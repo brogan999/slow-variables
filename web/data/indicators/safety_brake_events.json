@@ -1,0 +1,272 @@
+{
+ "band_input": "metric:safety_brake_events_12m",
+ "band_rationale": "Normal = at least one announced brake a year (the limits bind); fast = none, the pace the AI 2027 scenario assumes on the invention stage. Lab self-reports are tier 7, so the status is capped at emerging until an independent record exists.",
+ "band_value": {
+  "as_of": "2026-09-01",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "2ab8fec44e7914a5",
+   "67d75927e7d23e32",
+   "82685d1efcfba981"
+  ],
+  "value": 3.0
+ },
+ "bucket_id": "adaptation",
+ "cadence_expected": "quarterly",
+ "confidence": 40,
+ "counterevidence": "Every row is the lab describing itself; a brake announced is not a brake measured, and the same lab restarted the paused run within a month; other labs' brakes are not yet recorded.",
+ "crosswalk": [],
+ "definition": "Deliberate slowdowns announced by a frontier lab and recorded as dated evidence rows with a verbatim announcement: paused training runs, gated releases, confinement of a model under a preparedness framework. Derived metric safety_brake_events_12m counts them over the trailing twelve months.",
+ "derived": [
+  {
+   "as_of_date": "2026-08-07",
+   "computed_at": "2026-09-10T06:34:41.789348Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "df3387d87a0077d2",
+   "input_observation_ids": [
+    "67d75927e7d23e32"
+   ],
+   "metric": "safety_brake_events_12m",
+   "obs_ids": [
+    "67d75927e7d23e32"
+   ],
+   "value": 1.0,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2026-08-18",
+   "computed_at": "2026-09-10T06:34:41.789348Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "e17ec4f433efc6b9",
+   "input_observation_ids": [
+    "67d75927e7d23e32",
+    "82685d1efcfba981"
+   ],
+   "metric": "safety_brake_events_12m",
+   "obs_ids": [
+    "67d75927e7d23e32",
+    "82685d1efcfba981"
+   ],
+   "value": 2.0,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2026-09-01",
+   "computed_at": "2026-09-10T06:34:41.789348Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "7c969c2962d8d726",
+   "input_observation_ids": [
+    "2ab8fec44e7914a5",
+    "67d75927e7d23e32",
+    "82685d1efcfba981"
+   ],
+   "metric": "safety_brake_events_12m",
+   "obs_ids": [
+    "2ab8fec44e7914a5",
+    "67d75927e7d23e32",
+    "82685d1efcfba981"
+   ],
+   "value": 3.0,
+   "value_high": null,
+   "value_low": null
+  }
+ ],
+ "direction": null,
+ "direction_rule": null,
+ "evidence": [
+  {
+   "as_of": "2026-09-06",
+   "entity_id": "openai",
+   "id": "7806bbf22f9f5f35",
+   "snippet": "I expect and hope for voluntary slowdowns to become commonplace until shared safety bars are established.",
+   "source_id": "openai_blog",
+   "stance": "context",
+   "summary": "Pachocki: voluntary slowdowns should become commonplace until shared safety bars exist (6 Sep 2026)",
+   "target": "safety_brake_events",
+   "tier": 7,
+   "url": "https://web.archive.org/web/20260909052306/https://openai.com/index/an-alien-mind/"
+  },
+  {
+   "as_of": "2026-09-01",
+   "entity_id": "openai",
+   "id": "2ab8fec44e7914a5",
+   "snippet": "We now believe Astra meets the Critical cybersecurity capability threshold under our Preparedness Framework, meaning that with the right tools and access, it can find previously unknown security flaws and develop ways to exploit them across many well-protected systems without a person guiding each step.",
+   "source_id": "openai_blog",
+   "stance": "for",
+   "summary": "Astra judged to meet the Critical cybersecurity threshold; release gated behind safeguards (1 Sep 2026)",
+   "target": "safety_brake_events",
+   "tier": 7,
+   "url": "https://web.archive.org/web/20260908174419/https://openai.com/index/path-to-astra/"
+  },
+  {
+   "as_of": "2026-08-18",
+   "entity_id": "openai",
+   "id": "82685d1efcfba981",
+   "snippet": "This included a two-week pause in reinforcement learning (RL) training on our latest models intended for deployment while we further hardened and red-teamed our research environments and expanded the coverage of our monitoring systems.",
+   "source_id": "openai_blog",
+   "stance": "for",
+   "summary": "two-week pause in RL training on deployment-bound models after the Hugging Face incident (Jul-Aug 2026)",
+   "target": "safety_brake_events",
+   "tier": 7,
+   "url": "https://web.archive.org/web/20260909170810/https://openai.com/index/pacing-model-development-cyber-capabilities/"
+  },
+  {
+   "as_of": "2026-08-07",
+   "entity_id": "openai",
+   "id": "67d75927e7d23e32",
+   "snippet": "We are pausing internal activities involving Astra that do not yet meet these strengthened security control requirements.",
+   "source_id": "openai_blog",
+   "stance": "for",
+   "summary": "Astra internal activities paused pending strengthened security controls (7 Aug 2026)",
+   "target": "safety_brake_events",
+   "tier": 7,
+   "url": "https://web.archive.org/web/20260905045509/https://openai.com/index/responding-next-frontier-critical-cyber-capabilities/"
+  }
+ ],
+ "falsifying_band": null,
+ "fast_band": {
+  "hi": 0.0,
+  "lo": null
+ },
+ "fits": [],
+ "flow_status": null,
+ "grade": "D",
+ "id": "safety_brake_events",
+ "latest": {
+  "as_of": "2026-09-01",
+  "dims": {},
+  "obs_ids": [
+   "2ab8fec44e7914a5",
+   "67d75927e7d23e32",
+   "82685d1efcfba981"
+  ],
+  "unit": "count",
+  "value": 3.0
+ },
+ "layer_id": "model",
+ "leading_lagging": "leading",
+ "metric": "safety_brake_events_12m",
+ "metric_dims": {},
+ "n_observations": 3,
+ "name": "Safety brakes inside the labs (events, trailing year)",
+ "normal_band": {
+  "hi": null,
+  "lo": 1.0
+ },
+ "override_note": null,
+ "points": [
+  {
+   "as_of": "2026-08-07",
+   "dims": {},
+   "obs_ids": [
+    "67d75927e7d23e32"
+   ],
+   "unit": "count",
+   "value": 1.0
+  },
+  {
+   "as_of": "2026-08-18",
+   "dims": {},
+   "obs_ids": [
+    "67d75927e7d23e32",
+    "82685d1efcfba981"
+   ],
+   "unit": "count",
+   "value": 2.0
+  },
+  {
+   "as_of": "2026-09-01",
+   "dims": {},
+   "obs_ids": [
+    "2ab8fec44e7914a5",
+    "67d75927e7d23e32",
+    "82685d1efcfba981"
+   ],
+   "unit": "count",
+   "value": 3.0
+  }
+ ],
+ "proposed_status": "emerging",
+ "proxy_types": [
+  "policy",
+  "model_release"
+ ],
+ "published": true,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "rsi_intervention_rate_4_8h",
+  "rsi_agent_workdays_per_human"
+ ],
+ "related_metrics": [],
+ "related_predictions": [],
+ "series": [],
+ "series_keys": [],
+ "sparkline": [
+  {
+   "as_of": "2026-08-07",
+   "dims": {},
+   "obs_ids": [
+    "67d75927e7d23e32"
+   ],
+   "unit": "count",
+   "value": 1.0
+  },
+  {
+   "as_of": "2026-08-18",
+   "dims": {},
+   "obs_ids": [
+    "67d75927e7d23e32",
+    "82685d1efcfba981"
+   ],
+   "unit": "count",
+   "value": 2.0
+  },
+  {
+   "as_of": "2026-09-01",
+   "dims": {},
+   "obs_ids": [
+    "2ab8fec44e7914a5",
+    "67d75927e7d23e32",
+    "82685d1efcfba981"
+   ],
+   "unit": "count",
+   "value": 3.0
+  }
+ ],
+ "stale_as_of": null,
+ "stale_ok": false,
+ "stale_reason": null,
+ "status": "emerging",
+ "status_events": [
+  {
+   "author": "evaluate",
+   "created_at": "2026-09-10T06:34:09.792184Z",
+   "evidence_ids": [
+    "2ab8fec44e7914a5",
+    "67d75927e7d23e32",
+    "82685d1efcfba981"
+   ],
+   "id": "7a7dea7183f59fa1",
+   "new_conf": 40,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "Three announced brakes inside OpenAI in the trailing year, all with a verbatim source via the Internet Archive: internal Astra activity paused pending stronger security controls (7 Aug 2026), a two-week pause in RL training on deployment-bound models after the Hugging Face incident (18 Aug), and Astra judged to meet the Critical cybersecurity threshold with release gated behind safeguards (1 Sep). At or above the normal band (one or more a year), but every row is the lab describing itself (tier 7), so the status is capped at emerging. Initial seed.",
+   "target_id": "safety_brake_events",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": null,
+ "tracker_interpretation": "Three brakes in five weeks of 2026, all inside OpenAI and all self-announced; the count is a floor, since labs announce selectively.",
+ "unit": "count",
+ "unpublished_reason": null,
+ "updated_at": "2026-09-11",
+ "valve_measured": "adoption_to_adaptation",
+ "why_it_matters": "The paper's safety speed limits are argued from regulated domains; the tracker also watches for them on the invention stage, where a brake inside a lab slows the whole chain before any regulator acts."
+}

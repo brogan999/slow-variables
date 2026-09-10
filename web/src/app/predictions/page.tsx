@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ChangelogList } from "@/components/Changelog";
+import { EvidenceLog } from "@/components/EvidenceLog";
 import { StatusChip } from "@/components/StatusChip";
 import { index, obsIndex, predictions } from "@/lib/data";
 
@@ -38,6 +39,7 @@ export default function PredictionsPage() {
                     {p.related_indicators.length ? <p className="mt-1 text-xs text-ink-2">Indicators: {p.related_indicators.map((r) => <Link key={r} href={`/indicators/${r}`} className="hover:underline mr-2">{indicators.find((i) => i.id === r)?.name ?? r}</Link>)}</p> : null}
                     <details className="mt-2 text-sm"><summary className="cursor-pointer text-ink-2">Counterevidence and history</summary>
                       <p className="mt-1">{p.counterevidence}</p>
+                      {p.evidence.length ? <div className="mt-2"><EvidenceLog items={p.evidence} /></div> : null}
                       <div className="mt-2"><ChangelogList events={p.status_events} obsIndex={idx} showTarget={false} /></div>
                     </details>
                   </li>

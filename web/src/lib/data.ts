@@ -19,6 +19,7 @@ export type StatusEvent = {
   reason: string; evidence_ids: string[]; author: string; created_at: string;
 };
 export type Band = { lo?: number | null; hi?: number | null } | null;
+export type Evidence = { id: string; target: string; stance: "for" | "against" | "context"; as_of: string; summary: string; url: string; tier: number; source_id: string; snippet: string; entity_id: string | null };
 export type IndicatorDoc = Card & {
   definition: string; why_it_matters: string; proxy_types: string[]; cadence_expected: string; tracker_interpretation: string;
   counterevidence: string; series_keys: string[]; metric: string | null; band_input: string | null;
@@ -28,7 +29,7 @@ export type IndicatorDoc = Card & {
   related_predictions: string[]; updated_at: string;
   series: { series_key: string; points: Point[] }[];
   derived: (Point & { metric: string; as_of_date: string; input_observation_ids: string[] })[];
-  status_events: StatusEvent[]; crosswalk: Crosswalk[];
+  status_events: StatusEvent[]; crosswalk: Crosswalk[]; evidence: Evidence[];
 };
 export type Bucket = { id: string; name: string; order: number; stock: string; valve: string; speed_limit: string };
 export type Layer = { id: string; name: string; order: number; description: string; dependency_tier: number | null };
@@ -69,7 +70,7 @@ export type Prediction = {
   id: string; ledger: "nk" | "lab" | "ai2027" | "capture"; claimant: string; claim_text: string; claim_url: string | null; claim_date: string;
   window_start: string | null; window_end: string | null; operationalisation: string; related_indicators: string[]; proxy_types: string[];
   confidence: number; counterevidence: string; note: string | null; published: boolean; status: string | null; confidence_now: number | null;
-  status_events: StatusEvent[];
+  status_events: StatusEvent[]; evidence: Evidence[];
 };
 export const predictions = () => read<Prediction[]>("predictions.json");
 export type LedgerRow = Observation & { parties: string[]; instrument: string; obs_id: string; as_of_date: string; published_date: string; value_numeric: number | null; value_text: string | null; unit: string; tier: number; source_id: string; url: string; disputed: boolean; dispute_text: string | null; raw_snippet: string };

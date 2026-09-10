@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { EvidenceLog } from "@/components/EvidenceLog";
 import { BandChart } from "@/components/BandChart";
 import { ChangelogList } from "@/components/Changelog";
 import { Num, ObsLinks } from "@/components/Provenance";
@@ -101,6 +102,8 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
             {d.derived.slice().reverse().map((r) => <tr key={r.as_of_date + JSON.stringify(r.dims)}><td>{r.as_of_date}</td><td>{Object.values(r.dims ?? {}).join(" ")}</td><td className="tabular-nums">{fmt(r.value, d.unit)}</td><td><ObsLinks ids={r.obs_ids} obsIndex={idx} max={3} /></td></tr>)}
           </tbody></table></details> : null}
       </Section>
+
+      {d.evidence.length ? <Section n={4} title="Evidence log"><EvidenceLog items={d.evidence} /></Section> : null}
 
       <Section n={5} title="Status and reasoning">
         <div className="flex flex-wrap items-center gap-2"><StatusChip status={d.published ? d.status : null} size="lg" />{current ? <span className="text-xs text-muted">since {current.created_at.slice(0, 10)} · {current.author}</span> : null}</div>

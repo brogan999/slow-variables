@@ -399,3 +399,43 @@ indicators:
     proposed_status: not_yet_measurable
     published: false
     updated_at: 2026-09-11
+  - id: open_vs_closed_gap
+    name: Open-weights gap to the closed frontier (ECI points)
+    definition: Gap in Epoch Capabilities Index points between the best closed-weights model and the best open-weights model, measured at each open-weights release. Derived metric open_vs_closed_gap.
+    why_it_matters: Open-weight quality converging on the frontier is the single best leading indicator of model-layer commoditisation; a widening gap says the closed labs keep their rents.
+    proxy_types: [benchmark, market_structure]
+    unit: index
+    cadence_expected: monthly
+    metric: open_vs_closed_gap
+    band_input: "metric:open_vs_closed_gap"
+    layer_id: model
+    sublayer_id: open_weight_labs
+    direction_rule: {periods: 4, dead_band: 2, higher_is: concentrating, rationale: "Four open-weights releases; a move under two ECI points is inside the index's confidence intervals. Widening gap = rents concentrating in the closed labs."}
+    leading_lagging: leading
+    tracker_interpretation: Measured on Epoch's composite index, so it follows the benchmarks Epoch runs; a gap in points is not a gap in months.
+    counterevidence: ECI is one composite; open models are often released with a lag that the gap at release date understates; Chinese labs' compute constraints are the confound.
+    confidence: 55
+    proposed_status: stable
+    related_indicators: [lab_hhi, model_price_per_horizon_hour]
+    published: true
+    updated_at: 2026-09-11
+  - id: custom_silicon_share
+    name: Non-Nvidia share of AI compute shipped (H100-equivalents)
+    definition: Non-Nvidia designers' share of cumulative AI compute shipped, in H100-equivalents, at each complete quarter end, from Epoch's chip-sales estimates. Derived metric custom_silicon_share.
+    why_it_matters: The leading indicator of Nvidia rent decay; TPUs, Trainium and AMD are the routes around the chokepoint.
+    proxy_types: [market_structure]
+    unit: share
+    cadence_expected: quarterly
+    metric: custom_silicon_share
+    band_input: "metric:custom_silicon_share"
+    layer_id: compute_physical
+    sublayer_id: semis
+    direction_rule: {periods: 4, dead_band: 0.02, higher_is: dispersing, rationale: "Four quarters; under two points is inside Epoch's estimate ranges. Rising non-Nvidia share = the chip layer's rent dispersing."}
+    leading_lagging: leading
+    tracker_interpretation: Google's TPUs are internal, not sold, so the share overstates merchant competition; the direction still says whether the chokepoint is being routed around.
+    counterevidence: Epoch's estimates carry 5th-95th percentile ranges of a third or more; cumulative shares move slowly by construction.
+    confidence: 50
+    proposed_status: dispersing
+    related_indicators: [semis_rent_concentration, semis_hhi]
+    published: true
+    updated_at: 2026-09-11

@@ -1,0 +1,293 @@
+{
+ "band_input": "metric:perf_per_dollar_doubling_days",
+ "band_rationale": "Normal = doubling no faster than every 500 days (roughly the +49% a year Epoch reports); fast = yearly or faster. Between is emerging.",
+ "band_value": {
+  "as_of": "2025-11-06",
+  "high": 3784.9492753061486,
+  "low": 771.4136391929312,
+  "obs_ids": [
+   "0aa9e9df43a3fb45",
+   "15c9bef11896b05f",
+   "2b8b94cb3d94a3e6",
+   "2e743762cc395272",
+   "345c670ec334f86b",
+   "4974aa55ffd802d2",
+   "567f121dc3087113",
+   "6b074a07a0cd811e",
+   "6e6de1b32ed92ee9",
+   "77e04e6906d1fdc4",
+   "807828ee7a53a639",
+   "918bc964636fbd59",
+   "9ade8deec5e96f2a",
+   "9fbf26a4e044fda0",
+   "ac1fe3e63f28cbd4",
+   "c1b29a95f3a16bc3",
+   "c5ccd7e41add9ca1",
+   "db70c7d361b714e4",
+   "e36cd4d621098b63",
+   "f331bddd3c0863d4"
+  ],
+  "value": 1281.6193746698327
+ },
+ "bucket_id": "methods",
+ "cadence_expected": "annual",
+ "confidence": 40,
+ "counterevidence": "List prices for a handful of parts; real transaction prices for H100-class GPUs are not public; FP16 peak throughput is not delivered throughput.",
+ "crosswalk": [
+  {
+   "bucket_id": "methods",
+   "layer_id": "compute_physical",
+   "note": "Compute growth and hardware perf-per-dollar feed the methods stock.",
+   "relation": "input_to",
+   "shared_indicators": [],
+   "sublayer_id": null
+  }
+ ],
+ "definition": "Doubling time of FP16 tensor throughput per release-price dollar across accelerators with a public price, fitted log-linearly from 2012 on Epoch's hardware table. Derived metric perf_per_dollar_doubling_days.",
+ "derived": [
+  {
+   "as_of_date": "2025-11-06",
+   "computed_at": "2026-09-10T06:34:41.789348Z",
+   "dims": {
+    "aic": "-6.6",
+    "n": "20",
+    "r2": "0.360"
+   },
+   "formula_version": "1",
+   "id": "eeb1925cd35ee237",
+   "input_observation_ids": [
+    "0aa9e9df43a3fb45",
+    "15c9bef11896b05f",
+    "2b8b94cb3d94a3e6",
+    "2e743762cc395272",
+    "345c670ec334f86b",
+    "4974aa55ffd802d2",
+    "567f121dc3087113",
+    "6b074a07a0cd811e",
+    "6e6de1b32ed92ee9",
+    "77e04e6906d1fdc4",
+    "807828ee7a53a639",
+    "918bc964636fbd59",
+    "9ade8deec5e96f2a",
+    "9fbf26a4e044fda0",
+    "ac1fe3e63f28cbd4",
+    "c1b29a95f3a16bc3",
+    "c5ccd7e41add9ca1",
+    "db70c7d361b714e4",
+    "e36cd4d621098b63",
+    "f331bddd3c0863d4"
+   ],
+   "metric": "perf_per_dollar_doubling_days",
+   "obs_ids": [
+    "0aa9e9df43a3fb45",
+    "15c9bef11896b05f",
+    "2b8b94cb3d94a3e6",
+    "2e743762cc395272",
+    "345c670ec334f86b",
+    "4974aa55ffd802d2",
+    "567f121dc3087113",
+    "6b074a07a0cd811e",
+    "6e6de1b32ed92ee9",
+    "77e04e6906d1fdc4",
+    "807828ee7a53a639",
+    "918bc964636fbd59",
+    "9ade8deec5e96f2a",
+    "9fbf26a4e044fda0",
+    "ac1fe3e63f28cbd4",
+    "c1b29a95f3a16bc3",
+    "c5ccd7e41add9ca1",
+    "db70c7d361b714e4",
+    "e36cd4d621098b63",
+    "f331bddd3c0863d4"
+   ],
+   "value": 1281.6193746698327,
+   "value_high": 3784.9492753061486,
+   "value_low": 771.4136391929312
+  }
+ ],
+ "direction": null,
+ "direction_rule": null,
+ "evidence": [],
+ "falsifying_band": null,
+ "fast_band": {
+  "hi": 365.0,
+  "lo": null
+ },
+ "fits": [],
+ "flow_status": null,
+ "grade": "B",
+ "id": "perf_per_dollar_growth",
+ "latest": {
+  "as_of": "2025-11-06",
+  "dims": {
+   "aic": "-6.6",
+   "n": "20",
+   "r2": "0.360"
+  },
+  "obs_ids": [
+   "0aa9e9df43a3fb45",
+   "15c9bef11896b05f",
+   "2b8b94cb3d94a3e6",
+   "2e743762cc395272",
+   "345c670ec334f86b",
+   "4974aa55ffd802d2",
+   "567f121dc3087113",
+   "6b074a07a0cd811e",
+   "6e6de1b32ed92ee9",
+   "77e04e6906d1fdc4",
+   "807828ee7a53a639",
+   "918bc964636fbd59",
+   "9ade8deec5e96f2a",
+   "9fbf26a4e044fda0",
+   "ac1fe3e63f28cbd4",
+   "c1b29a95f3a16bc3",
+   "c5ccd7e41add9ca1",
+   "db70c7d361b714e4",
+   "e36cd4d621098b63",
+   "f331bddd3c0863d4"
+  ],
+  "unit": "days",
+  "value": 1281.6193746698327
+ },
+ "layer_id": "compute_physical",
+ "leading_lagging": "leading",
+ "metric": "perf_per_dollar_doubling_days",
+ "metric_dims": {},
+ "n_observations": 20,
+ "name": "Hardware price-performance growth (doubling time)",
+ "normal_band": {
+  "hi": null,
+  "lo": 500.0
+ },
+ "override_note": null,
+ "points": [
+  {
+   "as_of": "2025-11-06",
+   "dims": {
+    "aic": "-6.6",
+    "n": "20",
+    "r2": "0.360"
+   },
+   "obs_ids": [
+    "0aa9e9df43a3fb45",
+    "15c9bef11896b05f",
+    "2b8b94cb3d94a3e6",
+    "2e743762cc395272",
+    "345c670ec334f86b",
+    "4974aa55ffd802d2",
+    "567f121dc3087113",
+    "6b074a07a0cd811e",
+    "6e6de1b32ed92ee9",
+    "77e04e6906d1fdc4",
+    "807828ee7a53a639",
+    "918bc964636fbd59",
+    "9ade8deec5e96f2a",
+    "9fbf26a4e044fda0",
+    "ac1fe3e63f28cbd4",
+    "c1b29a95f3a16bc3",
+    "c5ccd7e41add9ca1",
+    "db70c7d361b714e4",
+    "e36cd4d621098b63",
+    "f331bddd3c0863d4"
+   ],
+   "unit": "days",
+   "value": 1281.6193746698327
+  }
+ ],
+ "proposed_status": "emerging",
+ "proxy_types": [
+  "price",
+  "model_release"
+ ],
+ "published": true,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "epoch_inference_price_fixed_capability",
+  "semis_rent_concentration"
+ ],
+ "related_metrics": [],
+ "related_predictions": [],
+ "series": [],
+ "series_keys": [],
+ "sparkline": [
+  {
+   "as_of": "2025-11-06",
+   "dims": {
+    "aic": "-6.6",
+    "n": "20",
+    "r2": "0.360"
+   },
+   "obs_ids": [
+    "0aa9e9df43a3fb45",
+    "15c9bef11896b05f",
+    "2b8b94cb3d94a3e6",
+    "2e743762cc395272",
+    "345c670ec334f86b",
+    "4974aa55ffd802d2",
+    "567f121dc3087113",
+    "6b074a07a0cd811e",
+    "6e6de1b32ed92ee9",
+    "77e04e6906d1fdc4",
+    "807828ee7a53a639",
+    "918bc964636fbd59",
+    "9ade8deec5e96f2a",
+    "9fbf26a4e044fda0",
+    "ac1fe3e63f28cbd4",
+    "c1b29a95f3a16bc3",
+    "c5ccd7e41add9ca1",
+    "db70c7d361b714e4",
+    "e36cd4d621098b63",
+    "f331bddd3c0863d4"
+   ],
+   "unit": "days",
+   "value": 1281.6193746698327
+  }
+ ],
+ "stale_as_of": null,
+ "stale_ok": false,
+ "stale_reason": null,
+ "status": "consistent_with_normal",
+ "status_events": [
+  {
+   "author": "evaluate",
+   "created_at": "2026-09-10T06:33:37.223105Z",
+   "evidence_ids": [
+    "0aa9e9df43a3fb45",
+    "15c9bef11896b05f",
+    "2b8b94cb3d94a3e6",
+    "2e743762cc395272",
+    "345c670ec334f86b",
+    "4974aa55ffd802d2",
+    "567f121dc3087113",
+    "6b074a07a0cd811e",
+    "6e6de1b32ed92ee9",
+    "77e04e6906d1fdc4",
+    "807828ee7a53a639",
+    "918bc964636fbd59",
+    "9ade8deec5e96f2a",
+    "9fbf26a4e044fda0",
+    "ac1fe3e63f28cbd4",
+    "c1b29a95f3a16bc3",
+    "c5ccd7e41add9ca1",
+    "db70c7d361b714e4",
+    "e36cd4d621098b63",
+    "f331bddd3c0863d4"
+   ],
+   "id": "6f770f1e0df505d0",
+   "new_conf": 40,
+   "new_status": "consistent_with_normal",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "Evaluator: 1282 (Epoch AI ML hardware, 2025-11-06) is inside the consistent band (lo=500 ). Auto-reason; band rationale: Normal = doubling no faster than every 500 days (roughly the +49% a year Epoch reports); fast = yearly or faster. Between is emerging.",
+   "target_id": "perf_per_dollar_growth",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": "semis",
+ "tracker_interpretation": "Only accelerators with a public list price enter, and recent data-centre GPUs have none, so the series can end years before today.",
+ "unit": "days",
+ "unpublished_reason": null,
+ "updated_at": "2026-09-11",
+ "valve_measured": "invention_to_product",
+ "why_it_matters": "The floor under falling inference prices; the brief's reading is +49% a year."
+}

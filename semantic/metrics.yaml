@@ -368,3 +368,100 @@ metrics:
       latest_rr AS (SELECT d.as_of_date, r.entity_id, arg_max(r.v, r.as_of_date) AS v, arg_max(r.id, r.as_of_date) AS id FROM dates d JOIN rr r ON r.as_of_date <= d.as_of_date AND r.as_of_date > d.as_of_date - INTERVAL 12 MONTH GROUP BY 1, 2)
       SELECT p.as_of_date, sum(p.v) / sum(r.v) AS value, list_distinct(flatten(list([p.id, r.id]))) AS obs_ids
       FROM latest_pm p JOIN latest_rr r USING (as_of_date, entity_id) GROUP BY 1 HAVING sum(r.v) > 0
+  safety_brake_events_12m:
+    description: Number of deliberate safety brakes (paused training, gated releases, confinement under a preparedness framework) recorded as evidence rows in the trailing twelve months, at each event date.
+    rationale: Narayanan and Kapoor's safety speed limits are usually read off regulators; the September 2026 events show them binding inside a lab first, which the tracker records as dated evidence rather than prose.
+    grain: [as_of_date]
+    unit: count
+    lead_lag: coincident
+    formula_version: 1
+    inputs: ["evidence.safety_brake_events.for.pt"]
+    caveats: Only events with a fetched, verbatim announcement count; labs announce brakes selectively, so the count is a floor; statements of intent are recorded as context and excluded.
+    sql: |
+      WITH ev AS (SELECT as_of_date, id FROM observations WHERE series_key = 'evidence.safety_brake_events.for.pt')
+      SELECT a.as_of_date, count(*)::DOUBLE AS value, list(b.id ORDER BY b.id) AS obs_ids
+      FROM ev a JOIN ev b ON b.as_of_date <= a.as_of_date AND b.as_of_date > a.as_of_date - INTERVAL 12 MONTH GROUP BY 1
+  training_compute_doubling_days:
+    description: Log-linear fit of frontier models' training compute against publication date, 2020 onward; doubling time in days with a 95% CI (Epoch's frontier table).
+    rationale: The invention-stage speed limit the brief tracks as epoch_training_compute_growth (4-5x a year in Epoch's own reading).
+    grain: [as_of_date]
+    unit: days
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["epoch_models.*.training_compute_flop.pt"]
+    args: {since: "2020-01-01"}
+    caveats: Frontier set only; compute is estimated for most closed models; the newest models are censored until Epoch estimates them.
+    python: fits.loglinear
+  training_power_doubling_days:
+    description: Log-linear fit of notable models' training power draw against publication date, 2020 onward; doubling time in days.
+    rationale: "Power is the physical constraint on the invention stage (brief: 2.2x a year)."
+    grain: [as_of_date]
+    unit: days
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["epoch_models.*.training_power_w.pt"]
+    args: {since: "2020-01-01"}
+    caveats: Power draw is estimated from hardware counts and TDP for most models.
+    python: fits.loglinear
+  perf_per_dollar_doubling_days:
+    description: Log-linear fit of FP16 tensor FLOP/s per release-price dollar across accelerators, by release date; doubling time in days.
+    rationale: "Hardware price-performance is the floor under inference-price declines (brief: +49% a year)."
+    grain: [as_of_date]
+    unit: days
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["epoch_hw.*.price_performance_flops_per_usd.pt"]
+    args: {since: "2012-01-01"}
+    caveats: Only accelerators with a public release price; recent data-centre GPUs have no list price, so the series may end years before today.
+    python: fits.loglinear
+  inference_price_halving_days:
+    description: Halving time, in days, of the lowest price per million tokens among models clearing GPT-4-0314's GPQA Diamond score, from Epoch's price-trend series (fit on the inverse price).
+    rationale: Price per unit of capability on a fixed benchmark axis; the brief cites ~40x a year at this threshold.
+    grain: [as_of_date]
+    unit: days
+    lead_lag: coincident
+    formula_version: 1
+    inputs: ["epoch_price.gpqa_diamond_gpt_4_0314.lowest_usd_per_mtok.pt"]
+    args: {since: "2023-01-01", invert: true}
+    caveats: Six-ish points; list prices; the cheapest model at a fixed threshold is not the frontier.
+    python: fits.loglinear
+  open_vs_closed_gap:
+    description: Gap in Epoch Capabilities Index points between the best closed-weights and the best open-weights model, at each open-weights release date.
+    rationale: Open-weight quality converging on the frontier is the leading indicator of model-layer commoditisation (value-capture chat, section 2).
+    grain: [as_of_date]
+    unit: index
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["epoch_bench.*.eci_open.pt", "epoch_bench.*.eci_closed.pt"]
+    caveats: ECI is a composite with its own CIs; 'other' accessibility rows are excluded; the gap is measured only on open-release dates.
+    sql: |
+      WITH o AS (SELECT as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'epoch_bench.%.eci_open.pt'),
+      c AS (SELECT as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'epoch_bench.%.eci_closed.pt')
+      SELECT o.as_of_date,
+             (SELECT max(v) FROM c WHERE c.as_of_date <= o.as_of_date) - (SELECT max(v) FROM o o2 WHERE o2.as_of_date <= o.as_of_date) AS value,
+             list_distinct([o.id, (SELECT arg_max(id, v) FROM c WHERE c.as_of_date <= o.as_of_date), (SELECT arg_max(id, v) FROM o o2 WHERE o2.as_of_date <= o.as_of_date)]) AS obs_ids
+      FROM o WHERE EXISTS (SELECT 1 FROM c WHERE c.as_of_date <= o.as_of_date) GROUP BY o.as_of_date, o.id, o.v
+  arc_agi_frontier:
+    description: Running best ARC-AGI-2 score by release date, from Epoch's compilation of external results.
+    rationale: The brief's one serious proxy for out-of-distribution generalisation.
+    grain: [as_of_date]
+    unit: share
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["epoch_bench.*.arc_agi_2.pt"]
+    caveats: External, compute-unconstrained results; cost per task is not in the score.
+    sql: |
+      SELECT as_of_date, max(value_numeric) OVER (ORDER BY as_of_date) AS value, list(id) OVER (ORDER BY as_of_date) AS obs_ids
+      FROM observations WHERE series_key LIKE 'epoch_bench.%.arc_agi_2.pt' QUALIFY value_numeric = value
+  custom_silicon_share:
+    description: Non-Nvidia designers' share of cumulative AI compute shipped, in H100-equivalents, at each complete quarter end (Epoch chip sales).
+    rationale: Custom silicon share is the leading indicator of Nvidia rent decay (value-capture chat, semis layer).
+    grain: [as_of_date]
+    unit: share
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["epoch_chips.*.h100e_cumulative.pt"]
+    caveats: Epoch estimates with wide ranges; incomplete quarters skipped; Google TPUs are internal, not sold, so the share overstates merchant competition.
+    sql: |
+      SELECT as_of_date, sum(CASE WHEN subject <> 'nvidia' THEN value_numeric ELSE 0 END) / sum(value_numeric) AS value, list(id ORDER BY id) AS obs_ids
+      FROM observations WHERE series_key LIKE 'epoch_chips.%.h100e_cumulative.pt' GROUP BY 1 HAVING count(*) >= 3

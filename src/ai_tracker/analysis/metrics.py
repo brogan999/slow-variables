@@ -66,7 +66,8 @@ def _python_metric(con: duckdb.DuckDBPyConnection, name: str, m: dict, now: date
         k: (date.fromisoformat(v) if isinstance(v, str) and len(v) == 10 and v[4] == "-" else v)
         for k, v in (m.get("args") or {}).items()
     }
-    fit = fn([(r[1], r[2]) for r in rows], **args)
+    invert = bool(args.pop("invert", False))  # fit 1/y for series that fall (prices): the doubling time becomes a halving time
+    fit = fn([(r[1], 1 / r[2] if invert else r[2]) for r in rows], **args)
     if fit is None:
         return []
     return [

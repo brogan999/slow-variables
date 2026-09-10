@@ -348,6 +348,7 @@ class Store:
                     and c.layer_id == ind.layer_id
                 ],
             }
+            doc["evidence"] = self.evidence_for(ind.id)
             doc["related_bottlenecks"] = sorted(
                 set(ind.related_bottlenecks)
                 | {b.id for b in self.seed.bottlenecks if ind.id in b.related_indicators}
@@ -428,6 +429,7 @@ class Store:
             [
                 {
                     **_jsonable(pr.model_dump()),
+                    "evidence": self.evidence_for(pr.id, *pr.related_indicators),
                     "status": (ev.new_status if (ev := self.current(pr.id)) else None),
                     "confidence_now": ev.new_conf if ev else None,
                     "status_events": [
@@ -534,6 +536,31 @@ class Store:
             for r in rows
             if r.as_of_date == latest
         }
+
+    def evidence_for(self, *targets: str) -> list[dict[str, Any]]:
+        """Dated evidence records: observations whose series is evidence.<target>.<for|against|context>.pt."""
+        if not targets:
+            return []
+        rows = self.con.execute(
+            "SELECT id, series_key, as_of_date, value_text, url, tier, source_id, raw_snippet, entity_id FROM observations "
+            "WHERE " + " OR ".join("series_key LIKE ?" for _ in targets) + " ORDER BY as_of_date DESC",
+            [f"evidence.{t}.%" for t in targets],
+        ).fetchall()
+        return [
+            {
+                "id": r[0],
+                "target": r[1].split(".")[1],
+                "stance": r[1].split(".")[2],
+                "as_of": r[2].isoformat(),
+                "summary": r[3],
+                "url": r[4],
+                "tier": r[5],
+                "source_id": r[6],
+                "snippet": r[7],
+                "entity_id": r[8],
+            }
+            for r in rows
+        ]
 
     def _stack(self, cards: dict[str, Any]) -> dict[str, Any]:
         """The sub-layer taxonomy with its entities, their dated memberships and each entity's latest observation."""

@@ -3,6 +3,7 @@ from .bls import Bls
 from .census_btos import CensusBtos
 from .clouded_judgment import CloudedJudgment
 from .epoch import Epoch
+from .epoch_tables import EpochBench, EpochChips, EpochHardware, EpochModels, EpochPrices
 from .feeds import Feeds
 from .formd import FormD
 from .fred import Fred
@@ -28,5 +29,10 @@ CONNECTORS = {
         CloudedJudgment,
         OpenRouter,
         FormD,
+        EpochModels,
+        EpochHardware,
+        EpochPrices,
+        EpochBench,
+        EpochChips,
     )
 }

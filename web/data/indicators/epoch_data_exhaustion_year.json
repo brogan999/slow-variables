@@ -1,0 +1,152 @@
+{
+ "band_input": "epoch_blog.public_text.exhaustion_year.pt",
+ "band_rationale": "Normal = exhaustion in 2028 or later (the paper's compute-optimal case); fast = 2026 or earlier (the overtrained case, which is what the AI 2027 scenario's compute path implies). Between is emerging.",
+ "band_value": {
+  "as_of": "2024-06-06",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "c43909ea5651399c"
+  ],
+  "value": 2028.0
+ },
+ "bucket_id": "methods",
+ "cadence_expected": "annual",
+ "confidence": 40,
+ "counterevidence": "One research group's estimate; synthetic data, licensed corpora and multimodal data all extend the stock; the estimate has already been revised once by four years.",
+ "crosswalk": [],
+ "definition": "Epoch's central projection of the year in which language-model training fully utilises the effective stock of public human-generated text, from the 2024 paper.",
+ "derived": [],
+ "direction": null,
+ "direction_rule": null,
+ "evidence": [],
+ "falsifying_band": null,
+ "fast_band": {
+  "hi": 2026.0,
+  "lo": null
+ },
+ "fits": [],
+ "flow_status": null,
+ "grade": "B",
+ "id": "epoch_data_exhaustion_year",
+ "latest": {
+  "as_of": "2024-06-06",
+  "disputed": false,
+  "grade": "B",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "c43909ea5651399c"
+  ],
+  "series_key": "epoch_blog.public_text.exhaustion_year.pt",
+  "subject": "public_text",
+  "unit": "year",
+  "value": 2028.0
+ },
+ "layer_id": "training_input",
+ "leading_lagging": "leading",
+ "metric": null,
+ "metric_dims": {},
+ "n_observations": 1,
+ "name": "Public text data exhaustion year (Epoch projection)",
+ "normal_band": {
+  "hi": null,
+  "lo": 2028.0
+ },
+ "override_note": null,
+ "points": [
+  {
+   "as_of": "2024-06-06",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "c43909ea5651399c"
+   ],
+   "series_key": "epoch_blog.public_text.exhaustion_year.pt",
+   "subject": "public_text",
+   "unit": "year",
+   "value": 2028.0
+  }
+ ],
+ "proposed_status": "emerging",
+ "proxy_types": [
+  "benchmark"
+ ],
+ "published": true,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "epoch_training_compute_growth"
+ ],
+ "related_metrics": [],
+ "related_predictions": [],
+ "series": [
+  {
+   "points": [
+    {
+     "as_of": "2024-06-06",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "c43909ea5651399c"
+     ],
+     "series_key": "epoch_blog.public_text.exhaustion_year.pt",
+     "subject": "public_text",
+     "unit": "year",
+     "value": 2028.0
+    }
+   ],
+   "series_key": "epoch_blog.public_text.exhaustion_year.pt"
+  }
+ ],
+ "series_keys": [
+  "epoch_blog.public_text.exhaustion_year.pt"
+ ],
+ "sparkline": [
+  {
+   "as_of": "2024-06-06",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "c43909ea5651399c"
+   ],
+   "series_key": "epoch_blog.public_text.exhaustion_year.pt",
+   "subject": "public_text",
+   "unit": "year",
+   "value": 2028.0
+  }
+ ],
+ "stale_as_of": "2024-06-06",
+ "stale_ok": true,
+ "stale_reason": "A projection from a 2024 paper; it changes only when Epoch republishes the analysis, so the two-year freshness rule does not apply.",
+ "status": "emerging",
+ "status_events": [
+  {
+   "author": "evaluate",
+   "created_at": "2026-09-10T06:34:42.696886Z",
+   "evidence_ids": [
+    "c43909ea5651399c"
+   ],
+   "id": "2a48514c13172072",
+   "new_conf": 40,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "Epoch's 2024 projection puts full utilisation of public human-generated text in 2028 for compute-optimal training (80% interval 2026-2032), inside the normal band (2028 or later); the 2022 paper had said 2024. One research group's estimate, tier 6 and single-source, so the status is capped at emerging; refreshed when Epoch republishes. Initial seed.",
+   "target_id": "epoch_data_exhaustion_year",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": null,
+ "tracker_interpretation": "A projection, not a reading; the 80% interval runs 2026 to 2032, and the estimate moved four years later between Epoch's 2022 and 2024 papers.",
+ "unit": "year",
+ "unpublished_reason": null,
+ "updated_at": "2026-09-11",
+ "valve_measured": "invention_to_product",
+ "why_it_matters": "Bottleneck 88 (data exhaustion) as a dated estimate: when the readily available data is spent, continued scaling becomes a business decision about synthetic and licensed data."
+}

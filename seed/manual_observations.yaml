@@ -829,3 +829,76 @@ observations:
     tier: 6
     basis: reported
     raw_snippet: "pouring $4.6 billion into generative AI applications in 2024, an almost 8x increase from the $600 million reported last year."
+  # --- Evidence records: safety brakes inside OpenAI, July-September 2026 (verbatim from Internet Archive snapshots; openai.com 403s the fetcher). series evidence.<target>.<stance>.pt ---
+  - series_key: evidence.safety_brake_events.for.pt
+    source_id: openai_blog
+    entity_id: openai
+    value_text: "Astra internal activities paused pending strengthened security controls (7 Aug 2026)"
+    unit: event
+    as_of_date: 2026-08-07
+    published_date: 2026-08-07
+    url: https://web.archive.org/web/20260905045509/https://openai.com/index/responding-next-frontier-critical-cyber-capabilities/
+    tier: 7
+    basis: company_stated
+    raw_snippet: "We are pausing internal activities involving Astra that do not yet meet these strengthened security control requirements."
+    note: "OpenAI, 'Responding to the next frontier of critical cyber capabilities', 7 Aug 2026. A deliberate brake under the Preparedness Framework, inside a lab, before deployment."
+  - series_key: evidence.safety_brake_events.for.pt
+    source_id: openai_blog
+    entity_id: openai
+    value_text: "two-week pause in RL training on deployment-bound models after the Hugging Face incident (Jul-Aug 2026)"
+    unit: event
+    as_of_date: 2026-08-18
+    published_date: 2026-08-18
+    url: https://web.archive.org/web/20260909170810/https://openai.com/index/pacing-model-development-cyber-capabilities/
+    tier: 7
+    basis: company_stated
+    raw_snippet: "This included a two-week pause in reinforcement learning (RL) training on our latest models intended for deployment while we further hardened and red-teamed our research environments and expanded the coverage of our monitoring systems."
+    note: "OpenAI, 'Pacing model development in an era of cyber-critical capabilities', 18 Aug 2026. The same post: 'we paused frontier model inference in research clusters for runs that could execute code or use tools that could access the internet.'"
+  - series_key: evidence.safety_brake_events.for.pt
+    source_id: openai_blog
+    entity_id: openai
+    value_text: "Astra judged to meet the Critical cybersecurity threshold; release gated behind safeguards (1 Sep 2026)"
+    unit: event
+    as_of_date: 2026-09-01
+    published_date: 2026-09-01
+    url: https://web.archive.org/web/20260908174419/https://openai.com/index/path-to-astra/
+    tier: 7
+    basis: company_stated
+    raw_snippet: "We now believe Astra meets the Critical cybersecurity capability threshold under our Preparedness Framework, meaning that with the right tools and access, it can find previously unknown security flaws and develop ways to exploit them across many well-protected systems without a person guiding each step."
+    note: "OpenAI, 'Path to Astra: critical capabilities and frontier safeguards', 1 Sep 2026. Same post: 'On August 28th, we restarted the large frontier RL run that was previously paused after the new safety and security requirements were put in place.'"
+  - series_key: evidence.safety_brake_events.context.pt
+    source_id: openai_blog
+    entity_id: openai
+    value_text: "Pachocki: voluntary slowdowns should become commonplace until shared safety bars exist (6 Sep 2026)"
+    unit: statement
+    as_of_date: 2026-09-06
+    published_date: 2026-09-06
+    url: https://web.archive.org/web/20260909052306/https://openai.com/index/an-alien-mind/
+    tier: 7
+    basis: company_stated
+    raw_snippet: "I expect and hope for voluntary slowdowns to become commonplace until shared safety bars are established."
+    note: "Jakub Pachocki, 'An Alien Mind', 6 Sep 2026. A stated intention, not an event; recorded as context for the safety-speed-limits claim."
+  - series_key: evidence.nk_safety_speed_limits.for.pt
+    source_id: openai_blog
+    entity_id: openai
+    value_text: "OpenAI restarted the paused frontier RL run only after new safety and security requirements were in place (28 Aug 2026)"
+    unit: statement
+    as_of_date: 2026-08-28
+    published_date: 2026-09-01
+    url: https://web.archive.org/web/20260908174419/https://openai.com/index/path-to-astra/
+    tier: 7
+    basis: company_stated
+    raw_snippet: "On August 28th, we restarted the large frontier RL run that was previously paused after the new safety and security requirements were put in place."
+    note: "Supports Narayanan & Kapoor's safety-speed-limits claim on the invention stage itself: the brake bound inside the lab, before any regulator."
+  # --- Epoch data-exhaustion projection (sourced 2026-09-11) ---
+  - series_key: epoch_blog.public_text.exhaustion_year.pt
+    source_id: epoch_blog
+    value: 2028
+    unit: year
+    as_of_date: 2024-06-06
+    published_date: 2024-06-06
+    url: https://epoch.ai/blog/will-we-run-out-of-data-limits-of-llm-scaling-based-on-human-generated-data
+    tier: 6
+    basis: estimated
+    raw_snippet: "Our 2022 paper predicted that high-quality text data would be fully used by 2024, whereas our new results indicate that might not happen until 2028."
+    note: "Villalobos et al., 'Will we run out of data?' (Epoch, 6 Jun 2024). Same page: 'Our 80% confidence interval is that the data stock will be fully utilized at some point between 2026 and 2032.' The 2028 figure is the compute-optimal central case; stored as the point estimate with the CI in this note."

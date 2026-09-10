@@ -281,6 +281,170 @@ indicators:
     related_indicators: [rsi_agent_workdays_per_human, horizon_ratio_80_50]
     published: true
     updated_at: 2026-09-10
+  - id: safety_brake_events
+    name: Safety brakes inside the labs (events, trailing year)
+    definition: "Deliberate slowdowns announced by a frontier lab and recorded as dated evidence rows with a verbatim announcement: paused training runs, gated releases, confinement of a model under a preparedness framework. Derived metric safety_brake_events_12m counts them over the trailing twelve months."
+    why_it_matters: The paper's safety speed limits are argued from regulated domains; the tracker also watches for them on the invention stage, where a brake inside a lab slows the whole chain before any regulator acts.
+    proxy_types: [policy, model_release]
+    unit: count
+    cadence_expected: quarterly
+    metric: safety_brake_events_12m
+    band_input: "metric:safety_brake_events_12m"
+    bucket_id: adaptation
+    valve_measured: adoption_to_adaptation
+    normal_band: {lo: 1}
+    fast_band: {hi: 0}
+    band_rationale: "Normal = at least one announced brake a year (the limits bind); fast = none, the pace the AI 2027 scenario assumes on the invention stage. Lab self-reports are tier 7, so the status is capped at emerging until an independent record exists."
+    tracker_interpretation: Three brakes in five weeks of 2026, all inside OpenAI and all self-announced; the count is a floor, since labs announce selectively.
+    counterevidence: Every row is the lab describing itself; a brake announced is not a brake measured, and the same lab restarted the paused run within a month; other labs' brakes are not yet recorded.
+    layer_id: model
+    leading_lagging: leading
+    confidence: 40
+    proposed_status: emerging
+    related_indicators: [rsi_intervention_rate_4_8h, rsi_agent_workdays_per_human]
+    published: true
+    updated_at: 2026-09-11
+  - id: epoch_training_compute_growth
+    name: Frontier training compute growth (doubling time)
+    definition: Doubling time of frontier models' training compute, fitted log-linearly against publication date from 2020 on Epoch's frontier-model table. Derived metric training_compute_doubling_days.
+    why_it_matters: The invention stage's own speed limit. The brief's reading is 4-5x a year; a slowdown here is the first thing the data-and-compute constraint would show.
+    proxy_types: [benchmark, model_release]
+    unit: days
+    cadence_expected: annual
+    metric: training_compute_doubling_days
+    band_input: "metric:training_compute_doubling_days"
+    bucket_id: methods
+    valve_measured: invention_to_product
+    normal_band: {lo: 300}
+    fast_band: {hi: 182}
+    band_rationale: "Normal = doubling no faster than every 300 days (about 2.3x a year, the pre-2010 pace of compute growth); fast = every 182 days or less (4x a year or more, Epoch's 2010-2025 trend). Between is emerging."
+    tracker_interpretation: Fitted on Epoch's estimates, most of which are inferred for closed models; the newest models are missing until Epoch estimates them.
+    counterevidence: Compute estimates for closed models carry wide uncertainty; the frontier set is Epoch's selection; training compute is an input, not a capability.
+    layer_id: model
+    leading_lagging: leading
+    confidence: 60
+    proposed_status: faster_than_normal
+    related_indicators: [epoch_training_power_growth, metr_horizon_50]
+    published: true
+    updated_at: 2026-09-11
+  - id: epoch_training_power_growth
+    name: Training power draw growth (doubling time)
+    definition: Doubling time of notable models' estimated training power draw, fitted log-linearly from 2020 on Epoch's notable-model table. Derived metric training_power_doubling_days.
+    why_it_matters: Power is the physical constraint that compute growth eventually hits; the brief's reading is 2.2x a year.
+    proxy_types: [model_release]
+    unit: days
+    cadence_expected: monthly
+    metric: training_power_doubling_days
+    band_input: "metric:training_power_doubling_days"
+    bucket_id: methods
+    valve_measured: invention_to_product
+    normal_band: {lo: 365}
+    fast_band: {hi: 230}
+    band_rationale: "Normal = doubling no faster than yearly (grid-connection pace); fast = every 230 days or less (3x a year, the pace a runaway buildout needs). Between is emerging."
+    tracker_interpretation: Estimated from hardware counts and thermal design power; a proxy for the buildout's physical footprint, not a metered figure.
+    counterevidence: Power draw is estimated for nearly every model; the notable set skews to models whose hardware is public.
+    layer_id: compute_physical
+    leading_lagging: leading
+    confidence: 50
+    proposed_status: emerging
+    related_indicators: [epoch_training_compute_growth, circular_financing_scale]
+    published: true
+    updated_at: 2026-09-11
+  - id: perf_per_dollar_growth
+    name: Hardware price-performance growth (doubling time)
+    definition: Doubling time of FP16 tensor throughput per release-price dollar across accelerators with a public price, fitted log-linearly from 2012 on Epoch's hardware table. Derived metric perf_per_dollar_doubling_days.
+    why_it_matters: The floor under falling inference prices; the brief's reading is +49% a year.
+    proxy_types: [price, model_release]
+    unit: days
+    cadence_expected: annual
+    metric: perf_per_dollar_doubling_days
+    band_input: "metric:perf_per_dollar_doubling_days"
+    bucket_id: methods
+    valve_measured: invention_to_product
+    normal_band: {lo: 500}
+    fast_band: {hi: 365}
+    band_rationale: "Normal = doubling no faster than every 500 days (roughly the +49% a year Epoch reports); fast = yearly or faster. Between is emerging."
+    tracker_interpretation: Only accelerators with a public list price enter, and recent data-centre GPUs have none, so the series can end years before today.
+    counterevidence: List prices for a handful of parts; real transaction prices for H100-class GPUs are not public; FP16 peak throughput is not delivered throughput.
+    layer_id: compute_physical
+    sublayer_id: semis
+    leading_lagging: leading
+    confidence: 40
+    proposed_status: emerging
+    related_indicators: [epoch_inference_price_fixed_capability, semis_rent_concentration]
+    published: true
+    updated_at: 2026-09-11
+  - id: epoch_inference_price_fixed_capability
+    name: Inference price at fixed capability (halving time)
+    definition: Halving time of the lowest price per million tokens among models clearing GPT-4-0314's GPQA Diamond score, fitted from 2023 on Epoch's price-trend series. Derived metric inference_price_halving_days.
+    why_it_matters: Price per unit of capability on a benchmark axis, the lab layer's capture proxy; the brief cites about 40x a year at this threshold.
+    proxy_types: [price]
+    unit: days
+    cadence_expected: annual
+    metric: inference_price_halving_days
+    band_input: "metric:inference_price_halving_days"
+    bucket_id: methods
+    valve_measured: invention_to_product
+    normal_band: {lo: 230}
+    fast_band: {hi: 110}
+    band_rationale: "Normal = halving no faster than every 230 days (about 3x a year, the hardware pace); fast = every 110 days or less (10x a year or more; Epoch's reading at this threshold is faster still). Between is emerging."
+    tracker_interpretation: Few points, and the cheapest model at a fixed threshold is rarely the frontier; the METR-hour price series on OpenRouter is the companion reading.
+    counterevidence: Six-ish points on one benchmark threshold; list prices; a threshold fixed in 2023 measures commodity capability, not frontier capability.
+    layer_id: model
+    leading_lagging: coincident
+    confidence: 45
+    proposed_status: faster_than_normal
+    related_indicators: [model_price_per_horizon_hour, perf_per_dollar_growth]
+    published: true
+    updated_at: 2026-09-11
+  - id: epoch_data_exhaustion_year
+    name: Public text data exhaustion year (Epoch projection)
+    definition: Epoch's central projection of the year in which language-model training fully utilises the effective stock of public human-generated text, from the 2024 paper.
+    why_it_matters: "Bottleneck 88 (data exhaustion) as a dated estimate: when the readily available data is spent, continued scaling becomes a business decision about synthetic and licensed data."
+    proxy_types: [benchmark]
+    unit: year
+    cadence_expected: annual
+    series_keys: ["epoch_blog.public_text.exhaustion_year.pt"]
+    band_input: epoch_blog.public_text.exhaustion_year.pt
+    bucket_id: methods
+    valve_measured: invention_to_product
+    normal_band: {lo: 2028}
+    fast_band: {hi: 2026}
+    band_rationale: "Normal = exhaustion in 2028 or later (the paper's compute-optimal case); fast = 2026 or earlier (the overtrained case, which is what the AI 2027 scenario's compute path implies). Between is emerging."
+    tracker_interpretation: A projection, not a reading; the 80% interval runs 2026 to 2032, and the estimate moved four years later between Epoch's 2022 and 2024 papers.
+    counterevidence: One research group's estimate; synthetic data, licensed corpora and multimodal data all extend the stock; the estimate has already been revised once by four years.
+    layer_id: training_input
+    leading_lagging: leading
+    confidence: 40
+    proposed_status: emerging
+    related_indicators: [epoch_training_compute_growth]
+    stale_ok: true
+    stale_reason: "A projection from a 2024 paper; it changes only when Epoch republishes the analysis, so the two-year freshness rule does not apply."
+    published: true
+    updated_at: 2026-09-11
+  - id: arc_agi_frontier
+    name: ARC-AGI-2 best score
+    definition: Running best ARC-AGI-2 score by release date, from Epoch's compilation of external results. Derived metric arc_agi_frontier.
+    why_it_matters: The one serious proxy for out-of-distribution generalisation, the brief's replacement for a 'world-model transfer' dimension.
+    proxy_types: [benchmark]
+    unit: share
+    cadence_expected: monthly
+    metric: arc_agi_frontier
+    band_input: "metric:arc_agi_frontier"
+    bucket_id: methods
+    valve_measured: invention_to_product
+    normal_band: {hi: 0.5}
+    fast_band: {lo: 0.85}
+    band_rationale: "Normal = under half (the 2025 frontier); fast = 85% or above (the ARC Prize grand-prize bar). Between is emerging."
+    tracker_interpretation: External, compute-unconstrained results; the score says nothing about cost per task, which the prize also caps.
+    counterevidence: Compiled from external submissions rather than run by Epoch; cost per task is unconstrained in most entries; a single benchmark.
+    layer_id: model
+    leading_lagging: leading
+    confidence: 55
+    proposed_status: faster_than_normal
+    related_indicators: [metr_horizon_50]
+    published: true
+    updated_at: 2026-09-11
   - id: canaries_exposed_employment_yoy
     name: Employment in AI-exposed occupations, year on year
     definition: Year-on-year employment change in the most AI-exposed occupation quintile versus the least exposed, from the Stanford DEL and ADP Research Canaries Dashboard (payroll data). The band applies to the most-exposed series.
