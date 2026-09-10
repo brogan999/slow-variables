@@ -3,7 +3,7 @@ import { ChangelogList } from "@/components/Changelog";
 import { IndicatorCard } from "@/components/IndicatorCard";
 import { StockFlowDiagram } from "@/components/StockFlowDiagram";
 import { ThesisMonitor } from "@/components/ThesisMonitor";
-import { diffusion, obsIndex, thesis } from "@/lib/data";
+import { diffusion, memos, obsIndex, thesis } from "@/lib/data";
 
 export const metadata = { title: "Diffusion lens" };
 
@@ -11,6 +11,7 @@ export default function DiffusionLens() {
   const d = diffusion();
   const idx = obsIndex();
   const verdicts = thesis();
+  const latest = memos()[0];
   return (
     <div className="flex flex-col gap-8">
       <section>
@@ -23,6 +24,9 @@ export default function DiffusionLens() {
           Five stocks from <em>AI as Normal Technology</em>. A valve carries a status only when a published indicator measures it; everything else reads <em>unmeasured</em>, not a guess.
         </p>
       </section>
+      {latest ? (
+        <p className="text-sm rounded-lg bg-surface ring-hair px-3 py-2 max-w-3xl"><span className="text-muted">This week · </span><Link href={`/memos/${latest.date}`} className="font-medium hover:underline">{latest.title}</Link><span className="text-ink-2"> — {latest.summary}</span></p>
+      ) : null}
       <StockFlowDiagram buckets={d.buckets} valves={d.valves} />
       <section className="grid gap-4 md:grid-cols-2">
         {d.buckets.map((b) => (

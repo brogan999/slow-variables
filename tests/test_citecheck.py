@@ -32,3 +32,26 @@ def test_years_small_counts_and_zero_of_four_pass():
 
 def test_snippet_text_counts_as_a_source():
     assert check("The paper said 172 billion [obs:x].", R).ok
+
+
+def test_iso_dates_are_not_numbers():
+    res = check("Between 2026-09-01 and 2026-09-10 nothing moved.", R)
+    assert res.ok and res.numbers == []
+
+
+def test_a_bullet_is_one_claim_and_event_reasons_count():
+    recs = {
+        **R,
+        "e1": Record("e1", "event", [55.0], "", "Evaluator: 128.7 days is inside the band. Second sentence."),
+    }
+    ok = check(
+        "- **Horizon** moved to faster, confidence 55 [ind:i]. Evaluator: 128.7 days is inside the band. Second sentence. [event:e1]",
+        recs,
+    )
+    assert ok.ok, ok.failures
+    bad = check("Horizon moved. Evaluator: 128.7 days is inside the band. [event:e1]", recs)
+    assert not bad.ok
+
+
+def test_hash_ids_are_labels():
+    assert check("Bottleneck #86 is under test.", R).numbers == []

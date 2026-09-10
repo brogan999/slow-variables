@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 const NAV = [
-  ["/", "Diffusion"], ["/capture", "Capture"], ["/stack", "Stack"], ["/indicators", "Indicators"], ["/predictions", "Predictions"], ["/compare", "Compare"], ["/bottlenecks", "Bottlenecks"], ["/ledger", "Ledger"], ["/crosswalk", "Crosswalk"], ["/query", "Query"],
+  ["/", "Diffusion"], ["/capture", "Capture"], ["/memos", "Memos"], ["/stack", "Stack"], ["/indicators", "Indicators"], ["/predictions", "Predictions"], ["/compare", "Compare"], ["/bottlenecks", "Bottlenecks"], ["/ledger", "Ledger"], ["/crosswalk", "Crosswalk"], ["/query", "Query"],
   ["/sources", "Sources"], ["/methodology", "Methodology"], ["/changelog", "Changelog"],
 ] as const;
 

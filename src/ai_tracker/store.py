@@ -505,6 +505,22 @@ class Store:
             out / "lens" / "capture.json",
             {
                 "as_of": as_of_c,
+                "verdict": "As of %s: " % as_of_c
+                + ", ".join(
+                    f"{layer.name.lower()} {status.replace('_', ' ')}"
+                    for layer in self.seed.layers
+                    for status in [
+                        _summarise(
+                            [
+                                cards[i.id]
+                                for i in self.seed.indicators
+                                if i.layer_id == layer.id and i.published
+                            ]
+                        )
+                    ]
+                    if status
+                )
+                + ".",
                 "recent_status_events": recent,
                 "margin_shares": self._margin_shares(),
                 "margin_stack_series": [
@@ -564,6 +580,19 @@ class Store:
         _write(out / "stack.json", self._stack(cards))
         _write(out / "lens" / "ladder.json", self._ladder())
         _write(out / "analyses.json", self._analyses())
+        from .memo import load_memos
+
+        memos = load_memos()
+        (out / "memos").mkdir(parents=True, exist_ok=True)
+        for m in memos:
+            _write(out / "memos" / f"{m['date']}.json", m)
+        _write(
+            out / "memos" / "index.json",
+            [
+                {k: v for k, v in m.items() if k != "body"} | {"summary": m["body"].split("\n\n")[0][:400]}
+                for m in reversed(memos)
+            ],
+        )
         (out / "venture").mkdir(parents=True, exist_ok=True)
         for sub_id, doc in self._venture().items():
             _write(out / "venture" / f"{sub_id}.json", doc)

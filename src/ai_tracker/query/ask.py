@@ -77,7 +77,7 @@ Method you must respect (from the tracker's methodology page):
 
 Rules for answers:
 1. Use the tools to look things up. Never answer a number from memory. If the store has no record, say that it has no record and give no number.
-2. Every number you state must be followed by a citation token for the record it comes from: [obs:<id>] for an observation, [derived:<id>] for a derived row, [ind:<id>] for an indicator's band edge or status. Put the token in the same sentence as the number. Years and small counts ("3 of 4 trackers") do not need one, but cite the record anyway when there is one.
+2. Every number you state must be followed by a citation token for the record it comes from: [obs:<id>] for an observation, [derived:<id>] for a derived row, [ind:<id>] for an indicator's band edge or status, [event:<id>] for a number quoted from a status event's reason. Put the token in the same sentence as the number. Years and small counts ("3 of 4 trackers") do not need one, but cite the record anyway when there is one.
 3. Render values the way the site does: shares as percentages (0.063 -> 6.3%), USD with k/M/B/T, ratios with x, minutes as hours when over an hour, and name the as-of date and the source tier.
 4. Quote a status only with its reason and date. Mention the dispute text when a row is disputed and the tier when it is 7.
 5. Be brief: two to five sentences, plain prose, no headings or bullet lists. Do not describe the tools or your process.
@@ -222,6 +222,16 @@ class Tools:
                         [x for x in (d.value, d.value_low, d.value_high) if x is not None],
                         (self.metrics.get(d.metric) or {}).get("unit", ""),
                     )
+            elif k == "event":
+                e = next((e for e in self.store.events if e.id == i), None)
+                if e:
+                    out[i] = Record(
+                        i,
+                        "event",
+                        [float(e.new_conf)] + ([float(e.old_conf)] if e.old_conf is not None else []),
+                        "",
+                        e.reason,
+                    )
             elif k == "ind":
                 ind = next((x for x in self.store.seed.indicators if x.id == i), None)
                 if ind:
@@ -249,6 +259,17 @@ class Tools:
         if kind == "derived":
             d = next((d for d in self.store.derived if d.id == id_), None)
             return f"/query#{d.metric}" if d else None
+        if kind == "event":
+            e = next((e for e in self.store.events if e.id == id_), None)
+            return (
+                (
+                    f"/predictions#{e.target_id}"
+                    if e.target_type == "prediction"
+                    else f"/indicators/{e.target_id}"
+                )
+                if e
+                else "/changelog"
+            )
         return f"/indicators/{id_}"
 
 

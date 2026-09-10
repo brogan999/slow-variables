@@ -11,9 +11,9 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass, field
 
-CITE = re.compile(r"\[(obs|derived|ind):([A-Za-z0-9_.\-]+)\]")
+CITE = re.compile(r"\[(obs|derived|ind|event):([A-Za-z0-9_.\-]+)\]")
 NUM = re.compile(
-    r"(?<![\w.])(?P<sign>[-−–])?(?P<cur>\$|€|£)?(?P<num>\d{1,3}(?:,\d{3})+|\d+(?:\.\d+)?)(?P<suffix>\s?(?:%|×|x\b|[kKmMbBtT](?!\w)|h\b|hours?\b|min\b|minutes?\b|days?\b|pp\b|points?\b|bn\b|trillion|billion|million))?",
+    r"(?<![\w.\-#])(?P<sign>[-−–])?(?P<cur>\$|€|£)?(?P<num>\d{1,3}(?:,\d{3})+|\d+(?:\.\d+)?)(?P<suffix>\s?(?:%|×|x\b|[kKmMbBtT](?!\w)|h\b|hours?\b|min\b|minutes?\b|days?\b|pp\b|points?\b|bn\b|trillion|billion|million))?",
 )
 MULT = {"k": 1e3, "m": 1e6, "b": 1e9, "bn": 1e9, "t": 1e12, "million": 1e6, "billion": 1e9, "trillion": 1e12}
 WORD_NUMBERS = {"one", "two", "three", "four"}
@@ -24,7 +24,7 @@ class Record:
     """One cited thing: an observation, a derived row or an indicator (whose band edges count as numbers)."""
 
     id: str
-    kind: str  # obs | derived | ind
+    kind: str  # obs | derived | ind | event
     values: list[float] = field(default_factory=list)  # value, low, high, band edges
     unit: str = ""
     snippet: str = ""
@@ -83,10 +83,15 @@ def _parse(m: re.Match) -> float | None:
 
 def check(text: str, records: dict[str, Record]) -> Result:
     numbers, failures, annotated = [], [], text
-    for sentence in re.split(r"(?<=[.!?])\s+", text):
+    units = []
+    for line in text.splitlines():
+        units += (
+            [line] if line.lstrip().startswith("- ") else re.split(r"(?<=[.!?])\s+", line)
+        )  # a bullet is one claim
+    for sentence in units:
         cited = [records.get(i) for _, i in CITE.findall(sentence)]
         cited = [r for r in cited if r]
-        for m in NUM.finditer(sentence):
+        for m in NUM.finditer(CITE.sub(" ", sentence)):  # ids inside citation tokens are not numbers
             token_text = m.group(0).strip()
             suf = (m.group("suffix") or "").strip().lower()
             num = m.group("num")

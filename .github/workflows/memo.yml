@@ -1,0 +1,25 @@
+name: memo
+on:
+  schedule: [{ cron: "17 9 * * 1" }]
+  workflow_dispatch:
+permissions: { contents: write, pull-requests: write }
+jobs:
+  memo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync
+      - run: uv run ai-tracker evaluate && uv run ai-tracker export && uv run ai-tracker memo && uv run ai-tracker export
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          AI_TRACKER_USER_AGENT: ${{ secrets.AI_TRACKER_USER_AGENT }}
+      - uses: peter-evans/create-pull-request@v7
+        with:
+          branch: memo
+          title: "memo: week to ${{ github.run_started_at }}"
+          body: "Weekly memo draft from the memo job. Merging publishes it under /memos. Edit docs/memos/*.md on this branch to change the prose; the front matter is generated."
+          commit-message: "memo: weekly draft"
+          add-paths: |
+            docs/memos/**
+            web/data/memos/**

@@ -57,7 +57,7 @@ export function ChatDrawer() {
 }
 
 function AnswerView({ a }: { a: Answer }) {
-  const parts = a.answer.split(/(\[(?:obs|derived|ind):[A-Za-z0-9_.-]+\]|⟦unverified: [^⟧]*⟧)/g);
+  const parts = a.answer.split(/(\[(?:obs|derived|ind|event):[A-Za-z0-9_.-]+\]|⟦unverified: [^⟧]*⟧)/g);
   const byId = new Map(a.citations.map((c) => [`[${c.kind}:${c.id}]`, c]));
   return (
     <div className="flex flex-col gap-2">

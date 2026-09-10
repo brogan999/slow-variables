@@ -19,7 +19,8 @@ export default function CaptureLens() {
           <h1 className="text-2xl font-semibold tracking-tight">Capture lens</h1>
           <Link href="/" className="text-sm text-ink-2 hover:text-ink">← Switch to diffusion lens</Link>
         </div>
-        <p className="mt-2 max-w-3xl text-lg leading-snug">Who keeps the surplus, layer by layer. The compute layer's bar is sized by its filed segment operating income; a layer without a filed margin series shows a hairline, and its indicators carry the reading.</p>
+        {c.verdict ? <p className="mt-2 max-w-3xl text-lg leading-snug">{c.verdict}</p> : null}
+        <p className="mt-1 text-sm text-ink-2 max-w-3xl">Who keeps the surplus, layer by layer. The compute layer's bar is sized by its filed segment operating income; a layer without a filed margin series shows a hairline, and its indicators carry the reading.</p>
       </section>
       <StackVertical layers={c.layers} shares={c.margin_shares} obsIndex={idx} />
       <section>

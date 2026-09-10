@@ -325,6 +325,18 @@ def cmd_golden(a: argparse.Namespace) -> int:
     return 0 if n == len(res) else 1
 
 
+def cmd_memo(a: argparse.Namespace) -> int:
+    from .memo import write
+
+    s = st.Store()
+    if not s.derived:
+        s.derived = run_metrics(s.con)
+        s.semantic_tables()
+    p = write(s, a.date, a.since)
+    print(f"wrote {p}")
+    return 0
+
+
 def cmd_serve(a: argparse.Namespace) -> int:
     from .query.server import serve
 
@@ -369,6 +381,10 @@ def main(argv: list[str] | None = None) -> None:
     q.add_argument("question")
     q.set_defaults(fn=cmd_ask)
     sub.add_parser("golden").set_defaults(fn=cmd_golden)
+    mm = sub.add_parser("memo")
+    mm.add_argument("--date", type=date.fromisoformat, default=None)
+    mm.add_argument("--since", type=date.fromisoformat, default=None)
+    mm.set_defaults(fn=cmd_memo)
     sv = sub.add_parser("serve")
     sv.add_argument("--port", type=int, default=int(os.environ.get("PORT", "8080")))
     sv.set_defaults(fn=cmd_serve)
