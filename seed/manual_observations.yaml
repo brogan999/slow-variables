@@ -925,3 +925,193 @@ observations:
     basis: reported
     raw_snippet: "up from 36% last year"
     note: "Same sentence as the 2025 row: the 2024 share, restated in the 2025 report."
+  # --- continual-learning ladder (Appendix E), sourced 2026-09-11; every snippet verified verbatim against the fetched page ---
+  - series_key: cl_ladder.anysphere.rung.pt
+    source_id: cursor_blog
+    entity_id: anysphere
+    value: 2
+    unit: rung
+    as_of_date: 2025-09-12
+    published_date: 2025-09-12
+    url: https://cursor.com/blog/tab-rl
+    tier: 7
+    basis: company_stated
+    raw_snippet: "Our approach is unusual because it involves rolling out new models to users frequently throughout the day and using that data for training."
+    note: "Cursor Tab trained by online RL on accept/reject signals from all users; one objective for the whole population, no per-deployment weights, so L2 not L3. Same post: 'handling over 400 million requests per day'."
+  - series_key: cl.anysphere.refresh_cadence_hours.pt
+    source_id: cursor_blog
+    entity_id: anysphere
+    value: 2
+    unit: hours
+    as_of_date: 2025-09-12
+    published_date: 2025-09-12
+    url: https://cursor.com/blog/tab-rl
+    tier: 7
+    basis: company_stated
+    raw_snippet: "Currently, it takes us 1.5 to 2 hours to roll out a checkpoint and collect the data for the next step."
+    note: "Stated range 1.5-2 h per checkpoint-and-collect cycle; upper bound stored."
+  - series_key: cl_ladder.trajectory.rung.pt
+    source_id: baseten_blog
+    entity_id: trajectory
+    value: 3
+    unit: rung
+    as_of_date: 2026-05-27
+    published_date: 2026-05-27
+    url: https://www.baseten.co/blog/powering-inference-for-the-continual-learning-era/
+    tier: 7
+    basis: company_stated
+    raw_snippet: "a pipeline that takes a freshly trained LoRA adapter and puts it behind a live, A/B routed, fully provenanced endpoint in roughly an hour. That is enough to run continual learning in production today"
+    note: "Baseten + Trajectory (co-authored by Trajectory's Elabd and Karanam): per-customer LoRA adapters merged and A/B-routed on a cadence, with provenance. L3: adapters per customer on a cadence; nothing per-session, so not L5."
+  - series_key: cl.trajectory.refresh_cadence_hours.pt
+    source_id: baseten_blog
+    entity_id: trajectory
+    value: 1
+    unit: hours
+    as_of_date: 2026-05-27
+    published_date: 2026-05-27
+    url: https://www.baseten.co/blog/powering-inference-for-the-continual-learning-era/
+    tier: 7
+    basis: company_stated
+    raw_snippet: "Checkpoints arrive from training runs hourly."
+    note: "Same post: 'Under continual learning, you do it every hour, on every customer's adapter' and 'The whole pipeline runs in roughly an hour, end to end.' Hourly is the checkpoint arrival rate; promotion to production is gated by A/B routing, so the customer-facing refresh may be slower."
+  - series_key: cl.decagon.self_trained_traffic_share.pt
+    source_id: decagon_blog
+    entity_id: decagon
+    value: 0.8
+    unit: share
+    as_of_date: 2026-03-24
+    published_date: 2026-03-24
+    url: https://decagon.ai/blog/introducing-decagon-labs
+    tier: 7
+    basis: company_stated
+    raw_snippet: "Today, over 80% of all model traffic at Decagon runs on models we trained ourselves."
+    note: "Floor (>80%). Supports Decagon's presence on the ladder but states no retraining cadence; the brief's 'retrained weekly' is not on any fetchable Decagon or Trajectory page, so no rung row yet."
+  - series_key: cl_ladder.engram_harvey.rung_research.pt
+    source_id: engram_blog
+    entity_id: engram
+    value: 4
+    unit: rung
+    as_of_date: 2026-08-17
+    published_date: 2026-08-17
+    url: https://engram.com/blog/legal-agents-with-memory
+    tier: 7
+    basis: company_stated
+    raw_snippet: "By combining its knowledge of the workspace with search, it solves tasks more effectively with an order of magnitude lower cost-per-query ($0.13 / 30% all-pass for our agent, vs. $1.32 / 25% all-pass for Opus 4.8)."
+    note: "Engram + Harvey on the synthetic firm Calderwood & Harkness (LAB: Firm Knowledge): firm knowledge internalised into Qwen3.8-27B weights via parameter-efficient fine-tuning plus notes and search. L4 (organisation knowledge in weights) but research on a synthetic firm, not a shipped Harvey feature, hence rung_research."
+  - series_key: cl.engram_harvey.closed_book_accuracy.pt
+    source_id: engram_blog
+    entity_id: engram
+    value: 0.726
+    unit: share
+    as_of_date: 2026-08-17
+    published_date: 2026-08-17
+    url: https://engram.com/blog/legal-agents-with-memory
+    tier: 7
+    basis: company_stated
+    raw_snippet: "Closed-book knowledge rises from 4.7% to 72.6% between training steps zero and one thousand."
+    note: "Closed-book recall of firm facts after study, no retrieval; the nearest thing to a firm-knowledge-in-weights observable on the page. Baseline 4.7%."
+  - series_key: cl_ladder.harvey_tenet.rung_research.pt
+    source_id: harvey_blog
+    entity_id: harvey
+    value: 4
+    unit: rung
+    as_of_date: 2026-08-20
+    published_date: 2026-08-20
+    url: https://www.harvey.ai/blog/post-training-update-harvey-tenet
+    tier: 7
+    basis: company_stated
+    raw_snippet: "Starting from a Kimi K3 base, we worked with Fireworks to post-train our model via asynchronous reinforcement learning (RL) in realistic legal work settings."
+    dispute_text: "Placed at L4 because Appendix E lists Tenet there, but the post describes one async-RL post-training run on domain (legal) data for a research preview, not organisation-specific knowledge on a refresh cadence; read literally it is an L0 static snapshot with domain specialisation."
+    note: "Harvey Tenet research preview, Kimi K3 base post-trained with Fireworks; 'will be incorporating into the Harvey product over time', so not production yet."
+  - series_key: cl_ladder.baseten_rank1_lora.rung_research.pt
+    source_id: baseten_blog
+    entity_id: baseten
+    value: 5
+    unit: rung
+    as_of_date: 2025-10-12
+    published_date: 2025-10-12
+    url: https://www.baseten.co/research/write-small-learn-forever/
+    tier: 7
+    basis: company_stated
+    raw_snippet: "Continuously (or close to continuously) merging rank-1 LoRA adapters into the model on the same GPUs running inference felt like the right answer to that to us."
+    note: "Rank-1 LoRA continuous merge on the inference GPUs: per-update weight changes that persist and pool, i.e. the L5 mechanism, demonstrated only as research. The post's own caveat: it 'doesn't really solve a lot of the problems of continual learning' and forgetting remains."
+  - series_key: cl_ladder.nested_learning_hope.rung_research.pt
+    source_id: google_research_blog
+    entity_id: googl
+    value: 5
+    unit: rung
+    as_of_date: 2025-11-07
+    published_date: 2025-11-07
+    url: https://research.google/blog/introducing-nested-learning-a-new-ml-paradigm-for-continual-learning/
+    tier: 7
+    basis: company_stated
+    raw_snippet: "We test and validate Nested Learning through a proof-of-concept, self-modifying architecture that we call “Hope”, which achieves superior performance in language modeling and demonstrates better long-context memory management than existing state-of-the-art models."
+    note: "Google Research (Behrouz, Mirrokni), NeurIPS 2025; arXiv 2512.24695. Self-modifying weights with a continuum memory system, aimed at catastrophic forgetting: L5 mechanism, proof-of-concept only; no Gemini production claim found."
+  - series_key: cl_ladder.titans.rung_research.pt
+    source_id: arxiv_abs
+    entity_id: googl
+    value: 5
+    unit: rung
+    as_of_date: 2024-12-31
+    published_date: 2024-12-31
+    url: https://arxiv.org/abs/2501.00663
+    tier: 6
+    basis: reported
+    raw_snippet: "We present a new neural long-term memory module that learns to memorize historical context and helps attention to attend to the current context while utilizing long past information."
+    note: "Titans (Behrouz, Zhong, Mirrokni): memory written into module weights at test time; persists within a sequence, no cross-session pooling shown, so the weakest L5 claim in the set."
+  - series_key: cl_ladder.ttt_layers.rung_research.pt
+    source_id: arxiv_abs
+    value: 5
+    unit: rung
+    as_of_date: 2024-07-05
+    published_date: 2024-07-05
+    url: https://arxiv.org/abs/2407.04620
+    tier: 6
+    basis: reported
+    raw_snippet: "Since the hidden state is updated by training even on test sequences, our layers are called Test-Time Training (TTT) layers."
+    note: "Sun et al., Stanford/UCSD/Berkeley/Meta; v4 2025-08-31. Weight updates at test time (hidden state is itself a model trained on the sequence): L5 mechanism at 125M-1.3B scale, no persistence across sessions."
+  - series_key: cl_ladder.sdft_self_distillation.rung_research.pt
+    source_id: arxiv_abs
+    value: 5
+    unit: rung
+    as_of_date: 2026-01-27
+    published_date: 2026-01-27
+    url: https://arxiv.org/abs/2601.19897
+    tier: 6
+    basis: reported
+    raw_snippet: "In sequential learning experiments, SDFT enables a single model to accumulate multiple skills over time without performance regression, establishing on-policy distillation as a practical path to continual learning from demonstrations."
+    note: "Shenfeld, Damani, Hübotter, Agrawal (MIT/ETH); v2 2026-08-07. On-policy self-distillation from demonstrations with skills pooling without forgetting: the L5 'pool without forgetting' observable, demonstrated in research."
+  - series_key: cl_ladder.sdpo.rung_research.pt
+    source_id: arxiv_abs
+    value: 5
+    unit: rung
+    as_of_date: 2026-01-28
+    published_date: 2026-01-28
+    url: https://arxiv.org/abs/2601.20802
+    tier: 6
+    basis: reported
+    raw_snippet: "Finally, applying SDPO to individual questions at test time accelerates discovery on difficult binary-reward tasks, achieving the same discovery probability as best-of-k sampling or multi-turn conversations with 3x fewer attempts."
+    note: "Hübotter et al. (ETH), Self-Distillation Policy Optimization; v2 2026-02-16. Listed under L5 in Appendix E; the paper is a training method with a per-question test-time variant, not a persistence-across-sessions result, so the placement is by mechanism only."
+  - series_key: cl_ladder.tml_on_policy_distillation.rung_research.pt
+    source_id: thinking_machines_blog
+    entity_id: thinking_machines_lab
+    value: 5
+    unit: rung
+    as_of_date: 2025-10-27
+    published_date: 2025-10-27
+    url: https://thinkingmachines.ai/blog/on-policy-distillation/
+    tier: 7
+    basis: company_stated
+    raw_snippet: "This generalizes to a broader set of continual learning tasks, which require acquiring new knowledge without degrading prior capabilities."
+    note: "Thinking Machines (Kevin Lu), 'On-Policy Distillation': shows on-policy distillation restores post-training behaviour after mid-training on new documents. Research/Tinker recipe; no production continual-learning claim by the lab found."
+  - series_key: cl_ladder.frozen_weights_memory.rung_research.pt
+    source_id: arxiv_abs
+    value: 1
+    unit: rung
+    as_of_date: 2026-07-24
+    published_date: 2026-07-24
+    url: https://arxiv.org/abs/2607.22157
+    tier: 6
+    basis: reported
+    raw_snippet: "We show that this feedback is a sufficient signal for continual learning when the frozen model is paired with an external memory that distils each episode into retrievable natural-language rules."
+    note: "Tablan, Taylor, Bernhem, 'Learning on the Job': the Appendix E L1 exemplar. Frozen weights, feedback distilled into retrievable rules; the abstract states pass^1 1.6x (verdict) to 2.6x (corrections) over static RAG on tau-bench banking, with cross-model transfer of the store."

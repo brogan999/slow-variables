@@ -2,12 +2,14 @@ import json
 from datetime import datetime, timedelta, timezone
 
 from ai_tracker import store as st
+from ai_tracker.analysis.metrics import run_metrics
 from ai_tracker.cli import check_errors
 from ai_tracker.schema import StatusEvent
 
 
 def test_check_rules_fire(monkeypatch, tmp_path):
     s = st.Store()
+    s.derived = run_metrics(s.con)  # derived rows are not committed; a fresh checkout computes them
     assert check_errors(s) == []  # the committed data passes today
     # 1. a status event citing an observation that does not exist
     s.events.append(

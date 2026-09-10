@@ -3365,8 +3365,8 @@
        "dims": {},
        "obs_ids": [
         "24789a9da722d2de",
-        "ac6f1c2cdefb7d8a",
-        "d092bfa7505183e3"
+        "d092bfa7505183e3",
+        "ecc8d38ac38efd20"
        ],
        "unit": "index",
        "value": 10.900000000000006
@@ -3376,8 +3376,8 @@
        "dims": {},
        "obs_ids": [
         "24789a9da722d2de",
-        "d092bfa7505183e3",
-        "ecc8d38ac38efd20"
+        "ac6f1c2cdefb7d8a",
+        "d092bfa7505183e3"
        ],
        "unit": "index",
        "value": 10.900000000000006
@@ -3430,7 +3430,7 @@
        "obs_ids": [
         "280009b4280e4135",
         "7313ea1c506e40e2",
-        "e2ec2503b5e14b8f"
+        "d471ec4fe8519574"
        ],
        "unit": "index",
        "value": 11.25
@@ -3441,7 +3441,7 @@
        "obs_ids": [
         "280009b4280e4135",
         "7313ea1c506e40e2",
-        "d471ec4fe8519574"
+        "e2ec2503b5e14b8f"
        ],
        "unit": "index",
        "value": 11.25
@@ -3505,7 +3505,7 @@
        "dims": {},
        "obs_ids": [
         "2202dee6a2133a8e",
-        "472a62400c7c198b",
+        "b1c57b5cc34b16a8",
         "ebf4836f647dcf59"
        ],
        "unit": "index",
@@ -3516,7 +3516,7 @@
        "dims": {},
        "obs_ids": [
         "2202dee6a2133a8e",
-        "b1c57b5cc34b16a8",
+        "472a62400c7c198b",
         "ebf4836f647dcf59"
        ],
        "unit": "index",
@@ -7226,6 +7226,53 @@
     },
     {
      "bucket_id": "return_arrow",
+     "confidence": 45,
+     "grade": "D",
+     "id": "continual_learning_level",
+     "latest": {
+      "as_of": "2026-05-27",
+      "dims": {},
+      "obs_ids": [
+       "1b7d08dbce2be548",
+       "dc983a8178691c42"
+      ],
+      "unit": "rung",
+      "value": 3.0
+     },
+     "layer_id": "training_input",
+     "leading_lagging": "leading",
+     "n_observations": 2,
+     "name": "Continual-learning ladder (highest production rung)",
+     "published": true,
+     "sparkline": [
+      {
+       "as_of": "2025-09-12",
+       "dims": {},
+       "obs_ids": [
+        "dc983a8178691c42"
+       ],
+       "unit": "rung",
+       "value": 2.0
+      },
+      {
+       "as_of": "2026-05-27",
+       "dims": {},
+       "obs_ids": [
+        "1b7d08dbce2be548",
+        "dc983a8178691c42"
+       ],
+       "unit": "rung",
+       "value": 3.0
+      }
+     ],
+     "stale_as_of": null,
+     "status": "emerging",
+     "unit": "rung",
+     "unpublished_reason": null,
+     "valve_measured": "return_arrow"
+    },
+    {
+     "bucket_id": "return_arrow",
      "confidence": 35,
      "grade": "B",
      "id": "rl_environment_vendor_count",
@@ -8277,20 +8324,6 @@
        "as_of": "2026-05-03",
        "disputed": false,
        "grade": "A",
-       "high": null,
-       "low": null,
-       "obs_ids": [
-        "955af5a5e7888769"
-       ],
-       "series_key": "census_btos.us.ai_use_share_v2.2w",
-       "subject": "us",
-       "unit": "share",
-       "value": 0.198
-      },
-      {
-       "as_of": "2026-05-03",
-       "disputed": false,
-       "grade": "A",
        "high": 0.199704,
        "low": 0.19029600000000002,
        "obs_ids": [
@@ -8300,6 +8333,20 @@
        "subject": "us",
        "unit": "share",
        "value": 0.195
+      },
+      {
+       "as_of": "2026-05-03",
+       "disputed": false,
+       "grade": "A",
+       "high": null,
+       "low": null,
+       "obs_ids": [
+        "955af5a5e7888769"
+       ],
+       "series_key": "census_btos.us.ai_use_share_v2.2w",
+       "subject": "us",
+       "unit": "share",
+       "value": 0.198
       },
       {
        "as_of": "2026-05-17",
@@ -10145,6 +10192,22 @@
  "recent_status_events": [
   {
    "author": "evaluate",
+   "created_at": "2026-09-10T06:54:26.276102Z",
+   "evidence_ids": [
+    "1b7d08dbce2be548",
+    "dc983a8178691c42"
+   ],
+   "id": "0da1c10d4ea380f4",
+   "new_conf": 45,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "Highest production rung on record is L3: Trajectory's per-customer LoRA adapters refreshed hourly and A/B-routed behind provenanced endpoints, per Baseten's co-authored post of 27 May 2026; Cursor's Tab model sits at L2 (one online-trained model for all users, 1.5-2 hour checkpoint cycles). L4 (firm knowledge in weights, Engram + Harvey) and L5 (rank-1 LoRA merge, Nested Learning, TTT, self-distillation) exist only as research and do not move the level. L3 is inside the normal band, but every production row is a vendor describing its own system (tier 7), so the status is capped at emerging. Initial seed.",
+   "target_id": "continual_learning_level",
+   "target_type": "indicator"
+  },
+  {
+   "author": "evaluate",
    "created_at": "2026-09-10T06:50:36.329552Z",
    "evidence_ids": [
     "6cc13c311340cd50"
@@ -10172,36 +10235,6 @@
    "old_status": null,
    "reason": "Evaluator: 2.042 (METR time horizons (v1.1), 2026-03-05) is inside the consistent band (lo=1.5 ). Auto-reason; band rationale: Normal = misfit of 1.5 or more (observed ratios of 5-10x against the constant-hazard 3.1x, the pattern since 2024); fast = within 10% of the constant-hazard prediction, which would mean long-task reliability tracking short-task success. Between is emerging.",
    "target_id": "ord_half_life_misfit",
-   "target_type": "indicator"
-  },
-  {
-   "author": "evaluate",
-   "created_at": "2026-09-10T06:49:58.909223Z",
-   "evidence_ids": [
-    "027237d89717d303",
-    "143dcf3ea59eb522",
-    "196a6174924b2821",
-    "29221e0928c0242d",
-    "416fff663e911055",
-    "4910df35443940aa",
-    "4dc8ee6d073b8430",
-    "6012e72e8105bfc4",
-    "8065a41f15722c18",
-    "9fbab158355685d5",
-    "c72d56dfb070b2b7",
-    "ccc7b379ab5ac2f2",
-    "ce2a8065b1d4c7ac",
-    "f2df3324fcaa3dd6",
-    "f64560a6646757a8",
-    "f87fbd907ad6c419"
-   ],
-   "id": "9d4f4e6286d09c7b",
-   "new_conf": 40,
-   "new_status": "dispersing",
-   "old_conf": null,
-   "old_status": null,
-   "reason": "Evaluator: 2.507 (SEC EDGAR XBRL company facts, 2026-06-30) reads dispersing over 4 periods with a dead band of 0.3. Auto-reason; rule rationale: Four quarters; a move under 0.3x is run-rate noise. Rising = capex pulling further ahead of revenue (the bet growing); falling = revenue catching the buildout.",
-   "target_id": "capex_to_revenue_stack",
    "target_type": "indicator"
   }
  ]

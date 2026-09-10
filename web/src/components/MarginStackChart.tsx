@@ -19,7 +19,7 @@ export function MarginStackChart({ rows, obsIndex }: { rows: Row[]; obsIndex: Re
                 {parts.map((p) => {
                   if (!p.row) return null;
                   const id = p.row.obs_ids[0];
-                  const bar = <div className="w-full" style={{ height: `${p.row.value * 100}%`, background: p.id === "compute_semis" ? "var(--s1)" : "var(--axis)" }} title={`${p.name} ${fmt(p.row.value, "share")} ${q}`} />;
+                  const bar = <div className="w-full h-full" style={{ background: p.id === "compute_semis" ? "var(--s1)" : "var(--axis)" }} title={`${p.name} ${fmt(p.row.value, "share")} ${q}`} />;
                   return obsIndex[id] ? <Link key={p.id} href={`/series/${obsIndex[id]}#${id}`} className="w-full flex flex-col-reverse" style={{ height: `${p.row.value * 100}%` }} aria-label={`${p.name} ${fmt(p.row.value, "share")} in ${q}`}>{bar}</Link> : <div key={p.id} className="w-full" style={{ height: `${p.row.value * 100}%` }}>{bar}</div>;
                 })}
               </div>

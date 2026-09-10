@@ -18,6 +18,7 @@ export function DirectionChart({ points, unit, rule }: { points: Point[]; unit: 
   const pad = (hi - lo || Math.abs(hi) || 1) * 0.15;
   const monthYr = (t: number) => new Date(t).toLocaleDateString("en", { month: "short", year: "2-digit", timeZone: "UTC" });
   return (
+    <div className="w-full">
     <div className="h-72 w-full" role="img" aria-label={`${unit} over time with the direction rule's dead band`}>
       <ResponsiveContainer>
         <LineChart data={pts} margin={{ top: 8, right: 16, bottom: 4, left: 0 }}>
@@ -29,7 +30,8 @@ export function DirectionChart({ points, unit, rule }: { points: Point[]; unit: 
           <Line type="monotone" dataKey="v" stroke="var(--s1)" strokeWidth={2} dot={{ r: 3, fill: "var(--s1)" }} isAnimationActive={false} />
         </LineChart>
       </ResponsiveContainer>
-      <p className="text-xs text-muted mt-1">Direction over the last {rule.periods} periods; the band is ±{fmtUnit(rule.dead_band, unit)} around the window&apos;s first point. Higher reads {rule.higher_is.replace(/_/g, " ")}.</p>
+    </div>
+    <p className="text-xs text-muted mt-1">Direction over the last {rule.periods} periods; the band is ±{fmtUnit(rule.dead_band, unit)} around the window&apos;s first point. Higher reads {rule.higher_is.replace(/_/g, " ")}.</p>
     </div>
   );
 }

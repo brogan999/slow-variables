@@ -18,7 +18,7 @@ Rule: (ratio ≤ 2 AND 80% horizon > 8 h) AND (≥ 3 trackers break) AND (hours 
 Rule: ratio non-decreasing AND ladder ≤ L4 AND four clean tracker releases
 
 - ✗ 50%/80% ratio non-decreasing over the last four models — 10.3×, 6.4×, 4.3×, 6.3× (obs: 39c8213a, 8f73b56b, 959db6dd…)
-- ? continual-learning ladder ≤ L4 — untestable: no observation within two source cadences
+- ✓ continual-learning ladder ≤ L4 — L3 as of 2026-05-27 (obs: 1b7d08db, dc983a81)
 - ? precise nulls persist through four monthly tracker releases — 1 readings, max break count 0 (obs: 2ec713fc, 83c12bef, a9276b9d…)
 
 ## Invention-side WARNING (bottleneck #86 under test): **untestable**

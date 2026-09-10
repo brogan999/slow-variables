@@ -1,10 +1,19 @@
 {
  "band_input": "metric:continual_learning_level",
  "band_rationale": "Appendix E's rule: L0-L3 (memory, population-level online learning, per-customer adapters) is normal; L5-L6 (persistent per-session weight updates, the six-month-employee test) is fast; L4 (organisation knowledge in weights) is emerging.",
- "band_value": null,
+ "band_value": {
+  "as_of": "2026-05-27",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "1b7d08dbce2be548",
+   "dc983a8178691c42"
+  ],
+  "value": 3.0
+ },
  "bucket_id": "return_arrow",
  "cadence_expected": "quarterly",
- "confidence": null,
+ "confidence": 45,
  "counterevidence": "Every production row is tier 7 (self-described); research results are kept off the level; no public benchmark exists for L6, so the top rung cannot be reached by construction until one does.",
  "crosswalk": [
   {
@@ -17,7 +26,44 @@
   }
  ],
  "definition": "The highest rung of the continual-learning ladder (L0 static snapshot to L6 six-month-employee test) with a shipped production system on record, from dated rows citing the vendor's or lab's own description. Derived metric continual_learning_level.",
- "derived": [],
+ "derived": [
+  {
+   "as_of_date": "2025-09-12",
+   "computed_at": "2026-09-10T06:54:25.117392Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "c7f9a81f6ad95f7d",
+   "input_observation_ids": [
+    "dc983a8178691c42"
+   ],
+   "metric": "continual_learning_level",
+   "obs_ids": [
+    "dc983a8178691c42"
+   ],
+   "value": 2.0,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2026-05-27",
+   "computed_at": "2026-09-10T06:54:25.117392Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "f7165955499a56d4",
+   "input_observation_ids": [
+    "1b7d08dbce2be548",
+    "dc983a8178691c42"
+   ],
+   "metric": "continual_learning_level",
+   "obs_ids": [
+    "1b7d08dbce2be548",
+    "dc983a8178691c42"
+   ],
+   "value": 3.0,
+   "value_high": null,
+   "value_low": null
+  }
+ ],
  "direction": null,
  "direction_rule": null,
  "evidence": [],
@@ -28,27 +74,56 @@
  },
  "fits": [],
  "flow_status": null,
- "grade": null,
+ "grade": "D",
  "id": "continual_learning_level",
- "latest": null,
+ "latest": {
+  "as_of": "2026-05-27",
+  "dims": {},
+  "obs_ids": [
+   "1b7d08dbce2be548",
+   "dc983a8178691c42"
+  ],
+  "unit": "rung",
+  "value": 3.0
+ },
  "layer_id": "training_input",
  "leading_lagging": "leading",
  "metric": "continual_learning_level",
  "metric_dims": {},
- "n_observations": 0,
+ "n_observations": 2,
  "name": "Continual-learning ladder (highest production rung)",
  "normal_band": {
   "hi": 3.0,
   "lo": null
  },
  "override_note": null,
- "points": [],
+ "points": [
+  {
+   "as_of": "2025-09-12",
+   "dims": {},
+   "obs_ids": [
+    "dc983a8178691c42"
+   ],
+   "unit": "rung",
+   "value": 2.0
+  },
+  {
+   "as_of": "2026-05-27",
+   "dims": {},
+   "obs_ids": [
+    "1b7d08dbce2be548",
+    "dc983a8178691c42"
+   ],
+   "unit": "rung",
+   "value": 3.0
+  }
+ ],
  "proposed_status": "consistent_with_normal",
  "proxy_types": [
   "product",
   "model_release"
  ],
- "published": false,
+ "published": true,
  "related_bottlenecks": [],
  "related_indicators": [
   "rsi_agent_workdays_per_human",
@@ -58,16 +133,53 @@
  "related_predictions": [],
  "series": [],
  "series_keys": [],
- "sparkline": [],
+ "sparkline": [
+  {
+   "as_of": "2025-09-12",
+   "dims": {},
+   "obs_ids": [
+    "dc983a8178691c42"
+   ],
+   "unit": "rung",
+   "value": 2.0
+  },
+  {
+   "as_of": "2026-05-27",
+   "dims": {},
+   "obs_ids": [
+    "1b7d08dbce2be548",
+    "dc983a8178691c42"
+   ],
+   "unit": "rung",
+   "value": 3.0
+  }
+ ],
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,
- "status": null,
- "status_events": [],
+ "status": "emerging",
+ "status_events": [
+  {
+   "author": "evaluate",
+   "created_at": "2026-09-10T06:54:26.276102Z",
+   "evidence_ids": [
+    "1b7d08dbce2be548",
+    "dc983a8178691c42"
+   ],
+   "id": "0da1c10d4ea380f4",
+   "new_conf": 45,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "Highest production rung on record is L3: Trajectory's per-customer LoRA adapters refreshed hourly and A/B-routed behind provenanced endpoints, per Baseten's co-authored post of 27 May 2026; Cursor's Tab model sits at L2 (one online-trained model for all users, 1.5-2 hour checkpoint cycles). L4 (firm knowledge in weights, Engram + Harvey) and L5 (rank-1 LoRA merge, Nested Learning, TTT, self-distillation) exist only as research and do not move the level. L3 is inside the normal band, but every production row is a vendor describing its own system (tier 7), so the status is capped at emerging. Initial seed.",
+   "target_id": "continual_learning_level",
+   "target_type": "indicator"
+  }
+ ],
  "sublayer_id": "post_training",
  "tracker_interpretation": "Rows are vendors describing their own systems; the rung is what they claim to ship, not what an independent evaluation found.",
  "unit": "rung",
- "unpublished_reason": "Waiting on the first verified production rows (vendor posts fetched and quoted verbatim); the ladder definitions and the metric are in place.",
+ "unpublished_reason": null,
  "updated_at": "2026-09-11",
  "valve_measured": "return_arrow",
  "why_it_matters": "The crux of the timelines argument. If systems learn on the job, deployment feeds invention automatically and the return arrow stops depending on human-data vendors; Narayanan and Kapoor's speed limits assume it stays unsolved."

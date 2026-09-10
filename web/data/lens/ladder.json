@@ -1,5 +1,12 @@
 {
- "current": null,
+ "current": {
+  "as_of": "2026-05-27",
+  "obs_ids": [
+   "1b7d08dbce2be548",
+   "dc983a8178691c42"
+  ],
+  "value": 3.0
+ },
  "rungs": [
   {
    "description": "Static snapshot; memory is files in context.",
@@ -15,14 +22,34 @@
    "name": "Gradient-free memory",
    "observables": "pass^1 lift with memory; hold rate; transfer across models",
    "production": [],
-   "research": []
+   "research": [
+    {
+     "as_of": "2026-07-24",
+     "entity_id": null,
+     "obs_id": "a79c6c8b1963db53",
+     "snippet": "We show that this feedback is a sufficient signal for continual learning when the frozen model is paired with an external memory that distils each episode into retrievable natural-language rules.",
+     "subject": "frozen_weights_memory",
+     "tier": 6,
+     "url": "https://arxiv.org/abs/2607.22157"
+    }
+   ]
   },
   {
    "description": "One objective, all users; the model updates from aggregate usage.",
    "level": 2,
    "name": "Population-level online learning",
    "observables": "refresh cadence; documented lift",
-   "production": [],
+   "production": [
+    {
+     "as_of": "2025-09-12",
+     "entity_id": "anysphere",
+     "obs_id": "dc983a8178691c42",
+     "snippet": "Our approach is unusual because it involves rolling out new models to users frequently throughout the day and using that data for training.",
+     "subject": "anysphere",
+     "tier": 7,
+     "url": "https://cursor.com/blog/tab-rl"
+    }
+   ],
    "research": []
   },
   {
@@ -30,7 +57,17 @@
    "level": 3,
    "name": "Per-customer adapters on a cadence",
    "observables": "cl_refresh_cadence_hours; cl_adapters_per_product; per-customer lift over time",
-   "production": [],
+   "production": [
+    {
+     "as_of": "2026-05-27",
+     "entity_id": "trajectory",
+     "obs_id": "1b7d08dbce2be548",
+     "snippet": "a pipeline that takes a freshly trained LoRA adapter and puts it behind a live, A/B routed, fully provenanced endpoint in roughly an hour. That is enough to run continual learning in production today",
+     "subject": "trajectory",
+     "tier": 7,
+     "url": "https://www.baseten.co/blog/powering-inference-for-the-continual-learning-era/"
+    }
+   ],
    "research": []
   },
   {
@@ -39,7 +76,26 @@
    "name": "Organisation knowledge in weights",
    "observables": "cl_forgetting_retention; firm-knowledge lift; cost per query",
    "production": [],
-   "research": []
+   "research": [
+    {
+     "as_of": "2026-08-17",
+     "entity_id": "engram",
+     "obs_id": "00c723253a9f2d58",
+     "snippet": "By combining its knowledge of the workspace with search, it solves tasks more effectively with an order of magnitude lower cost-per-query ($0.13 / 30% all-pass for our agent, vs. $1.32 / 25% all-pass for Opus 4.8).",
+     "subject": "engram_harvey",
+     "tier": 7,
+     "url": "https://engram.com/blog/legal-agents-with-memory"
+    },
+    {
+     "as_of": "2026-08-20",
+     "entity_id": "harvey",
+     "obs_id": "c16acbc4fb932e98",
+     "snippet": "Starting from a Kimi K3 base, we worked with Fireworks to post-train our model via asynchronous reinforcement learning (RL) in realistic legal work settings.",
+     "subject": "harvey_tenet",
+     "tier": 7,
+     "url": "https://www.harvey.ai/blog/post-training-update-harvey-tenet"
+    }
+   ]
   },
   {
    "description": "Updates from individual sessions persist and pool without forgetting.",
@@ -47,7 +103,71 @@
    "name": "Per-session weight updates that persist and pool",
    "observables": "a lab release branded continual or online learning; a forgetting benchmark; per-user weight divergence",
    "production": [],
-   "research": []
+   "research": [
+    {
+     "as_of": "2024-07-05",
+     "entity_id": null,
+     "obs_id": "ce504f354741057f",
+     "snippet": "Since the hidden state is updated by training even on test sequences, our layers are called Test-Time Training (TTT) layers.",
+     "subject": "ttt_layers",
+     "tier": 6,
+     "url": "https://arxiv.org/abs/2407.04620"
+    },
+    {
+     "as_of": "2024-12-31",
+     "entity_id": "googl",
+     "obs_id": "467305c0493e0085",
+     "snippet": "We present a new neural long-term memory module that learns to memorize historical context and helps attention to attend to the current context while utilizing long past information.",
+     "subject": "titans",
+     "tier": 6,
+     "url": "https://arxiv.org/abs/2501.00663"
+    },
+    {
+     "as_of": "2025-10-12",
+     "entity_id": "baseten",
+     "obs_id": "9d52a59f8076617e",
+     "snippet": "Continuously (or close to continuously) merging rank-1 LoRA adapters into the model on the same GPUs running inference felt like the right answer to that to us.",
+     "subject": "baseten_rank1_lora",
+     "tier": 7,
+     "url": "https://www.baseten.co/research/write-small-learn-forever/"
+    },
+    {
+     "as_of": "2025-10-27",
+     "entity_id": "thinking_machines_lab",
+     "obs_id": "34cad01fa532bd45",
+     "snippet": "This generalizes to a broader set of continual learning tasks, which require acquiring new knowledge without degrading prior capabilities.",
+     "subject": "tml_on_policy_distillation",
+     "tier": 7,
+     "url": "https://thinkingmachines.ai/blog/on-policy-distillation/"
+    },
+    {
+     "as_of": "2025-11-07",
+     "entity_id": "googl",
+     "obs_id": "01ae8bf66cb9fa43",
+     "snippet": "We test and validate Nested Learning through a proof-of-concept, self-modifying architecture that we call \u201cHope\u201d, which achieves superior performance in language modeling and demonstrates better long-context memory management than existing state-of-the-art models.",
+     "subject": "nested_learning_hope",
+     "tier": 7,
+     "url": "https://research.google/blog/introducing-nested-learning-a-new-ml-paradigm-for-continual-learning/"
+    },
+    {
+     "as_of": "2026-01-27",
+     "entity_id": null,
+     "obs_id": "5fb2b23a62ecf025",
+     "snippet": "In sequential learning experiments, SDFT enables a single model to accumulate multiple skills over time without performance regression, establishing on-policy distillation as a practical path to continual learning from demonstrations.",
+     "subject": "sdft_self_distillation",
+     "tier": 6,
+     "url": "https://arxiv.org/abs/2601.19897"
+    },
+    {
+     "as_of": "2026-01-28",
+     "entity_id": null,
+     "obs_id": "8d2af92daf94cb81",
+     "snippet": "Finally, applying SDPO to individual questions at test time accelerates discovery on difficult binary-reward tasks, achieving the same discovery probability as best-of-k sampling or multi-turn conversations with 3x fewer attempts.",
+     "subject": "sdpo",
+     "tier": 6,
+     "url": "https://arxiv.org/abs/2601.20802"
+    }
+   ]
   },
   {
    "description": "A frontier system passes a public benchmark for knowing an organisation the way a six-month employee would.",
