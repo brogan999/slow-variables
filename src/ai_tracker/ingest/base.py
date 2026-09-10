@@ -24,7 +24,7 @@ CACHE = Path("ingest/cache")
 
 def ua() -> str:
     return os.environ.get(
-        "AI_TRACKER_USER_AGENT", "ai-tracker/0.1 (+https://github.com/brogan999/ai-tracker)"
+        "AI_TRACKER_USER_AGENT", "slow-variables/0.1 (+https://github.com/brogan999/slow-variables)"
     )
 
 

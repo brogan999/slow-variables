@@ -1,4 +1,4 @@
-# ai-tracker — build plan
+# Slow Variables (working name ai-tracker) — build plan
 
 ## Context
 
@@ -35,7 +35,7 @@ Toolchain present: python3.12 + uv, node 25 + pnpm, gh, vercel, fly. Postgres 14
   docs/research/bottlenecks.md, bottlenecks_raw.json, BOTTLENECK_PROMPT.md, predictions.json,
                 worldview-summary.md
   docs/interpretation/technological-revolutions-perez.md   (copies; write nothing new)
-  docs/private/            private business notes, gitignored (a private value-chain map landscape, scorecard, value-capture theory)
+  docs/private/            private business notes, gitignored
   docs/prior-art.md      ← 10 lines pointing at ~/ai-value-chain and what was ported
 ```
 
@@ -260,7 +260,7 @@ Verify per PR: fixture extract test, `check`, `export`, screenshot of the touche
 
 ### Phase 4 — name, scrub, public (Alex ≈ 8 h, build ≈ 3 h)
 34. **Naming pass** per the naming canon (private) Part XI: foundation lock, divergent longlist, harness sentence + competitor test to ~15, screening record (DNS/SERP/handles/TM/linguistic) to 3–5, one-page brand world each, Alex locks at ≥80/100. Output `AI-TRACKER-NAMING.md` in the private naming folder (outside the repo). Alex buys the domain; Vercel Domains apex + www. Rename = `site.ts`, wordmark, `web/package.json` name, README.
-35. **Repo scrub** (checkpoint with Alex before the flip): move `docs/research/betterbrain-competitive-landscape.md` and `betterbrain-value-chain-scorecard.md` (and any other private business docs he names) to a gitignored `docs/private/` and rewrite history for those paths; remove `web/AGENTS.md`/`web/CLAUDE.md` scaffolds; strip personal paths from `docs/plan.md`, `docs/research/BOTTLENECK_PROMPT.md`; add `LICENSE` (MIT), `LICENSE-DATA` (CC BY 4.0 compilation, upstream terms govern rows), `CONTRIBUTING.md`; `.env` stays untracked.
+35. **Repo scrub** (checkpoint with Alex before the flip): move the private business notes (and any others he names) to a gitignored `docs/private/` and rewrite history for those paths; remove `web/AGENTS.md`/`web/CLAUDE.md` scaffolds; strip personal paths from `docs/plan.md`, `docs/research/BOTTLENECK_PROMPT.md`; add `LICENSE` (MIT), `LICENSE-DATA` (CC BY 4.0 compilation, upstream terms govern rows), `CONTRIBUTING.md`; `.env` stays untracked.
 36. **Flip**: `gh repo edit --visibility public`; Vercel Deployment Protection → "Only Preview Deployments"; confirm the domain resolves, sitemap fetches, `/api/ask` answers a golden question, nightly PR previews stay gated.
 
 ## Checkpoints that need Alex

@@ -19,6 +19,7 @@ jobs:
         run: uv run ai-tracker ingest --all || echo "failed=true" >> "$GITHUB_OUTPUT"
         env:
           AI_TRACKER_USER_AGENT: "${{ secrets.AI_TRACKER_USER_AGENT }}"
+          ARTIFICIAL_ANALYSIS_API_KEY: "${{ secrets.ARTIFICIAL_ANALYSIS_API_KEY }}"
       # approve inside the run so the PR shows exactly what merge will commit; merge is still the gate
       - run: uv run ai-tracker approve && uv run ai-tracker build && uv run ai-tracker evaluate && uv run ai-tracker export
       - id: check

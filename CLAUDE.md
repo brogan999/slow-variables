@@ -1,4 +1,4 @@
-# ai-tracker — rules for agents
+# Slow Variables (`ai-tracker` package) — rules for agents
 
 Read `docs/plan.md` first; `docs/briefs/ai-tracker-brief-v2.md` is the canonical spec, `docs/briefs/value-capture-tracker-part1.md` the capture-lens appendix.
 

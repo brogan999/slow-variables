@@ -1,4 +1,6 @@
-# ai-tracker
+# Slow Variables
+
+*The slow variables decide how AI lands: adoption in hours worked, margins in filings, productivity in the statistics.*
 
 One tracker, two lenses: how fast AI value moves through the diffusion stages (Narayanan & Kapoor) and who keeps it at each layer of the stack. Every number traces to a dated, graded observation; the site never computes a number.
 
