@@ -393,7 +393,9 @@ class Store:
         stale = None
         if latest and ind.cadence_expected in CADENCE_DAYS:
             age = (date.today() - date.fromisoformat(latest["as_of"])).days
-            if age > max(2 * CADENCE_DAYS[ind.cadence_expected], CADENCE_DAYS[ind.cadence_expected] + 30):  # allow a publication lag
+            if age > max(
+                2 * CADENCE_DAYS[ind.cadence_expected], CADENCE_DAYS[ind.cadence_expected] + 30
+            ):  # allow a publication lag
                 stale = latest["as_of"]
         return {
             "id": ind.id,

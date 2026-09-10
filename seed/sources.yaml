@@ -214,16 +214,17 @@ sources:
     license: "Public record (State of California)"
     attribution: "California Employment Development Department, AI and the economy"
   - id: anthropic_ei
-    name: Anthropic Economic Index reports
+    name: Anthropic Economic Index (open dataset and reports)
     org: Anthropic
-    url: https://www.anthropic.com/economic-index
-    kind: html
+    url: https://huggingface.co/datasets/Anthropic/EconomicIndex
+    kind: csv
     default_tier: 2
     cadence: quarterly
     lens: diffusion
-    connector: manual
-    license: "Anthropic; short quotation"
-    attribution: "Anthropic Economic Index, January and March 2026 reports"
+    connector: anthropic_ei
+    license: "CC BY 4.0 (dataset)"
+    attribution: "Anthropic Economic Index, open dataset on Hugging Face (CC BY 4.0) and the 2026 reports"
+    expect_series: ["anthropic_ei.global.augmentation_share.pt"]
   - id: nyfed
     name: The Labor Market for Recent College Graduates
     org: Federal Reserve Bank of New York

@@ -409,24 +409,26 @@
   "url": "https://edd.ca.gov/en/about_edd/ai-and-the-economy/"
  },
  {
-  "attribution": "Anthropic Economic Index, January and March 2026 reports",
+  "attribution": "Anthropic Economic Index, open dataset on Hugging Face (CC BY 4.0) and the 2026 reports",
   "cadence": "quarterly",
-  "connector": "manual",
+  "connector": "anthropic_ei",
   "default_tier": 2,
-  "expect_series": [],
+  "expect_series": [
+   "anthropic_ei.global.augmentation_share.pt"
+  ],
   "id": "anthropic_ei",
-  "items_found": 3,
-  "kind": "html",
+  "items_found": 32,
+  "kind": "csv",
   "last_error": null,
-  "last_success_at": "2026-09-10T02:28:08.710799Z",
+  "last_success_at": "2026-09-10T02:42:48.261427+00:00",
   "lens": "diffusion",
-  "license": "Anthropic; short quotation",
-  "name": "Anthropic Economic Index reports",
+  "license": "CC BY 4.0 (dataset)",
+  "name": "Anthropic Economic Index (open dataset and reports)",
   "org": "Anthropic",
   "people": [],
   "robots_ok": true,
-  "runs": 0,
-  "url": "https://www.anthropic.com/economic-index"
+  "runs": 1,
+  "url": "https://huggingface.co/datasets/Anthropic/EconomicIndex"
  },
  {
   "attribution": "Federal Reserve Bank of New York, The Labor Market for Recent College Graduates",

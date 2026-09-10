@@ -2,13 +2,13 @@
  "band_input": "anthropic_ei.global.augmentation_share.pt",
  "band_rationale": "Normal = augmentation at least half of classified use; fast = automation clearly dominant (augmentation under 40%). Between is `emerging`.",
  "band_value": {
-  "as_of": "2025-11-30",
+  "as_of": "2026-05-31",
   "high": null,
   "low": null,
   "obs_ids": [
-   "94a856a674612b96"
+   "3c4c0eb291611df7"
   ],
-  "value": 0.52
+  "value": 0.5138
  },
  "bucket_id": "early_adoption",
  "cadence_expected": "quarterly",
@@ -24,7 +24,7 @@
    "sublayer_id": null
   }
  ],
- "definition": "Share of Claude.ai conversations classified as augmentation (the human stays in the loop) versus automation, from Anthropic's Economic Index; the share of occupations with at least a quarter of their tasks used is shown alongside.",
+ "definition": "Share of classified Claude.ai conversations in the augmentation bucket (learning, task iteration, validation) versus automation (directive, feedback loop), computed from Anthropic's Economic Index open dataset for each 2026 release; the blog-reported shares and the share of occupations with at least a quarter of their tasks used are shown alongside.",
  "derived": [],
  "direction": null,
  "direction_rule": null,
@@ -38,24 +38,24 @@
  "grade": "B",
  "id": "aei_augmentation_share",
  "latest": {
-  "as_of": "2025-11-30",
+  "as_of": "2026-05-31",
   "disputed": false,
   "grade": "B",
   "high": null,
   "low": null,
   "obs_ids": [
-   "94a856a674612b96"
+   "3c4c0eb291611df7"
   ],
   "series_key": "anthropic_ei.global.augmentation_share.pt",
   "subject": "global",
   "unit": "share",
-  "value": 0.52
+  "value": 0.5138
  },
  "layer_id": "adopters",
  "leading_lagging": "coincident",
  "metric": null,
  "metric_dims": {},
- "n_observations": 3,
+ "n_observations": 11,
  "name": "Augmentation vs automation share (Anthropic Economic Index)",
  "normal_band": {
   "hi": null,
@@ -64,18 +64,60 @@
  "override_note": null,
  "points": [
   {
-   "as_of": "2025-11-30",
+   "as_of": "2025-11-19",
    "disputed": false,
    "grade": "B",
    "high": null,
    "low": null,
    "obs_ids": [
-    "94a856a674612b96"
+    "713109bb8bd3873e"
    ],
    "series_key": "anthropic_ei.global.augmentation_share.pt",
    "subject": "global",
    "unit": "share",
-   "value": 0.52
+   "value": 0.5326
+  },
+  {
+   "as_of": "2026-02-11",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "22c1000f899dffdd"
+   ],
+   "series_key": "anthropic_ei.global.augmentation_share.pt",
+   "subject": "global",
+   "unit": "share",
+   "value": 0.5445
+  },
+  {
+   "as_of": "2026-04-30",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "73edeb921df0ec08"
+   ],
+   "series_key": "anthropic_ei.global.augmentation_share.pt",
+   "subject": "global",
+   "unit": "share",
+   "value": 0.5102
+  },
+  {
+   "as_of": "2026-05-31",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "3c4c0eb291611df7"
+   ],
+   "series_key": "anthropic_ei.global.augmentation_share.pt",
+   "subject": "global",
+   "unit": "share",
+   "value": 0.5138
   }
  ],
  "proposed_status": "consistent_with_normal",
@@ -94,18 +136,60 @@
   {
    "points": [
     {
-     "as_of": "2025-11-30",
+     "as_of": "2025-11-19",
      "disputed": false,
      "grade": "B",
      "high": null,
      "low": null,
      "obs_ids": [
-      "94a856a674612b96"
+      "713109bb8bd3873e"
      ],
      "series_key": "anthropic_ei.global.augmentation_share.pt",
      "subject": "global",
      "unit": "share",
-     "value": 0.52
+     "value": 0.5326
+    },
+    {
+     "as_of": "2026-02-11",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "22c1000f899dffdd"
+     ],
+     "series_key": "anthropic_ei.global.augmentation_share.pt",
+     "subject": "global",
+     "unit": "share",
+     "value": 0.5445
+    },
+    {
+     "as_of": "2026-04-30",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "73edeb921df0ec08"
+     ],
+     "series_key": "anthropic_ei.global.augmentation_share.pt",
+     "subject": "global",
+     "unit": "share",
+     "value": 0.5102
+    },
+    {
+     "as_of": "2026-05-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "3c4c0eb291611df7"
+     ],
+     "series_key": "anthropic_ei.global.augmentation_share.pt",
+     "subject": "global",
+     "unit": "share",
+     "value": 0.5138
     }
    ],
    "series_key": "anthropic_ei.global.augmentation_share.pt"
@@ -119,15 +203,95 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "2da56e6efd9e205b"
+      "89f7c1ac2dff47be"
+     ],
+     "series_key": "anthropic_ei.global.augmentation_share_reported.pt",
+     "subject": "global",
+     "unit": "share",
+     "value": 0.52
+    }
+   ],
+   "series_key": "anthropic_ei.global.augmentation_share_reported.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2025-11-19",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "2a734529163dcb61"
      ],
      "series_key": "anthropic_ei.global.automation_share.pt",
+     "subject": "global",
+     "unit": "share",
+     "value": 0.4674
+    },
+    {
+     "as_of": "2026-02-11",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "e0c2f76fe385624c"
+     ],
+     "series_key": "anthropic_ei.global.automation_share.pt",
+     "subject": "global",
+     "unit": "share",
+     "value": 0.4555
+    },
+    {
+     "as_of": "2026-04-30",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "372c9bb1c4325550"
+     ],
+     "series_key": "anthropic_ei.global.automation_share.pt",
+     "subject": "global",
+     "unit": "share",
+     "value": 0.4898
+    },
+    {
+     "as_of": "2026-05-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "f0f4ba8663dc674d"
+     ],
+     "series_key": "anthropic_ei.global.automation_share.pt",
+     "subject": "global",
+     "unit": "share",
+     "value": 0.4862
+    }
+   ],
+   "series_key": "anthropic_ei.global.automation_share.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2025-11-30",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "d1308ca48ccd5ed9"
+     ],
+     "series_key": "anthropic_ei.global.automation_share_reported.pt",
      "subject": "global",
      "unit": "share",
      "value": 0.45
     }
    ],
-   "series_key": "anthropic_ei.global.automation_share.pt"
+   "series_key": "anthropic_ei.global.automation_share_reported.pt"
   },
   {
    "points": [
@@ -152,25 +316,69 @@
  "series_keys": [
   "anthropic_ei.global.augmentation_share.pt",
   "anthropic_ei.global.automation_share.pt",
+  "anthropic_ei.global.augmentation_share_reported.pt",
+  "anthropic_ei.global.automation_share_reported.pt",
   "anthropic_ei.global.occupations_25pct_tasks_share.pt"
  ],
  "sparkline": [
   {
-   "as_of": "2025-11-30",
+   "as_of": "2025-11-19",
    "disputed": false,
    "grade": "B",
    "high": null,
    "low": null,
    "obs_ids": [
-    "94a856a674612b96"
+    "713109bb8bd3873e"
    ],
    "series_key": "anthropic_ei.global.augmentation_share.pt",
    "subject": "global",
    "unit": "share",
-   "value": 0.52
+   "value": 0.5326
+  },
+  {
+   "as_of": "2026-02-11",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "22c1000f899dffdd"
+   ],
+   "series_key": "anthropic_ei.global.augmentation_share.pt",
+   "subject": "global",
+   "unit": "share",
+   "value": 0.5445
+  },
+  {
+   "as_of": "2026-04-30",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "73edeb921df0ec08"
+   ],
+   "series_key": "anthropic_ei.global.augmentation_share.pt",
+   "subject": "global",
+   "unit": "share",
+   "value": 0.5102
+  },
+  {
+   "as_of": "2026-05-31",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "3c4c0eb291611df7"
+   ],
+   "series_key": "anthropic_ei.global.augmentation_share.pt",
+   "subject": "global",
+   "unit": "share",
+   "value": 0.5138
   }
  ],
- "stale_as_of": "2025-11-30",
+ "stale_as_of": null,
  "status": "consistent_with_normal",
  "status_events": [
   {
@@ -190,7 +398,7 @@
   }
  ],
  "sublayer_id": null,
- "tracker_interpretation": "Augmentation rose to 52% in the latest numeric report; the 2026 reports say it rose again but only in figures, so the number here lags.",
+ "tracker_interpretation": "Augmentation has held just above half of classified use through the 2026 releases (53% in Nov 2025, 54% in Feb 2026, 51% in Apr-May 2026); automation is gaining slowly on the monthly data.",
  "unit": "share",
  "updated_at": "2026-09-10",
  "valve_measured": "product_to_adoption",
