@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import logging
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from fnmatch import fnmatch
 from pathlib import Path
 
@@ -11,6 +11,7 @@ import duckdb
 import yaml
 
 from ..schema import Derived
+from . import fits
 
 log = logging.getLogger(__name__)
 
@@ -26,6 +27,9 @@ def run_metrics(
         missing = [p for p in m["inputs"] if not any(fnmatch(k, p) for k in keys)]
         if missing:
             log.warning("%s skipped: no observations for %s", name, missing)
+            continue
+        if "python" in m:
+            out.extend(_python_metric(con, name, m, now))
             continue
         cur = con.execute(m["sql"])
         cols = [d[0] for d in cur.description]
@@ -46,3 +50,35 @@ def run_metrics(
                 )
             )
     return out
+
+
+def _python_metric(con: duckdb.DuckDBPyConnection, name: str, m: dict, now: datetime) -> list[Derived]:
+    """`python: fits.<fn>` over the non-disputed numeric points of the input series; returns one row with a CI."""
+    fn = getattr(fits, m["python"].split(".", 1)[1])
+    pats = " OR ".join("series_key LIKE ?" for _ in m["inputs"])
+    rows = con.execute(
+        f"SELECT id, as_of_date, value_numeric FROM observations WHERE ({pats}) AND NOT disputed AND value_numeric > 0",
+        [p.replace("*", "%") for p in m["inputs"]],
+    ).fetchall()
+    if not rows:
+        return []
+    args = {
+        k: (date.fromisoformat(v) if isinstance(v, str) and len(v) == 10 and v[4] == "-" else v)
+        for k, v in (m.get("args") or {}).items()
+    }
+    fit = fn([(r[1], r[2]) for r in rows], **args)
+    if fit is None:
+        return []
+    return [
+        Derived(
+            metric=name,
+            value=fit.value,
+            value_low=fit.low,
+            value_high=fit.high,
+            as_of_date=max(r[1] for r in rows),
+            dims={"n": str(fit.n), "r2": f"{fit.r2:.3f}", "aic": f"{fit.aic:.1f}"},
+            input_observation_ids=sorted(r[0] for r in rows),
+            formula_version=str(m["formula_version"]),
+            computed_at=now,
+        )
+    ]

@@ -10,6 +10,7 @@ indicators:
     cadence_expected: per_release
     series_keys: ["metr.*.horizon_50.pt", "metr.suite.doubling_time_days.pt", "metr_blog.suite.doubling_time_days_since_2024.pt", "metr_blog.suite.doubling_time_days_since_2023.pt", "metr_blog.suite.doubling_time_days_2019_2025.pt"]
     band_input: "metric:horizon_doubling_days_50_since_2024"
+    related_metrics: [horizon_doubling_days_50_since_2024, horizon_doubling_days_50_since_2023, horizon_blowup_year_50_since_2024]
     bucket_id: methods
     normal_band: {lo: 213}
     fast_band: {hi: 122}
@@ -33,6 +34,7 @@ indicators:
     cadence_expected: per_release
     series_keys: ["metr.*.horizon_80.pt"]
     band_input: "metric:horizon_doubling_days_80_since_2024"
+    related_metrics: [horizon_doubling_days_80_since_2024, horizon_doubling_days_80_since_2023]
     bucket_id: methods
     normal_band: {lo: 213}
     fast_band: {hi: 122}
@@ -166,13 +168,13 @@ indicators:
     updated_at: 2026-09-10
   - id: bbd_work_hours_assisted
     name: Share of work hours assisted by generative AI
-    definition: Share of all US work hours in which employed adults used generative AI, from the Bick–Blandin–Deming Real-Time Population Survey (via FRED), with weekly work use and any-use shares shown alongside.
+    definition: Share of all US work hours in which employed adults used generative AI, from the Bick–Blandin–Deming Real-Time Population Survey (quarterly series via FRED), with weekly work use and any-use shares shown alongside.
     why_it_matters: The intensive margin. Headline adoption is broad, but hours actually assisted is what productivity arithmetic runs on.
     proxy_types: [behaviour, deployment]
     unit: share
     cadence_expected: quarterly
-    series_keys: ["bbd.us_workers.hours_assisted_share.pt", "bbd.us_workers.work_use_weekly_share.pt", "bbd.us_adults.any_use_share.pt", "stlouisfed_blog.us_workers.hours_assisted_share.pt"]
-    band_input: bbd.us_workers.hours_assisted_share.pt
+    series_keys: ["fred.us_workers.hours_assisted_share.q", "fred.us_workers.work_use_weekly_share.q", "fred.us_adults.any_use_share.q", "bbd.us_workers.hours_assisted_share.pt", "bbd.us_workers.work_use_weekly_share.pt", "bbd.us_adults.any_use_share.pt", "stlouisfed_blog.us_workers.hours_assisted_share.pt"]
+    band_input: fred.us_workers.hours_assisted_share.q
     bucket_id: early_adoption
     valve_measured: product_to_adoption
     normal_band: {hi: 0.09}
@@ -194,7 +196,7 @@ indicators:
     proxy_types: [behaviour, deployment]
     unit: share
     cadence_expected: biweekly
-    series_keys: ["census_btos.us.ai_use_share_v2.2w"]
+    series_keys: ["census_btos.us.ai_use_share_v2.2w", "census_btos.us.ai_use_share_v1.2w"]
     band_input: census_btos.us.ai_use_share_v2.2w
     bucket_id: early_adoption
     valve_measured: product_to_adoption
@@ -202,7 +204,7 @@ indicators:
     fast_band: {lo: 0.5}
     band_rationale: "Normal = under about a third of firms in year three, the pace at which PCs and e-commerce reached half of firms over a decade or more; fast = more than half. Ramp's card-spend index (>50%) is a different instrument and not comparable."
     tracker_interpretation: One firm in five, rising a point or two per quarter - organisational speed, not capability speed.
-    counterevidence: Series break in November 2025; 'AI use' is self-defined by respondents; the count is dominated by very small firms. The latest XLSX cycle shows a higher value than the last official statement.
+    counterevidence: Series break in November 2025 (the pre-break series is shown as v1); 'AI use' is self-defined by respondents; the count is dominated by very small firms.
     layer_id: adopters
     leading_lagging: coincident
     confidence: 70

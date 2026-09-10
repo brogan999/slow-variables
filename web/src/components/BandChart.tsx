@@ -9,6 +9,7 @@ type Props = { series: Series[]; unit: string; log?: boolean; bands?: { normal: 
 
 const COLORS = ["var(--s1)", "var(--s2)"];
 const yr = (t: number) => new Date(t).getUTCFullYear().toString();
+const monthYr = (t: number) => new Date(t).toLocaleDateString("en", { month: "short", year: "2-digit", timeZone: "UTC" });
 
 export function BandChart({ series, unit, log, bands }: Props) {
   const data = series.map((s) => s.points.filter((p) => p.value !== null).map((p) => ({
@@ -18,13 +19,15 @@ export function BandChart({ series, unit, log, bands }: Props) {
   const all = data.flat();
   if (!all.length) return <p className="text-sm text-muted">No approved observations yet.</p>;
   const ys = all.map((d) => d.v);
+  const ts = all.map((d) => d.t);
+  const shortSpan = Math.max(...ts) - Math.min(...ts) < 2 * 365 * 86400e3;
   const domain: [number, number] = log ? [Math.min(...ys) / 2, Math.max(...ys) * 2] : [0, Math.max(...ys) * 1.15];
   return (
     <div className="h-72 w-full" role="img" aria-label={`${series.map((s) => s.name).join(" and ")} over time, ${unit}`}>
       <ResponsiveContainer>
         <ScatterChart margin={{ top: 8, right: 16, bottom: 4, left: 0 }}>
           <CartesianGrid stroke="var(--grid)" strokeDasharray="0" vertical={false} />
-          <XAxis type="number" dataKey="t" domain={["dataMin", "dataMax"]} tickFormatter={yr} stroke="var(--axis)" tick={{ fill: "var(--muted)", fontSize: 11 }} />
+          <XAxis type="number" dataKey="t" domain={["dataMin", "dataMax"]} tickFormatter={shortSpan ? monthYr : yr} stroke="var(--axis)" tick={{ fill: "var(--muted)", fontSize: 11 }} />
           <YAxis type="number" dataKey="v" scale={log ? "log" : "linear"} domain={domain} tickFormatter={tick(unit)} stroke="var(--axis)"
             tick={{ fill: "var(--muted)", fontSize: 11 }} width={48} label={{ value: unit, angle: -90, position: "insideLeft", fill: "var(--muted)", fontSize: 11 }} />
           {bands?.normal ? <ReferenceArea y1={bands.normal.lo ?? undefined} y2={bands.normal.hi ?? undefined} fill="var(--ink)" fillOpacity={0.04} label={{ value: "normal", fill: "var(--muted)", fontSize: 11, position: "insideTopRight" }} /> : null}

@@ -191,6 +191,8 @@ class Derived(BaseModel):
     id: str = ""
     metric: str
     value: float
+    value_low: float | None = None
+    value_high: float | None = None
     as_of_date: date
     input_observation_ids: list[str] = Field(min_length=1)
     formula_version: str
@@ -238,6 +240,7 @@ class Indicator(BaseModel):
     series_keys: list[str] = []  # fnmatch globs over observation series_key
     metric: str | None = None  # derived metric that is the headline series
     metric_dims: dict[str, str] = {}  # e.g. {"entity": "nvda"} to select one dims slice of the metric
+    related_metrics: list[str] = []  # alternative fits shown alongside (model comparison)
     band_input: str | None = None  # series_key glob, or "metric:<name>", that the bands apply to
     bucket_id: str | None = None
     valve_measured: str | None = None

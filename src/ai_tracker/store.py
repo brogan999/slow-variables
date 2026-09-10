@@ -200,6 +200,13 @@ class Store:
         evs = [e for e in self.events if e.target_id == indicator_id]
         return max(evs, key=lambda e: e.created_at) if evs else None
 
+    def band_fit(self, ind: Indicator) -> Derived | None:
+        """The derived row the bands were applied to, when the band input is a metric (carries the CI)."""
+        if ind.band_input and ind.band_input.startswith("metric:"):
+            rows = self.derived_for(ind.band_input[7:], ind.metric_dims)
+            return rows[-1] if rows else None
+        return None
+
     def band_input(self, ind: Indicator) -> tuple[float | None, date | None, list[str], Tier]:
         """Latest value the bands apply to, its obs ids, and the best (lowest) tier behind it."""
         if not ind.band_input:
@@ -278,9 +285,16 @@ class Store:
                     "value": bv,
                     "as_of": b_as_of.isoformat() if b_as_of else None,
                     "obs_ids": b_ids,
+                    "low": fit.value_low if (fit := self.band_fit(ind)) else None,
+                    "high": fit.value_high if fit else None,
                 }
                 if bv is not None
                 else None,
+                "fits": [
+                    {**dump(r[-1]), "obs_ids": r[-1].input_observation_ids}
+                    for m in ind.related_metrics
+                    if (r := self.derived_for(m, ind.metric_dims))
+                ],
                 "series": [{"series_key": k, "points": v} for k, v in sorted(series.items())],
                 "derived": [
                     {**dump(d), "obs_ids": d.input_observation_ids}
@@ -379,7 +393,7 @@ class Store:
         stale = None
         if latest and ind.cadence_expected in CADENCE_DAYS:
             age = (date.today() - date.fromisoformat(latest["as_of"])).days
-            if age > 2 * CADENCE_DAYS[ind.cadence_expected]:
+            if age > max(2 * CADENCE_DAYS[ind.cadence_expected], CADENCE_DAYS[ind.cadence_expected] + 30):  # allow a publication lag
                 stale = latest["as_of"]
         return {
             "id": ind.id,

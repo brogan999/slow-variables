@@ -10,6 +10,7 @@ export function Num({ p, unit, obsIndex }: { p: Point | null | undefined; unit?:
   return (
     <span className="inline-flex items-baseline gap-1">
       <Link href={`/series/${key}#${id}`} className="underline decoration-grid underline-offset-4 hover:decoration-ink">{label}</Link>
+      {p.low != null && p.high != null ? <span className="text-[11px] text-ink-2" title="95% interval">({fmt(p.low, unit ?? p.unit)}–{fmt(p.high, unit ?? p.unit)})</span> : null}
       {p.disputed ? <span className="text-[11px] text-slow" title="disputed">⚑</span> : null}
       <span className="text-[11px] text-muted">as of {p.as_of}</span>
       {p.obs_ids.length > 1 ? <span className="text-[11px] text-muted">({p.obs_ids.length} obs)</span> : null}

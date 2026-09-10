@@ -61,4 +61,5 @@ export const meta = () => read<{ generated_at: string }>("meta.json");
 
 export { fmt, words } from "./format";
 export const obsIndex = () => read<Record<string, string>>("obs_index.json");
-export type Doc = IndicatorDoc & { points: Point[]; band_value: { value: number; as_of: string | null; obs_ids: string[] } | null };
+export type Fit = { metric: string; value: number; value_low: number | null; value_high: number | null; as_of_date: string; dims: Record<string, string>; obs_ids: string[] };
+export type Doc = IndicatorDoc & { points: Point[]; band_value: { value: number; as_of: string | null; obs_ids: string[]; low: number | null; high: number | null } | null; fits: Fit[]; related_metrics: string[] };

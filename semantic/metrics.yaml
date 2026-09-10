@@ -17,22 +17,6 @@ metrics:
       FROM observations a JOIN observations b ON a.subject = b.subject AND a.as_of_date = b.as_of_date
       WHERE a.series_key LIKE 'metr.%.horizon_50.pt' AND b.series_key LIKE 'metr.%.horizon_80.pt'
         AND NOT a.disputed AND NOT b.disputed AND b.value_numeric > 0
-  horizon_doubling_days_80:
-    description: Log-linear fit of the 80% horizon against release date, 2023 onward; doubling time in days.
-    rationale: METR publishes a doubling time for the 50% horizon only; this applies the same fit to the 80% series.
-    grain: [as_of_date]
-    unit: days
-    lead_lag: leading
-    formula_version: 1
-    inputs: ["metr.*.horizon_80.pt"]
-    caveats: Point estimate only, no CI; disputed rows excluded; needs >= 3 points.
-    sql: |
-      SELECT max(as_of_date) AS as_of_date,
-             CASE WHEN count(*) >= 3 THEN ln(2) / regr_slope(ln(value_numeric), epoch_days) END AS value,
-             list(id ORDER BY id) AS obs_ids
-      FROM (SELECT *, date_diff('day', DATE '2023-01-01', as_of_date) AS epoch_days FROM observations
-            WHERE series_key LIKE 'metr.%.horizon_80.pt' AND as_of_date >= DATE '2023-01-01'
-              AND NOT disputed AND value_numeric > 0)
   gross_margin:
     description: Gross profit divided by revenue per filer per fiscal quarter, from XBRL company facts.
     rationale: The margin is the rent; its direction at each layer is the capture question in one number.
@@ -47,54 +31,6 @@ metrics:
       FROM observations g JOIN observations r
         ON r.subject = g.subject AND r.as_of_date = g.as_of_date AND r.series_key = 'sec.' || g.subject || '.revenue.q'
       WHERE g.series_key LIKE 'sec.%.gross_profit.q' AND r.value_numeric > 0
-  horizon_doubling_days_50_since_2024:
-    description: Log-linear fit of the 50% horizon against release date, 2024 onward; doubling time in days. The most recent window, matching METR's own "since 2024" figure.
-    rationale: The normal/fast bands are about the current pace, so the band input is the most recent window METR itself reports (TH1.1 post, 29 Jan 2026 - 89 days since 2024), recomputed here from the corrected data file.
-    grain: [as_of_date]
-    unit: days
-    lead_lag: leading
-    formula_version: 1
-    inputs: ["metr.*.horizon_50.pt"]
-    caveats: Point estimate only, no CI; rows beyond the 16h suite ceiling excluded; needs >= 3 points.
-    sql: |
-      SELECT max(as_of_date) AS as_of_date,
-             CASE WHEN count(*) >= 3 THEN ln(2) / regr_slope(ln(value_numeric), epoch_days) END AS value,
-             list(id ORDER BY id) AS obs_ids
-      FROM (SELECT *, date_diff('day', DATE '2024-01-01', as_of_date) AS epoch_days FROM observations
-            WHERE series_key LIKE 'metr.%.horizon_50.pt' AND as_of_date >= DATE '2024-01-01'
-              AND NOT disputed AND value_numeric > 0)
-  horizon_doubling_days_80_since_2024:
-    description: Log-linear fit of the 80% horizon against release date, 2024 onward; doubling time in days.
-    rationale: Same window as the 50% fit so the two horizons are judged on the same period.
-    grain: [as_of_date]
-    unit: days
-    lead_lag: leading
-    formula_version: 1
-    inputs: ["metr.*.horizon_80.pt"]
-    caveats: Point estimate only, no CI; disputed rows excluded; needs >= 3 points.
-    sql: |
-      SELECT max(as_of_date) AS as_of_date,
-             CASE WHEN count(*) >= 3 THEN ln(2) / regr_slope(ln(value_numeric), epoch_days) END AS value,
-             list(id ORDER BY id) AS obs_ids
-      FROM (SELECT *, date_diff('day', DATE '2024-01-01', as_of_date) AS epoch_days FROM observations
-            WHERE series_key LIKE 'metr.%.horizon_80.pt' AND as_of_date >= DATE '2024-01-01'
-              AND NOT disputed AND value_numeric > 0)
-  horizon_doubling_days_50_since_2023:
-    description: Our own log-linear fit of the 50% horizon, 2023 onward, to compare against METR's published from_2023_on figure.
-    rationale: A reproducibility check on METR's published number from the same data file.
-    grain: [as_of_date]
-    unit: days
-    lead_lag: leading
-    formula_version: 1
-    inputs: ["metr.*.horizon_50.pt"]
-    caveats: Point estimate only.
-    sql: |
-      SELECT max(as_of_date) AS as_of_date,
-             CASE WHEN count(*) >= 3 THEN ln(2) / regr_slope(ln(value_numeric), epoch_days) END AS value,
-             list(id ORDER BY id) AS obs_ids
-      FROM (SELECT *, date_diff('day', DATE '2023-01-01', as_of_date) AS epoch_days FROM observations
-            WHERE series_key LIKE 'metr.%.horizon_50.pt' AND as_of_date >= DATE '2023-01-01'
-              AND NOT disputed AND value_numeric > 0)
   bls_tfp_yoy:
     description: Year-on-year change in the BLS private nonfarm business total factor productivity index.
     rationale: TFP is the residual where an AI productivity effect would have to show up; the brief's normal band is Acemoglu's estimate, the fast band Goldman-scale.
@@ -125,3 +61,58 @@ metrics:
              list_concat([rr.id], list(eq.id ORDER BY eq.id)) AS obs_ids
       FROM rr JOIN eq ON eq.subject = rr.subject AND eq.as_of_date <= rr.as_of_date
       GROUP BY rr.as_of_date, rr.subject, rr.rev, rr.id
+  horizon_doubling_days_50_since_2024:
+    description: Log-linear fit of the 50% horizon against release date, 2024 onward; doubling time in days with a 95% CI. The most recent window, matching METR's own "since 2024" figure.
+    rationale: The normal/fast bands are about the current pace, so the band input is the most recent window METR itself reports (TH1.1 post, 29 Jan 2026 - 89 days since 2024), recomputed here from the corrected data file.
+    grain: [as_of_date]
+    unit: days
+    lead_lag: leading
+    formula_version: 2
+    inputs: ["metr.*.horizon_50.pt"]
+    args: {since: "2024-01-01"}
+    caveats: OLS on ln(horizon); rows beyond the 16h suite ceiling excluded; CI from the slope standard error.
+    python: fits.loglinear
+  horizon_doubling_days_80_since_2024:
+    description: Log-linear fit of the 80% horizon against release date, 2024 onward; doubling time in days with a 95% CI.
+    rationale: Same window as the 50% fit so the two horizons are judged on the same period.
+    grain: [as_of_date]
+    unit: days
+    lead_lag: leading
+    formula_version: 2
+    inputs: ["metr.*.horizon_80.pt"]
+    args: {since: "2024-01-01"}
+    caveats: OLS on ln(horizon); disputed rows excluded.
+    python: fits.loglinear
+  horizon_doubling_days_50_since_2023:
+    description: Our own log-linear fit of the 50% horizon, 2023 onward, to compare against METR's published from_2023_on figure.
+    rationale: A reproducibility check on METR's published number from the same data file.
+    grain: [as_of_date]
+    unit: days
+    lead_lag: leading
+    formula_version: 2
+    inputs: ["metr.*.horizon_50.pt"]
+    args: {since: "2023-01-01"}
+    caveats: Point estimate with CI; METR's own fit uses a different estimator.
+    python: fits.loglinear
+  horizon_doubling_days_80_since_2023:
+    description: Log-linear fit of the 80% horizon, 2023 onward.
+    rationale: The wider window for the 80% series, for comparison with the 2024-onward fit.
+    grain: [as_of_date]
+    unit: days
+    lead_lag: leading
+    formula_version: 2
+    inputs: ["metr.*.horizon_80.pt"]
+    args: {since: "2023-01-01"}
+    caveats: Point estimate with CI.
+    python: fits.loglinear
+  horizon_blowup_year_50_since_2024:
+    description: Hyperbolic fit of the 50% horizon (horizon = 1/(a - b t)), 2024 onward; the year at which the fitted horizon diverges, with a 95% CI. Compare its AIC with the log-linear fit's.
+    rationale: The AI 2027 story is superexponential; a hyperbolic form with a lower AIC than the log-linear form would be evidence for it.
+    grain: [as_of_date]
+    unit: year
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["metr.*.horizon_50.pt"]
+    args: {since: "2024-01-01"}
+    caveats: Three parameters worth of freedom on ~20 points; AIC computed on ln(horizon) residuals for both forms.
+    python: fits.hyperbolic

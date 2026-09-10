@@ -78,9 +78,19 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
         <BandChart series={[{ name: d.name, points: d.points }]} unit={d.unit} log={d.unit === "minutes"} bands={bandOnChart ? { normal: d.normal_band, fast: d.fast_band } : null} />
         <div className="mt-3 grid gap-3 sm:grid-cols-2 text-sm">
           <div className="rounded-lg bg-surface ring-hair p-3"><div className="text-xs text-muted">Latest point</div><Num p={d.latest} unit={d.unit} obsIndex={idx} />{d.latest?.subject ? <div className="text-xs text-ink-2">{d.latest.subject}</div> : null}</div>
-          {d.band_value ? <div className="rounded-lg bg-surface ring-hair p-3"><div className="text-xs text-muted">Value the bands apply to</div><Num p={{ as_of: d.band_value.as_of ?? "", value: d.band_value.value, obs_ids: d.band_value.obs_ids }} unit={bandUnit} obsIndex={idx} /></div> : null}
+          {d.band_value ? <div className="rounded-lg bg-surface ring-hair p-3"><div className="text-xs text-muted">Value the bands apply to</div><Num p={{ as_of: d.band_value.as_of ?? "", value: d.band_value.value, low: d.band_value.low, high: d.band_value.high, obs_ids: d.band_value.obs_ids }} unit={bandUnit} obsIndex={idx} /></div> : null}
         </div>
         <p className="mt-2 text-xs text-muted">{d.n_observations} observations. Hollow points are disputed (see counterevidence). Every point links to its observation.</p>
+        {d.fits?.length ? (
+          <div className="mt-3 overflow-x-auto">
+            <div className="text-xs text-muted mb-1">Model comparison (lower AIC fits better; both on ln(horizon) residuals)</div>
+            <table className="data w-full text-xs"><thead><tr><th>fit</th><th>estimate</th><th>95% interval</th><th>n</th><th>R²</th><th>AIC</th><th>inputs</th></tr></thead><tbody>
+              {d.fits.map((f) => { const u = f.metric.includes("blowup") ? "year" : "days"; const show = (v: number | null) => v == null ? "—" : u === "year" ? v.toFixed(1) : `${v.toFixed(0)} days`; return (
+                <tr key={f.metric}><td><code>{f.metric}</code></td><td className="tabular-nums">{show(f.value)}</td><td className="tabular-nums">{show(f.value_low)}–{show(f.value_high)}</td><td className="tabular-nums">{f.dims.n}</td><td className="tabular-nums">{f.dims.r2}</td><td className="tabular-nums">{f.dims.aic}</td><td><ObsLinks ids={f.obs_ids} obsIndex={idx} max={2} /></td></tr>
+              ); })}
+            </tbody></table>
+          </div>
+        ) : null}
         {d.derived.length ? <details className="mt-2 text-xs"><summary className="cursor-pointer text-ink-2">Derived rows ({d.derived.length})</summary>
           <table className="data w-full mt-1"><thead><tr><th>as of</th><th>dims</th><th>value</th><th>inputs</th></tr></thead><tbody>
             {d.derived.slice().reverse().map((r) => <tr key={r.as_of_date + JSON.stringify(r.dims)}><td>{r.as_of_date}</td><td>{Object.values(r.dims ?? {}).join(" ")}</td><td className="tabular-nums">{fmt(r.value, d.unit)}</td><td><ObsLinks ids={r.obs_ids} obsIndex={idx} max={3} /></td></tr>)}

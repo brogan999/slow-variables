@@ -193,21 +193,23 @@
  {
   "attribution": "U.S. Census Bureau, Business Trends and Outlook Survey",
   "cadence": "biweekly",
-  "connector": "manual",
+  "connector": "census_btos",
   "default_tier": 4,
-  "expect_series": [],
+  "expect_series": [
+   "census_btos.us.ai_use_share_v2.2w"
+  ],
   "id": "census_btos",
-  "items_found": 1,
-  "kind": "html",
+  "items_found": 40,
+  "kind": "csv",
   "last_error": null,
-  "last_success_at": "2026-09-10T01:28:40.293469Z",
+  "last_success_at": "2026-09-10T02:20:37.510197+00:00",
   "lens": "both",
   "license": "Public domain (U.S. government)",
   "name": "Census Business Trends and Outlook Survey",
   "org": "U.S. Census Bureau",
   "people": [],
   "robots_ok": true,
-  "runs": 0,
+  "runs": 2,
   "url": "https://www.census.gov/hfp/btos/"
  },
  {
@@ -289,5 +291,31 @@
   "robots_ok": true,
   "runs": 0,
   "url": "https://fredblog.stlouisfed.org/"
+ },
+ {
+  "attribution": "Bick, Blandin & Deming, Real-Time Population Survey, retrieved from FRED",
+  "cadence": "quarterly",
+  "connector": "fred",
+  "default_tier": 6,
+  "expect_series": [
+   "fred.us_workers.hours_assisted_share.q"
+  ],
+  "id": "fred",
+  "items_found": 31,
+  "kind": "csv",
+  "last_error": null,
+  "last_success_at": "2026-09-10T02:19:48.965753+00:00",
+  "lens": "both",
+  "license": "FRED terms of use; RPS series by Bick, Blandin & Deming",
+  "name": "FRED (Federal Reserve Economic Data)",
+  "org": "Federal Reserve Bank of St. Louis",
+  "people": [
+   "Alexander Bick",
+   "Adam Blandin",
+   "David Deming"
+  ],
+  "robots_ok": true,
+  "runs": 1,
+  "url": "https://fred.stlouisfed.org/"
  }
 ]

@@ -101,11 +101,12 @@ sources:
     name: Census Business Trends and Outlook Survey
     org: U.S. Census Bureau
     url: https://www.census.gov/hfp/btos/
-    kind: html
+    kind: csv
     default_tier: 4
     cadence: biweekly
     lens: both
-    connector: manual
+    connector: census_btos
+    expect_series: ["census_btos.us.ai_use_share_v2.2w"]
     license: "Public domain (U.S. government)"
     attribution: "U.S. Census Bureau, Business Trends and Outlook Survey"
   - id: menlo
@@ -152,3 +153,16 @@ sources:
     connector: manual
     license: "FRED terms of use"
     attribution: "FRED Blog, 'Does generative AI save time at work?' (27 Aug 2026)"
+  - id: fred
+    name: FRED (Federal Reserve Economic Data)
+    org: Federal Reserve Bank of St. Louis
+    url: https://fred.stlouisfed.org/
+    kind: csv
+    default_tier: 6
+    cadence: quarterly
+    lens: both
+    connector: fred
+    license: "FRED terms of use; RPS series by Bick, Blandin & Deming"
+    attribution: "Bick, Blandin & Deming, Real-Time Population Survey, retrieved from FRED"
+    expect_series: ["fred.us_workers.hours_assisted_share.q"]
+    people: ["Alexander Bick", "Adam Blandin", "David Deming"]
