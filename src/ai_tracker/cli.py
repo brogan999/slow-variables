@@ -132,6 +132,7 @@ def cmd_evaluate(a: argparse.Namespace) -> int:
     derived = run_metrics(s.con)
     st.write_jsonl(st.DATA / "derived.jsonl", [st.dump(d) for d in derived])
     s.derived = derived
+    s.semantic_tables()
     proposed = st.read_jsonl(st.DATA / "proposed_status_events.jsonl")
     seen = {(p["target_id"], p["new_status"]) for p in proposed}
     lines = [f"derived: {len(derived)} rows across {len({d.metric for d in derived})} metrics"]
@@ -296,6 +297,41 @@ def cmd_approve(a: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_ask(a: argparse.Namespace) -> int:
+    from .query.ask import ask
+
+    s = st.Store()
+    if not s.derived:
+        s.derived = run_metrics(s.con)
+    res = ask(s, a.question)
+    print(res["answer"])
+    print(f"\n[{res['status']}] {len(res['citations'])} citations, ${res['usage']['usd']:.4f}")
+    for f in res["checks"]["failures"]:
+        print("  !", f)
+    return 0 if res["status"] != "blocked" else 1
+
+
+def cmd_golden(a: argparse.Namespace) -> int:
+    from .query.ask import golden
+
+    s = st.Store()
+    if not s.derived:
+        s.derived = run_metrics(s.con)
+    res = golden(s)
+    for r in res:
+        print(f"{'PASS' if r['ok'] else 'FAIL'} {r['id']} [{r['status']}] {r['answer'][:160]!r}")
+    n = sum(r["ok"] for r in res)
+    print(f"{n}/{len(res)} passed, ${sum(r['usd'] for r in res):.3f}")
+    return 0 if n == len(res) else 1
+
+
+def cmd_serve(a: argparse.Namespace) -> int:
+    from .query.server import serve
+
+    serve(a.port)
+    return 0
+
+
 def load_env(path: str = ".env") -> None:
     """KEY=VALUE lines, optional quotes; never overrides a variable already set."""
     try:
@@ -329,6 +365,13 @@ def main(argv: list[str] | None = None) -> None:
     cd = sub.add_parser("candidates")
     cd.add_argument("--day", type=date.fromisoformat, default=date.today())
     cd.set_defaults(fn=cmd_candidates)
+    q = sub.add_parser("ask")
+    q.add_argument("question")
+    q.set_defaults(fn=cmd_ask)
+    sub.add_parser("golden").set_defaults(fn=cmd_golden)
+    sv = sub.add_parser("serve")
+    sv.add_argument("--port", type=int, default=int(os.environ.get("PORT", "8080")))
+    sv.set_defaults(fn=cmd_serve)
     ap = sub.add_parser("approve")
     ap.add_argument("--reviewer", default="merge")
     ap.set_defaults(fn=cmd_approve)

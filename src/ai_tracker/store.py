@@ -216,6 +216,104 @@ class Store:
         self.derived = [Derived(**r) for r in read_jsonl(DATA / "derived.jsonl")]
         self.events = [StatusEvent(**r) for r in read_jsonl(DATA / "status_events.jsonl")]
         self.fetchlog = [FetchLog(**r) for r in read_jsonl(DATA / "fetchlog.jsonl")]
+        self.semantic_tables()
+
+    def semantic_tables(self) -> None:
+        """DuckDB tables for the query layer: derived, status_events, indicators, metrics. Re-run after derived changes."""
+        con = self.con
+        con.execute(
+            "CREATE OR REPLACE TABLE derived (id VARCHAR, metric VARCHAR, value DOUBLE, value_low DOUBLE, value_high DOUBLE, as_of_date DATE, dims VARCHAR, obs_ids VARCHAR[])"
+        )
+        con.executemany(
+            "INSERT INTO derived VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+            [
+                (
+                    d.id,
+                    d.metric,
+                    d.value,
+                    d.value_low,
+                    d.value_high,
+                    d.as_of_date,
+                    json.dumps(d.dims, sort_keys=True),
+                    d.input_observation_ids,
+                )
+                for d in self.derived
+            ]
+            or [(None,) * 8],
+        )
+        con.execute(
+            "CREATE OR REPLACE TABLE status_events (id VARCHAR, target_type VARCHAR, target_id VARCHAR, old_status VARCHAR, new_status VARCHAR, old_conf INTEGER, new_conf INTEGER, reason VARCHAR, evidence_ids VARCHAR[], author VARCHAR, created_at TIMESTAMPTZ)"
+        )
+        con.executemany(
+            "INSERT INTO status_events VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            [
+                (
+                    e.id,
+                    e.target_type,
+                    e.target_id,
+                    e.old_status,
+                    e.new_status,
+                    e.old_conf,
+                    e.new_conf,
+                    e.reason,
+                    e.evidence_ids,
+                    e.author,
+                    e.created_at,
+                )
+                for e in self.events
+            ]
+            or [(None,) * 11],
+        )
+        con.execute(
+            "CREATE OR REPLACE TABLE indicators (id VARCHAR, name VARCHAR, lens VARCHAR, bucket_id VARCHAR, layer_id VARCHAR, sublayer_id VARCHAR, unit VARCHAR, metric VARCHAR, band_input VARCHAR, status VARCHAR, confidence INTEGER, published BOOLEAN)"
+        )
+        con.executemany(
+            "INSERT INTO indicators VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            [
+                (
+                    i.id,
+                    i.name,
+                    "both" if i.bucket_id and i.layer_id else "diffusion" if i.bucket_id else "capture",
+                    i.bucket_id,
+                    i.layer_id,
+                    i.sublayer_id,
+                    i.unit,
+                    i.metric,
+                    i.band_input,
+                    ev.new_status if ev else None,
+                    ev.new_conf if ev else None,
+                    i.published,
+                )
+                for i in self.seed.indicators
+                for ev in [self.current(i.id)]
+            ],
+        )
+        spec = (
+            (yaml.safe_load(Path("semantic/metrics.yaml").read_text()) or {}).get("metrics", {})
+            if Path("semantic/metrics.yaml").exists()
+            else {}
+        )
+        con.execute(
+            "CREATE OR REPLACE TABLE metrics (name VARCHAR, description VARCHAR, unit VARCHAR, grain VARCHAR, lead_lag VARCHAR, caveats VARCHAR, formula VARCHAR)"
+        )
+        con.executemany(
+            "INSERT INTO metrics VALUES (?, ?, ?, ?, ?, ?, ?)",
+            [
+                (
+                    k,
+                    m.get("description"),
+                    m.get("unit"),
+                    ",".join(m.get("grain", [])),
+                    m.get("lead_lag"),
+                    m.get("caveats"),
+                    m.get("sql") or f"python: {m.get('python')}",
+                )
+                for k, m in spec.items()
+            ]
+            or [(None,) * 7],
+        )
+        for t in ("derived", "status_events", "metrics"):
+            con.execute(f"DELETE FROM {t} WHERE {'id' if t != 'metrics' else 'name'} IS NULL")
 
     # ---- queries -------------------------------------------------------------------------------------------
     def observations(self, *globs: str) -> list[dict[str, Any]]:

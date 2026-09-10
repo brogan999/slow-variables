@@ -86,6 +86,12 @@ export type StackEntity = { id: string; name: string; kind: string; cik: string 
 export type StackSublayer = Sublayer & { entities: StackEntity[]; indicators: Card[] };
 export type StackDoc = { layers: (Layer & { sublayers: StackSublayer[] })[] };
 export const stack = () => read<StackDoc>("stack.json");
+export type Analysis = {
+  id: string; name: string; question: string; metric: string; dims?: Record<string, string>; related?: string[];
+  shape?: { unit?: string }; description?: string | null; caveats?: string | null; sql: string;
+  latest: { as_of_date: string; value: number; value_low?: number | null; value_high?: number | null; obs_ids: string[] } | null;
+};
+export const analyses = () => read<Analysis[]>("analyses.json");
 export type VentureQuarter = { as_of: string; venture_dollars?: { value: number; obs_ids: string[] }; round_count?: { value: number; obs_ids: string[] } };
 export type VentureDoc = { sublayer_id: string; quarters: VentureQuarter[] };
 export const venture = (sublayerId: string): VentureDoc | null => { try { return read<VentureDoc>(`venture/${sublayerId}.json`); } catch { return null; } };
