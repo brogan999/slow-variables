@@ -19,18 +19,18 @@ export function MarginStackChart({ rows, obsIndex }: { rows: Row[]; obsIndex: Re
                 {parts.map((p) => {
                   if (!p.row) return null;
                   const id = p.row.obs_ids[0];
-                  const bar = <div className="w-full h-full" style={{ background: p.id === "compute_semis" ? "var(--s1)" : "var(--axis)" }} title={`${p.name} ${fmt(p.row.value, "share")} ${q}`} />;
+                  const bar = <div className="w-full h-full" style={{ background: p.id === "compute_semis" ? "var(--s1)" : "var(--s2)" }} title={`${p.name} ${fmt(p.row.value, "share")} ${q}`} />;
                   return obsIndex[id] ? <Link key={p.id} href={`/series/${obsIndex[id]}#${id}`} className="w-full flex flex-col-reverse" style={{ height: `${p.row.value * 100}%` }} aria-label={`${p.name} ${fmt(p.row.value, "share")} in ${q}`}>{bar}</Link> : <div key={p.id} className="w-full" style={{ height: `${p.row.value * 100}%` }}>{bar}</div>;
                 })}
               </div>
-              <span className="text-[10px] text-muted tabular-nums">{q.slice(2, 7)}</span>
+              <span className="num text-[10px] text-muted">{q.slice(2, 7)}</span>
             </div>
           );
         })}
       </div>
       <div className="flex flex-wrap gap-x-4 text-xs text-ink-2">
         <span><span className="inline-block w-3 h-3 align-middle mr-1" style={{ background: "var(--s1)" }} />Semis</span>
-        <span><span className="inline-block w-3 h-3 align-middle mr-1" style={{ background: "var(--axis)" }} />Cloud</span>
+        <span><span className="inline-block w-3 h-3 align-middle mr-1" style={{ background: "var(--s2)" }} />Cloud</span>
         <span className="text-muted">Labs and apps: no filed or estimated margin series yet, so their share is unmeasured rather than drawn.</span>
       </div>
     </div>
