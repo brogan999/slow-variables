@@ -6,7 +6,7 @@ import { fmt } from "@/lib/format";
 // links to the observations behind it through the series index. Server component; no chart library.
 export function VentureFlowStrip({ doc, obsIndex }: { doc: VentureDoc; obsIndex: Record<string, string> }) {
   const qs = doc.quarters.filter((q) => q.venture_dollars);
-  if (!qs.length) return <p className="text-sm text-muted">No primary rounds on file for this sub-layer's entities.</p>;
+  if (!qs.length) return <p className="text-sm text-muted">No primary rounds on file for this sub-layer&apos;s entities.</p>;
   const max = Math.max(...qs.map((q) => q.venture_dollars!.value));
   return (
     <div className="flex flex-col gap-2">
@@ -25,7 +25,7 @@ export function VentureFlowStrip({ doc, obsIndex }: { doc: VentureDoc; obsIndex:
           );
         })}
       </div>
-      <p className="text-xs text-muted">Primary-round dollars per calendar quarter: Form D amount sold where the entity files, Epoch's press-compiled rounds otherwise. Amendments replace their originals; SPVs, secondaries and debt are excluded.</p>
+      <p className="text-xs text-muted">Primary-round dollars per calendar quarter: Form D amount sold where the entity files, Epoch&apos;s press-compiled rounds otherwise. Amendments replace their originals; SPVs, secondaries and debt are excluded.</p>
     </div>
   );
 }

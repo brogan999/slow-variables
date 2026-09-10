@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { fmt, type Point } from "@/lib/data";
+import type { Point } from "@/lib/data";
+import { fmt } from "@/lib/format";
 
 // Every number renders as a link to its L3 row. `obsIndex` maps observation id -> series key.
 export function Num({ p, unit, obsIndex }: { p: Point | null | undefined; unit?: string; obsIndex: Record<string, string> }) {

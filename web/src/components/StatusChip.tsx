@@ -1,4 +1,4 @@
-import { words } from "@/lib/data";
+import { words } from "@/lib/format";
 
 // Two accents only (faster/concentrating, slower/dispersing). Icon + text always; colour never carries meaning alone.
 const STYLE: Record<string, { glyph: string; cls: string }> = {
