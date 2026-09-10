@@ -1,31 +1,69 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
 
 :root {
   color-scheme: light;
-  --background: #f9f9f7; --surface: #fcfcfb; --ink: #0b0b0b; --ink-2: #52514e; --muted: #6f6e68;
-  --grid: #e1e0d9; --axis: #c3c2b7; --ring: rgba(11, 11, 11, 0.1);
-  --fast: #4a3aa7; --slow: #b84a1c; --s1: #2a78d6; --s2: #eb6834;
+  --background: #f4f1e8; --surface: #fbf9f4; --surface-2: #ece8dc;
+  --ink: #161512; --ink-2: #4b4740; --muted: #69645a;
+  --grid: #e2ddd1; --axis: #c6c0b1; --hairline: rgba(22, 21, 18, 0.1);
+  --fast: #4a3aa7; --slow: #a8451b; --s1: #33302a; --s2: #857e6f;
 }
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-    --background: #0d0d0d; --surface: #1a1a19; --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
-    --grid: #2c2c2a; --axis: #383835; --ring: rgba(255, 255, 255, 0.1);
-    --fast: #9085e9; --slow: #d95926; --s1: #3987e5; --s2: #d95926;
-  }
+.dark {
+  color-scheme: dark;
+  --background: #121110; --surface: #1c1b19; --surface-2: #242320;
+  --ink: #f1eee6; --ink-2: #b9b3a5; --muted: #8f897c;
+  --grid: #2b2a27; --axis: #403e39; --hairline: rgba(241, 238, 230, 0.12);
+  --fast: #a79cf3; --slow: #e0794a; --s1: #d9d4c9; --s2: #7b7568;
 }
+
 @theme inline {
-  --color-background: var(--background); --color-surface: var(--surface); --color-ink: var(--ink);
-  --color-ink-2: var(--ink-2); --color-muted: var(--muted); --color-grid: var(--grid); --color-axis: var(--axis);
+  --color-background: var(--background); --color-foreground: var(--ink);
+  --color-surface: var(--surface); --color-surface-2: var(--surface-2);
+  --color-card: var(--surface); --color-card-foreground: var(--ink);
+  --color-popover: var(--surface); --color-popover-foreground: var(--ink);
+  --color-primary: var(--ink); --color-primary-foreground: var(--background);
+  --color-secondary: var(--surface-2); --color-secondary-foreground: var(--ink);
+  --color-accent: var(--surface-2); --color-accent-foreground: var(--ink);
+  --color-muted: var(--muted); --color-muted-foreground: var(--muted);
+  --color-destructive: var(--slow);
+  --color-border: var(--grid); --color-input: var(--grid); --color-ring: var(--ink);
+  --color-ink: var(--ink); --color-ink-2: var(--ink-2); --color-grid: var(--grid); --color-axis: var(--axis);
   --color-fast: var(--fast); --color-slow: var(--slow); --color-s1: var(--s1); --color-s2: var(--s2);
-  --font-sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --color-chart-1: var(--s1); --color-chart-2: var(--s2); --color-chart-3: var(--fast); --color-chart-4: var(--slow); --color-chart-5: var(--axis);
+  --font-sans: var(--font-instrument-sans), system-ui, sans-serif;
+  --font-display: var(--font-instrument-serif), Georgia, "Times New Roman", serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, Menlo, monospace;
+  --radius-sm: 4px; --radius-md: 6px; --radius-lg: 8px; --radius-xl: 12px;
 }
+
 body { background: var(--background); color: var(--ink); font-family: var(--font-sans); }
+
+@utility ring-hair { box-shadow: 0 0 0 1px var(--hairline); }
+@utility panel { border-radius: var(--radius-md); background: var(--surface); box-shadow: 0 0 0 1px var(--hairline); }
+@utility num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+@utility eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+@utility display { font-family: var(--font-display); font-weight: 400; }
+@utility dots {
+  background-image: radial-gradient(var(--axis) 1px, transparent 1.2px);
+  background-size: 20px 20px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 20%, transparent 75%);
+}
+@utility stagger {
+  & > * { animation: fade-up 0.45s ease-out both; animation-delay: calc(min(var(--i, 0), 12) * 40ms); }
+}
+@keyframes fade-up { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@keyframes grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.scroll-progress { position: fixed; inset-inline: 0; top: 0; height: 2px; background: var(--ink); transform-origin: 0 50%; animation: grow linear both; animation-timeline: scroll(root); z-index: 40; }
+@supports not (animation-timeline: scroll()) { .scroll-progress { display: none; } }
+
 .prose-tight p + p { margin-top: 0.5rem; }
 table.data { font-variant-numeric: tabular-nums; }
-table.data th, table.data td { padding: 0.35rem 0.6rem; border-bottom: 1px solid var(--grid); text-align: left; vertical-align: top; }
-table.data th { color: var(--muted); font-weight: 500; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; }
-.ring-hair { box-shadow: 0 0 0 1px var(--ring); }
+table.data th, table.data td { padding: 0.4rem 0.6rem; border-bottom: 1px solid var(--grid); text-align: left; vertical-align: top; }
+table.data th { font-family: var(--font-mono); color: var(--muted); font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; }
+table.data tbody tr:hover { background: color-mix(in srgb, var(--surface-2) 60%, transparent); }
+table.data td { font-size: 13px; }
 
 :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
