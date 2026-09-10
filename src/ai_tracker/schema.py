@@ -261,6 +261,8 @@ class Indicator(BaseModel):
     related_indicators: list[str] = []
     related_predictions: list[str] = []
     published: bool = False
+    stale_ok: bool = False  # a published indicator may sit past its cadence only with a reason
+    stale_reason: str | None = None
     updated_at: date
 
     @model_validator(mode="after")
@@ -269,6 +271,8 @@ class Indicator(BaseModel):
             raise ValueError(f"{self.id}: needs a bucket_id or layer_id")
         if self.published and not self.counterevidence.strip():
             raise ValueError(f"{self.id}: published indicators need counterevidence")
+        if self.stale_ok and not self.stale_reason:
+            raise ValueError(f"{self.id}: stale_ok needs stale_reason")
         return self
 
 

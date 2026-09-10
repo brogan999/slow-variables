@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from datetime import date
 
-from .store import Store
+from .store import CADENCE_DAYS, Store
 
 
 @dataclass
@@ -44,6 +44,14 @@ def _any(conds: list[Cond]) -> bool | None:
 class Data:
     def __init__(self, store: Store) -> None:
         self.s = store
+        self.cadence = {src.id: src.cadence for src in store.seed.sources}
+
+    def _fresh(self, o: dict) -> bool:
+        """Same rule as the indicator cards: older than 2x the source cadence (plus a publication lag) is stale."""
+        days = CADENCE_DAYS.get(self.cadence.get(o["source_id"], ""))
+        if days is None:
+            return True
+        return (date.today() - o["as_of_date"]).days <= max(2 * days, days + 30)
 
     def metric(self, name: str, dims: dict[str, str] | None = None) -> tuple[float, date, list[str]] | None:
         rows = self.s.derived_for(name, dims)
@@ -56,14 +64,16 @@ class Data:
 
     def series(self, glob: str, max_tier: int = 7) -> tuple[float, date, list[str]] | None:
         rows = [
-            o for o in self.s.observations(glob) if o["value_numeric"] is not None and o["tier"] <= max_tier
+            o
+            for o in self.s.observations(glob)
+            if o["value_numeric"] is not None and o["tier"] <= max_tier and self._fresh(o)
         ]
         return (rows[-1]["value_numeric"], rows[-1]["as_of_date"], [rows[-1]["id"]]) if rows else None
 
 
 def _cond(text: str, got: tuple[float, date, list[str]] | None, test, fmt: str = "{:.3g}") -> Cond:
     if got is None:
-        return Cond(text, None, [], "untestable: no observations yet")
+        return Cond(text, None, [], "untestable: no observation within two source cadences")
     v, d, ids = got
     return Cond(text, bool(test(v)), ids, f"{fmt.format(v)} as of {d}")
 
@@ -127,7 +137,7 @@ def normal_tech_strengthened(d: Data) -> Verdict:
         "Normal-technology thesis STRENGTHENED",
         _all(conds),
         conds,
-        "ratio non-decreasing AND ladder ≤ L4 AND four clean tracker releases (the ladder has no series yet, so this cannot resolve)",
+        "ratio non-decreasing AND ladder ≤ L4 AND four clean tracker releases (untestable until the continual-learning ladder series exists)",
     )
 
 
@@ -174,7 +184,7 @@ def rents_migrate_up(d: Data) -> Verdict:
             "labs + apps share of stack margin up ≥ 5pp over four quarters",
             None,
             [],
-            "untestable: no filed or estimated lab/app margin series yet",
+            "waiting on a lab/app margin series (none filed or estimated)",
         ),
         Cond(
             "semis' share of stack margin falling over four quarters",

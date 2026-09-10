@@ -2,11 +2,11 @@
 
 Read `docs/plan.md` first; `docs/briefs/ai-tracker-brief-v2.md` is the canonical spec, `docs/briefs/value-capture-tracker-part1.md` the capture-lens appendix.
 
-- Status lives only in `data/status_events.jsonl`. `evaluate` proposes rows into `data/proposed_status_events.jsonl`; a human writes the `reason`; `approve` commits them. Never write a status into seed YAML.
+- Status lives only in `data/status_events.jsonl`. `evaluate` proposes rows into `data/proposed_status_events.jsonl`, writing a machine reason only for a first scoring inside a band; a band crossing waits for a human `reason`; `approve` commits reasoned rows. `check` fails when a proposal has waited more than 14 days. Never write a status into seed YAML.
 - Never hard-code a URL you have not fetched in this session; fetch, then store with `retrieved_at`, `http_status`, `content_hash`.
 - Every observation needs `as_of_date`, `published_date`, `retrieved_at`, `url`, `tier`, `audited_vs_reported`, `extraction_method`, `raw_snippet`. Pydantic rejects anything less.
 - Figures from the briefs' appendices enter only through `seed/manual_observations.yaml`; `ingest manual` fetches the URL and asserts `raw_snippet` is a verbatim substring of the page. Never type a number into an indicator.
-- LLM-extracted, scraped and manual values land `pending`; merge to main is approval. Do not approve your own extraction.
+- LLM-extracted, scraped and manual values land `pending`. The nightly runs `approve` inside its own run so its PR shows exactly what merge will commit; merging that PR is the approval. Never approve a row into `main` outside that PR flow.
 - Tier 7 never moves a status above `emerging`; `audited` only with tier 4 and a 10-K.
 - Derived numbers resolve to observation IDs through `semantic/metrics.yaml`; if a formula needs an input that isn't an observation, the formula is wrong.
 - Every indicator has at least one address (bucket or layer); shared ones have both and a `Crosswalk` row.

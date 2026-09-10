@@ -15,10 +15,10 @@ Rule: (ratio ≤ 2 AND 80% horizon > 8 h) AND (≥ 3 trackers break) AND (hours 
 
 ## Normal-technology thesis STRENGTHENED: **does not hold**
 
-Rule: ratio non-decreasing AND ladder ≤ L4 AND four clean tracker releases (the ladder has no series yet, so this cannot resolve)
+Rule: ratio non-decreasing AND ladder ≤ L4 AND four clean tracker releases (untestable until the continual-learning ladder series exists)
 
 - ✗ 50%/80% ratio non-decreasing over the last four models — 10.3×, 6.4×, 4.3×, 6.3× (obs: 39c8213a, 8f73b56b, 959db6dd…)
-- ? continual-learning ladder ≤ L4 — untestable: no observations yet
+- ? continual-learning ladder ≤ L4 — untestable: no observation within two source cadences
 - ? precise nulls persist through four monthly tracker releases — 1 readings, max break count 0 (obs: 2ec713fc, 83c12bef, a9276b9d…)
 
 ## Invention-side WARNING (bottleneck #86 under test): **untestable**
@@ -32,7 +32,7 @@ Rule: both conditions, on independently verified series (OpenAI's self-reported 
 
 Rule: labs + apps up ≥ 5pp AND semis down (contradicted if semis hold and app margins net of inference fall)
 
-- ? labs + apps share of stack margin up ≥ 5pp over four quarters — untestable: no filed or estimated lab/app margin series yet
+- ? labs + apps share of stack margin up ≥ 5pp over four quarters — waiting on a lab/app margin series (none filed or estimated)
 - ✗ semis' share of stack margin falling over four quarters — 51.0% → 57.3% (obs: 33e002b2, 4e31dd06, 6c32c53e…)
 
 ## Capture thesis 'consumers keep most of the surplus' HOLDS: **HOLDS**

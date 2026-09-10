@@ -54,6 +54,64 @@ def _single_non_primary(s: st.Store, ind: Indicator) -> bool:
     return len({o["source_id"] for o in obs}) < 2 and not ({Tier(o["tier"]) for o in obs} & PRIMARY)
 
 
+def _auto_reason(
+    s: st.Store, ind: Indicator, value: float | None, as_of, new: str, old: str | None, ids: list[str]
+) -> str:
+    """A machine-written reason only for a first scoring inside a band; band crossings wait for a human."""
+    if old not in (None, *UNSCORED) or new in UNSCORED or value is None:
+        return ""
+    src = (
+        s.con.execute("SELECT source_id FROM observation_all WHERE id = ?", [ids[0]]).fetchone()
+        if ids
+        else None
+    )
+    name = next((x.name for x in s.seed.sources if src and x.id == src[0]), src[0] if src else "?")
+    if ind.direction_rule:
+        r = ind.direction_rule
+        return (
+            f"Evaluator: {value:.4g} ({name}, {as_of}) reads {new.replace('_', ' ')} over {r.periods} periods with a "
+            f"dead band of {r.dead_band:g}. Auto-reason; rule rationale: {r.rationale}"
+        )
+    band = ind.normal_band if new == "consistent_with_normal" else ind.fast_band
+    edge = f"lo={band.lo:g}" if band and band.lo is not None else ""
+    edge += (" " if edge else "") + (f"hi={band.hi:g}" if band and band.hi is not None else "")
+    return (
+        f"Evaluator: {value:.4g} ({name}, {as_of}) is inside the {new.replace('_', ' ').replace(' with normal', '')} "
+        f"band ({edge}). Auto-reason; band rationale: {ind.band_rationale}"
+    )
+
+
+def _propose_predictions(s: st.Store, proposed: list[dict], seen: set, lines: list[str]) -> None:
+    today = date.today()
+    for pr in s.seed.predictions:
+        if not pr.published:
+            continue
+        cur = s.current(pr.id)
+        status = cur.new_status if cur else None
+        new = None
+        if pr.window_start and pr.window_start > today and status != "not_yet_testable":
+            new = "not_yet_testable"
+        elif pr.window_end and pr.window_end < today and status not in ("confirmed", "ahead", "behind"):
+            new = "behind"
+        if new and (pr.id, new) not in seen:
+            ev = StatusEvent(
+                target_type="prediction",
+                target_id=pr.id,
+                old_status=status,
+                new_status=new,
+                old_conf=cur.new_conf if cur else None,
+                new_conf=cur.new_conf if cur else pr.confidence,
+                reason="",
+                evidence_ids=[],
+                author="evaluate",
+                created_at=datetime.now(timezone.utc),
+            )
+            proposed.append(st.dump(ev))
+            lines.append(
+                f"prediction {pr.id}: window says {new}; proposed StatusEvent {ev.id} needs a reason"
+            )
+
+
 def cmd_evaluate(a: argparse.Namespace) -> int:
     s = st.Store()
     derived = run_metrics(s.con)
@@ -91,15 +149,21 @@ def cmd_evaluate(a: argparse.Namespace) -> int:
                 new_status=new,
                 old_conf=cur.new_conf if cur else None,
                 new_conf=cur.new_conf if cur else ind.confidence,
-                reason="",
+                reason=_auto_reason(s, ind, value, as_of, new, old, ids),
                 evidence_ids=ids,
                 author="evaluate",
                 created_at=datetime.now(timezone.utc),
             )
             proposed.append(st.dump(ev))
             lines.append(
-                f"  proposed StatusEvent {ev.id}: fill `reason` in data/proposed_status_events.jsonl or delete the row"
+                f"  proposed StatusEvent {ev.id}: "
+                + (
+                    "auto-reason written"
+                    if ev.reason
+                    else "fill `reason` in data/proposed_status_events.jsonl or delete the row"
+                )
             )
+    _propose_predictions(s, proposed, seen, lines)
     st.write_jsonl(st.DATA / "proposed_status_events.jsonl", proposed)
     verdicts = run_all(s)
     st.write_jsonl(
@@ -136,9 +200,17 @@ def cmd_export(a: argparse.Namespace) -> int:
     return 0
 
 
-def cmd_check(a: argparse.Namespace) -> int:
-    s = st.Store()
+def check_errors(s: st.Store) -> list[str]:
     errors: list[str] = []
+    known = {r[0] for r in s.con.execute("SELECT id FROM observation_all").fetchall()}
+    for e in s.events:
+        missing = [i for i in e.evidence_ids if i not in known]
+        if missing:
+            errors.append(f"{e.target_id}: status event {e.id} cites unknown observations {missing}")
+    for p in st.read_jsonl(st.DATA / "proposed_status_events.jsonl"):
+        age = (datetime.now(timezone.utc) - datetime.fromisoformat(p["created_at"])).days
+        if not p.get("reason", "").strip() and age > 14:
+            errors.append(f"{p['target_id']}: proposal {p['id']} has waited {age} days for a reason")
     for ind in s.seed.indicators:
         if not ind.published:
             continue
@@ -157,6 +229,17 @@ def cmd_check(a: argparse.Namespace) -> int:
                 errors.append(f"{ind.id}: scored status from a single non-primary source")
         if ev and ind.proposed_status and ind.proposed_status != ev.new_status:
             print(f"note {ind.id}: seed proposed {ind.proposed_status}, evaluator says {ev.new_status}")
+        stale = s._card(ind)["stale_as_of"]
+        if stale and not ind.stale_ok:
+            errors.append(
+                f"{ind.id}: stale since {stale} (cadence {ind.cadence_expected}); set stale_ok with a reason or refresh"
+            )
+    return errors
+
+
+def cmd_check(a: argparse.Namespace) -> int:
+    s = st.Store()
+    errors = check_errors(s)
     pending = sum(
         1 for p in st.OBS.glob("*.jsonl") for r in st.read_jsonl(p) if r["review_status"] == "pending"
     )

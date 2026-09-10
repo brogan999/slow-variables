@@ -55,6 +55,7 @@ def _verified(ledger: Path) -> set[tuple]:
 class Manual(Connector):
     source_id = "manual"
     kind = "html"
+    may_be_empty = True  # every seed row is verified once; afterwards there is nothing to fetch
     headers = {"Accept": "text/html,application/pdf,text/csv,*/*;q=0.8", "Accept-Language": "en"}
 
     def __init__(self, path: Path = Path("seed/manual_observations.yaml")) -> None:

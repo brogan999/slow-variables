@@ -49,6 +49,9 @@ class CensusBtos(Connector):
             cur = con.execute(f"SELECT * FROM read_xlsx('{path}', sheet='{name}', all_varchar=true)")
             return [d[0] for d in cur.description], cur.fetchall()
 
+        return self._from_sheets(item, sheet)
+
+    def _from_sheets(self, item: RawItem, sheet) -> list[Observation]:
         dcols, drows = sheet("Collection and Reference Dates")
         expect(set(dcols), {"Smpdt"}, "btos dates sheet")
         ref_end_col = next((c for c in dcols if c.lower().startswith("ref end")), None) or next(

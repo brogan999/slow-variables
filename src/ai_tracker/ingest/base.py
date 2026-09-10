@@ -90,6 +90,7 @@ class Connector:
     post_json: dict[str, Any] | None = None  # set to POST a JSON body instead of GET
     expect_series: list[str] = []
     version: str = "1"
+    may_be_empty: bool = False  # a connector with nothing left to verify is healthy, not broken
 
     def __init__(self) -> None:
         self.scrubbed: list[str] = []
@@ -171,7 +172,7 @@ class Connector:
         try:
             items = self.fetch(day, refetch)
             rows = self.extract(items)
-            if not rows:
+            if not rows and not self.may_be_empty:
                 raise LayoutChanged(f"{self.source_id}: 0 items")
             keys = {r.series_key for r in rows}
             missing = [pat for pat in self.expect_series if not any(fnmatch(k, pat) for k in keys)]

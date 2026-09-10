@@ -10,22 +10,33 @@ jobs:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v5
       - run: uv sync
+      - uses: actions/cache@v4
+        with:
+          path: ingest/cache
+          key: raw-cache-${{ github.run_started_at }}
+          restore-keys: raw-cache-
       - id: ingest
         run: uv run ai-tracker ingest --all || echo "failed=true" >> "$GITHUB_OUTPUT"
         env:
           AI_TRACKER_USER_AGENT: "${{ secrets.AI_TRACKER_USER_AGENT }}"
-      - run: uv run ai-tracker build && uv run ai-tracker evaluate && uv run ai-tracker check && uv run ai-tracker export
+      # approve inside the run so the PR shows exactly what merge will commit; merge is still the gate
+      - run: uv run ai-tracker approve && uv run ai-tracker build && uv run ai-tracker evaluate && uv run ai-tracker export
+      - id: check
+        run: uv run ai-tracker check || echo "failed=true" >> "$GITHUB_OUTPUT"
       - uses: actions/upload-artifact@v4
+        if: always()
         with: { name: raw-cache, path: ingest/cache, retention-days: 90, if-no-files-found: ignore }
       - uses: peter-evans/create-pull-request@v7
+        if: always()
         with:
-          branch: nightly/${{ github.run_id }}
-          title: "nightly: ${{ steps.ingest.outputs.failed == 'true' && 'PARTIAL ' || '' }}observations ${{ github.run_started_at }}"
+          branch: nightly
+          title: "nightly: ${{ steps.check.outputs.failed == 'true' && 'CHECK FAILED ' || '' }}${{ steps.ingest.outputs.failed == 'true' && 'PARTIAL ' || '' }}observations ${{ github.run_started_at }}"
           body-path: data/summary.md
           commit-message: "nightly ingest\n\nCo-Authored-By: ai-tracker nightly <noreply@github.com>"
           add-paths: |
             data/**
             web/data/**
             web/public/data/**
-      - if: steps.ingest.outputs.failed == 'true'
+            docs/thesis.md
+      - if: steps.ingest.outputs.failed == 'true' || steps.check.outputs.failed == 'true'
         run: exit 1
