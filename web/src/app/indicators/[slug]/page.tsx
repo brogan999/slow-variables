@@ -124,7 +124,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
       <Section n={10} title="Related">
         <ul className="text-sm flex flex-col gap-1">
           {d.related_indicators.map((r) => { const c = indicators.find((i) => i.id === r); return <li key={r}><Link href={`/indicators/${r}`} className="hover:underline">{c?.name ?? r}</Link> <StatusChip status={c?.published ? c.status : null} /></li>; })}
-          {d.related_bottlenecks.length ? <li className="text-ink-2">Bottlenecks #{d.related_bottlenecks.join(", #")} <span className="text-muted">(the 89-item grid ships in M3)</span></li> : null}
+          {d.related_bottlenecks.length ? <li className="text-ink-2">Bottlenecks {d.related_bottlenecks.map((n, i) => <span key={n}>{i ? ", " : ""}<Link href={`/bottlenecks#b${n}`} className="hover:underline">#{n}</Link></span>)} <span className="text-muted">(Narayanan &amp; Kapoor&apos;s list)</span></li> : null}
           {d.crosswalk.map((c, i) => <li key={i} className="text-ink-2">Crosswalk: <Link href={`/buckets/${c.bucket_id}`} className="hover:underline">{buckets.find((b) => b.id === c.bucket_id)?.name}</Link> ⇄ <Link href={`/layers/${c.layer_id}`} className="hover:underline">{layers.find((l) => l.id === c.layer_id)?.name}</Link> <span className="text-muted">({words(c.relation)})</span></li>)}
         </ul>
       </Section>

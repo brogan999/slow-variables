@@ -1,0 +1,79 @@
+# /compare: the same evidence read against both worldviews. `leans` is never written here; export derives it from the
+# indicator's current status (faster_than_normal -> AI 2027, consistent/slower -> Normal Technology, else open).
+# Expectation text paraphrases sourced claims in seed/predictions.yaml (ids listed) or the briefs' band rationale.
+rows:
+  - indicator: metr_horizon_50
+    nk: "Capability can move fast; the paper's speed limits sit downstream of methods. A short doubling time does not contradict Normal Technology on its own."
+    ai2027: "Doubling every four months or faster from 2024, continuing to shorten, is the premise of the superhuman-coder timeline."
+    nk_predictions: [nk_benchmarks_false_summits]
+    ai2027_predictions: [ai2027_horizon_doubling_4mo]
+  - indicator: metr_horizon_80
+    nk: "The 80% horizon is the number that matters for products; it should lag the 50% horizon by years because reliability fixes are application-specific."
+    ai2027: "80% reliability on tasks taking humans years by March 2027 if the trend keeps accelerating."
+    nk_predictions: [nk_benchmarks_false_summits]
+    ai2027_predictions: [ai2027_80pct_years_by_mar_2027]
+  - indicator: horizon_ratio_80_50
+    nk: "The capability-reliability gap stays wide (ratio of five or more); benchmarks are false summits."
+    ai2027: "The gap collapses toward two as agents become reliable enough to run unattended."
+    nk_predictions: [nk_benchmarks_false_summits]
+    ai2027_predictions: [ai2027_superhuman_coder_2027]
+  - indicator: dev_rct_uplift
+    nk: "Modest, setting-dependent developer uplift; AI has not replaced software engineers and will not."
+    ai2027: "Broad, large uplift as coding agents take over; most of what software engineers do, end to end, within a year (Amodei)."
+    nk_predictions: [nk_benchmarks_false_summits]
+    ai2027_predictions: [amodei_swe_end_to_end_6_12mo]
+  - indicator: enterprise_pilot_to_production
+    nk: "The proof-of-concept-to-product gap keeps most pilots from measurable P&L impact for years."
+    ai2027: "Agents that work reset the pilot economics; production share rises quickly."
+    nk_predictions: [nk_adoption_decades]
+    ai2027_predictions: [ai2027_superhuman_coder_2027]
+  - indicator: bbd_work_hours_assisted
+    nk: "Single-digit share of work hours in year three, like PCs and the web at the same age."
+    ai2027: "A fifth or more of work hours assisted as agents diffuse through white-collar work."
+    nk_predictions: [nk_adoption_decades]
+    ai2027_predictions: [ai2027_superhuman_coder_2027]
+  - indicator: btos_firm_use
+    nk: "Under a third of firms in year three; organisational speed, not capability speed."
+    ai2027: "More than half of firms as agents remove the integration cost."
+    nk_predictions: [nk_adoption_decades]
+    ai2027_predictions: [ai2027_superhuman_coder_2027]
+  - indicator: ramp_paid_ai_adoption
+    nk: "Paid adoption saturates early among tech-forward firms and flattens as the hard integration work begins."
+    ai2027: "Paid adoption keeps rising toward universality as agents pay for themselves."
+    nk_predictions: [nk_adoption_decades]
+    ai2027_predictions: [amodei_trillions_before_2030]
+  - indicator: bls_labor_productivity_yoy
+    nk: "Productivity at trend for years; the Solow paradox repeats (paper's entries 28, 29, 61)."
+    ai2027: "Productivity prints above 3.5% sustained as automation compounds."
+    nk_predictions: [nk_adoption_decades]
+    ai2027_predictions: [korinek_extreme_scenario]
+  - indicator: bls_tfp_private_nonfarm
+    nk: "TFP invisible at annual resolution; Acemoglu's 0.66% over a decade is the normal reading."
+    ai2027: "TFP a point or more above trend by the late 2020s."
+    nk_predictions: [nk_adoption_decades]
+    ai2027_predictions: [korinek_extreme_scenario]
+  - indicator: labor_share_nonfarm
+    nk: "Labour share moves within its cyclical range; no AI-attributable break before 2028."
+    ai2027: "Labour share falls from about 60% toward 45% by 2030 on the extreme path."
+    nk_predictions: [nk_adoption_decades]
+    ai2027_predictions: [korinek_extreme_scenario]
+  - indicator: canaries_entry_level_gap
+    nk: "No broad AI-attributable employment decline for years; canaries stay within youth-employment swings."
+    ai2027: "Entry-level exposed employment breaks first and keeps widening."
+    nk_predictions: [nk_adoption_decades]
+    ai2027_predictions: [korinek_substantial_scenario]
+  - indicator: cross_tracker_concordance
+    nk: "The four monthly labour trackers agree on a null."
+    ai2027: "The trackers converge on a decline in exposed occupations."
+    nk_predictions: [nk_agi_not_milestone]
+    ai2027_predictions: [korinek_substantial_scenario]
+  - indicator: rsi_agent_workdays_per_human
+    nk: "Agent effort inside labs can rise without escaping external bottlenecks; self-reports do not resolve the question."
+    ai2027: "Agent effort passes human effort inside labs by 2026 and the R&D multiplier compounds from there."
+    nk_predictions: [nk_rsi_external_limits]
+    ai2027_predictions: [openai_research_intern_sep_2026, openai_automated_researcher_mar_2028]
+  - indicator: rsi_intervention_rate_4_8h
+    nk: "Humans keep steering most long agent runs; unreliability compounds over steps (entry 4)."
+    ai2027: "Long runs go unattended as reliability catches up; intervention rates fall below a quarter."
+    nk_predictions: [nk_rsi_external_limits, nk_benchmarks_false_summits]
+    ai2027_predictions: [openai_automated_researcher_mar_2028]

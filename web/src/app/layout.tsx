@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 const NAV = [
-  ["/", "Diffusion"], ["/capture", "Capture"], ["/indicators", "Indicators"], ["/predictions", "Predictions"], ["/ledger", "Ledger"], ["/crosswalk", "Crosswalk"],
+  ["/", "Diffusion"], ["/capture", "Capture"], ["/indicators", "Indicators"], ["/predictions", "Predictions"], ["/compare", "Compare"], ["/bottlenecks", "Bottlenecks"], ["/ledger", "Ledger"], ["/crosswalk", "Crosswalk"],
   ["/sources", "Sources"], ["/methodology", "Methodology"], ["/changelog", "Changelog"],
 ] as const;
 

@@ -414,6 +414,31 @@ class Prediction(BaseModel):
         return self
 
 
+class Essay(BaseModel):
+    code: str
+    title: str
+    url: str
+    date: date
+
+
+class Bottleneck(BaseModel):
+    id: int = Field(ge=1, le=89)
+    title: str
+    text: str
+    section: str
+    bucket_id: str
+    source_codes: list[str]
+    related_indicators: list[str] = []
+
+
+class CompareRow(BaseModel):
+    indicator: str
+    nk: str
+    ai2027: str
+    nk_predictions: list[str] = []
+    ai2027_predictions: list[str] = []
+
+
 class Crosswalk(BaseModel):
     bucket_id: str
     layer_id: str

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import csv
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import date, datetime, timezone
 from fnmatch import fnmatch
 from pathlib import Path
@@ -14,10 +14,13 @@ import duckdb
 import yaml
 
 from .schema import (
+    Bottleneck,
     Bucket,
+    CompareRow,
     Crosswalk,
     Derived,
     Entity,
+    Essay,
     FetchLog,
     Indicator,
     Layer,
@@ -88,6 +91,10 @@ class Seed:
     indicators: list[Indicator]
     entities: list[Entity]
     predictions: list[Prediction]
+    bottlenecks: list[Bottleneck] = field(default_factory=list)
+    essays: list[Essay] = field(default_factory=list)
+    sections: list[dict[str, str]] = field(default_factory=list)
+    compare: list[CompareRow] = field(default_factory=list)
 
     @classmethod
     def load(cls, root: Path = SEED) -> Seed:
@@ -99,6 +106,12 @@ class Seed:
             for f in sorted((root / "indicators").glob("*.yaml"))
             for r in yaml.safe_load(f.read_text())["indicators"]
         ]
+        bn = (
+            yaml.safe_load((root / "bottlenecks.yaml").read_text())
+            if (root / "bottlenecks.yaml").exists()
+            else {}
+        )
+        cmp_ = yaml.safe_load((root / "compare.yaml").read_text()) if (root / "compare.yaml").exists() else {}
         return cls(
             [Bucket(**r) for r in rows("buckets")],
             [Layer(**r) for r in rows("layers")],
@@ -108,6 +121,10 @@ class Seed:
             inds,
             [Entity(**r) for r in rows("entities")],
             [Prediction(**r) for r in rows("predictions")] if (root / "predictions.yaml").exists() else [],
+            [Bottleneck(**r) for r in bn.get("bottlenecks", [])],
+            [Essay(**r) for r in bn.get("essays", [])],
+            bn.get("sections", []),
+            [CompareRow(**r) for r in cmp_.get("rows", [])],
         )
 
 
@@ -315,6 +332,10 @@ class Store:
                     and c.layer_id == ind.layer_id
                 ],
             }
+            doc["related_bottlenecks"] = sorted(
+                set(ind.related_bottlenecks)
+                | {b.id for b in self.seed.bottlenecks if ind.id in b.related_indicators}
+            )
             _write(out / "indicators" / f"{ind.id}.json", doc)
         for key, rows in self._all_series().items():
             src = next((s for s in self.seed.sources if s.id == rows[0]["source_id"]), None)
@@ -406,6 +427,8 @@ class Store:
             ],
         )
         _write(out / "ledger.json", self._ledger())
+        _write(out / "bottlenecks.json", self._bottlenecks(cards))
+        _write(out / "compare.json", self._compare(cards))
         _write(out / "thesis.json", read_jsonl(DATA / "thesis.jsonl"))
         _write(out / "sources.json", [self._source_health(s) for s in self.seed.sources])
         _write(
@@ -490,6 +513,49 @@ class Store:
             for r in rows
             if r.as_of_date == latest
         }
+
+    def _bottlenecks(self, cards: dict[str, Any]) -> dict[str, Any]:
+        def rel(b: Bottleneck) -> list[dict[str, Any]]:
+            return [
+                {
+                    "id": i,
+                    "name": cards[i]["name"],
+                    "status": cards[i]["status"],
+                    "published": cards[i]["published"],
+                }
+                for i in b.related_indicators
+                if i in cards
+            ]
+
+        return {
+            "sections": self.seed.sections,
+            "essays": [dump(e) for e in self.seed.essays],
+            "items": [{**dump(b), "related": rel(b)} for b in self.seed.bottlenecks],
+        }
+
+    def _compare(self, cards: dict[str, Any]) -> dict[str, Any]:
+        """Leans is derived from status, never written by hand."""
+        LEAN = {"faster_than_normal": "ai2027", "consistent_with_normal": "nk", "slower_than_normal": "nk"}
+        preds = {p.id: p for p in self.seed.predictions}
+
+        def pred(pid: str) -> dict[str, Any]:
+            ev = self.current(pid)
+            return {"id": pid, "claimant": preds[pid].claimant, "status": ev.new_status if ev else None}
+
+        rows = []
+        for r in self.seed.compare:
+            c = cards[r.indicator]
+            rows.append(
+                {
+                    **r.model_dump(),
+                    "card": c,
+                    "leans": LEAN.get(c["status"] or "", "open") if c["published"] else "open",
+                    "nk_predictions": [pred(p) for p in r.nk_predictions],
+                    "ai2027_predictions": [pred(p) for p in r.ai2027_predictions],
+                }
+            )
+        tally = {k: sum(1 for x in rows if x["leans"] == k) for k in ("nk", "ai2027", "open")}
+        return {"rows": rows, "tally": tally}
 
     def _ledger(self) -> list[dict[str, Any]]:
         """The circular / vendor-financing ledger: every `circular.*` and `markets.*` observation with parties and instrument."""

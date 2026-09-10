@@ -13,5 +13,18 @@ from .sec_xbrl import SecXbrl
 
 CONNECTORS = {
     c.source_id: c
-    for c in (Metr, SecXbrl, Manual, Bls, Epoch, Fred, CensusBtos, AnthropicEi, SecSegments, Feeds, CloudedJudgment, OpenRouter)
+    for c in (
+        Metr,
+        SecXbrl,
+        Manual,
+        Bls,
+        Epoch,
+        Fred,
+        CensusBtos,
+        AnthropicEi,
+        SecSegments,
+        Feeds,
+        CloudedJudgment,
+        OpenRouter,
+    )
 }

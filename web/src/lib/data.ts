@@ -75,3 +75,8 @@ export type LedgerRow = Observation & { parties: string[]; instrument: string; o
 export const ledger = () => read<LedgerRow[]>("ledger.json");
 export type ThesisVerdict = { id: string; name: string; holds: boolean | null; logic: string; conds: { text: string; holds: boolean | null; obs_ids: string[]; detail: string }[] };
 export const thesis = () => read<ThesisVerdict[]>("thesis.json");
+export type Bottleneck = { id: number; title: string; text: string; section: string; bucket_id: string; source_codes: string[]; related_indicators: string[]; related: { id: string; name: string; status: string | null; published: boolean }[] };
+export type BottleneckDoc = { sections: { name: string; bucket_id: string }[]; essays: { code: string; title: string; url: string; date: string }[]; items: Bottleneck[] };
+export const bottlenecks = () => read<BottleneckDoc>("bottlenecks.json");
+export type CompareRow = { indicator: string; nk: string; ai2027: string; card: Card; leans: "nk" | "ai2027" | "open"; nk_predictions: { id: string; claimant: string; status: string | null }[]; ai2027_predictions: { id: string; claimant: string; status: string | null }[] };
+export const compare = () => read<{ rows: CompareRow[]; tally: { nk: number; ai2027: number; open: number } }>("compare.json");
