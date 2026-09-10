@@ -2,7 +2,7 @@
 
 ## Context
 
-Two briefs landed in ~/Downloads on 9 Sep 2026:
+Two briefs arrived on 9 Sep 2026:
 
 - **AI Tracker Brief v2 — Technology Diffusion** (`v2`): the unified spec. One data store, one methodology, one indicator object, two L0 lenses (diffusion ⇄ capture), crosswalk as a first-class table. M0–M6, 7 weeks.
 - **Value Capture Tracker Part 1** (`P1`): the earlier capture-side build prompt. Richer on 21 sub-layers with seed companies, ingestor endpoints, cleverhack directories, 13 seed indicators, circular-financing ledger, reference figures.
@@ -17,8 +17,8 @@ Outcome: a repo at `~/ai-tracker` holding both briefs and the research corpus, s
 |---|---|---|
 | 89-bottleneck list | ✅ complete, with 224-row raw JSON + extraction prompt | `~/normaltech-predictions/bottlenecks.md`, `bottlenecks_raw.json`, `BOTTLENECK_PROMPT.md` |
 | N&K prediction material | ✅ 747 predictions with verbatim quote + URL + verified flag | `~/normaltech-predictions/predictions.json`, `normaltech-predictions.md`, `worldview-summary.md`, `corpus/` (70 posts) |
-| 11-layer a private value-chain map value-chain map | ✅ | `~/Documents/a private value-chain map Thesis/competitive/competitive-landscape.md`; ten→eleven crosswalk paragraph in `value-chain-scorecard.md` |
-| Teece / Nordhaus / Perez / Ding notes | ✅ scattered | `~/Documents/a private value-chain map Thesis/06-theory-of-value-capture/theory-of-value-capture.md`; `~/vc-frameworks-project/phase1/3-modern-era/technological-revolutions-perez.md`; Ding in `bottlenecks.md` §Theoretical foundations |
+| 11-layer a private value-chain map value-chain map | ✅ | private a private value-chain map thesis notes (kept outside the public tree in `docs/private/`, gitignored) |
+| Teece / Nordhaus / Perez / Ding notes | ✅ scattered | private thesis notes (`docs/private/`, gitignored); `docs/interpretation/technological-revolutions-perez.md`; Ding in `bottlenecks.md` §Theoretical foundations |
 | Prior attempt at this product | ✅ `~/ai-value-chain` (Aug 2026, Next 16 + Prisma/Postgres, not git-inited, DB tables never created). Has a working Epoch ZIP connector with declarative column maps (`config/sources.yaml`), SEC XBRL connector (`src/lib/ingest/connectors/sec-xbrl.ts`: quarterly filter, restatement dedupe), 23-layer taxonomy, honesty rules | Port the *patterns*; do not fork (Postgres ≠ brief; TS parquet story is weak) |
 | "Diffusion Tracker v2" report, "Measuring AI Value Capture" report, venture-sources output, five-tier dependency graph | ❌ not on disk — live in chat only | Value-capture chat linked from the Notion page: `[private chat]…`. **Alex exports these**; not a blocker |
 
@@ -33,8 +33,9 @@ Toolchain present: python3.12 + uv, node 25 + pnpm, gh, vercel, fly. Postgres 14
   docs/briefs/ai-tracker-brief-v2.md              ← git mv from Downloads
   docs/briefs/value-capture-tracker-part1.md      ← git mv from Downloads
   docs/research/bottlenecks.md, bottlenecks_raw.json, BOTTLENECK_PROMPT.md, predictions.json,
-                worldview-summary.md, betterbrain-competitive-landscape.md, betterbrain-value-chain-scorecard.md
-  docs/interpretation/theory-of-value-capture.md, technological-revolutions-perez.md   (copies; write nothing new)
+                worldview-summary.md
+  docs/interpretation/technological-revolutions-perez.md   (copies; write nothing new)
+  docs/private/            private business notes, gitignored (a private value-chain map landscape, scorecard, value-capture theory)
   docs/prior-art.md      ← 10 lines pointing at ~/ai-value-chain and what was ported
 ```
 
@@ -258,7 +259,7 @@ Verify per PR: fixture extract test, `check`, `export`, screenshot of the touche
 33. **A11y final + docs**: `<dialog>` semantics, `aria-live` answer region, `aria-current` nav, `prefers-reduced-motion`, axe run at 375/1280; methodology sections for the query layer, memo policy, X policy; README.
 
 ### Phase 4 — name, scrub, public (Alex ≈ 8 h, build ≈ 3 h)
-34. **Naming pass** per `~/naming-canon/NAMING-CANON.md` Part XI: foundation lock, divergent longlist, harness sentence + competitor test to ~15, screening record (DNS/SERP/handles/TM/linguistic) to 3–5, one-page brand world each, Alex locks at ≥80/100. Output `~/naming-canon/AI-TRACKER-NAMING.md` (outside the repo). Alex buys the domain; Vercel Domains apex + www. Rename = `site.ts`, wordmark, `web/package.json` name, README.
+34. **Naming pass** per the naming canon (private) Part XI: foundation lock, divergent longlist, harness sentence + competitor test to ~15, screening record (DNS/SERP/handles/TM/linguistic) to 3–5, one-page brand world each, Alex locks at ≥80/100. Output `AI-TRACKER-NAMING.md` in the private naming folder (outside the repo). Alex buys the domain; Vercel Domains apex + www. Rename = `site.ts`, wordmark, `web/package.json` name, README.
 35. **Repo scrub** (checkpoint with Alex before the flip): move `docs/research/betterbrain-competitive-landscape.md` and `betterbrain-value-chain-scorecard.md` (and any other private business docs he names) to a gitignored `docs/private/` and rewrite history for those paths; remove `web/AGENTS.md`/`web/CLAUDE.md` scaffolds; strip personal paths from `docs/plan.md`, `docs/research/BOTTLENECK_PROMPT.md`; add `LICENSE` (MIT), `LICENSE-DATA` (CC BY 4.0 compilation, upstream terms govern rows), `CONTRIBUTING.md`; `.env` stays untracked.
 36. **Flip**: `gh repo edit --visibility public`; Vercel Deployment Protection → "Only Preview Deployments"; confirm the domain resolves, sitemap fetches, `/api/ask` answers a golden question, nightly PR previews stay gated.
 

@@ -1,4 +1,4 @@
-Working directory: ~/normaltech-predictions/corpus
+Working directory: the normaltech-predictions corpus (70 posts)
 
 You are cataloguing every SPECIFIC BOTTLENECK, SPEED LIMIT, or BARRIER TO DIFFUSION/ADOPTION of AI that Arvind Narayanan and Sayash Kapoor name in their essays. "Diffusion" for them means the whole chain from AI method -> product/application -> individual adoption -> organizational/legal/structural adaptation. A bottleneck is anything they say slows, caps, or blocks AI capabilities from turning into real-world use or impact (economic, scientific, legal, safety-related).
 
