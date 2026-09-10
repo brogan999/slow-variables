@@ -31,6 +31,7 @@ from .schema import (
 )
 
 SEED, DATA, WEB = Path("seed"), Path("data"), Path("web/data")
+Path = Path  # re-exported for cli
 OBS = DATA / "observations"
 OBS_COLUMNS = {
     "id": "VARCHAR",
@@ -399,6 +400,8 @@ class Store:
                 for pr in self.seed.predictions
             ],
         )
+        _write(out / "ledger.json", self._ledger())
+        _write(out / "thesis.json", read_jsonl(DATA / "thesis.jsonl"))
         _write(out / "sources.json", [self._source_health(s) for s in self.seed.sources])
         _write(
             out / "changelog.json",
@@ -482,6 +485,16 @@ class Store:
             for r in rows
             if r.as_of_date == latest
         }
+
+    def _ledger(self) -> list[dict[str, Any]]:
+        """The circular / vendor-financing ledger: every `circular.*` and `markets.*` observation with parties and instrument."""
+        rows = []
+        for o in self.observations("circular.*", "markets.*"):
+            parts = o["series_key"].split(".")
+            parties = parts[1].split("_") if parts[0] == "circular" else [parts[1]]
+            instrument = parts[2].rsplit("_", 1)[0] if parts[0] == "circular" else parts[2]
+            rows.append({**_full(o), "parties": parties, "instrument": instrument, "obs_id": o["id"]})
+        return sorted(rows, key=lambda r: r["as_of_date"], reverse=True)
 
     def _all_series(self) -> dict[str, list[dict[str, Any]]]:
         out: dict[str, list[dict[str, Any]]] = {}

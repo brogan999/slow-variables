@@ -347,3 +347,297 @@ observations:
     basis: reported
     raw_snippet: "In levels, employment of workers ages 22–25 in the two most exposed quintiles fell about 11% between November 2022 and June 2026, while employment of the same age group in the three least-exposed quintiles grew about 10%."
     note: "Same footnote; three least-exposed quintiles, same age group."
+
+  # --- circular / vendor-financing ledger, sourced 2026-09-10; snippets verified verbatim on ingest ---
+  - series_key: circular.nvidia_openai.loi_usd.pt
+    source_id: nvidia_ir
+    entity_id: nvda
+    value: 100000000000
+    unit: USD
+    as_of_date: 2025-09-22
+    published_date: 2025-09-22
+    tier: 4
+    basis: company_stated
+    url: https://nvidianews.nvidia.com/news/openai-and-nvidia-announce-strategic-partnership-to-deploy-10gw-of-nvidia-systems
+    raw_snippet: NVIDIA intends to invest up to $100 billion in OpenAI progressively as each gigawatt is deployed
+    note: Nvidia -> OpenAI letter of intent, up to US$100B tied to 10 GW deployment; non-binding; superseded in practice by the US$30B equity.
+  - series_key: circular.nvidia_openai.equity_usd.pt
+    source_id: cnbc
+    entity_id: nvda
+    value: 30000000000
+    unit: USD
+    as_of_date: 2026-03-31
+    published_date: 2026-03-31
+    tier: 5
+    basis: reported
+    url: https://www.cnbc.com/2026/03/31/openai-funding-round-ipo.html
+    raw_snippet: Amazon agreed to invest up to $50 billion in the startup, Nvidia invested $30 billion, and SoftBank invested $30 billion
+    dispute_text: 'Reported (OpenAI announcement via CNBC), not in an Nvidia filing: the FY26 10-K says only ''finalizing an investment and partnership agreement with OpenAI''; the Q2 FY27 10-Q does not name the amount.'
+    note: Nvidia -> OpenAI equity in the US$122B round (closed 31 Mar 2026); Amazon US$50B and SoftBank US$30B in the same round.
+  - series_key: circular.nvidia_openai.guarantee_usd.pt
+    source_id: sec_edgar_filings
+    entity_id: nvda
+    value: 105000000000
+    unit: USD
+    as_of_date: 2026-08-17
+    published_date: 2026-08-26
+    tier: 4
+    basis: company_stated
+    url: https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm
+    raw_snippet: In August 2026, we entered into guarantees, capped at a total of $105 billion, to provide credit support on a land, power, and shell buildout with affiliates of SB Energy Corp. (SB Energy) on behalf of a customer, an affiliate of OpenAI Group PBC (OpenAI), related to leases for approximately 4.25 gigawatts of IT load in the aggregate at SB Energy’s PORTS Technology Campus in Pike County, Ohio
+    note: Nvidia guarantees OpenAI's 20-year leases to SB Energy at PORTS-Pike, Ohio; 4.25 GW initial with an option on ~3.8 GW more; effective in phases from FY2029. Q2 FY27 10-Q.
+  - series_key: circular.nvidia_openai.guarantee_customer.pt
+    source_id: sec_edgar_filings
+    entity_id: nvda
+    value_text: guarantee announced; no amount in the 8-K
+    unit: text
+    as_of_date: 2026-08-17
+    published_date: 2026-08-17
+    tier: 4
+    basis: company_stated
+    url: https://www.sec.gov/Archives/edgar/data/1045810/000104581026000069/sbeoainvidia-portsrelease.htm
+    raw_snippet: OpenAI will be the customer. SB Energy will build, own and operate the data center under a 20-year lease to OpenAI.
+    note: 'Nvidia 8-K Ex. 99.1, 17 Aug 2026: names Nvidia, SB Energy and OpenAI and the 20-year lease; Nvidia also invests US$1.5B in SB Energy.'
+  - series_key: circular.nvidia_openai.backstop_talks_usd.pt
+    source_id: cnbc
+    entity_id: nvda
+    value: 250000000000
+    unit: USD
+    as_of_date: 2026-07-27
+    published_date: 2026-07-27
+    tier: 5
+    basis: reported
+    url: https://www.cnbc.com/2026/07/27/nvidia-and-openai-in-talks-for-up-to-250-billion-dollar-ai-backstop.html
+    raw_snippet: OpenAI is in discussions with Nvidia about a backstop of up to $250 billion that would help fund its plans to lease a new AI data center, CNBC has confirmed
+    dispute_text: Talks only, single anonymous source; the signed instrument three weeks later was the US$105B SB Energy guarantee.
+    note: Nvidia -> OpenAI credit backstop as first reported; the Nvidia 5-year CDS hit its record the same day.
+  - series_key: circular.amd_openai.warrant_shares.pt
+    source_id: sec_edgar_filings
+    entity_id: amd
+    value: 160000000
+    unit: shares
+    as_of_date: 2025-10-05
+    published_date: 2025-10-06
+    tier: 4
+    basis: company_stated
+    url: https://www.sec.gov/Archives/edgar/data/2488/000119312525230895/d28189d8k.htm
+    raw_snippet: issued to OpenAI OpCo, LLC (“Warrantholder”) a warrant (the “Warrant”) to purchase up to an aggregate of 160 million shares of common stock of the Company (the “Warrant Shares”) at an exercise price of $0.01 per share
+    note: AMD -> OpenAI warrant; vests in tranches from the first 1 GW of MI450 through 6 GW plus AMD share-price hurdles. AMD 8-K Item 1.01.
+  - series_key: circular.amd_openai.commitment_gw.pt
+    source_id: sec_edgar_filings
+    entity_id: amd
+    value: 6
+    unit: GW
+    as_of_date: 2025-10-06
+    published_date: 2025-10-06
+    tier: 4
+    basis: company_stated
+    url: https://www.sec.gov/Archives/edgar/data/2488/000119312525230895/d28189dex991.htm
+    raw_snippet: 'AMD (NASDAQ: AMD) and OpenAI today announced a 6 gigawatt agreement to power OpenAI’s next-generation AI infrastructure across multiple generations of AMD Instinct GPUs'
+    note: OpenAI -> AMD 6 GW multi-year GPU agreement (first 1 GW MI450 in 2H 2026); no dollar value stated. AMD 8-K Ex. 99.1.
+  - series_key: circular.coreweave_nvidia.backstop_usd.pt
+    source_id: sec_edgar_filings
+    entity_id: crwv
+    value: 6300000000
+    unit: USD
+    as_of_date: 2025-09-09
+    published_date: 2025-09-15
+    tier: 4
+    basis: company_stated
+    url: https://www.sec.gov/Archives/edgar/data/1769628/000176962825000047/crwv-20250909.htm
+    raw_snippet: which has an initial value of $6.3 billion, that establishes an arrangement with respect to the sale by the Company of reserved cloud computing capacity to its customers and provides NVIDIA access to any residual unsold cloud computing capacity
+    note: Nvidia obliged to buy CoreWeave's unsold capacity through 13 Apr 2032; Nvidia is also supplier and shareholder. CoreWeave 8-K Item 1.01.
+  - series_key: circular.oracle_openai.contract_usd.pt
+    source_id: siliconangle
+    entity_id: orcl
+    value: 300000000000
+    unit: USD
+    as_of_date: 2025-09-10
+    published_date: 2025-09-10
+    tier: 5
+    basis: reported
+    url: https://siliconangle.com/2025/09/10/openai-oracle-strike-300b-cloud-computing-deal-power-ai/
+    raw_snippet: OpenAI today confirmed that it has signed an agreement to purchase computing infrastructure worth $300 billion from Oracle Corp. over a period of roughly five years
+    dispute_text: Reported only (WSJ broke it; SiliconANGLE relays OpenAI's confirmation). Not disclosed by name in any Oracle filing; visible only inside Oracle RPO.
+    note: OpenAI -> Oracle compute purchase, ~5 years from 2027.
+  - series_key: circular.microsoft_openai.azure_commitment_usd.pt
+    source_id: microsoft_blog
+    entity_id: msft
+    value: 250000000000
+    unit: USD
+    as_of_date: 2025-10-28
+    published_date: 2025-10-28
+    tier: 4
+    basis: company_stated
+    url: https://blogs.microsoft.com/blog/2025/10/28/the-next-chapter-of-the-microsoft-openai-partnership/
+    raw_snippet: OpenAI has contracted to purchase an incremental $250B of Azure services, and Microsoft will no longer have a right of first refusal to be OpenAI’s compute provider
+    note: OpenAI -> Microsoft Azure services commitment from the Oct 2025 recapitalisation; the same post values Microsoft's OpenAI stake at ~US$135B.
+  - series_key: circular.microsoft.commercial_rpo_usd.pt
+    source_id: microsoft_ir
+    entity_id: msft
+    value: 625000000000
+    unit: USD
+    as_of_date: 2025-12-31
+    published_date: 2026-01-28
+    tier: 4
+    basis: company_stated
+    url: https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q2
+    raw_snippet: Commercial remaining performance obligation, which continues to be reported net of reserves, increased to $625 billion and was up 110% year-over-year
+    note: Microsoft FY26 Q2 earnings call (CFO Amy Hood); the 10-Q figure in sec_xbrl supersedes for the series.
+  - series_key: circular.microsoft_openai.rpo_share.pt
+    source_id: microsoft_ir
+    entity_id: msft
+    value: 0.45
+    unit: share
+    as_of_date: 2025-12-31
+    published_date: 2026-01-28
+    tier: 4
+    basis: company_stated
+    url: https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q2
+    raw_snippet: Approximately 45% of our commercial RPO balance is from OpenAI
+    note: Microsoft's own CFO statement (not IDC). The FY26 Q4 call reportedly implied ~32% of US$678B; not yet sourced.
+  - series_key: circular.openai.total_commitments_usd.pt
+    source_id: techcrunch
+    entity_id: openai
+    value: 1400000000000
+    unit: USD
+    as_of_date: 2025-11-06
+    published_date: 2025-11-06
+    tier: 7
+    basis: company_stated
+    url: https://techcrunch.com/2025/11/06/sam-altman-says-openai-has-20b-arr-and-about-1-4-trillion-in-data-center-commitments/
+    raw_snippet: We are looking at commitments of about $1.4 trillion over the next 8 years
+    note: Altman's X post as quoted by TechCrunch; actor statement (tier 7).
+  - series_key: circular.openai.total_commitments_usd.pt
+    source_id: cnbc
+    entity_id: openai
+    value: 600000000000
+    unit: USD
+    as_of_date: 2026-02-20
+    published_date: 2026-02-20
+    tier: 5
+    basis: reported
+    url: https://www.cnbc.com/2026/02/20/openai-resets-spend-expectations-targets-around-600-billion-by-2030.html
+    raw_snippet: OpenAI is telling investors that it's now targeting roughly $600 billion in total compute spend by 2030, months after CEO Sam Altman touted $1.4 trillion in infrastructure commitments
+    dispute_text: Anonymous sources to CNBC; measures spend-to-2030, not contracted commitments, so not strictly comparable with the US$1.4T figure.
+    note: OpenAI investor guidance reset; pairs with a US$280B 2030 revenue target in the same report.
+  - series_key: markets.nvidia.cds_5y_bps.pt
+    source_id: yahoo_finance
+    entity_id: nvda
+    value: 82
+    unit: bps
+    as_of_date: 2026-07-27
+    published_date: 2026-07-28
+    tier: 5
+    basis: reported
+    url: https://finance.yahoo.com/markets/stocks/articles/nvidia-rising-cds-talk-wall-123955612.html
+    raw_snippet: Nvidia's five-year credit default swap surged to a record 82 basis points on Monday, July 27, its largest single-day intraday gain since the contract began actively trading in November 2025, according to ICE Data Services
+    note: Investing.com piece syndicated on Yahoo Finance; underlying data ICE Data Services.
+  - series_key: circular.microsoft_anthropic.azure_commitment_usd.pt
+    source_id: microsoft_blog
+    entity_id: msft
+    value: 30000000000
+    unit: USD
+    as_of_date: 2025-11-18
+    published_date: 2025-11-18
+    tier: 4
+    basis: company_stated
+    url: https://blogs.microsoft.com/blog/2025/11/18/microsoft-nvidia-and-anthropic-announce-strategic-partnerships/
+    raw_snippet: Anthropic has committed to purchase $30 billion of Azure compute capacity and to contract additional compute capacity up to one gigawatt
+    note: Anthropic -> Microsoft Azure compute commitment.
+  - series_key: circular.nvidia_anthropic.equity_usd.pt
+    source_id: microsoft_blog
+    entity_id: nvda
+    value: 10000000000
+    unit: USD
+    as_of_date: 2025-11-18
+    published_date: 2025-11-18
+    tier: 4
+    basis: company_stated
+    url: https://blogs.microsoft.com/blog/2025/11/18/microsoft-nvidia-and-anthropic-announce-strategic-partnerships/
+    raw_snippet: NVIDIA and Microsoft are committing to invest up to $10 billion and up to $5 billion respectively in Anthropic
+    note: Nvidia -> Anthropic equity, up to US$10B; Anthropic also committed to up to 1 GW of Nvidia systems.
+  - series_key: circular.microsoft_anthropic.equity_usd.pt
+    source_id: microsoft_blog
+    entity_id: msft
+    value: 5000000000
+    unit: USD
+    as_of_date: 2025-11-18
+    published_date: 2025-11-18
+    tier: 4
+    basis: company_stated
+    url: https://blogs.microsoft.com/blog/2025/11/18/microsoft-nvidia-and-anthropic-announce-strategic-partnerships/
+    raw_snippet: NVIDIA and Microsoft are committing to invest up to $10 billion and up to $5 billion respectively in Anthropic
+    note: Microsoft -> Anthropic equity, up to US$5B; same sentence as the Nvidia row.
+  - series_key: circular.nvidia_coreweave.equity_usd.pt
+    source_id: nvidia_ir
+    entity_id: nvda
+    value: 2000000000
+    unit: USD
+    as_of_date: 2026-01-26
+    published_date: 2026-01-26
+    tier: 4
+    basis: company_stated
+    url: https://nvidianews.nvidia.com/news/nvidia-and-coreweave-strengthen-collaboration-to-accelerate-buildout-of-ai-factories
+    raw_snippet: NVIDIA has invested $2 billion in CoreWeave Class A common stock at a purchase price of $87.20 per share
+    note: Nvidia -> CoreWeave equity; supplier, backstop provider and shareholder of the same customer.
+  - series_key: circular.meta_coreweave.contract_usd.pt
+    source_id: sec_edgar_filings
+    entity_id: crwv
+    value: 14200000000
+    unit: USD
+    as_of_date: 2025-09-25
+    published_date: 2025-09-30
+    tier: 4
+    basis: company_stated
+    url: https://www.sec.gov/Archives/edgar/data/1769628/000176962825000050/crwv-20250925.htm
+    raw_snippet: Meta has initially committed to pay the Company up to approximately $14.2 billion through December 14, 2031 under the Order Form
+    note: Meta -> CoreWeave reserved-capacity order form to 14 Dec 2031, option to expand. CoreWeave 8-K Item 1.01.
+  - series_key: circular.microsoft_nebius.contract_usd.pt
+    source_id: sec_edgar_filings
+    entity_id: nbis
+    value: 17400000000
+    unit: USD
+    as_of_date: 2025-09-08
+    published_date: 2025-09-08
+    tier: 4
+    basis: company_stated
+    url: https://www.sec.gov/Archives/edgar/data/1513845/000110465925088312/tm2525580d1_6k.htm
+    raw_snippet: the total contract value is about $17.4 billion through 2031
+    note: Microsoft -> Nebius dedicated GPU capacity (Vineland, NJ), 5-year term, up to US$19.4B. Nebius Form 6-K.
+  - series_key: circular.amazon_anthropic.equity_usd.pt
+    source_id: anthropic_news
+    entity_id: amzn
+    value: 8000000000
+    unit: USD
+    as_of_date: 2024-11-22
+    published_date: 2024-11-22
+    tier: 4
+    basis: company_stated
+    url: https://www.anthropic.com/news/anthropic-amazon-trainium
+    raw_snippet: This expanded partnership includes a new $4 billion investment from Amazon and establishes AWS as our primary cloud and training partner. This will bring Amazon's total investment in Anthropic to $8 billion
+    note: Amazon -> Anthropic cumulative equity US$8B; AWS primary cloud and training partner.
+  - series_key: circular.amazon_anthropic.equity_usd.pt
+    source_id: amazon_news
+    entity_id: amzn
+    value: 25000000000
+    unit: USD
+    as_of_date: 2026-04-20
+    published_date: 2026-04-20
+    tier: 4
+    basis: company_stated
+    url: https://www.aboutamazon.com/news/company-news/amazon-invests-additional-5-billion-anthropic-ai
+    raw_snippet: Amazon will invest $5 billion in Anthropic today and up to an additional $20 billion in the future tied to certain commercial milestones
+    note: 'Amazon -> Anthropic: US$5B now plus up to US$20B milestone-tied, on top of the earlier US$8B.'
+  - series_key: circular.amazon_anthropic.aws_commitment_usd.pt
+    source_id: amazon_news
+    entity_id: amzn
+    value: 100000000000
+    unit: USD
+    as_of_date: 2026-04-20
+    published_date: 2026-04-20
+    tier: 4
+    basis: company_stated
+    url: https://www.aboutamazon.com/news/company-news/amazon-invests-additional-5-billion-anthropic-ai
+    raw_snippet: a commitment from Anthropic to spend more than $100 billion over the next ten years on AWS technologies
+    note: Anthropic -> Amazon AWS spend commitment, more than US$100B over ten years (floor value); up to 5 GW of Trainium.

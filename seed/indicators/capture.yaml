@@ -160,3 +160,22 @@ indicators:
     related_indicators: [margin_stack_semis_share, cloud_rpo_backlog]
     published: true
     updated_at: 2026-09-10
+  - id: circular_financing_scale
+    name: Circular financing scale
+    definition: Cumulative signed vendor-financing commitments between AI-stack suppliers and their lab customers (equity stakes, guarantees, take-or-pay contracts, backstops), from filings and company announcements; derived metric circular_commitments_total. Letters of intent, talks and self-reported aggregates are on the ledger but excluded from the total.
+    why_it_matters: When Nvidia guarantees OpenAI's leases, Microsoft's backlog is half OpenAI, and Amazon funds the customer that commits to AWS, revenue and capital are the same dollars going round the stack. The ledger is where the circularity is filed.
+    proxy_types: [capital_flow]
+    unit: USD
+    cadence_expected: quarterly
+    metric: circular_commitments_total
+    band_input: "metric:circular_commitments_total"
+    layer_id: compute_physical
+    direction_rule: {periods: 3, dead_band: 20000000000, higher_is: concentrating, rationale: "Three quarters; moves under $20B are one small deal. A growing cumulative total concentrates the stack's risk in a few counterparties."}
+    leading_lagging: leading
+    tracker_interpretation: Over a trillion dollars of circular commitments in a year, most of it filed. The Nvidia 5-year CDS (on the ledger) is the market's stress read on it.
+    counterevidence: Commitments are not cash; "up to" amounts and ten-year floors are counted at face; equity in a customer is only circular if the customer spends it with the investor.
+    confidence: 75
+    proposed_status: concentrating
+    related_indicators: [cloud_rpo_backlog, semis_rent_concentration]
+    published: true
+    updated_at: 2026-09-10

@@ -71,3 +71,7 @@ export type Prediction = {
   status_events: StatusEvent[];
 };
 export const predictions = () => read<Prediction[]>("predictions.json");
+export type LedgerRow = Observation & { parties: string[]; instrument: string; obs_id: string; as_of_date: string; published_date: string; value_numeric: number | null; value_text: string | null; unit: string; tier: number; source_id: string; url: string; disputed: boolean; dispute_text: string | null; raw_snippet: string };
+export const ledger = () => read<LedgerRow[]>("ledger.json");
+export type ThesisVerdict = { id: string; name: string; holds: boolean | null; logic: string; conds: { text: string; holds: boolean | null; obs_ids: string[]; detail: string }[] };
+export const thesis = () => read<ThesisVerdict[]>("thesis.json");

@@ -15,6 +15,7 @@ from .analysis.direction import direction
 from .analysis.metrics import run_metrics
 from .ingest.connectors import CONNECTORS
 from .schema import StatusEvent, Tier
+from .thesis import render_md, run_all
 
 log = logging.getLogger("ai-tracker")
 
@@ -85,6 +86,27 @@ def cmd_evaluate(a: argparse.Namespace) -> int:
                 f"  proposed StatusEvent {ev.id}: fill `reason` in data/proposed_status_events.jsonl or delete the row"
             )
     st.write_jsonl(st.DATA / "proposed_status_events.jsonl", proposed)
+    verdicts = run_all(s)
+    st.write_jsonl(
+        st.DATA / "thesis.jsonl",
+        [
+            {
+                "id": v.id,
+                "name": v.name,
+                "holds": v.holds,
+                "logic": v.logic,
+                "conds": [
+                    {"text": c.text, "holds": c.holds, "obs_ids": c.obs_ids, "detail": c.detail}
+                    for c in v.conds
+                ],
+            }
+            for v in verdicts
+        ],
+    )
+    (st.Path("docs") / "thesis.md").write_text(render_md(verdicts, date.today()))
+    lines += [
+        f"thesis {v.id}: {({True: 'HOLDS', False: 'no', None: 'untestable'})[v.holds]}" for v in verdicts
+    ]
     summary = "\n".join(lines)
     print(summary)
     (st.DATA / "summary.md").write_text(

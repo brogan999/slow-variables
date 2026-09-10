@@ -2,11 +2,13 @@ import Link from "next/link";
 import { ChangelogList } from "@/components/Changelog";
 import { IndicatorCard } from "@/components/IndicatorCard";
 import { StockFlowDiagram } from "@/components/StockFlowDiagram";
-import { diffusion, obsIndex } from "@/lib/data";
+import { ThesisMonitor } from "@/components/ThesisMonitor";
+import { diffusion, obsIndex, thesis } from "@/lib/data";
 
 export default function DiffusionLens() {
   const d = diffusion();
   const idx = obsIndex();
+  const verdicts = thesis();
   return (
     <div className="flex flex-col gap-8">
       <section>
@@ -27,6 +29,10 @@ export default function DiffusionLens() {
             {b.indicators.length ? b.indicators.map((c) => <IndicatorCard key={c.id} c={c} obsIndex={idx} />) : <p className="text-sm text-muted rounded-lg border border-dashed border-grid p-3">No published indicator yet. Connectors for this stock land in the next milestone.</p>}
           </div>
         ))}
+      </section>
+      <section>
+        <h2 className="text-sm font-medium text-ink-2 mb-2">Thesis monitor <span className="text-muted">· the falsification rules, evaluated nightly</span></h2>
+        <ThesisMonitor verdicts={verdicts} obsIndex={idx} />
       </section>
       <section className="grid gap-6 md:grid-cols-2">
         <div>

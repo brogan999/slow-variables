@@ -203,3 +203,22 @@ metrics:
       SELECT (cq + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE AS as_of_date, layer_id, oi / sum(oi) OVER (PARTITION BY cq) AS value,
              list_distinct(flatten(list(ids) OVER (PARTITION BY cq))) AS obs_ids
       FROM by_layer
+  circular_commitments_total:
+    description: Cumulative signed circular / vendor-financing commitments in USD by quarter - equity stakes, guarantees, take-or-pay contracts and backstops between suppliers and their AI-lab customers - excluding letters of intent, talks and self-reported aggregates.
+    rationale: The scale of money that flows round the stack rather than out of it; the leading indicator of over- or under-build (P1 §6.4).
+    grain: [as_of_date]
+    unit: USD
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["circular.*_usd.pt"]
+    caveats: Mixes instruments (equity, guarantees, commitments) with different risk; "up to" and floor values taken at face; cumulative, so it only rises until a row is superseded.
+    sql: |
+      WITH deals AS (
+        SELECT as_of_date, value_numeric AS v, id FROM observations
+        WHERE series_key LIKE 'circular.%_usd.pt'
+          AND series_key NOT LIKE '%loi_usd%' AND series_key NOT LIKE '%talks_usd%' AND series_key NOT LIKE '%total_commitments%'
+          AND series_key NOT LIKE '%commercial_rpo%')
+      SELECT q_end AS as_of_date, sum(v) OVER (ORDER BY q_end) AS value,
+             flatten(list(ids) OVER (ORDER BY q_end)) AS obs_ids
+      FROM (SELECT (date_trunc('quarter', as_of_date) + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE AS q_end, sum(v) AS v, list(id ORDER BY id) AS ids
+            FROM deals GROUP BY 1)
