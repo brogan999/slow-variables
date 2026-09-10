@@ -1507,20 +1507,6 @@
        "as_of": "2026-05-03",
        "disputed": false,
        "grade": "A",
-       "high": null,
-       "low": null,
-       "obs_ids": [
-        "955af5a5e7888769"
-       ],
-       "series_key": "census_btos.us.ai_use_share_v2.2w",
-       "subject": "us",
-       "unit": "share",
-       "value": 0.198
-      },
-      {
-       "as_of": "2026-05-03",
-       "disputed": false,
-       "grade": "A",
        "high": 0.199704,
        "low": 0.19029600000000002,
        "obs_ids": [
@@ -1530,6 +1516,20 @@
        "subject": "us",
        "unit": "share",
        "value": 0.195
+      },
+      {
+       "as_of": "2026-05-03",
+       "disputed": false,
+       "grade": "A",
+       "high": null,
+       "low": null,
+       "obs_ids": [
+        "955af5a5e7888769"
+       ],
+       "series_key": "census_btos.us.ai_use_share_v2.2w",
+       "subject": "us",
+       "unit": "share",
+       "value": 0.198
       },
       {
        "as_of": "2026-05-17",
@@ -2867,52 +2867,81 @@
  "recent_status_events": [
   {
    "author": "evaluate",
-   "created_at": "2026-09-10T04:22:58.733590Z",
+   "created_at": "2026-09-10T04:54:27.857968Z",
    "evidence_ids": [
-    "fcf1e544553a333f"
+    "03f5354fa58eb2ef",
+    "0862bc678e313a4b",
+    "0d21fe651b2bd589",
+    "261c1f51f1f6b138",
+    "2eb7c897f31e5b3e",
+    "37e97a6fcbe1c2ca",
+    "39c8213ab061a5f7",
+    "3ce52d69876392b2",
+    "45bce91f047a6986",
+    "4a682b8c20f32dfe",
+    "57019089ce8aee7d",
+    "66fb934f83b26f09",
+    "679cbbe280732318",
+    "6af93ac0d37ce9a2",
+    "6b19d566b4f5cd57",
+    "72bcb9d860605a44",
+    "7a780fb077b3dc72",
+    "7c977050ff6a8cfe",
+    "858c619bbf5d9edd",
+    "88c30276fbfa9c93",
+    "8a2d699724cf4d5e",
+    "8b0a6a6d96e336e4",
+    "8b107841abf447ee",
+    "8dd5053cb4bc588d",
+    "96d016fade882963",
+    "a2aa2e4df87f5448",
+    "ae5278061f1da61c",
+    "cffc805c709a4421",
+    "e466aae4890e8f57",
+    "f5e42bc76c480641",
+    "f898fbb2a3bfb3f6",
+    "fa8c145cfc184e69"
    ],
-   "id": "94e0a387c6681f23",
-   "new_conf": 30,
-   "new_status": "emerging",
+   "id": "2c653b559d0c78e2",
+   "new_conf": 40,
+   "new_status": "not_yet_measurable",
    "old_conf": null,
    "old_status": null,
-   "reason": "Same OpenAI post: over half of successful 4-8 hour tasks in the last six months involved at least one human intervention, stored as the floor 0.5. That sits at the edge of the normal band (half or more), and tier 7 caps the status at emerging regardless. Humans still steer most long agent runs. Initial seed.",
-   "target_id": "rsi_intervention_rate_4_8h",
+   "reason": "First price snapshot, 10 Sep 2026: the cheapest METR-measured capability on OpenRouter costs about $0.30 per million prompt tokens per hour of 50% time horizon (16 models present in both datasets). The series records price change-points, so a direction needs four more of them; not yet measurable until then. Initial seed.",
+   "target_id": "model_price_per_horizon_hour",
    "target_type": "indicator"
   },
   {
    "author": "evaluate",
-   "created_at": "2026-09-10T04:22:58.725182Z",
+   "created_at": "2026-09-10T04:54:27.856138Z",
    "evidence_ids": [
-    "6cd4efa01b7ac70e"
+    "6905545954e2ad11"
    ],
-   "id": "4838e15c23b50f23",
-   "new_conf": 30,
+   "id": "ea9864fcbc3650fa",
+   "new_conf": 50,
    "new_status": "emerging",
    "old_conf": null,
    "old_status": null,
-   "reason": "OpenAI's 'Research acceleration' post (6 Sep 2026, via the Internet Archive snapshot because openai.com blocks the fetcher): 3.1 agent-workdays per human workday as of mid-August 2026, having crossed 1.0 in June. Above the fast band (3 or more), but a lab's statement about itself is tier 7 and caps the status at emerging. METR's modelling note puts Anthropic's researcher uplift from coding agents at over 2x; Anthropic's own system card says overall R&D uplift is well short of a doubling. No independent measurement exists yet. Initial seed.",
-   "target_id": "rsi_agent_workdays_per_human",
+   "reason": "Clouded Judgement weekly medians: EV/NTM revenue for public cloud software fell to about 3x in spring 2026 and recovered to 4.4x by 4 Sep 2026 (top five at 31x). Over eight weekly prints the median rose from 3.5x to 4.4x, beyond the 0.3x dead band, so the direction reads concentrating (the market pricing more durable rents into the application layer). Capped at emerging because a single analyst's basket is tier 6 and there is no second source yet. Initial seed.",
+   "target_id": "saas_multiples",
    "target_type": "indicator"
   },
   {
-   "author": "claude-initial-seed",
-   "created_at": "2026-09-10T03:51:16.080998Z",
+   "author": "evaluate",
+   "created_at": "2026-09-10T04:54:27.819544Z",
    "evidence_ids": [
-    "bb472afbee7ab7eb",
-    "7a1c89cb3f486453",
-    "29ead0fabdeb8fe8",
-    "f7a348d1769cecde",
-    "fe4fd5aab4976231"
+    "01a2687f35147ddf",
+    "5b9948898bd3d1b5",
+    "a26cee82e25e94ff"
    ],
-   "id": "a9768aa55acf5a56",
-   "new_conf": 70,
-   "new_status": "on_track",
+   "id": "9afa19bb95ddf86d",
+   "new_conf": 60,
+   "new_status": "dispersing",
    "old_conf": null,
    "old_status": null,
-   "reason": "Every adoption and adaptation indicator with a status sits inside its normal band: Census BTOS firm use 22.4% (normal under a third), BBD hours assisted 6.3% (normal single digits), BLS labour productivity 2.2% and private nonfarm TFP 0.8% (both at trend). The only reading outside a normal band is Ramp's paid-adoption share (56%, emerging on a tech-forward sample). No fast-band breach anywhere; the falsifying pattern (two adoption plus one adaptation indicator in the fast band for four readings) is nowhere near. Initial seed.",
-   "target_id": "nk_adoption_decades",
-   "target_type": "prediction"
+   "reason": "HHI across AWS, Google Cloud and Microsoft Intelligent Cloud segment revenue: 0.37 (Sep 2024) to 0.354 (Mar 2026), falling by more than the 200-point dead band over four quarters as Google Cloud grows fastest. Dispersing within the covered hyperscalers; Oracle and the neoclouds are outside the index, which would push it lower still. Intelligent Cloud bundles server products with Azure. Initial seed.",
+   "target_id": "cloud_hhi",
+   "target_type": "indicator"
   }
  ],
  "valves": [

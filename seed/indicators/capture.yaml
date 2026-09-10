@@ -102,22 +102,24 @@ indicators:
     published: true
     updated_at: 2026-09-10
   - id: enterprise_spend_by_layer
-    name: Enterprise generative-AI spend by layer (Menlo)
-    definition: Enterprise spend on generative AI in the US, total and application layer, from Menlo Ventures' annual survey.
-    why_it_matters: The only layer split of enterprise spend that is published; the application share is where the model-tax question starts.
+    name: Application layer's share of enterprise generative-AI spend (Menlo)
+    definition: Enterprise spend on generative-AI applications as a share of total enterprise generative-AI spend in the US, per Menlo Ventures' annual buyer survey (derived metric enterprise_app_spend_share).
+    why_it_matters: The only published layer split of enterprise dollars. A rising application share means buyers' money is landing above the model layer, where the model-tax question starts.
     proxy_types: [capital_flow]
-    unit: USD
+    unit: share
     cadence_expected: annual
     series_keys: ["menlo.us_enterprise.genai_spend_usd.fy", "menlo.us_enterprise.genai_app_spend_usd.fy"]
-    band_input: menlo.us_enterprise.genai_spend_usd.fy
+    metric: enterprise_app_spend_share
+    band_input: "metric:enterprise_app_spend_share"
     layer_id: deployment_application
-    direction_rule: {periods: 1, dead_band: 2000000000, higher_is: concentrating, rationale: "Annual; needs two waves before a direction can be read."}
+    direction_rule: {periods: 1, dead_band: 0.05, higher_is: concentrating, rationale: "Two annual waves, so the trend is one step; a move under five points is within survey error. Rising application share = value concentrating at the application layer."}
     leading_lagging: coincident
-    tracker_interpretation: One wave ingested; unpublished until the 2024 figure lands as a sourced row.
-    counterevidence: Survey of ~500 buyers; excludes chips, standalone inference and embedded features.
-    confidence: 60
-    proposed_status: not_yet_measurable
-    published: false
+    tracker_interpretation: Applications took a third of enterprise generative-AI dollars in 2024 and half in 2025; the money is moving up the stack even as chips keep the margin.
+    counterevidence: Survey of a few hundred buyers, not filings; scope excludes chips, standalone inference and embedded features, so the infrastructure denominator is understated; two waves only.
+    confidence: 55
+    proposed_status: emerging
+    related_indicators: [margin_stack_semis_share]
+    published: true
     updated_at: 2026-09-10
   - id: margin_stack_semis_share
     name: Semiconductors' share of stack operating income
@@ -177,5 +179,107 @@ indicators:
     confidence: 75
     proposed_status: concentrating
     related_indicators: [cloud_rpo_backlog, semis_rent_concentration]
+    published: true
+    updated_at: 2026-09-10
+  - id: semis_hhi
+    name: Concentration among covered chip filers (HHI)
+    definition: Herfindahl index of data-centre revenue between NVIDIA (Data Center segment) and AMD (Data Center segment), per calendar quarter, from filed segment disclosures. Derived metric hhi_by_layer, semis slice.
+    why_it_matters: Rents stay where concentration stays. AMD's data-centre ramp and custom silicon are the routes by which the chip layer's rent would erode; this is the first of them in filed numbers.
+    proxy_types: [market_structure]
+    unit: index
+    cadence_expected: quarterly
+    metric: hhi_by_layer
+    metric_dims: {layer_id: compute_semis}
+    band_input: "metric:hhi_by_layer"
+    layer_id: compute_physical
+    sublayer_id: semis
+    direction_rule: {periods: 4, dead_band: 0.02, higher_is: concentrating, rationale: "Four calendar quarters; a move under 200 HHI points is noise. Rising = the covered chip layer concentrating further."}
+    leading_lagging: leading
+    tracker_interpretation: Two filers only, so the level is near the top of the scale by construction; the direction is what carries information.
+    counterevidence: Broadcom, TSMC, memory and custom silicon are not covered, so the index overstates concentration; segment definitions differ between filers.
+    confidence: 60
+    proposed_status: unclear
+    related_indicators: [semis_rent_concentration, margin_stack_semis_share]
+    published: true
+    updated_at: 2026-09-10
+  - id: cloud_hhi
+    name: Concentration among covered cloud filers (HHI)
+    definition: Herfindahl index of segment revenue between AWS, Google Cloud and Microsoft Intelligent Cloud, per calendar quarter, from filed segment disclosures. Derived metric hhi_by_layer, cloud slice.
+    why_it_matters: Whether the cloud layer stays an oligopoly while labs and apps fragment is the P1 leading indicator of where capture flows next.
+    proxy_types: [market_structure]
+    unit: index
+    cadence_expected: quarterly
+    metric: hhi_by_layer
+    metric_dims: {layer_id: compute_cloud}
+    band_input: "metric:hhi_by_layer"
+    layer_id: compute_physical
+    sublayer_id: hyperscalers_neoclouds
+    direction_rule: {periods: 4, dead_band: 0.02, higher_is: concentrating, rationale: "Four calendar quarters; a move under 200 HHI points is noise."}
+    leading_lagging: leading
+    tracker_interpretation: Three filers, no neoclouds or Oracle; Intelligent Cloud bundles server products with Azure, which flatters Microsoft's share.
+    counterevidence: Partial coverage overstates concentration; Microsoft's segment is not pure cloud; quarters where any filer's segment is missing are dropped.
+    confidence: 60
+    proposed_status: dispersing
+    related_indicators: [cloud_segment_margins, cloud_rpo_backlog]
+    published: true
+    updated_at: 2026-09-10
+  - id: lab_hhi
+    name: Concentration of business AI spend across labs (Ramp, HHI)
+    definition: Herfindahl index over Ramp's share of US businesses paying each lab (Anthropic, OpenAI, xAI), normalised to sum to one, monthly. Derived metric hhi_by_layer, model slice.
+    why_it_matters: Multi-homing shrinks lock-in, which shrinks the labs' bargaining share; a falling index is the leading sign of model commoditisation in buyer behaviour.
+    proxy_types: [market_structure]
+    unit: index
+    cadence_expected: monthly
+    metric: hhi_by_layer
+    metric_dims: {layer_id: model}
+    band_input: "metric:hhi_by_layer"
+    layer_id: model
+    sublayer_id: frontier_labs
+    direction_rule: {periods: 4, dead_band: 0.02, higher_is: concentrating, rationale: "Four monthly readings; under 200 points is noise."}
+    leading_lagging: leading
+    tracker_interpretation: One monthly reading (July 2026) so far; unpublished until Ramp's next letters add the trend.
+    counterevidence: Shares are of businesses paying, not of dollars; Google and open-weight providers are not in Ramp's published cut.
+    confidence: 40
+    proposed_status: not_yet_measurable
+    related_indicators: [ramp_paid_ai_adoption]
+    published: false
+    updated_at: 2026-09-10
+  - id: saas_multiples
+    name: Public cloud software valuation multiples (Clouded Judgement)
+    definition: Median enterprise value to next-twelve-months revenue across public cloud software companies, weekly, as computed by Jamin Ball's Clouded Judgement; the top-five median is tracked alongside.
+    why_it_matters: The valuation multiple is the market's expectation of durable rent at the application layer. Compression toward low single digits prices in commoditisation by AI; recovery prices in apps keeping their surplus.
+    proxy_types: [market_structure, price]
+    unit: ratio
+    cadence_expected: weekly
+    series_keys: ["clouded_judgment.saas_public.ev_ntm_revenue_median.w", "clouded_judgment.saas_public_top5.ev_ntm_revenue_median.w"]
+    band_input: clouded_judgment.saas_public.ev_ntm_revenue_median.w
+    layer_id: deployment_application
+    direction_rule: {periods: 8, dead_band: 0.3, higher_is: concentrating, rationale: "Eight weekly prints (two months); a move under 0.3x of NTM revenue is market noise. Rising multiples = the market pricing more durable rents into the application layer."}
+    leading_lagging: leading
+    tracker_interpretation: The median multiple fell to about 3x in spring 2026 on the 'AI eats software' trade and has recovered to the mid-4s; the top five trade above 30x.
+    counterevidence: One analyst's basket and methodology; multiples move with rates as much as with AI; the basket is incumbents, not AI-native apps.
+    confidence: 50
+    proposed_status: emerging
+    related_indicators: [enterprise_spend_by_layer]
+    published: true
+    updated_at: 2026-09-10
+  - id: model_price_per_horizon_hour
+    name: Price per unit of capability (cheapest METR-hour on OpenRouter)
+    definition: For each price date, the lowest OpenRouter prompt price (USD per million tokens) divided by the model's latest METR 50% time horizon in hours, across models present in both datasets. Derived metric frontier_price_per_horizon_hour.
+    why_it_matters: Price per unit of capability is the lab layer's capture proxy. Falling means the surplus from better models is passed to applications and users; flat or rising means labs keep it.
+    proxy_types: [price]
+    unit: USD
+    cadence_expected: daily
+    metric: frontier_price_per_horizon_hour
+    band_input: "metric:frontier_price_per_horizon_hour"
+    layer_id: model
+    sublayer_id: frontier_labs
+    direction_rule: {periods: 4, dead_band: 0.02, higher_is: concentrating, rationale: "Four price change-points; a move under two cents per million tokens per horizon-hour is noise. Rising = labs keeping the surplus from capability gains."}
+    leading_lagging: coincident
+    tracker_interpretation: The series records price change-points from 10 September 2026; a direction needs several months of them.
+    counterevidence: One router's list prices, prompt tokens only; METR's horizon is software tasks under its suite, not general capability; the cheapest model per horizon-hour is a moving target as models are added.
+    confidence: 40
+    proposed_status: not_yet_measurable
+    related_indicators: [metr_horizon_50, lab_run_rates]
     published: true
     updated_at: 2026-09-10

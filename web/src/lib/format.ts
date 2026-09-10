@@ -9,7 +9,7 @@ export function fmt(v: number | null | undefined, unit?: string): string {
     case "USD": case "usd": {
       const a = Math.abs(v);
       const [d, s] = a >= 1e12 ? [v / 1e12, "T"] : a >= 1e9 ? [v / 1e9, "B"] : a >= 1e6 ? [v / 1e6, "M"] : a >= 1e3 ? [v / 1e3, "k"] : [v, ""];
-      return `$${Math.abs(d) >= 100 ? d.toFixed(0) : d.toFixed(1)}${s}`;
+      return `$${s ? (Math.abs(d) >= 100 ? d.toFixed(0) : d.toFixed(1)) : sig(d)}${s}`;
     }
     case "ratio": return `${sig(v)}×`;
     case "minutes": return v >= 60 ? `${(v / 60).toFixed(1)} h` : `${sig(v)} min`;

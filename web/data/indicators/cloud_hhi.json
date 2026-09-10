@@ -1,0 +1,398 @@
+{
+ "band_input": "metric:hhi_by_layer",
+ "band_rationale": null,
+ "band_value": {
+  "as_of": "2026-03-31",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "01a2687f35147ddf",
+   "5b9948898bd3d1b5",
+   "a26cee82e25e94ff"
+  ],
+  "value": 0.3541300505045857
+ },
+ "bucket_id": null,
+ "cadence_expected": "quarterly",
+ "confidence": 60,
+ "counterevidence": "Partial coverage overstates concentration; Microsoft's segment is not pure cloud; quarters where any filer's segment is missing are dropped.",
+ "crosswalk": [],
+ "definition": "Herfindahl index of segment revenue between AWS, Google Cloud and Microsoft Intelligent Cloud, per calendar quarter, from filed segment disclosures. Derived metric hhi_by_layer, cloud slice.",
+ "derived": [
+  {
+   "as_of_date": "2023-09-30",
+   "computed_at": "2026-09-10T04:54:27.620901Z",
+   "dims": {
+    "layer_id": "compute_cloud"
+   },
+   "formula_version": "1",
+   "id": "73790153bfa603e3",
+   "input_observation_ids": [
+    "12d2979e6ccdddc1",
+    "295fd031ce2866b6",
+    "fdddee5744bf273d"
+   ],
+   "metric": "hhi_by_layer",
+   "obs_ids": [
+    "12d2979e6ccdddc1",
+    "295fd031ce2866b6",
+    "fdddee5744bf273d"
+   ],
+   "value": 0.37841269196431765,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2024-03-31",
+   "computed_at": "2026-09-10T04:54:27.620901Z",
+   "dims": {
+    "layer_id": "compute_cloud"
+   },
+   "formula_version": "1",
+   "id": "bafacce6add5d1f0",
+   "input_observation_ids": [
+    "5630e062e0d86064",
+    "e8369d0c003c2466",
+    "ffce6f16d684267c"
+   ],
+   "metric": "hhi_by_layer",
+   "obs_ids": [
+    "5630e062e0d86064",
+    "e8369d0c003c2466",
+    "ffce6f16d684267c"
+   ],
+   "value": 0.3752920594465524,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2024-09-30",
+   "computed_at": "2026-09-10T04:54:27.620901Z",
+   "dims": {
+    "layer_id": "compute_cloud"
+   },
+   "formula_version": "1",
+   "id": "df821b0139f56783",
+   "input_observation_ids": [
+    "78e3a8bb65070e37",
+    "7a234cd5506c11a1",
+    "e4f122d1f53db3a8"
+   ],
+   "metric": "hhi_by_layer",
+   "obs_ids": [
+    "78e3a8bb65070e37",
+    "7a234cd5506c11a1",
+    "e4f122d1f53db3a8"
+   ],
+   "value": 0.36979659208870796,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-03-31",
+   "computed_at": "2026-09-10T04:54:27.620901Z",
+   "dims": {
+    "layer_id": "compute_cloud"
+   },
+   "formula_version": "1",
+   "id": "20abe5eb019c1498",
+   "input_observation_ids": [
+    "2f2dda9da987485e",
+    "5023e66b21818fde",
+    "d71a32c414d72e0b"
+   ],
+   "metric": "hhi_by_layer",
+   "obs_ids": [
+    "2f2dda9da987485e",
+    "5023e66b21818fde",
+    "d71a32c414d72e0b"
+   ],
+   "value": 0.3694816120661969,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-09-30",
+   "computed_at": "2026-09-10T04:54:27.620901Z",
+   "dims": {
+    "layer_id": "compute_cloud"
+   },
+   "formula_version": "1",
+   "id": "ba9273b73d45dac7",
+   "input_observation_ids": [
+    "0c0a639d7d53f326",
+    "4ed8ddca0961556e",
+    "d575d683afd39e24"
+   ],
+   "metric": "hhi_by_layer",
+   "obs_ids": [
+    "0c0a639d7d53f326",
+    "4ed8ddca0961556e",
+    "d575d683afd39e24"
+   ],
+   "value": 0.36377269976358306,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2026-03-31",
+   "computed_at": "2026-09-10T04:54:27.620901Z",
+   "dims": {
+    "layer_id": "compute_cloud"
+   },
+   "formula_version": "1",
+   "id": "0f5f10649fdabeb8",
+   "input_observation_ids": [
+    "01a2687f35147ddf",
+    "5b9948898bd3d1b5",
+    "a26cee82e25e94ff"
+   ],
+   "metric": "hhi_by_layer",
+   "obs_ids": [
+    "01a2687f35147ddf",
+    "5b9948898bd3d1b5",
+    "a26cee82e25e94ff"
+   ],
+   "value": 0.3541300505045857,
+   "value_high": null,
+   "value_low": null
+  }
+ ],
+ "direction": null,
+ "direction_rule": {
+  "dead_band": 0.02,
+  "higher_is": "concentrating",
+  "periods": 4,
+  "rationale": "Four calendar quarters; a move under 200 HHI points is noise."
+ },
+ "falsifying_band": null,
+ "fast_band": null,
+ "fits": [],
+ "flow_status": null,
+ "grade": "A",
+ "id": "cloud_hhi",
+ "latest": {
+  "as_of": "2026-03-31",
+  "dims": {
+   "layer_id": "compute_cloud"
+  },
+  "obs_ids": [
+   "01a2687f35147ddf",
+   "5b9948898bd3d1b5",
+   "a26cee82e25e94ff"
+  ],
+  "unit": "index",
+  "value": 0.3541300505045857
+ },
+ "layer_id": "compute_physical",
+ "leading_lagging": "leading",
+ "metric": "hhi_by_layer",
+ "metric_dims": {
+  "layer_id": "compute_cloud"
+ },
+ "n_observations": 18,
+ "name": "Concentration among covered cloud filers (HHI)",
+ "normal_band": null,
+ "override_note": null,
+ "points": [
+  {
+   "as_of": "2023-09-30",
+   "dims": {
+    "layer_id": "compute_cloud"
+   },
+   "obs_ids": [
+    "12d2979e6ccdddc1",
+    "295fd031ce2866b6",
+    "fdddee5744bf273d"
+   ],
+   "unit": "index",
+   "value": 0.37841269196431765
+  },
+  {
+   "as_of": "2024-03-31",
+   "dims": {
+    "layer_id": "compute_cloud"
+   },
+   "obs_ids": [
+    "5630e062e0d86064",
+    "e8369d0c003c2466",
+    "ffce6f16d684267c"
+   ],
+   "unit": "index",
+   "value": 0.3752920594465524
+  },
+  {
+   "as_of": "2024-09-30",
+   "dims": {
+    "layer_id": "compute_cloud"
+   },
+   "obs_ids": [
+    "78e3a8bb65070e37",
+    "7a234cd5506c11a1",
+    "e4f122d1f53db3a8"
+   ],
+   "unit": "index",
+   "value": 0.36979659208870796
+  },
+  {
+   "as_of": "2025-03-31",
+   "dims": {
+    "layer_id": "compute_cloud"
+   },
+   "obs_ids": [
+    "2f2dda9da987485e",
+    "5023e66b21818fde",
+    "d71a32c414d72e0b"
+   ],
+   "unit": "index",
+   "value": 0.3694816120661969
+  },
+  {
+   "as_of": "2025-09-30",
+   "dims": {
+    "layer_id": "compute_cloud"
+   },
+   "obs_ids": [
+    "0c0a639d7d53f326",
+    "4ed8ddca0961556e",
+    "d575d683afd39e24"
+   ],
+   "unit": "index",
+   "value": 0.36377269976358306
+  },
+  {
+   "as_of": "2026-03-31",
+   "dims": {
+    "layer_id": "compute_cloud"
+   },
+   "obs_ids": [
+    "01a2687f35147ddf",
+    "5b9948898bd3d1b5",
+    "a26cee82e25e94ff"
+   ],
+   "unit": "index",
+   "value": 0.3541300505045857
+  }
+ ],
+ "proposed_status": "stable",
+ "proxy_types": [
+  "market_structure"
+ ],
+ "published": true,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "cloud_segment_margins",
+  "cloud_rpo_backlog"
+ ],
+ "related_metrics": [],
+ "related_predictions": [],
+ "series": [],
+ "series_keys": [],
+ "sparkline": [
+  {
+   "as_of": "2023-09-30",
+   "dims": {
+    "layer_id": "compute_cloud"
+   },
+   "obs_ids": [
+    "12d2979e6ccdddc1",
+    "295fd031ce2866b6",
+    "fdddee5744bf273d"
+   ],
+   "unit": "index",
+   "value": 0.37841269196431765
+  },
+  {
+   "as_of": "2024-03-31",
+   "dims": {
+    "layer_id": "compute_cloud"
+   },
+   "obs_ids": [
+    "5630e062e0d86064",
+    "e8369d0c003c2466",
+    "ffce6f16d684267c"
+   ],
+   "unit": "index",
+   "value": 0.3752920594465524
+  },
+  {
+   "as_of": "2024-09-30",
+   "dims": {
+    "layer_id": "compute_cloud"
+   },
+   "obs_ids": [
+    "78e3a8bb65070e37",
+    "7a234cd5506c11a1",
+    "e4f122d1f53db3a8"
+   ],
+   "unit": "index",
+   "value": 0.36979659208870796
+  },
+  {
+   "as_of": "2025-03-31",
+   "dims": {
+    "layer_id": "compute_cloud"
+   },
+   "obs_ids": [
+    "2f2dda9da987485e",
+    "5023e66b21818fde",
+    "d71a32c414d72e0b"
+   ],
+   "unit": "index",
+   "value": 0.3694816120661969
+  },
+  {
+   "as_of": "2025-09-30",
+   "dims": {
+    "layer_id": "compute_cloud"
+   },
+   "obs_ids": [
+    "0c0a639d7d53f326",
+    "4ed8ddca0961556e",
+    "d575d683afd39e24"
+   ],
+   "unit": "index",
+   "value": 0.36377269976358306
+  },
+  {
+   "as_of": "2026-03-31",
+   "dims": {
+    "layer_id": "compute_cloud"
+   },
+   "obs_ids": [
+    "01a2687f35147ddf",
+    "5b9948898bd3d1b5",
+    "a26cee82e25e94ff"
+   ],
+   "unit": "index",
+   "value": 0.3541300505045857
+  }
+ ],
+ "stale_as_of": null,
+ "status": "dispersing",
+ "status_events": [
+  {
+   "author": "evaluate",
+   "created_at": "2026-09-10T04:54:27.819544Z",
+   "evidence_ids": [
+    "01a2687f35147ddf",
+    "5b9948898bd3d1b5",
+    "a26cee82e25e94ff"
+   ],
+   "id": "9afa19bb95ddf86d",
+   "new_conf": 60,
+   "new_status": "dispersing",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "HHI across AWS, Google Cloud and Microsoft Intelligent Cloud segment revenue: 0.37 (Sep 2024) to 0.354 (Mar 2026), falling by more than the 200-point dead band over four quarters as Google Cloud grows fastest. Dispersing within the covered hyperscalers; Oracle and the neoclouds are outside the index, which would push it lower still. Intelligent Cloud bundles server products with Azure. Initial seed.",
+   "target_id": "cloud_hhi",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": "hyperscalers_neoclouds",
+ "tracker_interpretation": "Three filers, no neoclouds or Oracle; Intelligent Cloud bundles server products with Azure, which flatters Microsoft's share.",
+ "unit": "index",
+ "updated_at": "2026-09-10",
+ "valve_measured": null,
+ "why_it_matters": "Whether the cloud layer stays an oligopoly while labs and apps fragment is the P1 leading indicator of where capture flows next."
+}

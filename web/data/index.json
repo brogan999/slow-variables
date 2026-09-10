@@ -1440,47 +1440,49 @@
   },
   {
    "bucket_id": null,
-   "confidence": null,
+   "confidence": 55,
    "grade": "B",
    "id": "enterprise_spend_by_layer",
    "latest": {
     "as_of": "2025-12-31",
-    "disputed": false,
-    "grade": "B",
-    "high": null,
-    "low": null,
+    "dims": {},
     "obs_ids": [
-     "6012e72e8105bfc4"
+     "6012e72e8105bfc4",
+     "790ba59ba69990e5"
     ],
-    "series_key": "menlo.us_enterprise.genai_spend_usd.fy",
-    "subject": "us_enterprise",
-    "unit": "USD",
-    "value": 37000000000.0
+    "unit": "share",
+    "value": 0.5135135135135135
    },
    "layer_id": "deployment_application",
    "leading_lagging": "coincident",
-   "n_observations": 2,
-   "name": "Enterprise generative-AI spend by layer (Menlo)",
-   "published": false,
+   "n_observations": 4,
+   "name": "Application layer's share of enterprise generative-AI spend (Menlo)",
+   "published": true,
    "sparkline": [
     {
-     "as_of": "2025-12-31",
-     "disputed": false,
-     "grade": "B",
-     "high": null,
-     "low": null,
+     "as_of": "2024-12-31",
+     "dims": {},
      "obs_ids": [
-      "6012e72e8105bfc4"
+      "eb8d37a9275b0137",
+      "fbc90648f2532e9c"
      ],
-     "series_key": "menlo.us_enterprise.genai_spend_usd.fy",
-     "subject": "us_enterprise",
-     "unit": "USD",
-     "value": 37000000000.0
+     "unit": "share",
+     "value": 0.3333333333333333
+    },
+    {
+     "as_of": "2025-12-31",
+     "dims": {},
+     "obs_ids": [
+      "6012e72e8105bfc4",
+      "790ba59ba69990e5"
+     ],
+     "unit": "share",
+     "value": 0.5135135135135135
     }
    ],
    "stale_as_of": null,
-   "status": null,
-   "unit": "USD",
+   "status": "emerging",
+   "unit": "share",
    "valve_measured": null
   },
   {
@@ -1924,6 +1926,667 @@
    ],
    "stale_as_of": null,
    "status": "concentrating",
+   "unit": "USD",
+   "valve_measured": null
+  },
+  {
+   "bucket_id": null,
+   "confidence": 60,
+   "grade": "A",
+   "id": "semis_hhi",
+   "latest": {
+    "as_of": "2026-06-30",
+    "dims": {
+     "layer_id": "compute_semis"
+    },
+    "obs_ids": [
+     "005d040fe4b816e0",
+     "2faa719b05b9c22a"
+    ],
+    "unit": "index",
+    "value": 0.8495101795262834
+   },
+   "layer_id": "compute_physical",
+   "leading_lagging": "leading",
+   "n_observations": 13,
+   "name": "Concentration among covered chip filers (HHI)",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2023-09-30",
+     "dims": {
+      "layer_id": "compute_semis"
+     },
+     "obs_ids": [
+      "196f2f0424de7a94",
+      "5deaa5e9e8ddd24e",
+      "855ffb049e696409"
+     ],
+     "unit": "index",
+     "value": 0.6191019423549491
+    },
+    {
+     "as_of": "2024-06-30",
+     "dims": {
+      "layer_id": "compute_semis"
+     },
+     "obs_ids": [
+      "09d6b6a7052c2cfb",
+      "6cb012f77bd0712e"
+     ],
+     "unit": "index",
+     "value": 0.8017277901600692
+    },
+    {
+     "as_of": "2024-09-30",
+     "dims": {
+      "layer_id": "compute_semis"
+     },
+     "obs_ids": [
+      "358f0bff93532e9e",
+      "35ee16d551982cd1"
+     ],
+     "unit": "index",
+     "value": 0.7903066176210161
+    },
+    {
+     "as_of": "2025-06-30",
+     "dims": {
+      "layer_id": "compute_semis"
+     },
+     "obs_ids": [
+      "1e5e52fcf38b8f42",
+      "944782759e2d02d3"
+     ],
+     "unit": "index",
+     "value": 0.8587016201417834
+    },
+    {
+     "as_of": "2025-09-30",
+     "dims": {
+      "layer_id": "compute_semis"
+     },
+     "obs_ids": [
+      "8991d1b8489b9697",
+      "fbc2a23860888eb2"
+     ],
+     "unit": "index",
+     "value": 0.8271775984078173
+    },
+    {
+     "as_of": "2026-06-30",
+     "dims": {
+      "layer_id": "compute_semis"
+     },
+     "obs_ids": [
+      "005d040fe4b816e0",
+      "2faa719b05b9c22a"
+     ],
+     "unit": "index",
+     "value": 0.8495101795262834
+    }
+   ],
+   "stale_as_of": null,
+   "status": "unclear",
+   "unit": "index",
+   "valve_measured": null
+  },
+  {
+   "bucket_id": null,
+   "confidence": 60,
+   "grade": "A",
+   "id": "cloud_hhi",
+   "latest": {
+    "as_of": "2026-03-31",
+    "dims": {
+     "layer_id": "compute_cloud"
+    },
+    "obs_ids": [
+     "01a2687f35147ddf",
+     "5b9948898bd3d1b5",
+     "a26cee82e25e94ff"
+    ],
+    "unit": "index",
+    "value": 0.3541300505045857
+   },
+   "layer_id": "compute_physical",
+   "leading_lagging": "leading",
+   "n_observations": 18,
+   "name": "Concentration among covered cloud filers (HHI)",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2023-09-30",
+     "dims": {
+      "layer_id": "compute_cloud"
+     },
+     "obs_ids": [
+      "12d2979e6ccdddc1",
+      "295fd031ce2866b6",
+      "fdddee5744bf273d"
+     ],
+     "unit": "index",
+     "value": 0.37841269196431765
+    },
+    {
+     "as_of": "2024-03-31",
+     "dims": {
+      "layer_id": "compute_cloud"
+     },
+     "obs_ids": [
+      "5630e062e0d86064",
+      "e8369d0c003c2466",
+      "ffce6f16d684267c"
+     ],
+     "unit": "index",
+     "value": 0.3752920594465524
+    },
+    {
+     "as_of": "2024-09-30",
+     "dims": {
+      "layer_id": "compute_cloud"
+     },
+     "obs_ids": [
+      "78e3a8bb65070e37",
+      "7a234cd5506c11a1",
+      "e4f122d1f53db3a8"
+     ],
+     "unit": "index",
+     "value": 0.36979659208870796
+    },
+    {
+     "as_of": "2025-03-31",
+     "dims": {
+      "layer_id": "compute_cloud"
+     },
+     "obs_ids": [
+      "2f2dda9da987485e",
+      "5023e66b21818fde",
+      "d71a32c414d72e0b"
+     ],
+     "unit": "index",
+     "value": 0.3694816120661969
+    },
+    {
+     "as_of": "2025-09-30",
+     "dims": {
+      "layer_id": "compute_cloud"
+     },
+     "obs_ids": [
+      "0c0a639d7d53f326",
+      "4ed8ddca0961556e",
+      "d575d683afd39e24"
+     ],
+     "unit": "index",
+     "value": 0.36377269976358306
+    },
+    {
+     "as_of": "2026-03-31",
+     "dims": {
+      "layer_id": "compute_cloud"
+     },
+     "obs_ids": [
+      "01a2687f35147ddf",
+      "5b9948898bd3d1b5",
+      "a26cee82e25e94ff"
+     ],
+     "unit": "index",
+     "value": 0.3541300505045857
+    }
+   ],
+   "stale_as_of": null,
+   "status": "dispersing",
+   "unit": "index",
+   "valve_measured": null
+  },
+  {
+   "bucket_id": null,
+   "confidence": null,
+   "grade": "B",
+   "id": "lab_hhi",
+   "latest": {
+    "as_of": "2026-07-31",
+    "dims": {
+     "layer_id": "model"
+    },
+    "obs_ids": [
+     "a60353bc84a2f44a",
+     "bb43f3d481ea9fae",
+     "f68d1904eb7f0c04"
+    ],
+    "unit": "index",
+    "value": 0.4582342605841259
+   },
+   "layer_id": "model",
+   "leading_lagging": "leading",
+   "n_observations": 3,
+   "name": "Concentration of business AI spend across labs (Ramp, HHI)",
+   "published": false,
+   "sparkline": [
+    {
+     "as_of": "2026-07-31",
+     "dims": {
+      "layer_id": "model"
+     },
+     "obs_ids": [
+      "a60353bc84a2f44a",
+      "bb43f3d481ea9fae",
+      "f68d1904eb7f0c04"
+     ],
+     "unit": "index",
+     "value": 0.4582342605841259
+    }
+   ],
+   "stale_as_of": null,
+   "status": null,
+   "unit": "index",
+   "valve_measured": null
+  },
+  {
+   "bucket_id": null,
+   "confidence": 50,
+   "grade": "B",
+   "id": "saas_multiples",
+   "latest": {
+    "as_of": "2026-09-04",
+    "disputed": false,
+    "grade": "B",
+    "high": null,
+    "low": null,
+    "obs_ids": [
+     "6905545954e2ad11"
+    ],
+    "series_key": "clouded_judgment.saas_public.ev_ntm_revenue_median.w",
+    "subject": "saas_public",
+    "unit": "ratio",
+    "value": 4.4
+   },
+   "layer_id": "deployment_application",
+   "leading_lagging": "leading",
+   "n_observations": 40,
+   "name": "Public cloud software valuation multiples (Clouded Judgement)",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2026-04-24",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "5c8fa4daf06c5834"
+     ],
+     "series_key": "clouded_judgment.saas_public.ev_ntm_revenue_median.w",
+     "subject": "saas_public",
+     "unit": "ratio",
+     "value": 3.0
+    },
+    {
+     "as_of": "2026-05-01",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "19a13605d01abb40"
+     ],
+     "series_key": "clouded_judgment.saas_public.ev_ntm_revenue_median.w",
+     "subject": "saas_public",
+     "unit": "ratio",
+     "value": 3.2
+    },
+    {
+     "as_of": "2026-05-08",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "325f19d7dfe6b6c7"
+     ],
+     "series_key": "clouded_judgment.saas_public.ev_ntm_revenue_median.w",
+     "subject": "saas_public",
+     "unit": "ratio",
+     "value": 3.2
+    },
+    {
+     "as_of": "2026-05-15",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "3097a3844129f243"
+     ],
+     "series_key": "clouded_judgment.saas_public.ev_ntm_revenue_median.w",
+     "subject": "saas_public",
+     "unit": "ratio",
+     "value": 3.1
+    },
+    {
+     "as_of": "2026-05-22",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "3171fd7fdcad2bb8"
+     ],
+     "series_key": "clouded_judgment.saas_public.ev_ntm_revenue_median.w",
+     "subject": "saas_public",
+     "unit": "ratio",
+     "value": 3.2
+    },
+    {
+     "as_of": "2026-05-29",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "315f853992a01c8f"
+     ],
+     "series_key": "clouded_judgment.saas_public.ev_ntm_revenue_median.w",
+     "subject": "saas_public",
+     "unit": "ratio",
+     "value": 3.2
+    },
+    {
+     "as_of": "2026-06-05",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "9b51a87b3f01f289"
+     ],
+     "series_key": "clouded_judgment.saas_public.ev_ntm_revenue_median.w",
+     "subject": "saas_public",
+     "unit": "ratio",
+     "value": 3.4
+    },
+    {
+     "as_of": "2026-06-12",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "e05f3adab3953024"
+     ],
+     "series_key": "clouded_judgment.saas_public.ev_ntm_revenue_median.w",
+     "subject": "saas_public",
+     "unit": "ratio",
+     "value": 3.1
+    },
+    {
+     "as_of": "2026-06-19",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "8bfef103edc5f5d3"
+     ],
+     "series_key": "clouded_judgment.saas_public.ev_ntm_revenue_median.w",
+     "subject": "saas_public",
+     "unit": "ratio",
+     "value": 2.9
+    },
+    {
+     "as_of": "2026-06-26",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "01609f165006b3ad"
+     ],
+     "series_key": "clouded_judgment.saas_public.ev_ntm_revenue_median.w",
+     "subject": "saas_public",
+     "unit": "ratio",
+     "value": 2.9
+    },
+    {
+     "as_of": "2026-07-03",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "d526c22113b3f024"
+     ],
+     "series_key": "clouded_judgment.saas_public.ev_ntm_revenue_median.w",
+     "subject": "saas_public",
+     "unit": "ratio",
+     "value": 3.5
+    },
+    {
+     "as_of": "2026-07-10",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "226408a3ac3c1ff7"
+     ],
+     "series_key": "clouded_judgment.saas_public.ev_ntm_revenue_median.w",
+     "subject": "saas_public",
+     "unit": "ratio",
+     "value": 3.5
+    },
+    {
+     "as_of": "2026-07-17",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "ab429388c6ece786"
+     ],
+     "series_key": "clouded_judgment.saas_public.ev_ntm_revenue_median.w",
+     "subject": "saas_public",
+     "unit": "ratio",
+     "value": 3.7
+    },
+    {
+     "as_of": "2026-07-24",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "d35bee7371fa6b21"
+     ],
+     "series_key": "clouded_judgment.saas_public.ev_ntm_revenue_median.w",
+     "subject": "saas_public",
+     "unit": "ratio",
+     "value": 3.3
+    },
+    {
+     "as_of": "2026-07-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "6352c36780b51251"
+     ],
+     "series_key": "clouded_judgment.saas_public.ev_ntm_revenue_median.w",
+     "subject": "saas_public",
+     "unit": "ratio",
+     "value": 3.8
+    },
+    {
+     "as_of": "2026-08-07",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "3bbe2611e53ce4c3"
+     ],
+     "series_key": "clouded_judgment.saas_public.ev_ntm_revenue_median.w",
+     "subject": "saas_public",
+     "unit": "ratio",
+     "value": 4.1
+    },
+    {
+     "as_of": "2026-08-14",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "0755d9bdf7af8e3c"
+     ],
+     "series_key": "clouded_judgment.saas_public.ev_ntm_revenue_median.w",
+     "subject": "saas_public",
+     "unit": "ratio",
+     "value": 4.4
+    },
+    {
+     "as_of": "2026-08-21",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "a41d484babc59e35"
+     ],
+     "series_key": "clouded_judgment.saas_public.ev_ntm_revenue_median.w",
+     "subject": "saas_public",
+     "unit": "ratio",
+     "value": 4.3
+    },
+    {
+     "as_of": "2026-08-28",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "123e97f8a4bceb04"
+     ],
+     "series_key": "clouded_judgment.saas_public.ev_ntm_revenue_median.w",
+     "subject": "saas_public",
+     "unit": "ratio",
+     "value": 4.4
+    },
+    {
+     "as_of": "2026-09-04",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "6905545954e2ad11"
+     ],
+     "series_key": "clouded_judgment.saas_public.ev_ntm_revenue_median.w",
+     "subject": "saas_public",
+     "unit": "ratio",
+     "value": 4.4
+    }
+   ],
+   "stale_as_of": null,
+   "status": "emerging",
+   "unit": "ratio",
+   "valve_measured": null
+  },
+  {
+   "bucket_id": null,
+   "confidence": 40,
+   "grade": "A",
+   "id": "model_price_per_horizon_hour",
+   "latest": {
+    "as_of": "2026-09-10",
+    "dims": {},
+    "obs_ids": [
+     "03f5354fa58eb2ef",
+     "0862bc678e313a4b",
+     "0d21fe651b2bd589",
+     "261c1f51f1f6b138",
+     "2eb7c897f31e5b3e",
+     "37e97a6fcbe1c2ca",
+     "39c8213ab061a5f7",
+     "3ce52d69876392b2",
+     "45bce91f047a6986",
+     "4a682b8c20f32dfe",
+     "57019089ce8aee7d",
+     "66fb934f83b26f09",
+     "679cbbe280732318",
+     "6af93ac0d37ce9a2",
+     "6b19d566b4f5cd57",
+     "72bcb9d860605a44",
+     "7a780fb077b3dc72",
+     "7c977050ff6a8cfe",
+     "858c619bbf5d9edd",
+     "88c30276fbfa9c93",
+     "8a2d699724cf4d5e",
+     "8b0a6a6d96e336e4",
+     "8b107841abf447ee",
+     "8dd5053cb4bc588d",
+     "96d016fade882963",
+     "a2aa2e4df87f5448",
+     "ae5278061f1da61c",
+     "cffc805c709a4421",
+     "e466aae4890e8f57",
+     "f5e42bc76c480641",
+     "f898fbb2a3bfb3f6",
+     "fa8c145cfc184e69"
+    ],
+    "unit": "USD",
+    "value": 0.2980843380067223
+   },
+   "layer_id": "model",
+   "leading_lagging": "coincident",
+   "n_observations": 32,
+   "name": "Price per unit of capability (cheapest METR-hour on OpenRouter)",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2026-09-10",
+     "dims": {},
+     "obs_ids": [
+      "03f5354fa58eb2ef",
+      "0862bc678e313a4b",
+      "0d21fe651b2bd589",
+      "261c1f51f1f6b138",
+      "2eb7c897f31e5b3e",
+      "37e97a6fcbe1c2ca",
+      "39c8213ab061a5f7",
+      "3ce52d69876392b2",
+      "45bce91f047a6986",
+      "4a682b8c20f32dfe",
+      "57019089ce8aee7d",
+      "66fb934f83b26f09",
+      "679cbbe280732318",
+      "6af93ac0d37ce9a2",
+      "6b19d566b4f5cd57",
+      "72bcb9d860605a44",
+      "7a780fb077b3dc72",
+      "7c977050ff6a8cfe",
+      "858c619bbf5d9edd",
+      "88c30276fbfa9c93",
+      "8a2d699724cf4d5e",
+      "8b0a6a6d96e336e4",
+      "8b107841abf447ee",
+      "8dd5053cb4bc588d",
+      "96d016fade882963",
+      "a2aa2e4df87f5448",
+      "ae5278061f1da61c",
+      "cffc805c709a4421",
+      "e466aae4890e8f57",
+      "f5e42bc76c480641",
+      "f898fbb2a3bfb3f6",
+      "fa8c145cfc184e69"
+     ],
+     "unit": "USD",
+     "value": 0.2980843380067223
+    }
+   ],
+   "stale_as_of": null,
+   "status": "not_yet_measurable",
    "unit": "USD",
    "valve_measured": null
   },
@@ -3882,20 +4545,6 @@
      "as_of": "2026-05-03",
      "disputed": false,
      "grade": "A",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "955af5a5e7888769"
-     ],
-     "series_key": "census_btos.us.ai_use_share_v2.2w",
-     "subject": "us",
-     "unit": "share",
-     "value": 0.198
-    },
-    {
-     "as_of": "2026-05-03",
-     "disputed": false,
-     "grade": "A",
      "high": 0.199704,
      "low": 0.19029600000000002,
      "obs_ids": [
@@ -3905,6 +4554,20 @@
      "subject": "us",
      "unit": "share",
      "value": 0.195
+    },
+    {
+     "as_of": "2026-05-03",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "955af5a5e7888769"
+     ],
+     "series_key": "census_btos.us.ai_use_share_v2.2w",
+     "subject": "us",
+     "unit": "share",
+     "value": 0.198
     },
     {
      "as_of": "2026-05-17",

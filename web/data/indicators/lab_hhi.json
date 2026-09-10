@@ -1,0 +1,134 @@
+{
+ "band_input": "metric:hhi_by_layer",
+ "band_rationale": null,
+ "band_value": {
+  "as_of": "2026-07-31",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "a60353bc84a2f44a",
+   "bb43f3d481ea9fae",
+   "f68d1904eb7f0c04"
+  ],
+  "value": 0.4582342605841259
+ },
+ "bucket_id": null,
+ "cadence_expected": "monthly",
+ "confidence": null,
+ "counterevidence": "Shares are of businesses paying, not of dollars; Google and open-weight providers are not in Ramp's published cut.",
+ "crosswalk": [],
+ "definition": "Herfindahl index over Ramp's share of US businesses paying each lab (Anthropic, OpenAI, xAI), normalised to sum to one, monthly. Derived metric hhi_by_layer, model slice.",
+ "derived": [
+  {
+   "as_of_date": "2026-07-31",
+   "computed_at": "2026-09-10T04:54:27.620901Z",
+   "dims": {
+    "layer_id": "model"
+   },
+   "formula_version": "1",
+   "id": "31678138bea16a9e",
+   "input_observation_ids": [
+    "a60353bc84a2f44a",
+    "bb43f3d481ea9fae",
+    "f68d1904eb7f0c04"
+   ],
+   "metric": "hhi_by_layer",
+   "obs_ids": [
+    "a60353bc84a2f44a",
+    "bb43f3d481ea9fae",
+    "f68d1904eb7f0c04"
+   ],
+   "value": 0.4582342605841259,
+   "value_high": null,
+   "value_low": null
+  }
+ ],
+ "direction": null,
+ "direction_rule": {
+  "dead_band": 0.02,
+  "higher_is": "concentrating",
+  "periods": 4,
+  "rationale": "Four monthly readings; under 200 points is noise."
+ },
+ "falsifying_band": null,
+ "fast_band": null,
+ "fits": [],
+ "flow_status": null,
+ "grade": "B",
+ "id": "lab_hhi",
+ "latest": {
+  "as_of": "2026-07-31",
+  "dims": {
+   "layer_id": "model"
+  },
+  "obs_ids": [
+   "a60353bc84a2f44a",
+   "bb43f3d481ea9fae",
+   "f68d1904eb7f0c04"
+  ],
+  "unit": "index",
+  "value": 0.4582342605841259
+ },
+ "layer_id": "model",
+ "leading_lagging": "leading",
+ "metric": "hhi_by_layer",
+ "metric_dims": {
+  "layer_id": "model"
+ },
+ "n_observations": 3,
+ "name": "Concentration of business AI spend across labs (Ramp, HHI)",
+ "normal_band": null,
+ "override_note": null,
+ "points": [
+  {
+   "as_of": "2026-07-31",
+   "dims": {
+    "layer_id": "model"
+   },
+   "obs_ids": [
+    "a60353bc84a2f44a",
+    "bb43f3d481ea9fae",
+    "f68d1904eb7f0c04"
+   ],
+   "unit": "index",
+   "value": 0.4582342605841259
+  }
+ ],
+ "proposed_status": "not_yet_measurable",
+ "proxy_types": [
+  "market_structure"
+ ],
+ "published": false,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "ramp_paid_ai_adoption"
+ ],
+ "related_metrics": [],
+ "related_predictions": [],
+ "series": [],
+ "series_keys": [],
+ "sparkline": [
+  {
+   "as_of": "2026-07-31",
+   "dims": {
+    "layer_id": "model"
+   },
+   "obs_ids": [
+    "a60353bc84a2f44a",
+    "bb43f3d481ea9fae",
+    "f68d1904eb7f0c04"
+   ],
+   "unit": "index",
+   "value": 0.4582342605841259
+  }
+ ],
+ "stale_as_of": null,
+ "status": null,
+ "status_events": [],
+ "sublayer_id": "frontier_labs",
+ "tracker_interpretation": "One monthly reading (July 2026) so far; unpublished until Ramp's next letters add the trend.",
+ "unit": "index",
+ "updated_at": "2026-09-10",
+ "valve_measured": null,
+ "why_it_matters": "Multi-homing shrinks lock-in, which shrinks the labs' bargaining share; a falling index is the leading sign of model commoditisation in buyer behaviour."
+}

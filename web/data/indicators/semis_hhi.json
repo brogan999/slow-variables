@@ -1,0 +1,375 @@
+{
+ "band_input": "metric:hhi_by_layer",
+ "band_rationale": null,
+ "band_value": {
+  "as_of": "2026-06-30",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "005d040fe4b816e0",
+   "2faa719b05b9c22a"
+  ],
+  "value": 0.8495101795262834
+ },
+ "bucket_id": null,
+ "cadence_expected": "quarterly",
+ "confidence": 60,
+ "counterevidence": "Broadcom, TSMC, memory and custom silicon are not covered, so the index overstates concentration; segment definitions differ between filers.",
+ "crosswalk": [],
+ "definition": "Herfindahl index of data-centre revenue between NVIDIA (Data Center segment) and AMD (Data Center segment), per calendar quarter, from filed segment disclosures. Derived metric hhi_by_layer, semis slice.",
+ "derived": [
+  {
+   "as_of_date": "2023-09-30",
+   "computed_at": "2026-09-10T04:54:27.620901Z",
+   "dims": {
+    "layer_id": "compute_semis"
+   },
+   "formula_version": "1",
+   "id": "8c3c7913e3fd47bd",
+   "input_observation_ids": [
+    "196f2f0424de7a94",
+    "5deaa5e9e8ddd24e",
+    "855ffb049e696409"
+   ],
+   "metric": "hhi_by_layer",
+   "obs_ids": [
+    "196f2f0424de7a94",
+    "5deaa5e9e8ddd24e",
+    "855ffb049e696409"
+   ],
+   "value": 0.6191019423549491,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2024-06-30",
+   "computed_at": "2026-09-10T04:54:27.620901Z",
+   "dims": {
+    "layer_id": "compute_semis"
+   },
+   "formula_version": "1",
+   "id": "4e35b0a61ed4d0ba",
+   "input_observation_ids": [
+    "09d6b6a7052c2cfb",
+    "6cb012f77bd0712e"
+   ],
+   "metric": "hhi_by_layer",
+   "obs_ids": [
+    "09d6b6a7052c2cfb",
+    "6cb012f77bd0712e"
+   ],
+   "value": 0.8017277901600692,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2024-09-30",
+   "computed_at": "2026-09-10T04:54:27.620901Z",
+   "dims": {
+    "layer_id": "compute_semis"
+   },
+   "formula_version": "1",
+   "id": "3682a6cfb5dbc678",
+   "input_observation_ids": [
+    "358f0bff93532e9e",
+    "35ee16d551982cd1"
+   ],
+   "metric": "hhi_by_layer",
+   "obs_ids": [
+    "358f0bff93532e9e",
+    "35ee16d551982cd1"
+   ],
+   "value": 0.7903066176210161,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-06-30",
+   "computed_at": "2026-09-10T04:54:27.620901Z",
+   "dims": {
+    "layer_id": "compute_semis"
+   },
+   "formula_version": "1",
+   "id": "b4e2fdeab29c7d4e",
+   "input_observation_ids": [
+    "1e5e52fcf38b8f42",
+    "944782759e2d02d3"
+   ],
+   "metric": "hhi_by_layer",
+   "obs_ids": [
+    "1e5e52fcf38b8f42",
+    "944782759e2d02d3"
+   ],
+   "value": 0.8587016201417834,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-09-30",
+   "computed_at": "2026-09-10T04:54:27.620901Z",
+   "dims": {
+    "layer_id": "compute_semis"
+   },
+   "formula_version": "1",
+   "id": "a5c96e3b3fcc81ec",
+   "input_observation_ids": [
+    "8991d1b8489b9697",
+    "fbc2a23860888eb2"
+   ],
+   "metric": "hhi_by_layer",
+   "obs_ids": [
+    "8991d1b8489b9697",
+    "fbc2a23860888eb2"
+   ],
+   "value": 0.8271775984078173,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2026-06-30",
+   "computed_at": "2026-09-10T04:54:27.620901Z",
+   "dims": {
+    "layer_id": "compute_semis"
+   },
+   "formula_version": "1",
+   "id": "f67404bbdcc6149e",
+   "input_observation_ids": [
+    "005d040fe4b816e0",
+    "2faa719b05b9c22a"
+   ],
+   "metric": "hhi_by_layer",
+   "obs_ids": [
+    "005d040fe4b816e0",
+    "2faa719b05b9c22a"
+   ],
+   "value": 0.8495101795262834,
+   "value_high": null,
+   "value_low": null
+  }
+ ],
+ "direction": null,
+ "direction_rule": {
+  "dead_band": 0.02,
+  "higher_is": "concentrating",
+  "periods": 4,
+  "rationale": "Four calendar quarters; a move under 200 HHI points is noise. Rising = the covered chip layer concentrating further."
+ },
+ "falsifying_band": null,
+ "fast_band": null,
+ "fits": [],
+ "flow_status": null,
+ "grade": "A",
+ "id": "semis_hhi",
+ "latest": {
+  "as_of": "2026-06-30",
+  "dims": {
+   "layer_id": "compute_semis"
+  },
+  "obs_ids": [
+   "005d040fe4b816e0",
+   "2faa719b05b9c22a"
+  ],
+  "unit": "index",
+  "value": 0.8495101795262834
+ },
+ "layer_id": "compute_physical",
+ "leading_lagging": "leading",
+ "metric": "hhi_by_layer",
+ "metric_dims": {
+  "layer_id": "compute_semis"
+ },
+ "n_observations": 13,
+ "name": "Concentration among covered chip filers (HHI)",
+ "normal_band": null,
+ "override_note": null,
+ "points": [
+  {
+   "as_of": "2023-09-30",
+   "dims": {
+    "layer_id": "compute_semis"
+   },
+   "obs_ids": [
+    "196f2f0424de7a94",
+    "5deaa5e9e8ddd24e",
+    "855ffb049e696409"
+   ],
+   "unit": "index",
+   "value": 0.6191019423549491
+  },
+  {
+   "as_of": "2024-06-30",
+   "dims": {
+    "layer_id": "compute_semis"
+   },
+   "obs_ids": [
+    "09d6b6a7052c2cfb",
+    "6cb012f77bd0712e"
+   ],
+   "unit": "index",
+   "value": 0.8017277901600692
+  },
+  {
+   "as_of": "2024-09-30",
+   "dims": {
+    "layer_id": "compute_semis"
+   },
+   "obs_ids": [
+    "358f0bff93532e9e",
+    "35ee16d551982cd1"
+   ],
+   "unit": "index",
+   "value": 0.7903066176210161
+  },
+  {
+   "as_of": "2025-06-30",
+   "dims": {
+    "layer_id": "compute_semis"
+   },
+   "obs_ids": [
+    "1e5e52fcf38b8f42",
+    "944782759e2d02d3"
+   ],
+   "unit": "index",
+   "value": 0.8587016201417834
+  },
+  {
+   "as_of": "2025-09-30",
+   "dims": {
+    "layer_id": "compute_semis"
+   },
+   "obs_ids": [
+    "8991d1b8489b9697",
+    "fbc2a23860888eb2"
+   ],
+   "unit": "index",
+   "value": 0.8271775984078173
+  },
+  {
+   "as_of": "2026-06-30",
+   "dims": {
+    "layer_id": "compute_semis"
+   },
+   "obs_ids": [
+    "005d040fe4b816e0",
+    "2faa719b05b9c22a"
+   ],
+   "unit": "index",
+   "value": 0.8495101795262834
+  }
+ ],
+ "proposed_status": "stable",
+ "proxy_types": [
+  "market_structure"
+ ],
+ "published": true,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "semis_rent_concentration",
+  "margin_stack_semis_share"
+ ],
+ "related_metrics": [],
+ "related_predictions": [],
+ "series": [],
+ "series_keys": [],
+ "sparkline": [
+  {
+   "as_of": "2023-09-30",
+   "dims": {
+    "layer_id": "compute_semis"
+   },
+   "obs_ids": [
+    "196f2f0424de7a94",
+    "5deaa5e9e8ddd24e",
+    "855ffb049e696409"
+   ],
+   "unit": "index",
+   "value": 0.6191019423549491
+  },
+  {
+   "as_of": "2024-06-30",
+   "dims": {
+    "layer_id": "compute_semis"
+   },
+   "obs_ids": [
+    "09d6b6a7052c2cfb",
+    "6cb012f77bd0712e"
+   ],
+   "unit": "index",
+   "value": 0.8017277901600692
+  },
+  {
+   "as_of": "2024-09-30",
+   "dims": {
+    "layer_id": "compute_semis"
+   },
+   "obs_ids": [
+    "358f0bff93532e9e",
+    "35ee16d551982cd1"
+   ],
+   "unit": "index",
+   "value": 0.7903066176210161
+  },
+  {
+   "as_of": "2025-06-30",
+   "dims": {
+    "layer_id": "compute_semis"
+   },
+   "obs_ids": [
+    "1e5e52fcf38b8f42",
+    "944782759e2d02d3"
+   ],
+   "unit": "index",
+   "value": 0.8587016201417834
+  },
+  {
+   "as_of": "2025-09-30",
+   "dims": {
+    "layer_id": "compute_semis"
+   },
+   "obs_ids": [
+    "8991d1b8489b9697",
+    "fbc2a23860888eb2"
+   ],
+   "unit": "index",
+   "value": 0.8271775984078173
+  },
+  {
+   "as_of": "2026-06-30",
+   "dims": {
+    "layer_id": "compute_semis"
+   },
+   "obs_ids": [
+    "005d040fe4b816e0",
+    "2faa719b05b9c22a"
+   ],
+   "unit": "index",
+   "value": 0.8495101795262834
+  }
+ ],
+ "stale_as_of": null,
+ "status": "unclear",
+ "status_events": [
+  {
+   "author": "evaluate",
+   "created_at": "2026-09-10T04:54:27.815906Z",
+   "evidence_ids": [
+    "005d040fe4b816e0",
+    "2faa719b05b9c22a"
+   ],
+   "id": "ae11b6d863c504e6",
+   "new_conf": 60,
+   "new_status": "unclear",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "HHI between NVIDIA Data Center and AMD Data Center revenue by calendar quarter: 0.79 (Sep 2024), 0.86 (Jun 2025), 0.83 (Sep 2025), 0.85 (Jun 2026). Steps exceed the 200-point dead band in both directions, so the evaluator reads unclear: NVIDIA's share oscillates with its product cycle rather than trending. Two filers only; the level is high by construction. Initial seed.",
+   "target_id": "semis_hhi",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": "semis",
+ "tracker_interpretation": "Two filers only, so the level is near the top of the scale by construction; the direction is what carries information.",
+ "unit": "index",
+ "updated_at": "2026-09-10",
+ "valve_measured": null,
+ "why_it_matters": "Rents stay where concentration stays. AMD's data-centre ramp and custom silicon are the routes by which the chip layer's rent would erode; this is the first of them in filed numbers."
+}

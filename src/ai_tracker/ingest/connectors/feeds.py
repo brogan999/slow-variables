@@ -20,6 +20,7 @@ from ..base import Connector, RawItem
 from ..scrub import html_to_text, normalise
 
 ATOM = "{http://www.w3.org/2005/Atom}"
+CONTENT = "{http://purl.org/rss/1.0/modules/content/}encoded"  # Substack and others ship the full post here
 
 
 def parse_feed(body: bytes) -> list[tuple[str, str, str, date | None]]:
@@ -32,7 +33,7 @@ def parse_feed(body: bytes) -> list[tuple[str, str, str, date | None]]:
             (
                 (it.findtext("title") or "").strip(),
                 (it.findtext("link") or "").strip(),
-                it.findtext("description") or "",
+                it.findtext(CONTENT) or it.findtext("description") or "",
                 parsedate_to_datetime(d).date() if d else None,
             )
         )

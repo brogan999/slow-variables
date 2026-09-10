@@ -228,10 +228,10 @@
   "default_tier": 6,
   "expect_series": [],
   "id": "menlo",
-  "items_found": 2,
+  "items_found": 4,
   "kind": "html",
   "last_error": null,
-  "last_success_at": "2026-09-10T01:30:39.969035Z",
+  "last_success_at": "2026-09-10T04:53:51.227288Z",
   "lens": "capture",
   "license": "Report",
   "name": "Menlo Ventures, State of Generative AI in the Enterprise",
@@ -819,6 +819,52 @@
   "robots_ok": true,
   "runs": 0,
   "url": "https://www.anthropic.com/",
+  "watch": {}
+ },
+ {
+  "attribution": "Jamin Ball, Clouded Judgement",
+  "cadence": "weekly",
+  "connector": "clouded_judgment",
+  "default_tier": 6,
+  "expect_series": [],
+  "id": "clouded_judgment",
+  "items_found": 40,
+  "kind": "rss",
+  "last_error": null,
+  "last_success_at": "2026-09-10T04:53:51.369696+00:00",
+  "lens": "capture",
+  "license": "Substack; figures quoted with attribution",
+  "name": "Clouded Judgement (weekly cloud software multiples)",
+  "org": "Jamin Ball / Altimeter",
+  "people": [
+   "Jamin Ball"
+  ],
+  "robots_ok": true,
+  "runs": 1,
+  "url": "https://cloudedjudgement.substack.com/feed",
+  "watch": {}
+ },
+ {
+  "attribution": "OpenRouter list prices",
+  "cadence": "daily",
+  "connector": "openrouter",
+  "default_tier": 3,
+  "expect_series": [
+   "openrouter.gpt_5_4.price_prompt_usd_per_mtok.pt"
+  ],
+  "id": "openrouter",
+  "items_found": 260,
+  "kind": "api",
+  "last_error": null,
+  "last_success_at": "2026-09-10T04:53:51.461430+00:00",
+  "lens": "capture",
+  "license": "Public API",
+  "name": "OpenRouter model prices",
+  "org": "OpenRouter",
+  "people": [],
+  "robots_ok": true,
+  "runs": 1,
+  "url": "https://openrouter.ai/api/v1/models",
   "watch": {}
  }
 ]

@@ -14,7 +14,7 @@ from .analysis.bands import flow_status
 from .analysis.direction import direction
 from .analysis.metrics import run_metrics
 from .ingest.connectors import CONNECTORS
-from .schema import StatusEvent, Tier
+from .schema import UNSCORED, Indicator, StatusEvent, Tier
 from .thesis import render_md, run_all
 
 log = logging.getLogger("ai-tracker")
@@ -45,6 +45,15 @@ def cmd_build(a: argparse.Namespace) -> int:
     return 0
 
 
+PRIMARY = {Tier.BENCHMARK, Tier.MODEL_RELEASE, Tier.OFFICIAL_FILING}
+
+
+def _single_non_primary(s: st.Store, ind: Indicator) -> bool:
+    """A scored status needs two sources, or one primary (benchmark, model release, official filing)."""
+    obs = s.evidence_obs(ind)
+    return len({o["source_id"] for o in obs}) < 2 and not ({Tier(o["tier"]) for o in obs} & PRIMARY)
+
+
 def cmd_evaluate(a: argparse.Namespace) -> int:
     s = st.Store()
     derived = run_metrics(s.con)
@@ -66,9 +75,15 @@ def cmd_evaluate(a: argparse.Namespace) -> int:
             new = direction(pts, ind.direction_rule, tier).value
         else:
             new = flow_status(value, ind.normal_band, ind.fast_band, ind.falsifying_band, tier).value
+        capped = new not in UNSCORED and _single_non_primary(s, ind)
+        if capped:  # the two-source rule, applied at proposal time rather than only at the gate
+            new = "emerging"
         cur = s.current(ind.id)
         old = cur.new_status if cur else None
-        lines.append(f"{ind.id}: input={value!r} as_of={as_of} tier={int(tier)} -> {new} (current: {old})")
+        lines.append(
+            f"{ind.id}: input={value!r} as_of={as_of} tier={int(tier)} -> {new} (current: {old})"
+            + (" [capped: single non-primary source]" if capped else "")
+        )
         if new != old and (ind.id, new) not in seen and (value is not None or ind.direction_rule):
             ev = StatusEvent(
                 target_id=ind.id,
@@ -138,10 +153,7 @@ def cmd_check(a: argparse.Namespace) -> int:
         if not ev:
             errors.append(f"{ind.id}: published without a StatusEvent")
         elif ev.new_status not in ("emerging", "not_yet_measurable"):
-            ev_obs = s.evidence_obs(ind)
-            srcs = {o["source_id"] for o in ev_obs}
-            tiers = {Tier(o["tier"]) for o in ev_obs}
-            if len(srcs) < 2 and not tiers & {Tier.BENCHMARK, Tier.MODEL_RELEASE, Tier.OFFICIAL_FILING}:
+            if _single_non_primary(s, ind):
                 errors.append(f"{ind.id}: scored status from a single non-primary source")
         if ev and ind.proposed_status and ind.proposed_status != ev.new_status:
             print(f"note {ind.id}: seed proposed {ind.proposed_status}, evaluator says {ev.new_status}")

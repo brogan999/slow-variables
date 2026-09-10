@@ -1,28 +1,68 @@
 {
- "band_input": "menlo.us_enterprise.genai_spend_usd.fy",
+ "band_input": "metric:enterprise_app_spend_share",
  "band_rationale": null,
  "band_value": {
   "as_of": "2025-12-31",
   "high": null,
   "low": null,
   "obs_ids": [
-   "6012e72e8105bfc4"
+   "6012e72e8105bfc4",
+   "790ba59ba69990e5"
   ],
-  "value": 37000000000.0
+  "value": 0.5135135135135135
  },
  "bucket_id": null,
  "cadence_expected": "annual",
- "confidence": null,
- "counterevidence": "Survey of ~500 buyers; excludes chips, standalone inference and embedded features.",
+ "confidence": 55,
+ "counterevidence": "Survey of a few hundred buyers, not filings; scope excludes chips, standalone inference and embedded features, so the infrastructure denominator is understated; two waves only.",
  "crosswalk": [],
- "definition": "Enterprise spend on generative AI in the US, total and application layer, from Menlo Ventures' annual survey.",
- "derived": [],
+ "definition": "Enterprise spend on generative-AI applications as a share of total enterprise generative-AI spend in the US, per Menlo Ventures' annual buyer survey (derived metric enterprise_app_spend_share).",
+ "derived": [
+  {
+   "as_of_date": "2024-12-31",
+   "computed_at": "2026-09-10T04:54:27.620901Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "9dcbe30bf6fb6d4d",
+   "input_observation_ids": [
+    "eb8d37a9275b0137",
+    "fbc90648f2532e9c"
+   ],
+   "metric": "enterprise_app_spend_share",
+   "obs_ids": [
+    "eb8d37a9275b0137",
+    "fbc90648f2532e9c"
+   ],
+   "value": 0.3333333333333333,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-12-31",
+   "computed_at": "2026-09-10T04:54:27.620901Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "0be29ea5ec20d20a",
+   "input_observation_ids": [
+    "6012e72e8105bfc4",
+    "790ba59ba69990e5"
+   ],
+   "metric": "enterprise_app_spend_share",
+   "obs_ids": [
+    "6012e72e8105bfc4",
+    "790ba59ba69990e5"
+   ],
+   "value": 0.5135135135135135,
+   "value_high": null,
+   "value_low": null
+  }
+ ],
  "direction": null,
  "direction_rule": {
-  "dead_band": 2000000000.0,
+  "dead_band": 0.05,
   "higher_is": "concentrating",
   "periods": 1,
-  "rationale": "Annual; needs two waves before a direction can be read."
+  "rationale": "Two annual waves, so the trend is one step; a move under five points is within survey error. Rising application share = value concentrating at the application layer."
  },
  "falsifying_band": null,
  "fast_band": null,
@@ -32,54 +72,72 @@
  "id": "enterprise_spend_by_layer",
  "latest": {
   "as_of": "2025-12-31",
-  "disputed": false,
-  "grade": "B",
-  "high": null,
-  "low": null,
+  "dims": {},
   "obs_ids": [
-   "6012e72e8105bfc4"
+   "6012e72e8105bfc4",
+   "790ba59ba69990e5"
   ],
-  "series_key": "menlo.us_enterprise.genai_spend_usd.fy",
-  "subject": "us_enterprise",
-  "unit": "USD",
-  "value": 37000000000.0
+  "unit": "share",
+  "value": 0.5135135135135135
  },
  "layer_id": "deployment_application",
  "leading_lagging": "coincident",
- "metric": null,
+ "metric": "enterprise_app_spend_share",
  "metric_dims": {},
- "n_observations": 2,
- "name": "Enterprise generative-AI spend by layer (Menlo)",
+ "n_observations": 4,
+ "name": "Application layer's share of enterprise generative-AI spend (Menlo)",
  "normal_band": null,
  "override_note": null,
  "points": [
   {
-   "as_of": "2025-12-31",
-   "disputed": false,
-   "grade": "B",
-   "high": null,
-   "low": null,
+   "as_of": "2024-12-31",
+   "dims": {},
    "obs_ids": [
-    "6012e72e8105bfc4"
+    "eb8d37a9275b0137",
+    "fbc90648f2532e9c"
    ],
-   "series_key": "menlo.us_enterprise.genai_spend_usd.fy",
-   "subject": "us_enterprise",
-   "unit": "USD",
-   "value": 37000000000.0
+   "unit": "share",
+   "value": 0.3333333333333333
+  },
+  {
+   "as_of": "2025-12-31",
+   "dims": {},
+   "obs_ids": [
+    "6012e72e8105bfc4",
+    "790ba59ba69990e5"
+   ],
+   "unit": "share",
+   "value": 0.5135135135135135
   }
  ],
- "proposed_status": "not_yet_measurable",
+ "proposed_status": "concentrating",
  "proxy_types": [
   "capital_flow"
  ],
- "published": false,
+ "published": true,
  "related_bottlenecks": [],
- "related_indicators": [],
+ "related_indicators": [
+  "margin_stack_semis_share"
+ ],
  "related_metrics": [],
  "related_predictions": [],
  "series": [
   {
    "points": [
+    {
+     "as_of": "2024-12-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "fbc90648f2532e9c"
+     ],
+     "series_key": "menlo.us_enterprise.genai_app_spend_usd.fy",
+     "subject": "us_enterprise",
+     "unit": "USD",
+     "value": 4600000000.0
+    },
     {
      "as_of": "2025-12-31",
      "disputed": false,
@@ -99,6 +157,20 @@
   },
   {
    "points": [
+    {
+     "as_of": "2024-12-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "eb8d37a9275b0137"
+     ],
+     "series_key": "menlo.us_enterprise.genai_spend_usd.fy",
+     "subject": "us_enterprise",
+     "unit": "USD",
+     "value": 13800000000.0
+    },
     {
      "as_of": "2025-12-31",
      "disputed": false,
@@ -123,27 +195,50 @@
  ],
  "sparkline": [
   {
-   "as_of": "2025-12-31",
-   "disputed": false,
-   "grade": "B",
-   "high": null,
-   "low": null,
+   "as_of": "2024-12-31",
+   "dims": {},
    "obs_ids": [
-    "6012e72e8105bfc4"
+    "eb8d37a9275b0137",
+    "fbc90648f2532e9c"
    ],
-   "series_key": "menlo.us_enterprise.genai_spend_usd.fy",
-   "subject": "us_enterprise",
-   "unit": "USD",
-   "value": 37000000000.0
+   "unit": "share",
+   "value": 0.3333333333333333
+  },
+  {
+   "as_of": "2025-12-31",
+   "dims": {},
+   "obs_ids": [
+    "6012e72e8105bfc4",
+    "790ba59ba69990e5"
+   ],
+   "unit": "share",
+   "value": 0.5135135135135135
   }
  ],
  "stale_as_of": null,
- "status": null,
- "status_events": [],
+ "status": "emerging",
+ "status_events": [
+  {
+   "author": "evaluate",
+   "created_at": "2026-09-10T04:54:27.799238Z",
+   "evidence_ids": [
+    "6012e72e8105bfc4",
+    "790ba59ba69990e5"
+   ],
+   "id": "095d3d9641b13f52",
+   "new_conf": 55,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "Menlo Ventures' buyer surveys: applications took $4.6B of $13.8B enterprise generative-AI spend in 2024 (33%) and $19B of $37B in 2025 (51%), an 18-point rise against a five-point dead band, so the direction reads concentrating at the application layer. Capped at emerging because Menlo is the only source and a survey is tier 6; a second, independent layer split would lift the cap. Initial seed.",
+   "target_id": "enterprise_spend_by_layer",
+   "target_type": "indicator"
+  }
+ ],
  "sublayer_id": null,
- "tracker_interpretation": "One wave ingested; unpublished until the 2024 figure lands as a sourced row.",
- "unit": "USD",
+ "tracker_interpretation": "Applications took a third of enterprise generative-AI dollars in 2024 and half in 2025; the money is moving up the stack even as chips keep the margin.",
+ "unit": "share",
  "updated_at": "2026-09-10",
  "valve_measured": null,
- "why_it_matters": "The only layer split of enterprise spend that is published; the application share is where the model-tax question starts."
+ "why_it_matters": "The only published layer split of enterprise dollars. A rising application share means buyers' money is landing above the model layer, where the model-tax question starts."
 }

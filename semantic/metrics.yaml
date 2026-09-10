@@ -222,3 +222,57 @@ metrics:
              flatten(list(ids) OVER (ORDER BY q_end)) AS obs_ids
       FROM (SELECT date_trunc('quarter', as_of_date)::DATE AS q_end, max(as_of_date) AS last_deal, sum(v) AS v, list(id ORDER BY id) AS ids
             FROM deals GROUP BY 1)
+  enterprise_app_spend_share:
+    description: Application layer's share of US enterprise generative-AI spend, per Menlo Ventures wave (applications ÷ total).
+    rationale: The only published layer split of enterprise dollars; a rising application share means buyers' money is landing above the model layer.
+    grain: [as_of_date]
+    unit: share
+    lead_lag: coincident
+    formula_version: 1
+    inputs: ["menlo.us_enterprise.genai_app_spend_usd.fy", "menlo.us_enterprise.genai_spend_usd.fy"]
+    caveats: Survey-based; scope excludes chips, standalone inference and embedded features; two waves so far.
+    sql: |
+      SELECT a.as_of_date, a.value_numeric / t.value_numeric AS value, [a.id, t.id] AS obs_ids
+      FROM observations a JOIN observations t ON a.as_of_date = t.as_of_date
+      WHERE a.series_key = 'menlo.us_enterprise.genai_app_spend_usd.fy' AND t.series_key = 'menlo.us_enterprise.genai_spend_usd.fy'
+  hhi_by_layer:
+    description: Herfindahl index (sum of squared revenue shares, 0-1) among the filers the tracker covers in a layer, per calendar quarter. Semis = NVIDIA Data Center vs AMD Data Center; cloud = AWS vs Google Cloud vs Microsoft Intelligent Cloud; model = Ramp's share of businesses paying each lab, normalised.
+    rationale: Capture flows toward the layer that stays concentrated while its neighbours fragment (P1 cross-layer indicator). Coverage is partial, so read the trend, not the level.
+    grain: [as_of_date, layer_id]
+    unit: index
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["sec_seg.*.revenue.q", "ramp.*.business_paid_share.m"]
+    caveats: Only covered filers; Broadcom, TSMC, Oracle and the neoclouds are absent, so levels overstate concentration. Fiscal quarters mapped to the calendar quarter of their period end. Ramp lab shares allow multi-homing and are normalised to sum to one.
+    sql: |
+      WITH rev AS (
+        SELECT date_trunc('quarter', as_of_date) AS cq, subject, value_numeric AS v, id,
+               CASE WHEN subject IN ('nvda', 'amd') THEN 'compute_semis' ELSE 'compute_cloud' END AS layer_id,
+               CASE WHEN subject IN ('nvda', 'amd') THEN 2 ELSE 3 END AS need
+        FROM observations
+        WHERE series_key IN ('sec_seg.nvda.data_center.revenue.q', 'sec_seg.amd.data_center.revenue.q',
+                             'sec_seg.amzn.aws.revenue.q', 'sec_seg.googl.cloud.revenue.q', 'sec_seg.msft.intelligent_cloud.revenue.q')),
+      complete AS (SELECT cq, layer_id FROM rev GROUP BY cq, layer_id, need HAVING count(DISTINCT subject) = need),
+      sh AS (SELECT (r.cq + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE AS as_of_date, r.layer_id,
+                    r.v / sum(r.v) OVER (PARTITION BY r.cq, r.layer_id) AS s, r.id
+             FROM rev r JOIN complete c USING (cq, layer_id)),
+      lab AS (SELECT as_of_date, 'model' AS layer_id, value_numeric / sum(value_numeric) OVER (PARTITION BY as_of_date) AS s, id
+              FROM observations WHERE series_key LIKE 'ramp.%.business_paid_share.m')
+      SELECT as_of_date, layer_id, sum(s * s) AS value, list(id ORDER BY id) AS obs_ids
+      FROM (SELECT * FROM sh UNION ALL SELECT * FROM lab) GROUP BY 1, 2
+  frontier_price_per_horizon_hour:
+    description: Cheapest available capability-hour - for each price date, the minimum over METR-measured models of OpenRouter prompt price (USD per million tokens) divided by the model's latest 50% time horizon in hours.
+    rationale: Price per unit of capability is the lab layer's capture proxy (value-capture chat, section 2). Falling means surplus is passed to the application layer and users; flat or rising means labs keep it.
+    grain: [as_of_date]
+    unit: USD
+    lead_lag: coincident
+    formula_version: 1
+    inputs: ["openrouter.*.price_prompt_usd_per_mtok.pt", "metr.*.horizon_50.pt"]
+    caveats: List prices on one router, prompt tokens only; the horizon is METR's suite, not general capability; only models present in both datasets count; a price series starts on 10 Sep 2026 and records change points, so the trend needs months.
+    sql: |
+      WITH h AS (
+        SELECT subject, arg_max(value_numeric, as_of_date) AS minutes, arg_max(id, as_of_date) AS hid
+        FROM observations WHERE series_key LIKE 'metr.%.horizon_50.pt' AND NOT coalesce(disputed, false) GROUP BY subject),
+      p AS (SELECT subject, as_of_date, value_numeric AS usd, id FROM observations WHERE series_key LIKE 'openrouter.%.price_prompt_usd_per_mtok.pt')
+      SELECT p.as_of_date, min(p.usd / (h.minutes / 60)) AS value, list_distinct(flatten(list([p.id, h.hid]))) AS obs_ids
+      FROM p JOIN h USING (subject) GROUP BY p.as_of_date
