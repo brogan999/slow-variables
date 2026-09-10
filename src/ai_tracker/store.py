@@ -24,6 +24,7 @@ from .schema import (
     FetchLog,
     Indicator,
     Layer,
+    Membership,
     Observation,
     Prediction,
     Review,
@@ -196,6 +197,21 @@ class Store:
             SELECT *, split_part(series_key, '.', 2) AS subject, date_trunc('quarter', as_of_date) AS q
             FROM observation_all o
             WHERE review_status = 'approved' AND NOT EXISTS (SELECT 1 FROM observation_all s WHERE s.supersedes_id = o.id)""")
+        self.con.execute(
+            "CREATE TABLE entity_membership (entity_id VARCHAR, layer_id VARCHAR, sublayer_id VARCHAR, "
+            "is_primary BOOLEAN, from_date DATE, to_date DATE)"
+        )
+        self.con.executemany(
+            "INSERT INTO entity_membership VALUES (?, ?, ?, ?, ?, ?)",
+            [
+                (e.id, m.layer_id, m.sublayer_id, m.is_primary, m.from_date, m.to_date)
+                for e in self.seed.entities
+                for m in e.memberships
+            ]
+            or [("", "", None, True, None, None)],
+        )
+        if not any(e.memberships for e in self.seed.entities):
+            self.con.execute("DELETE FROM entity_membership")
         self.derived = [Derived(**r) for r in read_jsonl(DATA / "derived.jsonl")]
         self.events = [StatusEvent(**r) for r in read_jsonl(DATA / "status_events.jsonl")]
         self.fetchlog = [FetchLog(**r) for r in read_jsonl(DATA / "fetchlog.jsonl")]
@@ -427,6 +443,7 @@ class Store:
             ],
         )
         _write(out / "ledger.json", self._ledger())
+        _write(out / "stack.json", self._stack(cards))
         _write(out / "bottlenecks.json", self._bottlenecks(cards))
         _write(out / "compare.json", self._compare(cards))
         _write(out / "thesis.json", read_jsonl(DATA / "thesis.jsonl"))
@@ -512,6 +529,62 @@ class Store:
             }
             for r in rows
             if r.as_of_date == latest
+        }
+
+    def _stack(self, cards: dict[str, Any]) -> dict[str, Any]:
+        """The sub-layer taxonomy with its entities, their dated memberships and each entity's latest observation."""
+        latest = {
+            r[0]: {
+                "series_key": r[1],
+                "value": r[2],
+                "value_text": r[3],
+                "unit": r[4],
+                "as_of": r[5].isoformat(),
+                "obs_ids": [r[6]],
+            }
+            for r in self.con.execute(
+                "SELECT entity_id, series_key, value_numeric, value_text, unit, as_of_date, id FROM ("
+                "SELECT *, row_number() OVER (PARTITION BY entity_id ORDER BY as_of_date DESC, retrieved_at DESC) rn "
+                "FROM observations WHERE entity_id IS NOT NULL) WHERE rn = 1"
+            ).fetchall()
+        }
+        ents = {e.id: e for e in self.seed.entities}
+
+        def entity(e: Entity, m: Membership) -> dict[str, Any]:
+            return {
+                **dump(e),
+                "is_primary": m.is_primary,
+                "from_date": m.from_date.isoformat() if m.from_date else None,
+                "to_date": m.to_date.isoformat() if m.to_date else None,
+                "latest": latest.get(e.id),
+            }
+
+        return {
+            "layers": [
+                {
+                    **dump(layer),
+                    "sublayers": [
+                        {
+                            **dump(sub),
+                            "entities": sorted(
+                                (
+                                    entity(ents[e.id], m)
+                                    for e in self.seed.entities
+                                    for m in e.memberships
+                                    if m.sublayer_id == sub.id
+                                ),
+                                key=lambda x: (not x["is_primary"], x["name"].lower()),
+                            ),
+                            "indicators": [
+                                cards[i.id] for i in self.seed.indicators if i.sublayer_id == sub.id
+                            ],
+                        }
+                        for sub in self.seed.sublayers
+                        if sub.layer_id == layer.id
+                    ],
+                }
+                for layer in self.seed.layers
+            ]
         }
 
     def _bottlenecks(self, cards: dict[str, Any]) -> dict[str, Any]:

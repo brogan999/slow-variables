@@ -1,0 +1,58 @@
+{
+ "observations": [
+  {
+   "as_of_date": "2025-11-21",
+   "audited_vs_reported": "company_stated",
+   "content_hash": "e7a08365a5600d1e72357687c76cda20075c00e6817008fcd9fa7064a984592a",
+   "dispute_text": null,
+   "disputed": false,
+   "entity_id": "black_forest_labs",
+   "extraction_method": "api",
+   "extractor_version": "formd-1",
+   "grade": "A",
+   "gross_vs_net": null,
+   "http_status": 200,
+   "id": "af65b9353f234959",
+   "period_start": null,
+   "published_date": "2026-06-03",
+   "q": "2025-10-01 00:00:00",
+   "raw_snippet": "{\"TOTALAMOUNTSOLD\": \"307572022\", \"accession\": \"0002109710-26-000002\", \"amendment\": \"false\", \"cik\": \"0002109710\", \"filed\": \"03-JUN-2026\", \"issuer\": \"Black Forest Labs Inc.\", \"sale_date\": \"2025-11-21\"}",
+   "retrieved_at": "2026-09-10T06:16:11.186494Z",
+   "review_status": "approved",
+   "reviewer_id": null,
+   "run_rate_vs_booked": null,
+   "series_key": "formd.black_forest_labs.amount_sold_usd.pt",
+   "source_id": "formd",
+   "subject": "black_forest_labs",
+   "supersedes_id": null,
+   "tier": 4,
+   "unit": "USD",
+   "url": "https://www.sec.gov/files/datastandardsinnovation/data/form-d-data-sets/2026q2_d.zip",
+   "value_high": null,
+   "value_low": null,
+   "value_numeric": 307572022.0,
+   "value_text": null
+  }
+ ],
+ "series_key": "formd.black_forest_labs.amount_sold_usd.pt",
+ "source": {
+  "attribution": "SEC EDGAR Form D data sets",
+  "cadence": "daily",
+  "connector": "formd",
+  "default_tier": 4,
+  "expect_series": [
+   "formd.baseten.amount_sold_usd.pt"
+  ],
+  "id": "formd",
+  "kind": "formd",
+  "lens": "capture",
+  "license": "Public domain (U.S. government work)",
+  "name": "SEC EDGAR Form D (private offerings)",
+  "org": "U.S. Securities and Exchange Commission",
+  "people": [],
+  "robots_ok": true,
+  "url": "https://www.sec.gov/data-research/sec-markets-data/form-d-data-sets",
+  "watch": {}
+ },
+ "unit": "USD"
+}

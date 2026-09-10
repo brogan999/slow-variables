@@ -1,0 +1,58 @@
+{
+ "observations": [
+  {
+   "as_of_date": "2024-05-16",
+   "audited_vs_reported": "company_stated",
+   "content_hash": "cded813f6a8a1f258a032b9602e078d4b6cec327b14cb0e76d38a4af2a6718f3",
+   "dispute_text": null,
+   "disputed": false,
+   "entity_id": "crwv",
+   "extraction_method": "api",
+   "extractor_version": "formd-1",
+   "grade": "A",
+   "gross_vs_net": null,
+   "http_status": 200,
+   "id": "401007b658cde003",
+   "period_start": null,
+   "published_date": "2024-05-30",
+   "q": "2024-04-01 00:00:00",
+   "raw_snippet": "{\"TOTALOFFERINGAMOUNT\": \"1149999332\", \"accession\": \"0001769628-24-000001\", \"amendment\": \"false\", \"cik\": \"0001769628\", \"filed\": \"30-MAY-2024\", \"issuer\": \"CoreWeave, Inc.\", \"sale_date\": \"2024-05-16\"}",
+   "retrieved_at": "2026-09-10T06:16:13.277301Z",
+   "review_status": "approved",
+   "reviewer_id": null,
+   "run_rate_vs_booked": null,
+   "series_key": "formd.crwv.offering_amount_usd.pt",
+   "source_id": "formd",
+   "subject": "crwv",
+   "supersedes_id": null,
+   "tier": 4,
+   "unit": "USD",
+   "url": "https://www.sec.gov/files/structureddata/data/form-d-data-sets/2024q2_d.zip",
+   "value_high": null,
+   "value_low": null,
+   "value_numeric": 1149999332.0,
+   "value_text": null
+  }
+ ],
+ "series_key": "formd.crwv.offering_amount_usd.pt",
+ "source": {
+  "attribution": "SEC EDGAR Form D data sets",
+  "cadence": "daily",
+  "connector": "formd",
+  "default_tier": 4,
+  "expect_series": [
+   "formd.baseten.amount_sold_usd.pt"
+  ],
+  "id": "formd",
+  "kind": "formd",
+  "lens": "capture",
+  "license": "Public domain (U.S. government work)",
+  "name": "SEC EDGAR Form D (private offerings)",
+  "org": "U.S. Securities and Exchange Commission",
+  "people": [],
+  "robots_ok": true,
+  "url": "https://www.sec.gov/data-research/sec-markets-data/form-d-data-sets",
+  "watch": {}
+ },
+ "unit": "USD"
+}

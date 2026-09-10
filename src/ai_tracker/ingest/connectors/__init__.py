@@ -4,6 +4,7 @@ from .census_btos import CensusBtos
 from .clouded_judgment import CloudedJudgment
 from .epoch import Epoch
 from .feeds import Feeds
+from .formd import FormD
 from .fred import Fred
 from .manual import Manual
 from .metr import Metr
@@ -26,5 +27,6 @@ CONNECTORS = {
         Feeds,
         CloudedJudgment,
         OpenRouter,
+        FormD,
     )
 }

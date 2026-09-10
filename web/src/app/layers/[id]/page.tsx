@@ -29,7 +29,7 @@ export default async function LayerPage({ params }: { params: Promise<{ id: stri
       {l.sublayers.length ? (
         <section>
           <h2 className="text-sm font-medium text-ink-2 mb-2">Sub-layers</h2>
-          <ol className="text-sm grid gap-1 md:grid-cols-2">{l.sublayers.map((s) => <li key={s.id}><span className="text-muted tabular-nums">{s.order}.</span> {s.name}</li>)}</ol>
+          <ol className="text-sm grid gap-1 md:grid-cols-2">{l.sublayers.map((s) => <li key={s.id}><span className="text-muted tabular-nums">{s.order}.</span> <Link href={`/stack/${s.id}`} className="hover:underline">{s.name}</Link></li>)}</ol>
           
         </section>
       ) : null}

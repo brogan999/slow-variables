@@ -1,0 +1,58 @@
+{
+ "observations": [
+  {
+   "as_of_date": "2022-10-04",
+   "audited_vs_reported": "company_stated",
+   "content_hash": "f849e596219aa419bde549c370f7d0b52f0b7eef17ae21043b48543c70fcdc0b",
+   "dispute_text": null,
+   "disputed": false,
+   "entity_id": "jetcool",
+   "extraction_method": "api",
+   "extractor_version": "formd-1",
+   "grade": "A",
+   "gross_vs_net": null,
+   "http_status": 200,
+   "id": "7d15b01e5a1e5320",
+   "period_start": null,
+   "published_date": "2023-10-16",
+   "q": "2022-10-01 00:00:00",
+   "raw_snippet": "{\"TOTALAMOUNTSOLD\": \"16733031\", \"accession\": \"0001803353-23-000002\", \"amendment\": \"true\", \"cik\": \"0001803353\", \"filed\": \"16-OCT-2023\", \"issuer\": \"JETCOOL Technologies Inc.\", \"sale_date\": \"2022-10-04\"}",
+   "retrieved_at": "2026-09-10T06:16:12.537684Z",
+   "review_status": "approved",
+   "reviewer_id": null,
+   "run_rate_vs_booked": null,
+   "series_key": "formd.jetcool.amount_sold_usd.pt",
+   "source_id": "formd",
+   "subject": "jetcool",
+   "supersedes_id": null,
+   "tier": 4,
+   "unit": "USD",
+   "url": "https://www.sec.gov/files/structureddata/data/form-d-data-sets/2023q4_d.zip",
+   "value_high": null,
+   "value_low": null,
+   "value_numeric": 16733031.0,
+   "value_text": null
+  }
+ ],
+ "series_key": "formd.jetcool.amount_sold_usd.pt",
+ "source": {
+  "attribution": "SEC EDGAR Form D data sets",
+  "cadence": "daily",
+  "connector": "formd",
+  "default_tier": 4,
+  "expect_series": [
+   "formd.baseten.amount_sold_usd.pt"
+  ],
+  "id": "formd",
+  "kind": "formd",
+  "lens": "capture",
+  "license": "Public domain (U.S. government work)",
+  "name": "SEC EDGAR Form D (private offerings)",
+  "org": "U.S. Securities and Exchange Commission",
+  "people": [],
+  "robots_ok": true,
+  "url": "https://www.sec.gov/data-research/sec-markets-data/form-d-data-sets",
+  "watch": {}
+ },
+ "unit": "USD"
+}

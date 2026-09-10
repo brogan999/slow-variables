@@ -1,0 +1,58 @@
+{
+ "observations": [
+  {
+   "as_of_date": "2023-11-22",
+   "audited_vs_reported": "company_stated",
+   "content_hash": "c8101d66b5c1070f249c2b7a26500e48a1dd490e70b4b18bbcf5b836948ebe3e",
+   "dispute_text": null,
+   "disputed": false,
+   "entity_id": "crusoe",
+   "extraction_method": "api",
+   "extractor_version": "formd-1",
+   "grade": "A",
+   "gross_vs_net": null,
+   "http_status": 200,
+   "id": "4db213d9c9775fd4",
+   "period_start": null,
+   "published_date": "2024-02-08",
+   "q": "2023-10-01 00:00:00",
+   "raw_snippet": "{\"TOTALAMOUNTSOLD\": \"192423000\", \"accession\": \"0001924674-24-000001\", \"amendment\": \"true\", \"cik\": \"0001924674\", \"filed\": \"08-FEB-2024\", \"issuer\": \"Crusoe Energy Holdings Inc.\", \"sale_date\": \"2023-11-22\"}",
+   "retrieved_at": "2026-09-10T06:16:12.888446Z",
+   "review_status": "approved",
+   "reviewer_id": null,
+   "run_rate_vs_booked": null,
+   "series_key": "formd.crusoe.debt_sold_usd.pt",
+   "source_id": "formd",
+   "subject": "crusoe",
+   "supersedes_id": "3e869672ce0a3f62",
+   "tier": 4,
+   "unit": "USD",
+   "url": "https://www.sec.gov/files/structureddata/data/form-d-data-sets/2024q1_d.zip",
+   "value_high": null,
+   "value_low": null,
+   "value_numeric": 192423000.0,
+   "value_text": null
+  }
+ ],
+ "series_key": "formd.crusoe.debt_sold_usd.pt",
+ "source": {
+  "attribution": "SEC EDGAR Form D data sets",
+  "cadence": "daily",
+  "connector": "formd",
+  "default_tier": 4,
+  "expect_series": [
+   "formd.baseten.amount_sold_usd.pt"
+  ],
+  "id": "formd",
+  "kind": "formd",
+  "lens": "capture",
+  "license": "Public domain (U.S. government work)",
+  "name": "SEC EDGAR Form D (private offerings)",
+  "org": "U.S. Securities and Exchange Commission",
+  "people": [],
+  "robots_ok": true,
+  "url": "https://www.sec.gov/data-research/sec-markets-data/form-d-data-sets",
+  "watch": {}
+ },
+ "unit": "USD"
+}

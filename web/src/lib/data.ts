@@ -80,3 +80,7 @@ export type BottleneckDoc = { sections: { name: string; bucket_id: string }[]; e
 export const bottlenecks = () => read<BottleneckDoc>("bottlenecks.json");
 export type CompareRow = { indicator: string; nk: string; ai2027: string; card: Card; leans: "nk" | "ai2027" | "open"; nk_predictions: { id: string; claimant: string; status: string | null }[]; ai2027_predictions: { id: string; claimant: string; status: string | null }[] };
 export const compare = () => read<{ rows: CompareRow[]; tally: { nk: number; ai2027: number; open: number } }>("compare.json");
+export type StackEntity = { id: string; name: string; kind: string; cik: string | null; aliases: string[]; verified: boolean; notes: string | null; founded: number | null; is_primary: boolean; from_date: string | null; to_date: string | null; latest: { series_key: string; value: number | null; value_text: string | null; unit: string; as_of: string; obs_ids: string[] } | null };
+export type StackSublayer = Sublayer & { entities: StackEntity[]; indicators: Card[] };
+export type StackDoc = { layers: (Layer & { sublayers: StackSublayer[] })[] };
+export const stack = () => read<StackDoc>("stack.json");

@@ -1,0 +1,58 @@
+{
+ "observations": [
+  {
+   "as_of_date": "2023-03-21",
+   "audited_vs_reported": "company_stated",
+   "content_hash": "0d968c8a5a030b1132fe0d2a17ea72261d09d501ed65c14fe53b096c4cb4e091",
+   "dispute_text": null,
+   "disputed": false,
+   "entity_id": "perplexity",
+   "extraction_method": "api",
+   "extractor_version": "formd-1",
+   "grade": "A",
+   "gross_vs_net": null,
+   "http_status": 200,
+   "id": "ad9f66fa7058f450",
+   "period_start": null,
+   "published_date": "2023-04-05",
+   "q": "2023-01-01 00:00:00",
+   "raw_snippet": "{\"TOTALAMOUNTSOLD\": \"28821948\", \"accession\": \"0001567619-23-005521\", \"amendment\": \"false\", \"cik\": \"0001972171\", \"filed\": \"05-APR-2023\", \"issuer\": \"Perplexity AI, Inc.\", \"sale_date\": \"2023-03-21\"}",
+   "retrieved_at": "2026-09-10T06:16:11.829537Z",
+   "review_status": "approved",
+   "reviewer_id": null,
+   "run_rate_vs_booked": null,
+   "series_key": "formd.perplexity.amount_sold_usd.pt",
+   "source_id": "formd",
+   "subject": "perplexity",
+   "supersedes_id": null,
+   "tier": 4,
+   "unit": "USD",
+   "url": "https://www.sec.gov/files/structureddata/data/form-d-data-sets/2023q2_d.zip",
+   "value_high": null,
+   "value_low": null,
+   "value_numeric": 28821948.0,
+   "value_text": null
+  }
+ ],
+ "series_key": "formd.perplexity.amount_sold_usd.pt",
+ "source": {
+  "attribution": "SEC EDGAR Form D data sets",
+  "cadence": "daily",
+  "connector": "formd",
+  "default_tier": 4,
+  "expect_series": [
+   "formd.baseten.amount_sold_usd.pt"
+  ],
+  "id": "formd",
+  "kind": "formd",
+  "lens": "capture",
+  "license": "Public domain (U.S. government work)",
+  "name": "SEC EDGAR Form D (private offerings)",
+  "org": "U.S. Securities and Exchange Commission",
+  "people": [],
+  "robots_ok": true,
+  "url": "https://www.sec.gov/data-research/sec-markets-data/form-d-data-sets",
+  "watch": {}
+ },
+ "unit": "USD"
+}

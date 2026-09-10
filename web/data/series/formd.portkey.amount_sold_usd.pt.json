@@ -1,0 +1,58 @@
+{
+ "observations": [
+  {
+   "as_of_date": "2023-08-08",
+   "audited_vs_reported": "company_stated",
+   "content_hash": "0d6837d2cff478acaa3d564a05e4f307c8eae3b04bb20516c4b1cb7366aad515",
+   "dispute_text": null,
+   "disputed": false,
+   "entity_id": "portkey",
+   "extraction_method": "api",
+   "extractor_version": "formd-1",
+   "grade": "A",
+   "gross_vs_net": null,
+   "http_status": 200,
+   "id": "2bf120e4b12b391f",
+   "period_start": null,
+   "published_date": "2023-08-22",
+   "q": "2023-07-01 00:00:00",
+   "raw_snippet": "{\"TOTALAMOUNTSOLD\": \"2699999\", \"accession\": \"0001989908-23-000001\", \"amendment\": \"false\", \"cik\": \"0001989908\", \"filed\": \"22-AUG-2023\", \"issuer\": \"Portkey, Inc.\", \"sale_date\": \"2023-08-08\"}",
+   "retrieved_at": "2026-09-10T06:16:12.212124Z",
+   "review_status": "approved",
+   "reviewer_id": null,
+   "run_rate_vs_booked": null,
+   "series_key": "formd.portkey.amount_sold_usd.pt",
+   "source_id": "formd",
+   "subject": "portkey",
+   "supersedes_id": null,
+   "tier": 4,
+   "unit": "USD",
+   "url": "https://www.sec.gov/files/structureddata/data/form-d-data-sets/2023q3_d.zip",
+   "value_high": null,
+   "value_low": null,
+   "value_numeric": 2699999.0,
+   "value_text": null
+  }
+ ],
+ "series_key": "formd.portkey.amount_sold_usd.pt",
+ "source": {
+  "attribution": "SEC EDGAR Form D data sets",
+  "cadence": "daily",
+  "connector": "formd",
+  "default_tier": 4,
+  "expect_series": [
+   "formd.baseten.amount_sold_usd.pt"
+  ],
+  "id": "formd",
+  "kind": "formd",
+  "lens": "capture",
+  "license": "Public domain (U.S. government work)",
+  "name": "SEC EDGAR Form D (private offerings)",
+  "org": "U.S. Securities and Exchange Commission",
+  "people": [],
+  "robots_ok": true,
+  "url": "https://www.sec.gov/data-research/sec-markets-data/form-d-data-sets",
+  "watch": {}
+ },
+ "unit": "USD"
+}

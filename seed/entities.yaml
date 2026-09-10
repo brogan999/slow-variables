@@ -10,10 +10,220 @@ entities:
   - {id: crwv, name: CoreWeave Inc., cik: "0001769628", aliases: [CoreWeave], verified: true, memberships: [{layer_id: compute_physical, sublayer_id: hyperscalers_neoclouds}]}
   - {id: openai, name: OpenAI, kind: lab, aliases: [OpenAI], verified: true, memberships: [{layer_id: model, sublayer_id: frontier_labs}]}
   - {id: anthropic, name: Anthropic, kind: lab, aliases: [Anthropic], verified: true, memberships: [{layer_id: model, sublayer_id: frontier_labs}]}
-  - {id: xai, name: xAI, kind: lab, aliases: [xAI, x.AI], verified: true, memberships: [{layer_id: model, sublayer_id: frontier_labs}]}
+  - {id: xai, name: xAI, kind: lab, cik: "0002079267", extra_ciks: ["0002002695"], aliases: [xAI, x.AI], verified: true, memberships: [{layer_id: model, sublayer_id: frontier_labs}]}
   - {id: mistral, name: Mistral AI, kind: lab, aliases: [Mistral, Mistral AI], verified: true, memberships: [{layer_id: model, sublayer_id: neolabs}]}
   - {id: deepseek, name: DeepSeek, kind: lab, aliases: [DeepSeek], verified: true, memberships: [{layer_id: model, sublayer_id: open_weight_labs}]}
   - {id: moonshot, name: Moonshot AI, kind: lab, aliases: [Moonshot, Moonshot AI, Kimi], verified: true, memberships: [{layer_id: model, sublayer_id: open_weight_labs}]}
   - {id: minimax, name: MiniMax, kind: lab, aliases: [MiniMax], verified: true, memberships: [{layer_id: model, sublayer_id: open_weight_labs}]}
   - {id: zhipu, name: Zhipu AI, kind: lab, aliases: [Zhipu, Z.ai, "Z.ai (Zhipu)"], verified: true, memberships: [{layer_id: model, sublayer_id: open_weight_labs}]}
   - {id: nbis, name: Nebius Group N.V., cik: "0001513845", aliases: [Nebius], verified: true, memberships: [{layer_id: compute_physical, sublayer_id: hyperscalers_neoclouds}]}
+  # --- P1 §4.2 seed companies (11 Sep 2026). verified: true only with a CIK checked against a Form D filing's city/state; aliases feed `ai-tracker candidates`, never rows ---
+  - {aliases: [Broadcom], id: broadcom, memberships: [{layer_id: compute_physical, sublayer_id: semis}], name: Broadcom, verified: false}
+  - {aliases: [TSMC], id: tsmc, memberships: [{layer_id: compute_physical, sublayer_id: semis}], name: TSMC, verified: false}
+  - {aliases: [Cerebras, Cerebras Systems], id: cerebras, memberships: [{layer_id: compute_physical, sublayer_id: semis}], name: Cerebras, verified: false}
+  - {aliases: [Groq], id: groq, memberships: [{layer_id: compute_physical, sublayer_id: semis}], name: Groq, verified: false}
+  - {aliases: [SambaNova], id: sambanova, memberships: [{layer_id: compute_physical, sublayer_id: semis}], name: SambaNova, verified: false}
+  - {aliases: [Etched], id: etched, memberships: [{layer_id: compute_physical, sublayer_id: semis}], name: Etched, verified: false}
+  - {aliases: [d-Matrix], id: d_matrix, memberships: [{layer_id: compute_physical, sublayer_id: semis}], name: d-Matrix, verified: false}
+  - {aliases: [Tenstorrent], id: tenstorrent, memberships: [{layer_id: compute_physical, sublayer_id: semis}], name: Tenstorrent, cik: "0002031944", verified: true}
+  - {aliases: [Lightmatter], id: lightmatter, memberships: [{layer_id: compute_physical, sublayer_id: semis}], name: Lightmatter, cik: "0001768622", verified: true}
+  - {aliases: [Ayar Labs], id: ayar_labs, memberships: [{layer_id: compute_physical, sublayer_id: semis}], name: Ayar Labs, verified: false}
+  - {aliases: [Celestial AI], id: celestial_ai, memberships: [{layer_id: compute_physical, sublayer_id: semis}], name: Celestial AI, cik: "0001822129", verified: true}
+  - {aliases: [MatX], id: matx, memberships: [{layer_id: compute_physical, sublayer_id: semis}], name: MatX, cik: "0002004726", verified: true}
+  - {aliases: [Positron], id: positron, memberships: [{layer_id: compute_physical, sublayer_id: semis}], name: Positron, cik: "0002077932", verified: true}
+  - {aliases: [Fractile], id: fractile, memberships: [{layer_id: compute_physical, sublayer_id: semis}], name: Fractile, verified: false}
+  - {aliases: [Extropic], id: extropic, memberships: [{layer_id: compute_physical, sublayer_id: semis}], name: Extropic, verified: false}
+  - {aliases: [Crusoe], id: crusoe, memberships: [{layer_id: compute_physical, sublayer_id: hyperscalers_neoclouds}, {is_primary: false, layer_id: compute_physical, sublayer_id: dc_power}], name: Crusoe, cik: "0001924674", verified: true}
+  - {aliases: [Lambda, Lambda Labs], id: lambda, memberships: [{layer_id: compute_physical, sublayer_id: hyperscalers_neoclouds}], name: Lambda, verified: false}
+  - {aliases: [Vultr], id: vultr, memberships: [{layer_id: compute_physical, sublayer_id: hyperscalers_neoclouds}], name: Vultr, verified: false}
+  - {aliases: [Nscale], id: nscale, memberships: [{layer_id: compute_physical, sublayer_id: hyperscalers_neoclouds}], name: Nscale, verified: false}
+  - {aliases: [Fluidstack], id: fluidstack, memberships: [{layer_id: compute_physical, sublayer_id: hyperscalers_neoclouds}], name: Fluidstack, cik: "0002104151", verified: true}
+  - {aliases: [TensorWave], id: tensorwave, memberships: [{layer_id: compute_physical, sublayer_id: hyperscalers_neoclouds}], name: TensorWave, cik: "0002066342", verified: true}
+  - {aliases: [Voltage Park], id: voltage_park, memberships: [{layer_id: compute_physical, sublayer_id: hyperscalers_neoclouds}], name: Voltage Park, verified: false}
+  - {aliases: [Firmus], id: firmus, memberships: [{layer_id: compute_physical, sublayer_id: hyperscalers_neoclouds}], name: Firmus, verified: false}
+  - {aliases: [Applied Digital], id: applied_digital, memberships: [{layer_id: compute_physical, sublayer_id: dc_power}], name: Applied Digital, cik: "0001144879", verified: true}
+  - {aliases: [Oklo], id: oklo, memberships: [{layer_id: compute_physical, sublayer_id: dc_power}], name: Oklo, verified: false}
+  - {aliases: [X-energy], id: x_energy, memberships: [{layer_id: compute_physical, sublayer_id: dc_power}], name: X-energy, verified: false}
+  - {aliases: [Commonwealth Fusion], id: commonwealth_fusion, memberships: [{layer_id: compute_physical, sublayer_id: dc_power}], name: Commonwealth Fusion, verified: false}
+  - {aliases: [Exowatt], id: exowatt, memberships: [{layer_id: compute_physical, sublayer_id: dc_power}], name: Exowatt, verified: false}
+  - {aliases: [Base Power], id: base_power, memberships: [{layer_id: compute_physical, sublayer_id: dc_power}], name: Base Power, verified: false}
+  - {aliases: [TeraWulf], id: terawulf, memberships: [{layer_id: compute_physical, sublayer_id: dc_power}], name: TeraWulf, verified: false}
+  - {aliases: [IREN], id: iren, memberships: [{layer_id: compute_physical, sublayer_id: dc_power}], name: IREN, verified: false}
+  - {aliases: [Core Scientific], id: core_scientific, memberships: [{layer_id: compute_physical, sublayer_id: dc_power}], name: Core Scientific, verified: false}
+  - {aliases: [SK Hynix], id: sk_hynix, memberships: [{layer_id: compute_physical, sublayer_id: memory_networking}], name: SK Hynix, verified: false}
+  - {aliases: [Micron], id: micron, memberships: [{layer_id: compute_physical, sublayer_id: memory_networking}], name: Micron, verified: false}
+  - {aliases: [Astera Labs], id: astera_labs, memberships: [{layer_id: compute_physical, sublayer_id: memory_networking}], name: Astera Labs, verified: false}
+  - {aliases: [Enfabrica], id: enfabrica, memberships: [{layer_id: compute_physical, sublayer_id: memory_networking}], name: Enfabrica, cik: "0001985332", verified: true}
+  - {aliases: [LiquidStack], id: liquidstack, memberships: [{layer_id: compute_physical, sublayer_id: memory_networking}], name: LiquidStack, verified: false}
+  - {aliases: [JetCool], id: jetcool, memberships: [{layer_id: compute_physical, sublayer_id: memory_networking}], name: JetCool, cik: "0001803353", verified: true}
+  - {aliases: [Submer], id: submer, memberships: [{layer_id: compute_physical, sublayer_id: memory_networking}], name: Submer, verified: false}
+  - {aliases: [Google DeepMind, DeepMind], id: google_deepmind, memberships: [{layer_id: model, sublayer_id: frontier_labs}], name: Google DeepMind, verified: false}
+  - {aliases: [Safe Superintelligence, SSI], id: safe_superintelligence, memberships: [{layer_id: model, sublayer_id: neolabs}], name: Safe Superintelligence, verified: false}
+  - {aliases: [Thinking Machines Lab, Thinking Machines], id: thinking_machines_lab, memberships: [{layer_id: model, sublayer_id: neolabs}, {is_primary: false, layer_id: training_input, sublayer_id: post_training}], name: Thinking Machines Lab, verified: false}
+  - {aliases: [Reflection AI], id: reflection_ai, memberships: [{layer_id: model, sublayer_id: neolabs}], name: Reflection AI, verified: false}
+  - {aliases: [Periodic Labs], id: periodic_labs, memberships: [{layer_id: model, sublayer_id: neolabs}], name: Periodic Labs, verified: false}
+  - {aliases: [Physical Intelligence], id: physical_intelligence, memberships: [{layer_id: model, sublayer_id: neolabs}, {is_primary: false, layer_id: deployment_application, sublayer_id: vertical_ai}], name: Physical Intelligence, verified: false}
+  - {aliases: [World Labs], id: world_labs, memberships: [{layer_id: model, sublayer_id: neolabs}], name: World Labs, verified: false}
+  - {aliases: [Poolside], id: poolside, memberships: [{layer_id: model, sublayer_id: neolabs}], name: Poolside, verified: false}
+  - {aliases: [Magic], id: magic, memberships: [{layer_id: model, sublayer_id: neolabs}], name: Magic, cik: "0001959571", verified: true}
+  - {aliases: [Inception Labs], id: inception_labs, memberships: [{layer_id: model, sublayer_id: neolabs}], name: Inception Labs, verified: false}
+  - {aliases: [Liquid AI], id: liquid_ai, memberships: [{layer_id: model, sublayer_id: neolabs}], name: Liquid AI, cik: "0002004369", verified: true}
+  - {aliases: [Sakana AI], id: sakana_ai, memberships: [{layer_id: model, sublayer_id: neolabs}], name: Sakana AI, verified: false}
+  - {aliases: [Black Forest Labs], id: black_forest_labs, memberships: [{layer_id: model, sublayer_id: neolabs}], name: Black Forest Labs, cik: "0002109710", verified: true}
+  - {aliases: [Runway], id: runway, memberships: [{layer_id: model, sublayer_id: neolabs}], name: Runway, verified: false}
+  - {aliases: [Luma], id: luma, memberships: [{layer_id: model, sublayer_id: neolabs}], name: Luma, cik: "0001971882", verified: true}
+  - {aliases: [Pika], id: pika, memberships: [{layer_id: model, sublayer_id: neolabs}], name: Pika, verified: false}
+  - {aliases: [ElevenLabs], id: elevenlabs, memberships: [{layer_id: model, sublayer_id: neolabs}], name: ElevenLabs, verified: false}
+  - {aliases: [Suno], id: suno, memberships: [{layer_id: model, sublayer_id: neolabs}], name: Suno, verified: false}
+  - {aliases: [Cartesia], id: cartesia, memberships: [{layer_id: model, sublayer_id: neolabs}], name: Cartesia, verified: false}
+  - {aliases: [Humans&, Humans and], id: humans_and, memberships: [{layer_id: model, sublayer_id: neolabs}], name: Humans&, verified: false}
+  - {aliases: [Nous Research], id: nous_research, memberships: [{layer_id: model, sublayer_id: neolabs}], name: Nous Research, verified: false}
+  - {aliases: [Prime Intellect], id: prime_intellect, memberships: [{layer_id: model, sublayer_id: neolabs}, {is_primary: false, layer_id: training_input, sublayer_id: post_training}], name: Prime Intellect, cik: "0002103990", verified: true}
+  - {aliases: [Ndea], id: ndea, memberships: [{layer_id: model, sublayer_id: neolabs}], name: Ndea, verified: false}
+  - {aliases: [Harmonic], id: harmonic, memberships: [{layer_id: model, sublayer_id: neolabs}], name: Harmonic, verified: false}
+  - {aliases: [Skild AI], id: skild_ai, memberships: [{layer_id: model, sublayer_id: neolabs}, {is_primary: false, layer_id: deployment_application, sublayer_id: vertical_ai}], name: Skild AI, verified: false}
+  - {aliases: [Figure], id: figure, memberships: [{layer_id: model, sublayer_id: neolabs}, {is_primary: false, layer_id: deployment_application, sublayer_id: vertical_ai}], name: Figure, cik: "0002014185", verified: true}
+  - {aliases: [1X], id: 1x, memberships: [{layer_id: model, sublayer_id: neolabs}, {is_primary: false, layer_id: deployment_application, sublayer_id: vertical_ai}], name: 1X, verified: false}
+  - {aliases: [Apptronik], id: apptronik, memberships: [{layer_id: model, sublayer_id: neolabs}, {is_primary: false, layer_id: deployment_application, sublayer_id: vertical_ai}], name: Apptronik, cik: "0001918029", verified: true}
+  - {aliases: [StepFun], id: stepfun, memberships: [{layer_id: model, sublayer_id: open_weight_labs}], name: StepFun, verified: false}
+  - {aliases: [Baichuan], id: baichuan, memberships: [{layer_id: model, sublayer_id: open_weight_labs}], name: Baichuan, verified: false}
+  - {aliases: [01.AI], id: 01_ai, memberships: [{layer_id: model, sublayer_id: open_weight_labs}], name: 01.AI, verified: false}
+  - {aliases: [Alibaba Qwen], id: alibaba_qwen, memberships: [{layer_id: model, sublayer_id: open_weight_labs}], name: Alibaba Qwen, verified: false}
+  - {aliases: [Scale AI, Scale], id: scale_ai, memberships: [{layer_id: training_input, sublayer_id: human_data}, {from_date: '2025-06-01', is_primary: false, layer_id: model, sublayer_id: frontier_labs}], name: Scale AI, notes: 49% acquired by Meta in June 2025; human-data business continues., verified: false}
+  - {aliases: [Surge AI], id: surge_ai, memberships: [{layer_id: training_input, sublayer_id: human_data}], name: Surge AI, verified: false}
+  - {aliases: [Mercor, Mercor.io], cik: 0002103986, id: mercor, memberships: [{layer_id: training_input, sublayer_id: human_data}], name: Mercor, verified: true}
+  - {aliases: [Micro1], id: micro1, memberships: [{layer_id: training_input, sublayer_id: human_data}], name: Micro1, verified: false}
+  - {aliases: [Turing], id: turing, memberships: [{layer_id: training_input, sublayer_id: human_data}, {is_primary: false, layer_id: deployment_application, sublayer_id: deployment_services}], name: Turing, verified: false}
+  - {aliases: [Handshake AI], id: handshake_ai, memberships: [{layer_id: training_input, sublayer_id: human_data}], name: Handshake AI, verified: false}
+  - {aliases: [Invisible Technologies], id: invisible_technologies, memberships: [{layer_id: training_input, sublayer_id: human_data}], name: Invisible Technologies, verified: false}
+  - {aliases: [Toloka], id: toloka, memberships: [{layer_id: training_input, sublayer_id: human_data}], name: Toloka, verified: false}
+  - {aliases: [Snorkel], id: snorkel, memberships: [{layer_id: training_input, sublayer_id: human_data}], name: Snorkel, verified: false}
+  - {aliases: [Labelbox], id: labelbox, memberships: [{layer_id: training_input, sublayer_id: human_data}], name: Labelbox, verified: false}
+  - {aliases: [Sapien], id: sapien, memberships: [{layer_id: training_input, sublayer_id: human_data}], name: Sapien, verified: false}
+  - {aliases: [Pareto], id: pareto, memberships: [{layer_id: training_input, sublayer_id: human_data}], name: Pareto, verified: false}
+  - {aliases: [Prolific], id: prolific, memberships: [{layer_id: training_input, sublayer_id: human_data}], name: Prolific, cik: "0001976659", verified: true}
+  - {aliases: [Appen], id: appen, memberships: [{layer_id: training_input, sublayer_id: human_data}], name: Appen, verified: false}
+  - {aliases: [iMerit], id: imerit, memberships: [{layer_id: training_input, sublayer_id: human_data}], name: iMerit, verified: false}
+  - {aliases: [CloudFactory], id: cloudfactory, memberships: [{layer_id: training_input, sublayer_id: human_data}], name: CloudFactory, verified: false}
+  - {aliases: [Datacurve], id: datacurve, memberships: [{layer_id: training_input, sublayer_id: human_data}], name: Datacurve, verified: false}
+  - {aliases: [Mechanize], id: mechanize, memberships: [{layer_id: training_input, sublayer_id: rl_environments}], name: Mechanize, verified: false}
+  - {aliases: [Fleet], id: fleet, memberships: [{layer_id: training_input, sublayer_id: rl_environments}], name: Fleet, verified: false}
+  - {aliases: [Halluminate], id: halluminate, memberships: [{layer_id: training_input, sublayer_id: rl_environments}], name: Halluminate, verified: false}
+  - {aliases: [Matrices], id: matrices, memberships: [{layer_id: training_input, sublayer_id: rl_environments}], name: Matrices, verified: false}
+  - {aliases: [Endless], id: endless, memberships: [{layer_id: training_input, sublayer_id: rl_environments}], name: Endless, verified: false}
+  - {aliases: [Applied Compute], id: applied_compute, memberships: [{layer_id: training_input, sublayer_id: rl_environments}, {is_primary: false, layer_id: training_input, sublayer_id: post_training}], name: Applied Compute, verified: false}
+  - {aliases: [Veris], id: veris, memberships: [{layer_id: training_input, sublayer_id: rl_environments}], name: Veris, verified: false}
+  - {aliases: [Judgment Labs], id: judgment_labs, memberships: [{layer_id: training_input, sublayer_id: rl_environments}], name: Judgment Labs, verified: false}
+  - {aliases: [Osmosis], id: osmosis, memberships: [{layer_id: training_input, sublayer_id: rl_environments}], name: Osmosis, verified: false}
+  - {aliases: [Reinforce], id: reinforce, memberships: [{layer_id: training_input, sublayer_id: rl_environments}], name: Reinforce, verified: false}
+  - {aliases: [Bespoke Labs], id: bespoke_labs, memberships: [{layer_id: training_input, sublayer_id: rl_environments}], name: Bespoke Labs, verified: false}
+  - {aliases: [Kaizen], id: kaizen, memberships: [{layer_id: training_input, sublayer_id: rl_environments}], name: Kaizen, verified: false}
+  - {aliases: [Plato], id: plato, memberships: [{layer_id: training_input, sublayer_id: rl_environments}], name: Plato, verified: false}
+  - {aliases: [Adaptive ML], id: adaptive_ml, memberships: [{layer_id: training_input, sublayer_id: post_training}], name: Adaptive ML, verified: false}
+  - {aliases: [OpenPipe], id: openpipe, memberships: [{layer_id: training_input, sublayer_id: post_training}], name: OpenPipe, verified: false}
+  - {aliases: [Predibase], id: predibase, memberships: [{layer_id: training_input, sublayer_id: post_training}], name: Predibase, verified: false}
+  - {aliases: [Arcee], id: arcee, memberships: [{layer_id: training_input, sublayer_id: post_training}], name: Arcee, verified: false}
+  - {aliases: [Unsloth], id: unsloth, memberships: [{layer_id: training_input, sublayer_id: post_training}], name: Unsloth, verified: false}
+  - {aliases: [Gretel], id: gretel, memberships: [{layer_id: training_input, sublayer_id: synthetic_data}], name: Gretel, verified: false}
+  - {aliases: [Datology], id: datology, memberships: [{layer_id: training_input, sublayer_id: synthetic_data}], name: Datology, verified: false}
+  - {aliases: [Tonic], id: tonic, memberships: [{layer_id: training_input, sublayer_id: synthetic_data}], name: Tonic, verified: false}
+  - {aliases: [Mostly AI], id: mostly_ai, memberships: [{layer_id: training_input, sublayer_id: synthetic_data}], name: Mostly AI, verified: false}
+  - {aliases: [Rendered.ai], id: rendered_ai, memberships: [{layer_id: training_input, sublayer_id: synthetic_data}], name: Rendered.ai, verified: false}
+  - {aliases: [Synthesis AI], id: synthesis_ai, memberships: [{layer_id: training_input, sublayer_id: synthetic_data}], name: Synthesis AI, verified: false}
+  - {aliases: [Protege], id: protege, memberships: [{layer_id: training_input, sublayer_id: data_licensing}], name: Protege, verified: false}
+  - {aliases: [ProRata], id: prorata, memberships: [{layer_id: training_input, sublayer_id: data_licensing}], name: ProRata, verified: false}
+  - {aliases: [TollBit], id: tollbit, memberships: [{layer_id: training_input, sublayer_id: data_licensing}], name: TollBit, verified: false}
+  - {aliases: [Created by Humans], id: created_by_humans, memberships: [{layer_id: training_input, sublayer_id: data_licensing}], name: Created by Humans, verified: false}
+  - {aliases: [Vermillio], id: vermillio, memberships: [{layer_id: training_input, sublayer_id: data_licensing}], name: Vermillio, verified: false}
+  - {aliases: [Human Native], id: human_native, memberships: [{layer_id: training_input, sublayer_id: data_licensing}], name: Human Native, verified: false}
+  - {aliases: [Defined.ai], id: defined_ai, memberships: [{layer_id: training_input, sublayer_id: data_licensing}], name: Defined.ai, verified: false}
+  - {aliases: [Datarade], id: datarade, memberships: [{layer_id: training_input, sublayer_id: data_licensing}], name: Datarade, verified: false}
+  - {aliases: [Braintrust], id: braintrust, memberships: [{layer_id: training_input, sublayer_id: evals}], name: Braintrust, verified: false}
+  - {aliases: [LangSmith], id: langsmith, memberships: [{layer_id: training_input, sublayer_id: evals}], name: LangSmith, verified: false}
+  - {aliases: [Arize], id: arize, memberships: [{layer_id: training_input, sublayer_id: evals}], name: Arize, cik: "0001803829", verified: true}
+  - {aliases: [Galileo], id: galileo, memberships: [{layer_id: training_input, sublayer_id: evals}], name: Galileo, verified: false}
+  - {aliases: [Patronus], id: patronus, memberships: [{layer_id: training_input, sublayer_id: evals}], name: Patronus, cik: "0002026190", verified: true}
+  - {aliases: [Vals AI], id: vals_ai, memberships: [{layer_id: training_input, sublayer_id: evals}], name: Vals AI, verified: false}
+  - {aliases: [Weights & Biases, W&B], id: weights_and_biases, memberships: [{layer_id: training_input, sublayer_id: evals}], name: Weights & Biases, notes: Acquired by CoreWeave (P1 §4.2)., cik: "0001987275", verified: true}
+  - {aliases: [Humanloop], id: humanloop, memberships: [{layer_id: training_input, sublayer_id: evals}], name: Humanloop, verified: false}
+  - {aliases: [Confident AI], id: confident_ai, memberships: [{layer_id: training_input, sublayer_id: evals}], name: Confident AI, verified: false}
+  - {aliases: [Atla], id: atla, memberships: [{layer_id: training_input, sublayer_id: evals}], name: Atla, verified: false}
+  - {aliases: [LMArena], id: lmarena, memberships: [{layer_id: training_input, sublayer_id: evals}], name: LMArena, verified: false}
+  - {aliases: [Baseten, Baseten Labs], cik: 0001865393, id: baseten, memberships: [{layer_id: serving_orchestration, sublayer_id: inference_serving}], name: Baseten, verified: true}
+  - {aliases: [Fireworks, Fireworks AI], id: fireworks, memberships: [{layer_id: serving_orchestration, sublayer_id: inference_serving}], name: Fireworks, verified: false}
+  - {aliases: [Together, Together AI], id: together, memberships: [{layer_id: serving_orchestration, sublayer_id: inference_serving}], name: Together, verified: false}
+  - {aliases: [Modal], id: modal, memberships: [{layer_id: serving_orchestration, sublayer_id: inference_serving}], name: Modal, cik: "0002088132", verified: true}
+  - {aliases: [Replicate], id: replicate, memberships: [{layer_id: serving_orchestration, sublayer_id: inference_serving}], name: Replicate, cik: "0001984806", verified: true}
+  - {aliases: [RunPod], id: runpod, memberships: [{layer_id: serving_orchestration, sublayer_id: inference_serving}], name: RunPod, cik: "0002002761", verified: true}
+  - {aliases: [Hyperbolic], id: hyperbolic, memberships: [{layer_id: serving_orchestration, sublayer_id: inference_serving}], name: Hyperbolic, verified: false}
+  - {aliases: [DeepInfra], id: deepinfra, memberships: [{layer_id: serving_orchestration, sublayer_id: inference_serving}], name: DeepInfra, verified: false}
+  - {aliases: [Novita], id: novita, memberships: [{layer_id: serving_orchestration, sublayer_id: inference_serving}], name: Novita, verified: false}
+  - {aliases: [Anyscale], id: anyscale, memberships: [{layer_id: serving_orchestration, sublayer_id: inference_serving}], name: Anyscale, verified: false}
+  - {aliases: [OpenRouter], id: openrouter, memberships: [{layer_id: serving_orchestration, sublayer_id: routing_gateways}], name: OpenRouter, notes: 'Acquired by Stripe, August 2026 (P1 §4.2); membership retained, ownership noted.', cik: "0002073423", verified: true}
+  - {aliases: [Martian], id: martian, memberships: [{layer_id: serving_orchestration, sublayer_id: routing_gateways}], name: Martian, verified: false}
+  - {aliases: [Not Diamond], id: not_diamond, memberships: [{layer_id: serving_orchestration, sublayer_id: routing_gateways}], name: Not Diamond, verified: false}
+  - {aliases: [Portkey], id: portkey, memberships: [{layer_id: serving_orchestration, sublayer_id: routing_gateways}], name: Portkey, cik: "0001989908", verified: true}
+  - {aliases: [Helicone], id: helicone, memberships: [{layer_id: serving_orchestration, sublayer_id: routing_gateways}], name: Helicone, verified: false}
+  - {aliases: [LiteLLM], id: litellm, memberships: [{layer_id: serving_orchestration, sublayer_id: routing_gateways}], name: LiteLLM, verified: false}
+  - {aliases: [TrueFoundry], id: truefoundry, memberships: [{layer_id: serving_orchestration, sublayer_id: routing_gateways}], name: TrueFoundry, verified: false}
+  - {aliases: [Requesty], id: requesty, memberships: [{layer_id: serving_orchestration, sublayer_id: routing_gateways}], name: Requesty, verified: false}
+  - {aliases: [Unify], id: unify, memberships: [{layer_id: serving_orchestration, sublayer_id: routing_gateways}], name: Unify, verified: false}
+  - {aliases: [Browserbase], id: browserbase, memberships: [{layer_id: serving_orchestration, sublayer_id: agent_infra}], name: Browserbase, verified: false}
+  - {aliases: [Composio], id: composio, memberships: [{layer_id: serving_orchestration, sublayer_id: agent_infra}], name: Composio, verified: false}
+  - {aliases: [E2B], id: e2b, memberships: [{layer_id: serving_orchestration, sublayer_id: agent_infra}], name: E2B, verified: false}
+  - {aliases: [Daytona], id: daytona, memberships: [{layer_id: serving_orchestration, sublayer_id: agent_infra}], name: Daytona, verified: false}
+  - {aliases: [Letta], id: letta, memberships: [{layer_id: serving_orchestration, sublayer_id: agent_infra}], name: Letta, verified: false}
+  - {aliases: [Mastra], id: mastra, memberships: [{layer_id: serving_orchestration, sublayer_id: agent_infra}], name: Mastra, verified: false}
+  - {aliases: [LangChain], id: langchain, memberships: [{layer_id: serving_orchestration, sublayer_id: agent_infra}], name: LangChain, verified: false}
+  - {aliases: [CrewAI], id: crewai, memberships: [{layer_id: serving_orchestration, sublayer_id: agent_infra}], name: CrewAI, verified: false}
+  - {aliases: [Arcade], id: arcade, memberships: [{layer_id: serving_orchestration, sublayer_id: agent_infra}], name: Arcade, cik: "0002048826", verified: true}
+  - {aliases: [Nango], id: nango, memberships: [{layer_id: serving_orchestration, sublayer_id: agent_infra}], name: Nango, verified: false}
+  - {aliases: [Merge], id: merge, memberships: [{layer_id: serving_orchestration, sublayer_id: agent_infra}], name: Merge, verified: false}
+  - {aliases: [Distyl], id: distyl, memberships: [{layer_id: deployment_application, sublayer_id: deployment_services}], name: Distyl, verified: false}
+  - {aliases: [Tribe AI], id: tribe_ai, memberships: [{layer_id: deployment_application, sublayer_id: deployment_services}], name: Tribe AI, verified: false}
+  - {aliases: [Fractal], id: fractal, memberships: [{layer_id: deployment_application, sublayer_id: deployment_services}], name: Fractal, verified: false}
+  - {aliases: [a private value-chain map], id: betterbrain, memberships: [{layer_id: deployment_application, sublayer_id: deployment_services}], name: a private value-chain map, notes: Maintainer conflict disclosed on /methodology and the deployment layer page., verified: false}
+  - {aliases: [Anysphere, Cursor], id: anysphere, memberships: [{layer_id: deployment_application, sublayer_id: coding_agents}], name: Anysphere, verified: false}
+  - {aliases: [Cognition], id: cognition, memberships: [{layer_id: deployment_application, sublayer_id: coding_agents}], name: Cognition, verified: false}
+  - {aliases: [Replit], id: replit, memberships: [{layer_id: deployment_application, sublayer_id: coding_agents}], name: Replit, verified: false}
+  - {aliases: [Lovable], id: lovable, memberships: [{layer_id: deployment_application, sublayer_id: coding_agents}], name: Lovable, cik: "0002055162", verified: true}
+  - {aliases: [StackBlitz, Bolt], id: stackblitz, memberships: [{layer_id: deployment_application, sublayer_id: coding_agents}], name: StackBlitz, verified: false}
+  - {aliases: [Factory], id: factory, memberships: [{layer_id: deployment_application, sublayer_id: coding_agents}], name: Factory, verified: false}
+  - {aliases: [Augment], id: augment, memberships: [{layer_id: deployment_application, sublayer_id: coding_agents}], name: Augment, verified: false}
+  - {aliases: [Sourcegraph], id: sourcegraph, memberships: [{layer_id: deployment_application, sublayer_id: coding_agents}], name: Sourcegraph, verified: false}
+  - {aliases: [Warp], id: warp, memberships: [{layer_id: deployment_application, sublayer_id: coding_agents}], name: Warp, verified: false}
+  - {aliases: [Harvey, Harvey AI], cik: 0001974654, id: harvey, memberships: [{layer_id: deployment_application, sublayer_id: vertical_ai}], name: Harvey, verified: true}
+  - {aliases: [Legora], id: legora, memberships: [{layer_id: deployment_application, sublayer_id: vertical_ai}], name: Legora, cik: "0002071663", verified: true}
+  - {aliases: [EvenUp], id: evenup, memberships: [{layer_id: deployment_application, sublayer_id: vertical_ai}], name: EvenUp, verified: false}
+  - {aliases: [Eve], id: eve, memberships: [{layer_id: deployment_application, sublayer_id: vertical_ai}], name: Eve, verified: false}
+  - {aliases: [Spellbook], id: spellbook, memberships: [{layer_id: deployment_application, sublayer_id: vertical_ai}], name: Spellbook, verified: false}
+  - {aliases: [Abridge], id: abridge, memberships: [{layer_id: deployment_application, sublayer_id: vertical_ai}], name: Abridge, cik: "0001737537", verified: true}
+  - {aliases: [OpenEvidence], id: openevidence, memberships: [{layer_id: deployment_application, sublayer_id: vertical_ai}], name: OpenEvidence, verified: false}
+  - {aliases: [Ambience], id: ambience, memberships: [{layer_id: deployment_application, sublayer_id: vertical_ai}], name: Ambience, verified: false}
+  - {aliases: [Hippocratic], id: hippocratic, memberships: [{layer_id: deployment_application, sublayer_id: vertical_ai}], name: Hippocratic, verified: false}
+  - {aliases: [Tennr], id: tennr, memberships: [{layer_id: deployment_application, sublayer_id: vertical_ai}], name: Tennr, verified: false}
+  - {aliases: [Hebbia], id: hebbia, memberships: [{layer_id: deployment_application, sublayer_id: vertical_ai}], name: Hebbia, cik: "0001932477", verified: true}
+  - {aliases: [Rogo], id: rogo, memberships: [{layer_id: deployment_application, sublayer_id: vertical_ai}], name: Rogo, verified: false}
+  - {aliases: [Brightwave], id: brightwave, memberships: [{layer_id: deployment_application, sublayer_id: vertical_ai}], name: Brightwave, verified: false}
+  - {aliases: [Sierra], id: sierra, memberships: [{layer_id: deployment_application, sublayer_id: vertical_ai}], name: Sierra, verified: false}
+  - {aliases: [Decagon], id: decagon, memberships: [{layer_id: deployment_application, sublayer_id: vertical_ai}], name: Decagon, cik: "0002043374", verified: true}
+  - {aliases: [Parloa], id: parloa, memberships: [{layer_id: deployment_application, sublayer_id: vertical_ai}], name: Parloa, verified: false}
+  - {aliases: [Crescendo], id: crescendo, memberships: [{layer_id: deployment_application, sublayer_id: vertical_ai}], name: Crescendo, verified: false}
+  - {aliases: [Clay], id: clay, memberships: [{layer_id: deployment_application, sublayer_id: vertical_ai}], name: Clay, cik: "0002053989", verified: true}
+  - {aliases: [11x], id: 11x, memberships: [{layer_id: deployment_application, sublayer_id: vertical_ai}], name: 11x, verified: false}
+  - {aliases: [Artisan], id: artisan, memberships: [{layer_id: deployment_application, sublayer_id: vertical_ai}], name: Artisan, verified: false}
+  - {aliases: [Glean], id: glean, memberships: [{layer_id: deployment_application, sublayer_id: vertical_ai}], name: Glean, verified: false}
+  - {aliases: [Perplexity], id: perplexity, memberships: [{layer_id: deployment_application, sublayer_id: vertical_ai}, {is_primary: false, layer_id: deployment_application, sublayer_id: consumer_ai}], name: Perplexity, cik: "0001972171", verified: true}
+  - {aliases: [Exa], id: exa, memberships: [{layer_id: deployment_application, sublayer_id: vertical_ai}], name: Exa, cik: "0002024864", verified: true}
+  - {aliases: [Parallel], id: parallel, memberships: [{layer_id: deployment_application, sublayer_id: vertical_ai}], name: Parallel, verified: false}
+  - {aliases: [Vapi], id: vapi, memberships: [{layer_id: deployment_application, sublayer_id: vertical_ai}], name: Vapi, cik: "0002042931", verified: true}
+  - {aliases: [Bland], id: bland, memberships: [{layer_id: deployment_application, sublayer_id: vertical_ai}], name: Bland, verified: false}
+  - {aliases: [Retell], id: retell, memberships: [{layer_id: deployment_application, sublayer_id: vertical_ai}], name: Retell, verified: false}
+  - {aliases: [Dyna], id: dyna, memberships: [{layer_id: deployment_application, sublayer_id: vertical_ai}], name: Dyna, verified: false}
+  - {aliases: [Character.AI, Character AI], id: character_ai, memberships: [{layer_id: deployment_application, sublayer_id: consumer_ai}], name: Character.AI, verified: false}
+  - {aliases: [Replika], id: replika, memberships: [{layer_id: deployment_application, sublayer_id: consumer_ai}], name: Replika, verified: false}
+  - {aliases: [Thrive Holdings], id: thrive_holdings, memberships: [{layer_id: deployment_application, sublayer_id: ai_rollups}], name: Thrive Holdings, verified: false}
+  - {aliases: [Long Lake], id: long_lake, memberships: [{layer_id: deployment_application, sublayer_id: ai_rollups}], name: Long Lake, verified: false}
+  - {aliases: [Crete], id: crete, memberships: [{layer_id: deployment_application, sublayer_id: ai_rollups}], name: Crete, verified: false}
+  - {aliases: [Dwelly], id: dwelly, memberships: [{layer_id: deployment_application, sublayer_id: ai_rollups}], name: Dwelly, verified: false}
+  - {aliases: [Titan], id: titan, memberships: [{layer_id: deployment_application, sublayer_id: ai_rollups}], name: Titan, verified: false}

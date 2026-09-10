@@ -1,0 +1,58 @@
+{
+ "observations": [
+  {
+   "as_of_date": "2023-07-12",
+   "audited_vs_reported": "company_stated",
+   "content_hash": "cec247f2211fd715ed2a1af02160cc0a6d060326f81cd775250e0e8343a04cc2",
+   "dispute_text": null,
+   "disputed": false,
+   "entity_id": "replicate",
+   "extraction_method": "api",
+   "extractor_version": "formd-1",
+   "grade": "A",
+   "gross_vs_net": null,
+   "http_status": 200,
+   "id": "01b38b4d8aff857e",
+   "period_start": null,
+   "published_date": "2023-07-12",
+   "q": "2023-07-01 00:00:00",
+   "raw_snippet": "{\"adsh\": \"0001984806-23-000001\", \"ciks\": [\"0001984806\"], \"display_names\": [\"Replicate, Inc.  (CIK 0001984806)\"], \"file_date\": \"2023-07-12\"}",
+   "retrieved_at": "2026-09-10T06:18:52.387344Z",
+   "review_status": "approved",
+   "reviewer_id": null,
+   "run_rate_vs_booked": null,
+   "series_key": "formd.replicate.filing.pt",
+   "source_id": "formd",
+   "subject": "replicate",
+   "supersedes_id": null,
+   "tier": 4,
+   "unit": "filing",
+   "url": "https://efts.sec.gov/LATEST/search-index?q=\"Replicate\"&forms=D&dateRange=custom&startdt=2026-09-01",
+   "value_high": null,
+   "value_low": null,
+   "value_numeric": null,
+   "value_text": "Form D filed 2023-07-12 (0001984806-23-000001)"
+  }
+ ],
+ "series_key": "formd.replicate.filing.pt",
+ "source": {
+  "attribution": "SEC EDGAR Form D data sets",
+  "cadence": "daily",
+  "connector": "formd",
+  "default_tier": 4,
+  "expect_series": [
+   "formd.baseten.amount_sold_usd.pt"
+  ],
+  "id": "formd",
+  "kind": "formd",
+  "lens": "capture",
+  "license": "Public domain (U.S. government work)",
+  "name": "SEC EDGAR Form D (private offerings)",
+  "org": "U.S. Securities and Exchange Commission",
+  "people": [],
+  "robots_ok": true,
+  "url": "https://www.sec.gov/data-research/sec-markets-data/form-d-data-sets",
+  "watch": {}
+ },
+ "unit": "filing"
+}

@@ -1,0 +1,58 @@
+{
+ "observations": [
+  {
+   "as_of_date": "2025-01-14",
+   "audited_vs_reported": "company_stated",
+   "content_hash": "d98c166e1b7995a2daf0632028825cd3217186299912ae4cdee0e1e3dd7c281c",
+   "dispute_text": null,
+   "disputed": false,
+   "entity_id": "arize",
+   "extraction_method": "api",
+   "extractor_version": "formd-1",
+   "grade": "A",
+   "gross_vs_net": null,
+   "http_status": 200,
+   "id": "73cf5a725fa77d64",
+   "period_start": null,
+   "published_date": "2025-01-28",
+   "q": "2025-01-01 00:00:00",
+   "raw_snippet": "{\"TOTALOFFERINGAMOUNT\": \"69149168\", \"accession\": \"0001803829-25-000001\", \"amendment\": \"false\", \"cik\": \"0001803829\", \"filed\": \"28-JAN-2025\", \"issuer\": \"Arize AI, Inc.\", \"sale_date\": \"2025-01-14\"}",
+   "retrieved_at": "2026-09-10T06:16:14.299867Z",
+   "review_status": "approved",
+   "reviewer_id": null,
+   "run_rate_vs_booked": null,
+   "series_key": "formd.arize.offering_amount_usd.pt",
+   "source_id": "formd",
+   "subject": "arize",
+   "supersedes_id": null,
+   "tier": 4,
+   "unit": "USD",
+   "url": "https://www.sec.gov/files/structureddata/data/form-d-data-sets/2025q1_d.zip",
+   "value_high": null,
+   "value_low": null,
+   "value_numeric": 69149168.0,
+   "value_text": null
+  }
+ ],
+ "series_key": "formd.arize.offering_amount_usd.pt",
+ "source": {
+  "attribution": "SEC EDGAR Form D data sets",
+  "cadence": "daily",
+  "connector": "formd",
+  "default_tier": 4,
+  "expect_series": [
+   "formd.baseten.amount_sold_usd.pt"
+  ],
+  "id": "formd",
+  "kind": "formd",
+  "lens": "capture",
+  "license": "Public domain (U.S. government work)",
+  "name": "SEC EDGAR Form D (private offerings)",
+  "org": "U.S. Securities and Exchange Commission",
+  "people": [],
+  "robots_ok": true,
+  "url": "https://www.sec.gov/data-research/sec-markets-data/form-d-data-sets",
+  "watch": {}
+ },
+ "unit": "USD"
+}

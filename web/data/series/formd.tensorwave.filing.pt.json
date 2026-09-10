@@ -1,0 +1,58 @@
+{
+ "observations": [
+  {
+   "as_of_date": "2025-05-27",
+   "audited_vs_reported": "company_stated",
+   "content_hash": "d622819af3d1e03e3747ebce31c0812abc32da4e54c58914822915e4a7cc09e1",
+   "dispute_text": null,
+   "disputed": false,
+   "entity_id": "tensorwave",
+   "extraction_method": "api",
+   "extractor_version": "formd-1",
+   "grade": "A",
+   "gross_vs_net": null,
+   "http_status": 200,
+   "id": "4b3e8b6543f276e1",
+   "period_start": null,
+   "published_date": "2025-05-27",
+   "q": "2025-04-01 00:00:00",
+   "raw_snippet": "{\"adsh\": \"0002066342-25-000003\", \"ciks\": [\"0002066342\"], \"display_names\": [\"TensorWave Inc.  (CIK 0002066342)\"], \"file_date\": \"2025-05-27\"}",
+   "retrieved_at": "2026-09-10T06:18:47.868523Z",
+   "review_status": "approved",
+   "reviewer_id": null,
+   "run_rate_vs_booked": null,
+   "series_key": "formd.tensorwave.filing.pt",
+   "source_id": "formd",
+   "subject": "tensorwave",
+   "supersedes_id": null,
+   "tier": 4,
+   "unit": "filing",
+   "url": "https://efts.sec.gov/LATEST/search-index?q=\"TensorWave\"&forms=D&dateRange=custom&startdt=2026-09-01",
+   "value_high": null,
+   "value_low": null,
+   "value_numeric": null,
+   "value_text": "Form D filed 2025-05-27 (0002066342-25-000003)"
+  }
+ ],
+ "series_key": "formd.tensorwave.filing.pt",
+ "source": {
+  "attribution": "SEC EDGAR Form D data sets",
+  "cadence": "daily",
+  "connector": "formd",
+  "default_tier": 4,
+  "expect_series": [
+   "formd.baseten.amount_sold_usd.pt"
+  ],
+  "id": "formd",
+  "kind": "formd",
+  "lens": "capture",
+  "license": "Public domain (U.S. government work)",
+  "name": "SEC EDGAR Form D (private offerings)",
+  "org": "U.S. Securities and Exchange Commission",
+  "people": [],
+  "robots_ok": true,
+  "url": "https://www.sec.gov/data-research/sec-markets-data/form-d-data-sets",
+  "watch": {}
+ },
+ "unit": "filing"
+}

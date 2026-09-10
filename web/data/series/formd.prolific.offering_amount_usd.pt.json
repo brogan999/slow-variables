@@ -1,0 +1,58 @@
+{
+ "observations": [
+  {
+   "as_of_date": "2023-04-25",
+   "audited_vs_reported": "company_stated",
+   "content_hash": "0d968c8a5a030b1132fe0d2a17ea72261d09d501ed65c14fe53b096c4cb4e091",
+   "dispute_text": null,
+   "disputed": false,
+   "entity_id": "prolific",
+   "extraction_method": "api",
+   "extractor_version": "formd-1",
+   "grade": "A",
+   "gross_vs_net": null,
+   "http_status": 200,
+   "id": "212ec38668e5c65d",
+   "period_start": null,
+   "published_date": "2023-05-09",
+   "q": "2023-04-01 00:00:00",
+   "raw_snippet": "{\"TOTALOFFERINGAMOUNT\": \"16639954\", \"accession\": \"0001976659-23-000001\", \"amendment\": \"false\", \"cik\": \"0001976659\", \"filed\": \"09-MAY-2023\", \"issuer\": \"Prolific Technologies, Inc.\", \"sale_date\": \"2023-04-25\"}",
+   "retrieved_at": "2026-09-10T06:16:11.829537Z",
+   "review_status": "approved",
+   "reviewer_id": null,
+   "run_rate_vs_booked": null,
+   "series_key": "formd.prolific.offering_amount_usd.pt",
+   "source_id": "formd",
+   "subject": "prolific",
+   "supersedes_id": null,
+   "tier": 4,
+   "unit": "USD",
+   "url": "https://www.sec.gov/files/structureddata/data/form-d-data-sets/2023q2_d.zip",
+   "value_high": null,
+   "value_low": null,
+   "value_numeric": 16639954.0,
+   "value_text": null
+  }
+ ],
+ "series_key": "formd.prolific.offering_amount_usd.pt",
+ "source": {
+  "attribution": "SEC EDGAR Form D data sets",
+  "cadence": "daily",
+  "connector": "formd",
+  "default_tier": 4,
+  "expect_series": [
+   "formd.baseten.amount_sold_usd.pt"
+  ],
+  "id": "formd",
+  "kind": "formd",
+  "lens": "capture",
+  "license": "Public domain (U.S. government work)",
+  "name": "SEC EDGAR Form D (private offerings)",
+  "org": "U.S. Securities and Exchange Commission",
+  "people": [],
+  "robots_ok": true,
+  "url": "https://www.sec.gov/data-research/sec-markets-data/form-d-data-sets",
+  "watch": {}
+ },
+ "unit": "USD"
+}

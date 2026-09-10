@@ -372,6 +372,7 @@ class Entity(BaseModel):
     name: str
     kind: Literal["company", "lab", "agency", "person", "university", "fund"] = "company"
     cik: str | None = None  # 10-digit, zero-padded
+    extra_ciks: list[str] = []  # further filers that are the same entity (xAI files under two)
     crunchbase_id: str | None = None
     aliases: list[str] = []
     founded: int | None = None

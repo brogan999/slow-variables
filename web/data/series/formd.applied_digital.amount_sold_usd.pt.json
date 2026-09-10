@@ -1,0 +1,58 @@
+{
+ "observations": [
+  {
+   "as_of_date": "2024-09-05",
+   "audited_vs_reported": "company_stated",
+   "content_hash": "40d78ab710a12ca8c180855e69ca3d19fd4162e05d8f0dcab25d140ec035ac06",
+   "dispute_text": null,
+   "disputed": false,
+   "entity_id": "applied_digital",
+   "extraction_method": "api",
+   "extractor_version": "formd-1",
+   "grade": "A",
+   "gross_vs_net": null,
+   "http_status": 200,
+   "id": "7ff06eaa3486d738",
+   "period_start": null,
+   "published_date": "2024-09-20",
+   "q": "2024-07-01 00:00:00",
+   "raw_snippet": "{\"TOTALAMOUNTSOLD\": \"160000013\", \"accession\": \"0001493152-24-037662\", \"amendment\": \"false\", \"cik\": \"0001144879\", \"filed\": \"20-SEP-2024\", \"issuer\": \"Applied Digital Corp.\", \"sale_date\": \"2024-09-05\"}",
+   "retrieved_at": "2026-09-10T06:16:13.592765Z",
+   "review_status": "approved",
+   "reviewer_id": null,
+   "run_rate_vs_booked": null,
+   "series_key": "formd.applied_digital.amount_sold_usd.pt",
+   "source_id": "formd",
+   "subject": "applied_digital",
+   "supersedes_id": null,
+   "tier": 4,
+   "unit": "USD",
+   "url": "https://www.sec.gov/files/structureddata/data/form-d-data-sets/2024q3_d.zip",
+   "value_high": null,
+   "value_low": null,
+   "value_numeric": 160000013.0,
+   "value_text": null
+  }
+ ],
+ "series_key": "formd.applied_digital.amount_sold_usd.pt",
+ "source": {
+  "attribution": "SEC EDGAR Form D data sets",
+  "cadence": "daily",
+  "connector": "formd",
+  "default_tier": 4,
+  "expect_series": [
+   "formd.baseten.amount_sold_usd.pt"
+  ],
+  "id": "formd",
+  "kind": "formd",
+  "lens": "capture",
+  "license": "Public domain (U.S. government work)",
+  "name": "SEC EDGAR Form D (private offerings)",
+  "org": "U.S. Securities and Exchange Commission",
+  "people": [],
+  "robots_ok": true,
+  "url": "https://www.sec.gov/data-research/sec-markets-data/form-d-data-sets",
+  "watch": {}
+ },
+ "unit": "USD"
+}

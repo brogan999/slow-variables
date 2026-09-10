@@ -1,0 +1,58 @@
+{
+ "observations": [
+  {
+   "as_of_date": "2024-12-23",
+   "audited_vs_reported": "company_stated",
+   "content_hash": "e4aa299ae3c741c54d1cacbd251468d40c743a3782e945e6769b71858da066c2",
+   "dispute_text": null,
+   "disputed": false,
+   "entity_id": "decagon",
+   "extraction_method": "api",
+   "extractor_version": "formd-1",
+   "grade": "A",
+   "gross_vs_net": null,
+   "http_status": 200,
+   "id": "62bfa66c6a587bc8",
+   "period_start": null,
+   "published_date": "2024-12-23",
+   "q": "2024-10-01 00:00:00",
+   "raw_snippet": "{\"adsh\": \"0002043374-24-000001\", \"ciks\": [\"0002043374\"], \"display_names\": [\"Decagon AI, Inc.  (CIK 0002043374)\"], \"file_date\": \"2024-12-23\"}",
+   "retrieved_at": "2026-09-10T06:18:55.111639Z",
+   "review_status": "approved",
+   "reviewer_id": null,
+   "run_rate_vs_booked": null,
+   "series_key": "formd.decagon.filing.pt",
+   "source_id": "formd",
+   "subject": "decagon",
+   "supersedes_id": null,
+   "tier": 4,
+   "unit": "filing",
+   "url": "https://efts.sec.gov/LATEST/search-index?q=\"Decagon\"&forms=D&dateRange=custom&startdt=2026-09-01",
+   "value_high": null,
+   "value_low": null,
+   "value_numeric": null,
+   "value_text": "Form D filed 2024-12-23 (0002043374-24-000001)"
+  }
+ ],
+ "series_key": "formd.decagon.filing.pt",
+ "source": {
+  "attribution": "SEC EDGAR Form D data sets",
+  "cadence": "daily",
+  "connector": "formd",
+  "default_tier": 4,
+  "expect_series": [
+   "formd.baseten.amount_sold_usd.pt"
+  ],
+  "id": "formd",
+  "kind": "formd",
+  "lens": "capture",
+  "license": "Public domain (U.S. government work)",
+  "name": "SEC EDGAR Form D (private offerings)",
+  "org": "U.S. Securities and Exchange Commission",
+  "people": [],
+  "robots_ok": true,
+  "url": "https://www.sec.gov/data-research/sec-markets-data/form-d-data-sets",
+  "watch": {}
+ },
+ "unit": "filing"
+}

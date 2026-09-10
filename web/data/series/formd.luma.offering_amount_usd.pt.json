@@ -1,0 +1,58 @@
+{
+ "observations": [
+  {
+   "as_of_date": "2023-01-13",
+   "audited_vs_reported": "company_stated",
+   "content_hash": "0d6837d2cff478acaa3d564a05e4f307c8eae3b04bb20516c4b1cb7366aad515",
+   "dispute_text": null,
+   "disputed": false,
+   "entity_id": "luma",
+   "extraction_method": "api",
+   "extractor_version": "formd-1",
+   "grade": "A",
+   "gross_vs_net": null,
+   "http_status": 200,
+   "id": "29f5546cdf12d6ba",
+   "period_start": null,
+   "published_date": "2023-08-25",
+   "q": "2023-01-01 00:00:00",
+   "raw_snippet": "{\"TOTALOFFERINGAMOUNT\": \"25534227\", \"accession\": \"0001971882-23-000001\", \"amendment\": \"false\", \"cik\": \"0001971882\", \"filed\": \"25-AUG-2023\", \"issuer\": \"Luma AI, Inc.\", \"sale_date\": \"2023-01-13\"}",
+   "retrieved_at": "2026-09-10T06:16:12.212124Z",
+   "review_status": "approved",
+   "reviewer_id": null,
+   "run_rate_vs_booked": null,
+   "series_key": "formd.luma.offering_amount_usd.pt",
+   "source_id": "formd",
+   "subject": "luma",
+   "supersedes_id": null,
+   "tier": 4,
+   "unit": "USD",
+   "url": "https://www.sec.gov/files/structureddata/data/form-d-data-sets/2023q3_d.zip",
+   "value_high": null,
+   "value_low": null,
+   "value_numeric": 25534227.0,
+   "value_text": null
+  }
+ ],
+ "series_key": "formd.luma.offering_amount_usd.pt",
+ "source": {
+  "attribution": "SEC EDGAR Form D data sets",
+  "cadence": "daily",
+  "connector": "formd",
+  "default_tier": 4,
+  "expect_series": [
+   "formd.baseten.amount_sold_usd.pt"
+  ],
+  "id": "formd",
+  "kind": "formd",
+  "lens": "capture",
+  "license": "Public domain (U.S. government work)",
+  "name": "SEC EDGAR Form D (private offerings)",
+  "org": "U.S. Securities and Exchange Commission",
+  "people": [],
+  "robots_ok": true,
+  "url": "https://www.sec.gov/data-research/sec-markets-data/form-d-data-sets",
+  "watch": {}
+ },
+ "unit": "USD"
+}

@@ -256,6 +256,20 @@ def cmd_check(a: argparse.Namespace) -> int:
     return 1 if errors else 0
 
 
+def cmd_candidates(a: argparse.Namespace) -> int:
+    """Form D issuers that look like a seed company but have no CIK on file; add the CIK to seed/entities.yaml."""
+    from .ingest.connectors.formd import FormD
+
+    c = FormD()
+    rows = c.candidates(c.fetch(a.day, False))
+    for r in rows:
+        print(
+            f"{r['entity']:24s} {r['issuer'][:40]:40s} CIK {r['cik']}  {r['city']}, {r['state']}  [{r['industry']}]"
+        )
+    print(f"{len(rows)} candidates")
+    return 0
+
+
 def cmd_approve(a: argparse.Namespace) -> int:
     n = st.approve_pending(a.reviewer)
     moved = 0
@@ -303,6 +317,9 @@ def main(argv: list[str] | None = None) -> None:
         ("check", cmd_check),
     ):
         sub.add_parser(name).set_defaults(fn=fn)
+    cd = sub.add_parser("candidates")
+    cd.add_argument("--day", type=date.fromisoformat, default=date.today())
+    cd.set_defaults(fn=cmd_candidates)
     ap = sub.add_parser("approve")
     ap.add_argument("--reviewer", default="merge")
     ap.set_defaults(fn=cmd_approve)
