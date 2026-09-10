@@ -21,7 +21,8 @@ export function BandChart({ series, unit, log, bands }: Props) {
   const ys = all.map((d) => d.v);
   const ts = all.map((d) => d.t);
   const shortSpan = Math.max(...ts) - Math.min(...ts) < 2 * 365 * 86400e3;
-  const domain: [number, number] = log ? [Math.min(...ys) / 2, Math.max(...ys) * 2] : [0, Math.max(...ys) * 1.15];
+  const edges = [bands?.normal?.hi, bands?.fast?.lo, bands?.fast?.hi].filter((n): n is number => n != null);
+  const domain: [number, number] = log ? [Math.min(...ys) / 2, Math.max(...ys, ...edges) * 2] : [0, Math.max(...ys, ...edges) * 1.15];
   return (
     <div className="h-72 w-full" role="img" aria-label={`${series.map((s) => s.name).join(" and ")} over time, ${unit}`}>
       <ResponsiveContainer>
@@ -30,8 +31,8 @@ export function BandChart({ series, unit, log, bands }: Props) {
           <XAxis type="number" dataKey="t" domain={["dataMin", "dataMax"]} tickFormatter={shortSpan ? monthYr : yr} stroke="var(--axis)" tick={{ fill: "var(--muted)", fontSize: 11 }} />
           <YAxis type="number" dataKey="v" scale={log ? "log" : "linear"} domain={domain} tickFormatter={tick(unit)} stroke="var(--axis)"
             tick={{ fill: "var(--muted)", fontSize: 11 }} width={48} label={{ value: unit, angle: -90, position: "insideLeft", fill: "var(--muted)", fontSize: 11 }} />
-          {bands?.normal ? <ReferenceArea y1={bands.normal.lo ?? undefined} y2={bands.normal.hi ?? undefined} fill="var(--ink)" fillOpacity={0.04} label={{ value: "normal", fill: "var(--muted)", fontSize: 11, position: "insideTopRight" }} /> : null}
-          {bands?.fast ? <ReferenceArea y1={bands.fast.lo ?? undefined} y2={bands.fast.hi ?? undefined} fill="var(--fast)" fillOpacity={0.08} label={{ value: "fast", fill: "var(--fast)", fontSize: 11, position: "insideBottomRight" }} /> : null}
+          {bands?.normal ? <ReferenceArea y1={bands.normal.lo ?? domain[0]} y2={bands.normal.hi ?? domain[1]} fill="var(--ink)" fillOpacity={0.04} label={{ value: "normal", fill: "var(--muted)", fontSize: 11, position: "insideTopRight" }} /> : null}
+          {bands?.fast ? <ReferenceArea y1={bands.fast.lo ?? domain[0]} y2={bands.fast.hi ?? domain[1]} fill="var(--fast)" fillOpacity={0.08} label={{ value: "fast", fill: "var(--fast)", fontSize: 11, position: "insideBottomRight" }} /> : null}
           <Tooltip cursor={{ stroke: "var(--axis)" }} content={({ payload }) => {
             const d = payload?.[0]?.payload as (typeof all)[number] | undefined;
             if (!d) return null;

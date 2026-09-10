@@ -6,7 +6,7 @@
   "claimant": "Narayanan & Kapoor",
   "claimant_entity_id": null,
   "confidence": 80,
-  "confidence_now": null,
+  "confidence_now": 70,
   "counterevidence": "Weekly work use of generative AI reached 39% within three years, faster than the PC or the web at the same age; the claim is about impacts, not use, which is what makes it hard to falsify early.",
   "direction_assessment": null,
   "id": "nk_adoption_decades",
@@ -26,8 +26,28 @@
    "bls_labor_productivity_yoy",
    "bls_tfp_private_nonfarm"
   ],
-  "status": null,
-  "status_events": [],
+  "status": "on_track",
+  "status_events": [
+   {
+    "author": "claude-initial-seed",
+    "created_at": "2026-09-10T03:51:16.080998Z",
+    "evidence_ids": [
+     "bb472afbee7ab7eb",
+     "7a1c89cb3f486453",
+     "29ead0fabdeb8fe8",
+     "f7a348d1769cecde",
+     "fe4fd5aab4976231"
+    ],
+    "id": "a9768aa55acf5a56",
+    "new_conf": 70,
+    "new_status": "on_track",
+    "old_conf": null,
+    "old_status": null,
+    "reason": "Every adoption and adaptation indicator with a status sits inside its normal band: Census BTOS firm use 22.4% (normal under a third), BBD hours assisted 6.3% (normal single digits), BLS labour productivity 2.2% and private nonfarm TFP 0.8% (both at trend). The only reading outside a normal band is Ramp's paid-adoption share (56%, emerging on a tech-forward sample). No fast-band breach anywhere; the falsifying pattern (two adoption plus one adaptation indicator in the fast band for four readings) is nowhere near. Initial seed.",
+    "target_id": "nk_adoption_decades",
+    "target_type": "prediction"
+   }
+  ],
   "timing_assessment": null,
   "window_end": "2035-04-15",
   "window_start": "2025-04-15"
@@ -39,7 +59,7 @@
   "claimant": "Narayanan & Kapoor",
   "claimant_entity_id": null,
   "confidence": 75,
-  "confidence_now": null,
+  "confidence_now": 30,
   "counterevidence": "Waymo scaled to hundreds of thousands of paid rides a week; medical-device clearances now exceed a thousand; the safety brakes observed in 2026 were inside labs, not in deployment.",
   "direction_assessment": null,
   "id": "nk_safety_speed_limits",
@@ -53,8 +73,22 @@
   ],
   "published": true,
   "related_indicators": [],
-  "status": null,
-  "status_events": [],
+  "status": "not_yet_testable",
+  "status_events": [
+   {
+    "author": "claude-initial-seed",
+    "created_at": "2026-09-10T03:51:16.080998Z",
+    "evidence_ids": [],
+    "id": "88a4cdaddc9a91f3",
+    "new_conf": 30,
+    "new_status": "not_yet_testable",
+    "old_conf": null,
+    "old_status": null,
+    "reason": "No safety-gating series is in the ledger yet: FDA AI device clearances, Waymo paid rides and lab pause events are planned inputs. Not scored until an instrument exists. Initial seed.",
+    "target_id": "nk_safety_speed_limits",
+    "target_type": "prediction"
+   }
+  ],
   "timing_assessment": null,
   "window_end": "2030-04-15",
   "window_start": "2025-04-15"
@@ -66,7 +100,7 @@
   "claimant": "Narayanan & Kapoor",
   "claimant_entity_id": null,
   "confidence": 70,
-  "confidence_now": null,
+  "confidence_now": 40,
   "counterevidence": "OpenAI's September 2026 research-acceleration disclosure reports more agent than human workdays inside its research org; if independent evaluation confirms it and intervention rates fall, the invention-stage version of this claim fails first.",
   "direction_assessment": null,
   "id": "nk_rsi_external_limits",
@@ -83,8 +117,25 @@
    "metr_horizon_50",
    "horizon_ratio_80_50"
   ],
-  "status": null,
-  "status_events": [],
+  "status": "emerging",
+  "status_events": [
+   {
+    "author": "claude-initial-seed",
+    "created_at": "2026-09-10T03:51:16.080998Z",
+    "evidence_ids": [
+     "bb472afbee7ab7eb",
+     "7a1c89cb3f486453"
+    ],
+    "id": "98805453208e44be",
+    "new_conf": 40,
+    "new_status": "emerging",
+    "old_conf": null,
+    "old_status": null,
+    "reason": "OpenAI's self-reported 3.1 agent-workdays per human workday with more than half of 4-8 hour tasks needing intervention (6 Sep 2026) is tier 7 and does not qualify as the independent RSI series the operationalisation requires; the thesis monitor's invention-side warning is untestable for the same reason. Downstream, the diffusion indicators sit in their normal bands. Initial seed.",
+    "target_id": "nk_rsi_external_limits",
+    "target_type": "prediction"
+   }
+  ],
   "timing_assessment": null,
   "window_end": "2030-09-09",
   "window_start": "2025-09-09"
@@ -96,7 +147,7 @@
   "claimant": "Narayanan & Kapoor",
   "claimant_entity_id": null,
   "confidence": 70,
-  "confidence_now": null,
+  "confidence_now": 65,
   "counterevidence": "METR's 80% horizon is now measured in hours, not minutes, and doubles on the same clock as the 50% horizon; the gap is stable in ratio terms but the absolute reliable horizon is growing fast.",
   "direction_assessment": null,
   "id": "nk_benchmarks_false_summits",
@@ -114,8 +165,27 @@
    "dev_rct_uplift",
    "enterprise_pilot_to_production"
   ],
-  "status": null,
-  "status_events": [],
+  "status": "on_track",
+  "status_events": [
+   {
+    "author": "claude-initial-seed",
+    "created_at": "2026-09-10T03:51:16.080998Z",
+    "evidence_ids": [
+     "11a8bbd24c5c99cb",
+     "858c619bbf5d9edd",
+     "432914bd5a0024ff",
+     "f9abac975385a365"
+    ],
+    "id": "255a3f1bc6613c39",
+    "new_conf": 65,
+    "new_status": "on_track",
+    "old_conf": null,
+    "old_status": null,
+    "reason": "The 80%/50% horizon ratio is 6.3 (normal is 5 or wider), the 2026 METR RCT found developers 4% slower while the 50% horizon doubles every 108 days, and 5% of enterprise pilots reach production with measurable P&L impact (normal under 10%). All three product-side readings are what the claim predicts; the counter-pattern (ratio toward 2 with uplift above 40%) is absent. Initial seed.",
+    "target_id": "nk_benchmarks_false_summits",
+    "target_type": "prediction"
+   }
+  ],
   "timing_assessment": null,
   "window_end": "2030-04-15",
   "window_start": "2025-04-15"
@@ -127,7 +197,7 @@
   "claimant": "Narayanan & Kapoor",
   "claimant_entity_id": null,
   "confidence": 60,
-  "confidence_now": null,
+  "confidence_now": 30,
   "counterevidence": "A single lab release that visibly moves adoption or productivity series within two quarters would be evidence of capability gating.",
   "direction_assessment": null,
   "id": "nk_agi_not_milestone",
@@ -144,10 +214,883 @@
    "cross_tracker_concordance",
    "bbd_work_hours_assisted"
   ],
-  "status": null,
-  "status_events": [],
+  "status": "not_yet_testable",
+  "status_events": [
+   {
+    "author": "claude-initial-seed",
+    "created_at": "2026-09-10T03:51:16.080998Z",
+    "evidence_ids": [
+     "2ec713fc54d6b942",
+     "83c12bef8f8e8107",
+     "a9276b9dfc5babca",
+     "cbb77dc61aadf044"
+    ],
+    "id": "a993e8594ab351bb",
+    "new_conf": 30,
+    "new_status": "not_yet_testable",
+    "old_conf": null,
+    "old_status": null,
+    "reason": "Not testable as a point prediction, as the operationalisation says. Read through cross-tracker concordance, which is 0.0 (all four labour trackers agree on no broad employment effect), consistent with the claim but not a test of it. Initial seed.",
+    "target_id": "nk_agi_not_milestone",
+    "target_type": "prediction"
+   }
+  ],
   "timing_assessment": null,
   "window_end": "2031-07-13",
   "window_start": "2026-07-13"
+ },
+ {
+  "claim_date": "2025-10-28",
+  "claim_text": "According to our measurements, we have now reached the goal, announced last fall, of having an automated research intern by September of this year. By \u201cresearch intern,\u201d we mean a system that can carry out well-defined research tasks under human direction, including tasks that would take a skilled researcher a few days.",
+  "claim_url": "https://openai.com/index/research-acceleration-view-inside-openai/",
+  "claimant": "OpenAI",
+  "claimant_entity_id": "openai",
+  "confidence": 30,
+  "confidence_now": 30,
+  "counterevidence": "The claim is scored by OpenAI's own measurements. The same post reports that over half of successful four-to-eight-hour tasks in the last six months needed at least one human intervention, and no external evaluation of the intern milestone exists.",
+  "direction_assessment": null,
+  "id": "openai_research_intern_sep_2026",
+  "ledger": "lab",
+  "magnitude_assessment": null,
+  "note": "The goal was announced by Sam Altman on a 28 Oct 2025 livestream (TechCrunch paraphrase: https://techcrunch.com/2025/10/28/sam-altman-says-openai-will-have-a-legitimate-ai-researcher-by-2028/); the primary is an X post, which the tracker does not scrape. The claim text is OpenAI's own restatement in its 6 Sep 2026 post, quoted as rendered (a screen-reader-only link label is omitted). openai.com returns 403 to the tracker's fetcher, so the post's figures (3.1 agent-workdays per human workday; over half of 4\u20138 h tasks needed intervention) are not in the observation ledger.",
+  "operationalisation": "Resolves only on an independent replication of OpenAI's agent-workday ratio and intervention rate (METR's RSI programme or equivalent), not on OpenAI's own measurements. The lab's self-grade is tier 7 and caps the status at emerging.",
+  "proxy_types": [
+   "deployment",
+   "benchmark"
+  ],
+  "published": true,
+  "related_indicators": [
+   "metr_horizon_80",
+   "dev_rct_uplift"
+  ],
+  "status": "emerging",
+  "status_events": [
+   {
+    "author": "claude-initial-seed",
+    "created_at": "2026-09-10T03:49:42.830001Z",
+    "evidence_ids": [],
+    "id": "155c477686486dbc",
+    "new_conf": 30,
+    "new_status": "emerging",
+    "old_conf": null,
+    "old_status": null,
+    "reason": "OpenAI's 6 Sep 2026 post declares the September 2026 intern milestone met by its own measurements (3.1 agent-workdays per human workday; over half of successful 4-8 hour tasks still needed a human intervention). A lab's self-grade is tier 7 evidence and caps the status at emerging; no independent replication exists. openai.com blocks the tracker's fetcher, so the figures are cited, not in the ledger. Initial seed.",
+    "target_id": "openai_research_intern_sep_2026",
+    "target_type": "prediction"
+   }
+  ],
+  "timing_assessment": null,
+  "window_end": "2026-09-30",
+  "window_start": "2025-10-28"
+ },
+ {
+  "claim_date": "2026-09-06",
+  "claim_text": "We are making strong progress toward creating an automated AI researcher by March of 2028.",
+  "claim_url": "https://openai.com/index/research-acceleration-view-inside-openai/",
+  "claimant": "OpenAI",
+  "claimant_entity_id": "openai",
+  "confidence": 30,
+  "confidence_now": 30,
+  "counterevidence": "OpenAI's intern milestone was self-graded; its own intervention rate on four-to-eight-hour tasks is above half; METR's 80% horizon on external tasks is hours, not weeks.",
+  "direction_assessment": null,
+  "id": "openai_automated_researcher_mar_2028",
+  "ledger": "lab",
+  "magnitude_assessment": null,
+  "note": "Restates the Oct 2025 goal. openai.com blocks the tracker's fetcher; verified through the browser.",
+  "operationalisation": "Resolves when an external evaluation shows autonomous delivery of a multi-week research project without human intervention; proxied until then by the 80% METR horizon reaching weeks.",
+  "proxy_types": [
+   "benchmark",
+   "deployment"
+  ],
+  "published": true,
+  "related_indicators": [
+   "metr_horizon_80"
+  ],
+  "status": "not_yet_testable",
+  "status_events": [
+   {
+    "author": "claude-initial-seed",
+    "created_at": "2026-09-10T03:49:42.830001Z",
+    "evidence_ids": [],
+    "id": "78e2ea21551719f5",
+    "new_conf": 30,
+    "new_status": "not_yet_testable",
+    "old_conf": null,
+    "old_status": null,
+    "reason": "Window closes March 2028; the only resolving evidence would be an external evaluation of autonomous multi-week research, which does not exist. Initial seed.",
+    "target_id": "openai_automated_researcher_mar_2028",
+    "target_type": "prediction"
+   }
+  ],
+  "timing_assessment": null,
+  "window_end": "2028-03-31",
+  "window_start": "2026-09-06"
+ },
+ {
+  "claim_date": "2026-01-20",
+  "claim_text": "I think we might be six to 12 months away from when the model is doing most, maybe all of what software engineers do end-to-end, and then it\u2019s a question of how fast does that loop close?",
+  "claim_url": "https://officechai.com/ai/we-could-be-6-12-months-away-from-ai-doing-everything-software-engineers-do-end-to-end-anthropic-ceo-dario-amodei/",
+  "claimant": "Dario Amodei",
+  "claimant_entity_id": "anthropic",
+  "confidence": 55,
+  "confidence_now": 55,
+  "counterevidence": "Amodei's own later phrasing softened to 'one or two years' (Dwarkesh Patel interview, Feb 2026). METR's 2026 RCT found experienced developers slowed by 4% (new recruits) and 18% (returning participants). The 80% horizon on METR's suite is around three hours.",
+  "direction_assessment": null,
+  "id": "amodei_swe_end_to_end_6_12mo",
+  "ledger": "lab",
+  "magnitude_assessment": null,
+  "note": "Press quoting verbatim (Davos, Economist/WEF session). The WEF transcript page and a Medium transcript return 403; OfficeChai carries the full quote.",
+  "operationalisation": "'Most' = more than half of software-engineering task-hours completed without human edits. Proxied by the 80% METR horizon on software tasks reaching working days, and by the developer RCTs turning strongly positive.",
+  "proxy_types": [
+   "benchmark",
+   "behaviour"
+  ],
+  "published": true,
+  "related_indicators": [
+   "metr_horizon_80",
+   "dev_rct_uplift",
+   "horizon_ratio_80_50"
+  ],
+  "status": "behind",
+  "status_events": [
+   {
+    "author": "claude-initial-seed",
+    "created_at": "2026-09-10T03:49:42.830001Z",
+    "evidence_ids": [
+     "c256ff03726522bf",
+     "432914bd5a0024ff",
+     "3b8cf0acd1ec2093"
+    ],
+    "id": "b3b7c06cb26be94e",
+    "new_conf": 55,
+    "new_status": "behind",
+    "old_conf": null,
+    "old_status": null,
+    "reason": "Mid-window (Jul 2026 to Jan 2027). METR's 80% horizon on the best-measured model is about three hours (Mythos preview, Apr 2026), not a working day; METR's 2026 RCT found experienced developers 4% slower (new recruits) and 18% slower (returning), after 19% slower in 2025. 'Most of what software engineers do end-to-end' is not what the external instruments show. Initial seed.",
+    "target_id": "amodei_swe_end_to_end_6_12mo",
+    "target_type": "prediction"
+   }
+  ],
+  "timing_assessment": null,
+  "window_end": "2027-01-20",
+  "window_start": "2026-07-20"
+ },
+ {
+  "claim_date": "2026-06-10",
+  "claim_text": "If these scaling laws continue for only a year or two longer, we are likely to get what I\u2019ve called Powerful AI, or \u201ca country of geniuses in a datacenter\u201d.",
+  "claim_url": "https://darioamodei.com/post/policy-on-the-ai-exponential",
+  "claimant": "Dario Amodei",
+  "claimant_entity_id": "anthropic",
+  "confidence": 30,
+  "confidence_now": 30,
+  "counterevidence": "The same post hedges that it 'could also be considerably further out'; Amodei called it 'more like a 50/50 thing' in February 2026; no continual-learning system has shipped and the 80% horizon is hours.",
+  "direction_assessment": null,
+  "id": "amodei_country_of_geniuses_1_2y",
+  "ledger": "lab",
+  "magnitude_assessment": null,
+  "note": "Own post, dated 'June 2026' on the page; the day is taken from press coverage (11\u201312 Jun) and is approximate.",
+  "operationalisation": "Resolves against the 'Machines of Loving Grace' definition (Nobel-level across fields, autonomous multi-day and multi-week tasks, millions of instances); proxied by the 80% METR horizon exceeding weeks and a shipped continual-learning system.",
+  "proxy_types": [
+   "benchmark",
+   "model_release"
+  ],
+  "published": true,
+  "related_indicators": [
+   "metr_horizon_80",
+   "metr_horizon_50"
+  ],
+  "status": "not_yet_testable",
+  "status_events": [
+   {
+    "author": "claude-initial-seed",
+    "created_at": "2026-09-10T03:49:42.830001Z",
+    "evidence_ids": [],
+    "id": "9622fef33cde0d42",
+    "new_conf": 30,
+    "new_status": "not_yet_testable",
+    "old_conf": null,
+    "old_status": null,
+    "reason": "Window runs to mid-2028; the definition (Nobel-level across fields, autonomous multi-week work) has no instrument today beyond the 80% horizon, which is hours. Initial seed.",
+    "target_id": "amodei_country_of_geniuses_1_2y",
+    "target_type": "prediction"
+   }
+  ],
+  "timing_assessment": null,
+  "window_end": "2028-06-30",
+  "window_start": "2026-06-10"
+ },
+ {
+  "claim_date": "2026-02-13",
+  "claim_text": "It is hard for me to see that there won\u2019t be trillions of dollars in revenue before 2030.",
+  "claim_url": "https://www.dwarkesh.com/p/dario-amodei-2",
+  "claimant": "Dario Amodei",
+  "claimant_entity_id": "anthropic",
+  "confidence": 35,
+  "confidence_now": 35,
+  "counterevidence": "Run-rates are annualised from a single month and reported by press, not booked or audited; Cahn's and Bain's gap analyses put required revenue far above the realised path.",
+  "direction_assessment": null,
+  "id": "amodei_trillions_before_2030",
+  "ledger": "lab",
+  "magnitude_assessment": null,
+  "note": "Interviewer's own transcript. Same page: 'The revenue\u2019s going into the low hundreds of billions by 2028, and then the country of geniuses accelerates it to trillions.'",
+  "operationalisation": "Sum of frontier-lab run-rates (Epoch's revenue reports plus press-confirmed figures) reaching $1T annualised before 1 Jan 2030; interim path per Amodei's own words on the same page, 'low hundreds of billions by 2028'.",
+  "proxy_types": [
+   "capital_flow",
+   "deployment"
+  ],
+  "published": true,
+  "related_indicators": [
+   "circular_financing_scale",
+   "cloud_rpo_backlog"
+  ],
+  "status": "emerging",
+  "status_events": [
+   {
+    "author": "claude-initial-seed",
+    "created_at": "2026-09-10T03:49:42.830001Z",
+    "evidence_ids": [
+     "2932a2f9febe1aeb",
+     "76d9d169a90543e5",
+     "c5363ed7b16cf8da"
+    ],
+    "id": "d527928fe1693b6a",
+    "new_conf": 35,
+    "new_status": "emerging",
+    "old_conf": null,
+    "old_status": null,
+    "reason": "Combined OpenAI ($40B, Aug 2026) and Anthropic ($65B, Jul 2026, CNBC-confirmed) run-rates are about $105B annualised, on Amodei's own 'low hundreds of billions by 2028' path. Run-rates are press-reported and annualised, and no stack-wide revenue metric exists yet. Initial seed.",
+    "target_id": "amodei_trillions_before_2030",
+    "target_type": "prediction"
+   }
+  ],
+  "timing_assessment": null,
+  "window_end": "2029-12-31",
+  "window_start": "2026-02-13"
+ },
+ {
+  "claim_date": "2026-02-13",
+  "claim_text": "there\u2019s this bizarre 10x per year growth in revenue that we\u2019ve seen. So in 2023, it was zero to $100 million. In 2024, it was $100 million to $1 billion. In 2025, it was $1 billion to $ 9-10 billion.",
+  "claim_url": "https://www.dwarkesh.com/p/dario-amodei-2",
+  "claimant": "Dario Amodei",
+  "claimant_entity_id": "anthropic",
+  "confidence": 50,
+  "confidence_now": 50,
+  "counterevidence": "Run-rate figures annualise one month of revenue and are press-reported (tier 5); a single large enterprise contract moves them; the adoption indicators (22% of firms, 6% of work hours) sit far behind revenue, which is a tension the run-rate cannot resolve.",
+  "direction_assessment": null,
+  "id": "anthropic_10x_per_year",
+  "ledger": "lab",
+  "magnitude_assessment": null,
+  "note": "Backward-looking statement scored as a forward claim for 2026, as the claimant's own framing invites.",
+  "operationalisation": "Anthropic's run-rate at end-2026 of $90\u2013100B against $9\u201310B at end-2025 keeps the 10x-a-year pattern; the same page states the intent to grow '20 or 30x a year instead of 10x'.",
+  "proxy_types": [
+   "capital_flow"
+  ],
+  "published": true,
+  "related_indicators": [
+   "circular_financing_scale"
+  ],
+  "status": "ahead",
+  "status_events": [
+   {
+    "author": "claude-initial-seed",
+    "created_at": "2026-09-10T03:49:42.830001Z",
+    "evidence_ids": [
+     "afadf59ee9cbb7ff",
+     "76d9d169a90543e5",
+     "c5363ed7b16cf8da"
+    ],
+    "id": "6e76cc5ec700c7d7",
+    "new_conf": 50,
+    "new_status": "ahead",
+    "old_conf": null,
+    "old_status": null,
+    "reason": "Anthropic's run-rate went from $9B (Dec 2025, Epoch) to $65B at end-July 2026 (Epoch; CNBC confirmed): 7.2x in seven months, where a 10x-a-year pace would give about 3.8x. Two sources; tier 5 run-rate, not booked revenue. Initial seed.",
+    "target_id": "anthropic_10x_per_year",
+    "target_type": "prediction"
+   }
+  ],
+  "timing_assessment": null,
+  "window_end": "2026-12-31",
+  "window_start": "2026-01-01"
+ },
+ {
+  "claim_date": "2025-04-03",
+  "claim_text": "According to a recent METR report, the length of coding tasks AIs can handle, their \u201ctime horizon\u201d, doubled every 7 months from 2019 - 2024 and every 4 months from 2024-onward.",
+  "claim_url": "https://ai-2027.com/",
+  "claimant": "AI Futures Project (Kokotajlo, Lifland, Jurkovic et al.)",
+  "claimant_entity_id": null,
+  "confidence": 60,
+  "confidence_now": 60,
+  "counterevidence": "METR's 2023-onward fit is 128.7 days, over four months; the 2024-window fit is sensitive to the model set; METR's 16-hour suite ceiling censors the newest points; horizons measure software tasks under METR's suite, not work in general.",
+  "direction_assessment": null,
+  "id": "ai2027_horizon_doubling_4mo",
+  "ledger": "ai2027",
+  "magnitude_assessment": null,
+  "note": "Own site, 'Why we forecast a superhuman coder in early 2027' box. The timelines supplement adds 'doubling roughly every 4 months in 2025 and may be doubling faster at longer time horizons'.",
+  "operationalisation": "The 50% METR horizon doubling time fitted over the 2024-onward window stays at or under four months (122 days); the tracker's own fit is the band input on the horizon indicators.",
+  "proxy_types": [
+   "benchmark"
+  ],
+  "published": true,
+  "related_indicators": [
+   "metr_horizon_50",
+   "metr_horizon_80"
+  ],
+  "status": "on_track",
+  "status_events": [
+   {
+    "author": "claude-initial-seed",
+    "created_at": "2026-09-10T03:49:42.830001Z",
+    "evidence_ids": [
+     "0d21fe651b2bd589",
+     "1963199165cd8c93",
+     "2325ad877ea0581f",
+     "261c1f51f1f6b138",
+     "2eb7c897f31e5b3e",
+     "3466aea4ed2495c4",
+     "37e97a6fcbe1c2ca",
+     "39c8213ab061a5f7",
+     "4a682b8c20f32dfe",
+     "64f0dec494a49904",
+     "68864ed59f5d9a57",
+     "6af93ac0d37ce9a2",
+     "6b19d566b4f5cd57",
+     "72bcb9d860605a44",
+     "734779b57a58f38f",
+     "7c977050ff6a8cfe",
+     "858c619bbf5d9edd",
+     "8a2d699724cf4d5e",
+     "96d016fade882963",
+     "a2aa2e4df87f5448",
+     "ae5278061f1da61c",
+     "cd50d5649e0a06f1",
+     "e466aae4890e8f57",
+     "efa58e1ccf788fa1",
+     "fb7435cdf6c0c3f4"
+    ],
+    "id": "f25d784bb6177c70",
+    "new_conf": 60,
+    "new_status": "on_track",
+    "old_conf": null,
+    "old_status": null,
+    "reason": "The tracker's log-linear fit of METR's 50% horizon over the 2024-onward window gives a doubling time of 108 days (95% CI 99-119), inside the four-month (122-day) claim; METR's own 2024-onward figure is 89 days. The 2023-onward fit (128.7 days) would read behind, so the reading is window-sensitive. Initial seed.",
+    "target_id": "ai2027_horizon_doubling_4mo",
+    "target_type": "prediction"
+   }
+  ],
+  "timing_assessment": null,
+  "window_end": "2027-03-31",
+  "window_start": "2025-04-03"
+ },
+ {
+  "claim_date": "2025-04-03",
+  "claim_text": "If the trend continues to speed up, by March 2027 AIs could succeed with 80% reliability on software tasks that would take a skilled human years to complete.",
+  "claim_url": "https://ai-2027.com/",
+  "claimant": "AI Futures Project (Kokotajlo, Lifland, Jurkovic et al.)",
+  "claimant_entity_id": null,
+  "confidence": 55,
+  "confidence_now": 55,
+  "counterevidence": "The sentence is conditional on the trend speeding up; the authors' own all-things-considered medians moved out in December 2025; METR's suite cannot measure horizons beyond 16 hours, so a 'years' horizon would be unmeasurable on the current instrument.",
+  "direction_assessment": null,
+  "id": "ai2027_80pct_years_by_mar_2027",
+  "ledger": "ai2027",
+  "magnitude_assessment": null,
+  "note": null,
+  "operationalisation": "The 80% METR horizon reaching a working year (about 2,000 hours) by March 2027; the tracker's 80% horizon indicator is the input.",
+  "proxy_types": [
+   "benchmark"
+  ],
+  "published": true,
+  "related_indicators": [
+   "metr_horizon_80",
+   "horizon_ratio_80_50"
+  ],
+  "status": "behind",
+  "status_events": [
+   {
+    "author": "claude-initial-seed",
+    "created_at": "2026-09-10T03:49:42.830001Z",
+    "evidence_ids": [
+     "c256ff03726522bf",
+     "0d21fe651b2bd589",
+     "1963199165cd8c93",
+     "2325ad877ea0581f",
+     "261c1f51f1f6b138",
+     "2eb7c897f31e5b3e"
+    ],
+    "id": "3a46e6d213568899",
+    "new_conf": 55,
+    "new_status": "behind",
+    "old_conf": null,
+    "old_status": null,
+    "reason": "Six months before the date, the 80% horizon on METR's suite is about three hours (Mythos preview, Apr 2026). A 'years' horizon (about 2,000 working hours) needs roughly ten doublings, about three years at the current 108-day doubling time, and the doubling time is not shortening. The condition 'if the trend continues to speed up' is not met. Initial seed.",
+    "target_id": "ai2027_80pct_years_by_mar_2027",
+    "target_type": "prediction"
+   }
+  ],
+  "timing_assessment": null,
+  "window_end": "2027-03-31",
+  "window_start": "2025-04-03"
+ },
+ {
+  "claim_date": "2025-04-03",
+  "claim_text": "All model-based forecasts have 2027 as one of the most likely years that SC being developed, which is when an SC arrives in the AI 2027 scenario.",
+  "claim_url": "https://ai-2027.com/research/timelines-forecast",
+  "claimant": "AI Futures Project",
+  "claimant_entity_id": null,
+  "confidence": 30,
+  "confidence_now": 30,
+  "counterevidence": "The authors moved their own medians to 2028 (Nikola Jurkovic) and 2030 (Eli Lifland) in a December 2025 disclaimer on the same page; METR's 2026 RCT found no speedup for experienced developers.",
+  "direction_assessment": null,
+  "id": "ai2027_superhuman_coder_2027",
+  "ledger": "ai2027",
+  "magnitude_assessment": null,
+  "note": null,
+  "operationalisation": "SC = an AI that does any coding task of the best lab engineer, 30x faster and cheaper, on 5% of frontier compute; proxied by the 80% METR horizon and a lab disclosure of fully autonomous coding of frontier training runs.",
+  "proxy_types": [
+   "benchmark",
+   "model_release"
+  ],
+  "published": true,
+  "related_indicators": [
+   "metr_horizon_80",
+   "metr_horizon_50"
+  ],
+  "status": "not_yet_testable",
+  "status_events": [
+   {
+    "author": "claude-initial-seed",
+    "created_at": "2026-09-10T03:49:42.830001Z",
+    "evidence_ids": [],
+    "id": "8d28bfab17da5800",
+    "new_conf": 30,
+    "new_status": "not_yet_testable",
+    "old_conf": null,
+    "old_status": null,
+    "reason": "Window is calendar 2027. The authors' own December 2025 update moved their medians to 2028 and 2030; recorded, but a claim is not scored before its window opens. Initial seed.",
+    "target_id": "ai2027_superhuman_coder_2027",
+    "target_type": "prediction"
+   }
+  ],
+  "timing_assessment": null,
+  "window_end": "2027-12-31",
+  "window_start": "2027-01-01"
+ },
+ {
+  "claim_date": "2024-06-20",
+  "claim_text": "AI\u2019s $200B question is now AI\u2019s $600B question.",
+  "claim_url": "https://www.sequoiacap.com/article/ais-600b-question/",
+  "claimant": "David Cahn (Sequoia Capital)",
+  "claimant_entity_id": null,
+  "confidence": 40,
+  "confidence_now": 40,
+  "counterevidence": "Cloud AI revenue is growing (AWS, Google Cloud and Intelligent Cloud segment revenue in the ledger); neither the 'double it twice' multiplier nor the 50% margin assumption is an observed quantity, so the gap is an accounting construct.",
+  "direction_assessment": null,
+  "id": "cahn_600b_question",
+  "ledger": "capture",
+  "magnitude_assessment": null,
+  "note": "Own article; the gap sentence on the same page: 'the $125B hole is now going to become a $500B hole.'",
+  "operationalisation": "Capex-to-revenue gap for the stack: Nvidia data-centre run-rate doubled for the rest of the data centre and doubled again for a 50% margin, minus AI ecosystem revenue. Tracked as a gap, not pass/fail, once the capex_to_revenue_stack metric lands.",
+  "proxy_types": [
+   "capital_flow",
+   "market_structure"
+  ],
+  "published": true,
+  "related_indicators": [
+   "circular_financing_scale",
+   "margin_stack_semis_share",
+   "cloud_rpo_backlog"
+  ],
+  "status": "emerging",
+  "status_events": [
+   {
+    "author": "claude-initial-seed",
+    "created_at": "2026-09-10T03:49:42.830001Z",
+    "evidence_ids": [
+     "2932a2f9febe1aeb",
+     "76d9d169a90543e5"
+    ],
+    "id": "e7e407ddba7420e9",
+    "new_conf": 40,
+    "new_status": "emerging",
+    "old_conf": null,
+    "old_status": null,
+    "reason": "Tracked, not resolved: the stack-wide capex-to-revenue metric is not yet built. Cahn's own July 2026 update restates the gap at $1.5T; realised lab run-rates (about $105B combined) remain far below the implied required revenue. Initial seed.",
+    "target_id": "cahn_600b_question",
+    "target_type": "prediction"
+   }
+  ],
+  "timing_assessment": null,
+  "window_end": "2026-12-31",
+  "window_start": "2024-06-20"
+ },
+ {
+  "claim_date": "2026-07-08",
+  "claim_text": "A lot of people have reached out to me for the updated math behind AI\u2019s $600B question. It is now AI\u2019s $1.5T question.",
+  "claim_url": "https://dcahn.substack.com/p/ais-15t-question",
+  "claimant": "David Cahn",
+  "claimant_entity_id": null,
+  "confidence": 40,
+  "confidence_now": 40,
+  "counterevidence": "The required-revenue figure depends on assumed hardware lifetimes and margins; the labs' run-rates ($65B Anthropic, $40B OpenAI in mid-2026) are growing several-fold a year, which the static gap arithmetic does not project forward.",
+  "direction_assessment": null,
+  "id": "cahn_1_5t_question",
+  "ledger": "capture",
+  "magnitude_assessment": null,
+  "note": "Own Substack; the page lists the trajectory: $200B (Sep 2023), $600B (Jun 2024), $840B (Jun 2025), $1.5T (Jul 2026).",
+  "operationalisation": "Same gap measure: about $3T of cumulative lifetime revenue required against realised AI revenue.",
+  "proxy_types": [
+   "capital_flow"
+  ],
+  "published": true,
+  "related_indicators": [
+   "circular_financing_scale",
+   "margin_stack_semis_share"
+  ],
+  "status": "emerging",
+  "status_events": [
+   {
+    "author": "claude-initial-seed",
+    "created_at": "2026-09-10T03:49:42.830001Z",
+    "evidence_ids": [
+     "2932a2f9febe1aeb",
+     "76d9d169a90543e5"
+    ],
+    "id": "87bedeea7dd91b1a",
+    "new_conf": 40,
+    "new_status": "emerging",
+    "old_conf": null,
+    "old_status": null,
+    "reason": "Same gap measure as the $600B claim; tracked until the capex-to-revenue metric lands. Lab run-rates are growing several-fold a year, which the static arithmetic does not project. Initial seed.",
+    "target_id": "cahn_1_5t_question",
+    "target_type": "prediction"
+   }
+  ],
+  "timing_assessment": null,
+  "window_end": "2030-12-31",
+  "window_start": "2026-07-08"
+ },
+ {
+  "claim_date": "2025-09-23",
+  "claim_text": "Two trillion dollars in annual revenue is what\u2019s needed to fund computing power needed to meet anticipated AI demand by 2030. However, even with AI-related savings, the world is still $800 billion short to keep pace with demand, new research by Bain & Company finds.",
+  "claim_url": "https://www.bain.com/about/media-center/press-releases/20252/%242-trillion-in-new-revenue-needed-to-fund-ais-scaling-trend---bain--companys-6th-annual-global-technology-report/",
+  "claimant": "Bain & Company (Global Technology Report 2025)",
+  "claimant_entity_id": null,
+  "confidence": 30,
+  "confidence_now": 30,
+  "counterevidence": "Bain's demand figure is a model of required, not observed, revenue; falling price per unit of capability means the same compute serves more demand than the model assumes.",
+  "direction_assessment": null,
+  "id": "bain_2t_revenue_2030",
+  "ledger": "capture",
+  "magnitude_assessment": null,
+  "note": null,
+  "operationalisation": "Global AI revenue (labs, applications, cloud AI) trajectory against $2T a year by 2030; interim reading from the capex-to-revenue gap.",
+  "proxy_types": [
+   "capital_flow"
+  ],
+  "published": true,
+  "related_indicators": [
+   "circular_financing_scale",
+   "cloud_rpo_backlog"
+  ],
+  "status": "not_yet_testable",
+  "status_events": [
+   {
+    "author": "claude-initial-seed",
+    "created_at": "2026-09-10T03:49:42.830001Z",
+    "evidence_ids": [],
+    "id": "a779afb341bdd199",
+    "new_conf": 30,
+    "new_status": "not_yet_testable",
+    "old_conf": null,
+    "old_status": null,
+    "reason": "Resolves in 2030 against global AI revenue; no interim reading is decisive. Initial seed.",
+    "target_id": "bain_2t_revenue_2030",
+    "target_type": "prediction"
+   }
+  ],
+  "timing_assessment": null,
+  "window_end": "2030-12-31",
+  "window_start": "2025-09-23"
+ },
+ {
+  "claim_date": "2024-06-25",
+  "claim_text": "AI technology is exceptionally expensive, and to justify those costs, the technology must be able to solve complex problems, which it isn\u2019t designed to do,",
+  "claim_url": "https://www.404media.co/goldman-sachs-ai-is-overhyped-wildly-expensive-and-unreliable/",
+  "claimant": "Jim Covello (Goldman Sachs)",
+  "claimant_entity_id": null,
+  "confidence": 40,
+  "confidence_now": 40,
+  "counterevidence": "The 50% METR horizon on multi-hour software tasks has doubled roughly every four months since 2024, which is not what 'isn't designed to solve complex problems' predicts; hyperscaler cloud segments report rising revenue and stable margins.",
+  "direction_assessment": null,
+  "id": "covello_too_much_spend",
+  "ledger": "capture",
+  "magnitude_assessment": null,
+  "note": "Press quoting verbatim (404 Media, 12 Jul 2024). Goldman's PDF and article return 403 to the tracker; the Goldman landing page (https://www.goldmansachs.com/insights/top-of-mind/gen-ai-too-much-spend-too-little-benefit) verifies the report's framing.",
+  "operationalisation": "Direction claim: application-layer margins net of inference and reported enterprise P&L impact fail to cover the capex; contradicted if the lab recoupment ratio exceeds one or the developer RCTs turn strongly positive.",
+  "proxy_types": [
+   "capital_flow",
+   "benchmark"
+  ],
+  "published": true,
+  "related_indicators": [
+   "dev_rct_uplift",
+   "metr_horizon_50",
+   "margin_stack_semis_share"
+  ],
+  "status": "emerging",
+  "status_events": [
+   {
+    "author": "claude-initial-seed",
+    "created_at": "2026-09-10T03:49:42.830001Z",
+    "evidence_ids": [
+     "432914bd5a0024ff",
+     "3b8cf0acd1ec2093",
+     "0d21fe651b2bd589",
+     "1963199165cd8c93",
+     "2325ad877ea0581f",
+     "261c1f51f1f6b138",
+     "2eb7c897f31e5b3e"
+    ],
+    "id": "73f5baf7dbcb60cf",
+    "new_conf": 40,
+    "new_status": "emerging",
+    "old_conf": null,
+    "old_status": null,
+    "reason": "Mixed evidence. METR's RCTs found no developer speedup (19% slower in 2025; 4% and 18% slower in 2026), consistent with Covello; METR's 50% horizon doubling every 108 days is not. Recoupment metrics stay unpublished until lab cost data exist. Initial seed.",
+    "target_id": "covello_too_much_spend",
+    "target_type": "prediction"
+   }
+  ],
+  "timing_assessment": null,
+  "window_end": "2029-12-31",
+  "window_start": "2024-06-25"
+ },
+ {
+  "claim_date": "2026-03-17",
+  "claim_text": "Hyperscalers are spending $12 on AI infrastructure for every $1 of AI revenue, betting on 5x revenue growth within five years to justify $575B in capex.",
+  "claim_url": "https://tomtunguz.com/12x-bet-on-ai/",
+  "claimant": "Tomasz Tunguz",
+  "claimant_entity_id": null,
+  "confidence": 35,
+  "confidence_now": 35,
+  "counterevidence": "The 12:1 figure divides capex by AI-attributed revenue that hyperscalers only partly disclose; AWS operating margin held near 39% through the capex surge and cloud backlogs are at record highs.",
+  "direction_assessment": null,
+  "id": "tunguz_12x_infra_per_revenue",
+  "ledger": "capture",
+  "magnitude_assessment": null,
+  "note": null,
+  "operationalisation": "Hyperscaler AI capex over hyperscaler AI revenue near 12; resolves in Tunguz's favour if the ratio has not fallen toward the low single digits within five years.",
+  "proxy_types": [
+   "capital_flow"
+  ],
+  "published": true,
+  "related_indicators": [
+   "cloud_segment_margins",
+   "cloud_rpo_backlog",
+   "circular_financing_scale"
+  ],
+  "status": "emerging",
+  "status_events": [
+   {
+    "author": "claude-initial-seed",
+    "created_at": "2026-09-10T03:49:42.830001Z",
+    "evidence_ids": [],
+    "id": "25bcd5ba1bafde19",
+    "new_conf": 35,
+    "new_status": "emerging",
+    "old_conf": null,
+    "old_status": null,
+    "reason": "No hyperscaler discloses AI revenue cleanly enough to compute the 12:1 ratio from filings; AWS operating margin held near 39% through the capex surge (cloud_segment_margins) and cloud backlogs are at records. Initial seed.",
+    "target_id": "tunguz_12x_infra_per_revenue",
+    "target_type": "prediction"
+   }
+  ],
+  "timing_assessment": null,
+  "window_end": "2031-03-17",
+  "window_start": "2026-03-17"
+ },
+ {
+  "claim_date": "2026-09-01",
+  "claim_text": "Under modest change, AI adds less than half a point to GDP growth by 2030 and raises unemployment by a tenth of a point.",
+  "claim_url": "https://www-cdn.anthropic.com/files/4zrzovbb/website/cf58f84d46a4a76bf5a5b039ac695fba6b80041c.pdf",
+  "claimant": "Korinek, Jones, Sacher, Cotter and McCrory (The Anthropic Institute, WP 2026-02)",
+  "claimant_entity_id": null,
+  "confidence": 30,
+  "confidence_now": 30,
+  "counterevidence": "The scenarios are conditional paths, not forecasts, and the paper says today's readings cannot tell them apart before 2028; the labour share is already falling 3.4% year on year, which the modest scenario would not predict.",
+  "direction_assessment": null,
+  "id": "korinek_modest_scenario",
+  "ledger": "capture",
+  "magnitude_assessment": null,
+  "note": "PDF abstract, p. 1; dated September 2026 without a day. Landing page: https://www.anthropic.com/institute/econ-scenarios.",
+  "operationalisation": "US GDP growth and TFP against the no-AI trend; unemployment-rate delta. The authors state the scenarios only separate after 2027, so no macro reading before 2028 discriminates them.",
+  "proxy_types": [
+   "welfare"
+  ],
+  "published": true,
+  "related_indicators": [
+   "bls_tfp_private_nonfarm",
+   "bls_labor_productivity_yoy",
+   "labor_share_nonfarm"
+  ],
+  "status": "not_yet_testable",
+  "status_events": [
+   {
+    "author": "claude-initial-seed",
+    "created_at": "2026-09-10T03:49:42.830001Z",
+    "evidence_ids": [],
+    "id": "05865571a5434fc8",
+    "new_conf": 30,
+    "new_status": "not_yet_testable",
+    "old_conf": null,
+    "old_status": null,
+    "reason": "Per the authors, almost all divergence between the scenarios comes after 2027; the tracker records the path and expects nulls until 2028. Initial seed.",
+    "target_id": "korinek_modest_scenario",
+    "target_type": "prediction"
+   }
+  ],
+  "timing_assessment": null,
+  "window_end": "2030-12-31",
+  "window_start": "2026-09-01"
+ },
+ {
+  "claim_date": "2026-09-01",
+  "claim_text": "the median respondent\u2019s answers are consistent with our substantial change scenario in which, by 2030, GDP rises by 8 percent and cognitive employment declines by 4 percent.",
+  "claim_url": "https://www-cdn.anthropic.com/files/4zrzovbb/website/cf58f84d46a4a76bf5a5b039ac695fba6b80041c.pdf",
+  "claimant": "Korinek et al. (The Anthropic Institute, WP 2026-02)",
+  "claimant_entity_id": null,
+  "confidence": 30,
+  "confidence_now": 30,
+  "counterevidence": "The scenario is anchored on a survey median, not on data; the paper's own divergence claim means the tracker should expect nulls until 2028.",
+  "direction_assessment": null,
+  "id": "korinek_substantial_scenario",
+  "ledger": "capture",
+  "magnitude_assessment": null,
+  "note": "PDF abstract, p. 1.",
+  "operationalisation": "US GDP 8% above the no-AI path by 2030; employment in cognitive occupations down 4%, read off the labour trackers' exposed-occupation series.",
+  "proxy_types": [
+   "welfare",
+   "deployment"
+  ],
+  "published": true,
+  "related_indicators": [
+   "bls_tfp_private_nonfarm",
+   "cross_tracker_concordance",
+   "canaries_entry_level_gap"
+  ],
+  "status": "not_yet_testable",
+  "status_events": [
+   {
+    "author": "claude-initial-seed",
+    "created_at": "2026-09-10T03:49:42.830001Z",
+    "evidence_ids": [],
+    "id": "6b0913e9b160c4ef",
+    "new_conf": 30,
+    "new_status": "not_yet_testable",
+    "old_conf": null,
+    "old_status": null,
+    "reason": "Per the authors, almost all divergence between the scenarios comes after 2027; the tracker records the path and expects nulls until 2028. Initial seed.",
+    "target_id": "korinek_substantial_scenario",
+    "target_type": "prediction"
+   }
+  ],
+  "timing_assessment": null,
+  "window_end": "2030-12-31",
+  "window_start": "2026-09-01"
+ },
+ {
+  "claim_date": "2026-09-01",
+  "claim_text": "GDP growth then rises to 15 percent per year, the labor share of income falls from 60 to 45 percent, and nearly one in five cognitive workers is unemployed.",
+  "claim_url": "https://www-cdn.anthropic.com/files/4zrzovbb/website/cf58f84d46a4a76bf5a5b039ac695fba6b80041c.pdf",
+  "claimant": "Korinek et al. (The Anthropic Institute, WP 2026-02)",
+  "claimant_entity_id": null,
+  "confidence": 30,
+  "confidence_now": 30,
+  "counterevidence": "The extreme path requires diffusion far beyond the adoption indicators (22% of firms, 6% of hours); the labour-share decline so far (3.4% year on year) is within the range of past cyclical swings.",
+  "direction_assessment": null,
+  "id": "korinek_extreme_scenario",
+  "ledger": "capture",
+  "magnitude_assessment": null,
+  "note": "PDF abstract, p. 1.",
+  "operationalisation": "BLS labour share of nonfarm business income falling toward 45%; GDP growth toward 15% a year; cognitive-worker unemployment near 20%.",
+  "proxy_types": [
+   "welfare"
+  ],
+  "published": true,
+  "related_indicators": [
+   "labor_share_nonfarm",
+   "bls_labor_productivity_yoy",
+   "new_grad_unemployment"
+  ],
+  "status": "not_yet_testable",
+  "status_events": [
+   {
+    "author": "claude-initial-seed",
+    "created_at": "2026-09-10T03:49:42.830001Z",
+    "evidence_ids": [
+     "d589259f2640a81d",
+     "d814011d992b9c48"
+    ],
+    "id": "fbdb2cf8acd836fa",
+    "new_conf": 30,
+    "new_status": "not_yet_testable",
+    "old_conf": null,
+    "old_status": null,
+    "reason": "Per the authors, almost all divergence comes after 2027. The BLS labour share is already down 3.4% year on year (labor_share_nonfarm, emerging), noted here but not scored against a 2030 path. Initial seed.",
+    "target_id": "korinek_extreme_scenario",
+    "target_type": "prediction"
+   }
+  ],
+  "timing_assessment": null,
+  "window_end": "2030-12-31",
+  "window_start": "2026-09-01"
+ },
+ {
+  "claim_date": "2026-09-01",
+  "claim_text": "Second, almost all of the divergence comes after 2027, a year and a half from the mid-2026 anchor, because the scenarios share today\u2019s readings and separate only as the reach and use of AI diverge.",
+  "claim_url": "https://www-cdn.anthropic.com/files/4zrzovbb/website/cf58f84d46a4a76bf5a5b039ac695fba6b80041c.pdf",
+  "claimant": "Korinek et al. (The Anthropic Institute, WP 2026-02)",
+  "claimant_entity_id": null,
+  "confidence": 30,
+  "confidence_now": 30,
+  "counterevidence": "Labour share and entry-level employment in exposed occupations already show movements the modest scenario would not predict; 'cannot discriminate before 2028' may be too conservative.",
+  "direction_assessment": null,
+  "id": "korinek_divergence_after_2027",
+  "ledger": "capture",
+  "magnitude_assessment": null,
+  "note": "PDF introduction; shorter form in the conclusions: 'Across scenarios, almost all of the divergence comes after 2027.'",
+  "operationalisation": "A meta-claim about the tracker's own power: no macro indicator (GDP, TFP, labour share, unemployment) should separate the three scenarios before 2028. Falsified if a macro series breaches its fast band before then.",
+  "proxy_types": [
+   "welfare"
+  ],
+  "published": true,
+  "related_indicators": [
+   "bls_tfp_private_nonfarm",
+   "labor_share_nonfarm",
+   "cross_tracker_concordance"
+  ],
+  "status": "not_yet_testable",
+  "status_events": [
+   {
+    "author": "claude-initial-seed",
+    "created_at": "2026-09-10T03:49:42.830001Z",
+    "evidence_ids": [
+     "d589259f2640a81d",
+     "d814011d992b9c48"
+    ],
+    "id": "61cfa81c7138fbcf",
+    "new_conf": 30,
+    "new_status": "not_yet_testable",
+    "old_conf": null,
+    "old_status": null,
+    "reason": "A meta-claim about instrument power, scored only if a macro series breaches its fast band before 2028. The labour share (down 3.4% year on year) sits in the emerging band, not the fast band. Initial seed.",
+    "target_id": "korinek_divergence_after_2027",
+    "target_type": "prediction"
+   }
+  ],
+  "timing_assessment": null,
+  "window_end": "2030-12-31",
+  "window_start": "2027-12-31"
  }
 ]

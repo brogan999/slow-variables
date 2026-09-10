@@ -1,0 +1,179 @@
+{
+ "band_input": "ramp.us_businesses.paid_ai_adoption_share.m",
+ "band_rationale": "Ramp's customers are younger and more tech-forward than the Census universe (56% here against 22% in BTOS at the same date), so the BTOS edges (a third, a half) do not transfer. Normal = under 45% of Ramp customers paying in year four; fast = 65% or more, i.e. most of even this sample paying. Between is emerging. The trend carries more information than the level: +0.4 points in August 2026 after a year of roughly a point a month.",
+ "band_value": {
+  "as_of": "2026-08-31",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "076abc7e58b1e501"
+  ],
+  "value": 0.561
+ },
+ "bucket_id": "early_adoption",
+ "cadence_expected": "monthly",
+ "confidence": 60,
+ "counterevidence": "Sample is Ramp's customer base, not a representative panel; a paid subscription is not usage; the Census all-firm rate at the same date is 22%; Ramp's own August letter is titled 'Cracks in the AI thesis'.",
+ "crosswalk": [
+  {
+   "bucket_id": "early_adoption",
+   "layer_id": "adopters",
+   "note": "BTOS, BBD, Ramp and the Anthropic Economic Index are adoption from both ends.",
+   "relation": "same_valve",
+   "shared_indicators": [],
+   "sublayer_id": null
+  }
+ ],
+ "definition": "Share of Ramp's business customers with a paid subscription to, or token purchases from, an AI model, platform or tool in the month, from Ramp card and bill-pay data.",
+ "derived": [],
+ "direction": null,
+ "direction_rule": null,
+ "falsifying_band": null,
+ "fast_band": {
+  "hi": null,
+  "lo": 0.65
+ },
+ "fits": [],
+ "flow_status": null,
+ "grade": "B",
+ "id": "ramp_paid_ai_adoption",
+ "latest": {
+  "as_of": "2026-08-31",
+  "disputed": false,
+  "grade": "B",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "076abc7e58b1e501"
+  ],
+  "series_key": "ramp.us_businesses.paid_ai_adoption_share.m",
+  "subject": "us_businesses",
+  "unit": "share",
+  "value": 0.561
+ },
+ "layer_id": "adopters",
+ "leading_lagging": "leading",
+ "metric": null,
+ "metric_dims": {},
+ "n_observations": 2,
+ "name": "US businesses paying for AI (Ramp AI Index)",
+ "normal_band": {
+  "hi": 0.45,
+  "lo": null
+ },
+ "override_note": null,
+ "points": [
+  {
+   "as_of": "2026-08-31",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "076abc7e58b1e501"
+   ],
+   "series_key": "ramp.us_businesses.paid_ai_adoption_share.m",
+   "subject": "us_businesses",
+   "unit": "share",
+   "value": 0.561
+  }
+ ],
+ "proposed_status": "emerging",
+ "proxy_types": [
+  "behaviour",
+  "deployment"
+ ],
+ "published": true,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "btos_firm_use",
+  "bbd_work_hours_assisted"
+ ],
+ "related_metrics": [],
+ "related_predictions": [],
+ "series": [
+  {
+   "points": [
+    {
+     "as_of": "2026-08-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "076abc7e58b1e501"
+     ],
+     "series_key": "ramp.us_businesses.paid_ai_adoption_share.m",
+     "subject": "us_businesses",
+     "unit": "share",
+     "value": 0.561
+    }
+   ],
+   "series_key": "ramp.us_businesses.paid_ai_adoption_share.m"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-08-31",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "8dc4e00ef70cf721"
+     ],
+     "series_key": "techcrunch.us_businesses.paid_ai_adoption_share.m",
+     "subject": "us_businesses",
+     "unit": "share",
+     "value": 0.56
+    }
+   ],
+   "series_key": "techcrunch.us_businesses.paid_ai_adoption_share.m"
+  }
+ ],
+ "series_keys": [
+  "ramp.us_businesses.paid_ai_adoption_share.m",
+  "techcrunch.us_businesses.paid_ai_adoption_share.m"
+ ],
+ "sparkline": [
+  {
+   "as_of": "2026-08-31",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "076abc7e58b1e501"
+   ],
+   "series_key": "ramp.us_businesses.paid_ai_adoption_share.m",
+   "subject": "us_businesses",
+   "unit": "share",
+   "value": 0.561
+  }
+ ],
+ "stale_as_of": null,
+ "status": "emerging",
+ "status_events": [
+  {
+   "author": "evaluate",
+   "created_at": "2026-09-10T03:48:21.761557Z",
+   "evidence_ids": [
+    "076abc7e58b1e501"
+   ],
+   "id": "4acc0bfad43a3bf7",
+   "new_conf": 60,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "Ramp AI Index, August 2026: 56.1% of Ramp business customers paid for AI (TechCrunch, 9 Sep 2026: 56%, +0.4 points month on month). Between the normal band (under 45%) and the fast band (65% or more) set for this tech-forward sample; the Census all-firm rate at the same date is 22%. Ramp's own August letter is titled 'Cracks in the AI thesis'. Initial seed.",
+   "target_id": "ramp_paid_ai_adoption",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": null,
+ "tracker_interpretation": "Over half of tech-forward firms pay for AI, but the monthly gain has slowed to under half a point. Paid adoption is broad in this sample and flattening.",
+ "unit": "share",
+ "updated_at": "2026-09-10",
+ "valve_measured": "product_to_adoption",
+ "why_it_matters": "The only monthly spend-based adoption series. Paying is a stronger commitment than 'using', and the sample skews to tech-forward firms, so it runs ahead of the Census rate and shows the ceiling first."
+}

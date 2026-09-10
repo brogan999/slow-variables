@@ -641,3 +641,73 @@ observations:
     url: https://www.aboutamazon.com/news/company-news/amazon-invests-additional-5-billion-anthropic-ai
     raw_snippet: a commitment from Anthropic to spend more than $100 billion over the next ten years on AWS technologies
     note: Anthropic -> Amazon AWS spend commitment, more than US$100B over ten years (floor value); up to 5 GW of Trainium.
+  # --- Ramp AI Index + second sources (sourced 2026-09-10) ---
+  - series_key: ramp.us_businesses.paid_ai_adoption_share.m
+    source_id: ramp
+    value: 0.561
+    unit: share
+    as_of_date: 2026-08-31
+    published_date: 2026-09-09
+    url: https://ramp.com/data
+    tier: 3
+    basis: reported
+    raw_snippet: "Adoption rate 56.1% MoM change +0.4 pp"
+    note: "Ramp Economics Lab landing page, 'Ramp AI Index — Updated Aug 2026'. The /data/ai-index page renders client-side and carries no visible text, so the landing page is the fetched URL. Share of Ramp business customers with paid AI subscriptions or token purchases in the month."
+  - series_key: techcrunch.us_businesses.paid_ai_adoption_share.m
+    source_id: techcrunch
+    value: 0.56
+    unit: share
+    as_of_date: 2026-08-31
+    published_date: 2026-09-09
+    url: https://techcrunch.com/2026/09/09/ai-spend-per-employee-slumped-at-top-firms-in-august-summer-doldrums-or-a-warning-sign/
+    tier: 5
+    basis: reported
+    raw_snippet: "The latest survey shows 56% of Ramp customers paid for AI products in August, rising just 0.4% from the month before."
+    note: "Second source for the Ramp August 2026 reading; rounded to 56%."
+  - series_key: ramp.anthropic.business_paid_share.m
+    source_id: ramp
+    entity_id: anthropic
+    value: 0.435
+    unit: share
+    as_of_date: 2026-07-31
+    published_date: 2026-08-12
+    url: https://ramp.com/data/ai-index-august-2026
+    tier: 3
+    basis: reported
+    raw_snippet: "43.5% of U.S. businesses paid for subscriptions or tokens from Anthropic, up 1.1 percentage points month-over-month."
+    note: "Ramp AI Index August 2026 letter (July data): share of Ramp customers paying a given lab. Feeds a lab-share-of-business-adoption series for the HHI work."
+  - series_key: ramp.openai.business_paid_share.m
+    source_id: ramp
+    entity_id: openai
+    value: 0.397
+    unit: share
+    as_of_date: 2026-07-31
+    published_date: 2026-08-12
+    url: https://ramp.com/data/ai-index-august-2026
+    tier: 3
+    basis: reported
+    raw_snippet: "OpenAI underperformed overall AI adoption, rising only 0.23 percentage points to 39.7% of businesses."
+  - series_key: ramp.xai.business_paid_share.m
+    source_id: ramp
+    value: 0.04
+    unit: share
+    as_of_date: 2026-07-31
+    published_date: 2026-08-12
+    url: https://ramp.com/data/ai-index-august-2026
+    tier: 3
+    basis: reported
+    raw_snippet: "xAI posted its fastest growth since July 2025, rising 0.94 percentage points to 4% of businesses."
+    note: "xAI is not yet an entity; no entity_id."
+  - series_key: cnbc.anthropic.revenue_run_rate_usd.pt
+    source_id: cnbc
+    entity_id: anthropic
+    value: 65000000000
+    unit: USD
+    as_of_date: 2026-07-31
+    published_date: 2026-08-17
+    url: https://www.cnbc.com/2026/08/17/anthropic-says-annualized-revenue-climbed-to-65-billion-in-july.html
+    tier: 5
+    basis: reported
+    raw_snippet: "Anthropic's annualized revenue run rate hit $65 billion at the end of July, CNBC confirmed on Monday, a sevenfold increase from a year ago."
+    run_rate_vs_booked: run_rate
+    note: "Second source for Epoch's Anthropic run-rate row (Bloomberg was first to report). Annualised run-rate, not booked revenue."

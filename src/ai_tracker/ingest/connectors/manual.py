@@ -7,6 +7,7 @@ snippet-in-page assertion either passes or rejects the row. Rows land `pending`;
 from __future__ import annotations
 
 import io
+import json
 import logging
 from datetime import date, datetime, timezone
 from pathlib import Path
@@ -30,6 +31,27 @@ def pdf_text(body: bytes) -> str:
         )  # default tolerance drops spaces in some PDFs
 
 
+def _key(r: dict) -> tuple:
+    v = r.get("value")
+    return (
+        r["series_key"],
+        r.get("entity_id"),
+        str(r["as_of_date"]),
+        None if v is None else float(v),
+        r.get("value_text"),
+        r["url"],
+    )
+
+
+def _verified(ledger: Path) -> set[tuple]:
+    if not ledger.exists():
+        return set()
+    return {
+        _key({**o, "value": o.get("value_numeric")})
+        for o in (json.loads(line) for line in ledger.read_text().splitlines() if line)
+    }
+
+
 class Manual(Connector):
     source_id = "manual"
     kind = "html"
@@ -37,9 +59,11 @@ class Manual(Connector):
 
     def __init__(self, path: Path = Path("seed/manual_observations.yaml")) -> None:
         super().__init__()
-        self.rows: list[dict] = (
+        rows: list[dict] = (
             (yaml.safe_load(path.read_text()) or {}).get("observations") or [] if path.exists() else []
         )
+        done = _verified(Path("data/observations/manual.jsonl"))
+        self.rows = [r for r in rows if _key(r) not in done]  # verified once; pages change after that
         self.urls = [r["url"] for r in self.rows]
 
     def fetch(self, day: date, refetch: bool = False) -> list[RawItem]:

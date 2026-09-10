@@ -353,12 +353,17 @@ class Store:
                 },
             )
         recent = [dump(e) for e in sorted(self.events, key=lambda e: e.created_at, reverse=True)[:3]]
-        as_of = max([c["latest"]["as_of"] for c in cards.values() if c["latest"] and c["published"]] or [""])
-        _write(out / "lens" / "diffusion.json", self._diffusion_lens(cards, recent, as_of))
+
+        def as_of(cs: list[dict[str, Any]]) -> str:
+            return max([c["latest"]["as_of"] for c in cs if c["latest"] and c["published"]] or [""])
+
+        as_of_d = as_of([cards[i.id] for i in self.seed.indicators if i.bucket_id])
+        as_of_c = as_of([cards[i.id] for i in self.seed.indicators if i.layer_id])
+        _write(out / "lens" / "diffusion.json", self._diffusion_lens(cards, recent, as_of_d))
         _write(
             out / "lens" / "capture.json",
             {
-                "as_of": as_of,
+                "as_of": as_of_c,
                 "recent_status_events": recent,
                 "margin_shares": self._margin_shares(),
                 "layers": [

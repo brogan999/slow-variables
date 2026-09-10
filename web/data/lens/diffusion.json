@@ -1,5 +1,5 @@
 {
- "as_of": "2026-09-30",
+ "as_of": "2026-08-31",
  "buckets": [
   {
    "id": "methods",
@@ -1639,6 +1639,51 @@
      "bucket_id": "early_adoption",
      "confidence": 60,
      "grade": "B",
+     "id": "ramp_paid_ai_adoption",
+     "latest": {
+      "as_of": "2026-08-31",
+      "disputed": false,
+      "grade": "B",
+      "high": null,
+      "low": null,
+      "obs_ids": [
+       "076abc7e58b1e501"
+      ],
+      "series_key": "ramp.us_businesses.paid_ai_adoption_share.m",
+      "subject": "us_businesses",
+      "unit": "share",
+      "value": 0.561
+     },
+     "layer_id": "adopters",
+     "leading_lagging": "leading",
+     "n_observations": 2,
+     "name": "US businesses paying for AI (Ramp AI Index)",
+     "published": true,
+     "sparkline": [
+      {
+       "as_of": "2026-08-31",
+       "disputed": false,
+       "grade": "B",
+       "high": null,
+       "low": null,
+       "obs_ids": [
+        "076abc7e58b1e501"
+       ],
+       "series_key": "ramp.us_businesses.paid_ai_adoption_share.m",
+       "subject": "us_businesses",
+       "unit": "share",
+       "value": 0.561
+      }
+     ],
+     "stale_as_of": null,
+     "status": "emerging",
+     "unit": "share",
+     "valve_measured": "product_to_adoption"
+    },
+    {
+     "bucket_id": "early_adoption",
+     "confidence": 60,
+     "grade": "B",
      "id": "aei_augmentation_share",
      "latest": {
       "as_of": "2026-05-31",
@@ -2731,69 +2776,51 @@
  "recent_status_events": [
   {
    "author": "claude-initial-seed",
-   "created_at": "2026-09-10T03:33:19.710753Z",
+   "created_at": "2026-09-10T03:51:16.080998Z",
    "evidence_ids": [
-    "0020effe4dfd27db",
-    "15768aa04a91e520",
-    "15f854e53d8ab33a",
-    "47769aec0def968f",
-    "5b741dc1c66e44b9",
-    "86bf3cb0a6332e69",
-    "8f6d7f9ec8d190d8",
-    "ade7ee6fe91208ab",
-    "bb4e60191fef03e2",
-    "d46842ce12c8b89f",
-    "d4a1c4d05ce13c70",
-    "e89b6535dc8c7e2b",
-    "f2652bb8a224e740",
-    "f280c45df7f10d10"
+    "bb472afbee7ab7eb",
+    "7a1c89cb3f486453",
+    "29ead0fabdeb8fe8",
+    "f7a348d1769cecde",
+    "fe4fd5aab4976231"
    ],
-   "id": "0bf1bcda4658f5f9",
-   "new_conf": 75,
-   "new_status": "concentrating",
-   "old_conf": null,
-   "old_status": null,
-   "reason": "Cumulative signed circular commitments (equity, guarantees, take-or-pay, backstops; LOIs, talks and self-reported aggregates excluded): Dec 2025 $641B, Mar 2026 $673B, Jun 2026 $798B, Sep 2026 $903B. Rising by far more than the $20B dead band each quarter; the largest single items are OpenAI's $300B Oracle contract (reported), $250B Azure commitment (Microsoft blog), Nvidia's $105B lease guarantee (10-Q) and Anthropic's $100B+ AWS commitment (Amazon). Initial seed.",
-   "target_id": "circular_financing_scale",
-   "target_type": "indicator"
-  },
-  {
-   "author": "claude-initial-seed",
-   "created_at": "2026-09-10T03:28:21.345349Z",
-   "evidence_ids": [
-    "288c79d6d2cfef4a",
-    "815ceb0b563b37cb",
-    "87068884441cb244",
-    "89c26630d3de81d0",
-    "a3832632b73ebd69",
-    "d271f3bfd0f0be62",
-    "da8e7e0e31932cfe",
-    "fae81703934cb958"
-   ],
-   "id": "eacb8a9a06f1b332",
+   "id": "a9768aa55acf5a56",
    "new_conf": 70,
-   "new_status": "concentrating",
+   "new_status": "on_track",
    "old_conf": null,
    "old_status": null,
-   "reason": "Semis' share of filed segment operating income (NVIDIA Compute & Networking + AMD Data Center vs AWS + Google Cloud + Microsoft Intelligent Cloud), by calendar quarter: Mar 2025 51.0%, Jun 2025 46.6%, Sep 2025 50.9%, Mar 2026 56.9%, Jun 2026 57.3%. Up more than the two-point dead band over four quarters, with every step up or flat: the bulge is moving down the stack, not up. Microsoft's fiscal Q4 filled as FY minus three quarters. Initial seed.",
-   "target_id": "margin_stack_semis_share",
-   "target_type": "indicator"
+   "reason": "Every adoption and adaptation indicator with a status sits inside its normal band: Census BTOS firm use 22.4% (normal under a third), BBD hours assisted 6.3% (normal single digits), BLS labour productivity 2.2% and private nonfarm TFP 0.8% (both at trend). The only reading outside a normal band is Ramp's paid-adoption share (56%, emerging on a tech-forward sample). No fast-band breach anywhere; the falsifying pattern (two adoption plus one adaptation indicator in the fast band for four readings) is nowhere near. Initial seed.",
+   "target_id": "nk_adoption_decades",
+   "target_type": "prediction"
   },
   {
    "author": "claude-initial-seed",
-   "created_at": "2026-09-10T03:26:57.158418Z",
-   "evidence_ids": [
-    "6fb0f8f0c93debba",
-    "89c26630d3de81d0"
-   ],
-   "id": "5aef343dcc45ec68",
-   "new_conf": 75,
-   "new_status": "stable",
+   "created_at": "2026-09-10T03:51:16.080998Z",
+   "evidence_ids": [],
+   "id": "88a4cdaddc9a91f3",
+   "new_conf": 30,
+   "new_status": "not_yet_testable",
    "old_conf": null,
    "old_status": null,
-   "reason": "AWS operating margin by fiscal quarter (10-Q/10-K segment disclosure): Mar 2025 39.5%, Jun 2025 32.9%, Sep 2025 34.6%, Mar 2026 37.7%, Jun 2026 39.4%. Within the two-point dead band over four quarters despite record capex; Google Cloud and Intelligent Cloud tracked alongside. Initial seed.",
-   "target_id": "cloud_segment_margins",
-   "target_type": "indicator"
+   "reason": "No safety-gating series is in the ledger yet: FDA AI device clearances, Waymo paid rides and lab pause events are planned inputs. Not scored until an instrument exists. Initial seed.",
+   "target_id": "nk_safety_speed_limits",
+   "target_type": "prediction"
+  },
+  {
+   "author": "claude-initial-seed",
+   "created_at": "2026-09-10T03:51:16.080998Z",
+   "evidence_ids": [
+    "bb472afbee7ab7eb",
+    "7a1c89cb3f486453"
+   ],
+   "id": "98805453208e44be",
+   "new_conf": 40,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "OpenAI's self-reported 3.1 agent-workdays per human workday with more than half of 4-8 hour tasks needing intervention (6 Sep 2026) is tier 7 and does not qualify as the independent RSI series the operationalisation requires; the thesis monitor's invention-side warning is untestable for the same reason. Downstream, the diffusion indicators sit in their normal bands. Initial seed.",
+   "target_id": "nk_rsi_external_limits",
+   "target_type": "prediction"
   }
  ],
  "valves": [
@@ -2815,6 +2842,7 @@
     "enterprise_pilot_to_production",
     "bbd_work_hours_assisted",
     "btos_firm_use",
+    "ramp_paid_ai_adoption",
     "aei_augmentation_share"
    ],
    "name": "Product \u2192 adoption",
@@ -2856,7 +2884,7 @@
    "to": "capture"
   }
  ],
- "verdict": "As of 2026-09-30: methods faster than normal, products consistent with normal, early adoption consistent with normal, adaptation consistent with normal, return arrow unmeasured.",
+ "verdict": "As of 2026-08-31: methods faster than normal, products consistent with normal, early adoption consistent with normal, adaptation consistent with normal, return arrow unmeasured.",
  "what_would_change": [
   "METR 50% time horizon: Normal = doubling time \u2265 7 months (\u2248213 days, METR's 2019\u20132025 trend); fast = \u2264 4 months (\u2248122 days), the AI 2027 assumption. Between the two is `emerging`. The bands are about the current pace, so the input is a log-linear fit over the 2024-onward window, the most recent window METR reports (89 days in the TH1.1 post of 29 Jan 2026), recomputed from METR's corrected data. On the 2023-onward window METR's published figure is 128.7 days, in the gap between the bands: the reading is window-sensitive and both numbers are shown.",
   "METR 80% time horizon: Same bands and same 2024-onward window as the 50% horizon, applied to our own fit because METR publishes doubling times for the 50% series only. The 2023-onward fit (horizon_doubling_days_80) sits in the gap between the bands.",
@@ -2867,6 +2895,7 @@
   "Enterprise pilots with measurable P&L impact: Normal = at most 10% of pilots with measurable P&L impact, the typical enterprise-IT hit rate; fast = more than 30%.",
   "Share of work hours assisted by generative AI: Normal = single-digit share of hours in year three (PCs and the internet were here at the same age); fast = more than 20% of hours assisted.",
   "US firms using AI (Census BTOS): Normal = under about a third of firms in year three, the pace at which PCs and e-commerce reached half of firms over a decade or more; fast = more than half. Ramp's card-spend index (>50%) is a different instrument and not comparable.",
+  "US businesses paying for AI (Ramp AI Index): Ramp's customers are younger and more tech-forward than the Census universe (56% here against 22% in BTOS at the same date), so the BTOS edges (a third, a half) do not transfer. Normal = under 45% of Ramp customers paying in year four; fast = 65% or more, i.e. most of even this sample paying. Between is emerging. The trend carries more information than the level: +0.4 points in August 2026 after a year of roughly a point a month.",
   "Entry-level employment shortfall in AI-exposed occupations: Normal = a shortfall under 10 points, inside the range youth employment swings over a cycle; fast = 25 points or more. The current reading sits between, so it is `emerging`.",
   "Exposed vs unexposed occupation employment gap (Revelio): Normal = a relative gap of at most 5 points over nearly four years, within the drift between occupation groups in any period; fast = a 10-point or larger gap. Between is `emerging`.",
   "California unemployment claims from AI-exposed occupations: Normal = monthly moves of up to 2% in the smoothed series, the noise floor of claims data; fast = 5% or more month on month, sustained. Between is `emerging`.",

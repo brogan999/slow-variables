@@ -212,6 +212,29 @@ indicators:
     related_indicators: [bbd_work_hours_assisted]
     published: true
     updated_at: 2026-09-10
+  - id: ramp_paid_ai_adoption
+    name: US businesses paying for AI (Ramp AI Index)
+    definition: Share of Ramp's business customers with a paid subscription to, or token purchases from, an AI model, platform or tool in the month, from Ramp card and bill-pay data.
+    why_it_matters: The only monthly spend-based adoption series. Paying is a stronger commitment than 'using', and the sample skews to tech-forward firms, so it runs ahead of the Census rate and shows the ceiling first.
+    proxy_types: [behaviour, deployment]
+    unit: share
+    cadence_expected: monthly
+    series_keys: ["ramp.us_businesses.paid_ai_adoption_share.m", "techcrunch.us_businesses.paid_ai_adoption_share.m"]
+    band_input: ramp.us_businesses.paid_ai_adoption_share.m
+    bucket_id: early_adoption
+    valve_measured: product_to_adoption
+    normal_band: {hi: 0.45}
+    fast_band: {lo: 0.65}
+    band_rationale: "Ramp's customers are younger and more tech-forward than the Census universe (56% here against 22% in BTOS at the same date), so the BTOS edges (a third, a half) do not transfer. Normal = under 45% of Ramp customers paying in year four; fast = 65% or more, i.e. most of even this sample paying. Between is emerging. The trend carries more information than the level: +0.4 points in August 2026 after a year of roughly a point a month."
+    tracker_interpretation: Over half of tech-forward firms pay for AI, but the monthly gain has slowed to under half a point. Paid adoption is broad in this sample and flattening.
+    counterevidence: Sample is Ramp's customer base, not a representative panel; a paid subscription is not usage; the Census all-firm rate at the same date is 22%; Ramp's own August letter is titled 'Cracks in the AI thesis'.
+    layer_id: adopters
+    leading_lagging: leading
+    confidence: 60
+    proposed_status: emerging
+    related_indicators: [btos_firm_use, bbd_work_hours_assisted]
+    published: true
+    updated_at: 2026-09-10
   - id: canaries_exposed_employment_yoy
     name: Employment in AI-exposed occupations, year on year
     definition: Year-on-year employment change in the most AI-exposed occupation quintile versus the least exposed, from the Stanford DEL and ADP Research Canaries Dashboard (payroll data). The band applies to the most-exposed series.
