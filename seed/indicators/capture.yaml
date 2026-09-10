@@ -636,3 +636,23 @@ indicators:
     proposed_status: not_yet_measurable
     published: false
     updated_at: 2026-09-11
+  - id: model_token_concentration
+    name: "Model-layer token concentration on OpenRouter (HHI, top table)"
+    definition: "Herfindahl index of prompt-plus-completion tokens across the models in OpenRouter's daily top table, derived metric model_token_hhi_top10; one router's traffic, the listed slice only."
+    why_it_matters: "The only public, daily, cross-vendor usage signal. If routed demand concentrates on one or two models, the model layer holds pricing power; if it spreads, the layer is dispersing from the demand side."
+    proxy_types: [market_structure, product]
+    unit: index
+    cadence_expected: weekly
+    metric: model_token_hhi_top10
+    band_input: "metric:model_token_hhi_top10"
+    layer_id: model
+    sublayer_id: frontier_labs
+    direction_rule: {periods: 4, dead_band: 0.02, higher_is: concentrating, rationale: "Weekly readings; moves under 0.02 in the index are table churn. A rising index means routed tokens concentrating on fewer models."}
+    leading_lagging: coincident
+    tracker_interpretation: "Series starts 9 September 2026; a direction needs five weekly readings."
+    counterevidence: "OpenRouter is one router with a developer-heavy mix; the top table's length changes, which moves the index without any change in demand; enterprise traffic goes direct to the labs and never appears here."
+    confidence: 40
+    proposed_status: not_yet_measurable
+    related_indicators: [lab_hhi, model_price_per_horizon_hour]
+    published: true
+    updated_at: 2026-09-10

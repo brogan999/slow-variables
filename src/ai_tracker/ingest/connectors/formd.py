@@ -9,6 +9,7 @@ from __future__ import annotations
 import csv
 import io
 import json
+import logging
 import re
 import zipfile
 from datetime import date
@@ -75,6 +76,9 @@ def _date(s: str) -> date | None:
     return None
 
 
+log = logging.getLogger(__name__)
+
+
 class FormD(Connector):
     source_id = "formd"
     kind = "api"
@@ -108,7 +112,9 @@ class FormD(Connector):
                 try:
                     items.append(self.fetch_one(url, day, refetch))
                 except Exception as ex:  # noqa: BLE001 - one search failing must not drop the quarterly zips
-                    self.errors.append(f"efts {e.id}: {ex}")
+                    log.warning(
+                        "formd: efts %s skipped this run: %s", e.id, ex
+                    )  # supplementary; the zips are the record
         return items
 
     def _match(self, cik: str, name: str) -> str | None:

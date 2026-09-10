@@ -7,8 +7,11 @@ CY2025 = year, CY2026Q2I = instant). Rows without a frame are cumulative year-to
 from __future__ import annotations
 
 import json
+import logging
 import re
 from datetime import date
+
+import httpx
 
 from ...schema import Basis, Entity, Extraction, Observation, Tier
 from ...store import Seed
@@ -29,6 +32,9 @@ CONCEPTS = {
 FRAME = re.compile(r"^CY(\d{4})(?:Q([1-4]))?(I?)$")
 
 
+log = logging.getLogger(__name__)
+
+
 class SecXbrl(Connector):
     source_id = "sec_xbrl"
     headers = {"Accept": "application/json"}
@@ -38,6 +44,17 @@ class SecXbrl(Connector):
         super().__init__()
         self.entities = [e for e in (entities or Seed.load().entities) if e.cik]
         self.urls = [f"https://data.sec.gov/api/xbrl/companyfacts/CIK{e.cik}.json" for e in self.entities]
+
+    def fetch(self, day: date, refetch: bool = False) -> list[RawItem]:
+        out: list[RawItem] = []
+        for url in self.urls:
+            try:
+                out.append(self.fetch_one(url, day, refetch))
+            except httpx.HTTPStatusError as ex:
+                if ex.response.status_code != 404:
+                    raise
+                log.info("sec_xbrl: no companyfacts for %s (private filer)", url.rsplit("/", 1)[-1])
+        return out
 
     def extract(self, items: list[RawItem]) -> list[Observation]:
         rows: list[Observation] = []

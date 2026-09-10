@@ -63,6 +63,7 @@ class Ncsl(Connector):
 
     source_id = "ncsl"
     kind = "html"
+    optional = True  # ncsl.org's robots.txt now disallows the tracking page for our agent; the ledger keeps the last count
     year = 2025
     urls = [f"https://www.ncsl.org/technology-and-communication/artificial-intelligence-{year}-legislation"]
     expect_series = ["ncsl.us.ai_bills_introduced.a"]

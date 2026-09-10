@@ -259,6 +259,9 @@ def prose(f: dict[str, Any], tools: Tools) -> tuple[str | None, str | None]:
 def write(store: st.Store, today: date | None = None, since: date | None = None) -> Path:
     today = today or date.today()
     prev = load_memos()
+    if prev and prev[-1]["date"] == today.isoformat():
+        log.info("memo for %s already exists; not rewriting it", today)
+        return MEMOS / f"{today.isoformat()}.md"
     since = since or (
         date.fromisoformat(prev[-1]["date"]) + timedelta(days=1) if prev else today - timedelta(days=7)
     )

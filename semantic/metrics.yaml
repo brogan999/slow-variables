@@ -555,3 +555,28 @@ metrics:
     sql: |
       SELECT max(as_of_date) AS as_of_date, count(DISTINCT subject) AS value, list(id) AS obs_ids
       FROM observations WHERE series_key LIKE '%.first_llm_device_clearance.pt'
+  model_token_hhi_top10:
+    description: Herfindahl index of prompt-plus-completion tokens across the models in OpenRouter's daily top table (sum of squared shares within the listed slice).
+    rationale: Router traffic is the only public, daily, cross-vendor usage signal; concentration in it is the model layer's HHI from the demand side.
+    grain: [as_of_date]
+    unit: index
+    lead_lag: coincident
+    formula_version: 1
+    inputs: ["openrouter_rankings.*.tokens.d"]
+    caveats: Only the models OpenRouter lists that day (its top table) are in the denominator, so the index is an upper bound on market concentration and shifts when the table's length changes; one router, not the market.
+    sql: |
+      WITH t AS (SELECT as_of_date, id, value_numeric AS v, sum(value_numeric) OVER (PARTITION BY as_of_date) AS tot
+                 FROM observations WHERE series_key LIKE 'openrouter_rankings.%.tokens.d' AND value_numeric > 0)
+      SELECT as_of_date, sum((v / tot) * (v / tot)) AS value, list(id) AS obs_ids FROM t GROUP BY as_of_date HAVING count(*) >= 5
+  aa_frontier_intelligence_index:
+    description: Highest Artificial Analysis Intelligence Index among covered models on each date the value changed.
+    rationale: An independent, frequently refreshed capability axis to set beside METR's horizon.
+    grain: [as_of_date]
+    unit: index
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["aa.*.intelligence_index.pt"]
+    caveats: The index composition changes between Artificial Analysis versions; compare within a version.
+    sql: |
+      SELECT as_of_date, max(value_numeric) AS value, list(id ORDER BY value_numeric DESC)[1:3] AS obs_ids
+      FROM observations WHERE series_key LIKE 'aa.%.intelligence_index.pt' GROUP BY as_of_date

@@ -26,11 +26,14 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with: { name: raw-cache, path: ingest/cache, retention-days: 90, if-no-files-found: ignore }
+      - id: today
+        if: always()
+        run: echo "date=$(date -u +%F)" >> "$GITHUB_OUTPUT"
       - uses: peter-evans/create-pull-request@v7
         if: always()
         with:
           branch: nightly
-          title: "nightly: ${{ steps.check.outputs.failed == 'true' && 'CHECK FAILED ' || '' }}${{ steps.ingest.outputs.failed == 'true' && 'PARTIAL ' || '' }}observations ${{ github.run_started_at }}"
+          title: "nightly: ${{ steps.check.outputs.failed == 'true' && 'CHECK FAILED ' || '' }}${{ steps.ingest.outputs.failed == 'true' && 'PARTIAL ' || '' }}observations ${{ steps.today.outputs.date }}"
           body-path: data/summary.md
           commit-message: "nightly ingest\n\nCo-Authored-By: ai-tracker nightly <noreply@github.com>"
           add-paths: |

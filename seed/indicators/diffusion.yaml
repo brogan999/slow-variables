@@ -1048,27 +1048,29 @@ indicators:
     published: true
     updated_at: 2026-09-10
   - id: yale_occupational_mix_dissimilarity
-    name: Occupational-mix dissimilarity since ChatGPT (Yale Budget Lab)
-    definition: How far the occupational mix of the US workforce has moved from its November 2022 baseline, the Budget Lab's dissimilarity index, with the graduates sub-index range the reports state in text.
-    why_it_matters: If AI were reshaping work, the mix of occupations would move faster than in prior technology transitions. The Budget Lab finds it moving at about the historical pace.
+    name: "Occupational-mix dissimilarity since ChatGPT (Yale Budget Lab)"
+    definition: "How far the occupational mix of the US workforce has moved from its November 2022 baseline, in percentage points, the Budget Lab's dissimilarity index from its monthly labour-market update workbook; the same index from a January 2021 baseline is shown alongside as the pre-AI comparison at the same age."
+    why_it_matters: "If AI were reshaping work, the mix of occupations would move faster than in prior technology transitions. The Budget Lab finds it moving at about the historical pace."
     proxy_types: [deployment, welfare]
-    unit: share
-    cadence_expected: monthly
-    series_keys: ["yale_budget_lab.recent_vs_older_grads.occupation_dissimilarity_range.pt"]
+    unit: pp
+    cadence_expected: quarterly
+    series_keys: ["yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m", "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m", "yale_budget_lab.recent_vs_older_grads.occupation_dissimilarity_range.pt"]
+    band_input: yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m
     bucket_id: adaptation
     valve_measured: adoption_to_adaptation
-    normal_band: {hi: 0.08}
-    fast_band: {lo: 0.12}
-    band_rationale: "Placeholder pending the numeric series: normal = the all-worker index within the range prior transitions (computers, the internet) produced at the same age; fast = 50% above that range."
-    tracker_interpretation: Unpublished; see the reason.
-    unpublished_reason: "Waiting on a connector for the Budget Lab data workbook: the monthly updates state the all-worker index only in a chart, and the text gives just the graduates sub-index range (30-33%)."
-    counterevidence: Occupational mix moves slowly by construction; a CPS-based index cannot see within-occupation task change.
+    normal_band: {hi: 7.5}
+    fast_band: {lo: 10}
+    band_rationale: "Normal = within one and a half times the pre-AI baseline's reading at the same age (the January 2021 baseline sat near 5 pp forty months in); fast = 10 pp or more, twice the pre-AI pace. Between is `emerging`."
+    tracker_interpretation: "5.3 pp forty months after ChatGPT against 5.0 pp for the January 2021 baseline at the same age: slightly above the norm, and the curve predates AI."
+    counterevidence: "Occupational mix moves slowly by construction; a CPS-based index cannot see within-occupation task change; the workbook URL changes with each update, so the series is refreshed by hand."
+    stale_ok: true
+    stale_reason: "The Budget Lab's update pages block fetchers and the workbook URL changes each release; the source row is moved forward by hand."
     layer_id: labour_consumers
     leading_lagging: lagging
-    confidence: 60
+    confidence: 65
     proposed_status: consistent_with_normal
-    related_indicators: [canaries_exposed_employment_yoy]
-    published: false
+    related_indicators: [canaries_exposed_employment_yoy, humlum_precise_null]
+    published: true
     updated_at: 2026-09-10
   - id: humlum_precise_null
     name: Chatbot effect on earnings and hours in exposed occupations (Denmark)
