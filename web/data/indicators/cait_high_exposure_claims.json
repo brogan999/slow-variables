@@ -1,0 +1,178 @@
+{
+ "band_input": "edd.ca_high_exposure.claims_3mma_mom.m",
+ "band_rationale": "Normal = monthly moves of up to 2% in the smoothed series, the noise floor of claims data; fast = 5% or more month on month, sustained. Between is `emerging`.",
+ "band_value": {
+  "as_of": "2026-07-31",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "70a2930208a0f005"
+  ],
+  "value": 0.01
+ },
+ "bucket_id": "adaptation",
+ "cadence_expected": "monthly",
+ "confidence": 70,
+ "counterevidence": "One state; exposure measured at occupation level; claims respond to the business cycle first.",
+ "crosswalk": [
+  {
+   "bucket_id": "adaptation",
+   "layer_id": "labour_consumers",
+   "note": "Productivity, wages, employment and consumer surplus.",
+   "relation": "same_valve",
+   "shared_indicators": [],
+   "sublayer_id": null
+  }
+ ],
+ "definition": "Month-on-month change in the three-month moving average of new initial unemployment claims from high-AI-exposure occupations in California (potential-exposure measure), from the California Policy Lab and EDD tracker.",
+ "derived": [],
+ "direction": null,
+ "direction_rule": null,
+ "falsifying_band": null,
+ "fast_band": {
+  "hi": null,
+  "lo": 0.05
+ },
+ "fits": [],
+ "flow_status": null,
+ "grade": "A",
+ "id": "cait_high_exposure_claims",
+ "latest": {
+  "as_of": "2026-07-31",
+  "disputed": false,
+  "grade": "B",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "83c12bef8f8e8107"
+  ],
+  "series_key": "cait.ca_high_exposure.claims_3mma_mom.m",
+  "subject": "ca_high_exposure",
+  "unit": "share",
+  "value": 0.01
+ },
+ "layer_id": "labour_consumers",
+ "leading_lagging": "leading",
+ "metric": null,
+ "metric_dims": {},
+ "n_observations": 2,
+ "name": "California unemployment claims from AI-exposed occupations",
+ "normal_band": {
+  "hi": 0.02,
+  "lo": null
+ },
+ "override_note": null,
+ "points": [
+  {
+   "as_of": "2026-07-31",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "83c12bef8f8e8107"
+   ],
+   "series_key": "cait.ca_high_exposure.claims_3mma_mom.m",
+   "subject": "ca_high_exposure",
+   "unit": "share",
+   "value": 0.01
+  }
+ ],
+ "proposed_status": "consistent_with_normal",
+ "proxy_types": [
+  "deployment",
+  "welfare"
+ ],
+ "published": true,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "cross_tracker_concordance"
+ ],
+ "related_metrics": [],
+ "related_predictions": [],
+ "series": [
+  {
+   "points": [
+    {
+     "as_of": "2026-07-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "83c12bef8f8e8107"
+     ],
+     "series_key": "cait.ca_high_exposure.claims_3mma_mom.m",
+     "subject": "ca_high_exposure",
+     "unit": "share",
+     "value": 0.01
+    }
+   ],
+   "series_key": "cait.ca_high_exposure.claims_3mma_mom.m"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-07-31",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "70a2930208a0f005"
+     ],
+     "series_key": "edd.ca_high_exposure.claims_3mma_mom.m",
+     "subject": "ca_high_exposure",
+     "unit": "share",
+     "value": 0.01
+    }
+   ],
+   "series_key": "edd.ca_high_exposure.claims_3mma_mom.m"
+  }
+ ],
+ "series_keys": [
+  "cait.ca_high_exposure.claims_3mma_mom.m",
+  "edd.ca_high_exposure.claims_3mma_mom.m"
+ ],
+ "sparkline": [
+  {
+   "as_of": "2026-07-31",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "83c12bef8f8e8107"
+   ],
+   "series_key": "cait.ca_high_exposure.claims_3mma_mom.m",
+   "subject": "ca_high_exposure",
+   "unit": "share",
+   "value": 0.01
+  }
+ ],
+ "stale_as_of": null,
+ "status": "consistent_with_normal",
+ "status_events": [
+  {
+   "author": "claude-initial-seed",
+   "created_at": "2026-09-10T02:28:10.721882Z",
+   "evidence_ids": [
+    "70a2930208a0f005"
+   ],
+   "id": "c674167a8cf8d3e0",
+   "new_conf": 70,
+   "new_status": "consistent_with_normal",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "California AI-Unemployment Tracker, July 2026 data (California Policy Lab; identical release on the EDD site): the 3-month moving average of high-AI-exposure initial claims rose about 1.0% month on month (52,300 to 52,800). Inside the normal band (<=2%). Initial seed.",
+   "target_id": "cait_high_exposure_claims",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": null,
+ "tracker_interpretation": "Claims from exposed occupations are drifting up about a percent a month, in line with California's overall labour market, not ahead of it.",
+ "unit": "share",
+ "updated_at": "2026-09-10",
+ "valve_measured": "adoption_to_adaptation",
+ "why_it_matters": "Administrative claims data, not a survey and not a profile scrape; the closest thing to a real-time separations signal."
+}

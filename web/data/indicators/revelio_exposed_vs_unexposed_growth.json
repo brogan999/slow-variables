@@ -1,0 +1,159 @@
+{
+ "band_input": "revelio.us_exposed.growth_gap.m",
+ "band_rationale": "Normal = a relative gap of at most 5 points over nearly four years, within the drift between occupation groups in any period; fast = a 10-point or larger gap. Between is `emerging`.",
+ "band_value": {
+  "as_of": "2026-07-31",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "a9276b9dfc5babca"
+  ],
+  "value": -0.06
+ },
+ "bucket_id": "adaptation",
+ "cadence_expected": "monthly",
+ "confidence": 65,
+ "counterevidence": "Profile-based data over-represents white-collar workers; the event study's control group is not immune to AI; single source.",
+ "crosswalk": [
+  {
+   "bucket_id": "adaptation",
+   "layer_id": "labour_consumers",
+   "note": "Productivity, wages, employment and consumer surplus.",
+   "relation": "same_valve",
+   "shared_indicators": [],
+   "sublayer_id": null
+  }
+ ],
+ "definition": "Employment in the most AI-exposed occupations relative to the least exposed, since October 2022, from Revelio Labs' AI Labor Market Tracker (online profile data).",
+ "derived": [],
+ "direction": null,
+ "direction_rule": null,
+ "falsifying_band": null,
+ "fast_band": {
+  "hi": -0.1,
+  "lo": null
+ },
+ "fits": [],
+ "flow_status": null,
+ "grade": "B",
+ "id": "revelio_exposed_vs_unexposed_growth",
+ "latest": {
+  "as_of": "2026-07-31",
+  "disputed": false,
+  "grade": "B",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "a9276b9dfc5babca"
+  ],
+  "series_key": "revelio.us_exposed.growth_gap.m",
+  "subject": "us_exposed",
+  "unit": "share",
+  "value": -0.06
+ },
+ "layer_id": "labour_consumers",
+ "leading_lagging": "coincident",
+ "metric": null,
+ "metric_dims": {},
+ "n_observations": 1,
+ "name": "Exposed vs unexposed occupation employment gap (Revelio)",
+ "normal_band": {
+  "hi": null,
+  "lo": -0.05
+ },
+ "override_note": null,
+ "points": [
+  {
+   "as_of": "2026-07-31",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "a9276b9dfc5babca"
+   ],
+   "series_key": "revelio.us_exposed.growth_gap.m",
+   "subject": "us_exposed",
+   "unit": "share",
+   "value": -0.06
+  }
+ ],
+ "proposed_status": "emerging",
+ "proxy_types": [
+  "deployment",
+  "welfare"
+ ],
+ "published": true,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "canaries_exposed_employment_yoy",
+  "cross_tracker_concordance"
+ ],
+ "related_metrics": [],
+ "related_predictions": [],
+ "series": [
+  {
+   "points": [
+    {
+     "as_of": "2026-07-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "a9276b9dfc5babca"
+     ],
+     "series_key": "revelio.us_exposed.growth_gap.m",
+     "subject": "us_exposed",
+     "unit": "share",
+     "value": -0.06
+    }
+   ],
+   "series_key": "revelio.us_exposed.growth_gap.m"
+  }
+ ],
+ "series_keys": [
+  "revelio.us_exposed.growth_gap.m"
+ ],
+ "sparkline": [
+  {
+   "as_of": "2026-07-31",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "a9276b9dfc5babca"
+   ],
+   "series_key": "revelio.us_exposed.growth_gap.m",
+   "subject": "us_exposed",
+   "unit": "share",
+   "value": -0.06
+  }
+ ],
+ "stale_as_of": null,
+ "status": "emerging",
+ "status_events": [
+  {
+   "author": "claude-initial-seed",
+   "created_at": "2026-09-10T02:28:10.711840Z",
+   "evidence_ids": [
+    "a9276b9dfc5babca"
+   ],
+   "id": "c9553f06b40b7e27",
+   "new_conf": 65,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "Revelio Labs AI Labor Market Tracker, August 2026 edition (data to July 2026): employment in the most AI-exposed occupations is down ~6% relative to the least exposed since pre-ChatGPT, widened from ~4% in the previous edition. Between the normal band (>= -5%) and the fast band (<= -10%). Single source. Initial seed.",
+   "target_id": "revelio_exposed_vs_unexposed_growth",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": null,
+ "tracker_interpretation": "The gap widened from ~4% to ~6% in a month of releases; direction matters more than level here.",
+ "unit": "share",
+ "updated_at": "2026-09-10",
+ "valve_measured": "adoption_to_adaptation",
+ "why_it_matters": "An independent, differently sourced read on the same question as the Canaries payroll series."
+}

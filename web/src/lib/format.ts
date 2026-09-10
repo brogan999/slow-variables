@@ -14,6 +14,7 @@ export function fmt(v: number | null | undefined, unit?: string): string {
     case "ratio": return `${sig(v)}×`;
     case "minutes": return v >= 60 ? `${(v / 60).toFixed(1)} h` : `${sig(v)} min`;
     case "days": return `${v.toFixed(0)} days`;
+    case "count": return v.toFixed(0);
     default: return unit ? `${sig(v)} ${unit}` : sig(v);
   }
 }

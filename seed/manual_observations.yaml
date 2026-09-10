@@ -203,3 +203,147 @@ observations:
     basis: reported
     raw_snippet: "The share of work hours assisted by generative AI grew from 4.1% to 6.3% over roughly the same stretch."
     note: "FRED Blog, 'Does generative AI save time at work?'; rounds RPSGENAIASSISTWRKHRSALL Q2 2026 (6.27%). Same page: weekly work use 28.2% (Q3 2024) to 39.2% (Q2 2026)."
+  # --- labour trackers and Anthropic Economic Index, sourced 2026-09-10; snippets verified verbatim ---
+  - series_key: adp_research.us_high_exposure.employment_yoy.m
+    source_id: adp_research
+    value: -0.002
+    unit: share
+    as_of_date: 2026-06-30
+    published_date: 2026-07-22
+    url: https://www.adpresearch.com/research/canaries-dashboard-2026-june
+    tier: 6
+    basis: reported
+    raw_snippet: "Employment in occupations with high exposure to AI contracted 0.2 percent in June from a year earlier, according to new data from the Canaries Dashboard, a project of the Stanford Digital Economy Lab and ADP Research."
+    note: "Canaries Dashboard, June 2026 release; most-exposed quintile, all ages. Ages 22-25 high-exposure: -4.3% y/y on the same page."
+  - series_key: adp_research.us_low_exposure.employment_yoy.m
+    source_id: adp_research
+    value: 0.006
+    unit: share
+    as_of_date: 2026-06-30
+    published_date: 2026-07-22
+    url: https://www.adpresearch.com/research/canaries-dashboard-2026-june
+    tier: 6
+    basis: reported
+    raw_snippet: "Employment in the least-exposed occupations grew by 0.6 percent year over year."
+    note: "Least-exposed quintile, all ages, June 2026 y/y."
+  - series_key: stanford_del.us_entry_level_exposed.employment_gap.pt
+    source_id: stanford_del
+    value: 0.19
+    unit: share
+    as_of_date: 2026-06-30
+    published_date: 2026-08-12
+    url: https://digitaleconomy.stanford.edu/news/canariesaug26/
+    tier: 6
+    basis: reported
+    raw_snippet: "by this same measure, the shortfall was 15% at the July 2025 data vintage and is 19% as of June 2026"
+    note: "Canaries August 2026 revision: kept-pace shortfall for ages 22-25 in the two most-exposed quintiles vs the three least."
+  - series_key: stanford_del.us_entry_level_exposed.employment_gap.pt
+    source_id: stanford_del
+    value: 0.15
+    unit: share
+    as_of_date: 2025-07-31
+    published_date: 2026-08-12
+    url: https://digitaleconomy.stanford.edu/news/canariesaug26/
+    tier: 6
+    basis: reported
+    raw_snippet: "by this same measure, the shortfall was 15% at the July 2025 data vintage and is 19% as of June 2026"
+    note: "Same sentence; the July 2025 vintage."
+  - series_key: revelio.us_exposed.growth_gap.m
+    source_id: revelio
+    value: -0.06
+    unit: share
+    as_of_date: 2026-07-31
+    published_date: 2026-09-03
+    url: https://www.reveliolabs.com/ai-labor-market-tracker/us/august-2026
+    tier: 6
+    basis: reported
+    raw_snippet: "Employment in the most AI-exposed occupations is down ~6% relative to the least exposed occupations, since pre-ChatGPT."
+    note: "August 2026 edition (released 3 Sep 2026), stats as of July 2026; event study vs Oct 2022. Same page: AI-adopting firms grow headcount 26% more than non-adopters."
+  - series_key: cait.ca_high_exposure.claims_3mma_mom.m
+    source_id: cait
+    value: 0.010
+    unit: share
+    as_of_date: 2026-07-31
+    published_date: 2026-08-13
+    url: https://capolicylab.org/california-ai-unemployment-tracker/
+    tier: 6
+    basis: reported
+    raw_snippet: "Using the potential AI exposure measure, the 3-month moving average of high-AI-exposure claims rose by about 500 (up about 1.0%), from about 52,300 to 52,800 new initial claims."
+    note: "July 2026 data month; observed-exposure measure +3.1% on the same page."
+  - series_key: edd.ca_high_exposure.claims_3mma_mom.m
+    source_id: edd
+    value: 0.010
+    unit: share
+    as_of_date: 2026-07-31
+    published_date: 2026-08-13
+    url: https://edd.ca.gov/en/about_edd/ai-and-the-economy/
+    tier: 4
+    basis: reported
+    raw_snippet: "Using the potential AI exposure measure, the 3-month moving average of high-AI-exposure claims rose by about 500 (up about 1.0%), from about 52,300 to 52,800 new initial claims."
+    note: "Official EDD mirror of the CAIT release; the second, official source for the July 2026 figure."
+  - series_key: anthropic_ei.global.augmentation_share.pt
+    source_id: anthropic_ei
+    value: 0.52
+    unit: share
+    as_of_date: 2025-11-30
+    published_date: 2026-01-15
+    url: https://www.anthropic.com/research/anthropic-economic-index-january-2026-report
+    tier: 2
+    basis: company_stated
+    raw_snippet: "The share of conversations classified as augmented jumped 5pp to 52% and the share deemed automated fell 4pp to 45%."
+    note: "Claude.ai conversations, November 2025 data; the latest report with a numeric aggregate (Mar and Jun 2026 reports show the split only in figures)."
+  - series_key: anthropic_ei.global.automation_share.pt
+    source_id: anthropic_ei
+    value: 0.45
+    unit: share
+    as_of_date: 2025-11-30
+    published_date: 2026-01-15
+    url: https://www.anthropic.com/research/anthropic-economic-index-january-2026-report
+    tier: 2
+    basis: company_stated
+    raw_snippet: "The share of conversations classified as augmented jumped 5pp to 52% and the share deemed automated fell 4pp to 45%."
+    note: "Same sentence; remainder unclassified."
+  - series_key: anthropic_ei.global.occupations_25pct_tasks_share.pt
+    source_id: anthropic_ei
+    value: 0.49
+    unit: share
+    as_of_date: 2026-02-12
+    published_date: 2026-03-24
+    url: https://www.anthropic.com/research/economic-index-march-2026-report
+    tier: 2
+    basis: company_stated
+    raw_snippet: "About 49% of jobs have seen at least a quarter of their tasks performed using Claude."
+    note: "March 2026 report, data 5-12 Feb 2026; cumulative across reports."
+  - series_key: nyfed.us_recent_grads.unemployment_rate.pt
+    source_id: nyfed
+    value: 0.056
+    unit: share
+    as_of_date: 2026-06-30
+    published_date: 2026-08-13
+    url: https://www.newyorkfed.org/research/college-labor-market
+    tier: 4
+    basis: reported
+    raw_snippet: "The unemployment rate stayed elevated at about 5.6 percent, and the underemployment rate edged up to 42 percent."
+    note: "2026:Q2, ages 22-27 with a bachelor's degree; the page carries no date, so published_date is the first archive capture showing Q2."
+  - series_key: stanford_del.us_entry_level_exposed.employment_change_since_nov2022.pt
+    source_id: stanford_del
+    value: -0.11
+    unit: share
+    as_of_date: 2026-06-30
+    published_date: 2026-08-12
+    url: https://digitaleconomy.stanford.edu/news/canariesaug26/
+    tier: 6
+    basis: reported
+    raw_snippet: "In levels, employment of workers ages 22–25 in the two most exposed quintiles fell about 11% between November 2022 and June 2026, while employment of the same age group in the three least-exposed quintiles grew about 10%."
+    note: "Canaries August 2026 revision, footnote: cumulative change since Nov 2022, ages 22-25, two most-exposed quintiles."
+  - series_key: stanford_del.us_entry_level_unexposed.employment_change_since_nov2022.pt
+    source_id: stanford_del
+    value: 0.10
+    unit: share
+    as_of_date: 2026-06-30
+    published_date: 2026-08-12
+    url: https://digitaleconomy.stanford.edu/news/canariesaug26/
+    tier: 6
+    basis: reported
+    raw_snippet: "In levels, employment of workers ages 22–25 in the two most exposed quintiles fell about 11% between November 2022 and June 2026, while employment of the same age group in the three least-exposed quintiles grew about 10%."
+    note: "Same footnote; three least-exposed quintiles, same age group."

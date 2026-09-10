@@ -116,3 +116,27 @@ metrics:
     args: {since: "2024-01-01"}
     caveats: Three parameters worth of freedom on ~20 points; AIC computed on ln(horizon) residuals for both forms.
     python: fits.hyperbolic
+  cross_tracker_concordance:
+    description: Number of the four monthly labour trackers whose latest reading is past its own AI-attributable-break threshold (0-4). Thresholds - high-exposure employment y/y <= -3% (ADP/Stanford Canaries); exposed-vs-unexposed gap <= -10% (Revelio); high-exposure claims 3-month average +5% or more m/m (CAIT); entry-level shortfall >= 25% (Canaries).
+    rationale: The falsification rule wants three trackers breaking at once, not one; this is the count. Thresholds are the fast-band edges of the four indicators, documented there.
+    grain: [as_of_date]
+    unit: count
+    lead_lag: coincident
+    formula_version: 1
+    inputs: ["adp_research.us_high_exposure.employment_yoy.m", "revelio.us_exposed.growth_gap.m", "cait.ca_high_exposure.claims_3mma_mom.m", "stanford_del.us_entry_level_exposed.employment_gap.pt"]
+    caveats: Different geographies (CA claims vs US employment), different exposure measures; a count, not a test.
+    sql: |
+      WITH latest AS (
+        SELECT series_key, value_numeric, as_of_date, id,
+               row_number() OVER (PARTITION BY series_key ORDER BY as_of_date DESC) AS rn
+        FROM observations
+        WHERE series_key IN ('adp_research.us_high_exposure.employment_yoy.m', 'revelio.us_exposed.growth_gap.m',
+                             'cait.ca_high_exposure.claims_3mma_mom.m', 'stanford_del.us_entry_level_exposed.employment_gap.pt'))
+      SELECT max(as_of_date) AS as_of_date,
+             sum(CASE WHEN series_key = 'adp_research.us_high_exposure.employment_yoy.m' AND value_numeric <= -0.03 THEN 1
+                      WHEN series_key = 'revelio.us_exposed.growth_gap.m' AND value_numeric <= -0.10 THEN 1
+                      WHEN series_key = 'cait.ca_high_exposure.claims_3mma_mom.m' AND value_numeric >= 0.05 THEN 1
+                      WHEN series_key = 'stanford_del.us_entry_level_exposed.employment_gap.pt' AND value_numeric >= 0.25 THEN 1
+                      ELSE 0 END)::DOUBLE AS value,
+             list(id ORDER BY id) AS obs_ids
+      FROM latest WHERE rn = 1

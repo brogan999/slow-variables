@@ -1,0 +1,166 @@
+{
+ "band_input": "metric:cross_tracker_concordance",
+ "band_rationale": "Normal = at most one tracker past its threshold; fast = two; falsifying = three or more concurrently, per the thesis rules in the brief.",
+ "band_value": {
+  "as_of": "2026-07-31",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "2ec713fc54d6b942",
+   "83c12bef8f8e8107",
+   "a9276b9dfc5babca",
+   "cbb77dc61aadf044"
+  ],
+  "value": 0.0
+ },
+ "bucket_id": "adaptation",
+ "cadence_expected": "monthly",
+ "confidence": 70,
+ "counterevidence": "Thresholds are ours; the four trackers measure different populations and geographies, so concurrence is a loose test.",
+ "crosswalk": [
+  {
+   "bucket_id": "adaptation",
+   "layer_id": "labour_consumers",
+   "note": "Productivity, wages, employment and consumer surplus.",
+   "relation": "same_valve",
+   "shared_indicators": [],
+   "sublayer_id": null
+  }
+ ],
+ "definition": "How many of the four labour trackers (Canaries payroll, Canaries entry-level, Revelio, CAIT) currently read past their own AI-attributable-break threshold. Derived metric cross_tracker_concordance, 0 to 4.",
+ "derived": [
+  {
+   "as_of_date": "2026-07-31",
+   "computed_at": "2026-09-10T02:28:10.579298Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "ed08c58063fcdeb8",
+   "input_observation_ids": [
+    "2ec713fc54d6b942",
+    "83c12bef8f8e8107",
+    "a9276b9dfc5babca",
+    "cbb77dc61aadf044"
+   ],
+   "metric": "cross_tracker_concordance",
+   "obs_ids": [
+    "2ec713fc54d6b942",
+    "83c12bef8f8e8107",
+    "a9276b9dfc5babca",
+    "cbb77dc61aadf044"
+   ],
+   "value": 0.0,
+   "value_high": null,
+   "value_low": null
+  }
+ ],
+ "direction": null,
+ "direction_rule": null,
+ "falsifying_band": {
+  "hi": null,
+  "lo": 3.0
+ },
+ "fast_band": {
+  "hi": null,
+  "lo": 2.0
+ },
+ "fits": [],
+ "flow_status": null,
+ "grade": "B",
+ "id": "cross_tracker_concordance",
+ "latest": {
+  "as_of": "2026-07-31",
+  "dims": {},
+  "obs_ids": [
+   "2ec713fc54d6b942",
+   "83c12bef8f8e8107",
+   "a9276b9dfc5babca",
+   "cbb77dc61aadf044"
+  ],
+  "unit": "count",
+  "value": 0.0
+ },
+ "layer_id": "labour_consumers",
+ "leading_lagging": "coincident",
+ "metric": "cross_tracker_concordance",
+ "metric_dims": {},
+ "n_observations": 4,
+ "name": "Cross-tracker concordance (labour)",
+ "normal_band": {
+  "hi": 1.0,
+  "lo": null
+ },
+ "override_note": null,
+ "points": [
+  {
+   "as_of": "2026-07-31",
+   "dims": {},
+   "obs_ids": [
+    "2ec713fc54d6b942",
+    "83c12bef8f8e8107",
+    "a9276b9dfc5babca",
+    "cbb77dc61aadf044"
+   ],
+   "unit": "count",
+   "value": 0.0
+  }
+ ],
+ "proposed_status": "consistent_with_normal",
+ "proxy_types": [
+  "deployment",
+  "welfare"
+ ],
+ "published": true,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "canaries_exposed_employment_yoy",
+  "revelio_exposed_vs_unexposed_growth",
+  "cait_high_exposure_claims",
+  "canaries_entry_level_gap"
+ ],
+ "related_metrics": [],
+ "related_predictions": [],
+ "series": [],
+ "series_keys": [],
+ "sparkline": [
+  {
+   "as_of": "2026-07-31",
+   "dims": {},
+   "obs_ids": [
+    "2ec713fc54d6b942",
+    "83c12bef8f8e8107",
+    "a9276b9dfc5babca",
+    "cbb77dc61aadf044"
+   ],
+   "unit": "count",
+   "value": 0.0
+  }
+ ],
+ "stale_as_of": null,
+ "status": "consistent_with_normal",
+ "status_events": [
+  {
+   "author": "claude-initial-seed",
+   "created_at": "2026-09-10T02:28:10.735231Z",
+   "evidence_ids": [
+    "2ec713fc54d6b942",
+    "83c12bef8f8e8107",
+    "a9276b9dfc5babca",
+    "cbb77dc61aadf044"
+   ],
+   "id": "162319d3d6b6993f",
+   "new_conf": 70,
+   "new_status": "consistent_with_normal",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "Zero of four labour trackers past their AI-attributable-break threshold as of July 2026: Canaries y/y -0.2% (threshold -3%), Revelio gap -6% (threshold -10%), CAIT +1.0% (threshold +5%), entry-level shortfall 19% (threshold 25%). The falsification rule needs three concurrent. Initial seed.",
+   "target_id": "cross_tracker_concordance",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": null,
+ "tracker_interpretation": "Zero of four. The entry-level signal is real but below its threshold; nothing else is close.",
+ "unit": "count",
+ "updated_at": "2026-09-10",
+ "valve_measured": "adoption_to_adaptation",
+ "why_it_matters": "The thesis's falsification rule requires three trackers breaking concurrently, not one. This is that count, made explicit."
+}

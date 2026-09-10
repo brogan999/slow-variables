@@ -1,0 +1,198 @@
+{
+ "band_input": "anthropic_ei.global.augmentation_share.pt",
+ "band_rationale": "Normal = augmentation at least half of classified use; fast = automation clearly dominant (augmentation under 40%). Between is `emerging`.",
+ "band_value": {
+  "as_of": "2025-11-30",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "94a856a674612b96"
+  ],
+  "value": 0.52
+ },
+ "bucket_id": "early_adoption",
+ "cadence_expected": "quarterly",
+ "confidence": 60,
+ "counterevidence": "One provider's consumer product; classification is model-based; API usage (where automation concentrates) is reported separately and skews the other way.",
+ "crosswalk": [
+  {
+   "bucket_id": "early_adoption",
+   "layer_id": "adopters",
+   "note": "BTOS, BBD, Ramp and the Anthropic Economic Index are adoption from both ends.",
+   "relation": "same_valve",
+   "shared_indicators": [],
+   "sublayer_id": null
+  }
+ ],
+ "definition": "Share of Claude.ai conversations classified as augmentation (the human stays in the loop) versus automation, from Anthropic's Economic Index; the share of occupations with at least a quarter of their tasks used is shown alongside.",
+ "derived": [],
+ "direction": null,
+ "direction_rule": null,
+ "falsifying_band": null,
+ "fast_band": {
+  "hi": 0.4,
+  "lo": null
+ },
+ "fits": [],
+ "flow_status": null,
+ "grade": "B",
+ "id": "aei_augmentation_share",
+ "latest": {
+  "as_of": "2025-11-30",
+  "disputed": false,
+  "grade": "B",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "94a856a674612b96"
+  ],
+  "series_key": "anthropic_ei.global.augmentation_share.pt",
+  "subject": "global",
+  "unit": "share",
+  "value": 0.52
+ },
+ "layer_id": "adopters",
+ "leading_lagging": "coincident",
+ "metric": null,
+ "metric_dims": {},
+ "n_observations": 3,
+ "name": "Augmentation vs automation share (Anthropic Economic Index)",
+ "normal_band": {
+  "hi": null,
+  "lo": 0.5
+ },
+ "override_note": null,
+ "points": [
+  {
+   "as_of": "2025-11-30",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "94a856a674612b96"
+   ],
+   "series_key": "anthropic_ei.global.augmentation_share.pt",
+   "subject": "global",
+   "unit": "share",
+   "value": 0.52
+  }
+ ],
+ "proposed_status": "consistent_with_normal",
+ "proxy_types": [
+  "behaviour",
+  "product"
+ ],
+ "published": true,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "bbd_work_hours_assisted"
+ ],
+ "related_metrics": [],
+ "related_predictions": [],
+ "series": [
+  {
+   "points": [
+    {
+     "as_of": "2025-11-30",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "94a856a674612b96"
+     ],
+     "series_key": "anthropic_ei.global.augmentation_share.pt",
+     "subject": "global",
+     "unit": "share",
+     "value": 0.52
+    }
+   ],
+   "series_key": "anthropic_ei.global.augmentation_share.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2025-11-30",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "2da56e6efd9e205b"
+     ],
+     "series_key": "anthropic_ei.global.automation_share.pt",
+     "subject": "global",
+     "unit": "share",
+     "value": 0.45
+    }
+   ],
+   "series_key": "anthropic_ei.global.automation_share.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-02-12",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "85e4ee329e1a9c2d"
+     ],
+     "series_key": "anthropic_ei.global.occupations_25pct_tasks_share.pt",
+     "subject": "global",
+     "unit": "share",
+     "value": 0.49
+    }
+   ],
+   "series_key": "anthropic_ei.global.occupations_25pct_tasks_share.pt"
+  }
+ ],
+ "series_keys": [
+  "anthropic_ei.global.augmentation_share.pt",
+  "anthropic_ei.global.automation_share.pt",
+  "anthropic_ei.global.occupations_25pct_tasks_share.pt"
+ ],
+ "sparkline": [
+  {
+   "as_of": "2025-11-30",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "94a856a674612b96"
+   ],
+   "series_key": "anthropic_ei.global.augmentation_share.pt",
+   "subject": "global",
+   "unit": "share",
+   "value": 0.52
+  }
+ ],
+ "stale_as_of": "2025-11-30",
+ "status": "consistent_with_normal",
+ "status_events": [
+  {
+   "author": "claude-initial-seed",
+   "created_at": "2026-09-10T02:28:10.743661Z",
+   "evidence_ids": [
+    "94a856a674612b96"
+   ],
+   "id": "c18c9e4a9145fe1d",
+   "new_conf": 60,
+   "new_status": "consistent_with_normal",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "Anthropic Economic Index, January 2026 report (November 2025 data): 52% of Claude.ai conversations classified as augmentation, 45% automation; the March 2026 report says augmentation rose again but only in figures. Inside the normal band (augmentation >= 50%). Tier 2 provider disclosure. Initial seed.",
+   "target_id": "aei_augmentation_share",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": null,
+ "tracker_interpretation": "Augmentation rose to 52% in the latest numeric report; the 2026 reports say it rose again but only in figures, so the number here lags.",
+ "unit": "share",
+ "updated_at": "2026-09-10",
+ "valve_measured": "product_to_adoption",
+ "why_it_matters": "The paper's bet is that AI diffuses as a tool people use, not a replacement; this is the only large-scale usage classification that speaks to it directly."
+}

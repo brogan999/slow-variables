@@ -166,3 +166,72 @@ sources:
     attribution: "Bick, Blandin & Deming, Real-Time Population Survey, retrieved from FRED"
     expect_series: ["fred.us_workers.hours_assisted_share.q"]
     people: ["Alexander Bick", "Adam Blandin", "David Deming"]
+  - id: adp_research
+    name: ADP Research, Canaries Dashboard releases
+    org: ADP Research
+    url: https://www.adpresearch.com/
+    kind: html
+    default_tier: 6
+    cadence: monthly
+    lens: diffusion
+    connector: manual
+    license: "ADP Research; short quotation"
+    attribution: "Canaries Dashboard, a project of the Stanford Digital Economy Lab and ADP Research"
+    people: ["Nela Richardson", "Erik Brynjolfsson", "Bharat Chandar", "Ruyu Chen"]
+  - id: revelio
+    name: Revelio Labs AI Labor Market Tracker (US)
+    org: Revelio Labs
+    url: https://www.reveliolabs.com/ai-labor-market-tracker
+    kind: html
+    default_tier: 6
+    cadence: monthly
+    lens: diffusion
+    connector: manual
+    license: "Revelio Labs; short quotation"
+    attribution: "Revelio Labs, AI Labor Market Tracker"
+    people: ["Ben Zweig", "Lisa Simon"]
+  - id: cait
+    name: California AI-Unemployment Tracker (CAIT)
+    org: California Policy Lab with California EDD
+    url: https://capolicylab.org/california-ai-unemployment-tracker/
+    kind: html
+    default_tier: 6
+    cadence: monthly
+    lens: diffusion
+    connector: manual
+    license: "California Policy Lab"
+    attribution: "California Policy Lab and California Employment Development Department, California AI-Unemployment Tracker"
+    people: ["Till von Wachter"]
+  - id: edd
+    name: California EDD, AI and the economy
+    org: California Employment Development Department
+    url: https://edd.ca.gov/en/about_edd/ai-and-the-economy/
+    kind: html
+    default_tier: 4
+    cadence: monthly
+    lens: diffusion
+    connector: manual
+    license: "Public record (State of California)"
+    attribution: "California Employment Development Department, AI and the economy"
+  - id: anthropic_ei
+    name: Anthropic Economic Index reports
+    org: Anthropic
+    url: https://www.anthropic.com/economic-index
+    kind: html
+    default_tier: 2
+    cadence: quarterly
+    lens: diffusion
+    connector: manual
+    license: "Anthropic; short quotation"
+    attribution: "Anthropic Economic Index, January and March 2026 reports"
+  - id: nyfed
+    name: The Labor Market for Recent College Graduates
+    org: Federal Reserve Bank of New York
+    url: https://www.newyorkfed.org/research/college-labor-market
+    kind: html
+    default_tier: 4
+    cadence: quarterly
+    lens: diffusion
+    connector: manual
+    license: "Public domain (U.S. Federal Reserve)"
+    attribution: "Federal Reserve Bank of New York, The Labor Market for Recent College Graduates"

@@ -1,0 +1,163 @@
+{
+ "band_input": "adp_research.us_high_exposure.employment_yoy.m",
+ "band_rationale": "Normal = within one percent of flat, ordinary occupational churn; fast = a 3% or worse decline in exposed occupations, which is what a broad AI-attributable displacement looks like in payroll data. Between is `emerging`.",
+ "band_value": {
+  "as_of": "2026-06-30",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "cbb77dc61aadf044"
+  ],
+  "value": -0.002
+ },
+ "bucket_id": "adaptation",
+ "cadence_expected": "monthly",
+ "confidence": null,
+ "counterevidence": "Unpublished until a second source states the all-ages figure (the Stanford note shows it only in a figure). Exposure is a model-derived measure; ADP payroll coverage skews to larger firms; the divergence began before ChatGPT on some cuts (NY Fed; Iscenko and Millet).",
+ "crosswalk": [
+  {
+   "bucket_id": "adaptation",
+   "layer_id": "labour_consumers",
+   "note": "Productivity, wages, employment and consumer surplus.",
+   "relation": "same_valve",
+   "shared_indicators": [],
+   "sublayer_id": null
+  }
+ ],
+ "definition": "Year-on-year employment change in the most AI-exposed occupation quintile versus the least exposed, from the Stanford DEL and ADP Research Canaries Dashboard (payroll data). The band applies to the most-exposed series.",
+ "derived": [],
+ "direction": null,
+ "direction_rule": null,
+ "falsifying_band": null,
+ "fast_band": {
+  "hi": -0.03,
+  "lo": null
+ },
+ "fits": [],
+ "flow_status": null,
+ "grade": "B",
+ "id": "canaries_exposed_employment_yoy",
+ "latest": {
+  "as_of": "2026-06-30",
+  "disputed": false,
+  "grade": "B",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "cbb77dc61aadf044"
+  ],
+  "series_key": "adp_research.us_high_exposure.employment_yoy.m",
+  "subject": "us_high_exposure",
+  "unit": "share",
+  "value": -0.002
+ },
+ "layer_id": "labour_consumers",
+ "leading_lagging": "coincident",
+ "metric": null,
+ "metric_dims": {},
+ "n_observations": 2,
+ "name": "Employment in AI-exposed occupations, year on year",
+ "normal_band": {
+  "hi": 0.01,
+  "lo": -0.01
+ },
+ "override_note": null,
+ "points": [
+  {
+   "as_of": "2026-06-30",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "cbb77dc61aadf044"
+   ],
+   "series_key": "adp_research.us_high_exposure.employment_yoy.m",
+   "subject": "us_high_exposure",
+   "unit": "share",
+   "value": -0.002
+  }
+ ],
+ "proposed_status": "consistent_with_normal",
+ "proxy_types": [
+  "deployment",
+  "welfare"
+ ],
+ "published": false,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "canaries_entry_level_gap",
+  "cross_tracker_concordance"
+ ],
+ "related_metrics": [],
+ "related_predictions": [],
+ "series": [
+  {
+   "points": [
+    {
+     "as_of": "2026-06-30",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "cbb77dc61aadf044"
+     ],
+     "series_key": "adp_research.us_high_exposure.employment_yoy.m",
+     "subject": "us_high_exposure",
+     "unit": "share",
+     "value": -0.002
+    }
+   ],
+   "series_key": "adp_research.us_high_exposure.employment_yoy.m"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-06-30",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "d50d901018622f10"
+     ],
+     "series_key": "adp_research.us_low_exposure.employment_yoy.m",
+     "subject": "us_low_exposure",
+     "unit": "share",
+     "value": 0.006
+    }
+   ],
+   "series_key": "adp_research.us_low_exposure.employment_yoy.m"
+  }
+ ],
+ "series_keys": [
+  "adp_research.us_high_exposure.employment_yoy.m",
+  "adp_research.us_low_exposure.employment_yoy.m"
+ ],
+ "sparkline": [
+  {
+   "as_of": "2026-06-30",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "cbb77dc61aadf044"
+   ],
+   "series_key": "adp_research.us_high_exposure.employment_yoy.m",
+   "subject": "us_high_exposure",
+   "unit": "share",
+   "value": -0.002
+  }
+ ],
+ "stale_as_of": "2026-06-30",
+ "status": null,
+ "status_events": [],
+ "sublayer_id": null,
+ "tracker_interpretation": "Exposed occupations are flat while unexposed grow slowly; the signal is in the young, not the aggregate.",
+ "unit": "share",
+ "updated_at": "2026-09-10",
+ "valve_measured": "adoption_to_adaptation",
+ "why_it_matters": "The paper predicts no broad AI-attributable employment decline for years; this is the highest-frequency payroll test of that claim."
+}

@@ -1,0 +1,157 @@
+{
+ "band_input": "nyfed.us_recent_grads.unemployment_rate.pt",
+ "band_rationale": "Normal = up to 6%, the top of the 2010s range for recent graduates; fast = 8% or more outside a recession. Between is `emerging`.",
+ "band_value": {
+  "as_of": "2026-06-30",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "5ff73e8c8ad1d3ca"
+  ],
+  "value": 0.056
+ },
+ "bucket_id": "adaptation",
+ "cadence_expected": "quarterly",
+ "confidence": 75,
+ "counterevidence": "The rate rose before AI deployment at scale; it is highly cyclical; the exposed-vs-unexposed graduate gap (SIEPR) is small.",
+ "crosswalk": [
+  {
+   "bucket_id": "adaptation",
+   "layer_id": "labour_consumers",
+   "note": "Productivity, wages, employment and consumer surplus.",
+   "relation": "same_valve",
+   "shared_indicators": [],
+   "sublayer_id": null
+  }
+ ],
+ "definition": "Unemployment rate for recent college graduates aged 22\u201327 with a bachelor's degree, from the New York Fed's labour-market tracker.",
+ "derived": [],
+ "direction": null,
+ "direction_rule": null,
+ "falsifying_band": null,
+ "fast_band": {
+  "hi": null,
+  "lo": 0.08
+ },
+ "fits": [],
+ "flow_status": null,
+ "grade": "A",
+ "id": "new_grad_unemployment",
+ "latest": {
+  "as_of": "2026-06-30",
+  "disputed": false,
+  "grade": "A",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "5ff73e8c8ad1d3ca"
+  ],
+  "series_key": "nyfed.us_recent_grads.unemployment_rate.pt",
+  "subject": "us_recent_grads",
+  "unit": "share",
+  "value": 0.056
+ },
+ "layer_id": "labour_consumers",
+ "leading_lagging": "lagging",
+ "metric": null,
+ "metric_dims": {},
+ "n_observations": 1,
+ "name": "Recent-graduate unemployment rate (NY Fed)",
+ "normal_band": {
+  "hi": 0.06,
+  "lo": null
+ },
+ "override_note": null,
+ "points": [
+  {
+   "as_of": "2026-06-30",
+   "disputed": false,
+   "grade": "A",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "5ff73e8c8ad1d3ca"
+   ],
+   "series_key": "nyfed.us_recent_grads.unemployment_rate.pt",
+   "subject": "us_recent_grads",
+   "unit": "share",
+   "value": 0.056
+  }
+ ],
+ "proposed_status": "consistent_with_normal",
+ "proxy_types": [
+  "welfare"
+ ],
+ "published": true,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "canaries_entry_level_gap"
+ ],
+ "related_metrics": [],
+ "related_predictions": [],
+ "series": [
+  {
+   "points": [
+    {
+     "as_of": "2026-06-30",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "5ff73e8c8ad1d3ca"
+     ],
+     "series_key": "nyfed.us_recent_grads.unemployment_rate.pt",
+     "subject": "us_recent_grads",
+     "unit": "share",
+     "value": 0.056
+    }
+   ],
+   "series_key": "nyfed.us_recent_grads.unemployment_rate.pt"
+  }
+ ],
+ "series_keys": [
+  "nyfed.us_recent_grads.unemployment_rate.pt"
+ ],
+ "sparkline": [
+  {
+   "as_of": "2026-06-30",
+   "disputed": false,
+   "grade": "A",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "5ff73e8c8ad1d3ca"
+   ],
+   "series_key": "nyfed.us_recent_grads.unemployment_rate.pt",
+   "subject": "us_recent_grads",
+   "unit": "share",
+   "value": 0.056
+  }
+ ],
+ "stale_as_of": null,
+ "status": "consistent_with_normal",
+ "status_events": [
+  {
+   "author": "claude-initial-seed",
+   "created_at": "2026-09-10T02:28:10.734456Z",
+   "evidence_ids": [
+    "5ff73e8c8ad1d3ca"
+   ],
+   "id": "047e2d4c0370d071",
+   "new_conf": 75,
+   "new_status": "consistent_with_normal",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "NY Fed, The Labor Market for Recent College Graduates, 2026:Q2: unemployment rate for recent graduates about 5.6%, underemployment 42%. Inside the normal band (<=6%), at the top of the 2010s range. Initial seed.",
+   "target_id": "new_grad_unemployment",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": null,
+ "tracker_interpretation": "Elevated for the cycle but inside the historical range; not separable from the wider hiring slowdown.",
+ "unit": "share",
+ "updated_at": "2026-09-10",
+ "valve_measured": "adoption_to_adaptation",
+ "why_it_matters": "The macro counterpart of the entry-level canaries signal; if AI is closing the door on new graduates, it shows here first among official series."
+}

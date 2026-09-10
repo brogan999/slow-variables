@@ -212,3 +212,165 @@ indicators:
     related_indicators: [bbd_work_hours_assisted]
     published: true
     updated_at: 2026-09-10
+  - id: canaries_exposed_employment_yoy
+    name: Employment in AI-exposed occupations, year on year
+    definition: Year-on-year employment change in the most AI-exposed occupation quintile versus the least exposed, from the Stanford DEL and ADP Research Canaries Dashboard (payroll data). The band applies to the most-exposed series.
+    why_it_matters: The paper predicts no broad AI-attributable employment decline for years; this is the highest-frequency payroll test of that claim.
+    proxy_types: [deployment, welfare]
+    unit: share
+    cadence_expected: monthly
+    series_keys: ["adp_research.us_high_exposure.employment_yoy.m", "adp_research.us_low_exposure.employment_yoy.m"]
+    band_input: adp_research.us_high_exposure.employment_yoy.m
+    bucket_id: adaptation
+    valve_measured: adoption_to_adaptation
+    normal_band: {lo: -0.01, hi: 0.01}
+    fast_band: {hi: -0.03}
+    band_rationale: "Normal = within one percent of flat, ordinary occupational churn; fast = a 3% or worse decline in exposed occupations, which is what a broad AI-attributable displacement looks like in payroll data. Between is `emerging`."
+    tracker_interpretation: Exposed occupations are flat while unexposed grow slowly; the signal is in the young, not the aggregate.
+    counterevidence: Unpublished until a second source states the all-ages figure (the Stanford note shows it only in a figure). Exposure is a model-derived measure; ADP payroll coverage skews to larger firms; the divergence began before ChatGPT on some cuts (NY Fed; Iscenko and Millet).
+    layer_id: labour_consumers
+    leading_lagging: coincident
+    confidence: 80
+    proposed_status: consistent_with_normal
+    related_indicators: [canaries_entry_level_gap, cross_tracker_concordance]
+    published: false
+    updated_at: 2026-09-10
+  - id: canaries_entry_level_gap
+    name: Entry-level employment shortfall in AI-exposed occupations
+    definition: How far employment of 22–25-year-olds in the two most AI-exposed quintiles has fallen short of keeping pace with the three least exposed, per the Canaries paper (Aug 2026 revision).
+    why_it_matters: If AI substitutes for the codified knowledge new graduates bring, the first sign is hiring, not separations. This is that sign.
+    proxy_types: [deployment, welfare]
+    unit: share
+    cadence_expected: quarterly
+    series_keys: ["stanford_del.us_entry_level_exposed.employment_gap.pt", "stanford_del.us_entry_level_exposed.employment_change_since_nov2022.pt", "stanford_del.us_entry_level_unexposed.employment_change_since_nov2022.pt"]
+    band_input: stanford_del.us_entry_level_exposed.employment_gap.pt
+    bucket_id: adaptation
+    valve_measured: adoption_to_adaptation
+    normal_band: {hi: 0.1}
+    fast_band: {lo: 0.25}
+    band_rationale: "Normal = a shortfall under 10 points, inside the range youth employment swings over a cycle; fast = 25 points or more. The current reading sits between, so it is `emerging`."
+    tracker_interpretation: Widening (15% to 19% in a year) and concentrated exactly where the paper says AI bites first. Real, but not yet the broad decline the falsification rule needs.
+    counterevidence: Timing partly predates ChatGPT; hiring freezes in tech and finance explain part of it; the measure is relative, so exposed-occupation youth could be flat while others boom.
+    layer_id: labour_consumers
+    leading_lagging: leading
+    confidence: 70
+    proposed_status: emerging
+    related_indicators: [canaries_exposed_employment_yoy, new_grad_unemployment]
+    published: true
+    updated_at: 2026-09-10
+  - id: revelio_exposed_vs_unexposed_growth
+    name: Exposed vs unexposed occupation employment gap (Revelio)
+    definition: Employment in the most AI-exposed occupations relative to the least exposed, since October 2022, from Revelio Labs' AI Labor Market Tracker (online profile data).
+    why_it_matters: An independent, differently sourced read on the same question as the Canaries payroll series.
+    proxy_types: [deployment, welfare]
+    unit: share
+    cadence_expected: monthly
+    series_keys: ["revelio.us_exposed.growth_gap.m"]
+    band_input: revelio.us_exposed.growth_gap.m
+    bucket_id: adaptation
+    valve_measured: adoption_to_adaptation
+    normal_band: {lo: -0.05}
+    fast_band: {hi: -0.1}
+    band_rationale: "Normal = a relative gap of at most 5 points over nearly four years, within the drift between occupation groups in any period; fast = a 10-point or larger gap. Between is `emerging`."
+    tracker_interpretation: The gap widened from ~4% to ~6% in a month of releases; direction matters more than level here.
+    counterevidence: Profile-based data over-represents white-collar workers; the event study's control group is not immune to AI; single source.
+    layer_id: labour_consumers
+    leading_lagging: coincident
+    confidence: 65
+    proposed_status: emerging
+    related_indicators: [canaries_exposed_employment_yoy, cross_tracker_concordance]
+    published: true
+    updated_at: 2026-09-10
+  - id: cait_high_exposure_claims
+    name: California unemployment claims from AI-exposed occupations
+    definition: Month-on-month change in the three-month moving average of new initial unemployment claims from high-AI-exposure occupations in California (potential-exposure measure), from the California Policy Lab and EDD tracker.
+    why_it_matters: Administrative claims data, not a survey and not a profile scrape; the closest thing to a real-time separations signal.
+    proxy_types: [deployment, welfare]
+    unit: share
+    cadence_expected: monthly
+    series_keys: ["cait.ca_high_exposure.claims_3mma_mom.m", "edd.ca_high_exposure.claims_3mma_mom.m"]
+    band_input: edd.ca_high_exposure.claims_3mma_mom.m
+    bucket_id: adaptation
+    valve_measured: adoption_to_adaptation
+    normal_band: {hi: 0.02}
+    fast_band: {lo: 0.05}
+    band_rationale: "Normal = monthly moves of up to 2% in the smoothed series, the noise floor of claims data; fast = 5% or more month on month, sustained. Between is `emerging`."
+    tracker_interpretation: Claims from exposed occupations are drifting up about a percent a month, in line with California's overall labour market, not ahead of it.
+    counterevidence: One state; exposure measured at occupation level; claims respond to the business cycle first.
+    layer_id: labour_consumers
+    leading_lagging: leading
+    confidence: 70
+    proposed_status: consistent_with_normal
+    related_indicators: [cross_tracker_concordance]
+    published: true
+    updated_at: 2026-09-10
+  - id: new_grad_unemployment
+    name: Recent-graduate unemployment rate (NY Fed)
+    definition: Unemployment rate for recent college graduates aged 22–27 with a bachelor's degree, from the New York Fed's labour-market tracker.
+    why_it_matters: The macro counterpart of the entry-level canaries signal; if AI is closing the door on new graduates, it shows here first among official series.
+    proxy_types: [welfare]
+    unit: share
+    cadence_expected: quarterly
+    series_keys: ["nyfed.us_recent_grads.unemployment_rate.pt"]
+    band_input: nyfed.us_recent_grads.unemployment_rate.pt
+    bucket_id: adaptation
+    valve_measured: adoption_to_adaptation
+    normal_band: {hi: 0.06}
+    fast_band: {lo: 0.08}
+    band_rationale: "Normal = up to 6%, the top of the 2010s range for recent graduates; fast = 8% or more outside a recession. Between is `emerging`."
+    tracker_interpretation: Elevated for the cycle but inside the historical range; not separable from the wider hiring slowdown.
+    counterevidence: The rate rose before AI deployment at scale; it is highly cyclical; the exposed-vs-unexposed graduate gap (SIEPR) is small.
+    layer_id: labour_consumers
+    leading_lagging: lagging
+    confidence: 75
+    proposed_status: consistent_with_normal
+    related_indicators: [canaries_entry_level_gap]
+    published: true
+    updated_at: 2026-09-10
+  - id: cross_tracker_concordance
+    name: Cross-tracker concordance (labour)
+    definition: How many of the four labour trackers (Canaries payroll, Canaries entry-level, Revelio, CAIT) currently read past their own AI-attributable-break threshold. Derived metric cross_tracker_concordance, 0 to 4.
+    why_it_matters: The thesis's falsification rule requires three trackers breaking concurrently, not one. This is that count, made explicit.
+    proxy_types: [deployment, welfare]
+    unit: count
+    cadence_expected: monthly
+    metric: cross_tracker_concordance
+    band_input: "metric:cross_tracker_concordance"
+    bucket_id: adaptation
+    valve_measured: adoption_to_adaptation
+    normal_band: {hi: 1}
+    fast_band: {lo: 2}
+    falsifying_band: {lo: 3}
+    band_rationale: "Normal = at most one tracker past its threshold; fast = two; falsifying = three or more concurrently, per the thesis rules in the brief."
+    tracker_interpretation: Zero of four. The entry-level signal is real but below its threshold; nothing else is close.
+    counterevidence: Thresholds are ours; the four trackers measure different populations and geographies, so concurrence is a loose test.
+    layer_id: labour_consumers
+    leading_lagging: coincident
+    confidence: 70
+    proposed_status: consistent_with_normal
+    related_indicators: [canaries_exposed_employment_yoy, revelio_exposed_vs_unexposed_growth, cait_high_exposure_claims, canaries_entry_level_gap]
+    published: true
+    updated_at: 2026-09-10
+  - id: aei_augmentation_share
+    name: Augmentation vs automation share (Anthropic Economic Index)
+    definition: Share of Claude.ai conversations classified as augmentation (the human stays in the loop) versus automation, from Anthropic's Economic Index; the share of occupations with at least a quarter of their tasks used is shown alongside.
+    why_it_matters: The paper's bet is that AI diffuses as a tool people use, not a replacement; this is the only large-scale usage classification that speaks to it directly.
+    proxy_types: [behaviour, product]
+    unit: share
+    cadence_expected: quarterly
+    series_keys: ["anthropic_ei.global.augmentation_share.pt", "anthropic_ei.global.automation_share.pt", "anthropic_ei.global.occupations_25pct_tasks_share.pt"]
+    band_input: anthropic_ei.global.augmentation_share.pt
+    bucket_id: early_adoption
+    valve_measured: product_to_adoption
+    normal_band: {lo: 0.5}
+    fast_band: {hi: 0.4}
+    band_rationale: "Normal = augmentation at least half of classified use; fast = automation clearly dominant (augmentation under 40%). Between is `emerging`."
+    tracker_interpretation: Augmentation rose to 52% in the latest numeric report; the 2026 reports say it rose again but only in figures, so the number here lags.
+    counterevidence: One provider's consumer product; classification is model-based; API usage (where automation concentrates) is reported separately and skews the other way.
+    layer_id: adopters
+    leading_lagging: coincident
+    confidence: 60
+    proposed_status: consistent_with_normal
+    related_indicators: [bbd_work_hours_assisted]
+    published: true
+    updated_at: 2026-09-10
