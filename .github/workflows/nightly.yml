@@ -12,7 +12,8 @@ jobs:
       - run: uv sync
       - id: ingest
         run: uv run ai-tracker ingest --all || echo "failed=true" >> "$GITHUB_OUTPUT"
-        env: { AI_TRACKER_USER_AGENT: ${{ secrets.AI_TRACKER_USER_AGENT }} }
+        env:
+          AI_TRACKER_USER_AGENT: "${{ secrets.AI_TRACKER_USER_AGENT }}"
       - run: uv run ai-tracker build && uv run ai-tracker evaluate && uv run ai-tracker check && uv run ai-tracker export
       - uses: actions/upload-artifact@v4
         with: { name: raw-cache, path: ingest/cache, retention-days: 90, if-no-files-found: ignore }
