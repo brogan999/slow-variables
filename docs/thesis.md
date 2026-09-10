@@ -25,8 +25,8 @@ Rule: ratio non-decreasing AND ladder ≤ L4 AND four clean tracker releases (th
 
 Rule: both conditions, on independently verified series (OpenAI's self-reported 3.1 and >50% do not qualify)
 
-- ? independently verified agent-workdays per human-workday > 1 — untestable: no observations yet
-- ? intervention rate on 4–8 h agent tasks < 50% — untestable: no observations yet
+- ? independently verified agent-workdays per human-workday > 1 — untestable: only self-reported (tier 7) 3.1 as of 2026-08-15 (obs: 6cd4efa0)
+- ? intervention rate on 4–8 h agent tasks < 50% — untestable: only self-reported (tier 7) 50% as of 2026-07-31 (obs: fcf1e544)
 
 ## Capture thesis 'rents migrate up the stack' SUPPORTED: **does not hold**
 

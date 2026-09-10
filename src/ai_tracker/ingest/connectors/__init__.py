@@ -2,6 +2,7 @@ from .anthropic_ei import AnthropicEi
 from .bls import Bls
 from .census_btos import CensusBtos
 from .epoch import Epoch
+from .feeds import Feeds
 from .fred import Fred
 from .manual import Manual
 from .metr import Metr
@@ -9,5 +10,6 @@ from .sec_segments import SecSegments
 from .sec_xbrl import SecXbrl
 
 CONNECTORS = {
-    c.source_id: c for c in (Metr, SecXbrl, Manual, Bls, Epoch, Fred, CensusBtos, AnthropicEi, SecSegments)
+    c.source_id: c
+    for c in (Metr, SecXbrl, Manual, Bls, Epoch, Fred, CensusBtos, AnthropicEi, SecSegments, Feeds)
 }

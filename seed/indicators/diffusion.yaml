@@ -235,6 +235,52 @@ indicators:
     related_indicators: [btos_firm_use, bbd_work_hours_assisted]
     published: true
     updated_at: 2026-09-10
+  - id: rsi_agent_workdays_per_human
+    name: Agent-workdays per human workday in frontier research (self-reported)
+    definition: Agent effort used by a frontier lab's research organisation, in standard eight-hour workdays, per workday of human labour. Today only OpenAI reports it, about itself.
+    why_it_matters: The return arrow made numeric. If deployment inside the lab is feeding invention at more than one agent-day per human-day, the loop Narayanan and Kapoor draw but do not instrument is running; whether it substitutes for external bottlenecks is the thesis question.
+    proxy_types: [deployment, behaviour]
+    unit: ratio
+    cadence_expected: quarterly
+    series_keys: ["openai_blog.openai.rsi_agent_workdays_per_human.pt"]
+    band_input: openai_blog.openai.rsi_agent_workdays_per_human.pt
+    bucket_id: return_arrow
+    valve_measured: return_arrow
+    normal_band: {hi: 1.0}
+    fast_band: {lo: 3.0}
+    band_rationale: "Below one agent-day per human-day, agents are tools inside a human-run process (normal); at three or more, most research effort is agent effort, the regime the AI 2027 'R&D multiplier' assumes (fast). Between is emerging. Tier 7 evidence caps the status at emerging whatever the number says."
+    tracker_interpretation: OpenAI says 3.1 as of mid-August 2026, having crossed 1.0 in June; Anthropic says its overall progress multiplier is below 2x. Lab statements about themselves, not outcome measures; the number to watch is an independent replication, which METR is funded to build.
+    counterevidence: Self-measured and self-published by the lab whose timeline it supports; 'effort' counts agent time, not delivered research; the same post says over half of successful four-to-eight-hour tasks still needed human intervention. Anthropic's September 2026 system card reports staff self-estimating about 4x productivity uplift while the company puts its overall progress multiplier below 2x and observes no sustained AI-attributable 2x acceleration. METR's technical-worker survey finds a self-reported 1.4–2x value uplift, and METR's own RCT measured developers slower with AI.
+    layer_id: model
+    leading_lagging: leading
+    confidence: 30
+    proposed_status: emerging
+    related_indicators: [rsi_intervention_rate_4_8h, metr_horizon_80, dev_rct_uplift]
+    published: true
+    updated_at: 2026-09-10
+  - id: rsi_intervention_rate_4_8h
+    name: Human interventions on 4–8 hour agent tasks (self-reported)
+    definition: Share of successful four-to-eight-hour agent tasks inside a frontier lab's research organisation that needed at least one human intervention. Today only OpenAI reports it, about itself, and only as 'over half'.
+    why_it_matters: The reliability side of the return arrow. Agent-workdays can rise while humans still steer every long task; the loop only substitutes for people when this rate falls.
+    proxy_types: [deployment, behaviour]
+    unit: share
+    cadence_expected: quarterly
+    series_keys: ["openai_blog.openai.rsi_intervention_rate_4_8h.pt"]
+    band_input: openai_blog.openai.rsi_intervention_rate_4_8h.pt
+    bucket_id: return_arrow
+    valve_measured: return_arrow
+    normal_band: {lo: 0.5}
+    fast_band: {hi: 0.25}
+    band_rationale: "Humans steering most long tasks (half or more need intervention) is the normal-technology picture; a quarter or fewer is the regime where long agent runs are autonomous. Between is emerging. The reported value is a floor ('over half'), stored as 0.5."
+    tracker_interpretation: Over half of successful long tasks still needed a person in the loop in the first half of 2026; agent effort is up, autonomy on long tasks is not yet.
+    counterevidence: Self-reported and rounded; counts successful tasks only, so failed runs that needed no intervention are excluded; 'intervention' is defined by the lab.
+    layer_id: model
+    leading_lagging: leading
+    confidence: 30
+    proposed_status: emerging
+    related_indicators: [rsi_agent_workdays_per_human, horizon_ratio_80_50]
+    published: true
+    updated_at: 2026-09-10
   - id: canaries_exposed_employment_yoy
     name: Employment in AI-exposed occupations, year on year
     definition: Year-on-year employment change in the most AI-exposed occupation quintile versus the least exposed, from the Stanford DEL and ADP Research Canaries Dashboard (payroll data). The band applies to the most-exposed series.

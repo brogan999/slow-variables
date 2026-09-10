@@ -54,8 +54,10 @@ class Data:
     ) -> list[tuple[date, float, list[str]]]:
         return [(r.as_of_date, r.value, r.input_observation_ids) for r in self.s.derived_for(name, dims)[-n:]]
 
-    def series(self, glob: str) -> tuple[float, date, list[str]] | None:
-        rows = [o for o in self.s.observations(glob) if o["value_numeric"] is not None]
+    def series(self, glob: str, max_tier: int = 7) -> tuple[float, date, list[str]] | None:
+        rows = [
+            o for o in self.s.observations(glob) if o["value_numeric"] is not None and o["tier"] <= max_tier
+        ]
         return (rows[-1]["value_numeric"], rows[-1]["as_of_date"], [rows[-1]["id"]]) if rows else None
 
 
@@ -129,12 +131,31 @@ def normal_tech_strengthened(d: Data) -> Verdict:
     )
 
 
+def _independent(d: Data, glob: str, text: str, test, fmt: str) -> Cond:
+    """Tier-7 (lab self-report) rows are shown but never satisfy the condition."""
+    got = d.series(glob, max_tier=5)
+    if got is None and (own := d.series(glob)):
+        v, day, ids = own
+        return Cond(text, None, ids, f"untestable: only self-reported (tier 7) {fmt.format(v)} as of {day}")
+    return _cond(text, got, test, fmt)
+
+
 def invention_side_warning(d: Data) -> Verdict:
-    wd = d.series("*.rsi_agent_workdays_per_human.pt")
-    ir = d.series("*.rsi_intervention_rate_4_8h.pt")
     conds = [
-        _cond("independently verified agent-workdays per human-workday > 1", wd, lambda v: v > 1, "{:.1f}"),
-        _cond("intervention rate on 4–8 h agent tasks < 50%", ir, lambda v: v < 0.5, "{:.0%}"),
+        _independent(
+            d,
+            "*.rsi_agent_workdays_per_human.pt",
+            "independently verified agent-workdays per human-workday > 1",
+            lambda v: v > 1,
+            "{:.1f}",
+        ),
+        _independent(
+            d,
+            "*.rsi_intervention_rate_4_8h.pt",
+            "intervention rate on 4–8 h agent tasks < 50%",
+            lambda v: v < 0.5,
+            "{:.0%}",
+        ),
     ]
     return Verdict(
         "invention_side_warning",

@@ -1,0 +1,150 @@
+{
+ "band_input": "openai_blog.openai.rsi_intervention_rate_4_8h.pt",
+ "band_rationale": "Humans steering most long tasks (half or more need intervention) is the normal-technology picture; a quarter or fewer is the regime where long agent runs are autonomous. Between is emerging. The reported value is a floor ('over half'), stored as 0.5.",
+ "band_value": {
+  "as_of": "2026-07-31",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "fcf1e544553a333f"
+  ],
+  "value": 0.5
+ },
+ "bucket_id": "return_arrow",
+ "cadence_expected": "quarterly",
+ "confidence": 30,
+ "counterevidence": "Self-reported and rounded; counts successful tasks only, so failed runs that needed no intervention are excluded; 'intervention' is defined by the lab.",
+ "crosswalk": [],
+ "definition": "Share of successful four-to-eight-hour agent tasks inside a frontier lab's research organisation that needed at least one human intervention. Today only OpenAI reports it, about itself, and only as 'over half'.",
+ "derived": [],
+ "direction": null,
+ "direction_rule": null,
+ "falsifying_band": null,
+ "fast_band": {
+  "hi": 0.25,
+  "lo": null
+ },
+ "fits": [],
+ "flow_status": null,
+ "grade": "D",
+ "id": "rsi_intervention_rate_4_8h",
+ "latest": {
+  "as_of": "2026-07-31",
+  "disputed": false,
+  "grade": "D",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "fcf1e544553a333f"
+  ],
+  "series_key": "openai_blog.openai.rsi_intervention_rate_4_8h.pt",
+  "subject": "openai",
+  "unit": "share",
+  "value": 0.5
+ },
+ "layer_id": "model",
+ "leading_lagging": "leading",
+ "metric": null,
+ "metric_dims": {},
+ "n_observations": 1,
+ "name": "Human interventions on 4\u20138 hour agent tasks (self-reported)",
+ "normal_band": {
+  "hi": null,
+  "lo": 0.5
+ },
+ "override_note": null,
+ "points": [
+  {
+   "as_of": "2026-07-31",
+   "disputed": false,
+   "grade": "D",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "fcf1e544553a333f"
+   ],
+   "series_key": "openai_blog.openai.rsi_intervention_rate_4_8h.pt",
+   "subject": "openai",
+   "unit": "share",
+   "value": 0.5
+  }
+ ],
+ "proposed_status": "emerging",
+ "proxy_types": [
+  "deployment",
+  "behaviour"
+ ],
+ "published": true,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "rsi_agent_workdays_per_human",
+  "horizon_ratio_80_50"
+ ],
+ "related_metrics": [],
+ "related_predictions": [],
+ "series": [
+  {
+   "points": [
+    {
+     "as_of": "2026-07-31",
+     "disputed": false,
+     "grade": "D",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "fcf1e544553a333f"
+     ],
+     "series_key": "openai_blog.openai.rsi_intervention_rate_4_8h.pt",
+     "subject": "openai",
+     "unit": "share",
+     "value": 0.5
+    }
+   ],
+   "series_key": "openai_blog.openai.rsi_intervention_rate_4_8h.pt"
+  }
+ ],
+ "series_keys": [
+  "openai_blog.openai.rsi_intervention_rate_4_8h.pt"
+ ],
+ "sparkline": [
+  {
+   "as_of": "2026-07-31",
+   "disputed": false,
+   "grade": "D",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "fcf1e544553a333f"
+   ],
+   "series_key": "openai_blog.openai.rsi_intervention_rate_4_8h.pt",
+   "subject": "openai",
+   "unit": "share",
+   "value": 0.5
+  }
+ ],
+ "stale_as_of": null,
+ "status": "emerging",
+ "status_events": [
+  {
+   "author": "evaluate",
+   "created_at": "2026-09-10T04:22:58.733590Z",
+   "evidence_ids": [
+    "fcf1e544553a333f"
+   ],
+   "id": "94e0a387c6681f23",
+   "new_conf": 30,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "Same OpenAI post: over half of successful 4-8 hour tasks in the last six months involved at least one human intervention, stored as the floor 0.5. That sits at the edge of the normal band (half or more), and tier 7 caps the status at emerging regardless. Humans still steer most long agent runs. Initial seed.",
+   "target_id": "rsi_intervention_rate_4_8h",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": null,
+ "tracker_interpretation": "Over half of successful long tasks still needed a person in the loop in the first half of 2026; agent effort is up, autonomy on long tasks is not yet.",
+ "unit": "share",
+ "updated_at": "2026-09-10",
+ "valve_measured": "return_arrow",
+ "why_it_matters": "The reliability side of the return arrow. Agent-workdays can rise while humans still steer every long task; the loop only substitutes for people when this rate falls."
+}

@@ -2768,6 +2768,96 @@
      "status": "consistent_with_normal",
      "unit": "ratio",
      "valve_measured": "invention_to_product"
+    },
+    {
+     "bucket_id": "return_arrow",
+     "confidence": 30,
+     "grade": "D",
+     "id": "rsi_agent_workdays_per_human",
+     "latest": {
+      "as_of": "2026-08-15",
+      "disputed": false,
+      "grade": "D",
+      "high": null,
+      "low": null,
+      "obs_ids": [
+       "6cd4efa01b7ac70e"
+      ],
+      "series_key": "openai_blog.openai.rsi_agent_workdays_per_human.pt",
+      "subject": "openai",
+      "unit": "ratio",
+      "value": 3.1
+     },
+     "layer_id": "model",
+     "leading_lagging": "leading",
+     "n_observations": 1,
+     "name": "Agent-workdays per human workday in frontier research (self-reported)",
+     "published": true,
+     "sparkline": [
+      {
+       "as_of": "2026-08-15",
+       "disputed": false,
+       "grade": "D",
+       "high": null,
+       "low": null,
+       "obs_ids": [
+        "6cd4efa01b7ac70e"
+       ],
+       "series_key": "openai_blog.openai.rsi_agent_workdays_per_human.pt",
+       "subject": "openai",
+       "unit": "ratio",
+       "value": 3.1
+      }
+     ],
+     "stale_as_of": null,
+     "status": "emerging",
+     "unit": "ratio",
+     "valve_measured": "return_arrow"
+    },
+    {
+     "bucket_id": "return_arrow",
+     "confidence": 30,
+     "grade": "D",
+     "id": "rsi_intervention_rate_4_8h",
+     "latest": {
+      "as_of": "2026-07-31",
+      "disputed": false,
+      "grade": "D",
+      "high": null,
+      "low": null,
+      "obs_ids": [
+       "fcf1e544553a333f"
+      ],
+      "series_key": "openai_blog.openai.rsi_intervention_rate_4_8h.pt",
+      "subject": "openai",
+      "unit": "share",
+      "value": 0.5
+     },
+     "layer_id": "model",
+     "leading_lagging": "leading",
+     "n_observations": 1,
+     "name": "Human interventions on 4\u20138 hour agent tasks (self-reported)",
+     "published": true,
+     "sparkline": [
+      {
+       "as_of": "2026-07-31",
+       "disputed": false,
+       "grade": "D",
+       "high": null,
+       "low": null,
+       "obs_ids": [
+        "fcf1e544553a333f"
+       ],
+       "series_key": "openai_blog.openai.rsi_intervention_rate_4_8h.pt",
+       "subject": "openai",
+       "unit": "share",
+       "value": 0.5
+      }
+     ],
+     "stale_as_of": null,
+     "status": "emerging",
+     "unit": "share",
+     "valve_measured": "return_arrow"
     }
    ],
    "name": "Model",
@@ -4664,6 +4754,36 @@
  },
  "recent_status_events": [
   {
+   "author": "evaluate",
+   "created_at": "2026-09-10T04:22:58.733590Z",
+   "evidence_ids": [
+    "fcf1e544553a333f"
+   ],
+   "id": "94e0a387c6681f23",
+   "new_conf": 30,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "Same OpenAI post: over half of successful 4-8 hour tasks in the last six months involved at least one human intervention, stored as the floor 0.5. That sits at the edge of the normal band (half or more), and tier 7 caps the status at emerging regardless. Humans still steer most long agent runs. Initial seed.",
+   "target_id": "rsi_intervention_rate_4_8h",
+   "target_type": "indicator"
+  },
+  {
+   "author": "evaluate",
+   "created_at": "2026-09-10T04:22:58.725182Z",
+   "evidence_ids": [
+    "6cd4efa01b7ac70e"
+   ],
+   "id": "4838e15c23b50f23",
+   "new_conf": 30,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "OpenAI's 'Research acceleration' post (6 Sep 2026, via the Internet Archive snapshot because openai.com blocks the fetcher): 3.1 agent-workdays per human workday as of mid-August 2026, having crossed 1.0 in June. Above the fast band (3 or more), but a lab's statement about itself is tier 7 and caps the status at emerging. METR's modelling note puts Anthropic's researcher uplift from coding agents at over 2x; Anthropic's own system card says overall R&D uplift is well short of a doubling. No independent measurement exists yet. Initial seed.",
+   "target_id": "rsi_agent_workdays_per_human",
+   "target_type": "indicator"
+  },
+  {
    "author": "claude-initial-seed",
    "created_at": "2026-09-10T03:51:16.080998Z",
    "evidence_ids": [
@@ -4680,35 +4800,6 @@
    "old_status": null,
    "reason": "Every adoption and adaptation indicator with a status sits inside its normal band: Census BTOS firm use 22.4% (normal under a third), BBD hours assisted 6.3% (normal single digits), BLS labour productivity 2.2% and private nonfarm TFP 0.8% (both at trend). The only reading outside a normal band is Ramp's paid-adoption share (56%, emerging on a tech-forward sample). No fast-band breach anywhere; the falsifying pattern (two adoption plus one adaptation indicator in the fast band for four readings) is nowhere near. Initial seed.",
    "target_id": "nk_adoption_decades",
-   "target_type": "prediction"
-  },
-  {
-   "author": "claude-initial-seed",
-   "created_at": "2026-09-10T03:51:16.080998Z",
-   "evidence_ids": [],
-   "id": "88a4cdaddc9a91f3",
-   "new_conf": 30,
-   "new_status": "not_yet_testable",
-   "old_conf": null,
-   "old_status": null,
-   "reason": "No safety-gating series is in the ledger yet: FDA AI device clearances, Waymo paid rides and lab pause events are planned inputs. Not scored until an instrument exists. Initial seed.",
-   "target_id": "nk_safety_speed_limits",
-   "target_type": "prediction"
-  },
-  {
-   "author": "claude-initial-seed",
-   "created_at": "2026-09-10T03:51:16.080998Z",
-   "evidence_ids": [
-    "bb472afbee7ab7eb",
-    "7a1c89cb3f486453"
-   ],
-   "id": "98805453208e44be",
-   "new_conf": 40,
-   "new_status": "emerging",
-   "old_conf": null,
-   "old_status": null,
-   "reason": "OpenAI's self-reported 3.1 agent-workdays per human workday with more than half of 4-8 hour tasks needing intervention (6 Sep 2026) is tier 7 and does not qualify as the independent RSI series the operationalisation requires; the thesis monitor's invention-side warning is untestable for the same reason. Downstream, the diffusion indicators sit in their normal bands. Initial seed.",
-   "target_id": "nk_rsi_external_limits",
    "target_type": "prediction"
   }
  ]

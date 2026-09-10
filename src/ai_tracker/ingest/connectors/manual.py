@@ -71,7 +71,7 @@ class Manual(Connector):
         for url in self.urls:
             try:
                 items.append(self.fetch_one(url, day, refetch))
-            except (httpx.HTTPStatusError, PermissionError) as e:  # keep the row, mark it unverified
+            except (httpx.HTTPError, PermissionError) as e:  # one bad URL rejects its row, never the run
                 status = e.response.status_code if isinstance(e, httpx.HTTPStatusError) else 999
                 items.append(RawItem(url, b"", status, datetime.now(timezone.utc), "", None))
         return items

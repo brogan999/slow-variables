@@ -711,3 +711,99 @@ observations:
     raw_snippet: "Anthropic's annualized revenue run rate hit $65 billion at the end of July, CNBC confirmed on Monday, a sevenfold increase from a year ago."
     run_rate_vs_booked: run_rate
     note: "Second source for Epoch's Anthropic run-rate row (Bloomberg was first to report). Annualised run-rate, not booked revenue."
+  # --- self-improvement (return arrow): OpenAI's 6 Sep 2026 post via the Internet Archive snapshot (openai.com 403s the fetcher); METR's survey (sourced 2026-09-10) ---
+  - series_key: openai_blog.openai.rsi_agent_workdays_per_human.pt
+    source_id: openai_blog
+    entity_id: openai
+    value: 3.1
+    unit: ratio
+    as_of_date: 2026-08-15
+    published_date: 2026-09-06
+    url: https://web.archive.org/web/20260908175614/https://openai.com/index/research-acceleration-view-inside-openai/
+    tier: 7
+    basis: company_stated
+    raw_snippet: "In terms of a standard 8 hour workday, as of mid-August, in total, the research organization uses 3.1 agent-workdays of effort for every workday of human labor."
+    note: "Original: https://openai.com/index/research-acceleration-view-inside-openai/ ('Research acceleration: The view inside OpenAI', 6 Sep 2026). Self-measured by OpenAI; crossed 1.0 in June 2026 per the post. Internet Archive snapshot of 8 Sep 2026, raw (id_) form."
+  - series_key: openai_blog.openai.rsi_intervention_rate_4_8h.pt
+    source_id: openai_blog
+    entity_id: openai
+    value: 0.5
+    unit: share
+    as_of_date: 2026-07-31
+    published_date: 2026-09-06
+    url: https://web.archive.org/web/20260908175614/https://openai.com/index/research-acceleration-view-inside-openai/
+    tier: 7
+    basis: company_stated
+    raw_snippet: "In the last 6 months, over half of successful 4-8 hour tasks involved 1 or more interventions."
+    note: "Reported only as 'over half'; stored as its floor (0.5). Successful tasks only, Jan–Jul 2026. Same archived post."
+  - series_key: openai_blog.openai.median_researcher_inference_usd_per_day.pt
+    source_id: openai_blog
+    entity_id: openai
+    value: 600
+    unit: USD
+    as_of_date: 2026-08-15
+    published_date: 2026-09-06
+    url: https://web.archive.org/web/20260908175614/https://openai.com/index/research-acceleration-view-inside-openai/
+    tier: 7
+    basis: company_stated
+    raw_snippet: "By mid-August, the median researcher was integrating agents daily into their work, using more than $600 per day of inference at API prices."
+    note: "Reported as 'more than $600'; stored as its floor. Same archived post."
+  - series_key: metr_blog.technical_workers.self_reported_value_uplift.pt
+    source_id: metr_blog
+    value: 1.4
+    unit: ratio
+    as_of_date: 2026-03-31
+    published_date: 2026-05-11
+    url: https://metr.org/blog/2026-05-11-ai-usage-survey/
+    tier: 6
+    basis: estimated
+    raw_snippet: "Participants self-reported a median 1.4–2x change in the value in their work due to AI tools."
+    note: "Survey of 349 technical workers, fielded around March 2026; three measures with medians between 1.4x and 2x, stored as the lowest median. METR itself flags reasons to be skeptical of the magnitude."
+  - series_key: metr_blog.technical_workers.self_reported_speed_uplift.pt
+    source_id: metr_blog
+    value: 3
+    unit: ratio
+    as_of_date: 2026-03-31
+    published_date: 2026-05-11
+    url: https://metr.org/blog/2026-05-11-ai-usage-survey/
+    tier: 6
+    basis: estimated
+    raw_snippet: "The median self-reported speed change (which we expect to be higher than value change) is 3x."
+    note: "Same survey. Self-reported speed, against METR's own RCT measuring −4% to −18% on returning developers."
+  - series_key: metr_blog.anthropic.researcher_uplift_estimate.pt
+    source_id: metr_blog
+    entity_id: anthropic
+    value: 2
+    unit: ratio
+    as_of_date: 2026-07-08
+    published_date: 2026-07-08
+    url: https://metr.org/notes/2026-07-08-anthropic-researcher-uplift/
+    tier: 6
+    basis: estimated
+    raw_snippet: "all models predict researcher uplift at Anthropic from coding agents alone is >2×."
+    note: "Thomas Kwa (METR) note, modelling Anthropic's stated 8x code-output multiplier under Cobb-Douglas/CES assumptions; stored as the floor (>2x). The note itself says others at METR disagree, and quotes Anthropic's Mythos system card as putting overall R&D uplift 'well short of' 2x."
+  # --- Anthropic's own R&D-acceleration statements, Claude Fable 5.1 & Mythos 5.1 System Card, 1 Sep 2026 (sourced 2026-09-10) ---
+  - series_key: anthropic_system_card.anthropic.rd_acceleration_2x_observed.pt
+    source_id: anthropic_system_card
+    entity_id: anthropic
+    value_text: "no sustained, AI-attributable 2x acceleration observed"
+    unit: statement
+    as_of_date: 2026-09-01
+    published_date: 2026-09-01
+    url: "https://www-cdn.anthropic.com/0339e6a7c5c7b87f5c07798616dc32c215d14235/Claude%20Fable%205.1%20&%20Claude%20Mythos%205.1%20System%20Card.pdf"
+    tier: 7
+    basis: company_stated
+    raw_snippet: "we do not observe a sustained, AI-attributable 2× acceleration in the pace of progress on AI R&D, and (2) the model is not close to substituting for Anthropic Research Scientists and Research Engineers, especially relatively senior ones."
+    note: "System card p. 34, Anthropic's automated-AI-R&D threshold assessment. 2x sustained acceleration is Anthropic's own RSP trigger."
+  - series_key: anthropic_system_card.anthropic.staff_productivity_uplift_geomean.pt
+    source_id: anthropic_system_card
+    entity_id: anthropic
+    value: 4
+    unit: ratio
+    as_of_date: 2026-04-07
+    published_date: 2026-09-01
+    url: "https://www-cdn.anthropic.com/0339e6a7c5c7b87f5c07798616dc32c215d14235/Claude%20Fable%205.1%20&%20Claude%20Mythos%205.1%20System%20Card.pdf"
+    tier: 7
+    basis: company_stated
+    raw_snippet: "The geometric mean of the responses was on the order of 4x, though Anthropic estimated an overall progress multiplier below 2x."
+    note: "System card p. 41, in METR's external-assessment section, summarising Anthropic's staff survey from the Mythos Preview card (7 Apr 2026): self-reported productivity uplift versus zero AI assistance. 'On the order of 4x' stored as 4; the company's overall progress multiplier is stated as below 2x."

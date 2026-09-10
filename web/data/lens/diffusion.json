@@ -2764,16 +2764,137 @@
   },
   {
    "id": "return_arrow",
-   "indicators": [],
+   "indicators": [
+    {
+     "bucket_id": "return_arrow",
+     "confidence": 30,
+     "grade": "D",
+     "id": "rsi_agent_workdays_per_human",
+     "latest": {
+      "as_of": "2026-08-15",
+      "disputed": false,
+      "grade": "D",
+      "high": null,
+      "low": null,
+      "obs_ids": [
+       "6cd4efa01b7ac70e"
+      ],
+      "series_key": "openai_blog.openai.rsi_agent_workdays_per_human.pt",
+      "subject": "openai",
+      "unit": "ratio",
+      "value": 3.1
+     },
+     "layer_id": "model",
+     "leading_lagging": "leading",
+     "n_observations": 1,
+     "name": "Agent-workdays per human workday in frontier research (self-reported)",
+     "published": true,
+     "sparkline": [
+      {
+       "as_of": "2026-08-15",
+       "disputed": false,
+       "grade": "D",
+       "high": null,
+       "low": null,
+       "obs_ids": [
+        "6cd4efa01b7ac70e"
+       ],
+       "series_key": "openai_blog.openai.rsi_agent_workdays_per_human.pt",
+       "subject": "openai",
+       "unit": "ratio",
+       "value": 3.1
+      }
+     ],
+     "stale_as_of": null,
+     "status": "emerging",
+     "unit": "ratio",
+     "valve_measured": "return_arrow"
+    },
+    {
+     "bucket_id": "return_arrow",
+     "confidence": 30,
+     "grade": "D",
+     "id": "rsi_intervention_rate_4_8h",
+     "latest": {
+      "as_of": "2026-07-31",
+      "disputed": false,
+      "grade": "D",
+      "high": null,
+      "low": null,
+      "obs_ids": [
+       "fcf1e544553a333f"
+      ],
+      "series_key": "openai_blog.openai.rsi_intervention_rate_4_8h.pt",
+      "subject": "openai",
+      "unit": "share",
+      "value": 0.5
+     },
+     "layer_id": "model",
+     "leading_lagging": "leading",
+     "n_observations": 1,
+     "name": "Human interventions on 4\u20138 hour agent tasks (self-reported)",
+     "published": true,
+     "sparkline": [
+      {
+       "as_of": "2026-07-31",
+       "disputed": false,
+       "grade": "D",
+       "high": null,
+       "low": null,
+       "obs_ids": [
+        "fcf1e544553a333f"
+       ],
+       "series_key": "openai_blog.openai.rsi_intervention_rate_4_8h.pt",
+       "subject": "openai",
+       "unit": "share",
+       "value": 0.5
+      }
+     ],
+     "stale_as_of": null,
+     "status": "emerging",
+     "unit": "share",
+     "valve_measured": "return_arrow"
+    }
+   ],
    "name": "Return arrow",
    "order": 5,
    "speed_limit": "Whether the deployment\u2192training channel is open and how far it substitutes for external bottlenecks.",
-   "status": "unmeasured",
+   "status": "emerging",
    "stock": "Deployment feedback flowing back into invention \u2014 data, RL environments, continual learning.",
    "valve": "leak"
   }
  ],
  "recent_status_events": [
+  {
+   "author": "evaluate",
+   "created_at": "2026-09-10T04:22:58.733590Z",
+   "evidence_ids": [
+    "fcf1e544553a333f"
+   ],
+   "id": "94e0a387c6681f23",
+   "new_conf": 30,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "Same OpenAI post: over half of successful 4-8 hour tasks in the last six months involved at least one human intervention, stored as the floor 0.5. That sits at the edge of the normal band (half or more), and tier 7 caps the status at emerging regardless. Humans still steer most long agent runs. Initial seed.",
+   "target_id": "rsi_intervention_rate_4_8h",
+   "target_type": "indicator"
+  },
+  {
+   "author": "evaluate",
+   "created_at": "2026-09-10T04:22:58.725182Z",
+   "evidence_ids": [
+    "6cd4efa01b7ac70e"
+   ],
+   "id": "4838e15c23b50f23",
+   "new_conf": 30,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "OpenAI's 'Research acceleration' post (6 Sep 2026, via the Internet Archive snapshot because openai.com blocks the fetcher): 3.1 agent-workdays per human workday as of mid-August 2026, having crossed 1.0 in June. Above the fast band (3 or more), but a lab's statement about itself is tier 7 and caps the status at emerging. METR's modelling note puts Anthropic's researcher uplift from coding agents at over 2x; Anthropic's own system card says overall R&D uplift is well short of a doubling. No independent measurement exists yet. Initial seed.",
+   "target_id": "rsi_agent_workdays_per_human",
+   "target_type": "indicator"
+  },
   {
    "author": "claude-initial-seed",
    "created_at": "2026-09-10T03:51:16.080998Z",
@@ -2791,35 +2912,6 @@
    "old_status": null,
    "reason": "Every adoption and adaptation indicator with a status sits inside its normal band: Census BTOS firm use 22.4% (normal under a third), BBD hours assisted 6.3% (normal single digits), BLS labour productivity 2.2% and private nonfarm TFP 0.8% (both at trend). The only reading outside a normal band is Ramp's paid-adoption share (56%, emerging on a tech-forward sample). No fast-band breach anywhere; the falsifying pattern (two adoption plus one adaptation indicator in the fast band for four readings) is nowhere near. Initial seed.",
    "target_id": "nk_adoption_decades",
-   "target_type": "prediction"
-  },
-  {
-   "author": "claude-initial-seed",
-   "created_at": "2026-09-10T03:51:16.080998Z",
-   "evidence_ids": [],
-   "id": "88a4cdaddc9a91f3",
-   "new_conf": 30,
-   "new_status": "not_yet_testable",
-   "old_conf": null,
-   "old_status": null,
-   "reason": "No safety-gating series is in the ledger yet: FDA AI device clearances, Waymo paid rides and lab pause events are planned inputs. Not scored until an instrument exists. Initial seed.",
-   "target_id": "nk_safety_speed_limits",
-   "target_type": "prediction"
-  },
-  {
-   "author": "claude-initial-seed",
-   "created_at": "2026-09-10T03:51:16.080998Z",
-   "evidence_ids": [
-    "bb472afbee7ab7eb",
-    "7a1c89cb3f486453"
-   ],
-   "id": "98805453208e44be",
-   "new_conf": 40,
-   "new_status": "emerging",
-   "old_conf": null,
-   "old_status": null,
-   "reason": "OpenAI's self-reported 3.1 agent-workdays per human workday with more than half of 4-8 hour tasks needing intervention (6 Sep 2026) is tier 7 and does not qualify as the independent RSI series the operationalisation requires; the thesis monitor's invention-side warning is untestable for the same reason. Downstream, the diffusion indicators sit in their normal bands. Initial seed.",
-   "target_id": "nk_rsi_external_limits",
    "target_type": "prediction"
   }
  ],
@@ -2868,9 +2960,12 @@
   {
    "from": "adaptation",
    "id": "return_arrow",
-   "indicator_ids": [],
+   "indicator_ids": [
+    "rsi_agent_workdays_per_human",
+    "rsi_intervention_rate_4_8h"
+   ],
    "name": "Return arrow (deployment \u2192 invention)",
-   "status": "unmeasured",
+   "status": "emerging",
    "to": "methods"
   },
   {
@@ -2884,7 +2979,7 @@
    "to": "capture"
   }
  ],
- "verdict": "As of 2026-08-31: methods faster than normal, products consistent with normal, early adoption consistent with normal, adaptation consistent with normal, return arrow unmeasured.",
+ "verdict": "As of 2026-08-31: methods faster than normal, products consistent with normal, early adoption consistent with normal, adaptation consistent with normal, return arrow emerging.",
  "what_would_change": [
   "METR 50% time horizon: Normal = doubling time \u2265 7 months (\u2248213 days, METR's 2019\u20132025 trend); fast = \u2264 4 months (\u2248122 days), the AI 2027 assumption. Between the two is `emerging`. The bands are about the current pace, so the input is a log-linear fit over the 2024-onward window, the most recent window METR reports (89 days in the TH1.1 post of 29 Jan 2026), recomputed from METR's corrected data. On the 2023-onward window METR's published figure is 128.7 days, in the gap between the bands: the reading is window-sensitive and both numbers are shown.",
   "METR 80% time horizon: Same bands and same 2024-onward window as the 50% horizon, applied to our own fit because METR publishes doubling times for the 50% series only. The 2023-onward fit (horizon_doubling_days_80) sits in the gap between the bands.",
@@ -2896,6 +2991,8 @@
   "Share of work hours assisted by generative AI: Normal = single-digit share of hours in year three (PCs and the internet were here at the same age); fast = more than 20% of hours assisted.",
   "US firms using AI (Census BTOS): Normal = under about a third of firms in year three, the pace at which PCs and e-commerce reached half of firms over a decade or more; fast = more than half. Ramp's card-spend index (>50%) is a different instrument and not comparable.",
   "US businesses paying for AI (Ramp AI Index): Ramp's customers are younger and more tech-forward than the Census universe (56% here against 22% in BTOS at the same date), so the BTOS edges (a third, a half) do not transfer. Normal = under 45% of Ramp customers paying in year four; fast = 65% or more, i.e. most of even this sample paying. Between is emerging. The trend carries more information than the level: +0.4 points in August 2026 after a year of roughly a point a month.",
+  "Agent-workdays per human workday in frontier research (self-reported): Below one agent-day per human-day, agents are tools inside a human-run process (normal); at three or more, most research effort is agent effort, the regime the AI 2027 'R&D multiplier' assumes (fast). Between is emerging. Tier 7 evidence caps the status at emerging whatever the number says.",
+  "Human interventions on 4\u20138 hour agent tasks (self-reported): Humans steering most long tasks (half or more need intervention) is the normal-technology picture; a quarter or fewer is the regime where long agent runs are autonomous. Between is emerging. The reported value is a floor ('over half'), stored as 0.5.",
   "Entry-level employment shortfall in AI-exposed occupations: Normal = a shortfall under 10 points, inside the range youth employment swings over a cycle; fast = 25 points or more. The current reading sits between, so it is `emerging`.",
   "Exposed vs unexposed occupation employment gap (Revelio): Normal = a relative gap of at most 5 points over nearly four years, within the drift between occupation groups in any period; fast = a 10-point or larger gap. Between is `emerging`.",
   "California unemployment claims from AI-exposed occupations: Normal = monthly moves of up to 2% in the smoothed series, the noise floor of claims data; fast = 5% or more month on month, sustained. Between is `emerging`.",
