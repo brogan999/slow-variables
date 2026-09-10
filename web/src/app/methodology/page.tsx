@@ -16,7 +16,7 @@ const TIERS: [string, string, string][] = [
 export default function Methodology() {
   const credits = [...new Map(sources().filter((x) => x.attribution).map((x) => [x.attribution as string, x.license])).entries()].map(([a, l]) => (l && /CC BY/i.test(l) ? `${a} (${l})` : a));
   return (
-    <article className="prose-tight max-w-3xl flex flex-col gap-6 text-base leading-[1.6]">
+    <article className="prose-tight max-w-[68ch] flex flex-col gap-5 text-[17px] leading-[1.65]">
       <h1 className="display text-[2.25rem] md:text-[3rem] leading-[1.05] tracking-[-0.015em]">Methodology</h1>
       <p>One tracker, two lenses. The diffusion lens follows Narayanan and Kapoor&apos;s <em>AI as Normal Technology</em>: five stocks, valves between them, normal and fast bands with falsification thresholds. The capture lens measures who keeps the surplus, layer by layer. They are the same question asked from two ends, so they share one data store, one indicator object and one discipline, adapted from the <a href="https://ai2027-tracker.com/methodology/" className="underline decoration-grid underline-offset-4">AI 2027 tracker</a>.</p>
       <H>Three layers, strictly separated</H>
@@ -58,4 +58,4 @@ export default function Methodology() {
   );
 }
 
-function H({ children }: { children: React.ReactNode }) { return <h2 className="text-sm font-medium text-ink-2 mt-2">{children}</h2>; }
+function H({ children }: { children: React.ReactNode }) { return <h2 className="display text-2xl leading-tight border-t border-grid pt-5 mt-2">{children}</h2>; }

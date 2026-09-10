@@ -45,7 +45,7 @@ export default function BottlenecksPage() {
       <p className="text-xs text-muted">Counts are distinct published indicators linked within the family. &ldquo;Faster than normal&rdquo; on a bottleneck&apos;s instrument means the barrier is being crossed faster than the normal-technology bands allow; &ldquo;consistent or slower&rdquo; means it is holding.</p>
       {sections.map((s, si) => (
         <details key={s.name} id={`s-${si}`} open={si === 0} className="group">
-          <summary className="cursor-pointer list-none"><h2 className="text-base font-medium mb-2 inline"><span className="text-muted mr-2 inline-block transition-transform group-open:rotate-90">▸</span>{s.name} <span className="text-muted font-normal">· acts on {bucketName(s.bucket_id)}</span></h2></summary>
+          <summary className="cursor-pointer list-none"><h2 className="display text-2xl leading-tight mb-2 inline"><span className="text-muted mr-2 inline-block transition-transform group-open:rotate-90">▸</span>{s.name} <span className="text-muted font-normal">· acts on {bucketName(s.bucket_id)}</span></h2></summary>
           <p className="text-xs text-muted mb-2"><Link href={`/buckets/${s.bucket_id}`} className="underline decoration-grid underline-offset-4">Open the {bucketName(s.bucket_id)} stock</Link></p>
           <ol className="flex flex-col gap-2">
             {items.filter((i) => i.section === s.name).map((b) => (

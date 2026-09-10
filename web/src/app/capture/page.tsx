@@ -35,7 +35,7 @@ export default function CaptureLens() {
           return (
             <li key={l.id} className="panel p-4">
               <div className="flex flex-wrap items-center gap-3">
-                <h2 className="font-medium"><Link href={`/layers/${l.id}`} className="hover:underline">{l.order}. {l.name}</Link></h2>
+                <h2 className="display text-xl leading-tight"><Link href={`/layers/${l.id}`} className="hover:underline underline-offset-4 decoration-grid">{l.order}. {l.name}</Link></h2>
                 <StatusChip status={summary} />
                 {published.length ? <span className="text-xs text-muted">{published.length} indicator{published.length === 1 ? "" : "s"}</span> : null}
                 {l.id === "training_input" ? <Link href="/buckets/return_arrow" className="text-xs text-ink-2 hover:text-ink ml-auto">⇄ return arrow</Link> : null}
