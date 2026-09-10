@@ -276,3 +276,16 @@ Verify per PR: fixture extract test, `check`, `export`, screenshot of the touche
 - Staging Fly app: `/health`, golden via drawer on a Vercel preview, `QUERY_DAILY_USD_CAP=0.01` → 429, machine stopped → drawer says offline.
 - Memo `workflow_dispatch` opens a PR; with the key removed the fallback digest PR opens.
 - Public: domain resolves over HTTPS, headers present, repo visible, previews gated.
+
+## Status against the definition of done (10 Sep 2026, end of day)
+
+| # | Criterion | State |
+|---|---|---|
+| 1 | Routes and components in brief v2 §4.3–4.4 | Done: `/stack`, `/stack/[id]`, `/query`, `/memos`, `DirectionChart`, `MarginStackChart`, `ConfidenceDial`, `LadderView`, `VentureFlowStrip`, `ChatDrawer`, `QueryConsole`. `/admin` and `/data` remain the PR-queue and `/series` substitutions. |
+| 2 | Every indicator published with status + counterevidence, or unpublished with a rendered reason | Done for 85 indicators (62 published). Open: Artificial Analysis connector (needs the key), Yale dissimilarity workbook connector, neocloud debt terms, depreciation useful-life changes, enterprise multi-homing (Menlo), the acquisition ledger. |
+| 3 | Seven consecutive unattended nightlies; one merged nightly PR moving a status without a human reason | In progress: one green nightly (PR #2 merged) plus today's dispatch; the streak needs the calendar. Auto-reasons are in place. |
+| 4 | Twelve golden questions pass; citecheck tested; one memo PR produced and merged | citecheck tested (7 tests); memo job dispatched (branch `memo`). Golden run waits for `ANTHROPIC_API_KEY` on the Fly app. |
+| 5 | Site metadata, 375px, AA contrast, focus, no milestone language, attribution and licences | Done; axe-core clean on twenty routes at 375 and 1280. |
+| 6 | Name locked ≥80, domain live, wordmark renamed; repo scrubbed and public; previews-only protection | Naming pass written (private naming folder): Slow Variables 94, Stock and Valve 87, Weirgauge 82. Scrub part 1 committed. Waiting on Alex: lock the name, buy the domain, approve the history rewrite and the visibility flip. |
+
+Checkpoints still with Alex: `ANTHROPIC_API_KEY` (Fly secret + repo secret), Artificial Analysis key, X API purchase or the drop file, name and domain, history rewrite + `gh repo edit --visibility public` + Vercel deployment protection to previews only.
