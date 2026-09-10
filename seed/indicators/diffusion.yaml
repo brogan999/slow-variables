@@ -3,20 +3,19 @@
 indicators:
   - id: metr_horizon_50
     name: METR 50% time horizon
-    definition: Length (in human-expert minutes) of software tasks a frontier model completes with 50% success, per METR's Horizon v1.1 suite, plotted by model release date. The band applies to METR's published doubling time from 2023 onward.
+    definition: Length (in human-expert minutes) of software tasks a frontier model completes with 50% success, per METR's Horizon v1.1 suite, plotted by model release date. The band applies to the doubling time of that series over the most recent window METR itself reports (2024 onward), recomputed here from METR's corrected data file; METR's published 2023-onward figure is shown alongside.
     why_it_matters: The cleanest single series for the methods stock. If capability doubles every few months the invention valve is wide open; the paper's claim is that this alone does not move the later stocks.
     proxy_types: [benchmark]
     unit: minutes
     cadence_expected: per_release
-    series_keys: ["metr.*.horizon_50.pt", "metr.suite.doubling_time_days.pt"]
-    band_input: metr.suite.doubling_time_days.pt
+    series_keys: ["metr.*.horizon_50.pt", "metr.suite.doubling_time_days.pt", "metr_blog.suite.doubling_time_days_since_2024.pt", "metr_blog.suite.doubling_time_days_since_2023.pt", "metr_blog.suite.doubling_time_days_2019_2025.pt"]
+    band_input: "metric:horizon_doubling_days_50_since_2024"
     bucket_id: methods
-    valve_measured: invention_to_product
     normal_band: {lo: 213}
     fast_band: {hi: 122}
-    band_rationale: "Normal = doubling time ≥ 7 months (≈213 days); fast = ≤ 4 months (≈122 days), the AI 2027 assumption. Between the two is `emerging`. Input is METR's own 2023-onward fit, tier 1."
+    band_rationale: "Normal = doubling time ≥ 7 months (≈213 days, METR's 2019–2025 trend); fast = ≤ 4 months (≈122 days), the AI 2027 assumption. Between the two is `emerging`. The bands are about the current pace, so the input is a log-linear fit over the 2024-onward window, the most recent window METR reports (89 days in the TH1.1 post of 29 Jan 2026), recomputed from METR's corrected data. On the 2023-onward window METR's published figure is 128.7 days, in the gap between the bands: the reading is window-sensitive and both numbers are shown."
     tracker_interpretation: Capability is moving fast by any historical standard. Whether it is faster than the AI-2027 doubling assumption is the live question the band answers.
-    counterevidence: METR notes measurements above 16 hours are unreliable with the current task suite, so the newest points carry wide intervals and are flagged disputed. Horizon is a software-task construct and may not transfer to other work.
+    counterevidence: On the 2023-onward window (METR's published 128.7 days, our fit 125) the status would be `emerging`, not `faster_than_normal`; the status depends on the window. METR notes measurements above 16 hours are unreliable with the current task suite, so the newest points carry wide intervals and are flagged disputed, and human baselines exist for only 5 of the 31 tasks over 8 hours. Horizon is a software-task construct and may not transfer to other work.
     layer_id: model
     leading_lagging: leading
     confidence: 80
@@ -27,20 +26,19 @@ indicators:
     updated_at: 2026-09-10
   - id: metr_horizon_80
     name: METR 80% time horizon
-    definition: Task length a model completes with 80% success on the same suite. The band applies to a log-linear doubling-time fit over the 80% series from 2023 onward (derived metric horizon_doubling_days_80).
+    definition: Task length a model completes with 80% success on the same suite. The band applies to a log-linear doubling-time fit over the 80% series from 2024 onward (derived metric horizon_doubling_days_80_since_2024), the same window as the 50% horizon.
     why_it_matters: 80% is closer to what a product needs than 50%. If the reliable horizon lags badly, benchmarks flatter products.
     proxy_types: [benchmark]
     unit: minutes
     cadence_expected: per_release
     series_keys: ["metr.*.horizon_80.pt"]
-    band_input: "metric:horizon_doubling_days_80"
+    band_input: "metric:horizon_doubling_days_80_since_2024"
     bucket_id: methods
-    valve_measured: invention_to_product
     normal_band: {lo: 213}
     fast_band: {hi: 122}
-    band_rationale: "Same bands as the 50% horizon (normal ≥ 7 months, fast ≤ 4 months) applied to our own fit, because METR publishes a doubling time for the 50% series only."
+    band_rationale: "Same bands and same 2024-onward window as the 50% horizon, applied to our own fit because METR publishes doubling times for the 50% series only. The 2023-onward fit (horizon_doubling_days_80) sits in the gap between the bands."
     tracker_interpretation: Fast, but lagging the 50% horizon; the lag is the reliability gap the products bucket has to close.
-    counterevidence: Our fit has no confidence interval and excludes points METR marks unreliable; a different start date changes the doubling time materially.
+    counterevidence: Our fit has no confidence interval and excludes points METR marks unreliable; the 2023-onward window gives ~125 days, which would read `emerging`. The 80% horizon is still an order of magnitude below the 50% horizon, which is the reliability gap the products bucket has to close.
     layer_id: model
     leading_lagging: leading
     confidence: 70
@@ -69,5 +67,146 @@ indicators:
     confidence: 70
     proposed_status: consistent_with_normal
     related_indicators: [metr_horizon_50, metr_horizon_80]
+    published: true
+    updated_at: 2026-09-10
+  - id: bls_labor_productivity_yoy
+    name: US labour productivity, year on year
+    definition: Nonfarm business sector output per hour, percent change from the same quarter a year earlier (BLS PRS85006091).
+    why_it_matters: The adaptation stock only counts when it shows up in aggregate productivity. The paper predicts diffusion at human speed, so productivity stays near trend for years even while capability races.
+    proxy_types: [deployment, welfare]
+    unit: pct
+    cadence_expected: quarterly
+    series_keys: ["bls.prs85006091.q", "bls.prs85006092.q"]
+    band_input: bls.prs85006091.q
+    bucket_id: adaptation
+    valve_measured: adoption_to_adaptation
+    normal_band: {hi: 2.5}
+    fast_band: {lo: 3.5}
+    band_rationale: "Post-war nonfarm productivity growth averages about 2.1% a year, so anything up to 2.5% is trend. Goldman's AI scenario adds about 1.5 points a year; sustained prints of 3.5% or more would be that. Between is `emerging`."
+    tracker_interpretation: Productivity is at or slightly above trend, which is exactly what a normal-technology diffusion path looks like in year three of deployment.
+    counterevidence: Quarterly productivity is noisy and cyclical; 2025–26 prints reflect a softening labour market and hours cuts as much as technology. Aggregate data cannot attribute anything to AI.
+    layer_id: labour_consumers
+    leading_lagging: lagging
+    confidence: 80
+    proposed_status: consistent_with_normal
+    related_indicators: [bls_tfp_private_nonfarm]
+    published: true
+    updated_at: 2026-09-10
+  - id: bls_tfp_private_nonfarm
+    name: US total factor productivity, private nonfarm business
+    definition: Year-on-year change in the BLS total factor productivity index for private nonfarm business (MPU4910012), derived from the annual index.
+    why_it_matters: TFP is the residual where a general-purpose-technology effect must eventually appear; it strips out capital deepening, so it is the cleanest macro test of adaptation.
+    proxy_types: [welfare]
+    unit: share
+    cadence_expected: annual
+    series_keys: ["bls.mpu4910012.a"]
+    metric: bls_tfp_yoy
+    band_input: "metric:bls_tfp_yoy"
+    bucket_id: adaptation
+    valve_measured: adoption_to_adaptation
+    normal_band: {hi: 0.012}
+    fast_band: {lo: 0.02}
+    band_rationale: "Long-run private nonfarm TFP growth is about 1% a year; Acemoglu's AI estimate is at most 0.66% over a decade, invisible at annual resolution. Goldman-scale is roughly a point a year on top of trend. Normal = at most 1.2%; fast = 2% or more."
+    tracker_interpretation: TFP growth is inside its long-run range. A sustained break above 2% for several years is what the fast band requires, and nothing yet suggests it.
+    counterevidence: Annual, published with a lag, and revised; the latest year predates most enterprise deployment. TFP can be flattered by measurement of software investment.
+    layer_id: labour_consumers
+    leading_lagging: lagging
+    confidence: 75
+    proposed_status: consistent_with_normal
+    related_indicators: [bls_labor_productivity_yoy]
+    published: true
+    updated_at: 2026-09-10
+  - id: dev_rct_uplift
+    name: Developer productivity uplift (METR RCTs)
+    definition: Measured speed change for experienced developers using AI tools versus not, from METR's randomised trials. Negative means slower. The band applies to the newest estimate (Feb 2026, newly recruited developers).
+    why_it_matters: The single best-controlled test of whether frontier capability turns into product-level uplift. The paper's claim is that benchmark gains do not translate quickly; this is where that shows.
+    proxy_types: [product, deployment]
+    unit: share
+    cadence_expected: annual
+    series_keys: ["metr_blog.rct_*.dev_speed_change.pt"]
+    band_input: metr_blog.rct_2026.dev_speed_change.pt
+    bucket_id: products
+    valve_measured: invention_to_product
+    normal_band: {hi: 0.2}
+    fast_band: {lo: 0.4}
+    band_rationale: "Normal = uplift of at most about 20%, setting-dependent (the range of controlled studies to date); fast = broad uplift above 40%, the scale the productivity-boom claims need."
+    tracker_interpretation: Two trials, two years, and the best estimate is still near zero. Capability is not the constraint; integration and verification are.
+    counterevidence: Small samples; the 2026 redesign has selection effects METR itself calls 'very weak evidence'; experienced open-source maintainers on their own repos are the hardest case for uplift.
+    layer_id: deployment_application
+    leading_lagging: leading
+    confidence: 70
+    proposed_status: consistent_with_normal
+    related_bottlenecks: [4, 5, 6]
+    related_indicators: [enterprise_pilot_to_production]
+    published: true
+    updated_at: 2026-09-10
+  - id: enterprise_pilot_to_production
+    name: Enterprise pilots with measurable P&L impact
+    definition: Share of enterprise generative-AI pilots that reach measurable P&L impact, from MIT NANDA's 2025 survey (5%). Disputed; Menlo's ~47% reaching production uses a different denominator.
+    why_it_matters: The product-to-adoption valve in one number. If most pilots never pay off, adoption stays broad but shallow.
+    proxy_types: [deployment, behaviour]
+    unit: share
+    cadence_expected: annual
+    series_keys: ["nanda.us_enterprise.pilots_with_pnl_impact_share.pt", "fortune.us_enterprise.pilots_with_pnl_impact_share.pt"]
+    band_input: nanda.us_enterprise.pilots_with_pnl_impact_share.pt
+    bucket_id: products
+    valve_measured: product_to_adoption
+    normal_band: {hi: 0.1}
+    fast_band: {lo: 0.3}
+    band_rationale: "Normal = at most 10% of pilots with measurable P&L impact, the typical enterprise-IT hit rate; fast = more than 30%."
+    tracker_interpretation: Consistent with the paper, and with every previous general-purpose technology; the number to watch is whether it moves at all in the 2026 wave.
+    counterevidence: One survey, disputed sample and denominator; Menlo's 47% reach-production figure on a different definition; the report is hosted only on a mirror.
+    layer_id: deployment_application
+    leading_lagging: coincident
+    confidence: 55
+    proposed_status: consistent_with_normal
+    related_bottlenecks: [20, 21, 22]
+    related_indicators: [dev_rct_uplift]
+    published: true
+    updated_at: 2026-09-10
+  - id: bbd_work_hours_assisted
+    name: Share of work hours assisted by generative AI
+    definition: Share of all US work hours in which employed adults used generative AI, from the Bick–Blandin–Deming Real-Time Population Survey (via FRED), with weekly work use and any-use shares shown alongside.
+    why_it_matters: The intensive margin. Headline adoption is broad, but hours actually assisted is what productivity arithmetic runs on.
+    proxy_types: [behaviour, deployment]
+    unit: share
+    cadence_expected: quarterly
+    series_keys: ["bbd.us_workers.hours_assisted_share.pt", "bbd.us_workers.work_use_weekly_share.pt", "bbd.us_adults.any_use_share.pt", "stlouisfed_blog.us_workers.hours_assisted_share.pt"]
+    band_input: bbd.us_workers.hours_assisted_share.pt
+    bucket_id: early_adoption
+    valve_measured: product_to_adoption
+    normal_band: {hi: 0.09}
+    fast_band: {lo: 0.2}
+    band_rationale: "Normal = single-digit share of hours in year three (PCs and the internet were here at the same age); fast = more than 20% of hours assisted."
+    tracker_interpretation: Broad but shallow, exactly as the paper predicts - most workers touch it, few hours run on it. The weekly-use share moved far faster than the brief expected.
+    counterevidence: Self-reported survey; the instrument changed between waves; hours assisted is not hours saved.
+    layer_id: adopters
+    leading_lagging: coincident
+    confidence: 80
+    proposed_status: consistent_with_normal
+    related_indicators: [btos_firm_use]
+    published: true
+    updated_at: 2026-09-10
+  - id: btos_firm_use
+    name: US firms using AI (Census BTOS)
+    definition: Share of US businesses reporting AI use in any business function in the last two weeks, Census Business Trends and Outlook Survey. The question changed in November 2025, so this is the post-break series.
+    why_it_matters: The firm-level extensive margin from an official biweekly survey of 1.2 million businesses. Employment-weighted use is higher; small firms dominate the count.
+    proxy_types: [behaviour, deployment]
+    unit: share
+    cadence_expected: biweekly
+    series_keys: ["census_btos.us.ai_use_share_v2.2w"]
+    band_input: census_btos.us.ai_use_share_v2.2w
+    bucket_id: early_adoption
+    valve_measured: product_to_adoption
+    normal_band: {hi: 0.35}
+    fast_band: {lo: 0.5}
+    band_rationale: "Normal = under about a third of firms in year three, the pace at which PCs and e-commerce reached half of firms over a decade or more; fast = more than half. Ramp's card-spend index (>50%) is a different instrument and not comparable."
+    tracker_interpretation: One firm in five, rising a point or two per quarter - organisational speed, not capability speed.
+    counterevidence: Series break in November 2025; 'AI use' is self-defined by respondents; the count is dominated by very small firms. The latest XLSX cycle shows a higher value than the last official statement.
+    layer_id: adopters
+    leading_lagging: coincident
+    confidence: 70
+    proposed_status: consistent_with_normal
+    related_indicators: [bbd_work_hours_assisted]
     published: true
     updated_at: 2026-09-10

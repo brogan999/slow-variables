@@ -65,7 +65,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
                 <div><dt className="text-muted text-xs">Falsifying</dt><dd>{band(d.falsifying_band, bandUnit) || "—"}</dd></div>
               </dl>
             ) : null}
-            {d.direction_rule ? <p>Direction over {d.direction_rule.periods} periods, dead-band {d.direction_rule.dead_band}; higher = {d.direction_rule.higher_is}.</p> : null}
+            {d.direction_rule ? <p>Direction over {d.direction_rule.periods} periods, dead-band {fmt(d.direction_rule.dead_band, d.unit)}; higher = {d.direction_rule.higher_is}.</p> : null}
             <p className="mt-2 text-ink-2 text-xs">{d.band_rationale ?? d.direction_rule?.rationale}</p>
             {d.band_input ? <p className="mt-1 text-xs text-muted">Applied to <code>{d.band_input}</code>.</p> : null}
           </div>

@@ -13,3 +13,142 @@ sources:
     attribution: "METR, Measuring AI Ability to Complete Long Tasks (Horizon v1.1)"
     expect_series: ["metr.*.horizon_50.pt", "metr.*.horizon_80.pt", "metr.suite.doubling_time_days.pt"]
     people: ["Beth Barnes", "Thomas Kwa", "Ben West"]
+  - id: sec_xbrl
+    name: SEC EDGAR XBRL company facts
+    org: U.S. Securities and Exchange Commission
+    url: https://www.sec.gov/edgar/sec-api-documentation
+    kind: xbrl
+    default_tier: 4
+    cadence: quarterly
+    lens: capture
+    connector: sec_xbrl
+    license: "Public domain (U.S. government); fair-access policy requires a descriptive User-Agent"
+    attribution: "SEC EDGAR, XBRL company facts API"
+    expect_series: ["sec.nvda.revenue.q", "sec.nvda.gross_profit.q", "sec.orcl.rpo.q"]
+  - id: metr_blog
+    name: METR research posts
+    org: METR
+    url: https://metr.org/blog/
+    kind: html
+    default_tier: 6
+    cadence: per_release
+    lens: diffusion
+    connector: manual
+    license: "METR"
+    attribution: "METR, Time Horizon 1.1 (29 Jan 2026)"
+    people: ["Thomas Kwa", "Ben West"]
+  - id: epoch
+    name: Epoch AI data hub — AI companies
+    org: Epoch AI
+    url: https://epoch.ai/data/ai-companies
+    kind: csv
+    default_tier: 5
+    cadence: daily
+    lens: both
+    connector: epoch
+    license: "CC BY 4.0"
+    attribution: "Epoch AI, 'Data on AI Companies' (CC BY 4.0), epoch.ai/data"
+    expect_series: ["epoch.*.round_equity_usd.pt", "epoch.*.revenue_run_rate_usd.pt"]
+    people: ["Jaime Sevilla", "Tamay Besiroglu"]
+  - id: bls
+    name: BLS productivity and costs; total factor productivity
+    org: U.S. Bureau of Labor Statistics
+    url: https://www.bls.gov/productivity/
+    kind: api
+    default_tier: 4
+    cadence: quarterly
+    lens: both
+    connector: bls
+    license: "Public domain (U.S. government)"
+    attribution: "U.S. Bureau of Labor Statistics, Productivity and Costs (PRS85006092/93), Total Factor Productivity (MPU4910012)"
+    expect_series: ["bls.prs85006091.q", "bls.mpu4910012.a"]
+  - id: bbd
+    name: Bick–Blandin–Deming Real-Time Population Survey (via FRED)
+    org: Federal Reserve Bank of St. Louis
+    url: https://www.genaiadoptiontracker.com/
+    kind: csv
+    default_tier: 6
+    cadence: quarterly
+    lens: both
+    connector: manual
+    license: "FRED terms of use; RPS by Bick, Blandin & Deming"
+    attribution: "Bick, Blandin & Deming, Real-Time Population Survey, via FRED"
+    people: ["Alexander Bick", "Adam Blandin", "David Deming"]
+  - id: stanford_del
+    name: Stanford Digital Economy Lab
+    org: Stanford University
+    url: https://digitaleconomy.stanford.edu/
+    kind: html
+    default_tier: 6
+    cadence: annual
+    lens: both
+    connector: manual
+    license: "Working paper"
+    attribution: "Brynjolfsson, Collis, Eggers, Kazinnik & Nguyen, 'What is Generative AI Worth?' (2026)"
+    people: ["Erik Brynjolfsson", "Avinash Collis"]
+  - id: nanda
+    name: MIT NANDA, The GenAI Divide
+    org: MIT Media Lab
+    url: https://nanda.media.mit.edu/
+    kind: pdf
+    default_tier: 6
+    cadence: annual
+    lens: both
+    connector: manual
+    license: "Report"
+    attribution: "MIT NANDA, 'The GenAI Divide: State of AI in Business 2025'"
+  - id: census_btos
+    name: Census Business Trends and Outlook Survey
+    org: U.S. Census Bureau
+    url: https://www.census.gov/hfp/btos/
+    kind: html
+    default_tier: 4
+    cadence: biweekly
+    lens: both
+    connector: manual
+    license: "Public domain (U.S. government)"
+    attribution: "U.S. Census Bureau, Business Trends and Outlook Survey"
+  - id: menlo
+    name: Menlo Ventures, State of Generative AI in the Enterprise
+    org: Menlo Ventures
+    url: https://menlovc.com/perspective/2025-the-state-of-generative-ai-in-the-enterprise/
+    kind: html
+    default_tier: 6
+    cadence: annual
+    lens: capture
+    connector: manual
+    license: "Report"
+    attribution: "Menlo Ventures, '2025: The State of Generative AI in the Enterprise'"
+  - id: hsbc
+    name: HSBC Insights (Global Investment Research)
+    org: HSBC
+    url: https://www.business.hsbc.com/en-gb/insights
+    kind: html
+    default_tier: 5
+    cadence: irregular
+    lens: both
+    connector: manual
+    license: "HSBC; short quotation"
+    attribution: "HSBC Insights, 'The billions of AI consumer surplus' (10 Aug 2026)"
+  - id: fortune
+    name: Fortune
+    org: Fortune Media
+    url: https://fortune.com/
+    kind: html
+    default_tier: 5
+    cadence: irregular
+    lens: both
+    connector: manual
+    license: "Fortune Media; short quotation"
+    attribution: "Fortune, 'MIT report: 95% of generative AI pilots at companies are failing' (18 Aug 2025)"
+  - id: stlouisfed_blog
+    name: FRED Blog
+    org: Federal Reserve Bank of St. Louis
+    url: https://fredblog.stlouisfed.org/
+    kind: html
+    default_tier: 6
+    cadence: irregular
+    lens: diffusion
+    connector: manual
+    license: "FRED terms of use"
+    attribution: "FRED Blog, 'Does generative AI save time at work?' (27 Aug 2026)"

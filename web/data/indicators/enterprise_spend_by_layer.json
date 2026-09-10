@@ -1,0 +1,145 @@
+{
+ "band_input": "menlo.us_enterprise.genai_spend_usd.fy",
+ "band_rationale": null,
+ "band_value": {
+  "as_of": "2025-12-31",
+  "obs_ids": [
+   "5b395211b571d2f2"
+  ],
+  "value": 37000000000.0
+ },
+ "bucket_id": null,
+ "cadence_expected": "annual",
+ "confidence": null,
+ "counterevidence": "Survey of ~500 buyers; excludes chips, standalone inference and embedded features.",
+ "crosswalk": [],
+ "definition": "Enterprise spend on generative AI in the US, total and application layer, from Menlo Ventures' annual survey.",
+ "derived": [],
+ "direction": null,
+ "direction_rule": {
+  "dead_band": 2000000000.0,
+  "higher_is": "concentrating",
+  "periods": 1,
+  "rationale": "Annual; needs two waves before a direction can be read."
+ },
+ "falsifying_band": null,
+ "fast_band": null,
+ "flow_status": null,
+ "grade": "B",
+ "id": "enterprise_spend_by_layer",
+ "latest": {
+  "as_of": "2025-12-31",
+  "disputed": false,
+  "grade": "B",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "5b395211b571d2f2"
+  ],
+  "series_key": "menlo.us_enterprise.genai_spend_usd.fy",
+  "subject": "us_enterprise",
+  "unit": "USD",
+  "value": 37000000000.0
+ },
+ "layer_id": "deployment_application",
+ "leading_lagging": "coincident",
+ "metric": null,
+ "metric_dims": {},
+ "n_observations": 2,
+ "name": "Enterprise generative-AI spend by layer (Menlo)",
+ "normal_band": null,
+ "override_note": null,
+ "points": [
+  {
+   "as_of": "2025-12-31",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "5b395211b571d2f2"
+   ],
+   "series_key": "menlo.us_enterprise.genai_spend_usd.fy",
+   "subject": "us_enterprise",
+   "unit": "USD",
+   "value": 37000000000.0
+  }
+ ],
+ "proposed_status": "not_yet_measurable",
+ "proxy_types": [
+  "capital_flow"
+ ],
+ "published": false,
+ "related_bottlenecks": [],
+ "related_indicators": [],
+ "related_predictions": [],
+ "series": [
+  {
+   "points": [
+    {
+     "as_of": "2025-12-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "4ebea6eeb0eb577c"
+     ],
+     "series_key": "menlo.us_enterprise.genai_app_spend_usd.fy",
+     "subject": "us_enterprise",
+     "unit": "USD",
+     "value": 19000000000.0
+    }
+   ],
+   "series_key": "menlo.us_enterprise.genai_app_spend_usd.fy"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2025-12-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "5b395211b571d2f2"
+     ],
+     "series_key": "menlo.us_enterprise.genai_spend_usd.fy",
+     "subject": "us_enterprise",
+     "unit": "USD",
+     "value": 37000000000.0
+    }
+   ],
+   "series_key": "menlo.us_enterprise.genai_spend_usd.fy"
+  }
+ ],
+ "series_keys": [
+  "menlo.us_enterprise.genai_spend_usd.fy",
+  "menlo.us_enterprise.genai_app_spend_usd.fy"
+ ],
+ "sparkline": [
+  {
+   "as_of": "2025-12-31",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "5b395211b571d2f2"
+   ],
+   "series_key": "menlo.us_enterprise.genai_spend_usd.fy",
+   "subject": "us_enterprise",
+   "unit": "USD",
+   "value": 37000000000.0
+  }
+ ],
+ "stale_as_of": null,
+ "status": null,
+ "status_events": [],
+ "sublayer_id": null,
+ "tracker_interpretation": "One wave ingested; unpublished until the 2024 figure lands as a sourced row.",
+ "unit": "USD",
+ "updated_at": "2026-09-10",
+ "valve_measured": null,
+ "why_it_matters": "The only layer split of enterprise spend that is published; the application share is where the model-tax question starts."
+}

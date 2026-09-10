@@ -2,13 +2,13 @@
 
 import { CartesianGrid, ErrorBar, Legend, ReferenceArea, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis } from "recharts";
 import type { Band, Point } from "@/lib/data";
+import { fmt as fmtUnit, tick } from "@/lib/format";
 
 type Series = { name: string; points: Point[] };
 type Props = { series: Series[]; unit: string; log?: boolean; bands?: { normal: Band; fast: Band } | null };
 
 const COLORS = ["var(--s1)", "var(--s2)"];
 const yr = (t: number) => new Date(t).getUTCFullYear().toString();
-const fmt = (v: number) => (Math.abs(v) >= 100 ? v.toFixed(0) : Math.abs(v) >= 10 ? v.toFixed(1) : v.toFixed(2));
 
 export function BandChart({ series, unit, log, bands }: Props) {
   const data = series.map((s) => s.points.filter((p) => p.value !== null).map((p) => ({
@@ -25,7 +25,7 @@ export function BandChart({ series, unit, log, bands }: Props) {
         <ScatterChart margin={{ top: 8, right: 16, bottom: 4, left: 0 }}>
           <CartesianGrid stroke="var(--grid)" strokeDasharray="0" vertical={false} />
           <XAxis type="number" dataKey="t" domain={["dataMin", "dataMax"]} tickFormatter={yr} stroke="var(--axis)" tick={{ fill: "var(--muted)", fontSize: 11 }} />
-          <YAxis type="number" dataKey="v" scale={log ? "log" : "linear"} domain={domain} tickFormatter={fmt} stroke="var(--axis)"
+          <YAxis type="number" dataKey="v" scale={log ? "log" : "linear"} domain={domain} tickFormatter={tick(unit)} stroke="var(--axis)"
             tick={{ fill: "var(--muted)", fontSize: 11 }} width={48} label={{ value: unit, angle: -90, position: "insideLeft", fill: "var(--muted)", fontSize: 11 }} />
           {bands?.normal ? <ReferenceArea y1={bands.normal.lo ?? undefined} y2={bands.normal.hi ?? undefined} fill="var(--ink)" fillOpacity={0.04} label={{ value: "normal", fill: "var(--muted)", fontSize: 11, position: "insideTopRight" }} /> : null}
           {bands?.fast ? <ReferenceArea y1={bands.fast.lo ?? undefined} y2={bands.fast.hi ?? undefined} fill="var(--fast)" fillOpacity={0.08} label={{ value: "fast", fill: "var(--fast)", fontSize: 11, position: "insideBottomRight" }} /> : null}
@@ -35,7 +35,7 @@ export function BandChart({ series, unit, log, bands }: Props) {
             return (
               <div className="rounded bg-surface ring-hair px-2 py-1 text-xs">
                 <div className="font-medium">{d.subject}</div>
-                <div>{fmt(d.v)} {unit}{d.err ? ` (${fmt(d.v - d.err[0])}–${fmt(d.v + d.err[1])})` : ""}</div>
+                <div>{fmtUnit(d.v, unit)}{d.err ? ` (${fmtUnit(d.v - d.err[0], unit)}–${fmtUnit(d.v + d.err[1], unit)})` : ""}</div>
                 <div className="text-muted">{d.as_of}{d.disputed ? " · disputed" : ""}</div>
               </div>
             );

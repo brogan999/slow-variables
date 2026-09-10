@@ -1,0 +1,18 @@
+# Public filers first (CIKs fetched from sec.gov/files/company_tickers.json on 2026-09-10). Private entities arrive with their connectors.
+entities:
+  - {id: nvda, name: NVIDIA Corp, cik: "0001045810", aliases: [NVIDIA, Nvidia], verified: true, memberships: [{layer_id: compute_physical, sublayer_id: semis}]}
+  - {id: amd, name: Advanced Micro Devices, cik: "0000002488", aliases: [AMD], verified: true, memberships: [{layer_id: compute_physical, sublayer_id: semis}]}
+  - {id: msft, name: Microsoft Corp, cik: "0000789019", aliases: [Microsoft], verified: true, memberships: [{layer_id: compute_physical, sublayer_id: hyperscalers_neoclouds}]}
+  - {id: googl, name: Alphabet Inc., cik: "0001652044", aliases: [Alphabet, Google], verified: true, memberships: [{layer_id: compute_physical, sublayer_id: hyperscalers_neoclouds}, {layer_id: model, sublayer_id: frontier_labs, is_primary: false}]}
+  - {id: amzn, name: Amazon.com Inc., cik: "0001018724", aliases: [Amazon, AWS], verified: true, memberships: [{layer_id: compute_physical, sublayer_id: hyperscalers_neoclouds}]}
+  - {id: meta, name: Meta Platforms, cik: "0001326801", aliases: [Meta, Facebook], verified: true, memberships: [{layer_id: model, sublayer_id: frontier_labs}, {layer_id: compute_physical, sublayer_id: hyperscalers_neoclouds, is_primary: false}]}
+  - {id: orcl, name: Oracle Corp, cik: "0001341439", aliases: [Oracle], verified: true, memberships: [{layer_id: compute_physical, sublayer_id: hyperscalers_neoclouds}]}
+  - {id: crwv, name: CoreWeave Inc., cik: "0001769628", aliases: [CoreWeave], verified: true, memberships: [{layer_id: compute_physical, sublayer_id: hyperscalers_neoclouds}]}
+  - {id: openai, name: OpenAI, kind: lab, aliases: [OpenAI], verified: true, memberships: [{layer_id: model, sublayer_id: frontier_labs}]}
+  - {id: anthropic, name: Anthropic, kind: lab, aliases: [Anthropic], verified: true, memberships: [{layer_id: model, sublayer_id: frontier_labs}]}
+  - {id: xai, name: xAI, kind: lab, aliases: [xAI, x.AI], verified: true, memberships: [{layer_id: model, sublayer_id: frontier_labs}]}
+  - {id: mistral, name: Mistral AI, kind: lab, aliases: [Mistral, Mistral AI], verified: true, memberships: [{layer_id: model, sublayer_id: neolabs}]}
+  - {id: deepseek, name: DeepSeek, kind: lab, aliases: [DeepSeek], verified: true, memberships: [{layer_id: model, sublayer_id: open_weight_labs}]}
+  - {id: moonshot, name: Moonshot AI, kind: lab, aliases: [Moonshot, Moonshot AI, Kimi], verified: true, memberships: [{layer_id: model, sublayer_id: open_weight_labs}]}
+  - {id: minimax, name: MiniMax, kind: lab, aliases: [MiniMax], verified: true, memberships: [{layer_id: model, sublayer_id: open_weight_labs}]}
+  - {id: zhipu, name: Zhipu AI, kind: lab, aliases: [Zhipu, Z.ai, "Z.ai (Zhipu)"], verified: true, memberships: [{layer_id: model, sublayer_id: open_weight_labs}]}

@@ -33,3 +33,95 @@ metrics:
       FROM (SELECT *, date_diff('day', DATE '2023-01-01', as_of_date) AS epoch_days FROM observations
             WHERE series_key LIKE 'metr.%.horizon_80.pt' AND as_of_date >= DATE '2023-01-01'
               AND NOT disputed AND value_numeric > 0)
+  gross_margin:
+    description: Gross profit divided by revenue per filer per fiscal quarter, from XBRL company facts.
+    rationale: The margin is the rent; its direction at each layer is the capture question in one number.
+    grain: [as_of_date, entity]
+    unit: share
+    lead_lag: lagging
+    formula_version: 1
+    inputs: ["sec.*.gross_profit.q", "sec.*.revenue.q"]
+    caveats: Fiscal quarters differ by filer (NVDA ends late Jan/Apr/Jul/Oct). Whole-company, not segment, margin.
+    sql: |
+      SELECT g.as_of_date, g.subject AS entity, g.value_numeric / r.value_numeric AS value, [g.id, r.id] AS obs_ids
+      FROM observations g JOIN observations r
+        ON r.subject = g.subject AND r.as_of_date = g.as_of_date AND r.series_key = 'sec.' || g.subject || '.revenue.q'
+      WHERE g.series_key LIKE 'sec.%.gross_profit.q' AND r.value_numeric > 0
+  horizon_doubling_days_50_since_2024:
+    description: Log-linear fit of the 50% horizon against release date, 2024 onward; doubling time in days. The most recent window, matching METR's own "since 2024" figure.
+    rationale: The normal/fast bands are about the current pace, so the band input is the most recent window METR itself reports (TH1.1 post, 29 Jan 2026 - 89 days since 2024), recomputed here from the corrected data file.
+    grain: [as_of_date]
+    unit: days
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["metr.*.horizon_50.pt"]
+    caveats: Point estimate only, no CI; rows beyond the 16h suite ceiling excluded; needs >= 3 points.
+    sql: |
+      SELECT max(as_of_date) AS as_of_date,
+             CASE WHEN count(*) >= 3 THEN ln(2) / regr_slope(ln(value_numeric), epoch_days) END AS value,
+             list(id ORDER BY id) AS obs_ids
+      FROM (SELECT *, date_diff('day', DATE '2024-01-01', as_of_date) AS epoch_days FROM observations
+            WHERE series_key LIKE 'metr.%.horizon_50.pt' AND as_of_date >= DATE '2024-01-01'
+              AND NOT disputed AND value_numeric > 0)
+  horizon_doubling_days_80_since_2024:
+    description: Log-linear fit of the 80% horizon against release date, 2024 onward; doubling time in days.
+    rationale: Same window as the 50% fit so the two horizons are judged on the same period.
+    grain: [as_of_date]
+    unit: days
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["metr.*.horizon_80.pt"]
+    caveats: Point estimate only, no CI; disputed rows excluded; needs >= 3 points.
+    sql: |
+      SELECT max(as_of_date) AS as_of_date,
+             CASE WHEN count(*) >= 3 THEN ln(2) / regr_slope(ln(value_numeric), epoch_days) END AS value,
+             list(id ORDER BY id) AS obs_ids
+      FROM (SELECT *, date_diff('day', DATE '2024-01-01', as_of_date) AS epoch_days FROM observations
+            WHERE series_key LIKE 'metr.%.horizon_80.pt' AND as_of_date >= DATE '2024-01-01'
+              AND NOT disputed AND value_numeric > 0)
+  horizon_doubling_days_50_since_2023:
+    description: Our own log-linear fit of the 50% horizon, 2023 onward, to compare against METR's published from_2023_on figure.
+    rationale: A reproducibility check on METR's published number from the same data file.
+    grain: [as_of_date]
+    unit: days
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["metr.*.horizon_50.pt"]
+    caveats: Point estimate only.
+    sql: |
+      SELECT max(as_of_date) AS as_of_date,
+             CASE WHEN count(*) >= 3 THEN ln(2) / regr_slope(ln(value_numeric), epoch_days) END AS value,
+             list(id ORDER BY id) AS obs_ids
+      FROM (SELECT *, date_diff('day', DATE '2023-01-01', as_of_date) AS epoch_days FROM observations
+            WHERE series_key LIKE 'metr.%.horizon_50.pt' AND as_of_date >= DATE '2023-01-01'
+              AND NOT disputed AND value_numeric > 0)
+  bls_tfp_yoy:
+    description: Year-on-year change in the BLS private nonfarm business total factor productivity index.
+    rationale: TFP is the residual where an AI productivity effect would have to show up; the brief's normal band is Acemoglu's estimate, the fast band Goldman-scale.
+    grain: [as_of_date]
+    unit: share
+    lead_lag: lagging
+    formula_version: 1
+    inputs: ["bls.mpu4910012.a"]
+    caveats: Annual, published with a lag, revised.
+    sql: |
+      SELECT as_of_date, value_numeric / lag(value_numeric) OVER (ORDER BY as_of_date) - 1 AS value,
+             [id, lag(id) OVER (ORDER BY as_of_date)] AS obs_ids
+      FROM observations WHERE series_key = 'bls.mpu4910012.a'
+      QUALIFY lag(id) OVER (ORDER BY as_of_date) IS NOT NULL
+  lab_recoupment_ratio:
+    description: A lab's latest revenue run-rate divided by the equity it had raised by that date (Epoch data). Above 1 means a year of run-rate exceeds all capital raised.
+    rationale: The financial view of the return arrow - whether deployment revenue is recouping the capital that funded invention. Large caveat - run-rate is not booked revenue and equity is not total capital.
+    grain: [as_of_date, entity]
+    unit: ratio
+    lead_lag: lagging
+    formula_version: 1
+    inputs: ["epoch.*.revenue_run_rate_usd.pt", "epoch.*.round_equity_usd.pt"]
+    caveats: Tier-5 inputs; excludes debt, compute credits and cloud commitments; run-rates are press-reported annualised months.
+    sql: |
+      WITH rr AS (SELECT subject, as_of_date, value_numeric AS rev, id FROM observations WHERE series_key LIKE 'epoch.%.revenue_run_rate_usd.pt'),
+           eq AS (SELECT subject, as_of_date, value_numeric AS eq, id FROM observations WHERE series_key LIKE 'epoch.%.round_equity_usd.pt')
+      SELECT rr.as_of_date, rr.subject AS entity, rr.rev / sum(eq.eq) AS value,
+             list_concat([rr.id], list(eq.id ORDER BY eq.id)) AS obs_ids
+      FROM rr JOIN eq ON eq.subject = rr.subject AND eq.as_of_date <= rr.as_of_date
+      GROUP BY rr.as_of_date, rr.subject, rr.rev, rr.id

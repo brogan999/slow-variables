@@ -59,11 +59,6 @@ export const sources = () => read<Source[]>("sources.json");
 export const changelog = () => read<StatusEvent[]>("changelog.json");
 export const meta = () => read<{ generated_at: string }>("meta.json");
 
-export const fmt = (v: number | null | undefined, unit?: string) => {
-  if (v === null || v === undefined) return "—";
-  const s = Math.abs(v) >= 100 ? v.toFixed(0) : Math.abs(v) >= 10 ? v.toFixed(1) : v.toFixed(2);
-  return unit === "ratio" ? `${s}×` : unit ? `${s} ${unit}` : s;
-};
-export const words = (s: string | null | undefined) => (s ?? "unmeasured").replace(/_/g, " ");
+export { fmt, words } from "./format";
 export const obsIndex = () => read<Record<string, string>>("obs_index.json");
 export type Doc = IndicatorDoc & { points: Point[]; band_value: { value: number; as_of: string | null; obs_ids: string[] } | null };

@@ -1,0 +1,205 @@
+# Figures quoted from documents. `ingest manual` fetches each URL and rejects any row whose raw_snippet is not
+# a verbatim substring of the page. Rows land `pending`; merge to main approves them. Never type a number elsewhere.
+observations:
+  - series_key: metr_blog.suite.doubling_time_days_since_2024.pt
+    source_id: metr_blog
+    value: 89
+    unit: days
+    as_of_date: 2026-01-29
+    published_date: 2026-01-29
+    url: https://metr.org/blog/2026-1-29-time-horizon-1-1/
+    tier: 6
+    basis: reported
+    raw_snippet: "We also report below the doubling time since 2024: this was at 109 days under TH1, and falls to 89 days under TH1.1"
+    note: "TH1.1 release post, before the 3 Mar 2026 regularisation correction; our fit on corrected data is the band input."
+  - series_key: metr_blog.suite.doubling_time_days_since_2023.pt
+    source_id: metr_blog
+    value: 131
+    unit: days
+    as_of_date: 2026-01-29
+    published_date: 2026-01-29
+    url: https://metr.org/blog/2026-1-29-time-horizon-1-1/
+    tier: 6
+    basis: reported
+    raw_snippet: "The post-2023 doubling-time is 131 days under TH1.1"
+    note: "Pre-correction; the data file now says 128.7."
+  - series_key: metr_blog.suite.doubling_time_days_2019_2025.pt
+    source_id: metr_blog
+    value: 196
+    unit: days
+    as_of_date: 2026-01-29
+    published_date: 2026-01-29
+    url: https://metr.org/blog/2026-1-29-time-horizon-1-1/
+    tier: 6
+    basis: reported
+    raw_snippet: "This hybrid trend shows exactly the same doubling time as the TH1 trend, of 196 days (7 months)"
+    note: "The 2019–2025 trend that anchors the normal band."
+  # --- rows sourced 2026-09-10; every snippet verified verbatim against the fetched page ---
+  - series_key: bbd.us_workers.work_use_weekly_share.pt
+    source_id: bbd
+    value: 0.39234
+    unit: share
+    as_of_date: 2026-05-31
+    published_date: 2026-08-04
+    url: https://fred.stlouisfed.org/graph/fredgraph.csv?id=RPSGENAIUSAGESHARELWWORK
+    tier: 6
+    basis: reported
+    raw_snippet: "2026-04-01,39.2336972111"
+    note: "FRED RPSGENAIUSAGESHARELWWORK, employed adults who used genAI last week for work; Q2 2026 row = RPS wave fielded May 2026."
+  - series_key: bbd.us_workers.hours_assisted_share.pt
+    source_id: bbd
+    value: 0.06267
+    unit: share
+    as_of_date: 2026-05-31
+    published_date: 2026-08-04
+    url: https://fred.stlouisfed.org/graph/fredgraph.csv?id=RPSGENAIASSISTWRKHRSALL
+    tier: 6
+    basis: reported
+    raw_snippet: "2026-04-01,6.2668768989"
+    note: "FRED RPSGENAIASSISTWRKHRSALL, share of total work hours assisted by genAI, employed adults; Q2 2026 row."
+  - series_key: bbd.us_adults.any_use_share.pt
+    source_id: bbd
+    value: 0.618
+    unit: share
+    as_of_date: 2026-05-31
+    published_date: 2026-05-31
+    url: https://www.genaiadoptiontracker.com/
+    tier: 6
+    basis: reported
+    raw_snippet: "61.8% of the U.S. population aged 18-64 uses genAI"
+    note: "GenAI Adoption Tracker headline, May 2026 wave; any use (work or non-work), not weekly."
+  - series_key: stanford_del.us.genai_consumer_surplus_usd.pt
+    source_id: stanford_del
+    value: 172000000000
+    unit: USD
+    as_of_date: 2026-03-31
+    published_date: 2026-04-13
+    url: https://digitaleconomy.stanford.edu/publication/what-is-generative-ai-worth/
+    tier: 6
+    basis: estimated
+    raw_snippet: "these estimates imply that aggregate consumer surplus increased from $116 billion to $172 billion"
+    note: "Brynjolfsson, Collis et al., 'What is Generative AI Worth?', March 2026 wave; Jul 2025 wave = $116B."
+  - series_key: stanford_del.us.genai_consumer_surplus_usd.pt
+    source_id: stanford_del
+    value: 116000000000
+    unit: USD
+    as_of_date: 2025-07-31
+    published_date: 2026-04-13
+    url: https://digitaleconomy.stanford.edu/publication/what-is-generative-ai-worth/
+    tier: 6
+    basis: estimated
+    raw_snippet: "these estimates imply that aggregate consumer surplus increased from $116 billion to $172 billion"
+    note: "Same abstract; the July 2025 wave."
+  - series_key: stanford_del.us.genai_mean_wta_usd_month.pt
+    source_id: stanford_del
+    value: 124.5
+    unit: USD
+    as_of_date: 2026-03-31
+    published_date: 2026-04-13
+    url: https://digitaleconomy.stanford.edu/publication/what-is-generative-ai-worth/
+    tier: 6
+    basis: estimated
+    raw_snippet: "mean willingness to accept (WTA) increased from $98 in 2025 to $124.50 in 2026"
+    note: "Mean WTA to give up AI chatbots for one month, March 2026 wave."
+  - series_key: nanda.us_enterprise.pilots_with_pnl_impact_share.pt
+    source_id: nanda
+    value: 0.05
+    unit: share
+    as_of_date: 2025-06-30
+    published_date: 2025-07-31
+    url: https://mlq.ai/media/quarterly_decks/v0.1_State_of_AI_in_Business_2025_Report.pdf
+    tier: 6
+    basis: estimated
+    raw_snippet: "Just 5% of integrated AI pilots are extracting millions in value, while the vast majority remain stuck with no measurable P&L impact."
+    dispute_text: "Denominator and sample disputed; Menlo reports ~47% of pilots reach production on a different definition. No MIT-hosted copy of the PDF exists; this is the mirror Menlo cites."
+    note: "MIT NANDA, 'The GenAI Divide: State of AI in Business 2025', executive summary."
+  - series_key: metr_blog.rct_2025.dev_speed_change.pt
+    source_id: metr_blog
+    value: -0.19
+    unit: share
+    as_of_date: 2025-06-30
+    published_date: 2025-07-10
+    url: https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/
+    tier: 1
+    basis: reported
+    raw_snippet: "when developers use AI tools, they take 19% longer than without—AI makes them slower."
+    note: "METR RCT, Feb–Jun 2025, 16 experienced open-source developers. Negative = slower."
+  - series_key: metr_blog.rct_2026.dev_speed_change.pt
+    source_id: metr_blog
+    value: -0.04
+    unit: share
+    as_of_date: 2026-02-24
+    published_date: 2026-02-24
+    url: https://metr.org/blog/2026-02-24-uplift-update/
+    tier: 1
+    basis: reported
+    raw_snippet: "Among newly-recruited developers the estimated speedup is -4%, with a confidence interval between -15% and +9%."
+    dispute_text: "METR itself calls this 'very weak evidence' because developers refusing the no-AI arm biases the sample."
+    note: "Feb 2026 redesign, 57 developers, 143 repos, 800+ tasks; returning 2025 developers measured -18% (CI -38% to +9%)."
+  - series_key: census_btos.us.ai_use_share_v2.2w
+    source_id: census_btos
+    value: 0.198
+    unit: share
+    as_of_date: 2026-05-03
+    published_date: 2026-05-26
+    url: https://www.census.gov/library/stories/2026/05/ai-use-businesses.html
+    tier: 4
+    basis: reported
+    raw_snippet: "As of May 3, 2026, the AI use rates in the Information (39.7%) and Finance and Insurance (33.9%) sectors were both higher than the national rate (19.8%)"
+    note: "Post-Nov-2025 instrument ('in any business function'). National.xlsx cycle 202617 (Jul 27–Aug 9 2026) shows 22.4%; needs the XLSX connector."
+  - series_key: menlo.us_enterprise.genai_spend_usd.fy
+    source_id: menlo
+    value: 37000000000
+    unit: USD
+    as_of_date: 2025-12-31
+    published_date: 2025-12-09
+    url: https://menlovc.com/perspective/2025-the-state-of-generative-ai-in-the-enterprise/
+    tier: 6
+    basis: reported
+    raw_snippet: "Enterprise AI is now a $37 billion market—the fastest-scaling category in software history."
+    note: "Menlo Ventures, '2025: The State of Generative AI in the Enterprise'; excludes chips, standalone inference, embedded features."
+  - series_key: menlo.us_enterprise.genai_app_spend_usd.fy
+    source_id: menlo
+    value: 19000000000
+    unit: USD
+    as_of_date: 2025-12-31
+    published_date: 2025-12-09
+    url: https://menlovc.com/perspective/2025-the-state-of-generative-ai-in-the-enterprise/
+    tier: 6
+    basis: reported
+    raw_snippet: "The application layer captured $19 billion in 2025, more than half of all generative AI spending."
+    note: "Same report; infrastructure = $18B."
+  # --- second sources for the two-source rule (sourced 2026-09-10) ---
+  - series_key: hsbc.us.genai_consumer_surplus_usd.pt
+    source_id: hsbc
+    value: 172000000000
+    unit: USD
+    as_of_date: 2026-03-31
+    published_date: 2026-08-10
+    url: https://www.business.hsbc.com/en-gb/insights/the-billions-of-ai-consumer-surplus
+    tier: 5
+    basis: reported
+    raw_snippet: "in early 2026, based on surveys of users, the consumer surplus generated from AI in the US amounted to roughly USD172bn, up from roughly USD116bn six months prior."
+    note: "HSBC Global Investment Research insight quoting the Stanford DEL April 2026 paper; second source for the $172B figure."
+  - series_key: fortune.us_enterprise.pilots_with_pnl_impact_share.pt
+    source_id: fortune
+    value: 0.05
+    unit: share
+    as_of_date: 2025-06-30
+    published_date: 2025-08-18
+    url: https://fortune.com/2025/08/18/mit-report-95-percent-generative-ai-pilots-at-companies-failing-cfo/
+    tier: 5
+    basis: reported
+    raw_snippet: "Despite the rush to integrate powerful new models, about 5% of AI pilot programs achieve rapid revenue acceleration; the vast majority stall, delivering little to no measurable impact on P&L."
+    note: "Fortune CFO Daily on MIT NANDA's 'The GenAI Divide'; second source for the 5%/95% figure."
+  - series_key: stlouisfed_blog.us_workers.hours_assisted_share.pt
+    source_id: stlouisfed_blog
+    value: 0.063
+    unit: share
+    as_of_date: 2026-05-31
+    published_date: 2026-08-27
+    url: https://fredblog.stlouisfed.org/2026/08/does-generative-ai-save-time-at-work/
+    tier: 6
+    basis: reported
+    raw_snippet: "The share of work hours assisted by generative AI grew from 4.1% to 6.3% over roughly the same stretch."
+    note: "FRED Blog, 'Does generative AI save time at work?'; rounds RPSGENAIASSISTWRKHRSALL Q2 2026 (6.27%). Same page: weekly work use 28.2% (Q3 2024) to 39.2% (Q2 2026)."

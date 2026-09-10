@@ -1,0 +1,205 @@
+{
+ "band_input": "metr_blog.rct_2026.dev_speed_change.pt",
+ "band_rationale": "Normal = uplift of at most about 20%, setting-dependent (the range of controlled studies to date); fast = broad uplift above 40%, the scale the productivity-boom claims need.",
+ "band_value": {
+  "as_of": "2026-02-24",
+  "obs_ids": [
+   "feaa59c199632f60"
+  ],
+  "value": -0.04
+ },
+ "bucket_id": "products",
+ "cadence_expected": "annual",
+ "confidence": 70,
+ "counterevidence": "Small samples; the 2026 redesign has selection effects METR itself calls 'very weak evidence'; experienced open-source maintainers on their own repos are the hardest case for uplift.",
+ "crosswalk": [
+  {
+   "bucket_id": "products",
+   "layer_id": "deployment_application",
+   "note": "Uplift RCTs, pilot\u2192production and app-layer margin net of inference measure the same valve.",
+   "relation": "same_valve",
+   "shared_indicators": [],
+   "sublayer_id": null
+  }
+ ],
+ "definition": "Measured speed change for experienced developers using AI tools versus not, from METR's randomised trials. Negative means slower. The band applies to the newest estimate (Feb 2026, newly recruited developers).",
+ "derived": [],
+ "direction": null,
+ "direction_rule": null,
+ "falsifying_band": null,
+ "fast_band": {
+  "hi": null,
+  "lo": 0.4
+ },
+ "flow_status": null,
+ "grade": "A",
+ "id": "dev_rct_uplift",
+ "latest": {
+  "as_of": "2026-02-24",
+  "disputed": true,
+  "grade": "A",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "feaa59c199632f60"
+  ],
+  "series_key": "metr_blog.rct_2026.dev_speed_change.pt",
+  "subject": "rct_2026",
+  "unit": "share",
+  "value": -0.04
+ },
+ "layer_id": "deployment_application",
+ "leading_lagging": "leading",
+ "metric": null,
+ "metric_dims": {},
+ "n_observations": 2,
+ "name": "Developer productivity uplift (METR RCTs)",
+ "normal_band": {
+  "hi": 0.2,
+  "lo": null
+ },
+ "override_note": null,
+ "points": [
+  {
+   "as_of": "2025-06-30",
+   "disputed": false,
+   "grade": "A",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "07f5c389a9db6343"
+   ],
+   "series_key": "metr_blog.rct_2025.dev_speed_change.pt",
+   "subject": "rct_2025",
+   "unit": "share",
+   "value": -0.19
+  },
+  {
+   "as_of": "2026-02-24",
+   "disputed": true,
+   "grade": "A",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "feaa59c199632f60"
+   ],
+   "series_key": "metr_blog.rct_2026.dev_speed_change.pt",
+   "subject": "rct_2026",
+   "unit": "share",
+   "value": -0.04
+  }
+ ],
+ "proposed_status": "consistent_with_normal",
+ "proxy_types": [
+  "product",
+  "deployment"
+ ],
+ "published": true,
+ "related_bottlenecks": [
+  4,
+  5,
+  6
+ ],
+ "related_indicators": [
+  "enterprise_pilot_to_production"
+ ],
+ "related_predictions": [],
+ "series": [
+  {
+   "points": [
+    {
+     "as_of": "2025-06-30",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "07f5c389a9db6343"
+     ],
+     "series_key": "metr_blog.rct_2025.dev_speed_change.pt",
+     "subject": "rct_2025",
+     "unit": "share",
+     "value": -0.19
+    }
+   ],
+   "series_key": "metr_blog.rct_2025.dev_speed_change.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-02-24",
+     "disputed": true,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "feaa59c199632f60"
+     ],
+     "series_key": "metr_blog.rct_2026.dev_speed_change.pt",
+     "subject": "rct_2026",
+     "unit": "share",
+     "value": -0.04
+    }
+   ],
+   "series_key": "metr_blog.rct_2026.dev_speed_change.pt"
+  }
+ ],
+ "series_keys": [
+  "metr_blog.rct_*.dev_speed_change.pt"
+ ],
+ "sparkline": [
+  {
+   "as_of": "2025-06-30",
+   "disputed": false,
+   "grade": "A",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "07f5c389a9db6343"
+   ],
+   "series_key": "metr_blog.rct_2025.dev_speed_change.pt",
+   "subject": "rct_2025",
+   "unit": "share",
+   "value": -0.19
+  },
+  {
+   "as_of": "2026-02-24",
+   "disputed": true,
+   "grade": "A",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "feaa59c199632f60"
+   ],
+   "series_key": "metr_blog.rct_2026.dev_speed_change.pt",
+   "subject": "rct_2026",
+   "unit": "share",
+   "value": -0.04
+  }
+ ],
+ "stale_as_of": null,
+ "status": "consistent_with_normal",
+ "status_events": [
+  {
+   "author": "claude-initial-seed",
+   "created_at": "2026-09-10T01:29:58.458114Z",
+   "evidence_ids": [
+    "feaa59c199632f60"
+   ],
+   "id": "a29f450549149eee",
+   "new_conf": 70,
+   "new_status": "consistent_with_normal",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "METR's Feb 2026 redesign estimates a -4% speedup for newly recruited developers (CI -15% to +9%; METR calls it very weak evidence); the 2025 RCT found developers 19% slower. Both are far below the 20% ceiling of the normal band. Initial seed.",
+   "target_id": "dev_rct_uplift",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": null,
+ "tracker_interpretation": "Two trials, two years, and the best estimate is still near zero. Capability is not the constraint; integration and verification are.",
+ "unit": "share",
+ "updated_at": "2026-09-10",
+ "valve_measured": "invention_to_product",
+ "why_it_matters": "The single best-controlled test of whether frontier capability turns into product-level uplift. The paper's claim is that benchmark gains do not translate quickly; this is where that shows."
+}

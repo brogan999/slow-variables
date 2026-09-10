@@ -1,0 +1,194 @@
+{
+ "band_input": "bbd.us_workers.hours_assisted_share.pt",
+ "band_rationale": "Normal = single-digit share of hours in year three (PCs and the internet were here at the same age); fast = more than 20% of hours assisted.",
+ "band_value": {
+  "as_of": "2026-05-31",
+  "obs_ids": [
+   "a6ec1ef308194b12"
+  ],
+  "value": 0.06267
+ },
+ "bucket_id": "early_adoption",
+ "cadence_expected": "quarterly",
+ "confidence": 80,
+ "counterevidence": "Self-reported survey; the instrument changed between waves; hours assisted is not hours saved.",
+ "crosswalk": [
+  {
+   "bucket_id": "early_adoption",
+   "layer_id": "adopters",
+   "note": "BTOS, BBD, Ramp and the Anthropic Economic Index are adoption from both ends.",
+   "relation": "same_valve",
+   "shared_indicators": [],
+   "sublayer_id": null
+  }
+ ],
+ "definition": "Share of all US work hours in which employed adults used generative AI, from the Bick\u2013Blandin\u2013Deming Real-Time Population Survey (via FRED), with weekly work use and any-use shares shown alongside.",
+ "derived": [],
+ "direction": null,
+ "direction_rule": null,
+ "falsifying_band": null,
+ "fast_band": {
+  "hi": null,
+  "lo": 0.2
+ },
+ "flow_status": null,
+ "grade": "B",
+ "id": "bbd_work_hours_assisted",
+ "latest": {
+  "as_of": "2026-05-31",
+  "disputed": false,
+  "grade": "B",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "a6ec1ef308194b12"
+  ],
+  "series_key": "bbd.us_workers.hours_assisted_share.pt",
+  "subject": "us_workers",
+  "unit": "share",
+  "value": 0.06267
+ },
+ "layer_id": "adopters",
+ "leading_lagging": "coincident",
+ "metric": null,
+ "metric_dims": {},
+ "n_observations": 3,
+ "name": "Share of work hours assisted by generative AI",
+ "normal_band": {
+  "hi": 0.09,
+  "lo": null
+ },
+ "override_note": null,
+ "points": [
+  {
+   "as_of": "2026-05-31",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "a6ec1ef308194b12"
+   ],
+   "series_key": "bbd.us_workers.hours_assisted_share.pt",
+   "subject": "us_workers",
+   "unit": "share",
+   "value": 0.06267
+  }
+ ],
+ "proposed_status": "consistent_with_normal",
+ "proxy_types": [
+  "behaviour",
+  "deployment"
+ ],
+ "published": true,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "btos_firm_use"
+ ],
+ "related_predictions": [],
+ "series": [
+  {
+   "points": [
+    {
+     "as_of": "2026-05-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "6f4614d7abfab500"
+     ],
+     "series_key": "bbd.us_adults.any_use_share.pt",
+     "subject": "us_adults",
+     "unit": "share",
+     "value": 0.618
+    }
+   ],
+   "series_key": "bbd.us_adults.any_use_share.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-05-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "a6ec1ef308194b12"
+     ],
+     "series_key": "bbd.us_workers.hours_assisted_share.pt",
+     "subject": "us_workers",
+     "unit": "share",
+     "value": 0.06267
+    }
+   ],
+   "series_key": "bbd.us_workers.hours_assisted_share.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-05-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "177fbb1f17b3b54f"
+     ],
+     "series_key": "bbd.us_workers.work_use_weekly_share.pt",
+     "subject": "us_workers",
+     "unit": "share",
+     "value": 0.39234
+    }
+   ],
+   "series_key": "bbd.us_workers.work_use_weekly_share.pt"
+  }
+ ],
+ "series_keys": [
+  "bbd.us_workers.hours_assisted_share.pt",
+  "bbd.us_workers.work_use_weekly_share.pt",
+  "bbd.us_adults.any_use_share.pt"
+ ],
+ "sparkline": [
+  {
+   "as_of": "2026-05-31",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "a6ec1ef308194b12"
+   ],
+   "series_key": "bbd.us_workers.hours_assisted_share.pt",
+   "subject": "us_workers",
+   "unit": "share",
+   "value": 0.06267
+  }
+ ],
+ "stale_as_of": null,
+ "status": "consistent_with_normal",
+ "status_events": [
+  {
+   "author": "claude-initial-seed",
+   "created_at": "2026-09-10T01:29:58.476677Z",
+   "evidence_ids": [
+    "a6ec1ef308194b12"
+   ],
+   "id": "e786ebb3862bc89f",
+   "new_conf": 80,
+   "new_status": "consistent_with_normal",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "Bick-Blandin-Deming RPS, May 2026 wave via FRED: 6.3% of work hours assisted by generative AI, inside the single-digit normal band. Weekly work use is 39.2% and any-use 61.8%, both well above the brief's expectations - broad adoption, shallow intensity. Initial seed.",
+   "target_id": "bbd_work_hours_assisted",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": null,
+ "tracker_interpretation": "Broad but shallow, exactly as the paper predicts - most workers touch it, few hours run on it. The weekly-use share moved far faster than the brief expected.",
+ "unit": "share",
+ "updated_at": "2026-09-10",
+ "valve_measured": "product_to_adoption",
+ "why_it_matters": "The intensive margin. Headline adoption is broad, but hours actually assisted is what productivity arithmetic runs on."
+}

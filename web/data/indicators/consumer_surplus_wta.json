@@ -1,0 +1,205 @@
+{
+ "band_input": "stanford_del.us.genai_consumer_surplus_usd.pt",
+ "band_rationale": null,
+ "band_value": {
+  "as_of": "2026-03-31",
+  "obs_ids": [
+   "4845c613c06ed234"
+  ],
+  "value": 172000000000.0
+ },
+ "bucket_id": null,
+ "cadence_expected": "annual",
+ "confidence": 65,
+ "counterevidence": "A single survey series with a stated-preference method; WTA estimates run higher than willingness to pay. No high-frequency version exists.",
+ "crosswalk": [],
+ "definition": "Aggregate annual US consumer surplus from generative-AI chatbots, estimated by Stanford DEL from willingness-to-accept surveys (users \u00d7 mean WTA to give the tools up for a month, annualised).",
+ "derived": [],
+ "direction": null,
+ "direction_rule": {
+  "dead_band": 10000000000.0,
+  "higher_is": "dispersing",
+  "periods": 1,
+  "rationale": "Two annual waves so far, so the trend is one step; moves under $10B are within survey error. Rising surplus disperses value away from producers to consumers."
+ },
+ "falsifying_band": null,
+ "fast_band": null,
+ "flow_status": null,
+ "grade": "B",
+ "id": "consumer_surplus_wta",
+ "latest": {
+  "as_of": "2026-03-31",
+  "disputed": false,
+  "grade": "B",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "4845c613c06ed234"
+  ],
+  "series_key": "stanford_del.us.genai_consumer_surplus_usd.pt",
+  "subject": "us",
+  "unit": "USD",
+  "value": 172000000000.0
+ },
+ "layer_id": "labour_consumers",
+ "leading_lagging": "lagging",
+ "metric": null,
+ "metric_dims": {},
+ "n_observations": 3,
+ "name": "Consumer surplus from generative AI (willingness to accept)",
+ "normal_band": null,
+ "override_note": null,
+ "points": [
+  {
+   "as_of": "2025-07-31",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "9be9d0729b4243d4"
+   ],
+   "series_key": "stanford_del.us.genai_consumer_surplus_usd.pt",
+   "subject": "us",
+   "unit": "USD",
+   "value": 116000000000.0
+  },
+  {
+   "as_of": "2026-03-31",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "4845c613c06ed234"
+   ],
+   "series_key": "stanford_del.us.genai_consumer_surplus_usd.pt",
+   "subject": "us",
+   "unit": "USD",
+   "value": 172000000000.0
+  }
+ ],
+ "proposed_status": "dispersing",
+ "proxy_types": [
+  "welfare"
+ ],
+ "published": true,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "semis_rent_concentration"
+ ],
+ "related_predictions": [],
+ "series": [
+  {
+   "points": [
+    {
+     "as_of": "2025-07-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "9be9d0729b4243d4"
+     ],
+     "series_key": "stanford_del.us.genai_consumer_surplus_usd.pt",
+     "subject": "us",
+     "unit": "USD",
+     "value": 116000000000.0
+    },
+    {
+     "as_of": "2026-03-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "4845c613c06ed234"
+     ],
+     "series_key": "stanford_del.us.genai_consumer_surplus_usd.pt",
+     "subject": "us",
+     "unit": "USD",
+     "value": 172000000000.0
+    }
+   ],
+   "series_key": "stanford_del.us.genai_consumer_surplus_usd.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "7e371945301bb0da"
+     ],
+     "series_key": "stanford_del.us.genai_mean_wta_usd_month.pt",
+     "subject": "us",
+     "unit": "USD",
+     "value": 124.5
+    }
+   ],
+   "series_key": "stanford_del.us.genai_mean_wta_usd_month.pt"
+  }
+ ],
+ "series_keys": [
+  "stanford_del.us.genai_consumer_surplus_usd.pt",
+  "stanford_del.us.genai_mean_wta_usd_month.pt"
+ ],
+ "sparkline": [
+  {
+   "as_of": "2025-07-31",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "9be9d0729b4243d4"
+   ],
+   "series_key": "stanford_del.us.genai_consumer_surplus_usd.pt",
+   "subject": "us",
+   "unit": "USD",
+   "value": 116000000000.0
+  },
+  {
+   "as_of": "2026-03-31",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "4845c613c06ed234"
+   ],
+   "series_key": "stanford_del.us.genai_consumer_surplus_usd.pt",
+   "subject": "us",
+   "unit": "USD",
+   "value": 172000000000.0
+  }
+ ],
+ "stale_as_of": null,
+ "status": "dispersing",
+ "status_events": [
+  {
+   "author": "claude-initial-seed",
+   "created_at": "2026-09-10T01:29:58.431825Z",
+   "evidence_ids": [
+    "4845c613c06ed234"
+   ],
+   "id": "97faa342204cd9ac",
+   "new_conf": 65,
+   "new_status": "dispersing",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "Stanford DEL WTA estimates: $116B (Jul 2025) to $172B (Mar 2026), one step above the $10B dead band; mean WTA $98 to $124.50 per month. Surplus is moving to consumers faster than any layer's revenue grows. Initial seed.",
+   "target_id": "consumer_surplus_wta",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": null,
+ "tracker_interpretation": "Consumer surplus is growing faster than any layer's revenue; the Nordhaus pattern (innovators keep a sliver) is so far holding.",
+ "unit": "USD",
+ "updated_at": "2026-09-10",
+ "valve_measured": null,
+ "why_it_matters": "The leak from the stack. If consumers keep more surplus than every layer earns in US revenue, the capture story is about who does not capture it."
+}

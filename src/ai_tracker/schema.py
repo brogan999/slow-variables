@@ -237,6 +237,7 @@ class Indicator(BaseModel):
     counterevidence: str = ""
     series_keys: list[str] = []  # fnmatch globs over observation series_key
     metric: str | None = None  # derived metric that is the headline series
+    metric_dims: dict[str, str] = {}  # e.g. {"entity": "nvda"} to select one dims slice of the metric
     band_input: str | None = None  # series_key glob, or "metric:<name>", that the bands apply to
     bucket_id: str | None = None
     valve_measured: str | None = None
@@ -348,6 +349,28 @@ class Sublayer(BaseModel):
     name: str
     order: int
     description: str = ""
+
+
+class Membership(BaseModel):
+    layer_id: str
+    sublayer_id: str | None = None
+    is_primary: bool = True
+    from_date: date | None = None
+    to_date: date | None = None
+
+
+class Entity(BaseModel):
+    id: str
+    name: str
+    kind: Literal["company", "lab", "agency", "person", "university", "fund"] = "company"
+    cik: str | None = None  # 10-digit, zero-padded
+    crunchbase_id: str | None = None
+    aliases: list[str] = []
+    founded: int | None = None
+    hq: str | None = None
+    notes: str | None = None
+    verified: bool = False
+    memberships: list[Membership] = []
 
 
 class Crosswalk(BaseModel):

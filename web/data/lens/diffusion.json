@@ -1,5 +1,5 @@
 {
- "as_of": "2026-04-07",
+ "as_of": "2026-07-26",
  "buckets": [
   {
    "id": "methods",
@@ -25,7 +25,7 @@
      },
      "layer_id": "model",
      "leading_lagging": "leading",
-     "n_observations": 27,
+     "n_observations": 30,
      "name": "METR 50% time horizon",
      "published": true,
      "sparkline": [
@@ -367,9 +367,9 @@
       }
      ],
      "stale_as_of": null,
-     "status": "emerging",
+     "status": "faster_than_normal",
      "unit": "minutes",
-     "valve_measured": "invention_to_product"
+     "valve_measured": null
     },
     {
      "bucket_id": "methods",
@@ -734,9 +734,9 @@
       }
      ],
      "stale_as_of": null,
-     "status": "emerging",
+     "status": "faster_than_normal",
      "unit": "minutes",
-     "valve_measured": "invention_to_product"
+     "valve_measured": null
     },
     {
      "bucket_id": "methods",
@@ -1059,37 +1059,708 @@
    "name": "Methods",
    "order": 1,
    "speed_limit": "None inherent; capability can move fast. The paper's claim is that this stock is not the bottleneck.",
-   "status": "emerging",
+   "status": "faster_than_normal",
    "stock": "Capabilities and methods \u2014 what the frontier can do on benchmarks and in the lab.",
    "valve": "invention_to_product"
   },
   {
    "id": "products",
-   "indicators": [],
+   "indicators": [
+    {
+     "bucket_id": "products",
+     "confidence": 70,
+     "grade": "A",
+     "id": "dev_rct_uplift",
+     "latest": {
+      "as_of": "2026-02-24",
+      "disputed": true,
+      "grade": "A",
+      "high": null,
+      "low": null,
+      "obs_ids": [
+       "feaa59c199632f60"
+      ],
+      "series_key": "metr_blog.rct_2026.dev_speed_change.pt",
+      "subject": "rct_2026",
+      "unit": "share",
+      "value": -0.04
+     },
+     "layer_id": "deployment_application",
+     "leading_lagging": "leading",
+     "n_observations": 2,
+     "name": "Developer productivity uplift (METR RCTs)",
+     "published": true,
+     "sparkline": [
+      {
+       "as_of": "2025-06-30",
+       "disputed": false,
+       "grade": "A",
+       "high": null,
+       "low": null,
+       "obs_ids": [
+        "07f5c389a9db6343"
+       ],
+       "series_key": "metr_blog.rct_2025.dev_speed_change.pt",
+       "subject": "rct_2025",
+       "unit": "share",
+       "value": -0.19
+      },
+      {
+       "as_of": "2026-02-24",
+       "disputed": true,
+       "grade": "A",
+       "high": null,
+       "low": null,
+       "obs_ids": [
+        "feaa59c199632f60"
+       ],
+       "series_key": "metr_blog.rct_2026.dev_speed_change.pt",
+       "subject": "rct_2026",
+       "unit": "share",
+       "value": -0.04
+      }
+     ],
+     "stale_as_of": null,
+     "status": "consistent_with_normal",
+     "unit": "share",
+     "valve_measured": "invention_to_product"
+    },
+    {
+     "bucket_id": "products",
+     "confidence": 55,
+     "grade": "B",
+     "id": "enterprise_pilot_to_production",
+     "latest": {
+      "as_of": "2025-06-30",
+      "disputed": true,
+      "grade": "B",
+      "high": null,
+      "low": null,
+      "obs_ids": [
+       "8cdf8f5390e4722d"
+      ],
+      "series_key": "nanda.us_enterprise.pilots_with_pnl_impact_share.pt",
+      "subject": "us_enterprise",
+      "unit": "share",
+      "value": 0.05
+     },
+     "layer_id": "deployment_application",
+     "leading_lagging": "coincident",
+     "n_observations": 1,
+     "name": "Enterprise pilots with measurable P&L impact",
+     "published": true,
+     "sparkline": [
+      {
+       "as_of": "2025-06-30",
+       "disputed": true,
+       "grade": "B",
+       "high": null,
+       "low": null,
+       "obs_ids": [
+        "8cdf8f5390e4722d"
+       ],
+       "series_key": "nanda.us_enterprise.pilots_with_pnl_impact_share.pt",
+       "subject": "us_enterprise",
+       "unit": "share",
+       "value": 0.05
+      }
+     ],
+     "stale_as_of": null,
+     "status": "consistent_with_normal",
+     "unit": "share",
+     "valve_measured": "product_to_adoption"
+    }
+   ],
    "name": "Products",
    "order": 2,
    "speed_limit": "Reliability, integration, evaluation and liability \u2014 the 50%\u219280% gap and the \"last mile\" of productisation.",
-   "status": "unmeasured",
+   "status": "consistent_with_normal",
    "stock": "Reliable, integrated products built on those methods.",
    "valve": "product_to_adoption"
   },
   {
    "id": "early_adoption",
-   "indicators": [],
+   "indicators": [
+    {
+     "bucket_id": "early_adoption",
+     "confidence": 80,
+     "grade": "B",
+     "id": "bbd_work_hours_assisted",
+     "latest": {
+      "as_of": "2026-05-31",
+      "disputed": false,
+      "grade": "B",
+      "high": null,
+      "low": null,
+      "obs_ids": [
+       "a6ec1ef308194b12"
+      ],
+      "series_key": "bbd.us_workers.hours_assisted_share.pt",
+      "subject": "us_workers",
+      "unit": "share",
+      "value": 0.06267
+     },
+     "layer_id": "adopters",
+     "leading_lagging": "coincident",
+     "n_observations": 3,
+     "name": "Share of work hours assisted by generative AI",
+     "published": true,
+     "sparkline": [
+      {
+       "as_of": "2026-05-31",
+       "disputed": false,
+       "grade": "B",
+       "high": null,
+       "low": null,
+       "obs_ids": [
+        "a6ec1ef308194b12"
+       ],
+       "series_key": "bbd.us_workers.hours_assisted_share.pt",
+       "subject": "us_workers",
+       "unit": "share",
+       "value": 0.06267
+      }
+     ],
+     "stale_as_of": null,
+     "status": "consistent_with_normal",
+     "unit": "share",
+     "valve_measured": "product_to_adoption"
+    },
+    {
+     "bucket_id": "early_adoption",
+     "confidence": 70,
+     "grade": "A",
+     "id": "btos_firm_use",
+     "latest": {
+      "as_of": "2026-05-03",
+      "disputed": false,
+      "grade": "A",
+      "high": null,
+      "low": null,
+      "obs_ids": [
+       "0d1ed38c99b3dccd"
+      ],
+      "series_key": "census_btos.us.ai_use_share_v2.2w",
+      "subject": "us",
+      "unit": "share",
+      "value": 0.198
+     },
+     "layer_id": "adopters",
+     "leading_lagging": "coincident",
+     "n_observations": 1,
+     "name": "US firms using AI (Census BTOS)",
+     "published": true,
+     "sparkline": [
+      {
+       "as_of": "2026-05-03",
+       "disputed": false,
+       "grade": "A",
+       "high": null,
+       "low": null,
+       "obs_ids": [
+        "0d1ed38c99b3dccd"
+       ],
+       "series_key": "census_btos.us.ai_use_share_v2.2w",
+       "subject": "us",
+       "unit": "share",
+       "value": 0.198
+      }
+     ],
+     "stale_as_of": "2026-05-03",
+     "status": "consistent_with_normal",
+     "unit": "share",
+     "valve_measured": "product_to_adoption"
+    }
+   ],
    "name": "Early adoption",
    "order": 3,
    "speed_limit": "Human and organisational speed \u2014 training, procurement, trust, ROI measurement (electrification took decades).",
-   "status": "unmeasured",
+   "status": "consistent_with_normal",
    "stock": "Individuals and firms using the products, at any depth.",
    "valve": "adoption_to_adaptation"
   },
   {
    "id": "adaptation",
-   "indicators": [],
+   "indicators": [
+    {
+     "bucket_id": "adaptation",
+     "confidence": 80,
+     "grade": "A",
+     "id": "bls_labor_productivity_yoy",
+     "latest": {
+      "as_of": "2026-06-30",
+      "disputed": false,
+      "grade": "A",
+      "high": null,
+      "low": null,
+      "obs_ids": [
+       "29ead0fabdeb8fe8"
+      ],
+      "series_key": "bls.prs85006091.q",
+      "subject": "prs85006091",
+      "unit": "pct_change_yoy",
+      "value": 2.2
+     },
+     "layer_id": "labour_consumers",
+     "leading_lagging": "lagging",
+     "n_observations": 76,
+     "name": "US labour productivity, year on year",
+     "published": true,
+     "sparkline": [
+      {
+       "as_of": "2020-09-30",
+       "disputed": false,
+       "grade": "A",
+       "high": null,
+       "low": null,
+       "obs_ids": [
+        "db20b652fc7d0521"
+       ],
+       "series_key": "bls.prs85006091.q",
+       "subject": "prs85006091",
+       "unit": "pct_change_yoy",
+       "value": 7.1
+      },
+      {
+       "as_of": "2020-12-31",
+       "disputed": false,
+       "grade": "A",
+       "high": null,
+       "low": null,
+       "obs_ids": [
+        "67017337f2903e08"
+       ],
+       "series_key": "bls.prs85006091.q",
+       "subject": "prs85006091",
+       "unit": "pct_change_yoy",
+       "value": 5.2
+      },
+      {
+       "as_of": "2021-03-31",
+       "disputed": false,
+       "grade": "A",
+       "high": null,
+       "low": null,
+       "obs_ids": [
+        "6c488efbe87fee38"
+       ],
+       "series_key": "bls.prs85006091.q",
+       "subject": "prs85006091",
+       "unit": "pct_change_yoy",
+       "value": 6.4
+      },
+      {
+       "as_of": "2021-06-30",
+       "disputed": false,
+       "grade": "A",
+       "high": null,
+       "low": null,
+       "obs_ids": [
+        "06a33d88713e46b4"
+       ],
+       "series_key": "bls.prs85006091.q",
+       "subject": "prs85006091",
+       "unit": "pct_change_yoy",
+       "value": 1.7
+      },
+      {
+       "as_of": "2021-09-30",
+       "disputed": false,
+       "grade": "A",
+       "high": null,
+       "low": null,
+       "obs_ids": [
+        "10bea5d0ae08c775"
+       ],
+       "series_key": "bls.prs85006091.q",
+       "subject": "prs85006091",
+       "unit": "pct_change_yoy",
+       "value": -0.5
+      },
+      {
+       "as_of": "2021-12-31",
+       "disputed": false,
+       "grade": "A",
+       "high": null,
+       "low": null,
+       "obs_ids": [
+        "c7290867e2bbf43a"
+       ],
+       "series_key": "bls.prs85006091.q",
+       "subject": "prs85006091",
+       "unit": "pct_change_yoy",
+       "value": 0.9
+      },
+      {
+       "as_of": "2022-03-31",
+       "disputed": false,
+       "grade": "A",
+       "high": null,
+       "low": null,
+       "obs_ids": [
+        "895a4fa5119c0f6a"
+       ],
+       "series_key": "bls.prs85006091.q",
+       "subject": "prs85006091",
+       "unit": "pct_change_yoy",
+       "value": -1.1
+      },
+      {
+       "as_of": "2022-06-30",
+       "disputed": false,
+       "grade": "A",
+       "high": null,
+       "low": null,
+       "obs_ids": [
+        "3ef16b9d5d7d4c75"
+       ],
+       "series_key": "bls.prs85006091.q",
+       "subject": "prs85006091",
+       "unit": "pct_change_yoy",
+       "value": -2.0
+      },
+      {
+       "as_of": "2022-09-30",
+       "disputed": false,
+       "grade": "A",
+       "high": null,
+       "low": null,
+       "obs_ids": [
+        "979ae64c4314a362"
+       ],
+       "series_key": "bls.prs85006091.q",
+       "subject": "prs85006091",
+       "unit": "pct_change_yoy",
+       "value": -1.4
+      },
+      {
+       "as_of": "2022-12-31",
+       "disputed": false,
+       "grade": "A",
+       "high": null,
+       "low": null,
+       "obs_ids": [
+        "3bf73c33dab95de6"
+       ],
+       "series_key": "bls.prs85006091.q",
+       "subject": "prs85006091",
+       "unit": "pct_change_yoy",
+       "value": -1.4
+      },
+      {
+       "as_of": "2023-03-31",
+       "disputed": false,
+       "grade": "A",
+       "high": null,
+       "low": null,
+       "obs_ids": [
+        "c3d3944348b8cbd1"
+       ],
+       "series_key": "bls.prs85006091.q",
+       "subject": "prs85006091",
+       "unit": "pct_change_yoy",
+       "value": 0.1
+      },
+      {
+       "as_of": "2023-06-30",
+       "disputed": false,
+       "grade": "A",
+       "high": null,
+       "low": null,
+       "obs_ids": [
+        "5b81895ee65f8b07"
+       ],
+       "series_key": "bls.prs85006091.q",
+       "subject": "prs85006091",
+       "unit": "pct_change_yoy",
+       "value": 1.9
+      },
+      {
+       "as_of": "2023-09-30",
+       "disputed": false,
+       "grade": "A",
+       "high": null,
+       "low": null,
+       "obs_ids": [
+        "a73abc2133df652e"
+       ],
+       "series_key": "bls.prs85006091.q",
+       "subject": "prs85006091",
+       "unit": "pct_change_yoy",
+       "value": 3.1
+      },
+      {
+       "as_of": "2023-12-31",
+       "disputed": false,
+       "grade": "A",
+       "high": null,
+       "low": null,
+       "obs_ids": [
+        "3a50baf5663e76ec"
+       ],
+       "series_key": "bls.prs85006091.q",
+       "subject": "prs85006091",
+       "unit": "pct_change_yoy",
+       "value": 3.5
+      },
+      {
+       "as_of": "2024-03-31",
+       "disputed": false,
+       "grade": "A",
+       "high": null,
+       "low": null,
+       "obs_ids": [
+        "ca3f146dbe9a472f"
+       ],
+       "series_key": "bls.prs85006091.q",
+       "subject": "prs85006091",
+       "unit": "pct_change_yoy",
+       "value": 3.3
+      },
+      {
+       "as_of": "2024-06-30",
+       "disputed": false,
+       "grade": "A",
+       "high": null,
+       "low": null,
+       "obs_ids": [
+        "f9c77b2ba887d6e8"
+       ],
+       "series_key": "bls.prs85006091.q",
+       "subject": "prs85006091",
+       "unit": "pct_change_yoy",
+       "value": 3.2
+      },
+      {
+       "as_of": "2024-09-30",
+       "disputed": false,
+       "grade": "A",
+       "high": null,
+       "low": null,
+       "obs_ids": [
+        "73639fe23cf8e0da"
+       ],
+       "series_key": "bls.prs85006091.q",
+       "subject": "prs85006091",
+       "unit": "pct_change_yoy",
+       "value": 2.9
+      },
+      {
+       "as_of": "2024-12-31",
+       "disputed": false,
+       "grade": "A",
+       "high": null,
+       "low": null,
+       "obs_ids": [
+        "29c1a4f7a74c413b"
+       ],
+       "series_key": "bls.prs85006091.q",
+       "subject": "prs85006091",
+       "unit": "pct_change_yoy",
+       "value": 2.3
+      },
+      {
+       "as_of": "2025-03-31",
+       "disputed": false,
+       "grade": "A",
+       "high": null,
+       "low": null,
+       "obs_ids": [
+        "158b8664df122065"
+       ],
+       "series_key": "bls.prs85006091.q",
+       "subject": "prs85006091",
+       "unit": "pct_change_yoy",
+       "value": 2.0
+      },
+      {
+       "as_of": "2025-06-30",
+       "disputed": false,
+       "grade": "A",
+       "high": null,
+       "low": null,
+       "obs_ids": [
+        "4d9f1e2448a1d6e5"
+       ],
+       "series_key": "bls.prs85006091.q",
+       "subject": "prs85006091",
+       "unit": "pct_change_yoy",
+       "value": 2.1
+      },
+      {
+       "as_of": "2025-09-30",
+       "disputed": false,
+       "grade": "A",
+       "high": null,
+       "low": null,
+       "obs_ids": [
+        "06c679ceb8d43c08"
+       ],
+       "series_key": "bls.prs85006091.q",
+       "subject": "prs85006091",
+       "unit": "pct_change_yoy",
+       "value": 2.5
+      },
+      {
+       "as_of": "2025-12-31",
+       "disputed": false,
+       "grade": "A",
+       "high": null,
+       "low": null,
+       "obs_ids": [
+        "f2239871e7fe79fb"
+       ],
+       "series_key": "bls.prs85006091.q",
+       "subject": "prs85006091",
+       "unit": "pct_change_yoy",
+       "value": 2.5
+      },
+      {
+       "as_of": "2026-03-31",
+       "disputed": false,
+       "grade": "A",
+       "high": null,
+       "low": null,
+       "obs_ids": [
+        "98bc55026f3fef0f"
+       ],
+       "series_key": "bls.prs85006091.q",
+       "subject": "prs85006091",
+       "unit": "pct_change_yoy",
+       "value": 2.9
+      },
+      {
+       "as_of": "2026-06-30",
+       "disputed": false,
+       "grade": "A",
+       "high": null,
+       "low": null,
+       "obs_ids": [
+        "29ead0fabdeb8fe8"
+       ],
+       "series_key": "bls.prs85006091.q",
+       "subject": "prs85006091",
+       "unit": "pct_change_yoy",
+       "value": 2.2
+      }
+     ],
+     "stale_as_of": null,
+     "status": "consistent_with_normal",
+     "unit": "pct",
+     "valve_measured": "adoption_to_adaptation"
+    },
+    {
+     "bucket_id": "adaptation",
+     "confidence": 75,
+     "grade": "A",
+     "id": "bls_tfp_private_nonfarm",
+     "latest": {
+      "as_of": "2025-12-31",
+      "dims": {},
+      "obs_ids": [
+       "f7a348d1769cecde",
+       "fe4fd5aab4976231"
+      ],
+      "unit": "share",
+      "value": 0.008322020344782688
+     },
+     "layer_id": "labour_consumers",
+     "leading_lagging": "lagging",
+     "n_observations": 9,
+     "name": "US total factor productivity, private nonfarm business",
+     "published": true,
+     "sparkline": [
+      {
+       "as_of": "2018-12-31",
+       "dims": {},
+       "obs_ids": [
+        "5a08cfd36d91a672",
+        "c2f165e3b203e953"
+       ],
+       "unit": "share",
+       "value": 0.006389999999999896
+      },
+      {
+       "as_of": "2019-12-31",
+       "dims": {},
+       "obs_ids": [
+        "898e507ec27f9846",
+        "c2f165e3b203e953"
+       ],
+       "unit": "share",
+       "value": 0.01292739395264264
+      },
+      {
+       "as_of": "2020-12-31",
+       "dims": {},
+       "obs_ids": [
+        "1da76ecd863d88c5",
+        "898e507ec27f9846"
+       ],
+       "unit": "share",
+       "value": -0.004973513831665555
+      },
+      {
+       "as_of": "2021-12-31",
+       "dims": {},
+       "obs_ids": [
+        "1da76ecd863d88c5",
+        "3af5026f68f8445e"
+       ],
+       "unit": "share",
+       "value": 0.03854761270986762
+      },
+      {
+       "as_of": "2022-12-31",
+       "dims": {},
+       "obs_ids": [
+        "3af5026f68f8445e",
+        "3cb18cc9448dba39"
+       ],
+       "unit": "share",
+       "value": -0.01056548607880925
+      },
+      {
+       "as_of": "2023-12-31",
+       "dims": {},
+       "obs_ids": [
+        "3cb18cc9448dba39",
+        "d5aa7c0a22c69e32"
+       ],
+       "unit": "share",
+       "value": 0.01631008346925067
+      },
+      {
+       "as_of": "2024-12-31",
+       "dims": {},
+       "obs_ids": [
+        "d5aa7c0a22c69e32",
+        "f7a348d1769cecde"
+       ],
+       "unit": "share",
+       "value": 0.015255357311432016
+      },
+      {
+       "as_of": "2025-12-31",
+       "dims": {},
+       "obs_ids": [
+        "f7a348d1769cecde",
+        "fe4fd5aab4976231"
+       ],
+       "unit": "share",
+       "value": 0.008322020344782688
+      }
+     ],
+     "stale_as_of": null,
+     "status": "consistent_with_normal",
+     "unit": "share",
+     "valve_measured": "adoption_to_adaptation"
+    }
+   ],
    "name": "Adaptation",
    "order": 4,
    "speed_limit": "Complementary innovation, regulation, safety brakes and the pace of institutional change.",
-   "status": "unmeasured",
+   "status": "consistent_with_normal",
    "stock": "Workflows, institutions, labour markets and regulation reorganised around the technology.",
    "valve": "return_arrow"
   },
@@ -1107,70 +1778,47 @@
  "recent_status_events": [
   {
    "author": "claude-initial-seed",
-   "created_at": "2026-09-10T00:55:32.193200Z",
+   "created_at": "2026-09-10T01:29:58.486401Z",
    "evidence_ids": [
-    "11a8bbd24c5c99cb",
-    "858c619bbf5d9edd"
+    "0d1ed38c99b3dccd"
    ],
-   "id": "aaf7234ca67f7558",
+   "id": "61b8d2688b76d786",
    "new_conf": 70,
    "new_status": "consistent_with_normal",
    "old_conf": null,
    "old_status": null,
-   "reason": "Latest non-disputed model ratio is 6.3x (>= 5 normal band); the Mythos point is excluded as beyond the 16h suite ceiling. Matches the brief's expectation. Initial seed; pending Alex's review.",
-   "target_id": "horizon_ratio_80_50",
+   "reason": "Census BTOS, post-November-2025 instrument: 19.8% of firms using AI in any business function as of 3 May 2026 (Census story, 26 May 2026), inside the normal band (<=35%). The National.xlsx cycle ending 9 Aug 2026 shows 22.4%; that value needs the XLSX connector. Initial seed.",
+   "target_id": "btos_firm_use",
    "target_type": "indicator"
   },
   {
    "author": "claude-initial-seed",
-   "created_at": "2026-09-10T00:55:32.192333Z",
+   "created_at": "2026-09-10T01:29:58.476677Z",
    "evidence_ids": [
-    "09061051488d31d8",
-    "095bb21142dc666e",
-    "0fb6ae10625216fb",
-    "11a8bbd24c5c99cb",
-    "145115d411f64a37",
-    "1f69c37251b857fb",
-    "29446d6c837793d5",
-    "2dc1a032ed30619b",
-    "47db79bda335bcb0",
-    "5eb0848814989421",
-    "75c93027341be6a5",
-    "833be5d2cc9c9421",
-    "8de1effa26863680",
-    "8f73b56b30434655",
-    "9450442af9ff97b6",
-    "959db6dd7d0e15af",
-    "a53da98c12dc8c0d",
-    "b5c1303bf31f5a8d",
-    "c256ff03726522bf",
-    "d1bb5ffe97ca5bad",
-    "deb6a1ab9fff15aa",
-    "f1409c691bdca4ec",
-    "fecd07e2f7444679"
+    "a6ec1ef308194b12"
    ],
-   "id": "1bd721a4e6e758cd",
-   "new_conf": 70,
-   "new_status": "emerging",
-   "old_conf": null,
-   "old_status": null,
-   "reason": "Log-linear fit over the 80% horizon, 2023 onward, gives a doubling time of 124.7 days, just above the fast band ceiling (122). No CI on our fit. Initial seed; pending Alex's review.",
-   "target_id": "metr_horizon_80",
-   "target_type": "indicator"
-  },
-  {
-   "author": "claude-initial-seed",
-   "created_at": "2026-09-10T00:55:32.189541Z",
-   "evidence_ids": [
-    "479bfe0ed46088db"
-   ],
-   "id": "a790bbf08f111d54",
+   "id": "e786ebb3862bc89f",
    "new_conf": 80,
-   "new_status": "emerging",
+   "new_status": "consistent_with_normal",
    "old_conf": null,
    "old_status": null,
-   "reason": "METR's published 2023-onward doubling time is 128.7 days (CI 104-158), between the normal band (>=213 days) and the fast band (<=122 days). Initial seed; the brief expected faster_than_normal. Pending Alex's review.",
-   "target_id": "metr_horizon_50",
+   "reason": "Bick-Blandin-Deming RPS, May 2026 wave via FRED: 6.3% of work hours assisted by generative AI, inside the single-digit normal band. Weekly work use is 39.2% and any-use 61.8%, both well above the brief's expectations - broad adoption, shallow intensity. Initial seed.",
+   "target_id": "bbd_work_hours_assisted",
+   "target_type": "indicator"
+  },
+  {
+   "author": "claude-initial-seed",
+   "created_at": "2026-09-10T01:29:58.467906Z",
+   "evidence_ids": [
+    "8cdf8f5390e4722d"
+   ],
+   "id": "404c8c6c87bcd568",
+   "new_conf": 55,
+   "new_status": "consistent_with_normal",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "MIT NANDA (Jul 2025): 5% of integrated pilots extract millions in value, the rest show no measurable P&L impact. Inside the normal band (<=10%). Disputed denominator; Menlo's 47% reach-production figure uses a different definition. Initial seed.",
+   "target_id": "enterprise_pilot_to_production",
    "target_type": "indicator"
   }
  ],
@@ -1179,28 +1827,34 @@
    "from": "methods",
    "id": "invention_to_product",
    "indicator_ids": [
-    "metr_horizon_50",
-    "metr_horizon_80",
-    "horizon_ratio_80_50"
+    "horizon_ratio_80_50",
+    "dev_rct_uplift"
    ],
    "name": "Invention \u2192 product",
-   "status": "emerging",
+   "status": "consistent_with_normal",
    "to": "products"
   },
   {
    "from": "products",
    "id": "product_to_adoption",
-   "indicator_ids": [],
+   "indicator_ids": [
+    "enterprise_pilot_to_production",
+    "bbd_work_hours_assisted",
+    "btos_firm_use"
+   ],
    "name": "Product \u2192 adoption",
-   "status": "unmeasured",
+   "status": "consistent_with_normal",
    "to": "early_adoption"
   },
   {
    "from": "early_adoption",
    "id": "adoption_to_adaptation",
-   "indicator_ids": [],
+   "indicator_ids": [
+    "bls_labor_productivity_yoy",
+    "bls_tfp_private_nonfarm"
+   ],
    "name": "Adoption \u2192 adaptation",
-   "status": "unmeasured",
+   "status": "consistent_with_normal",
    "to": "adaptation"
   },
   {
@@ -1220,10 +1874,16 @@
    "to": "capture"
   }
  ],
- "verdict": "As of 2026-04-07: methods emerging, products unmeasured, early adoption unmeasured, adaptation unmeasured, return arrow unmeasured.",
+ "verdict": "As of 2026-07-26: methods faster than normal, products consistent with normal, early adoption consistent with normal, adaptation consistent with normal, return arrow unmeasured.",
  "what_would_change": [
-  "METR 50% time horizon: Normal = doubling time \u2265 7 months (\u2248213 days); fast = \u2264 4 months (\u2248122 days), the AI 2027 assumption. Between the two is `emerging`. Input is METR's own 2023-onward fit, tier 1.",
-  "METR 80% time horizon: Same bands as the 50% horizon (normal \u2265 7 months, fast \u2264 4 months) applied to our own fit, because METR publishes a doubling time for the 50% series only.",
-  "50%/80% horizon ratio: Normal = ratio \u2265 5 (gap holding or widening); fast = ratio \u2264 2. The falsifying condition (\u2264 2 AND 80% horizon > 8 h) is compound and lives in the thesis monitor, not the band."
+  "METR 50% time horizon: Normal = doubling time \u2265 7 months (\u2248213 days, METR's 2019\u20132025 trend); fast = \u2264 4 months (\u2248122 days), the AI 2027 assumption. Between the two is `emerging`. The bands are about the current pace, so the input is a log-linear fit over the 2024-onward window, the most recent window METR reports (89 days in the TH1.1 post of 29 Jan 2026), recomputed from METR's corrected data. On the 2023-onward window METR's published figure is 128.7 days, in the gap between the bands: the reading is window-sensitive and both numbers are shown.",
+  "METR 80% time horizon: Same bands and same 2024-onward window as the 50% horizon, applied to our own fit because METR publishes doubling times for the 50% series only. The 2023-onward fit (horizon_doubling_days_80) sits in the gap between the bands.",
+  "50%/80% horizon ratio: Normal = ratio \u2265 5 (gap holding or widening); fast = ratio \u2264 2. The falsifying condition (\u2264 2 AND 80% horizon > 8 h) is compound and lives in the thesis monitor, not the band.",
+  "US labour productivity, year on year: Post-war nonfarm productivity growth averages about 2.1% a year, so anything up to 2.5% is trend. Goldman's AI scenario adds about 1.5 points a year; sustained prints of 3.5% or more would be that. Between is `emerging`.",
+  "US total factor productivity, private nonfarm business: Long-run private nonfarm TFP growth is about 1% a year; Acemoglu's AI estimate is at most 0.66% over a decade, invisible at annual resolution. Goldman-scale is roughly a point a year on top of trend. Normal = at most 1.2%; fast = 2% or more.",
+  "Developer productivity uplift (METR RCTs): Normal = uplift of at most about 20%, setting-dependent (the range of controlled studies to date); fast = broad uplift above 40%, the scale the productivity-boom claims need.",
+  "Enterprise pilots with measurable P&L impact: Normal = at most 10% of pilots with measurable P&L impact, the typical enterprise-IT hit rate; fast = more than 30%.",
+  "Share of work hours assisted by generative AI: Normal = single-digit share of hours in year three (PCs and the internet were here at the same age); fast = more than 20% of hours assisted.",
+  "US firms using AI (Census BTOS): Normal = under about a third of firms in year three, the pace at which PCs and e-commerce reached half of firms over a decade or more; fast = more than half. Ramp's card-spend index (>50%) is a different instrument and not comparable."
  ]
 }

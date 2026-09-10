@@ -9,9 +9,9 @@ type Props = { buckets: (Bucket & { status: string; indicators: Card[] })[]; val
 // the leak out to the right into the capture lens. Valve colour = status; icon + text always.
 const STROKE: Record<string, string> = {
   faster_than_normal: "var(--fast)", slower_than_normal: "var(--slow)", consistent_with_normal: "var(--ink)",
-  emerging: "var(--muted)", not_yet_measurable: "var(--muted)", unmeasured: "var(--axis)",
+  emerging: "var(--muted)", not_yet_measurable: "var(--muted)", unmeasured: "var(--axis)", mixed: "var(--ink-2)",
 };
-const GLYPH: Record<string, string> = { faster_than_normal: "▲", slower_than_normal: "▼", consistent_with_normal: "●", emerging: "◐" };
+const GLYPH: Record<string, string> = { faster_than_normal: "▲", slower_than_normal: "▼", consistent_with_normal: "●", emerging: "◐", mixed: "◐" };
 
 export function StockFlowDiagram({ buckets, valves }: Props) {
   const W = 500, BOX = 270, X0 = 84, H = 58, GAP = 58;

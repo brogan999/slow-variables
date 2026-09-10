@@ -18,7 +18,112 @@
   }
  ],
  "id": "products",
- "indicators": [],
+ "indicators": [
+  {
+   "bucket_id": "products",
+   "confidence": 70,
+   "grade": "A",
+   "id": "dev_rct_uplift",
+   "latest": {
+    "as_of": "2026-02-24",
+    "disputed": true,
+    "grade": "A",
+    "high": null,
+    "low": null,
+    "obs_ids": [
+     "feaa59c199632f60"
+    ],
+    "series_key": "metr_blog.rct_2026.dev_speed_change.pt",
+    "subject": "rct_2026",
+    "unit": "share",
+    "value": -0.04
+   },
+   "layer_id": "deployment_application",
+   "leading_lagging": "leading",
+   "n_observations": 2,
+   "name": "Developer productivity uplift (METR RCTs)",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2025-06-30",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "07f5c389a9db6343"
+     ],
+     "series_key": "metr_blog.rct_2025.dev_speed_change.pt",
+     "subject": "rct_2025",
+     "unit": "share",
+     "value": -0.19
+    },
+    {
+     "as_of": "2026-02-24",
+     "disputed": true,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "feaa59c199632f60"
+     ],
+     "series_key": "metr_blog.rct_2026.dev_speed_change.pt",
+     "subject": "rct_2026",
+     "unit": "share",
+     "value": -0.04
+    }
+   ],
+   "stale_as_of": null,
+   "status": "consistent_with_normal",
+   "unit": "share",
+   "valve_measured": "invention_to_product"
+  },
+  {
+   "bucket_id": "products",
+   "confidence": 55,
+   "grade": "B",
+   "id": "enterprise_pilot_to_production",
+   "latest": {
+    "as_of": "2025-06-30",
+    "disputed": true,
+    "grade": "B",
+    "high": null,
+    "low": null,
+    "obs_ids": [
+     "8cdf8f5390e4722d"
+    ],
+    "series_key": "nanda.us_enterprise.pilots_with_pnl_impact_share.pt",
+    "subject": "us_enterprise",
+    "unit": "share",
+    "value": 0.05
+   },
+   "layer_id": "deployment_application",
+   "leading_lagging": "coincident",
+   "n_observations": 1,
+   "name": "Enterprise pilots with measurable P&L impact",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2025-06-30",
+     "disputed": true,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "8cdf8f5390e4722d"
+     ],
+     "series_key": "nanda.us_enterprise.pilots_with_pnl_impact_share.pt",
+     "subject": "us_enterprise",
+     "unit": "share",
+     "value": 0.05
+    }
+   ],
+   "stale_as_of": null,
+   "status": "consistent_with_normal",
+   "unit": "share",
+   "valve_measured": "product_to_adoption"
+  }
+ ],
  "name": "Products",
  "order": 2,
  "speed_limit": "Reliability, integration, evaluation and liability \u2014 the 50%\u219280% gap and the \"last mile\" of productisation.",

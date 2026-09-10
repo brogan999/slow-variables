@@ -5,6 +5,8 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import shutil
+import subprocess
 import urllib.robotparser
 from dataclasses import dataclass
 from datetime import date, datetime, timezone
@@ -18,7 +20,12 @@ import httpx
 from ..schema import FetchLog, Observation, short_hash
 
 CACHE = Path("ingest/cache")
-UA = os.environ.get("AI_TRACKER_USER_AGENT", "ai-tracker/0.1 (+https://github.com/brogan999/ai-tracker)")
+
+
+def ua() -> str:
+    return os.environ.get(
+        "AI_TRACKER_USER_AGENT", "ai-tracker/0.1 (+https://github.com/brogan999/ai-tracker)"
+    )
 
 
 class LayoutChanged(RuntimeError):
@@ -63,7 +70,16 @@ def robots_ok(url: str) -> bool:
         except Exception:
             rp.allow_all = True
         _robots[host] = rp
-    return _robots[host].can_fetch(UA, url)
+    return _robots[host].can_fetch(ua(), url)
+
+
+def _curl(url: str, headers: dict[str, str]) -> tuple[bytes, int]:
+    args = ["curl", "-sL", "--max-time", "60", "-w", "\n%{http_code}", url]
+    for k, v in headers.items():
+        args += ["-H", f"{k}: {v}"]
+    out = subprocess.run(args, capture_output=True, check=False).stdout
+    body, _, code = out.rpartition(b"\n")
+    return body, int(code or 0)
 
 
 class Connector:
@@ -71,11 +87,13 @@ class Connector:
     urls: list[str] = []
     headers: dict[str, str] = {}
     kind: str = "api"  # html/pdf kinds are robots-checked
+    post_json: dict[str, Any] | None = None  # set to POST a JSON body instead of GET
     expect_series: list[str] = []
     version: str = "1"
 
     def __init__(self) -> None:
         self.scrubbed: list[str] = []
+        self.errors: list[str] = []  # per-row failures that should fail the run but keep the good rows
 
     def fetch(self, day: date, refetch: bool = False) -> list[RawItem]:
         out: list[RawItem] = []
@@ -86,7 +104,7 @@ class Connector:
     def fetch_one(self, url: str, day: date, refetch: bool = False) -> RawItem:
         d = CACHE / self.source_id / day.isoformat()
         d.mkdir(parents=True, exist_ok=True)
-        p = d / (short_hash(url)[:8] + ".bin")
+        p = d / (short_hash(url, json.dumps(self.post_json, sort_keys=True))[:8] + ".bin")
         meta = p.with_suffix(".meta.json")
         if p.exists() and meta.exists() and not refetch:
             m = json.loads(meta.read_text())
@@ -100,7 +118,16 @@ class Connector:
             )
         if self.kind in ("html", "pdf") and not robots_ok(url):
             raise PermissionError(f"robots.txt disallows {url}")
-        r = httpx.get(url, headers={"User-Agent": UA, **self.headers}, follow_redirects=True, timeout=60)
+        hdrs = {"User-Agent": ua(), **self.headers}
+        if self.post_json is not None:
+            r = httpx.post(url, json=self.post_json, headers=hdrs, timeout=60)
+        else:
+            r = httpx.get(url, headers=hdrs, follow_redirects=True, timeout=60)
+        if r.status_code == 403 and self.post_json is None and shutil.which("curl"):
+            # some CDNs fingerprint Python's TLS stack and 403 it while serving curl the same public page
+            body, status = _curl(url, hdrs)
+            if status < 400:
+                r = httpx.Response(status, content=body, request=r.request)
         r.raise_for_status()
         item = RawItem(
             url,
@@ -130,7 +157,7 @@ class Connector:
     def obs(self, item: RawItem, **kw: Any) -> Observation:
         kw.setdefault("published_date", item.published_date)
         return Observation(
-            source_id=self.source_id,
+            source_id=kw.pop("source_id", None) or self.source_id,
             extractor_version=f"{self.source_id}-{self.version}",
             url=item.url,
             content_hash=item.content_hash,
@@ -163,7 +190,8 @@ class Connector:
             source_id=self.source_id,
             started_at=t0,
             finished_at=datetime.now(timezone.utc),
-            ok=True,
+            ok=not self.errors,
+            error="; ".join(self.errors)[:500] or None,
             http_status=items[-1].http_status if items else None,
             bytes=sum(len(i.body) for i in items),
             items_found=len(rows),

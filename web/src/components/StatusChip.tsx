@@ -10,6 +10,7 @@ const STYLE: Record<string, { glyph: string; cls: string }> = {
   stable: { glyph: "●", cls: "border-ink-2 text-ink" },
   emerging: { glyph: "◐", cls: "border-muted text-ink-2" },
   unclear: { glyph: "◐", cls: "border-muted text-ink-2" },
+  mixed: { glyph: "◐", cls: "border-muted text-ink-2" },
   not_yet_measurable: { glyph: "○", cls: "border-dashed border-muted text-muted" },
 };
 

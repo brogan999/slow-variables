@@ -1,0 +1,154 @@
+{
+ "band_input": "census_btos.us.ai_use_share_v2.2w",
+ "band_rationale": "Normal = under about a third of firms in year three, the pace at which PCs and e-commerce reached half of firms over a decade or more; fast = more than half. Ramp's card-spend index (>50%) is a different instrument and not comparable.",
+ "band_value": {
+  "as_of": "2026-05-03",
+  "obs_ids": [
+   "0d1ed38c99b3dccd"
+  ],
+  "value": 0.198
+ },
+ "bucket_id": "early_adoption",
+ "cadence_expected": "biweekly",
+ "confidence": 70,
+ "counterevidence": "Series break in November 2025; 'AI use' is self-defined by respondents; the count is dominated by very small firms. The latest XLSX cycle shows a higher value than the last official statement.",
+ "crosswalk": [
+  {
+   "bucket_id": "early_adoption",
+   "layer_id": "adopters",
+   "note": "BTOS, BBD, Ramp and the Anthropic Economic Index are adoption from both ends.",
+   "relation": "same_valve",
+   "shared_indicators": [],
+   "sublayer_id": null
+  }
+ ],
+ "definition": "Share of US businesses reporting AI use in any business function in the last two weeks, Census Business Trends and Outlook Survey. The question changed in November 2025, so this is the post-break series.",
+ "derived": [],
+ "direction": null,
+ "direction_rule": null,
+ "falsifying_band": null,
+ "fast_band": {
+  "hi": null,
+  "lo": 0.5
+ },
+ "flow_status": null,
+ "grade": "A",
+ "id": "btos_firm_use",
+ "latest": {
+  "as_of": "2026-05-03",
+  "disputed": false,
+  "grade": "A",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "0d1ed38c99b3dccd"
+  ],
+  "series_key": "census_btos.us.ai_use_share_v2.2w",
+  "subject": "us",
+  "unit": "share",
+  "value": 0.198
+ },
+ "layer_id": "adopters",
+ "leading_lagging": "coincident",
+ "metric": null,
+ "metric_dims": {},
+ "n_observations": 1,
+ "name": "US firms using AI (Census BTOS)",
+ "normal_band": {
+  "hi": 0.35,
+  "lo": null
+ },
+ "override_note": null,
+ "points": [
+  {
+   "as_of": "2026-05-03",
+   "disputed": false,
+   "grade": "A",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "0d1ed38c99b3dccd"
+   ],
+   "series_key": "census_btos.us.ai_use_share_v2.2w",
+   "subject": "us",
+   "unit": "share",
+   "value": 0.198
+  }
+ ],
+ "proposed_status": "consistent_with_normal",
+ "proxy_types": [
+  "behaviour",
+  "deployment"
+ ],
+ "published": true,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "bbd_work_hours_assisted"
+ ],
+ "related_predictions": [],
+ "series": [
+  {
+   "points": [
+    {
+     "as_of": "2026-05-03",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "0d1ed38c99b3dccd"
+     ],
+     "series_key": "census_btos.us.ai_use_share_v2.2w",
+     "subject": "us",
+     "unit": "share",
+     "value": 0.198
+    }
+   ],
+   "series_key": "census_btos.us.ai_use_share_v2.2w"
+  }
+ ],
+ "series_keys": [
+  "census_btos.us.ai_use_share_v2.2w"
+ ],
+ "sparkline": [
+  {
+   "as_of": "2026-05-03",
+   "disputed": false,
+   "grade": "A",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "0d1ed38c99b3dccd"
+   ],
+   "series_key": "census_btos.us.ai_use_share_v2.2w",
+   "subject": "us",
+   "unit": "share",
+   "value": 0.198
+  }
+ ],
+ "stale_as_of": "2026-05-03",
+ "status": "consistent_with_normal",
+ "status_events": [
+  {
+   "author": "claude-initial-seed",
+   "created_at": "2026-09-10T01:29:58.486401Z",
+   "evidence_ids": [
+    "0d1ed38c99b3dccd"
+   ],
+   "id": "61b8d2688b76d786",
+   "new_conf": 70,
+   "new_status": "consistent_with_normal",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "Census BTOS, post-November-2025 instrument: 19.8% of firms using AI in any business function as of 3 May 2026 (Census story, 26 May 2026), inside the normal band (<=35%). The National.xlsx cycle ending 9 Aug 2026 shows 22.4%; that value needs the XLSX connector. Initial seed.",
+   "target_id": "btos_firm_use",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": null,
+ "tracker_interpretation": "One firm in five, rising a point or two per quarter - organisational speed, not capability speed.",
+ "unit": "share",
+ "updated_at": "2026-09-10",
+ "valve_measured": "product_to_adoption",
+ "why_it_matters": "The firm-level extensive margin from an official biweekly survey of 1.2 million businesses. Employment-weighted use is higher; small firms dominate the count."
+}

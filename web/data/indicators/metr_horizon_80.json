@@ -1,6 +1,6 @@
 {
- "band_input": "metric:horizon_doubling_days_80",
- "band_rationale": "Same bands as the 50% horizon (normal \u2265 7 months, fast \u2264 4 months) applied to our own fit, because METR publishes a doubling time for the 50% series only.",
+ "band_input": "metric:horizon_doubling_days_80_since_2024",
+ "band_rationale": "Same bands and same 2024-onward window as the 50% horizon, applied to our own fit because METR publishes doubling times for the 50% series only. The 2023-onward fit (horizon_doubling_days_80) sits in the gap between the bands.",
  "band_value": {
   "as_of": "2026-04-07",
   "obs_ids": [
@@ -10,7 +10,6 @@
    "11a8bbd24c5c99cb",
    "145115d411f64a37",
    "1f69c37251b857fb",
-   "29446d6c837793d5",
    "2dc1a032ed30619b",
    "47db79bda335bcb0",
    "5eb0848814989421",
@@ -20,7 +19,6 @@
    "8f73b56b30434655",
    "9450442af9ff97b6",
    "959db6dd7d0e15af",
-   "a53da98c12dc8c0d",
    "b5c1303bf31f5a8d",
    "c256ff03726522bf",
    "d1bb5ffe97ca5bad",
@@ -28,12 +26,12 @@
    "f1409c691bdca4ec",
    "fecd07e2f7444679"
   ],
-  "value": 124.65044898894656
+  "value": 106.99000145687246
  },
  "bucket_id": "methods",
  "cadence_expected": "per_release",
  "confidence": 70,
- "counterevidence": "Our fit has no confidence interval and excludes points METR marks unreliable; a different start date changes the doubling time materially.",
+ "counterevidence": "Our fit has no confidence interval and excludes points METR marks unreliable; the 2023-onward window gives ~125 days, which would read `emerging`. The 80% horizon is still an order of magnitude below the 50% horizon, which is the reliability gap the products bucket has to close.",
  "crosswalk": [
   {
    "bucket_id": "methods",
@@ -48,7 +46,7 @@
    "sublayer_id": null
   }
  ],
- "definition": "Task length a model completes with 80% success on the same suite. The band applies to a log-linear doubling-time fit over the 80% series from 2023 onward (derived metric horizon_doubling_days_80).",
+ "definition": "Task length a model completes with 80% success on the same suite. The band applies to a log-linear doubling-time fit over the 80% series from 2024 onward (derived metric horizon_doubling_days_80_since_2024), the same window as the 50% horizon.",
  "derived": [],
  "direction": null,
  "direction_rule": null,
@@ -77,6 +75,7 @@
  "layer_id": "model",
  "leading_lagging": "leading",
  "metric": null,
+ "metric_dims": {},
  "n_observations": 26,
  "name": "METR 80% time horizon",
  "normal_band": {
@@ -1299,8 +1298,43 @@
   }
  ],
  "stale_as_of": null,
- "status": "emerging",
+ "status": "faster_than_normal",
  "status_events": [
+  {
+   "author": "claude-initial-seed",
+   "created_at": "2026-09-10T01:28:43.388538Z",
+   "evidence_ids": [
+    "09061051488d31d8",
+    "095bb21142dc666e",
+    "0fb6ae10625216fb",
+    "11a8bbd24c5c99cb",
+    "145115d411f64a37",
+    "1f69c37251b857fb",
+    "2dc1a032ed30619b",
+    "47db79bda335bcb0",
+    "5eb0848814989421",
+    "75c93027341be6a5",
+    "833be5d2cc9c9421",
+    "8de1effa26863680",
+    "8f73b56b30434655",
+    "9450442af9ff97b6",
+    "959db6dd7d0e15af",
+    "b5c1303bf31f5a8d",
+    "c256ff03726522bf",
+    "d1bb5ffe97ca5bad",
+    "deb6a1ab9fff15aa",
+    "f1409c691bdca4ec",
+    "fecd07e2f7444679"
+   ],
+   "id": "7934728cc6e36636",
+   "new_conf": 70,
+   "new_status": "faster_than_normal",
+   "old_conf": 70,
+   "old_status": "emerging",
+   "reason": "Same 2024-onward window as the 50% horizon: our fit gives 107 days, inside the fast band; the 2023-onward fit is 125 days, in the gap. No confidence interval on our fit; the 80% horizon remains roughly 6x below the 50% horizon.",
+   "target_id": "metr_horizon_80",
+   "target_type": "indicator"
+  },
   {
    "author": "claude-initial-seed",
    "created_at": "2026-09-10T00:55:32.192333Z",
@@ -1343,6 +1377,6 @@
  "tracker_interpretation": "Fast, but lagging the 50% horizon; the lag is the reliability gap the products bucket has to close.",
  "unit": "minutes",
  "updated_at": "2026-09-10",
- "valve_measured": "invention_to_product",
+ "valve_measured": null,
  "why_it_matters": "80% is closer to what a product needs than 50%. If the reliable horizon lags badly, benchmarks flatter products."
 }

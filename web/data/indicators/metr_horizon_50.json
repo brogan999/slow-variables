@@ -1,17 +1,36 @@
 {
- "band_input": "metr.suite.doubling_time_days.pt",
- "band_rationale": "Normal = doubling time \u2265 7 months (\u2248213 days); fast = \u2264 4 months (\u2248122 days), the AI 2027 assumption. Between the two is `emerging`. Input is METR's own 2023-onward fit, tier 1.",
+ "band_input": "metric:horizon_doubling_days_50_since_2024",
+ "band_rationale": "Normal = doubling time \u2265 7 months (\u2248213 days, METR's 2019\u20132025 trend); fast = \u2264 4 months (\u2248122 days), the AI 2027 assumption. Between the two is `emerging`. The bands are about the current pace, so the input is a log-linear fit over the 2024-onward window, the most recent window METR reports (89 days in the TH1.1 post of 29 Jan 2026), recomputed from METR's corrected data. On the 2023-onward window METR's published figure is 128.7 days, in the gap between the bands: the reading is window-sensitive and both numbers are shown.",
  "band_value": {
-  "as_of": "2026-09-10",
+  "as_of": "2026-03-05",
   "obs_ids": [
-   "479bfe0ed46088db"
+   "0d21fe651b2bd589",
+   "1963199165cd8c93",
+   "261c1f51f1f6b138",
+   "2eb7c897f31e5b3e",
+   "3466aea4ed2495c4",
+   "37e97a6fcbe1c2ca",
+   "39c8213ab061a5f7",
+   "68864ed59f5d9a57",
+   "6af93ac0d37ce9a2",
+   "6b19d566b4f5cd57",
+   "72bcb9d860605a44",
+   "734779b57a58f38f",
+   "7c977050ff6a8cfe",
+   "858c619bbf5d9edd",
+   "8a2d699724cf4d5e",
+   "a2aa2e4df87f5448",
+   "ae5278061f1da61c",
+   "e466aae4890e8f57",
+   "efa58e1ccf788fa1",
+   "fb7435cdf6c0c3f4"
   ],
-  "value": 128.744
+  "value": 107.98984337397351
  },
  "bucket_id": "methods",
  "cadence_expected": "per_release",
  "confidence": 80,
- "counterevidence": "METR notes measurements above 16 hours are unreliable with the current task suite, so the newest points carry wide intervals and are flagged disputed. Horizon is a software-task construct and may not transfer to other work.",
+ "counterevidence": "On the 2023-onward window (METR's published 128.7 days, our fit 125) the status would be `emerging`, not `faster_than_normal`; the status depends on the window. METR notes measurements above 16 hours are unreliable with the current task suite, so the newest points carry wide intervals and are flagged disputed, and human baselines exist for only 5 of the 31 tasks over 8 hours. Horizon is a software-task construct and may not transfer to other work.",
  "crosswalk": [
   {
    "bucket_id": "methods",
@@ -26,7 +45,7 @@
    "sublayer_id": null
   }
  ],
- "definition": "Length (in human-expert minutes) of software tasks a frontier model completes with 50% success, per METR's Horizon v1.1 suite, plotted by model release date. The band applies to METR's published doubling time from 2023 onward.",
+ "definition": "Length (in human-expert minutes) of software tasks a frontier model completes with 50% success, per METR's Horizon v1.1 suite, plotted by model release date. The band applies to the doubling time of that series over the most recent window METR itself reports (2024 onward), recomputed here from METR's corrected data file; METR's published 2023-onward figure is shown alongside.",
  "derived": [],
  "direction": null,
  "direction_rule": null,
@@ -55,7 +74,8 @@
  "layer_id": "model",
  "leading_lagging": "leading",
  "metric": null,
- "n_observations": 27,
+ "metric_dims": {},
+ "n_observations": 30,
  "name": "METR 50% time horizon",
  "normal_band": {
   "hi": null,
@@ -956,11 +976,71 @@
     }
    ],
    "series_key": "metr.suite.doubling_time_days.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-01-29",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "0a2d5145b2c20be0"
+     ],
+     "series_key": "metr_blog.suite.doubling_time_days_2019_2025.pt",
+     "subject": "suite",
+     "unit": "days",
+     "value": 196.0
+    }
+   ],
+   "series_key": "metr_blog.suite.doubling_time_days_2019_2025.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-01-29",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "bd1b42efd01f5e97"
+     ],
+     "series_key": "metr_blog.suite.doubling_time_days_since_2023.pt",
+     "subject": "suite",
+     "unit": "days",
+     "value": 131.0
+    }
+   ],
+   "series_key": "metr_blog.suite.doubling_time_days_since_2023.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-01-29",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "260f4de1d2f41fa3"
+     ],
+     "series_key": "metr_blog.suite.doubling_time_days_since_2024.pt",
+     "subject": "suite",
+     "unit": "days",
+     "value": 89.0
+    }
+   ],
+   "series_key": "metr_blog.suite.doubling_time_days_since_2024.pt"
   }
  ],
  "series_keys": [
   "metr.*.horizon_50.pt",
-  "metr.suite.doubling_time_days.pt"
+  "metr.suite.doubling_time_days.pt",
+  "metr_blog.suite.doubling_time_days_since_2024.pt",
+  "metr_blog.suite.doubling_time_days_since_2023.pt",
+  "metr_blog.suite.doubling_time_days_2019_2025.pt"
  ],
  "sparkline": [
   {
@@ -1301,8 +1381,42 @@
   }
  ],
  "stale_as_of": null,
- "status": "emerging",
+ "status": "faster_than_normal",
  "status_events": [
+  {
+   "author": "claude-initial-seed",
+   "created_at": "2026-09-10T01:28:43.386423Z",
+   "evidence_ids": [
+    "0d21fe651b2bd589",
+    "1963199165cd8c93",
+    "261c1f51f1f6b138",
+    "2eb7c897f31e5b3e",
+    "3466aea4ed2495c4",
+    "37e97a6fcbe1c2ca",
+    "39c8213ab061a5f7",
+    "68864ed59f5d9a57",
+    "6af93ac0d37ce9a2",
+    "6b19d566b4f5cd57",
+    "72bcb9d860605a44",
+    "734779b57a58f38f",
+    "7c977050ff6a8cfe",
+    "858c619bbf5d9edd",
+    "8a2d699724cf4d5e",
+    "a2aa2e4df87f5448",
+    "ae5278061f1da61c",
+    "e466aae4890e8f57",
+    "efa58e1ccf788fa1",
+    "fb7435cdf6c0c3f4"
+   ],
+   "id": "30eed8a5e962d3f9",
+   "new_conf": 80,
+   "new_status": "faster_than_normal",
+   "old_conf": 80,
+   "old_status": "emerging",
+   "reason": "Band input switched to the most recent window METR reports (2024 onward), per the updated rationale: our log-linear fit on METR's corrected v1.1 data gives a doubling time of 108 days, inside the fast band (<=122). METR's own TH1.1 post (29 Jan 2026) reports 89 days since 2024. On the 2023-onward window the figures are 128.7 (METR) and 125 (ours), which would read emerging; the status is window-sensitive and both are shown on the page.",
+   "target_id": "metr_horizon_50",
+   "target_type": "indicator"
+  },
   {
    "author": "claude-initial-seed",
    "created_at": "2026-09-10T00:55:32.189541Z",
@@ -1323,6 +1437,6 @@
  "tracker_interpretation": "Capability is moving fast by any historical standard. Whether it is faster than the AI-2027 doubling assumption is the live question the band answers.",
  "unit": "minutes",
  "updated_at": "2026-09-10",
- "valve_measured": "invention_to_product",
+ "valve_measured": null,
  "why_it_matters": "The cleanest single series for the methods stock. If capability doubles every few months the invention valve is wide open; the paper's claim is that this alone does not move the later stocks."
 }

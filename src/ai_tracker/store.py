@@ -17,6 +17,7 @@ from .schema import (
     Bucket,
     Crosswalk,
     Derived,
+    Entity,
     FetchLog,
     Indicator,
     Layer,
@@ -83,6 +84,7 @@ class Seed:
     crosswalk: list[Crosswalk]
     sources: list[Source]
     indicators: list[Indicator]
+    entities: list[Entity]
 
     @classmethod
     def load(cls, root: Path = SEED) -> Seed:
@@ -101,6 +103,7 @@ class Seed:
             [Crosswalk(**r) for r in rows("crosswalk")],
             [Source(**r) for r in rows("sources")],
             inds,
+            [Entity(**r) for r in rows("entities")],
         )
 
 
@@ -183,9 +186,13 @@ class Store:
         rows = [dict(zip(cols, r)) for r in cur.fetchall()]
         return [r for r in rows if any(fnmatch(r["series_key"], g) for g in globs)]
 
-    def derived_for(self, metric: str) -> list[Derived]:
+    def derived_for(self, metric: str, dims: dict[str, str] | None = None) -> list[Derived]:
         return sorted(
-            (d for d in self.derived if d.metric == metric),
+            (
+                d
+                for d in self.derived
+                if d.metric == metric and all(d.dims.get(k) == v for k, v in (dims or {}).items())
+            ),
             key=lambda d: (d.as_of_date, sorted(d.dims.items())),
         )
 
@@ -198,7 +205,7 @@ class Store:
         if not ind.band_input:
             return None, None, [], Tier.ACTOR_STATEMENT
         if ind.band_input.startswith("metric:"):
-            rows = self.derived_for(ind.band_input[7:])
+            rows = self.derived_for(ind.band_input[7:], ind.metric_dims)
             if not rows:
                 return None, None, [], Tier.ACTOR_STATEMENT
             d = rows[-1]
@@ -213,7 +220,9 @@ class Store:
         """Observations behind an indicator: its series globs plus the inputs of its derived metric."""
         rows = {o["id"]: o for g in ind.series_keys for o in self.observations(g)}
         if ind.metric:
-            ids = sorted({i for d in self.derived_for(ind.metric) for i in d.input_observation_ids})
+            ids = sorted(
+                {i for d in self.derived_for(ind.metric, ind.metric_dims) for i in d.input_observation_ids}
+            )
             if ids:
                 cur = self.con.execute(
                     "SELECT * FROM observations WHERE id IN (" + ",".join("?" * len(ids)) + ")", ids
@@ -240,7 +249,7 @@ class Store:
                     "dims": d.dims,
                     "unit": ind.unit,
                 }
-                for d in self.derived_for(ind.metric)
+                for d in self.derived_for(ind.metric, ind.metric_dims)
             ]
         if not ind.series_keys:
             return []
@@ -265,10 +274,17 @@ class Store:
                 **_jsonable(ind.model_dump()),
                 **cards[ind.id],
                 "points": self.headline(ind),
-                "band_value": {"value": bv, "as_of": b_as_of.isoformat() if b_as_of else None, "obs_ids": b_ids} if bv is not None else None,
+                "band_value": {
+                    "value": bv,
+                    "as_of": b_as_of.isoformat() if b_as_of else None,
+                    "obs_ids": b_ids,
+                }
+                if bv is not None
+                else None,
                 "series": [{"series_key": k, "points": v} for k, v in sorted(series.items())],
                 "derived": [
-                    {**dump(d), "obs_ids": d.input_observation_ids} for d in self.derived_for(ind.metric)
+                    {**dump(d), "obs_ids": d.input_observation_ids}
+                    for d in self.derived_for(ind.metric, ind.metric_dims)
                 ]
                 if ind.metric
                 else [],
@@ -319,7 +335,7 @@ class Store:
                 },
             )
         recent = [dump(e) for e in sorted(self.events, key=lambda e: e.created_at, reverse=True)[:3]]
-        as_of = max([c["latest"]["as_of"] for c in cards.values() if c["latest"]] or [""])
+        as_of = max([c["latest"]["as_of"] for c in cards.values() if c["latest"] and c["published"]] or [""])
         _write(out / "lens" / "diffusion.json", self._diffusion_lens(cards, recent, as_of))
         _write(
             out / "lens" / "capture.json",
@@ -421,6 +437,18 @@ class Store:
     def _source_health(self, s: Source) -> dict[str, Any]:
         logs = sorted((fl for fl in self.fetchlog if fl.source_id == s.id), key=lambda fl: fl.finished_at)
         last_ok = next((fl for fl in reversed(logs) if fl.ok), None)
+        if not last_ok:
+            row = self.con.execute(
+                "SELECT max(retrieved_at), count(*) FROM observation_all WHERE source_id = ?", [s.id]
+            ).fetchone()
+            if row and row[0]:
+                return {
+                    **dump(s),
+                    "last_success_at": row[0],
+                    "last_error": None,
+                    "items_found": row[1],
+                    "runs": 0,
+                }
         return {
             **dump(s),
             "last_success_at": last_ok.finished_at.isoformat() if last_ok else None,
@@ -468,7 +496,10 @@ def _summarise(cards: list[dict[str, Any]]) -> str:
     statuses = [c["status"] for c in cards if c.get("status")]
     if not statuses:
         return "unmeasured"
-    return max(set(statuses), key=statuses.count)
+    counts = sorted(((statuses.count(x), x) for x in set(statuses)), reverse=True)
+    if len(counts) > 1 and counts[0][0] == counts[1][0]:
+        return "mixed"  # no majority: say so rather than pick one
+    return counts[0][1]
 
 
 def _point(o: dict[str, Any]) -> dict[str, Any]:

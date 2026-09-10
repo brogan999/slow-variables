@@ -1,0 +1,121 @@
+# Capture-lens indicators. Status lives in data/status_events.jsonl only.
+indicators:
+  - id: semis_rent_concentration
+    name: Rent concentration in semiconductors
+    definition: NVIDIA's gross margin (gross profit ÷ revenue, whole company) by fiscal quarter from audited and reviewed SEC filings, as the cleanest public read on how much of the stack's surplus the chip layer keeps.
+    why_it_matters: Nordhaus's base rate says innovators keep ~2% of surplus; a 70%+ gross margin at the bottom of the stack is the opposite pattern. Whether it holds, rises or erodes is the first capture question.
+    proxy_types: [market_structure]
+    unit: share
+    cadence_expected: quarterly
+    metric: gross_margin
+    metric_dims: {entity: nvda}
+    band_input: "metric:gross_margin"
+    layer_id: compute_physical
+    sublayer_id: semis
+    direction_rule: {periods: 4, dead_band: 0.01, higher_is: concentrating, rationale: "Four fiscal quarters; a move under one point of margin is noise. Rising margin = rent concentrating at the chip layer."}
+    leading_lagging: lagging
+    tracker_interpretation: The margin has held at the level a monopolist would print. Custom silicon share and AMD's data-centre ramp are the things that would erode it.
+    counterevidence: Whole-company margin blends gaming and automotive with data centre; segment margins are not in the company-facts API. Margin can hold while unit share falls.
+    confidence: 85
+    proposed_status: concentrating
+    related_indicators: [cloud_rpo_backlog]
+    published: true
+    updated_at: 2026-09-10
+  - id: cloud_rpo_backlog
+    name: Cloud backlog (remaining performance obligations)
+    definition: Remaining performance obligations reported by Oracle, Microsoft and CoreWeave at each quarter end, from SEC filings. Contracted, not yet recognised revenue; the headline series is Oracle's.
+    why_it_matters: RPO is the forward view of whether compute demand is contracted ahead of revenue. Its growth is the clearest filed evidence of capex-ahead-of-revenue, and of how much of it is one customer.
+    proxy_types: [capital_flow, market_structure]
+    unit: USD
+    cadence_expected: quarterly
+    series_keys: ["sec.orcl.rpo.q", "sec.msft.rpo.q", "sec.crwv.rpo.q"]
+    band_input: "sec.orcl.rpo.q"
+    layer_id: compute_physical
+    sublayer_id: hyperscalers_neoclouds
+    direction_rule: {periods: 4, dead_band: 10000000000, higher_is: concentrating, rationale: "Four quarters; moves under $10B are noise at this scale. Growing backlog concentrates future cloud revenue in a few contracts."}
+    leading_lagging: leading
+    tracker_interpretation: Backlog is growing far faster than recognised revenue; a large share is a handful of AI-lab contracts, which is the circular-financing question in filed form.
+    counterevidence: RPO includes non-cancellable commitments that may never convert; Oracle's ~$300B OpenAI contract is reported, not itemised in the filing. Definitions differ across filers.
+    confidence: 80
+    proposed_status: concentrating
+    related_indicators: [semis_rent_concentration]
+    published: true
+    updated_at: 2026-09-10
+  - id: lab_run_rates
+    name: Frontier-lab revenue run-rates
+    definition: Annualised revenue run-rates for OpenAI and Anthropic as compiled by Epoch AI from press reports; each point is an annualised month, not booked revenue.
+    why_it_matters: Whether the model layer keeps surplus depends on revenue growing faster than the capital it consumes. Run-rate is the only public series, and it is press-sourced.
+    proxy_types: [capital_flow, market_structure]
+    unit: USD
+    cadence_expected: monthly
+    series_keys: ["epoch.openai.revenue_run_rate_usd.pt", "epoch.anthropic.revenue_run_rate_usd.pt"]
+    band_input: epoch.openai.revenue_run_rate_usd.pt
+    layer_id: model
+    sublayer_id: frontier_labs
+    direction_rule: {periods: 4, dead_band: 2000000000, higher_is: concentrating, rationale: "Four reports; moves under $2B are reporting noise. Rising run-rate concentrates revenue at the two frontier labs."}
+    leading_lagging: coincident
+    tracker_interpretation: Run-rates are compounding at rates no software company has printed, but every point is a leak to a journalist and definitions drift between gross and net.
+    counterevidence: Single-source press reports (tier 5); run-rate is annualised from one month; gross vs net of cloud revenue share is often unstated. Unpublished until a second source confirms the latest points.
+    confidence: 55
+    proposed_status: concentrating
+    related_indicators: [lab_recoupment_ratio, semis_rent_concentration]
+    published: false
+    updated_at: 2026-09-10
+  - id: lab_recoupment_ratio
+    name: Lab recoupment ratio
+    definition: OpenAI's latest revenue run-rate divided by all equity it had raised by that date (derived metric lab_recoupment_ratio, Epoch data).
+    why_it_matters: The financial form of the return arrow. If deployment revenue is recouping invention capital, the loop is closing; if capital keeps outrunning revenue, the layer is being subsidised.
+    proxy_types: [capital_flow]
+    unit: ratio
+    cadence_expected: monthly
+    metric: lab_recoupment_ratio
+    metric_dims: {entity: openai}
+    band_input: "metric:lab_recoupment_ratio"
+    layer_id: model
+    sublayer_id: frontier_labs
+    direction_rule: {periods: 3, dead_band: 0.05, higher_is: concentrating, rationale: "Three points; a move under 0.05 is noise. A rising ratio means the lab is recouping capital faster than it raises it."}
+    leading_lagging: lagging
+    tracker_interpretation: Large caveat, as the brief says - excludes debt, compute credits and cloud commitments, and the numerator is a run-rate.
+    counterevidence: Tier-5 inputs on both sides; equity raised is a floor on capital consumed. Unpublished until a second source confirms the run-rate points.
+    confidence: 50
+    proposed_status: emerging
+    related_indicators: [lab_run_rates]
+    published: false
+    updated_at: 2026-09-10
+  - id: consumer_surplus_wta
+    name: Consumer surplus from generative AI (willingness to accept)
+    definition: Aggregate annual US consumer surplus from generative-AI chatbots, estimated by Stanford DEL from willingness-to-accept surveys (users × mean WTA to give the tools up for a month, annualised).
+    why_it_matters: The leak from the stack. If consumers keep more surplus than every layer earns in US revenue, the capture story is about who does not capture it.
+    proxy_types: [welfare]
+    unit: USD
+    cadence_expected: annual
+    series_keys: ["stanford_del.us.genai_consumer_surplus_usd.pt", "stanford_del.us.genai_mean_wta_usd_month.pt", "hsbc.us.genai_consumer_surplus_usd.pt"]
+    band_input: stanford_del.us.genai_consumer_surplus_usd.pt
+    layer_id: labour_consumers
+    direction_rule: {periods: 1, dead_band: 10000000000, higher_is: dispersing, rationale: "Two annual waves so far, so the trend is one step; moves under $10B are within survey error. Rising surplus disperses value away from producers to consumers."}
+    leading_lagging: lagging
+    tracker_interpretation: Consumer surplus is growing faster than any layer's revenue; the Nordhaus pattern (innovators keep a sliver) is so far holding.
+    counterevidence: A single survey series with a stated-preference method; WTA estimates run higher than willingness to pay. No high-frequency version exists.
+    confidence: 65
+    proposed_status: dispersing
+    related_indicators: [semis_rent_concentration]
+    published: true
+    updated_at: 2026-09-10
+  - id: enterprise_spend_by_layer
+    name: Enterprise generative-AI spend by layer (Menlo)
+    definition: Enterprise spend on generative AI in the US, total and application layer, from Menlo Ventures' annual survey.
+    why_it_matters: The only layer split of enterprise spend that is published; the application share is where the model-tax question starts.
+    proxy_types: [capital_flow]
+    unit: USD
+    cadence_expected: annual
+    series_keys: ["menlo.us_enterprise.genai_spend_usd.fy", "menlo.us_enterprise.genai_app_spend_usd.fy"]
+    band_input: menlo.us_enterprise.genai_spend_usd.fy
+    layer_id: deployment_application
+    direction_rule: {periods: 1, dead_band: 2000000000, higher_is: concentrating, rationale: "Annual; needs two waves before a direction can be read."}
+    leading_lagging: coincident
+    tracker_interpretation: One wave ingested; unpublished until the 2024 figure lands as a sourced row.
+    counterevidence: Survey of ~500 buyers; excludes chips, standalone inference and embedded features.
+    confidence: 60
+    proposed_status: not_yet_measurable
+    published: false
+    updated_at: 2026-09-10

@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import logging
+import os
 import sys
 from datetime import date, datetime, timezone
 
@@ -52,6 +53,8 @@ def cmd_evaluate(a: argparse.Namespace) -> int:
     seen = {(p["target_id"], p["new_status"]) for p in proposed}
     lines = [f"derived: {len(derived)} rows across {len({d.metric for d in derived})} metrics"]
     for ind in s.seed.indicators:
+        if not ind.published:
+            continue
         value, as_of, ids, tier = s.band_input(ind)
         if ind.direction_rule:
             pts = [
@@ -147,7 +150,20 @@ def cmd_approve(a: argparse.Namespace) -> int:
     return 0
 
 
+def load_env(path: str = ".env") -> None:
+    """KEY=VALUE lines, optional quotes; never overrides a variable already set."""
+    try:
+        lines = open(path).read().splitlines()
+    except FileNotFoundError:
+        return
+    for line in lines:
+        if "=" in line and not line.lstrip().startswith("#"):
+            k, v = line.split("=", 1)
+            os.environ.setdefault(k.strip(), v.strip().strip("\"'"))
+
+
 def main(argv: list[str] | None = None) -> None:
+    load_env()
     logging.basicConfig(level=logging.INFO, format="%(levelname)s %(name)s: %(message)s")
     p = argparse.ArgumentParser(prog="ai-tracker")
     sub = p.add_subparsers(dest="cmd", required=True)

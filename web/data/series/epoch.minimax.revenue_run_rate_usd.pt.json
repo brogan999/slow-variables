@@ -1,0 +1,61 @@
+{
+ "observations": [
+  {
+   "as_of_date": "2026-08-26",
+   "audited_vs_reported": "estimated",
+   "content_hash": "90c5337eb305680e60c4986f81ce86d44f12171844ba92aefe4dbb587cc6b2df",
+   "dispute_text": null,
+   "disputed": false,
+   "entity_id": "minimax",
+   "extraction_method": "api",
+   "extractor_version": "epoch-1",
+   "grade": "C",
+   "gross_vs_net": null,
+   "http_status": 200,
+   "id": "87dd71d5670d0873",
+   "period_start": null,
+   "published_date": "2026-08-26",
+   "q": "2026-07-01 00:00:00",
+   "raw_snippet": "{\"Annualized revenue (USD)\": \"800000000.0\", \"Annualized revenue type\": \"Annual recurring revenue (ARR)\", \"Company\": \"MiniMax\", \"Confidence\": \"Likely\", \"Date\": \"2026-08-26\", \"Id\": \"Aug 2026 800M\", \"Notes\": \"Per SCMP: \\\"In August, the firm\\u2019s ARR rose to US$800 million, driven mostly by improvements in model capabilities, said Yan Junjie, MiniMax\\u2019s founder and CEO, in an earnings call on Wednesday.\\\"\", \"Report date\": \"2026-08-26\", \"Revenue amount (normalize to annual)\": \"800000000.0\", \"Scope\": \"Full company\", \"Source 1\": \"https://www.scmp.com/tech/big-tech/article/3365341/minimax-revenue-surges-283-remains-behind-pace-meet-forecast-amid-crowded-ai-race\", \"Source type\": \"Company disclosure\"}",
+   "retrieved_at": "2026-09-10T01:28:41.972289Z",
+   "review_status": "approved",
+   "reviewer_id": null,
+   "run_rate_vs_booked": "run_rate",
+   "series_key": "epoch.minimax.revenue_run_rate_usd.pt",
+   "source_id": "epoch",
+   "subject": "minimax",
+   "supersedes_id": null,
+   "tier": 5,
+   "unit": "USD",
+   "url": "https://epoch.ai/data/ai_companies.zip",
+   "value_high": null,
+   "value_low": null,
+   "value_numeric": 800000000.0,
+   "value_text": null
+  }
+ ],
+ "series_key": "epoch.minimax.revenue_run_rate_usd.pt",
+ "source": {
+  "attribution": "Epoch AI, 'Data on AI Companies' (CC BY 4.0), epoch.ai/data",
+  "cadence": "daily",
+  "connector": "epoch",
+  "default_tier": 5,
+  "expect_series": [
+   "epoch.*.round_equity_usd.pt",
+   "epoch.*.revenue_run_rate_usd.pt"
+  ],
+  "id": "epoch",
+  "kind": "csv",
+  "lens": "both",
+  "license": "CC BY 4.0",
+  "name": "Epoch AI data hub \u2014 AI companies",
+  "org": "Epoch AI",
+  "people": [
+   "Jaime Sevilla",
+   "Tamay Besiroglu"
+  ],
+  "robots_ok": true,
+  "url": "https://epoch.ai/data/ai-companies"
+ },
+ "unit": "USD"
+}
