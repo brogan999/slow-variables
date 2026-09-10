@@ -137,7 +137,13 @@ def append_observations(source_id: str, rows: list[Observation]) -> int:
     ids = {r["id"] for r in existing}
     latest: dict[tuple[Any, ...], tuple[str, str]] = {}
     for r in existing:
-        k = (r["series_key"], r.get("entity_id"), r["as_of_date"], r.get("period_start"))
+        k = (
+            r["series_key"],
+            r.get("entity_id"),
+            r["as_of_date"],
+            r.get("period_start"),
+            r["url"] if r["series_key"].startswith("watch.") else None,
+        )
         if k not in latest or r["retrieved_at"] > latest[k][1]:
             latest[k] = (r["id"], r["retrieved_at"])
     new: list[dict[str, Any]] = []
@@ -149,6 +155,7 @@ def append_observations(source_id: str, rows: list[Observation]) -> int:
             o.entity_id,
             o.as_of_date.isoformat(),
             o.period_start.isoformat() if o.period_start else None,
+            o.url if o.series_key.startswith("watch.") else None,  # several posts per author per day
         )
         if k in latest:
             o.supersedes_id = latest[k][0]

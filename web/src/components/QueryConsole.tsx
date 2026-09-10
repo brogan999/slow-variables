@@ -20,7 +20,7 @@ export function QueryConsole({ initial }: { initial: string }) {
     <form onSubmit={run} className="flex flex-col gap-2">
       <textarea value={sql} onChange={(e) => setSql(e.target.value)} rows={5} spellCheck={false} aria-label="SQL" className="w-full resize-y rounded-md ring-hair bg-surface px-3 py-2 font-mono text-xs" />
       <div className="flex items-center gap-3 text-xs text-muted">
-        <button type="submit" disabled={busy} className="rounded-full bg-ink px-3 py-1 text-xs text-bg disabled:opacity-50">{busy ? "Running…" : "Run"}</button>
+        <button type="submit" disabled={busy} className="rounded-full bg-ink px-3 py-1 text-xs text-background disabled:opacity-50">{busy ? "Running…" : "Run"}</button>
         <span>Read-only, 200 rows, five seconds. Tables: observations, derived, status_events, indicators, metrics.</span>
       </div>
       <div aria-live="polite">

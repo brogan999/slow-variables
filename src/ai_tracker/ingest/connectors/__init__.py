@@ -13,11 +13,14 @@ from .openrouter import OpenRouter
 from .regulatory import FdaDevices, Ncsl, Owid, RlList
 from .sec_segments import SecSegments
 from .sec_xbrl import SecXbrl
+from .x import XDrop, XList
 
 CONNECTORS = {
     c.source_id: c
     for c in (
         Metr,
+        XDrop,
+        XList,
         SecXbrl,
         Manual,
         Bls,

@@ -9,15 +9,21 @@ One tracker, two lenses: how fast AI value moves through the diffusion stages (N
 ```bash
 cp .env.example .env            # SEC EDGAR needs a User-Agent with a contact address
 uv sync
-uv run ai-tracker ingest --all  # every connector (12 today; `ingest --help` lists them) -> data/observations/*.jsonl
+uv run ai-tracker ingest --all  # every connector (26 today; `ingest --help` lists them) -> data/observations/*.jsonl
 uv run ai-tracker build         # seed YAML + JSONL -> DuckDB (in memory), prints counts
 uv run ai-tracker evaluate      # derived metrics; proposes StatusEvents into data/proposed_status_events.jsonl
 #   ...write a `reason` on each proposal (or delete the row), then:
 uv run ai-tracker approve       # pending observations -> approved; reasoned proposals -> data/status_events.jsonl
 uv run ai-tracker check         # publish rules; exit 1 on any violation
 uv run ai-tracker export        # web/data/*.json (committed) + web/public/data/*.csv
+uv run ai-tracker memo          # docs/memos/<date>.md: model prose with a citation check, else the deterministic digest
+uv run ai-tracker ask "..."     # one question through the query service's tool loop (needs ANTHROPIC_API_KEY)
+uv run ai-tracker golden        # the twelve golden questions plus one refusal case
+uv run ai-tracker serve         # the query service (what Fly runs); the site proxies /api/query/* to it
 cd web && pnpm install && pnpm dev
 ```
+
+Services: the query service runs on Fly (`fly.toml`, `Dockerfile`, deployed by `deploy-query.yml` on pushes that touch data, seed, semantic or src); the site needs `QUERY_URL` and `QUERY_TOKEN`; the service needs `QUERY_TOKEN`, `ANTHROPIC_API_KEY` and optionally `QUERY_DAILY_USD_CAP` (default 5). The memo job (`memo.yml`, Mondays 09:17 UTC) and the nightly (`nightly.yml`, 06:17 UTC) open pull requests; merging is the approval. X posts come from `seed/x_drop.yaml` (oEmbed, no key) or a curated List (`X_BEARER_TOKEN`, `X_LIST_ID`).
 
 `uv run pytest`, `uv run ruff check src tests`. CI runs the same; the nightly workflow ingests, evaluates, checks, exports and opens a PR with `data/summary.md` as the body. Merge = publish (Vercel builds `web/`).
 
@@ -32,3 +38,6 @@ cd web && pnpm install && pnpm dev
 | Bands, direction rules, counterevidence | `seed/indicators/*.yaml` |
 | Status (the only place) | `data/status_events.jsonl` |
 | Observations (append-only, superseded never deleted) | `data/observations/*.jsonl` |
+| Query service, citation post-check, golden questions | `src/ai_tracker/query/`, `seed/golden.yaml`, `seed/analyses.yaml` |
+| Weekly memo | `src/ai_tracker/memo.py`, `docs/memos/` |
+| X drop file | `seed/x_drop.yaml` |

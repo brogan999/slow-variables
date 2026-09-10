@@ -44,7 +44,7 @@ export function ChatDrawer() {
           <textarea value={q} onChange={(e) => setQ(e.target.value)} rows={2} placeholder="What is the latest 50% horizon and its doubling time?" aria-label="Question" className="w-full resize-y rounded-md ring-hair bg-bg px-3 py-2 text-sm" />
           <div className="flex items-center justify-between gap-3 text-xs text-muted">
             <span>Answers come from the same store as the site; every number is checked against the record it cites.</span>
-            <button type="submit" disabled={s.kind === "busy"} className="rounded-full bg-ink px-3 py-1 text-xs text-bg disabled:opacity-50">{s.kind === "busy" ? "Asking…" : "Ask"}</button>
+            <button type="submit" disabled={s.kind === "busy"} className="rounded-full bg-ink px-3 py-1 text-xs text-background disabled:opacity-50">{s.kind === "busy" ? "Asking…" : "Ask"}</button>
           </div>
           <div aria-live="polite" className="text-sm leading-relaxed">
             {s.kind === "error" ? <p className="text-slow">{s.text}</p> : null}

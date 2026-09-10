@@ -206,8 +206,34 @@ def cmd_evaluate(a: argparse.Namespace) -> int:
     print(summary)
     (st.DATA / "summary.md").write_text(
         f"# evaluate {datetime.now(timezone.utc):%Y-%m-%d %H:%M}Z\n\n```\n{summary}\n```\n"
+        + _suggested_enrichment(s)
     )
     return 0
+
+
+def _suggested_enrichment(s: st.Store) -> str:
+    """Free lookups only (v2 M6): Form D issuers that match a seed alias without a CIK, and watchlist posts that link
+    to a non-X artifact. Paid enrichment (Explorium, Swarm, Clay) stays in the operator's own session."""
+    from .ingest.connectors.formd import FormD
+
+    lines = []
+    try:
+        c = FormD()
+        for r in c.candidates(c.fetch(date.today(), False)):
+            lines.append(
+                f'- entities.yaml `{r["entity"]}`: Form D issuer "{r["issuer"]}" CIK {r["cik"]} ({r["city"]}, {r["state"]}); add `cik` if it is the same company'
+            )
+    except Exception as e:  # noqa: BLE001 - no Form D cache today is not an error
+        lines.append(f"- Form D candidates unavailable today ({type(e).__name__})")
+    rows = s.con.execute(
+        "SELECT series_key, value_text, url FROM observation_all WHERE series_key LIKE 'watch.x.%' AND value_text LIKE '% links: %' AND substr(retrieved_at, 1, 10) = ?",
+        [date.today().isoformat()],
+    ).fetchall()
+    for k, text, url in rows:
+        lines.append(
+            f"- {k}: linked artifact(s) {text.split(' links: ', 1)[1]} ({url}); fetch and add a manual row if it is tier 1-6"
+        )
+    return "\n## Suggested enrichment\n\n" + "\n".join(lines or ["- nothing to suggest"]) + "\n"
 
 
 def cmd_export(a: argparse.Namespace) -> int:

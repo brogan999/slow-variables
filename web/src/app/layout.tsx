@@ -3,6 +3,7 @@ import Link from "next/link";
 import "./globals.css";
 import { ChatDrawer } from "@/components/ChatDrawer";
 import { Freshness } from "@/components/Freshness";
+import { NavLinks } from "@/components/NavLinks";
 import { meta } from "@/lib/data";
 import { SITE } from "@/lib/site";
 
@@ -29,7 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="mx-auto max-w-5xl px-4 py-3 flex items-baseline gap-x-5">
             <Link href="/" className="font-semibold tracking-tight shrink-0">{SITE.name}</Link>
             <nav aria-label="Primary" className="min-w-0 flex-1 flex gap-x-4 text-sm text-ink-2 overflow-x-auto whitespace-nowrap md:flex-wrap md:whitespace-normal md:gap-y-1 -mx-1 px-1">
-              {NAV.map(([href, label]) => <Link key={href} href={href} className="hover:text-ink">{label}</Link>)}
+              <NavLinks items={NAV} />
             </nav>
             <ChatDrawer />
           </div>

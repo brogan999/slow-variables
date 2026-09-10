@@ -19,7 +19,7 @@ export function StackVertical({ layers, shares, obsIndex }: { layers: (Layer & {
         return (
           <div key={l.id} className="grid grid-cols-1 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] items-center gap-2 sm:gap-3">
             <div className="min-w-0">
-              <h3 className="font-medium"><Link href={`/layers/${l.id}`} className="hover:underline">{l.order}. {l.name}</Link></h3>
+              <h2 className="font-medium"><Link href={`/layers/${l.id}`} className="hover:underline">{l.order}. {l.name}</Link></h2>
               <div className="mt-1 flex flex-wrap items-center gap-2 text-xs text-ink-2">
                 <StatusChip status={summary} />
                 {published.length ? <span>{published.length} indicator{published.length === 1 ? "" : "s"}</span> : null}

@@ -25,7 +25,7 @@ export default function DiffusionLens() {
         </p>
       </section>
       {latest ? (
-        <p className="text-sm rounded-lg bg-surface ring-hair px-3 py-2 max-w-3xl"><span className="text-muted">This week · </span><Link href={`/memos/${latest.date}`} className="font-medium hover:underline">{latest.title}</Link><span className="text-ink-2"> — {latest.summary}</span></p>
+        <p className="text-sm rounded-lg bg-surface ring-hair px-3 py-2 max-w-3xl"><span className="text-muted">This week · </span><Link href={`/memos/${latest.date}`} className="font-medium hover:underline">{latest.title}</Link><span className="text-ink-2"> — {latest.events} status events and {latest.new_observations.toLocaleString("en-US")} new observations, {latest.mode === "prose" ? `drafted by ${latest.model}` : "as a deterministic digest"}.</span></p>
       ) : null}
       <StockFlowDiagram buckets={d.buckets} valves={d.valves} />
       <section className="grid gap-4 md:grid-cols-2">

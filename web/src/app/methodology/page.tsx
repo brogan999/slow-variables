@@ -40,6 +40,12 @@ export default function Methodology() {
         <li>Rebuilt nightly at 06:17 UTC into a pull request; merging that pull request is the approval that publishes new observations and statuses.</li>
         <li>Fetched HTML passes through a prompt-injection scrub; anything addressed to an AI agent is logged and never stored.</li>
       </ul>
+      <H>Query layer</H>
+      <p>The Ask button and the console on <a href="/query" className="underline decoration-grid underline-offset-4">/query</a> run against the same store the site is exported from, on a separate read-only service. A question goes to a model with four tools (read-only SQL over the semantic layer, a metric lookup, an indicator lookup, and status changes since a date). Every number in an answer must be followed by the citation token of the record it came from; a post-check extracts the numbers and verifies each against that record&apos;s value, confidence bounds, band edges or verbatim snippet. An answer that fails is revised once and otherwise shown as blocked with the unverified numbers marked. The service cannot write observations or statuses, has a daily spend cap, and logs only a hash of each question. The model and prompt version are recorded with every answer.</p>
+      <H>Weekly memo</H>
+      <p>Each Monday a job assembles what changed since the last memo (status events, new observations by indicator, watchlist posts, staleness, the thesis monitor, and any crosswalk pair whose two sides moved in opposite directions) and asks a model to draft the memo and the two lens sentences under the same citation rule. If no key is configured or the check fails twice, the memo is the deterministic digest of the same facts. Either way it opens a pull request; merging it publishes the memo under <a href="/memos" className="underline decoration-grid underline-offset-4">/memos</a>. Nothing in a memo can move a status.</p>
+      <H>X posts</H>
+      <p>X is never scraped. Posts enter through a curated List on the X API, or through a weekly manual drop of URLs fetched via X&apos;s public embed endpoint. Every post is tier 7 and recorded as a watchlist row; when a post links to a tier 1&ndash;6 artifact, the artifact is fetched and entered as an observation in its own right. Posts never move a status.</p>
       <H>Colour</H>
       <p>Two accents mark direction (faster or concentrating; slower or dispersing) and always ship with an icon and a word. Nothing is red or green: fast is not good, and concentrating is not good.</p>
       <H>Credits and conflicts</H>
