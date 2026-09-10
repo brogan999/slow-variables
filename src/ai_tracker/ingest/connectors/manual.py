@@ -54,6 +54,7 @@ class Manual(Connector):
         out: list[Observation] = []
         for r, item in zip(self.rows, items):
             common = dict(
+                source_id=r.get("source_id"),
                 series_key=r["series_key"],
                 unit=r["unit"],
                 as_of_date=r["as_of_date"],
