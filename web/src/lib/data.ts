@@ -9,6 +9,7 @@ export type Point = {
   subject?: string; unit?: string; disputed?: boolean; grade?: string; dims?: Record<string, string>; series_key?: string;
 };
 export type Card = {
+  unpublished_reason?: string | null;
   id: string; name: string; bucket_id: string | null; layer_id: string | null; valve_measured: string | null;
   unit: string; published: boolean; status: string | null; confidence: number | null; leading_lagging: string | null;
   grade: string | null; latest: Point | null; sparkline: Point[]; stale_as_of: string | null; n_observations: number;
@@ -84,3 +85,6 @@ export type StackEntity = { id: string; name: string; kind: string; cik: string 
 export type StackSublayer = Sublayer & { entities: StackEntity[]; indicators: Card[] };
 export type StackDoc = { layers: (Layer & { sublayers: StackSublayer[] })[] };
 export const stack = () => read<StackDoc>("stack.json");
+export type VentureQuarter = { as_of: string; venture_dollars?: { value: number; obs_ids: string[] }; round_count?: { value: number; obs_ids: string[] } };
+export type VentureDoc = { sublayer_id: string; quarters: VentureQuarter[] };
+export const venture = (sublayerId: string): VentureDoc | null => { try { return read<VentureDoc>(`venture/${sublayerId}.json`); } catch { return null; } };

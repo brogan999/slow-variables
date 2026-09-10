@@ -18,7 +18,7 @@ export default function Indicators() {
           <tbody>
             {indicators.map((c) => (
               <tr key={c.id}>
-                <td>{c.published ? <Link href={`/indicators/${c.id}`} className="font-medium hover:underline">{c.name}</Link> : <span className="font-medium text-ink-2">{c.name}</span>}{c.published ? null : <span className="ml-2 text-xs text-muted">unpublished</span>}</td>
+                <td>{c.published ? <Link href={`/indicators/${c.id}`} className="font-medium hover:underline">{c.name}</Link> : <span className="font-medium text-ink-2">{c.name}</span>}{c.published ? null : <span className="ml-2 text-xs text-muted">unpublished</span>}{!c.published && c.unpublished_reason ? <div className="text-xs text-ink-2 mt-0.5 max-w-md">{c.unpublished_reason}</div> : null}</td>
                 <td className="text-ink-2">{buckets.find((b) => b.id === c.bucket_id)?.name ?? "—"}</td>
                 <td className="text-ink-2">{layers.find((l) => l.id === c.layer_id)?.name ?? "—"}</td>
                 <td>{c.published ? <StatusChip status={c.status} /> : <span className="text-xs text-muted">no status until published</span>}</td>

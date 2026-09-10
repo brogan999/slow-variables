@@ -276,3 +276,95 @@ metrics:
       p AS (SELECT subject, as_of_date, value_numeric AS usd, id FROM observations WHERE series_key LIKE 'openrouter.%.price_prompt_usd_per_mtok.pt')
       SELECT p.as_of_date, min(p.usd / (h.minutes / 60)) AS value, list_distinct(flatten(list([p.id, h.hid]))) AS obs_ids
       FROM p JOIN h USING (subject) GROUP BY p.as_of_date
+  venture_dollars:
+    description: Primary-round dollars per calendar quarter and sub-layer. Form D amount sold (tier 4) where an entity files; Epoch's press-compiled equity rounds (tier 5) only for entity-quarters with no Form D row. Sub-layer from the entity's primary membership.
+    rationale: The venture-flow strip and the concentration metrics start here (P1 §7 #8-#13). Filed amounts first; press only where filings are absent (most frontier labs raise via SPVs and offshore vehicles that never file).
+    grain: [as_of_date, sublayer_id]
+    unit: USD
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["formd.*.amount_sold_usd.pt", "epoch.*.round_equity_usd.pt"]
+    caveats: Only entities on the seed list with a verified CIK or an Epoch row; Form D amendments supersede their originals (cumulative amount sold); Epoch rounds are reported, not filed; secondary sales and debt are excluded.
+    sql: |
+      WITH f AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'formd.%.amount_sold_usd.pt' AND entity_id IS NOT NULL),
+      e AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'epoch.%.round_equity_usd.pt' AND entity_id IS NOT NULL),
+      rounds AS (
+        SELECT * FROM f
+        UNION ALL
+        SELECT * FROM e WHERE NOT EXISTS (SELECT 1 FROM f WHERE f.entity_id = e.entity_id AND date_trunc('quarter', f.as_of_date) = date_trunc('quarter', e.as_of_date))),
+      m AS (SELECT entity_id, sublayer_id FROM entity_membership WHERE is_primary AND sublayer_id IS NOT NULL)
+      SELECT (date_trunc('quarter', r.as_of_date) + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE AS as_of_date, m.sublayer_id, sum(r.v) AS value, list(r.id ORDER BY r.id) AS obs_ids
+      FROM rounds r JOIN m USING (entity_id) WHERE r.as_of_date >= DATE '2023-01-01' GROUP BY 1, 2
+  round_count:
+    description: Number of primary rounds per calendar quarter and sub-layer, same sources as venture_dollars.
+    rationale: Round counts separate one mega-round from broad activity.
+    grain: [as_of_date, sublayer_id]
+    unit: count
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["formd.*.amount_sold_usd.pt", "epoch.*.round_equity_usd.pt"]
+    caveats: As venture_dollars.
+    sql: |
+      WITH f AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'formd.%.amount_sold_usd.pt' AND entity_id IS NOT NULL),
+      e AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'epoch.%.round_equity_usd.pt' AND entity_id IS NOT NULL),
+      rounds AS (SELECT * FROM f UNION ALL SELECT * FROM e WHERE NOT EXISTS (SELECT 1 FROM f WHERE f.entity_id = e.entity_id AND date_trunc('quarter', f.as_of_date) = date_trunc('quarter', e.as_of_date))),
+      m AS (SELECT entity_id, sublayer_id FROM entity_membership WHERE is_primary AND sublayer_id IS NOT NULL)
+      SELECT (date_trunc('quarter', r.as_of_date) + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE AS as_of_date, m.sublayer_id, count(*)::DOUBLE AS value, list(r.id ORDER BY r.id) AS obs_ids
+      FROM rounds r JOIN m USING (entity_id) WHERE r.as_of_date >= DATE '2023-01-01' GROUP BY 1, 2
+  frontier_share_of_venture_dollars:
+    description: Frontier labs' share of all tracked primary-round dollars over the trailing four calendar quarters (P1 §7 #8, capital concentration in frontier labs).
+    rationale: Whether capital keeps piling into the model layer's incumbents or spreads down and up the stack.
+    grain: [as_of_date]
+    unit: share
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["formd.*.amount_sold_usd.pt", "epoch.*.round_equity_usd.pt"]
+    caveats: Denominator is the seed list, not the market; frontier rounds are mostly Epoch (tier 5) because the labs raise through vehicles that do not file Form D.
+    sql: |
+      WITH f AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'formd.%.amount_sold_usd.pt' AND entity_id IS NOT NULL),
+      e AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'epoch.%.round_equity_usd.pt' AND entity_id IS NOT NULL),
+      rounds AS (SELECT * FROM f UNION ALL SELECT * FROM e WHERE NOT EXISTS (SELECT 1 FROM f WHERE f.entity_id = e.entity_id AND date_trunc('quarter', f.as_of_date) = date_trunc('quarter', e.as_of_date))),
+      m AS (SELECT entity_id, sublayer_id FROM entity_membership WHERE is_primary AND sublayer_id IS NOT NULL),
+      q AS (SELECT date_trunc('quarter', r.as_of_date) AS cq, m.sublayer_id, r.v, r.id FROM rounds r JOIN m USING (entity_id) WHERE r.as_of_date >= DATE '2023-01-01'),
+      qs AS (SELECT DISTINCT cq FROM q)
+      SELECT (qs.cq + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE AS as_of_date,
+             sum(CASE WHEN q.sublayer_id = 'frontier_labs' THEN q.v ELSE 0 END) / sum(q.v) AS value,
+             list(q.id ORDER BY q.id) AS obs_ids
+      FROM qs JOIN q ON q.cq > qs.cq - INTERVAL 12 MONTH AND q.cq <= qs.cq GROUP BY 1 HAVING sum(q.v) > 0
+  vertical_vs_horizontal_apps:
+    description: Vertical AI primary-round dollars divided by coding-agent plus consumer-AI dollars, trailing four quarters (P1 §7 #11).
+    rationale: Whether investors are backing domain-specific applications over horizontal ones.
+    grain: [as_of_date]
+    unit: ratio
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["formd.*.amount_sold_usd.pt", "epoch.*.round_equity_usd.pt"]
+    caveats: Seed-list coverage; large horizontal raises by entities without a CIK (Anysphere, Cognition) are missing until their filings are matched, which biases the ratio upward.
+    sql: |
+      WITH f AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'formd.%.amount_sold_usd.pt' AND entity_id IS NOT NULL),
+      e AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'epoch.%.round_equity_usd.pt' AND entity_id IS NOT NULL),
+      rounds AS (SELECT * FROM f UNION ALL SELECT * FROM e WHERE NOT EXISTS (SELECT 1 FROM f WHERE f.entity_id = e.entity_id AND date_trunc('quarter', f.as_of_date) = date_trunc('quarter', e.as_of_date))),
+      m AS (SELECT entity_id, sublayer_id FROM entity_membership WHERE is_primary AND sublayer_id IN ('vertical_ai', 'coding_agents', 'consumer_ai')),
+      q AS (SELECT date_trunc('quarter', r.as_of_date) AS cq, m.sublayer_id, r.v, r.id FROM rounds r JOIN m USING (entity_id) WHERE r.as_of_date >= DATE '2023-01-01'),
+      qs AS (SELECT DISTINCT cq FROM q)
+      SELECT (qs.cq + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE AS as_of_date,
+             sum(CASE WHEN q.sublayer_id = 'vertical_ai' THEN q.v ELSE 0 END) / sum(CASE WHEN q.sublayer_id <> 'vertical_ai' THEN q.v ELSE 0 END) AS value,
+             list(q.id ORDER BY q.id) AS obs_ids
+      FROM qs JOIN q ON q.cq > qs.cq - INTERVAL 12 MONTH AND q.cq <= qs.cq GROUP BY 1 HAVING sum(CASE WHEN q.sublayer_id <> 'vertical_ai' THEN q.v ELSE 0 END) > 0
+  post_money_to_arr_multiple:
+    description: Frontier labs' latest post-money valuations divided by their latest annualised run-rates, summed across labs with both, at each valuation date (the market's expected-rent multiple for the model layer).
+    rationale: A multiple of 30-40x says the market prices durable rents; compression toward software multiples says commoditisation is being priced in (value-capture chat, section 2).
+    grain: [as_of_date]
+    unit: ratio
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["epoch.*.post_money_usd.pt", "epoch.*.revenue_run_rate_usd.pt"]
+    caveats: Run-rates are press-reported and annualised; the nearest run-rate on or before the valuation date is used, so the multiple lags when revenue is growing fast.
+    sql: |
+      WITH pm AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'epoch.%.post_money_usd.pt' AND entity_id IS NOT NULL),
+      rr AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'epoch.%.revenue_run_rate_usd.pt' AND entity_id IS NOT NULL),
+      dates AS (SELECT DISTINCT as_of_date FROM pm),
+      latest_pm AS (SELECT d.as_of_date, p.entity_id, arg_max(p.v, p.as_of_date) AS v, arg_max(p.id, p.as_of_date) AS id FROM dates d JOIN pm p ON p.as_of_date <= d.as_of_date AND p.as_of_date > d.as_of_date - INTERVAL 18 MONTH GROUP BY 1, 2),
+      latest_rr AS (SELECT d.as_of_date, r.entity_id, arg_max(r.v, r.as_of_date) AS v, arg_max(r.id, r.as_of_date) AS id FROM dates d JOIN rr r ON r.as_of_date <= d.as_of_date AND r.as_of_date > d.as_of_date - INTERVAL 12 MONTH GROUP BY 1, 2)
+      SELECT p.as_of_date, sum(p.v) / sum(r.v) AS value, list_distinct(flatten(list([p.id, r.id]))) AS obs_ids
+      FROM latest_pm p JOIN latest_rr r USING (as_of_date, entity_id) GROUP BY 1 HAVING sum(r.v) > 0

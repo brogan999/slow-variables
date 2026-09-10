@@ -444,6 +444,9 @@ class Store:
         )
         _write(out / "ledger.json", self._ledger())
         _write(out / "stack.json", self._stack(cards))
+        (out / "venture").mkdir(parents=True, exist_ok=True)
+        for sub_id, doc in self._venture().items():
+            _write(out / "venture" / f"{sub_id}.json", doc)
         _write(out / "bottlenecks.json", self._bottlenecks(cards))
         _write(out / "compare.json", self._compare(cards))
         _write(out / "thesis.json", read_jsonl(DATA / "thesis.jsonl"))
@@ -474,6 +477,7 @@ class Store:
             "bucket_id": ind.bucket_id,
             "layer_id": ind.layer_id,
             "valve_measured": ind.valve_measured,
+            "unpublished_reason": ind.unpublished_reason,
             "unit": ind.unit,
             "published": ind.published,
             "status": ev.new_status if ev else None,
@@ -545,7 +549,7 @@ class Store:
             for r in self.con.execute(
                 "SELECT entity_id, series_key, value_numeric, value_text, unit, as_of_date, id FROM ("
                 "SELECT *, row_number() OVER (PARTITION BY entity_id ORDER BY as_of_date DESC, retrieved_at DESC) rn "
-                "FROM observations WHERE entity_id IS NOT NULL) WHERE rn = 1"
+                "FROM observations WHERE entity_id IS NOT NULL AND source_id <> 'openrouter') WHERE rn = 1"  # model prices are not entity facts
             ).fetchall()
         }
         ents = {e.id: e for e in self.seed.entities}
@@ -585,6 +589,22 @@ class Store:
                 }
                 for layer in self.seed.layers
             ]
+        }
+
+    def _venture(self) -> dict[str, dict[str, Any]]:
+        """Per sub-layer: quarterly venture dollars and round counts from the derived rows, for the flow strip."""
+        out: dict[str, dict[str, Any]] = {}
+        for metric in ("venture_dollars", "round_count"):
+            for d in self.derived_for(metric):
+                sub = d.dims.get("sublayer_id")
+                if not sub:
+                    continue
+                q = out.setdefault(sub, {"sublayer_id": sub, "quarters": {}})["quarters"].setdefault(
+                    d.as_of_date.isoformat(), {"as_of": d.as_of_date.isoformat()}
+                )
+                q[metric] = {"value": d.value, "obs_ids": d.input_observation_ids}
+        return {
+            k: {**v, "quarters": [v["quarters"][d] for d in sorted(v["quarters"])]} for k, v in out.items()
         }
 
     def _bottlenecks(self, cards: dict[str, Any]) -> dict[str, Any]:

@@ -262,6 +262,7 @@ class Indicator(BaseModel):
     related_predictions: list[str] = []
     published: bool = False
     stale_ok: bool = False  # a published indicator may sit past its cadence only with a reason
+    unpublished_reason: str | None = None  # rendered on the index when published is false
     stale_reason: str | None = None
     updated_at: date
 
@@ -273,6 +274,8 @@ class Indicator(BaseModel):
             raise ValueError(f"{self.id}: published indicators need counterevidence")
         if self.stale_ok and not self.stale_reason:
             raise ValueError(f"{self.id}: stale_ok needs stale_reason")
+        if not self.published and not (self.unpublished_reason or "").strip():
+            raise ValueError(f"{self.id}: unpublished indicators need an unpublished_reason")
         return self
 
 

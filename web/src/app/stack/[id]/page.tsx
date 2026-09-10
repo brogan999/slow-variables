@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { IndicatorCard } from "@/components/IndicatorCard";
-import { fmt, obsIndex, stack } from "@/lib/data";
+import { VentureFlowStrip } from "@/components/VentureFlowStrip";
+import { fmt, obsIndex, stack, venture } from "@/lib/data";
 
 export const dynamicParams = false;
 export function generateStaticParams() { return stack().layers.flatMap((l) => l.sublayers.map((s) => ({ id: s.id }))); }
@@ -15,6 +16,7 @@ export default async function SublayerPage({ params }: { params: Promise<{ id: s
   const layer = stack().layers.find((l) => l.sublayers.some((s) => s.id === id))!;
   const s = layer.sublayers.find((x) => x.id === id)!;
   const idx = obsIndex();
+  const v = venture(id);
   return (
     <div className="flex flex-col gap-6">
       <div>
@@ -25,6 +27,12 @@ export default async function SublayerPage({ params }: { params: Promise<{ id: s
         <h2 className="text-sm font-medium text-ink-2 mb-2">Indicators</h2>
         {s.indicators.length ? <div className="grid gap-3 md:grid-cols-2">{s.indicators.filter((c) => c.published).map((c) => <IndicatorCard key={c.id} c={c} obsIndex={idx} />)}</div> : <p className="text-sm text-muted">No indicator addresses this sub-layer yet; its entities carry whatever filings and dataset rows attach to them.</p>}
       </section>
+      {v ? (
+        <section>
+          <h2 className="text-sm font-medium text-ink-2 mb-2">Venture flow</h2>
+          <VentureFlowStrip doc={v} obsIndex={idx} />
+        </section>
+      ) : null}
       <section>
         <h2 className="text-sm font-medium text-ink-2 mb-2">Entities <span className="text-muted">· {s.entities.length}</span></h2>
         <div className="overflow-x-auto">

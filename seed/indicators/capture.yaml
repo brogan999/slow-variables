@@ -59,6 +59,7 @@ indicators:
     confidence: 55
     proposed_status: concentrating
     related_indicators: [lab_recoupment_ratio, semis_rent_concentration]
+    unpublished_reason: "Waiting on a second source per lab: Epoch's run-rate compilation is tier 5 and single-source; the CNBC confirmation covers Anthropic's July 2026 figure only. The indicator publishes once two sources cover the current run-rates."
     published: false
     updated_at: 2026-09-10
   - id: lab_recoupment_ratio
@@ -80,6 +81,7 @@ indicators:
     confidence: 50
     proposed_status: emerging
     related_indicators: [lab_run_rates]
+    unpublished_reason: "Depends on lab_run_rates, which is unpublished for want of a second source; the cumulative-capital denominator is ready."
     published: false
     updated_at: 2026-09-10
   - id: consumer_surplus_wta
@@ -242,6 +244,7 @@ indicators:
     confidence: 40
     proposed_status: not_yet_measurable
     related_indicators: [ramp_paid_ai_adoption]
+    unpublished_reason: "Not yet measurable: the direction rule needs four monthly readings of Ramp's per-lab paid shares and only July 2026 exists; each month arrives as a manual row from Ramp's letter."
     published: false
     updated_at: 2026-09-10
   - id: saas_multiples
@@ -283,3 +286,116 @@ indicators:
     related_indicators: [metr_horizon_50, lab_run_rates]
     published: true
     updated_at: 2026-09-10
+  - id: frontier_capital_concentration
+    name: Frontier labs' share of tracked venture dollars
+    definition: Frontier labs' share of all primary-round dollars across the tracked stack over the trailing four quarters, from Form D filings where entities file and Epoch's press-compiled rounds elsewhere. Derived metric frontier_share_of_venture_dollars.
+    why_it_matters: Capital concentrating in the model layer's incumbents is the installation-phase pattern; capital spreading to applications and infrastructure is what a maturing stack looks like (P1 seed indicator 8).
+    proxy_types: [capital_flow, market_structure]
+    unit: share
+    cadence_expected: quarterly
+    metric: frontier_share_of_venture_dollars
+    band_input: "metric:frontier_share_of_venture_dollars"
+    layer_id: model
+    sublayer_id: frontier_labs
+    direction_rule: {periods: 4, dead_band: 0.05, higher_is: concentrating, rationale: "Four quarters; a move under five points is a single round's timing. Rising = capital concentrating in the frontier labs."}
+    leading_lagging: leading
+    tracker_interpretation: The denominator is the seed list, so the level is high by construction; the direction says whether the rest of the stack is catching up.
+    counterevidence: Frontier rounds come mostly from press (Epoch, tier 5) because the labs raise through vehicles that do not file Form D; many seed companies have no CIK matched yet, so the denominator undercounts.
+    confidence: 50
+    proposed_status: concentrating
+    related_indicators: [circular_financing_scale, lab_valuation_to_run_rate]
+    published: true
+    updated_at: 2026-09-11
+  - id: vertical_vs_horizontal_apps
+    name: Vertical versus horizontal application funding
+    definition: Vertical AI primary-round dollars divided by coding-agent plus consumer-AI dollars, trailing four quarters, same sources. Derived metric vertical_vs_horizontal_apps.
+    why_it_matters: The brief's bet that value at the application layer accrues to domain-specific products (P1 seed indicator 11); the ratio says where investors are placing it.
+    proxy_types: [capital_flow]
+    unit: ratio
+    cadence_expected: quarterly
+    metric: vertical_vs_horizontal_apps
+    band_input: "metric:vertical_vs_horizontal_apps"
+    layer_id: deployment_application
+    sublayer_id: vertical_ai
+    direction_rule: {periods: 4, dead_band: 0.2, higher_is: concentrating, rationale: "Four quarters; a move under 0.2x is round timing. Rising = capital concentrating in vertical applications."}
+    leading_lagging: leading
+    tracker_interpretation: Horizontal raises by entities without a matched CIK are missing, which biases the ratio upward until their filings are added.
+    counterevidence: Coverage follows the seed list and CIK matching; one mega-round by a coding-agent company swings the ratio; dollars raised are not dollars captured.
+    confidence: 45
+    proposed_status: dispersing
+    related_indicators: [enterprise_spend_by_layer, saas_multiples]
+    published: true
+    updated_at: 2026-09-11
+  - id: lab_valuation_to_run_rate
+    name: Frontier lab valuation to run-rate multiple
+    definition: Sum of frontier labs' latest post-money valuations divided by the sum of their latest annualised run-rates, at each new valuation date, from Epoch's press-compiled rounds and revenue reports. Derived metric post_money_to_arr_multiple.
+    why_it_matters: The market's expected-rent multiple for the model layer. Thirty to forty times says durable rents are priced in; compression toward software multiples says commoditisation is.
+    proxy_types: [capital_flow, price]
+    unit: ratio
+    cadence_expected: quarterly
+    metric: post_money_to_arr_multiple
+    band_input: "metric:post_money_to_arr_multiple"
+    layer_id: model
+    sublayer_id: frontier_labs
+    direction_rule: {periods: 3, dead_band: 3, higher_is: concentrating, rationale: "Three valuation events; a move under 3x is noise in press-reported run-rates. Rising = the market pricing more durable rents into the labs."}
+    leading_lagging: leading
+    tracker_interpretation: Run-rates lag valuations by months, so the multiple overstates when revenue is growing fast; the direction is still informative.
+    counterevidence: Single source (Epoch's compilation of press reports); run-rates annualise one month; post-money valuations include committed but undrawn capital.
+    confidence: 45
+    proposed_status: emerging
+    related_indicators: [lab_run_rates, frontier_capital_concentration]
+    published: true
+    updated_at: 2026-09-11
+  - id: neolab_capital_intensity
+    name: Neolab capital raised per dollar of revenue
+    definition: Primary rounds raised by labs founded 2023 or later divided by their annualised revenue (P1 seed indicator 9).
+    why_it_matters: Overfunding relative to revenue is the pattern that preceded every prior installation-phase crash.
+    proxy_types: [capital_flow]
+    unit: ratio
+    cadence_expected: quarterly
+    layer_id: model
+    sublayer_id: neolabs
+    direction_rule: {periods: 4, dead_band: 1, higher_is: concentrating, rationale: "Four quarters; under 1x is noise."}
+    leading_lagging: leading
+    tracker_interpretation: Unpublished until a revenue series exists for the neolabs.
+    unpublished_reason: "Not measurable from free sources: the neolabs' rounds are filed or reported, but none of them has a revenue figure in Epoch or a filing, so the denominator does not exist."
+    counterevidence: Revenue for private neolabs is reported by The Information and Sacra behind paywalls.
+    confidence: 30
+    proposed_status: not_yet_measurable
+    published: false
+    updated_at: 2026-09-11
+  - id: lab_vertical_integration_exit_bell
+    name: Lab vertical integration (acquisitions and acquihires)
+    definition: Count of frontier-lab acquisitions and acquihires of companies in the training-input, serving and application layers over the trailing four quarters (P1 seed indicator 12, the exit bell).
+    why_it_matters: When the labs buy their suppliers and their best customers, the bottleneck-migration model says the venture window in those sub-layers is closing.
+    proxy_types: [market_structure, capital_flow]
+    unit: count
+    cadence_expected: quarterly
+    layer_id: model
+    sublayer_id: frontier_labs
+    direction_rule: {periods: 4, dead_band: 1, higher_is: concentrating, rationale: "Four quarters; one event is not a trend."}
+    leading_lagging: leading
+    tracker_interpretation: Unpublished until the acquisition ledger (manual rows with verbatim announcements) exists.
+    unpublished_reason: "Waiting on an acquisition ledger: each event needs a fetched announcement with a verbatim snippet, like the circular-financing ledger; none has been entered yet."
+    counterevidence: Acquihire terms are rarely disclosed; a count treats a $3B deal and a five-person team alike.
+    confidence: 30
+    proposed_status: not_yet_measurable
+    published: false
+    updated_at: 2026-09-11
+  - id: vc_flow_revenue_lag
+    name: Venture flow to revenue lag
+    definition: Cross-correlation lag, in quarters, between primary-round dollars into a sub-layer and its members' revenue (P1 seed indicator 13).
+    why_it_matters: Whether venture money leads or follows revenue tells you whether the flow is a forecast or a reaction.
+    proxy_types: [capital_flow]
+    unit: quarters
+    cadence_expected: quarterly
+    layer_id: model
+    direction_rule: {periods: 4, dead_band: 1, higher_is: concentrating, rationale: "Needs at least eight quarters of both series before a lag can be estimated."}
+    leading_lagging: leading
+    tracker_interpretation: Not yet measurable; fewer than eight quarters of paired series exist.
+    unpublished_reason: "Not yet measurable: the estimate needs at least eight quarters of both venture dollars and revenue for the same sub-layer; the venture series starts in 2023 and revenue exists only for the frontier labs."
+    counterevidence: Lags estimated on a handful of quarters are dominated by single rounds.
+    confidence: 20
+    proposed_status: not_yet_measurable
+    published: false
+    updated_at: 2026-09-11
