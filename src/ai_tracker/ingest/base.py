@@ -61,12 +61,24 @@ _robots: dict[str, urllib.robotparser.RobotFileParser] = {}
 
 
 def robots_ok(url: str) -> bool:
+    """robots.txt fetched with our own User-Agent (and the curl fallback CDNs need); unreachable = allowed,
+    forbidden (401/403) = disallowed, as urllib's parser would treat it."""
     u = httpx.URL(url)
     host = f"{u.scheme}://{u.host}"
     if host not in _robots:
-        rp = urllib.robotparser.RobotFileParser(f"{host}/robots.txt")
+        rp = urllib.robotparser.RobotFileParser()
         try:
-            rp.read()
+            hdrs = {"User-Agent": ua()}
+            r = httpx.get(f"{host}/robots.txt", headers=hdrs, follow_redirects=True, timeout=30)
+            body, status = r.content, r.status_code
+            if status == 403 and shutil.which("curl"):
+                body, status = _curl(f"{host}/robots.txt", hdrs)
+            if status in (401, 403):
+                rp.disallow_all = True
+            elif status >= 400:
+                rp.allow_all = True
+            else:
+                rp.parse(body.decode("utf-8", "ignore").splitlines())
         except Exception:
             rp.allow_all = True
         _robots[host] = rp

@@ -32,6 +32,9 @@ class OpenRouterRankings(Connector):
     source_id = "openrouter_rankings"
     kind = "html"
     urls = [URL]
+    optional = (
+        True  # OpenRouter's CDN answers GitHub runners with 403 on robots.txt; a local ingest fills the gap
+    )
     headers = {"Accept": "text/html"}
     expect_series = ["openrouter_rankings.*.tokens.d"]
 
