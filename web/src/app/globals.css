@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  --background: #f9f9f7; --surface: #fcfcfb; --ink: #0b0b0b; --ink-2: #52514e; --muted: #898781;
+  --grid: #e1e0d9; --axis: #c3c2b7; --ring: rgba(11, 11, 11, 0.1);
+  --fast: #4a3aa7; --slow: #eb6834; --s1: #2a78d6; --s2: #eb6834;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --background: #0d0d0d; --surface: #1a1a19; --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
+    --grid: #2c2c2a; --axis: #383835; --ring: rgba(255, 255, 255, 0.1);
+    --fast: #9085e9; --slow: #d95926; --s1: #3987e5; --s2: #d95926;
+  }
+}
+@theme inline {
+  --color-background: var(--background); --color-surface: var(--surface); --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2); --color-muted: var(--muted); --color-grid: var(--grid); --color-axis: var(--axis);
+  --color-fast: var(--fast); --color-slow: var(--slow); --color-s1: var(--s1); --color-s2: var(--s2);
+  --font-sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+body { background: var(--background); color: var(--ink); font-family: var(--font-sans); }
+.prose-tight p + p { margin-top: 0.5rem; }
+table.data { font-variant-numeric: tabular-nums; }
+table.data th, table.data td { padding: 0.35rem 0.6rem; border-bottom: 1px solid var(--grid); text-align: left; vertical-align: top; }
+table.data th { color: var(--muted); font-weight: 500; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; }
+.ring-hair { box-shadow: 0 0 0 1px var(--ring); }

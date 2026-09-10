@@ -1,0 +1,73 @@
+# Diffusion-lens indicators. No status here: status lives in data/status_events.jsonl only.
+# `proposed_status` is what the brief expected on 9 Sep 2026; `check` reports disagreement with the evaluator.
+indicators:
+  - id: metr_horizon_50
+    name: METR 50% time horizon
+    definition: Length (in human-expert minutes) of software tasks a frontier model completes with 50% success, per METR's Horizon v1.1 suite, plotted by model release date. The band applies to METR's published doubling time from 2023 onward.
+    why_it_matters: The cleanest single series for the methods stock. If capability doubles every few months the invention valve is wide open; the paper's claim is that this alone does not move the later stocks.
+    proxy_types: [benchmark]
+    unit: minutes
+    cadence_expected: per_release
+    series_keys: ["metr.*.horizon_50.pt", "metr.suite.doubling_time_days.pt"]
+    band_input: metr.suite.doubling_time_days.pt
+    bucket_id: methods
+    valve_measured: invention_to_product
+    normal_band: {lo: 213}
+    fast_band: {hi: 122}
+    band_rationale: "Normal = doubling time ≥ 7 months (≈213 days); fast = ≤ 4 months (≈122 days), the AI 2027 assumption. Between the two is `emerging`. Input is METR's own 2023-onward fit, tier 1."
+    tracker_interpretation: Capability is moving fast by any historical standard. Whether it is faster than the AI-2027 doubling assumption is the live question the band answers.
+    counterevidence: METR notes measurements above 16 hours are unreliable with the current task suite, so the newest points carry wide intervals and are flagged disputed. Horizon is a software-task construct and may not transfer to other work.
+    layer_id: model
+    leading_lagging: leading
+    confidence: 80
+    proposed_status: faster_than_normal
+    related_bottlenecks: [1, 2, 3]
+    related_indicators: [metr_horizon_80, horizon_ratio_80_50]
+    published: true
+    updated_at: 2026-09-10
+  - id: metr_horizon_80
+    name: METR 80% time horizon
+    definition: Task length a model completes with 80% success on the same suite. The band applies to a log-linear doubling-time fit over the 80% series from 2023 onward (derived metric horizon_doubling_days_80).
+    why_it_matters: 80% is closer to what a product needs than 50%. If the reliable horizon lags badly, benchmarks flatter products.
+    proxy_types: [benchmark]
+    unit: minutes
+    cadence_expected: per_release
+    series_keys: ["metr.*.horizon_80.pt"]
+    band_input: "metric:horizon_doubling_days_80"
+    bucket_id: methods
+    valve_measured: invention_to_product
+    normal_band: {lo: 213}
+    fast_band: {hi: 122}
+    band_rationale: "Same bands as the 50% horizon (normal ≥ 7 months, fast ≤ 4 months) applied to our own fit, because METR publishes a doubling time for the 50% series only."
+    tracker_interpretation: Fast, but lagging the 50% horizon; the lag is the reliability gap the products bucket has to close.
+    counterevidence: Our fit has no confidence interval and excludes points METR marks unreliable; a different start date changes the doubling time materially.
+    layer_id: model
+    leading_lagging: leading
+    confidence: 70
+    proposed_status: faster_than_normal
+    related_indicators: [metr_horizon_50, horizon_ratio_80_50]
+    published: true
+    updated_at: 2026-09-10
+  - id: horizon_ratio_80_50
+    name: 50%/80% horizon ratio
+    definition: METR 50% horizon divided by 80% horizon for the same model (derived metric horizon_ratio_80_50). ~7-10x recently, up from ~5x.
+    why_it_matters: The ratio is the reliability gap in one number. If it collapses toward 2x while the 80% horizon exceeds eight hours, the normal-technology thesis loses its productisation argument.
+    proxy_types: [benchmark]
+    unit: ratio
+    cadence_expected: per_release
+    metric: horizon_ratio_80_50
+    band_input: "metric:horizon_ratio_80_50"
+    bucket_id: methods
+    valve_measured: invention_to_product
+    normal_band: {lo: 5}
+    fast_band: {hi: 2}
+    band_rationale: "Normal = ratio ≥ 5 (gap holding or widening); fast = ratio ≤ 2. The falsifying condition (≤ 2 AND 80% horizon > 8 h) is compound and lives in the thesis monitor, not the band."
+    tracker_interpretation: The gap is widening, which is pro-normal. It is the paper's reliability argument made measurable.
+    counterevidence: Ratio is sensitive to the task mix and to the exclusion of models beyond the suite ceiling; a single new model can move it.
+    layer_id: model
+    leading_lagging: leading
+    confidence: 70
+    proposed_status: consistent_with_normal
+    related_indicators: [metr_horizon_50, metr_horizon_80]
+    published: true
+    updated_at: 2026-09-10

@@ -1,0 +1,498 @@
+"""Seed YAML + data/*.jsonl -> in-memory DuckDB; export -> web/data/*.json. The web never computes a number."""
+
+from __future__ import annotations
+
+import csv
+import json
+from dataclasses import dataclass
+from datetime import date, datetime, timezone
+from fnmatch import fnmatch
+from pathlib import Path
+from typing import Any
+
+import duckdb
+import yaml
+
+from .schema import (
+    Bucket,
+    Crosswalk,
+    Derived,
+    FetchLog,
+    Indicator,
+    Layer,
+    Observation,
+    Review,
+    Source,
+    StatusEvent,
+    Sublayer,
+    Tier,
+)
+
+SEED, DATA, WEB = Path("seed"), Path("data"), Path("web/data")
+OBS = DATA / "observations"
+OBS_COLUMNS = {
+    "id": "VARCHAR",
+    "series_key": "VARCHAR",
+    "unit": "VARCHAR",
+    "as_of_date": "DATE",
+    "published_date": "DATE",
+    "retrieved_at": "VARCHAR",
+    "url": "VARCHAR",
+    "content_hash": "VARCHAR",
+    "http_status": "INTEGER",
+    "source_id": "VARCHAR",
+    "tier": "INTEGER",
+    "audited_vs_reported": "VARCHAR",
+    "extraction_method": "VARCHAR",
+    "extractor_version": "VARCHAR",
+    "raw_snippet": "VARCHAR",
+    "value_numeric": "DOUBLE",
+    "value_text": "VARCHAR",
+    "value_low": "DOUBLE",
+    "value_high": "DOUBLE",
+    "period_start": "DATE",
+    "entity_id": "VARCHAR",
+    "run_rate_vs_booked": "VARCHAR",
+    "gross_vs_net": "VARCHAR",
+    "disputed": "BOOLEAN",
+    "dispute_text": "VARCHAR",
+    "review_status": "VARCHAR",
+    "reviewer_id": "VARCHAR",
+    "supersedes_id": "VARCHAR",
+}
+
+
+def read_jsonl(p: Path) -> list[dict[str, Any]]:
+    return [json.loads(line) for line in p.read_text().splitlines() if line.strip()] if p.exists() else []
+
+
+def write_jsonl(p: Path, rows: list[dict[str, Any]]) -> None:
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text("".join(json.dumps(r, sort_keys=True, default=str) + "\n" for r in rows))
+
+
+def dump(m: Any) -> dict[str, Any]:
+    return json.loads(m.model_dump_json())
+
+
+@dataclass
+class Seed:
+    buckets: list[Bucket]
+    layers: list[Layer]
+    sublayers: list[Sublayer]
+    crosswalk: list[Crosswalk]
+    sources: list[Source]
+    indicators: list[Indicator]
+
+    @classmethod
+    def load(cls, root: Path = SEED) -> Seed:
+        def rows(name: str) -> list[dict[str, Any]]:
+            return yaml.safe_load((root / f"{name}.yaml").read_text())[name]
+
+        inds = [
+            Indicator(**r)
+            for f in sorted((root / "indicators").glob("*.yaml"))
+            for r in yaml.safe_load(f.read_text())["indicators"]
+        ]
+        return cls(
+            [Bucket(**r) for r in rows("buckets")],
+            [Layer(**r) for r in rows("layers")],
+            [Sublayer(**r) for r in rows("sublayers")],
+            [Crosswalk(**r) for r in rows("crosswalk")],
+            [Source(**r) for r in rows("sources")],
+            inds,
+        )
+
+
+def append_observations(source_id: str, rows: list[Observation]) -> int:
+    """Append-only, sorted by id. A changed value for the same key gets a new row that supersedes the old one."""
+    p = OBS / f"{source_id}.jsonl"
+    existing = read_jsonl(p)
+    ids = {r["id"] for r in existing}
+    latest: dict[tuple[Any, ...], tuple[str, str]] = {}
+    for r in existing:
+        k = (r["series_key"], r.get("entity_id"), r["as_of_date"], r.get("period_start"))
+        if k not in latest or r["retrieved_at"] > latest[k][1]:
+            latest[k] = (r["id"], r["retrieved_at"])
+    new: list[dict[str, Any]] = []
+    for o in rows:
+        if o.id in ids:
+            continue
+        k = (
+            o.series_key,
+            o.entity_id,
+            o.as_of_date.isoformat(),
+            o.period_start.isoformat() if o.period_start else None,
+        )
+        if k in latest:
+            o.supersedes_id = latest[k][0]
+        latest[k] = (o.id, o.retrieved_at.isoformat())
+        ids.add(o.id)
+        new.append(dump(o))
+    if new:
+        write_jsonl(p, sorted(existing + new, key=lambda r: r["id"]))
+    return len(new)
+
+
+def append_fetchlog(log: FetchLog) -> None:
+    p = DATA / "fetchlog.jsonl"
+    p.parent.mkdir(parents=True, exist_ok=True)
+    with p.open("a") as f:
+        f.write(json.dumps(dump(log), sort_keys=True) + "\n")
+
+
+def approve_pending(reviewer: str = "merge") -> int:
+    n = 0
+    for p in sorted(OBS.glob("*.jsonl")):
+        rows = read_jsonl(p)
+        for r in rows:
+            if r["review_status"] == Review.pending.value:
+                r["review_status"], r["reviewer_id"] = Review.approved.value, reviewer
+                n += 1
+        write_jsonl(p, rows)
+    return n
+
+
+class Store:
+    def __init__(self, seed: Seed | None = None) -> None:
+        self.seed = seed or Seed.load()
+        self.con = duckdb.connect()
+        cols = ", ".join(f"'{k}': '{v}'" for k, v in OBS_COLUMNS.items())
+        files = sorted(OBS.glob("*.jsonl"))
+        if files:
+            self.con.execute(
+                f"CREATE TABLE observation_all AS SELECT * FROM read_json('{OBS}/*.jsonl', "
+                f"format='newline_delimited', columns={{{cols}}})"
+            )
+        else:
+            self.con.execute(
+                "CREATE TABLE observation_all (" + ", ".join(f"{k} {v}" for k, v in OBS_COLUMNS.items()) + ")"
+            )
+        self.con.execute("""CREATE VIEW observations AS
+            SELECT *, split_part(series_key, '.', 2) AS subject, date_trunc('quarter', as_of_date) AS q
+            FROM observation_all o
+            WHERE review_status = 'approved' AND NOT EXISTS (SELECT 1 FROM observation_all s WHERE s.supersedes_id = o.id)""")
+        self.derived = [Derived(**r) for r in read_jsonl(DATA / "derived.jsonl")]
+        self.events = [StatusEvent(**r) for r in read_jsonl(DATA / "status_events.jsonl")]
+        self.fetchlog = [FetchLog(**r) for r in read_jsonl(DATA / "fetchlog.jsonl")]
+
+    # ---- queries -------------------------------------------------------------------------------------------
+    def observations(self, *globs: str) -> list[dict[str, Any]]:
+        cur = self.con.execute("SELECT * FROM observations ORDER BY as_of_date, series_key")
+        cols = [d[0] for d in cur.description]
+        rows = [dict(zip(cols, r)) for r in cur.fetchall()]
+        return [r for r in rows if any(fnmatch(r["series_key"], g) for g in globs)]
+
+    def derived_for(self, metric: str) -> list[Derived]:
+        return sorted(
+            (d for d in self.derived if d.metric == metric),
+            key=lambda d: (d.as_of_date, sorted(d.dims.items())),
+        )
+
+    def current(self, indicator_id: str) -> StatusEvent | None:
+        evs = [e for e in self.events if e.target_id == indicator_id]
+        return max(evs, key=lambda e: e.created_at) if evs else None
+
+    def band_input(self, ind: Indicator) -> tuple[float | None, date | None, list[str], Tier]:
+        """Latest value the bands apply to, its obs ids, and the best (lowest) tier behind it."""
+        if not ind.band_input:
+            return None, None, [], Tier.ACTOR_STATEMENT
+        if ind.band_input.startswith("metric:"):
+            rows = self.derived_for(ind.band_input[7:])
+            if not rows:
+                return None, None, [], Tier.ACTOR_STATEMENT
+            d = rows[-1]
+            return d.value, d.as_of_date, d.input_observation_ids, self._best_tier(d.input_observation_ids)
+        obs = self.observations(ind.band_input)
+        if not obs:
+            return None, None, [], Tier.ACTOR_STATEMENT
+        o = obs[-1]
+        return o["value_numeric"], o["as_of_date"], [o["id"]], Tier(o["tier"])
+
+    def evidence_obs(self, ind: Indicator) -> list[dict[str, Any]]:
+        """Observations behind an indicator: its series globs plus the inputs of its derived metric."""
+        rows = {o["id"]: o for g in ind.series_keys for o in self.observations(g)}
+        if ind.metric:
+            ids = sorted({i for d in self.derived_for(ind.metric) for i in d.input_observation_ids})
+            if ids:
+                cur = self.con.execute(
+                    "SELECT * FROM observations WHERE id IN (" + ",".join("?" * len(ids)) + ")", ids
+                )
+                cols = [c[0] for c in cur.description]
+                rows.update({r[0]: dict(zip(cols, r)) for r in cur.fetchall()})
+        return list(rows.values())
+
+    def _best_tier(self, ids: list[str]) -> Tier:
+        if not ids:
+            return Tier.ACTOR_STATEMENT
+        q = "SELECT min(tier) FROM observation_all WHERE id IN (" + ",".join("?" * len(ids)) + ")"
+        t = self.con.execute(q, ids).fetchone()
+        return Tier(t[0]) if t and t[0] else Tier.ACTOR_STATEMENT
+
+    def headline(self, ind: Indicator) -> list[dict[str, Any]]:
+        """Points for the indicator's chart: derived metric if set, else observations of the first series glob."""
+        if ind.metric:
+            return [
+                {
+                    "as_of": d.as_of_date.isoformat(),
+                    "value": d.value,
+                    "obs_ids": d.input_observation_ids,
+                    "dims": d.dims,
+                    "unit": ind.unit,
+                }
+                for d in self.derived_for(ind.metric)
+            ]
+        if not ind.series_keys:
+            return []
+        return [_point(o) for o in self.observations(ind.series_keys[0])]
+
+    # ---- export --------------------------------------------------------------------------------------------
+    def export(self, out: Path = WEB) -> None:
+        out.mkdir(parents=True, exist_ok=True)
+        for sub in ("indicators", "series", "buckets", "layers", "lens"):
+            (out / sub).mkdir(exist_ok=True)
+        cards = {i.id: self._card(i) for i in self.seed.indicators}
+        for ind in self.seed.indicators:
+            series = {}
+            for g in ind.series_keys:
+                for o in self.observations(g):
+                    series.setdefault(o["series_key"], []).append(_point(o))
+            ev = sorted(
+                (e for e in self.events if e.target_id == ind.id), key=lambda e: e.created_at, reverse=True
+            )
+            bv, b_as_of, b_ids, _ = self.band_input(ind)
+            doc = {
+                **_jsonable(ind.model_dump()),
+                **cards[ind.id],
+                "points": self.headline(ind),
+                "band_value": {"value": bv, "as_of": b_as_of.isoformat() if b_as_of else None, "obs_ids": b_ids} if bv is not None else None,
+                "series": [{"series_key": k, "points": v} for k, v in sorted(series.items())],
+                "derived": [
+                    {**dump(d), "obs_ids": d.input_observation_ids} for d in self.derived_for(ind.metric)
+                ]
+                if ind.metric
+                else [],
+                "status_events": [dump(e) for e in ev],
+                "crosswalk": [
+                    dump(c)
+                    for c in self.seed.crosswalk
+                    if ind.id in c.shared_indicators
+                    or c.bucket_id == ind.bucket_id
+                    and c.layer_id == ind.layer_id
+                ],
+            }
+            _write(out / "indicators" / f"{ind.id}.json", doc)
+        for key, rows in self._all_series().items():
+            src = next((s for s in self.seed.sources if s.id == rows[0]["source_id"]), None)
+            _write(
+                out / "series" / f"{key}.json",
+                {
+                    "series_key": key,
+                    "unit": rows[0]["unit"],
+                    "source": dump(src) if src else None,
+                    "observations": [_full(o) for o in rows],
+                },
+            )
+            (out.parent / "public" / "data").mkdir(parents=True, exist_ok=True)
+            with (out.parent / "public" / "data" / f"{key}.csv").open("w", newline="") as f:
+                w = csv.DictWriter(f, fieldnames=list(OBS_COLUMNS))
+                w.writeheader()
+                for o in rows:
+                    w.writerow({k: o.get(k) for k in OBS_COLUMNS})
+        for b in self.seed.buckets:
+            _write(
+                out / "buckets" / f"{b.id}.json",
+                {
+                    **dump(b),
+                    "indicators": [cards[i.id] for i in self.seed.indicators if i.bucket_id == b.id],
+                    "crosswalk": [dump(c) for c in self.seed.crosswalk if c.bucket_id == b.id],
+                },
+            )
+        for layer in self.seed.layers:
+            _write(
+                out / "layers" / f"{layer.id}.json",
+                {
+                    **dump(layer),
+                    "sublayers": [dump(s) for s in self.seed.sublayers if s.layer_id == layer.id],
+                    "indicators": [cards[i.id] for i in self.seed.indicators if i.layer_id == layer.id],
+                    "crosswalk": [dump(c) for c in self.seed.crosswalk if c.layer_id == layer.id],
+                },
+            )
+        recent = [dump(e) for e in sorted(self.events, key=lambda e: e.created_at, reverse=True)[:3]]
+        as_of = max([c["latest"]["as_of"] for c in cards.values() if c["latest"]] or [""])
+        _write(out / "lens" / "diffusion.json", self._diffusion_lens(cards, recent, as_of))
+        _write(
+            out / "lens" / "capture.json",
+            {
+                "as_of": as_of,
+                "recent_status_events": recent,
+                "layers": [
+                    {
+                        **dump(layer),
+                        "indicators": [cards[i.id] for i in self.seed.indicators if i.layer_id == layer.id],
+                    }
+                    for layer in self.seed.layers
+                ],
+            },
+        )
+        _write(
+            out / "index.json",
+            {
+                "indicators": list(cards.values()),
+                "buckets": [dump(b) for b in self.seed.buckets],
+                "layers": [dump(x) for x in self.seed.layers],
+                "sublayers": [dump(s) for s in self.seed.sublayers],
+                "crosswalk": [dump(c) for c in self.seed.crosswalk],
+            },
+        )
+        _write(out / "obs_index.json", {o["id"]: o["series_key"] for o in self.observations("*")})
+        _write(out / "sources.json", [self._source_health(s) for s in self.seed.sources])
+        _write(
+            out / "changelog.json",
+            [dump(e) for e in sorted(self.events, key=lambda e: e.created_at, reverse=True)],
+        )
+        (out / "meta.json").write_text(
+            json.dumps({"generated_at": datetime.now(timezone.utc).isoformat()}) + "\n"
+        )
+
+    def _card(self, ind: Indicator) -> dict[str, Any]:
+        pts = self.headline(ind)
+        ev = self.current(ind.id)
+        latest = pts[-1] if pts else None
+        tiers = [Tier(o["tier"]) for o in self.evidence_obs(ind)]
+        stale = None
+        if latest and ind.cadence_expected in CADENCE_DAYS:
+            age = (date.today() - date.fromisoformat(latest["as_of"])).days
+            if age > 2 * CADENCE_DAYS[ind.cadence_expected]:
+                stale = latest["as_of"]
+        return {
+            "id": ind.id,
+            "name": ind.name,
+            "bucket_id": ind.bucket_id,
+            "layer_id": ind.layer_id,
+            "valve_measured": ind.valve_measured,
+            "unit": ind.unit,
+            "published": ind.published,
+            "status": ev.new_status if ev else None,
+            "confidence": ev.new_conf if ev else None,
+            "leading_lagging": ind.leading_lagging.value if ind.leading_lagging else None,
+            "grade": _grade(min(tiers)) if tiers else None,
+            "latest": latest,
+            "sparkline": pts[-24:],
+            "stale_as_of": stale,
+            "n_observations": len(self.evidence_obs(ind)),
+        }
+
+    def _diffusion_lens(
+        self, cards: dict[str, Any], recent: list[dict[str, Any]], as_of: str
+    ) -> dict[str, Any]:
+        buckets = []
+        for b in self.seed.buckets:
+            inds = [cards[i.id] for i in self.seed.indicators if i.bucket_id == b.id and i.published]
+            buckets.append({**dump(b), "indicators": inds, "status": _summarise(inds)})
+        valves = []
+        for v in VALVES:
+            inds = [cards[i.id] for i in self.seed.indicators if i.valve_measured == v["id"] and i.published]
+            valves.append({**v, "status": _summarise(inds), "indicator_ids": [i["id"] for i in inds]})
+        verdict = (
+            "As of %s: " % as_of
+            + ", ".join(f"{b['name'].lower()} {b['status'].replace('_', ' ')}" for b in buckets)
+            + "."
+        )
+        return {
+            "as_of": as_of,
+            "verdict": verdict,
+            "buckets": buckets,
+            "valves": valves,
+            "recent_status_events": recent,
+            "what_would_change": [
+                f"{i.name}: {i.band_rationale}"
+                for i in self.seed.indicators
+                if i.published and i.band_rationale
+            ],
+        }
+
+    def _all_series(self) -> dict[str, list[dict[str, Any]]]:
+        out: dict[str, list[dict[str, Any]]] = {}
+        for o in self.observations("*"):
+            out.setdefault(o["series_key"], []).append(o)
+        return out
+
+    def _source_health(self, s: Source) -> dict[str, Any]:
+        logs = sorted((fl for fl in self.fetchlog if fl.source_id == s.id), key=lambda fl: fl.finished_at)
+        last_ok = next((fl for fl in reversed(logs) if fl.ok), None)
+        return {
+            **dump(s),
+            "last_success_at": last_ok.finished_at.isoformat() if last_ok else None,
+            "last_error": logs[-1].error if logs and not logs[-1].ok else None,
+            "items_found": last_ok.items_found if last_ok else 0,
+            "runs": len(logs),
+        }
+
+
+CADENCE_DAYS = {
+    "daily": 1,
+    "weekly": 7,
+    "biweekly": 14,
+    "monthly": 31,
+    "quarterly": 92,
+    "per_release": 120,
+    "annual": 366,
+}
+VALVES = [
+    {"id": "invention_to_product", "from": "methods", "to": "products", "name": "Invention → product"},
+    {"id": "product_to_adoption", "from": "products", "to": "early_adoption", "name": "Product → adoption"},
+    {
+        "id": "adoption_to_adaptation",
+        "from": "early_adoption",
+        "to": "adaptation",
+        "name": "Adoption → adaptation",
+    },
+    {
+        "id": "return_arrow",
+        "from": "adaptation",
+        "to": "methods",
+        "name": "Return arrow (deployment → invention)",
+    },
+    {"id": "leak", "from": "adaptation", "to": "capture", "name": "Leak (surplus exits the chain)"},
+]
+
+
+def _grade(t: Tier) -> str:
+    from .schema import grade_from_tier
+
+    return grade_from_tier(t)
+
+
+def _summarise(cards: list[dict[str, Any]]) -> str:
+    statuses = [c["status"] for c in cards if c.get("status")]
+    if not statuses:
+        return "unmeasured"
+    return max(set(statuses), key=statuses.count)
+
+
+def _point(o: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "as_of": o["as_of_date"].isoformat(),
+        "value": o["value_numeric"],
+        "low": o["value_low"],
+        "high": o["value_high"],
+        "obs_ids": [o["id"]],
+        "series_key": o["series_key"],
+        "subject": o["subject"],
+        "unit": o["unit"],
+        "disputed": o["disputed"],
+        "grade": _grade(Tier(o["tier"])),
+    }
+
+
+def _full(o: dict[str, Any]) -> dict[str, Any]:
+    return {**_jsonable(o), "grade": _grade(Tier(o["tier"]))}
+
+
+def _jsonable(d: dict[str, Any]) -> dict[str, Any]:
+    return json.loads(json.dumps(d, default=lambda v: v.value if hasattr(v, "value") else str(v)))
+
+
+def _write(p: Path, doc: Any) -> None:
+    p.write_text(json.dumps(doc, sort_keys=True, indent=1, default=str) + "\n")

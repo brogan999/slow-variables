@@ -1,0 +1,63 @@
+{
+ "observations": [
+  {
+   "as_of_date": "2022-03-15",
+   "audited_vs_reported": "reported",
+   "content_hash": "aae31902b0519a4da73e16643915e5e8aca13cd3315c3aac893ce3d6dfe92ad9",
+   "dispute_text": null,
+   "disputed": false,
+   "entity_id": null,
+   "extraction_method": "api",
+   "extractor_version": "metr-1",
+   "grade": "A",
+   "gross_vs_net": null,
+   "http_status": 200,
+   "id": "4a682b8c20f32dfe",
+   "period_start": null,
+   "published_date": "2026-09-10",
+   "q": "2022-01-01 00:00:00",
+   "raw_snippet": "{\"gpt_3_5_turbo_instruct\": {\"p50_horizon_length\": {\"ci_high\": 1.115905, \"ci_low\": 0.255148, \"estimate\": 0.599247}, \"release_date\": \"2022-03-15\"}}",
+   "retrieved_at": "2026-09-10T00:51:13.090038Z",
+   "review_status": "approved",
+   "reviewer_id": null,
+   "run_rate_vs_booked": null,
+   "series_key": "metr.gpt_3_5_turbo_instruct.horizon_50.pt",
+   "source_id": "metr",
+   "subject": "gpt_3_5_turbo_instruct",
+   "supersedes_id": null,
+   "tier": 1,
+   "unit": "minutes",
+   "url": "https://metr.org/assets/benchmark_results_1_1.yaml",
+   "value_high": 1.115905,
+   "value_low": 0.255148,
+   "value_numeric": 0.599247,
+   "value_text": null
+  }
+ ],
+ "series_key": "metr.gpt_3_5_turbo_instruct.horizon_50.pt",
+ "source": {
+  "attribution": "METR, Measuring AI Ability to Complete Long Tasks (Horizon v1.1)",
+  "cadence": "per_release",
+  "connector": "metr",
+  "default_tier": 1,
+  "expect_series": [
+   "metr.*.horizon_50.pt",
+   "metr.*.horizon_80.pt",
+   "metr.suite.doubling_time_days.pt"
+  ],
+  "id": "metr",
+  "kind": "api",
+  "lens": "both",
+  "license": "METR; analysis code MIT at https://github.com/METR/eval-analysis-public",
+  "name": "METR time horizons (v1.1)",
+  "org": "METR",
+  "people": [
+   "Beth Barnes",
+   "Thomas Kwa",
+   "Ben West"
+  ],
+  "robots_ok": true,
+  "url": "https://metr.org/time-horizons/"
+ },
+ "unit": "minutes"
+}

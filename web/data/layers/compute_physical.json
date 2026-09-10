@@ -1,0 +1,56 @@
+{
+ "crosswalk": [
+  {
+   "bucket_id": "methods",
+   "layer_id": "compute_physical",
+   "note": "Compute growth and hardware perf-per-dollar feed the methods stock.",
+   "relation": "input_to",
+   "shared_indicators": [],
+   "sublayer_id": null
+  },
+  {
+   "bucket_id": "leak",
+   "layer_id": "compute_physical",
+   "note": "Margin stacking, HHI, circular financing: surplus exiting the chain at semis and cloud. Interpretive spine: Teece, Nordhaus, Perez, Ding (docs/interpretation).",
+   "relation": "leak_from",
+   "shared_indicators": [],
+   "sublayer_id": null
+  }
+ ],
+ "dependency_tier": 1,
+ "description": "Semis, hyperscalers and neoclouds, data centres and power, memory/networking.",
+ "id": "compute_physical",
+ "indicators": [],
+ "name": "Compute & physical",
+ "order": 1,
+ "sublayers": [
+  {
+   "description": "",
+   "id": "semis",
+   "layer_id": "compute_physical",
+   "name": "Semiconductors & AI chip startups",
+   "order": 1
+  },
+  {
+   "description": "",
+   "id": "hyperscalers_neoclouds",
+   "layer_id": "compute_physical",
+   "name": "Hyperscalers",
+   "order": 2
+  },
+  {
+   "description": "",
+   "id": "dc_power",
+   "layer_id": "compute_physical",
+   "name": "Data-centre developers & power",
+   "order": 3
+  },
+  {
+   "description": "",
+   "id": "memory_networking",
+   "layer_id": "compute_physical",
+   "name": "Memory/HBM",
+   "order": 4
+  }
+ ]
+}

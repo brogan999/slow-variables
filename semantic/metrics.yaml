@@ -1,0 +1,35 @@
+# Every derived metric: inputs are observation series_key globs; sql runs over the `observations` view
+# (approved, non-superseded rows + `subject` = second dotted segment + `q` = calendar quarter) and must
+# return as_of_date, value, obs_ids (+ any dims columns). Change only via reviewed PR, with a rationale.
+version: 1
+metrics:
+  horizon_ratio_80_50:
+    description: METR 50% horizon divided by 80% horizon, per model (~7-10x today; a fall toward 2x would be pro-fast).
+    rationale: N&K reliability argument; the gap between "works half the time" and "works reliably" is the productisation valve.
+    grain: [as_of_date, model]
+    unit: ratio
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["metr.*.horizon_50.pt", "metr.*.horizon_80.pt"]
+    caveats: Rows METR marks beyond the 16h suite ceiling are excluded.
+    sql: |
+      SELECT a.as_of_date, a.subject AS model, a.value_numeric / b.value_numeric AS value, [a.id, b.id] AS obs_ids
+      FROM observations a JOIN observations b ON a.subject = b.subject AND a.as_of_date = b.as_of_date
+      WHERE a.series_key LIKE 'metr.%.horizon_50.pt' AND b.series_key LIKE 'metr.%.horizon_80.pt'
+        AND NOT a.disputed AND NOT b.disputed AND b.value_numeric > 0
+  horizon_doubling_days_80:
+    description: Log-linear fit of the 80% horizon against release date, 2023 onward; doubling time in days.
+    rationale: METR publishes a doubling time for the 50% horizon only; this applies the same fit to the 80% series.
+    grain: [as_of_date]
+    unit: days
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["metr.*.horizon_80.pt"]
+    caveats: Point estimate only, no CI; disputed rows excluded; needs >= 3 points.
+    sql: |
+      SELECT max(as_of_date) AS as_of_date,
+             CASE WHEN count(*) >= 3 THEN ln(2) / regr_slope(ln(value_numeric), epoch_days) END AS value,
+             list(id ORDER BY id) AS obs_ids
+      FROM (SELECT *, date_diff('day', DATE '2023-01-01', as_of_date) AS epoch_days FROM observations
+            WHERE series_key LIKE 'metr.%.horizon_80.pt' AND as_of_date >= DATE '2023-01-01'
+              AND NOT disputed AND value_numeric > 0)

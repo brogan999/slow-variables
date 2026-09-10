@@ -1,0 +1,15 @@
+# Only sources with a connector or a manual row. Health is derived from data/fetchlog.jsonl at export, never stored here.
+sources:
+  - id: metr
+    name: METR time horizons (v1.1)
+    org: METR
+    url: https://metr.org/time-horizons/
+    kind: api
+    default_tier: 1
+    cadence: per_release
+    lens: both
+    connector: metr
+    license: "METR; analysis code MIT at https://github.com/METR/eval-analysis-public"
+    attribution: "METR, Measuring AI Ability to Complete Long Tasks (Horizon v1.1)"
+    expect_series: ["metr.*.horizon_50.pt", "metr.*.horizon_80.pt", "metr.suite.doubling_time_days.pt"]
+    people: ["Beth Barnes", "Thomas Kwa", "Ben West"]

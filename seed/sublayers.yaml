@@ -1,0 +1,23 @@
+# 21 sub-layers (P1 §4.2). Sub-layer 2 also houses the hyperscalers so capex has a home. Entities attach later with dated membership.
+sublayers:
+  - {id: semis, layer_id: compute_physical, order: 1, name: Semiconductors & AI chip startups}
+  - {id: hyperscalers_neoclouds, layer_id: compute_physical, order: 2, name: Hyperscalers, neoclouds & GPU clouds}
+  - {id: dc_power, layer_id: compute_physical, order: 3, name: Data-centre developers & power}
+  - {id: memory_networking, layer_id: compute_physical, order: 4, name: Memory/HBM, networking, photonics, cooling}
+  - {id: frontier_labs, layer_id: model, order: 5, name: Frontier labs}
+  - {id: neolabs, layer_id: model, order: 6, name: Neolabs (founded 2023+)}
+  - {id: open_weight_labs, layer_id: model, order: 7, name: Open-weight & Chinese labs}
+  - {id: human_data, layer_id: training_input, order: 8, name: Human/expert data & labelling}
+  - {id: rl_environments, layer_id: training_input, order: 9, name: RL environments, simulators, verifiers}
+  - {id: post_training, layer_id: training_input, order: 10, name: RLaaS / post-training / continual-learning infra}
+  - {id: synthetic_data, layer_id: training_input, order: 11, name: Synthetic data & pipelines}
+  - {id: data_licensing, layer_id: training_input, order: 12, name: Permissioned data markets & licensing}
+  - {id: evals, layer_id: training_input, order: 13, name: Evals, benchmarks, observability}
+  - {id: inference_serving, layer_id: serving_orchestration, order: 14, name: Inference serving}
+  - {id: routing_gateways, layer_id: serving_orchestration, order: 15, name: Routing, gateways, inference FinOps}
+  - {id: agent_infra, layer_id: serving_orchestration, order: 16, name: Agent infrastructure}
+  - {id: deployment_services, layer_id: deployment_application, order: 17, name: Deployment / FDE / implementation services}
+  - {id: coding_agents, layer_id: deployment_application, order: 18, name: Coding agents & dev tools}
+  - {id: vertical_ai, layer_id: deployment_application, order: 19, name: Vertical AI by domain}
+  - {id: consumer_ai, layer_id: deployment_application, order: 20, name: Consumer AI}
+  - {id: ai_rollups, layer_id: deployment_application, order: 21, name: AI-native rollups / buyout vehicles}

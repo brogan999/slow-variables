@@ -1,0 +1,63 @@
+{
+ "observations": [
+  {
+   "as_of_date": "2026-09-10",
+   "audited_vs_reported": "reported",
+   "content_hash": "aae31902b0519a4da73e16643915e5e8aca13cd3315c3aac893ce3d6dfe92ad9",
+   "dispute_text": null,
+   "disputed": false,
+   "entity_id": null,
+   "extraction_method": "api",
+   "extractor_version": "metr-1",
+   "grade": "A",
+   "gross_vs_net": null,
+   "http_status": 200,
+   "id": "479bfe0ed46088db",
+   "period_start": null,
+   "published_date": "2026-09-10",
+   "q": "2026-07-01 00:00:00",
+   "raw_snippet": "{\"doubling_time_in_days\": {\"all_time_stitched\": {\"point_estimate\": 187.778}, \"from_2023_on\": {\"ci_high\": 158.012, \"ci_low\": 104.428, \"point_estimate\": 128.744}}}",
+   "retrieved_at": "2026-09-10T00:51:13.090038Z",
+   "review_status": "approved",
+   "reviewer_id": null,
+   "run_rate_vs_booked": null,
+   "series_key": "metr.suite.doubling_time_days.pt",
+   "source_id": "metr",
+   "subject": "suite",
+   "supersedes_id": null,
+   "tier": 1,
+   "unit": "days",
+   "url": "https://metr.org/assets/benchmark_results_1_1.yaml",
+   "value_high": 158.012,
+   "value_low": 104.428,
+   "value_numeric": 128.744,
+   "value_text": null
+  }
+ ],
+ "series_key": "metr.suite.doubling_time_days.pt",
+ "source": {
+  "attribution": "METR, Measuring AI Ability to Complete Long Tasks (Horizon v1.1)",
+  "cadence": "per_release",
+  "connector": "metr",
+  "default_tier": 1,
+  "expect_series": [
+   "metr.*.horizon_50.pt",
+   "metr.*.horizon_80.pt",
+   "metr.suite.doubling_time_days.pt"
+  ],
+  "id": "metr",
+  "kind": "api",
+  "lens": "both",
+  "license": "METR; analysis code MIT at https://github.com/METR/eval-analysis-public",
+  "name": "METR time horizons (v1.1)",
+  "org": "METR",
+  "people": [
+   "Beth Barnes",
+   "Thomas Kwa",
+   "Ben West"
+  ],
+  "robots_ok": true,
+  "url": "https://metr.org/time-horizons/"
+ },
+ "unit": "days"
+}

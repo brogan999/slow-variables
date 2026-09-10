@@ -1,0 +1,9 @@
+# Capture lens: the stack, top-down. Seven layers (v2 Appendix D); bucket→layer is many-to-many via crosswalk.yaml.
+layers:
+  - {id: compute_physical, name: Compute & physical, order: 1, description: "Semis, hyperscalers and neoclouds, data centres and power, memory/networking.", dependency_tier: 1}
+  - {id: model, name: Model, order: 2, description: "Frontier labs, neolabs, open-weight and Chinese labs.", dependency_tier: 2}
+  - {id: training_input, name: Training input, order: 3, description: "Human data, RL environments, post-training platforms, synthetic data, licensing, evals.", dependency_tier: 2}
+  - {id: serving_orchestration, name: Serving & orchestration, order: 4, description: "Inference serving, routing and gateways, agent infrastructure.", dependency_tier: 3}
+  - {id: deployment_application, name: Deployment & application, order: 5, description: "Deployment services, coding agents, vertical and consumer apps, rollups.", dependency_tier: 4}
+  - {id: adopters, name: Adopters, order: 6, description: "Enterprises and individuals using the products; indicator-only layer.", dependency_tier: 5}
+  - {id: labour_consumers, name: Labour & consumers, order: 7, description: "Wages, employment and consumer surplus — the welfare residual; indicator-only layer.", dependency_tier: 5}

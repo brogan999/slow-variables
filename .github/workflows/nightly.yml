@@ -1,0 +1,30 @@
+name: nightly
+on:
+  schedule: [{ cron: "17 6 * * *" }]
+  workflow_dispatch:
+permissions: { contents: write, pull-requests: write }
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync
+      - id: ingest
+        run: uv run ai-tracker ingest --all || echo "failed=true" >> "$GITHUB_OUTPUT"
+        env: { AI_TRACKER_USER_AGENT: "ai-tracker nightly (+https://github.com/brogan999/ai-tracker)" }
+      - run: uv run ai-tracker build && uv run ai-tracker evaluate && uv run ai-tracker check && uv run ai-tracker export
+      - uses: actions/upload-artifact@v4
+        with: { name: raw-cache, path: ingest/cache, retention-days: 90, if-no-files-found: ignore }
+      - uses: peter-evans/create-pull-request@v7
+        with:
+          branch: nightly/${{ github.run_id }}
+          title: "nightly: ${{ steps.ingest.outputs.failed == 'true' && 'PARTIAL ' || '' }}observations ${{ github.run_started_at }}"
+          body-path: data/summary.md
+          commit-message: "nightly ingest\n\nCo-Authored-By: ai-tracker nightly <noreply@github.com>"
+          add-paths: |
+            data/**
+            web/data/**
+            web/public/data/**
+      - if: steps.ingest.outputs.failed == 'true'
+        run: exit 1

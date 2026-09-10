@@ -1,0 +1,1097 @@
+{
+ "crosswalk": [
+  {
+   "bucket_id": "methods",
+   "layer_id": "model",
+   "note": "Capability growth is the model layer's product; inference price at fixed capability \u21c4 price-per-token pass-through; open-weights lag \u21c4 open-vs-closed gap.",
+   "relation": "same_valve",
+   "shared_indicators": [
+    "metr_horizon_50",
+    "metr_horizon_80",
+    "horizon_ratio_80_50"
+   ],
+   "sublayer_id": null
+  }
+ ],
+ "dependency_tier": 2,
+ "description": "Frontier labs, neolabs, open-weight and Chinese labs.",
+ "id": "model",
+ "indicators": [
+  {
+   "bucket_id": "methods",
+   "confidence": 80,
+   "grade": "A",
+   "id": "metr_horizon_50",
+   "latest": {
+    "as_of": "2026-04-07",
+    "disputed": true,
+    "grade": "A",
+    "high": 3304.261235,
+    "low": 508.876789,
+    "obs_ids": [
+     "a3cd6bcee336eaa3"
+    ],
+    "series_key": "metr.claude_mythos_preview_early_inspect.horizon_50.pt",
+    "subject": "claude_mythos_preview_early_inspect",
+    "unit": "minutes",
+    "value": 1044.780145
+   },
+   "layer_id": "model",
+   "leading_lagging": "leading",
+   "n_observations": 27,
+   "name": "METR 50% time horizon",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2022-03-15",
+     "disputed": false,
+     "grade": "A",
+     "high": 1.115905,
+     "low": 0.255148,
+     "obs_ids": [
+      "4a682b8c20f32dfe"
+     ],
+     "series_key": "metr.gpt_3_5_turbo_instruct.horizon_50.pt",
+     "subject": "gpt_3_5_turbo_instruct",
+     "unit": "minutes",
+     "value": 0.599247
+    },
+    {
+     "as_of": "2023-03-14",
+     "disputed": false,
+     "grade": "A",
+     "high": 7.995283,
+     "low": 1.93292,
+     "obs_ids": [
+      "96d016fade882963"
+     ],
+     "series_key": "metr.gpt_4.horizon_50.pt",
+     "subject": "gpt_4",
+     "unit": "minutes",
+     "value": 3.987428
+    },
+    {
+     "as_of": "2023-11-06",
+     "disputed": false,
+     "grade": "A",
+     "high": 8.443226,
+     "low": 1.866859,
+     "obs_ids": [
+      "cd50d5649e0a06f1"
+     ],
+     "series_key": "metr.gpt_4_1106_inspect.horizon_50.pt",
+     "subject": "gpt_4_1106_inspect",
+     "unit": "minutes",
+     "value": 4.044959
+    },
+    {
+     "as_of": "2024-03-04",
+     "disputed": false,
+     "grade": "A",
+     "high": 8.76484,
+     "low": 1.706313,
+     "obs_ids": [
+      "fb7435cdf6c0c3f4"
+     ],
+     "series_key": "metr.claude_3_opus_inspect.horizon_50.pt",
+     "subject": "claude_3_opus_inspect",
+     "unit": "minutes",
+     "value": 3.952262
+    },
+    {
+     "as_of": "2024-04-09",
+     "disputed": false,
+     "grade": "A",
+     "high": 6.736613,
+     "low": 1.980046,
+     "obs_ids": [
+      "0d21fe651b2bd589"
+     ],
+     "series_key": "metr.gpt_4_turbo_inspect.horizon_50.pt",
+     "subject": "gpt_4_turbo_inspect",
+     "unit": "minutes",
+     "value": 3.732787
+    },
+    {
+     "as_of": "2024-05-13",
+     "disputed": false,
+     "grade": "A",
+     "high": 12.905741,
+     "low": 4.001482,
+     "obs_ids": [
+      "7c977050ff6a8cfe"
+     ],
+     "series_key": "metr.gpt_4o_inspect.horizon_50.pt",
+     "subject": "gpt_4o_inspect",
+     "unit": "minutes",
+     "value": 6.991195
+    },
+    {
+     "as_of": "2024-06-20",
+     "disputed": false,
+     "grade": "A",
+     "high": 22.384214,
+     "low": 5.489734,
+     "obs_ids": [
+      "efa58e1ccf788fa1"
+     ],
+     "series_key": "metr.claude_3_5_sonnet_20240620_inspect.horizon_50.pt",
+     "subject": "claude_3_5_sonnet_20240620_inspect",
+     "unit": "minutes",
+     "value": 11.395377
+    },
+    {
+     "as_of": "2024-09-12",
+     "disputed": false,
+     "grade": "A",
+     "high": 33.379877,
+     "low": 11.716193,
+     "obs_ids": [
+      "734779b57a58f38f"
+     ],
+     "series_key": "metr.o1_preview.horizon_50.pt",
+     "subject": "o1_preview",
+     "unit": "minutes",
+     "value": 20.326586
+    },
+    {
+     "as_of": "2024-10-22",
+     "disputed": false,
+     "grade": "A",
+     "high": 40.82028,
+     "low": 10.144026,
+     "obs_ids": [
+      "1963199165cd8c93"
+     ],
+     "series_key": "metr.claude_3_5_sonnet_20241022_inspect.horizon_50.pt",
+     "subject": "claude_3_5_sonnet_20241022_inspect",
+     "unit": "minutes",
+     "value": 20.522872
+    },
+    {
+     "as_of": "2024-12-05",
+     "disputed": false,
+     "grade": "A",
+     "high": 64.95249,
+     "low": 21.164512,
+     "obs_ids": [
+      "37e97a6fcbe1c2ca"
+     ],
+     "series_key": "metr.o1_inspect.horizon_50.pt",
+     "subject": "o1_inspect",
+     "unit": "minutes",
+     "value": 38.831588
+    },
+    {
+     "as_of": "2025-02-24",
+     "disputed": false,
+     "grade": "A",
+     "high": 104.226017,
+     "low": 33.006168,
+     "obs_ids": [
+      "68864ed59f5d9a57"
+     ],
+     "series_key": "metr.claude_3_7_sonnet_inspect.horizon_50.pt",
+     "subject": "claude_3_7_sonnet_inspect",
+     "unit": "minutes",
+     "value": 60.388937
+    },
+    {
+     "as_of": "2025-04-16",
+     "disputed": false,
+     "grade": "A",
+     "high": 190.943818,
+     "low": 74.615398,
+     "obs_ids": [
+      "6b19d566b4f5cd57"
+     ],
+     "series_key": "metr.o3_inspect.horizon_50.pt",
+     "subject": "o3_inspect",
+     "unit": "minutes",
+     "value": 119.732634
+    },
+    {
+     "as_of": "2025-05-22",
+     "disputed": false,
+     "grade": "A",
+     "high": 163.454074,
+     "low": 59.994073,
+     "obs_ids": [
+      "6af93ac0d37ce9a2"
+     ],
+     "series_key": "metr.claude_4_opus_inspect.horizon_50.pt",
+     "subject": "claude_4_opus_inspect",
+     "unit": "minutes",
+     "value": 100.366123
+    },
+    {
+     "as_of": "2025-08-05",
+     "disputed": false,
+     "grade": "A",
+     "high": 159.451918,
+     "low": 59.272391,
+     "obs_ids": [
+      "ae5278061f1da61c"
+     ],
+     "series_key": "metr.claude_4_1_opus_inspect.horizon_50.pt",
+     "subject": "claude_4_1_opus_inspect",
+     "unit": "minutes",
+     "value": 100.472004
+    },
+    {
+     "as_of": "2025-08-07",
+     "disputed": false,
+     "grade": "A",
+     "high": 405.551565,
+     "low": 112.641357,
+     "obs_ids": [
+      "261c1f51f1f6b138"
+     ],
+     "series_key": "metr.gpt_5_2025_08_07_inspect.horizon_50.pt",
+     "subject": "gpt_5_2025_08_07_inspect",
+     "unit": "minutes",
+     "value": 203.012577
+    },
+    {
+     "as_of": "2025-11-18",
+     "disputed": false,
+     "grade": "A",
+     "high": 379.235434,
+     "low": 139.565157,
+     "obs_ids": [
+      "3466aea4ed2495c4"
+     ],
+     "series_key": "metr.gemini_3_pro.horizon_50.pt",
+     "subject": "gemini_3_pro",
+     "unit": "minutes",
+     "value": 224.325884
+    },
+    {
+     "as_of": "2025-11-19",
+     "disputed": false,
+     "grade": "A",
+     "high": 396.206723,
+     "low": 134.31077,
+     "obs_ids": [
+      "a2aa2e4df87f5448"
+     ],
+     "series_key": "metr.gpt_5_1_codex_max_inspect.horizon_50.pt",
+     "subject": "gpt_5_1_codex_max_inspect",
+     "unit": "minutes",
+     "value": 223.714694
+    },
+    {
+     "as_of": "2025-11-24",
+     "disputed": false,
+     "grade": "A",
+     "high": 623.704698,
+     "low": 161.717714,
+     "obs_ids": [
+      "72bcb9d860605a44"
+     ],
+     "series_key": "metr.claude_opus_4_5_inspect.horizon_50.pt",
+     "subject": "claude_opus_4_5_inspect",
+     "unit": "minutes",
+     "value": 292.994594
+    },
+    {
+     "as_of": "2025-12-11",
+     "disputed": false,
+     "grade": "A",
+     "high": 815.177445,
+     "low": 198.067494,
+     "obs_ids": [
+      "8a2d699724cf4d5e"
+     ],
+     "series_key": "metr.gpt_5_2.horizon_50.pt",
+     "subject": "gpt_5_2",
+     "unit": "minutes",
+     "value": 352.249302
+    },
+    {
+     "as_of": "2026-02-05",
+     "disputed": false,
+     "grade": "A",
+     "high": 3633.786163,
+     "low": 316.685725,
+     "obs_ids": [
+      "39c8213ab061a5f7"
+     ],
+     "series_key": "metr.claude_opus_4_6_inspect.horizon_50.pt",
+     "subject": "claude_opus_4_6_inspect",
+     "unit": "minutes",
+     "value": 718.80683
+    },
+    {
+     "as_of": "2026-02-05",
+     "disputed": false,
+     "grade": "A",
+     "high": 816.351994,
+     "low": 194.913134,
+     "obs_ids": [
+      "e466aae4890e8f57"
+     ],
+     "series_key": "metr.gpt_5_3_codex.horizon_50.pt",
+     "subject": "gpt_5_3_codex",
+     "unit": "minutes",
+     "value": 349.530732
+    },
+    {
+     "as_of": "2026-02-19",
+     "disputed": false,
+     "grade": "A",
+     "high": 694.750898,
+     "low": 233.50073,
+     "obs_ids": [
+      "2eb7c897f31e5b3e"
+     ],
+     "series_key": "metr.gemini_3_1_pro.horizon_50.pt",
+     "subject": "gemini_3_1_pro",
+     "unit": "minutes",
+     "value": 384.147435
+    },
+    {
+     "as_of": "2026-03-05",
+     "disputed": false,
+     "grade": "A",
+     "high": 768.779526,
+     "low": 186.581591,
+     "obs_ids": [
+      "858c619bbf5d9edd"
+     ],
+     "series_key": "metr.gpt_5_4.horizon_50.pt",
+     "subject": "gpt_5_4",
+     "unit": "minutes",
+     "value": 341.735276
+    },
+    {
+     "as_of": "2026-04-07",
+     "disputed": true,
+     "grade": "A",
+     "high": 3304.261235,
+     "low": 508.876789,
+     "obs_ids": [
+      "a3cd6bcee336eaa3"
+     ],
+     "series_key": "metr.claude_mythos_preview_early_inspect.horizon_50.pt",
+     "subject": "claude_mythos_preview_early_inspect",
+     "unit": "minutes",
+     "value": 1044.780145
+    }
+   ],
+   "stale_as_of": null,
+   "status": "emerging",
+   "unit": "minutes",
+   "valve_measured": "invention_to_product"
+  },
+  {
+   "bucket_id": "methods",
+   "confidence": 70,
+   "grade": "A",
+   "id": "metr_horizon_80",
+   "latest": {
+    "as_of": "2026-04-07",
+    "disputed": false,
+    "grade": "A",
+    "high": 398.514614,
+    "low": 97.30292,
+    "obs_ids": [
+     "c256ff03726522bf"
+    ],
+    "series_key": "metr.claude_mythos_preview_early_inspect.horizon_80.pt",
+    "subject": "claude_mythos_preview_early_inspect",
+    "unit": "minutes",
+    "value": 185.911829
+   },
+   "layer_id": "model",
+   "leading_lagging": "leading",
+   "n_observations": 26,
+   "name": "METR 80% time horizon",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2022-03-15",
+     "disputed": false,
+     "grade": "A",
+     "high": 0.492933,
+     "low": 0.141649,
+     "obs_ids": [
+      "5e6df7810b5d462b"
+     ],
+     "series_key": "metr.gpt_3_5_turbo_instruct.horizon_80.pt",
+     "subject": "gpt_3_5_turbo_instruct",
+     "unit": "minutes",
+     "value": 0.25538
+    },
+    {
+     "as_of": "2023-03-14",
+     "disputed": false,
+     "grade": "A",
+     "high": 2.523746,
+     "low": 0.342984,
+     "obs_ids": [
+      "a53da98c12dc8c0d"
+     ],
+     "series_key": "metr.gpt_4.horizon_80.pt",
+     "subject": "gpt_4",
+     "unit": "minutes",
+     "value": 0.889561
+    },
+    {
+     "as_of": "2023-11-06",
+     "disputed": false,
+     "grade": "A",
+     "high": 2.358414,
+     "low": 0.276599,
+     "obs_ids": [
+      "29446d6c837793d5"
+     ],
+     "series_key": "metr.gpt_4_1106_inspect.horizon_80.pt",
+     "subject": "gpt_4_1106_inspect",
+     "unit": "minutes",
+     "value": 0.783032
+    },
+    {
+     "as_of": "2024-03-04",
+     "disputed": false,
+     "grade": "A",
+     "high": 2.118276,
+     "low": 0.190491,
+     "obs_ids": [
+      "f1409c691bdca4ec"
+     ],
+     "series_key": "metr.claude_3_opus_inspect.horizon_80.pt",
+     "subject": "claude_3_opus_inspect",
+     "unit": "minutes",
+     "value": 0.638973
+    },
+    {
+     "as_of": "2024-04-09",
+     "disputed": false,
+     "grade": "A",
+     "high": 2.196806,
+     "low": 0.428277,
+     "obs_ids": [
+      "deb6a1ab9fff15aa"
+     ],
+     "series_key": "metr.gpt_4_turbo_inspect.horizon_80.pt",
+     "subject": "gpt_4_turbo_inspect",
+     "unit": "minutes",
+     "value": 0.927933
+    },
+    {
+     "as_of": "2024-05-13",
+     "disputed": false,
+     "grade": "A",
+     "high": 3.01517,
+     "low": 0.562997,
+     "obs_ids": [
+      "2dc1a032ed30619b"
+     ],
+     "series_key": "metr.gpt_4o_inspect.horizon_80.pt",
+     "subject": "gpt_4o_inspect",
+     "unit": "minutes",
+     "value": 1.267009
+    },
+    {
+     "as_of": "2024-06-20",
+     "disputed": false,
+     "grade": "A",
+     "high": 4.573519,
+     "low": 0.57927,
+     "obs_ids": [
+      "145115d411f64a37"
+     ],
+     "series_key": "metr.claude_3_5_sonnet_20240620_inspect.horizon_80.pt",
+     "subject": "claude_3_5_sonnet_20240620_inspect",
+     "unit": "minutes",
+     "value": 1.671757
+    },
+    {
+     "as_of": "2024-09-12",
+     "disputed": false,
+     "grade": "A",
+     "high": 8.912444,
+     "low": 2.012646,
+     "obs_ids": [
+      "b5c1303bf31f5a8d"
+     ],
+     "series_key": "metr.o1_preview.horizon_80.pt",
+     "subject": "o1_preview",
+     "unit": "minutes",
+     "value": 4.420545
+    },
+    {
+     "as_of": "2024-10-22",
+     "disputed": false,
+     "grade": "A",
+     "high": 7.363864,
+     "low": 0.89379,
+     "obs_ids": [
+      "0fb6ae10625216fb"
+     ],
+     "series_key": "metr.claude_3_5_sonnet_20241022_inspect.horizon_80.pt",
+     "subject": "claude_3_5_sonnet_20241022_inspect",
+     "unit": "minutes",
+     "value": 2.595677
+    },
+    {
+     "as_of": "2024-12-05",
+     "disputed": false,
+     "grade": "A",
+     "high": 16.640636,
+     "low": 3.036033,
+     "obs_ids": [
+      "9450442af9ff97b6"
+     ],
+     "series_key": "metr.o1_inspect.horizon_80.pt",
+     "subject": "o1_inspect",
+     "unit": "minutes",
+     "value": 7.090121
+    },
+    {
+     "as_of": "2025-02-24",
+     "disputed": false,
+     "grade": "A",
+     "high": 28.889879,
+     "low": 4.575608,
+     "obs_ids": [
+      "095bb21142dc666e"
+     ],
+     "series_key": "metr.claude_3_7_sonnet_inspect.horizon_80.pt",
+     "subject": "claude_3_7_sonnet_inspect",
+     "unit": "minutes",
+     "value": 12.09179
+    },
+    {
+     "as_of": "2025-04-16",
+     "disputed": false,
+     "grade": "A",
+     "high": 57.823511,
+     "low": 15.127348,
+     "obs_ids": [
+      "d1bb5ffe97ca5bad"
+     ],
+     "series_key": "metr.o3_inspect.horizon_80.pt",
+     "subject": "o3_inspect",
+     "unit": "minutes",
+     "value": 29.981603
+    },
+    {
+     "as_of": "2025-05-22",
+     "disputed": false,
+     "grade": "A",
+     "high": 41.937268,
+     "low": 8.483125,
+     "obs_ids": [
+      "1f69c37251b857fb"
+     ],
+     "series_key": "metr.claude_4_opus_inspect.horizon_80.pt",
+     "subject": "claude_4_opus_inspect",
+     "unit": "minutes",
+     "value": 20.429752
+    },
+    {
+     "as_of": "2025-08-05",
+     "disputed": false,
+     "grade": "A",
+     "high": 47.785951,
+     "low": 10.538456,
+     "obs_ids": [
+      "fecd07e2f7444679"
+     ],
+     "series_key": "metr.claude_4_1_opus_inspect.horizon_80.pt",
+     "subject": "claude_4_1_opus_inspect",
+     "unit": "minutes",
+     "value": 23.455761
+    },
+    {
+     "as_of": "2025-08-07",
+     "disputed": false,
+     "grade": "A",
+     "high": 70.093125,
+     "low": 19.184874,
+     "obs_ids": [
+      "47db79bda335bcb0"
+     ],
+     "series_key": "metr.gpt_5_2025_08_07_inspect.horizon_80.pt",
+     "subject": "gpt_5_2025_08_07_inspect",
+     "unit": "minutes",
+     "value": 38.312431
+    },
+    {
+     "as_of": "2025-11-18",
+     "disputed": false,
+     "grade": "A",
+     "high": 103.295501,
+     "low": 25.650451,
+     "obs_ids": [
+      "833be5d2cc9c9421"
+     ],
+     "series_key": "metr.gemini_3_pro.horizon_80.pt",
+     "subject": "gemini_3_pro",
+     "unit": "minutes",
+     "value": 54.142849
+    },
+    {
+     "as_of": "2025-11-19",
+     "disputed": false,
+     "grade": "A",
+     "high": 88.365435,
+     "low": 27.30204,
+     "obs_ids": [
+      "8de1effa26863680"
+     ],
+     "series_key": "metr.gpt_5_1_codex_max_inspect.horizon_80.pt",
+     "subject": "gpt_5_1_codex_max_inspect",
+     "unit": "minutes",
+     "value": 50.632499
+    },
+    {
+     "as_of": "2025-11-24",
+     "disputed": false,
+     "grade": "A",
+     "high": 104.641318,
+     "low": 20.660485,
+     "obs_ids": [
+      "75c93027341be6a5"
+     ],
+     "series_key": "metr.claude_opus_4_5_inspect.horizon_80.pt",
+     "subject": "claude_opus_4_5_inspect",
+     "unit": "minutes",
+     "value": 49.430584
+    },
+    {
+     "as_of": "2025-12-11",
+     "disputed": false,
+     "grade": "A",
+     "high": 131.730719,
+     "low": 31.665111,
+     "obs_ids": [
+      "09061051488d31d8"
+     ],
+     "series_key": "metr.gpt_5_2.horizon_80.pt",
+     "subject": "gpt_5_2",
+     "unit": "minutes",
+     "value": 66.002649
+    },
+    {
+     "as_of": "2026-02-05",
+     "disputed": false,
+     "grade": "A",
+     "high": 170.437873,
+     "low": 27.026521,
+     "obs_ids": [
+      "8f73b56b30434655"
+     ],
+     "series_key": "metr.claude_opus_4_6_inspect.horizon_80.pt",
+     "subject": "claude_opus_4_6_inspect",
+     "unit": "minutes",
+     "value": 69.874587
+    },
+    {
+     "as_of": "2026-02-05",
+     "disputed": false,
+     "grade": "A",
+     "high": 122.058963,
+     "low": 22.361504,
+     "obs_ids": [
+      "959db6dd7d0e15af"
+     ],
+     "series_key": "metr.gpt_5_3_codex.horizon_80.pt",
+     "subject": "gpt_5_3_codex",
+     "unit": "minutes",
+     "value": 54.739407
+    },
+    {
+     "as_of": "2026-02-19",
+     "disputed": false,
+     "grade": "A",
+     "high": 158.618017,
+     "low": 52.025934,
+     "obs_ids": [
+      "5eb0848814989421"
+     ],
+     "series_key": "metr.gemini_3_1_pro.horizon_80.pt",
+     "subject": "gemini_3_1_pro",
+     "unit": "minutes",
+     "value": 89.801503
+    },
+    {
+     "as_of": "2026-03-05",
+     "disputed": false,
+     "grade": "A",
+     "high": 108.679232,
+     "low": 23.957027,
+     "obs_ids": [
+      "11a8bbd24c5c99cb"
+     ],
+     "series_key": "metr.gpt_5_4.horizon_80.pt",
+     "subject": "gpt_5_4",
+     "unit": "minutes",
+     "value": 53.877851
+    },
+    {
+     "as_of": "2026-04-07",
+     "disputed": false,
+     "grade": "A",
+     "high": 398.514614,
+     "low": 97.30292,
+     "obs_ids": [
+      "c256ff03726522bf"
+     ],
+     "series_key": "metr.claude_mythos_preview_early_inspect.horizon_80.pt",
+     "subject": "claude_mythos_preview_early_inspect",
+     "unit": "minutes",
+     "value": 185.911829
+    }
+   ],
+   "stale_as_of": null,
+   "status": "emerging",
+   "unit": "minutes",
+   "valve_measured": "invention_to_product"
+  },
+  {
+   "bucket_id": "methods",
+   "confidence": 70,
+   "grade": "A",
+   "id": "horizon_ratio_80_50",
+   "latest": {
+    "as_of": "2026-03-05",
+    "dims": {
+     "model": "gpt_5_4"
+    },
+    "obs_ids": [
+     "11a8bbd24c5c99cb",
+     "858c619bbf5d9edd"
+    ],
+    "unit": "ratio",
+    "value": 6.342778519507023
+   },
+   "layer_id": "model",
+   "leading_lagging": "leading",
+   "n_observations": 50,
+   "name": "50%/80% horizon ratio",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2020-05-28",
+     "dims": {
+      "model": "davinci_002"
+     },
+     "obs_ids": [
+      "2325ad877ea0581f",
+      "58c5e6775cc06fc5"
+     ],
+     "unit": "ratio",
+     "value": 2.561559799423877
+    },
+    {
+     "as_of": "2022-03-15",
+     "dims": {
+      "model": "gpt_3_5_turbo_instruct"
+     },
+     "obs_ids": [
+      "4a682b8c20f32dfe",
+      "5e6df7810b5d462b"
+     ],
+     "unit": "ratio",
+     "value": 2.3464915028584854
+    },
+    {
+     "as_of": "2023-03-14",
+     "dims": {
+      "model": "gpt_4"
+     },
+     "obs_ids": [
+      "96d016fade882963",
+      "a53da98c12dc8c0d"
+     ],
+     "unit": "ratio",
+     "value": 4.482467194492564
+    },
+    {
+     "as_of": "2023-11-06",
+     "dims": {
+      "model": "gpt_4_1106_inspect"
+     },
+     "obs_ids": [
+      "29446d6c837793d5",
+      "cd50d5649e0a06f1"
+     ],
+     "unit": "ratio",
+     "value": 5.165764617537981
+    },
+    {
+     "as_of": "2024-03-04",
+     "dims": {
+      "model": "claude_3_opus_inspect"
+     },
+     "obs_ids": [
+      "f1409c691bdca4ec",
+      "fb7435cdf6c0c3f4"
+     ],
+     "unit": "ratio",
+     "value": 6.1853349046047335
+    },
+    {
+     "as_of": "2024-04-09",
+     "dims": {
+      "model": "gpt_4_turbo_inspect"
+     },
+     "obs_ids": [
+      "0d21fe651b2bd589",
+      "deb6a1ab9fff15aa"
+     ],
+     "unit": "ratio",
+     "value": 4.022690215780665
+    },
+    {
+     "as_of": "2024-05-13",
+     "dims": {
+      "model": "gpt_4o_inspect"
+     },
+     "obs_ids": [
+      "2dc1a032ed30619b",
+      "7c977050ff6a8cfe"
+     ],
+     "unit": "ratio",
+     "value": 5.517873195849438
+    },
+    {
+     "as_of": "2024-06-20",
+     "dims": {
+      "model": "claude_3_5_sonnet_20240620_inspect"
+     },
+     "obs_ids": [
+      "145115d411f64a37",
+      "efa58e1ccf788fa1"
+     ],
+     "unit": "ratio",
+     "value": 6.816407528127593
+    },
+    {
+     "as_of": "2024-09-12",
+     "dims": {
+      "model": "o1_preview"
+     },
+     "obs_ids": [
+      "734779b57a58f38f",
+      "b5c1303bf31f5a8d"
+     ],
+     "unit": "ratio",
+     "value": 4.598208139494112
+    },
+    {
+     "as_of": "2024-10-22",
+     "dims": {
+      "model": "claude_3_5_sonnet_20241022_inspect"
+     },
+     "obs_ids": [
+      "0fb6ae10625216fb",
+      "1963199165cd8c93"
+     ],
+     "unit": "ratio",
+     "value": 7.906558481660084
+    },
+    {
+     "as_of": "2024-12-05",
+     "dims": {
+      "model": "o1_inspect"
+     },
+     "obs_ids": [
+      "37e97a6fcbe1c2ca",
+      "9450442af9ff97b6"
+     ],
+     "unit": "ratio",
+     "value": 5.476858293391609
+    },
+    {
+     "as_of": "2025-02-24",
+     "dims": {
+      "model": "claude_3_7_sonnet_inspect"
+     },
+     "obs_ids": [
+      "095bb21142dc666e",
+      "68864ed59f5d9a57"
+     ],
+     "unit": "ratio",
+     "value": 4.994209872979931
+    },
+    {
+     "as_of": "2025-04-16",
+     "dims": {
+      "model": "o3_inspect"
+     },
+     "obs_ids": [
+      "6b19d566b4f5cd57",
+      "d1bb5ffe97ca5bad"
+     ],
+     "unit": "ratio",
+     "value": 3.993536769865174
+    },
+    {
+     "as_of": "2025-05-22",
+     "dims": {
+      "model": "claude_4_opus_inspect"
+     },
+     "obs_ids": [
+      "1f69c37251b857fb",
+      "6af93ac0d37ce9a2"
+     ],
+     "unit": "ratio",
+     "value": 4.912743091546094
+    },
+    {
+     "as_of": "2025-08-05",
+     "dims": {
+      "model": "claude_4_1_opus_inspect"
+     },
+     "obs_ids": [
+      "ae5278061f1da61c",
+      "fecd07e2f7444679"
+     ],
+     "unit": "ratio",
+     "value": 4.283468099798595
+    },
+    {
+     "as_of": "2025-08-07",
+     "dims": {
+      "model": "gpt_5_2025_08_07_inspect"
+     },
+     "obs_ids": [
+      "261c1f51f1f6b138",
+      "47db79bda335bcb0"
+     ],
+     "unit": "ratio",
+     "value": 5.298869627980538
+    },
+    {
+     "as_of": "2025-11-18",
+     "dims": {
+      "model": "gemini_3_pro"
+     },
+     "obs_ids": [
+      "3466aea4ed2495c4",
+      "833be5d2cc9c9421"
+     ],
+     "unit": "ratio",
+     "value": 4.143222755049333
+    },
+    {
+     "as_of": "2025-11-19",
+     "dims": {
+      "model": "gpt_5_1_codex_max_inspect"
+     },
+     "obs_ids": [
+      "8de1effa26863680",
+      "a2aa2e4df87f5448"
+     ],
+     "unit": "ratio",
+     "value": 4.418401193273119
+    },
+    {
+     "as_of": "2025-11-24",
+     "dims": {
+      "model": "claude_opus_4_5_inspect"
+     },
+     "obs_ids": [
+      "72bcb9d860605a44",
+      "75c93027341be6a5"
+     ],
+     "unit": "ratio",
+     "value": 5.927394950462248
+    },
+    {
+     "as_of": "2025-12-11",
+     "dims": {
+      "model": "gpt_5_2"
+     },
+     "obs_ids": [
+      "09061051488d31d8",
+      "8a2d699724cf4d5e"
+     ],
+     "unit": "ratio",
+     "value": 5.3368964327477215
+    },
+    {
+     "as_of": "2026-02-05",
+     "dims": {
+      "model": "claude_opus_4_6_inspect"
+     },
+     "obs_ids": [
+      "39c8213ab061a5f7",
+      "8f73b56b30434655"
+     ],
+     "unit": "ratio",
+     "value": 10.28709951444865
+    },
+    {
+     "as_of": "2026-02-05",
+     "dims": {
+      "model": "gpt_5_3_codex"
+     },
+     "obs_ids": [
+      "959db6dd7d0e15af",
+      "e466aae4890e8f57"
+     ],
+     "unit": "ratio",
+     "value": 6.385358394547461
+    },
+    {
+     "as_of": "2026-02-19",
+     "dims": {
+      "model": "gemini_3_1_pro"
+     },
+     "obs_ids": [
+      "2eb7c897f31e5b3e",
+      "5eb0848814989421"
+     ],
+     "unit": "ratio",
+     "value": 4.277739482823578
+    },
+    {
+     "as_of": "2026-03-05",
+     "dims": {
+      "model": "gpt_5_4"
+     },
+     "obs_ids": [
+      "11a8bbd24c5c99cb",
+      "858c619bbf5d9edd"
+     ],
+     "unit": "ratio",
+     "value": 6.342778519507023
+    }
+   ],
+   "stale_as_of": null,
+   "status": "consistent_with_normal",
+   "unit": "ratio",
+   "valve_measured": "invention_to_product"
+  }
+ ],
+ "name": "Model",
+ "order": 2,
+ "sublayers": [
+  {
+   "description": "",
+   "id": "frontier_labs",
+   "layer_id": "model",
+   "name": "Frontier labs",
+   "order": 5
+  },
+  {
+   "description": "",
+   "id": "neolabs",
+   "layer_id": "model",
+   "name": "Neolabs (founded 2023+)",
+   "order": 6
+  },
+  {
+   "description": "",
+   "id": "open_weight_labs",
+   "layer_id": "model",
+   "name": "Open-weight & Chinese labs",
+   "order": 7
+  }
+ ]
+}

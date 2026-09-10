@@ -1,0 +1,63 @@
+{
+ "crosswalk": [
+  {
+   "bucket_id": "products",
+   "layer_id": "deployment_application",
+   "note": "Uplift RCTs, pilot\u2192production and app-layer margin net of inference measure the same valve.",
+   "relation": "same_valve",
+   "shared_indicators": [],
+   "sublayer_id": null
+  },
+  {
+   "bucket_id": "adaptation",
+   "layer_id": "deployment_application",
+   "note": "Deployment/FDE services capture part of the surplus that adaptation creates.",
+   "relation": "leak_from",
+   "shared_indicators": [],
+   "sublayer_id": "deployment_services"
+  }
+ ],
+ "dependency_tier": 4,
+ "description": "Deployment services, coding agents, vertical and consumer apps, rollups.",
+ "id": "deployment_application",
+ "indicators": [],
+ "name": "Deployment & application",
+ "order": 5,
+ "sublayers": [
+  {
+   "description": "",
+   "id": "deployment_services",
+   "layer_id": "deployment_application",
+   "name": "Deployment / FDE / implementation services",
+   "order": 17
+  },
+  {
+   "description": "",
+   "id": "coding_agents",
+   "layer_id": "deployment_application",
+   "name": "Coding agents & dev tools",
+   "order": 18
+  },
+  {
+   "description": "",
+   "id": "vertical_ai",
+   "layer_id": "deployment_application",
+   "name": "Vertical AI by domain",
+   "order": 19
+  },
+  {
+   "description": "",
+   "id": "consumer_ai",
+   "layer_id": "deployment_application",
+   "name": "Consumer AI",
+   "order": 20
+  },
+  {
+   "description": "",
+   "id": "ai_rollups",
+   "layer_id": "deployment_application",
+   "name": "AI-native rollups / buyout vehicles",
+   "order": 21
+  }
+ ]
+}

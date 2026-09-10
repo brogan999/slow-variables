@@ -1,0 +1,28 @@
+import Link from "next/link";
+import { index, words } from "@/lib/data";
+
+export default function CrosswalkPage() {
+  const { crosswalk, buckets, layers, sublayers, indicators } = index();
+  return (
+    <div className="flex flex-col gap-4">
+      <h1 className="text-2xl font-semibold tracking-tight">Crosswalk</h1>
+      <p className="text-sm text-ink-2 max-w-3xl">The same observations carry a diffusion address (bucket, valve) and a capture address (layer, sub-layer). Diffusion asks how fast value moves; capture asks who keeps it. The leak on the diffusion diagram is the capture lens.</p>
+      <div className="overflow-x-auto">
+        <table className="data w-full text-sm">
+          <thead><tr><th>Diffusion bucket</th><th>Relation</th><th>Capture layer</th><th>Note</th><th>Shared indicators</th></tr></thead>
+          <tbody>
+            {crosswalk.map((c, i) => (
+              <tr key={i}>
+                <td>{c.bucket_id === "leak" ? <span>Leak</span> : <Link href={`/buckets/${c.bucket_id}`} className="font-medium hover:underline">{buckets.find((b) => b.id === c.bucket_id)?.name}</Link>}</td>
+                <td className="text-ink-2 whitespace-nowrap">{words(c.relation)}</td>
+                <td><Link href={`/layers/${c.layer_id}`} className="font-medium hover:underline">{layers.find((l) => l.id === c.layer_id)?.name}</Link>{c.sublayer_id ? <span className="text-muted"> / {sublayers.find((s) => s.id === c.sublayer_id)?.name}</span> : null}</td>
+                <td className="text-ink-2">{c.note}</td>
+                <td className="flex flex-wrap gap-x-2">{c.shared_indicators.map((s) => <Link key={s} href={`/indicators/${s}`} className="hover:underline">{indicators.find((i) => i.id === s)?.name ?? s}</Link>)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}

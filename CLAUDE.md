@@ -2,7 +2,7 @@
 
 Read `docs/plan.md` first; `docs/briefs/ai-tracker-brief-v2.md` is the canonical spec, `docs/briefs/value-capture-tracker-part1.md` the capture-lens appendix.
 
-- Never write a status directly; propose via a `StatusEvent` row in `data/proposed_status_events.jsonl` in a PR. `check` fails if an indicator's status ≠ its latest StatusEvent.
+- Status lives only in `data/status_events.jsonl`. `evaluate` proposes rows into `data/proposed_status_events.jsonl`; a human writes the `reason`; `approve` commits them. Never write a status into seed YAML.
 - Never hard-code a URL you have not fetched in this session; fetch, then store with `retrieved_at`, `http_status`, `content_hash`.
 - Every observation needs `as_of_date`, `published_date`, `retrieved_at`, `url`, `tier`, `audited_vs_reported`, `extraction_method`, `raw_snippet`. Pydantic rejects anything less.
 - Figures from the briefs' appendices enter only through `seed/manual_observations.yaml`; `ingest manual` fetches the URL and asserts `raw_snippet` is a verbatim substring of the page. Never type a number into an indicator.

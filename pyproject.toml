@@ -28,3 +28,7 @@ testpaths = ["tests"]
 [tool.mypy]
 strict = true
 ignore_missing_imports = true
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B"]
+ignore = ["B904", "B905", "E501"]

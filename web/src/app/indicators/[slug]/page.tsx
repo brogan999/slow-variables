@@ -1,0 +1,132 @@
+import Link from "next/link";
+import { BandChart } from "@/components/BandChart";
+import { ChangelogList } from "@/components/Changelog";
+import { Num, ObsLinks } from "@/components/Provenance";
+import { Grade, StatusChip } from "@/components/StatusChip";
+import { fmt, index, indicator, obsIndex, sources, words, type Band } from "@/lib/data";
+
+export const dynamicParams = false;
+export function generateStaticParams() { return index().indicators.map((i) => ({ slug: i.id })); }
+
+const band = (b: Band, unit: string) => (b ? [b.lo != null ? `≥ ${fmt(b.lo, unit)}` : null, b.hi != null ? `≤ ${fmt(b.hi, unit)}` : null].filter(Boolean).join(" and ") : "—");
+const RUBRIC = (c: number | null) => c === null ? "no status yet" : c >= 90 ? "multiple strong independent sources" : c >= 70 ? "good evidence, some ambiguity" : c >= 50 ? "mixed or hard to operationalise" : "limited or vague evidence";
+
+export default async function IndicatorPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const d = indicator(slug);
+  const idx = obsIndex();
+  const { buckets, layers, indicators } = index();
+  const srcs = sources();
+  const bandOnChart = d.band_input && (d.band_input === `metric:${d.metric}` || d.band_input === d.series_keys[0]);
+  const bandUnit = d.band_input?.includes("doubling") ? "days" : d.unit;
+  const current = d.status_events[0];
+  const seriesSources = Array.from(new Set(d.series.map((s) => s.series_key.split(".")[0]))).map((id) => srcs.find((s) => s.id === id)).filter(Boolean);
+  return (
+    <article className="flex flex-col gap-8 max-w-3xl">
+      <header>
+        <p className="text-xs text-muted">
+          {d.bucket_id ? <Link href={`/buckets/${d.bucket_id}`} className="hover:text-ink">{buckets.find((b) => b.id === d.bucket_id)?.name}</Link> : null}
+          {d.bucket_id && d.layer_id ? " · " : null}
+          {d.layer_id ? <Link href={`/layers/${d.layer_id}`} className="hover:text-ink">{layers.find((l) => l.id === d.layer_id)?.name}</Link> : null}
+        </p>
+        <h1 className="text-2xl font-semibold tracking-tight">{d.name}</h1>
+        <div className="mt-2 flex flex-wrap items-center gap-2 text-sm">
+          <StatusChip status={d.published ? d.status : null} size="lg" />
+          {d.confidence !== null ? <span className="text-ink-2">confidence {d.confidence} / 95</span> : null}
+          <Grade grade={d.grade} />
+          {d.leading_lagging ? <span className="rounded bg-grid/60 px-1.5 py-0.5 text-xs">{d.leading_lagging}</span> : null}
+          {d.stale_as_of ? <span className="text-slow text-xs">stale as of {d.stale_as_of}</span> : null}
+        </div>
+      </header>
+
+      <Section n={1} title="What this measures">
+        <p>{d.definition}</p>
+        <p className="mt-2 text-ink-2"><span className="text-muted">Why it matters.</span> {d.why_it_matters}</p>
+        <dl className="mt-3 grid grid-cols-2 gap-2 text-xs md:grid-cols-4">
+          <div><dt className="text-muted">Proxy types</dt><dd>{d.proxy_types.join(", ")}</dd></div>
+          <div><dt className="text-muted">Unit</dt><dd>{d.unit}</dd></div>
+          <div><dt className="text-muted">Cadence</dt><dd>{words(d.cadence_expected)}</dd></div>
+          {d.valve_measured ? <div><dt className="text-muted">Valve</dt><dd>{words(d.valve_measured)}</dd></div> : null}
+        </dl>
+      </Section>
+
+      <Section n={2} title="How we track this">
+        <ul className="text-sm flex flex-col gap-1">
+          {d.series_keys.map((k) => <li key={k}><span className="text-muted">series</span> <code className="text-xs">{k}</code></li>)}
+          {d.metric ? <li><span className="text-muted">derived metric</span> <code className="text-xs">{d.metric}</code> <span className="text-muted">(semantic/metrics.yaml)</span></li> : null}
+          {seriesSources.map((s) => s ? <li key={s.id}><span className="text-muted">source</span> <a href={s.url} className="underline decoration-grid underline-offset-4">{s.name}</a> <span className="text-muted">· default tier {s.default_tier} · {s.license}</span></li> : null)}
+        </ul>
+        {d.normal_band || d.direction_rule ? (
+          <div className="mt-3 rounded-lg bg-surface ring-hair p-3 text-sm">
+            {d.normal_band ? (
+              <dl className="grid gap-1 sm:grid-cols-3">
+                <div><dt className="text-muted text-xs">Normal band</dt><dd>{band(d.normal_band, bandUnit)}</dd></div>
+                <div><dt className="text-muted text-xs">Fast band</dt><dd>{band(d.fast_band, bandUnit)}</dd></div>
+                <div><dt className="text-muted text-xs">Falsifying</dt><dd>{band(d.falsifying_band, bandUnit) || "—"}</dd></div>
+              </dl>
+            ) : null}
+            {d.direction_rule ? <p>Direction over {d.direction_rule.periods} periods, dead-band {d.direction_rule.dead_band}; higher = {d.direction_rule.higher_is}.</p> : null}
+            <p className="mt-2 text-ink-2 text-xs">{d.band_rationale ?? d.direction_rule?.rationale}</p>
+            {d.band_input ? <p className="mt-1 text-xs text-muted">Applied to <code>{d.band_input}</code>.</p> : null}
+          </div>
+        ) : null}
+      </Section>
+
+      <Section n={3} title="Tracker interpretation"><p>{d.tracker_interpretation}</p></Section>
+
+      <Section n={4} title="Evidence">
+        <BandChart series={[{ name: d.name, points: d.points }]} unit={d.unit} log={d.unit === "minutes"} bands={bandOnChart ? { normal: d.normal_band, fast: d.fast_band } : null} />
+        <div className="mt-3 grid gap-3 sm:grid-cols-2 text-sm">
+          <div className="rounded-lg bg-surface ring-hair p-3"><div className="text-xs text-muted">Latest point</div><Num p={d.latest} unit={d.unit} obsIndex={idx} />{d.latest?.subject ? <div className="text-xs text-ink-2">{d.latest.subject}</div> : null}</div>
+          {d.band_value ? <div className="rounded-lg bg-surface ring-hair p-3"><div className="text-xs text-muted">Value the bands apply to</div><Num p={{ as_of: d.band_value.as_of ?? "", value: d.band_value.value, obs_ids: d.band_value.obs_ids }} unit={bandUnit} obsIndex={idx} /></div> : null}
+        </div>
+        <p className="mt-2 text-xs text-muted">{d.n_observations} observations. Hollow points are disputed (see counterevidence). Every point links to its observation.</p>
+        {d.derived.length ? <details className="mt-2 text-xs"><summary className="cursor-pointer text-ink-2">Derived rows ({d.derived.length})</summary>
+          <table className="data w-full mt-1"><thead><tr><th>as of</th><th>dims</th><th>value</th><th>inputs</th></tr></thead><tbody>
+            {d.derived.slice().reverse().map((r) => <tr key={r.as_of_date + JSON.stringify(r.dims)}><td>{r.as_of_date}</td><td>{Object.values(r.dims ?? {}).join(" ")}</td><td className="tabular-nums">{fmt(r.value, d.unit)}</td><td><ObsLinks ids={r.obs_ids} obsIndex={idx} max={3} /></td></tr>)}
+          </tbody></table></details> : null}
+      </Section>
+
+      <Section n={5} title="Status and reasoning">
+        <div className="flex flex-wrap items-center gap-2"><StatusChip status={d.published ? d.status : null} size="lg" />{current ? <span className="text-xs text-muted">since {current.created_at.slice(0, 10)} · {current.author}</span> : null}</div>
+        {current ? <p className="mt-2">{current.reason}</p> : <p className="mt-2 text-muted">No status event yet; the evaluator proposes one once an approved observation exists.</p>}
+        {d.proposed_status && d.proposed_status !== d.status ? <p className="mt-2 text-xs text-ink-2">The seed brief expected <em>{words(d.proposed_status)}</em>; the evaluator says <em>{words(d.status)}</em>. The evaluator wins until a reviewed override.</p> : null}
+        {d.override_note ? <p className="mt-2 text-xs text-ink-2">Override: {d.override_note}</p> : null}
+      </Section>
+
+      <Section n={6} title="Timeline notes">
+        <ul className="text-sm text-ink-2 flex flex-col gap-1">
+          {d.points.slice(-6).reverse().map((p) => <li key={p.as_of + (p.subject ?? "")}><span className="text-muted tabular-nums">{p.as_of}</span> {p.subject ?? p.dims?.model ?? ""} · <Num p={p} unit={d.unit} obsIndex={idx} /></li>)}
+        </ul>
+      </Section>
+
+      <Section n={7} title="Counterevidence">
+        <details open className="rounded-lg border border-slow/40 p-3"><summary className="cursor-pointer text-sm font-medium">What cuts against this reading</summary><p className="mt-2">{d.counterevidence || "None recorded — this indicator cannot be published until it has some."}</p></details>
+      </Section>
+
+      <Section n={8} title="Update history"><ChangelogList events={d.status_events} obsIndex={idx} showTarget={false} /></Section>
+
+      <Section n={9} title="Confidence">
+        <p><span className="text-2xl font-semibold tabular-nums">{d.confidence ?? "—"}</span><span className="text-muted"> / 95 — {RUBRIC(d.confidence)}</span></p>
+        <p className="mt-1 text-xs text-muted">Confidence is independent of status: 90–95 multiple strong independent sources; 70–89 good evidence, some ambiguity; 50–69 mixed or hard to operationalise; below 50 limited or vague.</p>
+      </Section>
+
+      <Section n={10} title="Related">
+        <ul className="text-sm flex flex-col gap-1">
+          {d.related_indicators.map((r) => { const c = indicators.find((i) => i.id === r); return <li key={r}><Link href={`/indicators/${r}`} className="hover:underline">{c?.name ?? r}</Link> <StatusChip status={c?.published ? c.status : null} /></li>; })}
+          {d.related_bottlenecks.length ? <li className="text-ink-2">Bottlenecks #{d.related_bottlenecks.join(", #")} <span className="text-muted">(the 89-item grid ships in M3)</span></li> : null}
+          {d.crosswalk.map((c, i) => <li key={i} className="text-ink-2">Crosswalk: <Link href={`/buckets/${c.bucket_id}`} className="hover:underline">{buckets.find((b) => b.id === c.bucket_id)?.name}</Link> ⇄ <Link href={`/layers/${c.layer_id}`} className="hover:underline">{layers.find((l) => l.id === c.layer_id)?.name}</Link> <span className="text-muted">({words(c.relation)})</span></li>)}
+        </ul>
+      </Section>
+    </article>
+  );
+}
+
+function Section({ n, title, children }: { n: number; title: string; children: React.ReactNode }) {
+  return (
+    <section>
+      <h2 className="text-sm font-medium text-ink-2 mb-2"><span className="text-muted tabular-nums mr-2">{n}</span>{title}</h2>
+      <div className="text-[15px] leading-relaxed">{children}</div>
+    </section>
+  );
+}
