@@ -1,60 +1,212 @@
 {
- "band_input": null,
+ "band_input": "sec_filing.amzn.server_useful_life_years.fy",
  "band_rationale": null,
- "band_value": null,
+ "band_value": {
+  "as_of": "2025-12-31",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "81efc38c88434c53"
+  ],
+  "value": 5.0
+ },
  "bucket_id": null,
- "cadence_expected": "quarterly",
- "confidence": null,
- "counterevidence": "Nobody maintains this series; the brief calls it gap 3.",
+ "cadence_expected": "annual",
+ "confidence": 65,
+ "counterevidence": "Ranges rather than points at Microsoft; a subset at Amazon; the estimate says what the filer chooses to assume, not how long the hardware lasts.",
  "crosswalk": [],
- "definition": "Changes to the estimated useful life of servers and network equipment disclosed in hyperscaler 10-Ks, which extend or shorten depreciation and move reported margins.",
+ "definition": "Estimated useful life of servers and network equipment each hyperscaler states in its 10-K, in years, quoted verbatim: Amazon (a subset cut to five years from 2025), Microsoft (two to six), Alphabet (six), Meta (extended to 5.5 from 2025). The band input is Amazon's, the only one to shorten.",
  "derived": [],
  "direction": null,
  "direction_rule": {
-  "dead_band": 0.05,
-  "higher_is": "concentrating",
-  "periods": 4,
-  "rationale": "Placeholder until the series exists; bands are set with the first observation."
+  "dead_band": 0.4,
+  "higher_is": "dispersing",
+  "periods": 2,
+  "rationale": "Two annual readings; a change under half a year is rounding. A shorter life means faster hardware turnover and thinner margins for the layer, so shortening reads as dispersing."
  },
  "evidence": [],
  "falsifying_band": null,
  "fast_band": null,
  "fits": [],
  "flow_status": null,
- "grade": null,
+ "grade": "A",
  "id": "depreciation_useful_life_changes",
- "latest": null,
+ "latest": {
+  "as_of": "2025-12-31",
+  "disputed": false,
+  "grade": "A",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "81efc38c88434c53"
+  ],
+  "series_key": "sec_filing.amzn.server_useful_life_years.fy",
+  "subject": "amzn",
+  "unit": "years",
+  "value": 5.0
+ },
  "layer_id": "compute_physical",
- "leading_lagging": "leading",
+ "leading_lagging": "lagging",
  "metric": null,
  "metric_dims": {},
- "n_observations": 0,
- "name": "Hyperscaler server useful-life changes",
+ "n_observations": 4,
+ "name": "Hyperscaler server useful lives (10-K estimates)",
  "normal_band": null,
  "override_note": null,
- "points": [],
+ "points": [
+  {
+   "as_of": "2025-12-31",
+   "disputed": false,
+   "grade": "A",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "81efc38c88434c53"
+   ],
+   "series_key": "sec_filing.amzn.server_useful_life_years.fy",
+   "subject": "amzn",
+   "unit": "years",
+   "value": 5.0
+  }
+ ],
  "proposed_status": "not_yet_measurable",
  "proxy_types": [
   "capital_flow"
  ],
- "published": false,
+ "published": true,
  "related_bottlenecks": [],
- "related_indicators": [],
+ "related_indicators": [
+  "capex_to_revenue_stack",
+  "cloud_segment_margins"
+ ],
  "related_metrics": [],
  "related_predictions": [],
- "series": [],
- "series_keys": [],
- "sparkline": [],
+ "series": [
+  {
+   "points": [
+    {
+     "as_of": "2025-12-31",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "81efc38c88434c53"
+     ],
+     "series_key": "sec_filing.amzn.server_useful_life_years.fy",
+     "subject": "amzn",
+     "unit": "years",
+     "value": 5.0
+    }
+   ],
+   "series_key": "sec_filing.amzn.server_useful_life_years.fy"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2025-12-31",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "dad6f4a9ae0a0214"
+     ],
+     "series_key": "sec_filing.googl.server_useful_life_years.fy",
+     "subject": "googl",
+     "unit": "years",
+     "value": 6.0
+    }
+   ],
+   "series_key": "sec_filing.googl.server_useful_life_years.fy"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2025-12-31",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "50fb84da3318017a"
+     ],
+     "series_key": "sec_filing.meta.server_useful_life_years.fy",
+     "subject": "meta",
+     "unit": "years",
+     "value": 5.5
+    }
+   ],
+   "series_key": "sec_filing.meta.server_useful_life_years.fy"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-06-30",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "b85f4ae35f063ba2"
+     ],
+     "series_key": "sec_filing.msft.server_useful_life_years.fy",
+     "subject": "msft",
+     "unit": "years",
+     "value": 6.0
+    }
+   ],
+   "series_key": "sec_filing.msft.server_useful_life_years.fy"
+  }
+ ],
+ "series_keys": [
+  "sec_filing.amzn.server_useful_life_years.fy",
+  "sec_filing.msft.server_useful_life_years.fy",
+  "sec_filing.googl.server_useful_life_years.fy",
+  "sec_filing.meta.server_useful_life_years.fy"
+ ],
+ "sparkline": [
+  {
+   "as_of": "2025-12-31",
+   "disputed": false,
+   "grade": "A",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "81efc38c88434c53"
+   ],
+   "series_key": "sec_filing.amzn.server_useful_life_years.fy",
+   "subject": "amzn",
+   "unit": "years",
+   "value": 5.0
+  }
+ ],
  "stale_as_of": null,
- "stale_ok": false,
- "stale_reason": null,
- "status": null,
- "status_events": [],
+ "stale_ok": true,
+ "stale_reason": "Annual filings; each change is quoted by hand from the 10-K notes.",
+ "status": "not_yet_measurable",
+ "status_events": [
+  {
+   "author": "evaluate",
+   "created_at": "2026-09-10T09:52:21.463938Z",
+   "evidence_ids": [
+    "81efc38c88434c53"
+   ],
+   "id": "43c70694cafb7c67",
+   "new_conf": 65,
+   "new_status": "not_yet_measurable",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "First reading. Amazon's FY2025 10-K states a subset of servers and networking equipment moved from six to five years from 1 January 2025; Meta lengthened to 5.5 years, Alphabet holds six and Microsoft states two to six. One annual point per filer, so the direction rule cannot run yet: not yet measurable.",
+   "target_id": "depreciation_useful_life_changes",
+   "target_type": "indicator"
+  }
+ ],
  "sublayer_id": "hyperscalers_neoclouds",
- "tracker_interpretation": "Unpublished; see the reason.",
- "unit": "ratio",
- "unpublished_reason": "Not measurable from the XBRL company-facts API: useful-life facts are not tagged for servers (only decade-old PP&E ranges); each change must be quoted verbatim from a 10-K note, and no row has been entered yet.",
- "updated_at": "2026-09-11",
+ "tracker_interpretation": "Estimates diverge: Amazon shortened a subset to five years, Meta lengthened to 5.5, Alphabet and Microsoft hold at six. No filer shortened in 2026.",
+ "unit": "years",
+ "unpublished_reason": null,
+ "updated_at": "2026-09-10",
  "valve_measured": null,
- "why_it_matters": "A change flatters or hurts margins by billions; the direction of the change is what matters."
+ "why_it_matters": "Depreciation is where the capex bet meets the income statement. A lengthening life flatters margins; a shortening one says the hardware is turning over faster than the accountants assumed."
 }

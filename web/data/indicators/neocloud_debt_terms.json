@@ -1,60 +1,397 @@
 {
- "band_input": null,
+ "band_input": "metric:neocloud_weighted_facility_rate",
  "band_rationale": null,
- "band_value": null,
+ "band_value": {
+  "as_of": "2026-06-30",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "07ff8ebabf22d060",
+   "5ecdd5795911ce93",
+   "61c7969e48db4455",
+   "83dde83bc0a515eb"
+  ],
+  "value": 0.105
+ },
  "bucket_id": null,
  "cadence_expected": "quarterly",
- "confidence": null,
- "counterevidence": "Facility rates are not a single number; refinancing changes the mix.",
+ "confidence": 60,
+ "counterevidence": "Effective rates mix vintages and hedges; an unweighted average overstates small facilities; one filer with facility-level disclosure.",
  "crosswalk": [],
- "definition": "Effective interest rates on CoreWeave's and peers' GPU-backed debt facilities, from 10-Q disclosures.",
- "derived": [],
+ "definition": "Average effective interest rate CoreWeave reports on its delayed-draw term-loan facilities at each quarter end (derived metric neocloud_weighted_facility_rate over the 10-Q debt table), with the stated spreads, total indebtedness and Nebius's convertible terms shown alongside.",
+ "derived": [
+  {
+   "as_of_date": "2026-06-30",
+   "computed_at": "2026-09-10T09:53:41.195235Z",
+   "dims": {
+    "entity": "crwv"
+   },
+   "formula_version": "1",
+   "id": "a153a967dd1bb61a",
+   "input_observation_ids": [
+    "07ff8ebabf22d060",
+    "5ecdd5795911ce93",
+    "61c7969e48db4455",
+    "83dde83bc0a515eb"
+   ],
+   "metric": "neocloud_weighted_facility_rate",
+   "obs_ids": [
+    "07ff8ebabf22d060",
+    "5ecdd5795911ce93",
+    "61c7969e48db4455",
+    "83dde83bc0a515eb"
+   ],
+   "value": 0.105,
+   "value_high": null,
+   "value_low": null
+  }
+ ],
  "direction": null,
  "direction_rule": {
-  "dead_band": 0.05,
+  "dead_band": 0.01,
   "higher_is": "concentrating",
-  "periods": 4,
-  "rationale": "Placeholder until the series exists; bands are set with the first observation."
+  "periods": 3,
+  "rationale": "Three quarter-ends; moves under a percentage point are facility mix. Rising rates concentrate the compute layer's returns with its lenders."
  },
  "evidence": [],
  "falsifying_band": null,
  "fast_band": null,
  "fits": [],
  "flow_status": null,
- "grade": null,
+ "grade": "A",
  "id": "neocloud_debt_terms",
- "latest": null,
+ "latest": {
+  "as_of": "2026-06-30",
+  "dims": {
+   "entity": "crwv"
+  },
+  "obs_ids": [
+   "07ff8ebabf22d060",
+   "5ecdd5795911ce93",
+   "61c7969e48db4455",
+   "83dde83bc0a515eb"
+  ],
+  "unit": "share",
+  "value": 0.105
+ },
  "layer_id": "compute_physical",
- "leading_lagging": "leading",
- "metric": null,
- "metric_dims": {},
- "n_observations": 0,
- "name": "Neocloud borrowing cost",
+ "leading_lagging": "coincident",
+ "metric": "neocloud_weighted_facility_rate",
+ "metric_dims": {
+  "entity": "crwv"
+ },
+ "n_observations": 12,
+ "name": "Neocloud borrowing cost (CoreWeave facility rates)",
  "normal_band": null,
  "override_note": null,
- "points": [],
+ "points": [
+  {
+   "as_of": "2026-06-30",
+   "dims": {
+    "entity": "crwv"
+   },
+   "obs_ids": [
+    "07ff8ebabf22d060",
+    "5ecdd5795911ce93",
+    "61c7969e48db4455",
+    "83dde83bc0a515eb"
+   ],
+   "unit": "share",
+   "value": 0.105
+  }
+ ],
  "proposed_status": "not_yet_measurable",
  "proxy_types": [
-  "capital_flow"
+  "capital_flow",
+  "market_structure"
  ],
- "published": false,
+ "published": true,
  "related_bottlenecks": [],
- "related_indicators": [],
+ "related_indicators": [
+  "cloud_rpo_backlog",
+  "circular_financing_scale",
+  "capex_to_revenue_stack"
+ ],
  "related_metrics": [],
  "related_predictions": [],
- "series": [],
- "series_keys": [],
- "sparkline": [],
+ "series": [
+  {
+   "points": [
+    {
+     "as_of": "2026-06-30",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "61c7969e48db4455"
+     ],
+     "series_key": "sec_filing.crwv.debt_facility_rate_ddtl1.pt",
+     "subject": "crwv",
+     "unit": "share",
+     "value": 0.15
+    }
+   ],
+   "series_key": "sec_filing.crwv.debt_facility_rate_ddtl1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-06-30",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "83dde83bc0a515eb"
+     ],
+     "series_key": "sec_filing.crwv.debt_facility_rate_ddtl2.pt",
+     "subject": "crwv",
+     "unit": "share",
+     "value": 0.11
+    }
+   ],
+   "series_key": "sec_filing.crwv.debt_facility_rate_ddtl2.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-06-30",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "07ff8ebabf22d060"
+     ],
+     "series_key": "sec_filing.crwv.debt_facility_rate_ddtl4.pt",
+     "subject": "crwv",
+     "unit": "share",
+     "value": 0.07
+    }
+   ],
+   "series_key": "sec_filing.crwv.debt_facility_rate_ddtl4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-06-30",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "5ecdd5795911ce93"
+     ],
+     "series_key": "sec_filing.crwv.debt_facility_rate_ddtl5.pt",
+     "subject": "crwv",
+     "unit": "share",
+     "value": 0.09
+    }
+   ],
+   "series_key": "sec_filing.crwv.debt_facility_rate_ddtl5.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-06-30",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "cfc0c3ff08b03a6f"
+     ],
+     "series_key": "sec_filing.crwv.debt_terms_ddtl4.pt",
+     "subject": "crwv",
+     "unit": "text",
+     "value": null
+    }
+   ],
+   "series_key": "sec_filing.crwv.debt_terms_ddtl4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-08-07",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "db40951d51242bc2"
+     ],
+     "series_key": "sec_filing.crwv.debt_terms_ddtl55_10q.pt",
+     "subject": "crwv",
+     "unit": "text",
+     "value": null
+    }
+   ],
+   "series_key": "sec_filing.crwv.debt_terms_ddtl55_10q.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-08-07",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "60d28cce7dc7371e"
+     ],
+     "series_key": "sec_filing.crwv.debt_terms_ddtl55_8k.pt",
+     "subject": "crwv",
+     "unit": "text",
+     "value": null
+    }
+   ],
+   "series_key": "sec_filing.crwv.debt_terms_ddtl55_8k.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-06-30",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "7793be7e2abff23a"
+     ],
+     "series_key": "sec_filing.crwv.debt_terms_h1_2026_issuances.pt",
+     "subject": "crwv",
+     "unit": "text",
+     "value": null
+    }
+   ],
+   "series_key": "sec_filing.crwv.debt_terms_h1_2026_issuances.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-06-30",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "776bc83cc39ef3e9"
+     ],
+     "series_key": "sec_filing.crwv.total_debt_usd.q",
+     "subject": "crwv",
+     "unit": "USD",
+     "value": 35551000000.0
+    }
+   ],
+   "series_key": "sec_filing.crwv.total_debt_usd.q"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-20",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "8f6c9aab44895b72"
+     ],
+     "series_key": "sec_filing.nbis.convertible_coupon_rate.pt",
+     "subject": "nbis",
+     "unit": "share",
+     "value": 0.02625
+    }
+   ],
+   "series_key": "sec_filing.nbis.convertible_coupon_rate.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-06-30",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "b375ba3f5e6b7720"
+     ],
+     "series_key": "sec_filing.nbis.debt_effective_rate.pt",
+     "subject": "nbis",
+     "unit": "share",
+     "value": 0.052
+    }
+   ],
+   "series_key": "sec_filing.nbis.debt_effective_rate.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-06-30",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "1397d6876b819deb"
+     ],
+     "series_key": "sec_filing.nbis.total_debt_usd.q",
+     "subject": "nbis",
+     "unit": "USD",
+     "value": 10041800000.0
+    }
+   ],
+   "series_key": "sec_filing.nbis.total_debt_usd.q"
+  }
+ ],
+ "series_keys": [
+  "sec_filing.crwv.debt_facility_rate_*.pt",
+  "sec_filing.crwv.debt_terms_*.pt",
+  "sec_filing.crwv.total_debt_usd.q",
+  "sec_filing.nbis.convertible_coupon_rate.pt",
+  "sec_filing.nbis.debt_effective_rate.pt",
+  "sec_filing.nbis.total_debt_usd.q"
+ ],
+ "sparkline": [
+  {
+   "as_of": "2026-06-30",
+   "dims": {
+    "entity": "crwv"
+   },
+   "obs_ids": [
+    "07ff8ebabf22d060",
+    "5ecdd5795911ce93",
+    "61c7969e48db4455",
+    "83dde83bc0a515eb"
+   ],
+   "unit": "share",
+   "value": 0.105
+  }
+ ],
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,
- "status": null,
- "status_events": [],
+ "status": "not_yet_measurable",
+ "status_events": [
+  {
+   "author": "evaluate",
+   "created_at": "2026-09-10T09:52:21.464059Z",
+   "evidence_ids": [],
+   "id": "71b3ad620e3db182",
+   "new_conf": 60,
+   "new_status": "not_yet_measurable",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "First reading. CoreWeave's Q2 2026 10-Q states effective rates of 15% (DDTL 1.0), 11% (DDTL 2.0), 9% (DDTL 5.0) and 7% (non-recourse DDTL 4.0), a simple average of 10.5%, on $35.6B of total indebtedness; the August DDTL 5.5 facility prices at Term SOFR plus 5.5%. One quarter-end, so the direction rule cannot run: not yet measurable.",
+   "target_id": "neocloud_debt_terms",
+   "target_type": "indicator"
+  }
+ ],
  "sublayer_id": "hyperscalers_neoclouds",
- "tracker_interpretation": "Unpublished; see the reason.",
- "unit": "ratio",
- "unpublished_reason": "Waiting on 10-Q rows: CoreWeave's debt notes state rates per facility and must be quoted verbatim; none entered yet.",
- "updated_at": "2026-09-11",
+ "tracker_interpretation": "Effective rates from 7% (non-recourse) to 15% on the 2023 facility, 10.5% on average, on $35.6B of debt; the newest facility prices at SOFR plus 5.5%. Nebius borrows through converts at 1.25 to 2.6% coupons instead.",
+ "unit": "share",
+ "unpublished_reason": null,
+ "updated_at": "2026-09-10",
  "valve_measured": null,
- "why_it_matters": "Rising borrowing cost with revenue concentrated in one or two labs means the neoclouds' rent is a quasi-rent exposed to hold-up."
+ "why_it_matters": "The compute build is financed at the margin by lenders. If neoclouds pay double-digit rates while hyperscalers borrow at treasuries plus a little, the capture story at the compute layer is a credit story."
 }

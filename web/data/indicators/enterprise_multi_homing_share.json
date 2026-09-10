@@ -1,60 +1,193 @@
 {
- "band_input": null,
+ "band_input": "menlo.enterprise.multi_model_share.pt",
  "band_rationale": null,
- "band_value": null,
+ "band_value": {
+  "as_of": "2023-11-10",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "5a3caabee92bfad9"
+  ],
+  "value": 0.6
+ },
  "bucket_id": null,
- "cadence_expected": "quarterly",
- "confidence": null,
- "counterevidence": "Survey of buyers; usage share is not spend share.",
+ "cadence_expected": "annual",
+ "confidence": 45,
+ "counterevidence": "One survey house; the numeric share is a 2023 figure; later waves changed the question.",
  "crosswalk": [],
- "definition": "Share of enterprises using more than one model provider, from Menlo's annual survey.",
+ "definition": "Share of enterprises using more than one foundation model, from Menlo Ventures' enterprise surveys (60% in the 2023 wave, restated in 2024); the 2024 wave states 'three or more models' without a share and the 2025 mid-year update gives the share that switched vendors (11%), shown alongside.",
  "derived": [],
  "direction": null,
  "direction_rule": {
   "dead_band": 0.05,
-  "higher_is": "concentrating",
-  "periods": 4,
-  "rationale": "Placeholder until the series exists; bands are set with the first observation."
+  "higher_is": "dispersing",
+  "periods": 2,
+  "rationale": "Annual waves; a move under five points is survey noise. More multi-homing disperses the model layer's pricing power."
  },
  "evidence": [],
  "falsifying_band": null,
  "fast_band": null,
  "fits": [],
  "flow_status": null,
- "grade": null,
+ "grade": "B",
  "id": "enterprise_multi_homing_share",
- "latest": null,
+ "latest": {
+  "as_of": "2023-11-10",
+  "disputed": false,
+  "grade": "B",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "5a3caabee92bfad9"
+  ],
+  "series_key": "menlo.enterprise.multi_model_share.pt",
+  "subject": "enterprise",
+  "unit": "share",
+  "value": 0.6
+ },
  "layer_id": "model",
- "leading_lagging": "leading",
+ "leading_lagging": "coincident",
  "metric": null,
  "metric_dims": {},
- "n_observations": 0,
- "name": "Enterprise multi-model usage share",
+ "n_observations": 3,
+ "name": "Enterprise multi-model usage share (Menlo)",
  "normal_band": null,
  "override_note": null,
- "points": [],
+ "points": [
+  {
+   "as_of": "2023-11-10",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "5a3caabee92bfad9"
+   ],
+   "series_key": "menlo.enterprise.multi_model_share.pt",
+   "subject": "enterprise",
+   "unit": "share",
+   "value": 0.6
+  }
+ ],
  "proposed_status": "not_yet_measurable",
  "proxy_types": [
+  "behaviour",
   "market_structure"
  ],
- "published": false,
+ "published": true,
  "related_bottlenecks": [],
- "related_indicators": [],
+ "related_indicators": [
+  "enterprise_spend_by_layer",
+  "lab_hhi"
+ ],
  "related_metrics": [],
  "related_predictions": [],
- "series": [],
- "series_keys": [],
- "sparkline": [],
+ "series": [
+  {
+   "points": [
+    {
+     "as_of": "2024-11-20",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "1de8dc2bd3b96007"
+     ],
+     "series_key": "menlo.enterprise.models_deployed_typical.pt",
+     "subject": "enterprise",
+     "unit": "text",
+     "value": null
+    }
+   ],
+   "series_key": "menlo.enterprise.models_deployed_typical.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2023-11-10",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "5a3caabee92bfad9"
+     ],
+     "series_key": "menlo.enterprise.multi_model_share.pt",
+     "subject": "enterprise",
+     "unit": "share",
+     "value": 0.6
+    }
+   ],
+   "series_key": "menlo.enterprise.multi_model_share.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2025-07-10",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "a65b54e6db3d0fcf"
+     ],
+     "series_key": "menlo.enterprise.vendor_switch_share.pt",
+     "subject": "enterprise",
+     "unit": "share",
+     "value": 0.11
+    }
+   ],
+   "series_key": "menlo.enterprise.vendor_switch_share.pt"
+  }
+ ],
+ "series_keys": [
+  "menlo.enterprise.multi_model_share.pt",
+  "menlo.enterprise.models_deployed_typical.pt",
+  "menlo.enterprise.vendor_switch_share.pt"
+ ],
+ "sparkline": [
+  {
+   "as_of": "2023-11-10",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "5a3caabee92bfad9"
+   ],
+   "series_key": "menlo.enterprise.multi_model_share.pt",
+   "subject": "enterprise",
+   "unit": "share",
+   "value": 0.6
+  }
+ ],
  "stale_as_of": null,
- "stale_ok": false,
- "stale_reason": null,
- "status": null,
- "status_events": [],
+ "stale_ok": true,
+ "stale_reason": "Menlo's later waves state the pattern without a share; the row is refreshed when a wave publishes one.",
+ "status": "not_yet_measurable",
+ "status_events": [
+  {
+   "author": "evaluate",
+   "created_at": "2026-09-10T09:52:21.499946Z",
+   "evidence_ids": [
+    "5a3caabee92bfad9"
+   ],
+   "id": "6e0774cb715ad4ab",
+   "new_conf": 45,
+   "new_status": "not_yet_measurable",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "First reading. Menlo's 2023 enterprise survey put multi-model use at 60% (restated January 2024); later waves state the pattern without a share and the 2025 mid-year update gives an 11% vendor-switch rate instead. One numeric point, so not yet measurable.",
+   "target_id": "enterprise_multi_homing_share",
+   "target_type": "indicator"
+  }
+ ],
  "sublayer_id": "frontier_labs",
- "tracker_interpretation": "Unpublished; see the reason.",
- "unit": "ratio",
- "unpublished_reason": "Waiting on a verbatim row from Menlo's survey page; the figure exists but has not been fetched and quoted yet.",
- "updated_at": "2026-09-11",
+ "tracker_interpretation": "Sixty percent multi-homed in 2023 and the pattern has only spread since, but Menlo stopped publishing the share; the 11% vendor-switch figure says buyers add models rather than replace them.",
+ "unit": "share",
+ "unpublished_reason": null,
+ "updated_at": "2026-09-10",
  "valve_measured": null,
- "why_it_matters": "Multi-homing shrinks lock-in, which shrinks the labs' bargaining share."
+ "why_it_matters": "Multi-homing is the model layer's pricing power in one number: buyers who route across providers keep the surplus; buyers locked to one hand it over."
 }

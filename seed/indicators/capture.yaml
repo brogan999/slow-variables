@@ -363,23 +363,26 @@ indicators:
     published: false
     updated_at: 2026-09-11
   - id: lab_vertical_integration_exit_bell
-    name: Lab vertical integration (acquisitions and acquihires)
-    definition: Count of frontier-lab acquisitions and acquihires of companies in the training-input, serving and application layers over the trailing four quarters (P1 seed indicator 12, the exit bell).
-    why_it_matters: When the labs buy their suppliers and their best customers, the bottleneck-migration model says the venture window in those sub-layers is closing.
-    proxy_types: [market_structure, capital_flow]
+    name: "Lab vertical integration (acquisitions and acquihires, trailing four quarters)"
+    definition: "Distinct acquisitions or acquihires by AI labs and hyperscalers of application, tooling, data or infrastructure companies announced in the trailing four quarters, derived metric lab_vertical_integration_events_4q over the acquisition ledger (acq.<acquirer>.<target>.pt rows, each with a fetched announcement)."
+    why_it_matters: "The application layer's exit bell. When the labs buy the layer above them, the surplus that layer was capturing moves down the stack; a rising count is the capture thesis's clearest leading signal."
+    proxy_types: [capital_flow, market_structure]
     unit: count
     cadence_expected: quarterly
+    series_keys: ["acq.*.pt"]
+    metric: lab_vertical_integration_events_4q
+    band_input: "metric:lab_vertical_integration_events_4q"
     layer_id: model
     sublayer_id: frontier_labs
-    direction_rule: {periods: 4, dead_band: 1, higher_is: concentrating, rationale: "Four quarters; one event is not a trend."}
+    direction_rule: {periods: 4, dead_band: 1, higher_is: concentrating, rationale: "Four quarters; one event is not a trend. More deals per year concentrate the application layer into the labs."}
     leading_lagging: leading
-    tracker_interpretation: Unpublished until the acquisition ledger (manual rows with verbatim announcements) exists.
-    unpublished_reason: "Waiting on an acquisition ledger: each event needs a fetched announcement with a verbatim snippet, like the circular-financing ledger; none has been entered yet."
-    counterevidence: Acquihire terms are rarely disclosed; a count treats a $3B deal and a five-person team alike.
-    confidence: 30
-    proposed_status: not_yet_measurable
-    published: false
-    updated_at: 2026-09-11
+    tracker_interpretation: "Fifteen deals in the ledger, from Meta's $14.3B Scale stake and Google's $2.4B Windsurf licence to Nvidia's $12.9B Hugging Face purchase and Stripe's $7B-plus OpenRouter deal; the pace roughly doubled in 2026."
+    counterevidence: "The ledger holds what the press and filings announce; undisclosed prices count as events; Stripe is a payments company, in the ledger because OpenRouter is a routing layer."
+    confidence: 55
+    proposed_status: concentrating
+    related_indicators: [frontier_capital_concentration, lab_hhi, model_token_concentration]
+    published: true
+    updated_at: 2026-09-10
   - id: vc_flow_revenue_lag
     name: Venture flow to revenue lag
     definition: Cross-correlation lag, in quarters, between primary-round dollars into a sub-layer and its members' revenue (P1 seed indicator 13).
@@ -458,59 +461,71 @@ indicators:
     published: true
     updated_at: 2026-09-11
   - id: depreciation_useful_life_changes
-    name: "Hyperscaler server useful-life changes"
-    definition: "Changes to the estimated useful life of servers and network equipment disclosed in hyperscaler 10-Ks, which extend or shorten depreciation and move reported margins."
-    why_it_matters: "A change flatters or hurts margins by billions; the direction of the change is what matters."
+    name: "Hyperscaler server useful lives (10-K estimates)"
+    definition: "Estimated useful life of servers and network equipment each hyperscaler states in its 10-K, in years, quoted verbatim: Amazon (a subset cut to five years from 2025), Microsoft (two to six), Alphabet (six), Meta (extended to 5.5 from 2025). The band input is Amazon's, the only one to shorten."
+    why_it_matters: "Depreciation is where the capex bet meets the income statement. A lengthening life flatters margins; a shortening one says the hardware is turning over faster than the accountants assumed."
     proxy_types: [capital_flow]
-    unit: ratio
-    cadence_expected: quarterly
+    unit: years
+    cadence_expected: annual
+    series_keys: ["sec_filing.amzn.server_useful_life_years.fy", "sec_filing.msft.server_useful_life_years.fy", "sec_filing.googl.server_useful_life_years.fy", "sec_filing.meta.server_useful_life_years.fy"]
+    band_input: sec_filing.amzn.server_useful_life_years.fy
     layer_id: compute_physical
     sublayer_id: hyperscalers_neoclouds
-    direction_rule: {periods: 4, dead_band: 0.05, higher_is: concentrating, rationale: "Placeholder until the series exists; bands are set with the first observation."}
-    leading_lagging: leading
-    tracker_interpretation: "Unpublished; see the reason."
-    unpublished_reason: "Not measurable from the XBRL company-facts API: useful-life facts are not tagged for servers (only decade-old PP&E ranges); each change must be quoted verbatim from a 10-K note, and no row has been entered yet."
-    counterevidence: "Nobody maintains this series; the brief calls it gap 3."
-    confidence: 20
+    direction_rule: {periods: 2, dead_band: 0.4, higher_is: dispersing, rationale: "Two annual readings; a change under half a year is rounding. A shorter life means faster hardware turnover and thinner margins for the layer, so shortening reads as dispersing."}
+    leading_lagging: lagging
+    tracker_interpretation: "Estimates diverge: Amazon shortened a subset to five years, Meta lengthened to 5.5, Alphabet and Microsoft hold at six. No filer shortened in 2026."
+    counterevidence: "Ranges rather than points at Microsoft; a subset at Amazon; the estimate says what the filer chooses to assume, not how long the hardware lasts."
+    stale_ok: true
+    stale_reason: "Annual filings; each change is quoted by hand from the 10-K notes."
+    confidence: 65
     proposed_status: not_yet_measurable
-    published: false
-    updated_at: 2026-09-11
+    related_indicators: [capex_to_revenue_stack, cloud_segment_margins]
+    published: true
+    updated_at: 2026-09-10
   - id: neocloud_debt_terms
-    name: "Neocloud borrowing cost"
-    definition: "Effective interest rates on CoreWeave's and peers' GPU-backed debt facilities, from 10-Q disclosures."
-    why_it_matters: "Rising borrowing cost with revenue concentrated in one or two labs means the neoclouds' rent is a quasi-rent exposed to hold-up."
-    proxy_types: [capital_flow]
-    unit: ratio
+    name: "Neocloud borrowing cost (CoreWeave facility rates)"
+    definition: "Average effective interest rate CoreWeave reports on its delayed-draw term-loan facilities at each quarter end (derived metric neocloud_weighted_facility_rate over the 10-Q debt table), with the stated spreads, total indebtedness and Nebius's convertible terms shown alongside."
+    why_it_matters: "The compute build is financed at the margin by lenders. If neoclouds pay double-digit rates while hyperscalers borrow at treasuries plus a little, the capture story at the compute layer is a credit story."
+    proxy_types: [capital_flow, market_structure]
+    unit: share
     cadence_expected: quarterly
+    series_keys: ["sec_filing.crwv.debt_facility_rate_*.pt", "sec_filing.crwv.debt_terms_*.pt", "sec_filing.crwv.total_debt_usd.q", "sec_filing.nbis.convertible_coupon_rate.pt", "sec_filing.nbis.debt_effective_rate.pt", "sec_filing.nbis.total_debt_usd.q"]
+    metric: neocloud_weighted_facility_rate
+    metric_dims: {entity: crwv}
+    band_input: "metric:neocloud_weighted_facility_rate"
     layer_id: compute_physical
     sublayer_id: hyperscalers_neoclouds
-    direction_rule: {periods: 4, dead_band: 0.05, higher_is: concentrating, rationale: "Placeholder until the series exists; bands are set with the first observation."}
-    leading_lagging: leading
-    tracker_interpretation: "Unpublished; see the reason."
-    unpublished_reason: "Waiting on 10-Q rows: CoreWeave's debt notes state rates per facility and must be quoted verbatim; none entered yet."
-    counterevidence: "Facility rates are not a single number; refinancing changes the mix."
-    confidence: 20
+    direction_rule: {periods: 3, dead_band: 0.01, higher_is: concentrating, rationale: "Three quarter-ends; moves under a percentage point are facility mix. Rising rates concentrate the compute layer's returns with its lenders."}
+    leading_lagging: coincident
+    tracker_interpretation: "Effective rates from 7% (non-recourse) to 15% on the 2023 facility, 10.5% on average, on $35.6B of debt; the newest facility prices at SOFR plus 5.5%. Nebius borrows through converts at 1.25 to 2.6% coupons instead."
+    counterevidence: "Effective rates mix vintages and hedges; an unweighted average overstates small facilities; one filer with facility-level disclosure."
+    confidence: 60
     proposed_status: not_yet_measurable
-    published: false
-    updated_at: 2026-09-11
+    related_indicators: [cloud_rpo_backlog, circular_financing_scale, capex_to_revenue_stack]
+    published: true
+    updated_at: 2026-09-10
   - id: enterprise_multi_homing_share
-    name: "Enterprise multi-model usage share"
-    definition: "Share of enterprises using more than one model provider, from Menlo's annual survey."
-    why_it_matters: "Multi-homing shrinks lock-in, which shrinks the labs' bargaining share."
-    proxy_types: [market_structure]
-    unit: ratio
-    cadence_expected: quarterly
+    name: "Enterprise multi-model usage share (Menlo)"
+    definition: "Share of enterprises using more than one foundation model, from Menlo Ventures' enterprise surveys (60% in the 2023 wave, restated in 2024); the 2024 wave states 'three or more models' without a share and the 2025 mid-year update gives the share that switched vendors (11%), shown alongside."
+    why_it_matters: "Multi-homing is the model layer's pricing power in one number: buyers who route across providers keep the surplus; buyers locked to one hand it over."
+    proxy_types: [behaviour, market_structure]
+    unit: share
+    cadence_expected: annual
+    series_keys: ["menlo.enterprise.multi_model_share.pt", "menlo.enterprise.models_deployed_typical.pt", "menlo.enterprise.vendor_switch_share.pt"]
+    band_input: menlo.enterprise.multi_model_share.pt
     layer_id: model
     sublayer_id: frontier_labs
-    direction_rule: {periods: 4, dead_band: 0.05, higher_is: concentrating, rationale: "Placeholder until the series exists; bands are set with the first observation."}
-    leading_lagging: leading
-    tracker_interpretation: "Unpublished; see the reason."
-    unpublished_reason: "Waiting on a verbatim row from Menlo's survey page; the figure exists but has not been fetched and quoted yet."
-    counterevidence: "Survey of buyers; usage share is not spend share."
-    confidence: 20
+    direction_rule: {periods: 2, dead_band: 0.05, higher_is: dispersing, rationale: "Annual waves; a move under five points is survey noise. More multi-homing disperses the model layer's pricing power."}
+    leading_lagging: coincident
+    tracker_interpretation: "Sixty percent multi-homed in 2023 and the pattern has only spread since, but Menlo stopped publishing the share; the 11% vendor-switch figure says buyers add models rather than replace them."
+    counterevidence: "One survey house; the numeric share is a 2023 figure; later waves changed the question."
+    stale_ok: true
+    stale_reason: "Menlo's later waves state the pattern without a share; the row is refreshed when a wave publishes one."
+    confidence: 45
     proposed_status: not_yet_measurable
-    published: false
-    updated_at: 2026-09-11
+    related_indicators: [enterprise_spend_by_layer, lab_hhi]
+    published: true
+    updated_at: 2026-09-10
   - id: startup_share_of_app_revenue
     name: "Startups' share of enterprise AI application revenue"
     definition: "Share of enterprise generative-AI application revenue earned by startups rather than incumbents, from Menlo Ventures' annual buyer survey."

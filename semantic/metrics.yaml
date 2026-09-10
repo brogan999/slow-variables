@@ -580,3 +580,35 @@ metrics:
     sql: |
       SELECT as_of_date, max(value_numeric) AS value, list(id ORDER BY value_numeric DESC)[1:3] AS obs_ids
       FROM observations WHERE series_key LIKE 'aa.%.intelligence_index.pt' GROUP BY as_of_date
+  lab_vertical_integration_events_4q:
+    description: Distinct acquisitions or acquihires by AI labs and hyperscalers of application, tooling or data companies announced in the trailing four quarters, counted from the acquisition ledger (one per acquirer-target pair) at each quarter end.
+    rationale: The exit bell for the application layer rings when labs buy the layer above them; a rising count is vertical integration, the capture thesis's clearest signal.
+    grain: [as_of_date]
+    unit: count
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["acq.*.*.pt"]
+    caveats: Only deals with a fetched announcement are counted; undisclosed prices still count as events; Stripe (a payments company) is in the ledger for the OpenRouter deal and is included in the count.
+    sql: |
+      WITH deals AS (
+        SELECT split_part(series_key, '.', 2) || '/' || split_part(series_key, '.', 3) AS deal, min(as_of_date) AS announced, list(id) AS ids
+        FROM observations WHERE series_key LIKE 'acq.%.pt' GROUP BY 1
+      ), qends AS (
+        SELECT DISTINCT (date_trunc('quarter', announced) + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE AS q FROM deals
+      )
+      SELECT q AS as_of_date, count(*) AS value, flatten(list(ids)) AS obs_ids
+      FROM qends JOIN deals ON deals.announced <= qends.q AND deals.announced > qends.q - INTERVAL 12 MONTH
+      GROUP BY q ORDER BY q
+  neocloud_weighted_facility_rate:
+    description: Simple average of the effective interest rates CoreWeave reports on its delayed-draw term-loan facilities at each quarter end.
+    rationale: What the neocloud layer pays for capital; rising rates say the compute build is being financed at the margin by lenders who price it as risk.
+    grain: [as_of_date, entity]
+    unit: share
+    lead_lag: coincident
+    formula_version: 1
+    inputs: ["sec_filing.*.debt_facility_rate_*.pt"]
+    caveats: Unweighted by facility size; only facilities with a stated effective rate; one filer.
+    sql: |
+      SELECT as_of_date, subject AS entity, avg(value_numeric) AS value, list(id) AS obs_ids
+      FROM observations WHERE series_key LIKE 'sec_filing.%.debt_facility_rate_%.pt' AND value_numeric IS NOT NULL
+      GROUP BY 1, 2

@@ -1,61 +1,785 @@
 {
- "band_input": null,
+ "band_input": "metric:lab_vertical_integration_events_4q",
  "band_rationale": null,
- "band_value": null,
+ "band_value": {
+  "as_of": "2026-09-30",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "07e3555c39a96050",
+   "129c29f7c904cd92",
+   "323f4b23d02dc306",
+   "63fe32e4118fa976",
+   "708f5f947cf75c74",
+   "9ea06530e32d0e37",
+   "bb8f74b796a1d779",
+   "d7e2c8855360a39c",
+   "e6c4132e68724a57",
+   "ef2cd91f517adf57",
+   "ef40bd94a06afa5d"
+  ],
+  "value": 10.0
+ },
  "bucket_id": null,
  "cadence_expected": "quarterly",
- "confidence": null,
- "counterevidence": "Acquihire terms are rarely disclosed; a count treats a $3B deal and a five-person team alike.",
+ "confidence": 55,
+ "counterevidence": "The ledger holds what the press and filings announce; undisclosed prices count as events; Stripe is a payments company, in the ledger because OpenRouter is a routing layer.",
  "crosswalk": [],
- "definition": "Count of frontier-lab acquisitions and acquihires of companies in the training-input, serving and application layers over the trailing four quarters (P1 seed indicator 12, the exit bell).",
- "derived": [],
+ "definition": "Distinct acquisitions or acquihires by AI labs and hyperscalers of application, tooling, data or infrastructure companies announced in the trailing four quarters, derived metric lab_vertical_integration_events_4q over the acquisition ledger (acq.<acquirer>.<target>.pt rows, each with a fetched announcement).",
+ "derived": [
+  {
+   "as_of_date": "2025-06-30",
+   "computed_at": "2026-09-10T09:53:41.195235Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "031c97c9ba26722b",
+   "input_observation_ids": [
+    "10c4c0b2d0426e32",
+    "87066654f5416275"
+   ],
+   "metric": "lab_vertical_integration_events_4q",
+   "obs_ids": [
+    "10c4c0b2d0426e32",
+    "87066654f5416275"
+   ],
+   "value": 1.0,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-09-30",
+   "computed_at": "2026-09-10T09:53:41.195235Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "2b3c6d5c6a2c16a2",
+   "input_observation_ids": [
+    "10c4c0b2d0426e32",
+    "4217fe77072bbea2",
+    "8646dd26d8b7dcec",
+    "87066654f5416275",
+    "d6dd36d1a3dc9f36"
+   ],
+   "metric": "lab_vertical_integration_events_4q",
+   "obs_ids": [
+    "10c4c0b2d0426e32",
+    "4217fe77072bbea2",
+    "8646dd26d8b7dcec",
+    "87066654f5416275",
+    "d6dd36d1a3dc9f36"
+   ],
+   "value": 4.0,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-12-31",
+   "computed_at": "2026-09-10T09:53:41.195235Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "07a2140b23878346",
+   "input_observation_ids": [
+    "10c4c0b2d0426e32",
+    "129c29f7c904cd92",
+    "4217fe77072bbea2",
+    "8646dd26d8b7dcec",
+    "87066654f5416275",
+    "d6dd36d1a3dc9f36"
+   ],
+   "metric": "lab_vertical_integration_events_4q",
+   "obs_ids": [
+    "10c4c0b2d0426e32",
+    "129c29f7c904cd92",
+    "4217fe77072bbea2",
+    "8646dd26d8b7dcec",
+    "87066654f5416275",
+    "d6dd36d1a3dc9f36"
+   ],
+   "value": 5.0,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2026-03-31",
+   "computed_at": "2026-09-10T09:53:41.195235Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "db8b47f57a52e7f6",
+   "input_observation_ids": [
+    "10c4c0b2d0426e32",
+    "129c29f7c904cd92",
+    "4217fe77072bbea2",
+    "63fe32e4118fa976",
+    "8646dd26d8b7dcec",
+    "87066654f5416275",
+    "d6dd36d1a3dc9f36",
+    "d7e2c8855360a39c",
+    "ef40bd94a06afa5d"
+   ],
+   "metric": "lab_vertical_integration_events_4q",
+   "obs_ids": [
+    "10c4c0b2d0426e32",
+    "129c29f7c904cd92",
+    "4217fe77072bbea2",
+    "63fe32e4118fa976",
+    "8646dd26d8b7dcec",
+    "87066654f5416275",
+    "d6dd36d1a3dc9f36",
+    "d7e2c8855360a39c",
+    "ef40bd94a06afa5d"
+   ],
+   "value": 8.0,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2026-06-30",
+   "computed_at": "2026-09-10T09:53:41.195235Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "5e8c00219959cbbf",
+   "input_observation_ids": [
+    "07e3555c39a96050",
+    "129c29f7c904cd92",
+    "323f4b23d02dc306",
+    "4217fe77072bbea2",
+    "63fe32e4118fa976",
+    "8646dd26d8b7dcec",
+    "9ea06530e32d0e37",
+    "d6dd36d1a3dc9f36",
+    "d7e2c8855360a39c",
+    "ef40bd94a06afa5d"
+   ],
+   "metric": "lab_vertical_integration_events_4q",
+   "obs_ids": [
+    "07e3555c39a96050",
+    "129c29f7c904cd92",
+    "323f4b23d02dc306",
+    "4217fe77072bbea2",
+    "63fe32e4118fa976",
+    "8646dd26d8b7dcec",
+    "9ea06530e32d0e37",
+    "d6dd36d1a3dc9f36",
+    "d7e2c8855360a39c",
+    "ef40bd94a06afa5d"
+   ],
+   "value": 10.0,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2026-09-30",
+   "computed_at": "2026-09-10T09:53:41.195235Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "b340dd5ceb0c4fcb",
+   "input_observation_ids": [
+    "07e3555c39a96050",
+    "129c29f7c904cd92",
+    "323f4b23d02dc306",
+    "63fe32e4118fa976",
+    "708f5f947cf75c74",
+    "9ea06530e32d0e37",
+    "bb8f74b796a1d779",
+    "d7e2c8855360a39c",
+    "e6c4132e68724a57",
+    "ef2cd91f517adf57",
+    "ef40bd94a06afa5d"
+   ],
+   "metric": "lab_vertical_integration_events_4q",
+   "obs_ids": [
+    "07e3555c39a96050",
+    "129c29f7c904cd92",
+    "323f4b23d02dc306",
+    "63fe32e4118fa976",
+    "708f5f947cf75c74",
+    "9ea06530e32d0e37",
+    "bb8f74b796a1d779",
+    "d7e2c8855360a39c",
+    "e6c4132e68724a57",
+    "ef2cd91f517adf57",
+    "ef40bd94a06afa5d"
+   ],
+   "value": 10.0,
+   "value_high": null,
+   "value_low": null
+  }
+ ],
  "direction": null,
  "direction_rule": {
   "dead_band": 1.0,
   "higher_is": "concentrating",
   "periods": 4,
-  "rationale": "Four quarters; one event is not a trend."
+  "rationale": "Four quarters; one event is not a trend. More deals per year concentrate the application layer into the labs."
  },
  "evidence": [],
  "falsifying_band": null,
  "fast_band": null,
  "fits": [],
  "flow_status": null,
- "grade": null,
+ "grade": "A",
  "id": "lab_vertical_integration_exit_bell",
- "latest": null,
+ "latest": {
+  "as_of": "2026-09-30",
+  "dims": {},
+  "obs_ids": [
+   "07e3555c39a96050",
+   "129c29f7c904cd92",
+   "323f4b23d02dc306",
+   "63fe32e4118fa976",
+   "708f5f947cf75c74",
+   "9ea06530e32d0e37",
+   "bb8f74b796a1d779",
+   "d7e2c8855360a39c",
+   "e6c4132e68724a57",
+   "ef2cd91f517adf57",
+   "ef40bd94a06afa5d"
+  ],
+  "unit": "count",
+  "value": 10.0
+ },
  "layer_id": "model",
  "leading_lagging": "leading",
- "metric": null,
+ "metric": "lab_vertical_integration_events_4q",
  "metric_dims": {},
- "n_observations": 0,
- "name": "Lab vertical integration (acquisitions and acquihires)",
+ "n_observations": 16,
+ "name": "Lab vertical integration (acquisitions and acquihires, trailing four quarters)",
  "normal_band": null,
  "override_note": null,
- "points": [],
- "proposed_status": "not_yet_measurable",
- "proxy_types": [
-  "market_structure",
-  "capital_flow"
+ "points": [
+  {
+   "as_of": "2025-06-30",
+   "dims": {},
+   "obs_ids": [
+    "10c4c0b2d0426e32",
+    "87066654f5416275"
+   ],
+   "unit": "count",
+   "value": 1.0
+  },
+  {
+   "as_of": "2025-09-30",
+   "dims": {},
+   "obs_ids": [
+    "10c4c0b2d0426e32",
+    "4217fe77072bbea2",
+    "8646dd26d8b7dcec",
+    "87066654f5416275",
+    "d6dd36d1a3dc9f36"
+   ],
+   "unit": "count",
+   "value": 4.0
+  },
+  {
+   "as_of": "2025-12-31",
+   "dims": {},
+   "obs_ids": [
+    "10c4c0b2d0426e32",
+    "129c29f7c904cd92",
+    "4217fe77072bbea2",
+    "8646dd26d8b7dcec",
+    "87066654f5416275",
+    "d6dd36d1a3dc9f36"
+   ],
+   "unit": "count",
+   "value": 5.0
+  },
+  {
+   "as_of": "2026-03-31",
+   "dims": {},
+   "obs_ids": [
+    "10c4c0b2d0426e32",
+    "129c29f7c904cd92",
+    "4217fe77072bbea2",
+    "63fe32e4118fa976",
+    "8646dd26d8b7dcec",
+    "87066654f5416275",
+    "d6dd36d1a3dc9f36",
+    "d7e2c8855360a39c",
+    "ef40bd94a06afa5d"
+   ],
+   "unit": "count",
+   "value": 8.0
+  },
+  {
+   "as_of": "2026-06-30",
+   "dims": {},
+   "obs_ids": [
+    "07e3555c39a96050",
+    "129c29f7c904cd92",
+    "323f4b23d02dc306",
+    "4217fe77072bbea2",
+    "63fe32e4118fa976",
+    "8646dd26d8b7dcec",
+    "9ea06530e32d0e37",
+    "d6dd36d1a3dc9f36",
+    "d7e2c8855360a39c",
+    "ef40bd94a06afa5d"
+   ],
+   "unit": "count",
+   "value": 10.0
+  },
+  {
+   "as_of": "2026-09-30",
+   "dims": {},
+   "obs_ids": [
+    "07e3555c39a96050",
+    "129c29f7c904cd92",
+    "323f4b23d02dc306",
+    "63fe32e4118fa976",
+    "708f5f947cf75c74",
+    "9ea06530e32d0e37",
+    "bb8f74b796a1d779",
+    "d7e2c8855360a39c",
+    "e6c4132e68724a57",
+    "ef2cd91f517adf57",
+    "ef40bd94a06afa5d"
+   ],
+   "unit": "count",
+   "value": 10.0
+  }
  ],
- "published": false,
+ "proposed_status": "concentrating",
+ "proxy_types": [
+  "capital_flow",
+  "market_structure"
+ ],
+ "published": true,
  "related_bottlenecks": [],
- "related_indicators": [],
+ "related_indicators": [
+  "frontier_capital_concentration",
+  "lab_hhi",
+  "model_token_concentration"
+ ],
  "related_metrics": [],
  "related_predictions": [],
- "series": [],
- "series_keys": [],
- "sparkline": [],
+ "series": [
+  {
+   "points": [
+    {
+     "as_of": "2026-08-26",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "bb8f74b796a1d779"
+     ],
+     "series_key": "acq.amzn.ducklabs.pt",
+     "subject": "amzn",
+     "unit": "text",
+     "value": null
+    }
+   ],
+   "series_key": "acq.amzn.ducklabs.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2025-12-03",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "129c29f7c904cd92"
+     ],
+     "series_key": "acq.anthropic.bun.pt",
+     "subject": "anthropic",
+     "unit": "text",
+     "value": null
+    }
+   ],
+   "series_key": "acq.anthropic.bun.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-05-18",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "323f4b23d02dc306"
+     ],
+     "series_key": "acq.anthropic.stainless.pt",
+     "subject": "anthropic",
+     "unit": "text",
+     "value": null
+    }
+   ],
+   "series_key": "acq.anthropic.stainless.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-02-25",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "ef40bd94a06afa5d"
+     ],
+     "series_key": "acq.anthropic.vercept.pt",
+     "subject": "anthropic",
+     "unit": "text",
+     "value": null
+    }
+   ],
+   "series_key": "acq.anthropic.vercept.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2025-07-14",
+     "disputed": false,
+     "grade": "D",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "4217fe77072bbea2"
+     ],
+     "series_key": "acq.cognition.windsurf.pt",
+     "subject": "cognition",
+     "unit": "text",
+     "value": null
+    }
+   ],
+   "series_key": "acq.cognition.windsurf.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2025-07-11",
+     "disputed": false,
+     "grade": "D",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "d6dd36d1a3dc9f36"
+     ],
+     "series_key": "acq.googl.windsurf.pt",
+     "subject": "googl",
+     "unit": "USD",
+     "value": 2400000000.0
+    }
+   ],
+   "series_key": "acq.googl.windsurf.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2025-06-12",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "87066654f5416275"
+     ],
+     "series_key": "acq.meta.scale_ai.pt",
+     "subject": "meta",
+     "unit": "USD",
+     "value": 14300000000.0
+    },
+    {
+     "as_of": "2025-12-31",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "10c4c0b2d0426e32"
+     ],
+     "series_key": "acq.meta.scale_ai.pt",
+     "subject": "meta",
+     "unit": "USD",
+     "value": 13800000000.0
+    }
+   ],
+   "series_key": "acq.meta.scale_ai.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-09-03",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "708f5f947cf75c74"
+     ],
+     "series_key": "acq.nvda.hugging_face.pt",
+     "subject": "nvda",
+     "unit": "USD",
+     "value": 12900000000.0
+    }
+   ],
+   "series_key": "acq.nvda.hugging_face.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-19",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "d7e2c8855360a39c"
+     ],
+     "series_key": "acq.openai.astral.pt",
+     "subject": "openai",
+     "unit": "text",
+     "value": null
+    }
+   ],
+   "series_key": "acq.openai.astral.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-06-11",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "07e3555c39a96050"
+     ],
+     "series_key": "acq.openai.ona.pt",
+     "subject": "openai",
+     "unit": "text",
+     "value": null
+    }
+   ],
+   "series_key": "acq.openai.ona.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-09",
+     "disputed": false,
+     "grade": "D",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "63fe32e4118fa976"
+     ],
+     "series_key": "acq.openai.promptfoo.pt",
+     "subject": "openai",
+     "unit": "text",
+     "value": null
+    }
+   ],
+   "series_key": "acq.openai.promptfoo.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2025-09-02",
+     "disputed": false,
+     "grade": "D",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "8646dd26d8b7dcec"
+     ],
+     "series_key": "acq.openai.statsig.pt",
+     "subject": "openai",
+     "unit": "USD",
+     "value": 1100000000.0
+    }
+   ],
+   "series_key": "acq.openai.statsig.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-04-02",
+     "disputed": false,
+     "grade": "D",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "9ea06530e32d0e37"
+     ],
+     "series_key": "acq.openai.tbpn.pt",
+     "subject": "openai",
+     "unit": "text",
+     "value": null
+    }
+   ],
+   "series_key": "acq.openai.tbpn.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-08-16",
+     "disputed": false,
+     "grade": "D",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "e6c4132e68724a57"
+     ],
+     "series_key": "acq.stripe.openrouter.pt",
+     "subject": "stripe",
+     "unit": "USD",
+     "value": 7000000000.0
+    },
+    {
+     "as_of": "2026-08-19",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "ef2cd91f517adf57"
+     ],
+     "series_key": "acq.stripe.openrouter.pt",
+     "subject": "stripe",
+     "unit": "text",
+     "value": null
+    }
+   ],
+   "series_key": "acq.stripe.openrouter.pt"
+  }
+ ],
+ "series_keys": [
+  "acq.*.pt"
+ ],
+ "sparkline": [
+  {
+   "as_of": "2025-06-30",
+   "dims": {},
+   "obs_ids": [
+    "10c4c0b2d0426e32",
+    "87066654f5416275"
+   ],
+   "unit": "count",
+   "value": 1.0
+  },
+  {
+   "as_of": "2025-09-30",
+   "dims": {},
+   "obs_ids": [
+    "10c4c0b2d0426e32",
+    "4217fe77072bbea2",
+    "8646dd26d8b7dcec",
+    "87066654f5416275",
+    "d6dd36d1a3dc9f36"
+   ],
+   "unit": "count",
+   "value": 4.0
+  },
+  {
+   "as_of": "2025-12-31",
+   "dims": {},
+   "obs_ids": [
+    "10c4c0b2d0426e32",
+    "129c29f7c904cd92",
+    "4217fe77072bbea2",
+    "8646dd26d8b7dcec",
+    "87066654f5416275",
+    "d6dd36d1a3dc9f36"
+   ],
+   "unit": "count",
+   "value": 5.0
+  },
+  {
+   "as_of": "2026-03-31",
+   "dims": {},
+   "obs_ids": [
+    "10c4c0b2d0426e32",
+    "129c29f7c904cd92",
+    "4217fe77072bbea2",
+    "63fe32e4118fa976",
+    "8646dd26d8b7dcec",
+    "87066654f5416275",
+    "d6dd36d1a3dc9f36",
+    "d7e2c8855360a39c",
+    "ef40bd94a06afa5d"
+   ],
+   "unit": "count",
+   "value": 8.0
+  },
+  {
+   "as_of": "2026-06-30",
+   "dims": {},
+   "obs_ids": [
+    "07e3555c39a96050",
+    "129c29f7c904cd92",
+    "323f4b23d02dc306",
+    "4217fe77072bbea2",
+    "63fe32e4118fa976",
+    "8646dd26d8b7dcec",
+    "9ea06530e32d0e37",
+    "d6dd36d1a3dc9f36",
+    "d7e2c8855360a39c",
+    "ef40bd94a06afa5d"
+   ],
+   "unit": "count",
+   "value": 10.0
+  },
+  {
+   "as_of": "2026-09-30",
+   "dims": {},
+   "obs_ids": [
+    "07e3555c39a96050",
+    "129c29f7c904cd92",
+    "323f4b23d02dc306",
+    "63fe32e4118fa976",
+    "708f5f947cf75c74",
+    "9ea06530e32d0e37",
+    "bb8f74b796a1d779",
+    "d7e2c8855360a39c",
+    "e6c4132e68724a57",
+    "ef2cd91f517adf57",
+    "ef40bd94a06afa5d"
+   ],
+   "unit": "count",
+   "value": 10.0
+  }
+ ],
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,
- "status": null,
- "status_events": [],
+ "status": "concentrating",
+ "status_events": [
+  {
+   "author": "evaluate",
+   "created_at": "2026-09-10T09:52:21.398504Z",
+   "evidence_ids": [
+    "07e3555c39a96050",
+    "129c29f7c904cd92",
+    "323f4b23d02dc306",
+    "63fe32e4118fa976",
+    "708f5f947cf75c74",
+    "9ea06530e32d0e37",
+    "bb8f74b796a1d779",
+    "d7e2c8855360a39c",
+    "e6c4132e68724a57",
+    "ef2cd91f517adf57",
+    "ef40bd94a06afa5d"
+   ],
+   "id": "32d8f6c517462a6b",
+   "new_conf": 55,
+   "new_status": "concentrating",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "Evaluator: 10 (CNBC, 2026-09-30) reads concentrating over 4 periods with a dead band of 1. Auto-reason; rule rationale: Four quarters; one event is not a trend. More deals per year concentrate the application layer into the labs.",
+   "target_id": "lab_vertical_integration_exit_bell",
+   "target_type": "indicator"
+  }
+ ],
  "sublayer_id": "frontier_labs",
- "tracker_interpretation": "Unpublished until the acquisition ledger (manual rows with verbatim announcements) exists.",
+ "tracker_interpretation": "Fifteen deals in the ledger, from Meta's $14.3B Scale stake and Google's $2.4B Windsurf licence to Nvidia's $12.9B Hugging Face purchase and Stripe's $7B-plus OpenRouter deal; the pace roughly doubled in 2026.",
  "unit": "count",
- "unpublished_reason": "Waiting on an acquisition ledger: each event needs a fetched announcement with a verbatim snippet, like the circular-financing ledger; none has been entered yet.",
- "updated_at": "2026-09-11",
+ "unpublished_reason": null,
+ "updated_at": "2026-09-10",
  "valve_measured": null,
- "why_it_matters": "When the labs buy their suppliers and their best customers, the bottleneck-migration model says the venture window in those sub-layers is closing."
+ "why_it_matters": "The application layer's exit bell. When the labs buy the layer above them, the surplus that layer was capturing moves down the stack; a rising count is the capture thesis's clearest leading signal."
 }

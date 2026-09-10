@@ -1566,3 +1566,517 @@ observations:
     basis: reported
     raw_snippet: "The most AI-exposed occupations contracted just 0.2% year over year as of April 2026, compared to 0.1% growth for the least-exposed roles."
     note: "Second source for adp_research.us_high_exposure.employment_yoy.m; April 2026 vintage (ADP's June release: -0.2% / +0.6%). Latest ADP release (19 Aug 2026): July +0.1% high-exposure, +1.1% least-exposed."
+  # ---------- 1. neocloud_debt_terms ----------
+  - series_key: sec_filing.crwv.debt_facility_rate_ddtl2.pt
+    source_id: sec_edgar_filings
+    entity_id: crwv
+    value: 0.11
+    unit: share
+    as_of_date: 2026-06-30
+    published_date: 2026-08-12
+    url: https://www.sec.gov/Archives/edgar/data/1769628/000176962826000366/crwv-20260630.htm
+    tier: 4
+    basis: company_stated
+    raw_snippet: "DDTL 2.0 Facility Aug 2030 11% 3,190 5,037"
+    note: "Effective interest rate on the DDTL 2.0 Facility (recourse), Note 10 debt table; $3,190M outstanding at 30 Jun 2026 vs $5,037M at 31 Dec 2025. CoreWeave Q2 2026 10-Q."
+  - series_key: sec_filing.crwv.debt_facility_rate_ddtl1.pt
+    source_id: sec_edgar_filings
+    entity_id: crwv
+    value: 0.15
+    unit: share
+    as_of_date: 2026-06-30
+    published_date: 2026-08-12
+    url: https://www.sec.gov/Archives/edgar/data/1769628/000176962826000366/crwv-20260630.htm
+    tier: 4
+    basis: company_stated
+    raw_snippet: "DDTL 1.0 Facility Mar 2028 15% $ 1,300 $ 1,553"
+    note: "Effective interest rate on the DDTL 1.0 Facility (Jul 2023 vintage, recourse); $1,300M outstanding at 30 Jun 2026. Same debt table."
+  - series_key: sec_filing.crwv.debt_facility_rate_ddtl5.pt
+    source_id: sec_edgar_filings
+    entity_id: crwv
+    value: 0.09
+    unit: share
+    as_of_date: 2026-06-30
+    published_date: 2026-08-12
+    url: https://www.sec.gov/Archives/edgar/data/1769628/000176962826000366/crwv-20260630.htm
+    tier: 4
+    basis: company_stated
+    raw_snippet: "DDTL 5.0 Facility Nov 2031 9% 1,101"
+    note: "Effective interest rate on the DDTL 5.0 Facility (May 2026, $3.1B capacity, stated SOFR + 4.50%); $1,101M drawn at 30 Jun 2026. Same debt table."
+  - series_key: sec_filing.crwv.debt_facility_rate_ddtl4.pt
+    source_id: sec_edgar_filings
+    entity_id: crwv
+    value: 0.07
+    unit: share
+    as_of_date: 2026-06-30
+    published_date: 2026-08-12
+    url: https://www.sec.gov/Archives/edgar/data/1769628/000176962826000366/crwv-20260630.htm
+    tier: 4
+    basis: company_stated
+    raw_snippet: "Non-recourse debt: DDTL 4.0 Facility Mar 2032 7% 2,837"
+    note: "Effective interest rate on the non-recourse DDTL 4.0 Facility (Mar 2026, $8.5B capacity); $2,837M drawn at 30 Jun 2026. Same debt table."
+  - series_key: sec_filing.crwv.debt_terms_h1_2026_issuances.pt
+    source_id: sec_edgar_filings
+    entity_id: crwv
+    value_text: "DDTL 5.0: SOFR + 4.50% (stated); DDTL 4.0: SOFR + 2.25% floating / Treasury + 2.00% fixed"
+    unit: text
+    as_of_date: 2026-06-30
+    published_date: 2026-08-12
+    url: https://www.sec.gov/Archives/edgar/data/1769628/000176962826000366/crwv-20260630.htm
+    tier: 4
+    basis: company_stated
+    raw_snippet: "DDTL 4.0 Facility March 2026 SOFR + 2.25%; Treasury + 2.00% $ 8,500 DDTL 5.0 Facility May 2026 SOFR + 4.50% $ 3,100 2031 9.75% Senior Notes April 2026 9.75% $ 2,750 2032 9.625% Senior Notes June 2026 9.625% $ 1,250 2032 EUR Senior Notes June 2026 8.50% € 2,000 2032 Convertible Senior Notes April 2026 1.75% $ 4,000"
+    note: "Stated rates on every H1 2026 issuance (Note 10 issuance table): two DDTL spreads plus 9.75% / 9.625% / 8.50% senior notes and a 1.75% convert."
+  - series_key: sec_filing.crwv.debt_terms_ddtl4.pt
+    source_id: sec_edgar_filings
+    entity_id: crwv
+    value_text: "DDTL 4.0 floating: daily compounded SOFR + 2.25% (or ABR + 1.25%)"
+    unit: text
+    as_of_date: 2026-06-30
+    published_date: 2026-08-12
+    url: https://www.sec.gov/Archives/edgar/data/1769628/000176962826000366/crwv-20260630.htm
+    tier: 4
+    basis: company_stated
+    raw_snippet: "As of June 30, 2026, the facility has $1.4 billion of outstanding floating-rate loan and $1.5 billion of outstanding fixed-rate loan. Amounts borrowed under the floating-rate commitments bear interest, at the Company’s option, at daily compounded SOFR plus 2.25% per annum or the alternative base rate plus 1.25% per annum."
+    note: "DDTL 4.0 Facility (CCAC VIII, MUFG agent), non-recourse; 95% hedging covenant on floating draws."
+  - series_key: sec_filing.crwv.debt_terms_ddtl55_10q.pt
+    source_id: sec_edgar_filings
+    entity_id: crwv
+    value_text: "DDTL 5.5 (Aug 2026): Term SOFR + 5.5% (or base rate + 4.5%)"
+    unit: text
+    as_of_date: 2026-08-07
+    published_date: 2026-08-12
+    url: https://www.sec.gov/Archives/edgar/data/1769628/000176962826000366/crwv-20260630.htm
+    tier: 4
+    basis: company_stated
+    raw_snippet: "on the DDTL 5.5 Facility accrues for SOFR loans at an interest rate per annum equal to the Term SOFR plus an applicable margin of 5.5% or for base rate loans at the applicable base rate plus 4.5% per annum, at the Company's election. The DDTL 5.5 Facility matures in September 2031. Subsequent to the closing, the Company has drawn $1.2 billion."
+    note: "Subsequent-events note (Note 16): $2.6B DDTL 5.5 Facility, JPMorgan agent, entered August 2026; the widest spread of any CoreWeave DDTL. Same-day $1.2B revolver draw."
+  - series_key: sec_filing.crwv.debt_terms_ddtl55_8k.pt
+    source_id: sec_edgar_filings
+    entity_id: crwv
+    value_text: "DDTL 5.5 (8-K, 7 Aug 2026): Term SOFR + 5.50%, 0.00% floor; base rate + 4.50%; 0.50% undrawn fee"
+    unit: text
+    as_of_date: 2026-08-07
+    published_date: 2026-08-10
+    url: https://www.sec.gov/Archives/edgar/data/1769628/000176962826000357/crwv-20260807.htm
+    tier: 4
+    basis: company_stated
+    raw_snippet: "Amounts borrowed under the DDTL 5.5 Facility are subject to an interest rate per annum equal to (i) for SOFR loans, Term SOFR (subject to a 0.00% floor) plus an applicable margin of 5.50% per annum"
+    note: "CoreWeave 8-K Item 1.01: $2.6B DDTL 5.5 Facility, JPMorgan agent, MUFG co-arranger, matures Sep 2031; second source for the 10-Q subsequent-events rate."
+  - series_key: sec_filing.crwv.total_debt_usd.q
+    source_id: sec_edgar_filings
+    entity_id: crwv
+    value: 35600000000
+    unit: USD
+    as_of_date: 2026-06-30
+    published_date: 2026-08-12
+    url: https://www.sec.gov/Archives/edgar/data/1769628/000176962826000366/crwv-20260630.htm
+    tier: 4
+    basis: company_stated
+    raw_snippet: "As of June 30, 2026, our total indebtedness was $35.6 billion and we had $10.0 billion of undrawn availability under our Revolving Credit Facility, DDTL 3.0 Facility, DDTL 4.0 Facility (as defined below), and DDTL 5.0 Facility (as defined below)."
+    note: "MD&A liquidity section; principal basis. Recourse debt net $31.4B + non-recourse net $3.7B on the balance sheet."
+  - series_key: sec_filing.crwv.total_debt_usd.q
+    source_id: sec_edgar_filings
+    entity_id: crwv
+    value: 35551000000
+    unit: USD
+    as_of_date: 2026-06-30
+    published_date: 2026-08-12
+    url: https://www.sec.gov/Archives/edgar/data/1769628/000176962826000366/crwv-20260630.htm
+    tier: 4
+    basis: company_stated
+    raw_snippet: "Remaining portion of 2026 $ 4,413 2027 6,184 2028 4,416 2029 2,421 2030 3,221 Thereafter 14,896 Total $ 35,551"
+    note: "Future principal payments schedule, Note 10 (in millions): $10.6B falls due by end-2027."
+  - series_key: sec_filing.nbis.convertible_coupon_rate.pt
+    source_id: sec_edgar_filings
+    entity_id: nbis
+    value: 0.02625
+    unit: share
+    as_of_date: 2026-03-20
+    published_date: 2026-04-30
+    url: https://www.sec.gov/Archives/edgar/data/1513845/000110465926052948/nbis-20251231x20f.htm
+    tier: 4
+    basis: company_stated
+    raw_snippet: "On March 18, 2026, the Company announced the pricing of a private offering of $4.0 billion aggregate principal amount of convertible senior notes, comprising $2.25 billion of 1.250% notes due 2031 and $1.75 billion of 2.625% notes due 2033. The offering closed on March 20, 2026."
+    note: "Nebius has no delayed-draw or term-loan facility in its FY2025 20-F or Q2 2026 6-K; all debt is convertible notes. Coupon on the longer 2033 tranche; 2031 tranche 1.250%. Subsequent-events note of the 20-F."
+  - series_key: sec_filing.nbis.debt_effective_rate.pt
+    source_id: sec_edgar_filings
+    entity_id: nbis
+    value: 0.052
+    unit: share
+    as_of_date: 2026-06-30
+    published_date: 2026-08-12
+    url: https://www.sec.gov/Archives/edgar/data/1513845/000110465926094844/nbis-20260812xex99d2.htm
+    tier: 4
+    basis: company_stated
+    raw_snippet: "Notes due March 2033 March 2033 2.63% 5.20% 2,100.0"
+    note: "Effective interest rate (vs 2.63% stated coupon) on the March 2033 converts, $2,100.0M principal; Q2 2026 6-K Ex. 99.2 convertible-debt table."
+  - series_key: sec_filing.nbis.total_debt_usd.q
+    source_id: sec_edgar_filings
+    entity_id: nbis
+    value: 10041800000
+    unit: USD
+    as_of_date: 2026-06-30
+    published_date: 2026-08-12
+    url: https://www.sec.gov/Archives/edgar/data/1513845/000110465926094844/nbis-20260812xex99d2.htm
+    tier: 4
+    basis: company_stated
+    raw_snippet: "Total convertible debt 10,041.8 (1,424.8) (118.0) 8,499.0"
+    note: "Principal amount outstanding of all convertible notes at 30 Jun 2026 (in millions); carrying amount $8,499.0M after discount and issuance costs. Up from $4,836.8M at 31 Dec 2025."
+  # ---------- 2. depreciation_useful_life_changes ----------
+  - series_key: sec_filing.amzn.server_useful_life_years.fy
+    source_id: sec_edgar_filings
+    entity_id: amzn
+    value: 5
+    unit: years
+    as_of_date: 2025-12-31
+    published_date: 2026-02-06
+    url: https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/amzn-20251231.htm
+    tier: 4
+    basis: audited
+    raw_snippet: "(1)Effective January 1, 2024, we changed our estimate of the useful lives for our servers from five to six years, and effective January 1, 2025, we changed our estimate of the useful lives of a subset of our servers and networking equipment from six to five years."
+    note: "Amazon FY2025 10-K, Note 1 property and equipment. Only a subset of servers/networking shortened to five years; the table still lists servers at five to six years. No further change in the Q2 2026 10-Q."
+  - series_key: sec_filing.msft.server_useful_life_years.fy
+    source_id: sec_edgar_filings
+    entity_id: msft
+    value: 6
+    unit: years
+    as_of_date: 2026-06-30
+    published_date: 2026-07-29
+    url: https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm
+    tier: 4
+    basis: audited
+    raw_snippet: "servers and network equipment, two to six years"
+    note: "Microsoft FY2026 10-K (year ended 30 Jun 2026), Note 1. Filing states a range of two to six years; 6 = upper bound stored. FY2025 10-K said 'computer equipment, two to six years' — relabelled, range unchanged."
+  - series_key: sec_filing.googl.server_useful_life_years.fy
+    source_id: sec_edgar_filings
+    entity_id: googl
+    value: 6
+    unit: years
+    as_of_date: 2025-12-31
+    published_date: 2026-02-05
+    url: https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm
+    tier: 4
+    basis: audited
+    raw_snippet: "We depreciate servers and network equipment generally over a period of six years."
+    note: "Alphabet FY2025 10-K, Note 1. Six years since the Jan 2023 extension; no change in FY2025 or the Q2 2026 10-Q."
+  - series_key: sec_filing.meta.server_useful_life_years.fy
+    source_id: sec_edgar_filings
+    entity_id: meta
+    value: 5.5
+    unit: years
+    as_of_date: 2025-12-31
+    published_date: 2026-01-29
+    url: https://www.sec.gov/Archives/edgar/data/1326801/000162828026003942/meta-20251231.htm
+    tier: 4
+    basis: audited
+    raw_snippet: "In January 2025, we completed an assessment of the useful lives of property and equipment, which resulted in an increase in the estimated useful lives of most servers and network assets to 5.5 years, effective January 1, 2025."
+    note: "Meta FY2025 10-K, MD&A change in accounting estimate (extension from 5.0 years). Servers and network depreciation still rose to $13.36B in 2025 from $11.34B."
+  # ---------- 3. enterprise_multi_homing_share ----------
+  - series_key: menlo.enterprise.multi_model_share.pt
+    source_id: menlo
+    value: 0.60
+    unit: share
+    as_of_date: 2023-11-10
+    published_date: 2023-11-10
+    url: https://menlovc.com/2023-the-state-of-generative-ai-in-the-enterprise-report/
+    tier: 6
+    basis: reported
+    raw_snippet: "60% of enterprises adopt multiple models (and route prompts to the most performant model)."
+    note: "Menlo Ventures, '2023: The State of Generative AI in the Enterprise' (10 Nov 2023). The only Menlo wave that publishes a multi-model share as a number; the 2024 and 2025 waves describe the pattern without a share."
+  - series_key: menlo.enterprise.multi_model_share.pt
+    source_id: menlo
+    value: 0.60
+    unit: share
+    as_of_date: 2023-11-10
+    published_date: 2024-01-18
+    url: https://menlovc.com/perspective/the-modern-ai-stack-design-principles-for-the-future-of-enterprise-ai-architectures/
+    tier: 6
+    basis: reported
+    raw_snippet: "According to Menlo’s Enterprise AI report, 60% of enterprises use multiple models and route prompts to the most performant model."
+    note: "Menlo, 'The Modern AI Stack' (18 Jan 2024), restating the 2023 enterprise survey figure."
+  - series_key: menlo.enterprise.models_deployed_typical.pt
+    source_id: menlo
+    value_text: "three or more foundation models (typical enterprise stack)"
+    unit: text
+    as_of_date: 2024-11-20
+    published_date: 2024-11-20
+    url: https://menlovc.com/2024-the-state-of-generative-ai-in-the-enterprise/
+    tier: 6
+    basis: reported
+    raw_snippet: "Our research shows organizations typically deploy three or more foundation models in their AI stacks, routing to different models depending on the use case or results."
+    note: "Menlo 2024 wave: multi-model stated qualitatively, no share published."
+  - series_key: menlo.enterprise.vendor_switch_share.pt
+    source_id: menlo
+    value: 0.11
+    unit: share
+    as_of_date: 2025-07-10
+    published_date: 2025-07-31
+    url: https://menlovc.com/perspective/2025-mid-year-llm-market-update/
+    tier: 6
+    basis: reported
+    raw_snippet: "66% of builders upgraded models within their existing provider, while 23% did not switch models at all this past year. Only 11% switched vendors."
+    note: "Menlo 2025 Mid-Year LLM Market Update (31 Jul 2025), 150 technical decision-makers surveyed 30 Jun–10 Jul 2025. Share that switched model vendors in the prior year; nearest 2025 datapoint to multi-homing, not the same construct."
+  # ---------- 4. lab_vertical_integration_exit_bell ----------
+  - series_key: acq.meta.scale_ai.pt
+    source_id: cnbc
+    entity_id: meta
+    value: 14300000000
+    unit: USD
+    as_of_date: 2025-06-12
+    published_date: 2025-06-12
+    url: https://www.cnbc.com/2025/06/12/scale-ai-founder-wang-announces-exit-for-meta-part-of-14-billion-deal.html
+    tier: 5
+    basis: reported
+    raw_snippet: "Meta is pumping $14.3 billion into Scale AI as part of the deal, and will have a 49% stake in the artificial intelligence startup, but will not have any voting power, a Scale AI spokesperson said."
+    note: "Meta -> Scale AI: 49% non-voting stake plus Alexandr Wang to Meta Superintelligence Labs. Training-input layer target."
+  - series_key: acq.meta.scale_ai.pt
+    source_id: sec_edgar_filings
+    entity_id: meta
+    value: 13800000000
+    unit: USD
+    as_of_date: 2025-12-31
+    published_date: 2026-01-29
+    url: https://www.sec.gov/Archives/edgar/data/1326801/000162828026003942/meta-20251231.htm
+    tier: 4
+    basis: audited
+    raw_snippet: "Our non-marketable equity investments accounted for under the measurement alternative mostly consist of our minority investments in Scale AI for $13.80 billion, which was closed during 2025, and our investment in Jio Platforms Limited of $5.82 billion as of December 31, 2025."
+    note: "Meta FY2025 10-K carrying value of the Scale AI stake ($13.80B vs the $14.3B headline)."
+  - series_key: acq.googl.windsurf.pt
+    source_id: cnbc
+    entity_id: googl
+    value: 2400000000
+    unit: USD
+    as_of_date: 2025-07-11
+    published_date: 2025-07-14
+    url: https://www.cnbc.com/2025/07/14/cognition-to-buy-ai-startup-windsurf-days-after-google-poached-ceo.html
+    tier: 5
+    basis: reported
+    raw_snippet: "Google is paying $2.4 billion in licensing fees and for compensation, as CNBC previously reported."
+    note: "Google -> Windsurf: non-exclusive licence plus hire of CEO Varun Mohan and co-founder Douglas Chen into DeepMind (announced Fri 11 Jul 2025), after OpenAI's ~$3B offer lapsed. Reverse-acquihire, not a purchase of the company."
+  - series_key: acq.googl.windsurf.pt
+    source_id: techcrunch
+    entity_id: googl
+    value: 2400000000
+    unit: USD
+    as_of_date: 2025-07-11
+    published_date: 2025-07-14
+    url: https://techcrunch.com/2025/07/14/cognition-maker-of-the-ai-coding-agent-devin-acquires-windsurf/
+    tier: 7
+    basis: reported
+    raw_snippet: "The announcement comes just days after Google hired away Windsurf’s CEO Varun Mohan, co-founder Douglas Chen, and research leaders in a $2.4 billion reverse-acquihire that left much of the startup’s 250-person team behind."
+    note: "Second relay of the Google-Windsurf figure."
+  - series_key: acq.cognition.windsurf.pt
+    source_id: techcrunch
+    entity_id: cognition
+    value_text: "definitive agreement to acquire Windsurf's remaining business; terms undisclosed"
+    unit: text
+    as_of_date: 2025-07-14
+    published_date: 2025-07-14
+    url: https://techcrunch.com/2025/07/14/cognition-maker-of-the-ai-coding-agent-devin-acquires-windsurf/
+    tier: 7
+    basis: reported
+    raw_snippet: "Cognition, the startup behind the viral AI coding agent Devin, announced in a blog post on Monday that it has signed a definitive agreement to acquire AI coding startup Windsurf."
+    note: "The other half of the Windsurf split: IP, product, brand and remaining team to Cognition."
+  - series_key: acq.openai.statsig.pt
+    source_id: cnbc
+    entity_id: openai
+    value: 1100000000
+    unit: USD
+    as_of_date: 2025-09-02
+    published_date: 2025-09-02
+    url: https://www.cnbc.com/2025/09/02/openai-buys-statsig-for-1point1-billion-hires-ceo-as-applications-exec.html
+    tier: 5
+    basis: reported
+    raw_snippet: "OpenAI has acquired Statsig for $1.1 billion."
+    note: "OpenAI -> Statsig (product experimentation / feature flags); CEO Vijaye Raji becomes CTO of Applications."
+  - series_key: acq.openai.statsig.pt
+    source_id: techcrunch
+    entity_id: openai
+    value: 1100000000
+    unit: USD
+    as_of_date: 2025-09-02
+    published_date: 2025-09-02
+    url: https://techcrunch.com/2025/09/02/openai-acquires-product-testing-startup-statsig-and-shakes-up-its-leadership-team/
+    tier: 7
+    basis: reported
+    raw_snippet: "OpenAI is paying $1.1 billion for Statsig in an all-stock deal — one of the largest acquisitions ever for the ChatGPT maker — under the company’s current $300 billion valuation, OpenAI spokesperson Kayla Wood told TechCrunch."
+    note: "All-stock at the $300B valuation, per OpenAI's spokesperson."
+  - series_key: acq.anthropic.bun.pt
+    source_id: anthropic_news
+    entity_id: anthropic
+    value_text: "acquired Bun (JavaScript runtime); terms not disclosed"
+    unit: text
+    as_of_date: 2025-12-03
+    published_date: 2025-12-03
+    url: https://www.anthropic.com/news/anthropic-acquires-bun-as-claude-code-reaches-usd1b-milestone
+    tier: 4
+    basis: company_stated
+    raw_snippet: "And today we’re announcing that Anthropic is acquiring Bun—a breakthrough JavaScript runtime—to further accelerate Claude Code."
+    note: "Anthropic -> Bun (dev-tool runtime under Claude Code). Same post: Claude Code at $1B run-rate revenue six months after launch."
+  - series_key: acq.anthropic.vercept.pt
+    source_id: techcrunch
+    entity_id: anthropic
+    value_text: "acquired Vercept (computer-use agents); terms not disclosed; Vercept had raised $50M"
+    unit: text
+    as_of_date: 2026-02-25
+    published_date: 2026-02-25
+    url: https://techcrunch.com/2026/02/25/anthropic-acquires-vercept-ai-startup-agents-computer-use-founders-investors/
+    tier: 7
+    basis: reported
+    raw_snippet: "Anthropic on Wednesday announced that it has acquired Vercept, an AI startup with deep roots to some of the biggest names in Seattle’s tech scene."
+    note: "Anthropic -> Vercept (Seattle computer-use agent startup, ex-AI2 founders); 'While the terms of the deal were not disclosed' per the same article."
+  - series_key: acq.anthropic.vercept.pt
+    source_id: anthropic_news
+    entity_id: anthropic
+    value_text: "acquired Vercept; terms not disclosed"
+    unit: text
+    as_of_date: 2026-02-25
+    published_date: 2026-02-25
+    url: https://www.anthropic.com/news/acquires-vercept
+    tier: 4
+    basis: company_stated
+    raw_snippet: "Today, we're announcing that Anthropic has acquired Vercept to help us push those capabilities further."
+    note: "Acquirer's own announcement."
+  - series_key: acq.openai.promptfoo.pt
+    source_id: techcrunch
+    entity_id: openai
+    value_text: "acquired Promptfoo (AI security / red-teaming); value not disclosed; last valued $86M"
+    unit: text
+    as_of_date: 2026-03-09
+    published_date: 2026-03-09
+    url: https://techcrunch.com/2026/03/09/openai-acquires-promptfoo-to-secure-its-ai-agents/
+    tier: 7
+    basis: reported
+    raw_snippet: "OpenAI announced Monday it has acquired Promptfoo, an AI security startup founded in 2024 to protect LLMs from online adversaries."
+    note: "OpenAI -> Promptfoo, folded into OpenAI Frontier; 'OpenAI did not disclose the value of the transaction.' openai.com announcement 403s curl."
+  - series_key: acq.openai.astral.pt
+    source_id: cnbc
+    entity_id: openai
+    value_text: "acquiring Astral (uv / Ruff / ty Python tooling) for Codex; terms not disclosed"
+    unit: text
+    as_of_date: 2026-03-19
+    published_date: 2026-03-19
+    url: https://www.cnbc.com/2026/03/19/openai-to-acquire-developer-tooling-startup-astral.html
+    tier: 5
+    basis: reported
+    raw_snippet: "OpenAI on Thursday announced it's acquiring Astral, a small startup that builds popular open source tools for software developers."
+    note: "OpenAI -> Astral; 'The companies did not disclose the financial terms of the acquisition.' Subject to regulatory approval."
+  - series_key: acq.anthropic.stainless.pt
+    source_id: techcrunch
+    entity_id: anthropic
+    value_text: "acquired Stainless (SDK / MCP tooling); terms undisclosed; The Information reported >$300M"
+    unit: text
+    as_of_date: 2026-05-18
+    published_date: 2026-05-18
+    url: https://techcrunch.com/2026/05/18/anthropic-has-acquired-the-dev-tools-startup-used-by-openai-google-and-cloudflare/
+    tier: 7
+    basis: reported
+    raw_snippet: "Anthropic didn’t disclose terms of the deal. However, The Information reported last week that the company was in talks to acquire Stainless, which is backed by Sequoia Capital and Andreessen Horowitz, for more than $300 million."
+    note: "Anthropic -> Stainless, the SDK generator used by OpenAI, Google and Cloudflare; hosted products to be wound down."
+  - series_key: acq.anthropic.stainless.pt
+    source_id: anthropic_news
+    entity_id: anthropic
+    value_text: "acquiring Stainless; terms not stated"
+    unit: text
+    as_of_date: 2026-05-18
+    published_date: 2026-05-18
+    url: https://www.anthropic.com/news/anthropic-acquires-stainless
+    tier: 4
+    basis: company_stated
+    raw_snippet: "Today, Anthropic is acquiring Stainless, a leader in SDKs and MCP server tooling, to extend that reach even further."
+    note: "Acquirer's own announcement."
+  - series_key: acq.openai.ona.pt
+    source_id: cnbc
+    entity_id: openai
+    value_text: "acquiring Ona (secure cloud dev environments for agents) for Codex; terms not disclosed"
+    unit: text
+    as_of_date: 2026-06-11
+    published_date: 2026-06-11
+    url: https://www.cnbc.com/2026/06/11/open-ai-ona-acquisition-codex.html
+    tier: 5
+    basis: reported
+    raw_snippet: "OpenAI on Thursday announced it will acquire Ona, a startup that provides secure, pre-configured cloud environments where artificial intelligence agents can access tools, systems and context."
+    note: "OpenAI -> Ona (formerly Gitpod); 'OpenAI did not disclose the terms of the acquisition'."
+  - series_key: acq.openai.tbpn.pt
+    source_id: techcrunch
+    entity_id: openai
+    value_text: "acquired TBPN (media); terms not disclosed"
+    unit: text
+    as_of_date: 2026-04-02
+    published_date: 2026-04-02
+    url: https://techcrunch.com/2026/04/02/openai-acquires-tbpn-the-buzzy-founder-led-business-talk-show/
+    tier: 7
+    basis: reported
+    raw_snippet: "OpenAI has acquired popular tech industry talk show TBPN — Technology Business Programming Network — making this the AI giant’s first acquisition of a media company."
+    note: "OpenAI -> TBPN, its first media acquisition; WSJ put TBPN on track for >$30M 2026 revenue."
+  - series_key: acq.stripe.openrouter.pt
+    source_id: techcrunch
+    value: 7000000000
+    unit: USD
+    as_of_date: 2026-08-16
+    published_date: 2026-08-16
+    url: https://techcrunch.com/2026/08/16/stripe-will-reportedly-acquire-ai-gateway-startup-openrouter-for-7b/
+    tier: 7
+    basis: reported
+    raw_snippet: "Now, Bloomberg said those discussions have led to a deal price of more than $7 billion."
+    note: "Stripe -> OpenRouter, TechCrunch relaying Bloomberg; 'more than $7 billion' stored as the floor. Stripe is a payments company, not a lab or hyperscaler; no stripe entity exists yet."
+  - series_key: acq.stripe.openrouter.pt
+    source_id: stripe_newsroom
+    value_text: "agreed to acquire OpenRouter; price not stated by Stripe"
+    unit: text
+    as_of_date: 2026-08-19
+    published_date: 2026-08-19
+    url: https://stripe.com/newsroom/news/stripe-agrees-to-acquire-openrouter
+    tier: 4
+    basis: company_stated
+    raw_snippet: "Stripe, the programmable financial services company, today announced that it has agreed to acquire OpenRouter, a leading AI model gateway and routing platform."
+    note: "Acquirer's own announcement (19 Aug 2026) confirms the deal; no consideration disclosed. OpenRouter was valued at $1.3B in its May 2026 Series B (Menlo)."
+  - series_key: acq.nvda.hugging_face.pt
+    source_id: nvidia_blog
+    entity_id: nvda
+    value: 12930300000
+    unit: USD
+    as_of_date: 2026-09-03
+    published_date: 2026-09-03
+    url: https://blogs.nvidia.com/blog/nvidia-to-acquire-hugging-face/
+    tier: 4
+    basis: company_stated
+    raw_snippet: "I’m excited to announce that NVIDIA has agreed to acquire Hugging Face for $12,930,300,000."
+    note: "Nvidia -> Hugging Face (model/app hub, 18M developers); Jensen Huang's own post. Second-largest Nvidia purchase after the $20B Groq asset deal (Dec 2025)."
+  - series_key: acq.nvda.hugging_face.pt
+    source_id: cnbc
+    entity_id: nvda
+    value: 12900000000
+    unit: USD
+    as_of_date: 2026-09-03
+    published_date: 2026-09-03
+    url: https://www.cnbc.com/2026/09/03/nvidia-agrees-to-buy-hugging-face-for-almost-13-billion-ai-expansion.html
+    tier: 5
+    basis: reported
+    raw_snippet: "Nvidia agreed to buy Hugging Face, an open-source AI platform, for $12.9 billion."
+    note: "CNBC relay; Huang says Hugging Face stays an open platform and Nvidia compute will not be required."
+  - series_key: acq.amzn.ducklabs.pt
+    source_id: aws_blog
+    entity_id: amzn
+    value_text: "definitive agreement to acquire DuckLabs (DuckDB); terms not disclosed"
+    unit: text
+    as_of_date: 2026-08-26
+    published_date: 2026-08-26
+    url: https://aws.amazon.com/blogs/big-data/aws-and-ducklabs-building-the-future-of-analytics-together/
+    tier: 4
+    basis: company_stated
+    raw_snippet: "Today we are announcing that Amazon has signed a definitive agreement to acquire DuckLabs, the Amsterdam-based company behind the open-source analytical database DuckDB."
+    note: "AWS -> DuckLabs (analytics database); DuckDB open-source project stays with the DuckDB Foundation. AWS Big Data Blog, 26 Aug 2026."
+  - series_key: acq.amzn.ducklabs.pt
+    source_id: amazon_news
+    entity_id: amzn
+    value_text: "definitive agreement to acquire DuckLabs; terms not disclosed"
+    unit: text
+    as_of_date: 2026-08-26
+    published_date: 2026-08-26
+    url: https://www.aboutamazon.com/news/company-news/aws-ducklabs
+    tier: 4
+    basis: company_stated
+    raw_snippet: "Amazon has announced it has signed a definitive agreement to acquire DuckLabs, the Amsterdam-based company behind the open source analytical database DuckDB."
+    note: "About Amazon company-news post (undated in page text; date taken from the AWS blog of 26 Aug 2026)."
