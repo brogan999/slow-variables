@@ -1,0 +1,162 @@
+{
+ "band_input": "nber.us_workers.high_exposure_low_adaptive_capacity.pt",
+ "band_rationale": "Normal = under five million workers (about 3% of the workforce), the scale of the China trade shock spread over a decade; fast = ten million or more. Between is `emerging`.",
+ "band_value": {
+  "as_of": "2026-01-31",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "d811ea689cbfb327"
+  ],
+  "value": 3300000.0
+ },
+ "bucket_id": "adaptation",
+ "cadence_expected": "annual",
+ "confidence": 45,
+ "counterevidence": "Single source (tier 6); exposure and adaptive capacity are both modelled; the WP 34705 abstract gives different totals from the chapter page.",
+ "crosswalk": [
+  {
+   "bucket_id": "adaptation",
+   "layer_id": "labour_consumers",
+   "note": "Productivity, wages, employment and consumer surplus.",
+   "relation": "same_valve",
+   "shared_indicators": [],
+   "sublayer_id": null
+  }
+ ],
+ "definition": "Number of US workers who are both in the top exposure quartile and have low measured capacity to move occupations, from Manning and Aguirre's NBER chapter (January 2026).",
+ "derived": [],
+ "direction": null,
+ "direction_rule": null,
+ "evidence": [],
+ "falsifying_band": null,
+ "fast_band": {
+  "hi": null,
+  "lo": 10000000.0
+ },
+ "fits": [],
+ "flow_status": null,
+ "grade": "B",
+ "id": "exposed_low_adaptive_workers",
+ "latest": {
+  "as_of": "2026-01-31",
+  "disputed": false,
+  "grade": "B",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "d811ea689cbfb327"
+  ],
+  "series_key": "nber.us_workers.high_exposure_low_adaptive_capacity.pt",
+  "subject": "us_workers",
+  "unit": "workers",
+  "value": 3300000.0
+ },
+ "layer_id": "labour_consumers",
+ "leading_lagging": "leading",
+ "metric": null,
+ "metric_dims": {},
+ "n_observations": 1,
+ "name": "Workers highly exposed to AI with low adaptive capacity",
+ "normal_band": {
+  "hi": 5000000.0,
+  "lo": null
+ },
+ "override_note": null,
+ "points": [
+  {
+   "as_of": "2026-01-31",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "d811ea689cbfb327"
+   ],
+   "series_key": "nber.us_workers.high_exposure_low_adaptive_capacity.pt",
+   "subject": "us_workers",
+   "unit": "workers",
+   "value": 3300000.0
+  }
+ ],
+ "proposed_status": "emerging",
+ "proxy_types": [
+  "welfare"
+ ],
+ "published": true,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "canaries_exposed_employment_yoy",
+  "humlum_precise_null"
+ ],
+ "related_metrics": [],
+ "related_predictions": [],
+ "series": [
+  {
+   "points": [
+    {
+     "as_of": "2026-01-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "d811ea689cbfb327"
+     ],
+     "series_key": "nber.us_workers.high_exposure_low_adaptive_capacity.pt",
+     "subject": "us_workers",
+     "unit": "workers",
+     "value": 3300000.0
+    }
+   ],
+   "series_key": "nber.us_workers.high_exposure_low_adaptive_capacity.pt"
+  }
+ ],
+ "series_keys": [
+  "nber.us_workers.high_exposure_low_adaptive_capacity.pt"
+ ],
+ "sparkline": [
+  {
+   "as_of": "2026-01-31",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "d811ea689cbfb327"
+   ],
+   "series_key": "nber.us_workers.high_exposure_low_adaptive_capacity.pt",
+   "subject": "us_workers",
+   "unit": "workers",
+   "value": 3300000.0
+  }
+ ],
+ "stale_as_of": null,
+ "stale_ok": false,
+ "stale_reason": null,
+ "status": "emerging",
+ "status_events": [
+  {
+   "author": "evaluate",
+   "created_at": "2026-09-10T07:06:26.572109Z",
+   "evidence_ids": [
+    "d811ea689cbfb327"
+   ],
+   "id": "715f55677e484540",
+   "new_conf": 45,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "First scoring. 3.3 million US workers are both highly exposed and low in adaptive capacity (Manning and Aguirre, NBER chapter, Jan 2026), inside the normal band; a single tier-6 estimate cannot score under the two-source rule, so emerging.",
+   "target_id": "exposed_low_adaptive_workers",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": null,
+ "tracker_interpretation": "3.3 million, or 2.5% of the sample. One estimate, one method; the working-paper version revises the split.",
+ "unit": "workers",
+ "unpublished_reason": null,
+ "updated_at": "2026-09-10",
+ "valve_measured": "adoption_to_adaptation",
+ "why_it_matters": "Displacement is a distribution question. The workers who cannot adapt are where a fast scenario turns from a productivity story into a welfare one."
+}

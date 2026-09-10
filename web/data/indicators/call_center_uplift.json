@@ -1,0 +1,174 @@
+{
+ "band_input": "nber.customer_support_agents.productivity_uplift.pt",
+ "band_rationale": "Normal = an average uplift under 20%, the range prior process tools (CRM, knowledge bases) delivered in the same job; fast = 50% or more, the order of magnitude the fast scenario needs from a single tool. Between is `emerging`.",
+ "band_value": {
+  "as_of": "2023-04-30",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "15a42a777f78ef32"
+  ],
+  "value": 0.14
+ },
+ "bucket_id": "adaptation",
+ "cadence_expected": "annual",
+ "confidence": 75,
+ "counterevidence": "One firm, one tool, 2020-21 vintage models; issues per hour is a partial productivity measure; later assistants may do more.",
+ "crosswalk": [],
+ "definition": "Change in issues resolved per hour when support agents get a generative-AI assistant, from the Brynjolfsson, Li and Raymond field experiment (NBER WP 31161), with the novice effect and MIT Sloan's restatement shown alongside.",
+ "derived": [],
+ "direction": null,
+ "direction_rule": null,
+ "evidence": [],
+ "falsifying_band": null,
+ "fast_band": {
+  "hi": null,
+  "lo": 0.5
+ },
+ "fits": [],
+ "flow_status": null,
+ "grade": "B",
+ "id": "call_center_uplift",
+ "latest": {
+  "as_of": "2023-04-30",
+  "disputed": false,
+  "grade": "B",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "15a42a777f78ef32"
+  ],
+  "series_key": "nber.customer_support_agents.productivity_uplift.pt",
+  "subject": "customer_support_agents",
+  "unit": "share",
+  "value": 0.14
+ },
+ "layer_id": "adopters",
+ "leading_lagging": "coincident",
+ "metric": null,
+ "metric_dims": {},
+ "n_observations": 2,
+ "name": "Customer-support productivity uplift from a generative-AI assistant",
+ "normal_band": {
+  "hi": 0.2,
+  "lo": null
+ },
+ "override_note": null,
+ "points": [
+  {
+   "as_of": "2023-04-30",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "15a42a777f78ef32"
+   ],
+   "series_key": "nber.customer_support_agents.productivity_uplift.pt",
+   "subject": "customer_support_agents",
+   "unit": "share",
+   "value": 0.14
+  }
+ ],
+ "proposed_status": "consistent_with_normal",
+ "proxy_types": [
+  "deployment",
+  "welfare"
+ ],
+ "published": true,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "dev_rct_uplift",
+  "exec_reported_impact"
+ ],
+ "related_metrics": [],
+ "related_predictions": [],
+ "series": [
+  {
+   "points": [
+    {
+     "as_of": "2023-04-30",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "8ccfce3630b85493"
+     ],
+     "series_key": "mitsloan.customer_support_agents.productivity_uplift.pt",
+     "subject": "customer_support_agents",
+     "unit": "share",
+     "value": 0.14
+    }
+   ],
+   "series_key": "mitsloan.customer_support_agents.productivity_uplift.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2023-04-30",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "15a42a777f78ef32"
+     ],
+     "series_key": "nber.customer_support_agents.productivity_uplift.pt",
+     "subject": "customer_support_agents",
+     "unit": "share",
+     "value": 0.14
+    }
+   ],
+   "series_key": "nber.customer_support_agents.productivity_uplift.pt"
+  }
+ ],
+ "series_keys": [
+  "nber.customer_support_agents.productivity_uplift.pt",
+  "mitsloan.customer_support_agents.productivity_uplift.pt"
+ ],
+ "sparkline": [
+  {
+   "as_of": "2023-04-30",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "15a42a777f78ef32"
+   ],
+   "series_key": "nber.customer_support_agents.productivity_uplift.pt",
+   "subject": "customer_support_agents",
+   "unit": "share",
+   "value": 0.14
+  }
+ ],
+ "stale_as_of": null,
+ "stale_ok": true,
+ "stale_reason": "A one-off field experiment; refreshed only when a comparable randomised study publishes.",
+ "status": "consistent_with_normal",
+ "status_events": [
+  {
+   "author": "evaluate",
+   "created_at": "2026-09-10T07:06:26.390304Z",
+   "evidence_ids": [
+    "15a42a777f78ef32"
+   ],
+   "id": "6008376409e77917",
+   "new_conf": 75,
+   "new_status": "consistent_with_normal",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "Evaluator: 0.14 (NBER working papers and chapters, 2023-04-30) is inside the consistent band (hi=0.2). Auto-reason; band rationale: Normal = an average uplift under 20%, the range prior process tools (CRM, knowledge bases) delivered in the same job; fast = 50% or more, the order of magnitude the fast scenario needs from a single tool. Between is `emerging`.",
+   "target_id": "call_center_uplift",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": null,
+ "tracker_interpretation": "A 14% average, 34% for novices and nothing for experts. A tool that levels the floor, not one that replaces the role.",
+ "unit": "share",
+ "unpublished_reason": null,
+ "updated_at": "2026-09-10",
+ "valve_measured": "adoption_to_adaptation",
+ "why_it_matters": "The best-identified productivity effect on record for a deployed assistant; the normal-technology story predicts modest average gains concentrated in novices, which is exactly what it found."
+}

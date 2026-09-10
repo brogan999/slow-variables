@@ -64,6 +64,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "emerging",
    "unit": "share",
    "unpublished_reason": null,
@@ -376,6 +377,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "emerging",
    "unit": "ratio",
    "unpublished_reason": null,
@@ -504,6 +506,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "dispersing",
    "unit": "ratio",
    "unpublished_reason": null,
@@ -564,6 +567,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "emerging",
    "unit": "share",
    "unpublished_reason": null,
@@ -624,6 +628,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "consistent_with_normal",
    "unit": "share",
    "unpublished_reason": null,
@@ -670,10 +675,146 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "consistent_with_normal",
    "unit": "share",
    "unpublished_reason": null,
    "valve_measured": "product_to_adoption"
+  },
+  {
+   "bucket_id": "adaptation",
+   "confidence": 60,
+   "grade": "A",
+   "id": "fda_first_llm_device",
+   "latest": {
+    "as_of": "2025-12-23",
+    "dims": {},
+    "obs_ids": [
+     "678d971e84b1de53",
+     "8da46094b2c903b1",
+     "f98335f057fe8c67"
+    ],
+    "unit": "count",
+    "value": 1.0
+   },
+   "layer_id": "deployment_application",
+   "leading_lagging": "leading",
+   "n_observations": 3,
+   "name": "FDA-authorised devices built on a large language model",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2025-12-23",
+     "dims": {},
+     "obs_ids": [
+      "678d971e84b1de53",
+      "8da46094b2c903b1",
+      "f98335f057fe8c67"
+     ],
+     "unit": "count",
+     "value": 1.0
+    }
+   ],
+   "stale_as_of": null,
+   "stale_reason": "An event-driven count; it moves only when a new LLM-based device is authorised.",
+   "status": "consistent_with_normal",
+   "unit": "count",
+   "unpublished_reason": null,
+   "valve_measured": "adoption_to_adaptation"
+  },
+  {
+   "bucket_id": "products",
+   "confidence": 40,
+   "grade": "D",
+   "id": "harvey_lab_frontier_completion",
+   "latest": {
+    "as_of": "2026-05-26",
+    "disputed": false,
+    "grade": "D",
+    "high": null,
+    "low": null,
+    "obs_ids": [
+     "723ff70f7eaca105"
+    ],
+    "series_key": "harvey_blog.lab_holdout.all_pass_top_model.pt",
+    "subject": "lab_holdout",
+    "unit": "share",
+    "value": 0.071
+   },
+   "layer_id": "deployment_application",
+   "leading_lagging": "leading",
+   "n_observations": 2,
+   "name": "Frontier models completing expert legal tasks end to end (Harvey LAB)",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2026-05-26",
+     "disputed": false,
+     "grade": "D",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "723ff70f7eaca105"
+     ],
+     "series_key": "harvey_blog.lab_holdout.all_pass_top_model.pt",
+     "subject": "lab_holdout",
+     "unit": "share",
+     "value": 0.071
+    }
+   ],
+   "stale_as_of": null,
+   "stale_reason": null,
+   "status": "emerging",
+   "unit": "share",
+   "unpublished_reason": null,
+   "valve_measured": "invention_to_product"
+  },
+  {
+   "bucket_id": "adaptation",
+   "confidence": 65,
+   "grade": "C",
+   "id": "waymo_weekly_paid_rides",
+   "latest": {
+    "as_of": "2026-03-27",
+    "disputed": false,
+    "grade": "C",
+    "high": null,
+    "low": null,
+    "obs_ids": [
+     "23ce14c301434fd3"
+    ],
+    "series_key": "techcrunch.waymo.weekly_paid_rides.pt",
+    "subject": "waymo",
+    "unit": "rides_per_week",
+    "value": 500000.0
+   },
+   "layer_id": "deployment_application",
+   "leading_lagging": "coincident",
+   "n_observations": 2,
+   "name": "Waymo paid rides per week",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2026-03-27",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "23ce14c301434fd3"
+     ],
+     "series_key": "techcrunch.waymo.weekly_paid_rides.pt",
+     "subject": "waymo",
+     "unit": "rides_per_week",
+     "value": 500000.0
+    }
+   ],
+   "stale_as_of": null,
+   "stale_reason": null,
+   "status": "consistent_with_normal",
+   "unit": "rides_per_week",
+   "unpublished_reason": null,
+   "valve_measured": "adoption_to_adaptation"
   }
  ],
  "name": "Deployment & application",

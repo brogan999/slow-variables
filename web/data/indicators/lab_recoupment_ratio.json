@@ -23,14 +23,14 @@
  },
  "bucket_id": null,
  "cadence_expected": "monthly",
- "confidence": null,
- "counterevidence": "Tier-5 inputs on both sides; equity raised is a floor on capital consumed. Unpublished until a second source confirms the run-rate points.",
+ "confidence": 50,
+ "counterevidence": "Tier-5 inputs on both sides; equity raised is a floor on capital consumed.",
  "crosswalk": [],
  "definition": "OpenAI's latest revenue run-rate divided by all equity it had raised by that date (derived metric lab_recoupment_ratio, Epoch data).",
  "derived": [
   {
    "as_of_date": "2023-03-01",
-   "computed_at": "2026-09-10T06:54:25.117392Z",
+   "computed_at": "2026-09-10T07:06:24.664913Z",
    "dims": {
     "entity": "openai"
    },
@@ -57,7 +57,7 @@
   },
   {
    "as_of_date": "2023-08-29",
-   "computed_at": "2026-09-10T06:54:25.117392Z",
+   "computed_at": "2026-09-10T07:06:24.664913Z",
    "dims": {
     "entity": "openai"
    },
@@ -86,7 +86,7 @@
   },
   {
    "as_of_date": "2023-10-10",
-   "computed_at": "2026-09-10T06:54:25.117392Z",
+   "computed_at": "2026-09-10T07:06:24.664913Z",
    "dims": {
     "entity": "openai"
    },
@@ -115,7 +115,7 @@
   },
   {
    "as_of_date": "2023-12-30",
-   "computed_at": "2026-09-10T06:54:25.117392Z",
+   "computed_at": "2026-09-10T07:06:24.664913Z",
    "dims": {
     "entity": "openai"
    },
@@ -144,7 +144,7 @@
   },
   {
    "as_of_date": "2023-12-31",
-   "computed_at": "2026-09-10T06:54:25.117392Z",
+   "computed_at": "2026-09-10T07:06:24.664913Z",
    "dims": {
     "entity": "openai"
    },
@@ -173,7 +173,7 @@
   },
   {
    "as_of_date": "2024-06-12",
-   "computed_at": "2026-09-10T06:54:25.117392Z",
+   "computed_at": "2026-09-10T07:06:24.664913Z",
    "dims": {
     "entity": "openai"
    },
@@ -202,7 +202,7 @@
   },
   {
    "as_of_date": "2024-08-15",
-   "computed_at": "2026-09-10T06:54:25.117392Z",
+   "computed_at": "2026-09-10T07:06:24.664913Z",
    "dims": {
     "entity": "openai"
    },
@@ -231,7 +231,7 @@
   },
   {
    "as_of_date": "2024-09-12",
-   "computed_at": "2026-09-10T06:54:25.117392Z",
+   "computed_at": "2026-09-10T07:06:24.664913Z",
    "dims": {
     "entity": "openai"
    },
@@ -260,7 +260,7 @@
   },
   {
    "as_of_date": "2024-12-31",
-   "computed_at": "2026-09-10T06:54:25.117392Z",
+   "computed_at": "2026-09-10T07:06:24.664913Z",
    "dims": {
     "entity": "openai"
    },
@@ -291,7 +291,7 @@
   },
   {
    "as_of_date": "2025-06-09",
-   "computed_at": "2026-09-10T06:54:25.117392Z",
+   "computed_at": "2026-09-10T07:06:24.664913Z",
    "dims": {
     "entity": "openai"
    },
@@ -324,7 +324,7 @@
   },
   {
    "as_of_date": "2025-07-30",
-   "computed_at": "2026-09-10T06:54:25.117392Z",
+   "computed_at": "2026-09-10T07:06:24.664913Z",
    "dims": {
     "entity": "openai"
    },
@@ -357,7 +357,7 @@
   },
   {
    "as_of_date": "2025-08-01",
-   "computed_at": "2026-09-10T06:54:25.117392Z",
+   "computed_at": "2026-09-10T07:06:24.664913Z",
    "dims": {
     "entity": "openai"
    },
@@ -392,7 +392,7 @@
   },
   {
    "as_of_date": "2025-12-18",
-   "computed_at": "2026-09-10T06:54:25.117392Z",
+   "computed_at": "2026-09-10T07:06:24.664913Z",
    "dims": {
     "entity": "openai"
    },
@@ -427,7 +427,7 @@
   },
   {
    "as_of_date": "2025-12-31",
-   "computed_at": "2026-09-10T06:54:25.117392Z",
+   "computed_at": "2026-09-10T07:06:24.664913Z",
    "dims": {
     "entity": "openai"
    },
@@ -464,7 +464,7 @@
   },
   {
    "as_of_date": "2026-02-28",
-   "computed_at": "2026-09-10T06:54:25.117392Z",
+   "computed_at": "2026-09-10T07:06:24.664913Z",
    "dims": {
     "entity": "openai"
    },
@@ -503,7 +503,7 @@
   },
   {
    "as_of_date": "2026-08-13",
-   "computed_at": "2026-09-10T06:54:25.117392Z",
+   "computed_at": "2026-09-10T07:06:24.664913Z",
    "dims": {
     "entity": "openai"
    },
@@ -876,7 +876,7 @@
  "proxy_types": [
   "capital_flow"
  ],
- "published": false,
+ "published": true,
  "related_bottlenecks": [
   75
  ],
@@ -1173,12 +1173,39 @@
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,
- "status": null,
- "status_events": [],
+ "status": "emerging",
+ "status_events": [
+  {
+   "author": "evaluate",
+   "created_at": "2026-09-10T07:06:24.995829Z",
+   "evidence_ids": [
+    "15d383db12c87c1e",
+    "167d57240d3a4367",
+    "2932a2f9febe1aeb",
+    "3225749165d9c18c",
+    "3cedc058b3e5c5d9",
+    "4c7d05bb7edc95d9",
+    "b892fe5de7c7b647",
+    "c3b51b4040aaaee3",
+    "c73ede82ddda7d55",
+    "d72e3cf14dacb84a",
+    "db8429b333d8fc75",
+    "f7701f1b6ac42494"
+   ],
+   "id": "6508557d5b55f5f2",
+   "new_conf": 50,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "First scoring. OpenAI's run-rate ($40B, Epoch/PYMNTS/Yahoo relaying Bloomberg, Aug 2026) over cumulative equity raised gives a ratio still under 1 with three points of history; the direction rule needs more periods, so emerging.",
+   "target_id": "lab_recoupment_ratio",
+   "target_type": "indicator"
+  }
+ ],
  "sublayer_id": "frontier_labs",
  "tracker_interpretation": "Large caveat, as the brief says - excludes debt, compute credits and cloud commitments, and the numerator is a run-rate.",
  "unit": "ratio",
- "unpublished_reason": "Depends on lab_run_rates, which is unpublished for want of a second source; the cumulative-capital denominator is ready.",
+ "unpublished_reason": null,
  "updated_at": "2026-09-10",
  "valve_measured": null,
  "why_it_matters": "The financial form of the return arrow. If deployment revenue is recouping invention capital, the loop is closing; if capital keeps outrunning revenue, the layer is being subsidised."

@@ -1,0 +1,175 @@
+{
+ "band_input": "nber.executives_4_countries.no_ai_impact_share.pt",
+ "band_rationale": "Normal = at least 70% of firms report no measurable impact three years in, as with PCs at the same age; fast = a majority reporting impact (no-impact share under 40%). Between is `emerging`.",
+ "band_value": {
+  "as_of": "2026-02-28",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "d0538040758acb6e"
+  ],
+  "value": 0.9
+ },
+ "bucket_id": "adaptation",
+ "cadence_expected": "annual",
+ "confidence": 70,
+ "counterevidence": "Executives may not see impacts that exist below the firm-level line; the question asks about the last three years, which mostly predate agentic tools.",
+ "crosswalk": [],
+ "definition": "Share of executives in a four-country survey (US, UK, Germany, Australia; more than 5,000 respondents) reporting no measurable AI impact on their firm's employment or productivity over the last three years, from Yotzov, Barrero and co-authors (NBER WP 34836).",
+ "derived": [],
+ "direction": null,
+ "direction_rule": null,
+ "evidence": [],
+ "falsifying_band": null,
+ "fast_band": {
+  "hi": 0.4,
+  "lo": null
+ },
+ "fits": [],
+ "flow_status": null,
+ "grade": "C",
+ "id": "exec_reported_impact",
+ "latest": {
+  "as_of": "2026-02-28",
+  "disputed": false,
+  "grade": "B",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "d0538040758acb6e"
+  ],
+  "series_key": "nber.executives_4_countries.no_ai_impact_share.pt",
+  "subject": "executives_4_countries",
+  "unit": "share",
+  "value": 0.9
+ },
+ "layer_id": "adopters",
+ "leading_lagging": "lagging",
+ "metric": null,
+ "metric_dims": {},
+ "n_observations": 2,
+ "name": "Executives reporting no AI impact on their own firm",
+ "normal_band": {
+  "hi": null,
+  "lo": 0.7
+ },
+ "override_note": null,
+ "points": [
+  {
+   "as_of": "2026-02-28",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "d0538040758acb6e"
+   ],
+   "series_key": "nber.executives_4_countries.no_ai_impact_share.pt",
+   "subject": "executives_4_countries",
+   "unit": "share",
+   "value": 0.9
+  }
+ ],
+ "proposed_status": "consistent_with_normal",
+ "proxy_types": [
+  "deployment",
+  "welfare"
+ ],
+ "published": true,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "call_center_uplift",
+  "bls_labor_productivity_yoy",
+  "enterprise_pilot_to_production"
+ ],
+ "related_metrics": [],
+ "related_predictions": [],
+ "series": [
+  {
+   "points": [
+    {
+     "as_of": "2026-02-28",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "d0538040758acb6e"
+     ],
+     "series_key": "nber.executives_4_countries.no_ai_impact_share.pt",
+     "subject": "executives_4_countries",
+     "unit": "share",
+     "value": 0.9
+    }
+   ],
+   "series_key": "nber.executives_4_countries.no_ai_impact_share.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-02-28",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "c244d898985112b3"
+     ],
+     "series_key": "peoplematters.executives_4_countries.no_ai_employment_impact_share.pt",
+     "subject": "executives_4_countries",
+     "unit": "share",
+     "value": 0.9
+    }
+   ],
+   "series_key": "peoplematters.executives_4_countries.no_ai_employment_impact_share.pt"
+  }
+ ],
+ "series_keys": [
+  "nber.executives_4_countries.no_ai_impact_share.pt",
+  "peoplematters.executives_4_countries.no_ai_employment_impact_share.pt"
+ ],
+ "sparkline": [
+  {
+   "as_of": "2026-02-28",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "d0538040758acb6e"
+   ],
+   "series_key": "nber.executives_4_countries.no_ai_impact_share.pt",
+   "subject": "executives_4_countries",
+   "unit": "share",
+   "value": 0.9
+  }
+ ],
+ "stale_as_of": null,
+ "stale_ok": false,
+ "stale_reason": null,
+ "status": "consistent_with_normal",
+ "status_events": [
+  {
+   "author": "evaluate",
+   "created_at": "2026-09-10T07:06:26.439043Z",
+   "evidence_ids": [
+    "d0538040758acb6e"
+   ],
+   "id": "2db7af8769911f97",
+   "new_conf": 70,
+   "new_status": "consistent_with_normal",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "Evaluator: 0.9 (NBER working papers and chapters, 2026-02-28) is inside the consistent band (lo=0.7 ). Auto-reason; band rationale: Normal = at least 70% of firms report no measurable impact three years in, as with PCs at the same age; fast = a majority reporting impact (no-impact share under 40%). Between is `emerging`.",
+   "target_id": "exec_reported_impact",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": null,
+ "tracker_interpretation": "The survey says what the productivity statistics say. Impact is expected, reported and rarely measured.",
+ "unit": "share",
+ "unpublished_reason": null,
+ "updated_at": "2026-09-10",
+ "valve_measured": "adoption_to_adaptation",
+ "why_it_matters": "Adoption headlines are broad, but firm-level impact is what adaptation means. Nine in ten firms seeing nothing yet is the productivity J-curve in survey form."
+}

@@ -1,0 +1,183 @@
+{
+ "band_input": "techcrunch.waymo.weekly_paid_rides.pt",
+ "band_rationale": "Normal = under a million paid rides a week, well under one percent of US ride-hail trips and scaling one city at a time; fast = five million or more, a national-scale substitution. Between is `emerging`.",
+ "band_value": {
+  "as_of": "2026-03-27",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "23ce14c301434fd3"
+  ],
+  "value": 500000.0
+ },
+ "bucket_id": "adaptation",
+ "cadence_expected": "quarterly",
+ "confidence": 65,
+ "counterevidence": "Company-stated figures relayed by the press (tier 5); city launches are lumpy; a single safety event can pause the curve.",
+ "crosswalk": [
+  {
+   "bucket_id": "adaptation",
+   "layer_id": "deployment_application",
+   "note": "Deployment/FDE services capture part of the surplus that adaptation creates.",
+   "relation": "leak_from",
+   "shared_indicators": [],
+   "sublayer_id": "deployment_services"
+  }
+ ],
+ "definition": "Paid robotaxi rides Waymo provides per week across its US cities, as stated by the company and relayed by the press.",
+ "derived": [],
+ "direction": null,
+ "direction_rule": null,
+ "evidence": [],
+ "falsifying_band": null,
+ "fast_band": {
+  "hi": null,
+  "lo": 5000000.0
+ },
+ "fits": [],
+ "flow_status": null,
+ "grade": "C",
+ "id": "waymo_weekly_paid_rides",
+ "latest": {
+  "as_of": "2026-03-27",
+  "disputed": false,
+  "grade": "C",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "23ce14c301434fd3"
+  ],
+  "series_key": "techcrunch.waymo.weekly_paid_rides.pt",
+  "subject": "waymo",
+  "unit": "rides_per_week",
+  "value": 500000.0
+ },
+ "layer_id": "deployment_application",
+ "leading_lagging": "coincident",
+ "metric": null,
+ "metric_dims": {},
+ "n_observations": 2,
+ "name": "Waymo paid rides per week",
+ "normal_band": {
+  "hi": 1000000.0,
+  "lo": null
+ },
+ "override_note": null,
+ "points": [
+  {
+   "as_of": "2026-03-27",
+   "disputed": false,
+   "grade": "C",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "23ce14c301434fd3"
+   ],
+   "series_key": "techcrunch.waymo.weekly_paid_rides.pt",
+   "subject": "waymo",
+   "unit": "rides_per_week",
+   "value": 500000.0
+  }
+ ],
+ "proposed_status": "consistent_with_normal",
+ "proxy_types": [
+  "deployment",
+  "product"
+ ],
+ "published": true,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "fda_first_llm_device",
+  "state_ai_bills_introduced"
+ ],
+ "related_metrics": [],
+ "related_predictions": [],
+ "series": [
+  {
+   "points": [
+    {
+     "as_of": "2026-03-31",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "b37b9be98e4e4860"
+     ],
+     "series_key": "electrek.waymo.weekly_paid_rides.pt",
+     "subject": "waymo",
+     "unit": "rides_per_week",
+     "value": 500000.0
+    }
+   ],
+   "series_key": "electrek.waymo.weekly_paid_rides.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-27",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "23ce14c301434fd3"
+     ],
+     "series_key": "techcrunch.waymo.weekly_paid_rides.pt",
+     "subject": "waymo",
+     "unit": "rides_per_week",
+     "value": 500000.0
+    }
+   ],
+   "series_key": "techcrunch.waymo.weekly_paid_rides.pt"
+  }
+ ],
+ "series_keys": [
+  "techcrunch.waymo.weekly_paid_rides.pt",
+  "electrek.waymo.weekly_paid_rides.pt"
+ ],
+ "sparkline": [
+  {
+   "as_of": "2026-03-27",
+   "disputed": false,
+   "grade": "C",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "23ce14c301434fd3"
+   ],
+   "series_key": "techcrunch.waymo.weekly_paid_rides.pt",
+   "subject": "waymo",
+   "unit": "rides_per_week",
+   "value": 500000.0
+  }
+ ],
+ "stale_as_of": null,
+ "stale_ok": false,
+ "stale_reason": null,
+ "status": "consistent_with_normal",
+ "status_events": [
+  {
+   "author": "evaluate",
+   "created_at": "2026-09-10T07:06:26.857781Z",
+   "evidence_ids": [
+    "23ce14c301434fd3"
+   ],
+   "id": "fca7d8749ee59f87",
+   "new_conf": 65,
+   "new_status": "consistent_with_normal",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "Evaluator: 5e+05 (TechCrunch, 2026-03-27) is inside the consistent band (hi=1e+06). Auto-reason; band rationale: Normal = under a million paid rides a week, well under one percent of US ride-hail trips and scaling one city at a time; fast = five million or more, a national-scale substitution. Between is `emerging`.",
+   "target_id": "waymo_weekly_paid_rides",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": "consumer_ai",
+ "tracker_interpretation": "Half a million a week, doubling roughly yearly, ten cities. A decade-long diffusion curve on schedule.",
+ "unit": "rides_per_week",
+ "unpublished_reason": null,
+ "updated_at": "2026-09-10",
+ "valve_measured": "adoption_to_adaptation",
+ "why_it_matters": "The paper's clearest example of a regulated, physical-world deployment that diffuses city by city. The number is the speed limit made visible."
+}

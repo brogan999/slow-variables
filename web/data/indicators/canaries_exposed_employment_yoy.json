@@ -11,9 +11,9 @@
   "value": -0.002
  },
  "bucket_id": "adaptation",
- "cadence_expected": "monthly",
- "confidence": null,
- "counterevidence": "Unpublished until a second source states the all-ages figure (the Stanford note shows it only in a figure). Exposure is a model-derived measure; ADP payroll coverage skews to larger firms; the divergence began before ChatGPT on some cuts (NY Fed; Iscenko and Millet).",
+ "cadence_expected": "quarterly",
+ "confidence": 80,
+ "counterevidence": "Exposure is a model-derived measure; ADP payroll coverage skews to larger firms; the divergence began before ChatGPT on some cuts (NY Fed; Iscenko and Millet).",
  "crosswalk": [
   {
    "bucket_id": "adaptation",
@@ -36,7 +36,7 @@
  },
  "fits": [],
  "flow_status": null,
- "grade": "B",
+ "grade": "C",
  "id": "canaries_exposed_employment_yoy",
  "latest": {
   "as_of": "2026-06-30",
@@ -56,7 +56,7 @@
  "leading_lagging": "coincident",
  "metric": null,
  "metric_dims": {},
- "n_observations": 2,
+ "n_observations": 3,
  "name": "Employment in AI-exposed occupations, year on year",
  "normal_band": {
   "hi": 0.01,
@@ -84,7 +84,7 @@
   "deployment",
   "welfare"
  ],
- "published": false,
+ "published": true,
  "related_bottlenecks": [],
  "related_indicators": [
   "canaries_entry_level_gap",
@@ -130,11 +130,31 @@
     }
    ],
    "series_key": "adp_research.us_low_exposure.employment_yoy.m"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-04-30",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "21ae504b95003b35"
+     ],
+     "series_key": "fortune.us_high_exposure.employment_yoy.m",
+     "subject": "us_high_exposure",
+     "unit": "share",
+     "value": -0.002
+    }
+   ],
+   "series_key": "fortune.us_high_exposure.employment_yoy.m"
   }
  ],
  "series_keys": [
   "adp_research.us_high_exposure.employment_yoy.m",
-  "adp_research.us_low_exposure.employment_yoy.m"
+  "adp_research.us_low_exposure.employment_yoy.m",
+  "fortune.us_high_exposure.employment_yoy.m"
  ],
  "sparkline": [
   {
@@ -152,15 +172,31 @@
    "value": -0.002
   }
  ],
- "stale_as_of": "2026-06-30",
+ "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,
- "status": null,
- "status_events": [],
+ "status": "consistent_with_normal",
+ "status_events": [
+  {
+   "author": "evaluate",
+   "created_at": "2026-09-10T07:06:26.120281Z",
+   "evidence_ids": [
+    "cbb77dc61aadf044"
+   ],
+   "id": "61072ea80c3f85c8",
+   "new_conf": 80,
+   "new_status": "consistent_with_normal",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "Evaluator: -0.002 (ADP Research, Canaries Dashboard releases, 2026-06-30) is inside the consistent band (lo=-0.01 hi=0.01). Auto-reason; band rationale: Normal = within one percent of flat, ordinary occupational churn; fast = a 3% or worse decline in exposed occupations, which is what a broad AI-attributable displacement looks like in payroll data. Between is `emerging`.",
+   "target_id": "canaries_exposed_employment_yoy",
+   "target_type": "indicator"
+  }
+ ],
  "sublayer_id": null,
  "tracker_interpretation": "Exposed occupations are flat while unexposed grow slowly; the signal is in the young, not the aggregate.",
  "unit": "share",
- "unpublished_reason": "Waiting on a second source: the all-ages ADP/Stanford figure appears only in a chart in the Stanford note and one ADP row; the two-source rule blocks a scored status.",
+ "unpublished_reason": null,
  "updated_at": "2026-09-10",
  "valve_measured": "adoption_to_adaptation",
  "why_it_matters": "The paper predicts no broad AI-attributable employment decline for years; this is the highest-frequency payroll test of that claim."

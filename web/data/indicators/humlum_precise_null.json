@@ -1,0 +1,202 @@
+{
+ "band_input": "humlum_pdf.denmark_exposed_workers.chatbot_effect_on_earnings.pt",
+ "band_rationale": "Normal = earnings and hours effects within two percent two years in; fast = a decline of five percent or more for exposed workers. Between is `emerging`.",
+ "band_value": {
+  "as_of": "2024-12-31",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "dcb86d2cc1a86b58"
+  ],
+  "value": 0.0
+ },
+ "bucket_id": "adaptation",
+ "cadence_expected": "annual",
+ "confidence": 80,
+ "counterevidence": "Denmark is not the US; the window ends in 2024, before agentic tools; the effect could be a compositional wash across winners and losers.",
+ "crosswalk": [
+  {
+   "bucket_id": "adaptation",
+   "layer_id": "labour_consumers",
+   "note": "Productivity, wages, employment and consumer surplus.",
+   "relation": "same_valve",
+   "shared_indicators": [],
+   "sublayer_id": null
+  }
+ ],
+ "definition": "Difference-in-differences estimate of the effect of chatbot adoption on earnings and recorded hours for workers in exposed occupations, two years after ChatGPT, from Humlum and Vestergaard's Danish register study; the point estimates centre on zero with confidence intervals excluding effects above 2%.",
+ "derived": [],
+ "direction": null,
+ "direction_rule": null,
+ "evidence": [],
+ "falsifying_band": null,
+ "fast_band": {
+  "hi": -0.05,
+  "lo": null
+ },
+ "fits": [],
+ "flow_status": null,
+ "grade": "B",
+ "id": "humlum_precise_null",
+ "latest": {
+  "as_of": "2024-12-31",
+  "disputed": false,
+  "grade": "B",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "dcb86d2cc1a86b58"
+  ],
+  "series_key": "humlum_pdf.denmark_exposed_workers.chatbot_effect_on_earnings.pt",
+  "subject": "denmark_exposed_workers",
+  "unit": "share",
+  "value": 0.0
+ },
+ "layer_id": "labour_consumers",
+ "leading_lagging": "lagging",
+ "metric": null,
+ "metric_dims": {},
+ "n_observations": 3,
+ "name": "Chatbot effect on earnings and hours in exposed occupations (Denmark)",
+ "normal_band": {
+  "hi": 0.02,
+  "lo": -0.02
+ },
+ "override_note": null,
+ "points": [
+  {
+   "as_of": "2024-12-31",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "dcb86d2cc1a86b58"
+   ],
+   "series_key": "humlum_pdf.denmark_exposed_workers.chatbot_effect_on_earnings.pt",
+   "subject": "denmark_exposed_workers",
+   "unit": "share",
+   "value": 0.0
+  }
+ ],
+ "proposed_status": "consistent_with_normal",
+ "proxy_types": [
+  "welfare"
+ ],
+ "published": true,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "upwork_freelancer_effects",
+  "canaries_exposed_employment_yoy"
+ ],
+ "related_metrics": [],
+ "related_predictions": [],
+ "series": [
+  {
+   "points": [
+    {
+     "as_of": "2024-12-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "182212ae9c22de6e"
+     ],
+     "series_key": "chicago_booth.denmark_exposed_workers.chatbot_effect_bound.pt",
+     "subject": "denmark_exposed_workers",
+     "unit": "text",
+     "value": null
+    }
+   ],
+   "series_key": "chicago_booth.denmark_exposed_workers.chatbot_effect_bound.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2024-12-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "dcb86d2cc1a86b58"
+     ],
+     "series_key": "humlum_pdf.denmark_exposed_workers.chatbot_effect_on_earnings.pt",
+     "subject": "denmark_exposed_workers",
+     "unit": "share",
+     "value": 0.0
+    }
+   ],
+   "series_key": "humlum_pdf.denmark_exposed_workers.chatbot_effect_on_earnings.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2024-12-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "39c8b0fac5553596"
+     ],
+     "series_key": "nber.denmark_exposed_workers.chatbot_effect_bound.pt",
+     "subject": "denmark_exposed_workers",
+     "unit": "text",
+     "value": null
+    }
+   ],
+   "series_key": "nber.denmark_exposed_workers.chatbot_effect_bound.pt"
+  }
+ ],
+ "series_keys": [
+  "humlum_pdf.denmark_exposed_workers.chatbot_effect_on_earnings.pt",
+  "nber.denmark_exposed_workers.chatbot_effect_bound.pt",
+  "chicago_booth.denmark_exposed_workers.chatbot_effect_bound.pt"
+ ],
+ "sparkline": [
+  {
+   "as_of": "2024-12-31",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "dcb86d2cc1a86b58"
+   ],
+   "series_key": "humlum_pdf.denmark_exposed_workers.chatbot_effect_on_earnings.pt",
+   "subject": "denmark_exposed_workers",
+   "unit": "share",
+   "value": 0.0
+  }
+ ],
+ "stale_as_of": null,
+ "stale_ok": false,
+ "stale_reason": null,
+ "status": "consistent_with_normal",
+ "status_events": [
+  {
+   "author": "evaluate",
+   "created_at": "2026-09-10T07:06:26.634166Z",
+   "evidence_ids": [
+    "dcb86d2cc1a86b58"
+   ],
+   "id": "56ad1fbab48c1238",
+   "new_conf": 80,
+   "new_status": "consistent_with_normal",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "Evaluator: 0 (Humlum working-paper PDFs (author site), 2024-12-31) is inside the consistent band (lo=-0.02 hi=0.02). Auto-reason; band rationale: Normal = earnings and hours effects within two percent two years in; fast = a decline of five percent or more for exposed workers. Between is `emerging`.",
+   "target_id": "humlum_precise_null",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": null,
+ "tracker_interpretation": "Zero, precisely. Adoption is high, time savings are real and modest, and none of it reaches pay yet.",
+ "unit": "share",
+ "unpublished_reason": null,
+ "updated_at": "2026-09-10",
+ "valve_measured": "adoption_to_adaptation",
+ "why_it_matters": "The cleanest labour-market null on record, from administrative data covering the whole population. A normal technology shows up in earnings slowly; this is the slow showing."
+}

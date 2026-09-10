@@ -15,7 +15,10 @@ export function fmt(v: number | null | undefined, unit?: string): string {
     case "minutes": return v >= 60 ? `${(v / 60).toFixed(1)} h` : `${sig(v)} min`;
     case "days": return `${v.toFixed(0)} days`;
     case "count": return v.toFixed(0);
-    default: return unit ? `${sig(v)} ${unit}` : sig(v);
+    default: {
+      const n = Math.abs(v) >= 1e4 ? Math.round(v).toLocaleString("en-US") : sig(v);
+      return unit ? `${n} ${unit.replace(/_/g, " ")}` : n;
+    }
   }
 }
 

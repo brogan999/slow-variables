@@ -1115,3 +1115,454 @@ observations:
     basis: reported
     raw_snippet: "We show that this feedback is a sufficient signal for continual learning when the frozen model is paired with an external memory that distils each episode into retrievable natural-language rules."
     note: "Tablan, Taylor, Bernhem, 'Learning on the Job': the Appendix E L1 exemplar. Frozen weights, feedback distilled into retrievable rules; the abstract states pass^1 1.6x (verdict) to 2.6x (corrections) over static RAG on tau-bench banking, with cross-model transfer of the store."
+  # --- bucket 2/3/4/5 rows sourced 2026-09-09; every snippet verified verbatim against the fetched page ---
+  # 1. call_center_uplift
+  - series_key: nber.customer_support_agents.productivity_uplift.pt
+    source_id: nber
+    value: 0.14
+    unit: share
+    as_of_date: 2023-04-30
+    published_date: 2023-11-30
+    url: https://www.nber.org/papers/w31161
+    tier: 6
+    basis: estimated
+    raw_snippet: "Access to the tool increases productivity, as measured by issues resolved per hour, by 14% on average, including a 34% improvement for novice and low-skilled workers but with minimal impact on experienced and highly skilled workers."
+    note: "Brynjolfsson, Li & Raymond, NBER WP 31161 (rev. Nov 2023; QJE 2025). as_of = issue date; the field experiment ran 2020-21. Novices +34%."
+  - series_key: mitsloan.customer_support_agents.productivity_uplift.pt
+    source_id: mitsloan
+    value: 0.14
+    unit: share
+    as_of_date: 2023-04-30
+    published_date: 2024-04-16
+    url: https://mitsloan.mit.edu/centers-initiatives/institute-work-and-employment-research/generative-ai-and-worker-productivity
+    tier: 6
+    basis: reported
+    raw_snippet: "Overall, access to the new tool increased worker productivity by about 14% on average, with the productivity gains concentrated among lower-skill, newer workers."
+    note: "Second source (MIT Sloan IWER summary of the same study)."
+  # 2. exec_reported_impact
+  - series_key: nber.executives_4_countries.no_ai_impact_share.pt
+    source_id: nber
+    value: 0.9
+    unit: share
+    as_of_date: 2026-02-28
+    published_date: 2026-03-31
+    url: https://www.nber.org/papers/w34836
+    tier: 6
+    basis: reported
+    raw_snippet: "executives report little own-firm impact of AI over the last 3 years, with nine-in-ten reporting no impact on employment or productivity"
+    note: "Yotzov, Barrero et al., 'Firm Data on AI', NBER WP 34836 (issued Feb 2026, rev. Mar 2026); >5,000 executives, US/UK/DE/AU. Abstract says nine-in-ten; press coverage gives >90% employment / 89% productivity."
+  - series_key: peoplematters.executives_4_countries.no_ai_employment_impact_share.pt
+    source_id: peoplematters
+    value: 0.9
+    unit: share
+    as_of_date: 2026-02-28
+    published_date: 2026-08-24
+    url: https://www.peoplematters.in/news/ai-and-emerging-tech/90percent-of-firms-see-no-measurable-ai-impact-on-productivity-or-jobs-study-51625
+    tier: 5
+    basis: reported
+    raw_snippet: "more than 90% of firms reported no measurable impact on employment, while 89% reported no measurable effect on labour productivity over the previous three years"
+    note: "Second source; 'more than 90%' stored as 0.9 floor. Same page: 89% no productivity impact."
+  # 3. harvey_lab_frontier_completion
+  - series_key: harvey_blog.lab_holdout.all_pass_top_model.pt
+    source_id: harvey_blog
+    entity_id: harvey
+    value: 0.071
+    unit: share
+    as_of_date: 2026-05-26
+    published_date: 2026-05-26
+    url: https://www.harvey.ai/blog/legal-agent-benchmark-initial-results
+    tier: 7
+    basis: company_stated
+    raw_snippet: "Claude Opus 4.7 leads at 7.1%, with Sonnet 4.6 at 5.4%, Opus 4.6 at 4.2%, GPT-5.5 at 2.1%, and Gemini 3.5 Flash at 0.8%"
+    note: "Harvey Legal Agent Benchmark (LAB) initial results; strict all-pass end-to-end standard on the holdout; best model."
+  - series_key: harvey_blog.lab_holdout.all_pass_aggregate.pt
+    source_id: harvey_blog
+    entity_id: harvey
+    value_text: "less than 10% of tasks end-to-end in aggregate"
+    unit: text
+    as_of_date: 2026-05-26
+    published_date: 2026-05-26
+    url: https://www.harvey.ai/blog/legal-agent-benchmark-initial-results
+    tier: 7
+    basis: company_stated
+    raw_snippet: "Under our strict all-pass standard, the frontier models we evaluated complete less than 10% of tasks end-to-end in aggregate."
+    note: "The brief's '<10% end-to-end (May 2026)' figure. No independent numeric second source found (Artificial Analysis LAB-AA page is JS-rendered, no figures in HTML)."
+  # 4. pass_hat_k_tau_bench
+  - series_key: arxiv.tau_bench_retail_gpt4o.pass_hat_1.pt
+    source_id: arxiv
+    value: 0.612
+    unit: share
+    as_of_date: 2024-06-17
+    published_date: 2024-06-17
+    url: https://arxiv.org/pdf/2406.12045
+    tier: 6
+    basis: reported
+    raw_snippet: "gpt-4o 61.2 35.2 48.2"
+    note: "tau-bench paper Table 2: gpt-4o pass^1 retail 61.2 / airline 35.2 / avg 48.2. The canonical k-collapse datum."
+  - series_key: arxiv.tau_bench_retail_gpt4o.pass_hat_8.pt
+    source_id: arxiv
+    value_text: "pass^8 <25% in retail"
+    unit: text
+    as_of_date: 2024-06-17
+    published_date: 2024-06-17
+    url: https://arxiv.org/abs/2406.12045
+    tier: 6
+    basis: reported
+    raw_snippet: "even state-of-the-art function calling agents (like gpt-4o) succeed on <50% of the tasks, and are quite inconsistent (pass^8 <25% in retail)"
+    note: "Same paper, abstract page. 61.2% at k=1 to <25% at k=8 for the same model."
+  - series_key: automation_anywhere.tau_bench_leaderboard_1.pass_hat_1.pt
+    source_id: automation_anywhere
+    value: 0.702
+    unit: share
+    as_of_date: 2026-05-18
+    published_date: 2026-05-18
+    url: https://www.automationanywhere.com/company/blog/product-insights/ai-agent-benchmark
+    tier: 7
+    basis: reported
+    raw_snippet: "pass¹ 74.50% 70.20% +4.3 pts pass² 67.90% 63.10% +4.8 pts pass³ 63.60% 59.30% +4.3 pts pass⁴ 60.30% 56.20% +4.1 pts"
+    note: "2026 datum: tau-bench leaderboard #1 (unnamed frontier row) pass^1 70.2% per Automation Anywhere's table; AA's own agent 74.5%. Pooled 375 tasks, 4 domains."
+  - series_key: automation_anywhere.tau_bench_leaderboard_1.pass_hat_4.pt
+    source_id: automation_anywhere
+    value: 0.562
+    unit: share
+    as_of_date: 2026-05-18
+    published_date: 2026-05-18
+    url: https://www.automationanywhere.com/company/blog/product-insights/ai-agent-benchmark
+    tier: 7
+    basis: reported
+    raw_snippet: "pass¹ 74.50% 70.20% +4.3 pts pass² 67.90% 63.10% +4.8 pts pass³ 63.60% 59.30% +4.3 pts pass⁴ 60.30% 56.20% +4.1 pts"
+    note: "Leaderboard #1 pass^4 56.2% vs pass^1 70.2%: collapse with k persists in 2026 (-14 pts by k=4). Vendor-relayed; model not named on page."
+  # 5. surprise_index
+  - series_key: aifutures_blog.ai_2027_quantitative.pace_vs_predicted.pt
+    source_id: aifutures_blog
+    value: 0.65
+    unit: share
+    as_of_date: 2025-12-31
+    published_date: 2026-02-12
+    url: https://blog.aifutures.org/p/grading-ai-2027s-2025-predictions
+    tier: 7
+    basis: estimated
+    raw_snippet: "In aggregate, progress on quantitative metrics is at roughly 65% of the pace that AI 2027 predicted."
+    note: "AI Futures Project self-grade of AI 2027's 2025 predictions (Kokotajlo & Lifland). Tier 7: actor grading itself."
+  - series_key: aifutures_blog.ai_2027_quantitative.pace_vs_predicted.pt
+    source_id: aifutures_blog
+    value: 0.75
+    unit: share
+    as_of_date: 2026-07-31
+    published_date: 2026-07-31
+    url: https://blog.aifutures.org/p/grading-ai-2027s-2025-predictions
+    tier: 7
+    basis: estimated
+    raw_snippet: "Update: As of July 2026, more data has come in; preliminary analysis indicates that progress on quantitative metrics is actually more like 75% the pace the AI 2027 predicted."
+    note: "In-page update, undated beyond 'July 2026'; published_date set to month end. Supersedes the 65% reading."
+  - series_key: ai2027_tracker.ai_2027_quantitative.pace_vs_predicted.pt
+    source_id: ai2027_tracker
+    value: 0.65
+    unit: share
+    as_of_date: 2025-12-31
+    published_date: 2026-02-28
+    url: https://ai2027-tracker.com/compare/ai-2027-vs-ai-futures/
+    tier: 6
+    basis: reported
+    raw_snippet: "65% pace → ~2 year delay"
+    note: "Independent tracker's restatement of the Feb 2026 self-grade; page undated, published_date = month of the estimate it quotes."
+  # 6. openai_work_share
+  - series_key: openai_blog.chatgpt_consumer.work_related_message_share.pt
+    source_id: openai_blog
+    entity_id: openai
+    value: 0.27
+    unit: share
+    as_of_date: 2025-06-30
+    published_date: 2025-09-15
+    url: https://cdn.openai.com/pdf/a253471f-8260-40c6-a2cc-aa93fe9f142e/economic-research-chatgpt-usage-paper.pdf
+    tier: 7
+    basis: company_stated
+    raw_snippet: "Jun 2025 1,911 73% 716 27% 2,627"
+    note: "Chatterji et al., 'How People Use ChatGPT', Table 1 row: June 2025 daily messages (millions) non-work 1,911 (73%) / work 716 (27%). PDF."
+  - series_key: nber.chatgpt_consumer.non_work_message_share.pt
+    source_id: nber
+    entity_id: openai
+    value_text: "non-work messages more than 70% of all usage (work under 30%)"
+    unit: text
+    as_of_date: 2025-07-31
+    published_date: 2025-09-30
+    url: https://www.nber.org/papers/w34255
+    tier: 6
+    basis: reported
+    raw_snippet: "which have grown from 53% to more than 70% of all usage"
+    note: "NBER WP 34255 abstract; second source for the 27% work share (stated as complement)."
+  # 7. exposure_vs_usage_gap (exposure leg; usage leg = existing bbd rows)
+  - series_key: arxiv.us_workforce.llm_exposed_10pct_tasks_share.pt
+    source_id: arxiv
+    value: 0.8
+    unit: share
+    as_of_date: 2023-03-17
+    published_date: 2023-08-21
+    url: https://arxiv.org/abs/2303.10130
+    tier: 6
+    basis: estimated
+    raw_snippet: "around 80% of the U.S. workforce could have at least 10% of their work tasks affected by the introduction of LLMs, while approximately 19% of workers may see at least 50% of their tasks impacted"
+    note: "Eloundou, Manning, Mishkin & Rock, 'GPTs are GPTs' (v5). Theoretical-exposure leg of the gap; pair with bbd.us_workers.work_use_weekly_share.pt (39%) for the usage leg."
+  # 8. exposed_low_adaptive_workers
+  - series_key: nber.us_workers.high_exposure_low_adaptive_capacity.pt
+    source_id: nber
+    value: 3300000
+    unit: workers
+    as_of_date: 2026-01-31
+    published_date: 2026-01-31
+    url: https://www.nber.org/books-and-chapters/economics-transformative-ai/how-adaptable-are-american-workers-ai-induced-job-displacement
+    tier: 6
+    basis: estimated
+    raw_snippet: "3.3 million workers (2.5 percent of the workforce in our sample) are both highly exposed and have low adaptive capacity"
+    note: "Manning & Aguirre, NBER chapter (Economics of Transformative AI), Jan 2026 working-paper version. Caution: the NBER WP 34705 abstract (same month) gives a revised split (37.1M top-quartile exposed, 26.5M with above-median capacity) and does not state 3.3M; the chapter page does. No independent second source found (Brookings/GovAI pages are the authors')."
+  # 9. yale_occupational_mix_dissimilarity
+  - series_key: yale_budget_lab.recent_vs_older_grads.occupation_dissimilarity_range.pt
+    source_id: yale_budget_lab
+    value_text: "30-33% range since January 2021"
+    unit: text
+    as_of_date: 2025-07-31
+    published_date: 2025-10-01
+    url: https://budgetlab.yale.edu/research/evaluating-impact-ai-labor-market-current-state-affairs
+    tier: 6
+    basis: reported
+    raw_snippet: "the dissimilarity between older and more recent college graduates rarely deviates outside of the 30-33% range"
+    note: "Only stated number in any Budget Lab text: the graduates sub-index. The headline all-worker index (Nov 2022 baseline) is chart-only in the Jan 2026 and Jul 2026 updates; the series lives in the xlsx (see report)."
+  # 10. humlum_precise_null
+  - series_key: humlum_pdf.denmark_exposed_workers.chatbot_effect_on_earnings.pt
+    source_id: humlum_pdf
+    value: 0
+    unit: share
+    as_of_date: 2024-12-31
+    published_date: 2026-03-13
+    url: https://static1.squarespace.com/static/5d35e72fcff15f0001b48fc2/t/6a022dda700a5125900234dd/1778527706156/chatbots_260313.pdf
+    tier: 6
+    basis: estimated
+    raw_snippet: "in-differences estimates for earnings, recorded hours, and wages all center on zero, with confidence intervals ruling out average effects larger than 2%."
+    note: "Humlum & Vestergaard, 'Still Waters, Rapid Currents' (13 Mar 2026 version). Point estimate: centred on zero; CI excludes |effect| > 2%. Snippet starts mid-word because the PDF hyphenates 'Difference-in-differences' across lines."
+  - series_key: nber.denmark_exposed_workers.chatbot_effect_bound.pt
+    source_id: nber
+    value_text: "precise null on earnings and hours; effects larger than 2% ruled out"
+    unit: text
+    as_of_date: 2024-12-31
+    published_date: 2026-03-31
+    url: https://www.nber.org/papers/w33777
+    tier: 6
+    basis: estimated
+    raw_snippet: "we estimate precise null effects on earnings and recorded hours at both the worker and workplace levels, ruling out effects larger than 2% two years after the launch of ChatGPT"
+    note: "NBER WP 33777 abstract (rev. Mar 2026)."
+  - series_key: chicago_booth.denmark_exposed_workers.chatbot_effect_bound.pt
+    source_id: chicago_booth
+    value_text: "precise null; impacts larger than two percent ruled out"
+    unit: text
+    as_of_date: 2024-12-31
+    published_date: 2026-03-31
+    url: https://www.chicagobooth.edu/research/center-for-applied-artificial-intelligence/research/our-faculty-research/2026/still-waters-rapid-currents
+    tier: 6
+    basis: reported
+    raw_snippet: "the authors estimate precise null effects, ruling out impacts larger than two percent over the observation window"
+    note: "Second source (Booth CAAI summary). Page carries no date; published_date set to the paper revision month, URL year 2026."
+  # 11. upwork_freelancer_effects
+  - series_key: cepr_voxeu.upwork_writing_freelancers.monthly_earnings_change.pt
+    source_id: cepr_voxeu
+    value: -0.052
+    unit: share
+    as_of_date: 2023-12-01
+    published_date: 2023-12-01
+    url: https://web.archive.org/web/2026/https://cepr.org/voxeu/columns/artificial-intelligence-and-its-short-term-effects-employment
+    tier: 6
+    basis: estimated
+    raw_snippet: "In writing-related occupations, freelancers experience a decrease of 2% in the number of monthly jobs and a decrease of 5.2% in monthly earnings on the platform."
+    note: "Hui, Reshef & Zhou, authors' VoxEU column; cepr.org returns 403 to bots, Wayback URL used. Same sentence: -2% monthly jobs."
+  - series_key: cepr_voxeu.upwork_writing_freelancers.monthly_jobs_change.pt
+    source_id: cepr_voxeu
+    value: -0.02
+    unit: share
+    as_of_date: 2023-12-01
+    published_date: 2023-12-01
+    url: https://web.archive.org/web/2026/https://cepr.org/voxeu/columns/artificial-intelligence-and-its-short-term-effects-employment
+    tier: 6
+    basis: estimated
+    raw_snippet: "In writing-related occupations, freelancers experience a decrease of 2% in the number of monthly jobs and a decrease of 5.2% in monthly earnings on the platform."
+    note: "Jobs leg of the same finding."
+  - series_key: wustl_olin.upwork_writing_freelancers.monthly_earnings_change.pt
+    source_id: wustl_olin
+    value: -0.052
+    unit: share
+    as_of_date: 2023-08-24
+    published_date: 2023-08-24
+    url: https://olin.washu.edu/about/news-and-media/news/2023/08/study-ai-tools-cause-a-decline-in-freelance-work-and-incomeat-least-in-the-short-run.php
+    tier: 6
+    basis: reported
+    raw_snippet: "the number of monthly jobs for writing-related freelancers on Upwork declined by 2%, while monthly earnings declined by 5.2%"
+    note: "Second source (WashU Olin news office)."
+  # 12. pwc_ai_skill_wage_premium
+  - series_key: pwc.ai_skilled_workers.wage_premium.fy
+    source_id: pwc
+    value: 0.62
+    unit: share
+    as_of_date: 2025-12-31
+    published_date: 2026-06-15
+    url: https://web.archive.org/web/2026/https://www.pwc.com/gx/en/news-room/press-releases/2026/pwc-2026-ai-jobs-barometer.html
+    tier: 7
+    basis: company_stated
+    raw_snippet: "Jobs requiring specific AI skills are growing almost eight times (69%) faster than the total jobs market (9%), with the average wage premium for AI skills rising to 62%"
+    note: "PwC 2026 Global AI Jobs Barometer press release (2025 data, 1bn+ job ads, 27 countries); pwc.com 403s bots, Wayback URL used. Confirms the brief's 62% (2025 edition was 56%)."
+  - series_key: outsource_accelerator.ai_skilled_workers.wage_premium.fy
+    source_id: outsource_accelerator
+    value: 0.62
+    unit: share
+    as_of_date: 2025-12-31
+    published_date: 2026-06-24
+    url: https://news.outsourceaccelerator.com/pwc-ai-labor-split/
+    tier: 5
+    basis: reported
+    raw_snippet: "The AI skills wage premium reached 62% globally — up from 57% the prior year — and ranges from 118% in consumer markets to just 16% in government sectors"
+    note: "Second source. Note it says prior year 57% where PwC's 2025 release said 56%; store as reported."
+  # 13. expert_data_market_run_rate
+  - series_key: dealroom.mercor.gross_revenue_run_rate_usd.pt
+    source_id: dealroom
+    entity_id: mercor
+    value: 2000000000
+    unit: USD
+    as_of_date: 2026-06-30
+    published_date: 2026-07-06
+    url: https://dealroom.co/news/137121-mercor-doubles-to-2b-gross-revenue-run-rate-as-ai-labs-buy-expert-data/
+    tier: 5
+    basis: reported
+    raw_snippet: "AI data startup Mercor hit over $2 billion in gross annualized revenue in June 2026, double its pace at the start of the year, according to a person with direct knowledge of the company's financials."
+    run_rate_vs_booked: run_rate
+    note: "Gross (before ~60-70% contractor payouts), annualised. 'over $2B' stored as 2.0B floor."
+  - series_key: techcrunch.mercor.gross_revenue_run_rate_usd.pt
+    source_id: techcrunch
+    entity_id: mercor
+    value: 2000000000
+    unit: USD
+    as_of_date: 2026-07-09
+    published_date: 2026-07-09
+    url: https://techcrunch.com/2026/07/09/mercor-is-in-talks-for-a-20b-valuation/
+    tier: 5
+    basis: company_stated
+    raw_snippet: "founder-CEO Brendan Foody took to X to say the company’s annualized revenue run rate crossed $2 billion"
+    run_rate_vs_booked: run_rate
+    note: "Second source; TechCrunch relaying the founder's X post (basis company_stated). Surge/Scale: no 2026 public figure found."
+  # 14. internal_external_deployment_gap_months
+  - series_key: dwarkesh.anthropic_mythos.internal_to_public_gap_months.pt
+    source_id: dwarkesh
+    entity_id: anthropic
+    value: 4
+    unit: months
+    as_of_date: 2026-06-30
+    published_date: 2026-08-11
+    url: https://www.dwarkesh.com/p/ryan-greenblatt
+    tier: 6
+    basis: reported
+    raw_snippet: "Mythos was available internally to Anthropic employees in February, but only released to the public in, I think, June, actually."
+    note: "Ryan Greenblatt on the Dwarkesh Podcast (11 Aug 2026): Feb internal -> Jun public = 4 months; speaker hedges ('I think'). Single datum for the February leg."
+  - series_key: fortune.anthropic_mythos.public_release.pt
+    source_id: fortune
+    entity_id: anthropic
+    value_text: "Fable 5 general release; Claude Mythos 5 to vetted partners (9 Jun 2026)"
+    unit: text
+    as_of_date: 2026-06-09
+    published_date: 2026-06-09
+    url: https://fortune.com/2026/06/09/anthropic-releases-its-first-mythos-model-to-the-public/
+    tier: 5
+    basis: reported
+    raw_snippet: "On Tuesday, the AI lab announced it was rolling out Fable 5—the first widespread release of an AI model from a significantly more powerful class of model—as a general release, and Claude Mythos 5 to vetted partners who already have access to the Claude Mythos Preview."
+    note: "Public-release leg of the gap (Tuesday 9 Jun 2026). Mythos Preview announced 7 Apr 2026 under Project Glasswing (restricted)."
+  # 15. waymo_weekly_paid_rides
+  - series_key: techcrunch.waymo.weekly_paid_rides.pt
+    source_id: techcrunch
+    value: 500000
+    unit: rides_per_week
+    as_of_date: 2026-03-27
+    published_date: 2026-03-27
+    url: https://techcrunch.com/2026/03/27/waymo-skyrocketing-ridership-in-one-chart/
+    tier: 5
+    basis: company_stated
+    raw_snippet: "Waymo is now providing 500,000 paid robotaxi rides every week across 10 U.S. cities, the company shared in a post on X this week."
+    note: "Waymo is not an entity; no entity_id. Latest stated figure found; Waymo's 1 Sep 2026 Denver/San Diego/Tampa post carries no weekly-rides number, and Jul-Sep press still cites 'more than 500,000'."
+  - series_key: electrek.waymo.weekly_paid_rides.pt
+    source_id: electrek
+    value: 500000
+    unit: rides_per_week
+    as_of_date: 2026-03-31
+    published_date: 2026-07-08
+    url: https://electrek.co/2026/07/08/waymo-driverless-las-vegas-four-new-cities/
+    tier: 5
+    basis: reported
+    raw_snippet: "It was providing around 500,000 paid rides per week across its existing markets earlier this year"
+    note: "Second source, 8 Jul 2026 four-city expansion story; 'earlier this year' -> as_of Q1 2026. Target: 1M/week by end-2026."
+  # 16. fda_first_llm_device
+  - series_key: fda_510k.updoc.first_llm_device_clearance.pt
+    source_id: fda_510k
+    value_text: "K253281 UpDoc (Updoc, Inc.), SESE decision 12/23/2025, product code NDC drug-dose calculator"
+    unit: text
+    as_of_date: 2025-12-23
+    published_date: 2025-12-23
+    url: https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm?ID=K253281
+    tier: 4
+    basis: reported
+    raw_snippet: "Decision Date 12/23/2025"
+    note: "Official record; the FDA page itself does not say 'LLM' (predicate: drug-dose calculator). Page also contains '510(k) Number K253281 Device Name UpDoc' (verified)."
+  - series_key: statnews.updoc.first_llm_device_clearance.pt
+    source_id: statnews
+    value_text: "first FDA clearance for medical software using patient-facing large language models"
+    unit: text
+    as_of_date: 2025-12-23
+    published_date: 2026-07-02
+    url: https://www.statnews.com/2026/07/02/fda-clearance-raises-questions-updoc-use-generative-ai-diabetes-treatment/
+    tier: 5
+    basis: reported
+    raw_snippet: "its app for people with diabetes had received the first Food and Drug Administration clearance for medical software using “patient-facing large language models.”"
+    note: "STAT relaying UpDoc's late-June 2026 claim; article notes clearance was December and only publicised in June."
+  - series_key: innolitics.updoc.first_llm_device_clearance.pt
+    source_id: innolitics
+    value_text: "K253281 cleared 23 Dec 2025; LLM claim not visible in the public record"
+    unit: text
+    as_of_date: 2025-12-23
+    published_date: 2026-06-25
+    url: https://innolitics.com/articles/updoc-fda-cleared-ai-agent/
+    tier: 6
+    basis: reported
+    raw_snippet: "FDA's public 510(k) database shows that K253281 cleared on December 23, 2025."
+    note: "Regulatory-consultancy analysis; flags that it is unclear whether K253281 is the LLM device UpDoc's press release describes. Keep the indicator disputed until the 510(k) summary is checked."
+  # second source: OpenAI run-rate
+  - series_key: pymnts.openai.revenue_run_rate_usd.pt
+    source_id: pymnts
+    entity_id: openai
+    value: 40000000000
+    unit: USD
+    as_of_date: 2026-07-31
+    published_date: 2026-08-14
+    url: https://www.pymnts.com/news/artificial-intelligence/2026/openais-revenue-run-rate-tops-40-billion-as-ipo-nears/
+    tier: 5
+    basis: reported
+    raw_snippet: "OpenAI is now on pace to bring in annualized revenue of more than $40 billion, roughly double its run rate from the end of 2025."
+    run_rate_vs_booked: run_rate
+    note: "Relays Bloomberg's 13 Aug 2026 report (bloomberg.com paywalled). 'more than $40B' stored as floor; July monthly run-rate +20% m/m per the same report."
+  - series_key: yahoo_finance.openai.revenue_run_rate_usd.pt
+    source_id: yahoo_finance
+    entity_id: openai
+    value: 40000000000
+    unit: USD
+    as_of_date: 2026-07-31
+    published_date: 2026-08-14
+    url: https://finance.yahoo.com/technology/ai/articles/openai-annualized-revenue-tops-40-111122841.html
+    tier: 5
+    basis: reported
+    raw_snippet: "OpenAI is headed toward annualized revenue exceeding $40 billion, a figure that would represent roughly twice the run rate it recorded at the close of 2025, Bloomberg reported"
+    run_rate_vs_booked: run_rate
+    note: "Quartz via Yahoo Finance; independent relay of the same Bloomberg report."
+  # second source: Canaries all-ages high-exposure employment
+  - series_key: fortune.us_high_exposure.employment_yoy.m
+    source_id: fortune
+    value: -0.002
+    unit: share
+    as_of_date: 2026-04-30
+    published_date: 2026-06-27
+    url: https://fortune.com/2026/06/27/what-is-ai-impact-entry-level-jobs-stanford-adp-canaries-brynjolfsson-richardson/
+    tier: 5
+    basis: reported
+    raw_snippet: "The most AI-exposed occupations contracted just 0.2% year over year as of April 2026, compared to 0.1% growth for the least-exposed roles."
+    note: "Second source for adp_research.us_high_exposure.employment_yoy.m; April 2026 vintage (ADP's June release: -0.2% / +0.6%). Latest ADP release (19 Aug 2026): July +0.1% high-exposure, +1.1% least-exposed."

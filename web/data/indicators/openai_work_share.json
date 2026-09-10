@@ -1,0 +1,183 @@
+{
+ "band_input": "openai_blog.chatgpt_consumer.work_related_message_share.pt",
+ "band_rationale": "Normal = under 40% of consumer messages are work-related, as personal use led with PCs and the web; fast = a work majority, meaning the consumer product has been pulled into production workflows. Between is `emerging`.",
+ "band_value": {
+  "as_of": "2025-06-30",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "71978c1402e55137"
+  ],
+  "value": 0.27
+ },
+ "bucket_id": "early_adoption",
+ "cadence_expected": "annual",
+ "confidence": 65,
+ "counterevidence": "Consumer plans only; enterprise and API traffic (where work concentrates) are excluded; classification is model-based.",
+ "crosswalk": [
+  {
+   "bucket_id": "early_adoption",
+   "layer_id": "adopters",
+   "note": "BTOS, BBD, Ramp and the Anthropic Economic Index are adoption from both ends.",
+   "relation": "same_valve",
+   "shared_indicators": [],
+   "sublayer_id": null
+  }
+ ],
+ "definition": "Share of ChatGPT consumer-plan messages classified as work-related in OpenAI's usage paper (Chatterji and co-authors), with the NBER abstract's complement (non-work above 70%) alongside.",
+ "derived": [],
+ "direction": null,
+ "direction_rule": null,
+ "evidence": [],
+ "falsifying_band": null,
+ "fast_band": {
+  "hi": null,
+  "lo": 0.6
+ },
+ "fits": [],
+ "flow_status": null,
+ "grade": "B",
+ "id": "openai_work_share",
+ "latest": {
+  "as_of": "2025-06-30",
+  "disputed": false,
+  "grade": "D",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "71978c1402e55137"
+  ],
+  "series_key": "openai_blog.chatgpt_consumer.work_related_message_share.pt",
+  "subject": "chatgpt_consumer",
+  "unit": "share",
+  "value": 0.27
+ },
+ "layer_id": "adopters",
+ "leading_lagging": "coincident",
+ "metric": null,
+ "metric_dims": {},
+ "n_observations": 2,
+ "name": "Work-related share of ChatGPT consumer messages",
+ "normal_band": {
+  "hi": 0.4,
+  "lo": null
+ },
+ "override_note": null,
+ "points": [
+  {
+   "as_of": "2025-06-30",
+   "disputed": false,
+   "grade": "D",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "71978c1402e55137"
+   ],
+   "series_key": "openai_blog.chatgpt_consumer.work_related_message_share.pt",
+   "subject": "chatgpt_consumer",
+   "unit": "share",
+   "value": 0.27
+  }
+ ],
+ "proposed_status": "emerging",
+ "proxy_types": [
+  "behaviour",
+  "product"
+ ],
+ "published": true,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "bbd_work_hours_assisted",
+  "aei_augmentation_share"
+ ],
+ "related_metrics": [],
+ "related_predictions": [],
+ "series": [
+  {
+   "points": [
+    {
+     "as_of": "2025-07-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "bd078949c951ff36"
+     ],
+     "series_key": "nber.chatgpt_consumer.non_work_message_share.pt",
+     "subject": "chatgpt_consumer",
+     "unit": "text",
+     "value": null
+    }
+   ],
+   "series_key": "nber.chatgpt_consumer.non_work_message_share.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2025-06-30",
+     "disputed": false,
+     "grade": "D",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "71978c1402e55137"
+     ],
+     "series_key": "openai_blog.chatgpt_consumer.work_related_message_share.pt",
+     "subject": "chatgpt_consumer",
+     "unit": "share",
+     "value": 0.27
+    }
+   ],
+   "series_key": "openai_blog.chatgpt_consumer.work_related_message_share.pt"
+  }
+ ],
+ "series_keys": [
+  "openai_blog.chatgpt_consumer.work_related_message_share.pt",
+  "nber.chatgpt_consumer.non_work_message_share.pt"
+ ],
+ "sparkline": [
+  {
+   "as_of": "2025-06-30",
+   "disputed": false,
+   "grade": "D",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "71978c1402e55137"
+   ],
+   "series_key": "openai_blog.chatgpt_consumer.work_related_message_share.pt",
+   "subject": "chatgpt_consumer",
+   "unit": "share",
+   "value": 0.27
+  }
+ ],
+ "stale_as_of": null,
+ "stale_ok": false,
+ "stale_reason": null,
+ "status": "emerging",
+ "status_events": [
+  {
+   "author": "evaluate",
+   "created_at": "2026-09-10T07:06:26.504623Z",
+   "evidence_ids": [
+    "71978c1402e55137"
+   ],
+   "id": "7a642e59551ed25a",
+   "new_conf": 65,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "First scoring. 27% of ChatGPT consumer messages were work-related in June 2025 (OpenAI usage paper Table 1; NBER abstract gives non-work above 70%), inside the normal band; the numeric source is the company's own paper (tier 7), so emerging.",
+   "target_id": "openai_work_share",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": null,
+ "tracker_interpretation": "About a quarter of messages are work, and the share fell through 2025 as consumer use grew faster.",
+ "unit": "share",
+ "unpublished_reason": null,
+ "updated_at": "2026-09-10",
+ "valve_measured": "product_to_adoption",
+ "why_it_matters": "The largest usage dataset there is says most use is personal. Diffusion into work is the slower, deeper channel the paper expects."
+}

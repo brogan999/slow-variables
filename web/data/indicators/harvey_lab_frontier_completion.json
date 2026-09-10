@@ -1,0 +1,182 @@
+{
+ "band_input": "harvey_blog.lab_holdout.all_pass_top_model.pt",
+ "band_rationale": "Normal = the best frontier model completes under 30% of expert tasks end to end; fast = above 70%, where substitution rather than assistance becomes the product. Between is `emerging`.",
+ "band_value": {
+  "as_of": "2026-05-26",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "723ff70f7eaca105"
+  ],
+  "value": 0.071
+ },
+ "bucket_id": "products",
+ "cadence_expected": "quarterly",
+ "confidence": 40,
+ "counterevidence": "A vendor benchmark scored by the vendor (tier 7); the all-pass standard is deliberately harsh; partial completions have value in practice.",
+ "crosswalk": [
+  {
+   "bucket_id": "products",
+   "layer_id": "deployment_application",
+   "note": "Uplift RCTs, pilot\u2192production and app-layer margin net of inference measure the same valve.",
+   "relation": "same_valve",
+   "shared_indicators": [],
+   "sublayer_id": null
+  }
+ ],
+ "definition": "Share of holdout tasks the best frontier model completes end to end under Harvey's strict all-pass standard on its Legal Agent Benchmark, with the aggregate figure alongside.",
+ "derived": [],
+ "direction": null,
+ "direction_rule": null,
+ "evidence": [],
+ "falsifying_band": null,
+ "fast_band": {
+  "hi": null,
+  "lo": 0.7
+ },
+ "fits": [],
+ "flow_status": null,
+ "grade": "D",
+ "id": "harvey_lab_frontier_completion",
+ "latest": {
+  "as_of": "2026-05-26",
+  "disputed": false,
+  "grade": "D",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "723ff70f7eaca105"
+  ],
+  "series_key": "harvey_blog.lab_holdout.all_pass_top_model.pt",
+  "subject": "lab_holdout",
+  "unit": "share",
+  "value": 0.071
+ },
+ "layer_id": "deployment_application",
+ "leading_lagging": "leading",
+ "metric": null,
+ "metric_dims": {},
+ "n_observations": 2,
+ "name": "Frontier models completing expert legal tasks end to end (Harvey LAB)",
+ "normal_band": {
+  "hi": 0.3,
+  "lo": null
+ },
+ "override_note": null,
+ "points": [
+  {
+   "as_of": "2026-05-26",
+   "disputed": false,
+   "grade": "D",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "723ff70f7eaca105"
+   ],
+   "series_key": "harvey_blog.lab_holdout.all_pass_top_model.pt",
+   "subject": "lab_holdout",
+   "unit": "share",
+   "value": 0.071
+  }
+ ],
+ "proposed_status": "emerging",
+ "proxy_types": [
+  "benchmark"
+ ],
+ "published": true,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "pass_hat_k_tau_bench",
+  "metr_horizon_80"
+ ],
+ "related_metrics": [],
+ "related_predictions": [],
+ "series": [
+  {
+   "points": [
+    {
+     "as_of": "2026-05-26",
+     "disputed": false,
+     "grade": "D",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "dca91df347452038"
+     ],
+     "series_key": "harvey_blog.lab_holdout.all_pass_aggregate.pt",
+     "subject": "lab_holdout",
+     "unit": "text",
+     "value": null
+    }
+   ],
+   "series_key": "harvey_blog.lab_holdout.all_pass_aggregate.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-05-26",
+     "disputed": false,
+     "grade": "D",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "723ff70f7eaca105"
+     ],
+     "series_key": "harvey_blog.lab_holdout.all_pass_top_model.pt",
+     "subject": "lab_holdout",
+     "unit": "share",
+     "value": 0.071
+    }
+   ],
+   "series_key": "harvey_blog.lab_holdout.all_pass_top_model.pt"
+  }
+ ],
+ "series_keys": [
+  "harvey_blog.lab_holdout.all_pass_top_model.pt",
+  "harvey_blog.lab_holdout.all_pass_aggregate.pt"
+ ],
+ "sparkline": [
+  {
+   "as_of": "2026-05-26",
+   "disputed": false,
+   "grade": "D",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "723ff70f7eaca105"
+   ],
+   "series_key": "harvey_blog.lab_holdout.all_pass_top_model.pt",
+   "subject": "lab_holdout",
+   "unit": "share",
+   "value": 0.071
+  }
+ ],
+ "stale_as_of": null,
+ "stale_ok": false,
+ "stale_reason": null,
+ "status": "emerging",
+ "status_events": [
+  {
+   "author": "evaluate",
+   "created_at": "2026-09-10T07:06:26.455401Z",
+   "evidence_ids": [
+    "723ff70f7eaca105"
+   ],
+   "id": "26f5e7c467cf45ea",
+   "new_conf": 40,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "First scoring. Best frontier model completes 7.1% of Legal Agent Benchmark holdout tasks end to end under the all-pass standard (Harvey, 26 May 2026), inside the normal band, but the only source is the vendor (tier 7), which caps the status at emerging until an independent run exists.",
+   "target_id": "harvey_lab_frontier_completion",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": "vertical_ai",
+ "tracker_interpretation": "Single digits under an all-pass standard. The benchmark is a vendor's, so the reading stays emerging until an independent run lands.",
+ "unit": "share",
+ "unpublished_reason": null,
+ "updated_at": "2026-09-10",
+ "valve_measured": "invention_to_product",
+ "why_it_matters": "The productisation valve for professional work. A model that passes bar-style questions but completes 7% of real matters is a tool, not a lawyer."
+}

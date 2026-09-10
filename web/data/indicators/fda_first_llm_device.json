@@ -1,61 +1,219 @@
 {
- "band_input": null,
- "band_rationale": "Placeholder until the series exists; bands are set with the first observation.",
- "band_value": null,
+ "band_input": "metric:fda_llm_devices_count",
+ "band_rationale": "Normal = a handful of LLM-based authorisations by end-2026, given a 510(k) path of roughly six months and a first clearance in December 2025; fast = ten or more, the regulatory throughput a fast scenario needs. Between is `emerging`.",
+ "band_value": {
+  "as_of": "2025-12-23",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "678d971e84b1de53",
+   "8da46094b2c903b1",
+   "f98335f057fe8c67"
+  ],
+  "value": 1.0
+ },
  "bucket_id": "adaptation",
  "cadence_expected": "quarterly",
- "confidence": null,
- "counterevidence": "Device classification lags product reality; a clearance is narrow.",
- "crosswalk": [],
- "definition": "Whether the FDA has authorised a device whose core function is a large language model, and when.",
- "derived": [],
+ "confidence": 60,
+ "counterevidence": "The FDA record does not name an LLM; the clearance is narrow (a diabetes dosing app); a count of one is not a rate.",
+ "crosswalk": [
+  {
+   "bucket_id": "adaptation",
+   "layer_id": "deployment_application",
+   "note": "Deployment/FDE services capture part of the surplus that adaptation creates.",
+   "relation": "leak_from",
+   "shared_indicators": [],
+   "sublayer_id": "deployment_services"
+  }
+ ],
+ "definition": "Count of distinct devices the FDA has cleared or authorised whose core function is a large language model, derived metric fda_llm_devices_count over the clearance records. The first is UpDoc (K253281, decision 23 December 2025), per the FDA 510(k) database, STAT News and Innolitics.",
+ "derived": [
+  {
+   "as_of_date": "2025-12-23",
+   "computed_at": "2026-09-10T07:06:24.664913Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "3429d58ec336b7fe",
+   "input_observation_ids": [
+    "678d971e84b1de53",
+    "8da46094b2c903b1",
+    "f98335f057fe8c67"
+   ],
+   "metric": "fda_llm_devices_count",
+   "obs_ids": [
+    "678d971e84b1de53",
+    "8da46094b2c903b1",
+    "f98335f057fe8c67"
+   ],
+   "value": 1.0,
+   "value_high": null,
+   "value_low": null
+  }
+ ],
  "direction": null,
  "direction_rule": null,
  "evidence": [],
  "falsifying_band": null,
  "fast_band": {
   "hi": null,
-  "lo": 1.0
+  "lo": 10.0
  },
  "fits": [],
  "flow_status": null,
- "grade": null,
+ "grade": "A",
  "id": "fda_first_llm_device",
- "latest": null,
- "layer_id": "model",
+ "latest": {
+  "as_of": "2025-12-23",
+  "dims": {},
+  "obs_ids": [
+   "678d971e84b1de53",
+   "8da46094b2c903b1",
+   "f98335f057fe8c67"
+  ],
+  "unit": "count",
+  "value": 1.0
+ },
+ "layer_id": "deployment_application",
  "leading_lagging": "leading",
- "metric": null,
+ "metric": "fda_llm_devices_count",
  "metric_dims": {},
- "n_observations": 0,
- "name": "First FDA-authorised LLM-based device",
+ "n_observations": 3,
+ "name": "FDA-authorised devices built on a large language model",
  "normal_band": {
-  "hi": 1.0,
+  "hi": 3.0,
   "lo": null
  },
  "override_note": null,
- "points": [],
- "proposed_status": "not_yet_measurable",
+ "points": [
+  {
+   "as_of": "2025-12-23",
+   "dims": {},
+   "obs_ids": [
+    "678d971e84b1de53",
+    "8da46094b2c903b1",
+    "f98335f057fe8c67"
+   ],
+   "unit": "count",
+   "value": 1.0
+  }
+ ],
+ "proposed_status": "consistent_with_normal",
  "proxy_types": [
   "policy"
  ],
- "published": false,
+ "published": true,
  "related_bottlenecks": [],
- "related_indicators": [],
+ "related_indicators": [
+  "fda_ai_devices_cumulative",
+  "waymo_weekly_paid_rides"
+ ],
  "related_metrics": [],
  "related_predictions": [],
- "series": [],
- "series_keys": [],
- "sparkline": [],
+ "series": [
+  {
+   "points": [
+    {
+     "as_of": "2025-12-23",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "678d971e84b1de53"
+     ],
+     "series_key": "fda_510k.updoc.first_llm_device_clearance.pt",
+     "subject": "updoc",
+     "unit": "text",
+     "value": null
+    }
+   ],
+   "series_key": "fda_510k.updoc.first_llm_device_clearance.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2025-12-23",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "8da46094b2c903b1"
+     ],
+     "series_key": "innolitics.updoc.first_llm_device_clearance.pt",
+     "subject": "updoc",
+     "unit": "text",
+     "value": null
+    }
+   ],
+   "series_key": "innolitics.updoc.first_llm_device_clearance.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2025-12-23",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "f98335f057fe8c67"
+     ],
+     "series_key": "statnews.updoc.first_llm_device_clearance.pt",
+     "subject": "updoc",
+     "unit": "text",
+     "value": null
+    }
+   ],
+   "series_key": "statnews.updoc.first_llm_device_clearance.pt"
+  }
+ ],
+ "series_keys": [
+  "fda_510k.updoc.first_llm_device_clearance.pt",
+  "statnews.updoc.first_llm_device_clearance.pt",
+  "innolitics.updoc.first_llm_device_clearance.pt"
+ ],
+ "sparkline": [
+  {
+   "as_of": "2025-12-23",
+   "dims": {},
+   "obs_ids": [
+    "678d971e84b1de53",
+    "8da46094b2c903b1",
+    "f98335f057fe8c67"
+   ],
+   "unit": "count",
+   "value": 1.0
+  }
+ ],
  "stale_as_of": null,
- "stale_ok": false,
- "stale_reason": null,
- "status": null,
- "status_events": [],
- "sublayer_id": null,
- "tracker_interpretation": "Unpublished; see the reason.",
- "unit": "share",
- "unpublished_reason": "Not yet verifiable: the brief names UpDoc K253281 (Dec 2025) but the submission is absent from the FDA's AI-enabled device list; a row needs the FDA decision document itself.",
- "updated_at": "2026-09-11",
+ "stale_ok": true,
+ "stale_reason": "An event-driven count; it moves only when a new LLM-based device is authorised.",
+ "status": "consistent_with_normal",
+ "status_events": [
+  {
+   "author": "evaluate",
+   "created_at": "2026-09-10T07:06:26.051498Z",
+   "evidence_ids": [
+    "678d971e84b1de53",
+    "8da46094b2c903b1",
+    "f98335f057fe8c67"
+   ],
+   "id": "ec4184a8383704bc",
+   "new_conf": 60,
+   "new_status": "consistent_with_normal",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "Evaluator: 1 (FDA 510(k) premarket notification database, 2025-12-23) is inside the consistent band (hi=3). Auto-reason; band rationale: Normal = a handful of LLM-based authorisations by end-2026, given a 510(k) path of roughly six months and a first clearance in December 2025; fast = ten or more, the regulatory throughput a fast scenario needs. Between is `emerging`.",
+   "target_id": "fda_first_llm_device",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": "vertical_ai",
+ "tracker_interpretation": "One device, cleared on a drug-dose-calculator predicate and publicised six months later. The public record does not itself say \"LLM\"; Innolitics' caveat stands.",
+ "unit": "count",
+ "unpublished_reason": null,
+ "updated_at": "2026-09-10",
  "valve_measured": "adoption_to_adaptation",
- "why_it_matters": "The first LLM device through review is the moment the regulated-domain speed limit meets the technology the paper is about."
+ "why_it_matters": "The first LLM device through review is the moment the regulated-domain speed limit meets the technology the paper is about; the count after it is the throughput of that limit."
 }

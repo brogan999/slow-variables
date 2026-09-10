@@ -1,0 +1,213 @@
+{
+ "band_input": "automation_anywhere.tau_bench_leaderboard_1.pass_hat_4.pt",
+ "band_rationale": "Normal = under 70% of tasks pass all four runs, so the best agent still fails one attempt in three; fast = 90% or more at k of four or higher, the reliability a workflow can be built on. Between is `emerging`.",
+ "band_value": {
+  "as_of": "2026-05-18",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "77cbd0ec9267f9c7"
+  ],
+  "value": 0.562
+ },
+ "bucket_id": "products",
+ "cadence_expected": "quarterly",
+ "confidence": 55,
+ "counterevidence": "The 2026 point is vendor-tabulated and the model is unnamed; tau-bench domains are narrow; pass^k penalises benign variation.",
+ "crosswalk": [],
+ "definition": "Share of tau-bench tasks an agent passes on every one of k attempts. The 2024 paper's gpt-4o figures (pass^1 61%, pass^8 under 25%) set the baseline; the 2026 point is the leaderboard leader's pass^1 and pass^4 as tabulated by Automation Anywhere.",
+ "derived": [],
+ "direction": null,
+ "direction_rule": null,
+ "evidence": [],
+ "falsifying_band": null,
+ "fast_band": {
+  "hi": null,
+  "lo": 0.9
+ },
+ "fits": [],
+ "flow_status": null,
+ "grade": "B",
+ "id": "pass_hat_k_tau_bench",
+ "latest": {
+  "as_of": "2026-05-18",
+  "disputed": false,
+  "grade": "D",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "77cbd0ec9267f9c7"
+  ],
+  "series_key": "automation_anywhere.tau_bench_leaderboard_1.pass_hat_4.pt",
+  "subject": "tau_bench_leaderboard_1",
+  "unit": "share",
+  "value": 0.562
+ },
+ "layer_id": "model",
+ "leading_lagging": "leading",
+ "metric": null,
+ "metric_dims": {},
+ "n_observations": 4,
+ "name": "Agent reliability across repeated runs (tau-bench pass^k)",
+ "normal_band": {
+  "hi": 0.7,
+  "lo": null
+ },
+ "override_note": null,
+ "points": [
+  {
+   "as_of": "2026-05-18",
+   "disputed": false,
+   "grade": "D",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "77cbd0ec9267f9c7"
+   ],
+   "series_key": "automation_anywhere.tau_bench_leaderboard_1.pass_hat_4.pt",
+   "subject": "tau_bench_leaderboard_1",
+   "unit": "share",
+   "value": 0.562
+  }
+ ],
+ "proposed_status": "consistent_with_normal",
+ "proxy_types": [
+  "benchmark"
+ ],
+ "published": true,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "harvey_lab_frontier_completion",
+  "horizon_ratio_80_50"
+ ],
+ "related_metrics": [],
+ "related_predictions": [],
+ "series": [
+  {
+   "points": [
+    {
+     "as_of": "2024-06-17",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "0649975d9c9eaff7"
+     ],
+     "series_key": "arxiv.tau_bench_retail_gpt4o.pass_hat_1.pt",
+     "subject": "tau_bench_retail_gpt4o",
+     "unit": "share",
+     "value": 0.612
+    }
+   ],
+   "series_key": "arxiv.tau_bench_retail_gpt4o.pass_hat_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2024-06-17",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "f6285e213b487ef4"
+     ],
+     "series_key": "arxiv.tau_bench_retail_gpt4o.pass_hat_8.pt",
+     "subject": "tau_bench_retail_gpt4o",
+     "unit": "text",
+     "value": null
+    }
+   ],
+   "series_key": "arxiv.tau_bench_retail_gpt4o.pass_hat_8.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-05-18",
+     "disputed": false,
+     "grade": "D",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "a52dca968236b730"
+     ],
+     "series_key": "automation_anywhere.tau_bench_leaderboard_1.pass_hat_1.pt",
+     "subject": "tau_bench_leaderboard_1",
+     "unit": "share",
+     "value": 0.702
+    }
+   ],
+   "series_key": "automation_anywhere.tau_bench_leaderboard_1.pass_hat_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-05-18",
+     "disputed": false,
+     "grade": "D",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "77cbd0ec9267f9c7"
+     ],
+     "series_key": "automation_anywhere.tau_bench_leaderboard_1.pass_hat_4.pt",
+     "subject": "tau_bench_leaderboard_1",
+     "unit": "share",
+     "value": 0.562
+    }
+   ],
+   "series_key": "automation_anywhere.tau_bench_leaderboard_1.pass_hat_4.pt"
+  }
+ ],
+ "series_keys": [
+  "automation_anywhere.tau_bench_leaderboard_1.pass_hat_4.pt",
+  "automation_anywhere.tau_bench_leaderboard_1.pass_hat_1.pt",
+  "arxiv.tau_bench_retail_gpt4o.pass_hat_1.pt",
+  "arxiv.tau_bench_retail_gpt4o.pass_hat_8.pt"
+ ],
+ "sparkline": [
+  {
+   "as_of": "2026-05-18",
+   "disputed": false,
+   "grade": "D",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "77cbd0ec9267f9c7"
+   ],
+   "series_key": "automation_anywhere.tau_bench_leaderboard_1.pass_hat_4.pt",
+   "subject": "tau_bench_leaderboard_1",
+   "unit": "share",
+   "value": 0.562
+  }
+ ],
+ "stale_as_of": null,
+ "stale_ok": false,
+ "stale_reason": null,
+ "status": "emerging",
+ "status_events": [
+  {
+   "author": "evaluate",
+   "created_at": "2026-09-10T07:06:26.472306Z",
+   "evidence_ids": [
+    "77cbd0ec9267f9c7"
+   ],
+   "id": "d67cec81a492a76d",
+   "new_conf": 55,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "First scoring. The tau-bench leaderboard leader passes 70.2% of tasks once and 56.2% four times running (Automation Anywhere table, 18 May 2026), inside the normal band; the 2026 point is vendor-tabulated (tier 7) so the status is capped at emerging, with the 2024 paper (gpt-4o pass^1 61%, pass^8 under 25%) as the second source.",
+   "target_id": "pass_hat_k_tau_bench",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": null,
+ "tracker_interpretation": "Reliability still collapses with k - 70% once, 56% four times running - two years after the paper that named the problem.",
+ "unit": "share",
+ "unpublished_reason": null,
+ "updated_at": "2026-09-10",
+ "valve_measured": "invention_to_product",
+ "why_it_matters": "The 70% problem in one number - solving a task once is not solving it reliably. Deployment needs pass^k, not pass^1, and the gap between them is where the normal-technology speed limit lives."
+}

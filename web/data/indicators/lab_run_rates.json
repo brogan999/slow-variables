@@ -12,8 +12,8 @@
  },
  "bucket_id": null,
  "cadence_expected": "monthly",
- "confidence": null,
- "counterevidence": "Single-source press reports (tier 5); run-rate is annualised from one month; gross vs net of cloud revenue share is often unstated. Unpublished until a second source confirms the latest points.",
+ "confidence": 55,
+ "counterevidence": "Single-source press reports (tier 5); run-rate is annualised from one month; gross vs net of cloud revenue share is often unstated.",
  "crosswalk": [],
  "definition": "Annualised revenue run-rates for OpenAI and Anthropic as compiled by Epoch AI from press reports; each point is an annualised month, not booked revenue.",
  "derived": [],
@@ -49,7 +49,7 @@
  "leading_lagging": "coincident",
  "metric": null,
  "metric_dims": {},
- "n_observations": 31,
+ "n_observations": 34,
  "name": "Frontier-lab revenue run-rates",
  "normal_band": null,
  "override_note": null,
@@ -284,7 +284,7 @@
   "capital_flow",
   "market_structure"
  ],
- "published": false,
+ "published": true,
  "related_bottlenecks": [],
  "related_indicators": [
   "lab_recoupment_ratio",
@@ -293,6 +293,25 @@
  "related_metrics": [],
  "related_predictions": [],
  "series": [
+  {
+   "points": [
+    {
+     "as_of": "2026-07-31",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "c5363ed7b16cf8da"
+     ],
+     "series_key": "cnbc.anthropic.revenue_run_rate_usd.pt",
+     "subject": "anthropic",
+     "unit": "USD",
+     "value": 65000000000.0
+    }
+   ],
+   "series_key": "cnbc.anthropic.revenue_run_rate_usd.pt"
+  },
   {
    "points": [
     {
@@ -736,11 +755,52 @@
     }
    ],
    "series_key": "epoch.openai.revenue_run_rate_usd.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-07-31",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "c53ac94a961dd48f"
+     ],
+     "series_key": "pymnts.openai.revenue_run_rate_usd.pt",
+     "subject": "openai",
+     "unit": "USD",
+     "value": 40000000000.0
+    }
+   ],
+   "series_key": "pymnts.openai.revenue_run_rate_usd.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-07-31",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "13c0e1cdb3d86b0a"
+     ],
+     "series_key": "yahoo_finance.openai.revenue_run_rate_usd.pt",
+     "subject": "openai",
+     "unit": "USD",
+     "value": 40000000000.0
+    }
+   ],
+   "series_key": "yahoo_finance.openai.revenue_run_rate_usd.pt"
   }
  ],
  "series_keys": [
   "epoch.openai.revenue_run_rate_usd.pt",
-  "epoch.anthropic.revenue_run_rate_usd.pt"
+  "epoch.anthropic.revenue_run_rate_usd.pt",
+  "pymnts.openai.revenue_run_rate_usd.pt",
+  "yahoo_finance.openai.revenue_run_rate_usd.pt",
+  "cnbc.anthropic.revenue_run_rate_usd.pt"
  ],
  "sparkline": [
   {
@@ -971,12 +1031,28 @@
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,
- "status": null,
- "status_events": [],
+ "status": "concentrating",
+ "status_events": [
+  {
+   "author": "evaluate",
+   "created_at": "2026-09-10T07:06:24.990139Z",
+   "evidence_ids": [
+    "2932a2f9febe1aeb"
+   ],
+   "id": "fb7eb16bb5cb8c43",
+   "new_conf": 55,
+   "new_status": "concentrating",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "Evaluator: 4e+10 (Epoch AI data hub \u2014 AI companies, 2026-08-13) reads concentrating over 4 periods with a dead band of 2e+09. Auto-reason; rule rationale: Four reports; moves under $2B are reporting noise. Rising run-rate concentrates revenue at the two frontier labs.",
+   "target_id": "lab_run_rates",
+   "target_type": "indicator"
+  }
+ ],
  "sublayer_id": "frontier_labs",
  "tracker_interpretation": "Run-rates are compounding at rates no software company has printed, but every point is a leak to a journalist and definitions drift between gross and net.",
  "unit": "USD",
- "unpublished_reason": "Waiting on a second source per lab: Epoch's run-rate compilation is tier 5 and single-source; the CNBC confirmation covers Anthropic's July 2026 figure only. The indicator publishes once two sources cover the current run-rates.",
+ "unpublished_reason": null,
  "updated_at": "2026-09-10",
  "valve_measured": null,
  "why_it_matters": "Whether the model layer keeps surplus depends on revenue growing faster than the capital it consumes. Run-rate is the only public series, and it is press-sourced."

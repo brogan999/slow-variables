@@ -48,19 +48,18 @@ indicators:
     proxy_types: [capital_flow, market_structure]
     unit: USD
     cadence_expected: monthly
-    series_keys: ["epoch.openai.revenue_run_rate_usd.pt", "epoch.anthropic.revenue_run_rate_usd.pt"]
+    series_keys: ["epoch.openai.revenue_run_rate_usd.pt", "epoch.anthropic.revenue_run_rate_usd.pt", "pymnts.openai.revenue_run_rate_usd.pt", "yahoo_finance.openai.revenue_run_rate_usd.pt", "cnbc.anthropic.revenue_run_rate_usd.pt"]
     band_input: epoch.openai.revenue_run_rate_usd.pt
     layer_id: model
     sublayer_id: frontier_labs
     direction_rule: {periods: 4, dead_band: 2000000000, higher_is: concentrating, rationale: "Four reports; moves under $2B are reporting noise. Rising run-rate concentrates revenue at the two frontier labs."}
     leading_lagging: coincident
     tracker_interpretation: Run-rates are compounding at rates no software company has printed, but every point is a leak to a journalist and definitions drift between gross and net.
-    counterevidence: Single-source press reports (tier 5); run-rate is annualised from one month; gross vs net of cloud revenue share is often unstated. Unpublished until a second source confirms the latest points.
+    counterevidence: Single-source press reports (tier 5); run-rate is annualised from one month; gross vs net of cloud revenue share is often unstated.
     confidence: 55
     proposed_status: concentrating
     related_indicators: [lab_recoupment_ratio, semis_rent_concentration]
-    unpublished_reason: "Waiting on a second source per lab: Epoch's run-rate compilation is tier 5 and single-source; the CNBC confirmation covers Anthropic's July 2026 figure only. The indicator publishes once two sources cover the current run-rates."
-    published: false
+    published: true
     updated_at: 2026-09-10
   - id: lab_recoupment_ratio
     name: Lab recoupment ratio
@@ -77,12 +76,11 @@ indicators:
     direction_rule: {periods: 3, dead_band: 0.05, higher_is: concentrating, rationale: "Three points; a move under 0.05 is noise. A rising ratio means the lab is recouping capital faster than it raises it."}
     leading_lagging: lagging
     tracker_interpretation: Large caveat, as the brief says - excludes debt, compute credits and cloud commitments, and the numerator is a run-rate.
-    counterevidence: Tier-5 inputs on both sides; equity raised is a floor on capital consumed. Unpublished until a second source confirms the run-rate points.
+    counterevidence: Tier-5 inputs on both sides; equity raised is a floor on capital consumed.
     confidence: 50
     proposed_status: emerging
     related_indicators: [lab_run_rates]
-    unpublished_reason: "Depends on lab_run_rates, which is unpublished for want of a second source; the cumulative-capital denominator is ready."
-    published: false
+    published: true
     updated_at: 2026-09-10
   - id: consumer_surplus_wta
     name: Consumer surplus from generative AI (willingness to accept)

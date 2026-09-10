@@ -1,0 +1,182 @@
+{
+ "band_input": "pwc.ai_skilled_workers.wage_premium.fy",
+ "band_rationale": "Normal = a premium between 25% and 75%, large but of the size prior scarce IT skills carried; fast = a premium of 100% or more, wages doubling for a skill. Between is `emerging`.",
+ "band_value": {
+  "as_of": "2025-12-31",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "3289e34cb683153a"
+  ],
+  "value": 0.62
+ },
+ "bucket_id": "adaptation",
+ "cadence_expected": "annual",
+ "confidence": 50,
+ "counterevidence": "A consultancy's method over job ads (tier 7), not paid wages; ad wording drifts as \"AI skills\" becomes table stakes; premium partly reflects seniority.",
+ "crosswalk": [
+  {
+   "bucket_id": "adaptation",
+   "layer_id": "labour_consumers",
+   "note": "Productivity, wages, employment and consumer surplus.",
+   "relation": "same_valve",
+   "shared_indicators": [],
+   "sublayer_id": null
+  }
+ ],
+ "definition": "Average wage premium for jobs requiring specific AI skills over comparable jobs without them, from PwC's Global AI Jobs Barometer (one billion job ads, 27 countries), with a press restatement alongside.",
+ "derived": [],
+ "direction": null,
+ "direction_rule": null,
+ "evidence": [],
+ "falsifying_band": null,
+ "fast_band": {
+  "hi": null,
+  "lo": 1.0
+ },
+ "fits": [],
+ "flow_status": null,
+ "grade": "C",
+ "id": "pwc_ai_skill_wage_premium",
+ "latest": {
+  "as_of": "2025-12-31",
+  "disputed": false,
+  "grade": "D",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "3289e34cb683153a"
+  ],
+  "series_key": "pwc.ai_skilled_workers.wage_premium.fy",
+  "subject": "ai_skilled_workers",
+  "unit": "share",
+  "value": 0.62
+ },
+ "layer_id": "labour_consumers",
+ "leading_lagging": "coincident",
+ "metric": null,
+ "metric_dims": {},
+ "n_observations": 2,
+ "name": "Wage premium for AI skills (PwC AI Jobs Barometer)",
+ "normal_band": {
+  "hi": 0.75,
+  "lo": 0.25
+ },
+ "override_note": null,
+ "points": [
+  {
+   "as_of": "2025-12-31",
+   "disputed": false,
+   "grade": "D",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "3289e34cb683153a"
+   ],
+   "series_key": "pwc.ai_skilled_workers.wage_premium.fy",
+   "subject": "ai_skilled_workers",
+   "unit": "share",
+   "value": 0.62
+  }
+ ],
+ "proposed_status": "emerging",
+ "proxy_types": [
+  "welfare",
+  "market_structure"
+ ],
+ "published": true,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "new_grad_unemployment"
+ ],
+ "related_metrics": [],
+ "related_predictions": [],
+ "series": [
+  {
+   "points": [
+    {
+     "as_of": "2025-12-31",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "f47a427a512be685"
+     ],
+     "series_key": "outsource_accelerator.ai_skilled_workers.wage_premium.fy",
+     "subject": "ai_skilled_workers",
+     "unit": "share",
+     "value": 0.62
+    }
+   ],
+   "series_key": "outsource_accelerator.ai_skilled_workers.wage_premium.fy"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2025-12-31",
+     "disputed": false,
+     "grade": "D",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "3289e34cb683153a"
+     ],
+     "series_key": "pwc.ai_skilled_workers.wage_premium.fy",
+     "subject": "ai_skilled_workers",
+     "unit": "share",
+     "value": 0.62
+    }
+   ],
+   "series_key": "pwc.ai_skilled_workers.wage_premium.fy"
+  }
+ ],
+ "series_keys": [
+  "pwc.ai_skilled_workers.wage_premium.fy",
+  "outsource_accelerator.ai_skilled_workers.wage_premium.fy"
+ ],
+ "sparkline": [
+  {
+   "as_of": "2025-12-31",
+   "disputed": false,
+   "grade": "D",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "3289e34cb683153a"
+   ],
+   "series_key": "pwc.ai_skilled_workers.wage_premium.fy",
+   "subject": "ai_skilled_workers",
+   "unit": "share",
+   "value": 0.62
+  }
+ ],
+ "stale_as_of": null,
+ "stale_ok": false,
+ "stale_reason": null,
+ "status": "emerging",
+ "status_events": [
+  {
+   "author": "evaluate",
+   "created_at": "2026-09-10T07:06:26.712305Z",
+   "evidence_ids": [
+    "3289e34cb683153a"
+   ],
+   "id": "9502079734106bc8",
+   "new_conf": 50,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "First scoring. The AI-skills wage premium reached 62% in 2025 data (PwC 2026 Barometer, 15 Jun 2026; Outsource Accelerator relay), inside the normal band; the measure is a consultancy's own job-ad method (tier 7), so emerging.",
+   "target_id": "pwc_ai_skill_wage_premium",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": null,
+ "tracker_interpretation": "62%, up from 56% the year before; the market pays for the complement, not the substitute.",
+ "unit": "share",
+ "unpublished_reason": null,
+ "updated_at": "2026-09-10",
+ "valve_measured": "adoption_to_adaptation",
+ "why_it_matters": "The price of scarce complementary skill. A large, stable premium says AI diffuses through people who can use it; a premium that doubles or collapses says the labour market is repricing at speed."
+}

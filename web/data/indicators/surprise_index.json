@@ -1,0 +1,228 @@
+{
+ "band_input": "aifutures_blog.ai_2027_quantitative.pace_vs_predicted.pt",
+ "band_rationale": "Normal = 60% or less of the predicted pace (a delay that compounds to years); fast = 90% or more (on schedule). Between is `emerging`.",
+ "band_value": {
+  "as_of": "2026-07-31",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "86d58f4a839a1c59"
+  ],
+  "value": 0.75
+ },
+ "bucket_id": "methods",
+ "cadence_expected": "annual",
+ "confidence": 50,
+ "counterevidence": "The authors grade themselves (tier 7); the metric mix is theirs; a pace figure hides which metrics lag.",
+ "crosswalk": [
+  {
+   "bucket_id": "methods",
+   "layer_id": "model",
+   "note": "Capability growth is the model layer's product; inference price at fixed capability \u21c4 price-per-token pass-through; open-weights lag \u21c4 open-vs-closed gap.",
+   "relation": "same_valve",
+   "shared_indicators": [
+    "metr_horizon_50",
+    "metr_horizon_80",
+    "horizon_ratio_80_50"
+   ],
+   "sublayer_id": null
+  }
+ ],
+ "definition": "The share of the pace AI 2027 predicted that its quantitative metrics actually achieved, as graded by the AI Futures Project itself (65% for 2025, revised to about 75% in July 2026) and restated by the independent AI 2027 Tracker.",
+ "derived": [],
+ "direction": null,
+ "direction_rule": null,
+ "evidence": [],
+ "falsifying_band": null,
+ "fast_band": {
+  "hi": null,
+  "lo": 0.9
+ },
+ "fits": [],
+ "flow_status": null,
+ "grade": "B",
+ "id": "surprise_index",
+ "latest": {
+  "as_of": "2026-07-31",
+  "disputed": false,
+  "grade": "D",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "86d58f4a839a1c59"
+  ],
+  "series_key": "aifutures_blog.ai_2027_quantitative.pace_vs_predicted.pt",
+  "subject": "ai_2027_quantitative",
+  "unit": "share",
+  "value": 0.75
+ },
+ "layer_id": "model",
+ "leading_lagging": "leading",
+ "metric": null,
+ "metric_dims": {},
+ "n_observations": 3,
+ "name": "Progress against the AI 2027 quantitative predictions",
+ "normal_band": {
+  "hi": 0.6,
+  "lo": null
+ },
+ "override_note": null,
+ "points": [
+  {
+   "as_of": "2025-12-31",
+   "disputed": false,
+   "grade": "D",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "f8386ab8c9d0fc8d"
+   ],
+   "series_key": "aifutures_blog.ai_2027_quantitative.pace_vs_predicted.pt",
+   "subject": "ai_2027_quantitative",
+   "unit": "share",
+   "value": 0.65
+  },
+  {
+   "as_of": "2026-07-31",
+   "disputed": false,
+   "grade": "D",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "86d58f4a839a1c59"
+   ],
+   "series_key": "aifutures_blog.ai_2027_quantitative.pace_vs_predicted.pt",
+   "subject": "ai_2027_quantitative",
+   "unit": "share",
+   "value": 0.75
+  }
+ ],
+ "proposed_status": "emerging",
+ "proxy_types": [
+  "benchmark"
+ ],
+ "published": true,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "metr_horizon_50",
+  "rsi_agent_workdays_per_human"
+ ],
+ "related_metrics": [],
+ "related_predictions": [],
+ "series": [
+  {
+   "points": [
+    {
+     "as_of": "2025-12-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "8f07be35b7fe2867"
+     ],
+     "series_key": "ai2027_tracker.ai_2027_quantitative.pace_vs_predicted.pt",
+     "subject": "ai_2027_quantitative",
+     "unit": "share",
+     "value": 0.65
+    }
+   ],
+   "series_key": "ai2027_tracker.ai_2027_quantitative.pace_vs_predicted.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2025-12-31",
+     "disputed": false,
+     "grade": "D",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "f8386ab8c9d0fc8d"
+     ],
+     "series_key": "aifutures_blog.ai_2027_quantitative.pace_vs_predicted.pt",
+     "subject": "ai_2027_quantitative",
+     "unit": "share",
+     "value": 0.65
+    },
+    {
+     "as_of": "2026-07-31",
+     "disputed": false,
+     "grade": "D",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "86d58f4a839a1c59"
+     ],
+     "series_key": "aifutures_blog.ai_2027_quantitative.pace_vs_predicted.pt",
+     "subject": "ai_2027_quantitative",
+     "unit": "share",
+     "value": 0.75
+    }
+   ],
+   "series_key": "aifutures_blog.ai_2027_quantitative.pace_vs_predicted.pt"
+  }
+ ],
+ "series_keys": [
+  "aifutures_blog.ai_2027_quantitative.pace_vs_predicted.pt",
+  "ai2027_tracker.ai_2027_quantitative.pace_vs_predicted.pt"
+ ],
+ "sparkline": [
+  {
+   "as_of": "2025-12-31",
+   "disputed": false,
+   "grade": "D",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "f8386ab8c9d0fc8d"
+   ],
+   "series_key": "aifutures_blog.ai_2027_quantitative.pace_vs_predicted.pt",
+   "subject": "ai_2027_quantitative",
+   "unit": "share",
+   "value": 0.65
+  },
+  {
+   "as_of": "2026-07-31",
+   "disputed": false,
+   "grade": "D",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "86d58f4a839a1c59"
+   ],
+   "series_key": "aifutures_blog.ai_2027_quantitative.pace_vs_predicted.pt",
+   "subject": "ai_2027_quantitative",
+   "unit": "share",
+   "value": 0.75
+  }
+ ],
+ "stale_as_of": null,
+ "stale_ok": false,
+ "stale_reason": null,
+ "status": "emerging",
+ "status_events": [
+  {
+   "author": "evaluate",
+   "created_at": "2026-09-10T07:06:26.488598Z",
+   "evidence_ids": [
+    "86d58f4a839a1c59"
+   ],
+   "id": "386e02ff7208a015",
+   "new_conf": 50,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "First scoring. AI Futures grades its own 2025 quantitative predictions at roughly 75% of predicted pace (July 2026 update to the Feb 2026 65%), between the normal and fast bands; a self-grade is tier 7 and caps at emerging in any case.",
+   "target_id": "surprise_index",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": null,
+ "tracker_interpretation": "Behind schedule but not by the margin a normal-technology reading needs; the July revision moved it the fast way.",
+ "unit": "share",
+ "unpublished_reason": null,
+ "updated_at": "2026-09-10",
+ "valve_measured": "invention_to_product",
+ "why_it_matters": "The scenario the fast lens is calibrated on grades its own forecasts. If progress runs at three quarters of its pace, the timeline stretches by years."
+}

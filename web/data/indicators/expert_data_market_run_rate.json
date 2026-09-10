@@ -1,0 +1,174 @@
+{
+ "band_input": "dealroom.mercor.gross_revenue_run_rate_usd.pt",
+ "band_rationale": "Normal = the largest vendor under one billion gross, the scale the data-labelling leaders reached over a decade; fast = two billion or more at a single vendor, doubling within a year. Between is `emerging`.",
+ "band_value": {
+  "as_of": "2026-06-30",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "944743051df0e9df"
+  ],
+  "value": 2000000000.0
+ },
+ "bucket_id": "methods",
+ "cadence_expected": "quarterly",
+ "confidence": 70,
+ "counterevidence": "Press-sourced run-rate (tier 5) that is gross of payouts; one vendor; lab demand for expert data can fall as fast as it rose if synthetic data or self-play substitutes.",
+ "crosswalk": [],
+ "definition": "Gross annualised revenue run-rate of the largest expert-data vendor, Mercor, as reported in the press and by its founder; gross of the 60-70% paid out to experts.",
+ "derived": [],
+ "direction": null,
+ "direction_rule": null,
+ "evidence": [],
+ "falsifying_band": null,
+ "fast_band": {
+  "hi": null,
+  "lo": 2000000000.0
+ },
+ "fits": [],
+ "flow_status": null,
+ "grade": "C",
+ "id": "expert_data_market_run_rate",
+ "latest": {
+  "as_of": "2026-06-30",
+  "disputed": false,
+  "grade": "C",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "944743051df0e9df"
+  ],
+  "series_key": "dealroom.mercor.gross_revenue_run_rate_usd.pt",
+  "subject": "mercor",
+  "unit": "USD",
+  "value": 2000000000.0
+ },
+ "layer_id": "training_input",
+ "leading_lagging": "leading",
+ "metric": null,
+ "metric_dims": {},
+ "n_observations": 2,
+ "name": "Expert-data market run-rate (Mercor)",
+ "normal_band": {
+  "hi": 1000000000.0,
+  "lo": null
+ },
+ "override_note": null,
+ "points": [
+  {
+   "as_of": "2026-06-30",
+   "disputed": false,
+   "grade": "C",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "944743051df0e9df"
+   ],
+   "series_key": "dealroom.mercor.gross_revenue_run_rate_usd.pt",
+   "subject": "mercor",
+   "unit": "USD",
+   "value": 2000000000.0
+  }
+ ],
+ "proposed_status": "faster_than_normal",
+ "proxy_types": [
+  "capital_flow",
+  "market_structure"
+ ],
+ "published": true,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "rl_environment_vendor_count",
+  "lab_run_rates"
+ ],
+ "related_metrics": [],
+ "related_predictions": [],
+ "series": [
+  {
+   "points": [
+    {
+     "as_of": "2026-06-30",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "944743051df0e9df"
+     ],
+     "series_key": "dealroom.mercor.gross_revenue_run_rate_usd.pt",
+     "subject": "mercor",
+     "unit": "USD",
+     "value": 2000000000.0
+    }
+   ],
+   "series_key": "dealroom.mercor.gross_revenue_run_rate_usd.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-07-09",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "43fac39f9068e55f"
+     ],
+     "series_key": "techcrunch.mercor.gross_revenue_run_rate_usd.pt",
+     "subject": "mercor",
+     "unit": "USD",
+     "value": 2000000000.0
+    }
+   ],
+   "series_key": "techcrunch.mercor.gross_revenue_run_rate_usd.pt"
+  }
+ ],
+ "series_keys": [
+  "dealroom.mercor.gross_revenue_run_rate_usd.pt",
+  "techcrunch.mercor.gross_revenue_run_rate_usd.pt"
+ ],
+ "sparkline": [
+  {
+   "as_of": "2026-06-30",
+   "disputed": false,
+   "grade": "C",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "944743051df0e9df"
+   ],
+   "series_key": "dealroom.mercor.gross_revenue_run_rate_usd.pt",
+   "subject": "mercor",
+   "unit": "USD",
+   "value": 2000000000.0
+  }
+ ],
+ "stale_as_of": null,
+ "stale_ok": false,
+ "stale_reason": null,
+ "status": "faster_than_normal",
+ "status_events": [
+  {
+   "author": "evaluate",
+   "created_at": "2026-09-10T07:06:26.759962Z",
+   "evidence_ids": [
+    "944743051df0e9df"
+   ],
+   "id": "2410fef42c8c56c7",
+   "new_conf": 70,
+   "new_status": "faster_than_normal",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "Evaluator: $2.0B (Dealroom news, 2026-06-30) is inside the faster than normal band (lo=2e+09). Auto-reason; band rationale: Normal = the largest vendor under one billion gross, the scale the data-labelling leaders reached over a decade; fast = two billion or more at a single vendor, doubling within a year. Between is `emerging`.",
+   "target_id": "expert_data_market_run_rate",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": "human_data",
+ "tracker_interpretation": "Faster than normal. Labs are buying expert time at a pace the human-data layer has never seen, and most of it flows straight through to the experts.",
+ "unit": "USD",
+ "unpublished_reason": null,
+ "updated_at": "2026-09-10",
+ "valve_measured": "invention_to_product",
+ "why_it_matters": "The RL-environment and expert-data market is the input the fast scenario needs to keep scaling. A single vendor doubling to two billion gross in six months is that input arriving."
+}

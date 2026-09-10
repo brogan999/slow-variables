@@ -382,6 +382,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "consistent_with_normal",
    "unit": "pct",
    "unpublished_reason": null,
@@ -490,6 +491,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "consistent_with_normal",
    "unit": "share",
    "unpublished_reason": null,
@@ -549,6 +551,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "emerging",
    "unit": "count",
    "unpublished_reason": null,
@@ -817,6 +820,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "consistent_with_normal",
    "unit": "pct_change_yoy",
    "unpublished_reason": null,
@@ -863,8 +867,97 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "emerging",
    "unit": "count",
+   "unpublished_reason": null,
+   "valve_measured": "adoption_to_adaptation"
+  },
+  {
+   "bucket_id": "adaptation",
+   "confidence": 60,
+   "grade": "A",
+   "id": "fda_first_llm_device",
+   "latest": {
+    "as_of": "2025-12-23",
+    "dims": {},
+    "obs_ids": [
+     "678d971e84b1de53",
+     "8da46094b2c903b1",
+     "f98335f057fe8c67"
+    ],
+    "unit": "count",
+    "value": 1.0
+   },
+   "layer_id": "deployment_application",
+   "leading_lagging": "leading",
+   "n_observations": 3,
+   "name": "FDA-authorised devices built on a large language model",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2025-12-23",
+     "dims": {},
+     "obs_ids": [
+      "678d971e84b1de53",
+      "8da46094b2c903b1",
+      "f98335f057fe8c67"
+     ],
+     "unit": "count",
+     "value": 1.0
+    }
+   ],
+   "stale_as_of": null,
+   "stale_reason": "An event-driven count; it moves only when a new LLM-based device is authorised.",
+   "status": "consistent_with_normal",
+   "unit": "count",
+   "unpublished_reason": null,
+   "valve_measured": "adoption_to_adaptation"
+  },
+  {
+   "bucket_id": "adaptation",
+   "confidence": 80,
+   "grade": "C",
+   "id": "canaries_exposed_employment_yoy",
+   "latest": {
+    "as_of": "2026-06-30",
+    "disputed": false,
+    "grade": "B",
+    "high": null,
+    "low": null,
+    "obs_ids": [
+     "cbb77dc61aadf044"
+    ],
+    "series_key": "adp_research.us_high_exposure.employment_yoy.m",
+    "subject": "us_high_exposure",
+    "unit": "share",
+    "value": -0.002
+   },
+   "layer_id": "labour_consumers",
+   "leading_lagging": "coincident",
+   "n_observations": 3,
+   "name": "Employment in AI-exposed occupations, year on year",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2026-06-30",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "cbb77dc61aadf044"
+     ],
+     "series_key": "adp_research.us_high_exposure.employment_yoy.m",
+     "subject": "us_high_exposure",
+     "unit": "share",
+     "value": -0.002
+    }
+   ],
+   "stale_as_of": null,
+   "stale_reason": null,
+   "status": "consistent_with_normal",
+   "unit": "share",
    "unpublished_reason": null,
    "valve_measured": "adoption_to_adaptation"
   },
@@ -923,6 +1016,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "emerging",
    "unit": "share",
    "unpublished_reason": null,
@@ -969,6 +1063,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "emerging",
    "unit": "share",
    "unpublished_reason": null,
@@ -1015,6 +1110,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "consistent_with_normal",
    "unit": "share",
    "unpublished_reason": null,
@@ -1061,6 +1157,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "consistent_with_normal",
    "unit": "share",
    "unpublished_reason": null,
@@ -1103,6 +1200,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "consistent_with_normal",
    "unit": "count",
    "unpublished_reason": null,
@@ -1371,10 +1469,340 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "emerging",
    "unit": "share",
    "unpublished_reason": null,
    "valve_measured": "leak"
+  },
+  {
+   "bucket_id": "adaptation",
+   "confidence": 75,
+   "grade": "B",
+   "id": "call_center_uplift",
+   "latest": {
+    "as_of": "2023-04-30",
+    "disputed": false,
+    "grade": "B",
+    "high": null,
+    "low": null,
+    "obs_ids": [
+     "15a42a777f78ef32"
+    ],
+    "series_key": "nber.customer_support_agents.productivity_uplift.pt",
+    "subject": "customer_support_agents",
+    "unit": "share",
+    "value": 0.14
+   },
+   "layer_id": "adopters",
+   "leading_lagging": "coincident",
+   "n_observations": 2,
+   "name": "Customer-support productivity uplift from a generative-AI assistant",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2023-04-30",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "15a42a777f78ef32"
+     ],
+     "series_key": "nber.customer_support_agents.productivity_uplift.pt",
+     "subject": "customer_support_agents",
+     "unit": "share",
+     "value": 0.14
+    }
+   ],
+   "stale_as_of": null,
+   "stale_reason": "A one-off field experiment; refreshed only when a comparable randomised study publishes.",
+   "status": "consistent_with_normal",
+   "unit": "share",
+   "unpublished_reason": null,
+   "valve_measured": "adoption_to_adaptation"
+  },
+  {
+   "bucket_id": "adaptation",
+   "confidence": 70,
+   "grade": "C",
+   "id": "exec_reported_impact",
+   "latest": {
+    "as_of": "2026-02-28",
+    "disputed": false,
+    "grade": "B",
+    "high": null,
+    "low": null,
+    "obs_ids": [
+     "d0538040758acb6e"
+    ],
+    "series_key": "nber.executives_4_countries.no_ai_impact_share.pt",
+    "subject": "executives_4_countries",
+    "unit": "share",
+    "value": 0.9
+   },
+   "layer_id": "adopters",
+   "leading_lagging": "lagging",
+   "n_observations": 2,
+   "name": "Executives reporting no AI impact on their own firm",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2026-02-28",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "d0538040758acb6e"
+     ],
+     "series_key": "nber.executives_4_countries.no_ai_impact_share.pt",
+     "subject": "executives_4_countries",
+     "unit": "share",
+     "value": 0.9
+    }
+   ],
+   "stale_as_of": null,
+   "stale_reason": null,
+   "status": "consistent_with_normal",
+   "unit": "share",
+   "unpublished_reason": null,
+   "valve_measured": "adoption_to_adaptation"
+  },
+  {
+   "bucket_id": "adaptation",
+   "confidence": 45,
+   "grade": "B",
+   "id": "exposed_low_adaptive_workers",
+   "latest": {
+    "as_of": "2026-01-31",
+    "disputed": false,
+    "grade": "B",
+    "high": null,
+    "low": null,
+    "obs_ids": [
+     "d811ea689cbfb327"
+    ],
+    "series_key": "nber.us_workers.high_exposure_low_adaptive_capacity.pt",
+    "subject": "us_workers",
+    "unit": "workers",
+    "value": 3300000.0
+   },
+   "layer_id": "labour_consumers",
+   "leading_lagging": "leading",
+   "n_observations": 1,
+   "name": "Workers highly exposed to AI with low adaptive capacity",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2026-01-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "d811ea689cbfb327"
+     ],
+     "series_key": "nber.us_workers.high_exposure_low_adaptive_capacity.pt",
+     "subject": "us_workers",
+     "unit": "workers",
+     "value": 3300000.0
+    }
+   ],
+   "stale_as_of": null,
+   "stale_reason": null,
+   "status": "emerging",
+   "unit": "workers",
+   "unpublished_reason": null,
+   "valve_measured": "adoption_to_adaptation"
+  },
+  {
+   "bucket_id": "adaptation",
+   "confidence": 80,
+   "grade": "B",
+   "id": "humlum_precise_null",
+   "latest": {
+    "as_of": "2024-12-31",
+    "disputed": false,
+    "grade": "B",
+    "high": null,
+    "low": null,
+    "obs_ids": [
+     "dcb86d2cc1a86b58"
+    ],
+    "series_key": "humlum_pdf.denmark_exposed_workers.chatbot_effect_on_earnings.pt",
+    "subject": "denmark_exposed_workers",
+    "unit": "share",
+    "value": 0.0
+   },
+   "layer_id": "labour_consumers",
+   "leading_lagging": "lagging",
+   "n_observations": 3,
+   "name": "Chatbot effect on earnings and hours in exposed occupations (Denmark)",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2024-12-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "dcb86d2cc1a86b58"
+     ],
+     "series_key": "humlum_pdf.denmark_exposed_workers.chatbot_effect_on_earnings.pt",
+     "subject": "denmark_exposed_workers",
+     "unit": "share",
+     "value": 0.0
+    }
+   ],
+   "stale_as_of": null,
+   "stale_reason": null,
+   "status": "consistent_with_normal",
+   "unit": "share",
+   "unpublished_reason": null,
+   "valve_measured": "adoption_to_adaptation"
+  },
+  {
+   "bucket_id": "adaptation",
+   "confidence": 70,
+   "grade": "B",
+   "id": "upwork_freelancer_effects",
+   "latest": {
+    "as_of": "2023-12-01",
+    "disputed": false,
+    "grade": "B",
+    "high": null,
+    "low": null,
+    "obs_ids": [
+     "55a1d3e669c7be73"
+    ],
+    "series_key": "cepr_voxeu.upwork_writing_freelancers.monthly_earnings_change.pt",
+    "subject": "upwork_writing_freelancers",
+    "unit": "share",
+    "value": -0.052
+   },
+   "layer_id": "labour_consumers",
+   "leading_lagging": "leading",
+   "n_observations": 3,
+   "name": "Freelance writing earnings after ChatGPT (Upwork)",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2023-12-01",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "55a1d3e669c7be73"
+     ],
+     "series_key": "cepr_voxeu.upwork_writing_freelancers.monthly_earnings_change.pt",
+     "subject": "upwork_writing_freelancers",
+     "unit": "share",
+     "value": -0.052
+    }
+   ],
+   "stale_as_of": null,
+   "stale_reason": "A one-off platform study; refreshed only when a comparable study publishes.",
+   "status": "consistent_with_normal",
+   "unit": "share",
+   "unpublished_reason": null,
+   "valve_measured": "adoption_to_adaptation"
+  },
+  {
+   "bucket_id": "adaptation",
+   "confidence": 50,
+   "grade": "C",
+   "id": "pwc_ai_skill_wage_premium",
+   "latest": {
+    "as_of": "2025-12-31",
+    "disputed": false,
+    "grade": "D",
+    "high": null,
+    "low": null,
+    "obs_ids": [
+     "3289e34cb683153a"
+    ],
+    "series_key": "pwc.ai_skilled_workers.wage_premium.fy",
+    "subject": "ai_skilled_workers",
+    "unit": "share",
+    "value": 0.62
+   },
+   "layer_id": "labour_consumers",
+   "leading_lagging": "coincident",
+   "n_observations": 2,
+   "name": "Wage premium for AI skills (PwC AI Jobs Barometer)",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2025-12-31",
+     "disputed": false,
+     "grade": "D",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "3289e34cb683153a"
+     ],
+     "series_key": "pwc.ai_skilled_workers.wage_premium.fy",
+     "subject": "ai_skilled_workers",
+     "unit": "share",
+     "value": 0.62
+    }
+   ],
+   "stale_as_of": null,
+   "stale_reason": null,
+   "status": "emerging",
+   "unit": "share",
+   "unpublished_reason": null,
+   "valve_measured": "adoption_to_adaptation"
+  },
+  {
+   "bucket_id": "adaptation",
+   "confidence": 65,
+   "grade": "C",
+   "id": "waymo_weekly_paid_rides",
+   "latest": {
+    "as_of": "2026-03-27",
+    "disputed": false,
+    "grade": "C",
+    "high": null,
+    "low": null,
+    "obs_ids": [
+     "23ce14c301434fd3"
+    ],
+    "series_key": "techcrunch.waymo.weekly_paid_rides.pt",
+    "subject": "waymo",
+    "unit": "rides_per_week",
+    "value": 500000.0
+   },
+   "layer_id": "deployment_application",
+   "leading_lagging": "coincident",
+   "n_observations": 2,
+   "name": "Waymo paid rides per week",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2026-03-27",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "23ce14c301434fd3"
+     ],
+     "series_key": "techcrunch.waymo.weekly_paid_rides.pt",
+     "subject": "waymo",
+     "unit": "rides_per_week",
+     "value": 500000.0
+    }
+   ],
+   "stale_as_of": null,
+   "stale_reason": null,
+   "status": "consistent_with_normal",
+   "unit": "rides_per_week",
+   "unpublished_reason": null,
+   "valve_measured": "adoption_to_adaptation"
   }
  ],
  "name": "Adaptation",

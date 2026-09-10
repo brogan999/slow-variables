@@ -138,6 +138,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "consistent_with_normal",
    "unit": "share",
    "unpublished_reason": null,
@@ -464,6 +465,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "consistent_with_normal",
    "unit": "share",
    "unpublished_reason": null,
@@ -510,6 +512,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "emerging",
    "unit": "share",
    "unpublished_reason": null,
@@ -778,6 +781,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "consistent_with_normal",
    "unit": "pct_change_yoy",
    "unpublished_reason": null,
@@ -824,6 +828,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "emerging",
    "unit": "count",
    "unpublished_reason": null,
@@ -912,8 +917,259 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "consistent_with_normal",
    "unit": "share",
+   "unpublished_reason": null,
+   "valve_measured": "product_to_adoption"
+  },
+  {
+   "bucket_id": "adaptation",
+   "confidence": 75,
+   "grade": "B",
+   "id": "call_center_uplift",
+   "latest": {
+    "as_of": "2023-04-30",
+    "disputed": false,
+    "grade": "B",
+    "high": null,
+    "low": null,
+    "obs_ids": [
+     "15a42a777f78ef32"
+    ],
+    "series_key": "nber.customer_support_agents.productivity_uplift.pt",
+    "subject": "customer_support_agents",
+    "unit": "share",
+    "value": 0.14
+   },
+   "layer_id": "adopters",
+   "leading_lagging": "coincident",
+   "n_observations": 2,
+   "name": "Customer-support productivity uplift from a generative-AI assistant",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2023-04-30",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "15a42a777f78ef32"
+     ],
+     "series_key": "nber.customer_support_agents.productivity_uplift.pt",
+     "subject": "customer_support_agents",
+     "unit": "share",
+     "value": 0.14
+    }
+   ],
+   "stale_as_of": null,
+   "stale_reason": "A one-off field experiment; refreshed only when a comparable randomised study publishes.",
+   "status": "consistent_with_normal",
+   "unit": "share",
+   "unpublished_reason": null,
+   "valve_measured": "adoption_to_adaptation"
+  },
+  {
+   "bucket_id": "adaptation",
+   "confidence": 70,
+   "grade": "C",
+   "id": "exec_reported_impact",
+   "latest": {
+    "as_of": "2026-02-28",
+    "disputed": false,
+    "grade": "B",
+    "high": null,
+    "low": null,
+    "obs_ids": [
+     "d0538040758acb6e"
+    ],
+    "series_key": "nber.executives_4_countries.no_ai_impact_share.pt",
+    "subject": "executives_4_countries",
+    "unit": "share",
+    "value": 0.9
+   },
+   "layer_id": "adopters",
+   "leading_lagging": "lagging",
+   "n_observations": 2,
+   "name": "Executives reporting no AI impact on their own firm",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2026-02-28",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "d0538040758acb6e"
+     ],
+     "series_key": "nber.executives_4_countries.no_ai_impact_share.pt",
+     "subject": "executives_4_countries",
+     "unit": "share",
+     "value": 0.9
+    }
+   ],
+   "stale_as_of": null,
+   "stale_reason": null,
+   "status": "consistent_with_normal",
+   "unit": "share",
+   "unpublished_reason": null,
+   "valve_measured": "adoption_to_adaptation"
+  },
+  {
+   "bucket_id": "early_adoption",
+   "confidence": 65,
+   "grade": "B",
+   "id": "openai_work_share",
+   "latest": {
+    "as_of": "2025-06-30",
+    "disputed": false,
+    "grade": "D",
+    "high": null,
+    "low": null,
+    "obs_ids": [
+     "71978c1402e55137"
+    ],
+    "series_key": "openai_blog.chatgpt_consumer.work_related_message_share.pt",
+    "subject": "chatgpt_consumer",
+    "unit": "share",
+    "value": 0.27
+   },
+   "layer_id": "adopters",
+   "leading_lagging": "coincident",
+   "n_observations": 2,
+   "name": "Work-related share of ChatGPT consumer messages",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2025-06-30",
+     "disputed": false,
+     "grade": "D",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "71978c1402e55137"
+     ],
+     "series_key": "openai_blog.chatgpt_consumer.work_related_message_share.pt",
+     "subject": "chatgpt_consumer",
+     "unit": "share",
+     "value": 0.27
+    }
+   ],
+   "stale_as_of": null,
+   "stale_reason": null,
+   "status": "emerging",
+   "unit": "share",
+   "unpublished_reason": null,
+   "valve_measured": "product_to_adoption"
+  },
+  {
+   "bucket_id": "early_adoption",
+   "confidence": 60,
+   "grade": "B",
+   "id": "exposure_vs_usage_gap",
+   "latest": {
+    "as_of": "2026-06-30",
+    "dims": {},
+    "obs_ids": [
+     "115415a8b34ab556",
+     "72b0b6f718eaea49"
+    ],
+    "unit": "ratio",
+    "value": 0.49042121513875
+   },
+   "layer_id": "adopters",
+   "leading_lagging": "coincident",
+   "n_observations": 9,
+   "name": "Usage as a share of theoretical exposure",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2024-09-30",
+     "dims": {},
+     "obs_ids": [
+      "115415a8b34ab556",
+      "3fa468ca00d179d1"
+     ],
+     "unit": "ratio",
+     "value": 0.35242503707249995
+    },
+    {
+     "as_of": "2024-12-31",
+     "dims": {},
+     "obs_ids": [
+      "115415a8b34ab556",
+      "972d925077c1e98e"
+     ],
+     "unit": "ratio",
+     "value": 0.32955308446125
+    },
+    {
+     "as_of": "2025-03-31",
+     "dims": {},
+     "obs_ids": [
+      "115415a8b34ab556",
+      "2c173e2d949fa737"
+     ],
+     "unit": "ratio",
+     "value": 0.36598075384875
+    },
+    {
+     "as_of": "2025-06-30",
+     "dims": {},
+     "obs_ids": [
+      "115415a8b34ab556",
+      "8aa0a471af912a92"
+     ],
+     "unit": "ratio",
+     "value": 0.3819122503025
+    },
+    {
+     "as_of": "2025-09-30",
+     "dims": {},
+     "obs_ids": [
+      "115415a8b34ab556",
+      "58f79eeff8feacb7"
+     ],
+     "unit": "ratio",
+     "value": 0.40014512601875
+    },
+    {
+     "as_of": "2025-12-31",
+     "dims": {},
+     "obs_ids": [
+      "115415a8b34ab556",
+      "56e28ca75b0f54e0"
+     ],
+     "unit": "ratio",
+     "value": 0.4399409259425
+    },
+    {
+     "as_of": "2026-03-31",
+     "dims": {},
+     "obs_ids": [
+      "115415a8b34ab556",
+      "8d4f8bd10681b4c1"
+     ],
+     "unit": "ratio",
+     "value": 0.47284192894375
+    },
+    {
+     "as_of": "2026-06-30",
+     "dims": {},
+     "obs_ids": [
+      "115415a8b34ab556",
+      "72b0b6f718eaea49"
+     ],
+     "unit": "ratio",
+     "value": 0.49042121513875
+    }
+   ],
+   "stale_as_of": null,
+   "stale_reason": null,
+   "status": "consistent_with_normal",
+   "unit": "ratio",
    "unpublished_reason": null,
    "valve_measured": "product_to_adoption"
   }

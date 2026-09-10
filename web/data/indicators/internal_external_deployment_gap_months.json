@@ -1,0 +1,173 @@
+{
+ "band_input": "dwarkesh.anthropic_mythos.internal_to_public_gap_months.pt",
+ "band_rationale": "Normal = a gap under six months, ordinary red-teaming and productisation; fast = a year or more, a lab running internally on a model the public does not have. Between is `emerging`.",
+ "band_value": {
+  "as_of": "2026-06-30",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "8d657a642bef97a9"
+  ],
+  "value": 4.0
+ },
+ "bucket_id": "products",
+ "cadence_expected": "quarterly",
+ "confidence": 45,
+ "counterevidence": "A single datum from a third party speaking from memory; internal availability is not internal deployment at scale; restricted partner access blurs the public date.",
+ "crosswalk": [],
+ "definition": "Months between a frontier model's internal availability and its public release, from the one documented case (Anthropic's Mythos class: internal in February, public in June 2026, per Ryan Greenblatt on the Dwarkesh Podcast, with Fortune's release report for the public leg).",
+ "derived": [],
+ "direction": null,
+ "direction_rule": null,
+ "evidence": [],
+ "falsifying_band": null,
+ "fast_band": {
+  "hi": null,
+  "lo": 12.0
+ },
+ "fits": [],
+ "flow_status": null,
+ "grade": "C",
+ "id": "internal_external_deployment_gap_months",
+ "latest": {
+  "as_of": "2026-06-30",
+  "disputed": false,
+  "grade": "B",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "8d657a642bef97a9"
+  ],
+  "series_key": "dwarkesh.anthropic_mythos.internal_to_public_gap_months.pt",
+  "subject": "anthropic_mythos",
+  "unit": "months",
+  "value": 4.0
+ },
+ "layer_id": "model",
+ "leading_lagging": "leading",
+ "metric": null,
+ "metric_dims": {},
+ "n_observations": 2,
+ "name": "Internal-to-public deployment gap at the frontier",
+ "normal_band": {
+  "hi": 6.0,
+  "lo": null
+ },
+ "override_note": null,
+ "points": [
+  {
+   "as_of": "2026-06-30",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "8d657a642bef97a9"
+   ],
+   "series_key": "dwarkesh.anthropic_mythos.internal_to_public_gap_months.pt",
+   "subject": "anthropic_mythos",
+   "unit": "months",
+   "value": 4.0
+  }
+ ],
+ "proposed_status": "consistent_with_normal",
+ "proxy_types": [
+  "model_release"
+ ],
+ "published": true,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "rsi_agent_workdays_per_human",
+  "safety_brake_events"
+ ],
+ "related_metrics": [],
+ "related_predictions": [],
+ "series": [
+  {
+   "points": [
+    {
+     "as_of": "2026-06-30",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "8d657a642bef97a9"
+     ],
+     "series_key": "dwarkesh.anthropic_mythos.internal_to_public_gap_months.pt",
+     "subject": "anthropic_mythos",
+     "unit": "months",
+     "value": 4.0
+    }
+   ],
+   "series_key": "dwarkesh.anthropic_mythos.internal_to_public_gap_months.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-06-09",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "54622ceef81f05a0"
+     ],
+     "series_key": "fortune.anthropic_mythos.public_release.pt",
+     "subject": "anthropic_mythos",
+     "unit": "text",
+     "value": null
+    }
+   ],
+   "series_key": "fortune.anthropic_mythos.public_release.pt"
+  }
+ ],
+ "series_keys": [
+  "dwarkesh.anthropic_mythos.internal_to_public_gap_months.pt",
+  "fortune.anthropic_mythos.public_release.pt"
+ ],
+ "sparkline": [
+  {
+   "as_of": "2026-06-30",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "8d657a642bef97a9"
+   ],
+   "series_key": "dwarkesh.anthropic_mythos.internal_to_public_gap_months.pt",
+   "subject": "anthropic_mythos",
+   "unit": "months",
+   "value": 4.0
+  }
+ ],
+ "stale_as_of": null,
+ "stale_ok": false,
+ "stale_reason": null,
+ "status": "consistent_with_normal",
+ "status_events": [
+  {
+   "author": "evaluate",
+   "created_at": "2026-09-10T07:06:26.806457Z",
+   "evidence_ids": [
+    "8d657a642bef97a9"
+   ],
+   "id": "33785c35e0188877",
+   "new_conf": 45,
+   "new_status": "consistent_with_normal",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "Evaluator: 4 (Dwarkesh Podcast transcripts, 2026-06-30) is inside the consistent band (hi=6). Auto-reason; band rationale: Normal = a gap under six months, ordinary red-teaming and productisation; fast = a year or more, a lab running internally on a model the public does not have. Between is `emerging`.",
+   "target_id": "internal_external_deployment_gap_months",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": "frontier_labs",
+ "tracker_interpretation": "Four months, on one hedged podcast statement. Enough to publish, not enough to lean on.",
+ "unit": "months",
+ "unpublished_reason": null,
+ "updated_at": "2026-09-10",
+ "valve_measured": "invention_to_product",
+ "why_it_matters": "AI 2027 turns on labs keeping their best models internal. A gap that grows is the scenario's signature; a gap of months is ordinary product testing."
+}

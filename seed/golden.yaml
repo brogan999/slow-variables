@@ -1,0 +1,55 @@
+# Twelve golden questions (v2 §12), six per lens, plus one refusal case. `expect` names the series or metric whose
+# records a correct answer must cite; the golden runner passes only when every number in the answer traces to them.
+questions:
+  - id: g01
+    lens: diffusion
+    question: "What is the latest METR 50% time horizon and which model set it?"
+    expect: {series: ["metr.*.horizon_50.pt"]}
+  - id: g02
+    lens: diffusion
+    question: "What is the 50% horizon doubling time since 2024, with its confidence interval?"
+    expect: {metrics: ["horizon_doubling_days_50_since_2024"]}
+  - id: g03
+    lens: diffusion
+    question: "What is the latest 50%/80% horizon ratio and which band does it sit in?"
+    expect: {metrics: ["horizon_ratio_80_50"], indicators: ["horizon_ratio_80_50"]}
+  - id: g04
+    lens: diffusion
+    question: "What share of US firms report using AI in the latest Census BTOS reading?"
+    expect: {series: ["census_btos.us.ai_use_share_v2.2w"]}
+  - id: g05
+    lens: diffusion
+    question: "How many of the monthly labour trackers show an AI-attributable break, and what are their latest readings?"
+    expect: {metrics: ["cross_tracker_concordance"]}
+  - id: g06
+    lens: diffusion
+    question: "What did METR's 2026 developer RCT find compared with the 2025 one?"
+    expect: {series: ["metr_blog.rct_2026.dev_speed_change.pt", "metr_blog.rct_2025.dev_speed_change.pt"]}
+  - id: g07
+    lens: capture
+    question: "What is the semiconductor layer's share of stack operating income in the latest complete quarter?"
+    expect: {metrics: ["margin_stack_share_by_layer"]}
+  - id: g08
+    lens: capture
+    question: "What is NVIDIA's latest gross margin and which filing does it come from?"
+    expect: {metrics: ["gross_margin"]}
+  - id: g09
+    lens: capture
+    question: "What is Oracle's latest remaining performance obligation?"
+    expect: {series: ["sec.orcl.rpo.q"]}
+  - id: g10
+    lens: capture
+    question: "What are the cumulative circular financing commitments and what are the largest deals in them?"
+    expect: {metrics: ["circular_commitments_total"]}
+  - id: g11
+    lens: capture
+    question: "What is OpenAI's latest run-rate and its recoupment ratio?"
+    expect: {series: ["epoch.openai.revenue_run_rate_usd.pt"], metrics: ["lab_recoupment_ratio"]}
+  - id: g12
+    lens: capture
+    question: "What share of enterprise generative-AI spend went to applications in the latest Menlo wave?"
+    expect: {metrics: ["enterprise_app_spend_share"]}
+  - id: g13
+    lens: capture
+    question: "What is Anthropic's gross margin?"
+    expect: {refuse: true}

@@ -563,26 +563,32 @@ indicators:
     published: true
     updated_at: 2026-09-11
   - id: fda_first_llm_device
-    name: "First FDA-authorised LLM-based device"
-    definition: "Whether the FDA has authorised a device whose core function is a large language model, and when."
-    why_it_matters: "The first LLM device through review is the moment the regulated-domain speed limit meets the technology the paper is about."
+    name: FDA-authorised devices built on a large language model
+    definition: Count of distinct devices the FDA has cleared or authorised whose core function is a large language model, derived metric fda_llm_devices_count over the clearance records. The first is UpDoc (K253281, decision 23 December 2025), per the FDA 510(k) database, STAT News and Innolitics.
+    why_it_matters: The first LLM device through review is the moment the regulated-domain speed limit meets the technology the paper is about; the count after it is the throughput of that limit.
     proxy_types: [policy]
-    unit: share
+    unit: count
     cadence_expected: quarterly
+    series_keys: ["fda_510k.updoc.first_llm_device_clearance.pt", "statnews.updoc.first_llm_device_clearance.pt", "innolitics.updoc.first_llm_device_clearance.pt"]
+    metric: fda_llm_devices_count
+    band_input: "metric:fda_llm_devices_count"
     bucket_id: adaptation
     valve_measured: adoption_to_adaptation
-    normal_band: {hi: 1}
-    fast_band: {lo: 1}
-    band_rationale: "Placeholder until the series exists; bands are set with the first observation."
-    tracker_interpretation: "Unpublished; see the reason."
-    unpublished_reason: "Not yet verifiable: the brief names UpDoc K253281 (Dec 2025) but the submission is absent from the FDA's AI-enabled device list; a row needs the FDA decision document itself."
-    counterevidence: "Device classification lags product reality; a clearance is narrow."
-    layer_id: model
+    normal_band: {hi: 3}
+    fast_band: {lo: 10}
+    band_rationale: "Normal = a handful of LLM-based authorisations by end-2026, given a 510(k) path of roughly six months and a first clearance in December 2025; fast = ten or more, the regulatory throughput a fast scenario needs. Between is `emerging`."
+    tracker_interpretation: One device, cleared on a drug-dose-calculator predicate and publicised six months later. The public record does not itself say "LLM"; Innolitics' caveat stands.
+    counterevidence: The FDA record does not name an LLM; the clearance is narrow (a diabetes dosing app); a count of one is not a rate.
+    layer_id: deployment_application
+    sublayer_id: vertical_ai
     leading_lagging: leading
-    confidence: 20
-    proposed_status: not_yet_measurable
-    published: false
-    updated_at: 2026-09-11
+    confidence: 60
+    proposed_status: consistent_with_normal
+    related_indicators: [fda_ai_devices_cumulative, waymo_weekly_paid_rides]
+    stale_ok: true
+    stale_reason: "An event-driven count; it moves only when a new LLM-based device is authorised."
+    published: true
+    updated_at: 2026-09-10
   - id: reliability_framework_adoption
     name: "Reliability-science framework adoption"
     definition: "Whether labs report reliability along the four-dimension framework (consistency, robustness, calibration, operational safety) in system cards."
@@ -673,8 +679,8 @@ indicators:
     why_it_matters: The paper predicts no broad AI-attributable employment decline for years; this is the highest-frequency payroll test of that claim.
     proxy_types: [deployment, welfare]
     unit: share
-    cadence_expected: monthly
-    series_keys: ["adp_research.us_high_exposure.employment_yoy.m", "adp_research.us_low_exposure.employment_yoy.m"]
+    cadence_expected: quarterly
+    series_keys: ["adp_research.us_high_exposure.employment_yoy.m", "adp_research.us_low_exposure.employment_yoy.m", "fortune.us_high_exposure.employment_yoy.m"]
     band_input: adp_research.us_high_exposure.employment_yoy.m
     bucket_id: adaptation
     valve_measured: adoption_to_adaptation
@@ -682,14 +688,13 @@ indicators:
     fast_band: {hi: -0.03}
     band_rationale: "Normal = within one percent of flat, ordinary occupational churn; fast = a 3% or worse decline in exposed occupations, which is what a broad AI-attributable displacement looks like in payroll data. Between is `emerging`."
     tracker_interpretation: Exposed occupations are flat while unexposed grow slowly; the signal is in the young, not the aggregate.
-    counterevidence: Unpublished until a second source states the all-ages figure (the Stanford note shows it only in a figure). Exposure is a model-derived measure; ADP payroll coverage skews to larger firms; the divergence began before ChatGPT on some cuts (NY Fed; Iscenko and Millet).
+    counterevidence: Exposure is a model-derived measure; ADP payroll coverage skews to larger firms; the divergence began before ChatGPT on some cuts (NY Fed; Iscenko and Millet).
     layer_id: labour_consumers
     leading_lagging: coincident
     confidence: 80
     proposed_status: consistent_with_normal
     related_indicators: [canaries_entry_level_gap, cross_tracker_concordance]
-    unpublished_reason: "Waiting on a second source: the all-ages ADP/Stanford figure appears only in a chart in the Stanford note and one ADP row; the two-source rule blocks a scored status."
-    published: false
+    published: true
     updated_at: 2026-09-10
   - id: canaries_entry_level_gap
     name: Entry-level employment shortfall in AI-exposed occupations
@@ -852,5 +857,359 @@ indicators:
     confidence: 65
     proposed_status: emerging
     related_indicators: [bls_labor_productivity_yoy, consumer_surplus_wta]
+    published: true
+    updated_at: 2026-09-10
+  - id: call_center_uplift
+    name: Customer-support productivity uplift from a generative-AI assistant
+    definition: Change in issues resolved per hour when support agents get a generative-AI assistant, from the Brynjolfsson, Li and Raymond field experiment (NBER WP 31161), with the novice effect and MIT Sloan's restatement shown alongside.
+    why_it_matters: The best-identified productivity effect on record for a deployed assistant; the normal-technology story predicts modest average gains concentrated in novices, which is exactly what it found.
+    proxy_types: [deployment, welfare]
+    unit: share
+    cadence_expected: annual
+    series_keys: ["nber.customer_support_agents.productivity_uplift.pt", "mitsloan.customer_support_agents.productivity_uplift.pt"]
+    band_input: nber.customer_support_agents.productivity_uplift.pt
+    bucket_id: adaptation
+    valve_measured: adoption_to_adaptation
+    normal_band: {hi: 0.2}
+    fast_band: {lo: 0.5}
+    band_rationale: "Normal = an average uplift under 20%, the range prior process tools (CRM, knowledge bases) delivered in the same job; fast = 50% or more, the order of magnitude the fast scenario needs from a single tool. Between is `emerging`."
+    tracker_interpretation: A 14% average, 34% for novices and nothing for experts. A tool that levels the floor, not one that replaces the role.
+    counterevidence: One firm, one tool, 2020-21 vintage models; issues per hour is a partial productivity measure; later assistants may do more.
+    layer_id: adopters
+    leading_lagging: coincident
+    confidence: 75
+    proposed_status: consistent_with_normal
+    related_indicators: [dev_rct_uplift, exec_reported_impact]
+    stale_ok: true
+    stale_reason: "A one-off field experiment; refreshed only when a comparable randomised study publishes."
+    published: true
+    updated_at: 2026-09-10
+  - id: exec_reported_impact
+    name: Executives reporting no AI impact on their own firm
+    definition: Share of executives in a four-country survey (US, UK, Germany, Australia; more than 5,000 respondents) reporting no measurable AI impact on their firm's employment or productivity over the last three years, from Yotzov, Barrero and co-authors (NBER WP 34836).
+    why_it_matters: Adoption headlines are broad, but firm-level impact is what adaptation means. Nine in ten firms seeing nothing yet is the productivity J-curve in survey form.
+    proxy_types: [deployment, welfare]
+    unit: share
+    cadence_expected: annual
+    series_keys: ["nber.executives_4_countries.no_ai_impact_share.pt", "peoplematters.executives_4_countries.no_ai_employment_impact_share.pt"]
+    band_input: nber.executives_4_countries.no_ai_impact_share.pt
+    bucket_id: adaptation
+    valve_measured: adoption_to_adaptation
+    normal_band: {lo: 0.7}
+    fast_band: {hi: 0.4}
+    band_rationale: "Normal = at least 70% of firms report no measurable impact three years in, as with PCs at the same age; fast = a majority reporting impact (no-impact share under 40%). Between is `emerging`."
+    tracker_interpretation: The survey says what the productivity statistics say. Impact is expected, reported and rarely measured.
+    counterevidence: Executives may not see impacts that exist below the firm-level line; the question asks about the last three years, which mostly predate agentic tools.
+    layer_id: adopters
+    leading_lagging: lagging
+    confidence: 70
+    proposed_status: consistent_with_normal
+    related_indicators: [call_center_uplift, bls_labor_productivity_yoy, enterprise_pilot_to_production]
+    published: true
+    updated_at: 2026-09-10
+  - id: harvey_lab_frontier_completion
+    name: Frontier models completing expert legal tasks end to end (Harvey LAB)
+    definition: Share of holdout tasks the best frontier model completes end to end under Harvey's strict all-pass standard on its Legal Agent Benchmark, with the aggregate figure alongside.
+    why_it_matters: The productisation valve for professional work. A model that passes bar-style questions but completes 7% of real matters is a tool, not a lawyer.
+    proxy_types: [benchmark]
+    unit: share
+    cadence_expected: quarterly
+    series_keys: ["harvey_blog.lab_holdout.all_pass_top_model.pt", "harvey_blog.lab_holdout.all_pass_aggregate.pt"]
+    band_input: harvey_blog.lab_holdout.all_pass_top_model.pt
+    bucket_id: products
+    valve_measured: invention_to_product
+    normal_band: {hi: 0.3}
+    fast_band: {lo: 0.7}
+    band_rationale: "Normal = the best frontier model completes under 30% of expert tasks end to end; fast = above 70%, where substitution rather than assistance becomes the product. Between is `emerging`."
+    tracker_interpretation: Single digits under an all-pass standard. The benchmark is a vendor's, so the reading stays emerging until an independent run lands.
+    counterevidence: A vendor benchmark scored by the vendor (tier 7); the all-pass standard is deliberately harsh; partial completions have value in practice.
+    layer_id: deployment_application
+    sublayer_id: vertical_ai
+    leading_lagging: leading
+    confidence: 40
+    proposed_status: emerging
+    related_indicators: [pass_hat_k_tau_bench, metr_horizon_80]
+    published: true
+    updated_at: 2026-09-10
+  - id: pass_hat_k_tau_bench
+    name: Agent reliability across repeated runs (tau-bench pass^k)
+    definition: Share of tau-bench tasks an agent passes on every one of k attempts. The 2024 paper's gpt-4o figures (pass^1 61%, pass^8 under 25%) set the baseline; the 2026 point is the leaderboard leader's pass^1 and pass^4 as tabulated by Automation Anywhere.
+    why_it_matters: The 70% problem in one number - solving a task once is not solving it reliably. Deployment needs pass^k, not pass^1, and the gap between them is where the normal-technology speed limit lives.
+    proxy_types: [benchmark]
+    unit: share
+    cadence_expected: quarterly
+    series_keys: ["automation_anywhere.tau_bench_leaderboard_1.pass_hat_4.pt", "automation_anywhere.tau_bench_leaderboard_1.pass_hat_1.pt", "arxiv.tau_bench_retail_gpt4o.pass_hat_1.pt", "arxiv.tau_bench_retail_gpt4o.pass_hat_8.pt"]
+    band_input: automation_anywhere.tau_bench_leaderboard_1.pass_hat_4.pt
+    bucket_id: products
+    valve_measured: invention_to_product
+    normal_band: {hi: 0.7}
+    fast_band: {lo: 0.9}
+    band_rationale: "Normal = under 70% of tasks pass all four runs, so the best agent still fails one attempt in three; fast = 90% or more at k of four or higher, the reliability a workflow can be built on. Between is `emerging`."
+    tracker_interpretation: Reliability still collapses with k - 70% once, 56% four times running - two years after the paper that named the problem.
+    counterevidence: The 2026 point is vendor-tabulated and the model is unnamed; tau-bench domains are narrow; pass^k penalises benign variation.
+    layer_id: model
+    leading_lagging: leading
+    confidence: 55
+    proposed_status: consistent_with_normal
+    related_indicators: [harvey_lab_frontier_completion, horizon_ratio_80_50]
+    published: true
+    updated_at: 2026-09-10
+  - id: surprise_index
+    name: Progress against the AI 2027 quantitative predictions
+    definition: The share of the pace AI 2027 predicted that its quantitative metrics actually achieved, as graded by the AI Futures Project itself (65% for 2025, revised to about 75% in July 2026) and restated by the independent AI 2027 Tracker.
+    why_it_matters: The scenario the fast lens is calibrated on grades its own forecasts. If progress runs at three quarters of its pace, the timeline stretches by years.
+    proxy_types: [benchmark]
+    unit: share
+    cadence_expected: annual
+    series_keys: ["aifutures_blog.ai_2027_quantitative.pace_vs_predicted.pt", "ai2027_tracker.ai_2027_quantitative.pace_vs_predicted.pt"]
+    band_input: aifutures_blog.ai_2027_quantitative.pace_vs_predicted.pt
+    bucket_id: methods
+    valve_measured: invention_to_product
+    normal_band: {hi: 0.6}
+    fast_band: {lo: 0.9}
+    band_rationale: "Normal = 60% or less of the predicted pace (a delay that compounds to years); fast = 90% or more (on schedule). Between is `emerging`."
+    tracker_interpretation: Behind schedule but not by the margin a normal-technology reading needs; the July revision moved it the fast way.
+    counterevidence: The authors grade themselves (tier 7); the metric mix is theirs; a pace figure hides which metrics lag.
+    layer_id: model
+    leading_lagging: leading
+    confidence: 50
+    proposed_status: emerging
+    related_indicators: [metr_horizon_50, rsi_agent_workdays_per_human]
+    published: true
+    updated_at: 2026-09-10
+  - id: openai_work_share
+    name: Work-related share of ChatGPT consumer messages
+    definition: Share of ChatGPT consumer-plan messages classified as work-related in OpenAI's usage paper (Chatterji and co-authors), with the NBER abstract's complement (non-work above 70%) alongside.
+    why_it_matters: The largest usage dataset there is says most use is personal. Diffusion into work is the slower, deeper channel the paper expects.
+    proxy_types: [behaviour, product]
+    unit: share
+    cadence_expected: annual
+    series_keys: ["openai_blog.chatgpt_consumer.work_related_message_share.pt", "nber.chatgpt_consumer.non_work_message_share.pt"]
+    band_input: openai_blog.chatgpt_consumer.work_related_message_share.pt
+    bucket_id: early_adoption
+    valve_measured: product_to_adoption
+    normal_band: {hi: 0.4}
+    fast_band: {lo: 0.6}
+    band_rationale: "Normal = under 40% of consumer messages are work-related, as personal use led with PCs and the web; fast = a work majority, meaning the consumer product has been pulled into production workflows. Between is `emerging`."
+    tracker_interpretation: About a quarter of messages are work, and the share fell through 2025 as consumer use grew faster.
+    counterevidence: Consumer plans only; enterprise and API traffic (where work concentrates) are excluded; classification is model-based.
+    layer_id: adopters
+    leading_lagging: coincident
+    confidence: 65
+    proposed_status: emerging
+    related_indicators: [bbd_work_hours_assisted, aei_augmentation_share]
+    published: true
+    updated_at: 2026-09-10
+  - id: exposure_vs_usage_gap
+    name: Usage as a share of theoretical exposure
+    definition: Weekly work use of generative AI (Bick-Blandin-Deming) divided by the share of the US workforce with at least a tenth of tasks exposed to LLMs (Eloundou and co-authors' "GPTs are GPTs"), derived metric exposure_vs_usage_gap.
+    why_it_matters: The paper's central gap - what the technology could touch versus what people actually use it for weekly. Exposure is a ceiling; usage is the diffusion curve under it.
+    proxy_types: [behaviour]
+    unit: ratio
+    cadence_expected: quarterly
+    series_keys: ["fred.us_workers.work_use_weekly_share.q", "arxiv.us_workforce.llm_exposed_10pct_tasks_share.pt"]
+    metric: exposure_vs_usage_gap
+    band_input: "metric:exposure_vs_usage_gap"
+    bucket_id: early_adoption
+    valve_measured: product_to_adoption
+    normal_band: {hi: 0.6}
+    fast_band: {lo: 0.8}
+    band_rationale: "Normal = under 60% of exposed workers use the tools weekly three years in; fast = 80% or more, the gap closed. Between is `emerging`."
+    tracker_interpretation: Roughly half of the exposed workforce uses generative AI weekly; the ratio has climbed steadily since 2024.
+    counterevidence: The denominator is a 2023 model-based exposure estimate; the numerator counts any weekly use, however shallow; exposure and use are measured on different populations.
+    layer_id: adopters
+    leading_lagging: coincident
+    confidence: 60
+    proposed_status: consistent_with_normal
+    related_indicators: [bbd_work_hours_assisted]
+    published: true
+    updated_at: 2026-09-10
+  - id: exposed_low_adaptive_workers
+    name: Workers highly exposed to AI with low adaptive capacity
+    definition: Number of US workers who are both in the top exposure quartile and have low measured capacity to move occupations, from Manning and Aguirre's NBER chapter (January 2026).
+    why_it_matters: Displacement is a distribution question. The workers who cannot adapt are where a fast scenario turns from a productivity story into a welfare one.
+    proxy_types: [welfare]
+    unit: workers
+    cadence_expected: annual
+    series_keys: ["nber.us_workers.high_exposure_low_adaptive_capacity.pt"]
+    band_input: nber.us_workers.high_exposure_low_adaptive_capacity.pt
+    bucket_id: adaptation
+    valve_measured: adoption_to_adaptation
+    normal_band: {hi: 5000000}
+    fast_band: {lo: 10000000}
+    band_rationale: "Normal = under five million workers (about 3% of the workforce), the scale of the China trade shock spread over a decade; fast = ten million or more. Between is `emerging`."
+    tracker_interpretation: 3.3 million, or 2.5% of the sample. One estimate, one method; the working-paper version revises the split.
+    counterevidence: Single source (tier 6); exposure and adaptive capacity are both modelled; the WP 34705 abstract gives different totals from the chapter page.
+    layer_id: labour_consumers
+    leading_lagging: leading
+    confidence: 45
+    proposed_status: emerging
+    related_indicators: [canaries_exposed_employment_yoy, humlum_precise_null]
+    published: true
+    updated_at: 2026-09-10
+  - id: yale_occupational_mix_dissimilarity
+    name: Occupational-mix dissimilarity since ChatGPT (Yale Budget Lab)
+    definition: How far the occupational mix of the US workforce has moved from its November 2022 baseline, the Budget Lab's dissimilarity index, with the graduates sub-index range the reports state in text.
+    why_it_matters: If AI were reshaping work, the mix of occupations would move faster than in prior technology transitions. The Budget Lab finds it moving at about the historical pace.
+    proxy_types: [deployment, welfare]
+    unit: share
+    cadence_expected: monthly
+    series_keys: ["yale_budget_lab.recent_vs_older_grads.occupation_dissimilarity_range.pt"]
+    bucket_id: adaptation
+    valve_measured: adoption_to_adaptation
+    normal_band: {hi: 0.08}
+    fast_band: {lo: 0.12}
+    band_rationale: "Placeholder pending the numeric series: normal = the all-worker index within the range prior transitions (computers, the internet) produced at the same age; fast = 50% above that range."
+    tracker_interpretation: Unpublished; see the reason.
+    unpublished_reason: "Waiting on a connector for the Budget Lab data workbook: the monthly updates state the all-worker index only in a chart, and the text gives just the graduates sub-index range (30-33%)."
+    counterevidence: Occupational mix moves slowly by construction; a CPS-based index cannot see within-occupation task change.
+    layer_id: labour_consumers
+    leading_lagging: lagging
+    confidence: 60
+    proposed_status: consistent_with_normal
+    related_indicators: [canaries_exposed_employment_yoy]
+    published: false
+    updated_at: 2026-09-10
+  - id: humlum_precise_null
+    name: Chatbot effect on earnings and hours in exposed occupations (Denmark)
+    definition: Difference-in-differences estimate of the effect of chatbot adoption on earnings and recorded hours for workers in exposed occupations, two years after ChatGPT, from Humlum and Vestergaard's Danish register study; the point estimates centre on zero with confidence intervals excluding effects above 2%.
+    why_it_matters: The cleanest labour-market null on record, from administrative data covering the whole population. A normal technology shows up in earnings slowly; this is the slow showing.
+    proxy_types: [welfare]
+    unit: share
+    cadence_expected: annual
+    series_keys: ["humlum_pdf.denmark_exposed_workers.chatbot_effect_on_earnings.pt", "nber.denmark_exposed_workers.chatbot_effect_bound.pt", "chicago_booth.denmark_exposed_workers.chatbot_effect_bound.pt"]
+    band_input: humlum_pdf.denmark_exposed_workers.chatbot_effect_on_earnings.pt
+    bucket_id: adaptation
+    valve_measured: adoption_to_adaptation
+    normal_band: {lo: -0.02, hi: 0.02}
+    fast_band: {hi: -0.05}
+    band_rationale: "Normal = earnings and hours effects within two percent two years in; fast = a decline of five percent or more for exposed workers. Between is `emerging`."
+    tracker_interpretation: Zero, precisely. Adoption is high, time savings are real and modest, and none of it reaches pay yet.
+    counterevidence: Denmark is not the US; the window ends in 2024, before agentic tools; the effect could be a compositional wash across winners and losers.
+    layer_id: labour_consumers
+    leading_lagging: lagging
+    confidence: 80
+    proposed_status: consistent_with_normal
+    related_indicators: [upwork_freelancer_effects, canaries_exposed_employment_yoy]
+    published: true
+    updated_at: 2026-09-10
+  - id: upwork_freelancer_effects
+    name: Freelance writing earnings after ChatGPT (Upwork)
+    definition: Change in monthly earnings for writing-related freelancers on Upwork after ChatGPT's release relative to less exposed categories, from Hui, Reshef and Zhou, with the jobs effect alongside.
+    why_it_matters: The most substitutable work on the most measurable platform. If displacement shows anywhere first, it is here, and it shows as single digits.
+    proxy_types: [welfare, deployment]
+    unit: share
+    cadence_expected: annual
+    series_keys: ["cepr_voxeu.upwork_writing_freelancers.monthly_earnings_change.pt", "cepr_voxeu.upwork_writing_freelancers.monthly_jobs_change.pt", "wustl_olin.upwork_writing_freelancers.monthly_earnings_change.pt"]
+    band_input: cepr_voxeu.upwork_writing_freelancers.monthly_earnings_change.pt
+    bucket_id: adaptation
+    valve_measured: adoption_to_adaptation
+    normal_band: {lo: -0.1, hi: 0}
+    fast_band: {hi: -0.2}
+    band_rationale: "Normal = declines under 10% in the most substitutable freelance categories, a tool effect at the margin; fast = a 20% or worse collapse in freelance earnings. Between is `emerging`."
+    tracker_interpretation: Five percent off earnings and two percent off jobs for the workers most exposed to a text generator. Real, small, early.
+    counterevidence: One platform; short window after release; the comparison categories were also exposed; later models may widen the effect.
+    layer_id: labour_consumers
+    leading_lagging: leading
+    confidence: 70
+    proposed_status: consistent_with_normal
+    related_indicators: [humlum_precise_null, canaries_entry_level_gap]
+    stale_ok: true
+    stale_reason: "A one-off platform study; refreshed only when a comparable study publishes."
+    published: true
+    updated_at: 2026-09-10
+  - id: pwc_ai_skill_wage_premium
+    name: Wage premium for AI skills (PwC AI Jobs Barometer)
+    definition: Average wage premium for jobs requiring specific AI skills over comparable jobs without them, from PwC's Global AI Jobs Barometer (one billion job ads, 27 countries), with a press restatement alongside.
+    why_it_matters: The price of scarce complementary skill. A large, stable premium says AI diffuses through people who can use it; a premium that doubles or collapses says the labour market is repricing at speed.
+    proxy_types: [welfare, market_structure]
+    unit: share
+    cadence_expected: annual
+    series_keys: ["pwc.ai_skilled_workers.wage_premium.fy", "outsource_accelerator.ai_skilled_workers.wage_premium.fy"]
+    band_input: pwc.ai_skilled_workers.wage_premium.fy
+    bucket_id: adaptation
+    valve_measured: adoption_to_adaptation
+    normal_band: {lo: 0.25, hi: 0.75}
+    fast_band: {lo: 1}
+    band_rationale: "Normal = a premium between 25% and 75%, large but of the size prior scarce IT skills carried; fast = a premium of 100% or more, wages doubling for a skill. Between is `emerging`."
+    tracker_interpretation: 62%, up from 56% the year before; the market pays for the complement, not the substitute.
+    counterevidence: A consultancy's method over job ads (tier 7), not paid wages; ad wording drifts as "AI skills" becomes table stakes; premium partly reflects seniority.
+    layer_id: labour_consumers
+    leading_lagging: coincident
+    confidence: 50
+    proposed_status: emerging
+    related_indicators: [new_grad_unemployment]
+    published: true
+    updated_at: 2026-09-10
+  - id: expert_data_market_run_rate
+    name: Expert-data market run-rate (Mercor)
+    definition: Gross annualised revenue run-rate of the largest expert-data vendor, Mercor, as reported in the press and by its founder; gross of the 60-70% paid out to experts.
+    why_it_matters: The RL-environment and expert-data market is the input the fast scenario needs to keep scaling. A single vendor doubling to two billion gross in six months is that input arriving.
+    proxy_types: [capital_flow, market_structure]
+    unit: USD
+    cadence_expected: quarterly
+    series_keys: ["dealroom.mercor.gross_revenue_run_rate_usd.pt", "techcrunch.mercor.gross_revenue_run_rate_usd.pt"]
+    band_input: dealroom.mercor.gross_revenue_run_rate_usd.pt
+    bucket_id: methods
+    valve_measured: invention_to_product
+    normal_band: {hi: 1000000000}
+    fast_band: {lo: 2000000000}
+    band_rationale: "Normal = the largest vendor under one billion gross, the scale the data-labelling leaders reached over a decade; fast = two billion or more at a single vendor, doubling within a year. Between is `emerging`."
+    tracker_interpretation: Faster than normal. Labs are buying expert time at a pace the human-data layer has never seen, and most of it flows straight through to the experts.
+    counterevidence: Press-sourced run-rate (tier 5) that is gross of payouts; one vendor; lab demand for expert data can fall as fast as it rose if synthetic data or self-play substitutes.
+    layer_id: training_input
+    sublayer_id: human_data
+    leading_lagging: leading
+    confidence: 70
+    proposed_status: faster_than_normal
+    related_indicators: [rl_environment_vendor_count, lab_run_rates]
+    published: true
+    updated_at: 2026-09-10
+  - id: internal_external_deployment_gap_months
+    name: Internal-to-public deployment gap at the frontier
+    definition: "Months between a frontier model's internal availability and its public release, from the one documented case (Anthropic's Mythos class: internal in February, public in June 2026, per Ryan Greenblatt on the Dwarkesh Podcast, with Fortune's release report for the public leg)."
+    why_it_matters: AI 2027 turns on labs keeping their best models internal. A gap that grows is the scenario's signature; a gap of months is ordinary product testing.
+    proxy_types: [model_release]
+    unit: months
+    cadence_expected: quarterly
+    series_keys: ["dwarkesh.anthropic_mythos.internal_to_public_gap_months.pt", "fortune.anthropic_mythos.public_release.pt"]
+    band_input: dwarkesh.anthropic_mythos.internal_to_public_gap_months.pt
+    bucket_id: products
+    valve_measured: invention_to_product
+    normal_band: {hi: 6}
+    fast_band: {lo: 12}
+    band_rationale: "Normal = a gap under six months, ordinary red-teaming and productisation; fast = a year or more, a lab running internally on a model the public does not have. Between is `emerging`."
+    tracker_interpretation: Four months, on one hedged podcast statement. Enough to publish, not enough to lean on.
+    counterevidence: A single datum from a third party speaking from memory; internal availability is not internal deployment at scale; restricted partner access blurs the public date.
+    layer_id: model
+    sublayer_id: frontier_labs
+    leading_lagging: leading
+    confidence: 45
+    proposed_status: consistent_with_normal
+    related_indicators: [rsi_agent_workdays_per_human, safety_brake_events]
+    published: true
+    updated_at: 2026-09-10
+  - id: waymo_weekly_paid_rides
+    name: Waymo paid rides per week
+    definition: Paid robotaxi rides Waymo provides per week across its US cities, as stated by the company and relayed by the press.
+    why_it_matters: The paper's clearest example of a regulated, physical-world deployment that diffuses city by city. The number is the speed limit made visible.
+    proxy_types: [deployment, product]
+    unit: rides_per_week
+    cadence_expected: quarterly
+    series_keys: ["techcrunch.waymo.weekly_paid_rides.pt", "electrek.waymo.weekly_paid_rides.pt"]
+    band_input: techcrunch.waymo.weekly_paid_rides.pt
+    bucket_id: adaptation
+    valve_measured: adoption_to_adaptation
+    normal_band: {hi: 1000000}
+    fast_band: {lo: 5000000}
+    band_rationale: "Normal = under a million paid rides a week, well under one percent of US ride-hail trips and scaling one city at a time; fast = five million or more, a national-scale substitution. Between is `emerging`."
+    tracker_interpretation: Half a million a week, doubling roughly yearly, ten cities. A decade-long diffusion curve on schedule.
+    counterevidence: Company-stated figures relayed by the press (tier 5); city launches are lumpy; a single safety event can pause the curve.
+    layer_id: deployment_application
+    sublayer_id: consumer_ai
+    leading_lagging: coincident
+    confidence: 65
+    proposed_status: consistent_with_normal
+    related_indicators: [fda_first_llm_device, state_ai_bills_introduced]
     published: true
     updated_at: 2026-09-10

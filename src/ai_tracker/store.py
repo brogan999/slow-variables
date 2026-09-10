@@ -465,6 +465,7 @@ class Store:
         _write(out / "ledger.json", self._ledger())
         _write(out / "stack.json", self._stack(cards))
         _write(out / "lens" / "ladder.json", self._ladder())
+        _write(out / "analyses.json", self._analyses())
         (out / "venture").mkdir(parents=True, exist_ok=True)
         for sub_id, doc in self._venture().items():
             _write(out / "venture" / f"{sub_id}.json", doc)
@@ -507,7 +508,8 @@ class Store:
             "grade": _grade(min(tiers)) if tiers else None,
             "latest": latest,
             "sparkline": pts[-24:],
-            "stale_as_of": stale,
+            "stale_as_of": None if ind.stale_ok else stale,
+            "stale_reason": ind.stale_reason,
             "n_observations": len(self.evidence_obs(ind)),
         }
 
@@ -636,6 +638,28 @@ class Store:
                 for layer in self.seed.layers
             ]
         }
+
+    def _analyses(self) -> list[dict[str, Any]]:
+        """Saved analyses: each metric's latest derived rows with provenance and the formula text, for /query."""
+        spec = (yaml.safe_load((SEED / "analyses.yaml").read_text()) or {}).get("analyses", [])
+        metrics = (yaml.safe_load(Path("semantic/metrics.yaml").read_text()) or {}).get("metrics", {})
+
+        def latest(m: str, dims: dict[str, str] | None) -> dict[str, Any] | None:
+            rows = self.derived_for(m, dims)
+            return {**dump(rows[-1]), "obs_ids": rows[-1].input_observation_ids} if rows else None
+
+        return [
+            {
+                **a,
+                "latest": latest(a["metric"], a.get("dims")),
+                "related_latest": {m: latest(m, None) for m in a.get("related", [])},
+                "description": metrics.get(a["metric"], {}).get("description"),
+                "caveats": metrics.get(a["metric"], {}).get("caveats"),
+                "sql": metrics.get(a["metric"], {}).get("sql")
+                or f"python: {metrics.get(a['metric'], {}).get('python')}",
+            }
+            for a in spec
+        ]
 
     def _ladder(self) -> dict[str, Any]:
         """Appendix E rungs with the production and research rows that sit on each, plus the current level."""

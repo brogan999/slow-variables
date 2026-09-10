@@ -433,6 +433,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "concentrating",
    "unit": "share",
    "unpublished_reason": null,
@@ -801,6 +802,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "concentrating",
    "unit": "USD",
    "unpublished_reason": null,
@@ -808,7 +810,7 @@
   },
   {
    "bucket_id": null,
-   "confidence": null,
+   "confidence": 55,
    "grade": "C",
    "id": "lab_run_rates",
    "latest": {
@@ -827,9 +829,9 @@
    },
    "layer_id": "model",
    "leading_lagging": "coincident",
-   "n_observations": 31,
+   "n_observations": 34,
    "name": "Frontier-lab revenue run-rates",
-   "published": false,
+   "published": true,
    "sparkline": [
     {
      "as_of": "2023-03-01",
@@ -1057,14 +1059,15 @@
     }
    ],
    "stale_as_of": null,
-   "status": null,
+   "stale_reason": null,
+   "status": "concentrating",
    "unit": "USD",
-   "unpublished_reason": "Waiting on a second source per lab: Epoch's run-rate compilation is tier 5 and single-source; the CNBC confirmation covers Anthropic's July 2026 figure only. The indicator publishes once two sources cover the current run-rates.",
+   "unpublished_reason": null,
    "valve_measured": null
   },
   {
    "bucket_id": null,
-   "confidence": null,
+   "confidence": 50,
    "grade": "C",
    "id": "lab_recoupment_ratio",
    "latest": {
@@ -1093,7 +1096,7 @@
    "leading_lagging": "lagging",
    "n_observations": 27,
    "name": "Lab recoupment ratio",
-   "published": false,
+   "published": true,
    "sparkline": [
     {
      "as_of": "2023-03-01",
@@ -1378,9 +1381,10 @@
     }
    ],
    "stale_as_of": null,
-   "status": null,
+   "stale_reason": null,
+   "status": "emerging",
    "unit": "ratio",
-   "unpublished_reason": "Depends on lab_run_rates, which is unpublished for want of a second source; the cumulative-capital denominator is ready.",
+   "unpublished_reason": null,
    "valve_measured": null
   },
   {
@@ -1438,6 +1442,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "dispersing",
    "unit": "USD",
    "unpublished_reason": null,
@@ -1486,6 +1491,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "emerging",
    "unit": "share",
    "unpublished_reason": null,
@@ -1642,6 +1648,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "concentrating",
    "unit": "share",
    "unpublished_reason": null,
@@ -1792,6 +1799,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "stable",
    "unit": "share",
    "unpublished_reason": null,
@@ -1933,6 +1941,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "concentrating",
    "unit": "USD",
    "unpublished_reason": null,
@@ -2036,6 +2045,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "unclear",
    "unit": "index",
    "unpublished_reason": null,
@@ -2145,6 +2155,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "dispersing",
    "unit": "index",
    "unpublished_reason": null,
@@ -2189,6 +2200,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": null,
    "unit": "index",
    "unpublished_reason": "Not yet measurable: the direction rule needs four monthly readings of Ramp's per-lab paid shares and only July 2026 exists; each month arrives as a manual row from Ramp's letter.",
@@ -2501,6 +2513,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "emerging",
    "unit": "ratio",
    "unpublished_reason": null,
@@ -2599,6 +2612,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "not_yet_measurable",
    "unit": "USD",
    "unpublished_reason": null,
@@ -3126,6 +3140,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "stable",
    "unit": "share",
    "unpublished_reason": null,
@@ -3254,6 +3269,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "dispersing",
    "unit": "ratio",
    "unpublished_reason": null,
@@ -3648,6 +3664,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "emerging",
    "unit": "ratio",
    "unpublished_reason": null,
@@ -3666,6 +3683,7 @@
    "published": false,
    "sparkline": [],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": null,
    "unit": "ratio",
    "unpublished_reason": "Not measurable from free sources: the neolabs' rounds are filed or reported, but none of them has a revenue figure in Epoch or a filing, so the denominator does not exist.",
@@ -3684,6 +3702,7 @@
    "published": false,
    "sparkline": [],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": null,
    "unit": "count",
    "unpublished_reason": "Waiting on an acquisition ledger: each event needs a fetched announcement with a verbatim snippet, like the circular-financing ledger; none has been entered yet.",
@@ -3702,6 +3721,7 @@
    "published": false,
    "sparkline": [],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": null,
    "unit": "quarters",
    "unpublished_reason": "Not yet measurable: the estimate needs at least eight quarters of both venture dollars and revenue for the same sub-layer; the venture series starts in 2023 and revenue exists only for the frontier labs.",
@@ -3755,8 +3775,8 @@
      "as_of": "2026-02-24",
      "dims": {},
      "obs_ids": [
-      "08041a8a456d6dbf",
       "24789a9da722d2de",
+      "38c27cadfec7d562",
       "67eabbfe73fcd529"
      ],
      "unit": "index",
@@ -3766,8 +3786,8 @@
      "as_of": "2026-02-24",
      "dims": {},
      "obs_ids": [
+      "08041a8a456d6dbf",
       "24789a9da722d2de",
-      "38c27cadfec7d562",
       "67eabbfe73fcd529"
      ],
      "unit": "index",
@@ -3854,7 +3874,7 @@
      "obs_ids": [
       "280009b4280e4135",
       "7313ea1c506e40e2",
-      "d471ec4fe8519574"
+      "e2ec2503b5e14b8f"
      ],
      "unit": "index",
      "value": 11.25
@@ -3865,7 +3885,7 @@
      "obs_ids": [
       "280009b4280e4135",
       "7313ea1c506e40e2",
-      "e2ec2503b5e14b8f"
+      "d471ec4fe8519574"
      ],
      "unit": "index",
      "value": 11.25
@@ -3929,7 +3949,7 @@
      "dims": {},
      "obs_ids": [
       "2202dee6a2133a8e",
-      "b1c57b5cc34b16a8",
+      "472a62400c7c198b",
       "ebf4836f647dcf59"
      ],
      "unit": "index",
@@ -3940,7 +3960,7 @@
      "dims": {},
      "obs_ids": [
       "2202dee6a2133a8e",
-      "472a62400c7c198b",
+      "b1c57b5cc34b16a8",
       "ebf4836f647dcf59"
      ],
      "unit": "index",
@@ -3991,6 +4011,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "dispersing",
    "unit": "index",
    "unpublished_reason": null,
@@ -4143,6 +4164,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "emerging",
    "unit": "share",
    "unpublished_reason": null,
@@ -4345,6 +4367,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "dispersing",
    "unit": "ratio",
    "unpublished_reason": null,
@@ -4363,6 +4386,7 @@
    "published": false,
    "sparkline": [],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": null,
    "unit": "ratio",
    "unpublished_reason": "Not measurable from the XBRL company-facts API: useful-life facts are not tagged for servers (only decade-old PP&E ranges); each change must be quoted verbatim from a 10-K note, and no row has been entered yet.",
@@ -4381,6 +4405,7 @@
    "published": false,
    "sparkline": [],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": null,
    "unit": "ratio",
    "unpublished_reason": "Waiting on 10-Q rows: CoreWeave's debt notes state rates per facility and must be quoted verbatim; none entered yet.",
@@ -4399,6 +4424,7 @@
    "published": false,
    "sparkline": [],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": null,
    "unit": "ratio",
    "unpublished_reason": "Waiting on a verbatim row from Menlo's survey page; the figure exists but has not been fetched and quoted yet.",
@@ -4459,6 +4485,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "emerging",
    "unit": "share",
    "unpublished_reason": null,
@@ -4477,6 +4504,7 @@
    "published": false,
    "sparkline": [],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": null,
    "unit": "ratio",
    "unpublished_reason": "Not measurable from free sources: lab gross margins are reported only by The Information and Sacra behind paywalls; the paid stubs exist and are off.",
@@ -4495,6 +4523,7 @@
    "published": false,
    "sparkline": [],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": null,
    "unit": "ratio",
    "unpublished_reason": "Not measurable as a series: Epoch published a one-off estimate range, not a table; a manual row can carry the point estimate once quoted.",
@@ -4513,6 +4542,7 @@
    "published": false,
    "sparkline": [],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": null,
    "unit": "ratio",
    "unpublished_reason": "Not measurable from free sources: needs SemiAnalysis unit inference costs (paid) joined to reported ARR and Ramp token spend; the paid stub is off.",
@@ -4531,6 +4561,7 @@
    "published": false,
    "sparkline": [],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": null,
    "unit": "ratio",
    "unpublished_reason": "Not measurable from free sources: the SemiAnalysis index is paywalled; the paid stub is off.",
@@ -4549,6 +4580,7 @@
    "published": false,
    "sparkline": [],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": null,
    "unit": "ratio",
    "unpublished_reason": "Not measurable from free sources: secondary marks are behind Caplight, Forge and EquityZen paywalls; the paid stub is off.",
@@ -4567,6 +4599,7 @@
    "published": false,
    "sparkline": [],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": null,
    "unit": "ratio",
    "unpublished_reason": "Not measurable yet: no free source pairs sector revenue with employee counts at a usable cadence; BLS industry mappings to exposure are unverified.",
@@ -4935,6 +4968,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "faster_than_normal",
    "unit": "minutes",
    "unpublished_reason": null,
@@ -5303,6 +5337,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "faster_than_normal",
    "unit": "minutes",
    "unpublished_reason": null,
@@ -5621,6 +5656,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "consistent_with_normal",
    "unit": "ratio",
    "unpublished_reason": null,
@@ -5989,6 +6025,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "consistent_with_normal",
    "unit": "pct",
    "unpublished_reason": null,
@@ -6097,6 +6134,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "consistent_with_normal",
    "unit": "share",
    "unpublished_reason": null,
@@ -6157,6 +6195,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "consistent_with_normal",
    "unit": "share",
    "unpublished_reason": null,
@@ -6203,6 +6242,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "consistent_with_normal",
    "unit": "share",
    "unpublished_reason": null,
@@ -6333,6 +6373,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "consistent_with_normal",
    "unit": "share",
    "unpublished_reason": null,
@@ -6659,6 +6700,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "consistent_with_normal",
    "unit": "share",
    "unpublished_reason": null,
@@ -6705,6 +6747,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "emerging",
    "unit": "share",
    "unpublished_reason": null,
@@ -6751,6 +6794,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "emerging",
    "unit": "ratio",
    "unpublished_reason": null,
@@ -6797,6 +6841,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "emerging",
    "unit": "share",
    "unpublished_reason": null,
@@ -6856,6 +6901,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "emerging",
    "unit": "count",
    "unpublished_reason": null,
@@ -7030,6 +7076,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "emerging",
    "unit": "days",
    "unpublished_reason": null,
@@ -7498,6 +7545,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "emerging",
    "unit": "days",
    "unpublished_reason": null,
@@ -7580,6 +7628,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "consistent_with_normal",
    "unit": "days",
    "unpublished_reason": null,
@@ -7634,6 +7683,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "emerging",
    "unit": "days",
    "unpublished_reason": null,
@@ -7679,7 +7729,8 @@
      "value": 2028.0
     }
    ],
-   "stale_as_of": "2024-06-06",
+   "stale_as_of": null,
+   "stale_reason": "A projection from a 2024 paper; it changes only when Epoch republishes the analysis, so the two-year freshness rule does not apply.",
    "status": "emerging",
    "unit": "year",
    "unpublished_reason": null,
@@ -9576,6 +9627,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "emerging",
    "unit": "share",
    "unpublished_reason": null,
@@ -9623,6 +9675,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "emerging",
    "unit": "rung",
    "unpublished_reason": null,
@@ -9891,6 +9944,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "consistent_with_normal",
    "unit": "pct_change_yoy",
    "unpublished_reason": null,
@@ -9937,6 +9991,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "emerging",
    "unit": "count",
    "unpublished_reason": null,
@@ -9983,6 +10038,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "emerging",
    "unit": "count",
    "unpublished_reason": null,
@@ -10251,6 +10307,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "consistent_with_normal",
    "unit": "ratio",
    "unpublished_reason": null,
@@ -10258,20 +10315,43 @@
   },
   {
    "bucket_id": "adaptation",
-   "confidence": null,
-   "grade": null,
+   "confidence": 60,
+   "grade": "A",
    "id": "fda_first_llm_device",
-   "latest": null,
-   "layer_id": "model",
+   "latest": {
+    "as_of": "2025-12-23",
+    "dims": {},
+    "obs_ids": [
+     "678d971e84b1de53",
+     "8da46094b2c903b1",
+     "f98335f057fe8c67"
+    ],
+    "unit": "count",
+    "value": 1.0
+   },
+   "layer_id": "deployment_application",
    "leading_lagging": "leading",
-   "n_observations": 0,
-   "name": "First FDA-authorised LLM-based device",
-   "published": false,
-   "sparkline": [],
+   "n_observations": 3,
+   "name": "FDA-authorised devices built on a large language model",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2025-12-23",
+     "dims": {},
+     "obs_ids": [
+      "678d971e84b1de53",
+      "8da46094b2c903b1",
+      "f98335f057fe8c67"
+     ],
+     "unit": "count",
+     "value": 1.0
+    }
+   ],
    "stale_as_of": null,
-   "status": null,
-   "unit": "share",
-   "unpublished_reason": "Not yet verifiable: the brief names UpDoc K253281 (Dec 2025) but the submission is absent from the FDA's AI-enabled device list; a row needs the FDA decision document itself.",
+   "stale_reason": "An event-driven count; it moves only when a new LLM-based device is authorised.",
+   "status": "consistent_with_normal",
+   "unit": "count",
+   "unpublished_reason": null,
    "valve_measured": "adoption_to_adaptation"
   },
   {
@@ -10287,6 +10367,7 @@
    "published": false,
    "sparkline": [],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": null,
    "unit": "share",
    "unpublished_reason": "Not measurable as a number: adoption is a yes/no per system card, recorded as evidence rows rather than a series.",
@@ -10305,6 +10386,7 @@
    "published": false,
    "sparkline": [],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": null,
    "unit": "share",
    "unpublished_reason": "Not measurable yet: no public leaderboard reports calibration for agents; HAL and tau-bench report success, not confidence.",
@@ -10323,6 +10405,7 @@
    "published": false,
    "sparkline": [],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": null,
    "unit": "share",
    "unpublished_reason": "Not measurable yet: incidents are anecdotal; no incident registry with a denominator exists.",
@@ -10341,6 +10424,7 @@
    "published": false,
    "sparkline": [],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": null,
    "unit": "share",
    "unpublished_reason": "Not measurable: no lab discloses the provenance mix of its training data; recorded only if a system card states it.",
@@ -10348,8 +10432,8 @@
   },
   {
    "bucket_id": "adaptation",
-   "confidence": null,
-   "grade": "B",
+   "confidence": 80,
+   "grade": "C",
    "id": "canaries_exposed_employment_yoy",
    "latest": {
     "as_of": "2026-06-30",
@@ -10367,9 +10451,9 @@
    },
    "layer_id": "labour_consumers",
    "leading_lagging": "coincident",
-   "n_observations": 2,
+   "n_observations": 3,
    "name": "Employment in AI-exposed occupations, year on year",
-   "published": false,
+   "published": true,
    "sparkline": [
     {
      "as_of": "2026-06-30",
@@ -10386,10 +10470,11 @@
      "value": -0.002
     }
    ],
-   "stale_as_of": "2026-06-30",
-   "status": null,
+   "stale_as_of": null,
+   "stale_reason": null,
+   "status": "consistent_with_normal",
    "unit": "share",
-   "unpublished_reason": "Waiting on a second source: the all-ages ADP/Stanford figure appears only in a chart in the Stanford note and one ADP row; the two-source rule blocks a scored status.",
+   "unpublished_reason": null,
    "valve_measured": "adoption_to_adaptation"
   },
   {
@@ -10447,6 +10532,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "emerging",
    "unit": "share",
    "unpublished_reason": null,
@@ -10493,6 +10579,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "emerging",
    "unit": "share",
    "unpublished_reason": null,
@@ -10539,6 +10626,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "consistent_with_normal",
    "unit": "share",
    "unpublished_reason": null,
@@ -10585,6 +10673,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "consistent_with_normal",
    "unit": "share",
    "unpublished_reason": null,
@@ -10627,6 +10716,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "consistent_with_normal",
    "unit": "count",
    "unpublished_reason": null,
@@ -10715,6 +10805,7 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "consistent_with_normal",
    "unit": "share",
    "unpublished_reason": null,
@@ -10983,10 +11074,792 @@
     }
    ],
    "stale_as_of": null,
+   "stale_reason": null,
    "status": "emerging",
    "unit": "share",
    "unpublished_reason": null,
    "valve_measured": "leak"
+  },
+  {
+   "bucket_id": "adaptation",
+   "confidence": 75,
+   "grade": "B",
+   "id": "call_center_uplift",
+   "latest": {
+    "as_of": "2023-04-30",
+    "disputed": false,
+    "grade": "B",
+    "high": null,
+    "low": null,
+    "obs_ids": [
+     "15a42a777f78ef32"
+    ],
+    "series_key": "nber.customer_support_agents.productivity_uplift.pt",
+    "subject": "customer_support_agents",
+    "unit": "share",
+    "value": 0.14
+   },
+   "layer_id": "adopters",
+   "leading_lagging": "coincident",
+   "n_observations": 2,
+   "name": "Customer-support productivity uplift from a generative-AI assistant",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2023-04-30",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "15a42a777f78ef32"
+     ],
+     "series_key": "nber.customer_support_agents.productivity_uplift.pt",
+     "subject": "customer_support_agents",
+     "unit": "share",
+     "value": 0.14
+    }
+   ],
+   "stale_as_of": null,
+   "stale_reason": "A one-off field experiment; refreshed only when a comparable randomised study publishes.",
+   "status": "consistent_with_normal",
+   "unit": "share",
+   "unpublished_reason": null,
+   "valve_measured": "adoption_to_adaptation"
+  },
+  {
+   "bucket_id": "adaptation",
+   "confidence": 70,
+   "grade": "C",
+   "id": "exec_reported_impact",
+   "latest": {
+    "as_of": "2026-02-28",
+    "disputed": false,
+    "grade": "B",
+    "high": null,
+    "low": null,
+    "obs_ids": [
+     "d0538040758acb6e"
+    ],
+    "series_key": "nber.executives_4_countries.no_ai_impact_share.pt",
+    "subject": "executives_4_countries",
+    "unit": "share",
+    "value": 0.9
+   },
+   "layer_id": "adopters",
+   "leading_lagging": "lagging",
+   "n_observations": 2,
+   "name": "Executives reporting no AI impact on their own firm",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2026-02-28",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "d0538040758acb6e"
+     ],
+     "series_key": "nber.executives_4_countries.no_ai_impact_share.pt",
+     "subject": "executives_4_countries",
+     "unit": "share",
+     "value": 0.9
+    }
+   ],
+   "stale_as_of": null,
+   "stale_reason": null,
+   "status": "consistent_with_normal",
+   "unit": "share",
+   "unpublished_reason": null,
+   "valve_measured": "adoption_to_adaptation"
+  },
+  {
+   "bucket_id": "products",
+   "confidence": 40,
+   "grade": "D",
+   "id": "harvey_lab_frontier_completion",
+   "latest": {
+    "as_of": "2026-05-26",
+    "disputed": false,
+    "grade": "D",
+    "high": null,
+    "low": null,
+    "obs_ids": [
+     "723ff70f7eaca105"
+    ],
+    "series_key": "harvey_blog.lab_holdout.all_pass_top_model.pt",
+    "subject": "lab_holdout",
+    "unit": "share",
+    "value": 0.071
+   },
+   "layer_id": "deployment_application",
+   "leading_lagging": "leading",
+   "n_observations": 2,
+   "name": "Frontier models completing expert legal tasks end to end (Harvey LAB)",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2026-05-26",
+     "disputed": false,
+     "grade": "D",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "723ff70f7eaca105"
+     ],
+     "series_key": "harvey_blog.lab_holdout.all_pass_top_model.pt",
+     "subject": "lab_holdout",
+     "unit": "share",
+     "value": 0.071
+    }
+   ],
+   "stale_as_of": null,
+   "stale_reason": null,
+   "status": "emerging",
+   "unit": "share",
+   "unpublished_reason": null,
+   "valve_measured": "invention_to_product"
+  },
+  {
+   "bucket_id": "products",
+   "confidence": 55,
+   "grade": "B",
+   "id": "pass_hat_k_tau_bench",
+   "latest": {
+    "as_of": "2026-05-18",
+    "disputed": false,
+    "grade": "D",
+    "high": null,
+    "low": null,
+    "obs_ids": [
+     "77cbd0ec9267f9c7"
+    ],
+    "series_key": "automation_anywhere.tau_bench_leaderboard_1.pass_hat_4.pt",
+    "subject": "tau_bench_leaderboard_1",
+    "unit": "share",
+    "value": 0.562
+   },
+   "layer_id": "model",
+   "leading_lagging": "leading",
+   "n_observations": 4,
+   "name": "Agent reliability across repeated runs (tau-bench pass^k)",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2026-05-18",
+     "disputed": false,
+     "grade": "D",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "77cbd0ec9267f9c7"
+     ],
+     "series_key": "automation_anywhere.tau_bench_leaderboard_1.pass_hat_4.pt",
+     "subject": "tau_bench_leaderboard_1",
+     "unit": "share",
+     "value": 0.562
+    }
+   ],
+   "stale_as_of": null,
+   "stale_reason": null,
+   "status": "emerging",
+   "unit": "share",
+   "unpublished_reason": null,
+   "valve_measured": "invention_to_product"
+  },
+  {
+   "bucket_id": "methods",
+   "confidence": 50,
+   "grade": "B",
+   "id": "surprise_index",
+   "latest": {
+    "as_of": "2026-07-31",
+    "disputed": false,
+    "grade": "D",
+    "high": null,
+    "low": null,
+    "obs_ids": [
+     "86d58f4a839a1c59"
+    ],
+    "series_key": "aifutures_blog.ai_2027_quantitative.pace_vs_predicted.pt",
+    "subject": "ai_2027_quantitative",
+    "unit": "share",
+    "value": 0.75
+   },
+   "layer_id": "model",
+   "leading_lagging": "leading",
+   "n_observations": 3,
+   "name": "Progress against the AI 2027 quantitative predictions",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2025-12-31",
+     "disputed": false,
+     "grade": "D",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "f8386ab8c9d0fc8d"
+     ],
+     "series_key": "aifutures_blog.ai_2027_quantitative.pace_vs_predicted.pt",
+     "subject": "ai_2027_quantitative",
+     "unit": "share",
+     "value": 0.65
+    },
+    {
+     "as_of": "2026-07-31",
+     "disputed": false,
+     "grade": "D",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "86d58f4a839a1c59"
+     ],
+     "series_key": "aifutures_blog.ai_2027_quantitative.pace_vs_predicted.pt",
+     "subject": "ai_2027_quantitative",
+     "unit": "share",
+     "value": 0.75
+    }
+   ],
+   "stale_as_of": null,
+   "stale_reason": null,
+   "status": "emerging",
+   "unit": "share",
+   "unpublished_reason": null,
+   "valve_measured": "invention_to_product"
+  },
+  {
+   "bucket_id": "early_adoption",
+   "confidence": 65,
+   "grade": "B",
+   "id": "openai_work_share",
+   "latest": {
+    "as_of": "2025-06-30",
+    "disputed": false,
+    "grade": "D",
+    "high": null,
+    "low": null,
+    "obs_ids": [
+     "71978c1402e55137"
+    ],
+    "series_key": "openai_blog.chatgpt_consumer.work_related_message_share.pt",
+    "subject": "chatgpt_consumer",
+    "unit": "share",
+    "value": 0.27
+   },
+   "layer_id": "adopters",
+   "leading_lagging": "coincident",
+   "n_observations": 2,
+   "name": "Work-related share of ChatGPT consumer messages",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2025-06-30",
+     "disputed": false,
+     "grade": "D",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "71978c1402e55137"
+     ],
+     "series_key": "openai_blog.chatgpt_consumer.work_related_message_share.pt",
+     "subject": "chatgpt_consumer",
+     "unit": "share",
+     "value": 0.27
+    }
+   ],
+   "stale_as_of": null,
+   "stale_reason": null,
+   "status": "emerging",
+   "unit": "share",
+   "unpublished_reason": null,
+   "valve_measured": "product_to_adoption"
+  },
+  {
+   "bucket_id": "early_adoption",
+   "confidence": 60,
+   "grade": "B",
+   "id": "exposure_vs_usage_gap",
+   "latest": {
+    "as_of": "2026-06-30",
+    "dims": {},
+    "obs_ids": [
+     "115415a8b34ab556",
+     "72b0b6f718eaea49"
+    ],
+    "unit": "ratio",
+    "value": 0.49042121513875
+   },
+   "layer_id": "adopters",
+   "leading_lagging": "coincident",
+   "n_observations": 9,
+   "name": "Usage as a share of theoretical exposure",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2024-09-30",
+     "dims": {},
+     "obs_ids": [
+      "115415a8b34ab556",
+      "3fa468ca00d179d1"
+     ],
+     "unit": "ratio",
+     "value": 0.35242503707249995
+    },
+    {
+     "as_of": "2024-12-31",
+     "dims": {},
+     "obs_ids": [
+      "115415a8b34ab556",
+      "972d925077c1e98e"
+     ],
+     "unit": "ratio",
+     "value": 0.32955308446125
+    },
+    {
+     "as_of": "2025-03-31",
+     "dims": {},
+     "obs_ids": [
+      "115415a8b34ab556",
+      "2c173e2d949fa737"
+     ],
+     "unit": "ratio",
+     "value": 0.36598075384875
+    },
+    {
+     "as_of": "2025-06-30",
+     "dims": {},
+     "obs_ids": [
+      "115415a8b34ab556",
+      "8aa0a471af912a92"
+     ],
+     "unit": "ratio",
+     "value": 0.3819122503025
+    },
+    {
+     "as_of": "2025-09-30",
+     "dims": {},
+     "obs_ids": [
+      "115415a8b34ab556",
+      "58f79eeff8feacb7"
+     ],
+     "unit": "ratio",
+     "value": 0.40014512601875
+    },
+    {
+     "as_of": "2025-12-31",
+     "dims": {},
+     "obs_ids": [
+      "115415a8b34ab556",
+      "56e28ca75b0f54e0"
+     ],
+     "unit": "ratio",
+     "value": 0.4399409259425
+    },
+    {
+     "as_of": "2026-03-31",
+     "dims": {},
+     "obs_ids": [
+      "115415a8b34ab556",
+      "8d4f8bd10681b4c1"
+     ],
+     "unit": "ratio",
+     "value": 0.47284192894375
+    },
+    {
+     "as_of": "2026-06-30",
+     "dims": {},
+     "obs_ids": [
+      "115415a8b34ab556",
+      "72b0b6f718eaea49"
+     ],
+     "unit": "ratio",
+     "value": 0.49042121513875
+    }
+   ],
+   "stale_as_of": null,
+   "stale_reason": null,
+   "status": "consistent_with_normal",
+   "unit": "ratio",
+   "unpublished_reason": null,
+   "valve_measured": "product_to_adoption"
+  },
+  {
+   "bucket_id": "adaptation",
+   "confidence": 45,
+   "grade": "B",
+   "id": "exposed_low_adaptive_workers",
+   "latest": {
+    "as_of": "2026-01-31",
+    "disputed": false,
+    "grade": "B",
+    "high": null,
+    "low": null,
+    "obs_ids": [
+     "d811ea689cbfb327"
+    ],
+    "series_key": "nber.us_workers.high_exposure_low_adaptive_capacity.pt",
+    "subject": "us_workers",
+    "unit": "workers",
+    "value": 3300000.0
+   },
+   "layer_id": "labour_consumers",
+   "leading_lagging": "leading",
+   "n_observations": 1,
+   "name": "Workers highly exposed to AI with low adaptive capacity",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2026-01-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "d811ea689cbfb327"
+     ],
+     "series_key": "nber.us_workers.high_exposure_low_adaptive_capacity.pt",
+     "subject": "us_workers",
+     "unit": "workers",
+     "value": 3300000.0
+    }
+   ],
+   "stale_as_of": null,
+   "stale_reason": null,
+   "status": "emerging",
+   "unit": "workers",
+   "unpublished_reason": null,
+   "valve_measured": "adoption_to_adaptation"
+  },
+  {
+   "bucket_id": "adaptation",
+   "confidence": null,
+   "grade": "B",
+   "id": "yale_occupational_mix_dissimilarity",
+   "latest": {
+    "as_of": "2025-07-31",
+    "disputed": false,
+    "grade": "B",
+    "high": null,
+    "low": null,
+    "obs_ids": [
+     "cf3c403d549e53e1"
+    ],
+    "series_key": "yale_budget_lab.recent_vs_older_grads.occupation_dissimilarity_range.pt",
+    "subject": "recent_vs_older_grads",
+    "unit": "text",
+    "value": null
+   },
+   "layer_id": "labour_consumers",
+   "leading_lagging": "lagging",
+   "n_observations": 1,
+   "name": "Occupational-mix dissimilarity since ChatGPT (Yale Budget Lab)",
+   "published": false,
+   "sparkline": [
+    {
+     "as_of": "2025-07-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "cf3c403d549e53e1"
+     ],
+     "series_key": "yale_budget_lab.recent_vs_older_grads.occupation_dissimilarity_range.pt",
+     "subject": "recent_vs_older_grads",
+     "unit": "text",
+     "value": null
+    }
+   ],
+   "stale_as_of": "2025-07-31",
+   "stale_reason": null,
+   "status": null,
+   "unit": "share",
+   "unpublished_reason": "Waiting on a connector for the Budget Lab data workbook: the monthly updates state the all-worker index only in a chart, and the text gives just the graduates sub-index range (30-33%).",
+   "valve_measured": "adoption_to_adaptation"
+  },
+  {
+   "bucket_id": "adaptation",
+   "confidence": 80,
+   "grade": "B",
+   "id": "humlum_precise_null",
+   "latest": {
+    "as_of": "2024-12-31",
+    "disputed": false,
+    "grade": "B",
+    "high": null,
+    "low": null,
+    "obs_ids": [
+     "dcb86d2cc1a86b58"
+    ],
+    "series_key": "humlum_pdf.denmark_exposed_workers.chatbot_effect_on_earnings.pt",
+    "subject": "denmark_exposed_workers",
+    "unit": "share",
+    "value": 0.0
+   },
+   "layer_id": "labour_consumers",
+   "leading_lagging": "lagging",
+   "n_observations": 3,
+   "name": "Chatbot effect on earnings and hours in exposed occupations (Denmark)",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2024-12-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "dcb86d2cc1a86b58"
+     ],
+     "series_key": "humlum_pdf.denmark_exposed_workers.chatbot_effect_on_earnings.pt",
+     "subject": "denmark_exposed_workers",
+     "unit": "share",
+     "value": 0.0
+    }
+   ],
+   "stale_as_of": null,
+   "stale_reason": null,
+   "status": "consistent_with_normal",
+   "unit": "share",
+   "unpublished_reason": null,
+   "valve_measured": "adoption_to_adaptation"
+  },
+  {
+   "bucket_id": "adaptation",
+   "confidence": 70,
+   "grade": "B",
+   "id": "upwork_freelancer_effects",
+   "latest": {
+    "as_of": "2023-12-01",
+    "disputed": false,
+    "grade": "B",
+    "high": null,
+    "low": null,
+    "obs_ids": [
+     "55a1d3e669c7be73"
+    ],
+    "series_key": "cepr_voxeu.upwork_writing_freelancers.monthly_earnings_change.pt",
+    "subject": "upwork_writing_freelancers",
+    "unit": "share",
+    "value": -0.052
+   },
+   "layer_id": "labour_consumers",
+   "leading_lagging": "leading",
+   "n_observations": 3,
+   "name": "Freelance writing earnings after ChatGPT (Upwork)",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2023-12-01",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "55a1d3e669c7be73"
+     ],
+     "series_key": "cepr_voxeu.upwork_writing_freelancers.monthly_earnings_change.pt",
+     "subject": "upwork_writing_freelancers",
+     "unit": "share",
+     "value": -0.052
+    }
+   ],
+   "stale_as_of": null,
+   "stale_reason": "A one-off platform study; refreshed only when a comparable study publishes.",
+   "status": "consistent_with_normal",
+   "unit": "share",
+   "unpublished_reason": null,
+   "valve_measured": "adoption_to_adaptation"
+  },
+  {
+   "bucket_id": "adaptation",
+   "confidence": 50,
+   "grade": "C",
+   "id": "pwc_ai_skill_wage_premium",
+   "latest": {
+    "as_of": "2025-12-31",
+    "disputed": false,
+    "grade": "D",
+    "high": null,
+    "low": null,
+    "obs_ids": [
+     "3289e34cb683153a"
+    ],
+    "series_key": "pwc.ai_skilled_workers.wage_premium.fy",
+    "subject": "ai_skilled_workers",
+    "unit": "share",
+    "value": 0.62
+   },
+   "layer_id": "labour_consumers",
+   "leading_lagging": "coincident",
+   "n_observations": 2,
+   "name": "Wage premium for AI skills (PwC AI Jobs Barometer)",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2025-12-31",
+     "disputed": false,
+     "grade": "D",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "3289e34cb683153a"
+     ],
+     "series_key": "pwc.ai_skilled_workers.wage_premium.fy",
+     "subject": "ai_skilled_workers",
+     "unit": "share",
+     "value": 0.62
+    }
+   ],
+   "stale_as_of": null,
+   "stale_reason": null,
+   "status": "emerging",
+   "unit": "share",
+   "unpublished_reason": null,
+   "valve_measured": "adoption_to_adaptation"
+  },
+  {
+   "bucket_id": "methods",
+   "confidence": 70,
+   "grade": "C",
+   "id": "expert_data_market_run_rate",
+   "latest": {
+    "as_of": "2026-06-30",
+    "disputed": false,
+    "grade": "C",
+    "high": null,
+    "low": null,
+    "obs_ids": [
+     "944743051df0e9df"
+    ],
+    "series_key": "dealroom.mercor.gross_revenue_run_rate_usd.pt",
+    "subject": "mercor",
+    "unit": "USD",
+    "value": 2000000000.0
+   },
+   "layer_id": "training_input",
+   "leading_lagging": "leading",
+   "n_observations": 2,
+   "name": "Expert-data market run-rate (Mercor)",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2026-06-30",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "944743051df0e9df"
+     ],
+     "series_key": "dealroom.mercor.gross_revenue_run_rate_usd.pt",
+     "subject": "mercor",
+     "unit": "USD",
+     "value": 2000000000.0
+    }
+   ],
+   "stale_as_of": null,
+   "stale_reason": null,
+   "status": "faster_than_normal",
+   "unit": "USD",
+   "unpublished_reason": null,
+   "valve_measured": "invention_to_product"
+  },
+  {
+   "bucket_id": "products",
+   "confidence": 45,
+   "grade": "C",
+   "id": "internal_external_deployment_gap_months",
+   "latest": {
+    "as_of": "2026-06-30",
+    "disputed": false,
+    "grade": "B",
+    "high": null,
+    "low": null,
+    "obs_ids": [
+     "8d657a642bef97a9"
+    ],
+    "series_key": "dwarkesh.anthropic_mythos.internal_to_public_gap_months.pt",
+    "subject": "anthropic_mythos",
+    "unit": "months",
+    "value": 4.0
+   },
+   "layer_id": "model",
+   "leading_lagging": "leading",
+   "n_observations": 2,
+   "name": "Internal-to-public deployment gap at the frontier",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2026-06-30",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "8d657a642bef97a9"
+     ],
+     "series_key": "dwarkesh.anthropic_mythos.internal_to_public_gap_months.pt",
+     "subject": "anthropic_mythos",
+     "unit": "months",
+     "value": 4.0
+    }
+   ],
+   "stale_as_of": null,
+   "stale_reason": null,
+   "status": "consistent_with_normal",
+   "unit": "months",
+   "unpublished_reason": null,
+   "valve_measured": "invention_to_product"
+  },
+  {
+   "bucket_id": "adaptation",
+   "confidence": 65,
+   "grade": "C",
+   "id": "waymo_weekly_paid_rides",
+   "latest": {
+    "as_of": "2026-03-27",
+    "disputed": false,
+    "grade": "C",
+    "high": null,
+    "low": null,
+    "obs_ids": [
+     "23ce14c301434fd3"
+    ],
+    "series_key": "techcrunch.waymo.weekly_paid_rides.pt",
+    "subject": "waymo",
+    "unit": "rides_per_week",
+    "value": 500000.0
+   },
+   "layer_id": "deployment_application",
+   "leading_lagging": "coincident",
+   "n_observations": 2,
+   "name": "Waymo paid rides per week",
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2026-03-27",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "23ce14c301434fd3"
+     ],
+     "series_key": "techcrunch.waymo.weekly_paid_rides.pt",
+     "subject": "waymo",
+     "unit": "rides_per_week",
+     "value": 500000.0
+    }
+   ],
+   "stale_as_of": null,
+   "stale_reason": null,
+   "status": "consistent_with_normal",
+   "unit": "rides_per_week",
+   "unpublished_reason": null,
+   "valve_measured": "adoption_to_adaptation"
   }
  ],
  "layers": [

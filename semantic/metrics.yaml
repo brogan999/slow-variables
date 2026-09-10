@@ -529,3 +529,29 @@ metrics:
       SELECT a.as_of_date, (a.value_numeric / b.value_numeric) / 3.1063 AS value, [a.id, b.id] AS obs_ids
       FROM observations a JOIN observations b ON a.subject = b.subject AND a.as_of_date = b.as_of_date
       WHERE a.series_key LIKE 'metr.%.horizon_50.pt' AND b.series_key LIKE 'metr.%.horizon_80.pt' AND NOT coalesce(a.disputed, false)
+  exposure_vs_usage_gap:
+    description: Weekly work use of generative AI (Bick-Blandin-Deming, via FRED) divided by the share of the US workforce with at least a tenth of tasks exposed to LLMs (Eloundou et al. 2023).
+    rationale: Exposure is a ceiling on diffusion; the ratio is how much of the ceiling has been reached.
+    grain: [as_of_date]
+    unit: ratio
+    lead_lag: coincident
+    formula_version: 1
+    inputs: ["fred.us_workers.work_use_weekly_share.q", "arxiv.us_workforce.llm_exposed_10pct_tasks_share.pt"]
+    caveats: The denominator is a fixed 2023 estimate; the numerator counts any weekly use.
+    sql: |
+      SELECT u.as_of_date, u.value_numeric / e.value_numeric AS value, [u.id, e.id] AS obs_ids
+      FROM observations u, observations e
+      WHERE u.series_key = 'fred.us_workers.work_use_weekly_share.q'
+        AND e.series_key = 'arxiv.us_workforce.llm_exposed_10pct_tasks_share.pt' AND e.value_numeric > 0
+  fda_llm_devices_count:
+    description: Number of distinct FDA-cleared devices whose core function is a large language model, counted from clearance records.
+    rationale: A count of authorisations is the throughput of the regulated-domain speed limit.
+    grain: [as_of_date]
+    unit: count
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["*.first_llm_device_clearance.pt"]
+    caveats: One record per device from any source counts once; the FDA record itself does not say LLM.
+    sql: |
+      SELECT max(as_of_date) AS as_of_date, count(DISTINCT subject) AS value, list(id) AS obs_ids
+      FROM observations WHERE series_key LIKE '%.first_llm_device_clearance.pt'

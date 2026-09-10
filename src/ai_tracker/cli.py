@@ -60,6 +60,15 @@ def _single_non_primary(s: st.Store, ind: Indicator) -> bool:
     return len({o["source_id"] for o in obs}) < 2 and not ({Tier(o["tier"]) for o in obs} & PRIMARY)
 
 
+def _fmt(v: float, unit: str) -> str:
+    if unit in ("USD", "usd") and abs(v) >= 1e6:
+        d, suf = (v / 1e12, "T") if abs(v) >= 1e12 else (v / 1e9, "B") if abs(v) >= 1e9 else (v / 1e6, "M")
+        return f"${d:.1f}{suf}"
+    if unit == "share":
+        return f"{v * 100:.1f}%"
+    return f"{v:,.0f}" if abs(v) >= 1e4 else f"{v:.4g}"
+
+
 def _auto_reason(
     s: st.Store, ind: Indicator, value: float | None, as_of, new: str, old: str | None, ids: list[str]
 ) -> str:
@@ -75,14 +84,14 @@ def _auto_reason(
     if ind.direction_rule:
         r = ind.direction_rule
         return (
-            f"Evaluator: {value:.4g} ({name}, {as_of}) reads {new.replace('_', ' ')} over {r.periods} periods with a "
+            f"Evaluator: {_fmt(value, ind.unit)} ({name}, {as_of}) reads {new.replace('_', ' ')} over {r.periods} periods with a "
             f"dead band of {r.dead_band:g}. Auto-reason; rule rationale: {r.rationale}"
         )
     band = ind.normal_band if new == "consistent_with_normal" else ind.fast_band
-    edge = f"lo={band.lo:g}" if band and band.lo is not None else ""
-    edge += (" " if edge else "") + (f"hi={band.hi:g}" if band and band.hi is not None else "")
+    edge = f"lo={_fmt(band.lo, ind.unit)}" if band and band.lo is not None else ""
+    edge += (" " if edge else "") + (f"hi={_fmt(band.hi, ind.unit)}" if band and band.hi is not None else "")
     return (
-        f"Evaluator: {value:.4g} ({name}, {as_of}) is inside the {new.replace('_', ' ').replace(' with normal', '')} "
+        f"Evaluator: {_fmt(value, ind.unit)} ({name}, {as_of}) is inside the {new.replace('_', ' ').replace(' with normal', '')} "
         f"band ({edge}). Auto-reason; band rationale: {ind.band_rationale}"
     )
 

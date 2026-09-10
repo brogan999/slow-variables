@@ -44,6 +44,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
           <Grade grade={d.grade} />
           {d.leading_lagging ? <span className="rounded bg-grid/60 px-1.5 py-0.5 text-xs">{d.leading_lagging}</span> : null}
           {d.stale_as_of ? <span className="text-slow text-xs">stale as of {d.stale_as_of}</span> : null}
+          {d.stale_reason ? <span className="text-muted text-xs">refreshed irregularly: {d.stale_reason}</span> : null}
         </div>
       </header>
 
