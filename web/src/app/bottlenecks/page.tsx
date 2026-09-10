@@ -2,6 +2,8 @@ import Link from "next/link";
 import { StatusChip } from "@/components/StatusChip";
 import { bottlenecks, index, words } from "@/lib/data";
 
+export const metadata = { title: "Bottlenecks" };
+
 const FAST = new Set(["faster_than_normal"]);
 const NORMAL = new Set(["consistent_with_normal", "slower_than_normal"]);
 
@@ -24,7 +26,7 @@ export default function BottlenecksPage() {
       </div>
       <div className="overflow-x-auto">
         <table className="data w-full text-sm">
-          <thead><tr><th>Family</th><th>Acts on</th><th className="text-right">Items</th><th className="text-right">With an instrument</th><th className="text-right">Faster than normal</th><th className="text-right">Consistent or slower</th><th className="text-right">Emerging or unclear</th></tr></thead>
+          <thead><tr><th scope="col">Family</th><th scope="col">Acts on</th><th scope="col" className="text-right">Items</th><th scope="col" className="text-right">With an instrument</th><th scope="col" className="text-right">Faster than normal</th><th scope="col" className="text-right">Consistent or slower</th><th scope="col" className="text-right">Emerging or unclear</th></tr></thead>
           <tbody>
             {rows.map((r) => (
               <tr key={r.name}>
@@ -42,8 +44,8 @@ export default function BottlenecksPage() {
       </div>
       <p className="text-xs text-muted">Counts are distinct published indicators linked within the family. &ldquo;Faster than normal&rdquo; on a bottleneck&apos;s instrument means the barrier is being crossed faster than the normal-technology bands allow; &ldquo;consistent or slower&rdquo; means it is holding.</p>
       {sections.map((s, si) => (
-        <section key={s.name} id={`s-${si}`}>
-          <h2 className="text-base font-medium mb-2">{s.name} <span className="text-muted font-normal">· acts on <Link href={`/buckets/${s.bucket_id}`} className="hover:underline">{bucketName(s.bucket_id)}</Link></span></h2>
+        <details key={s.name} id={`s-${si}`} open={si === 0} className="group">
+          <summary className="cursor-pointer list-none"><h2 className="text-base font-medium mb-2 inline"><span className="text-muted mr-2 inline-block transition-transform group-open:rotate-90">▸</span>{s.name} <span className="text-muted font-normal">· acts on <Link href={`/buckets/${s.bucket_id}`} className="hover:underline">{bucketName(s.bucket_id)}</Link></span></h2></summary>
           <ol className="flex flex-col gap-2">
             {items.filter((i) => i.section === s.name).map((b) => (
               <li key={b.id} id={`b${b.id}`} className="rounded-lg bg-surface ring-hair p-3 text-sm">
@@ -52,7 +54,7 @@ export default function BottlenecksPage() {
               </li>
             ))}
           </ol>
-        </section>
+        </details>
       ))}
       <section>
         <h2 className="text-base font-medium mb-2">Essays</h2>

@@ -19,12 +19,13 @@ PATTERNS = {
 class CloudedJudgment(Connector):
     source_id = "clouded_judgment"
     kind = "api"
+    optional = True  # Substack blocks datacenter IPs (403 from GitHub runners); the weekly series then reads stale, which check reports
     urls = [FEED]
     expect_series = ["clouded_judgment.saas_public.ev_ntm_revenue_median.w"]
 
     def extract(self, items: list[RawItem]) -> list[Observation]:
         out: list[Observation] = []
-        for title, link, body, published in parse_feed(items[0].body):
+        for title, link, body, published, _summary in parse_feed(items[0].body):
             text = normalise(html_to_text(body))
             for subject, pat in PATTERNS.items():
                 m = re.search(pat, text)

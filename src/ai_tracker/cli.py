@@ -27,11 +27,17 @@ def cmd_ingest(a: argparse.Namespace) -> int:
         rows, fl = CONNECTORS[name]().run(a.day, a.refetch)
         fl.items_new = st.append_observations(name, rows) if rows else 0
         st.append_fetchlog(fl)
+        optional = CONNECTORS[name].optional and not fl.ok
         print(
             f"{name}: ok={fl.ok} found={fl.items_found} new={fl.items_new}"
             + (f" error={fl.error}" if fl.error else "")
+            + (
+                " (optional source; run continues, series will read stale until it recovers)"
+                if optional
+                else ""
+            )
         )
-        rc |= int(not fl.ok)
+        rc |= int(not fl.ok and not CONNECTORS[name].optional)
     return rc
 
 

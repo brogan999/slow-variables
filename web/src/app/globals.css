@@ -2,9 +2,9 @@
 
 :root {
   color-scheme: light;
-  --background: #f9f9f7; --surface: #fcfcfb; --ink: #0b0b0b; --ink-2: #52514e; --muted: #898781;
+  --background: #f9f9f7; --surface: #fcfcfb; --ink: #0b0b0b; --ink-2: #52514e; --muted: #6f6e68;
   --grid: #e1e0d9; --axis: #c3c2b7; --ring: rgba(11, 11, 11, 0.1);
-  --fast: #4a3aa7; --slow: #eb6834; --s1: #2a78d6; --s2: #eb6834;
+  --fast: #4a3aa7; --slow: #b84a1c; --s1: #2a78d6; --s2: #eb6834;
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -26,3 +26,8 @@ table.data { font-variant-numeric: tabular-nums; }
 table.data th, table.data td { padding: 0.35rem 0.6rem; border-bottom: 1px solid var(--grid); text-align: left; vertical-align: top; }
 table.data th { color: var(--muted); font-weight: 500; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; }
 .ring-hair { box-shadow: 0 0 0 1px var(--ring); }
+
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+
+.overflow-x-auto { position: relative; } /* absolutely positioned sr-only text inside a scroller must be clipped by it */

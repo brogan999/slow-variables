@@ -5,6 +5,8 @@ import { StockFlowDiagram } from "@/components/StockFlowDiagram";
 import { ThesisMonitor } from "@/components/ThesisMonitor";
 import { diffusion, obsIndex, thesis } from "@/lib/data";
 
+export const metadata = { title: "Diffusion lens" };
+
 export default function DiffusionLens() {
   const d = diffusion();
   const idx = obsIndex();
@@ -26,7 +28,7 @@ export default function DiffusionLens() {
         {d.buckets.map((b) => (
           <div key={b.id} className="flex flex-col gap-2">
             <h2 className="text-sm font-medium text-ink-2"><Link href={`/buckets/${b.id}`} className="hover:text-ink">{b.order}. {b.name}</Link> <span className="text-muted">· {b.speed_limit.split(" — ")[0].split(". ")[0]}</span></h2>
-            {b.indicators.length ? b.indicators.map((c) => <IndicatorCard key={c.id} c={c} obsIndex={idx} />) : <p className="text-sm text-muted rounded-lg border border-dashed border-grid p-3">No published indicator yet. Connectors for this stock land in the next milestone.</p>}
+            {b.indicators.length ? b.indicators.map((c) => <IndicatorCard key={c.id} c={c} obsIndex={idx} />) : <p className="text-sm text-muted rounded-lg border border-dashed border-grid p-3">No published indicator for this stock yet.</p>}
           </div>
         ))}
       </section>

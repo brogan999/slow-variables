@@ -3,6 +3,8 @@ import { Grade } from "@/components/StatusChip";
 import { ledger, sources } from "@/lib/data";
 import { fmt } from "@/lib/format";
 
+export const metadata = { title: "Ledger" };
+
 const NAMES: Record<string, string> = { nvidia: "Nvidia", openai: "OpenAI", amd: "AMD", coreweave: "CoreWeave", oracle: "Oracle", microsoft: "Microsoft", anthropic: "Anthropic", meta: "Meta", nebius: "Nebius", amazon: "Amazon" };
 const INSTR: Record<string, string> = { equity: "equity", guarantee: "guarantee", loi: "letter of intent", backstop: "backstop", backstop_talks: "backstop (talks)", warrant: "warrant", commitment: "commitment", azure_commitment: "Azure commitment", aws_commitment: "AWS commitment", contract: "take-or-pay contract", total_commitments: "stated total", commercial_rpo: "commercial RPO", rpo_share: "RPO share", guarantee_customer: "guarantee (announcement)", cds_5y_bps: "5-year CDS" };
 
@@ -17,7 +19,7 @@ export default function LedgerPage() {
       </div>
       <div className="overflow-x-auto">
         <table className="data w-full text-sm">
-          <thead><tr><th>Date</th><th>Parties</th><th>Instrument</th><th>Amount</th><th>Grade</th><th>Source</th><th>Flags</th><th>Snippet</th></tr></thead>
+          <thead><tr><th scope="col">Date</th><th scope="col">Parties</th><th scope="col">Instrument</th><th scope="col">Amount</th><th scope="col">Grade</th><th scope="col">Source</th><th scope="col">Flags</th><th scope="col">Snippet</th></tr></thead>
           <tbody>
             {rows.map((r) => {
               const src = srcs.find((s) => s.id === r.source_id);

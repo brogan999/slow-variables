@@ -3,6 +3,8 @@ import { StatusChip } from "@/components/StatusChip";
 import { Num } from "@/components/Provenance";
 import { compare, obsIndex, words } from "@/lib/data";
 
+export const metadata = { title: "Compare" };
+
 const LEAN: Record<string, string> = { nk: "Normal Technology", ai2027: "AI 2027", open: "open" };
 
 export default function ComparePage() {
@@ -17,7 +19,7 @@ export default function ComparePage() {
       <p className="text-sm"><span className="font-medium tabular-nums">{tally.nk}</span> lean Normal Technology · <span className="font-medium tabular-nums">{tally.ai2027}</span> lean AI 2027 · <span className="font-medium tabular-nums">{tally.open}</span> open</p>
       <div className="overflow-x-auto">
         <table className="data w-full text-sm align-top">
-          <thead><tr><th className="w-[22%]">Indicator</th><th className="w-[30%]">Normal Technology expects</th><th className="w-[30%]">AI 2027 expects</th><th>Leans</th></tr></thead>
+          <thead><tr><th scope="col" className="w-[22%]">Indicator</th><th scope="col" className="w-[30%]">Normal Technology expects</th><th scope="col" className="w-[30%]">AI 2027 expects</th><th scope="col">Leans</th></tr></thead>
           <tbody>
             {rows.map((r) => (
               <tr key={r.indicator}>

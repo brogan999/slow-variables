@@ -3,6 +3,10 @@ import { IndicatorCard } from "@/components/IndicatorCard";
 import { bucket, index, obsIndex } from "@/lib/data";
 
 export const dynamicParams = false;
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  return { title: bucket(id).name };
+}
 export function generateStaticParams() { return index().buckets.map((b) => ({ id: b.id })); }
 
 export default async function BucketPage({ params }: { params: Promise<{ id: string }> }) {

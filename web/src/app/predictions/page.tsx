@@ -3,6 +3,8 @@ import { ChangelogList } from "@/components/Changelog";
 import { StatusChip } from "@/components/StatusChip";
 import { index, obsIndex, predictions } from "@/lib/data";
 
+export const metadata = { title: "Predictions" };
+
 const LEDGERS: Record<string, string> = { nk: "Narayanan & Kapoor", lab: "Lab timelines", ai2027: "AI 2027", capture: "Capture theses" };
 
 export default function PredictionsPage() {
@@ -23,9 +25,9 @@ export default function PredictionsPage() {
             {items.length ? (
               <ol className="flex flex-col gap-3">
                 {items.map((p) => (
-                  <li key={p.id} className="rounded-lg bg-surface ring-hair p-4">
+                  <li key={p.id} id={p.id} className="rounded-lg bg-surface ring-hair p-4 scroll-mt-4 target:ring-2 target:ring-fast/40">
                     <div className="flex flex-wrap items-center gap-2 text-xs text-ink-2">
-                      <span className="font-medium text-ink">{p.claimant}</span>
+                      <h3 className="font-medium text-ink">{p.claimant}</h3>
                       <span className="tabular-nums">{p.claim_date}</span>
                       {p.window_end ? <span>window to {p.window_end}</span> : null}
                       <StatusChip status={p.status} />

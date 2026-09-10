@@ -3,6 +3,10 @@ import { Grade } from "@/components/StatusChip";
 import { fmt, series, seriesKeys } from "@/lib/data";
 
 export const dynamicParams = false;
+export async function generateMetadata({ params }: { params: Promise<{ key: string }> }) {
+  const { key } = await params;
+  return { title: decodeURIComponent(key) };
+}
 export function generateStaticParams() { return seriesKeys().map((key) => ({ key })); }
 
 const COLS = ["as_of_date", "published_date", "tier", "audited_vs_reported", "extraction_method", "review_status", "retrieved_at", "http_status", "content_hash", "supersedes_id"] as const;
@@ -22,16 +26,16 @@ export default async function SeriesPage({ params }: { params: Promise<{ key: st
       </div>
       <div className="overflow-x-auto">
         <table className="data w-full text-xs">
-          <thead><tr><th>id</th><th>value</th><th>grade</th>{COLS.map((c) => <th key={c}>{c.replace(/_/g, " ")}</th>)}<th>url</th><th>flags</th></tr></thead>
+          <thead><tr><th scope="col">id</th><th scope="col">{s.observations.every((o) => o.value_numeric === null) ? "text" : "value"}</th><th scope="col">grade</th>{COLS.map((c) => <th scope="col" key={c}>{c.replace(/_/g, " ")}</th>)}<th scope="col">url</th><th scope="col">flags</th></tr></thead>
           <tbody>
             {s.observations.map((o) => (
               <tr key={o.id} id={o.id} className="target:bg-fast/10">
                 <td className="font-mono">{o.id}</td>
-                <td className="tabular-nums whitespace-nowrap">{o.value_numeric !== null ? fmt(o.value_numeric as number, String(o.unit)) : String(o.value_text)}{o.value_low != null ? <span className="text-muted"> ({fmt(o.value_low as number)}–{fmt(o.value_high as number)})</span> : null}</td>
+                <td className={o.value_numeric !== null ? "tabular-nums whitespace-nowrap" : "max-w-md"}>{o.value_numeric !== null ? fmt(o.value_numeric as number, String(o.unit)) : String(o.value_text)}{o.value_low != null ? <span className="text-muted"> ({fmt(o.value_low as number)}–{fmt(o.value_high as number)})</span> : null}</td>
                 <td><Grade grade={o.grade} tier={o.tier as number} /></td>
                 {COLS.map((c) => <td key={c} className="whitespace-nowrap text-ink-2">{o[c] === null || o[c] === undefined ? "—" : String(o[c]).slice(0, c === "content_hash" ? 12 : 40)}</td>)}
-                <td><a href={String(o.url)} className="underline decoration-grid underline-offset-4">link</a></td>
-                <td>{o.disputed ? <span className="text-slow" title={String(o.dispute_text)}>⚑ disputed</span> : null}{o.run_rate_vs_booked ? <span className="ml-1">{String(o.run_rate_vs_booked)}</span> : null}</td>
+                <td><a href={String(o.url)} className="underline decoration-grid underline-offset-4">source page</a></td>
+                <td>{o.disputed ? <span className="text-slow">⚑ disputed: {String(o.dispute_text).slice(0, 120)}</span> : null}{o.run_rate_vs_booked ? <span className="ml-1">{String(o.run_rate_vs_booked)}</span> : null}</td>
               </tr>
             ))}
           </tbody>

@@ -91,6 +91,7 @@ class Connector:
     expect_series: list[str] = []
     version: str = "1"
     may_be_empty: bool = False  # a connector with nothing left to verify is healthy, not broken
+    optional: bool = False  # a failure is logged and shown as degraded but does not fail the nightly run
 
     def __init__(self) -> None:
         self.scrubbed: list[str] = []

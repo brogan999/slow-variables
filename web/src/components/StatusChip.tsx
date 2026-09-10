@@ -30,7 +30,8 @@ export function Grade({ grade, tier }: { grade: string | null | undefined; tier?
   return (
     <span className="inline-flex items-center rounded border border-grid px-1.5 py-0.5 text-[11px] font-medium text-ink-2"
       title={tier ? `Evidence tier ${tier}; grade ${grade} is derived from the tier` : `Grade ${grade}, derived from evidence tier`}>
-      {grade}{tier ? <span className="ml-1 text-muted">t{tier}</span> : null}
+      <span aria-hidden>{grade}{tier ? <span className="ml-1 text-muted">t{tier}</span> : null}</span>
+      <span className="sr-only">grade {grade}{tier ? `, evidence tier ${tier}` : ""}</span>
     </span>
   );
 }

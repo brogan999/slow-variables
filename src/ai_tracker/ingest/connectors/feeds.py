@@ -23,8 +23,8 @@ ATOM = "{http://www.w3.org/2005/Atom}"
 CONTENT = "{http://purl.org/rss/1.0/modules/content/}encoded"  # Substack and others ship the full post here
 
 
-def parse_feed(body: bytes) -> list[tuple[str, str, str, date | None]]:
-    """(title, link, description, published) for RSS 2.0 and Atom."""
+def parse_feed(body: bytes) -> list[tuple[str, str, str, date | None, str]]:
+    """(title, link, body, published, summary) for RSS 2.0 and Atom; body prefers the full post, summary never does."""
     root = ET.fromstring(body)
     out = []
     for it in root.iter("item"):
@@ -35,6 +35,7 @@ def parse_feed(body: bytes) -> list[tuple[str, str, str, date | None]]:
                 (it.findtext("link") or "").strip(),
                 it.findtext(CONTENT) or it.findtext("description") or "",
                 parsedate_to_datetime(d).date() if d else None,
+                it.findtext("description") or "",
             )
         )
     for e in root.iter(f"{ATOM}entry"):
@@ -46,6 +47,7 @@ def parse_feed(body: bytes) -> list[tuple[str, str, str, date | None]]:
                 (link.get("href") if link is not None else "") or "",
                 e.findtext(f"{ATOM}summary") or e.findtext(f"{ATOM}content") or "",
                 datetime.fromisoformat(d.replace("Z", "+00:00")).date() if d else None,
+                e.findtext(f"{ATOM}summary") or "",
             )
         )
     return out
@@ -68,8 +70,10 @@ class Feeds(Connector):
             if not posts:
                 self.errors.append(f"{src.id}: feed parsed to 0 posts")
                 continue
-            for title, link, desc, published in posts:
-                text = normalise(f"{title} {html_to_text(desc)}")
+            for title, link, _body, published, summary in posts:
+                text = normalise(
+                    f"{title} {html_to_text(summary)}"
+                )  # title + summary only: a full body matches everything
                 for slug, pattern in src.watch.items():
                     if re.search(pattern, text, re.I) and published:
                         out.append(

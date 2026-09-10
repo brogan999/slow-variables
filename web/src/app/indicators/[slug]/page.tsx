@@ -6,7 +6,12 @@ import { Grade, StatusChip } from "@/components/StatusChip";
 import { fmt, index, indicator, obsIndex, sources, words, type Band } from "@/lib/data";
 
 export const dynamicParams = false;
-export function generateStaticParams() { return index().indicators.map((i) => ({ slug: i.id })); }
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const d = indicator(slug);
+  return { title: d.name, description: d.definition };
+}
+export function generateStaticParams() { return index().indicators.filter((i) => i.published).map((i) => ({ slug: i.id })); }
 
 const band = (b: Band, unit: string) => (b ? [b.lo != null ? `≥ ${fmt(b.lo, unit)}` : null, b.hi != null ? `≤ ${fmt(b.hi, unit)}` : null].filter(Boolean).join(" and ") : "—");
 const RUBRIC = (c: number | null) => c === null ? "no status yet" : c >= 90 ? "multiple strong independent sources" : c >= 70 ? "good evidence, some ambiguity" : c >= 50 ? "mixed or hard to operationalise" : "limited or vague evidence";
@@ -53,7 +58,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
       <Section n={2} title="How we track this">
         <ul className="text-sm flex flex-col gap-1">
           {d.series_keys.map((k) => <li key={k}><span className="text-muted">series</span> <code className="text-xs">{k}</code></li>)}
-          {d.metric ? <li><span className="text-muted">derived metric</span> <code className="text-xs">{d.metric}</code> <span className="text-muted">(semantic/metrics.yaml)</span></li> : null}
+          {d.metric ? <li><span className="text-muted">derived metric</span> <code className="text-xs">{d.metric}</code> <span className="text-muted">(formula in the semantic layer)</span></li> : null}
           {seriesSources.map((s) => s ? <li key={s.id}><span className="text-muted">source</span> <a href={s.url} className="underline decoration-grid underline-offset-4">{s.name}</a> <span className="text-muted">· default tier {s.default_tier} · {s.license}</span></li> : null)}
         </ul>
         {d.normal_band || d.direction_rule ? (
@@ -84,7 +89,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
         {d.fits?.length ? (
           <div className="mt-3 overflow-x-auto">
             <div className="text-xs text-muted mb-1">Model comparison (lower AIC fits better; both on ln(horizon) residuals)</div>
-            <table className="data w-full text-xs"><thead><tr><th>fit</th><th>estimate</th><th>95% interval</th><th>n</th><th>R²</th><th>AIC</th><th>inputs</th></tr></thead><tbody>
+            <table className="data w-full text-xs"><thead><tr><th scope="col">fit</th><th scope="col">estimate</th><th scope="col">95% interval</th><th scope="col">n</th><th scope="col">R²</th><th scope="col">AIC</th><th scope="col">inputs</th></tr></thead><tbody>
               {d.fits.map((f) => { const u = f.metric.includes("blowup") ? "year" : "days"; const show = (v: number | null) => v == null ? "—" : u === "year" ? v.toFixed(1) : `${v.toFixed(0)} days`; return (
                 <tr key={f.metric}><td><code>{f.metric}</code></td><td className="tabular-nums">{show(f.value)}</td><td className="tabular-nums">{show(f.value_low)}–{show(f.value_high)}</td><td className="tabular-nums">{f.dims.n}</td><td className="tabular-nums">{f.dims.r2}</td><td className="tabular-nums">{f.dims.aic}</td><td><ObsLinks ids={f.obs_ids} obsIndex={idx} max={2} /></td></tr>
               ); })}
@@ -92,7 +97,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
           </div>
         ) : null}
         {d.derived.length ? <details className="mt-2 text-xs"><summary className="cursor-pointer text-ink-2">Derived rows ({d.derived.length})</summary>
-          <table className="data w-full mt-1"><thead><tr><th>as of</th><th>dims</th><th>value</th><th>inputs</th></tr></thead><tbody>
+          <table className="data w-full mt-1"><thead><tr><th scope="col">as of</th><th scope="col">dims</th><th scope="col">value</th><th scope="col">inputs</th></tr></thead><tbody>
             {d.derived.slice().reverse().map((r) => <tr key={r.as_of_date + JSON.stringify(r.dims)}><td>{r.as_of_date}</td><td>{Object.values(r.dims ?? {}).join(" ")}</td><td className="tabular-nums">{fmt(r.value, d.unit)}</td><td><ObsLinks ids={r.obs_ids} obsIndex={idx} max={3} /></td></tr>)}
           </tbody></table></details> : null}
       </Section>
@@ -100,7 +105,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
       <Section n={5} title="Status and reasoning">
         <div className="flex flex-wrap items-center gap-2"><StatusChip status={d.published ? d.status : null} size="lg" />{current ? <span className="text-xs text-muted">since {current.created_at.slice(0, 10)} · {current.author}</span> : null}</div>
         {current ? <p className="mt-2">{current.reason}</p> : <p className="mt-2 text-muted">No status event yet; the evaluator proposes one once an approved observation exists.</p>}
-        {d.proposed_status && d.proposed_status !== d.status ? <p className="mt-2 text-xs text-ink-2">The seed brief expected <em>{words(d.proposed_status)}</em>; the evaluator says <em>{words(d.status)}</em>. The evaluator wins until a reviewed override.</p> : null}
+        {d.proposed_status && d.proposed_status !== d.status ? <p className="mt-2 text-xs text-ink-2">The tracker's prior expectation was <em>{words(d.proposed_status)}</em>; the evaluator reads <em>{words(d.status)}</em>. The evaluator wins until a reviewed override.</p> : null}
         {d.override_note ? <p className="mt-2 text-xs text-ink-2">Override: {d.override_note}</p> : null}
       </Section>
 

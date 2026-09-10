@@ -17,9 +17,9 @@ export function StackVertical({ layers, shares, obsIndex }: { layers: (Layer & {
         const s = share(l.id);
         const width = s !== undefined ? Math.max(12, s * 100) : 6;
         return (
-          <div key={l.id} className="grid grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] items-center gap-3">
+          <div key={l.id} className="grid grid-cols-1 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] items-center gap-2 sm:gap-3">
             <div className="min-w-0">
-              <Link href={`/layers/${l.id}`} className="font-medium hover:underline">{l.order}. {l.name}</Link>
+              <h3 className="font-medium"><Link href={`/layers/${l.id}`} className="hover:underline">{l.order}. {l.name}</Link></h3>
               <div className="mt-1 flex flex-wrap items-center gap-2 text-xs text-ink-2">
                 <StatusChip status={summary} />
                 {published.length ? <span>{published.length} indicator{published.length === 1 ? "" : "s"}</span> : null}
@@ -28,7 +28,7 @@ export function StackVertical({ layers, shares, obsIndex }: { layers: (Layer & {
             </div>
             <div className="flex items-center gap-2">
               <div className="h-7 rounded-sm" style={{ width: `${width}%`, background: s !== undefined ? "var(--s1)" : "transparent", border: s === undefined ? "1px dashed var(--axis)" : "none" }} title={s !== undefined ? `${fmt(s, "share")} of filed segment operating income` : "no filed margin series yet"} />
-              <span className="text-xs tabular-nums text-ink-2 whitespace-nowrap">
+              <span className="text-xs tabular-nums text-ink-2">
                 {s !== undefined ? (
                   <>
                     {shares.compute_semis ? <Link href={`/series/${obsIndex[shares.compute_semis.obs_ids[0]] ?? ""}`} className="underline decoration-grid underline-offset-4">semis {fmt(shares.compute_semis.value, "share")}</Link> : null}
@@ -41,7 +41,7 @@ export function StackVertical({ layers, shares, obsIndex }: { layers: (Layer & {
           </div>
         );
       })}
-      <p className="text-xs text-muted mt-1">Bar = share of filed segment operating income across NVIDIA, AMD, AWS, Google Cloud and Microsoft Intelligent Cloud (the one layer group with filings so far). Other layers gain bars as filed or estimated series land.</p>
+      <p className="text-xs text-muted mt-1">Bar = share of filed segment operating income across NVIDIA, AMD, AWS, Google Cloud and Microsoft Intelligent Cloud, the one layer group with segment filings. A layer without a filed or estimated margin series shows a hairline.</p>
     </div>
   );
 }

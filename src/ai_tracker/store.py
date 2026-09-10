@@ -587,6 +587,7 @@ class Store:
                     "last_error": None,
                     "items_found": row[1],
                     "runs": 0,
+                    "health": _health(row[0], s.cadence),
                 }
         return {
             **dump(s),
@@ -594,7 +595,19 @@ class Store:
             "last_error": logs[-1].error if logs and not logs[-1].ok else None,
             "items_found": last_ok.items_found if last_ok else 0,
             "runs": len(logs),
+            "health": _health(last_ok.finished_at.isoformat() if last_ok else None, s.cadence),
         }
+
+
+def _health(last_success: str | None, cadence: str) -> str:
+    """ok within twice the cadence (plus a lag), stale beyond it, never when there is no success at all."""
+    if not last_success:
+        return "never"
+    days = CADENCE_DAYS.get(cadence)
+    if days is None:
+        return "ok"
+    age = (date.today() - date.fromisoformat(last_success[:10])).days
+    return "ok" if age <= max(2 * days, days + 30) else "stale"
 
 
 CADENCE_DAYS = {

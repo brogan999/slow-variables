@@ -14,7 +14,7 @@ export type Card = {
   grade: string | null; latest: Point | null; sparkline: Point[]; stale_as_of: string | null; n_observations: number;
 };
 export type StatusEvent = {
-  id: string; target_id: string; old_status: string | null; new_status: string; old_conf: number | null; new_conf: number;
+  id: string; target_type?: "indicator" | "prediction"; target_id: string; old_status: string | null; new_status: string; old_conf: number | null; new_conf: number;
   reason: string; evidence_ids: string[]; author: string; created_at: string;
 };
 export type Band = { lo?: number | null; hi?: number | null } | null;
@@ -37,7 +37,7 @@ export type Observation = Record<string, string | number | boolean | null> & { i
 export type Source = {
   id: string; name: string; org: string; url: string; kind: string; default_tier: number; cadence: string; lens: string;
   license: string | null; attribution: string | null; last_success_at: string | null; last_error: string | null;
-  items_found: number; runs: number; people: string[];
+  items_found: number; runs: number; people: string[]; health: "ok" | "stale" | "never";
 };
 
 function read<T>(rel: string): T {
