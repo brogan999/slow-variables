@@ -27,3 +27,15 @@ export const tick = (unit: string) => (v: number) => {
 };
 
 export const words = (s: string | null | undefined) => (s ?? "unmeasured").replace(/_/g, " ");
+
+// Mode of the scored statuses; emerging and not-yet-measurable never outvote a scored reading (matches store._summarise).
+const UNSCORED = new Set(["emerging", "not_yet_measurable", "not_yet_testable"]);
+export function summarise(statuses: (string | null | undefined)[]): string | null {
+  const all = statuses.filter((s): s is string => !!s);
+  if (!all.length) return null;
+  const scored = all.filter((s) => !UNSCORED.has(s));
+  const pool = scored.length ? scored : all;
+  const counts = [...new Set(pool)].map((s) => [pool.filter((x) => x === s).length, s] as const).sort((a, b) => b[0] - a[0]);
+  if (counts.length > 1 && counts[0][0] === counts[1][0]) return scored.length ? "mixed" : counts[0][1];
+  return counts[0][1];
+}

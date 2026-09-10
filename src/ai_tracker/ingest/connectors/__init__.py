@@ -10,6 +10,7 @@ from .fred import Fred
 from .manual import Manual
 from .metr import Metr
 from .openrouter import OpenRouter
+from .regulatory import FdaDevices, Ncsl, Owid, RlList
 from .sec_segments import SecSegments
 from .sec_xbrl import SecXbrl
 
@@ -34,5 +35,9 @@ CONNECTORS = {
         EpochPrices,
         EpochBench,
         EpochChips,
+        FdaDevices,
+        Ncsl,
+        RlList,
+        Owid,
     )
 }

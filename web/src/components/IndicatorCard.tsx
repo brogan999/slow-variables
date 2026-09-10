@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Card } from "@/lib/data";
 import { Num } from "./Provenance";
+import { ConfidenceDial } from "./ConfidenceDial";
 import { Grade, StatusChip } from "./StatusChip";
 
 export function IndicatorCard({ c, obsIndex }: { c: Card; obsIndex: Record<string, string> }) {
@@ -14,7 +15,7 @@ export function IndicatorCard({ c, obsIndex }: { c: Card; obsIndex: Record<strin
       <div className="flex flex-wrap items-center gap-2 text-xs text-ink-2">
         <StatusChip status={c.published ? c.status : null} />
         {c.leading_lagging ? <span className="rounded bg-grid/60 px-1.5 py-0.5">{c.leading_lagging}</span> : null}
-        {c.confidence !== null ? <span title="confidence, 0–95, independent of status">conf {c.confidence}</span> : null}
+        <ConfidenceDial value={c.confidence} size={30} />
         {c.stale_as_of ? <span className="text-slow">stale as of {c.stale_as_of}</span> : null}
       </div>
       <div className="flex items-end justify-between gap-3">

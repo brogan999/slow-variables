@@ -1,0 +1,9 @@
+# Appendix E: the continual-learning ladder. Rungs are definitions; evidence arrives as cl_ladder.<entity>.rung.pt rows.
+rungs:
+  - {level: 0, name: Static snapshot, description: "Static snapshot; memory is files in context.", observables: "none"}
+  - {level: 1, name: Gradient-free memory, description: "Feedback distilled into retrievable rules; no weight change.", observables: "pass^1 lift with memory; hold rate; transfer across models"}
+  - {level: 2, name: Population-level online learning, description: "One objective, all users; the model updates from aggregate usage.", observables: "refresh cadence; documented lift"}
+  - {level: 3, name: Per-customer adapters on a cadence, description: "Adapters per deployment, refreshed hourly to weekly, routed and versioned.", observables: "cl_refresh_cadence_hours; cl_adapters_per_product; per-customer lift over time"}
+  - {level: 4, name: Organisation knowledge in weights, description: "Firm knowledge internalised in weights with measured retention.", observables: "cl_forgetting_retention; firm-knowledge lift; cost per query"}
+  - {level: 5, name: Per-session weight updates that persist and pool, description: "Updates from individual sessions persist and pool without forgetting.", observables: "a lab release branded continual or online learning; a forgetting benchmark; per-user weight divergence"}
+  - {level: 6, name: Six-month-employee test passed, description: "A frontier system passes a public benchmark for knowing an organisation the way a six-month employee would.", observables: "the benchmark exists and a frontier system passes it"}

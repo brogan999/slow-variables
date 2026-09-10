@@ -1,6 +1,113 @@
 [
  {
   "author": "evaluate",
+  "created_at": "2026-09-10T06:50:36.329552Z",
+  "evidence_ids": [
+   "6cc13c311340cd50"
+  ],
+  "id": "38272114124823fe",
+  "new_conf": 50,
+  "new_status": "emerging",
+  "old_conf": null,
+  "old_status": null,
+  "reason": "Menlo Ventures' buyer survey: startups earned 36% of enterprise generative-AI application revenue in 2024 and 63% in 2025 (nearly $2 for every $1 earned by incumbents), a 27-point move against a five-point dead band, so the direction reads dispersing away from incumbents. Capped at emerging because Menlo is the only source and a survey is tier 6. Initial seed.",
+  "target_id": "startup_share_of_app_revenue",
+  "target_type": "indicator"
+ },
+ {
+  "author": "evaluate",
+  "created_at": "2026-09-10T06:49:59.632515Z",
+  "evidence_ids": [
+   "11a8bbd24c5c99cb",
+   "858c619bbf5d9edd"
+  ],
+  "id": "7331962af85db506",
+  "new_conf": 60,
+  "new_status": "consistent_with_normal",
+  "old_conf": null,
+  "old_status": null,
+  "reason": "Evaluator: 2.042 (METR time horizons (v1.1), 2026-03-05) is inside the consistent band (lo=1.5 ). Auto-reason; band rationale: Normal = misfit of 1.5 or more (observed ratios of 5-10x against the constant-hazard 3.1x, the pattern since 2024); fast = within 10% of the constant-hazard prediction, which would mean long-task reliability tracking short-task success. Between is emerging.",
+  "target_id": "ord_half_life_misfit",
+  "target_type": "indicator"
+ },
+ {
+  "author": "evaluate",
+  "created_at": "2026-09-10T06:49:58.909223Z",
+  "evidence_ids": [
+   "027237d89717d303",
+   "143dcf3ea59eb522",
+   "196a6174924b2821",
+   "29221e0928c0242d",
+   "416fff663e911055",
+   "4910df35443940aa",
+   "4dc8ee6d073b8430",
+   "6012e72e8105bfc4",
+   "8065a41f15722c18",
+   "9fbab158355685d5",
+   "c72d56dfb070b2b7",
+   "ccc7b379ab5ac2f2",
+   "ce2a8065b1d4c7ac",
+   "f2df3324fcaa3dd6",
+   "f64560a6646757a8",
+   "f87fbd907ad6c419"
+  ],
+  "id": "9d4f4e6286d09c7b",
+  "new_conf": 40,
+  "new_status": "dispersing",
+  "old_conf": null,
+  "old_status": null,
+  "reason": "Evaluator: 2.507 (SEC EDGAR XBRL company facts, 2026-06-30) reads dispersing over 4 periods with a dead band of 0.3. Auto-reason; rule rationale: Four quarters; a move under 0.3x is run-rate noise. Rising = capex pulling further ahead of revenue (the bet growing); falling = revenue catching the buildout.",
+  "target_id": "capex_to_revenue_stack",
+  "target_type": "indicator"
+ },
+ {
+  "author": "evaluate",
+  "created_at": "2026-09-10T06:44:07.374993Z",
+  "evidence_ids": [
+   "9d5a213e73989490"
+  ],
+  "id": "d7c0a996f57b8418",
+  "new_conf": 35,
+  "new_status": "emerging",
+  "old_conf": null,
+  "old_status": null,
+  "reason": "rl-list.com's directory (generated 15 Jul 2026) lists 24 active commercial RL-environment vendors of 38 entries, inside the normal band (a few dozen, a specialist market). A single directory maintained by one person, tier 6, so the status is capped at emerging. Initial seed.",
+  "target_id": "rl_environment_vendor_count",
+  "target_type": "indicator"
+ },
+ {
+  "author": "evaluate",
+  "created_at": "2026-09-10T06:44:07.344564Z",
+  "evidence_ids": [
+   "758a7f7203a96107"
+  ],
+  "id": "cadcabc7769b0e59",
+  "new_conf": 55,
+  "new_status": "emerging",
+  "old_conf": null,
+  "old_status": null,
+  "reason": "NCSL's 2025 legislation tracker holds 1,035 state AI bills, of which 170 carry an enacted or signed status, counted from the published table on 11 Sep 2026. Inside the normal band (500 or more a year: legislatures reacting at their own pace). One tracker, scraped, tier 6, so the status is capped at emerging until a second count (MultiState or the Transparency Coalition) corroborates. Initial seed.",
+  "target_id": "state_ai_bills_introduced",
+  "target_type": "indicator"
+ },
+ {
+  "author": "evaluate",
+  "created_at": "2026-09-10T06:44:07.298401Z",
+  "evidence_ids": [
+   "27f07ca342dbc132",
+   "b4fc2fe607027d4d"
+  ],
+  "id": "968ce88095ba34e8",
+  "new_conf": 70,
+  "new_status": "consistent_with_normal",
+  "old_conf": null,
+  "old_status": null,
+  "reason": "Evaluator: 26.69 (FDA AI-enabled medical device list, 2026-06-30) is inside the consistent band (hi=50). Auto-reason; band rationale: Normal = the cumulative count growing under 50% a year (the 2019-2024 pace); fast = doubling or faster, which is what an ungated regulated domain would show. Between is emerging.",
+  "target_id": "fda_ai_devices_cumulative",
+  "target_type": "indicator"
+ },
+ {
+  "author": "evaluate",
   "created_at": "2026-09-10T06:34:42.696886Z",
   "evidence_ids": [
    "c43909ea5651399c"

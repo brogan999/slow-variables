@@ -15,7 +15,7 @@ Rule: (ratio ≤ 2 AND 80% horizon > 8 h) AND (≥ 3 trackers break) AND (hours 
 
 ## Normal-technology thesis STRENGTHENED: **does not hold**
 
-Rule: ratio non-decreasing AND ladder ≤ L4 AND four clean tracker releases (untestable until the continual-learning ladder series exists)
+Rule: ratio non-decreasing AND ladder ≤ L4 AND four clean tracker releases
 
 - ✗ 50%/80% ratio non-decreasing over the last four models — 10.3×, 6.4×, 4.3×, 6.3× (obs: 39c8213a, 8f73b56b, 959db6dd…)
 - ? continual-learning ladder ≤ L4 — untestable: no observation within two source cadences

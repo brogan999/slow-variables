@@ -1,0 +1,74 @@
+{
+ "band_input": "metric:continual_learning_level",
+ "band_rationale": "Appendix E's rule: L0-L3 (memory, population-level online learning, per-customer adapters) is normal; L5-L6 (persistent per-session weight updates, the six-month-employee test) is fast; L4 (organisation knowledge in weights) is emerging.",
+ "band_value": null,
+ "bucket_id": "return_arrow",
+ "cadence_expected": "quarterly",
+ "confidence": null,
+ "counterevidence": "Every production row is tier 7 (self-described); research results are kept off the level; no public benchmark exists for L6, so the top rung cannot be reached by construction until one does.",
+ "crosswalk": [
+  {
+   "bucket_id": "return_arrow",
+   "layer_id": "training_input",
+   "note": "Expert data, RL environments and continual-learning infra are the deployment\u2192invention channel; lab recoupment \u21c4 capex-to-revenue.",
+   "relation": "return_arrow",
+   "shared_indicators": [],
+   "sublayer_id": null
+  }
+ ],
+ "definition": "The highest rung of the continual-learning ladder (L0 static snapshot to L6 six-month-employee test) with a shipped production system on record, from dated rows citing the vendor's or lab's own description. Derived metric continual_learning_level.",
+ "derived": [],
+ "direction": null,
+ "direction_rule": null,
+ "evidence": [],
+ "falsifying_band": null,
+ "fast_band": {
+  "hi": null,
+  "lo": 5.0
+ },
+ "fits": [],
+ "flow_status": null,
+ "grade": null,
+ "id": "continual_learning_level",
+ "latest": null,
+ "layer_id": "training_input",
+ "leading_lagging": "leading",
+ "metric": "continual_learning_level",
+ "metric_dims": {},
+ "n_observations": 0,
+ "name": "Continual-learning ladder (highest production rung)",
+ "normal_band": {
+  "hi": 3.0,
+  "lo": null
+ },
+ "override_note": null,
+ "points": [],
+ "proposed_status": "consistent_with_normal",
+ "proxy_types": [
+  "product",
+  "model_release"
+ ],
+ "published": false,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "rsi_agent_workdays_per_human",
+  "expert_data_market_run_rate"
+ ],
+ "related_metrics": [],
+ "related_predictions": [],
+ "series": [],
+ "series_keys": [],
+ "sparkline": [],
+ "stale_as_of": null,
+ "stale_ok": false,
+ "stale_reason": null,
+ "status": null,
+ "status_events": [],
+ "sublayer_id": "post_training",
+ "tracker_interpretation": "Rows are vendors describing their own systems; the rung is what they claim to ship, not what an independent evaluation found.",
+ "unit": "rung",
+ "unpublished_reason": "Waiting on the first verified production rows (vendor posts fetched and quoted verbatim); the ladder definitions and the metric are in place.",
+ "updated_at": "2026-09-11",
+ "valve_measured": "return_arrow",
+ "why_it_matters": "The crux of the timelines argument. If systems learn on the job, deployment feeds invention automatically and the return arrow stops depending on human-data vendors; Narayanan and Kapoor's speed limits assume it stays unsolved."
+}

@@ -465,3 +465,67 @@ metrics:
     sql: |
       SELECT as_of_date, sum(CASE WHEN subject <> 'nvidia' THEN value_numeric ELSE 0 END) / sum(value_numeric) AS value, list(id ORDER BY id) AS obs_ids
       FROM observations WHERE series_key LIKE 'epoch_chips.%.h100e_cumulative.pt' GROUP BY 1 HAVING count(*) >= 3
+  continual_learning_level:
+    description: The highest ladder rung (Appendix E, L0-L6) with a shipped, production system on record, at each date a new production row lands.
+    rationale: The return arrow made mechanical - if deployment data feeds weights automatically, the fourth-to-first-stage loop stops depending on human data vendors. The thesis rule 'strengthened' needs this at or below L4.
+    grain: [as_of_date]
+    unit: rung
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["cl_ladder.*.rung.pt"]
+    caveats: Production rows only; research results sit in cl_ladder.*.rung_research.pt and never move the level; each row is a lab or vendor describing its own system (tier 7) unless independently evaluated.
+    sql: |
+      SELECT as_of_date, max(value_numeric) OVER (ORDER BY as_of_date) AS value, list(id) OVER (ORDER BY as_of_date) AS obs_ids
+      FROM observations WHERE series_key LIKE 'cl_ladder.%.rung.pt' QUALIFY value_numeric = value
+  fda_ai_devices_yoy:
+    description: Year-on-year growth in the cumulative count of FDA-authorised AI-enabled devices, at each month end.
+    rationale: The regulated-domain speed limit as a rate; the paper predicts slow diffusion in high-consequence tasks.
+    grain: [as_of_date]
+    unit: pct_change_yoy
+    lead_lag: coincident
+    formula_version: 1
+    inputs: ["fda.us.ai_devices_cumulative.m"]
+    caveats: Authorisations, not deployments; mostly radiology CAD; the list is updated in batches.
+    sql: |
+      SELECT a.as_of_date, (a.value_numeric / b.value_numeric - 1) * 100 AS value, [a.id, b.id] AS obs_ids
+      FROM observations a JOIN observations b ON b.series_key = a.series_key AND b.as_of_date = a.as_of_date - INTERVAL 12 MONTH
+      WHERE a.series_key = 'fda.us.ai_devices_cumulative.m'
+  capex_to_revenue_stack:
+    description: "Trailing four quarters of hyperscaler capex (Microsoft, Alphabet, Amazon, Meta, Oracle; filed) divided by AI revenue (frontier-lab run-rates from Epoch plus Menlo's enterprise generative-AI spend), at each quarter end."
+    rationale: "The Sequoia '$600B question' framed as a ratio: capex ahead of the revenue that must repay it (P1 seed indicator 2; brief Appendix C)."
+    grain: [as_of_date]
+    unit: ratio
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["sec.*.capex.q", "epoch.*.revenue_run_rate_usd.pt", "menlo.us_enterprise.genai_spend_usd.fy"]
+    caveats: "Hyperscaler capex is not all AI; the revenue side is run-rates (annualised, press-reported) plus one annual survey and double-counts where enterprises buy from labs; grade C by construction."
+    sql: |
+      WITH capex AS (
+        SELECT date_trunc('quarter', as_of_date) AS cq, subject, value_numeric AS v, id FROM observations
+        WHERE series_key LIKE 'sec.%.capex.q' AND subject IN ('msft', 'googl', 'amzn', 'meta', 'orcl')),
+      qs AS (SELECT DISTINCT cq FROM capex WHERE cq >= DATE '2024-01-01'),
+      capex4 AS (
+        SELECT q.cq, sum(c.v) AS v, list(c.id ORDER BY c.id) AS ids FROM qs q JOIN capex c ON c.cq > q.cq - INTERVAL 12 MONTH AND c.cq <= q.cq
+        GROUP BY q.cq HAVING count(DISTINCT c.subject) >= 4),
+      rr AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'epoch.%.revenue_run_rate_usd.pt' AND entity_id IS NOT NULL),
+      rr_latest AS (
+        SELECT q.cq, r.entity_id, arg_max(r.v, r.as_of_date) AS v, arg_max(r.id, r.as_of_date) AS id FROM qs q JOIN rr r ON r.as_of_date <= q.cq + INTERVAL 3 MONTH AND r.as_of_date > q.cq - INTERVAL 9 MONTH GROUP BY 1, 2),
+      ent AS (SELECT as_of_date, value_numeric AS v, id FROM observations WHERE series_key = 'menlo.us_enterprise.genai_spend_usd.fy'),
+      ent_latest AS (SELECT q.cq, arg_max(e.v, e.as_of_date) AS v, arg_max(e.id, e.as_of_date) AS id FROM qs q JOIN ent e ON e.as_of_date <= q.cq + INTERVAL 3 MONTH GROUP BY 1)
+      SELECT (c.cq + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE AS as_of_date,
+             c.v / ((SELECT sum(v) FROM rr_latest r WHERE r.cq = c.cq) + e.v) AS value,
+             list_distinct(flatten([c.ids, (SELECT list(id) FROM rr_latest r WHERE r.cq = c.cq), [e.id]])) AS obs_ids
+      FROM capex4 c JOIN ent_latest e USING (cq)
+  ord_half_life_misfit:
+    description: "How far the observed 50%/80% horizon ratio departs from the constant-hazard (Ord half-life) prediction of ln(0.5)/ln(0.8) = 3.11: the ratio divided by 3.11, per model."
+    rationale: "Ord's reframing says every model has a task-length half-life; if success decays at a constant hazard the 50% and 80% horizons sit a fixed 3.1x apart. A misfit above 1 says reliability degrades faster than a constant hazard at long horizons."
+    grain: [as_of_date]
+    unit: ratio
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["metr.*.horizon_50.pt", "metr.*.horizon_80.pt"]
+    caveats: "Two points per model on METR's suite; the constant-hazard model is a null, not a claim."
+    sql: |
+      SELECT a.as_of_date, (a.value_numeric / b.value_numeric) / 3.1063 AS value, [a.id, b.id] AS obs_ids
+      FROM observations a JOIN observations b ON a.subject = b.subject AND a.as_of_date = b.as_of_date
+      WHERE a.series_key LIKE 'metr.%.horizon_50.pt' AND b.series_key LIKE 'metr.%.horizon_80.pt' AND NOT coalesce(a.disputed, false)

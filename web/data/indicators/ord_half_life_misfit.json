@@ -1,0 +1,1080 @@
+{
+ "band_input": "metric:ord_half_life_misfit",
+ "band_rationale": "Normal = misfit of 1.5 or more (observed ratios of 5-10x against the constant-hazard 3.1x, the pattern since 2024); fast = within 10% of the constant-hazard prediction, which would mean long-task reliability tracking short-task success. Between is emerging.",
+ "band_value": {
+  "as_of": "2026-03-05",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "11a8bbd24c5c99cb",
+   "858c619bbf5d9edd"
+  ],
+  "value": 2.041907903134605
+ },
+ "bucket_id": "methods",
+ "cadence_expected": "per_release",
+ "confidence": 60,
+ "counterevidence": "The 80% horizon has wider CIs than the 50%; METR's suite ceiling censors the newest models; a misfit can shrink because the 50% horizon stalls, not because reliability improves.",
+ "crosswalk": [
+  {
+   "bucket_id": "methods",
+   "layer_id": "model",
+   "note": "Capability growth is the model layer's product; inference price at fixed capability \u21c4 price-per-token pass-through; open-weights lag \u21c4 open-vs-closed gap.",
+   "relation": "same_valve",
+   "shared_indicators": [
+    "metr_horizon_50",
+    "metr_horizon_80",
+    "horizon_ratio_80_50"
+   ],
+   "sublayer_id": null
+  }
+ ],
+ "definition": "The observed ratio of METR's 50% to 80% horizons divided by 3.11, the ratio a constant task-length hazard (Ord's half-life model) predicts. Derived metric ord_half_life_misfit.",
+ "derived": [
+  {
+   "as_of_date": "2019-02-14",
+   "computed_at": "2026-09-10T06:50:35.701452Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "fabd1b0a47808613",
+   "input_observation_ids": [
+    "1c22fa34888106fd",
+    "64f0dec494a49904"
+   ],
+   "metric": "ord_half_life_misfit",
+   "obs_ids": [
+    "1c22fa34888106fd",
+    "64f0dec494a49904"
+   ],
+   "value": 1.352543621028233,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2020-05-28",
+   "computed_at": "2026-09-10T06:50:35.701452Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "5267da63d62c82ed",
+   "input_observation_ids": [
+    "2325ad877ea0581f",
+    "58c5e6775cc06fc5"
+   ],
+   "metric": "ord_half_life_misfit",
+   "obs_ids": [
+    "2325ad877ea0581f",
+    "58c5e6775cc06fc5"
+   ],
+   "value": 0.8246337441405778,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2022-03-15",
+   "computed_at": "2026-09-10T06:50:35.701452Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "91ea9e725939226a",
+   "input_observation_ids": [
+    "4a682b8c20f32dfe",
+    "5e6df7810b5d462b"
+   ],
+   "metric": "ord_half_life_misfit",
+   "obs_ids": [
+    "4a682b8c20f32dfe",
+    "5e6df7810b5d462b"
+   ],
+   "value": 0.7553975800336366,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2023-03-14",
+   "computed_at": "2026-09-10T06:50:35.701452Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "de955551ff1c8ce9",
+   "input_observation_ids": [
+    "96d016fade882963",
+    "a53da98c12dc8c0d"
+   ],
+   "metric": "ord_half_life_misfit",
+   "obs_ids": [
+    "96d016fade882963",
+    "a53da98c12dc8c0d"
+   ],
+   "value": 1.4430245612119126,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2023-11-06",
+   "computed_at": "2026-09-10T06:50:35.701452Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "adf45136116f419f",
+   "input_observation_ids": [
+    "29446d6c837793d5",
+    "cd50d5649e0a06f1"
+   ],
+   "metric": "ord_half_life_misfit",
+   "obs_ids": [
+    "29446d6c837793d5",
+    "cd50d5649e0a06f1"
+   ],
+   "value": 1.6629960459511255,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2024-03-04",
+   "computed_at": "2026-09-10T06:50:35.701452Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "a2fe8e44409309d5",
+   "input_observation_ids": [
+    "f1409c691bdca4ec",
+    "fb7435cdf6c0c3f4"
+   ],
+   "metric": "ord_half_life_misfit",
+   "obs_ids": [
+    "f1409c691bdca4ec",
+    "fb7435cdf6c0c3f4"
+   ],
+   "value": 1.9912226457858975,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2024-04-09",
+   "computed_at": "2026-09-10T06:50:35.701452Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "fd2ab961b5e5c233",
+   "input_observation_ids": [
+    "0d21fe651b2bd589",
+    "deb6a1ab9fff15aa"
+   ],
+   "metric": "ord_half_life_misfit",
+   "obs_ids": [
+    "0d21fe651b2bd589",
+    "deb6a1ab9fff15aa"
+   ],
+   "value": 1.2950102101473344,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2024-05-13",
+   "computed_at": "2026-09-10T06:50:35.701452Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "363a59669bf8eaea",
+   "input_observation_ids": [
+    "2dc1a032ed30619b",
+    "7c977050ff6a8cfe"
+   ],
+   "metric": "ord_half_life_misfit",
+   "obs_ids": [
+    "2dc1a032ed30619b",
+    "7c977050ff6a8cfe"
+   ],
+   "value": 1.776349095660251,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2024-06-20",
+   "computed_at": "2026-09-10T06:50:35.701452Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "d2d4b5dcf28de93a",
+   "input_observation_ids": [
+    "145115d411f64a37",
+    "efa58e1ccf788fa1"
+   ],
+   "metric": "ord_half_life_misfit",
+   "obs_ids": [
+    "145115d411f64a37",
+    "efa58e1ccf788fa1"
+   ],
+   "value": 2.194381588425971,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2024-09-12",
+   "computed_at": "2026-09-10T06:50:35.701452Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "9a20b4203681f020",
+   "input_observation_ids": [
+    "734779b57a58f38f",
+    "b5c1303bf31f5a8d"
+   ],
+   "metric": "ord_half_life_misfit",
+   "obs_ids": [
+    "734779b57a58f38f",
+    "b5c1303bf31f5a8d"
+   ],
+   "value": 1.4802846278511772,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2024-10-22",
+   "computed_at": "2026-09-10T06:50:35.701452Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "a3b815f9e9bab1a2",
+   "input_observation_ids": [
+    "0fb6ae10625216fb",
+    "1963199165cd8c93"
+   ],
+   "metric": "ord_half_life_misfit",
+   "obs_ids": [
+    "0fb6ae10625216fb",
+    "1963199165cd8c93"
+   ],
+   "value": 2.5453299686637103,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2024-12-05",
+   "computed_at": "2026-09-10T06:50:35.701452Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "6e777127e6d6ecba",
+   "input_observation_ids": [
+    "37e97a6fcbe1c2ca",
+    "9450442af9ff97b6"
+   ],
+   "metric": "ord_half_life_misfit",
+   "obs_ids": [
+    "37e97a6fcbe1c2ca",
+    "9450442af9ff97b6"
+   ],
+   "value": 1.7631453154529855,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-02-24",
+   "computed_at": "2026-09-10T06:50:35.701452Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "5165d0fbf8d1b153",
+   "input_observation_ids": [
+    "095bb21142dc666e",
+    "68864ed59f5d9a57"
+   ],
+   "metric": "ord_half_life_misfit",
+   "obs_ids": [
+    "095bb21142dc666e",
+    "68864ed59f5d9a57"
+   ],
+   "value": 1.6077680433248336,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-04-16",
+   "computed_at": "2026-09-10T06:50:35.701452Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "36d0d8704f399fd6",
+   "input_observation_ids": [
+    "6b19d566b4f5cd57",
+    "d1bb5ffe97ca5bad"
+   ],
+   "metric": "ord_half_life_misfit",
+   "obs_ids": [
+    "6b19d566b4f5cd57",
+    "d1bb5ffe97ca5bad"
+   ],
+   "value": 1.2856249460339226,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-05-22",
+   "computed_at": "2026-09-10T06:50:35.701452Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "d6f235422cc924f0",
+   "input_observation_ids": [
+    "1f69c37251b857fb",
+    "6af93ac0d37ce9a2"
+   ],
+   "metric": "ord_half_life_misfit",
+   "obs_ids": [
+    "1f69c37251b857fb",
+    "6af93ac0d37ce9a2"
+   ],
+   "value": 1.5815417350372127,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-08-05",
+   "computed_at": "2026-09-10T06:50:35.701452Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "4fdb422c03e5e7a5",
+   "input_observation_ids": [
+    "ae5278061f1da61c",
+    "fecd07e2f7444679"
+   ],
+   "metric": "ord_half_life_misfit",
+   "obs_ids": [
+    "ae5278061f1da61c",
+    "fecd07e2f7444679"
+   ],
+   "value": 1.3789614975368107,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-08-07",
+   "computed_at": "2026-09-10T06:50:35.701452Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "7f8f737551c10777",
+   "input_observation_ids": [
+    "261c1f51f1f6b138",
+    "47db79bda335bcb0"
+   ],
+   "metric": "ord_half_life_misfit",
+   "obs_ids": [
+    "261c1f51f1f6b138",
+    "47db79bda335bcb0"
+   ],
+   "value": 1.7058460637995485,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-11-18",
+   "computed_at": "2026-09-10T06:50:35.701452Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "51b96b3722149ed8",
+   "input_observation_ids": [
+    "3466aea4ed2495c4",
+    "833be5d2cc9c9421"
+   ],
+   "metric": "ord_half_life_misfit",
+   "obs_ids": [
+    "3466aea4ed2495c4",
+    "833be5d2cc9c9421"
+   ],
+   "value": 1.333812817515801,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-11-19",
+   "computed_at": "2026-09-10T06:50:35.701452Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "fe129a2bbd9164ef",
+   "input_observation_ids": [
+    "8de1effa26863680",
+    "a2aa2e4df87f5448"
+   ],
+   "metric": "ord_half_life_misfit",
+   "obs_ids": [
+    "8de1effa26863680",
+    "a2aa2e4df87f5448"
+   ],
+   "value": 1.4224000235885519,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-11-24",
+   "computed_at": "2026-09-10T06:50:35.701452Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "d996a678cf3dd3e9",
+   "input_observation_ids": [
+    "72bcb9d860605a44",
+    "75c93027341be6a5"
+   ],
+   "metric": "ord_half_life_misfit",
+   "obs_ids": [
+    "72bcb9d860605a44",
+    "75c93027341be6a5"
+   ],
+   "value": 1.9081849629663097,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-12-11",
+   "computed_at": "2026-09-10T06:50:35.701452Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "73a1c916f0b05d3b",
+   "input_observation_ids": [
+    "09061051488d31d8",
+    "8a2d699724cf4d5e"
+   ],
+   "metric": "ord_half_life_misfit",
+   "obs_ids": [
+    "09061051488d31d8",
+    "8a2d699724cf4d5e"
+   ],
+   "value": 1.7180878964516375,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2026-02-05",
+   "computed_at": "2026-09-10T06:50:35.701452Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "e2134cef8ec7861d",
+   "input_observation_ids": [
+    "39c8213ab061a5f7",
+    "8f73b56b30434655"
+   ],
+   "metric": "ord_half_life_misfit",
+   "obs_ids": [
+    "39c8213ab061a5f7",
+    "8f73b56b30434655"
+   ],
+   "value": 3.3116889915489973,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2026-02-05",
+   "computed_at": "2026-09-10T06:50:35.701452Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "e2134cef8ec7861d",
+   "input_observation_ids": [
+    "959db6dd7d0e15af",
+    "e466aae4890e8f57"
+   ],
+   "metric": "ord_half_life_misfit",
+   "obs_ids": [
+    "959db6dd7d0e15af",
+    "e466aae4890e8f57"
+   ],
+   "value": 2.055615489343418,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2026-02-19",
+   "computed_at": "2026-09-10T06:50:35.701452Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "2d1b7adfb3c02250",
+   "input_observation_ids": [
+    "2eb7c897f31e5b3e",
+    "5eb0848814989421"
+   ],
+   "metric": "ord_half_life_misfit",
+   "obs_ids": [
+    "2eb7c897f31e5b3e",
+    "5eb0848814989421"
+   ],
+   "value": 1.377117304453394,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2026-03-05",
+   "computed_at": "2026-09-10T06:50:35.701452Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "cec9da67e1d41a15",
+   "input_observation_ids": [
+    "11a8bbd24c5c99cb",
+    "858c619bbf5d9edd"
+   ],
+   "metric": "ord_half_life_misfit",
+   "obs_ids": [
+    "11a8bbd24c5c99cb",
+    "858c619bbf5d9edd"
+   ],
+   "value": 2.041907903134605,
+   "value_high": null,
+   "value_low": null
+  }
+ ],
+ "direction": null,
+ "direction_rule": null,
+ "evidence": [],
+ "falsifying_band": null,
+ "fast_band": {
+  "hi": 1.1,
+  "lo": null
+ },
+ "fits": [],
+ "flow_status": null,
+ "grade": "A",
+ "id": "ord_half_life_misfit",
+ "latest": {
+  "as_of": "2026-03-05",
+  "dims": {},
+  "obs_ids": [
+   "11a8bbd24c5c99cb",
+   "858c619bbf5d9edd"
+  ],
+  "unit": "ratio",
+  "value": 2.041907903134605
+ },
+ "layer_id": "model",
+ "leading_lagging": "leading",
+ "metric": "ord_half_life_misfit",
+ "metric_dims": {},
+ "n_observations": 50,
+ "name": "Ord half-life misfit (observed 50/80 ratio vs constant hazard)",
+ "normal_band": {
+  "hi": null,
+  "lo": 1.5
+ },
+ "override_note": null,
+ "points": [
+  {
+   "as_of": "2019-02-14",
+   "dims": {},
+   "obs_ids": [
+    "1c22fa34888106fd",
+    "64f0dec494a49904"
+   ],
+   "unit": "ratio",
+   "value": 1.352543621028233
+  },
+  {
+   "as_of": "2020-05-28",
+   "dims": {},
+   "obs_ids": [
+    "2325ad877ea0581f",
+    "58c5e6775cc06fc5"
+   ],
+   "unit": "ratio",
+   "value": 0.8246337441405778
+  },
+  {
+   "as_of": "2022-03-15",
+   "dims": {},
+   "obs_ids": [
+    "4a682b8c20f32dfe",
+    "5e6df7810b5d462b"
+   ],
+   "unit": "ratio",
+   "value": 0.7553975800336366
+  },
+  {
+   "as_of": "2023-03-14",
+   "dims": {},
+   "obs_ids": [
+    "96d016fade882963",
+    "a53da98c12dc8c0d"
+   ],
+   "unit": "ratio",
+   "value": 1.4430245612119126
+  },
+  {
+   "as_of": "2023-11-06",
+   "dims": {},
+   "obs_ids": [
+    "29446d6c837793d5",
+    "cd50d5649e0a06f1"
+   ],
+   "unit": "ratio",
+   "value": 1.6629960459511255
+  },
+  {
+   "as_of": "2024-03-04",
+   "dims": {},
+   "obs_ids": [
+    "f1409c691bdca4ec",
+    "fb7435cdf6c0c3f4"
+   ],
+   "unit": "ratio",
+   "value": 1.9912226457858975
+  },
+  {
+   "as_of": "2024-04-09",
+   "dims": {},
+   "obs_ids": [
+    "0d21fe651b2bd589",
+    "deb6a1ab9fff15aa"
+   ],
+   "unit": "ratio",
+   "value": 1.2950102101473344
+  },
+  {
+   "as_of": "2024-05-13",
+   "dims": {},
+   "obs_ids": [
+    "2dc1a032ed30619b",
+    "7c977050ff6a8cfe"
+   ],
+   "unit": "ratio",
+   "value": 1.776349095660251
+  },
+  {
+   "as_of": "2024-06-20",
+   "dims": {},
+   "obs_ids": [
+    "145115d411f64a37",
+    "efa58e1ccf788fa1"
+   ],
+   "unit": "ratio",
+   "value": 2.194381588425971
+  },
+  {
+   "as_of": "2024-09-12",
+   "dims": {},
+   "obs_ids": [
+    "734779b57a58f38f",
+    "b5c1303bf31f5a8d"
+   ],
+   "unit": "ratio",
+   "value": 1.4802846278511772
+  },
+  {
+   "as_of": "2024-10-22",
+   "dims": {},
+   "obs_ids": [
+    "0fb6ae10625216fb",
+    "1963199165cd8c93"
+   ],
+   "unit": "ratio",
+   "value": 2.5453299686637103
+  },
+  {
+   "as_of": "2024-12-05",
+   "dims": {},
+   "obs_ids": [
+    "37e97a6fcbe1c2ca",
+    "9450442af9ff97b6"
+   ],
+   "unit": "ratio",
+   "value": 1.7631453154529855
+  },
+  {
+   "as_of": "2025-02-24",
+   "dims": {},
+   "obs_ids": [
+    "095bb21142dc666e",
+    "68864ed59f5d9a57"
+   ],
+   "unit": "ratio",
+   "value": 1.6077680433248336
+  },
+  {
+   "as_of": "2025-04-16",
+   "dims": {},
+   "obs_ids": [
+    "6b19d566b4f5cd57",
+    "d1bb5ffe97ca5bad"
+   ],
+   "unit": "ratio",
+   "value": 1.2856249460339226
+  },
+  {
+   "as_of": "2025-05-22",
+   "dims": {},
+   "obs_ids": [
+    "1f69c37251b857fb",
+    "6af93ac0d37ce9a2"
+   ],
+   "unit": "ratio",
+   "value": 1.5815417350372127
+  },
+  {
+   "as_of": "2025-08-05",
+   "dims": {},
+   "obs_ids": [
+    "ae5278061f1da61c",
+    "fecd07e2f7444679"
+   ],
+   "unit": "ratio",
+   "value": 1.3789614975368107
+  },
+  {
+   "as_of": "2025-08-07",
+   "dims": {},
+   "obs_ids": [
+    "261c1f51f1f6b138",
+    "47db79bda335bcb0"
+   ],
+   "unit": "ratio",
+   "value": 1.7058460637995485
+  },
+  {
+   "as_of": "2025-11-18",
+   "dims": {},
+   "obs_ids": [
+    "3466aea4ed2495c4",
+    "833be5d2cc9c9421"
+   ],
+   "unit": "ratio",
+   "value": 1.333812817515801
+  },
+  {
+   "as_of": "2025-11-19",
+   "dims": {},
+   "obs_ids": [
+    "8de1effa26863680",
+    "a2aa2e4df87f5448"
+   ],
+   "unit": "ratio",
+   "value": 1.4224000235885519
+  },
+  {
+   "as_of": "2025-11-24",
+   "dims": {},
+   "obs_ids": [
+    "72bcb9d860605a44",
+    "75c93027341be6a5"
+   ],
+   "unit": "ratio",
+   "value": 1.9081849629663097
+  },
+  {
+   "as_of": "2025-12-11",
+   "dims": {},
+   "obs_ids": [
+    "09061051488d31d8",
+    "8a2d699724cf4d5e"
+   ],
+   "unit": "ratio",
+   "value": 1.7180878964516375
+  },
+  {
+   "as_of": "2026-02-05",
+   "dims": {},
+   "obs_ids": [
+    "39c8213ab061a5f7",
+    "8f73b56b30434655"
+   ],
+   "unit": "ratio",
+   "value": 3.3116889915489973
+  },
+  {
+   "as_of": "2026-02-05",
+   "dims": {},
+   "obs_ids": [
+    "959db6dd7d0e15af",
+    "e466aae4890e8f57"
+   ],
+   "unit": "ratio",
+   "value": 2.055615489343418
+  },
+  {
+   "as_of": "2026-02-19",
+   "dims": {},
+   "obs_ids": [
+    "2eb7c897f31e5b3e",
+    "5eb0848814989421"
+   ],
+   "unit": "ratio",
+   "value": 1.377117304453394
+  },
+  {
+   "as_of": "2026-03-05",
+   "dims": {},
+   "obs_ids": [
+    "11a8bbd24c5c99cb",
+    "858c619bbf5d9edd"
+   ],
+   "unit": "ratio",
+   "value": 2.041907903134605
+  }
+ ],
+ "proposed_status": "consistent_with_normal",
+ "proxy_types": [
+  "benchmark"
+ ],
+ "published": true,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "horizon_ratio_80_50",
+  "metr_horizon_80"
+ ],
+ "related_metrics": [],
+ "related_predictions": [],
+ "series": [],
+ "series_keys": [],
+ "sparkline": [
+  {
+   "as_of": "2020-05-28",
+   "dims": {},
+   "obs_ids": [
+    "2325ad877ea0581f",
+    "58c5e6775cc06fc5"
+   ],
+   "unit": "ratio",
+   "value": 0.8246337441405778
+  },
+  {
+   "as_of": "2022-03-15",
+   "dims": {},
+   "obs_ids": [
+    "4a682b8c20f32dfe",
+    "5e6df7810b5d462b"
+   ],
+   "unit": "ratio",
+   "value": 0.7553975800336366
+  },
+  {
+   "as_of": "2023-03-14",
+   "dims": {},
+   "obs_ids": [
+    "96d016fade882963",
+    "a53da98c12dc8c0d"
+   ],
+   "unit": "ratio",
+   "value": 1.4430245612119126
+  },
+  {
+   "as_of": "2023-11-06",
+   "dims": {},
+   "obs_ids": [
+    "29446d6c837793d5",
+    "cd50d5649e0a06f1"
+   ],
+   "unit": "ratio",
+   "value": 1.6629960459511255
+  },
+  {
+   "as_of": "2024-03-04",
+   "dims": {},
+   "obs_ids": [
+    "f1409c691bdca4ec",
+    "fb7435cdf6c0c3f4"
+   ],
+   "unit": "ratio",
+   "value": 1.9912226457858975
+  },
+  {
+   "as_of": "2024-04-09",
+   "dims": {},
+   "obs_ids": [
+    "0d21fe651b2bd589",
+    "deb6a1ab9fff15aa"
+   ],
+   "unit": "ratio",
+   "value": 1.2950102101473344
+  },
+  {
+   "as_of": "2024-05-13",
+   "dims": {},
+   "obs_ids": [
+    "2dc1a032ed30619b",
+    "7c977050ff6a8cfe"
+   ],
+   "unit": "ratio",
+   "value": 1.776349095660251
+  },
+  {
+   "as_of": "2024-06-20",
+   "dims": {},
+   "obs_ids": [
+    "145115d411f64a37",
+    "efa58e1ccf788fa1"
+   ],
+   "unit": "ratio",
+   "value": 2.194381588425971
+  },
+  {
+   "as_of": "2024-09-12",
+   "dims": {},
+   "obs_ids": [
+    "734779b57a58f38f",
+    "b5c1303bf31f5a8d"
+   ],
+   "unit": "ratio",
+   "value": 1.4802846278511772
+  },
+  {
+   "as_of": "2024-10-22",
+   "dims": {},
+   "obs_ids": [
+    "0fb6ae10625216fb",
+    "1963199165cd8c93"
+   ],
+   "unit": "ratio",
+   "value": 2.5453299686637103
+  },
+  {
+   "as_of": "2024-12-05",
+   "dims": {},
+   "obs_ids": [
+    "37e97a6fcbe1c2ca",
+    "9450442af9ff97b6"
+   ],
+   "unit": "ratio",
+   "value": 1.7631453154529855
+  },
+  {
+   "as_of": "2025-02-24",
+   "dims": {},
+   "obs_ids": [
+    "095bb21142dc666e",
+    "68864ed59f5d9a57"
+   ],
+   "unit": "ratio",
+   "value": 1.6077680433248336
+  },
+  {
+   "as_of": "2025-04-16",
+   "dims": {},
+   "obs_ids": [
+    "6b19d566b4f5cd57",
+    "d1bb5ffe97ca5bad"
+   ],
+   "unit": "ratio",
+   "value": 1.2856249460339226
+  },
+  {
+   "as_of": "2025-05-22",
+   "dims": {},
+   "obs_ids": [
+    "1f69c37251b857fb",
+    "6af93ac0d37ce9a2"
+   ],
+   "unit": "ratio",
+   "value": 1.5815417350372127
+  },
+  {
+   "as_of": "2025-08-05",
+   "dims": {},
+   "obs_ids": [
+    "ae5278061f1da61c",
+    "fecd07e2f7444679"
+   ],
+   "unit": "ratio",
+   "value": 1.3789614975368107
+  },
+  {
+   "as_of": "2025-08-07",
+   "dims": {},
+   "obs_ids": [
+    "261c1f51f1f6b138",
+    "47db79bda335bcb0"
+   ],
+   "unit": "ratio",
+   "value": 1.7058460637995485
+  },
+  {
+   "as_of": "2025-11-18",
+   "dims": {},
+   "obs_ids": [
+    "3466aea4ed2495c4",
+    "833be5d2cc9c9421"
+   ],
+   "unit": "ratio",
+   "value": 1.333812817515801
+  },
+  {
+   "as_of": "2025-11-19",
+   "dims": {},
+   "obs_ids": [
+    "8de1effa26863680",
+    "a2aa2e4df87f5448"
+   ],
+   "unit": "ratio",
+   "value": 1.4224000235885519
+  },
+  {
+   "as_of": "2025-11-24",
+   "dims": {},
+   "obs_ids": [
+    "72bcb9d860605a44",
+    "75c93027341be6a5"
+   ],
+   "unit": "ratio",
+   "value": 1.9081849629663097
+  },
+  {
+   "as_of": "2025-12-11",
+   "dims": {},
+   "obs_ids": [
+    "09061051488d31d8",
+    "8a2d699724cf4d5e"
+   ],
+   "unit": "ratio",
+   "value": 1.7180878964516375
+  },
+  {
+   "as_of": "2026-02-05",
+   "dims": {},
+   "obs_ids": [
+    "39c8213ab061a5f7",
+    "8f73b56b30434655"
+   ],
+   "unit": "ratio",
+   "value": 3.3116889915489973
+  },
+  {
+   "as_of": "2026-02-05",
+   "dims": {},
+   "obs_ids": [
+    "959db6dd7d0e15af",
+    "e466aae4890e8f57"
+   ],
+   "unit": "ratio",
+   "value": 2.055615489343418
+  },
+  {
+   "as_of": "2026-02-19",
+   "dims": {},
+   "obs_ids": [
+    "2eb7c897f31e5b3e",
+    "5eb0848814989421"
+   ],
+   "unit": "ratio",
+   "value": 1.377117304453394
+  },
+  {
+   "as_of": "2026-03-05",
+   "dims": {},
+   "obs_ids": [
+    "11a8bbd24c5c99cb",
+    "858c619bbf5d9edd"
+   ],
+   "unit": "ratio",
+   "value": 2.041907903134605
+  }
+ ],
+ "stale_as_of": null,
+ "stale_ok": false,
+ "stale_reason": null,
+ "status": "consistent_with_normal",
+ "status_events": [
+  {
+   "author": "evaluate",
+   "created_at": "2026-09-10T06:49:59.632515Z",
+   "evidence_ids": [
+    "11a8bbd24c5c99cb",
+    "858c619bbf5d9edd"
+   ],
+   "id": "7331962af85db506",
+   "new_conf": 60,
+   "new_status": "consistent_with_normal",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "Evaluator: 2.042 (METR time horizons (v1.1), 2026-03-05) is inside the consistent band (lo=1.5 ). Auto-reason; band rationale: Normal = misfit of 1.5 or more (observed ratios of 5-10x against the constant-hazard 3.1x, the pattern since 2024); fast = within 10% of the constant-hazard prediction, which would mean long-task reliability tracking short-task success. Between is emerging.",
+   "target_id": "ord_half_life_misfit",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": null,
+ "tracker_interpretation": "Two points per model; the constant-hazard model is the null hypothesis, not a claim about how models fail.",
+ "unit": "ratio",
+ "unpublished_reason": null,
+ "updated_at": "2026-09-11",
+ "valve_measured": "invention_to_product",
+ "why_it_matters": "Reports Ord's reframing alongside the horizons, as the brief asks: a misfit near 1 means success decays at a constant rate with task length; well above 1 means reliability collapses faster at long horizons, which is the capability-reliability gap in one number."
+}

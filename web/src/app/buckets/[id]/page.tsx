@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { IndicatorCard } from "@/components/IndicatorCard";
-import { bucket, index, obsIndex } from "@/lib/data";
+import { LadderView } from "@/components/LadderView";
+import { bucket, index, ladder, obsIndex } from "@/lib/data";
 
 export const dynamicParams = false;
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
@@ -29,6 +30,12 @@ export default async function BucketPage({ params }: { params: Promise<{ id: str
         <h2 className="text-sm font-medium text-ink-2 mb-2">Indicators</h2>
         {b.indicators.length ? <div className="grid gap-3 md:grid-cols-2">{b.indicators.map((c) => <IndicatorCard key={c.id} c={c} obsIndex={idx} />)}</div> : <p className="text-sm text-muted">None published yet.</p>}
       </section>
+      {id === "return_arrow" ? (
+        <section>
+          <h2 className="text-sm font-medium text-ink-2 mb-2">Continual-learning ladder</h2>
+          <LadderView doc={ladder()} obsIndex={idx} />
+        </section>
+      ) : null}
       <section>
         <h2 className="text-sm font-medium text-ink-2 mb-2">Crosswalk to the capture lens</h2>
         <ul className="text-sm flex flex-col gap-1.5">

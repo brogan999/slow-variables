@@ -1,0 +1,194 @@
+{
+ "band_input": "menlo.us_enterprise.startup_app_revenue_share.fy",
+ "band_rationale": null,
+ "band_value": {
+  "as_of": "2025-12-31",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "6cc13c311340cd50"
+  ],
+  "value": 0.63
+ },
+ "bucket_id": null,
+ "cadence_expected": "annual",
+ "confidence": 50,
+ "counterevidence": "One survey of buyers; revenue share is not margin share; incumbents' embedded AI features are excluded by Menlo's scope.",
+ "crosswalk": [],
+ "definition": "Share of enterprise generative-AI application revenue earned by startups rather than incumbents, from Menlo Ventures' annual buyer survey.",
+ "derived": [],
+ "direction": null,
+ "direction_rule": {
+  "dead_band": 0.05,
+  "higher_is": "dispersing",
+  "periods": 1,
+  "rationale": "Two annual waves, so the trend is one step; under five points is survey error. Rising startup share = value dispersing away from incumbents."
+ },
+ "evidence": [],
+ "falsifying_band": null,
+ "fast_band": null,
+ "fits": [],
+ "flow_status": null,
+ "grade": "B",
+ "id": "startup_share_of_app_revenue",
+ "latest": {
+  "as_of": "2025-12-31",
+  "disputed": false,
+  "grade": "B",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "6cc13c311340cd50"
+  ],
+  "series_key": "menlo.us_enterprise.startup_app_revenue_share.fy",
+  "subject": "us_enterprise",
+  "unit": "share",
+  "value": 0.63
+ },
+ "layer_id": "deployment_application",
+ "leading_lagging": "coincident",
+ "metric": null,
+ "metric_dims": {},
+ "n_observations": 2,
+ "name": "Startups' share of enterprise AI application revenue",
+ "normal_band": null,
+ "override_note": null,
+ "points": [
+  {
+   "as_of": "2024-12-31",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "8d364969e3da2a27"
+   ],
+   "series_key": "menlo.us_enterprise.startup_app_revenue_share.fy",
+   "subject": "us_enterprise",
+   "unit": "share",
+   "value": 0.36
+  },
+  {
+   "as_of": "2025-12-31",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "6cc13c311340cd50"
+   ],
+   "series_key": "menlo.us_enterprise.startup_app_revenue_share.fy",
+   "subject": "us_enterprise",
+   "unit": "share",
+   "value": 0.63
+  }
+ ],
+ "proposed_status": "emerging",
+ "proxy_types": [
+  "market_structure"
+ ],
+ "published": true,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "enterprise_spend_by_layer",
+  "saas_multiples"
+ ],
+ "related_metrics": [],
+ "related_predictions": [],
+ "series": [
+  {
+   "points": [
+    {
+     "as_of": "2024-12-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "8d364969e3da2a27"
+     ],
+     "series_key": "menlo.us_enterprise.startup_app_revenue_share.fy",
+     "subject": "us_enterprise",
+     "unit": "share",
+     "value": 0.36
+    },
+    {
+     "as_of": "2025-12-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "6cc13c311340cd50"
+     ],
+     "series_key": "menlo.us_enterprise.startup_app_revenue_share.fy",
+     "subject": "us_enterprise",
+     "unit": "share",
+     "value": 0.63
+    }
+   ],
+   "series_key": "menlo.us_enterprise.startup_app_revenue_share.fy"
+  }
+ ],
+ "series_keys": [
+  "menlo.us_enterprise.startup_app_revenue_share.fy"
+ ],
+ "sparkline": [
+  {
+   "as_of": "2024-12-31",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "8d364969e3da2a27"
+   ],
+   "series_key": "menlo.us_enterprise.startup_app_revenue_share.fy",
+   "subject": "us_enterprise",
+   "unit": "share",
+   "value": 0.36
+  },
+  {
+   "as_of": "2025-12-31",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "6cc13c311340cd50"
+   ],
+   "series_key": "menlo.us_enterprise.startup_app_revenue_share.fy",
+   "subject": "us_enterprise",
+   "unit": "share",
+   "value": 0.63
+  }
+ ],
+ "stale_as_of": null,
+ "stale_ok": false,
+ "stale_reason": null,
+ "status": "emerging",
+ "status_events": [
+  {
+   "author": "evaluate",
+   "created_at": "2026-09-10T06:50:36.329552Z",
+   "evidence_ids": [
+    "6cc13c311340cd50"
+   ],
+   "id": "38272114124823fe",
+   "new_conf": 50,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "Menlo Ventures' buyer survey: startups earned 36% of enterprise generative-AI application revenue in 2024 and 63% in 2025 (nearly $2 for every $1 earned by incumbents), a 27-point move against a five-point dead band, so the direction reads dispersing away from incumbents. Capped at emerging because Menlo is the only source and a survey is tier 6. Initial seed.",
+   "target_id": "startup_share_of_app_revenue",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": null,
+ "tracker_interpretation": "Startups went from a third of application revenue in 2024 to nearly two thirds in 2025 in Menlo's sample; one survey, so read as a direction.",
+ "unit": "share",
+ "unpublished_reason": null,
+ "updated_at": "2026-09-11",
+ "valve_measured": null,
+ "why_it_matters": "Whether incumbents with distribution keep the application layer or startups take it is the Teece question at the top of the stack; Menlo's survey is the only published split."
+}

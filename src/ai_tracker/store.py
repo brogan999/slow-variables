@@ -14,6 +14,7 @@ import duckdb
 import yaml
 
 from .schema import (
+    UNSCORED,
     Bottleneck,
     Bucket,
     CompareRow,
@@ -376,7 +377,9 @@ class Store:
                 out / "buckets" / f"{b.id}.json",
                 {
                     **dump(b),
-                    "indicators": [cards[i.id] for i in self.seed.indicators if i.bucket_id == b.id],
+                    "indicators": [
+                        cards[i.id] for i in self.seed.indicators if i.bucket_id == b.id and i.published
+                    ],
                     "crosswalk": [dump(c) for c in self.seed.crosswalk if c.bucket_id == b.id],
                 },
             )
@@ -386,7 +389,9 @@ class Store:
                 {
                     **dump(layer),
                     "sublayers": [dump(s) for s in self.seed.sublayers if s.layer_id == layer.id],
-                    "indicators": [cards[i.id] for i in self.seed.indicators if i.layer_id == layer.id],
+                    "indicators": [
+                        cards[i.id] for i in self.seed.indicators if i.layer_id == layer.id and i.published
+                    ],
                     "crosswalk": [dump(c) for c in self.seed.crosswalk if c.layer_id == layer.id],
                 },
             )
@@ -404,10 +409,23 @@ class Store:
                 "as_of": as_of_c,
                 "recent_status_events": recent,
                 "margin_shares": self._margin_shares(),
+                "margin_stack_series": [
+                    {
+                        "as_of": d.as_of_date.isoformat(),
+                        "layer_id": d.dims.get("layer_id"),
+                        "value": d.value,
+                        "obs_ids": d.input_observation_ids,
+                    }
+                    for d in self.derived_for("margin_stack_share_by_layer")
+                ],
                 "layers": [
                     {
                         **dump(layer),
-                        "indicators": [cards[i.id] for i in self.seed.indicators if i.layer_id == layer.id],
+                        "indicators": [
+                            cards[i.id]
+                            for i in self.seed.indicators
+                            if i.layer_id == layer.id and i.published
+                        ],
                     }
                     for layer in self.seed.layers
                 ],
@@ -446,6 +464,7 @@ class Store:
         )
         _write(out / "ledger.json", self._ledger())
         _write(out / "stack.json", self._stack(cards))
+        _write(out / "lens" / "ladder.json", self._ladder())
         (out / "venture").mkdir(parents=True, exist_ok=True)
         for sub_id, doc in self._venture().items():
             _write(out / "venture" / f"{sub_id}.json", doc)
@@ -618,6 +637,43 @@ class Store:
             ]
         }
 
+    def _ladder(self) -> dict[str, Any]:
+        """Appendix E rungs with the production and research rows that sit on each, plus the current level."""
+        rungs = (yaml.safe_load((SEED / "ladder.yaml").read_text()) or {}).get("rungs", [])
+        rows = self.con.execute(
+            "SELECT id, series_key, entity_id, as_of_date, value_numeric, tier, url, raw_snippet FROM observations "
+            "WHERE series_key LIKE 'cl_ladder.%' ORDER BY as_of_date"
+        ).fetchall()
+
+        def at(level: int, research: bool) -> list[dict[str, Any]]:
+            return [
+                {
+                    "obs_id": r[0],
+                    "subject": r[1].split(".")[1],
+                    "entity_id": r[2],
+                    "as_of": r[3].isoformat(),
+                    "tier": r[5],
+                    "url": r[6],
+                    "snippet": r[7],
+                }
+                for r in rows
+                if r[4] == level and r[1].endswith(".rung_research.pt") == research
+            ]
+
+        cur = self.derived_for("continual_learning_level")
+        return {
+            "current": {
+                "value": cur[-1].value,
+                "as_of": cur[-1].as_of_date.isoformat(),
+                "obs_ids": cur[-1].input_observation_ids,
+            }
+            if cur
+            else None,
+            "rungs": [
+                {**r, "production": at(r["level"], False), "research": at(r["level"], True)} for r in rungs
+            ],
+        }
+
     def _venture(self) -> dict[str, dict[str, Any]]:
         """Per sub-layer: quarterly venture dollars and round counts from the derived rows, for the flow strip."""
         out: dict[str, dict[str, Any]] = {}
@@ -765,9 +821,14 @@ def _grade(t: Tier) -> str:
 
 
 def _summarise(cards: list[dict[str, Any]]) -> str:
+    """Mode of the scored statuses; unscored ones (emerging, not yet measurable) never outvote a scored reading."""
     statuses = [c["status"] for c in cards if c.get("status")]
     if not statuses:
         return "unmeasured"
+    scored = [x for x in statuses if x not in UNSCORED]
+    if not scored:
+        return "emerging" if "emerging" in statuses else statuses[0]
+    statuses = scored
     counts = sorted(((statuses.count(x), x) for x in set(statuses)), reverse=True)
     if len(counts) > 1 and counts[0][0] == counts[1][0]:
         return "mixed"  # no majority: say so rather than pick one

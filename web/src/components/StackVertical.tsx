@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Card, Layer, MarginShare } from "@/lib/data";
-import { fmt, words } from "@/lib/format";
+import { fmt, summarise, words } from "@/lib/format";
 import { StatusChip } from "./StatusChip";
 
 // The stack as one vertical: bar width = the layer's share of filed segment operating income (where a filed series
@@ -13,7 +13,7 @@ export function StackVertical({ layers, shares, obsIndex }: { layers: (Layer & {
       {layers.map((l) => {
         const published = l.indicators.filter((i) => i.published);
         const statuses = published.map((i) => i.status).filter(Boolean) as string[];
-        const summary = statuses.length ? statuses.sort((a, b) => statuses.filter((s) => s === b).length - statuses.filter((s) => s === a).length)[0] : null;
+        const summary = summarise(statuses);
         const s = share(l.id);
         const width = s !== undefined ? Math.max(12, s * 100) : 6;
         return (

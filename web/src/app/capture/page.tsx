@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { ChangelogList } from "@/components/Changelog";
 import { IndicatorCard } from "@/components/IndicatorCard";
+import { MarginStackChart } from "@/components/MarginStackChart";
 import { StackVertical } from "@/components/StackVertical";
 import { StatusChip } from "@/components/StatusChip";
 import { capture, obsIndex } from "@/lib/data";
+import { summarise } from "@/lib/format";
 
 export const metadata = { title: "Capture lens" };
 
@@ -20,11 +22,15 @@ export default function CaptureLens() {
         <p className="mt-2 max-w-3xl text-lg leading-snug">Who keeps the surplus, layer by layer. The compute layer's bar is sized by its filed segment operating income; a layer without a filed margin series shows a hairline, and its indicators carry the reading.</p>
       </section>
       <StackVertical layers={c.layers} shares={c.margin_shares} obsIndex={idx} />
+      <section>
+        <h2 className="text-sm font-medium text-ink-2 mb-2">Margin stack by quarter <span className="text-muted">· share of filed segment operating income</span></h2>
+        <MarginStackChart rows={c.margin_stack_series} obsIndex={idx} />
+      </section>
       <ol className="flex flex-col gap-3">
         {c.layers.map((l) => {
           const published = l.indicators.filter((i) => i.published);
           const statuses = published.map((i) => i.status).filter(Boolean) as string[];
-          const summary = statuses.length ? statuses.sort((a, b) => statuses.filter((s) => s === b).length - statuses.filter((s) => s === a).length)[0] : null;
+          const summary = summarise(statuses);
           return (
             <li key={l.id} className="rounded-lg bg-surface ring-hair p-4">
               <div className="flex flex-wrap items-center gap-3">

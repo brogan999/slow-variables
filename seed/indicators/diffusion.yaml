@@ -445,6 +445,229 @@ indicators:
     related_indicators: [metr_horizon_50]
     published: true
     updated_at: 2026-09-11
+  - id: continual_learning_level
+    name: Continual-learning ladder (highest production rung)
+    definition: "The highest rung of the continual-learning ladder (L0 static snapshot to L6 six-month-employee test) with a shipped production system on record, from dated rows citing the vendor's or lab's own description. Derived metric continual_learning_level."
+    why_it_matters: "The crux of the timelines argument. If systems learn on the job, deployment feeds invention automatically and the return arrow stops depending on human-data vendors; Narayanan and Kapoor's speed limits assume it stays unsolved."
+    proxy_types: [product, model_release]
+    unit: rung
+    cadence_expected: quarterly
+    metric: continual_learning_level
+    band_input: "metric:continual_learning_level"
+    bucket_id: return_arrow
+    valve_measured: return_arrow
+    normal_band: {hi: 3}
+    fast_band: {lo: 5}
+    band_rationale: "Appendix E's rule: L0-L3 (memory, population-level online learning, per-customer adapters) is normal; L5-L6 (persistent per-session weight updates, the six-month-employee test) is fast; L4 (organisation knowledge in weights) is emerging."
+    tracker_interpretation: "Rows are vendors describing their own systems; the rung is what they claim to ship, not what an independent evaluation found."
+    counterevidence: "Every production row is tier 7 (self-described); research results are kept off the level; no public benchmark exists for L6, so the top rung cannot be reached by construction until one does."
+    layer_id: training_input
+    sublayer_id: post_training
+    leading_lagging: leading
+    confidence: 45
+    proposed_status: consistent_with_normal
+    related_indicators: [rsi_agent_workdays_per_human, expert_data_market_run_rate]
+    published: false
+    unpublished_reason: "Waiting on the first verified production rows (vendor posts fetched and quoted verbatim); the ladder definitions and the metric are in place."
+    updated_at: 2026-09-11
+  - id: fda_ai_devices_cumulative
+    name: FDA-authorised AI-enabled devices, growth
+    definition: "Year-on-year growth in the cumulative count of AI-enabled medical devices with an FDA final decision, from the FDA's published list. Derived metric fda_ai_devices_yoy."
+    why_it_matters: "The clearest regulated-domain speed limit with an official monthly series; the paper predicts slow diffusion in high-consequence tasks and this is the count of what gets through."
+    proxy_types: [policy]
+    unit: pct_change_yoy
+    cadence_expected: quarterly
+    metric: fda_ai_devices_yoy
+    band_input: "metric:fda_ai_devices_yoy"
+    bucket_id: adaptation
+    valve_measured: adoption_to_adaptation
+    normal_band: {hi: 50}
+    fast_band: {lo: 100}
+    band_rationale: "Normal = the cumulative count growing under 50% a year (the 2019-2024 pace); fast = doubling or faster, which is what an ungated regulated domain would show. Between is emerging."
+    tracker_interpretation: "Authorisations are mostly radiology CAD tools; the list says what clears review, not what is used at the bedside."
+    counterevidence: "The list is updated in batches and reclassified; a cleared device is not a deployed one; LLM-based devices are a handful at most."
+    layer_id: adopters
+    leading_lagging: coincident
+    confidence: 70
+    proposed_status: consistent_with_normal
+    related_indicators: [safety_brake_events, state_ai_bills_introduced]
+    published: true
+    updated_at: 2026-09-11
+  - id: state_ai_bills_introduced
+    name: US state AI bills introduced (legislative year)
+    definition: "Count of state bills in NCSL's artificial-intelligence legislation tracker for the legislative year, with the enacted subset alongside."
+    why_it_matters: "The institutional response the paper expects to lag deployment; volume says attention, enactments say binding rules."
+    proxy_types: [policy]
+    unit: count
+    cadence_expected: annual
+    series_keys: ["ncsl.us.ai_bills_introduced.a", "ncsl.us.ai_bills_enacted.a"]
+    band_input: ncsl.us.ai_bills_introduced.a
+    bucket_id: adaptation
+    valve_measured: adoption_to_adaptation
+    normal_band: {lo: 500}
+    fast_band: {hi: 200}
+    band_rationale: "Normal = five hundred or more bills a year (the 2024-2025 volume, legislatures reacting at their own speed); fast = under two hundred, legislatures standing aside. Between is emerging."
+    tracker_interpretation: "Counted from NCSL's table, so scraped and pending until a human merges; bills are not laws."
+    counterevidence: "A single tracker's classification; introduced bills are cheap signals; the enacted count is the one that binds."
+    layer_id: adopters
+    leading_lagging: lagging
+    confidence: 55
+    proposed_status: consistent_with_normal
+    related_indicators: [fda_ai_devices_cumulative]
+    published: true
+    updated_at: 2026-09-11
+  - id: rl_environment_vendor_count
+    name: Active RL-environment vendors (directory count)
+    definition: "Active commercial vendors in rl-list.com's directory of reinforcement-learning environment suppliers, at each directory release."
+    why_it_matters: "The return arrow's supply side: environments are how deployment feedback becomes training signal today, and the vendor count is the only public series on that market."
+    proxy_types: [market_structure]
+    unit: count
+    cadence_expected: quarterly
+    series_keys: ["rl_list.commercial.active_vendor_count.pt"]
+    band_input: rl_list.commercial.active_vendor_count.pt
+    bucket_id: return_arrow
+    valve_measured: return_arrow
+    normal_band: {hi: 60}
+    fast_band: {lo: 150}
+    band_rationale: "Normal = a few dozen vendors (a specialist market); fast = 150 or more (a commodity market forming in months). Between is emerging."
+    tracker_interpretation: "A directory maintained by one person; the count is a floor and the 'active' tag is self-reported by vendors."
+    counterevidence: "Directory coverage and confidence tags are uneven; count says nothing about revenue, which is where the labs' procurement shows."
+    layer_id: training_input
+    sublayer_id: rl_environments
+    leading_lagging: leading
+    confidence: 35
+    proposed_status: consistent_with_normal
+    related_indicators: [continual_learning_level]
+    published: true
+    updated_at: 2026-09-11
+  - id: ord_half_life_misfit
+    name: Ord half-life misfit (observed 50/80 ratio vs constant hazard)
+    definition: "The observed ratio of METR's 50% to 80% horizons divided by 3.11, the ratio a constant task-length hazard (Ord's half-life model) predicts. Derived metric ord_half_life_misfit."
+    why_it_matters: "Reports Ord's reframing alongside the horizons, as the brief asks: a misfit near 1 means success decays at a constant rate with task length; well above 1 means reliability collapses faster at long horizons, which is the capability-reliability gap in one number."
+    proxy_types: [benchmark]
+    unit: ratio
+    cadence_expected: per_release
+    metric: ord_half_life_misfit
+    band_input: "metric:ord_half_life_misfit"
+    bucket_id: methods
+    valve_measured: invention_to_product
+    normal_band: {lo: 1.5}
+    fast_band: {hi: 1.1}
+    band_rationale: "Normal = misfit of 1.5 or more (observed ratios of 5-10x against the constant-hazard 3.1x, the pattern since 2024); fast = within 10% of the constant-hazard prediction, which would mean long-task reliability tracking short-task success. Between is emerging."
+    tracker_interpretation: "Two points per model; the constant-hazard model is the null hypothesis, not a claim about how models fail."
+    counterevidence: "The 80% horizon has wider CIs than the 50%; METR's suite ceiling censors the newest models; a misfit can shrink because the 50% horizon stalls, not because reliability improves."
+    layer_id: model
+    leading_lagging: leading
+    confidence: 60
+    proposed_status: consistent_with_normal
+    related_indicators: [horizon_ratio_80_50, metr_horizon_80]
+    published: true
+    updated_at: 2026-09-11
+  - id: fda_first_llm_device
+    name: "First FDA-authorised LLM-based device"
+    definition: "Whether the FDA has authorised a device whose core function is a large language model, and when."
+    why_it_matters: "The first LLM device through review is the moment the regulated-domain speed limit meets the technology the paper is about."
+    proxy_types: [policy]
+    unit: share
+    cadence_expected: quarterly
+    bucket_id: adaptation
+    valve_measured: adoption_to_adaptation
+    normal_band: {hi: 1}
+    fast_band: {lo: 1}
+    band_rationale: "Placeholder until the series exists; bands are set with the first observation."
+    tracker_interpretation: "Unpublished; see the reason."
+    unpublished_reason: "Not yet verifiable: the brief names UpDoc K253281 (Dec 2025) but the submission is absent from the FDA's AI-enabled device list; a row needs the FDA decision document itself."
+    counterevidence: "Device classification lags product reality; a clearance is narrow."
+    layer_id: model
+    leading_lagging: leading
+    confidence: 20
+    proposed_status: not_yet_measurable
+    published: false
+    updated_at: 2026-09-11
+  - id: reliability_framework_adoption
+    name: "Reliability-science framework adoption"
+    definition: "Whether labs report reliability along the four-dimension framework (consistency, robustness, calibration, operational safety) in system cards."
+    why_it_matters: "The 70% problem (70% of tasks always versus every task 70% of the time) only becomes trackable once labs report reliability, not accuracy."
+    proxy_types: [model_release]
+    unit: share
+    cadence_expected: quarterly
+    bucket_id: products
+    valve_measured: invention_to_product
+    normal_band: {hi: 1}
+    fast_band: {lo: 1}
+    band_rationale: "Placeholder until the series exists; bands are set with the first observation."
+    tracker_interpretation: "Unpublished; see the reason."
+    unpublished_reason: "Not measurable as a number: adoption is a yes/no per system card, recorded as evidence rows rather than a series."
+    counterevidence: "A framework named in a card is not a metric published."
+    layer_id: model
+    leading_lagging: leading
+    confidence: 20
+    proposed_status: not_yet_measurable
+    published: false
+    updated_at: 2026-09-11
+  - id: agent_calibration
+    name: "Agent calibration"
+    definition: "Calibration of agents' confidence against outcomes on public agent benchmarks."
+    why_it_matters: "Calibration is self-monitoring, the reliability dimension that lets a human trust when not to check."
+    proxy_types: [benchmark]
+    unit: share
+    cadence_expected: quarterly
+    bucket_id: products
+    valve_measured: invention_to_product
+    normal_band: {hi: 1}
+    fast_band: {lo: 1}
+    band_rationale: "Placeholder until the series exists; bands are set with the first observation."
+    tracker_interpretation: "Unpublished; see the reason."
+    unpublished_reason: "Not measurable yet: no public leaderboard reports calibration for agents; HAL and tau-bench report success, not confidence."
+    counterevidence: "Calibration on a benchmark is not calibration in deployment."
+    layer_id: model
+    leading_lagging: leading
+    confidence: 20
+    proposed_status: not_yet_measurable
+    published: false
+    updated_at: 2026-09-11
+  - id: agent_operational_safety
+    name: "Agent operational safety incidents"
+    definition: "Rate of destructive actions by deployed agents ('deleted the production database') from incident reports."
+    why_it_matters: "Operational safety is the fourth reliability dimension and the one that connects to bottleneck 65."
+    proxy_types: [behaviour]
+    unit: share
+    cadence_expected: quarterly
+    bucket_id: products
+    valve_measured: invention_to_product
+    normal_band: {hi: 1}
+    fast_band: {lo: 1}
+    band_rationale: "Placeholder until the series exists; bands are set with the first observation."
+    tracker_interpretation: "Unpublished; see the reason."
+    unpublished_reason: "Not measurable yet: incidents are anecdotal; no incident registry with a denominator exists."
+    counterevidence: "Reported incidents are a biased sample of all incidents."
+    layer_id: model
+    leading_lagging: leading
+    confidence: 20
+    proposed_status: not_yet_measurable
+    published: false
+    updated_at: 2026-09-11
+  - id: deployment_data_share_of_training
+    name: "Deployment data share of training"
+    definition: "Share of frontier training data that comes from deployment feedback rather than curated corpora."
+    why_it_matters: "The return arrow's throughput in one number."
+    proxy_types: [model_release]
+    unit: share
+    cadence_expected: quarterly
+    bucket_id: return_arrow
+    valve_measured: return_arrow
+    normal_band: {hi: 1}
+    fast_band: {lo: 1}
+    band_rationale: "Placeholder until the series exists; bands are set with the first observation."
+    tracker_interpretation: "Unpublished; see the reason."
+    unpublished_reason: "Not measurable: no lab discloses the provenance mix of its training data; recorded only if a system card states it."
+    counterevidence: "Labs have every reason not to disclose it."
+    layer_id: model
+    leading_lagging: leading
+    confidence: 20
+    proposed_status: not_yet_measurable
+    published: false
+    updated_at: 2026-09-11
   - id: canaries_exposed_employment_yoy
     name: Employment in AI-exposed occupations, year on year
     definition: Year-on-year employment change in the most AI-exposed occupation quintile versus the least exposed, from the Stanford DEL and ADP Research Canaries Dashboard (payroll data). The band applies to the most-exposed series.

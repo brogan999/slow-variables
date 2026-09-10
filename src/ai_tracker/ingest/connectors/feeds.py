@@ -55,7 +55,7 @@ def parse_feed(body: bytes) -> list[tuple[str, str, str, date | None, str]]:
 
 class Feeds(Connector):
     source_id = "feeds"
-    kind = "api"
+    kind = "api"  # feed rows; html page-watch rows are robots-checked per URL in fetch
 
     def __init__(self, path: Path = Path("seed/sources.yaml")) -> None:
         super().__init__()
@@ -66,6 +66,28 @@ class Feeds(Connector):
     def extract(self, items: list[RawItem]) -> list[Observation]:
         out: list[Observation] = []
         for src, item in zip(self.sources, items):
+            if (
+                src.kind.value == "html"
+            ):  # page watch: a blog with no feed; one row per content change, keyed by hash
+                text = normalise(html_to_text(item.body.decode("utf-8", "ignore")))
+                for slug, pattern in src.watch.items():
+                    if re.search(pattern, text, re.I):
+                        out.append(
+                            self.obs(
+                                item,
+                                source_id=src.id,
+                                series_key=f"watch.{src.id}.{slug}.pt",
+                                unit="page",
+                                as_of_date=item.retrieved_at.date(),
+                                published_date=item.retrieved_at.date(),
+                                value_text=f"page changed; matches {slug} (content hash {item.content_hash[:12]})",
+                                tier=src.default_tier,
+                                audited_vs_reported=Basis.reported,
+                                extraction_method=Extraction.scrape,
+                                raw_snippet=text[:200],
+                            )
+                        )
+                continue
             posts = parse_feed(item.body)
             if not posts:
                 self.errors.append(f"{src.id}: feed parsed to 0 posts")

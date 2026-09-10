@@ -439,3 +439,202 @@ indicators:
     related_indicators: [semis_rent_concentration, semis_hhi]
     published: true
     updated_at: 2026-09-11
+  - id: capex_to_revenue_stack
+    name: Hyperscaler capex to AI revenue (trailing year)
+    definition: "Trailing four quarters of filed capex at Microsoft, Alphabet, Amazon, Meta and Oracle divided by AI revenue, taken as the frontier labs' latest run-rates plus Menlo's enterprise generative-AI spend. Derived metric capex_to_revenue_stack."
+    why_it_matters: "Sequoia's $600B question as a ratio: how far the buildout runs ahead of the revenue that has to repay it. Investment-phase accounting or evidence of no capture; the ratio cannot tell you which, only whether it is closing."
+    proxy_types: [capital_flow]
+    unit: ratio
+    cadence_expected: quarterly
+    metric: capex_to_revenue_stack
+    band_input: "metric:capex_to_revenue_stack"
+    layer_id: compute_physical
+    sublayer_id: hyperscalers_neoclouds
+    direction_rule: {periods: 4, dead_band: 0.3, higher_is: concentrating, rationale: "Four quarters; a move under 0.3x is run-rate noise. Rising = capex pulling further ahead of revenue (the bet growing); falling = revenue catching the buildout."}
+    leading_lagging: leading
+    tracker_interpretation: "Hyperscaler capex is not all AI and the revenue side mixes annualised run-rates with one annual survey, so read the direction, not the level; grade C by construction."
+    counterevidence: "Both sides are approximations: capex includes non-AI spend and the revenue side double-counts enterprise purchases from labs; a ratio of filed capex to press-reported run-rates is the brief's own 'gap #1' caveat."
+    confidence: 40
+    proposed_status: concentrating
+    related_indicators: [circular_financing_scale, cloud_rpo_backlog, lab_valuation_to_run_rate]
+    published: true
+    updated_at: 2026-09-11
+  - id: depreciation_useful_life_changes
+    name: "Hyperscaler server useful-life changes"
+    definition: "Changes to the estimated useful life of servers and network equipment disclosed in hyperscaler 10-Ks, which extend or shorten depreciation and move reported margins."
+    why_it_matters: "A change flatters or hurts margins by billions; the direction of the change is what matters."
+    proxy_types: [capital_flow]
+    unit: ratio
+    cadence_expected: quarterly
+    layer_id: compute_physical
+    sublayer_id: hyperscalers_neoclouds
+    direction_rule: {periods: 4, dead_band: 0.05, higher_is: concentrating, rationale: "Placeholder until the series exists; bands are set with the first observation."}
+    leading_lagging: leading
+    tracker_interpretation: "Unpublished; see the reason."
+    unpublished_reason: "Not measurable from the XBRL company-facts API: useful-life facts are not tagged for servers (only decade-old PP&E ranges); each change must be quoted verbatim from a 10-K note, and no row has been entered yet."
+    counterevidence: "Nobody maintains this series; the brief calls it gap 3."
+    confidence: 20
+    proposed_status: not_yet_measurable
+    published: false
+    updated_at: 2026-09-11
+  - id: neocloud_debt_terms
+    name: "Neocloud borrowing cost"
+    definition: "Effective interest rates on CoreWeave's and peers' GPU-backed debt facilities, from 10-Q disclosures."
+    why_it_matters: "Rising borrowing cost with revenue concentrated in one or two labs means the neoclouds' rent is a quasi-rent exposed to hold-up."
+    proxy_types: [capital_flow]
+    unit: ratio
+    cadence_expected: quarterly
+    layer_id: compute_physical
+    sublayer_id: hyperscalers_neoclouds
+    direction_rule: {periods: 4, dead_band: 0.05, higher_is: concentrating, rationale: "Placeholder until the series exists; bands are set with the first observation."}
+    leading_lagging: leading
+    tracker_interpretation: "Unpublished; see the reason."
+    unpublished_reason: "Waiting on 10-Q rows: CoreWeave's debt notes state rates per facility and must be quoted verbatim; none entered yet."
+    counterevidence: "Facility rates are not a single number; refinancing changes the mix."
+    confidence: 20
+    proposed_status: not_yet_measurable
+    published: false
+    updated_at: 2026-09-11
+  - id: enterprise_multi_homing_share
+    name: "Enterprise multi-model usage share"
+    definition: "Share of enterprises using more than one model provider, from Menlo's annual survey."
+    why_it_matters: "Multi-homing shrinks lock-in, which shrinks the labs' bargaining share."
+    proxy_types: [market_structure]
+    unit: ratio
+    cadence_expected: quarterly
+    layer_id: model
+    sublayer_id: frontier_labs
+    direction_rule: {periods: 4, dead_band: 0.05, higher_is: concentrating, rationale: "Placeholder until the series exists; bands are set with the first observation."}
+    leading_lagging: leading
+    tracker_interpretation: "Unpublished; see the reason."
+    unpublished_reason: "Waiting on a verbatim row from Menlo's survey page; the figure exists but has not been fetched and quoted yet."
+    counterevidence: "Survey of buyers; usage share is not spend share."
+    confidence: 20
+    proposed_status: not_yet_measurable
+    published: false
+    updated_at: 2026-09-11
+  - id: startup_share_of_app_revenue
+    name: "Startups' share of enterprise AI application revenue"
+    definition: "Share of enterprise generative-AI application revenue earned by startups rather than incumbents, from Menlo Ventures' annual buyer survey."
+    why_it_matters: "Whether incumbents with distribution keep the application layer or startups take it is the Teece question at the top of the stack; Menlo's survey is the only published split."
+    proxy_types: [market_structure]
+    unit: share
+    cadence_expected: annual
+    series_keys: ["menlo.us_enterprise.startup_app_revenue_share.fy"]
+    band_input: menlo.us_enterprise.startup_app_revenue_share.fy
+    layer_id: deployment_application
+    direction_rule: {periods: 1, dead_band: 0.05, higher_is: dispersing, rationale: "Two annual waves, so the trend is one step; under five points is survey error. Rising startup share = value dispersing away from incumbents."}
+    leading_lagging: coincident
+    tracker_interpretation: "Startups went from a third of application revenue in 2024 to nearly two thirds in 2025 in Menlo's sample; one survey, so read as a direction."
+    counterevidence: "One survey of buyers; revenue share is not margin share; incumbents' embedded AI features are excluded by Menlo's scope."
+    confidence: 50
+    proposed_status: emerging
+    related_indicators: [enterprise_spend_by_layer, saas_multiples]
+    published: true
+    updated_at: 2026-09-11
+  - id: lab_gross_margin
+    name: "Frontier lab gross margin"
+    definition: "Reported gross margins of the frontier labs (the brief cites 40-60%)."
+    why_it_matters: "Whether the model layer keeps a software margin or a cloud margin decides whether it is a chokepoint or a commodity."
+    proxy_types: [price]
+    unit: ratio
+    cadence_expected: quarterly
+    layer_id: model
+    sublayer_id: frontier_labs
+    direction_rule: {periods: 4, dead_band: 0.05, higher_is: concentrating, rationale: "Placeholder until the series exists; bands are set with the first observation."}
+    leading_lagging: leading
+    tracker_interpretation: "Unpublished; see the reason."
+    unpublished_reason: "Not measurable from free sources: lab gross margins are reported only by The Information and Sacra behind paywalls; the paid stubs exist and are off."
+    counterevidence: "Reported by journalists, not auditors; inference cost accounting differs by lab."
+    confidence: 20
+    proposed_status: not_yet_measurable
+    published: false
+    updated_at: 2026-09-11
+  - id: compute_share_of_spend
+    name: "Compute share of lab spending"
+    definition: "Compute as a share of frontier labs' total spending (Epoch's estimate: 57-70%)."
+    why_it_matters: "The labs' cost structure is what decides whether falling token prices are passed through or absorbed."
+    proxy_types: [capital_flow]
+    unit: ratio
+    cadence_expected: quarterly
+    layer_id: model
+    sublayer_id: frontier_labs
+    direction_rule: {periods: 4, dead_band: 0.05, higher_is: concentrating, rationale: "Placeholder until the series exists; bands are set with the first observation."}
+    leading_lagging: leading
+    tracker_interpretation: "Unpublished; see the reason."
+    unpublished_reason: "Not measurable as a series: Epoch published a one-off estimate range, not a table; a manual row can carry the point estimate once quoted."
+    counterevidence: "One estimate; spending mix differs by lab and year."
+    confidence: 20
+    proposed_status: not_yet_measurable
+    published: false
+    updated_at: 2026-09-11
+  - id: app_gross_margin_net_of_inference
+    name: "Application gross margin net of inference (model tax)"
+    definition: "Application-layer gross margin after inference cost, constructed from reported ARR, token spend and unit inference costs (the brief's gap 4)."
+    why_it_matters: "The model tax in one number: whether falling token prices are retained by apps or passed through."
+    proxy_types: [price]
+    unit: ratio
+    cadence_expected: quarterly
+    layer_id: deployment_application
+    direction_rule: {periods: 4, dead_band: 0.05, higher_is: concentrating, rationale: "Placeholder until the series exists; bands are set with the first observation."}
+    leading_lagging: leading
+    tracker_interpretation: "Unpublished; see the reason."
+    unpublished_reason: "Not measurable from free sources: needs SemiAnalysis unit inference costs (paid) joined to reported ARR and Ramp token spend; the paid stub is off."
+    counterevidence: "Every input is private-company reporting."
+    confidence: 20
+    proposed_status: not_yet_measurable
+    published: false
+    updated_at: 2026-09-11
+  - id: gpu_rental_price_per_hour
+    name: "GPU rental price per hour"
+    definition: "Market rental price for H100-class GPUs per hour (SemiAnalysis index)."
+    why_it_matters: "The cloud layer's price per unit of compute; falling rental prices are the neoclouds' rent eroding."
+    proxy_types: [price]
+    unit: ratio
+    cadence_expected: quarterly
+    layer_id: compute_physical
+    sublayer_id: hyperscalers_neoclouds
+    direction_rule: {periods: 4, dead_band: 0.05, higher_is: concentrating, rationale: "Placeholder until the series exists; bands are set with the first observation."}
+    leading_lagging: leading
+    tracker_interpretation: "Unpublished; see the reason."
+    unpublished_reason: "Not measurable from free sources: the SemiAnalysis index is paywalled; the paid stub is off."
+    counterevidence: "Spot and contracted prices diverge; list prices are not transaction prices."
+    confidence: 20
+    proposed_status: not_yet_measurable
+    published: false
+    updated_at: 2026-09-11
+  - id: secondary_marks_between_rounds
+    name: "Secondary-market marks between rounds"
+    definition: "Implied valuations from secondary trades between primary rounds (Caplight, Forge, EquityZen)."
+    why_it_matters: "Marks between rounds show expected-rent repricing before the next primary round confirms it."
+    proxy_types: [capital_flow]
+    unit: ratio
+    cadence_expected: quarterly
+    layer_id: model
+    sublayer_id: frontier_labs
+    direction_rule: {periods: 4, dead_band: 0.05, higher_is: concentrating, rationale: "Placeholder until the series exists; bands are set with the first observation."}
+    leading_lagging: leading
+    tracker_interpretation: "Unpublished; see the reason."
+    unpublished_reason: "Not measurable from free sources: secondary marks are behind Caplight, Forge and EquityZen paywalls; the paid stub is off."
+    counterevidence: "Thin trades; marks reflect liquidity discounts."
+    confidence: 20
+    proposed_status: not_yet_measurable
+    published: false
+    updated_at: 2026-09-11
+  - id: revenue_per_employee_exposed_sectors
+    name: "Revenue per employee in AI-exposed sectors"
+    definition: "Revenue per employee in the sectors most exposed to AI, from public filings and BLS employment."
+    why_it_matters: "The cleanest capture signal for adopters: output per head rising where AI is used."
+    proxy_types: [welfare]
+    unit: ratio
+    cadence_expected: quarterly
+    layer_id: adopters
+    direction_rule: {periods: 4, dead_band: 0.05, higher_is: concentrating, rationale: "Placeholder until the series exists; bands are set with the first observation."}
+    leading_lagging: leading
+    tracker_interpretation: "Unpublished; see the reason."
+    unpublished_reason: "Not measurable yet: no free source pairs sector revenue with employee counts at a usable cadence; BLS industry mappings to exposure are unverified."
+    counterevidence: "Sector aggregates hide firm-level dispersion; revenue per head moves with prices and outsourcing."
+    confidence: 20
+    proposed_status: not_yet_measurable
+    published: false
+    updated_at: 2026-09-11

@@ -113,7 +113,7 @@ def normal_tech_falsified(d: Data) -> Verdict:
 
 def normal_tech_strengthened(d: Data) -> Verdict:
     r4 = d.metric_n("horizon_ratio_80_50", 4)
-    cl = d.series("*.continual_learning_level.pt")
+    cl = d.metric("continual_learning_level")
     conc4 = d.metric_n("cross_tracker_concordance", 4)
     conds = [
         Cond(
@@ -137,7 +137,7 @@ def normal_tech_strengthened(d: Data) -> Verdict:
         "Normal-technology thesis STRENGTHENED",
         _all(conds),
         conds,
-        "ratio non-decreasing AND ladder ≤ L4 AND four clean tracker releases (untestable until the continual-learning ladder series exists)",
+        "ratio non-decreasing AND ladder ≤ L4 AND four clean tracker releases",
     )
 
 

@@ -1,0 +1,161 @@
+{
+ "band_input": "rl_list.commercial.active_vendor_count.pt",
+ "band_rationale": "Normal = a few dozen vendors (a specialist market); fast = 150 or more (a commodity market forming in months). Between is emerging.",
+ "band_value": {
+  "as_of": "2026-07-15",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "9d5a213e73989490"
+  ],
+  "value": 24.0
+ },
+ "bucket_id": "return_arrow",
+ "cadence_expected": "quarterly",
+ "confidence": 35,
+ "counterevidence": "Directory coverage and confidence tags are uneven; count says nothing about revenue, which is where the labs' procurement shows.",
+ "crosswalk": [
+  {
+   "bucket_id": "return_arrow",
+   "layer_id": "training_input",
+   "note": "Expert data, RL environments and continual-learning infra are the deployment\u2192invention channel; lab recoupment \u21c4 capex-to-revenue.",
+   "relation": "return_arrow",
+   "shared_indicators": [],
+   "sublayer_id": null
+  }
+ ],
+ "definition": "Active commercial vendors in rl-list.com's directory of reinforcement-learning environment suppliers, at each directory release.",
+ "derived": [],
+ "direction": null,
+ "direction_rule": null,
+ "evidence": [],
+ "falsifying_band": null,
+ "fast_band": {
+  "hi": null,
+  "lo": 150.0
+ },
+ "fits": [],
+ "flow_status": null,
+ "grade": "B",
+ "id": "rl_environment_vendor_count",
+ "latest": {
+  "as_of": "2026-07-15",
+  "disputed": false,
+  "grade": "B",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "9d5a213e73989490"
+  ],
+  "series_key": "rl_list.commercial.active_vendor_count.pt",
+  "subject": "commercial",
+  "unit": "count",
+  "value": 24.0
+ },
+ "layer_id": "training_input",
+ "leading_lagging": "leading",
+ "metric": null,
+ "metric_dims": {},
+ "n_observations": 1,
+ "name": "Active RL-environment vendors (directory count)",
+ "normal_band": {
+  "hi": 60.0,
+  "lo": null
+ },
+ "override_note": null,
+ "points": [
+  {
+   "as_of": "2026-07-15",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "9d5a213e73989490"
+   ],
+   "series_key": "rl_list.commercial.active_vendor_count.pt",
+   "subject": "commercial",
+   "unit": "count",
+   "value": 24.0
+  }
+ ],
+ "proposed_status": "consistent_with_normal",
+ "proxy_types": [
+  "market_structure"
+ ],
+ "published": true,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "continual_learning_level"
+ ],
+ "related_metrics": [],
+ "related_predictions": [],
+ "series": [
+  {
+   "points": [
+    {
+     "as_of": "2026-07-15",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "9d5a213e73989490"
+     ],
+     "series_key": "rl_list.commercial.active_vendor_count.pt",
+     "subject": "commercial",
+     "unit": "count",
+     "value": 24.0
+    }
+   ],
+   "series_key": "rl_list.commercial.active_vendor_count.pt"
+  }
+ ],
+ "series_keys": [
+  "rl_list.commercial.active_vendor_count.pt"
+ ],
+ "sparkline": [
+  {
+   "as_of": "2026-07-15",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "9d5a213e73989490"
+   ],
+   "series_key": "rl_list.commercial.active_vendor_count.pt",
+   "subject": "commercial",
+   "unit": "count",
+   "value": 24.0
+  }
+ ],
+ "stale_as_of": null,
+ "stale_ok": false,
+ "stale_reason": null,
+ "status": "emerging",
+ "status_events": [
+  {
+   "author": "evaluate",
+   "created_at": "2026-09-10T06:44:07.374993Z",
+   "evidence_ids": [
+    "9d5a213e73989490"
+   ],
+   "id": "d7c0a996f57b8418",
+   "new_conf": 35,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "rl-list.com's directory (generated 15 Jul 2026) lists 24 active commercial RL-environment vendors of 38 entries, inside the normal band (a few dozen, a specialist market). A single directory maintained by one person, tier 6, so the status is capped at emerging. Initial seed.",
+   "target_id": "rl_environment_vendor_count",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": "rl_environments",
+ "tracker_interpretation": "A directory maintained by one person; the count is a floor and the 'active' tag is self-reported by vendors.",
+ "unit": "count",
+ "unpublished_reason": null,
+ "updated_at": "2026-09-11",
+ "valve_measured": "return_arrow",
+ "why_it_matters": "The return arrow's supply side: environments are how deployment feedback becomes training signal today, and the vendor count is the only public series on that market."
+}
