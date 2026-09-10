@@ -31,7 +31,7 @@ export function ChangelogByMonth({ events, obsIndex }: { events: StatusEvent[]; 
       {months.map((m, i) => {
         const items = events.filter((e) => e.created_at.startsWith(m));
         return (
-          <details key={m} open={i === 0} className="group rounded-lg bg-surface ring-hair p-3">
+          <details key={m} open={i === 0} className="group panel p-3">
             <summary className="cursor-pointer list-none text-sm font-medium"><span className="text-muted mr-2 inline-block transition-transform group-open:rotate-90">▸</span>{m} <span className="text-muted font-normal">· {items.length} change{items.length === 1 ? "" : "s"}</span></summary>
             <div className="mt-3"><ChangelogList events={items} obsIndex={obsIndex} /></div>
           </details>

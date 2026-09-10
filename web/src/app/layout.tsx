@@ -4,7 +4,8 @@ import Link from "next/link";
 import "./globals.css";
 import { ChatDrawer } from "@/components/ChatDrawer";
 import { Freshness } from "@/components/Freshness";
-import { NavLinks } from "@/components/NavLinks";
+import { SiteNav } from "@/components/SiteNav";
+import { ABOUT } from "@/lib/nav";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { meta } from "@/lib/data";
 import { SITE } from "@/lib/site";
@@ -22,10 +23,6 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title: SITE.name, description: SITE.description },
 };
 
-const NAV = [
-  ["/", "Diffusion"], ["/capture", "Capture"], ["/memos", "Memos"], ["/stack", "Stack"], ["/indicators", "Indicators"], ["/predictions", "Predictions"], ["/compare", "Compare"], ["/bottlenecks", "Bottlenecks"], ["/ledger", "Ledger"], ["/crosswalk", "Crosswalk"], ["/query", "Query"],
-  ["/sources", "Sources"], ["/methodology", "Methodology"], ["/changelog", "Changelog"],
-] as const;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const generated = meta().generated_at;
@@ -35,22 +32,27 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
         <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-50 focus:rounded focus:bg-surface focus:px-3 focus:py-1 focus:ring-hair">Skip to content</a>
         <header className="border-b border-grid">
-          <div className="mx-auto max-w-5xl px-4 py-3 flex items-baseline gap-x-5">
-            <Link href="/" className="display text-xl tracking-tight shrink-0">{SITE.name}</Link>
-            <nav aria-label="Primary" className="min-w-0 flex-1 flex gap-x-4 text-sm text-ink-2 overflow-x-auto whitespace-nowrap md:flex-wrap md:whitespace-normal md:gap-y-1 -mx-1 px-1">
-              <NavLinks items={NAV} />
-            </nav>
-            <ChatDrawer />
-            <ThemeToggle />
+          <div className="mx-auto max-w-5xl px-4 py-4 flex items-center gap-x-6">
+            <Link href="/" className="display text-[1.375rem] tracking-tight shrink-0">{SITE.name}</Link>
+            <div className="flex-1"><SiteNav /></div>
+            <div className="flex items-center gap-x-1 shrink-0">
+              <ChatDrawer />
+              <ThemeToggle />
+            </div>
           </div>
         </header>
         <main id="main" className="mx-auto w-full max-w-5xl px-4 py-6 flex-1">{children}</main>
-        <footer className="border-t border-grid text-xs text-muted">
-          <div className="mx-auto max-w-5xl px-4 py-4 flex flex-wrap gap-x-6 gap-y-1">
-            <span>Every number links to the observation behind it.</span>
-            <Freshness generatedAt={generated} />
-            <span>Fast is not good; concentrating is not good. Status colours carry no verdict.</span>
-            <Link href="/methodology" className="hover:text-ink">Reuse, cite, corrections</Link>
+        <footer className="border-t border-grid mt-16">
+          <div className="mx-auto max-w-5xl px-4 py-8 grid gap-6 md:grid-cols-[1fr_auto] text-sm">
+            <div className="flex flex-col gap-1.5 text-muted max-w-xl">
+              <span className="display text-lg text-ink">{SITE.name}</span>
+              <span>Every number links to the observation behind it. Fast is not good; concentrating is not good. Status colours carry no verdict.</span>
+              <Freshness generatedAt={generated} />
+            </div>
+            <nav aria-label="About" className="flex md:flex-col gap-x-5 gap-y-1.5 text-ink-2">
+              {ABOUT.map(([href, label]) => <Link key={href} href={href} className="hover:text-ink">{label}</Link>)}
+              <Link href="/methodology#reuse" className="hover:text-ink">Reuse, cite, corrections</Link>
+            </nav>
           </div>
         </footer>
       </body>

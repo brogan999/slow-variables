@@ -7,7 +7,7 @@ import { diffusion, memos, obsIndex, thesis } from "@/lib/data";
 
 export const metadata = { title: "Diffusion lens" };
 
-export default function DiffusionLens() {
+export default function DiffusionPage() {
   const d = diffusion();
   const idx = obsIndex();
   const verdicts = thesis();

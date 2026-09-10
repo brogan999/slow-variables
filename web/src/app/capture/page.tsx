@@ -16,15 +16,15 @@ export default function CaptureLens() {
     <div className="flex flex-col gap-8">
       <section>
         <div className="flex flex-wrap items-baseline justify-between gap-2">
-          <h1 className="text-2xl font-semibold tracking-tight">Capture lens</h1>
+          <h1 className="display text-[2.25rem] md:text-[3rem] leading-[1.05] tracking-[-0.015em]">Capture lens</h1>
           <Link href="/" className="text-sm text-ink-2 hover:text-ink">← Switch to diffusion lens</Link>
         </div>
         {c.verdict ? <p className="mt-2 max-w-3xl text-lg leading-snug">{c.verdict}</p> : null}
-        <p className="mt-1 text-sm text-ink-2 max-w-3xl">Who keeps the surplus, layer by layer. The compute layer's bar is sized by its filed segment operating income; a layer without a filed margin series shows a hairline, and its indicators carry the reading.</p>
+        <p className="mt-2 text-lg leading-snug text-ink-2 max-w-[60ch]">Who keeps the surplus, layer by layer. The compute layer's bar is sized by its filed segment operating income; a layer without a filed margin series shows a hairline, and its indicators carry the reading.</p>
       </section>
       <StackVertical layers={c.layers} shares={c.margin_shares} obsIndex={idx} />
       <section>
-        <h2 className="text-sm font-medium text-ink-2 mb-2">Margin stack by quarter <span className="text-muted">· share of filed segment operating income</span></h2>
+        <h2 className="display text-2xl leading-tight mb-3 mt-2">Margin stack by quarter <span className="text-muted">· share of filed segment operating income</span></h2>
         <MarginStackChart rows={c.margin_stack_series} obsIndex={idx} />
       </section>
       <ol className="flex flex-col gap-3">
@@ -33,7 +33,7 @@ export default function CaptureLens() {
           const statuses = published.map((i) => i.status).filter(Boolean) as string[];
           const summary = summarise(statuses);
           return (
-            <li key={l.id} className="rounded-lg bg-surface ring-hair p-4">
+            <li key={l.id} className="panel p-4">
               <div className="flex flex-wrap items-center gap-3">
                 <h2 className="font-medium"><Link href={`/layers/${l.id}`} className="hover:underline">{l.order}. {l.name}</Link></h2>
                 <StatusChip status={summary} />
@@ -47,7 +47,7 @@ export default function CaptureLens() {
         })}
       </ol>
       <section>
-        <h2 className="text-sm font-medium text-ink-2 mb-2">Last three status changes</h2>
+        <h2 className="display text-2xl leading-tight mb-3 mt-2">Last three status changes</h2>
         <ChangelogList events={c.recent_status_events} obsIndex={idx} />
       </section>
     </div>

@@ -37,7 +37,7 @@ export function BandChart({ series, unit, log, bands }: Props) {
             const d = payload?.[0]?.payload as (typeof all)[number] | undefined;
             if (!d) return null;
             return (
-              <div className="rounded bg-surface ring-hair px-2 py-1 text-xs">
+              <div className="rounded panel px-2 py-1 text-xs">
                 <div className="font-medium">{d.subject}</div>
                 <div>{fmtUnit(d.v, unit)}{d.err ? ` (${fmtUnit(d.v - d.err[0], unit)}–${fmtUnit(d.v + d.err[1], unit)})` : ""}</div>
                 <div className="text-muted">{d.as_of}{d.disputed ? " · disputed" : ""}</div>

@@ -10,8 +10,8 @@ export default function Indicators() {
   const idx = obsIndex();
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="text-2xl font-semibold tracking-tight">Indicators</h1>
-      <p className="text-sm text-ink-2 max-w-3xl">One object, two addresses. Unpublished rows have a definition and data but do not yet meet the publishing rules (a status, counterevidence, and either two sources or one primary source), so they carry no status and no page.</p>
+      <h1 className="display text-[2.25rem] md:text-[3rem] leading-[1.05] tracking-[-0.015em]">Indicators</h1>
+      <p className="text-lg leading-snug text-ink-2 max-w-[60ch]">One object, two addresses. Unpublished rows have a definition and data but do not yet meet the publishing rules (a status, counterevidence, and either two sources or one primary source), so they carry no status and no page.</p>
       <div className="overflow-x-auto">
         <table className="data w-full text-sm">
           <thead><tr><th scope="col">Indicator</th><th scope="col">Bucket</th><th scope="col">Layer</th><th scope="col">Status</th><th scope="col">Conf</th><th scope="col">Grade</th><th scope="col">Latest</th><th scope="col">Obs</th></tr></thead>

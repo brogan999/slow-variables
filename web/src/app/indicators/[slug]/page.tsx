@@ -37,7 +37,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
           {d.bucket_id && d.layer_id ? " · " : null}
           {d.layer_id ? <Link href={`/layers/${d.layer_id}`} className="hover:text-ink">{layers.find((l) => l.id === d.layer_id)?.name}</Link> : null}
         </p>
-        <h1 className="text-2xl font-semibold tracking-tight">{d.name}</h1>
+        <h1 className="display text-[2.25rem] md:text-[3rem] leading-[1.05] tracking-[-0.015em]">{d.name}</h1>
         <div className="mt-2 flex flex-wrap items-center gap-2 text-sm">
           <StatusChip status={d.published ? d.status : null} size="lg" />
           <ConfidenceDial value={d.confidence} />
@@ -66,7 +66,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
           {seriesSources.map((s) => s ? <li key={s.id}><span className="text-muted">source</span> <a href={s.url} className="underline decoration-grid underline-offset-4">{s.name}</a> <span className="text-muted">· default tier {s.default_tier} · {s.license}</span></li> : null)}
         </ul>
         {d.normal_band || d.direction_rule ? (
-          <div className="mt-3 rounded-lg bg-surface ring-hair p-3 text-sm">
+          <div className="mt-3 panel p-3 text-sm">
             {d.normal_band ? (
               <dl className="grid gap-1 sm:grid-cols-3">
                 <div><dt className="text-muted text-xs">Normal band</dt><dd>{band(d.normal_band, bandUnit)}</dd></div>
@@ -86,8 +86,8 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
       <Section n={4} title="Evidence">
         {d.direction_rule ? <DirectionChart points={d.points} unit={d.unit} rule={d.direction_rule} /> : <BandChart series={[{ name: d.name, points: d.points }]} unit={d.unit} log={d.unit === "minutes"} bands={bandOnChart ? { normal: d.normal_band, fast: d.fast_band } : null} />}
         <div className="mt-3 grid gap-3 sm:grid-cols-2 text-sm">
-          <div className="rounded-lg bg-surface ring-hair p-3"><div className="text-xs text-muted">Latest point</div><Num p={d.latest} unit={d.unit} obsIndex={idx} />{d.latest?.subject ? <div className="text-xs text-ink-2">{d.latest.subject}</div> : null}</div>
-          {d.band_value ? <div className="rounded-lg bg-surface ring-hair p-3"><div className="text-xs text-muted">Value the bands apply to</div><Num p={{ as_of: d.band_value.as_of ?? "", value: d.band_value.value, low: d.band_value.low, high: d.band_value.high, obs_ids: d.band_value.obs_ids }} unit={bandUnit} obsIndex={idx} /></div> : null}
+          <div className="panel p-3"><div className="text-xs text-muted">Latest point</div><Num p={d.latest} unit={d.unit} obsIndex={idx} />{d.latest?.subject ? <div className="text-xs text-ink-2">{d.latest.subject}</div> : null}</div>
+          {d.band_value ? <div className="panel p-3"><div className="text-xs text-muted">Value the bands apply to</div><Num p={{ as_of: d.band_value.as_of ?? "", value: d.band_value.value, low: d.band_value.low, high: d.band_value.high, obs_ids: d.band_value.obs_ids }} unit={bandUnit} obsIndex={idx} /></div> : null}
         </div>
         <p className="mt-2 text-xs text-muted">{d.n_observations} observations. Hollow points are disputed (see counterevidence). Every point links to its observation.</p>
         {d.fits?.length ? (
@@ -146,8 +146,8 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
 function Section({ n, title, children }: { n: number; title: string; children: React.ReactNode }) {
   return (
     <section>
-      <h2 className="text-sm font-medium text-ink-2 mb-2"><span className="text-muted tabular-nums mr-2">{n}</span>{title}</h2>
-      <div className="text-[15px] leading-relaxed">{children}</div>
+      <h2 className="display text-2xl leading-tight mb-3 mt-2"><span className="text-muted tabular-nums mr-2">{n}</span>{title}</h2>
+      <div className="text-base leading-[1.6]">{children}</div>
     </section>
   );
 }

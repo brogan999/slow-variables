@@ -22,7 +22,7 @@ function inline(text: string, obsIndex: Record<string, string>) {
 export function MemoBody({ body, obsIndex }: { body: string; obsIndex: Record<string, string> }) {
   const blocks = body.split(/\n{2,}/).map((b) => b.trim()).filter(Boolean);
   return (
-    <div className="flex flex-col gap-3 text-[15px] leading-relaxed max-w-3xl">
+    <div className="flex flex-col gap-3 text-base leading-[1.6] max-w-3xl">
       {blocks.map((b, i) => {
         if (b.startsWith("## ")) return <h2 key={i} className="text-sm font-medium text-ink-2 mt-3">{b.slice(3)}</h2>;
         if (b.startsWith("# ")) return <h2 key={i} className="text-base font-medium mt-3">{b.slice(2)}</h2>;
