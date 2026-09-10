@@ -54,7 +54,8 @@ export const diffusion = () => read<{
   valves: { id: string; from: string; to: string; name: string; status: string; indicator_ids: string[] }[];
   recent_status_events: StatusEvent[]; what_would_change: string[];
 }>("lens/diffusion.json");
-export const capture = () => read<{ as_of: string; layers: (Layer & { indicators: Card[] })[]; recent_status_events: StatusEvent[] }>("lens/capture.json");
+export type MarginShare = { value: number; as_of: string; obs_ids: string[] };
+export const capture = () => read<{ as_of: string; layers: (Layer & { indicators: Card[] })[]; recent_status_events: StatusEvent[]; margin_shares: Record<string, MarginShare> }>("lens/capture.json");
 export const sources = () => read<Source[]>("sources.json");
 export const changelog = () => read<StatusEvent[]>("changelog.json");
 export const meta = () => read<{ generated_at: string }>("meta.json");
@@ -63,3 +64,10 @@ export { fmt, words } from "./format";
 export const obsIndex = () => read<Record<string, string>>("obs_index.json");
 export type Fit = { metric: string; value: number; value_low: number | null; value_high: number | null; as_of_date: string; dims: Record<string, string>; obs_ids: string[] };
 export type Doc = IndicatorDoc & { points: Point[]; band_value: { value: number; as_of: string | null; obs_ids: string[]; low: number | null; high: number | null } | null; fits: Fit[]; related_metrics: string[] };
+export type Prediction = {
+  id: string; ledger: "nk" | "lab" | "ai2027" | "capture"; claimant: string; claim_text: string; claim_url: string | null; claim_date: string;
+  window_start: string | null; window_end: string | null; operationalisation: string; related_indicators: string[]; proxy_types: string[];
+  confidence: number; counterevidence: string; note: string | null; published: boolean; status: string | null; confidence_now: number | null;
+  status_events: StatusEvent[];
+};
+export const predictions = () => read<Prediction[]>("predictions.json");

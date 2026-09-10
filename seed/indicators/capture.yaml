@@ -119,3 +119,44 @@ indicators:
     proposed_status: not_yet_measurable
     published: false
     updated_at: 2026-09-10
+  - id: margin_stack_semis_share
+    name: Semiconductors' share of stack operating income
+    definition: The chip layer's share of filed segment operating income across the AI stack's public filers, per calendar quarter (NVIDIA Compute & Networking and AMD Data Center versus AWS, Google Cloud and Microsoft Intelligent Cloud). Derived metric margin_stack_share_by_layer, semis slice.
+    why_it_matters: The capture thesis in one number. "Rents migrate up the stack" means this share falls over four quarters while labs and apps rise; Nvidia holding its share means the bulge stays at the bottom.
+    proxy_types: [market_structure]
+    unit: share
+    cadence_expected: quarterly
+    metric: margin_stack_share_by_layer
+    metric_dims: {layer_id: compute_semis}
+    band_input: "metric:margin_stack_share_by_layer"
+    layer_id: compute_physical
+    direction_rule: {periods: 4, dead_band: 0.02, higher_is: concentrating, rationale: "Four calendar quarters; a move under two points is within fiscal-calendar noise. Rising semis share = rent concentrating at the chip layer; falling = migrating up."}
+    leading_lagging: lagging
+    tracker_interpretation: Segment operating income, not gross profit, and only the two layers with filings so far; the labs and apps slices arrive with estimated series and are flagged as such.
+    counterevidence: Intelligent Cloud and AWS include non-AI workloads; Nvidia's fiscal quarter is a month later than the others; two of the seven layers are represented.
+    confidence: 70
+    proposed_status: concentrating
+    related_indicators: [semis_rent_concentration, cloud_rpo_backlog]
+    published: true
+    updated_at: 2026-09-10
+  - id: cloud_segment_margins
+    name: Cloud segment operating margins
+    definition: Operating income over revenue for AWS, Google Cloud and Microsoft Intelligent Cloud, per fiscal quarter, from 10-Q/10-K segment disclosures (derived metric segment_operating_margin). Headline slice is AWS.
+    why_it_matters: Whether the cloud layer keeps its margin while capex explodes is the capex-to-revenue question in filed form; depreciation-life changes show up here first.
+    proxy_types: [market_structure]
+    unit: share
+    cadence_expected: quarterly
+    metric: segment_operating_margin
+    metric_dims: {segment: amzn.aws}
+    band_input: "metric:segment_operating_margin"
+    layer_id: compute_physical
+    sublayer_id: hyperscalers_neoclouds
+    direction_rule: {periods: 4, dead_band: 0.02, higher_is: concentrating, rationale: "Four fiscal quarters; two points of margin is noise. Rising cloud margin under rising capex means the layer is keeping surplus."}
+    leading_lagging: lagging
+    tracker_interpretation: Cloud margins have held through the capex wave so far; depreciation schedules do a lot of the holding.
+    counterevidence: Segment margins blend AI and non-AI workloads; useful-life extensions flatter them; Google Cloud's margin is on a much smaller base.
+    confidence: 75
+    proposed_status: stable
+    related_indicators: [margin_stack_semis_share, cloud_rpo_backlog]
+    published: true
+    updated_at: 2026-09-10

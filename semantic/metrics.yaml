@@ -140,3 +140,66 @@ metrics:
                       ELSE 0 END)::DOUBLE AS value,
              list(id ORDER BY id) AS obs_ids
       FROM latest WHERE rn = 1
+  bls_labor_share_yoy:
+    description: Year-on-year change in the BLS nonfarm business labor share index (PRS85006173).
+    rationale: The Anthropic Institute scenarios (Korinek, Jones et al., Sept 2026) make the labor share the cleanest macro discriminator - extreme change takes it from 60% to 45% by 2030 - and it is where "surplus shifts to capital" would first show in official data.
+    grain: [as_of_date]
+    unit: share
+    lead_lag: lagging
+    formula_version: 1
+    inputs: ["bls.prs85006173.q"]
+    caveats: Index, not the published percent level; quarterly, revised; cyclical swings of a point or two are normal.
+    sql: |
+      SELECT as_of_date, value_numeric / lag(value_numeric, 4) OVER (ORDER BY as_of_date) - 1 AS value,
+             [id, lag(id, 4) OVER (ORDER BY as_of_date)] AS obs_ids
+      FROM observations WHERE series_key = 'bls.prs85006173.q'
+      QUALIFY lag(id, 4) OVER (ORDER BY as_of_date) IS NOT NULL
+  segment_operating_margin:
+    description: Segment operating income divided by segment revenue, per filer segment, per fiscal quarter (AWS, Google Cloud, Microsoft Intelligent Cloud, AMD Data Center, NVIDIA Compute & Networking).
+    rationale: The closest filed proxy for the margin each layer keeps; gross profit is not disclosed by segment.
+    grain: [as_of_date, segment]
+    unit: share
+    lead_lag: lagging
+    formula_version: 1
+    inputs: ["sec_seg.*.operating_income.q", "sec_seg.*.revenue.q"]
+    caveats: Operating, not gross, margin; segment definitions differ (Intelligent Cloud includes server products and Windows Server).
+    sql: |
+      SELECT oi.as_of_date, oi.subject || '.' || split_part(oi.series_key, '.', 3) AS segment,
+             oi.value_numeric / r.value_numeric AS value, [oi.id, r.id] AS obs_ids
+      FROM observations oi JOIN observations r
+        ON r.series_key = replace(oi.series_key, '.operating_income.q', '.revenue.q') AND r.as_of_date = oi.as_of_date
+      WHERE oi.series_key LIKE 'sec_seg.%.operating_income.q' AND r.value_numeric > 0
+  margin_stack_share_by_layer:
+    description: Each layer's share of the AI stack's filed segment operating income per calendar quarter. Semis = NVIDIA Compute & Networking + AMD Data Center; cloud = AWS + Google Cloud + Microsoft Intelligent Cloud. Labs and apps join when a filed or estimated series exists.
+    rationale: The headline capture chart (P1 gap #1). Where operating income bulges is where the surplus sits; the thesis "rents migrate up the stack" needs the semis share to fall while labs and apps rise.
+    grain: [as_of_date, layer_id]
+    unit: share
+    lead_lag: lagging
+    formula_version: 2
+    inputs: ["sec_seg.*.operating_income.q", "sec_seg.*.operating_income.fy"]
+    caveats: Fiscal quarters mapped to the calendar quarter of their period end (NVIDIA's late-July quarter counts as Q3); a filer's unreported fiscal Q4 is filled as fiscal year minus its three reported quarters and cites all four filings; quarters where any of the five segments is still missing are dropped; segment operating income, not gross profit; only two layers so far.
+    sql: |
+      WITH q AS (
+        SELECT subject, series_key, as_of_date, period_start, value_numeric AS v, id
+        FROM observations WHERE series_key LIKE 'sec_seg.%.operating_income.q'),
+      fy AS (
+        SELECT subject, replace(series_key, '.fy', '.q') AS series_key, as_of_date, period_start, value_numeric AS v, id
+        FROM observations WHERE series_key LIKE 'sec_seg.%.operating_income.fy'),
+      fill AS (  -- FY minus the three quarters inside it, when exactly three are reported
+        SELECT fy.subject, fy.series_key, fy.as_of_date, fy.v - sum(q.v) AS v, list_prepend(fy.id, list(q.id ORDER BY q.id)) AS ids
+        FROM fy JOIN q ON q.subject = fy.subject AND q.series_key = fy.series_key
+                       AND q.as_of_date > fy.period_start AND q.as_of_date < fy.as_of_date
+        GROUP BY fy.subject, fy.series_key, fy.as_of_date, fy.v, fy.id
+        HAVING count(*) = 3 AND NOT EXISTS (SELECT 1 FROM q q2 WHERE q2.series_key = fy.series_key AND q2.as_of_date = fy.as_of_date)),
+      allq AS (
+        SELECT subject, as_of_date, v, [id] AS ids FROM q
+        UNION ALL SELECT subject, as_of_date, v, ids FROM fill),
+      seg AS (
+        SELECT date_trunc('quarter', as_of_date) AS cq, subject, v, ids,
+               CASE WHEN subject IN ('nvda', 'amd') THEN 'compute_semis' ELSE 'compute_cloud' END AS layer_id
+        FROM allq),
+      complete AS (SELECT cq FROM seg GROUP BY cq HAVING count(DISTINCT subject) = 5),
+      by_layer AS (SELECT s.cq, s.layer_id, sum(v) AS oi, flatten(list(ids)) AS ids FROM seg s JOIN complete c USING (cq) GROUP BY 1, 2)
+      SELECT (cq + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE AS as_of_date, layer_id, oi / sum(oi) OVER (PARTITION BY cq) AS value,
+             list_distinct(flatten(list(ids) OVER (PARTITION BY cq))) AS obs_ids
+      FROM by_layer

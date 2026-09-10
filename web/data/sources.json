@@ -110,17 +110,17 @@
    "bls.mpu4910012.a"
   ],
   "id": "bls",
-  "items_found": 123,
+  "items_found": 161,
   "kind": "api",
   "last_error": null,
-  "last_success_at": "2026-09-10T01:29:57.564266+00:00",
+  "last_success_at": "2026-09-10T03:23:07.373876+00:00",
   "lens": "both",
   "license": "Public domain (U.S. government)",
   "name": "BLS productivity and costs; total factor productivity",
   "org": "U.S. Bureau of Labor Statistics",
   "people": [],
   "robots_ok": true,
-  "runs": 2,
+  "runs": 3,
   "url": "https://www.bls.gov/productivity/"
  },
  {
@@ -449,5 +449,28 @@
   "robots_ok": true,
   "runs": 0,
   "url": "https://www.newyorkfed.org/research/college-labor-market"
+ },
+ {
+  "attribution": "SEC EDGAR, inline XBRL filings (segment disclosures)",
+  "cadence": "quarterly",
+  "connector": "sec_seg",
+  "default_tier": 4,
+  "expect_series": [
+   "sec_seg.nvda.data_center.revenue.q",
+   "sec_seg.amzn.aws.operating_income.q"
+  ],
+  "id": "sec_seg",
+  "items_found": 142,
+  "kind": "xbrl",
+  "last_error": null,
+  "last_success_at": "2026-09-10T03:26:56.654993+00:00",
+  "lens": "capture",
+  "license": "Public domain (U.S. government); fair-access policy requires a descriptive User-Agent",
+  "name": "SEC EDGAR 10-Q/10-K XBRL instances (segment data)",
+  "org": "U.S. Securities and Exchange Commission",
+  "people": [],
+  "robots_ok": true,
+  "runs": 2,
+  "url": "https://www.sec.gov/cgi-bin/browse-edgar"
  }
 ]

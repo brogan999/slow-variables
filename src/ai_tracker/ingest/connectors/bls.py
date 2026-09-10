@@ -16,6 +16,7 @@ SERIES = {  # id -> (grain, unit)
     "PRS85006092": ("q", "pct_change_qoq_saar"),  # same, q/q at annual rate
     "PRS85006093": ("q", "index_2017_100"),  # same, index level
     "MPU4910012": ("a", "index_2017_100"),  # private nonfarm business total factor productivity, annual index
+    "PRS85006173": ("q", "index_2017_100"),  # nonfarm business labor share, index
 }
 QUARTER_END = {"Q01": (3, 31), "Q02": (6, 30), "Q03": (9, 30), "Q04": (12, 31)}
 

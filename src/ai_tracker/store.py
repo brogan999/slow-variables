@@ -22,6 +22,7 @@ from .schema import (
     Indicator,
     Layer,
     Observation,
+    Prediction,
     Review,
     Source,
     StatusEvent,
@@ -85,6 +86,7 @@ class Seed:
     sources: list[Source]
     indicators: list[Indicator]
     entities: list[Entity]
+    predictions: list[Prediction]
 
     @classmethod
     def load(cls, root: Path = SEED) -> Seed:
@@ -104,6 +106,7 @@ class Seed:
             [Source(**r) for r in rows("sources")],
             inds,
             [Entity(**r) for r in rows("entities")],
+            [Prediction(**r) for r in rows("predictions")] if (root / "predictions.yaml").exists() else [],
         )
 
 
@@ -356,6 +359,7 @@ class Store:
             {
                 "as_of": as_of,
                 "recent_status_events": recent,
+                "margin_shares": self._margin_shares(),
                 "layers": [
                     {
                         **dump(layer),
@@ -376,6 +380,25 @@ class Store:
             },
         )
         _write(out / "obs_index.json", {o["id"]: o["series_key"] for o in self.observations("*")})
+        _write(
+            out / "predictions.json",
+            [
+                {
+                    **_jsonable(pr.model_dump()),
+                    "status": (ev.new_status if (ev := self.current(pr.id)) else None),
+                    "confidence_now": ev.new_conf if ev else None,
+                    "status_events": [
+                        dump(e)
+                        for e in sorted(
+                            (e for e in self.events if e.target_id == pr.id),
+                            key=lambda e: e.created_at,
+                            reverse=True,
+                        )
+                    ],
+                }
+                for pr in self.seed.predictions
+            ],
+        )
         _write(out / "sources.json", [self._source_health(s) for s in self.seed.sources])
         _write(
             out / "changelog.json",
@@ -442,6 +465,22 @@ class Store:
                 for i in self.seed.indicators
                 if i.published and i.band_rationale
             ],
+        }
+
+    def _margin_shares(self) -> dict[str, Any]:
+        """Latest complete quarter of margin_stack_share_by_layer, keyed by layer id, with provenance."""
+        rows = self.derived_for("margin_stack_share_by_layer")
+        if not rows:
+            return {}
+        latest = max(r.as_of_date for r in rows)
+        return {
+            r.dims["layer_id"]: {
+                "value": r.value,
+                "as_of": latest.isoformat(),
+                "obs_ids": r.input_observation_ids,
+            }
+            for r in rows
+            if r.as_of_date == latest
         }
 
     def _all_series(self) -> dict[str, list[dict[str, Any]]]:

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ChangelogList } from "@/components/Changelog";
 import { IndicatorCard } from "@/components/IndicatorCard";
+import { StackVertical } from "@/components/StackVertical";
 import { StatusChip } from "@/components/StatusChip";
 import { capture, obsIndex } from "@/lib/data";
 
@@ -14,8 +15,9 @@ export default function CaptureLens() {
           <h1 className="text-2xl font-semibold tracking-tight">Capture lens</h1>
           <Link href="/" className="text-sm text-ink-2 hover:text-ink">← Switch to diffusion lens</Link>
         </div>
-        <p className="mt-2 max-w-3xl text-lg leading-snug">Who keeps the surplus, layer by layer. Bars will be sized by gross-profit share once segment-level filings are ingested; until then each layer shows its published indicators.</p>
+        <p className="mt-2 max-w-3xl text-lg leading-snug">Who keeps the surplus, layer by layer. The compute layer's bar is sized by its filed segment operating income; the other layers get bars as their series land.</p>
       </section>
+      <StackVertical layers={c.layers} shares={c.margin_shares} obsIndex={idx} />
       <ol className="flex flex-col gap-3">
         {c.layers.map((l) => {
           const published = l.indicators.filter((i) => i.published);

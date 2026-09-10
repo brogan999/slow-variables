@@ -374,3 +374,27 @@ indicators:
     related_indicators: [bbd_work_hours_assisted]
     published: true
     updated_at: 2026-09-10
+  - id: labor_share_nonfarm
+    name: US labour share of income, year on year
+    definition: Year-on-year change in the BLS nonfarm business labor share index (PRS85006173), derived metric bls_labor_share_yoy. The share of output paid to labour rather than capital.
+    why_it_matters: If AI shifts surplus from wages to capital, this is where it shows in official data. The Anthropic Institute's September 2026 scenarios put the labour share at 60% today and 45% by 2030 under extreme change, and unchanged under modest change.
+    proxy_types: [welfare]
+    unit: share
+    cadence_expected: quarterly
+    series_keys: ["bls.prs85006173.q"]
+    metric: bls_labor_share_yoy
+    band_input: "metric:bls_labor_share_yoy"
+    bucket_id: adaptation
+    valve_measured: leak
+    normal_band: {lo: -0.02}
+    fast_band: {hi: -0.05}
+    band_rationale: "Normal = year-on-year moves of at most 2%, the size of ordinary cyclical swings in the index; fast = 5% or worse a year, roughly the pace that takes the share from 60% to 45% by 2030 (the extreme scenario). Between is `emerging`."
+    tracker_interpretation: The share is falling faster than a cycle alone explains, though from a post-pandemic high; it is the one adaptation series that is not at trend.
+    counterevidence: The index has fallen before without AI (2000s); wage lags after an inflation shock push it down mechanically; quarterly readings are revised and the 2025 peak was unusual.
+    layer_id: labour_consumers
+    leading_lagging: lagging
+    confidence: 65
+    proposed_status: emerging
+    related_indicators: [bls_labor_productivity_yoy, consumer_surplus_wta]
+    published: true
+    updated_at: 2026-09-10

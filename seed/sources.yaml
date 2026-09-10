@@ -236,3 +236,15 @@ sources:
     connector: manual
     license: "Public domain (U.S. Federal Reserve)"
     attribution: "Federal Reserve Bank of New York, The Labor Market for Recent College Graduates"
+  - id: sec_seg
+    name: SEC EDGAR 10-Q/10-K XBRL instances (segment data)
+    org: U.S. Securities and Exchange Commission
+    url: https://www.sec.gov/cgi-bin/browse-edgar
+    kind: xbrl
+    default_tier: 4
+    cadence: quarterly
+    lens: capture
+    connector: sec_seg
+    license: "Public domain (U.S. government); fair-access policy requires a descriptive User-Agent"
+    attribution: "SEC EDGAR, inline XBRL filings (segment disclosures)"
+    expect_series: ["sec_seg.nvda.data_center.revenue.q", "sec_seg.amzn.aws.operating_income.q"]

@@ -25,7 +25,9 @@ def pdf_text(body: bytes) -> str:
     import pdfplumber
 
     with pdfplumber.open(io.BytesIO(body)) as pdf:
-        return "\n".join(page.extract_text() or "" for page in pdf.pages)
+        return "\n".join(
+            page.extract_text(x_tolerance=1) or "" for page in pdf.pages
+        )  # default tolerance drops spaces in some PDFs
 
 
 class Manual(Connector):

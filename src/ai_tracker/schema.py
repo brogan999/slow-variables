@@ -376,6 +376,43 @@ class Entity(BaseModel):
     memberships: list[Membership] = []
 
 
+class PredStatus(str, Enum):
+    confirmed = "confirmed"
+    ahead = "ahead"
+    on_track = "on_track"
+    behind = "behind"
+    emerging = "emerging"
+    not_yet_testable = "not_yet_testable"
+
+
+class Prediction(BaseModel):
+    id: str
+    ledger: Literal["nk", "lab", "ai2027", "capture"]
+    claimant: str
+    claimant_entity_id: str | None = None
+    claim_text: str = Field(min_length=20)  # verbatim
+    claim_url: str | None = None
+    claim_date: date
+    window_start: date | None = None
+    window_end: date | None = None
+    operationalisation: str
+    related_indicators: list[str] = []
+    proxy_types: list[ProxyType] = []
+    confidence: int = Field(0, ge=0, le=95)
+    direction_assessment: str | None = None
+    magnitude_assessment: str | None = None
+    timing_assessment: str | None = None
+    counterevidence: str = ""
+    note: str | None = None
+    published: bool = False
+
+    @model_validator(mode="after")
+    def _rules(self) -> Prediction:
+        if self.published and not (self.claim_url and self.counterevidence.strip()):
+            raise ValueError(f"{self.id}: published predictions need a fetched claim_url and counterevidence")
+        return self
+
+
 class Crosswalk(BaseModel):
     bucket_id: str
     layer_id: str
