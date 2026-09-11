@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import type { VentureDoc } from "@/lib/data";
+import { ChartSources } from "./ChartSources";
 import { fmt } from "@/lib/format";
 
 const SEG: Record<string, { name: string; style: React.CSSProperties }> = {
@@ -56,6 +57,7 @@ export function VentureFlowStrip({ doc, note = true }: { doc: VentureDoc; note?:
           <span key={k}><span className="inline-block w-2.5 h-2.5 align-middle mr-1 rounded-sm" style={v.style} />{v.name}</span>
         ))}
       </div>
+      <ChartSources cs={doc.chart_sources} />
       {note ? <p className="text-xs text-muted">Primary-round dollars per calendar quarter: Form D amount sold where the entity files, Epoch&apos;s press-compiled rounds for an entity-quarter with no filing. Amendments replace their originals; SPVs and secondaries are excluded; debt appears only under &ldquo;Incl. debt&rdquo;.</p> : null}
     </div>
   );

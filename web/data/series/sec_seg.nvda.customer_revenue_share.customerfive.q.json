@@ -1,0 +1,60 @@
+{
+ "observations": [
+  {
+   "as_of_date": "2024-10-27",
+   "audited_vs_reported": "company_stated",
+   "content_hash": "ce89af0e0a0fd133b93ac0127d054c821b78aa9055e64b8d41aad737f303107c",
+   "dispute_text": null,
+   "disputed": false,
+   "entity_id": "nvda",
+   "extraction_method": "xbrl",
+   "extractor_version": "sec_seg-1",
+   "grade": "A",
+   "gross_vs_net": null,
+   "http_status": 200,
+   "id": "ff9c6a587ce8c6a9",
+   "period_start": "2024-07-29",
+   "published_date": "2025-11-19",
+   "q": "2024-10-01 00:00:00",
+   "raw_snippet": "{\"benchmark\": \"us-gaap:SalesRevenueNetMember\", \"customer\": \"nvda:CustomerFiveMember\", \"end\": \"2024-10-27\", \"filed\": \"2025-11-19\", \"form\": \"10-Q\", \"start\": \"2024-07-29\", \"tag\": \"us-gaap:ConcentrationRiskPercentage1\", \"value\": \"0.12\"}",
+   "retrieved_at": "2026-09-10T03:25:39.515838Z",
+   "review_status": "approved",
+   "reviewer_id": null,
+   "run_rate_vs_booked": null,
+   "series_key": "sec_seg.nvda.customer_revenue_share.customerfive.q",
+   "source_id": "sec_seg",
+   "subject": "nvda",
+   "supersedes_id": null,
+   "tier": 4,
+   "unit": "share",
+   "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000230/nvda-20251026_htm.xml",
+   "value_high": null,
+   "value_low": null,
+   "value_numeric": 0.12,
+   "value_text": null
+  }
+ ],
+ "series_key": "sec_seg.nvda.customer_revenue_share.customerfive.q",
+ "source": {
+  "attribution": "SEC EDGAR, inline XBRL filings (segment disclosures)",
+  "cadence": "quarterly",
+  "connector": "sec_seg",
+  "default_tier": 4,
+  "expect_series": [
+   "sec_seg.nvda.data_center.revenue.q",
+   "sec_seg.amzn.aws.operating_income.q"
+  ],
+  "id": "sec_seg",
+  "kind": "xbrl",
+  "lens": "capture",
+  "license": "Public domain (U.S. government); fair-access policy requires a descriptive User-Agent",
+  "name": "SEC EDGAR 10-Q/10-K XBRL instances (segment data)",
+  "org": "U.S. Securities and Exchange Commission",
+  "people": [],
+  "robots_ok": true,
+  "url": "https://www.sec.gov/cgi-bin/browse-edgar",
+  "watch": {}
+ },
+ "unit": "share",
+ "withdrawn": []
+}

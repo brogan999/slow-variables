@@ -4,6 +4,7 @@ import { ConfidenceDial } from "@/components/ConfidenceDial";
 import { DirectionChart } from "@/components/DirectionChart";
 import { EvidenceLog } from "@/components/EvidenceLog";
 import { BandChart } from "@/components/BandChart";
+import { ChartSources } from "@/components/ChartSources";
 import { ChangelogList } from "@/components/Changelog";
 import { Num, ObsLinks } from "@/components/Provenance";
 import { Section } from "@/components/Section";
@@ -83,6 +84,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
 
       <Section n={num("evidence")} id="evidence" title="Evidence">
         {d.direction_rule ? <DirectionChart points={d.points} unit={d.unit} rule={d.direction_rule} /> : <BandChart series={[{ name: d.name, points: d.points }]} unit={d.unit} log={d.unit === "minutes"} bands={bandOnChart ? { normal: d.normal_band, fast: d.fast_band } : null} />}
+        <ChartSources cs={d.chart_sources} />
         <div className="mt-3 grid gap-3 sm:grid-cols-2 text-sm">
           <div className="panel p-3"><div className="text-xs text-muted">Latest point</div><Num p={d.latest} unit={d.unit} obsIndex={idx} />{d.latest?.subject ? <div className="text-xs text-ink-2">{d.latest.subject}</div> : null}</div>
           {d.band_value ? <div className="panel p-3"><div className="text-xs text-muted">Value the bands apply to</div><Num p={{ as_of: d.band_value.as_of ?? "", value: d.band_value.value, low: d.band_value.low, high: d.band_value.high, obs_ids: d.band_value.obs_ids }} unit={bandUnit} obsIndex={idx} /></div> : null}

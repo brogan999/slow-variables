@@ -410,6 +410,30 @@ indicators:
     related_indicators: [model_price_per_horizon_hour, perf_per_dollar_growth]
     published: true
     updated_at: 2026-09-11
+  - id: open_weights_lag_months
+    name: Open-weights lag behind the closed frontier (months)
+    definition: At each new open-weights record on Epoch's Capabilities Index, the months since a closed model first scored as high. Derived metric open_weights_lag_months; the time version of the open-vs-closed gap.
+    why_it_matters: How fast frontier capability becomes something anyone can download and run is the methods stock leaking into products outside the labs' control, and the capture lens's clearest sign of model-layer commoditisation.
+    proxy_types: [benchmark, model_release]
+    unit: months
+    cadence_expected: monthly
+    metric: open_weights_lag_months
+    band_input: "metric:open_weights_lag_months"
+    bucket_id: methods
+    valve_measured: invention_to_product
+    normal_band: {lo: 9}
+    fast_band: {hi: 3}
+    band_rationale: "Normal = open weights at least nine months behind, roughly a model generation; fast = three months or less, when a closed lead lasts about one release cycle. Between is emerging."
+    tracker_interpretation: Read at open-weights records only, so a quiet quarter shows no reading even as the true lag widens; the ECI points gap on the capture lens is the companion reading.
+    counterevidence: One composite index run by one organisation; open releases often land after internal use, so the lag at release overstates how long the capability was closed; a Chinese lab's release depends on compute export rules as much as on methods.
+    layer_id: model
+    sublayer_id: open_weight_labs
+    leading_lagging: leading
+    timing_rationale: "Leading: an open model that matches the frontier arrives before prices and market shares in the model layer adjust to it."
+    confidence: 45
+    related_indicators: [open_vs_closed_gap, epoch_inference_price_fixed_capability]
+    published: true
+    updated_at: 2026-09-11
   - id: epoch_data_exhaustion_year
     name: Public text data exhaustion year (Epoch projection)
     definition: Epoch's central projection of the year in which language-model training fully utilises the effective stock of public human-generated text, from the 2024 paper.
