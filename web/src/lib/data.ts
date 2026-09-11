@@ -57,8 +57,10 @@ export const diffusion = () => read<{
   valves: { id: string; from: string; to: string; name: string; status: string; indicator_ids: string[] }[];
   recent_status_events: StatusEvent[]; what_would_change: string[];
 }>("lens/diffusion.json");
-export type MarginShare = { value: number; as_of: string; obs_ids: string[] };
-export const capture = () => read<{ as_of: string; verdict?: string; what_would_change: string[]; layers: (Layer & { indicators: Card[]; status: string })[]; recent_status_events: StatusEvent[]; margin_shares: Record<string, MarginShare>; margin_stack_series: { as_of: string; layer_id: string | null; value: number; obs_ids: string[] }[] }>("lens/capture.json");
+export type StackPart = { label: string; value: number; estimated: boolean; grade: string | null; href: string; obs_ids: string[] };
+export type StackBar = { value: number; as_of: string; estimated: boolean; parts: StackPart[]; obs_ids: string[] };
+export type StackRow = { as_of: string; layer_id: string | null; basis?: string; value: number; obs_ids: string[] };
+export const capture = () => read<{ as_of: string; verdict?: string; what_would_change: string[]; layers: (Layer & { indicators: Card[]; status: string })[]; recent_status_events: StatusEvent[]; stack_bars: Record<string, StackBar>; gross_profit_stack_series: StackRow[]; margin_stack_series: StackRow[] }>("lens/capture.json");
 export const sources = () => read<Source[]>("sources.json");
 export type Skipped = { id: string; name: string; url: string | null; reason: string; attribution: string | null };
 export const skippedSources = () => read<Skipped[]>("skipped_sources.json");

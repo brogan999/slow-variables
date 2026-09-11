@@ -19,12 +19,16 @@ export default function CaptureLens() {
           <Link href="/diffusion" className="text-sm text-ink-2 hover:text-ink">← Switch to diffusion lens</Link>
         </div>
         {c.verdict ? <p className="mt-2 max-w-3xl text-lg leading-snug">{c.verdict}</p> : null}
-        <p className="mt-2 text-lg leading-snug text-ink-2 max-w-[60ch]">Who keeps the surplus, layer by layer. The compute layer&apos;s bar is sized by its filed segment operating income; a layer without a filed margin series shows a hairline, and its indicators carry the reading.</p>
+        <p className="mt-2 text-lg leading-snug text-ink-2 max-w-[60ch]">Who keeps the surplus, layer by layer. Bars are each layer&apos;s share of the stack&apos;s gross profit: chips and cloud from filings, labs estimated and hatched. A layer without a series shows a hairline, and its indicators carry the reading.</p>
       </section>
-      <StackVertical layers={c.layers} shares={c.margin_shares} obsIndex={idx} />
+      <StackVertical layers={c.layers} bars={c.stack_bars} />
       <section>
-        <h2 className="display text-2xl leading-tight mb-3 mt-2">Margin stack by quarter <span className="text-muted">· share of filed segment operating income</span></h2>
-        <MarginStackChart rows={c.margin_stack_series} obsIndex={idx} />
+        <h2 className="display text-2xl leading-tight mb-3 mt-2">Gross profit by layer <span className="text-muted">· share per calendar quarter</span></h2>
+        <MarginStackChart rows={c.gross_profit_stack_series} obsIndex={idx} parts={[{ id: "compute_semis", name: "Chips", fill: "var(--s1)", prefix: "sec.nvda.gross_profit." }, { id: "compute_cloud", name: "Cloud", fill: "var(--s2)", prefix: "sec_seg.msft.intelligent_cloud.revenue." }, { id: "model", name: "Labs", fill: "var(--s1)", prefix: "epoch." }]} unmeasured="Apps: no gross-profit series, so unmeasured rather than drawn." />
+      </section>
+      <section>
+        <h2 className="display text-2xl leading-tight mb-3 mt-2">Filed operating income, five segments <span className="text-muted">· the filed check</span></h2>
+        <MarginStackChart rows={c.margin_stack_series} obsIndex={idx} parts={[{ id: "compute_semis", name: "Semis segments", fill: "var(--s1)", prefix: "sec_seg.nvda." }, { id: "compute_cloud", name: "Cloud segments", fill: "var(--s2)", prefix: "sec_seg.amzn." }]} unmeasured="NVIDIA Compute & Networking and AMD Data Center against AWS, Google Cloud and Microsoft Intelligent Cloud; labs and apps file no segments." />
       </section>
       <ol className="flex flex-col gap-3">
         {c.layers.map((l) => {

@@ -191,7 +191,7 @@ def test_golden_survives_a_hallucinated_id_and_flags_informational_questions():
     s = st.Store()
     res = golden(s, Tools(s), ScriptClient(["No record [obs:deadbeef00000000]."]))
     assert {r["id"] for r in res if r["informational"]} == {"g14", "g15"}
-    assert not any(r["ok"] for r in res if not r["id"] == "g13")
+    assert not any(r["ok"] for r in res if r["id"] not in ("g16",))
 
 
 def test_audit_pull_appends_only_new_rows_and_only_the_audit_keys(tmp_path, monkeypatch):

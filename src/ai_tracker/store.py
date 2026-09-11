@@ -547,7 +547,17 @@ class Store:
                     if i.published and i.layer_id and i.direction_rule
                 ],
                 "recent_status_events": recent,
-                "margin_shares": self._margin_shares(),
+                "stack_bars": self._stack_bars(),
+                "gross_profit_stack_series": [
+                    {
+                        "as_of": d.as_of_date.isoformat(),
+                        "layer_id": d.dims.get("layer_id"),
+                        "basis": d.dims.get("basis"),
+                        "value": d.value,
+                        "obs_ids": d.input_observation_ids,
+                    }
+                    for d in self.derived_for("gross_profit_share_by_layer")
+                ],
                 "margin_stack_series": [
                     {
                         "as_of": d.as_of_date.isoformat(),
@@ -713,21 +723,46 @@ class Store:
             ],
         }
 
-    def _margin_shares(self) -> dict[str, Any]:
-        """Latest complete quarter of margin_stack_share_by_layer, keyed by layer id, with provenance."""
-        rows = self.derived_for("margin_stack_share_by_layer")
+    def _stack_bars(self) -> dict[str, Any]:
+        """Latest complete quarter of the gross-profit stack as one bar per layer, summed here so the web never adds."""
+        rows = self.derived_for("gross_profit_share_by_layer")
         if not rows:
             return {}
         latest = max(r.as_of_date for r in rows)
-        return {
-            r.dims["layer_id"]: {
-                "value": r.value,
-                "as_of": latest.isoformat(),
-                "obs_ids": r.input_observation_ids,
-            }
-            for r in rows
-            if r.as_of_date == latest
+        keys = {o["id"]: o["series_key"] for o in self.observations("sec.*", "sec_seg.*", "epoch.*")}
+        # part -> (layer, label, the series whose row the part links to)
+        part = {
+            "compute_semis": ("compute_physical", "chips", "sec.nvda.gross_profit."),
+            "compute_cloud": ("compute_physical", "cloud", "sec_seg.msft.intelligent_cloud.revenue."),
+            "model": ("model", "labs", "epoch."),
         }
+        bars: dict[str, Any] = {}
+        for r in sorted(
+            (r for r in rows if r.as_of_date == latest), key=lambda r: r.dims["layer_id"], reverse=True
+        ):
+            layer, label, prefix = part[r.dims["layer_id"]]
+            est = r.dims.get("basis") == "estimated"
+            b = bars.setdefault(
+                layer,
+                {"value": 0.0, "as_of": latest.isoformat(), "estimated": False, "parts": [], "obs_ids": []},
+            )
+            b["value"] += r.value
+            b["estimated"] = b["estimated"] or est
+            link = next((i for i in r.input_observation_ids if keys.get(i, "").startswith(prefix)), None)
+            b["parts"].append(
+                {
+                    "label": label,
+                    "value": r.value,
+                    "estimated": est,
+                    "grade": "C"
+                    if est
+                    else None,  # filed parts mix 10-K (A) and 10-Q (B) rows; the page shows neither
+                    "href": f"/series/{keys[link]}#{link}" if link else "/query#gross_profit_share_by_layer",
+                    "obs_ids": r.input_observation_ids,
+                }
+            )
+            b["obs_ids"] = sorted(set(b["obs_ids"]) | set(r.input_observation_ids))
+        return bars
 
     def evidence_for(self, *targets: str) -> list[dict[str, Any]]:
         """Dated evidence records: observations whose series is evidence.<target>.<for|against|context>.pt."""

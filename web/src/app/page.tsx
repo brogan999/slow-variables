@@ -51,8 +51,8 @@ export default function Home() {
       </Section>
 
       <Section n={2} title="Who keeps it" action={<Link href="/capture" className="hover:text-ink">Capture lens →</Link>}>
-        <p className="text-ink-2 max-w-[60ch] mb-6">Seven layers of the stack. The compute layer&apos;s bar is sized by its filed segment operating income; a layer without a filed margin series shows a hairline, and its indicators carry the reading.</p>
-        <StackVertical layers={c.layers} shares={c.margin_shares} obsIndex={idx} />
+        <p className="text-ink-2 max-w-[60ch] mb-6">Seven layers of the stack. Bars are each layer&apos;s share of the stack&apos;s gross profit, with the lab layer estimated and hatched; a layer without a series shows a hairline, and its indicators carry the reading.</p>
+        <StackVertical layers={c.layers} bars={c.stack_bars} />
       </Section>
 
       <Section n={3} title="This week" action={<Link href="/memos" className="hover:text-ink">All memos →</Link>}>

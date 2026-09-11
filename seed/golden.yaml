@@ -52,6 +52,10 @@ questions:
   - id: g13
     lens: capture
     question: "What is Anthropic's gross margin?"
+    expect: {metrics: ["lab_gross_margin_estimate", "gross_profit_share_by_layer"], mentions: ["inference", "estimate"]}
+  - id: g16
+    lens: capture
+    question: "What is OpenAI's operating margin?"
     expect: {refuse: true}
   # Informational (not part of the v2 §12 bar): each exercises one v2 §6.1 tool and must call it.
   - id: g14

@@ -3,7 +3,8 @@
 analyses:
   - {id: horizon_fits, name: "METR horizon doubling times, both windows and both reliability levels", question: "How fast is the time horizon doubling, and does the answer depend on the window?", metric: horizon_doubling_days_50_since_2024, related: [horizon_doubling_days_80_since_2024, horizon_doubling_days_50_since_2023, horizon_doubling_days_80_since_2023, horizon_blowup_year_50_since_2024], shape: {unit: days}}
   - {id: ord_misfit, name: "Constant-hazard misfit", question: "Do the 50% and 80% horizons sit where a constant task-length hazard predicts?", metric: ord_half_life_misfit, shape: {unit: ratio}}
-  - {id: margin_stack, name: "Margin stack by layer", question: "Where in the stack does filed operating income bulge?", metric: margin_stack_share_by_layer, dims: {layer_id: compute_semis}, shape: {unit: share}}
+  - {id: gross_profit_stack, name: "Gross profit by layer", question: "What share of the stack's gross profit do the labs take, counting them as an estimate?", metric: gross_profit_share_by_layer, dims: {layer_id: model}, related: [lab_gross_margin_estimate, gross_margin_fy], shape: {unit: share}}
+  - {id: margin_stack, name: "Filed operating income, five segments", question: "Where in the stack does filed operating income bulge?", metric: margin_stack_share_by_layer, dims: {layer_id: compute_semis}, shape: {unit: share}}
   - {id: hhi_layers, name: "Concentration by layer", question: "Is any layer fragmenting while its neighbours stay concentrated?", metric: hhi_by_layer, dims: {layer_id: compute_cloud}, related: [], shape: {unit: index}}
   - {id: recoupment, name: "Lab recoupment ratios", question: "How much run-rate has each lab earned per dollar of capital raised?", metric: lab_recoupment_ratio, shape: {unit: ratio}}
   - {id: concordance, name: "Labour-tracker concordance", question: "Do the four monthly labour trackers agree?", metric: cross_tracker_concordance, shape: {unit: count}}
