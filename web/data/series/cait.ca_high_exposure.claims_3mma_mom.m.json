@@ -36,15 +36,18 @@
  ],
  "series_key": "cait.ca_high_exposure.claims_3mma_mom.m",
  "source": {
-  "attribution": "California Policy Lab and California Employment Development Department, California AI-Unemployment Tracker",
+  "attribution": "Hyman, von Wachter et al. (2026), Tracking AI-Related Job Loss Using Unemployment Insurance Claims Data in California, California Policy Lab",
   "cadence": "monthly",
-  "connector": "manual",
+  "connector": "cait",
   "default_tier": 6,
-  "expect_series": [],
+  "expect_series": [
+   "cait.ca_top_quartile_potential.claims.m",
+   "cait.ca_top_quartile_observed.claims.m"
+  ],
   "id": "cait",
-  "kind": "html",
+  "kind": "csv",
   "lens": "diffusion",
-  "license": "California Policy Lab",
+  "license": "California Policy Lab; monthly claims workbook, cited as the Lab suggests",
   "name": "California AI-Unemployment Tracker (CAIT)",
   "org": "California Policy Lab with California EDD",
   "people": [

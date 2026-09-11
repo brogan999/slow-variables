@@ -374,6 +374,35 @@
   "watch": {}
  },
  {
+  "attribution": "Stanford Digital Economy Lab and ADP Research, AI Economic Indicators: Canaries Dashboard",
+  "cadence": "monthly",
+  "connector": "canaries",
+  "default_tier": 6,
+  "expect_series": [
+   "canaries.us_exposure_q5.employment_yoy.m"
+  ],
+  "health": "ok",
+  "id": "canaries",
+  "items_found": 240,
+  "kind": "csv",
+  "last_error": null,
+  "last_success_at": "2026-09-11T12:46:49.914379+00:00",
+  "lens": "diffusion",
+  "license": "Stanford Digital Economy Lab; free public data, cited as the Lab asks",
+  "name": "Canaries Dashboard data (by exposure)",
+  "org": "Stanford Digital Economy Lab and ADP Research",
+  "people": [
+   "Erik Brynjolfsson",
+   "Bharat Chandar",
+   "Ruyu Chen",
+   "Nela Richardson"
+  ],
+  "robots_ok": true,
+  "runs": 1,
+  "url": "https://digitaleconomy.stanford.edu/project/indicators/canaries-dashboard/",
+  "watch": {}
+ },
+ {
   "attribution": "Revelio Labs, AI Labor Market Tracker",
   "cadence": "monthly",
   "connector": "manual",
@@ -399,26 +428,29 @@
   "watch": {}
  },
  {
-  "attribution": "California Policy Lab and California Employment Development Department, California AI-Unemployment Tracker",
+  "attribution": "Hyman, von Wachter et al. (2026), Tracking AI-Related Job Loss Using Unemployment Insurance Claims Data in California, California Policy Lab",
   "cadence": "monthly",
-  "connector": "manual",
+  "connector": "cait",
   "default_tier": 6,
-  "expect_series": [],
+  "expect_series": [
+   "cait.ca_top_quartile_potential.claims.m",
+   "cait.ca_top_quartile_observed.claims.m"
+  ],
   "health": "ok",
   "id": "cait",
-  "items_found": 1,
-  "kind": "html",
+  "items_found": 230,
+  "kind": "csv",
   "last_error": null,
-  "last_success_at": "2026-09-10T02:28:08.063014Z",
+  "last_success_at": "2026-09-11T12:46:50.228915+00:00",
   "lens": "diffusion",
-  "license": "California Policy Lab",
+  "license": "California Policy Lab; monthly claims workbook, cited as the Lab suggests",
   "name": "California AI-Unemployment Tracker (CAIT)",
   "org": "California Policy Lab with California EDD",
   "people": [
    "Till von Wachter"
   ],
   "robots_ok": true,
-  "runs": 0,
+  "runs": 1,
   "url": "https://capolicylab.org/california-ai-unemployment-tracker/",
   "watch": {}
  },
@@ -741,22 +773,25 @@
  {
   "attribution": "Ramp AI Index, Ramp Economics Lab",
   "cadence": "monthly",
-  "connector": "manual",
+  "connector": "ramp",
   "default_tier": 3,
-  "expect_series": [],
+  "expect_series": [
+   "ramp.us_businesses.paid_ai_adoption_share.m",
+   "ramp.anthropic.business_paid_share.m"
+  ],
   "health": "ok",
   "id": "ramp",
-  "items_found": 4,
+  "items_found": 344,
   "kind": "html",
   "last_error": null,
-  "last_success_at": "2026-09-10T03:47:20.524738Z",
+  "last_success_at": "2026-09-11T12:47:42.041821+00:00",
   "lens": "both",
   "license": "Ramp Economics Lab; cited with attribution",
   "name": "Ramp AI Index (Ramp Economics Lab)",
   "org": "Ramp",
   "people": [],
   "robots_ok": true,
-  "runs": 0,
+  "runs": 3,
   "url": "https://ramp.com/data/ai-index",
   "watch": {}
  },

@@ -60,3 +60,21 @@ def test_a_failed_feed_does_not_shift_the_next_feeds_posts(tmp_path, monkeypatch
     rows = c.extract(c.fetch(date(2026, 9, 10)))
     assert [(r.source_id, r.series_key) for r in rows] == [("f2", "watch.f2.self_improvement.pt")]
     assert c.errors == ["f1: OSError: down"]
+
+
+def test_a_page_watch_logs_a_change_only_when_the_text_changes(tmp_path):
+    p = tmp_path / "sources.yaml"
+    p.write_text(
+        "sources:\n  - {id: w1, name: w1, org: o, url: 'https://ex.test/blog', kind: html, default_tier: 7, cadence: irregular,"
+        " lens: both, connector: feeds, watch: {launch: 'continual'}}\n"
+    )
+    c = Feeds(p)
+    page = b"<html><body><p>Continual learning, now in production.</p><script>nonce=1</script></body></html>"
+    first = c.extract([_item("https://ex.test/blog", page)])
+    assert len(first) == 1 and "text hash" in first[0].value_text
+    import re
+
+    c.last_text_hash["watch.w1.launch.pt"] = re.search(r"text hash (\w+)", first[0].value_text).group(1)
+    same_text = page.replace(b"nonce=1", b"nonce=2")  # new bytes, same readable text
+    assert c.extract([_item("https://ex.test/blog", same_text)]) == []
+    assert len(c.extract([_item("https://ex.test/blog", page.replace(b"now", b"today"))])) == 1

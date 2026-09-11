@@ -6,6 +6,7 @@ does not). A human turns the post into figures via seed/manual_observations.yaml
 
 from __future__ import annotations
 
+import hashlib
 import re
 import xml.etree.ElementTree as ET
 from dataclasses import replace
@@ -16,6 +17,7 @@ from pathlib import Path
 import yaml
 
 from ...schema import Basis, Extraction, Observation, Source
+from ...store import read_jsonl
 from ..base import Connector, RawItem, robots_ok
 from ..scrub import html_to_text, normalise
 
@@ -62,6 +64,15 @@ class Feeds(Connector):
         rows = (yaml.safe_load(path.read_text()) or {}).get("sources") or []
         self.sources = [Source(**r) for r in rows if r.get("connector") == "feeds"]
         self.urls = [s.url for s in self.sources]
+        self.last_text_hash: dict[
+            str, str
+        ] = {}  # watch series -> text hash of its newest row: log changes, not visits
+        ledger = Path("data/observations/feeds.jsonl")
+        for r in sorted(read_jsonl(ledger) if ledger.exists() else [], key=lambda r: r["as_of_date"]):
+            if r["series_key"].startswith("watch.") and (
+                m := re.search(r"text hash (\w+)", r.get("value_text") or "")
+            ):
+                self.last_text_hash[r["series_key"]] = m.group(1)
 
     def fetch(self, day: date, refetch: bool = False) -> list[RawItem]:
         out: list[RawItem] = []
@@ -85,7 +96,12 @@ class Feeds(Connector):
                 src.kind.value == "html"
             ):  # page watch: a blog with no feed; one row per content change, keyed by hash
                 text = normalise(html_to_text(item.body.decode("utf-8", "ignore")))
+                th = hashlib.sha256(text.encode()).hexdigest()[
+                    :12
+                ]  # the text, not the bytes: nonces change nightly
                 for slug, pattern in src.watch.items():
+                    if self.last_text_hash.get(f"watch.{src.id}.{slug}.pt") == th:
+                        continue  # the page reads the same as last time: nothing changed
                     if re.search(pattern, text, re.I):
                         out.append(
                             self.obs(
@@ -95,7 +111,7 @@ class Feeds(Connector):
                                 unit="page",
                                 as_of_date=item.retrieved_at.date(),
                                 published_date=item.retrieved_at.date(),
-                                value_text=f"page changed; matches {slug} (content hash {item.content_hash[:12]})",
+                                value_text=f"page changed; matches {slug} (text hash {th})",
                                 tier=src.default_tier,
                                 audited_vs_reported=Basis.reported,
                                 extraction_method=Extraction.scrape,
