@@ -21,20 +21,20 @@ export default async function SublayerPage({ params }: { params: Promise<{ id: s
     <div className="flex flex-col gap-6">
       <div>
         <p className="text-xs text-muted"><Link href="/stack" className="hover:text-ink">Stack</Link> / <Link href={`/layers/${layer.id}`} className="hover:text-ink">{layer.name}</Link> / sub-layer {s.order}</p>
-        <h1 className="text-2xl font-semibold tracking-tight">{s.name}</h1>
+        <h1 className="display text-[2.25rem] md:text-[3rem] leading-[1.05] tracking-[-0.015em]">{s.name}</h1>
       </div>
       <section>
-        <h2 className="text-sm font-medium text-ink-2 mb-2">Indicators</h2>
+        <h2 className="display text-2xl leading-tight mb-3 mt-2">Indicators</h2>
         {s.indicators.length ? <div className="grid gap-3 md:grid-cols-2">{s.indicators.filter((c) => c.published).map((c) => <IndicatorCard key={c.id} c={c} obsIndex={idx} />)}</div> : <p className="text-sm text-muted">No indicator addresses this sub-layer yet; its entities carry whatever filings and dataset rows attach to them.</p>}
       </section>
       {v ? (
         <section>
-          <h2 className="text-sm font-medium text-ink-2 mb-2">Venture flow</h2>
+          <h2 className="display text-2xl leading-tight mb-3 mt-2">Venture flow</h2>
           <VentureFlowStrip doc={v} obsIndex={idx} />
         </section>
       ) : null}
       <section>
-        <h2 className="text-sm font-medium text-ink-2 mb-2">Entities <span className="text-muted">· {s.entities.length}</span></h2>
+        <h2 className="display text-2xl leading-tight mb-3 mt-2">Entities <span className="text-muted">· {s.entities.length}</span></h2>
         <div className="overflow-x-auto">
           <table className="data w-full text-sm">
             <thead><tr><th scope="col">Entity</th><th scope="col">Role</th><th scope="col">Since</th><th scope="col">Verified</th><th scope="col">Latest observation</th></tr></thead>

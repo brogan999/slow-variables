@@ -18,7 +18,7 @@ export default async function SeriesPage({ params }: { params: Promise<{ key: st
     <div className="flex flex-col gap-4">
       <div>
         <p className="text-xs text-muted"><Link href="/indicators" className="hover:text-ink">Indicators</Link> / series</p>
-        <h1 className="text-xl font-semibold tracking-tight font-mono break-all">{s.series_key}</h1>
+        <h1 className="num text-xl md:text-2xl break-all">{s.series_key}</h1>
         <p className="text-sm text-ink-2 mt-1">
           {s.source ? <>Source: <a href={s.source.url} className="underline decoration-grid underline-offset-4">{s.source.name}</a> ({s.source.org}) · {s.source.license}</> : "Source unknown"} · <a href={`/data/${s.series_key}.csv`} className="underline decoration-grid underline-offset-4">CSV</a>
         </p>

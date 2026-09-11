@@ -6,8 +6,8 @@ export default function SourcesPage() {
   const rows = sources();
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="text-2xl font-semibold tracking-tight">Sources</h1>
-      <p className="text-sm text-ink-2 max-w-3xl">Only sources with a working connector or a fetched manual row are listed. Health comes from the fetch log, never from a hand-edited field; a source is stale when its last success is older than twice its cadence.</p>
+      <h1 className="display text-[2.25rem] md:text-[3rem] leading-[1.05] tracking-[-0.015em]">Sources</h1>
+      <p className="text-lg leading-snug text-ink-2 max-w-[60ch]">Only sources with a working connector or a fetched manual row are listed. Health comes from the fetch log, never from a hand-edited field; a source is stale when its last success is older than twice its cadence.</p>
       <div className="overflow-x-auto">
         <table className="data w-full text-sm">
           <thead><tr><th scope="col">Source</th><th scope="col">Org</th><th scope="col">Kind</th><th scope="col">Default tier</th><th scope="col">Cadence</th><th scope="col">Lens</th><th scope="col">Health</th><th scope="col">Last success</th><th scope="col">Items</th><th scope="col">Runs</th><th scope="col">Attribution and licence</th></tr></thead>

@@ -14,8 +14,8 @@ export default function LedgerPage() {
   return (
     <div className="flex flex-col gap-4">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight">Circular financing ledger</h1>
-        <p className="text-sm text-ink-2 max-w-3xl">Money that goes round the stack instead of out of it: suppliers investing in, guaranteeing, or buying capacity back from their own customers. Every row is a filed or announced instrument with its verbatim snippet; reported-only rows are flagged. The cumulative signed total feeds the <Link href="/indicators/circular_financing_scale" className="underline decoration-grid underline-offset-4">circular financing scale</Link> indicator; letters of intent, talks and self-reported aggregates are shown but not summed.</p>
+        <h1 className="display text-[2.25rem] md:text-[3rem] leading-[1.05] tracking-[-0.015em]">Circular financing ledger</h1>
+        <p className="text-lg leading-snug text-ink-2 max-w-[60ch]">Money that goes round the stack instead of out of it: suppliers investing in, guaranteeing, or buying capacity back from their own customers. Every row is a filed or announced instrument with its verbatim snippet; reported-only rows are flagged. The cumulative signed total feeds the <Link href="/indicators/circular_financing_scale" className="underline decoration-grid underline-offset-4">circular financing scale</Link> indicator; letters of intent, talks and self-reported aggregates are shown but not summed.</p>
       </div>
       <div className="overflow-x-auto">
         <table className="data w-full text-sm">

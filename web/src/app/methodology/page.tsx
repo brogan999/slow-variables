@@ -1,3 +1,4 @@
+import Link from "next/link";
 export const metadata = { title: "Methodology" };
 
 import { sources } from "@/lib/data";
@@ -15,8 +16,8 @@ const TIERS: [string, string, string][] = [
 export default function Methodology() {
   const credits = [...new Map(sources().filter((x) => x.attribution).map((x) => [x.attribution as string, x.license])).entries()].map(([a, l]) => (l && /CC BY/i.test(l) ? `${a} (${l})` : a));
   return (
-    <article className="prose-tight max-w-3xl flex flex-col gap-6 text-[15px] leading-relaxed">
-      <h1 className="text-2xl font-semibold tracking-tight">Methodology</h1>
+    <article className="prose-tight max-w-[68ch] flex flex-col gap-5 text-[17px] leading-[1.65]">
+      <h1 className="display text-[2.25rem] md:text-[3rem] leading-[1.05] tracking-[-0.015em]">Methodology</h1>
       <p>One tracker, two lenses. The diffusion lens follows Narayanan and Kapoor&apos;s <em>AI as Normal Technology</em>: five stocks, valves between them, normal and fast bands with falsification thresholds. The capture lens measures who keeps the surplus, layer by layer. They are the same question asked from two ends, so they share one data store, one indicator object and one discipline, adapted from the <a href="https://ai2027-tracker.com/methodology/" className="underline decoration-grid underline-offset-4">AI 2027 tracker</a>.</p>
       <H>Three layers, strictly separated</H>
       <p><strong>Observation</strong> (raw, sourced, dated) → <strong>Derived</strong> (a formula over observations, defined in the semantic layer) → <strong>Indicator</strong> (proxies, status, confidence, evidence, counterevidence). No derived number exists without a traceable path to observation ids, and the site never computes a number: every figure was exported with the ids behind it.</p>
@@ -41,9 +42,9 @@ export default function Methodology() {
         <li>Fetched HTML passes through a prompt-injection scrub; anything addressed to an AI agent is logged and never stored.</li>
       </ul>
       <H>Query layer</H>
-      <p>The Ask button and the console on <a href="/query" className="underline decoration-grid underline-offset-4">/query</a> run against the same store the site is exported from, on a separate read-only service. A question goes to a model with four tools (read-only SQL over the semantic layer, a metric lookup, an indicator lookup, and status changes since a date). Every number in an answer must be followed by the citation token of the record it came from; a post-check extracts the numbers and verifies each against that record&apos;s value, confidence bounds, band edges or verbatim snippet. An answer that fails is revised once and otherwise shown as blocked with the unverified numbers marked. The service cannot write observations or statuses, has a daily spend cap, and logs only a hash of each question. The model and prompt version are recorded with every answer.</p>
+      <p>The Ask button and the console on <Link href="/query" className="underline decoration-grid underline-offset-4">/query</Link> run against the same store the site is exported from, on a separate read-only service. A question goes to a model with four tools (read-only SQL over the semantic layer, a metric lookup, an indicator lookup, and status changes since a date). Every number in an answer must be followed by the citation token of the record it came from; a post-check extracts the numbers and verifies each against that record&apos;s value, confidence bounds, band edges or verbatim snippet. An answer that fails is revised once and otherwise shown as blocked with the unverified numbers marked. The service cannot write observations or statuses, has a daily spend cap, and logs only a hash of each question. The model and prompt version are recorded with every answer.</p>
       <H>Weekly memo</H>
-      <p>Each Monday a job assembles what changed since the last memo (status events, new observations by indicator, watchlist posts, staleness, the thesis monitor, and any crosswalk pair whose two sides moved in opposite directions) and asks a model to draft the memo and the two lens sentences under the same citation rule. If no key is configured or the check fails twice, the memo is the deterministic digest of the same facts. Either way it opens a pull request; merging it publishes the memo under <a href="/memos" className="underline decoration-grid underline-offset-4">/memos</a>. Nothing in a memo can move a status.</p>
+      <p>Each Monday a job assembles what changed since the last memo (status events, new observations by indicator, watchlist posts, staleness, the thesis monitor, and any crosswalk pair whose two sides moved in opposite directions) and asks a model to draft the memo and the two lens sentences under the same citation rule. If no key is configured or the check fails twice, the memo is the deterministic digest of the same facts. Either way it opens a pull request; merging it publishes the memo under <Link href="/memos" className="underline decoration-grid underline-offset-4">/memos</Link>. Nothing in a memo can move a status.</p>
       <H>X posts</H>
       <p>X is never scraped. Posts enter through a curated List on the X API, or through a weekly manual drop of URLs fetched via X&apos;s public embed endpoint. Every post is tier 7 and recorded as a watchlist row; when a post links to a tier 1&ndash;6 artifact, the artifact is fetched and entered as an observation in its own right. Posts never move a status.</p>
       <H>Colour</H>
@@ -51,10 +52,10 @@ export default function Methodology() {
       <H>Credits and conflicts</H>
       <p>Method after the <a href="https://ai2027-tracker.com/methodology/" className="underline decoration-grid underline-offset-4">AI 2027 tracker</a> (independent, not affiliated). Disclosure: the maintainer is involved with a private value-chain map, a firm in the deployment-services sub-layer; that sub-layer is listed and its indicators are held to the same rules.</p>
       <p className="text-sm text-ink-2">Data credits, generated from the source registry: {credits.join("; ")}.</p>
-      <H>Reuse, citation and corrections</H>
+      <H id="reuse">Reuse, citation and corrections</H>
       <p>Code is MIT licensed. The compiled dataset (observations, derived values, status events) is CC BY 4.0; each observation also carries its upstream source and licence, which govern that row. Cite the site by URL and the observation ids you rely on. Corrections: open an issue or pull request on the repository; every change to a number or a status leaves a dated event in the changelog.</p>
     </article>
   );
 }
 
-function H({ children }: { children: React.ReactNode }) { return <h2 className="text-sm font-medium text-ink-2 mt-2">{children}</h2>; }
+function H({ children, id }: { children: React.ReactNode; id?: string }) { return <h2 id={id} className="display text-2xl leading-tight border-t border-grid pt-5 mt-2 scroll-mt-6">{children}</h2>; }

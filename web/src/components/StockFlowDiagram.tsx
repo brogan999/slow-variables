@@ -32,9 +32,9 @@ export function StockFlowDiagram({ buckets, valves }: Props) {
       {main.map((b, i) => (
         <g key={b.id}>
           <Link href={`/buckets/${b.id}`}>
-            <rect x={X0} y={y(i)} width={BOX} height={H} rx={6} fill="var(--surface)" stroke="var(--axis)" />
-            <text x={X0 + 12} y={y(i) + 24} fontSize="16" fontWeight="600" fill="var(--ink)">{b.order}. {b.name}</text>
-            <text x={X0 + 12} y={y(i) + 44} fontSize="15" fill="var(--ink-2)">{GLYPH[b.status] ?? "○"} {words(b.status)} · {b.indicators.length} indicator{b.indicators.length === 1 ? "" : "s"}</text>
+            <rect x={X0} y={y(i)} width={BOX} height={H} rx={4} fill="var(--surface)" stroke="var(--grid)" />
+            <text x={X0 + 12} y={y(i) + 24} fontSize="20" fontFamily="var(--font-display)" fill="var(--ink)">{b.order}. {b.name}</text>
+            <text x={X0 + 12} y={y(i) + 44} fontSize="14" fontFamily="var(--font-sans)" fill="var(--ink-2)">{GLYPH[b.status] ?? "○"} {words(b.status)} · {b.indicators.length} indicator{b.indicators.length === 1 ? "" : "s"}</text>
           </Link>
           {i < main.length - 1 ? <ValveArrow valve={v(b.valve)} x={X0 + BOX / 2} y1={y(i) + H} y2={y(i + 1)} /> : null}
         </g>
@@ -42,9 +42,9 @@ export function StockFlowDiagram({ buckets, valves }: Props) {
       {ret ? (
         <g>
           <path d={`M${X0} ${y(main.length - 1) + H / 2} H${X0 - 50} V${y(0) + H / 2} H${X0 - 4}`} fill="none"
-            stroke={STROKE[v("return_arrow")?.status ?? "unmeasured"]} strokeWidth="2" strokeDasharray={v("return_arrow")?.status === "unmeasured" ? "4 4" : undefined} markerEnd="url(#arr)" />
+            stroke={STROKE[v("return_arrow")?.status ?? "unmeasured"]} strokeWidth="1.5" strokeDasharray={v("return_arrow")?.status === "unmeasured" ? "4 4" : undefined} markerEnd="url(#arr)" />
           <Link href={`/buckets/return_arrow`}>
-            <text x={X0 - 58} y={(y(0) + y(main.length - 1)) / 2 + 20} fontSize="14" fill="var(--ink)" transform={`rotate(-90 ${X0 - 58} ${(y(0) + y(main.length - 1)) / 2 + 20})`} textAnchor="middle">
+            <text x={X0 - 58} y={(y(0) + y(main.length - 1)) / 2 + 20} fontSize="13" fontFamily="var(--font-mono)" fill="var(--ink)" transform={`rotate(-90 ${X0 - 58} ${(y(0) + y(main.length - 1)) / 2 + 20})`} textAnchor="middle">
               5. Return arrow · {words(v("return_arrow")?.status)}
             </text>
           </Link>
@@ -53,8 +53,8 @@ export function StockFlowDiagram({ buckets, valves }: Props) {
       <g>
         <path d={`M${X0 + BOX} ${y(main.length - 1) + H / 2} H${X0 + BOX + 44}`} fill="none" stroke={STROKE[v("leak")?.status ?? "unmeasured"]} strokeWidth="2" strokeDasharray="4 4" markerEnd="url(#arr)" />
         <Link href="/capture">
-          <text x={X0 + BOX + 50} y={y(main.length - 1) + H / 2 - 6} fontSize="15" fill="var(--ink)">Leak →</text>
-          <text x={X0 + BOX + 50} y={y(main.length - 1) + H / 2 + 11} fontSize="13" fill="var(--ink-2)">who keeps it</text>
+          <text x={X0 + BOX + 50} y={y(main.length - 1) + H / 2 - 6} fontSize="15" fontFamily="var(--font-display)" fill="var(--ink)">Leak →</text>
+          <text x={X0 + BOX + 50} y={y(main.length - 1) + H / 2 + 11} fontSize="12" fontFamily="var(--font-sans)" fill="var(--ink-2)">who keeps it</text>
         </Link>
       </g>
     </svg>
@@ -67,8 +67,8 @@ function ValveArrow({ valve, x, y1, y2 }: { valve?: Valve; x: number; y1: number
   const label = `${GLYPH[status] ?? "○"} ${words(status)}`;
   const inner = (
     <g>
-      <line x1={x} y1={y1 + 2} x2={x} y2={y2 - 3} stroke={stroke} strokeWidth="2" strokeDasharray={status === "unmeasured" ? "4 4" : undefined} markerEnd="url(#arr)" />
-      <text x={x + 10} y={(y1 + y2) / 2 + 5} fontSize="15" fill="var(--ink-2)">{label}</text>
+      <line x1={x} y1={y1 + 2} x2={x} y2={y2 - 3} stroke={stroke} strokeWidth="1.5" strokeDasharray={status === "unmeasured" ? "4 4" : undefined} markerEnd="url(#arr)" />
+      <text x={x + 10} y={(y1 + y2) / 2 + 5} fontSize="14" fontFamily="var(--font-sans)" fill="var(--ink-2)">{label}</text>
     </g>
   );
   const first = valve?.indicator_ids[0];

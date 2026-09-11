@@ -24,34 +24,34 @@ export function BandChart({ series, unit, log, bands }: Props) {
   const edges = [bands?.normal?.hi, bands?.fast?.lo, bands?.fast?.hi].filter((n): n is number => n != null);
   const domain: [number, number] = log ? [Math.min(...ys) / 2, Math.max(...ys, ...edges) * 2] : [0, Math.max(...ys, ...edges) * 1.15];
   return (
-    <div className="h-72 w-full" role="img" aria-label={`${series.map((s) => s.name).join(" and ")} over time, ${unit}`}>
+    <div className="h-64 md:h-80 w-full" role="img" aria-label={`${series.map((s) => s.name).join(" and ")} over time, ${unit}`}>
       <ResponsiveContainer>
         <ScatterChart margin={{ top: 8, right: 16, bottom: 4, left: 0 }}>
           <CartesianGrid stroke="var(--grid)" strokeDasharray="0" vertical={false} />
-          <XAxis type="number" dataKey="t" domain={["dataMin", "dataMax"]} tickFormatter={shortSpan ? monthYr : yr} stroke="var(--axis)" tick={{ fill: "var(--muted)", fontSize: 11 }} />
-          <YAxis type="number" dataKey="v" scale={log ? "log" : "linear"} domain={domain} tickFormatter={tick(unit)} stroke="var(--axis)"
-            tick={{ fill: "var(--muted)", fontSize: 11 }} width={48} label={{ value: unit, angle: -90, position: "insideLeft", fill: "var(--muted)", fontSize: 11 }} />
-          {bands?.normal ? <ReferenceArea y1={bands.normal.lo ?? domain[0]} y2={bands.normal.hi ?? domain[1]} fill="var(--ink)" fillOpacity={0.04} label={{ value: "normal", fill: "var(--muted)", fontSize: 11, position: "insideTopRight" }} /> : null}
-          {bands?.fast ? <ReferenceArea y1={bands.fast.lo ?? domain[0]} y2={bands.fast.hi ?? domain[1]} fill="var(--fast)" fillOpacity={0.08} label={{ value: "fast", fill: "var(--fast)", fontSize: 11, position: "insideBottomRight" }} /> : null}
+          <XAxis type="number" dataKey="t" domain={["dataMin", "dataMax"]} tickFormatter={shortSpan ? monthYr : yr} axisLine={{ stroke: "var(--grid)" }} tickLine={false} tick={{ fill: "var(--muted)", fontSize: 11, fontFamily: "var(--font-mono)" }} />
+          <YAxis type="number" dataKey="v" scale={log ? "log" : "linear"} domain={domain} tickFormatter={tick(unit)} axisLine={{ stroke: "var(--grid)" }} tickLine={false}
+            tick={{ fill: "var(--muted)", fontSize: 11, fontFamily: "var(--font-mono)" }} width={48} label={{ value: unit, angle: -90, position: "insideLeft", fill: "var(--muted)", fontSize: 11, fontFamily: "var(--font-mono)" }} />
+          {bands?.normal ? <ReferenceArea y1={bands.normal.lo ?? domain[0]} y2={bands.normal.hi ?? domain[1]} fill="var(--ink)" fillOpacity={0.04} label={{ value: "normal", fill: "var(--muted)", fontSize: 11, fontFamily: "var(--font-mono)", position: "insideTopRight" }} /> : null}
+          {bands?.fast ? <ReferenceArea y1={bands.fast.lo ?? domain[0]} y2={bands.fast.hi ?? domain[1]} fill="var(--fast)" fillOpacity={0.08} label={{ value: "fast", fill: "var(--fast)", fontSize: 11, fontFamily: "var(--font-mono)", position: "insideBottomRight" }} /> : null}
           <Tooltip cursor={{ stroke: "var(--axis)" }} content={({ payload }) => {
             const d = payload?.[0]?.payload as (typeof all)[number] | undefined;
             if (!d) return null;
             return (
-              <div className="rounded bg-surface ring-hair px-2 py-1 text-xs">
+              <div className="panel px-2.5 py-1.5 text-xs num">
                 <div className="font-medium">{d.subject}</div>
                 <div>{fmtUnit(d.v, unit)}{d.err ? ` (${fmtUnit(d.v - d.err[0], unit)}–${fmtUnit(d.v + d.err[1], unit)})` : ""}</div>
                 <div className="text-muted">{d.as_of}{d.disputed ? " · disputed" : ""}</div>
               </div>
             );
           }} />
-          {series.length > 1 ? <Legend wrapperStyle={{ fontSize: 12 }} /> : null}
+          {series.length > 1 ? <Legend wrapperStyle={{ fontSize: 11, fontFamily: "var(--font-mono)" }} /> : null}
           {data.map((d, i) => (
-            <Scatter key={series[i].name} name={series[i].name} data={d} fill={COLORS[i % COLORS.length]} fillOpacity={0.9}
+            <Scatter key={series[i].name} name={series[i].name} data={d} fill={COLORS[i % COLORS.length]} fillOpacity={0.9} isAnimationActive={false}
               shape={(p: { cx?: number; cy?: number; payload?: { disputed: boolean } }) => (
-                <circle cx={p.cx} cy={p.cy} r={4.5} fill={p.payload?.disputed ? "var(--surface)" : COLORS[i % COLORS.length]}
-                  stroke={COLORS[i % COLORS.length]} strokeWidth={2} />
+                <circle cx={p.cx} cy={p.cy} r={4} fill={p.payload?.disputed ? "var(--surface)" : COLORS[i % COLORS.length]}
+                  stroke={COLORS[i % COLORS.length]} strokeWidth={1.5} />
               )}>
-              <ErrorBar dataKey="err" direction="y" width={3} stroke={COLORS[i % COLORS.length]} strokeOpacity={0.5} />
+              <ErrorBar dataKey="err" direction="y" width={3} stroke={COLORS[i % COLORS.length]} strokeOpacity={0.4} />
             </Scatter>
           ))}
         </ScatterChart>

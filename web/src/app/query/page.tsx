@@ -10,14 +10,14 @@ export default function QueryPage() {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight">Query</h1>
-        <p className="text-sm text-ink-2 max-w-3xl">Saved analyses are materialised by the nightly export from the semantic layer; each shows its latest value, the observations behind it and the formula. The console runs read-only SQL against the same store; the Ask button in the header puts a model in front of it, with every number checked against the record it cites.</p>
+        <h1 className="display text-[2.25rem] md:text-[3rem] leading-[1.05] tracking-[-0.015em]">Query</h1>
+        <p className="text-lg leading-snug text-ink-2 max-w-[60ch]">Saved analyses are materialised by the nightly export from the semantic layer; each shows its latest value, the observations behind it and the formula. The console runs read-only SQL against the same store; the Ask button in the header puts a model in front of it, with every number checked against the record it cites.</p>
       </div>
       <section className="flex flex-col gap-3">
-        <h2 className="text-sm font-medium text-ink-2">Saved analyses</h2>
+        <h2 className="display text-2xl leading-tight">Saved analyses</h2>
         <ul className="grid gap-3 md:grid-cols-2">
           {rows.map((a) => (
-            <li key={a.id} id={a.metric} className="rounded-lg bg-surface ring-hair p-3 text-sm flex flex-col gap-1.5">
+            <li key={a.id} id={a.metric} className="panel p-3 text-sm flex flex-col gap-1.5">
               <div className="font-medium">{a.name}</div>
               <p className="text-xs text-ink-2">{a.question}</p>
               {a.latest ? (
@@ -33,7 +33,7 @@ export default function QueryPage() {
         </ul>
       </section>
       <section className="flex flex-col gap-2">
-        <h2 className="text-sm font-medium text-ink-2">Console</h2>
+        <h2 className="display text-2xl leading-tight">Console</h2>
         <QueryConsole initial={"SELECT metric, count(*) AS rows, max(as_of_date) AS latest\nFROM derived GROUP BY 1 ORDER BY 1"} />
       </section>
     </div>

@@ -2,7 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useRef, useState } from "react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { Textarea } from "@/components/ui/textarea";
 
 type Cite = { kind: string; id: string; href: string | null };
 type Answer = { answer: string; status: "ok" | "revised" | "blocked"; citations: Cite[]; usage?: { usd: number } };
@@ -10,9 +13,8 @@ type State = { kind: "idle" } | { kind: "busy" } | { kind: "answer"; a: Answer }
 
 const OFFLINE = "The query service is offline right now. Everything on the page still links to its observations.";
 
-// Native <dialog>; the question is scoped by the page it was asked from so the model starts in the right lens.
+// Ask sheet: the question is scoped by the page it was asked from so the model starts in the right lens.
 export function ChatDrawer() {
-  const ref = useRef<HTMLDialogElement>(null);
   const path = usePathname();
   const [q, setQ] = useState("");
   const [s, setS] = useState<State>({ kind: "idle" });
@@ -33,26 +35,26 @@ export function ChatDrawer() {
   }
 
   return (
-    <>
-      <button type="button" onClick={() => ref.current?.showModal()} className="shrink-0 rounded-full ring-hair px-3 py-0.5 text-sm text-ink-2 hover:text-ink" aria-haspopup="dialog">Ask</button>
-      <dialog ref={ref} aria-labelledby="ask-title" className="m-auto w-[min(40rem,calc(100vw-2rem))] rounded-xl bg-surface p-0 text-ink shadow-lg backdrop:bg-ink/30">
-        <form onSubmit={submit} className="flex flex-col gap-3 p-4">
-          <div className="flex items-baseline justify-between gap-3">
-            <h2 id="ask-title" className="text-sm font-medium">Ask the data</h2>
-            <button type="button" onClick={() => ref.current?.close()} className="text-xs text-ink-2 hover:text-ink">Close</button>
-          </div>
-          <textarea value={q} onChange={(e) => setQ(e.target.value)} rows={2} placeholder="What is the latest 50% horizon and its doubling time?" aria-label="Question" className="w-full resize-y rounded-md ring-hair bg-bg px-3 py-2 text-sm" />
-          <div className="flex items-center justify-between gap-3 text-xs text-muted">
-            <span>Answers come from the same store as the site; every number is checked against the record it cites.</span>
-            <button type="submit" disabled={s.kind === "busy"} className="rounded-full bg-ink px-3 py-1 text-xs text-background disabled:opacity-50">{s.kind === "busy" ? "Asking…" : "Ask"}</button>
+    <Sheet>
+      <SheetTrigger render={<Button variant="outline" size="sm" className="rounded-full" />}>Ask</SheetTrigger>
+      <SheetContent side="right" aria-describedby="ask-desc" className="bg-surface overflow-y-auto p-5 data-[side=right]:sm:max-w-md">
+        <SheetHeader className="p-0">
+          <SheetTitle className="display text-2xl">Ask the data</SheetTitle>
+          <SheetDescription id="ask-desc" className="text-muted">Answers come from the same store as the site; every number is checked against the record it cites.</SheetDescription>
+        </SheetHeader>
+        <form onSubmit={submit} className="flex flex-col gap-3">
+          <Textarea value={q} onChange={(e) => setQ(e.target.value)} rows={3} placeholder="What is the latest 50% horizon and its doubling time?" aria-label="Question" className="bg-background" />
+          <div className="flex items-center justify-between gap-3">
+            <span className="eyebrow">{path}</span>
+            <Button type="submit" size="sm" disabled={s.kind === "busy"}>{s.kind === "busy" ? "Asking…" : "Ask"}</Button>
           </div>
           <div aria-live="polite" className="text-sm leading-relaxed">
             {s.kind === "error" ? <p className="text-slow">{s.text}</p> : null}
             {s.kind === "answer" ? <AnswerView a={s.a} /> : null}
           </div>
         </form>
-      </dialog>
-    </>
+      </SheetContent>
+    </Sheet>
   );
 }
 

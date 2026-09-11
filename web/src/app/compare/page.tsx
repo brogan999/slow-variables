@@ -13,8 +13,8 @@ export default function ComparePage() {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight">Compare</h1>
-        <p className="text-sm text-ink-2 max-w-3xl">The same evidence read against both worldviews. Each row is a published indicator; the two middle columns say what <em>AI as Normal Technology</em> and <em>AI 2027</em> (with the lab timelines that share its premise) expect it to show, citing the sourced claims on the prediction ledger. The last column is not an opinion: it is derived from the indicator&apos;s current status. Faster than normal leans AI 2027; consistent with normal or slower leans Normal Technology; emerging, unclear or unmeasured is open.</p>
+        <h1 className="display text-[2.25rem] md:text-[3rem] leading-[1.05] tracking-[-0.015em]">Compare</h1>
+        <p className="text-lg leading-snug text-ink-2 max-w-[60ch]">The same evidence read against both worldviews. Each row is a published indicator; the two middle columns say what <em>AI as Normal Technology</em> and <em>AI 2027</em> (with the lab timelines that share its premise) expect it to show, citing the sourced claims on the prediction ledger. The last column is not an opinion: it is derived from the indicator&apos;s current status. Faster than normal leans AI 2027; consistent with normal or slower leans Normal Technology; emerging, unclear or unmeasured is open.</p>
       </div>
       <p className="text-sm"><span className="font-medium tabular-nums">{tally.nk}</span> lean Normal Technology · <span className="font-medium tabular-nums">{tally.ai2027}</span> lean AI 2027 · <span className="font-medium tabular-nums">{tally.open}</span> open</p>
       <div className="overflow-x-auto">

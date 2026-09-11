@@ -9,7 +9,7 @@ export function EvidenceLog({ items }: { items: Evidence[] }) {
   return (
     <ol className="flex flex-col gap-2 text-sm">
       {items.map((e) => (
-        <li key={e.id} id={e.id} className="rounded-lg bg-surface ring-hair p-3">
+        <li key={e.id} id={e.id} className="panel p-3">
           <div className="flex flex-wrap items-center gap-2 text-xs text-ink-2">
             <span className="tabular-nums text-muted">{e.as_of}</span>
             <span className={e.stance === "against" ? "text-slow" : e.stance === "for" ? "text-ink" : "text-muted"}>{STANCE[e.stance] ?? e.stance}</span>

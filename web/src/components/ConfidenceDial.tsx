@@ -9,10 +9,10 @@ export function ConfidenceDial({ value, size = 44 }: { value: number | null | un
   return (
     <span className="inline-flex items-center gap-1.5" title={`Confidence ${value} of 95: ${label}`}>
       <svg width={size} height={size / 2 + 4} viewBox={`0 0 ${size} ${size / 2 + 4}`} aria-hidden>
-        <path d={`M${c - r},${c} A${r},${r} 0 0 1 ${c + r},${c}`} fill="none" stroke="var(--grid)" strokeWidth="4" />
-        <path d={`M${c - r},${c} A${r},${r} 0 ${frac > 0.5 ? 1 : 0} 1 ${x},${y}`} fill="none" stroke="var(--ink)" strokeWidth="4" strokeLinecap="round" />
+        <path d={`M${c - r},${c} A${r},${r} 0 0 1 ${c + r},${c}`} fill="none" stroke="var(--grid)" strokeWidth="3" />
+        <path d={`M${c - r},${c} A${r},${r} 0 ${frac > 0.5 ? 1 : 0} 1 ${x},${y}`} fill="none" stroke="var(--ink)" strokeWidth="3" strokeLinecap="round" />
       </svg>
-      <span className="text-xs tabular-nums"><span className="font-medium">{value}</span><span className="text-muted">/95</span><span className="sr-only"> confidence, {label}</span></span>
+      <span className="num text-xs"><span className="font-medium">{value}</span><span className="text-muted">/95</span><span className="sr-only"> confidence, {label}</span></span>
     </span>
   );
 }

@@ -1,11 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 
 // The footer date is the build's generated_at; the warning appears only in the viewer's browser once it is old.
 export function Freshness({ generatedAt }: { generatedAt: string }) {
-  const [days, setDays] = useState<number | null>(null);
-  useEffect(() => { setDays(Math.floor((Date.now() - Date.parse(generatedAt)) / 86400e3)); }, [generatedAt]);
+  const days = useSyncExternalStore(() => () => {}, () => Math.floor((Date.now() - Date.parse(generatedAt)) / 86400e3), () => null);
   const stamp = generatedAt.slice(0, 16).replace("T", " ") + " UTC";
   return (
     <span>
