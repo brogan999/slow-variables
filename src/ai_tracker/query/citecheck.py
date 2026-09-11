@@ -14,7 +14,7 @@ from dataclasses import dataclass, field
 URL = re.compile(r"https?://\S+")  # links are provenance, not claims; arXiv ids and paths are not numbers
 CITE = re.compile(r"\[(obs|derived|ind|event):([A-Za-z0-9_.\-]+)\]")
 NUM = re.compile(
-    r"(?<![\w.\-#])(?P<sign>[-−–])?(?P<cur>\$|€|£)?(?P<num>\d{1,3}(?:,\d{3})+|\d+(?:\.\d+)?)(?P<suffix>\s?(?:%|×|x\b|[kKmMbBtT](?!\w)|h\b|hours?\b|min\b|minutes?\b|days?\b|pp\b|points?\b|bn\b|trillion|billion|million))?(?![A-Za-z0-9]|-[A-Za-z])",
+    r"(?<![\w.\-#])(?P<sign>[-−–])?(?P<cur>\$|€|£)?(?P<num>\d{1,3}(?:,\d{3})+|\d+(?:\.\d+)?)(?P<suffix>\s?(?:%|×|x\b|[kKmMbBtT](?!\w)|h\b|hours?\b|min\b|minutes?\b|days?\b|pp\b|points?\b|bn\b|trillion|billion|million))?(?![A-Za-z0-9]|-[A-Za-z0-9])",
 )
 MULT = {"k": 1e3, "m": 1e6, "b": 1e9, "bn": 1e9, "t": 1e12, "million": 1e6, "billion": 1e9, "trillion": 1e12}
 WORD_NUMBERS = {"one", "two", "three", "four"}
@@ -107,7 +107,9 @@ def check(text: str, records: dict[str, Record]) -> Result:
                 continue  # a bare year
             if not m.group("cur") and not suf and re.fullmatch(r"\d", num):
                 continue  # "one of 4" style small counts and list numbering
-            if re.match(r"\s*(time[- ])?horizon|\s*reliab|\s*confidence", sentence[m.end() :]):
+            if re.match(
+                r"\s*(?:/\d+%?\s*)?(?:(time[- ])?horizon|reliab|confidence|success)", sentence[m.end() :]
+            ):
                 continue  # "the 80% horizon" names a series, it is not a claim
             v = _parse(m)
             if v is None:

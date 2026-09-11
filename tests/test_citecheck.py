@@ -72,3 +72,8 @@ def test_form_names_are_not_numbers_and_annotation_never_nests():
     assert check("Built from 10-Q and 10-K filings and the 20-F [obs:x].", R).numbers == []
     res = check("It was 55 then 55 again.", R)
     assert res.annotated.count("⟦unverified: 55⟧") == 2 and "⟦unverified: ⟦" not in res.annotated
+
+
+def test_ratio_labels_and_hyphenated_ids_are_not_numbers():
+    assert check("The 50%/80% horizon ratio is 6.34× [derived:r].", R).ok
+    assert check("Accession 0001045810-26-000075 [obs:x].", R).numbers == []
