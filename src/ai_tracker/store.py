@@ -466,15 +466,19 @@ class Store:
                 | {b.id for b in self.seed.bottlenecks if ind.id in b.related_indicators}
             )
             _write(out / "indicators" / f"{ind.id}.json", doc)
-        for key, rows in self._all_series().items():
-            src = next((s for s in self.seed.sources if s.id == rows[0]["source_id"]), None)
+        live, withdrawn = self._all_series(), self._withdrawn()
+        for key in sorted(live.keys() | withdrawn.keys()):
+            rows = live.get(key, [])
+            first = rows[0] if rows else withdrawn[key][0]
+            src = next((s for s in self.seed.sources if s.id == first["source_id"]), None)
             _write(
                 out / "series" / f"{key}.json",
                 {
                     "series_key": key,
-                    "unit": rows[0]["unit"],
+                    "unit": first["unit"],
                     "source": dump(src) if src else None,
                     "observations": [_full(o) for o in rows],
+                    "withdrawn": withdrawn.get(key, []),
                 },
             )
             (out.parent / "public" / "data").mkdir(parents=True, exist_ok=True)
@@ -933,6 +937,19 @@ class Store:
             instrument = parts[2].rsplit("_", 1)[0] if parts[0] == "circular" else parts[2]
             rows.append({**_full(o), "parties": parties, "instrument": instrument, "obs_id": o["id"]})
         return sorted(rows, key=lambda r: r["as_of_date"], reverse=True)
+
+    def _withdrawn(self) -> dict[str, list[dict[str, Any]]]:
+        """Rows withdrawn in place (rejected, with the reason in dispute_text): shown struck through, never deleted."""
+        cur = self.con.execute(
+            "SELECT * FROM observation_all WHERE review_status = 'rejected' AND dispute_text IS NOT NULL "
+            "ORDER BY as_of_date, id"
+        )
+        cols = [d[0] for d in cur.description]
+        out: dict[str, list[dict[str, Any]]] = {}
+        for r in cur.fetchall():
+            o = dict(zip(cols, r))
+            out.setdefault(o["series_key"], []).append(_full(o))
+        return out
 
     def _all_series(self) -> dict[str, list[dict[str, Any]]]:
         out: dict[str, list[dict[str, Any]]] = {}

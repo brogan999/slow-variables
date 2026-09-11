@@ -120,18 +120,47 @@ class Epoch(Connector):
                     run_rate_vs_booked="run_rate",
                 )
             )
-        for r in table(COMPUTE, {"Company", "Amount", "Period type", "Date", "Confidence"}):
-            v, d = num(r.get("Amount")), day(r.get("Date"))
-            grain = {"Year": "fy", "Quarter": "q"}.get((r.get("Period type") or "").strip())
-            if not v or not d or not grain:
-                continue
-            rows.append(
-                emit(
-                    r,
-                    f"epoch.{slug(r['Company'])}.compute_spend_usd.{grain}",
-                    v,
-                    d,
-                    day(r.get("Report date")),
+        for r in table(
+            REVENUE, {"Company", "Date", "Period revenue", "Period type", "Scope", "Confidence"}
+        ):  # booked revenue for a full year, beside the run-rates
+            v, d = num(r.get("Period revenue")), day(r.get("Date"))
+            if (
+                v
+                and d
+                and (r.get("Period type") or "").strip() == "Year"
+                and (r.get("Scope") or "").strip() == "Full company"
+            ):
+                rows.append(
+                    emit(r, f"epoch.{slug(r['Company'])}.revenue_usd.fy", v, d, day(r.get("Report date")))
                 )
-            )
+        # Epoch splits each report into inference, R&D and total compute; one series per category, so a year's
+        # inference figure never overwrites its R&D figure. Rows Epoch keeps off its own chart are skipped.
+        split = {
+            "Inference compute spend": "inference",
+            "R&D compute spend": "rd",
+            "Total compute spend": "total",
+        }
+        for r in table(
+            COMPUTE, {"Company", "Period type", "Date", "Confidence", "Exclude from graph view", *split}
+        ):
+            grain = {"Year": "fy", "Quarter": "q"}.get((r.get("Period type") or "").strip())
+            d = day(r.get("Date"))
+            if (
+                not grain
+                or not d
+                or (r.get("Exclude from graph view") or "").strip().lower() in ("true", "yes", "1")
+            ):
+                continue
+            for col, cat in split.items():
+                v = num(r.get(col))
+                if v:
+                    rows.append(
+                        emit(
+                            r,
+                            f"epoch.{slug(r['Company'])}.{cat}_compute_usd.{grain}",
+                            v,
+                            d,
+                            day(r.get("Report date")),
+                        )
+                    )
         return rows
