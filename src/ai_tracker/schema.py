@@ -355,6 +355,7 @@ class SkippedSource(BaseModel):
     url: str | None = None
     reason: str = Field(min_length=1)
     attribution: str | None = None
+    people: list[str] = []  # Appendix F: people read through this source, even though it is not ingested
 
 
 class Bucket(BaseModel):

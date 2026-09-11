@@ -17,7 +17,6 @@ from .ramp import Ramp
 from .regulatory import FdaDevices, Ncsl, Owid, RlList
 from .sec_segments import SecSegments
 from .sec_xbrl import SecXbrl
-from .x import XDrop, XList
 from .yale import YaleDissimilarity
 
 CONNECTORS = {
@@ -27,8 +26,6 @@ CONNECTORS = {
         Ramp,
         Canaries,
         Cait,
-        XDrop,
-        XList,
         YaleDissimilarity,
         OpenRouterRankings,
         ArtificialAnalysis,

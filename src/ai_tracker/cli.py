@@ -249,14 +249,6 @@ def _suggested_enrichment(s: st.Store) -> str:
             )
     except Exception as e:  # noqa: BLE001 - no Form D cache today is not an error
         lines.append(f"- Form D candidates unavailable today ({type(e).__name__})")
-    rows = s.con.execute(
-        "SELECT series_key, value_text, url FROM observation_all WHERE series_key LIKE 'watch.x.%' AND value_text LIKE '% links: %' AND substr(retrieved_at, 1, 10) = ?",
-        [date.today().isoformat()],
-    ).fetchall()
-    for k, text, url in rows:
-        lines.append(
-            f"- {k}: linked artifact(s) {text.split(' links: ', 1)[1]} ({url}); fetch and add a manual row if it is tier 1-6"
-        )
     return "\n## Suggested enrichment\n\n" + "\n".join(lines or ["- nothing to suggest"]) + "\n"
 
 
