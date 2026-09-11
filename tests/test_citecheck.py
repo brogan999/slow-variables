@@ -60,3 +60,9 @@ def test_hash_ids_are_labels():
 def test_urls_are_not_numbers():
     res = check("- 2026-09-10 arxiv: a post (https://arxiv.org/abs/2609.08162v1) [obs:x]", R)
     assert res.ok and res.numbers == []
+
+
+def test_hashes_and_ids_glued_to_letters_are_not_numbers():
+    res = check("- page changed (content hash 4975fd84a4f9) [obs:x]", R)
+    assert res.ok and res.numbers == []
+    assert check("It reached $172B [obs:x].", R).numbers == ["$172B"]
