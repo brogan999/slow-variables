@@ -13,7 +13,7 @@
  "bucket_id": "early_adoption",
  "cadence_expected": "quarterly",
  "confidence": 80,
- "counterevidence": "Self-reported survey; the instrument changed between waves; hours assisted is not hours saved.",
+ "counterevidence": "Self-reported survey; the instrument changed between waves; hours assisted is not hours saved. One instrument (the Real-Time Population Survey) is published three ways (FRED, the authors' tracker, the FRED Blog), which count as one source, so the status stays emerging until a second survey measures hours.",
  "crosswalk": [
   {
    "bucket_id": "early_adoption",
@@ -24,7 +24,7 @@
    "sublayer_id": null
   }
  ],
- "definition": "Share of all US work hours in which employed adults used generative AI, from the Bick\u2013Blandin\u2013Deming Real-Time Population Survey (quarterly series via FRED), with weekly work use and any-use shares shown alongside.",
+ "definition": "Share of all US work hours in which employed adults used generative AI, from the Bick\u2013Blandin\u2013Deming Real-Time Population Survey (quarterly series via FRED).",
  "derived": [],
  "direction": null,
  "direction_rule": null,
@@ -56,7 +56,7 @@
  "leading_lagging": "coincident",
  "metric": null,
  "metric_dims": {},
- "n_observations": 27,
+ "n_observations": 7,
  "name": "Share of work hours assisted by generative AI",
  "normal_band": {
   "hi": 0.09,
@@ -164,7 +164,7 @@
    "value": 0.06266876898899999
   }
  ],
- "proposed_status": "consistent_with_normal",
+ "proposed_status": null,
  "proxy_types": [
   "behaviour",
   "deployment"
@@ -182,180 +182,6 @@
  "related_metrics": [],
  "related_predictions": [],
  "series": [
-  {
-   "points": [
-    {
-     "as_of": "2026-05-31",
-     "disputed": false,
-     "grade": "B",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "b99d50efadc55f94"
-     ],
-     "series_key": "bbd.us_adults.any_use_share.pt",
-     "subject": "us_adults",
-     "unit": "share",
-     "value": 0.618
-    }
-   ],
-   "series_key": "bbd.us_adults.any_use_share.pt"
-  },
-  {
-   "points": [
-    {
-     "as_of": "2026-05-31",
-     "disputed": false,
-     "grade": "B",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "5dcc48a7f656d170"
-     ],
-     "series_key": "bbd.us_workers.hours_assisted_share.pt",
-     "subject": "us_workers",
-     "unit": "share",
-     "value": 0.06267
-    }
-   ],
-   "series_key": "bbd.us_workers.hours_assisted_share.pt"
-  },
-  {
-   "points": [
-    {
-     "as_of": "2026-05-31",
-     "disputed": false,
-     "grade": "B",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "eec2435095e75743"
-     ],
-     "series_key": "bbd.us_workers.work_use_weekly_share.pt",
-     "subject": "us_workers",
-     "unit": "share",
-     "value": 0.39234
-    }
-   ],
-   "series_key": "bbd.us_workers.work_use_weekly_share.pt"
-  },
-  {
-   "points": [
-    {
-     "as_of": "2024-09-30",
-     "disputed": false,
-     "grade": "B",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "3cc47b2f11707296"
-     ],
-     "series_key": "fred.us_adults.any_use_share.q",
-     "subject": "us_adults",
-     "unit": "share",
-     "value": 0.44619203460400003
-    },
-    {
-     "as_of": "2024-12-31",
-     "disputed": false,
-     "grade": "B",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "b59e413110e3a8df"
-     ],
-     "series_key": "fred.us_adults.any_use_share.q",
-     "subject": "us_adults",
-     "unit": "share",
-     "value": 0.463369490715
-    },
-    {
-     "as_of": "2025-03-31",
-     "disputed": false,
-     "grade": "B",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "d741602e79d9d39c"
-     ],
-     "series_key": "fred.us_adults.any_use_share.q",
-     "subject": "us_adults",
-     "unit": "share",
-     "value": 0.479755528473
-    },
-    {
-     "as_of": "2025-06-30",
-     "disputed": false,
-     "grade": "B",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "fe29b8b27eda0659"
-     ],
-     "series_key": "fred.us_adults.any_use_share.q",
-     "subject": "us_adults",
-     "unit": "share",
-     "value": 0.518648873699
-    },
-    {
-     "as_of": "2025-09-30",
-     "disputed": false,
-     "grade": "B",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "fa5b0fa3e9ed905e"
-     ],
-     "series_key": "fred.us_adults.any_use_share.q",
-     "subject": "us_adults",
-     "unit": "share",
-     "value": 0.545391471974
-    },
-    {
-     "as_of": "2025-12-31",
-     "disputed": false,
-     "grade": "B",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "c311796d9bcf864a"
-     ],
-     "series_key": "fred.us_adults.any_use_share.q",
-     "subject": "us_adults",
-     "unit": "share",
-     "value": 0.5592530085
-    },
-    {
-     "as_of": "2026-03-31",
-     "disputed": false,
-     "grade": "B",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "84024a9f67d3d4b5"
-     ],
-     "series_key": "fred.us_adults.any_use_share.q",
-     "subject": "us_adults",
-     "unit": "share",
-     "value": 0.5786560276689999
-    },
-    {
-     "as_of": "2026-06-30",
-     "disputed": false,
-     "grade": "B",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "2735a60f0d2378e3"
-     ],
-     "series_key": "fred.us_adults.any_use_share.q",
-     "subject": "us_adults",
-     "unit": "share",
-     "value": 0.617802431014
-    }
-   ],
-   "series_key": "fred.us_adults.any_use_share.q"
-  },
   {
    "points": [
     {
@@ -458,152 +284,10 @@
     }
    ],
    "series_key": "fred.us_workers.hours_assisted_share.q"
-  },
-  {
-   "points": [
-    {
-     "as_of": "2024-09-30",
-     "disputed": false,
-     "grade": "B",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "3fa468ca00d179d1"
-     ],
-     "series_key": "fred.us_workers.work_use_weekly_share.q",
-     "subject": "us_workers",
-     "unit": "share",
-     "value": 0.28194002965799997
-    },
-    {
-     "as_of": "2024-12-31",
-     "disputed": false,
-     "grade": "B",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "972d925077c1e98e"
-     ],
-     "series_key": "fred.us_workers.work_use_weekly_share.q",
-     "subject": "us_workers",
-     "unit": "share",
-     "value": 0.263642467569
-    },
-    {
-     "as_of": "2025-03-31",
-     "disputed": false,
-     "grade": "B",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "2c173e2d949fa737"
-     ],
-     "series_key": "fred.us_workers.work_use_weekly_share.q",
-     "subject": "us_workers",
-     "unit": "share",
-     "value": 0.292784603079
-    },
-    {
-     "as_of": "2025-06-30",
-     "disputed": false,
-     "grade": "B",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "8aa0a471af912a92"
-     ],
-     "series_key": "fred.us_workers.work_use_weekly_share.q",
-     "subject": "us_workers",
-     "unit": "share",
-     "value": 0.305529800242
-    },
-    {
-     "as_of": "2025-09-30",
-     "disputed": false,
-     "grade": "B",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "58f79eeff8feacb7"
-     ],
-     "series_key": "fred.us_workers.work_use_weekly_share.q",
-     "subject": "us_workers",
-     "unit": "share",
-     "value": 0.320116100815
-    },
-    {
-     "as_of": "2025-12-31",
-     "disputed": false,
-     "grade": "B",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "56e28ca75b0f54e0"
-     ],
-     "series_key": "fred.us_workers.work_use_weekly_share.q",
-     "subject": "us_workers",
-     "unit": "share",
-     "value": 0.351952740754
-    },
-    {
-     "as_of": "2026-03-31",
-     "disputed": false,
-     "grade": "B",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "8d4f8bd10681b4c1"
-     ],
-     "series_key": "fred.us_workers.work_use_weekly_share.q",
-     "subject": "us_workers",
-     "unit": "share",
-     "value": 0.378273543155
-    },
-    {
-     "as_of": "2026-06-30",
-     "disputed": false,
-     "grade": "B",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "72b0b6f718eaea49"
-     ],
-     "series_key": "fred.us_workers.work_use_weekly_share.q",
-     "subject": "us_workers",
-     "unit": "share",
-     "value": 0.392336972111
-    }
-   ],
-   "series_key": "fred.us_workers.work_use_weekly_share.q"
-  },
-  {
-   "points": [
-    {
-     "as_of": "2026-05-31",
-     "disputed": false,
-     "grade": "B",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "d5850842fc53df4d"
-     ],
-     "series_key": "stlouisfed_blog.us_workers.hours_assisted_share.pt",
-     "subject": "us_workers",
-     "unit": "share",
-     "value": 0.063
-    }
-   ],
-   "series_key": "stlouisfed_blog.us_workers.hours_assisted_share.pt"
   }
  ],
  "series_keys": [
-  "fred.us_workers.hours_assisted_share.q",
-  "fred.us_workers.work_use_weekly_share.q",
-  "fred.us_adults.any_use_share.q",
-  "bbd.us_workers.hours_assisted_share.pt",
-  "bbd.us_workers.work_use_weekly_share.pt",
-  "bbd.us_adults.any_use_share.pt",
-  "stlouisfed_blog.us_workers.hours_assisted_share.pt"
+  "fred.us_workers.hours_assisted_share.q"
  ],
  "sparkline": [
   {
@@ -708,8 +392,23 @@
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,
- "status": "consistent_with_normal",
+ "status": "emerging",
  "status_events": [
+  {
+   "author": "claude",
+   "created_at": "2026-09-11T10:42:17.676014Z",
+   "evidence_ids": [
+    "7a1c89cb3f486453"
+   ],
+   "id": "38e57ee91534d3e6",
+   "new_conf": 80,
+   "new_status": "emerging",
+   "old_conf": 80,
+   "old_status": "consistent_with_normal",
+   "reason": "6.3% of US work hours assisted (Q2 2026, FRED) sits inside the normal band, but every reading comes from one instrument, the Real-Time Population Survey, published three ways (FRED, the authors' tracker, the FRED Blog). Three publishers are one source, so the two-source rule caps the status at emerging until a second survey measures hours.",
+   "target_id": "bbd_work_hours_assisted",
+   "target_type": "indicator"
+  },
   {
    "author": "claude-initial-seed",
    "created_at": "2026-09-10T01:29:58.476677Z",
