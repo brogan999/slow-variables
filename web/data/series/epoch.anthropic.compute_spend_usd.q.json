@@ -1,39 +1,5 @@
 {
- "observations": [
-  {
-   "as_of_date": "2026-03-31",
-   "audited_vs_reported": "estimated",
-   "content_hash": "90c5337eb305680e60c4986f81ce86d44f12171844ba92aefe4dbb587cc6b2df",
-   "dispute_text": null,
-   "disputed": false,
-   "entity_id": "anthropic",
-   "extraction_method": "api",
-   "extractor_version": "epoch-1",
-   "grade": "C",
-   "gross_vs_net": null,
-   "http_status": 200,
-   "id": "41c9e487489ae4ac",
-   "period_start": null,
-   "published_date": "2026-05-20",
-   "q": "2026-01-01 00:00:00",
-   "raw_snippet": "{\"Amount\": \"13600000000\", \"Category\": \"R&D cloud compute,Inference cloud compute\", \"Company\": \"Anthropic\", \"Confidence\": \"Likely\", \"Date\": \"2026-03-31\", \"Exclude from graph view\": \"True\", \"Id\": \"Anthropic Q1 2026\", \"Notes\": \"Digitized from $3.4 billion in Q1 2026, from WSJ article\", \"Period type\": \"Quarter\", \"Report date\": \"2026-05-20\", \"Source 1\": \"https://www.wsj.com/tech/ai/mind-blowing-growth-is-about-to-propel-anthropic-into-its-first-profitable-quarter-7edbf2f4\", \"Source Type\": \"Media report\", \"Total compute spend\": \"13600000000.0\"}",
-   "retrieved_at": "2026-09-10T01:28:41.972289Z",
-   "review_status": "approved",
-   "reviewer_id": null,
-   "run_rate_vs_booked": null,
-   "series_key": "epoch.anthropic.compute_spend_usd.q",
-   "source_id": "epoch",
-   "subject": "anthropic",
-   "supersedes_id": null,
-   "tier": 5,
-   "unit": "USD",
-   "url": "https://epoch.ai/data/ai_companies.zip",
-   "value_high": null,
-   "value_low": null,
-   "value_numeric": 13600000000.0,
-   "value_text": null
-  }
- ],
+ "observations": [],
  "series_key": "epoch.anthropic.compute_spend_usd.q",
  "source": {
   "attribution": "Epoch AI, 'Data on AI Companies' (CC BY 4.0), epoch.ai/data",
@@ -58,5 +24,38 @@
   "url": "https://epoch.ai/data/ai-companies",
   "watch": {}
  },
- "unit": "USD"
+ "unit": "USD",
+ "withdrawn": [
+  {
+   "as_of_date": "2026-03-31",
+   "audited_vs_reported": "estimated",
+   "content_hash": "90c5337eb305680e60c4986f81ce86d44f12171844ba92aefe4dbb587cc6b2df",
+   "dispute_text": "Withdrawn 11 Sep 2026: Epoch's compute-spend table carries inference, R&D and total spend in one column, so figures for one year overwrote each other; they are re-ingested as one series per category.",
+   "disputed": true,
+   "entity_id": "anthropic",
+   "extraction_method": "api",
+   "extractor_version": "epoch-1",
+   "grade": "C",
+   "gross_vs_net": null,
+   "http_status": 200,
+   "id": "41c9e487489ae4ac",
+   "period_start": null,
+   "published_date": "2026-05-20",
+   "raw_snippet": "{\"Amount\": \"13600000000\", \"Category\": \"R&D cloud compute,Inference cloud compute\", \"Company\": \"Anthropic\", \"Confidence\": \"Likely\", \"Date\": \"2026-03-31\", \"Exclude from graph view\": \"True\", \"Id\": \"Anthropic Q1 2026\", \"Notes\": \"Digitized from $3.4 billion in Q1 2026, from WSJ article\", \"Period type\": \"Quarter\", \"Report date\": \"2026-05-20\", \"Source 1\": \"https://www.wsj.com/tech/ai/mind-blowing-growth-is-about-to-propel-anthropic-into-its-first-profitable-quarter-7edbf2f4\", \"Source Type\": \"Media report\", \"Total compute spend\": \"13600000000.0\"}",
+   "retrieved_at": "2026-09-10T01:28:41.972289Z",
+   "review_status": "rejected",
+   "reviewer_id": null,
+   "run_rate_vs_booked": null,
+   "series_key": "epoch.anthropic.compute_spend_usd.q",
+   "source_id": "epoch",
+   "supersedes_id": null,
+   "tier": 5,
+   "unit": "USD",
+   "url": "https://epoch.ai/data/ai_companies.zip",
+   "value_high": null,
+   "value_low": null,
+   "value_numeric": 13600000000.0,
+   "value_text": null
+  }
+ ]
 }

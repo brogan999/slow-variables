@@ -16,7 +16,7 @@ from pathlib import Path
 import yaml
 
 from ...schema import Basis, Extraction, Observation, Source
-from ..base import Connector, RawItem
+from ..base import Connector, RawItem, robots_ok
 from ..scrub import html_to_text, normalise
 
 ATOM = "{http://www.w3.org/2005/Atom}"
@@ -63,9 +63,22 @@ class Feeds(Connector):
         self.sources = [Source(**r) for r in rows if r.get("connector") == "feeds"]
         self.urls = [s.url for s in self.sources]
 
+    def fetch(self, day: date, refetch: bool = False) -> list[RawItem]:
+        out: list[RawItem] = []
+        for src in self.sources:
+            try:  # one failing feed must not stop the rest
+                if src.kind.value == "html" and not robots_ok(src.url):
+                    raise PermissionError(f"robots.txt disallows {src.url}")
+                out.append(self.fetch_one(src.url, day, refetch))
+            except Exception as e:
+                self.errors.append(f"{src.id}: {type(e).__name__}: {e}")
+        return out
+
     def extract(self, items: list[RawItem]) -> list[Observation]:
         out: list[Observation] = []
-        for src, item in zip(self.sources, items):
+        by_url = {s.url: s for s in self.sources}  # a skipped feed must not shift the next feed's posts onto it
+        for item in items:
+            src = by_url[item.url]
             if (
                 src.kind.value == "html"
             ):  # page watch: a blog with no feed; one row per content change, keyed by hash

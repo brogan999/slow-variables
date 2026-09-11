@@ -46,3 +46,17 @@ def test_empty_feed_is_an_error_not_silence(tmp_path):
         [_item("https://ex.test/rss", b"<rss><channel/></rss>"), _item("https://ex.test/atom", ATOM)]
     )
     assert c.errors == ["f1: feed parsed to 0 posts"] and parse_feed(b"<rss><channel/></rss>") == []
+
+
+def test_a_failed_feed_does_not_shift_the_next_feeds_posts(tmp_path, monkeypatch):
+    c = _feeds(tmp_path)
+
+    def fetch_one(url, day, refetch=False):
+        if url.endswith("/rss"):
+            raise OSError("down")
+        return _item(url, ATOM)
+
+    monkeypatch.setattr(c, "fetch_one", fetch_one)
+    rows = c.extract(c.fetch(date(2026, 9, 10)))
+    assert [(r.source_id, r.series_key) for r in rows] == [("f2", "watch.f2.self_improvement.pt")]
+    assert c.errors == ["f1: OSError: down"]

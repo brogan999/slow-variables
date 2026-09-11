@@ -50,7 +50,7 @@ export const index = () => read<{ indicators: Card[]; buckets: Bucket[]; layers:
 export const indicator = (id: string) => read<Doc>(`indicators/${id}.json`);
 export const bucket = (id: string) => read<Bucket & { indicators: Card[]; crosswalk: Crosswalk[] }>(`buckets/${id}.json`);
 export const layer = (id: string) => read<Layer & { indicators: Card[]; sublayers: Sublayer[]; crosswalk: Crosswalk[] }>(`layers/${id}.json`);
-export const series = (key: string) => read<{ series_key: string; unit: string; source: Source | null; observations: Observation[] }>(`series/${key}.json`);
+export const series = (key: string) => read<{ series_key: string; unit: string; source: Source | null; observations: Observation[]; withdrawn: Observation[] }>(`series/${key}.json`);
 export const seriesKeys = () => fs.readdirSync(path.join(ROOT, "series")).map((f) => f.replace(/\.json$/, ""));
 export const diffusion = () => read<{
   as_of: string; verdict: string; buckets: (Bucket & { indicators: Card[]; status: string })[];

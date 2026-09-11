@@ -38,6 +38,7 @@ CIK = {
 CONCEPTS = {
     "revenue": ["us-gaap:Revenues", "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax"],
     "operating_income": ["us-gaap:OperatingIncomeLoss"],
+    "cost_of_revenue": ["us-gaap:CostOfGoodsAndServicesSold", "us-gaap:CostOfRevenue"],  # segment cost: MSFT from its FY25 10-K
 }
 FILINGS_PER_FILER = 9  # ~2 years of 10-Q + 10-K
 

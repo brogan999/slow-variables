@@ -58,7 +58,11 @@ class SecXbrl(Connector):
 
     def extract(self, items: list[RawItem]) -> list[Observation]:
         rows: list[Observation] = []
-        for ent, item in zip(self.entities, items):
+        by_url = dict(
+            zip(self.urls, self.entities)
+        )  # a skipped 404 must not shift every later filer onto the wrong company
+        for item in items:
+            ent = by_url[item.url]
             doc = json.loads(item.body)
             expect(set(doc), {"facts"}, f"sec {ent.id}")
             gaap = doc["facts"].get("us-gaap") or {}
