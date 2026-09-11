@@ -77,6 +77,18 @@
  },
  "bucket_id": "methods",
  "cadence_expected": "annual",
+ "chart_sources": {
+  "metric": "training_compute_doubling_days",
+  "sources": [
+   {
+    "attribution": "Epoch AI, Notable AI Models (CC BY 4.0)",
+    "id": "epoch_models",
+    "license": "CC BY 4.0",
+    "name": "Epoch AI notable and frontier models",
+    "org": "Epoch AI"
+   }
+  ]
+ },
  "confidence": 60,
  "counterevidence": "Compute estimates for closed models carry wide uncertainty; the frontier set is Epoch's selection; training compute is an input, not a capability.",
  "crosswalk": [
@@ -88,7 +100,8 @@
    "shared_indicators": [
     "metr_horizon_50",
     "metr_horizon_80",
-    "horizon_ratio_80_50"
+    "horizon_ratio_80_50",
+    "open_weights_lag_months"
    ],
    "sublayer_id": null
   }
@@ -97,7 +110,7 @@
  "derived": [
   {
    "as_of_date": "2025-07-09",
-   "computed_at": "2026-09-11T11:54:15.814018Z",
+   "computed_at": "2026-09-11T12:08:02.268270Z",
    "dims": {
     "aic": "-10.0",
     "n": "38",

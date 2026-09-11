@@ -52,7 +52,7 @@ def test_metrics_refuse_missing_inputs(tmp_path):
     assert run_metrics(st.Store().con, spec) == []
 
 
-def test_capture_layers_carry_a_number_free_reading_and_meta_carries_the_counts(tmp_path):
+def test_capture_readings_meta_counts_and_chart_sources(tmp_path):
     import json
 
     s = st.Store()
@@ -62,3 +62,15 @@ def test_capture_layers_carry_a_number_free_reading_and_meta_carries_the_counts(
     assert all(layer["reading"].endswith(".") and not any(c in layer["reading"] for c in "$%") for layer in cap["layers"])
     meta = json.loads((tmp_path / "data" / "meta.json").read_text())
     assert meta["observations"] == s.con.execute("SELECT count(*) FROM observations").fetchone()[0]
+    # P1 §9: every chart document with points names its sources
+    d = tmp_path / "data"
+    for f in (d / "indicators").glob("*.json"):
+        doc = json.loads(f.read_text())
+        assert not doc.get("points") or doc["chart_sources"]["sources"], f.name
+    for f in (d / "venture").glob("*.json"):
+        doc = json.loads(f.read_text())
+        assert not any(q.get("by_source") for q in doc["quarters"]) or doc["chart_sources"]["sources"], f.name
+    for series, sources in (("gross_profit_stack_series", "gross_profit_stack_sources"), ("margin_stack_series", "margin_stack_sources")):
+        assert not cap[series] or cap[sources]["sources"], series
+    lad = json.loads((d / "lens" / "ladder.json").read_text())
+    assert not any(r["production"] or r["research"] for r in lad["rungs"]) or lad["chart_sources"]["sources"]

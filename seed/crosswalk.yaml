@@ -1,6 +1,6 @@
 # First-class: the same observations carry a diffusion address and a capture address (v2 §3).
 crosswalk:
-  - {bucket_id: methods, layer_id: model, relation: same_valve, note: "Capability growth is the model layer's product; inference price at fixed capability ⇄ price-per-token pass-through; open-weights lag ⇄ open-vs-closed gap.", shared_indicators: [metr_horizon_50, metr_horizon_80, horizon_ratio_80_50]}
+  - {bucket_id: methods, layer_id: model, relation: same_valve, note: "Capability growth is the model layer's product; inference price at fixed capability ⇄ price-per-token pass-through; open-weights lag ⇄ open-vs-closed gap.", shared_indicators: [metr_horizon_50, metr_horizon_80, horizon_ratio_80_50, open_weights_lag_months]}
   - {bucket_id: methods, layer_id: compute_physical, relation: input_to, note: "Compute growth and hardware perf-per-dollar feed the methods stock."}
   - {bucket_id: products, layer_id: serving_orchestration, relation: same_valve, note: "Productisation runs through serving, routing and agent infrastructure."}
   - {bucket_id: products, layer_id: deployment_application, relation: same_valve, note: "Uplift RCTs, pilot→production and app-layer margin net of inference measure the same valve."}

@@ -590,22 +590,72 @@ metrics:
     args: {since: "2023-01-01", invert: true}
     caveats: Six-ish points; list prices; the cheapest model at a fixed threshold is not the frontier.
     python: fits.loglinear
+  open_weights_lag_months:
+    description: How far the open-weights frontier trails the closed one in time, on Epoch's Capabilities Index - at each new open-weights record, the months since a closed model first scored as high.
+    rationale: v2 Appendix A's open-weights lag; the time version of the open-vs-closed gap, so it reads in months rather than index points.
+    grain: [as_of_date]
+    unit: months
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["epoch_bench.*.eci_open.pt", "epoch_bench.*.eci_closed.pt"]
+    caveats: Measured only when the open frontier sets a record; between records the true lag grows with the calendar. A 30.44-day month. ECI carries its own confidence intervals.
+    sql: |
+      WITH o AS (SELECT as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'epoch_bench.%.eci_open.pt'),
+      c AS (SELECT as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'epoch_bench.%.eci_closed.pt'),
+      daily AS (SELECT as_of_date, max(v) AS v, arg_max(id, v) AS id FROM o GROUP BY as_of_date),
+      rec AS (SELECT d.* FROM daily d WHERE d.v > coalesce((SELECT max(v) FROM daily d2 WHERE d2.as_of_date < d.as_of_date), -1e9)),
+      m AS (SELECT r.as_of_date, r.id, (SELECT arg_min(c.id, c.as_of_date) FROM c WHERE c.v >= r.v) AS cid,
+                   (SELECT min(c.as_of_date) FROM c WHERE c.v >= r.v) AS cdate FROM rec r)
+      SELECT as_of_date, date_diff('day', cdate, as_of_date) / 30.44 AS value, [id, cid] AS obs_ids
+      FROM m WHERE cdate IS NOT NULL AND cdate <= as_of_date
+  customer_concentration:
+    description: The largest direct customer's share of a filer's total revenue per fiscal quarter, from the customer-concentration facts in its 10-Q and 10-K (P1 §6, semis).
+    rationale: A chokepoint's rent is only as durable as its buyers are many; a few buyers' capex plans can move it.
+    grain: [as_of_date, entity]
+    unit: share
+    lead_lag: coincident
+    formula_version: 1
+    inputs: ["sec_seg.*.customer_revenue_share.*.q"]
+    caveats: Filers name customers only by letter or number and rename them each filing, so this is the top share, not one customer tracked over time; indirect sales through distributors and cloud providers are not attributed.
+    sql: |
+      SELECT as_of_date, subject AS entity, max(value_numeric) AS value, [arg_max(id, value_numeric)] AS obs_ids
+      FROM observations WHERE series_key LIKE 'sec_seg.%.customer_revenue_share.%.q' GROUP BY as_of_date, subject
+  incremental_capex_to_revenue:
+    description: The change in a cloud filer's capital expenditure over the change in its revenue, fiscal year on fiscal year (P1 §6, cloud).
+    rationale: How many new dollars of capex each new dollar of revenue is costing; a ratio climbing above one says capacity is being built ahead of the revenue it is for.
+    grain: [as_of_date, entity]
+    unit: ratio
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["sec.*.capex.fy", "sec.*.revenue.fy"]
+    caveats: Fiscal years only (quarters are too noisy); whole-company revenue, not AI revenue; skipped when revenue fell. Hyperscalers and CoreWeave.
+    sql: |
+      WITH j AS (
+        SELECT c.subject, c.as_of_date, c.value_numeric AS capex, r.value_numeric AS rev, [c.id, r.id] AS ids
+        FROM observations c JOIN observations r ON r.subject = c.subject AND r.as_of_date = c.as_of_date AND r.series_key = 'sec.' || c.subject || '.revenue.fy'
+        WHERE c.series_key LIKE 'sec.%.capex.fy' AND c.subject IN ('msft', 'googl', 'amzn', 'meta', 'orcl', 'crwv')),
+      p AS (SELECT *, lag(capex) OVER w AS capex0, lag(rev) OVER w AS rev0, lag(ids) OVER w AS ids0, lag(as_of_date) OVER w AS d0
+            FROM j WINDOW w AS (PARTITION BY subject ORDER BY as_of_date))
+      SELECT as_of_date, subject AS entity, (capex - capex0) / (rev - rev0) AS value, list_concat(ids, ids0) AS obs_ids
+      FROM p WHERE capex0 IS NOT NULL AND rev > rev0 AND date_diff('day', d0, as_of_date) BETWEEN 350 AND 380
   open_vs_closed_gap:
     description: Gap in Epoch Capabilities Index points between the best closed-weights and the best open-weights model, at each open-weights release date.
     rationale: Open-weight quality converging on the frontier is the leading indicator of model-layer commoditisation.
     grain: [as_of_date]
     unit: index
     lead_lag: leading
-    formula_version: 1
+    formula_version: 2
     inputs: ["epoch_bench.*.eci_open.pt", "epoch_bench.*.eci_closed.pt"]
     caveats: ECI is a composite with its own CIs; 'other' accessibility rows are excluded; the gap is measured only on open-release dates.
     sql: |
       WITH o AS (SELECT as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'epoch_bench.%.eci_open.pt'),
-      c AS (SELECT as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'epoch_bench.%.eci_closed.pt')
-      SELECT o.as_of_date,
-             (SELECT max(v) FROM c WHERE c.as_of_date <= o.as_of_date) - (SELECT max(v) FROM o o2 WHERE o2.as_of_date <= o.as_of_date) AS value,
-             list_distinct([o.id, (SELECT arg_max(id, v) FROM c WHERE c.as_of_date <= o.as_of_date), (SELECT arg_max(id, v) FROM o o2 WHERE o2.as_of_date <= o.as_of_date)]) AS obs_ids
-      FROM o WHERE EXISTS (SELECT 1 FROM c WHERE c.as_of_date <= o.as_of_date) GROUP BY o.as_of_date, o.id, o.v
+      c AS (SELECT as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'epoch_bench.%.eci_closed.pt'),
+      d AS (SELECT as_of_date, list(id ORDER BY id) AS ids FROM o GROUP BY as_of_date)
+      SELECT d.as_of_date,
+             (SELECT max(v) FROM c WHERE c.as_of_date <= d.as_of_date) - (SELECT max(v) FROM o WHERE o.as_of_date <= d.as_of_date) AS value,
+             list_distinct(list_concat(d.ids, [(SELECT arg_max(id, v) FROM c WHERE c.as_of_date <= d.as_of_date),
+                                               (SELECT arg_max(id, v) FROM o WHERE o.as_of_date <= d.as_of_date)])) AS obs_ids
+      FROM d WHERE EXISTS (SELECT 1 FROM c WHERE c.as_of_date <= d.as_of_date)
   arc_agi_frontier:
     description: Running best ARC-AGI-2 score by release date, from Epoch's compilation of external results.
     rationale: The brief's one serious proxy for out-of-distribution generalisation.

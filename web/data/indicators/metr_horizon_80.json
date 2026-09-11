@@ -37,6 +37,18 @@
  },
  "bucket_id": "methods",
  "cadence_expected": "per_release",
+ "chart_sources": {
+  "metric": null,
+  "sources": [
+   {
+    "attribution": "METR, Measuring AI Ability to Complete Long Tasks (Horizon v1.1)",
+    "id": "metr",
+    "license": "METR; analysis code MIT at https://github.com/METR/eval-analysis-public",
+    "name": "METR time horizons (v1.1)",
+    "org": "METR"
+   }
+  ]
+ },
  "confidence": 70,
  "counterevidence": "Our fit has no confidence interval and excludes points METR marks unreliable; the 2023-onward window gives ~125 days, which would read `emerging`. The 80% horizon is still an order of magnitude below the 50% horizon, which is the reliability gap the products bucket has to close.",
  "crosswalk": [
@@ -48,7 +60,8 @@
    "shared_indicators": [
     "metr_horizon_50",
     "metr_horizon_80",
-    "horizon_ratio_80_50"
+    "horizon_ratio_80_50",
+    "open_weights_lag_months"
    ],
    "sublayer_id": null
   }
@@ -66,7 +79,7 @@
  "fits": [
   {
    "as_of_date": "2026-04-07",
-   "computed_at": "2026-09-11T11:54:15.814018Z",
+   "computed_at": "2026-09-11T12:08:02.268270Z",
    "dims": {
     "aic": "-41.3",
     "n": "21",
@@ -137,7 +150,7 @@
   },
   {
    "as_of_date": "2026-04-07",
-   "computed_at": "2026-09-11T11:54:15.814018Z",
+   "computed_at": "2026-09-11T12:08:02.268270Z",
    "dims": {
     "aic": "-27.6",
     "n": "23",

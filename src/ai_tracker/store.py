@@ -459,6 +459,9 @@ class Store:
                     if (r := self.derived_for(m, ind.metric_dims))
                 ],
                 "series": [{"series_key": k, "points": v} for k, v in sorted(series.items())],
+                "chart_sources": self._chart_sources(
+                    [i for p in self.headline(ind) for i in p["obs_ids"]], ind.metric
+                ),
                 "derived": [
                     {**dump(d), "obs_ids": d.input_observation_ids}
                     for d in self.derived_for(ind.metric, ind.metric_dims)
@@ -574,6 +577,22 @@ class Store:
                     }
                     for d in self.derived_for("gross_profit_share_by_layer")
                 ],
+                "gross_profit_stack_sources": self._chart_sources(
+                    [
+                        i
+                        for d in self.derived_for("gross_profit_share_by_layer")
+                        for i in d.input_observation_ids
+                    ],
+                    "gross_profit_share_by_layer",
+                ),
+                "margin_stack_sources": self._chart_sources(
+                    [
+                        i
+                        for d in self.derived_for("margin_stack_share_by_layer")
+                        for i in d.input_observation_ids
+                    ],
+                    "margin_stack_share_by_layer",
+                ),
                 "margin_stack_series": [
                     {
                         "as_of": d.as_of_date.isoformat(),
@@ -928,6 +947,7 @@ class Store:
             "rungs": [
                 {**r, "production": at(r["level"], False), "research": at(r["level"], True)} for r in rungs
             ],
+            "chart_sources": self._chart_sources([r[0] for r in rows]),
         }
 
     def _venture(self) -> dict[str, dict[str, Any]]:
@@ -944,7 +964,45 @@ class Store:
                 q[metric] = {"value": d.value, "obs_ids": d.input_observation_ids}
         self._by_source(out)
         return {
-            k: {**v, "quarters": [v["quarters"][d] for d in sorted(v["quarters"])]} for k, v in out.items()
+            k: {
+                **v,
+                "quarters": [v["quarters"][d] for d in sorted(v["quarters"])],
+                "chart_sources": self._chart_sources(
+                    [
+                        i
+                        for q in v["quarters"].values()
+                        for seg in q.get("by_source", [])
+                        for i in seg["obs_ids"]
+                    ],
+                    "venture_dollars_by_source",
+                ),
+            }
+            for k, v in out.items()
+        }
+
+    def _chart_sources(self, ids: list[str], metric: str | None = None) -> dict[str, Any]:
+        """P1 §9: every chart names where its points come from (and the metric, when they are derived)."""
+        ids = sorted(set(ids))
+        found = (
+            {
+                r[0]
+                for r in self.con.execute(
+                    "SELECT DISTINCT source_id FROM observation_all WHERE id IN ("
+                    + ",".join("?" * len(ids))
+                    + ")",
+                    ids,
+                ).fetchall()
+            }
+            if ids
+            else set()
+        )
+        return {
+            "metric": metric,
+            "sources": [
+                {"id": x.id, "name": x.name, "org": x.org, "license": x.license, "attribution": x.attribution}
+                for x in self.seed.sources
+                if x.id in found
+            ],
         }
 
     def _by_source(self, out: dict[str, dict[str, Any]]) -> None:

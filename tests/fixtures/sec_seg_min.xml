@@ -10,6 +10,18 @@
 <xbrldi:explicitMember dimension="us-gaap:StatementBusinessSegmentsAxis">nvda:DataCenterMember</xbrldi:explicitMember>
 <xbrldi:explicitMember dimension="srt:ProductOrServiceAxis">nvda:ComputeMember</xbrldi:explicitMember>
 </segment></entity><period><startDate>2026-04-27</startDate><endDate>2026-07-26</endDate></period></context>
+<context id="c_cust"><entity><identifier>0001045810</identifier><segment>
+<xbrldi:explicitMember dimension="srt:MajorCustomersAxis">nvda:RevenueCustomer1Member</xbrldi:explicitMember>
+<xbrldi:explicitMember dimension="us-gaap:ConcentrationRiskByBenchmarkAxis">us-gaap:SalesRevenueNetMember</xbrldi:explicitMember>
+<xbrldi:explicitMember dimension="us-gaap:ConcentrationRiskByTypeAxis">us-gaap:CustomerConcentrationRiskMember</xbrldi:explicitMember>
+<xbrldi:explicitMember dimension="us-gaap:StatementBusinessSegmentsAxis">nvda:ComputeAndNetworkingMember</xbrldi:explicitMember>
+</segment></entity><period><startDate>2026-04-27</startDate><endDate>2026-07-26</endDate></period></context>
+<context id="c_ar"><entity><identifier>0001045810</identifier><segment>
+<xbrldi:explicitMember dimension="srt:MajorCustomersAxis">nvda:CustomerOneMember</xbrldi:explicitMember>
+<xbrldi:explicitMember dimension="us-gaap:ConcentrationRiskByBenchmarkAxis">us-gaap:AccountsReceivableMember</xbrldi:explicitMember>
+</segment></entity><period><startDate>2026-04-27</startDate><endDate>2026-07-26</endDate></period></context>
+<us-gaap:ConcentrationRiskPercentage1 contextRef="c_cust" unitRef="pure" decimals="2">0.16</us-gaap:ConcentrationRiskPercentage1>
+<us-gaap:ConcentrationRiskPercentage1 contextRef="c_ar" unitRef="pure" decimals="2">0.23</us-gaap:ConcentrationRiskPercentage1>
 <us-gaap:Revenues contextRef="c_q" unitRef="usd" decimals="-6">41100000000</us-gaap:Revenues>
 <us-gaap:Revenues contextRef="c_fy" unitRef="usd" decimals="-6">150000000000</us-gaap:Revenues>
 <us-gaap:Revenues contextRef="c_two" unitRef="usd" decimals="-6">30000000000</us-gaap:Revenues>

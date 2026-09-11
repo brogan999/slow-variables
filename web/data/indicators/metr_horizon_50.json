@@ -36,6 +36,18 @@
  },
  "bucket_id": "methods",
  "cadence_expected": "per_release",
+ "chart_sources": {
+  "metric": null,
+  "sources": [
+   {
+    "attribution": "METR, Measuring AI Ability to Complete Long Tasks (Horizon v1.1)",
+    "id": "metr",
+    "license": "METR; analysis code MIT at https://github.com/METR/eval-analysis-public",
+    "name": "METR time horizons (v1.1)",
+    "org": "METR"
+   }
+  ]
+ },
  "confidence": 80,
  "counterevidence": "On the 2023-onward window (METR's published 128.7 days, our fit 125) the status would be `emerging`, not `faster_than_normal`; the status depends on the window. METR notes measurements above 16 hours are unreliable with the current task suite, so the newest points carry wide intervals and are flagged disputed, and human baselines exist for only 5 of the 31 tasks over 8 hours. Horizon is a software-task construct and may not transfer to other work.",
  "crosswalk": [
@@ -47,7 +59,8 @@
    "shared_indicators": [
     "metr_horizon_50",
     "metr_horizon_80",
-    "horizon_ratio_80_50"
+    "horizon_ratio_80_50",
+    "open_weights_lag_months"
    ],
    "sublayer_id": null
   }
@@ -65,7 +78,7 @@
  "fits": [
   {
    "as_of_date": "2026-03-05",
-   "computed_at": "2026-09-11T11:54:15.814018Z",
+   "computed_at": "2026-09-11T12:08:02.268270Z",
    "dims": {
     "aic": "-44.8",
     "n": "20",
@@ -134,7 +147,7 @@
   },
   {
    "as_of_date": "2026-03-05",
-   "computed_at": "2026-09-11T11:54:15.814018Z",
+   "computed_at": "2026-09-11T12:08:02.268270Z",
    "dims": {
     "aic": "-31.0",
     "n": "22",
@@ -203,7 +216,7 @@
   },
   {
    "as_of_date": "2026-03-05",
-   "computed_at": "2026-09-11T11:54:15.814018Z",
+   "computed_at": "2026-09-11T12:08:02.268270Z",
    "dims": {
     "aic": "78.1",
     "n": "20",

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ChartSources } from "./ChartSources";
 import type { LadderDoc } from "@/lib/data";
 
 // Appendix E rungs, filled up to the current production level; production rows and research rows listed on each rung.
@@ -22,6 +23,7 @@ export function LadderView({ doc, obsIndex }: { doc: LadderDoc; obsIndex: Record
         );
       })}
       <p className="text-xs text-muted">Production rows are vendors describing their own systems (tier 7 unless independently evaluated); research rows never move the level. The rule: L0-L3 normal, L4 emerging, L5-L6 fast.</p>
+      <ChartSources cs={doc.chart_sources} />
     </div>
   );
 }

@@ -27,6 +27,32 @@
  },
  "bucket_id": null,
  "cadence_expected": "quarterly",
+ "chart_sources": {
+  "metric": "capex_to_revenue_stack",
+  "sources": [
+   {
+    "attribution": "SEC EDGAR, XBRL company facts API",
+    "id": "sec_xbrl",
+    "license": "Public domain (U.S. government); fair-access policy requires a descriptive User-Agent",
+    "name": "SEC EDGAR XBRL company facts",
+    "org": "U.S. Securities and Exchange Commission"
+   },
+   {
+    "attribution": "Epoch AI, 'Data on AI Companies' (CC BY 4.0), epoch.ai/data",
+    "id": "epoch",
+    "license": "CC BY 4.0",
+    "name": "Epoch AI data hub \u2014 AI companies",
+    "org": "Epoch AI"
+   },
+   {
+    "attribution": "Menlo Ventures, '2025: The State of Generative AI in the Enterprise'",
+    "id": "menlo",
+    "license": "Report",
+    "name": "Menlo Ventures, State of Generative AI in the Enterprise",
+    "org": "Menlo Ventures"
+   }
+  ]
+ },
  "confidence": 40,
  "counterevidence": "Both sides are approximations: capex includes non-AI spend and the revenue side double-counts enterprise purchases from labs; a ratio of filed capex to press-reported run-rates is the brief's own 'gap #1' caveat. Part of the ratio's fall is a step when Menlo's 2025 survey wave raised the enterprise-spend denominator, not a change in capex.",
  "crosswalk": [],
@@ -34,7 +60,7 @@
  "derived": [
   {
    "as_of_date": "2024-12-31",
-   "computed_at": "2026-09-11T11:54:15.814018Z",
+   "computed_at": "2026-09-11T12:08:02.268270Z",
    "dims": {},
    "formula_version": "1",
    "id": "ca0db96dc37294a8",
@@ -77,7 +103,7 @@
   },
   {
    "as_of_date": "2025-03-31",
-   "computed_at": "2026-09-11T11:54:15.814018Z",
+   "computed_at": "2026-09-11T12:08:02.268270Z",
    "dims": {},
    "formula_version": "1",
    "id": "03a595647b4ef4a9",
@@ -120,7 +146,7 @@
   },
   {
    "as_of_date": "2025-06-30",
-   "computed_at": "2026-09-11T11:54:15.814018Z",
+   "computed_at": "2026-09-11T12:08:02.268270Z",
    "dims": {},
    "formula_version": "1",
    "id": "9b8e91ebb8aeb547",
@@ -165,7 +191,7 @@
   },
   {
    "as_of_date": "2025-09-30",
-   "computed_at": "2026-09-11T11:54:15.814018Z",
+   "computed_at": "2026-09-11T12:08:02.268270Z",
    "dims": {},
    "formula_version": "1",
    "id": "86a7060a7c9a1b8d",
@@ -210,7 +236,7 @@
   },
   {
    "as_of_date": "2025-12-31",
-   "computed_at": "2026-09-11T11:54:15.814018Z",
+   "computed_at": "2026-09-11T12:08:02.268270Z",
    "dims": {},
    "formula_version": "1",
    "id": "643d9ae527a64760",
@@ -255,7 +281,7 @@
   },
   {
    "as_of_date": "2026-03-31",
-   "computed_at": "2026-09-11T11:54:15.814018Z",
+   "computed_at": "2026-09-11T12:08:02.268270Z",
    "dims": {},
    "formula_version": "1",
    "id": "f23f9776afb42bc0",
@@ -300,7 +326,7 @@
   },
   {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-11T11:54:15.814018Z",
+   "computed_at": "2026-09-11T12:08:02.268270Z",
    "dims": {},
    "formula_version": "1",
    "id": "7867e6c6b3b7fe32",

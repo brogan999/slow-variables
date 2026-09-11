@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ChangelogList } from "@/components/Changelog";
 import { IndicatorCard } from "@/components/IndicatorCard";
+import { ChartSources } from "@/components/ChartSources";
 import { MarginStackChart } from "@/components/MarginStackChart";
 import { StackVertical } from "@/components/StackVertical";
 import { StatusChip } from "@/components/StatusChip";
@@ -25,10 +26,12 @@ export default function CaptureLens() {
       <section>
         <h2 className="display text-2xl leading-tight mb-3 mt-2">Gross profit by layer <span className="text-muted">· share per calendar quarter</span></h2>
         <MarginStackChart rows={c.gross_profit_stack_series} obsIndex={idx} parts={[{ id: "compute_semis", name: "Chips", fill: "var(--s1)", prefix: "sec.nvda.gross_profit." }, { id: "compute_cloud", name: "Cloud", fill: "var(--s2)", prefix: "sec_seg.msft.intelligent_cloud.revenue." }, { id: "model", name: "Labs", fill: "var(--s1)", prefix: "epoch." }]} unmeasured="Apps: no gross-profit series, so unmeasured rather than drawn." />
+        <ChartSources cs={c.gross_profit_stack_sources} />
       </section>
       <section>
         <h2 className="display text-2xl leading-tight mb-3 mt-2">Filed operating income, five segments <span className="text-muted">· the filed check</span></h2>
         <MarginStackChart rows={c.margin_stack_series} obsIndex={idx} parts={[{ id: "compute_semis", name: "Semis segments", fill: "var(--s1)", prefix: "sec_seg.nvda." }, { id: "compute_cloud", name: "Cloud segments", fill: "var(--s2)", prefix: "sec_seg.amzn." }]} unmeasured="NVIDIA Compute & Networking and AMD Data Center against AWS, Google Cloud and Microsoft Intelligent Cloud; labs and apps file no segments." />
+        <ChartSources cs={c.margin_stack_sources} />
       </section>
       <ol className="flex flex-col gap-3">
         {c.layers.map((l) => {

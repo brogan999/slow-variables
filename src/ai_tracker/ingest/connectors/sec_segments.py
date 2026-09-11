@@ -156,4 +156,58 @@ class SecSegments(Connector):
                             )
                         if len(rows) > before:
                             break  # first concept tag that yields rows in this filing wins
+            # Customer concentration (P1 §6, semis): each direct customer's published share of total revenue. The filer
+            # renames its customers every filing, so the member is kept in the key and the top share is a metric.
+            for cid, val in re.findall(
+                r'<us-gaap:ConcentrationRiskPercentage1\b[^>]*contextRef="([^"]+)"[^>]*>([^<]+)</us-gaap:ConcentrationRiskPercentage1>',
+                xml,
+            ):
+                dims = dict(
+                    re.findall(
+                        r'<(?:xbrldi:)?explicitMember dimension="([^"]+)"[^>]*>([^<]+)<', ctx.get(cid, "")
+                    )
+                )
+                cust = dims.pop("srt:MajorCustomersAxis", None)
+                bench = dims.pop("us-gaap:ConcentrationRiskByBenchmarkAxis", "")
+                dims.pop("us-gaap:ConcentrationRiskByTypeAxis", None)
+                dims.pop(
+                    "us-gaap:StatementBusinessSegmentsAxis", None
+                )  # the customer's segment; the share is of total revenue
+                _, s, e = periods.get(cid, (set(), None, None))
+                if not cust or dims or not s or not e or not re.search(r"Revenue|SalesRevenueNet", bench):
+                    continue
+                days = (e - s).days
+                grain = "q" if 80 <= days <= 100 else "fy" if 350 <= days <= 380 else None
+                if not grain:
+                    continue
+                slug = re.sub(r"member$", "", cust.split(":")[-1].lower())
+                key = f"sec_seg.{ent}.customer_revenue_share.{slug}.{grain}"
+                if (key, e) in rows and rows[(key, e)].published_date >= filed:
+                    continue
+                rows[(key, e)] = self.obs(
+                    item,
+                    series_key=key,
+                    unit="share",
+                    as_of_date=e,
+                    period_start=s,
+                    published_date=filed,
+                    value_numeric=float(val),
+                    entity_id=ent,
+                    tier=Tier.OFFICIAL_FILING,
+                    audited_vs_reported=Basis.audited if form == "10-K" else Basis.company_stated,
+                    extraction_method=Extraction.xbrl,
+                    raw_snippet=json.dumps(
+                        {
+                            "tag": "us-gaap:ConcentrationRiskPercentage1",
+                            "customer": cust,
+                            "benchmark": bench,
+                            "start": s.isoformat(),
+                            "end": e.isoformat(),
+                            "value": val,
+                            "form": form,
+                            "filed": filed.isoformat(),
+                        },
+                        sort_keys=True,
+                    ),
+                )
         return list(rows.values())

@@ -14,7 +14,7 @@ export default function SourcesPage() {
           <thead><tr><th scope="col">Source</th><th scope="col">Org</th><th scope="col">Kind</th><th scope="col">Default tier</th><th scope="col">Cadence</th><th scope="col">Lens</th><th scope="col">Health</th><th scope="col">Last success</th><th scope="col">Items</th><th scope="col">Runs</th><th scope="col">Attribution and licence</th></tr></thead>
           <tbody>
             {rows.map((s) => (
-              <tr key={s.id}>
+              <tr key={s.id} id={s.id} className="target:bg-fast/10">
                 <td><a href={s.url} className="font-medium underline decoration-grid underline-offset-4">{s.name}</a>{s.last_error ? <div className="text-xs text-slow">last run failed: {s.last_error}</div> : null}</td>
                 <td className="text-ink-2">{s.org}</td><td>{s.kind}</td><td className="tabular-nums">{s.default_tier}</td><td>{s.cadence.replace(/_/g, " ")}</td><td>{s.lens}</td>
                 <td><Health h={s.health} /></td>
@@ -32,7 +32,7 @@ export default function SourcesPage() {
           <thead><tr><th scope="col">Source</th><th scope="col">Why not ingested</th></tr></thead>
           <tbody>
             {skipped.map((s) => (
-              <tr key={s.id}>
+              <tr key={s.id} id={s.id} className="target:bg-fast/10">
                 <td className="min-w-32 sm:min-w-48">{s.url ? <a href={s.url} className="font-medium underline decoration-grid underline-offset-4">{s.name}</a> : <span className="font-medium">{s.name}</span>}</td>
                 <td className="text-ink-2 max-w-2xl [overflow-wrap:anywhere]">{s.reason}</td>
               </tr>

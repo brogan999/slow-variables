@@ -57,10 +57,11 @@ export const diffusion = () => read<{
   valves: { id: string; from: string; to: string; name: string; status: string; indicator_ids: string[] }[];
   recent_status_events: StatusEvent[]; what_would_change: string[];
 }>("lens/diffusion.json");
+export type ChartSourcesT = { metric: string | null; sources: { id: string; name: string; org: string; license: string | null; attribution: string | null }[] };
 export type StackPart = { label: string; value: number; estimated: boolean; grade: string | null; href: string; obs_ids: string[] };
 export type StackBar = { value: number; as_of: string; estimated: boolean; parts: StackPart[]; obs_ids: string[] };
 export type StackRow = { as_of: string; layer_id: string | null; basis?: string; value: number; obs_ids: string[] };
-export const capture = () => read<{ as_of: string; verdict?: string; what_would_change: string[]; layers: (Layer & { indicators: Card[]; status: string; venture: LayerVenture | null; reading: string })[]; recent_status_events: StatusEvent[]; stack_bars: Record<string, StackBar>; gross_profit_stack_series: StackRow[]; margin_stack_series: StackRow[] }>("lens/capture.json");
+export const capture = () => read<{ as_of: string; verdict?: string; what_would_change: string[]; layers: (Layer & { indicators: Card[]; status: string; venture: LayerVenture | null; reading: string })[]; recent_status_events: StatusEvent[]; stack_bars: Record<string, StackBar>; gross_profit_stack_series: StackRow[]; margin_stack_series: StackRow[]; gross_profit_stack_sources: ChartSourcesT; margin_stack_sources: ChartSourcesT }>("lens/capture.json");
 export const sources = () => read<Source[]>("sources.json");
 export type Skipped = { id: string; name: string; url: string | null; reason: string; attribution: string | null };
 export const skippedSources = () => read<Skipped[]>("skipped_sources.json");
@@ -70,7 +71,7 @@ export const meta = () => read<{ generated_at: string; observations: number; ind
 export { fmt, words } from "./format";
 export const obsIndex = () => read<Record<string, string>>("obs_index.json");
 export type Fit = { metric: string; value: number; value_low: number | null; value_high: number | null; as_of_date: string; dims: Record<string, string>; obs_ids: string[] };
-export type Doc = IndicatorDoc & { points: Point[]; band_value: { value: number; as_of: string | null; obs_ids: string[]; low: number | null; high: number | null } | null; fits: Fit[]; related_metrics: string[] };
+export type Doc = IndicatorDoc & { chart_sources?: ChartSourcesT; points: Point[]; band_value: { value: number; as_of: string | null; obs_ids: string[]; low: number | null; high: number | null } | null; fits: Fit[]; related_metrics: string[] };
 export type Prediction = {
   id: string; ledger: "nk" | "lab" | "ai2027" | "capture"; claimant: string; claim_text: string; claim_url: string | null; claim_date: string;
   window_start: string | null; window_end: string | null; operationalisation: string; related_indicators: string[]; proxy_types: string[];
@@ -109,10 +110,10 @@ export function memo(date: string): Memo | null {
 export type VentureSeg = { source: string; kind: string; value: number; obs_ids: string[]; href: string | null };
 export type VentureQuarter = { as_of: string; venture_dollars?: { value: number; obs_ids: string[] }; round_count?: { value: number; obs_ids: string[] }; venture_dollars_incl_debt?: { value: number; obs_ids: string[] }; by_source?: VentureSeg[] };
 export type LayerVenture = { value: number; as_of: string; obs_ids: string[]; prior: { value: number; as_of: string; obs_ids: string[] } | null; arrow: "up" | "down" | "flat" | null; sublayers: { sublayer_id: string; name: string; value: number; as_of: string; obs_ids: string[] }[] };
-export type VentureDoc = { sublayer_id: string; quarters: VentureQuarter[] };
+export type VentureDoc = { sublayer_id: string; quarters: VentureQuarter[]; chart_sources?: ChartSourcesT };
 export const venture = (sublayerId: string): VentureDoc | null => { try { return read<VentureDoc>(`venture/${sublayerId}.json`); } catch { return null; } };
 export type LadderRow = { obs_id: string; subject: string; entity_id: string | null; as_of: string; tier: number; url: string; snippet: string };
-export type LadderDoc = { current: { value: number; as_of: string; obs_ids: string[] } | null; rungs: { level: number; name: string; description: string; observables: string; production: LadderRow[]; research: LadderRow[] }[] };
+export type LadderDoc = { current: { value: number; as_of: string; obs_ids: string[] } | null; rungs: { level: number; name: string; description: string; observables: string; production: LadderRow[]; research: LadderRow[] }[]; chart_sources?: ChartSourcesT };
 export const ladder = () => read<LadderDoc>("lens/ladder.json");
 
 // Server-only: which indicators have a page, so links to unpublished ones go to their row on /indicators instead of a 404.

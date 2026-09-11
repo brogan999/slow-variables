@@ -1,0 +1,1067 @@
+{
+ "band_input": "metric:open_weights_lag_months",
+ "band_rationale": "Normal = open weights at least nine months behind, roughly a model generation; fast = three months or less, when a closed lead lasts about one release cycle. Between is emerging.",
+ "band_value": {
+  "as_of": "2026-07-16",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "92d9e212d48e3bf9",
+   "d092bfa7505183e3"
+  ],
+  "value": 4.369250985545335
+ },
+ "bucket_id": "methods",
+ "cadence_expected": "monthly",
+ "chart_sources": {
+  "metric": "open_weights_lag_months",
+  "sources": [
+   {
+    "attribution": "Epoch AI, Benchmarking Hub and Epoch Capabilities Index (CC BY 4.0)",
+    "id": "epoch_bench",
+    "license": "CC BY 4.0",
+    "name": "Epoch AI benchmarks and Capabilities Index",
+    "org": "Epoch AI"
+   }
+  ]
+ },
+ "confidence": 45,
+ "counterevidence": "One composite index run by one organisation; open releases often land after internal use, so the lag at release overstates how long the capability was closed; a Chinese lab's release depends on compute export rules as much as on methods.",
+ "crosswalk": [
+  {
+   "bucket_id": "methods",
+   "layer_id": "model",
+   "note": "Capability growth is the model layer's product; inference price at fixed capability \u21c4 price-per-token pass-through; open-weights lag \u21c4 open-vs-closed gap.",
+   "relation": "same_valve",
+   "shared_indicators": [
+    "metr_horizon_50",
+    "metr_horizon_80",
+    "horizon_ratio_80_50",
+    "open_weights_lag_months"
+   ],
+   "sublayer_id": null
+  }
+ ],
+ "definition": "At each new open-weights record on Epoch's Capabilities Index, the months since a closed model first scored as high. Derived metric open_weights_lag_months; the time version of the open-vs-closed gap.",
+ "derived": [
+  {
+   "as_of_date": "2023-07-18",
+   "computed_at": "2026-09-11T12:08:02.268270Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "bdc2ac2cd2d49515",
+   "input_observation_ids": [
+    "236ef2af03390831",
+    "60fe177d3ef05961"
+   ],
+   "metric": "open_weights_lag_months",
+   "obs_ids": [
+    "236ef2af03390831",
+    "60fe177d3ef05961"
+   ],
+   "value": 4.139290407358739,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2023-07-20",
+   "computed_at": "2026-09-11T12:08:02.268270Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "06be15f36c3b6a40",
+   "input_observation_ids": [
+    "236ef2af03390831",
+    "680c2f1b7cc8432d"
+   ],
+   "metric": "open_weights_lag_months",
+   "obs_ids": [
+    "236ef2af03390831",
+    "680c2f1b7cc8432d"
+   ],
+   "value": 4.204993429697766,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2023-11-02",
+   "computed_at": "2026-09-11T12:08:02.268270Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "e91f9a4f7b1f216e",
+   "input_observation_ids": [
+    "236ef2af03390831",
+    "6ec517ae8fa3de5a"
+   ],
+   "metric": "open_weights_lag_months",
+   "obs_ids": [
+    "236ef2af03390831",
+    "6ec517ae8fa3de5a"
+   ],
+   "value": 7.654402102496714,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2023-12-11",
+   "computed_at": "2026-09-11T12:08:02.268270Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "2f2b216da368e490",
+   "input_observation_ids": [
+    "236ef2af03390831",
+    "9882269fec0247f8"
+   ],
+   "metric": "open_weights_lag_months",
+   "obs_ids": [
+    "236ef2af03390831",
+    "9882269fec0247f8"
+   ],
+   "value": 8.935611038107753,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2024-04-17",
+   "computed_at": "2026-09-11T12:08:02.268270Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "c33c021a7d892666",
+   "input_observation_ids": [
+    "236ef2af03390831",
+    "986cb72d834d6d62"
+   ],
+   "metric": "open_weights_lag_months",
+   "obs_ids": [
+    "236ef2af03390831",
+    "986cb72d834d6d62"
+   ],
+   "value": 13.140604467805518,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2024-04-18",
+   "computed_at": "2026-09-11T12:08:02.268270Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "1bc01992ee40a1c2",
+   "input_observation_ids": [
+    "236ef2af03390831",
+    "320b1d080e4f9a45"
+   ],
+   "metric": "open_weights_lag_months",
+   "obs_ids": [
+    "236ef2af03390831",
+    "320b1d080e4f9a45"
+   ],
+   "value": 13.173455978975033,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2024-05-07",
+   "computed_at": "2026-09-11T12:08:02.268270Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "500ba798834f944d",
+   "input_observation_ids": [
+    "003d3803ff092ea6",
+    "236ef2af03390831"
+   ],
+   "metric": "open_weights_lag_months",
+   "obs_ids": [
+    "003d3803ff092ea6",
+    "236ef2af03390831"
+   ],
+   "value": 13.797634691195794,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2024-06-07",
+   "computed_at": "2026-09-11T12:08:02.268270Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "43560d4d76f149cb",
+   "input_observation_ids": [
+    "236ef2af03390831",
+    "b84eda209dcd5b54"
+   ],
+   "metric": "open_weights_lag_months",
+   "obs_ids": [
+    "236ef2af03390831",
+    "b84eda209dcd5b54"
+   ],
+   "value": 14.816031537450723,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2024-07-23",
+   "computed_at": "2026-09-11T12:08:02.268270Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "fe705d2e1eefc919",
+   "input_observation_ids": [
+    "37270e7efb0ce752",
+    "7d6328da319bf63f"
+   ],
+   "metric": "open_weights_lag_months",
+   "obs_ids": [
+    "37270e7efb0ce752",
+    "7d6328da319bf63f"
+   ],
+   "value": 2.3324572930354797,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2024-09-19",
+   "computed_at": "2026-09-11T12:08:02.268270Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "57229f15d91500d7",
+   "input_observation_ids": [
+    "34b670d8704afe11",
+    "6843a02887d24e4f"
+   ],
+   "metric": "open_weights_lag_months",
+   "obs_ids": [
+    "34b670d8704afe11",
+    "6843a02887d24e4f"
+   ],
+   "value": 2.9894875164257555,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2024-12-12",
+   "computed_at": "2026-09-11T12:08:02.268270Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "cb71a0a260422ec2",
+   "input_observation_ids": [
+    "62f10f728c8b5fbd",
+    "dc85ebe17899ecfb"
+   ],
+   "metric": "open_weights_lag_months",
+   "obs_ids": [
+    "62f10f728c8b5fbd",
+    "dc85ebe17899ecfb"
+   ],
+   "value": 2.9894875164257555,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2024-12-26",
+   "computed_at": "2026-09-11T12:08:02.268270Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "33fb7f75de4a3a8c",
+   "input_observation_ids": [
+    "62f10f728c8b5fbd",
+    "c73c464f29ebff1c"
+   ],
+   "metric": "open_weights_lag_months",
+   "obs_ids": [
+    "62f10f728c8b5fbd",
+    "c73c464f29ebff1c"
+   ],
+   "value": 3.4494086727989486,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-01-20",
+   "computed_at": "2026-09-11T12:08:02.268270Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "1c6bb741f178c994",
+   "input_observation_ids": [
+    "10ea618e62215f30",
+    "7a43eb873fe434ed"
+   ],
+   "metric": "open_weights_lag_months",
+   "obs_ids": [
+    "10ea618e62215f30",
+    "7a43eb873fe434ed"
+   ],
+   "value": 1.1169513797634691,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-04-28",
+   "computed_at": "2026-09-11T12:08:02.268270Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "f43063b2ac791695",
+   "input_observation_ids": [
+    "10ea618e62215f30",
+    "24daa5e649bc1f2a"
+   ],
+   "metric": "open_weights_lag_months",
+   "obs_ids": [
+    "10ea618e62215f30",
+    "24daa5e649bc1f2a"
+   ],
+   "value": 4.336399474375821,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-05-28",
+   "computed_at": "2026-09-11T12:08:02.268270Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "a84162280d36df27",
+   "input_observation_ids": [
+    "10ea618e62215f30",
+    "544cda9224d7ac15"
+   ],
+   "metric": "open_weights_lag_months",
+   "obs_ids": [
+    "10ea618e62215f30",
+    "544cda9224d7ac15"
+   ],
+   "value": 5.321944809461235,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-07-25",
+   "computed_at": "2026-09-11T12:08:02.268270Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "d71c4daaf93c2c3d",
+   "input_observation_ids": [
+    "16349f900aef5d3b",
+    "3cd44bf713568670"
+   ],
+   "metric": "open_weights_lag_months",
+   "obs_ids": [
+    "16349f900aef5d3b",
+    "3cd44bf713568670"
+   ],
+   "value": 3.8107752956636003,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-09-29",
+   "computed_at": "2026-09-11T12:08:02.268270Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "3487a7fe9111c54a",
+   "input_observation_ids": [
+    "84e81ae47fd95266",
+    "cf9b8d4d17509f06"
+   ],
+   "metric": "open_weights_lag_months",
+   "obs_ids": [
+    "84e81ae47fd95266",
+    "cf9b8d4d17509f06"
+   ],
+   "value": 5.45335085413929,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-11-06",
+   "computed_at": "2026-09-11T12:08:02.268270Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "4e6cbdc0f4eb1075",
+   "input_observation_ids": [
+    "742dfda0ec20106f",
+    "84e81ae47fd95266"
+   ],
+   "metric": "open_weights_lag_months",
+   "obs_ids": [
+    "742dfda0ec20106f",
+    "84e81ae47fd95266"
+   ],
+   "value": 6.701708278580814,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-12-01",
+   "computed_at": "2026-09-11T12:08:02.268270Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "49c01167798508d4",
+   "input_observation_ids": [
+    "84e81ae47fd95266",
+    "98b05eacb145646a"
+   ],
+   "metric": "open_weights_lag_months",
+   "obs_ids": [
+    "84e81ae47fd95266",
+    "98b05eacb145646a"
+   ],
+   "value": 7.522996057818659,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2026-01-27",
+   "computed_at": "2026-09-11T12:08:02.268270Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "5eb80e87316fc0c4",
+   "input_observation_ids": [
+    "24789a9da722d2de",
+    "419a9a57febb5dee"
+   ],
+   "metric": "open_weights_lag_months",
+   "obs_ids": [
+    "24789a9da722d2de",
+    "419a9a57febb5dee"
+   ],
+   "value": 5.683311432325887,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2026-04-07",
+   "computed_at": "2026-09-11T12:08:02.268270Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "9d424e2755392a04",
+   "input_observation_ids": [
+    "419a9a57febb5dee",
+    "672304c6742f647a"
+   ],
+   "metric": "open_weights_lag_months",
+   "obs_ids": [
+    "419a9a57febb5dee",
+    "672304c6742f647a"
+   ],
+   "value": 7.982917214191852,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2026-04-20",
+   "computed_at": "2026-09-11T12:08:02.268270Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "4a70f4ce02450fd9",
+   "input_observation_ids": [
+    "7313ea1c506e40e2",
+    "b8094dfa2457f664"
+   ],
+   "metric": "open_weights_lag_months",
+   "obs_ids": [
+    "7313ea1c506e40e2",
+    "b8094dfa2457f664"
+   ],
+   "value": 5.026281208935611,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2026-06-16",
+   "computed_at": "2026-09-11T12:08:02.268270Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "a27d9fd09cb40b44",
+   "input_observation_ids": [
+    "b8094dfa2457f664",
+    "ebf4836f647dcf59"
+   ],
+   "metric": "open_weights_lag_months",
+   "obs_ids": [
+    "b8094dfa2457f664",
+    "ebf4836f647dcf59"
+   ],
+   "value": 6.898817345597897,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2026-07-16",
+   "computed_at": "2026-09-11T12:08:02.268270Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "8080cadec2d4e822",
+   "input_observation_ids": [
+    "92d9e212d48e3bf9",
+    "d092bfa7505183e3"
+   ],
+   "metric": "open_weights_lag_months",
+   "obs_ids": [
+    "92d9e212d48e3bf9",
+    "d092bfa7505183e3"
+   ],
+   "value": 4.369250985545335,
+   "value_high": null,
+   "value_low": null
+  }
+ ],
+ "direction": null,
+ "direction_rule": null,
+ "evidence": [],
+ "falsifying_band": null,
+ "fast_band": {
+  "hi": 3.0,
+  "lo": null
+ },
+ "fits": [],
+ "flow_status": null,
+ "grade": "A",
+ "id": "open_weights_lag_months",
+ "latest": {
+  "as_of": "2026-07-16",
+  "dims": {},
+  "obs_ids": [
+   "92d9e212d48e3bf9",
+   "d092bfa7505183e3"
+  ],
+  "unit": "months",
+  "value": 4.369250985545335
+ },
+ "layer_id": "model",
+ "leading_lagging": "leading",
+ "metric": "open_weights_lag_months",
+ "metric_dims": {},
+ "n_observations": 34,
+ "name": "Open-weights lag behind the closed frontier (months)",
+ "normal_band": {
+  "hi": null,
+  "lo": 9.0
+ },
+ "override_note": null,
+ "pending": null,
+ "points": [
+  {
+   "as_of": "2023-07-18",
+   "dims": {},
+   "obs_ids": [
+    "236ef2af03390831",
+    "60fe177d3ef05961"
+   ],
+   "unit": "months",
+   "value": 4.139290407358739
+  },
+  {
+   "as_of": "2023-07-20",
+   "dims": {},
+   "obs_ids": [
+    "236ef2af03390831",
+    "680c2f1b7cc8432d"
+   ],
+   "unit": "months",
+   "value": 4.204993429697766
+  },
+  {
+   "as_of": "2023-11-02",
+   "dims": {},
+   "obs_ids": [
+    "236ef2af03390831",
+    "6ec517ae8fa3de5a"
+   ],
+   "unit": "months",
+   "value": 7.654402102496714
+  },
+  {
+   "as_of": "2023-12-11",
+   "dims": {},
+   "obs_ids": [
+    "236ef2af03390831",
+    "9882269fec0247f8"
+   ],
+   "unit": "months",
+   "value": 8.935611038107753
+  },
+  {
+   "as_of": "2024-04-17",
+   "dims": {},
+   "obs_ids": [
+    "236ef2af03390831",
+    "986cb72d834d6d62"
+   ],
+   "unit": "months",
+   "value": 13.140604467805518
+  },
+  {
+   "as_of": "2024-04-18",
+   "dims": {},
+   "obs_ids": [
+    "236ef2af03390831",
+    "320b1d080e4f9a45"
+   ],
+   "unit": "months",
+   "value": 13.173455978975033
+  },
+  {
+   "as_of": "2024-05-07",
+   "dims": {},
+   "obs_ids": [
+    "003d3803ff092ea6",
+    "236ef2af03390831"
+   ],
+   "unit": "months",
+   "value": 13.797634691195794
+  },
+  {
+   "as_of": "2024-06-07",
+   "dims": {},
+   "obs_ids": [
+    "236ef2af03390831",
+    "b84eda209dcd5b54"
+   ],
+   "unit": "months",
+   "value": 14.816031537450723
+  },
+  {
+   "as_of": "2024-07-23",
+   "dims": {},
+   "obs_ids": [
+    "37270e7efb0ce752",
+    "7d6328da319bf63f"
+   ],
+   "unit": "months",
+   "value": 2.3324572930354797
+  },
+  {
+   "as_of": "2024-09-19",
+   "dims": {},
+   "obs_ids": [
+    "34b670d8704afe11",
+    "6843a02887d24e4f"
+   ],
+   "unit": "months",
+   "value": 2.9894875164257555
+  },
+  {
+   "as_of": "2024-12-12",
+   "dims": {},
+   "obs_ids": [
+    "62f10f728c8b5fbd",
+    "dc85ebe17899ecfb"
+   ],
+   "unit": "months",
+   "value": 2.9894875164257555
+  },
+  {
+   "as_of": "2024-12-26",
+   "dims": {},
+   "obs_ids": [
+    "62f10f728c8b5fbd",
+    "c73c464f29ebff1c"
+   ],
+   "unit": "months",
+   "value": 3.4494086727989486
+  },
+  {
+   "as_of": "2025-01-20",
+   "dims": {},
+   "obs_ids": [
+    "10ea618e62215f30",
+    "7a43eb873fe434ed"
+   ],
+   "unit": "months",
+   "value": 1.1169513797634691
+  },
+  {
+   "as_of": "2025-04-28",
+   "dims": {},
+   "obs_ids": [
+    "10ea618e62215f30",
+    "24daa5e649bc1f2a"
+   ],
+   "unit": "months",
+   "value": 4.336399474375821
+  },
+  {
+   "as_of": "2025-05-28",
+   "dims": {},
+   "obs_ids": [
+    "10ea618e62215f30",
+    "544cda9224d7ac15"
+   ],
+   "unit": "months",
+   "value": 5.321944809461235
+  },
+  {
+   "as_of": "2025-07-25",
+   "dims": {},
+   "obs_ids": [
+    "16349f900aef5d3b",
+    "3cd44bf713568670"
+   ],
+   "unit": "months",
+   "value": 3.8107752956636003
+  },
+  {
+   "as_of": "2025-09-29",
+   "dims": {},
+   "obs_ids": [
+    "84e81ae47fd95266",
+    "cf9b8d4d17509f06"
+   ],
+   "unit": "months",
+   "value": 5.45335085413929
+  },
+  {
+   "as_of": "2025-11-06",
+   "dims": {},
+   "obs_ids": [
+    "742dfda0ec20106f",
+    "84e81ae47fd95266"
+   ],
+   "unit": "months",
+   "value": 6.701708278580814
+  },
+  {
+   "as_of": "2025-12-01",
+   "dims": {},
+   "obs_ids": [
+    "84e81ae47fd95266",
+    "98b05eacb145646a"
+   ],
+   "unit": "months",
+   "value": 7.522996057818659
+  },
+  {
+   "as_of": "2026-01-27",
+   "dims": {},
+   "obs_ids": [
+    "24789a9da722d2de",
+    "419a9a57febb5dee"
+   ],
+   "unit": "months",
+   "value": 5.683311432325887
+  },
+  {
+   "as_of": "2026-04-07",
+   "dims": {},
+   "obs_ids": [
+    "419a9a57febb5dee",
+    "672304c6742f647a"
+   ],
+   "unit": "months",
+   "value": 7.982917214191852
+  },
+  {
+   "as_of": "2026-04-20",
+   "dims": {},
+   "obs_ids": [
+    "7313ea1c506e40e2",
+    "b8094dfa2457f664"
+   ],
+   "unit": "months",
+   "value": 5.026281208935611
+  },
+  {
+   "as_of": "2026-06-16",
+   "dims": {},
+   "obs_ids": [
+    "b8094dfa2457f664",
+    "ebf4836f647dcf59"
+   ],
+   "unit": "months",
+   "value": 6.898817345597897
+  },
+  {
+   "as_of": "2026-07-16",
+   "dims": {},
+   "obs_ids": [
+    "92d9e212d48e3bf9",
+    "d092bfa7505183e3"
+   ],
+   "unit": "months",
+   "value": 4.369250985545335
+  }
+ ],
+ "proposed_status": null,
+ "proxy_types": [
+  "benchmark",
+  "model_release"
+ ],
+ "published": true,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "open_vs_closed_gap",
+  "epoch_inference_price_fixed_capability"
+ ],
+ "related_metrics": [],
+ "related_predictions": [],
+ "series": [],
+ "series_keys": [],
+ "sparkline": [
+  {
+   "as_of": "2023-07-18",
+   "dims": {},
+   "obs_ids": [
+    "236ef2af03390831",
+    "60fe177d3ef05961"
+   ],
+   "unit": "months",
+   "value": 4.139290407358739
+  },
+  {
+   "as_of": "2023-07-20",
+   "dims": {},
+   "obs_ids": [
+    "236ef2af03390831",
+    "680c2f1b7cc8432d"
+   ],
+   "unit": "months",
+   "value": 4.204993429697766
+  },
+  {
+   "as_of": "2023-11-02",
+   "dims": {},
+   "obs_ids": [
+    "236ef2af03390831",
+    "6ec517ae8fa3de5a"
+   ],
+   "unit": "months",
+   "value": 7.654402102496714
+  },
+  {
+   "as_of": "2023-12-11",
+   "dims": {},
+   "obs_ids": [
+    "236ef2af03390831",
+    "9882269fec0247f8"
+   ],
+   "unit": "months",
+   "value": 8.935611038107753
+  },
+  {
+   "as_of": "2024-04-17",
+   "dims": {},
+   "obs_ids": [
+    "236ef2af03390831",
+    "986cb72d834d6d62"
+   ],
+   "unit": "months",
+   "value": 13.140604467805518
+  },
+  {
+   "as_of": "2024-04-18",
+   "dims": {},
+   "obs_ids": [
+    "236ef2af03390831",
+    "320b1d080e4f9a45"
+   ],
+   "unit": "months",
+   "value": 13.173455978975033
+  },
+  {
+   "as_of": "2024-05-07",
+   "dims": {},
+   "obs_ids": [
+    "003d3803ff092ea6",
+    "236ef2af03390831"
+   ],
+   "unit": "months",
+   "value": 13.797634691195794
+  },
+  {
+   "as_of": "2024-06-07",
+   "dims": {},
+   "obs_ids": [
+    "236ef2af03390831",
+    "b84eda209dcd5b54"
+   ],
+   "unit": "months",
+   "value": 14.816031537450723
+  },
+  {
+   "as_of": "2024-07-23",
+   "dims": {},
+   "obs_ids": [
+    "37270e7efb0ce752",
+    "7d6328da319bf63f"
+   ],
+   "unit": "months",
+   "value": 2.3324572930354797
+  },
+  {
+   "as_of": "2024-09-19",
+   "dims": {},
+   "obs_ids": [
+    "34b670d8704afe11",
+    "6843a02887d24e4f"
+   ],
+   "unit": "months",
+   "value": 2.9894875164257555
+  },
+  {
+   "as_of": "2024-12-12",
+   "dims": {},
+   "obs_ids": [
+    "62f10f728c8b5fbd",
+    "dc85ebe17899ecfb"
+   ],
+   "unit": "months",
+   "value": 2.9894875164257555
+  },
+  {
+   "as_of": "2024-12-26",
+   "dims": {},
+   "obs_ids": [
+    "62f10f728c8b5fbd",
+    "c73c464f29ebff1c"
+   ],
+   "unit": "months",
+   "value": 3.4494086727989486
+  },
+  {
+   "as_of": "2025-01-20",
+   "dims": {},
+   "obs_ids": [
+    "10ea618e62215f30",
+    "7a43eb873fe434ed"
+   ],
+   "unit": "months",
+   "value": 1.1169513797634691
+  },
+  {
+   "as_of": "2025-04-28",
+   "dims": {},
+   "obs_ids": [
+    "10ea618e62215f30",
+    "24daa5e649bc1f2a"
+   ],
+   "unit": "months",
+   "value": 4.336399474375821
+  },
+  {
+   "as_of": "2025-05-28",
+   "dims": {},
+   "obs_ids": [
+    "10ea618e62215f30",
+    "544cda9224d7ac15"
+   ],
+   "unit": "months",
+   "value": 5.321944809461235
+  },
+  {
+   "as_of": "2025-07-25",
+   "dims": {},
+   "obs_ids": [
+    "16349f900aef5d3b",
+    "3cd44bf713568670"
+   ],
+   "unit": "months",
+   "value": 3.8107752956636003
+  },
+  {
+   "as_of": "2025-09-29",
+   "dims": {},
+   "obs_ids": [
+    "84e81ae47fd95266",
+    "cf9b8d4d17509f06"
+   ],
+   "unit": "months",
+   "value": 5.45335085413929
+  },
+  {
+   "as_of": "2025-11-06",
+   "dims": {},
+   "obs_ids": [
+    "742dfda0ec20106f",
+    "84e81ae47fd95266"
+   ],
+   "unit": "months",
+   "value": 6.701708278580814
+  },
+  {
+   "as_of": "2025-12-01",
+   "dims": {},
+   "obs_ids": [
+    "84e81ae47fd95266",
+    "98b05eacb145646a"
+   ],
+   "unit": "months",
+   "value": 7.522996057818659
+  },
+  {
+   "as_of": "2026-01-27",
+   "dims": {},
+   "obs_ids": [
+    "24789a9da722d2de",
+    "419a9a57febb5dee"
+   ],
+   "unit": "months",
+   "value": 5.683311432325887
+  },
+  {
+   "as_of": "2026-04-07",
+   "dims": {},
+   "obs_ids": [
+    "419a9a57febb5dee",
+    "672304c6742f647a"
+   ],
+   "unit": "months",
+   "value": 7.982917214191852
+  },
+  {
+   "as_of": "2026-04-20",
+   "dims": {},
+   "obs_ids": [
+    "7313ea1c506e40e2",
+    "b8094dfa2457f664"
+   ],
+   "unit": "months",
+   "value": 5.026281208935611
+  },
+  {
+   "as_of": "2026-06-16",
+   "dims": {},
+   "obs_ids": [
+    "b8094dfa2457f664",
+    "ebf4836f647dcf59"
+   ],
+   "unit": "months",
+   "value": 6.898817345597897
+  },
+  {
+   "as_of": "2026-07-16",
+   "dims": {},
+   "obs_ids": [
+    "92d9e212d48e3bf9",
+    "d092bfa7505183e3"
+   ],
+   "unit": "months",
+   "value": 4.369250985545335
+  }
+ ],
+ "stale_as_of": null,
+ "stale_ok": false,
+ "stale_reason": null,
+ "status": "emerging",
+ "status_events": [
+  {
+   "author": "claude",
+   "created_at": "2026-09-11T12:03:01.557554Z",
+   "evidence_ids": [
+    "92d9e212d48e3bf9",
+    "d092bfa7505183e3"
+   ],
+   "id": "9577716bf27a704d",
+   "new_conf": 45,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "First reading: at its latest record (16 Jul 2026 on Epoch's Capabilities Index) the open-weights frontier trailed the closed frontier by 4.4 months, between the fast band (3 months or less) and the normal band (9 months or more), so the status is emerging until the lag settles on one side.",
+   "target_id": "open_weights_lag_months",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": "open_weight_labs",
+ "timing_rationale": "Leading: an open model that matches the frontier arrives before prices and market shares in the model layer adjust to it.",
+ "tracker_interpretation": "Read at open-weights records only, so a quiet quarter shows no reading even as the true lag widens; the ECI points gap on the capture lens is the companion reading.",
+ "unit": "months",
+ "unpublished_reason": null,
+ "updated_at": "2026-09-11",
+ "valve_measured": "invention_to_product",
+ "why_it_matters": "How fast frontier capability becomes something anyone can download and run is the methods stock leaking into products outside the labs' control, and the capture lens's clearest sign of model-layer commoditisation."
+}
