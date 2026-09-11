@@ -720,9 +720,9 @@ indicators:
     why_it_matters: The paper predicts no broad AI-attributable employment decline for years; this is the highest-frequency payroll test of that claim.
     proxy_types: [deployment, welfare]
     unit: share
-    cadence_expected: quarterly
-    series_keys: ["adp_research.us_high_exposure.employment_yoy.m", "adp_research.us_low_exposure.employment_yoy.m", "fortune.us_high_exposure.employment_yoy.m"]
-    band_input: adp_research.us_high_exposure.employment_yoy.m
+    cadence_expected: monthly
+    series_keys: ["canaries.us_exposure_q5.employment_yoy.m", "canaries.us_exposure_q1.employment_yoy.m", "adp_research.us_high_exposure.employment_yoy.m", "adp_research.us_low_exposure.employment_yoy.m", "fortune.us_high_exposure.employment_yoy.m"]
+    band_input: canaries.us_exposure_q5.employment_yoy.m
     bucket_id: adaptation
     valve_measured: adoption_to_adaptation
     normal_band: {lo: -0.01, hi: 0.01}
@@ -794,7 +794,8 @@ indicators:
     unit: share
     cadence_expected: monthly
     series_keys: ["cait.ca_high_exposure.claims_3mma_mom.m", "edd.ca_high_exposure.claims_3mma_mom.m"]
-    band_input: edd.ca_high_exposure.claims_3mma_mom.m
+    metric: cait_high_exposure_claims_3mma_mom
+    band_input: "metric:cait_high_exposure_claims_3mma_mom"
     bucket_id: adaptation
     valve_measured: adoption_to_adaptation
     normal_band: {hi: 0.02}

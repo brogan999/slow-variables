@@ -153,7 +153,17 @@ def append_observations(source_id: str, rows: list[Observation]) -> int:
     """Append-only, sorted by id. A changed value for the same key gets a new row that supersedes the old one."""
     p = OBS / f"{source_id}.jsonl"
     existing = read_jsonl(p)
-    ids = {r["id"] for r in existing}
+    # other files count too: a connector that continues a hand-entered series (Ramp) supersedes the manual row for the
+    # same key and date instead of standing beside it
+    others = [r for f in sorted(OBS.glob("*.jsonl")) if f != p for r in read_jsonl(f)]
+    ids = {r["id"] for r in existing + others}
+    across: dict[
+        tuple[Any, ...], tuple[str, str]
+    ] = {}  # other files: the series key already names the subject
+    for r in others:
+        k = (r["series_key"], r["as_of_date"], r.get("period_start"))
+        if not r["series_key"].startswith("watch.") and (k not in across or r["retrieved_at"] > across[k][1]):
+            across[k] = (r["id"], r["retrieved_at"])
     latest: dict[tuple[Any, ...], tuple[str, str]] = {}
     for r in existing:
         k = (
@@ -178,6 +188,8 @@ def append_observations(source_id: str, rows: list[Observation]) -> int:
         )
         if k in latest:
             o.supersedes_id = latest[k][0]
+        elif (k[0], k[2], k[3]) in across:
+            o.supersedes_id = across[(k[0], k[2], k[3])][0]
         latest[k] = (o.id, o.retrieved_at.isoformat())
         ids.add(o.id)
         new.append(dump(o))

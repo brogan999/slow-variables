@@ -217,6 +217,22 @@ metrics:
     args: {since: "2024-01-01"}
     caveats: Three parameters worth of freedom on ~20 points; AIC computed on ln(horizon) residuals for both forms.
     python: fits.hyperbolic
+  cait_high_exposure_claims_3mma_mom:
+    description: Month-on-month change in the three-month moving average of California initial UI claims from occupations in the top quartile of potential AI exposure (Eloundou et al.), from the tracker's monthly claims workbook - the tracker's own headline figure.
+    rationale: The fast-band test for claims needs the tracker's headline computed from its published counts rather than retyped from its page each month.
+    grain: [as_of_date]
+    unit: share
+    lead_lag: coincident
+    formula_version: 1
+    inputs: ["cait.ca_top_quartile_potential.claims.m"]
+    caveats: California only; claims dated to the month of their week-ending date; the observed-exposure measure (Claude usage) is stored beside it but not used here.
+    sql: |
+      WITH m AS (SELECT as_of_date, value_numeric AS v, id FROM observations WHERE series_key = 'cait.ca_top_quartile_potential.claims.m'),
+      a AS (SELECT as_of_date, avg(v) OVER w AS ma, count(*) OVER w AS n, list(id) OVER w AS ids
+            FROM m WINDOW w AS (ORDER BY as_of_date ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)),
+      b AS (SELECT *, lag(ma) OVER (ORDER BY as_of_date) AS ma0, lag(n) OVER (ORDER BY as_of_date) AS n0,
+                   lag(ids) OVER (ORDER BY as_of_date) AS ids0 FROM a)
+      SELECT as_of_date, ma / ma0 - 1 AS value, list_distinct(list_concat(ids, ids0)) AS obs_ids FROM b WHERE n = 3 AND n0 = 3
   cross_tracker_concordance:
     description: Number of the four monthly labour trackers whose latest reading is past its own AI-attributable-break threshold (0-4). Thresholds - high-exposure employment y/y <= -3% (ADP/Stanford Canaries); exposed-vs-unexposed gap <= -10% (Revelio); high-exposure claims 3-month average +5% or more m/m (CAIT); entry-level shortfall >= 25% (Canaries).
     rationale: The falsification rule wants three trackers breaking at once, not one; this is the count. Thresholds are the fast-band edges of the four indicators, documented there.

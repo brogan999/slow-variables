@@ -5,11 +5,17 @@ from __future__ import annotations
 import re
 from html.parser import HTMLParser
 
+# Agent-addressing forms only: a sentence that talks *to* a model. Ordinary prose about agents ("a benchmark for AI
+# agents", a paper titled "... for LLM Agents") is evidence and must survive.
 AGENT_RE = re.compile(
-    r"(?i)(ignore (all |any |the )?(previous|prior|above) instructions"
-    r"|you are an? (ai|llm|language model|assistant)\b"
-    r"|(to|for|attention|note to) (any |all )?(ai|llm) (agents?|assistants?|crawlers?|models?)"
-    r"|\bas an ai\b|system prompt|<\|im_start\|>|\[INST\]|^\s*(assistant|system):)"
+    r"(?i)(\b(ignore|disregard) (all |any |the )?(previous|prior|above|earlier) (instructions|prompts?|messages?)"
+    r"|\byou are (now )?an? (ai|llm|language model|assistant|chatbot)\b"
+    r"|\bif you are an? (ai|llm|language model|assistant|agent|crawler|bot)\b"
+    r"|\b(attention|note|message|instructions?)( to| for)? (any |all )?(ai|llms?|language models?)( agents?| assistants?| crawlers?| models?| systems?)?\s*[:!,-]"
+    r"|\b(dear|hey|hello) (ai|llm|chatgpt|claude|gemini|assistant)\b"
+    r"|\bas an ai (language )?(model|assistant)\b"
+    r"|\b(reveal|print|repeat|output|show) (your|the) (system )?prompt"
+    r"|<\|im_start\|>|\[INST\]|^\s*(assistant|system):)"
 )
 SKIP_TAGS = {"script", "style", "noscript", "template"}
 BLOCK = {"p", "div", "li", "tr", "h1", "h2", "h3", "h4", "h5", "td", "th", "section", "article", "br", "pre"}

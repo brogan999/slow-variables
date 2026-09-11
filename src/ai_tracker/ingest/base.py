@@ -18,6 +18,7 @@ from typing import Any
 import httpx
 
 from ..schema import FetchLog, Observation, short_hash
+from .scrub import scrub
 
 CACHE = Path("ingest/cache")
 
@@ -168,6 +169,12 @@ class Connector:
 
     def obs(self, item: RawItem, **kw: Any) -> Observation:
         kw.setdefault("published_date", item.published_date)
+        for k in ("raw_snippet", "value_text"):  # P1 rule 3: every stored text passes the injection scrub
+            if kw.get(k):
+                clean, flags = scrub(kw[k])
+                if flags:  # untouched when nothing is flagged, so text-valued ids never change
+                    kw[k] = clean or "(text removed by the prompt-injection scrub)"
+                    self.scrubbed += flags
         return Observation(
             source_id=kw.pop("source_id", None) or self.source_id,
             extractor_version=f"{self.source_id}-{self.version}",

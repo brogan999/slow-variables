@@ -60,3 +60,16 @@ def test_a_model_error_falls_back_to_the_digest(monkeypatch):
     monkeypatch.setenv("ANTHROPIC_API_KEY", "x")
     monkeypatch.setattr(anthropic, "Anthropic", Down)
     assert memo.prose({"since": "2026-09-01"}, None) == (None, "model error (APIConnectionError)")
+
+
+def test_refresh_list_names_hand_entered_series_but_not_connector_fed_or_one_off_ones():
+    from datetime import date
+
+    from ai_tracker import store as st
+    from ai_tracker.memo import due_for_refresh
+
+    s = st.Store()
+    due = "\n".join(due_for_refresh(s, date(2030, 1, 1)))
+    assert "edd.ca_high_exposure.claims_3mma_mom.m" in due  # hand-entered, monthly, behind a published indicator
+    assert "ramp.us_businesses.paid_ai_adoption_share.m" not in due  # the connector now writes its newest row
+    assert "metr_blog.rct_2025" not in due  # a one-off study is never due

@@ -14,6 +14,7 @@ Read `docs/plan.md` first; `docs/briefs/ai-tracker-brief-v2.md` is the canonical
 - Entity writes go through `seed/entities.yaml`; no free-text company names in observations.
 - Prompt-injection hygiene: all fetched HTML passes through `ingest/scrub.py`; flagged text is logged to `FetchLog.scrubbed` and never stored or sent to a model.
 - Respect robots.txt (`urllib.robotparser`) for html/pdf sources. Never scrape X.
+- Connectors store what the source publishes; anything computed from it (a moving average, a ratio, a top share) is a metric in `semantic/metrics.yaml`. A connector row supersedes a hand-entered row only when it reads the same published figure (as Ramp's page data does); otherwise it takes new series keys and the hand-entered series stays as the second source.
 - Prefer structured file over HTML over PDF over LLM extraction. A source layout change raises `LayoutChanged`; never return zero items silently.
 - Bands and formulas change only via reviewed PR, with a `rationale`.
 - Web never computes a number; it renders `web/data/*.json` written by `export`. Every number carries `obs_ids`.

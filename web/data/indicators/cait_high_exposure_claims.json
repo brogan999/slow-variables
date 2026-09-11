@@ -1,24 +1,27 @@
 {
- "band_input": "edd.ca_high_exposure.claims_3mma_mom.m",
+ "band_input": "metric:cait_high_exposure_claims_3mma_mom",
  "band_rationale": "Normal = monthly moves of up to 2% in the smoothed series, the noise floor of claims data; fast = 5% or more month on month, sustained. Between is `emerging`.",
  "band_value": {
   "as_of": "2026-07-31",
   "high": null,
   "low": null,
   "obs_ids": [
-   "70a2930208a0f005"
+   "14ca8a23f3a7fee5",
+   "1fce2bb84f849403",
+   "eb3282424b0fcc9a",
+   "f03af856e9a46333"
   ],
-  "value": 0.01
+  "value": 0.010034531530727975
  },
  "bucket_id": "adaptation",
  "cadence_expected": "monthly",
  "chart_sources": {
-  "metric": null,
+  "metric": "cait_high_exposure_claims_3mma_mom",
   "sources": [
    {
-    "attribution": "California Policy Lab and California Employment Development Department, California AI-Unemployment Tracker",
+    "attribution": "Hyman, von Wachter et al. (2026), Tracking AI-Related Job Loss Using Unemployment Insurance Claims Data in California, California Policy Lab",
     "id": "cait",
-    "license": "California Policy Lab",
+    "license": "California Policy Lab; monthly claims workbook, cited as the Lab suggests",
     "name": "California AI-Unemployment Tracker (CAIT)",
     "org": "California Policy Lab with California EDD"
    }
@@ -37,7 +40,2584 @@
   }
  ],
  "definition": "Month-on-month change in the three-month moving average of new initial unemployment claims from high-AI-exposure occupations in California (potential-exposure measure), from the California Policy Lab and EDD tracker.",
- "derived": [],
+ "derived": [
+  {
+   "as_of_date": "2017-04-30",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "b346442c2be301e2",
+   "input_observation_ids": [
+    "1ab560814bf03144",
+    "3aca212ec3c2edf8",
+    "50cf3e5409130049",
+    "d32bdeb2cef6de55"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "1ab560814bf03144",
+    "3aca212ec3c2edf8",
+    "50cf3e5409130049",
+    "d32bdeb2cef6de55"
+   ],
+   "value": -0.05480998736369169,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2017-05-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "9373c86b36466c96",
+   "input_observation_ids": [
+    "17bc1ed23b68151f",
+    "1ab560814bf03144",
+    "3aca212ec3c2edf8",
+    "d32bdeb2cef6de55"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "17bc1ed23b68151f",
+    "1ab560814bf03144",
+    "3aca212ec3c2edf8",
+    "d32bdeb2cef6de55"
+   ],
+   "value": 0.009290263482022887,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2017-06-30",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "e295da32d09eea45",
+   "input_observation_ids": [
+    "17bc1ed23b68151f",
+    "1ab560814bf03144",
+    "c88e7c3639c5564c",
+    "d32bdeb2cef6de55"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "17bc1ed23b68151f",
+    "1ab560814bf03144",
+    "c88e7c3639c5564c",
+    "d32bdeb2cef6de55"
+   ],
+   "value": 0.003943140285034508,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2017-07-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "403238094d919688",
+   "input_observation_ids": [
+    "17bc1ed23b68151f",
+    "684b3dcbe25f8780",
+    "c88e7c3639c5564c",
+    "d32bdeb2cef6de55"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "17bc1ed23b68151f",
+    "684b3dcbe25f8780",
+    "c88e7c3639c5564c",
+    "d32bdeb2cef6de55"
+   ],
+   "value": 0.011337051267171994,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2017-08-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "1ebd07c4b941bed5",
+   "input_observation_ids": [
+    "17bc1ed23b68151f",
+    "684b3dcbe25f8780",
+    "c016d63b36535809",
+    "c88e7c3639c5564c"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "17bc1ed23b68151f",
+    "684b3dcbe25f8780",
+    "c016d63b36535809",
+    "c88e7c3639c5564c"
+   ],
+   "value": -0.00847391086387983,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2017-09-30",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "6c6029aba90393a2",
+   "input_observation_ids": [
+    "50fbff870275206d",
+    "684b3dcbe25f8780",
+    "c016d63b36535809",
+    "c88e7c3639c5564c"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "50fbff870275206d",
+    "684b3dcbe25f8780",
+    "c016d63b36535809",
+    "c88e7c3639c5564c"
+   ],
+   "value": -0.04920689067030537,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2017-10-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "182235b8bcea3748",
+   "input_observation_ids": [
+    "50fbff870275206d",
+    "684b3dcbe25f8780",
+    "b1df2f2c19f88bbc",
+    "c016d63b36535809"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "50fbff870275206d",
+    "684b3dcbe25f8780",
+    "b1df2f2c19f88bbc",
+    "c016d63b36535809"
+   ],
+   "value": -0.017515984777622506,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2017-11-30",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "9a87b4d5ef68d24d",
+   "input_observation_ids": [
+    "16b3cb54dec03f7c",
+    "50fbff870275206d",
+    "b1df2f2c19f88bbc",
+    "c016d63b36535809"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "16b3cb54dec03f7c",
+    "50fbff870275206d",
+    "b1df2f2c19f88bbc",
+    "c016d63b36535809"
+   ],
+   "value": -0.02094527622724196,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2017-12-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "d04e55eb819d1ff9",
+   "input_observation_ids": [
+    "16b3cb54dec03f7c",
+    "50fbff870275206d",
+    "57803e67c35f65e0",
+    "b1df2f2c19f88bbc"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "16b3cb54dec03f7c",
+    "50fbff870275206d",
+    "57803e67c35f65e0",
+    "b1df2f2c19f88bbc"
+   ],
+   "value": 0.01288131077660859,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2018-01-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "a214ffb13ea60e69",
+   "input_observation_ids": [
+    "16b3cb54dec03f7c",
+    "57803e67c35f65e0",
+    "b1df2f2c19f88bbc",
+    "f41b5a9482709c6e"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "16b3cb54dec03f7c",
+    "57803e67c35f65e0",
+    "b1df2f2c19f88bbc",
+    "f41b5a9482709c6e"
+   ],
+   "value": 0.06798006233807219,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2018-02-28",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "25c603c0bc090d6b",
+   "input_observation_ids": [
+    "16b3cb54dec03f7c",
+    "5464c3488da771d0",
+    "57803e67c35f65e0",
+    "f41b5a9482709c6e"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "16b3cb54dec03f7c",
+    "5464c3488da771d0",
+    "57803e67c35f65e0",
+    "f41b5a9482709c6e"
+   ],
+   "value": -0.028710932689702817,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2018-03-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "4507fb1742416321",
+   "input_observation_ids": [
+    "39da9f4a651aeec5",
+    "5464c3488da771d0",
+    "57803e67c35f65e0",
+    "f41b5a9482709c6e"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "39da9f4a651aeec5",
+    "5464c3488da771d0",
+    "57803e67c35f65e0",
+    "f41b5a9482709c6e"
+   ],
+   "value": 0.010206086884861243,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2018-04-30",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "17c4d2ed61a253ac",
+   "input_observation_ids": [
+    "39da9f4a651aeec5",
+    "5464c3488da771d0",
+    "6fb4876f65f4e662",
+    "f41b5a9482709c6e"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "39da9f4a651aeec5",
+    "5464c3488da771d0",
+    "6fb4876f65f4e662",
+    "f41b5a9482709c6e"
+   ],
+   "value": -0.0641256533989294,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2018-05-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "35a9213945de355a",
+   "input_observation_ids": [
+    "39da9f4a651aeec5",
+    "5463ba4b526ea0e6",
+    "5464c3488da771d0",
+    "6fb4876f65f4e662"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "39da9f4a651aeec5",
+    "5463ba4b526ea0e6",
+    "5464c3488da771d0",
+    "6fb4876f65f4e662"
+   ],
+   "value": 0.057898618747485475,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2018-06-30",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "11764bcc3dbe3922",
+   "input_observation_ids": [
+    "39da9f4a651aeec5",
+    "5463ba4b526ea0e6",
+    "6fb4876f65f4e662",
+    "9544a3ed74134602"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "39da9f4a651aeec5",
+    "5463ba4b526ea0e6",
+    "6fb4876f65f4e662",
+    "9544a3ed74134602"
+   ],
+   "value": 0.00014577721438757685,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2018-07-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "eeac9ce7de6e50f4",
+   "input_observation_ids": [
+    "48c96560d7801c5d",
+    "5463ba4b526ea0e6",
+    "6fb4876f65f4e662",
+    "9544a3ed74134602"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "48c96560d7801c5d",
+    "5463ba4b526ea0e6",
+    "6fb4876f65f4e662",
+    "9544a3ed74134602"
+   ],
+   "value": -0.012357571071876738,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2018-08-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "02b2747c86536423",
+   "input_observation_ids": [
+    "48c96560d7801c5d",
+    "5463ba4b526ea0e6",
+    "945d3f15f4657a68",
+    "9544a3ed74134602"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "48c96560d7801c5d",
+    "5463ba4b526ea0e6",
+    "945d3f15f4657a68",
+    "9544a3ed74134602"
+   ],
+   "value": -0.03381499923001907,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2018-09-30",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "fa3ef1ee78d226d3",
+   "input_observation_ids": [
+    "0ada48ecfd6583c1",
+    "48c96560d7801c5d",
+    "945d3f15f4657a68",
+    "9544a3ed74134602"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "0ada48ecfd6583c1",
+    "48c96560d7801c5d",
+    "945d3f15f4657a68",
+    "9544a3ed74134602"
+   ],
+   "value": -0.06183506222688573,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2018-10-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "0b398ac8f4426925",
+   "input_observation_ids": [
+    "010f882c3cbf120a",
+    "0ada48ecfd6583c1",
+    "48c96560d7801c5d",
+    "945d3f15f4657a68"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "010f882c3cbf120a",
+    "0ada48ecfd6583c1",
+    "48c96560d7801c5d",
+    "945d3f15f4657a68"
+   ],
+   "value": -0.011488882753934004,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2018-11-30",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "2a28b44bd41d516c",
+   "input_observation_ids": [
+    "010f882c3cbf120a",
+    "0ada48ecfd6583c1",
+    "73e775aaa40c0419",
+    "945d3f15f4657a68"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "010f882c3cbf120a",
+    "0ada48ecfd6583c1",
+    "73e775aaa40c0419",
+    "945d3f15f4657a68"
+   ],
+   "value": -0.031136318065939195,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2018-12-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "5c06d3075c33ac7f",
+   "input_observation_ids": [
+    "010f882c3cbf120a",
+    "0ada48ecfd6583c1",
+    "73e775aaa40c0419",
+    "ff205f71a58d6a93"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "010f882c3cbf120a",
+    "0ada48ecfd6583c1",
+    "73e775aaa40c0419",
+    "ff205f71a58d6a93"
+   ],
+   "value": 0.060164380321665156,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2019-01-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "14c096ae8ae64db8",
+   "input_observation_ids": [
+    "010f882c3cbf120a",
+    "73e775aaa40c0419",
+    "886ba1fd8568b050",
+    "ff205f71a58d6a93"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "010f882c3cbf120a",
+    "73e775aaa40c0419",
+    "886ba1fd8568b050",
+    "ff205f71a58d6a93"
+   ],
+   "value": 0.10311218940851674,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2019-02-28",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "9f77c3c925250484",
+   "input_observation_ids": [
+    "5f47ba51c71b41a6",
+    "73e775aaa40c0419",
+    "886ba1fd8568b050",
+    "ff205f71a58d6a93"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "5f47ba51c71b41a6",
+    "73e775aaa40c0419",
+    "886ba1fd8568b050",
+    "ff205f71a58d6a93"
+   ],
+   "value": 0.007445046958148405,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2019-03-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "7ac4b948eb5e7734",
+   "input_observation_ids": [
+    "1c8874b1624e587d",
+    "5f47ba51c71b41a6",
+    "886ba1fd8568b050",
+    "ff205f71a58d6a93"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "1c8874b1624e587d",
+    "5f47ba51c71b41a6",
+    "886ba1fd8568b050",
+    "ff205f71a58d6a93"
+   ],
+   "value": -0.011197962409977169,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2019-04-30",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "622cb10b0b62f848",
+   "input_observation_ids": [
+    "1c8874b1624e587d",
+    "359aef2bc3444792",
+    "5f47ba51c71b41a6",
+    "886ba1fd8568b050"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "1c8874b1624e587d",
+    "359aef2bc3444792",
+    "5f47ba51c71b41a6",
+    "886ba1fd8568b050"
+   ],
+   "value": -0.09194957460712228,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2019-05-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "f1c56349c5409cb4",
+   "input_observation_ids": [
+    "1c8874b1624e587d",
+    "359aef2bc3444792",
+    "5f47ba51c71b41a6",
+    "d1051cfa0c8fd29f"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "1c8874b1624e587d",
+    "359aef2bc3444792",
+    "5f47ba51c71b41a6",
+    "d1051cfa0c8fd29f"
+   ],
+   "value": 0.02389502955437872,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2019-06-30",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "3c604911d4d865a4",
+   "input_observation_ids": [
+    "1c8874b1624e587d",
+    "359aef2bc3444792",
+    "711cb6a440f0d045",
+    "d1051cfa0c8fd29f"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "1c8874b1624e587d",
+    "359aef2bc3444792",
+    "711cb6a440f0d045",
+    "d1051cfa0c8fd29f"
+   ],
+   "value": -0.005588688875847847,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2019-07-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "0707b3ebea21c4ba",
+   "input_observation_ids": [
+    "359aef2bc3444792",
+    "711cb6a440f0d045",
+    "7c8fcfe8d0f0c49f",
+    "d1051cfa0c8fd29f"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "359aef2bc3444792",
+    "711cb6a440f0d045",
+    "7c8fcfe8d0f0c49f",
+    "d1051cfa0c8fd29f"
+   ],
+   "value": 0.0009675626342406929,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2019-08-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "5246b681688bec30",
+   "input_observation_ids": [
+    "711cb6a440f0d045",
+    "7c8fcfe8d0f0c49f",
+    "b0d5d13c9cfdc856",
+    "d1051cfa0c8fd29f"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "711cb6a440f0d045",
+    "7c8fcfe8d0f0c49f",
+    "b0d5d13c9cfdc856",
+    "d1051cfa0c8fd29f"
+   ],
+   "value": -0.019860421751172197,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2019-09-30",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "2ea445a4dfb3cfd1",
+   "input_observation_ids": [
+    "711cb6a440f0d045",
+    "7c8fcfe8d0f0c49f",
+    "b0d5d13c9cfdc856",
+    "ba0e4bbd447e93a1"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "711cb6a440f0d045",
+    "7c8fcfe8d0f0c49f",
+    "b0d5d13c9cfdc856",
+    "ba0e4bbd447e93a1"
+   ],
+   "value": -0.025082009638318303,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2019-10-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "947c631e79f7b5fb",
+   "input_observation_ids": [
+    "4c58d8169368275e",
+    "7c8fcfe8d0f0c49f",
+    "b0d5d13c9cfdc856",
+    "ba0e4bbd447e93a1"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "4c58d8169368275e",
+    "7c8fcfe8d0f0c49f",
+    "b0d5d13c9cfdc856",
+    "ba0e4bbd447e93a1"
+   ],
+   "value": -0.026695842450765728,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2019-11-30",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "ce245558fe9de402",
+   "input_observation_ids": [
+    "4c58d8169368275e",
+    "b0d5d13c9cfdc856",
+    "ba0e4bbd447e93a1",
+    "ebbf824d4e486d10"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "4c58d8169368275e",
+    "b0d5d13c9cfdc856",
+    "ba0e4bbd447e93a1",
+    "ebbf824d4e486d10"
+   ],
+   "value": -0.024774442740889357,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2019-12-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "4681b9d698c8852b",
+   "input_observation_ids": [
+    "1ffd11bb54d1f142",
+    "4c58d8169368275e",
+    "ba0e4bbd447e93a1",
+    "ebbf824d4e486d10"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "1ffd11bb54d1f142",
+    "4c58d8169368275e",
+    "ba0e4bbd447e93a1",
+    "ebbf824d4e486d10"
+   ],
+   "value": 0.0262881416143248,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2020-01-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "9158686fa4db7a5a",
+   "input_observation_ids": [
+    "14bea9c535049a78",
+    "1ffd11bb54d1f142",
+    "4c58d8169368275e",
+    "ebbf824d4e486d10"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "14bea9c535049a78",
+    "1ffd11bb54d1f142",
+    "4c58d8169368275e",
+    "ebbf824d4e486d10"
+   ],
+   "value": 0.06654833886920852,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2020-02-29",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "4e985eacf8fdd892",
+   "input_observation_ids": [
+    "14bea9c535049a78",
+    "1ffd11bb54d1f142",
+    "62893f896ceb0c4a",
+    "ebbf824d4e486d10"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "14bea9c535049a78",
+    "1ffd11bb54d1f142",
+    "62893f896ceb0c4a",
+    "ebbf824d4e486d10"
+   ],
+   "value": 0.010247415703957374,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2020-03-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "4336df7acbc73d5f",
+   "input_observation_ids": [
+    "14bea9c535049a78",
+    "1ffd11bb54d1f142",
+    "62893f896ceb0c4a",
+    "9258630c7ef61fd5"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "14bea9c535049a78",
+    "1ffd11bb54d1f142",
+    "62893f896ceb0c4a",
+    "9258630c7ef61fd5"
+   ],
+   "value": 2.5425731881531908,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2020-04-30",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "50a2db29a8fbf486",
+   "input_observation_ids": [
+    "14bea9c535049a78",
+    "62893f896ceb0c4a",
+    "9258630c7ef61fd5",
+    "c84a40557f252c1a"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "14bea9c535049a78",
+    "62893f896ceb0c4a",
+    "9258630c7ef61fd5",
+    "c84a40557f252c1a"
+   ],
+   "value": 1.1777391458703952,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2020-05-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "5c1a4ec1c6710a36",
+   "input_observation_ids": [
+    "62893f896ceb0c4a",
+    "9258630c7ef61fd5",
+    "c84a40557f252c1a",
+    "cb2c5844e8ea6244"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "62893f896ceb0c4a",
+    "9258630c7ef61fd5",
+    "c84a40557f252c1a",
+    "cb2c5844e8ea6244"
+   ],
+   "value": 0.22255407408457462,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2020-06-30",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "5a2f8d3f7fc2f11c",
+   "input_observation_ids": [
+    "0d6dbeecb385df81",
+    "9258630c7ef61fd5",
+    "c84a40557f252c1a",
+    "cb2c5844e8ea6244"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "0d6dbeecb385df81",
+    "9258630c7ef61fd5",
+    "c84a40557f252c1a",
+    "cb2c5844e8ea6244"
+   ],
+   "value": -0.08041084851102565,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2020-07-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "34eabe6ed677ca37",
+   "input_observation_ids": [
+    "0d6dbeecb385df81",
+    "76fe99d2d0618b50",
+    "c84a40557f252c1a",
+    "cb2c5844e8ea6244"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "0d6dbeecb385df81",
+    "76fe99d2d0618b50",
+    "c84a40557f252c1a",
+    "cb2c5844e8ea6244"
+   ],
+   "value": -0.2960646030203661,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2020-08-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "8c58fb6d3d0d4235",
+   "input_observation_ids": [
+    "02d6fef827a1e0a9",
+    "0d6dbeecb385df81",
+    "76fe99d2d0618b50",
+    "cb2c5844e8ea6244"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "02d6fef827a1e0a9",
+    "0d6dbeecb385df81",
+    "76fe99d2d0618b50",
+    "cb2c5844e8ea6244"
+   ],
+   "value": -0.08093932517349833,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2020-09-30",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "1030f8ff7212af4f",
+   "input_observation_ids": [
+    "02d6fef827a1e0a9",
+    "0d6dbeecb385df81",
+    "76fe99d2d0618b50",
+    "cc16560c7b4f7f96"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "02d6fef827a1e0a9",
+    "0d6dbeecb385df81",
+    "76fe99d2d0618b50",
+    "cc16560c7b4f7f96"
+   ],
+   "value": -0.09996601452726683,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2020-10-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "8a24162333e0a670",
+   "input_observation_ids": [
+    "02d6fef827a1e0a9",
+    "76fe99d2d0618b50",
+    "88c4f23dfb4528b7",
+    "cc16560c7b4f7f96"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "02d6fef827a1e0a9",
+    "76fe99d2d0618b50",
+    "88c4f23dfb4528b7",
+    "cc16560c7b4f7f96"
+   ],
+   "value": -0.12319573187814414,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2020-11-30",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "bc3d738db07a33d3",
+   "input_observation_ids": [
+    "02d6fef827a1e0a9",
+    "4a1646cb386422d9",
+    "88c4f23dfb4528b7",
+    "cc16560c7b4f7f96"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "02d6fef827a1e0a9",
+    "4a1646cb386422d9",
+    "88c4f23dfb4528b7",
+    "cc16560c7b4f7f96"
+   ],
+   "value": -0.04002333884389375,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2020-12-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "399e101062f586d5",
+   "input_observation_ids": [
+    "4a1646cb386422d9",
+    "88c4f23dfb4528b7",
+    "cc16560c7b4f7f96",
+    "dc2ee1e8a1faa36e"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "4a1646cb386422d9",
+    "88c4f23dfb4528b7",
+    "cc16560c7b4f7f96",
+    "dc2ee1e8a1faa36e"
+   ],
+   "value": -0.025022591402725114,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2021-01-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "2bd6f6ac5662c61f",
+   "input_observation_ids": [
+    "139f2fe76e4dc848",
+    "4a1646cb386422d9",
+    "88c4f23dfb4528b7",
+    "dc2ee1e8a1faa36e"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "139f2fe76e4dc848",
+    "4a1646cb386422d9",
+    "88c4f23dfb4528b7",
+    "dc2ee1e8a1faa36e"
+   ],
+   "value": -0.05271325755826606,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2021-02-28",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "d5733a7b5d5b41a2",
+   "input_observation_ids": [
+    "139f2fe76e4dc848",
+    "4a1646cb386422d9",
+    "d135b9380d8dd7cf",
+    "dc2ee1e8a1faa36e"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "139f2fe76e4dc848",
+    "4a1646cb386422d9",
+    "d135b9380d8dd7cf",
+    "dc2ee1e8a1faa36e"
+   ],
+   "value": -0.07980946843015158,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2021-03-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "18a9f595c94d44bc",
+   "input_observation_ids": [
+    "139f2fe76e4dc848",
+    "d135b9380d8dd7cf",
+    "dc2ee1e8a1faa36e",
+    "e419a88359c1108e"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "139f2fe76e4dc848",
+    "d135b9380d8dd7cf",
+    "dc2ee1e8a1faa36e",
+    "e419a88359c1108e"
+   ],
+   "value": -0.08809178300674858,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2021-04-30",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "c269cfaa656846b5",
+   "input_observation_ids": [
+    "1178c368bacb369c",
+    "139f2fe76e4dc848",
+    "d135b9380d8dd7cf",
+    "e419a88359c1108e"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "1178c368bacb369c",
+    "139f2fe76e4dc848",
+    "d135b9380d8dd7cf",
+    "e419a88359c1108e"
+   ],
+   "value": 0.036764248220917395,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2021-05-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "01ecd55f4d2d947d",
+   "input_observation_ids": [
+    "1178c368bacb369c",
+    "d135b9380d8dd7cf",
+    "e06da70ddd444345",
+    "e419a88359c1108e"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "1178c368bacb369c",
+    "d135b9380d8dd7cf",
+    "e06da70ddd444345",
+    "e419a88359c1108e"
+   ],
+   "value": -0.024172019771467546,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2021-06-30",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "65a27d9110f24220",
+   "input_observation_ids": [
+    "1178c368bacb369c",
+    "ab59dc158c7842ff",
+    "e06da70ddd444345",
+    "e419a88359c1108e"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "1178c368bacb369c",
+    "ab59dc158c7842ff",
+    "e06da70ddd444345",
+    "e419a88359c1108e"
+   ],
+   "value": -0.1200908063679299,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2021-07-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "487123959f6188d8",
+   "input_observation_ids": [
+    "1178c368bacb369c",
+    "2cb5f90b5e285fa5",
+    "ab59dc158c7842ff",
+    "e06da70ddd444345"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "1178c368bacb369c",
+    "2cb5f90b5e285fa5",
+    "ab59dc158c7842ff",
+    "e06da70ddd444345"
+   ],
+   "value": -0.18162262189707534,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2021-08-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "053ddfd849510ecf",
+   "input_observation_ids": [
+    "2cb5f90b5e285fa5",
+    "3e577ec96013929c",
+    "ab59dc158c7842ff",
+    "e06da70ddd444345"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "2cb5f90b5e285fa5",
+    "3e577ec96013929c",
+    "ab59dc158c7842ff",
+    "e06da70ddd444345"
+   ],
+   "value": -0.09226466785516962,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2021-09-30",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "fa37a06b134bcbd2",
+   "input_observation_ids": [
+    "2cb5f90b5e285fa5",
+    "3e577ec96013929c",
+    "ab59dc158c7842ff",
+    "dc3f0ea15d1c5758"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "2cb5f90b5e285fa5",
+    "3e577ec96013929c",
+    "ab59dc158c7842ff",
+    "dc3f0ea15d1c5758"
+   ],
+   "value": -0.08214115402956601,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2021-10-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "5923931bda6f2a5b",
+   "input_observation_ids": [
+    "2cb5f90b5e285fa5",
+    "3e577ec96013929c",
+    "418557007a710166",
+    "dc3f0ea15d1c5758"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "2cb5f90b5e285fa5",
+    "3e577ec96013929c",
+    "418557007a710166",
+    "dc3f0ea15d1c5758"
+   ],
+   "value": -0.14254756256793444,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2021-11-30",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "74c1dfa8c7fbecc4",
+   "input_observation_ids": [
+    "3e577ec96013929c",
+    "418557007a710166",
+    "9b636daf965069d5",
+    "dc3f0ea15d1c5758"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "3e577ec96013929c",
+    "418557007a710166",
+    "9b636daf965069d5",
+    "dc3f0ea15d1c5758"
+   ],
+   "value": -0.21530507298949997,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2021-12-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "cdef1f076f275404",
+   "input_observation_ids": [
+    "2193240cd3876e1e",
+    "418557007a710166",
+    "9b636daf965069d5",
+    "dc3f0ea15d1c5758"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "2193240cd3876e1e",
+    "418557007a710166",
+    "9b636daf965069d5",
+    "dc3f0ea15d1c5758"
+   ],
+   "value": -0.12835349281421626,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2022-01-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "d9e5bde11472dfd0",
+   "input_observation_ids": [
+    "2193240cd3876e1e",
+    "418557007a710166",
+    "9b636daf965069d5",
+    "e92c7f2cbdd63257"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "2193240cd3876e1e",
+    "418557007a710166",
+    "9b636daf965069d5",
+    "e92c7f2cbdd63257"
+   ],
+   "value": -0.06307225158962815,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2022-02-28",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "fd3b532e4546c91b",
+   "input_observation_ids": [
+    "2193240cd3876e1e",
+    "3e70da798dd69dc2",
+    "9b636daf965069d5",
+    "e92c7f2cbdd63257"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "2193240cd3876e1e",
+    "3e70da798dd69dc2",
+    "9b636daf965069d5",
+    "e92c7f2cbdd63257"
+   ],
+   "value": -0.06800241355071879,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2022-03-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "d51276c56453f098",
+   "input_observation_ids": [
+    "2193240cd3876e1e",
+    "3e70da798dd69dc2",
+    "e92c7f2cbdd63257",
+    "fff7d3350d98583a"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "2193240cd3876e1e",
+    "3e70da798dd69dc2",
+    "e92c7f2cbdd63257",
+    "fff7d3350d98583a"
+   ],
+   "value": -0.03867126752854966,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2022-04-30",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "76734ee85e2853db",
+   "input_observation_ids": [
+    "3757c8024baeba81",
+    "3e70da798dd69dc2",
+    "e92c7f2cbdd63257",
+    "fff7d3350d98583a"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "3757c8024baeba81",
+    "3e70da798dd69dc2",
+    "e92c7f2cbdd63257",
+    "fff7d3350d98583a"
+   ],
+   "value": -0.04761408843806625,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2022-05-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "bf99c92d9cb56454",
+   "input_observation_ids": [
+    "3757c8024baeba81",
+    "3e70da798dd69dc2",
+    "764630cb52e567de",
+    "fff7d3350d98583a"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "3757c8024baeba81",
+    "3e70da798dd69dc2",
+    "764630cb52e567de",
+    "fff7d3350d98583a"
+   ],
+   "value": 0.10835793694186258,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2022-06-30",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "6e754a5e6b3d4096",
+   "input_observation_ids": [
+    "3757c8024baeba81",
+    "69a1c46008187a23",
+    "764630cb52e567de",
+    "fff7d3350d98583a"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "3757c8024baeba81",
+    "69a1c46008187a23",
+    "764630cb52e567de",
+    "fff7d3350d98583a"
+   ],
+   "value": 0.09207505968863261,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2022-07-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "8dad8a3c3cb6a628",
+   "input_observation_ids": [
+    "1d0dfb719ce52f45",
+    "3757c8024baeba81",
+    "69a1c46008187a23",
+    "764630cb52e567de"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "1d0dfb719ce52f45",
+    "3757c8024baeba81",
+    "69a1c46008187a23",
+    "764630cb52e567de"
+   ],
+   "value": 0.010925209891711418,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2022-08-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "7b727473dde0fe8f",
+   "input_observation_ids": [
+    "1d0dfb719ce52f45",
+    "3b0bfdadf0982a78",
+    "69a1c46008187a23",
+    "764630cb52e567de"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "1d0dfb719ce52f45",
+    "3b0bfdadf0982a78",
+    "69a1c46008187a23",
+    "764630cb52e567de"
+   ],
+   "value": -0.03560279293663471,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2022-09-30",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "f6f717547ac2da81",
+   "input_observation_ids": [
+    "1d0dfb719ce52f45",
+    "3b0bfdadf0982a78",
+    "69a1c46008187a23",
+    "e505011232dfa942"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "1d0dfb719ce52f45",
+    "3b0bfdadf0982a78",
+    "69a1c46008187a23",
+    "e505011232dfa942"
+   ],
+   "value": -0.10945415009019255,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2022-10-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "2f3b9a730bc95cdb",
+   "input_observation_ids": [
+    "1d0dfb719ce52f45",
+    "3b0bfdadf0982a78",
+    "66374e1a70950251",
+    "e505011232dfa942"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "1d0dfb719ce52f45",
+    "3b0bfdadf0982a78",
+    "66374e1a70950251",
+    "e505011232dfa942"
+   ],
+   "value": -0.017973334813191078,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2022-11-30",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "732514b481d0ac2b",
+   "input_observation_ids": [
+    "0d53699bd40c58bf",
+    "3b0bfdadf0982a78",
+    "66374e1a70950251",
+    "e505011232dfa942"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "0d53699bd40c58bf",
+    "3b0bfdadf0982a78",
+    "66374e1a70950251",
+    "e505011232dfa942"
+   ],
+   "value": -0.011669386227016076,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2022-12-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "88351192b0284ffc",
+   "input_observation_ids": [
+    "0d53699bd40c58bf",
+    "66374e1a70950251",
+    "bd91799c08b0335a",
+    "e505011232dfa942"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "0d53699bd40c58bf",
+    "66374e1a70950251",
+    "bd91799c08b0335a",
+    "e505011232dfa942"
+   ],
+   "value": 0.04609227030697194,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2023-01-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "433955430d7fbcae",
+   "input_observation_ids": [
+    "0d53699bd40c58bf",
+    "66374e1a70950251",
+    "bd91799c08b0335a",
+    "c800d89cd6f5d9e0"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "0d53699bd40c58bf",
+    "66374e1a70950251",
+    "bd91799c08b0335a",
+    "c800d89cd6f5d9e0"
+   ],
+   "value": 0.11864256237872706,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2023-02-28",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "7958db1c8b578c10",
+   "input_observation_ids": [
+    "0d53699bd40c58bf",
+    "2f9922b020d9c436",
+    "bd91799c08b0335a",
+    "c800d89cd6f5d9e0"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "0d53699bd40c58bf",
+    "2f9922b020d9c436",
+    "bd91799c08b0335a",
+    "c800d89cd6f5d9e0"
+   ],
+   "value": 0.022842624092249908,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2023-03-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "0df077858481e328",
+   "input_observation_ids": [
+    "2f9922b020d9c436",
+    "a89350d68f1215df",
+    "bd91799c08b0335a",
+    "c800d89cd6f5d9e0"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "2f9922b020d9c436",
+    "a89350d68f1215df",
+    "bd91799c08b0335a",
+    "c800d89cd6f5d9e0"
+   ],
+   "value": 0.03941625017167372,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2023-04-30",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "d18260da3a0bcf4a",
+   "input_observation_ids": [
+    "2f9922b020d9c436",
+    "6849d6eae95f37b3",
+    "a89350d68f1215df",
+    "c800d89cd6f5d9e0"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "2f9922b020d9c436",
+    "6849d6eae95f37b3",
+    "a89350d68f1215df",
+    "c800d89cd6f5d9e0"
+   ],
+   "value": -0.04101223645659802,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2023-05-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "301ddcdb687d5805",
+   "input_observation_ids": [
+    "117737d7f749fa4a",
+    "2f9922b020d9c436",
+    "6849d6eae95f37b3",
+    "a89350d68f1215df"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "117737d7f749fa4a",
+    "2f9922b020d9c436",
+    "6849d6eae95f37b3",
+    "a89350d68f1215df"
+   ],
+   "value": 0.06644062516848281,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2023-06-30",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "c50cd7d6197c8595",
+   "input_observation_ids": [
+    "117737d7f749fa4a",
+    "6849d6eae95f37b3",
+    "a89350d68f1215df",
+    "d88ca1e49d236a3c"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "117737d7f749fa4a",
+    "6849d6eae95f37b3",
+    "a89350d68f1215df",
+    "d88ca1e49d236a3c"
+   ],
+   "value": 0.044809068542090325,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2023-07-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "7fdaa6d283417255",
+   "input_observation_ids": [
+    "117737d7f749fa4a",
+    "6849d6eae95f37b3",
+    "90c5c27143bfb51d",
+    "d88ca1e49d236a3c"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "117737d7f749fa4a",
+    "6849d6eae95f37b3",
+    "90c5c27143bfb51d",
+    "d88ca1e49d236a3c"
+   ],
+   "value": 0.03456470196076333,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2023-08-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "175202cbc38be268",
+   "input_observation_ids": [
+    "117737d7f749fa4a",
+    "90c5c27143bfb51d",
+    "c27318839d5dec75",
+    "d88ca1e49d236a3c"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "117737d7f749fa4a",
+    "90c5c27143bfb51d",
+    "c27318839d5dec75",
+    "d88ca1e49d236a3c"
+   ],
+   "value": -0.0374321824266739,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2023-09-30",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "1223996730d865f9",
+   "input_observation_ids": [
+    "90c5c27143bfb51d",
+    "9f676b373d5220cd",
+    "c27318839d5dec75",
+    "d88ca1e49d236a3c"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "90c5c27143bfb51d",
+    "9f676b373d5220cd",
+    "c27318839d5dec75",
+    "d88ca1e49d236a3c"
+   ],
+   "value": -0.08028613848022681,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2023-10-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "ca519db6e6d3960b",
+   "input_observation_ids": [
+    "54dd0a781bb06ea8",
+    "90c5c27143bfb51d",
+    "9f676b373d5220cd",
+    "c27318839d5dec75"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "54dd0a781bb06ea8",
+    "90c5c27143bfb51d",
+    "9f676b373d5220cd",
+    "c27318839d5dec75"
+   ],
+   "value": -0.03884264531504977,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2023-11-30",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "dae9700ed036bb44",
+   "input_observation_ids": [
+    "3c1d4d8b034b4266",
+    "54dd0a781bb06ea8",
+    "9f676b373d5220cd",
+    "c27318839d5dec75"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "3c1d4d8b034b4266",
+    "54dd0a781bb06ea8",
+    "9f676b373d5220cd",
+    "c27318839d5dec75"
+   ],
+   "value": -0.019629039251971236,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2023-12-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "7f250c21050a200f",
+   "input_observation_ids": [
+    "3c1d4d8b034b4266",
+    "54dd0a781bb06ea8",
+    "9f676b373d5220cd",
+    "f4c602a66914da8d"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "3c1d4d8b034b4266",
+    "54dd0a781bb06ea8",
+    "9f676b373d5220cd",
+    "f4c602a66914da8d"
+   ],
+   "value": 0.014359312995645634,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2024-01-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "be48d3858904e487",
+   "input_observation_ids": [
+    "3c1d4d8b034b4266",
+    "54dd0a781bb06ea8",
+    "d5ed603fcf60480f",
+    "f4c602a66914da8d"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "3c1d4d8b034b4266",
+    "54dd0a781bb06ea8",
+    "d5ed603fcf60480f",
+    "f4c602a66914da8d"
+   ],
+   "value": 0.04534846586582164,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2024-02-29",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "d1b3df4e1ef3bd71",
+   "input_observation_ids": [
+    "3c1d4d8b034b4266",
+    "7b9f04592bf4bcdc",
+    "d5ed603fcf60480f",
+    "f4c602a66914da8d"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "3c1d4d8b034b4266",
+    "7b9f04592bf4bcdc",
+    "d5ed603fcf60480f",
+    "f4c602a66914da8d"
+   ],
+   "value": 0.004917397128286982,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2024-03-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "6b9c54b6135e197d",
+   "input_observation_ids": [
+    "24c27676fd725f15",
+    "7b9f04592bf4bcdc",
+    "d5ed603fcf60480f",
+    "f4c602a66914da8d"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "24c27676fd725f15",
+    "7b9f04592bf4bcdc",
+    "d5ed603fcf60480f",
+    "f4c602a66914da8d"
+   ],
+   "value": 0.022356166946313483,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2024-04-30",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "62b5c4a866aed6eb",
+   "input_observation_ids": [
+    "24c27676fd725f15",
+    "77929542dd7b5d17",
+    "7b9f04592bf4bcdc",
+    "d5ed603fcf60480f"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "24c27676fd725f15",
+    "77929542dd7b5d17",
+    "7b9f04592bf4bcdc",
+    "d5ed603fcf60480f"
+   ],
+   "value": -0.03755296701034461,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2024-05-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "e5e61ea0d1b0028f",
+   "input_observation_ids": [
+    "24c27676fd725f15",
+    "739d3e0469355999",
+    "77929542dd7b5d17",
+    "7b9f04592bf4bcdc"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "24c27676fd725f15",
+    "739d3e0469355999",
+    "77929542dd7b5d17",
+    "7b9f04592bf4bcdc"
+   ],
+   "value": 0.01364776062647799,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2024-06-30",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "100737e41871e63f",
+   "input_observation_ids": [
+    "24c27676fd725f15",
+    "739d3e0469355999",
+    "77929542dd7b5d17",
+    "8bb60eaaf930bd5c"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "24c27676fd725f15",
+    "739d3e0469355999",
+    "77929542dd7b5d17",
+    "8bb60eaaf930bd5c"
+   ],
+   "value": 0.007913108210289455,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2024-07-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "bb41bcb3fb528549",
+   "input_observation_ids": [
+    "739d3e0469355999",
+    "77929542dd7b5d17",
+    "8bb60eaaf930bd5c",
+    "d070b87183ef8316"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "739d3e0469355999",
+    "77929542dd7b5d17",
+    "8bb60eaaf930bd5c",
+    "d070b87183ef8316"
+   ],
+   "value": 0.0018784202660029337,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2024-08-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "04644b059d819299",
+   "input_observation_ids": [
+    "739d3e0469355999",
+    "8bb60eaaf930bd5c",
+    "d070b87183ef8316",
+    "ffb916f452e11695"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "739d3e0469355999",
+    "8bb60eaaf930bd5c",
+    "d070b87183ef8316",
+    "ffb916f452e11695"
+   ],
+   "value": -0.018214957393949294,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2024-09-30",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "6293854e6a4240de",
+   "input_observation_ids": [
+    "63cc0efb560d01ce",
+    "8bb60eaaf930bd5c",
+    "d070b87183ef8316",
+    "ffb916f452e11695"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "63cc0efb560d01ce",
+    "8bb60eaaf930bd5c",
+    "d070b87183ef8316",
+    "ffb916f452e11695"
+   ],
+   "value": -0.04321323416381895,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2024-10-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "d499c4ce5381fefb",
+   "input_observation_ids": [
+    "63cc0efb560d01ce",
+    "c92a4c1be393b3d1",
+    "d070b87183ef8316",
+    "ffb916f452e11695"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "63cc0efb560d01ce",
+    "c92a4c1be393b3d1",
+    "d070b87183ef8316",
+    "ffb916f452e11695"
+   ],
+   "value": -0.02509438975708922,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2024-11-30",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "b29464c920d60ad4",
+   "input_observation_ids": [
+    "63cc0efb560d01ce",
+    "c92a4c1be393b3d1",
+    "d6472c9addd6471c",
+    "ffb916f452e11695"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "63cc0efb560d01ce",
+    "c92a4c1be393b3d1",
+    "d6472c9addd6471c",
+    "ffb916f452e11695"
+   ],
+   "value": -0.0060722072917195336,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2024-12-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "6aa5d58439657049",
+   "input_observation_ids": [
+    "2bd1d3e3e2aecc33",
+    "63cc0efb560d01ce",
+    "c92a4c1be393b3d1",
+    "d6472c9addd6471c"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "2bd1d3e3e2aecc33",
+    "63cc0efb560d01ce",
+    "c92a4c1be393b3d1",
+    "d6472c9addd6471c"
+   ],
+   "value": 0.02313627957400688,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-01-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "fae32b40c5d8708d",
+   "input_observation_ids": [
+    "2bd1d3e3e2aecc33",
+    "411aba41d0eefd0d",
+    "c92a4c1be393b3d1",
+    "d6472c9addd6471c"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "2bd1d3e3e2aecc33",
+    "411aba41d0eefd0d",
+    "c92a4c1be393b3d1",
+    "d6472c9addd6471c"
+   ],
+   "value": 0.03978483900322871,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-02-28",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "f56fc97ba01d9d1a",
+   "input_observation_ids": [
+    "2bd1d3e3e2aecc33",
+    "411aba41d0eefd0d",
+    "c3141afa7a098199",
+    "d6472c9addd6471c"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "2bd1d3e3e2aecc33",
+    "411aba41d0eefd0d",
+    "c3141afa7a098199",
+    "d6472c9addd6471c"
+   ],
+   "value": 0.009297390616289425,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-03-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "81c0aac310d5a8bf",
+   "input_observation_ids": [
+    "2bd1d3e3e2aecc33",
+    "411aba41d0eefd0d",
+    "bff95f6a8ccfab29",
+    "c3141afa7a098199"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "2bd1d3e3e2aecc33",
+    "411aba41d0eefd0d",
+    "bff95f6a8ccfab29",
+    "c3141afa7a098199"
+   ],
+   "value": 7.127075760804402e-05,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-04-30",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "a4008a1a4fa23081",
+   "input_observation_ids": [
+    "0e9eb8d02b14b507",
+    "411aba41d0eefd0d",
+    "bff95f6a8ccfab29",
+    "c3141afa7a098199"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "0e9eb8d02b14b507",
+    "411aba41d0eefd0d",
+    "bff95f6a8ccfab29",
+    "c3141afa7a098199"
+   ],
+   "value": -0.019710898897757567,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-05-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "bcaead1d9a372507",
+   "input_observation_ids": [
+    "0e9eb8d02b14b507",
+    "bff95f6a8ccfab29",
+    "c3141afa7a098199",
+    "dfcdb3997b72268e"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "0e9eb8d02b14b507",
+    "bff95f6a8ccfab29",
+    "c3141afa7a098199",
+    "dfcdb3997b72268e"
+   ],
+   "value": 0.002459637112652624,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-06-30",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "adecc1b810dcbb7a",
+   "input_observation_ids": [
+    "0e9eb8d02b14b507",
+    "5c52f8adbacb0f47",
+    "bff95f6a8ccfab29",
+    "dfcdb3997b72268e"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "0e9eb8d02b14b507",
+    "5c52f8adbacb0f47",
+    "bff95f6a8ccfab29",
+    "dfcdb3997b72268e"
+   ],
+   "value": 0.022064289210798282,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-07-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "e4b42833e75c8033",
+   "input_observation_ids": [
+    "0e9eb8d02b14b507",
+    "5c52f8adbacb0f47",
+    "82315b098d1a3aa4",
+    "dfcdb3997b72268e"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "0e9eb8d02b14b507",
+    "5c52f8adbacb0f47",
+    "82315b098d1a3aa4",
+    "dfcdb3997b72268e"
+   ],
+   "value": 0.0008928465841226974,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-08-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "91bae8409f793a3c",
+   "input_observation_ids": [
+    "1e07f1749ee4e3a4",
+    "5c52f8adbacb0f47",
+    "82315b098d1a3aa4",
+    "dfcdb3997b72268e"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "1e07f1749ee4e3a4",
+    "5c52f8adbacb0f47",
+    "82315b098d1a3aa4",
+    "dfcdb3997b72268e"
+   ],
+   "value": -0.016417266782062123,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-09-30",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "7614b04d27bbe164",
+   "input_observation_ids": [
+    "1e07f1749ee4e3a4",
+    "5c52f8adbacb0f47",
+    "82315b098d1a3aa4",
+    "ef761cd6a14582d2"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "1e07f1749ee4e3a4",
+    "5c52f8adbacb0f47",
+    "82315b098d1a3aa4",
+    "ef761cd6a14582d2"
+   ],
+   "value": -0.045965620382716454,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-10-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "ce639abbd1db22b9",
+   "input_observation_ids": [
+    "1e07f1749ee4e3a4",
+    "82315b098d1a3aa4",
+    "a6f18e6a42fc95ec",
+    "ef761cd6a14582d2"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "1e07f1749ee4e3a4",
+    "82315b098d1a3aa4",
+    "a6f18e6a42fc95ec",
+    "ef761cd6a14582d2"
+   ],
+   "value": -0.0037395886452490368,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-11-30",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "823ee0790846f38c",
+   "input_observation_ids": [
+    "1e07f1749ee4e3a4",
+    "23362c3555f8f45a",
+    "a6f18e6a42fc95ec",
+    "ef761cd6a14582d2"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "1e07f1749ee4e3a4",
+    "23362c3555f8f45a",
+    "a6f18e6a42fc95ec",
+    "ef761cd6a14582d2"
+   ],
+   "value": -0.017883435388980518,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-12-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "6ad1adb3ec2948ae",
+   "input_observation_ids": [
+    "23362c3555f8f45a",
+    "a6f18e6a42fc95ec",
+    "b43bff740abc59c1",
+    "ef761cd6a14582d2"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "23362c3555f8f45a",
+    "a6f18e6a42fc95ec",
+    "b43bff740abc59c1",
+    "ef761cd6a14582d2"
+   ],
+   "value": 0.031701808682447874,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2026-01-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "8df9bc5da4b6cc08",
+   "input_observation_ids": [
+    "23362c3555f8f45a",
+    "75670685207d1801",
+    "a6f18e6a42fc95ec",
+    "b43bff740abc59c1"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "23362c3555f8f45a",
+    "75670685207d1801",
+    "a6f18e6a42fc95ec",
+    "b43bff740abc59c1"
+   ],
+   "value": -0.0021017312777529273,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2026-02-28",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "dec6db2a7f41be81",
+   "input_observation_ids": [
+    "23362c3555f8f45a",
+    "337c73d9d52d314b",
+    "75670685207d1801",
+    "b43bff740abc59c1"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "23362c3555f8f45a",
+    "337c73d9d52d314b",
+    "75670685207d1801",
+    "b43bff740abc59c1"
+   ],
+   "value": -0.00404982282025157,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2026-03-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "58bd4e17942508ca",
+   "input_observation_ids": [
+    "337c73d9d52d314b",
+    "75670685207d1801",
+    "7b66415c752f4843",
+    "b43bff740abc59c1"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "337c73d9d52d314b",
+    "75670685207d1801",
+    "7b66415c752f4843",
+    "b43bff740abc59c1"
+   ],
+   "value": -0.022144968279168342,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2026-04-30",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "52c6035bd1491bde",
+   "input_observation_ids": [
+    "337c73d9d52d314b",
+    "75670685207d1801",
+    "7b66415c752f4843",
+    "eb3282424b0fcc9a"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "337c73d9d52d314b",
+    "75670685207d1801",
+    "7b66415c752f4843",
+    "eb3282424b0fcc9a"
+   ],
+   "value": -0.020920233587884307,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2026-05-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "dcb50c1c39989bf8",
+   "input_observation_ids": [
+    "14ca8a23f3a7fee5",
+    "337c73d9d52d314b",
+    "7b66415c752f4843",
+    "eb3282424b0fcc9a"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "14ca8a23f3a7fee5",
+    "337c73d9d52d314b",
+    "7b66415c752f4843",
+    "eb3282424b0fcc9a"
+   ],
+   "value": 0.01526512420528281,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2026-06-30",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "1d32fda37b1fb921",
+   "input_observation_ids": [
+    "14ca8a23f3a7fee5",
+    "7b66415c752f4843",
+    "eb3282424b0fcc9a",
+    "f03af856e9a46333"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "14ca8a23f3a7fee5",
+    "7b66415c752f4843",
+    "eb3282424b0fcc9a",
+    "f03af856e9a46333"
+   ],
+   "value": 0.013292532553470293,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2026-07-31",
+   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "db027dc9434ef682",
+   "input_observation_ids": [
+    "14ca8a23f3a7fee5",
+    "1fce2bb84f849403",
+    "eb3282424b0fcc9a",
+    "f03af856e9a46333"
+   ],
+   "metric": "cait_high_exposure_claims_3mma_mom",
+   "obs_ids": [
+    "14ca8a23f3a7fee5",
+    "1fce2bb84f849403",
+    "eb3282424b0fcc9a",
+    "f03af856e9a46333"
+   ],
+   "value": 0.010034531530727975,
+   "value_high": null,
+   "value_low": null
+  }
+ ],
  "direction": null,
  "direction_rule": null,
  "evidence": [],
@@ -52,23 +2632,21 @@
  "id": "cait_high_exposure_claims",
  "latest": {
   "as_of": "2026-07-31",
-  "disputed": false,
-  "grade": "B",
-  "high": null,
-  "low": null,
+  "dims": {},
   "obs_ids": [
-   "83c12bef8f8e8107"
+   "14ca8a23f3a7fee5",
+   "1fce2bb84f849403",
+   "eb3282424b0fcc9a",
+   "f03af856e9a46333"
   ],
-  "series_key": "cait.ca_high_exposure.claims_3mma_mom.m",
-  "subject": "ca_high_exposure",
   "unit": "share",
-  "value": 0.01
+  "value": 0.010034531530727975
  },
  "layer_id": "labour_consumers",
  "leading_lagging": "leading",
- "metric": null,
+ "metric": "cait_high_exposure_claims_3mma_mom",
  "metric_dims": {},
- "n_observations": 2,
+ "n_observations": 117,
  "name": "California unemployment claims from AI-exposed occupations",
  "normal_band": {
   "hi": 0.02,
@@ -78,18 +2656,1348 @@
  "pending": null,
  "points": [
   {
-   "as_of": "2026-07-31",
-   "disputed": false,
-   "grade": "B",
-   "high": null,
-   "low": null,
+   "as_of": "2017-04-30",
+   "dims": {},
    "obs_ids": [
-    "83c12bef8f8e8107"
+    "1ab560814bf03144",
+    "3aca212ec3c2edf8",
+    "50cf3e5409130049",
+    "d32bdeb2cef6de55"
    ],
-   "series_key": "cait.ca_high_exposure.claims_3mma_mom.m",
-   "subject": "ca_high_exposure",
    "unit": "share",
-   "value": 0.01
+   "value": -0.05480998736369169
+  },
+  {
+   "as_of": "2017-05-31",
+   "dims": {},
+   "obs_ids": [
+    "17bc1ed23b68151f",
+    "1ab560814bf03144",
+    "3aca212ec3c2edf8",
+    "d32bdeb2cef6de55"
+   ],
+   "unit": "share",
+   "value": 0.009290263482022887
+  },
+  {
+   "as_of": "2017-06-30",
+   "dims": {},
+   "obs_ids": [
+    "17bc1ed23b68151f",
+    "1ab560814bf03144",
+    "c88e7c3639c5564c",
+    "d32bdeb2cef6de55"
+   ],
+   "unit": "share",
+   "value": 0.003943140285034508
+  },
+  {
+   "as_of": "2017-07-31",
+   "dims": {},
+   "obs_ids": [
+    "17bc1ed23b68151f",
+    "684b3dcbe25f8780",
+    "c88e7c3639c5564c",
+    "d32bdeb2cef6de55"
+   ],
+   "unit": "share",
+   "value": 0.011337051267171994
+  },
+  {
+   "as_of": "2017-08-31",
+   "dims": {},
+   "obs_ids": [
+    "17bc1ed23b68151f",
+    "684b3dcbe25f8780",
+    "c016d63b36535809",
+    "c88e7c3639c5564c"
+   ],
+   "unit": "share",
+   "value": -0.00847391086387983
+  },
+  {
+   "as_of": "2017-09-30",
+   "dims": {},
+   "obs_ids": [
+    "50fbff870275206d",
+    "684b3dcbe25f8780",
+    "c016d63b36535809",
+    "c88e7c3639c5564c"
+   ],
+   "unit": "share",
+   "value": -0.04920689067030537
+  },
+  {
+   "as_of": "2017-10-31",
+   "dims": {},
+   "obs_ids": [
+    "50fbff870275206d",
+    "684b3dcbe25f8780",
+    "b1df2f2c19f88bbc",
+    "c016d63b36535809"
+   ],
+   "unit": "share",
+   "value": -0.017515984777622506
+  },
+  {
+   "as_of": "2017-11-30",
+   "dims": {},
+   "obs_ids": [
+    "16b3cb54dec03f7c",
+    "50fbff870275206d",
+    "b1df2f2c19f88bbc",
+    "c016d63b36535809"
+   ],
+   "unit": "share",
+   "value": -0.02094527622724196
+  },
+  {
+   "as_of": "2017-12-31",
+   "dims": {},
+   "obs_ids": [
+    "16b3cb54dec03f7c",
+    "50fbff870275206d",
+    "57803e67c35f65e0",
+    "b1df2f2c19f88bbc"
+   ],
+   "unit": "share",
+   "value": 0.01288131077660859
+  },
+  {
+   "as_of": "2018-01-31",
+   "dims": {},
+   "obs_ids": [
+    "16b3cb54dec03f7c",
+    "57803e67c35f65e0",
+    "b1df2f2c19f88bbc",
+    "f41b5a9482709c6e"
+   ],
+   "unit": "share",
+   "value": 0.06798006233807219
+  },
+  {
+   "as_of": "2018-02-28",
+   "dims": {},
+   "obs_ids": [
+    "16b3cb54dec03f7c",
+    "5464c3488da771d0",
+    "57803e67c35f65e0",
+    "f41b5a9482709c6e"
+   ],
+   "unit": "share",
+   "value": -0.028710932689702817
+  },
+  {
+   "as_of": "2018-03-31",
+   "dims": {},
+   "obs_ids": [
+    "39da9f4a651aeec5",
+    "5464c3488da771d0",
+    "57803e67c35f65e0",
+    "f41b5a9482709c6e"
+   ],
+   "unit": "share",
+   "value": 0.010206086884861243
+  },
+  {
+   "as_of": "2018-04-30",
+   "dims": {},
+   "obs_ids": [
+    "39da9f4a651aeec5",
+    "5464c3488da771d0",
+    "6fb4876f65f4e662",
+    "f41b5a9482709c6e"
+   ],
+   "unit": "share",
+   "value": -0.0641256533989294
+  },
+  {
+   "as_of": "2018-05-31",
+   "dims": {},
+   "obs_ids": [
+    "39da9f4a651aeec5",
+    "5463ba4b526ea0e6",
+    "5464c3488da771d0",
+    "6fb4876f65f4e662"
+   ],
+   "unit": "share",
+   "value": 0.057898618747485475
+  },
+  {
+   "as_of": "2018-06-30",
+   "dims": {},
+   "obs_ids": [
+    "39da9f4a651aeec5",
+    "5463ba4b526ea0e6",
+    "6fb4876f65f4e662",
+    "9544a3ed74134602"
+   ],
+   "unit": "share",
+   "value": 0.00014577721438757685
+  },
+  {
+   "as_of": "2018-07-31",
+   "dims": {},
+   "obs_ids": [
+    "48c96560d7801c5d",
+    "5463ba4b526ea0e6",
+    "6fb4876f65f4e662",
+    "9544a3ed74134602"
+   ],
+   "unit": "share",
+   "value": -0.012357571071876738
+  },
+  {
+   "as_of": "2018-08-31",
+   "dims": {},
+   "obs_ids": [
+    "48c96560d7801c5d",
+    "5463ba4b526ea0e6",
+    "945d3f15f4657a68",
+    "9544a3ed74134602"
+   ],
+   "unit": "share",
+   "value": -0.03381499923001907
+  },
+  {
+   "as_of": "2018-09-30",
+   "dims": {},
+   "obs_ids": [
+    "0ada48ecfd6583c1",
+    "48c96560d7801c5d",
+    "945d3f15f4657a68",
+    "9544a3ed74134602"
+   ],
+   "unit": "share",
+   "value": -0.06183506222688573
+  },
+  {
+   "as_of": "2018-10-31",
+   "dims": {},
+   "obs_ids": [
+    "010f882c3cbf120a",
+    "0ada48ecfd6583c1",
+    "48c96560d7801c5d",
+    "945d3f15f4657a68"
+   ],
+   "unit": "share",
+   "value": -0.011488882753934004
+  },
+  {
+   "as_of": "2018-11-30",
+   "dims": {},
+   "obs_ids": [
+    "010f882c3cbf120a",
+    "0ada48ecfd6583c1",
+    "73e775aaa40c0419",
+    "945d3f15f4657a68"
+   ],
+   "unit": "share",
+   "value": -0.031136318065939195
+  },
+  {
+   "as_of": "2018-12-31",
+   "dims": {},
+   "obs_ids": [
+    "010f882c3cbf120a",
+    "0ada48ecfd6583c1",
+    "73e775aaa40c0419",
+    "ff205f71a58d6a93"
+   ],
+   "unit": "share",
+   "value": 0.060164380321665156
+  },
+  {
+   "as_of": "2019-01-31",
+   "dims": {},
+   "obs_ids": [
+    "010f882c3cbf120a",
+    "73e775aaa40c0419",
+    "886ba1fd8568b050",
+    "ff205f71a58d6a93"
+   ],
+   "unit": "share",
+   "value": 0.10311218940851674
+  },
+  {
+   "as_of": "2019-02-28",
+   "dims": {},
+   "obs_ids": [
+    "5f47ba51c71b41a6",
+    "73e775aaa40c0419",
+    "886ba1fd8568b050",
+    "ff205f71a58d6a93"
+   ],
+   "unit": "share",
+   "value": 0.007445046958148405
+  },
+  {
+   "as_of": "2019-03-31",
+   "dims": {},
+   "obs_ids": [
+    "1c8874b1624e587d",
+    "5f47ba51c71b41a6",
+    "886ba1fd8568b050",
+    "ff205f71a58d6a93"
+   ],
+   "unit": "share",
+   "value": -0.011197962409977169
+  },
+  {
+   "as_of": "2019-04-30",
+   "dims": {},
+   "obs_ids": [
+    "1c8874b1624e587d",
+    "359aef2bc3444792",
+    "5f47ba51c71b41a6",
+    "886ba1fd8568b050"
+   ],
+   "unit": "share",
+   "value": -0.09194957460712228
+  },
+  {
+   "as_of": "2019-05-31",
+   "dims": {},
+   "obs_ids": [
+    "1c8874b1624e587d",
+    "359aef2bc3444792",
+    "5f47ba51c71b41a6",
+    "d1051cfa0c8fd29f"
+   ],
+   "unit": "share",
+   "value": 0.02389502955437872
+  },
+  {
+   "as_of": "2019-06-30",
+   "dims": {},
+   "obs_ids": [
+    "1c8874b1624e587d",
+    "359aef2bc3444792",
+    "711cb6a440f0d045",
+    "d1051cfa0c8fd29f"
+   ],
+   "unit": "share",
+   "value": -0.005588688875847847
+  },
+  {
+   "as_of": "2019-07-31",
+   "dims": {},
+   "obs_ids": [
+    "359aef2bc3444792",
+    "711cb6a440f0d045",
+    "7c8fcfe8d0f0c49f",
+    "d1051cfa0c8fd29f"
+   ],
+   "unit": "share",
+   "value": 0.0009675626342406929
+  },
+  {
+   "as_of": "2019-08-31",
+   "dims": {},
+   "obs_ids": [
+    "711cb6a440f0d045",
+    "7c8fcfe8d0f0c49f",
+    "b0d5d13c9cfdc856",
+    "d1051cfa0c8fd29f"
+   ],
+   "unit": "share",
+   "value": -0.019860421751172197
+  },
+  {
+   "as_of": "2019-09-30",
+   "dims": {},
+   "obs_ids": [
+    "711cb6a440f0d045",
+    "7c8fcfe8d0f0c49f",
+    "b0d5d13c9cfdc856",
+    "ba0e4bbd447e93a1"
+   ],
+   "unit": "share",
+   "value": -0.025082009638318303
+  },
+  {
+   "as_of": "2019-10-31",
+   "dims": {},
+   "obs_ids": [
+    "4c58d8169368275e",
+    "7c8fcfe8d0f0c49f",
+    "b0d5d13c9cfdc856",
+    "ba0e4bbd447e93a1"
+   ],
+   "unit": "share",
+   "value": -0.026695842450765728
+  },
+  {
+   "as_of": "2019-11-30",
+   "dims": {},
+   "obs_ids": [
+    "4c58d8169368275e",
+    "b0d5d13c9cfdc856",
+    "ba0e4bbd447e93a1",
+    "ebbf824d4e486d10"
+   ],
+   "unit": "share",
+   "value": -0.024774442740889357
+  },
+  {
+   "as_of": "2019-12-31",
+   "dims": {},
+   "obs_ids": [
+    "1ffd11bb54d1f142",
+    "4c58d8169368275e",
+    "ba0e4bbd447e93a1",
+    "ebbf824d4e486d10"
+   ],
+   "unit": "share",
+   "value": 0.0262881416143248
+  },
+  {
+   "as_of": "2020-01-31",
+   "dims": {},
+   "obs_ids": [
+    "14bea9c535049a78",
+    "1ffd11bb54d1f142",
+    "4c58d8169368275e",
+    "ebbf824d4e486d10"
+   ],
+   "unit": "share",
+   "value": 0.06654833886920852
+  },
+  {
+   "as_of": "2020-02-29",
+   "dims": {},
+   "obs_ids": [
+    "14bea9c535049a78",
+    "1ffd11bb54d1f142",
+    "62893f896ceb0c4a",
+    "ebbf824d4e486d10"
+   ],
+   "unit": "share",
+   "value": 0.010247415703957374
+  },
+  {
+   "as_of": "2020-03-31",
+   "dims": {},
+   "obs_ids": [
+    "14bea9c535049a78",
+    "1ffd11bb54d1f142",
+    "62893f896ceb0c4a",
+    "9258630c7ef61fd5"
+   ],
+   "unit": "share",
+   "value": 2.5425731881531908
+  },
+  {
+   "as_of": "2020-04-30",
+   "dims": {},
+   "obs_ids": [
+    "14bea9c535049a78",
+    "62893f896ceb0c4a",
+    "9258630c7ef61fd5",
+    "c84a40557f252c1a"
+   ],
+   "unit": "share",
+   "value": 1.1777391458703952
+  },
+  {
+   "as_of": "2020-05-31",
+   "dims": {},
+   "obs_ids": [
+    "62893f896ceb0c4a",
+    "9258630c7ef61fd5",
+    "c84a40557f252c1a",
+    "cb2c5844e8ea6244"
+   ],
+   "unit": "share",
+   "value": 0.22255407408457462
+  },
+  {
+   "as_of": "2020-06-30",
+   "dims": {},
+   "obs_ids": [
+    "0d6dbeecb385df81",
+    "9258630c7ef61fd5",
+    "c84a40557f252c1a",
+    "cb2c5844e8ea6244"
+   ],
+   "unit": "share",
+   "value": -0.08041084851102565
+  },
+  {
+   "as_of": "2020-07-31",
+   "dims": {},
+   "obs_ids": [
+    "0d6dbeecb385df81",
+    "76fe99d2d0618b50",
+    "c84a40557f252c1a",
+    "cb2c5844e8ea6244"
+   ],
+   "unit": "share",
+   "value": -0.2960646030203661
+  },
+  {
+   "as_of": "2020-08-31",
+   "dims": {},
+   "obs_ids": [
+    "02d6fef827a1e0a9",
+    "0d6dbeecb385df81",
+    "76fe99d2d0618b50",
+    "cb2c5844e8ea6244"
+   ],
+   "unit": "share",
+   "value": -0.08093932517349833
+  },
+  {
+   "as_of": "2020-09-30",
+   "dims": {},
+   "obs_ids": [
+    "02d6fef827a1e0a9",
+    "0d6dbeecb385df81",
+    "76fe99d2d0618b50",
+    "cc16560c7b4f7f96"
+   ],
+   "unit": "share",
+   "value": -0.09996601452726683
+  },
+  {
+   "as_of": "2020-10-31",
+   "dims": {},
+   "obs_ids": [
+    "02d6fef827a1e0a9",
+    "76fe99d2d0618b50",
+    "88c4f23dfb4528b7",
+    "cc16560c7b4f7f96"
+   ],
+   "unit": "share",
+   "value": -0.12319573187814414
+  },
+  {
+   "as_of": "2020-11-30",
+   "dims": {},
+   "obs_ids": [
+    "02d6fef827a1e0a9",
+    "4a1646cb386422d9",
+    "88c4f23dfb4528b7",
+    "cc16560c7b4f7f96"
+   ],
+   "unit": "share",
+   "value": -0.04002333884389375
+  },
+  {
+   "as_of": "2020-12-31",
+   "dims": {},
+   "obs_ids": [
+    "4a1646cb386422d9",
+    "88c4f23dfb4528b7",
+    "cc16560c7b4f7f96",
+    "dc2ee1e8a1faa36e"
+   ],
+   "unit": "share",
+   "value": -0.025022591402725114
+  },
+  {
+   "as_of": "2021-01-31",
+   "dims": {},
+   "obs_ids": [
+    "139f2fe76e4dc848",
+    "4a1646cb386422d9",
+    "88c4f23dfb4528b7",
+    "dc2ee1e8a1faa36e"
+   ],
+   "unit": "share",
+   "value": -0.05271325755826606
+  },
+  {
+   "as_of": "2021-02-28",
+   "dims": {},
+   "obs_ids": [
+    "139f2fe76e4dc848",
+    "4a1646cb386422d9",
+    "d135b9380d8dd7cf",
+    "dc2ee1e8a1faa36e"
+   ],
+   "unit": "share",
+   "value": -0.07980946843015158
+  },
+  {
+   "as_of": "2021-03-31",
+   "dims": {},
+   "obs_ids": [
+    "139f2fe76e4dc848",
+    "d135b9380d8dd7cf",
+    "dc2ee1e8a1faa36e",
+    "e419a88359c1108e"
+   ],
+   "unit": "share",
+   "value": -0.08809178300674858
+  },
+  {
+   "as_of": "2021-04-30",
+   "dims": {},
+   "obs_ids": [
+    "1178c368bacb369c",
+    "139f2fe76e4dc848",
+    "d135b9380d8dd7cf",
+    "e419a88359c1108e"
+   ],
+   "unit": "share",
+   "value": 0.036764248220917395
+  },
+  {
+   "as_of": "2021-05-31",
+   "dims": {},
+   "obs_ids": [
+    "1178c368bacb369c",
+    "d135b9380d8dd7cf",
+    "e06da70ddd444345",
+    "e419a88359c1108e"
+   ],
+   "unit": "share",
+   "value": -0.024172019771467546
+  },
+  {
+   "as_of": "2021-06-30",
+   "dims": {},
+   "obs_ids": [
+    "1178c368bacb369c",
+    "ab59dc158c7842ff",
+    "e06da70ddd444345",
+    "e419a88359c1108e"
+   ],
+   "unit": "share",
+   "value": -0.1200908063679299
+  },
+  {
+   "as_of": "2021-07-31",
+   "dims": {},
+   "obs_ids": [
+    "1178c368bacb369c",
+    "2cb5f90b5e285fa5",
+    "ab59dc158c7842ff",
+    "e06da70ddd444345"
+   ],
+   "unit": "share",
+   "value": -0.18162262189707534
+  },
+  {
+   "as_of": "2021-08-31",
+   "dims": {},
+   "obs_ids": [
+    "2cb5f90b5e285fa5",
+    "3e577ec96013929c",
+    "ab59dc158c7842ff",
+    "e06da70ddd444345"
+   ],
+   "unit": "share",
+   "value": -0.09226466785516962
+  },
+  {
+   "as_of": "2021-09-30",
+   "dims": {},
+   "obs_ids": [
+    "2cb5f90b5e285fa5",
+    "3e577ec96013929c",
+    "ab59dc158c7842ff",
+    "dc3f0ea15d1c5758"
+   ],
+   "unit": "share",
+   "value": -0.08214115402956601
+  },
+  {
+   "as_of": "2021-10-31",
+   "dims": {},
+   "obs_ids": [
+    "2cb5f90b5e285fa5",
+    "3e577ec96013929c",
+    "418557007a710166",
+    "dc3f0ea15d1c5758"
+   ],
+   "unit": "share",
+   "value": -0.14254756256793444
+  },
+  {
+   "as_of": "2021-11-30",
+   "dims": {},
+   "obs_ids": [
+    "3e577ec96013929c",
+    "418557007a710166",
+    "9b636daf965069d5",
+    "dc3f0ea15d1c5758"
+   ],
+   "unit": "share",
+   "value": -0.21530507298949997
+  },
+  {
+   "as_of": "2021-12-31",
+   "dims": {},
+   "obs_ids": [
+    "2193240cd3876e1e",
+    "418557007a710166",
+    "9b636daf965069d5",
+    "dc3f0ea15d1c5758"
+   ],
+   "unit": "share",
+   "value": -0.12835349281421626
+  },
+  {
+   "as_of": "2022-01-31",
+   "dims": {},
+   "obs_ids": [
+    "2193240cd3876e1e",
+    "418557007a710166",
+    "9b636daf965069d5",
+    "e92c7f2cbdd63257"
+   ],
+   "unit": "share",
+   "value": -0.06307225158962815
+  },
+  {
+   "as_of": "2022-02-28",
+   "dims": {},
+   "obs_ids": [
+    "2193240cd3876e1e",
+    "3e70da798dd69dc2",
+    "9b636daf965069d5",
+    "e92c7f2cbdd63257"
+   ],
+   "unit": "share",
+   "value": -0.06800241355071879
+  },
+  {
+   "as_of": "2022-03-31",
+   "dims": {},
+   "obs_ids": [
+    "2193240cd3876e1e",
+    "3e70da798dd69dc2",
+    "e92c7f2cbdd63257",
+    "fff7d3350d98583a"
+   ],
+   "unit": "share",
+   "value": -0.03867126752854966
+  },
+  {
+   "as_of": "2022-04-30",
+   "dims": {},
+   "obs_ids": [
+    "3757c8024baeba81",
+    "3e70da798dd69dc2",
+    "e92c7f2cbdd63257",
+    "fff7d3350d98583a"
+   ],
+   "unit": "share",
+   "value": -0.04761408843806625
+  },
+  {
+   "as_of": "2022-05-31",
+   "dims": {},
+   "obs_ids": [
+    "3757c8024baeba81",
+    "3e70da798dd69dc2",
+    "764630cb52e567de",
+    "fff7d3350d98583a"
+   ],
+   "unit": "share",
+   "value": 0.10835793694186258
+  },
+  {
+   "as_of": "2022-06-30",
+   "dims": {},
+   "obs_ids": [
+    "3757c8024baeba81",
+    "69a1c46008187a23",
+    "764630cb52e567de",
+    "fff7d3350d98583a"
+   ],
+   "unit": "share",
+   "value": 0.09207505968863261
+  },
+  {
+   "as_of": "2022-07-31",
+   "dims": {},
+   "obs_ids": [
+    "1d0dfb719ce52f45",
+    "3757c8024baeba81",
+    "69a1c46008187a23",
+    "764630cb52e567de"
+   ],
+   "unit": "share",
+   "value": 0.010925209891711418
+  },
+  {
+   "as_of": "2022-08-31",
+   "dims": {},
+   "obs_ids": [
+    "1d0dfb719ce52f45",
+    "3b0bfdadf0982a78",
+    "69a1c46008187a23",
+    "764630cb52e567de"
+   ],
+   "unit": "share",
+   "value": -0.03560279293663471
+  },
+  {
+   "as_of": "2022-09-30",
+   "dims": {},
+   "obs_ids": [
+    "1d0dfb719ce52f45",
+    "3b0bfdadf0982a78",
+    "69a1c46008187a23",
+    "e505011232dfa942"
+   ],
+   "unit": "share",
+   "value": -0.10945415009019255
+  },
+  {
+   "as_of": "2022-10-31",
+   "dims": {},
+   "obs_ids": [
+    "1d0dfb719ce52f45",
+    "3b0bfdadf0982a78",
+    "66374e1a70950251",
+    "e505011232dfa942"
+   ],
+   "unit": "share",
+   "value": -0.017973334813191078
+  },
+  {
+   "as_of": "2022-11-30",
+   "dims": {},
+   "obs_ids": [
+    "0d53699bd40c58bf",
+    "3b0bfdadf0982a78",
+    "66374e1a70950251",
+    "e505011232dfa942"
+   ],
+   "unit": "share",
+   "value": -0.011669386227016076
+  },
+  {
+   "as_of": "2022-12-31",
+   "dims": {},
+   "obs_ids": [
+    "0d53699bd40c58bf",
+    "66374e1a70950251",
+    "bd91799c08b0335a",
+    "e505011232dfa942"
+   ],
+   "unit": "share",
+   "value": 0.04609227030697194
+  },
+  {
+   "as_of": "2023-01-31",
+   "dims": {},
+   "obs_ids": [
+    "0d53699bd40c58bf",
+    "66374e1a70950251",
+    "bd91799c08b0335a",
+    "c800d89cd6f5d9e0"
+   ],
+   "unit": "share",
+   "value": 0.11864256237872706
+  },
+  {
+   "as_of": "2023-02-28",
+   "dims": {},
+   "obs_ids": [
+    "0d53699bd40c58bf",
+    "2f9922b020d9c436",
+    "bd91799c08b0335a",
+    "c800d89cd6f5d9e0"
+   ],
+   "unit": "share",
+   "value": 0.022842624092249908
+  },
+  {
+   "as_of": "2023-03-31",
+   "dims": {},
+   "obs_ids": [
+    "2f9922b020d9c436",
+    "a89350d68f1215df",
+    "bd91799c08b0335a",
+    "c800d89cd6f5d9e0"
+   ],
+   "unit": "share",
+   "value": 0.03941625017167372
+  },
+  {
+   "as_of": "2023-04-30",
+   "dims": {},
+   "obs_ids": [
+    "2f9922b020d9c436",
+    "6849d6eae95f37b3",
+    "a89350d68f1215df",
+    "c800d89cd6f5d9e0"
+   ],
+   "unit": "share",
+   "value": -0.04101223645659802
+  },
+  {
+   "as_of": "2023-05-31",
+   "dims": {},
+   "obs_ids": [
+    "117737d7f749fa4a",
+    "2f9922b020d9c436",
+    "6849d6eae95f37b3",
+    "a89350d68f1215df"
+   ],
+   "unit": "share",
+   "value": 0.06644062516848281
+  },
+  {
+   "as_of": "2023-06-30",
+   "dims": {},
+   "obs_ids": [
+    "117737d7f749fa4a",
+    "6849d6eae95f37b3",
+    "a89350d68f1215df",
+    "d88ca1e49d236a3c"
+   ],
+   "unit": "share",
+   "value": 0.044809068542090325
+  },
+  {
+   "as_of": "2023-07-31",
+   "dims": {},
+   "obs_ids": [
+    "117737d7f749fa4a",
+    "6849d6eae95f37b3",
+    "90c5c27143bfb51d",
+    "d88ca1e49d236a3c"
+   ],
+   "unit": "share",
+   "value": 0.03456470196076333
+  },
+  {
+   "as_of": "2023-08-31",
+   "dims": {},
+   "obs_ids": [
+    "117737d7f749fa4a",
+    "90c5c27143bfb51d",
+    "c27318839d5dec75",
+    "d88ca1e49d236a3c"
+   ],
+   "unit": "share",
+   "value": -0.0374321824266739
+  },
+  {
+   "as_of": "2023-09-30",
+   "dims": {},
+   "obs_ids": [
+    "90c5c27143bfb51d",
+    "9f676b373d5220cd",
+    "c27318839d5dec75",
+    "d88ca1e49d236a3c"
+   ],
+   "unit": "share",
+   "value": -0.08028613848022681
+  },
+  {
+   "as_of": "2023-10-31",
+   "dims": {},
+   "obs_ids": [
+    "54dd0a781bb06ea8",
+    "90c5c27143bfb51d",
+    "9f676b373d5220cd",
+    "c27318839d5dec75"
+   ],
+   "unit": "share",
+   "value": -0.03884264531504977
+  },
+  {
+   "as_of": "2023-11-30",
+   "dims": {},
+   "obs_ids": [
+    "3c1d4d8b034b4266",
+    "54dd0a781bb06ea8",
+    "9f676b373d5220cd",
+    "c27318839d5dec75"
+   ],
+   "unit": "share",
+   "value": -0.019629039251971236
+  },
+  {
+   "as_of": "2023-12-31",
+   "dims": {},
+   "obs_ids": [
+    "3c1d4d8b034b4266",
+    "54dd0a781bb06ea8",
+    "9f676b373d5220cd",
+    "f4c602a66914da8d"
+   ],
+   "unit": "share",
+   "value": 0.014359312995645634
+  },
+  {
+   "as_of": "2024-01-31",
+   "dims": {},
+   "obs_ids": [
+    "3c1d4d8b034b4266",
+    "54dd0a781bb06ea8",
+    "d5ed603fcf60480f",
+    "f4c602a66914da8d"
+   ],
+   "unit": "share",
+   "value": 0.04534846586582164
+  },
+  {
+   "as_of": "2024-02-29",
+   "dims": {},
+   "obs_ids": [
+    "3c1d4d8b034b4266",
+    "7b9f04592bf4bcdc",
+    "d5ed603fcf60480f",
+    "f4c602a66914da8d"
+   ],
+   "unit": "share",
+   "value": 0.004917397128286982
+  },
+  {
+   "as_of": "2024-03-31",
+   "dims": {},
+   "obs_ids": [
+    "24c27676fd725f15",
+    "7b9f04592bf4bcdc",
+    "d5ed603fcf60480f",
+    "f4c602a66914da8d"
+   ],
+   "unit": "share",
+   "value": 0.022356166946313483
+  },
+  {
+   "as_of": "2024-04-30",
+   "dims": {},
+   "obs_ids": [
+    "24c27676fd725f15",
+    "77929542dd7b5d17",
+    "7b9f04592bf4bcdc",
+    "d5ed603fcf60480f"
+   ],
+   "unit": "share",
+   "value": -0.03755296701034461
+  },
+  {
+   "as_of": "2024-05-31",
+   "dims": {},
+   "obs_ids": [
+    "24c27676fd725f15",
+    "739d3e0469355999",
+    "77929542dd7b5d17",
+    "7b9f04592bf4bcdc"
+   ],
+   "unit": "share",
+   "value": 0.01364776062647799
+  },
+  {
+   "as_of": "2024-06-30",
+   "dims": {},
+   "obs_ids": [
+    "24c27676fd725f15",
+    "739d3e0469355999",
+    "77929542dd7b5d17",
+    "8bb60eaaf930bd5c"
+   ],
+   "unit": "share",
+   "value": 0.007913108210289455
+  },
+  {
+   "as_of": "2024-07-31",
+   "dims": {},
+   "obs_ids": [
+    "739d3e0469355999",
+    "77929542dd7b5d17",
+    "8bb60eaaf930bd5c",
+    "d070b87183ef8316"
+   ],
+   "unit": "share",
+   "value": 0.0018784202660029337
+  },
+  {
+   "as_of": "2024-08-31",
+   "dims": {},
+   "obs_ids": [
+    "739d3e0469355999",
+    "8bb60eaaf930bd5c",
+    "d070b87183ef8316",
+    "ffb916f452e11695"
+   ],
+   "unit": "share",
+   "value": -0.018214957393949294
+  },
+  {
+   "as_of": "2024-09-30",
+   "dims": {},
+   "obs_ids": [
+    "63cc0efb560d01ce",
+    "8bb60eaaf930bd5c",
+    "d070b87183ef8316",
+    "ffb916f452e11695"
+   ],
+   "unit": "share",
+   "value": -0.04321323416381895
+  },
+  {
+   "as_of": "2024-10-31",
+   "dims": {},
+   "obs_ids": [
+    "63cc0efb560d01ce",
+    "c92a4c1be393b3d1",
+    "d070b87183ef8316",
+    "ffb916f452e11695"
+   ],
+   "unit": "share",
+   "value": -0.02509438975708922
+  },
+  {
+   "as_of": "2024-11-30",
+   "dims": {},
+   "obs_ids": [
+    "63cc0efb560d01ce",
+    "c92a4c1be393b3d1",
+    "d6472c9addd6471c",
+    "ffb916f452e11695"
+   ],
+   "unit": "share",
+   "value": -0.0060722072917195336
+  },
+  {
+   "as_of": "2024-12-31",
+   "dims": {},
+   "obs_ids": [
+    "2bd1d3e3e2aecc33",
+    "63cc0efb560d01ce",
+    "c92a4c1be393b3d1",
+    "d6472c9addd6471c"
+   ],
+   "unit": "share",
+   "value": 0.02313627957400688
+  },
+  {
+   "as_of": "2025-01-31",
+   "dims": {},
+   "obs_ids": [
+    "2bd1d3e3e2aecc33",
+    "411aba41d0eefd0d",
+    "c92a4c1be393b3d1",
+    "d6472c9addd6471c"
+   ],
+   "unit": "share",
+   "value": 0.03978483900322871
+  },
+  {
+   "as_of": "2025-02-28",
+   "dims": {},
+   "obs_ids": [
+    "2bd1d3e3e2aecc33",
+    "411aba41d0eefd0d",
+    "c3141afa7a098199",
+    "d6472c9addd6471c"
+   ],
+   "unit": "share",
+   "value": 0.009297390616289425
+  },
+  {
+   "as_of": "2025-03-31",
+   "dims": {},
+   "obs_ids": [
+    "2bd1d3e3e2aecc33",
+    "411aba41d0eefd0d",
+    "bff95f6a8ccfab29",
+    "c3141afa7a098199"
+   ],
+   "unit": "share",
+   "value": 7.127075760804402e-05
+  },
+  {
+   "as_of": "2025-04-30",
+   "dims": {},
+   "obs_ids": [
+    "0e9eb8d02b14b507",
+    "411aba41d0eefd0d",
+    "bff95f6a8ccfab29",
+    "c3141afa7a098199"
+   ],
+   "unit": "share",
+   "value": -0.019710898897757567
+  },
+  {
+   "as_of": "2025-05-31",
+   "dims": {},
+   "obs_ids": [
+    "0e9eb8d02b14b507",
+    "bff95f6a8ccfab29",
+    "c3141afa7a098199",
+    "dfcdb3997b72268e"
+   ],
+   "unit": "share",
+   "value": 0.002459637112652624
+  },
+  {
+   "as_of": "2025-06-30",
+   "dims": {},
+   "obs_ids": [
+    "0e9eb8d02b14b507",
+    "5c52f8adbacb0f47",
+    "bff95f6a8ccfab29",
+    "dfcdb3997b72268e"
+   ],
+   "unit": "share",
+   "value": 0.022064289210798282
+  },
+  {
+   "as_of": "2025-07-31",
+   "dims": {},
+   "obs_ids": [
+    "0e9eb8d02b14b507",
+    "5c52f8adbacb0f47",
+    "82315b098d1a3aa4",
+    "dfcdb3997b72268e"
+   ],
+   "unit": "share",
+   "value": 0.0008928465841226974
+  },
+  {
+   "as_of": "2025-08-31",
+   "dims": {},
+   "obs_ids": [
+    "1e07f1749ee4e3a4",
+    "5c52f8adbacb0f47",
+    "82315b098d1a3aa4",
+    "dfcdb3997b72268e"
+   ],
+   "unit": "share",
+   "value": -0.016417266782062123
+  },
+  {
+   "as_of": "2025-09-30",
+   "dims": {},
+   "obs_ids": [
+    "1e07f1749ee4e3a4",
+    "5c52f8adbacb0f47",
+    "82315b098d1a3aa4",
+    "ef761cd6a14582d2"
+   ],
+   "unit": "share",
+   "value": -0.045965620382716454
+  },
+  {
+   "as_of": "2025-10-31",
+   "dims": {},
+   "obs_ids": [
+    "1e07f1749ee4e3a4",
+    "82315b098d1a3aa4",
+    "a6f18e6a42fc95ec",
+    "ef761cd6a14582d2"
+   ],
+   "unit": "share",
+   "value": -0.0037395886452490368
+  },
+  {
+   "as_of": "2025-11-30",
+   "dims": {},
+   "obs_ids": [
+    "1e07f1749ee4e3a4",
+    "23362c3555f8f45a",
+    "a6f18e6a42fc95ec",
+    "ef761cd6a14582d2"
+   ],
+   "unit": "share",
+   "value": -0.017883435388980518
+  },
+  {
+   "as_of": "2025-12-31",
+   "dims": {},
+   "obs_ids": [
+    "23362c3555f8f45a",
+    "a6f18e6a42fc95ec",
+    "b43bff740abc59c1",
+    "ef761cd6a14582d2"
+   ],
+   "unit": "share",
+   "value": 0.031701808682447874
+  },
+  {
+   "as_of": "2026-01-31",
+   "dims": {},
+   "obs_ids": [
+    "23362c3555f8f45a",
+    "75670685207d1801",
+    "a6f18e6a42fc95ec",
+    "b43bff740abc59c1"
+   ],
+   "unit": "share",
+   "value": -0.0021017312777529273
+  },
+  {
+   "as_of": "2026-02-28",
+   "dims": {},
+   "obs_ids": [
+    "23362c3555f8f45a",
+    "337c73d9d52d314b",
+    "75670685207d1801",
+    "b43bff740abc59c1"
+   ],
+   "unit": "share",
+   "value": -0.00404982282025157
+  },
+  {
+   "as_of": "2026-03-31",
+   "dims": {},
+   "obs_ids": [
+    "337c73d9d52d314b",
+    "75670685207d1801",
+    "7b66415c752f4843",
+    "b43bff740abc59c1"
+   ],
+   "unit": "share",
+   "value": -0.022144968279168342
+  },
+  {
+   "as_of": "2026-04-30",
+   "dims": {},
+   "obs_ids": [
+    "337c73d9d52d314b",
+    "75670685207d1801",
+    "7b66415c752f4843",
+    "eb3282424b0fcc9a"
+   ],
+   "unit": "share",
+   "value": -0.020920233587884307
+  },
+  {
+   "as_of": "2026-05-31",
+   "dims": {},
+   "obs_ids": [
+    "14ca8a23f3a7fee5",
+    "337c73d9d52d314b",
+    "7b66415c752f4843",
+    "eb3282424b0fcc9a"
+   ],
+   "unit": "share",
+   "value": 0.01526512420528281
+  },
+  {
+   "as_of": "2026-06-30",
+   "dims": {},
+   "obs_ids": [
+    "14ca8a23f3a7fee5",
+    "7b66415c752f4843",
+    "eb3282424b0fcc9a",
+    "f03af856e9a46333"
+   ],
+   "unit": "share",
+   "value": 0.013292532553470293
+  },
+  {
+   "as_of": "2026-07-31",
+   "dims": {},
+   "obs_ids": [
+    "14ca8a23f3a7fee5",
+    "1fce2bb84f849403",
+    "eb3282424b0fcc9a",
+    "f03af856e9a46333"
+   ],
+   "unit": "share",
+   "value": 0.010034531530727975
   }
  ],
  "proposed_status": "consistent_with_normal",
@@ -150,18 +4058,292 @@
  ],
  "sparkline": [
   {
-   "as_of": "2026-07-31",
-   "disputed": false,
-   "grade": "B",
-   "high": null,
-   "low": null,
+   "as_of": "2024-08-31",
+   "dims": {},
    "obs_ids": [
-    "83c12bef8f8e8107"
+    "739d3e0469355999",
+    "8bb60eaaf930bd5c",
+    "d070b87183ef8316",
+    "ffb916f452e11695"
    ],
-   "series_key": "cait.ca_high_exposure.claims_3mma_mom.m",
-   "subject": "ca_high_exposure",
    "unit": "share",
-   "value": 0.01
+   "value": -0.018214957393949294
+  },
+  {
+   "as_of": "2024-09-30",
+   "dims": {},
+   "obs_ids": [
+    "63cc0efb560d01ce",
+    "8bb60eaaf930bd5c",
+    "d070b87183ef8316",
+    "ffb916f452e11695"
+   ],
+   "unit": "share",
+   "value": -0.04321323416381895
+  },
+  {
+   "as_of": "2024-10-31",
+   "dims": {},
+   "obs_ids": [
+    "63cc0efb560d01ce",
+    "c92a4c1be393b3d1",
+    "d070b87183ef8316",
+    "ffb916f452e11695"
+   ],
+   "unit": "share",
+   "value": -0.02509438975708922
+  },
+  {
+   "as_of": "2024-11-30",
+   "dims": {},
+   "obs_ids": [
+    "63cc0efb560d01ce",
+    "c92a4c1be393b3d1",
+    "d6472c9addd6471c",
+    "ffb916f452e11695"
+   ],
+   "unit": "share",
+   "value": -0.0060722072917195336
+  },
+  {
+   "as_of": "2024-12-31",
+   "dims": {},
+   "obs_ids": [
+    "2bd1d3e3e2aecc33",
+    "63cc0efb560d01ce",
+    "c92a4c1be393b3d1",
+    "d6472c9addd6471c"
+   ],
+   "unit": "share",
+   "value": 0.02313627957400688
+  },
+  {
+   "as_of": "2025-01-31",
+   "dims": {},
+   "obs_ids": [
+    "2bd1d3e3e2aecc33",
+    "411aba41d0eefd0d",
+    "c92a4c1be393b3d1",
+    "d6472c9addd6471c"
+   ],
+   "unit": "share",
+   "value": 0.03978483900322871
+  },
+  {
+   "as_of": "2025-02-28",
+   "dims": {},
+   "obs_ids": [
+    "2bd1d3e3e2aecc33",
+    "411aba41d0eefd0d",
+    "c3141afa7a098199",
+    "d6472c9addd6471c"
+   ],
+   "unit": "share",
+   "value": 0.009297390616289425
+  },
+  {
+   "as_of": "2025-03-31",
+   "dims": {},
+   "obs_ids": [
+    "2bd1d3e3e2aecc33",
+    "411aba41d0eefd0d",
+    "bff95f6a8ccfab29",
+    "c3141afa7a098199"
+   ],
+   "unit": "share",
+   "value": 7.127075760804402e-05
+  },
+  {
+   "as_of": "2025-04-30",
+   "dims": {},
+   "obs_ids": [
+    "0e9eb8d02b14b507",
+    "411aba41d0eefd0d",
+    "bff95f6a8ccfab29",
+    "c3141afa7a098199"
+   ],
+   "unit": "share",
+   "value": -0.019710898897757567
+  },
+  {
+   "as_of": "2025-05-31",
+   "dims": {},
+   "obs_ids": [
+    "0e9eb8d02b14b507",
+    "bff95f6a8ccfab29",
+    "c3141afa7a098199",
+    "dfcdb3997b72268e"
+   ],
+   "unit": "share",
+   "value": 0.002459637112652624
+  },
+  {
+   "as_of": "2025-06-30",
+   "dims": {},
+   "obs_ids": [
+    "0e9eb8d02b14b507",
+    "5c52f8adbacb0f47",
+    "bff95f6a8ccfab29",
+    "dfcdb3997b72268e"
+   ],
+   "unit": "share",
+   "value": 0.022064289210798282
+  },
+  {
+   "as_of": "2025-07-31",
+   "dims": {},
+   "obs_ids": [
+    "0e9eb8d02b14b507",
+    "5c52f8adbacb0f47",
+    "82315b098d1a3aa4",
+    "dfcdb3997b72268e"
+   ],
+   "unit": "share",
+   "value": 0.0008928465841226974
+  },
+  {
+   "as_of": "2025-08-31",
+   "dims": {},
+   "obs_ids": [
+    "1e07f1749ee4e3a4",
+    "5c52f8adbacb0f47",
+    "82315b098d1a3aa4",
+    "dfcdb3997b72268e"
+   ],
+   "unit": "share",
+   "value": -0.016417266782062123
+  },
+  {
+   "as_of": "2025-09-30",
+   "dims": {},
+   "obs_ids": [
+    "1e07f1749ee4e3a4",
+    "5c52f8adbacb0f47",
+    "82315b098d1a3aa4",
+    "ef761cd6a14582d2"
+   ],
+   "unit": "share",
+   "value": -0.045965620382716454
+  },
+  {
+   "as_of": "2025-10-31",
+   "dims": {},
+   "obs_ids": [
+    "1e07f1749ee4e3a4",
+    "82315b098d1a3aa4",
+    "a6f18e6a42fc95ec",
+    "ef761cd6a14582d2"
+   ],
+   "unit": "share",
+   "value": -0.0037395886452490368
+  },
+  {
+   "as_of": "2025-11-30",
+   "dims": {},
+   "obs_ids": [
+    "1e07f1749ee4e3a4",
+    "23362c3555f8f45a",
+    "a6f18e6a42fc95ec",
+    "ef761cd6a14582d2"
+   ],
+   "unit": "share",
+   "value": -0.017883435388980518
+  },
+  {
+   "as_of": "2025-12-31",
+   "dims": {},
+   "obs_ids": [
+    "23362c3555f8f45a",
+    "a6f18e6a42fc95ec",
+    "b43bff740abc59c1",
+    "ef761cd6a14582d2"
+   ],
+   "unit": "share",
+   "value": 0.031701808682447874
+  },
+  {
+   "as_of": "2026-01-31",
+   "dims": {},
+   "obs_ids": [
+    "23362c3555f8f45a",
+    "75670685207d1801",
+    "a6f18e6a42fc95ec",
+    "b43bff740abc59c1"
+   ],
+   "unit": "share",
+   "value": -0.0021017312777529273
+  },
+  {
+   "as_of": "2026-02-28",
+   "dims": {},
+   "obs_ids": [
+    "23362c3555f8f45a",
+    "337c73d9d52d314b",
+    "75670685207d1801",
+    "b43bff740abc59c1"
+   ],
+   "unit": "share",
+   "value": -0.00404982282025157
+  },
+  {
+   "as_of": "2026-03-31",
+   "dims": {},
+   "obs_ids": [
+    "337c73d9d52d314b",
+    "75670685207d1801",
+    "7b66415c752f4843",
+    "b43bff740abc59c1"
+   ],
+   "unit": "share",
+   "value": -0.022144968279168342
+  },
+  {
+   "as_of": "2026-04-30",
+   "dims": {},
+   "obs_ids": [
+    "337c73d9d52d314b",
+    "75670685207d1801",
+    "7b66415c752f4843",
+    "eb3282424b0fcc9a"
+   ],
+   "unit": "share",
+   "value": -0.020920233587884307
+  },
+  {
+   "as_of": "2026-05-31",
+   "dims": {},
+   "obs_ids": [
+    "14ca8a23f3a7fee5",
+    "337c73d9d52d314b",
+    "7b66415c752f4843",
+    "eb3282424b0fcc9a"
+   ],
+   "unit": "share",
+   "value": 0.01526512420528281
+  },
+  {
+   "as_of": "2026-06-30",
+   "dims": {},
+   "obs_ids": [
+    "14ca8a23f3a7fee5",
+    "7b66415c752f4843",
+    "eb3282424b0fcc9a",
+    "f03af856e9a46333"
+   ],
+   "unit": "share",
+   "value": 0.013292532553470293
+  },
+  {
+   "as_of": "2026-07-31",
+   "dims": {},
+   "obs_ids": [
+    "14ca8a23f3a7fee5",
+    "1fce2bb84f849403",
+    "eb3282424b0fcc9a",
+    "f03af856e9a46333"
+   ],
+   "unit": "share",
+   "value": 0.010034531530727975
   }
  ],
  "stale_as_of": null,

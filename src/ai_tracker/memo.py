@@ -301,6 +301,43 @@ def write(store: st.Store, today: date | None = None, since: date | None = None)
     return p
 
 
+REFRESH_NOTES = {
+    "revelio": "Revelio's terms forbid automated access: take the figure from a Wayback snapshot"
+}
+
+
+def due_for_refresh(store: st.Store, today: date) -> list[str]:
+    """Hand-entered series behind a published indicator whose newest row is older than twice its source's cadence."""
+    from fnmatch import fnmatch
+
+    import yaml
+
+    metrics = (yaml.safe_load(Path("semantic/metrics.yaml").read_text()) or {})["metrics"]
+    globs = {
+        g
+        for i in store.seed.indicators
+        if i.published
+        for g in [*i.series_keys, *((metrics.get(i.metric) or {}).get("inputs", []) if i.metric else [])]
+    }
+    cadence = {x.id: (x.name, x.cadence) for x in store.seed.sources}
+    rows = store.con.execute(
+        "SELECT series_key, arg_max(source_id, as_of_date), max(as_of_date), arg_max(url, as_of_date), "
+        "arg_max(extraction_method, as_of_date) FROM observations GROUP BY series_key ORDER BY series_key"
+    ).fetchall()
+    out = []
+    for key, src, as_of, url, method in rows:
+        name, cad = cadence.get(src, (src, None))
+        days = st.CADENCE_DAYS.get(cad or "")
+        if (
+            method != "manual" or not days or cad == "per_release" or not any(fnmatch(key, g) for g in globs)
+        ):  # a one-off study is not due
+            continue
+        if (today - as_of).days > 2 * days:
+            note = f" ({REFRESH_NOTES[src]})" if src in REFRESH_NOTES else ""
+            out.append(f"- `{key}` ({name}, {cad}): newest {as_of}; {url}{note}")
+    return out
+
+
 def ops_notes(store: st.Store, today: date | None = None) -> str:
     """Operator notes for the memo PR body: what needs the maintainer this week. Everything here is already
     public in the repo or on /sources; nothing is written to docs/memos."""
@@ -343,6 +380,9 @@ def ops_notes(store: st.Store, today: date | None = None) -> str:
         "Connectors failing 3+ of the last 7 nights": [
             f"- `{k}`: {len(v)} nights" for k, v in sorted(nights.items()) if len(v) >= 3
         ],
+        "Hand-entered series due for a refresh (fetch the page, add a row to seed/manual_observations.yaml)": due_for_refresh(
+            store, today
+        ),
         "Sources stale or never fetched": [
             f"- `{h['id']}`: {h['health']}, last success {str(h['last_success_at'] or 'never')[:10]}"
             for h in health
