@@ -5,7 +5,6 @@ import { fmt } from "@/lib/format";
 
 export const metadata = { title: "Ledger" };
 
-const NAMES: Record<string, string> = { nvidia: "Nvidia", openai: "OpenAI", amd: "AMD", coreweave: "CoreWeave", oracle: "Oracle", microsoft: "Microsoft", anthropic: "Anthropic", meta: "Meta", nebius: "Nebius", amazon: "Amazon" };
 const INSTR: Record<string, string> = { equity: "equity", guarantee: "guarantee", loi: "letter of intent", backstop: "backstop", backstop_talks: "backstop (talks)", warrant: "warrant", commitment: "commitment", azure_commitment: "Azure commitment", aws_commitment: "AWS commitment", contract: "take-or-pay contract", total_commitments: "stated total", commercial_rpo: "commercial RPO", rpo_share: "RPO share", guarantee_customer: "guarantee (announcement)", cds_5y_bps: "5-year CDS" };
 
 export default function LedgerPage() {
@@ -26,7 +25,7 @@ export default function LedgerPage() {
               return (
                 <tr key={r.obs_id} id={r.obs_id}>
                   <td className="whitespace-nowrap tabular-nums">{r.as_of_date}</td>
-                  <td className="whitespace-nowrap">{r.parties.map((p) => NAMES[p] ?? p).join(" → ")}</td>
+                  <td className="whitespace-nowrap">{r.parties.map((p, i) => <span key={p.slug}>{i ? " → " : ""}{p.href ? <Link href={p.href} className="hover:underline">{p.name}</Link> : p.name}</span>)}</td>
                   <td className="whitespace-nowrap text-ink-2">{INSTR[r.instrument] ?? r.instrument.replace(/_/g, " ")}</td>
                   <td className="whitespace-nowrap tabular-nums"><Link href={`/series/${r.series_key}#${r.obs_id}`} className="underline decoration-grid underline-offset-4">{r.value_numeric !== null ? fmt(r.value_numeric, r.unit === "shares" || r.unit === "GW" || r.unit === "bps" ? undefined : r.unit) : "—"}</Link>{r.unit === "shares" ? " shares" : r.unit === "GW" ? " GW" : r.unit === "bps" ? " bps" : ""}</td>
                   <td><Grade grade={r.grade} tier={r.tier} /></td>
