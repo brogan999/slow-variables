@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import csv
 import json
+from collections import Counter
 from dataclasses import dataclass, field
 from datetime import date, datetime, timezone
 from fnmatch import fnmatch
@@ -1231,10 +1232,44 @@ class Store:
                 if i in cards
             ]
 
+        items = [{**dump(b), "related": rel(b)} for b in self.seed.bottlenecks]
+        fast, normal = {"faster_than_normal"}, {"consistent_with_normal", "slower_than_normal"}
+        summary = []
+        for sec in self.seed.sections:
+            its = [i for i in items if i["section"] == sec["name"]]
+            linked = list({r["id"]: r for i in its for r in i["related"] if r["published"]}.values())
+            summary.append(
+                {
+                    "name": sec["name"],
+                    "items": len(its),
+                    "watched": sum(1 for i in its if i["related"]),
+                    "fast": sum(1 for r in linked if r["status"] in fast),
+                    "normal": sum(1 for r in linked if r["status"] in normal),
+                    "other": sum(1 for r in linked if r["status"] and r["status"] not in fast | normal),
+                }
+            )
+        domains = [d for d, _ in Counter(b.domain or "general" for b in self.seed.bottlenecks).most_common()]
+        grid = [
+            {
+                "name": sec["name"],
+                "cells": {
+                    d: [
+                        b.id
+                        for b in self.seed.bottlenecks
+                        if b.section == sec["name"] and (b.domain or "general") == d
+                    ]
+                    for d in domains
+                },
+            }
+            for sec in self.seed.sections
+        ]
         return {
             "sections": self.seed.sections,
             "essays": [dump(e) for e in self.seed.essays],
-            "items": [{**dump(b), "related": rel(b)} for b in self.seed.bottlenecks],
+            "items": items,
+            "summary": summary,
+            "domains": domains,
+            "grid": grid,
         }
 
     def _compare(self, cards: dict[str, Any]) -> dict[str, Any]:
@@ -1249,13 +1284,23 @@ class Store:
         rows = []
         for r in self.seed.compare:
             c = cards[r.indicator]
+            ids = list(dict.fromkeys(r.predictions + r.nk_predictions + r.ai2027_predictions))
+            flow = not next(i for i in self.seed.indicators if i.id == r.indicator).direction_rule
             rows.append(
                 {
-                    **r.model_dump(),
+                    "indicator": r.indicator,
                     "card": c,
-                    "leans": LEAN.get(c["status"] or "", "open") if c["published"] else "open",
-                    "nk_predictions": [pred(p) for p in r.nk_predictions],
-                    "ai2027_predictions": [pred(p) for p in r.ai2027_predictions],
+                    # a capture row reads concentrating or dispersing, which neither worldview's lean describes
+                    "leans": (LEAN.get(c["status"] or "", "open") if c["published"] else "open")
+                    if flow
+                    else None,
+                    "columns": {
+                        ledger: {
+                            "text": getattr(r, ledger),
+                            "predictions": [pred(p) for p in ids if preds[p].ledger == ledger],
+                        }
+                        for ledger in ("nk", "ai2027", "lab", "capture")
+                    },
                 }
             )
         tally = {k: sum(1 for x in rows if x["leans"] == k) for k in ("nk", "ai2027", "open")}

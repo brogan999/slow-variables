@@ -42,6 +42,24 @@ for line in md.splitlines():
 essays = []
 for row in re.findall(r"^\| (\w+) \| \[(.+?)\]\((.+?)\) \| (\d{4}-\d{2}-\d{2}) \|$", md, re.M):
     essays.append({"code": row[0], "title": row[1], "url": row[2], "date": row[3]})
+# Domain (the grid's second axis): the raw extraction tags each of its 224 rows with a domain but has no mechanism field.
+# An item takes the domain of the raw row that best matches its words; with no close match, the most common domain
+# among the raw rows of the essays it cites. The basis is kept so the fallbacks can be reviewed.
+import collections, difflib, json
+raw = json.load(open("docs/research/bottlenecks_raw.json"))
+words = lambda t: set(re.findall(r"[a-z]{4,}", t.lower()))  # noqa: E731
+slug = {e["code"]: e["url"].rstrip("/").split("/")[-1] for e in essays}
+for it in items:
+    mine = words(it["title"] + " " + it["text"])
+    def score(r):  # (title similarity, word overlap)
+        other = words(r["name"] + " " + r["description"])
+        return difflib.SequenceMatcher(None, it["title"].lower(), r["name"].lower()).ratio(), len(mine & other) / max(1, len(mine | other))
+    best = max(raw, key=lambda r: max(score(r)[0], 2 * score(r)[1]))
+    if score(best)[0] >= 0.5 or score(best)[1] >= 1 / 3:  # a close title or a third of the words shared
+        it["domain"], it["domain_basis"] = best["domain"], f"matched extraction row: {best['name']}"
+    else:
+        doms = collections.Counter(r["domain"] for r in raw if r["slug"] in {slug.get(c) for c in it["source_codes"]})
+        it["domain"], it["domain_basis"] = (doms.most_common(1)[0][0] if doms else "general"), "most common domain of its essays"
 assert [i["id"] for i in items] == list(range(1, 90)), [i["id"] for i in items][:5]
 codes = {e["code"] for e in essays}
 bad = {c for i in items for c in i["source_codes"] if c not in codes}

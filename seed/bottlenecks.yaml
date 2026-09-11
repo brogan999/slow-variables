@@ -103,6 +103,8 @@ bottlenecks:
   - Pivot
   related_indicators:
   - enterprise_pilot_to_production
+  domain: general
+  domain_basis: 'matched extraction row: Application development effort does not vanish'
 - id: 2
   title: Proof-of-concept to product gap
   text: A demo that works 90% of the time is a capability, not a product. Executives see quick prototypes and miss the 90% of work needed to finish them.
@@ -115,6 +117,8 @@ bottlenecks:
   related_indicators:
   - enterprise_pilot_to_production
   - dev_rct_uplift
+  domain: general
+  domain_basis: 'matched extraction row: Proof-of-concept to product gap'
 - id: 3
   title: Capability-reliability gap
   text: Accuracy has risen sharply while reliability has moved only a few points. A model that is right 70% of the time but fails unpredictably cannot remove the human from the loop, and reliability fixes are application-specific.
@@ -128,6 +132,8 @@ bottlenecks:
   related_indicators:
   - horizon_ratio_80_50
   - metr_horizon_80
+  domain: general
+  domain_basis: 'matched extraction row: Capability-reliability gap'
 - id: 4
   title: Compounding unreliability in agents
   text: An agent making dozens of LLM calls with even a 2% error rate per step becomes useless end to end.
@@ -138,6 +144,8 @@ bottlenecks:
   related_indicators:
   - rsi_intervention_rate_4_8h
   - horizon_ratio_80_50
+  domain: agents
+  domain_basis: 'matched extraction row: Compounding unreliability in agents'
 - id: 5
   title: Users expect software-like determinism
   text: People expect AI products to behave like software. Stochastic outputs violate that expectation, and it is unclear whether determinism can be engineered in.
@@ -147,6 +155,8 @@ bottlenecks:
   - Pivot
   - AGI
   related_indicators: []
+  domain: general
+  domain_basis: 'matched extraction row: Reliability vs software expectations'
 - id: 6
   title: Missing interface paradigms
   text: Current AI products are like PCs before the GUI. Higher-bandwidth interfaces that let users supervise without constant interruption have not been invented.
@@ -156,6 +166,8 @@ bottlenecks:
   - Slowing
   - Pivot
   related_indicators: []
+  domain: general
+  domain_basis: 'matched extraction row: Missing interface paradigms'
 - id: 7
   title: Domain-specific product design
   text: General capabilities have to be made useful one domain at a time, which requires deep domain knowledge to find the adoption hurdles (Cursor's code-verification UI is their example).
@@ -165,6 +177,8 @@ bottlenecks:
   - AGI
   related_indicators:
   - enterprise_pilot_to_production
+  domain: software engineering
+  domain_basis: 'matched extraction row: Domain-specific adoption hurdles need product design'
 - id: 8
   title: AI companies neglected product engineering
   text: Labs assumed generality exempted them from UX and software engineering, and are rediscovering that both are hard.
@@ -173,6 +187,8 @@ bottlenecks:
   source_codes:
   - Slowing
   related_indicators: []
+  domain: software engineering
+  domain_basis: 'matched extraction row: AI companies neglect product engineering'
 - id: 9
   title: Cost of inference
   text: Cost, not capability, blocks many applications, especially agentic workflows that call models hundreds of times. Cost also sets accuracy, since retries improve success.
@@ -185,6 +201,8 @@ bottlenecks:
   - OWE
   related_indicators:
   - model_price_per_horizon_hour
+  domain: general
+  domain_basis: 'matched extraction row: Cost of inference'
 - id: 10
   title: Judgment tasks resist evaluation
   text: The tasks whose automation would most transform a profession (legal filings, research) have no single correct answer, so they are the hardest to evaluate and improve.
@@ -194,6 +212,8 @@ bottlenecks:
   - ANT
   - Legal
   related_indicators: []
+  domain: law
+  domain_basis: 'matched extraction row: Judgment tasks resist evaluation'
 - id: 11
   title: No verifiers in open domains
   text: AI became superhuman at chess because of fast, accurate feedback. Law, medicine, and science have no such verifier, so progress is limited to automatically checkable tasks.
@@ -203,6 +223,8 @@ bottlenecks:
   - Moravec
   - Agents26
   related_indicators: []
+  domain: law
+  domain_basis: 'matched extraction row: Lack of verifiers in open domains'
 - id: 12
   title: Real-world knowledge caps reasoning
   text: AI reasoning in medicine is limited by the medical knowledge that exists, the same limit humans face.
@@ -211,6 +233,8 @@ bottlenecks:
   source_codes:
   - Moravec
   related_indicators: []
+  domain: medicine
+  domain_basis: 'matched extraction row: Limits of real-world knowledge'
 - id: 13
   title: Brittleness outside closed domains
   text: Systems that excel in narrow demos go off the rails in open-ended settings.
@@ -220,6 +244,8 @@ bottlenecks:
   - Moravec
   - OWE
   related_indicators: []
+  domain: general
+  domain_basis: 'matched extraction row: Brittleness outside closed domains'
 - id: 14
   title: Agents lack judgment for open-ended work
   text: In their shadow evaluations, frontier agents given real research questions lacked judgment, creativity, and the ability to backtrack or respond to feedback.
@@ -229,6 +255,8 @@ bottlenecks:
   - Agents26
   - OWE
   related_indicators: []
+  domain: agents
+  domain_basis: 'matched extraction row: Agents lack judgment for open-ended research'
 - id: 15
   title: Non-functional requirements go unmet
   text: Agent-built software sacrifices quality, maintainability, and security, and successes often rest on human-built test suites, thousands of lines of prompt, or memorized training data.
@@ -238,6 +266,8 @@ bottlenecks:
   - OWE
   - Google
   related_indicators: []
+  domain: software engineering
+  domain_basis: 'matched extraction row: Non-functional software requirements unmet'
 - id: 16
   title: Benchmarks lack construct validity
   text: Benchmarks overweight what models are good at, miss contextual reasoning, and encourage agents that score well without being useful. Vendor claims cannot be independently checked.
@@ -250,6 +280,8 @@ bottlenecks:
   related_indicators:
   - dev_rct_uplift
   - horizon_ratio_80_50
+  domain: law
+  domain_basis: 'matched extraction row: Benchmarks lack construct validity'
 - id: 17
   title: Real-world messiness cannot be simulated
   text: Whether a system can automate a job is only knowable after diffusion, because no lab environment captures the world's complexity.
@@ -260,6 +292,8 @@ bottlenecks:
   - OWE
   related_indicators:
   - dev_rct_uplift
+  domain: general
+  domain_basis: 'matched extraction row: Real-world messiness cannot be simulated'
 - id: 18
   title: Deployment is not diffusion
   text: Instant availability to hundreds of millions says nothing about how many people use a capability, for how long, or for what.
@@ -271,6 +305,8 @@ bottlenecks:
   related_indicators:
   - bbd_work_hours_assisted
   - btos_firm_use
+  domain: general
+  domain_basis: 'matched extraction row: Deployment is not diffusion'
 - id: 19
   title: Low intensity of use
   text: Most users use generative AI infrequently. Nearly a year after release, under 1% of ChatGPT users touched thinking models on a given day.
@@ -282,6 +318,8 @@ bottlenecks:
   related_indicators:
   - bbd_work_hours_assisted
   - aei_augmentation_share
+  domain: general
+  domain_basis: 'matched extraction row: Low intensity of use (thinking models)'
 - id: 20
   title: Human learning curves
   text: Taking advantage of AI requires continual learning of new workflows and topics. The curve is steep and time-consuming, and it moves at human speed.
@@ -293,6 +331,8 @@ bottlenecks:
   - AGI
   related_indicators:
   - bbd_work_hours_assisted
+  domain: general
+  domain_basis: 'matched extraction row: Human learning curves'
 - id: 21
   title: Workflow and habit change
   text: The hard part of adoption is users adapting their workflows, which cannot even start in the first months after a launch.
@@ -305,6 +345,8 @@ bottlenecks:
   related_indicators:
   - btos_firm_use
   - ramp_paid_ai_adoption
+  domain: general
+  domain_basis: 'matched extraction row: Workflow and habit change takes time'
 - id: 22
   title: Most adoption decisions are "no."
   text: Because deployment is instant, people constantly face adoption choices, and the vast majority of the time they decline, for rational and irrational reasons.
@@ -313,6 +355,8 @@ bottlenecks:
   source_codes:
   - Guide
   related_indicators: []
+  domain: general
+  domain_basis: 'matched extraction row: Most adoption decisions are ''no'''
 - id: 23
   title: Cost of supervising agents
   text: Agentic work requires constant human supervision, which is time-consuming and mentally exhausting, so realized productivity lags.
@@ -323,6 +367,8 @@ bottlenecks:
   - OWE
   related_indicators:
   - rsi_intervention_rate_4_8h
+  domain: software engineering
+  domain_basis: 'matched extraction row: Cost of supervising agents'
 - id: 24
   title: Skill erosion and the dependence spiral
   text: Using AI for tasks one has not mastered erodes skill and control, so responsible users limit offloading. Vendor-specific skills replace unaided ones.
@@ -332,6 +378,8 @@ bottlenecks:
   - Left
   - Stack
   related_indicators: []
+  domain: general
+  domain_basis: 'matched extraction row: Dependence spiral and skill erosion'
 - id: 25
   title: Skilled judgment gates "democratization."
   text: Past waves of no-code failed because the barrier is not syntax but the judgment and accountability needed to make good decisions.
@@ -340,6 +388,8 @@ bottlenecks:
   source_codes:
   - SWE
   related_indicators: []
+  domain: software engineering
+  domain_basis: 'matched extraction row: Skilled judgment required for democratization'
 - id: 26
   title: Verification needs domain expertise
   text: Checking whether an agent actually succeeded at an open-ended task takes deep expertise and time, and long logs cannot be fully reviewed.
@@ -349,6 +399,8 @@ bottlenecks:
   - OWE
   - Left
   related_indicators: []
+  domain: agents
+  domain_basis: 'matched extraction row: Verification requires domain expertise'
 - id: 27
   title: Privacy resistance
   text: Useful assistants need access to sensitive personal and organizational data, which triggers outcry and regulatory limits on data sharing.
@@ -358,6 +410,8 @@ bottlenecks:
   - Pivot
   - ANT
   related_indicators: []
+  domain: general
+  domain_basis: 'matched extraction row: Privacy concerns for assistants'
 - id: 28
   title: Organizational change is slower than individual change
   text: For past general-purpose technologies this stage took decades. It has barely begun even in software engineering.
@@ -371,6 +425,8 @@ bottlenecks:
   related_indicators:
   - btos_firm_use
   - bbd_work_hours_assisted
+  domain: general
+  domain_basis: 'matched extraction row: Speed of organizational and institutional adaptation'
 - id: 29
   title: Drop-in replacement fails
   text: 'Like electrification, benefits only arrive once work is reorganized: new layouts, processes, hiring, and training. The restructuring is discovered by experimentation, not designed in advance.'
@@ -382,6 +438,8 @@ bottlenecks:
   related_indicators:
   - enterprise_pilot_to_production
   - dev_rct_uplift
+  domain: general
+  domain_basis: 'matched extraction row: Drop-in replacement fails; organizational reorganization'
 - id: 30
   title: Tacit organizational knowledge
   text: Much of what organizations know is unwritten and not in training data. It has to be made available to models gradually through adoption, sector by sector.
@@ -392,6 +450,8 @@ bottlenecks:
   - Left
   - SWE
   related_indicators: []
+  domain: general
+  domain_basis: 'matched extraction row: Tacit organizational knowledge'
 - id: 31
   title: Integration into existing systems
   text: Models must be wired into the many systems organizations already run, a downstream task no model release solves. Enterprise data is locked in Salesforce, Workday, and SAP.
@@ -401,6 +461,8 @@ bottlenecks:
   - Left
   - Stack
   related_indicators: []
+  domain: general
+  domain_basis: 'matched extraction row: Integration into existing systems'
 - id: 32
   title: Task specification is human labor
   text: Unambiguously saying what is wanted is a large share of the work. Brooks's "essential complexity" of specification is untouched by AI.
@@ -410,6 +472,8 @@ bottlenecks:
   - ANT
   - SWE
   related_indicators: []
+  domain: general
+  domain_basis: 'matched extraction row: Task specification effort'
 - id: 33
   title: The "decide" and "deliver" layers do not compress
   text: Understanding requirements and taking accountability for what ships remain human. Once a decision is delegable it stops being a competitive advantage, so human judgment migrates upward.
@@ -419,6 +483,8 @@ bottlenecks:
   - SWE
   - Left
   related_indicators: []
+  domain: software engineering
+  domain_basis: 'matched extraction row: Decide layer not compressed'
 - id: 34
   title: Staged trust
   text: Organizations grant AI access to consequential decisions only after it proves reliable in less critical contexts.
@@ -427,6 +493,8 @@ bottlenecks:
   source_codes:
   - ANT
   related_indicators: []
+  domain: safety
+  domain_basis: 'matched extraction row: Staged adoption requires proving reliability first'
 - id: 35
   title: Human-in-the-loop erodes benefits
   text: Requiring approval of every action mostly destroys the value of automation, so it degrades into rubber-stamping or is outcompeted.
@@ -437,6 +505,8 @@ bottlenecks:
   related_indicators:
   - rsi_intervention_rate_4_8h
   - dev_rct_uplift
+  domain: safety
+  domain_basis: 'matched extraction row: Human-in-the-loop review erodes automation benefits'
 - id: 36
   title: Collective action and sclerotic institutions
   text: Structural change requires solving coordination problems or reforming institutions, which is far less predictable than user behavior (air traffic control is their example).
@@ -446,6 +516,8 @@ bottlenecks:
   - Guide
   - AGI
   related_indicators: []
+  domain: general
+  domain_basis: 'matched extraction row: Collective action and sclerotic institutions'
 - id: 37
   title: Underinvestment in complements
   text: 'Diffusion depends on public goods the private sector underprovides: AI literacy, workforce training, digitization, open data.'
@@ -456,6 +528,8 @@ bottlenecks:
   - AGI
   related_indicators:
   - bls_tfp_private_nonfarm
+  domain: general
+  domain_basis: 'matched extraction row: Underinvestment in complements: literacy, training, data'
 - id: 38
   title: National diffusion capacity
   text: Following Jeffrey Ding, countries differ enormously in their ability to spread innovations through the economy, and this, not who reaches a milestone first, sets economic outcomes.
@@ -466,6 +540,8 @@ bottlenecks:
   - AGI
   related_indicators:
   - btos_firm_use
+  domain: general
+  domain_basis: 'matched extraction row: National diffusion capacity (Ding)'
 - id: 39
   title: Bespoke deployment
   text: Transforming workplaces requires forward-deployed engineers and consulting partnerships, labor-intensive work outside the product.
@@ -475,6 +551,8 @@ bottlenecks:
   - Stack
   - Guide
   related_indicators: []
+  domain: general
+  domain_basis: 'matched extraction row: Bespoke deployment and workflow redesign'
 - id: 40
   title: Enterprise resistance to lock-in
   text: Embedded "digital workers" create extreme lock-in and target labor budgets, so enterprises resist, withhold data for training, and demand portability.
@@ -483,6 +561,8 @@ bottlenecks:
   source_codes:
   - Stack
   related_indicators: []
+  domain: agents
+  domain_basis: 'matched extraction row: Enterprise resistance to digital workers'
 - id: 41
   title: Deskilling breaks the talent pipeline
   text: Automating entry-level tasks removes the experiences through which juniors build expertise, a cost that emerges only over time.
@@ -494,6 +574,8 @@ bottlenecks:
   related_indicators:
   - canaries_entry_level_gap
   - new_grad_unemployment
+  domain: law
+  domain_basis: 'matched extraction row: Deskilling and disrupted junior-lawyer pipeline'
 - id: 42
   title: Millions of small adaptations
   text: Impact arrives through countless mundane process and policy tweaks, not a single leap.
@@ -504,6 +586,8 @@ bottlenecks:
   - ANT
   related_indicators:
   - bls_labor_productivity_yoy
+  domain: general
+  domain_basis: 'matched extraction row: Millions of small process and policy adaptations'
 - id: 43
   title: Regulation in high-consequence domains
   text: FDA, EU AI Act, and sector rules make deployment slow by design, and regulation often outright prohibits current AI use in productive settings.
@@ -514,6 +598,8 @@ bottlenecks:
   - Left
   - SWE
   related_indicators: []
+  domain: general
+  domain_basis: 'matched extraction row: Regulation in high-consequence domains'
 - id: 44
   title: Liability uncertainty
   text: Unclear application of liability law deters adoption. Clear rules (FAA drone rules in 2016) spur it.
@@ -523,6 +609,8 @@ bottlenecks:
   - ANT
   - SWE
   related_indicators: []
+  domain: general
+  domain_basis: 'matched extraction row: Legal and liability uncertainty'
 - id: 45
   title: Professional guardrails
   text: Malpractice liability, professional codes, and device regulation keep doctors from delegating decisions to chatbots.
@@ -531,6 +619,8 @@ bottlenecks:
   source_codes:
   - Guide
   related_indicators: []
+  domain: medicine
+  domain_basis: 'matched extraction row: Professional guardrails in medicine'
 - id: 46
   title: Regulation that freezes categories
   text: Rules insensitive to experimentation reify business models and organizational forms prematurely, and binary automated/not-automated rules discourage new oversight designs.
@@ -539,6 +629,8 @@ bottlenecks:
   source_codes:
   - ANT
   related_indicators: []
+  domain: general
+  domain_basis: 'matched extraction row: Regulation that freezes categories'
 - id: 47
   title: Misplaced burdens on model developers
   text: Regulation blind to the developer/deployer split saddles general-purpose model makers with context-specific obligations.
@@ -547,6 +639,8 @@ bottlenecks:
   source_codes:
   - ANT
   related_indicators: []
+  domain: general
+  domain_basis: 'matched extraction row: Misplaced burdens on model developers'
 - id: 48
   title: Unauthorized practice of law
   text: UPL rules and their state-by-state vagueness deter new entrants, and bar associations cite model unreliability as grounds for caution.
@@ -555,6 +649,8 @@ bottlenecks:
   source_codes:
   - Legal
   related_indicators: []
+  domain: law
+  domain_basis: 'matched extraction row: Unauthorized practice of law (UPL) liability'
 - id: 49
   title: Law firm ownership rules
   text: Restrictions on who can own or share fees with law firms block outside capital and scaled business models.
@@ -563,6 +659,8 @@ bottlenecks:
   source_codes:
   - Legal
   related_indicators: []
+  domain: law
+  domain_basis: 'matched extraction row: Law firm ownership / entity regulations'
 - id: 50
   title: Incumbent resistance to reform
   text: Lawyers and commerce groups lobby to narrow regulatory sandboxes despite scant evidence of harm.
@@ -571,6 +669,8 @@ bottlenecks:
   source_codes:
   - Legal
   related_indicators: []
+  domain: law
+  domain_basis: 'matched extraction row: Incumbent resistance to regulatory reform'
 - id: 51
   title: Human adjudication time
   text: The speed of human judges, lawyers, and clients caps how fast legal processes can move. Adding judges is politically fraught, and Article III likely requires human judges.
@@ -579,6 +679,8 @@ bottlenecks:
   source_codes:
   - Legal
   related_indicators: []
+  domain: law
+  domain_basis: 'matched extraction row: Human judges'' adjudication time'
 - id: 52
   title: Courts may restrict access
   text: Flooded courts respond by tightening doctrines to keep litigants out or by banning AI, counteracting the gains.
@@ -587,6 +689,8 @@ bottlenecks:
   source_codes:
   - Legal
   related_indicators: []
+  domain: law
+  domain_basis: 'matched extraction row: Courts restricting access or banning AI'
 - id: 53
   title: Policy-mandated human steps
   text: Platform policies require developer accounts, 2FA dialogs that block synthetic input, and a human pressing publish.
@@ -595,6 +699,8 @@ bottlenecks:
   source_codes:
   - OWE
   related_indicators: []
+  domain: agents
+  domain_basis: 'matched extraction row: Policy-mandated human steps'
 - id: 54
   title: State capacity sclerosis
   text: Veto points and proceduralism hobble governments' ability to deploy AI, coordinate resilience, or even provide services they could.
@@ -604,6 +710,8 @@ bottlenecks:
   - Gov
   - ANT
   related_indicators: []
+  domain: safety
+  domain_basis: 'matched extraction row: State capacity sclerosis'
 - id: 55
   title: Policy backlash
   text: Self-driving cars took 15+ years to deploy and now face bans because policymakers failed to prepare. Public anxiety and backlash from rushed deployments are headwinds.
@@ -615,6 +723,8 @@ bottlenecks:
   - Left
   - Pivot
   related_indicators: []
+  domain: general
+  domain_basis: 'matched extraction row: Policy backlash against deployment'
 - id: 56
   title: Clinical trials and real-world experiments
   text: Treatments need trials with thousands of people over 10 to 15 years. Progress needs data from real experiments that faster AI cannot speed up, and society will not let AI run large-scale experiments on people.
@@ -625,6 +735,8 @@ bottlenecks:
   - AGI
   - Agents26
   related_indicators: []
+  domain: science
+  domain_basis: 'matched extraction row: Real-world experimental data collection'
 - id: 57
   title: Costly, unsimulable errors
   text: Where mistakes are expensive and the world cannot be simulated (driving), safety throttles each iteration of the improvement loop.
@@ -633,6 +745,8 @@ bottlenecks:
   source_codes:
   - ANT
   related_indicators: []
+  domain: general
+  domain_basis: 'matched extraction row: Costly real-world errors throttle the feedback loop'
 - id: 58
   title: AI targets non-bottleneck steps
   text: In an already technological, regulated world, the workflow parts AI improves were optimized by earlier waves. The true bottlenecks resist for external reasons.
@@ -641,6 +755,8 @@ bottlenecks:
   source_codes:
   - Guide
   related_indicators: []
+  domain: general
+  domain_basis: 'matched extraction row: AI targets non-bottleneck workflow steps'
 - id: 59
   title: Physical and social task bundles
   text: Jobs bundle inspection, loading, paperwork, and negotiation with the "core" task. Bio-harm still depends on materials, equipment, and tacit know-how.
@@ -650,6 +766,8 @@ bottlenecks:
   - ANT
   - Gov
   related_indicators: []
+  domain: general
+  domain_basis: most common domain of its essays
 - id: 60
   title: Slow external review
   text: Deployment depends on systems the developer does not control. An app took 45 minutes to build and ten days to pass App Store review.
@@ -658,6 +776,8 @@ bottlenecks:
   source_codes:
   - OWE
   related_indicators: []
+  domain: software engineering
+  domain_basis: 'matched extraction row: Slow external review processes'
 - id: 61
   title: Infrastructure, energy, and compute
   text: Grid capacity constrains training and inference. Token supply is scarce today. Breakthroughs deploy slowly when supporting infrastructure does not exist yet (steam to electric took 40 years).
@@ -671,6 +791,8 @@ bottlenecks:
   related_indicators:
   - circular_financing_scale
   - cloud_rpo_backlog
+  domain: general
+  domain_basis: 'matched extraction row: Energy infrastructure and grid reliability'
 - id: 62
   title: Inherent limits on prediction
   text: Many tasks resemble long-range weather forecasting, where mathematical limits are already reached. Forecasting and persuasion have high irreducible error.
@@ -681,6 +803,8 @@ bottlenecks:
   - ANT
   - SciTool
   related_indicators: []
+  domain: science
+  domain_basis: 'matched extraction row: Inherent limits on prediction (chaos)'
 - id: 63
   title: Unrecognized latent bottlenecks and Amdahl's law
   text: Constraints like RL environments or energy only become visible once they bind, and if many hard steps remain, a hundredfold speedup on the AI-amenable parts yields a small overall gain.
@@ -689,6 +813,8 @@ bottlenecks:
   source_codes:
   - Agents26
   related_indicators: []
+  domain: general
+  domain_basis: 'matched extraction row: Unrecognized latent bottlenecks'
 - id: 64
   title: Safety limits in high-consequence tasks
   text: They predict slow diffusion will remain the norm where errors matter, enforced by regulators and by organizations' own caution.
@@ -698,6 +824,8 @@ bottlenecks:
   - ANT
   - AGI
   related_indicators: []
+  domain: general
+  domain_basis: 'matched extraction row: Safety speed limits in high-consequence tasks'
 - id: 65
   title: Business incentives against unsupervised deployment
   text: Poorly controlled AI is bad business. Unrecoverable failures like deleting production data make companies pull back from hasty automation.
@@ -711,6 +839,8 @@ bottlenecks:
   related_indicators:
   - rsi_intervention_rate_4_8h
   - horizon_ratio_80_50
+  domain: safety
+  domain_basis: 'matched extraction row: Business incentives against unsupervised deployment'
 - id: 66
   title: The general-purpose / high-stakes / automated trilemma
   text: For now an agent can be only two of the three, which keeps AI a collaboration technology rather than an automation one.
@@ -719,6 +849,8 @@ bottlenecks:
   source_codes:
   - Left
   related_indicators: []
+  domain: agents
+  domain_basis: 'matched extraction row: General-purpose / high-stakes / automated trilemma'
 - id: 67
   title: Legibility and control
   text: Removing humans from task boundaries to let AI run end to end reduces oversight, so autonomy is checked by the need to keep systems legible.
@@ -727,6 +859,8 @@ bottlenecks:
   source_codes:
   - ANT
   related_indicators: []
+  domain: agents
+  domain_basis: 'matched extraction row: Legibility and control risks check end-to-end autonomy'
 - id: 68
   title: Society's choice to keep humans accountable
   text: Liability law and sector regulation are speed controls society can strengthen deliberately, regardless of capability.
@@ -736,6 +870,8 @@ bottlenecks:
   - SWE
   - Left
   related_indicators: []
+  domain: general
+  domain_basis: 'matched extraction row: Collective choice to keep humans accountable'
 - id: 69
   title: Security risks of capable scaffolds
   text: Prompt injection, data leakage, and agent worms must be solved before assistants get broad access; scaffolds capable enough to test the frontier carry risks that may prevent use.
@@ -745,6 +881,8 @@ bottlenecks:
   - Pivot
   - OWE
   related_indicators: []
+  domain: agents
+  domain_basis: 'matched extraction row: Scaffold security risks block adoption'
 - id: 70
   title: Automation devalues the automated task
   text: Once a task is automated its value collapses and humans move to unautomated tasks, so the AGI goalpost keeps moving.
@@ -756,6 +894,8 @@ bottlenecks:
   related_indicators:
   - model_price_per_horizon_hour
   - consumer_surplus_wta
+  domain: general
+  domain_basis: 'matched extraction row: Automation devalues automated tasks; humans move on'
 - id: 71
   title: Competitive arms races dissipate gains
   text: In law and science, competition is so intense that productivity gains fuel escalation rather than societal value.
@@ -768,6 +908,8 @@ bottlenecks:
   - model_price_per_horizon_hour
   - lab_hhi
   - margin_stack_semis_share
+  domain: law
+  domain_basis: 'matched extraction row: Competitive arms races dissipate gains'
 - id: 72
   title: Credence goods
   text: Buyers cannot verify the quality of legal work or judgment-heavy AI output even in hindsight, so they rely on prestige and trust, and normal price competition fails.
@@ -777,6 +919,8 @@ bottlenecks:
   - Legal
   - Stack
   related_indicators: []
+  domain: general
+  domain_basis: 'matched extraction row: Credence-good quality of AI knowledge work'
 - id: 73
   title: Input-based incentives
   text: Billable hours reward more hours and more output regardless of outcome, absorbing efficiency gains.
@@ -785,6 +929,8 @@ bottlenecks:
   source_codes:
   - Legal
   related_indicators: []
+  domain: law
+  domain_basis: 'matched extraction row: Billable hours incentive model'
 - id: 74
   title: Growth is capped by the slowest sector
   text: AI's uneven sectoral effects mean long-run growth is bottlenecked by wherever it diffuses least.
@@ -795,6 +941,8 @@ bottlenecks:
   related_indicators:
   - bls_tfp_private_nonfarm
   - bls_labor_productivity_yoy
+  domain: general
+  domain_basis: 'matched extraction row: Growth bottlenecked by the weakest sector'
 - id: 75
   title: Commodity trap and recoupment
   text: Undifferentiated models push inference to marginal cost, outcomes are hard to measure so value pricing stalls, and incumbents own distribution. This limits how far labs can fund diffusion.
@@ -806,6 +954,8 @@ bottlenecks:
   - lab_recoupment_ratio
   - saas_multiples
   - enterprise_spend_by_layer
+  domain: general
+  domain_basis: 'matched extraction row: Commodity trap at the model layer'
 - id: 76
   title: Fixed consumer attention
   text: More apps do not increase usage, capping AI's impact on consumer software.
@@ -814,6 +964,8 @@ bottlenecks:
   source_codes:
   - SWE
   related_indicators: []
+  domain: software engineering
+  domain_basis: 'matched extraction row: Fixed pool of consumer attention'
 - id: 77
   title: Publisher distrust
   text: Media organizations' justified wariness and inability to bargain collectively limit the use of journalistic content.
@@ -822,6 +974,8 @@ bottlenecks:
   source_codes:
   - ANT
   related_indicators: []
+  domain: media
+  domain_basis: 'matched extraction row: Publisher wariness and bargaining asymmetry'
 - id: 78
   title: Production of findings is not the bottleneck
   text: Cheap generation of results will not unlock progress because producing findings is not what limits science.
@@ -831,6 +985,8 @@ bottlenecks:
   - AGI
   - Science
   related_indicators: []
+  domain: science
+  domain_basis: 'matched extraction row: Production of findings is not the science bottleneck'
 - id: 79
   title: Overproduction drowns novel work
   text: Attention is finite. As volume explodes, novel work is lost and AI search concentrates attention on already-famous papers.
@@ -839,6 +995,8 @@ bottlenecks:
   source_codes:
   - Science
   related_indicators: []
+  domain: science
+  domain_basis: 'matched extraction row: Overproduction drowns novel work'
 - id: 80
   title: Publish-or-perish incentives
   text: Institutions reward measurable production, making researchers risk-averse and making AI a tool for chasing metrics. Reform is blocked by inertia and Goodhart's law.
@@ -847,6 +1005,8 @@ bottlenecks:
   source_codes:
   - Science
   related_indicators: []
+  domain: science
+  domain_basis: 'matched extraction row: Publish-or-perish production incentives'
 - id: 81
   title: Scientists lack software engineering practice
   text: Most AI-for-science is software work, but fields have not adopted testing, version control, or code review, so leakage and other errors affect hundreds of papers.
@@ -856,6 +1016,8 @@ bottlenecks:
   - Science
   - SciTool
   related_indicators: []
+  domain: science
+  domain_basis: 'matched extraction row: Scientists lack software engineering skills'
 - id: 82
   title: Science does not self-correct
   text: Code and data go unshared, reviewers do not check code, retractions are near zero, and there is no incentive to debunk.
@@ -865,6 +1027,8 @@ bottlenecks:
   - Science
   - SciTool
   related_indicators: []
+  domain: science
+  domain_basis: 'matched extraction row: Science does not self-correct'
 - id: 83
   title: Prediction without understanding
   text: AI improves predictive accuracy without explanation, like epicycles, so wrong theories can persist and human understanding, which is the point of science, erodes.
@@ -875,6 +1039,8 @@ bottlenecks:
   - Left
   - SciTool
   related_indicators: []
+  domain: science
+  domain_basis: 'matched extraction row: Prediction-explanation fallacy prolongs flawed theories'
 - id: 84
   title: Epistemology change exceeds field capacity
   text: Adopting AI requires re-litigating validity per field and model type, which no field can do in a couple of years.
@@ -883,6 +1049,8 @@ bottlenecks:
   source_codes:
   - SciTool
   related_indicators: []
+  domain: science
+  domain_basis: 'matched extraction row: Epistemology change exceeds field capacity'
 - id: 85
   title: Misdirected tools and funding
   text: AI-for-science tools chase headlines rather than real bottlenecks like error detection, and are evaluated on time saved, not on understanding.
@@ -892,6 +1060,8 @@ bottlenecks:
   - Science
   - SciTool
   related_indicators: []
+  domain: science
+  domain_basis: 'matched extraction row: AI-for-science tools target wrong bottlenecks'
 - id: 86
   title: External bottlenecks are immune to self-improvement
   text: Limits on AI's power sit in deployment, not in the system's design, so improving the design cannot overcome them.
@@ -903,6 +1073,8 @@ bottlenecks:
   related_indicators:
   - rsi_agent_workdays_per_human
   - rsi_intervention_rate_4_8h
+  domain: general
+  domain_basis: 'matched extraction row: External bottlenecks immune to self-improvement'
 - id: 87
   title: Herding, compute, and declining openness in methods research
   text: Research herds around fashionable ideas, compute and cost constrain new paradigms, and the industry's culture of open sharing is fading. The AI community may be unusually bad at finding new paradigms.
@@ -912,6 +1084,8 @@ bottlenecks:
   - ANT
   - Guide
   related_indicators: []
+  domain: general
+  domain_basis: 'matched extraction row: Herding and ossification in methods research'
 - id: 88
   title: Data exhaustion
   text: Readily available data is spent, and more data costs ever more in money, licensing, and reputational risk. Continued scaling is a business decision, not a technical given.
@@ -921,6 +1095,8 @@ bottlenecks:
   - Scaling
   - Slowing
   related_indicators: []
+  domain: general
+  domain_basis: most common domain of its essays
 - id: 89
   title: Evaluation does not scale
   text: Every capability increase creates new demand for domain-specific evaluation, which resists automation and absorbs human effort.
@@ -929,3 +1105,5 @@ bottlenecks:
   source_codes:
   - Left
   related_indicators: []
+  domain: general
+  domain_basis: 'matched extraction row: Evaluation is not scalable'
