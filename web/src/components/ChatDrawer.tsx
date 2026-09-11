@@ -8,7 +8,7 @@ import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTr
 import { Textarea } from "@/components/ui/textarea";
 
 type Cite = { kind: string; id: string; href: string | null };
-type Answer = { answer: string; status: "ok" | "revised" | "blocked"; citations: Cite[]; usage?: { usd: number } };
+type Answer = { answer: string; status: "ok" | "revised" | "retried" | "blocked"; citations: Cite[]; usage?: { usd: number } };
 type State = { kind: "idle" } | { kind: "busy" } | { kind: "answer"; a: Answer } | { kind: "error"; text: string };
 
 const OFFLINE = "The query service is offline right now. Everything on the page still links to its observations.";
@@ -43,7 +43,7 @@ export function ChatDrawer() {
           <SheetDescription id="ask-desc" className="text-muted">Answers come from the same store as the site. Every number is checked against the record it cites; the sentence around it is not.</SheetDescription>
         </SheetHeader>
         <form onSubmit={submit} className="flex flex-col gap-3">
-          <p id="ask-note" className="text-xs text-muted">Sent with this page&apos;s path to an Anthropic model through the site&apos;s query service, which logs a hash of the question, not the text. <Link href="/methodology#privacy" className="underline decoration-grid underline-offset-2">Privacy</Link></p>
+          <p id="ask-note" className="text-xs text-muted">Sent with this page&apos;s path to an Anthropic model through the site&apos;s query service, which records the answer&apos;s outcome and cited ids, never your question. <Link href="/methodology#privacy" className="underline decoration-grid underline-offset-2">Privacy</Link></p>
           <Textarea value={q} onChange={(e) => setQ(e.target.value)} rows={3} placeholder="What is the latest 50% horizon and its doubling time?" aria-label="Question" aria-describedby="ask-note" className="bg-background" />
           <div className="flex items-center justify-between gap-3">
             <span className="eyebrow">{path}</span>
@@ -64,7 +64,7 @@ function AnswerView({ a }: { a: Answer }) {
   const byId = new Map(a.citations.map((c) => [`[${c.kind}:${c.id}]`, c]));
   return (
     <div className="flex flex-col gap-2">
-      {a.status === "blocked" ? <p className="text-slow text-xs">This answer failed the citation check twice; the unverified numbers are marked and should not be relied on.</p> : null}
+      {a.status === "blocked" ? <p className="text-slow text-xs">This answer failed the citation check after a revision and a fresh attempt; the unverified numbers are marked and should not be relied on.</p> : null}
       <p>
         {parts.map((p, i) => {
           const c = byId.get(p);
@@ -74,6 +74,7 @@ function AnswerView({ a }: { a: Answer }) {
         })}
       </p>
       {a.status === "revised" ? <p className="text-xs text-muted">Revised once after the citation check.</p> : null}
+      {a.status === "retried" ? <p className="text-xs text-muted">Asked afresh after the first answer failed the citation check twice.</p> : null}
     </div>
   );
 }

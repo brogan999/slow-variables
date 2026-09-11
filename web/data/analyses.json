@@ -5,7 +5,7 @@
   "id": "horizon_fits",
   "latest": {
    "as_of_date": "2026-03-05",
-   "computed_at": "2026-09-11T11:03:10.090286Z",
+   "computed_at": "2026-09-11T11:16:16.060568Z",
    "dims": {
     "aic": "-44.8",
     "n": "20",
@@ -84,7 +84,7 @@
   "related_latest": {
    "horizon_blowup_year_50_since_2024": {
     "as_of_date": "2026-03-05",
-    "computed_at": "2026-09-11T11:03:10.090286Z",
+    "computed_at": "2026-09-11T11:16:16.060568Z",
     "dims": {
      "aic": "78.1",
      "n": "20",
@@ -153,7 +153,7 @@
    },
    "horizon_doubling_days_50_since_2023": {
     "as_of_date": "2026-03-05",
-    "computed_at": "2026-09-11T11:03:10.090286Z",
+    "computed_at": "2026-09-11T11:16:16.060568Z",
     "dims": {
      "aic": "-31.0",
      "n": "22",
@@ -222,7 +222,7 @@
    },
    "horizon_doubling_days_80_since_2023": {
     "as_of_date": "2026-04-07",
-    "computed_at": "2026-09-11T11:03:10.090286Z",
+    "computed_at": "2026-09-11T11:16:16.060568Z",
     "dims": {
      "aic": "-27.6",
      "n": "23",
@@ -293,7 +293,7 @@
    },
    "horizon_doubling_days_80_since_2024": {
     "as_of_date": "2026-04-07",
-    "computed_at": "2026-09-11T11:03:10.090286Z",
+    "computed_at": "2026-09-11T11:16:16.060568Z",
     "dims": {
      "aic": "-41.3",
      "n": "21",
@@ -374,7 +374,7 @@
   "id": "ord_misfit",
   "latest": {
    "as_of_date": "2026-03-05",
-   "computed_at": "2026-09-11T11:03:10.090286Z",
+   "computed_at": "2026-09-11T11:16:16.060568Z",
    "dims": {},
    "formula_version": "1",
    "id": "cec9da67e1d41a15",
@@ -409,7 +409,7 @@
   "id": "margin_stack",
   "latest": {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-11T11:03:10.090286Z",
+   "computed_at": "2026-09-11T11:16:16.060568Z",
    "dims": {
     "layer_id": "compute_semis"
    },
@@ -458,7 +458,7 @@
   "id": "hhi_layers",
   "latest": {
    "as_of_date": "2026-03-31",
-   "computed_at": "2026-09-11T11:03:10.090286Z",
+   "computed_at": "2026-09-11T11:16:16.060568Z",
    "dims": {
     "layer_id": "compute_cloud"
    },
@@ -495,7 +495,7 @@
   "id": "recoupment",
   "latest": {
    "as_of_date": "2026-08-31",
-   "computed_at": "2026-09-11T11:03:10.090286Z",
+   "computed_at": "2026-09-11T11:16:16.060568Z",
    "dims": {
     "entity": "z_ai_zhipu"
    },
@@ -529,7 +529,7 @@
   "id": "concordance",
   "latest": {
    "as_of_date": "2026-07-31",
-   "computed_at": "2026-09-11T11:03:10.090286Z",
+   "computed_at": "2026-09-11T11:16:16.060568Z",
    "dims": {},
    "formula_version": "1",
    "id": "ed08c58063fcdeb8",
@@ -565,7 +565,7 @@
   "id": "capex_ratio",
   "latest": {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-11T11:03:10.090286Z",
+   "computed_at": "2026-09-11T11:16:16.060568Z",
    "dims": {},
    "formula_version": "1",
    "id": "7867e6c6b3b7fe32",
@@ -625,7 +625,7 @@
   "id": "circular",
   "latest": {
    "as_of_date": "2026-08-17",
-   "computed_at": "2026-09-11T11:03:10.090286Z",
+   "computed_at": "2026-09-11T11:16:16.060568Z",
    "dims": {},
    "formula_version": "2",
    "id": "f6d2b4cee03aed99",
@@ -681,7 +681,7 @@
   "id": "price_capability",
   "latest": {
    "as_of_date": "2026-09-10",
-   "computed_at": "2026-09-11T11:03:10.090286Z",
+   "computed_at": "2026-09-11T11:16:16.060568Z",
    "dims": {},
    "formula_version": "3",
    "id": "aadf76ab192df530",
@@ -708,12 +708,68 @@
   "sql": "WITH h AS (\n  SELECT subject, arg_max(value_numeric, as_of_date) AS minutes, arg_max(id, as_of_date) AS hid\n  FROM observations WHERE series_key LIKE 'metr.%.horizon_50.pt' AND NOT coalesce(disputed, false) GROUP BY subject),\np AS (SELECT subject, as_of_date, value_numeric AS usd, id FROM observations WHERE series_key LIKE 'openrouter.%.price_prompt_usd_per_mtok.pt' AND value_numeric > 0),\nd AS (SELECT DISTINCT as_of_date FROM p),\ncp AS (SELECT d.as_of_date, p.subject, arg_max(p.usd, p.as_of_date) AS usd, arg_max(p.id, p.as_of_date) AS pid\n       FROM d JOIN p ON p.as_of_date <= d.as_of_date GROUP BY 1, 2)\n, r AS (SELECT cp.as_of_date, min(cp.usd / (h.minutes / 60)) AS value, arg_min([cp.pid, h.hid], cp.usd / (h.minutes / 60)) AS obs_ids\nFROM cp JOIN h USING (subject) GROUP BY cp.as_of_date)\nSELECT * FROM r QUALIFY value IS DISTINCT FROM lag(value) OVER (ORDER BY as_of_date)  -- change points only\n"
  },
  {
+  "caveats": "Run-rates are press-reported annualised months (tier 5); rounds are mostly Epoch (tier 5). Other sub-layers have no revenue series outside the labs, so this is measured for frontier labs only.",
+  "description": "Frontier labs' primary-round dollars over the trailing four calendar quarters divided by their summed latest revenue run-rates at quarter end (v2 \u00a79 venture capital intensity, frontier-lab sub-layer). Only labs with a run-rate on record in the twelve months to quarter end count, on both sides.",
+  "id": "venture_intensity",
+  "latest": {
+   "as_of_date": "2026-06-30",
+   "computed_at": "2026-09-11T11:16:16.060568Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "2c1a393103691d88",
+   "input_observation_ids": [
+    "08c5c905416f3a32",
+    "143dcf3ea59eb522",
+    "15d383db12c87c1e",
+    "167d57240d3a4367",
+    "280059c0644be9c9",
+    "2b656fc8a505803f",
+    "3cedc058b3e5c5d9",
+    "4910df35443940aa",
+    "6f8dbf39287bb9e2",
+    "71a791f12fad7823",
+    "938312d662ee43fd",
+    "9fbab158355685d5",
+    "cd78df2387fbc6f5",
+    "db8429b333d8fc75"
+   ],
+   "metric": "venture_capital_intensity",
+   "obs_ids": [
+    "08c5c905416f3a32",
+    "143dcf3ea59eb522",
+    "15d383db12c87c1e",
+    "167d57240d3a4367",
+    "280059c0644be9c9",
+    "2b656fc8a505803f",
+    "3cedc058b3e5c5d9",
+    "4910df35443940aa",
+    "6f8dbf39287bb9e2",
+    "71a791f12fad7823",
+    "938312d662ee43fd",
+    "9fbab158355685d5",
+    "cd78df2387fbc6f5",
+    "db8429b333d8fc75"
+   ],
+   "value": 4.31324848166455,
+   "value_high": null,
+   "value_low": null
+  },
+  "metric": "venture_capital_intensity",
+  "name": "Venture capital intensity, frontier labs",
+  "question": "How many dollars of new capital do the frontier labs raise per dollar of run-rate?",
+  "related_latest": {},
+  "shape": {
+   "unit": "ratio"
+  },
+  "sql": "WITH f AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'formd.%.amount_sold_usd.pt' AND entity_id IS NOT NULL),\ne AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'epoch.%.round_equity_usd.pt' AND entity_id IS NOT NULL),\nrounds AS (SELECT * FROM f UNION ALL SELECT * FROM e WHERE NOT EXISTS (SELECT 1 FROM f WHERE f.entity_id = e.entity_id AND date_trunc('quarter', f.as_of_date) = date_trunc('quarter', e.as_of_date))),\nlabs AS (SELECT entity_id FROM entity_membership WHERE is_primary AND sublayer_id = 'frontier_labs'),\nrr AS (SELECT entity_id, as_of_date, value_numeric AS rev, id FROM observations WHERE series_key LIKE 'epoch.%.revenue_run_rate_usd.pt' AND entity_id IN (SELECT entity_id FROM labs)),\nqs AS (SELECT DISTINCT date_trunc('quarter', as_of_date) AS cq FROM rounds WHERE as_of_date >= DATE '2023-01-01'),\nrev AS (SELECT cq, entity_id, rev, id FROM (\n          SELECT qs.cq, rr.*, row_number() OVER (PARTITION BY qs.cq, rr.entity_id ORDER BY rr.as_of_date DESC) AS rn\n          FROM qs JOIN rr ON rr.as_of_date < qs.cq + INTERVAL 3 MONTH AND rr.as_of_date >= qs.cq + INTERVAL 3 MONTH - INTERVAL 12 MONTH)\n        WHERE rn = 1),\nraised AS (SELECT qs.cq, r.entity_id, r.v, r.id FROM qs JOIN rounds r ON date_trunc('quarter', r.as_of_date) > qs.cq - INTERVAL 12 MONTH AND date_trunc('quarter', r.as_of_date) <= qs.cq\n           WHERE r.entity_id IN (SELECT entity_id FROM rev WHERE rev.cq = qs.cq))\nSELECT (rv.cq + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE AS as_of_date,\n       (SELECT sum(v) FROM raised WHERE raised.cq = rv.cq) / sum(rv.rev) AS value,\n       list_concat((SELECT list(id ORDER BY id) FROM raised WHERE raised.cq = rv.cq), list(rv.id ORDER BY rv.id)) AS obs_ids\nFROM rev rv GROUP BY rv.cq HAVING sum(rv.rev) > 0 AND (SELECT sum(v) FROM raised WHERE raised.cq = rv.cq) > 0\n"
+ },
+ {
   "caveats": "Denominator is the seed list, not the market; frontier rounds are mostly Epoch (tier 5) because the labs raise through vehicles that do not file Form D.",
   "description": "Frontier labs' share of all tracked primary-round dollars over the trailing four calendar quarters (P1 \u00a77",
   "id": "venture_frontier",
   "latest": {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-11T11:03:10.090286Z",
+   "computed_at": "2026-09-11T11:16:16.060568Z",
    "dims": {},
    "formula_version": "1",
    "id": "39cc8e427e2c5638",
@@ -811,7 +867,7 @@
   "id": "aa_frontier",
   "latest": {
    "as_of_date": "2026-09-01",
-   "computed_at": "2026-09-11T11:03:10.090286Z",
+   "computed_at": "2026-09-11T11:16:16.060568Z",
    "dims": {},
    "formula_version": "2",
    "id": "9ac351a81f2d26a0",
@@ -841,7 +897,7 @@
   "id": "price_capability_aa",
   "latest": {
    "as_of_date": "2026-09-11",
-   "computed_at": "2026-09-11T11:03:10.090286Z",
+   "computed_at": "2026-09-11T11:16:16.060568Z",
    "dims": {},
    "formula_version": "2",
    "id": "f93befc11a81de1e",
@@ -867,7 +923,7 @@
   "related_latest": {
    "aa_frontier_price_per_point": {
     "as_of_date": "2026-09-11",
-    "computed_at": "2026-09-11T11:03:10.090286Z",
+    "computed_at": "2026-09-11T11:16:16.060568Z",
     "dims": {},
     "formula_version": "2",
     "id": "34a2009ea85bb400",
@@ -896,7 +952,7 @@
   "id": "venture_top3",
   "latest": {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-11T11:03:10.090286Z",
+   "computed_at": "2026-09-11T11:16:16.060568Z",
    "dims": {},
    "formula_version": "1",
    "id": "f1229f10c45623f1",

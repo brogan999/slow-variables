@@ -53,3 +53,14 @@ questions:
     lens: capture
     question: "What is Anthropic's gross margin?"
     expect: {refuse: true}
+  # Informational (not part of the v2 §12 bar): each exercises one v2 §6.1 tool and must call it.
+  - id: g14
+    lens: diffusion
+    informational: true
+    question: "What have lab statements and the watched feeds in the tracker said about AI speeding up AI research itself?"
+    expect: {tool: search_evidence, series: ["watch.*", "anthropic_system_card.*", "metr_blog.*", "evidence.*"]}
+  - id: g15
+    lens: capture
+    informational: true
+    question: "Which layer of the stack is CoreWeave in, and what is its latest quarterly revenue?"
+    expect: {tool: entity, series: ["sec.crwv.revenue.q"]}

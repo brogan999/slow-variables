@@ -119,3 +119,116 @@ def test_sql_tool_cannot_read_files_the_network_or_raw_rows():
             s.con.execute(q)
     Tools(s)  # a second Tools on a locked store must not raise
     assert t.sql("SELECT count(*) AS n FROM observations")["rows"][0][0] > 0
+
+
+class ScriptClient:
+    """Replays scripted turns: a dict is a tool call, a string is the final text."""
+
+    def __init__(self, turns):
+        self.turns = list(turns)
+
+    def __getattr__(self, name):
+        if name != "messages":
+            raise AttributeError(name)
+        return self
+
+    def create(self, **kw):
+        from types import SimpleNamespace as NS
+
+        t = self.turns.pop(0) if len(self.turns) > 1 else self.turns[0]
+        usage = NS(input_tokens=100, output_tokens=10, cache_creation_input_tokens=1000, cache_read_input_tokens=0)
+        if isinstance(t, dict):
+            return NS(stop_reason="tool_use", usage=usage, content=[NS(type="tool_use", id="t", **t)])
+        return NS(stop_reason="end_turn", usage=usage, content=[NS(type="text", text=t)])
+
+
+def test_the_five_spec_tools_answer_and_their_ids_verify():
+    from ai_tracker.query.citecheck import check
+
+    s = st.Store()
+    s.derived = run_metrics(s.con)
+    t = Tools(s)
+    hits = t.search_evidence("developer speed randomized trial", k=20)
+    assert any(h["cite"] and h["cite"].startswith("obs:") for h in hits)
+    assert all("BOTTLENECK_PROMPT" not in h.get("doc", "") for h in hits)
+    assert all(h["cite"] is None for h in hits if "doc" in h)  # notes are context, never citable
+    f = t.fit_trend("metr.*.horizon_50.pt", "2024-01-01")
+    assert f["kind"] == "doubling_days" and f["n_points"] >= 3
+    assert check(f"It doubles every {f['value_days']:.0f} days [derived:{f['id']}].", t.records([("derived", f["id"])])).ok
+    assert "error" in t.fit_trend("no.such.series")
+    c = t.concordance()
+    assert len(c["trackers"]) == 4 and all(x["fast_band"] for x in c["trackers"]) and c["concordance"]["id"]
+    assert t.crosswalk(layer_id="model") and all(r["layer_id"] == "model" for r in t.crosswalk(layer_id="model"))
+    assert t.entity("CoreWeave")["id"] == "crwv" and "sec.crwv.revenue.q" in t.entity("crwv")["series"]
+    assert "crwv" in t.entity("Corewave")["close_matches"]
+    assert t.sql("SELECT created_at FROM status_events LIMIT 1")["rows"]  # stored as UTC, fetchable without pytz
+
+
+def test_unknown_tools_and_bad_arguments_come_back_as_errors_not_crashes():
+    s = st.Store()
+    client = ScriptClient([{"name": "drop_tables", "input": {}}, {"name": "entity", "input": {"nom": "x"}}, "No record."])
+    res = ask(s, "q", Tools(s), client)
+    assert res["status"] == "ok" and [c["tool"] for c in res["tool_calls"]] == ["drop_tables", "entity"]
+
+
+def test_a_blocked_answer_gets_one_fresh_attempt_and_the_audit_row_holds_no_text():
+    from ai_tracker.query.ask import AUDIT_KEYS
+
+    s = st.Store()
+    t = Tools(s)
+    oid = s.con.execute("SELECT id, value_numeric FROM observations WHERE unit = 'USD' LIMIT 1").fetchone()
+    bad = "Revenue was $123,456,789 [obs:" + oid[0] + "]."
+    good = "No figure is quoted here [obs:" + oid[0] + "]."
+    res = ask(s, "secret question text", t, ScriptClient([bad, bad, good]))
+    assert res["status"] == "retried" and res["answer"] == good
+    assert set(res["audit"]) == set(AUDIT_KEYS) and "secret" not in json.dumps(res["audit"])
+    assert res["usage"]["usd"] > (330 * 2 + 30 * 10) / 1e6  # cache writes are billed, at 1.25x input
+
+
+def test_golden_survives_a_hallucinated_id_and_flags_informational_questions():
+    from ai_tracker.query.ask import golden
+
+    s = st.Store()
+    res = golden(s, Tools(s), ScriptClient(["No record [obs:deadbeef00000000]."]))
+    assert {r["id"] for r in res if r["informational"]} == {"g14", "g15"}
+    assert not any(r["ok"] for r in res if not r["id"] == "g13")
+
+
+def test_audit_pull_appends_only_new_rows_and_only_the_audit_keys(tmp_path, monkeypatch):
+    from types import SimpleNamespace as NS
+
+    import httpx
+
+    from ai_tracker import cli
+
+    monkeypatch.setattr(st, "DATA", tmp_path)
+    monkeypatch.setenv("QUERY_TOKEN", "t")
+    (tmp_path / "query_log.jsonl").write_text(json.dumps({"time": "2026-09-10T00:00:00+00:00"}) + "\n")
+    rows = [
+        {"time": "2026-09-09T00:00:00+00:00", "status": "ok"},
+        {"time": "2026-09-11T00:00:00+00:00", "status": "ok", "usd": 0.01, "tools": 2, "cites": ["obs:a"],
+         "model": "m", "prompt_version": "2", "question": "must not land"},
+    ]
+    monkeypatch.setattr(httpx, "get", lambda *a, **k: NS(raise_for_status=lambda: None, json=lambda: {"rows": rows}))
+    assert cli.cmd_audit_pull(NS()) == 0
+    lines = (tmp_path / "query_log.jsonl").read_text().splitlines()
+    assert len(lines) == 2 and "must not land" not in lines[1] and json.loads(lines[1])["status"] == "ok"
+    monkeypatch.setattr(httpx, "get", lambda *a, **k: (_ for _ in ()).throw(httpx.ConnectError("down")))
+    assert cli.cmd_audit_pull(NS()) == 0  # an unreachable service never fails the nightly
+
+
+def test_citecheck_ignores_cik_digits():
+    from ai_tracker.query.citecheck import Record, check
+
+    r = check("Applied Digital (CIK 0001144879) filed $5M [obs:a].", {"a": Record("a", "obs", [5e6], "USD")})
+    assert r.ok and r.numbers == ["$5M"]
+
+
+def test_citecheck_reads_a_written_date_as_a_date():
+    from ai_tracker.query.citecheck import Record, check
+
+    rec = {"a": Record("a", "obs", [902.9e9], "USD")}
+    for text in ("It reached $902.9B as of Aug 17, 2026 [obs:a].", "It reached $902.9B on 17 August 2026 [obs:a]."):
+        r = check(text, rec)
+        assert r.ok and r.numbers == ["$902.9B"], (text, r.failures)
+    assert not check("Revenue rose 17 percent in May [obs:a].", rec).ok  # a bare number is still a claim

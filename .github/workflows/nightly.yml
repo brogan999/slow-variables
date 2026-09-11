@@ -38,6 +38,10 @@ jobs:
         env:
           AI_TRACKER_USER_AGENT: "${{ secrets.AI_TRACKER_USER_AGENT }}"
           ARTIFICIAL_ANALYSIS_API_KEY: "${{ secrets.ARTIFICIAL_ANALYSIS_API_KEY }}"
+      # Ask's answer records (time, status, cost, lookups, cited ids, model; never text) become durable in the repo
+      - run: uv run ai-tracker audit-pull
+        continue-on-error: true
+        env: { QUERY_TOKEN: "${{ secrets.QUERY_TOKEN }}" }
       # approve inside the run so the PR is exactly what lands; the gate below decides whether it lands
       - id: build
         run: |

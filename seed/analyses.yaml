@@ -10,6 +10,7 @@ analyses:
   - {id: capex_ratio, name: "Capex to AI revenue", question: "How far ahead of AI revenue is hyperscaler capex running?", metric: capex_to_revenue_stack, shape: {unit: ratio}}
   - {id: circular, name: "Circular financing total", question: "How much circular financing has been signed?", metric: circular_commitments_total, shape: {unit: USD}}
   - {id: price_capability, name: "Price per capability", question: "What does a METR-hour of capability cost on OpenRouter?", metric: frontier_price_per_horizon_hour, shape: {unit: USD}}
+  - {id: venture_intensity, name: "Venture capital intensity, frontier labs", question: "How many dollars of new capital do the frontier labs raise per dollar of run-rate?", metric: venture_capital_intensity, shape: {unit: ratio}}
   - {id: venture_frontier, name: "Frontier share of venture dollars", question: "What share of tracked venture dollars goes to the frontier labs?", metric: frontier_share_of_venture_dollars, shape: {unit: share}}
   - {id: aa_frontier, name: "Frontier Intelligence Index", question: "What is the best Artificial Analysis Intelligence Index, and when was each record set?", metric: aa_frontier_intelligence_index, shape: {unit: index}}
   - {id: price_capability_aa, name: "Price per capability, Artificial Analysis", question: "What does a METR-hour cost at Artificial Analysis blended prices, and what does a near-frontier index point cost?", metric: aa_price_per_horizon_hour, related: [aa_frontier_price_per_point], shape: {unit: USD}}

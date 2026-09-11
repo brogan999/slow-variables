@@ -76,7 +76,9 @@ class Feeds(Connector):
 
     def extract(self, items: list[RawItem]) -> list[Observation]:
         out: list[Observation] = []
-        by_url = {s.url: s for s in self.sources}  # a skipped feed must not shift the next feed's posts onto it
+        by_url = {
+            s.url: s for s in self.sources
+        }  # a skipped feed must not shift the next feed's posts onto it
         for item in items:
             src = by_url[item.url]
             if (

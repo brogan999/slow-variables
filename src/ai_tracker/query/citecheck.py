@@ -12,6 +12,11 @@ import re
 from dataclasses import dataclass, field
 
 URL = re.compile(r"https?://\S+")  # links are provenance, not claims; arXiv ids and paths are not numbers
+CIK = re.compile(r"\bCIK\s*#?:?\s*\d+", re.I)  # an SEC filer id is a name, not a claim
+_MON = r"(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?"
+DATE = re.compile(  # "Aug 17, 2026" and "17 August 2026": the day is part of a date, not a claim
+    rf"\b(?:\d{{1,2}}(?:st|nd|rd|th)?\s+{_MON}|{_MON}\s+\d{{1,2}}(?:st|nd|rd|th)?)(?:,?\s+(?:19|20)\d\d)?\b"
+)
 CITE = re.compile(r"\[(obs|derived|ind|event):([A-Za-z0-9_.\-]+)\]")
 NUM = re.compile(
     r"(?<![\w.\-#])(?P<sign>[-−–])?(?P<cur>\$|€|£)?(?P<num>\d{1,3}(?:,\d{3})+|\d+(?:\.\d+)?)(?P<suffix>\s?(?:%|×|x\b|[kKmMbBtT](?!\w)|h\b|hours?\b|min\b|minutes?\b|days?\b|pp\b|points?\b|bn\b|trillion|billion|million))?(?![A-Za-z0-9]|-[A-Za-z0-9])",
@@ -98,7 +103,7 @@ def check(text: str, records: dict[str, Record]) -> Result:
         cited = [records.get(i) for _, i in CITE.findall(sentence)]
         cited = [r for r in cited if r]
         for m in NUM.finditer(
-            URL.sub(" ", CITE.sub(" ", sentence))
+            DATE.sub(" ", CIK.sub(" ", URL.sub(" ", CITE.sub(" ", sentence))))
         ):  # ids inside citation tokens and URLs are not numbers
             token_text = m.group(0).strip()
             suf = (m.group("suffix") or "").strip().lower()
