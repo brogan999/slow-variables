@@ -389,7 +389,7 @@ class Membership(BaseModel):
 class Entity(BaseModel):
     id: str
     name: str
-    kind: Literal["company", "lab", "agency", "person", "university", "fund"] = "company"
+    kind: Literal["company", "lab", "agency", "person", "university", "fund", "nonprofit"] = "company"
     cik: str | None = None  # 10-digit, zero-padded
     extra_ciks: list[str] = []  # further filers that are the same entity (xAI files under two)
     crunchbase_id: str | None = None

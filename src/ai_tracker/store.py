@@ -1168,12 +1168,35 @@ class Store:
 
     def _ledger(self) -> list[dict[str, Any]]:
         """The circular / vendor-financing ledger: every `circular.*` and `markets.*` observation with parties and instrument."""
+        names = {n.lower(): e for e in self.seed.entities for n in (e.id, e.name, *e.aliases)}
+
+        def party(
+            slug: str,
+        ) -> dict[str, Any]:  # series keys name parties in lower case; resolve them to entities
+            e = names.get(slug)
+            primary = next((m for m in e.memberships if m.is_primary), None) if e else None
+            return {
+                "slug": slug,
+                "entity_id": e.id if e else None,
+                "name": e.name if e else slug,
+                "href": f"/stack/{primary.sublayer_id}#{e.id}"
+                if e and primary and primary.sublayer_id
+                else None,
+            }
+
         rows = []
         for o in self.observations("circular.*", "markets.*"):
             parts = o["series_key"].split(".")
             parties = parts[1].split("_") if parts[0] == "circular" else [parts[1]]
             instrument = parts[2].rsplit("_", 1)[0] if parts[0] == "circular" else parts[2]
-            rows.append({**_full(o), "parties": parties, "instrument": instrument, "obs_id": o["id"]})
+            rows.append(
+                {
+                    **_full(o),
+                    "parties": [party(x) for x in parties],
+                    "instrument": instrument,
+                    "obs_id": o["id"],
+                }
+            )
         return sorted(rows, key=lambda r: r["as_of_date"], reverse=True)
 
     def _withdrawn(self) -> dict[str, list[dict[str, Any]]]:

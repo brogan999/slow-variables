@@ -285,6 +285,12 @@ def _check(s: st.Store) -> tuple[list[str], list[str]]:
         missing = [i for i in e.evidence_ids if i not in known]
         if missing:
             errors.append(f"{e.target_id}: status event {e.id} cites unknown observations {missing}")
+    for r in s._ledger():  # entity writes go through seed/entities.yaml: every ledger party must resolve
+        for p in r["parties"]:
+            if not p["entity_id"]:
+                errors.append(
+                    f"ledger {r['series_key']}: party '{p['slug']}' is not an entity id, name or alias"
+                )
     for p in st.read_jsonl(st.DATA / "proposed_status_events.jsonl"):
         age = (datetime.now(timezone.utc) - datetime.fromisoformat(p["created_at"])).days
         if not p.get("reason", "").strip() and age > 14:

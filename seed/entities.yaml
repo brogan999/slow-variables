@@ -66,7 +66,7 @@ entities:
   - {aliases: [World Labs], id: world_labs, memberships: [{layer_id: model, sublayer_id: neolabs}], name: World Labs, verified: false}
   - {aliases: [Poolside], id: poolside, memberships: [{layer_id: model, sublayer_id: neolabs}], name: Poolside, verified: false}
   - {aliases: [Magic], id: magic, memberships: [{layer_id: model, sublayer_id: neolabs}], name: Magic, cik: "0001959571", verified: true}
-  - {aliases: [Inception Labs], id: inception_labs, memberships: [{layer_id: model, sublayer_id: neolabs}], name: Inception Labs, verified: false}
+  - {aliases: [Inception Labs, Inception], id: inception_labs, kind: lab, hq: 'Palo Alto, CA', notes: 'Merged 11 Sep 2026 with the neolab directory row (cleverhack.com, Joy Larkin).', memberships: [{layer_id: model, sublayer_id: neolabs}], name: Inception Labs, verified: false}
   - {aliases: [Liquid AI], id: liquid_ai, memberships: [{layer_id: model, sublayer_id: neolabs}], name: Liquid AI, cik: "0002004369", verified: true}
   - {aliases: [Sakana AI], id: sakana_ai, memberships: [{layer_id: model, sublayer_id: neolabs}], name: Sakana AI, verified: false}
   - {aliases: [Black Forest Labs], id: black_forest_labs, memberships: [{layer_id: model, sublayer_id: neolabs}], name: Black Forest Labs, cik: "0002109710", verified: true}
@@ -122,7 +122,7 @@ entities:
   - {aliases: [Adaptive ML], id: adaptive_ml, memberships: [{layer_id: training_input, sublayer_id: post_training}], name: Adaptive ML, verified: false}
   - {aliases: [OpenPipe], id: openpipe, memberships: [{layer_id: training_input, sublayer_id: post_training}], name: OpenPipe, verified: false}
   - {aliases: [Predibase], id: predibase, memberships: [{layer_id: training_input, sublayer_id: post_training}], name: Predibase, verified: false}
-  - {aliases: [Arcee], id: arcee, memberships: [{layer_id: training_input, sublayer_id: post_training}], name: Arcee, verified: false}
+  - {aliases: [Arcee, Arcee AI], id: arcee, hq: 'San Francisco, CA', notes: 'Merged 11 Sep 2026 with the neolab directory row (cleverhack.com, Joy Larkin).', memberships: [{layer_id: training_input, sublayer_id: post_training}, {is_primary: false, layer_id: model, sublayer_id: neolabs}], name: Arcee AI, verified: false}
   - {aliases: [Unsloth], id: unsloth, memberships: [{layer_id: training_input, sublayer_id: post_training}], name: Unsloth, verified: false}
   - {aliases: [Gretel], id: gretel, memberships: [{layer_id: training_input, sublayer_id: synthetic_data}], name: Gretel, verified: false}
   - {aliases: [Datology], id: datology, memberships: [{layer_id: training_input, sublayer_id: synthetic_data}], name: Datology, verified: false}
@@ -135,7 +135,7 @@ entities:
   - {aliases: [TollBit], id: tollbit, memberships: [{layer_id: training_input, sublayer_id: data_licensing}], name: TollBit, verified: false}
   - {aliases: [Created by Humans], id: created_by_humans, memberships: [{layer_id: training_input, sublayer_id: data_licensing}], name: Created by Humans, verified: false}
   - {aliases: [Vermillio], id: vermillio, memberships: [{layer_id: training_input, sublayer_id: data_licensing}], name: Vermillio, verified: false}
-  - {aliases: [Human Native], id: human_native, memberships: [{layer_id: training_input, sublayer_id: data_licensing}], name: Human Native, verified: false}
+  - {aliases: [Human Native], id: human_native, memberships: [{layer_id: training_input, sublayer_id: data_licensing}], name: Human Native, notes: 'Acquired by Cloudflare, 15 Jan 2026 (CNBC); the marketplace continues inside Cloudflare.', verified: false}
   - {aliases: [Defined.ai], id: defined_ai, memberships: [{layer_id: training_input, sublayer_id: data_licensing}], name: Defined.ai, verified: false}
   - {aliases: [Datarade], id: datarade, memberships: [{layer_id: training_input, sublayer_id: data_licensing}], name: Datarade, verified: false}
   - {aliases: [Braintrust], id: braintrust, memberships: [{layer_id: training_input, sublayer_id: evals}], name: Braintrust, verified: false}
@@ -144,12 +144,12 @@ entities:
   - {aliases: [Galileo], id: galileo, memberships: [{layer_id: training_input, sublayer_id: evals}], name: Galileo, verified: false}
   - {aliases: [Patronus], id: patronus, memberships: [{layer_id: training_input, sublayer_id: evals}], name: Patronus, cik: "0002026190", verified: true}
   - {aliases: [Vals AI], id: vals_ai, memberships: [{layer_id: training_input, sublayer_id: evals}], name: Vals AI, verified: false}
-  - {aliases: [Weights & Biases, W&B], id: weights_and_biases, memberships: [{layer_id: training_input, sublayer_id: evals}], name: Weights & Biases, notes: Acquired by CoreWeave (P1 §4.2)., cik: "0001987275", verified: true}
+  - {aliases: [Weights & Biases, W&B], id: weights_and_biases, memberships: [{layer_id: training_input, sublayer_id: evals}, {from_date: '2025-05-05', is_primary: false, layer_id: compute_physical, sublayer_id: hyperscalers_neoclouds}], name: Weights & Biases, notes: 'Acquired by CoreWeave, completed 5 May 2025 (CoreWeave release); developer tools continue.', cik: "0001987275", verified: true}
   - {aliases: [Humanloop], id: humanloop, memberships: [{layer_id: training_input, sublayer_id: evals}], name: Humanloop, verified: false}
   - {aliases: [Confident AI], id: confident_ai, memberships: [{layer_id: training_input, sublayer_id: evals}], name: Confident AI, verified: false}
   - {aliases: [Atla], id: atla, memberships: [{layer_id: training_input, sublayer_id: evals}], name: Atla, verified: false}
   - {aliases: [LMArena], id: lmarena, memberships: [{layer_id: training_input, sublayer_id: evals}], name: LMArena, verified: false}
-  - {aliases: [Baseten, Baseten Labs], cik: 0001865393, id: baseten, memberships: [{layer_id: serving_orchestration, sublayer_id: inference_serving}], name: Baseten, verified: true}
+  - {aliases: [Baseten, Baseten Labs], cik: 0001865393, id: baseten, memberships: [{layer_id: serving_orchestration, sublayer_id: inference_serving}, {from_date: '2026-05-27', is_primary: false, layer_id: training_input, sublayer_id: post_training}], name: Baseten, notes: 'Serving first, then continual-learning infrastructure (v2 Appendix D): Baseten, Powering Inference for the Continual Learning Era, 27 May 2026.', verified: true}
   - {aliases: [Fireworks, Fireworks AI], id: fireworks, memberships: [{layer_id: serving_orchestration, sublayer_id: inference_serving}], name: Fireworks, verified: false}
   - {aliases: [Together, Together AI], id: together, memberships: [{layer_id: serving_orchestration, sublayer_id: inference_serving}], name: Together, verified: false}
   - {aliases: [Modal], id: modal, memberships: [{layer_id: serving_orchestration, sublayer_id: inference_serving}], name: Modal, cik: "0002088132", verified: true}
@@ -232,7 +232,6 @@ entities:
   - {id: ami_labs, name: Advanced Machine Intelligence / AMI Labs, kind: lab, aliases: [Advanced Machine Intelligence, AMI Labs], hq: Paris/New York/Montreal/Singapore, notes: 'Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026', verified: false, memberships: [{layer_id: model, sublayer_id: neolabs}]}
   - {id: aleph_alpha, name: Aleph Alpha, kind: lab, aliases: [Aleph Alpha], hq: 'Heidelberg, Germany', notes: 'Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026', verified: false, memberships: [{layer_id: model, sublayer_id: neolabs}]}
   - {id: antim_labs, name: Antim Labs, kind: lab, aliases: [Antim Labs], hq: 'New York, NY', notes: 'Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026', verified: false, memberships: [{layer_id: model, sublayer_id: neolabs}]}
-  - {id: arcee_ai, name: Arcee AI, kind: lab, aliases: [Arcee AI], hq: 'San Francisco, CA', notes: 'Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026', verified: false, memberships: [{layer_id: model, sublayer_id: neolabs}]}
   - {id: core_automation, name: Core Automation, kind: lab, aliases: [Core Automation], hq: 'San Francisco, CA', notes: 'Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026', verified: false, memberships: [{layer_id: model, sublayer_id: neolabs}]}
   - {id: discovery_loop, name: Discovery Loop, kind: lab, aliases: [Discovery Loop], hq: 'Palo Alto, CA', notes: 'Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026', verified: false, memberships: [{layer_id: model, sublayer_id: neolabs}]}
   - {id: dolphin_ai, name: Dolphin AI, kind: lab, aliases: [Dolphin AI], hq: Decentralized, notes: 'Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026', verified: false, memberships: [{layer_id: model, sublayer_id: neolabs}]}
@@ -241,7 +240,6 @@ entities:
   - {id: grafton_sciences, name: Grafton Sciences, kind: lab, aliases: [Grafton Sciences], hq: 'San Francisco & Redwood City, CA', notes: 'Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026', verified: false, memberships: [{layer_id: model, sublayer_id: neolabs}]}
   - {id: hark, name: Hark, kind: lab, aliases: [Hark], hq: 'San Jose, CA', notes: 'Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026', cik: '0002117821', verified: true, memberships: [{layer_id: model, sublayer_id: neolabs}]}
   - {id: helical, name: Helical, kind: lab, aliases: [Helical], hq: 'London, UK/Boston, MA/Luxembourg', notes: 'Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026', verified: false, memberships: [{layer_id: model, sublayer_id: neolabs}]}
-  - {id: inception, name: Inception, kind: lab, aliases: [Inception], hq: 'Palo Alto, CA', notes: 'Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026', verified: false, memberships: [{layer_id: model, sublayer_id: neolabs}]}
   - {id: ineffable_intelligence, name: Ineffable Intelligence, kind: lab, aliases: [Ineffable Intelligence], hq: 'London, UK', notes: 'Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026', verified: false, memberships: [{layer_id: model, sublayer_id: neolabs}]}
   - {id: isara_labs, name: Isara Labs, kind: lab, aliases: [Isara Labs], hq: 'Palo Alto, CA', notes: 'Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026', verified: false, memberships: [{layer_id: model, sublayer_id: neolabs}]}
   - {id: isomorphic_labs, name: Isomorphic Labs, kind: lab, aliases: [Isomorphic Labs], hq: 'London, UK and Lausanne, Switzerland', notes: 'Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026', verified: false, memberships: [{layer_id: model, sublayer_id: neolabs}]}
@@ -263,3 +261,8 @@ entities:
   - {id: flapping_airplanes, name: Flapping Airplanes, kind: lab, aliases: [Flapping Airplanes], hq: 'San Francisco, CA', notes: 'Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026', cik: '0002109371', verified: true, memberships: [{layer_id: model, sublayer_id: neolabs}]}
   - {id: general_intuition, name: General Intuition, kind: lab, aliases: [General Intuition], hq: 'New York, NY & Geneva, Switzerland', notes: 'Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026', verified: false, memberships: [{layer_id: model, sublayer_id: neolabs}]}
   - {id: sarvam, name: Sarvam, kind: lab, aliases: [Sarvam], hq: 'Bengaluru, Karnataka, India', notes: 'Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026', verified: false, memberships: [{layer_id: model, sublayer_id: neolabs}]}
+  - {id: openai_deployment_co, name: The OpenAI Deployment Company, kind: company, aliases: [OpenAI Deployment Company, The Deployment Company], notes: "OpenAI's enterprise deployment venture (TechCrunch, 4 May 2026; Advent International release, 11 May 2026).", verified: true, memberships: [{layer_id: deployment_application, sublayer_id: deployment_services}]}
+  - {id: anthropic_services_venture, name: Anthropic enterprise services venture, kind: company, aliases: [Anthropic enterprise services venture], notes: "Anthropic's joint venture with Blackstone, Goldman Sachs and others serving private-equity-owned companies (CNBC and TechCrunch, 4 May 2026). Neither page names it.", verified: true, memberships: [{layer_id: deployment_application, sublayer_id: deployment_services}]}
+  - {id: vercel, name: Vercel, kind: company, cik: "0001893137", aliases: [Vercel, v0], notes: "Series F (Vercel blog); Form D filer (EDGAR, CIK 0001893137).", verified: true, memberships: [{layer_id: deployment_application, sublayer_id: coding_agents}]}
+  - {id: rsl_collective, name: RSL Collective, kind: nonprofit, aliases: [RSL Collective, Really Simple Licensing], notes: "Collective rights organisation behind the RSL licensing standard (rslstandard.org; Digiday).", verified: true, memberships: [{layer_id: training_input, sublayer_id: data_licensing}]}
+  - {id: general_catalyst, name: General Catalyst, kind: fund, aliases: [General Catalyst], notes: "Earmarked part of its 2024 fund for a creation strategy that builds and rolls up companies (TechCrunch, 24 Oct 2024); second source pending.", verified: false, memberships: [{layer_id: deployment_application, sublayer_id: ai_rollups}]}

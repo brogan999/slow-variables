@@ -49,3 +49,22 @@ def test_no_tracked_file_carries_private_chat_links_or_the_delisted_firm():
         if chat in text or firm in text or garble in text:
             hits.append(f)
     assert not hits, hits
+
+
+def test_entity_ids_and_aliases_are_unique_and_memberships_point_at_real_sublayers():
+    import re
+
+    from ai_tracker import store as st
+
+    seed = st.Seed.load()
+    ids = [e.id for e in seed.entities]
+    assert len(ids) == len(set(ids)), "duplicate entity id"
+    owner: dict[str, str] = {}
+    for e in seed.entities:
+        for n in {e.id, e.name, *e.aliases}:
+            k = re.sub(r"[^a-z0-9]", "", n.lower())  # "Arcee AI" and "arcee_ai" are one name
+            assert owner.setdefault(k, e.id) == e.id, f"{n!r} names both {owner[k]} and {e.id}"
+    subs = {(x.layer_id, x.id) for x in seed.sublayers}
+    for e in seed.entities:
+        for m in e.memberships:
+            assert m.sublayer_id is None or (m.layer_id, m.sublayer_id) in subs, (e.id, m)

@@ -40,7 +40,7 @@ export default async function SublayerPage({ params }: { params: Promise<{ id: s
             <thead><tr><th scope="col">Entity</th><th scope="col">Role</th><th scope="col">Since</th><th scope="col">Verified</th><th scope="col">Latest observation</th></tr></thead>
             <tbody>
               {s.entities.map((e) => (
-                <tr key={e.id}>
+                <tr key={e.id} id={e.id} className="target:bg-fast/10">
                   <td><span className="font-medium">{e.name}</span>{e.cik ? <span className="ml-2 text-xs text-muted font-mono">CIK {e.cik}</span> : null}{e.notes ? <div className="text-xs text-ink-2">{e.notes}</div> : null}</td>
                   <td className="text-ink-2">{e.is_primary ? "primary" : "secondary"}</td>
                   <td className="tabular-nums text-ink-2">{e.from_date ?? "—"}{e.to_date ? ` → ${e.to_date}` : ""}</td>
