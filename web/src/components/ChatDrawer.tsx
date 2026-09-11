@@ -13,7 +13,7 @@ type State = { kind: "idle" } | { kind: "busy" } | { kind: "answer"; a: Answer }
 
 const OFFLINE = "The query service is offline right now. Everything on the page still links to its observations.";
 
-// Native <dialog>; the question is scoped by the page it was asked from so the model starts in the right lens.
+// Ask sheet: the question is scoped by the page it was asked from so the model starts in the right lens.
 export function ChatDrawer() {
   const path = usePathname();
   const [q, setQ] = useState("");
@@ -37,7 +37,7 @@ export function ChatDrawer() {
   return (
     <Sheet>
       <SheetTrigger render={<Button variant="outline" size="sm" className="rounded-full" />}>Ask</SheetTrigger>
-      <SheetContent side="right" aria-describedby="ask-desc" className="bg-surface overflow-y-auto sm:max-w-md">
+      <SheetContent side="right" aria-describedby="ask-desc" className="bg-surface overflow-y-auto p-5 data-[side=right]:sm:max-w-md">
         <SheetHeader className="p-0">
           <SheetTitle className="display text-2xl">Ask the data</SheetTitle>
           <SheetDescription id="ask-desc" className="text-muted">Answers come from the same store as the site; every number is checked against the record it cites.</SheetDescription>

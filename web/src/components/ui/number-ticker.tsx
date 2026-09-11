@@ -42,6 +42,7 @@ export function NumberTicker({
         return
       }
       motionValue.jump(direction === "down" ? value : startValue)
+      springValue.jump(direction === "down" ? value : startValue)
       timer = setTimeout(() => {
         motionValue.set(direction === "down" ? startValue : value)
       }, delay * 1000)
@@ -52,7 +53,7 @@ export function NumberTicker({
         clearTimeout(timer)
       }
     }
-  }, [motionValue, isInView, delay, value, direction, startValue, reduce])
+  }, [motionValue, springValue, isInView, delay, value, direction, startValue, reduce])
 
   useEffect(
     () =>

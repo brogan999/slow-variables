@@ -43,17 +43,13 @@ body { background: var(--background); color: var(--ink); font-family: var(--font
 @utility ring-hair { box-shadow: 0 0 0 1px var(--hairline); }
 @utility panel { border-radius: var(--radius-md); background: var(--surface); box-shadow: 0 0 0 1px var(--hairline); }
 @utility num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
-@utility eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+@utility eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
 @utility display { font-family: var(--font-display); font-weight: 400; }
 @utility dots {
   background-image: radial-gradient(var(--axis) 1px, transparent 1.2px);
   background-size: 20px 20px;
   mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 20%, transparent 75%);
 }
-@utility stagger {
-  & > * { animation: fade-up 0.45s ease-out both; animation-delay: calc(min(var(--i, 0), 12) * 40ms); }
-}
-@keyframes fade-up { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 @keyframes grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 .scroll-progress { position: fixed; inset-inline: 0; top: 0; height: 2px; background: var(--ink); transform-origin: 0 50%; animation: grow linear both; animation-timeline: scroll(root); z-index: 40; }
 @supports not (animation-timeline: scroll()) { .scroll-progress { display: none; } }

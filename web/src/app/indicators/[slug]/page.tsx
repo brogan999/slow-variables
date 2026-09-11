@@ -30,10 +30,12 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
   const bandOnChart = d.band_input && (d.band_input === `metric:${d.metric}` || d.band_input === d.series_keys[0]);
   const bandUnit = d.band_input?.includes("doubling") ? "days" : d.unit;
   const current = d.status_events[0];
+  const visible = SECTIONS.filter(([id]) => id !== "evidence-log" || d.evidence.length);
+  const num = (id: string) => visible.findIndex(([x]) => x === id) + 1;
   const seriesSources = Array.from(new Set(d.series.map((s) => s.series_key.split(".")[0]))).map((id) => srcs.find((s) => s.id === id)).filter(Boolean);
   return (
     <article className="flex flex-col lg:grid lg:grid-cols-[15rem_minmax(0,1fr)] lg:gap-12">
-      <div aria-label="Indicator summary" className="hidden lg:flex lg:sticky lg:top-8 self-start flex-col gap-4 lg:pt-1">
+      <section aria-label="Indicator summary" className="hidden lg:flex lg:sticky lg:top-8 self-start flex-col gap-4 lg:pt-1">
         <div className="flex flex-wrap items-center gap-2 lg:flex-col lg:items-start lg:gap-3">
           <StatusChip status={d.published ? d.status : null} size="lg" />
           <div className="flex items-center gap-3"><ConfidenceDial value={d.confidence} size={64} /><Grade grade={d.grade} /></div>
@@ -53,10 +55,10 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
         <p className="hidden lg:block eyebrow border-t border-grid pt-3">updated {d.updated_at}</p>
         <nav aria-label="On this page" className="hidden lg:block border-t border-grid pt-3">
           <ol className="flex flex-col gap-1 text-xs text-ink-2">
-            {SECTIONS.filter(([id]) => id !== "evidence-log" || d.evidence.length).map(([id, title], i) => <li key={id}><a href={`#${id}`} className="hover:text-ink"><span className="num text-muted mr-2">{String(i + 1).padStart(2, "0")}</span>{title}</a></li>)}
+            {visible.map(([id, title], i) => <li key={id}><a href={`#${id}`} className="hover:text-ink"><span className="num text-muted mr-2">{String(i + 1).padStart(2, "0")}</span>{title}</a></li>)}
           </ol>
         </nav>
-      </div>
+      </section>
       <div className="flex flex-col gap-10 min-w-0">
       <header>
         <p className="eyebrow">
@@ -75,7 +77,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
         <p className="mt-3 text-lg leading-snug text-ink-2 max-w-[60ch]">{d.definition}</p>
       </header>
 
-      <Section n={1} id="evidence" title="Evidence">
+      <Section n={num("evidence")} id="evidence" title="Evidence">
         {d.direction_rule ? <DirectionChart points={d.points} unit={d.unit} rule={d.direction_rule} /> : <BandChart series={[{ name: d.name, points: d.points }]} unit={d.unit} log={d.unit === "minutes"} bands={bandOnChart ? { normal: d.normal_band, fast: d.fast_band } : null} />}
         <div className="mt-3 grid gap-3 sm:grid-cols-2 text-sm">
           <div className="panel p-3"><div className="text-xs text-muted">Latest point</div><Num p={d.latest} unit={d.unit} obsIndex={idx} />{d.latest?.subject ? <div className="text-xs text-ink-2">{d.latest.subject}</div> : null}</div>
@@ -98,14 +100,14 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
           </tbody></table></details> : null}
       </Section>
 
-      <Section n={2} id="status" title="Status and reasoning">
+      <Section n={num("status")} id="status" title="Status and reasoning">
         <div className="flex flex-wrap items-center gap-2"><StatusChip status={d.published ? d.status : null} size="lg" />{current ? <span className="text-xs text-muted">since {current.created_at.slice(0, 10)} · {current.author}</span> : null}</div>
         {current ? <p className="mt-2">{current.reason}</p> : <p className="mt-2 text-muted">No status event yet; the evaluator proposes one once an approved observation exists.</p>}
         {d.proposed_status && d.proposed_status !== d.status ? <p className="mt-2 text-xs text-ink-2">The tracker&apos;s prior expectation was <em>{words(d.proposed_status)}</em>; the evaluator reads <em>{words(d.status)}</em>. The evaluator wins until a reviewed override.</p> : null}
         {d.override_note ? <p className="mt-2 text-xs text-ink-2">Override: {d.override_note}</p> : null}
       </Section>
 
-      <Section n={3} id="measures" title="What this measures">
+      <Section n={num("measures")} id="measures" title="What this measures">
         <p className="text-ink-2"><span className="text-muted">Why it matters.</span> {d.why_it_matters}</p>
         <dl className="mt-3 grid grid-cols-2 gap-2 text-xs md:grid-cols-4">
           <div><dt className="text-muted">Proxy types</dt><dd>{d.proxy_types.join(", ")}</dd></div>
@@ -115,7 +117,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
         </dl>
       </Section>
 
-      <Section n={4} id="track" title="How we track this">
+      <Section n={num("track")} id="track" title="How we track this">
         <ul className="text-sm flex flex-col gap-1">
           {d.series_keys.map((k) => <li key={k}><span className="text-muted">series</span> <code className="text-xs">{k}</code></li>)}
           {d.metric ? <li><span className="text-muted">derived metric</span> <code className="text-xs">{d.metric}</code> <span className="text-muted">(formula in the semantic layer)</span></li> : null}
@@ -137,28 +139,28 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
         ) : null}
       </Section>
 
-      <Section n={5} id="interpretation" title="Tracker interpretation"><p>{d.tracker_interpretation}</p></Section>
+      <Section n={num("interpretation")} id="interpretation" title="Tracker interpretation"><p>{d.tracker_interpretation}</p></Section>
 
-      {d.evidence.length ? <Section n={6} id="evidence-log" title="Evidence log"><EvidenceLog items={d.evidence} /></Section> : null}
+      {d.evidence.length ? <Section n={num("evidence-log")} id="evidence-log" title="Evidence log"><EvidenceLog items={d.evidence} /></Section> : null}
 
-      <Section n={7} id="counterevidence" title="Counterevidence">
+      <Section n={num("counterevidence")} id="counterevidence" title="Counterevidence">
         <details open className="rounded-md border border-slow/40 p-4"><summary className="cursor-pointer text-sm font-medium">What cuts against this reading</summary><p className="mt-2">{d.counterevidence || "None recorded — this indicator cannot be published until it has some."}</p></details>
       </Section>
 
-      <Section n={8} id="timeline" title="Timeline notes">
+      <Section n={num("timeline")} id="timeline" title="Timeline notes">
         <ul className="text-sm text-ink-2 flex flex-col gap-1">
           {d.points.slice(-6).reverse().map((p) => <li key={p.as_of + (p.subject ?? "")}><span className="text-muted tabular-nums">{p.as_of}</span> {p.subject ?? p.dims?.model ?? ""} · <Num p={p} unit={d.unit} obsIndex={idx} /></li>)}
         </ul>
       </Section>
 
-      <Section n={9} id="history" title="Update history"><ChangelogList events={d.status_events} obsIndex={idx} showTarget={false} /></Section>
+      <Section n={num("history")} id="history" title="Update history"><ChangelogList events={d.status_events} obsIndex={idx} showTarget={false} /></Section>
 
-      <Section n={10} id="confidence" title="Confidence">
+      <Section n={num("confidence")} id="confidence" title="Confidence">
         <p><span className="num text-3xl">{d.confidence ?? "—"}</span><span className="text-muted"> / 95 — {RUBRIC(d.confidence)}</span></p>
         <p className="mt-1 text-xs text-muted">Confidence is independent of status: 90–95 multiple strong independent sources; 70–89 good evidence, some ambiguity; 50–69 mixed or hard to operationalise; below 50 limited or vague.</p>
       </Section>
 
-      <Section n={11} id="related" title="Related">
+      <Section n={num("related")} id="related" title="Related">
         <ul className="text-sm flex flex-col gap-1">
           {d.related_indicators.map((r) => { const c = indicators.find((i) => i.id === r); return <li key={r}><Link href={`/indicators/${r}`} className="hover:underline">{c?.name ?? r}</Link> <StatusChip status={c?.published ? c.status : null} /></li>; })}
           {d.related_bottlenecks.length ? <li className="text-ink-2">Bottlenecks {d.related_bottlenecks.map((n, i) => <span key={n}>{i ? ", " : ""}<Link href={`/bottlenecks#b${n}`} className="hover:underline">#{n}</Link></span>)} <span className="text-muted">(Narayanan &amp; Kapoor&apos;s list)</span></li> : null}

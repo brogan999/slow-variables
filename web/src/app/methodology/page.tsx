@@ -52,10 +52,10 @@ export default function Methodology() {
       <H>Credits and conflicts</H>
       <p>Method after the <a href="https://ai2027-tracker.com/methodology/" className="underline decoration-grid underline-offset-4">AI 2027 tracker</a> (independent, not affiliated). Disclosure: the maintainer is involved with a private value-chain map, a firm in the deployment-services sub-layer; that sub-layer is listed and its indicators are held to the same rules.</p>
       <p className="text-sm text-ink-2">Data credits, generated from the source registry: {credits.join("; ")}.</p>
-      <H>Reuse, citation and corrections</H>
+      <H id="reuse">Reuse, citation and corrections</H>
       <p>Code is MIT licensed. The compiled dataset (observations, derived values, status events) is CC BY 4.0; each observation also carries its upstream source and licence, which govern that row. Cite the site by URL and the observation ids you rely on. Corrections: open an issue or pull request on the repository; every change to a number or a status leaves a dated event in the changelog.</p>
     </article>
   );
 }
 
-function H({ children }: { children: React.ReactNode }) { return <h2 className="display text-2xl leading-tight border-t border-grid pt-5 mt-2">{children}</h2>; }
+function H({ children, id }: { children: React.ReactNode; id?: string }) { return <h2 id={id} className="display text-2xl leading-tight border-t border-grid pt-5 mt-2 scroll-mt-6">{children}</h2>; }

@@ -14,22 +14,22 @@ export default function Image() {
   const d = diffusion();
   const published = index().indicators.filter((i) => i.published).length;
   const serif = readFileSync(path.join(process.cwd(), "src/app/fonts/InstrumentSerif-Regular.ttf"));
+  const italic = readFileSync(path.join(process.cwd(), "src/app/fonts/InstrumentSerif-Italic.ttf"));
   const verdict = d.verdict.replace(/^As of \d{4}-\d{2}-\d{2}: /, "");
   return new ImageResponse(
     (
       <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between", padding: 64, background: TOKENS.background, color: TOKENS.ink, fontFamily: "Instrument Serif" }}>
-        <div style={{ position: "absolute", top: 0, right: 0, width: 520, height: 400, display: "flex", backgroundImage: `radial-gradient(${TOKENS.axis} 1.5px, transparent 2px)`, backgroundSize: "22px 22px", opacity: 0.45 }} />
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ fontSize: 20, letterSpacing: 2, color: TOKENS.muted, fontFamily: "monospace" }}>{`A PUBLIC TRACKER · GENERATED ${meta().generated_at.slice(0, 10)}`}</div>
+          <div style={{ fontSize: 20, letterSpacing: 2, color: TOKENS.muted }}>{`A PUBLIC TRACKER · GENERATED ${meta().generated_at.slice(0, 10)}`}</div>
           <div style={{ fontSize: 96, lineHeight: 1, marginTop: 12, letterSpacing: -2 }}>{SITE.name}</div>
         </div>
         <div style={{ fontSize: 34, lineHeight: 1.25, maxWidth: 1040, fontStyle: "italic", color: TOKENS.ink }}>{verdict.charAt(0).toUpperCase() + verdict.slice(1)}</div>
-        <div style={{ display: "flex", justifyContent: "space-between", fontSize: 22, color: TOKENS.ink2, fontFamily: "monospace" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", fontSize: 22, color: TOKENS.ink2 }}>
           <span>{`${published} indicators · every number traced to a dated, graded observation`}</span>
           <span>{SITE.url.replace(/^https?:\/\//, "")}</span>
         </div>
       </div>
     ),
-    { ...size, fonts: [{ name: "Instrument Serif", data: serif, style: "normal", weight: 400 }] },
+    { ...size, fonts: [{ name: "Instrument Serif", data: serif, style: "normal", weight: 400 }, { name: "Instrument Serif", data: italic, style: "italic", weight: 400 }] },
   );
 }

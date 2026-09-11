@@ -4,7 +4,7 @@ import Link from "next/link";
 import "./globals.css";
 import { ChatDrawer } from "@/components/ChatDrawer";
 import { Freshness } from "@/components/Freshness";
-import { SiteNav } from "@/components/SiteNav";
+import { MobileNav, SiteNav } from "@/components/SiteNav";
 import { ABOUT } from "@/lib/nav";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { meta } from "@/lib/data";
@@ -13,7 +13,7 @@ import { SITE } from "@/lib/site";
 const serif = Instrument_Serif({ weight: "400", style: ["normal", "italic"], subsets: ["latin"], variable: "--font-instrument-serif", display: "swap" });
 const sans = Instrument_Sans({ subsets: ["latin"], variable: "--font-instrument-sans", display: "swap" });
 const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains-mono", display: "swap" });
-const THEME_SCRIPT = `(()=>{try{var t=localStorage.theme,d=t?t==="dark":matchMedia("(prefers-color-scheme: dark)").matches,r=document.documentElement;r.classList.toggle("dark",d);r.style.colorScheme=d?"dark":"light"}catch(e){}})()`;
+const THEME_SCRIPT = `(()=>{var t=null;try{t=localStorage.theme}catch(e){}try{var d=t?t==="dark":matchMedia("(prefers-color-scheme: dark)").matches,r=document.documentElement;r.classList.toggle("dark",d);r.style.colorScheme=d?"dark":"light"}catch(e){}})()`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -38,6 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div className="flex items-center gap-x-1 shrink-0">
               <ChatDrawer />
               <ThemeToggle />
+              <MobileNav />
             </div>
           </div>
         </header>
