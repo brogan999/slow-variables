@@ -84,8 +84,8 @@ export type LedgerRow = Observation & { parties: { slug: string; entity_id: stri
 export const ledger = () => read<LedgerRow[]>("ledger.json");
 export type ThesisVerdict = { id: string; name: string; holds: boolean | null; logic: string; conds: { text: string; holds: boolean | null; obs_ids: string[]; detail: string }[] };
 export const thesis = () => read<ThesisVerdict[]>("thesis.json");
-export type Bottleneck = { id: number; title: string; text: string; section: string; bucket_id: string; source_codes: string[]; related_indicators: string[]; related: { id: string; name: string; status: string | null; published: boolean }[] };
-export type BottleneckDoc = { sections: { name: string; bucket_id: string }[]; essays: { code: string; title: string; url: string; date: string }[]; items: Bottleneck[] };
+export type Bottleneck = { id: number; title: string; text: string; section: string; bucket_id: string; source_codes: string[]; related_indicators: string[]; domain?: string | null; domain_basis?: string | null; related: { id: string; name: string; status: string | null; published: boolean }[] };
+export type BottleneckDoc = { sections: { name: string; bucket_id: string }[]; essays: { code: string; title: string; url: string; date: string }[]; items: Bottleneck[]; summary: { name: string; items: number; watched: number; fast: number; normal: number; other: number }[]; domains: string[]; grid: { name: string; cells: Record<string, number[]> }[] };
 export const bottlenecks = () => read<BottleneckDoc>("bottlenecks.json");
 export type ComparePred = { id: string; claimant: string; status: string | null };
 export type CompareRow = { indicator: string; card: Card; leans: "nk" | "ai2027" | "open" | null; columns: Record<"nk" | "ai2027" | "lab" | "capture", { text: string; predictions: ComparePred[] }> };

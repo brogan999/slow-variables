@@ -5,20 +5,12 @@ import { bottlenecks, index, words } from "@/lib/data";
 
 export const metadata = { title: "Bottlenecks" };
 
-const FAST = new Set(["faster_than_normal"]);
-const NORMAL = new Set(["consistent_with_normal", "slower_than_normal"]);
 
 export default function BottlenecksPage() {
-  const { sections, essays, items } = bottlenecks();
+  const { sections, essays, items, summary, domains, grid } = bottlenecks();
   const { buckets } = index();
   const bucketName = (id: string) => buckets.find((b) => b.id === id)?.name ?? words(id);
-  const rows = sections.map((s) => {
-    const its = items.filter((i) => i.section === s.name);
-    const linked = its.flatMap((i) => i.related.filter((r) => r.published));
-    const uniq = [...new Map(linked.map((r) => [r.id, r])).values()];
-    const count = (pred: (st: string | null) => boolean) => uniq.filter((r) => pred(r.status)).length;
-    return { ...s, n: its.length, watched: its.filter((i) => i.related.length).length, fast: count((st) => FAST.has(st ?? "")), normal: count((st) => NORMAL.has(st ?? "")), other: count((st) => !!st && !FAST.has(st) && !NORMAL.has(st)), unmeasured: count((st) => !st) };
-  });
+  const rows = sections.map((s, si) => ({ ...s, ...summary[si] }));  // counts come from the export
   return (
     <div className="flex flex-col gap-6">
       <div>
@@ -33,7 +25,7 @@ export default function BottlenecksPage() {
               <tr key={r.name}>
                 <td><a href={`#s-${sections.indexOf(r)}`} className="font-medium hover:underline">{r.name}</a></td>
                 <td><Link href={`/buckets/${r.bucket_id}`} className="text-ink-2 hover:underline">{bucketName(r.bucket_id)}</Link></td>
-                <td className="text-right tabular-nums">{r.n}</td>
+                <td className="text-right tabular-nums">{r.items}</td>
                 <td className="text-right tabular-nums">{r.watched}</td>
                 <td className="text-right tabular-nums">{r.fast || "–"}</td>
                 <td className="text-right tabular-nums">{r.normal || "–"}</td>
@@ -43,6 +35,23 @@ export default function BottlenecksPage() {
           </tbody>
         </table>
       </div>
+      <section>
+        <h2 className="display text-2xl leading-tight mb-2 mt-2">Family by domain</h2>
+        <p className="text-sm text-ink-2 mb-3 max-w-[60ch]">Where each family&apos;s barriers bite. The domain comes from the essays&apos; own extraction; it has no mechanism field, so this grid is family by domain rather than stage by mechanism. Numbers are item numbers.</p>
+        <div className="overflow-x-auto">
+          <table className="data w-full text-sm">
+            <thead><tr><th scope="col">Family</th>{domains.map((d) => <th scope="col" key={d}>{d}</th>)}</tr></thead>
+            <tbody>
+              {grid.map((g, gi) => (
+                <tr key={g.name}>
+                  <th scope="row" className="text-left"><a href={`#s-${gi}`} className="font-sans text-sm font-medium normal-case tracking-normal text-ink hover:underline">{g.name}</a></th>
+                  {domains.map((d) => <td key={d} className="num text-xs">{g.cells[d].length ? g.cells[d].map((n, k) => <span key={n}>{k ? " " : ""}<a href={`#b${n}`} className="text-ink-2 hover:underline">{n}</a></span>) : <span className="text-muted">–</span>}</td>)}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
       <p className="text-xs text-muted">Counts are distinct published indicators linked within the family. &ldquo;Faster than normal&rdquo; on a bottleneck&apos;s instrument means the barrier is being crossed faster than the normal-technology bands allow; &ldquo;consistent or slower&rdquo; means it is holding.</p>
       {sections.map((s, si) => (
         <details key={s.name} id={`s-${si}`} open={si === 0} className="group">
@@ -51,7 +60,7 @@ export default function BottlenecksPage() {
           <ol className="flex flex-col gap-2">
             {items.filter((i) => i.section === s.name).map((b) => (
               <li key={b.id} id={`b${b.id}`} className="panel p-3 text-sm">
-                <div><span className="text-muted tabular-nums mr-2">#{b.id}</span><span className="font-medium">{b.title}.</span> {b.text} <span className="text-xs text-muted">{b.source_codes.map((c, i) => { const e = essays.find((x) => x.code === c); return <span key={c}>{i ? ", " : ""}{e ? <a href={e.url} className="underline decoration-grid underline-offset-4" title={`${e.title} (${e.date})`}>{c}</a> : c}</span>; })}</span></div>
+                <div><span className="text-muted tabular-nums mr-2">#{b.id}</span><span className="font-medium">{b.title}.</span> {b.text} {b.domain ? <span className="text-xs text-muted" title={b.domain_basis ?? undefined}>[{b.domain}] </span> : null}<span className="text-xs text-muted">{b.source_codes.map((c, i) => { const e = essays.find((x) => x.code === c); return <span key={c}>{i ? ", " : ""}{e ? <a href={e.url} className="underline decoration-grid underline-offset-4" title={`${e.title} (${e.date})`}>{c}</a> : c}</span>; })}</span></div>
                 {b.related.length ? <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-1 text-xs">{b.related.map((r) => <span key={r.id}><Link href={indicatorHref(r.id, r.published)} className="hover:underline">{r.name}</Link> <StatusChip status={r.published ? r.status : null} /></span>)}</div> : null}
               </li>
             ))}

@@ -457,6 +457,8 @@ class Bottleneck(BaseModel):
     bucket_id: str
     source_codes: list[str]
     related_indicators: list[str] = []
+    domain: str | None = None  # from the raw extraction; the grid's second axis (there is no mechanism field)
+    domain_basis: str | None = None
 
 
 class CompareRow(BaseModel):

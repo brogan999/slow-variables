@@ -83,3 +83,13 @@ def test_prediction_assessments_are_digit_free_and_compare_groups_claims_by_ledg
     dev = rows["dev_rct_uplift"]["columns"]
     assert [x["id"] for x in dev["lab"]["predictions"]] == ["amodei_swe_end_to_end_6_12mo"] and not dev["ai2027"]["predictions"]
     assert rows["margin_stack_semis_share"]["leans"] is None  # a capture row takes no worldview lean
+
+
+def test_every_bottleneck_has_a_domain_and_sits_in_the_grid_once():
+    from ai_tracker import store as st
+
+    s = st.Store()
+    doc = s._bottlenecks({i.id: s._card(i) for i in s.seed.indicators})
+    assert all(b.domain and b.domain_basis for b in s.seed.bottlenecks)
+    ids = sorted(n for row in doc["grid"] for cell in row["cells"].values() for n in cell)
+    assert ids == list(range(1, 90)) and sum(r["items"] for r in doc["summary"]) == 89
