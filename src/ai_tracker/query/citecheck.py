@@ -11,6 +11,7 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass, field
 
+URL = re.compile(r"https?://\S+")  # links are provenance, not claims; arXiv ids and paths are not numbers
 CITE = re.compile(r"\[(obs|derived|ind|event):([A-Za-z0-9_.\-]+)\]")
 NUM = re.compile(
     r"(?<![\w.\-#])(?P<sign>[-−–])?(?P<cur>\$|€|£)?(?P<num>\d{1,3}(?:,\d{3})+|\d+(?:\.\d+)?)(?P<suffix>\s?(?:%|×|x\b|[kKmMbBtT](?!\w)|h\b|hours?\b|min\b|minutes?\b|days?\b|pp\b|points?\b|bn\b|trillion|billion|million))?",
@@ -91,7 +92,9 @@ def check(text: str, records: dict[str, Record]) -> Result:
     for sentence in units:
         cited = [records.get(i) for _, i in CITE.findall(sentence)]
         cited = [r for r in cited if r]
-        for m in NUM.finditer(CITE.sub(" ", sentence)):  # ids inside citation tokens are not numbers
+        for m in NUM.finditer(
+            URL.sub(" ", CITE.sub(" ", sentence))
+        ):  # ids inside citation tokens and URLs are not numbers
             token_text = m.group(0).strip()
             suf = (m.group("suffix") or "").strip().lower()
             num = m.group("num")

@@ -55,3 +55,8 @@ def test_a_bullet_is_one_claim_and_event_reasons_count():
 
 def test_hash_ids_are_labels():
     assert check("Bottleneck #86 is under test.", R).numbers == []
+
+
+def test_urls_are_not_numbers():
+    res = check("- 2026-09-10 arxiv: a post (https://arxiv.org/abs/2609.08162v1) [obs:x]", R)
+    assert res.ok and res.numbers == []

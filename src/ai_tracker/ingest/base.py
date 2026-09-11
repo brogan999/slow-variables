@@ -23,9 +23,7 @@ CACHE = Path("ingest/cache")
 
 
 def ua() -> str:
-    return os.environ.get(
-        "AI_TRACKER_USER_AGENT", "slow-variables/0.1 github.com/brogan999/slow-variables"
-    )
+    return os.environ.get("AI_TRACKER_USER_AGENT", "slow-variables/0.1 github.com/brogan999/slow-variables")
 
 
 class LayoutChanged(RuntimeError):
