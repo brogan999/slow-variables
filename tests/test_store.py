@@ -40,7 +40,11 @@ def test_export_is_deterministic_and_every_number_has_provenance(tmp_path):
         if f.name == "meta.json":
             continue
         assert f.read_bytes() == (b / f.relative_to(a)).read_bytes(), f.name
-        _numbers(json.loads(f.read_text()), f.name)
+        if "_repo" not in f.parts:  # the JSON schemas are not data
+            _numbers(json.loads(f.read_text()), f.name)
+    for name in ("sources.md", "bands.md", "changelog.md"):  # the generated spec documents are stable too
+        assert (a / "_repo/docs" / name).read_bytes() == (b / "_repo/docs" / name).read_bytes(), name
+    assert (a / "_repo/schema/Observation.schema.json").exists()
 
 
 @pytest.mark.skipif(not (REPO / "data/observations/metr.jsonl").exists(), reason="no ingested data")
@@ -59,7 +63,10 @@ def test_capture_readings_meta_counts_and_chart_sources(tmp_path):
     s.derived = run_metrics(s.con)
     s.export(tmp_path / "data")
     cap = json.loads((tmp_path / "data" / "lens" / "capture.json").read_text())
-    assert all(layer["reading"].endswith(".") and not any(c in layer["reading"] for c in "$%") for layer in cap["layers"])
+    assert all(
+        layer["reading"].endswith(".") and not any(c in layer["reading"] for c in "$%")
+        for layer in cap["layers"]
+    )
     meta = json.loads((tmp_path / "data" / "meta.json").read_text())
     assert meta["observations"] == s.con.execute("SELECT count(*) FROM observations").fetchone()[0]
     # P1 §9: every chart document with points names its sources
@@ -70,7 +77,10 @@ def test_capture_readings_meta_counts_and_chart_sources(tmp_path):
     for f in (d / "venture").glob("*.json"):
         doc = json.loads(f.read_text())
         assert not any(q.get("by_source") for q in doc["quarters"]) or doc["chart_sources"]["sources"], f.name
-    for series, sources in (("gross_profit_stack_series", "gross_profit_stack_sources"), ("margin_stack_series", "margin_stack_sources")):
+    for series, sources in (
+        ("gross_profit_stack_series", "gross_profit_stack_sources"),
+        ("margin_stack_series", "margin_stack_sources"),
+    ):
         assert not cap[series] or cap[sources]["sources"], series
     lad = json.loads((d / "lens" / "ladder.json").read_text())
     assert not any(r["production"] or r["research"] for r in lad["rungs"]) or lad["chart_sources"]["sources"]

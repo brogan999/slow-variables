@@ -53,13 +53,20 @@ def run_metrics(
 
 
 def _python_metric(con: duckdb.DuckDBPyConnection, name: str, m: dict, now: datetime) -> list[Derived]:
-    """`python: fits.<fn>` over the non-disputed numeric points of the input series; returns one row with a CI."""
+    """`python: fits.<fn>` over points, returning one row with a CI. The points are the formula's own `sql`
+    (as_of_date, value, obs_ids) when it has one, else the non-disputed numeric points of the input series."""
     fn = getattr(fits, m["python"].split(".", 1)[1])
-    pats = " OR ".join("series_key LIKE ?" for _ in m["inputs"])
-    rows = con.execute(
-        f"SELECT id, as_of_date, value_numeric FROM observations WHERE ({pats}) AND NOT disputed AND value_numeric > 0",
-        [p.replace("*", "%") for p in m["inputs"]],
-    ).fetchall()
+    if "sql" in m:
+        rows = [(ids, d, v) for d, v, ids in con.execute(m["sql"]).fetchall() if v and v > 0]
+    else:
+        pats = " OR ".join("series_key LIKE ?" for _ in m["inputs"])
+        rows = [
+            ([i], d, v)
+            for i, d, v in con.execute(
+                f"SELECT id, as_of_date, value_numeric FROM observations WHERE ({pats}) AND NOT disputed AND value_numeric > 0",
+                [p.replace("*", "%") for p in m["inputs"]],
+            ).fetchall()
+        ]
     if not rows:
         return []
     args = {
@@ -80,7 +87,7 @@ def _python_metric(con: duckdb.DuckDBPyConnection, name: str, m: dict, now: date
             value_high=fit.high,
             as_of_date=max(r[1] for r in rows),
             dims={"n": str(fit.n), "r2": f"{fit.r2:.3f}", "aic": f"{fit.aic:.1f}"},
-            input_observation_ids=sorted(r[0] for r in rows),
+            input_observation_ids=sorted({i for r in rows for i in r[0]}),
             formula_version=str(m["formula_version"]),
             computed_at=now,
         )

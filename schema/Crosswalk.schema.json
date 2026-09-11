@@ -1,0 +1,59 @@
+{
+  "$defs": {
+    "Relation": {
+      "enum": [
+        "same_valve",
+        "input_to",
+        "leak_from",
+        "return_arrow"
+      ],
+      "title": "Relation",
+      "type": "string"
+    }
+  },
+  "properties": {
+    "bucket_id": {
+      "title": "Bucket Id",
+      "type": "string"
+    },
+    "layer_id": {
+      "title": "Layer Id",
+      "type": "string"
+    },
+    "note": {
+      "default": "",
+      "title": "Note",
+      "type": "string"
+    },
+    "relation": {
+      "$ref": "#/$defs/Relation"
+    },
+    "shared_indicators": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Shared Indicators",
+      "type": "array"
+    },
+    "sublayer_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sublayer Id"
+    }
+  },
+  "required": [
+    "bucket_id",
+    "layer_id",
+    "relation"
+  ],
+  "title": "Crosswalk",
+  "type": "object"
+}

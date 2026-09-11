@@ -9,18 +9,18 @@ Two briefs arrived on 9 Sep 2026:
 
 They describe the same product from two ends. `v2` is canonical; `P1` is the capture-lens appendix. The Notion page "Grand Theory of AI Development & Diffusion" frames the goal: *the business-relevant version of the AI 2027 tracker*, aimed at "which $1T companies exist in 2035".
 
-Outcome: a repo at `~/ai-tracker` holding both briefs and the research corpus, shipping a **thin vertical slice first** (one connector → one indicator → one page, live data, day 2), then widening connector-by-connector in `v2`'s milestone order. Nothing publishes without a traceable observation.
+Outcome: a repo holding both briefs and the research corpus, shipping a **thin vertical slice first** (one connector → one indicator → one page, live data, day 2), then widening connector-by-connector in `v2`'s milestone order. Nothing publishes without a traceable observation.
 
 ### What already exists on disk (found by search)
 
 | Brief asks for | Found | Path |
 |---|---|---|
-| 89-bottleneck list | ✅ complete, with 224-row raw JSON + extraction prompt | `~/normaltech-predictions/bottlenecks.md`, `bottlenecks_raw.json`, `BOTTLENECK_PROMPT.md` |
-| N&K prediction material | ✅ 747 predictions with verbatim quote + URL + verified flag | `~/normaltech-predictions/predictions.json`, `normaltech-predictions.md`, `worldview-summary.md`, `corpus/` (70 posts) |
+| 89-bottleneck list | ✅ complete, with 224-row raw JSON + extraction prompt | a private extraction workspace: `bottlenecks.md`, `bottlenecks_raw.json`, `BOTTLENECK_PROMPT.md` |
+| N&K prediction material | ✅ 747 predictions with verbatim quote + URL + verified flag | the same workspace: `predictions.json`, `normaltech-predictions.md`, `worldview-summary.md`, `corpus/` (70 posts) |
 | 11-layer value-chain map | ✅ | private thesis notes (kept outside the public tree in `docs/private/`, gitignored) |
 | Teece / Nordhaus / Perez / Ding notes | ✅ scattered | private thesis notes (`docs/private/`, gitignored); `docs/interpretation/technological-revolutions-perez.md`; Ding in `bottlenecks.md` §Theoretical foundations |
-| Prior attempt at this product | ✅ `~/ai-value-chain` (Aug 2026, Next 16 + Prisma/Postgres, not git-inited, DB tables never created). Has a working Epoch ZIP connector with declarative column maps (`config/sources.yaml`), SEC XBRL connector (`src/lib/ingest/connectors/sec-xbrl.ts`: quarterly filter, restatement dedupe), 23-layer taxonomy, honesty rules | Port the *patterns*; do not fork (Postgres ≠ brief; TS parquet story is weak) |
-| "Diffusion Tracker v2" report, "Measuring AI Value Capture" report, venture-sources output, five-tier dependency graph | ❌ not on disk — live in chat only | Value-capture chat linked from the Notion page: `[private chat]…`. **Alex exports these**; not a blocker |
+| Prior attempt at this product | ✅ a private prototype (Aug 2026, Next 16 + Prisma/Postgres, not git-inited, DB tables never created). Has a working Epoch ZIP connector with declarative column maps (`config/sources.yaml`), SEC XBRL connector (`src/lib/ingest/connectors/sec-xbrl.ts`: quarterly filter, restatement dedupe), 23-layer taxonomy, honesty rules | Port the *patterns*; do not fork (Postgres ≠ brief; TS parquet story is weak) |
+| "Diffusion Tracker v2" report, "Measuring AI Value Capture" report, venture-sources output, five-tier dependency graph | Kept private | The three reports and the chat exports live in the git-ignored `docs/private/` (Part 6, step 1); the five-tier dependency graph was never exported and is recorded as missing |
 
 Live-verified today: Epoch ships ZIPs (`epoch.ai/data/ai_companies.zip`, `ai_models.zip`, `ml_hardware.zip`, `ai_chip_sales.zip`), not the CSV paths in `P1`; SEC companyfacts works for NVDA (needs `User-Agent`); METR publishes `metr.org/assets/benchmark_results_1_1.yaml`; Census BTOS has **no API** (404) and a JS-rendered downloads page; ai2027-tracker methodology = 7 tiers, 6 proxy types, 6 statuses, 0–95 confidence, 9-section page.
 
@@ -29,14 +29,14 @@ Toolchain present: python3.12 + uv, node 25 + pnpm, gh, vercel, fly. Postgres 14
 ## 1. Step 0 — the folder
 
 ```
-~/ai-tracker/
+ai-tracker/
   docs/briefs/ai-tracker-brief-v2.md              ← git mv from Downloads
   docs/briefs/value-capture-tracker-part1.md      ← git mv from Downloads
   docs/research/bottlenecks.md, bottlenecks_raw.json, BOTTLENECK_PROMPT.md, predictions.json,
                 worldview-summary.md
   docs/interpretation/technological-revolutions-perez.md   (copies; write nothing new)
   docs/private/            private business notes, gitignored
-  docs/prior-art.md      ← 10 lines pointing at ~/ai-value-chain and what was ported
+  docs/prior-art.md      ← 10 lines on the private prototype and what was ported
 ```
 
 `git init`, `gh repo create ai-tracker --private`. Move (not copy) the two briefs so Downloads stops being the source of truth.
@@ -45,7 +45,7 @@ Toolchain present: python3.12 + uv, node 25 + pnpm, gh, vercel, fly. Postgres 14
 
 | Topic | Decision | Why |
 |---|---|---|
-| Stack | **Python 3.12 (uv) spine + Next.js 16 site**, per `v2` §9. Deps: `httpx pydantic duckdb pyyaml`; `pdfplumber` only with the manual connector. No polars (DuckDB reads CSV/JSON/XLSX itself) | Brief is explicit; DuckDB/parquet are Python-native. Alternative (TS-only, lift `~/ai-value-chain`) rejected: Postgres + weak TS parquet story |
+| Stack | **Python 3.12 (uv) spine + Next.js 16 site**, per `v2` §9. Deps: `httpx pydantic duckdb pyyaml`; `pdfplumber` only with the manual connector. No polars (DuckDB reads CSV/JSON/XLSX itself) | Brief is explicit; DuckDB/parquet are Python-native. Alternative (TS-only, lift the private prototype) rejected: Postgres + weak TS parquet story |
 | Layers | **7** (`v2` Appendix D) | Crosswalk distinguishes bucket 3 adopters from bucket 4 labour/consumers. Note: bucket→layer is not one-to-one; build nothing that assumes it |
 | Sub-layer 2 | Rename to "Hyperscalers, neoclouds & GPU clouds" | `capex_to_revenue_stack` needs MSFT/GOOGL/AMZN/ORCL a home; no 22nd sub-layer |
 | Evidence grade | Store tier 1–7; letter A–D derived (`grade_from_tier`). Tier 4 `reported` (gov stats) → A; tier 4 `company_stated` (8-K) → B | `v2` §1.2 rule as written would grade BLS "C" |
@@ -63,7 +63,7 @@ Toolchain present: python3.12 + uv, node 25 + pnpm, gh, vercel, fly. Postgres 14
 | CI blocking | `ruff`, `pytest`, `ai-tracker check`, `next build`. `mypy --strict` advisory for month 1 | duckdb/pydantic stub fights |
 | Models | `claude-sonnet-5` routine, `claude-fable-5-1` synthesis (M5) | `P1`'s sonnet-4-6 is stale |
 
-Repo `CLAUDE.md` = `v2` §10 verbatim + `P1` rule 3 (prompt-injection scrub) + `P1` rule 5 (robots.txt) + `~/ai-value-chain/AGENTS.md`'s warning: read `node_modules/next/dist/docs/` before writing Next 16 routes.
+Repo `CLAUDE.md` = `v2` §10 verbatim + `P1` rule 3 (prompt-injection scrub) + `P1` rule 5 (robots.txt) + the prototype's AGENTS.md warning: read `node_modules/next/dist/docs/` before writing Next 16 routes.
 
 ## 3. Architecture
 
@@ -105,7 +105,7 @@ Flow: `seed/*.yaml` + `data/*.jsonl` → `build` (DuckDB in memory; `observation
 | `sec_xbrl` | companyfacts per entity with `cik` (NVDA AMD MSFT GOOGL AMZN META ORCL CRWV NBIS; CIKs from `sec.gov/files/company_tickers.json`, fetched once). `SEC_USER_AGENT` env | `Revenues`∥`RevenueFromContractWithCustomerExcludingAssessedTax`, `GrossProfit`, `CostOfRevenue`, `PaymentsToAcquirePropertyPlantAndEquipment`→`capex`, `RevenueRemainingPerformanceObligation`→`rpo`, `DepreciationDepletionAndAmortization`→`da`. Forms 10-K/10-Q, USD, dedupe (start,end) by latest `filed`; 80–100 d → `.q`, 350–380 d → `.fy`; `as_of=end`, `published=filed`. Q4 = FY − 9M as a **Derived** (M2, with margin stacking) | 4 / 10-K audited, 10-Q company_stated | `sec_nvda_companyfacts.json` (5 concepts) |
 | `manual` | `seed/manual_observations.yaml` rows: series_key value unit as_of_date url raw_snippet tier basis dispute_text | as declared; snippet-in-page assertion; lands `pending` | per row | one html + one pdf fixture |
 | `bls` | POST `api.bls.gov/publicAPI/v2/timeseries/data/` (v1 unkeyed is enough); ids under the source in `sources.yaml` (`PRS85006092`; TFP id verified day 4 — may be a table download) | `bls.<id>.q`/`.a` | 4 / reported | one API JSON |
-| `epoch` | `ai_companies.zip` first (funding rounds, revenue reports); `ai_models.zip`, `ml_hardware.zip` when an indicator needs them. `zipfile` + `expect()` on member names/columns. Port column maps from `~/ai-value-chain/config/sources.yaml`. CC-BY attribution string on the source row, rendered on every Epoch chart | **per table**: funding 5/reported (Debt `Type` dropped); revenue 5/reported + `run_rate`; training compute 6/estimated; hardware 2; `Confidence` → basis only | 20-row CSV heads zipped in-memory |
+| `epoch` | `ai_companies.zip` first (funding rounds, revenue reports); `ai_models.zip`, `ml_hardware.zip` when an indicator needs them. `zipfile` + `expect()` on member names/columns. Port column maps from the prototype's sources config. CC-BY attribution string on the source row, rendered on every Epoch chart | **per table**: funding 5/reported (Debt `Type` dropped); revenue 5/reported + `run_rate`; training compute 6/estimated; hardware 2; `Confidence` → basis only | 20-row CSV heads zipped in-memory |
 
 Dropped from the slice: `fred` (no flagship indicator uses FRED; "St. Louis Fed" in the briefs is the BBD paper → manual row), `census_btos` XLSX (manual row now; automate in M1 after reading the file twice), Form D (M4), Artificial Analysis / OpenRouter (M2).
 

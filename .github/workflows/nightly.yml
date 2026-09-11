@@ -72,6 +72,10 @@ jobs:
             web/data/**
             web/public/data/**
             docs/thesis.md
+            docs/sources.md
+            docs/bands.md
+            docs/changelog.md
+            schema/**
       # merge only the tree that check, tests and build saw: if main moved, rerun rather than merge unseen code
       - id: merge
         if: steps.cpr.outputs.pull-request-number && steps.check.outputs.failed != 'true' && steps.tests.outputs.failed != 'true'

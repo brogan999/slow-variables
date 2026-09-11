@@ -1,0 +1,81 @@
+{
+  "properties": {
+    "as_of_date": {
+      "format": "date",
+      "title": "As Of Date",
+      "type": "string"
+    },
+    "computed_at": {
+      "format": "date-time",
+      "title": "Computed At",
+      "type": "string"
+    },
+    "dims": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "default": {},
+      "title": "Dims",
+      "type": "object"
+    },
+    "formula_version": {
+      "title": "Formula Version",
+      "type": "string"
+    },
+    "id": {
+      "default": "",
+      "title": "Id",
+      "type": "string"
+    },
+    "input_observation_ids": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Input Observation Ids",
+      "type": "array"
+    },
+    "metric": {
+      "title": "Metric",
+      "type": "string"
+    },
+    "value": {
+      "title": "Value",
+      "type": "number"
+    },
+    "value_high": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Value High"
+    },
+    "value_low": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Value Low"
+    }
+  },
+  "required": [
+    "metric",
+    "value",
+    "as_of_date",
+    "input_observation_ids",
+    "formula_version",
+    "computed_at"
+  ],
+  "title": "Derived",
+  "type": "object"
+}

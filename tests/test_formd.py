@@ -76,3 +76,27 @@ def test_form_d_maps_by_cik_only_and_drops_spvs():
     assert not any("surge" in k[0] or "hii" in k[0] for k in by)  # the surgery centre and the SPV never map
     assert json.loads(b.raw_snippet)["accession"] == "A1"
     assert norm("Baseten Labs, Inc.") == norm("Baseten") == "baseten"
+
+
+def test_a_primary_doc_row_carries_the_id_its_zip_row_will_have():
+    from datetime import datetime, timezone
+    from pathlib import Path
+
+    from ai_tracker.ingest.base import RawItem
+
+    c = FormD()
+    url = "https://www.sec.gov/Archives/edgar/data/1865393/000186539326000004/primary_doc.xml"  # Baseten's June 2026 D
+    body = (Path(__file__).parent / "fixtures" / "formd_baseten_primary_doc.xml").read_bytes()
+    c.filed[url] = date(2026, 6, 30)
+    rows = {
+        r.series_key: r
+        for r in c._from_primary(
+            RawItem(url, body, 200, datetime(2026, 9, 11, tzinfo=timezone.utc), "h", None)
+        )
+    }
+    sold = rows["formd.baseten.amount_sold_usd.pt"]
+    assert sold.value_numeric == 1096448855 and sold.as_of_date == date(2026, 6, 15)
+    assert (
+        sold.id == "89d79b626a4418c5"
+    )  # the quarterly zip's row for the same filing, already in data/observations/formd.jsonl
+    assert rows["formd.baseten.offering_amount_usd.pt"].id == "2a30a35cb5e33f89"

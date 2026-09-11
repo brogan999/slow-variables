@@ -11,6 +11,7 @@ import io
 import json
 import logging
 import re
+import xml.etree.ElementTree as ET
 import zipfile
 from datetime import date
 from pathlib import Path
@@ -22,6 +23,7 @@ from ..base import Connector, RawItem, expect
 
 INDEX = "https://www.sec.gov/data-research/sec-markets-data/form-d-data-sets"
 EFTS = "https://efts.sec.gov/LATEST/search-index"
+PRIMARY = "https://www.sec.gov/Archives/edgar/data/{cik}/{acc}/primary_doc.xml"
 FIRST_QUARTER = "2023q1"  # the AI-era window; earlier quarters are not fetched
 SKIP_INDUSTRY = {"Pooled Investment Fund"}
 
@@ -90,6 +92,7 @@ class FormD(Connector):
         self.entities = [Entity(**r) for r in rows]
         self.by_cik, self.by_name = entity_index(self.entities)
         self.urls = [INDEX]
+        self.filed: dict[str, date] = {}  # primary_doc URL -> filing date from its search hit
 
     def fetch(self, day: date, refetch: bool = False) -> list[RawItem]:
         index = self.fetch_one(INDEX, day, refetch)
@@ -110,12 +113,87 @@ class FormD(Connector):
             if e.cik:
                 url = f'{EFTS}?q="{e.name}"&forms=D&dateRange=custom&startdt={day.replace(day=1).isoformat()}'
                 try:
-                    items.append(self.fetch_one(url, day, refetch))
+                    hit = self.fetch_one(url, day, refetch)
+                    items.append(hit)
+                    # this quarter's filings carry their amounts in primary_doc.xml before the quarter's zip lands
+                    for cik, adsh, filed in self._hits(hit):
+                        doc = PRIMARY.format(cik=int(cik), acc=adsh.replace("-", ""))
+                        self.filed[doc] = filed
+                        items.append(self.fetch_one(doc, day, refetch))
                 except Exception as ex:  # noqa: BLE001 - one search failing must not drop the quarterly zips
                     log.warning(
                         "formd: efts %s skipped this run: %s", e.id, ex
                     )  # supplementary; the zips are the record
         return items
+
+    def _hits(self, item: RawItem) -> list[tuple[str, str, date]]:
+        """(CIK, accession, filing date) for search hits filed by a seed entity's own CIK."""
+        try:
+            hits = json.loads(item.body).get("hits", {}).get("hits", [])
+        except ValueError:
+            return []
+        out = []
+        for h in hits:
+            src = h.get("_source", {})
+            cik = next((c.zfill(10) for c in src.get("ciks", []) if c.zfill(10) in self.by_cik), None)
+            filed = _date(src.get("file_date", ""))
+            if cik and filed and src.get("adsh"):
+                out.append((cik, src["adsh"], filed))
+        return out
+
+    def _from_primary(self, item: RawItem) -> list[Observation]:
+        """A filing's own primary_doc.xml, read into exactly the rows its line in the quarterly zip will produce, so
+        the zip's rows later carry the same ids and add nothing twice."""
+        x = ET.fromstring(item.body)
+
+        def val(path: str) -> str:
+            e = x.find(path)
+            return (e.text or "").strip() if e is not None and e.text else ""
+
+        ent = self._match(val("./primaryIssuer/cik"), "")
+        if (
+            not ent
+            or val(".//industryGroupType") in SKIP_INDUSTRY
+            or val(".//isPooledInvestmentFundType").lower() == "true"
+        ):
+            return []
+        filed = self.filed.get(item.url) or item.retrieved_at.date()
+        sale = _date(val(".//dateOfFirstSale/value")) or filed
+        debt_only = val(".//isDebtType").lower() == "true" and val(".//isEquityType").lower() != "true"
+        out = []
+        for tag, measure in (
+            ("totalAmountSold", "debt_sold_usd" if debt_only else "amount_sold_usd"),
+            ("totalOfferingAmount", "offering_amount_usd"),
+        ):
+            raw = val(f".//offeringSalesAmounts/{tag}").replace(",", "")
+            if not raw.replace(".", "").isdigit() or float(raw) <= 0:
+                continue
+            out.append(
+                self.obs(
+                    item,
+                    series_key=f"formd.{ent}.{measure}.pt",
+                    entity_id=ent,
+                    unit="USD",
+                    as_of_date=sale,
+                    published_date=filed,
+                    value_numeric=float(raw),
+                    tier=Tier.OFFICIAL_FILING,
+                    audited_vs_reported=Basis.company_stated,
+                    extraction_method=Extraction.api,
+                    raw_snippet=json.dumps(
+                        {
+                            "issuer": val("./primaryIssuer/entityName"),
+                            "cik": val("./primaryIssuer/cik"),
+                            tag: raw,
+                            "sale_date": sale.isoformat(),
+                            "filed": filed.isoformat(),
+                            "form": val("./submissionType"),
+                        },
+                        sort_keys=True,
+                    ),
+                )
+            )
+        return out
 
     def _match(self, cik: str, name: str) -> str | None:
         # CIK only. A bare name match ("Sierra Co LLC", "PIKA Inc.") is a candidate for a human, never a row.
@@ -155,6 +233,8 @@ class FormD(Connector):
                 rows += self._from_zip(item)
             elif item.url.startswith(EFTS):
                 rows += self._from_efts(item)
+            elif item.url.endswith("/primary_doc.xml"):
+                rows += self._from_primary(item)
         expect({"zip"} if any(i.body[:2] == b"PK" for i in items) else set(), {"zip"}, "formd quarterly zips")
         return rows
 

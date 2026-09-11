@@ -1,0 +1,75 @@
+{
+  "properties": {
+    "bucket_id": {
+      "title": "Bucket Id",
+      "type": "string"
+    },
+    "domain": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Domain"
+    },
+    "domain_basis": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Domain Basis"
+    },
+    "id": {
+      "maximum": 89,
+      "minimum": 1,
+      "title": "Id",
+      "type": "integer"
+    },
+    "related_indicators": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Related Indicators",
+      "type": "array"
+    },
+    "section": {
+      "title": "Section",
+      "type": "string"
+    },
+    "source_codes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Codes",
+      "type": "array"
+    },
+    "text": {
+      "title": "Text",
+      "type": "string"
+    },
+    "title": {
+      "title": "Title",
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "title",
+    "text",
+    "section",
+    "bucket_id",
+    "source_codes"
+  ],
+  "title": "Bottleneck",
+  "type": "object"
+}

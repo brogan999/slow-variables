@@ -1,0 +1,58 @@
+{
+  "additionalProperties": false,
+  "description": "A source the briefs name that is read but not ingested, with the reason (rendered on /sources).",
+  "properties": {
+    "attribution": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Attribution"
+    },
+    "id": {
+      "title": "Id",
+      "type": "string"
+    },
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "people": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "People",
+      "type": "array"
+    },
+    "reason": {
+      "minLength": 1,
+      "title": "Reason",
+      "type": "string"
+    },
+    "url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Url"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "reason"
+  ],
+  "title": "SkippedSource",
+  "type": "object"
+}
