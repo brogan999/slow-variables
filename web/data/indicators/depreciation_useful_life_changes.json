@@ -1,4 +1,7 @@
 {
+ "answers": [
+  "Who keeps it: Compute & physical / Hyperscalers"
+ ],
  "band_input": "sec_filing.amzn.server_useful_life_years.fy",
  "band_rationale": null,
  "band_value": {
@@ -25,6 +28,15 @@
   ]
  },
  "confidence": 65,
+ "confidence_basis": {
+  "best_tier": 4,
+  "grade": "A",
+  "n_observations": 4,
+  "sources": [
+   "SEC EDGAR filings (8-K, 6-K, 10-Q exhibits)"
+  ],
+  "stale_as_of": null
+ },
  "counterevidence": "Ranges rather than points at Microsoft; a subset at Amazon; the estimate says what the filer chooses to assume, not how long the hardware lasts.",
  "crosswalk": [],
  "definition": "Estimated useful life of servers and network equipment each hyperscaler states in its 10-K, in years, quoted verbatim: Amazon (a subset cut to five years from 2025), Microsoft (two to six), Alphabet (six), Meta (extended to 5.5 from 2025). The band input is Amazon's, the only one to shorten.",
@@ -82,6 +94,7 @@
    "value": 5.0
   }
  ],
+ "prediction_rows": [],
  "proposed_status": "not_yet_measurable",
  "proxy_types": [
   "capital_flow"

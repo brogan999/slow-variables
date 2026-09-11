@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Textarea } from "@/components/ui/textarea";
@@ -18,6 +18,12 @@ export function ChatDrawer() {
   const path = usePathname();
   const [q, setQ] = useState("");
   const [s, setS] = useState<State>({ kind: "idle" });
+  const [open, setOpen] = useState(false);
+  useEffect(() => {  // v2 §4.2 L3: a "query this" box elsewhere opens the sheet with its question
+    const onAsk = (e: Event) => { const d = (e as CustomEvent<{ q?: string }>).detail; if (d?.q) setQ(d.q); setOpen(true); };
+    window.addEventListener("ask:open", onAsk);
+    return () => window.removeEventListener("ask:open", onAsk);
+  }, []);
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -35,7 +41,7 @@ export function ChatDrawer() {
   }
 
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger render={<Button variant="outline" size="sm" className="rounded-full" />}>Ask</SheetTrigger>
       <SheetContent side="right" aria-describedby="ask-desc" className="bg-surface overflow-y-auto p-5 data-[side=right]:sm:max-w-md">
         <SheetHeader className="p-0">

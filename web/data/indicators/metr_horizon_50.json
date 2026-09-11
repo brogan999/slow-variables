@@ -1,4 +1,8 @@
 {
+ "answers": [
+  "Bucket: Methods",
+  "Who keeps it: Model"
+ ],
  "band_input": "metric:horizon_doubling_days_50_since_2024",
  "band_rationale": "Normal = doubling time \u2265 7 months (\u2248213 days, METR's 2019\u20132025 trend); fast = \u2264 4 months (\u2248122 days), the AI 2027 assumption. Between the two is `emerging`. The bands are about the current pace, so the input is a log-linear fit over the 2024-onward window, the most recent window METR reports (89 days in the TH1.1 post of 29 Jan 2026), recomputed from METR's corrected data. On the 2023-onward window METR's published figure is 128.7 days, in the gap between the bands: the reading is window-sensitive and both numbers are shown.",
  "band_value": {
@@ -49,6 +53,16 @@
   ]
  },
  "confidence": 80,
+ "confidence_basis": {
+  "best_tier": 1,
+  "grade": "A",
+  "n_observations": 31,
+  "sources": [
+   "METR research posts",
+   "METR time horizons (v1.1)"
+  ],
+  "stale_as_of": null
+ },
  "counterevidence": "On the 2023-onward window (METR's published 128.7 days, our fit 125) the status would be `emerging`, not `faster_than_normal`; the status depends on the window. METR notes measurements above 16 hours are unreliable with the current task suite, so the newest points carry wide intervals and are flagged disputed, and human baselines exist for only 5 of the 31 tasks over 8 hours. Horizon is a software-task construct and may not transfer to other work.",
  "crosswalk": [
   {
@@ -692,6 +706,38 @@
    "subject": "claude_mythos_preview_early_inspect",
    "unit": "minutes",
    "value": 1044.780145
+  }
+ ],
+ "prediction_rows": [
+  {
+   "claimant": "Narayanan & Kapoor",
+   "id": "nk_rsi_external_limits",
+   "ledger": "nk",
+   "status": "emerging"
+  },
+  {
+   "claimant": "Dario Amodei",
+   "id": "amodei_country_of_geniuses_1_2y",
+   "ledger": "lab",
+   "status": "not_yet_testable"
+  },
+  {
+   "claimant": "AI Futures Project (Kokotajlo, Lifland, Jurkovic et al.)",
+   "id": "ai2027_horizon_doubling_4mo",
+   "ledger": "ai2027",
+   "status": "on_track"
+  },
+  {
+   "claimant": "AI Futures Project",
+   "id": "ai2027_superhuman_coder_2027",
+   "ledger": "ai2027",
+   "status": "not_yet_testable"
+  },
+  {
+   "claimant": "Jim Covello (Goldman Sachs)",
+   "id": "covello_too_much_spend",
+   "ledger": "capture",
+   "status": "emerging"
   }
  ],
  "proposed_status": "faster_than_normal",

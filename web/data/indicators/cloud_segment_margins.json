@@ -1,4 +1,7 @@
 {
+ "answers": [
+  "Who keeps it: Compute & physical / Hyperscalers"
+ ],
  "band_input": "metric:segment_operating_margin",
  "band_rationale": null,
  "band_value": {
@@ -26,6 +29,15 @@
   ]
  },
  "confidence": 75,
+ "confidence_basis": {
+  "best_tier": 4,
+  "grade": "A",
+  "n_observations": 20,
+  "sources": [
+   "SEC EDGAR 10-Q/10-K XBRL instances (segment data)"
+  ],
+  "stale_as_of": null
+ },
  "counterevidence": "Segment margins blend AI and non-AI workloads; useful-life extensions flatter them; Google Cloud's margin is on a much smaller base.",
  "crosswalk": [],
  "definition": "Operating income over revenue for AWS, Google Cloud and Microsoft Intelligent Cloud, per fiscal quarter, from 10-Q/10-K segment disclosures (derived metric segment_operating_margin). Headline slice is AWS.",
@@ -398,6 +410,14 @@
    ],
    "unit": "share",
    "value": 0.39356412199280166
+  }
+ ],
+ "prediction_rows": [
+  {
+   "claimant": "Tomasz Tunguz",
+   "id": "tunguz_12x_infra_per_revenue",
+   "ledger": "capture",
+   "status": "emerging"
   }
  ],
  "proposed_status": "stable",

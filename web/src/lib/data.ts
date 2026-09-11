@@ -10,7 +10,7 @@ export type Point = {
   flags?: string[]; dispute_text?: string | null;
 };
 export type Card = {
-  unpublished_reason?: string | null;
+  unpublished_reason?: string | null; answers?: string[];
   id: string; name: string; bucket_id: string | null; layer_id: string | null; valve_measured: string | null;
   unit: string; published: boolean; status: string | null; confidence: number | null; leading_lagging: string | null;
   grade: string | null; latest: Point | null; sparkline: Point[]; stale_as_of: string | null; stale_reason?: string | null; n_observations: number;
@@ -72,7 +72,7 @@ export const meta = () => read<{ generated_at: string; observations: number; ind
 export { fmt, words } from "./format";
 export const obsIndex = () => read<Record<string, string>>("obs_index.json");
 export type Fit = { metric: string; value: number; value_low: number | null; value_high: number | null; as_of_date: string; dims: Record<string, string>; obs_ids: string[] };
-export type Doc = IndicatorDoc & { chart_sources?: ChartSourcesT; points: Point[]; band_value: { value: number; as_of: string | null; obs_ids: string[]; low: number | null; high: number | null } | null; fits: Fit[]; related_metrics: string[] };
+export type Doc = IndicatorDoc & { chart_sources?: ChartSourcesT; confidence_basis?: { grade: string | null; best_tier: number | null; sources: string[]; n_observations: number; stale_as_of: string | null }; prediction_rows?: { id: string; claimant: string; ledger: string; status: string | null }[]; points: Point[]; band_value: { value: number; as_of: string | null; obs_ids: string[]; low: number | null; high: number | null } | null; fits: Fit[]; related_metrics: string[] };
 export type Prediction = {
   id: string; ledger: "nk" | "lab" | "ai2027" | "capture"; claimant: string; claim_text: string; claim_url: string | null; claim_date: string;
   window_start: string | null; window_end: string | null; operationalisation: string; related_indicators: string[]; proxy_types: string[];

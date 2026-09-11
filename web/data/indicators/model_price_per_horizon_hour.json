@@ -1,4 +1,7 @@
 {
+ "answers": [
+  "Who keeps it: Model / Frontier labs"
+ ],
  "band_input": "metric:frontier_price_per_horizon_hour",
  "band_rationale": null,
  "band_value": {
@@ -33,6 +36,16 @@
   ]
  },
  "confidence": 40,
+ "confidence_basis": {
+  "best_tier": 1,
+  "grade": "A",
+  "n_observations": 2,
+  "sources": [
+   "METR time horizons (v1.1)",
+   "OpenRouter model prices"
+  ],
+  "stale_as_of": null
+ },
  "counterevidence": "One router's list prices, prompt tokens only; METR's horizon is software tasks under its suite, not general capability; the cheapest model per horizon-hour is a moving target as models are added.",
  "crosswalk": [],
  "definition": "For each price date, the lowest OpenRouter prompt price (USD per million tokens) divided by the model's latest METR 50% time horizon in hours, across models present in both datasets. Derived metric frontier_price_per_horizon_hour.",
@@ -102,6 +115,7 @@
    "value": 0.2980843380067223
   }
  ],
+ "prediction_rows": [],
  "proposed_status": "not_yet_measurable",
  "proxy_types": [
   "price"
