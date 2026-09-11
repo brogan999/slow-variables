@@ -2503,7 +2503,7 @@
      "efd67b65106b82a9"
     ],
     "unit": "index",
-    "value": 0.1567884653567207
+    "value": 0.15678846535672072
    },
    "layer_id": "model",
    "leading_lagging": "leading",
@@ -2537,7 +2537,7 @@
       "efd67b65106b82a9"
      ],
      "unit": "index",
-     "value": 0.1567884653567207
+     "value": 0.15678846535672072
     }
    ],
    "stale_as_of": null,
@@ -5130,7 +5130,7 @@
    "stale_reason": null,
    "status": null,
    "unit": "ratio",
-   "unpublished_reason": "Not measurable as a series: Epoch published a one-off estimate range, not a table; a manual row can carry the point estimate once quoted.",
+   "unpublished_reason": "Not measurable as a series: Epoch published a one-off range for three companies (evidence below), and no lab discloses its compute share over time.",
    "valve_measured": null
   },
   {
@@ -13573,7 +13573,7 @@
    },
    "layer_id": "labour_consumers",
    "leading_lagging": "lagging",
-   "n_observations": 1,
+   "n_observations": 2,
    "name": "Recent-graduate unemployment rate (NY Fed)",
    "pending": null,
    "published": true,
@@ -15061,7 +15061,7 @@
    },
    "layer_id": "training_input",
    "leading_lagging": "leading",
-   "n_observations": 2,
+   "n_observations": 5,
    "name": "Expert-data market run-rate (Mercor)",
    "pending": null,
    "published": true,
@@ -15556,22 +15556,50 @@
     "Who keeps it: Adopters"
    ],
    "bucket_id": "early_adoption",
-   "confidence": null,
-   "grade": null,
+   "confidence": 30,
+   "grade": "B",
    "id": "bbd_work_use_daily",
-   "latest": null,
+   "latest": {
+    "as_of": "2025-11-30",
+    "disputed": false,
+    "grade": "B",
+    "high": null,
+    "low": null,
+    "obs_ids": [
+     "85b2df467df7b32c"
+    ],
+    "series_key": "fed_board.us_workers.genai_work_use_daily_share.pt",
+    "subject": "us_workers",
+    "unit": "share",
+    "value": 0.12
+   },
    "layer_id": "adopters",
    "leading_lagging": "coincident",
-   "n_observations": 0,
+   "n_observations": 1,
    "name": "US workers using generative AI for work every day",
    "pending": null,
-   "published": false,
-   "sparkline": [],
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2025-11-30",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "85b2df467df7b32c"
+     ],
+     "series_key": "fed_board.us_workers.genai_work_use_daily_share.pt",
+     "subject": "us_workers",
+     "unit": "share",
+     "value": 0.12
+    }
+   ],
    "stale_as_of": null,
    "stale_reason": null,
-   "status": null,
+   "status": "emerging",
    "unit": "share",
-   "unpublished_reason": "Not yet ingested: the GenAI Adoption Tracker splits work use into every day and some days but draws it in the browser, and none of the survey's series on FRED carries it; a manual row needs a verbatim figure from the working paper.",
+   "unpublished_reason": null,
    "valve_measured": "product_to_adoption"
   },
   {
@@ -15587,15 +15615,16 @@
     "as_of": "2026-09-11",
     "dims": {},
     "obs_ids": [
+     "0bdf1920b1feb93e",
      "1b7d08dbce2be548",
      "dc983a8178691c42"
     ],
     "unit": "count",
-    "value": 2.0
+    "value": 3.0
    },
    "layer_id": "training_input",
    "leading_lagging": "leading",
-   "n_observations": 2,
+   "n_observations": 3,
    "name": "Vendors claiming shipped continual learning",
    "pending": null,
    "published": true,
@@ -15620,14 +15649,26 @@
      "value": 2.0
     },
     {
-     "as_of": "2026-09-11",
+     "as_of": "2026-06-25",
      "dims": {},
      "obs_ids": [
+      "0bdf1920b1feb93e",
       "1b7d08dbce2be548",
       "dc983a8178691c42"
      ],
      "unit": "count",
-     "value": 2.0
+     "value": 3.0
+    },
+    {
+     "as_of": "2026-09-11",
+     "dims": {},
+     "obs_ids": [
+      "0bdf1920b1feb93e",
+      "1b7d08dbce2be548",
+      "dc983a8178691c42"
+     ],
+     "unit": "count",
+     "value": 3.0
     }
    ],
    "stale_as_of": null,

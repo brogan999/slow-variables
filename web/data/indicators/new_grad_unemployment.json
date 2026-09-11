@@ -32,8 +32,9 @@
  "confidence_basis": {
   "best_tier": 4,
   "grade": "A",
-  "n_observations": 1,
+  "n_observations": 2,
   "sources": [
+   "Stanford Institute for Economic Policy Research (policy briefs)",
    "The Labor Market for Recent College Graduates"
   ],
   "stale_as_of": null
@@ -69,7 +70,20 @@
  "derived": [],
  "direction": null,
  "direction_rule": null,
- "evidence": [],
+ "evidence": [
+  {
+   "as_of": "2026-03-31",
+   "entity_id": null,
+   "id": "e55b02b84bcd3cef",
+   "snippet": "As shown in Figure 1, the unemployment rate for the top quintile of AI-exposed workers has risen by 0.77 percentage points since 2022, while the unemployment rate for the least-exposed workers rose slightly more, by 0.85 percentage points over the same period.",
+   "source_id": "siepr",
+   "stance": "against",
+   "summary": "SIEPR: since 2022 unemployment in the most AI-exposed fifth of workers rose 0.77 points, slightly less than the 0.85 points in the least exposed.",
+   "target": "new_grad_unemployment",
+   "tier": 6,
+   "url": "https://siepr.stanford.edu/publications/policy-brief/what-really-happening-jobs-separating-ai-hype-reality"
+  }
+ ],
  "falsifying_band": null,
  "fast_band": {
   "hi": null,
@@ -97,7 +111,7 @@
  "leading_lagging": "lagging",
  "metric": null,
  "metric_dims": {},
- "n_observations": 1,
+ "n_observations": 2,
  "name": "Recent-graduate unemployment rate (NY Fed)",
  "normal_band": {
   "hi": 0.06,
@@ -161,10 +175,30 @@
     }
    ],
    "series_key": "nyfed.us_recent_grads.unemployment_rate.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "58ab115f974e0443"
+     ],
+     "series_key": "siepr.us_recent_grads.unemployment_rate.pt",
+     "subject": "us_recent_grads",
+     "unit": "share",
+     "value": 0.056
+    }
+   ],
+   "series_key": "siepr.us_recent_grads.unemployment_rate.pt"
   }
  ],
  "series_keys": [
-  "nyfed.us_recent_grads.unemployment_rate.pt"
+  "nyfed.us_recent_grads.unemployment_rate.pt",
+  "siepr.us_recent_grads.unemployment_rate.pt"
  ],
  "sparkline": [
   {

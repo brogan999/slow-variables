@@ -32,10 +32,13 @@
  "confidence_basis": {
   "best_tier": 5,
   "grade": "C",
-  "n_observations": 2,
+  "n_observations": 5,
   "sources": [
+   "CNBC",
    "Dealroom news",
-   "TechCrunch"
+   "TIME",
+   "TechCrunch",
+   "Yahoo Finance (syndicated Investing.com)"
   ],
   "stale_as_of": null
  },
@@ -99,7 +102,7 @@
  "leading_lagging": "leading",
  "metric": null,
  "metric_dims": {},
- "n_observations": 2,
+ "n_observations": 5,
  "name": "Expert-data market run-rate (Mercor)",
  "normal_band": {
   "hi": 1000000000.0,
@@ -144,6 +147,25 @@
  "related_metrics": [],
  "related_predictions": [],
  "series": [
+  {
+   "points": [
+    {
+     "as_of": "2024-12-31",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "ed50bce87cdb1140"
+     ],
+     "series_key": "cnbc.scale_ai.revenue_usd.fy",
+     "subject": "scale_ai",
+     "unit": "USD",
+     "value": 1000000000.0
+    }
+   ],
+   "series_key": "cnbc.scale_ai.revenue_usd.fy"
+  },
   {
    "points": [
     {
@@ -193,11 +215,58 @@
     }
    ],
    "series_key": "techcrunch.mercor.gross_revenue_run_rate_usd.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-05-31",
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate",
+      "gross"
+     ],
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "f310f75b5f4db517"
+     ],
+     "series_key": "time_magazine.handshake.gross_revenue_run_rate_usd.pt",
+     "subject": "handshake",
+     "unit": "USD",
+     "value": 1000000000.0
+    }
+   ],
+   "series_key": "time_magazine.handshake.gross_revenue_run_rate_usd.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2024-12-31",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "e4b51a82a45caf2b"
+     ],
+     "series_key": "yahoo_finance.surge_ai.revenue_usd.fy",
+     "subject": "surge_ai",
+     "unit": "USD",
+     "value": 1000000000.0
+    }
+   ],
+   "series_key": "yahoo_finance.surge_ai.revenue_usd.fy"
   }
  ],
  "series_keys": [
   "dealroom.mercor.gross_revenue_run_rate_usd.pt",
-  "techcrunch.mercor.gross_revenue_run_rate_usd.pt"
+  "techcrunch.mercor.gross_revenue_run_rate_usd.pt",
+  "time_magazine.handshake.gross_revenue_run_rate_usd.pt",
+  "yahoo_finance.surge_ai.revenue_usd.fy",
+  "cnbc.scale_ai.revenue_usd.fy"
  ],
  "sparkline": [
   {

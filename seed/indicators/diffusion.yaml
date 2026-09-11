@@ -822,7 +822,7 @@ indicators:
     proxy_types: [welfare]
     unit: share
     cadence_expected: quarterly
-    series_keys: ["nyfed.us_recent_grads.unemployment_rate.pt"]
+    series_keys: ["nyfed.us_recent_grads.unemployment_rate.pt", "siepr.us_recent_grads.unemployment_rate.pt"]
     band_input: nyfed.us_recent_grads.unemployment_rate.pt
     bucket_id: adaptation
     valve_measured: adoption_to_adaptation
@@ -1216,7 +1216,7 @@ indicators:
     proxy_types: [capital_flow, market_structure]
     unit: USD
     cadence_expected: quarterly
-    series_keys: ["dealroom.mercor.gross_revenue_run_rate_usd.pt", "techcrunch.mercor.gross_revenue_run_rate_usd.pt"]
+    series_keys: ["dealroom.mercor.gross_revenue_run_rate_usd.pt", "techcrunch.mercor.gross_revenue_run_rate_usd.pt", "time_magazine.handshake.gross_revenue_run_rate_usd.pt", "yahoo_finance.surge_ai.revenue_usd.fy", "cnbc.scale_ai.revenue_usd.fy"]
     band_input: dealroom.mercor.gross_revenue_run_rate_usd.pt
     bucket_id: return_arrow
     valve_measured: return_arrow
@@ -1355,16 +1355,21 @@ indicators:
     why_it_matters: Daily use is where depth shows up first.
     proxy_types: [behaviour]
     unit: share
-    cadence_expected: quarterly
+    cadence_expected: annual
     bucket_id: early_adoption
+    series_keys: ["fed_board.us_workers.genai_work_use_daily_share.pt"]
+    band_input: fed_board.us_workers.genai_work_use_daily_share.pt
+    normal_band: {hi: 0.15}
+    fast_band: {lo: 0.30}
+    band_rationale: "Normal = up to about one worker in seven using generative AI every working day, the pace of an office tool diffusing over years; fast = three in ten or more, daily use at the level of email. Between is emerging."
     valve_measured: product_to_adoption
     layer_id: adopters
+    counterevidence: "One instrument; daily use by the respondents' own recall; a worker using a tool embedded in other software may not count it."
     leading_lagging: coincident
     timing_rationale: "Coincident: daily work use moves with adoption itself, measured in the same wave."
-    tracker_interpretation: Not yet ingested.
+    tracker_interpretation: "One survey, read through the Federal Reserve Board's note on its November 2025 wave; the authors' earlier NBER paper (nine percent, late 2024) is the same instrument, so the status stays emerging until a second survey measures daily use."
     confidence: 30
-    unpublished_reason: "Not yet ingested: the GenAI Adoption Tracker splits work use into every day and some days but draws it in the browser, and none of the survey's series on FRED carries it; a manual row needs a verbatim figure from the working paper."
-    published: false
+    published: true
     updated_at: 2026-09-11
   - id: cl_lab_release_claims
     name: Vendors claiming shipped continual learning
