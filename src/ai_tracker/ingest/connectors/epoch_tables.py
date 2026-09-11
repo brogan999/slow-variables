@@ -139,12 +139,15 @@ class EpochModels(_EpochTable):
 
 
 class EpochHardware(_EpochTable):
-    """FP16 tensor FLOP/s per release-price dollar, per accelerator with both fields (ml_hardware.csv)."""
+    """FP16 tensor FLOP/s and release price, as Epoch publishes them, per accelerator with both (ml_hardware.csv).
+
+    Epoch's own Price-performance column divides its best-precision figure (FP8 or INT8 where it exists), so it
+    jumps when a chip adds a lower precision; the FP16 ratio is computed in metrics.yaml instead."""
 
     source_id = "epoch_hardware"
     urls = ["https://epoch.ai/data/ml_hardware.zip"]
     member = "ml_hardware.csv"
-    expect_series = ["epoch_hw.*.price_performance_flops_per_usd.pt"]
+    expect_series = ["epoch_hw.*.fp16_flops.pt", "epoch_hw.*.release_price_usd.pt"]
     columns = {
         "Hardware name",
         "Release date",
@@ -162,25 +165,24 @@ class EpochHardware(_EpochTable):
             )
             if not d or not p or not f:
                 continue
-            out.append(
-                self.emit(
-                    items[0],
-                    r,
-                    f"epoch_hw.{slug(r['Hardware name'])}.price_performance_flops_per_usd.pt",
-                    "FLOP/s per USD",
-                    d,
-                    f / p,
-                    Tier.MODEL_RELEASE,
-                    Basis.reported,
-                    [
-                        "Hardware name",
-                        "Manufacturer",
-                        "Release date",
-                        "Release price (USD)",
-                        "Tensor-FP16/BF16 performance (FLOP/s)",
-                    ],
+            hw = slug(r["Hardware name"])
+            for measure, unit, value, col in (
+                ("fp16_flops", "FLOP/s", f, "Tensor-FP16/BF16 performance (FLOP/s)"),
+                ("release_price_usd", "USD", p, "Release price (USD)"),
+            ):
+                out.append(
+                    self.emit(
+                        items[0],
+                        r,
+                        f"epoch_hw.{hw}.{measure}.pt",
+                        unit,
+                        d,
+                        value,
+                        Tier.MODEL_RELEASE,
+                        Basis.reported,
+                        ["Hardware name", "Manufacturer", "Release date", col],
+                    )
                 )
-            )
         return out
 
 

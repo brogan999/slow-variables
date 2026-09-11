@@ -1,0 +1,97 @@
+{
+  "properties": {
+    "author": {
+      "title": "Author",
+      "type": "string"
+    },
+    "counterevidence_considered": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Counterevidence Considered"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "evidence_ids": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Ids",
+      "type": "array"
+    },
+    "id": {
+      "default": "",
+      "title": "Id",
+      "type": "string"
+    },
+    "new_conf": {
+      "title": "New Conf",
+      "type": "integer"
+    },
+    "new_status": {
+      "title": "New Status",
+      "type": "string"
+    },
+    "old_conf": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Old Conf"
+    },
+    "old_status": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Old Status"
+    },
+    "reason": {
+      "title": "Reason",
+      "type": "string"
+    },
+    "target_id": {
+      "title": "Target Id",
+      "type": "string"
+    },
+    "target_type": {
+      "default": "indicator",
+      "enum": [
+        "indicator",
+        "prediction"
+      ],
+      "title": "Target Type",
+      "type": "string"
+    }
+  },
+  "required": [
+    "target_id",
+    "new_status",
+    "new_conf",
+    "reason",
+    "author",
+    "created_at"
+  ],
+  "title": "StatusEvent",
+  "type": "object"
+}

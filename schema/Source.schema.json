@@ -1,0 +1,151 @@
+{
+  "$defs": {
+    "Lens": {
+      "enum": [
+        "diffusion",
+        "capture",
+        "both"
+      ],
+      "title": "Lens",
+      "type": "string"
+    },
+    "SourceKind": {
+      "enum": [
+        "api",
+        "xbrl",
+        "formd",
+        "csv",
+        "rss",
+        "html",
+        "pdf",
+        "arxiv",
+        "x",
+        "manual"
+      ],
+      "title": "SourceKind",
+      "type": "string"
+    },
+    "Tier": {
+      "enum": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "title": "Tier",
+      "type": "integer"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "attribution": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Attribution"
+    },
+    "cadence": {
+      "title": "Cadence",
+      "type": "string"
+    },
+    "connector": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Connector"
+    },
+    "default_tier": {
+      "$ref": "#/$defs/Tier"
+    },
+    "expect_series": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Expect Series",
+      "type": "array"
+    },
+    "id": {
+      "title": "Id",
+      "type": "string"
+    },
+    "kind": {
+      "$ref": "#/$defs/SourceKind"
+    },
+    "lens": {
+      "$ref": "#/$defs/Lens"
+    },
+    "license": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "License"
+    },
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "org": {
+      "title": "Org",
+      "type": "string"
+    },
+    "people": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "People",
+      "type": "array"
+    },
+    "robots_ok": {
+      "default": true,
+      "title": "Robots Ok",
+      "type": "boolean"
+    },
+    "url": {
+      "title": "Url",
+      "type": "string"
+    },
+    "watch": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "default": {},
+      "title": "Watch",
+      "type": "object"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "org",
+    "url",
+    "kind",
+    "default_tier",
+    "cadence",
+    "lens"
+  ],
+  "title": "Source",
+  "type": "object"
+}

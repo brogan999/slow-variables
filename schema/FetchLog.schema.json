@@ -1,0 +1,82 @@
+{
+  "properties": {
+    "bytes": {
+      "default": 0,
+      "title": "Bytes",
+      "type": "integer"
+    },
+    "error": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Error"
+    },
+    "finished_at": {
+      "format": "date-time",
+      "title": "Finished At",
+      "type": "string"
+    },
+    "http_status": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Http Status"
+    },
+    "id": {
+      "default": "",
+      "title": "Id",
+      "type": "string"
+    },
+    "items_found": {
+      "default": 0,
+      "title": "Items Found",
+      "type": "integer"
+    },
+    "items_new": {
+      "default": 0,
+      "title": "Items New",
+      "type": "integer"
+    },
+    "ok": {
+      "title": "Ok",
+      "type": "boolean"
+    },
+    "scrubbed": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Scrubbed",
+      "type": "array"
+    },
+    "source_id": {
+      "title": "Source Id",
+      "type": "string"
+    },
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    }
+  },
+  "required": [
+    "source_id",
+    "started_at",
+    "finished_at",
+    "ok"
+  ],
+  "title": "FetchLog",
+  "type": "object"
+}

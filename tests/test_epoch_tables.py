@@ -66,3 +66,40 @@ def test_prices_key_on_benchmark_and_threshold():
         and rows[0].value_numeric == 0.175
         and rows[0].as_of_date == date(2025, 2, 5)
     )
+
+
+def test_models_read_frontier_compute_and_notable_power_with_real_headers():
+    from ai_tracker.ingest.connectors.epoch_tables import EpochModels
+
+    head = "Model,Publication date,Organization,Training compute (FLOP),Training compute notes,Domain,Confidence,Model accessibility\n"
+    z = _zip(
+        {
+            "frontier_ai_models.csv": head
+            + "GPT-5,2025-08-07,OpenAI,5e25,,Language,Confident,API access\n"
+            + "AlexNet,2012-09-30,U Toronto,4.7e17,,Vision,Confident,Open weights\n"  # before 2015: skipped
+            + "Grok 4,2025-07-09,xAI,5e26,,Language,Likely,API access\n",
+            "notable_ai_models.csv": "Model,Publication date,Organization,Training power draw (W),Confidence\nGPT-5,2025-08-07,OpenAI,2.5e8,Likely\n",
+        }
+    )
+    rows = {r.series_key: r for r in EpochModels().extract([_item(z)])}
+    assert rows["epoch_models.gpt_5.training_compute_flop.pt"].audited_vs_reported.value == "reported"
+    assert rows["epoch_models.grok_4.training_compute_flop.pt"].audited_vs_reported.value == "estimated"
+    assert rows["epoch_models.gpt_5.training_power_w.pt"].value_numeric == 2.5e8
+    assert not any("alexnet" in k for k in rows)
+
+
+def test_hardware_stores_fp16_flops_and_price_as_published_with_real_headers():
+    from ai_tracker.ingest.connectors.epoch_tables import EpochHardware
+
+    head = "Hardware name,Manufacturer,Type,Release date,Release price (USD),Tensor-FP16/BF16 performance (FLOP/s),Price-performance\n"
+    z = _zip(
+        {
+            "ml_hardware.csv": head
+            + "NVIDIA GB300 (Blackwell Ultra),NVIDIA,GPU,2025-08-01,43000,2.5e15,5.8e10\nNo price chip,X,GPU,2025-01-01,,1e15,\n"
+        }
+    )
+    rows = {r.series_key: r.value_numeric for r in EpochHardware().extract([_item(z)])}
+    assert rows == {
+        "epoch_hw.nvidia_gb300_blackwell_ultra.fp16_flops.pt": 2.5e15,
+        "epoch_hw.nvidia_gb300_blackwell_ultra.release_price_usd.pt": 43000,
+    }

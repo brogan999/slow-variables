@@ -1,0 +1,179 @@
+{
+  "$defs": {
+    "Membership": {
+      "properties": {
+        "from_date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "From Date"
+        },
+        "is_primary": {
+          "default": true,
+          "title": "Is Primary",
+          "type": "boolean"
+        },
+        "layer_id": {
+          "title": "Layer Id",
+          "type": "string"
+        },
+        "sublayer_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sublayer Id"
+        },
+        "to_date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "To Date"
+        }
+      },
+      "required": [
+        "layer_id"
+      ],
+      "title": "Membership",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "aliases": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Aliases",
+      "type": "array"
+    },
+    "cik": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Cik"
+    },
+    "crunchbase_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Crunchbase Id"
+    },
+    "extra_ciks": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Extra Ciks",
+      "type": "array"
+    },
+    "founded": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Founded"
+    },
+    "hq": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Hq"
+    },
+    "id": {
+      "title": "Id",
+      "type": "string"
+    },
+    "kind": {
+      "default": "company",
+      "enum": [
+        "company",
+        "lab",
+        "agency",
+        "person",
+        "university",
+        "fund",
+        "nonprofit"
+      ],
+      "title": "Kind",
+      "type": "string"
+    },
+    "memberships": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/Membership"
+      },
+      "title": "Memberships",
+      "type": "array"
+    },
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "notes": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Notes"
+    },
+    "verified": {
+      "default": false,
+      "title": "Verified",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "id",
+    "name"
+  ],
+  "title": "Entity",
+  "type": "object"
+}

@@ -5,7 +5,7 @@
   "id": "horizon_fits",
   "latest": {
    "as_of_date": "2026-03-05",
-   "computed_at": "2026-09-11T14:26:08.780096Z",
+   "computed_at": "2026-09-11T14:43:44.230362Z",
    "dims": {
     "aic": "-44.8",
     "n": "20",
@@ -84,7 +84,7 @@
   "related_latest": {
    "horizon_blowup_year_50_since_2024": {
     "as_of_date": "2026-03-05",
-    "computed_at": "2026-09-11T14:26:08.780096Z",
+    "computed_at": "2026-09-11T14:43:44.230362Z",
     "dims": {
      "aic": "78.1",
      "n": "20",
@@ -153,7 +153,7 @@
    },
    "horizon_doubling_days_50_since_2023": {
     "as_of_date": "2026-03-05",
-    "computed_at": "2026-09-11T14:26:08.780096Z",
+    "computed_at": "2026-09-11T14:43:44.230362Z",
     "dims": {
      "aic": "-31.0",
      "n": "22",
@@ -222,7 +222,7 @@
    },
    "horizon_doubling_days_80_since_2023": {
     "as_of_date": "2026-04-07",
-    "computed_at": "2026-09-11T14:26:08.780096Z",
+    "computed_at": "2026-09-11T14:43:44.230362Z",
     "dims": {
      "aic": "-27.6",
      "n": "23",
@@ -293,7 +293,7 @@
    },
    "horizon_doubling_days_80_since_2024": {
     "as_of_date": "2026-04-07",
-    "computed_at": "2026-09-11T14:26:08.780096Z",
+    "computed_at": "2026-09-11T14:43:44.230362Z",
     "dims": {
      "aic": "-41.3",
      "n": "21",
@@ -374,10 +374,12 @@
   "id": "ord_misfit",
   "latest": {
    "as_of_date": "2026-03-05",
-   "computed_at": "2026-09-11T14:26:08.780096Z",
-   "dims": {},
-   "formula_version": "1",
-   "id": "cec9da67e1d41a15",
+   "computed_at": "2026-09-11T14:43:44.230362Z",
+   "dims": {
+    "model": "gpt_5_4"
+   },
+   "formula_version": "2",
+   "id": "d7237820708951ab",
    "input_observation_ids": [
     "11a8bbd24c5c99cb",
     "858c619bbf5d9edd"
@@ -398,7 +400,7 @@
   "shape": {
    "unit": "ratio"
   },
-  "sql": "SELECT a.as_of_date, (a.value_numeric / b.value_numeric) / 3.1063 AS value, [a.id, b.id] AS obs_ids\nFROM observations a JOIN observations b ON a.subject = b.subject AND a.as_of_date = b.as_of_date\nWHERE a.series_key LIKE 'metr.%.horizon_50.pt' AND b.series_key LIKE 'metr.%.horizon_80.pt' AND NOT coalesce(a.disputed, false)\n"
+  "sql": "SELECT a.as_of_date, a.subject AS model, (a.value_numeric / b.value_numeric) / 3.1063 AS value, [a.id, b.id] AS obs_ids\nFROM observations a JOIN observations b ON a.subject = b.subject AND a.as_of_date = b.as_of_date\nWHERE a.series_key LIKE 'metr.%.horizon_50.pt' AND b.series_key LIKE 'metr.%.horizon_80.pt' AND NOT coalesce(a.disputed, false)\n"
  },
  {
   "caveats": "Fiscal quarters mapped to the calendar quarter of their period end; a fiscal Q4 is the full year minus three quarters. Chips are whole-company, so they include gaming and client chips. Only quarters with all five inputs are kept. The lab estimate uses the run-rate as of the quarter's end (never a later one), and the margin of the year containing the quarter, else the latest earlier year; revenue minus inference compute overstates true gross margin.",
@@ -409,7 +411,7 @@
   "id": "gross_profit_stack",
   "latest": {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-11T14:26:08.780096Z",
+   "computed_at": "2026-09-11T14:43:44.230362Z",
    "dims": {
     "basis": "estimated",
     "layer_id": "model"
@@ -467,7 +469,7 @@
   "related_latest": {
    "gross_margin_fy": {
     "as_of_date": "2026-06-30",
-    "computed_at": "2026-09-11T14:26:08.780096Z",
+    "computed_at": "2026-09-11T14:43:44.230362Z",
     "dims": {
      "entity": "msft"
     },
@@ -488,7 +490,7 @@
    },
    "lab_gross_margin_estimate": {
     "as_of_date": "2025-12-31",
-    "computed_at": "2026-09-11T14:26:08.780096Z",
+    "computed_at": "2026-09-11T14:43:44.230362Z",
     "dims": {
      "entity": "openai"
     },
@@ -522,7 +524,7 @@
   "id": "margin_stack",
   "latest": {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-11T14:26:08.780096Z",
+   "computed_at": "2026-09-11T14:43:44.230362Z",
    "dims": {
     "layer_id": "compute_semis"
    },
@@ -571,7 +573,7 @@
   "id": "hhi_layers",
   "latest": {
    "as_of_date": "2026-03-31",
-   "computed_at": "2026-09-11T14:26:08.780096Z",
+   "computed_at": "2026-09-11T14:43:44.230362Z",
    "dims": {
     "layer_id": "compute_cloud"
    },
@@ -608,7 +610,7 @@
   "id": "recoupment",
   "latest": {
    "as_of_date": "2026-08-31",
-   "computed_at": "2026-09-11T14:26:08.780096Z",
+   "computed_at": "2026-09-11T14:43:44.230362Z",
    "dims": {
     "entity": "z_ai_zhipu"
    },
@@ -642,7 +644,7 @@
   "id": "concordance",
   "latest": {
    "as_of_date": "2026-07-31",
-   "computed_at": "2026-09-11T14:26:08.780096Z",
+   "computed_at": "2026-09-11T14:43:44.230362Z",
    "dims": {},
    "formula_version": "2",
    "id": "ed08c58063fcdeb8",
@@ -684,7 +686,7 @@
   "id": "capex_ratio",
   "latest": {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-11T14:26:08.780096Z",
+   "computed_at": "2026-09-11T14:43:44.230362Z",
    "dims": {},
    "formula_version": "1",
    "id": "7867e6c6b3b7fe32",
@@ -744,7 +746,7 @@
   "id": "circular",
   "latest": {
    "as_of_date": "2026-08-17",
-   "computed_at": "2026-09-11T14:26:08.780096Z",
+   "computed_at": "2026-09-11T14:43:44.230362Z",
    "dims": {},
    "formula_version": "2",
    "id": "f6d2b4cee03aed99",
@@ -800,7 +802,7 @@
   "id": "price_capability",
   "latest": {
    "as_of_date": "2026-09-10",
-   "computed_at": "2026-09-11T14:26:08.780096Z",
+   "computed_at": "2026-09-11T14:43:44.230362Z",
    "dims": {},
    "formula_version": "3",
    "id": "aadf76ab192df530",
@@ -835,7 +837,7 @@
   "id": "customer_concentration",
   "latest": {
    "as_of_date": "2026-07-26",
-   "computed_at": "2026-09-11T14:26:08.780096Z",
+   "computed_at": "2026-09-11T14:43:44.230362Z",
    "dims": {
     "entity": "nvda"
    },
@@ -870,7 +872,7 @@
   "id": "incremental_capex",
   "latest": {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-11T14:26:08.780096Z",
+   "computed_at": "2026-09-11T14:43:44.230362Z",
    "dims": {
     "entity": "msft"
    },
@@ -902,7 +904,7 @@
   "related_latest": {
    "capex_to_revenue_stack": {
     "as_of_date": "2026-06-30",
-    "computed_at": "2026-09-11T14:26:08.780096Z",
+    "computed_at": "2026-09-11T14:43:44.230362Z",
     "dims": {},
     "formula_version": "1",
     "id": "7867e6c6b3b7fe32",
@@ -959,7 +961,7 @@
   "id": "surprise",
   "latest": {
    "as_of_date": "2026-07-31",
-   "computed_at": "2026-09-11T14:26:08.780096Z",
+   "computed_at": "2026-09-11T14:43:44.230362Z",
    "dims": {},
    "formula_version": "1",
    "id": "7ffbab052765a202",
@@ -995,7 +997,7 @@
   "id": "venture_4q",
   "latest": {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-11T14:26:08.780096Z",
+   "computed_at": "2026-09-11T14:43:44.230362Z",
    "dims": {
     "layer_id": "model",
     "sublayer_id": "all"
@@ -1068,7 +1070,7 @@
   "id": "venture_intensity",
   "latest": {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-11T14:26:08.780096Z",
+   "computed_at": "2026-09-11T14:43:44.230362Z",
    "dims": {},
    "formula_version": "1",
    "id": "2c1a393103691d88",
@@ -1124,7 +1126,7 @@
   "id": "venture_frontier",
   "latest": {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-11T14:26:08.780096Z",
+   "computed_at": "2026-09-11T14:43:44.230362Z",
    "dims": {},
    "formula_version": "1",
    "id": "39cc8e427e2c5638",
@@ -1222,7 +1224,7 @@
   "id": "aa_frontier",
   "latest": {
    "as_of_date": "2026-09-01",
-   "computed_at": "2026-09-11T14:26:08.780096Z",
+   "computed_at": "2026-09-11T14:43:44.230362Z",
    "dims": {},
    "formula_version": "2",
    "id": "9ac351a81f2d26a0",
@@ -1252,7 +1254,7 @@
   "id": "price_capability_aa",
   "latest": {
    "as_of_date": "2026-09-11",
-   "computed_at": "2026-09-11T14:26:08.780096Z",
+   "computed_at": "2026-09-11T14:43:44.230362Z",
    "dims": {},
    "formula_version": "2",
    "id": "f93befc11a81de1e",
@@ -1278,7 +1280,7 @@
   "related_latest": {
    "aa_frontier_price_per_point": {
     "as_of_date": "2026-09-11",
-    "computed_at": "2026-09-11T14:26:08.780096Z",
+    "computed_at": "2026-09-11T14:43:44.230362Z",
     "dims": {},
     "formula_version": "2",
     "id": "34a2009ea85bb400",
@@ -1307,7 +1309,7 @@
   "id": "venture_top3",
   "latest": {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-11T14:26:08.780096Z",
+   "computed_at": "2026-09-11T14:43:44.230362Z",
    "dims": {},
    "formula_version": "1",
    "id": "f1229f10c45623f1",

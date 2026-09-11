@@ -1,0 +1,195 @@
+{
+  "$defs": {
+    "ProxyType": {
+      "enum": [
+        "benchmark",
+        "deployment",
+        "product",
+        "behaviour",
+        "policy",
+        "model_release",
+        "market_structure",
+        "price",
+        "capital_flow",
+        "welfare"
+      ],
+      "title": "ProxyType",
+      "type": "string"
+    }
+  },
+  "properties": {
+    "claim_date": {
+      "format": "date",
+      "title": "Claim Date",
+      "type": "string"
+    },
+    "claim_text": {
+      "minLength": 20,
+      "title": "Claim Text",
+      "type": "string"
+    },
+    "claim_url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Claim Url"
+    },
+    "claimant": {
+      "title": "Claimant",
+      "type": "string"
+    },
+    "claimant_entity_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Claimant Entity Id"
+    },
+    "confidence": {
+      "default": 0,
+      "maximum": 95,
+      "minimum": 0,
+      "title": "Confidence",
+      "type": "integer"
+    },
+    "counterevidence": {
+      "default": "",
+      "title": "Counterevidence",
+      "type": "string"
+    },
+    "direction_assessment": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Direction Assessment"
+    },
+    "id": {
+      "title": "Id",
+      "type": "string"
+    },
+    "ledger": {
+      "enum": [
+        "nk",
+        "lab",
+        "ai2027",
+        "capture"
+      ],
+      "title": "Ledger",
+      "type": "string"
+    },
+    "magnitude_assessment": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Magnitude Assessment"
+    },
+    "note": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Note"
+    },
+    "operationalisation": {
+      "title": "Operationalisation",
+      "type": "string"
+    },
+    "proxy_types": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ProxyType"
+      },
+      "title": "Proxy Types",
+      "type": "array"
+    },
+    "published": {
+      "default": false,
+      "title": "Published",
+      "type": "boolean"
+    },
+    "related_indicators": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Related Indicators",
+      "type": "array"
+    },
+    "timing_assessment": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Timing Assessment"
+    },
+    "window_end": {
+      "anyOf": [
+        {
+          "format": "date",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Window End"
+    },
+    "window_start": {
+      "anyOf": [
+        {
+          "format": "date",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Window Start"
+    }
+  },
+  "required": [
+    "id",
+    "ledger",
+    "claimant",
+    "claim_text",
+    "claim_date",
+    "operationalisation"
+  ],
+  "title": "Prediction",
+  "type": "object"
+}

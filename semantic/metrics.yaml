@@ -621,15 +621,20 @@ metrics:
     python: fits.loglinear
   perf_per_dollar_doubling_days:
     description: Log-linear fit of FP16 tensor FLOP/s per release-price dollar across accelerators, by release date; doubling time in days.
-    rationale: "Hardware price-performance is the floor under inference-price declines (brief: +49% a year)."
+    rationale: "Hardware price-performance is the floor under inference-price declines (brief: +49% a year). FP16 at a fixed precision, not Epoch's best-precision column, so a chip adding FP8 or INT8 does not read as a price-performance jump."
     grain: [as_of_date]
     unit: days
     lead_lag: leading
-    formula_version: 1
-    inputs: ["epoch_hw.*.price_performance_flops_per_usd.pt"]
+    formula_version: 2
+    inputs: ["epoch_hw.*.fp16_flops.pt", "epoch_hw.*.release_price_usd.pt"]
     args: {since: "2012-01-01"}
     caveats: Only accelerators with a public release price; recent data-centre GPUs have no list price, so the series may end years before today.
     python: fits.loglinear
+    sql: |
+      SELECT f.as_of_date, f.value_numeric / p.value_numeric AS value, [f.id, p.id] AS obs_ids
+      FROM observations f JOIN observations p ON p.subject = f.subject AND p.as_of_date = f.as_of_date
+      WHERE f.series_key LIKE 'epoch_hw.%.fp16_flops.pt' AND p.series_key LIKE 'epoch_hw.%.release_price_usd.pt'
+        AND NOT f.disputed AND NOT p.disputed AND p.value_numeric > 0
   inference_price_halving_days:
     description: Halving time, in days, of the lowest price per million tokens among models clearing GPT-4-0314's GPQA Diamond score, from Epoch's price-trend series (fit on the inverse price).
     rationale: Price per unit of capability on a fixed benchmark axis; the brief cites ~40x a year at this threshold.
@@ -785,14 +790,14 @@ metrics:
   ord_half_life_misfit:
     description: "How far the observed 50%/80% horizon ratio departs from the constant-hazard (Ord half-life) prediction of ln(0.5)/ln(0.8) = 3.11: the ratio divided by 3.11, per model."
     rationale: "Ord's reframing says every model has a task-length half-life; if success decays at a constant hazard the 50% and 80% horizons sit a fixed 3.1x apart. A misfit above 1 says reliability degrades faster than a constant hazard at long horizons."
-    grain: [as_of_date]
+    grain: [as_of_date, model]
     unit: ratio
     lead_lag: leading
-    formula_version: 1
+    formula_version: 2
     inputs: ["metr.*.horizon_50.pt", "metr.*.horizon_80.pt"]
     caveats: "Two points per model on METR's suite; the constant-hazard model is a null, not a claim."
     sql: |
-      SELECT a.as_of_date, (a.value_numeric / b.value_numeric) / 3.1063 AS value, [a.id, b.id] AS obs_ids
+      SELECT a.as_of_date, a.subject AS model, (a.value_numeric / b.value_numeric) / 3.1063 AS value, [a.id, b.id] AS obs_ids
       FROM observations a JOIN observations b ON a.subject = b.subject AND a.as_of_date = b.as_of_date
       WHERE a.series_key LIKE 'metr.%.horizon_50.pt' AND b.series_key LIKE 'metr.%.horizon_80.pt' AND NOT coalesce(a.disputed, false)
   exposure_vs_usage_gap:

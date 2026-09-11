@@ -37,13 +37,20 @@ def load_memos() -> list[dict[str, Any]]:
     return out
 
 
+RANK = {"leading": 0, "coincident": 1, "lagging": 2}
+
+
 def facts(store: st.Store, since: date, today: date) -> dict[str, Any]:
     names = {i.id: i.name for i in store.seed.indicators} | {
         p.id: p.claim_text[:80] for p in store.seed.predictions
     }
+    # P1 §8: leading indicators first, then coincident, then lagging; predictions after indicators
+    lead = {
+        i.id: RANK.get(i.leading_lagging.value if i.leading_lagging else "", 3) for i in store.seed.indicators
+    }
     events = [
         {**st.dump(e), "name": names.get(e.target_id, e.target_id)}
-        for e in sorted(store.events, key=lambda e: e.created_at)
+        for e in sorted(store.events, key=lambda e: (lead.get(e.target_id, 4), e.created_at))
         if since <= e.created_at.date() <= today
     ]
     cur = store.con.execute(
@@ -66,12 +73,14 @@ def facts(store: st.Store, since: date, today: date) -> dict[str, Any]:
             {
                 "id": ind.id,
                 "name": ind.name,
+                "leading_lagging": ind.leading_lagging.value if ind.leading_lagging else None,
                 "unit": ind.unit,
                 "new": len(ids),
                 "latest": pts[-1] if pts else None,
                 "derived_id": drows[-1].id if drows else None,
             }
         )
+    by_indicator.sort(key=lambda r: (lead.get(r["id"], 3), r["name"]))
     by_source: dict[str, int] = {}
     for r in new:
         by_source[r["source_id"]] = by_source.get(r["source_id"], 0) + 1
@@ -220,7 +229,7 @@ def digest(f: dict[str, Any]) -> str:
 
 PROMPT = """You write the weekly memo for an AI diffusion and value-capture tracker. Given the observations and evidence added since {since}, which indicators changed status or would under the band and direction rules? Which crosswalk pairs moved in opposite directions? Draft the memo, the L0 sentences for both lenses, and note the changelog entries.
 
-Rules: use only the facts below; never introduce a number that is not in them. Every number must be followed by the citation token given with it ([obs:...], [derived:...], [ind:...] or [event:...]); a status is cited with [ind:<id>]. Under 450 words. Markdown with these sections: an opening paragraph, "## What changed", "## New evidence", "## Watchlist", "## Thesis monitor", "## Crosswalk", and last "## Lens sentences" containing exactly two lines "Diffusion: ..." and "Capture: ...". Fast is not good and concentrating is not good; say what moved and what it means for the normal-technology reading, nothing more.
+Rules: use only the facts below; never introduce a number that is not in them. Every number must be followed by the citation token given with it ([obs:...], [derived:...], [ind:...] or [event:...]); a status is cited with [ind:<id>]. Under 450 words. Markdown with these sections: an opening paragraph, "## What changed", "## New evidence", "## Watchlist", "## Thesis monitor", "## Crosswalk", and last "## Lens sentences" containing exactly two lines "Diffusion: ..." and "Capture: ...". Fast is not good and concentrating is not good; say what moved and what it means for the normal-technology reading, nothing more. Facts are ordered leading indicators first; lead with what moved among them, since they move before the coincident and lagging ones.
 
 Facts (JSON):
 {facts}

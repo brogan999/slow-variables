@@ -78,10 +78,15 @@ def test_prediction_assessments_are_digit_free_and_compare_groups_claims_by_ledg
     s = st.Store()
     for p in s.seed.predictions:
         for f in ("direction_assessment", "magnitude_assessment", "timing_assessment"):
-            assert not re.search(r"\d", getattr(p, f) or ""), (p.id, f)  # a figure belongs to a cited record, not prose
+            assert not re.search(r"\d", getattr(p, f) or ""), (
+                p.id,
+                f,
+            )  # a figure belongs to a cited record, not prose
     rows = {r["indicator"]: r for r in s._compare({i.id: s._card(i) for i in s.seed.indicators})["rows"]}
     dev = rows["dev_rct_uplift"]["columns"]
-    assert [x["id"] for x in dev["lab"]["predictions"]] == ["amodei_swe_end_to_end_6_12mo"] and not dev["ai2027"]["predictions"]
+    assert [x["id"] for x in dev["lab"]["predictions"]] == ["amodei_swe_end_to_end_6_12mo"] and not dev[
+        "ai2027"
+    ]["predictions"]
     assert rows["margin_stack_semis_share"]["leans"] is None  # a capture row takes no worldview lean
 
 
@@ -103,7 +108,21 @@ def test_everyone_on_appendix_f_is_read_through_a_source_or_a_skipped_row():
     s = st.Seed.load()
     have = {p for x in s.sources for p in x.people} | {p for x in s.skipped for p in x.people}
     lines = open("docs/briefs/ai-tracker-brief-v2.md").read().splitlines()
-    text = " ; ".join(line.split(":", 1)[1] for line in lines if line.startswith(("Diffusion: Arvind", "Capture: Dylan")))
-    names = [re.sub(r"^and\s+", "", re.sub(r"\(.*?\)", "", x).strip().rstrip(".").strip()) for x in re.split(r"[;,]", text)]
+    text = " ; ".join(
+        line.split(":", 1)[1] for line in lines if line.startswith(("Diffusion: Arvind", "Capture: Dylan"))
+    )
+    names = [
+        re.sub(r"^and\s+", "", re.sub(r"\(.*?\)", "", x).strip().rstrip(".").strip())
+        for x in re.split(r"[;,]", text)
+    ]
     assert len(names) > 60 and not [n for n in names if n and n not in have]
     assert not [x for x in s.sources if x.connector in ("x_list", "x_drop")]  # no request is ever made to X
+
+
+def test_no_tracked_document_names_a_local_path():
+    import subprocess
+
+    files = subprocess.run(["git", "ls-files", "docs"], capture_output=True, text=True).stdout.split()
+    home = "/" + "Users/"  # split so this file never matches itself
+    bad = [f for f in files if f.endswith(".md") and ("~" + "/" in open(f).read() or home in open(f).read())]
+    assert not bad, bad

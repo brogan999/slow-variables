@@ -1,0 +1,460 @@
+{
+  "$defs": {
+    "Band": {
+      "properties": {
+        "hi": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Hi"
+        },
+        "lo": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Lo"
+        }
+      },
+      "title": "Band",
+      "type": "object"
+    },
+    "Direction": {
+      "enum": [
+        "concentrating",
+        "dispersing",
+        "stable",
+        "unclear",
+        "emerging",
+        "not_yet_measurable"
+      ],
+      "title": "Direction",
+      "type": "string"
+    },
+    "DirectionRule": {
+      "properties": {
+        "dead_band": {
+          "title": "Dead Band",
+          "type": "number"
+        },
+        "higher_is": {
+          "enum": [
+            "concentrating",
+            "dispersing"
+          ],
+          "title": "Higher Is",
+          "type": "string"
+        },
+        "periods": {
+          "default": 4,
+          "title": "Periods",
+          "type": "integer"
+        },
+        "rationale": {
+          "title": "Rationale",
+          "type": "string"
+        }
+      },
+      "required": [
+        "dead_band",
+        "higher_is",
+        "rationale"
+      ],
+      "title": "DirectionRule",
+      "type": "object"
+    },
+    "FlowStatus": {
+      "enum": [
+        "consistent_with_normal",
+        "faster_than_normal",
+        "slower_than_normal",
+        "emerging",
+        "not_yet_measurable"
+      ],
+      "title": "FlowStatus",
+      "type": "string"
+    },
+    "LeadLag": {
+      "enum": [
+        "leading",
+        "coincident",
+        "lagging"
+      ],
+      "title": "LeadLag",
+      "type": "string"
+    },
+    "ProxyType": {
+      "enum": [
+        "benchmark",
+        "deployment",
+        "product",
+        "behaviour",
+        "policy",
+        "model_release",
+        "market_structure",
+        "price",
+        "capital_flow",
+        "welfare"
+      ],
+      "title": "ProxyType",
+      "type": "string"
+    }
+  },
+  "properties": {
+    "band_input": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Band Input"
+    },
+    "band_rationale": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Band Rationale"
+    },
+    "bucket_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Bucket Id"
+    },
+    "cadence_expected": {
+      "title": "Cadence Expected",
+      "type": "string"
+    },
+    "confidence": {
+      "default": 0,
+      "maximum": 95,
+      "minimum": 0,
+      "title": "Confidence",
+      "type": "integer"
+    },
+    "counterevidence": {
+      "default": "",
+      "title": "Counterevidence",
+      "type": "string"
+    },
+    "definition": {
+      "title": "Definition",
+      "type": "string"
+    },
+    "direction": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Direction"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "direction_rule": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/DirectionRule"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "falsifying_band": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Band"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "fast_band": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Band"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "flow_status": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/FlowStatus"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "id": {
+      "title": "Id",
+      "type": "string"
+    },
+    "layer_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Layer Id"
+    },
+    "leading_lagging": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/LeadLag"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "metric": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Metric"
+    },
+    "metric_dims": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "default": {},
+      "title": "Metric Dims",
+      "type": "object"
+    },
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "normal_band": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Band"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "override_note": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Override Note"
+    },
+    "proposed_status": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Proposed Status"
+    },
+    "proxy_types": {
+      "items": {
+        "$ref": "#/$defs/ProxyType"
+      },
+      "title": "Proxy Types",
+      "type": "array"
+    },
+    "published": {
+      "default": false,
+      "title": "Published",
+      "type": "boolean"
+    },
+    "related_bottlenecks": {
+      "default": [],
+      "items": {
+        "type": "integer"
+      },
+      "title": "Related Bottlenecks",
+      "type": "array"
+    },
+    "related_indicators": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Related Indicators",
+      "type": "array"
+    },
+    "related_metrics": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Related Metrics",
+      "type": "array"
+    },
+    "related_predictions": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Related Predictions",
+      "type": "array"
+    },
+    "series_keys": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Series Keys",
+      "type": "array"
+    },
+    "stale_ok": {
+      "default": false,
+      "title": "Stale Ok",
+      "type": "boolean"
+    },
+    "stale_reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Stale Reason"
+    },
+    "sublayer_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sublayer Id"
+    },
+    "timing_rationale": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Timing Rationale"
+    },
+    "tracker_interpretation": {
+      "title": "Tracker Interpretation",
+      "type": "string"
+    },
+    "unit": {
+      "title": "Unit",
+      "type": "string"
+    },
+    "unpublished_reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Unpublished Reason"
+    },
+    "updated_at": {
+      "format": "date",
+      "title": "Updated At",
+      "type": "string"
+    },
+    "valve_measured": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Valve Measured"
+    },
+    "why_it_matters": {
+      "title": "Why It Matters",
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "definition",
+    "why_it_matters",
+    "proxy_types",
+    "unit",
+    "cadence_expected",
+    "tracker_interpretation",
+    "updated_at"
+  ],
+  "title": "Indicator",
+  "type": "object"
+}

@@ -70,6 +70,20 @@ def test_refresh_list_names_hand_entered_series_but_not_connector_fed_or_one_off
 
     s = st.Store()
     due = "\n".join(due_for_refresh(s, date(2030, 1, 1)))
-    assert "edd.ca_high_exposure.claims_3mma_mom.m" in due  # hand-entered, monthly, behind a published indicator
+    assert (
+        "edd.ca_high_exposure.claims_3mma_mom.m" in due
+    )  # hand-entered, monthly, behind a published indicator
     assert "ramp.us_businesses.paid_ai_adoption_share.m" not in due  # the connector now writes its newest row
     assert "metr_blog.rct_2025" not in due  # a one-off study is never due
+
+
+def test_memo_facts_put_leading_indicators_first():
+    from datetime import date
+
+    from ai_tracker import store as st
+    from ai_tracker.memo import RANK, facts
+
+    s = st.Store()
+    f = facts(s, date(2020, 1, 1), date.today())
+    ranks = [RANK.get(r["leading_lagging"] or "", 3) for r in f["by_indicator"]]
+    assert ranks == sorted(ranks) and ranks[0] == 0

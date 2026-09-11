@@ -1,0 +1,292 @@
+{
+  "$defs": {
+    "Basis": {
+      "enum": [
+        "audited",
+        "company_stated",
+        "reported",
+        "estimated"
+      ],
+      "title": "Basis",
+      "type": "string"
+    },
+    "Extraction": {
+      "enum": [
+        "api",
+        "xbrl",
+        "scrape",
+        "pdf",
+        "llm_extract",
+        "manual"
+      ],
+      "title": "Extraction",
+      "type": "string"
+    },
+    "Review": {
+      "enum": [
+        "pending",
+        "approved",
+        "rejected"
+      ],
+      "title": "Review",
+      "type": "string"
+    },
+    "Tier": {
+      "enum": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "title": "Tier",
+      "type": "integer"
+    }
+  },
+  "properties": {
+    "as_of_date": {
+      "format": "date",
+      "title": "As Of Date",
+      "type": "string"
+    },
+    "audited_vs_reported": {
+      "$ref": "#/$defs/Basis"
+    },
+    "content_hash": {
+      "title": "Content Hash",
+      "type": "string"
+    },
+    "dispute_text": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dispute Text"
+    },
+    "disputed": {
+      "default": false,
+      "title": "Disputed",
+      "type": "boolean"
+    },
+    "entity_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Entity Id"
+    },
+    "extraction_method": {
+      "$ref": "#/$defs/Extraction"
+    },
+    "extractor_version": {
+      "title": "Extractor Version",
+      "type": "string"
+    },
+    "gross_vs_net": {
+      "anyOf": [
+        {
+          "enum": [
+            "gross",
+            "net"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Gross Vs Net"
+    },
+    "http_status": {
+      "title": "Http Status",
+      "type": "integer"
+    },
+    "id": {
+      "default": "",
+      "title": "Id",
+      "type": "string"
+    },
+    "note": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Note"
+    },
+    "period_start": {
+      "anyOf": [
+        {
+          "format": "date",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Period Start"
+    },
+    "published_date": {
+      "format": "date",
+      "title": "Published Date",
+      "type": "string"
+    },
+    "raw_snippet": {
+      "minLength": 1,
+      "title": "Raw Snippet",
+      "type": "string"
+    },
+    "retrieved_at": {
+      "format": "date-time",
+      "title": "Retrieved At",
+      "type": "string"
+    },
+    "review_status": {
+      "$ref": "#/$defs/Review",
+      "default": "approved"
+    },
+    "reviewer_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reviewer Id"
+    },
+    "run_rate_vs_booked": {
+      "anyOf": [
+        {
+          "enum": [
+            "run_rate",
+            "booked"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Run Rate Vs Booked"
+    },
+    "series_key": {
+      "title": "Series Key",
+      "type": "string"
+    },
+    "source_id": {
+      "title": "Source Id",
+      "type": "string"
+    },
+    "supersedes_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Supersedes Id"
+    },
+    "tier": {
+      "$ref": "#/$defs/Tier"
+    },
+    "unit": {
+      "title": "Unit",
+      "type": "string"
+    },
+    "url": {
+      "title": "Url",
+      "type": "string"
+    },
+    "value_high": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Value High"
+    },
+    "value_low": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Value Low"
+    },
+    "value_numeric": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Value Numeric"
+    },
+    "value_text": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Value Text"
+    }
+  },
+  "required": [
+    "series_key",
+    "unit",
+    "as_of_date",
+    "published_date",
+    "retrieved_at",
+    "url",
+    "content_hash",
+    "http_status",
+    "source_id",
+    "tier",
+    "audited_vs_reported",
+    "extraction_method",
+    "extractor_version",
+    "raw_snippet"
+  ],
+  "title": "Observation",
+  "type": "object"
+}

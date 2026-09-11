@@ -1,40 +1,5 @@
 {
- "observations": [
-  {
-   "as_of_date": "2017-07-01",
-   "audited_vs_reported": "reported",
-   "content_hash": "0584744ddbd6e22558881571f26376185f4fabdc376e415954a1a88e46cac9ca",
-   "dispute_text": null,
-   "disputed": false,
-   "entity_id": null,
-   "extraction_method": "api",
-   "extractor_version": "epoch_hardware-1",
-   "grade": "B",
-   "gross_vs_net": null,
-   "http_status": 200,
-   "id": "6e6de1b32ed92ee9",
-   "note": null,
-   "period_start": null,
-   "published_date": "2017-07-01",
-   "q": "2017-07-01 00:00:00",
-   "raw_snippet": "{\"Hardware name\": \"NVIDIA Tesla V100 SXM2\", \"Manufacturer\": \"NVIDIA\", \"Release date\": \"2017-07-01\", \"Release price (USD)\": \"11500.0\", \"Tensor-FP16/BF16 performance (FLOP/s)\": \"125000000000000.0\"}",
-   "retrieved_at": "2026-09-10T06:33:11.026267Z",
-   "review_status": "approved",
-   "reviewer_id": null,
-   "run_rate_vs_booked": null,
-   "series_key": "epoch_hw.nvidia_tesla_v100_sxm2.price_performance_flops_per_usd.pt",
-   "source_id": "epoch_hardware",
-   "subject": "nvidia_tesla_v100_sxm2",
-   "supersedes_id": null,
-   "tier": 2,
-   "unit": "FLOP/s per USD",
-   "url": "https://epoch.ai/data/ml_hardware.zip",
-   "value_high": null,
-   "value_low": null,
-   "value_numeric": 10869565217.391304,
-   "value_text": null
-  }
- ],
+ "observations": [],
  "series_key": "epoch_hw.nvidia_tesla_v100_sxm2.price_performance_flops_per_usd.pt",
  "source": {
   "attribution": "Epoch AI, Machine Learning Hardware (CC BY 4.0)",
@@ -54,5 +19,38 @@
   "watch": {}
  },
  "unit": "FLOP/s per USD",
- "withdrawn": []
+ "withdrawn": [
+  {
+   "as_of_date": "2017-07-01",
+   "audited_vs_reported": "reported",
+   "content_hash": "0584744ddbd6e22558881571f26376185f4fabdc376e415954a1a88e46cac9ca",
+   "dispute_text": "Withdrawn 11 Sep 2026: this ratio was computed by our connector (FP16 throughput divided by release price), not published by Epoch. Epoch's two figures are now stored as published and the ratio is computed in the metric perf_per_dollar_doubling_days.",
+   "disputed": true,
+   "entity_id": null,
+   "extraction_method": "api",
+   "extractor_version": "epoch_hardware-1",
+   "grade": "B",
+   "gross_vs_net": null,
+   "http_status": 200,
+   "id": "6e6de1b32ed92ee9",
+   "note": null,
+   "period_start": null,
+   "published_date": "2017-07-01",
+   "raw_snippet": "{\"Hardware name\": \"NVIDIA Tesla V100 SXM2\", \"Manufacturer\": \"NVIDIA\", \"Release date\": \"2017-07-01\", \"Release price (USD)\": \"11500.0\", \"Tensor-FP16/BF16 performance (FLOP/s)\": \"125000000000000.0\"}",
+   "retrieved_at": "2026-09-10T06:33:11.026267Z",
+   "review_status": "rejected",
+   "reviewer_id": null,
+   "run_rate_vs_booked": null,
+   "series_key": "epoch_hw.nvidia_tesla_v100_sxm2.price_performance_flops_per_usd.pt",
+   "source_id": "epoch_hardware",
+   "supersedes_id": null,
+   "tier": 2,
+   "unit": "FLOP/s per USD",
+   "url": "https://epoch.ai/data/ml_hardware.zip",
+   "value_high": null,
+   "value_low": null,
+   "value_numeric": 10869565217.391304,
+   "value_text": null
+  }
+ ]
 }
