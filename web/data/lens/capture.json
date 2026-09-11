@@ -3632,7 +3632,7 @@
        "efd67b65106b82a9"
       ],
       "unit": "index",
-      "value": 0.1567884653567207
+      "value": 0.15678846535672072
      },
      "layer_id": "model",
      "leading_lagging": "leading",
@@ -3666,7 +3666,7 @@
         "efd67b65106b82a9"
        ],
        "unit": "index",
-       "value": 0.1567884653567207
+       "value": 0.15678846535672072
       }
      ],
      "stale_as_of": null,
@@ -9776,7 +9776,7 @@
      },
      "layer_id": "training_input",
      "leading_lagging": "leading",
-     "n_observations": 2,
+     "n_observations": 5,
      "name": "Expert-data market run-rate (Mercor)",
      "pending": null,
      "published": true,
@@ -9822,15 +9822,16 @@
       "as_of": "2026-09-11",
       "dims": {},
       "obs_ids": [
+       "0bdf1920b1feb93e",
        "1b7d08dbce2be548",
        "dc983a8178691c42"
       ],
       "unit": "count",
-      "value": 2.0
+      "value": 3.0
      },
      "layer_id": "training_input",
      "leading_lagging": "leading",
-     "n_observations": 2,
+     "n_observations": 3,
      "name": "Vendors claiming shipped continual learning",
      "pending": null,
      "published": true,
@@ -9855,14 +9856,26 @@
        "value": 2.0
       },
       {
-       "as_of": "2026-09-11",
+       "as_of": "2026-06-25",
        "dims": {},
        "obs_ids": [
+        "0bdf1920b1feb93e",
         "1b7d08dbce2be548",
         "dc983a8178691c42"
        ],
        "unit": "count",
-       "value": 2.0
+       "value": 3.0
+      },
+      {
+       "as_of": "2026-09-11",
+       "dims": {},
+       "obs_ids": [
+        "0bdf1920b1feb93e",
+        "1b7d08dbce2be548",
+        "dc983a8178691c42"
+       ],
+       "unit": "count",
+       "value": 3.0
       }
      ],
      "stale_as_of": null,
@@ -12342,6 +12355,58 @@
      "unit": "share",
      "unpublished_reason": null,
      "valve_measured": "product_to_adoption"
+    },
+    {
+     "answers": [
+      "Valve: Product \u2192 adoption",
+      "Who keeps it: Adopters"
+     ],
+     "bucket_id": "early_adoption",
+     "confidence": 30,
+     "grade": "B",
+     "id": "bbd_work_use_daily",
+     "latest": {
+      "as_of": "2025-11-30",
+      "disputed": false,
+      "grade": "B",
+      "high": null,
+      "low": null,
+      "obs_ids": [
+       "85b2df467df7b32c"
+      ],
+      "series_key": "fed_board.us_workers.genai_work_use_daily_share.pt",
+      "subject": "us_workers",
+      "unit": "share",
+      "value": 0.12
+     },
+     "layer_id": "adopters",
+     "leading_lagging": "coincident",
+     "n_observations": 1,
+     "name": "US workers using generative AI for work every day",
+     "pending": null,
+     "published": true,
+     "sparkline": [
+      {
+       "as_of": "2025-11-30",
+       "disputed": false,
+       "grade": "B",
+       "high": null,
+       "low": null,
+       "obs_ids": [
+        "85b2df467df7b32c"
+       ],
+       "series_key": "fed_board.us_workers.genai_work_use_daily_share.pt",
+       "subject": "us_workers",
+       "unit": "share",
+       "value": 0.12
+      }
+     ],
+     "stale_as_of": null,
+     "stale_reason": null,
+     "status": "emerging",
+     "unit": "share",
+     "unpublished_reason": null,
+     "valve_measured": "product_to_adoption"
     }
    ],
    "name": "Adopters",
@@ -13750,7 +13815,7 @@
      },
      "layer_id": "labour_consumers",
      "leading_lagging": "lagging",
-     "n_observations": 1,
+     "n_observations": 2,
      "name": "Recent-graduate unemployment rate (NY Fed)",
      "pending": null,
      "published": true,
@@ -14919,6 +14984,22 @@
   {
    "author": "claude",
    "counterevidence_considered": null,
+   "created_at": "2026-09-11T14:19:09.561998Z",
+   "evidence_ids": [
+    "85b2df467df7b32c"
+   ],
+   "id": "f90ee3a5931c60cb",
+   "new_conf": 30,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "First reading: 12% of employed US adults used generative AI for work every day in the survey's November 2025 wave (Federal Reserve Board note on the Real-Time Population Survey), inside the normal band. One instrument is the only source, so the status caps at emerging until a second survey measures daily use.",
+   "target_id": "bbd_work_use_daily",
+   "target_type": "indicator"
+  },
+  {
+   "author": "claude",
+   "counterevidence_considered": null,
    "created_at": "2026-09-11T13:48:52.607422Z",
    "evidence_ids": [
     "73920f270a9efb8f"
@@ -14950,26 +15031,6 @@
    "reason": "Seeded from the brief's Appendix B: production continual learning today means retraining adapters on a short cycle and shipping them (the ladder's third rung), research systems that learn across sessions have not shipped, and no benchmark measures what a model retains across sessions. Confirmed while that holds.",
    "target_id": "continual_learning_unsolved",
    "target_type": "prediction"
-  },
-  {
-   "author": "claude",
-   "counterevidence_considered": null,
-   "created_at": "2026-09-11T12:19:23.280474Z",
-   "evidence_ids": [
-    "6ba3229c63091f93",
-    "6be245b72d765ecd",
-    "a56ea8fc9fccc482",
-    "a86b4d5b977580c2",
-    "b1d9b7eed4af1512"
-   ],
-   "id": "4a31d37b4c113168",
-   "new_conf": 30,
-   "new_status": "emerging",
-   "old_conf": 30,
-   "old_status": "not_yet_measurable",
-   "reason": "Held at emerging by its override note: the rubric sum has run 3, 4, 4, 3, 2 and 3 at the last six quarter ends as vendors disclosed lab customers and then went quiet, which tracks disclosure rather than demand; training-input demand reads through the expert-data market run-rate instead.",
-   "target_id": "lab_procurement_signal",
-   "target_type": "indicator"
   }
  ],
  "stack_bars": {

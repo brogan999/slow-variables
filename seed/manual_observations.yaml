@@ -1947,6 +1947,220 @@ observations:
     tier: 6
     basis: reported
     raw_snippet: "Since 2024, investors have put $94.3 billion into 119 AI research labs. Most are pre-revenue and some are pre-product, by design. Only 16 disclose any revenue at all."
+  # --- Part 6 step 8: rows the spec names that were still missing ---
+  - series_key: fed_board.us_workers.genai_work_use_daily_share.pt
+    source_id: fed_board
+    value: 0.12
+    unit: share
+    as_of_date: 2025-11-30
+    published_date: 2026-04-03
+    url: https://www.federalreserve.gov/econres/notes/feds-notes/monitoring-ai-adoption-in-the-u-s-economy-20260403.html
+    tier: 6
+    basis: reported
+    raw_snippet: "Table 2. Generative AI Usage at Work (November 2025) Frequency Level YoY Chg. YoY pct Chg. Any 40.7 9.7 31.3 Daily last week 12 2.9 32 At least once last week 35.2 8.9 33.7 Source: Real-Time Population Survey (Bick, Blandin, and Deming, 2026)"
+    note: "The Board's note republishes the Real-Time Population Survey's November 2025 wave; the table is flattened into one line by the page's text."
+  - series_key: nber.us_workers.genai_work_use_daily_share.pt
+    source_id: nber
+    value: 0.09
+    unit: share
+    as_of_date: 2024-11-30
+    published_date: 2025-02-01
+    url: https://www.nber.org/papers/w32966
+    tier: 6
+    basis: reported
+    raw_snippet: "23 percent of employed respondents had used generative AI for work at least once in the previous week, and 9 percent used it every work day."
+    note: "August and November 2024 waves pooled; the same survey as the Federal Reserve Board note."
+  - series_key: time_magazine.handshake.gross_revenue_run_rate_usd.pt
+    source_id: time_magazine
+    value: 1000000000
+    unit: USD
+    as_of_date: 2026-05-31
+    url: https://time.com/collection/time100-ai/2026/garrett-lord/
+    tier: 5
+    basis: reported
+    run_rate_vs_booked: run_rate
+    gross_vs_net: gross
+    raw_snippet: "Since launching Handshake’s AI unit, Lord says it has grown from zero to more than $1 billion in gross annualized revenue in 16 months"
+    dispute_text: "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself."
+    note: "Handshake's AI unit launched in January 2025; sixteen months puts the reading at about May 2026. A lower bound (more than)."
+  - series_key: yahoo_finance.surge_ai.revenue_usd.fy
+    source_id: yahoo_finance
+    value: 1000000000
+    unit: USD
+    as_of_date: 2024-12-31
+    published_date: 2025-07-19
+    url: https://finance.yahoo.com/news/surge-ai-quietly-hit-1b-150057861.html
+    tier: 5
+    basis: reported
+    raw_snippet: "Surge AI stayed under the radar until this summer, when news broke that the company crossed $1 billion in annual revenue without raising any outside capital."
+    note: "A lower bound (crossed); syndicated Benzinga story citing Inc."
+  - series_key: cnbc.scale_ai.revenue_usd.fy
+    source_id: cnbc
+    value: 1000000000
+    unit: USD
+    as_of_date: 2024-12-31
+    published_date: 2025-11-04
+    url: https://www.cnbc.com/2025/11/04/scale-ais-life-after-meta-has-been-rocky-cfo-insists-not-a-zombie.html
+    tier: 5
+    basis: reported
+    raw_snippet: "The startup generated close to $1 billion in revenue last year, before the Meta deal, a spokesperson told CNBC in August."
+    note: "Close to, as the company's spokesperson put it."
+  - series_key: siepr.us_recent_grads.unemployment_rate.pt
+    source_id: siepr
+    value: 0.056
+    unit: share
+    as_of_date: 2026-03-31
+    url: https://siepr.stanford.edu/publications/policy-brief/what-really-happening-jobs-separating-ai-hype-reality
+    tier: 6
+    basis: reported
+    raw_snippet: "Recent graduates are facing the most challenging job market in years, with unemployment rates for new grads reaching 5.6 percent in early 2026, up 1.6 percentage points from three years earlier."
+    note: "Early 2026, dated to the end of the first quarter."
+  - series_key: evidence.new_grad_unemployment.against.pt
+    source_id: siepr
+    value_text: "SIEPR: since 2022 unemployment in the most AI-exposed fifth of workers rose 0.77 points, slightly less than the 0.85 points in the least exposed."
+    unit: text
+    as_of_date: 2026-03-31
+    url: https://siepr.stanford.edu/publications/policy-brief/what-really-happening-jobs-separating-ai-hype-reality
+    tier: 6
+    basis: reported
+    raw_snippet: "As shown in Figure 1, the unemployment rate for the top quintile of AI-exposed workers has risen by 0.77 percentage points since 2022, while the unemployment rate for the least-exposed workers rose slightly more, by 0.85 percentage points over the same period."
+  - series_key: evidence.state_ai_bills_introduced.context.pt
+    source_id: multistate
+    value_text: "MultiState: 1,561 AI-related bills introduced in 45 states by March 2026, a count for the session so far rather than the full year."
+    unit: text
+    as_of_date: 2026-03-31
+    url: https://www.multistate.ai/artificial-intelligence-ai-legislation
+    tier: 6
+    basis: reported
+    raw_snippet: "As of March 2026, state lawmakers in 45 states have already introduced 1,561 AI-related bills"
+  - series_key: evidence.state_ai_bills_introduced.context.pt
+    source_id: transparency_coalition
+    value_text: "Transparency Coalition: 84 new AI-related laws passed or enacted in 27 states in 2026 by 21 July, a count of laws rather than bills."
+    unit: text
+    as_of_date: 2026-07-21
+    published_date: 2026-07-21
+    url: https://www.transparencycoalition.ai/news/tcai-report-84-new-ai-laws-enacted-in-27-states-in-2026
+    tier: 6
+    basis: reported
+    raw_snippet: "the Transparency Coalition has found that 84 new AI-related laws have been passed and/or enacted across 27 states so far in 2026."
+  - series_key: cl_ladder.baseten_draft.rung.pt
+    source_id: baseten_blog
+    entity_id: baseten
+    value: 2
+    unit: rung
+    as_of_date: 2026-06-25
+    published_date: 2026-06-25
+    url: https://www.baseten.co/blog/live-draft-model-training-for-speculative-decoding/
+    tier: 7
+    basis: company_stated
+    raw_snippet: "The pipeline extracts hidden states directly from live inference and uses them to train the draft model on the fly, eliminating the need to store data offline."
+    coding: "Rung 2 (population-level online learning): one draft model updated continuously from all users' live inference."
+  - series_key: evidence.compute_share_of_spend.context.pt
+    source_id: epoch_blog
+    value_text: "Epoch estimates compute (R&D plus inference) at 54% to 62% of costs across Anthropic, MiniMax and Z.ai: a one-off range for three companies, not a series."
+    unit: text
+    as_of_date: 2026-02-04
+    published_date: 2026-02-04
+    url: https://epoch.ai/data-insights/company-spending-breakdown
+    tier: 6
+    basis: estimated
+    raw_snippet: "Across three AI companies where we can make estimates, compute is the dominant expense: R&D and inference compute together make up 54% to 62% of costs."
+  - series_key: evidence.epoch_inference_price_fixed_capability.context.pt
+    source_id: epoch_blog
+    value_text: "Epoch: the price of reaching a fixed capability fell between 9x and 900x a year, depending on the milestone."
+    unit: text
+    as_of_date: 2025-03-12
+    published_date: 2025-03-12
+    url: https://epoch.ai/data-insights/llm-inference-price-trends
+    tier: 6
+    basis: estimated
+    raw_snippet: "The rate of decline varies dramatically depending on the performance milestone, ranging from 9x to 900x per year."
+  - series_key: evidence.epoch_inference_price_fixed_capability.for.pt
+    source_id: a16z
+    value_text: "Andreessen Horowitz: for a model of equivalent performance, inference cost falls about tenfold a year (LLMflation)."
+    unit: text
+    as_of_date: 2024-11-12
+    published_date: 2024-11-12
+    url: https://a16z.com/llmflation-llm-inference-cost/
+    tier: 6
+    basis: estimated
+    raw_snippet: "For an LLM of equivalent performance, the cost is decreasing by 10x every year."
+  - series_key: evidence.open_vs_closed_gap.context.pt
+    source_id: stanford_hai_ai_index
+    value_text: "AI Index 2025: the best closed model's lead over the best open one on Chatbot Arena fell from 8.04% in January 2024 to 1.70% in February 2025."
+    unit: text
+    as_of_date: 2025-02-28
+    published_date: 2025-04-07
+    url: https://hai-production.s3.amazonaws.com/files/hai_ai_index_report_2025.pdf
+    tier: 6
+    basis: reported
+    raw_snippet: "In early January 2024, the leading closed- weight model outperformed the top open-weight model by 8.04% on the Chatbot Arena Leaderboard. By February 2025, this gap had narrowed to 1.70%."
+  - series_key: mercor_blog.mercor.round_equity_usd.pt
+    source_id: mercor_blog
+    entity_id: mercor
+    value: 350000000
+    unit: USD
+    as_of_date: 2025-10-27
+    published_date: 2025-10-27
+    url: https://www.mercor.com/blog/series-c/
+    tier: 7
+    basis: company_stated
+    raw_snippet: "Today, we're announcing our $350 million Series C funding, led by Felicis with participation from Benchmark, General Catalyst, and Robinhood Ventures. This round values Mercor at $10 billion, 5x our Series B valuation."
+  - series_key: mercor_blog.mercor.post_money_usd.pt
+    source_id: mercor_blog
+    entity_id: mercor
+    value: 10000000000
+    unit: USD
+    as_of_date: 2025-10-27
+    published_date: 2025-10-27
+    url: https://www.mercor.com/blog/series-c/
+    tier: 7
+    basis: company_stated
+    raw_snippet: "Today, we're announcing our $350 million Series C funding, led by Felicis with participation from Benchmark, General Catalyst, and Robinhood Ventures. This round values Mercor at $10 billion, 5x our Series B valuation."
+  - series_key: cnbc.zhipu.revenue_cny.fy
+    source_id: cnbc
+    entity_id: zhipu
+    value: 724000000
+    unit: CNY
+    as_of_date: 2025-12-31
+    published_date: 2026-04-01
+    url: https://www.cnbc.com/2026/04/01/china-ai-tiger-zhipu-shares-surge-revenue-growth-first-earnings-report.html
+    tier: 5
+    basis: reported
+    raw_snippet: "Zhipu said in its earnings report released Tuesday that its revenue rose about 132% to 724 million yuan in 2025 from the previous year, though that figure missed the mean analyst estimate of 760 million yuan, polled by Reuters."
+  - series_key: cnbc.zhipu.ipo_raise_usd.pt
+    source_id: cnbc
+    entity_id: zhipu
+    value: 558000000
+    unit: USD
+    as_of_date: 2026-01-08
+    published_date: 2026-04-01
+    url: https://www.cnbc.com/2026/04/01/china-ai-tiger-zhipu-shares-surge-revenue-growth-first-earnings-report.html
+    tier: 5
+    basis: reported
+    raw_snippet: "Listed in Hong Kong in January after raising $558 million in an initial public offering"
+  - series_key: scmp.minimax.revenue_usd.fy
+    source_id: scmp
+    entity_id: minimax
+    value: 79000000
+    unit: USD
+    as_of_date: 2025-12-31
+    published_date: 2026-08-26
+    url: https://www.scmp.com/tech/big-tech/article/3365341/minimax-revenue-surges-283-remains-behind-pace-meet-forecast-amid-crowded-ai-race
+    tier: 5
+    basis: reported
+    raw_snippet: "The company reported full-year revenue of US$79 million for 2025."
+  - series_key: cnbc.minimax.ipo_raise_hkd.pt
+    source_id: cnbc
+    entity_id: minimax
+    value: 4800000000
+    unit: HKD
+    as_of_date: 2026-01-09
+    published_date: 2026-01-09
+    url: https://www.cnbc.com/2026/01/09/minimax-hong-kong-ipo-ai-tigers-zhipu.html
+    tier: 5
+    basis: reported
+    raw_snippet: "The company raised 4.8 billion Hong Kong dollars ($620 million) in its IPO"
   # --- X posts by people the tracker reads, quoted from a page that already carries their text; no request is made to X ---
   - series_key: watch.x.sama.pt
     source_id: techcrunch

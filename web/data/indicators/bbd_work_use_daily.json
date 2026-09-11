@@ -3,24 +3,42 @@
   "Valve: Product \u2192 adoption",
   "Who keeps it: Adopters"
  ],
- "band_input": null,
- "band_rationale": null,
- "band_value": null,
+ "band_input": "fed_board.us_workers.genai_work_use_daily_share.pt",
+ "band_rationale": "Normal = up to about one worker in seven using generative AI every working day, the pace of an office tool diffusing over years; fast = three in ten or more, daily use at the level of email. Between is emerging.",
+ "band_value": {
+  "as_of": "2025-11-30",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "85b2df467df7b32c"
+  ],
+  "value": 0.12
+ },
  "bucket_id": "early_adoption",
- "cadence_expected": "quarterly",
+ "cadence_expected": "annual",
  "chart_sources": {
   "metric": null,
-  "sources": []
+  "sources": [
+   {
+    "attribution": "Federal Reserve Board, FEDS Notes",
+    "id": "fed_board",
+    "license": "Public (U.S. government)",
+    "name": "Federal Reserve Board, FEDS Notes",
+    "org": "Board of Governors of the Federal Reserve System"
+   }
+  ]
  },
- "confidence": null,
+ "confidence": 30,
  "confidence_basis": {
-  "best_tier": null,
-  "grade": null,
-  "n_observations": 0,
-  "sources": [],
+  "best_tier": 6,
+  "grade": "B",
+  "n_observations": 1,
+  "sources": [
+   "Federal Reserve Board, FEDS Notes"
+  ],
   "stale_as_of": null
  },
- "counterevidence": "",
+ "counterevidence": "One instrument; daily use by the respondents' own recall; a worker using a tool embedded in other software may not count it.",
  "crosswalk": [
   {
    "bucket_id": "early_adoption",
@@ -48,45 +66,133 @@
  "direction_rule": null,
  "evidence": [],
  "falsifying_band": null,
- "fast_band": null,
+ "fast_band": {
+  "hi": null,
+  "lo": 0.3
+ },
  "fits": [],
  "flow_status": null,
- "grade": null,
+ "grade": "B",
  "id": "bbd_work_use_daily",
- "latest": null,
+ "latest": {
+  "as_of": "2025-11-30",
+  "disputed": false,
+  "grade": "B",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "85b2df467df7b32c"
+  ],
+  "series_key": "fed_board.us_workers.genai_work_use_daily_share.pt",
+  "subject": "us_workers",
+  "unit": "share",
+  "value": 0.12
+ },
  "layer_id": "adopters",
  "leading_lagging": "coincident",
  "metric": null,
  "metric_dims": {},
- "n_observations": 0,
+ "n_observations": 1,
  "name": "US workers using generative AI for work every day",
- "normal_band": null,
+ "normal_band": {
+  "hi": 0.15,
+  "lo": null
+ },
  "override_note": null,
  "pending": null,
- "points": [],
+ "points": [
+  {
+   "as_of": "2025-11-30",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "85b2df467df7b32c"
+   ],
+   "series_key": "fed_board.us_workers.genai_work_use_daily_share.pt",
+   "subject": "us_workers",
+   "unit": "share",
+   "value": 0.12
+  }
+ ],
  "prediction_rows": [],
  "proposed_status": null,
  "proxy_types": [
   "behaviour"
  ],
- "published": false,
+ "published": true,
  "related_bottlenecks": [],
  "related_indicators": [],
  "related_metrics": [],
  "related_predictions": [],
- "series": [],
- "series_keys": [],
- "sparkline": [],
+ "series": [
+  {
+   "points": [
+    {
+     "as_of": "2025-11-30",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "85b2df467df7b32c"
+     ],
+     "series_key": "fed_board.us_workers.genai_work_use_daily_share.pt",
+     "subject": "us_workers",
+     "unit": "share",
+     "value": 0.12
+    }
+   ],
+   "series_key": "fed_board.us_workers.genai_work_use_daily_share.pt"
+  }
+ ],
+ "series_keys": [
+  "fed_board.us_workers.genai_work_use_daily_share.pt"
+ ],
+ "sparkline": [
+  {
+   "as_of": "2025-11-30",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "85b2df467df7b32c"
+   ],
+   "series_key": "fed_board.us_workers.genai_work_use_daily_share.pt",
+   "subject": "us_workers",
+   "unit": "share",
+   "value": 0.12
+  }
+ ],
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,
- "status": null,
- "status_events": [],
+ "status": "emerging",
+ "status_events": [
+  {
+   "author": "claude",
+   "counterevidence_considered": null,
+   "created_at": "2026-09-11T14:19:09.561998Z",
+   "evidence_ids": [
+    "85b2df467df7b32c"
+   ],
+   "id": "f90ee3a5931c60cb",
+   "new_conf": 30,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "First reading: 12% of employed US adults used generative AI for work every day in the survey's November 2025 wave (Federal Reserve Board note on the Real-Time Population Survey), inside the normal band. One instrument is the only source, so the status caps at emerging until a second survey measures daily use.",
+   "target_id": "bbd_work_use_daily",
+   "target_type": "indicator"
+  }
+ ],
  "sublayer_id": null,
  "timing_rationale": "Coincident: daily work use moves with adoption itself, measured in the same wave.",
- "tracker_interpretation": "Not yet ingested.",
+ "tracker_interpretation": "One survey, read through the Federal Reserve Board's note on its November 2025 wave; the authors' earlier NBER paper (nine percent, late 2024) is the same instrument, so the status stays emerging until a second survey measures daily use.",
  "unit": "share",
- "unpublished_reason": "Not yet ingested: the GenAI Adoption Tracker splits work use into every day and some days but draws it in the browser, and none of the survey's series on FRED carries it; a manual row needs a verbatim figure from the working paper.",
+ "unpublished_reason": null,
  "updated_at": "2026-09-11",
  "valve_measured": "product_to_adoption",
  "why_it_matters": "Daily use is where depth shows up first."
