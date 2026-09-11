@@ -255,7 +255,7 @@ class Store:
             or [(None,) * 8],
         )
         con.execute(
-            "CREATE OR REPLACE TABLE status_events (id VARCHAR, target_type VARCHAR, target_id VARCHAR, old_status VARCHAR, new_status VARCHAR, old_conf INTEGER, new_conf INTEGER, reason VARCHAR, evidence_ids VARCHAR[], author VARCHAR, created_at TIMESTAMPTZ)"
+            "CREATE OR REPLACE TABLE status_events (id VARCHAR, target_type VARCHAR, target_id VARCHAR, old_status VARCHAR, new_status VARCHAR, old_conf INTEGER, new_conf INTEGER, reason VARCHAR, evidence_ids VARCHAR[], author VARCHAR, created_at TIMESTAMP)"
         )
         con.executemany(
             "INSERT INTO status_events VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
@@ -271,7 +271,7 @@ class Store:
                     e.reason,
                     e.evidence_ids,
                     e.author,
-                    e.created_at,
+                    _utc_naive(e.created_at),  # stored as UTC; DuckDB fetches TIMESTAMPTZ only with pytz
                 )
                 for e in self.events
             ]
@@ -1049,6 +1049,10 @@ def _summarise(cards: list[dict[str, Any]]) -> str:
     if len(counts) > 1 and counts[0][0] == counts[1][0]:
         return "mixed"  # no majority: say so rather than pick one
     return counts[0][1]
+
+
+def _utc_naive(t: datetime) -> datetime:
+    return t.astimezone(timezone.utc).replace(tzinfo=None) if t.tzinfo else t
 
 
 def _point(o: dict[str, Any]) -> dict[str, Any]:

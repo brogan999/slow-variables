@@ -337,6 +337,32 @@ metrics:
       m AS (SELECT entity_id, sublayer_id FROM entity_membership WHERE is_primary AND sublayer_id IS NOT NULL)
       SELECT (date_trunc('quarter', r.as_of_date) + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE AS as_of_date, m.sublayer_id, count(*)::DOUBLE AS value, list(r.id ORDER BY r.id) AS obs_ids
       FROM rounds r JOIN m USING (entity_id) WHERE r.as_of_date >= DATE '2023-01-01' GROUP BY 1, 2
+  venture_capital_intensity:
+    description: Frontier labs' primary-round dollars over the trailing four calendar quarters divided by their summed latest revenue run-rates at quarter end (v2 §9 venture capital intensity, frontier-lab sub-layer). Only labs with a run-rate on record in the twelve months to quarter end count, on both sides.
+    rationale: A leading overfunding signal - how many dollars of new capital each dollar of revenue attracts. Rising means capital is running ahead of revenue.
+    grain: [as_of_date]
+    unit: ratio
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["formd.*.amount_sold_usd.pt", "epoch.*.round_equity_usd.pt", "epoch.*.revenue_run_rate_usd.pt"]
+    caveats: Run-rates are press-reported annualised months (tier 5); rounds are mostly Epoch (tier 5). Other sub-layers have no revenue series outside the labs, so this is measured for frontier labs only.
+    sql: |
+      WITH f AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'formd.%.amount_sold_usd.pt' AND entity_id IS NOT NULL),
+      e AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'epoch.%.round_equity_usd.pt' AND entity_id IS NOT NULL),
+      rounds AS (SELECT * FROM f UNION ALL SELECT * FROM e WHERE NOT EXISTS (SELECT 1 FROM f WHERE f.entity_id = e.entity_id AND date_trunc('quarter', f.as_of_date) = date_trunc('quarter', e.as_of_date))),
+      labs AS (SELECT entity_id FROM entity_membership WHERE is_primary AND sublayer_id = 'frontier_labs'),
+      rr AS (SELECT entity_id, as_of_date, value_numeric AS rev, id FROM observations WHERE series_key LIKE 'epoch.%.revenue_run_rate_usd.pt' AND entity_id IN (SELECT entity_id FROM labs)),
+      qs AS (SELECT DISTINCT date_trunc('quarter', as_of_date) AS cq FROM rounds WHERE as_of_date >= DATE '2023-01-01'),
+      rev AS (SELECT cq, entity_id, rev, id FROM (
+                SELECT qs.cq, rr.*, row_number() OVER (PARTITION BY qs.cq, rr.entity_id ORDER BY rr.as_of_date DESC) AS rn
+                FROM qs JOIN rr ON rr.as_of_date < qs.cq + INTERVAL 3 MONTH AND rr.as_of_date >= qs.cq + INTERVAL 3 MONTH - INTERVAL 12 MONTH)
+              WHERE rn = 1),
+      raised AS (SELECT qs.cq, r.entity_id, r.v, r.id FROM qs JOIN rounds r ON date_trunc('quarter', r.as_of_date) > qs.cq - INTERVAL 12 MONTH AND date_trunc('quarter', r.as_of_date) <= qs.cq
+                 WHERE r.entity_id IN (SELECT entity_id FROM rev WHERE rev.cq = qs.cq))
+      SELECT (rv.cq + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE AS as_of_date,
+             (SELECT sum(v) FROM raised WHERE raised.cq = rv.cq) / sum(rv.rev) AS value,
+             list_concat((SELECT list(id ORDER BY id) FROM raised WHERE raised.cq = rv.cq), list(rv.id ORDER BY rv.id)) AS obs_ids
+      FROM rev rv GROUP BY rv.cq HAVING sum(rv.rev) > 0 AND (SELECT sum(v) FROM raised WHERE raised.cq = rv.cq) > 0
   frontier_share_of_venture_dollars:
     description: Frontier labs' share of all tracked primary-round dollars over the trailing four calendar quarters (P1 §7 #8, capital concentration in frontier labs).
     rationale: Whether capital keeps piling into the model layer's incumbents or spreads down and up the stack.

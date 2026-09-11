@@ -366,6 +366,7 @@ def cmd_ask(a: argparse.Namespace) -> int:
     s = st.Store()
     if not s.derived:
         s.derived = run_metrics(s.con)
+        s.semantic_tables()
     res = ask(s, a.question)
     print(res["answer"])
     print(f"\n[{res['status']}] {len(res['citations'])} citations, ${res['usage']['usd']:.4f}")
@@ -380,12 +381,40 @@ def cmd_golden(a: argparse.Namespace) -> int:
     s = st.Store()
     if not s.derived:
         s.derived = run_metrics(s.con)
+        s.semantic_tables()
     res = golden(s)
     for r in res:
-        print(f"{'PASS' if r['ok'] else 'FAIL'} {r['id']} [{r['status']}] {r['answer'][:160]!r}")
-    n = sum(r["ok"] for r in res)
-    print(f"{n}/{len(res)} passed, ${sum(r['usd'] for r in res):.3f}")
-    return 0 if n == len(res) else 1
+        tag = " (informational)" if r["informational"] else ""
+        print(f"{'PASS' if r['ok'] else 'FAIL'} {r['id']}{tag} [{r['status']}] {r['answer'][:160]!r}")
+    req = [r for r in res if not r["informational"]]
+    n = sum(r["ok"] for r in req)
+    print(f"{n}/{len(req)} required passed, ${sum(r['usd'] for r in res):.3f}")
+    return 0 if n == len(req) else 1
+
+
+def cmd_audit_pull(a: argparse.Namespace) -> int:
+    """Append the query service's answer records newer than the last one on file. Never fails the nightly."""
+    import httpx
+
+    from .query.ask import AUDIT_KEYS
+
+    path = st.DATA / "query_log.jsonl"
+    url = os.environ.get("QUERY_URL", "https://ai-tracker-query.fly.dev").rstrip("/") + "/audit"
+    try:
+        r = httpx.get(url, headers={"Authorization": f"Bearer {os.environ['QUERY_TOKEN']}"}, timeout=90)
+        r.raise_for_status()
+        rows = r.json()["rows"]
+    except Exception as e:  # noqa: BLE001 - a cold or unreachable service loses nothing: rows stay seven days
+        print(f"audit: not read ({type(e).__name__})")
+        return 0
+    lines = path.read_text().splitlines() if path.exists() else []
+    last = max((json.loads(x)["time"] for x in lines if x.strip()), default="")
+    new = sorted((x for x in rows if x["time"] > last), key=lambda x: x["time"])
+    with path.open("a") as f:
+        for x in new:
+            f.write(json.dumps({k: x.get(k) for k in AUDIT_KEYS}, sort_keys=True) + "\n")
+    print(f"audit: {len(new)} new answer records")
+    return 0
 
 
 def cmd_memo(a: argparse.Namespace) -> int:
@@ -452,6 +481,7 @@ def main(argv: list[str] | None = None) -> None:
     q.add_argument("question")
     q.set_defaults(fn=cmd_ask)
     sub.add_parser("golden").set_defaults(fn=cmd_golden)
+    sub.add_parser("audit-pull").set_defaults(fn=cmd_audit_pull)
     mm = sub.add_parser("memo")
     mm.add_argument("--date", type=date.fromisoformat, default=None)
     mm.add_argument("--since", type=date.fromisoformat, default=None)

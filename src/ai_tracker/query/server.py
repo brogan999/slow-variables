@@ -4,6 +4,7 @@ GET  /health              -> {ok, generated_at, observations}
 POST /sql   {query}       -> read-only SQL (bearer token)
 POST /ask   {question}    -> ask() (bearer token; daily spend cap)
 GET  /golden              -> golden run (bearer token)
+GET  /audit               -> the last seven days of answer records (bearer token; the nightly copies them)
 """
 
 from __future__ import annotations
@@ -12,7 +13,8 @@ import json
 import logging
 import os
 import threading
-from datetime import date
+from collections import deque
+from datetime import date, datetime, timedelta, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 from .. import store as st
@@ -35,6 +37,16 @@ class Service:
             str, float
         ] = {}  # ponytail: in-memory ledger, resets on restart; a file if the cap ever matters
         self.lock = threading.Lock()
+        # ponytail: memory only; the nightly copies new rows into data/query_log.jsonl, so a restart between
+        # nightlies drops what the buffer held. A Fly volume if that ever matters.
+        self.audit: deque[dict] = deque()
+
+    def record(self, row: dict) -> None:
+        cutoff = (datetime.now(timezone.utc) - timedelta(days=7)).isoformat()
+        with self.lock:
+            self.audit.append(row)
+            while self.audit and self.audit[0]["time"] < cutoff:
+                self.audit.popleft()
 
     def spent_today(self) -> float:
         return self.spend.get(date.today().isoformat(), 0.0)
@@ -79,7 +91,14 @@ class Handler(BaseHTTPRequestHandler):
                 return self._send(429, {"error": "daily cap reached", "cap_usd": self.svc.cap})
             res = ask_mod.golden(self.svc.store, self.svc.tools)
             self.svc.add_spend(sum(r["usd"] for r in res))
-            return self._send(200, {"passed": sum(r["ok"] for r in res), "total": len(res), "results": res})
+            req = [r for r in res if not r["informational"]]
+            return self._send(200, {"passed": sum(r["ok"] for r in req), "total": len(req), "results": res})
+        if self.path == "/audit":
+            if not self._authed():
+                return self._send(401, {"error": "unauthorised"})
+            with self.svc.lock:
+                rows = list(self.svc.audit)
+            return self._send(200, {"rows": rows})
         return self._send(404, {"error": "not found"})
 
     def do_POST(self) -> None:  # noqa: N802
@@ -105,6 +124,7 @@ class Handler(BaseHTTPRequestHandler):
                 log.exception("ask failed")
                 return self._send(502, {"error": "model error", "detail": str(e)[:200]})
             self.svc.add_spend(res["usage"]["usd"])
+            self.svc.record(res["audit"])
             return self._send(200, res)
         return self._send(404, {"error": "not found"})
 

@@ -7,5 +7,6 @@ RUN uv sync --frozen --no-dev
 COPY seed ./seed
 COPY semantic ./semantic
 COPY data ./data
+COPY docs ./docs
 ENV PORT=8080
 CMD ["uv", "run", "--no-sync", "ai-tracker", "serve"]

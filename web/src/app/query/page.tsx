@@ -1,6 +1,7 @@
 import { QueryConsole } from "@/components/QueryConsole";
 import { Num, ObsLinks } from "@/components/Provenance";
-import { analyses, obsIndex } from "@/lib/data";
+import { ThesisMonitor } from "@/components/ThesisMonitor";
+import { analyses, obsIndex, thesis } from "@/lib/data";
 
 export const metadata = { title: "Query" };
 
@@ -31,6 +32,11 @@ export default function QueryPage() {
             </li>
           ))}
         </ul>
+      </section>
+      <section className="flex flex-col gap-3" id="falsification">
+        <h2 className="display text-2xl leading-tight">Falsification monitor</h2>
+        <p className="text-sm text-ink-2 max-w-[60ch]">The rule that would falsify the normal-technology reading, evaluated nightly. Each condition names the observations it read.</p>
+        <ThesisMonitor verdicts={thesis().filter((v) => v.id === "normal_tech_falsified")} obsIndex={idx} />
       </section>
       <section className="flex flex-col gap-2">
         <h2 className="display text-2xl leading-tight">Console</h2>
