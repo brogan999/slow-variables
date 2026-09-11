@@ -6,15 +6,44 @@
   "high": null,
   "low": null,
   "obs_ids": [
-   "6ba3229c63091f93"
+   "6ba3229c63091f93",
+   "a86b4d5b977580c2"
   ],
-  "value": 2.0
+  "value": 3.0
  },
  "bucket_id": null,
  "cadence_expected": "quarterly",
  "chart_sources": {
   "metric": "lab_procurement_signal_4q",
   "sources": [
+   {
+    "attribution": "CNBC",
+    "id": "cnbc",
+    "license": "CNBC; short quotation",
+    "name": "CNBC",
+    "org": "CNBC LLC"
+   },
+   {
+    "attribution": "TechCrunch (quoting Sam Altman on X)",
+    "id": "techcrunch",
+    "license": "TechCrunch; short quotation",
+    "name": "TechCrunch",
+    "org": "Yahoo Inc."
+   },
+   {
+    "attribution": "Sacra estimates (free company page)",
+    "id": "sacra_free",
+    "license": "Sacra; short quotation of the free summary",
+    "name": "Sacra company pages (free summaries)",
+    "org": "Sacra"
+   },
+   {
+    "attribution": "The AI Insider",
+    "id": "theaiinsider",
+    "license": "The AI Insider; short quotation",
+    "name": "The AI Insider",
+    "org": "Resonance"
+   },
    {
     "attribution": "Dealroom",
     "id": "dealroom",
@@ -30,19 +59,141 @@
  "definition": "Sum over training-input vendors of each vendor's best procurement score in the trailing four quarters, at quarter ends. Rubric: 1 a lab named as customer; 2 revenue or growth attributed to lab demand; 3 a disclosed lab contract or commitment of at least $100M. Derived metric lab_procurement_signal_4q.",
  "derived": [
   {
+   "as_of_date": "2024-12-31",
+   "computed_at": "2026-09-11T12:24:21.700644Z",
+   "dims": {},
+   "formula_version": "2",
+   "id": "9e88b96290d5665e",
+   "input_observation_ids": [
+    "6be245b72d765ecd"
+   ],
+   "metric": "lab_procurement_signal_4q",
+   "obs_ids": [
+    "6be245b72d765ecd"
+   ],
+   "value": 2.0,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-03-31",
+   "computed_at": "2026-09-11T12:24:21.700644Z",
+   "dims": {},
+   "formula_version": "2",
+   "id": "01e9eac69e973cfa",
+   "input_observation_ids": [
+    "6be245b72d765ecd",
+    "a56ea8fc9fccc482"
+   ],
+   "metric": "lab_procurement_signal_4q",
+   "obs_ids": [
+    "6be245b72d765ecd",
+    "a56ea8fc9fccc482"
+   ],
+   "value": 3.0,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-06-30",
+   "computed_at": "2026-09-11T12:24:21.700644Z",
+   "dims": {},
+   "formula_version": "2",
+   "id": "85ec09695f9d26f6",
+   "input_observation_ids": [
+    "6be245b72d765ecd",
+    "a56ea8fc9fccc482",
+    "b1d9b7eed4af1512"
+   ],
+   "metric": "lab_procurement_signal_4q",
+   "obs_ids": [
+    "6be245b72d765ecd",
+    "a56ea8fc9fccc482",
+    "b1d9b7eed4af1512"
+   ],
+   "value": 4.0,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-09-30",
+   "computed_at": "2026-09-11T12:24:21.700644Z",
+   "dims": {},
+   "formula_version": "2",
+   "id": "e71004c50465a760",
+   "input_observation_ids": [
+    "6be245b72d765ecd",
+    "a56ea8fc9fccc482",
+    "a86b4d5b977580c2",
+    "b1d9b7eed4af1512"
+   ],
+   "metric": "lab_procurement_signal_4q",
+   "obs_ids": [
+    "6be245b72d765ecd",
+    "a56ea8fc9fccc482",
+    "a86b4d5b977580c2",
+    "b1d9b7eed4af1512"
+   ],
+   "value": 4.0,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-12-31",
+   "computed_at": "2026-09-11T12:24:21.700644Z",
+   "dims": {},
+   "formula_version": "2",
+   "id": "87b525dee327f080",
+   "input_observation_ids": [
+    "a56ea8fc9fccc482",
+    "a86b4d5b977580c2",
+    "b1d9b7eed4af1512"
+   ],
+   "metric": "lab_procurement_signal_4q",
+   "obs_ids": [
+    "a56ea8fc9fccc482",
+    "a86b4d5b977580c2",
+    "b1d9b7eed4af1512"
+   ],
+   "value": 3.0,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2026-03-31",
+   "computed_at": "2026-09-11T12:24:21.700644Z",
+   "dims": {},
+   "formula_version": "2",
+   "id": "3fd873c1124d8811",
+   "input_observation_ids": [
+    "a86b4d5b977580c2",
+    "b1d9b7eed4af1512"
+   ],
+   "metric": "lab_procurement_signal_4q",
+   "obs_ids": [
+    "a86b4d5b977580c2",
+    "b1d9b7eed4af1512"
+   ],
+   "value": 2.0,
+   "value_high": null,
+   "value_low": null
+  },
+  {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-11T12:08:02.268270Z",
+   "computed_at": "2026-09-11T12:24:21.700644Z",
    "dims": {},
    "formula_version": "2",
    "id": "e796a27d3c398ad6",
    "input_observation_ids": [
-    "6ba3229c63091f93"
+    "6ba3229c63091f93",
+    "a86b4d5b977580c2"
    ],
    "metric": "lab_procurement_signal_4q",
    "obs_ids": [
-    "6ba3229c63091f93"
+    "6ba3229c63091f93",
+    "a86b4d5b977580c2"
    ],
-   "value": 2.0,
+   "value": 3.0,
    "value_high": null,
    "value_low": null
   }
@@ -65,29 +216,94 @@
   "as_of": "2026-06-30",
   "dims": {},
   "obs_ids": [
-   "6ba3229c63091f93"
+   "6ba3229c63091f93",
+   "a86b4d5b977580c2"
   ],
   "unit": "score",
-  "value": 2.0
+  "value": 3.0
  },
  "layer_id": "training_input",
  "leading_lagging": "leading",
  "metric": "lab_procurement_signal_4q",
  "metric_dims": {},
- "n_observations": 1,
+ "n_observations": 5,
  "name": "Labs buying from the training-input layer (enter bell)",
  "normal_band": null,
- "override_note": null,
+ "override_note": "Held at emerging: the rubric sum rises when vendors disclose that labs are customers, which tracks disclosure rather than demand, so its direction is not read until disclosure is regular. Training-input demand reads through the expert-data market run-rate.",
  "pending": null,
  "points": [
+  {
+   "as_of": "2024-12-31",
+   "dims": {},
+   "obs_ids": [
+    "6be245b72d765ecd"
+   ],
+   "unit": "score",
+   "value": 2.0
+  },
+  {
+   "as_of": "2025-03-31",
+   "dims": {},
+   "obs_ids": [
+    "6be245b72d765ecd",
+    "a56ea8fc9fccc482"
+   ],
+   "unit": "score",
+   "value": 3.0
+  },
+  {
+   "as_of": "2025-06-30",
+   "dims": {},
+   "obs_ids": [
+    "6be245b72d765ecd",
+    "a56ea8fc9fccc482",
+    "b1d9b7eed4af1512"
+   ],
+   "unit": "score",
+   "value": 4.0
+  },
+  {
+   "as_of": "2025-09-30",
+   "dims": {},
+   "obs_ids": [
+    "6be245b72d765ecd",
+    "a56ea8fc9fccc482",
+    "a86b4d5b977580c2",
+    "b1d9b7eed4af1512"
+   ],
+   "unit": "score",
+   "value": 4.0
+  },
+  {
+   "as_of": "2025-12-31",
+   "dims": {},
+   "obs_ids": [
+    "a56ea8fc9fccc482",
+    "a86b4d5b977580c2",
+    "b1d9b7eed4af1512"
+   ],
+   "unit": "score",
+   "value": 3.0
+  },
+  {
+   "as_of": "2026-03-31",
+   "dims": {},
+   "obs_ids": [
+    "a86b4d5b977580c2",
+    "b1d9b7eed4af1512"
+   ],
+   "unit": "score",
+   "value": 2.0
+  },
   {
    "as_of": "2026-06-30",
    "dims": {},
    "obs_ids": [
-    "6ba3229c63091f93"
+    "6ba3229c63091f93",
+    "a86b4d5b977580c2"
    ],
    "unit": "score",
-   "value": 2.0
+   "value": 3.0
   }
  ],
  "proposed_status": "not_yet_measurable",
@@ -122,6 +338,77 @@
     }
    ],
    "series_key": "procurement.mercor.signal.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2025-06-12",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "b1d9b7eed4af1512"
+     ],
+     "series_key": "procurement.scale_ai.signal.pt",
+     "subject": "scale_ai",
+     "unit": "score",
+     "value": 1.0
+    }
+   ],
+   "series_key": "procurement.scale_ai.signal.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2024-12-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "6be245b72d765ecd"
+     ],
+     "series_key": "procurement.surge_ai.signal.pt",
+     "subject": "surge_ai",
+     "unit": "score",
+     "value": 2.0
+    },
+    {
+     "as_of": "2025-07-03",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "a86b4d5b977580c2"
+     ],
+     "series_key": "procurement.surge_ai.signal.pt",
+     "subject": "surge_ai",
+     "unit": "score",
+     "value": 1.0
+    }
+   ],
+   "series_key": "procurement.surge_ai.signal.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2025-03-06",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "a56ea8fc9fccc482"
+     ],
+     "series_key": "procurement.turing.signal.pt",
+     "subject": "turing",
+     "unit": "score",
+     "value": 1.0
+    }
+   ],
+   "series_key": "procurement.turing.signal.pt"
   }
  ],
  "series_keys": [
@@ -129,20 +416,103 @@
  ],
  "sparkline": [
   {
-   "as_of": "2026-06-30",
+   "as_of": "2024-12-31",
    "dims": {},
    "obs_ids": [
-    "6ba3229c63091f93"
+    "6be245b72d765ecd"
    ],
    "unit": "score",
    "value": 2.0
+  },
+  {
+   "as_of": "2025-03-31",
+   "dims": {},
+   "obs_ids": [
+    "6be245b72d765ecd",
+    "a56ea8fc9fccc482"
+   ],
+   "unit": "score",
+   "value": 3.0
+  },
+  {
+   "as_of": "2025-06-30",
+   "dims": {},
+   "obs_ids": [
+    "6be245b72d765ecd",
+    "a56ea8fc9fccc482",
+    "b1d9b7eed4af1512"
+   ],
+   "unit": "score",
+   "value": 4.0
+  },
+  {
+   "as_of": "2025-09-30",
+   "dims": {},
+   "obs_ids": [
+    "6be245b72d765ecd",
+    "a56ea8fc9fccc482",
+    "a86b4d5b977580c2",
+    "b1d9b7eed4af1512"
+   ],
+   "unit": "score",
+   "value": 4.0
+  },
+  {
+   "as_of": "2025-12-31",
+   "dims": {},
+   "obs_ids": [
+    "a56ea8fc9fccc482",
+    "a86b4d5b977580c2",
+    "b1d9b7eed4af1512"
+   ],
+   "unit": "score",
+   "value": 3.0
+  },
+  {
+   "as_of": "2026-03-31",
+   "dims": {},
+   "obs_ids": [
+    "a86b4d5b977580c2",
+    "b1d9b7eed4af1512"
+   ],
+   "unit": "score",
+   "value": 2.0
+  },
+  {
+   "as_of": "2026-06-30",
+   "dims": {},
+   "obs_ids": [
+    "6ba3229c63091f93",
+    "a86b4d5b977580c2"
+   ],
+   "unit": "score",
+   "value": 3.0
   }
  ],
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,
- "status": "not_yet_measurable",
+ "status": "emerging",
  "status_events": [
+  {
+   "author": "claude",
+   "created_at": "2026-09-11T12:19:23.280474Z",
+   "evidence_ids": [
+    "6ba3229c63091f93",
+    "6be245b72d765ecd",
+    "a56ea8fc9fccc482",
+    "a86b4d5b977580c2",
+    "b1d9b7eed4af1512"
+   ],
+   "id": "4a31d37b4c113168",
+   "new_conf": 30,
+   "new_status": "emerging",
+   "old_conf": 30,
+   "old_status": "not_yet_measurable",
+   "reason": "Held at emerging by its override note: the rubric sum has run 3, 4, 4, 3, 2 and 3 at the last six quarter ends as vendors disclosed lab customers and then went quiet, which tracks disclosure rather than demand; training-input demand reads through the expert-data market run-rate instead.",
+   "target_id": "lab_procurement_signal",
+   "target_type": "indicator"
+  },
   {
    "author": "claude",
    "created_at": "2026-09-11T04:56:28.200185Z",

@@ -109,7 +109,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
       <Section n={num("status")} id="status" title="Status and reasoning">
         <div className="flex flex-wrap items-center gap-2"><StatusChip status={d.published ? d.status : null} size="lg" />{current ? <span className="text-xs text-muted">since {current.created_at.slice(0, 10)} · {current.author}</span> : null}</div>
         {current ? <p className="mt-2">{current.reason}</p> : <p className="mt-2 text-muted">No status event yet; the evaluator proposes one once an approved observation exists.</p>}
-        {d.proposed_status && d.proposed_status !== d.status ? <p className="mt-2 text-xs text-ink-2">The tracker&apos;s prior expectation was <em>{words(d.proposed_status)}</em>; the evaluator reads <em>{words(d.status)}</em>. The evaluator wins until a reviewed override.</p> : null}
+        {d.proposed_status && d.proposed_status !== d.status && !d.override_note ? <p className="mt-2 text-xs text-ink-2">The tracker&apos;s prior expectation was <em>{words(d.proposed_status)}</em>; the evaluator reads <em>{words(d.status)}</em>. The evaluator wins until a reviewed override.</p> : null}
         {d.override_note ? <p className="mt-2 text-xs text-ink-2">Override: {d.override_note}</p> : null}
       </Section>
 

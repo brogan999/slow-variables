@@ -858,18 +858,19 @@ metrics:
       FROM cp JOIN h USING (subject) GROUP BY 1)
       SELECT * FROM r QUALIFY value IS DISTINCT FROM lag(value) OVER (ORDER BY as_of_date)  -- change points only
   lab_vertical_integration_events_4q:
-    description: Distinct acquisitions or acquihires by AI labs and hyperscalers of application, tooling or data companies announced in the trailing four quarters, counted from the acquisition ledger (one per acquirer-target pair) at each quarter end.
+    description: Distinct acquisitions or acquihires by AI labs and hyperscalers of application, tooling or data companies announced in the trailing four quarters, counted from the acquisition ledger (one per acquirer-target pair) at each quarter end. Only acquirers whose primary membership is in the model or compute layer count; the ledger keeps every deal.
     rationale: The exit bell for the application layer rings when labs buy the layer above them; a rising count is vertical integration, the capture thesis's clearest signal.
     grain: [as_of_date]
     unit: count
     lead_lag: leading
-    formula_version: 1
+    formula_version: 2
     inputs: ["acq.*.*.pt"]
     caveats: Only deals with a fetched announcement are counted; undisclosed prices still count as events; Stripe (a payments company) is in the ledger for the OpenRouter deal and is included in the count.
     sql: |
-      WITH deals AS (
+      WITH buyers AS (SELECT DISTINCT entity_id FROM entity_membership WHERE is_primary AND layer_id IN ('model', 'compute_physical')),
+      deals AS (
         SELECT split_part(series_key, '.', 2) || '/' || split_part(series_key, '.', 3) AS deal, min(as_of_date) AS announced, list(id) AS ids
-        FROM observations WHERE series_key LIKE 'acq.%.pt' GROUP BY 1
+        FROM observations WHERE series_key LIKE 'acq.%.pt' AND split_part(series_key, '.', 2) IN (SELECT entity_id FROM buyers) GROUP BY 1
       ), qends AS (
         SELECT DISTINCT (date_trunc('quarter', announced) + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE AS q FROM deals
       )
