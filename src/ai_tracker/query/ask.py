@@ -680,10 +680,12 @@ def golden(store: st.Store, tools: Tools | None = None, client: Any = None) -> l
                 or bool(cited_inds & set(exp.get("indicators", [])))
             )
             used = {c["tool"] for c in a["tool_calls"]}
+            said = a["answer"].lower()
             ok = (
                 a["status"] in ("ok", "revised", "retried")
                 and hit
                 and (not exp.get("tool") or exp["tool"] in used)
+                and all(w in said for w in exp.get("mentions", []))  # the answer must say what the number is
             )
         out.append(
             {

@@ -30,10 +30,10 @@ Rule: both conditions, on independently verified series (OpenAI's self-reported 
 
 ## Capture thesis 'rents migrate up the stack' SUPPORTED: **does not hold**
 
-Rule: labs + apps up ≥ 5pp AND semis down (contradicted if semis hold and app margins net of inference fall)
+Rule: labs up ≥ 5pp AND chips down, on gross profit (contradicted if chips hold and app margins net of inference fall)
 
-- ? labs + apps share of stack margin up ≥ 5pp over four quarters — waiting on a lab/app margin series (none filed or estimated)
-- ✗ semis' share of stack margin falling over four quarters — 51.0% → 57.3% (obs: 33e002b2, 4e31dd06, 6c32c53e…)
+- ✗ labs' share of stack gross profit up ≥ 5pp over four quarters (apps unmeasured) — 2.6% → 7.3%; the lab layer is a grade C estimate (run-rate × revenue-minus-inference margin) (obs: 0b6d0c8c, 1a2c7e77, 2a23fc81…)
+- ✗ chips' share of stack gross profit down ≥ 5pp over four quarters — 60.6% → 69.5% (obs: 0b6d0c8c, 1a2c7e77, 2a23fc81…)
 
 ## Capture thesis 'consumers keep most of the surplus' HOLDS: **HOLDS**
 

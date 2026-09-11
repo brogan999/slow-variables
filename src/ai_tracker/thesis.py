@@ -177,20 +177,30 @@ def invention_side_warning(d: Data) -> Verdict:
 
 
 def rents_migrate_up(d: Data) -> Verdict:
-    semis = d.metric_n("margin_stack_share_by_layer", 5, {"layer_id": "compute_semis"})
+    labs = d.metric_n("gross_profit_share_by_layer", 5, {"layer_id": "model"})
+    semis = d.metric_n("gross_profit_share_by_layer", 5, {"layer_id": "compute_semis"})
+    up = (labs[-1][1] - labs[0][1] >= 0.05) if len(labs) == 5 else None
     fall = (semis[-1][1] - semis[0][1] <= -0.05) if len(semis) == 5 else None
     conds = [
         Cond(
-            "labs + apps share of stack margin up ≥ 5pp over four quarters",
-            None,
-            [],
-            "waiting on a lab/app margin series (none filed or estimated)",
+            "labs' share of stack gross profit up ≥ 5pp over four quarters (apps unmeasured)",
+            up,
+            [i for _, _, ids in labs for i in ids],
+            (
+                f"{labs[0][1]:.1%} → {labs[-1][1]:.1%}; the lab layer is a grade C estimate (run-rate × revenue-minus-inference margin)"
+                if len(labs) == 5
+                else f"untestable, {len(labs)} of 5 quarters"
+            ),
         ),
         Cond(
-            "semis' share of stack margin falling over four quarters",
+            "chips' share of stack gross profit down ≥ 5pp over four quarters",
             fall,
             [i for _, _, ids in semis for i in ids],
-            (f"{semis[0][1]:.1%} → {semis[-1][1]:.1%}" if len(semis) == 5 else "untestable"),
+            (
+                f"{semis[0][1]:.1%} → {semis[-1][1]:.1%}"
+                if len(semis) == 5
+                else f"untestable, {len(semis)} of 5 quarters"
+            ),
         ),
     ]
     return Verdict(
@@ -198,7 +208,7 @@ def rents_migrate_up(d: Data) -> Verdict:
         "Capture thesis 'rents migrate up the stack' SUPPORTED",
         _all(conds),
         conds,
-        "labs + apps up ≥ 5pp AND semis down (contradicted if semis hold and app margins net of inference fall)",
+        "labs up ≥ 5pp AND chips down, on gross profit (contradicted if chips hold and app margins net of inference fall)",
     )
 
 

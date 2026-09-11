@@ -18,19 +18,120 @@ metrics:
       WHERE a.series_key LIKE 'metr.%.horizon_50.pt' AND b.series_key LIKE 'metr.%.horizon_80.pt'
         AND NOT a.disputed AND NOT b.disputed AND b.value_numeric > 0
   gross_margin:
-    description: Gross profit divided by revenue per filer per fiscal quarter, from XBRL company facts.
+    description: Gross profit divided by revenue per filer per fiscal quarter, from XBRL company facts; a fiscal Q4 filed only inside the 10-K is the full year minus the three quarters inside it.
     rationale: The margin is the rent; its direction at each layer is the capture question in one number.
     grain: [as_of_date, entity]
     unit: share
     lead_lag: lagging
+    formula_version: 2
+    inputs: ["sec.*.gross_profit.q", "sec.*.revenue.q", "sec.*.gross_profit.fy", "sec.*.revenue.fy"]
+    caveats: Fiscal quarters differ by filer (NVDA ends late Jan/Apr/Jul/Oct). Whole-company, not segment, margin. A filled Q4 cites the 10-K and the three 10-Qs it subtracts.
+    sql: |
+      WITH p AS (  -- gross profit and revenue for the same filer, grain and period end
+        SELECT g.subject, right(g.series_key, 3) = '.fy' AS is_fy, g.as_of_date, g.period_start,
+               g.value_numeric AS gp, r.value_numeric AS rev, [g.id, r.id] AS ids
+        FROM observations g JOIN observations r
+          ON r.subject = g.subject AND r.as_of_date = g.as_of_date AND r.series_key = replace(g.series_key, '.gross_profit.', '.revenue.')
+        WHERE (g.series_key LIKE 'sec.%.gross_profit.q' OR g.series_key LIKE 'sec.%.gross_profit.fy') AND r.value_numeric > 0),
+      q AS (SELECT * FROM p WHERE NOT is_fy),
+      fill AS (  -- a fiscal Q4 filed only inside the 10-K: full year minus the three quarters inside it
+        SELECT f.subject, f.as_of_date, f.gp - sum(q.gp) AS gp, f.rev - sum(q.rev) AS rev, flatten(list_prepend(f.ids, list(q.ids))) AS ids
+        FROM p f JOIN q ON q.subject = f.subject AND q.as_of_date > f.period_start AND q.as_of_date < f.as_of_date
+        WHERE f.is_fy
+        GROUP BY f.subject, f.as_of_date, f.gp, f.rev, f.ids
+        HAVING count(*) = 3 AND NOT EXISTS (SELECT 1 FROM q q2 WHERE q2.subject = f.subject AND q2.as_of_date = f.as_of_date))
+      SELECT as_of_date, subject AS entity, gp / rev AS value, ids AS obs_ids FROM q
+      UNION ALL SELECT as_of_date, subject, gp / rev, ids FROM fill WHERE rev > 0
+
+  gross_margin_fy:
+    description: Gross profit divided by revenue per filer per fiscal year, from the 10-K's XBRL company facts.
+    rationale: The annual margin smooths fiscal-calendar noise and is the figure filers headline.
+    grain: [as_of_date, entity]
+    unit: share
+    lead_lag: lagging
     formula_version: 1
-    inputs: ["sec.*.gross_profit.q", "sec.*.revenue.q"]
-    caveats: Fiscal quarters differ by filer (NVDA ends late Jan/Apr/Jul/Oct). Whole-company, not segment, margin.
+    inputs: ["sec.*.gross_profit.fy", "sec.*.revenue.fy"]
+    caveats: Whole-company margin; fiscal years end on different dates by filer.
     sql: |
       SELECT g.as_of_date, g.subject AS entity, g.value_numeric / r.value_numeric AS value, [g.id, r.id] AS obs_ids
       FROM observations g JOIN observations r
-        ON r.subject = g.subject AND r.as_of_date = g.as_of_date AND r.series_key = 'sec.' || g.subject || '.revenue.q'
-      WHERE g.series_key LIKE 'sec.%.gross_profit.q' AND r.value_numeric > 0
+        ON r.subject = g.subject AND r.as_of_date = g.as_of_date AND r.series_key = 'sec.' || g.subject || '.revenue.fy'
+      WHERE g.series_key LIKE 'sec.%.gross_profit.fy' AND r.value_numeric > 0
+
+  lab_gross_margin_estimate:
+    description: A lab's full-year revenue minus its inference compute spend, over revenue, from Epoch's estimates (grade C). Not a filed gross margin.
+    rationale: The only public view of lab unit economics; it feeds the lab layer of the gross-profit stack.
+    grain: [as_of_date, entity]
+    unit: share
+    lead_lag: lagging
+    formula_version: 1
+    inputs: ["epoch.*.revenue_usd.fy", "epoch.*.inference_compute_usd.fy"]
+    caveats: Estimated (tier 5). Revenue minus inference compute overstates a true gross margin, which would also subtract serving staff, data and hosting costs.
+    sql: |
+      SELECT r.as_of_date, r.subject AS entity, 1 - i.value_numeric / r.value_numeric AS value, [r.id, i.id] AS obs_ids
+      FROM observations r JOIN observations i
+        ON i.subject = r.subject AND i.as_of_date = r.as_of_date AND i.series_key = 'epoch.' || r.subject || '.inference_compute_usd.fy'
+      WHERE r.series_key LIKE 'epoch.%.revenue_usd.fy' AND r.value_numeric > 0
+
+  gross_profit_share_by_layer:
+    description: Each layer's share of the stack's gross profit per calendar quarter. Chips = NVIDIA and AMD whole-company gross profit (filed); cloud = Microsoft Intelligent Cloud revenue minus its cost of revenue (filed, the one cloud segment that files cost); labs = OpenAI and Anthropic, estimated as the run-rate at the quarter's end over four times Epoch's revenue-minus-inference margin for that year (grade C). Apps are unmeasured.
+    rationale: The headline capture chart on the brief's own basis (gross profit), with the lab layer drawn as an estimate rather than left out.
+    grain: [as_of_date, layer_id, basis]
+    unit: share
+    lead_lag: lagging
+    formula_version: 1
+    inputs: ["sec.nvda.gross_profit.*", "sec.amd.gross_profit.*", "sec_seg.msft.intelligent_cloud.revenue.*", "sec_seg.msft.intelligent_cloud.cost_of_revenue.*", "epoch.*.revenue_run_rate_usd.pt", "epoch.*.revenue_usd.fy", "epoch.*.inference_compute_usd.fy"]
+    caveats: Fiscal quarters mapped to the calendar quarter of their period end; a fiscal Q4 is the full year minus three quarters. Chips are whole-company, so they include gaming and client chips. Only quarters with all five inputs are kept. The lab estimate uses the run-rate as of the quarter's end (never a later one), and the margin of the year containing the quarter, else the latest earlier year; revenue minus inference compute overstates true gross margin.
+    sql: |
+      WITH gq AS (
+        SELECT subject, as_of_date, period_start, value_numeric AS v, [id] AS ids FROM observations
+        WHERE series_key IN ('sec.nvda.gross_profit.q', 'sec.amd.gross_profit.q')
+        UNION ALL
+        SELECT 'msft_ic', r.as_of_date, r.period_start, r.value_numeric - c.value_numeric, [r.id, c.id]
+        FROM observations r JOIN observations c ON c.series_key = 'sec_seg.msft.intelligent_cloud.cost_of_revenue.q'
+             AND c.as_of_date = r.as_of_date AND c.period_start = r.period_start
+        WHERE r.series_key = 'sec_seg.msft.intelligent_cloud.revenue.q'),
+      gfy AS (
+        SELECT subject, as_of_date, period_start, value_numeric AS v, [id] AS ids FROM observations
+        WHERE series_key IN ('sec.nvda.gross_profit.fy', 'sec.amd.gross_profit.fy')
+        UNION ALL
+        SELECT 'msft_ic', r.as_of_date, r.period_start, r.value_numeric - c.value_numeric, [r.id, c.id]
+        FROM observations r JOIN observations c ON c.series_key = 'sec_seg.msft.intelligent_cloud.cost_of_revenue.fy'
+             AND c.as_of_date = r.as_of_date AND c.period_start = r.period_start
+        WHERE r.series_key = 'sec_seg.msft.intelligent_cloud.revenue.fy'),
+      fill AS (  -- a fiscal Q4 filed only inside the 10-K: full year minus the three quarters inside it
+        SELECT f.subject, f.as_of_date, f.v - sum(q.v) AS v, flatten(list_prepend(f.ids, list(q.ids))) AS ids
+        FROM gfy f JOIN gq q ON q.subject = f.subject AND q.as_of_date > f.period_start AND q.as_of_date < f.as_of_date
+        GROUP BY f.subject, f.as_of_date, f.v, f.ids
+        HAVING count(*) = 3 AND NOT EXISTS (SELECT 1 FROM gq q2 WHERE q2.subject = f.subject AND q2.as_of_date = f.as_of_date)),
+      filed AS (
+        SELECT date_trunc('quarter', as_of_date) AS cq, subject, v, ids,
+               CASE WHEN subject = 'msft_ic' THEN 'compute_cloud' ELSE 'compute_semis' END AS layer_id
+        FROM (SELECT subject, as_of_date, v, ids FROM gq UNION ALL SELECT subject, as_of_date, v, ids FROM fill)),
+      qs AS (SELECT cq FROM filed GROUP BY cq HAVING count(DISTINCT subject) = 3),
+      margin AS (  -- Epoch's full-year revenue minus inference compute, over revenue
+        SELECT r.subject, year(r.as_of_date) AS fy, 1 - i.value_numeric / r.value_numeric AS m, [r.id, i.id] AS ids
+        FROM observations r JOIN observations i ON i.subject = r.subject AND i.as_of_date = r.as_of_date
+             AND i.series_key = 'epoch.' || r.subject || '.inference_compute_usd.fy'
+        WHERE r.series_key IN ('epoch.openai.revenue_usd.fy', 'epoch.anthropic.revenue_usd.fy') AND r.value_numeric > 0),
+      rr AS (SELECT subject, as_of_date, value_numeric AS v, id FROM observations
+             WHERE series_key IN ('epoch.openai.revenue_run_rate_usd.pt', 'epoch.anthropic.revenue_run_rate_usd.pt')),
+      lab AS (  -- the run-rate as of the quarter's end (never a later one) over four, times the year's margin
+        SELECT cq, subject, v, ids FROM (
+          SELECT qs.cq, rr.subject, rr.v / 4 * margin.m AS v, list_prepend(rr.id, margin.ids) AS ids,
+                 row_number() OVER (PARTITION BY qs.cq, rr.subject ORDER BY rr.as_of_date DESC, margin.fy DESC) AS rn
+          FROM qs JOIN rr ON rr.as_of_date < qs.cq + INTERVAL 3 MONTH AND rr.as_of_date >= qs.cq + INTERVAL 3 MONTH - INTERVAL 183 DAY
+                  JOIN margin ON margin.subject = rr.subject AND margin.fy <= year(qs.cq))
+        WHERE rn = 1),
+      complete AS (SELECT cq FROM lab GROUP BY cq HAVING count(DISTINCT subject) = 2),
+      by_layer AS (
+        SELECT f.cq, f.layer_id, 'filed' AS basis, sum(f.v) AS gp, flatten(list(f.ids)) AS ids FROM filed f JOIN complete USING (cq) GROUP BY 1, 2
+        UNION ALL
+        SELECT l.cq, 'model', 'estimated', sum(l.v), flatten(list(l.ids)) FROM lab l JOIN complete USING (cq) GROUP BY 1)
+      SELECT (cq + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE AS as_of_date, layer_id, basis, gp / sum(gp) OVER (PARTITION BY cq) AS value,
+             list_distinct(flatten(list(ids) OVER (PARTITION BY cq))) AS obs_ids
+      FROM by_layer
+
   bls_tfp_yoy:
     description: Year-on-year change in the BLS private nonfarm business total factor productivity index.
     rationale: TFP is the residual where an AI productivity effect would have to show up; the brief's normal band is Acemoglu's estimate, the fast band Goldman-scale.
