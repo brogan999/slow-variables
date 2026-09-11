@@ -10,7 +10,7 @@
   ],
   "value": 172000000000.0
  },
- "bucket_id": null,
+ "bucket_id": "adaptation",
  "cadence_expected": "annual",
  "chart_sources": {
   "metric": null,
@@ -26,7 +26,32 @@
  },
  "confidence": 65,
  "counterevidence": "A single survey series with a stated-preference method; WTA estimates run higher than willingness to pay. No high-frequency version exists.",
- "crosswalk": [],
+ "crosswalk": [
+  {
+   "bucket_id": "adaptation",
+   "layer_id": "labour_consumers",
+   "note": "Productivity, wages, employment and consumer surplus.",
+   "relation": "same_valve",
+   "shared_indicators": [
+    "consumer_surplus_wta",
+    "bls_labor_productivity_yoy",
+    "bls_tfp_private_nonfarm",
+    "canaries_exposed_employment_yoy",
+    "canaries_entry_level_gap",
+    "revelio_exposed_vs_unexposed_growth",
+    "cait_high_exposure_claims",
+    "new_grad_unemployment",
+    "cross_tracker_concordance",
+    "labor_share_nonfarm",
+    "exposed_low_adaptive_workers",
+    "yale_occupational_mix_dissimilarity",
+    "humlum_precise_null",
+    "upwork_freelancer_effects",
+    "pwc_ai_skill_wage_premium"
+   ],
+   "sublayer_id": null
+  }
+ ],
  "definition": "Aggregate annual US consumer surplus from generative-AI chatbots, estimated by Stanford DEL from willingness-to-accept surveys (users \u00d7 mean WTA to give the tools up for a month, annualised).",
  "derived": [],
  "direction": null,
@@ -224,6 +249,7 @@
  "status_events": [
   {
    "author": "claude-initial-seed",
+   "counterevidence_considered": null,
    "created_at": "2026-09-10T01:29:58.431825Z",
    "evidence_ids": [
     "2d48146988bbebb0"
@@ -244,6 +270,6 @@
  "unit": "USD",
  "unpublished_reason": null,
  "updated_at": "2026-09-10",
- "valve_measured": null,
+ "valve_measured": "leak",
  "why_it_matters": "The leak from the stack. If consumers keep more surplus than every layer earns in US revenue, the capture story is about who does not capture it."
 }

@@ -26,7 +26,21 @@
  },
  "confidence": 30,
  "counterevidence": "Self-measured and self-published by the lab whose timeline it supports; 'effort' counts agent time, not delivered research; the same post says over half of successful four-to-eight-hour tasks still needed human intervention. Anthropic's September 2026 system card reports staff self-estimating about 4x productivity uplift while the company puts its overall progress multiplier below 2x and observes no sustained AI-attributable 2x acceleration. METR's technical-worker survey finds a self-reported 1.4\u20132x value uplift, and METR's own RCT measured developers slower with AI.",
- "crosswalk": [],
+ "crosswalk": [
+  {
+   "bucket_id": "return_arrow",
+   "layer_id": "model",
+   "note": "Inside the labs: agent work on the labs' own research and lab recoupment are deployment feeding back into invention.",
+   "relation": "return_arrow",
+   "shared_indicators": [
+    "lab_recoupment_ratio",
+    "rsi_agent_workdays_per_human",
+    "rsi_intervention_rate_4_8h",
+    "deployment_data_share_of_training"
+   ],
+   "sublayer_id": null
+  }
+ ],
  "definition": "Agent effort used by a frontier lab's research organisation, in standard eight-hour workdays, per workday of human labour. Today only OpenAI reports it, about itself.",
  "derived": [],
  "direction": null,
@@ -43,7 +57,11 @@
  "id": "rsi_agent_workdays_per_human",
  "latest": {
   "as_of": "2026-08-15",
-  "disputed": false,
+  "dispute_text": "OpenAI measuring its own research organisation and publishing the result itself; no independent check (tier 7).",
+  "disputed": true,
+  "flags": [
+   "disputed"
+  ],
   "grade": "D",
   "high": null,
   "low": null,
@@ -70,7 +88,11 @@
  "points": [
   {
    "as_of": "2026-08-15",
-   "disputed": false,
+   "dispute_text": "OpenAI measuring its own research organisation and publishing the result itself; no independent check (tier 7).",
+   "disputed": true,
+   "flags": [
+    "disputed"
+   ],
    "grade": "D",
    "high": null,
    "low": null,
@@ -104,7 +126,11 @@
    "points": [
     {
      "as_of": "2026-08-15",
-     "disputed": false,
+     "dispute_text": "OpenAI measuring its own research organisation and publishing the result itself; no independent check (tier 7).",
+     "disputed": true,
+     "flags": [
+      "disputed"
+     ],
      "grade": "D",
      "high": null,
      "low": null,
@@ -126,7 +152,11 @@
  "sparkline": [
   {
    "as_of": "2026-08-15",
-   "disputed": false,
+   "dispute_text": "OpenAI measuring its own research organisation and publishing the result itself; no independent check (tier 7).",
+   "disputed": true,
+   "flags": [
+    "disputed"
+   ],
    "grade": "D",
    "high": null,
    "low": null,
@@ -146,6 +176,7 @@
  "status_events": [
   {
    "author": "evaluate",
+   "counterevidence_considered": null,
    "created_at": "2026-09-10T04:22:58.725182Z",
    "evidence_ids": [
     "6cd4efa01b7ac70e"

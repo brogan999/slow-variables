@@ -57,10 +57,17 @@
    "note": "Capability growth is the model layer's product; inference price at fixed capability \u21c4 price-per-token pass-through; open-weights lag \u21c4 open-vs-closed gap.",
    "relation": "same_valve",
    "shared_indicators": [
+    "lab_run_rates",
+    "open_vs_closed_gap",
     "metr_horizon_50",
     "metr_horizon_80",
     "horizon_ratio_80_50",
-    "open_weights_lag_months"
+    "epoch_training_compute_growth",
+    "epoch_inference_price_fixed_capability",
+    "open_weights_lag_months",
+    "arc_agi_frontier",
+    "ord_half_life_misfit",
+    "surprise_index"
    ],
    "sublayer_id": null
   }
@@ -78,7 +85,7 @@
  "fits": [
   {
    "as_of_date": "2026-03-05",
-   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "computed_at": "2026-09-11T13:08:36.843553Z",
    "dims": {
     "aic": "-44.8",
     "n": "20",
@@ -147,7 +154,7 @@
   },
   {
    "as_of_date": "2026-03-05",
-   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "computed_at": "2026-09-11T13:08:36.843553Z",
    "dims": {
     "aic": "-31.0",
     "n": "22",
@@ -216,7 +223,7 @@
   },
   {
    "as_of_date": "2026-03-05",
-   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "computed_at": "2026-09-11T13:08:36.843553Z",
    "dims": {
     "aic": "78.1",
     "n": "20",
@@ -289,7 +296,11 @@
  "id": "metr_horizon_50",
  "latest": {
   "as_of": "2026-04-07",
+  "dispute_text": "METR: measurements above 16 hours are unreliable with the current task suite",
   "disputed": true,
+  "flags": [
+   "disputed"
+  ],
   "grade": "A",
   "high": 3304.261235,
   "low": 508.876789,
@@ -666,7 +677,11 @@
   },
   {
    "as_of": "2026-04-07",
+   "dispute_text": "METR: measurements above 16 hours are unreliable with the current task suite",
    "disputed": true,
+   "flags": [
+    "disputed"
+   ],
    "grade": "A",
    "high": 3304.261235,
    "low": 508.876789,
@@ -818,7 +833,11 @@
    "points": [
     {
      "as_of": "2026-04-07",
+     "dispute_text": "METR: measurements above 16 hours are unreliable with the current task suite",
      "disputed": true,
+     "flags": [
+      "disputed"
+     ],
      "grade": "A",
      "high": 3304.261235,
      "low": 508.876789,
@@ -1617,7 +1636,11 @@
   },
   {
    "as_of": "2026-04-07",
+   "dispute_text": "METR: measurements above 16 hours are unreliable with the current task suite",
    "disputed": true,
+   "flags": [
+    "disputed"
+   ],
    "grade": "A",
    "high": 3304.261235,
    "low": 508.876789,
@@ -1637,6 +1660,7 @@
  "status_events": [
   {
    "author": "claude-initial-seed",
+   "counterevidence_considered": null,
    "created_at": "2026-09-10T01:28:43.386423Z",
    "evidence_ids": [
     "0d21fe651b2bd589",
@@ -1671,6 +1695,7 @@
   },
   {
    "author": "claude-initial-seed",
+   "counterevidence_considered": null,
    "created_at": "2026-09-10T00:55:32.189541Z",
    "evidence_ids": [
     "479bfe0ed46088db"

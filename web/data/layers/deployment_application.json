@@ -6,7 +6,12 @@
    "layer_id": "deployment_application",
    "note": "Uplift RCTs, pilot\u2192production and app-layer margin net of inference measure the same valve.",
    "relation": "same_valve",
-   "shared_indicators": [],
+   "shared_indicators": [
+    "enterprise_spend_by_layer",
+    "dev_rct_uplift",
+    "enterprise_pilot_to_production",
+    "harvey_lab_frontier_completion"
+   ],
    "sublayer_id": null
   },
   {
@@ -23,7 +28,7 @@
  "id": "deployment_application",
  "indicators": [
   {
-   "bucket_id": null,
+   "bucket_id": "products",
    "confidence": 55,
    "grade": "B",
    "id": "enterprise_spend_by_layer",
@@ -271,7 +276,11 @@
    "id": "dev_rct_uplift",
    "latest": {
     "as_of": "2026-02-24",
+    "dispute_text": "METR itself calls this 'very weak evidence' because developers refusing the no-AI arm biases the sample.",
     "disputed": true,
+    "flags": [
+     "disputed"
+    ],
     "grade": "A",
     "high": null,
     "low": null,
@@ -292,7 +301,11 @@
    "sparkline": [
     {
      "as_of": "2025-06-30",
-     "disputed": false,
+     "dispute_text": "Sixteen experienced open-source maintainers working on their own large repositories with early-2025 tools; METR cautions against reading it as a general productivity effect.",
+     "disputed": true,
+     "flags": [
+      "disputed"
+     ],
      "grade": "A",
      "high": null,
      "low": null,
@@ -306,7 +319,11 @@
     },
     {
      "as_of": "2026-02-24",
+     "dispute_text": "METR itself calls this 'very weak evidence' because developers refusing the no-AI arm biases the sample.",
      "disputed": true,
+     "flags": [
+      "disputed"
+     ],
      "grade": "A",
      "high": null,
      "low": null,
@@ -333,7 +350,11 @@
    "id": "enterprise_pilot_to_production",
    "latest": {
     "as_of": "2025-06-30",
+    "dispute_text": "Denominator and sample disputed; Menlo reports ~47% of pilots reach production on a different definition. No MIT-hosted copy of the PDF exists; this is the mirror Menlo cites.",
     "disputed": true,
+    "flags": [
+     "disputed"
+    ],
     "grade": "B",
     "high": null,
     "low": null,
@@ -354,7 +375,11 @@
    "sparkline": [
     {
      "as_of": "2025-06-30",
+     "dispute_text": "Denominator and sample disputed; Menlo reports ~47% of pilots reach production on a different definition. No MIT-hosted copy of the PDF exists; this is the mirror Menlo cites.",
      "disputed": true,
+     "flags": [
+      "disputed"
+     ],
      "grade": "B",
      "high": null,
      "low": null,

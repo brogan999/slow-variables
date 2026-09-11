@@ -26,7 +26,21 @@
  },
  "confidence": 55,
  "counterevidence": "A single tracker's classification; introduced bills are cheap signals; the enacted count is the one that binds.",
- "crosswalk": [],
+ "crosswalk": [
+  {
+   "bucket_id": "adaptation",
+   "layer_id": "adopters",
+   "note": "Adaptation inside adopting organisations and sectors: regulated devices, state bills, call-centre uplift, reported executive impact.",
+   "relation": "same_valve",
+   "shared_indicators": [
+    "fda_ai_devices_cumulative",
+    "state_ai_bills_introduced",
+    "call_center_uplift",
+    "exec_reported_impact"
+   ],
+   "sublayer_id": null
+  }
+ ],
  "definition": "Count of state bills in NCSL's artificial-intelligence legislation tracker for the legislative year, with the enacted subset alongside.",
  "derived": [],
  "direction": null,
@@ -161,6 +175,7 @@
  "status_events": [
   {
    "author": "evaluate",
+   "counterevidence_considered": null,
    "created_at": "2026-09-10T06:44:07.344564Z",
    "evidence_ids": [
     "758a7f7203a96107"

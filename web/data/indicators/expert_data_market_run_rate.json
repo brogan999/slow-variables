@@ -32,7 +32,16 @@
    "layer_id": "training_input",
    "note": "Expert data, RL environments and continual-learning infra are the deployment\u2192invention channel; lab recoupment \u21c4 capex-to-revenue.",
    "relation": "return_arrow",
-   "shared_indicators": [],
+   "shared_indicators": [
+    "continual_learning_level",
+    "rl_environment_vendor_count",
+    "expert_data_market_run_rate",
+    "cl_lab_release_claims",
+    "cl_adapters_per_product",
+    "cl_forgetting_retention",
+    "cl_learning_curve_slope",
+    "cl_benchmark_exists"
+   ],
    "sublayer_id": null
   }
  ],
@@ -52,7 +61,13 @@
  "id": "expert_data_market_run_rate",
  "latest": {
   "as_of": "2026-06-30",
-  "disputed": false,
+  "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+  "disputed": true,
+  "flags": [
+   "disputed",
+   "run-rate",
+   "gross"
+  ],
   "grade": "C",
   "high": null,
   "low": null,
@@ -79,7 +94,13 @@
  "points": [
   {
    "as_of": "2026-06-30",
-   "disputed": false,
+   "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+   "disputed": true,
+   "flags": [
+    "disputed",
+    "run-rate",
+    "gross"
+   ],
    "grade": "C",
    "high": null,
    "low": null,
@@ -110,7 +131,13 @@
    "points": [
     {
      "as_of": "2026-06-30",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate",
+      "gross"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -129,7 +156,13 @@
    "points": [
     {
      "as_of": "2026-07-09",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate",
+      "gross"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -152,7 +185,13 @@
  "sparkline": [
   {
    "as_of": "2026-06-30",
-   "disputed": false,
+   "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+   "disputed": true,
+   "flags": [
+    "disputed",
+    "run-rate",
+    "gross"
+   ],
    "grade": "C",
    "high": null,
    "low": null,
@@ -172,6 +211,7 @@
  "status_events": [
   {
    "author": "evaluate",
+   "counterevidence_considered": null,
    "created_at": "2026-09-10T07:06:26.759962Z",
    "evidence_ids": [
     "944743051df0e9df"

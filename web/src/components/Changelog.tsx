@@ -17,6 +17,7 @@ export function ChangelogList({ events, obsIndex, showTarget = true }: { events:
             <span className="text-xs text-muted">conf {e.old_conf ?? "—"} → {e.new_conf} · {e.author}</span>
           </div>
           <p className="text-ink-2 mt-1">{e.reason}</p>
+          {e.counterevidence_considered ? <p className="text-xs text-muted mt-1">Weighed against it: {e.counterevidence_considered}</p> : null}
           {e.evidence_ids.length ? <div className="mt-1"><ObsLinks ids={e.evidence_ids} obsIndex={obsIndex} /></div> : null}
         </li>
       ))}

@@ -285,6 +285,12 @@ def _check(s: st.Store) -> tuple[list[str], list[str]]:
         missing = [i for i in e.evidence_ids if i not in known]
         if missing:
             errors.append(f"{e.target_id}: status event {e.id} cites unknown observations {missing}")
+    pairs = {(c.bucket_id, c.layer_id) for c in s.seed.crosswalk}
+    for ind in s.seed.indicators:  # v2 §0/§10: a shared indicator's two addresses need a crosswalk row
+        if ind.bucket_id and ind.layer_id and (ind.bucket_id, ind.layer_id) not in pairs:
+            errors.append(
+                f"{ind.id}: addressed to {ind.bucket_id} and {ind.layer_id}, which no crosswalk row joins"
+            )
     for r in s._ledger():  # entity writes go through seed/entities.yaml: every ledger party must resolve
         for p in r["parties"]:
             if not p["entity_id"]:

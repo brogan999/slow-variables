@@ -6,10 +6,17 @@
    "note": "Capability growth is the model layer's product; inference price at fixed capability \u21c4 price-per-token pass-through; open-weights lag \u21c4 open-vs-closed gap.",
    "relation": "same_valve",
    "shared_indicators": [
+    "lab_run_rates",
+    "open_vs_closed_gap",
     "metr_horizon_50",
     "metr_horizon_80",
     "horizon_ratio_80_50",
-    "open_weights_lag_months"
+    "epoch_training_compute_growth",
+    "epoch_inference_price_fixed_capability",
+    "open_weights_lag_months",
+    "arc_agi_frontier",
+    "ord_half_life_misfit",
+    "surprise_index"
    ],
    "sublayer_id": null
   },
@@ -18,7 +25,20 @@
    "layer_id": "compute_physical",
    "note": "Compute growth and hardware perf-per-dollar feed the methods stock.",
    "relation": "input_to",
-   "shared_indicators": [],
+   "shared_indicators": [
+    "epoch_training_power_growth",
+    "perf_per_dollar_growth"
+   ],
+   "sublayer_id": null
+  },
+  {
+   "bucket_id": "methods",
+   "layer_id": "training_input",
+   "note": "The public text stock and other training inputs bound how fast the methods stock can grow.",
+   "relation": "input_to",
+   "shared_indicators": [
+    "epoch_data_exhaustion_year"
+   ],
    "sublayer_id": null
   }
  ],
@@ -26,12 +46,652 @@
  "indicators": [
   {
    "bucket_id": "methods",
+   "confidence": 55,
+   "grade": "C",
+   "id": "lab_run_rates",
+   "latest": {
+    "as_of": "2026-08-13",
+    "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+    "disputed": true,
+    "flags": [
+     "disputed",
+     "run-rate"
+    ],
+    "grade": "C",
+    "high": null,
+    "low": null,
+    "obs_ids": [
+     "2932a2f9febe1aeb"
+    ],
+    "series_key": "epoch.openai.revenue_run_rate_usd.pt",
+    "subject": "openai",
+    "unit": "USD",
+    "value": 40000000000.0
+   },
+   "layer_id": "model",
+   "leading_lagging": "coincident",
+   "n_observations": 34,
+   "name": "Frontier-lab revenue run-rates",
+   "pending": null,
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2023-03-01",
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "c82813127138c8ec"
+     ],
+     "series_key": "epoch.openai.revenue_run_rate_usd.pt",
+     "subject": "openai",
+     "unit": "USD",
+     "value": 200000000.0
+    },
+    {
+     "as_of": "2023-08-29",
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "e05bb55f92ca8c2a"
+     ],
+     "series_key": "epoch.openai.revenue_run_rate_usd.pt",
+     "subject": "openai",
+     "unit": "USD",
+     "value": 1000000000.0
+    },
+    {
+     "as_of": "2023-10-10",
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "21955e538a2ba67e"
+     ],
+     "series_key": "epoch.openai.revenue_run_rate_usd.pt",
+     "subject": "openai",
+     "unit": "USD",
+     "value": 1300000000.0
+    },
+    {
+     "as_of": "2023-12-30",
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "b91b5b17c6879bdd"
+     ],
+     "series_key": "epoch.openai.revenue_run_rate_usd.pt",
+     "subject": "openai",
+     "unit": "USD",
+     "value": 1600000000.0
+    },
+    {
+     "as_of": "2023-12-31",
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "aad9c4389300cdcd"
+     ],
+     "series_key": "epoch.openai.revenue_run_rate_usd.pt",
+     "subject": "openai",
+     "unit": "USD",
+     "value": 2000000000.0
+    },
+    {
+     "as_of": "2024-06-12",
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "eba1d490f1b1f20a"
+     ],
+     "series_key": "epoch.openai.revenue_run_rate_usd.pt",
+     "subject": "openai",
+     "unit": "USD",
+     "value": 3400000000.0
+    },
+    {
+     "as_of": "2024-08-15",
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "c83da3dd9f581770"
+     ],
+     "series_key": "epoch.openai.revenue_run_rate_usd.pt",
+     "subject": "openai",
+     "unit": "USD",
+     "value": 3600000000.0
+    },
+    {
+     "as_of": "2024-09-12",
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "b87365501f644603"
+     ],
+     "series_key": "epoch.openai.revenue_run_rate_usd.pt",
+     "subject": "openai",
+     "unit": "USD",
+     "value": 4000000000.0
+    },
+    {
+     "as_of": "2024-12-31",
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "cb9aea146ae3d2e7"
+     ],
+     "series_key": "epoch.openai.revenue_run_rate_usd.pt",
+     "subject": "openai",
+     "unit": "USD",
+     "value": 5500000000.0
+    },
+    {
+     "as_of": "2025-06-09",
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "46820cf03ef990ef"
+     ],
+     "series_key": "epoch.openai.revenue_run_rate_usd.pt",
+     "subject": "openai",
+     "unit": "USD",
+     "value": 10000000000.0
+    },
+    {
+     "as_of": "2025-07-30",
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "7a9b85b56ec77293"
+     ],
+     "series_key": "epoch.openai.revenue_run_rate_usd.pt",
+     "subject": "openai",
+     "unit": "USD",
+     "value": 12000000000.0
+    },
+    {
+     "as_of": "2025-08-01",
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "0dfac555b5f950a6"
+     ],
+     "series_key": "epoch.openai.revenue_run_rate_usd.pt",
+     "subject": "openai",
+     "unit": "USD",
+     "value": 13000000000.0
+    },
+    {
+     "as_of": "2025-12-18",
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "7b980074f99f805e"
+     ],
+     "series_key": "epoch.openai.revenue_run_rate_usd.pt",
+     "subject": "openai",
+     "unit": "USD",
+     "value": 19000000000.0
+    },
+    {
+     "as_of": "2025-12-31",
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "206dd0605a5540c9"
+     ],
+     "series_key": "epoch.openai.revenue_run_rate_usd.pt",
+     "subject": "openai",
+     "unit": "USD",
+     "value": 21400000000.0
+    },
+    {
+     "as_of": "2026-02-28",
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "4910df35443940aa"
+     ],
+     "series_key": "epoch.openai.revenue_run_rate_usd.pt",
+     "subject": "openai",
+     "unit": "USD",
+     "value": 25000000000.0
+    },
+    {
+     "as_of": "2026-08-13",
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "2932a2f9febe1aeb"
+     ],
+     "series_key": "epoch.openai.revenue_run_rate_usd.pt",
+     "subject": "openai",
+     "unit": "USD",
+     "value": 40000000000.0
+    }
+   ],
+   "stale_as_of": null,
+   "stale_reason": null,
+   "status": "concentrating",
+   "unit": "USD",
+   "unpublished_reason": null,
+   "valve_measured": null
+  },
+  {
+   "bucket_id": "methods",
+   "confidence": 55,
+   "grade": "A",
+   "id": "open_vs_closed_gap",
+   "latest": {
+    "as_of": "2026-08-20",
+    "dims": {},
+    "obs_ids": [
+     "2202dee6a2133a8e",
+     "92d9e212d48e3bf9",
+     "ec19ff8318f6bba8"
+    ],
+    "unit": "index",
+    "value": 5.77000000000001
+   },
+   "layer_id": "model",
+   "leading_lagging": "leading",
+   "n_observations": 141,
+   "name": "Open-weights gap to the closed frontier (ECI points)",
+   "pending": null,
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2025-12-01",
+     "dims": {},
+     "obs_ids": [
+      "98b05eacb145646a",
+      "b8094dfa2457f664"
+     ],
+     "unit": "index",
+     "value": 6.810000000000002
+    },
+    {
+     "as_of": "2025-12-22",
+     "dims": {},
+     "obs_ids": [
+      "2c6d66e1dd09052b",
+      "466316dfc09bf5f6",
+      "98b05eacb145646a"
+     ],
+     "unit": "index",
+     "value": 9.140000000000015
+    },
+    {
+     "as_of": "2026-01-27",
+     "dims": {},
+     "obs_ids": [
+      "24789a9da722d2de",
+      "2c6d66e1dd09052b"
+     ],
+     "unit": "index",
+     "value": 7.310000000000002
+    },
+    {
+     "as_of": "2026-02-11",
+     "dims": {},
+     "obs_ids": [
+      "24789a9da722d2de",
+      "67eabbfe73fcd529",
+      "736c2080bfcd831f"
+     ],
+     "unit": "index",
+     "value": 8.560000000000002
+    },
+    {
+     "as_of": "2026-02-12",
+     "dims": {},
+     "obs_ids": [
+      "24789a9da722d2de",
+      "3da03209e4c5f9bb",
+      "67eabbfe73fcd529"
+     ],
+     "unit": "index",
+     "value": 8.560000000000002
+    },
+    {
+     "as_of": "2026-02-13",
+     "dims": {},
+     "obs_ids": [
+      "24789a9da722d2de",
+      "67eabbfe73fcd529",
+      "e3a12ca81edd3c06"
+     ],
+     "unit": "index",
+     "value": 8.560000000000002
+    },
+    {
+     "as_of": "2026-02-24",
+     "dims": {},
+     "obs_ids": [
+      "08041a8a456d6dbf",
+      "24789a9da722d2de",
+      "38c27cadfec7d562",
+      "67eabbfe73fcd529"
+     ],
+     "unit": "index",
+     "value": 8.560000000000002
+    },
+    {
+     "as_of": "2026-03-18",
+     "dims": {},
+     "obs_ids": [
+      "24789a9da722d2de",
+      "d092bfa7505183e3",
+      "f3ea468ee5b6e81b"
+     ],
+     "unit": "index",
+     "value": 10.900000000000006
+    },
+    {
+     "as_of": "2026-04-02",
+     "dims": {},
+     "obs_ids": [
+      "24789a9da722d2de",
+      "ac6f1c2cdefb7d8a",
+      "d092bfa7505183e3",
+      "ecc8d38ac38efd20"
+     ],
+     "unit": "index",
+     "value": 10.900000000000006
+    },
+    {
+     "as_of": "2026-04-07",
+     "dims": {},
+     "obs_ids": [
+      "672304c6742f647a",
+      "d092bfa7505183e3"
+     ],
+     "unit": "index",
+     "value": 9.200000000000017
+    },
+    {
+     "as_of": "2026-04-14",
+     "dims": {},
+     "obs_ids": [
+      "672304c6742f647a",
+      "d092bfa7505183e3",
+      "e47b7c9c0980b9c0"
+     ],
+     "unit": "index",
+     "value": 9.200000000000017
+    },
+    {
+     "as_of": "2026-04-20",
+     "dims": {},
+     "obs_ids": [
+      "7313ea1c506e40e2",
+      "d092bfa7505183e3"
+     ],
+     "unit": "index",
+     "value": 7.920000000000016
+    },
+    {
+     "as_of": "2026-04-22",
+     "dims": {},
+     "obs_ids": [
+      "366d1592d4bac1de",
+      "7313ea1c506e40e2",
+      "d092bfa7505183e3"
+     ],
+     "unit": "index",
+     "value": 7.920000000000016
+    },
+    {
+     "as_of": "2026-04-24",
+     "dims": {},
+     "obs_ids": [
+      "280009b4280e4135",
+      "7313ea1c506e40e2",
+      "d471ec4fe8519574",
+      "e2ec2503b5e14b8f"
+     ],
+     "unit": "index",
+     "value": 11.25
+    },
+    {
+     "as_of": "2026-04-28",
+     "dims": {},
+     "obs_ids": [
+      "280009b4280e4135",
+      "7313ea1c506e40e2",
+      "db232b221b6c0f68"
+     ],
+     "unit": "index",
+     "value": 11.25
+    },
+    {
+     "as_of": "2026-06-01",
+     "dims": {},
+     "obs_ids": [
+      "280009b4280e4135",
+      "7313ea1c506e40e2",
+      "d2bbc63fb2fddbc9"
+     ],
+     "unit": "index",
+     "value": 11.25
+    },
+    {
+     "as_of": "2026-06-04",
+     "dims": {},
+     "obs_ids": [
+      "222a342cff154fa1",
+      "280009b4280e4135",
+      "7313ea1c506e40e2"
+     ],
+     "unit": "index",
+     "value": 11.25
+    },
+    {
+     "as_of": "2026-06-12",
+     "dims": {},
+     "obs_ids": [
+      "2202dee6a2133a8e",
+      "7313ea1c506e40e2",
+      "74019ff6e0c0c7d1"
+     ],
+     "unit": "index",
+     "value": 12.400000000000006
+    },
+    {
+     "as_of": "2026-06-16",
+     "dims": {},
+     "obs_ids": [
+      "2202dee6a2133a8e",
+      "ebf4836f647dcf59"
+     ],
+     "unit": "index",
+     "value": 11.530000000000001
+    },
+    {
+     "as_of": "2026-07-15",
+     "dims": {},
+     "obs_ids": [
+      "2202dee6a2133a8e",
+      "472a62400c7c198b",
+      "b1c57b5cc34b16a8",
+      "ebf4836f647dcf59"
+     ],
+     "unit": "index",
+     "value": 11.530000000000001
+    },
+    {
+     "as_of": "2026-07-16",
+     "dims": {},
+     "obs_ids": [
+      "2202dee6a2133a8e",
+      "92d9e212d48e3bf9"
+     ],
+     "unit": "index",
+     "value": 5.77000000000001
+    },
+    {
+     "as_of": "2026-07-31",
+     "dims": {},
+     "obs_ids": [
+      "2202dee6a2133a8e",
+      "3a6895b56eb9e9f0",
+      "92d9e212d48e3bf9"
+     ],
+     "unit": "index",
+     "value": 5.77000000000001
+    },
+    {
+     "as_of": "2026-08-13",
+     "dims": {},
+     "obs_ids": [
+      "0d746079a5f6cbfc",
+      "2202dee6a2133a8e",
+      "92d9e212d48e3bf9"
+     ],
+     "unit": "index",
+     "value": 5.77000000000001
+    },
+    {
+     "as_of": "2026-08-20",
+     "dims": {},
+     "obs_ids": [
+      "2202dee6a2133a8e",
+      "92d9e212d48e3bf9",
+      "ec19ff8318f6bba8"
+     ],
+     "unit": "index",
+     "value": 5.77000000000001
+    }
+   ],
+   "stale_as_of": null,
+   "stale_reason": null,
+   "status": "unclear",
+   "unit": "index",
+   "unpublished_reason": null,
+   "valve_measured": null
+  },
+  {
+   "bucket_id": "methods",
    "confidence": 80,
    "grade": "A",
    "id": "metr_horizon_50",
    "latest": {
     "as_of": "2026-04-07",
+    "dispute_text": "METR: measurements above 16 hours are unreliable with the current task suite",
     "disputed": true,
+    "flags": [
+     "disputed"
+    ],
     "grade": "A",
     "high": 3304.261235,
     "low": 508.876789,
@@ -374,7 +1034,11 @@
     },
     {
      "as_of": "2026-04-07",
+     "dispute_text": "METR: measurements above 16 hours are unreliable with the current task suite",
      "disputed": true,
+     "flags": [
+      "disputed"
+     ],
      "grade": "A",
      "high": 3304.261235,
      "low": 508.876789,

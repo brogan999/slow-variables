@@ -154,6 +154,7 @@ class Observation(BaseModel):
     entity_id: str | None = None
     run_rate_vs_booked: Literal["run_rate", "booked"] | None = None
     gross_vs_net: Literal["gross", "net"] | None = None
+    note: str | None = None  # a maintainer's note carried from the seed row; never a value
     disputed: bool = False
     dispute_text: str | None = None
     review_status: Review = Review.approved
@@ -290,6 +291,9 @@ class StatusEvent(BaseModel):
     new_conf: int
     reason: str
     evidence_ids: list[str] = []
+    counterevidence_considered: str | None = (
+        None  # v2 §8: what a human weighed against the move, when they write one
+    )
     author: str
     created_at: datetime
 

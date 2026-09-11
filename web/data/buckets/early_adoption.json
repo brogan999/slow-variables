@@ -5,12 +5,89 @@
    "layer_id": "adopters",
    "note": "BTOS, BBD, Ramp and the Anthropic Economic Index are adoption from both ends.",
    "relation": "same_valve",
+   "shared_indicators": [
+    "bbd_work_hours_assisted",
+    "btos_firm_use",
+    "ramp_paid_ai_adoption",
+    "aei_augmentation_share",
+    "openai_work_share",
+    "exposure_vs_usage_gap",
+    "bbd_adult_use",
+    "aei_occupation_depth_25",
+    "bbd_work_use_weekly",
+    "bbd_work_use_daily"
+   ],
+   "sublayer_id": null
+  },
+  {
+   "bucket_id": "early_adoption",
+   "layer_id": "model",
+   "note": "Buyers spreading work across several labs is adoption breadth read from the model layer.",
+   "relation": "same_valve",
+   "shared_indicators": [
+    "enterprise_multi_homing_share"
+   ],
+   "sublayer_id": null
+  },
+  {
+   "bucket_id": "early_adoption",
+   "layer_id": "labour_consumers",
+   "note": "People adopting directly: consumer and worker use counted from the household side.",
+   "relation": "same_valve",
    "shared_indicators": [],
    "sublayer_id": null
   }
  ],
  "id": "early_adoption",
  "indicators": [
+  {
+   "bucket_id": "early_adoption",
+   "confidence": 45,
+   "grade": "B",
+   "id": "enterprise_multi_homing_share",
+   "latest": {
+    "as_of": "2023-11-10",
+    "disputed": false,
+    "grade": "B",
+    "high": null,
+    "low": null,
+    "obs_ids": [
+     "5a3caabee92bfad9"
+    ],
+    "series_key": "menlo.enterprise.multi_model_share.pt",
+    "subject": "enterprise",
+    "unit": "share",
+    "value": 0.6
+   },
+   "layer_id": "model",
+   "leading_lagging": "coincident",
+   "n_observations": 3,
+   "name": "Enterprise multi-model usage share (Menlo)",
+   "pending": null,
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2023-11-10",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "5a3caabee92bfad9"
+     ],
+     "series_key": "menlo.enterprise.multi_model_share.pt",
+     "subject": "enterprise",
+     "unit": "share",
+     "value": 0.6
+    }
+   ],
+   "stale_as_of": null,
+   "stale_reason": "Menlo's later waves state the pattern without a share; the row is refreshed when a wave publishes one.",
+   "status": "not_yet_measurable",
+   "unit": "share",
+   "unpublished_reason": null,
+   "valve_measured": null
+  },
   {
    "bucket_id": "early_adoption",
    "confidence": 80,

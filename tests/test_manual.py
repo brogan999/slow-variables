@@ -86,3 +86,32 @@ def test_every_numeric_seed_value_is_in_its_snippet_or_says_how_it_was_coded():
         if not any(matches(t, float(r["value"]), r["unit"]) for t in toks):
             unbound.append(f"{r['series_key']} = {r['value']}")
     assert not unbound, unbound
+
+
+def test_a_corrected_annotation_rewrites_only_flag_fields(tmp_path, monkeypatch):
+    import json
+    from datetime import datetime, timezone
+
+    from ai_tracker import store as st
+    from ai_tracker.ingest.connectors.manual import annotate
+    from ai_tracker.schema import Basis, Extraction, Observation, Tier
+
+    stored = {"series_key": "x.a.b.pt", "entity_id": None, "as_of_date": "2026-01-01", "value_numeric": 5.0, "value_text": None,
+              "url": "https://ex.test", "id": "abc", "raw_snippet": "5", "disputed": False, "dispute_text": None}
+    ledger = tmp_path / "manual.jsonl"
+    ledger.write_text(json.dumps(stored) + "\n")
+    seed = [{"series_key": "x.a.b.pt", "as_of_date": "2026-01-01", "value": 5, "url": "https://ex.test", "dispute_text": "Contested.", "gross_vs_net": "gross"}]
+    assert annotate(ledger, seed) == 1 and annotate(ledger, seed) == 0
+    row = json.loads(ledger.read_text())
+    assert row["disputed"] and row["dispute_text"] == "Contested." and row["gross_vs_net"] == "gross"
+    assert (row["id"], row["value_numeric"], row["raw_snippet"], row["url"]) == ("abc", 5.0, "5", "https://ex.test")
+
+    monkeypatch.setattr(st, "OBS", tmp_path / "obs")  # a connector re-emitting a row with corrected flags
+    kw = dict(series_key="c.a.b.pt", unit="USD", as_of_date="2026-01-01", published_date="2026-01-01", value_numeric=1.0,
+              url="https://ex.test", content_hash="h", http_status=200, retrieved_at=datetime(2026, 1, 2, tzinfo=timezone.utc),
+              source_id="c", tier=Tier(5), audited_vs_reported=Basis.reported, extraction_method=Extraction.api,
+              extractor_version="c-1", raw_snippet="1")
+    assert st.append_observations("c", [Observation(**kw)]) == 1
+    assert st.append_observations("c", [Observation(**kw, disputed=True, dispute_text="Run-rate.")]) == 0
+    (row2,) = st.read_jsonl(tmp_path / "obs" / "c.jsonl")
+    assert row2["disputed"] and row2["dispute_text"] == "Run-rate." and row2["value_numeric"] == 1.0

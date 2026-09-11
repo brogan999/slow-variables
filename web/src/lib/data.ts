@@ -7,6 +7,7 @@ const ROOT = path.join(process.cwd(), "data");
 export type Point = {
   as_of: string; value: number | null; low?: number | null; high?: number | null; obs_ids: string[];
   subject?: string; unit?: string; disputed?: boolean; grade?: string; dims?: Record<string, string>; series_key?: string;
+  flags?: string[]; dispute_text?: string | null;
 };
 export type Card = {
   unpublished_reason?: string | null;
@@ -17,7 +18,7 @@ export type Card = {
 };
 export type StatusEvent = {
   id: string; target_type?: "indicator" | "prediction"; target_id: string; old_status: string | null; new_status: string; old_conf: number | null; new_conf: number;
-  reason: string; evidence_ids: string[]; author: string; created_at: string;
+  reason: string; evidence_ids: string[]; author: string; created_at: string; counterevidence_considered?: string | null;
 };
 export type Band = { lo?: number | null; hi?: number | null } | null;
 export type Evidence = { id: string; target: string; stance: "for" | "against" | "context"; as_of: string; summary: string; url: string; tier: number; source_id: string; snippet: string; entity_id: string | null };

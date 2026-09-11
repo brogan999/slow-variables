@@ -10,7 +10,7 @@
   ],
   "value": 40000000000.0
  },
- "bucket_id": null,
+ "bucket_id": "methods",
  "cadence_expected": "monthly",
  "chart_sources": {
   "metric": null,
@@ -26,7 +26,28 @@
  },
  "confidence": 55,
  "counterevidence": "Single-source press reports (tier 5); run-rate is annualised from one month; gross vs net of cloud revenue share is often unstated.",
- "crosswalk": [],
+ "crosswalk": [
+  {
+   "bucket_id": "methods",
+   "layer_id": "model",
+   "note": "Capability growth is the model layer's product; inference price at fixed capability \u21c4 price-per-token pass-through; open-weights lag \u21c4 open-vs-closed gap.",
+   "relation": "same_valve",
+   "shared_indicators": [
+    "lab_run_rates",
+    "open_vs_closed_gap",
+    "metr_horizon_50",
+    "metr_horizon_80",
+    "horizon_ratio_80_50",
+    "epoch_training_compute_growth",
+    "epoch_inference_price_fixed_capability",
+    "open_weights_lag_months",
+    "arc_agi_frontier",
+    "ord_half_life_misfit",
+    "surprise_index"
+   ],
+   "sublayer_id": null
+  }
+ ],
  "definition": "Annualised revenue run-rates for OpenAI and Anthropic as compiled by Epoch AI from press reports; each point is an annualised month, not booked revenue.",
  "derived": [],
  "direction": null,
@@ -45,7 +66,12 @@
  "id": "lab_run_rates",
  "latest": {
   "as_of": "2026-08-13",
-  "disputed": false,
+  "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+  "disputed": true,
+  "flags": [
+   "disputed",
+   "run-rate"
+  ],
   "grade": "C",
   "high": null,
   "low": null,
@@ -69,7 +95,12 @@
  "points": [
   {
    "as_of": "2023-03-01",
-   "disputed": false,
+   "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+   "disputed": true,
+   "flags": [
+    "disputed",
+    "run-rate"
+   ],
    "grade": "C",
    "high": null,
    "low": null,
@@ -83,7 +114,12 @@
   },
   {
    "as_of": "2023-08-29",
-   "disputed": false,
+   "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+   "disputed": true,
+   "flags": [
+    "disputed",
+    "run-rate"
+   ],
    "grade": "C",
    "high": null,
    "low": null,
@@ -97,7 +133,12 @@
   },
   {
    "as_of": "2023-10-10",
-   "disputed": false,
+   "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+   "disputed": true,
+   "flags": [
+    "disputed",
+    "run-rate"
+   ],
    "grade": "C",
    "high": null,
    "low": null,
@@ -111,7 +152,12 @@
   },
   {
    "as_of": "2023-12-30",
-   "disputed": false,
+   "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+   "disputed": true,
+   "flags": [
+    "disputed",
+    "run-rate"
+   ],
    "grade": "C",
    "high": null,
    "low": null,
@@ -125,7 +171,12 @@
   },
   {
    "as_of": "2023-12-31",
-   "disputed": false,
+   "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+   "disputed": true,
+   "flags": [
+    "disputed",
+    "run-rate"
+   ],
    "grade": "C",
    "high": null,
    "low": null,
@@ -139,7 +190,12 @@
   },
   {
    "as_of": "2024-06-12",
-   "disputed": false,
+   "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+   "disputed": true,
+   "flags": [
+    "disputed",
+    "run-rate"
+   ],
    "grade": "C",
    "high": null,
    "low": null,
@@ -153,7 +209,12 @@
   },
   {
    "as_of": "2024-08-15",
-   "disputed": false,
+   "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+   "disputed": true,
+   "flags": [
+    "disputed",
+    "run-rate"
+   ],
    "grade": "C",
    "high": null,
    "low": null,
@@ -167,7 +228,12 @@
   },
   {
    "as_of": "2024-09-12",
-   "disputed": false,
+   "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+   "disputed": true,
+   "flags": [
+    "disputed",
+    "run-rate"
+   ],
    "grade": "C",
    "high": null,
    "low": null,
@@ -181,7 +247,12 @@
   },
   {
    "as_of": "2024-12-31",
-   "disputed": false,
+   "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+   "disputed": true,
+   "flags": [
+    "disputed",
+    "run-rate"
+   ],
    "grade": "C",
    "high": null,
    "low": null,
@@ -195,7 +266,12 @@
   },
   {
    "as_of": "2025-06-09",
-   "disputed": false,
+   "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+   "disputed": true,
+   "flags": [
+    "disputed",
+    "run-rate"
+   ],
    "grade": "C",
    "high": null,
    "low": null,
@@ -209,7 +285,12 @@
   },
   {
    "as_of": "2025-07-30",
-   "disputed": false,
+   "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+   "disputed": true,
+   "flags": [
+    "disputed",
+    "run-rate"
+   ],
    "grade": "C",
    "high": null,
    "low": null,
@@ -223,7 +304,12 @@
   },
   {
    "as_of": "2025-08-01",
-   "disputed": false,
+   "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+   "disputed": true,
+   "flags": [
+    "disputed",
+    "run-rate"
+   ],
    "grade": "C",
    "high": null,
    "low": null,
@@ -237,7 +323,12 @@
   },
   {
    "as_of": "2025-12-18",
-   "disputed": false,
+   "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+   "disputed": true,
+   "flags": [
+    "disputed",
+    "run-rate"
+   ],
    "grade": "C",
    "high": null,
    "low": null,
@@ -251,7 +342,12 @@
   },
   {
    "as_of": "2025-12-31",
-   "disputed": false,
+   "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+   "disputed": true,
+   "flags": [
+    "disputed",
+    "run-rate"
+   ],
    "grade": "C",
    "high": null,
    "low": null,
@@ -265,7 +361,12 @@
   },
   {
    "as_of": "2026-02-28",
-   "disputed": false,
+   "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+   "disputed": true,
+   "flags": [
+    "disputed",
+    "run-rate"
+   ],
    "grade": "C",
    "high": null,
    "low": null,
@@ -279,7 +380,12 @@
   },
   {
    "as_of": "2026-08-13",
-   "disputed": false,
+   "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+   "disputed": true,
+   "flags": [
+    "disputed",
+    "run-rate"
+   ],
    "grade": "C",
    "high": null,
    "low": null,
@@ -310,7 +416,12 @@
    "points": [
     {
      "as_of": "2026-07-31",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -329,7 +440,12 @@
    "points": [
     {
      "as_of": "2023-10-01",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -343,7 +459,12 @@
     },
     {
      "as_of": "2024-01-01",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -357,7 +478,12 @@
     },
     {
      "as_of": "2024-12-31",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -371,7 +497,12 @@
     },
     {
      "as_of": "2025-03-01",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -385,7 +516,12 @@
     },
     {
      "as_of": "2025-03-31",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -399,7 +535,12 @@
     },
     {
      "as_of": "2025-05-30",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -413,7 +554,12 @@
     },
     {
      "as_of": "2025-07-01",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -427,7 +573,12 @@
     },
     {
      "as_of": "2025-07-29",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -441,7 +592,12 @@
     },
     {
      "as_of": "2025-10-21",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -455,7 +611,12 @@
     },
     {
      "as_of": "2025-12-31",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -469,7 +630,12 @@
     },
     {
      "as_of": "2026-02-12",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -483,7 +649,12 @@
     },
     {
      "as_of": "2026-03-03",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -497,7 +668,12 @@
     },
     {
      "as_of": "2026-04-06",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -511,7 +687,12 @@
     },
     {
      "as_of": "2026-05-15",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -525,7 +706,12 @@
     },
     {
      "as_of": "2026-07-31",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -544,7 +730,12 @@
    "points": [
     {
      "as_of": "2023-03-01",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -558,7 +749,12 @@
     },
     {
      "as_of": "2023-08-29",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -572,7 +768,12 @@
     },
     {
      "as_of": "2023-10-10",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -586,7 +787,12 @@
     },
     {
      "as_of": "2023-12-30",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -600,7 +806,12 @@
     },
     {
      "as_of": "2023-12-31",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -614,7 +825,12 @@
     },
     {
      "as_of": "2024-06-12",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -628,7 +844,12 @@
     },
     {
      "as_of": "2024-08-15",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -642,7 +863,12 @@
     },
     {
      "as_of": "2024-09-12",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -656,7 +882,12 @@
     },
     {
      "as_of": "2024-12-31",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -670,7 +901,12 @@
     },
     {
      "as_of": "2025-06-09",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -684,7 +920,12 @@
     },
     {
      "as_of": "2025-07-30",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -698,7 +939,12 @@
     },
     {
      "as_of": "2025-08-01",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -712,7 +958,12 @@
     },
     {
      "as_of": "2025-12-18",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -726,7 +977,12 @@
     },
     {
      "as_of": "2025-12-31",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -740,7 +996,12 @@
     },
     {
      "as_of": "2026-02-28",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -754,7 +1015,12 @@
     },
     {
      "as_of": "2026-08-13",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -773,7 +1039,12 @@
    "points": [
     {
      "as_of": "2026-07-31",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -792,7 +1063,12 @@
    "points": [
     {
      "as_of": "2026-07-31",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -818,7 +1094,12 @@
  "sparkline": [
   {
    "as_of": "2023-03-01",
-   "disputed": false,
+   "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+   "disputed": true,
+   "flags": [
+    "disputed",
+    "run-rate"
+   ],
    "grade": "C",
    "high": null,
    "low": null,
@@ -832,7 +1113,12 @@
   },
   {
    "as_of": "2023-08-29",
-   "disputed": false,
+   "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+   "disputed": true,
+   "flags": [
+    "disputed",
+    "run-rate"
+   ],
    "grade": "C",
    "high": null,
    "low": null,
@@ -846,7 +1132,12 @@
   },
   {
    "as_of": "2023-10-10",
-   "disputed": false,
+   "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+   "disputed": true,
+   "flags": [
+    "disputed",
+    "run-rate"
+   ],
    "grade": "C",
    "high": null,
    "low": null,
@@ -860,7 +1151,12 @@
   },
   {
    "as_of": "2023-12-30",
-   "disputed": false,
+   "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+   "disputed": true,
+   "flags": [
+    "disputed",
+    "run-rate"
+   ],
    "grade": "C",
    "high": null,
    "low": null,
@@ -874,7 +1170,12 @@
   },
   {
    "as_of": "2023-12-31",
-   "disputed": false,
+   "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+   "disputed": true,
+   "flags": [
+    "disputed",
+    "run-rate"
+   ],
    "grade": "C",
    "high": null,
    "low": null,
@@ -888,7 +1189,12 @@
   },
   {
    "as_of": "2024-06-12",
-   "disputed": false,
+   "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+   "disputed": true,
+   "flags": [
+    "disputed",
+    "run-rate"
+   ],
    "grade": "C",
    "high": null,
    "low": null,
@@ -902,7 +1208,12 @@
   },
   {
    "as_of": "2024-08-15",
-   "disputed": false,
+   "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+   "disputed": true,
+   "flags": [
+    "disputed",
+    "run-rate"
+   ],
    "grade": "C",
    "high": null,
    "low": null,
@@ -916,7 +1227,12 @@
   },
   {
    "as_of": "2024-09-12",
-   "disputed": false,
+   "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+   "disputed": true,
+   "flags": [
+    "disputed",
+    "run-rate"
+   ],
    "grade": "C",
    "high": null,
    "low": null,
@@ -930,7 +1246,12 @@
   },
   {
    "as_of": "2024-12-31",
-   "disputed": false,
+   "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+   "disputed": true,
+   "flags": [
+    "disputed",
+    "run-rate"
+   ],
    "grade": "C",
    "high": null,
    "low": null,
@@ -944,7 +1265,12 @@
   },
   {
    "as_of": "2025-06-09",
-   "disputed": false,
+   "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+   "disputed": true,
+   "flags": [
+    "disputed",
+    "run-rate"
+   ],
    "grade": "C",
    "high": null,
    "low": null,
@@ -958,7 +1284,12 @@
   },
   {
    "as_of": "2025-07-30",
-   "disputed": false,
+   "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+   "disputed": true,
+   "flags": [
+    "disputed",
+    "run-rate"
+   ],
    "grade": "C",
    "high": null,
    "low": null,
@@ -972,7 +1303,12 @@
   },
   {
    "as_of": "2025-08-01",
-   "disputed": false,
+   "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+   "disputed": true,
+   "flags": [
+    "disputed",
+    "run-rate"
+   ],
    "grade": "C",
    "high": null,
    "low": null,
@@ -986,7 +1322,12 @@
   },
   {
    "as_of": "2025-12-18",
-   "disputed": false,
+   "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+   "disputed": true,
+   "flags": [
+    "disputed",
+    "run-rate"
+   ],
    "grade": "C",
    "high": null,
    "low": null,
@@ -1000,7 +1341,12 @@
   },
   {
    "as_of": "2025-12-31",
-   "disputed": false,
+   "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+   "disputed": true,
+   "flags": [
+    "disputed",
+    "run-rate"
+   ],
    "grade": "C",
    "high": null,
    "low": null,
@@ -1014,7 +1360,12 @@
   },
   {
    "as_of": "2026-02-28",
-   "disputed": false,
+   "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+   "disputed": true,
+   "flags": [
+    "disputed",
+    "run-rate"
+   ],
    "grade": "C",
    "high": null,
    "low": null,
@@ -1028,7 +1379,12 @@
   },
   {
    "as_of": "2026-08-13",
-   "disputed": false,
+   "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+   "disputed": true,
+   "flags": [
+    "disputed",
+    "run-rate"
+   ],
    "grade": "C",
    "high": null,
    "low": null,
@@ -1048,6 +1404,7 @@
  "status_events": [
   {
    "author": "evaluate",
+   "counterevidence_considered": null,
    "created_at": "2026-09-10T07:06:24.990139Z",
    "evidence_ids": [
     "2932a2f9febe1aeb"

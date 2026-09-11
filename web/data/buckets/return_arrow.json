@@ -5,7 +5,29 @@
    "layer_id": "training_input",
    "note": "Expert data, RL environments and continual-learning infra are the deployment\u2192invention channel; lab recoupment \u21c4 capex-to-revenue.",
    "relation": "return_arrow",
-   "shared_indicators": [],
+   "shared_indicators": [
+    "continual_learning_level",
+    "rl_environment_vendor_count",
+    "expert_data_market_run_rate",
+    "cl_lab_release_claims",
+    "cl_adapters_per_product",
+    "cl_forgetting_retention",
+    "cl_learning_curve_slope",
+    "cl_benchmark_exists"
+   ],
+   "sublayer_id": null
+  },
+  {
+   "bucket_id": "return_arrow",
+   "layer_id": "model",
+   "note": "Inside the labs: agent work on the labs' own research and lab recoupment are deployment feeding back into invention.",
+   "relation": "return_arrow",
+   "shared_indicators": [
+    "lab_recoupment_ratio",
+    "rsi_agent_workdays_per_human",
+    "rsi_intervention_rate_4_8h",
+    "deployment_data_share_of_training"
+   ],
    "sublayer_id": null
   }
  ],
@@ -13,12 +35,339 @@
  "indicators": [
   {
    "bucket_id": "return_arrow",
+   "confidence": 50,
+   "grade": "C",
+   "id": "lab_recoupment_ratio",
+   "latest": {
+    "as_of": "2026-08-13",
+    "dims": {
+     "entity": "openai"
+    },
+    "obs_ids": [
+     "15d383db12c87c1e",
+     "167d57240d3a4367",
+     "2932a2f9febe1aeb",
+     "3225749165d9c18c",
+     "3cedc058b3e5c5d9",
+     "4c7d05bb7edc95d9",
+     "b892fe5de7c7b647",
+     "c3b51b4040aaaee3",
+     "c73ede82ddda7d55",
+     "d72e3cf14dacb84a",
+     "db8429b333d8fc75",
+     "f7701f1b6ac42494"
+    ],
+    "unit": "ratio",
+    "value": 0.2188782489740082
+   },
+   "layer_id": "model",
+   "leading_lagging": "lagging",
+   "n_observations": 27,
+   "name": "Lab recoupment ratio",
+   "pending": null,
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2023-03-01",
+     "dims": {
+      "entity": "openai"
+     },
+     "obs_ids": [
+      "b892fe5de7c7b647",
+      "c73ede82ddda7d55",
+      "c82813127138c8ec",
+      "d72e3cf14dacb84a",
+      "f7701f1b6ac42494"
+     ],
+     "unit": "ratio",
+     "value": 0.01532567049808429
+    },
+    {
+     "as_of": "2023-08-29",
+     "dims": {
+      "entity": "openai"
+     },
+     "obs_ids": [
+      "b892fe5de7c7b647",
+      "c3b51b4040aaaee3",
+      "c73ede82ddda7d55",
+      "d72e3cf14dacb84a",
+      "e05bb55f92ca8c2a",
+      "f7701f1b6ac42494"
+     ],
+     "unit": "ratio",
+     "value": 0.0749063670411985
+    },
+    {
+     "as_of": "2023-10-10",
+     "dims": {
+      "entity": "openai"
+     },
+     "obs_ids": [
+      "21955e538a2ba67e",
+      "b892fe5de7c7b647",
+      "c3b51b4040aaaee3",
+      "c73ede82ddda7d55",
+      "d72e3cf14dacb84a",
+      "f7701f1b6ac42494"
+     ],
+     "unit": "ratio",
+     "value": 0.09737827715355805
+    },
+    {
+     "as_of": "2023-12-30",
+     "dims": {
+      "entity": "openai"
+     },
+     "obs_ids": [
+      "b892fe5de7c7b647",
+      "b91b5b17c6879bdd",
+      "c3b51b4040aaaee3",
+      "c73ede82ddda7d55",
+      "d72e3cf14dacb84a",
+      "f7701f1b6ac42494"
+     ],
+     "unit": "ratio",
+     "value": 0.1198501872659176
+    },
+    {
+     "as_of": "2023-12-31",
+     "dims": {
+      "entity": "openai"
+     },
+     "obs_ids": [
+      "aad9c4389300cdcd",
+      "b892fe5de7c7b647",
+      "c3b51b4040aaaee3",
+      "c73ede82ddda7d55",
+      "d72e3cf14dacb84a",
+      "f7701f1b6ac42494"
+     ],
+     "unit": "ratio",
+     "value": 0.149812734082397
+    },
+    {
+     "as_of": "2024-06-12",
+     "dims": {
+      "entity": "openai"
+     },
+     "obs_ids": [
+      "b892fe5de7c7b647",
+      "c3b51b4040aaaee3",
+      "c73ede82ddda7d55",
+      "d72e3cf14dacb84a",
+      "eba1d490f1b1f20a",
+      "f7701f1b6ac42494"
+     ],
+     "unit": "ratio",
+     "value": 0.2546816479400749
+    },
+    {
+     "as_of": "2024-08-15",
+     "dims": {
+      "entity": "openai"
+     },
+     "obs_ids": [
+      "b892fe5de7c7b647",
+      "c3b51b4040aaaee3",
+      "c73ede82ddda7d55",
+      "c83da3dd9f581770",
+      "d72e3cf14dacb84a",
+      "f7701f1b6ac42494"
+     ],
+     "unit": "ratio",
+     "value": 0.2696629213483146
+    },
+    {
+     "as_of": "2024-09-12",
+     "dims": {
+      "entity": "openai"
+     },
+     "obs_ids": [
+      "b87365501f644603",
+      "b892fe5de7c7b647",
+      "c3b51b4040aaaee3",
+      "c73ede82ddda7d55",
+      "d72e3cf14dacb84a",
+      "f7701f1b6ac42494"
+     ],
+     "unit": "ratio",
+     "value": 0.299625468164794
+    },
+    {
+     "as_of": "2024-12-31",
+     "dims": {
+      "entity": "openai"
+     },
+     "obs_ids": [
+      "4c7d05bb7edc95d9",
+      "b892fe5de7c7b647",
+      "c3b51b4040aaaee3",
+      "c73ede82ddda7d55",
+      "cb9aea146ae3d2e7",
+      "d72e3cf14dacb84a",
+      "f7701f1b6ac42494"
+     ],
+     "unit": "ratio",
+     "value": 0.2756892230576441
+    },
+    {
+     "as_of": "2025-06-09",
+     "dims": {
+      "entity": "openai"
+     },
+     "obs_ids": [
+      "3225749165d9c18c",
+      "46820cf03ef990ef",
+      "4c7d05bb7edc95d9",
+      "b892fe5de7c7b647",
+      "c3b51b4040aaaee3",
+      "c73ede82ddda7d55",
+      "d72e3cf14dacb84a",
+      "f7701f1b6ac42494"
+     ],
+     "unit": "ratio",
+     "value": 0.333889816360601
+    },
+    {
+     "as_of": "2025-07-30",
+     "dims": {
+      "entity": "openai"
+     },
+     "obs_ids": [
+      "3225749165d9c18c",
+      "4c7d05bb7edc95d9",
+      "7a9b85b56ec77293",
+      "b892fe5de7c7b647",
+      "c3b51b4040aaaee3",
+      "c73ede82ddda7d55",
+      "d72e3cf14dacb84a",
+      "f7701f1b6ac42494"
+     ],
+     "unit": "ratio",
+     "value": 0.4006677796327212
+    },
+    {
+     "as_of": "2025-08-01",
+     "dims": {
+      "entity": "openai"
+     },
+     "obs_ids": [
+      "0dfac555b5f950a6",
+      "3225749165d9c18c",
+      "3cedc058b3e5c5d9",
+      "4c7d05bb7edc95d9",
+      "b892fe5de7c7b647",
+      "c3b51b4040aaaee3",
+      "c73ede82ddda7d55",
+      "d72e3cf14dacb84a",
+      "f7701f1b6ac42494"
+     ],
+     "unit": "ratio",
+     "value": 0.33986928104575165
+    },
+    {
+     "as_of": "2025-12-18",
+     "dims": {
+      "entity": "openai"
+     },
+     "obs_ids": [
+      "3225749165d9c18c",
+      "3cedc058b3e5c5d9",
+      "4c7d05bb7edc95d9",
+      "7b980074f99f805e",
+      "b892fe5de7c7b647",
+      "c3b51b4040aaaee3",
+      "c73ede82ddda7d55",
+      "d72e3cf14dacb84a",
+      "f7701f1b6ac42494"
+     ],
+     "unit": "ratio",
+     "value": 0.49673202614379086
+    },
+    {
+     "as_of": "2025-12-31",
+     "dims": {
+      "entity": "openai"
+     },
+     "obs_ids": [
+      "167d57240d3a4367",
+      "206dd0605a5540c9",
+      "3225749165d9c18c",
+      "3cedc058b3e5c5d9",
+      "4c7d05bb7edc95d9",
+      "b892fe5de7c7b647",
+      "c3b51b4040aaaee3",
+      "c73ede82ddda7d55",
+      "d72e3cf14dacb84a",
+      "f7701f1b6ac42494"
+     ],
+     "unit": "ratio",
+     "value": 0.3522633744855967
+    },
+    {
+     "as_of": "2026-02-28",
+     "dims": {
+      "entity": "openai"
+     },
+     "obs_ids": [
+      "167d57240d3a4367",
+      "3225749165d9c18c",
+      "3cedc058b3e5c5d9",
+      "4910df35443940aa",
+      "4c7d05bb7edc95d9",
+      "b892fe5de7c7b647",
+      "c3b51b4040aaaee3",
+      "c73ede82ddda7d55",
+      "d72e3cf14dacb84a",
+      "db8429b333d8fc75",
+      "f7701f1b6ac42494"
+     ],
+     "unit": "ratio",
+     "value": 0.14641288433382138
+    },
+    {
+     "as_of": "2026-08-13",
+     "dims": {
+      "entity": "openai"
+     },
+     "obs_ids": [
+      "15d383db12c87c1e",
+      "167d57240d3a4367",
+      "2932a2f9febe1aeb",
+      "3225749165d9c18c",
+      "3cedc058b3e5c5d9",
+      "4c7d05bb7edc95d9",
+      "b892fe5de7c7b647",
+      "c3b51b4040aaaee3",
+      "c73ede82ddda7d55",
+      "d72e3cf14dacb84a",
+      "db8429b333d8fc75",
+      "f7701f1b6ac42494"
+     ],
+     "unit": "ratio",
+     "value": 0.2188782489740082
+    }
+   ],
+   "stale_as_of": null,
+   "stale_reason": null,
+   "status": "emerging",
+   "unit": "ratio",
+   "unpublished_reason": null,
+   "valve_measured": null
+  },
+  {
+   "bucket_id": "return_arrow",
    "confidence": 30,
    "grade": "D",
    "id": "rsi_agent_workdays_per_human",
    "latest": {
     "as_of": "2026-08-15",
-    "disputed": false,
+    "dispute_text": "OpenAI measuring its own research organisation and publishing the result itself; no independent check (tier 7).",
+    "disputed": true,
+    "flags": [
+     "disputed"
+    ],
     "grade": "D",
     "high": null,
     "low": null,
@@ -39,7 +388,11 @@
    "sparkline": [
     {
      "as_of": "2026-08-15",
-     "disputed": false,
+     "dispute_text": "OpenAI measuring its own research organisation and publishing the result itself; no independent check (tier 7).",
+     "disputed": true,
+     "flags": [
+      "disputed"
+     ],
      "grade": "D",
      "high": null,
      "low": null,
@@ -66,7 +419,11 @@
    "id": "rsi_intervention_rate_4_8h",
    "latest": {
     "as_of": "2026-07-31",
-    "disputed": false,
+    "dispute_text": "OpenAI measuring its own research organisation and publishing the result itself; no independent check (tier 7).",
+    "disputed": true,
+    "flags": [
+     "disputed"
+    ],
     "grade": "D",
     "high": null,
     "low": null,
@@ -87,7 +444,11 @@
    "sparkline": [
     {
      "as_of": "2026-07-31",
-     "disputed": false,
+     "dispute_text": "OpenAI measuring its own research organisation and publishing the result itself; no independent check (tier 7).",
+     "disputed": true,
+     "flags": [
+      "disputed"
+     ],
      "grade": "D",
      "high": null,
      "low": null,
@@ -211,7 +572,13 @@
    "id": "expert_data_market_run_rate",
    "latest": {
     "as_of": "2026-06-30",
-    "disputed": false,
+    "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+    "disputed": true,
+    "flags": [
+     "disputed",
+     "run-rate",
+     "gross"
+    ],
     "grade": "C",
     "high": null,
     "low": null,
@@ -232,7 +599,13 @@
    "sparkline": [
     {
      "as_of": "2026-06-30",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate",
+      "gross"
+     ],
      "grade": "C",
      "high": null,
      "low": null,

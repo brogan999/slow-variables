@@ -26,7 +26,18 @@
  },
  "confidence": 40,
  "counterevidence": "One research group's estimate; synthetic data, licensed corpora and multimodal data all extend the stock; the estimate has already been revised once by four years.",
- "crosswalk": [],
+ "crosswalk": [
+  {
+   "bucket_id": "methods",
+   "layer_id": "training_input",
+   "note": "The public text stock and other training inputs bound how fast the methods stock can grow.",
+   "relation": "input_to",
+   "shared_indicators": [
+    "epoch_data_exhaustion_year"
+   ],
+   "sublayer_id": null
+  }
+ ],
  "definition": "Epoch's central projection of the year in which language-model training fully utilises the effective stock of public human-generated text, from the 2024 paper.",
  "derived": [],
  "direction": null,
@@ -141,6 +152,7 @@
  "status_events": [
   {
    "author": "evaluate",
+   "counterevidence_considered": null,
    "created_at": "2026-09-10T06:34:42.696886Z",
    "evidence_ids": [
     "c43909ea5651399c"
