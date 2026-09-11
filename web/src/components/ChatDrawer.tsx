@@ -40,10 +40,11 @@ export function ChatDrawer() {
       <SheetContent side="right" aria-describedby="ask-desc" className="bg-surface overflow-y-auto p-5 data-[side=right]:sm:max-w-md">
         <SheetHeader className="p-0">
           <SheetTitle className="display text-2xl">Ask the data</SheetTitle>
-          <SheetDescription id="ask-desc" className="text-muted">Answers come from the same store as the site; every number is checked against the record it cites.</SheetDescription>
+          <SheetDescription id="ask-desc" className="text-muted">Answers come from the same store as the site. Every number is checked against the record it cites; the sentence around it is not.</SheetDescription>
         </SheetHeader>
         <form onSubmit={submit} className="flex flex-col gap-3">
-          <Textarea value={q} onChange={(e) => setQ(e.target.value)} rows={3} placeholder="What is the latest 50% horizon and its doubling time?" aria-label="Question" className="bg-background" />
+          <p id="ask-note" className="text-xs text-muted">Sent with this page&apos;s path to an Anthropic model through the site&apos;s query service, which logs a hash of the question, not the text. <Link href="/methodology#privacy" className="underline decoration-grid underline-offset-2">Privacy</Link></p>
+          <Textarea value={q} onChange={(e) => setQ(e.target.value)} rows={3} placeholder="What is the latest 50% horizon and its doubling time?" aria-label="Question" aria-describedby="ask-note" className="bg-background" />
           <div className="flex items-center justify-between gap-3">
             <span className="eyebrow">{path}</span>
             <Button type="submit" size="sm" disabled={s.kind === "busy"}>{s.kind === "busy" ? "Asking…" : "Ask"}</Button>

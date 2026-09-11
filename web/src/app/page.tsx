@@ -7,7 +7,6 @@ import { StockFlowDiagram } from "@/components/StockFlowDiagram";
 import { ThesisMonitor } from "@/components/ThesisMonitor";
 import { NumberTicker } from "@/components/ui/number-ticker";
 import { capture, diffusion, index, memos, meta, obsIndex, sources, thesis } from "@/lib/data";
-import { summarise } from "@/lib/format";
 import { SITE } from "@/lib/site";
 
 export const metadata = { title: { absolute: `${SITE.name} · how fast AI lands, and who keeps the value` } };
@@ -32,7 +31,7 @@ export default function Home() {
         <p className="mt-5 text-lg md:text-xl leading-snug text-ink-2 max-w-[60ch]">{SITE.description}</p>
         <div className="mt-10 grid gap-8 md:grid-cols-2">
           <Verdict eyebrow="Diffusion lens" href="/diffusion" sentence={d.verdict} chips={d.buckets.map((b) => [b.name, b.status, `/buckets/${b.id}`])} />
-          <Verdict eyebrow="Capture lens" href="/capture" sentence={c.verdict ?? ""} chips={c.layers.map((l) => [l.name, summarise(l.indicators.map((i) => i.status)), `/layers/${l.id}`])} />
+          <Verdict eyebrow="Capture lens" href="/capture" sentence={c.verdict ?? ""} chips={c.layers.map((l) => [l.name, l.status, `/layers/${l.id}`])} />
         </div>
         <ul className="mt-10 flex flex-wrap gap-x-10 gap-y-4">
           {figures.map(([n, label, href]) => (
@@ -80,8 +79,15 @@ export default function Home() {
       <Section n={4} title="Thesis monitor" action={<span className="text-muted">the falsification rules, evaluated nightly</span>}>
         <ThesisMonitor verdicts={verdicts} obsIndex={idx} />
         <details className="mt-6 group">
-          <summary className="cursor-pointer display text-xl">What would change our mind <span className="text-muted text-sm font-sans">({d.what_would_change.length} rules)</span></summary>
-          <ul className="mt-3 text-sm text-ink-2 flex flex-col gap-1.5 list-disc pl-5 max-w-[70ch]">{d.what_would_change.map((w) => <li key={w}>{w}</li>)}</ul>
+          <summary className="cursor-pointer display text-xl">What would change our mind <span className="text-muted text-sm font-sans">({d.what_would_change.length} diffusion · {c.what_would_change.length} capture rules)</span></summary>
+          <div className="mt-3 grid gap-6 md:grid-cols-2">
+            {([["Diffusion", d.what_would_change], ["Capture", c.what_would_change]] as const).map(([k, rules]) => (
+              <div key={k}>
+                <div className="eyebrow mb-2">{k}</div>
+                <ul className="text-sm text-ink-2 flex flex-col gap-1.5 list-disc pl-5">{rules.map((w) => <li key={w}>{w}</li>)}</ul>
+              </div>
+            ))}
+          </div>
         </details>
       </Section>
     </div>

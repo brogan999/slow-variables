@@ -298,6 +298,28 @@ metrics:
       m AS (SELECT entity_id, sublayer_id FROM entity_membership WHERE is_primary AND sublayer_id IS NOT NULL)
       SELECT (date_trunc('quarter', r.as_of_date) + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE AS as_of_date, m.sublayer_id, sum(r.v) AS value, list(r.id ORDER BY r.id) AS obs_ids
       FROM rounds r JOIN m USING (entity_id) WHERE r.as_of_date >= DATE '2023-01-01' GROUP BY 1, 2
+  venture_dollars_incl_debt:
+    description: venture_dollars plus Form D offerings filed as debt alone, per calendar quarter and sub-layer (P1 §9's equity-only versus including-debt view).
+    rationale: Debt-financed compute (neoclouds, data centres) is a growing share of AI capital; the equity-only strip hides it.
+    grain: [as_of_date, sublayer_id]
+    unit: USD
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["formd.*.amount_sold_usd.pt", "formd.*.debt_sold_usd.pt", "epoch.*.round_equity_usd.pt"]
+    caveats: Only Form D debt, so bank facilities and bonds are missing; Epoch's press rows stay equity-only and are suppressed only by a Form D equity row in the same entity-quarter.
+    sql: |
+      WITH f AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'formd.%.amount_sold_usd.pt' AND entity_id IS NOT NULL),
+      d AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'formd.%.debt_sold_usd.pt' AND entity_id IS NOT NULL),
+      e AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'epoch.%.round_equity_usd.pt' AND entity_id IS NOT NULL),
+      rounds AS (
+        SELECT * FROM f
+        UNION ALL
+        SELECT * FROM d
+        UNION ALL
+        SELECT * FROM e WHERE NOT EXISTS (SELECT 1 FROM f WHERE f.entity_id = e.entity_id AND date_trunc('quarter', f.as_of_date) = date_trunc('quarter', e.as_of_date))),
+      m AS (SELECT entity_id, sublayer_id FROM entity_membership WHERE is_primary AND sublayer_id IS NOT NULL)
+      SELECT (date_trunc('quarter', r.as_of_date) + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE AS as_of_date, m.sublayer_id, sum(r.v) AS value, list(r.id ORDER BY r.id) AS obs_ids
+      FROM rounds r JOIN m USING (entity_id) WHERE r.as_of_date >= DATE '2023-01-01' GROUP BY 1, 2
   round_count:
     description: Number of primary rounds per calendar quarter and sub-layer, same sources as venture_dollars.
     rationale: Round counts separate one mega-round from broad activity.

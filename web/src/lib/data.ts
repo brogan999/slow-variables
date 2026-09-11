@@ -58,7 +58,7 @@ export const diffusion = () => read<{
   recent_status_events: StatusEvent[]; what_would_change: string[];
 }>("lens/diffusion.json");
 export type MarginShare = { value: number; as_of: string; obs_ids: string[] };
-export const capture = () => read<{ as_of: string; verdict?: string; layers: (Layer & { indicators: Card[] })[]; recent_status_events: StatusEvent[]; margin_shares: Record<string, MarginShare>; margin_stack_series: { as_of: string; layer_id: string | null; value: number; obs_ids: string[] }[] }>("lens/capture.json");
+export const capture = () => read<{ as_of: string; verdict?: string; what_would_change: string[]; layers: (Layer & { indicators: Card[]; status: string })[]; recent_status_events: StatusEvent[]; margin_shares: Record<string, MarginShare>; margin_stack_series: { as_of: string; layer_id: string | null; value: number; obs_ids: string[] }[] }>("lens/capture.json");
 export const sources = () => read<Source[]>("sources.json");
 export type Skipped = { id: string; name: string; url: string | null; reason: string; attribution: string | null };
 export const skippedSources = () => read<Skipped[]>("skipped_sources.json");
@@ -104,7 +104,7 @@ export function memo(date: string): Memo | null {
   const p = path.join(ROOT, "memos", `${date}.json`);
   return fs.existsSync(p) ? (JSON.parse(fs.readFileSync(p, "utf8")) as Memo) : null;
 }
-export type VentureQuarter = { as_of: string; venture_dollars?: { value: number; obs_ids: string[] }; round_count?: { value: number; obs_ids: string[] } };
+export type VentureQuarter = { as_of: string; venture_dollars?: { value: number; obs_ids: string[] }; round_count?: { value: number; obs_ids: string[] }; venture_dollars_incl_debt?: { value: number; obs_ids: string[] } };
 export type VentureDoc = { sublayer_id: string; quarters: VentureQuarter[] };
 export const venture = (sublayerId: string): VentureDoc | null => { try { return read<VentureDoc>(`venture/${sublayerId}.json`); } catch { return null; } };
 export type LadderRow = { obs_id: string; subject: string; entity_id: string | null; as_of: string; tier: number; url: string; snippet: string };

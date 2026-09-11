@@ -50,9 +50,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <span>Every number links to the observation behind it. Fast is not good; concentrating is not good. Status colours carry no verdict.</span>
               <Freshness generatedAt={generated} />
             </div>
-            <nav aria-label="About" className="flex md:flex-col gap-x-5 gap-y-1.5 text-ink-2">
+            <nav aria-label="About" className="flex flex-wrap md:flex-col md:flex-nowrap gap-x-5 gap-y-1.5 text-ink-2">
               {ABOUT.map(([href, label]) => <Link key={href} href={href} className="hover:text-ink">{label}</Link>)}
               <Link href="/methodology#reuse" className="hover:text-ink">Reuse, cite, corrections</Link>
+              <Link href="/methodology#privacy" className="hover:text-ink">Privacy and disclaimers</Link>
             </nav>
           </div>
         </footer>

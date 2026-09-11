@@ -337,7 +337,6 @@ indicators:
     leading_lagging: leading
     timing_rationale: "Leading: training compute sets the capability of models released months later and deployed years later."
     confidence: 60
-    proposed_status: faster_than_normal
     related_indicators: [epoch_training_power_growth, metr_horizon_50]
     published: true
     updated_at: 2026-09-11
@@ -380,13 +379,12 @@ indicators:
     fast_band: {hi: 365}
     band_rationale: "Normal = doubling no faster than every 500 days (roughly the +49% a year Epoch reports); fast = yearly or faster. Between is emerging."
     tracker_interpretation: Only accelerators with a public list price enter, and recent data-centre GPUs have none, so the series can end years before today.
-    counterevidence: List prices for a handful of parts; real transaction prices for H100-class GPUs are not public; FP16 peak throughput is not delivered throughput.
+    counterevidence: List prices for a handful of parts; real transaction prices for H100-class GPUs are not public; FP16 peak throughput is not delivered throughput. The fit covers only accelerators with a public list price, about 22% a year, slower than trends fitted on wider hardware sets; list prices overstate what hyperscalers pay.
     layer_id: compute_physical
     sublayer_id: semis
     leading_lagging: leading
     timing_rationale: "Leading: cheaper compute per dollar lowers the cost of the models and inference that arrive over the following years."
     confidence: 40
-    proposed_status: emerging
     related_indicators: [epoch_inference_price_fixed_capability, semis_rent_concentration]
     published: true
     updated_at: 2026-09-11
@@ -410,7 +408,6 @@ indicators:
     leading_lagging: coincident
     timing_rationale: "Coincident: prices fall the day a cheaper model matches the benchmark, when buyers can switch."
     confidence: 45
-    proposed_status: faster_than_normal
     related_indicators: [model_price_per_horizon_hour, perf_per_dollar_growth]
     published: true
     updated_at: 2026-09-11
@@ -460,7 +457,6 @@ indicators:
     leading_lagging: leading
     timing_rationale: "Leading: benchmark gains on novel reasoning come before products can rely on that reasoning."
     confidence: 55
-    proposed_status: faster_than_normal
     related_indicators: [metr_horizon_50]
     published: true
     updated_at: 2026-09-11
@@ -485,7 +481,6 @@ indicators:
     leading_lagging: leading
     timing_rationale: "Leading: learning on the job would feed deployment back into capability before labour or productivity series could show it."
     confidence: 45
-    proposed_status: consistent_with_normal
     related_indicators: [rsi_agent_workdays_per_human, expert_data_market_run_rate]
     published: true
     updated_at: 2026-09-11
@@ -533,7 +528,6 @@ indicators:
     leading_lagging: lagging
     timing_rationale: "Lagging: bills follow public attention to deployments already under way, and counts settle after the legislative year."
     confidence: 55
-    proposed_status: consistent_with_normal
     related_indicators: [fda_ai_devices_cumulative]
     published: true
     updated_at: 2026-09-11
@@ -558,7 +552,6 @@ indicators:
     leading_lagging: leading
     timing_rationale: "Leading: vendors sell training environments for models that ship months later."
     confidence: 35
-    proposed_status: consistent_with_normal
     related_indicators: [continual_learning_level]
     published: true
     updated_at: 2026-09-11
@@ -987,7 +980,6 @@ indicators:
     leading_lagging: leading
     timing_rationale: "Leading: reliability across repeated runs is what deployment needs, and it moves in benchmarks before agents ship widely."
     confidence: 55
-    proposed_status: consistent_with_normal
     related_indicators: [harvey_lab_frontier_completion, horizon_ratio_80_50]
     published: true
     updated_at: 2026-09-10

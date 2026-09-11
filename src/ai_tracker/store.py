@@ -509,7 +509,10 @@ class Store:
         recent = [dump(e) for e in sorted(self.events, key=lambda e: e.created_at, reverse=True)[:3]]
 
         def as_of(cs: list[dict[str, Any]]) -> str:
-            return max([c["latest"]["as_of"] for c in cs if c["latest"] and c["published"]] or [""])
+            m = max([c["latest"]["as_of"] for c in cs if c["latest"] and c["published"]] or [""])
+            return (
+                min(m, date.today().isoformat()) if m else m
+            )  # a quarter still in progress is labelled by its end
 
         as_of_d = as_of([cards[i.id] for i in self.seed.indicators if i.bucket_id])
         as_of_c = as_of([cards[i.id] for i in self.seed.indicators if i.layer_id])
@@ -527,13 +530,18 @@ class Store:
                             [
                                 cards[i.id]
                                 for i in self.seed.indicators
-                                if i.layer_id == layer.id and i.published
-                            ]
+                                if i.layer_id == layer.id and i.published and i.direction_rule
+                            ]  # the capture lens reads directions; a flow status on the same layer belongs to the other lens
                         )
                     ]
                     if status
                 )
                 + ".",
+                "what_would_change": [
+                    f"{i.name}: {i.direction_rule.rationale}"
+                    for i in self.seed.indicators
+                    if i.published and i.layer_id and i.direction_rule
+                ],
                 "recent_status_events": recent,
                 "margin_shares": self._margin_shares(),
                 "margin_stack_series": [
@@ -553,6 +561,13 @@ class Store:
                             for i in self.seed.indicators
                             if i.layer_id == layer.id and i.published
                         ],
+                        "status": _summarise(
+                            [
+                                cards[i.id]
+                                for i in self.seed.indicators
+                                if i.layer_id == layer.id and i.published and i.direction_rule
+                            ]
+                        ),
                     }
                     for layer in self.seed.layers
                 ],
@@ -853,7 +868,7 @@ class Store:
     def _venture(self) -> dict[str, dict[str, Any]]:
         """Per sub-layer: quarterly venture dollars and round counts from the derived rows, for the flow strip."""
         out: dict[str, dict[str, Any]] = {}
-        for metric in ("venture_dollars", "round_count"):
+        for metric in ("venture_dollars", "round_count", "venture_dollars_incl_debt"):
             for d in self.derived_for(metric):
                 sub = d.dims.get("sublayer_id")
                 if not sub:

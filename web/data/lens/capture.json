@@ -1,5 +1,5 @@
 {
- "as_of": "2026-09-30",
+ "as_of": "2026-09-10",
  "layers": [
   {
    "dependency_tier": 1,
@@ -2375,7 +2375,8 @@
     }
    ],
    "name": "Compute & physical",
-   "order": 1
+   "order": 1,
+   "status": "concentrating"
   },
   {
    "dependency_tier": 2,
@@ -4231,8 +4232,8 @@
        "as_of": "2026-02-24",
        "dims": {},
        "obs_ids": [
-        "08041a8a456d6dbf",
         "24789a9da722d2de",
+        "38c27cadfec7d562",
         "67eabbfe73fcd529"
        ],
        "unit": "index",
@@ -4242,8 +4243,8 @@
        "as_of": "2026-02-24",
        "dims": {},
        "obs_ids": [
+        "08041a8a456d6dbf",
         "24789a9da722d2de",
-        "38c27cadfec7d562",
         "67eabbfe73fcd529"
        ],
        "unit": "index",
@@ -4405,7 +4406,7 @@
        "dims": {},
        "obs_ids": [
         "2202dee6a2133a8e",
-        "b1c57b5cc34b16a8",
+        "472a62400c7c198b",
         "ebf4836f647dcf59"
        ],
        "unit": "index",
@@ -4416,7 +4417,7 @@
        "dims": {},
        "obs_ids": [
         "2202dee6a2133a8e",
-        "472a62400c7c198b",
+        "b1c57b5cc34b16a8",
         "ebf4836f647dcf59"
        ],
        "unit": "index",
@@ -4468,7 +4469,7 @@
      ],
      "stale_as_of": null,
      "stale_reason": null,
-     "status": "dispersing",
+     "status": "unclear",
      "unit": "index",
      "unpublished_reason": null,
      "valve_measured": null
@@ -8372,7 +8373,8 @@
     }
    ],
    "name": "Model",
-   "order": 2
+   "order": 2,
+   "status": "concentrating"
   },
   {
    "dependency_tier": 2,
@@ -8661,7 +8663,8 @@
     }
    ],
    "name": "Training input",
-   "order": 3
+   "order": 3,
+   "status": "not_yet_measurable"
   },
   {
    "dependency_tier": 3,
@@ -8669,7 +8672,8 @@
    "id": "serving_orchestration",
    "indicators": [],
    "name": "Serving & orchestration",
-   "order": 4
+   "order": 4,
+   "status": "unmeasured"
   },
   {
    "dependency_tier": 4,
@@ -9168,7 +9172,8 @@
     }
    ],
    "name": "Deployment & application",
-   "order": 5
+   "order": 5,
+   "status": "dispersing"
   },
   {
    "dependency_tier": 5,
@@ -10555,7 +10560,8 @@
     }
    ],
    "name": "Adopters",
-   "order": 6
+   "order": 6,
+   "status": "unmeasured"
   },
   {
    "dependency_tier": 5,
@@ -12236,7 +12242,8 @@
     }
    ],
    "name": "Labour & consumers",
-   "order": 7
+   "order": 7,
+   "status": "dispersing"
   }
  ],
  "margin_shares": {
@@ -12472,6 +12479,23 @@
  "recent_status_events": [
   {
    "author": "claude",
+   "created_at": "2026-09-11T05:21:02.630188Z",
+   "evidence_ids": [
+    "2202dee6a2133a8e",
+    "92d9e212d48e3bf9",
+    "ec19ff8318f6bba8"
+   ],
+   "id": "a11440457ad7cdc2",
+   "new_conf": 55,
+   "new_status": "unclear",
+   "old_conf": 55,
+   "old_status": "dispersing",
+   "reason": "The gap fell from 11.5 to 5.8 ECI points with one open-weights release on 16 Jul 2026, then held flat across three more releases. One move in four readings is not a trend under the direction rule, so the reading moves from dispersing to unclear. The earlier reading counted flat steps as agreeing with a fall, an evaluator bug fixed in this change.",
+   "target_id": "open_vs_closed_gap",
+   "target_type": "indicator"
+  },
+  {
+   "author": "claude",
    "created_at": "2026-09-11T04:56:30.394955Z",
    "evidence_ids": [
     "1b7d08dbce2be548",
@@ -12500,22 +12524,36 @@
    "reason": "Evaluator: 49.0% (Anthropic Economic Index (open dataset and reports), 2026-02-12) is inside the consistent band (hi=60.0%). Auto-reason; band rationale: The share only rises, so the question is how fast. Normal = under 60% of occupations with a quarter of their tasks in use four years in; fast = 80% or more. Anchor: 49% in the March 2026 report (data 5-12 February 2026).",
    "target_id": "aei_occupation_depth_25",
    "target_type": "indicator"
-  },
-  {
-   "author": "evaluate",
-   "created_at": "2026-09-11T04:56:30.353103Z",
-   "evidence_ids": [
-    "2735a60f0d2378e3"
-   ],
-   "id": "ccc076564dc0c530",
-   "new_conf": 70,
-   "new_status": "consistent_with_normal",
-   "old_conf": null,
-   "old_status": null,
-   "reason": "Evaluator: 61.8% (FRED (Federal Reserve Economic Data), 2026-06-30) is inside the consistent band (hi=75.0%). Auto-reason; band rationale: Normal = up to three quarters of adults four years after launch (the internet took about a decade to reach that share of US adults); fast = near-universal use at the same age. Anchors: 44.6% in the first FRED wave (Q3 2024) and 61.8% in Q2 2026.",
-   "target_id": "bbd_adult_use",
-   "target_type": "indicator"
   }
  ],
- "verdict": "As of 2026-09-30: compute & physical concentrating, model consistent with normal, training input faster than normal, serving & orchestration unmeasured, deployment & application consistent with normal, adopters consistent with normal, labour & consumers consistent with normal."
+ "verdict": "As of 2026-09-10: compute & physical concentrating, model concentrating, training input not yet measurable, serving & orchestration unmeasured, deployment & application dispersing, adopters unmeasured, labour & consumers dispersing.",
+ "what_would_change": [
+  "Rent concentration in semiconductors: Four fiscal quarters; a move under one point of margin is noise. Rising margin = rent concentrating at the chip layer.",
+  "Cloud backlog (remaining performance obligations): Four quarters; moves under $10B are noise at this scale. Growing backlog concentrates future cloud revenue in a few contracts.",
+  "Frontier-lab revenue run-rates: Four reports; moves under $2B are reporting noise. Rising run-rate concentrates revenue at the two frontier labs.",
+  "Lab recoupment ratio: Three points; a move under 0.05 is noise. A rising ratio means the lab is recouping capital faster than it raises it.",
+  "Consumer surplus from generative AI (willingness to accept): Two annual waves so far, so the trend is one step; moves under $10B are within survey error. Rising surplus disperses value away from producers to consumers.",
+  "Application layer's share of enterprise generative-AI spend (Menlo): Two annual waves, so the trend is one step; a move under five points is within survey error. Rising application share = value concentrating at the application layer.",
+  "Semiconductors' share of stack operating income: Four calendar quarters; a move under two points is within fiscal-calendar noise. Rising semis share = rent concentrating at the chip layer; falling = migrating up.",
+  "Cloud segment operating margins: Four fiscal quarters; two points of margin is noise. Rising cloud margin under rising capex means the layer is keeping surplus.",
+  "Circular financing scale: Three quarters; moves under $20B are one small deal. A growing cumulative total concentrates the stack's risk in a few counterparties.",
+  "Concentration among covered chip filers (HHI): Four calendar quarters; a move under 200 HHI points is noise. Rising = the covered chip layer concentrating further.",
+  "Concentration among covered cloud filers (HHI): Four calendar quarters; a move under 200 HHI points is noise.",
+  "Lab concentration of routed tokens (OpenRouter, HHI): Four weekly readings; under 0.02 in the index is table churn. Rising = routed tokens concentrating on fewer labs.",
+  "Price per unit of capability (cheapest METR-hour on OpenRouter): Four price change-points; a move under two cents per million tokens per horizon-hour is noise. Rising = labs keeping the surplus from capability gains.",
+  "Price per unit of capability (cheapest near-frontier model, Artificial Analysis): Four price change-points; a move under $0.0006 per million tokens per index point (about a tenth of the 11 Sep 2026 level) is one model's repricing. Rising = labs keeping the surplus from capability gains.",
+  "Frontier labs' share of tracked venture dollars: Four quarters; a move under five points is a single round's timing. Rising = capital concentrating in the frontier labs.",
+  "Vertical versus horizontal application funding: Four quarters; a move under 0.2x is round timing. Rising = capital concentrating in vertical applications.",
+  "Frontier lab valuation to run-rate multiple: Three valuation events; a move under 3x is noise in press-reported run-rates. Rising = the market pricing more durable rents into the labs.",
+  "Lab vertical integration (acquisitions and acquihires, trailing four quarters): Four quarters; one event is not a trend. More deals per year concentrate the application layer into the labs.",
+  "Open-weights gap to the closed frontier (ECI points): Four open-weights releases; a move under two ECI points is inside the index's confidence intervals. Widening gap = rents concentrating in the closed labs.",
+  "Non-Nvidia share of AI compute shipped (H100-equivalents): Four quarters; under two points is inside Epoch's estimate ranges. Rising non-Nvidia share = the chip layer's rent dispersing.",
+  "Hyperscaler capex to AI revenue (trailing year): Four quarters; a move under 0.3x is run-rate noise. Rising = capex pulling further ahead of revenue (the bet growing); falling = revenue catching the buildout.",
+  "Hyperscaler server useful lives (10-K estimates): Two annual readings; a change under half a year is rounding. A shorter life means faster hardware turnover and thinner margins for the layer, so shortening reads as dispersing.",
+  "Neocloud borrowing cost (CoreWeave facility rates): Three quarter-ends; moves under a percentage point are facility mix. Rising rates concentrate the compute layer's returns with its lenders.",
+  "Enterprise multi-model usage share (Menlo): Annual waves; a move under five points is survey noise. More multi-homing disperses the model layer's pricing power.",
+  "Startups' share of enterprise AI application revenue: Two annual waves, so the trend is one step; under five points is survey error. Rising startup share = value dispersing away from incumbents.",
+  "Model-layer token concentration on OpenRouter (HHI, top table): Weekly readings; moves under 0.02 in the index are table churn. A rising index means routed tokens concentrating on fewer models.",
+  "Labs buying from the training-input layer (enter bell): Four quarters; a one-point move is one vendor's single disclosure. Rising = the labs buying more from the training-input layer."
+ ]
 }

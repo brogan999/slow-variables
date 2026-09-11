@@ -17,7 +17,7 @@ def direction(
     if abs(delta) <= rule.dead_band:
         return Direction.stable
     steps = [b[1] - a[1] for a, b in zip(pts, pts[1:])]
-    agree = sum(1 for s in steps if (s > 0) == (delta > 0))
+    agree = sum(1 for s in steps if s * delta > 0)  # a flat step agrees with neither a rise nor a fall
     if agree <= len(steps) / 2:  # half the steps agreeing is no trend
         return Direction.unclear
     up = rule.higher_is
