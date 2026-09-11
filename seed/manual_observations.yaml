@@ -1905,6 +1905,27 @@ observations:
     basis: reported
     raw_snippet: "Cloudflare acquires AI data marketplace Human Native"
     note: "Cloudflare's own release body is dated 15 January 2025 against a 2026 header; CNBC dates the deal 15 Jan 2026. In the ledger, outside the lab exit-bell count."
+  - series_key: evidence.continual_learning_unsolved.for.pt
+    source_id: google_research_blog
+    value_text: "Google Research introduces Nested Learning as a way round catastrophic forgetting: updating a model's weights with new data still costs it what it knew."
+    unit: text
+    as_of_date: 2025-11-07
+    published_date: 2025-11-07
+    url: https://research.google/blog/introducing-nested-learning-a-new-ml-paradigm-for-continual-learning/
+    tier: 6
+    basis: reported
+    raw_snippet: "The simple approach, continually updating a model's parameters with new data, often leads to “catastrophic forgetting” (CF), where learning new tasks sacrifices proficiency on old tasks."
+  - series_key: evidence.continual_learning_unsolved.against.pt
+    source_id: baseten_blog
+    entity_id: baseten
+    value_text: "Trajectory retrains adapters from live use and puts them behind a production endpoint within about an hour: continual updating in production, though by retraining rather than learning across sessions."
+    unit: text
+    as_of_date: 2026-05-27
+    published_date: 2026-05-27
+    url: https://www.baseten.co/blog/powering-inference-for-the-continual-learning-era/
+    tier: 7
+    basis: company_stated
+    raw_snippet: "a pipeline that takes a freshly trained LoRA adapter and puts it behind a live, A/B routed, fully provenanced endpoint in roughly an hour."
   - series_key: evidence.neolab_capital_intensity.context.pt
     source_id: leonis
     value_text: "Leonis Capital counts $94.3B raised by 119 neolabs since 2024, of which 16 disclose any revenue: money raised and a lab count, but no revenue denominator."

@@ -73,7 +73,7 @@ export { fmt, words } from "./format";
 export const obsIndex = () => read<Record<string, string>>("obs_index.json");
 export type Fit = { metric: string; value: number; value_low: number | null; value_high: number | null; as_of_date: string; dims: Record<string, string>; obs_ids: string[] };
 export type Doc = IndicatorDoc & { chart_sources?: ChartSourcesT; confidence_basis?: { grade: string | null; best_tier: number | null; sources: string[]; n_observations: number; stale_as_of: string | null }; prediction_rows?: { id: string; claimant: string; ledger: string; status: string | null }[]; points: Point[]; band_value: { value: number; as_of: string | null; obs_ids: string[]; low: number | null; high: number | null } | null; fits: Fit[]; related_metrics: string[] };
-export type Prediction = {
+export type Prediction = { direction_assessment?: string | null; magnitude_assessment?: string | null; timing_assessment?: string | null;
   id: string; ledger: "nk" | "lab" | "ai2027" | "capture"; claimant: string; claim_text: string; claim_url: string | null; claim_date: string;
   window_start: string | null; window_end: string | null; operationalisation: string; related_indicators: string[]; proxy_types: string[];
   confidence: number; counterevidence: string; note: string | null; published: boolean; status: string | null; confidence_now: number | null;
@@ -87,7 +87,8 @@ export const thesis = () => read<ThesisVerdict[]>("thesis.json");
 export type Bottleneck = { id: number; title: string; text: string; section: string; bucket_id: string; source_codes: string[]; related_indicators: string[]; related: { id: string; name: string; status: string | null; published: boolean }[] };
 export type BottleneckDoc = { sections: { name: string; bucket_id: string }[]; essays: { code: string; title: string; url: string; date: string }[]; items: Bottleneck[] };
 export const bottlenecks = () => read<BottleneckDoc>("bottlenecks.json");
-export type CompareRow = { indicator: string; nk: string; ai2027: string; card: Card; leans: "nk" | "ai2027" | "open"; nk_predictions: { id: string; claimant: string; status: string | null }[]; ai2027_predictions: { id: string; claimant: string; status: string | null }[] };
+export type ComparePred = { id: string; claimant: string; status: string | null };
+export type CompareRow = { indicator: string; card: Card; leans: "nk" | "ai2027" | "open" | null; columns: Record<"nk" | "ai2027" | "lab" | "capture", { text: string; predictions: ComparePred[] }> };
 export const compare = () => read<{ rows: CompareRow[]; tally: { nk: number; ai2027: number; open: number } }>("compare.json");
 export type StackEntity = { id: string; name: string; kind: string; cik: string | null; aliases: string[]; verified: boolean; notes: string | null; founded: number | null; is_primary: boolean; from_date: string | null; to_date: string | null; latest: { series_key: string; value: number | null; value_text: string | null; unit: string; as_of: string; obs_ids: string[] } | null };
 export type StackSublayer = Sublayer & { entities: StackEntity[]; indicators: Card[] };

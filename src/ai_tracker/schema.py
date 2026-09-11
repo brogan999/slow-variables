@@ -461,8 +461,11 @@ class Bottleneck(BaseModel):
 
 class CompareRow(BaseModel):
     indicator: str
-    nk: str
-    ai2027: str
+    nk: str = ""
+    ai2027: str = ""
+    lab: str = ""
+    capture: str = ""
+    predictions: list[str] = []  # grouped into columns by each prediction's own ledger at export
     nk_predictions: list[str] = []
     ai2027_predictions: list[str] = []
 

@@ -68,3 +68,18 @@ def test_entity_ids_and_aliases_are_unique_and_memberships_point_at_real_sublaye
     for e in seed.entities:
         for m in e.memberships:
             assert m.sublayer_id is None or (m.layer_id, m.sublayer_id) in subs, (e.id, m)
+
+
+def test_prediction_assessments_are_digit_free_and_compare_groups_claims_by_ledger():
+    import re
+
+    from ai_tracker import store as st
+
+    s = st.Store()
+    for p in s.seed.predictions:
+        for f in ("direction_assessment", "magnitude_assessment", "timing_assessment"):
+            assert not re.search(r"\d", getattr(p, f) or ""), (p.id, f)  # a figure belongs to a cited record, not prose
+    rows = {r["indicator"]: r for r in s._compare({i.id: s._card(i) for i in s.seed.indicators})["rows"]}
+    dev = rows["dev_rct_uplift"]["columns"]
+    assert [x["id"] for x in dev["lab"]["predictions"]] == ["amodei_swe_end_to_end_6_12mo"] and not dev["ai2027"]["predictions"]
+    assert rows["margin_stack_semis_share"]["leans"] is None  # a capture row takes no worldview lean

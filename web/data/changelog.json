@@ -1,6 +1,25 @@
 [
  {
   "author": "claude",
+  "counterevidence_considered": "Trajectory's hourly adapter pipeline shows continual updating in production; it is retraining, not learning across sessions.",
+  "created_at": "2026-09-11T13:25:23.251843Z",
+  "evidence_ids": [
+   "1b7d08dbce2be548",
+   "4b623aa5074b1691",
+   "7deb61ff1f65a7e7",
+   "dc983a8178691c42"
+  ],
+  "id": "67b406cec26cb83b",
+  "new_conf": 80,
+  "new_status": "confirmed",
+  "old_conf": null,
+  "old_status": null,
+  "reason": "Seeded from the brief's Appendix B: production continual learning today means retraining adapters on a short cycle and shipping them (the ladder's third rung), research systems that learn across sessions have not shipped, and no benchmark measures what a model retains across sessions. Confirmed while that holds.",
+  "target_id": "continual_learning_unsolved",
+  "target_type": "prediction"
+ },
+ {
+  "author": "claude",
   "counterevidence_considered": null,
   "created_at": "2026-09-11T12:19:23.280474Z",
   "evidence_ids": [

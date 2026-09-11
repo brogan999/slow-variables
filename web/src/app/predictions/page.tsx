@@ -37,6 +37,11 @@ export default function PredictionsPage() {
                     </div>
                     <blockquote className="mt-2 border-l-2 border-grid pl-3 text-base leading-[1.6]">&ldquo;{p.claim_text}&rdquo; {p.claim_url ? <a href={p.claim_url} className="text-xs text-ink-2 underline decoration-grid underline-offset-4">source</a> : null}</blockquote>
                     <p className="mt-2 text-sm"><span className="text-muted">How we track it.</span> {p.operationalisation}</p>
+                    {p.direction_assessment || p.magnitude_assessment || p.timing_assessment ? (
+                      <dl className="mt-2 grid gap-x-3 gap-y-1 text-sm sm:grid-cols-[6rem_minmax(0,1fr)]">
+                        {([["Direction", p.direction_assessment], ["Magnitude", p.magnitude_assessment], ["Timing", p.timing_assessment]] as const).map(([k, v]) => v ? <div key={k} className="contents"><dt className="text-muted">{k}</dt><dd>{v}</dd></div> : null)}
+                      </dl>
+                    ) : null}
                     {p.related_indicators.length ? <p className="mt-1 text-xs text-ink-2">Indicators: {p.related_indicators.map((r) => <Link key={r} href={indicatorHref(r, indicators.find((i) => i.id === r)?.published)} className="hover:underline mr-2">{indicators.find((i) => i.id === r)?.name ?? r}</Link>)}</p> : null}
                     <details className="mt-2 text-sm"><summary className="cursor-pointer text-ink-2">Counterevidence and history</summary>
                       <p className="mt-1">{p.counterevidence}</p>

@@ -14,6 +14,9 @@ predictions:
     proxy_types: [deployment, behaviour, welfare]
     confidence: 80
     counterevidence: "Weekly work use of generative AI reached 39% within three years, faster than the PC or the web at the same age; the claim is about impacts, not use, which is what makes it hard to falsify early."
+    direction_assessment: "Adoption keeps widening while the adaptation indicators stay inside their normal bands, the direction the claim describes."
+    magnitude_assessment: "Firm use, assisted work hours and productivity have moved by modest amounts, not the step changes fast diffusion would show."
+    timing_assessment: "Too early to judge a claim about decades; the reading so far is on schedule."
     published: true
   - id: nk_safety_speed_limits
     ledger: nk
@@ -28,6 +31,9 @@ predictions:
     proxy_types: [policy, deployment]
     confidence: 75
     counterevidence: "Waymo scaled to hundreds of thousands of paid rides a week; medical-device clearances now exceed a thousand; the safety brakes observed in 2026 were inside labs, not in deployment."
+    direction_assessment: "High-consequence deployment still passes through approval and gating: device clearances, robotaxi permits and lab safety pauses."
+    magnitude_assessment: "No ungated deployment in high-consequence work has been observed."
+    timing_assessment: "No reading yet separates the claim from its alternative inside the window."
     published: true
   - id: nk_rsi_external_limits
     ledger: nk
@@ -42,6 +48,9 @@ predictions:
     proxy_types: [benchmark, model_release]
     confidence: 70
     counterevidence: "OpenAI's September 2026 research-acceleration disclosure reports more agent than human workdays inside its research org; if independent evaluation confirms it and intervention rates fall, the invention-stage version of this claim fails first."
+    direction_assessment: "Labs report agents doing more of their own research, the development the claim says will still meet outside limits."
+    magnitude_assessment: "The only figures are a lab's own, and they show most long tasks still need a person."
+    timing_assessment: "Untestable until an independent measurement of agent research work exists."
     published: true
   - id: nk_benchmarks_false_summits
     ledger: nk
@@ -56,6 +65,9 @@ predictions:
     proxy_types: [benchmark, product]
     confidence: 70
     counterevidence: "METR's 80% horizon is now measured in hours, not minutes, and doubles on the same clock as the 50% horizon; the gap is stable in ratio terms but the absolute reliable horizon is growing fast."
+    direction_assessment: "Benchmark horizons keep racing while reliability lags and field trials show little uplift."
+    magnitude_assessment: "The gap between half-reliable and reliable horizons has not narrowed toward the point where benchmark gains carry straight into products."
+    timing_assessment: "On schedule so far within the window."
     published: true
   - id: nk_agi_not_milestone
     ledger: nk
@@ -70,6 +82,9 @@ predictions:
     proxy_types: [deployment, behaviour]
     confidence: 60
     counterevidence: "A single lab release that visibly moves adoption or productivity series within two quarters would be evidence of capability gating."
+    direction_assessment: "No single capability release has moved the adoption and labour indicators together."
+    magnitude_assessment: "Not a claim about size."
+    timing_assessment: "A claim about how change arrives, readable only over years."
     published: true
   # --- lab, ai2027 and capture rows sourced 2026-09-10 (claim_text verbatim from claim_url; agent-verified snippet-in-page) ---
   - id: openai_research_intern_sep_2026
@@ -87,6 +102,9 @@ predictions:
     confidence: 30
     counterevidence: "The claim is scored by OpenAI's own measurements. The same post reports that over half of successful four-to-eight-hour tasks in the last six months needed at least one human intervention, and no external evaluation of the intern milestone exists."
     note: "The goal was announced by Sam Altman on a 28 Oct 2025 livestream (TechCrunch paraphrase: https://techcrunch.com/2025/10/28/sam-altman-says-openai-will-have-a-legitimate-ai-researcher-by-2028/); the primary is an X post, which the tracker does not scrape. The claim text is OpenAI's own restatement in its 6 Sep 2026 post, quoted as rendered (a screen-reader-only link label is omitted). openai.com returns 403 to the tracker's fetcher, so the post's figures (3.1 agent-workdays per human workday; over half of 4–8 h tasks needed intervention) are not in the observation ledger."
+    direction_assessment: "OpenAI reports reaching the goal by its own measurement."
+    magnitude_assessment: "The reported agent share of research effort is large, but long tasks still need human intervention more often than not."
+    timing_assessment: "Declared on time; it resolves only on an independent replication, which does not yet exist."
     published: true
   - id: openai_automated_researcher_mar_2028
     ledger: lab
@@ -103,6 +121,9 @@ predictions:
     confidence: 30
     counterevidence: "OpenAI's intern milestone was self-graded; its own intervention rate on four-to-eight-hour tasks is above half; METR's 80% horizon on external tasks is hours, not weeks."
     note: "Restates the Oct 2025 goal. openai.com blocks the tracker's fetcher; verified through the browser."
+    direction_assessment: "Progress toward autonomous research is reported by the lab rather than measured by anyone else."
+    magnitude_assessment: "Autonomous delivery of a multi-week research project has not been shown."
+    timing_assessment: "Not yet testable before its window closes."
     published: true
   - id: amodei_swe_end_to_end_6_12mo
     ledger: lab
@@ -119,6 +140,9 @@ predictions:
     confidence: 55
     counterevidence: "Amodei's own later phrasing softened to 'one or two years' (Dwarkesh Patel interview, Feb 2026). METR's 2026 RCT found experienced developers slowed by 4% (new recruits) and 18% (returning participants). The 80% horizon on METR's suite is around three hours."
     note: "Press quoting verbatim (Davos, Economist/WEF session). The WEF transcript page and a Medium transcript return 403; OfficeChai carries the full quote."
+    direction_assessment: "Coding agents are taking on more of the work, the direction the claim describes."
+    magnitude_assessment: "The reliable horizon is measured in hours, not working days, and field trials show little uplift: far short of most of the job end to end."
+    timing_assessment: "Behind: at the current pace the proxies will not reach the threshold before the window closes."
     published: true
   - id: amodei_country_of_geniuses_1_2y
     ledger: lab
@@ -135,9 +159,12 @@ predictions:
     confidence: 30
     counterevidence: "The same post hedges that it 'could also be considerably further out'; Amodei called it 'more like a 50/50 thing' in February 2026; no continual-learning system has shipped and the 80% horizon is hours."
     note: "Own post, dated 'June 2026' on the page; the day is taken from press coverage (11–12 Jun) and is approximate."
+    direction_assessment: "Scaling continues, as the claim assumes."
+    magnitude_assessment: "No system yet does multi-week autonomous work at expert level."
+    timing_assessment: "Not yet testable inside its window."
     published: true
   - id: amodei_trillions_before_2030
-    ledger: lab
+    ledger: capture
     claimant: Dario Amodei
     claimant_entity_id: anthropic
     claim_text: "It is hard for me to see that there won’t be trillions of dollars in revenue before 2030."
@@ -151,6 +178,9 @@ predictions:
     confidence: 35
     counterevidence: "Run-rates are annualised from a single month and reported by press, not booked or audited; Cahn's and Bain's gap analyses put required revenue far above the realised path."
     note: "Interviewer's own transcript. Same page: 'The revenue’s going into the low hundreds of billions by 2028, and then the country of geniuses accelerates it to trillions.'"
+    direction_assessment: "Frontier-lab revenue keeps compounding quickly."
+    magnitude_assessment: "Combined frontier-lab run-rates are around a tenth of the trillion-dollar mark."
+    timing_assessment: "It needs roughly a further tenfold rise before the window closes: possible at recent growth, not yet shown."
     published: true
   - id: anthropic_10x_per_year
     ledger: lab
@@ -167,6 +197,9 @@ predictions:
     confidence: 50
     counterevidence: "Run-rate figures annualise one month of revenue and are press-reported (tier 5); a single large enterprise contract moves them; the adoption indicators (22% of firms, 6% of work hours) sit far behind revenue, which is a tension the run-rate cannot resolve."
     note: "Backward-looking statement scored as a forward claim for 2026, as the claimant's own framing invites."
+    direction_assessment: "Anthropic's run-rate keeps rising steeply through the year."
+    magnitude_assessment: "The mid-year run-rate is already most of the way to a tenfold year."
+    timing_assessment: "Ahead of schedule on press-reported run-rates, which are not booked revenue."
     published: true
   - id: ai2027_horizon_doubling_4mo
     ledger: ai2027
@@ -182,6 +215,9 @@ predictions:
     confidence: 60
     counterevidence: "METR's 2023-onward fit is 128.7 days, over four months; the 2024-window fit is sensitive to the model set; METR's 16-hour suite ceiling censors the newest points; horizons measure software tasks under METR's suite, not work in general."
     note: "Own site, 'Why we forecast a superhuman coder in early 2027' box. The timelines supplement adds 'doubling roughly every 4 months in 2025 and may be doubling faster at longer time horizons'."
+    direction_assessment: "The half-reliability horizon keeps doubling."
+    magnitude_assessment: "The tracker's fit since the start of the window doubles a little faster than the claimed pace."
+    timing_assessment: "On track through the latest METR release."
     published: true
   - id: ai2027_80pct_years_by_mar_2027
     ledger: ai2027
@@ -196,6 +232,9 @@ predictions:
     proxy_types: [benchmark]
     confidence: 55
     counterevidence: "The sentence is conditional on the trend speeding up; the authors' own all-things-considered medians moved out in December 2025; METR's suite cannot measure horizons beyond 16 hours, so a 'years' horizon would be unmeasurable on the current instrument."
+    direction_assessment: "The reliable horizon is rising."
+    magnitude_assessment: "It is measured in hours, orders of magnitude below a working year."
+    timing_assessment: "Behind: reaching years by the deadline needs a far steeper curve than the one observed."
     published: true
   - id: ai2027_superhuman_coder_2027
     ledger: ai2027
@@ -210,6 +249,9 @@ predictions:
     proxy_types: [benchmark, model_release]
     confidence: 30
     counterevidence: "The authors moved their own medians to 2028 (Nikola Jurkovic) and 2030 (Eli Lifland) in a December 2025 disclaimer on the same page; METR's 2026 RCT found no speedup for experienced developers."
+    direction_assessment: "Coding capability keeps improving on benchmarks."
+    magnitude_assessment: "No lab has disclosed a coder that outperforms its best engineers at scale."
+    timing_assessment: "Not yet testable until its window opens."
     published: true
   - id: cahn_600b_question
     ledger: capture
@@ -225,6 +267,9 @@ predictions:
     confidence: 40
     counterevidence: "Cloud AI revenue is growing (AWS, Google Cloud and Intelligent Cloud segment revenue in the ledger); neither the 'double it twice' multiplier nor the 50% margin assumption is an observed quantity, so the gap is an accounting construct."
     note: "Own article; the gap sentence on the same page: 'the $125B hole is now going to become a $500B hole.'"
+    direction_assessment: "The gap between infrastructure spend and AI revenue persists."
+    magnitude_assessment: "Hyperscaler capex still runs well ahead of AI revenue on the tracker's capex-to-revenue measure."
+    timing_assessment: "Resolves when its window closes, against the realised gap."
     published: true
   - id: cahn_1_5t_question
     ledger: capture
@@ -240,6 +285,9 @@ predictions:
     confidence: 40
     counterevidence: "The required-revenue figure depends on assumed hardware lifetimes and margins; the labs' run-rates ($65B Anthropic, $40B OpenAI in mid-2026) are growing several-fold a year, which the static gap arithmetic does not project forward."
     note: "Own Substack; the page lists the trajectory: $200B (Sep 2023), $600B (Jun 2024), $840B (Jun 2025), $1.5T (Jul 2026)."
+    direction_assessment: "Spend keeps outrunning realised revenue."
+    magnitude_assessment: "Circular and vendor financing adds to the gap the claim describes."
+    timing_assessment: "Early in a window that runs to the end of the decade."
     published: true
   - id: bain_2t_revenue_2030
     ledger: capture
@@ -254,6 +302,9 @@ predictions:
     proxy_types: [capital_flow]
     confidence: 30
     counterevidence: "Bain's demand figure is a model of required, not observed, revenue; falling price per unit of capability means the same compute serves more demand than the model assumes."
+    direction_assessment: "AI revenue is growing fast from a small base."
+    magnitude_assessment: "Realised revenue is a small fraction of the level the claim says is needed."
+    timing_assessment: "Not yet testable before the end of the decade."
     published: true
   - id: covello_too_much_spend
     ledger: capture
@@ -269,6 +320,9 @@ predictions:
     confidence: 40
     counterevidence: "The 50% METR horizon on multi-hour software tasks has doubled roughly every four months since 2024, which is not what 'isn't designed to solve complex problems' predicts; hyperscaler cloud segments report rising revenue and stable margins."
     note: "Press quoting verbatim (404 Media, 12 Jul 2024). Goldman's PDF and article return 403 to the tracker; the Goldman landing page (https://www.goldmansachs.com/insights/top-of-mind/gen-ai-too-much-spend-too-little-benefit) verifies the report's framing."
+    direction_assessment: "Spend keeps rising while measured enterprise returns stay thin."
+    magnitude_assessment: "Lab recoupment remains well below one, and application margins net of inference cannot be measured from free sources."
+    timing_assessment: "Open until the window closes late in the decade."
     published: true
   - id: tunguz_12x_infra_per_revenue
     ledger: capture
@@ -283,6 +337,9 @@ predictions:
     proxy_types: [capital_flow]
     confidence: 35
     counterevidence: "The 12:1 figure divides capex by AI-attributed revenue that hyperscalers only partly disclose; AWS operating margin held near 39% through the capex surge and cloud backlogs are at record highs."
+    direction_assessment: "Infrastructure spend still leads revenue."
+    magnitude_assessment: "The tracker's own capex-to-revenue measure is far below twelve to one, on a broader revenue base."
+    timing_assessment: "Early in a five-year window."
     published: true
   - id: korinek_modest_scenario
     ledger: capture
@@ -298,6 +355,9 @@ predictions:
     confidence: 30
     counterevidence: "The scenarios are conditional paths, not forecasts, and the paper says today's readings cannot tell them apart before 2028; the labour share is already falling 3.4% year on year, which the modest scenario would not predict."
     note: "PDF abstract, p. 1; dated September 2026 without a day. Landing page: https://www.anthropic.com/institute/econ-scenarios."
+    direction_assessment: "Macro indicators have not separated from trend."
+    magnitude_assessment: "Productivity and unemployment sit where the modest scenario and the no-AI path overlap."
+    timing_assessment: "The authors expect the scenarios to separate only late in the window."
     published: true
   - id: korinek_substantial_scenario
     ledger: capture
@@ -313,6 +373,9 @@ predictions:
     confidence: 30
     counterevidence: "The scenario is anchored on a survey median, not on data; the paper's own divergence claim means the tracker should expect nulls until 2028."
     note: "PDF abstract, p. 1."
+    direction_assessment: "Exposed-occupation employment shows no concurrent break across the labour trackers."
+    magnitude_assessment: "Far from a decline in cognitive employment of the size the scenario describes."
+    timing_assessment: "The authors expect the scenarios to separate only late in the window."
     published: true
   - id: korinek_extreme_scenario
     ledger: capture
@@ -328,6 +391,9 @@ predictions:
     confidence: 30
     counterevidence: "The extreme path requires diffusion far beyond the adoption indicators (22% of firms, 6% of hours); the labour-share decline so far (3.4% year on year) is within the range of past cyclical swings."
     note: "PDF abstract, p. 1."
+    direction_assessment: "The labour share and output growth show no break."
+    magnitude_assessment: "Nothing near the collapse in labour share or the growth surge the scenario describes."
+    timing_assessment: "The authors expect the scenarios to separate only late in the window."
     published: true
   - id: korinek_divergence_after_2027
     ledger: capture
@@ -343,4 +409,25 @@ predictions:
     confidence: 30
     counterevidence: "Labour share and entry-level employment in exposed occupations already show movements the modest scenario would not predict; 'cannot discriminate before 2028' may be too conservative."
     note: "PDF introduction; shorter form in the conclusions: 'Across scenarios, almost all of the divergence comes after 2027.'"
+    direction_assessment: "Consistent so far: no macro indicator separates the scenarios."
+    magnitude_assessment: "Not a claim about size."
+    timing_assessment: "Its test period has not begun."
+    published: true
+  - id: continual_learning_unsolved
+    ledger: nk
+    claimant: Dwarkesh Patel
+    claim_text: "But the fundamental problem is that LLMs don’t get better over time the way a human would. The lack of continual learning is a huge huge problem."
+    claim_url: https://www.dwarkesh.com/p/timelines-june-2025
+    claim_date: 2025-06-02
+    window_start: 2025-06-02
+    window_end: 2028-12-31
+    operationalisation: "Holds while no production system learns across sessions without being retrained (the continual-learning ladder at or below its fourth rung) and no benchmark measures what a model retains across sessions."
+    related_indicators: [continual_learning_level, cl_lab_release_claims]
+    proxy_types: [product, benchmark]
+    confidence: 80
+    counterevidence: "Vendors now retrain adapters from live use and ship them within about an hour, and research systems that learn at test time or through memory exist; a lab could ship across-session learning without warning."
+    note: "Filed with the Normal Technology family as a sceptic of short timelines; Patel is not Narayanan or Kapoor. The same essay: 'I expect to get lots of heads up before this big bottleneck is totally solved.'"
+    direction_assessment: "Production systems update through retrained adapters and memory, not by learning continuously the way a person does."
+    magnitude_assessment: "The production ladder sits at retraining on a short cycle; research systems that learn across sessions have not shipped, and no benchmark measures retention."
+    timing_assessment: "Holds today; it resolves against the first production system that learns across sessions without retraining."
     published: true

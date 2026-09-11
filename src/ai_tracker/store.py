@@ -1249,13 +1249,23 @@ class Store:
         rows = []
         for r in self.seed.compare:
             c = cards[r.indicator]
+            ids = list(dict.fromkeys(r.predictions + r.nk_predictions + r.ai2027_predictions))
+            flow = not next(i for i in self.seed.indicators if i.id == r.indicator).direction_rule
             rows.append(
                 {
-                    **r.model_dump(),
+                    "indicator": r.indicator,
                     "card": c,
-                    "leans": LEAN.get(c["status"] or "", "open") if c["published"] else "open",
-                    "nk_predictions": [pred(p) for p in r.nk_predictions],
-                    "ai2027_predictions": [pred(p) for p in r.ai2027_predictions],
+                    # a capture row reads concentrating or dispersing, which neither worldview's lean describes
+                    "leans": (LEAN.get(c["status"] or "", "open") if c["published"] else "open")
+                    if flow
+                    else None,
+                    "columns": {
+                        ledger: {
+                            "text": getattr(r, ledger),
+                            "predictions": [pred(p) for p in ids if preds[p].ledger == ledger],
+                        }
+                        for ledger in ("nk", "ai2027", "lab", "capture")
+                    },
                 }
             )
         tally = {k: sum(1 for x in rows if x["leans"] == k) for k in ("nk", "ai2027", "open")}
