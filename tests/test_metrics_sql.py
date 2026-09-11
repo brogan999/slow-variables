@@ -1,6 +1,8 @@
 import duckdb
 import yaml
 
+from ai_tracker.store import VENTURE_ROUNDS
+
 METRICS = yaml.safe_load(open("semantic/metrics.yaml"))["metrics"]
 
 
@@ -65,6 +67,7 @@ def test_venture_incl_debt_adds_form_d_debt_to_equity_in_the_same_quarter():
     )
     con.execute("CREATE TABLE entity_membership (entity_id VARCHAR, sublayer_id VARCHAR, is_primary BOOLEAN)")
     con.execute("INSERT INTO entity_membership VALUES ('crusoe', 'hyperscalers_neoclouds', true)")
+    con.execute(VENTURE_ROUNDS)
     con.executemany(
         "INSERT INTO observations VALUES (?, ?, 'crusoe', ?, ?)",
         [
@@ -117,3 +120,23 @@ def test_gross_margin_fills_the_fiscal_q4_and_reports_the_year():
     assert abs(q["2026-01-25"][0] - 115 / 150) < 1e-9 and q["2026-01-25"][1] == 8  # the fill cites the 10-K and three 10-Qs
     fy = run_p("gross_margin_fy", rows)
     assert [(str(r[0]), r[2]) for r in fy] == [("2026-01-25", 0.8)]
+
+
+def test_venture_4q_sums_the_trailing_year_per_layer_and_sub_layer():
+    con = duckdb.connect()
+    con.execute("CREATE TABLE observations (id VARCHAR, series_key VARCHAR, entity_id VARCHAR, as_of_date DATE, value_numeric DOUBLE)")
+    con.execute("CREATE TABLE entity_membership (entity_id VARCHAR, layer_id VARCHAR, sublayer_id VARCHAR, is_primary BOOLEAN)")
+    con.executemany("INSERT INTO entity_membership VALUES (?, 'model', ?, true)", [("a", "frontier_labs"), ("b", "neolabs")])
+    con.executemany(
+        "INSERT INTO observations VALUES (?, ?, ?, ?, ?)",
+        [
+            ("a1", "epoch.a.round_equity_usd.pt", "a", "2025-02-01", 10.0),  # Q1 2025: drops out of the Q2 2026 window
+            ("a2", "epoch.a.round_equity_usd.pt", "a", "2025-08-01", 20.0),
+            ("b1", "formd.b.amount_sold_usd.pt", "b", "2026-05-01", 5.0),
+            ("b2", "formd.b.debt_sold_usd.pt", "b", "2026-05-02", 99.0),  # debt never counts here
+        ],
+    )
+    con.execute(VENTURE_ROUNDS)
+    out = {(str(r[0]), r[2]): r[3] for r in con.execute(METRICS["venture_dollars_4q"]["sql"]).fetchall()}
+    assert out[("2026-06-30", "all")] == 25.0 and out[("2026-06-30", "frontier_labs")] == 20.0
+    assert out[("2025-03-31", "all")] == 10.0

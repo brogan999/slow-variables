@@ -30,7 +30,7 @@ export default async function SublayerPage({ params }: { params: Promise<{ id: s
       {v ? (
         <section>
           <h2 className="display text-2xl leading-tight mb-3 mt-2">Venture flow</h2>
-          <VentureFlowStrip doc={v} obsIndex={idx} />
+          <VentureFlowStrip doc={v} />
         </section>
       ) : null}
       <section>

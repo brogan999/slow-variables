@@ -27,6 +27,14 @@ export default async function LayerPage({ params }: { params: Promise<{ id: stri
         <p className="text-xs text-muted"><Link href="/capture" className="hover:text-ink">Capture</Link> / layer {l.order}</p>
         <h1 className="display text-[2.25rem] md:text-[3rem] leading-[1.05] tracking-[-0.015em]">{l.name}</h1>
         <p className="mt-1 text-sm text-ink-2">{l.description}{l.dependency_tier ? ` Dependency tier ${l.dependency_tier}.` : ""}</p>
+        {l.commoditisation ? (
+          <p className="mt-2 text-sm max-w-[70ch]">
+            Commoditisation proxies:{" "}
+            {l.commoditisation.proxies.map((p, i) => (
+              <span key={p.id}>{i ? "; " : ""}<Link href={`/indicators/${p.id}`} className="underline decoration-grid underline-offset-4">{p.name}</Link> <span className="text-ink-2">{(p.status ?? "unmeasured").replace(/_/g, " ")}</span></span>
+            ))}. No composite: each proxy keeps its own status.
+          </p>
+        ) : null}
       </div>
       {bells.length ? (
         <section>
@@ -54,7 +62,7 @@ export default async function LayerPage({ params }: { params: Promise<{ id: stri
               return (
                 <li key={s.id}>
                   <h3 className="text-sm font-medium mb-2"><span className="text-muted tabular-nums">{s.order}.</span> <Link href={`/stack/${s.id}`} className="hover:underline">{s.name}</Link></h3>
-                  {v ? <VentureFlowStrip doc={v} obsIndex={idx} note={false} /> : <p className="text-xs text-muted">No primary rounds on file.</p>}
+                  {v ? <VentureFlowStrip doc={v} note={false} /> : <p className="text-xs text-muted">No primary rounds on file.</p>}
                 </li>
               );
             })}
