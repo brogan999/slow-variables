@@ -1,0 +1,58 @@
+{
+ "observations": [
+  {
+   "as_of_date": "2026-03-24",
+   "audited_vs_reported": "company_stated",
+   "content_hash": "5fc84b65ba5f9429f6df472f1d92a3fc0820bbb65470397a9318946ac0d85b00",
+   "dispute_text": null,
+   "disputed": false,
+   "entity_id": "hark",
+   "extraction_method": "api",
+   "extractor_version": "formd-1",
+   "grade": "A",
+   "gross_vs_net": null,
+   "http_status": 200,
+   "id": "db83b5a07ec93ac7",
+   "period_start": null,
+   "published_date": "2026-03-24",
+   "q": "2026-01-01 00:00:00",
+   "raw_snippet": "{\"adsh\": \"0002117821-26-000001\", \"ciks\": [\"0002117821\"], \"display_names\": [\"Hark Labs Inc.  (CIK 0002117821)\"], \"file_date\": \"2026-03-24\"}",
+   "retrieved_at": "2026-09-11T10:53:26.417372Z",
+   "review_status": "approved",
+   "reviewer_id": null,
+   "run_rate_vs_booked": null,
+   "series_key": "formd.hark.filing.pt",
+   "source_id": "formd",
+   "subject": "hark",
+   "supersedes_id": null,
+   "tier": 4,
+   "unit": "filing",
+   "url": "https://efts.sec.gov/LATEST/search-index?q=\"Hark\"&forms=D&dateRange=custom&startdt=2026-09-01",
+   "value_high": null,
+   "value_low": null,
+   "value_numeric": null,
+   "value_text": "Form D filed 2026-03-24 (0002117821-26-000001)"
+  }
+ ],
+ "series_key": "formd.hark.filing.pt",
+ "source": {
+  "attribution": "SEC EDGAR Form D data sets",
+  "cadence": "daily",
+  "connector": "formd",
+  "default_tier": 4,
+  "expect_series": [
+   "formd.baseten.amount_sold_usd.pt"
+  ],
+  "id": "formd",
+  "kind": "formd",
+  "lens": "capture",
+  "license": "Public domain (U.S. government work)",
+  "name": "SEC EDGAR Form D (private offerings)",
+  "org": "U.S. Securities and Exchange Commission",
+  "people": [],
+  "robots_ok": true,
+  "url": "https://www.sec.gov/data-research/sec-markets-data/form-d-data-sets",
+  "watch": {}
+ },
+ "unit": "filing"
+}
