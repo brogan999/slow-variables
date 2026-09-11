@@ -62,7 +62,7 @@ def annotate(ledger: Path, rows: list[dict]) -> int:
     n = 0
     for o in stored:
         r = seed.get(_key({**o, "value": o.get("value_numeric")}))
-        if not r:
+        if not r or o.get("review_status") == "rejected":  # a withdrawal's dispute text is its public reason
             continue
         want = {
             "disputed": bool(r.get("dispute_text")),

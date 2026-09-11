@@ -77,6 +77,9 @@ def test_a_shared_indicator_needs_a_crosswalk_row_for_its_two_addresses():
     s.seed.crosswalk = [c for c in s.seed.crosswalk if (c.bucket_id, c.layer_id) != ("return_arrow", "model")]
     errs = check_errors(s)
     assert any("lab_recoupment_ratio" in e and "no crosswalk row" in e for e in errs)
+    s = st.Store()  # a row for the same bucket and layer but another sub-layer does not join it either
+    s.seed.crosswalk = [c for c in s.seed.crosswalk if c.sublayer_id or (c.bucket_id, c.layer_id) != ("adaptation", "deployment_application")]
+    assert any(e.startswith("waymo_weekly_paid_rides: addressed to adaptation and deployment_application/consumer_ai") for e in check_errors(s))
 
 
 def test_diffusion_buckets_read_flow_statuses_only():
@@ -84,7 +87,12 @@ def test_diffusion_buckets_read_flow_statuses_only():
 
     s = st.Store()
     cards = {i.id: s._card(i) for i in s.seed.indicators}
+    mine = [i for i in s.seed.indicators if i.bucket_id == "methods"]
+    assert any(i.direction_rule for i in mine) and any(not i.direction_rule for i in mine)
+    for i in mine:  # capture readings would carry the vote if they were counted
+        cards[i.id]["status"] = "concentrating" if i.direction_rule else "emerging"
     lens = s._diffusion_lens(cards, [], "2026-09-11")
     methods = next(b for b in lens["buckets"] if b["id"] == "methods")
     assert any(c["id"] == "lab_run_rates" for c in methods["indicators"])  # listed on the bucket
-    assert methods["status"] not in ("concentrating", "dispersing", "stable", "unclear")  # but never summarised there
+    assert methods["status"] == "emerging"  # but never summarised there
+    assert all(v["status"] != "concentrating" for v in lens["valves"])

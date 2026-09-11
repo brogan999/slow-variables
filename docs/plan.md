@@ -279,18 +279,18 @@ Verify per PR: fixture extract test, `check`, `export`, screenshot of the touche
 - Memo `workflow_dispatch` opens a PR; with the key removed the fallback digest PR opens.
 - Public: domain resolves over HTTPS, headers present, repo visible, previews gated.
 
-## Status against the definition of done (11 Sep 2026, after Part 5)
+## Status against the definition of done (11 Sep 2026, after Part 6)
 
 | # | Criterion | State |
 |---|---|---|
 | 1 | Routes and components in brief v2 §4.3–4.4 | Done: `/stack`, `/stack/[id]`, `/query`, `/memos`, `DirectionChart`, `MarginStackChart`, `ConfidenceDial`, `LadderView`, `VentureFlowStrip`, `ChatDrawer`, `QueryConsole`. `/admin` and `/data` remain the PR-queue and `/series` substitutions. |
-| 2 | Every indicator published with status + counterevidence, or unpublished with a rendered reason | Done for 103 indicators (78 published). Part 5 added the Artificial Analysis price-per-capability indicator, lab concentration on routed tokens, adoption breadth, occupation depth, continual-learning release claims and the labs' enter bell, and gave every unpublished indicator a reason. Every free source the briefs name has a connector, a manual row, or a line on /sources under "Read, not ingested". |
+| 2 | Every indicator published with status + counterevidence, or unpublished with a rendered reason | Done for 106 indicators (81 published). Part 5 added the Artificial Analysis price-per-capability indicator, lab concentration on routed tokens, adoption breadth, occupation depth, continual-learning release claims and the labs' enter bell. Part 6 added the open-weights lag, the refresh cadence, daily work use and the session-policy stub, and gave every indicator a timing rationale. Every free source the briefs name has a connector, a manual row, or a line on /sources under "Read, not ingested". |
 | 3 | Seven consecutive unattended nightlies; one merged nightly PR moving a status without a human reason | In progress, now unattended: since Part 5 the nightly merges its own PR when check, pytest and the web build pass on the tree it built, then redeploys the query service and checks that it serves the new data. The first self-merged run (PR #7, 11 Sep) proved the path, including Vercel deploying a bot-authored commit. Seven consecutive nights close this around 17 Sep. A status moved by an auto-reason through a nightly waits for the data to move one. |
 | 4 | Twelve golden questions pass; citecheck tested; one memo PR produced and merged | Golden, run locally on the live model after the g05 and g07 fixes: 10 of 13 on the first pass; g05 and g02 passed on rerun (model variance); g09 was blocked because the model quoted older values without citing them, which is the check working. citecheck is tested. Part 6 step 4 (11 Sep, prompt v2, nine tools, one fresh retry): 12 of 13 required passed on the first run; g10 failed only because citecheck read the day in "Aug 17, 2026" as a claim, which is fixed and passed on re-ask. g14 (search) and g15 (entity) are informational and both pass. The close-out run on the dedicated key is the record. The memo PR now carries operator notes and falls back to the digest on any model error; Monday 14 Sep is the first real run, and merging it closes this row. |
-| 5 | Site metadata, 375px, AA contrast, focus, no milestone language, attribution and licences | Done; axe-core clean on twenty routes at 375 and 1280. |
+| 5 | Site metadata, 375px, AA contrast, focus, no milestone language, attribution and licences | Done. After Part 6, axe-core is clean on 29 routes at 375 and 1280 in both themes, with no horizontal overflow. Five interaction states also pass in both themes: the Ask sheet, the mobile menu, the More menu, the table sorted by status, and the venture strip with debt. |
 | 6 | Name locked ≥80, domain live, wordmark renamed; repo scrubbed and public; previews-only protection | Done: name locked **Slow Variables** (94); slowvariables.ai bought through Vercel on 10 Sep (auto-renews 2028) and serving; repo public with a ruleset, push protection and Dependabot alerts; previews gated, custom domain public. |
 
-Checkpoints still with Alex: a dedicated Anthropic workspace for this site with a monthly spend limit and its own key (the current key is shared with another project); GitHub watch on the repo set to Participating so self-merged nightlies stop notifying; confirm the conflicts line on /methodology; read each Part 5 PR's "Judgement calls" list. X stays on the drop file.
+Checkpoints still with Alex: a dedicated Anthropic workspace for this site with a monthly spend limit and its own key in `.env` (the key in use was reused from Faster Than Normal Chat and must be treated as exposed; rotating it there is Alex's too); GitHub watch on the new repo set to Participating so self-merged nightlies stop notifying; read each Part 5 and Part 6 PR's "Judgement calls" list. X is quoted only from pages that embed a post.
 
 ## Redesign status (10 Sep 2026)
 
@@ -306,3 +306,37 @@ Scope set by Alex: finish the brief, make the operating cadence automatic, add p
 - **Site.** Privacy and disclaimers on /methodology, a note in the Ask sheet, the capture lens reading directions only with its own "what would change our mind", B1 and B2 loops on the diagram, venture strips and the two bells on layer pages, debt beside equity, the ladder on the training-input layer, a sortable indicators table, a memo RSS feed, a theme that returns to the system, and small values that keep their digits. axe-core: zero violations on 30 routes at 375 and 1280 in both themes, plus the Ask sheet open and the table sorted.
 - **Deliberately not done.** Launch and distribution, trademark and brand work, the X API, Dependabot version updates, blocking mypy, a shared venture-rounds view, an Artificial Analysis diffusion indicator (the index is rescaled per version), a Fly volume for the spend ledger, and a `reason` CLI.
 
+## Part 6 status (11 Sep 2026): every spec gap closed or recorded
+
+Scope set by Alex: close every remaining gap in the original spec, after a security fix and a history scrub. Shipped as step 0 on the archived repo and PRs #1 and #3–#17 on the new one, each with a "Judgement calls" list at the top of its body.
+
+- **Security.** The query service's DuckDB connection cannot read files or the network and cannot unlock itself; raw tables are refused; the service token was rotated. The Anthropic key it used is treated as exposed: its replacement and the rotation in Faster Than Normal Chat are Alex's.
+- **History.** The Part 1 brief and six private chat exports left the public repo and its whole history through a fresh repo; the old repo is a private archive. The conflicts line and its company are gone from the site, the seed and the public files.
+- **Data correctness.** SEC and feed downloads pair by URL, not position; Epoch compute spend is split by category; 82 wrong rows and 20 connector-computed hardware ratios are withdrawn in place and shown struck through; eight CIKs added.
+- **Query layer.** Nine tools (BM25 evidence search, trend fits, concordance, crosswalk, entities), one fresh retry, the theory frame in the prompt, and a durable audit log of time, status, cost, tools and cited ids, never text.
+- **Capture lens.** A gross-profit stack with the lab layer estimated (grade C, hatched) above the filed operating-income check, fiscal Q4 fills and full-year margins, a venture strip stacked by source with an equity/debt toggle, capital-flow arrows and a reading per layer, the commoditisation line, customer concentration, incremental capex, the open-weights lag, and every chart naming its sources.
+- **Freshness.** Ramp, Canaries and CAIT connectors; a narrower injection scrub on every stored text; a monthly refresh list in the Monday notes for sources that cannot be automated.
+- **Surfaces.** Shared indicators carry both addresses with crosswalk rows and a check; flags and dispute text travel with every point; /compare has four columns by ledger; every prediction has assessments; /bottlenecks has a family-by-domain grid; series pages have a query box.
+- **Registry.** X connectors removed (no request to X); new feeds, page watches and EDGAR 8-K watches; everyone in Appendix F read through a named source.
+- **Artifacts.** `export` writes `docs/sources.md`, `docs/bands.md`, `docs/changelog.md` and `schema/*.schema.json`; the memo ranks leading moves first; a Meadows note; local paths out of docs; real NVIDIA 10-K and Form D fixtures; the margin stack and HHI checked by hand.
+
+- **Staff review.** A read-only review of the whole Part 6 diff found nine issues, all fixed in the close-out PR:
+  - the audit log kept every citation-shaped token, so a visitor could put text into the public log; it now keeps only cites that resolve to a record, and the nightly pull drops any cite not shaped like a ledger id;
+  - model and console SQL now run on a separate database holding only the public tables, so no spelling reaches raw rows;
+  - each thread gets its own DuckDB cursor, because concurrent Asks were reading wrong row counts;
+  - a withdrawn row keeps its reason when a connector or the manual seed re-emits it;
+  - the injection scrub again catches sentences that open by addressing a model;
+  - a layer's venture figure is dated at the latest quarter the data covers and reads "none on file" when that window is empty;
+  - the crosswalk check uses the same sub-layer match as /crosswalk, and one row was added for adaptation inside deployed products;
+  - the bucket-summary test now fails without its fix;
+  - the exit-bell caveat no longer says Stripe is counted.
+
+Recorded skips found during the work, beyond the plan's list:
+
+- Not published anywhere we can fetch verbatim: OpenAI's compute share, a non-Sacra 2025 Scale AI revenue figure, SIEPR's recent-graduate split, NCSL's 2026 bill table, and Epoch's 50x and 200x price-decline figures (behind a script-rendered accordion).
+- BTOS has no employment-weighted series; the "32%" in coverage is a size class.
+- Application-layer HHI: Menlo publishes category and model-vendor shares, not app-vendor shares.
+- The X starter set is two posts: most posts on the design-pass list are links, not text, and only static embeds qualify.
+- Epoch's hardware "Price-performance" column is not used: it divides each chip's best-precision figure, so it jumps when a chip adds FP8 or INT8.
+
+Still needs time or Alex: the golden record on the dedicated key (g01–g12 must pass), the seven-night streak on the new repo, the first merged Monday memo (14 Sep), and the fifth quarter for the gross-profit rents test (early November).

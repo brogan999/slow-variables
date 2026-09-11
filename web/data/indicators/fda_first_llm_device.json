@@ -65,13 +65,24 @@
    "relation": "leak_from",
    "shared_indicators": [],
    "sublayer_id": "deployment_services"
+  },
+  {
+   "bucket_id": "adaptation",
+   "layer_id": "deployment_application",
+   "note": "Adaptation measured inside deployed products: regulated devices built on language models and paid robotaxi rides.",
+   "relation": "same_valve",
+   "shared_indicators": [
+    "fda_first_llm_device",
+    "waymo_weekly_paid_rides"
+   ],
+   "sublayer_id": null
   }
  ],
  "definition": "Count of distinct devices the FDA has cleared or authorised whose core function is a large language model, derived metric fda_llm_devices_count over the clearance records. The first is UpDoc (K253281, decision 23 December 2025), per the FDA 510(k) database, STAT News and Innolitics.",
  "derived": [
   {
    "as_of_date": "2025-12-23",
-   "computed_at": "2026-09-11T14:43:44.230362Z",
+   "computed_at": "2026-09-11T15:30:55.241635Z",
    "dims": {},
    "formula_version": "1",
    "id": "3429d58ec336b7fe",

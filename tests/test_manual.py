@@ -115,3 +115,10 @@ def test_a_corrected_annotation_rewrites_only_flag_fields(tmp_path, monkeypatch)
     assert st.append_observations("c", [Observation(**kw, disputed=True, dispute_text="Run-rate.")]) == 0
     (row2,) = st.read_jsonl(tmp_path / "obs" / "c.jsonl")
     assert row2["disputed"] and row2["dispute_text"] == "Run-rate." and row2["value_numeric"] == 1.0
+
+    withdrawn = {**row2, "review_status": "rejected", "dispute_text": "Withdrawn: wrong company."}
+    st.write_jsonl(tmp_path / "obs" / "c.jsonl", [withdrawn])  # re-emitted unflagged, a withdrawal keeps its reason
+    assert st.append_observations("c", [Observation(**kw)]) == 0
+    assert st.read_jsonl(tmp_path / "obs" / "c.jsonl") == [withdrawn]
+    ledger.write_text(json.dumps({**stored, "review_status": "rejected", "disputed": True, "dispute_text": "Withdrawn."}) + "\n")
+    assert annotate(ledger, seed) == 0 and json.loads(ledger.read_text())["dispute_text"] == "Withdrawn."

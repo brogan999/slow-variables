@@ -15,6 +15,7 @@ import logging
 import math
 import os
 import re
+import tempfile
 import threading
 from collections import Counter
 from datetime import date, datetime, timezone
@@ -22,6 +23,7 @@ from fnmatch import fnmatch
 from pathlib import Path
 from typing import Any
 
+import duckdb
 import yaml
 
 from .. import store as st
@@ -49,8 +51,10 @@ DOC_DIRS = ("docs/research", "docs/interpretation")  # public notes only; docs/p
 DOC_SKIP = {"BOTTLENECK_PROMPT.md"}  # a prompt addressed to a model: an injection hazard, not evidence
 ROW_CAP = 200
 READ_ONLY = re.compile(r"^\s*(select|with|describe|show)\b", re.I)
-# v2 §6.1: pending and superseded rows (the raw table) never reach an answer; query()/query_table() would reach it by name
-RAW = re.compile(r"observation_all|\bquery(_table)?\s*\(", re.I)
+# v2 §6.1: pending and superseded rows never reach an answer. Model and console SQL run on a separate database
+# that holds only these tables, so no spelling of a raw-table name can reach one; RAW only explains the refusal.
+PUBLIC_TABLES = ("observations", "derived", "status_events", "indicators", "metrics", "entity_membership", "venture_rounds")
+RAW = re.compile(r"observation_all", re.I)
 
 TOOLS = [
     {
@@ -156,6 +160,19 @@ Published indicators:
 """
 
 
+def _public_db(store: st.Store) -> duckdb.DuckDBPyConnection:
+    """A separate in-memory database holding copies of the public tables, for model and console SQL."""
+    pub = duckdb.connect()
+    have = {r[0] for r in store.con.execute("SELECT table_name FROM information_schema.tables").fetchall()}
+    with tempfile.TemporaryDirectory() as d:
+        for t in PUBLIC_TABLES:
+            if t in have:
+                store.con.execute(f"COPY (SELECT * FROM {t}) TO '{d}/{t}.parquet' (FORMAT parquet)")
+                pub.execute(f"CREATE TABLE {t} AS SELECT * FROM read_parquet('{d}/{t}.parquet')")
+    store._pub = pub
+    return pub
+
+
 class Tools:
     """Read-only tool implementations bound to one Store."""
 
@@ -167,12 +184,14 @@ class Tools:
         ] = {}  # fit_trend rows for one answer; ask() works on a copy, never the shared store
         self.adhoc_href: dict[str, str] = {}
         self._index: dict[str, Any] = {}  # shared by copies: the BM25 index is built once, on first search
-        # Model SQL and the public console run on this connection: no file, network or extension access
-        # (/proc/self/environ holds the service's secrets), locked so no statement can switch it back.
-        # The store's only DuckDB file read (read_json at load) has already run; later reads use pathlib.
-        if not store.con.execute("SELECT current_setting('lock_configuration')").fetchone()[0]:
-            store.con.execute("SET enable_external_access = false")
-            store.con.execute("SET lock_configuration = true")
+        # Both databases lose file, network and extension access (/proc/self/environ holds the service's
+        # secrets), locked so no statement can switch it back. The store's only DuckDB file read (read_json at
+        # load) has already run; later reads use pathlib.
+        self.pub = getattr(store, "_pub", None) or _public_db(store)
+        for con in (store.con, self.pub):
+            if not con.execute("SELECT current_setting('lock_configuration')").fetchone()[0]:
+                con.execute("SET enable_external_access = false")
+                con.execute("SET lock_configuration = true")
 
     def sql(self, query: str) -> Any:
         if not READ_ONLY.match(query) or ";" in query.strip().rstrip(";"):
@@ -184,7 +203,7 @@ class Tools:
         q = query.strip().rstrip(";")
         if READ_ONLY.match(q).group(1).lower() in ("select", "with"):
             q = f"SELECT * FROM ({q}) LIMIT {ROW_CAP}"
-        cur = self.store.con.cursor()
+        cur = self.pub.cursor()
         timer = threading.Timer(5.0, cur.interrupt)
         timer.start()
         try:
@@ -611,7 +630,11 @@ def ask(store: st.Store, question: str, tools: Tools | None = None, client: Any 
         res2 = check(retry, tools.records(CITE.findall(retry)))
         if res2.ok:
             text, res, status = retry, res2, "retried"
-    cites = [{"kind": k, "id": i, "href": tools.href(k, i)} for k, i in dict.fromkeys(CITE.findall(text))]
+    # only tokens that resolve to a record: anything else is model or visitor text and must not reach the log
+    found = tools.records(CITE.findall(text))
+    cites = [
+        {"kind": k, "id": i, "href": tools.href(k, i)} for k, i in dict.fromkeys(CITE.findall(text)) if i in found
+    ]
     usd = (
         (usage["in"] + 1.25 * usage["cache_write"] + 0.1 * usage["cache_read"]) * USD_PER_MTOK_IN
         + usage["out"] * USD_PER_MTOK_OUT

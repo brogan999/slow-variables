@@ -84,3 +84,21 @@ def test_capture_readings_meta_counts_and_chart_sources(tmp_path):
         assert not cap[series] or cap[sources]["sources"], series
     lad = json.loads((d / "lens" / "ladder.json").read_text())
     assert not any(r["production"] or r["research"] for r in lad["rungs"]) or lad["chart_sources"]["sources"]
+
+
+def test_layer_venture_reads_the_latest_covered_quarter_not_the_last_non_empty_one():
+    from datetime import date, datetime, timezone
+
+    from ai_tracker.schema import Derived
+
+    def d(day, layer, value):
+        return Derived(metric="venture_dollars_4q", value=value, as_of_date=day, input_observation_ids=[f"{layer}{day}"],
+                       formula_version="1", computed_at=datetime.now(timezone.utc), dims={"layer_id": layer, "sublayer_id": "all"})
+
+    s = st.Store()
+    s.derived = [d(date(2025, 3, 31), "old", 5e8), d(date(2025, 6, 30), "old", 5e8), d(date(2025, 6, 30), "new", 1e8),
+                 d(date(2026, 6, 30), "new", 3e8)]
+    old = s._layer_venture("old")  # rounds stopped: the four quarters to 30 Jun 2026 hold none
+    assert old["value"] is None and old["as_of"] == "2026-06-30" and old["arrow"] == "down" and old["obs_ids"] == []
+    s.derived = [d(date(2025, 3, 31), "old", 5e8), d(date(2026, 6, 30), "new", 3e8)]
+    assert s._layer_venture("new")["arrow"] == "up"  # the year-earlier window was covered and empty

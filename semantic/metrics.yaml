@@ -921,7 +921,7 @@ metrics:
     lead_lag: leading
     formula_version: 2
     inputs: ["acq.*.*.pt"]
-    caveats: Only deals with a fetched announcement are counted; undisclosed prices still count as events; Stripe (a payments company) is in the ledger for the OpenRouter deal and is included in the count.
+    caveats: Only deals with a fetched announcement are counted; undisclosed prices still count as events; Stripe (a payments company) is in the ledger for the OpenRouter deal but, with no model or compute membership, is not counted.
     sql: |
       WITH buyers AS (SELECT DISTINCT entity_id FROM entity_membership WHERE is_primary AND layer_id IN ('model', 'compute_physical')),
       deals AS (
