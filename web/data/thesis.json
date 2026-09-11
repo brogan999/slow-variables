@@ -186,18 +186,27 @@
  {
   "conds": [
    {
-    "detail": "$172B surplus vs $37B enterprise spend (consumer spend not yet ingested)",
+    "detail": "$172B surplus against a floor of $37B (US enterprise spend) and a ceiling of $146B (lab run-rates plus enterprise spend)",
     "holds": true,
     "obs_ids": [
      "2d48146988bbebb0",
-     "6012e72e8105bfc4"
+     "6012e72e8105bfc4",
+     "143dcf3ea59eb522",
+     "2932a2f9febe1aeb",
+     "300bb7e7943ce4ae",
+     "6012e72e8105bfc4",
+     "76d9d169a90543e5",
+     "87dd71d5670d0873",
+     "b7dae3087b70126a",
+     "c72d56dfb070b2b7",
+     "ce2a8065b1d4c7ac"
     ],
-    "text": "consumer surplus (WTA) > US GenAI revenue"
+    "text": "consumer surplus (WTA) > US GenAI revenue, bracketed"
    }
   ],
   "holds": true,
   "id": "consumers_keep_surplus",
-  "logic": "surplus > revenue (revenue side is enterprise spend only until consumer spend is sourced)",
+  "logic": "surplus above the revenue ceiling holds, below the enterprise-spend floor fails, in between is untestable",
   "name": "Capture thesis 'consumers keep most of the surplus' HOLDS"
  }
 ]

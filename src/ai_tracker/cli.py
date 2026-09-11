@@ -169,7 +169,11 @@ def cmd_evaluate(a: argparse.Namespace) -> int:
             f"{ind.id}: input={value!r} as_of={as_of} tier={int(tier)} -> {new} (current: {old})"
             + (" [capped: single non-primary source]" if capped else "")
         )
-        if new != old and (ind.id, new) not in seen and (value is not None or ind.direction_rule):
+        if not ids and ind.direction_rule:  # a direction reading rests on the window it compared
+            ids = sorted(
+                {i for p in s.headline(ind)[-(ind.direction_rule.periods + 1) :] for i in p["obs_ids"]}
+            )
+        if new != old and ids and (ind.id, new) not in seen and (value is not None or ind.direction_rule):
             ev = StatusEvent(
                 target_id=ind.id,
                 old_status=old,
@@ -268,6 +272,8 @@ def _check(s: st.Store) -> tuple[list[str], list[str]]:
     notes: list[str] = []
     known = {r[0] for r in s.con.execute("SELECT id FROM observation_all").fetchall()}
     for e in s.events:
+        if e.target_type == "indicator" and not e.evidence_ids:
+            errors.append(f"{e.target_id}: status event {e.id} cites no evidence")
         missing = [i for i in e.evidence_ids if i not in known]
         if missing:
             errors.append(f"{e.target_id}: status event {e.id} cites unknown observations {missing}")
@@ -285,6 +291,9 @@ def _check(s: st.Store) -> tuple[list[str], list[str]]:
             (ind.normal_band and ind.band_rationale) or (ind.direction_rule and ind.direction_rule.rationale)
         ):
             errors.append(f"{ind.id}: published without bands/direction rule + rationale")
+        tag = ind.leading_lagging.value if ind.leading_lagging else None
+        if not tag or not (ind.timing_rationale or "").lower().startswith(tag + ":"):
+            errors.append(f"{ind.id}: published without a timing_rationale that opens with its tag ({tag})")
         ev = s.current(ind.id)
         if not ev:
             errors.append(f"{ind.id}: published without a StatusEvent")

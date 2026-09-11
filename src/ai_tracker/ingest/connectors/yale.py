@@ -30,6 +30,7 @@ def _months_after(start: date, n: int) -> date:
 class YaleDissimilarity(Connector):
     source_id = "yale_budget_lab_data"
     kind = "csv"
+    optional = True  # a stale workbook is a note for the maintainer, not a PARTIAL night
     expect_series = ["yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m"]
 
     def __init__(self, path: Path = Path("seed/sources.yaml")) -> None:
@@ -46,6 +47,9 @@ class YaleDissimilarity(Connector):
         rows = con.execute(
             f"SELECT * FROM read_xlsx('{p}', sheet='F2', header=false, stop_at_empty=false, all_varchar=true, range='A1:M200')"
         ).fetchall()
+        return self._from_rows(item, rows)
+
+    def _from_rows(self, item: RawItem, rows: list[tuple]) -> list[Observation]:
         header = next((r for r in rows if r and r[0] == "Months from baseline"), None)
         expect(set(header or ()), {"Months from baseline", *BASELINES}, "yale F2 sheet")
         cols = {name: header.index(name) for name in BASELINES}
@@ -73,4 +77,8 @@ class YaleDissimilarity(Connector):
                         raw_snippet=f"F2 {name} month {n}: {v}",
                     )
                 )
+        newest = max((o.as_of_date for o in out), default=None)
+        # ponytail: the workbook URL is moved by hand each release; this is the nudge, 184 days = the quarterly allowance
+        if newest and (item.retrieved_at.date() - newest).days > 184:
+            self.errors.append(f"newest month {newest}; move the workbook URL in seed/sources.yaml")
         return out

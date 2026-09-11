@@ -37,6 +37,6 @@ Rule: labs + apps up ≥ 5pp AND semis down (contradicted if semis hold and app 
 
 ## Capture thesis 'consumers keep most of the surplus' HOLDS: **HOLDS**
 
-Rule: surplus > revenue (revenue side is enterprise spend only until consumer spend is sourced)
+Rule: surplus above the revenue ceiling holds, below the enterprise-spend floor fails, in between is untestable
 
-- ✓ consumer surplus (WTA) > US GenAI revenue — $172B surplus vs $37B enterprise spend (consumer spend not yet ingested) (obs: 2d481469, 6012e72e)
+- ✓ consumer surplus (WTA) > US GenAI revenue, bracketed — $172B surplus against a floor of $37B (US enterprise spend) and a ceiling of $146B (lab run-rates plus enterprise spend) (obs: 2d481469, 6012e72e, 143dcf3e…)

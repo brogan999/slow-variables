@@ -254,6 +254,7 @@ class Indicator(BaseModel):
     direction_rule: DirectionRule | None = None
     direction: Direction | None = None
     leading_lagging: LeadLag | None = None
+    timing_rationale: str | None = None  # one sentence why the tag fits; its first word is the tag
     confidence: int = Field(0, ge=0, le=95)
     proposed_status: str | None = None
     override_note: str | None = None

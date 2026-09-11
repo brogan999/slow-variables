@@ -726,3 +726,20 @@ metrics:
       qe AS (SELECT DISTINCT (date_trunc('quarter', as_of_date) + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE AS q FROM s),
       best AS (SELECT qe.q, s.entity_id, max(s.v) AS v, list(s.id) AS ids FROM qe JOIN s ON s.as_of_date <= qe.q AND s.as_of_date > qe.q - INTERVAL 12 MONTH GROUP BY 1, 2)
       SELECT q AS as_of_date, sum(v) AS value, flatten(list(ids)) AS obs_ids FROM best GROUP BY q
+  genai_revenue_upper_bound:
+    description: A ceiling on generative-AI revenue - the frontier labs' latest annualised run-rates (within twelve months) plus Menlo's latest US enterprise generative-AI spend, at each run-rate date.
+    rationale: The capture thesis compares consumer surplus with what consumers and firms pay; lab run-rates include consumer subscriptions and are global, so adding enterprise spend over-counts US revenue and makes a ceiling the surplus must clear.
+    grain: [as_of_date]
+    unit: USD
+    lead_lag: coincident
+    formula_version: 1
+    inputs: ["epoch.*.revenue_run_rate_usd.pt", "menlo.us_enterprise.genai_spend_usd.fy"]
+    caveats: Deliberately an over-count (lab API revenue is inside enterprise spend, and run-rates are global); use it only as a ceiling.
+    sql: |
+      WITH rr AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'epoch.%.revenue_run_rate_usd.pt' AND entity_id IS NOT NULL),
+      d AS (SELECT DISTINCT as_of_date FROM rr),
+      lr AS (SELECT d.as_of_date, r.entity_id, arg_max(r.v, r.as_of_date) AS v, arg_max(r.id, r.as_of_date) AS id FROM d JOIN rr r ON r.as_of_date <= d.as_of_date AND r.as_of_date > d.as_of_date - INTERVAL 12 MONTH GROUP BY 1, 2),
+      m AS (SELECT as_of_date, value_numeric AS v, id FROM observations WHERE series_key = 'menlo.us_enterprise.genai_spend_usd.fy'),
+      lm AS (SELECT d.as_of_date, arg_max(m.v, m.as_of_date) AS v, arg_max(m.id, m.as_of_date) AS id FROM d JOIN m ON m.as_of_date <= d.as_of_date AND m.as_of_date > d.as_of_date - INTERVAL 18 MONTH GROUP BY 1)
+      SELECT lr.as_of_date, sum(lr.v) + max(lm.v) AS value, list_append(list(lr.id ORDER BY lr.id), max(lm.id)) AS obs_ids
+      FROM lr JOIN lm USING (as_of_date) GROUP BY 1

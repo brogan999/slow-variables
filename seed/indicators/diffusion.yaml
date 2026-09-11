@@ -19,6 +19,7 @@ indicators:
     counterevidence: On the 2023-onward window (METR's published 128.7 days, our fit 125) the status would be `emerging`, not `faster_than_normal`; the status depends on the window. METR notes measurements above 16 hours are unreliable with the current task suite, so the newest points carry wide intervals and are flagged disputed, and human baselines exist for only 5 of the 31 tasks over 8 hours. Horizon is a software-task construct and may not transfer to other work.
     layer_id: model
     leading_lagging: leading
+    timing_rationale: "Leading: benchmark capability moves months before products are built on it and years before adoption or productivity series register it."
     confidence: 80
     proposed_status: faster_than_normal
     related_bottlenecks: [1, 2, 3]
@@ -43,6 +44,7 @@ indicators:
     counterevidence: Our fit has no confidence interval and excludes points METR marks unreliable; the 2023-onward window gives ~125 days, which would read `emerging`. The 80% horizon is still an order of magnitude below the 50% horizon, which is the reliability gap the products bucket has to close.
     layer_id: model
     leading_lagging: leading
+    timing_rationale: "Leading: reliable task length is what products need, and it moves before the products that depend on it ship."
     confidence: 70
     proposed_status: faster_than_normal
     related_indicators: [metr_horizon_50, horizon_ratio_80_50]
@@ -66,6 +68,7 @@ indicators:
     counterevidence: Ratio is sensitive to the task mix and to the exclusion of models beyond the suite ceiling; a single new model can move it.
     layer_id: model
     leading_lagging: leading
+    timing_rationale: "Leading: the gap between occasional and reliable success closes before agents can be deployed unsupervised."
     confidence: 70
     proposed_status: consistent_with_normal
     related_indicators: [metr_horizon_50, metr_horizon_80]
@@ -89,6 +92,7 @@ indicators:
     counterevidence: Quarterly productivity is noisy and cyclical; 2025–26 prints reflect a softening labour market and hours cuts as much as technology. Aggregate data cannot attribute anything to AI.
     layer_id: labour_consumers
     leading_lagging: lagging
+    timing_rationale: "Lagging: output per hour rises only after firms reorganise work around a tool, and BLS prints it a quarter late and revises it."
     confidence: 80
     proposed_status: consistent_with_normal
     related_indicators: [bls_tfp_private_nonfarm]
@@ -113,6 +117,7 @@ indicators:
     counterevidence: Annual, published with a lag, and revised; the latest year predates most enterprise deployment. TFP can be flattered by measurement of software investment.
     layer_id: labour_consumers
     leading_lagging: lagging
+    timing_rationale: "Lagging: total factor productivity is annual, published over a year late, and moves only after complementary investment pays off."
     confidence: 75
     proposed_status: consistent_with_normal
     related_indicators: [bls_labor_productivity_yoy]
@@ -136,6 +141,7 @@ indicators:
     counterevidence: Small samples; the 2026 redesign has selection effects METR itself calls 'very weak evidence'; experienced open-source maintainers on their own repos are the hardest case for uplift.
     layer_id: deployment_application
     leading_lagging: leading
+    timing_rationale: "Leading: controlled trials show what tools do to working speed before firms reorganise work around them."
     confidence: 70
     proposed_status: consistent_with_normal
     related_bottlenecks: [4, 5, 6]
@@ -160,6 +166,7 @@ indicators:
     counterevidence: One survey, disputed sample and denominator; Menlo's 47% reach-production figure on a different definition; the report is hosted only on a mirror.
     layer_id: deployment_application
     leading_lagging: coincident
+    timing_rationale: "Coincident: the survey records whether this year's pilots are paying off now."
     confidence: 55
     proposed_status: consistent_with_normal
     related_bottlenecks: [20, 21, 22]
@@ -184,6 +191,7 @@ indicators:
     counterevidence: Self-reported survey; the instrument changed between waves; hours assisted is not hours saved.
     layer_id: adopters
     leading_lagging: coincident
+    timing_rationale: "Coincident: the survey records hours assisted in the week before the interview, published within a quarter."
     confidence: 80
     proposed_status: consistent_with_normal
     related_indicators: [btos_firm_use]
@@ -207,6 +215,7 @@ indicators:
     counterevidence: Series break in November 2025 (the pre-break series is shown as v1); 'AI use' is self-defined by respondents; the count is dominated by very small firms.
     layer_id: adopters
     leading_lagging: coincident
+    timing_rationale: "Coincident: firms report use in the last two weeks, and Census publishes every two weeks."
     confidence: 70
     proposed_status: consistent_with_normal
     related_indicators: [bbd_work_hours_assisted]
@@ -230,6 +239,7 @@ indicators:
     counterevidence: Sample is Ramp's customer base, not a representative panel; a paid subscription is not usage; the Census all-firm rate at the same date is 22%; Ramp's own August letter is titled 'Cracks in the AI thesis'.
     layer_id: adopters
     leading_lagging: leading
+    timing_rationale: "Leading: paid subscriptions come before measurable use at scale, and card data arrives within weeks."
     confidence: 60
     proposed_status: emerging
     related_indicators: [btos_firm_use, bbd_work_hours_assisted]
@@ -253,6 +263,7 @@ indicators:
     counterevidence: Self-measured and self-published by the lab whose timeline it supports; 'effort' counts agent time, not delivered research; the same post says over half of successful four-to-eight-hour tasks still needed human intervention. Anthropic's September 2026 system card reports staff self-estimating about 4x productivity uplift while the company puts its overall progress multiplier below 2x and observes no sustained AI-attributable 2x acceleration. METR's technical-worker survey finds a self-reported 1.4–2x value uplift, and METR's own RCT measured developers slower with AI.
     layer_id: model
     leading_lagging: leading
+    timing_rationale: "Leading: agent effort inside research labs runs ahead of the capability it produces by a model generation or more."
     confidence: 30
     proposed_status: emerging
     related_indicators: [rsi_intervention_rate_4_8h, metr_horizon_80, dev_rct_uplift]
@@ -276,6 +287,7 @@ indicators:
     counterevidence: Self-reported and rounded; counts successful tasks only, so failed runs that needed no intervention are excluded; 'intervention' is defined by the lab.
     layer_id: model
     leading_lagging: leading
+    timing_rationale: "Leading: fewer interventions on long internal tasks come before agents are trusted with the same work outside the lab."
     confidence: 30
     proposed_status: emerging
     related_indicators: [rsi_agent_workdays_per_human, horizon_ratio_80_50]
@@ -299,6 +311,7 @@ indicators:
     counterevidence: Every row is the lab describing itself; a brake announced is not a brake measured, and the same lab restarted the paused run within a month; other labs' brakes are not yet recorded.
     layer_id: model
     leading_lagging: leading
+    timing_rationale: "Leading: a lab pauses or gates before a release reaches users, so brakes show before any deployment slows."
     confidence: 40
     proposed_status: emerging
     related_indicators: [rsi_intervention_rate_4_8h, rsi_agent_workdays_per_human]
@@ -322,6 +335,7 @@ indicators:
     counterevidence: Compute estimates for closed models carry wide uncertainty; the frontier set is Epoch's selection; training compute is an input, not a capability.
     layer_id: model
     leading_lagging: leading
+    timing_rationale: "Leading: training compute sets the capability of models released months later and deployed years later."
     confidence: 60
     proposed_status: faster_than_normal
     related_indicators: [epoch_training_power_growth, metr_horizon_50]
@@ -345,6 +359,7 @@ indicators:
     counterevidence: Power draw is estimated for nearly every model; the notable set skews to models whose hardware is public.
     layer_id: compute_physical
     leading_lagging: leading
+    timing_rationale: "Leading: power drawn for training reflects data-centre capacity built earlier and caps the models released next."
     confidence: 50
     proposed_status: emerging
     related_indicators: [epoch_training_compute_growth, circular_financing_scale]
@@ -369,6 +384,7 @@ indicators:
     layer_id: compute_physical
     sublayer_id: semis
     leading_lagging: leading
+    timing_rationale: "Leading: cheaper compute per dollar lowers the cost of the models and inference that arrive over the following years."
     confidence: 40
     proposed_status: emerging
     related_indicators: [epoch_inference_price_fixed_capability, semis_rent_concentration]
@@ -392,6 +408,7 @@ indicators:
     counterevidence: Six-ish points on one benchmark threshold; list prices; a threshold fixed in 2023 measures commodity capability, not frontier capability.
     layer_id: model
     leading_lagging: coincident
+    timing_rationale: "Coincident: prices fall the day a cheaper model matches the benchmark, when buyers can switch."
     confidence: 45
     proposed_status: faster_than_normal
     related_indicators: [model_price_per_horizon_hour, perf_per_dollar_growth]
@@ -415,6 +432,7 @@ indicators:
     counterevidence: One research group's estimate; synthetic data, licensed corpora and multimodal data all extend the stock; the estimate has already been revised once by four years.
     layer_id: training_input
     leading_lagging: leading
+    timing_rationale: "Leading: the projected exhaustion year constrains training plans years before it binds."
     confidence: 40
     proposed_status: emerging
     related_indicators: [epoch_training_compute_growth]
@@ -440,6 +458,7 @@ indicators:
     counterevidence: Compiled from external submissions rather than run by Epoch; cost per task is unconstrained in most entries; a single benchmark.
     layer_id: model
     leading_lagging: leading
+    timing_rationale: "Leading: benchmark gains on novel reasoning come before products can rely on that reasoning."
     confidence: 55
     proposed_status: faster_than_normal
     related_indicators: [metr_horizon_50]
@@ -464,6 +483,7 @@ indicators:
     layer_id: training_input
     sublayer_id: post_training
     leading_lagging: leading
+    timing_rationale: "Leading: learning on the job would feed deployment back into capability before labour or productivity series could show it."
     confidence: 45
     proposed_status: consistent_with_normal
     related_indicators: [rsi_agent_workdays_per_human, expert_data_market_run_rate]
@@ -487,6 +507,7 @@ indicators:
     counterevidence: "The list is updated in batches and reclassified; a cleared device is not a deployed one; LLM-based devices are a handful at most."
     layer_id: adopters
     leading_lagging: coincident
+    timing_rationale: "Coincident: authorisations arrive as devices reach market, published as the FDA updates its list."
     confidence: 70
     proposed_status: consistent_with_normal
     related_indicators: [safety_brake_events, state_ai_bills_introduced]
@@ -510,6 +531,7 @@ indicators:
     counterevidence: "A single tracker's classification; introduced bills are cheap signals; the enacted count is the one that binds."
     layer_id: adopters
     leading_lagging: lagging
+    timing_rationale: "Lagging: bills follow public attention to deployments already under way, and counts settle after the legislative year."
     confidence: 55
     proposed_status: consistent_with_normal
     related_indicators: [fda_ai_devices_cumulative]
@@ -534,6 +556,7 @@ indicators:
     layer_id: training_input
     sublayer_id: rl_environments
     leading_lagging: leading
+    timing_rationale: "Leading: vendors sell training environments for models that ship months later."
     confidence: 35
     proposed_status: consistent_with_normal
     related_indicators: [continual_learning_level]
@@ -557,6 +580,7 @@ indicators:
     counterevidence: "The 80% horizon has wider CIs than the 50%; METR's suite ceiling censors the newest models; a misfit can shrink because the 50% horizon stalls, not because reliability improves."
     layer_id: model
     leading_lagging: leading
+    timing_rationale: "Leading: a change in how reliability scales with task length would show in benchmarks before deployment changes."
     confidence: 60
     proposed_status: consistent_with_normal
     related_indicators: [horizon_ratio_80_50, metr_horizon_80]
@@ -582,6 +606,7 @@ indicators:
     layer_id: deployment_application
     sublayer_id: vertical_ai
     leading_lagging: leading
+    timing_rationale: "Leading: the first language-model devices clear review before clinical use spreads."
     confidence: 60
     proposed_status: consistent_with_normal
     related_indicators: [fda_ai_devices_cumulative, waymo_weekly_paid_rides]
@@ -691,6 +716,7 @@ indicators:
     counterevidence: Exposure is a model-derived measure; ADP payroll coverage skews to larger firms; the divergence began before ChatGPT on some cuts (NY Fed; Iscenko and Millet).
     layer_id: labour_consumers
     leading_lagging: coincident
+    timing_rationale: "Coincident: monthly payroll records employment as it changes, published with a few weeks' lag."
     confidence: 80
     proposed_status: consistent_with_normal
     related_indicators: [canaries_entry_level_gap, cross_tracker_concordance]
@@ -714,6 +740,7 @@ indicators:
     counterevidence: Timing partly predates ChatGPT; hiring freezes in tech and finance explain part of it; the measure is relative, so exposed-occupation youth could be flat while others boom.
     layer_id: labour_consumers
     leading_lagging: leading
+    timing_rationale: "Leading: firms stop hiring juniors before they cut existing staff, so entry-level gaps open first."
     confidence: 70
     proposed_status: emerging
     related_indicators: [canaries_exposed_employment_yoy, new_grad_unemployment]
@@ -737,6 +764,7 @@ indicators:
     counterevidence: Profile-based data over-represents white-collar workers; the event study's control group is not immune to AI; single source.
     layer_id: labour_consumers
     leading_lagging: coincident
+    timing_rationale: "Coincident: online profiles track employment month by month, published within weeks."
     confidence: 65
     proposed_status: emerging
     related_indicators: [canaries_exposed_employment_yoy, cross_tracker_concordance]
@@ -760,6 +788,7 @@ indicators:
     counterevidence: One state; exposure measured at occupation level; claims respond to the business cycle first.
     layer_id: labour_consumers
     leading_lagging: leading
+    timing_rationale: "Leading: new unemployment claims rise before employment and wage statistics reflect job losses."
     confidence: 70
     proposed_status: consistent_with_normal
     related_indicators: [cross_tracker_concordance]
@@ -783,6 +812,7 @@ indicators:
     counterevidence: The rate rose before AI deployment at scale; it is highly cyclical; the exposed-vs-unexposed graduate gap (SIEPR) is small.
     layer_id: labour_consumers
     leading_lagging: lagging
+    timing_rationale: "Lagging: graduates meet the labour market after hiring plans are set, and the series is a smoothed average."
     confidence: 75
     proposed_status: consistent_with_normal
     related_indicators: [canaries_entry_level_gap]
@@ -807,6 +837,7 @@ indicators:
     counterevidence: Thresholds are ours; the four trackers measure different populations and geographies, so concurrence is a loose test.
     layer_id: labour_consumers
     leading_lagging: coincident
+    timing_rationale: "Coincident: it counts how many monthly labour trackers read past their thresholds at the latest release."
     confidence: 70
     proposed_status: consistent_with_normal
     related_indicators: [canaries_exposed_employment_yoy, revelio_exposed_vs_unexposed_growth, cait_high_exposure_claims, canaries_entry_level_gap]
@@ -830,6 +861,7 @@ indicators:
     counterevidence: One provider's consumer product; classification is model-based; API usage (where automation concentrates) is reported separately and skews the other way.
     layer_id: adopters
     leading_lagging: coincident
+    timing_rationale: "Coincident: the report classifies conversations from its sampling week, published within weeks."
     confidence: 60
     proposed_status: consistent_with_normal
     related_indicators: [bbd_work_hours_assisted]
@@ -854,6 +886,7 @@ indicators:
     counterevidence: The index has fallen before without AI (2000s); wage lags after an inflation shock push it down mechanically; quarterly readings are revised and the 2025 peak was unusual.
     layer_id: labour_consumers
     leading_lagging: lagging
+    timing_rationale: "Lagging: the labour share moves only as wages and profits adjust to productivity, and BLS revises it for years."
     confidence: 65
     proposed_status: emerging
     related_indicators: [bls_labor_productivity_yoy, consumer_surplus_wta]
@@ -877,6 +910,7 @@ indicators:
     counterevidence: One firm, one tool, 2020-21 vintage models; issues per hour is a partial productivity measure; later assistants may do more.
     layer_id: adopters
     leading_lagging: coincident
+    timing_rationale: "Coincident: the field experiment measured resolution rates while agents used the assistant."
     confidence: 75
     proposed_status: consistent_with_normal
     related_indicators: [dev_rct_uplift, exec_reported_impact]
@@ -902,6 +936,7 @@ indicators:
     counterevidence: Executives may not see impacts that exist below the firm-level line; the question asks about the last three years, which mostly predate agentic tools.
     layer_id: adopters
     leading_lagging: lagging
+    timing_rationale: "Lagging: executives report impact on their firm only after it shows in results, surveyed and published with a lag."
     confidence: 70
     proposed_status: consistent_with_normal
     related_indicators: [call_center_uplift, bls_labor_productivity_yoy, enterprise_pilot_to_production]
@@ -926,6 +961,7 @@ indicators:
     layer_id: deployment_application
     sublayer_id: vertical_ai
     leading_lagging: leading
+    timing_rationale: "Leading: end-to-end completion on a legal benchmark comes before firms trust agents with the same work."
     confidence: 40
     proposed_status: emerging
     related_indicators: [pass_hat_k_tau_bench, metr_horizon_80]
@@ -949,6 +985,7 @@ indicators:
     counterevidence: The 2026 point is vendor-tabulated and the model is unnamed; tau-bench domains are narrow; pass^k penalises benign variation.
     layer_id: model
     leading_lagging: leading
+    timing_rationale: "Leading: reliability across repeated runs is what deployment needs, and it moves in benchmarks before agents ship widely."
     confidence: 55
     proposed_status: consistent_with_normal
     related_indicators: [harvey_lab_frontier_completion, horizon_ratio_80_50]
@@ -972,6 +1009,7 @@ indicators:
     counterevidence: The authors grade themselves (tier 7); the metric mix is theirs; a pace figure hides which metrics lag.
     layer_id: model
     leading_lagging: leading
+    timing_rationale: "Leading: grading predictions against capability benchmarks shows the pace before labour or productivity series can."
     confidence: 50
     proposed_status: emerging
     related_indicators: [metr_horizon_50, rsi_agent_workdays_per_human]
@@ -995,6 +1033,7 @@ indicators:
     counterevidence: Consumer plans only; enterprise and API traffic (where work concentrates) are excluded; classification is model-based.
     layer_id: adopters
     leading_lagging: coincident
+    timing_rationale: "Coincident: the share describes what users did in the sampled period, published months later."
     confidence: 65
     proposed_status: emerging
     related_indicators: [bbd_work_hours_assisted, aei_augmentation_share]
@@ -1019,6 +1058,7 @@ indicators:
     counterevidence: The denominator is a 2023 model-based exposure estimate; the numerator counts any weekly use, however shallow; exposure and use are measured on different populations.
     layer_id: adopters
     leading_lagging: coincident
+    timing_rationale: "Coincident: current weekly use is divided by a fixed exposure estimate, so it moves with use."
     confidence: 60
     proposed_status: consistent_with_normal
     related_indicators: [bbd_work_hours_assisted]
@@ -1042,6 +1082,7 @@ indicators:
     counterevidence: Single source (tier 6); exposure and adaptive capacity are both modelled; the WP 34705 abstract gives different totals from the chapter page.
     layer_id: labour_consumers
     leading_lagging: leading
+    timing_rationale: "Leading: it counts workers likely to struggle before displacement happens, from exposure and adaptive capacity measured now."
     confidence: 45
     proposed_status: emerging
     related_indicators: [canaries_exposed_employment_yoy, humlum_precise_null]
@@ -1067,6 +1108,7 @@ indicators:
     stale_reason: "The Budget Lab's update pages block fetchers and the workbook URL changes each release; the source row is moved forward by hand."
     layer_id: labour_consumers
     leading_lagging: lagging
+    timing_rationale: "Lagging: the occupational mix moves only as workers change jobs over years, published monthly with revisions."
     confidence: 65
     proposed_status: consistent_with_normal
     related_indicators: [canaries_exposed_employment_yoy, humlum_precise_null]
@@ -1090,6 +1132,7 @@ indicators:
     counterevidence: Denmark is not the US; the window ends in 2024, before agentic tools; the effect could be a compositional wash across winners and losers.
     layer_id: labour_consumers
     leading_lagging: lagging
+    timing_rationale: "Lagging: administrative earnings records show effects years after adoption, published after linkage and review."
     confidence: 80
     proposed_status: consistent_with_normal
     related_indicators: [upwork_freelancer_effects, canaries_exposed_employment_yoy]
@@ -1113,6 +1156,7 @@ indicators:
     counterevidence: One platform; short window after release; the comparison categories were also exposed; later models may widen the effect.
     layer_id: labour_consumers
     leading_lagging: leading
+    timing_rationale: "Leading: freelance marketplaces reprice exposed work within months, ahead of employment inside firms."
     confidence: 70
     proposed_status: consistent_with_normal
     related_indicators: [humlum_precise_null, canaries_entry_level_gap]
@@ -1138,6 +1182,7 @@ indicators:
     counterevidence: A consultancy's method over job ads (tier 7), not paid wages; ad wording drifts as "AI skills" becomes table stakes; premium partly reflects seniority.
     layer_id: labour_consumers
     leading_lagging: coincident
+    timing_rationale: "Coincident: job ads state the wage employers offer for the skill now."
     confidence: 50
     proposed_status: emerging
     related_indicators: [new_grad_unemployment]
@@ -1162,6 +1207,7 @@ indicators:
     layer_id: training_input
     sublayer_id: human_data
     leading_lagging: leading
+    timing_rationale: "Leading: labs buy expert data for models they will release months later."
     confidence: 70
     proposed_status: faster_than_normal
     related_indicators: [rl_environment_vendor_count, lab_run_rates]
@@ -1186,6 +1232,7 @@ indicators:
     layer_id: model
     sublayer_id: frontier_labs
     leading_lagging: leading
+    timing_rationale: "Leading: capabilities exist inside labs before the public can use them, by the months this measures."
     confidence: 45
     proposed_status: consistent_with_normal
     related_indicators: [rsi_agent_workdays_per_human, safety_brake_events]
@@ -1210,6 +1257,7 @@ indicators:
     layer_id: deployment_application
     sublayer_id: consumer_ai
     leading_lagging: coincident
+    timing_rationale: "Coincident: rides are counted as they happen and stated by the company in periodic updates."
     confidence: 65
     proposed_status: consistent_with_normal
     related_indicators: [fda_first_llm_device, state_ai_bills_introduced]
@@ -1233,6 +1281,7 @@ indicators:
     counterevidence: Self-reported "ever used" is a low bar; the FRED series and the paper are one survey through two publishers, not two measurements; the question wording changed between waves, so small moves are not trend.
     layer_id: adopters
     leading_lagging: coincident
+    timing_rationale: "Coincident: the survey records use up to the interview, published within a quarter via FRED."
     confidence: 70
     proposed_status: consistent_with_normal
     related_indicators: [bbd_work_hours_assisted, btos_firm_use]
@@ -1256,6 +1305,7 @@ indicators:
     counterevidence: One provider's traffic, weighted to coding and to Claude's user base; a task counts when it appears at all, not when it is done mostly with AI; the task taxonomy (O*NET) lags new work.
     layer_id: adopters
     leading_lagging: coincident
+    timing_rationale: "Coincident: it classifies usage from the report's sampling week, published in that report."
     confidence: 55
     proposed_status: consistent_with_normal
     related_indicators: [bbd_adult_use, exposure_vs_usage_gap]
@@ -1313,6 +1363,7 @@ indicators:
     layer_id: training_input
     sublayer_id: post_training
     leading_lagging: leading
+    timing_rationale: "Leading: vendors ship learning systems before labour or productivity series could register what they do."
     confidence: 35
     proposed_status: emerging
     related_indicators: [continual_learning_level]

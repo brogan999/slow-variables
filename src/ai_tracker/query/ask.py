@@ -48,7 +48,7 @@ TOOLS = [
     },
     {
         "name": "indicator",
-        "description": "An indicator's definition, bands or direction rule, current status and reason, latest value and the ids behind it.",
+        "description": "An indicator's definition, bands or direction rule, current status and reason, latest value and the ids behind it. When band_input.derived_id is set, cite that derived row for the value; it is the slice the bands apply to.",
         "input_schema": {"type": "object", "properties": {"id": {"type": "string"}}, "required": ["id"]},
     },
     {
@@ -153,6 +153,7 @@ class Tools:
             return {"error": f"no indicator {id}"}
         ev = self.store.current(id)
         value, as_of, ids, tier = self.store.band_input(ind)
+        fit = self.store.band_fit(ind)
         return {
             "id": ind.id,
             "name": ind.name,
@@ -180,6 +181,8 @@ class Tools:
                 "as_of": as_of.isoformat() if as_of else None,
                 "obs_ids": ids,
                 "best_tier": int(tier),
+                "derived_id": fit.id if fit else None,  # the row to cite for this value
+                "dims": fit.dims if fit else {},
             },
             "series_keys": ind.series_keys,
             "metric": ind.metric,
@@ -216,11 +219,15 @@ class Tools:
             if k == "derived":
                 d = next((d for d in self.store.derived if d.id == i), None)
                 if d:
-                    out[i] = Record(
-                        i,
-                        "derived",
-                        [x for x in (d.value, d.value_low, d.value_high) if x is not None],
-                        (self.metrics.get(d.metric) or {}).get("unit", ""),
+                    m = self.metrics.get(d.metric) or {}
+                    out[i] = (
+                        Record(  # ponytail: the description's stated thresholds verify too; so would a typical value it quotes
+                            i,
+                            "derived",
+                            [x for x in (d.value, d.value_low, d.value_high) if x is not None],
+                            m.get("unit", ""),
+                            m.get("description", ""),
+                        )
                     )
             elif k == "event":
                 e = next((e for e in self.store.events if e.id == i), None)
@@ -341,12 +348,13 @@ def ask(store: st.Store, question: str, tools: Tools | None = None, client: Any 
         status = "revised" if res.ok else "blocked"
     cites = [{"kind": k, "id": i, "href": tools.href(k, i)} for k, i in dict.fromkeys(CITE.findall(text))]
     usd = usage["in"] * USD_PER_MTOK_IN / 1e6 + usage["out"] * USD_PER_MTOK_OUT / 1e6
-    log.info(
-        "ask %s status=%s usd=%.4f tools=%d",
+    log.info(  # P1 §8: every answer is auditable by the records it cited; the question itself is only hashed
+        "ask %s status=%s usd=%.4f tools=%d cites=%s",
         hashlib.sha1(question.encode()).hexdigest()[:8],
         status,
         usd,
         len(calls),
+        ",".join(f"{c['kind']}:{c['id']}" for c in cites),
     )
     return {
         "answer": res.annotated if status == "blocked" else text,

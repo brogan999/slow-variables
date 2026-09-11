@@ -59,3 +59,11 @@ def test_a_blank_proposal_the_evaluator_no_longer_holds_is_dropped():
     ]
     kept = _drop_stale(rows, {"a": "consistent_with_normal", "b": "stable", "c": "unclear"})
     assert [r["target_id"] for r in kept] == ["b", "c", "p1"]
+
+
+def test_a_published_indicator_needs_a_timing_rationale_that_opens_with_its_tag():
+    s = st.Store()
+    s.derived = run_metrics(s.con)
+    ind = next(i for i in s.seed.indicators if i.id == "metr_horizon_50")
+    ind.timing_rationale = "Lagging: wrong tag."
+    assert any(e.startswith("metr_horizon_50: published without a timing_rationale") for e in check_errors(s))

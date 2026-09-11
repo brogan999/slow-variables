@@ -78,6 +78,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
           <PendingNote p={d.pending} />
         </div>
         <p className="mt-3 text-lg leading-snug text-ink-2 max-w-[60ch]">{d.definition}</p>
+        {d.timing_rationale ? <p className="mt-2 text-sm text-ink-2 max-w-[60ch]">{d.timing_rationale}</p> : null}
       </header>
 
       <Section n={num("evidence")} id="evidence" title="Evidence">

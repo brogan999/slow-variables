@@ -202,18 +202,25 @@ def rents_migrate_up(d: Data) -> Verdict:
     )
 
 
+def _bracket(v: float, floor: float, ceiling: float) -> bool | None:
+    """True above the ceiling, False below the floor, None (untestable) in between."""
+    return True if v > ceiling else False if v < floor else None
+
+
 def consumers_keep_surplus(d: Data) -> Verdict:
     cs = d.series("stanford_del.us.genai_consumer_surplus_usd.pt")
-    rev = d.series("menlo.us_enterprise.genai_spend_usd.fy")
-    holds = (cs[0] > rev[0]) if cs and rev else None
+    floor = d.series("menlo.us_enterprise.genai_spend_usd.fy")
+    ceiling = d.metric("genai_revenue_upper_bound")
+    holds = _bracket(cs[0], floor[0], ceiling[0]) if cs and floor and ceiling else None
     conds = [
         Cond(
-            "consumer surplus (WTA) > US GenAI revenue",
+            "consumer surplus (WTA) > US GenAI revenue, bracketed",
             holds,
-            (cs[2] if cs else []) + (rev[2] if rev else []),
+            (cs[2] if cs else []) + (floor[2] if floor else []) + (ceiling[2] if ceiling else []),
             (
-                f"${cs[0] / 1e9:.0f}B surplus vs ${rev[0] / 1e9:.0f}B enterprise spend (consumer spend not yet ingested)"
-                if cs and rev
+                f"${cs[0] / 1e9:.0f}B surplus against a floor of ${floor[0] / 1e9:.0f}B (US enterprise spend) and a "
+                f"ceiling of ${ceiling[0] / 1e9:.0f}B (lab run-rates plus enterprise spend)"
+                if cs and floor and ceiling
                 else "untestable"
             ),
         ),
@@ -223,7 +230,7 @@ def consumers_keep_surplus(d: Data) -> Verdict:
         "Capture thesis 'consumers keep most of the surplus' HOLDS",
         holds,
         conds,
-        "surplus > revenue (revenue side is enterprise spend only until consumer spend is sourced)",
+        "surplus above the revenue ceiling holds, below the enterprise-spend floor fails, in between is untestable",
     )
 
 

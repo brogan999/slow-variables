@@ -26,7 +26,7 @@ export type IndicatorDoc = Card & {
   counterevidence: string; series_keys: string[]; metric: string | null; band_input: string | null;
   normal_band: Band; fast_band: Band; falsifying_band: Band; band_rationale: string | null;
   direction_rule: { periods: number; dead_band: number; higher_is: string; rationale: string } | null;
-  proposed_status: string | null; override_note: string | null; related_bottlenecks: number[]; related_indicators: string[];
+  proposed_status: string | null; override_note: string | null; timing_rationale?: string | null; related_bottlenecks: number[]; related_indicators: string[];
   related_predictions: string[]; updated_at: string;
   series: { series_key: string; points: Point[] }[];
   derived: (Point & { metric: string; as_of_date: string; input_observation_ids: string[] })[];

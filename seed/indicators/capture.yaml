@@ -14,6 +14,7 @@ indicators:
     sublayer_id: semis
     direction_rule: {periods: 4, dead_band: 0.01, higher_is: concentrating, rationale: "Four fiscal quarters; a move under one point of margin is noise. Rising margin = rent concentrating at the chip layer."}
     leading_lagging: lagging
+    timing_rationale: "Lagging: chip margins reflect orders placed quarters earlier and are filed a quarter after they are earned."
     tracker_interpretation: The margin has held at the level a monopolist would print. Custom silicon share and AMD's data-centre ramp are the things that would erode it.
     counterevidence: Whole-company margin blends gaming and automotive with data centre; segment margins are not in the company-facts API. Margin can hold while unit share falls.
     confidence: 85
@@ -34,6 +35,7 @@ indicators:
     sublayer_id: hyperscalers_neoclouds
     direction_rule: {periods: 4, dead_band: 10000000000, higher_is: concentrating, rationale: "Four quarters; moves under $10B are noise at this scale. Growing backlog concentrates future cloud revenue in a few contracts."}
     leading_lagging: leading
+    timing_rationale: "Leading: backlog is contracted revenue not yet recognised, so it moves quarters before cloud revenue and the margins that follow."
     tracker_interpretation: Backlog is growing far faster than recognised revenue; a large share is a handful of AI-lab contracts, which is the circular-financing question in filed form.
     counterevidence: RPO includes non-cancellable commitments that may never convert; Oracle's ~$300B OpenAI contract is reported, not itemised in the filing. Definitions differ across filers.
     confidence: 80
@@ -54,6 +56,7 @@ indicators:
     sublayer_id: frontier_labs
     direction_rule: {periods: 4, dead_band: 2000000000, higher_is: concentrating, rationale: "Four reports; moves under $2B are reporting noise. Rising run-rate concentrates revenue at the two frontier labs."}
     leading_lagging: coincident
+    timing_rationale: "Coincident: an annualised month of revenue moves with current usage and pricing and is reported within weeks."
     tracker_interpretation: Run-rates are compounding at rates no software company has printed, but every point is a leak to a journalist and definitions drift between gross and net.
     counterevidence: Single-source press reports (tier 5); run-rate is annualised from one month; gross vs net of cloud revenue share is often unstated.
     confidence: 55
@@ -75,6 +78,7 @@ indicators:
     sublayer_id: frontier_labs
     direction_rule: {periods: 3, dead_band: 0.05, higher_is: concentrating, rationale: "Three points; a move under 0.05 is noise. A rising ratio means the lab is recouping capital faster than it raises it."}
     leading_lagging: lagging
+    timing_rationale: "Lagging: revenue earned against capital already raised accumulates slowly, after the funding and pricing decisions behind it."
     tracker_interpretation: Large caveat, as the brief says - excludes debt, compute credits and cloud commitments, and the numerator is a run-rate.
     counterevidence: Tier-5 inputs on both sides; equity raised is a floor on capital consumed.
     confidence: 50
@@ -94,6 +98,7 @@ indicators:
     layer_id: labour_consumers
     direction_rule: {periods: 1, dead_band: 10000000000, higher_is: dispersing, rationale: "Two annual waves so far, so the trend is one step; moves under $10B are within survey error. Rising surplus disperses value away from producers to consumers."}
     leading_lagging: lagging
+    timing_rationale: "Lagging: surplus estimates come from surveys of habits users have already formed and publish months after fieldwork."
     tracker_interpretation: Consumer surplus is growing faster than any layer's revenue; the Nordhaus pattern (innovators keep a sliver) is so far holding.
     counterevidence: A single survey series with a stated-preference method; WTA estimates run higher than willingness to pay. No high-frequency version exists.
     confidence: 65
@@ -114,6 +119,7 @@ indicators:
     layer_id: deployment_application
     direction_rule: {periods: 1, dead_band: 0.05, higher_is: concentrating, rationale: "Two annual waves, so the trend is one step; a move under five points is within survey error. Rising application share = value concentrating at the application layer."}
     leading_lagging: coincident
+    timing_rationale: "Coincident: the survey records budgets enterprises are spending this year, published once a year."
     tracker_interpretation: Applications took a third of enterprise generative-AI dollars in 2024 and half in 2025; the money is moving up the stack even as chips keep the margin.
     counterevidence: Survey of a few hundred buyers, not filings; scope excludes chips, standalone inference and embedded features, so the infrastructure denominator is understated; two waves only.
     confidence: 55
@@ -134,6 +140,7 @@ indicators:
     layer_id: compute_physical
     direction_rule: {periods: 4, dead_band: 0.02, higher_is: concentrating, rationale: "Four calendar quarters; a move under two points is within fiscal-calendar noise. Rising semis share = rent concentrating at the chip layer; falling = migrating up."}
     leading_lagging: lagging
+    timing_rationale: "Lagging: segment operating income is filed a quarter after it is earned and reflects contracts signed well before."
     tracker_interpretation: Segment operating income, not gross profit, and only the two layers with filings so far; the labs and apps slices arrive with estimated series and are flagged as such.
     counterevidence: Intelligent Cloud and AWS include non-AI workloads; Nvidia's fiscal quarter is a month later than the others; two of the seven layers are represented.
     confidence: 70
@@ -155,6 +162,7 @@ indicators:
     sublayer_id: hyperscalers_neoclouds
     direction_rule: {periods: 4, dead_band: 0.02, higher_is: concentrating, rationale: "Four fiscal quarters; two points of margin is noise. Rising cloud margin under rising capex means the layer is keeping surplus."}
     leading_lagging: lagging
+    timing_rationale: "Lagging: cloud margins absorb depreciation on capex spent years earlier and are filed a quarter after the fact."
     tracker_interpretation: Cloud margins have held through the capex wave so far; depreciation schedules do a lot of the holding.
     counterevidence: Segment margins blend AI and non-AI workloads; useful-life extensions flatter them; Google Cloud's margin is on a much smaller base.
     confidence: 75
@@ -174,6 +182,7 @@ indicators:
     layer_id: compute_physical
     direction_rule: {periods: 3, dead_band: 20000000000, higher_is: concentrating, rationale: "Three quarters; moves under $20B are one small deal. A growing cumulative total concentrates the stack's risk in a few counterparties."}
     leading_lagging: leading
+    timing_rationale: "Leading: vendor financing is signed before the compute is delivered or used, so commitments run ahead of revenue and capacity."
     tracker_interpretation: Over a trillion dollars of circular commitments in a year, most of it filed. The Nvidia 5-year CDS (on the ledger) is the market's stress read on it.
     counterevidence: Commitments are not cash; "up to" amounts and ten-year floors are counted at face; equity in a customer is only circular if the customer spends it with the investor.
     confidence: 75
@@ -195,6 +204,7 @@ indicators:
     sublayer_id: semis
     direction_rule: {periods: 4, dead_band: 0.02, higher_is: concentrating, rationale: "Four calendar quarters; a move under 200 HHI points is noise. Rising = the covered chip layer concentrating further."}
     leading_lagging: leading
+    timing_rationale: "Leading: a challenger's revenue share moves before the incumbent's pricing power erodes, so concentration falls ahead of margins."
     tracker_interpretation: Two filers only, so the level is near the top of the scale by construction; the direction is what carries information.
     counterevidence: Broadcom, TSMC, memory and custom silicon are not covered, so the index overstates concentration; segment definitions differ between filers.
     confidence: 60
@@ -216,6 +226,7 @@ indicators:
     sublayer_id: hyperscalers_neoclouds
     direction_rule: {periods: 4, dead_band: 0.02, higher_is: concentrating, rationale: "Four calendar quarters; a move under 200 HHI points is noise."}
     leading_lagging: leading
+    timing_rationale: "Leading: buyers shift workloads between clouds before pricing is renegotiated, so share moves ahead of margins."
     tracker_interpretation: Three filers, no neoclouds or Oracle; Intelligent Cloud bundles server products with Azure, which flatters Microsoft's share.
     counterevidence: Partial coverage overstates concentration; Microsoft's segment is not pure cloud; quarters where any filer's segment is missing are dropped.
     confidence: 60
@@ -235,6 +246,7 @@ indicators:
     layer_id: model
     direction_rule: {periods: 4, dead_band: 0.02, higher_is: concentrating, rationale: "Four weekly readings; under 0.02 in the index is table churn. Rising = routed tokens concentrating on fewer labs."}
     leading_lagging: leading
+    timing_rationale: "Leading: developers move routed traffic between labs within days of a release, ahead of enterprise contracts and revenue."
     tracker_interpretation: The series starts in the week of 7 September 2026; a direction needs five weekly readings. On 9 September the top table spread across twelve labs, led by Chinese open-weight authors.
     counterevidence: OpenRouter is one router with a developer-heavy mix and only its top table is counted; enterprise buyers mostly go direct to the labs and never appear here. Ramp's letters measure a different thing (the share of US businesses paying each lab) and are not counted as a second source for this index.
     confidence: 40
@@ -275,6 +287,7 @@ indicators:
     sublayer_id: frontier_labs
     direction_rule: {periods: 4, dead_band: 0.02, higher_is: concentrating, rationale: "Four price change-points; a move under two cents per million tokens per horizon-hour is noise. Rising = labs keeping the surplus from capability gains."}
     leading_lagging: coincident
+    timing_rationale: "Coincident: list prices change the day a lab reprices or releases, the moment capability becomes purchasable."
     tracker_interpretation: The series records price change-points from 10 September 2026; a direction needs several months of them.
     counterevidence: One router's list prices, prompt tokens only; METR's horizon is software tasks under its suite, not general capability; the cheapest model per horizon-hour is a moving target as models are added.
     confidence: 40
@@ -296,6 +309,7 @@ indicators:
     layer_id: model
     direction_rule: {periods: 4, dead_band: 0.0006, higher_is: concentrating, rationale: "Four price change-points; a move under $0.0006 per million tokens per index point (about a tenth of the 11 Sep 2026 level) is one model's repricing. Rising = labs keeping the surplus from capability gains."}
     leading_lagging: coincident
+    timing_rationale: "Coincident: a model's price and index arrive together at release, so the ratio moves when the market does."
     tracker_interpretation: The series records price change-points from 11 September 2026; a direction needs several of them. The cheapest near-frontier model is often an open-weight one, so this reads the whole model layer, not only the frontier labs.
     counterevidence: List prices, not the committed-use prices large buyers pay; the Intelligence Index is re-based between Artificial Analysis versions; the top decile moves as models are added and dropped; unpriced models are excluded.
     confidence: 40
@@ -318,6 +332,7 @@ indicators:
     sublayer_id: frontier_labs
     direction_rule: {periods: 4, dead_band: 0.05, higher_is: concentrating, rationale: "Four quarters; a move under five points is a single round's timing. Rising = capital concentrating in the frontier labs."}
     leading_lagging: leading
+    timing_rationale: "Leading: venture rounds fund capacity and hiring that produce revenue a year or more later."
     tracker_interpretation: The denominator is the seed list, so the level is high by construction; the direction says whether the rest of the stack is catching up.
     counterevidence: Frontier rounds come mostly from press (Epoch, tier 5) because the labs raise through vehicles that do not file Form D; many seed companies have no CIK matched yet, so the denominator undercounts.
     confidence: 50
@@ -338,6 +353,7 @@ indicators:
     sublayer_id: vertical_ai
     direction_rule: {periods: 4, dead_band: 0.2, higher_is: concentrating, rationale: "Four quarters; a move under 0.2x is round timing. Rising = capital concentrating in vertical applications."}
     leading_lagging: leading
+    timing_rationale: "Leading: funding follows investors' expectations of which applications will earn, a year or more before revenue shows it."
     tracker_interpretation: Horizontal raises by entities without a matched CIK are missing, which biases the ratio upward until their filings are added.
     counterevidence: Coverage follows the seed list and CIK matching; one mega-round by a coding-agent company swings the ratio; dollars raised are not dollars captured.
     confidence: 45
@@ -358,6 +374,7 @@ indicators:
     sublayer_id: frontier_labs
     direction_rule: {periods: 3, dead_band: 3, higher_is: concentrating, rationale: "Three valuation events; a move under 3x is noise in press-reported run-rates. Rising = the market pricing more durable rents into the labs."}
     leading_lagging: leading
+    timing_rationale: "Leading: valuations price revenue years out, so the multiple moves before the run-rates that would justify it."
     tracker_interpretation: Run-rates lag valuations by months, so the multiple overstates when revenue is growing fast; the direction is still informative.
     counterevidence: Single source (Epoch's compilation of press reports); run-rates annualise one month; post-money valuations include committed but undrawn capital.
     confidence: 45
@@ -397,6 +414,7 @@ indicators:
     sublayer_id: frontier_labs
     direction_rule: {periods: 4, dead_band: 1, higher_is: concentrating, rationale: "Four quarters; one event is not a trend. More deals per year concentrate the application layer into the labs."}
     leading_lagging: leading
+    timing_rationale: "Leading: an acquisition is announced before the acquired layer's economics change, so the count moves ahead of margins."
     tracker_interpretation: "Fifteen deals in the ledger, from Meta's $14.3B Scale stake and Google's $2.4B Windsurf licence to Nvidia's $12.9B Hugging Face purchase and Stripe's $7B-plus OpenRouter deal; the pace roughly doubled in 2026."
     counterevidence: "The ledger holds what the press and filings announce; undisclosed prices count as events; Stripe is a payments company, in the ledger because OpenRouter is a routing layer."
     confidence: 55
@@ -434,6 +452,7 @@ indicators:
     sublayer_id: open_weight_labs
     direction_rule: {periods: 4, dead_band: 2, higher_is: concentrating, rationale: "Four open-weights releases; a move under two ECI points is inside the index's confidence intervals. Widening gap = rents concentrating in the closed labs."}
     leading_lagging: leading
+    timing_rationale: "Leading: open-weights releases close the capability gap before prices and shares in the model layer respond."
     tracker_interpretation: Measured on Epoch's composite index, so it follows the benchmarks Epoch runs; a gap in points is not a gap in months.
     counterevidence: ECI is one composite; open models are often released with a lag that the gap at release date understates; Chinese labs' compute constraints are the confound.
     confidence: 55
@@ -454,6 +473,7 @@ indicators:
     sublayer_id: semis
     direction_rule: {periods: 4, dead_band: 0.02, higher_is: dispersing, rationale: "Four quarters; under two points is inside Epoch's estimate ranges. Rising non-Nvidia share = the chip layer's rent dispersing."}
     leading_lagging: leading
+    timing_rationale: "Leading: chips shipped now set the compute mix that serves models over the next several years."
     tracker_interpretation: Google's TPUs are internal, not sold, so the share overstates merchant competition; the direction still says whether the chokepoint is being routed around.
     counterevidence: Epoch's estimates carry 5th-95th percentile ranges of a third or more; cumulative shares move slowly by construction.
     confidence: 50
@@ -474,6 +494,7 @@ indicators:
     sublayer_id: hyperscalers_neoclouds
     direction_rule: {periods: 4, dead_band: 0.3, higher_is: concentrating, rationale: "Four quarters; a move under 0.3x is run-rate noise. Rising = capex pulling further ahead of revenue (the bet growing); falling = revenue catching the buildout."}
     leading_lagging: leading
+    timing_rationale: "Leading: capex is committed years before the capacity earns, so the ratio signals over- or under-building ahead of returns."
     tracker_interpretation: "Hyperscaler capex is not all AI and the revenue side mixes annualised run-rates with one annual survey, so read the direction, not the level; grade C by construction."
     counterevidence: "Both sides are approximations: capex includes non-AI spend and the revenue side double-counts enterprise purchases from labs; a ratio of filed capex to press-reported run-rates is the brief's own 'gap #1' caveat."
     confidence: 40
@@ -494,6 +515,7 @@ indicators:
     sublayer_id: hyperscalers_neoclouds
     direction_rule: {periods: 2, dead_band: 0.4, higher_is: dispersing, rationale: "Two annual readings; a change under half a year is rounding. A shorter life means faster hardware turnover and thinner margins for the layer, so shortening reads as dispersing."}
     leading_lagging: lagging
+    timing_rationale: "Lagging: useful-life estimates change in annual 10-Ks after the hardware has served long enough to judge."
     tracker_interpretation: "Estimates diverge: Amazon shortened a subset to five years, Meta lengthened to 5.5, Alphabet and Microsoft hold at six. No filer shortened in 2026."
     counterevidence: "Ranges rather than points at Microsoft; a subset at Amazon; the estimate says what the filer chooses to assume, not how long the hardware lasts."
     stale_ok: true
@@ -518,6 +540,7 @@ indicators:
     sublayer_id: hyperscalers_neoclouds
     direction_rule: {periods: 3, dead_band: 0.01, higher_is: concentrating, rationale: "Three quarter-ends; moves under a percentage point are facility mix. Rising rates concentrate the compute layer's returns with its lenders."}
     leading_lagging: coincident
+    timing_rationale: "Coincident: facility rates are priced on current lender appetite and reported at each quarter end."
     tracker_interpretation: "Effective rates from 7% (non-recourse) to 15% on the 2023 facility, 10.5% on average, on $35.6B of debt; the newest facility prices at SOFR plus 5.5%. Nebius borrows through converts at 1.25 to 2.6% coupons instead."
     counterevidence: "Effective rates mix vintages and hedges; an unweighted average overstates small facilities; one filer with facility-level disclosure."
     confidence: 60
@@ -538,6 +561,7 @@ indicators:
     sublayer_id: frontier_labs
     direction_rule: {periods: 2, dead_band: 0.05, higher_is: dispersing, rationale: "Annual waves; a move under five points is survey noise. More multi-homing disperses the model layer's pricing power."}
     leading_lagging: coincident
+    timing_rationale: "Coincident: the survey records how many models firms use now, published with each annual wave."
     tracker_interpretation: "Sixty percent multi-homed in 2023 and the pattern has only spread since, but Menlo stopped publishing the share; the 11% vendor-switch figure says buyers add models rather than replace them."
     counterevidence: "One survey house; the numeric share is a 2023 figure; later waves changed the question."
     stale_ok: true
@@ -559,6 +583,7 @@ indicators:
     layer_id: deployment_application
     direction_rule: {periods: 1, dead_band: 0.05, higher_is: dispersing, rationale: "Two annual waves, so the trend is one step; under five points is survey error. Rising startup share = value dispersing away from incumbents."}
     leading_lagging: coincident
+    timing_rationale: "Coincident: the annual survey records where this year's application spend goes."
     tracker_interpretation: "Startups went from a third of application revenue in 2024 to nearly two thirds in 2025 in Menlo's sample; one survey, so read as a direction."
     counterevidence: "One survey of buyers; revenue share is not margin share; incumbents' embedded AI features are excluded by Menlo's scope."
     confidence: 50
@@ -685,6 +710,7 @@ indicators:
     sublayer_id: frontier_labs
     direction_rule: {periods: 4, dead_band: 0.02, higher_is: concentrating, rationale: "Weekly readings; moves under 0.02 in the index are table churn. A rising index means routed tokens concentrating on fewer models."}
     leading_lagging: coincident
+    timing_rationale: "Coincident: routed tokens show which models developers are using this week."
     tracker_interpretation: "Series starts 9 September 2026; a direction needs five weekly readings."
     counterevidence: "OpenRouter is one router with a developer-heavy mix; the top table's length changes, which moves the index without any change in demand; enterprise traffic goes direct to the labs and never appears here."
     confidence: 40
@@ -705,6 +731,7 @@ indicators:
     layer_id: training_input
     direction_rule: {periods: 4, dead_band: 1, higher_is: concentrating, rationale: "Four quarters; a one-point move is one vendor's single disclosure. Rising = the labs buying more from the training-input layer."}
     leading_lagging: leading
+    timing_rationale: "Leading: labs buy data and environments for models released months later, so purchases precede capability and revenue."
     tracker_interpretation: One scored vendor so far (Mercor, revenue attributed to lab demand in June 2026); the sum is a floor until more vendors have a quotable source.
     counterevidence: Scores are hand-coded from quoted text; vendors announce selectively and the labs rarely confirm; lab compute commitments are on the circular ledger and excluded here, so the bell reads data and environments, not compute.
     confidence: 30

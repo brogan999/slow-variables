@@ -74,3 +74,14 @@ def test_records_carry_dispute_text_so_quoted_caveats_verify():
     rec = t.records([("obs", row[0])])[row[0]]
     dispute = s.con.execute("SELECT dispute_text FROM observation_all WHERE id = ?", [row[0]]).fetchone()[0]
     assert dispute[:20] in rec.snippet
+
+
+def test_derived_records_carry_their_description_and_the_indicator_tool_names_its_row():
+    s = st.Store()
+    s.derived = run_metrics(s.con)
+    t = Tools(s)
+    c = next(d for d in s.derived if d.metric == "cross_tracker_concordance")
+    assert "-3%" in t.records([("derived", c.id)])[c.id].snippet  # g05: a quoted threshold verifies
+    bi = t.indicator("margin_stack_semis_share")["band_input"]
+    fit = s.band_fit(next(i for i in s.seed.indicators if i.id == "margin_stack_semis_share"))
+    assert bi["derived_id"] == fit.id and bi["dims"] == {"layer_id": "compute_semis"}  # g07: cite this row
