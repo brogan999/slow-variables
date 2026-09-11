@@ -55,6 +55,12 @@ export default function Methodology() {
       <p className="text-sm text-ink-2">Data credits, generated from the source registry: {credits.join("; ")}.</p>
       <H id="reuse">Reuse, citation and corrections</H>
       <p>Code is MIT licensed. The compiled dataset (observations, derived values, status events) is CC BY 4.0; each observation also carries its upstream source and licence, which govern that row. Cite the site by URL and the observation ids you rely on. Corrections: open an issue or pull request on the repository; every change to a number or a status leaves a dated event in the changelog.</p>
+      <H id="not-measured">Not measured, and why</H>
+      <ul className="list-disc pl-5 flex flex-col gap-2">
+        <li><strong className="font-medium">Return on capital against its cost, by layer.</strong> Invested capital is not filed by segment, the labs publish neither capital employed nor a cost of capital, and any cost of capital would be our assumption laid on theirs.</li>
+        <li><strong className="font-medium">Markups.</strong> The marginal cost of a token is not public, and list prices are not transaction prices.</li>
+        <li><strong className="font-medium">Anything that needs paid data.</strong> Lab and app gross margins, GPU rental prices, private valuations between rounds and market-wide round data are paywalled; each affected indicator says so on /indicators, and the paid sources are listed on /sources.</li>
+      </ul>
       <H id="privacy">Privacy</H>
       <p>Slow Variables sets no cookies and runs no analytics; the only thing its code stores in your browser is your theme, and only once you pick one. Scripts, fonts and images all come from this site, and its content security policy blocks third-party ones. What you type into Ask or the query console goes through this site&apos;s server to a separate query service on Fly.io; Ask questions, with the path of the page you asked from, then go to Anthropic&apos;s API to draft the answer. That service sees this site&apos;s server, not your browser, and logs a short hash of each question with its outcome, cost, number of lookups and the ids of the records it cited; it never logs what you typed. Vercel, which hosts the site, keeps standard request logs (such as IP address and user agent) under its own policy, and Anthropic handles questions under its commercial terms, so leave personal details out of what you ask.</p>
       <H id="disclaimers">Disclaimers</H>
@@ -63,7 +69,6 @@ export default function Methodology() {
         <li><strong className="font-medium">Third-party figures.</strong> Figures are shown as the sources beside them published them. The pipeline records where each came from and checks quoted text against the page; it cannot vouch for the number itself, and the data comes as is, without warranty.</li>
         <li><strong className="font-medium">AI-written text.</strong> Ask answers, and the prose of memos marked as model-drafted, are written by an AI model. The citation check confirms that each number matches the record it cites, not that the sentence around it is right, so a checked answer can still be wrong.</li>
         <li><strong className="font-medium">Statuses.</strong> A status is an editorial judgement made under published rules: the maintainer chooses the bands and direction rules, writes down the rationale, and changes them only through a reviewed pull request.</li>
-        <li><strong className="font-medium">Conflicts.</strong> The maintainer is involved with a private value-chain map, a firm in the deployment-services sub-layer; that sub-layer is listed and its indicators are held to the same rules.</li>
       </ul>
     </article>
   );

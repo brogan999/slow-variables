@@ -1,6 +1,6 @@
 # Slow Variables (`ai-tracker` package) — rules for agents
 
-Read `docs/plan.md` first; `docs/briefs/ai-tracker-brief-v2.md` is the canonical spec, `docs/briefs/value-capture-tracker-part1.md` the capture-lens appendix.
+Read `docs/plan.md` first; `docs/briefs/ai-tracker-brief-v2.md` is the canonical spec. The capture-lens appendix (Part 1 brief) and the research reports exported from private chats live only in the git-ignored `docs/private/`; never copy their text into a tracked file.
 
 - Status lives only in `data/status_events.jsonl`. `evaluate` proposes rows into `data/proposed_status_events.jsonl`, writing a machine reason only for a first scoring inside a band; a band crossing waits for a human `reason` and meanwhile shows on the card as "evaluator reads X; reason pending"; `approve` commits reasoned rows; a blank proposal the evaluator no longer holds is dropped. A reason waiting more than 14 days, or a stale published indicator, is an `attention` line in `check` and in Monday's operator notes, not an error: it must never freeze the other sources. Never write a status into seed YAML.
 - Never hard-code a URL you have not fetched in this session; fetch, then store with `retrieved_at`, `http_status`, `content_hash`.

@@ -1,5 +1,5 @@
 {
- "as_of": "2026-09-10",
+ "as_of": "2026-09-11",
  "layers": [
   {
    "dependency_tier": 1,
@@ -2994,7 +2994,7 @@
        "efd67b65106b82a9"
       ],
       "unit": "index",
-      "value": 0.15678846535672072
+      "value": 0.15678846535672075
      },
      "layer_id": "model",
      "leading_lagging": "leading",
@@ -3028,7 +3028,7 @@
         "efd67b65106b82a9"
        ],
        "unit": "index",
-       "value": 0.15678846535672072
+       "value": 0.15678846535672075
       }
      ],
      "stale_as_of": null,
@@ -4222,8 +4222,8 @@
        "as_of": "2026-02-24",
        "dims": {},
        "obs_ids": [
-        "08041a8a456d6dbf",
         "24789a9da722d2de",
+        "38c27cadfec7d562",
         "67eabbfe73fcd529"
        ],
        "unit": "index",
@@ -4233,8 +4233,8 @@
        "as_of": "2026-02-24",
        "dims": {},
        "obs_ids": [
+        "08041a8a456d6dbf",
         "24789a9da722d2de",
-        "38c27cadfec7d562",
         "67eabbfe73fcd529"
        ],
        "unit": "index",
@@ -4256,8 +4256,8 @@
        "dims": {},
        "obs_ids": [
         "24789a9da722d2de",
-        "ac6f1c2cdefb7d8a",
-        "d092bfa7505183e3"
+        "d092bfa7505183e3",
+        "ecc8d38ac38efd20"
        ],
        "unit": "index",
        "value": 10.900000000000006
@@ -4267,8 +4267,8 @@
        "dims": {},
        "obs_ids": [
         "24789a9da722d2de",
-        "d092bfa7505183e3",
-        "ecc8d38ac38efd20"
+        "ac6f1c2cdefb7d8a",
+        "d092bfa7505183e3"
        ],
        "unit": "index",
        "value": 10.900000000000006
@@ -4396,7 +4396,7 @@
        "dims": {},
        "obs_ids": [
         "2202dee6a2133a8e",
-        "472a62400c7c198b",
+        "b1c57b5cc34b16a8",
         "ebf4836f647dcf59"
        ],
        "unit": "index",
@@ -4407,7 +4407,7 @@
        "dims": {},
        "obs_ids": [
         "2202dee6a2133a8e",
-        "b1c57b5cc34b16a8",
+        "472a62400c7c198b",
         "ebf4836f647dcf59"
        ],
        "unit": "index",
@@ -5748,7 +5748,7 @@
      "grade": "D",
      "id": "safety_brake_events",
      "latest": {
-      "as_of": "2026-09-10",
+      "as_of": "2026-09-11",
       "dims": {},
       "obs_ids": [
        "2ab8fec44e7914a5",
@@ -5796,7 +5796,7 @@
        "value": 3.0
       },
       {
-       "as_of": "2026-09-10",
+       "as_of": "2026-09-11",
        "dims": {},
        "obs_ids": [
         "2ab8fec44e7914a5",
@@ -8619,7 +8619,7 @@
      "grade": "D",
      "id": "cl_lab_release_claims",
      "latest": {
-      "as_of": "2026-09-10",
+      "as_of": "2026-09-11",
       "dims": {},
       "obs_ids": [
        "1b7d08dbce2be548",
@@ -8655,7 +8655,7 @@
        "value": 2.0
       },
       {
-       "as_of": "2026-09-10",
+       "as_of": "2026-09-11",
        "dims": {},
        "obs_ids": [
         "1b7d08dbce2be548",
@@ -9212,7 +9212,7 @@
      },
      "layer_id": "adopters",
      "leading_lagging": "coincident",
-     "n_observations": 27,
+     "n_observations": 7,
      "name": "Share of work hours assisted by generative AI",
      "pending": null,
      "published": true,
@@ -9318,7 +9318,7 @@
      ],
      "stale_as_of": null,
      "stale_reason": null,
-     "status": "consistent_with_normal",
+     "status": "emerging",
      "unit": "share",
      "unpublished_reason": null,
      "valve_measured": "product_to_adoption"
@@ -12490,6 +12490,21 @@
  "recent_status_events": [
   {
    "author": "claude",
+   "created_at": "2026-09-11T10:42:17.676014Z",
+   "evidence_ids": [
+    "7a1c89cb3f486453"
+   ],
+   "id": "38e57ee91534d3e6",
+   "new_conf": 80,
+   "new_status": "emerging",
+   "old_conf": 80,
+   "old_status": "consistent_with_normal",
+   "reason": "6.3% of US work hours assisted (Q2 2026, FRED) sits inside the normal band, but every reading comes from one instrument, the Real-Time Population Survey, published three ways (FRED, the authors' tracker, the FRED Blog). Three publishers are one source, so the two-source rule caps the status at emerging until a second survey measures hours.",
+   "target_id": "bbd_work_hours_assisted",
+   "target_type": "indicator"
+  },
+  {
+   "author": "claude",
    "created_at": "2026-09-11T06:12:54.565555Z",
    "evidence_ids": [
     "2735a60f0d2378e3"
@@ -12519,25 +12534,9 @@
    "reason": "The gap fell from 11.5 to 5.8 ECI points with one open-weights release on 16 Jul 2026, then held flat across three more releases. One move in four readings is not a trend under the direction rule, so the reading moves from dispersing to unclear. The earlier reading counted flat steps as agreeing with a fall, an evaluator bug fixed in this change.",
    "target_id": "open_vs_closed_gap",
    "target_type": "indicator"
-  },
-  {
-   "author": "claude",
-   "created_at": "2026-09-11T04:56:30.394955Z",
-   "evidence_ids": [
-    "1b7d08dbce2be548",
-    "dc983a8178691c42"
-   ],
-   "id": "e8b228767de78009",
-   "new_conf": 35,
-   "new_status": "emerging",
-   "old_conf": null,
-   "old_status": null,
-   "reason": "Two builders claimed production continual learning in the twelve months to 27 May 2026 (Cursor's online RL for Tab, Trajectory's hourly adapters), inside the normal band, but every row is the vendor's own description (tier 7), so the status is emerging. Initial seed.",
-   "target_id": "cl_lab_release_claims",
-   "target_type": "indicator"
   }
  ],
- "verdict": "As of 2026-09-10: compute & physical concentrating, model concentrating, training input not yet measurable, serving & orchestration unmeasured, deployment & application dispersing, adopters unmeasured, labour & consumers dispersing.",
+ "verdict": "As of 2026-09-11: compute & physical concentrating, model concentrating, training input not yet measurable, serving & orchestration unmeasured, deployment & application dispersing, adopters unmeasured, labour & consumers dispersing.",
  "what_would_change": [
   "Rent concentration in semiconductors: Four fiscal quarters; a move under one point of margin is noise. Rising margin = rent concentrating at the chip layer.",
   "Cloud backlog (remaining performance obligations): Four quarters; moves under $10B are noise at this scale. Growing backlog concentrates future cloud revenue in a few contracts.",

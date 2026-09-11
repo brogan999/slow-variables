@@ -25,3 +25,27 @@ def test_skipped_sources_are_unique_and_the_paid_tier_is_listed():
     assert {c.source_id for c in PAID} <= set(
         skipped
     ) | sources  # the paid tier shows on /sources, never silently
+
+
+def test_no_tracked_file_carries_private_chat_links_or_the_delisted_firm():
+    import subprocess
+
+    files = subprocess.run(["git", "ls-files"], capture_output=True, text=True, check=True).stdout.split()
+    hits = []
+    for f in files:
+        if f.startswith(("web/public/", "data/observations/")) or f.endswith(
+            (".png", ".ttf", ".ico", ".woff2")
+        ):
+            continue
+        try:
+            text = open(f, encoding="utf-8").read()
+        except (UnicodeDecodeError, FileNotFoundError, IsADirectoryError):
+            continue
+        chat, firm, garble = (
+            "claude.ai" + "/chat",
+            "Better" + "Brain",
+            "a private " + "value-chain map",
+        )  # split: no self-match
+        if chat in text or firm in text or garble in text:
+            hits.append(f)
+    assert not hits, hits

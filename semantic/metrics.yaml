@@ -262,7 +262,7 @@ metrics:
       FROM (SELECT * FROM sh UNION ALL SELECT * FROM lab) GROUP BY 1, 2
   frontier_price_per_horizon_hour:
     description: Cheapest available capability-hour - on each price change date, the minimum over METR-measured models of OpenRouter prompt price (USD per million tokens, each model's latest price carried forward) divided by the model's latest 50% time horizon in hours.
-    rationale: Price per unit of capability is the lab layer's capture proxy (value-capture chat, section 2). Falling means surplus is passed to the application layer and users; flat or rising means labs keep it.
+    rationale: Price per unit of capability is the lab layer's capture proxy. Falling means surplus is passed to the application layer and users; flat or rising means labs keep it.
     grain: [as_of_date]
     unit: USD
     lead_lag: coincident
@@ -379,7 +379,7 @@ metrics:
       FROM qs JOIN q ON q.cq > qs.cq - INTERVAL 12 MONTH AND q.cq <= qs.cq GROUP BY 1 HAVING sum(CASE WHEN q.sublayer_id <> 'vertical_ai' THEN q.v ELSE 0 END) > 0
   post_money_to_arr_multiple:
     description: Frontier labs' latest post-money valuations divided by their latest annualised run-rates, summed across labs with both, at each valuation date (the market's expected-rent multiple for the model layer).
-    rationale: A multiple of 30-40x says the market prices durable rents; compression toward software multiples says commoditisation is being priced in (value-capture chat, section 2).
+    rationale: A multiple of 30-40x says the market prices durable rents; compression toward software multiples says commoditisation is being priced in.
     grain: [as_of_date]
     unit: ratio
     lead_lag: leading
@@ -454,7 +454,7 @@ metrics:
     python: fits.loglinear
   open_vs_closed_gap:
     description: Gap in Epoch Capabilities Index points between the best closed-weights and the best open-weights model, at each open-weights release date.
-    rationale: Open-weight quality converging on the frontier is the leading indicator of model-layer commoditisation (value-capture chat, section 2).
+    rationale: Open-weight quality converging on the frontier is the leading indicator of model-layer commoditisation.
     grain: [as_of_date]
     unit: index
     lead_lag: leading
@@ -482,7 +482,7 @@ metrics:
       FROM observations WHERE series_key LIKE 'epoch_bench.%.arc_agi_2.pt' QUALIFY value_numeric = value
   custom_silicon_share:
     description: Non-Nvidia designers' share of cumulative AI compute shipped, in H100-equivalents, at each complete quarter end (Epoch chip sales).
-    rationale: Custom silicon share is the leading indicator of Nvidia rent decay (value-capture chat, semis layer).
+    rationale: Custom silicon share is the leading indicator of Nvidia rent decay.
     grain: [as_of_date]
     unit: share
     lead_lag: leading

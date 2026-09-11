@@ -175,12 +175,12 @@ indicators:
     updated_at: 2026-09-10
   - id: bbd_work_hours_assisted
     name: Share of work hours assisted by generative AI
-    definition: Share of all US work hours in which employed adults used generative AI, from the Bick–Blandin–Deming Real-Time Population Survey (quarterly series via FRED), with weekly work use and any-use shares shown alongside.
+    definition: Share of all US work hours in which employed adults used generative AI, from the Bick–Blandin–Deming Real-Time Population Survey (quarterly series via FRED).
     why_it_matters: The intensive margin. Headline adoption is broad, but hours actually assisted is what productivity arithmetic runs on.
     proxy_types: [behaviour, deployment]
     unit: share
     cadence_expected: quarterly
-    series_keys: ["fred.us_workers.hours_assisted_share.q", "fred.us_workers.work_use_weekly_share.q", "fred.us_adults.any_use_share.q", "bbd.us_workers.hours_assisted_share.pt", "bbd.us_workers.work_use_weekly_share.pt", "bbd.us_adults.any_use_share.pt", "stlouisfed_blog.us_workers.hours_assisted_share.pt"]
+    series_keys: ["fred.us_workers.hours_assisted_share.q"]
     band_input: fred.us_workers.hours_assisted_share.q
     bucket_id: early_adoption
     valve_measured: product_to_adoption
@@ -188,12 +188,11 @@ indicators:
     fast_band: {lo: 0.2}
     band_rationale: "Normal = single-digit share of hours in year three (PCs and the internet were here at the same age); fast = more than 20% of hours assisted."
     tracker_interpretation: Broad but shallow, exactly as the paper predicts - most workers touch it, few hours run on it. The weekly-use share moved far faster than the brief expected.
-    counterevidence: Self-reported survey; the instrument changed between waves; hours assisted is not hours saved.
+    counterevidence: Self-reported survey; the instrument changed between waves; hours assisted is not hours saved. One instrument (the Real-Time Population Survey) is published three ways (FRED, the authors' tracker, the FRED Blog), which count as one source, so the status stays emerging until a second survey measures hours.
     layer_id: adopters
     leading_lagging: coincident
     timing_rationale: "Coincident: the survey records hours assisted in the week before the interview, published within a quarter."
     confidence: 80
-    proposed_status: consistent_with_normal
     related_indicators: [btos_firm_use]
     published: true
     updated_at: 2026-09-10

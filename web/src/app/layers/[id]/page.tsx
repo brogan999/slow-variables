@@ -27,7 +27,6 @@ export default async function LayerPage({ params }: { params: Promise<{ id: stri
         <p className="text-xs text-muted"><Link href="/capture" className="hover:text-ink">Capture</Link> / layer {l.order}</p>
         <h1 className="display text-[2.25rem] md:text-[3rem] leading-[1.05] tracking-[-0.015em]">{l.name}</h1>
         <p className="mt-1 text-sm text-ink-2">{l.description}{l.dependency_tier ? ` Dependency tier ${l.dependency_tier}.` : ""}</p>
-        {id === "deployment_application" ? <p className="mt-2 text-xs text-ink-2 rounded border border-grid px-3 py-2">Disclosure: the maintainer is involved with a private value-chain map, a firm in this layer&apos;s deployment-services sub-layer. Its indicators follow the same rules as every other. <Link href="/methodology#disclaimers" className="underline decoration-grid underline-offset-2">Disclaimers</Link></p> : null}
       </div>
       {bells.length ? (
         <section>
