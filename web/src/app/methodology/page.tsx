@@ -38,7 +38,7 @@ export default function Methodology() {
         <li>No single-source status change unless the source is a benchmark, a model release or an official filing. Non-empty counterevidence before anything publishes.</li>
         <li>Status lives only in status events, each with a reason, evidence ids and an author. The changelog is generated from them. Observations are superseded, never deleted; disputed figures carry their dispute text everywhere they appear.</li>
         <li>The evaluator proposes; it writes its own reason only for a first reading inside a band, and a band crossing waits for a human. Bands and formulas change only through a reviewed pull request.</li>
-        <li>Rebuilt nightly at 06:17 UTC into a pull request; merging that pull request is the approval that publishes new observations and statuses.</li>
+        <li>Rebuilt nightly at 06:17 UTC into a pull request that merges itself when the consistency checks, the tests and the site build all pass on exactly what it built; a failure holds it for review. What merges that way was decided by a published rule: observations that passed their source&apos;s checks, and first readings inside a band. A band crossing still waits for a human-written reason, and the card says so meanwhile.</li>
         <li>Fetched HTML passes through a prompt-injection scrub; anything addressed to an AI agent is logged and never stored.</li>
       </ul>
       <H>Query layer</H>

@@ -25,6 +25,17 @@ export function StatusChip({ status, size = "sm" }: { status: string | null | un
   );
 }
 
+// The evaluator crossed a band and a human has not yet written the reason: the card keeps the old status and says so.
+export function PendingNote({ p }: { p: { new_status: string; since: string } | null | undefined }) {
+  if (!p) return null;
+  const s = STYLE[p.new_status] ?? { glyph: "○" };
+  return (
+    <span className="text-xs text-ink-2">
+      Evaluator reads <span aria-hidden>{s.glyph}</span> {words(p.new_status)} since {p.since}; reason pending
+    </span>
+  );
+}
+
 export function Grade({ grade, tier }: { grade: string | null | undefined; tier?: number }) {
   if (!grade) return null;
   return (

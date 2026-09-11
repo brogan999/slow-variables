@@ -1,5 +1,10 @@
 name: ci
-on: [push, pull_request]
+on:
+  push:
+  pull_request:  # bot PRs (nightly, memo) only touch these paths; their gate runs inside the job that opens them
+    paths-ignore: ["data/**", "web/data/**", "web/public/data/**", "docs/**"]
+permissions: { contents: read }
+concurrency: { group: "ci-${{ github.ref }}", cancel-in-progress: true }
 jobs:
   python:
     runs-on: ubuntu-latest

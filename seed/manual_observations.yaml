@@ -114,6 +114,7 @@ observations:
     dispute_text: "Denominator and sample disputed; Menlo reports ~47% of pilots reach production on a different definition. No MIT-hosted copy of the PDF exists; this is the mirror Menlo cites."
     note: "MIT NANDA, 'The GenAI Divide: State of AI in Business 2025', executive summary."
   - series_key: metr_blog.rct_2025.dev_speed_change.pt
+    coding: "Sign coded: 'take 19% longer' stored as a -19% change in speed."
     source_id: metr_blog
     value: -0.19
     unit: share
@@ -249,6 +250,7 @@ observations:
     raw_snippet: "by this same measure, the shortfall was 15% at the July 2025 data vintage and is 19% as of June 2026"
     note: "Same sentence; the July 2025 vintage."
   - series_key: revelio.us_exposed.growth_gap.m
+    coding: "Sign coded: 'down ~6%' stored as -6%."
     source_id: revelio
     value: -0.06
     unit: share
@@ -326,6 +328,7 @@ observations:
     raw_snippet: "The unemployment rate stayed elevated at about 5.6 percent, and the underemployment rate edged up to 42 percent."
     note: "2026:Q2, ages 22-27 with a bachelor's degree; the page carries no date, so published_date is the first archive capture showing Q2."
   - series_key: stanford_del.us_entry_level_exposed.employment_change_since_nov2022.pt
+    coding: "Sign coded: 'fell about 11%' stored as -11%."
     source_id: stanford_del
     value: -0.11
     unit: share
@@ -618,6 +621,7 @@ observations:
     raw_snippet: This expanded partnership includes a new $4 billion investment from Amazon and establishes AWS as our primary cloud and training partner. This will bring Amazon's total investment in Anthropic to $8 billion
     note: Amazon -> Anthropic cumulative equity US$8B; AWS primary cloud and training partner.
   - series_key: circular.amazon_anthropic.equity_usd.pt
+    coding: "Summed: $5 billion now plus up to $20 billion later."
     source_id: amazon_news
     entity_id: amzn
     value: 25000000000
@@ -927,6 +931,7 @@ observations:
     note: "Same sentence as the 2025 row: the 2024 share, restated in the 2025 report."
   # --- continual-learning ladder (Appendix E), sourced 2026-09-11; every snippet verified verbatim against the fetched page ---
   - series_key: cl_ladder.anysphere.rung.pt
+    coding: "Rung coded from the quoted description against the ladder rubric in seed/ladder.yaml."
     source_id: cursor_blog
     entity_id: anysphere
     value: 2
@@ -951,6 +956,7 @@ observations:
     raw_snippet: "Currently, it takes us 1.5 to 2 hours to roll out a checkpoint and collect the data for the next step."
     note: "Stated range 1.5-2 h per checkpoint-and-collect cycle; upper bound stored."
   - series_key: cl_ladder.trajectory.rung.pt
+    coding: "Rung coded from the quoted description against the ladder rubric in seed/ladder.yaml."
     source_id: baseten_blog
     entity_id: trajectory
     value: 3
@@ -963,6 +969,7 @@ observations:
     raw_snippet: "a pipeline that takes a freshly trained LoRA adapter and puts it behind a live, A/B routed, fully provenanced endpoint in roughly an hour. That is enough to run continual learning in production today"
     note: "Baseten + Trajectory (co-authored by Trajectory's Elabd and Karanam): per-customer LoRA adapters merged and A/B-routed on a cadence, with provenance. L3: adapters per customer on a cadence; nothing per-session, so not L5."
   - series_key: cl.trajectory.refresh_cadence_hours.pt
+    coding: "'hourly' stored as 1 hour."
     source_id: baseten_blog
     entity_id: trajectory
     value: 1
@@ -987,6 +994,7 @@ observations:
     raw_snippet: "Today, over 80% of all model traffic at Decagon runs on models we trained ourselves."
     note: "Floor (>80%). Supports Decagon's presence on the ladder but states no retraining cadence; the brief's 'retrained weekly' is not on any fetchable Decagon or Trajectory page, so no rung row yet."
   - series_key: cl_ladder.engram_harvey.rung_research.pt
+    coding: "Rung coded from the quoted description against the ladder rubric in seed/ladder.yaml."
     source_id: engram_blog
     entity_id: engram
     value: 4
@@ -1011,6 +1019,7 @@ observations:
     raw_snippet: "Closed-book knowledge rises from 4.7% to 72.6% between training steps zero and one thousand."
     note: "Closed-book recall of firm facts after study, no retrieval; the nearest thing to a firm-knowledge-in-weights observable on the page. Baseline 4.7%."
   - series_key: cl_ladder.harvey_tenet.rung_research.pt
+    coding: "Rung coded from the quoted description against the ladder rubric in seed/ladder.yaml."
     source_id: harvey_blog
     entity_id: harvey
     value: 4
@@ -1024,6 +1033,7 @@ observations:
     dispute_text: "Placed at L4 because Appendix E lists Tenet there, but the post describes one async-RL post-training run on domain (legal) data for a research preview, not organisation-specific knowledge on a refresh cadence; read literally it is an L0 static snapshot with domain specialisation."
     note: "Harvey Tenet research preview, Kimi K3 base post-trained with Fireworks; 'will be incorporating into the Harvey product over time', so not production yet."
   - series_key: cl_ladder.baseten_rank1_lora.rung_research.pt
+    coding: "Rung coded from the quoted description against the ladder rubric in seed/ladder.yaml."
     source_id: baseten_blog
     entity_id: baseten
     value: 5
@@ -1036,6 +1046,7 @@ observations:
     raw_snippet: "Continuously (or close to continuously) merging rank-1 LoRA adapters into the model on the same GPUs running inference felt like the right answer to that to us."
     note: "Rank-1 LoRA continuous merge on the inference GPUs: per-update weight changes that persist and pool, i.e. the L5 mechanism, demonstrated only as research. The post's own caveat: it 'doesn't really solve a lot of the problems of continual learning' and forgetting remains."
   - series_key: cl_ladder.nested_learning_hope.rung_research.pt
+    coding: "Rung coded from the quoted description against the ladder rubric in seed/ladder.yaml."
     source_id: google_research_blog
     entity_id: googl
     value: 5
@@ -1048,6 +1059,7 @@ observations:
     raw_snippet: "We test and validate Nested Learning through a proof-of-concept, self-modifying architecture that we call “Hope”, which achieves superior performance in language modeling and demonstrates better long-context memory management than existing state-of-the-art models."
     note: "Google Research (Behrouz, Mirrokni), NeurIPS 2025; arXiv 2512.24695. Self-modifying weights with a continuum memory system, aimed at catastrophic forgetting: L5 mechanism, proof-of-concept only; no Gemini production claim found."
   - series_key: cl_ladder.titans.rung_research.pt
+    coding: "Rung coded from the quoted description against the ladder rubric in seed/ladder.yaml."
     source_id: arxiv_abs
     entity_id: googl
     value: 5
@@ -1060,6 +1072,7 @@ observations:
     raw_snippet: "We present a new neural long-term memory module that learns to memorize historical context and helps attention to attend to the current context while utilizing long past information."
     note: "Titans (Behrouz, Zhong, Mirrokni): memory written into module weights at test time; persists within a sequence, no cross-session pooling shown, so the weakest L5 claim in the set."
   - series_key: cl_ladder.ttt_layers.rung_research.pt
+    coding: "Rung coded from the quoted description against the ladder rubric in seed/ladder.yaml."
     source_id: arxiv_abs
     value: 5
     unit: rung
@@ -1071,6 +1084,7 @@ observations:
     raw_snippet: "Since the hidden state is updated by training even on test sequences, our layers are called Test-Time Training (TTT) layers."
     note: "Sun et al., Stanford/UCSD/Berkeley/Meta; v4 2025-08-31. Weight updates at test time (hidden state is itself a model trained on the sequence): L5 mechanism at 125M-1.3B scale, no persistence across sessions."
   - series_key: cl_ladder.sdft_self_distillation.rung_research.pt
+    coding: "Rung coded from the quoted description against the ladder rubric in seed/ladder.yaml."
     source_id: arxiv_abs
     value: 5
     unit: rung
@@ -1082,6 +1096,7 @@ observations:
     raw_snippet: "In sequential learning experiments, SDFT enables a single model to accumulate multiple skills over time without performance regression, establishing on-policy distillation as a practical path to continual learning from demonstrations."
     note: "Shenfeld, Damani, Hübotter, Agrawal (MIT/ETH); v2 2026-08-07. On-policy self-distillation from demonstrations with skills pooling without forgetting: the L5 'pool without forgetting' observable, demonstrated in research."
   - series_key: cl_ladder.sdpo.rung_research.pt
+    coding: "Rung coded from the quoted description against the ladder rubric in seed/ladder.yaml."
     source_id: arxiv_abs
     value: 5
     unit: rung
@@ -1093,6 +1108,7 @@ observations:
     raw_snippet: "Finally, applying SDPO to individual questions at test time accelerates discovery on difficult binary-reward tasks, achieving the same discovery probability as best-of-k sampling or multi-turn conversations with 3x fewer attempts."
     note: "Hübotter et al. (ETH), Self-Distillation Policy Optimization; v2 2026-02-16. Listed under L5 in Appendix E; the paper is a training method with a per-question test-time variant, not a persistence-across-sessions result, so the placement is by mechanism only."
   - series_key: cl_ladder.tml_on_policy_distillation.rung_research.pt
+    coding: "Rung coded from the quoted description against the ladder rubric in seed/ladder.yaml."
     source_id: thinking_machines_blog
     entity_id: thinking_machines_lab
     value: 5
@@ -1105,6 +1121,7 @@ observations:
     raw_snippet: "This generalizes to a broader set of continual learning tasks, which require acquiring new knowledge without degrading prior capabilities."
     note: "Thinking Machines (Kevin Lu), 'On-Policy Distillation': shows on-policy distillation restores post-training behaviour after mid-training on new documents. Research/Tinker recipe; no production continual-learning claim by the lab found."
   - series_key: cl_ladder.frozen_weights_memory.rung_research.pt
+    coding: "Rung coded from the quoted description against the ladder rubric in seed/ladder.yaml."
     source_id: arxiv_abs
     value: 1
     unit: rung
@@ -1141,6 +1158,7 @@ observations:
     note: "Second source (MIT Sloan IWER summary of the same study)."
   # 2. exec_reported_impact
   - series_key: nber.executives_4_countries.no_ai_impact_share.pt
+    coding: "'nine-in-ten' stored as 0.9."
     source_id: nber
     value: 0.9
     unit: share
@@ -1329,6 +1347,7 @@ observations:
     note: "Only stated number in any Budget Lab text: the graduates sub-index. The headline all-worker index (Nov 2022 baseline) is chart-only in the Jan 2026 and Jul 2026 updates; the series lives in the xlsx (see report)."
   # 10. humlum_precise_null
   - series_key: humlum_pdf.denmark_exposed_workers.chatbot_effect_on_earnings.pt
+    coding: "'center on zero' stored as 0."
     source_id: humlum_pdf
     value: 0
     unit: share
@@ -1363,6 +1382,7 @@ observations:
     note: "Second source (Booth CAAI summary). Page carries no date; published_date set to the paper revision month, URL year 2026."
   # 11. upwork_freelancer_effects
   - series_key: cepr_voxeu.upwork_writing_freelancers.monthly_earnings_change.pt
+    coding: "Sign coded: 'a decrease of 5.2%' stored as -5.2%."
     source_id: cepr_voxeu
     value: -0.052
     unit: share
@@ -1374,6 +1394,7 @@ observations:
     raw_snippet: "In writing-related occupations, freelancers experience a decrease of 2% in the number of monthly jobs and a decrease of 5.2% in monthly earnings on the platform."
     note: "Hui, Reshef & Zhou, authors' VoxEU column; cepr.org returns 403 to bots, Wayback URL used. Same sentence: -2% monthly jobs."
   - series_key: cepr_voxeu.upwork_writing_freelancers.monthly_jobs_change.pt
+    coding: "Sign coded: 'a decrease of 2%' stored as -2%."
     source_id: cepr_voxeu
     value: -0.02
     unit: share
@@ -1385,6 +1406,7 @@ observations:
     raw_snippet: "In writing-related occupations, freelancers experience a decrease of 2% in the number of monthly jobs and a decrease of 5.2% in monthly earnings on the platform."
     note: "Jobs leg of the same finding."
   - series_key: wustl_olin.upwork_writing_freelancers.monthly_earnings_change.pt
+    coding: "Sign coded: 'declined by 5.2%' stored as -5.2%."
     source_id: wustl_olin
     value: -0.052
     unit: share
@@ -1447,6 +1469,7 @@ observations:
     note: "Second source; TechCrunch relaying the founder's X post (basis company_stated). Surge/Scale: no 2026 public figure found."
   # 14. internal_external_deployment_gap_months
   - series_key: dwarkesh.anthropic_mythos.internal_to_public_gap_months.pt
+    coding: "Counted: internal in February, public in June, four months."
     source_id: dwarkesh
     entity_id: anthropic
     value: 4
@@ -1676,6 +1699,7 @@ observations:
     raw_snippet: "As of June 30, 2026, our total indebtedness was $35.6 billion and we had $10.0 billion of undrawn availability under our Revolving Credit Facility, DDTL 3.0 Facility, DDTL 4.0 Facility (as defined below), and DDTL 5.0 Facility (as defined below)."
     note: "MD&A liquidity section; principal basis. Recourse debt net $31.4B + non-recourse net $3.7B on the balance sheet."
   - series_key: sec_filing.crwv.total_debt_usd.q
+    coding: "Scaled: the filing's table is in millions ($35,551 million)."
     source_id: sec_edgar_filings
     entity_id: crwv
     value: 35551000000
@@ -1712,6 +1736,7 @@ observations:
     raw_snippet: "Notes due March 2033 March 2033 2.63% 5.20% 2,100.0"
     note: "Effective interest rate (vs 2.63% stated coupon) on the March 2033 converts, $2,100.0M principal; Q2 2026 6-K Ex. 99.2 convertible-debt table."
   - series_key: sec_filing.nbis.total_debt_usd.q
+    coding: "Scaled: the filing's table is in millions (10,041.8 million)."
     source_id: sec_edgar_filings
     entity_id: nbis
     value: 10041800000

@@ -2,39 +2,64 @@ name: nightly
 on:
   schedule: [{ cron: "17 6 * * *" }]
   workflow_dispatch:
-permissions: { contents: write, pull-requests: write }
+permissions: { contents: write, pull-requests: write, actions: write, issues: write }
+concurrency: nightly
 jobs:
   ingest:
     runs-on: ubuntu-latest
+    outputs:
+      merged: ${{ steps.merge.outputs.outcome }}
+      observations: ${{ steps.build.outputs.observations }}
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v5
       - run: uv sync
+      - uses: pnpm/action-setup@v4
+        with: { version: 10 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: pnpm, cache-dependency-path: web/pnpm-lock.yaml }
       - uses: actions/cache@v4
         with:
           path: ingest/cache
-          key: raw-cache-${{ github.run_started_at }}
+          key: raw-cache-${{ github.run_id }}
           restore-keys: raw-cache-
+      # dated raw files older than a week go; undated ones (EI, segments) are reused across days and stay
+      - run: |
+          cutoff=$(date -u -d '7 days ago' +%F)
+          for d in ingest/cache/*/20??-??-??; do [ -d "$d" ] && [[ "$(basename "$d")" < "$cutoff" ]] && rm -rf "$d"; done; true
       - id: ingest
-        run: uv run ai-tracker ingest --all || echo "failed=true" >> "$GITHUB_OUTPUT"
+        run: |
+          set +e
+          uv run ai-tracker ingest --all > "$RUNNER_TEMP/ingest.log" 2>&1
+          rc=$?
+          cat "$RUNNER_TEMP/ingest.log"
+          [ $rc -eq 0 ] || echo "failed=true" >> "$GITHUB_OUTPUT"
         env:
           AI_TRACKER_USER_AGENT: "${{ secrets.AI_TRACKER_USER_AGENT }}"
           ARTIFICIAL_ANALYSIS_API_KEY: "${{ secrets.ARTIFICIAL_ANALYSIS_API_KEY }}"
-      # approve inside the run so the PR shows exactly what merge will commit; merge is still the gate
-      - run: uv run ai-tracker approve && uv run ai-tracker build && uv run ai-tracker evaluate && uv run ai-tracker export
+      # approve inside the run so the PR is exactly what lands; the gate below decides whether it lands
+      - id: build
+        run: |
+          uv run ai-tracker approve --reviewer nightly
+          uv run ai-tracker build | tee "$RUNNER_TEMP/build.log"
+          echo "observations=$(grep -o '[0-9]* approved observations' "$RUNNER_TEMP/build.log" | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"
+          uv run ai-tracker evaluate && uv run ai-tracker export
       - id: check
         run: uv run ai-tracker check || echo "failed=true" >> "$GITHUB_OUTPUT"
+      # CI never runs on a PR opened with GITHUB_TOKEN, so the gate runs here
+      - id: tests
+        run: (uv run pytest -q && pnpm -C web install --frozen-lockfile && pnpm -C web build) || echo "failed=true" >> "$GITHUB_OUTPUT"
       - uses: actions/upload-artifact@v4
         if: always()
         with: { name: raw-cache, path: ingest/cache, retention-days: 90, if-no-files-found: ignore }
       - id: today
         if: always()
         run: echo "date=$(date -u +%F)" >> "$GITHUB_OUTPUT"
-      - uses: peter-evans/create-pull-request@v7
-        if: always()
+      - id: cpr
+        uses: peter-evans/create-pull-request@v7
         with:
           branch: nightly
-          title: "nightly: ${{ steps.check.outputs.failed == 'true' && 'CHECK FAILED ' || '' }}${{ steps.ingest.outputs.failed == 'true' && 'PARTIAL ' || '' }}observations ${{ steps.today.outputs.date }}"
+          title: "nightly: ${{ steps.check.outputs.failed == 'true' && 'CHECK FAILED ' || '' }}${{ steps.tests.outputs.failed == 'true' && 'TESTS FAILED ' || '' }}${{ steps.ingest.outputs.failed == 'true' && 'PARTIAL ' || '' }}observations ${{ steps.today.outputs.date }}"
           body-path: data/summary.md
           commit-message: "nightly ingest\n\nCo-Authored-By: ai-tracker nightly <noreply@github.com>"
           add-paths: |
@@ -42,5 +67,39 @@ jobs:
             web/data/**
             web/public/data/**
             docs/thesis.md
-      - if: steps.ingest.outputs.failed == 'true' || steps.check.outputs.failed == 'true'
+      # merge only the tree that check, tests and build saw: if main moved, rerun rather than merge unseen code
+      - id: merge
+        if: steps.cpr.outputs.pull-request-number && steps.check.outputs.failed != 'true' && steps.tests.outputs.failed != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          N: ${{ steps.cpr.outputs.pull-request-number }}
+          SHA: ${{ github.sha }}
+          EVENT: ${{ github.event_name }}
+        run: |
+          head=$(git ls-remote origin refs/heads/main | cut -f1)
+          if [ "$head" != "$SHA" ]; then
+            echo "main moved during the run ($SHA -> $head)"
+            if [ "$EVENT" = schedule ]; then gh workflow run nightly.yml --ref main; exit 0; fi
+            exit 1
+          fi
+          gh pr merge "$N" --squash || { sleep 20; gh pr merge "$N" --squash; }
+          echo "outcome=merged" >> "$GITHUB_OUTPUT"
+      # a layout change must fail loudly (brief §5): one open issue per source, assigned to the maintainer
+      - if: always()
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: |
+          grep -E '^[a-z0-9_]+: ok=False .*error=LayoutChanged' "$RUNNER_TEMP/ingest.log" | grep -v 'optional source' | while read -r line; do
+            src="${line%%:*}"; title="Layout changed: $src"
+            gh issue list --state open --search "\"$title\" in:title" --json title --jq '.[].title' | grep -qxF "$title" && continue
+            gh issue create --title "$title" --assignee brogan999 \
+              --body "The nightly on $(date -u +%F) raised LayoutChanged for \`$src\`, so its series stopped updating. Log line: \`$line\`. Run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          done; true
+      # a source outage (PARTIAL) is reported in the PR title and Monday's operator notes, not by email
+      - if: steps.check.outputs.failed == 'true' || steps.tests.outputs.failed == 'true'
         run: exit 1
+  deploy:
+    needs: ingest
+    if: needs.ingest.outputs.merged == 'merged'
+    uses: ./.github/workflows/deploy-query.yml
+    with: { observations: "${{ needs.ingest.outputs.observations }}" }
+    secrets: inherit

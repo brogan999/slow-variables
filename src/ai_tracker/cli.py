@@ -127,6 +127,15 @@ def _propose_predictions(s: st.Store, proposed: list[dict], seen: set, lines: li
             )
 
 
+def _drop_stale(proposed: list[dict], tonight: dict[str, str]) -> list[dict]:
+    """A blank proposal the evaluator no longer holds is not a to-do, and a late reason must not commit it."""
+    return [
+        p
+        for p in proposed
+        if p.get("reason", "").strip() or tonight.get(p["target_id"], p["new_status"]) == p["new_status"]
+    ]
+
+
 def cmd_evaluate(a: argparse.Namespace) -> int:
     s = st.Store()
     derived = run_metrics(s.con)
@@ -136,6 +145,7 @@ def cmd_evaluate(a: argparse.Namespace) -> int:
     proposed = st.read_jsonl(st.DATA / "proposed_status_events.jsonl")
     seen = {(p["target_id"], p["new_status"]) for p in proposed}
     lines = [f"derived: {len(derived)} rows across {len({d.metric for d in derived})} metrics"]
+    tonight: dict[str, str] = {}
     for ind in s.seed.indicators:
         if not ind.published:
             continue
@@ -152,6 +162,7 @@ def cmd_evaluate(a: argparse.Namespace) -> int:
         capped = new not in UNSCORED and _single_non_primary(s, ind)
         if capped:  # the two-source rule, applied at proposal time rather than only at the gate
             new = "emerging"
+        tonight[ind.id] = new
         cur = s.current(ind.id)
         old = cur.new_status if cur else None
         lines.append(
@@ -179,6 +190,7 @@ def cmd_evaluate(a: argparse.Namespace) -> int:
                     else "fill `reason` in data/proposed_status_events.jsonl or delete the row"
                 )
             )
+    proposed = _drop_stale(proposed, tonight)
     _propose_predictions(s, proposed, seen, lines)
     st.write_jsonl(st.DATA / "proposed_status_events.jsonl", proposed)
     verdicts = run_all(s)
@@ -243,7 +255,17 @@ def cmd_export(a: argparse.Namespace) -> int:
 
 
 def check_errors(s: st.Store) -> list[str]:
+    return _check(s)[0]
+
+
+def attention(s: st.Store) -> list[str]:
+    """What a human should look at but must not freeze the nightly: stale cards, late reasons, seed disagreements."""
+    return _check(s)[1]
+
+
+def _check(s: st.Store) -> tuple[list[str], list[str]]:
     errors: list[str] = []
+    notes: list[str] = []
     known = {r[0] for r in s.con.execute("SELECT id FROM observation_all").fetchall()}
     for e in s.events:
         missing = [i for i in e.evidence_ids if i not in known]
@@ -252,7 +274,7 @@ def check_errors(s: st.Store) -> list[str]:
     for p in st.read_jsonl(st.DATA / "proposed_status_events.jsonl"):
         age = (datetime.now(timezone.utc) - datetime.fromisoformat(p["created_at"])).days
         if not p.get("reason", "").strip() and age > 14:
-            errors.append(f"{p['target_id']}: proposal {p['id']} has waited {age} days for a reason")
+            notes.append(f"{p['target_id']}: proposal {p['id']} has waited {age} days for a reason")
     for ind in s.seed.indicators:
         if not ind.published:
             continue
@@ -270,23 +292,25 @@ def check_errors(s: st.Store) -> list[str]:
             if _single_non_primary(s, ind):
                 errors.append(f"{ind.id}: scored status from a single non-primary source")
         if ev and ind.proposed_status and ind.proposed_status != ev.new_status:
-            print(f"note {ind.id}: seed proposed {ind.proposed_status}, evaluator says {ev.new_status}")
+            notes.append(f"{ind.id}: seed proposed {ind.proposed_status}, evaluator says {ev.new_status}")
         stale = s._card(ind)["stale_as_of"]
         if stale and not ind.stale_ok:
-            errors.append(
+            notes.append(
                 f"{ind.id}: stale since {stale} (cadence {ind.cadence_expected}); set stale_ok with a reason or refresh"
             )
-    return errors
+    return errors, notes
 
 
 def cmd_check(a: argparse.Namespace) -> int:
     s = st.Store()
-    errors = check_errors(s)
+    errors, notes = _check(s)
     pending = sum(
         1 for p in st.OBS.glob("*.jsonl") for r in st.read_jsonl(p) if r["review_status"] == "pending"
     )
     proposed = st.read_jsonl(st.DATA / "proposed_status_events.jsonl")
     print(f"{pending} pending observations, {len(proposed)} proposed status events awaiting a reason")
+    for n in notes:
+        print("attention", n)
     for e in errors:
         print("ERROR", e)
     return 1 if errors else 0

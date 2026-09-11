@@ -4,13 +4,26 @@ on:
     branches: [main]
     paths: ["data/**", "seed/**", "semantic/**", "src/**", "Dockerfile", "fly.toml", "pyproject.toml", "uv.lock"]
   workflow_dispatch:
+  workflow_call:
+    inputs:
+      observations: { type: string, required: false, default: "" }
 jobs:
   deploy:
     runs-on: ubuntu-latest
     concurrency: deploy-query
     steps:
       - uses: actions/checkout@v4
-      - uses: superfly/flyctl-actions/setup-flyctl@master
+        with: { ref: main }  # a nightly call runs on the pre-merge commit; deploy what was merged
+      - uses: superfly/flyctl-actions/setup-flyctl@1.6
       - run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+      # the machine sleeps, so allow a cold start; from the nightly, also prove it serves the new data
+      - env: { WANT: "${{ inputs.observations }}" }
+        run: |
+          for i in 1 2 3 4 5 6; do
+            got=$(curl -fsS --max-time 60 https://ai-tracker-query.fly.dev/health | jq -r '.observations') \
+              && { [ -z "$WANT" ] || [ "$got" = "$WANT" ]; } && { echo "health ok, $got observations"; exit 0; }
+            sleep 10
+          done
+          echo "health check failed: serving ${got:-nothing}, expected ${WANT:-any}"; exit 1

@@ -6,7 +6,7 @@ import { BandChart } from "@/components/BandChart";
 import { ChangelogList } from "@/components/Changelog";
 import { Num, ObsLinks } from "@/components/Provenance";
 import { Section } from "@/components/Section";
-import { Grade, StatusChip } from "@/components/StatusChip";
+import { Grade, PendingNote, StatusChip } from "@/components/StatusChip";
 import { fmt, index, indicator, obsIndex, sources, words, type Band } from "@/lib/data";
 
 export const dynamicParams = false;
@@ -43,6 +43,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
         </div>
         <p className="text-xs text-muted">{RUBRIC(d.confidence)}</p>
         {d.stale_as_of ? <p className="text-slow text-xs">stale as of {d.stale_as_of}</p> : null}
+        {d.pending ? <p className="text-xs leading-snug"><PendingNote p={d.pending} /></p> : null}
         {d.stale_reason ? <p className="text-muted text-xs">refreshed irregularly: {d.stale_reason}</p> : null}
         {d.normal_band ? (
           <dl className="hidden lg:grid gap-1 text-xs border-t border-grid pt-3">
@@ -73,6 +74,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
           <Grade grade={d.grade} />
           {d.leading_lagging ? <span className="eyebrow">{d.leading_lagging}</span> : null}
           {d.stale_as_of ? <span className="text-slow text-xs">stale as of {d.stale_as_of}</span> : null}
+          <PendingNote p={d.pending} />
         </div>
         <p className="mt-3 text-lg leading-snug text-ink-2 max-w-[60ch]">{d.definition}</p>
       </header>

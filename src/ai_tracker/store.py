@@ -644,8 +644,19 @@ class Store:
             "sparkline": pts[-24:],
             "stale_as_of": None if ind.stale_ok else stale,
             "stale_reason": ind.stale_reason,
+            "pending": self._awaiting().get(ind.id),
             "n_observations": len(self.evidence_obs(ind)),
         }
+
+    def _awaiting(self) -> dict[str, dict[str, str]]:
+        """Crossings the evaluator proposed that wait for a human reason: shown on the card as the override note."""
+        if not hasattr(self, "_awaiting_cache"):
+            self._awaiting_cache = {
+                p["target_id"]: {"new_status": p["new_status"], "since": p["created_at"][:10]}
+                for p in read_jsonl(DATA / "proposed_status_events.jsonl")
+                if p.get("target_type", "indicator") == "indicator" and not p.get("reason", "").strip()
+            }
+        return self._awaiting_cache
 
     def _diffusion_lens(
         self, cards: dict[str, Any], recent: list[dict[str, Any]], as_of: str

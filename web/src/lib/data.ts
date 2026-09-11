@@ -13,6 +13,7 @@ export type Card = {
   id: string; name: string; bucket_id: string | null; layer_id: string | null; valve_measured: string | null;
   unit: string; published: boolean; status: string | null; confidence: number | null; leading_lagging: string | null;
   grade: string | null; latest: Point | null; sparkline: Point[]; stale_as_of: string | null; stale_reason?: string | null; n_observations: number;
+  pending?: { new_status: string; since: string } | null;
 };
 export type StatusEvent = {
   id: string; target_type?: "indicator" | "prediction"; target_id: string; old_status: string | null; new_status: string; old_conf: number | null; new_conf: number;

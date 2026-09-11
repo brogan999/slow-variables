@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Card } from "@/lib/data";
 import { Num } from "./Provenance";
 import { ConfidenceDial } from "./ConfidenceDial";
-import { Grade, StatusChip } from "./StatusChip";
+import { Grade, PendingNote, StatusChip } from "./StatusChip";
 
 export function IndicatorCard({ c, obsIndex }: { c: Card; obsIndex: Record<string, string> }) {
   const pts = c.sparkline.filter((p) => p.value !== null);
@@ -17,6 +17,7 @@ export function IndicatorCard({ c, obsIndex }: { c: Card; obsIndex: Record<strin
         {c.leading_lagging ? <span className="eyebrow">{c.leading_lagging}</span> : null}
         <ConfidenceDial value={c.confidence} size={30} />
         {c.stale_as_of ? <span className="text-slow">stale as of {c.stale_as_of}</span> : null}
+        <PendingNote p={c.pending} />
       </div>
       <div className="flex items-end justify-between gap-3">
         <div className="text-lg"><Num p={c.latest} unit={c.unit} obsIndex={obsIndex} /></div>

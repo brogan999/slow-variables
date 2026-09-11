@@ -54,3 +54,27 @@ def test_snippet_missing_rejects_row_and_fails_run(tmp_path):
 def test_fetch_failure_rejects_row(tmp_path):
     c = _connector(tmp_path, "reached $172 billion in March 2026")
     assert c.extract([_item("https://example.test/report", b"", 403)]) == [] and "HTTP 403" in c.errors[0]
+
+
+WORDS = {
+    w: i for i, w in enumerate("zero one two three four five six seven eight nine ten eleven twelve".split())
+}
+
+
+def test_every_numeric_seed_value_is_in_its_snippet_or_says_how_it_was_coded():
+    """The snippet-on-page check proves the quote; this binds the stored number to the quote. A value the snippet
+    does not state (a sign from "fell", a rung coded against the ladder, a table in millions) must carry `coding`."""
+    import re
+
+    from ai_tracker.query.citecheck import NUM, Record, _parse, _rendered_matches
+
+    unbound = []
+    for r in yaml.safe_load(Path("seed/manual_observations.yaml").read_text())["observations"]:
+        if r.get("value") is None or r.get("coding"):
+            continue
+        text = re.sub(r"(?<=[A-Za-z])(?=\d)", " ", r["raw_snippet"])  # "USD172bn" -> "USD 172bn"
+        toks = [v for m in NUM.finditer(text) if (v := _parse(m)) is not None]
+        toks += [WORDS[w] for w in re.findall(r"[a-z]+", text.lower()) if w in WORDS]
+        if not any(_rendered_matches(t, Record("x", "obs", [float(r["value"])], r["unit"])) for t in toks):
+            unbound.append(f"{r['series_key']} = {r['value']}")
+    assert not unbound, unbound

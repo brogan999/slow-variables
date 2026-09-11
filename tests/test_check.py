@@ -3,7 +3,7 @@ from datetime import datetime, timedelta, timezone
 
 from ai_tracker import store as st
 from ai_tracker.analysis.metrics import run_metrics
-from ai_tracker.cli import check_errors
+from ai_tracker.cli import attention, check_errors
 from ai_tracker.schema import StatusEvent
 
 
@@ -32,13 +32,30 @@ def test_check_rules_fire(monkeypatch, tmp_path):
     (tmp_path / "proposed_status_events.jsonl").write_text(
         json.dumps({"id": "p1", "target_id": "btos_firm_use", "reason": "", "created_at": old}) + "\n"
     )
-    assert any("waited 20 days" in e for e in check_errors(s))
+    assert any(
+        "waited 20 days" in e for e in attention(s)
+    )  # attention, not an error: it must not freeze the nightly
+    assert not any("waited 20 days" in e for e in check_errors(s))
     (tmp_path / "proposed_status_events.jsonl").write_text("")
     # 3. a published indicator past twice its cadence, unless stale_ok carries a reason
     ind = next(
         i for i in s.seed.indicators if i.id == "enterprise_pilot_to_production"
     )  # latest point mid-2025
     ind.cadence_expected = "daily"
-    assert any(e.startswith("enterprise_pilot_to_production: stale since") for e in check_errors(s))
+    assert any(e.startswith("enterprise_pilot_to_production: stale since") for e in attention(s))
+    assert check_errors(s) == []  # one stale source never blocks the rest
     ind.stale_ok, ind.stale_reason = True, "test"
-    assert not any(e.startswith("enterprise_pilot_to_production: stale") for e in check_errors(s))
+    assert not any(e.startswith("enterprise_pilot_to_production: stale") for e in attention(s))
+
+
+def test_a_blank_proposal_the_evaluator_no_longer_holds_is_dropped():
+    from ai_tracker.cli import _drop_stale
+
+    rows = [
+        {"target_id": "a", "new_status": "faster_than_normal", "reason": ""},  # flipped back tonight
+        {"target_id": "b", "new_status": "stable", "reason": ""},  # still held
+        {"target_id": "c", "new_status": "stable", "reason": "a human wrote this"},  # reasoned rows stay
+        {"target_id": "p1", "new_status": "behind", "reason": ""},  # not evaluated tonight (a prediction)
+    ]
+    kept = _drop_stale(rows, {"a": "consistent_with_normal", "b": "stable", "c": "unclear"})
+    assert [r["target_id"] for r in kept] == ["b", "c", "p1"]
