@@ -1,0 +1,186 @@
+{
+ "band_input": "metric:cl_lab_release_claims_12m",
+ "band_rationale": "Normal = up to three builders a year claiming shipped continual learning; fast = six or more, including a frontier-lab release branded continual or online learning (the ladder's L5 made observable). Every row is tier 7, so the status caps at emerging.",
+ "band_value": {
+  "as_of": "2026-05-27",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "1b7d08dbce2be548",
+   "dc983a8178691c42"
+  ],
+  "value": 2.0
+ },
+ "bucket_id": "return_arrow",
+ "cadence_expected": "quarterly",
+ "confidence": 35,
+ "counterevidence": "Every row is the vendor's own description; the definition of continual learning varies by vendor; frontier labs may ship it without saying so, which this count would miss.",
+ "crosswalk": [
+  {
+   "bucket_id": "return_arrow",
+   "layer_id": "training_input",
+   "note": "Expert data, RL environments and continual-learning infra are the deployment\u2192invention channel; lab recoupment \u21c4 capex-to-revenue.",
+   "relation": "return_arrow",
+   "shared_indicators": [],
+   "sublayer_id": null
+  }
+ ],
+ "definition": "Distinct vendors or labs with a dated production claim on the continual-learning ladder in the trailing twelve months, each claim a row citing the vendor's own description. Derived metric cl_lab_release_claims_12m. It counts builders, not frontier labs.",
+ "derived": [
+  {
+   "as_of_date": "2025-09-12",
+   "computed_at": "2026-09-11T05:06:10.048166Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "13397ae95784cc95",
+   "input_observation_ids": [
+    "dc983a8178691c42"
+   ],
+   "metric": "cl_lab_release_claims_12m",
+   "obs_ids": [
+    "dc983a8178691c42"
+   ],
+   "value": 1.0,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2026-05-27",
+   "computed_at": "2026-09-11T05:06:10.048166Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "28720e55f7493c34",
+   "input_observation_ids": [
+    "1b7d08dbce2be548",
+    "dc983a8178691c42"
+   ],
+   "metric": "cl_lab_release_claims_12m",
+   "obs_ids": [
+    "1b7d08dbce2be548",
+    "dc983a8178691c42"
+   ],
+   "value": 2.0,
+   "value_high": null,
+   "value_low": null
+  }
+ ],
+ "direction": null,
+ "direction_rule": null,
+ "evidence": [],
+ "falsifying_band": null,
+ "fast_band": {
+  "hi": null,
+  "lo": 6.0
+ },
+ "fits": [],
+ "flow_status": null,
+ "grade": "D",
+ "id": "cl_lab_release_claims",
+ "latest": {
+  "as_of": "2026-05-27",
+  "dims": {},
+  "obs_ids": [
+   "1b7d08dbce2be548",
+   "dc983a8178691c42"
+  ],
+  "unit": "count",
+  "value": 2.0
+ },
+ "layer_id": "training_input",
+ "leading_lagging": "leading",
+ "metric": "cl_lab_release_claims_12m",
+ "metric_dims": {},
+ "n_observations": 2,
+ "name": "Vendors claiming shipped continual learning",
+ "normal_band": {
+  "hi": 3.0,
+  "lo": null
+ },
+ "override_note": null,
+ "pending": null,
+ "points": [
+  {
+   "as_of": "2025-09-12",
+   "dims": {},
+   "obs_ids": [
+    "dc983a8178691c42"
+   ],
+   "unit": "count",
+   "value": 1.0
+  },
+  {
+   "as_of": "2026-05-27",
+   "dims": {},
+   "obs_ids": [
+    "1b7d08dbce2be548",
+    "dc983a8178691c42"
+   ],
+   "unit": "count",
+   "value": 2.0
+  }
+ ],
+ "proposed_status": "emerging",
+ "proxy_types": [
+  "product",
+  "model_release"
+ ],
+ "published": true,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "continual_learning_level"
+ ],
+ "related_metrics": [],
+ "related_predictions": [],
+ "series": [],
+ "series_keys": [],
+ "sparkline": [
+  {
+   "as_of": "2025-09-12",
+   "dims": {},
+   "obs_ids": [
+    "dc983a8178691c42"
+   ],
+   "unit": "count",
+   "value": 1.0
+  },
+  {
+   "as_of": "2026-05-27",
+   "dims": {},
+   "obs_ids": [
+    "1b7d08dbce2be548",
+    "dc983a8178691c42"
+   ],
+   "unit": "count",
+   "value": 2.0
+  }
+ ],
+ "stale_as_of": null,
+ "stale_ok": true,
+ "stale_reason": "Event-driven count: it moves when a builder announces, not on a calendar.",
+ "status": "emerging",
+ "status_events": [
+  {
+   "author": "claude",
+   "created_at": "2026-09-11T04:56:30.394955Z",
+   "evidence_ids": [
+    "1b7d08dbce2be548",
+    "dc983a8178691c42"
+   ],
+   "id": "e8b228767de78009",
+   "new_conf": 35,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "Two builders claimed production continual learning in the twelve months to 27 May 2026 (Cursor's online RL for Tab, Trajectory's hourly adapters), inside the normal band, but every row is the vendor's own description (tier 7), so the status is emerging. Initial seed.",
+   "target_id": "cl_lab_release_claims",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": "post_training",
+ "tracker_interpretation": "Two builders (Cursor's online RL for Tab, Trajectory's hourly adapters) claimed production continual learning in the last twelve months.",
+ "unit": "count",
+ "unpublished_reason": null,
+ "updated_at": "2026-09-11",
+ "valve_measured": "return_arrow",
+ "why_it_matters": "The breadth behind the ladder's top rung. One vendor shipping per-customer learning is an anecdote; six is a product category."
+}

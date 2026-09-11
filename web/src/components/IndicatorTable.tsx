@@ -37,7 +37,7 @@ export function IndicatorTable({ indicators, names, obsIndex }: { indicators: Ca
           <thead><tr><th scope="col">Indicator</th><th scope="col">Bucket</th><th scope="col">Layer</th><th scope="col">Status</th><th scope="col">Conf</th><th scope="col">Grade</th><th scope="col">Latest</th><th scope="col">Obs</th></tr></thead>
           <tbody>
             {rows.map((c) => (
-              <tr key={c.id}>
+              <tr key={c.id} id={c.id} className="scroll-mt-24">
                 <td className="min-w-56">{c.published ? <Link href={`/indicators/${c.id}`} className="font-medium hover:underline underline-offset-4 decoration-grid">{c.name}</Link> : <span className="font-medium text-ink-2">{c.name}</span>}{c.published ? null : <span className="ml-2 eyebrow">unpublished</span>}{!c.published && c.unpublished_reason ? <div className="text-xs text-ink-2 mt-0.5 max-w-md">{c.unpublished_reason}</div> : null}</td>
                 <td className="text-ink-2">{names[c.bucket_id ?? ""] ?? "—"}</td>
                 <td className="text-ink-2">{names[c.layer_id ?? ""] ?? "—"}</td>

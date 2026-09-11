@@ -10,11 +10,20 @@
   ],
   "value": 2000000000.0
  },
- "bucket_id": "methods",
+ "bucket_id": "return_arrow",
  "cadence_expected": "quarterly",
  "confidence": 70,
  "counterevidence": "Press-sourced run-rate (tier 5) that is gross of payouts; one vendor; lab demand for expert data can fall as fast as it rose if synthetic data or self-play substitutes.",
- "crosswalk": [],
+ "crosswalk": [
+  {
+   "bucket_id": "return_arrow",
+   "layer_id": "training_input",
+   "note": "Expert data, RL environments and continual-learning infra are the deployment\u2192invention channel; lab recoupment \u21c4 capex-to-revenue.",
+   "relation": "return_arrow",
+   "shared_indicators": [],
+   "sublayer_id": null
+  }
+ ],
  "definition": "Gross annualised revenue run-rate of the largest expert-data vendor, Mercor, as reported in the press and by its founder; gross of the 60-70% paid out to experts.",
  "derived": [],
  "direction": null,
@@ -170,6 +179,6 @@
  "unit": "USD",
  "unpublished_reason": null,
  "updated_at": "2026-09-10",
- "valve_measured": "invention_to_product",
+ "valve_measured": "return_arrow",
  "why_it_matters": "The RL-environment and expert-data market is the input the fast scenario needs to keep scaling. A single vendor doubling to two billion gross in six months is that input arriving."
 }

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { indicatorHref } from "@/lib/format";
 import { StatusChip } from "@/components/StatusChip";
 import { Num } from "@/components/Provenance";
 import { compare, obsIndex, words } from "@/lib/data";
@@ -24,7 +25,7 @@ export default function ComparePage() {
             {rows.map((r) => (
               <tr key={r.indicator}>
                 <td>
-                  <Link href={`/indicators/${r.indicator}`} className="font-medium hover:underline">{r.card.name}</Link>
+                  <Link href={indicatorHref(r.indicator, r.card.published)} className="font-medium hover:underline">{r.card.name}</Link>
                   <div className="mt-1 flex flex-wrap items-center gap-2"><StatusChip status={r.card.published ? r.card.status : null} /><span className="text-xs"><Num p={r.card.latest} unit={r.card.unit} obsIndex={idx} /></span></div>
                 </td>
                 <td className="text-ink-2">{r.nk}<Preds items={r.nk_predictions} /></td>

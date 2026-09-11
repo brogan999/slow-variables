@@ -42,3 +42,6 @@ export function summarise(statuses: (string | null | undefined)[]): string | nul
   if (counts.length > 1 && counts[0][0] === counts[1][0]) return scored.length ? "mixed" : counts[0][1];
   return counts[0][1];
 }
+
+// Unpublished indicators have no page; link to their row on /indicators, which carries the reason.
+export const indicatorHref = (id: string, published: boolean | undefined) => (published ? `/indicators/${id}` : `/indicators#${id}`);

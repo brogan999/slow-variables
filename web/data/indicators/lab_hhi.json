@@ -1,44 +1,90 @@
 {
- "band_input": "metric:hhi_by_layer",
+ "band_input": "metric:lab_token_hhi",
  "band_rationale": null,
  "band_value": {
-  "as_of": "2026-07-31",
+  "as_of": "2026-09-10",
   "high": null,
   "low": null,
   "obs_ids": [
-   "a60353bc84a2f44a",
-   "bb43f3d481ea9fae",
-   "f68d1904eb7f0c04"
+   "063c6ccae53e9c57",
+   "137e78ad9366c5d1",
+   "1f26adb3dc0907a4",
+   "351bd73fb030046d",
+   "52da00764b0b4822",
+   "59a3a13c9f261e2c",
+   "5e91e61a6a0014b7",
+   "749f6a2c05319e25",
+   "8943b8cfbebd429e",
+   "8d1c3632ae903403",
+   "9ba3fbe69993735f",
+   "b2ed68973a1737f7",
+   "b619a3afeffa18e6",
+   "c5f9317aeaf8d6dc",
+   "ca8f6b10f9f80897",
+   "cfd3d3694243f474",
+   "e269adf2ab3c9e05",
+   "e6e212d5b66c44a7",
+   "efd67b65106b82a9"
   ],
-  "value": 0.4582342605841259
+  "value": 0.15678846535672072
  },
  "bucket_id": null,
- "cadence_expected": "monthly",
- "confidence": null,
- "counterevidence": "Shares are of businesses paying, not of dollars; Google and open-weight providers are not in Ramp's published cut.",
+ "cadence_expected": "weekly",
+ "confidence": 40,
+ "counterevidence": "OpenRouter is one router with a developer-heavy mix and only its top table is counted; enterprise buyers mostly go direct to the labs and never appear here. Ramp's letters measure a different thing (the share of US businesses paying each lab) and are not counted as a second source for this index.",
  "crosswalk": [],
- "definition": "Herfindahl index over Ramp's share of US businesses paying each lab (Anthropic, OpenAI, xAI), normalised to sum to one, monthly. Derived metric hhi_by_layer, model slice.",
+ "definition": "Herfindahl index of prompt-plus-completion tokens by lab across the models in OpenRouter's daily top table, each model counted toward the lab in its OpenRouter id, last reading each week. Derived metric lab_token_hhi. One router's traffic and the listed slice only.",
  "derived": [
   {
-   "as_of_date": "2026-07-31",
-   "computed_at": "2026-09-11T04:53:24.360794Z",
-   "dims": {
-    "layer_id": "model"
-   },
+   "as_of_date": "2026-09-10",
+   "computed_at": "2026-09-11T05:06:10.048166Z",
+   "dims": {},
    "formula_version": "1",
-   "id": "31678138bea16a9e",
+   "id": "8ecc883567fcf227",
    "input_observation_ids": [
-    "a60353bc84a2f44a",
-    "bb43f3d481ea9fae",
-    "f68d1904eb7f0c04"
+    "063c6ccae53e9c57",
+    "137e78ad9366c5d1",
+    "1f26adb3dc0907a4",
+    "351bd73fb030046d",
+    "52da00764b0b4822",
+    "59a3a13c9f261e2c",
+    "5e91e61a6a0014b7",
+    "749f6a2c05319e25",
+    "8943b8cfbebd429e",
+    "8d1c3632ae903403",
+    "9ba3fbe69993735f",
+    "b2ed68973a1737f7",
+    "b619a3afeffa18e6",
+    "c5f9317aeaf8d6dc",
+    "ca8f6b10f9f80897",
+    "cfd3d3694243f474",
+    "e269adf2ab3c9e05",
+    "e6e212d5b66c44a7",
+    "efd67b65106b82a9"
    ],
-   "metric": "hhi_by_layer",
+   "metric": "lab_token_hhi",
    "obs_ids": [
-    "a60353bc84a2f44a",
-    "bb43f3d481ea9fae",
-    "f68d1904eb7f0c04"
+    "063c6ccae53e9c57",
+    "137e78ad9366c5d1",
+    "1f26adb3dc0907a4",
+    "351bd73fb030046d",
+    "52da00764b0b4822",
+    "59a3a13c9f261e2c",
+    "5e91e61a6a0014b7",
+    "749f6a2c05319e25",
+    "8943b8cfbebd429e",
+    "8d1c3632ae903403",
+    "9ba3fbe69993735f",
+    "b2ed68973a1737f7",
+    "b619a3afeffa18e6",
+    "c5f9317aeaf8d6dc",
+    "ca8f6b10f9f80897",
+    "cfd3d3694243f474",
+    "e269adf2ab3c9e05",
+    "e6e212d5b66c44a7",
+    "efd67b65106b82a9"
    ],
-   "value": 0.4582342605841259,
+   "value": 0.15678846535672072,
    "value_high": null,
    "value_low": null
   }
@@ -48,7 +94,7 @@
   "dead_band": 0.02,
   "higher_is": "concentrating",
   "periods": 4,
-  "rationale": "Four monthly readings; under 200 points is noise."
+  "rationale": "Four weekly readings; under 0.02 in the index is table churn. Rising = routed tokens concentrating on fewer labs."
  },
  "evidence": [],
  "falsifying_band": null,
@@ -58,53 +104,80 @@
  "grade": "B",
  "id": "lab_hhi",
  "latest": {
-  "as_of": "2026-07-31",
-  "dims": {
-   "layer_id": "model"
-  },
+  "as_of": "2026-09-10",
+  "dims": {},
   "obs_ids": [
-   "a60353bc84a2f44a",
-   "bb43f3d481ea9fae",
-   "f68d1904eb7f0c04"
+   "063c6ccae53e9c57",
+   "137e78ad9366c5d1",
+   "1f26adb3dc0907a4",
+   "351bd73fb030046d",
+   "52da00764b0b4822",
+   "59a3a13c9f261e2c",
+   "5e91e61a6a0014b7",
+   "749f6a2c05319e25",
+   "8943b8cfbebd429e",
+   "8d1c3632ae903403",
+   "9ba3fbe69993735f",
+   "b2ed68973a1737f7",
+   "b619a3afeffa18e6",
+   "c5f9317aeaf8d6dc",
+   "ca8f6b10f9f80897",
+   "cfd3d3694243f474",
+   "e269adf2ab3c9e05",
+   "e6e212d5b66c44a7",
+   "efd67b65106b82a9"
   ],
   "unit": "index",
-  "value": 0.4582342605841259
+  "value": 0.15678846535672072
  },
  "layer_id": "model",
  "leading_lagging": "leading",
- "metric": "hhi_by_layer",
- "metric_dims": {
-  "layer_id": "model"
- },
- "n_observations": 3,
- "name": "Concentration of business AI spend across labs (Ramp, HHI)",
+ "metric": "lab_token_hhi",
+ "metric_dims": {},
+ "n_observations": 19,
+ "name": "Lab concentration of routed tokens (OpenRouter, HHI)",
  "normal_band": null,
  "override_note": null,
  "pending": null,
  "points": [
   {
-   "as_of": "2026-07-31",
-   "dims": {
-    "layer_id": "model"
-   },
+   "as_of": "2026-09-10",
+   "dims": {},
    "obs_ids": [
-    "a60353bc84a2f44a",
-    "bb43f3d481ea9fae",
-    "f68d1904eb7f0c04"
+    "063c6ccae53e9c57",
+    "137e78ad9366c5d1",
+    "1f26adb3dc0907a4",
+    "351bd73fb030046d",
+    "52da00764b0b4822",
+    "59a3a13c9f261e2c",
+    "5e91e61a6a0014b7",
+    "749f6a2c05319e25",
+    "8943b8cfbebd429e",
+    "8d1c3632ae903403",
+    "9ba3fbe69993735f",
+    "b2ed68973a1737f7",
+    "b619a3afeffa18e6",
+    "c5f9317aeaf8d6dc",
+    "ca8f6b10f9f80897",
+    "cfd3d3694243f474",
+    "e269adf2ab3c9e05",
+    "e6e212d5b66c44a7",
+    "efd67b65106b82a9"
    ],
    "unit": "index",
-   "value": 0.4582342605841259
+   "value": 0.15678846535672072
   }
  ],
  "proposed_status": "not_yet_measurable",
  "proxy_types": [
   "market_structure"
  ],
- "published": false,
+ "published": true,
  "related_bottlenecks": [
   71
  ],
  "related_indicators": [
+  "model_token_concentration",
   "ramp_paid_ai_adoption"
  ],
  "related_metrics": [],
@@ -113,29 +186,77 @@
  "series_keys": [],
  "sparkline": [
   {
-   "as_of": "2026-07-31",
-   "dims": {
-    "layer_id": "model"
-   },
+   "as_of": "2026-09-10",
+   "dims": {},
    "obs_ids": [
-    "a60353bc84a2f44a",
-    "bb43f3d481ea9fae",
-    "f68d1904eb7f0c04"
+    "063c6ccae53e9c57",
+    "137e78ad9366c5d1",
+    "1f26adb3dc0907a4",
+    "351bd73fb030046d",
+    "52da00764b0b4822",
+    "59a3a13c9f261e2c",
+    "5e91e61a6a0014b7",
+    "749f6a2c05319e25",
+    "8943b8cfbebd429e",
+    "8d1c3632ae903403",
+    "9ba3fbe69993735f",
+    "b2ed68973a1737f7",
+    "b619a3afeffa18e6",
+    "c5f9317aeaf8d6dc",
+    "ca8f6b10f9f80897",
+    "cfd3d3694243f474",
+    "e269adf2ab3c9e05",
+    "e6e212d5b66c44a7",
+    "efd67b65106b82a9"
    ],
    "unit": "index",
-   "value": 0.4582342605841259
+   "value": 0.15678846535672072
   }
  ],
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,
- "status": null,
- "status_events": [],
- "sublayer_id": "frontier_labs",
- "tracker_interpretation": "One monthly reading (July 2026) so far; unpublished until Ramp's next letters add the trend.",
+ "status": "not_yet_measurable",
+ "status_events": [
+  {
+   "author": "claude",
+   "created_at": "2026-09-11T04:50:50.868746Z",
+   "evidence_ids": [
+    "10009a61f008a49a",
+    "107990b4a0268d6e",
+    "10a439253fee9d51",
+    "24df0ff2189986a3",
+    "30d43fd60c6010d6",
+    "3c293fcf927c2ab7",
+    "3f94137ce93eab8c",
+    "4a68214db18c2f43",
+    "50647a882d4645b3",
+    "5e77e0b8f0667e55",
+    "6f05e3fe64d550f6",
+    "772cd0c0b2363ef8",
+    "7a264faad7eeee2d",
+    "8043c61916c8d1fa",
+    "ac73cbd7785b9603",
+    "c15504db51492a01",
+    "cf86118bc0448017",
+    "dce0f9186d4c56cd",
+    "e8aab6d6765a79ba"
+   ],
+   "id": "1844294117d3c331",
+   "new_conf": 40,
+   "new_status": "not_yet_measurable",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "First weekly reading, 9 Sep 2026: routed tokens in OpenRouter's top table spread across twelve labs, an index of 0.16, led by Tencent, Z.ai and DeepSeek ahead of OpenAI. The direction rule needs five weekly readings; not yet measurable until then. Replaces the Ramp instrument, which had one monthly reading.",
+   "target_id": "lab_hhi",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": null,
+ "tracker_interpretation": "The series starts in the week of 7 September 2026; a direction needs five weekly readings. On 9 September the top table spread across twelve labs, led by Chinese open-weight authors.",
  "unit": "index",
- "unpublished_reason": "Not yet measurable: the direction rule needs four monthly readings of Ramp's per-lab paid shares and only July 2026 exists; each month arrives as a manual row from Ramp's letter.",
- "updated_at": "2026-09-10",
+ "unpublished_reason": null,
+ "updated_at": "2026-09-11",
  "valve_measured": null,
  "why_it_matters": "Multi-homing shrinks lock-in, which shrinks the labs' bargaining share; a falling index is the leading sign of model commoditisation in buyer behaviour."
 }

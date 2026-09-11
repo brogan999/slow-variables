@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { indicatorHref } from "@/lib/format";
 import { StatusChip } from "@/components/StatusChip";
 import { bottlenecks, index, words } from "@/lib/data";
 
@@ -51,7 +52,7 @@ export default function BottlenecksPage() {
             {items.filter((i) => i.section === s.name).map((b) => (
               <li key={b.id} id={`b${b.id}`} className="panel p-3 text-sm">
                 <div><span className="text-muted tabular-nums mr-2">#{b.id}</span><span className="font-medium">{b.title}.</span> {b.text} <span className="text-xs text-muted">{b.source_codes.map((c, i) => { const e = essays.find((x) => x.code === c); return <span key={c}>{i ? ", " : ""}{e ? <a href={e.url} className="underline decoration-grid underline-offset-4" title={`${e.title} (${e.date})`}>{c}</a> : c}</span>; })}</span></div>
-                {b.related.length ? <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-1 text-xs">{b.related.map((r) => <span key={r.id}><Link href={`/indicators/${r.id}`} className="hover:underline">{r.name}</Link> <StatusChip status={r.published ? r.status : null} /></span>)}</div> : null}
+                {b.related.length ? <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-1 text-xs">{b.related.map((r) => <span key={r.id}><Link href={indicatorHref(r.id, r.published)} className="hover:underline">{r.name}</Link> <StatusChip status={r.published ? r.status : null} /></span>)}</div> : null}
               </li>
             ))}
           </ol>

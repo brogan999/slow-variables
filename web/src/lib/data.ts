@@ -60,6 +60,8 @@ export const diffusion = () => read<{
 export type MarginShare = { value: number; as_of: string; obs_ids: string[] };
 export const capture = () => read<{ as_of: string; verdict?: string; layers: (Layer & { indicators: Card[] })[]; recent_status_events: StatusEvent[]; margin_shares: Record<string, MarginShare>; margin_stack_series: { as_of: string; layer_id: string | null; value: number; obs_ids: string[] }[] }>("lens/capture.json");
 export const sources = () => read<Source[]>("sources.json");
+export type Skipped = { id: string; name: string; url: string | null; reason: string; attribution: string | null };
+export const skippedSources = () => read<Skipped[]>("skipped_sources.json");
 export const changelog = () => read<StatusEvent[]>("changelog.json");
 export const meta = () => read<{ generated_at: string }>("meta.json");
 

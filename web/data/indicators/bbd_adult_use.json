@@ -1,0 +1,596 @@
+{
+ "band_input": "fred.us_adults.any_use_share.q",
+ "band_rationale": "Normal = up to three quarters of adults four years after launch (the internet took about a decade to reach that share of US adults); fast = near-universal use at the same age. Anchors: 44.6% in the first FRED wave (Q3 2024) and 61.8% in Q2 2026.",
+ "band_value": {
+  "as_of": "2026-06-30",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "2735a60f0d2378e3"
+  ],
+  "value": 0.617802431014
+ },
+ "bucket_id": "early_adoption",
+ "cadence_expected": "quarterly",
+ "confidence": 70,
+ "counterevidence": "Self-reported \"ever used\" is a low bar; the FRED series and the paper are one survey through two publishers, not two measurements; the question wording changed between waves, so small moves are not trend.",
+ "crosswalk": [
+  {
+   "bucket_id": "early_adoption",
+   "layer_id": "adopters",
+   "note": "BTOS, BBD, Ramp and the Anthropic Economic Index are adoption from both ends.",
+   "relation": "same_valve",
+   "shared_indicators": [],
+   "sublayer_id": null
+  }
+ ],
+ "definition": "Share of US adults aged 18-64 who have ever used generative AI, from the Bick-Blandin-Deming Real-Time Population Survey (quarterly via FRED), with use in the last week shown alongside.",
+ "derived": [],
+ "direction": null,
+ "direction_rule": null,
+ "evidence": [],
+ "falsifying_band": null,
+ "fast_band": {
+  "hi": null,
+  "lo": 0.9
+ },
+ "fits": [],
+ "flow_status": null,
+ "grade": "B",
+ "id": "bbd_adult_use",
+ "latest": {
+  "as_of": "2026-06-30",
+  "disputed": false,
+  "grade": "B",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "2735a60f0d2378e3"
+  ],
+  "series_key": "fred.us_adults.any_use_share.q",
+  "subject": "us_adults",
+  "unit": "share",
+  "value": 0.617802431014
+ },
+ "layer_id": "adopters",
+ "leading_lagging": "coincident",
+ "metric": null,
+ "metric_dims": {},
+ "n_observations": 17,
+ "name": "US adults who have used generative AI",
+ "normal_band": {
+  "hi": 0.75,
+  "lo": null
+ },
+ "override_note": null,
+ "pending": null,
+ "points": [
+  {
+   "as_of": "2024-09-30",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "3cc47b2f11707296"
+   ],
+   "series_key": "fred.us_adults.any_use_share.q",
+   "subject": "us_adults",
+   "unit": "share",
+   "value": 0.44619203460400003
+  },
+  {
+   "as_of": "2024-12-31",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "b59e413110e3a8df"
+   ],
+   "series_key": "fred.us_adults.any_use_share.q",
+   "subject": "us_adults",
+   "unit": "share",
+   "value": 0.463369490715
+  },
+  {
+   "as_of": "2025-03-31",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "d741602e79d9d39c"
+   ],
+   "series_key": "fred.us_adults.any_use_share.q",
+   "subject": "us_adults",
+   "unit": "share",
+   "value": 0.479755528473
+  },
+  {
+   "as_of": "2025-06-30",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "fe29b8b27eda0659"
+   ],
+   "series_key": "fred.us_adults.any_use_share.q",
+   "subject": "us_adults",
+   "unit": "share",
+   "value": 0.518648873699
+  },
+  {
+   "as_of": "2025-09-30",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "fa5b0fa3e9ed905e"
+   ],
+   "series_key": "fred.us_adults.any_use_share.q",
+   "subject": "us_adults",
+   "unit": "share",
+   "value": 0.545391471974
+  },
+  {
+   "as_of": "2025-12-31",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "c311796d9bcf864a"
+   ],
+   "series_key": "fred.us_adults.any_use_share.q",
+   "subject": "us_adults",
+   "unit": "share",
+   "value": 0.5592530085
+  },
+  {
+   "as_of": "2026-03-31",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "84024a9f67d3d4b5"
+   ],
+   "series_key": "fred.us_adults.any_use_share.q",
+   "subject": "us_adults",
+   "unit": "share",
+   "value": 0.5786560276689999
+  },
+  {
+   "as_of": "2026-06-30",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "2735a60f0d2378e3"
+   ],
+   "series_key": "fred.us_adults.any_use_share.q",
+   "subject": "us_adults",
+   "unit": "share",
+   "value": 0.617802431014
+  }
+ ],
+ "proposed_status": "consistent_with_normal",
+ "proxy_types": [
+  "behaviour",
+  "deployment"
+ ],
+ "published": true,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "bbd_work_hours_assisted",
+  "btos_firm_use"
+ ],
+ "related_metrics": [],
+ "related_predictions": [],
+ "series": [
+  {
+   "points": [
+    {
+     "as_of": "2026-05-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "b99d50efadc55f94"
+     ],
+     "series_key": "bbd.us_adults.any_use_share.pt",
+     "subject": "us_adults",
+     "unit": "share",
+     "value": 0.618
+    }
+   ],
+   "series_key": "bbd.us_adults.any_use_share.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2024-09-30",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "3cc47b2f11707296"
+     ],
+     "series_key": "fred.us_adults.any_use_share.q",
+     "subject": "us_adults",
+     "unit": "share",
+     "value": 0.44619203460400003
+    },
+    {
+     "as_of": "2024-12-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "b59e413110e3a8df"
+     ],
+     "series_key": "fred.us_adults.any_use_share.q",
+     "subject": "us_adults",
+     "unit": "share",
+     "value": 0.463369490715
+    },
+    {
+     "as_of": "2025-03-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "d741602e79d9d39c"
+     ],
+     "series_key": "fred.us_adults.any_use_share.q",
+     "subject": "us_adults",
+     "unit": "share",
+     "value": 0.479755528473
+    },
+    {
+     "as_of": "2025-06-30",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "fe29b8b27eda0659"
+     ],
+     "series_key": "fred.us_adults.any_use_share.q",
+     "subject": "us_adults",
+     "unit": "share",
+     "value": 0.518648873699
+    },
+    {
+     "as_of": "2025-09-30",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "fa5b0fa3e9ed905e"
+     ],
+     "series_key": "fred.us_adults.any_use_share.q",
+     "subject": "us_adults",
+     "unit": "share",
+     "value": 0.545391471974
+    },
+    {
+     "as_of": "2025-12-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "c311796d9bcf864a"
+     ],
+     "series_key": "fred.us_adults.any_use_share.q",
+     "subject": "us_adults",
+     "unit": "share",
+     "value": 0.5592530085
+    },
+    {
+     "as_of": "2026-03-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "84024a9f67d3d4b5"
+     ],
+     "series_key": "fred.us_adults.any_use_share.q",
+     "subject": "us_adults",
+     "unit": "share",
+     "value": 0.5786560276689999
+    },
+    {
+     "as_of": "2026-06-30",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "2735a60f0d2378e3"
+     ],
+     "series_key": "fred.us_adults.any_use_share.q",
+     "subject": "us_adults",
+     "unit": "share",
+     "value": 0.617802431014
+    }
+   ],
+   "series_key": "fred.us_adults.any_use_share.q"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2024-09-30",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "34b5b0ad2b91ecd0"
+     ],
+     "series_key": "fred.us_adults.use_last_week_share.q",
+     "subject": "us_adults",
+     "unit": "share",
+     "value": 0.360586361958
+    },
+    {
+     "as_of": "2024-12-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "7476bc4df8f9cb13"
+     ],
+     "series_key": "fred.us_adults.use_last_week_share.q",
+     "subject": "us_adults",
+     "unit": "share",
+     "value": 0.381992366888
+    },
+    {
+     "as_of": "2025-03-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "d647dd752666ce94"
+     ],
+     "series_key": "fred.us_adults.use_last_week_share.q",
+     "subject": "us_adults",
+     "unit": "share",
+     "value": 0.40379038226200004
+    },
+    {
+     "as_of": "2025-06-30",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "b0d7d9388fd4aa91"
+     ],
+     "series_key": "fred.us_adults.use_last_week_share.q",
+     "subject": "us_adults",
+     "unit": "share",
+     "value": 0.44016587808700003
+    },
+    {
+     "as_of": "2025-09-30",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "e3a7f713710d933e"
+     ],
+     "series_key": "fred.us_adults.use_last_week_share.q",
+     "subject": "us_adults",
+     "unit": "share",
+     "value": 0.46847356460100004
+    },
+    {
+     "as_of": "2025-12-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "6361f74fff2b2c02"
+     ],
+     "series_key": "fred.us_adults.use_last_week_share.q",
+     "subject": "us_adults",
+     "unit": "share",
+     "value": 0.47806345449
+    },
+    {
+     "as_of": "2026-03-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "569584e26c1636c1"
+     ],
+     "series_key": "fred.us_adults.use_last_week_share.q",
+     "subject": "us_adults",
+     "unit": "share",
+     "value": 0.508155843682
+    },
+    {
+     "as_of": "2026-06-30",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "b99a6d5aff632b57"
+     ],
+     "series_key": "fred.us_adults.use_last_week_share.q",
+     "subject": "us_adults",
+     "unit": "share",
+     "value": 0.542087424858
+    }
+   ],
+   "series_key": "fred.us_adults.use_last_week_share.q"
+  }
+ ],
+ "series_keys": [
+  "fred.us_adults.any_use_share.q",
+  "bbd.us_adults.any_use_share.pt",
+  "fred.us_adults.use_last_week_share.q"
+ ],
+ "sparkline": [
+  {
+   "as_of": "2024-09-30",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "3cc47b2f11707296"
+   ],
+   "series_key": "fred.us_adults.any_use_share.q",
+   "subject": "us_adults",
+   "unit": "share",
+   "value": 0.44619203460400003
+  },
+  {
+   "as_of": "2024-12-31",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "b59e413110e3a8df"
+   ],
+   "series_key": "fred.us_adults.any_use_share.q",
+   "subject": "us_adults",
+   "unit": "share",
+   "value": 0.463369490715
+  },
+  {
+   "as_of": "2025-03-31",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "d741602e79d9d39c"
+   ],
+   "series_key": "fred.us_adults.any_use_share.q",
+   "subject": "us_adults",
+   "unit": "share",
+   "value": 0.479755528473
+  },
+  {
+   "as_of": "2025-06-30",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "fe29b8b27eda0659"
+   ],
+   "series_key": "fred.us_adults.any_use_share.q",
+   "subject": "us_adults",
+   "unit": "share",
+   "value": 0.518648873699
+  },
+  {
+   "as_of": "2025-09-30",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "fa5b0fa3e9ed905e"
+   ],
+   "series_key": "fred.us_adults.any_use_share.q",
+   "subject": "us_adults",
+   "unit": "share",
+   "value": 0.545391471974
+  },
+  {
+   "as_of": "2025-12-31",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "c311796d9bcf864a"
+   ],
+   "series_key": "fred.us_adults.any_use_share.q",
+   "subject": "us_adults",
+   "unit": "share",
+   "value": 0.5592530085
+  },
+  {
+   "as_of": "2026-03-31",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "84024a9f67d3d4b5"
+   ],
+   "series_key": "fred.us_adults.any_use_share.q",
+   "subject": "us_adults",
+   "unit": "share",
+   "value": 0.5786560276689999
+  },
+  {
+   "as_of": "2026-06-30",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "2735a60f0d2378e3"
+   ],
+   "series_key": "fred.us_adults.any_use_share.q",
+   "subject": "us_adults",
+   "unit": "share",
+   "value": 0.617802431014
+  }
+ ],
+ "stale_as_of": null,
+ "stale_ok": false,
+ "stale_reason": null,
+ "status": "consistent_with_normal",
+ "status_events": [
+  {
+   "author": "evaluate",
+   "created_at": "2026-09-11T04:56:30.353103Z",
+   "evidence_ids": [
+    "2735a60f0d2378e3"
+   ],
+   "id": "ccc076564dc0c530",
+   "new_conf": 70,
+   "new_status": "consistent_with_normal",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "Evaluator: 61.8% (FRED (Federal Reserve Economic Data), 2026-06-30) is inside the consistent band (hi=75.0%). Auto-reason; band rationale: Normal = up to three quarters of adults four years after launch (the internet took about a decade to reach that share of US adults); fast = near-universal use at the same age. Anchors: 44.6% in the first FRED wave (Q3 2024) and 61.8% in Q2 2026.",
+   "target_id": "bbd_adult_use",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": null,
+ "tracker_interpretation": "Breadth is rising by about ten points a year and sits inside the normal band; the paper's shallow-depth finding (hours assisted) is the other half of the picture.",
+ "unit": "share",
+ "unpublished_reason": null,
+ "updated_at": "2026-09-11",
+ "valve_measured": "product_to_adoption",
+ "why_it_matters": "The extensive margin. The paper expects breadth to move fast and depth to lag; this is the breadth half of that claim, read against hours assisted."
+}

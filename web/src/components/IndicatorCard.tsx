@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { indicatorHref } from "@/lib/format";
 import type { Card } from "@/lib/data";
 import { Num } from "./Provenance";
 import { ConfidenceDial } from "./ConfidenceDial";
@@ -9,7 +10,7 @@ export function IndicatorCard({ c, obsIndex }: { c: Card; obsIndex: Record<strin
   return (
     <div className="panel p-4 flex flex-col gap-2.5">
       <div className="flex items-start justify-between gap-2">
-        <Link href={`/indicators/${c.id}`} className="font-medium leading-snug hover:underline underline-offset-4 decoration-grid">{c.name}</Link>
+        <Link href={indicatorHref(c.id, c.published)} className="font-medium leading-snug hover:underline underline-offset-4 decoration-grid">{c.name}</Link>
         <Grade grade={c.grade} />
       </div>
       <div className="flex flex-wrap items-center gap-2 text-xs text-ink-2">

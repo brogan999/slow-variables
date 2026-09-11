@@ -377,13 +377,14 @@ metrics:
     grain: [as_of_date]
     unit: count
     lead_lag: coincident
-    formula_version: 1
+    formula_version: 2
     inputs: ["evidence.safety_brake_events.for.pt"]
     caveats: Only events with a fetched, verbatim announcement count; labs announce brakes selectively, so the count is a floor; statements of intent are recorded as context and excluded.
     sql: |
-      WITH ev AS (SELECT as_of_date, id FROM observations WHERE series_key = 'evidence.safety_brake_events.for.pt')
-      SELECT a.as_of_date, count(*)::DOUBLE AS value, list(b.id ORDER BY b.id) AS obs_ids
-      FROM ev a JOIN ev b ON b.as_of_date <= a.as_of_date AND b.as_of_date > a.as_of_date - INTERVAL 12 MONTH GROUP BY 1
+      WITH ev AS (SELECT as_of_date, id FROM observations WHERE series_key = 'evidence.safety_brake_events.for.pt'),
+      d AS (SELECT DISTINCT as_of_date FROM ev)
+      SELECT d.as_of_date, count(*)::DOUBLE AS value, list(ev.id ORDER BY ev.id) AS obs_ids
+      FROM d JOIN ev ON ev.as_of_date <= d.as_of_date AND ev.as_of_date > d.as_of_date - INTERVAL 12 MONTH GROUP BY 1
   training_compute_doubling_days:
     description: Log-linear fit of frontier models' training compute against publication date, 2020 onward; doubling time in days with a 95% CI (Epoch's frontier table).
     rationale: The invention-stage speed limit the brief tracks as epoch_training_compute_growth (4-5x a year in Epoch's own reading).
@@ -559,18 +560,37 @@ metrics:
       SELECT max(as_of_date) AS as_of_date, count(DISTINCT subject) AS value, list(id) AS obs_ids
       FROM observations WHERE series_key LIKE '%.first_llm_device_clearance.pt'
   model_token_hhi_top10:
-    description: Herfindahl index of prompt-plus-completion tokens across the models in OpenRouter's daily top table (sum of squared shares within the listed slice).
+    description: Herfindahl index of prompt-plus-completion tokens across the models in OpenRouter's daily top table (sum of squared shares within the listed slice), the last reading in each week.
     rationale: Router traffic is the only public, daily, cross-vendor usage signal; concentration in it is the model layer's HHI from the demand side.
+    grain: [as_of_date]
+    unit: index
+    lead_lag: coincident
+    formula_version: 2
+    inputs: ["openrouter_rankings.*.tokens.d"]
+    caveats: Only the models OpenRouter lists that day (its top table) are in the denominator, so the index is an upper bound on market concentration and shifts when the table's length changes; one router, not the market; weekly so the direction rule's four periods are four weeks.
+    sql: |
+      WITH t AS (SELECT as_of_date, id, value_numeric AS v, sum(value_numeric) OVER (PARTITION BY as_of_date) AS tot
+                 FROM observations WHERE series_key LIKE 'openrouter_rankings.%.tokens.d' AND value_numeric > 0),
+      d AS (SELECT as_of_date, sum((v / tot) * (v / tot)) AS value, list(id) AS obs_ids FROM t GROUP BY as_of_date HAVING count(*) >= 5)
+      SELECT * FROM d QUALIFY as_of_date = max(as_of_date) OVER (PARTITION BY date_trunc('week', as_of_date))
+  lab_token_hhi:
+    description: Herfindahl index of routed tokens by lab - models in OpenRouter's daily top table grouped by the author prefix of their OpenRouter id (meta-llama counted as meta, qwen as alibaba), sum of squared lab shares, the last reading in each week.
+    rationale: Concentration by lab rather than by model is the bargaining question - a lab with three popular models holds one position, not three.
     grain: [as_of_date]
     unit: index
     lead_lag: coincident
     formula_version: 1
     inputs: ["openrouter_rankings.*.tokens.d"]
-    caveats: Only the models OpenRouter lists that day (its top table) are in the denominator, so the index is an upper bound on market concentration and shifts when the table's length changes; one router, not the market.
+    caveats: One router with a developer-heavy mix; only the day's listed models; an open-weight model served by many providers counts toward its author; enterprise traffic that goes direct to the labs never appears.
     sql: |
-      WITH t AS (SELECT as_of_date, id, value_numeric AS v, sum(value_numeric) OVER (PARTITION BY as_of_date) AS tot
-                 FROM observations WHERE series_key LIKE 'openrouter_rankings.%.tokens.d' AND value_numeric > 0)
-      SELECT as_of_date, sum((v / tot) * (v / tot)) AS value, list(id) AS obs_ids FROM t GROUP BY as_of_date HAVING count(*) >= 5
+      WITH t AS (SELECT as_of_date, id, value_numeric AS v,
+                        CASE split_part(raw_snippet, '/', 1) WHEN 'meta-llama' THEN 'meta' WHEN 'qwen' THEN 'alibaba'
+                             ELSE split_part(raw_snippet, '/', 1) END AS lab
+                 FROM observations WHERE series_key LIKE 'openrouter_rankings.%.tokens.d' AND value_numeric > 0),
+      l AS (SELECT as_of_date, lab, sum(v) AS v, count(*) AS n, list(id) AS ids FROM t GROUP BY 1, 2),
+      sh AS (SELECT *, v / sum(v) OVER (PARTITION BY as_of_date) AS s FROM l),
+      d AS (SELECT as_of_date, sum(s * s) AS value, flatten(list(ids)) AS obs_ids FROM sh GROUP BY 1 HAVING sum(n) >= 5)
+      SELECT * FROM d QUALIFY as_of_date = max(as_of_date) OVER (PARTITION BY date_trunc('week', as_of_date))
   aa_frontier_intelligence_index:
     description: Highest Artificial Analysis Intelligence Index among models released on or before each date on which a new record was set (index rows are dated by model release).
     rationale: An independent, frequently refreshed capability axis to set beside METR's horizon.
@@ -656,3 +676,53 @@ metrics:
       SELECT as_of_date, subject AS entity, avg(value_numeric) AS value, list(id) AS obs_ids
       FROM observations WHERE series_key LIKE 'sec_filing.%.debt_facility_rate_%.pt' AND value_numeric IS NOT NULL
       GROUP BY 1, 2
+  cl_lab_release_claims_12m:
+    description: Distinct vendors or labs with a dated production claim on the continual-learning ladder (a `cl_ladder.*.rung.pt` row citing their own description) in the trailing twelve months, at each claim date.
+    rationale: Appendix E's release-claims sub-metric; the count of builders shipping systems they call continual learning is the breadth behind the ladder's top rung.
+    grain: [as_of_date]
+    unit: count
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["cl_ladder.*.rung.pt"]
+    caveats: Every row is self-described (tier 7); research results are kept off; a vendor counts once however many posts it publishes.
+    sql: |
+      WITH ev AS (SELECT as_of_date, subject, id FROM observations WHERE series_key LIKE 'cl_ladder.%.rung.pt'),
+      d AS (SELECT DISTINCT as_of_date FROM ev)
+      SELECT d.as_of_date, count(DISTINCT ev.subject)::DOUBLE AS value, list(ev.id ORDER BY ev.id) AS obs_ids
+      FROM d JOIN ev ON ev.as_of_date <= d.as_of_date AND ev.as_of_date > d.as_of_date - INTERVAL 12 MONTH GROUP BY 1
+  top3_concentration:
+    description: Share of tracked primary-round dollars raised by the three largest raisers over the trailing four calendar quarters, across the whole seed list.
+    rationale: P1's venture concentration measure; read beside frontier_share_of_venture_dollars, which it equals while the top three are the frontier labs.
+    grain: [as_of_date]
+    unit: share
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["formd.*.amount_sold_usd.pt", "epoch.*.round_equity_usd.pt"]
+    caveats: Denominator is the seed list, not the market; per sub-layer it is meaningless on current coverage (one to four rounds per cell), so it is computed stack-wide only.
+    sql: |
+      -- ponytail: the f/e/rounds/m CTEs are copied from frontier_share_of_venture_dollars; a shared view when a third venture metric needs them
+      WITH f AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'formd.%.amount_sold_usd.pt' AND entity_id IS NOT NULL),
+      e AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'epoch.%.round_equity_usd.pt' AND entity_id IS NOT NULL),
+      rounds AS (SELECT * FROM f UNION ALL SELECT * FROM e WHERE NOT EXISTS (SELECT 1 FROM f WHERE f.entity_id = e.entity_id AND date_trunc('quarter', f.as_of_date) = date_trunc('quarter', e.as_of_date))),
+      m AS (SELECT entity_id FROM entity_membership WHERE is_primary AND sublayer_id IS NOT NULL),
+      q AS (SELECT date_trunc('quarter', r.as_of_date) AS cq, r.entity_id, r.v, r.id FROM rounds r JOIN m USING (entity_id) WHERE r.as_of_date >= DATE '2023-01-01'),
+      qs AS (SELECT DISTINCT cq FROM q),
+      win AS (SELECT qs.cq, q.entity_id, sum(q.v) AS v, list(q.id) AS ids FROM qs JOIN q ON q.cq > qs.cq - INTERVAL 12 MONTH AND q.cq <= qs.cq GROUP BY 1, 2),
+      rk AS (SELECT *, row_number() OVER (PARTITION BY cq ORDER BY v DESC, entity_id) AS r, sum(v) OVER (PARTITION BY cq) AS tot FROM win)
+      SELECT (cq + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE AS as_of_date, sum(v) FILTER (WHERE r <= 3) / max(tot) AS value,
+             flatten(list(ids) FILTER (WHERE r <= 3)) AS obs_ids
+      FROM rk GROUP BY cq HAVING max(tot) > 0
+  lab_procurement_signal_4q:
+    description: "The labs' enter bell (P1 §6.3): the sum over training-input vendors of each vendor's best procurement score in the trailing four quarters, at quarter ends. Rubric per vendor: 0 no public evidence; 1 a lab named as customer; 2 revenue or growth attributed to lab demand; 3 a disclosed lab contract or commitment of at least $100M, in a filing or confirmed by both parties."
+    rationale: Labs buying from the layer below them is the entry signal for that layer's economics; read with lab_vertical_integration_events_4q, the exit bell when they buy the vendors outright.
+    grain: [as_of_date]
+    unit: score
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["procurement.*.signal.pt"]
+    caveats: Scores are hand-coded from quoted text against the rubric (each row's coding note says how); only vendors with a fetched, verbatim source count, so the sum is a floor; lab compute commitments are on the circular ledger and excluded here.
+    sql: |
+      WITH s AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'procurement.%.signal.pt' AND entity_id IS NOT NULL),
+      qe AS (SELECT DISTINCT (date_trunc('quarter', as_of_date) + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE AS q FROM s),
+      best AS (SELECT qe.q, s.entity_id, max(s.v) AS v, list(s.id) AS ids FROM qe JOIN s ON s.as_of_date <= qe.q AND s.as_of_date > qe.q - INTERVAL 12 MONTH GROUP BY 1, 2)
+      SELECT q AS as_of_date, sum(v) AS value, flatten(list(ids)) AS obs_ids FROM best GROUP BY q

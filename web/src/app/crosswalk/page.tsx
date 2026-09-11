@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { indicatorHref } from "@/lib/format";
 import { index, words } from "@/lib/data";
 
 export const metadata = { title: "Crosswalk" };
@@ -19,7 +20,7 @@ export default function CrosswalkPage() {
                 <td className="text-ink-2 whitespace-nowrap">{words(c.relation)}</td>
                 <td><Link href={`/layers/${c.layer_id}`} className="font-medium hover:underline">{layers.find((l) => l.id === c.layer_id)?.name}</Link>{c.sublayer_id ? <span className="text-muted"> / {sublayers.find((s) => s.id === c.sublayer_id)?.name}</span> : null}</td>
                 <td className="text-ink-2">{c.note}</td>
-                <td><span className="flex flex-wrap gap-x-2">{c.shared_indicators.map((s) => <Link key={s} href={`/indicators/${s}`} className="hover:underline">{indicators.find((i) => i.id === s)?.name ?? s}</Link>)}</span></td>
+                <td><span className="flex flex-wrap gap-x-2">{c.shared_indicators.map((s) => <Link key={s} href={indicatorHref(s, indicators.find((i) => i.id === s)?.published)} className="hover:underline">{indicators.find((i) => i.id === s)?.name ?? s}</Link>)}</span></td>
               </tr>
             ))}
           </tbody>

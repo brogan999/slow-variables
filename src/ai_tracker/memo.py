@@ -238,7 +238,10 @@ def prose(f: dict[str, Any], tools: Tools) -> tuple[str | None, str | None]:
         {"role": "user", "content": PROMPT.format(since=f["since"], facts=json.dumps(f, default=str)[:60000])}
     ]
     for attempt in range(2):
-        r = client.messages.create(model=MODEL, max_tokens=1800, messages=msgs)
+        try:
+            r = client.messages.create(model=MODEL, max_tokens=1800, messages=msgs)
+        except anthropic.APIError as e:  # an outage or a spent limit still yields a memo PR (the digest)
+            return None, f"model error ({type(e).__name__})"
         text = "".join(b.text for b in r.content if b.type == "text")
         res = check(text, tools.records(CITE.findall(text)))
         if res.ok:
@@ -296,3 +299,56 @@ def write(store: st.Store, today: date | None = None, since: date | None = None)
         "---\n" + yaml.safe_dump(fm, sort_keys=False, allow_unicode=True) + "---\n\n" + body.strip() + "\n"
     )
     return p
+
+
+def ops_notes(store: st.Store, today: date | None = None) -> str:
+    """Operator notes for the memo PR body: what needs the maintainer this week. Everything here is already
+    public in the repo or on /sources; nothing is written to docs/memos."""
+    from .cli import attention
+
+    today = today or date.today()
+    week = [fl for fl in store.fetchlog if (today - fl.finished_at.date()).days < 7]
+    memo = (load_memos() or [{}])[-1]
+    lead = (
+        [
+            f"- The memo fell back to the digest: {memo['fallback_reason']}. If that is a model error, Ask is down too."
+        ]
+        if memo.get("date") == today.isoformat() and memo.get("fallback_reason")
+        else []
+    )
+    last = max((fl.finished_at for fl in store.fetchlog), default=None)
+    lead.append(f"- Last ingest on main: {last.date() if last else 'never'}.")
+    blank = [
+        p for p in st.read_jsonl(st.DATA / "proposed_status_events.jsonl") if not p.get("reason", "").strip()
+    ]
+    layout = sorted({fl.source_id for fl in week if not fl.ok and "LayoutChanged" in (fl.error or "")})
+    nights: dict[str, set[date]] = {}
+    for fl in week:
+        if (
+            not fl.ok and fl.source_id not in layout and "not set" not in (fl.error or "")
+        ):  # a missing key is a choice
+            nights.setdefault(fl.source_id, set()).add(fl.finished_at.date())
+    health = [store._source_health(s) for s in store.seed.sources]
+    sections = {
+        "Band crossings waiting for a reason (tell Claude, or write it on main)": [
+            f"- `{p['target_id']}`: {(p.get('old_status') or 'unscored').replace('_', ' ')} → "
+            f"{p['new_status'].replace('_', ' ')}, waiting {(today - date.fromisoformat(p['created_at'][:10])).days} days"
+            for p in blank
+        ],
+        "Attention from check": [f"- {n}" for n in attention(store) if "waited" not in n],
+        "Layout changes this week (an issue is open for each)": [f"- `{s}`" for s in layout],
+        "Connectors failing 3+ of the last 7 nights": [
+            f"- `{k}`: {len(v)} nights" for k, v in sorted(nights.items()) if len(v) >= 3
+        ],
+        "Sources stale or never fetched": [
+            f"- `{h['id']}`: {h['health']}, last success {str(h['last_success_at'] or 'never')[:10]}"
+            for h in health
+            if h["health"] != "ok" and "not set" not in (h["last_error"] or "")
+        ],
+    }
+    return (
+        "## Operator notes\n\n"
+        + "\n".join(lead)
+        + "\n"
+        + "".join(f"\n**{k}**\n\n" + "\n".join(v or ["- none"]) + "\n" for k, v in sections.items())
+    )

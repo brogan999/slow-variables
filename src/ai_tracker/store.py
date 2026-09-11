@@ -29,6 +29,7 @@ from .schema import (
     Observation,
     Prediction,
     Review,
+    SkippedSource,
     Source,
     StatusEvent,
     Sublayer,
@@ -97,6 +98,7 @@ class Seed:
     essays: list[Essay] = field(default_factory=list)
     sections: list[dict[str, str]] = field(default_factory=list)
     compare: list[CompareRow] = field(default_factory=list)
+    skipped: list[SkippedSource] = field(default_factory=list)
 
     @classmethod
     def load(cls, root: Path = SEED) -> Seed:
@@ -127,6 +129,10 @@ class Seed:
             [Essay(**r) for r in bn.get("essays", [])],
             bn.get("sections", []),
             [CompareRow(**r) for r in cmp_.get("rows", [])],
+            [
+                SkippedSource(**r)
+                for r in yaml.safe_load((root / "sources.yaml").read_text()).get("skipped") or []
+            ],
         )
 
 
@@ -607,6 +613,7 @@ class Store:
         _write(out / "compare.json", self._compare(cards))
         _write(out / "thesis.json", read_jsonl(DATA / "thesis.jsonl"))
         _write(out / "sources.json", [self._source_health(s) for s in self.seed.sources])
+        _write(out / "skipped_sources.json", [dump(s) for s in self.seed.skipped])
         _write(
             out / "changelog.json",
             [dump(e) for e in sorted(self.events, key=lambda e: e.created_at, reverse=True)],
@@ -919,7 +926,10 @@ class Store:
         return out
 
     def _source_health(self, s: Source) -> dict[str, Any]:
-        logs = sorted((fl for fl in self.fetchlog if fl.source_id == s.id), key=lambda fl: fl.finished_at)
+        own = [fl for fl in self.fetchlog if fl.source_id == s.id]
+        if not own and s.connector == "feeds":  # one connector fetches every watched feed under its own id
+            own = [fl for fl in self.fetchlog if fl.source_id == "feeds"]
+        logs = sorted(own, key=lambda fl: fl.finished_at)
         last_ok = next((fl for fl in reversed(logs) if fl.ok), None)
         if not last_ok:
             row = self.con.execute(

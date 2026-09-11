@@ -10,7 +10,7 @@ primary_region = "sjc"
 [http_service]
   internal_port = 8080
   force_https = true
-  auto_stop_machines = "stop"
+  auto_stop_machines = "suspend"  # memory, and the daily spend ledger, survive idling; a deploy resets it
   auto_start_machines = true
   min_machines_running = 0
 

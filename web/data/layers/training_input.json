@@ -14,6 +14,44 @@
  "id": "training_input",
  "indicators": [
   {
+   "bucket_id": null,
+   "confidence": 30,
+   "grade": "C",
+   "id": "lab_procurement_signal",
+   "latest": {
+    "as_of": "2026-06-30",
+    "dims": {},
+    "obs_ids": [
+     "6ba3229c63091f93"
+    ],
+    "unit": "score",
+    "value": 2.0
+   },
+   "layer_id": "training_input",
+   "leading_lagging": "leading",
+   "n_observations": 1,
+   "name": "Labs buying from the training-input layer (enter bell)",
+   "pending": null,
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2026-06-30",
+     "dims": {},
+     "obs_ids": [
+      "6ba3229c63091f93"
+     ],
+     "unit": "score",
+     "value": 2.0
+    }
+   ],
+   "stale_as_of": null,
+   "stale_reason": null,
+   "status": "not_yet_measurable",
+   "unit": "score",
+   "unpublished_reason": null,
+   "valve_measured": null
+  },
+  {
    "bucket_id": "methods",
    "confidence": 40,
    "grade": "B",
@@ -159,7 +197,7 @@
    "valve_measured": "return_arrow"
   },
   {
-   "bucket_id": "methods",
+   "bucket_id": "return_arrow",
    "confidence": 70,
    "grade": "C",
    "id": "expert_data_market_run_rate",
@@ -204,7 +242,56 @@
    "status": "faster_than_normal",
    "unit": "USD",
    "unpublished_reason": null,
-   "valve_measured": "invention_to_product"
+   "valve_measured": "return_arrow"
+  },
+  {
+   "bucket_id": "return_arrow",
+   "confidence": 35,
+   "grade": "D",
+   "id": "cl_lab_release_claims",
+   "latest": {
+    "as_of": "2026-05-27",
+    "dims": {},
+    "obs_ids": [
+     "1b7d08dbce2be548",
+     "dc983a8178691c42"
+    ],
+    "unit": "count",
+    "value": 2.0
+   },
+   "layer_id": "training_input",
+   "leading_lagging": "leading",
+   "n_observations": 2,
+   "name": "Vendors claiming shipped continual learning",
+   "pending": null,
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2025-09-12",
+     "dims": {},
+     "obs_ids": [
+      "dc983a8178691c42"
+     ],
+     "unit": "count",
+     "value": 1.0
+    },
+    {
+     "as_of": "2026-05-27",
+     "dims": {},
+     "obs_ids": [
+      "1b7d08dbce2be548",
+      "dc983a8178691c42"
+     ],
+     "unit": "count",
+     "value": 2.0
+    }
+   ],
+   "stale_as_of": null,
+   "stale_reason": "Event-driven count: it moves when a builder announces, not on a calendar.",
+   "status": "emerging",
+   "unit": "count",
+   "unpublished_reason": null,
+   "valve_measured": "return_arrow"
   }
  ],
  "name": "Training input",

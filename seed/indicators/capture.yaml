@@ -224,27 +224,24 @@ indicators:
     published: true
     updated_at: 2026-09-10
   - id: lab_hhi
-    name: Concentration of business AI spend across labs (Ramp, HHI)
-    definition: Herfindahl index over Ramp's share of US businesses paying each lab (Anthropic, OpenAI, xAI), normalised to sum to one, monthly. Derived metric hhi_by_layer, model slice.
+    name: Lab concentration of routed tokens (OpenRouter, HHI)
+    definition: Herfindahl index of prompt-plus-completion tokens by lab across the models in OpenRouter's daily top table, each model counted toward the lab in its OpenRouter id, last reading each week. Derived metric lab_token_hhi. One router's traffic and the listed slice only.
     why_it_matters: Multi-homing shrinks lock-in, which shrinks the labs' bargaining share; a falling index is the leading sign of model commoditisation in buyer behaviour.
     proxy_types: [market_structure]
     unit: index
-    cadence_expected: monthly
-    metric: hhi_by_layer
-    metric_dims: {layer_id: model}
-    band_input: "metric:hhi_by_layer"
+    cadence_expected: weekly
+    metric: lab_token_hhi
+    band_input: "metric:lab_token_hhi"
     layer_id: model
-    sublayer_id: frontier_labs
-    direction_rule: {periods: 4, dead_band: 0.02, higher_is: concentrating, rationale: "Four monthly readings; under 200 points is noise."}
+    direction_rule: {periods: 4, dead_band: 0.02, higher_is: concentrating, rationale: "Four weekly readings; under 0.02 in the index is table churn. Rising = routed tokens concentrating on fewer labs."}
     leading_lagging: leading
-    tracker_interpretation: One monthly reading (July 2026) so far; unpublished until Ramp's next letters add the trend.
-    counterevidence: Shares are of businesses paying, not of dollars; Google and open-weight providers are not in Ramp's published cut.
+    tracker_interpretation: The series starts in the week of 7 September 2026; a direction needs five weekly readings. On 9 September the top table spread across twelve labs, led by Chinese open-weight authors.
+    counterevidence: OpenRouter is one router with a developer-heavy mix and only its top table is counted; enterprise buyers mostly go direct to the labs and never appear here. Ramp's letters measure a different thing (the share of US businesses paying each lab) and are not counted as a second source for this index.
     confidence: 40
     proposed_status: not_yet_measurable
-    related_indicators: [ramp_paid_ai_adoption]
-    unpublished_reason: "Not yet measurable: the direction rule needs four monthly readings of Ramp's per-lab paid shares and only July 2026 exists; each month arrives as a manual row from Ramp's letter."
-    published: false
-    updated_at: 2026-09-10
+    related_indicators: [model_token_concentration, ramp_paid_ai_adoption]
+    published: true
+    updated_at: 2026-09-11
   - id: saas_multiples
     name: Public cloud software valuation multiples (Clouded Judgement)
     definition: Median enterprise value to next-twelve-months revenue across public cloud software companies, weekly, as computed by Jamin Ball's Clouded Judgement; the top-five median is tracked alongside.
@@ -262,8 +259,9 @@ indicators:
     confidence: 50
     proposed_status: emerging
     related_indicators: [enterprise_spend_by_layer]
-    published: true
-    updated_at: 2026-09-10
+    unpublished_reason: "Cannot refresh unattended: Clouded Judgement's Substack feed refuses the nightly's cloud fetches (HTTP 403 on every run since 10 Sep 2026), so the weekly series would sit stale; the history stays on /series, and the indicator publishes again if a fetchable copy of the weekly table appears."
+    published: false
+    updated_at: 2026-09-11
   - id: model_price_per_horizon_hour
     name: Price per unit of capability (cheapest METR-hour on OpenRouter)
     definition: For each price date, the lowest OpenRouter prompt price (USD per million tokens) divided by the model's latest METR 50% time horizon in hours, across models present in both datasets. Derived metric frontier_price_per_horizon_hour.
@@ -694,3 +692,112 @@ indicators:
     related_indicators: [lab_hhi, model_price_per_horizon_hour]
     published: true
     updated_at: 2026-09-10
+  - id: lab_procurement_signal
+    name: Labs buying from the training-input layer (enter bell)
+    definition: "Sum over training-input vendors of each vendor's best procurement score in the trailing four quarters, at quarter ends. Rubric: 1 a lab named as customer; 2 revenue or growth attributed to lab demand; 3 a disclosed lab contract or commitment of at least $100M. Derived metric lab_procurement_signal_4q."
+    why_it_matters: "P1's enter bell: when the labs start buying from the layer below them, that layer's economics turn; read with the exit bell, when they buy the vendors outright."
+    proxy_types: [capital_flow, market_structure]
+    unit: score
+    cadence_expected: quarterly
+    series_keys: ["procurement.*.signal.pt"]
+    metric: lab_procurement_signal_4q
+    band_input: "metric:lab_procurement_signal_4q"
+    layer_id: training_input
+    direction_rule: {periods: 4, dead_band: 1, higher_is: concentrating, rationale: "Four quarters; a one-point move is one vendor's single disclosure. Rising = the labs buying more from the training-input layer."}
+    leading_lagging: leading
+    tracker_interpretation: One scored vendor so far (Mercor, revenue attributed to lab demand in June 2026); the sum is a floor until more vendors have a quotable source.
+    counterevidence: Scores are hand-coded from quoted text; vendors announce selectively and the labs rarely confirm; lab compute commitments are on the circular ledger and excluded here, so the bell reads data and environments, not compute.
+    confidence: 30
+    proposed_status: not_yet_measurable
+    related_indicators: [lab_vertical_integration_exit_bell, expert_data_market_run_rate]
+    published: true
+    updated_at: 2026-09-11
+  - id: nvidia_5y_cds_bps
+    name: Nvidia five-year credit default swap spread
+    definition: Five-year CDS spread on Nvidia debt, in basis points; the stress barometer for the circular-financing ledger (Appendix C).
+    why_it_matters: The market's price of the chance that the compute layer's counterparties cannot pay.
+    proxy_types: [price]
+    unit: bps
+    cadence_expected: quarterly
+    series_keys: ["markets.nvidia.cds_5y_bps.pt"]
+    layer_id: compute_physical
+    sublayer_id: semis
+    leading_lagging: leading
+    tracker_interpretation: One press-quoted reading sits on the circular-financing ledger.
+    confidence: 20
+    unpublished_reason: "Not measurable as a series from free sources: five-year CDS quotes come from ICE and Bloomberg terminals; the one free reading is a press-quoted figure on the circular-financing ledger, and a direction rule needs quarterly prints."
+    published: false
+    updated_at: 2026-09-11
+  - id: valuation_multiple_by_layer
+    name: Valuation to revenue by layer
+    definition: Enterprise value (public) or post-money (private) divided by revenue or run-rate, per layer (Appendix C, P1 §6.1).
+    why_it_matters: Where the market expects the rent to sit.
+    proxy_types: [market_structure, price]
+    unit: ratio
+    cadence_expected: quarterly
+    layer_id: model
+    leading_lagging: leading
+    tracker_interpretation: The model layer's version is lab_valuation_to_run_rate.
+    confidence: 20
+    unpublished_reason: "Not measurable across layers from free sources: Epoch's post-money and run-rate rows cover model-layer companies only, so a by-layer multiple collapses to lab_valuation_to_run_rate; application- and infrastructure-layer private multiples need Sacra or PitchBook revenue (paid stubs off), and public EV/revenue needs a market-value source the tracker does not ingest."
+    published: false
+    updated_at: 2026-09-11
+  - id: venture_top3_concentration
+    name: Top-three share of tracked venture dollars
+    definition: Share of tracked primary-round dollars raised by the three largest raisers over the trailing four quarters. Derived metric top3_concentration; shown on /query as a saved analysis.
+    why_it_matters: P1's concentration measure for venture flows.
+    proxy_types: [capital_flow, market_structure]
+    unit: share
+    cadence_expected: quarterly
+    metric: top3_concentration
+    layer_id: model
+    sublayer_id: frontier_labs
+    leading_lagging: leading
+    tracker_interpretation: Equal to the frontier share since the second quarter of 2025.
+    confidence: 30
+    unpublished_reason: "Identical to frontier_capital_concentration on the seed list since Q2 2025 (the top three raisers are the frontier_labs sub-layer), so a separate status would count one fact twice; it publishes when a non-frontier company enters the top three."
+    published: false
+    updated_at: 2026-09-11
+  - id: median_round_size
+    name: Median round size by sub-layer
+    definition: Median primary-round size per sub-layer per quarter (Appendix C venture measures).
+    why_it_matters: Round size is the price of entry to a sub-layer.
+    proxy_types: [capital_flow]
+    unit: USD
+    cadence_expected: quarterly
+    layer_id: model
+    leading_lagging: leading
+    tracker_interpretation: Not published.
+    confidence: 20
+    unpublished_reason: "Not meaningful on current coverage: one to four seed-list rounds per sub-layer-quarter, so a median restates the venture strip's total and count; it needs a round source with market coverage (aifunding.me is on the read-not-ingested list; PitchBook, Crunchbase and Dealroom are paid)."
+    published: false
+    updated_at: 2026-09-11
+  - id: stage_mix
+    name: Stage mix of venture rounds by sub-layer
+    definition: Share of rounds by stage (seed, early, growth) per sub-layer (Appendix C venture measures).
+    why_it_matters: A sub-layer full of seed rounds is being entered; one full of growth rounds is consolidating.
+    proxy_types: [capital_flow]
+    unit: share
+    cadence_expected: quarterly
+    layer_id: model
+    leading_lagging: leading
+    tracker_interpretation: Not published.
+    confidence: 20
+    unpublished_reason: "Not measurable from free structured data: Form D has no round or series field, and Epoch's rounds (labs only) name the stage inside a free-text label; a stage mix by sub-layer needs PitchBook, Crunchbase or Dealroom (paid stubs off)."
+    published: false
+    updated_at: 2026-09-11
+  - id: founding_to_100m_arr_quarters
+    name: Quarters from founding to $100M run-rate
+    definition: Time from founding to a $100M revenue run-rate for companies on the seed list (Appendix C venture measures).
+    why_it_matters: The speed at which new companies reach scale is the application layer's rent in motion.
+    proxy_types: [capital_flow, product]
+    unit: quarters
+    cadence_expected: quarterly
+    layer_id: deployment_application
+    leading_lagging: leading
+    tracker_interpretation: Not published.
+    confidence: 20
+    unpublished_reason: "Not measurable: seed/entities.yaml carries no founding dates, and the only run-rate series (Epoch, labs) dates a figure when the press reports it, not when the company crossed a hundred million."
+    published: false
+    updated_at: 2026-09-11
+

@@ -17,3 +17,46 @@ def test_digest_is_deterministic_and_passes_the_citation_check():
     assert body == digest(f)
     res = check(body, Tools(s).records(CITE.findall(body)))
     assert res.ok, res.failures[:5]
+
+
+def test_ops_notes_list_a_waiting_crossing(monkeypatch, tmp_path):
+    import json
+
+    from ai_tracker.memo import ops_notes
+
+    s = st.Store()
+    monkeypatch.setattr(st, "DATA", tmp_path)
+    (tmp_path / "proposed_status_events.jsonl").write_text(
+        json.dumps(
+            {
+                "target_id": "btos_firm_use",
+                "old_status": None,
+                "new_status": "faster_than_normal",
+                "reason": "",
+                "created_at": "2026-09-01T00:00:00+00:00",
+                "target_type": "indicator",
+            }
+        )
+        + "\n"
+    )
+    notes = ops_notes(s, date(2026, 9, 11))
+    assert "`btos_firm_use`: unscored → faster than normal, waiting 10 days" in notes
+    assert notes.startswith("## Operator notes") and "Last ingest on main:" in notes
+
+
+def test_a_model_error_falls_back_to_the_digest(monkeypatch):
+    import anthropic
+    import httpx
+
+    from ai_tracker import memo
+
+    class Down:
+        def __init__(self, *a, **k):
+            self.messages = self
+
+        def create(self, **k):
+            raise anthropic.APIConnectionError(request=httpx.Request("POST", "https://api.anthropic.com"))
+
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "x")
+    monkeypatch.setattr(anthropic, "Anthropic", Down)
+    assert memo.prose({"since": "2026-09-01"}, None) == (None, "model error (APIConnectionError)")

@@ -1,7 +1,7 @@
 import Link from "next/link";
 export const metadata = { title: "Methodology" };
 
-import { sources } from "@/lib/data";
+import { skippedSources, sources } from "@/lib/data";
 
 const TIERS: [string, string, string][] = [
   ["1", "benchmark", "Benchmark or independent evaluation (METR horizons, Epoch benchmarks)"],
@@ -14,7 +14,8 @@ const TIERS: [string, string, string][] = [
 ];
 
 export default function Methodology() {
-  const credits = [...new Map(sources().filter((x) => x.attribution).map((x) => [x.attribution as string, x.license])).entries()].map(([a, l]) => (l && /CC BY/i.test(l) ? `${a} (${l})` : a));
+  const registry: [string | null, string | null][] = [...sources().map((x) => [x.attribution, x.license] as [string | null, string | null]), ...skippedSources().map((x) => [x.attribution, null] as [string | null, string | null])];
+  const credits = [...new Map(registry.filter(([a]) => a) as [string, string | null][]).entries()].map(([a, l]) => (l && /CC BY/i.test(l) ? `${a} (${l})` : a));
   return (
     <article className="prose-tight max-w-[68ch] flex flex-col gap-5 text-[17px] leading-[1.65]">
       <h1 className="display text-[2.25rem] md:text-[3rem] leading-[1.05] tracking-[-0.015em]">Methodology</h1>

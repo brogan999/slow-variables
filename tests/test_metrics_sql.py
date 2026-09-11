@@ -40,3 +40,19 @@ def test_change_points_carry_unchanged_prices_forward():
         0.1 / 50,
         ["pa2", "ia"],
     )  # b's unchanged price still competes, a's new one wins
+
+
+def test_lab_token_hhi_groups_models_by_author():
+    rows = [
+        (
+            f"t{i}",
+            f"openrouter_rankings.m{i}.tokens.d",
+            f"m{i}",
+            "2026-09-09",
+            v,
+            f"{lab}/model-{i} 2026-09-09",
+        )
+        for i, (lab, v) in enumerate([("a", 40), ("a", 40), ("b", 10), ("meta-llama", 5), ("meta", 5)])
+    ]
+    ((d, v, ids),) = run("lab_token_hhi", rows)
+    assert abs(v - (0.8**2 + 0.1**2 + 0.1**2)) < 1e-9 and len(ids) == 5  # meta-llama and meta are one lab

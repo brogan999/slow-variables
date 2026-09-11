@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { indicatorHref } from "@/lib/format";
 import { ChangelogList } from "@/components/Changelog";
 import { EvidenceLog } from "@/components/EvidenceLog";
 import { StatusChip } from "@/components/StatusChip";
@@ -36,7 +37,7 @@ export default function PredictionsPage() {
                     </div>
                     <blockquote className="mt-2 border-l-2 border-grid pl-3 text-base leading-[1.6]">&ldquo;{p.claim_text}&rdquo; {p.claim_url ? <a href={p.claim_url} className="text-xs text-ink-2 underline decoration-grid underline-offset-4">source</a> : null}</blockquote>
                     <p className="mt-2 text-sm"><span className="text-muted">How we track it.</span> {p.operationalisation}</p>
-                    {p.related_indicators.length ? <p className="mt-1 text-xs text-ink-2">Indicators: {p.related_indicators.map((r) => <Link key={r} href={`/indicators/${r}`} className="hover:underline mr-2">{indicators.find((i) => i.id === r)?.name ?? r}</Link>)}</p> : null}
+                    {p.related_indicators.length ? <p className="mt-1 text-xs text-ink-2">Indicators: {p.related_indicators.map((r) => <Link key={r} href={indicatorHref(r, indicators.find((i) => i.id === r)?.published)} className="hover:underline mr-2">{indicators.find((i) => i.id === r)?.name ?? r}</Link>)}</p> : null}
                     <details className="mt-2 text-sm"><summary className="cursor-pointer text-ink-2">Counterevidence and history</summary>
                       <p className="mt-1">{p.counterevidence}</p>
                       {p.evidence.length ? <div className="mt-2"><EvidenceLog items={p.evidence} /></div> : null}

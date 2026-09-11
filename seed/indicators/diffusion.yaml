@@ -1152,8 +1152,8 @@ indicators:
     cadence_expected: quarterly
     series_keys: ["dealroom.mercor.gross_revenue_run_rate_usd.pt", "techcrunch.mercor.gross_revenue_run_rate_usd.pt"]
     band_input: dealroom.mercor.gross_revenue_run_rate_usd.pt
-    bucket_id: methods
-    valve_measured: invention_to_product
+    bucket_id: return_arrow
+    valve_measured: return_arrow
     normal_band: {hi: 1000000000}
     fast_band: {lo: 2000000000}
     band_rationale: "Normal = the largest vendor under one billion gross, the scale the data-labelling leaders reached over a decade; fast = two billion or more at a single vendor, doubling within a year. Between is `emerging`."
@@ -1215,3 +1215,177 @@ indicators:
     related_indicators: [fda_first_llm_device, state_ai_bills_introduced]
     published: true
     updated_at: 2026-09-10
+  - id: bbd_adult_use
+    name: US adults who have used generative AI
+    definition: Share of US adults aged 18-64 who have ever used generative AI, from the Bick-Blandin-Deming Real-Time Population Survey (quarterly via FRED), with use in the last week shown alongside.
+    why_it_matters: The extensive margin. The paper expects breadth to move fast and depth to lag; this is the breadth half of that claim, read against hours assisted.
+    proxy_types: [behaviour, deployment]
+    unit: share
+    cadence_expected: quarterly
+    series_keys: ["fred.us_adults.any_use_share.q", "bbd.us_adults.any_use_share.pt", "fred.us_adults.use_last_week_share.q"]
+    band_input: fred.us_adults.any_use_share.q
+    bucket_id: early_adoption
+    valve_measured: product_to_adoption
+    normal_band: {hi: 0.75}
+    fast_band: {lo: 0.9}
+    band_rationale: "Normal = up to three quarters of adults four years after launch (the internet took about a decade to reach that share of US adults); fast = near-universal use at the same age. Anchors: 44.6% in the first FRED wave (Q3 2024) and 61.8% in Q2 2026."
+    tracker_interpretation: Breadth is rising by about ten points a year and sits inside the normal band; the paper's shallow-depth finding (hours assisted) is the other half of the picture.
+    counterevidence: Self-reported "ever used" is a low bar; the FRED series and the paper are one survey through two publishers, not two measurements; the question wording changed between waves, so small moves are not trend.
+    layer_id: adopters
+    leading_lagging: coincident
+    confidence: 70
+    proposed_status: consistent_with_normal
+    related_indicators: [bbd_work_hours_assisted, btos_firm_use]
+    published: true
+    updated_at: 2026-09-11
+  - id: aei_occupation_depth_25
+    name: Occupations with a quarter of their tasks using Claude
+    definition: Share of occupations in which at least 25% of tasks appear in Claude usage, from Anthropic's Economic Index (global, per report).
+    why_it_matters: Depth across the occupational map rather than across people; whether AI use is reaching most of the work in most jobs or a narrow band of them.
+    proxy_types: [behaviour]
+    unit: share
+    cadence_expected: annual
+    series_keys: ["anthropic_ei.global.occupations_25pct_tasks_share.pt"]
+    band_input: anthropic_ei.global.occupations_25pct_tasks_share.pt
+    bucket_id: early_adoption
+    valve_measured: product_to_adoption
+    normal_band: {hi: 0.6}
+    fast_band: {lo: 0.8}
+    band_rationale: "The share only rises, so the question is how fast. Normal = under 60% of occupations with a quarter of their tasks in use four years in; fast = 80% or more. Anchor: 49% in the March 2026 report (data 5-12 February 2026)."
+    tracker_interpretation: About half of occupations clear the quarter-of-tasks mark, inside the normal band; the report restates the figure irregularly.
+    counterevidence: One provider's traffic, weighted to coding and to Claude's user base; a task counts when it appears at all, not when it is done mostly with AI; the task taxonomy (O*NET) lags new work.
+    layer_id: adopters
+    leading_lagging: coincident
+    confidence: 55
+    proposed_status: consistent_with_normal
+    related_indicators: [bbd_adult_use, exposure_vs_usage_gap]
+    published: true
+    updated_at: 2026-09-11
+  - id: bbd_work_use_weekly
+    name: US workers using generative AI for work weekly
+    definition: Share of employed US adults who used generative AI for work in the past week, Real-Time Population Survey via FRED.
+    why_it_matters: The work margin between ever-used and hours assisted.
+    proxy_types: [behaviour]
+    unit: share
+    cadence_expected: quarterly
+    series_keys: ["fred.us_workers.work_use_weekly_share.q", "bbd.us_workers.work_use_weekly_share.pt"]
+    bucket_id: early_adoption
+    valve_measured: product_to_adoption
+    layer_id: adopters
+    leading_lagging: coincident
+    tracker_interpretation: Shown on bbd_work_hours_assisted.
+    confidence: 60
+    unpublished_reason: "Folded into two published indicators: the same FRED series is shown on bbd_work_hours_assisted and is the numerator of exposure_vs_usage_gap, so a separate status would count one survey twice in the early-adoption bucket."
+    published: false
+    updated_at: 2026-09-11
+  - id: bbd_work_use_daily
+    name: US workers using generative AI for work every day
+    definition: Share of employed US adults who used generative AI for work every day, Real-Time Population Survey.
+    why_it_matters: Daily use is where depth shows up first.
+    proxy_types: [behaviour]
+    unit: share
+    cadence_expected: quarterly
+    bucket_id: early_adoption
+    valve_measured: product_to_adoption
+    layer_id: adopters
+    leading_lagging: coincident
+    tracker_interpretation: Not yet ingested.
+    confidence: 30
+    unpublished_reason: "Not yet ingested: the GenAI Adoption Tracker splits work use into every day and some days but draws it in the browser, and none of the survey's series on FRED carries it; a manual row needs a verbatim figure from the working paper."
+    published: false
+    updated_at: 2026-09-11
+  - id: cl_lab_release_claims
+    name: Vendors claiming shipped continual learning
+    definition: "Distinct vendors or labs with a dated production claim on the continual-learning ladder in the trailing twelve months, each claim a row citing the vendor's own description. Derived metric cl_lab_release_claims_12m. It counts builders, not frontier labs."
+    why_it_matters: The breadth behind the ladder's top rung. One vendor shipping per-customer learning is an anecdote; six is a product category.
+    proxy_types: [product, model_release]
+    unit: count
+    cadence_expected: quarterly
+    metric: cl_lab_release_claims_12m
+    band_input: "metric:cl_lab_release_claims_12m"
+    bucket_id: return_arrow
+    valve_measured: return_arrow
+    normal_band: {hi: 3}
+    fast_band: {lo: 6}
+    band_rationale: "Normal = up to three builders a year claiming shipped continual learning; fast = six or more, including a frontier-lab release branded continual or online learning (the ladder's L5 made observable). Every row is tier 7, so the status caps at emerging."
+    tracker_interpretation: Two builders (Cursor's online RL for Tab, Trajectory's hourly adapters) claimed production continual learning in the last twelve months.
+    counterevidence: Every row is the vendor's own description; the definition of continual learning varies by vendor; frontier labs may ship it without saying so, which this count would miss.
+    layer_id: training_input
+    sublayer_id: post_training
+    leading_lagging: leading
+    confidence: 35
+    proposed_status: emerging
+    related_indicators: [continual_learning_level]
+    published: true
+    stale_ok: true
+    stale_reason: "Event-driven count: it moves when a builder announces, not on a calendar."
+    updated_at: 2026-09-11
+  - id: cl_adapters_per_product
+    name: Per-customer adapters per product
+    definition: Number of per-customer adapters a production continual-learning system maintains (Appendix E).
+    why_it_matters: The scale at which systems learn from each customer separately.
+    proxy_types: [product]
+    unit: count
+    cadence_expected: irregular
+    bucket_id: return_arrow
+    valve_measured: return_arrow
+    layer_id: training_input
+    sublayer_id: post_training
+    leading_lagging: leading
+    tracker_interpretation: Not published.
+    confidence: 20
+    unpublished_reason: "Not measurable from public sources: Trajectory describes an adapter per customer refreshed hourly without a count, and Decagon states a share of traffic on self-trained models, not adapters."
+    published: false
+    updated_at: 2026-09-11
+  - id: cl_forgetting_retention
+    name: Retention after continual updates
+    definition: Share of prior capability a production system keeps after continual updates (Appendix E).
+    why_it_matters: Continual learning without forgetting is the hard part; retention is how to tell.
+    proxy_types: [benchmark]
+    unit: share
+    cadence_expected: irregular
+    bucket_id: return_arrow
+    valve_measured: return_arrow
+    layer_id: training_input
+    sublayer_id: post_training
+    leading_lagging: leading
+    tracker_interpretation: Not published.
+    confidence: 20
+    unpublished_reason: "Not measurable yet: no production system reports retention after updates; the research rows on the ladder report their own tasks, and no shared forgetting benchmark scores deployed systems."
+    published: false
+    updated_at: 2026-09-11
+  - id: cl_learning_curve_slope
+    name: Learning-curve slope in deployment
+    definition: Improvement per unit of deployment time for a system that learns on the job (Appendix E).
+    why_it_matters: The six-month-employee test is a slope, not a level.
+    proxy_types: [product]
+    unit: ratio
+    cadence_expected: irregular
+    bucket_id: return_arrow
+    valve_measured: return_arrow
+    layer_id: training_input
+    sublayer_id: post_training
+    leading_lagging: leading
+    tracker_interpretation: Not published.
+    confidence: 20
+    unpublished_reason: "Not measurable: the only curve on record (cl.engram_harvey.closed_book_accuracy.pt) is a research result across training steps, not lift over deployment time."
+    published: false
+    updated_at: 2026-09-11
+  - id: cl_benchmark_exists
+    name: A benchmark for learning on the job
+    definition: Whether a public benchmark scores retention and improvement across sessions, the ladder's L6 test (Appendix E).
+    why_it_matters: Without a benchmark the top rung cannot be observed, so the ladder tops out by construction.
+    proxy_types: [benchmark]
+    unit: count
+    cadence_expected: irregular
+    bucket_id: return_arrow
+    valve_measured: return_arrow
+    layer_id: training_input
+    sublayer_id: post_training
+    leading_lagging: leading
+    tracker_interpretation: Not published.
+    confidence: 20
+    unpublished_reason: "A yes/no, not a series: Epoch's CL-bench rows score learning from material supplied within one task (domain reasoning, rule application, procedure, empirical discovery), not retention across sessions, so they do not meet the L6 six-month-employee test."
+    published: false
+    updated_at: 2026-09-11
+

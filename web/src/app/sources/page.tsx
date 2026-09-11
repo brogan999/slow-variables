@@ -1,13 +1,14 @@
-import { sources } from "@/lib/data";
+import { skippedSources, sources } from "@/lib/data";
 
 export const metadata = { title: "Sources" };
 
 export default function SourcesPage() {
   const rows = sources();
+  const skipped = skippedSources();
   return (
     <div className="flex flex-col gap-4">
       <h1 className="display text-[2.25rem] md:text-[3rem] leading-[1.05] tracking-[-0.015em]">Sources</h1>
-      <p className="text-lg leading-snug text-ink-2 max-w-[60ch]">Only sources with a working connector or a fetched manual row are listed. Health comes from the fetch log, never from a hand-edited field; a source is stale when its last success is older than twice its cadence.</p>
+      <p className="text-lg leading-snug text-ink-2 max-w-[60ch]">Every source with a working connector or a fetched manual row, then the ones the briefs name that are read but not ingested, with the reason. Health comes from the fetch log, never from a hand-edited field; a source is stale when its last success is older than twice its cadence.</p>
       <div className="overflow-x-auto">
         <table className="data w-full text-sm">
           <thead><tr><th scope="col">Source</th><th scope="col">Org</th><th scope="col">Kind</th><th scope="col">Default tier</th><th scope="col">Cadence</th><th scope="col">Lens</th><th scope="col">Health</th><th scope="col">Last success</th><th scope="col">Items</th><th scope="col">Runs</th><th scope="col">Attribution and licence</th></tr></thead>
@@ -19,6 +20,21 @@ export default function SourcesPage() {
                 <td><Health h={s.health} /></td>
                 <td className="whitespace-nowrap tabular-nums">{s.last_success_at ? s.last_success_at.slice(0, 16).replace("T", " ") : "never"}</td>
                 <td className="tabular-nums">{s.items_found}</td><td className="tabular-nums">{s.runs || "—"}</td><td className="text-xs text-ink-2">{s.attribution}{s.license ? <span className="text-muted"> · {s.license}</span> : null}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <h2 id="read-not-ingested" className="display text-[1.75rem] leading-tight mt-8 border-t border-grid pt-6">Read, not ingested</h2>
+      <p className="text-sm text-ink-2 max-w-[60ch]">Named in the briefs but not a series here: episodic reports, paywalled data and directories. Each says why, and what would change that.</p>
+      <div className="overflow-x-auto">
+        <table className="data w-full text-sm">
+          <thead><tr><th scope="col">Source</th><th scope="col">Why not ingested</th></tr></thead>
+          <tbody>
+            {skipped.map((s) => (
+              <tr key={s.id}>
+                <td className="min-w-32 sm:min-w-48">{s.url ? <a href={s.url} className="font-medium underline decoration-grid underline-offset-4">{s.name}</a> : <span className="font-medium">{s.name}</span>}</td>
+                <td className="text-ink-2 max-w-2xl [overflow-wrap:anywhere]">{s.reason}</td>
               </tr>
             ))}
           </tbody>

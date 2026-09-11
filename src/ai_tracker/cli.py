@@ -387,6 +387,13 @@ def cmd_memo(a: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_ops_notes(a: argparse.Namespace) -> int:
+    from .memo import ops_notes
+
+    print(ops_notes(st.Store()))
+    return 0
+
+
 def cmd_serve(a: argparse.Namespace) -> int:
     from .query.server import serve
 
@@ -422,6 +429,7 @@ def main(argv: list[str] | None = None) -> None:
         ("evaluate", cmd_evaluate),
         ("export", cmd_export),
         ("check", cmd_check),
+        ("ops-notes", cmd_ops_notes),
     ):
         sub.add_parser(name).set_defaults(fn=fn)
     cd = sub.add_parser("candidates")

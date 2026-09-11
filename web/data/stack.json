@@ -1134,6 +1134,54 @@
        "valve_measured": null
       },
       {
+       "bucket_id": null,
+       "confidence": null,
+       "grade": "C",
+       "id": "nvidia_5y_cds_bps",
+       "latest": {
+        "as_of": "2026-07-27",
+        "disputed": false,
+        "grade": "C",
+        "high": null,
+        "low": null,
+        "obs_ids": [
+         "aa3d3658ff525155"
+        ],
+        "series_key": "markets.nvidia.cds_5y_bps.pt",
+        "subject": "nvidia",
+        "unit": "bps",
+        "value": 82.0
+       },
+       "layer_id": "compute_physical",
+       "leading_lagging": "leading",
+       "n_observations": 1,
+       "name": "Nvidia five-year credit default swap spread",
+       "pending": null,
+       "published": false,
+       "sparkline": [
+        {
+         "as_of": "2026-07-27",
+         "disputed": false,
+         "grade": "C",
+         "high": null,
+         "low": null,
+         "obs_ids": [
+          "aa3d3658ff525155"
+         ],
+         "series_key": "markets.nvidia.cds_5y_bps.pt",
+         "subject": "nvidia",
+         "unit": "bps",
+         "value": 82.0
+        }
+       ],
+       "stale_as_of": null,
+       "stale_reason": null,
+       "status": null,
+       "unit": "bps",
+       "unpublished_reason": "Not measurable as a series from free sources: five-year CDS quotes come from ICE and Bloomberg terminals; the one free reading is a press-quoted figure on the circular-financing ledger, and a direction rule needs quarterly prints.",
+       "valve_measured": null
+      },
+      {
        "bucket_id": "methods",
        "confidence": 40,
        "grade": "B",
@@ -4127,52 +4175,6 @@
       },
       {
        "bucket_id": null,
-       "confidence": null,
-       "grade": "B",
-       "id": "lab_hhi",
-       "latest": {
-        "as_of": "2026-07-31",
-        "dims": {
-         "layer_id": "model"
-        },
-        "obs_ids": [
-         "a60353bc84a2f44a",
-         "bb43f3d481ea9fae",
-         "f68d1904eb7f0c04"
-        ],
-        "unit": "index",
-        "value": 0.4582342605841259
-       },
-       "layer_id": "model",
-       "leading_lagging": "leading",
-       "n_observations": 3,
-       "name": "Concentration of business AI spend across labs (Ramp, HHI)",
-       "pending": null,
-       "published": false,
-       "sparkline": [
-        {
-         "as_of": "2026-07-31",
-         "dims": {
-          "layer_id": "model"
-         },
-         "obs_ids": [
-          "a60353bc84a2f44a",
-          "bb43f3d481ea9fae",
-          "f68d1904eb7f0c04"
-         ],
-         "unit": "index",
-         "value": 0.4582342605841259
-        }
-       ],
-       "stale_as_of": null,
-       "stale_reason": null,
-       "status": null,
-       "unit": "index",
-       "unpublished_reason": "Not yet measurable: the direction rule needs four monthly readings of Ramp's per-lab paid shares and only July 2026 exists; each month arrives as a manual row from Ramp's letter.",
-       "valve_measured": null
-      },
-      {
-       "bucket_id": null,
        "confidence": 40,
        "grade": "A",
        "id": "model_price_per_horizon_hour",
@@ -5418,38 +5420,11 @@
        },
        "layer_id": "model",
        "leading_lagging": "coincident",
-       "n_observations": 38,
+       "n_observations": 19,
        "name": "Model-layer token concentration on OpenRouter (HHI, top table)",
        "pending": null,
        "published": true,
        "sparkline": [
-        {
-         "as_of": "2026-09-09",
-         "dims": {},
-         "obs_ids": [
-          "10009a61f008a49a",
-          "107990b4a0268d6e",
-          "10a439253fee9d51",
-          "24df0ff2189986a3",
-          "30d43fd60c6010d6",
-          "3c293fcf927c2ab7",
-          "3f94137ce93eab8c",
-          "4a68214db18c2f43",
-          "50647a882d4645b3",
-          "5e77e0b8f0667e55",
-          "6f05e3fe64d550f6",
-          "772cd0c0b2363ef8",
-          "7a264faad7eeee2d",
-          "8043c61916c8d1fa",
-          "ac73cbd7785b9603",
-          "c15504db51492a01",
-          "cf86118bc0448017",
-          "dce0f9186d4c56cd",
-          "e8aab6d6765a79ba"
-         ],
-         "unit": "index",
-         "value": 0.10864588049903252
-        },
         {
          "as_of": "2026-09-10",
          "dims": {},
@@ -5483,6 +5458,255 @@
        "status": "not_yet_measurable",
        "unit": "index",
        "unpublished_reason": null,
+       "valve_measured": null
+      },
+      {
+       "bucket_id": null,
+       "confidence": null,
+       "grade": "A",
+       "id": "venture_top3_concentration",
+       "latest": {
+        "as_of": "2026-06-30",
+        "dims": {},
+        "obs_ids": [
+         "08c5c905416f3a32",
+         "15d383db12c87c1e",
+         "167d57240d3a4367",
+         "280059c0644be9c9",
+         "2b656fc8a505803f",
+         "3cedc058b3e5c5d9",
+         "6f8dbf39287bb9e2",
+         "71a791f12fad7823",
+         "938312d662ee43fd",
+         "cd78df2387fbc6f5",
+         "db8429b333d8fc75"
+        ],
+        "unit": "share",
+        "value": 0.9479309941050943
+       },
+       "layer_id": "model",
+       "leading_lagging": "leading",
+       "n_observations": 34,
+       "name": "Top-three share of tracked venture dollars",
+       "pending": null,
+       "published": false,
+       "sparkline": [
+        {
+         "as_of": "2023-03-31",
+         "dims": {},
+         "obs_ids": [
+          "5c9e78d4ed79b299",
+          "ad9f66fa7058f450",
+          "b892fe5de7c7b647"
+         ],
+         "unit": "share",
+         "value": 0.999006394465168
+        },
+        {
+         "as_of": "2023-06-30",
+         "dims": {},
+         "obs_ids": [
+          "88dfce67606373c2",
+          "a61dbd9e67230a85",
+          "b892fe5de7c7b647",
+          "c3b51b4040aaaee3"
+         ],
+         "unit": "share",
+         "value": 0.9634861722304525
+        },
+        {
+         "as_of": "2023-09-30",
+         "dims": {},
+         "obs_ids": [
+          "88dfce67606373c2",
+          "a61dbd9e67230a85",
+          "b892fe5de7c7b647",
+          "c3b51b4040aaaee3"
+         ],
+         "unit": "share",
+         "value": 0.9632554970834689
+        },
+        {
+         "as_of": "2023-12-31",
+         "dims": {},
+         "obs_ids": [
+          "0551e1cf0aae9d01",
+          "87bcef34bd6d629d",
+          "88dfce67606373c2",
+          "a61dbd9e67230a85",
+          "b892fe5de7c7b647",
+          "c3b51b4040aaaee3"
+         ],
+         "unit": "share",
+         "value": 0.9401407292678434
+        },
+        {
+         "as_of": "2024-03-31",
+         "dims": {},
+         "obs_ids": [
+          "0551e1cf0aae9d01",
+          "4c5a7363e7746ccb",
+          "79fc9c8df9c59efe",
+          "87bcef34bd6d629d",
+          "88dfce67606373c2",
+          "a61dbd9e67230a85",
+          "e148af66d3786ff1",
+          "e9b853c2731a3f1a"
+         ],
+         "unit": "share",
+         "value": 0.8211066602261837
+        },
+        {
+         "as_of": "2024-06-30",
+         "dims": {},
+         "obs_ids": [
+          "1695e963f20e5edf",
+          "79fc9c8df9c59efe",
+          "87bcef34bd6d629d",
+          "d0c12169e94bf97b",
+          "dce5b4daf5ccbc90",
+          "e9b853c2731a3f1a"
+         ],
+         "unit": "share",
+         "value": 0.822046729872124
+        },
+        {
+         "as_of": "2024-09-30",
+         "dims": {},
+         "obs_ids": [
+          "1695e963f20e5edf",
+          "79fc9c8df9c59efe",
+          "87bcef34bd6d629d",
+          "d0c12169e94bf97b",
+          "dce5b4daf5ccbc90",
+          "e9b853c2731a3f1a"
+         ],
+         "unit": "share",
+         "value": 0.8089943760099596
+        },
+        {
+         "as_of": "2024-12-31",
+         "dims": {},
+         "obs_ids": [
+          "1695e963f20e5edf",
+          "4c7d05bb7edc95d9",
+          "79fc9c8df9c59efe",
+          "bd74adc757066ddf",
+          "c2cb6c276e8c4373",
+          "e9b853c2731a3f1a"
+         ],
+         "unit": "share",
+         "value": 0.8435130699481179
+        },
+        {
+         "as_of": "2025-03-31",
+         "dims": {},
+         "obs_ids": [
+          "1695e963f20e5edf",
+          "3225749165d9c18c",
+          "44a2c87fe46b3c11",
+          "4c7d05bb7edc95d9",
+          "9e28d5a389285821",
+          "bd74adc757066ddf",
+          "c2cb6c276e8c4373",
+          "ded246641741fae0"
+         ],
+         "unit": "share",
+         "value": 0.8970696110296068
+        },
+        {
+         "as_of": "2025-06-30",
+         "dims": {},
+         "obs_ids": [
+          "3225749165d9c18c",
+          "44a2c87fe46b3c11",
+          "4c7d05bb7edc95d9",
+          "57cb50770078ba1a",
+          "9e28d5a389285821",
+          "bd74adc757066ddf",
+          "c2cb6c276e8c4373",
+          "ded246641741fae0"
+         ],
+         "unit": "share",
+         "value": 0.9172245167087897
+        },
+        {
+         "as_of": "2025-09-30",
+         "dims": {},
+         "obs_ids": [
+          "3225749165d9c18c",
+          "3cedc058b3e5c5d9",
+          "44a2c87fe46b3c11",
+          "4c7d05bb7edc95d9",
+          "57cb50770078ba1a",
+          "9e28d5a389285821",
+          "bd74adc757066ddf",
+          "c2cb6c276e8c4373",
+          "cd78df2387fbc6f5",
+          "ded246641741fae0"
+         ],
+         "unit": "share",
+         "value": 0.9179561945235698
+        },
+        {
+         "as_of": "2025-12-31",
+         "dims": {},
+         "obs_ids": [
+          "167d57240d3a4367",
+          "3225749165d9c18c",
+          "3cedc058b3e5c5d9",
+          "44a2c87fe46b3c11",
+          "57cb50770078ba1a",
+          "6f8dbf39287bb9e2",
+          "9e28d5a389285821",
+          "cd78df2387fbc6f5",
+          "ded246641741fae0"
+         ],
+         "unit": "share",
+         "value": 0.9260060355876739
+        },
+        {
+         "as_of": "2026-03-31",
+         "dims": {},
+         "obs_ids": [
+          "15d383db12c87c1e",
+          "167d57240d3a4367",
+          "280059c0644be9c9",
+          "2b656fc8a505803f",
+          "3cedc058b3e5c5d9",
+          "57cb50770078ba1a",
+          "6f8dbf39287bb9e2",
+          "cd78df2387fbc6f5",
+          "db8429b333d8fc75"
+         ],
+         "unit": "share",
+         "value": 0.9643311777540091
+        },
+        {
+         "as_of": "2026-06-30",
+         "dims": {},
+         "obs_ids": [
+          "08c5c905416f3a32",
+          "15d383db12c87c1e",
+          "167d57240d3a4367",
+          "280059c0644be9c9",
+          "2b656fc8a505803f",
+          "3cedc058b3e5c5d9",
+          "6f8dbf39287bb9e2",
+          "71a791f12fad7823",
+          "938312d662ee43fd",
+          "cd78df2387fbc6f5",
+          "db8429b333d8fc75"
+         ],
+         "unit": "share",
+         "value": 0.9479309941050943
+        }
+       ],
+       "stale_as_of": null,
+       "stale_reason": null,
+       "status": null,
+       "unit": "share",
+       "unpublished_reason": "Identical to frontier_capital_concentration on the seed list since Q2 2025 (the top three raisers are the frontier_labs sub-layer), so a separate status would count one fact twice; it publishes when a non-frontier company enters the top three.",
        "valve_measured": null
       },
       {
@@ -5578,6 +5802,91 @@
       },
       {
        "aliases": [
+        "Advanced Machine Intelligence",
+        "AMI Labs"
+       ],
+       "cik": null,
+       "crunchbase_id": null,
+       "extra_ciks": [],
+       "founded": null,
+       "from_date": null,
+       "hq": "Paris/New York/Montreal/Singapore",
+       "id": "ami_labs",
+       "is_primary": true,
+       "kind": "lab",
+       "latest": null,
+       "memberships": [
+        {
+         "from_date": null,
+         "is_primary": true,
+         "layer_id": "model",
+         "sublayer_id": "neolabs",
+         "to_date": null
+        }
+       ],
+       "name": "Advanced Machine Intelligence / AMI Labs",
+       "notes": "Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026",
+       "to_date": null,
+       "verified": false
+      },
+      {
+       "aliases": [
+        "Aleph Alpha"
+       ],
+       "cik": null,
+       "crunchbase_id": null,
+       "extra_ciks": [],
+       "founded": null,
+       "from_date": null,
+       "hq": "Heidelberg, Germany",
+       "id": "aleph_alpha",
+       "is_primary": true,
+       "kind": "lab",
+       "latest": null,
+       "memberships": [
+        {
+         "from_date": null,
+         "is_primary": true,
+         "layer_id": "model",
+         "sublayer_id": "neolabs",
+         "to_date": null
+        }
+       ],
+       "name": "Aleph Alpha",
+       "notes": "Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026",
+       "to_date": null,
+       "verified": false
+      },
+      {
+       "aliases": [
+        "Antim Labs"
+       ],
+       "cik": null,
+       "crunchbase_id": null,
+       "extra_ciks": [],
+       "founded": null,
+       "from_date": null,
+       "hq": "New York, NY",
+       "id": "antim_labs",
+       "is_primary": true,
+       "kind": "lab",
+       "latest": null,
+       "memberships": [
+        {
+         "from_date": null,
+         "is_primary": true,
+         "layer_id": "model",
+         "sublayer_id": "neolabs",
+         "to_date": null
+        }
+       ],
+       "name": "Antim Labs",
+       "notes": "Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026",
+       "to_date": null,
+       "verified": false
+      },
+      {
+       "aliases": [
         "Apptronik"
        ],
        "cik": "0001918029",
@@ -5619,6 +5928,34 @@
        "notes": null,
        "to_date": null,
        "verified": true
+      },
+      {
+       "aliases": [
+        "Arcee AI"
+       ],
+       "cik": null,
+       "crunchbase_id": null,
+       "extra_ciks": [],
+       "founded": null,
+       "from_date": null,
+       "hq": "San Francisco, CA",
+       "id": "arcee_ai",
+       "is_primary": true,
+       "kind": "lab",
+       "latest": null,
+       "memberships": [
+        {
+         "from_date": null,
+         "is_primary": true,
+         "layer_id": "model",
+         "sublayer_id": "neolabs",
+         "to_date": null
+        }
+       ],
+       "name": "Arcee AI",
+       "notes": "Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026",
+       "to_date": null,
+       "verified": false
       },
       {
        "aliases": [
@@ -5687,6 +6024,90 @@
       },
       {
        "aliases": [
+        "Core Automation"
+       ],
+       "cik": null,
+       "crunchbase_id": null,
+       "extra_ciks": [],
+       "founded": null,
+       "from_date": null,
+       "hq": "San Francisco, CA",
+       "id": "core_automation",
+       "is_primary": true,
+       "kind": "lab",
+       "latest": null,
+       "memberships": [
+        {
+         "from_date": null,
+         "is_primary": true,
+         "layer_id": "model",
+         "sublayer_id": "neolabs",
+         "to_date": null
+        }
+       ],
+       "name": "Core Automation",
+       "notes": "Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026",
+       "to_date": null,
+       "verified": false
+      },
+      {
+       "aliases": [
+        "Discovery Loop"
+       ],
+       "cik": null,
+       "crunchbase_id": null,
+       "extra_ciks": [],
+       "founded": null,
+       "from_date": null,
+       "hq": "Palo Alto, CA",
+       "id": "discovery_loop",
+       "is_primary": true,
+       "kind": "lab",
+       "latest": null,
+       "memberships": [
+        {
+         "from_date": null,
+         "is_primary": true,
+         "layer_id": "model",
+         "sublayer_id": "neolabs",
+         "to_date": null
+        }
+       ],
+       "name": "Discovery Loop",
+       "notes": "Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026",
+       "to_date": null,
+       "verified": false
+      },
+      {
+       "aliases": [
+        "Dolphin AI"
+       ],
+       "cik": null,
+       "crunchbase_id": null,
+       "extra_ciks": [],
+       "founded": null,
+       "from_date": null,
+       "hq": "Decentralized",
+       "id": "dolphin_ai",
+       "is_primary": true,
+       "kind": "lab",
+       "latest": null,
+       "memberships": [
+        {
+         "from_date": null,
+         "is_primary": true,
+         "layer_id": "model",
+         "sublayer_id": "neolabs",
+         "to_date": null
+        }
+       ],
+       "name": "Dolphin AI",
+       "notes": "Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026",
+       "to_date": null,
+       "verified": false
+      },
+      {
+       "aliases": [
         "ElevenLabs"
        ],
        "cik": null,
@@ -5710,6 +6131,34 @@
        ],
        "name": "ElevenLabs",
        "notes": null,
+       "to_date": null,
+       "verified": false
+      },
+      {
+       "aliases": [
+        "Elorian"
+       ],
+       "cik": null,
+       "crunchbase_id": null,
+       "extra_ciks": [],
+       "founded": null,
+       "from_date": null,
+       "hq": "New York, NY & Geneva, Switzerland",
+       "id": "elorian",
+       "is_primary": true,
+       "kind": "lab",
+       "latest": null,
+       "memberships": [
+        {
+         "from_date": null,
+         "is_primary": true,
+         "layer_id": "model",
+         "sublayer_id": "neolabs",
+         "to_date": null
+        }
+       ],
+       "name": "Elorian",
+       "notes": "Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026",
        "to_date": null,
        "verified": false
       },
@@ -5759,6 +6208,146 @@
       },
       {
        "aliases": [
+        "Flapping Airplanes"
+       ],
+       "cik": "0002109371",
+       "crunchbase_id": null,
+       "extra_ciks": [],
+       "founded": null,
+       "from_date": null,
+       "hq": "San Francisco, CA",
+       "id": "flapping_airplanes",
+       "is_primary": true,
+       "kind": "lab",
+       "latest": null,
+       "memberships": [
+        {
+         "from_date": null,
+         "is_primary": true,
+         "layer_id": "model",
+         "sublayer_id": "neolabs",
+         "to_date": null
+        }
+       ],
+       "name": "Flapping Airplanes",
+       "notes": "Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026",
+       "to_date": null,
+       "verified": true
+      },
+      {
+       "aliases": [
+        "General Intuition"
+       ],
+       "cik": null,
+       "crunchbase_id": null,
+       "extra_ciks": [],
+       "founded": null,
+       "from_date": null,
+       "hq": "New York, NY & Geneva, Switzerland",
+       "id": "general_intuition",
+       "is_primary": true,
+       "kind": "lab",
+       "latest": null,
+       "memberships": [
+        {
+         "from_date": null,
+         "is_primary": true,
+         "layer_id": "model",
+         "sublayer_id": "neolabs",
+         "to_date": null
+        }
+       ],
+       "name": "General Intuition",
+       "notes": "Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026",
+       "to_date": null,
+       "verified": false
+      },
+      {
+       "aliases": [
+        "Goodfire"
+       ],
+       "cik": "0002070813",
+       "crunchbase_id": null,
+       "extra_ciks": [],
+       "founded": null,
+       "from_date": null,
+       "hq": "San Francisco, CA",
+       "id": "goodfire",
+       "is_primary": true,
+       "kind": "lab",
+       "latest": null,
+       "memberships": [
+        {
+         "from_date": null,
+         "is_primary": true,
+         "layer_id": "model",
+         "sublayer_id": "neolabs",
+         "to_date": null
+        }
+       ],
+       "name": "Goodfire",
+       "notes": "Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026",
+       "to_date": null,
+       "verified": true
+      },
+      {
+       "aliases": [
+        "Grafton Sciences"
+       ],
+       "cik": null,
+       "crunchbase_id": null,
+       "extra_ciks": [],
+       "founded": null,
+       "from_date": null,
+       "hq": "San Francisco & Redwood City, CA",
+       "id": "grafton_sciences",
+       "is_primary": true,
+       "kind": "lab",
+       "latest": null,
+       "memberships": [
+        {
+         "from_date": null,
+         "is_primary": true,
+         "layer_id": "model",
+         "sublayer_id": "neolabs",
+         "to_date": null
+        }
+       ],
+       "name": "Grafton Sciences",
+       "notes": "Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026",
+       "to_date": null,
+       "verified": false
+      },
+      {
+       "aliases": [
+        "Hark"
+       ],
+       "cik": "0002117821",
+       "crunchbase_id": null,
+       "extra_ciks": [],
+       "founded": null,
+       "from_date": null,
+       "hq": "San Jose, CA",
+       "id": "hark",
+       "is_primary": true,
+       "kind": "lab",
+       "latest": null,
+       "memberships": [
+        {
+         "from_date": null,
+         "is_primary": true,
+         "layer_id": "model",
+         "sublayer_id": "neolabs",
+         "to_date": null
+        }
+       ],
+       "name": "Hark",
+       "notes": "Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026",
+       "to_date": null,
+       "verified": true
+      },
+      {
+       "aliases": [
         "Harmonic"
        ],
        "cik": null,
@@ -5782,6 +6371,34 @@
        ],
        "name": "Harmonic",
        "notes": null,
+       "to_date": null,
+       "verified": false
+      },
+      {
+       "aliases": [
+        "Helical"
+       ],
+       "cik": null,
+       "crunchbase_id": null,
+       "extra_ciks": [],
+       "founded": null,
+       "from_date": null,
+       "hq": "London, UK/Boston, MA/Luxembourg",
+       "id": "helical",
+       "is_primary": true,
+       "kind": "lab",
+       "latest": null,
+       "memberships": [
+        {
+         "from_date": null,
+         "is_primary": true,
+         "layer_id": "model",
+         "sublayer_id": "neolabs",
+         "to_date": null
+        }
+       ],
+       "name": "Helical",
+       "notes": "Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026",
        "to_date": null,
        "verified": false
       },
@@ -5816,6 +6433,34 @@
       },
       {
        "aliases": [
+        "Inception"
+       ],
+       "cik": null,
+       "crunchbase_id": null,
+       "extra_ciks": [],
+       "founded": null,
+       "from_date": null,
+       "hq": "Palo Alto, CA",
+       "id": "inception",
+       "is_primary": true,
+       "kind": "lab",
+       "latest": null,
+       "memberships": [
+        {
+         "from_date": null,
+         "is_primary": true,
+         "layer_id": "model",
+         "sublayer_id": "neolabs",
+         "to_date": null
+        }
+       ],
+       "name": "Inception",
+       "notes": "Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026",
+       "to_date": null,
+       "verified": false
+      },
+      {
+       "aliases": [
         "Inception Labs"
        ],
        "cik": null,
@@ -5839,6 +6484,146 @@
        ],
        "name": "Inception Labs",
        "notes": null,
+       "to_date": null,
+       "verified": false
+      },
+      {
+       "aliases": [
+        "Ineffable Intelligence"
+       ],
+       "cik": null,
+       "crunchbase_id": null,
+       "extra_ciks": [],
+       "founded": null,
+       "from_date": null,
+       "hq": "London, UK",
+       "id": "ineffable_intelligence",
+       "is_primary": true,
+       "kind": "lab",
+       "latest": null,
+       "memberships": [
+        {
+         "from_date": null,
+         "is_primary": true,
+         "layer_id": "model",
+         "sublayer_id": "neolabs",
+         "to_date": null
+        }
+       ],
+       "name": "Ineffable Intelligence",
+       "notes": "Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026",
+       "to_date": null,
+       "verified": false
+      },
+      {
+       "aliases": [
+        "Isara Labs"
+       ],
+       "cik": null,
+       "crunchbase_id": null,
+       "extra_ciks": [],
+       "founded": null,
+       "from_date": null,
+       "hq": "Palo Alto, CA",
+       "id": "isara_labs",
+       "is_primary": true,
+       "kind": "lab",
+       "latest": null,
+       "memberships": [
+        {
+         "from_date": null,
+         "is_primary": true,
+         "layer_id": "model",
+         "sublayer_id": "neolabs",
+         "to_date": null
+        }
+       ],
+       "name": "Isara Labs",
+       "notes": "Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026",
+       "to_date": null,
+       "verified": false
+      },
+      {
+       "aliases": [
+        "Isomorphic Labs"
+       ],
+       "cik": null,
+       "crunchbase_id": null,
+       "extra_ciks": [],
+       "founded": null,
+       "from_date": null,
+       "hq": "London, UK and Lausanne, Switzerland",
+       "id": "isomorphic_labs",
+       "is_primary": true,
+       "kind": "lab",
+       "latest": null,
+       "memberships": [
+        {
+         "from_date": null,
+         "is_primary": true,
+         "layer_id": "model",
+         "sublayer_id": "neolabs",
+         "to_date": null
+        }
+       ],
+       "name": "Isomorphic Labs",
+       "notes": "Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026",
+       "to_date": null,
+       "verified": false
+      },
+      {
+       "aliases": [
+        "Kyutai"
+       ],
+       "cik": null,
+       "crunchbase_id": null,
+       "extra_ciks": [],
+       "founded": null,
+       "from_date": null,
+       "hq": "Paris, France",
+       "id": "kyutai",
+       "is_primary": true,
+       "kind": "lab",
+       "latest": null,
+       "memberships": [
+        {
+         "from_date": null,
+         "is_primary": true,
+         "layer_id": "model",
+         "sublayer_id": "neolabs",
+         "to_date": null
+        }
+       ],
+       "name": "Kyutai",
+       "notes": "Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026",
+       "to_date": null,
+       "verified": false
+      },
+      {
+       "aliases": [
+        "Lila Sciences"
+       ],
+       "cik": null,
+       "crunchbase_id": null,
+       "extra_ciks": [],
+       "founded": null,
+       "from_date": null,
+       "hq": "Cambridge, MA/San Francisco, CA",
+       "id": "lila_sciences",
+       "is_primary": true,
+       "kind": "lab",
+       "latest": null,
+       "memberships": [
+        {
+         "from_date": null,
+         "is_primary": true,
+         "layer_id": "model",
+         "sublayer_id": "neolabs",
+         "to_date": null
+        }
+       ],
+       "name": "Lila Sciences",
+       "notes": "Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026",
        "to_date": null,
        "verified": false
       },
@@ -5878,6 +6663,34 @@
        "notes": null,
        "to_date": null,
        "verified": true
+      },
+      {
+       "aliases": [
+        "Logical Intelligence"
+       ],
+       "cik": null,
+       "crunchbase_id": null,
+       "extra_ciks": [],
+       "founded": null,
+       "from_date": null,
+       "hq": "San Francisco, CA",
+       "id": "logical_intelligence",
+       "is_primary": true,
+       "kind": "lab",
+       "latest": null,
+       "memberships": [
+        {
+         "from_date": null,
+         "is_primary": true,
+         "layer_id": "model",
+         "sublayer_id": "neolabs",
+         "to_date": null
+        }
+       ],
+       "name": "Logical Intelligence",
+       "notes": "Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026",
+       "to_date": null,
+       "verified": false
       },
       {
        "aliases": [
@@ -5955,6 +6768,90 @@
       },
       {
        "aliases": [
+        "Math, Inc."
+       ],
+       "cik": null,
+       "crunchbase_id": null,
+       "extra_ciks": [],
+       "founded": null,
+       "from_date": null,
+       "hq": "Palo Alto, CA",
+       "id": "math_inc",
+       "is_primary": true,
+       "kind": "lab",
+       "latest": null,
+       "memberships": [
+        {
+         "from_date": null,
+         "is_primary": true,
+         "layer_id": "model",
+         "sublayer_id": "neolabs",
+         "to_date": null
+        }
+       ],
+       "name": "Math, Inc.",
+       "notes": "Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026",
+       "to_date": null,
+       "verified": false
+      },
+      {
+       "aliases": [
+        "MBZUAI"
+       ],
+       "cik": null,
+       "crunchbase_id": null,
+       "extra_ciks": [],
+       "founded": null,
+       "from_date": null,
+       "hq": "Abu Dhabi/Paris/Silicon Valley",
+       "id": "mbzuai",
+       "is_primary": true,
+       "kind": "university",
+       "latest": null,
+       "memberships": [
+        {
+         "from_date": null,
+         "is_primary": true,
+         "layer_id": "model",
+         "sublayer_id": "neolabs",
+         "to_date": null
+        }
+       ],
+       "name": "MBZUAI",
+       "notes": "Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026",
+       "to_date": null,
+       "verified": false
+      },
+      {
+       "aliases": [
+        "Mirendil"
+       ],
+       "cik": null,
+       "crunchbase_id": null,
+       "extra_ciks": [],
+       "founded": null,
+       "from_date": null,
+       "hq": "San Francisco, CA",
+       "id": "mirendil",
+       "is_primary": true,
+       "kind": "lab",
+       "latest": null,
+       "memberships": [
+        {
+         "from_date": null,
+         "is_primary": true,
+         "layer_id": "model",
+         "sublayer_id": "neolabs",
+         "to_date": null
+        }
+       ],
+       "name": "Mirendil",
+       "notes": "Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026",
+       "to_date": null,
+       "verified": false
+      },
+      {
+       "aliases": [
         "Mistral",
         "Mistral AI"
        ],
@@ -5990,6 +6887,34 @@
        "notes": null,
        "to_date": null,
        "verified": true
+      },
+      {
+       "aliases": [
+        "Moonlake AI"
+       ],
+       "cik": null,
+       "crunchbase_id": null,
+       "extra_ciks": [],
+       "founded": null,
+       "from_date": null,
+       "hq": "San Francisco, CA",
+       "id": "moonlake_ai",
+       "is_primary": true,
+       "kind": "lab",
+       "latest": null,
+       "memberships": [
+        {
+         "from_date": null,
+         "is_primary": true,
+         "layer_id": "model",
+         "sublayer_id": "neolabs",
+         "to_date": null
+        }
+       ],
+       "name": "Moonlake AI",
+       "notes": "Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026",
+       "to_date": null,
+       "verified": false
       },
       {
        "aliases": [
@@ -6044,6 +6969,34 @@
        ],
        "name": "Nous Research",
        "notes": null,
+       "to_date": null,
+       "verified": false
+      },
+      {
+       "aliases": [
+        "Oak Lab"
+       ],
+       "cik": null,
+       "crunchbase_id": null,
+       "extra_ciks": [],
+       "founded": null,
+       "from_date": null,
+       "hq": "Toronto, Canada",
+       "id": "oak_lab",
+       "is_primary": true,
+       "kind": "lab",
+       "latest": null,
+       "memberships": [
+        {
+         "from_date": null,
+         "is_primary": true,
+         "layer_id": "model",
+         "sublayer_id": "neolabs",
+         "to_date": null
+        }
+       ],
+       "name": "Oak Lab",
+       "notes": "Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026",
        "to_date": null,
        "verified": false
       },
@@ -6140,6 +7093,34 @@
       },
       {
        "aliases": [
+        "Poetiq"
+       ],
+       "cik": null,
+       "crunchbase_id": null,
+       "extra_ciks": [],
+       "founded": null,
+       "from_date": null,
+       "hq": "Mountain View, CA",
+       "id": "poetiq",
+       "is_primary": true,
+       "kind": "lab",
+       "latest": null,
+       "memberships": [
+        {
+         "from_date": null,
+         "is_primary": true,
+         "layer_id": "model",
+         "sublayer_id": "neolabs",
+         "to_date": null
+        }
+       ],
+       "name": "Poetiq",
+       "notes": "Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026",
+       "to_date": null,
+       "verified": false
+      },
+      {
+       "aliases": [
         "Poolside"
        ],
        "cik": null,
@@ -6212,6 +7193,62 @@
       },
       {
        "aliases": [
+        "PrismML"
+       ],
+       "cik": null,
+       "crunchbase_id": null,
+       "extra_ciks": [],
+       "founded": null,
+       "from_date": null,
+       "hq": "Pasadena & San Francisco, CA",
+       "id": "prismml",
+       "is_primary": true,
+       "kind": "lab",
+       "latest": null,
+       "memberships": [
+        {
+         "from_date": null,
+         "is_primary": true,
+         "layer_id": "model",
+         "sublayer_id": "neolabs",
+         "to_date": null
+        }
+       ],
+       "name": "PrismML",
+       "notes": "Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026",
+       "to_date": null,
+       "verified": false
+      },
+      {
+       "aliases": [
+        "Recursive"
+       ],
+       "cik": null,
+       "crunchbase_id": null,
+       "extra_ciks": [],
+       "founded": null,
+       "from_date": null,
+       "hq": "San Francisco, CA and London, UK",
+       "id": "recursive",
+       "is_primary": true,
+       "kind": "lab",
+       "latest": null,
+       "memberships": [
+        {
+         "from_date": null,
+         "is_primary": true,
+         "layer_id": "model",
+         "sublayer_id": "neolabs",
+         "to_date": null
+        }
+       ],
+       "name": "Recursive",
+       "notes": "Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026",
+       "to_date": null,
+       "verified": false
+      },
+      {
+       "aliases": [
         "Reflection AI"
        ],
        "cik": null,
@@ -6235,6 +7272,34 @@
        ],
        "name": "Reflection AI",
        "notes": null,
+       "to_date": null,
+       "verified": false
+      },
+      {
+       "aliases": [
+        "Ricursive Intelligence"
+       ],
+       "cik": null,
+       "crunchbase_id": null,
+       "extra_ciks": [],
+       "founded": null,
+       "from_date": null,
+       "hq": "Bengaluru, Karnataka, India",
+       "id": "ricursive_intelligence",
+       "is_primary": true,
+       "kind": "lab",
+       "latest": null,
+       "memberships": [
+        {
+         "from_date": null,
+         "is_primary": true,
+         "layer_id": "model",
+         "sublayer_id": "neolabs",
+         "to_date": null
+        }
+       ],
+       "name": "Ricursive Intelligence",
+       "notes": "Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026",
        "to_date": null,
        "verified": false
       },
@@ -6325,6 +7390,34 @@
       },
       {
        "aliases": [
+        "Sarvam"
+       ],
+       "cik": null,
+       "crunchbase_id": null,
+       "extra_ciks": [],
+       "founded": null,
+       "from_date": null,
+       "hq": "Bengaluru, Karnataka, India",
+       "id": "sarvam",
+       "is_primary": true,
+       "kind": "lab",
+       "latest": null,
+       "memberships": [
+        {
+         "from_date": null,
+         "is_primary": true,
+         "layer_id": "model",
+         "sublayer_id": "neolabs",
+         "to_date": null
+        }
+       ],
+       "name": "Sarvam",
+       "notes": "Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026",
+       "to_date": null,
+       "verified": false
+      },
+      {
+       "aliases": [
         "Skild AI"
        ],
        "cik": null,
@@ -6355,6 +7448,62 @@
        ],
        "name": "Skild AI",
        "notes": null,
+       "to_date": null,
+       "verified": false
+      },
+      {
+       "aliases": [
+        "Sooth Labs"
+       ],
+       "cik": null,
+       "crunchbase_id": null,
+       "extra_ciks": [],
+       "founded": null,
+       "from_date": null,
+       "hq": "Pittsburgh, PA",
+       "id": "sooth_labs",
+       "is_primary": true,
+       "kind": "lab",
+       "latest": null,
+       "memberships": [
+        {
+         "from_date": null,
+         "is_primary": true,
+         "layer_id": "model",
+         "sublayer_id": "neolabs",
+         "to_date": null
+        }
+       ],
+       "name": "Sooth Labs",
+       "notes": "Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026",
+       "to_date": null,
+       "verified": false
+      },
+      {
+       "aliases": [
+        "Standard Intelligence"
+       ],
+       "cik": null,
+       "crunchbase_id": null,
+       "extra_ciks": [],
+       "founded": null,
+       "from_date": null,
+       "hq": "San Francisco, CA",
+       "id": "standard_intelligence",
+       "is_primary": true,
+       "kind": "lab",
+       "latest": null,
+       "memberships": [
+        {
+         "from_date": null,
+         "is_primary": true,
+         "layer_id": "model",
+         "sublayer_id": "neolabs",
+         "to_date": null
+        }
+       ],
+       "name": "Standard Intelligence",
+       "notes": "Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026",
        "to_date": null,
        "verified": false
       },
@@ -6428,6 +7577,34 @@
        ],
        "name": "Thinking Machines Lab",
        "notes": null,
+       "to_date": null,
+       "verified": false
+      },
+      {
+       "aliases": [
+        "Thomson Reuters\u2013Imperial Frontier AI Research Lab"
+       ],
+       "cik": null,
+       "crunchbase_id": null,
+       "extra_ciks": [],
+       "founded": null,
+       "from_date": null,
+       "hq": "London, UK",
+       "id": "thomson_reuters_imperial_frontier_ai_research_lab",
+       "is_primary": true,
+       "kind": "lab",
+       "latest": null,
+       "memberships": [
+        {
+         "from_date": null,
+         "is_primary": true,
+         "layer_id": "model",
+         "sublayer_id": "neolabs",
+         "to_date": null
+        }
+       ],
+       "name": "Thomson Reuters\u2013Imperial Frontier AI Research Lab",
+       "notes": "Neolab directory, cleverhack.com (Joy Larkin), read 11 Sep 2026",
        "to_date": null,
        "verified": false
       },
@@ -6840,8 +8017,8 @@
          "dims": {},
          "obs_ids": [
           "24789a9da722d2de",
-          "d092bfa7505183e3",
-          "ecc8d38ac38efd20"
+          "ac6f1c2cdefb7d8a",
+          "d092bfa7505183e3"
          ],
          "unit": "index",
          "value": 10.900000000000006
@@ -6851,8 +8028,8 @@
          "dims": {},
          "obs_ids": [
           "24789a9da722d2de",
-          "ac6f1c2cdefb7d8a",
-          "d092bfa7505183e3"
+          "d092bfa7505183e3",
+          "ecc8d38ac38efd20"
          ],
          "unit": "index",
          "value": 10.900000000000006
@@ -6905,7 +8082,7 @@
          "obs_ids": [
           "280009b4280e4135",
           "7313ea1c506e40e2",
-          "d471ec4fe8519574"
+          "e2ec2503b5e14b8f"
          ],
          "unit": "index",
          "value": 11.25
@@ -6916,7 +8093,7 @@
          "obs_ids": [
           "280009b4280e4135",
           "7313ea1c506e40e2",
-          "e2ec2503b5e14b8f"
+          "d471ec4fe8519574"
          ],
          "unit": "index",
          "value": 11.25
@@ -6980,7 +8157,7 @@
          "dims": {},
          "obs_ids": [
           "2202dee6a2133a8e",
-          "472a62400c7c198b",
+          "b1c57b5cc34b16a8",
           "ebf4836f647dcf59"
          ],
          "unit": "index",
@@ -6991,7 +8168,7 @@
          "dims": {},
          "obs_ids": [
           "2202dee6a2133a8e",
-          "b1c57b5cc34b16a8",
+          "472a62400c7c198b",
           "ebf4836f647dcf59"
          ],
          "unit": "index",
@@ -7579,7 +8756,7 @@
      "id": "human_data",
      "indicators": [
       {
-       "bucket_id": "methods",
+       "bucket_id": "return_arrow",
        "confidence": 70,
        "grade": "C",
        "id": "expert_data_market_run_rate",
@@ -7624,7 +8801,7 @@
        "status": "faster_than_normal",
        "unit": "USD",
        "unpublished_reason": null,
-       "valve_measured": "invention_to_product"
+       "valve_measured": "return_arrow"
       }
      ],
      "layer_id": "training_input",
@@ -8453,6 +9630,135 @@
        "status": "emerging",
        "unit": "rung",
        "unpublished_reason": null,
+       "valve_measured": "return_arrow"
+      },
+      {
+       "bucket_id": "return_arrow",
+       "confidence": 35,
+       "grade": "D",
+       "id": "cl_lab_release_claims",
+       "latest": {
+        "as_of": "2026-05-27",
+        "dims": {},
+        "obs_ids": [
+         "1b7d08dbce2be548",
+         "dc983a8178691c42"
+        ],
+        "unit": "count",
+        "value": 2.0
+       },
+       "layer_id": "training_input",
+       "leading_lagging": "leading",
+       "n_observations": 2,
+       "name": "Vendors claiming shipped continual learning",
+       "pending": null,
+       "published": true,
+       "sparkline": [
+        {
+         "as_of": "2025-09-12",
+         "dims": {},
+         "obs_ids": [
+          "dc983a8178691c42"
+         ],
+         "unit": "count",
+         "value": 1.0
+        },
+        {
+         "as_of": "2026-05-27",
+         "dims": {},
+         "obs_ids": [
+          "1b7d08dbce2be548",
+          "dc983a8178691c42"
+         ],
+         "unit": "count",
+         "value": 2.0
+        }
+       ],
+       "stale_as_of": null,
+       "stale_reason": "Event-driven count: it moves when a builder announces, not on a calendar.",
+       "status": "emerging",
+       "unit": "count",
+       "unpublished_reason": null,
+       "valve_measured": "return_arrow"
+      },
+      {
+       "bucket_id": "return_arrow",
+       "confidence": null,
+       "grade": null,
+       "id": "cl_adapters_per_product",
+       "latest": null,
+       "layer_id": "training_input",
+       "leading_lagging": "leading",
+       "n_observations": 0,
+       "name": "Per-customer adapters per product",
+       "pending": null,
+       "published": false,
+       "sparkline": [],
+       "stale_as_of": null,
+       "stale_reason": null,
+       "status": null,
+       "unit": "count",
+       "unpublished_reason": "Not measurable from public sources: Trajectory describes an adapter per customer refreshed hourly without a count, and Decagon states a share of traffic on self-trained models, not adapters.",
+       "valve_measured": "return_arrow"
+      },
+      {
+       "bucket_id": "return_arrow",
+       "confidence": null,
+       "grade": null,
+       "id": "cl_forgetting_retention",
+       "latest": null,
+       "layer_id": "training_input",
+       "leading_lagging": "leading",
+       "n_observations": 0,
+       "name": "Retention after continual updates",
+       "pending": null,
+       "published": false,
+       "sparkline": [],
+       "stale_as_of": null,
+       "stale_reason": null,
+       "status": null,
+       "unit": "share",
+       "unpublished_reason": "Not measurable yet: no production system reports retention after updates; the research rows on the ladder report their own tasks, and no shared forgetting benchmark scores deployed systems.",
+       "valve_measured": "return_arrow"
+      },
+      {
+       "bucket_id": "return_arrow",
+       "confidence": null,
+       "grade": null,
+       "id": "cl_learning_curve_slope",
+       "latest": null,
+       "layer_id": "training_input",
+       "leading_lagging": "leading",
+       "n_observations": 0,
+       "name": "Learning-curve slope in deployment",
+       "pending": null,
+       "published": false,
+       "sparkline": [],
+       "stale_as_of": null,
+       "stale_reason": null,
+       "status": null,
+       "unit": "ratio",
+       "unpublished_reason": "Not measurable: the only curve on record (cl.engram_harvey.closed_book_accuracy.pt) is a research result across training steps, not lift over deployment time.",
+       "valve_measured": "return_arrow"
+      },
+      {
+       "bucket_id": "return_arrow",
+       "confidence": null,
+       "grade": null,
+       "id": "cl_benchmark_exists",
+       "latest": null,
+       "layer_id": "training_input",
+       "leading_lagging": "leading",
+       "n_observations": 0,
+       "name": "A benchmark for learning on the job",
+       "pending": null,
+       "published": false,
+       "sparkline": [],
+       "stale_as_of": null,
+       "stale_reason": null,
+       "status": null,
+       "unit": "count",
+       "unpublished_reason": "A yes/no, not a series: Epoch's CL-bench rows score learning from material supplied within one task (domain reasoning, rule application, procedure, empirical discovery), not retention across sessions, so they do not meet the L6 six-month-employee test.",
        "valve_measured": "return_arrow"
       }
      ],

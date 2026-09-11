@@ -7,7 +7,7 @@ from datetime import date, datetime
 from enum import Enum, IntEnum
 from typing import Literal
 
-from pydantic import BaseModel, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 
 class Tier(IntEnum):
@@ -320,6 +320,10 @@ class FetchLog(BaseModel):
 
 
 class Source(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid"
+    )  # an unquoted comma in a flow mapping becomes a stray key; refuse it
+
     id: str
     name: str
     org: str
@@ -335,6 +339,17 @@ class Source(BaseModel):
     expect_series: list[str] = []
     people: list[str] = []
     watch: dict[str, str] = {}  # feeds connector: slug -> regex over title + description
+
+
+class SkippedSource(BaseModel):
+    """A source the briefs name that is read but not ingested, with the reason (rendered on /sources)."""
+
+    model_config = ConfigDict(extra="forbid")
+    id: str
+    name: str
+    url: str | None = None
+    reason: str = Field(min_length=1)
+    attribution: str | None = None
 
 
 class Bucket(BaseModel):

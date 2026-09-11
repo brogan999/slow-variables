@@ -1,0 +1,163 @@
+{
+ "band_input": "anthropic_ei.global.occupations_25pct_tasks_share.pt",
+ "band_rationale": "The share only rises, so the question is how fast. Normal = under 60% of occupations with a quarter of their tasks in use four years in; fast = 80% or more. Anchor: 49% in the March 2026 report (data 5-12 February 2026).",
+ "band_value": {
+  "as_of": "2026-02-12",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "85e4ee329e1a9c2d"
+  ],
+  "value": 0.49
+ },
+ "bucket_id": "early_adoption",
+ "cadence_expected": "annual",
+ "confidence": 55,
+ "counterevidence": "One provider's traffic, weighted to coding and to Claude's user base; a task counts when it appears at all, not when it is done mostly with AI; the task taxonomy (O*NET) lags new work.",
+ "crosswalk": [
+  {
+   "bucket_id": "early_adoption",
+   "layer_id": "adopters",
+   "note": "BTOS, BBD, Ramp and the Anthropic Economic Index are adoption from both ends.",
+   "relation": "same_valve",
+   "shared_indicators": [],
+   "sublayer_id": null
+  }
+ ],
+ "definition": "Share of occupations in which at least 25% of tasks appear in Claude usage, from Anthropic's Economic Index (global, per report).",
+ "derived": [],
+ "direction": null,
+ "direction_rule": null,
+ "evidence": [],
+ "falsifying_band": null,
+ "fast_band": {
+  "hi": null,
+  "lo": 0.8
+ },
+ "fits": [],
+ "flow_status": null,
+ "grade": "B",
+ "id": "aei_occupation_depth_25",
+ "latest": {
+  "as_of": "2026-02-12",
+  "disputed": false,
+  "grade": "B",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "85e4ee329e1a9c2d"
+  ],
+  "series_key": "anthropic_ei.global.occupations_25pct_tasks_share.pt",
+  "subject": "global",
+  "unit": "share",
+  "value": 0.49
+ },
+ "layer_id": "adopters",
+ "leading_lagging": "coincident",
+ "metric": null,
+ "metric_dims": {},
+ "n_observations": 1,
+ "name": "Occupations with a quarter of their tasks using Claude",
+ "normal_band": {
+  "hi": 0.6,
+  "lo": null
+ },
+ "override_note": null,
+ "pending": null,
+ "points": [
+  {
+   "as_of": "2026-02-12",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "85e4ee329e1a9c2d"
+   ],
+   "series_key": "anthropic_ei.global.occupations_25pct_tasks_share.pt",
+   "subject": "global",
+   "unit": "share",
+   "value": 0.49
+  }
+ ],
+ "proposed_status": "consistent_with_normal",
+ "proxy_types": [
+  "behaviour"
+ ],
+ "published": true,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "bbd_adult_use",
+  "exposure_vs_usage_gap"
+ ],
+ "related_metrics": [],
+ "related_predictions": [],
+ "series": [
+  {
+   "points": [
+    {
+     "as_of": "2026-02-12",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "85e4ee329e1a9c2d"
+     ],
+     "series_key": "anthropic_ei.global.occupations_25pct_tasks_share.pt",
+     "subject": "global",
+     "unit": "share",
+     "value": 0.49
+    }
+   ],
+   "series_key": "anthropic_ei.global.occupations_25pct_tasks_share.pt"
+  }
+ ],
+ "series_keys": [
+  "anthropic_ei.global.occupations_25pct_tasks_share.pt"
+ ],
+ "sparkline": [
+  {
+   "as_of": "2026-02-12",
+   "disputed": false,
+   "grade": "B",
+   "high": null,
+   "low": null,
+   "obs_ids": [
+    "85e4ee329e1a9c2d"
+   ],
+   "series_key": "anthropic_ei.global.occupations_25pct_tasks_share.pt",
+   "subject": "global",
+   "unit": "share",
+   "value": 0.49
+  }
+ ],
+ "stale_as_of": null,
+ "stale_ok": false,
+ "stale_reason": null,
+ "status": "consistent_with_normal",
+ "status_events": [
+  {
+   "author": "evaluate",
+   "created_at": "2026-09-11T04:56:30.394524Z",
+   "evidence_ids": [
+    "85e4ee329e1a9c2d"
+   ],
+   "id": "6489b6ebf0364d3b",
+   "new_conf": 55,
+   "new_status": "consistent_with_normal",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "Evaluator: 49.0% (Anthropic Economic Index (open dataset and reports), 2026-02-12) is inside the consistent band (hi=60.0%). Auto-reason; band rationale: The share only rises, so the question is how fast. Normal = under 60% of occupations with a quarter of their tasks in use four years in; fast = 80% or more. Anchor: 49% in the March 2026 report (data 5-12 February 2026).",
+   "target_id": "aei_occupation_depth_25",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": null,
+ "tracker_interpretation": "About half of occupations clear the quarter-of-tasks mark, inside the normal band; the report restates the figure irregularly.",
+ "unit": "share",
+ "unpublished_reason": null,
+ "updated_at": "2026-09-11",
+ "valve_measured": "product_to_adoption",
+ "why_it_matters": "Depth across the occupational map rather than across people; whether AI use is reaching most of the work in most jobs or a narrow band of them."
+}
