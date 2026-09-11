@@ -33,7 +33,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
   const seriesSources = Array.from(new Set(d.series.map((s) => s.series_key.split(".")[0]))).map((id) => srcs.find((s) => s.id === id)).filter(Boolean);
   return (
     <article className="flex flex-col lg:grid lg:grid-cols-[15rem_minmax(0,1fr)] lg:gap-12">
-      <aside className="hidden lg:flex lg:sticky lg:top-8 self-start flex-col gap-4 lg:pt-1">
+      <div aria-label="Indicator summary" className="hidden lg:flex lg:sticky lg:top-8 self-start flex-col gap-4 lg:pt-1">
         <div className="flex flex-wrap items-center gap-2 lg:flex-col lg:items-start lg:gap-3">
           <StatusChip status={d.published ? d.status : null} size="lg" />
           <div className="flex items-center gap-3"><ConfidenceDial value={d.confidence} size={64} /><Grade grade={d.grade} /></div>
@@ -56,7 +56,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
             {SECTIONS.filter(([id]) => id !== "evidence-log" || d.evidence.length).map(([id, title], i) => <li key={id}><a href={`#${id}`} className="hover:text-ink"><span className="num text-muted mr-2">{String(i + 1).padStart(2, "0")}</span>{title}</a></li>)}
           </ol>
         </nav>
-      </aside>
+      </div>
       <div className="flex flex-col gap-10 min-w-0">
       <header>
         <p className="eyebrow">
