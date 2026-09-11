@@ -5,7 +5,7 @@
   "id": "horizon_fits",
   "latest": {
    "as_of_date": "2026-03-05",
-   "computed_at": "2026-09-11T13:28:43.096133Z",
+   "computed_at": "2026-09-11T13:49:06.103006Z",
    "dims": {
     "aic": "-44.8",
     "n": "20",
@@ -84,7 +84,7 @@
   "related_latest": {
    "horizon_blowup_year_50_since_2024": {
     "as_of_date": "2026-03-05",
-    "computed_at": "2026-09-11T13:28:43.096133Z",
+    "computed_at": "2026-09-11T13:49:06.103006Z",
     "dims": {
      "aic": "78.1",
      "n": "20",
@@ -153,7 +153,7 @@
    },
    "horizon_doubling_days_50_since_2023": {
     "as_of_date": "2026-03-05",
-    "computed_at": "2026-09-11T13:28:43.096133Z",
+    "computed_at": "2026-09-11T13:49:06.103006Z",
     "dims": {
      "aic": "-31.0",
      "n": "22",
@@ -222,7 +222,7 @@
    },
    "horizon_doubling_days_80_since_2023": {
     "as_of_date": "2026-04-07",
-    "computed_at": "2026-09-11T13:28:43.096133Z",
+    "computed_at": "2026-09-11T13:49:06.103006Z",
     "dims": {
      "aic": "-27.6",
      "n": "23",
@@ -293,7 +293,7 @@
    },
    "horizon_doubling_days_80_since_2024": {
     "as_of_date": "2026-04-07",
-    "computed_at": "2026-09-11T13:28:43.096133Z",
+    "computed_at": "2026-09-11T13:49:06.103006Z",
     "dims": {
      "aic": "-41.3",
      "n": "21",
@@ -374,7 +374,7 @@
   "id": "ord_misfit",
   "latest": {
    "as_of_date": "2026-03-05",
-   "computed_at": "2026-09-11T13:28:43.096133Z",
+   "computed_at": "2026-09-11T13:49:06.103006Z",
    "dims": {},
    "formula_version": "1",
    "id": "cec9da67e1d41a15",
@@ -409,7 +409,7 @@
   "id": "gross_profit_stack",
   "latest": {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-11T13:28:43.096133Z",
+   "computed_at": "2026-09-11T13:49:06.103006Z",
    "dims": {
     "basis": "estimated",
     "layer_id": "model"
@@ -467,7 +467,7 @@
   "related_latest": {
    "gross_margin_fy": {
     "as_of_date": "2026-06-30",
-    "computed_at": "2026-09-11T13:28:43.096133Z",
+    "computed_at": "2026-09-11T13:49:06.103006Z",
     "dims": {
      "entity": "msft"
     },
@@ -488,7 +488,7 @@
    },
    "lab_gross_margin_estimate": {
     "as_of_date": "2025-12-31",
-    "computed_at": "2026-09-11T13:28:43.096133Z",
+    "computed_at": "2026-09-11T13:49:06.103006Z",
     "dims": {
      "entity": "openai"
     },
@@ -522,7 +522,7 @@
   "id": "margin_stack",
   "latest": {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-11T13:28:43.096133Z",
+   "computed_at": "2026-09-11T13:49:06.103006Z",
    "dims": {
     "layer_id": "compute_semis"
    },
@@ -571,7 +571,7 @@
   "id": "hhi_layers",
   "latest": {
    "as_of_date": "2026-03-31",
-   "computed_at": "2026-09-11T13:28:43.096133Z",
+   "computed_at": "2026-09-11T13:49:06.103006Z",
    "dims": {
     "layer_id": "compute_cloud"
    },
@@ -608,7 +608,7 @@
   "id": "recoupment",
   "latest": {
    "as_of_date": "2026-08-31",
-   "computed_at": "2026-09-11T13:28:43.096133Z",
+   "computed_at": "2026-09-11T13:49:06.103006Z",
    "dims": {
     "entity": "z_ai_zhipu"
    },
@@ -637,27 +637,33 @@
   "sql": "WITH rr AS (SELECT subject, as_of_date, value_numeric AS rev, id FROM observations WHERE series_key LIKE 'epoch.%.revenue_run_rate_usd.pt'),\n     eq AS (SELECT subject, as_of_date, value_numeric AS eq, id FROM observations WHERE series_key LIKE 'epoch.%.round_equity_usd.pt')\nSELECT rr.as_of_date, rr.subject AS entity, rr.rev / sum(eq.eq) AS value,\n       list_concat([rr.id], list(eq.id ORDER BY eq.id)) AS obs_ids\nFROM rr JOIN eq ON eq.subject = rr.subject AND eq.as_of_date <= rr.as_of_date\nGROUP BY rr.as_of_date, rr.subject, rr.rev, rr.id\n"
  },
  {
-  "caveats": "Different geographies (CA claims vs US employment), different exposure measures; a count, not a test.",
-  "description": "Number of the four monthly labour trackers whose latest reading is past its own AI-attributable-break threshold (0-4). Thresholds - high-exposure employment y/y <= -3% (ADP/Stanford Canaries); exposed-vs-unexposed gap <= -10% (Revelio); high-exposure claims 3-month average +5% or more m/m (CAIT); entry-level shortfall >= 25% (Canaries).",
+  "caveats": "Different geographies (CA claims vs US employment) and different exposure measures; a count, not a test. Each tracker's latest reading counts, whatever its month.",
+  "description": "Number of the four monthly labour trackers whose latest reading is past its own AI-attributable-break threshold (0-4), counting each tracker once and none of the entry-level cuts (Appendix B asks for a break beyond entry level). Thresholds - most-exposed quintile employment y/y <= -3% (Canaries, all ages); exposed-vs-unexposed gap <= -10% (Revelio); high-exposure claims 3-month average +5% or more m/m (CAIT, potential exposure, computed from its counts); occupational-mix dissimilarity >= 10 pp (Yale).",
   "id": "concordance",
   "latest": {
    "as_of_date": "2026-07-31",
-   "computed_at": "2026-09-11T13:28:43.096133Z",
+   "computed_at": "2026-09-11T13:49:06.103006Z",
    "dims": {},
-   "formula_version": "1",
+   "formula_version": "2",
    "id": "ed08c58063fcdeb8",
    "input_observation_ids": [
-    "2ec713fc54d6b942",
-    "83c12bef8f8e8107",
+    "14ca8a23f3a7fee5",
+    "1fce2bb84f849403",
+    "4b51d49e30e2619d",
     "a9276b9dfc5babca",
-    "cbb77dc61aadf044"
+    "e024995d58fffc7f",
+    "eb3282424b0fcc9a",
+    "f03af856e9a46333"
    ],
    "metric": "cross_tracker_concordance",
    "obs_ids": [
-    "2ec713fc54d6b942",
-    "83c12bef8f8e8107",
+    "14ca8a23f3a7fee5",
+    "1fce2bb84f849403",
+    "4b51d49e30e2619d",
     "a9276b9dfc5babca",
-    "cbb77dc61aadf044"
+    "e024995d58fffc7f",
+    "eb3282424b0fcc9a",
+    "f03af856e9a46333"
    ],
    "value": 0.0,
    "value_high": null,
@@ -670,7 +676,7 @@
   "shape": {
    "unit": "count"
   },
-  "sql": "WITH latest AS (\n  SELECT series_key, value_numeric, as_of_date, id,\n         row_number() OVER (PARTITION BY series_key ORDER BY as_of_date DESC) AS rn\n  FROM observations\n  WHERE series_key IN ('adp_research.us_high_exposure.employment_yoy.m', 'revelio.us_exposed.growth_gap.m',\n                       'cait.ca_high_exposure.claims_3mma_mom.m', 'stanford_del.us_entry_level_exposed.employment_gap.pt'))\nSELECT max(as_of_date) AS as_of_date,\n       sum(CASE WHEN series_key = 'adp_research.us_high_exposure.employment_yoy.m' AND value_numeric <= -0.03 THEN 1\n                WHEN series_key = 'revelio.us_exposed.growth_gap.m' AND value_numeric <= -0.10 THEN 1\n                WHEN series_key = 'cait.ca_high_exposure.claims_3mma_mom.m' AND value_numeric >= 0.05 THEN 1\n                WHEN series_key = 'stanford_del.us_entry_level_exposed.employment_gap.pt' AND value_numeric >= 0.25 THEN 1\n                ELSE 0 END)::DOUBLE AS value,\n       list(id ORDER BY id) AS obs_ids\nFROM latest WHERE rn = 1\n"
+  "sql": "WITH obs AS (\n  SELECT series_key, value_numeric AS v, as_of_date, [id] AS ids FROM observations\n  WHERE series_key IN ('canaries.us_exposure_q5.employment_yoy.m', 'revelio.us_exposed.growth_gap.m',\n                       'yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m')),\ncait AS (SELECT as_of_date, value_numeric AS v, id FROM observations WHERE series_key = 'cait.ca_top_quartile_potential.claims.m'),\ncma AS (SELECT as_of_date, avg(v) OVER w AS ma, count(*) OVER w AS n, list(id) OVER w AS ids\n        FROM cait WINDOW w AS (ORDER BY as_of_date ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)),\ncchg AS (SELECT 'cait_3mma_mom' AS series_key, ma / lag(ma) OVER o - 1 AS v, as_of_date,\n                list_distinct(list_concat(ids, lag(ids) OVER o)) AS ids, n, lag(n) OVER o AS n0\n         FROM cma WINDOW o AS (ORDER BY as_of_date)),\nallx AS (SELECT series_key, v, as_of_date, ids FROM obs UNION ALL SELECT series_key, v, as_of_date, ids FROM cchg WHERE n = 3 AND n0 = 3),\nlatest AS (SELECT *, row_number() OVER (PARTITION BY series_key ORDER BY as_of_date DESC) AS rn FROM allx)\nSELECT max(as_of_date) AS as_of_date,\n       sum(CASE WHEN series_key = 'canaries.us_exposure_q5.employment_yoy.m' AND v <= -0.03 THEN 1\n                WHEN series_key = 'revelio.us_exposed.growth_gap.m' AND v <= -0.10 THEN 1\n                WHEN series_key = 'cait_3mma_mom' AND v >= 0.05 THEN 1\n                WHEN series_key = 'yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m' AND v >= 10 THEN 1\n                ELSE 0 END)::DOUBLE AS value,\n       list_distinct(flatten(list(ids))) AS obs_ids\nFROM latest WHERE rn = 1\n"
  },
  {
   "caveats": "Hyperscaler capex is not all AI; the revenue side is run-rates (annualised, press-reported) plus one annual survey and double-counts where enterprises buy from labs; grade C by construction.",
@@ -678,7 +684,7 @@
   "id": "capex_ratio",
   "latest": {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-11T13:28:43.096133Z",
+   "computed_at": "2026-09-11T13:49:06.103006Z",
    "dims": {},
    "formula_version": "1",
    "id": "7867e6c6b3b7fe32",
@@ -738,7 +744,7 @@
   "id": "circular",
   "latest": {
    "as_of_date": "2026-08-17",
-   "computed_at": "2026-09-11T13:28:43.096133Z",
+   "computed_at": "2026-09-11T13:49:06.103006Z",
    "dims": {},
    "formula_version": "2",
    "id": "f6d2b4cee03aed99",
@@ -794,7 +800,7 @@
   "id": "price_capability",
   "latest": {
    "as_of_date": "2026-09-10",
-   "computed_at": "2026-09-11T13:28:43.096133Z",
+   "computed_at": "2026-09-11T13:49:06.103006Z",
    "dims": {},
    "formula_version": "3",
    "id": "aadf76ab192df530",
@@ -829,7 +835,7 @@
   "id": "customer_concentration",
   "latest": {
    "as_of_date": "2026-07-26",
-   "computed_at": "2026-09-11T13:28:43.096133Z",
+   "computed_at": "2026-09-11T13:49:06.103006Z",
    "dims": {
     "entity": "nvda"
    },
@@ -864,7 +870,7 @@
   "id": "incremental_capex",
   "latest": {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-11T13:28:43.096133Z",
+   "computed_at": "2026-09-11T13:49:06.103006Z",
    "dims": {
     "entity": "msft"
    },
@@ -896,7 +902,7 @@
   "related_latest": {
    "capex_to_revenue_stack": {
     "as_of_date": "2026-06-30",
-    "computed_at": "2026-09-11T13:28:43.096133Z",
+    "computed_at": "2026-09-11T13:49:06.103006Z",
     "dims": {},
     "formula_version": "1",
     "id": "7867e6c6b3b7fe32",
@@ -948,6 +954,38 @@
   "sql": "WITH j AS (\n  SELECT c.subject, c.as_of_date, c.value_numeric AS capex, r.value_numeric AS rev, [c.id, r.id] AS ids\n  FROM observations c JOIN observations r ON r.subject = c.subject AND r.as_of_date = c.as_of_date AND r.series_key = 'sec.' || c.subject || '.revenue.fy'\n  WHERE c.series_key LIKE 'sec.%.capex.fy' AND c.subject IN ('msft', 'googl', 'amzn', 'meta', 'orcl', 'crwv')),\np AS (SELECT *, lag(capex) OVER w AS capex0, lag(rev) OVER w AS rev0, lag(ids) OVER w AS ids0, lag(as_of_date) OVER w AS d0\n      FROM j WINDOW w AS (PARTITION BY subject ORDER BY as_of_date))\nSELECT as_of_date, subject AS entity, (capex - capex0) / (rev - rev0) AS value, list_concat(ids, ids0) AS obs_ids\nFROM p WHERE capex0 IS NOT NULL AND rev > rev0 AND date_diff('day', d0, as_of_date) BETWEEN 350 AND 380\n"
  },
  {
+  "caveats": "Two graders with different item lists; each counts once, at its latest reading.",
+  "description": "The mean of the two graders' latest readings of AI 2027's quantitative predictions against what happened (AI Futures Project's own grading and the independent ai2027-tracker), as a share of the predicted pace.",
+  "id": "surprise",
+  "latest": {
+   "as_of_date": "2026-07-31",
+   "computed_at": "2026-09-11T13:49:06.103006Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "7ffbab052765a202",
+   "input_observation_ids": [
+    "86d58f4a839a1c59",
+    "8f07be35b7fe2867"
+   ],
+   "metric": "surprise_index",
+   "obs_ids": [
+    "86d58f4a839a1c59",
+    "8f07be35b7fe2867"
+   ],
+   "value": 0.7,
+   "value_high": null,
+   "value_low": null
+  },
+  "metric": "surprise_index",
+  "name": "Surprise index",
+  "question": "Is AI 2027 running ahead of or behind its own quantitative predictions, by its graders' reckoning?",
+  "related_latest": {},
+  "shape": {
+   "unit": "share"
+  },
+  "sql": "WITH l AS (SELECT series_key, value_numeric AS v, as_of_date, id,\n                  row_number() OVER (PARTITION BY series_key ORDER BY as_of_date DESC) AS rn\n           FROM observations WHERE series_key IN ('aifutures_blog.ai_2027_quantitative.pace_vs_predicted.pt',\n                                                  'ai2027_tracker.ai_2027_quantitative.pace_vs_predicted.pt'))\nSELECT max(as_of_date) AS as_of_date, avg(v) AS value, list(id ORDER BY id) AS obs_ids FROM l WHERE rn = 1 HAVING count(*) > 0\n"
+ },
+ {
   "caveats": "Seed-list entities only, attributed by primary membership; debt excluded.",
   "description": "Equity venture dollars over the trailing four calendar quarters at each quarter end, per layer (sublayer_id \"all\") and per sub-layer.",
   "dims": {
@@ -957,7 +995,7 @@
   "id": "venture_4q",
   "latest": {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-11T13:28:43.096133Z",
+   "computed_at": "2026-09-11T13:49:06.103006Z",
    "dims": {
     "layer_id": "model",
     "sublayer_id": "all"
@@ -1030,7 +1068,7 @@
   "id": "venture_intensity",
   "latest": {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-11T13:28:43.096133Z",
+   "computed_at": "2026-09-11T13:49:06.103006Z",
    "dims": {},
    "formula_version": "1",
    "id": "2c1a393103691d88",
@@ -1086,7 +1124,7 @@
   "id": "venture_frontier",
   "latest": {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-11T13:28:43.096133Z",
+   "computed_at": "2026-09-11T13:49:06.103006Z",
    "dims": {},
    "formula_version": "1",
    "id": "39cc8e427e2c5638",
@@ -1184,7 +1222,7 @@
   "id": "aa_frontier",
   "latest": {
    "as_of_date": "2026-09-01",
-   "computed_at": "2026-09-11T13:28:43.096133Z",
+   "computed_at": "2026-09-11T13:49:06.103006Z",
    "dims": {},
    "formula_version": "2",
    "id": "9ac351a81f2d26a0",
@@ -1214,7 +1252,7 @@
   "id": "price_capability_aa",
   "latest": {
    "as_of_date": "2026-09-11",
-   "computed_at": "2026-09-11T13:28:43.096133Z",
+   "computed_at": "2026-09-11T13:49:06.103006Z",
    "dims": {},
    "formula_version": "2",
    "id": "f93befc11a81de1e",
@@ -1240,7 +1278,7 @@
   "related_latest": {
    "aa_frontier_price_per_point": {
     "as_of_date": "2026-09-11",
-    "computed_at": "2026-09-11T13:28:43.096133Z",
+    "computed_at": "2026-09-11T13:49:06.103006Z",
     "dims": {},
     "formula_version": "2",
     "id": "34a2009ea85bb400",
@@ -1269,7 +1307,7 @@
   "id": "venture_top3",
   "latest": {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-11T13:28:43.096133Z",
+   "computed_at": "2026-09-11T13:49:06.103006Z",
    "dims": {},
    "formula_version": "1",
    "id": "f1229f10c45623f1",

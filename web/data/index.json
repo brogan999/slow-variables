@@ -158,6 +158,8 @@
     "cl_adapters_per_product",
     "cl_forgetting_retention",
     "cl_learning_curve_slope",
+    "cl_refresh_cadence_hours",
+    "enterprise_session_training_policy",
     "cl_benchmark_exists"
    ],
    "sublayer_id": null
@@ -13611,17 +13613,20 @@
     "as_of": "2026-07-31",
     "dims": {},
     "obs_ids": [
-     "2ec713fc54d6b942",
-     "83c12bef8f8e8107",
+     "14ca8a23f3a7fee5",
+     "1fce2bb84f849403",
+     "4b51d49e30e2619d",
      "a9276b9dfc5babca",
-     "cbb77dc61aadf044"
+     "e024995d58fffc7f",
+     "eb3282424b0fcc9a",
+     "f03af856e9a46333"
     ],
     "unit": "count",
     "value": 0.0
    },
    "layer_id": "labour_consumers",
    "leading_lagging": "coincident",
-   "n_observations": 4,
+   "n_observations": 7,
    "name": "Cross-tracker concordance (labour)",
    "pending": null,
    "published": true,
@@ -13630,10 +13635,13 @@
      "as_of": "2026-07-31",
      "dims": {},
      "obs_ids": [
-      "2ec713fc54d6b942",
-      "83c12bef8f8e8107",
+      "14ca8a23f3a7fee5",
+      "1fce2bb84f849403",
+      "4b51d49e30e2619d",
       "a9276b9dfc5babca",
-      "cbb77dc61aadf044"
+      "e024995d58fffc7f",
+      "eb3282424b0fcc9a",
+      "f03af856e9a46333"
      ],
      "unit": "count",
      "value": 0.0
@@ -14233,17 +14241,13 @@
    "id": "surprise_index",
    "latest": {
     "as_of": "2026-07-31",
-    "disputed": false,
-    "grade": "D",
-    "high": null,
-    "low": null,
+    "dims": {},
     "obs_ids": [
-     "86d58f4a839a1c59"
+     "86d58f4a839a1c59",
+     "8f07be35b7fe2867"
     ],
-    "series_key": "aifutures_blog.ai_2027_quantitative.pace_vs_predicted.pt",
-    "subject": "ai_2027_quantitative",
     "unit": "share",
-    "value": 0.75
+    "value": 0.7
    },
    "layer_id": "model",
    "leading_lagging": "leading",
@@ -14253,32 +14257,14 @@
    "published": true,
    "sparkline": [
     {
-     "as_of": "2025-12-31",
-     "disputed": false,
-     "grade": "D",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "f8386ab8c9d0fc8d"
-     ],
-     "series_key": "aifutures_blog.ai_2027_quantitative.pace_vs_predicted.pt",
-     "subject": "ai_2027_quantitative",
-     "unit": "share",
-     "value": 0.65
-    },
-    {
      "as_of": "2026-07-31",
-     "disputed": false,
-     "grade": "D",
-     "high": null,
-     "low": null,
+     "dims": {},
      "obs_ids": [
-      "86d58f4a839a1c59"
+      "86d58f4a839a1c59",
+      "8f07be35b7fe2867"
      ],
-     "series_key": "aifutures_blog.ai_2027_quantitative.pace_vs_predicted.pt",
-     "subject": "ai_2027_quantitative",
      "unit": "share",
-     "value": 0.75
+     "value": 0.7
     }
    ],
    "stale_as_of": null,
@@ -15721,6 +15707,72 @@
    "status": null,
    "unit": "ratio",
    "unpublished_reason": "Not measurable: the only curve on record (cl.engram_harvey.closed_book_accuracy.pt) is a research result across training steps, not lift over deployment time.",
+   "valve_measured": "return_arrow"
+  },
+  {
+   "answers": [
+    "Valve: Return arrow (deployment \u2192 invention)",
+    "Who keeps it: Training input / RLaaS / post-training / continual-learning infra"
+   ],
+   "bucket_id": "return_arrow",
+   "confidence": 30,
+   "grade": "D",
+   "id": "cl_refresh_cadence_hours",
+   "latest": {
+    "as_of": "2026-05-27",
+    "dims": {},
+    "obs_ids": [
+     "73920f270a9efb8f"
+    ],
+    "unit": "hours",
+    "value": 1.0
+   },
+   "layer_id": "training_input",
+   "leading_lagging": "leading",
+   "n_observations": 1,
+   "name": "Fastest production refresh of a continually updated model (hours)",
+   "pending": null,
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2026-05-27",
+     "dims": {},
+     "obs_ids": [
+      "73920f270a9efb8f"
+     ],
+     "unit": "hours",
+     "value": 1.0
+    }
+   ],
+   "stale_as_of": null,
+   "stale_reason": "Event-driven: a vendor describes its pipeline once; a quiet quarter means nothing new was described.",
+   "status": "emerging",
+   "unit": "hours",
+   "unpublished_reason": null,
+   "valve_measured": "return_arrow"
+  },
+  {
+   "answers": [
+    "Valve: Return arrow (deployment \u2192 invention)",
+    "Who keeps it: Training input / Permissioned data markets & licensing"
+   ],
+   "bucket_id": "return_arrow",
+   "confidence": null,
+   "grade": null,
+   "id": "enterprise_session_training_policy",
+   "latest": null,
+   "layer_id": "training_input",
+   "leading_lagging": "leading",
+   "n_observations": 0,
+   "name": "Enterprise sessions allowed to train vendor models",
+   "pending": null,
+   "published": false,
+   "sparkline": [],
+   "stale_as_of": null,
+   "stale_reason": null,
+   "status": null,
+   "unit": "share",
+   "unpublished_reason": "Not measurable: the policy is set contract by contract, and no vendor publishes the share of enterprise seats whose sessions may train its models; default opt-outs are recorded as evidence when a vendor changes them.",
    "valve_measured": "return_arrow"
   },
   {

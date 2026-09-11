@@ -10793,6 +10793,48 @@
         "Who keeps it: Training input / RLaaS / post-training / continual-learning infra"
        ],
        "bucket_id": "return_arrow",
+       "confidence": 30,
+       "grade": "D",
+       "id": "cl_refresh_cadence_hours",
+       "latest": {
+        "as_of": "2026-05-27",
+        "dims": {},
+        "obs_ids": [
+         "73920f270a9efb8f"
+        ],
+        "unit": "hours",
+        "value": 1.0
+       },
+       "layer_id": "training_input",
+       "leading_lagging": "leading",
+       "n_observations": 1,
+       "name": "Fastest production refresh of a continually updated model (hours)",
+       "pending": null,
+       "published": true,
+       "sparkline": [
+        {
+         "as_of": "2026-05-27",
+         "dims": {},
+         "obs_ids": [
+          "73920f270a9efb8f"
+         ],
+         "unit": "hours",
+         "value": 1.0
+        }
+       ],
+       "stale_as_of": null,
+       "stale_reason": "Event-driven: a vendor describes its pipeline once; a quiet quarter means nothing new was described.",
+       "status": "emerging",
+       "unit": "hours",
+       "unpublished_reason": null,
+       "valve_measured": "return_arrow"
+      },
+      {
+       "answers": [
+        "Valve: Return arrow (deployment \u2192 invention)",
+        "Who keeps it: Training input / RLaaS / post-training / continual-learning infra"
+       ],
+       "bucket_id": "return_arrow",
        "confidence": null,
        "grade": null,
        "id": "cl_benchmark_exists",
@@ -11252,7 +11294,32 @@
       }
      ],
      "id": "data_licensing",
-     "indicators": [],
+     "indicators": [
+      {
+       "answers": [
+        "Valve: Return arrow (deployment \u2192 invention)",
+        "Who keeps it: Training input / Permissioned data markets & licensing"
+       ],
+       "bucket_id": "return_arrow",
+       "confidence": null,
+       "grade": null,
+       "id": "enterprise_session_training_policy",
+       "latest": null,
+       "layer_id": "training_input",
+       "leading_lagging": "leading",
+       "n_observations": 0,
+       "name": "Enterprise sessions allowed to train vendor models",
+       "pending": null,
+       "published": false,
+       "sparkline": [],
+       "stale_as_of": null,
+       "stale_reason": null,
+       "status": null,
+       "unit": "share",
+       "unpublished_reason": "Not measurable: the policy is set contract by contract, and no vendor publishes the share of enterprise seats whose sessions may train its models; default opt-outs are recorded as evidence when a vendor changes them.",
+       "valve_measured": "return_arrow"
+      }
+     ],
      "layer_id": "training_input",
      "name": "Permissioned data markets & licensing",
      "order": 12

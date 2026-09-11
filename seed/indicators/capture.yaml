@@ -271,6 +271,7 @@ indicators:
     layer_id: deployment_application
     direction_rule: {periods: 8, dead_band: 0.3, higher_is: concentrating, rationale: "Eight weekly prints (two months); a move under 0.3x of NTM revenue is market noise. Rising multiples = the market pricing more durable rents into the application layer."}
     leading_lagging: leading
+    timing_rationale: "Leading: valuation multiples price expected rents before any margin reports them."
     tracker_interpretation: The median multiple fell to about 3x in spring 2026 on the 'AI eats software' trade and has recovered to the mid-4s; the top five trade above 30x.
     counterevidence: One analyst's basket and methodology; multiples move with rates as much as with AI; the basket is incumbents, not AI-native apps.
     confidence: 50
@@ -397,6 +398,7 @@ indicators:
     sublayer_id: neolabs
     direction_rule: {periods: 4, dead_band: 1, higher_is: concentrating, rationale: "Four quarters; under 1x is noise."}
     leading_lagging: leading
+    timing_rationale: "Leading: capital raised ahead of revenue signals overfunding before returns disappoint."
     tracker_interpretation: Unpublished until a revenue series exists for the neolabs.
     unpublished_reason: "Not measurable from free sources: the neolabs' rounds are filed or reported, but none has a revenue figure in Epoch or a filing, and Leonis Capital's count (evidence below) finds most disclose no revenue at all, so the denominator does not exist."
     counterevidence: Revenue for private neolabs is reported by The Information and Sacra behind paywalls.
@@ -436,6 +438,7 @@ indicators:
     layer_id: model
     direction_rule: {periods: 4, dead_band: 1, higher_is: concentrating, rationale: "Needs at least eight quarters of both series before a lag can be estimated."}
     leading_lagging: leading
+    timing_rationale: "Leading: venture money arrives quarters before a sub-layer's revenue does, which is the lag this would measure."
     tracker_interpretation: Not yet measurable; fewer than eight quarters of paired series exist.
     unpublished_reason: "Not yet measurable: the estimate needs at least eight quarters of both venture dollars and revenue for the same sub-layer; the venture series starts in 2023 and revenue exists only for the frontier labs."
     counterevidence: Lags estimated on a handful of quarters are dominated by single rounds.
@@ -605,6 +608,7 @@ indicators:
     sublayer_id: frontier_labs
     direction_rule: {periods: 4, dead_band: 0.05, higher_is: concentrating, rationale: "Placeholder until the series exists; bands are set with the first observation."}
     leading_lagging: leading
+    timing_rationale: "Leading: a lab's margin moves before its share of stack profit shows up in anyone's filings."
     tracker_interpretation: "Unpublished; see the reason."
     unpublished_reason: "Not measurable from free sources: lab gross margins are reported only by The Information and Sacra behind paywalls; the paid stubs exist and are off."
     counterevidence: "Reported by journalists, not auditors; inference cost accounting differs by lab."
@@ -623,6 +627,7 @@ indicators:
     sublayer_id: frontier_labs
     direction_rule: {periods: 4, dead_band: 0.05, higher_is: concentrating, rationale: "Placeholder until the series exists; bands are set with the first observation."}
     leading_lagging: leading
+    timing_rationale: "Leading: a rising compute share says labs are buying capability ahead of the revenue it is meant to earn."
     tracker_interpretation: "Unpublished; see the reason."
     unpublished_reason: "Not measurable as a series: Epoch published a one-off estimate range, not a table; a manual row can carry the point estimate once quoted."
     counterevidence: "One estimate; spending mix differs by lab and year."
@@ -640,6 +645,7 @@ indicators:
     layer_id: deployment_application
     direction_rule: {periods: 4, dead_band: 0.05, higher_is: concentrating, rationale: "Placeholder until the series exists; bands are set with the first observation."}
     leading_lagging: leading
+    timing_rationale: "Leading: the model tax squeezes application margins before application valuations adjust."
     tracker_interpretation: "Unpublished; see the reason."
     unpublished_reason: "Not measurable from free sources: Artificial Analysis now gives list price per token, but a margin needs each app's token volume and revenue, neither public, and list price overstates what large apps pay under committed-use discounts; SemiAnalysis unit costs and The Information's app financials are paid (stubs off)."
     counterevidence: "Every input is private-company reporting."
@@ -658,6 +664,7 @@ indicators:
     sublayer_id: hyperscalers_neoclouds
     direction_rule: {periods: 4, dead_band: 0.05, higher_is: concentrating, rationale: "Placeholder until the series exists; bands are set with the first observation."}
     leading_lagging: leading
+    timing_rationale: "Leading: rental prices fall as capacity outruns demand, ahead of neocloud earnings."
     tracker_interpretation: "Unpublished; see the reason."
     unpublished_reason: "Not measurable from free sources: the SemiAnalysis index is paywalled; the paid stub is off."
     counterevidence: "Spot and contracted prices diverge; list prices are not transaction prices."
@@ -676,6 +683,7 @@ indicators:
     sublayer_id: frontier_labs
     direction_rule: {periods: 4, dead_band: 0.05, higher_is: concentrating, rationale: "Placeholder until the series exists; bands are set with the first observation."}
     leading_lagging: leading
+    timing_rationale: "Leading: secondary marks reprice private companies months before their next round does."
     tracker_interpretation: "Unpublished; see the reason."
     unpublished_reason: "Not measurable from free sources: secondary marks are behind Caplight, Forge and EquityZen paywalls; the paid stub is off."
     counterevidence: "Thin trades; marks reflect liquidity discounts."
@@ -693,6 +701,7 @@ indicators:
     layer_id: adopters
     direction_rule: {periods: 4, dead_band: 0.05, higher_is: concentrating, rationale: "Placeholder until the series exists; bands are set with the first observation."}
     leading_lagging: leading
+    timing_rationale: "Leading: revenue per employee rises in exposed sectors before productivity statistics pick it up."
     tracker_interpretation: "Unpublished; see the reason."
     unpublished_reason: "Not measurable yet: no free source pairs sector revenue with employee counts at a usable cadence; BLS industry mappings to exposure are unverified."
     counterevidence: "Sector aggregates hide firm-level dispersion; revenue per head moves with prices and outsourcing."
@@ -754,6 +763,7 @@ indicators:
     layer_id: compute_physical
     sublayer_id: semis
     leading_lagging: leading
+    timing_rationale: "Leading: credit spreads price stress at the chip layer before earnings show it."
     tracker_interpretation: One press-quoted reading sits on the circular-financing ledger.
     confidence: 20
     unpublished_reason: "Not measurable as a series from free sources: five-year CDS quotes come from ICE and Bloomberg terminals; the one free reading is a press-quoted figure on the circular-financing ledger, and a direction rule needs quarterly prints."
@@ -768,6 +778,7 @@ indicators:
     cadence_expected: quarterly
     layer_id: model
     leading_lagging: leading
+    timing_rationale: "Leading: the market's multiple prices where rents are expected to sit before margins do."
     tracker_interpretation: The model layer's version is lab_valuation_to_run_rate.
     confidence: 20
     unpublished_reason: "Not measurable across layers from free sources: Epoch's post-money and run-rate rows cover model-layer companies only, so a by-layer multiple collapses to lab_valuation_to_run_rate; application- and infrastructure-layer private multiples need Sacra or PitchBook revenue (paid stubs off), and public EV/revenue needs a market-value source the tracker does not ingest."
@@ -784,6 +795,7 @@ indicators:
     layer_id: model
     sublayer_id: frontier_labs
     leading_lagging: leading
+    timing_rationale: "Leading: capital concentrating in a few raisers comes before the market structure it pays for."
     tracker_interpretation: Equal to the frontier share since the second quarter of 2025.
     confidence: 30
     unpublished_reason: "Identical to frontier_capital_concentration on the seed list since Q2 2025 (the top three raisers are the frontier_labs sub-layer), so a separate status would count one fact twice; it publishes when a non-frontier company enters the top three."
@@ -798,6 +810,7 @@ indicators:
     cadence_expected: quarterly
     layer_id: model
     leading_lagging: leading
+    timing_rationale: "Leading: round sizes move with investor appetite before a sub-layer's revenue does."
     tracker_interpretation: Not published.
     confidence: 20
     unpublished_reason: "Not meaningful on current coverage: one to four seed-list rounds per sub-layer-quarter, so a median restates the venture strip's total and count; it needs a round source with market coverage (aifunding.me is on the read-not-ingested list; PitchBook, Crunchbase and Dealroom are paid)."
@@ -812,6 +825,7 @@ indicators:
     cadence_expected: quarterly
     layer_id: model
     leading_lagging: leading
+    timing_rationale: "Leading: a shift toward late-stage rounds marks a maturing sub-layer before its revenue does."
     tracker_interpretation: Not published.
     confidence: 20
     unpublished_reason: "Not measurable from free structured data: Form D has no round or series field, and Epoch's rounds (labs only) name the stage inside a free-text label; a stage mix by sub-layer needs PitchBook, Crunchbase or Dealroom (paid stubs off)."
@@ -826,6 +840,7 @@ indicators:
     cadence_expected: quarterly
     layer_id: deployment_application
     leading_lagging: leading
+    timing_rationale: "Leading: faster climbs to scale revenue show where demand is before layer totals do."
     tracker_interpretation: Not published.
     confidence: 20
     unpublished_reason: "Not measurable: seed/entities.yaml carries no founding dates, and the only run-rate series (Epoch, labs) dates a figure when the press reports it, not when the company crossed a hundred million."
