@@ -49,7 +49,7 @@ function read<T>(rel: string): T {
 export const index = () => read<{ indicators: Card[]; buckets: Bucket[]; layers: Layer[]; sublayers: Sublayer[]; crosswalk: Crosswalk[] }>("index.json");
 export const indicator = (id: string) => read<Doc>(`indicators/${id}.json`);
 export const bucket = (id: string) => read<Bucket & { indicators: Card[]; crosswalk: Crosswalk[] }>(`buckets/${id}.json`);
-export const layer = (id: string) => read<Layer & { indicators: Card[]; sublayers: Sublayer[]; crosswalk: Crosswalk[] }>(`layers/${id}.json`);
+export const layer = (id: string) => read<Layer & { indicators: Card[]; sublayers: Sublayer[]; crosswalk: Crosswalk[]; venture: LayerVenture | null; commoditisation: { proxies: { id: string; name: string; status: string | null }[]; line: string } | null }>(`layers/${id}.json`);
 export const series = (key: string) => read<{ series_key: string; unit: string; source: Source | null; observations: Observation[]; withdrawn: Observation[] }>(`series/${key}.json`);
 export const seriesKeys = () => fs.readdirSync(path.join(ROOT, "series")).map((f) => f.replace(/\.json$/, ""));
 export const diffusion = () => read<{
@@ -60,12 +60,12 @@ export const diffusion = () => read<{
 export type StackPart = { label: string; value: number; estimated: boolean; grade: string | null; href: string; obs_ids: string[] };
 export type StackBar = { value: number; as_of: string; estimated: boolean; parts: StackPart[]; obs_ids: string[] };
 export type StackRow = { as_of: string; layer_id: string | null; basis?: string; value: number; obs_ids: string[] };
-export const capture = () => read<{ as_of: string; verdict?: string; what_would_change: string[]; layers: (Layer & { indicators: Card[]; status: string })[]; recent_status_events: StatusEvent[]; stack_bars: Record<string, StackBar>; gross_profit_stack_series: StackRow[]; margin_stack_series: StackRow[] }>("lens/capture.json");
+export const capture = () => read<{ as_of: string; verdict?: string; what_would_change: string[]; layers: (Layer & { indicators: Card[]; status: string; venture: LayerVenture | null; reading: string })[]; recent_status_events: StatusEvent[]; stack_bars: Record<string, StackBar>; gross_profit_stack_series: StackRow[]; margin_stack_series: StackRow[] }>("lens/capture.json");
 export const sources = () => read<Source[]>("sources.json");
 export type Skipped = { id: string; name: string; url: string | null; reason: string; attribution: string | null };
 export const skippedSources = () => read<Skipped[]>("skipped_sources.json");
 export const changelog = () => read<StatusEvent[]>("changelog.json");
-export const meta = () => read<{ generated_at: string }>("meta.json");
+export const meta = () => read<{ generated_at: string; observations: number; indicators_published: number; sources: number }>("meta.json");
 
 export { fmt, words } from "./format";
 export const obsIndex = () => read<Record<string, string>>("obs_index.json");
@@ -106,7 +106,9 @@ export function memo(date: string): Memo | null {
   const p = path.join(ROOT, "memos", `${date}.json`);
   return fs.existsSync(p) ? (JSON.parse(fs.readFileSync(p, "utf8")) as Memo) : null;
 }
-export type VentureQuarter = { as_of: string; venture_dollars?: { value: number; obs_ids: string[] }; round_count?: { value: number; obs_ids: string[] }; venture_dollars_incl_debt?: { value: number; obs_ids: string[] } };
+export type VentureSeg = { source: string; kind: string; value: number; obs_ids: string[]; href: string | null };
+export type VentureQuarter = { as_of: string; venture_dollars?: { value: number; obs_ids: string[] }; round_count?: { value: number; obs_ids: string[] }; venture_dollars_incl_debt?: { value: number; obs_ids: string[] }; by_source?: VentureSeg[] };
+export type LayerVenture = { value: number; as_of: string; obs_ids: string[]; prior: { value: number; as_of: string; obs_ids: string[] } | null; arrow: "up" | "down" | "flat" | null; sublayers: { sublayer_id: string; name: string; value: number; as_of: string; obs_ids: string[] }[] };
 export type VentureDoc = { sublayer_id: string; quarters: VentureQuarter[] };
 export const venture = (sublayerId: string): VentureDoc | null => { try { return read<VentureDoc>(`venture/${sublayerId}.json`); } catch { return null; } };
 export type LadderRow = { obs_id: string; subject: string; entity_id: string | null; as_of: string; tier: number; url: string; snippet: string };

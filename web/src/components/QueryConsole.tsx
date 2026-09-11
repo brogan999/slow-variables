@@ -21,7 +21,7 @@ export function QueryConsole({ initial }: { initial: string }) {
       <textarea value={sql} onChange={(e) => setSql(e.target.value)} rows={5} spellCheck={false} aria-label="SQL" className="w-full resize-y rounded-md ring-hair bg-surface px-3 py-2 font-mono text-xs" />
       <div className="flex items-center gap-3 text-xs text-muted">
         <button type="submit" disabled={busy} className="rounded-full bg-ink px-3 py-1 text-xs text-background disabled:opacity-50">{busy ? "Running…" : "Run"}</button>
-        <span>Read-only, 200 rows, five seconds. Tables: observations, derived, status_events, indicators, metrics.</span>
+        <span>Read-only, 200 rows, five seconds. Tables: observations, derived, status_events, indicators, metrics, entity_membership, venture_rounds.</span>
       </div>
       <div aria-live="polite">
         {res === "offline" ? <p className="text-sm text-slow">The query service is offline; the saved analyses above are the nightly export.</p> : null}

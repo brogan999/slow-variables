@@ -391,15 +391,42 @@ metrics:
     inputs: ["formd.*.amount_sold_usd.pt", "epoch.*.round_equity_usd.pt"]
     caveats: Only entities on the seed list with a verified CIK or an Epoch row; Form D amendments supersede their originals (cumulative amount sold); Epoch rounds are reported, not filed; secondary sales and debt are excluded.
     sql: |
-      WITH f AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'formd.%.amount_sold_usd.pt' AND entity_id IS NOT NULL),
-      e AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'epoch.%.round_equity_usd.pt' AND entity_id IS NOT NULL),
-      rounds AS (
-        SELECT * FROM f
-        UNION ALL
-        SELECT * FROM e WHERE NOT EXISTS (SELECT 1 FROM f WHERE f.entity_id = e.entity_id AND date_trunc('quarter', f.as_of_date) = date_trunc('quarter', e.as_of_date))),
+      WITH rounds AS (SELECT entity_id, as_of_date, v, id FROM venture_rounds WHERE kind = 'equity'),
       m AS (SELECT entity_id, sublayer_id FROM entity_membership WHERE is_primary AND sublayer_id IS NOT NULL)
       SELECT (date_trunc('quarter', r.as_of_date) + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE AS as_of_date, m.sublayer_id, sum(r.v) AS value, list(r.id ORDER BY r.id) AS obs_ids
       FROM rounds r JOIN m USING (entity_id) WHERE r.as_of_date >= DATE '2023-01-01' GROUP BY 1, 2
+  venture_dollars_by_source:
+    description: Venture dollars per sub-layer per calendar quarter, split by source (Form D, tier 4; Epoch, tier 5) and kind (equity; Form D debt), for the stacked flow strip.
+    rationale: The strip shows how much of each quarter rests on a filing and how much on reporting, and what debt adds.
+    grain: [as_of_date, sublayer_id, source, kind]
+    unit: USD
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["formd.*.amount_sold_usd.pt", "formd.*.debt_sold_usd.pt", "epoch.*.round_equity_usd.pt"]
+    caveats: Epoch rows count only for an entity-quarter with no Form D filing, so the two sources never double-count a round.
+    sql: |
+      SELECT (date_trunc('quarter', r.as_of_date) + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE AS as_of_date, m.sublayer_id, r.source, r.kind,
+             sum(r.v) AS value, list(r.id ORDER BY r.id) AS obs_ids
+      FROM venture_rounds r JOIN (SELECT entity_id, sublayer_id FROM entity_membership WHERE is_primary AND sublayer_id IS NOT NULL) m USING (entity_id)
+      WHERE r.as_of_date >= DATE '2023-01-01' GROUP BY 1, 2, 3, 4
+  venture_dollars_4q:
+    description: Equity venture dollars over the trailing four calendar quarters at each quarter end, per layer (sublayer_id "all") and per sub-layer.
+    rationale: The capture lens's capital-flow arrow and sub-layer ticks (v2 §4.2); four quarters smooth a single mega-round.
+    grain: [as_of_date, layer_id, sublayer_id]
+    unit: USD
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["formd.*.amount_sold_usd.pt", "epoch.*.round_equity_usd.pt"]
+    caveats: Seed-list entities only, attributed by primary membership; debt excluded.
+    sql: |
+      WITH m AS (SELECT entity_id, layer_id, sublayer_id FROM entity_membership WHERE is_primary AND sublayer_id IS NOT NULL),
+      r AS (SELECT date_trunc('quarter', v.as_of_date) AS cq, m.layer_id, m.sublayer_id, v.v, v.id
+            FROM venture_rounds v JOIN m USING (entity_id) WHERE v.kind = 'equity' AND v.as_of_date >= DATE '2022-04-01'),
+      qs AS (SELECT DISTINCT cq FROM r WHERE cq >= DATE '2023-01-01'),
+      w AS (SELECT qs.cq, r.layer_id, r.sublayer_id, r.v, r.id FROM qs JOIN r ON r.cq > qs.cq - INTERVAL 12 MONTH AND r.cq <= qs.cq)
+      SELECT (cq + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE AS as_of_date, layer_id, coalesce(sublayer_id, 'all') AS sublayer_id,
+             sum(v) AS value, list(id ORDER BY id) AS obs_ids
+      FROM w GROUP BY GROUPING SETS ((cq, layer_id), (cq, layer_id, sublayer_id))
   venture_dollars_incl_debt:
     description: venture_dollars plus Form D offerings filed as debt alone, per calendar quarter and sub-layer (P1 §9's equity-only versus including-debt view).
     rationale: Debt-financed compute (neoclouds, data centres) is a growing share of AI capital; the equity-only strip hides it.
@@ -410,15 +437,7 @@ metrics:
     inputs: ["formd.*.amount_sold_usd.pt", "formd.*.debt_sold_usd.pt", "epoch.*.round_equity_usd.pt"]
     caveats: Only Form D debt, so bank facilities and bonds are missing; Epoch's press rows stay equity-only and are suppressed only by a Form D equity row in the same entity-quarter.
     sql: |
-      WITH f AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'formd.%.amount_sold_usd.pt' AND entity_id IS NOT NULL),
-      d AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'formd.%.debt_sold_usd.pt' AND entity_id IS NOT NULL),
-      e AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'epoch.%.round_equity_usd.pt' AND entity_id IS NOT NULL),
-      rounds AS (
-        SELECT * FROM f
-        UNION ALL
-        SELECT * FROM d
-        UNION ALL
-        SELECT * FROM e WHERE NOT EXISTS (SELECT 1 FROM f WHERE f.entity_id = e.entity_id AND date_trunc('quarter', f.as_of_date) = date_trunc('quarter', e.as_of_date))),
+      WITH rounds AS (SELECT entity_id, as_of_date, v, id FROM venture_rounds),
       m AS (SELECT entity_id, sublayer_id FROM entity_membership WHERE is_primary AND sublayer_id IS NOT NULL)
       SELECT (date_trunc('quarter', r.as_of_date) + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE AS as_of_date, m.sublayer_id, sum(r.v) AS value, list(r.id ORDER BY r.id) AS obs_ids
       FROM rounds r JOIN m USING (entity_id) WHERE r.as_of_date >= DATE '2023-01-01' GROUP BY 1, 2
@@ -432,9 +451,7 @@ metrics:
     inputs: ["formd.*.amount_sold_usd.pt", "epoch.*.round_equity_usd.pt"]
     caveats: As venture_dollars.
     sql: |
-      WITH f AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'formd.%.amount_sold_usd.pt' AND entity_id IS NOT NULL),
-      e AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'epoch.%.round_equity_usd.pt' AND entity_id IS NOT NULL),
-      rounds AS (SELECT * FROM f UNION ALL SELECT * FROM e WHERE NOT EXISTS (SELECT 1 FROM f WHERE f.entity_id = e.entity_id AND date_trunc('quarter', f.as_of_date) = date_trunc('quarter', e.as_of_date))),
+      WITH rounds AS (SELECT entity_id, as_of_date, v, id FROM venture_rounds WHERE kind = 'equity'),
       m AS (SELECT entity_id, sublayer_id FROM entity_membership WHERE is_primary AND sublayer_id IS NOT NULL)
       SELECT (date_trunc('quarter', r.as_of_date) + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE AS as_of_date, m.sublayer_id, count(*)::DOUBLE AS value, list(r.id ORDER BY r.id) AS obs_ids
       FROM rounds r JOIN m USING (entity_id) WHERE r.as_of_date >= DATE '2023-01-01' GROUP BY 1, 2
@@ -448,9 +465,7 @@ metrics:
     inputs: ["formd.*.amount_sold_usd.pt", "epoch.*.round_equity_usd.pt", "epoch.*.revenue_run_rate_usd.pt"]
     caveats: Run-rates are press-reported annualised months (tier 5); rounds are mostly Epoch (tier 5). Other sub-layers have no revenue series outside the labs, so this is measured for frontier labs only.
     sql: |
-      WITH f AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'formd.%.amount_sold_usd.pt' AND entity_id IS NOT NULL),
-      e AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'epoch.%.round_equity_usd.pt' AND entity_id IS NOT NULL),
-      rounds AS (SELECT * FROM f UNION ALL SELECT * FROM e WHERE NOT EXISTS (SELECT 1 FROM f WHERE f.entity_id = e.entity_id AND date_trunc('quarter', f.as_of_date) = date_trunc('quarter', e.as_of_date))),
+      WITH rounds AS (SELECT entity_id, as_of_date, v, id FROM venture_rounds WHERE kind = 'equity'),
       labs AS (SELECT entity_id FROM entity_membership WHERE is_primary AND sublayer_id = 'frontier_labs'),
       rr AS (SELECT entity_id, as_of_date, value_numeric AS rev, id FROM observations WHERE series_key LIKE 'epoch.%.revenue_run_rate_usd.pt' AND entity_id IN (SELECT entity_id FROM labs)),
       qs AS (SELECT DISTINCT date_trunc('quarter', as_of_date) AS cq FROM rounds WHERE as_of_date >= DATE '2023-01-01'),
@@ -474,9 +489,7 @@ metrics:
     inputs: ["formd.*.amount_sold_usd.pt", "epoch.*.round_equity_usd.pt"]
     caveats: Denominator is the seed list, not the market; frontier rounds are mostly Epoch (tier 5) because the labs raise through vehicles that do not file Form D.
     sql: |
-      WITH f AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'formd.%.amount_sold_usd.pt' AND entity_id IS NOT NULL),
-      e AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'epoch.%.round_equity_usd.pt' AND entity_id IS NOT NULL),
-      rounds AS (SELECT * FROM f UNION ALL SELECT * FROM e WHERE NOT EXISTS (SELECT 1 FROM f WHERE f.entity_id = e.entity_id AND date_trunc('quarter', f.as_of_date) = date_trunc('quarter', e.as_of_date))),
+      WITH rounds AS (SELECT entity_id, as_of_date, v, id FROM venture_rounds WHERE kind = 'equity'),
       m AS (SELECT entity_id, sublayer_id FROM entity_membership WHERE is_primary AND sublayer_id IS NOT NULL),
       q AS (SELECT date_trunc('quarter', r.as_of_date) AS cq, m.sublayer_id, r.v, r.id FROM rounds r JOIN m USING (entity_id) WHERE r.as_of_date >= DATE '2023-01-01'),
       qs AS (SELECT DISTINCT cq FROM q)
@@ -494,9 +507,7 @@ metrics:
     inputs: ["formd.*.amount_sold_usd.pt", "epoch.*.round_equity_usd.pt"]
     caveats: Seed-list coverage; large horizontal raises by entities without a CIK (Anysphere, Cognition) are missing until their filings are matched, which biases the ratio upward.
     sql: |
-      WITH f AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'formd.%.amount_sold_usd.pt' AND entity_id IS NOT NULL),
-      e AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'epoch.%.round_equity_usd.pt' AND entity_id IS NOT NULL),
-      rounds AS (SELECT * FROM f UNION ALL SELECT * FROM e WHERE NOT EXISTS (SELECT 1 FROM f WHERE f.entity_id = e.entity_id AND date_trunc('quarter', f.as_of_date) = date_trunc('quarter', e.as_of_date))),
+      WITH rounds AS (SELECT entity_id, as_of_date, v, id FROM venture_rounds WHERE kind = 'equity'),
       m AS (SELECT entity_id, sublayer_id FROM entity_membership WHERE is_primary AND sublayer_id IN ('vertical_ai', 'coding_agents', 'consumer_ai')),
       q AS (SELECT date_trunc('quarter', r.as_of_date) AS cq, m.sublayer_id, r.v, r.id FROM rounds r JOIN m USING (entity_id) WHERE r.as_of_date >= DATE '2023-01-01'),
       qs AS (SELECT DISTINCT cq FROM q)
@@ -853,9 +864,7 @@ metrics:
     caveats: Denominator is the seed list, not the market; per sub-layer it is meaningless on current coverage (one to four rounds per cell), so it is computed stack-wide only.
     sql: |
       -- ponytail: the f/e/rounds/m CTEs are copied from frontier_share_of_venture_dollars; a shared view when a third venture metric needs them
-      WITH f AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'formd.%.amount_sold_usd.pt' AND entity_id IS NOT NULL),
-      e AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'epoch.%.round_equity_usd.pt' AND entity_id IS NOT NULL),
-      rounds AS (SELECT * FROM f UNION ALL SELECT * FROM e WHERE NOT EXISTS (SELECT 1 FROM f WHERE f.entity_id = e.entity_id AND date_trunc('quarter', f.as_of_date) = date_trunc('quarter', e.as_of_date))),
+      WITH rounds AS (SELECT entity_id, as_of_date, v, id FROM venture_rounds WHERE kind = 'equity'),
       m AS (SELECT entity_id FROM entity_membership WHERE is_primary AND sublayer_id IS NOT NULL),
       q AS (SELECT date_trunc('quarter', r.as_of_date) AS cq, r.entity_id, r.v, r.id FROM rounds r JOIN m USING (entity_id) WHERE r.as_of_date >= DATE '2023-01-01'),
       qs AS (SELECT DISTINCT cq FROM q),

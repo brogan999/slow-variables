@@ -50,3 +50,15 @@ def test_metrics_refuse_missing_inputs(tmp_path):
         "version: 1\nmetrics:\n  ghost:\n    inputs: ['nope.*.x.pt']\n    formula_version: 1\n    sql: 'SELECT 1'\n"
     )
     assert run_metrics(st.Store().con, spec) == []
+
+
+def test_capture_layers_carry_a_number_free_reading_and_meta_carries_the_counts(tmp_path):
+    import json
+
+    s = st.Store()
+    s.derived = run_metrics(s.con)
+    s.export(tmp_path / "data")
+    cap = json.loads((tmp_path / "data" / "lens" / "capture.json").read_text())
+    assert all(layer["reading"].endswith(".") and not any(c in layer["reading"] for c in "$%") for layer in cap["layers"])
+    meta = json.loads((tmp_path / "data" / "meta.json").read_text())
+    assert meta["observations"] == s.con.execute("SELECT count(*) FROM observations").fetchone()[0]

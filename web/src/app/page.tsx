@@ -6,7 +6,7 @@ import { StatusChip } from "@/components/StatusChip";
 import { StockFlowDiagram } from "@/components/StockFlowDiagram";
 import { ThesisMonitor } from "@/components/ThesisMonitor";
 import { NumberTicker } from "@/components/ui/number-ticker";
-import { capture, diffusion, index, memos, meta, obsIndex, sources, thesis } from "@/lib/data";
+import { capture, diffusion, memos, meta, obsIndex, thesis } from "@/lib/data";
 import { SITE } from "@/lib/site";
 
 export const metadata = { title: { absolute: `${SITE.name} · how fast AI lands, and who keeps the value` } };
@@ -17,11 +17,9 @@ export default function Home() {
   const idx = obsIndex();
   const verdicts = thesis();
   const latest = memos()[0];
-  const published = index().indicators.filter((i) => i.published).length;
-  const observations = Object.keys(idx).length;
-  const nSources = sources().length;
-  const generated = meta().generated_at.slice(0, 10);
-  const figures: [number, string, string][] = [[published, "indicators published", "/indicators"], [observations, "dated observations", "/query"], [nSources, "sources", "/sources"]];
+  const m = meta();  // counts come from the export; the page never counts
+  const generated = m.generated_at.slice(0, 10);
+  const figures: [number, string, string][] = [[m.indicators_published, "indicators published", "/indicators"], [m.observations, "dated observations", "/query"], [m.sources, "sources", "/sources"]];
   return (
     <div className="flex flex-col gap-14 md:gap-20">
       <section className="relative py-10 md:py-16">

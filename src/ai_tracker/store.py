@@ -39,6 +39,19 @@ from .schema import (
 SEED, DATA, WEB = Path("seed"), Path("data"), Path("web/data")
 Path = Path  # re-exported for cli
 OBS = DATA / "observations"
+
+# Every venture metric reads rounds from this one view: Form D equity and debt, and Epoch's equity rounds for an
+# entity-quarter with no Form D filing (Form D is tier 4, Epoch tier 5; the better source wins the quarter).
+VENTURE_ROUNDS = """CREATE OR REPLACE VIEW venture_rounds AS
+WITH f AS (SELECT entity_id, as_of_date, value_numeric AS v, id, 'formd' AS source, 'equity' AS kind FROM observations
+           WHERE series_key LIKE 'formd.%.amount_sold_usd.pt' AND entity_id IS NOT NULL),
+d AS (SELECT entity_id, as_of_date, value_numeric AS v, id, 'formd' AS source, 'debt' AS kind FROM observations
+      WHERE series_key LIKE 'formd.%.debt_sold_usd.pt' AND entity_id IS NOT NULL),
+e AS (SELECT entity_id, as_of_date, value_numeric AS v, id, 'epoch' AS source, 'equity' AS kind FROM observations
+      WHERE series_key LIKE 'epoch.%.round_equity_usd.pt' AND entity_id IS NOT NULL)
+SELECT * FROM f UNION ALL SELECT * FROM d
+UNION ALL SELECT * FROM e WHERE NOT EXISTS (
+  SELECT 1 FROM f WHERE f.entity_id = e.entity_id AND date_trunc('quarter', f.as_of_date) = date_trunc('quarter', e.as_of_date))"""
 OBS_COLUMNS = {
     "id": "VARCHAR",
     "series_key": "VARCHAR",
@@ -226,6 +239,7 @@ class Store:
         )
         if not any(e.memberships for e in self.seed.entities):
             self.con.execute("DELETE FROM entity_membership")
+        self.con.execute(VENTURE_ROUNDS)
         self.derived = [Derived(**r) for r in read_jsonl(DATA / "derived.jsonl")]
         self.events = [StatusEvent(**r) for r in read_jsonl(DATA / "status_events.jsonl")]
         self.fetchlog = [FetchLog(**r) for r in read_jsonl(DATA / "fetchlog.jsonl")]
@@ -508,6 +522,8 @@ class Store:
                         cards[i.id] for i in self.seed.indicators if i.layer_id == layer.id and i.published
                     ],
                     "crosswalk": [dump(c) for c in self.seed.crosswalk if c.layer_id == layer.id],
+                    "venture": self._layer_venture(layer.id),
+                    "commoditisation": self._commoditisation(cards) if layer.id == "model" else None,
                 },
             )
         recent = [dump(e) for e in sorted(self.events, key=lambda e: e.created_at, reverse=True)[:3]]
@@ -582,6 +598,8 @@ class Store:
                                 if i.layer_id == layer.id and i.published and i.direction_rule
                             ]
                         ),
+                        "venture": self._layer_venture(layer.id),
+                        "reading": self._reading(layer, cards),
                     }
                     for layer in self.seed.layers
                 ],
@@ -648,7 +666,15 @@ class Store:
             [dump(e) for e in sorted(self.events, key=lambda e: e.created_at, reverse=True)],
         )
         (out / "meta.json").write_text(
-            json.dumps({"generated_at": datetime.now(timezone.utc).isoformat()}) + "\n"
+            json.dumps(
+                {
+                    "generated_at": datetime.now(timezone.utc).isoformat(),
+                    "observations": self.con.execute("SELECT count(*) FROM observations").fetchone()[0],
+                    "indicators_published": sum(1 for i in self.seed.indicators if i.published),
+                    "sources": len(self.seed.sources),
+                }
+            )
+            + "\n"
         )
 
     def _card(self, ind: Indicator) -> dict[str, Any]:
@@ -916,8 +942,127 @@ class Store:
                     d.as_of_date.isoformat(), {"as_of": d.as_of_date.isoformat()}
                 )
                 q[metric] = {"value": d.value, "obs_ids": d.input_observation_ids}
+        self._by_source(out)
         return {
             k: {**v, "quarters": [v["quarters"][d] for d in sorted(v["quarters"])]} for k, v in out.items()
+        }
+
+    def _by_source(self, out: dict[str, dict[str, Any]]) -> None:
+        """Stacked segments per quarter: source x kind, each linking to its first round's row."""
+        keys = {o["id"]: o["series_key"] for o in self.observations("formd.*", "epoch.*")}
+        for d in self.derived_for("venture_dollars_by_source"):
+            sub = d.dims["sublayer_id"]
+            q = out.setdefault(sub, {"sublayer_id": sub, "quarters": {}})["quarters"].setdefault(
+                d.as_of_date.isoformat(), {"as_of": d.as_of_date.isoformat()}
+            )
+            first = d.input_observation_ids[0]
+            q.setdefault("by_source", []).append(
+                {
+                    "source": d.dims["source"],
+                    "kind": d.dims["kind"],
+                    "value": d.value,
+                    "obs_ids": d.input_observation_ids,
+                    "href": f"/series/{keys[first]}#{first}" if first in keys else None,
+                }
+            )
+
+    def _layer_venture(self, layer_id: str) -> dict[str, Any] | None:
+        """Trailing-four-quarter equity dollars at the latest complete quarter, the same a year earlier, the arrow
+        (±10% [judgement]) and each sub-layer's figure for the ticks."""
+        rows = [
+            d
+            for d in self.derived_for("venture_dollars_4q", {"layer_id": layer_id})
+            if d.as_of_date <= date.today()
+        ]
+        if not rows:
+            return None
+        latest = max(d.as_of_date for d in rows)
+
+        def at(day: date, sub: str) -> Derived | None:
+            return next((d for d in rows if d.as_of_date == day and d.dims["sublayer_id"] == sub), None)
+
+        def pt(d: Derived) -> dict[str, Any]:
+            return {"value": d.value, "as_of": d.as_of_date.isoformat(), "obs_ids": d.input_observation_ids}
+
+        now = at(latest, "all")
+        prior = at(date(latest.year - 1, latest.month, latest.day), "all")
+        change = now.value / prior.value - 1 if now and prior and prior.value > 0 else None
+        names = {x.id: x.name for x in self.seed.sublayers}
+        return {
+            **pt(now),
+            "prior": pt(prior) if prior else None,
+            "arrow": None
+            if change is None
+            else "up"
+            if change > 0.10
+            else "down"
+            if change < -0.10
+            else "flat",
+            "sublayers": [
+                {
+                    "sublayer_id": d.dims["sublayer_id"],
+                    "name": names.get(d.dims["sublayer_id"], d.dims["sublayer_id"]),
+                    **pt(d),
+                }
+                for d in sorted(rows, key=lambda d: -d.value)
+                if d.as_of_date == latest and d.dims["sublayer_id"] != "all"
+            ],
+        }
+
+    def _reading(self, layer: Any, cards: dict[str, Any]) -> str:
+        """One sentence per layer from its direction statuses and capital flow. Deterministic; no numbers."""
+        scored = [
+            cards[i.id]
+            for i in self.seed.indicators
+            if i.layer_id == layer.id and i.published and i.direction_rule
+        ]
+        status = _summarise(scored).replace("_", " ")
+
+        def names(xs: list[str]) -> str:
+            return (
+                xs[0]
+                if len(xs) == 1
+                else f"{xs[0]} and {xs[1]}"
+                if len(xs) == 2
+                else f"{xs[0]}, {xs[1]} and others"
+            )
+
+        conc = [c["name"] for c in scored if c["status"] == "concentrating"]
+        disp = [c["name"] for c in scored if c["status"] == "dispersing"]
+        parts = [
+            f"{layer.name} {'is' if status in ('unmeasured', 'not yet measurable') else 'reads'} {status}"
+        ]
+        if conc:
+            parts.append(f"{names(conc)} {'points' if len(conc) == 1 else 'point'} to concentration")
+        if disp:
+            parts.append(f"{names(disp)} {'points' if len(disp) == 1 else 'point'} to dispersion")
+        v = self._layer_venture(layer.id)
+        if v and v["arrow"]:
+            parts.append(
+                {
+                    "up": "venture money is up on a year earlier",
+                    "down": "venture money is down on a year earlier",
+                    "flat": "venture money is flat on a year earlier",
+                }[v["arrow"]]
+            )
+        return "; ".join(parts) + "."
+
+    def _commoditisation(self, cards: dict[str, Any]) -> dict[str, Any]:
+        """The model layer's four commoditisation proxies (Part 1's list), named with their own statuses; no composite."""
+        ids = [
+            "open_vs_closed_gap",
+            "model_price_per_intelligence_point",
+            "epoch_inference_price_fixed_capability",
+            "enterprise_multi_homing_share",
+        ]
+        proxies = [
+            {"id": i, "name": cards[i]["name"], "status": cards[i]["status"]} for i in ids if i in cards
+        ]
+        return {
+            "proxies": proxies,
+            "line": "Commoditisation proxies: "
+            + "; ".join(f"{p['name']} {(p['status'] or 'unmeasured').replace('_', ' ')}" for p in proxies)
+            + ".",
         }
 
     def _bottlenecks(self, cards: dict[str, Any]) -> dict[str, Any]:
