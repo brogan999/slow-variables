@@ -67,3 +67,24 @@ def test_a_published_indicator_needs_a_timing_rationale_that_opens_with_its_tag(
     ind = next(i for i in s.seed.indicators if i.id == "metr_horizon_50")
     ind.timing_rationale = "Lagging: wrong tag."
     assert any(e.startswith("metr_horizon_50: published without a timing_rationale") for e in check_errors(s))
+
+
+def test_a_shared_indicator_needs_a_crosswalk_row_for_its_two_addresses():
+    from ai_tracker import store as st
+    from ai_tracker.cli import check_errors
+
+    s = st.Store()
+    s.seed.crosswalk = [c for c in s.seed.crosswalk if (c.bucket_id, c.layer_id) != ("return_arrow", "model")]
+    errs = check_errors(s)
+    assert any("lab_recoupment_ratio" in e and "no crosswalk row" in e for e in errs)
+
+
+def test_diffusion_buckets_read_flow_statuses_only():
+    from ai_tracker import store as st
+
+    s = st.Store()
+    cards = {i.id: s._card(i) for i in s.seed.indicators}
+    lens = s._diffusion_lens(cards, [], "2026-09-11")
+    methods = next(b for b in lens["buckets"] if b["id"] == "methods")
+    assert any(c["id"] == "lab_run_rates" for c in methods["indicators"])  # listed on the bucket
+    assert methods["status"] not in ("concentrating", "dispersing", "stable", "unclear")  # but never summarised there

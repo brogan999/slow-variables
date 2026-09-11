@@ -37,7 +37,7 @@ export default async function SeriesPage({ params }: { params: Promise<{ key: st
                 <td><Grade grade={o.grade} tier={o.tier as number} /></td>
                 {COLS.map((c) => <td key={c} className="whitespace-nowrap text-ink-2">{o[c] === null || o[c] === undefined ? "—" : String(o[c]).slice(0, c === "content_hash" ? 12 : 40)}</td>)}
                 <td><a href={String(o.url)} className="underline decoration-grid underline-offset-4">source page</a></td>
-                <td>{o.disputed ? <span className="text-slow">⚑ disputed: {String(o.dispute_text).slice(0, 120)}</span> : null}{o.run_rate_vs_booked ? <span className="ml-1">{String(o.run_rate_vs_booked)}</span> : null}</td>
+                <td>{o.disputed ? <span className="text-slow">⚑ disputed: {String(o.dispute_text).slice(0, 120)}</span> : null}{o.run_rate_vs_booked ? <span className="ml-1">{String(o.run_rate_vs_booked)}</span> : null}{o.gross_vs_net ? <span className="ml-1">{String(o.gross_vs_net)}</span> : null}{o.note ? <div className="text-muted">{String(o.note)}</div> : null}</td>
               </tr>
             ))}
           </tbody>

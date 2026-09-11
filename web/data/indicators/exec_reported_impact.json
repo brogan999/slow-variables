@@ -26,7 +26,21 @@
  },
  "confidence": 70,
  "counterevidence": "Executives may not see impacts that exist below the firm-level line; the question asks about the last three years, which mostly predate agentic tools.",
- "crosswalk": [],
+ "crosswalk": [
+  {
+   "bucket_id": "adaptation",
+   "layer_id": "adopters",
+   "note": "Adaptation inside adopting organisations and sectors: regulated devices, state bills, call-centre uplift, reported executive impact.",
+   "relation": "same_valve",
+   "shared_indicators": [
+    "fda_ai_devices_cumulative",
+    "state_ai_bills_introduced",
+    "call_center_uplift",
+    "exec_reported_impact"
+   ],
+   "sublayer_id": null
+  }
+ ],
  "definition": "Share of executives in a four-country survey (US, UK, Germany, Australia; more than 5,000 respondents) reporting no measurable AI impact on their firm's employment or productivity over the last three years, from Yotzov, Barrero and co-authors (NBER WP 34836).",
  "derived": [],
  "direction": null,
@@ -164,6 +178,7 @@
  "status_events": [
   {
    "author": "evaluate",
+   "counterevidence_considered": null,
    "created_at": "2026-09-10T07:06:26.439043Z",
    "evidence_ids": [
     "d0538040758acb6e"

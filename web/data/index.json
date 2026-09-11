@@ -48,10 +48,17 @@
    "note": "Capability growth is the model layer's product; inference price at fixed capability \u21c4 price-per-token pass-through; open-weights lag \u21c4 open-vs-closed gap.",
    "relation": "same_valve",
    "shared_indicators": [
+    "lab_run_rates",
+    "open_vs_closed_gap",
     "metr_horizon_50",
     "metr_horizon_80",
     "horizon_ratio_80_50",
-    "open_weights_lag_months"
+    "epoch_training_compute_growth",
+    "epoch_inference_price_fixed_capability",
+    "open_weights_lag_months",
+    "arc_agi_frontier",
+    "ord_half_life_misfit",
+    "surprise_index"
    ],
    "sublayer_id": null
   },
@@ -60,7 +67,10 @@
    "layer_id": "compute_physical",
    "note": "Compute growth and hardware perf-per-dollar feed the methods stock.",
    "relation": "input_to",
-   "shared_indicators": [],
+   "shared_indicators": [
+    "epoch_training_power_growth",
+    "perf_per_dollar_growth"
+   ],
    "sublayer_id": null
   },
   {
@@ -76,7 +86,12 @@
    "layer_id": "deployment_application",
    "note": "Uplift RCTs, pilot\u2192production and app-layer margin net of inference measure the same valve.",
    "relation": "same_valve",
-   "shared_indicators": [],
+   "shared_indicators": [
+    "enterprise_spend_by_layer",
+    "dev_rct_uplift",
+    "enterprise_pilot_to_production",
+    "harvey_lab_frontier_completion"
+   ],
    "sublayer_id": null
   },
   {
@@ -84,7 +99,18 @@
    "layer_id": "adopters",
    "note": "BTOS, BBD, Ramp and the Anthropic Economic Index are adoption from both ends.",
    "relation": "same_valve",
-   "shared_indicators": [],
+   "shared_indicators": [
+    "bbd_work_hours_assisted",
+    "btos_firm_use",
+    "ramp_paid_ai_adoption",
+    "aei_augmentation_share",
+    "openai_work_share",
+    "exposure_vs_usage_gap",
+    "bbd_adult_use",
+    "aei_occupation_depth_25",
+    "bbd_work_use_weekly",
+    "bbd_work_use_daily"
+   ],
    "sublayer_id": null
   },
   {
@@ -92,7 +118,23 @@
    "layer_id": "labour_consumers",
    "note": "Productivity, wages, employment and consumer surplus.",
    "relation": "same_valve",
-   "shared_indicators": [],
+   "shared_indicators": [
+    "consumer_surplus_wta",
+    "bls_labor_productivity_yoy",
+    "bls_tfp_private_nonfarm",
+    "canaries_exposed_employment_yoy",
+    "canaries_entry_level_gap",
+    "revelio_exposed_vs_unexposed_growth",
+    "cait_high_exposure_claims",
+    "new_grad_unemployment",
+    "cross_tracker_concordance",
+    "labor_share_nonfarm",
+    "exposed_low_adaptive_workers",
+    "yale_occupational_mix_dissimilarity",
+    "humlum_precise_null",
+    "upwork_freelancer_effects",
+    "pwc_ai_skill_wage_premium"
+   ],
    "sublayer_id": null
   },
   {
@@ -108,13 +150,108 @@
    "layer_id": "training_input",
    "note": "Expert data, RL environments and continual-learning infra are the deployment\u2192invention channel; lab recoupment \u21c4 capex-to-revenue.",
    "relation": "return_arrow",
-   "shared_indicators": [],
+   "shared_indicators": [
+    "continual_learning_level",
+    "rl_environment_vendor_count",
+    "expert_data_market_run_rate",
+    "cl_lab_release_claims",
+    "cl_adapters_per_product",
+    "cl_forgetting_retention",
+    "cl_learning_curve_slope",
+    "cl_benchmark_exists"
+   ],
    "sublayer_id": null
   },
   {
    "bucket_id": "leak",
    "layer_id": "compute_physical",
    "note": "Margin stacking, HHI, circular financing: surplus exiting the chain at semis and cloud. Interpretive spine: Teece, Nordhaus, Perez, Ding (docs/interpretation).",
+   "relation": "leak_from",
+   "shared_indicators": [],
+   "sublayer_id": null
+  },
+  {
+   "bucket_id": "return_arrow",
+   "layer_id": "model",
+   "note": "Inside the labs: agent work on the labs' own research and lab recoupment are deployment feeding back into invention.",
+   "relation": "return_arrow",
+   "shared_indicators": [
+    "lab_recoupment_ratio",
+    "rsi_agent_workdays_per_human",
+    "rsi_intervention_rate_4_8h",
+    "deployment_data_share_of_training"
+   ],
+   "sublayer_id": null
+  },
+  {
+   "bucket_id": "adaptation",
+   "layer_id": "model",
+   "note": "Backlash, safety brakes and paused runs are adaptation acting back on the model layer.",
+   "relation": "input_to",
+   "shared_indicators": [
+    "safety_brake_events"
+   ],
+   "sublayer_id": null
+  },
+  {
+   "bucket_id": "methods",
+   "layer_id": "training_input",
+   "note": "The public text stock and other training inputs bound how fast the methods stock can grow.",
+   "relation": "input_to",
+   "shared_indicators": [
+    "epoch_data_exhaustion_year"
+   ],
+   "sublayer_id": null
+  },
+  {
+   "bucket_id": "adaptation",
+   "layer_id": "adopters",
+   "note": "Adaptation inside adopting organisations and sectors: regulated devices, state bills, call-centre uplift, reported executive impact.",
+   "relation": "same_valve",
+   "shared_indicators": [
+    "fda_ai_devices_cumulative",
+    "state_ai_bills_introduced",
+    "call_center_uplift",
+    "exec_reported_impact"
+   ],
+   "sublayer_id": null
+  },
+  {
+   "bucket_id": "products",
+   "layer_id": "model",
+   "note": "Reliability, calibration and the gap between internal and external deployment decide what the model layer can productise.",
+   "relation": "same_valve",
+   "shared_indicators": [
+    "reliability_framework_adoption",
+    "agent_calibration",
+    "agent_operational_safety",
+    "pass_hat_k_tau_bench",
+    "internal_external_deployment_gap_months"
+   ],
+   "sublayer_id": null
+  },
+  {
+   "bucket_id": "early_adoption",
+   "layer_id": "model",
+   "note": "Buyers spreading work across several labs is adoption breadth read from the model layer.",
+   "relation": "same_valve",
+   "shared_indicators": [
+    "enterprise_multi_homing_share"
+   ],
+   "sublayer_id": null
+  },
+  {
+   "bucket_id": "early_adoption",
+   "layer_id": "labour_consumers",
+   "note": "People adopting directly: consumer and worker use counted from the household side.",
+   "relation": "same_valve",
+   "shared_indicators": [],
+   "sublayer_id": null
+  },
+  {
+   "bucket_id": "leak",
+   "layer_id": "labour_consumers",
+   "note": "Consumer surplus is where most of the value goes if the capture thesis fails: the leak to labour and consumers.",
    "relation": "leak_from",
    "shared_indicators": [],
    "sublayer_id": null
@@ -848,13 +985,18 @@
    "valve_measured": null
   },
   {
-   "bucket_id": null,
+   "bucket_id": "methods",
    "confidence": 55,
    "grade": "C",
    "id": "lab_run_rates",
    "latest": {
     "as_of": "2026-08-13",
-    "disputed": false,
+    "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+    "disputed": true,
+    "flags": [
+     "disputed",
+     "run-rate"
+    ],
     "grade": "C",
     "high": null,
     "low": null,
@@ -875,7 +1017,12 @@
    "sparkline": [
     {
      "as_of": "2023-03-01",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -889,7 +1036,12 @@
     },
     {
      "as_of": "2023-08-29",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -903,7 +1055,12 @@
     },
     {
      "as_of": "2023-10-10",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -917,7 +1074,12 @@
     },
     {
      "as_of": "2023-12-30",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -931,7 +1093,12 @@
     },
     {
      "as_of": "2023-12-31",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -945,7 +1112,12 @@
     },
     {
      "as_of": "2024-06-12",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -959,7 +1131,12 @@
     },
     {
      "as_of": "2024-08-15",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -973,7 +1150,12 @@
     },
     {
      "as_of": "2024-09-12",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -987,7 +1169,12 @@
     },
     {
      "as_of": "2024-12-31",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -1001,7 +1188,12 @@
     },
     {
      "as_of": "2025-06-09",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -1015,7 +1207,12 @@
     },
     {
      "as_of": "2025-07-30",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -1029,7 +1226,12 @@
     },
     {
      "as_of": "2025-08-01",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -1043,7 +1245,12 @@
     },
     {
      "as_of": "2025-12-18",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -1057,7 +1264,12 @@
     },
     {
      "as_of": "2025-12-31",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -1071,7 +1283,12 @@
     },
     {
      "as_of": "2026-02-28",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -1085,7 +1302,12 @@
     },
     {
      "as_of": "2026-08-13",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -1106,7 +1328,7 @@
    "valve_measured": null
   },
   {
-   "bucket_id": null,
+   "bucket_id": "return_arrow",
    "confidence": 50,
    "grade": "C",
    "id": "lab_recoupment_ratio",
@@ -1429,7 +1651,7 @@
    "valve_measured": null
   },
   {
-   "bucket_id": null,
+   "bucket_id": "adaptation",
    "confidence": 65,
    "grade": "C",
    "id": "consumer_surplus_wta",
@@ -1488,10 +1710,10 @@
    "status": "dispersing",
    "unit": "USD",
    "unpublished_reason": null,
-   "valve_measured": null
+   "valve_measured": "leak"
   },
   {
-   "bucket_id": null,
+   "bucket_id": "products",
    "confidence": 55,
    "grade": "B",
    "id": "enterprise_spend_by_layer",
@@ -3917,7 +4139,7 @@
    "valve_measured": null
   },
   {
-   "bucket_id": null,
+   "bucket_id": "methods",
    "confidence": 55,
    "grade": "A",
    "id": "open_vs_closed_gap",
@@ -4664,7 +4886,7 @@
    "valve_measured": null
   },
   {
-   "bucket_id": null,
+   "bucket_id": "early_adoption",
    "confidence": 45,
    "grade": "B",
    "id": "enterprise_multi_homing_share",
@@ -5748,7 +5970,11 @@
    "id": "metr_horizon_50",
    "latest": {
     "as_of": "2026-04-07",
+    "dispute_text": "METR: measurements above 16 hours are unreliable with the current task suite",
     "disputed": true,
+    "flags": [
+     "disputed"
+    ],
     "grade": "A",
     "high": 3304.261235,
     "low": 508.876789,
@@ -6091,7 +6317,11 @@
     },
     {
      "as_of": "2026-04-07",
+     "dispute_text": "METR: measurements above 16 hours are unreliable with the current task suite",
      "disputed": true,
+     "flags": [
+      "disputed"
+     ],
      "grade": "A",
      "high": 3304.261235,
      "low": 508.876789,
@@ -7288,7 +7518,11 @@
    "id": "dev_rct_uplift",
    "latest": {
     "as_of": "2026-02-24",
+    "dispute_text": "METR itself calls this 'very weak evidence' because developers refusing the no-AI arm biases the sample.",
     "disputed": true,
+    "flags": [
+     "disputed"
+    ],
     "grade": "A",
     "high": null,
     "low": null,
@@ -7309,7 +7543,11 @@
    "sparkline": [
     {
      "as_of": "2025-06-30",
-     "disputed": false,
+     "dispute_text": "Sixteen experienced open-source maintainers working on their own large repositories with early-2025 tools; METR cautions against reading it as a general productivity effect.",
+     "disputed": true,
+     "flags": [
+      "disputed"
+     ],
      "grade": "A",
      "high": null,
      "low": null,
@@ -7323,7 +7561,11 @@
     },
     {
      "as_of": "2026-02-24",
+     "dispute_text": "METR itself calls this 'very weak evidence' because developers refusing the no-AI arm biases the sample.",
      "disputed": true,
+     "flags": [
+      "disputed"
+     ],
      "grade": "A",
      "high": null,
      "low": null,
@@ -7350,7 +7592,11 @@
    "id": "enterprise_pilot_to_production",
    "latest": {
     "as_of": "2025-06-30",
+    "dispute_text": "Denominator and sample disputed; Menlo reports ~47% of pilots reach production on a different definition. No MIT-hosted copy of the PDF exists; this is the mirror Menlo cites.",
     "disputed": true,
+    "flags": [
+     "disputed"
+    ],
     "grade": "B",
     "high": null,
     "low": null,
@@ -7371,7 +7617,11 @@
    "sparkline": [
     {
      "as_of": "2025-06-30",
+     "dispute_text": "Denominator and sample disputed; Menlo reports ~47% of pilots reach production on a different definition. No MIT-hosted copy of the PDF exists; this is the mirror Menlo cites.",
      "disputed": true,
+     "flags": [
+      "disputed"
+     ],
      "grade": "B",
      "high": null,
      "low": null,
@@ -8242,7 +8492,11 @@
    "id": "rsi_agent_workdays_per_human",
    "latest": {
     "as_of": "2026-08-15",
-    "disputed": false,
+    "dispute_text": "OpenAI measuring its own research organisation and publishing the result itself; no independent check (tier 7).",
+    "disputed": true,
+    "flags": [
+     "disputed"
+    ],
     "grade": "D",
     "high": null,
     "low": null,
@@ -8263,7 +8517,11 @@
    "sparkline": [
     {
      "as_of": "2026-08-15",
-     "disputed": false,
+     "dispute_text": "OpenAI measuring its own research organisation and publishing the result itself; no independent check (tier 7).",
+     "disputed": true,
+     "flags": [
+      "disputed"
+     ],
      "grade": "D",
      "high": null,
      "low": null,
@@ -8290,7 +8548,11 @@
    "id": "rsi_intervention_rate_4_8h",
    "latest": {
     "as_of": "2026-07-31",
-    "disputed": false,
+    "dispute_text": "OpenAI measuring its own research organisation and publishing the result itself; no independent check (tier 7).",
+    "disputed": true,
+    "flags": [
+     "disputed"
+    ],
     "grade": "D",
     "high": null,
     "low": null,
@@ -8311,7 +8573,11 @@
    "sparkline": [
     {
      "as_of": "2026-07-31",
-     "disputed": false,
+     "dispute_text": "OpenAI measuring its own research organisation and publishing the result itself; no independent check (tier 7).",
+     "disputed": true,
+     "flags": [
+      "disputed"
+     ],
      "grade": "D",
      "high": null,
      "low": null,
@@ -14397,7 +14663,11 @@
    "id": "pwc_ai_skill_wage_premium",
    "latest": {
     "as_of": "2025-12-31",
-    "disputed": false,
+    "dispute_text": "PwC compares pay in job postings that ask for AI skills with postings that do not: a posting premium, not a measured effect of AI on wages.",
+    "disputed": true,
+    "flags": [
+     "disputed"
+    ],
     "grade": "D",
     "high": null,
     "low": null,
@@ -14418,7 +14688,11 @@
    "sparkline": [
     {
      "as_of": "2025-12-31",
-     "disputed": false,
+     "dispute_text": "PwC compares pay in job postings that ask for AI skills with postings that do not: a posting premium, not a measured effect of AI on wages.",
+     "disputed": true,
+     "flags": [
+      "disputed"
+     ],
      "grade": "D",
      "high": null,
      "low": null,
@@ -14445,7 +14719,13 @@
    "id": "expert_data_market_run_rate",
    "latest": {
     "as_of": "2026-06-30",
-    "disputed": false,
+    "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+    "disputed": true,
+    "flags": [
+     "disputed",
+     "run-rate",
+     "gross"
+    ],
     "grade": "C",
     "high": null,
     "low": null,
@@ -14466,7 +14746,13 @@
    "sparkline": [
     {
      "as_of": "2026-06-30",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate",
+      "gross"
+     ],
      "grade": "C",
      "high": null,
      "low": null,

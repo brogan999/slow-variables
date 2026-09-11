@@ -11,7 +11,7 @@
   ],
   "value": 0.5135135135135135
  },
- "bucket_id": null,
+ "bucket_id": "products",
  "cadence_expected": "annual",
  "chart_sources": {
   "metric": "enterprise_app_spend_share",
@@ -27,12 +27,26 @@
  },
  "confidence": 55,
  "counterevidence": "Survey of a few hundred buyers, not filings; scope excludes chips, standalone inference and embedded features, so the infrastructure denominator is understated; two waves only.",
- "crosswalk": [],
+ "crosswalk": [
+  {
+   "bucket_id": "products",
+   "layer_id": "deployment_application",
+   "note": "Uplift RCTs, pilot\u2192production and app-layer margin net of inference measure the same valve.",
+   "relation": "same_valve",
+   "shared_indicators": [
+    "enterprise_spend_by_layer",
+    "dev_rct_uplift",
+    "enterprise_pilot_to_production",
+    "harvey_lab_frontier_completion"
+   ],
+   "sublayer_id": null
+  }
+ ],
  "definition": "Enterprise spend on generative-AI applications as a share of total enterprise generative-AI spend in the US, per Menlo Ventures' annual buyer survey (derived metric enterprise_app_spend_share).",
  "derived": [
   {
    "as_of_date": "2024-12-31",
-   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "computed_at": "2026-09-11T13:08:36.843553Z",
    "dims": {},
    "formula_version": "1",
    "id": "9dcbe30bf6fb6d4d",
@@ -51,7 +65,7 @@
   },
   {
    "as_of_date": "2025-12-31",
-   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "computed_at": "2026-09-11T13:08:36.843553Z",
    "dims": {},
    "formula_version": "1",
    "id": "0be29ea5ec20d20a",
@@ -238,6 +252,7 @@
  "status_events": [
   {
    "author": "evaluate",
+   "counterevidence_considered": null,
    "created_at": "2026-09-10T04:54:27.799238Z",
    "evidence_ids": [
     "6012e72e8105bfc4",

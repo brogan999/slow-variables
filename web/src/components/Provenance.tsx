@@ -12,7 +12,8 @@ export function Num({ p, unit, obsIndex }: { p: Point | null | undefined; unit?:
     <span className="inline-flex flex-wrap items-baseline gap-x-1.5 gap-y-0">
       {key ? <Link href={`/series/${key}#${id}`} className="num underline decoration-grid underline-offset-4 hover:decoration-ink">{label}</Link> : <span className="num">{label}</span>}
       {p.low != null && p.high != null ? <span className="num text-[11px] text-ink-2" title="95% interval">({fmt(p.low, unit ?? p.unit)}–{fmt(p.high, unit ?? p.unit)})</span> : null}
-      {p.disputed ? <span className="text-[11px] text-slow" title="disputed">⚑<span className="sr-only">disputed</span></span> : null}
+      {p.disputed ? <span className="text-[11px] text-slow" title={p.dispute_text ?? "disputed"}>⚑<span className="sr-only">disputed: {p.dispute_text ?? ""}</span></span> : null}
+      {p.flags?.filter((f) => f !== "disputed").map((f) => <span key={f} className="num text-[11px] text-ink-2 rounded-sm px-1 ring-hair" title={f === "run-rate" ? "An annualised month, not booked revenue" : f === "gross" ? "Gross of pass-through (for example payments to contractors)" : "Net"}>{f}</span>)}
       <span className="num text-[11px] text-muted whitespace-nowrap">as of {p.as_of}</span>
       {p.obs_ids.length > 1 ? <span className="num text-[11px] text-muted whitespace-nowrap">({p.obs_ids.length} obs)</span> : null}
     </span>

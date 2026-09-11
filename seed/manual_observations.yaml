@@ -125,6 +125,7 @@ observations:
     basis: reported
     raw_snippet: "when developers use AI tools, they take 19% longer than without—AI makes them slower."
     note: "METR RCT, Feb–Jun 2025, 16 experienced open-source developers. Negative = slower."
+    dispute_text: "Sixteen experienced open-source maintainers working on their own large repositories with early-2025 tools; METR cautions against reading it as a general productivity effect."
   - series_key: metr_blog.rct_2026.dev_speed_change.pt
     source_id: metr_blog
     value: -0.04
@@ -717,6 +718,7 @@ observations:
     run_rate_vs_booked: run_rate
     note: "Second source for Epoch's Anthropic run-rate row (Bloomberg was first to report). Annualised run-rate, not booked revenue."
   # --- self-improvement (return arrow): OpenAI's 6 Sep 2026 post via the Internet Archive snapshot (openai.com 403s the fetcher); METR's survey (sourced 2026-09-10) ---
+    dispute_text: "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself."
   - series_key: openai_blog.openai.rsi_agent_workdays_per_human.pt
     source_id: openai_blog
     entity_id: openai
@@ -729,6 +731,7 @@ observations:
     basis: company_stated
     raw_snippet: "In terms of a standard 8 hour workday, as of mid-August, in total, the research organization uses 3.1 agent-workdays of effort for every workday of human labor."
     note: "Original: https://openai.com/index/research-acceleration-view-inside-openai/ ('Research acceleration: The view inside OpenAI', 6 Sep 2026). Self-measured by OpenAI; crossed 1.0 in June 2026 per the post. Internet Archive snapshot of 8 Sep 2026, raw (id_) form."
+    dispute_text: "OpenAI measuring its own research organisation and publishing the result itself; no independent check (tier 7)."
   - series_key: openai_blog.openai.rsi_intervention_rate_4_8h.pt
     coding: "'over half' stored as 0.5, a floor."
     source_id: openai_blog
@@ -742,6 +745,7 @@ observations:
     basis: company_stated
     raw_snippet: "In the last 6 months, over half of successful 4-8 hour tasks involved 1 or more interventions."
     note: "Reported only as 'over half'; stored as its floor (0.5). Successful tasks only, Jan–Jul 2026. Same archived post."
+    dispute_text: "OpenAI measuring its own research organisation and publishing the result itself; no independent check (tier 7)."
   - series_key: openai_blog.openai.median_researcher_inference_usd_per_day.pt
     source_id: openai_blog
     entity_id: openai
@@ -754,6 +758,7 @@ observations:
     basis: company_stated
     raw_snippet: "By mid-August, the median researcher was integrating agents daily into their work, using more than $600 per day of inference at API prices."
     note: "Reported as 'more than $600'; stored as its floor. Same archived post."
+    dispute_text: "OpenAI measuring its own research organisation and publishing the result itself; no independent check (tier 7)."
   - series_key: metr_blog.technical_workers.self_reported_value_uplift.pt
     source_id: metr_blog
     value: 1.4
@@ -1431,6 +1436,7 @@ observations:
     basis: company_stated
     raw_snippet: "Jobs requiring specific AI skills are growing almost eight times (69%) faster than the total jobs market (9%), with the average wage premium for AI skills rising to 62%"
     note: "PwC 2026 Global AI Jobs Barometer press release (2025 data, 1bn+ job ads, 27 countries); pwc.com 403s bots, Wayback URL used. Confirms the brief's 62% (2025 edition was 56%)."
+    dispute_text: "PwC compares pay in job postings that ask for AI skills with postings that do not: a posting premium, not a measured effect of AI on wages."
   - series_key: outsource_accelerator.ai_skilled_workers.wage_premium.fy
     source_id: outsource_accelerator
     value: 0.62
@@ -1456,6 +1462,8 @@ observations:
     raw_snippet: "AI data startup Mercor hit over $2 billion in gross annualized revenue in June 2026, double its pace at the start of the year, according to a person with direct knowledge of the company's financials."
     run_rate_vs_booked: run_rate
     note: "Gross (before ~60-70% contractor payouts), annualised. 'over $2B' stored as 2.0B floor."
+    dispute_text: "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself."
+    gross_vs_net: gross
   - series_key: techcrunch.mercor.gross_revenue_run_rate_usd.pt
     source_id: techcrunch
     entity_id: mercor
@@ -1470,6 +1478,8 @@ observations:
     run_rate_vs_booked: run_rate
     note: "Second source; TechCrunch relaying the founder's X post (basis company_stated). Surge/Scale: no 2026 public figure found."
   # 14. internal_external_deployment_gap_months
+    dispute_text: "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself."
+    gross_vs_net: gross
   - series_key: dwarkesh.anthropic_mythos.internal_to_public_gap_months.pt
     coding: "Counted: internal in February, public in June, four months."
     source_id: dwarkesh
@@ -1566,6 +1576,7 @@ observations:
     raw_snippet: "OpenAI is now on pace to bring in annualized revenue of more than $40 billion, roughly double its run rate from the end of 2025."
     run_rate_vs_booked: run_rate
     note: "Relays Bloomberg's 13 Aug 2026 report (bloomberg.com paywalled). 'more than $40B' stored as floor; July monthly run-rate +20% m/m per the same report."
+    dispute_text: "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself."
   - series_key: yahoo_finance.openai.revenue_run_rate_usd.pt
     source_id: yahoo_finance
     entity_id: openai
@@ -1580,6 +1591,7 @@ observations:
     run_rate_vs_booked: run_rate
     note: "Quartz via Yahoo Finance; independent relay of the same Bloomberg report."
   # second source: Canaries all-ages high-exposure employment
+    dispute_text: "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself."
   - series_key: fortune.us_high_exposure.employment_yoy.m
     coding: "Sign coded: the contraction of 0.2 percent stored as -0.2%."
     source_id: fortune

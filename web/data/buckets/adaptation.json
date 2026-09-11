@@ -5,7 +5,23 @@
    "layer_id": "labour_consumers",
    "note": "Productivity, wages, employment and consumer surplus.",
    "relation": "same_valve",
-   "shared_indicators": [],
+   "shared_indicators": [
+    "consumer_surplus_wta",
+    "bls_labor_productivity_yoy",
+    "bls_tfp_private_nonfarm",
+    "canaries_exposed_employment_yoy",
+    "canaries_entry_level_gap",
+    "revelio_exposed_vs_unexposed_growth",
+    "cait_high_exposure_claims",
+    "new_grad_unemployment",
+    "cross_tracker_concordance",
+    "labor_share_nonfarm",
+    "exposed_low_adaptive_workers",
+    "yale_occupational_mix_dissimilarity",
+    "humlum_precise_null",
+    "upwork_freelancer_effects",
+    "pwc_ai_skill_wage_premium"
+   ],
    "sublayer_id": null
   },
   {
@@ -15,10 +31,95 @@
    "relation": "leak_from",
    "shared_indicators": [],
    "sublayer_id": "deployment_services"
+  },
+  {
+   "bucket_id": "adaptation",
+   "layer_id": "model",
+   "note": "Backlash, safety brakes and paused runs are adaptation acting back on the model layer.",
+   "relation": "input_to",
+   "shared_indicators": [
+    "safety_brake_events"
+   ],
+   "sublayer_id": null
+  },
+  {
+   "bucket_id": "adaptation",
+   "layer_id": "adopters",
+   "note": "Adaptation inside adopting organisations and sectors: regulated devices, state bills, call-centre uplift, reported executive impact.",
+   "relation": "same_valve",
+   "shared_indicators": [
+    "fda_ai_devices_cumulative",
+    "state_ai_bills_introduced",
+    "call_center_uplift",
+    "exec_reported_impact"
+   ],
+   "sublayer_id": null
   }
  ],
  "id": "adaptation",
  "indicators": [
+  {
+   "bucket_id": "adaptation",
+   "confidence": 65,
+   "grade": "C",
+   "id": "consumer_surplus_wta",
+   "latest": {
+    "as_of": "2026-03-31",
+    "disputed": false,
+    "grade": "B",
+    "high": null,
+    "low": null,
+    "obs_ids": [
+     "2d48146988bbebb0"
+    ],
+    "series_key": "stanford_del.us.genai_consumer_surplus_usd.pt",
+    "subject": "us",
+    "unit": "USD",
+    "value": 172000000000.0
+   },
+   "layer_id": "labour_consumers",
+   "leading_lagging": "lagging",
+   "n_observations": 4,
+   "name": "Consumer surplus from generative AI (willingness to accept)",
+   "pending": null,
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2025-07-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "1307c3498e5ee6f5"
+     ],
+     "series_key": "stanford_del.us.genai_consumer_surplus_usd.pt",
+     "subject": "us",
+     "unit": "USD",
+     "value": 116000000000.0
+    },
+    {
+     "as_of": "2026-03-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "2d48146988bbebb0"
+     ],
+     "series_key": "stanford_del.us.genai_consumer_surplus_usd.pt",
+     "subject": "us",
+     "unit": "USD",
+     "value": 172000000000.0
+    }
+   ],
+   "stale_as_of": null,
+   "stale_reason": null,
+   "status": "dispersing",
+   "unit": "USD",
+   "unpublished_reason": null,
+   "valve_measured": "leak"
+  },
   {
    "bucket_id": "adaptation",
    "confidence": 80,
@@ -2710,7 +2811,11 @@
    "id": "pwc_ai_skill_wage_premium",
    "latest": {
     "as_of": "2025-12-31",
-    "disputed": false,
+    "dispute_text": "PwC compares pay in job postings that ask for AI skills with postings that do not: a posting premium, not a measured effect of AI on wages.",
+    "disputed": true,
+    "flags": [
+     "disputed"
+    ],
     "grade": "D",
     "high": null,
     "low": null,
@@ -2731,7 +2836,11 @@
    "sparkline": [
     {
      "as_of": "2025-12-31",
-     "disputed": false,
+     "dispute_text": "PwC compares pay in job postings that ask for AI skills with postings that do not: a posting premium, not a measured effect of AI on wages.",
+     "disputed": true,
+     "flags": [
+      "disputed"
+     ],
      "grade": "D",
      "high": null,
      "low": null,

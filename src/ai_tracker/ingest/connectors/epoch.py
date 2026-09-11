@@ -42,6 +42,9 @@ def slug(company: str) -> str:
     return re.sub(r"[^a-z0-9]+", "_", company.strip().lower()).strip("_")
 
 
+RUN_RATE_DISPUTE = "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself."
+
+
 class Epoch(Connector):
     source_id = "epoch"
     urls = ["https://epoch.ai/data/ai_companies.zip"]
@@ -118,6 +121,8 @@ class Epoch(Connector):
                     d,
                     day(r.get("Report date")),
                     run_rate_vs_booked="run_rate",
+                    disputed=True,
+                    dispute_text=RUN_RATE_DISPUTE,
                 )
             )
         for r in table(

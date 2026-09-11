@@ -6,6 +6,38 @@
    "layer_id": "labour_consumers",
    "note": "Productivity, wages, employment and consumer surplus.",
    "relation": "same_valve",
+   "shared_indicators": [
+    "consumer_surplus_wta",
+    "bls_labor_productivity_yoy",
+    "bls_tfp_private_nonfarm",
+    "canaries_exposed_employment_yoy",
+    "canaries_entry_level_gap",
+    "revelio_exposed_vs_unexposed_growth",
+    "cait_high_exposure_claims",
+    "new_grad_unemployment",
+    "cross_tracker_concordance",
+    "labor_share_nonfarm",
+    "exposed_low_adaptive_workers",
+    "yale_occupational_mix_dissimilarity",
+    "humlum_precise_null",
+    "upwork_freelancer_effects",
+    "pwc_ai_skill_wage_premium"
+   ],
+   "sublayer_id": null
+  },
+  {
+   "bucket_id": "early_adoption",
+   "layer_id": "labour_consumers",
+   "note": "People adopting directly: consumer and worker use counted from the household side.",
+   "relation": "same_valve",
+   "shared_indicators": [],
+   "sublayer_id": null
+  },
+  {
+   "bucket_id": "leak",
+   "layer_id": "labour_consumers",
+   "note": "Consumer surplus is where most of the value goes if the capture thesis fails: the leak to labour and consumers.",
+   "relation": "leak_from",
    "shared_indicators": [],
    "sublayer_id": null
   }
@@ -15,7 +47,7 @@
  "id": "labour_consumers",
  "indicators": [
   {
-   "bucket_id": null,
+   "bucket_id": "adaptation",
    "confidence": 65,
    "grade": "C",
    "id": "consumer_surplus_wta",
@@ -74,7 +106,7 @@
    "status": "dispersing",
    "unit": "USD",
    "unpublished_reason": null,
-   "valve_measured": null
+   "valve_measured": "leak"
   },
   {
    "bucket_id": "adaptation",
@@ -2239,7 +2271,11 @@
    "id": "pwc_ai_skill_wage_premium",
    "latest": {
     "as_of": "2025-12-31",
-    "disputed": false,
+    "dispute_text": "PwC compares pay in job postings that ask for AI skills with postings that do not: a posting premium, not a measured effect of AI on wages.",
+    "disputed": true,
+    "flags": [
+     "disputed"
+    ],
     "grade": "D",
     "high": null,
     "low": null,
@@ -2260,7 +2296,11 @@
    "sparkline": [
     {
      "as_of": "2025-12-31",
-     "disputed": false,
+     "dispute_text": "PwC compares pay in job postings that ask for AI skills with postings that do not: a posting premium, not a measured effect of AI on wages.",
+     "disputed": true,
+     "flags": [
+      "disputed"
+     ],
      "grade": "D",
      "high": null,
      "low": null,

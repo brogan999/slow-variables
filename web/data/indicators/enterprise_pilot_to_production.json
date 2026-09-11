@@ -32,7 +32,12 @@
    "layer_id": "deployment_application",
    "note": "Uplift RCTs, pilot\u2192production and app-layer margin net of inference measure the same valve.",
    "relation": "same_valve",
-   "shared_indicators": [],
+   "shared_indicators": [
+    "enterprise_spend_by_layer",
+    "dev_rct_uplift",
+    "enterprise_pilot_to_production",
+    "harvey_lab_frontier_completion"
+   ],
    "sublayer_id": null
   }
  ],
@@ -52,7 +57,11 @@
  "id": "enterprise_pilot_to_production",
  "latest": {
   "as_of": "2025-06-30",
+  "dispute_text": "Denominator and sample disputed; Menlo reports ~47% of pilots reach production on a different definition. No MIT-hosted copy of the PDF exists; this is the mirror Menlo cites.",
   "disputed": true,
+  "flags": [
+   "disputed"
+  ],
   "grade": "B",
   "high": null,
   "low": null,
@@ -79,7 +88,11 @@
  "points": [
   {
    "as_of": "2025-06-30",
+   "dispute_text": "Denominator and sample disputed; Menlo reports ~47% of pilots reach production on a different definition. No MIT-hosted copy of the PDF exists; this is the mirror Menlo cites.",
    "disputed": true,
+   "flags": [
+    "disputed"
+   ],
    "grade": "B",
    "high": null,
    "low": null,
@@ -136,7 +149,11 @@
    "points": [
     {
      "as_of": "2025-06-30",
+     "dispute_text": "Denominator and sample disputed; Menlo reports ~47% of pilots reach production on a different definition. No MIT-hosted copy of the PDF exists; this is the mirror Menlo cites.",
      "disputed": true,
+     "flags": [
+      "disputed"
+     ],
      "grade": "B",
      "high": null,
      "low": null,
@@ -159,7 +176,11 @@
  "sparkline": [
   {
    "as_of": "2025-06-30",
+   "dispute_text": "Denominator and sample disputed; Menlo reports ~47% of pilots reach production on a different definition. No MIT-hosted copy of the PDF exists; this is the mirror Menlo cites.",
    "disputed": true,
+   "flags": [
+    "disputed"
+   ],
    "grade": "B",
    "high": null,
    "low": null,
@@ -179,6 +200,7 @@
  "status_events": [
   {
    "author": "claude-initial-seed",
+   "counterevidence_considered": null,
    "created_at": "2026-09-10T01:29:58.467906Z",
    "evidence_ids": [
     "f9abac975385a365"

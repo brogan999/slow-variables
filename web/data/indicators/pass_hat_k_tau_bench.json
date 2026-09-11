@@ -26,7 +26,22 @@
  },
  "confidence": 55,
  "counterevidence": "The 2026 point is vendor-tabulated and the model is unnamed; tau-bench domains are narrow; pass^k penalises benign variation.",
- "crosswalk": [],
+ "crosswalk": [
+  {
+   "bucket_id": "products",
+   "layer_id": "model",
+   "note": "Reliability, calibration and the gap between internal and external deployment decide what the model layer can productise.",
+   "relation": "same_valve",
+   "shared_indicators": [
+    "reliability_framework_adoption",
+    "agent_calibration",
+    "agent_operational_safety",
+    "pass_hat_k_tau_bench",
+    "internal_external_deployment_gap_months"
+   ],
+   "sublayer_id": null
+  }
+ ],
  "definition": "Share of tau-bench tasks an agent passes on every one of k attempts. The 2024 paper's gpt-4o figures (pass^1 61%, pass^8 under 25%) set the baseline; the 2026 point is the leaderboard leader's pass^1 and pass^4 as tabulated by Automation Anywhere.",
  "derived": [],
  "direction": null,
@@ -202,6 +217,7 @@
  "status_events": [
   {
    "author": "evaluate",
+   "counterevidence_considered": null,
    "created_at": "2026-09-10T07:06:26.472306Z",
    "evidence_ids": [
     "77cbd0ec9267f9c7"

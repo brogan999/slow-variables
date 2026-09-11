@@ -31,10 +31,64 @@
    "note": "Capability growth is the model layer's product; inference price at fixed capability \u21c4 price-per-token pass-through; open-weights lag \u21c4 open-vs-closed gap.",
    "relation": "same_valve",
    "shared_indicators": [
+    "lab_run_rates",
+    "open_vs_closed_gap",
     "metr_horizon_50",
     "metr_horizon_80",
     "horizon_ratio_80_50",
-    "open_weights_lag_months"
+    "epoch_training_compute_growth",
+    "epoch_inference_price_fixed_capability",
+    "open_weights_lag_months",
+    "arc_agi_frontier",
+    "ord_half_life_misfit",
+    "surprise_index"
+   ],
+   "sublayer_id": null
+  },
+  {
+   "bucket_id": "return_arrow",
+   "layer_id": "model",
+   "note": "Inside the labs: agent work on the labs' own research and lab recoupment are deployment feeding back into invention.",
+   "relation": "return_arrow",
+   "shared_indicators": [
+    "lab_recoupment_ratio",
+    "rsi_agent_workdays_per_human",
+    "rsi_intervention_rate_4_8h",
+    "deployment_data_share_of_training"
+   ],
+   "sublayer_id": null
+  },
+  {
+   "bucket_id": "adaptation",
+   "layer_id": "model",
+   "note": "Backlash, safety brakes and paused runs are adaptation acting back on the model layer.",
+   "relation": "input_to",
+   "shared_indicators": [
+    "safety_brake_events"
+   ],
+   "sublayer_id": null
+  },
+  {
+   "bucket_id": "products",
+   "layer_id": "model",
+   "note": "Reliability, calibration and the gap between internal and external deployment decide what the model layer can productise.",
+   "relation": "same_valve",
+   "shared_indicators": [
+    "reliability_framework_adoption",
+    "agent_calibration",
+    "agent_operational_safety",
+    "pass_hat_k_tau_bench",
+    "internal_external_deployment_gap_months"
+   ],
+   "sublayer_id": null
+  },
+  {
+   "bucket_id": "early_adoption",
+   "layer_id": "model",
+   "note": "Buyers spreading work across several labs is adoption breadth read from the model layer.",
+   "relation": "same_valve",
+   "shared_indicators": [
+    "enterprise_multi_homing_share"
    ],
    "sublayer_id": null
   }
@@ -44,13 +98,18 @@
  "id": "model",
  "indicators": [
   {
-   "bucket_id": null,
+   "bucket_id": "methods",
    "confidence": 55,
    "grade": "C",
    "id": "lab_run_rates",
    "latest": {
     "as_of": "2026-08-13",
-    "disputed": false,
+    "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+    "disputed": true,
+    "flags": [
+     "disputed",
+     "run-rate"
+    ],
     "grade": "C",
     "high": null,
     "low": null,
@@ -71,7 +130,12 @@
    "sparkline": [
     {
      "as_of": "2023-03-01",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -85,7 +149,12 @@
     },
     {
      "as_of": "2023-08-29",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -99,7 +168,12 @@
     },
     {
      "as_of": "2023-10-10",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -113,7 +187,12 @@
     },
     {
      "as_of": "2023-12-30",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -127,7 +206,12 @@
     },
     {
      "as_of": "2023-12-31",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -141,7 +225,12 @@
     },
     {
      "as_of": "2024-06-12",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -155,7 +244,12 @@
     },
     {
      "as_of": "2024-08-15",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -169,7 +263,12 @@
     },
     {
      "as_of": "2024-09-12",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -183,7 +282,12 @@
     },
     {
      "as_of": "2024-12-31",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -197,7 +301,12 @@
     },
     {
      "as_of": "2025-06-09",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -211,7 +320,12 @@
     },
     {
      "as_of": "2025-07-30",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -225,7 +339,12 @@
     },
     {
      "as_of": "2025-08-01",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -239,7 +358,12 @@
     },
     {
      "as_of": "2025-12-18",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -253,7 +377,12 @@
     },
     {
      "as_of": "2025-12-31",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -267,7 +396,12 @@
     },
     {
      "as_of": "2026-02-28",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -281,7 +415,12 @@
     },
     {
      "as_of": "2026-08-13",
-     "disputed": false,
+     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+     "disputed": true,
+     "flags": [
+      "disputed",
+      "run-rate"
+     ],
      "grade": "C",
      "high": null,
      "low": null,
@@ -302,7 +441,7 @@
    "valve_measured": null
   },
   {
-   "bucket_id": null,
+   "bucket_id": "return_arrow",
    "confidence": 50,
    "grade": "C",
    "id": "lab_recoupment_ratio",
@@ -1848,7 +1987,7 @@
    "valve_measured": null
   },
   {
-   "bucket_id": null,
+   "bucket_id": "methods",
    "confidence": 55,
    "grade": "A",
    "id": "open_vs_closed_gap",
@@ -2141,7 +2280,7 @@
    "valve_measured": null
   },
   {
-   "bucket_id": null,
+   "bucket_id": "early_adoption",
    "confidence": 45,
    "grade": "B",
    "id": "enterprise_multi_homing_share",
@@ -2269,7 +2408,11 @@
    "id": "metr_horizon_50",
    "latest": {
     "as_of": "2026-04-07",
+    "dispute_text": "METR: measurements above 16 hours are unreliable with the current task suite",
     "disputed": true,
+    "flags": [
+     "disputed"
+    ],
     "grade": "A",
     "high": 3304.261235,
     "low": 508.876789,
@@ -2612,7 +2755,11 @@
     },
     {
      "as_of": "2026-04-07",
+     "dispute_text": "METR: measurements above 16 hours are unreliable with the current task suite",
      "disputed": true,
+     "flags": [
+      "disputed"
+     ],
      "grade": "A",
      "high": 3304.261235,
      "low": 508.876789,
@@ -3329,7 +3476,11 @@
    "id": "rsi_agent_workdays_per_human",
    "latest": {
     "as_of": "2026-08-15",
-    "disputed": false,
+    "dispute_text": "OpenAI measuring its own research organisation and publishing the result itself; no independent check (tier 7).",
+    "disputed": true,
+    "flags": [
+     "disputed"
+    ],
     "grade": "D",
     "high": null,
     "low": null,
@@ -3350,7 +3501,11 @@
    "sparkline": [
     {
      "as_of": "2026-08-15",
-     "disputed": false,
+     "dispute_text": "OpenAI measuring its own research organisation and publishing the result itself; no independent check (tier 7).",
+     "disputed": true,
+     "flags": [
+      "disputed"
+     ],
      "grade": "D",
      "high": null,
      "low": null,
@@ -3377,7 +3532,11 @@
    "id": "rsi_intervention_rate_4_8h",
    "latest": {
     "as_of": "2026-07-31",
-    "disputed": false,
+    "dispute_text": "OpenAI measuring its own research organisation and publishing the result itself; no independent check (tier 7).",
+    "disputed": true,
+    "flags": [
+     "disputed"
+    ],
     "grade": "D",
     "high": null,
     "low": null,
@@ -3398,7 +3557,11 @@
    "sparkline": [
     {
      "as_of": "2026-07-31",
-     "disputed": false,
+     "dispute_text": "OpenAI measuring its own research organisation and publishing the result itself; no independent check (tier 7).",
+     "disputed": true,
+     "flags": [
+      "disputed"
+     ],
      "grade": "D",
      "high": null,
      "low": null,

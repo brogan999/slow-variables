@@ -53,6 +53,7 @@ indicators:
     series_keys: ["epoch.openai.revenue_run_rate_usd.pt", "epoch.anthropic.revenue_run_rate_usd.pt", "pymnts.openai.revenue_run_rate_usd.pt", "yahoo_finance.openai.revenue_run_rate_usd.pt", "cnbc.anthropic.revenue_run_rate_usd.pt"]
     band_input: epoch.openai.revenue_run_rate_usd.pt
     layer_id: model
+    bucket_id: methods
     sublayer_id: frontier_labs
     direction_rule: {periods: 4, dead_band: 2000000000, higher_is: concentrating, rationale: "Four reports; moves under $2B are reporting noise. Rising run-rate concentrates revenue at the two frontier labs."}
     leading_lagging: coincident
@@ -75,6 +76,7 @@ indicators:
     metric_dims: {entity: openai}
     band_input: "metric:lab_recoupment_ratio"
     layer_id: model
+    bucket_id: return_arrow
     sublayer_id: frontier_labs
     direction_rule: {periods: 3, dead_band: 0.05, higher_is: concentrating, rationale: "Three points; a move under 0.05 is noise. A rising ratio means the lab is recouping capital faster than it raises it."}
     leading_lagging: lagging
@@ -96,6 +98,8 @@ indicators:
     series_keys: ["stanford_del.us.genai_consumer_surplus_usd.pt", "stanford_del.us.genai_mean_wta_usd_month.pt", "hsbc.us.genai_consumer_surplus_usd.pt"]
     band_input: stanford_del.us.genai_consumer_surplus_usd.pt
     layer_id: labour_consumers
+    bucket_id: adaptation
+    valve_measured: leak
     direction_rule: {periods: 1, dead_band: 10000000000, higher_is: dispersing, rationale: "Two annual waves so far, so the trend is one step; moves under $10B are within survey error. Rising surplus disperses value away from producers to consumers."}
     leading_lagging: lagging
     timing_rationale: "Lagging: surplus estimates come from surveys of habits users have already formed and publish months after fieldwork."
@@ -117,6 +121,7 @@ indicators:
     metric: enterprise_app_spend_share
     band_input: "metric:enterprise_app_spend_share"
     layer_id: deployment_application
+    bucket_id: products
     direction_rule: {periods: 1, dead_band: 0.05, higher_is: concentrating, rationale: "Two annual waves, so the trend is one step; a move under five points is within survey error. Rising application share = value concentrating at the application layer."}
     leading_lagging: coincident
     timing_rationale: "Coincident: the survey records budgets enterprises are spending this year, published once a year."
@@ -448,6 +453,7 @@ indicators:
     metric: open_vs_closed_gap
     band_input: "metric:open_vs_closed_gap"
     layer_id: model
+    bucket_id: methods
     sublayer_id: open_weight_labs
     direction_rule: {periods: 4, dead_band: 2, higher_is: concentrating, rationale: "Four open-weights releases; a move under two ECI points is inside the index's confidence intervals. Widening gap = rents concentrating in the closed labs."}
     leading_lagging: leading
@@ -554,6 +560,7 @@ indicators:
     series_keys: ["menlo.enterprise.multi_model_share.pt", "menlo.enterprise.models_deployed_typical.pt", "menlo.enterprise.vendor_switch_share.pt"]
     band_input: menlo.enterprise.multi_model_share.pt
     layer_id: model
+    bucket_id: early_adoption
     sublayer_id: frontier_labs
     direction_rule: {periods: 2, dead_band: 0.05, higher_is: dispersing, rationale: "Annual waves; a move under five points is survey noise. More multi-homing disperses the model layer's pricing power."}
     leading_lagging: coincident

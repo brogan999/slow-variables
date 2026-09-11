@@ -13,7 +13,26 @@
    "layer_id": "deployment_application",
    "note": "Uplift RCTs, pilot\u2192production and app-layer margin net of inference measure the same valve.",
    "relation": "same_valve",
-   "shared_indicators": [],
+   "shared_indicators": [
+    "enterprise_spend_by_layer",
+    "dev_rct_uplift",
+    "enterprise_pilot_to_production",
+    "harvey_lab_frontier_completion"
+   ],
+   "sublayer_id": null
+  },
+  {
+   "bucket_id": "products",
+   "layer_id": "model",
+   "note": "Reliability, calibration and the gap between internal and external deployment decide what the model layer can productise.",
+   "relation": "same_valve",
+   "shared_indicators": [
+    "reliability_framework_adoption",
+    "agent_calibration",
+    "agent_operational_safety",
+    "pass_hat_k_tau_bench",
+    "internal_external_deployment_gap_months"
+   ],
    "sublayer_id": null
   }
  ],
@@ -21,12 +40,66 @@
  "indicators": [
   {
    "bucket_id": "products",
+   "confidence": 55,
+   "grade": "B",
+   "id": "enterprise_spend_by_layer",
+   "latest": {
+    "as_of": "2025-12-31",
+    "dims": {},
+    "obs_ids": [
+     "6012e72e8105bfc4",
+     "790ba59ba69990e5"
+    ],
+    "unit": "share",
+    "value": 0.5135135135135135
+   },
+   "layer_id": "deployment_application",
+   "leading_lagging": "coincident",
+   "n_observations": 4,
+   "name": "Application layer's share of enterprise generative-AI spend (Menlo)",
+   "pending": null,
+   "published": true,
+   "sparkline": [
+    {
+     "as_of": "2024-12-31",
+     "dims": {},
+     "obs_ids": [
+      "eb8d37a9275b0137",
+      "fbc90648f2532e9c"
+     ],
+     "unit": "share",
+     "value": 0.3333333333333333
+    },
+    {
+     "as_of": "2025-12-31",
+     "dims": {},
+     "obs_ids": [
+      "6012e72e8105bfc4",
+      "790ba59ba69990e5"
+     ],
+     "unit": "share",
+     "value": 0.5135135135135135
+    }
+   ],
+   "stale_as_of": null,
+   "stale_reason": null,
+   "status": "emerging",
+   "unit": "share",
+   "unpublished_reason": null,
+   "valve_measured": null
+  },
+  {
+   "bucket_id": "products",
    "confidence": 70,
    "grade": "A",
    "id": "dev_rct_uplift",
    "latest": {
     "as_of": "2026-02-24",
+    "dispute_text": "METR itself calls this 'very weak evidence' because developers refusing the no-AI arm biases the sample.",
     "disputed": true,
+    "flags": [
+     "disputed"
+    ],
     "grade": "A",
     "high": null,
     "low": null,
@@ -47,7 +120,11 @@
    "sparkline": [
     {
      "as_of": "2025-06-30",
-     "disputed": false,
+     "dispute_text": "Sixteen experienced open-source maintainers working on their own large repositories with early-2025 tools; METR cautions against reading it as a general productivity effect.",
+     "disputed": true,
+     "flags": [
+      "disputed"
+     ],
      "grade": "A",
      "high": null,
      "low": null,
@@ -61,7 +138,11 @@
     },
     {
      "as_of": "2026-02-24",
+     "dispute_text": "METR itself calls this 'very weak evidence' because developers refusing the no-AI arm biases the sample.",
      "disputed": true,
+     "flags": [
+      "disputed"
+     ],
      "grade": "A",
      "high": null,
      "low": null,
@@ -88,7 +169,11 @@
    "id": "enterprise_pilot_to_production",
    "latest": {
     "as_of": "2025-06-30",
+    "dispute_text": "Denominator and sample disputed; Menlo reports ~47% of pilots reach production on a different definition. No MIT-hosted copy of the PDF exists; this is the mirror Menlo cites.",
     "disputed": true,
+    "flags": [
+     "disputed"
+    ],
     "grade": "B",
     "high": null,
     "low": null,
@@ -109,7 +194,11 @@
    "sparkline": [
     {
      "as_of": "2025-06-30",
+     "dispute_text": "Denominator and sample disputed; Menlo reports ~47% of pilots reach production on a different definition. No MIT-hosted copy of the PDF exists; this is the mirror Menlo cites.",
      "disputed": true,
+     "flags": [
+      "disputed"
+     ],
      "grade": "B",
      "high": null,
      "low": null,

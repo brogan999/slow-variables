@@ -21,7 +21,7 @@
   ],
   "value": 0.2188782489740082
  },
- "bucket_id": null,
+ "bucket_id": "return_arrow",
  "cadence_expected": "monthly",
  "chart_sources": {
   "metric": "lab_recoupment_ratio",
@@ -37,12 +37,26 @@
  },
  "confidence": 50,
  "counterevidence": "Tier-5 inputs on both sides; equity raised is a floor on capital consumed.",
- "crosswalk": [],
+ "crosswalk": [
+  {
+   "bucket_id": "return_arrow",
+   "layer_id": "model",
+   "note": "Inside the labs: agent work on the labs' own research and lab recoupment are deployment feeding back into invention.",
+   "relation": "return_arrow",
+   "shared_indicators": [
+    "lab_recoupment_ratio",
+    "rsi_agent_workdays_per_human",
+    "rsi_intervention_rate_4_8h",
+    "deployment_data_share_of_training"
+   ],
+   "sublayer_id": null
+  }
+ ],
  "definition": "OpenAI's latest revenue run-rate divided by all equity it had raised by that date (derived metric lab_recoupment_ratio, Epoch data).",
  "derived": [
   {
    "as_of_date": "2023-03-01",
-   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "computed_at": "2026-09-11T13:08:36.843553Z",
    "dims": {
     "entity": "openai"
    },
@@ -69,7 +83,7 @@
   },
   {
    "as_of_date": "2023-08-29",
-   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "computed_at": "2026-09-11T13:08:36.843553Z",
    "dims": {
     "entity": "openai"
    },
@@ -98,7 +112,7 @@
   },
   {
    "as_of_date": "2023-10-10",
-   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "computed_at": "2026-09-11T13:08:36.843553Z",
    "dims": {
     "entity": "openai"
    },
@@ -127,7 +141,7 @@
   },
   {
    "as_of_date": "2023-12-30",
-   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "computed_at": "2026-09-11T13:08:36.843553Z",
    "dims": {
     "entity": "openai"
    },
@@ -156,7 +170,7 @@
   },
   {
    "as_of_date": "2023-12-31",
-   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "computed_at": "2026-09-11T13:08:36.843553Z",
    "dims": {
     "entity": "openai"
    },
@@ -185,7 +199,7 @@
   },
   {
    "as_of_date": "2024-06-12",
-   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "computed_at": "2026-09-11T13:08:36.843553Z",
    "dims": {
     "entity": "openai"
    },
@@ -214,7 +228,7 @@
   },
   {
    "as_of_date": "2024-08-15",
-   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "computed_at": "2026-09-11T13:08:36.843553Z",
    "dims": {
     "entity": "openai"
    },
@@ -243,7 +257,7 @@
   },
   {
    "as_of_date": "2024-09-12",
-   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "computed_at": "2026-09-11T13:08:36.843553Z",
    "dims": {
     "entity": "openai"
    },
@@ -272,7 +286,7 @@
   },
   {
    "as_of_date": "2024-12-31",
-   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "computed_at": "2026-09-11T13:08:36.843553Z",
    "dims": {
     "entity": "openai"
    },
@@ -303,7 +317,7 @@
   },
   {
    "as_of_date": "2025-06-09",
-   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "computed_at": "2026-09-11T13:08:36.843553Z",
    "dims": {
     "entity": "openai"
    },
@@ -336,7 +350,7 @@
   },
   {
    "as_of_date": "2025-07-30",
-   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "computed_at": "2026-09-11T13:08:36.843553Z",
    "dims": {
     "entity": "openai"
    },
@@ -369,7 +383,7 @@
   },
   {
    "as_of_date": "2025-08-01",
-   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "computed_at": "2026-09-11T13:08:36.843553Z",
    "dims": {
     "entity": "openai"
    },
@@ -404,7 +418,7 @@
   },
   {
    "as_of_date": "2025-12-18",
-   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "computed_at": "2026-09-11T13:08:36.843553Z",
    "dims": {
     "entity": "openai"
    },
@@ -439,7 +453,7 @@
   },
   {
    "as_of_date": "2025-12-31",
-   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "computed_at": "2026-09-11T13:08:36.843553Z",
    "dims": {
     "entity": "openai"
    },
@@ -476,7 +490,7 @@
   },
   {
    "as_of_date": "2026-02-28",
-   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "computed_at": "2026-09-11T13:08:36.843553Z",
    "dims": {
     "entity": "openai"
    },
@@ -515,7 +529,7 @@
   },
   {
    "as_of_date": "2026-08-13",
-   "computed_at": "2026-09-11T12:51:18.797663Z",
+   "computed_at": "2026-09-11T13:08:36.843553Z",
    "dims": {
     "entity": "openai"
    },
@@ -1190,6 +1204,7 @@
  "status_events": [
   {
    "author": "evaluate",
+   "counterevidence_considered": null,
    "created_at": "2026-09-10T07:06:24.995829Z",
    "evidence_ids": [
     "15d383db12c87c1e",

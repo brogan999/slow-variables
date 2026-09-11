@@ -52,6 +52,33 @@ def _verified(ledger: Path) -> set[tuple]:
     }
 
 
+def annotate(ledger: Path, rows: list[dict]) -> int:
+    """A verified row is never re-fetched, so a corrected annotation in the seed (dispute text, gross or net, run-rate,
+    note) is copied onto the stored row here. Only those flag fields change: never value, snippet, URL or id."""
+    if not ledger.exists():
+        return 0
+    seed = {_key(r): r for r in rows}
+    stored = [json.loads(line) for line in ledger.read_text().splitlines() if line]
+    n = 0
+    for o in stored:
+        r = seed.get(_key({**o, "value": o.get("value_numeric")}))
+        if not r:
+            continue
+        want = {
+            "disputed": bool(r.get("dispute_text")),
+            "dispute_text": r.get("dispute_text"),
+            "gross_vs_net": r.get("gross_vs_net"),
+            "run_rate_vs_booked": r.get("run_rate_vs_booked"),
+            "note": r.get("note"),
+        }
+        if any(o.get(k) != v for k, v in want.items()):
+            o.update(want)
+            n += 1
+    if n:
+        ledger.write_text("".join(json.dumps(o, sort_keys=True) + "\n" for o in stored))
+    return n
+
+
 class Manual(Connector):
     source_id = "manual"
     kind = "html"
@@ -64,10 +91,12 @@ class Manual(Connector):
             (yaml.safe_load(path.read_text()) or {}).get("observations") or [] if path.exists() else []
         )
         done = _verified(Path("data/observations/manual.jsonl"))
+        self.all_rows = rows
         self.rows = [r for r in rows if _key(r) not in done]  # verified once; pages change after that
         self.urls = [r["url"] for r in self.rows]
 
     def fetch(self, day: date, refetch: bool = False) -> list[RawItem]:
+        annotate(Path("data/observations/manual.jsonl"), self.all_rows)
         items: list[RawItem] = []
         for url in self.urls:
             try:
@@ -94,6 +123,8 @@ class Manual(Connector):
                 value_numeric=r.get("value"),
                 value_text=r.get("value_text"),
                 run_rate_vs_booked=r.get("run_rate_vs_booked"),
+                gross_vs_net=r.get("gross_vs_net"),
+                note=r.get("note"),
             )
             if item.http_status >= 400:  # never store a number whose page we could not read
                 self.errors.append(

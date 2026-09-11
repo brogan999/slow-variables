@@ -10,7 +10,7 @@
   ],
   "value": 0.6
  },
- "bucket_id": null,
+ "bucket_id": "early_adoption",
  "cadence_expected": "annual",
  "chart_sources": {
   "metric": null,
@@ -26,7 +26,18 @@
  },
  "confidence": 45,
  "counterevidence": "One survey house; the numeric share is a 2023 figure; later waves changed the question.",
- "crosswalk": [],
+ "crosswalk": [
+  {
+   "bucket_id": "early_adoption",
+   "layer_id": "model",
+   "note": "Buyers spreading work across several labs is adoption breadth read from the model layer.",
+   "relation": "same_valve",
+   "shared_indicators": [
+    "enterprise_multi_homing_share"
+   ],
+   "sublayer_id": null
+  }
+ ],
  "definition": "Share of enterprises using more than one foundation model, from Menlo Ventures' enterprise surveys (60% in the 2023 wave, restated in 2024); the 2024 wave states 'three or more models' without a share and the 2025 mid-year update gives the share that switched vendors (11%), shown alongside.",
  "derived": [],
  "direction": null,
@@ -182,6 +193,7 @@
  "status_events": [
   {
    "author": "evaluate",
+   "counterevidence_considered": null,
    "created_at": "2026-09-10T09:52:21.499946Z",
    "evidence_ids": [
     "5a3caabee92bfad9"

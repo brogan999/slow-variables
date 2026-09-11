@@ -26,7 +26,22 @@
  },
  "confidence": 45,
  "counterevidence": "A single datum from a third party speaking from memory; internal availability is not internal deployment at scale; restricted partner access blurs the public date.",
- "crosswalk": [],
+ "crosswalk": [
+  {
+   "bucket_id": "products",
+   "layer_id": "model",
+   "note": "Reliability, calibration and the gap between internal and external deployment decide what the model layer can productise.",
+   "relation": "same_valve",
+   "shared_indicators": [
+    "reliability_framework_adoption",
+    "agent_calibration",
+    "agent_operational_safety",
+    "pass_hat_k_tau_bench",
+    "internal_external_deployment_gap_months"
+   ],
+   "sublayer_id": null
+  }
+ ],
  "definition": "Months between a frontier model's internal availability and its public release, from the one documented case (Anthropic's Mythos class: internal in February, public in June 2026, per Ryan Greenblatt on the Dwarkesh Podcast, with Fortune's release report for the public leg).",
  "derived": [],
  "direction": null,
@@ -162,6 +177,7 @@
  "status_events": [
   {
    "author": "evaluate",
+   "counterevidence_considered": null,
    "created_at": "2026-09-10T07:06:26.806457Z",
    "evidence_ids": [
     "8d657a642bef97a9"

@@ -78,6 +78,7 @@ OBS_COLUMNS = {
     "gross_vs_net": "VARCHAR",
     "disputed": "BOOLEAN",
     "dispute_text": "VARCHAR",
+    "note": "VARCHAR",
     "review_status": "VARCHAR",
     "reviewer_id": "VARCHAR",
     "supersedes_id": "VARCHAR",
@@ -129,11 +130,26 @@ class Seed:
             else {}
         )
         cmp_ = yaml.safe_load((root / "compare.yaml").read_text()) if (root / "compare.yaml").exists() else {}
+        crosswalk = [  # shared indicators follow from the indicators' own two addresses, never a hand list
+            Crosswalk(
+                **{
+                    **r,
+                    "shared_indicators": [
+                        i.id
+                        for i in inds
+                        if i.bucket_id == r["bucket_id"]
+                        and i.layer_id == r["layer_id"]
+                        and (not r.get("sublayer_id") or i.sublayer_id == r["sublayer_id"])
+                    ],
+                }
+            )
+            for r in rows("crosswalk")
+        ]
         return cls(
             [Bucket(**r) for r in rows("buckets")],
             [Layer(**r) for r in rows("layers")],
             [Sublayer(**r) for r in rows("sublayers")],
-            [Crosswalk(**r) for r in rows("crosswalk")],
+            crosswalk,
             [Source(**r) for r in rows("sources")],
             inds,
             [Entity(**r) for r in rows("entities")],
@@ -147,6 +163,9 @@ class Seed:
                 for r in yaml.safe_load((root / "sources.yaml").read_text()).get("skipped") or []
             ],
         )
+
+
+FLAG_FIELDS = ("disputed", "dispute_text", "gross_vs_net", "run_rate_vs_booked", "note")
 
 
 def append_observations(source_id: str, rows: list[Observation]) -> int:
@@ -176,7 +195,15 @@ def append_observations(source_id: str, rows: list[Observation]) -> int:
         if k not in latest or r["retrieved_at"] > latest[k][1]:
             latest[k] = (r["id"], r["retrieved_at"])
     new: list[dict[str, Any]] = []
+    own = {r["id"]: r for r in existing}
+    touched = False
     for o in rows:
+        if o.id in own:  # a corrected annotation rewrites only flag fields: never value, snippet, URL or id
+            d, cur = dump(o), own[o.id]
+            if any(cur.get(k) != d.get(k) for k in FLAG_FIELDS):
+                cur.update({k: d.get(k) for k in FLAG_FIELDS})
+                touched = True
+            continue
         if o.id in ids:
             continue
         k = (
@@ -193,7 +220,7 @@ def append_observations(source_id: str, rows: list[Observation]) -> int:
         latest[k] = (o.id, o.retrieved_at.isoformat())
         ids.add(o.id)
         new.append(dump(o))
-    if new:
+    if new or touched:
         write_jsonl(p, sorted(existing + new, key=lambda r: r["id"]))
     return len(new)
 
@@ -756,16 +783,25 @@ class Store:
     ) -> dict[str, Any]:
         buckets = []
         for b in self.seed.buckets:
-            inds = [cards[i.id] for i in self.seed.indicators if i.bucket_id == b.id and i.published]
-            buckets.append({**dump(b), "indicators": inds, "status": _summarise(inds)})
+            mine = [i for i in self.seed.indicators if i.bucket_id == b.id and i.published]
+            flow = [
+                cards[i.id] for i in mine if not i.direction_rule
+            ]  # a shared capture indicator keeps its own lens
+            buckets.append({**dump(b), "indicators": [cards[i.id] for i in mine], "status": _summarise(flow)})
         valves = []
         for v in VALVES:
-            inds = [cards[i.id] for i in self.seed.indicators if i.valve_measured == v["id"] and i.published]
-            valves.append({**v, "status": _summarise(inds), "indicator_ids": [i["id"] for i in inds]})
+            mine = [i for i in self.seed.indicators if i.valve_measured == v["id"] and i.published]
+            flow = [cards[i.id] for i in mine if not i.direction_rule]
+            valves.append({**v, "status": _summarise(flow), "indicator_ids": [i.id for i in mine]})
+        falsified = next(
+            (t for t in read_jsonl(DATA / "thesis.jsonl") if t.get("id") == "normal_tech_falsified"), None
+        )
+        thesis = {True: "falsified", False: "holding"}.get(falsified.get("holds")) if falsified else None
         verdict = (
             "As of %s: " % as_of
             + ", ".join(f"{b['name'].lower()} {b['status'].replace('_', ' ')}" for b in buckets)
             + "."
+            + (f" Thesis: {thesis or 'untestable'}." if falsified else "")
         )
         return {
             "as_of": as_of,
@@ -1340,7 +1376,23 @@ def _point(o: dict[str, Any]) -> dict[str, Any]:
         "unit": o["unit"],
         "disputed": o["disputed"],
         "grade": _grade(Tier(o["tier"])),
+        **_flags(o),
     }
+
+
+def _flags(o: dict[str, Any]) -> dict[str, Any]:
+    """v2 §1.3: the flags travel with every point, so a card or chart never shows a run-rate as revenue unmarked."""
+    flags = [
+        label
+        for label, on in (
+            ("disputed", o.get("disputed")),
+            ("run-rate", o.get("run_rate_vs_booked") == "run_rate"),
+            ("gross", o.get("gross_vs_net") == "gross"),
+            ("net", o.get("gross_vs_net") == "net"),
+        )
+        if on
+    ]
+    return {"flags": flags, "dispute_text": o.get("dispute_text")} if flags else {}
 
 
 def _full(o: dict[str, Any]) -> dict[str, Any]:
