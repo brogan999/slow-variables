@@ -9295,17 +9295,13 @@
      "id": "surprise_index",
      "latest": {
       "as_of": "2026-07-31",
-      "disputed": false,
-      "grade": "D",
-      "high": null,
-      "low": null,
+      "dims": {},
       "obs_ids": [
-       "86d58f4a839a1c59"
+       "86d58f4a839a1c59",
+       "8f07be35b7fe2867"
       ],
-      "series_key": "aifutures_blog.ai_2027_quantitative.pace_vs_predicted.pt",
-      "subject": "ai_2027_quantitative",
       "unit": "share",
-      "value": 0.75
+      "value": 0.7
      },
      "layer_id": "model",
      "leading_lagging": "leading",
@@ -9315,32 +9311,14 @@
      "published": true,
      "sparkline": [
       {
-       "as_of": "2025-12-31",
-       "disputed": false,
-       "grade": "D",
-       "high": null,
-       "low": null,
-       "obs_ids": [
-        "f8386ab8c9d0fc8d"
-       ],
-       "series_key": "aifutures_blog.ai_2027_quantitative.pace_vs_predicted.pt",
-       "subject": "ai_2027_quantitative",
-       "unit": "share",
-       "value": 0.65
-      },
-      {
        "as_of": "2026-07-31",
-       "disputed": false,
-       "grade": "D",
-       "high": null,
-       "low": null,
+       "dims": {},
        "obs_ids": [
-        "86d58f4a839a1c59"
+        "86d58f4a839a1c59",
+        "8f07be35b7fe2867"
        ],
-       "series_key": "aifutures_blog.ai_2027_quantitative.pace_vs_predicted.pt",
-       "subject": "ai_2027_quantitative",
        "unit": "share",
-       "value": 0.75
+       "value": 0.7
       }
      ],
      "stale_as_of": null,
@@ -9891,6 +9869,48 @@
      "stale_reason": null,
      "status": "emerging",
      "unit": "count",
+     "unpublished_reason": null,
+     "valve_measured": "return_arrow"
+    },
+    {
+     "answers": [
+      "Valve: Return arrow (deployment \u2192 invention)",
+      "Who keeps it: Training input / RLaaS / post-training / continual-learning infra"
+     ],
+     "bucket_id": "return_arrow",
+     "confidence": 30,
+     "grade": "D",
+     "id": "cl_refresh_cadence_hours",
+     "latest": {
+      "as_of": "2026-05-27",
+      "dims": {},
+      "obs_ids": [
+       "73920f270a9efb8f"
+      ],
+      "unit": "hours",
+      "value": 1.0
+     },
+     "layer_id": "training_input",
+     "leading_lagging": "leading",
+     "n_observations": 1,
+     "name": "Fastest production refresh of a continually updated model (hours)",
+     "pending": null,
+     "published": true,
+     "sparkline": [
+      {
+       "as_of": "2026-05-27",
+       "dims": {},
+       "obs_ids": [
+        "73920f270a9efb8f"
+       ],
+       "unit": "hours",
+       "value": 1.0
+      }
+     ],
+     "stale_as_of": null,
+     "stale_reason": "Event-driven: a vendor describes its pipeline once; a quiet quarter means nothing new was described.",
+     "status": "emerging",
+     "unit": "hours",
      "unpublished_reason": null,
      "valve_measured": "return_arrow"
     }
@@ -13770,17 +13790,20 @@
       "as_of": "2026-07-31",
       "dims": {},
       "obs_ids": [
-       "2ec713fc54d6b942",
-       "83c12bef8f8e8107",
+       "14ca8a23f3a7fee5",
+       "1fce2bb84f849403",
+       "4b51d49e30e2619d",
        "a9276b9dfc5babca",
-       "cbb77dc61aadf044"
+       "e024995d58fffc7f",
+       "eb3282424b0fcc9a",
+       "f03af856e9a46333"
       ],
       "unit": "count",
       "value": 0.0
      },
      "layer_id": "labour_consumers",
      "leading_lagging": "coincident",
-     "n_observations": 4,
+     "n_observations": 7,
      "name": "Cross-tracker concordance (labour)",
      "pending": null,
      "published": true,
@@ -13789,10 +13812,13 @@
        "as_of": "2026-07-31",
        "dims": {},
        "obs_ids": [
-        "2ec713fc54d6b942",
-        "83c12bef8f8e8107",
+        "14ca8a23f3a7fee5",
+        "1fce2bb84f849403",
+        "4b51d49e30e2619d",
         "a9276b9dfc5babca",
-        "cbb77dc61aadf044"
+        "e024995d58fffc7f",
+        "eb3282424b0fcc9a",
+        "f03af856e9a46333"
        ],
        "unit": "count",
        "value": 0.0
@@ -14892,6 +14918,22 @@
  "recent_status_events": [
   {
    "author": "claude",
+   "counterevidence_considered": null,
+   "created_at": "2026-09-11T13:48:52.607422Z",
+   "evidence_ids": [
+    "73920f270a9efb8f"
+   ],
+   "id": "c2ad32f8ed157388",
+   "new_conf": 30,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "First reading: Trajectory's pipeline, as Baseten describes it, puts a freshly trained adapter behind a live endpoint in roughly an hour, on the edge of the normal band. The only source is the vendor's own description (tier 7), so the status caps at emerging.",
+   "target_id": "cl_refresh_cadence_hours",
+   "target_type": "indicator"
+  },
+  {
+   "author": "claude",
    "counterevidence_considered": "Trajectory's hourly adapter pipeline shows continual updating in production; it is retraining, not learning across sessions.",
    "created_at": "2026-09-11T13:25:23.251843Z",
    "evidence_ids": [
@@ -14927,30 +14969,6 @@
    "old_status": "not_yet_measurable",
    "reason": "Held at emerging by its override note: the rubric sum has run 3, 4, 4, 3, 2 and 3 at the last six quarter ends as vendors disclosed lab customers and then went quiet, which tracks disclosure rather than demand; training-input demand reads through the expert-data market run-rate instead.",
    "target_id": "lab_procurement_signal",
-   "target_type": "indicator"
-  },
-  {
-   "author": "claude",
-   "counterevidence_considered": null,
-   "created_at": "2026-09-11T12:17:58.015778Z",
-   "evidence_ids": [
-    "07e3555c39a96050",
-    "129c29f7c904cd92",
-    "323f4b23d02dc306",
-    "63fe32e4118fa976",
-    "708f5f947cf75c74",
-    "9ea06530e32d0e37",
-    "bb8f74b796a1d779",
-    "d7e2c8855360a39c",
-    "ef40bd94a06afa5d"
-   ],
-   "id": "293294a7089f1639",
-   "new_conf": 55,
-   "new_status": "unclear",
-   "old_conf": 55,
-   "old_status": "concentrating",
-   "reason": "Recounted on 11 Sep 2026 with only buyers in the model or compute layer, as the indicator's definition says (the ledger keeps every deal): the trailing-four-quarter count reads 5, 6, 9, 9 and 9 at the last five quarter ends, the last still open. Two flat steps leave the direction rule reading unclear rather than concentrating.",
-   "target_id": "lab_vertical_integration_exit_bell",
    "target_type": "indicator"
   }
  ],

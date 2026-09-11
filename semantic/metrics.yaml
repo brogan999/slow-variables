@@ -233,30 +233,65 @@ metrics:
       b AS (SELECT *, lag(ma) OVER (ORDER BY as_of_date) AS ma0, lag(n) OVER (ORDER BY as_of_date) AS n0,
                    lag(ids) OVER (ORDER BY as_of_date) AS ids0 FROM a)
       SELECT as_of_date, ma / ma0 - 1 AS value, list_distinct(list_concat(ids, ids0)) AS obs_ids FROM b WHERE n = 3 AND n0 = 3
+  cl_refresh_cadence_hours:
+    description: The shortest production interval, in hours, between a model update learned from live use and that update serving traffic, among vendors that describe one (their latest description each).
+    rationale: The return arrow's speed as a vendor states it; the minimum is the frontier of what ships.
+    grain: [as_of_date]
+    unit: hours
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["cl_refresh.*.cadence_hours.pt"]
+    caveats: Vendors' own descriptions (tier 7); a stated interval, not a measured one.
+    sql: |
+      WITH l AS (SELECT series_key, value_numeric AS v, as_of_date, id,
+                        row_number() OVER (PARTITION BY series_key ORDER BY as_of_date DESC) AS rn
+                 FROM observations WHERE series_key LIKE 'cl_refresh.%.cadence_hours.pt')
+      SELECT max(as_of_date) AS as_of_date, min(v) AS value, [arg_min(id, v)] AS obs_ids FROM l WHERE rn = 1 HAVING count(*) > 0
   cross_tracker_concordance:
-    description: Number of the four monthly labour trackers whose latest reading is past its own AI-attributable-break threshold (0-4). Thresholds - high-exposure employment y/y <= -3% (ADP/Stanford Canaries); exposed-vs-unexposed gap <= -10% (Revelio); high-exposure claims 3-month average +5% or more m/m (CAIT); entry-level shortfall >= 25% (Canaries).
+    description: Number of the four monthly labour trackers whose latest reading is past its own AI-attributable-break threshold (0-4), counting each tracker once and none of the entry-level cuts (Appendix B asks for a break beyond entry level). Thresholds - most-exposed quintile employment y/y <= -3% (Canaries, all ages); exposed-vs-unexposed gap <= -10% (Revelio); high-exposure claims 3-month average +5% or more m/m (CAIT, potential exposure, computed from its counts); occupational-mix dissimilarity >= 10 pp (Yale).
     rationale: The falsification rule wants three trackers breaking at once, not one; this is the count. Thresholds are the fast-band edges of the four indicators, documented there.
     grain: [as_of_date]
     unit: count
     lead_lag: coincident
-    formula_version: 1
-    inputs: ["adp_research.us_high_exposure.employment_yoy.m", "revelio.us_exposed.growth_gap.m", "cait.ca_high_exposure.claims_3mma_mom.m", "stanford_del.us_entry_level_exposed.employment_gap.pt"]
-    caveats: Different geographies (CA claims vs US employment), different exposure measures; a count, not a test.
+    formula_version: 2
+    inputs: ['canaries.us_exposure_q5.employment_yoy.m', 'revelio.us_exposed.growth_gap.m', 'cait.ca_top_quartile_potential.claims.m', 'yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m']
+    caveats: Different geographies (CA claims vs US employment) and different exposure measures; a count, not a test. Each tracker's latest reading counts, whatever its month.
     sql: |
-      WITH latest AS (
-        SELECT series_key, value_numeric, as_of_date, id,
-               row_number() OVER (PARTITION BY series_key ORDER BY as_of_date DESC) AS rn
-        FROM observations
-        WHERE series_key IN ('adp_research.us_high_exposure.employment_yoy.m', 'revelio.us_exposed.growth_gap.m',
-                             'cait.ca_high_exposure.claims_3mma_mom.m', 'stanford_del.us_entry_level_exposed.employment_gap.pt'))
+      WITH obs AS (
+        SELECT series_key, value_numeric AS v, as_of_date, [id] AS ids FROM observations
+        WHERE series_key IN ('canaries.us_exposure_q5.employment_yoy.m', 'revelio.us_exposed.growth_gap.m',
+                             'yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m')),
+      cait AS (SELECT as_of_date, value_numeric AS v, id FROM observations WHERE series_key = 'cait.ca_top_quartile_potential.claims.m'),
+      cma AS (SELECT as_of_date, avg(v) OVER w AS ma, count(*) OVER w AS n, list(id) OVER w AS ids
+              FROM cait WINDOW w AS (ORDER BY as_of_date ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)),
+      cchg AS (SELECT 'cait_3mma_mom' AS series_key, ma / lag(ma) OVER o - 1 AS v, as_of_date,
+                      list_distinct(list_concat(ids, lag(ids) OVER o)) AS ids, n, lag(n) OVER o AS n0
+               FROM cma WINDOW o AS (ORDER BY as_of_date)),
+      allx AS (SELECT series_key, v, as_of_date, ids FROM obs UNION ALL SELECT series_key, v, as_of_date, ids FROM cchg WHERE n = 3 AND n0 = 3),
+      latest AS (SELECT *, row_number() OVER (PARTITION BY series_key ORDER BY as_of_date DESC) AS rn FROM allx)
       SELECT max(as_of_date) AS as_of_date,
-             sum(CASE WHEN series_key = 'adp_research.us_high_exposure.employment_yoy.m' AND value_numeric <= -0.03 THEN 1
-                      WHEN series_key = 'revelio.us_exposed.growth_gap.m' AND value_numeric <= -0.10 THEN 1
-                      WHEN series_key = 'cait.ca_high_exposure.claims_3mma_mom.m' AND value_numeric >= 0.05 THEN 1
-                      WHEN series_key = 'stanford_del.us_entry_level_exposed.employment_gap.pt' AND value_numeric >= 0.25 THEN 1
+             sum(CASE WHEN series_key = 'canaries.us_exposure_q5.employment_yoy.m' AND v <= -0.03 THEN 1
+                      WHEN series_key = 'revelio.us_exposed.growth_gap.m' AND v <= -0.10 THEN 1
+                      WHEN series_key = 'cait_3mma_mom' AND v >= 0.05 THEN 1
+                      WHEN series_key = 'yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m' AND v >= 10 THEN 1
                       ELSE 0 END)::DOUBLE AS value,
-             list(id ORDER BY id) AS obs_ids
+             list_distinct(flatten(list(ids))) AS obs_ids
       FROM latest WHERE rn = 1
+  surprise_index:
+    description: The mean of the two graders' latest readings of AI 2027's quantitative predictions against what happened (AI Futures Project's own grading and the independent ai2027-tracker), as a share of the predicted pace.
+    rationale: One number for whether the fast scenario is running ahead of or behind its own schedule, from the people grading it rather than from the tracker.
+    grain: [as_of_date]
+    unit: share
+    lead_lag: coincident
+    formula_version: 1
+    inputs: ['aifutures_blog.ai_2027_quantitative.pace_vs_predicted.pt', 'ai2027_tracker.ai_2027_quantitative.pace_vs_predicted.pt']
+    caveats: Two graders with different item lists; each counts once, at its latest reading.
+    sql: |
+      WITH l AS (SELECT series_key, value_numeric AS v, as_of_date, id,
+                        row_number() OVER (PARTITION BY series_key ORDER BY as_of_date DESC) AS rn
+                 FROM observations WHERE series_key IN ('aifutures_blog.ai_2027_quantitative.pace_vs_predicted.pt',
+                                                        'ai2027_tracker.ai_2027_quantitative.pace_vs_predicted.pt'))
+      SELECT max(as_of_date) AS as_of_date, avg(v) AS value, list(id ORDER BY id) AS obs_ids FROM l WHERE rn = 1 HAVING count(*) > 0
   bls_labor_share_yoy:
     description: Year-on-year change in the BLS nonfarm business labor share index (PRS85006173).
     rationale: The Anthropic Institute scenarios (Korinek, Jones et al., Sept 2026) make the labor share the cleanest macro discriminator - extreme change takes it from 60% to 45% by 2030 - and it is where "surplus shifts to capital" would first show in official data.

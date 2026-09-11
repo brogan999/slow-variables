@@ -5043,17 +5043,13 @@
      "id": "surprise_index",
      "latest": {
       "as_of": "2026-07-31",
-      "disputed": false,
-      "grade": "D",
-      "high": null,
-      "low": null,
+      "dims": {},
       "obs_ids": [
-       "86d58f4a839a1c59"
+       "86d58f4a839a1c59",
+       "8f07be35b7fe2867"
       ],
-      "series_key": "aifutures_blog.ai_2027_quantitative.pace_vs_predicted.pt",
-      "subject": "ai_2027_quantitative",
       "unit": "share",
-      "value": 0.75
+      "value": 0.7
      },
      "layer_id": "model",
      "leading_lagging": "leading",
@@ -5063,32 +5059,14 @@
      "published": true,
      "sparkline": [
       {
-       "as_of": "2025-12-31",
-       "disputed": false,
-       "grade": "D",
-       "high": null,
-       "low": null,
-       "obs_ids": [
-        "f8386ab8c9d0fc8d"
-       ],
-       "series_key": "aifutures_blog.ai_2027_quantitative.pace_vs_predicted.pt",
-       "subject": "ai_2027_quantitative",
-       "unit": "share",
-       "value": 0.65
-      },
-      {
        "as_of": "2026-07-31",
-       "disputed": false,
-       "grade": "D",
-       "high": null,
-       "low": null,
+       "dims": {},
        "obs_ids": [
-        "86d58f4a839a1c59"
+        "86d58f4a839a1c59",
+        "8f07be35b7fe2867"
        ],
-       "series_key": "aifutures_blog.ai_2027_quantitative.pace_vs_predicted.pt",
-       "subject": "ai_2027_quantitative",
        "unit": "share",
-       "value": 0.75
+       "value": 0.7
       }
      ],
      "stale_as_of": null,
@@ -8732,17 +8710,20 @@
       "as_of": "2026-07-31",
       "dims": {},
       "obs_ids": [
-       "2ec713fc54d6b942",
-       "83c12bef8f8e8107",
+       "14ca8a23f3a7fee5",
+       "1fce2bb84f849403",
+       "4b51d49e30e2619d",
        "a9276b9dfc5babca",
-       "cbb77dc61aadf044"
+       "e024995d58fffc7f",
+       "eb3282424b0fcc9a",
+       "f03af856e9a46333"
       ],
       "unit": "count",
       "value": 0.0
      },
      "layer_id": "labour_consumers",
      "leading_lagging": "coincident",
-     "n_observations": 4,
+     "n_observations": 7,
      "name": "Cross-tracker concordance (labour)",
      "pending": null,
      "published": true,
@@ -8751,10 +8732,13 @@
        "as_of": "2026-07-31",
        "dims": {},
        "obs_ids": [
-        "2ec713fc54d6b942",
-        "83c12bef8f8e8107",
+        "14ca8a23f3a7fee5",
+        "1fce2bb84f849403",
+        "4b51d49e30e2619d",
         "a9276b9dfc5babca",
-        "cbb77dc61aadf044"
+        "e024995d58fffc7f",
+        "eb3282424b0fcc9a",
+        "f03af856e9a46333"
        ],
        "unit": "count",
        "value": 0.0
@@ -10476,6 +10460,48 @@
      "unit": "count",
      "unpublished_reason": null,
      "valve_measured": "return_arrow"
+    },
+    {
+     "answers": [
+      "Valve: Return arrow (deployment \u2192 invention)",
+      "Who keeps it: Training input / RLaaS / post-training / continual-learning infra"
+     ],
+     "bucket_id": "return_arrow",
+     "confidence": 30,
+     "grade": "D",
+     "id": "cl_refresh_cadence_hours",
+     "latest": {
+      "as_of": "2026-05-27",
+      "dims": {},
+      "obs_ids": [
+       "73920f270a9efb8f"
+      ],
+      "unit": "hours",
+      "value": 1.0
+     },
+     "layer_id": "training_input",
+     "leading_lagging": "leading",
+     "n_observations": 1,
+     "name": "Fastest production refresh of a continually updated model (hours)",
+     "pending": null,
+     "published": true,
+     "sparkline": [
+      {
+       "as_of": "2026-05-27",
+       "dims": {},
+       "obs_ids": [
+        "73920f270a9efb8f"
+       ],
+       "unit": "hours",
+       "value": 1.0
+      }
+     ],
+     "stale_as_of": null,
+     "stale_reason": "Event-driven: a vendor describes its pipeline once; a quiet quarter means nothing new was described.",
+     "status": "emerging",
+     "unit": "hours",
+     "unpublished_reason": null,
+     "valve_measured": "return_arrow"
     }
    ],
    "name": "Return arrow",
@@ -10487,6 +10513,22 @@
   }
  ],
  "recent_status_events": [
+  {
+   "author": "claude",
+   "counterevidence_considered": null,
+   "created_at": "2026-09-11T13:48:52.607422Z",
+   "evidence_ids": [
+    "73920f270a9efb8f"
+   ],
+   "id": "c2ad32f8ed157388",
+   "new_conf": 30,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "First reading: Trajectory's pipeline, as Baseten describes it, puts a freshly trained adapter behind a live endpoint in roughly an hour, on the edge of the normal band. The only source is the vendor's own description (tier 7), so the status caps at emerging.",
+   "target_id": "cl_refresh_cadence_hours",
+   "target_type": "indicator"
+  },
   {
    "author": "claude",
    "counterevidence_considered": "Trajectory's hourly adapter pipeline shows continual updating in production; it is retraining, not learning across sessions.",
@@ -10524,30 +10566,6 @@
    "old_status": "not_yet_measurable",
    "reason": "Held at emerging by its override note: the rubric sum has run 3, 4, 4, 3, 2 and 3 at the last six quarter ends as vendors disclosed lab customers and then went quiet, which tracks disclosure rather than demand; training-input demand reads through the expert-data market run-rate instead.",
    "target_id": "lab_procurement_signal",
-   "target_type": "indicator"
-  },
-  {
-   "author": "claude",
-   "counterevidence_considered": null,
-   "created_at": "2026-09-11T12:17:58.015778Z",
-   "evidence_ids": [
-    "07e3555c39a96050",
-    "129c29f7c904cd92",
-    "323f4b23d02dc306",
-    "63fe32e4118fa976",
-    "708f5f947cf75c74",
-    "9ea06530e32d0e37",
-    "bb8f74b796a1d779",
-    "d7e2c8855360a39c",
-    "ef40bd94a06afa5d"
-   ],
-   "id": "293294a7089f1639",
-   "new_conf": 55,
-   "new_status": "unclear",
-   "old_conf": 55,
-   "old_status": "concentrating",
-   "reason": "Recounted on 11 Sep 2026 with only buyers in the model or compute layer, as the indicator's definition says (the ledger keeps every deal): the trailing-four-quarter count reads 5, 6, 9, 9 and 9 at the last five quarter ends, the last still open. Two flat steps leave the direction rule reading unclear rather than concentrating.",
-   "target_id": "lab_vertical_integration_exit_bell",
    "target_type": "indicator"
   }
  ],
@@ -10631,7 +10649,8 @@
     "continual_learning_level",
     "rl_environment_vendor_count",
     "expert_data_market_run_rate",
-    "cl_lab_release_claims"
+    "cl_lab_release_claims",
+    "cl_refresh_cadence_hours"
    ],
    "name": "Return arrow (deployment \u2192 invention)",
    "status": "faster_than_normal",
@@ -10702,6 +10721,7 @@
   "Waymo paid rides per week: Normal = under a million paid rides a week, well under one percent of US ride-hail trips and scaling one city at a time; fast = five million or more, a national-scale substitution. Between is `emerging`.",
   "US adults who have used generative AI: Normal = up to three quarters of adults four years after launch (the internet took about a decade to reach that share of US adults); fast = near-universal use at the same age. Anchors: 44.6% in the first FRED wave (Q3 2024) and 61.8% in Q2 2026.",
   "Occupations with a quarter of their tasks using Claude: The share only rises, so the question is how fast. Normal = under 60% of occupations with a quarter of their tasks in use four years in; fast = 80% or more. Anchor: 49% in the March 2026 report (data 5-12 February 2026).",
-  "Vendors claiming shipped continual learning: Normal = up to three builders a year claiming shipped continual learning; fast = six or more, including a frontier-lab release branded continual or online learning (the ladder's L5 made observable). Every row is tier 7, so the status caps at emerging."
+  "Vendors claiming shipped continual learning: Normal = up to three builders a year claiming shipped continual learning; fast = six or more, including a frontier-lab release branded continual or online learning (the ladder's L5 made observable). Every row is tier 7, so the status caps at emerging.",
+  "Fastest production refresh of a continually updated model (hours): Normal = an hour or more between learning from use and serving the update, the pace of a retrain-and-redeploy pipeline; fast = a quarter of an hour or less, updates flowing near-continuously. Every row is a vendor describing itself (tier 7), so the status caps at emerging."
  ]
 }

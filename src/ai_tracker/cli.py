@@ -285,6 +285,12 @@ def _check(s: st.Store) -> tuple[list[str], list[str]]:
         missing = [i for i in e.evidence_ids if i not in known]
         if missing:
             errors.append(f"{e.target_id}: status event {e.id} cites unknown observations {missing}")
+    for (
+        ind
+    ) in s.seed.indicators:  # unpublished ones too: every indicator says why it leads, coincides or lags
+        tag = ind.leading_lagging.value if ind.leading_lagging else None
+        if not ind.published and (not tag or not (ind.timing_rationale or "").lower().startswith(tag + ":")):
+            errors.append(f"{ind.id}: no timing_rationale that opens with its tag ({tag})")
     pairs = {(c.bucket_id, c.layer_id) for c in s.seed.crosswalk}
     for ind in s.seed.indicators:  # v2 §0/§10: a shared indicator's two addresses need a crosswalk row
         if ind.bucket_id and ind.layer_id and (ind.bucket_id, ind.layer_id) not in pairs:

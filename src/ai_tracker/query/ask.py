@@ -356,28 +356,24 @@ class Tools:
         latest = self.store.derived_for("cross_tracker_concordance")
         trackers = []
         for key in m.get("inputs", []):
-            ind = next(
-                (i for i in self.store.seed.indicators if any(fnmatch(key, g) for g in i.series_keys)), None
-            )
-            rows = self.store.observations(key)
-            last = rows[-1] if rows else None
+            inds = [i for i in self.store.seed.indicators if i.metric != "cross_tracker_concordance"]
+            ind = next((i for i in inds if any(fnmatch(key, g) for g in i.series_keys)), None) or next(
+                (i for i in inds if i.metric and key in (self.metrics.get(i.metric) or {}).get("inputs", [])),
+                None,
+            )  # the tracker's indicator: it lists the series, or its metric reads it
+            value, as_of, ids, _tier = self.store.band_input(ind) if ind else (None, None, [], 7)
             band = ind.fast_band if ind else None
             past = (
-                bool(last and band)
-                and (band.lo is None or last["value_numeric"] >= band.lo)
-                and (band.hi is None or last["value_numeric"] <= band.hi)
+                value is not None
+                and band is not None
+                and (band.lo is None or value >= band.lo)
+                and (band.hi is None or value <= band.hi)
             )
             trackers.append(
                 {
                     "series_key": key,
                     "indicator": ind.id if ind else None,
-                    "latest": {
-                        "id": last["id"],
-                        "value": last["value_numeric"],
-                        "as_of": last["as_of_date"].isoformat(),
-                    }
-                    if last
-                    else None,
+                    "latest": {"value": value, "as_of": as_of.isoformat() if as_of else None, "obs_ids": ids},
                     "fast_band": st.dump(band) if band else None,
                     "past_threshold": past,
                 }

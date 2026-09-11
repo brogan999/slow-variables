@@ -1,7 +1,7 @@
 {
  "answers": [
   "Valve: Return arrow (deployment \u2192 invention)",
-  "Who keeps it: Training input / RLaaS / post-training / continual-learning infra"
+  "Who keeps it: Training input / Permissioned data markets & licensing"
  ],
  "band_input": null,
  "band_rationale": null,
@@ -42,7 +42,7 @@
    "sublayer_id": null
   }
  ],
- "definition": "Share of prior capability a production system keeps after continual updates (Appendix E).",
+ "definition": "The share of enterprise seats whose contracts let the vendor learn from their sessions, the policy gate on the return arrow (v2 Appendix E).",
  "derived": [],
  "direction": null,
  "direction_rule": null,
@@ -52,14 +52,14 @@
  "fits": [],
  "flow_status": null,
  "grade": null,
- "id": "cl_forgetting_retention",
+ "id": "enterprise_session_training_policy",
  "latest": null,
  "layer_id": "training_input",
  "leading_lagging": "leading",
  "metric": null,
  "metric_dims": {},
  "n_observations": 0,
- "name": "Retention after continual updates",
+ "name": "Enterprise sessions allowed to train vendor models",
  "normal_band": null,
  "override_note": null,
  "pending": null,
@@ -67,7 +67,7 @@
  "prediction_rows": [],
  "proposed_status": null,
  "proxy_types": [
-  "benchmark"
+  "policy"
  ],
  "published": false,
  "related_bottlenecks": [],
@@ -82,12 +82,12 @@
  "stale_reason": null,
  "status": null,
  "status_events": [],
- "sublayer_id": "post_training",
- "timing_rationale": "Leading: retention after updates has to hold before labs trust continual learning in production.",
+ "sublayer_id": "data_licensing",
+ "timing_rationale": "Leading: a policy that lets sessions train a model comes before any learning from those sessions.",
  "tracker_interpretation": "Not published.",
  "unit": "share",
- "unpublished_reason": "Not measurable yet: no production system reports retention after updates; the research rows on the ladder report their own tasks, and no shared forgetting benchmark scores deployed systems.",
+ "unpublished_reason": "Not measurable: the policy is set contract by contract, and no vendor publishes the share of enterprise seats whose sessions may train its models; default opt-outs are recorded as evidence when a vendor changes them.",
  "updated_at": "2026-09-11",
  "valve_measured": "return_arrow",
- "why_it_matters": "Continual learning without forgetting is the hard part; retention is how to tell."
+ "why_it_matters": "Continual learning needs deployment data; enterprise contracts that forbid training on sessions close the arrow for most paid use."
 }

@@ -1,0 +1,184 @@
+{
+ "answers": [
+  "Valve: Return arrow (deployment \u2192 invention)",
+  "Who keeps it: Training input / RLaaS / post-training / continual-learning infra"
+ ],
+ "band_input": "metric:cl_refresh_cadence_hours",
+ "band_rationale": "Normal = an hour or more between learning from use and serving the update, the pace of a retrain-and-redeploy pipeline; fast = a quarter of an hour or less, updates flowing near-continuously. Every row is a vendor describing itself (tier 7), so the status caps at emerging.",
+ "band_value": {
+  "as_of": "2026-05-27",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "73920f270a9efb8f"
+  ],
+  "value": 1.0
+ },
+ "bucket_id": "return_arrow",
+ "cadence_expected": "quarterly",
+ "chart_sources": {
+  "metric": "cl_refresh_cadence_hours",
+  "sources": [
+   {
+    "attribution": "Baseten",
+    "id": "baseten_blog",
+    "license": "Baseten; short quotation",
+    "name": "Baseten blog and research posts",
+    "org": "Baseten"
+   }
+  ]
+ },
+ "confidence": 30,
+ "confidence_basis": {
+  "best_tier": 7,
+  "grade": "D",
+  "n_observations": 1,
+  "sources": [
+   "Baseten blog and research posts"
+  ],
+  "stale_as_of": null
+ },
+ "counterevidence": "Vendors describe their fastest path, not their typical one; an hour-long pipeline can still ship rarely, and a fast one can ship small, low-value updates.",
+ "crosswalk": [
+  {
+   "bucket_id": "return_arrow",
+   "layer_id": "training_input",
+   "note": "Expert data, RL environments and continual-learning infra are the deployment\u2192invention channel; lab recoupment \u21c4 capex-to-revenue.",
+   "relation": "return_arrow",
+   "shared_indicators": [
+    "continual_learning_level",
+    "rl_environment_vendor_count",
+    "expert_data_market_run_rate",
+    "cl_lab_release_claims",
+    "cl_adapters_per_product",
+    "cl_forgetting_retention",
+    "cl_learning_curve_slope",
+    "cl_refresh_cadence_hours",
+    "enterprise_session_training_policy",
+    "cl_benchmark_exists"
+   ],
+   "sublayer_id": null
+  }
+ ],
+ "definition": "The shortest interval, among vendors describing it in production, between a model update learned from live use and that update serving traffic. Derived metric cl_refresh_cadence_hours from rows citing each vendor's own description.",
+ "derived": [
+  {
+   "as_of_date": "2026-05-27",
+   "computed_at": "2026-09-11T13:49:06.103006Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "de96f946dec2eb37",
+   "input_observation_ids": [
+    "73920f270a9efb8f"
+   ],
+   "metric": "cl_refresh_cadence_hours",
+   "obs_ids": [
+    "73920f270a9efb8f"
+   ],
+   "value": 1.0,
+   "value_high": null,
+   "value_low": null
+  }
+ ],
+ "direction": null,
+ "direction_rule": null,
+ "evidence": [],
+ "falsifying_band": null,
+ "fast_band": {
+  "hi": 0.25,
+  "lo": null
+ },
+ "fits": [],
+ "flow_status": null,
+ "grade": "D",
+ "id": "cl_refresh_cadence_hours",
+ "latest": {
+  "as_of": "2026-05-27",
+  "dims": {},
+  "obs_ids": [
+   "73920f270a9efb8f"
+  ],
+  "unit": "hours",
+  "value": 1.0
+ },
+ "layer_id": "training_input",
+ "leading_lagging": "leading",
+ "metric": "cl_refresh_cadence_hours",
+ "metric_dims": {},
+ "n_observations": 1,
+ "name": "Fastest production refresh of a continually updated model (hours)",
+ "normal_band": {
+  "hi": null,
+  "lo": 1.0
+ },
+ "override_note": null,
+ "pending": null,
+ "points": [
+  {
+   "as_of": "2026-05-27",
+   "dims": {},
+   "obs_ids": [
+    "73920f270a9efb8f"
+   ],
+   "unit": "hours",
+   "value": 1.0
+  }
+ ],
+ "prediction_rows": [],
+ "proposed_status": null,
+ "proxy_types": [
+  "product",
+  "behaviour"
+ ],
+ "published": true,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "continual_learning_level",
+  "cl_lab_release_claims"
+ ],
+ "related_metrics": [],
+ "related_predictions": [],
+ "series": [],
+ "series_keys": [],
+ "sparkline": [
+  {
+   "as_of": "2026-05-27",
+   "dims": {},
+   "obs_ids": [
+    "73920f270a9efb8f"
+   ],
+   "unit": "hours",
+   "value": 1.0
+  }
+ ],
+ "stale_as_of": null,
+ "stale_ok": true,
+ "stale_reason": "Event-driven: a vendor describes its pipeline once; a quiet quarter means nothing new was described.",
+ "status": "emerging",
+ "status_events": [
+  {
+   "author": "claude",
+   "counterevidence_considered": null,
+   "created_at": "2026-09-11T13:48:52.607422Z",
+   "evidence_ids": [
+    "73920f270a9efb8f"
+   ],
+   "id": "c2ad32f8ed157388",
+   "new_conf": 30,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "First reading: Trajectory's pipeline, as Baseten describes it, puts a freshly trained adapter behind a live endpoint in roughly an hour, on the edge of the normal band. The only source is the vendor's own description (tier 7), so the status caps at emerging.",
+   "target_id": "cl_refresh_cadence_hours",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": "post_training",
+ "timing_rationale": "Leading: the refresh interval shortens before continual learning shows in products or capability.",
+ "tracker_interpretation": "One vendor's pipeline sets the reading; the refresh is a retrained adapter, not learning inside the model between sessions.",
+ "unit": "hours",
+ "unpublished_reason": null,
+ "updated_at": "2026-09-11",
+ "valve_measured": "return_arrow",
+ "why_it_matters": "How quickly deployment feeds back into the model is the return arrow's speed; a refresh measured in minutes is continual learning in all but name."
+}

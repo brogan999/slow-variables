@@ -9,7 +9,7 @@ Rule: (ratio ≤ 2 AND 80% horizon > 8 h) AND (≥ 3 trackers break) AND (hours 
 
 - ✗ 50%/80% horizon ratio ≤ 2 — 6.34× as of 2026-03-05 (obs: 11a8bbd2, 858c619b)
 - ✗ 80% horizon > 8 h — 186 min as of 2026-04-07 (obs: c256ff03)
-- ✗ ≥ 3 labour trackers show a concurrent AI-attributable break — 0 of 4 as of 2026-07-31 (obs: 2ec713fc, 83c12bef, a9276b9d…)
+- ✗ ≥ 3 labour trackers show a concurrent AI-attributable break — 0 of 4 as of 2026-07-31 (obs: 14ca8a23, 1fce2bb8, 4b51d49e…)
 - ✗ work hours assisted by AI > 20% — 6.3% as of 2026-06-30 (obs: 7a1c89cb)
 - ✗ TFP > trend + 1pp for ≥ 4 consecutive years — 2022 -1.1%, 2023 +1.6%, 2024 +1.5%, 2025 +0.8% (obs: 3af5026f, 3cb18cc9, 3cb18cc9…)
 
@@ -19,7 +19,7 @@ Rule: ratio non-decreasing AND ladder ≤ L4 AND four clean tracker releases
 
 - ✗ 50%/80% ratio non-decreasing over the last four models — 10.3×, 6.4×, 4.3×, 6.3× (obs: 39c8213a, 8f73b56b, 959db6dd…)
 - ✓ continual-learning ladder ≤ L4 — L3 as of 2026-05-27 (obs: 1b7d08db, dc983a81)
-- ? precise nulls persist through four monthly tracker releases — 1 readings, max break count 0 (obs: 2ec713fc, 83c12bef, a9276b9d…)
+- ? precise nulls persist through four monthly tracker releases — 1 readings, max break count 0 (obs: 14ca8a23, 1fce2bb8, 4b51d49e…)
 
 ## Invention-side WARNING (bottleneck #86 under test): **untestable**
 

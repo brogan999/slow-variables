@@ -647,6 +647,7 @@ indicators:
     counterevidence: "A framework named in a card is not a metric published."
     layer_id: model
     leading_lagging: leading
+    timing_rationale: "Leading: labs adopt reliability frameworks before reliable deployment shows up in products."
     confidence: 20
     proposed_status: not_yet_measurable
     published: false
@@ -668,6 +669,7 @@ indicators:
     counterevidence: "Calibration on a benchmark is not calibration in deployment."
     layer_id: model
     leading_lagging: leading
+    timing_rationale: "Leading: calibrated agents are a precondition for unattended deployment, so calibration moves first."
     confidence: 20
     proposed_status: not_yet_measurable
     published: false
@@ -689,6 +691,7 @@ indicators:
     counterevidence: "Reported incidents are a biased sample of all incidents."
     layer_id: model
     leading_lagging: leading
+    timing_rationale: "Leading: incidents in agent operations come before the brakes and rules that answer them."
     confidence: 20
     proposed_status: not_yet_measurable
     published: false
@@ -710,6 +713,7 @@ indicators:
     counterevidence: "Labs have every reason not to disclose it."
     layer_id: model
     leading_lagging: leading
+    timing_rationale: "Leading: training on deployment data is the return arrow starting, before capability gains show it."
     confidence: 20
     proposed_status: not_yet_measurable
     published: false
@@ -1015,7 +1019,8 @@ indicators:
     unit: share
     cadence_expected: annual
     series_keys: ["aifutures_blog.ai_2027_quantitative.pace_vs_predicted.pt", "ai2027_tracker.ai_2027_quantitative.pace_vs_predicted.pt"]
-    band_input: aifutures_blog.ai_2027_quantitative.pace_vs_predicted.pt
+    metric: surprise_index
+    band_input: "metric:surprise_index"
     bucket_id: methods
     valve_measured: invention_to_product
     normal_band: {hi: 0.6}
@@ -1338,6 +1343,7 @@ indicators:
     valve_measured: product_to_adoption
     layer_id: adopters
     leading_lagging: coincident
+    timing_rationale: "Coincident: weekly work use rises as workers adopt, in the same survey wave."
     tracker_interpretation: Shown on bbd_work_hours_assisted.
     confidence: 60
     unpublished_reason: "Folded into two published indicators: the same FRED series is shown on bbd_work_hours_assisted and is the numerator of exposure_vs_usage_gap, so a separate status would count one survey twice in the early-adoption bucket."
@@ -1354,6 +1360,7 @@ indicators:
     valve_measured: product_to_adoption
     layer_id: adopters
     leading_lagging: coincident
+    timing_rationale: "Coincident: daily work use moves with adoption itself, measured in the same wave."
     tracker_interpretation: Not yet ingested.
     confidence: 30
     unpublished_reason: "Not yet ingested: the GenAI Adoption Tracker splits work use into every day and some days but draws it in the browser, and none of the survey's series on FRED carries it; a manual row needs a verbatim figure from the working paper."
@@ -1396,6 +1403,7 @@ indicators:
     layer_id: training_input
     sublayer_id: post_training
     leading_lagging: leading
+    timing_rationale: "Leading: adapters per customer multiply before continual learning shows in product metrics."
     tracker_interpretation: Not published.
     confidence: 20
     unpublished_reason: "Not measurable from public sources: Trajectory describes an adapter per customer refreshed hourly without a count, and Decagon states a share of traffic on self-trained models, not adapters."
@@ -1413,6 +1421,7 @@ indicators:
     layer_id: training_input
     sublayer_id: post_training
     leading_lagging: leading
+    timing_rationale: "Leading: retention after updates has to hold before labs trust continual learning in production."
     tracker_interpretation: Not published.
     confidence: 20
     unpublished_reason: "Not measurable yet: no production system reports retention after updates; the research rows on the ladder report their own tasks, and no shared forgetting benchmark scores deployed systems."
@@ -1430,9 +1439,54 @@ indicators:
     layer_id: training_input
     sublayer_id: post_training
     leading_lagging: leading
+    timing_rationale: "Leading: a steepening learning curve in deployment comes before measured productivity gains."
     tracker_interpretation: Not published.
     confidence: 20
     unpublished_reason: "Not measurable: the only curve on record (cl.engram_harvey.closed_book_accuracy.pt) is a research result across training steps, not lift over deployment time."
+    published: false
+    updated_at: 2026-09-11
+  - id: cl_refresh_cadence_hours
+    name: Fastest production refresh of a continually updated model (hours)
+    definition: "The shortest interval, among vendors describing it in production, between a model update learned from live use and that update serving traffic. Derived metric cl_refresh_cadence_hours from rows citing each vendor's own description."
+    why_it_matters: How quickly deployment feeds back into the model is the return arrow's speed; a refresh measured in minutes is continual learning in all but name.
+    proxy_types: [product, behaviour]
+    unit: hours
+    cadence_expected: quarterly
+    stale_ok: true
+    stale_reason: "Event-driven: a vendor describes its pipeline once; a quiet quarter means nothing new was described."
+    metric: cl_refresh_cadence_hours
+    band_input: "metric:cl_refresh_cadence_hours"
+    bucket_id: return_arrow
+    valve_measured: return_arrow
+    normal_band: {lo: 1}
+    fast_band: {hi: 0.25}
+    band_rationale: "Normal = an hour or more between learning from use and serving the update, the pace of a retrain-and-redeploy pipeline; fast = a quarter of an hour or less, updates flowing near-continuously. Every row is a vendor describing itself (tier 7), so the status caps at emerging."
+    tracker_interpretation: One vendor's pipeline sets the reading; the refresh is a retrained adapter, not learning inside the model between sessions.
+    counterevidence: Vendors describe their fastest path, not their typical one; an hour-long pipeline can still ship rarely, and a fast one can ship small, low-value updates.
+    layer_id: training_input
+    sublayer_id: post_training
+    leading_lagging: leading
+    timing_rationale: "Leading: the refresh interval shortens before continual learning shows in products or capability."
+    confidence: 30
+    related_indicators: [continual_learning_level, cl_lab_release_claims]
+    published: true
+    updated_at: 2026-09-11
+  - id: enterprise_session_training_policy
+    name: Enterprise sessions allowed to train vendor models
+    definition: The share of enterprise seats whose contracts let the vendor learn from their sessions, the policy gate on the return arrow (v2 Appendix E).
+    why_it_matters: Continual learning needs deployment data; enterprise contracts that forbid training on sessions close the arrow for most paid use.
+    proxy_types: [policy]
+    unit: share
+    cadence_expected: irregular
+    bucket_id: return_arrow
+    valve_measured: return_arrow
+    layer_id: training_input
+    sublayer_id: data_licensing
+    leading_lagging: leading
+    timing_rationale: "Leading: a policy that lets sessions train a model comes before any learning from those sessions."
+    tracker_interpretation: Not published.
+    confidence: 20
+    unpublished_reason: "Not measurable: the policy is set contract by contract, and no vendor publishes the share of enterprise seats whose sessions may train its models; default opt-outs are recorded as evidence when a vendor changes them."
     published: false
     updated_at: 2026-09-11
   - id: cl_benchmark_exists
@@ -1447,6 +1501,7 @@ indicators:
     layer_id: training_input
     sublayer_id: post_training
     leading_lagging: leading
+    timing_rationale: "Leading: a benchmark for learning on the job comes before claims about it can be checked."
     tracker_interpretation: Not published.
     confidence: 20
     unpublished_reason: "A yes/no, not a series: Epoch's CL-bench rows score learning from material supplied within one task (domain reasoning, rule application, procedure, empirical discovery), not retention across sessions, so they do not meet the L6 six-month-employee test."
