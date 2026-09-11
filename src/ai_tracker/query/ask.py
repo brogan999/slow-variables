@@ -30,6 +30,8 @@ USD_PER_MTOK_IN, USD_PER_MTOK_OUT = (
 )
 ROW_CAP = 200
 READ_ONLY = re.compile(r"^\s*(select|with|describe|show)\b", re.I)
+# v2 §6.1: pending and superseded rows (the raw table) never reach an answer; query()/query_table() would reach it by name
+RAW = re.compile(r"observation_all|\bquery(_table)?\s*\(", re.I)
 
 TOOLS = [
     {
@@ -96,10 +98,20 @@ class Tools:
     def __init__(self, store: st.Store) -> None:
         self.store = store
         self.metrics = (yaml.safe_load(Path("semantic/metrics.yaml").read_text()) or {})["metrics"]
+        # Model SQL and the public console run on this connection: no file, network or extension access
+        # (/proc/self/environ holds the service's secrets), locked so no statement can switch it back.
+        # The store's only DuckDB file read (read_json at load) has already run; later reads use pathlib.
+        if not store.con.execute("SELECT current_setting('lock_configuration')").fetchone()[0]:
+            store.con.execute("SET enable_external_access = false")
+            store.con.execute("SET lock_configuration = true")
 
     def sql(self, query: str) -> Any:
         if not READ_ONLY.match(query) or ";" in query.strip().rstrip(";"):
             return {"error": "read-only: one SELECT/WITH/DESCRIBE/SHOW statement"}
+        if RAW.search(query):
+            return {
+                "error": "observation_all is the raw table (pending and superseded rows); query the observations view"
+            }
         q = query.strip().rstrip(";")
         if READ_ONLY.match(q).group(1).lower() in ("select", "with"):
             q = f"SELECT * FROM ({q}) LIMIT {ROW_CAP}"

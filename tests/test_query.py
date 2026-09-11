@@ -85,3 +85,37 @@ def test_derived_records_carry_their_description_and_the_indicator_tool_names_it
     bi = t.indicator("margin_stack_semis_share")["band_input"]
     fit = s.band_fit(next(i for i in s.seed.indicators if i.id == "margin_stack_semis_share"))
     assert bi["derived_id"] == fit.id and bi["dims"] == {"layer_id": "compute_semis"}  # g07: cite this row
+
+
+def test_sql_tool_cannot_read_files_the_network_or_raw_rows():
+    import duckdb
+    import pytest
+
+    s = st.Store()
+    t = Tools(s)
+    for q in [
+        "SELECT * FROM read_text('/proc/self/environ')",
+        "SELECT * FROM read_text('pyproject.toml')",
+        "SELECT * FROM read_csv('https://example.com/x.csv')",
+        "SELECT * FROM glob('*')",
+    ]:
+        assert "Permission Error" in t.sql(q).get("error", ""), q
+    for q in [
+        "SELECT * FROM observation_all",
+        'SELECT * FROM "OBSERVATION_ALL"',
+        "SELECT * FROM query('SELECT * FROM observation' || '_all')",
+        "SELECT * FROM query_table('observations')",
+    ]:
+        assert "raw table" in t.sql(q).get("error", ""), q
+    assert "error" in t.sql(
+        "SELECT getenv('QUERY_TOKEN')"
+    )  # a DuckDB upgrade that adds getenv must fail here
+    for q in [
+        "SET enable_external_access = true",
+        "RESET enable_external_access",
+        "SET lock_configuration = false",
+    ]:
+        with pytest.raises(duckdb.Error):
+            s.con.execute(q)
+    Tools(s)  # a second Tools on a locked store must not raise
+    assert t.sql("SELECT count(*) AS n FROM observations")["rows"][0][0] > 0

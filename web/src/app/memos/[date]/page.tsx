@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { memo, memos, obsIndex } from "@/lib/data";
 import { headings, MemoBody, slug } from "@/lib/memo-md";
 
+export const dynamicParams = false; // the date names a file; only built memos are served
 export function generateStaticParams() { return memos().map((m) => ({ date: m.date })); }
 export async function generateMetadata({ params }: { params: Promise<{ date: string }> }): Promise<Metadata> {
   const { date } = await params;

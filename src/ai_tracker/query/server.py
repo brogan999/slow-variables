@@ -75,6 +75,8 @@ class Handler(BaseHTTPRequestHandler):
                 return self._send(401, {"error": "unauthorised"})
             if not os.environ.get("ANTHROPIC_API_KEY"):
                 return self._send(503, {"error": "no ANTHROPIC_API_KEY"})
+            if self.svc.spent_today() >= self.svc.cap:
+                return self._send(429, {"error": "daily cap reached", "cap_usd": self.svc.cap})
             res = ask_mod.golden(self.svc.store, self.svc.tools)
             self.svc.add_spend(sum(r["usd"] for r in res))
             return self._send(200, {"passed": sum(r["ok"] for r in res), "total": len(res), "results": res})
