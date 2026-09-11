@@ -93,3 +93,17 @@ def test_every_bottleneck_has_a_domain_and_sits_in_the_grid_once():
     assert all(b.domain and b.domain_basis for b in s.seed.bottlenecks)
     ids = sorted(n for row in doc["grid"] for cell in row["cells"].values() for n in cell)
     assert ids == list(range(1, 90)) and sum(r["items"] for r in doc["summary"]) == 89
+
+
+def test_everyone_on_appendix_f_is_read_through_a_source_or_a_skipped_row():
+    import re
+
+    from ai_tracker import store as st
+
+    s = st.Seed.load()
+    have = {p for x in s.sources for p in x.people} | {p for x in s.skipped for p in x.people}
+    lines = open("docs/briefs/ai-tracker-brief-v2.md").read().splitlines()
+    text = " ; ".join(line.split(":", 1)[1] for line in lines if line.startswith(("Diffusion: Arvind", "Capture: Dylan")))
+    names = [re.sub(r"^and\s+", "", re.sub(r"\(.*?\)", "", x).strip().rstrip(".").strip()) for x in re.split(r"[;,]", text)]
+    assert len(names) > 60 and not [n for n in names if n and n not in have]
+    assert not [x for x in s.sources if x.connector in ("x_list", "x_drop")]  # no request is ever made to X

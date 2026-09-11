@@ -64,7 +64,7 @@ export type StackBar = { value: number; as_of: string; estimated: boolean; parts
 export type StackRow = { as_of: string; layer_id: string | null; basis?: string; value: number; obs_ids: string[] };
 export const capture = () => read<{ as_of: string; verdict?: string; what_would_change: string[]; layers: (Layer & { indicators: Card[]; status: string; venture: LayerVenture | null; reading: string })[]; recent_status_events: StatusEvent[]; stack_bars: Record<string, StackBar>; gross_profit_stack_series: StackRow[]; margin_stack_series: StackRow[]; gross_profit_stack_sources: ChartSourcesT; margin_stack_sources: ChartSourcesT }>("lens/capture.json");
 export const sources = () => read<Source[]>("sources.json");
-export type Skipped = { id: string; name: string; url: string | null; reason: string; attribution: string | null };
+export type Skipped = { id: string; name: string; url: string | null; reason: string; attribution: string | null; people?: string[] };
 export const skippedSources = () => read<Skipped[]>("skipped_sources.json");
 export const changelog = () => read<StatusEvent[]>("changelog.json");
 export const meta = () => read<{ generated_at: string; observations: number; indicators_published: number; sources: number }>("meta.json");

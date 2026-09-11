@@ -25,7 +25,7 @@ uv run ai-tracker serve         # the query service (what Fly runs); the site pr
 cd web && pnpm install && pnpm dev
 ```
 
-Services: the query service runs on Fly (`fly.toml`, `Dockerfile`, deployed by `deploy-query.yml` on pushes that touch data, seed, semantic or src); the site needs `QUERY_URL` and `QUERY_TOKEN`; the service needs `QUERY_TOKEN`, `ANTHROPIC_API_KEY` and optionally `QUERY_DAILY_USD_CAP` (default 5). The nightly (`nightly.yml`, 06:17 UTC) opens a pull request and merges it itself when `check`, `pytest` and the web build pass, then redeploys the query service; the memo job (`memo.yml`, Mondays 09:17 UTC) opens a pull request for a human to merge, with operator notes in its body. X posts come from `seed/x_drop.yaml` (oEmbed, no key) or a curated List (`X_BEARER_TOKEN`, `X_LIST_ID`).
+Services: the query service runs on Fly (`fly.toml`, `Dockerfile`, deployed by `deploy-query.yml` on pushes that touch data, seed, semantic or src); the site needs `QUERY_URL` and `QUERY_TOKEN`; the service needs `QUERY_TOKEN`, `ANTHROPIC_API_KEY` and optionally `QUERY_DAILY_USD_CAP` (default 5). The nightly (`nightly.yml`, 06:17 UTC) opens a pull request and merges it itself when `check`, `pytest` and the web build pass, then redeploys the query service; the memo job (`memo.yml`, Mondays 09:17 UTC) opens a pull request for a human to merge, with operator notes in its body. X posts are quoted from pages that already carry their text; the tracker makes no request to X.
 
 `uv run pytest`, `uv run ruff check src tests`. CI runs the same; the nightly workflow ingests, evaluates, checks, tests, builds, exports, opens a PR with `data/summary.md` as the body and merges it through that gate (Vercel builds `web/` on the merge).
 
@@ -42,4 +42,3 @@ Services: the query service runs on Fly (`fly.toml`, `Dockerfile`, deployed by `
 | Observations (append-only, superseded never deleted) | `data/observations/*.jsonl` |
 | Query service, citation post-check, golden questions | `src/ai_tracker/query/`, `seed/golden.yaml`, `seed/analyses.yaml` |
 | Weekly memo | `src/ai_tracker/memo.py`, `docs/memos/` |
-| X drop file | `seed/x_drop.yaml` |

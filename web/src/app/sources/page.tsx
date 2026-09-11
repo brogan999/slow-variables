@@ -40,6 +40,13 @@ export default function SourcesPage() {
           </tbody>
         </table>
       </div>
+      <h2 id="who-we-read" className="display text-[1.75rem] leading-tight mt-8 border-t border-grid pt-6">Who we read</h2>
+      <p className="text-sm text-ink-2 max-w-[60ch]">The people and teams whose work the tracker follows (the brief&apos;s Appendix F), with the source each is read through. Reading someone is not citing them: a figure enters only with its own source and snippet.</p>
+      <ul className="flex flex-col gap-1.5 text-sm">
+        {[...rows.filter((s) => s.people?.length).map((s) => ({ id: s.id, name: s.name, people: s.people ?? [] })), ...skipped.filter((s) => s.people?.length).map((s) => ({ id: s.id, name: s.name, people: s.people ?? [] }))].map((g) => (
+          <li key={g.id}><span className="font-medium">{g.people.join(", ")}</span> <span className="text-muted">·</span> <a href={`#${g.id}`} className="text-ink-2 hover:underline">{g.name}</a></li>
+        ))}
+      </ul>
     </div>
   );
 }
