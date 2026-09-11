@@ -305,6 +305,9 @@ def ops_notes(store: st.Store, today: date | None = None) -> str:
     """Operator notes for the memo PR body: what needs the maintainer this week. Everything here is already
     public in the repo or on /sources; nothing is written to docs/memos."""
     from .cli import attention
+    from .ingest.connectors import (
+        CONNECTORS,
+    )  # a retired connector's source stays on /sources, not in the weekly notes
 
     today = today or date.today()
     week = [fl for fl in store.fetchlog if (today - fl.finished_at.date()).days < 7]
@@ -317,7 +320,7 @@ def ops_notes(store: st.Store, today: date | None = None) -> str:
         else []
     )
     last = max((fl.finished_at for fl in store.fetchlog), default=None)
-    lead.append(f"- Last ingest on main: {last.date() if last else 'never'}.")
+    lead.append(f"- Newest fetch on main: {last.date() if last else 'never'}.")
     blank = [
         p for p in st.read_jsonl(st.DATA / "proposed_status_events.jsonl") if not p.get("reason", "").strip()
     ]
@@ -343,7 +346,9 @@ def ops_notes(store: st.Store, today: date | None = None) -> str:
         "Sources stale or never fetched": [
             f"- `{h['id']}`: {h['health']}, last success {str(h['last_success_at'] or 'never')[:10]}"
             for h in health
-            if h["health"] != "ok" and "not set" not in (h["last_error"] or "")
+            if h["health"] != "ok"
+            and "not set" not in (h["last_error"] or "")
+            and h["connector"] in CONNECTORS
         ],
     }
     return (

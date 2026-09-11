@@ -2,7 +2,6 @@ from .anthropic_ei import AnthropicEi
 from .artificial_analysis import ArtificialAnalysis
 from .bls import Bls
 from .census_btos import CensusBtos
-from .clouded_judgment import CloudedJudgment
 from .epoch import Epoch
 from .epoch_tables import EpochBench, EpochChips, EpochHardware, EpochModels, EpochPrices
 from .feeds import Feeds
@@ -36,7 +35,6 @@ CONNECTORS = {
         AnthropicEi,
         SecSegments,
         Feeds,
-        CloudedJudgment,
         OpenRouter,
         FormD,
         EpochModels,

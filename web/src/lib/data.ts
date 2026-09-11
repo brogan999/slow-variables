@@ -110,3 +110,7 @@ export const venture = (sublayerId: string): VentureDoc | null => { try { return
 export type LadderRow = { obs_id: string; subject: string; entity_id: string | null; as_of: string; tier: number; url: string; snippet: string };
 export type LadderDoc = { current: { value: number; as_of: string; obs_ids: string[] } | null; rungs: { level: number; name: string; description: string; observables: string; production: LadderRow[]; research: LadderRow[] }[] };
 export const ladder = () => read<LadderDoc>("lens/ladder.json");
+
+// Server-only: which indicators have a page, so links to unpublished ones go to their row on /indicators instead of a 404.
+let _published: Set<string> | null = null;
+export const publishedIds = () => (_published ??= new Set(index().indicators.filter((c) => c.published).map((c) => c.id)));

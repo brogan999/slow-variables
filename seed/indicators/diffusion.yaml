@@ -117,7 +117,7 @@ indicators:
     counterevidence: Annual, published with a lag, and revised; the latest year predates most enterprise deployment. TFP can be flattered by measurement of software investment.
     layer_id: labour_consumers
     leading_lagging: lagging
-    timing_rationale: "Lagging: total factor productivity is annual, published over a year late, and moves only after complementary investment pays off."
+    timing_rationale: "Lagging: total factor productivity is annual, published months after the year ends, and moves only after complementary investment pays off."
     confidence: 75
     proposed_status: consistent_with_normal
     related_indicators: [bls_labor_productivity_yoy]
@@ -1100,7 +1100,7 @@ indicators:
     stale_reason: "The Budget Lab's update pages block fetchers and the workbook URL changes each release; the source row is moved forward by hand."
     layer_id: labour_consumers
     leading_lagging: lagging
-    timing_rationale: "Lagging: the occupational mix moves only as workers change jobs over years, published monthly with revisions."
+    timing_rationale: "Lagging: the occupational mix moves only as workers change jobs over years, and the index is updated a few times a year."
     confidence: 65
     proposed_status: consistent_with_normal
     related_indicators: [canaries_exposed_employment_yoy, humlum_precise_null]
@@ -1262,7 +1262,7 @@ indicators:
     proxy_types: [behaviour, deployment]
     unit: share
     cadence_expected: quarterly
-    series_keys: ["fred.us_adults.any_use_share.q", "bbd.us_adults.any_use_share.pt", "fred.us_adults.use_last_week_share.q"]
+    series_keys: ["fred.us_adults.any_use_share.q", "fred.us_adults.use_last_week_share.q"]
     band_input: fred.us_adults.any_use_share.q
     bucket_id: early_adoption
     valve_measured: product_to_adoption
@@ -1270,12 +1270,11 @@ indicators:
     fast_band: {lo: 0.9}
     band_rationale: "Normal = up to three quarters of adults four years after launch (the internet took about a decade to reach that share of US adults); fast = near-universal use at the same age. Anchors: 44.6% in the first FRED wave (Q3 2024) and 61.8% in Q2 2026."
     tracker_interpretation: Breadth is rising by about ten points a year and sits inside the normal band; the paper's shallow-depth finding (hours assisted) is the other half of the picture.
-    counterevidence: Self-reported "ever used" is a low bar; the FRED series and the paper are one survey through two publishers, not two measurements; the question wording changed between waves, so small moves are not trend.
+    counterevidence: Self-reported "ever used" is a low bar; one survey (the paper's own figures are the same instrument, so they are not counted as a second source, and the status stays emerging until an independent measure agrees); the question wording changed between waves, so small moves are not trend.
     layer_id: adopters
     leading_lagging: coincident
     timing_rationale: "Coincident: the survey records use up to the interview, published within a quarter via FRED."
     confidence: 70
-    proposed_status: consistent_with_normal
     related_indicators: [bbd_work_hours_assisted, btos_firm_use]
     published: true
     updated_at: 2026-09-11
@@ -1360,8 +1359,6 @@ indicators:
     proposed_status: emerging
     related_indicators: [continual_learning_level]
     published: true
-    stale_ok: true
-    stale_reason: "Event-driven count: it moves when a builder announces, not on a calendar."
     updated_at: 2026-09-11
   - id: cl_adapters_per_product
     name: Per-customer adapters per product

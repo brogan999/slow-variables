@@ -219,7 +219,7 @@ def consumers_keep_surplus(d: Data) -> Verdict:
             (cs[2] if cs else []) + (floor[2] if floor else []) + (ceiling[2] if ceiling else []),
             (
                 f"${cs[0] / 1e9:.0f}B surplus against a floor of ${floor[0] / 1e9:.0f}B (US enterprise spend) and a "
-                f"ceiling of ${ceiling[0] / 1e9:.0f}B (lab run-rates plus enterprise spend)"
+                f"approximate ceiling of ${ceiling[0] / 1e9:.0f}B (lab run-rates plus enterprise spend; big-tech and app subscriptions sit outside both)"
                 if cs and floor and ceiling
                 else "untestable"
             ),
@@ -230,7 +230,7 @@ def consumers_keep_surplus(d: Data) -> Verdict:
         "Capture thesis 'consumers keep most of the surplus' HOLDS",
         holds,
         conds,
-        "surplus above the revenue ceiling holds, below the enterprise-spend floor fails, in between is untestable",
+        "surplus above the approximate revenue ceiling holds, below the enterprise-spend floor fails, in between is untestable",
     )
 
 

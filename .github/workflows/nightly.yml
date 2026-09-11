@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
 permissions: { contents: write, pull-requests: write, actions: write, issues: write }
 concurrency: nightly
+defaults: { run: { shell: bash } }  # bash -eo pipefail: a failing command inside a pipe fails its step
 jobs:
   ingest:
     runs-on: ubuntu-latest
@@ -86,20 +87,21 @@ jobs:
           echo "outcome=merged" >> "$GITHUB_OUTPUT"
       # a layout change must fail loudly (brief §5): one open issue per source, assigned to the maintainer
       - if: always()
+        continue-on-error: true  # an issue that cannot be opened must not skip the deploy of a merged night
         env: { GH_TOKEN: "${{ github.token }}" }
         run: |
-          grep -E '^[a-z0-9_]+: ok=False .*error=LayoutChanged' "$RUNNER_TEMP/ingest.log" | grep -v 'optional source' | while read -r line; do
+          grep -E '^[a-z0-9_]+: ok=False .*error=LayoutChanged' "$RUNNER_TEMP/ingest.log" | while read -r line; do
             src="${line%%:*}"; title="Layout changed: $src"
             gh issue list --state open --search "\"$title\" in:title" --json title --jq '.[].title' | grep -qxF "$title" && continue
             gh issue create --title "$title" --assignee brogan999 \
               --body "The nightly on $(date -u +%F) raised LayoutChanged for \`$src\`, so its series stopped updating. Log line: \`$line\`. Run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
-          done; true
+          done || true
       # a source outage (PARTIAL) is reported in the PR title and Monday's operator notes, not by email
       - if: steps.check.outputs.failed == 'true' || steps.tests.outputs.failed == 'true'
         run: exit 1
   deploy:
     needs: ingest
-    if: needs.ingest.outputs.merged == 'merged'
+    if: always() && needs.ingest.outputs.merged == 'merged'
     uses: ./.github/workflows/deploy-query.yml
     with: { observations: "${{ needs.ingest.outputs.observations }}" }
     secrets: inherit

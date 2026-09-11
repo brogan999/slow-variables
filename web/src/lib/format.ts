@@ -1,5 +1,5 @@
 // Number formatting shared by server and client components (no node imports here).
-const sig = (v: number) => (Math.abs(v) >= 100 ? v.toFixed(0) : Math.abs(v) >= 10 ? v.toFixed(1) : v.toFixed(2));
+const sig = (v: number) => (Math.abs(v) >= 100 ? v.toFixed(0) : Math.abs(v) >= 10 ? v.toFixed(1) : Math.abs(v) >= 0.1 || v === 0 ? v.toFixed(2) : v.toPrecision(2)); // $0.0057 must not read $0.01
 
 export function fmt(v: number | null | undefined, unit?: string): string {
   if (v === null || v === undefined || Number.isNaN(v)) return "—";

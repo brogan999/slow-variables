@@ -41,7 +41,7 @@ def test_ops_notes_list_a_waiting_crossing(monkeypatch, tmp_path):
     )
     notes = ops_notes(s, date(2026, 9, 11))
     assert "`btos_firm_use`: unscored → faster than normal, waiting 10 days" in notes
-    assert notes.startswith("## Operator notes") and "Last ingest on main:" in notes
+    assert notes.startswith("## Operator notes") and "Newest fetch on main:" in notes
 
 
 def test_a_model_error_falls_back_to_the_digest(monkeypatch):

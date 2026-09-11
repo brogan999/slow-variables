@@ -24,9 +24,12 @@ jobs:
             echo
             uv run ai-tracker ops-notes 2>/dev/null || echo "(operator notes failed; see the run log)"
             echo
-            echo "**Open nightly PR (held by its gate)**"
+            echo "**Nightly**"
             echo
-            gh pr list --head nightly --state open --json number,title --jq '.[] | "- #\(.number) \(.title)"' | grep . || echo "- none"
+            last=$(gh pr list --head nightly --state merged -L 1 --json number,mergedAt --jq '.[] | "- Last self-merged nightly: #\(.number) at \(.mergedAt)"') || last="- Last self-merged nightly: unavailable"
+            echo "${last:-- Last self-merged nightly: none}"
+            held=$(gh pr list --head nightly --state open --json number,title --jq '.[] | "- Held: #\(.number) \(.title)"') || held="- Held nightly PR: unavailable"
+            echo "${held:-- No nightly PR held}"
           } > "$RUNNER_TEMP/body.md"
       - uses: peter-evans/create-pull-request@v7
         with:

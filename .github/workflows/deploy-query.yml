@@ -7,6 +7,7 @@ on:
   workflow_call:
     inputs:
       observations: { type: string, required: false, default: "" }
+defaults: { run: { shell: bash } }  # pipefail, so a failed curl cannot pass as an empty count
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -22,7 +23,7 @@ jobs:
       - env: { WANT: "${{ inputs.observations }}" }
         run: |
           for i in 1 2 3 4 5 6; do
-            got=$(curl -fsS --max-time 60 https://ai-tracker-query.fly.dev/health | jq -r '.observations') \
+            got=$(curl -fsS --max-time 60 https://ai-tracker-query.fly.dev/health | jq -er '.observations') && [ -n "$got" ] \
               && { [ -z "$WANT" ] || [ "$got" = "$WANT" ]; } && { echo "health ok, $got observations"; exit 0; }
             sleep 10
           done

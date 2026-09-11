@@ -13,7 +13,7 @@
  "bucket_id": "early_adoption",
  "cadence_expected": "quarterly",
  "confidence": 70,
- "counterevidence": "Self-reported \"ever used\" is a low bar; the FRED series and the paper are one survey through two publishers, not two measurements; the question wording changed between waves, so small moves are not trend.",
+ "counterevidence": "Self-reported \"ever used\" is a low bar; one survey (the paper's own figures are the same instrument, so they are not counted as a second source, and the status stays emerging until an independent measure agrees); the question wording changed between waves, so small moves are not trend.",
  "crosswalk": [
   {
    "bucket_id": "early_adoption",
@@ -56,7 +56,7 @@
  "leading_lagging": "coincident",
  "metric": null,
  "metric_dims": {},
- "n_observations": 17,
+ "n_observations": 16,
  "name": "US adults who have used generative AI",
  "normal_band": {
   "hi": 0.75,
@@ -178,7 +178,7 @@
    "value": 0.617802431014
   }
  ],
- "proposed_status": "consistent_with_normal",
+ "proposed_status": null,
  "proxy_types": [
   "behaviour",
   "deployment"
@@ -192,25 +192,6 @@
  "related_metrics": [],
  "related_predictions": [],
  "series": [
-  {
-   "points": [
-    {
-     "as_of": "2026-05-31",
-     "disputed": false,
-     "grade": "B",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "b99d50efadc55f94"
-     ],
-     "series_key": "bbd.us_adults.any_use_share.pt",
-     "subject": "us_adults",
-     "unit": "share",
-     "value": 0.618
-    }
-   ],
-   "series_key": "bbd.us_adults.any_use_share.pt"
-  },
   {
    "points": [
     {
@@ -448,7 +429,6 @@
  ],
  "series_keys": [
   "fred.us_adults.any_use_share.q",
-  "bbd.us_adults.any_use_share.pt",
   "fred.us_adults.use_last_week_share.q"
  ],
  "sparkline": [
@@ -568,8 +548,23 @@
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,
- "status": "consistent_with_normal",
+ "status": "emerging",
  "status_events": [
+  {
+   "author": "claude",
+   "created_at": "2026-09-11T06:12:54.565555Z",
+   "evidence_ids": [
+    "2735a60f0d2378e3"
+   ],
+   "id": "3e00b7d919252821",
+   "new_conf": 70,
+   "new_status": "emerging",
+   "old_conf": 70,
+   "old_status": "consistent_with_normal",
+   "reason": "61.8% of US adults have used generative AI (Q2 2026, FRED), inside the normal band, but the reading rests on one survey: the paper's own figure was counted as a second source when it is the same instrument. With one non-primary source the two-source rule caps the status at emerging until an independent measure agrees.",
+   "target_id": "bbd_adult_use",
+   "target_type": "indicator"
+  },
   {
    "author": "evaluate",
    "created_at": "2026-09-11T04:56:30.353103Z",

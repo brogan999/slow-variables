@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { publishedIds } from "@/lib/data";
+import { indicatorHref } from "@/lib/format";
 
 // The memo body is markdown written by the memo job (a model or the digest); this renders the subset it uses:
 // headings, paragraphs, bullet lists, bold, and citation tokens [obs:id] / [derived:id] / [ind:id] / [event:id] as links.
@@ -12,7 +14,7 @@ function inline(text: string, obsIndex: Record<string, string>) {
     const m = p.match(/^\[(obs|derived|ind|event):([A-Za-z0-9_.-]+)\]$/);
     if (m) {
       const [, kind, id] = m;
-      const href = kind === "obs" ? (obsIndex[id] ? `/series/${obsIndex[id]}#${id}` : null) : kind === "ind" ? `/indicators/${id}` : kind === "event" ? "/changelog" : "/query";
+      const href = kind === "obs" ? (obsIndex[id] ? `/series/${obsIndex[id]}#${id}` : null) : kind === "ind" ? indicatorHref(id, publishedIds().has(id)) : kind === "event" ? "/changelog" : "/query";
       const label = `${kind}:${id.slice(0, 8)}`;
       return href ? <Link key={i} href={href} className="num text-[11px] text-ink-2 underline decoration-grid underline-offset-2">{label}</Link> : <span key={i} className="num text-[11px] text-muted">{label}</span>;
     }

@@ -942,8 +942,13 @@ class Store:
 
     def _source_health(self, s: Source) -> dict[str, Any]:
         own = [fl for fl in self.fetchlog if fl.source_id == s.id]
-        if not own and s.connector == "feeds":  # one connector fetches every watched feed under its own id
-            own = [fl for fl in self.fetchlog if fl.source_id == "feeds"]
+        if not own and s.connector == "feeds":  # one connector fetches every watched feed under its own id;
+            mine = lambda fl: f"{s.id}:" in (fl.error or "")  # noqa: E731 - a run failed this feed only if its error names it
+            own = [
+                fl.model_copy(update={"ok": fl.ok or not mine(fl), "error": fl.error if mine(fl) else None})
+                for fl in self.fetchlog
+                if fl.source_id == "feeds"
+            ]
         logs = sorted(own, key=lambda fl: fl.finished_at)
         last_ok = next((fl for fl in reversed(logs) if fl.ok), None)
         if not last_ok:

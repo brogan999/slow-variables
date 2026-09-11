@@ -8,7 +8,7 @@ export default function MemosPage() {
   const rows = memos();
   return (
     <div className="flex flex-col gap-8">
-      <PageHeader title="Weekly memos" lede="What changed each week: status moves, new evidence, watchlist posts, the thesis monitor and any crosswalk pair that moved in opposite directions. A model drafts the prose when a key is configured and every number is checked against the record it cites; otherwise the memo is the deterministic digest. Each memo is a pull request a human merged." />
+      <PageHeader title="Weekly memos" lede="What changed each week: status moves, new evidence, watchlist posts, the thesis monitor and any crosswalk pair that moved in opposite directions. A model drafts the prose when a key is configured and every number is checked against the record it cites; otherwise the memo is the deterministic digest. Each memo is a pull request a human merged." action={<a href="/memos/feed.xml" className="text-sm text-ink-2 hover:text-ink">RSS feed</a>} />
       {rows.length ? (
         <ol className="flex flex-col border-t border-grid">
           {rows.map((m) => (

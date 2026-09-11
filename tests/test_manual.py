@@ -66,7 +66,15 @@ def test_every_numeric_seed_value_is_in_its_snippet_or_says_how_it_was_coded():
     does not state (a sign from "fell", a rung coded against the ladder, a table in millions) must carry `coding`."""
     import re
 
-    from ai_tracker.query.citecheck import NUM, Record, _parse, _rendered_matches
+    from ai_tracker.query.citecheck import NUM, _candidates, _parse
+
+    def matches(
+        t: float, v: float, unit: str
+    ) -> bool:  # exact to half a percent, or equal at one decimal; sign counts
+        return any(
+            abs(t - c) <= 0.005 * max(abs(t), abs(c)) or round(t, 1) == round(c, 1)
+            for c in _candidates(v, unit)
+        )
 
     unbound = []
     for r in yaml.safe_load(Path("seed/manual_observations.yaml").read_text())["observations"]:
@@ -75,6 +83,6 @@ def test_every_numeric_seed_value_is_in_its_snippet_or_says_how_it_was_coded():
         text = re.sub(r"(?<=[A-Za-z])(?=\d)", " ", r["raw_snippet"])  # "USD172bn" -> "USD 172bn"
         toks = [v for m in NUM.finditer(text) if (v := _parse(m)) is not None]
         toks += [WORDS[w] for w in re.findall(r"[a-z]+", text.lower()) if w in WORDS]
-        if not any(_rendered_matches(t, Record("x", "obs", [float(r["value"])], r["unit"])) for t in toks):
+        if not any(matches(t, float(r["value"]), r["unit"]) for t in toks):
             unbound.append(f"{r['series_key']} = {r['value']}")
     assert not unbound, unbound

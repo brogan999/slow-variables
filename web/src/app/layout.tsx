@@ -21,6 +21,7 @@ export const metadata: Metadata = {
   description: SITE.description,
   openGraph: { type: "website", siteName: SITE.name, title: SITE.name, description: SITE.description, url: SITE.url },
   twitter: { card: "summary_large_image", title: SITE.name, description: SITE.description },
+  alternates: { types: { "application/rss+xml": "/memos/feed.xml" } },
 };
 
 
@@ -54,6 +55,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               {ABOUT.map(([href, label]) => <Link key={href} href={href} className="hover:text-ink">{label}</Link>)}
               <Link href="/methodology#reuse" className="hover:text-ink">Reuse, cite, corrections</Link>
               <Link href="/methodology#privacy" className="hover:text-ink">Privacy and disclaimers</Link>
+              <a href="/memos/feed.xml" className="hover:text-ink">Memo feed (RSS)</a>
             </nav>
           </div>
         </footer>

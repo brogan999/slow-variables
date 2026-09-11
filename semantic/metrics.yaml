@@ -266,7 +266,7 @@ metrics:
     grain: [as_of_date]
     unit: USD
     lead_lag: coincident
-    formula_version: 2
+    formula_version: 3
     inputs: ["openrouter.*.price_prompt_usd_per_mtok.pt", "metr.*.horizon_50.pt"]
     caveats: List prices on one router, prompt tokens only; the horizon is METR's suite, not general capability; only models present in both datasets count; a price series starts on 10 Sep 2026 and records change points, so the trend needs months; a delisted model's last price carries forward.
     sql: |
@@ -277,8 +277,9 @@ metrics:
       d AS (SELECT DISTINCT as_of_date FROM p),
       cp AS (SELECT d.as_of_date, p.subject, arg_max(p.usd, p.as_of_date) AS usd, arg_max(p.id, p.as_of_date) AS pid
              FROM d JOIN p ON p.as_of_date <= d.as_of_date GROUP BY 1, 2)
-      SELECT cp.as_of_date, min(cp.usd / (h.minutes / 60)) AS value, arg_min([cp.pid, h.hid], cp.usd / (h.minutes / 60)) AS obs_ids
-      FROM cp JOIN h USING (subject) GROUP BY cp.as_of_date
+      , r AS (SELECT cp.as_of_date, min(cp.usd / (h.minutes / 60)) AS value, arg_min([cp.pid, h.hid], cp.usd / (h.minutes / 60)) AS obs_ids
+      FROM cp JOIN h USING (subject) GROUP BY cp.as_of_date)
+      SELECT * FROM r QUALIFY value IS DISTINCT FROM lag(value) OVER (ORDER BY as_of_date)  -- change points only
   venture_dollars:
     description: Primary-round dollars per calendar quarter and sub-layer. Form D amount sold (tier 4) where an entity files; Epoch's press-compiled equity rounds (tier 5) only for entity-quarters with no Form D row. Sub-layer from the entity's primary membership.
     rationale: The venture-flow strip and the concentration metrics start here (P1 §7 #8-#13). Filed amounts first; press only where filings are absent (most frontier labs raise via SPVs and offshore vehicles that never file).
@@ -399,12 +400,12 @@ metrics:
     grain: [as_of_date]
     unit: count
     lead_lag: coincident
-    formula_version: 2
+    formula_version: 3
     inputs: ["evidence.safety_brake_events.for.pt"]
     caveats: Only events with a fetched, verbatim announcement count; labs announce brakes selectively, so the count is a floor; statements of intent are recorded as context and excluded.
     sql: |
       WITH ev AS (SELECT as_of_date, id FROM observations WHERE series_key = 'evidence.safety_brake_events.for.pt'),
-      d AS (SELECT DISTINCT as_of_date FROM ev)
+      d AS (SELECT DISTINCT as_of_date FROM ev UNION SELECT current_date)  -- today's row lets an old event age out
       SELECT d.as_of_date, count(*)::DOUBLE AS value, list(ev.id ORDER BY ev.id) AS obs_ids
       FROM d JOIN ev ON ev.as_of_date <= d.as_of_date AND ev.as_of_date > d.as_of_date - INTERVAL 12 MONTH GROUP BY 1
   training_compute_doubling_days:
@@ -632,7 +633,7 @@ metrics:
     grain: [as_of_date]
     unit: USD
     lead_lag: coincident
-    formula_version: 1
+    formula_version: 2
     inputs: ["aa.*.price_blended_usd_per_mtok.pt", "aa.*.intelligence_index.pt"]
     caveats: List prices, not what large buyers pay; the top decile moves as Artificial Analysis adds and drops models; unpriced models are excluded; a delisted model's last price carries forward; the series starts on 10 Sep 2026 and records change points.
     sql: |
@@ -645,14 +646,15 @@ metrics:
              FROM d JOIN p ON p.as_of_date <= d.as_of_date GROUP BY 1, 2),
       j AS (SELECT cp.as_of_date, cp.usd / i.idx AS v, [cp.pid, i.iid] AS ids,
                    percent_rank() OVER (PARTITION BY cp.as_of_date ORDER BY i.idx) AS pr FROM cp JOIN i USING (subject))
-      SELECT as_of_date, min(v) AS value, arg_min(ids, v) AS obs_ids FROM j WHERE pr >= 0.9 GROUP BY 1
+      , r AS (SELECT as_of_date, min(v) AS value, arg_min(ids, v) AS obs_ids FROM j WHERE pr >= 0.9 GROUP BY 1)
+      SELECT * FROM r QUALIFY value IS DISTINCT FROM lag(value) OVER (ORDER BY as_of_date)  -- change points only
   aa_price_per_horizon_hour:
     description: Cheapest capability-hour on Artificial Analysis prices - on each price change date, the lowest blended price (USD per million tokens, latest price carried forward) divided by the model's latest METR 50% time horizon in hours, across models in both datasets.
     rationale: The same capture proxy as frontier_price_per_horizon_hour on a second price source with blended rather than prompt-only prices, so a move in one can be checked against the other.
     grain: [as_of_date]
     unit: USD
     lead_lag: coincident
-    formula_version: 1
+    formula_version: 2
     inputs: ["aa.*.price_blended_usd_per_mtok.pt", "metr.*.horizon_50.pt"]
     caveats: Models are matched on METR's id with its "_inspect" suffix dropped, so only models named alike in both datasets count; list prices; METR's horizon is software tasks under its suite.
     sql: |
@@ -664,8 +666,9 @@ metrics:
       d AS (SELECT DISTINCT as_of_date FROM p),
       cp AS (SELECT d.as_of_date, p.subject, arg_max(p.usd, p.as_of_date) AS usd, arg_max(p.id, p.as_of_date) AS pid
              FROM d JOIN p ON p.as_of_date <= d.as_of_date GROUP BY 1, 2)
-      SELECT cp.as_of_date, min(cp.usd / (h.minutes / 60)) AS value, arg_min([cp.pid, h.hid], cp.usd / (h.minutes / 60)) AS obs_ids
-      FROM cp JOIN h USING (subject) GROUP BY 1
+      , r AS (SELECT cp.as_of_date, min(cp.usd / (h.minutes / 60)) AS value, arg_min([cp.pid, h.hid], cp.usd / (h.minutes / 60)) AS obs_ids
+      FROM cp JOIN h USING (subject) GROUP BY 1)
+      SELECT * FROM r QUALIFY value IS DISTINCT FROM lag(value) OVER (ORDER BY as_of_date)  -- change points only
   lab_vertical_integration_events_4q:
     description: Distinct acquisitions or acquihires by AI labs and hyperscalers of application, tooling or data companies announced in the trailing four quarters, counted from the acquisition ledger (one per acquirer-target pair) at each quarter end.
     rationale: The exit bell for the application layer rings when labs buy the layer above them; a rising count is vertical integration, the capture thesis's clearest signal.
@@ -704,13 +707,13 @@ metrics:
     grain: [as_of_date]
     unit: count
     lead_lag: leading
-    formula_version: 1
+    formula_version: 2
     inputs: ["cl_ladder.*.rung.pt"]
     caveats: Every row is self-described (tier 7); research results are kept off; a vendor counts once however many posts it publishes.
     sql: |
-      WITH ev AS (SELECT as_of_date, subject, id FROM observations WHERE series_key LIKE 'cl_ladder.%.rung.pt'),
-      d AS (SELECT DISTINCT as_of_date FROM ev)
-      SELECT d.as_of_date, count(DISTINCT ev.subject)::DOUBLE AS value, list(ev.id ORDER BY ev.id) AS obs_ids
+      WITH ev AS (SELECT as_of_date, coalesce(entity_id, subject) AS who, id FROM observations WHERE series_key LIKE 'cl_ladder.%.rung.pt'),
+      d AS (SELECT DISTINCT as_of_date FROM ev UNION SELECT current_date)  -- today's row lets an old claim age out
+      SELECT d.as_of_date, count(DISTINCT ev.who)::DOUBLE AS value, list(ev.id ORDER BY ev.id) AS obs_ids
       FROM d JOIN ev ON ev.as_of_date <= d.as_of_date AND ev.as_of_date > d.as_of_date - INTERVAL 12 MONTH GROUP BY 1
   top3_concentration:
     description: Share of tracked primary-round dollars raised by the three largest raisers over the trailing four calendar quarters, across the whole seed list.
@@ -732,7 +735,7 @@ metrics:
       win AS (SELECT qs.cq, q.entity_id, sum(q.v) AS v, list(q.id) AS ids FROM qs JOIN q ON q.cq > qs.cq - INTERVAL 12 MONTH AND q.cq <= qs.cq GROUP BY 1, 2),
       rk AS (SELECT *, row_number() OVER (PARTITION BY cq ORDER BY v DESC, entity_id) AS r, sum(v) OVER (PARTITION BY cq) AS tot FROM win)
       SELECT (cq + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE AS as_of_date, sum(v) FILTER (WHERE r <= 3) / max(tot) AS value,
-             flatten(list(ids) FILTER (WHERE r <= 3)) AS obs_ids
+             flatten(list(ids)) AS obs_ids
       FROM rk GROUP BY cq HAVING max(tot) > 0
   lab_procurement_signal_4q:
     description: "The labs' enter bell (P1 §6.3): the sum over training-input vendors of each vendor's best procurement score in the trailing four quarters, at quarter ends. Rubric per vendor: 0 no public evidence; 1 a lab named as customer; 2 revenue or growth attributed to lab demand; 3 a disclosed lab contract or commitment of at least $100M, in a filing or confirmed by both parties."
@@ -740,23 +743,23 @@ metrics:
     grain: [as_of_date]
     unit: score
     lead_lag: leading
-    formula_version: 1
+    formula_version: 2
     inputs: ["procurement.*.signal.pt"]
     caveats: Scores are hand-coded from quoted text against the rubric (each row's coding note says how); only vendors with a fetched, verbatim source count, so the sum is a floor; lab compute commitments are on the circular ledger and excluded here.
     sql: |
       WITH s AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'procurement.%.signal.pt' AND entity_id IS NOT NULL),
-      qe AS (SELECT DISTINCT (date_trunc('quarter', as_of_date) + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE AS q FROM s),
+      qe AS (SELECT (unnest(generate_series(date_trunc('quarter', min(as_of_date)), date_trunc('quarter', current_date) - INTERVAL 3 MONTH, INTERVAL 3 MONTH)) + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE AS q FROM s),  -- every complete quarter, so the window decays
       best AS (SELECT qe.q, s.entity_id, max(s.v) AS v, list(s.id) AS ids FROM qe JOIN s ON s.as_of_date <= qe.q AND s.as_of_date > qe.q - INTERVAL 12 MONTH GROUP BY 1, 2)
       SELECT q AS as_of_date, sum(v) AS value, flatten(list(ids)) AS obs_ids FROM best GROUP BY q
   genai_revenue_upper_bound:
-    description: A ceiling on generative-AI revenue - the frontier labs' latest annualised run-rates (within twelve months) plus Menlo's latest US enterprise generative-AI spend, at each run-rate date.
+    description: An approximate ceiling on generative-AI revenue - the frontier labs' latest annualised run-rates (within twelve months) plus Menlo's latest US enterprise generative-AI spend, at each run-rate date.
     rationale: The capture thesis compares consumer surplus with what consumers and firms pay; lab run-rates include consumer subscriptions and are global, so adding enterprise spend over-counts US revenue and makes a ceiling the surplus must clear.
     grain: [as_of_date]
     unit: USD
     lead_lag: coincident
     formula_version: 1
     inputs: ["epoch.*.revenue_run_rate_usd.pt", "menlo.us_enterprise.genai_spend_usd.fy"]
-    caveats: Deliberately an over-count (lab API revenue is inside enterprise spend, and run-rates are global); use it only as a ceiling.
+    caveats: An over-count on the labs' side (lab API revenue is inside enterprise spend, and run-rates are global) but it omits consumer spend on big-tech and app subscriptions, so it is an approximate ceiling, not a bound.
     sql: |
       WITH rr AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'epoch.%.revenue_run_rate_usd.pt' AND entity_id IS NOT NULL),
       d AS (SELECT DISTINCT as_of_date FROM rr),

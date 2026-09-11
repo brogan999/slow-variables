@@ -56,3 +56,22 @@ def test_lab_token_hhi_groups_models_by_author():
     ]
     ((d, v, ids),) = run("lab_token_hhi", rows)
     assert abs(v - (0.8**2 + 0.1**2 + 0.1**2)) < 1e-9 and len(ids) == 5  # meta-llama and meta are one lab
+
+
+def test_venture_incl_debt_adds_form_d_debt_to_equity_in_the_same_quarter():
+    con = duckdb.connect()
+    con.execute(
+        "CREATE TABLE observations (id VARCHAR, series_key VARCHAR, entity_id VARCHAR, as_of_date DATE, value_numeric DOUBLE)"
+    )
+    con.execute("CREATE TABLE entity_membership (entity_id VARCHAR, sublayer_id VARCHAR, is_primary BOOLEAN)")
+    con.execute("INSERT INTO entity_membership VALUES ('crusoe', 'hyperscalers_neoclouds', true)")
+    con.executemany(
+        "INSERT INTO observations VALUES (?, ?, 'crusoe', ?, ?)",
+        [
+            ("e1", "epoch.crusoe.round_equity_usd.pt", "2025-02-01", 100.0),
+            ("d1", "formd.crusoe.debt_sold_usd.pt", "2025-02-15", 40.0),
+        ],
+    )
+    eq = con.execute(METRICS["venture_dollars"]["sql"]).fetchall()
+    both = con.execute(METRICS["venture_dollars_incl_debt"]["sql"]).fetchall()
+    assert eq[0][2] == 100.0 and both[0][2] == 140.0 and sorted(both[0][3]) == ["d1", "e1"]

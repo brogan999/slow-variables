@@ -2,7 +2,7 @@
  "band_input": "metric:cl_lab_release_claims_12m",
  "band_rationale": "Normal = up to three builders a year claiming shipped continual learning; fast = six or more, including a frontier-lab release branded continual or online learning (the ladder's L5 made observable). Every row is tier 7, so the status caps at emerging.",
  "band_value": {
-  "as_of": "2026-05-27",
+  "as_of": "2026-09-10",
   "high": null,
   "low": null,
   "obs_ids": [
@@ -29,9 +29,9 @@
  "derived": [
   {
    "as_of_date": "2025-09-12",
-   "computed_at": "2026-09-11T05:27:38.229447Z",
+   "computed_at": "2026-09-11T06:15:41.883679Z",
    "dims": {},
-   "formula_version": "1",
+   "formula_version": "2",
    "id": "13397ae95784cc95",
    "input_observation_ids": [
     "dc983a8178691c42"
@@ -46,10 +46,29 @@
   },
   {
    "as_of_date": "2026-05-27",
-   "computed_at": "2026-09-11T05:27:38.229447Z",
+   "computed_at": "2026-09-11T06:15:41.883679Z",
    "dims": {},
-   "formula_version": "1",
+   "formula_version": "2",
    "id": "28720e55f7493c34",
+   "input_observation_ids": [
+    "1b7d08dbce2be548",
+    "dc983a8178691c42"
+   ],
+   "metric": "cl_lab_release_claims_12m",
+   "obs_ids": [
+    "1b7d08dbce2be548",
+    "dc983a8178691c42"
+   ],
+   "value": 2.0,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2026-09-10",
+   "computed_at": "2026-09-11T06:15:41.883679Z",
+   "dims": {},
+   "formula_version": "2",
+   "id": "2fe9496108c0e2ed",
    "input_observation_ids": [
     "1b7d08dbce2be548",
     "dc983a8178691c42"
@@ -77,7 +96,7 @@
  "grade": "D",
  "id": "cl_lab_release_claims",
  "latest": {
-  "as_of": "2026-05-27",
+  "as_of": "2026-09-10",
   "dims": {},
   "obs_ids": [
    "1b7d08dbce2be548",
@@ -110,6 +129,16 @@
   },
   {
    "as_of": "2026-05-27",
+   "dims": {},
+   "obs_ids": [
+    "1b7d08dbce2be548",
+    "dc983a8178691c42"
+   ],
+   "unit": "count",
+   "value": 2.0
+  },
+  {
+   "as_of": "2026-09-10",
    "dims": {},
    "obs_ids": [
     "1b7d08dbce2be548",
@@ -152,11 +181,21 @@
    ],
    "unit": "count",
    "value": 2.0
+  },
+  {
+   "as_of": "2026-09-10",
+   "dims": {},
+   "obs_ids": [
+    "1b7d08dbce2be548",
+    "dc983a8178691c42"
+   ],
+   "unit": "count",
+   "value": 2.0
   }
  ],
  "stale_as_of": null,
- "stale_ok": true,
- "stale_reason": "Event-driven count: it moves when a builder announces, not on a calendar.",
+ "stale_ok": false,
+ "stale_reason": null,
  "status": "emerging",
  "status_events": [
   {

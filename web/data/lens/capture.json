@@ -3044,7 +3044,7 @@
      "grade": "A",
      "id": "model_price_per_horizon_hour",
      "latest": {
-      "as_of": "2026-09-11",
+      "as_of": "2026-09-10",
       "dims": {},
       "obs_ids": [
        "03f5354fa58eb2ef",
@@ -3062,16 +3062,6 @@
      "sparkline": [
       {
        "as_of": "2026-09-10",
-       "dims": {},
-       "obs_ids": [
-        "03f5354fa58eb2ef",
-        "8a2d699724cf4d5e"
-       ],
-       "unit": "USD",
-       "value": 0.2980843380067223
-      },
-      {
-       "as_of": "2026-09-11",
        "dims": {},
        "obs_ids": [
         "03f5354fa58eb2ef",
@@ -4232,8 +4222,8 @@
        "as_of": "2026-02-24",
        "dims": {},
        "obs_ids": [
+        "08041a8a456d6dbf",
         "24789a9da722d2de",
-        "38c27cadfec7d562",
         "67eabbfe73fcd529"
        ],
        "unit": "index",
@@ -4243,8 +4233,8 @@
        "as_of": "2026-02-24",
        "dims": {},
        "obs_ids": [
-        "08041a8a456d6dbf",
         "24789a9da722d2de",
+        "38c27cadfec7d562",
         "67eabbfe73fcd529"
        ],
        "unit": "index",
@@ -4266,8 +4256,8 @@
        "dims": {},
        "obs_ids": [
         "24789a9da722d2de",
-        "d092bfa7505183e3",
-        "ecc8d38ac38efd20"
+        "ac6f1c2cdefb7d8a",
+        "d092bfa7505183e3"
        ],
        "unit": "index",
        "value": 10.900000000000006
@@ -4277,8 +4267,8 @@
        "dims": {},
        "obs_ids": [
         "24789a9da722d2de",
-        "ac6f1c2cdefb7d8a",
-        "d092bfa7505183e3"
+        "d092bfa7505183e3",
+        "ecc8d38ac38efd20"
        ],
        "unit": "index",
        "value": 10.900000000000006
@@ -5758,7 +5748,7 @@
      "grade": "D",
      "id": "safety_brake_events",
      "latest": {
-      "as_of": "2026-09-01",
+      "as_of": "2026-09-10",
       "dims": {},
       "obs_ids": [
        "2ab8fec44e7914a5",
@@ -5796,6 +5786,17 @@
       },
       {
        "as_of": "2026-09-01",
+       "dims": {},
+       "obs_ids": [
+        "2ab8fec44e7914a5",
+        "67d75927e7d23e32",
+        "82685d1efcfba981"
+       ],
+       "unit": "count",
+       "value": 3.0
+      },
+      {
+       "as_of": "2026-09-10",
        "dims": {},
        "obs_ids": [
         "2ab8fec44e7914a5",
@@ -8618,7 +8619,7 @@
      "grade": "D",
      "id": "cl_lab_release_claims",
      "latest": {
-      "as_of": "2026-05-27",
+      "as_of": "2026-09-10",
       "dims": {},
       "obs_ids": [
        "1b7d08dbce2be548",
@@ -8652,10 +8653,20 @@
        ],
        "unit": "count",
        "value": 2.0
+      },
+      {
+       "as_of": "2026-09-10",
+       "dims": {},
+       "obs_ids": [
+        "1b7d08dbce2be548",
+        "dc983a8178691c42"
+       ],
+       "unit": "count",
+       "value": 2.0
       }
      ],
      "stale_as_of": null,
-     "stale_reason": "Event-driven count: it moves when a builder announces, not on a calendar.",
+     "stale_reason": null,
      "status": "emerging",
      "unit": "count",
      "unpublished_reason": null,
@@ -10385,7 +10396,7 @@
      },
      "layer_id": "adopters",
      "leading_lagging": "coincident",
-     "n_observations": 17,
+     "n_observations": 16,
      "name": "US adults who have used generative AI",
      "pending": null,
      "published": true,
@@ -10505,7 +10516,7 @@
      ],
      "stale_as_of": null,
      "stale_reason": null,
-     "status": "consistent_with_normal",
+     "status": "emerging",
      "unit": "share",
      "unpublished_reason": null,
      "valve_measured": "product_to_adoption"
@@ -12479,6 +12490,21 @@
  "recent_status_events": [
   {
    "author": "claude",
+   "created_at": "2026-09-11T06:12:54.565555Z",
+   "evidence_ids": [
+    "2735a60f0d2378e3"
+   ],
+   "id": "3e00b7d919252821",
+   "new_conf": 70,
+   "new_status": "emerging",
+   "old_conf": 70,
+   "old_status": "consistent_with_normal",
+   "reason": "61.8% of US adults have used generative AI (Q2 2026, FRED), inside the normal band, but the reading rests on one survey: the paper's own figure was counted as a second source when it is the same instrument. With one non-primary source the two-source rule caps the status at emerging until an independent measure agrees.",
+   "target_id": "bbd_adult_use",
+   "target_type": "indicator"
+  },
+  {
+   "author": "claude",
    "created_at": "2026-09-11T05:21:02.630188Z",
    "evidence_ids": [
     "2202dee6a2133a8e",
@@ -12508,21 +12534,6 @@
    "old_status": null,
    "reason": "Two builders claimed production continual learning in the twelve months to 27 May 2026 (Cursor's online RL for Tab, Trajectory's hourly adapters), inside the normal band, but every row is the vendor's own description (tier 7), so the status is emerging. Initial seed.",
    "target_id": "cl_lab_release_claims",
-   "target_type": "indicator"
-  },
-  {
-   "author": "evaluate",
-   "created_at": "2026-09-11T04:56:30.394524Z",
-   "evidence_ids": [
-    "85e4ee329e1a9c2d"
-   ],
-   "id": "6489b6ebf0364d3b",
-   "new_conf": 55,
-   "new_status": "consistent_with_normal",
-   "old_conf": null,
-   "old_status": null,
-   "reason": "Evaluator: 49.0% (Anthropic Economic Index (open dataset and reports), 2026-02-12) is inside the consistent band (hi=60.0%). Auto-reason; band rationale: The share only rises, so the question is how fast. Normal = under 60% of occupations with a quarter of their tasks in use four years in; fast = 80% or more. Anchor: 49% in the March 2026 report (data 5-12 February 2026).",
-   "target_id": "aei_occupation_depth_25",
    "target_type": "indicator"
   }
  ],

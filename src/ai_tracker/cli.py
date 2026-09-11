@@ -14,7 +14,7 @@ from .analysis.bands import flow_status
 from .analysis.direction import direction
 from .analysis.metrics import run_metrics
 from .ingest.connectors import CONNECTORS
-from .schema import UNSCORED, Indicator, StatusEvent, Tier
+from .schema import UNSCORED, FetchLog, Indicator, StatusEvent, Tier
 from .thesis import render_md, run_all
 
 log = logging.getLogger("ai-tracker")
@@ -24,8 +24,12 @@ def cmd_ingest(a: argparse.Namespace) -> int:
     names = list(CONNECTORS) if a.all else a.source
     rc = 0
     for name in names:
-        rows, fl = CONNECTORS[name]().run(a.day, a.refetch)
-        fl.items_new = st.append_observations(name, rows) if rows else 0
+        try:  # a connector that crashes outside its own run() still logs a failure and never stops the others
+            rows, fl = CONNECTORS[name]().run(a.day, a.refetch)
+            fl.items_new = st.append_observations(name, rows) if rows else 0
+        except Exception as e:  # noqa: BLE001
+            now = datetime.now(timezone.utc)
+            fl = FetchLog(source_id=name, started_at=now, finished_at=now, ok=False, error=repr(e)[:500])
         st.append_fetchlog(fl)
         optional = CONNECTORS[name].optional and not fl.ok
         print(

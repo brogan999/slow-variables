@@ -32,7 +32,7 @@ export function VentureFlowStrip({ doc, obsIndex, note = true }: { doc: VentureD
           );
         })}
       </div>
-      {note ? <p className="text-xs text-muted">Primary-round dollars per calendar quarter: Form D amount sold where the entity files, Epoch&apos;s press-compiled rounds otherwise. Amendments replace their originals; SPVs, secondaries and debt are excluded, except where a quarter shows its total including Form D debt beneath the bar.</p> : null}
+      {note ? <p className="text-xs text-muted">Primary-round dollars per calendar quarter: Form D amount sold where the entity files, Epoch&apos;s press-compiled rounds otherwise. Amendments replace their originals; SPVs, secondaries and debt are excluded, except where a quarter shows its total including Form D debt above the bar.</p> : null}
     </div>
   );
 }
