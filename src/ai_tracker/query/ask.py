@@ -203,7 +203,7 @@ class Tools:
         obs = [i for k, i in ids if k == "obs"]
         if obs:
             cur = self.store.con.execute(
-                "SELECT id, value_numeric, value_low, value_high, unit, raw_snippet FROM observation_all WHERE id IN ("
+                "SELECT id, value_numeric, value_low, value_high, unit, concat_ws(' ', raw_snippet, value_text, dispute_text) FROM observation_all WHERE id IN ("
                 + ",".join("?" * len(obs))
                 + ")",
                 obs,
@@ -281,16 +281,15 @@ def _json(v: Any) -> Any:
     return str(v)
 
 
-def ask(store: st.Store, question: str, tools: Tools | None = None, client: Any = None) -> dict[str, Any]:
-    import anthropic
-
-    tools = tools or Tools(store)
-    client = client or anthropic.Anthropic()
-    system = [{"type": "text", "text": _system(store), "cache_control": {"type": "ephemeral"}}]
-    messages: list[dict[str, Any]] = [{"role": "user", "content": question}]
-    usage = {"in": 0, "out": 0}
-    calls: list[dict[str, Any]] = []
-    text = ""
+def _run(
+    client: Any,
+    system: list[dict[str, Any]],
+    messages: list[dict[str, Any]],
+    tools: Tools,
+    usage: dict[str, int],
+    calls: list[dict[str, Any]],
+) -> str:
+    """One pass of the tool loop: keep answering tool calls until the model stops with text."""
     for _ in range(12):
         r = client.messages.create(
             model=MODEL, max_tokens=1200, system=system, tools=TOOLS, messages=messages
@@ -299,8 +298,7 @@ def ask(store: st.Store, question: str, tools: Tools | None = None, client: Any 
         usage["out"] += r.usage.output_tokens
         messages.append({"role": "assistant", "content": r.content})
         if r.stop_reason != "tool_use":
-            text = "".join(b.text for b in r.content if b.type == "text")
-            break
+            return "".join(b.text for b in r.content if b.type == "text")
         results = []
         for b in r.content:
             if b.type == "tool_use":
@@ -314,6 +312,19 @@ def ask(store: st.Store, question: str, tools: Tools | None = None, client: Any 
                     }
                 )
         messages.append({"role": "user", "content": results})
+    return ""
+
+
+def ask(store: st.Store, question: str, tools: Tools | None = None, client: Any = None) -> dict[str, Any]:
+    import anthropic
+
+    tools = tools or Tools(store)
+    client = client or anthropic.Anthropic()
+    system = [{"type": "text", "text": _system(store), "cache_control": {"type": "ephemeral"}}]
+    messages: list[dict[str, Any]] = [{"role": "user", "content": question}]
+    usage = {"in": 0, "out": 0}
+    calls: list[dict[str, Any]] = []
+    text = _run(client, system, messages, tools, usage, calls)
     status = "ok"
     res = check(text, tools.records(CITE.findall(text)))
     if not res.ok:
@@ -325,12 +336,7 @@ def ask(store: st.Store, question: str, tools: Tools | None = None, client: Any 
                 + "\nRevise the answer so every number is followed by the citation token of a record that contains it, or drop the number. Reply with the revised answer only.",
             }
         )
-        r = client.messages.create(
-            model=MODEL, max_tokens=1200, system=system, tools=TOOLS, messages=messages
-        )
-        usage["in"] += r.usage.input_tokens
-        usage["out"] += r.usage.output_tokens
-        text = "".join(b.text for b in r.content if b.type == "text")
+        text = _run(client, system, messages, tools, usage, calls)
         res = check(text, tools.records(CITE.findall(text)))
         status = "revised" if res.ok else "blocked"
     cites = [{"kind": k, "id": i, "href": tools.href(k, i)} for k, i in dict.fromkeys(CITE.findall(text))]

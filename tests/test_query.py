@@ -62,3 +62,15 @@ def test_ask_loop_cites_and_passes_the_check():
     assert res["status"] == "ok", res
     assert res["citations"][0]["href"].startswith("/series/metr.")
     assert res["usage"]["usd"] > 0
+
+
+def test_records_carry_dispute_text_so_quoted_caveats_verify():
+    s = st.Store()
+    t = Tools(s)
+    row = s.con.execute(
+        "SELECT id FROM observation_all WHERE dispute_text IS NOT NULL AND dispute_text <> '' LIMIT 1"
+    ).fetchone()
+    assert row, "fixture data has a disputed row"
+    rec = t.records([("obs", row[0])])[row[0]]
+    dispute = s.con.execute("SELECT dispute_text FROM observation_all WHERE id = ?", [row[0]]).fetchone()[0]
+    assert dispute[:20] in rec.snippet

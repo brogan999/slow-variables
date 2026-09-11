@@ -66,3 +66,9 @@ def test_hashes_and_ids_glued_to_letters_are_not_numbers():
     res = check("- page changed (content hash 4975fd84a4f9) [obs:x]", R)
     assert res.ok and res.numbers == []
     assert check("It reached $172B [obs:x].", R).numbers == ["$172B"]
+
+
+def test_form_names_are_not_numbers_and_annotation_never_nests():
+    assert check("Built from 10-Q and 10-K filings and the 20-F [obs:x].", R).numbers == []
+    res = check("It was 55 then 55 again.", R)
+    assert res.annotated.count("⟦unverified: 55⟧") == 2 and "⟦unverified: ⟦" not in res.annotated
