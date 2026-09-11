@@ -1,8 +1,9 @@
 """Artificial Analysis API v2 (needs ARTIFICIAL_ANALYSIS_API_KEY; optional so the nightly stays green without it).
 
 `GET /api/v2/data/llms/models` with `x-api-key`. Per model: the Intelligence Index (tier 1, independent evals),
-the blended price per million tokens (tier 3) and median output speed. Change-point ledger like the OpenRouter
-price connector: an unchanged value reuses its existing as_of so the nightly does not add a row a day.
+the blended price per million tokens (tier 3) and median output speed. Index rows are dated by the model's release
+date (like METR), so a re-score supersedes in place. Price and speed are a change-point ledger like the OpenRouter
+price connector: an unchanged value reuses its existing as_of. AA reports an unpriced model as 0; those are skipped.
 """
 
 from __future__ import annotations
@@ -55,7 +56,7 @@ class ArtificialAnalysis(Connector):
         models = json.loads(item.body).get("data") or []
         expect(
             set(models[0]) if models else set(),
-            {"slug", "evaluations", "pricing", "model_creator"},
+            {"slug", "evaluations", "pricing", "model_creator", "release_date"},
             "artificial analysis models",
         )
         today = item.retrieved_at.date()
@@ -69,12 +70,17 @@ class ArtificialAnalysis(Connector):
                 v = m
                 for k in path:
                     v = (v or {}).get(k) if isinstance(v, dict) else None
-                if v is None:
+                if v is None or (measure != "intelligence_index" and v <= 0):
                     continue
                 key = f"aa.{subject}.{measure}.pt"
                 prev = self.latest.get(key)
-                as_of = (
+                published = (
                     today if prev is None or abs(prev[1] - float(v)) > 1e-9 else date.fromisoformat(prev[0])
+                )
+                as_of = (
+                    date.fromisoformat(m["release_date"])
+                    if measure == "intelligence_index" and m.get("release_date")
+                    else published
                 )
                 out.append(
                     self.obs(
@@ -82,7 +88,7 @@ class ArtificialAnalysis(Connector):
                         series_key=key,
                         unit=unit,
                         as_of_date=as_of,
-                        published_date=as_of,
+                        published_date=published,
                         value_numeric=float(v),
                         tier=tier,
                         audited_vs_reported=Basis.reported,

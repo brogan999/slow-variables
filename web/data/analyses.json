@@ -5,7 +5,7 @@
   "id": "horizon_fits",
   "latest": {
    "as_of_date": "2026-03-05",
-   "computed_at": "2026-09-10T10:45:54.592814Z",
+   "computed_at": "2026-09-11T04:31:40.036559Z",
    "dims": {
     "aic": "-44.8",
     "n": "20",
@@ -84,7 +84,7 @@
   "related_latest": {
    "horizon_blowup_year_50_since_2024": {
     "as_of_date": "2026-03-05",
-    "computed_at": "2026-09-10T10:45:54.592814Z",
+    "computed_at": "2026-09-11T04:31:40.036559Z",
     "dims": {
      "aic": "78.1",
      "n": "20",
@@ -153,7 +153,7 @@
    },
    "horizon_doubling_days_50_since_2023": {
     "as_of_date": "2026-03-05",
-    "computed_at": "2026-09-10T10:45:54.592814Z",
+    "computed_at": "2026-09-11T04:31:40.036559Z",
     "dims": {
      "aic": "-31.0",
      "n": "22",
@@ -222,7 +222,7 @@
    },
    "horizon_doubling_days_80_since_2023": {
     "as_of_date": "2026-04-07",
-    "computed_at": "2026-09-10T10:45:54.592814Z",
+    "computed_at": "2026-09-11T04:31:40.036559Z",
     "dims": {
      "aic": "-27.6",
      "n": "23",
@@ -293,7 +293,7 @@
    },
    "horizon_doubling_days_80_since_2024": {
     "as_of_date": "2026-04-07",
-    "computed_at": "2026-09-10T10:45:54.592814Z",
+    "computed_at": "2026-09-11T04:31:40.036559Z",
     "dims": {
      "aic": "-41.3",
      "n": "21",
@@ -374,7 +374,7 @@
   "id": "ord_misfit",
   "latest": {
    "as_of_date": "2026-03-05",
-   "computed_at": "2026-09-10T10:45:54.592814Z",
+   "computed_at": "2026-09-11T04:31:40.036559Z",
    "dims": {},
    "formula_version": "1",
    "id": "cec9da67e1d41a15",
@@ -409,7 +409,7 @@
   "id": "margin_stack",
   "latest": {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-10T10:45:54.592814Z",
+   "computed_at": "2026-09-11T04:31:40.036559Z",
    "dims": {
     "layer_id": "compute_semis"
    },
@@ -458,7 +458,7 @@
   "id": "hhi_layers",
   "latest": {
    "as_of_date": "2026-03-31",
-   "computed_at": "2026-09-10T10:45:54.592814Z",
+   "computed_at": "2026-09-11T04:31:40.036559Z",
    "dims": {
     "layer_id": "compute_cloud"
    },
@@ -495,7 +495,7 @@
   "id": "recoupment",
   "latest": {
    "as_of_date": "2026-08-31",
-   "computed_at": "2026-09-10T10:45:54.592814Z",
+   "computed_at": "2026-09-11T04:31:40.036559Z",
    "dims": {
     "entity": "z_ai_zhipu"
    },
@@ -529,7 +529,7 @@
   "id": "concordance",
   "latest": {
    "as_of_date": "2026-07-31",
-   "computed_at": "2026-09-10T10:45:54.592814Z",
+   "computed_at": "2026-09-11T04:31:40.036559Z",
    "dims": {},
    "formula_version": "1",
    "id": "ed08c58063fcdeb8",
@@ -565,7 +565,7 @@
   "id": "capex_ratio",
   "latest": {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-10T10:45:54.592814Z",
+   "computed_at": "2026-09-11T04:31:40.036559Z",
    "dims": {},
    "formula_version": "1",
    "id": "7867e6c6b3b7fe32",
@@ -625,7 +625,7 @@
   "id": "circular",
   "latest": {
    "as_of_date": "2026-08-17",
-   "computed_at": "2026-09-10T10:45:54.592814Z",
+   "computed_at": "2026-09-11T04:31:40.036559Z",
    "dims": {},
    "formula_version": "2",
    "id": "f6d2b4cee03aed99",
@@ -676,83 +676,23 @@
   "sql": "WITH deals AS (\n  SELECT as_of_date, value_numeric AS v, id FROM observations\n  WHERE series_key LIKE 'circular.%_usd.pt'\n    AND series_key NOT LIKE '%loi_usd%' AND series_key NOT LIKE '%talks_usd%' AND series_key NOT LIKE '%total_commitments%'\n    AND series_key NOT LIKE '%commercial_rpo%')\nSELECT last_deal AS as_of_date, sum(v) OVER (ORDER BY q_end) AS value,\n       flatten(list(ids) OVER (ORDER BY q_end)) AS obs_ids\nFROM (SELECT date_trunc('quarter', as_of_date)::DATE AS q_end, max(as_of_date) AS last_deal, sum(v) AS v, list(id ORDER BY id) AS ids\n      FROM deals GROUP BY 1)\n"
  },
  {
-  "caveats": "List prices on one router, prompt tokens only; the horizon is METR's suite, not general capability; only models present in both datasets count; a price series starts on 10 Sep 2026 and records change points, so the trend needs months.",
-  "description": "Cheapest available capability-hour - for each price date, the minimum over METR-measured models of OpenRouter prompt price (USD per million tokens) divided by the model's latest 50% time horizon in hours.",
+  "caveats": "List prices on one router, prompt tokens only; the horizon is METR's suite, not general capability; only models present in both datasets count; a price series starts on 10 Sep 2026 and records change points, so the trend needs months; a delisted model's last price carries forward.",
+  "description": "Cheapest available capability-hour - on each price change date, the minimum over METR-measured models of OpenRouter prompt price (USD per million tokens, each model's latest price carried forward) divided by the model's latest 50% time horizon in hours.",
   "id": "price_capability",
   "latest": {
    "as_of_date": "2026-09-10",
-   "computed_at": "2026-09-10T10:45:54.592814Z",
+   "computed_at": "2026-09-11T04:31:40.036559Z",
    "dims": {},
-   "formula_version": "1",
+   "formula_version": "2",
    "id": "aadf76ab192df530",
    "input_observation_ids": [
     "03f5354fa58eb2ef",
-    "0862bc678e313a4b",
-    "0d21fe651b2bd589",
-    "261c1f51f1f6b138",
-    "2eb7c897f31e5b3e",
-    "37e97a6fcbe1c2ca",
-    "39c8213ab061a5f7",
-    "3ce52d69876392b2",
-    "45bce91f047a6986",
-    "4a682b8c20f32dfe",
-    "57019089ce8aee7d",
-    "66fb934f83b26f09",
-    "679cbbe280732318",
-    "6af93ac0d37ce9a2",
-    "6b19d566b4f5cd57",
-    "72bcb9d860605a44",
-    "7a780fb077b3dc72",
-    "7c977050ff6a8cfe",
-    "858c619bbf5d9edd",
-    "88c30276fbfa9c93",
-    "8a2d699724cf4d5e",
-    "8b0a6a6d96e336e4",
-    "8b107841abf447ee",
-    "8dd5053cb4bc588d",
-    "96d016fade882963",
-    "a2aa2e4df87f5448",
-    "ae5278061f1da61c",
-    "cffc805c709a4421",
-    "e466aae4890e8f57",
-    "f5e42bc76c480641",
-    "f898fbb2a3bfb3f6",
-    "fa8c145cfc184e69"
+    "8a2d699724cf4d5e"
    ],
    "metric": "frontier_price_per_horizon_hour",
    "obs_ids": [
     "03f5354fa58eb2ef",
-    "0862bc678e313a4b",
-    "0d21fe651b2bd589",
-    "261c1f51f1f6b138",
-    "2eb7c897f31e5b3e",
-    "37e97a6fcbe1c2ca",
-    "39c8213ab061a5f7",
-    "3ce52d69876392b2",
-    "45bce91f047a6986",
-    "4a682b8c20f32dfe",
-    "57019089ce8aee7d",
-    "66fb934f83b26f09",
-    "679cbbe280732318",
-    "6af93ac0d37ce9a2",
-    "6b19d566b4f5cd57",
-    "72bcb9d860605a44",
-    "7a780fb077b3dc72",
-    "7c977050ff6a8cfe",
-    "858c619bbf5d9edd",
-    "88c30276fbfa9c93",
-    "8a2d699724cf4d5e",
-    "8b0a6a6d96e336e4",
-    "8b107841abf447ee",
-    "8dd5053cb4bc588d",
-    "96d016fade882963",
-    "a2aa2e4df87f5448",
-    "ae5278061f1da61c",
-    "cffc805c709a4421",
-    "e466aae4890e8f57",
-    "f5e42bc76c480641",
-    "f898fbb2a3bfb3f6",
-    "fa8c145cfc184e69"
+    "8a2d699724cf4d5e"
    ],
    "value": 0.2980843380067223,
    "value_high": null,
@@ -765,7 +705,7 @@
   "shape": {
    "unit": "USD"
   },
-  "sql": "WITH h AS (\n  SELECT subject, arg_max(value_numeric, as_of_date) AS minutes, arg_max(id, as_of_date) AS hid\n  FROM observations WHERE series_key LIKE 'metr.%.horizon_50.pt' AND NOT coalesce(disputed, false) GROUP BY subject),\np AS (SELECT subject, as_of_date, value_numeric AS usd, id FROM observations WHERE series_key LIKE 'openrouter.%.price_prompt_usd_per_mtok.pt')\nSELECT p.as_of_date, min(p.usd / (h.minutes / 60)) AS value, list_distinct(flatten(list([p.id, h.hid]))) AS obs_ids\nFROM p JOIN h USING (subject) GROUP BY p.as_of_date\n"
+  "sql": "WITH h AS (\n  SELECT subject, arg_max(value_numeric, as_of_date) AS minutes, arg_max(id, as_of_date) AS hid\n  FROM observations WHERE series_key LIKE 'metr.%.horizon_50.pt' AND NOT coalesce(disputed, false) GROUP BY subject),\np AS (SELECT subject, as_of_date, value_numeric AS usd, id FROM observations WHERE series_key LIKE 'openrouter.%.price_prompt_usd_per_mtok.pt' AND value_numeric > 0),\nd AS (SELECT DISTINCT as_of_date FROM p),\ncp AS (SELECT d.as_of_date, p.subject, arg_max(p.usd, p.as_of_date) AS usd, arg_max(p.id, p.as_of_date) AS pid\n       FROM d JOIN p ON p.as_of_date <= d.as_of_date GROUP BY 1, 2)\nSELECT cp.as_of_date, min(cp.usd / (h.minutes / 60)) AS value, arg_min([cp.pid, h.hid], cp.usd / (h.minutes / 60)) AS obs_ids\nFROM cp JOIN h USING (subject) GROUP BY cp.as_of_date\n"
  },
  {
   "caveats": "Denominator is the seed list, not the market; frontier rounds are mostly Epoch (tier 5) because the labs raise through vehicles that do not file Form D.",
@@ -773,7 +713,7 @@
   "id": "venture_frontier",
   "latest": {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-10T10:45:54.592814Z",
+   "computed_at": "2026-09-11T04:31:40.036559Z",
    "dims": {},
    "formula_version": "1",
    "id": "39cc8e427e2c5638",
@@ -858,5 +798,90 @@
    "unit": "share"
   },
   "sql": "WITH f AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'formd.%.amount_sold_usd.pt' AND entity_id IS NOT NULL),\ne AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'epoch.%.round_equity_usd.pt' AND entity_id IS NOT NULL),\nrounds AS (SELECT * FROM f UNION ALL SELECT * FROM e WHERE NOT EXISTS (SELECT 1 FROM f WHERE f.entity_id = e.entity_id AND date_trunc('quarter', f.as_of_date) = date_trunc('quarter', e.as_of_date))),\nm AS (SELECT entity_id, sublayer_id FROM entity_membership WHERE is_primary AND sublayer_id IS NOT NULL),\nq AS (SELECT date_trunc('quarter', r.as_of_date) AS cq, m.sublayer_id, r.v, r.id FROM rounds r JOIN m USING (entity_id) WHERE r.as_of_date >= DATE '2023-01-01'),\nqs AS (SELECT DISTINCT cq FROM q)\nSELECT (qs.cq + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE AS as_of_date,\n       sum(CASE WHEN q.sublayer_id = 'frontier_labs' THEN q.v ELSE 0 END) / sum(q.v) AS value,\n       list(q.id ORDER BY q.id) AS obs_ids\nFROM qs JOIN q ON q.cq > qs.cq - INTERVAL 12 MONTH AND q.cq <= qs.cq GROUP BY 1 HAVING sum(q.v) > 0\n"
+ },
+ {
+  "caveats": "The index composition changes between Artificial Analysis versions and every model is re-scored on the current version, so the history is today's scores placed at release dates, not what was measured then.",
+  "description": "Highest Artificial Analysis Intelligence Index among models released on or before each date on which a new record was set (index rows are dated by model release).",
+  "id": "aa_frontier",
+  "latest": {
+   "as_of_date": "2026-09-01",
+   "computed_at": "2026-09-11T04:31:40.036559Z",
+   "dims": {},
+   "formula_version": "2",
+   "id": "9ac351a81f2d26a0",
+   "input_observation_ids": [
+    "4e94ac75c59d496d"
+   ],
+   "metric": "aa_frontier_intelligence_index",
+   "obs_ids": [
+    "4e94ac75c59d496d"
+   ],
+   "value": 53.4,
+   "value_high": null,
+   "value_low": null
+  },
+  "metric": "aa_frontier_intelligence_index",
+  "name": "Frontier Intelligence Index",
+  "question": "What is the best Artificial Analysis Intelligence Index, and when was each record set?",
+  "related_latest": {},
+  "shape": {
+   "unit": "index"
+  },
+  "sql": "WITH x AS (SELECT as_of_date, max(value_numeric) AS v, arg_max(id, value_numeric) AS id\n           FROM observations WHERE series_key LIKE 'aa.%.intelligence_index.pt' GROUP BY 1)\nSELECT as_of_date, v AS value, [id] AS obs_ids FROM x QUALIFY v >= max(v) OVER (ORDER BY as_of_date)\n"
+ },
+ {
+  "caveats": "Models are matched on METR's id with its \"_inspect\" suffix dropped, so only models named alike in both datasets count; list prices; METR's horizon is software tasks under its suite.",
+  "description": "Cheapest capability-hour on Artificial Analysis prices - on each price change date, the lowest blended price (USD per million tokens, latest price carried forward) divided by the model's latest METR 50% time horizon in hours, across models in both datasets.",
+  "id": "price_capability_aa",
+  "latest": {
+   "as_of_date": "2026-09-11",
+   "computed_at": "2026-09-11T04:31:40.036559Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "f93befc11a81de1e",
+   "input_observation_ids": [
+    "8a2d699724cf4d5e",
+    "9478a57ba8a5867b"
+   ],
+   "metric": "aa_price_per_horizon_hour",
+   "obs_ids": [
+    "8a2d699724cf4d5e",
+    "9478a57ba8a5867b"
+   ],
+   "value": 0.8198170964722026,
+   "value_high": null,
+   "value_low": null
+  },
+  "metric": "aa_price_per_horizon_hour",
+  "name": "Price per capability, Artificial Analysis",
+  "question": "What does a METR-hour cost at Artificial Analysis blended prices, and what does a near-frontier index point cost?",
+  "related": [
+   "aa_frontier_price_per_point"
+  ],
+  "related_latest": {
+   "aa_frontier_price_per_point": {
+    "as_of_date": "2026-09-11",
+    "computed_at": "2026-09-11T04:31:40.036559Z",
+    "dims": {},
+    "formula_version": "1",
+    "id": "34a2009ea85bb400",
+    "input_observation_ids": [
+     "237e985e770d8c70",
+     "5f1df4e43db86382"
+    ],
+    "metric": "aa_frontier_price_per_point",
+    "obs_ids": [
+     "237e985e770d8c70",
+     "5f1df4e43db86382"
+    ],
+    "value": 0.005656324582338902,
+    "value_high": null,
+    "value_low": null
+   }
+  },
+  "shape": {
+   "unit": "USD"
+  },
+  "sql": "WITH h AS (SELECT regexp_replace(subject, '_inspect$', '') AS subject, arg_max(value_numeric, as_of_date) AS minutes,\n                  arg_max(id, as_of_date) AS hid FROM observations\n           WHERE series_key LIKE 'metr.%.horizon_50.pt' AND NOT coalesce(disputed, false) GROUP BY 1),\np AS (SELECT subject, as_of_date, value_numeric AS usd, id FROM observations\n      WHERE series_key LIKE 'aa.%.price_blended_usd_per_mtok.pt' AND value_numeric > 0),\nd AS (SELECT DISTINCT as_of_date FROM p),\ncp AS (SELECT d.as_of_date, p.subject, arg_max(p.usd, p.as_of_date) AS usd, arg_max(p.id, p.as_of_date) AS pid\n       FROM d JOIN p ON p.as_of_date <= d.as_of_date GROUP BY 1, 2)\nSELECT cp.as_of_date, min(cp.usd / (h.minutes / 60)) AS value, arg_min([cp.pid, h.hid], cp.usd / (h.minutes / 60)) AS obs_ids\nFROM cp JOIN h USING (subject) GROUP BY 1\n"
  }
 ]

@@ -281,9 +281,32 @@ indicators:
     counterevidence: One router's list prices, prompt tokens only; METR's horizon is software tasks under its suite, not general capability; the cheapest model per horizon-hour is a moving target as models are added.
     confidence: 40
     proposed_status: not_yet_measurable
-    related_indicators: [metr_horizon_50, lab_run_rates]
+    related_indicators: [metr_horizon_50, lab_run_rates, model_price_per_intelligence_point]
     published: true
-    updated_at: 2026-09-10
+    stale_ok: true
+    stale_reason: "Change-point series: a quiet month means prices held; fetch freshness is on /sources."
+    updated_at: 2026-09-11
+  - id: model_price_per_intelligence_point
+    name: Price per unit of capability (cheapest near-frontier model, Artificial Analysis)
+    definition: On each price change date, the lowest Artificial Analysis blended list price (USD per million tokens, 3:1 input to output) divided by the model's Intelligence Index, among models in the top decile of the index. Derived metric aa_frontier_price_per_point.
+    why_it_matters: The same capture proxy as the METR-hour price on an independent capability axis that covers hundreds of models, refreshed daily. Falling means the surplus from better models is passed on; flat or rising means labs keep it.
+    proxy_types: [price]
+    unit: USD
+    cadence_expected: daily
+    metric: aa_frontier_price_per_point
+    band_input: "metric:aa_frontier_price_per_point"
+    layer_id: model
+    direction_rule: {periods: 4, dead_band: 0.0006, higher_is: concentrating, rationale: "Four price change-points; a move under $0.0006 per million tokens per index point (about a tenth of the 11 Sep 2026 level) is one model's repricing. Rising = labs keeping the surplus from capability gains."}
+    leading_lagging: coincident
+    tracker_interpretation: The series records price change-points from 11 September 2026; a direction needs several of them. The cheapest near-frontier model is often an open-weight one, so this reads the whole model layer, not only the frontier labs.
+    counterevidence: List prices, not the committed-use prices large buyers pay; the Intelligence Index is re-based between Artificial Analysis versions; the top decile moves as models are added and dropped; unpriced models are excluded.
+    confidence: 40
+    proposed_status: not_yet_measurable
+    related_indicators: [model_price_per_horizon_hour, lab_run_rates]
+    published: true
+    stale_ok: true
+    stale_reason: "Change-point series: a quiet month means prices held; fetch freshness is on /sources."
+    updated_at: 2026-09-11
   - id: frontier_capital_concentration
     name: Frontier labs' share of tracked venture dollars
     definition: Frontier labs' share of all primary-round dollars across the tracked stack over the trailing four quarters, from Form D filings where entities file and Epoch's press-compiled rounds elsewhere. Derived metric frontier_share_of_venture_dollars.
@@ -592,7 +615,7 @@ indicators:
     direction_rule: {periods: 4, dead_band: 0.05, higher_is: concentrating, rationale: "Placeholder until the series exists; bands are set with the first observation."}
     leading_lagging: leading
     tracker_interpretation: "Unpublished; see the reason."
-    unpublished_reason: "Not measurable from free sources: needs SemiAnalysis unit inference costs (paid) joined to reported ARR and Ramp token spend; the paid stub is off."
+    unpublished_reason: "Not measurable from free sources: Artificial Analysis now gives list price per token, but a margin needs each app's token volume and revenue, neither public, and list price overstates what large apps pay under committed-use discounts; SemiAnalysis unit costs and The Information's app financials are paid (stubs off)."
     counterevidence: "Every input is private-company reporting."
     confidence: 20
     proposed_status: not_yet_measurable

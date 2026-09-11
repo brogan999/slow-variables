@@ -31,11 +31,22 @@ def test_artificial_analysis_extracts_three_measures_per_model():
                     "id": "x",
                     "name": "o3-mini",
                     "slug": "o3-mini",
+                    "release_date": "2025-01-31",
                     "model_creator": {"slug": "openai"},
                     "evaluations": {"artificial_analysis_intelligence_index": 62.9},
                     "pricing": {"price_1m_blended_3_to_1": 1.925},
                     "median_output_tokens_per_second": 153.8,
-                }
+                },
+                {
+                    "id": "y",
+                    "name": "unpriced",
+                    "slug": "unpriced",
+                    "release_date": "2026-09-03",
+                    "model_creator": {"slug": "openai"},
+                    "evaluations": {"artificial_analysis_intelligence_index": 70.1},
+                    "pricing": {"price_1m_blended_3_to_1": 0},
+                    "median_output_tokens_per_second": 0,
+                },
             ],
         }
     ).encode()
@@ -47,10 +58,10 @@ def test_artificial_analysis_extracts_three_measures_per_model():
         "aa.o3_mini.intelligence_index.pt",
         "aa.o3_mini.price_blended_usd_per_mtok.pt",
         "aa.o3_mini.output_tokens_per_second.pt",
+        "aa.unpriced.intelligence_index.pt",  # a zero price or speed means unpriced, not free
     }
-    assert keys["aa.o3_mini.intelligence_index.pt"].as_of_date == date(
-        2026, 1, 1
-    )  # unchanged value keeps its as_of
+    assert keys["aa.o3_mini.intelligence_index.pt"].as_of_date == date(2025, 1, 31)  # dated by release
+    assert keys["aa.o3_mini.intelligence_index.pt"].published_date == date(2026, 1, 1)  # unchanged value
     assert (
         int(keys["aa.o3_mini.intelligence_index.pt"].tier) == 1
         and int(keys["aa.o3_mini.price_blended_usd_per_mtok.pt"].tier) == 3

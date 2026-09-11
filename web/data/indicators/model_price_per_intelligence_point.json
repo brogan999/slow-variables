@@ -1,0 +1,140 @@
+{
+ "band_input": "metric:aa_frontier_price_per_point",
+ "band_rationale": null,
+ "band_value": {
+  "as_of": "2026-09-11",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "237e985e770d8c70",
+   "5f1df4e43db86382"
+  ],
+  "value": 0.005656324582338902
+ },
+ "bucket_id": null,
+ "cadence_expected": "daily",
+ "confidence": 40,
+ "counterevidence": "List prices, not the committed-use prices large buyers pay; the Intelligence Index is re-based between Artificial Analysis versions; the top decile moves as models are added and dropped; unpriced models are excluded.",
+ "crosswalk": [],
+ "definition": "On each price change date, the lowest Artificial Analysis blended list price (USD per million tokens, 3:1 input to output) divided by the model's Intelligence Index, among models in the top decile of the index. Derived metric aa_frontier_price_per_point.",
+ "derived": [
+  {
+   "as_of_date": "2026-09-11",
+   "computed_at": "2026-09-11T04:31:40.036559Z",
+   "dims": {},
+   "formula_version": "1",
+   "id": "34a2009ea85bb400",
+   "input_observation_ids": [
+    "237e985e770d8c70",
+    "5f1df4e43db86382"
+   ],
+   "metric": "aa_frontier_price_per_point",
+   "obs_ids": [
+    "237e985e770d8c70",
+    "5f1df4e43db86382"
+   ],
+   "value": 0.005656324582338902,
+   "value_high": null,
+   "value_low": null
+  }
+ ],
+ "direction": null,
+ "direction_rule": {
+  "dead_band": 0.0006,
+  "higher_is": "concentrating",
+  "periods": 4,
+  "rationale": "Four price change-points; a move under $0.0006 per million tokens per index point (about a tenth of the 11 Sep 2026 level) is one model's repricing. Rising = labs keeping the surplus from capability gains."
+ },
+ "evidence": [],
+ "falsifying_band": null,
+ "fast_band": null,
+ "fits": [],
+ "flow_status": null,
+ "grade": "A",
+ "id": "model_price_per_intelligence_point",
+ "latest": {
+  "as_of": "2026-09-11",
+  "dims": {},
+  "obs_ids": [
+   "237e985e770d8c70",
+   "5f1df4e43db86382"
+  ],
+  "unit": "USD",
+  "value": 0.005656324582338902
+ },
+ "layer_id": "model",
+ "leading_lagging": "coincident",
+ "metric": "aa_frontier_price_per_point",
+ "metric_dims": {},
+ "n_observations": 2,
+ "name": "Price per unit of capability (cheapest near-frontier model, Artificial Analysis)",
+ "normal_band": null,
+ "override_note": null,
+ "points": [
+  {
+   "as_of": "2026-09-11",
+   "dims": {},
+   "obs_ids": [
+    "237e985e770d8c70",
+    "5f1df4e43db86382"
+   ],
+   "unit": "USD",
+   "value": 0.005656324582338902
+  }
+ ],
+ "proposed_status": "not_yet_measurable",
+ "proxy_types": [
+  "price"
+ ],
+ "published": true,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "model_price_per_horizon_hour",
+  "lab_run_rates"
+ ],
+ "related_metrics": [],
+ "related_predictions": [],
+ "series": [],
+ "series_keys": [],
+ "sparkline": [
+  {
+   "as_of": "2026-09-11",
+   "dims": {},
+   "obs_ids": [
+    "237e985e770d8c70",
+    "5f1df4e43db86382"
+   ],
+   "unit": "USD",
+   "value": 0.005656324582338902
+  }
+ ],
+ "stale_as_of": null,
+ "stale_ok": true,
+ "stale_reason": "Change-point series: a quiet month means prices held; fetch freshness is on /sources.",
+ "status": "not_yet_measurable",
+ "status_events": [
+  {
+   "author": "claude",
+   "created_at": "2026-09-11T04:31:08.837389Z",
+   "evidence_ids": [
+    "237e985e770d8c70",
+    "5f1df4e43db86382"
+   ],
+   "id": "0a2074360ec9df26",
+   "new_conf": 40,
+   "new_status": "not_yet_measurable",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "First price snapshot, 11 Sep 2026: the cheapest model in the top decile of the Artificial Analysis Intelligence Index, GLM-5.3 Flash (index 41.9, $0.237 per million blended tokens), costs about $0.0057 per million tokens per index point. The series records price change-points, so a direction needs four more of them; not yet measurable until then.",
+   "target_id": "model_price_per_intelligence_point",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": null,
+ "tracker_interpretation": "The series records price change-points from 11 September 2026; a direction needs several of them. The cheapest near-frontier model is often an open-weight one, so this reads the whole model layer, not only the frontier labs.",
+ "unit": "USD",
+ "unpublished_reason": null,
+ "updated_at": "2026-09-11",
+ "valve_measured": null,
+ "why_it_matters": "The same capture proxy as the METR-hour price on an independent capability axis that covers hundreds of models, refreshed daily. Falling means the surplus from better models is passed on; flat or rising means labs keep it."
+}

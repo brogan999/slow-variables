@@ -261,21 +261,24 @@ metrics:
       SELECT as_of_date, layer_id, sum(s * s) AS value, list(id ORDER BY id) AS obs_ids
       FROM (SELECT * FROM sh UNION ALL SELECT * FROM lab) GROUP BY 1, 2
   frontier_price_per_horizon_hour:
-    description: Cheapest available capability-hour - for each price date, the minimum over METR-measured models of OpenRouter prompt price (USD per million tokens) divided by the model's latest 50% time horizon in hours.
+    description: Cheapest available capability-hour - on each price change date, the minimum over METR-measured models of OpenRouter prompt price (USD per million tokens, each model's latest price carried forward) divided by the model's latest 50% time horizon in hours.
     rationale: Price per unit of capability is the lab layer's capture proxy (value-capture chat, section 2). Falling means surplus is passed to the application layer and users; flat or rising means labs keep it.
     grain: [as_of_date]
     unit: USD
     lead_lag: coincident
-    formula_version: 1
+    formula_version: 2
     inputs: ["openrouter.*.price_prompt_usd_per_mtok.pt", "metr.*.horizon_50.pt"]
-    caveats: List prices on one router, prompt tokens only; the horizon is METR's suite, not general capability; only models present in both datasets count; a price series starts on 10 Sep 2026 and records change points, so the trend needs months.
+    caveats: List prices on one router, prompt tokens only; the horizon is METR's suite, not general capability; only models present in both datasets count; a price series starts on 10 Sep 2026 and records change points, so the trend needs months; a delisted model's last price carries forward.
     sql: |
       WITH h AS (
         SELECT subject, arg_max(value_numeric, as_of_date) AS minutes, arg_max(id, as_of_date) AS hid
         FROM observations WHERE series_key LIKE 'metr.%.horizon_50.pt' AND NOT coalesce(disputed, false) GROUP BY subject),
-      p AS (SELECT subject, as_of_date, value_numeric AS usd, id FROM observations WHERE series_key LIKE 'openrouter.%.price_prompt_usd_per_mtok.pt')
-      SELECT p.as_of_date, min(p.usd / (h.minutes / 60)) AS value, list_distinct(flatten(list([p.id, h.hid]))) AS obs_ids
-      FROM p JOIN h USING (subject) GROUP BY p.as_of_date
+      p AS (SELECT subject, as_of_date, value_numeric AS usd, id FROM observations WHERE series_key LIKE 'openrouter.%.price_prompt_usd_per_mtok.pt' AND value_numeric > 0),
+      d AS (SELECT DISTINCT as_of_date FROM p),
+      cp AS (SELECT d.as_of_date, p.subject, arg_max(p.usd, p.as_of_date) AS usd, arg_max(p.id, p.as_of_date) AS pid
+             FROM d JOIN p ON p.as_of_date <= d.as_of_date GROUP BY 1, 2)
+      SELECT cp.as_of_date, min(cp.usd / (h.minutes / 60)) AS value, arg_min([cp.pid, h.hid], cp.usd / (h.minutes / 60)) AS obs_ids
+      FROM cp JOIN h USING (subject) GROUP BY cp.as_of_date
   venture_dollars:
     description: Primary-round dollars per calendar quarter and sub-layer. Form D amount sold (tier 4) where an entity files; Epoch's press-compiled equity rounds (tier 5) only for entity-quarters with no Form D row. Sub-layer from the entity's primary membership.
     rationale: The venture-flow strip and the concentration metrics start here (P1 §7 #8-#13). Filed amounts first; press only where filings are absent (most frontier labs raise via SPVs and offshore vehicles that never file).
@@ -569,17 +572,58 @@ metrics:
                  FROM observations WHERE series_key LIKE 'openrouter_rankings.%.tokens.d' AND value_numeric > 0)
       SELECT as_of_date, sum((v / tot) * (v / tot)) AS value, list(id) AS obs_ids FROM t GROUP BY as_of_date HAVING count(*) >= 5
   aa_frontier_intelligence_index:
-    description: Highest Artificial Analysis Intelligence Index among covered models on each date the value changed.
+    description: Highest Artificial Analysis Intelligence Index among models released on or before each date on which a new record was set (index rows are dated by model release).
     rationale: An independent, frequently refreshed capability axis to set beside METR's horizon.
     grain: [as_of_date]
     unit: index
     lead_lag: leading
-    formula_version: 1
+    formula_version: 2
     inputs: ["aa.*.intelligence_index.pt"]
-    caveats: The index composition changes between Artificial Analysis versions; compare within a version.
+    caveats: The index composition changes between Artificial Analysis versions and every model is re-scored on the current version, so the history is today's scores placed at release dates, not what was measured then.
     sql: |
-      SELECT as_of_date, max(value_numeric) AS value, list(id ORDER BY value_numeric DESC)[1:3] AS obs_ids
-      FROM observations WHERE series_key LIKE 'aa.%.intelligence_index.pt' GROUP BY as_of_date
+      WITH x AS (SELECT as_of_date, max(value_numeric) AS v, arg_max(id, value_numeric) AS id
+                 FROM observations WHERE series_key LIKE 'aa.%.intelligence_index.pt' GROUP BY 1)
+      SELECT as_of_date, v AS value, [id] AS obs_ids FROM x QUALIFY v >= max(v) OVER (ORDER BY as_of_date)
+  aa_frontier_price_per_point:
+    description: Cheapest near-frontier capability - on each price change date, the lowest Artificial Analysis blended price (USD per million tokens, 3:1 input to output, each model's latest price carried forward) divided by the model's Intelligence Index, among models in the top decile of the index.
+    rationale: Price per unit of capability at the frontier is the lab layer's capture proxy on an independent capability axis; falling means the surplus from better models passes to applications and users, flat or rising means labs keep it.
+    grain: [as_of_date]
+    unit: USD
+    lead_lag: coincident
+    formula_version: 1
+    inputs: ["aa.*.price_blended_usd_per_mtok.pt", "aa.*.intelligence_index.pt"]
+    caveats: List prices, not what large buyers pay; the top decile moves as Artificial Analysis adds and drops models; unpriced models are excluded; a delisted model's last price carries forward; the series starts on 10 Sep 2026 and records change points.
+    sql: |
+      WITH i AS (SELECT subject, arg_max(value_numeric, as_of_date) AS idx, arg_max(id, as_of_date) AS iid
+                 FROM observations WHERE series_key LIKE 'aa.%.intelligence_index.pt' AND value_numeric > 0 GROUP BY 1),
+      p AS (SELECT subject, as_of_date, value_numeric AS usd, id FROM observations
+            WHERE series_key LIKE 'aa.%.price_blended_usd_per_mtok.pt' AND value_numeric > 0),
+      d AS (SELECT DISTINCT as_of_date FROM p),
+      cp AS (SELECT d.as_of_date, p.subject, arg_max(p.usd, p.as_of_date) AS usd, arg_max(p.id, p.as_of_date) AS pid
+             FROM d JOIN p ON p.as_of_date <= d.as_of_date GROUP BY 1, 2),
+      j AS (SELECT cp.as_of_date, cp.usd / i.idx AS v, [cp.pid, i.iid] AS ids,
+                   percent_rank() OVER (PARTITION BY cp.as_of_date ORDER BY i.idx) AS pr FROM cp JOIN i USING (subject))
+      SELECT as_of_date, min(v) AS value, arg_min(ids, v) AS obs_ids FROM j WHERE pr >= 0.9 GROUP BY 1
+  aa_price_per_horizon_hour:
+    description: Cheapest capability-hour on Artificial Analysis prices - on each price change date, the lowest blended price (USD per million tokens, latest price carried forward) divided by the model's latest METR 50% time horizon in hours, across models in both datasets.
+    rationale: The same capture proxy as frontier_price_per_horizon_hour on a second price source with blended rather than prompt-only prices, so a move in one can be checked against the other.
+    grain: [as_of_date]
+    unit: USD
+    lead_lag: coincident
+    formula_version: 1
+    inputs: ["aa.*.price_blended_usd_per_mtok.pt", "metr.*.horizon_50.pt"]
+    caveats: Models are matched on METR's id with its "_inspect" suffix dropped, so only models named alike in both datasets count; list prices; METR's horizon is software tasks under its suite.
+    sql: |
+      WITH h AS (SELECT regexp_replace(subject, '_inspect$', '') AS subject, arg_max(value_numeric, as_of_date) AS minutes,
+                        arg_max(id, as_of_date) AS hid FROM observations
+                 WHERE series_key LIKE 'metr.%.horizon_50.pt' AND NOT coalesce(disputed, false) GROUP BY 1),
+      p AS (SELECT subject, as_of_date, value_numeric AS usd, id FROM observations
+            WHERE series_key LIKE 'aa.%.price_blended_usd_per_mtok.pt' AND value_numeric > 0),
+      d AS (SELECT DISTINCT as_of_date FROM p),
+      cp AS (SELECT d.as_of_date, p.subject, arg_max(p.usd, p.as_of_date) AS usd, arg_max(p.id, p.as_of_date) AS pid
+             FROM d JOIN p ON p.as_of_date <= d.as_of_date GROUP BY 1, 2)
+      SELECT cp.as_of_date, min(cp.usd / (h.minutes / 60)) AS value, arg_min([cp.pid, h.hid], cp.usd / (h.minutes / 60)) AS obs_ids
+      FROM cp JOIN h USING (subject) GROUP BY 1
   lab_vertical_integration_events_4q:
     description: Distinct acquisitions or acquihires by AI labs and hyperscalers of application, tooling or data companies announced in the trailing four quarters, counted from the acquisition ledger (one per acquirer-target pair) at each quarter end.
     rationale: The exit bell for the application layer rings when labs buy the layer above them; a rising count is vertical integration, the capture thesis's clearest signal.
