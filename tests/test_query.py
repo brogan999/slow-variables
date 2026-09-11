@@ -100,13 +100,18 @@ def test_sql_tool_cannot_read_files_the_network_or_raw_rows():
         "SELECT * FROM glob('*')",
     ]:
         assert "Permission Error" in t.sql(q).get("error", ""), q
-    for q in [
+    for q in [  # every spelling of the raw table fails: the SQL database does not contain it
         "SELECT * FROM observation_all",
         'SELECT * FROM "OBSERVATION_ALL"',
         "SELECT * FROM query('SELECT * FROM observation' || '_all')",
-        "SELECT * FROM query_table('observations')",
+        """SELECT count(*) FROM "query"('SELECT * FROM observation'||'_all')""",
+        "SELECT count(*) FROM query/**/('SELECT * FROM observation'||'_all')",
+        "SELECT * FROM json_execute_serialized_sql(json_serialize_sql('SELECT * FROM observation'||'_all'))",
     ]:
-        assert "raw table" in t.sql(q).get("error", ""), q
+        assert "error" in t.sql(q), q
+    n = s.con.execute("SELECT count(*) FROM observations").fetchone()[0]
+    assert t.sql("SELECT count(*) FROM observations")["rows"] == [[n]]
+    assert t.sql("SELECT count(*) FROM venture_rounds")["rows"][0][0] > 0
     assert "error" in t.sql(
         "SELECT getenv('QUERY_TOKEN')"
     )  # a DuckDB upgrade that adds getenv must fail here
@@ -115,8 +120,9 @@ def test_sql_tool_cannot_read_files_the_network_or_raw_rows():
         "RESET enable_external_access",
         "SET lock_configuration = false",
     ]:
-        with pytest.raises(duckdb.Error):
-            s.con.execute(q)
+        for con in (s.con, t.pub):
+            with pytest.raises(duckdb.Error):
+                con.execute(q)
     Tools(s)  # a second Tools on a locked store must not raise
     assert t.sql("SELECT count(*) AS n FROM observations")["rows"][0][0] > 0
 
@@ -206,13 +212,14 @@ def test_audit_pull_appends_only_new_rows_and_only_the_audit_keys(tmp_path, monk
     (tmp_path / "query_log.jsonl").write_text(json.dumps({"time": "2026-09-10T00:00:00+00:00"}) + "\n")
     rows = [
         {"time": "2026-09-09T00:00:00+00:00", "status": "ok"},
-        {"time": "2026-09-11T00:00:00+00:00", "status": "ok", "usd": 0.01, "tools": 2, "cites": ["obs:a"],
+        {"time": "2026-09-11T00:00:00+00:00", "status": "ok", "usd": 0.01, "tools": 2, "cites": ["obs:0123456789abcdef", "obs:my-secret.example.com", "ind:metr_horizon_50", "ind:hello_secret"],
          "model": "m", "prompt_version": "2", "question": "must not land"},
     ]
     monkeypatch.setattr(httpx, "get", lambda *a, **k: NS(raise_for_status=lambda: None, json=lambda: {"rows": rows}))
     assert cli.cmd_audit_pull(NS()) == 0
     lines = (tmp_path / "query_log.jsonl").read_text().splitlines()
     assert len(lines) == 2 and "must not land" not in lines[1] and json.loads(lines[1])["status"] == "ok"
+    assert json.loads(lines[1])["cites"] == ["obs:0123456789abcdef", "ind:metr_horizon_50"]
     monkeypatch.setattr(httpx, "get", lambda *a, **k: (_ for _ in ()).throw(httpx.ConnectError("down")))
     assert cli.cmd_audit_pull(NS()) == 0  # an unreachable service never fails the nightly
 
@@ -232,3 +239,23 @@ def test_citecheck_reads_a_written_date_as_a_date():
         r = check(text, rec)
         assert r.ok and r.numbers == ["$902.9B"], (text, r.failures)
     assert not check("Revenue rose 17 percent in May [obs:a].", rec).ok  # a bare number is still a claim
+
+
+def test_store_reads_agree_across_threads():
+    from concurrent.futures import ThreadPoolExecutor
+
+    s = st.Store()
+    n = len(s.observations("*"))
+    with ThreadPoolExecutor(4) as ex:  # the query service answers each request on its own thread
+        counts = list(ex.map(lambda _: len(s.observations("*")), range(24)))
+    assert set(counts) == {n}
+
+
+def test_a_citation_token_that_resolves_to_no_record_never_reaches_the_audit_row():
+    s = st.Store()
+    t = Tools(s)
+    oid = s.con.execute("SELECT id FROM observations LIMIT 1").fetchone()[0]
+    text = f"Noted [obs:my-secret.example.com] and [obs:{oid}]."  # a visitor can make the model echo anything
+    res = ask(s, "q", t, ScriptClient([text]))
+    assert res["audit"]["cites"] == [f"obs:{oid}"] and [c["id"] for c in res["citations"]] == [oid]
+    assert "secret" not in json.dumps(res["audit"])

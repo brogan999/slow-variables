@@ -6,6 +6,7 @@ import argparse
 import json
 import logging
 import os
+import re
 import sys
 from datetime import date, datetime, timezone
 
@@ -283,12 +284,11 @@ def _check(s: st.Store) -> tuple[list[str], list[str]]:
         tag = ind.leading_lagging.value if ind.leading_lagging else None
         if not ind.published and (not tag or not (ind.timing_rationale or "").lower().startswith(tag + ":")):
             errors.append(f"{ind.id}: no timing_rationale that opens with its tag ({tag})")
-    pairs = {(c.bucket_id, c.layer_id) for c in s.seed.crosswalk}
+    shared = {i for c in s.seed.crosswalk for i in c.shared_indicators}  # the same match /crosswalk renders
     for ind in s.seed.indicators:  # v2 §0/§10: a shared indicator's two addresses need a crosswalk row
-        if ind.bucket_id and ind.layer_id and (ind.bucket_id, ind.layer_id) not in pairs:
-            errors.append(
-                f"{ind.id}: addressed to {ind.bucket_id} and {ind.layer_id}, which no crosswalk row joins"
-            )
+        if ind.bucket_id and ind.layer_id and ind.id not in shared:
+            where = f"{ind.layer_id}/{ind.sublayer_id}" if ind.sublayer_id else ind.layer_id
+            errors.append(f"{ind.id}: addressed to {ind.bucket_id} and {where}, which no crosswalk row joins")
     for r in s._ledger():  # entity writes go through seed/entities.yaml: every ledger party must resolve
         for p in r["parties"]:
             if not p["entity_id"]:
@@ -424,9 +424,16 @@ def cmd_audit_pull(a: argparse.Namespace) -> int:
     lines = path.read_text().splitlines() if path.exists() else []
     last = max((json.loads(x)["time"] for x in lines if x.strip()), default="")
     new = sorted((x for x in rows if x["time"] > last), key=lambda x: x["time"])
+    # this file is public: a cite that is not shaped like a ledger id, or names no indicator, never lands
+    inds = {i.id for i in st.Seed.load().indicators}
+    ok = re.compile(r"(obs|derived|event):[0-9a-f]{16}|derived:fit-[0-9a-f]{12}|ind:[a-z0-9_]+")
     with path.open("a") as f:
         for x in new:
-            f.write(json.dumps({k: x.get(k) for k in AUDIT_KEYS}, sort_keys=True) + "\n")
+            row = {k: x.get(k) for k in AUDIT_KEYS}
+            row["cites"] = [
+                c for c in row["cites"] or [] if ok.fullmatch(c) and (not c.startswith("ind:") or c[4:] in inds)
+            ]
+            f.write(json.dumps(row, sort_keys=True) + "\n")
     print(f"audit: {len(new)} new answer records")
     return 0
 

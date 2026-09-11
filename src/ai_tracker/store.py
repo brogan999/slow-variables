@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import csv
 import json
+import math
+import threading
 from collections import Counter
 from dataclasses import dataclass, field
 from datetime import date, datetime, timezone
@@ -201,6 +203,8 @@ def append_observations(source_id: str, rows: list[Observation]) -> int:
     for o in rows:
         if o.id in own:  # a corrected annotation rewrites only flag fields: never value, snippet, URL or id
             d, cur = dump(o), own[o.id]
+            if cur.get("review_status") == Review.rejected.value:
+                continue  # withdrawn in place: its dispute text is the public reason and stays
             if any(cur.get(k) != d.get(k) for k in FLAG_FIELDS):
                 cur.update({k: d.get(k) for k in FLAG_FIELDS})
                 touched = True
@@ -248,7 +252,8 @@ def approve_pending(reviewer: str = "merge") -> int:
 class Store:
     def __init__(self, seed: Seed | None = None) -> None:
         self.seed = seed or Seed.load()
-        self.con = duckdb.connect()
+        self._db = duckdb.connect()
+        self._local = threading.local()
         cols = ", ".join(f"'{k}': '{v}'" for k, v in OBS_COLUMNS.items())
         files = sorted(OBS.glob("*.jsonl"))
         if files:
@@ -284,6 +289,16 @@ class Store:
         self.events = [StatusEvent(**r) for r in read_jsonl(DATA / "status_events.jsonl")]
         self.fetchlog = [FetchLog(**r) for r in read_jsonl(DATA / "fetchlog.jsonl")]
         self.semantic_tables()
+
+
+    @property
+    def con(self) -> duckdb.DuckDBPyConnection:
+        """This thread's cursor on the store's database. One DuckDB connection is not safe to share across
+        threads, and the query service answers each request on its own thread; a cursor per thread is."""
+        c = getattr(self._local, "con", None)
+        if c is None:
+            c = self._local.con = self._db.cursor()
+        return c
 
     def semantic_tables(self) -> None:
         """DuckDB tables for the query layer: derived, status_events, indicators, metrics. Re-run after derived changes."""
@@ -1198,16 +1213,14 @@ class Store:
             )
 
     def _layer_venture(self, layer_id: str) -> dict[str, Any] | None:
-        """Trailing-four-quarter equity dollars at the latest complete quarter, the same a year earlier, the arrow
-        (±10% [judgement]) and each sub-layer's figure for the ticks."""
-        rows = [
-            d
-            for d in self.derived_for("venture_dollars_4q", {"layer_id": layer_id})
-            if d.as_of_date <= date.today()
-        ]
+        """Trailing-four-quarter equity dollars at the latest quarter the venture data covers, the same a year
+        earlier, the arrow (±10% [judgement]) and each sub-layer's figure for the ticks. A layer with no rounds in
+        that window reads "none on file" (value None), never its last non-empty figure."""
+        every = [d for d in self.derived_for("venture_dollars_4q") if d.as_of_date <= date.today()]
+        rows = [d for d in every if d.dims["layer_id"] == layer_id]
         if not rows:
             return None
-        latest = max(d.as_of_date for d in rows)
+        latest, first = max(d.as_of_date for d in every), min(d.as_of_date for d in every)
 
         def at(day: date, sub: str) -> Derived | None:
             return next((d for d in rows if d.as_of_date == day and d.dims["sublayer_id"] == sub), None)
@@ -1215,12 +1228,14 @@ class Store:
         def pt(d: Derived) -> dict[str, Any]:
             return {"value": d.value, "as_of": d.as_of_date.isoformat(), "obs_ids": d.input_observation_ids}
 
-        now = at(latest, "all")
-        prior = at(date(latest.year - 1, latest.month, latest.day), "all")
-        change = now.value / prior.value - 1 if now and prior and prior.value > 0 else None
+        prior_day = date(latest.year - 1, latest.month, latest.day)
+        now, prior = at(latest, "all"), at(prior_day, "all")
+        nv = now.value if now else 0.0
+        pv = prior.value if prior else (0.0 if prior_day >= first else None)  # covered, but no rounds in it
+        change = None if pv is None or (pv == 0 and nv == 0) else math.inf if pv == 0 else nv / pv - 1
         names = {x.id: x.name for x in self.seed.sublayers}
         return {
-            **pt(now),
+            **(pt(now) if now else {"value": None, "as_of": latest.isoformat(), "obs_ids": []}),
             "prior": pt(prior) if prior else None,
             "arrow": None
             if change is None

@@ -8,7 +8,11 @@ from html.parser import HTMLParser
 # Agent-addressing forms only: a sentence that talks *to* a model. Ordinary prose about agents ("a benchmark for AI
 # agents", a paper titled "... for LLM Agents") is evidence and must survive.
 AGENT_RE = re.compile(
-    r"(?i)(\b(ignore|disregard) (all |any |the )?(previous|prior|above|earlier) (instructions|prompts?|messages?)"
+    r"(?i)(\b(ignore|disregard) ((all|any|the|your) )*(previous|prior|above|earlier) (instructions|prompts?|messages?)"
+    r"|^\s*to (any |all |every )?(ai|llms?|language models?)( agents?| assistants?| crawlers?| models?| systems?)?"
+    r"( reading this( page)?)?\s*[:!,-]"
+    r"|^\s*(ai|llms?|language models?)( agents?| assistants?| crawlers?| models?| systems?)?\s*:\s*"
+    r"(disregard|ignore|rank|recommend|summari[sz]e|say|praise|index|always|never|do not|don't)\b"
     r"|\byou are (now )?an? (ai|llm|language model|assistant|chatbot)\b"
     r"|\bif you are an? (ai|llm|language model|assistant|agent|crawler|bot)\b"
     r"|\b(attention|note|message|instructions?)( to| for)? (any |all )?(ai|llms?|language models?)( agents?| assistants?| crawlers?| models?| systems?)?\s*[:!,-]"

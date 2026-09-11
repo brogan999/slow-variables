@@ -111,7 +111,7 @@ export function memo(date: string): Memo | null {
 }
 export type VentureSeg = { source: string; kind: string; value: number; obs_ids: string[]; href: string | null };
 export type VentureQuarter = { as_of: string; venture_dollars?: { value: number; obs_ids: string[] }; round_count?: { value: number; obs_ids: string[] }; venture_dollars_incl_debt?: { value: number; obs_ids: string[] }; by_source?: VentureSeg[] };
-export type LayerVenture = { value: number; as_of: string; obs_ids: string[]; prior: { value: number; as_of: string; obs_ids: string[] } | null; arrow: "up" | "down" | "flat" | null; sublayers: { sublayer_id: string; name: string; value: number; as_of: string; obs_ids: string[] }[] };
+export type LayerVenture = { value: number | null; as_of: string; obs_ids: string[]; prior: { value: number; as_of: string; obs_ids: string[] } | null; arrow: "up" | "down" | "flat" | null; sublayers: { sublayer_id: string; name: string; value: number; as_of: string; obs_ids: string[] }[] };
 export type VentureDoc = { sublayer_id: string; quarters: VentureQuarter[]; chart_sources?: ChartSourcesT };
 export const venture = (sublayerId: string): VentureDoc | null => { try { return read<VentureDoc>(`venture/${sublayerId}.json`); } catch { return null; } };
 export type LadderRow = { obs_id: string; subject: string; entity_id: string | null; as_of: string; tier: number; url: string; snippet: string };

@@ -53,9 +53,10 @@ const ARROW = { up: ["↑", "up"], down: ["↓", "down"], flat: ["→", "flat"] 
 // Capital-flow direction: trailing four quarters of equity rounds against the same a year earlier (±10%, set in the export).
 function VentureArrow({ v }: { v: LayerVenture }) {
   const [glyph, word] = v.arrow ? ARROW[v.arrow] : ["", ""];
+  const now = v.value === null ? "no primary rounds on file" : fmt(v.value, "USD");
   return (
-    <Link href="/query#venture_dollars_4q" className="hover:text-ink tabular-nums" title={v.prior ? `${fmt(v.value, "USD")} in the four quarters to ${v.as_of}; ${fmt(v.prior.value, "USD")} a year earlier` : `${fmt(v.value, "USD")} in the four quarters to ${v.as_of}`}>
-      {glyph ? <span aria-hidden>{glyph} </span> : null}venture {fmt(v.value, "USD")} 4Q{word ? <span className="sr-only">, {word} on a year earlier</span> : null}
+    <Link href="/query#venture_dollars_4q" className="hover:text-ink tabular-nums" title={v.prior ? `${now} in the four quarters to ${v.as_of}; ${fmt(v.prior.value, "USD")} a year earlier` : `${now} in the four quarters to ${v.as_of}`}>
+      {glyph ? <span aria-hidden>{glyph} </span> : null}venture {v.value === null ? "none on file" : fmt(v.value, "USD")} 4Q{word ? <span className="sr-only">, {word} on a year earlier</span> : null}
     </Link>
   );
 }
