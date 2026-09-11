@@ -1,4 +1,7 @@
 {
+ "answers": [
+  "Who keeps it: Compute & physical / Hyperscalers"
+ ],
  "band_input": "metric:neocloud_weighted_facility_rate",
  "band_rationale": null,
  "band_value": {
@@ -28,6 +31,15 @@
   ]
  },
  "confidence": 60,
+ "confidence_basis": {
+  "best_tier": 4,
+  "grade": "A",
+  "n_observations": 12,
+  "sources": [
+   "SEC EDGAR filings (8-K, 6-K, 10-Q exhibits)"
+  ],
+  "stale_as_of": null
+ },
  "counterevidence": "Effective rates mix vintages and hedges; an unweighted average overstates small facilities; one filer with facility-level disclosure.",
  "crosswalk": [],
  "definition": "Average effective interest rate CoreWeave reports on its delayed-draw term-loan facilities at each quarter end (derived metric neocloud_weighted_facility_rate over the 10-Q debt table), with the stated spreads, total indebtedness and Nebius's convertible terms shown alongside.",
@@ -113,6 +125,7 @@
    "value": 0.105
   }
  ],
+ "prediction_rows": [],
  "proposed_status": "not_yet_measurable",
  "proxy_types": [
   "capital_flow",

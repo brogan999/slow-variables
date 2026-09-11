@@ -20,6 +20,7 @@ export function IndicatorCard({ c, obsIndex }: { c: Card; obsIndex: Record<strin
         {c.stale_as_of ? <span className="text-slow">stale as of {c.stale_as_of}</span> : null}
         <PendingNote p={c.pending} />
       </div>
+      {c.answers?.length ? <p className="text-xs text-muted">{c.answers.join(" · ")}</p> : null}
       {!c.published && c.unpublished_reason ? <p className="text-xs text-ink-2">Unpublished: {c.unpublished_reason}</p> : null}
       <div className="flex items-end justify-between gap-3">
         <div className="text-lg"><Num p={c.latest} unit={c.unit} obsIndex={obsIndex} /></div>

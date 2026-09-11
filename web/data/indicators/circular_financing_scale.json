@@ -1,4 +1,7 @@
 {
+ "answers": [
+  "Who keeps it: Compute & physical"
+ ],
  "band_input": "metric:circular_commitments_total",
  "band_rationale": null,
  "band_value": {
@@ -80,6 +83,21 @@
   ]
  },
  "confidence": 75,
+ "confidence_basis": {
+  "best_tier": 4,
+  "grade": "A",
+  "n_observations": 14,
+  "sources": [
+   "About Amazon company news",
+   "Anthropic newsroom",
+   "CNBC",
+   "NVIDIA Newsroom",
+   "Official Microsoft Blog",
+   "SEC EDGAR filings (8-K, 6-K, 10-Q exhibits)",
+   "SiliconANGLE"
+  ],
+  "stale_as_of": null
+ },
  "counterevidence": "Commitments are not cash; \"up to\" amounts and ten-year floors are counted at face; equity in a customer is only circular if the customer spends it with the investor.",
  "crosswalk": [],
  "definition": "Cumulative signed vendor-financing commitments between AI-stack suppliers and their lab customers (equity stakes, guarantees, take-or-pay contracts, backstops), from filings and company announcements; derived metric circular_commitments_total. Letters of intent, talks and self-reported aggregates are on the ledger but excluded from the total.",
@@ -427,6 +445,44 @@
    ],
    "unit": "USD",
    "value": 902900000000.0
+  }
+ ],
+ "prediction_rows": [
+  {
+   "claimant": "Dario Amodei",
+   "id": "amodei_trillions_before_2030",
+   "ledger": "lab",
+   "status": "emerging"
+  },
+  {
+   "claimant": "Dario Amodei",
+   "id": "anthropic_10x_per_year",
+   "ledger": "lab",
+   "status": "ahead"
+  },
+  {
+   "claimant": "David Cahn (Sequoia Capital)",
+   "id": "cahn_600b_question",
+   "ledger": "capture",
+   "status": "emerging"
+  },
+  {
+   "claimant": "David Cahn",
+   "id": "cahn_1_5t_question",
+   "ledger": "capture",
+   "status": "emerging"
+  },
+  {
+   "claimant": "Bain & Company (Global Technology Report 2025)",
+   "id": "bain_2t_revenue_2030",
+   "ledger": "capture",
+   "status": "not_yet_testable"
+  },
+  {
+   "claimant": "Tomasz Tunguz",
+   "id": "tunguz_12x_infra_per_revenue",
+   "ledger": "capture",
+   "status": "emerging"
   }
  ],
  "proposed_status": "concentrating",

@@ -1,4 +1,8 @@
 {
+ "answers": [
+  "Bucket: Methods",
+  "Who keeps it: Model"
+ ],
  "band_input": "metric:horizon_doubling_days_80_since_2024",
  "band_rationale": "Same bands and same 2024-onward window as the 50% horizon, applied to our own fit because METR publishes doubling times for the 50% series only. The 2023-onward fit (horizon_doubling_days_80) sits in the gap between the bands.",
  "band_value": {
@@ -50,6 +54,15 @@
   ]
  },
  "confidence": 70,
+ "confidence_basis": {
+  "best_tier": 1,
+  "grade": "A",
+  "n_observations": 26,
+  "sources": [
+   "METR time horizons (v1.1)"
+  ],
+  "stale_as_of": null
+ },
  "counterevidence": "Our fit has no confidence interval and excludes points METR marks unreliable; the 2023-onward window gives ~125 days, which would read `emerging`. The 80% horizon is still an order of magnitude below the 50% horizon, which is the reliability gap the products bucket has to close.",
  "crosswalk": [
   {
@@ -620,6 +633,50 @@
    "subject": "claude_mythos_preview_early_inspect",
    "unit": "minutes",
    "value": 185.911829
+  }
+ ],
+ "prediction_rows": [
+  {
+   "claimant": "OpenAI",
+   "id": "openai_research_intern_sep_2026",
+   "ledger": "lab",
+   "status": "emerging"
+  },
+  {
+   "claimant": "OpenAI",
+   "id": "openai_automated_researcher_mar_2028",
+   "ledger": "lab",
+   "status": "not_yet_testable"
+  },
+  {
+   "claimant": "Dario Amodei",
+   "id": "amodei_swe_end_to_end_6_12mo",
+   "ledger": "lab",
+   "status": "behind"
+  },
+  {
+   "claimant": "Dario Amodei",
+   "id": "amodei_country_of_geniuses_1_2y",
+   "ledger": "lab",
+   "status": "not_yet_testable"
+  },
+  {
+   "claimant": "AI Futures Project (Kokotajlo, Lifland, Jurkovic et al.)",
+   "id": "ai2027_horizon_doubling_4mo",
+   "ledger": "ai2027",
+   "status": "on_track"
+  },
+  {
+   "claimant": "AI Futures Project (Kokotajlo, Lifland, Jurkovic et al.)",
+   "id": "ai2027_80pct_years_by_mar_2027",
+   "ledger": "ai2027",
+   "status": "behind"
+  },
+  {
+   "claimant": "AI Futures Project",
+   "id": "ai2027_superhuman_coder_2027",
+   "ledger": "ai2027",
+   "status": "not_yet_testable"
   }
  ],
  "proposed_status": "faster_than_normal",

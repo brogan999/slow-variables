@@ -1,4 +1,7 @@
 {
+ "answers": [
+  "Who keeps it: Training input"
+ ],
  "band_input": "metric:lab_procurement_signal_4q",
  "band_rationale": null,
  "band_value": {
@@ -54,6 +57,19 @@
   ]
  },
  "confidence": 30,
+ "confidence_basis": {
+  "best_tier": 5,
+  "grade": "C",
+  "n_observations": 5,
+  "sources": [
+   "CNBC",
+   "Dealroom news",
+   "Sacra company pages (free summaries)",
+   "TechCrunch",
+   "The AI Insider"
+  ],
+  "stale_as_of": null
+ },
  "counterevidence": "Scores are hand-coded from quoted text; vendors announce selectively and the labs rarely confirm; lab compute commitments are on the circular ledger and excluded here, so the bell reads data and environments, not compute.",
  "crosswalk": [],
  "definition": "Sum over training-input vendors of each vendor's best procurement score in the trailing four quarters, at quarter ends. Rubric: 1 a lab named as customer; 2 revenue or growth attributed to lab demand; 3 a disclosed lab contract or commitment of at least $100M. Derived metric lab_procurement_signal_4q.",
@@ -306,6 +322,7 @@
    "value": 3.0
   }
  ],
+ "prediction_rows": [],
  "proposed_status": "not_yet_measurable",
  "proxy_types": [
   "capital_flow",

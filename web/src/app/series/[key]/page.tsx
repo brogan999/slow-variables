@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { QueryThis } from "@/components/QueryThis";
 import { Grade } from "@/components/StatusChip";
 import { fmt, series, seriesKeys } from "@/lib/data";
 
@@ -24,6 +25,7 @@ export default async function SeriesPage({ params }: { params: Promise<{ key: st
           {s.source ? <>Source: <a href={s.source.url} className="underline decoration-grid underline-offset-4">{s.source.name}</a> ({s.source.org}) · {s.source.license}</> : "Source unknown"} · <a href={`/data/${s.series_key}.csv`} className="underline decoration-grid underline-offset-4">CSV</a>
         </p>
         {s.source?.attribution ? <p className="text-xs text-muted mt-1">{s.source.attribution}</p> : null}
+        <div className="mt-3"><QueryThis seriesKey={s.series_key} /></div>
       </div>
       {s.observations.length === 0 ? <p className="text-sm text-ink-2">No live rows: every row in this series was withdrawn.</p> : null}
       <div className="overflow-x-auto" hidden={s.observations.length === 0}>

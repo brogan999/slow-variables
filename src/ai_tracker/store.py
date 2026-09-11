@@ -501,6 +501,20 @@ class Store:
                 "chart_sources": self._chart_sources(
                     [i for p in self.headline(ind) for i in p["obs_ids"]], ind.metric
                 ),
+                "confidence_basis": {
+                    **self._confidence_basis(ind),
+                    "stale_as_of": cards[ind.id]["stale_as_of"],
+                },
+                "prediction_rows": [
+                    {
+                        "id": p.id,
+                        "claimant": p.claimant,
+                        "ledger": p.ledger,
+                        "status": (pe.new_status if (pe := self.current(p.id)) else None),
+                    }
+                    for p in self.seed.predictions
+                    if p.published and ind.id in p.related_indicators
+                ],
                 "derived": [
                     {**dump(d), "obs_ids": d.input_observation_ids}
                     for d in self.derived_for(ind.metric, ind.metric_dims)
@@ -766,7 +780,40 @@ class Store:
             "stale_reason": ind.stale_reason,
             "pending": self._awaiting().get(ind.id),
             "n_observations": len(self.evidence_obs(ind)),
+            "answers": self._answers(ind),
         }
+
+    def _confidence_basis(self, ind: Indicator) -> dict[str, Any]:
+        """What the confidence number rests on, computed here so the page only lists it (v2 §4.2 L2)."""
+        obs = self.evidence_obs(ind)
+        names = {x.id: x.name for x in self.seed.sources}
+        tiers = [Tier(o["tier"]) for o in obs]
+        return {
+            "grade": _grade(min(tiers)) if tiers else None,
+            "best_tier": int(min(tiers)) if tiers else None,
+            "sources": sorted({names.get(o["source_id"], o["source_id"]) for o in obs}),
+            "n_observations": len(obs),
+        }
+
+    def _answers(self, ind: Indicator) -> list[str]:
+        """v2 §4.2 L1: the one line a card carries on which valve or which capture question it answers."""
+        valves = {v["id"]: v["name"] for v in VALVES}
+        buckets = {b.id: b.name for b in self.seed.buckets}
+        layers = {x.id: x.name for x in self.seed.layers}
+        subs = {x.id: x.name for x in self.seed.sublayers}
+        out = []
+        if ind.bucket_id:
+            out.append(
+                f"Valve: {valves[ind.valve_measured]}"
+                if ind.valve_measured in valves
+                else f"Bucket: {buckets.get(ind.bucket_id, ind.bucket_id)}"
+            )
+        if ind.layer_id:
+            where = layers.get(ind.layer_id, ind.layer_id) + (
+                f" / {subs[ind.sublayer_id]}" if ind.sublayer_id in subs else ""
+            )
+            out.append(f"Who keeps it: {where}")
+        return out
 
     def _awaiting(self) -> dict[str, dict[str, str]]:
         """Crossings the evaluator proposed that wait for a human reason: shown on the card as the override note."""

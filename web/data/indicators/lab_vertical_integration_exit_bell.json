@@ -1,4 +1,7 @@
 {
+ "answers": [
+  "Who keeps it: Model / Frontier labs"
+ ],
  "band_input": "metric:lab_vertical_integration_events_4q",
  "band_rationale": null,
  "band_value": {
@@ -68,6 +71,22 @@
   ]
  },
  "confidence": 55,
+ "confidence_basis": {
+  "best_tier": 4,
+  "grade": "A",
+  "n_observations": 20,
+  "sources": [
+   "About Amazon company news",
+   "Anthropic newsroom",
+   "CNBC",
+   "CoreWeave newsroom",
+   "Fortune",
+   "SEC EDGAR filings (8-K, 6-K, 10-Q exhibits)",
+   "Stripe newsroom",
+   "TechCrunch"
+  ],
+  "stale_as_of": null
+ },
  "counterevidence": "The ledger holds what the press and filings announce; undisclosed prices count as events; Stripe is a payments company, in the ledger because OpenRouter is a routing layer.",
  "crosswalk": [],
  "definition": "Distinct acquisitions or acquihires by AI labs and hyperscalers of application, tooling, data or infrastructure companies announced in the trailing four quarters, derived metric lab_vertical_integration_events_4q over the acquisition ledger (acq.<acquirer>.<target>.pt rows, each with a fetched announcement).",
@@ -388,6 +407,7 @@
    "value": 9.0
   }
  ],
+ "prediction_rows": [],
  "proposed_status": "concentrating",
  "proxy_types": [
   "capital_flow",

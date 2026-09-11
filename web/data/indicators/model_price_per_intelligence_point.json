@@ -1,4 +1,7 @@
 {
+ "answers": [
+  "Who keeps it: Model"
+ ],
  "band_input": "metric:aa_frontier_price_per_point",
  "band_rationale": null,
  "band_value": {
@@ -26,6 +29,15 @@
   ]
  },
  "confidence": 40,
+ "confidence_basis": {
+  "best_tier": 1,
+  "grade": "A",
+  "n_observations": 2,
+  "sources": [
+   "Artificial Analysis API (Intelligence Index, blended price, speed)"
+  ],
+  "stale_as_of": null
+ },
  "counterevidence": "List prices, not the committed-use prices large buyers pay; the Intelligence Index is re-based between Artificial Analysis versions; the top decile moves as models are added and dropped; unpriced models are excluded.",
  "crosswalk": [],
  "definition": "On each price change date, the lowest Artificial Analysis blended list price (USD per million tokens, 3:1 input to output) divided by the model's Intelligence Index, among models in the top decile of the index. Derived metric aa_frontier_price_per_point.",
@@ -95,6 +107,7 @@
    "value": 0.005656324582338902
   }
  ],
+ "prediction_rows": [],
  "proposed_status": "not_yet_measurable",
  "proxy_types": [
   "price"

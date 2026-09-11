@@ -1,4 +1,7 @@
 {
+ "answers": [
+  "Who keeps it: Compute & physical / Hyperscalers"
+ ],
  "band_input": "metric:hhi_by_layer",
  "band_rationale": null,
  "band_value": {
@@ -27,6 +30,15 @@
   ]
  },
  "confidence": 60,
+ "confidence_basis": {
+  "best_tier": 4,
+  "grade": "A",
+  "n_observations": 18,
+  "sources": [
+   "SEC EDGAR 10-Q/10-K XBRL instances (segment data)"
+  ],
+  "stale_as_of": null
+ },
  "counterevidence": "Partial coverage overstates concentration; Microsoft's segment is not pure cloud; quarters where any filer's segment is missing are dropped.",
  "crosswalk": [],
  "definition": "Herfindahl index of segment revenue between AWS, Google Cloud and Microsoft Intelligent Cloud, per calendar quarter, from filed segment disclosures. Derived metric hhi_by_layer, cloud slice.",
@@ -288,6 +300,7 @@
    "value": 0.3541300505045857
   }
  ],
+ "prediction_rows": [],
  "proposed_status": "dispersing",
  "proxy_types": [
   "market_structure"

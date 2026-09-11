@@ -163,6 +163,13 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
 
       <Section n={num("confidence")} id="confidence" title="Confidence">
         <p><span className="num text-3xl">{d.confidence ?? "—"}</span><span className="text-muted"> / 95 — {RUBRIC(d.confidence)}</span></p>
+        {d.confidence_basis ? (
+          <p className="mt-2 text-sm text-ink-2">
+            Rests on {d.confidence_basis.n_observations} observation{d.confidence_basis.n_observations === 1 ? "" : "s"} from {d.confidence_basis.sources.join(", ") || "no source"}
+            {d.confidence_basis.best_tier ? <>; best evidence tier {d.confidence_basis.best_tier}, grade {d.confidence_basis.grade}</> : null}
+            {d.confidence_basis.stale_as_of ? <>; stale since {d.confidence_basis.stale_as_of}</> : <>; current</>}.
+          </p>
+        ) : null}
         <p className="mt-1 text-xs text-muted">Confidence is independent of status: 90–95 multiple strong independent sources; 70–89 good evidence, some ambiguity; 50–69 mixed or hard to operationalise; below 50 limited or vague.</p>
       </Section>
 
@@ -170,6 +177,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
         <ul className="text-sm flex flex-col gap-1">
           {d.related_indicators.map((r) => { const c = indicators.find((i) => i.id === r); return <li key={r}><Link href={indicatorHref(r, c?.published)} className="hover:underline">{c?.name ?? r}</Link> <StatusChip status={c?.published ? c.status : null} /></li>; })}
           {d.related_bottlenecks.length ? <li className="text-ink-2">Bottlenecks {d.related_bottlenecks.map((n, i) => <span key={n}>{i ? ", " : ""}<Link href={`/bottlenecks#b${n}`} className="hover:underline">#{n}</Link></span>)} <span className="text-muted">(Narayanan &amp; Kapoor&apos;s list)</span></li> : null}
+          {d.prediction_rows?.map((p) => <li key={p.id} className="text-ink-2">Prediction: <Link href={`/predictions#${p.id}`} className="hover:underline">{p.claimant}</Link> <span className="text-muted">({p.ledger === "nk" ? "Narayanan and Kapoor" : p.ledger === "ai2027" ? "AI 2027" : p.ledger === "lab" ? "lab timelines" : "capture theses"})</span> <StatusChip status={p.status} /></li>)}
           {d.crosswalk.map((c, i) => <li key={i} className="text-ink-2">Crosswalk: <Link href={`/buckets/${c.bucket_id}`} className="hover:underline">{buckets.find((b) => b.id === c.bucket_id)?.name}</Link> ⇄ <Link href={`/layers/${c.layer_id}`} className="hover:underline">{layers.find((l) => l.id === c.layer_id)?.name}</Link> <span className="text-muted">({words(c.relation)})</span></li>)}
         </ul>
       </Section>
