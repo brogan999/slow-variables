@@ -173,6 +173,10 @@ def cmd_evaluate(a: argparse.Namespace) -> int:
             f"{ind.id}: input={value!r} as_of={as_of} tier={int(tier)} -> {new} (current: {old})"
             + (" [capped: single non-primary source]" if capped else "")
         )
+        if ind.override_note:  # v2 §10: a status held by a published override note is never re-proposed
+            proposed = [p for p in proposed if p["target_id"] != ind.id]
+            lines.append(f"  held by its override note: {ind.override_note}")
+            continue
         if not ids and ind.direction_rule:  # a direction reading rests on the window it compared
             ids = sorted(
                 {i for p in s.headline(ind)[-(ind.direction_rule.periods + 1) :] for i in p["obs_ids"]}

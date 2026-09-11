@@ -1846,6 +1846,63 @@ observations:
     raw_snippet: "66% of builders upgraded models within their existing provider, while 23% did not switch models at all this past year. Only 11% switched vendors."
     note: "Menlo 2025 Mid-Year LLM Market Update (31 Jul 2025), 150 technical decision-makers surveyed 30 Jun–10 Jul 2025. Share that switched model vendors in the prior year; nearest 2025 datapoint to multi-homing, not the same construct."
   # ---------- 4. lab_vertical_integration_exit_bell ----------
+  - series_key: acq.openai.io_products.pt
+    source_id: cnbc
+    entity_id: openai
+    value: 6400000000
+    unit: USD
+    as_of_date: 2025-05-21
+    published_date: 2025-05-21
+    url: https://www.cnbc.com/2025/05/21/openai-buys-iphone-designer-jony-ive-device-startup-for-6point4-billion.html
+    tier: 5
+    basis: reported
+    raw_snippet: "OpenAI said Wednesday that it's acquiring Jony Ive's AI devices startup io for about $6.4 billion."
+    note: "OpenAI -> io Products: AI devices; an application-side target."
+  - series_key: acq.mercor.deeptune.pt
+    source_id: fortune
+    entity_id: mercor
+    value_text: "acquires Deeptune (AI training environments); terms undisclosed"
+    unit: text
+    as_of_date: 2026-07-09
+    published_date: 2026-07-09
+    url: https://fortune.com/2026/07/09/ai-unicorn-mercor-acquires-deeptune-brendan-foody-investor-a16z-openai-anthropic/
+    tier: 5
+    basis: reported
+    raw_snippet: "AI unicorn Mercor acquires Deeptune after founder Brendan Foody backed the startup"
+    note: "A training-input vendor buying another; in the ledger, outside the lab exit-bell count."
+  - series_key: acq.crwv.weights_and_biases.pt
+    source_id: coreweave_news
+    entity_id: crwv
+    value_text: "completed acquisition of Weights & Biases (AI developer platform)"
+    unit: text
+    as_of_date: 2025-05-05
+    published_date: 2025-05-05
+    url: https://www.coreweave.com/news/coreweave-completes-acquisition-of-weights-biases-2
+    tier: 7
+    basis: company_stated
+    raw_snippet: "CoreWeave, Inc. (Nasdaq: CRWV) today announced that it has completed its acquisition of Weights & Biases."
+    note: "A neocloud buying tooling; counts in the exit bell (acquirer in the compute layer)."
+  - series_key: acq.cloudflare.human_native.pt
+    source_id: cnbc
+    value_text: "acquires AI data marketplace Human Native; terms undisclosed"
+    unit: text
+    as_of_date: 2026-01-15
+    published_date: 2026-01-15
+    url: https://www.cnbc.com/2026/01/15/cloudflare-ai-human-native-acquisition.html
+    tier: 5
+    basis: reported
+    raw_snippet: "Cloudflare acquires AI data marketplace Human Native"
+    note: "Cloudflare's own release body is dated 15 January 2025 against a 2026 header; CNBC dates the deal 15 Jan 2026. In the ledger, outside the lab exit-bell count."
+  - series_key: evidence.neolab_capital_intensity.context.pt
+    source_id: leonis
+    value_text: "Leonis Capital counts $94.3B raised by 119 neolabs since 2024, of which 16 disclose any revenue: money raised and a lab count, but no revenue denominator."
+    unit: text
+    as_of_date: 2026-09-02
+    published_date: 2026-09-02
+    url: https://leonisnewsletter.substack.com/p/we-finally-got-our-flying-cars-theyre
+    tier: 6
+    basis: reported
+    raw_snippet: "Since 2024, investors have put $94.3 billion into 119 AI research labs. Most are pre-revenue and some are pre-product, by design. Only 16 disclose any revenue at all."
   - series_key: acq.meta.scale_ai.pt
     source_id: cnbc
     entity_id: meta
@@ -2109,6 +2166,55 @@ observations:
     raw_snippet: "Amazon has announced it has signed a definitive agreement to acquire DuckLabs, the Amsterdam-based company behind the open source analytical database DuckDB."
     note: "About Amazon company-news post (undated in page text; date taken from the AWS blog of 26 Aug 2026)."
   # --- procurement enter bell (lab_procurement_signal_4q); scores coded against the rubric in semantic/metrics.yaml ---
+  - series_key: procurement.turing.signal.pt
+    source_id: techcrunch
+    entity_id: turing
+    value: 1
+    unit: score
+    as_of_date: 2025-03-06
+    published_date: 2025-03-06
+    url: https://techcrunch.com/2025/03/06/turing-a-key-coding-provider-for-openai-and-other-llm-producers-raises-111m-at-a-2-2b-valuation/
+    tier: 5
+    basis: reported
+    raw_snippet: "Turing, a key coding provider for OpenAI and other LLM producers, raises $111M at a $2.2B valuation"
+    coding: "Score 1 on the procurement rubric: a lab is named as a customer."
+  - series_key: procurement.scale_ai.signal.pt
+    source_id: cnbc
+    entity_id: scale_ai
+    value: 1
+    unit: score
+    as_of_date: 2025-06-12
+    published_date: 2025-06-12
+    url: https://www.cnbc.com/2025/06/12/scale-ai-founder-wang-announces-exit-for-meta-part-of-14-billion-deal.html
+    tier: 5
+    basis: reported
+    raw_snippet: "Scale AI counts a number of Meta rivals as customers, including Google, Microsoft and OpenAI."
+    coding: "Score 1 on the procurement rubric: labs are named as customers."
+  - series_key: procurement.surge_ai.signal.pt
+    source_id: sacra_free
+    entity_id: surge_ai
+    value: 2
+    unit: score
+    as_of_date: 2024-12-31
+    published_date: 2026-09-11
+    url: https://sacra.com/c/surge-ai/
+    tier: 6
+    basis: estimated
+    raw_snippet: "Sacra estimates that Surge AI hit $1.2B in annualized revenue in 2024, with growth mainly driven by a group of ~12 frontier AI labs, most notably OpenAI, Google, Anthropic, Microsoft, and Meta"
+    coding: "Score 2 on the procurement rubric: revenue growth attributed to lab demand."
+    note: "Undated company page; published_date is the retrieval date."
+  - series_key: procurement.surge_ai.signal.pt
+    source_id: theaiinsider
+    entity_id: surge_ai
+    value: 1
+    unit: score
+    as_of_date: 2025-07-03
+    published_date: 2025-07-03
+    url: https://theaiinsider.tech/2025/07/03/surge-ai-prepares-1b-capital-raise-as-demand-for-premium-ai-training-data-surges/
+    tier: 5
+    basis: reported
+    raw_snippet: "Known for its high-precision RLHF datasets, Surge AI serves leading AI labs including Google, OpenAI, and Anthropic."
+    coding: "Score 1 on the procurement rubric: labs are named as customers."
   - series_key: procurement.mercor.signal.pt
     source_id: dealroom
     entity_id: mercor

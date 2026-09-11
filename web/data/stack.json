@@ -2833,11 +2833,11 @@
        "latest": {
         "as_of": "2026-05-31",
         "obs_ids": [
-         "7f3eb05328b16dda"
+         "ae49b8060dd399b0"
         ],
-        "series_key": "sec.applied_digital.capex.fy",
+        "series_key": "sec.applied_digital.cost_of_revenue.fy",
         "unit": "USD",
-        "value": 2865765000.0,
+        "value": 396858000.0,
         "value_text": null
        },
        "memberships": [
@@ -3323,11 +3323,11 @@
        "latest": {
         "as_of": "2026-05-28",
         "obs_ids": [
-         "884d706640442ad5"
+         "9436b7b10a0b5c14"
         ],
-        "series_key": "sec.micron.revenue.q",
+        "series_key": "sec.micron.gross_profit.q",
         "unit": "USD",
-        "value": 41456000000.0,
+        "value": 35056000000.0,
         "value_text": null
        },
        "memberships": [
@@ -3666,7 +3666,16 @@
        "id": "scale_ai",
        "is_primary": false,
        "kind": "company",
-       "latest": null,
+       "latest": {
+        "as_of": "2025-06-12",
+        "obs_ids": [
+         "b1d9b7eed4af1512"
+        ],
+        "series_key": "procurement.scale_ai.signal.pt",
+        "unit": "score",
+        "value": 1.0,
+        "value_text": null
+       },
        "memberships": [
         {
          "from_date": null,
@@ -5268,16 +5277,14 @@
          "9ea06530e32d0e37",
          "bb8f74b796a1d779",
          "d7e2c8855360a39c",
-         "e6c4132e68724a57",
-         "ef2cd91f517adf57",
          "ef40bd94a06afa5d"
         ],
         "unit": "count",
-        "value": 10.0
+        "value": 9.0
        },
        "layer_id": "model",
        "leading_lagging": "leading",
-       "n_observations": 16,
+       "n_observations": 20,
        "name": "Lab vertical integration (acquisitions and acquihires, trailing four quarters)",
        "pending": null,
        "published": true,
@@ -5287,23 +5294,26 @@
          "dims": {},
          "obs_ids": [
           "10c4c0b2d0426e32",
-          "87066654f5416275"
+          "5e4305fd8756819b",
+          "87066654f5416275",
+          "f94c91c13afa2caa"
          ],
          "unit": "count",
-         "value": 1.0
+         "value": 3.0
         },
         {
          "as_of": "2025-09-30",
          "dims": {},
          "obs_ids": [
           "10c4c0b2d0426e32",
-          "4217fe77072bbea2",
+          "5e4305fd8756819b",
           "8646dd26d8b7dcec",
           "87066654f5416275",
-          "d6dd36d1a3dc9f36"
+          "d6dd36d1a3dc9f36",
+          "f94c91c13afa2caa"
          ],
          "unit": "count",
-         "value": 4.0
+         "value": 5.0
         },
         {
          "as_of": "2025-12-31",
@@ -5311,13 +5321,14 @@
          "obs_ids": [
           "10c4c0b2d0426e32",
           "129c29f7c904cd92",
-          "4217fe77072bbea2",
+          "5e4305fd8756819b",
           "8646dd26d8b7dcec",
           "87066654f5416275",
-          "d6dd36d1a3dc9f36"
+          "d6dd36d1a3dc9f36",
+          "f94c91c13afa2caa"
          ],
          "unit": "count",
-         "value": 5.0
+         "value": 6.0
         },
         {
          "as_of": "2026-03-31",
@@ -5325,16 +5336,17 @@
          "obs_ids": [
           "10c4c0b2d0426e32",
           "129c29f7c904cd92",
-          "4217fe77072bbea2",
+          "5e4305fd8756819b",
           "63fe32e4118fa976",
           "8646dd26d8b7dcec",
           "87066654f5416275",
           "d6dd36d1a3dc9f36",
           "d7e2c8855360a39c",
-          "ef40bd94a06afa5d"
+          "ef40bd94a06afa5d",
+          "f94c91c13afa2caa"
          ],
          "unit": "count",
-         "value": 8.0
+         "value": 9.0
         },
         {
          "as_of": "2026-06-30",
@@ -5343,7 +5355,6 @@
           "07e3555c39a96050",
           "129c29f7c904cd92",
           "323f4b23d02dc306",
-          "4217fe77072bbea2",
           "63fe32e4118fa976",
           "8646dd26d8b7dcec",
           "9ea06530e32d0e37",
@@ -5352,7 +5363,7 @@
           "ef40bd94a06afa5d"
          ],
          "unit": "count",
-         "value": 10.0
+         "value": 9.0
         },
         {
          "as_of": "2026-09-30",
@@ -5366,17 +5377,15 @@
           "9ea06530e32d0e37",
           "bb8f74b796a1d779",
           "d7e2c8855360a39c",
-          "e6c4132e68724a57",
-          "ef2cd91f517adf57",
           "ef40bd94a06afa5d"
          ],
          "unit": "count",
-         "value": 10.0
+         "value": 9.0
         }
        ],
        "stale_as_of": null,
        "stale_reason": null,
-       "status": "concentrating",
+       "status": "unclear",
        "unit": "count",
        "unpublished_reason": null,
        "valve_measured": null
@@ -8080,7 +8089,7 @@
        "stale_reason": null,
        "status": null,
        "unit": "ratio",
-       "unpublished_reason": "Not measurable from free sources: the neolabs' rounds are filed or reported, but none of them has a revenue figure in Epoch or a filing, so the denominator does not exist.",
+       "unpublished_reason": "Not measurable from free sources: the neolabs' rounds are filed or reported, but none has a revenue figure in Epoch or a filing, and Leonis Capital's count (evidence below) finds most disclose no revenue at all, so the denominator does not exist.",
        "valve_measured": null
       }
      ],
@@ -9151,12 +9160,12 @@
        "latest": {
         "as_of": "2026-07-09",
         "obs_ids": [
-         "43fac39f9068e55f"
+         "1727db1699af1ab5"
         ],
-        "series_key": "techcrunch.mercor.gross_revenue_run_rate_usd.pt",
-        "unit": "USD",
-        "value": 2000000000.0,
-        "value_text": null
+        "series_key": "acq.mercor.deeptune.pt",
+        "unit": "text",
+        "value": null,
+        "value_text": "acquires Deeptune (AI training environments); terms undisclosed"
        },
        "memberships": [
         {
@@ -9307,7 +9316,16 @@
        "id": "scale_ai",
        "is_primary": true,
        "kind": "company",
-       "latest": null,
+       "latest": {
+        "as_of": "2025-06-12",
+        "obs_ids": [
+         "b1d9b7eed4af1512"
+        ],
+        "series_key": "procurement.scale_ai.signal.pt",
+        "unit": "score",
+        "value": 1.0,
+        "value_text": null
+       },
        "memberships": [
         {
          "from_date": null,
@@ -9370,7 +9388,16 @@
        "id": "surge_ai",
        "is_primary": true,
        "kind": "company",
-       "latest": null,
+       "latest": {
+        "as_of": "2025-07-03",
+        "obs_ids": [
+         "a86b4d5b977580c2"
+        ],
+        "series_key": "procurement.surge_ai.signal.pt",
+        "unit": "score",
+        "value": 1.0,
+        "value_text": null
+       },
        "memberships": [
         {
          "from_date": null,
@@ -9426,7 +9453,16 @@
        "id": "turing",
        "is_primary": true,
        "kind": "company",
-       "latest": null,
+       "latest": {
+        "as_of": "2025-03-06",
+        "obs_ids": [
+         "a56ea8fc9fccc482"
+        ],
+        "series_key": "procurement.turing.signal.pt",
+        "unit": "score",
+        "value": 1.0,
+        "value_text": null
+       },
        "memberships": [
         {
          "from_date": null,
@@ -12284,7 +12320,16 @@
        "id": "turing",
        "is_primary": false,
        "kind": "company",
-       "latest": null,
+       "latest": {
+        "as_of": "2025-03-06",
+        "obs_ids": [
+         "a56ea8fc9fccc482"
+        ],
+        "series_key": "procurement.turing.signal.pt",
+        "unit": "score",
+        "value": 1.0,
+        "value_text": null
+       },
        "memberships": [
         {
          "from_date": null,
