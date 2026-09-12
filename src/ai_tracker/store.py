@@ -1303,13 +1303,16 @@ class Store:
 
     def _capture_layer(self, layer: Any, cards: dict[str, Any]) -> dict[str, Any]:
         """One layer of the capture lens. Only direction-scored indicators vote: a flow status on the same
-        layer belongs to the other lens."""
+        layer belongs to the other lens. A layer with indicators but no direction rule is not unmeasured."""
         mine = [i for i in self.seed.indicators if i.layer_id == layer.id and i.published]
         directions = [cards[i.id] for i in mine if i.direction_rule]
+        status = _summarise(directions)
+        if status == "unmeasured" and mine:
+            status = "no_capture_rule_yet"
         return {
             **dump(layer),
             "indicators": [cards[i.id] for i in mine],
-            "status": _summarise(directions),
+            "status": status,
             "tally": _tally(directions),
             "venture": self._layer_venture(layer.id),
             "reading": self._reading(layer, cards),
@@ -1322,7 +1325,10 @@ class Store:
             for i in self.seed.indicators
             if i.layer_id == layer.id and i.published and i.direction_rule
         ]
-        status = _summarise(scored).replace("_", " ")
+        status = _summarise(scored)
+        if status == "unmeasured" and any(i.layer_id == layer.id and i.published for i in self.seed.indicators):
+            status = "no_capture_rule_yet"
+        status = status.replace("_", " ")
 
         def names(xs: list[str]) -> str:
             return (
@@ -1339,7 +1345,7 @@ class Store:
         parts = (
             []
             if conc or disp
-            else [f"{layer.name} {'is' if status in ('unmeasured', 'not yet measurable') else 'reads'} {status}"]
+            else [f"{layer.name} {'has' if status.startswith('no capture rule') else 'is' if status in ('unmeasured', 'not yet measurable') else 'reads'} {status}"]
         )
         if conc:
             parts.append(f"toward concentration: {names(conc)}")
@@ -1611,7 +1617,10 @@ def _clause(doc: dict[str, Any]) -> str:
     """A layer's clause in the lens verdict. One instrument is a reading, not a direction, so it is named."""
     t = doc.get("tally") or {}
     tail = " (one reading)" if t.get("scored") == 1 else ""
-    return f"{doc['name'].lower()} {doc['status'].replace('_', ' ')}{tail}"
+    status = doc["status"].replace("_", " ")
+    if status.startswith("no capture rule"):
+        return f"{doc['name'].lower()} ({status})"
+    return f"{doc['name'].lower()} {status}{tail}"
 
 
 def _votes(cards: list[dict[str, Any]]) -> list[dict[str, Any]]:
