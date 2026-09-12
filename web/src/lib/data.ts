@@ -75,7 +75,7 @@ export const meta = () => read<{ generated_at: string; observations: number; ind
 export { fmt, words } from "./format";
 export const obsIndex = () => read<Record<string, string>>("obs_index.json");
 export type Fit = { metric: string; value: number; value_low: number | null; value_high: number | null; as_of_date: string; unit?: string | null; dims: Record<string, string>; obs_ids: string[] };
-export type Doc = IndicatorDoc & { chart_sources?: ChartSourcesT; confidence_basis?: { grade: string | null; best_tier: number | null; sources: string[]; n_observations: number; stale_as_of: string | null }; prediction_rows?: { id: string; claimant: string; ledger: string; status: string | null }[]; points: Point[]; band_value: { value: number; as_of: string | null; obs_ids: string[]; low: number | null; high: number | null } | null; fits: Fit[]; related_metrics: string[] };
+export type Doc = IndicatorDoc & { source_ids?: string[]; chart_sources?: ChartSourcesT; confidence_basis?: { grade: string | null; best_tier: number | null; sources: string[]; n_observations: number; stale_as_of: string | null }; prediction_rows?: { id: string; claimant: string; ledger: string; status: string | null }[]; points: Point[]; band_value: { value: number; as_of: string | null; obs_ids: string[]; low: number | null; high: number | null } | null; fits: Fit[]; related_metrics: string[] };
 export type Prediction = { direction_assessment?: string | null; magnitude_assessment?: string | null; timing_assessment?: string | null;
   id: string; ledger: "nk" | "lab" | "ai2027" | "capture"; claimant: string; claim_text: string; claim_url: string | null; claim_date: string;
   window_start: string | null; window_end: string | null; operationalisation: string; related_indicators: string[]; proxy_types: string[];
@@ -85,7 +85,8 @@ export type Prediction = { direction_assessment?: string | null; magnitude_asses
 export const predictions = () => read<Prediction[]>("predictions.json");
 export type LedgerRow = Observation & { parties: { slug: string; entity_id: string | null; name: string; href: string | null }[]; instrument: string; obs_id: string; as_of_date: string; published_date: string; value_numeric: number | null; value_text: string | null; unit: string; tier: number; source_id: string; url: string; disputed: boolean; dispute_text: string | null; raw_snippet: string };
 export const ledger = () => read<LedgerRow[]>("ledger.json");
-export type ThesisVerdict = { id: string; name: string; holds: boolean | null; logic: string; conds: { text: string; holds: boolean | null; obs_ids: string[]; detail: string }[] };
+export type ThesisCond = { text: string; holds: boolean | null; obs_ids: string[]; detail: string };
+export type ThesisVerdict = { id: string; name: string; holds: boolean | null; state: string; logic: string; conds: ThesisCond[]; counter?: ThesisCond[] };
 export const thesis = () => read<ThesisVerdict[]>("thesis.json");
 export type Bottleneck = { id: number; title: string; text: string; section: string; bucket_id: string; source_codes: string[]; related_indicators: string[]; domain?: string | null; domain_basis?: string | null; related: { id: string; name: string; status: string | null; published: boolean }[] };
 export type BottleneckDoc = { sections: { name: string; bucket_id: string }[]; essays: { code: string; title: string; url: string; date: string }[]; items: Bottleneck[]; summary: { name: string; items: number; watched: number; fast: number; normal: number; other: number }[]; domains: string[]; grid: { name: string; cells: Record<string, number[]> }[] };

@@ -34,7 +34,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
   const current = d.status_events[0];
   const visible = SECTIONS.filter(([id]) => id !== "evidence-log" || d.evidence.length);
   const num = (id: string) => visible.findIndex(([x]) => x === id) + 1;
-  const seriesSources = Array.from(new Set(d.series.map((s) => s.series_key.split(".")[0]))).map((id) => srcs.find((s) => s.id === id)).filter(Boolean);
+  const seriesSources = (d.source_ids ?? []).map((id) => srcs.find((s) => s.id === id)).filter(Boolean);
   return (
     <article className="flex flex-col lg:grid lg:grid-cols-[15rem_minmax(0,1fr)] lg:gap-12">
       <section aria-label="Indicator summary" className="hidden lg:flex lg:sticky lg:top-8 self-start flex-col gap-4 lg:pt-1">

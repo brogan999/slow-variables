@@ -273,6 +273,23 @@ class Store:
             "CREATE TABLE entity_membership (entity_id VARCHAR, layer_id VARCHAR, sublayer_id VARCHAR, "
             "is_primary BOOLEAN, from_date DATE, to_date DATE)"
         )
+        # the bands, so a formula that needs a threshold joins the seed rather than restating the number
+        self.con.execute(
+            "CREATE TABLE bands (indicator_id VARCHAR, band_input VARCHAR, normal_lo DOUBLE, normal_hi DOUBLE, "
+            "fast_lo DOUBLE, fast_hi DOUBLE, falsifying_lo DOUBLE, falsifying_hi DOUBLE)"
+        )
+        self.con.executemany(
+            "INSERT INTO bands VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+            [
+                (
+                    i.id,
+                    i.band_input,
+                    *(x for b in (i.normal_band, i.fast_band, i.falsifying_band) for x in (b.lo if b else None, b.hi if b else None)),
+                )
+                for i in self.seed.indicators
+            ],
+        )
+
         self.con.executemany(
             "INSERT INTO entity_membership VALUES (?, ?, ?, ?, ?, ?)",
             [
@@ -526,6 +543,8 @@ class Store:
                 **_jsonable(ind.model_dump()),
                 **cards[ind.id],
                 "points": self.headline(ind),
+                # the ids of the sources actually behind the rows: a series namespace is not always a source id
+                "source_ids": sorted({o["source_id"] for o in self.evidence_obs(ind)}),
                 "band_value": {
                     "value": bv,
                     "unit": self.band_unit(ind),

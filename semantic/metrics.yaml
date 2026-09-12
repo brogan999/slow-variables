@@ -253,7 +253,7 @@ metrics:
     grain: [as_of_date]
     unit: count
     lead_lag: coincident
-    formula_version: 2
+    formula_version: 3
     inputs: ['canaries.us_exposure_q5.employment_yoy.m', 'revelio.us_exposed.growth_gap.m', 'cait.ca_top_quartile_potential.claims.m', 'yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m']
     caveats: Different geographies (CA claims vs US employment) and different exposure measures; a count, not a test. Each tracker's latest reading counts, whatever its month.
     sql: |
@@ -268,15 +268,20 @@ metrics:
                       list_distinct(list_concat(ids, lag(ids) OVER o)) AS ids, n, lag(n) OVER o AS n0
                FROM cma WINDOW o AS (ORDER BY as_of_date)),
       allx AS (SELECT series_key, v, as_of_date, ids FROM obs UNION ALL SELECT series_key, v, as_of_date, ids FROM cchg WHERE n = 3 AND n0 = 3),
-      latest AS (SELECT *, row_number() OVER (PARTITION BY series_key ORDER BY as_of_date DESC) AS rn FROM allx)
-      SELECT max(as_of_date) AS as_of_date,
-             sum(CASE WHEN series_key = 'canaries.us_exposure_q5.employment_yoy.m' AND v <= -0.03 THEN 1
-                      WHEN series_key = 'revelio.us_exposed.growth_gap.m' AND v <= -0.10 THEN 1
-                      WHEN series_key = 'cait_3mma_mom' AND v >= 0.05 THEN 1
-                      WHEN series_key = 'yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m' AND v >= 10 THEN 1
-                      ELSE 0 END)::DOUBLE AS value,
-             list_distinct(flatten(list(ids))) AS obs_ids
-      FROM latest WHERE rn = 1
+      latest AS (SELECT *, row_number() OVER (PARTITION BY series_key ORDER BY as_of_date DESC) AS rn FROM allx),
+      -- a break is that tracker's own fast band, read from the seed rather than restated here
+      tracker AS (SELECT * FROM (VALUES
+          ('canaries.us_exposure_q5.employment_yoy.m', 'canaries_exposed_employment_yoy'),
+          ('revelio.us_exposed.growth_gap.m', 'revelio_exposed_vs_unexposed_growth'),
+          ('cait_3mma_mom', 'cait_high_exposure_claims'),
+          ('yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m', 'yale_occupational_mix_dissimilarity'))
+        AS t(series_key, indicator_id))
+      SELECT max(l.as_of_date) AS as_of_date,
+             sum(CASE WHEN (b.fast_lo IS NULL OR l.v >= b.fast_lo) AND (b.fast_hi IS NULL OR l.v <= b.fast_hi)
+                      THEN 1 ELSE 0 END)::DOUBLE AS value,
+             list_distinct(flatten(list(l.ids))) AS obs_ids
+      FROM latest l JOIN tracker t USING (series_key) JOIN bands b ON b.indicator_id = t.indicator_id
+      WHERE l.rn = 1
   surprise_index:
     description: The mean of the two graders' latest readings of AI 2027's quantitative predictions against what happened (AI Futures Project's own grading and the independent ai2027-tracker), as a share of the predicted pace.
     rationale: One number for whether the fast scenario is running ahead of or behind its own schedule, from the people grading it rather than from the tracker.
@@ -374,6 +379,26 @@ metrics:
              flatten(list(ids) OVER (ORDER BY q_end)) AS obs_ids
       FROM (SELECT date_trunc('quarter', as_of_date)::DATE AS q_end, max(as_of_date) AS last_deal, sum(v) AS v, list(id ORDER BY id) AS ids
             FROM deals GROUP BY 1)
+  circular_commitments_new_4q:
+    description: Circular / vendor-financing commitments signed in the trailing four quarters, in USD - the flow, where circular_commitments_total is the stock.
+    rationale: A cumulative total can only rise, so a direction rule on it can never read dispersing. The flow can fall, and a fall is what a cooling vendor-financing cycle looks like (P1 §6.4).
+    grain: [as_of_date]
+    unit: USD
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["circular.*_usd.pt"]
+    caveats: Same instrument mix and face-value treatment as the cumulative total; a quarter with no deal drops out of the window a year later, so the series steps.
+    sql: |
+      WITH deals AS (
+        SELECT as_of_date, value_numeric AS v, id FROM observations
+        WHERE series_key LIKE 'circular.%_usd.pt'
+          AND series_key NOT LIKE '%loi_usd%' AND series_key NOT LIKE '%talks_usd%' AND series_key NOT LIKE '%total_commitments%'
+          AND series_key NOT LIKE '%commercial_rpo%'),
+      q AS (SELECT date_trunc('quarter', as_of_date)::DATE AS q, max(as_of_date) AS last_deal, sum(v) AS v,
+                   list(id ORDER BY id) AS ids FROM deals GROUP BY 1)
+      SELECT a.last_deal AS as_of_date, sum(b.v) AS value, flatten(list(b.ids)) AS obs_ids
+      FROM q a JOIN q b ON b.q > a.q - INTERVAL 12 MONTH AND b.q <= a.q
+      GROUP BY a.q, a.last_deal
   enterprise_app_spend_share:
     description: Application layer's share of US enterprise generative-AI spend, per Menlo Ventures wave (applications ÷ total).
     rationale: The only published layer split of enterprise dollars; a rising application share means buyers' money is landing above the model layer.
