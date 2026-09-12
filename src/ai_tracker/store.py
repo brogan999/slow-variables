@@ -265,8 +265,12 @@ class Store:
             self.con.execute(
                 "CREATE TABLE observation_all (" + ", ".join(f"{k} {v}" for k, v in OBS_COLUMNS.items()) + ")"
             )
+        # the series key is <namespace>.<subject>.<measure>.<grain>; split once here so no formula has to
         self.con.execute("""CREATE VIEW observations AS
-            SELECT *, split_part(series_key, '.', 2) AS subject, date_trunc('quarter', as_of_date) AS q
+            SELECT *, split_part(series_key, '.', 1) AS source_ns, split_part(series_key, '.', 2) AS subject,
+                   array_to_string(str_split(series_key, '.')[3:-2], '.') AS measure,
+                   str_split(series_key, '.')[-1] AS grain,
+                   date_trunc('quarter', as_of_date) AS q
             FROM observation_all o
             WHERE review_status = 'approved' AND NOT EXISTS (SELECT 1 FROM observation_all s WHERE s.supersedes_id = o.id)""")
         self.con.execute(
@@ -1692,8 +1696,12 @@ def _flags(o: dict[str, Any]) -> dict[str, Any]:
     return {"flags": flags, "dispute_text": o.get("dispute_text")} if flags else {}
 
 
+# the view's key columns are for formulas, not for the web: the key itself is on every row
+KEY_COLS = ("source_ns", "measure", "grain")
+
+
 def _full(o: dict[str, Any]) -> dict[str, Any]:
-    return {**_jsonable(o), "grade": _grade(o)}
+    return {**_jsonable({k: v for k, v in o.items() if k not in KEY_COLS}), "grade": _grade(o)}
 
 
 def _jsonable(d: dict[str, Any]) -> dict[str, Any]:

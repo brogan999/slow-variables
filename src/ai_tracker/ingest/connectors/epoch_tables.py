@@ -8,16 +8,11 @@ from __future__ import annotations
 import csv
 import io
 import json
-import re
 import zipfile
 from datetime import date
 
 from ...schema import Basis, Extraction, Observation, Tier
-from ..base import Connector, RawItem, expect
-
-
-def slug(s: str) -> str:
-    return re.sub(r"[^a-z0-9]+", "_", s.lower()).strip("_")
+from ..base import Connector, RawItem, expect, slug
 
 
 def _csv(body: bytes, member: str | None = None) -> list[dict[str, str]]:

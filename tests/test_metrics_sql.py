@@ -7,13 +7,21 @@ from ai_tracker.store import VENTURE_ROUNDS
 
 METRICS = yaml.safe_load(open("semantic/metrics.yaml"))["metrics"]
 
+# the store's view splits the series key into its four parts; a formula under test reads the same columns
+KEY_SPLIT = """CREATE VIEW observations AS SELECT *, split_part(series_key, '.', 1) AS source_ns,
+    array_to_string(str_split(series_key, '.')[3:-2], '.') AS measure, str_split(series_key, '.')[-1] AS grain
+    FROM obs_raw"""
+
+
+
 
 def run(metric: str, rows: list[tuple]) -> list[tuple]:
     con = duckdb.connect()
     con.execute(
-        "CREATE TABLE observations (id VARCHAR, series_key VARCHAR, subject VARCHAR, as_of_date DATE, value_numeric DOUBLE, raw_snippet VARCHAR, disputed BOOLEAN)"
+        "CREATE TABLE obs_raw (id VARCHAR, series_key VARCHAR, subject VARCHAR, as_of_date DATE, value_numeric DOUBLE, raw_snippet VARCHAR, disputed BOOLEAN)"
     )
-    con.executemany("INSERT INTO observations VALUES (?, ?, ?, ?, ?, ?, false)", rows)
+    con.executemany("INSERT INTO obs_raw VALUES (?, ?, ?, ?, ?, ?, false)", rows)
+    con.execute(KEY_SPLIT)
     return con.execute(METRICS[metric]["sql"]).fetchall()
 
 
@@ -86,9 +94,10 @@ def run_p(metric: str, rows: list[tuple]) -> list[tuple]:
     """Like run(), with period_start: (id, series_key, subject, as_of_date, period_start, value)."""
     con = duckdb.connect()
     con.execute(
-        "CREATE TABLE observations (id VARCHAR, series_key VARCHAR, subject VARCHAR, as_of_date DATE, period_start DATE, value_numeric DOUBLE)"
+        "CREATE TABLE obs_raw (id VARCHAR, series_key VARCHAR, subject VARCHAR, as_of_date DATE, period_start DATE, value_numeric DOUBLE)"
     )
-    con.executemany("INSERT INTO observations VALUES (?, ?, ?, ?, ?, ?)", rows)
+    con.executemany("INSERT INTO obs_raw VALUES (?, ?, ?, ?, ?, ?)", rows)
+    con.execute(KEY_SPLIT)
     return con.execute(METRICS[metric]["sql"]).fetchall()
 
 

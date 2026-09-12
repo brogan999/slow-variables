@@ -15,7 +15,7 @@ from datetime import date
 from pathlib import Path
 
 from ...schema import Basis, Extraction, Observation, Tier
-from ..base import Connector, RawItem, expect
+from ..base import Connector, RawItem, expect, slug
 from .openrouter import _latest
 
 URL = "https://artificialanalysis.ai/api/v2/data/llms/models"
@@ -62,7 +62,7 @@ class ArtificialAnalysis(Connector):
         today = item.retrieved_at.date()
         out = []
         for m in models:
-            subject = re.sub(r"[^a-z0-9]+", "_", m["slug"].lower()).strip("_")
+            subject = slug(m["slug"])
             creator = re.sub(
                 r"[^a-z0-9]+", "_", (m.get("model_creator") or {}).get("slug", "").lower()
             ).strip("_")

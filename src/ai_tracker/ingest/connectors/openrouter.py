@@ -7,11 +7,10 @@ Models METR has measured are keyed by METR's model id so the price joins the hor
 from __future__ import annotations
 
 import json
-import re
 from pathlib import Path
 
 from ...schema import Basis, Extraction, Observation, Tier
-from ..base import Connector, RawItem, expect
+from ..base import Connector, RawItem, expect, slug
 
 URL = "https://openrouter.ai/api/v1/models"
 VENDORS = {
@@ -73,7 +72,7 @@ class OpenRouter(Connector):
             vendor = m["id"].split("/")[0]
             if vendor not in VENDORS or ":" in m["id"]:
                 continue
-            subject = SUBJECT.get(m["id"]) or re.sub(r"[^a-z0-9]+", "_", m["id"].lower()).strip("_")
+            subject = SUBJECT.get(m["id"]) or slug(m["id"])
             for side in ("prompt", "completion"):
                 usd = float(m["pricing"].get(side) or 0) * 1e6
                 if usd <= 0:
