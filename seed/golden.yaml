@@ -56,7 +56,9 @@ questions:
   - id: g16
     lens: capture
     question: "What is OpenAI's operating margin?"
-    expect: {refuse: true}
+    expect:
+      refuse: true
+      says: ["no record", "no operating margin", "doesn't file", "does not file", "not a public filer", "isn't a public filer"]
   # Informational (not part of the v2 §12 bar): each exercises one v2 §6.1 tool and must call it.
   - id: g14
     lens: diffusion
