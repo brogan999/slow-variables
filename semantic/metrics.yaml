@@ -28,11 +28,12 @@ metrics:
     caveats: Fiscal quarters differ by filer (NVDA ends late Jan/Apr/Jul/Oct). Whole-company, not segment, margin. A filled Q4 cites the 10-K and the three 10-Qs it subtracts.
     sql: |
       WITH p AS (  -- gross profit and revenue for the same filer, grain and period end
-        SELECT g.subject, right(g.series_key, 3) = '.fy' AS is_fy, g.as_of_date, g.period_start,
+        SELECT g.subject, g.grain = 'fy' AS is_fy, g.as_of_date, g.period_start,
                g.value_numeric AS gp, r.value_numeric AS rev, [g.id, r.id] AS ids
         FROM observations g JOIN observations r
-          ON r.subject = g.subject AND r.as_of_date = g.as_of_date AND r.series_key = replace(g.series_key, '.gross_profit.', '.revenue.')
-        WHERE (g.series_key LIKE 'sec.%.gross_profit.q' OR g.series_key LIKE 'sec.%.gross_profit.fy') AND r.value_numeric > 0),
+          ON r.source_ns = g.source_ns AND r.subject = g.subject AND r.grain = g.grain
+         AND r.as_of_date = g.as_of_date AND r.measure = 'revenue'
+        WHERE g.source_ns = 'sec' AND g.measure = 'gross_profit' AND g.grain IN ('q', 'fy') AND r.value_numeric > 0),
       q AS (SELECT * FROM p WHERE NOT is_fy),
       fill AS (  -- a fiscal Q4 filed only inside the 10-K: full year minus the three quarters inside it
         SELECT f.subject, f.as_of_date, f.gp - sum(q.gp) AS gp, f.rev - sum(q.rev) AS rev, flatten(list_prepend(f.ids, list(q.ids))) AS ids
@@ -55,8 +56,9 @@ metrics:
     sql: |
       SELECT g.as_of_date, g.subject AS entity, g.value_numeric / r.value_numeric AS value, [g.id, r.id] AS obs_ids
       FROM observations g JOIN observations r
-        ON r.subject = g.subject AND r.as_of_date = g.as_of_date AND r.series_key = 'sec.' || g.subject || '.revenue.fy'
-      WHERE g.series_key LIKE 'sec.%.gross_profit.fy' AND r.value_numeric > 0
+        ON r.source_ns = 'sec' AND r.subject = g.subject AND r.measure = 'revenue' AND r.grain = 'fy'
+       AND r.as_of_date = g.as_of_date
+      WHERE g.source_ns = 'sec' AND g.measure = 'gross_profit' AND g.grain = 'fy' AND r.value_numeric > 0
 
   lab_gross_margin_estimate:
     description: A lab's full-year revenue minus its inference compute spend, over revenue, from Epoch's estimates (grade C). Not a filed gross margin.
@@ -738,8 +740,11 @@ metrics:
     sql: |
       WITH j AS (
         SELECT c.subject, c.as_of_date, c.value_numeric AS capex, r.value_numeric AS rev, [c.id, r.id] AS ids
-        FROM observations c JOIN observations r ON r.subject = c.subject AND r.as_of_date = c.as_of_date AND r.series_key = 'sec.' || c.subject || '.revenue.fy'
-        WHERE c.series_key LIKE 'sec.%.capex.fy' AND c.subject IN ('msft', 'googl', 'amzn', 'meta', 'orcl', 'crwv')),
+        FROM observations c JOIN observations r
+          ON r.source_ns = 'sec' AND r.subject = c.subject AND r.measure = 'revenue' AND r.grain = 'fy'
+         AND r.as_of_date = c.as_of_date
+        WHERE c.source_ns = 'sec' AND c.measure = 'capex' AND c.grain = 'fy'
+          AND c.subject IN ('msft', 'googl', 'amzn', 'meta', 'orcl', 'crwv')),
       p AS (SELECT *, lag(capex) OVER w AS capex0, lag(rev) OVER w AS rev0, lag(ids) OVER w AS ids0, lag(as_of_date) OVER w AS d0
             FROM j WINDOW w AS (PARTITION BY subject ORDER BY as_of_date))
       SELECT as_of_date, subject AS entity, (capex - capex0) / (rev - rev0) AS value, list_concat(ids, ids0) AS obs_ids

@@ -9,13 +9,12 @@ from __future__ import annotations
 import csv
 import io
 import json
-import re
 import zipfile
 from datetime import date
 
 from ...schema import Basis, Entity, Extraction, Observation, Tier
 from ...store import Seed
-from ..base import Connector, RawItem, expect
+from ..base import Connector, RawItem, expect, slug
 
 ROUNDS, REVENUE, COMPUTE = (
     "ai_companies_funding_rounds.csv",
@@ -38,8 +37,7 @@ def day(v: str | None) -> date | None:
         return None
 
 
-def slug(company: str) -> str:
-    return re.sub(r"[^a-z0-9]+", "_", company.strip().lower()).strip("_")
+
 
 
 RUN_RATE_DISPUTE = "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself."

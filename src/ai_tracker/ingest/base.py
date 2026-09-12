@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import re
 import shutil
 import subprocess
 import urllib.robotparser
@@ -48,6 +49,20 @@ class RawItem:
             except (TypeError, ValueError):
                 pass
         return self.retrieved_at.date()
+
+
+def slug(s: str) -> str:
+    """A subject or measure segment: lowercase, non-alphanumerics collapsed to underscores."""
+    return re.sub(r"[^a-z0-9]+", "_", s.strip().lower()).strip("_")
+
+
+def series_key(namespace: str, subject: str, measure: str, grain: str) -> str:
+    """The store's primary key: <namespace>.<subject>.<measure>.<grain>. Built here so it is parsed the same
+    way everywhere - the `observations` view splits it back into those four columns."""
+    parts = [slug(namespace), slug(subject), measure, grain]
+    if not all(parts):
+        raise ValueError(f"empty segment in series key {parts}")
+    return ".".join(parts)
 
 
 def expect(present: set[str], required: set[str], where: str) -> None:

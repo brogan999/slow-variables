@@ -9,7 +9,7 @@ import json
 import re
 
 from ...schema import Basis, Extraction, Observation, Tier
-from ..base import Connector, RawItem, expect
+from ..base import Connector, RawItem, expect, slug
 
 URL = "https://openrouter.ai/rankings"
 
@@ -48,12 +48,12 @@ class OpenRouterRankings(Connector):
         )
         out = []
         for r in rows:
-            slug = re.sub(r"[^a-z0-9]+", "_", r["model_permaslug"].lower()).strip("_")
+            model = slug(r["model_permaslug"])
             when = r["date"][:10]
             out.append(
                 self.obs(
                     item,
-                    series_key=f"openrouter_rankings.{slug}.tokens.d",
+                    series_key=f"openrouter_rankings.{model}.tokens.d",
                     unit="tokens",
                     as_of_date=when,
                     published_date=when,
