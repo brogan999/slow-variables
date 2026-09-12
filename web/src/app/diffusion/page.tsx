@@ -32,7 +32,9 @@ export default function DiffusionPage() {
         {d.buckets.map((b) => (
           <div key={b.id} className="flex flex-col gap-2">
             <h2 className="display text-2xl leading-tight"><Link href={`/buckets/${b.id}`} className="hover:text-ink">{b.order}. {b.name}</Link> <span className="text-muted">· {b.speed_limit.split(" — ")[0].split(". ")[0]}</span></h2>
-            {b.indicators.length ? b.indicators.map((c) => <IndicatorCard key={c.id} c={c} obsIndex={idx} />) : <p className="text-sm text-muted rounded-lg border border-dashed border-grid p-3">No published indicator for this stock yet.</p>}
+            {/* the lens is a summary: the most confident readings, then the bucket page for the rest */}
+            {b.indicators.length ? [...b.indicators].sort((x, y) => (y.confidence ?? 0) - (x.confidence ?? 0)).slice(0, 4).map((c) => <IndicatorCard key={c.id} c={c} obsIndex={idx} />) : <p className="text-sm text-muted rounded-lg border border-dashed border-grid p-3">No published indicator for this stock yet.</p>}
+            {b.indicators.length > 4 ? <p className="text-sm"><Link href={`/buckets/${b.id}`} className="underline decoration-grid underline-offset-4">All {b.indicators.length} indicators in this stock →</Link></p> : null}
           </div>
         ))}
       </section>

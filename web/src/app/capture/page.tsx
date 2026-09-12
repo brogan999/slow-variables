@@ -41,11 +41,17 @@ export default function CaptureLens() {
               <div className="flex flex-wrap items-center gap-3">
                 <h2 className="display text-xl leading-tight"><Link href={`/layers/${l.id}`} className="hover:underline underline-offset-4 decoration-grid">{l.order}. {l.name}</Link></h2>
                 <StatusChip status={l.status} />
-                {published.length ? <span className="text-xs text-muted">{published.length} indicator{published.length === 1 ? "" : "s"}</span> : null}
+                {l.tally?.scored ? <span className="text-xs text-muted" title={`${l.tally.scored} of ${l.tally.published} published indicators cast a vote; one instrument votes once`}>{l.tally.scored} of {l.tally.published} scored</span> : published.length ? <span className="text-xs text-muted">{published.length} indicator{published.length === 1 ? "" : "s"}</span> : null}
                 {l.id === "training_input" ? <Link href="/buckets/return_arrow" className="text-xs text-ink-2 hover:text-ink ml-auto">⇄ return arrow</Link> : null}
               </div>
               <p className="text-sm text-ink-2 mt-1">{l.description}</p>
-              {published.length ? <div className="mt-3 grid gap-3 md:grid-cols-2">{published.map((i) => <IndicatorCard key={i.id} c={i} obsIndex={idx} />)}</div> : <p className="mt-3 text-sm text-muted rounded-lg border border-dashed border-grid p-3">No published indicator for this layer yet.</p>}
+              {published.length ? (
+                <>
+                  {/* the lens is a summary: the most confident readings, then the layer page for the rest */}
+                  <div className="mt-3 grid gap-3 md:grid-cols-2">{[...published].sort((a, b) => (b.confidence ?? 0) - (a.confidence ?? 0)).slice(0, 4).map((i) => <IndicatorCard key={i.id} c={i} obsIndex={idx} />)}</div>
+                  {published.length > 4 ? <p className="mt-2 text-sm"><Link href={`/layers/${l.id}`} className="underline decoration-grid underline-offset-4">All {published.length} indicators on this layer →</Link></p> : null}
+                </>
+              ) : <p className="mt-3 text-sm text-muted rounded-lg border border-dashed border-grid p-3">No published indicator for this layer yet.</p>}
             </li>
           );
         })}

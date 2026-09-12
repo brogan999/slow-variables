@@ -756,7 +756,7 @@ class Store:
         _write(
             out / "memos" / "index.json",
             [
-                {k: v for k, v in m.items() if k != "body"} | {"summary": m["body"].split("\n\n")[0][:400]}
+                {k: v for k, v in m.items() if k != "body"} | {"summary": _excerpt(m["body"])}
                 for m in reversed(memos)
             ],
         )
@@ -1580,6 +1580,16 @@ VALVES = [
     },
     {"id": "leak", "from": "adaptation", "to": "capture", "name": "Leak (surplus exits the chain)"},
 ]
+
+
+def _excerpt(body: str, limit: int = 400) -> str:
+    """The memo's opening, cut at a sentence or a word rather than mid-word."""
+    text = body.split("\n\n")[0].strip()
+    if len(text) <= limit:
+        return text
+    cut = text[:limit]
+    stop = max(cut.rfind(". "), cut.rfind("; "))
+    return (cut[: stop + 1] if stop > limit // 2 else cut[: cut.rfind(" ")].rstrip(",;") + "…").strip()
 
 
 def _grade(o: dict[str, Any]) -> str:
