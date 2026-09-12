@@ -92,6 +92,7 @@ indicators:
     confidence: 70
     proposed_status: consistent_with_normal
     related_indicators: [metr_horizon_50, metr_horizon_80]
+    related_metrics: [ord_half_life_misfit]
     published: true
     updated_at: 2026-09-10
   - id: bls_labor_productivity_yoy
@@ -620,10 +621,10 @@ indicators:
     leading_lagging: leading
     timing_rationale: "Leading: a change in how reliability scales with task length would show in benchmarks before deployment changes."
     confidence: 60
-    proposed_status: consistent_with_normal
     related_indicators: [horizon_ratio_80_50, metr_horizon_80]
-    published: true
-    updated_at: 2026-09-11
+    unpublished_reason: "A presentation of the 50%/80% horizon ratio, not evidence about it: this is that ratio divided by 3.11, from the same two observations, so a separate status would score one number twice and its bands imply thresholds the ratio's own bands contradict. The misfit is shown on the ratio's page and in its saved analysis."
+    published: false
+    updated_at: 2026-09-12
   - id: fda_first_llm_device
     name: FDA-authorised devices built on a large language model
     definition: Count of distinct devices the FDA has cleared or authorised whose core function is a large language model, derived metric fda_llm_devices_count over the clearance records. The first is UpDoc (K253281, decision 23 December 2025), per the FDA 510(k) database, STAT News and Innolitics.
@@ -911,7 +912,6 @@ indicators:
     leading_lagging: coincident
     timing_rationale: "Coincident: the report classifies conversations from its sampling week, published within weeks."
     confidence: 60
-    proposed_status: consistent_with_normal
     related_indicators: [bbd_work_hours_assisted]
     published: true
     updated_at: 2026-09-10
@@ -1259,7 +1259,6 @@ indicators:
     leading_lagging: leading
     timing_rationale: "Leading: labs buy expert data for models they will release months later."
     confidence: 70
-    proposed_status: faster_than_normal
     related_indicators: [rl_environment_vendor_count, lab_run_rates]
     published: true
     updated_at: 2026-09-10

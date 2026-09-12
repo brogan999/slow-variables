@@ -12,6 +12,7 @@ const STYLE: Record<string, { glyph: string; cls: string }> = {
   unclear: { glyph: "◐", cls: "border-muted text-ink-2" },
   mixed: { glyph: "◐", cls: "border-muted text-ink-2" },
   not_yet_measurable: { glyph: "○", cls: "border-dashed border-muted text-muted" },
+  no_capture_rule_yet: { glyph: "○", cls: "border-dashed border-muted text-muted" },
 };
 
 export function StatusChip({ status, size = "sm" }: { status: string | null | undefined; size?: "sm" | "lg" }) {

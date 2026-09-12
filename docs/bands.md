@@ -374,12 +374,6 @@
 - Rule: normal -inf to 0.4; fast 0.6 to inf; falsifying none. Normal = under 40% of consumer messages are work-related, as personal use led with PCs and the web; fast = a work majority, meaning the consumer product has been pulled into production workflows. Between is `emerging`.
 - Timing: Coincident: the share describes what users did in the sampled period, published months later.
 
-## Ord half-life misfit (observed 50/80 ratio vs constant hazard) (`ord_half_life_misfit`)
-
-- Band input: `metric:ord_half_life_misfit` (ratio)
-- Rule: normal 1.5 to inf; fast -inf to 1.1; falsifying none. Normal = misfit of 1.5 or more (observed ratios of 5-10x against the constant-hazard 3.1x, the pattern since 2024); fast = within 10% of the constant-hazard prediction, which would mean long-task reliability tracking short-task success. Between is emerging.
-- Timing: Leading: a change in how reliability scales with task length would show in benchmarks before deployment changes.
-
 ## Agent reliability across repeated runs (tau-bench pass^k) (`pass_hat_k_tau_bench`)
 
 - Band input: `automation_anywhere.tau_bench_leaderboard_1.pass_hat_4.pt` (share)
