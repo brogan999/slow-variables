@@ -102,3 +102,19 @@ def test_layer_venture_reads_the_latest_covered_quarter_not_the_last_non_empty_o
     assert old["value"] is None and old["as_of"] == "2026-06-30" and old["arrow"] == "down" and old["obs_ids"] == []
     s.derived = [d(date(2025, 3, 31), "old", 5e8), d(date(2026, 6, 30), "new", 3e8)]
     assert s._layer_venture("new")["arrow"] == "up"  # the year-earlier window was covered and empty
+
+
+def test_one_instrument_casts_one_vote_and_the_tally_names_a_lone_reading():
+    from ai_tracker.store import _summarise, _tally
+
+    def card(i, status, cluster=None, conf=50):
+        return {"id": i, "name": i.upper(), "status": status, "source_cluster": cluster, "confidence": conf, "published": True}
+
+    survey = [card("a", "faster_than_normal", "one_survey", 60), card("b", "faster_than_normal", "one_survey", 40),
+              card("c", "faster_than_normal", "one_survey", 30)]
+    other = [card("d", "consistent_with_normal")]
+    assert _summarise(survey + other) == "mixed"  # three readings of one survey do not outvote another instrument
+    assert _tally(survey + other) == {"scored": 2, "published": 4, "margin": 0, "only": None}
+    assert _summarise(survey) == "faster_than_normal" and _tally(survey)["only"] == "A"  # the most confident speaks
+    assert _summarise([card("e", "unclear"), card("f", "dispersing")]) == "dispersing"  # unclear is not a reading
+    assert _tally([card("e", "unclear"), card("f", "dispersing")])["scored"] == 1

@@ -1,12 +1,12 @@
 import Link from "next/link";
-import type { Card, Layer, LayerVenture, StackBar } from "@/lib/data";
+import type { Card, Layer, LayerVenture, StackBar, Tally } from "@/lib/data";
 import { fmt, words } from "@/lib/format";
 import { HATCH } from "./MarginStackChart";
 import { Grade, StatusChip } from "./StatusChip";
 
 // The stack as one vertical: bar width = the layer's share of stack gross profit, summed by the export; an estimated
 // layer is hatched and labelled "est."; a layer with no series is a dashed hairline. Icon + text carry the status.
-export function StackVertical({ layers, bars }: { layers: (Layer & { indicators: Card[]; status: string | null; venture: LayerVenture | null; reading: string })[]; bars: Record<string, StackBar> }) {
+export function StackVertical({ layers, bars }: { layers: (Layer & { indicators: Card[]; status: string | null; tally?: Tally; venture: LayerVenture | null; reading: string })[]; bars: Record<string, StackBar> }) {
   const asOf = Object.values(bars)[0]?.as_of;
   return (
     <div className="flex flex-col gap-2">
@@ -20,7 +20,7 @@ export function StackVertical({ layers, bars }: { layers: (Layer & { indicators:
               <h2 className="font-medium"><Link href={`/layers/${l.id}`} className="hover:underline">{l.order}. {l.name}</Link></h2>
               <div className="mt-1 flex flex-wrap items-center gap-2 text-xs text-ink-2">
                 <StatusChip status={l.status} />
-                {published.length ? <span>{published.length} indicator{published.length === 1 ? "" : "s"}</span> : null}
+                {l.tally ? <span title={l.tally.only ? `the only reading: ${l.tally.only}` : `${l.tally.scored} of ${l.tally.published} published indicators cast a vote; one instrument votes once`}>{l.tally.scored} of {l.tally.published} scored{l.tally.only ? `: ${l.tally.only}` : ""}</span> : published.length ? <span>{published.length} indicator{published.length === 1 ? "" : "s"}</span> : null}
                 {l.id === "training_input" ? <Link href="/buckets/return_arrow" className="hover:text-ink">⇄ return arrow</Link> : null}
                 {l.venture ? <VentureArrow v={l.venture} /> : null}
               </div>

@@ -105,6 +105,8 @@ class Relation(str, Enum):
 
 
 UNSCORED = {"emerging", "not_yet_measurable", "not_yet_testable"}
+# a summary also ignores "unclear": the direction evaluator saying the steps disagreed is not a reading
+UNVOTED = UNSCORED | {"unclear"}
 NEEDS_REVIEW = {Extraction.llm_extract, Extraction.manual, Extraction.scrape}
 
 
@@ -256,6 +258,7 @@ class Indicator(BaseModel):
     direction: Direction | None = None
     leading_lagging: LeadLag | None = None
     timing_rationale: str | None = None  # one sentence why the tag fits; its first word is the tag
+    source_cluster: str | None = None  # indicators reading one instrument share a cluster and cast one vote
     confidence: int = Field(0, ge=0, le=95)
     proposed_status: str | None = None
     override_note: str | None = None

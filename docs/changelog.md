@@ -4,6 +4,8 @@
 
 | date | target | from | to | author | reason |
 |---|---|---|---|---|---|
+| 2026-09-12 | expert_data_market_run_rate | faster_than_normal | emerging | claude | Held at emerging by the band-edge rule: Mercor's $2.0B gross run-rate (Dealroom, 2026-06-30) is exactly the fast band's lower bound, so the reading sits on the line rather than past it. |
+| 2026-09-12 | aei_augmentation_share | consistent_with_normal | emerging | claude | Held at emerging by the band-edge rule: augmentation is 51.4% of classified conversations (Anthropic Economic Index, 2026-05-31), within 5% of the normal band's edge at 50%, so the reading cannot separate 'augmentation at least half' from the gap below it. |
 | 2026-09-11 | bbd_work_use_daily |  | emerging | claude | First reading: 12% of employed US adults used generative AI for work every day in the survey's November 2025 wave (Federal Reserve Board note on the Real-Time Population Survey), inside the normal band. One instrument is the only source, so the status caps at emerging until a second survey measures daily use. |
 | 2026-09-11 | cl_refresh_cadence_hours |  | emerging | claude | First reading: Trajectory's pipeline, as Baseten describes it, puts a freshly trained adapter behind a live endpoint in roughly an hour, on the edge of the normal band. The only source is the vendor's own description (tier 7), so the status caps at emerging. |
 | 2026-09-11 | continual_learning_unsolved |  | confirmed | claude | Seeded from the brief's Appendix B: production continual learning today means retraining adapters on a short cycle and shipping them (the ladder's third rung), research systems that learn across sessions have not shipped, and no benchmark measures what a model retains across sessions. Confirmed while that holds. |

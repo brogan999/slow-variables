@@ -34,6 +34,7 @@ export type IndicatorDoc = Card & {
   status_events: StatusEvent[]; crosswalk: Crosswalk[]; evidence: Evidence[];
 };
 export type Bucket = { id: string; name: string; order: number; stock: string; valve: string; speed_limit: string };
+export type Tally = { scored: number; published: number; margin: number; only: string | null };
 export type Layer = { id: string; name: string; order: number; description: string; dependency_tier: number | null };
 export type Sublayer = { id: string; layer_id: string; name: string; order: number; description: string };
 export type Crosswalk = { bucket_id: string; layer_id: string; sublayer_id: string | null; relation: string; note: string; shared_indicators: string[] };
@@ -50,19 +51,19 @@ function read<T>(rel: string): T {
 export const index = () => read<{ indicators: Card[]; buckets: Bucket[]; layers: Layer[]; sublayers: Sublayer[]; crosswalk: Crosswalk[] }>("index.json");
 export const indicator = (id: string) => read<Doc>(`indicators/${id}.json`);
 export const bucket = (id: string) => read<Bucket & { indicators: Card[]; crosswalk: Crosswalk[] }>(`buckets/${id}.json`);
-export const layer = (id: string) => read<Layer & { indicators: Card[]; sublayers: Sublayer[]; crosswalk: Crosswalk[]; venture: LayerVenture | null; commoditisation: { proxies: { id: string; name: string; status: string | null }[]; line: string } | null }>(`layers/${id}.json`);
+export const layer = (id: string) => read<Layer & { tally?: Tally; indicators: Card[]; sublayers: Sublayer[]; crosswalk: Crosswalk[]; venture: LayerVenture | null; commoditisation: { proxies: { id: string; name: string; status: string | null }[]; line: string } | null }>(`layers/${id}.json`);
 export const series = (key: string) => read<{ series_key: string; unit: string; source: Source | null; observations: Observation[]; withdrawn: Observation[] }>(`series/${key}.json`);
 export const seriesKeys = () => fs.readdirSync(path.join(ROOT, "series")).map((f) => f.replace(/\.json$/, ""));
 export const diffusion = () => read<{
-  as_of: string; verdict: string; buckets: (Bucket & { indicators: Card[]; status: string })[];
-  valves: { id: string; from: string; to: string; name: string; status: string; indicator_ids: string[] }[];
+  as_of: string; verdict: string; buckets: (Bucket & { indicators: Card[]; status: string; tally: Tally })[];
+  valves: { id: string; from: string; to: string; name: string; status: string; tally: Tally; indicator_ids: string[] }[];
   recent_status_events: StatusEvent[]; what_would_change: string[];
 }>("lens/diffusion.json");
 export type ChartSourcesT = { metric: string | null; sources: { id: string; name: string; org: string; license: string | null; attribution: string | null }[] };
 export type StackPart = { label: string; value: number; estimated: boolean; grade: string | null; href: string; obs_ids: string[] };
 export type StackBar = { value: number; as_of: string; estimated: boolean; parts: StackPart[]; obs_ids: string[] };
 export type StackRow = { as_of: string; layer_id: string | null; basis?: string; value: number; obs_ids: string[] };
-export const capture = () => read<{ as_of: string; verdict?: string; what_would_change: string[]; layers: (Layer & { indicators: Card[]; status: string; venture: LayerVenture | null; reading: string })[]; recent_status_events: StatusEvent[]; stack_bars: Record<string, StackBar>; gross_profit_stack_series: StackRow[]; margin_stack_series: StackRow[]; gross_profit_stack_sources: ChartSourcesT; margin_stack_sources: ChartSourcesT }>("lens/capture.json");
+export const capture = () => read<{ as_of: string; verdict?: string; what_would_change: string[]; layers: (Layer & { indicators: Card[]; status: string; tally: Tally; venture: LayerVenture | null; reading: string })[]; recent_status_events: StatusEvent[]; stack_bars: Record<string, StackBar>; gross_profit_stack_series: StackRow[]; margin_stack_series: StackRow[]; gross_profit_stack_sources: ChartSourcesT; margin_stack_sources: ChartSourcesT }>("lens/capture.json");
 export const sources = () => read<Source[]>("sources.json");
 export type Skipped = { id: string; name: string; url: string | null; reason: string; attribution: string | null; people?: string[] };
 export const skippedSources = () => read<Skipped[]>("skipped_sources.json");

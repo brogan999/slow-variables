@@ -361,6 +361,7 @@
   "anthropic_ei.global.automation_share_reported.pt",
   "anthropic_ei.global.occupations_25pct_tasks_share.pt"
  ],
+ "source_cluster": "anthropic_ei",
  "sparkline": [
   {
    "as_of": "2025-11-19",
@@ -422,8 +423,24 @@
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,
- "status": "consistent_with_normal",
+ "status": "emerging",
  "status_events": [
+  {
+   "author": "claude",
+   "counterevidence_considered": "The three earlier waves read 53.3%, 54.5% and 51.0%, so the series has stayed above the edge rather than crossing it, and the value is unchanged on the card and the series page. What the rule denies is a scored status this close to the line, not the reading itself.",
+   "created_at": "2026-09-12T01:10:30.691271Z",
+   "evidence_ids": [
+    "3c4c0eb291611df7"
+   ],
+   "id": "d63be7c576471a7a",
+   "new_conf": 60,
+   "new_status": "emerging",
+   "old_conf": 60,
+   "old_status": "consistent_with_normal",
+   "reason": "Held at emerging by the band-edge rule: augmentation is 51.4% of classified conversations (Anthropic Economic Index, 2026-05-31), within 5% of the normal band's edge at 50%, so the reading cannot separate 'augmentation at least half' from the gap below it.",
+   "target_id": "aei_augmentation_share",
+   "target_type": "indicator"
+  },
   {
    "author": "claude-initial-seed",
    "counterevidence_considered": null,

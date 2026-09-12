@@ -1,6 +1,7 @@
 # Capture-lens indicators. Status lives in data/status_events.jsonl only.
 indicators:
   - id: semis_rent_concentration
+    source_cluster: semis_filings
     name: Rent concentration in semiconductors
     definition: NVIDIA's gross margin (gross profit ÷ revenue, whole company) by fiscal quarter from audited and reviewed SEC filings, as the cleanest public read on how much of the stack's surplus the chip layer keeps.
     why_it_matters: Nordhaus's base rate says innovators keep ~2% of surplus; a 70%+ gross margin at the bottom of the stack is the opposite pattern. Whether it holds, rises or erodes is the first capture question.
@@ -133,6 +134,7 @@ indicators:
     published: true
     updated_at: 2026-09-10
   - id: margin_stack_semis_share
+    source_cluster: semis_filings
     name: Semiconductors' share of stack operating income
     definition: The chip layer's share of filed segment operating income across the AI stack's public filers, per calendar quarter (NVIDIA Compute & Networking and AMD Data Center versus AWS, Google Cloud and Microsoft Intelligent Cloud). Derived metric margin_stack_share_by_layer, semis slice.
     why_it_matters: The capture thesis in one number. "Rents migrate up the stack" means this share falls over four quarters while labs and apps rise; Nvidia holding its share means the bulge stays at the bottom.
@@ -196,6 +198,7 @@ indicators:
     published: true
     updated_at: 2026-09-10
   - id: semis_hhi
+    source_cluster: semis_filings
     name: Concentration among covered chip filers (HHI)
     definition: Herfindahl index of data-centre revenue between NVIDIA (Data Center segment) and AMD (Data Center segment), per calendar quarter, from filed segment disclosures. Derived metric hhi_by_layer, semis slice.
     why_it_matters: Rents stay where concentration stays. AMD's data-centre ramp and custom silicon are the routes by which the chip layer's rent would erode; this is the first of them in filed numbers.

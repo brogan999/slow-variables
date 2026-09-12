@@ -47,3 +47,18 @@ def test_the_surplus_bracket_holds_above_the_ceiling_and_fails_below_the_floor()
     assert _bracket(172, 37, 146) is True
     assert _bracket(30, 37, 146) is False
     assert _bracket(100, 37, 146) is None
+
+
+def test_a_reading_on_a_band_edge_or_with_a_straddling_interval_reads_emerging():
+    from ai_tracker.analysis.bands import flow_status
+    from ai_tracker.schema import Band, FlowStatus, Tier
+
+    normal, fast = Band(lo=None, hi=1e9), Band(lo=2e9, hi=None)
+    assert flow_status(2.4e9, normal, fast, None, Tier.BENCHMARK) == FlowStatus.faster_than_normal
+    assert flow_status(2e9, normal, fast, None, Tier.BENCHMARK) == FlowStatus.emerging  # exactly the edge
+    assert flow_status(2.05e9, normal, fast, None, Tier.BENCHMARK) == FlowStatus.emerging  # within 5% of it
+    assert flow_status(0.5e9, normal, fast, None, Tier.BENCHMARK) == FlowStatus.consistent_with_normal
+    slow, quick = Band(lo=230, hi=None), Band(lo=None, hi=110)
+    assert flow_status(67.7, slow, quick, None, Tier.BENCHMARK) == FlowStatus.faster_than_normal
+    assert flow_status(67.7, slow, quick, None, Tier.BENCHMARK, 38, 317) == FlowStatus.emerging  # covers both
+    assert flow_status(67.7, slow, quick, None, Tier.BENCHMARK, 60, 80) == FlowStatus.faster_than_normal
