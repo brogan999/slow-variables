@@ -132,6 +132,7 @@ class ScriptClient:
 
     def __init__(self, turns):
         self.turns = list(turns)
+        self.models = []
 
     def __getattr__(self, name):
         if name != "messages":
@@ -141,6 +142,7 @@ class ScriptClient:
     def create(self, **kw):
         from types import SimpleNamespace as NS
 
+        self.models.append(kw["model"])
         t = self.turns.pop(0) if len(self.turns) > 1 else self.turns[0]
         usage = NS(input_tokens=100, output_tokens=10, cache_creation_input_tokens=1000, cache_read_input_tokens=0)
         if isinstance(t, dict):
@@ -259,3 +261,28 @@ def test_a_citation_token_that_resolves_to_no_record_never_reaches_the_audit_row
     res = ask(s, "q", t, ScriptClient([text]))
     assert res["audit"]["cites"] == [f"obs:{oid}"] and [c["id"] for c in res["citations"]] == [oid]
     assert "secret" not in json.dumps(res["audit"])
+
+
+def test_an_indicator_record_carries_its_own_reading_and_status_reason():
+    s = st.Store()
+    s.derived = run_metrics(s.con)
+    t = Tools(s)
+    ind = next(i for i in s.seed.indicators if i.id == "btos_firm_use")
+    value, _as_of, _ids, _tier = s.band_input(ind)
+    rec = t.records([("ind", "btos_firm_use")])["btos_firm_use"]
+    assert value in rec.values and rec.snippet == s.current("btos_firm_use").reason  # the card's own number verifies
+
+
+def test_a_blocked_answer_retries_on_the_stronger_model_and_is_billed_at_its_rate():
+    from ai_tracker.query.ask import ESCALATE_MODEL, MODEL
+
+    s = st.Store()
+    t = Tools(s)
+    oid, value = s.con.execute("SELECT id, value_numeric FROM observations WHERE unit = 'USD' LIMIT 1").fetchone()
+    bad = "Revenue was $123,456,789 [obs:" + oid + "]."
+    good = "No figure is quoted here [obs:" + oid + "]."
+    c = ScriptClient([bad, bad, good])
+    res = ask(s, "q", t, c)
+    assert res["status"] == "retried" and res["model"] == ESCALATE_MODEL and res["audit"]["model"] == ESCALATE_MODEL
+    assert c.models[:2] == [MODEL, MODEL] and c.models[-1] == ESCALATE_MODEL  # only the fresh attempt escalates
+    assert value is not None

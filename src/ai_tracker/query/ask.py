@@ -29,12 +29,18 @@ import yaml
 from .. import store as st
 from ..analysis import fits
 from ..ingest.scrub import scrub
-from .citecheck import CITE, Record, check
+from .citecheck import CITE, NUM, Record, _parse, _rendered_matches, check
 
 log = logging.getLogger("ai-tracker.ask")
 MODEL = os.environ.get("QUERY_MODEL", "claude-sonnet-5")
-PROMPT_VERSION = "2"
-# Sonnet 5 list price (platform pricing page, 11 Sep 2026); cache writes bill at 1.25x input, cache reads at 0.1x
+# a blocked answer gets its fresh attempt on the stronger model: rare, so the bill stays near Sonnet's
+ESCALATE_MODEL = os.environ.get("QUERY_ESCALATE_MODEL", "claude-opus-5")
+PROMPT_VERSION = "3"
+# Opus 5 list price, for the escalated retry only
+ESCALATE_USD_PER_MTOK_IN, ESCALATE_USD_PER_MTOK_OUT = (
+    float(x) for x in os.environ.get("QUERY_ESCALATE_USD_PER_MTOK", "5,25").split(",")
+)
+# Sonnet 5 list price; cache writes bill at 1.25x input, cache reads at 0.1x
 USD_PER_MTOK_IN, USD_PER_MTOK_OUT = (
     float(x) for x in os.environ.get("QUERY_USD_PER_MTOK", "2,10").split(",")
 )
@@ -147,10 +153,11 @@ How to frame an answer (theory organises what the data shows; it is never a sour
 
 Rules for answers:
 1. Use the tools to look things up. Never answer a number from memory. If the store has no record, say that it has no record and give no number.
-2. Every number you state must be followed by a citation token for the record it comes from: [obs:<id>] for an observation, [derived:<id>] for a derived row, [ind:<id>] for an indicator's band edge or status, [event:<id>] for a number quoted from a status event's reason. Put the token in the same sentence as the number. Years and small counts ("3 of 4 trackers") do not need one, but cite the record anyway when there is one.
+2. Every number you state must be followed by a citation token for the record it comes from: [obs:<id>] for an observation, [derived:<id>] for a derived row, [ind:<id>] for an indicator's band edge or status, [event:<id>] for a number quoted from a status event's reason. Put the token in the same sentence as the number, and give every number in that sentence its own token, decimals such as -0.04 included. Cite the most specific record that holds the number: the observation or derived row it comes from, never the indicator when one of those holds it. A threshold, band edge, dead band or rule you quote counts as a number: cite the record whose text states it, which is the metric's own row for a description or caveat and the indicator for a band edge, its status, its confidence or its own headline reading. Years and small counts ("3 of 4 trackers") do not need one, but cite the record anyway when there is one.
 3. Render values the way the site does: shares as percentages (0.063 -> 6.3%), USD with k/M/B/T, ratios with x, minutes as hours when over an hour, and name the as-of date and the source tier.
 4. Quote a status only with its reason and date. Mention the dispute text when a row is disputed and the tier when it is 7.
-5. Be brief: two to five sentences, plain prose, no headings or bullet lists. Do not describe the tools or your process.
+5. Never compute a number. Do not add, divide, subtract or annualise records to make one, and do not restate a figure in a unit the record does not carry: a share, ratio, gap or growth rate must come from a metric row. If no record holds it, say the tracker does not compute it.
+6. Be brief: two to five sentences, plain prose, no headings or bullet lists. Do not describe the tools or your process.
 
 Metrics in the semantic layer:
 {mlines}
@@ -485,7 +492,11 @@ class Tools:
                         edges.append(float(ev.new_conf))
                     if ind.direction_rule:
                         edges += [ind.direction_rule.dead_band, float(ind.direction_rule.periods)]
-                    out[i] = Record(i, "ind", edges, ind.unit)
+                    # the card's own reading and the reason behind its status are the indicator's numbers too
+                    value, _as_of, _ids, _tier = self.store.band_input(ind)
+                    if value is not None:
+                        edges.append(float(value))
+                    out[i] = Record(i, "ind", edges, ind.unit, ev.reason if ev else "")
         return out
 
     def href(self, kind: str, id_: str) -> str | None:
@@ -562,11 +573,12 @@ def _run(
     tools: Tools,
     usage: dict[str, int],
     calls: list[dict[str, Any]],
+    model: str = MODEL,
 ) -> str:
     """One pass of the tool loop: keep answering tool calls until the model stops with text."""
     for _ in range(12):
         r = client.messages.create(
-            model=MODEL, max_tokens=1200, system=system, tools=TOOLS, messages=messages
+            model=model, max_tokens=1200, system=system, tools=TOOLS, messages=messages
         )
         usage["in"] += r.usage.input_tokens
         usage["out"] += r.usage.output_tokens
@@ -598,6 +610,30 @@ def _run(
     return ""
 
 
+def _hints(tools: Tools, calls: list[dict[str, Any]], failures: list[str], store: st.Store) -> str:
+    """For each number the check rejected, name a record the model already fetched that does hold it."""
+    blob = json.dumps(calls, default=str)
+    ids = list(dict.fromkeys(re.findall(r"\b[0-9a-f]{16}\b", blob)))[:120]
+    recs = tools.records([(k, i) for i in ids for k in ("obs", "derived")])
+    recs.update(tools.records([("ind", i.id) for i in store.seed.indicators if f'"{i.id}"' in blob]))
+    lines = []
+    for f in failures:
+        token = f.split("uncited number: ")[-1] if f.startswith("uncited number:") else f.split(" not found")[0]
+        m = NUM.search(token)
+        v = _parse(m) if m else None
+        hit = next(
+            (
+                r
+                for r in recs.values()
+                if (v is not None and _rendered_matches(v, r)) or (r.snippet and token.strip("%$x ~≈") in r.snippet)
+            ),
+            None,
+        )
+        if hit:
+            lines.append(f"- {token} is held by [{hit.kind}:{hit.id}]")
+    return ("\nRecords you already fetched that hold them:\n" + "\n".join(lines)) if lines else ""
+
+
 def ask(store: st.Store, question: str, tools: Tools | None = None, client: Any = None) -> dict[str, Any]:
     import anthropic
 
@@ -609,7 +645,8 @@ def ask(store: st.Store, question: str, tools: Tools | None = None, client: Any 
     usage = {"in": 0, "out": 0, "cache_write": 0, "cache_read": 0}
     calls: list[dict[str, Any]] = []
     text = _run(client, system, messages, tools, usage, calls)
-    status = "ok"
+    status, model = "ok", MODEL
+    up: dict[str, int] = {"in": 0, "out": 0, "cache_write": 0, "cache_read": 0}
     res = check(text, tools.records(CITE.findall(text)))
     if not res.ok:
         messages.append(
@@ -617,19 +654,23 @@ def ask(store: st.Store, question: str, tools: Tools | None = None, client: Any 
                 "role": "user",
                 "content": "Citation check failed:\n"
                 + "\n".join(f"- {f}" for f in res.failures)
-                + "\nRevise the answer so every number is followed by the citation token of a record that contains it, or drop the number. Reply with the revised answer only.",
+                + _hints(tools, calls, res.failures, store)
+                + "\nRevise the answer so every number is followed by the citation token of a record that contains it, or drop the number. Reply with the revised answer text only, and make no further tool calls.",
             }
         )
-        text = _run(client, system, messages, tools, usage, calls)
+        revised = _run(client, system, messages, tools, usage, calls)
+        if revised.strip():  # an empty reply (a tool call with no text) keeps the answer it was asked to revise
+            text = revised
         res = check(text, tools.records(CITE.findall(text)))
         status = "revised" if res.ok else "blocked"
     if (
         status == "blocked"
-    ):  # one fresh attempt: a new conversation often avoids the number that tripped the check
-        retry = _run(client, system, [{"role": "user", "content": question}], tools, usage, calls)
+    ):  # one fresh attempt on the stronger model: a new conversation, and better at citing what it read
+        up: dict[str, int] = {"in": 0, "out": 0, "cache_write": 0, "cache_read": 0}
+        retry = _run(client, system, [{"role": "user", "content": question}], tools, up, calls, ESCALATE_MODEL)
         res2 = check(retry, tools.records(CITE.findall(retry)))
         if res2.ok:
-            text, res, status = retry, res2, "retried"
+            text, res, status, model = retry, res2, "retried", ESCALATE_MODEL
     # only tokens that resolve to a record: anything else is model or visitor text and must not reach the log
     found = tools.records(CITE.findall(text))
     cites = [
@@ -638,6 +679,8 @@ def ask(store: st.Store, question: str, tools: Tools | None = None, client: Any 
     usd = (
         (usage["in"] + 1.25 * usage["cache_write"] + 0.1 * usage["cache_read"]) * USD_PER_MTOK_IN
         + usage["out"] * USD_PER_MTOK_OUT
+        + (up["in"] + 1.25 * up["cache_write"] + 0.1 * up["cache_read"]) * ESCALATE_USD_PER_MTOK_IN
+        + up["out"] * ESCALATE_USD_PER_MTOK_OUT
     ) / 1e6
     audit = {  # P1 §8 / v2 §6.1: auditable by the records it cited, the model and the prompt; never the text
         "time": datetime.now(timezone.utc).isoformat(timespec="microseconds"),
@@ -645,7 +688,7 @@ def ask(store: st.Store, question: str, tools: Tools | None = None, client: Any 
         "usd": round(usd, 5),
         "tools": len(calls),
         "cites": [f"{c['kind']}:{c['id']}" for c in cites],
-        "model": MODEL,
+        "model": model,
         "prompt_version": PROMPT_VERSION,
     }
     log.info("ask %s", json.dumps(audit, sort_keys=True))
@@ -655,7 +698,7 @@ def ask(store: st.Store, question: str, tools: Tools | None = None, client: Any 
         "status": status,
         "citations": cites,
         "checks": {"numbers": res.numbers, "failures": res.failures},
-        "model": MODEL,
+        "model": model,
         "prompt_version": PROMPT_VERSION,
         "usage": {**usage, "usd": round(usd, 5)},
         "tool_calls": calls,
@@ -672,7 +715,14 @@ def golden(store: st.Store, tools: Tools | None = None, client: Any = None) -> l
         a = ask(store, q["question"], tools, client)
         exp = q["expect"]
         if exp.get("refuse"):
-            ok = not a["checks"]["numbers"] and a["status"] != "blocked"
+            # a refusal must say the store holds no such record and invent nothing; cited context figures are
+            # allowed, because citecheck has already traced every one of them to a record
+            said = a["answer"].lower()
+            ok = (
+                a["status"] != "blocked"
+                and not a["checks"]["failures"]
+                and any(m in said for m in exp.get("says", ["no record"]))
+            )
         else:
             cited_series = {
                 (
@@ -693,6 +743,16 @@ def golden(store: st.Store, tools: Tools | None = None, client: Any = None) -> l
                 if d.id == c["id"]
             }
             cited_inds = {c["id"] for c in a["citations"] if c["kind"] == "ind"}
+            for c in a["citations"]:  # an indicator cited for its own reading traces to that reading's rows
+                if c["kind"] != "ind":
+                    continue
+                ind = next((x for x in store.seed.indicators if x.id == c["id"]), None)
+                for oid in store.band_input(ind)[2] if ind else []:
+                    r = tools.store.con.execute(
+                        "SELECT series_key FROM observation_all WHERE id = ?", [oid]
+                    ).fetchone()
+                    if r:
+                        cited_series.add(r[0])
             hit = (
                 any(fnmatch(s, g) for g in exp.get("series", []) for s in cited_series)
                 or bool(cited_metrics & set(exp.get("metrics", [])))
