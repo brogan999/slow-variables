@@ -30,7 +30,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
   const { buckets, layers, indicators } = index();
   const srcs = sources();
   const bandOnChart = d.band_input && (d.band_input === `metric:${d.metric}` || d.band_input === d.series_keys[0]);
-  const bandUnit = d.band_input?.includes("doubling") ? "days" : d.unit;
+  const bandUnit = d.band_value?.unit ?? d.unit;
   const current = d.status_events[0];
   const visible = SECTIONS.filter(([id]) => id !== "evidence-log" || d.evidence.length);
   const num = (id: string) => visible.findIndex(([x]) => x === id) + 1;
@@ -94,7 +94,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
           <div className="mt-3 overflow-x-auto">
             <div className="text-xs text-muted mb-1">Model comparison (lower AIC fits better; both on ln(horizon) residuals)</div>
             <table className="data w-full text-xs"><thead><tr><th scope="col">fit</th><th scope="col">estimate</th><th scope="col">95% interval</th><th scope="col">n</th><th scope="col">R²</th><th scope="col">AIC</th><th scope="col">inputs</th></tr></thead><tbody>
-              {d.fits.map((f) => { const u = f.metric.includes("blowup") ? "year" : "days"; const show = (v: number | null) => v == null ? "—" : u === "year" ? v.toFixed(1) : `${v.toFixed(0)} days`; return (
+              {d.fits.map((f) => { const u = f.unit ?? "days"; const show = (v: number | null) => v == null ? "—" : u === "year" ? v.toFixed(1) : `${v.toFixed(0)} days`; return (
                 <tr key={f.metric}><td><code>{f.metric}</code></td><td className="tabular-nums">{show(f.value)}</td><td className="tabular-nums">{show(f.value_low)}–{show(f.value_high)}</td><td className="tabular-nums">{f.dims.n}</td><td className="tabular-nums">{f.dims.r2}</td><td className="tabular-nums">{f.dims.aic}</td><td><ObsLinks ids={f.obs_ids} obsIndex={idx} max={2} /></td></tr>
               ); })}
             </tbody></table>

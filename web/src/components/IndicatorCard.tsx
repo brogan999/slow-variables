@@ -23,7 +23,11 @@ export function IndicatorCard({ c, obsIndex }: { c: Card; obsIndex: Record<strin
       {c.answers?.length ? <p className="text-xs text-muted">{c.answers.join(" · ")}</p> : null}
       {!c.published && c.unpublished_reason ? <p className="text-xs text-ink-2">Unpublished: {c.unpublished_reason}</p> : null}
       <div className="flex items-end justify-between gap-3">
-        <div className="text-lg"><Num p={c.latest} unit={c.unit} obsIndex={obsIndex} /></div>
+        <div className="text-lg">
+          <Num p={c.latest} unit={c.unit} obsIndex={obsIndex} />
+          {/* the status is read off the band input, which is often a fit rather than the latest point */}
+          {c.band_value ? <div className="text-xs text-muted">status from <Num p={c.band_value} unit={c.band_value.unit} obsIndex={obsIndex} /></div> : null}
+        </div>
         {pts.length > 1 ? <Sparkline pts={pts.map((p) => p.value as number)} /> : null}
       </div>
     </div>

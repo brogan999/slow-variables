@@ -441,6 +441,23 @@ class Store:
         o = obs[-1]
         return o["value_numeric"], o["as_of_date"], [o["id"]], Tier(o["tier"])
 
+    def metric_spec(self, name: str | None) -> dict[str, Any]:
+        """One metric's entry in the semantic layer, or an empty dict."""
+        if not name:
+            return {}
+        if not hasattr(self, "_metric_spec"):
+            path = Path("semantic/metrics.yaml")
+            self._metric_spec = (
+                (yaml.safe_load(path.read_text()) or {}).get("metrics", {}) if path.exists() else {}
+            )
+        return self._metric_spec.get(name) or {}
+
+    def band_unit(self, ind: Indicator) -> str:
+        """The unit of the number the bands apply to: a metric's own unit when the band reads a metric."""
+        if ind.band_input and ind.band_input.startswith("metric:"):
+            return self.metric_spec(ind.band_input[7:]).get("unit") or ind.unit
+        return ind.unit
+
     def band_interval(self, ind: Indicator) -> tuple[float | None, float | None]:
         """The interval around the band input, where the fit or the source published one."""
         if not ind.band_input:
@@ -511,6 +528,7 @@ class Store:
                 "points": self.headline(ind),
                 "band_value": {
                     "value": bv,
+                    "unit": self.band_unit(ind),
                     "as_of": b_as_of.isoformat() if b_as_of else None,
                     "obs_ids": b_ids,
                     "low": fit.value_low if (fit := self.band_fit(ind)) else None,
@@ -519,7 +537,11 @@ class Store:
                 if bv is not None
                 else None,
                 "fits": [
-                    {**dump(r[-1]), "obs_ids": r[-1].input_observation_ids}
+                    {
+                        **dump(r[-1]),
+                        "obs_ids": r[-1].input_observation_ids,
+                        "unit": self.metric_spec(m).get("unit"),
+                    }
                     for m in ind.related_metrics
                     if (r := self.derived_for(m, ind.metric_dims))
                 ],
@@ -749,6 +771,22 @@ class Store:
         ev = self.current(ind.id)
         latest = pts[-1] if pts else None
         ev_obs = self.evidence_obs(ind)
+        # the status is read off the band input, which is often a fit rather than the latest point; say so on
+        # the card unless they are the same number
+        bi = self.band_input(ind)
+        band_value = (
+            {
+                "value": bi[0],
+                "unit": self.band_unit(ind),
+                "as_of": bi[1].isoformat() if bi[1] else None,
+                "obs_ids": bi[2],
+            }
+            if bi[0] is not None
+            and ind.band_input
+            and ind.band_input.startswith("metric:")
+            and not (latest and latest.get("value") == bi[0])
+            else None
+        )
         stale = None
         if latest and ind.cadence_expected in CADENCE_DAYS:
             age = (date.today() - date.fromisoformat(latest["as_of"])).days
@@ -769,6 +807,7 @@ class Store:
             "confidence": ev.new_conf if ev else None,
             "leading_lagging": ind.leading_lagging.value if ind.leading_lagging else None,
             "source_cluster": ind.source_cluster,
+            "band_value": band_value,
             "grade": _best_grade(ev_obs),
             "latest": latest,
             "sparkline": pts[-24:],
