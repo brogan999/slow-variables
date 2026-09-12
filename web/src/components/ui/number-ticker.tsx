@@ -35,6 +35,7 @@ export function NumberTicker({
 
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout> | null = null
+    let settle: ReturnType<typeof setTimeout> | null = null
 
     if (isInView) {
       if (reduce) {
@@ -45,13 +46,15 @@ export function NumberTicker({
       springValue.jump(direction === "down" ? value : startValue)
       timer = setTimeout(() => {
         motionValue.set(direction === "down" ? startValue : value)
+        settle = setTimeout(() => {  // whatever the spring did, the figure on screen ends exact
+          if (ref.current) ref.current.textContent = fmt(direction === "down" ? startValue : value)
+        }, 3000)
       }, delay * 1000)
     }
 
     return () => {
-      if (timer !== null) {
-        clearTimeout(timer)
-      }
+      if (timer !== null) clearTimeout(timer)
+      if (settle !== null) clearTimeout(settle)
     }
   }, [motionValue, springValue, isInView, delay, value, direction, startValue, reduce])
 
@@ -59,13 +62,18 @@ export function NumberTicker({
     () =>
       springValue.on("change", (latest) => {
         if (ref.current) {
+          // a spring approaches its target without reaching it: inside one display step, show the real number
+          const target = direction === "down" ? startValue : value
+          // a spring approaches its target without reaching it, so the last stretch shows the real number
+          const near = Math.max(Math.pow(10, -decimalPlaces) / 2, Math.abs(target) * 0.01)
+          const shown = Math.abs(target - latest) < near ? target : latest
           ref.current.textContent = Intl.NumberFormat("en-US", {
             minimumFractionDigits: decimalPlaces,
             maximumFractionDigits: decimalPlaces,
-          }).format(Number(latest.toFixed(decimalPlaces)))
+          }).format(Number(shown.toFixed(decimalPlaces)))
         }
       }),
-    [springValue, decimalPlaces]
+    [springValue, decimalPlaces, direction, startValue, value]
   )
 
   return (

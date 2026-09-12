@@ -28,7 +28,17 @@ export function StackVertical({ layers, bars }: { layers: (Layer & { indicators:
               {l.venture && l.venture.sublayers.length > 1 ? <Ticks v={l.venture} /> : null}
             </div>
             <div className="flex flex-wrap items-center gap-2">
-              <div className="h-7 rounded-sm ring-hair" style={{ width: `${width}%`, background: b ? (b.estimated ? HATCH : "var(--s1)") : "transparent", border: b ? "none" : "1px dashed var(--axis)" }} title={b ? `${fmt(b.value, "share")} of stack gross profit${b.estimated ? " (estimated)" : ""}` : "no gross-profit series"} />
+              {/* one segment per source of the layer's gross profit, so the split is visible, not only listed */}
+              <div className="h-7 flex gap-[2px]" style={{ width: `${width}%` }}>
+                {b ? b.parts.map((p, i) => (
+                  <div
+                    key={p.label}
+                    className="h-full rounded-sm ring-hair"
+                    style={{ width: `${Math.max(2, (p.value / b.value) * 100)}%`, background: p.estimated ? HATCH : i % 2 ? "var(--s2)" : "var(--s1)" }}
+                    title={`${p.label}: ${fmt(p.value, "share")} of stack gross profit${p.estimated ? " (estimated)" : ""}`}
+                  />
+                )) : <div className="h-full w-full rounded-sm" style={{ border: "1px dashed var(--axis)" }} title="no gross-profit series" />}
+              </div>
               <span className="text-xs tabular-nums text-ink-2">
                 {b ? (
                   <>
