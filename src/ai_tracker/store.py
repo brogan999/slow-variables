@@ -770,7 +770,7 @@ class Store:
         pts = self.headline(ind)
         ev = self.current(ind.id)
         latest = pts[-1] if pts else None
-        tiers = [Tier(o["tier"]) for o in self.evidence_obs(ind)]
+        ev_obs = self.evidence_obs(ind)
         stale = None
         if latest and ind.cadence_expected in CADENCE_DAYS:
             age = (date.today() - date.fromisoformat(latest["as_of"])).days
@@ -790,7 +790,7 @@ class Store:
             "status": ev.new_status if ev else None,
             "confidence": ev.new_conf if ev else None,
             "leading_lagging": ind.leading_lagging.value if ind.leading_lagging else None,
-            "grade": _grade(min(tiers)) if tiers else None,
+            "grade": _best_grade(ev_obs),
             "latest": latest,
             "sparkline": pts[-24:],
             "stale_as_of": None if ind.stale_ok else stale,
@@ -806,7 +806,7 @@ class Store:
         names = {x.id: x.name for x in self.seed.sources}
         tiers = [Tier(o["tier"]) for o in obs]
         return {
-            "grade": _grade(min(tiers)) if tiers else None,
+            "grade": _best_grade(obs),
             "best_tier": int(min(tiers)) if tiers else None,
             "sources": sorted({names.get(o["source_id"], o["source_id"]) for o in obs}),
             "n_observations": len(obs),
@@ -1002,7 +1002,8 @@ class Store:
         if not targets:
             return []
         rows = self.con.execute(
-            "SELECT id, series_key, as_of_date, value_text, url, tier, source_id, raw_snippet, entity_id FROM observations "
+            "SELECT id, series_key, as_of_date, value_text, url, tier, source_id, raw_snippet, entity_id, "
+            "audited_vs_reported FROM observations "
             "WHERE " + " OR ".join("series_key LIKE ?" for _ in targets) + " ORDER BY as_of_date DESC",
             [f"evidence.{t}.%" for t in targets],
         ).fetchall()
@@ -1018,6 +1019,7 @@ class Store:
                 "source_id": r[6],
                 "snippet": r[7],
                 "entity_id": r[8],
+                "grade": _grade({"tier": r[5], "audited_vs_reported": r[9]}),
             }
             for r in rows
         ]
@@ -1275,23 +1277,20 @@ class Store:
 
         conc = [c["name"] for c in scored if c["status"] == "concentrating"]
         disp = [c["name"] for c in scored if c["status"] == "dispersing"]
-        parts = [
-            f"{layer.name} {'is' if status in ('unmeasured', 'not yet measurable') else 'reads'} {status}"
-        ]
+        # the status chip and the venture arrow sit beside this sentence, so it says what they cannot
+        parts = (
+            []
+            if conc or disp
+            else [f"{layer.name} {'is' if status in ('unmeasured', 'not yet measurable') else 'reads'} {status}"]
+        )
         if conc:
-            parts.append(f"{names(conc)} {'points' if len(conc) == 1 else 'point'} to concentration")
+            parts.append(f"toward concentration: {names(conc)}")
         if disp:
-            parts.append(f"{names(disp)} {'points' if len(disp) == 1 else 'point'} to dispersion")
-        v = self._layer_venture(layer.id)
-        if v and v["arrow"]:
-            parts.append(
-                {
-                    "up": "venture money is up on a year earlier",
-                    "down": "venture money is down on a year earlier",
-                    "flat": "venture money is flat on a year earlier",
-                }[v["arrow"]]
-            )
-        return "; ".join(parts) + "."
+            parts.append(f"toward dispersion: {names(disp)}")
+        if not parts:
+            parts = [f"{layer.name} reads {status}"]
+        out = "; ".join(parts) + "."
+        return out[0].upper() + out[1:]
 
     def _commoditisation(self, cards: dict[str, Any]) -> dict[str, Any]:
         """The model layer's four commoditisation proxies (Part 1's list), named with their own statuses; no composite."""
@@ -1523,10 +1522,16 @@ VALVES = [
 ]
 
 
-def _grade(t: Tier) -> str:
-    from .schema import grade_from_tier
+def _grade(o: dict[str, Any]) -> str:
+    """One row's grade. The basis matters: a 10-K is audited and grades A, a 10-Q is company-stated and grades B."""
+    from .schema import Basis, grade_from_tier
 
-    return grade_from_tier(t)
+    return grade_from_tier(Tier(o["tier"]), Basis(o["audited_vs_reported"]))
+
+
+def _best_grade(obs: list[dict[str, Any]]) -> str | None:
+    """The best grade among the rows behind an indicator; A sorts before B before C before D."""
+    return min((_grade(o) for o in obs), default=None)
 
 
 def _summarise(cards: list[dict[str, Any]]) -> str:
@@ -1567,7 +1572,7 @@ def _point(o: dict[str, Any]) -> dict[str, Any]:
         "subject": o["subject"],
         "unit": o["unit"],
         "disputed": o["disputed"],
-        "grade": _grade(Tier(o["tier"])),
+        "grade": _grade(o),
         **_flags(o),
     }
 
@@ -1588,7 +1593,7 @@ def _flags(o: dict[str, Any]) -> dict[str, Any]:
 
 
 def _full(o: dict[str, Any]) -> dict[str, Any]:
-    return {**_jsonable(o), "grade": _grade(Tier(o["tier"]))}
+    return {**_jsonable(o), "grade": _grade(o)}
 
 
 def _jsonable(d: dict[str, Any]) -> dict[str, Any]:

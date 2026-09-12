@@ -21,7 +21,7 @@ export type StatusEvent = {
   reason: string; evidence_ids: string[]; author: string; created_at: string; counterevidence_considered?: string | null;
 };
 export type Band = { lo?: number | null; hi?: number | null } | null;
-export type Evidence = { id: string; target: string; stance: "for" | "against" | "context"; as_of: string; summary: string; url: string; tier: number; source_id: string; snippet: string; entity_id: string | null };
+export type Evidence = { id: string; target: string; stance: "for" | "against" | "context"; as_of: string; summary: string; url: string; tier: number; grade: string; source_id: string; snippet: string; entity_id: string | null };
 export type IndicatorDoc = Card & {
   definition: string; why_it_matters: string; proxy_types: string[]; cadence_expected: string; tracker_interpretation: string;
   counterevidence: string; series_keys: string[]; metric: string | null; band_input: string | null;
