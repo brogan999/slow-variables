@@ -9,12 +9,14 @@ export type Point = {
   subject?: string; unit?: string; disputed?: boolean; grade?: string; dims?: Record<string, string>; series_key?: string;
   flags?: string[]; dispute_text?: string | null;
 };
+export type BandValue = { value: number; unit: string; as_of: string; obs_ids: string[] };
 export type Card = {
   unpublished_reason?: string | null; answers?: string[];
   id: string; name: string; bucket_id: string | null; layer_id: string | null; valve_measured: string | null;
   unit: string; published: boolean; status: string | null; confidence: number | null; leading_lagging: string | null;
   grade: string | null; latest: Point | null; sparkline: Point[]; stale_as_of: string | null; stale_reason?: string | null; n_observations: number;
   pending?: { new_status: string; since: string } | null;
+  source_cluster?: string | null; band_value?: BandValue | null;
 };
 export type StatusEvent = {
   id: string; target_type?: "indicator" | "prediction"; target_id: string; old_status: string | null; new_status: string; old_conf: number | null; new_conf: number;
@@ -34,6 +36,7 @@ export type IndicatorDoc = Card & {
   status_events: StatusEvent[]; crosswalk: Crosswalk[]; evidence: Evidence[];
 };
 export type Bucket = { id: string; name: string; order: number; stock: string; valve: string; speed_limit: string };
+export type Tally = { scored: number; published: number; margin: number; only: string | null };
 export type Layer = { id: string; name: string; order: number; description: string; dependency_tier: number | null };
 export type Sublayer = { id: string; layer_id: string; name: string; order: number; description: string };
 export type Crosswalk = { bucket_id: string; layer_id: string; sublayer_id: string | null; relation: string; note: string; shared_indicators: string[] };
@@ -50,19 +53,19 @@ function read<T>(rel: string): T {
 export const index = () => read<{ indicators: Card[]; buckets: Bucket[]; layers: Layer[]; sublayers: Sublayer[]; crosswalk: Crosswalk[] }>("index.json");
 export const indicator = (id: string) => read<Doc>(`indicators/${id}.json`);
 export const bucket = (id: string) => read<Bucket & { indicators: Card[]; crosswalk: Crosswalk[] }>(`buckets/${id}.json`);
-export const layer = (id: string) => read<Layer & { indicators: Card[]; sublayers: Sublayer[]; crosswalk: Crosswalk[]; venture: LayerVenture | null; commoditisation: { proxies: { id: string; name: string; status: string | null }[]; line: string } | null }>(`layers/${id}.json`);
+export const layer = (id: string) => read<Layer & { tally?: Tally; indicators: Card[]; sublayers: Sublayer[]; crosswalk: Crosswalk[]; venture: LayerVenture | null; commoditisation: { proxies: { id: string; name: string; status: string | null }[]; line: string } | null }>(`layers/${id}.json`);
 export const series = (key: string) => read<{ series_key: string; unit: string; source: Source | null; observations: Observation[]; withdrawn: Observation[] }>(`series/${key}.json`);
 export const seriesKeys = () => fs.readdirSync(path.join(ROOT, "series")).map((f) => f.replace(/\.json$/, ""));
 export const diffusion = () => read<{
-  as_of: string; verdict: string; buckets: (Bucket & { indicators: Card[]; status: string })[];
-  valves: { id: string; from: string; to: string; name: string; status: string; indicator_ids: string[] }[];
+  as_of: string; verdict: string; buckets: (Bucket & { indicators: Card[]; status: string; tally: Tally })[];
+  valves: { id: string; from: string; to: string; name: string; status: string; tally: Tally; indicator_ids: string[] }[];
   recent_status_events: StatusEvent[]; what_would_change: string[];
 }>("lens/diffusion.json");
 export type ChartSourcesT = { metric: string | null; sources: { id: string; name: string; org: string; license: string | null; attribution: string | null }[] };
 export type StackPart = { label: string; value: number; estimated: boolean; grade: string | null; href: string; obs_ids: string[] };
 export type StackBar = { value: number; as_of: string; estimated: boolean; parts: StackPart[]; obs_ids: string[] };
 export type StackRow = { as_of: string; layer_id: string | null; basis?: string; value: number; obs_ids: string[] };
-export const capture = () => read<{ as_of: string; verdict?: string; what_would_change: string[]; layers: (Layer & { indicators: Card[]; status: string; venture: LayerVenture | null; reading: string })[]; recent_status_events: StatusEvent[]; stack_bars: Record<string, StackBar>; gross_profit_stack_series: StackRow[]; margin_stack_series: StackRow[]; gross_profit_stack_sources: ChartSourcesT; margin_stack_sources: ChartSourcesT }>("lens/capture.json");
+export const capture = () => read<{ as_of: string; verdict?: string; what_would_change: string[]; layers: (Layer & { indicators: Card[]; status: string; tally: Tally; venture: LayerVenture | null; reading: string })[]; recent_status_events: StatusEvent[]; stack_bars: Record<string, StackBar>; gross_profit_stack_series: StackRow[]; margin_stack_series: StackRow[]; gross_profit_stack_sources: ChartSourcesT; margin_stack_sources: ChartSourcesT }>("lens/capture.json");
 export const sources = () => read<Source[]>("sources.json");
 export type Skipped = { id: string; name: string; url: string | null; reason: string; attribution: string | null; people?: string[] };
 export const skippedSources = () => read<Skipped[]>("skipped_sources.json");
@@ -71,7 +74,7 @@ export const meta = () => read<{ generated_at: string; observations: number; ind
 
 export { fmt, words } from "./format";
 export const obsIndex = () => read<Record<string, string>>("obs_index.json");
-export type Fit = { metric: string; value: number; value_low: number | null; value_high: number | null; as_of_date: string; dims: Record<string, string>; obs_ids: string[] };
+export type Fit = { metric: string; value: number; value_low: number | null; value_high: number | null; as_of_date: string; unit?: string | null; dims: Record<string, string>; obs_ids: string[] };
 export type Doc = IndicatorDoc & { chart_sources?: ChartSourcesT; confidence_basis?: { grade: string | null; best_tier: number | null; sources: string[]; n_observations: number; stale_as_of: string | null }; prediction_rows?: { id: string; claimant: string; ledger: string; status: string | null }[]; points: Point[]; band_value: { value: number; as_of: string | null; obs_ids: string[]; low: number | null; high: number | null } | null; fits: Fit[]; related_metrics: string[] };
 export type Prediction = { direction_assessment?: string | null; magnitude_assessment?: string | null; timing_assessment?: string | null;
   id: string; ledger: "nk" | "lab" | "ai2027" | "capture"; claimant: string; claim_text: string; claim_url: string | null; claim_date: string;

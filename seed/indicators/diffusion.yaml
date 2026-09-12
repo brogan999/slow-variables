@@ -1,7 +1,25 @@
 # Diffusion-lens indicators. No status here: status lives in data/status_events.jsonl only.
 # `proposed_status` is what the brief expected on 9 Sep 2026; `check` reports disagreement with the evaluator.
 indicators:
+  - id: routed_token_volume_growth
+    name: Growth in tokens routed through a public router
+    definition: Doubling time of the tokens routed to the models on OpenRouter's public rankings, summed across the list at each snapshot. Derived metric routed_tokens_doubling_days.
+    why_it_matters: "Every other adoption series counts people or accounts. This one counts work: how many tokens are actually being run, and how fast that is growing."
+    proxy_types: [deployment, behaviour]
+    unit: days
+    cadence_expected: weekly
+    bucket_id: early_adoption
+    valve_measured: products_to_early_adoption
+    leading_lagging: coincident
+    timing_rationale: "Coincident: routed volume moves as the work moves, with no reporting lag beyond the router's own window."
+    tracker_interpretation: Not published.
+    confidence: 25
+    unpublished_reason: "Waiting on history: the router's snapshots start in September 2026, and a growth fit on a few days of a trailing-window total would be noise. It publishes once eight weeks of snapshots exist."
+    counterevidence: "One router is a small and unrepresentative slice of inference: it carries no first-party API traffic, its list composition changes week to week, and a model leaving the list looks like a fall in volume."
+    published: false
+    updated_at: 2026-09-12
   - id: metr_horizon_50
+    source_cluster: metr_horizons
     name: METR 50% time horizon
     definition: Length (in human-expert minutes) of software tasks a frontier model completes with 50% success, per METR's Horizon v1.1 suite, plotted by model release date. The band applies to the doubling time of that series over the most recent window METR itself reports (2024 onward), recomputed here from METR's corrected data file; METR's published 2023-onward figure is shown alongside.
     why_it_matters: The cleanest single series for the methods stock. If capability doubles every few months the invention valve is wide open; the paper's claim is that this alone does not move the later stocks.
@@ -27,6 +45,7 @@ indicators:
     published: true
     updated_at: 2026-09-10
   - id: metr_horizon_80
+    source_cluster: metr_horizons
     name: METR 80% time horizon
     definition: Task length a model completes with 80% success on the same suite. The band applies to a log-linear doubling-time fit over the 80% series from 2024 onward (derived metric horizon_doubling_days_80_since_2024), the same window as the 50% horizon.
     why_it_matters: 80% is closer to what a product needs than 50%. If the reliable horizon lags badly, benchmarks flatter products.
@@ -51,6 +70,7 @@ indicators:
     published: true
     updated_at: 2026-09-10
   - id: horizon_ratio_80_50
+    source_cluster: metr_horizons
     name: 50%/80% horizon ratio
     definition: METR 50% horizon divided by 80% horizon for the same model (derived metric horizon_ratio_80_50). ~7-10x recently, up from ~5x.
     why_it_matters: The ratio is the reliability gap in one number. If it collapses toward 2x while the 80% horizon exceeds eight hours, the normal-technology thesis loses its productisation argument.
@@ -174,6 +194,7 @@ indicators:
     published: true
     updated_at: 2026-09-10
   - id: bbd_work_hours_assisted
+    source_cluster: bbd_rtps
     name: Share of work hours assisted by generative AI
     definition: Share of all US work hours in which employed adults used generative AI, from the Bick–Blandin–Deming Real-Time Population Survey (quarterly series via FRED).
     why_it_matters: The intensive margin. Headline adoption is broad, but hours actually assisted is what productivity arithmetic runs on.
@@ -579,6 +600,7 @@ indicators:
     published: true
     updated_at: 2026-09-11
   - id: ord_half_life_misfit
+    source_cluster: metr_horizons
     name: Ord half-life misfit (observed 50/80 ratio vs constant hazard)
     definition: "The observed ratio of METR's 50% to 80% horizons divided by 3.11, the ratio a constant task-length hazard (Ord's half-life model) predicts. Derived metric ord_half_life_misfit."
     why_it_matters: "Reports Ord's reframing alongside the horizons, as the brief asks: a misfit near 1 means success decays at a constant rate with task length; well above 1 means reliability collapses faster at long horizons, which is the capability-reliability gap in one number."
@@ -719,6 +741,7 @@ indicators:
     published: false
     updated_at: 2026-09-11
   - id: canaries_exposed_employment_yoy
+    source_cluster: labour_trackers
     name: Employment in AI-exposed occupations, year on year
     definition: Year-on-year employment change in the most AI-exposed occupation quintile versus the least exposed, from the Stanford DEL and ADP Research Canaries Dashboard (payroll data). The band applies to the most-exposed series.
     why_it_matters: The paper predicts no broad AI-attributable employment decline for years; this is the highest-frequency payroll test of that claim.
@@ -767,6 +790,7 @@ indicators:
     published: true
     updated_at: 2026-09-10
   - id: revelio_exposed_vs_unexposed_growth
+    source_cluster: labour_trackers
     name: Exposed vs unexposed occupation employment gap (Revelio)
     definition: Employment in the most AI-exposed occupations relative to the least exposed, since October 2022, from Revelio Labs' AI Labor Market Tracker (online profile data).
     why_it_matters: An independent, differently sourced read on the same question as the Canaries payroll series.
@@ -791,6 +815,7 @@ indicators:
     published: true
     updated_at: 2026-09-10
   - id: cait_high_exposure_claims
+    source_cluster: labour_trackers
     name: California unemployment claims from AI-exposed occupations
     definition: Month-on-month change in the three-month moving average of new initial unemployment claims from high-AI-exposure occupations in California (potential-exposure measure), from the California Policy Lab and EDD tracker.
     why_it_matters: Administrative claims data, not a survey and not a profile scrape; the closest thing to a real-time separations signal.
@@ -840,6 +865,7 @@ indicators:
     published: true
     updated_at: 2026-09-10
   - id: cross_tracker_concordance
+    source_cluster: labour_trackers
     name: Cross-tracker concordance (labour)
     definition: How many of the four labour trackers (Canaries payroll, Canaries entry-level, Revelio, CAIT) currently read past their own AI-attributable-break threshold. Derived metric cross_tracker_concordance, 0 to 4.
     why_it_matters: The thesis's falsification rule requires three trackers breaking concurrently, not one. This is that count, made explicit.
@@ -865,6 +891,7 @@ indicators:
     published: true
     updated_at: 2026-09-10
   - id: aei_augmentation_share
+    source_cluster: anthropic_ei
     name: Augmentation vs automation share (Anthropic Economic Index)
     definition: Share of classified Claude.ai conversations in the augmentation bucket (learning, task iteration, validation) versus automation (directive, feedback loop), computed from Anthropic's Economic Index open dataset for each 2026 release; the blog-reported shares and the share of occupations with at least a quarter of their tasks used are shown alongside.
     why_it_matters: The paper's bet is that AI diffuses as a tool people use, not a replacement; this is the only large-scale usage classification that speaks to it directly.
@@ -1061,6 +1088,7 @@ indicators:
     published: true
     updated_at: 2026-09-10
   - id: exposure_vs_usage_gap
+    source_cluster: bbd_rtps
     name: Usage as a share of theoretical exposure
     definition: Weekly work use of generative AI (Bick-Blandin-Deming) divided by the share of the US workforce with at least a tenth of tasks exposed to LLMs (Eloundou and co-authors' "GPTs are GPTs"), derived metric exposure_vs_usage_gap.
     why_it_matters: The paper's central gap - what the technology could touch versus what people actually use it for weekly. Exposure is a ceiling; usage is the diffusion curve under it.
@@ -1110,6 +1138,7 @@ indicators:
     published: true
     updated_at: 2026-09-10
   - id: yale_occupational_mix_dissimilarity
+    source_cluster: labour_trackers
     name: "Occupational-mix dissimilarity since ChatGPT (Yale Budget Lab)"
     definition: "How far the occupational mix of the US workforce has moved from its November 2022 baseline, in percentage points, the Budget Lab's dissimilarity index from its monthly labour-market update workbook; the same index from a January 2021 baseline is shown alongside as the pre-AI comparison at the same age."
     why_it_matters: "If AI were reshaping work, the mix of occupations would move faster than in prior technology transitions. The Budget Lab finds it moving at about the historical pace."
@@ -1285,6 +1314,7 @@ indicators:
     published: true
     updated_at: 2026-09-10
   - id: bbd_adult_use
+    source_cluster: bbd_rtps
     name: US adults who have used generative AI
     definition: Share of US adults aged 18-64 who have ever used generative AI, from the Bick-Blandin-Deming Real-Time Population Survey (quarterly via FRED), with use in the last week shown alongside.
     why_it_matters: The extensive margin. The paper expects breadth to move fast and depth to lag; this is the breadth half of that claim, read against hours assisted.
@@ -1308,6 +1338,7 @@ indicators:
     published: true
     updated_at: 2026-09-11
   - id: aei_occupation_depth_25
+    source_cluster: anthropic_ei
     name: Occupations with a quarter of their tasks using Claude
     definition: Share of occupations in which at least 25% of tasks appear in Claude usage, from Anthropic's Economic Index (global, per report).
     why_it_matters: Depth across the occupational map rather than across people; whether AI use is reaching most of the work in most jobs or a narrow band of them.
@@ -1350,6 +1381,7 @@ indicators:
     published: false
     updated_at: 2026-09-11
   - id: bbd_work_use_daily
+    source_cluster: bbd_rtps
     name: US workers using generative AI for work every day
     definition: Share of employed US adults who used generative AI for work every day, Real-Time Population Survey.
     why_it_matters: Daily use is where depth shows up first.

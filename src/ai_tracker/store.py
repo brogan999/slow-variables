@@ -17,7 +17,7 @@ import duckdb
 import yaml
 
 from .schema import (
-    UNSCORED,
+    UNVOTED,
     Bottleneck,
     Bucket,
     CompareRow,
@@ -441,6 +441,33 @@ class Store:
         o = obs[-1]
         return o["value_numeric"], o["as_of_date"], [o["id"]], Tier(o["tier"])
 
+    def metric_spec(self, name: str | None) -> dict[str, Any]:
+        """One metric's entry in the semantic layer, or an empty dict."""
+        if not name:
+            return {}
+        if not hasattr(self, "_metric_spec"):
+            path = Path("semantic/metrics.yaml")
+            self._metric_spec = (
+                (yaml.safe_load(path.read_text()) or {}).get("metrics", {}) if path.exists() else {}
+            )
+        return self._metric_spec.get(name) or {}
+
+    def band_unit(self, ind: Indicator) -> str:
+        """The unit of the number the bands apply to: a metric's own unit when the band reads a metric."""
+        if ind.band_input and ind.band_input.startswith("metric:"):
+            return self.metric_spec(ind.band_input[7:]).get("unit") or ind.unit
+        return ind.unit
+
+    def band_interval(self, ind: Indicator) -> tuple[float | None, float | None]:
+        """The interval around the band input, where the fit or the source published one."""
+        if not ind.band_input:
+            return None, None
+        if ind.band_input.startswith("metric:"):
+            rows = self.derived_for(ind.band_input[7:], ind.metric_dims)
+            return (rows[-1].value_low, rows[-1].value_high) if rows else (None, None)
+        obs = self.observations(ind.band_input)
+        return (obs[-1]["value_low"], obs[-1]["value_high"]) if obs else (None, None)
+
     def evidence_obs(self, ind: Indicator) -> list[dict[str, Any]]:
         """Observations behind an indicator: its series globs plus the inputs of its derived metric."""
         rows = {o["id"]: o for g in ind.series_keys for o in self.observations(g)}
@@ -501,6 +528,7 @@ class Store:
                 "points": self.headline(ind),
                 "band_value": {
                     "value": bv,
+                    "unit": self.band_unit(ind),
                     "as_of": b_as_of.isoformat() if b_as_of else None,
                     "obs_ids": b_ids,
                     "low": fit.value_low if (fit := self.band_fit(ind)) else None,
@@ -509,7 +537,11 @@ class Store:
                 if bv is not None
                 else None,
                 "fits": [
-                    {**dump(r[-1]), "obs_ids": r[-1].input_observation_ids}
+                    {
+                        **dump(r[-1]),
+                        "obs_ids": r[-1].input_observation_ids,
+                        "unit": self.metric_spec(m).get("unit"),
+                    }
                     for m in ind.related_metrics
                     if (r := self.derived_for(m, ind.metric_dims))
                 ],
@@ -614,20 +646,7 @@ class Store:
             {
                 "as_of": as_of_c,
                 "verdict": "As of %s: " % as_of_c
-                + ", ".join(
-                    f"{layer.name.lower()} {status.replace('_', ' ')}"
-                    for layer in self.seed.layers
-                    for status in [
-                        _summarise(
-                            [
-                                cards[i.id]
-                                for i in self.seed.indicators
-                                if i.layer_id == layer.id and i.published and i.direction_rule
-                            ]  # the capture lens reads directions; a flow status on the same layer belongs to the other lens
-                        )
-                    ]
-                    if status
-                )
+                + ", ".join(_clause(self._capture_layer(layer, cards)) for layer in self.seed.layers)
                 + ".",
                 "what_would_change": [
                     f"{i.name}: {i.direction_rule.rationale}"
@@ -671,26 +690,7 @@ class Store:
                     }
                     for d in self.derived_for("margin_stack_share_by_layer")
                 ],
-                "layers": [
-                    {
-                        **dump(layer),
-                        "indicators": [
-                            cards[i.id]
-                            for i in self.seed.indicators
-                            if i.layer_id == layer.id and i.published
-                        ],
-                        "status": _summarise(
-                            [
-                                cards[i.id]
-                                for i in self.seed.indicators
-                                if i.layer_id == layer.id and i.published and i.direction_rule
-                            ]
-                        ),
-                        "venture": self._layer_venture(layer.id),
-                        "reading": self._reading(layer, cards),
-                    }
-                    for layer in self.seed.layers
-                ],
+                "layers": [self._capture_layer(layer, cards) for layer in self.seed.layers],
             },
         )
         _write(
@@ -771,6 +771,22 @@ class Store:
         ev = self.current(ind.id)
         latest = pts[-1] if pts else None
         ev_obs = self.evidence_obs(ind)
+        # the status is read off the band input, which is often a fit rather than the latest point; say so on
+        # the card unless they are the same number
+        bi = self.band_input(ind)
+        band_value = (
+            {
+                "value": bi[0],
+                "unit": self.band_unit(ind),
+                "as_of": bi[1].isoformat() if bi[1] else None,
+                "obs_ids": bi[2],
+            }
+            if bi[0] is not None
+            and ind.band_input
+            and ind.band_input.startswith("metric:")
+            and not (latest and latest.get("value") == bi[0])
+            else None
+        )
         stale = None
         if latest and ind.cadence_expected in CADENCE_DAYS:
             age = (date.today() - date.fromisoformat(latest["as_of"])).days
@@ -790,6 +806,8 @@ class Store:
             "status": ev.new_status if ev else None,
             "confidence": ev.new_conf if ev else None,
             "leading_lagging": ind.leading_lagging.value if ind.leading_lagging else None,
+            "source_cluster": ind.source_cluster,
+            "band_value": band_value,
             "grade": _best_grade(ev_obs),
             "latest": latest,
             "sparkline": pts[-24:],
@@ -851,19 +869,28 @@ class Store:
             flow = [
                 cards[i.id] for i in mine if not i.direction_rule
             ]  # a shared capture indicator keeps its own lens
-            buckets.append({**dump(b), "indicators": [cards[i.id] for i in mine], "status": _summarise(flow)})
+            buckets.append(
+                {
+                    **dump(b),
+                    "indicators": [cards[i.id] for i in mine],
+                    "status": _summarise(flow),
+                    "tally": _tally(flow),
+                }
+            )
         valves = []
         for v in VALVES:
             mine = [i for i in self.seed.indicators if i.valve_measured == v["id"] and i.published]
             flow = [cards[i.id] for i in mine if not i.direction_rule]
-            valves.append({**v, "status": _summarise(flow), "indicator_ids": [i.id for i in mine]})
+            valves.append(
+                {**v, "status": _summarise(flow), "tally": _tally(flow), "indicator_ids": [i.id for i in mine]}
+            )
         falsified = next(
             (t for t in read_jsonl(DATA / "thesis.jsonl") if t.get("id") == "normal_tech_falsified"), None
         )
         thesis = {True: "falsified", False: "holding"}.get(falsified.get("holds")) if falsified else None
         verdict = (
             "As of %s: " % as_of
-            + ", ".join(f"{b['name'].lower()} {b['status'].replace('_', ' ')}" for b in buckets)
+            + ", ".join(_clause(b) for b in buckets)
             + "."
             + (f" Thesis: {thesis or 'untestable'}." if falsified else "")
         )
@@ -1257,6 +1284,20 @@ class Store:
             ],
         }
 
+    def _capture_layer(self, layer: Any, cards: dict[str, Any]) -> dict[str, Any]:
+        """One layer of the capture lens. Only direction-scored indicators vote: a flow status on the same
+        layer belongs to the other lens."""
+        mine = [i for i in self.seed.indicators if i.layer_id == layer.id and i.published]
+        directions = [cards[i.id] for i in mine if i.direction_rule]
+        return {
+            **dump(layer),
+            "indicators": [cards[i.id] for i in mine],
+            "status": _summarise(directions),
+            "tally": _tally(directions),
+            "venture": self._layer_venture(layer.id),
+            "reading": self._reading(layer, cards),
+        }
+
     def _reading(self, layer: Any, cards: dict[str, Any]) -> str:
         """One sentence per layer from its direction statuses and capital flow. Deterministic; no numbers."""
         scored = [
@@ -1534,19 +1575,49 @@ def _best_grade(obs: list[dict[str, Any]]) -> str | None:
     return min((_grade(o) for o in obs), default=None)
 
 
+def _clause(doc: dict[str, Any]) -> str:
+    """A layer's clause in the lens verdict. One instrument is a reading, not a direction, so it is named."""
+    t = doc.get("tally") or {}
+    tail = " (one reading)" if t.get("scored") == 1 else ""
+    return f"{doc['name'].lower()} {doc['status'].replace('_', ' ')}{tail}"
+
+
+def _votes(cards: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """One vote per source cluster: four readings of one survey are one instrument, not four facts. Within a
+    cluster the most confident scored card speaks. An unscored or unclear card never votes."""
+    clusters: dict[str, list[dict[str, Any]]] = {}
+    for c in cards:
+        if c.get("status") and c["status"] not in UNVOTED:
+            clusters.setdefault(c.get("source_cluster") or c["id"], []).append(c)
+    return [max(v, key=lambda c: (c.get("confidence") or 0, c["id"])) for v in clusters.values()]
+
+
 def _summarise(cards: list[dict[str, Any]]) -> str:
-    """Mode of the scored statuses; unscored ones (emerging, not yet measurable) never outvote a scored reading."""
-    statuses = [c["status"] for c in cards if c.get("status")]
-    if not statuses:
+    """Mode of the votes; an unscored or unclear card never outvotes a reading, and one instrument votes once."""
+    if not [c for c in cards if c.get("status")]:
         return "unmeasured"
-    scored = [x for x in statuses if x not in UNSCORED]
-    if not scored:
-        return "emerging" if "emerging" in statuses else statuses[0]
-    statuses = scored
+    votes = _votes(cards)
+    if not votes:
+        return "emerging" if any(c.get("status") == "emerging" for c in cards) else "unclear"
+    statuses = [c["status"] for c in votes]
     counts = sorted(((statuses.count(x), x) for x in set(statuses)), reverse=True)
     if len(counts) > 1 and counts[0][0] == counts[1][0]:
         return "mixed"  # no majority: say so rather than pick one
     return counts[0][1]
+
+
+def _tally(cards: list[dict[str, Any]]) -> dict[str, Any]:
+    """What the verdict rests on: how many instruments voted, out of how many published indicators, by how
+    much, and the name of the single reading when only one voted (v2 §4.2: say how thin a reading is)."""
+    votes = _votes(cards)
+    statuses = [c["status"] for c in votes]
+    counts = sorted(((statuses.count(x), x) for x in set(statuses)), reverse=True)
+    return {
+        "scored": len(votes),
+        "published": len([c for c in cards if c.get("published", True)]),
+        "margin": counts[0][0] - (counts[1][0] if len(counts) > 1 else 0) if counts else 0,
+        "only": votes[0]["name"] if len(votes) == 1 else None,
+    }
 
 
 def _band_text(b: Any) -> str:

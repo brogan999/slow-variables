@@ -163,7 +163,8 @@ def cmd_evaluate(a: argparse.Namespace) -> int:
             ]
             new = direction(pts, ind.direction_rule, tier).value
         else:
-            new = flow_status(value, ind.normal_band, ind.fast_band, ind.falsifying_band, tier).value
+            lo, hi = s.band_interval(ind)
+            new = flow_status(value, ind.normal_band, ind.fast_band, ind.falsifying_band, tier, lo, hi).value
         capped = new not in UNSCORED and _single_non_primary(s, ind)
         if capped:  # the two-source rule, applied at proposal time rather than only at the gate
             new = "emerging"

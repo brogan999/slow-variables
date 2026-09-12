@@ -12,6 +12,7 @@
   "obs_ids": [
    "944743051df0e9df"
   ],
+  "unit": "USD",
   "value": 2000000000.0
  },
  "bucket_id": "return_arrow",
@@ -268,6 +269,7 @@
   "yahoo_finance.surge_ai.revenue_usd.fy",
   "cnbc.scale_ai.revenue_usd.fy"
  ],
+ "source_cluster": null,
  "sparkline": [
   {
    "as_of": "2026-06-30",
@@ -293,8 +295,24 @@
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,
- "status": "faster_than_normal",
+ "status": "emerging",
  "status_events": [
+  {
+   "author": "claude",
+   "counterevidence_considered": "TechCrunch reports the same $2.0B nine days later, so the figure itself is corroborated; what is uncertain is the band, not the number. The figure is also gross of the 60-70% paid out to experts, so the vendor's own revenue would sit inside the normal band. A higher reading, or a band set on net revenue, would score.",
+   "created_at": "2026-09-12T01:10:31.817487Z",
+   "evidence_ids": [
+    "944743051df0e9df"
+   ],
+   "id": "bd478eedc26405d2",
+   "new_conf": 70,
+   "new_status": "emerging",
+   "old_conf": 70,
+   "old_status": "faster_than_normal",
+   "reason": "Held at emerging by the band-edge rule: Mercor's $2.0B gross run-rate (Dealroom, 2026-06-30) is exactly the fast band's lower bound, so the reading sits on the line rather than past it.",
+   "target_id": "expert_data_market_run_rate",
+   "target_type": "indicator"
+  },
   {
    "author": "evaluate",
    "counterevidence_considered": null,

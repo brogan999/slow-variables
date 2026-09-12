@@ -1,9 +1,9 @@
 import Link from "next/link";
-import type { Bucket, Card } from "@/lib/data";
+import type { Bucket, Card, Tally } from "@/lib/data";
 import { words } from "@/lib/data";
 
 type Valve = { id: string; from: string; to: string; name: string; status: string; indicator_ids: string[] };
-type Props = { buckets: (Bucket & { status: string; indicators: Card[] })[]; valves: Valve[] };
+type Props = { buckets: (Bucket & { status: string; tally?: Tally; indicators: Card[] })[]; valves: Valve[] };
 
 // Five stocks stacked vertically (label sizes chosen for 375px, where the SVG scales to about 0.75), valves between them, the return arrow up the left,
 // the leak out to the right into the capture lens. Valve colour = status; icon + text always.
@@ -35,7 +35,7 @@ export function StockFlowDiagram({ buckets, valves }: Props) {
           <Link href={`/buckets/${b.id}`}>
             <rect x={X0} y={y(i)} width={BOX} height={H} rx={4} fill="var(--surface)" stroke="var(--grid)" />
             <text x={X0 + 12} y={y(i) + 24} fontSize="20" fontFamily="var(--font-display)" fill="var(--ink)">{b.order}. {b.name}</text>
-            <text x={X0 + 12} y={y(i) + 44} fontSize="14" fontFamily="var(--font-sans)" fill="var(--ink-2)">{GLYPH[b.status] ?? "○"} {words(b.status)} · {b.indicators.length} indicator{b.indicators.length === 1 ? "" : "s"}</text>
+            <text x={X0 + 12} y={y(i) + 44} fontSize="14" fontFamily="var(--font-sans)" fill="var(--ink-2)">{GLYPH[b.status] ?? "○"} {words(b.status)} · {b.tally ? `${b.tally.scored} of ${b.tally.published} scored` : `${b.indicators.length} indicators`}</text>
           </Link>
           {i < main.length - 1 ? <ValveArrow valve={v(b.valve)} x={X0 + BOX / 2} y1={y(i) + H} y2={y(i + 1)} /> : null}
         </g>
