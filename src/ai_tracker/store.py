@@ -810,13 +810,7 @@ class Store:
             and not (latest and latest.get("value") == bi[0])
             else None
         )
-        stale = None
-        if latest and ind.cadence_expected in CADENCE_DAYS:
-            age = (date.today() - date.fromisoformat(latest["as_of"])).days
-            if age > max(
-                2 * CADENCE_DAYS[ind.cadence_expected], CADENCE_DAYS[ind.cadence_expected] + 30
-            ):  # allow a publication lag
-                stale = latest["as_of"]
+        stale = latest["as_of"] if latest and is_stale(latest["as_of"], ind.cadence_expected) else None
         return {
             "id": ind.id,
             "name": ind.name,
@@ -1547,15 +1541,20 @@ class Store:
         }
 
 
+def is_stale(as_of: date | str, cadence: str | None, today: date | None = None) -> bool:
+    """Past twice its cadence, or its cadence plus a month, whichever is longer: the publication lag is real."""
+    days = CADENCE_DAYS.get(cadence or "")
+    if not days:
+        return False
+    day = date.fromisoformat(as_of[:10]) if isinstance(as_of, str) else as_of
+    return ((today or date.today()) - day).days > max(2 * days, days + 30)
+
+
 def _health(last_success: str | None, cadence: str) -> str:
     """ok within twice the cadence (plus a lag), stale beyond it, never when there is no success at all."""
     if not last_success:
         return "never"
-    days = CADENCE_DAYS.get(cadence)
-    if days is None:
-        return "ok"
-    age = (date.today() - date.fromisoformat(last_success[:10])).days
-    return "ok" if age <= max(2 * days, days + 30) else "stale"
+    return "stale" if is_stale(last_success, cadence) else "ok"
 
 
 CADENCE_DAYS = {

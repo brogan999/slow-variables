@@ -344,7 +344,6 @@ class Source(BaseModel):
     license: str | None = None
     attribution: str | None = None
     robots_ok: bool = True
-    expect_series: list[str] = []
     people: list[str] = []
     watch: dict[str, str] = {}  # feeds connector: slug -> regex over title + description
 

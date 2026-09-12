@@ -14,6 +14,7 @@ from . import store as st
 from .analysis.bands import flow_status
 from .analysis.direction import direction
 from .analysis.metrics import run_metrics
+from .format import fmt as _fmt
 from .ingest.connectors import CONNECTORS
 from .schema import UNSCORED, FetchLog, Indicator, StatusEvent, Tier
 from .thesis import render_md, run_all
@@ -65,13 +66,7 @@ def _single_non_primary(s: st.Store, ind: Indicator) -> bool:
     return len({o["source_id"] for o in obs}) < 2 and not ({Tier(o["tier"]) for o in obs} & PRIMARY)
 
 
-def _fmt(v: float, unit: str) -> str:
-    if unit in ("USD", "usd") and abs(v) >= 1e6:
-        d, suf = (v / 1e12, "T") if abs(v) >= 1e12 else (v / 1e9, "B") if abs(v) >= 1e9 else (v / 1e6, "M")
-        return f"${d:.1f}{suf}"
-    if unit == "share":
-        return f"{v * 100:.1f}%"
-    return f"{v:,.0f}" if abs(v) >= 1e4 else f"{v:.4g}"
+
 
 
 def _auto_reason(
