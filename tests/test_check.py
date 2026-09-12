@@ -119,3 +119,17 @@ def test_a_written_status_reason_is_held_until_it_says_what_counterevidence_was_
     st.write_jsonl(tmp_path / "proposed_status_events.jsonl", [{**row, "counterevidence_considered": "The older wave read lower; it is a different instrument."}])
     assert cli.cmd_approve(NS(reviewer="claude")) == 0
     assert len((tmp_path / "status_events.jsonl").read_text().splitlines()) == 2
+
+
+def test_one_staleness_rule_serves_the_cards_the_sources_the_memo_and_the_thesis():
+    from datetime import date, timedelta
+
+    from ai_tracker.store import is_stale
+
+    today = date.today()
+    assert is_stale(today - timedelta(days=200), "monthly")  # past twice the cadence and past a month's lag
+    assert not is_stale(today - timedelta(days=45), "monthly")  # inside the publication lag
+    assert not is_stale(today - timedelta(days=200), "annual")
+    assert is_stale((today - timedelta(days=200)).isoformat(), "monthly")  # a string reads the same
+    assert not is_stale(today - timedelta(days=9999), "irregular")  # no cadence on file, never stale
+    assert not is_stale(today - timedelta(days=9999), None)

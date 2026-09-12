@@ -16,6 +16,7 @@ from typing import Any
 import yaml
 
 from . import store as st
+from .format import fmt
 from .query.ask import Tools
 from .query.citecheck import CITE, check
 
@@ -154,22 +155,8 @@ def _val(p: dict[str, Any] | None, unit: str, derived_id: str | None = None) -> 
     """A value the way the site renders it, followed by the token of the record that carries it."""
     if not p or p.get("value") is None:
         return "unmeasured"
-    v = p["value"]
-    if unit == "share":
-        s = f"{v * 100:.1f}%"
-    elif unit in ("USD", "usd") and abs(v) >= 1e6:
-        d, suf = (v / 1e12, "T") if abs(v) >= 1e12 else (v / 1e9, "B") if abs(v) >= 1e9 else (v / 1e6, "M")
-        s = f"${d:.1f}{suf}"
-    elif unit == "ratio":
-        s = f"{v:.3g}×"
-    elif unit == "minutes" and v >= 60:
-        s = f"{v / 60:.1f} h"
-    elif unit == "year":
-        s = f"{v:.0f}"
-    else:
-        s = f"{v:,.0f}" if abs(v) >= 1e3 else f"{v:.3g}"
     ids = f"[derived:{derived_id}]" if derived_id else " ".join(f"[obs:{i}]" for i in p.get("obs_ids", []))
-    return f"{s} as of {p['as_of']} {ids}".strip()
+    return f"{fmt(p['value'], unit)} as of {p['as_of']} {ids}".strip()
 
 
 def digest(f: dict[str, Any]) -> str:
@@ -341,7 +328,7 @@ def due_for_refresh(store: st.Store, today: date) -> list[str]:
             method != "manual" or not days or cad == "per_release" or not any(fnmatch(key, g) for g in globs)
         ):  # a one-off study is not due
             continue
-        if (today - as_of).days > 2 * days:
+        if st.is_stale(as_of, cad, today):
             note = f" ({REFRESH_NOTES[src]})" if src in REFRESH_NOTES else ""
             out.append(f"- `{key}` ({name}, {cad}): newest {as_of}; {url}{note}")
     return out

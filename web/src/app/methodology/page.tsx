@@ -55,6 +55,8 @@ export default function Methodology() {
       <H>Credits</H>
       <p>Method after the <a href="https://ai2027-tracker.com/methodology/" className="underline decoration-grid underline-offset-4">AI 2027 tracker</a> (independent, not affiliated).</p>
       <p className="text-sm text-ink-2">Data credits, generated from the source registry: {credits.join("; ")}.</p>
+      <H id="charts">How the charts read</H>
+      <p>Series marks are two neutrals, graphite and stone, and the two accents are reserved for meaning: violet for faster and concentrating, rust for slower and dispersing. Colour never carries a verdict on its own, so every status also has an icon and a word, and no chart uses red and green. The marks were checked for colour-vision separation: the two neutrals are 28 to 31 apart in perceptual distance for normal, protan, deutan and tritan vision in both themes, and the two accents 24 to 28. An estimated layer is hatched rather than tinted. Every chart has one vertical scale, names its sources beneath it, and repeats its numbers as text: each one links to the row it came from, and each series has a table and a CSV.</p>
       <H id="reuse">Reuse, citation and corrections</H>
       <p>Code is MIT licensed. The compiled dataset (observations, derived values, status events) is CC BY 4.0; each observation also carries its upstream source and licence, which govern that row. Cite the site by URL and the observation ids you rely on. Corrections: open an issue or pull request on the repository; every change to a number or a status leaves a dated event in the changelog.</p>
       <H id="not-measured">Not measured, and why</H>

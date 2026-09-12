@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from datetime import date
 
-from .store import CADENCE_DAYS, Store
+from .store import Store, is_stale
 
 
 @dataclass
@@ -58,10 +58,7 @@ class Data:
 
     def _fresh(self, o: dict) -> bool:
         """Same rule as the indicator cards: older than 2x the source cadence (plus a publication lag) is stale."""
-        days = CADENCE_DAYS.get(self.cadence.get(o["source_id"], ""))
-        if days is None:
-            return True
-        return (date.today() - o["as_of_date"]).days <= max(2 * days, days + 30)
+        return not is_stale(o["as_of_date"], self.cadence.get(o["source_id"], ""))
 
     def metric(self, name: str, dims: dict[str, str] | None = None) -> tuple[float, date, list[str]] | None:
         rows = self.s.derived_for(name, dims)

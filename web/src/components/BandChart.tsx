@@ -48,8 +48,12 @@ export function BandChart({ series, unit, log, bands }: Props) {
           {data.map((d, i) => (
             <Scatter key={series[i].name} name={series[i].name} data={d} fill={COLORS[i % COLORS.length]} fillOpacity={0.9} isAnimationActive={false}
               shape={(p: { cx?: number; cy?: number; payload?: { disputed: boolean } }) => (
-                <circle cx={p.cx} cy={p.cy} r={4} fill={p.payload?.disputed ? "var(--surface)" : COLORS[i % COLORS.length]}
-                  stroke={COLORS[i % COLORS.length]} strokeWidth={1.5} />
+                <g>
+                  {/* the hit target is larger than the mark: an 8px dot is not something to aim at */}
+                  <circle cx={p.cx} cy={p.cy} r={12} fill="transparent" />
+                  <circle cx={p.cx} cy={p.cy} r={4} fill={p.payload?.disputed ? "var(--surface)" : COLORS[i % COLORS.length]}
+                    stroke={COLORS[i % COLORS.length]} strokeWidth={1.5} />
+                </g>
               )}>
               <ErrorBar dataKey="err" direction="y" width={3} stroke={COLORS[i % COLORS.length]} strokeOpacity={0.4} />
             </Scatter>

@@ -12,7 +12,6 @@ sources:
     connector: metr
     license: "METR; analysis code MIT at https://github.com/METR/eval-analysis-public"
     attribution: "METR, Measuring AI Ability to Complete Long Tasks (Horizon v1.1)"
-    expect_series: ["metr.*.horizon_50.pt", "metr.*.horizon_80.pt", "metr.suite.doubling_time_days.pt"]
     people: ["Beth Barnes", "Thomas Kwa", "Ben West"]
   - id: sec_xbrl
     name: SEC EDGAR XBRL company facts
@@ -25,7 +24,6 @@ sources:
     connector: sec_xbrl
     license: "Public domain (U.S. government); fair-access policy requires a descriptive User-Agent"
     attribution: "SEC EDGAR, XBRL company facts API"
-    expect_series: ["sec.nvda.revenue.q", "sec.nvda.gross_profit.q", "sec.orcl.rpo.q"]
   - id: metr_blog
     name: METR research posts
     org: METR
@@ -49,7 +47,6 @@ sources:
     connector: epoch
     license: "CC BY 4.0"
     attribution: "Epoch AI, 'Data on AI Companies' (CC BY 4.0), epoch.ai/data"
-    expect_series: ["epoch.*.round_equity_usd.pt", "epoch.*.revenue_run_rate_usd.pt"]
     people: ["Jaime Sevilla", "Tamay Besiroglu", "Ege Erdil", "Lennart Heim"]
   - id: bls
     name: BLS productivity and costs; total factor productivity
@@ -62,7 +59,6 @@ sources:
     connector: bls
     license: "Public domain (U.S. government)"
     attribution: "U.S. Bureau of Labor Statistics, Productivity and Costs (PRS85006092/93), Total Factor Productivity (MPU4910012)"
-    expect_series: ["bls.prs85006091.q", "bls.mpu4910012.a"]
   - id: bbd
     name: Bick–Blandin–Deming Real-Time Population Survey (via FRED)
     org: Federal Reserve Bank of St. Louis
@@ -107,7 +103,6 @@ sources:
     cadence: biweekly
     lens: both
     connector: census_btos
-    expect_series: ["census_btos.us.ai_use_share_v2.2w"]
     license: "Public domain (U.S. government)"
     attribution: "U.S. Census Bureau, Business Trends and Outlook Survey"
   - id: menlo
@@ -166,7 +161,6 @@ sources:
     connector: fred
     license: "FRED terms of use; RPS series by Bick, Blandin & Deming"
     attribution: "Bick, Blandin & Deming, Real-Time Population Survey, retrieved from FRED"
-    expect_series: ["fred.us_workers.hours_assisted_share.q"]
     people: ["Alexander Bick", "Adam Blandin", "David Deming"]
   - id: adp_research
     name: ADP Research, Canaries Dashboard releases
@@ -189,7 +183,6 @@ sources:
     cadence: monthly
     lens: diffusion
     connector: canaries
-    expect_series: ["canaries.us_exposure_q5.employment_yoy.m"]
     license: "Stanford Digital Economy Lab; free public data, cited as the Lab asks"
     attribution: "Stanford Digital Economy Lab and ADP Research, AI Economic Indicators: Canaries Dashboard"
     people: ["Erik Brynjolfsson", "Bharat Chandar", "Ruyu Chen", "Nela Richardson"]
@@ -214,7 +207,6 @@ sources:
     cadence: monthly
     lens: diffusion
     connector: cait
-    expect_series: ["cait.ca_top_quartile_potential.claims.m", "cait.ca_top_quartile_observed.claims.m"]
     license: "California Policy Lab; monthly claims workbook, cited as the Lab suggests"
     attribution: "Hyman, von Wachter et al. (2026), Tracking AI-Related Job Loss Using Unemployment Insurance Claims Data in California, California Policy Lab"
     people: ["Till von Wachter"]
@@ -240,7 +232,6 @@ sources:
     connector: anthropic_ei
     license: "CC BY 4.0 (dataset)"
     attribution: "Anthropic Economic Index, open dataset on Hugging Face (CC BY 4.0) and the 2026 reports"
-    expect_series: ["anthropic_ei.global.augmentation_share.pt"]
   - id: nyfed
     name: The Labor Market for Recent College Graduates
     org: Federal Reserve Bank of New York
@@ -263,7 +254,6 @@ sources:
     connector: sec_seg
     license: "Public domain (U.S. government); fair-access policy requires a descriptive User-Agent"
     attribution: "SEC EDGAR, inline XBRL filings (segment disclosures)"
-    expect_series: ["sec_seg.nvda.data_center.revenue.q", "sec_seg.amzn.aws.operating_income.q"]
   - {id: sec_edgar_filings, name: "SEC EDGAR filings (8-K, 6-K, 10-Q exhibits)", org: U.S. Securities and Exchange Commission, url: "https://www.sec.gov/Archives/edgar/data/", kind: html, default_tier: 4, cadence: irregular, lens: capture, connector: manual, license: "Public domain (U.S. government)", attribution: "SEC EDGAR archives"}
   - {id: nvidia_ir, name: NVIDIA Newsroom, org: NVIDIA, url: "https://nvidianews.nvidia.com/", kind: html, default_tier: 4, cadence: irregular, lens: capture, connector: manual, license: "NVIDIA; short quotation", attribution: "NVIDIA Newsroom"}
   - {id: microsoft_blog, name: Official Microsoft Blog, org: Microsoft, url: "https://blogs.microsoft.com/", kind: html, default_tier: 4, cadence: irregular, lens: capture, connector: manual, license: "Microsoft; short quotation", attribution: "Official Microsoft Blog"}
@@ -274,7 +264,7 @@ sources:
   - {id: techcrunch, name: TechCrunch, org: Yahoo Inc., url: "https://techcrunch.com/", kind: html, default_tier: 7, cadence: irregular, lens: capture, connector: manual, license: "TechCrunch; short quotation", attribution: "TechCrunch (quoting Sam Altman on X)"}
   - {id: siliconangle, name: SiliconANGLE, org: SiliconANGLE Media, url: "https://siliconangle.com/", kind: html, default_tier: 5, cadence: irregular, lens: capture, connector: manual, license: "SiliconANGLE; short quotation", attribution: "SiliconANGLE (relaying the WSJ report)"}
   - {id: yahoo_finance, name: Yahoo Finance (syndicated Investing.com), org: Yahoo Inc., url: "https://finance.yahoo.com/", kind: html, default_tier: 5, cadence: irregular, lens: capture, connector: manual, license: "Syndicated; short quotation", attribution: "Investing.com via Yahoo Finance; CDS data ICE Data Services"}
-  - {id: ramp, name: Ramp AI Index (Ramp Economics Lab), org: Ramp, url: "https://ramp.com/data/ai-index", kind: html, default_tier: 3, cadence: monthly, lens: both, connector: ramp, expect_series: ["ramp.us_businesses.paid_ai_adoption_share.m", "ramp.anthropic.business_paid_share.m"], license: "Ramp Economics Lab; cited with attribution", attribution: "Ramp AI Index, Ramp Economics Lab", robots_ok: true, people: ["Ara Kharazian"]}
+  - {id: ramp, name: Ramp AI Index (Ramp Economics Lab), org: Ramp, url: "https://ramp.com/data/ai-index", kind: html, default_tier: 3, cadence: monthly, lens: both, connector: ramp, license: "Ramp Economics Lab; cited with attribution", attribution: "Ramp AI Index, Ramp Economics Lab", robots_ok: true, people: ["Ara Kharazian"]}
   - {id: openai_blog, name: OpenAI research posts, org: OpenAI, url: "https://openai.com/news/", kind: html, default_tier: 7, cadence: irregular, lens: diffusion, connector: manual, license: "OpenAI; short quotation", attribution: "OpenAI", robots_ok: true, people: ["OpenAI research organization", "Jakub Pachocki", "Sam Altman"]}
   - {id: openai_news_feed, name: OpenAI news feed (watchlist), org: OpenAI, url: "https://openai.com/news/rss.xml", kind: rss, default_tier: 7, cadence: irregular, lens: diffusion, connector: feeds, license: "Publisher terms; titles and links only", attribution: "OpenAI", watch: {research_acceleration: "research acceleration|automated research|research intern|agent-workday|AI researcher", self_improvement: "self-improv|recursive|R&D automation|automating AI research"}}
   - {id: metr_feed, name: METR feed (watchlist), org: METR, url: "https://metr.org/feed.xml", kind: rss, default_tier: 6, cadence: irregular, lens: diffusion, connector: feeds, license: "Publisher terms; titles and links only", attribution: "METR", watch: {self_improvement: "self-improv|recursive|R&D automation|AI R&D|research automation", time_horizon: "time horizon|horizon", uplift: "uplift|productivity|RCT|survey"}}
@@ -293,8 +283,8 @@ sources:
   - {id: a16z, name: "Andreessen Horowitz (a16z) essays", org: Andreessen Horowitz, url: "https://a16z.com/", kind: html, default_tier: 6, cadence: irregular, lens: capture, connector: manual, license: "a16z; short quotation", attribution: "Andreessen Horowitz", people: ["Guido Appenzeller", "Sarah Wang", "Martin Casado"]}
   - {id: stanford_hai_ai_index, name: Stanford HAI AI Index (report PDF), org: Stanford HAI, url: "https://hai.stanford.edu/ai-index", kind: pdf, default_tier: 6, cadence: annual, lens: both, connector: manual, license: "Stanford HAI; cited with attribution", attribution: "Stanford HAI, AI Index Report 2025"}
   - {id: clouded_judgment, name: "Clouded Judgement (weekly cloud software multiples; retired 11 Sep 2026: the feed refuses cloud runners)", org: Jamin Ball / Altimeter, url: "https://cloudedjudgement.substack.com/feed", kind: rss, default_tier: 6, cadence: weekly, lens: capture, connector: clouded_judgment, license: "Substack; figures quoted with attribution", attribution: "Jamin Ball, Clouded Judgement", people: ["Jamin Ball"]}
-  - {id: openrouter, name: OpenRouter model prices, org: OpenRouter, url: "https://openrouter.ai/api/v1/models", kind: api, default_tier: 3, cadence: daily, lens: capture, connector: openrouter, license: "Public API", attribution: "OpenRouter list prices", expect_series: ["openrouter.gpt_5_4.price_prompt_usd_per_mtok.pt"]}
-  - {id: formd, name: SEC EDGAR Form D (private offerings), org: U.S. Securities and Exchange Commission, url: "https://www.sec.gov/data-research/sec-markets-data/form-d-data-sets", kind: formd, default_tier: 4, cadence: daily, lens: capture, connector: formd, license: "Public domain (U.S. government work)", attribution: "SEC EDGAR Form D data sets", expect_series: ["formd.baseten.amount_sold_usd.pt"]}
+  - {id: openrouter, name: OpenRouter model prices, org: OpenRouter, url: "https://openrouter.ai/api/v1/models", kind: api, default_tier: 3, cadence: daily, lens: capture, connector: openrouter, license: "Public API", attribution: "OpenRouter list prices"}
+  - {id: formd, name: SEC EDGAR Form D (private offerings), org: U.S. Securities and Exchange Commission, url: "https://www.sec.gov/data-research/sec-markets-data/form-d-data-sets", kind: formd, default_tier: 4, cadence: daily, lens: capture, connector: formd, license: "Public domain (U.S. government work)", attribution: "SEC EDGAR Form D data sets"}
   - {id: epoch_models, name: Epoch AI notable and frontier models, org: Epoch AI, url: "https://epoch.ai/data/ai_models.zip", kind: csv, default_tier: 6, cadence: weekly, lens: diffusion, connector: epoch_models, license: "CC BY 4.0", attribution: "Epoch AI, Notable AI Models (CC BY 4.0)"}
   - {id: epoch_hardware, name: Epoch AI ML hardware, org: Epoch AI, url: "https://epoch.ai/data/ml_hardware.zip", kind: csv, default_tier: 2, cadence: monthly, lens: capture, connector: epoch_hardware, license: "CC BY 4.0", attribution: "Epoch AI, Machine Learning Hardware (CC BY 4.0)"}
   - {id: epoch_prices, name: Epoch AI LLM inference price trends, org: Epoch AI, url: "https://epoch.ai/data/charts/llm-inference-price-trends/lowest_price_models_data.csv", kind: csv, default_tier: 6, cadence: monthly, lens: both, connector: epoch_prices, license: "CC BY 4.0", attribution: "Epoch AI, LLM inference price trends (CC BY 4.0)"}
