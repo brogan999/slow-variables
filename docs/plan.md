@@ -304,7 +304,7 @@ Scope set by Alex: finish the brief, make the operating cadence automatic, add p
 - **Data.** Artificial Analysis rows (unpriced models skipped, index dated by release), carry-forward price metrics, lab concentration on routed tokens, four more published indicators and twelve reasoned unpublished ones, a "read, not ingested" registry of 30 sources, 34 neolabs from cleverhack's directory, the Yale connector's staleness note, the direction evaluator's flat-step fix, and every seed prior that disagreed with the evaluator dropped.
 - **Governance.** Manual values are bound to their snippets by test (25 rows carry a `coding` note); every indicator status event cites evidence; every published indicator has a one-line timing rationale; query logs carry cited ids; the consumer-surplus thesis is bracketed between a floor and a ceiling.
 - **Site.** Privacy and disclaimers on /methodology, a note in the Ask sheet, the capture lens reading directions only with its own "what would change our mind", B1 and B2 loops on the diagram, venture strips and the two bells on layer pages, debt beside equity, the ladder on the training-input layer, a sortable indicators table, a memo RSS feed, a theme that returns to the system, and small values that keep their digits. axe-core: zero violations on 30 routes at 375 and 1280 in both themes, plus the Ask sheet open and the table sorted.
-- **Deliberately not done.** Launch and distribution, trademark and brand work, the X API, Dependabot version updates, blocking mypy, a shared venture-rounds view, an Artificial Analysis diffusion indicator (the index is rescaled per version), a Fly volume for the spend ledger, and a `reason` CLI.
+- **Deliberately not done.** Launch and distribution, trademark and brand work, the X API, Dependabot version updates, blocking mypy, an Artificial Analysis diffusion indicator (the index is rescaled per version), a Fly volume for the spend ledger, and a `reason` CLI.
 
 ## Part 6 status (11 Sep 2026): every spec gap closed or recorded
 
@@ -337,6 +337,8 @@ Recorded skips found during the work, beyond the plan's list:
 - BTOS has no employment-weighted series; the "32%" in coverage is a size class.
 - Application-layer HHI: Menlo publishes category and model-vendor shares, not app-vendor shares.
 - The X starter set is two posts: most posts on the design-pass list are links, not text, and only static embeds qualify.
+- Part 5 listed a shared venture-rounds view as deliberately not done; Part 6 step 5 shipped it, and every venture metric now reads that one view.
+- The brief's `price_per_eci_point` ships as `model_price_per_intelligence_point`, fitted on Artificial Analysis's index rather than Epoch's Capabilities Index, because Artificial Analysis publishes a price beside the score and Epoch does not. Epoch's index still drives the open-versus-closed gap.
 - Epoch's hardware "Price-performance" column is not used: it divides each chip's best-precision figure, so it jumps when a chip adds FP8 or INT8.
 
 Still needs time or Alex: the golden record on the dedicated key (g01–g12 must pass), the seven-night streak on the new repo, the first merged Monday memo (14 Sep), and the fifth quarter for the gross-profit rents test (early November).

@@ -96,3 +96,26 @@ def test_diffusion_buckets_read_flow_statuses_only():
     assert any(c["id"] == "lab_run_rates" for c in methods["indicators"])  # listed on the bucket
     assert methods["status"] == "emerging"  # but never summarised there
     assert all(v["status"] != "concentrating" for v in lens["valves"])
+
+
+def test_a_written_status_reason_is_held_until_it_says_what_counterevidence_was_weighed(tmp_path, monkeypatch, capsys):
+    import json
+    from types import SimpleNamespace as NS
+
+    from ai_tracker import cli
+    from ai_tracker import store as st
+
+    monkeypatch.setattr(st, "DATA", tmp_path)
+    monkeypatch.setattr(st, "OBS", tmp_path / "obs")
+    row = {"id": "e1", "target_type": "indicator", "target_id": "hand_written", "new_status": "faster_than_normal",
+           "reason": "It crossed the band because the survey changed.", "evidence_ids": ["a"], "author": "claude",
+           "created_at": "2026-09-12T00:00:00+00:00"}
+    auto = {**row, "id": "e2", "target_id": "machine", "reason": "Evaluator: 3.0 (BLS, 2026-01-01) reads normal. Auto-reason; band rationale: x"}
+    st.write_jsonl(tmp_path / "proposed_status_events.jsonl", [row, auto])
+    assert cli.cmd_approve(NS(reviewer="claude")) == 0
+    committed = [json.loads(x) for x in (tmp_path / "status_events.jsonl").read_text().splitlines()]
+    assert [c["target_id"] for c in committed] == ["machine"]  # the machine reason lands, the written one waits
+    assert "hand_written" in capsys.readouterr().out
+    st.write_jsonl(tmp_path / "proposed_status_events.jsonl", [{**row, "counterevidence_considered": "The older wave read lower; it is a different instrument."}])
+    assert cli.cmd_approve(NS(reviewer="claude")) == 0
+    assert len((tmp_path / "status_events.jsonl").read_text().splitlines()) == 2

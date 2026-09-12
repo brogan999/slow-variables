@@ -362,15 +362,25 @@ def cmd_approve(a: argparse.Namespace) -> int:
     moved = 0
     proposed = st.read_jsonl(st.DATA / "proposed_status_events.jsonl")
     keep = []
+    held = []
     for p in proposed:
-        if p.get("reason", "").strip():
-            with (st.DATA / "status_events.jsonl").open("a") as f:
-                f.write(json.dumps(p, sort_keys=True) + "\n")
-            moved += 1
-        else:
+        reason = p.get("reason", "").strip()
+        if not reason:
             keep.append(p)
+            continue
+        # v2 §8: a reason a person wrote must also say what counterevidence was weighed. Machine reasons the
+        # evaluator wrote for a first scoring inside a band say so themselves and weigh nothing.
+        if not reason.startswith("Evaluator:") and not (p.get("counterevidence_considered") or "").strip():
+            held.append(p["target_id"])
+            keep.append(p)
+            continue
+        with (st.DATA / "status_events.jsonl").open("a") as f:
+            f.write(json.dumps(p, sort_keys=True) + "\n")
+        moved += 1
     st.write_jsonl(st.DATA / "proposed_status_events.jsonl", keep)
     print(f"approved {n} observations; {moved} status events committed, {len(keep)} still need a reason")
+    if held:
+        print(f"held, a written reason needs counterevidence_considered: {', '.join(sorted(held))}")
     return 0
 
 

@@ -98,10 +98,14 @@ TOOLS = [
     },
     {
         "name": "fit_trend",
-        "description": "Fit an exponential trend to one observation series (a series_key; a glob must match a single unit) from an optional ISO start date. Returns the doubling time in days (or the halving time for a falling series) with its 95% interval, the point count and R^2, and a one-off derived id to cite as [derived:<id>].",
+        "description": "Fit a trend to one observation series (a series_key; a glob must match a single unit) from an optional ISO start date. model 'exponential' (the default) returns the doubling time in days, or the halving time for a falling series; model 'hyperbolic' returns the year the fitted curve diverges. Both come with a 95% interval, the point count, R^2, the AIC of each model so they can be compared, and a one-off derived id to cite as [derived:<id>].",
         "input_schema": {
             "type": "object",
-            "properties": {"series": {"type": "string"}, "since": {"type": "string"}},
+            "properties": {
+                "series": {"type": "string"},
+                "since": {"type": "string"},
+                "model": {"type": "string", "enum": ["exponential", "hyperbolic"]},
+            },
             "required": ["series"],
         },
     },
@@ -336,7 +340,7 @@ class Tools:
                         docs.append({"cite": None, "doc": f"{f}#p{n}", "text": text})
         return docs
 
-    def fit_trend(self, series: str, since: str | None = None) -> Any:
+    def fit_trend(self, series: str, since: str | None = None, model: str = "exponential") -> Any:
         rows = self.store.observations(series)
         rows = [r for r in rows if r["value_numeric"] is not None]
         keys, units = {r["series_key"] for r in rows}, {r["unit"] for r in rows}
@@ -346,35 +350,43 @@ class Tools:
             return {"error": f"{series} matches several units {sorted(units)}; name one series"}
         start = date.fromisoformat(since) if since else None
         pts = [(r["as_of_date"], r["value_numeric"]) for r in rows]
-        fit, kind = fits.loglinear(pts, start), "doubling_days"
-        if fit is None:  # a falling series: the doubling time of 1/y is the halving time of y
-            fit, kind = fits.loglinear([(d, 1 / v) for d, v in pts if v > 0], start), "halving_days"
+        if model not in ("exponential", "hyperbolic"):
+            return {"error": f"unknown model {model}: use exponential or hyperbolic"}
+        alt = fits.hyperbolic(pts, start)  # both fits, so the model comparison the brief asks for is available
+        if model == "hyperbolic":
+            fit, kind = alt, "divergence_year"
+        else:
+            fit, kind = fits.loglinear(pts, start), "doubling_days"
+            if fit is None:  # a falling series: the doubling time of 1/y is the halving time of y
+                fit, kind = fits.loglinear([(d, 1 / v) for d, v in pts if v > 0], start), "halving_days"
         if fit is None:
             return {
-                "error": "no exponential trend: fewer than three positive points or no consistent direction"
+                "error": f"no {model} trend: fewer than three positive points or no consistent direction"
             }
         used = [
             r["id"] for r in rows if r["value_numeric"] > 0 and (start is None or r["as_of_date"] >= start)
         ]
-        rid = "fit-" + hashlib.sha1(f"{series}|{since}|{sorted(used)}".encode()).hexdigest()[:12]
+        rid = "fit-" + hashlib.sha1(f"{series}|{since}|{model}|{sorted(used)}".encode()).hexdigest()[:12]
         self.adhoc[rid] = Record(
             rid,
             "derived",
             [x for x in (fit.value, fit.low, fit.high, float(fit.n), fit.r2) if x is not None],
-            "days",
+            "days" if kind != "divergence_year" else "year",
         )
         self.adhoc_href[rid] = f"/series/{sorted(keys)[0]}"
         return {
             "id": rid,
             "kind": kind,
-            "value_days": round(fit.value, 1),
-            "low_days": round(fit.low, 1) if fit.low is not None else None,
-            "high_days": round(fit.high, 1) if fit.high is not None else None,
+            "value": round(fit.value, 1),
+            "low": round(fit.low, 1) if fit.low is not None else None,
+            "high": round(fit.high, 1) if fit.high is not None else None,
+            "unit": "days" if kind != "divergence_year" else "calendar year",
             "n_points": fit.n,
             "r2": round(fit.r2, 3),
+            "aic": {"this": round(fit.aic, 1), "hyperbolic": round(alt.aic, 1) if alt else None},
             "series_keys": sorted(keys),
             "obs_ids": used,
-            "note": "a one-off fit for this answer, not a saved metric; cite it as [derived:<id>]",
+            "note": "a one-off fit for this answer, not a saved metric; cite it as [derived:<id>]. Lower AIC fits better.",
         }
 
     def concordance(self) -> Any:

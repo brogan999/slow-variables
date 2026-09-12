@@ -816,6 +816,21 @@ indicators:
     unpublished_reason: "Not meaningful on current coverage: one to four seed-list rounds per sub-layer-quarter, so a median restates the venture strip's total and count; it needs a round source with market coverage (aifunding.me is on the read-not-ingested list; PitchBook, Crunchbase and Dealroom are paid)."
     published: false
     updated_at: 2026-09-11
+  - id: venture_lead_lag_vs_revenue
+    name: Venture flow's lead or lag against sub-layer revenue (quarters)
+    definition: Quarters between a move in a sub-layer's venture dollars and the matching move in that sub-layer's revenue (Appendix C venture measures).
+    why_it_matters: Capital arriving before revenue is a bet on a sub-layer; capital arriving after it is a response to one. The sign and size of the lag say which.
+    proxy_types: [capital_flow]
+    unit: quarters
+    cadence_expected: quarterly
+    layer_id: model
+    leading_lagging: leading
+    timing_rationale: "Leading: the whole measure is how far venture dollars move ahead of the revenue they are betting on."
+    tracker_interpretation: Not published.
+    confidence: 15
+    unpublished_reason: "Two things are missing: revenue by sub-layer, which only the labs report and only as press-relayed run-rates, and enough quarters to cross-correlate against. The venture series starts in 2023 and eight quarters of both sides are needed before a lag is more than noise."
+    published: false
+    updated_at: 2026-09-12
   - id: stage_mix
     name: Stage mix of venture rounds by sub-layer
     definition: Share of rounds by stage (seed, early, growth) per sub-layer (Appendix C venture measures).
