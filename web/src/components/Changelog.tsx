@@ -35,7 +35,14 @@ export function ChangelogByMonth({ events, obsIndex }: { events: StatusEvent[]; 
         return (
           <details key={m} open={i === 0} className="group panel p-3">
             <summary className="cursor-pointer list-none text-sm font-medium"><span className="text-muted mr-2 inline-block transition-transform group-open:rotate-90">▸</span>{m} <span className="text-muted font-normal">· {items.length} change{items.length === 1 ? "" : "s"}</span></summary>
-            <div className="mt-3"><ChangelogList events={items} obsIndex={obsIndex} /></div>
+            {/* the newest month runs to a hundred changes: show the recent ones, the rest one click away */}
+            <div className="mt-3"><ChangelogList events={items.slice(0, 20)} obsIndex={obsIndex} /></div>
+            {items.length > 20 ? (
+              <details className="mt-2">
+                <summary className="cursor-pointer text-sm text-ink-2">The other {items.length - 20} changes this month</summary>
+                <div className="mt-3"><ChangelogList events={items.slice(20)} obsIndex={obsIndex} /></div>
+              </details>
+            ) : null}
           </details>
         );
       })}

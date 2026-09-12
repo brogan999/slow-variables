@@ -10,6 +10,14 @@ export async function generateMetadata({ params }: { params: Promise<{ key: stri
 }
 export function generateStaticParams() { return seriesKeys().map((key) => ({ key })); }
 
+// a fetch timestamp to the microsecond is noise in a table; the full value stays in the cell's title
+function cell(col: string, v: unknown) {
+  if (v === null || v === undefined) return "—";
+  const t = String(v);
+  if (col === "retrieved_at") return t.slice(0, 16).replace("T", " ");
+  return t.slice(0, col === "content_hash" ? 12 : 40);
+}
+
 const COLS = ["as_of_date", "published_date", "tier", "audited_vs_reported", "extraction_method", "review_status", "retrieved_at", "http_status", "content_hash", "supersedes_id"] as const;
 
 export default async function SeriesPage({ params }: { params: Promise<{ key: string }> }) {
@@ -37,7 +45,7 @@ export default async function SeriesPage({ params }: { params: Promise<{ key: st
                 <td className="font-mono">{o.id}</td>
                 <td className={o.value_numeric !== null ? "tabular-nums whitespace-nowrap" : "max-w-md"}>{o.value_numeric !== null ? fmt(o.value_numeric as number, String(o.unit)) : String(o.value_text)}{o.value_low != null ? <span className="text-muted"> ({fmt(o.value_low as number)}–{fmt(o.value_high as number)})</span> : null}</td>
                 <td><Grade grade={o.grade} tier={o.tier as number} /></td>
-                {COLS.map((c) => <td key={c} className="whitespace-nowrap text-ink-2">{o[c] === null || o[c] === undefined ? "—" : String(o[c]).slice(0, c === "content_hash" ? 12 : 40)}</td>)}
+                {COLS.map((c) => <td key={c} className="whitespace-nowrap text-ink-2" title={o[c] === null || o[c] === undefined ? undefined : String(o[c])}>{cell(c, o[c])}</td>)}
                 <td><a href={String(o.url)} className="underline decoration-grid underline-offset-4">source page</a></td>
                 <td>{o.disputed ? <span className="text-slow">⚑ disputed: {String(o.dispute_text).slice(0, 120)}</span> : null}{o.run_rate_vs_booked ? <span className="ml-1">{String(o.run_rate_vs_booked)}</span> : null}{o.gross_vs_net ? <span className="ml-1">{String(o.gross_vs_net)}</span> : null}{o.note ? <div className="text-muted">{String(o.note)}</div> : null}</td>
               </tr>
