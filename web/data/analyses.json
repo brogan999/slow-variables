@@ -5,7 +5,7 @@
   "id": "horizon_fits",
   "latest": {
    "as_of_date": "2026-03-05",
-   "computed_at": "2026-09-12T02:03:36.986563Z",
+   "computed_at": "2026-09-12T02:16:59.086081Z",
    "dims": {
     "aic": "-44.8",
     "n": "20",
@@ -84,7 +84,7 @@
   "related_latest": {
    "horizon_blowup_year_50_since_2024": {
     "as_of_date": "2026-03-05",
-    "computed_at": "2026-09-12T02:03:36.986563Z",
+    "computed_at": "2026-09-12T02:16:59.086081Z",
     "dims": {
      "aic": "78.1",
      "n": "20",
@@ -153,7 +153,7 @@
    },
    "horizon_doubling_days_50_since_2023": {
     "as_of_date": "2026-03-05",
-    "computed_at": "2026-09-12T02:03:36.986563Z",
+    "computed_at": "2026-09-12T02:16:59.086081Z",
     "dims": {
      "aic": "-31.0",
      "n": "22",
@@ -222,7 +222,7 @@
    },
    "horizon_doubling_days_80_since_2023": {
     "as_of_date": "2026-04-07",
-    "computed_at": "2026-09-12T02:03:36.986563Z",
+    "computed_at": "2026-09-12T02:16:59.086081Z",
     "dims": {
      "aic": "-27.6",
      "n": "23",
@@ -293,7 +293,7 @@
    },
    "horizon_doubling_days_80_since_2024": {
     "as_of_date": "2026-04-07",
-    "computed_at": "2026-09-12T02:03:36.986563Z",
+    "computed_at": "2026-09-12T02:16:59.086081Z",
     "dims": {
      "aic": "-41.3",
      "n": "21",
@@ -374,7 +374,7 @@
   "id": "ord_misfit",
   "latest": {
    "as_of_date": "2026-03-05",
-   "computed_at": "2026-09-12T02:03:36.986563Z",
+   "computed_at": "2026-09-12T02:16:59.086081Z",
    "dims": {
     "model": "gpt_5_4"
    },
@@ -411,7 +411,7 @@
   "id": "gross_profit_stack",
   "latest": {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-12T02:03:36.986563Z",
+   "computed_at": "2026-09-12T02:16:59.086081Z",
    "dims": {
     "basis": "estimated",
     "layer_id": "model"
@@ -469,7 +469,7 @@
   "related_latest": {
    "gross_margin_fy": {
     "as_of_date": "2026-06-30",
-    "computed_at": "2026-09-12T02:03:36.986563Z",
+    "computed_at": "2026-09-12T02:16:59.086081Z",
     "dims": {
      "entity": "msft"
     },
@@ -490,7 +490,7 @@
    },
    "lab_gross_margin_estimate": {
     "as_of_date": "2025-12-31",
-    "computed_at": "2026-09-12T02:03:36.986563Z",
+    "computed_at": "2026-09-12T02:16:59.086081Z",
     "dims": {
      "entity": "openai"
     },
@@ -524,7 +524,7 @@
   "id": "margin_stack",
   "latest": {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-12T02:03:36.986563Z",
+   "computed_at": "2026-09-12T02:16:59.086081Z",
    "dims": {
     "layer_id": "compute_semis"
    },
@@ -573,7 +573,7 @@
   "id": "hhi_layers",
   "latest": {
    "as_of_date": "2026-03-31",
-   "computed_at": "2026-09-12T02:03:36.986563Z",
+   "computed_at": "2026-09-12T02:16:59.086081Z",
    "dims": {
     "layer_id": "compute_cloud"
    },
@@ -610,7 +610,7 @@
   "id": "recoupment",
   "latest": {
    "as_of_date": "2026-08-31",
-   "computed_at": "2026-09-12T02:03:36.986563Z",
+   "computed_at": "2026-09-12T02:16:59.086081Z",
    "dims": {
     "entity": "z_ai_zhipu"
    },
@@ -644,9 +644,9 @@
   "id": "concordance",
   "latest": {
    "as_of_date": "2026-07-31",
-   "computed_at": "2026-09-12T02:03:36.986563Z",
+   "computed_at": "2026-09-12T02:16:59.086081Z",
    "dims": {},
-   "formula_version": "2",
+   "formula_version": "3",
    "id": "ed08c58063fcdeb8",
    "input_observation_ids": [
     "14ca8a23f3a7fee5",
@@ -678,7 +678,7 @@
   "shape": {
    "unit": "count"
   },
-  "sql": "WITH obs AS (\n  SELECT series_key, value_numeric AS v, as_of_date, [id] AS ids FROM observations\n  WHERE series_key IN ('canaries.us_exposure_q5.employment_yoy.m', 'revelio.us_exposed.growth_gap.m',\n                       'yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m')),\ncait AS (SELECT as_of_date, value_numeric AS v, id FROM observations WHERE series_key = 'cait.ca_top_quartile_potential.claims.m'),\ncma AS (SELECT as_of_date, avg(v) OVER w AS ma, count(*) OVER w AS n, list(id) OVER w AS ids\n        FROM cait WINDOW w AS (ORDER BY as_of_date ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)),\ncchg AS (SELECT 'cait_3mma_mom' AS series_key, ma / lag(ma) OVER o - 1 AS v, as_of_date,\n                list_distinct(list_concat(ids, lag(ids) OVER o)) AS ids, n, lag(n) OVER o AS n0\n         FROM cma WINDOW o AS (ORDER BY as_of_date)),\nallx AS (SELECT series_key, v, as_of_date, ids FROM obs UNION ALL SELECT series_key, v, as_of_date, ids FROM cchg WHERE n = 3 AND n0 = 3),\nlatest AS (SELECT *, row_number() OVER (PARTITION BY series_key ORDER BY as_of_date DESC) AS rn FROM allx)\nSELECT max(as_of_date) AS as_of_date,\n       sum(CASE WHEN series_key = 'canaries.us_exposure_q5.employment_yoy.m' AND v <= -0.03 THEN 1\n                WHEN series_key = 'revelio.us_exposed.growth_gap.m' AND v <= -0.10 THEN 1\n                WHEN series_key = 'cait_3mma_mom' AND v >= 0.05 THEN 1\n                WHEN series_key = 'yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m' AND v >= 10 THEN 1\n                ELSE 0 END)::DOUBLE AS value,\n       list_distinct(flatten(list(ids))) AS obs_ids\nFROM latest WHERE rn = 1\n"
+  "sql": "WITH obs AS (\n  SELECT series_key, value_numeric AS v, as_of_date, [id] AS ids FROM observations\n  WHERE series_key IN ('canaries.us_exposure_q5.employment_yoy.m', 'revelio.us_exposed.growth_gap.m',\n                       'yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m')),\ncait AS (SELECT as_of_date, value_numeric AS v, id FROM observations WHERE series_key = 'cait.ca_top_quartile_potential.claims.m'),\ncma AS (SELECT as_of_date, avg(v) OVER w AS ma, count(*) OVER w AS n, list(id) OVER w AS ids\n        FROM cait WINDOW w AS (ORDER BY as_of_date ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)),\ncchg AS (SELECT 'cait_3mma_mom' AS series_key, ma / lag(ma) OVER o - 1 AS v, as_of_date,\n                list_distinct(list_concat(ids, lag(ids) OVER o)) AS ids, n, lag(n) OVER o AS n0\n         FROM cma WINDOW o AS (ORDER BY as_of_date)),\nallx AS (SELECT series_key, v, as_of_date, ids FROM obs UNION ALL SELECT series_key, v, as_of_date, ids FROM cchg WHERE n = 3 AND n0 = 3),\nlatest AS (SELECT *, row_number() OVER (PARTITION BY series_key ORDER BY as_of_date DESC) AS rn FROM allx),\n-- a break is that tracker's own fast band, read from the seed rather than restated here\ntracker AS (SELECT * FROM (VALUES\n    ('canaries.us_exposure_q5.employment_yoy.m', 'canaries_exposed_employment_yoy'),\n    ('revelio.us_exposed.growth_gap.m', 'revelio_exposed_vs_unexposed_growth'),\n    ('cait_3mma_mom', 'cait_high_exposure_claims'),\n    ('yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m', 'yale_occupational_mix_dissimilarity'))\n  AS t(series_key, indicator_id))\nSELECT max(l.as_of_date) AS as_of_date,\n       sum(CASE WHEN (b.fast_lo IS NULL OR l.v >= b.fast_lo) AND (b.fast_hi IS NULL OR l.v <= b.fast_hi)\n                THEN 1 ELSE 0 END)::DOUBLE AS value,\n       list_distinct(flatten(list(l.ids))) AS obs_ids\nFROM latest l JOIN tracker t USING (series_key) JOIN bands b ON b.indicator_id = t.indicator_id\nWHERE l.rn = 1\n"
  },
  {
   "caveats": "Hyperscaler capex is not all AI; the revenue side is run-rates (annualised, press-reported) plus one annual survey and double-counts where enterprises buy from labs; grade C by construction.",
@@ -686,7 +686,7 @@
   "id": "capex_ratio",
   "latest": {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-12T02:03:36.986563Z",
+   "computed_at": "2026-09-12T02:16:59.086081Z",
    "dims": {},
    "formula_version": "1",
    "id": "7867e6c6b3b7fe32",
@@ -746,7 +746,7 @@
   "id": "circular",
   "latest": {
    "as_of_date": "2026-08-17",
-   "computed_at": "2026-09-12T02:03:36.986563Z",
+   "computed_at": "2026-09-12T02:16:59.086081Z",
    "dims": {},
    "formula_version": "2",
    "id": "f6d2b4cee03aed99",
@@ -802,7 +802,7 @@
   "id": "price_capability",
   "latest": {
    "as_of_date": "2026-09-10",
-   "computed_at": "2026-09-12T02:03:36.986563Z",
+   "computed_at": "2026-09-12T02:16:59.086081Z",
    "dims": {},
    "formula_version": "3",
    "id": "aadf76ab192df530",
@@ -837,7 +837,7 @@
   "id": "customer_concentration",
   "latest": {
    "as_of_date": "2026-07-26",
-   "computed_at": "2026-09-12T02:03:36.986563Z",
+   "computed_at": "2026-09-12T02:16:59.086081Z",
    "dims": {
     "entity": "nvda"
    },
@@ -872,7 +872,7 @@
   "id": "incremental_capex",
   "latest": {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-12T02:03:36.986563Z",
+   "computed_at": "2026-09-12T02:16:59.086081Z",
    "dims": {
     "entity": "msft"
    },
@@ -904,7 +904,7 @@
   "related_latest": {
    "capex_to_revenue_stack": {
     "as_of_date": "2026-06-30",
-    "computed_at": "2026-09-12T02:03:36.986563Z",
+    "computed_at": "2026-09-12T02:16:59.086081Z",
     "dims": {},
     "formula_version": "1",
     "id": "7867e6c6b3b7fe32",
@@ -961,7 +961,7 @@
   "id": "surprise",
   "latest": {
    "as_of_date": "2026-07-31",
-   "computed_at": "2026-09-12T02:03:36.986563Z",
+   "computed_at": "2026-09-12T02:16:59.086081Z",
    "dims": {},
    "formula_version": "1",
    "id": "7ffbab052765a202",
@@ -997,7 +997,7 @@
   "id": "venture_4q",
   "latest": {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-12T02:03:36.986563Z",
+   "computed_at": "2026-09-12T02:16:59.086081Z",
    "dims": {
     "layer_id": "model",
     "sublayer_id": "all"
@@ -1070,7 +1070,7 @@
   "id": "venture_intensity",
   "latest": {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-12T02:03:36.986563Z",
+   "computed_at": "2026-09-12T02:16:59.086081Z",
    "dims": {},
    "formula_version": "1",
    "id": "2c1a393103691d88",
@@ -1126,7 +1126,7 @@
   "id": "venture_frontier",
   "latest": {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-12T02:03:36.986563Z",
+   "computed_at": "2026-09-12T02:16:59.086081Z",
    "dims": {},
    "formula_version": "1",
    "id": "39cc8e427e2c5638",
@@ -1224,7 +1224,7 @@
   "id": "aa_frontier",
   "latest": {
    "as_of_date": "2026-09-01",
-   "computed_at": "2026-09-12T02:03:36.986563Z",
+   "computed_at": "2026-09-12T02:16:59.086081Z",
    "dims": {},
    "formula_version": "2",
    "id": "9ac351a81f2d26a0",
@@ -1254,7 +1254,7 @@
   "id": "price_capability_aa",
   "latest": {
    "as_of_date": "2026-09-11",
-   "computed_at": "2026-09-12T02:03:36.986563Z",
+   "computed_at": "2026-09-12T02:16:59.086081Z",
    "dims": {},
    "formula_version": "2",
    "id": "f93befc11a81de1e",
@@ -1280,7 +1280,7 @@
   "related_latest": {
    "aa_frontier_price_per_point": {
     "as_of_date": "2026-09-11",
-    "computed_at": "2026-09-12T02:03:36.986563Z",
+    "computed_at": "2026-09-12T02:16:59.086081Z",
     "dims": {},
     "formula_version": "2",
     "id": "34a2009ea85bb400",
@@ -1309,7 +1309,7 @@
   "id": "venture_top3",
   "latest": {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-12T02:03:36.986563Z",
+   "computed_at": "2026-09-12T02:16:59.086081Z",
    "dims": {},
    "formula_version": "1",
    "id": "f1229f10c45623f1",
@@ -1407,7 +1407,7 @@
   "id": "routed_tokens",
   "latest": {
    "as_of_date": "2026-09-10",
-   "computed_at": "2026-09-12T02:03:36.986563Z",
+   "computed_at": "2026-09-12T02:16:59.086081Z",
    "dims": {},
    "formula_version": "1",
    "id": "7e73b46f0d700691",
@@ -1467,7 +1467,7 @@
   "related_latest": {
    "routed_tokens_doubling_days": {
     "as_of_date": "2026-09-10",
-    "computed_at": "2026-09-12T02:03:36.986563Z",
+    "computed_at": "2026-09-12T02:16:59.086081Z",
     "dims": {
      "aic": "0.5",
      "n": "3",

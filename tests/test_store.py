@@ -118,3 +118,15 @@ def test_one_instrument_casts_one_vote_and_the_tally_names_a_lone_reading():
     assert _summarise(survey) == "faster_than_normal" and _tally(survey)["only"] == "A"  # the most confident speaks
     assert _summarise([card("e", "unclear"), card("f", "dispersing")]) == "dispersing"  # unclear is not a reading
     assert _tally([card("e", "unclear"), card("f", "dispersing")])["scored"] == 1
+
+
+def test_the_bands_table_carries_every_indicator_band_from_seed():
+    s = st.Store()
+    rows = s.con.execute("SELECT indicator_id, band_input, fast_lo, fast_hi FROM bands WHERE fast_lo IS NOT NULL OR fast_hi IS NOT NULL").fetchall()
+    seeded = {i.id: i.fast_band for i in s.seed.indicators if i.fast_band}
+    assert {r[0] for r in rows} == set(seeded)
+    for iid, _bi, lo, hi in rows:
+        assert (lo, hi) == (seeded[iid].lo, seeded[iid].hi)
+    # the concordance count reads those bands rather than restating them
+    sql = __import__("yaml").safe_load(open("semantic/metrics.yaml"))["metrics"]["cross_tracker_concordance"]["sql"]
+    assert "JOIN bands" in sql and "-0.03" not in sql
