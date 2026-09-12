@@ -338,6 +338,7 @@ Recorded skips found during the work, beyond the plan's list:
 - Application-layer HHI: Menlo publishes category and model-vendor shares, not app-vendor shares.
 - The X starter set is two posts: most posts on the design-pass list are links, not text, and only static embeds qualify.
 - Part 5 listed a shared venture-rounds view as deliberately not done; Part 6 step 5 shipped it, and every venture metric now reads that one view.
+- Microsoft's share of OpenAI's losses is not available as a filed figure. Its quarterly filings say only that "Other, net primarily reflects net recognized losses on equity method investments, including OpenAI", with no OpenAI-specific amount and no `IncomeLossFromEquityMethodInvestments` tag in its company facts. The nearest tagged number mixes every equity-method investee, so the lab layer stays an estimate.
 - The brief's `price_per_eci_point` ships as `model_price_per_intelligence_point`, fitted on Artificial Analysis's index rather than Epoch's Capabilities Index, because Artificial Analysis publishes a price beside the score and Epoch does not. Epoch's index still drives the open-versus-closed gap.
 - Epoch's hardware "Price-performance" column is not used: it divides each chip's best-precision figure, so it jumps when a chip adds FP8 or INT8.
 

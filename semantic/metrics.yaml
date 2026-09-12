@@ -635,6 +635,31 @@ metrics:
       FROM observations f JOIN observations p ON p.subject = f.subject AND p.as_of_date = f.as_of_date
       WHERE f.series_key LIKE 'epoch_hw.%.fp16_flops.pt' AND p.series_key LIKE 'epoch_hw.%.release_price_usd.pt'
         AND NOT f.disputed AND NOT p.disputed AND p.value_numeric > 0
+  routed_tokens_top_models:
+    description: Tokens routed through OpenRouter to the models on its public rankings, summed across the list, at each snapshot date.
+    rationale: The tracker measures who has an account and how models score, but not how much AI work is being done. One router's routed volume is the only free, non-self-reported measure of that.
+    grain: [as_of_date]
+    unit: tokens
+    lead_lag: coincident
+    formula_version: 1
+    inputs: ["openrouter_rankings.*.tokens.d"]
+    caveats: One router, and only the models on its public list, over the router's own trailing window. A model entering or leaving the list moves the sum, so the level is a sample and the growth rate is the reading.
+    sql: |
+      SELECT as_of_date, sum(value_numeric) AS value, list(id ORDER BY id) AS obs_ids
+      FROM observations WHERE series_key LIKE 'openrouter_rankings.%.tokens.d' GROUP BY as_of_date
+  routed_tokens_doubling_days:
+    description: Log-linear fit of routed token volume across OpenRouter's listed models; doubling time in days.
+    rationale: Growth in work actually routed, rather than in accounts opened. The level is a sample of one router; its doubling time is comparable across snapshots.
+    grain: [as_of_date]
+    unit: days
+    lead_lag: coincident
+    formula_version: 1
+    inputs: ["openrouter_rankings.*.tokens.d"]
+    caveats: Needs months of snapshots before the fit means anything, and the list's composition changes under it.
+    python: fits.loglinear
+    sql: |
+      SELECT as_of_date, sum(value_numeric) AS value, list(id ORDER BY id) AS obs_ids
+      FROM observations WHERE series_key LIKE 'openrouter_rankings.%.tokens.d' GROUP BY as_of_date
   inference_price_halving_days:
     description: Halving time, in days, of the lowest price per million tokens among models clearing GPT-4-0314's GPQA Diamond score, from Epoch's price-trend series (fit on the inverse price).
     rationale: Price per unit of capability on a fixed benchmark axis; the brief cites ~40x a year at this threshold.

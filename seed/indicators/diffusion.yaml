@@ -1,6 +1,23 @@
 # Diffusion-lens indicators. No status here: status lives in data/status_events.jsonl only.
 # `proposed_status` is what the brief expected on 9 Sep 2026; `check` reports disagreement with the evaluator.
 indicators:
+  - id: routed_token_volume_growth
+    name: Growth in tokens routed through a public router
+    definition: Doubling time of the tokens routed to the models on OpenRouter's public rankings, summed across the list at each snapshot. Derived metric routed_tokens_doubling_days.
+    why_it_matters: "Every other adoption series counts people or accounts. This one counts work: how many tokens are actually being run, and how fast that is growing."
+    proxy_types: [deployment, behaviour]
+    unit: days
+    cadence_expected: weekly
+    bucket_id: early_adoption
+    valve_measured: products_to_early_adoption
+    leading_lagging: coincident
+    timing_rationale: "Coincident: routed volume moves as the work moves, with no reporting lag beyond the router's own window."
+    tracker_interpretation: Not published.
+    confidence: 25
+    unpublished_reason: "Waiting on history: the router's snapshots start in September 2026, and a growth fit on a few days of a trailing-window total would be noise. It publishes once eight weeks of snapshots exist."
+    counterevidence: "One router is a small and unrepresentative slice of inference: it carries no first-party API traffic, its list composition changes week to week, and a model leaving the list looks like a fall in volume."
+    published: false
+    updated_at: 2026-09-12
   - id: metr_horizon_50
     source_cluster: metr_horizons
     name: METR 50% time horizon
