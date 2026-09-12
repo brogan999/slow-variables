@@ -162,8 +162,11 @@ def test_the_five_spec_tools_answer_and_their_ids_verify():
     assert all(h["cite"] is None for h in hits if "doc" in h)  # notes are context, never citable
     f = t.fit_trend("metr.*.horizon_50.pt", "2024-01-01")
     assert f["kind"] == "doubling_days" and f["n_points"] >= 3
-    assert check(f"It doubles every {f['value_days']:.0f} days [derived:{f['id']}].", t.records([("derived", f["id"])])).ok
+    assert check(f"It doubles every {f['value']:.0f} days [derived:{f['id']}].", t.records([("derived", f["id"])])).ok
     assert "error" in t.fit_trend("no.such.series")
+    h = t.fit_trend("metr.*.horizon_50.pt", "2024-01-01", "hyperbolic")  # the brief's second model, and the AIC to compare them
+    assert h["kind"] == "divergence_year" and h["unit"] == "calendar year" and h["id"] != f["id"]
+    assert f["aic"]["hyperbolic"] == h["aic"]["this"] and "error" in t.fit_trend("metr.*.horizon_50.pt", None, "ord")
     c = t.concordance()
     assert len(c["trackers"]) == 4 and all(x["fast_band"] for x in c["trackers"]) and c["concordance"]["id"]
     assert t.crosswalk(layer_id="model") and all(r["layer_id"] == "model" for r in t.crosswalk(layer_id="model"))

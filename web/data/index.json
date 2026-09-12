@@ -178,7 +178,7 @@
   {
    "bucket_id": "leak",
    "layer_id": "compute_physical",
-   "note": "Margin stacking, HHI, circular financing: surplus exiting the chain at semis and cloud. Interpretive spine: Teece, Nordhaus, Perez, Ding (docs/interpretation).",
+   "note": "Margin stacking, HHI, circular financing: surplus exiting the chain at semis and cloud. Interpretive spine: Teece, Nordhaus and Perez in docs/interpretation; Ding through the bottleneck list.",
    "relation": "leak_from",
    "shared_indicators": [],
    "sublayer_id": null
@@ -2514,7 +2514,7 @@
      "efd67b65106b82a9"
     ],
     "unit": "index",
-    "value": 0.1567884653567207
+    "value": 0.15678846535672072
    },
    "layer_id": "model",
    "leading_lagging": "leading",
@@ -2548,7 +2548,7 @@
       "efd67b65106b82a9"
      ],
      "unit": "index",
-     "value": 0.1567884653567207
+     "value": 0.15678846535672072
     }
    ],
    "stale_as_of": null,
@@ -6060,6 +6060,29 @@
    "status": null,
    "unit": "USD",
    "unpublished_reason": "Not meaningful on current coverage: one to four seed-list rounds per sub-layer-quarter, so a median restates the venture strip's total and count; it needs a round source with market coverage (aifunding.me is on the read-not-ingested list; PitchBook, Crunchbase and Dealroom are paid).",
+   "valve_measured": null
+  },
+  {
+   "answers": [
+    "Who keeps it: Model"
+   ],
+   "bucket_id": null,
+   "confidence": null,
+   "grade": null,
+   "id": "venture_lead_lag_vs_revenue",
+   "latest": null,
+   "layer_id": "model",
+   "leading_lagging": "leading",
+   "n_observations": 0,
+   "name": "Venture flow's lead or lag against sub-layer revenue (quarters)",
+   "pending": null,
+   "published": false,
+   "sparkline": [],
+   "stale_as_of": null,
+   "stale_reason": null,
+   "status": null,
+   "unit": "quarters",
+   "unpublished_reason": "Two things are missing: revenue by sub-layer, which only the labs report and only as press-relayed run-rates, and enough quarters to cross-correlate against. The venture series starts in 2023 and eight quarters of both sides are needed before a lag is more than noise.",
    "valve_measured": null
   },
   {
