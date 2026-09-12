@@ -85,7 +85,8 @@ export type Prediction = { direction_assessment?: string | null; magnitude_asses
 export const predictions = () => read<Prediction[]>("predictions.json");
 export type LedgerRow = Observation & { parties: { slug: string; entity_id: string | null; name: string; href: string | null }[]; instrument: string; obs_id: string; as_of_date: string; published_date: string; value_numeric: number | null; value_text: string | null; unit: string; tier: number; source_id: string; url: string; disputed: boolean; dispute_text: string | null; raw_snippet: string };
 export const ledger = () => read<LedgerRow[]>("ledger.json");
-export type ThesisVerdict = { id: string; name: string; holds: boolean | null; logic: string; conds: { text: string; holds: boolean | null; obs_ids: string[]; detail: string }[] };
+export type ThesisCond = { text: string; holds: boolean | null; obs_ids: string[]; detail: string };
+export type ThesisVerdict = { id: string; name: string; holds: boolean | null; state: string; logic: string; conds: ThesisCond[]; counter?: ThesisCond[] };
 export const thesis = () => read<ThesisVerdict[]>("thesis.json");
 export type Bottleneck = { id: number; title: string; text: string; section: string; bucket_id: string; source_codes: string[]; related_indicators: string[]; domain?: string | null; domain_basis?: string | null; related: { id: string; name: string; status: string | null; published: boolean }[] };
 export type BottleneckDoc = { sections: { name: string; bucket_id: string }[]; essays: { code: string; title: string; url: string; date: string }[]; items: Bottleneck[]; summary: { name: string; items: number; watched: number; fast: number; normal: number; other: number }[]; domains: string[]; grid: { name: string; cells: Record<string, number[]> }[] };

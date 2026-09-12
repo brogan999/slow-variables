@@ -374,6 +374,26 @@ metrics:
              flatten(list(ids) OVER (ORDER BY q_end)) AS obs_ids
       FROM (SELECT date_trunc('quarter', as_of_date)::DATE AS q_end, max(as_of_date) AS last_deal, sum(v) AS v, list(id ORDER BY id) AS ids
             FROM deals GROUP BY 1)
+  circular_commitments_new_4q:
+    description: Circular / vendor-financing commitments signed in the trailing four quarters, in USD - the flow, where circular_commitments_total is the stock.
+    rationale: A cumulative total can only rise, so a direction rule on it can never read dispersing. The flow can fall, and a fall is what a cooling vendor-financing cycle looks like (P1 §6.4).
+    grain: [as_of_date]
+    unit: USD
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["circular.*_usd.pt"]
+    caveats: Same instrument mix and face-value treatment as the cumulative total; a quarter with no deal drops out of the window a year later, so the series steps.
+    sql: |
+      WITH deals AS (
+        SELECT as_of_date, value_numeric AS v, id FROM observations
+        WHERE series_key LIKE 'circular.%_usd.pt'
+          AND series_key NOT LIKE '%loi_usd%' AND series_key NOT LIKE '%talks_usd%' AND series_key NOT LIKE '%total_commitments%'
+          AND series_key NOT LIKE '%commercial_rpo%'),
+      q AS (SELECT date_trunc('quarter', as_of_date)::DATE AS q, max(as_of_date) AS last_deal, sum(v) AS v,
+                   list(id ORDER BY id) AS ids FROM deals GROUP BY 1)
+      SELECT a.last_deal AS as_of_date, sum(b.v) AS value, flatten(list(b.ids)) AS obs_ids
+      FROM q a JOIN q b ON b.q > a.q - INTERVAL 12 MONTH AND b.q <= a.q
+      GROUP BY a.q, a.last_deal
   enterprise_app_spend_share:
     description: Application layer's share of US enterprise generative-AI spend, per Menlo Ventures wave (applications ÷ total).
     rationale: The only published layer split of enterprise dollars; a rising application share means buyers' money is landing above the model layer.

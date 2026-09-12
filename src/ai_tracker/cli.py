@@ -215,7 +215,12 @@ def cmd_evaluate(a: argparse.Namespace) -> int:
                 "id": v.id,
                 "name": v.name,
                 "holds": v.holds,
+                "state": v.state,
                 "logic": v.logic,
+                "counter": [
+                    {"text": c.text, "holds": c.holds, "obs_ids": c.obs_ids, "detail": c.detail}
+                    for c in v.counter
+                ],
                 "conds": [
                     {"text": c.text, "holds": c.holds, "obs_ids": c.obs_ids, "detail": c.detail}
                     for c in v.conds

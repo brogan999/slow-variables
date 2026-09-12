@@ -88,8 +88,8 @@
 
 ## Circular financing scale (`circular_financing_scale`)
 
-- Band input: `metric:circular_commitments_total` (USD)
-- Rule: direction over 3 periods, dead band 20000000000.0, higher is concentrating. Three quarters; moves under $20B are one small deal. A growing cumulative total concentrates the stack's risk in a few counterparties.
+- Band input: `metric:circular_commitments_new_4q` (USD)
+- Rule: direction over 3 periods, dead band 20000000000.0, higher is concentrating. Three quarters of the trailing-year flow; moves under $20B are one small deal. Rising commitments concentrate the stack's financing on a few counterparties, and unlike the cumulative total this series can fall.
 - Timing: Leading: vendor financing is signed before the compute is delivered or used, so commitments run ahead of revenue and capacity.
 
 ## Vendors claiming shipped continual learning (`cl_lab_release_claims`)
