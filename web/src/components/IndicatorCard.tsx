@@ -2,32 +2,23 @@ import Link from "next/link";
 import { indicatorHref } from "@/lib/format";
 import type { Card } from "@/lib/data";
 import { Num } from "./Provenance";
-import { ConfidenceDial } from "./ConfidenceDial";
-import { Grade, PendingNote, StatusChip } from "./StatusChip";
+import { PendingNote, StatusChip } from "./StatusChip";
 
+// A card says four things: what it is, how it reads, the latest number, and its recent shape. Grade, confidence and
+// the rule live one click deeper, on the indicator page.
 export function IndicatorCard({ c, obsIndex }: { c: Card; obsIndex: Record<string, string> }) {
   const pts = c.sparkline.filter((p) => p.value !== null);
   return (
-    <div className="panel p-4 flex flex-col gap-2.5">
-      <div className="flex items-start justify-between gap-2">
-        <Link href={indicatorHref(c.id, c.published)} className="font-medium leading-snug hover:underline underline-offset-4 decoration-grid">{c.name}</Link>
-        <Grade grade={c.grade} />
-      </div>
-      <div className="flex flex-wrap items-center gap-2 text-xs text-ink-2">
+    <div className="panel p-4 flex flex-col gap-3">
+      <Link href={indicatorHref(c.id, c.published)} className="font-medium leading-snug hover:underline underline-offset-4 decoration-axis">{c.name}</Link>
+      <div className="flex flex-wrap items-center gap-2 text-xs">
         <StatusChip status={c.published ? c.status : null} />
-        {c.leading_lagging ? <span className="eyebrow">{c.leading_lagging}</span> : null}
-        <ConfidenceDial value={c.confidence} size={30} />
-        {c.stale_as_of ? <span className="text-error">stale as of {c.stale_as_of}</span> : null}
+        {c.stale_as_of ? <span className="text-error">stale since {c.stale_as_of}</span> : null}
         <PendingNote p={c.pending} />
       </div>
-      {c.answers?.length ? <p className="text-xs text-muted">{c.answers.join(" · ")}</p> : null}
       {!c.published && c.unpublished_reason ? <p className="text-xs text-ink-2">Unpublished: {c.unpublished_reason}</p> : null}
-      <div className="flex items-end justify-between gap-3">
-        <div className="text-lg">
-          <Num p={c.latest} unit={c.unit} obsIndex={obsIndex} />
-          {/* the status is read off the band input, which is often a fit rather than the latest point */}
-          {c.band_value ? <div className="text-xs text-muted">status from <Num p={c.band_value} unit={c.band_value.unit} obsIndex={obsIndex} /></div> : null}
-        </div>
+      <div className="flex items-end justify-between gap-3 mt-auto">
+        <div className="text-lg"><Num p={c.latest} unit={c.unit} obsIndex={obsIndex} /></div>
         {pts.length > 1 ? <Sparkline pts={pts.map((p) => p.value as number)} /> : null}
       </div>
     </div>
