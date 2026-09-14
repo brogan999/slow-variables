@@ -13,10 +13,11 @@ function Chart({ clocks, compact }: { clocks: ArgumentDoc["clocks"]; compact: bo
   const W = 660, H = compact ? 440 : 280, L = compact ? 76 : 44, R = 16, T = 14, B = compact ? 48 : 30, fs = compact ? 24 : 12, k = compact ? 1.8 : 1;
   const all = clocks.drawn.flatMap((d) => d.series.map((p) => p.as_of));
   const t0 = Date.parse(clocks.start), t1 = Math.max(...all.map(Date.parse));
-  const top = Math.max(2, ...clocks.drawn.flatMap((d) => d.series.map((p) => p.value / d.series[0].value)));
+  const ratios = clocks.drawn.flatMap((d) => d.series.map((p) => p.value / d.series[0].value));
+  const top = Math.max(2, ...ratios), bottom = Math.min(1, ...ratios);
   const x = (d: string) => L + ((Date.parse(d) - t0) / (t1 - t0)) * (W - L - R);
-  const y = (m: number) => T + (1 - Math.log(Math.max(m, 1e-9)) / Math.log(top)) * (H - T - B);
-  const ticks = [1, 2, 5, 10, 20, 50, 100].filter((v) => v <= top * 1.05);
+  const y = (m: number) => T + (1 - Math.log(m / bottom) / Math.log(top / bottom)) * (H - T - B);
+  const ticks = [0.5, 1, 2, 5, 10, 20, 50, 100].filter((v) => v >= bottom * 0.95 && v <= top * 1.05);
   const years = [...new Set(all.map((d) => d.slice(0, 4)))].sort();
   const id = compact ? "clocks-c" : "clocks";
   return (
@@ -60,7 +61,7 @@ export function FourClocks({ clocks, cards }: { clocks: ArgumentDoc["clocks"]; c
         ))}
       </ul>
       {clocks.listed.length ? <p className="mt-3 text-xs text-muted">Too few readings to draw: {clocks.listed.map((id) => cards[id]?.name ?? id).join(", ")}.</p> : null}
-      <figcaption className="mt-4 text-sm text-ink-2 leading-relaxed">Each line is a reading divided by its own first value, all on one scale; the methods line follows the best model so far. The steep one is what models can do; the flat ones are firms and working hours catching up.{clocks.holds === false ? " (That is no longer what the latest data shows; the sentence is flagged for rewriting.)" : ""}</figcaption>
+      <figcaption className="mt-4 text-sm text-ink-2 leading-relaxed">Each line is a reading divided by its own first value, all on one scale. The methods line follows the best model so far, leaving out readings METR flags as beyond what its tests can measure. The steep one is what models can do; the flat ones are firms and working hours catching up.{clocks.holds === false ? " (That is no longer what the latest data shows; the sentence is flagged for rewriting.)" : ""}</figcaption>
     </figure>
   );
 }

@@ -25,7 +25,7 @@ export function fmt(v: number | null | undefined, unit?: string): string {
 export const tick = (unit: string) => (v: number) => {
   if (unit === "share") return `${Math.round(v * 100)}%`;
   if (unit === "USD" || unit === "usd") return fmt(v, unit);
-  if (unit === "minutes") return v >= 60 ? `${Math.round(v / 60)}h` : `${sig(v)}m`;
+  if (unit === "minutes") return v >= 60 ? `${(v / 60).toFixed(v >= 6000 ? 0 : 1)}h` : `${sig(v)}m`;
   return sig(v);
 };
 
@@ -36,5 +36,5 @@ export const words = (s: string | null | undefined) => (s ?? "unmeasured").repla
 export const indicatorHref = (id: string, published: boolean | undefined) => (published ? `/indicators/${id}` : `/indicators#${id}`);
 
 // Thesis-monitor states in plain words for readers who have not met the monitor's logic.
-export const STATE_WORDS: Record<string, string> = { supported: "happening", unsupported: "not happening", contradicted: "ruled out by its own series", untestable: "can't be tested yet" };
+export const STATE_WORDS: Record<string, string> = { supported: "happening", unsupported: "not happening", contradicted: "running the other way", untestable: "can't be tested yet" };
 export const PHASE_WORDS: Record<string, string> = { installation: "installation", turning_point: "turning point", deployment: "deployment", untestable: "untestable" };

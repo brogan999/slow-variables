@@ -22,7 +22,7 @@ indicators:
     source_cluster: metr_horizons
     name: METR 50% time horizon
     definition: Length (in human-expert minutes) of software tasks a frontier model completes with 50% success, per METR's Horizon v1.1 suite, plotted by model release date. The band applies to the doubling time of that series over the most recent window METR itself reports (2024 onward), recomputed here from METR's corrected data file; METR's published 2023-onward figure is shown alongside.
-    why_it_matters: The cleanest single series for the methods stock. If capability doubles every few months the invention valve is wide open; the paper's claim is that this alone does not move the later stocks.
+    why_it_matters: "The cleanest single measure of how fast the models themselves are improving. Narayanan and Kapoor's argument is that fast improvement here does not, on its own, make firms, jobs or productivity change quickly."
     proxy_types: [benchmark]
     unit: minutes
     cadence_expected: per_release
@@ -33,7 +33,7 @@ indicators:
     normal_band: {lo: 213}
     fast_band: {hi: 122}
     band_rationale: "Normal = doubling time ≥ 7 months (≈213 days, METR's 2019–2025 trend); fast = ≤ 4 months (≈122 days), the AI 2027 assumption. Between the two is `emerging`. The bands are about the current pace, so the input is a log-linear fit over the 2024-onward window, the most recent window METR reports (89 days in the TH1.1 post of 29 Jan 2026), recomputed from METR's corrected data. On the 2023-onward window METR's published figure is 128.7 days, in the gap between the bands: the reading is window-sensitive and both numbers are shown."
-    tracker_interpretation: Capability is moving fast by any historical standard. Whether it is faster than the AI-2027 doubling assumption is the live question the band answers.
+    tracker_interpretation: "What models can do is improving fast by any historical standard. The open question the rule answers is whether it is improving as fast as AI 2027, the most aggressive widely read forecast, needs."
     counterevidence: On the 2023-onward window (METR's published 128.7 days, our fit 125) the status would be `emerging`, not `faster_than_normal`; the status depends on the window. METR notes measurements above 16 hours are unreliable with the current task suite, so the newest points carry wide intervals and are flagged disputed, and human baselines exist for only 5 of the 31 tasks over 8 hours. Horizon is a software-task construct and may not transfer to other work.
     layer_id: model
     leading_lagging: leading
@@ -98,7 +98,7 @@ indicators:
   - id: bls_labor_productivity_yoy
     name: US labour productivity, year on year
     definition: Nonfarm business sector output per hour, percent change from the same quarter a year earlier (BLS PRS85006091).
-    why_it_matters: The adaptation stock only counts when it shows up in aggregate productivity. The paper predicts diffusion at human speed, so productivity stays near trend for years even while capability races.
+    why_it_matters: "However widely AI is used, it only matters for the economy once output per hour rises. Narayanan and Kapoor expect that to happen at the speed people and firms change, so productivity should stay near its usual trend for years even while the models race ahead."
     proxy_types: [deployment, welfare]
     unit: pct
     cadence_expected: quarterly
@@ -109,7 +109,7 @@ indicators:
     normal_band: {hi: 2.5}
     fast_band: {lo: 3.5}
     band_rationale: "Post-war nonfarm productivity growth averages about 2.1% a year, so anything up to 2.5% is trend. Goldman's AI scenario adds about 1.5 points a year; sustained prints of 3.5% or more would be that. Between is `emerging`."
-    tracker_interpretation: Productivity is at or slightly above trend, which is exactly what a normal-technology diffusion path looks like in year three of deployment.
+    tracker_interpretation: "Productivity is growing at or a little above its usual pace, which is what an ordinary technology looks like a few years into wide use."
     counterevidence: Quarterly productivity is noisy and cyclical; 2025–26 prints reflect a softening labour market and hours cuts as much as technology. Aggregate data cannot attribute anything to AI.
     layer_id: labour_consumers
     leading_lagging: lagging
@@ -147,7 +147,7 @@ indicators:
   - id: dev_rct_uplift
     name: Developer productivity uplift (METR RCTs)
     definition: Measured speed change for experienced developers using AI tools versus not, from METR's randomised trials. Negative means slower. The band applies to the newest estimate (Feb 2026, newly recruited developers).
-    why_it_matters: The single best-controlled test of whether frontier capability turns into product-level uplift. The paper's claim is that benchmark gains do not translate quickly; this is where that shows.
+    why_it_matters: "The most carefully controlled test of whether better models make people faster at real work: randomised trials in which experienced software developers do their own tasks with and without AI. If benchmark gains turned quickly into real gains, it would show here first."
     proxy_types: [product, deployment]
     unit: share
     cadence_expected: annual
@@ -158,7 +158,7 @@ indicators:
     normal_band: {hi: 0.2}
     fast_band: {lo: 0.4}
     band_rationale: "Normal = uplift of at most about 20%, setting-dependent (the range of controlled studies to date); fast = broad uplift above 40%, the scale the productivity-boom claims need."
-    tracker_interpretation: Two trials, two years, and the best estimate is still near zero. Capability is not the constraint; integration and verification are.
+    tracker_interpretation: "Two trials a year apart, and the best estimate of the speed-up is still close to zero. What holds people back is fitting the tool into their work and checking its output, not what the model can do."
     counterevidence: Small samples; the 2026 redesign has selection effects METR itself calls 'very weak evidence'; experienced open-source maintainers on their own repos are the hardest case for uplift.
     layer_id: deployment_application
     leading_lagging: leading
@@ -198,7 +198,7 @@ indicators:
     source_cluster: bbd_rtps
     name: Share of work hours assisted by generative AI
     definition: Share of all US work hours in which employed adults used generative AI, from the Bick–Blandin–Deming Real-Time Population Survey (quarterly series via FRED).
-    why_it_matters: The intensive margin. Headline adoption is broad, but hours actually assisted is what productivity arithmetic runs on.
+    why_it_matters: "Saying you use AI is not the same as working with it. Adoption surveys count anyone who has tried it; this counts the share of working hours actually done with it, which is what any productivity gain has to be built from."
     proxy_types: [behaviour, deployment]
     unit: share
     cadence_expected: quarterly
@@ -209,7 +209,7 @@ indicators:
     normal_band: {hi: 0.09}
     fast_band: {lo: 0.2}
     band_rationale: "Normal = single-digit share of hours in year three (PCs and the internet were here at the same age); fast = more than 20% of hours assisted."
-    tracker_interpretation: Broad but shallow, exactly as the paper predicts - most workers touch it, few hours run on it. The weekly-use share moved far faster than the brief expected.
+    tracker_interpretation: "Broad but shallow: most workers have touched it, few of their hours run on it. The share using it weekly rose much faster than we expected, so this is the reading to watch."
     counterevidence: Self-reported survey; the instrument changed between waves; hours assisted is not hours saved. One instrument (the Real-Time Population Survey) is published three ways (FRED, the authors' tracker, the FRED Blog), which count as one source, so the status stays emerging until a second survey measures hours.
     layer_id: adopters
     leading_lagging: coincident
@@ -221,7 +221,7 @@ indicators:
   - id: btos_firm_use
     name: US firms using AI (Census BTOS)
     definition: Share of US businesses reporting AI use in any business function in the last two weeks, Census Business Trends and Outlook Survey. The question changed in November 2025, so this is the post-break series.
-    why_it_matters: The firm-level extensive margin from an official biweekly survey of 1.2 million businesses. Employment-weighted use is higher; small firms dominate the count.
+    why_it_matters: "The broadest official count of whether businesses use AI at all, from a Census Bureau survey sent to 1.2 million firms every two weeks. Every firm counts once, so small businesses dominate; weighted by employees, use is higher."
     proxy_types: [behaviour, deployment]
     unit: share
     cadence_expected: biweekly
@@ -232,7 +232,7 @@ indicators:
     normal_band: {hi: 0.35}
     fast_band: {lo: 0.5}
     band_rationale: "Normal = under about a third of firms in year three, the pace at which PCs and e-commerce reached half of firms over a decade or more; fast = more than half. Ramp's card-spend index (>50%) is a different instrument and not comparable."
-    tracker_interpretation: One firm in five, rising a point or two per quarter - organisational speed, not capability speed.
+    tracker_interpretation: "About one firm in five, rising a point or two a quarter: the speed at which organisations change, not the speed at which models improve."
     counterevidence: Series break in November 2025 (the pre-break series is shown as v1); 'AI use' is self-defined by respondents; the count is dominated by very small firms.
     layer_id: adopters
     leading_lagging: coincident

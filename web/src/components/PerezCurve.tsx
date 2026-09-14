@@ -2,7 +2,8 @@ import { Fact } from "@/components/Fact";
 import type { ArgumentDoc } from "@/lib/data";
 
 // Perez's two halves as a schematic; the only data on it is which region the published phase rule picks.
-const MARK = { installation: [214, 104], turning_point: [336, 150], deployment: [520, 58] } as const;
+// the centre of each region, on the curve: a phase, never a precise position
+const MARK = { installation: [170, 141], turning_point: [336, 148], deployment: [520, 58] } as const;
 const WORD = { installation: "installation", turning_point: "a turning point", deployment: "deployment", untestable: "untestable" } as const;
 
 function Curve({ phase, compact }: { phase: ArgumentDoc["phase"]; compact: boolean }) {
@@ -16,8 +17,8 @@ function Curve({ phase, compact }: { phase: ArgumentDoc["phase"]; compact: boole
       <text x="50" y={compact ? 48 : 40} className="font-serif" fontSize={big} fill="var(--ink)">Installation</text>
       {compact ? null : <text x="60" y="60" className="font-mono" fontSize={small} fill="var(--ink-2)">finance leads · gains concentrate</text>}
       <text x="336" y={compact ? 244 : 236} textAnchor="middle" className="font-mono" fontSize={small} fill="var(--ink-2)">turning point</text>
-      <text x={compact ? 420 : 420} y={compact ? 170 : 100} className="font-serif" fontSize={big} fill="var(--ink)">Deployment</text>
-      {compact ? null : <text x="420" y="120" className="font-mono" fontSize={small} fill="var(--ink-2)">production leads · gains spread</text>}
+      <text x={compact ? 420 : 430} y={170} className="font-serif" fontSize={big} fill="var(--ink)">Deployment</text>
+      {compact ? null : <text x="430" y="190" className="font-mono" fontSize={small} fill="var(--ink-2)">production leads · gains spread</text>}
       {mark ? (
         <g>
           <line x1={mark[0]} y1={mark[1]} x2={mark[0]} y2="212" stroke="var(--ink)" strokeDasharray="2 3" strokeWidth={compact ? 2 : 1} />
@@ -36,7 +37,7 @@ export function PerezCurve({ phase, facts }: { phase: ArgumentDoc["phase"]; fact
       <Curve phase={phase} compact={false} />
       <Curve phase={phase} compact />
       <figcaption className="mt-4 text-sm text-ink-2 leading-relaxed">
-        Schematic, after Perez (2002): the curve is her shape, not our data. The marker is placed by a published rule, using capital spending at <Fact f={facts.capex_to_revenue} /> the AI revenue it serves and <Fact f={facts.vendor_financing_4q} /> of vendor financing signed in four quarters. {phase.state === "untestable" ? "One of those series has no reading, so no position is shown." : `By that rule this is ${WORD[phase.state]}.`}
+        Schematic, after Perez (2002): the curve is her shape, not our data. The marker is placed by a published rule, using spending on buildings and equipment at <Fact f={facts.capex_to_revenue} /> the AI revenue we can measure, and <Fact f={facts.vendor_financing_4q} /> of commitments signed in four quarters in deals where the seller also funds the buyer. {phase.state === "untestable" ? "One of those series has no reading, so no position is shown." : `By that rule this is ${WORD[phase.state]}.`}
         <details className="mt-2"><summary className="cursor-pointer text-ink-2 hover:text-ink">The rule</summary><p className="mt-1">{phase.rule}</p></details>
       </figcaption>
     </figure>

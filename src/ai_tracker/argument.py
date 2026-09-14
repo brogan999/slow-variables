@@ -49,6 +49,17 @@ def fact(s: Store, spec: dict[str, Any]) -> dict[str, Any] | None:
     if not rows:
         return None
     d = rows[-1]
+    if spec.get("pick") == "quarter_end":  # the latest reading dated on a calendar quarter's last day
+        d = next(
+            (
+                r
+                for r in reversed(rows)
+                if (r.as_of_date + timedelta(days=1)).day == 1 and r.as_of_date.month in (3, 6, 9, 12)
+            ),
+            None,
+        )
+        if d is None:
+            return None
     if spec.get("pick") == "year_ago":  # exactly a year back, give or take a quarter-end's calendar drift
         d = next((r for r in reversed(rows) if 355 <= (rows[-1].as_of_date - r.as_of_date).days <= 375), None)
         if d is None:
@@ -87,14 +98,19 @@ def clocks(s: Store, spec: dict[str, Any]) -> dict[str, Any]:
     drawn, listed = [], []
     for link in c["links"]:
         ind = next(i for i in s.seed.indicators if i.id == link["id"])
-        pts = [p for p in s.headline(ind) if fnmatch(p["series_key"], link["series"]) and p["as_of"] >= start]
-        if link.get("frontier"):  # keep only readings that set a new best
-            best: list[dict[str, Any]] = []
+        # a disputed reading (METR's above its suite's ceiling, say) never sets a line's shape
+        mine = [
+            p for p in s.headline(ind) if fnmatch(p["series_key"], link["series"]) and not p.get("disputed")
+        ]
+        pts = [p for p in mine if p["as_of"] >= start]
+        if link.get("frontier"):  # the running best, starting from the best reading before the start date
+            before = [p for p in mine if p["as_of"] < start]
+            best: list[dict[str, Any]] = [max(before, key=lambda p: p["value"])] if before else []
             for p in pts:
                 if not best or p["value"] > best[-1]["value"]:
                     best.append(p)
             pts = best
-        if len(pts) < 3:
+        if len(pts) < 3 or pts[0]["value"] is None or pts[0]["value"] <= 0:
             listed.append(link["id"])
             continue
         first, last = pts[0], pts[-1]
@@ -121,9 +137,11 @@ def clocks(s: Store, spec: dict[str, Any]) -> dict[str, Any]:
 
 
 def _raw_phase(capex: float, fin: float | None, fin_year_ago: float | None) -> str:
-    if capex >= 1 and fin and fin > 0:
+    if fin is None:
+        return "untestable"
+    if capex >= 1 and fin > 0:
         return "installation"
-    if capex < 0.5 and fin is not None and fin_year_ago is not None and fin < fin_year_ago:
+    if capex < 0.5 and fin_year_ago is not None and fin < fin_year_ago:
         return "deployment"
     return "turning_point"
 
@@ -159,9 +177,56 @@ def exits(spec: dict[str, Any]) -> list[dict[str, Any]]:
 
     states = {v["id"]: v.get("state") for v in read_jsonl(DATA / "thesis.jsonl")}
     return [
-        {"monitor": e["monitor"], "label": e["label"], "text": e["text"], "state": states.get(e["monitor"])}
+        {
+            "monitor": e["monitor"],
+            "label": e.get("label"),
+            "text": e["text"],
+            "state": states.get(e["monitor"]),
+        }
         for e in spec["exits"]
     ]
+
+
+def headlines(spec: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    """Each lens page's headline: the claim its monitor's current state supports, in the words the seed gives."""
+    from .store import DATA, read_jsonl
+
+    states = {v["id"]: v.get("state") for v in read_jsonl(DATA / "thesis.jsonl")}
+    out = {}
+    for page, h in spec["headlines"].items():
+        state = states.get(h["monitor"]) or "untestable"
+        out[page] = {
+            "monitor": h["monitor"],
+            "state": state,
+            "claim": h["claims"].get(state) or h["claims"]["untestable"],
+        }
+    return out
+
+
+def essay_shape(text: str) -> list[str]:
+    """What the page renderer needs: a title, a lede, then folios each opened by one label and one claim."""
+    blocks = [b.strip() for b in text.split("\n\n") if b.strip()]
+    bad = []
+    if not blocks or not blocks[0].startswith("# "):
+        bad.append("does not open with a '# ' title")
+    folio = None
+    for b in blocks[2:]:
+        if b.startswith("### "):
+            if folio is not None and not folio["claim"]:
+                bad.append(f"folio '{folio['label']}' has no '## ' claim")
+            folio = {"label": b[4:], "claim": False}
+        elif b.startswith("## "):
+            if folio is None:
+                bad.append("a '## ' claim comes before any '### ' folio label")
+            elif folio["claim"]:
+                bad.append(f"folio '{folio['label']}' has two '## ' claims")
+            else:
+                folio["claim"] = True
+        elif folio is None:
+            bad.append("text between the lede and the first folio would be dropped")
+    if folio is not None and not folio["claim"]:
+        bad.append(f"folio '{folio['label']}' has no '## ' claim")
+    return bad
 
 
 def build(s: Store) -> dict[str, Any]:
@@ -175,6 +240,7 @@ def build(s: Store) -> dict[str, Any]:
         "clocks": clocks(s, spec),
         "phase": phase(s, spec),
         "exits": exits(spec),
+        "headlines": headlines(spec),
         "sources": spec["sources"],
     }
 
@@ -193,13 +259,18 @@ def problems(s: Store) -> tuple[list[str], list[str]]:
             errors.append(f"argument: {x['id']} is not a published indicator")
     from .thesis import RULES
 
+    monitors = {r.__name__ for r in RULES}
     for e in spec["exits"]:
-        if e["monitor"] not in {r.__name__ for r in RULES}:
-            errors.append(f"argument: exit names unknown thesis monitor {e['monitor']}")
+        if e["monitor"] not in monitors or not e.get("label"):
+            errors.append(f"argument: exit {e['monitor']} names an unknown monitor or has no label")
+    for page, h in spec["headlines"].items():
+        if h["monitor"] not in monitors or "untestable" not in h["claims"]:
+            errors.append(f"argument: {page} headline names an unknown monitor or has no untestable claim")
     for path in ESSAYS.values():
         text = path.read_text() if path.exists() else ""
         if not text:
             errors.append(f"argument: {path} is missing")
+        errors += [f"argument: {path} {b}" for b in essay_shape(text)] if text else []
         for kind, key in TOKEN.findall(text):
             if kind == "fact" and key not in spec["facts"] or kind == "plate" and key not in PLATES:
                 errors.append(f"argument: {path} has an unknown [{kind}:{key}]")
@@ -217,4 +288,14 @@ def problems(s: Store) -> tuple[list[str], list[str]]:
         notes.append(
             "argument: the clocks plate's caption (capability outpacing the work) no longer holds; rewrite it"
         )
+    # the essays also assert states in words ("installation", "contradicted"): re-test those too
+    got = {e["monitor"]: e["state"] for e in exits(spec)}
+    want = {e["monitor"]: e["expect"] for e in spec["exits"] if e.get("expect")}
+    if spec["phase"].get("expect"):
+        got["phase"], want["phase"] = phase(s, spec)["state"], spec["phase"]["expect"]
+    for k, w in want.items():
+        if got.get(k) != w:
+            notes.append(
+                f"argument: the essays say {k} reads {w}, but it now reads {got.get(k)}; rewrite them"
+            )
     return errors, notes

@@ -22,6 +22,9 @@ export function generateStaticParams() { return index().indicators.filter((i) =>
 const band = (b: Band, unit: string) => (b ? [b.lo != null ? `≥ ${fmt(b.lo, unit)}` : null, b.hi != null ? `≤ ${fmt(b.hi, unit)}` : null].filter(Boolean).join(" and ") : "—");
 const RUBRIC = (c: number | null) => c === null ? "no status yet" : c >= 90 ? "multiple strong independent sources" : c >= 70 ? "good evidence, some ambiguity" : c >= 50 ? "mixed or hard to operationalise" : "limited or vague evidence";
 
+// Seed prose sometimes names a status as a `code_word`; readers see the word.
+const plain = (t: string | null | undefined) => (t ?? "").replace(/`([a-z_]+)`/g, (_, w: string) => w.replace(/_/g, " "));
+
 function H2({ id, children }: { id: string; children: React.ReactNode }) {
   return <h2 id={id} className="display text-[1.5rem] md:text-[1.75rem] leading-tight mb-4 scroll-mt-8">{children}</h2>;
 }
@@ -53,7 +56,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
         <>
           <MarginPanel title="Reading">
             <div className="flex flex-col gap-3">
-              <div className="self-start"><StatusChip status={d.published ? d.status : null} size="lg" /></div>
+              <div className="self-start"><StatusChip status={d.published ? d.status : "unpublished"} size="lg" /></div>
               {d.pending ? <PendingNote p={d.pending} /> : null}
               {d.stale_as_of ? <p className="text-error">stale since {d.stale_as_of}</p> : null}
               {d.stale_reason ? <p className="text-muted">refreshed irregularly: {d.stale_reason}</p> : null}
@@ -74,7 +77,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
       <div className="flex flex-col gap-14">
         <section>
           <H2 id="reading">The reading</H2>
-          {current ? <p className="font-serif text-[1.0625rem] leading-relaxed mb-6">{current.reason}</p> : <p className="text-muted mb-6">No status yet; the evaluator proposes one once an approved observation exists.</p>}
+          <p className="font-serif text-[1.0625rem] leading-relaxed mb-6">{plain(d.tracker_interpretation)}</p>
           <figure className="plate">
             {d.direction_rule ? <DirectionChart points={d.points} unit={d.unit} rule={d.direction_rule} /> : <BandChart series={[{ name: d.name, points: d.points }]} unit={d.unit} log={d.unit === "minutes"} bands={bandOnChart ? { normal: d.normal_band, fast: d.fast_band } : null} />}
             <figcaption className="mt-2 text-xs text-muted">{d.n_observations} observations; hollow points are disputed; every point links to its record.</figcaption>
@@ -85,12 +88,12 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
 
         <section>
           <H2 id="why">Why it matters</H2>
-          <div className="prose-folio"><p>{d.why_it_matters}</p><p>{d.tracker_interpretation}</p></div>
+          <div className="prose-folio"><p>{plain(d.why_it_matters)}</p></div>
         </section>
 
         <section>
           <H2 id="against">What cuts against it</H2>
-          <div className="prose-folio"><p>{d.counterevidence || "None recorded; this indicator cannot be published until it has some."}</p></div>
+          <div className="prose-folio"><p>{plain(d.counterevidence) || "None recorded; this indicator cannot be published until it has some."}</p></div>
           {d.evidence.length ? <div className="mt-6"><EvidenceLog items={d.evidence} /></div> : null}
         </section>
 
@@ -128,7 +131,8 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
             </ul>
           </details>
           <details id="history">
-            <summary className="cursor-pointer display text-xl">Status history</summary>
+            <summary className="cursor-pointer display text-xl">Why this status, and its history</summary>
+            {current ? <p className="mt-3 text-sm text-ink-2 max-w-[75ch]">{current.reason}</p> : <p className="mt-3 text-sm text-muted">No status yet; the evaluator proposes one once an approved observation exists.</p>}
             <div className="mt-3"><ChangelogList events={d.status_events} obsIndex={idx} showTarget={false} /></div>
           </details>
           <details id="confidence">
@@ -145,7 +149,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
           <details id="related">
             <summary className="cursor-pointer display text-xl">Related</summary>
             <ul className="mt-3 text-sm flex flex-col gap-1">
-              {d.related_indicators.map((r) => { const c = indicators.find((i) => i.id === r); return <li key={r}><Link href={indicatorHref(r, c?.published)} className="hover:underline">{c?.name ?? r}</Link> <StatusChip status={c?.published ? c.status : null} /></li>; })}
+              {d.related_indicators.map((r) => { const c = indicators.find((i) => i.id === r); return <li key={r}><Link href={indicatorHref(r, c?.published)} className="hover:underline">{c?.name ?? r}</Link> <StatusChip status={c?.published ? c.status : "unpublished"} /></li>; })}
               {d.related_bottlenecks.length ? <li className="text-ink-2">Bottlenecks {d.related_bottlenecks.map((n, i) => <span key={n}>{i ? ", " : ""}<Link href={`/bottlenecks#b${n}`} className="hover:underline">#{n}</Link></span>)} <span className="text-muted">(Narayanan &amp; Kapoor&apos;s list)</span></li> : null}
               {d.prediction_rows?.map((p) => <li key={p.id} className="text-ink-2">Prediction: <Link href={`/predictions#${p.id}`} className="hover:underline">{p.claimant}</Link> <span className="text-muted">({p.ledger === "nk" ? "Narayanan and Kapoor" : p.ledger === "ai2027" ? "AI 2027" : p.ledger === "lab" ? "lab timelines" : "capture theses"})</span> <StatusChip status={p.status} /></li>)}
               {d.crosswalk.map((c, i) => <li key={i} className="text-ink-2">Crosswalk: <Link href={`/buckets/${c.bucket_id}`} className="hover:underline">{buckets.find((b) => b.id === c.bucket_id)?.name}</Link> ⇄ <Link href={`/layers/${c.layer_id}`} className="hover:underline">{layers.find((l) => l.id === c.layer_id)?.name}</Link> <span className="text-muted">({words(c.relation)})</span></li>)}

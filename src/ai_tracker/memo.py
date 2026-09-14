@@ -39,6 +39,21 @@ def load_memos() -> list[dict[str, Any]]:
 
 
 RANK = {"leading": 0, "coincident": 1, "lagging": 2}
+STATE_WORDS = {
+    "supported": "happening",
+    "unsupported": "not happening",
+    "contradicted": "running the other way",
+    "untestable": "cannot be tested yet",
+}
+
+
+def heading_problems(text: str) -> list[str]:
+    """Headings render as plain text on the site, so a number or a citation token there can be neither checked nor linked."""
+    return [
+        f"heading '{h}' contains a number or a citation token"
+        for h in re.findall(r"^#+ (.+)$", text, re.M)
+        if re.search(r"\d|\[", h)
+    ]
 
 
 def facts(store: st.Store, since: date, today: date) -> dict[str, Any]:
@@ -102,7 +117,7 @@ def facts(store: st.Store, since: date, today: date) -> dict[str, Any]:
         if c["stale_as_of"]
     ]
     tpath = st.DATA / "thesis.jsonl"
-    thesis = {v["name"]: v["holds"] for v in st.read_jsonl(tpath)} if tpath.exists() else {}
+    thesis = {v["id"]: v["state"] for v in st.read_jsonl(tpath)} if tpath.exists() else {}
     prev = load_memos()
     prev_thesis = (prev[-1].get("thesis") or {}) if prev else {}
     thesis_changes = {
@@ -161,7 +176,7 @@ def _val(p: dict[str, Any] | None, unit: str, derived_id: str | None = None) -> 
 
 def digest(f: dict[str, Any]) -> str:
     """Deterministic memo: ids rather than names (names carry numbers), every number followed by its record's token."""
-    w = {True: "holds", False: "does not hold", None: "untestable"}
+    w = STATE_WORDS
     opener = (
         " ".join(x for x in (f["lens"].get("diffusion"), f["lens"].get("capture")) if x)
         or "What moved this week, from the store."
@@ -194,8 +209,12 @@ def digest(f: dict[str, Any]) -> str:
         out.append("No new watchlist posts.")
     out.append("\n## Thesis monitor\n")
     out.extend(
-        f"- {k.replace('_', ' ')}: {w[v]}"
-        + (f" (was {w[f['thesis_changes'][k][0]]})" if k in f["thesis_changes"] else "")
+        f"- {k.replace('_', ' ')}: {w.get(v, v)}"
+        + (
+            f" (was {w.get(f['thesis_changes'][k][0], f['thesis_changes'][k][0])})"
+            if k in f["thesis_changes"]
+            else ""
+        )
         for k, v in f["thesis"].items()
     )
     out.append("\n## Crosswalk\n")
@@ -244,19 +263,20 @@ def prose(f: dict[str, Any], tools: Tools) -> tuple[str | None, str | None]:
             return None, f"model error ({type(e).__name__})"
         text = "".join(b.text for b in r.content if b.type == "text")
         res = check(text, tools.records(CITE.findall(text)))
-        if res.ok:
+        failures = list(res.failures) + heading_problems(text)
+        if not failures:
             return text, None
         msgs += [
             {"role": "assistant", "content": text},
             {
                 "role": "user",
-                "content": "Citation check failed:\n"
-                + "\n".join(f"- {x}" for x in res.failures)
-                + "\nRevise so every number is followed by the token of a record that contains it, or drop the number. Reply with the memo only.",
+                "content": "The memo failed its checks:\n"
+                + "\n".join(f"- {x}" for x in failures)
+                + "\nRevise so every number is followed by the token of a record that contains it (or drop the number), and keep numbers and tokens out of headings. Reply with the memo only.",
             },
         ]
-        log.warning("memo attempt %d failed citecheck: %s", attempt + 1, res.failures[:5])
-    return None, "citation check failed twice"
+        log.warning("memo attempt %d failed its checks: %s", attempt + 1, failures[:5])
+    return None, "citation or heading check failed twice"
 
 
 def write(store: st.Store, today: date | None = None, since: date | None = None) -> Path:

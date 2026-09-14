@@ -92,7 +92,7 @@ indicators:
   - id: consumer_surplus_wta
     name: Consumer surplus from generative AI (willingness to accept)
     definition: Aggregate annual US consumer surplus from generative-AI chatbots, estimated by Stanford DEL from willingness-to-accept surveys (users × mean WTA to give the tools up for a month, annualised).
-    why_it_matters: The leak from the stack. If consumers keep more surplus than every layer earns in US revenue, the capture story is about who does not capture it.
+    why_it_matters: "Value that users get without paying for it is value no company captures. If what people would need to be paid to give AI up is larger than what every company earns from it, the biggest winner is the user."
     proxy_types: [welfare]
     unit: USD
     cadence_expected: annual
@@ -104,7 +104,7 @@ indicators:
     direction_rule: {periods: 1, dead_band: 10000000000, higher_is: dispersing, rationale: "Two annual waves so far, so the trend is one step; moves under $10B are within survey error. Rising surplus disperses value away from producers to consumers."}
     leading_lagging: lagging
     timing_rationale: "Lagging: surplus estimates come from surveys of habits users have already formed and publish months after fieldwork."
-    tracker_interpretation: Consumer surplus is growing faster than any layer's revenue; the Nordhaus pattern (innovators keep a sliver) is so far holding.
+    tracker_interpretation: "What users say AI is worth to them is growing faster than any part of the industry's revenue. That is the pattern William Nordhaus found for past innovations, where the innovators keep only a sliver, and so far it is holding."
     counterevidence: A single survey series with a stated-preference method; WTA estimates run higher than willingness to pay. No high-frequency version exists.
     confidence: 65
     proposed_status: dispersing
@@ -170,7 +170,7 @@ indicators:
     direction_rule: {periods: 4, dead_band: 0.02, higher_is: concentrating, rationale: "Four calendar quarters, the same rule as the operating-income stack; a move under two points is fiscal-calendar noise. Rising = profit concentrating at the chip layer; falling = migrating up the stack."}
     leading_lagging: lagging
     timing_rationale: "Lagging: gross profit is filed a quarter after it is earned and reflects chip orders placed a year or more before."
-    tracker_interpretation: "The site's headline capture measure. Its denominator includes the labs' estimated gross profit, so a revision to Epoch's run-rates or margins moves the share even when no filing changes; the operating-income stack (margin_stack_semis_share) is the all-filed check."
+    tracker_interpretation: "The site's main measure of who keeps the money, and so far the chip makers are keeping more of it. The total includes an estimate for OpenAI and Anthropic, so a revision to that estimate can move the share even when no company files anything new; a second chart, built only from filed operating income, is the check."
     counterevidence: "NVIDIA and AMD are whole-company figures, so gaming and PC chips count as AI; only one cloud segment files its cost of revenue; the lab slice is an estimate that overstates true gross margin; applications publish nothing usable and are left out, which flatters every measured layer's share."
     confidence: 60
     related_indicators: [margin_stack_semis_share, semis_rent_concentration]

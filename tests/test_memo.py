@@ -89,16 +89,10 @@ def test_memo_facts_put_leading_indicators_first():
     assert ranks == sorted(ranks) and ranks[0] == 0
 
 
-def test_a_prose_memo_with_claim_headings_keeps_its_excerpt_and_heading_rules():
-    import re
+def test_a_heading_with_a_number_or_token_fails_and_a_claim_heading_passes():
+    from ai_tracker.memo import heading_problems
 
-    from ai_tracker.memo import PROMPT
-
-    body = (
-        "Chip makers kept their grip this week, and the reason is a filing, not a forecast.\n\n"
-        "## Chip makers kept their share\n\nNVIDIA filed its quarter [obs:abc].\n\n"
-        "## Lens sentences\n\nDiffusion: ordinary pace.\nCapture: chips concentrating."
-    )
-    assert st._excerpt(body).startswith("Chip makers kept their grip")
-    assert not any(re.search(r"\d|\[", h) for h in re.findall(r"^## (.+)$", body, re.M))
-    assert '"## Lens sentences"' in PROMPT and "no numbers or citation tokens in any heading" in PROMPT
+    good = "Chip makers kept their grip.\n\n## Chip makers kept their share\n\nNVIDIA filed [obs:abc].\n\n## Lens sentences"
+    assert heading_problems(good) == []
+    assert st._excerpt(good).startswith("Chip makers kept their grip")
+    assert len(heading_problems("## Chips took 69.5% [derived:x]\n\n## Twelve months on")) == 1

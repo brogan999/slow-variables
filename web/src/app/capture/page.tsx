@@ -6,25 +6,17 @@ import { IndicatorCard } from "@/components/IndicatorCard";
 import { MarginStackChart } from "@/components/MarginStackChart";
 import { PageHeader } from "@/components/PageHeader";
 import { StatusChip } from "@/components/StatusChip";
-import { capture, obsIndex, thesis } from "@/lib/data";
+import { argument, capture, obsIndex } from "@/lib/data";
 
 export const metadata = { title: "Who profits from AI" };
 
-// The headline is the rents-migrate-up test's state in words; the page never writes its own verdict.
-const CLAIM: Record<string, string> = {
-  contradicted: "So far, the profit is staying with the chip makers",
-  supported: "The profit is moving up to the labs and apps",
-  unsupported: "The profit is not yet moving up the stack",
-  untestable: "Too early to say who keeps the profit",
-};
 
 export default function CaptureLens() {
   const c = capture();
   const idx = obsIndex();
-  const test = thesis().find((v) => v.id === "rents_migrate_up");
   return (
     <div className="flex flex-col gap-16">
-      <PageHeader eyebrow="Who profits · the capture lens" title={CLAIM[test?.state ?? "untestable"] ?? CLAIM.untestable}
+      <PageHeader eyebrow="Who profits · the capture lens" title={argument().headlines.capture.claim}
         lede="The AI industry is a stack of layers, from chips and data centres at the bottom to the apps people use at the top. This page follows where the profit settles, layer by layer. Gross profit is what is left of revenue after paying to deliver the product; where a layer publishes none, it is left out rather than guessed." />
 
       <StackPlate />

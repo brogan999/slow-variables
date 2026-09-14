@@ -4,16 +4,10 @@ import { IndicatorCard } from "@/components/IndicatorCard";
 import { PageHeader } from "@/components/PageHeader";
 import { StockFlowDiagram } from "@/components/StockFlowDiagram";
 import { ThesisMonitor } from "@/components/ThesisMonitor";
-import { diffusion, obsIndex, thesis } from "@/lib/data";
+import { argument, diffusion, obsIndex, thesis } from "@/lib/data";
 
 export const metadata = { title: "How fast AI is spreading" };
 
-// The headline is the falsification test's state in words; the page never writes its own verdict.
-const CLAIM: Record<string, string> = {
-  unsupported: "So far, AI is spreading like an ordinary technology",
-  supported: "AI is spreading faster than an ordinary technology",
-  untestable: "Too early to say how fast AI is spreading",
-};
 
 export default function DiffusionPage() {
   const d = diffusion();
@@ -22,19 +16,19 @@ export default function DiffusionPage() {
   const test = verdicts.find((v) => v.id === "normal_tech_falsified");
   return (
     <div className="flex flex-col gap-16">
-      <PageHeader eyebrow="How fast · the diffusion lens" title={CLAIM[test?.state ?? "untestable"] ?? CLAIM.untestable}
+      <PageHeader eyebrow="How fast · the diffusion lens" title={argument().headlines.diffusion.claim}
         lede={<>Arvind Narayanan and Sayash Kapoor, two Princeton computer scientists, argue that AI will spread the way electricity did: over decades, through stages. This page times each stage separately, from new methods to reorganised work. A stage carries a status only when a published indicator measures it; otherwise it reads unmeasured.</>} />
 
       <figure className="plate flex flex-col items-center gap-3">
         <StockFlowDiagram buckets={d.buckets} valves={d.valves} />
-        <figcaption className="text-sm text-ink-2 max-w-[60ch] self-start">{d.verdict}</figcaption>
+        <figcaption className="text-sm text-ink-2 max-w-[62ch] self-start">Each box is a stage the technology has to pass through, each arrow the flow from one stage to the next. On the right, two things that push back: public backlash and safety brakes, and tests that keep moving the goalposts. Down the left, what use feeds back into better methods.</figcaption>
       </figure>
 
       {d.buckets.map((b) => (
         <section key={b.id} id={b.id} className="border-t border-grid pt-8 scroll-mt-8">
           <div className="eyebrow">Stage {b.order}</div>
           <h2 className="display text-[1.75rem] md:text-[2.125rem] leading-tight mt-2"><Link href={`/buckets/${b.id}`} className="hover:underline underline-offset-4 decoration-axis">{b.name}</Link></h2>
-          <p className="mt-2 mb-6 text-ink-2 max-w-[62ch]">{b.speed_limit}</p>
+          <p className="mt-2 mb-6 text-ink-2 max-w-[62ch]"><span className="text-muted">What limits its speed: </span>{b.speed_limit}</p>
           {b.indicators.length ? (
             <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
               {/* the lens is a summary: the most confident readings, then the stage page for the rest */}

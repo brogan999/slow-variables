@@ -106,7 +106,7 @@ export type Analysis = {
 export const analyses = () => read<Analysis[]>("analyses.json");
 export type Memo = {
   date: string; since: string; title: string; mode: "prose" | "digest"; model: string | null; prompt_version: string; fallback_reason: string | null;
-  thesis: Record<string, boolean | null>; lens: { diffusion?: string; capture?: string }; events: number; new_observations: number; summary?: string; body: string;
+  thesis: Record<string, boolean | string | null>; lens: { diffusion?: string; capture?: string }; events: number; new_observations: number; summary?: string; body: string;
 };
 export const memos = () => read<Memo[]>("memos/index.json");
 export function memo(date: string): Memo | null {
@@ -135,6 +135,7 @@ export type ArgumentDoc = {
   clocks: { start: string; drawn: ClockSeries[]; listed: string[]; holds: boolean | null };
   phase: { state: "installation" | "turning_point" | "deployment" | "untestable"; rule: string; as_of: string | null; history: { as_of: string; raw: string; state: string }[] };
   exits: { monitor: string; label: string; text: string; state: string | null }[];
+  headlines: Record<"diffusion" | "capture", { monitor: string; state: string; claim: string }>;
   sources: { who: string; work: string; where: string; url: string }[];
 };
 export const argument = () => read<ArgumentDoc>("argument.json");

@@ -12,13 +12,13 @@ export function IndicatorCard({ c, obsIndex }: { c: Card; obsIndex: Record<strin
     <div className="panel p-4 flex flex-col gap-3">
       <Link href={indicatorHref(c.id, c.published)} className="font-medium leading-snug hover:underline underline-offset-4 decoration-axis">{c.name}</Link>
       <div className="flex flex-wrap items-center gap-2 text-xs">
-        <StatusChip status={c.published ? c.status : null} />
+        <StatusChip status={c.published ? c.status : "unpublished"} />
         {c.stale_as_of ? <span className="text-error">stale since {c.stale_as_of}</span> : null}
         <PendingNote p={c.pending} />
       </div>
       {!c.published && c.unpublished_reason ? <p className="text-xs text-ink-2">Unpublished: {c.unpublished_reason}</p> : null}
       <div className="flex items-end justify-between gap-3 mt-auto">
-        <div className="text-lg"><Num p={c.latest} unit={c.unit} obsIndex={obsIndex} /></div>
+        <div className="text-lg"><Num p={c.latest} unit={c.unit} obsIndex={obsIndex} compact /></div>
         {pts.length > 1 ? <Sparkline pts={pts.map((p) => p.value as number)} /> : null}
       </div>
     </div>
