@@ -360,3 +360,36 @@ Owner decisions, 12 September: escalate a blocked answer to Opus rather than mov
 
 Still open: the five connectors that compute instead of storing what their source publishes; source URL and tier declared both in seed and in code; the valve taxonomy and the capital-flow threshold living in code rather than seed; no schema for the semantic layer; the export and memo cycle through the filesystem. Waiting on time: seven unattended nights, the first Monday memo, eight weeks of router snapshots, and a fifth quarter of filed gross profit.
 
+
+## Part 9 status (14 Sep 2026): the argument first, in the manuscript system
+
+The owner found the site cluttered and hard to follow, with no theory before the readings. The redesign leads with the argument and one message per page. Owner decisions, 12 September:
+- The manuscript look (parchment, Fraunces, a teal mono instrument layer, gold ornament) on every page, with dark mode dropped.
+- The Diff's voice on the argument essays and the weekly memo; plain words elsewhere; nobody introduced without their field and finding.
+- Home is the argument compressed, then the five slow variables, then what would change our mind. The full argument is `/argument`.
+- A "How to read this" essay.
+- Colour carries meaning only.
+
+What shipped:
+- **Argument as data.** `seed/argument.yaml` and `argument.py` export `argument.json`: facts for `[fact:id]` tokens, the five variables, the clocks plate, the Perez phase with its rule and history, the exits and the sources. The essays in `docs/argument/` type no number (tested). A fact the data stops backing is an attention line in `check`.
+- **Data found on the way.**
+  - `capex_to_revenue_stack` had summed 7 of 20 quarters because year-to-date capex filings were dropped. The connector now keeps them, and v2 differences them into quarters: 5.1×, not 1.66×.
+  - The vendor-financing flow reads every completed quarter, so it can fall.
+  - `gross_profit_semis_share` is published so the essay, plate and variables measure the same thing.
+- **Site.**
+  - Parchment tokens with AA contrast on the hardest ground. Rust now means only slower or dispersing.
+  - Five nav destinations and an Evidence footer.
+  - Lens pages lead with the thesis monitor's claim in words.
+  - Cards show status, value and shape.
+  - Indicator pages read first and fold the method away.
+  - Memos set as serif reading pages.
+  - The memo prompt is v2.
+- **Checks.** Axe clean on 30 routes at 375 and 1280 plus interaction states; no route scrolls sideways at 375.
+
+Deliberately not done:
+- the manuscript-ds components copied wholesale (defects; existing primitives restyled instead)
+- scanlines, sweeps and grids
+- illustrated plates
+- new routes beyond `/argument`
+- a doubling-time comparison across chain links
+- a Perez position finer than the phase
