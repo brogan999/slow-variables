@@ -21,7 +21,7 @@ export default async function SublayerPage({ params }: { params: Promise<{ id: s
     <div className="flex flex-col gap-6">
       <div>
         <p className="text-xs text-muted"><Link href="/stack" className="hover:text-ink">Stack</Link> / <Link href={`/layers/${layer.id}`} className="hover:text-ink">{layer.name}</Link> / sub-layer {s.order}</p>
-        <h1 className="display text-[2.25rem] md:text-[3rem] leading-[1.05] tracking-[-0.015em]">{s.name}</h1>
+        <h1 className="display text-[2.5rem] md:text-[3.5rem] leading-[1.02] max-w-[24ch]">{s.name}</h1>
       </div>
       <section>
         <h2 className="display text-2xl leading-tight mb-3 mt-2">Indicators</h2>

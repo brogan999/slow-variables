@@ -19,7 +19,7 @@ export default async function BucketPage({ params }: { params: Promise<{ id: str
     <div className="flex flex-col gap-6">
       <div>
         <p className="text-xs text-muted"><Link href="/diffusion" className="hover:text-ink">Diffusion</Link> / bucket {b.order}</p>
-        <h1 className="display text-[2.25rem] md:text-[3rem] leading-[1.05] tracking-[-0.015em]">{b.name}</h1>
+        <h1 className="display text-[2.5rem] md:text-[3.5rem] leading-[1.02] max-w-[24ch]">{b.name}</h1>
         <dl className="mt-3 grid gap-2 text-sm md:grid-cols-3">
           <div><dt className="text-muted">Stock</dt><dd>{b.stock}</dd></div>
           <div><dt className="text-muted">Speed limit</dt><dd>{b.speed_limit}</dd></div>

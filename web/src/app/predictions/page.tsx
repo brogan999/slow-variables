@@ -16,7 +16,7 @@ export default function PredictionsPage() {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="display text-[2.25rem] md:text-[3rem] leading-[1.05] tracking-[-0.015em]">Predictions</h1>
+        <h1 className="display text-[2.5rem] md:text-[3.5rem] leading-[1.02] max-w-[24ch]">Predictions</h1>
         <p className="text-lg leading-snug text-ink-2 max-w-[60ch]">One ledger, four claimant families, scored against the same evidence. Claim text is verbatim from the linked source; the status vocabulary is the AI 2027 tracker&apos;s (confirmed, ahead, on track, behind, emerging, not yet testable). A claimant&apos;s self-assessment never resolves a claim.</p>
       </div>
       {Object.entries(LEDGERS).map(([ledger, name]) => {

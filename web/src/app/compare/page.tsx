@@ -16,7 +16,7 @@ export default function ComparePage() {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="display text-[2.25rem] md:text-[3rem] leading-[1.05] tracking-[-0.015em]">Compare</h1>
+        <h1 className="display text-[2.5rem] md:text-[3.5rem] leading-[1.02] max-w-[24ch]">Compare</h1>
         <p className="text-lg leading-snug text-ink-2 max-w-[60ch]">The same evidence read against four families of claims: <em>AI as Normal Technology</em>, <em>AI 2027</em>, the labs&apos; own timelines, and the capture theses about who pays for the build-out. Each claim sits in its family&apos;s column by the ledger it is filed under, citing the sourced claim on the prediction ledger. The last column is not an opinion: for a diffusion indicator it follows from the current status (faster than normal leans AI 2027; consistent with normal or slower leans Normal Technology; anything else is open). A capture indicator reads concentrating or dispersing, which neither lean describes.</p>
       </div>
       <p className="text-sm"><span className="font-medium tabular-nums">{tally.nk}</span> lean Normal Technology · <span className="font-medium tabular-nums">{tally.ai2027}</span> lean AI 2027 · <span className="font-medium tabular-nums">{tally.open}</span> open</p>

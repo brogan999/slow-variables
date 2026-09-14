@@ -23,7 +23,7 @@ export default async function MemoPage({ params }: { params: Promise<{ date: str
       <div className="scroll-progress" aria-hidden />
       <header className="flex flex-col gap-3 max-w-[68ch]">
         <p className="eyebrow"><Link href="/memos" className="hover:text-ink">Memos</Link> · {m.since} → {m.date}</p>
-        <h1 className="display text-[2.25rem] md:text-[3rem] leading-[1.05] tracking-[-0.015em]">{m.title}</h1>
+        <h1 className="display text-[2.5rem] md:text-[3.5rem] leading-[1.02] max-w-[24ch]">{m.title}</h1>
         <p className="text-sm text-muted">{m.mode === "prose" ? `Drafted by ${m.model} (prompt v${m.prompt_version}); every number checked against the record it cites; approved by merge.` : `Deterministic digest${m.fallback_reason ? ` (${m.fallback_reason})` : ""}; approved by merge.`}</p>
       </header>
       <div className="grid gap-6 md:grid-cols-2 max-w-4xl">

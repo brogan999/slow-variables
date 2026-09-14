@@ -7,7 +7,7 @@ export default function SourcesPage() {
   const skipped = skippedSources();
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="display text-[2.25rem] md:text-[3rem] leading-[1.05] tracking-[-0.015em]">Sources</h1>
+      <h1 className="display text-[2.5rem] md:text-[3.5rem] leading-[1.02] max-w-[24ch]">Sources</h1>
       <p className="text-lg leading-snug text-ink-2 max-w-[60ch]">Every source with a working connector or a fetched manual row, then the ones the briefs name that are read but not ingested, with the reason. Health comes from the fetch log, never from a hand-edited field; a source is stale when its last success is older than twice its cadence.</p>
       <div className="overflow-x-auto">
         <table className="data w-full text-sm">
