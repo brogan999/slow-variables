@@ -1,0 +1,69 @@
+# The argument the site opens with, as data. The essays (docs/argument/*.md) carry no typed number: every figure is a
+# [fact:id] token resolved here at export, and a fact a sentence leans on carries an `expect` that `check` re-tests
+# nightly, so a sentence the data stops supporting shows up in the Monday notes instead of standing uncorrected.
+
+facts:
+  chips_gp_share_now: {metric: gross_profit_share_by_layer, dims: {layer_id: compute_semis, basis: filed}, expect: {gt: chips_gp_share_year_ago}}
+  chips_gp_share_year_ago: {metric: gross_profit_share_by_layer, dims: {layer_id: compute_semis, basis: filed}, pick: year_ago}
+  capex_to_revenue: {metric: capex_to_revenue_stack, expect: {gte: 1}}
+  vendor_financing_4q: {metric: circular_commitments_new_4q, expect: {gt: 0}}
+  horizon_doubling_days: {metric: horizon_doubling_days_50_since_2024, expect: {lt: 365}}
+  firms_using_ai: {indicator: btos_firm_use}
+  hours_assisted: {indicator: bbd_work_hours_assisted, expect: {lt: 0.2}}
+  productivity_yoy: {indicator: bls_labor_productivity_yoy}
+  consumer_surplus: {indicator: consumer_surplus_wta}
+
+slow_variables:
+  - id: btos_firm_use
+    label: Firms using AI
+    sentence: The share of American businesses that used AI anywhere in the business in the past two weeks, from the Census Bureau's fortnightly business survey.
+  - id: bbd_work_hours_assisted
+    label: Work hours done with AI
+    sentence: The share of all the hours American workers put in that were spent using generative AI. Adoption is a firm saying yes; this is the work itself changing.
+  - id: bls_labor_productivity_yoy
+    label: Output per hour
+    sentence: How much more American businesses outside farming produce per hour worked than a year before. If AI is rearranging work, this is where it finally has to show up.
+  - id: gross_profit_semis_share
+    label: Chips' share of the profit
+    sentence: Of the gross profit we can measure across the chip makers, the cloud companies and the labs, the share the chip makers keep. It falls if the money moves up to the labs and apps.
+  - id: consumer_surplus_wta
+    label: Value kept by users
+    sentence: What Americans say they would need to be paid to give up AI chatbots, added up over a year. Value users keep is value no company gets to charge for.
+
+# One shared log axis, "multiple of its first reading"; products has too few points per indicator to draw today.
+clocks:
+  start: 2024-12-31
+  links:
+    - {id: metr_horizon_50, series: "metr.*.horizon_50.pt", label: Methods}
+    - {id: btos_firm_use, series: "census_btos.us.ai_use_share_v2.2w", label: Early adoption}
+    - {id: bbd_work_hours_assisted, series: "fred.us_workers.hours_assisted_share.q", label: Adaptation}
+  expect: {gt: [metr_horizon_50, bbd_work_hours_assisted]}
+
+phase:
+  capex: capex_to_revenue_stack
+  financing: circular_commitments_new_4q
+  rule: >-
+    Installation while hyperscalers spend at least a dollar of capital for each dollar of AI revenue and vendor
+    financing is still being signed; deployment once spending falls below half a dollar per dollar and less vendor
+    financing is signed than a year before; a turning point in between. A change counts only after two quarters in a
+    row agree, and the phase is untestable when either series has no reading.
+
+exits:
+  - monitor: normal_tech_falsified
+    text: AI stops looking like an ordinary technology if three things happen together. Models become nearly as reliable on long jobs as on short ones, and not just because the tests have run out of longer tasks. Most of the labour-market trackers we follow break at the same time. And either the share of work hours done with AI passes a fifth, or productivity runs well above trend for years on end.
+  - monitor: rents_migrate_up
+    text: The chip makers' hold on the profit loosens if, over a year, the labs' share of the industry's gross profit rises by five points while the chips' share falls by as much.
+  - monitor: consumers_keep_surplus
+    text: Users rather than sellers keep most of the value if what people say they would need to be paid to give AI up runs well above everything the industry charges for it.
+  - monitor: invention_side_warning
+    text: AI starts speeding up its own invention if independent tests show agents doing more than a day of research work for each day a person puts in, and needing a person's help on long tasks less than half the time.
+
+# Every URL fetched on 14 Sep 2026 while the essays were fact-checked; rendered at the end of /argument.
+sources:
+  - {who: "Brian Walker, Stephen Carpenter, Johan Rockström, Anne-Sophie Crépin and Garry Peterson", work: "Drivers, \"slow\" variables, \"fast\" variables, shocks, and resilience", where: "Ecology and Society 17(3), 2012", url: "https://www.ecologyandsociety.org/vol17/iss3/art30/"}
+  - {who: "Paul A. David", work: "The Dynamo and the Computer: An Historical Perspective on the Modern Productivity Paradox", where: "American Economic Review 80(2), 1990", url: "https://ideas.repec.org/a/aea/aecrev/v80y1990i2p355-61.html"}
+  - {who: "Everett M. Rogers", work: "Diffusion of Innovations", where: "Free Press, first edition 1962", url: "https://en.wikipedia.org/wiki/Diffusion_of_innovations"}
+  - {who: "Bryce Ryan and Neal C. Gross", work: "The Diffusion of Hybrid Seed Corn in Two Iowa Communities", where: "Rural Sociology 8, 1943", url: "https://www.encyclopedia.com/education/encyclopedias-almanacs-transcripts-and-maps/diffusion-theory"}
+  - {who: "Carlota Perez", work: "Technological Revolutions and Financial Capital", where: "Edward Elgar, 2002", url: "https://en.wikipedia.org/wiki/Technological_Revolutions_and_Financial_Capital"}
+  - {who: "David J. Teece", work: "Profiting from technological innovation", where: "Research Policy 15(6), 1986", url: "https://doi.org/10.1016/0048-7333(86)90027-2"}
+  - {who: "William D. Nordhaus", work: "Schumpeterian Profits in the American Economy: Theory and Measurement", where: "NBER Working Paper 10433, 2004", url: "https://www.nber.org/papers/w10433"}

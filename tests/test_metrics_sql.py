@@ -13,8 +13,6 @@ KEY_SPLIT = """CREATE VIEW observations AS SELECT *, split_part(series_key, '.',
     FROM obs_raw"""
 
 
-
-
 def run(metric: str, rows: list[tuple]) -> list[tuple]:
     con = duckdb.connect()
     con.execute(
@@ -232,3 +230,58 @@ def test_hardware_price_performance_pairs_flops_and_price_by_chip_and_date():
         ("f2", "epoch_hw.a100.fp16_flops.pt", "a100", "2020-05-14", 3e14, ""),  # no price: not a point
     ]
     assert run("perf_per_dollar_doubling_days", rows) == [(date(2023, 3, 21), 4e10, ["f1", "p1"])]
+
+
+def test_capex_to_revenue_differences_year_to_date_capex_and_needs_four_quarters_per_filer():
+    con = duckdb.connect()
+    con.execute(
+        "CREATE TABLE obs_raw (id VARCHAR, series_key VARCHAR, subject VARCHAR, entity_id VARCHAR, as_of_date DATE, period_start DATE, value_numeric DOUBLE)"
+    )
+    rows = [  # Alphabet files capex only year to date: quarters 10, 15, 20, 25
+        ("g1", "sec.googl.capex.q", "googl", "googl", "2025-03-31", "2025-01-01", 10.0),
+        ("g2", "sec.googl.capex.h1", "googl", "googl", "2025-06-30", "2025-01-01", 25.0),
+        ("g3", "sec.googl.capex.9m", "googl", "googl", "2025-09-30", "2025-01-01", 45.0),
+        ("g4", "sec.googl.capex.fy", "googl", "googl", "2025-12-31", "2025-01-01", 70.0),
+        (
+            "mh1",
+            "sec.msft.capex.h1",
+            "msft",
+            "msft",
+            "2025-06-30",
+            "2025-01-01",
+            10.0,
+        ),  # a filed quarter beats it
+    ]
+    ends = {
+        "msft": ["2025-03-31", "2025-06-30", "2025-09-30", "2025-12-31"],
+        "amzn": ["2025-03-31", "2025-06-30", "2025-09-30", "2025-12-31"],
+        "meta": ["2025-03-31", "2025-06-30", "2025-09-30", "2025-12-31"],
+        "orcl": ["2025-02-28", "2025-05-31", "2025-08-31", "2025-11-30"],
+    }
+    for s, es in ends.items():
+        for i, e in enumerate(es):
+            start = str(date.fromisoformat(e).replace(day=1) - (date(2025, 3, 1) - date(2025, 1, 1)))
+            rows.append((f"{s[0]}{i + 1}", f"sec.{s}.capex.q", s, s, e, start, 5.0))
+    rows += [
+        ("rr", "epoch.openai.revenue_run_rate_usd.pt", "openai", "openai", "2025-12-15", None, 40.0),
+        ("me", "menlo.us_enterprise.genai_spend_usd.fy", "us_enterprise", None, "2025-11-01", None, 10.0),
+    ]
+    con.executemany("INSERT INTO obs_raw VALUES (?, ?, ?, ?, ?, ?, ?)", rows)
+    con.execute(KEY_SPLIT)
+    out = {str(d): (v, ids) for d, v, ids in con.execute(METRICS["capex_to_revenue_stack"]["sql"]).fetchall()}
+    assert list(out) == ["2025-12-31"]  # earlier windows lack a quarter for someone
+    v, ids = out["2025-12-31"]
+    assert abs(v - (70 + 4 * 20) / (40 + 10)) < 1e-9
+    assert {"g1", "g2", "g3", "g4", "rr", "me"} <= set(ids) and "mh1" not in ids
+
+
+def test_vendor_financing_flow_reads_every_completed_quarter_so_it_can_fall():
+    rows = [
+        ("d1", "circular.nvda_openai.commitment_usd.pt", "nvda_openai", "2025-02-10", 100.0, ""),
+        ("d2", "circular.amd_openai.commitment_usd.pt", "amd_openai", "2025-08-20", 50.0, ""),
+    ]
+    out = {str(d): (v, ids) for d, v, ids in run("circular_commitments_new_4q", rows)}
+    assert out["2025-03-31"] == (100.0, ["d1"]) and out["2025-06-30"] == (100.0, ["d1"])  # a quiet quarter still reads
+    assert out["2025-09-30"] == (150.0, ["d1", "d2"])
+    assert out["2026-03-31"] == (50.0, ["d2"])  # the February deal has left the window: the flow falls
+    assert "2026-09-30" not in out and "2026-12-31" not in out  # nothing left to cite a year after the last deal

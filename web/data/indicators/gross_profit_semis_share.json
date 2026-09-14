@@ -1,0 +1,764 @@
+{
+ "answers": [
+  "Who keeps it: Compute & physical"
+ ],
+ "band_input": "metric:gross_profit_share_by_layer",
+ "band_rationale": null,
+ "band_value": {
+  "as_of": "2026-06-30",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "0b6d0c8c368c7937",
+   "1a2c7e77a3879f2b",
+   "2a23fc81cd16d222",
+   "2d9a42587abe262f",
+   "4910df35443940aa",
+   "5940a28208892eaf",
+   "5b9948898bd3d1b5",
+   "62adf9bfc68ef6e2",
+   "76757aa09406f17b",
+   "77e6d896399b59a9",
+   "9fbab158355685d5",
+   "aca02d0b916a89dd",
+   "b095b7d2d519eb4e",
+   "c277318418142d0c",
+   "d575d683afd39e24",
+   "fc044aaf57883098"
+  ],
+  "unit": "share",
+  "value": 0.6951937886063614
+ },
+ "bucket_id": null,
+ "cadence_expected": "quarterly",
+ "chart_sources": {
+  "metric": "gross_profit_share_by_layer",
+  "sources": [
+   {
+    "attribution": "SEC EDGAR, XBRL company facts API",
+    "id": "sec_xbrl",
+    "license": "Public domain (U.S. government); fair-access policy requires a descriptive User-Agent",
+    "name": "SEC EDGAR XBRL company facts",
+    "org": "U.S. Securities and Exchange Commission"
+   },
+   {
+    "attribution": "Epoch AI, 'Data on AI Companies' (CC BY 4.0), epoch.ai/data",
+    "id": "epoch",
+    "license": "CC BY 4.0",
+    "name": "Epoch AI data hub \u2014 AI companies",
+    "org": "Epoch AI"
+   },
+   {
+    "attribution": "SEC EDGAR, inline XBRL filings (segment disclosures)",
+    "id": "sec_seg",
+    "license": "Public domain (U.S. government); fair-access policy requires a descriptive User-Agent",
+    "name": "SEC EDGAR 10-Q/10-K XBRL instances (segment data)",
+    "org": "U.S. Securities and Exchange Commission"
+   }
+  ]
+ },
+ "confidence": 60,
+ "confidence_basis": {
+  "best_tier": 4,
+  "grade": "A",
+  "n_observations": 46,
+  "sources": [
+   "Epoch AI data hub \u2014 AI companies",
+   "SEC EDGAR 10-Q/10-K XBRL instances (segment data)",
+   "SEC EDGAR XBRL company facts"
+  ],
+  "stale_as_of": null
+ },
+ "counterevidence": "NVIDIA and AMD are whole-company figures, so gaming and PC chips count as AI; only one cloud segment files its cost of revenue; the lab slice is an estimate that overstates true gross margin; applications publish nothing usable and are left out, which flatters every measured layer's share.",
+ "crosswalk": [],
+ "definition": "The chip layer's share of the AI stack's gross profit per calendar quarter: NVIDIA and AMD whole-company gross profit (filed) over that plus Microsoft Intelligent Cloud's gross profit (filed) and the frontier labs' estimated gross profit (grade C). Derived metric gross_profit_share_by_layer, chips slice.",
+ "derived": [
+  {
+   "as_of_date": "2025-03-31",
+   "computed_at": "2026-09-14T02:53:28.862109Z",
+   "dims": {
+    "basis": "filed",
+    "layer_id": "compute_semis"
+   },
+   "formula_version": "1",
+   "id": "c1c11a28ae6be99b",
+   "input_observation_ids": [
+    "0b6d0c8c368c7937",
+    "1a2c7e77a3879f2b",
+    "1bc5d9a30858bc99",
+    "2a23fc81cd16d222",
+    "2c12091b50da4890",
+    "2d9a42587abe262f",
+    "460a7d82798ce213",
+    "5262955597da61c6",
+    "69de1ab8b7416221",
+    "912b07576e75ad92",
+    "b85dc7465797532c",
+    "cb9aea146ae3d2e7",
+    "d71a32c414d72e0b"
+   ],
+   "metric": "gross_profit_share_by_layer",
+   "obs_ids": [
+    "0b6d0c8c368c7937",
+    "1a2c7e77a3879f2b",
+    "1bc5d9a30858bc99",
+    "2a23fc81cd16d222",
+    "2c12091b50da4890",
+    "2d9a42587abe262f",
+    "460a7d82798ce213",
+    "5262955597da61c6",
+    "69de1ab8b7416221",
+    "912b07576e75ad92",
+    "b85dc7465797532c",
+    "cb9aea146ae3d2e7",
+    "d71a32c414d72e0b"
+   ],
+   "value": 0.6539884470124802,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-06-30",
+   "computed_at": "2026-09-14T02:53:28.862109Z",
+   "dims": {
+    "basis": "filed",
+    "layer_id": "compute_semis"
+   },
+   "formula_version": "1",
+   "id": "b35c360fac88ebcb",
+   "input_observation_ids": [
+    "0b6d0c8c368c7937",
+    "1a2c7e77a3879f2b",
+    "2a23fc81cd16d222",
+    "2d9a42587abe262f",
+    "2f92f53cc755dbc0",
+    "3d20f8962324d4e8",
+    "460a7d82798ce213",
+    "46820cf03ef990ef",
+    "4914dc73308bc047",
+    "650a22847cd7c90c",
+    "76d684221e91551c",
+    "78e3a8bb65070e37",
+    "acdfb47d238a8057",
+    "d71a32c414d72e0b",
+    "f44a045f53a7a770",
+    "f683716fdcff362b"
+   ],
+   "metric": "gross_profit_share_by_layer",
+   "obs_ids": [
+    "0b6d0c8c368c7937",
+    "1a2c7e77a3879f2b",
+    "2a23fc81cd16d222",
+    "2d9a42587abe262f",
+    "2f92f53cc755dbc0",
+    "3d20f8962324d4e8",
+    "460a7d82798ce213",
+    "46820cf03ef990ef",
+    "4914dc73308bc047",
+    "650a22847cd7c90c",
+    "76d684221e91551c",
+    "78e3a8bb65070e37",
+    "acdfb47d238a8057",
+    "d71a32c414d72e0b",
+    "f44a045f53a7a770",
+    "f683716fdcff362b"
+   ],
+   "value": 0.6064069168991904,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-09-30",
+   "computed_at": "2026-09-14T02:53:28.862109Z",
+   "dims": {
+    "basis": "filed",
+    "layer_id": "compute_semis"
+   },
+   "formula_version": "1",
+   "id": "29859db48b421fb5",
+   "input_observation_ids": [
+    "0b6d0c8c368c7937",
+    "0dfac555b5f950a6",
+    "1a2c7e77a3879f2b",
+    "1ac6989d22843699",
+    "2a23fc81cd16d222",
+    "2d9a42587abe262f",
+    "62adf9bfc68ef6e2",
+    "93466332e820e7d6",
+    "aa4afbcf23f9c215",
+    "d575d683afd39e24"
+   ],
+   "metric": "gross_profit_share_by_layer",
+   "obs_ids": [
+    "0b6d0c8c368c7937",
+    "0dfac555b5f950a6",
+    "1a2c7e77a3879f2b",
+    "1ac6989d22843699",
+    "2a23fc81cd16d222",
+    "2d9a42587abe262f",
+    "62adf9bfc68ef6e2",
+    "93466332e820e7d6",
+    "aa4afbcf23f9c215",
+    "d575d683afd39e24"
+   ],
+   "value": 0.6551741681674829,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-12-31",
+   "computed_at": "2026-09-14T02:53:28.862109Z",
+   "dims": {
+    "basis": "filed",
+    "layer_id": "compute_semis"
+   },
+   "formula_version": "1",
+   "id": "b7cb6c147b99b0fb",
+   "input_observation_ids": [
+    "0b6d0c8c368c7937",
+    "1a2c7e77a3879f2b",
+    "1ac6989d22843699",
+    "206dd0605a5540c9",
+    "2a23fc81cd16d222",
+    "2d9a42587abe262f",
+    "2f92f53cc755dbc0",
+    "77e6d896399b59a9",
+    "81c90fd0aaa564b9",
+    "912b07576e75ad92",
+    "afadf59ee9cbb7ff",
+    "ba7631b6278d86f5",
+    "fc044aaf57883098"
+   ],
+   "metric": "gross_profit_share_by_layer",
+   "obs_ids": [
+    "0b6d0c8c368c7937",
+    "1a2c7e77a3879f2b",
+    "1ac6989d22843699",
+    "206dd0605a5540c9",
+    "2a23fc81cd16d222",
+    "2d9a42587abe262f",
+    "2f92f53cc755dbc0",
+    "77e6d896399b59a9",
+    "81c90fd0aaa564b9",
+    "912b07576e75ad92",
+    "afadf59ee9cbb7ff",
+    "ba7631b6278d86f5",
+    "fc044aaf57883098"
+   ],
+   "value": 0.6801894483949943,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2026-03-31",
+   "computed_at": "2026-09-14T02:53:28.862109Z",
+   "dims": {
+    "basis": "filed",
+    "layer_id": "compute_semis"
+   },
+   "formula_version": "1",
+   "id": "f12b386a1944ff28",
+   "input_observation_ids": [
+    "0b6d0c8c368c7937",
+    "13f0f27e82ca9faf",
+    "1a2c7e77a3879f2b",
+    "2a23fc81cd16d222",
+    "2d9a42587abe262f",
+    "383e0e366e0eb890",
+    "4910df35443940aa",
+    "5b9948898bd3d1b5",
+    "76757aa09406f17b",
+    "76d684221e91551c",
+    "81c90fd0aaa564b9",
+    "93466332e820e7d6",
+    "d66a0f883d6c9603"
+   ],
+   "metric": "gross_profit_share_by_layer",
+   "obs_ids": [
+    "0b6d0c8c368c7937",
+    "13f0f27e82ca9faf",
+    "1a2c7e77a3879f2b",
+    "2a23fc81cd16d222",
+    "2d9a42587abe262f",
+    "383e0e366e0eb890",
+    "4910df35443940aa",
+    "5b9948898bd3d1b5",
+    "76757aa09406f17b",
+    "76d684221e91551c",
+    "81c90fd0aaa564b9",
+    "93466332e820e7d6",
+    "d66a0f883d6c9603"
+   ],
+   "value": 0.7030769672534064,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2026-06-30",
+   "computed_at": "2026-09-14T02:53:28.862109Z",
+   "dims": {
+    "basis": "filed",
+    "layer_id": "compute_semis"
+   },
+   "formula_version": "1",
+   "id": "32234358f93956fd",
+   "input_observation_ids": [
+    "0b6d0c8c368c7937",
+    "1a2c7e77a3879f2b",
+    "2a23fc81cd16d222",
+    "2d9a42587abe262f",
+    "4910df35443940aa",
+    "5940a28208892eaf",
+    "5b9948898bd3d1b5",
+    "62adf9bfc68ef6e2",
+    "76757aa09406f17b",
+    "77e6d896399b59a9",
+    "9fbab158355685d5",
+    "aca02d0b916a89dd",
+    "b095b7d2d519eb4e",
+    "c277318418142d0c",
+    "d575d683afd39e24",
+    "fc044aaf57883098"
+   ],
+   "metric": "gross_profit_share_by_layer",
+   "obs_ids": [
+    "0b6d0c8c368c7937",
+    "1a2c7e77a3879f2b",
+    "2a23fc81cd16d222",
+    "2d9a42587abe262f",
+    "4910df35443940aa",
+    "5940a28208892eaf",
+    "5b9948898bd3d1b5",
+    "62adf9bfc68ef6e2",
+    "76757aa09406f17b",
+    "77e6d896399b59a9",
+    "9fbab158355685d5",
+    "aca02d0b916a89dd",
+    "b095b7d2d519eb4e",
+    "c277318418142d0c",
+    "d575d683afd39e24",
+    "fc044aaf57883098"
+   ],
+   "value": 0.6951937886063614,
+   "value_high": null,
+   "value_low": null
+  }
+ ],
+ "direction": null,
+ "direction_rule": {
+  "dead_band": 0.02,
+  "higher_is": "concentrating",
+  "periods": 4,
+  "rationale": "Four calendar quarters, the same rule as the operating-income stack; a move under two points is fiscal-calendar noise. Rising = profit concentrating at the chip layer; falling = migrating up the stack."
+ },
+ "evidence": [],
+ "falsifying_band": null,
+ "fast_band": null,
+ "fits": [],
+ "flow_status": null,
+ "grade": "A",
+ "id": "gross_profit_semis_share",
+ "latest": {
+  "as_of": "2026-06-30",
+  "dims": {
+   "basis": "filed",
+   "layer_id": "compute_semis"
+  },
+  "obs_ids": [
+   "0b6d0c8c368c7937",
+   "1a2c7e77a3879f2b",
+   "2a23fc81cd16d222",
+   "2d9a42587abe262f",
+   "4910df35443940aa",
+   "5940a28208892eaf",
+   "5b9948898bd3d1b5",
+   "62adf9bfc68ef6e2",
+   "76757aa09406f17b",
+   "77e6d896399b59a9",
+   "9fbab158355685d5",
+   "aca02d0b916a89dd",
+   "b095b7d2d519eb4e",
+   "c277318418142d0c",
+   "d575d683afd39e24",
+   "fc044aaf57883098"
+  ],
+  "unit": "share",
+  "value": 0.6951937886063614
+ },
+ "layer_id": "compute_physical",
+ "leading_lagging": "lagging",
+ "metric": "gross_profit_share_by_layer",
+ "metric_dims": {
+  "basis": "filed",
+  "layer_id": "compute_semis"
+ },
+ "n_observations": 46,
+ "name": "Chips' share of the stack's gross profit",
+ "normal_band": null,
+ "override_note": null,
+ "pending": null,
+ "points": [
+  {
+   "as_of": "2025-03-31",
+   "dims": {
+    "basis": "filed",
+    "layer_id": "compute_semis"
+   },
+   "obs_ids": [
+    "0b6d0c8c368c7937",
+    "1a2c7e77a3879f2b",
+    "1bc5d9a30858bc99",
+    "2a23fc81cd16d222",
+    "2c12091b50da4890",
+    "2d9a42587abe262f",
+    "460a7d82798ce213",
+    "5262955597da61c6",
+    "69de1ab8b7416221",
+    "912b07576e75ad92",
+    "b85dc7465797532c",
+    "cb9aea146ae3d2e7",
+    "d71a32c414d72e0b"
+   ],
+   "unit": "share",
+   "value": 0.6539884470124802
+  },
+  {
+   "as_of": "2025-06-30",
+   "dims": {
+    "basis": "filed",
+    "layer_id": "compute_semis"
+   },
+   "obs_ids": [
+    "0b6d0c8c368c7937",
+    "1a2c7e77a3879f2b",
+    "2a23fc81cd16d222",
+    "2d9a42587abe262f",
+    "2f92f53cc755dbc0",
+    "3d20f8962324d4e8",
+    "460a7d82798ce213",
+    "46820cf03ef990ef",
+    "4914dc73308bc047",
+    "650a22847cd7c90c",
+    "76d684221e91551c",
+    "78e3a8bb65070e37",
+    "acdfb47d238a8057",
+    "d71a32c414d72e0b",
+    "f44a045f53a7a770",
+    "f683716fdcff362b"
+   ],
+   "unit": "share",
+   "value": 0.6064069168991904
+  },
+  {
+   "as_of": "2025-09-30",
+   "dims": {
+    "basis": "filed",
+    "layer_id": "compute_semis"
+   },
+   "obs_ids": [
+    "0b6d0c8c368c7937",
+    "0dfac555b5f950a6",
+    "1a2c7e77a3879f2b",
+    "1ac6989d22843699",
+    "2a23fc81cd16d222",
+    "2d9a42587abe262f",
+    "62adf9bfc68ef6e2",
+    "93466332e820e7d6",
+    "aa4afbcf23f9c215",
+    "d575d683afd39e24"
+   ],
+   "unit": "share",
+   "value": 0.6551741681674829
+  },
+  {
+   "as_of": "2025-12-31",
+   "dims": {
+    "basis": "filed",
+    "layer_id": "compute_semis"
+   },
+   "obs_ids": [
+    "0b6d0c8c368c7937",
+    "1a2c7e77a3879f2b",
+    "1ac6989d22843699",
+    "206dd0605a5540c9",
+    "2a23fc81cd16d222",
+    "2d9a42587abe262f",
+    "2f92f53cc755dbc0",
+    "77e6d896399b59a9",
+    "81c90fd0aaa564b9",
+    "912b07576e75ad92",
+    "afadf59ee9cbb7ff",
+    "ba7631b6278d86f5",
+    "fc044aaf57883098"
+   ],
+   "unit": "share",
+   "value": 0.6801894483949943
+  },
+  {
+   "as_of": "2026-03-31",
+   "dims": {
+    "basis": "filed",
+    "layer_id": "compute_semis"
+   },
+   "obs_ids": [
+    "0b6d0c8c368c7937",
+    "13f0f27e82ca9faf",
+    "1a2c7e77a3879f2b",
+    "2a23fc81cd16d222",
+    "2d9a42587abe262f",
+    "383e0e366e0eb890",
+    "4910df35443940aa",
+    "5b9948898bd3d1b5",
+    "76757aa09406f17b",
+    "76d684221e91551c",
+    "81c90fd0aaa564b9",
+    "93466332e820e7d6",
+    "d66a0f883d6c9603"
+   ],
+   "unit": "share",
+   "value": 0.7030769672534064
+  },
+  {
+   "as_of": "2026-06-30",
+   "dims": {
+    "basis": "filed",
+    "layer_id": "compute_semis"
+   },
+   "obs_ids": [
+    "0b6d0c8c368c7937",
+    "1a2c7e77a3879f2b",
+    "2a23fc81cd16d222",
+    "2d9a42587abe262f",
+    "4910df35443940aa",
+    "5940a28208892eaf",
+    "5b9948898bd3d1b5",
+    "62adf9bfc68ef6e2",
+    "76757aa09406f17b",
+    "77e6d896399b59a9",
+    "9fbab158355685d5",
+    "aca02d0b916a89dd",
+    "b095b7d2d519eb4e",
+    "c277318418142d0c",
+    "d575d683afd39e24",
+    "fc044aaf57883098"
+   ],
+   "unit": "share",
+   "value": 0.6951937886063614
+  }
+ ],
+ "prediction_rows": [],
+ "proposed_status": null,
+ "proxy_types": [
+  "market_structure"
+ ],
+ "published": true,
+ "related_bottlenecks": [],
+ "related_indicators": [
+  "margin_stack_semis_share",
+  "semis_rent_concentration"
+ ],
+ "related_metrics": [],
+ "related_predictions": [],
+ "series": [],
+ "series_keys": [],
+ "source_cluster": "semis_filings",
+ "source_ids": [
+  "epoch",
+  "sec_seg",
+  "sec_xbrl"
+ ],
+ "sparkline": [
+  {
+   "as_of": "2025-03-31",
+   "dims": {
+    "basis": "filed",
+    "layer_id": "compute_semis"
+   },
+   "obs_ids": [
+    "0b6d0c8c368c7937",
+    "1a2c7e77a3879f2b",
+    "1bc5d9a30858bc99",
+    "2a23fc81cd16d222",
+    "2c12091b50da4890",
+    "2d9a42587abe262f",
+    "460a7d82798ce213",
+    "5262955597da61c6",
+    "69de1ab8b7416221",
+    "912b07576e75ad92",
+    "b85dc7465797532c",
+    "cb9aea146ae3d2e7",
+    "d71a32c414d72e0b"
+   ],
+   "unit": "share",
+   "value": 0.6539884470124802
+  },
+  {
+   "as_of": "2025-06-30",
+   "dims": {
+    "basis": "filed",
+    "layer_id": "compute_semis"
+   },
+   "obs_ids": [
+    "0b6d0c8c368c7937",
+    "1a2c7e77a3879f2b",
+    "2a23fc81cd16d222",
+    "2d9a42587abe262f",
+    "2f92f53cc755dbc0",
+    "3d20f8962324d4e8",
+    "460a7d82798ce213",
+    "46820cf03ef990ef",
+    "4914dc73308bc047",
+    "650a22847cd7c90c",
+    "76d684221e91551c",
+    "78e3a8bb65070e37",
+    "acdfb47d238a8057",
+    "d71a32c414d72e0b",
+    "f44a045f53a7a770",
+    "f683716fdcff362b"
+   ],
+   "unit": "share",
+   "value": 0.6064069168991904
+  },
+  {
+   "as_of": "2025-09-30",
+   "dims": {
+    "basis": "filed",
+    "layer_id": "compute_semis"
+   },
+   "obs_ids": [
+    "0b6d0c8c368c7937",
+    "0dfac555b5f950a6",
+    "1a2c7e77a3879f2b",
+    "1ac6989d22843699",
+    "2a23fc81cd16d222",
+    "2d9a42587abe262f",
+    "62adf9bfc68ef6e2",
+    "93466332e820e7d6",
+    "aa4afbcf23f9c215",
+    "d575d683afd39e24"
+   ],
+   "unit": "share",
+   "value": 0.6551741681674829
+  },
+  {
+   "as_of": "2025-12-31",
+   "dims": {
+    "basis": "filed",
+    "layer_id": "compute_semis"
+   },
+   "obs_ids": [
+    "0b6d0c8c368c7937",
+    "1a2c7e77a3879f2b",
+    "1ac6989d22843699",
+    "206dd0605a5540c9",
+    "2a23fc81cd16d222",
+    "2d9a42587abe262f",
+    "2f92f53cc755dbc0",
+    "77e6d896399b59a9",
+    "81c90fd0aaa564b9",
+    "912b07576e75ad92",
+    "afadf59ee9cbb7ff",
+    "ba7631b6278d86f5",
+    "fc044aaf57883098"
+   ],
+   "unit": "share",
+   "value": 0.6801894483949943
+  },
+  {
+   "as_of": "2026-03-31",
+   "dims": {
+    "basis": "filed",
+    "layer_id": "compute_semis"
+   },
+   "obs_ids": [
+    "0b6d0c8c368c7937",
+    "13f0f27e82ca9faf",
+    "1a2c7e77a3879f2b",
+    "2a23fc81cd16d222",
+    "2d9a42587abe262f",
+    "383e0e366e0eb890",
+    "4910df35443940aa",
+    "5b9948898bd3d1b5",
+    "76757aa09406f17b",
+    "76d684221e91551c",
+    "81c90fd0aaa564b9",
+    "93466332e820e7d6",
+    "d66a0f883d6c9603"
+   ],
+   "unit": "share",
+   "value": 0.7030769672534064
+  },
+  {
+   "as_of": "2026-06-30",
+   "dims": {
+    "basis": "filed",
+    "layer_id": "compute_semis"
+   },
+   "obs_ids": [
+    "0b6d0c8c368c7937",
+    "1a2c7e77a3879f2b",
+    "2a23fc81cd16d222",
+    "2d9a42587abe262f",
+    "4910df35443940aa",
+    "5940a28208892eaf",
+    "5b9948898bd3d1b5",
+    "62adf9bfc68ef6e2",
+    "76757aa09406f17b",
+    "77e6d896399b59a9",
+    "9fbab158355685d5",
+    "aca02d0b916a89dd",
+    "b095b7d2d519eb4e",
+    "c277318418142d0c",
+    "d575d683afd39e24",
+    "fc044aaf57883098"
+   ],
+   "unit": "share",
+   "value": 0.6951937886063614
+  }
+ ],
+ "stale_as_of": null,
+ "stale_ok": false,
+ "stale_reason": null,
+ "status": "concentrating",
+ "status_events": [
+  {
+   "author": "evaluate",
+   "counterevidence_considered": null,
+   "created_at": "2026-09-14T02:51:44.268036Z",
+   "evidence_ids": [
+    "0b6d0c8c368c7937",
+    "1a2c7e77a3879f2b",
+    "2a23fc81cd16d222",
+    "2d9a42587abe262f",
+    "4910df35443940aa",
+    "5940a28208892eaf",
+    "5b9948898bd3d1b5",
+    "62adf9bfc68ef6e2",
+    "76757aa09406f17b",
+    "77e6d896399b59a9",
+    "9fbab158355685d5",
+    "aca02d0b916a89dd",
+    "b095b7d2d519eb4e",
+    "c277318418142d0c",
+    "d575d683afd39e24",
+    "fc044aaf57883098"
+   ],
+   "id": "f6598cdfe2433390",
+   "new_conf": 60,
+   "new_status": "concentrating",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "Evaluator: 69.5% (Epoch AI data hub \u2014 AI companies, 2026-06-30) reads concentrating over 4 periods with a dead band of 0.02. Auto-reason; rule rationale: Four calendar quarters, the same rule as the operating-income stack; a move under two points is fiscal-calendar noise. Rising = profit concentrating at the chip layer; falling = migrating up the stack.",
+   "target_id": "gross_profit_semis_share",
+   "target_type": "indicator"
+  }
+ ],
+ "sublayer_id": null,
+ "timing_rationale": "Lagging: gross profit is filed a quarter after it is earned and reflects chip orders placed a year or more before.",
+ "tracker_interpretation": "The site's headline capture measure. Its denominator includes the labs' estimated gross profit, so a revision to Epoch's run-rates or margins moves the share even when no filing changes; the operating-income stack (margin_stack_semis_share) is the all-filed check.",
+ "unit": "share",
+ "unpublished_reason": null,
+ "updated_at": "2026-09-14",
+ "valve_measured": null,
+ "why_it_matters": "Gross profit is what is left after paying to deliver the product, so a layer's share of it is the plainest answer to who keeps the money. If rents migrate up the stack as models commoditise, this share falls; if the scarce part stays scarce, it holds or rises."
+}

@@ -387,9 +387,9 @@ metrics:
     grain: [as_of_date]
     unit: USD
     lead_lag: leading
-    formula_version: 1
+    formula_version: 2
     inputs: ["circular.*_usd.pt"]
-    caveats: Same instrument mix and face-value treatment as the cumulative total; a quarter with no deal drops out of the window a year later, so the series steps.
+    caveats: Same instrument mix and face-value treatment as the cumulative total; each completed calendar quarter reads at its last day, including quarters with no deal, so the flow falls when signing stops; the quarter in progress reads at its latest deal. Four quarters in a row with no deal leave nothing to cite, and the series then goes stale rather than reading zero.
     sql: |
       WITH deals AS (
         SELECT as_of_date, value_numeric AS v, id FROM observations
@@ -397,10 +397,16 @@ metrics:
           AND series_key NOT LIKE '%loi_usd%' AND series_key NOT LIKE '%talks_usd%' AND series_key NOT LIKE '%total_commitments%'
           AND series_key NOT LIKE '%commercial_rpo%'),
       q AS (SELECT date_trunc('quarter', as_of_date)::DATE AS q, max(as_of_date) AS last_deal, sum(v) AS v,
-                   list(id ORDER BY id) AS ids FROM deals GROUP BY 1)
-      SELECT a.last_deal AS as_of_date, sum(b.v) AS value, flatten(list(b.ids)) AS obs_ids
-      FROM q a JOIN q b ON b.q > a.q - INTERVAL 12 MONTH AND b.q <= a.q
-      GROUP BY a.q, a.last_deal
+                   list(id ORDER BY id) AS ids FROM deals GROUP BY 1),
+      spine AS (  -- every calendar quarter from the first deal to now, so a quiet quarter still reads
+        SELECT range::DATE AS q FROM range((SELECT min(q) FROM q), date_trunc('quarter', current_date)::DATE + INTERVAL 3 MONTH, INTERVAL 3 MONTH)),
+      w AS (
+        SELECT s.q, sum(b.v) AS v, flatten(list(b.ids ORDER BY b.q)) AS ids, max(b.last_deal) AS last_deal
+        FROM spine s JOIN q b ON b.q > s.q - INTERVAL 12 MONTH AND b.q <= s.q GROUP BY s.q)
+      SELECT CASE WHEN w.q + INTERVAL 3 MONTH <= current_date THEN (w.q + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE
+                  ELSE w.last_deal END AS as_of_date,
+             w.v AS value, w.ids AS obs_ids
+      FROM w WHERE w.q + INTERVAL 3 MONTH <= current_date OR EXISTS (SELECT 1 FROM q WHERE q.q = w.q)
   enterprise_app_spend_share:
     description: Application layer's share of US enterprise generative-AI spend, per Menlo Ventures wave (applications ÷ total).
     rationale: The only published layer split of enterprise dollars; a rising application share means buyers' money is landing above the model layer.
@@ -822,17 +828,27 @@ metrics:
     grain: [as_of_date]
     unit: ratio
     lead_lag: leading
-    formula_version: 1
-    inputs: ["sec.*.capex.q", "epoch.*.revenue_run_rate_usd.pt", "menlo.us_enterprise.genai_spend_usd.fy"]
-    caveats: "Hyperscaler capex is not all AI; the revenue side is run-rates (annualised, press-reported) plus one annual survey and double-counts where enterprises buy from labs; grade C by construction."
+    formula_version: 2
+    inputs: ["sec.*.capex.q", "sec.*.capex.h1", "sec.*.capex.9m", "sec.*.capex.fy", "epoch.*.revenue_run_rate_usd.pt", "menlo.us_enterprise.genai_spend_usd.fy"]
+    caveats: "Hyperscaler capex is not all AI; the revenue side is run-rates (annualised, press-reported) plus one annual survey and double-counts where enterprises buy from labs; grade C by construction. Most filers report capex only year to date, so fiscal quarters are differenced (six months minus the first quarter, and so on; a fourth quarter is the year minus nine months), and a window counts only when all five filers have four quarters in it."
     sql: |
-      WITH capex AS (
-        SELECT date_trunc('quarter', as_of_date) AS cq, subject, value_numeric AS v, id FROM observations
-        WHERE series_key LIKE 'sec.%.capex.q' AND subject IN ('msft', 'googl', 'amzn', 'meta', 'orcl')),
+      WITH cum AS (  -- year-to-date figures share their fiscal year's start date; a filed three-month quarter stands alone
+        SELECT subject, as_of_date, period_start, value_numeric AS v, id FROM observations
+        WHERE source_ns = 'sec' AND measure = 'capex' AND grain IN ('q', 'h1', '9m', 'fy')
+          AND subject IN ('msft', 'googl', 'amzn', 'meta', 'orcl')),
+      diffed AS (
+        SELECT subject, as_of_date, v - coalesce(lag(v) OVER w, 0) AS v,
+               list_filter([id, lag(id) OVER w], x -> x IS NOT NULL) AS ids,
+               date_diff('day', coalesce(lag(as_of_date) OVER w, period_start), as_of_date) AS days
+        FROM cum WINDOW w AS (PARTITION BY subject, period_start ORDER BY as_of_date)),
+      capex AS (  -- one figure per fiscal quarter; a filed quarter beats a differenced one
+        SELECT date_trunc('quarter', as_of_date) AS cq, subject, v, ids FROM diffed WHERE days BETWEEN 80 AND 100
+        QUALIFY row_number() OVER (PARTITION BY subject, as_of_date ORDER BY len(ids), ids) = 1),
       qs AS (SELECT DISTINCT cq FROM capex WHERE cq >= DATE '2024-01-01'),
-      capex4 AS (
-        SELECT q.cq, sum(c.v) AS v, list(c.id ORDER BY c.id) AS ids FROM qs q JOIN capex c ON c.cq > q.cq - INTERVAL 12 MONTH AND c.cq <= q.cq
-        GROUP BY q.cq HAVING count(DISTINCT c.subject) >= 4),
+      per AS (
+        SELECT q.cq, c.subject, sum(c.v) AS v, flatten(list(c.ids)) AS ids FROM qs q JOIN capex c ON c.cq > q.cq - INTERVAL 12 MONTH AND c.cq <= q.cq
+        GROUP BY q.cq, c.subject HAVING count(*) = 4),
+      capex4 AS (SELECT cq, sum(v) AS v, list_sort(flatten(list(ids))) AS ids FROM per GROUP BY cq HAVING count(*) = 5),
       rr AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'epoch.%.revenue_run_rate_usd.pt' AND entity_id IS NOT NULL),
       rr_latest AS (
         SELECT q.cq, r.entity_id, arg_max(r.v, r.as_of_date) AS v, arg_max(r.id, r.as_of_date) AS id FROM qs q JOIN rr r ON r.as_of_date <= q.cq + INTERVAL 3 MONTH AND r.as_of_date > q.cq - INTERVAL 9 MONTH GROUP BY 1, 2),

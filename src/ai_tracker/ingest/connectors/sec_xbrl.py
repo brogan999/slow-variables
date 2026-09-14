@@ -1,7 +1,9 @@
 """SEC XBRL company facts for the public filers in seed/entities.yaml.
 
 The `frame` field is the SEC's own dedupe: one canonical value per calendar period (CY2026Q2 = quarter,
-CY2025 = year, CY2026Q2I = instant). Rows without a frame are cumulative year-to-date durations and are skipped.
+CY2025 = year, CY2026Q2I = instant). Rows without a frame are cumulative year-to-date durations; they are skipped,
+except for cash-flow capex, which most filers report only year to date: six- and nine-month rows are kept as `.h1` and
+`.9m` so a metric can difference them into quarters.
 """
 
 from __future__ import annotations
@@ -30,6 +32,8 @@ CONCEPTS = {
     "da": ["DepreciationDepletionAndAmortization", "DepreciationAndAmortization"],
 }
 FRAME = re.compile(r"^CY(\d{4})(?:Q([1-4]))?(I?)$")
+YTD = {"capex"}  # cash-flow measures filed year to date
+YTD_GRAIN = ((170, 195, "h1"), (260, 285, "9m"))
 
 
 log = logging.getLogger(__name__)
@@ -74,15 +78,24 @@ class SecXbrl(Connector):
                     present, key=lambda t: max(r["end"] for r in gaap[t]["units"]["USD"])
                 )  # filers retire tags
                 best: dict[str, dict] = {}
+                ytd: dict[tuple[str, str], dict] = {}
                 for r in gaap[tag]["units"].get("USD") or []:
                     fr = r.get("frame")
                     if fr and (fr not in best or r["filed"] > best[fr]["filed"]):
                         best[fr] = r
+                    elif not fr and measure in YTD and r.get("start") and r.get("form") in ("10-K", "10-Q"):
+                        k = (r["start"], r["end"])
+                        if k not in ytd or r["filed"] > ytd[k]["filed"]:
+                            ytd[k] = r
+                picked: list[tuple[str, dict]] = []
                 for fr, r in best.items():
                     m = FRAME.match(fr)
-                    if not m or r.get("form") not in ("10-K", "10-Q"):
-                        continue
-                    grain = "q" if m.group(2) else "fy"
+                    if m and r.get("form") in ("10-K", "10-Q"):
+                        picked.append(("q" if m.group(2) else "fy", r))
+                for (start, end), r in ytd.items():
+                    days = (date.fromisoformat(end) - date.fromisoformat(start)).days
+                    picked += [(g, r) for lo, hi, g in YTD_GRAIN if lo <= days <= hi]
+                for grain, r in picked:
                     rows.append(
                         self.obs(
                             item,

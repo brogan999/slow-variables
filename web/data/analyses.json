@@ -5,7 +5,7 @@
   "id": "horizon_fits",
   "latest": {
    "as_of_date": "2026-03-05",
-   "computed_at": "2026-09-13T12:01:35.414258Z",
+   "computed_at": "2026-09-14T02:53:28.862109Z",
    "dims": {
     "aic": "-44.8",
     "n": "20",
@@ -84,7 +84,7 @@
   "related_latest": {
    "horizon_blowup_year_50_since_2024": {
     "as_of_date": "2026-03-05",
-    "computed_at": "2026-09-13T12:01:35.414258Z",
+    "computed_at": "2026-09-14T02:53:28.862109Z",
     "dims": {
      "aic": "78.1",
      "n": "20",
@@ -153,7 +153,7 @@
    },
    "horizon_doubling_days_50_since_2023": {
     "as_of_date": "2026-03-05",
-    "computed_at": "2026-09-13T12:01:35.414258Z",
+    "computed_at": "2026-09-14T02:53:28.862109Z",
     "dims": {
      "aic": "-31.0",
      "n": "22",
@@ -222,7 +222,7 @@
    },
    "horizon_doubling_days_80_since_2023": {
     "as_of_date": "2026-04-07",
-    "computed_at": "2026-09-13T12:01:35.414258Z",
+    "computed_at": "2026-09-14T02:53:28.862109Z",
     "dims": {
      "aic": "-27.6",
      "n": "23",
@@ -293,7 +293,7 @@
    },
    "horizon_doubling_days_80_since_2024": {
     "as_of_date": "2026-04-07",
-    "computed_at": "2026-09-13T12:01:35.414258Z",
+    "computed_at": "2026-09-14T02:53:28.862109Z",
     "dims": {
      "aic": "-41.3",
      "n": "21",
@@ -374,7 +374,7 @@
   "id": "ord_misfit",
   "latest": {
    "as_of_date": "2026-03-05",
-   "computed_at": "2026-09-13T12:01:35.414258Z",
+   "computed_at": "2026-09-14T02:53:28.862109Z",
    "dims": {
     "model": "gpt_5_4"
    },
@@ -411,7 +411,7 @@
   "id": "gross_profit_stack",
   "latest": {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-13T12:01:35.414258Z",
+   "computed_at": "2026-09-14T02:53:28.862109Z",
    "dims": {
     "basis": "estimated",
     "layer_id": "model"
@@ -469,7 +469,7 @@
   "related_latest": {
    "gross_margin_fy": {
     "as_of_date": "2026-06-30",
-    "computed_at": "2026-09-13T12:01:35.414258Z",
+    "computed_at": "2026-09-14T02:53:28.862109Z",
     "dims": {
      "entity": "msft"
     },
@@ -490,7 +490,7 @@
    },
    "lab_gross_margin_estimate": {
     "as_of_date": "2025-12-31",
-    "computed_at": "2026-09-13T12:01:35.414258Z",
+    "computed_at": "2026-09-14T02:53:28.862109Z",
     "dims": {
      "entity": "openai"
     },
@@ -524,7 +524,7 @@
   "id": "margin_stack",
   "latest": {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-13T12:01:35.414258Z",
+   "computed_at": "2026-09-14T02:53:28.862109Z",
    "dims": {
     "layer_id": "compute_semis"
    },
@@ -573,7 +573,7 @@
   "id": "hhi_layers",
   "latest": {
    "as_of_date": "2026-03-31",
-   "computed_at": "2026-09-13T12:01:35.414258Z",
+   "computed_at": "2026-09-14T02:53:28.862109Z",
    "dims": {
     "layer_id": "compute_cloud"
    },
@@ -610,7 +610,7 @@
   "id": "recoupment",
   "latest": {
    "as_of_date": "2026-08-31",
-   "computed_at": "2026-09-13T12:01:35.414258Z",
+   "computed_at": "2026-09-14T02:53:28.862109Z",
    "dims": {
     "entity": "z_ai_zhipu"
    },
@@ -644,7 +644,7 @@
   "id": "concordance",
   "latest": {
    "as_of_date": "2026-07-31",
-   "computed_at": "2026-09-13T12:01:35.414258Z",
+   "computed_at": "2026-09-14T02:53:28.862109Z",
    "dims": {},
    "formula_version": "3",
    "id": "ed08c58063fcdeb8",
@@ -681,51 +681,83 @@
   "sql": "WITH obs AS (\n  SELECT series_key, value_numeric AS v, as_of_date, [id] AS ids FROM observations\n  WHERE series_key IN ('canaries.us_exposure_q5.employment_yoy.m', 'revelio.us_exposed.growth_gap.m',\n                       'yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m')),\ncait AS (SELECT as_of_date, value_numeric AS v, id FROM observations WHERE series_key = 'cait.ca_top_quartile_potential.claims.m'),\ncma AS (SELECT as_of_date, avg(v) OVER w AS ma, count(*) OVER w AS n, list(id) OVER w AS ids\n        FROM cait WINDOW w AS (ORDER BY as_of_date ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)),\ncchg AS (SELECT 'cait_3mma_mom' AS series_key, ma / lag(ma) OVER o - 1 AS v, as_of_date,\n                list_distinct(list_concat(ids, lag(ids) OVER o)) AS ids, n, lag(n) OVER o AS n0\n         FROM cma WINDOW o AS (ORDER BY as_of_date)),\nallx AS (SELECT series_key, v, as_of_date, ids FROM obs UNION ALL SELECT series_key, v, as_of_date, ids FROM cchg WHERE n = 3 AND n0 = 3),\nlatest AS (SELECT *, row_number() OVER (PARTITION BY series_key ORDER BY as_of_date DESC) AS rn FROM allx),\n-- a break is that tracker's own fast band, read from the seed rather than restated here\ntracker AS (SELECT * FROM (VALUES\n    ('canaries.us_exposure_q5.employment_yoy.m', 'canaries_exposed_employment_yoy'),\n    ('revelio.us_exposed.growth_gap.m', 'revelio_exposed_vs_unexposed_growth'),\n    ('cait_3mma_mom', 'cait_high_exposure_claims'),\n    ('yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m', 'yale_occupational_mix_dissimilarity'))\n  AS t(series_key, indicator_id))\nSELECT max(l.as_of_date) AS as_of_date,\n       sum(CASE WHEN (b.fast_lo IS NULL OR l.v >= b.fast_lo) AND (b.fast_hi IS NULL OR l.v <= b.fast_hi)\n                THEN 1 ELSE 0 END)::DOUBLE AS value,\n       list_distinct(flatten(list(l.ids))) AS obs_ids\nFROM latest l JOIN tracker t USING (series_key) JOIN bands b ON b.indicator_id = t.indicator_id\nWHERE l.rn = 1\n"
  },
  {
-  "caveats": "Hyperscaler capex is not all AI; the revenue side is run-rates (annualised, press-reported) plus one annual survey and double-counts where enterprises buy from labs; grade C by construction.",
+  "caveats": "Hyperscaler capex is not all AI; the revenue side is run-rates (annualised, press-reported) plus one annual survey and double-counts where enterprises buy from labs; grade C by construction. Most filers report capex only year to date, so fiscal quarters are differenced (six months minus the first quarter, and so on; a fourth quarter is the year minus nine months), and a window counts only when all five filers have four quarters in it.",
   "description": "Trailing four quarters of hyperscaler capex (Microsoft, Alphabet, Amazon, Meta, Oracle; filed) divided by AI revenue (frontier-lab run-rates from Epoch plus Menlo's enterprise generative-AI spend), at each quarter end.",
   "id": "capex_ratio",
   "latest": {
-   "as_of_date": "2026-09-30",
-   "computed_at": "2026-09-13T12:01:35.414258Z",
+   "as_of_date": "2026-06-30",
+   "computed_at": "2026-09-14T02:53:28.862109Z",
    "dims": {},
-   "formula_version": "1",
-   "id": "c20ae5738d10c5f4",
+   "formula_version": "2",
+   "id": "7867e6c6b3b7fe32",
    "input_observation_ids": [
     "027237d89717d303",
-    "2932a2f9febe1aeb",
-    "300bb7e7943ce4ae",
+    "143dcf3ea59eb522",
+    "196a6174924b2821",
+    "22f1089618415146",
+    "29221e0928c0242d",
+    "32e64259c1e4e50d",
     "416fff663e911055",
+    "4910df35443940aa",
     "4dc8ee6d073b8430",
     "6012e72e8105bfc4",
-    "76d9d169a90543e5",
+    "63f00590a394882c",
+    "75543ae9e018ed01",
     "8065a41f15722c18",
-    "87dd71d5670d0873",
-    "91fd01bc6eb9a9ab",
-    "b7dae3087b70126a",
+    "8b365444d28ae498",
+    "8f56415d4215a050",
+    "9fbab158355685d5",
+    "b965137f0c59e1db",
+    "c2b3a023a57c6672",
+    "c2c40a32f6af336b",
+    "c3dc9a8eb030c5c7",
     "c72d56dfb070b2b7",
     "ccc7b379ab5ac2f2",
     "ce2a8065b1d4c7ac",
+    "d0aab6e876c0d174",
+    "d2f98ef9a6eab885",
+    "e917679d8ad7817e",
+    "ee8e059d6b7db9a1",
+    "f2df3324fcaa3dd6",
+    "f64560a6646757a8",
+    "f77a3da7ccf46854",
     "f87fbd907ad6c419"
    ],
    "metric": "capex_to_revenue_stack",
    "obs_ids": [
     "027237d89717d303",
-    "2932a2f9febe1aeb",
-    "300bb7e7943ce4ae",
+    "143dcf3ea59eb522",
+    "196a6174924b2821",
+    "22f1089618415146",
+    "29221e0928c0242d",
+    "32e64259c1e4e50d",
     "416fff663e911055",
+    "4910df35443940aa",
     "4dc8ee6d073b8430",
     "6012e72e8105bfc4",
-    "76d9d169a90543e5",
+    "63f00590a394882c",
+    "75543ae9e018ed01",
     "8065a41f15722c18",
-    "87dd71d5670d0873",
-    "91fd01bc6eb9a9ab",
-    "b7dae3087b70126a",
+    "8b365444d28ae498",
+    "8f56415d4215a050",
+    "9fbab158355685d5",
+    "b965137f0c59e1db",
+    "c2b3a023a57c6672",
+    "c2c40a32f6af336b",
+    "c3dc9a8eb030c5c7",
     "c72d56dfb070b2b7",
     "ccc7b379ab5ac2f2",
     "ce2a8065b1d4c7ac",
+    "d0aab6e876c0d174",
+    "d2f98ef9a6eab885",
+    "e917679d8ad7817e",
+    "ee8e059d6b7db9a1",
+    "f2df3324fcaa3dd6",
+    "f64560a6646757a8",
+    "f77a3da7ccf46854",
     "f87fbd907ad6c419"
    ],
-   "value": 1.664946753692889,
+   "value": 5.129569249719234,
    "value_high": null,
    "value_low": null
   },
@@ -736,7 +768,7 @@
   "shape": {
    "unit": "ratio"
   },
-  "sql": "WITH capex AS (\n  SELECT date_trunc('quarter', as_of_date) AS cq, subject, value_numeric AS v, id FROM observations\n  WHERE series_key LIKE 'sec.%.capex.q' AND subject IN ('msft', 'googl', 'amzn', 'meta', 'orcl')),\nqs AS (SELECT DISTINCT cq FROM capex WHERE cq >= DATE '2024-01-01'),\ncapex4 AS (\n  SELECT q.cq, sum(c.v) AS v, list(c.id ORDER BY c.id) AS ids FROM qs q JOIN capex c ON c.cq > q.cq - INTERVAL 12 MONTH AND c.cq <= q.cq\n  GROUP BY q.cq HAVING count(DISTINCT c.subject) >= 4),\nrr AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'epoch.%.revenue_run_rate_usd.pt' AND entity_id IS NOT NULL),\nrr_latest AS (\n  SELECT q.cq, r.entity_id, arg_max(r.v, r.as_of_date) AS v, arg_max(r.id, r.as_of_date) AS id FROM qs q JOIN rr r ON r.as_of_date <= q.cq + INTERVAL 3 MONTH AND r.as_of_date > q.cq - INTERVAL 9 MONTH GROUP BY 1, 2),\nent AS (SELECT as_of_date, value_numeric AS v, id FROM observations WHERE series_key = 'menlo.us_enterprise.genai_spend_usd.fy'),\nent_latest AS (SELECT q.cq, arg_max(e.v, e.as_of_date) AS v, arg_max(e.id, e.as_of_date) AS id FROM qs q JOIN ent e ON e.as_of_date <= q.cq + INTERVAL 3 MONTH GROUP BY 1)\nSELECT (c.cq + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE AS as_of_date,\n       c.v / ((SELECT sum(v) FROM rr_latest r WHERE r.cq = c.cq) + e.v) AS value,\n       list_distinct(flatten([c.ids, (SELECT list(id) FROM rr_latest r WHERE r.cq = c.cq), [e.id]])) AS obs_ids\nFROM capex4 c JOIN ent_latest e USING (cq)\n"
+  "sql": "WITH cum AS (  -- year-to-date figures share their fiscal year's start date; a filed three-month quarter stands alone\n  SELECT subject, as_of_date, period_start, value_numeric AS v, id FROM observations\n  WHERE source_ns = 'sec' AND measure = 'capex' AND grain IN ('q', 'h1', '9m', 'fy')\n    AND subject IN ('msft', 'googl', 'amzn', 'meta', 'orcl')),\ndiffed AS (\n  SELECT subject, as_of_date, v - coalesce(lag(v) OVER w, 0) AS v,\n         list_filter([id, lag(id) OVER w], x -> x IS NOT NULL) AS ids,\n         date_diff('day', coalesce(lag(as_of_date) OVER w, period_start), as_of_date) AS days\n  FROM cum WINDOW w AS (PARTITION BY subject, period_start ORDER BY as_of_date)),\ncapex AS (  -- one figure per fiscal quarter; a filed quarter beats a differenced one\n  SELECT date_trunc('quarter', as_of_date) AS cq, subject, v, ids FROM diffed WHERE days BETWEEN 80 AND 100\n  QUALIFY row_number() OVER (PARTITION BY subject, as_of_date ORDER BY len(ids), ids) = 1),\nqs AS (SELECT DISTINCT cq FROM capex WHERE cq >= DATE '2024-01-01'),\nper AS (\n  SELECT q.cq, c.subject, sum(c.v) AS v, flatten(list(c.ids)) AS ids FROM qs q JOIN capex c ON c.cq > q.cq - INTERVAL 12 MONTH AND c.cq <= q.cq\n  GROUP BY q.cq, c.subject HAVING count(*) = 4),\ncapex4 AS (SELECT cq, sum(v) AS v, list_sort(flatten(list(ids))) AS ids FROM per GROUP BY cq HAVING count(*) = 5),\nrr AS (SELECT entity_id, as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'epoch.%.revenue_run_rate_usd.pt' AND entity_id IS NOT NULL),\nrr_latest AS (\n  SELECT q.cq, r.entity_id, arg_max(r.v, r.as_of_date) AS v, arg_max(r.id, r.as_of_date) AS id FROM qs q JOIN rr r ON r.as_of_date <= q.cq + INTERVAL 3 MONTH AND r.as_of_date > q.cq - INTERVAL 9 MONTH GROUP BY 1, 2),\nent AS (SELECT as_of_date, value_numeric AS v, id FROM observations WHERE series_key = 'menlo.us_enterprise.genai_spend_usd.fy'),\nent_latest AS (SELECT q.cq, arg_max(e.v, e.as_of_date) AS v, arg_max(e.id, e.as_of_date) AS id FROM qs q JOIN ent e ON e.as_of_date <= q.cq + INTERVAL 3 MONTH GROUP BY 1)\nSELECT (c.cq + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE AS as_of_date,\n       c.v / ((SELECT sum(v) FROM rr_latest r WHERE r.cq = c.cq) + e.v) AS value,\n       list_distinct(flatten([c.ids, (SELECT list(id) FROM rr_latest r WHERE r.cq = c.cq), [e.id]])) AS obs_ids\nFROM capex4 c JOIN ent_latest e USING (cq)\n"
  },
  {
   "caveats": "Mixes instruments (equity, guarantees, commitments) with different risk; \"up to\" and floor values taken at face; cumulative, so it only rises until a row is superseded.",
@@ -744,7 +776,7 @@
   "id": "circular",
   "latest": {
    "as_of_date": "2026-08-17",
-   "computed_at": "2026-09-13T12:01:35.414258Z",
+   "computed_at": "2026-09-14T02:53:28.862109Z",
    "dims": {},
    "formula_version": "2",
    "id": "f6d2b4cee03aed99",
@@ -800,7 +832,7 @@
   "id": "price_capability",
   "latest": {
    "as_of_date": "2026-09-10",
-   "computed_at": "2026-09-13T12:01:35.414258Z",
+   "computed_at": "2026-09-14T02:53:28.862109Z",
    "dims": {},
    "formula_version": "3",
    "id": "aadf76ab192df530",
@@ -835,7 +867,7 @@
   "id": "customer_concentration",
   "latest": {
    "as_of_date": "2026-07-26",
-   "computed_at": "2026-09-13T12:01:35.414258Z",
+   "computed_at": "2026-09-14T02:53:28.862109Z",
    "dims": {
     "entity": "nvda"
    },
@@ -870,7 +902,7 @@
   "id": "incremental_capex",
   "latest": {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-13T12:01:35.414258Z",
+   "computed_at": "2026-09-14T02:53:28.862109Z",
    "dims": {
     "entity": "msft"
    },
@@ -901,47 +933,79 @@
   ],
   "related_latest": {
    "capex_to_revenue_stack": {
-    "as_of_date": "2026-09-30",
-    "computed_at": "2026-09-13T12:01:35.414258Z",
+    "as_of_date": "2026-06-30",
+    "computed_at": "2026-09-14T02:53:28.862109Z",
     "dims": {},
-    "formula_version": "1",
-    "id": "c20ae5738d10c5f4",
+    "formula_version": "2",
+    "id": "7867e6c6b3b7fe32",
     "input_observation_ids": [
      "027237d89717d303",
-     "2932a2f9febe1aeb",
-     "300bb7e7943ce4ae",
+     "143dcf3ea59eb522",
+     "196a6174924b2821",
+     "22f1089618415146",
+     "29221e0928c0242d",
+     "32e64259c1e4e50d",
      "416fff663e911055",
+     "4910df35443940aa",
      "4dc8ee6d073b8430",
      "6012e72e8105bfc4",
-     "76d9d169a90543e5",
+     "63f00590a394882c",
+     "75543ae9e018ed01",
      "8065a41f15722c18",
-     "87dd71d5670d0873",
-     "91fd01bc6eb9a9ab",
-     "b7dae3087b70126a",
+     "8b365444d28ae498",
+     "8f56415d4215a050",
+     "9fbab158355685d5",
+     "b965137f0c59e1db",
+     "c2b3a023a57c6672",
+     "c2c40a32f6af336b",
+     "c3dc9a8eb030c5c7",
      "c72d56dfb070b2b7",
      "ccc7b379ab5ac2f2",
      "ce2a8065b1d4c7ac",
+     "d0aab6e876c0d174",
+     "d2f98ef9a6eab885",
+     "e917679d8ad7817e",
+     "ee8e059d6b7db9a1",
+     "f2df3324fcaa3dd6",
+     "f64560a6646757a8",
+     "f77a3da7ccf46854",
      "f87fbd907ad6c419"
     ],
     "metric": "capex_to_revenue_stack",
     "obs_ids": [
      "027237d89717d303",
-     "2932a2f9febe1aeb",
-     "300bb7e7943ce4ae",
+     "143dcf3ea59eb522",
+     "196a6174924b2821",
+     "22f1089618415146",
+     "29221e0928c0242d",
+     "32e64259c1e4e50d",
      "416fff663e911055",
+     "4910df35443940aa",
      "4dc8ee6d073b8430",
      "6012e72e8105bfc4",
-     "76d9d169a90543e5",
+     "63f00590a394882c",
+     "75543ae9e018ed01",
      "8065a41f15722c18",
-     "87dd71d5670d0873",
-     "91fd01bc6eb9a9ab",
-     "b7dae3087b70126a",
+     "8b365444d28ae498",
+     "8f56415d4215a050",
+     "9fbab158355685d5",
+     "b965137f0c59e1db",
+     "c2b3a023a57c6672",
+     "c2c40a32f6af336b",
+     "c3dc9a8eb030c5c7",
      "c72d56dfb070b2b7",
      "ccc7b379ab5ac2f2",
      "ce2a8065b1d4c7ac",
+     "d0aab6e876c0d174",
+     "d2f98ef9a6eab885",
+     "e917679d8ad7817e",
+     "ee8e059d6b7db9a1",
+     "f2df3324fcaa3dd6",
+     "f64560a6646757a8",
+     "f77a3da7ccf46854",
      "f87fbd907ad6c419"
     ],
-    "value": 1.664946753692889,
+    "value": 5.129569249719234,
     "value_high": null,
     "value_low": null
    }
@@ -957,7 +1021,7 @@
   "id": "surprise",
   "latest": {
    "as_of_date": "2026-07-31",
-   "computed_at": "2026-09-13T12:01:35.414258Z",
+   "computed_at": "2026-09-14T02:53:28.862109Z",
    "dims": {},
    "formula_version": "1",
    "id": "7ffbab052765a202",
@@ -993,7 +1057,7 @@
   "id": "venture_4q",
   "latest": {
    "as_of_date": "2026-09-30",
-   "computed_at": "2026-09-13T12:01:35.414258Z",
+   "computed_at": "2026-09-14T02:53:28.862109Z",
    "dims": {
     "layer_id": "model",
     "sublayer_id": "all"
@@ -1062,7 +1126,7 @@
   "id": "venture_intensity",
   "latest": {
    "as_of_date": "2026-09-30",
-   "computed_at": "2026-09-13T12:01:35.414258Z",
+   "computed_at": "2026-09-14T02:53:28.862109Z",
    "dims": {},
    "formula_version": "1",
    "id": "d9064b8237072cc0",
@@ -1108,7 +1172,7 @@
   "id": "venture_frontier",
   "latest": {
    "as_of_date": "2026-09-30",
-   "computed_at": "2026-09-13T12:01:35.414258Z",
+   "computed_at": "2026-09-14T02:53:28.862109Z",
    "dims": {},
    "formula_version": "1",
    "id": "1163b818b2799291",
@@ -1210,7 +1274,7 @@
   "id": "aa_frontier",
   "latest": {
    "as_of_date": "2026-09-01",
-   "computed_at": "2026-09-13T12:01:35.414258Z",
+   "computed_at": "2026-09-14T02:53:28.862109Z",
    "dims": {},
    "formula_version": "2",
    "id": "9ac351a81f2d26a0",
@@ -1240,7 +1304,7 @@
   "id": "price_capability_aa",
   "latest": {
    "as_of_date": "2026-09-11",
-   "computed_at": "2026-09-13T12:01:35.414258Z",
+   "computed_at": "2026-09-14T02:53:28.862109Z",
    "dims": {},
    "formula_version": "2",
    "id": "f93befc11a81de1e",
@@ -1266,7 +1330,7 @@
   "related_latest": {
    "aa_frontier_price_per_point": {
     "as_of_date": "2026-09-11",
-    "computed_at": "2026-09-13T12:01:35.414258Z",
+    "computed_at": "2026-09-14T02:53:28.862109Z",
     "dims": {},
     "formula_version": "2",
     "id": "34a2009ea85bb400",
@@ -1295,7 +1359,7 @@
   "id": "venture_top3",
   "latest": {
    "as_of_date": "2026-09-30",
-   "computed_at": "2026-09-13T12:01:35.414258Z",
+   "computed_at": "2026-09-14T02:53:28.862109Z",
    "dims": {},
    "formula_version": "1",
    "id": "334427e3a185c051",
@@ -1397,7 +1461,7 @@
   "id": "routed_tokens",
   "latest": {
    "as_of_date": "2026-09-12",
-   "computed_at": "2026-09-13T12:01:35.414258Z",
+   "computed_at": "2026-09-14T02:53:28.862109Z",
    "dims": {},
    "formula_version": "1",
    "id": "257c73cc910b2617",
@@ -1459,7 +1523,7 @@
   "related_latest": {
    "routed_tokens_doubling_days": {
     "as_of_date": "2026-09-12",
-    "computed_at": "2026-09-13T12:01:35.414258Z",
+    "computed_at": "2026-09-14T02:53:28.862109Z",
     "dims": {
      "aic": "3.4",
      "n": "5",

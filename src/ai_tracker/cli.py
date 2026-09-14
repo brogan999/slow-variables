@@ -66,9 +66,6 @@ def _single_non_primary(s: st.Store, ind: Indicator) -> bool:
     return len({o["source_id"] for o in obs}) < 2 and not ({Tier(o["tier"]) for o in obs} & PRIMARY)
 
 
-
-
-
 def _auto_reason(
     s: st.Store, ind: Indicator, value: float | None, as_of, new: str, old: str | None, ids: list[str]
 ) -> str:
@@ -326,7 +323,10 @@ def _check(s: st.Store) -> tuple[list[str], list[str]]:
             notes.append(
                 f"{ind.id}: stale since {stale} (cadence {ind.cadence_expected}); set stale_ok with a reason or refresh"
             )
-    return errors, notes
+    from .argument import problems
+
+    a_errors, a_notes = problems(s)
+    return errors + a_errors, notes + a_notes
 
 
 def cmd_check(a: argparse.Namespace) -> int:
@@ -442,7 +442,9 @@ def cmd_audit_pull(a: argparse.Namespace) -> int:
         for x in new:
             row = {k: x.get(k) for k in AUDIT_KEYS}
             row["cites"] = [
-                c for c in row["cites"] or [] if ok.fullmatch(c) and (not c.startswith("ind:") or c[4:] in inds)
+                c
+                for c in row["cites"] or []
+                if ok.fullmatch(c) and (not c.startswith("ind:") or c[4:] in inds)
             ]
             f.write(json.dumps(row, sort_keys=True) + "\n")
     print(f"audit: {len(new)} new answer records")

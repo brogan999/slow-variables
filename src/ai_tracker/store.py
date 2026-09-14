@@ -288,7 +288,11 @@ class Store:
                 (
                     i.id,
                     i.band_input,
-                    *(x for b in (i.normal_band, i.fast_band, i.falsifying_band) for x in (b.lo if b else None, b.hi if b else None)),
+                    *(
+                        x
+                        for b in (i.normal_band, i.fast_band, i.falsifying_band)
+                        for x in (b.lo if b else None, b.hi if b else None)
+                    ),
                 )
                 for i in self.seed.indicators
             ],
@@ -310,7 +314,6 @@ class Store:
         self.events = [StatusEvent(**r) for r in read_jsonl(DATA / "status_events.jsonl")]
         self.fetchlog = [FetchLog(**r) for r in read_jsonl(DATA / "fetchlog.jsonl")]
         self.semantic_tables()
-
 
     @property
     def con(self) -> duckdb.DuckDBPyConnection:
@@ -770,6 +773,9 @@ class Store:
         _write(out / "bottlenecks.json", self._bottlenecks(cards))
         _write(out / "compare.json", self._compare(cards))
         _write(out / "thesis.json", read_jsonl(DATA / "thesis.jsonl"))
+        from .argument import build
+
+        _write(out / "argument.json", build(self))
         _write(out / "sources.json", [self._source_health(s) for s in self.seed.sources])
         _write(out / "skipped_sources.json", [dump(s) for s in self.seed.skipped])
         _write(
@@ -899,7 +905,12 @@ class Store:
             mine = [i for i in self.seed.indicators if i.valve_measured == v["id"] and i.published]
             flow = [cards[i.id] for i in mine if not i.direction_rule]
             valves.append(
-                {**v, "status": _summarise(flow), "tally": _tally(flow), "indicator_ids": [i.id for i in mine]}
+                {
+                    **v,
+                    "status": _summarise(flow),
+                    "tally": _tally(flow),
+                    "indicator_ids": [i.id for i in mine],
+                }
             )
         falsified = next(
             (t for t in read_jsonl(DATA / "thesis.jsonl") if t.get("id") == "normal_tech_falsified"), None
@@ -1326,7 +1337,9 @@ class Store:
             if i.layer_id == layer.id and i.published and i.direction_rule
         ]
         status = _summarise(scored)
-        if status == "unmeasured" and any(i.layer_id == layer.id and i.published for i in self.seed.indicators):
+        if status == "unmeasured" and any(
+            i.layer_id == layer.id and i.published for i in self.seed.indicators
+        ):
             status = "no_capture_rule_yet"
         status = status.replace("_", " ")
 
@@ -1345,7 +1358,9 @@ class Store:
         parts = (
             []
             if conc or disp
-            else [f"{layer.name} {'has' if status.startswith('no capture rule') else 'is' if status in ('unmeasured', 'not yet measurable') else 'reads'} {status}"]
+            else [
+                f"{layer.name} {'has' if status.startswith('no capture rule') else 'is' if status in ('unmeasured', 'not yet measurable') else 'reads'} {status}"
+            ]
         )
         if conc:
             parts.append(f"toward concentration: {names(conc)}")
