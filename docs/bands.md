@@ -242,6 +242,12 @@
 - Rule: direction over 4 periods, dead band 0.05, higher is concentrating. Four quarters; a move under five points is a single round's timing. Rising = capital concentrating in the frontier labs.
 - Timing: Leading: venture rounds fund capacity and hiring that produce revenue a year or more later.
 
+## Chips' share of the stack's gross profit (`gross_profit_semis_share`)
+
+- Band input: `metric:gross_profit_share_by_layer` (share)
+- Rule: direction over 4 periods, dead band 0.02, higher is concentrating. Four calendar quarters, the same rule as the operating-income stack; a move under two points is fiscal-calendar noise. Rising = profit concentrating at the chip layer; falling = migrating up the stack.
+- Timing: Lagging: gross profit is filed a quarter after it is earned and reflects chip orders placed a year or more before.
+
 ## Frontier models completing expert legal tasks end to end (Harvey LAB) (`harvey_lab_frontier_completion`)
 
 - Band input: `harvey_blog.lab_holdout.all_pass_top_model.pt` (share)

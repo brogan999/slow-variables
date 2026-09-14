@@ -26,11 +26,11 @@
        "latest": {
         "as_of": "2026-06-27",
         "obs_ids": [
-         "6411ff9cc07438db"
+         "798fdb81c6938d7f"
         ],
-        "series_key": "sec.amd.revenue.q",
+        "series_key": "sec.amd.capex.h1",
         "unit": "USD",
-        "value": 11536000000.0,
+        "value": 1197000000.0,
         "value_text": null
        },
        "memberships": [
@@ -91,11 +91,11 @@
        "latest": {
         "as_of": "2026-08-02",
         "obs_ids": [
-         "8fb4141665e9b93b"
+         "30bc055dcecfdcb3"
         ],
-        "series_key": "sec.broadcom.cost_of_revenue.q",
+        "series_key": "sec.broadcom.capex.9m",
         "unit": "USD",
-        "value": 9135000000.0,
+        "value": 1013000000.0,
         "value_text": null
        },
        "memberships": [
@@ -1401,11 +1401,11 @@
        "latest": {
         "as_of": "2026-06-30",
         "obs_ids": [
-         "87068884441cb244"
+         "8b365444d28ae498"
         ],
-        "series_key": "sec_seg.googl.cloud.operating_income.q",
+        "series_key": "sec.googl.capex.h1",
         "unit": "USD",
-        "value": 8814000000.0,
+        "value": 80598000000.0,
         "value_text": null
        },
        "memberships": [
@@ -1760,11 +1760,11 @@
        "latest": {
         "as_of": "2026-08-31",
         "obs_ids": [
-         "65b41426c1d25a9c"
+         "0da1ca1a1be2b5f9"
         ],
-        "series_key": "sec.orcl.revenue.q",
+        "series_key": "sec.orcl.rpo.q",
         "unit": "USD",
-        "value": 19345000000.0,
+        "value": 664000000000.0,
         "value_text": null
        },
        "memberships": [
@@ -1891,11 +1891,11 @@
        "latest": {
         "as_of": "2026-06-30",
         "obs_ids": [
-         "78a507963a02682c"
+         "c2b3a023a57c6672"
         ],
-        "series_key": "sec.meta.revenue.q",
+        "series_key": "sec.meta.capex.h1",
         "unit": "USD",
-        "value": 60801000000.0,
+        "value": 49113000000.0,
         "value_text": null
        },
        "memberships": [
@@ -2622,34 +2622,50 @@
        "band_value": null,
        "bucket_id": null,
        "confidence": 40,
-       "grade": "B",
+       "grade": "A",
        "id": "capex_to_revenue_stack",
        "latest": {
-        "as_of": "2026-09-30",
+        "as_of": "2026-06-30",
         "dims": {},
         "obs_ids": [
          "027237d89717d303",
-         "2932a2f9febe1aeb",
-         "300bb7e7943ce4ae",
+         "143dcf3ea59eb522",
+         "196a6174924b2821",
+         "22f1089618415146",
+         "29221e0928c0242d",
+         "32e64259c1e4e50d",
          "416fff663e911055",
+         "4910df35443940aa",
          "4dc8ee6d073b8430",
          "6012e72e8105bfc4",
-         "76d9d169a90543e5",
+         "63f00590a394882c",
+         "75543ae9e018ed01",
          "8065a41f15722c18",
-         "87dd71d5670d0873",
-         "91fd01bc6eb9a9ab",
-         "b7dae3087b70126a",
+         "8b365444d28ae498",
+         "8f56415d4215a050",
+         "9fbab158355685d5",
+         "b965137f0c59e1db",
+         "c2b3a023a57c6672",
+         "c2c40a32f6af336b",
+         "c3dc9a8eb030c5c7",
          "c72d56dfb070b2b7",
          "ccc7b379ab5ac2f2",
          "ce2a8065b1d4c7ac",
+         "d0aab6e876c0d174",
+         "d2f98ef9a6eab885",
+         "e917679d8ad7817e",
+         "ee8e059d6b7db9a1",
+         "f2df3324fcaa3dd6",
+         "f64560a6646757a8",
+         "f77a3da7ccf46854",
          "f87fbd907ad6c419"
         ],
         "unit": "ratio",
-        "value": 1.664946753692889
+        "value": 5.129569249719234
        },
        "layer_id": "compute_physical",
        "leading_lagging": "leading",
-       "n_observations": 54,
+       "n_observations": 81,
        "name": "Hyperscaler capex to AI revenue (trailing year)",
        "pending": null,
        "published": true,
@@ -2659,91 +2675,152 @@
          "as_of": "2024-12-31",
          "dims": {},
          "obs_ids": [
+          "02cd9c6c8be6294e",
           "06e7c5aaf6470c9a",
           "0b064977a302c2e4",
           "1d99c21cc854f536",
+          "2ae407dac517d1b4",
+          "37011deae1bc7f27",
+          "3d4fdb8c742413f2",
           "44b7986ae7f0d011",
           "56bbd6095db8cd50",
+          "62c15a189c85b219",
+          "6ce68ef4458d01e8",
+          "8b68a53fbc5ff928",
+          "8e099edb3045e1f8",
+          "9175ae9b2ac0af90",
           "958b612484b51d2f",
+          "9ed913072660dffd",
+          "a5c2685b5a940944",
           "a6e80dc3975f1268",
           "c83f8e96510d0977",
           "cb9aea146ae3d2e7",
+          "cfb9de6ad89c59cc",
           "d4b7a1f4bb171ba8",
+          "d8cce3657e064a83",
+          "dec473f382fe2293",
           "e40f748174fd91fb",
           "eb8d37a9275b0137",
           "f40379629b22656f",
           "fc97ca51a2689d53"
          ],
          "unit": "ratio",
-         "value": 5.752122324159021
+         "value": 11.698446483180428
         },
         {
          "as_of": "2025-03-31",
          "dims": {},
          "obs_ids": [
+          "02cd9c6c8be6294e",
+          "06e7c5aaf6470c9a",
           "0b3b7c04c602d791",
+          "1d99c21cc854f536",
           "1f3af8f3789bcc56",
+          "2ae407dac517d1b4",
+          "37011deae1bc7f27",
           "390ce991d51355e3",
+          "3d4fdb8c742413f2",
           "44b7986ae7f0d011",
           "53e1455f45a9b9fe",
           "56bbd6095db8cd50",
+          "62c15a189c85b219",
           "69de1ab8b7416221",
+          "6ce68ef4458d01e8",
           "7beca16f8e97e38a",
+          "8b68a53fbc5ff928",
+          "8e8f93b71a707eaf",
+          "9175ae9b2ac0af90",
+          "9ed913072660dffd",
+          "a5c2685b5a940944",
           "a6e80dc3975f1268",
           "ca1e24ce18cc78e4",
           "cb9aea146ae3d2e7",
+          "cfb9de6ad89c59cc",
           "d4b7a1f4bb171ba8",
+          "d8cce3657e064a83",
+          "dec473f382fe2293",
           "eb8d37a9275b0137",
           "f40379629b22656f"
          ],
          "unit": "ratio",
-         "value": 6.744249789782256
+         "value": 12.58463296678792
         },
         {
          "as_of": "2025-06-30",
          "dims": {},
          "obs_ids": [
+          "02cd9c6c8be6294e",
           "0b3b7c04c602d791",
           "0d4c08bd4c8d676f",
           "2412462cf7923632",
+          "2ae407dac517d1b4",
+          "2f666320753d9925",
+          "37011deae1bc7f27",
           "390ce991d51355e3",
           "46820cf03ef990ef",
           "53e1455f45a9b9fe",
           "56bbd6095db8cd50",
           "57fb6b694e86144e",
+          "62c15a189c85b219",
+          "63f00590a394882c",
+          "6ce68ef4458d01e8",
+          "75543ae9e018ed01",
           "7beca16f8e97e38a",
+          "8e8f93b71a707eaf",
+          "9175ae9b2ac0af90",
+          "9ed913072660dffd",
           "a6e80dc3975f1268",
+          "aa9108fb71b5dbf3",
           "b821527346a7ba3c",
           "ca1e24ce18cc78e4",
+          "cfb9de6ad89c59cc",
           "d4b7a1f4bb171ba8",
+          "d8cce3657e064a83",
           "eb8d37a9275b0137",
-          "f40379629b22656f"
+          "f40379629b22656f",
+          "f8dcd682b518ca4d"
          ],
          "unit": "ratio",
-         "value": 5.666511761554916
+         "value": 11.08803695019032
         },
         {
          "as_of": "2025-09-30",
          "dims": {},
          "obs_ids": [
+          "02cd9c6c8be6294e",
           "0b3b7c04c602d791",
           "0d4c08bd4c8d676f",
           "0dfac555b5f950a6",
           "143dcf3ea59eb522",
           "196a6174924b2821",
           "29221e0928c0242d",
+          "2ae407dac517d1b4",
+          "2f666320753d9925",
+          "32e64259c1e4e50d",
+          "37011deae1bc7f27",
           "390ce991d51355e3",
           "57fb6b694e86144e",
+          "63f00590a394882c",
+          "6ce68ef4458d01e8",
+          "75543ae9e018ed01",
           "7beca16f8e97e38a",
+          "8e8f93b71a707eaf",
+          "9175ae9b2ac0af90",
+          "9ed913072660dffd",
           "aa4afbcf23f9c215",
+          "aa9108fb71b5dbf3",
           "ca1e24ce18cc78e4",
           "d1b25741f036bb1b",
           "d4b7a1f4bb171ba8",
+          "d8cce3657e064a83",
           "eb8d37a9275b0137",
-          "f2df3324fcaa3dd6"
+          "ee8e059d6b7db9a1",
+          "f2df3324fcaa3dd6",
+          "f40379629b22656f",
+          "f8dcd682b518ca4d"
          ],
          "unit": "ratio",
-         "value": 5.630368523136603
+         "value": 10.99633631969459
         },
         {
          "as_of": "2025-12-31",
@@ -2754,19 +2831,33 @@
           "143dcf3ea59eb522",
           "196a6174924b2821",
           "206dd0605a5540c9",
+          "22f1089618415146",
           "29221e0928c0242d",
+          "2f666320753d9925",
+          "32e64259c1e4e50d",
           "390ce991d51355e3",
           "416fff663e911055",
           "57fb6b694e86144e",
           "6012e72e8105bfc4",
+          "63f00590a394882c",
+          "75543ae9e018ed01",
           "7beca16f8e97e38a",
+          "8e8f93b71a707eaf",
+          "8f56415d4215a050",
+          "9175ae9b2ac0af90",
+          "aa9108fb71b5dbf3",
           "afadf59ee9cbb7ff",
+          "b965137f0c59e1db",
+          "c2c40a32f6af336b",
           "ca1e24ce18cc78e4",
           "d1b25741f036bb1b",
-          "f2df3324fcaa3dd6"
+          "d2f98ef9a6eab885",
+          "ee8e059d6b7db9a1",
+          "f2df3324fcaa3dd6",
+          "f8dcd682b518ca4d"
          ],
          "unit": "ratio",
-         "value": 2.892906978452138
+         "value": 6.04468206988734
         },
         {
          "as_of": "2026-03-31",
@@ -2776,20 +2867,36 @@
           "0d4c08bd4c8d676f",
           "143dcf3ea59eb522",
           "196a6174924b2821",
+          "22f1089618415146",
           "29221e0928c0242d",
+          "2f666320753d9925",
+          "32e64259c1e4e50d",
           "416fff663e911055",
           "4910df35443940aa",
           "4dc8ee6d073b8430",
           "6012e72e8105bfc4",
+          "63f00590a394882c",
+          "75543ae9e018ed01",
+          "7beca16f8e97e38a",
           "8065a41f15722c18",
+          "8e8f93b71a707eaf",
+          "8f56415d4215a050",
+          "aa9108fb71b5dbf3",
+          "b965137f0c59e1db",
+          "c2c40a32f6af336b",
+          "c3dc9a8eb030c5c7",
+          "ca1e24ce18cc78e4",
           "ce2a8065b1d4c7ac",
+          "d2f98ef9a6eab885",
           "d66a0f883d6c9603",
+          "ee8e059d6b7db9a1",
           "f2df3324fcaa3dd6",
           "f64560a6646757a8",
-          "f87fbd907ad6c419"
+          "f87fbd907ad6c419",
+          "f8dcd682b518ca4d"
          ],
          "unit": "ratio",
-         "value": 3.103078721745908
+         "value": 5.871845771628995
         },
         {
          "as_of": "2026-06-30",
@@ -2798,45 +2905,37 @@
           "027237d89717d303",
           "143dcf3ea59eb522",
           "196a6174924b2821",
+          "22f1089618415146",
           "29221e0928c0242d",
+          "32e64259c1e4e50d",
           "416fff663e911055",
           "4910df35443940aa",
           "4dc8ee6d073b8430",
           "6012e72e8105bfc4",
+          "63f00590a394882c",
+          "75543ae9e018ed01",
           "8065a41f15722c18",
+          "8b365444d28ae498",
+          "8f56415d4215a050",
           "9fbab158355685d5",
+          "b965137f0c59e1db",
+          "c2b3a023a57c6672",
+          "c2c40a32f6af336b",
+          "c3dc9a8eb030c5c7",
           "c72d56dfb070b2b7",
           "ccc7b379ab5ac2f2",
           "ce2a8065b1d4c7ac",
+          "d0aab6e876c0d174",
+          "d2f98ef9a6eab885",
+          "e917679d8ad7817e",
+          "ee8e059d6b7db9a1",
           "f2df3324fcaa3dd6",
           "f64560a6646757a8",
+          "f77a3da7ccf46854",
           "f87fbd907ad6c419"
          ],
          "unit": "ratio",
-         "value": 2.5072003043147486
-        },
-        {
-         "as_of": "2026-09-30",
-         "dims": {},
-         "obs_ids": [
-          "027237d89717d303",
-          "2932a2f9febe1aeb",
-          "300bb7e7943ce4ae",
-          "416fff663e911055",
-          "4dc8ee6d073b8430",
-          "6012e72e8105bfc4",
-          "76d9d169a90543e5",
-          "8065a41f15722c18",
-          "87dd71d5670d0873",
-          "91fd01bc6eb9a9ab",
-          "b7dae3087b70126a",
-          "c72d56dfb070b2b7",
-          "ccc7b379ab5ac2f2",
-          "ce2a8065b1d4c7ac",
-          "f87fbd907ad6c419"
-         ],
-         "unit": "ratio",
-         "value": 1.664946753692889
+         "value": 5.129569249719234
         }
        ],
        "stale_as_of": null,
@@ -3001,11 +3100,11 @@
        "latest": {
         "as_of": "2026-05-31",
         "obs_ids": [
-         "ae49b8060dd399b0"
+         "b4e8c805deabaf83"
         ],
-        "series_key": "sec.applied_digital.cost_of_revenue.fy",
+        "series_key": "sec.applied_digital.da.fy",
         "unit": "USD",
-        "value": 396858000.0,
+        "value": 67389000.0,
         "value_text": null
        },
        "memberships": [
@@ -3094,11 +3193,11 @@
        "latest": {
         "as_of": "2026-06-30",
         "obs_ids": [
-         "aae198e968d4b95d"
+         "786da01c13282b43"
         ],
-        "series_key": "sec.core_scientific.gross_profit.q",
+        "series_key": "sec.core_scientific.capex.h1",
         "unit": "USD",
-        "value": 70044000.0,
+        "value": 954244000.0,
         "value_text": null
        },
        "memberships": [
@@ -3194,13 +3293,13 @@
        "is_primary": true,
        "kind": "company",
        "latest": {
-        "as_of": "2025-12-31",
+        "as_of": "2026-06-30",
         "obs_ids": [
-         "c26f7f55979c4ed4"
+         "dfaa2e284a285c50"
         ],
-        "series_key": "sec.oklo.capex.fy",
+        "series_key": "sec.oklo.capex.h1",
         "unit": "USD",
-        "value": 33205000.0,
+        "value": 126901000.0,
         "value_text": null
        },
        "memberships": [
@@ -3233,11 +3332,11 @@
        "latest": {
         "as_of": "2026-06-30",
         "obs_ids": [
-         "a60c47b492408643"
+         "35d064f3c93be1ba"
         ],
-        "series_key": "sec.terawulf.revenue.q",
+        "series_key": "sec.terawulf.capex.h1",
         "unit": "USD",
-        "value": 44767000.0,
+        "value": 1378514000.0,
         "value_text": null
        },
        "memberships": [
@@ -3352,11 +3451,11 @@
        "latest": {
         "as_of": "2026-06-30",
         "obs_ids": [
-         "3b6428fbd7946e57"
+         "e76ca6ac3defdaba"
         ],
-        "series_key": "sec.astera_labs.da.q",
+        "series_key": "sec.astera_labs.capex.h1",
         "unit": "USD",
-        "value": 3900000.0,
+        "value": 28054000.0,
         "value_text": null
        },
        "memberships": [
@@ -3491,11 +3590,11 @@
        "latest": {
         "as_of": "2026-05-28",
         "obs_ids": [
-         "884d706640442ad5"
+         "50418733aacc192c"
         ],
-        "series_key": "sec.micron.revenue.q",
+        "series_key": "sec.micron.capex.9m",
         "unit": "USD",
-        "value": 41456000000.0,
+        "value": 19602000000.0,
         "value_text": null
        },
        "memberships": [
@@ -3679,11 +3778,11 @@
        "latest": {
         "as_of": "2026-06-30",
         "obs_ids": [
-         "78a507963a02682c"
+         "c2b3a023a57c6672"
         ],
-        "series_key": "sec.meta.revenue.q",
+        "series_key": "sec.meta.capex.h1",
         "unit": "USD",
-        "value": 60801000000.0,
+        "value": 49113000000.0,
         "value_text": null
        },
        "memberships": [
@@ -3801,11 +3900,11 @@
        "latest": {
         "as_of": "2026-06-30",
         "obs_ids": [
-         "87068884441cb244"
+         "8b365444d28ae498"
         ],
-        "series_key": "sec_seg.googl.cloud.operating_income.q",
+        "series_key": "sec.googl.capex.h1",
         "unit": "USD",
-        "value": 8814000000.0,
+        "value": 80598000000.0,
         "value_text": null
        },
        "memberships": [
@@ -10606,11 +10705,11 @@
        "latest": {
         "as_of": "2026-05-27",
         "obs_ids": [
-         "2b320168884195b1"
+         "1b7d08dbce2be548"
         ],
-        "series_key": "cl.trajectory.refresh_cadence_hours.pt",
-        "unit": "hours",
-        "value": 1.0,
+        "series_key": "cl_ladder.trajectory.rung.pt",
+        "unit": "rung",
+        "value": 3.0,
         "value_text": null
        },
        "memberships": [

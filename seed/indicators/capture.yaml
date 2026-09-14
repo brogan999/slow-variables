@@ -152,9 +152,30 @@ indicators:
     counterevidence: Intelligent Cloud and AWS include non-AI workloads; Nvidia's fiscal quarter is a month later than the others; two of the seven layers are represented.
     confidence: 70
     proposed_status: concentrating
-    related_indicators: [semis_rent_concentration, cloud_rpo_backlog]
+    related_indicators: [semis_rent_concentration, cloud_rpo_backlog, gross_profit_semis_share]
     published: true
     updated_at: 2026-09-10
+  - id: gross_profit_semis_share
+    source_cluster: semis_filings
+    name: Chips' share of the stack's gross profit
+    definition: "The chip layer's share of the AI stack's gross profit per calendar quarter: NVIDIA and AMD whole-company gross profit (filed) over that plus Microsoft Intelligent Cloud's gross profit (filed) and the frontier labs' estimated gross profit (grade C). Derived metric gross_profit_share_by_layer, chips slice."
+    why_it_matters: "Gross profit is what is left after paying to deliver the product, so a layer's share of it is the plainest answer to who keeps the money. If rents migrate up the stack as models commoditise, this share falls; if the scarce part stays scarce, it holds or rises."
+    proxy_types: [market_structure]
+    unit: share
+    cadence_expected: quarterly
+    metric: gross_profit_share_by_layer
+    metric_dims: {layer_id: compute_semis, basis: filed}
+    band_input: "metric:gross_profit_share_by_layer"
+    layer_id: compute_physical
+    direction_rule: {periods: 4, dead_band: 0.02, higher_is: concentrating, rationale: "Four calendar quarters, the same rule as the operating-income stack; a move under two points is fiscal-calendar noise. Rising = profit concentrating at the chip layer; falling = migrating up the stack."}
+    leading_lagging: lagging
+    timing_rationale: "Lagging: gross profit is filed a quarter after it is earned and reflects chip orders placed a year or more before."
+    tracker_interpretation: "The site's headline capture measure. Its denominator includes the labs' estimated gross profit, so a revision to Epoch's run-rates or margins moves the share even when no filing changes; the operating-income stack (margin_stack_semis_share) is the all-filed check."
+    counterevidence: "NVIDIA and AMD are whole-company figures, so gaming and PC chips count as AI; only one cloud segment files its cost of revenue; the lab slice is an estimate that overstates true gross margin; applications publish nothing usable and are left out, which flatters every measured layer's share."
+    confidence: 60
+    related_indicators: [margin_stack_semis_share, semis_rent_concentration]
+    published: true
+    updated_at: 2026-09-14
   - id: cloud_segment_margins
     name: Cloud segment operating margins
     definition: Operating income over revenue for AWS, Google Cloud and Microsoft Intelligent Cloud, per fiscal quarter, from 10-Q/10-K segment disclosures (derived metric segment_operating_margin). Headline slice is AWS.

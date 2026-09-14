@@ -4,6 +4,7 @@
 
 | date | target | from | to | author | reason |
 |---|---|---|---|---|---|
+| 2026-09-14 | gross_profit_semis_share |  | concentrating | evaluate | Evaluator: 69.5% (Epoch AI data hub — AI companies, 2026-06-30) reads concentrating over 4 periods with a dead band of 0.02. Auto-reason; rule rationale: Four calendar quarters, the same rule as the operating-income stack; a move under two points is fiscal-calendar noise. Rising = profit concentrating at the chip layer; falling = migrating up the stack. |
 | 2026-09-12 | circular_financing_scale | concentrating | unclear | claude | The direction now reads the flow, not the stock: commitments signed in the trailing four quarters ($557B to 2026-08-17), where it previously read the cumulative total. A cumulative total can only rise, so the old rule could never return dispersing. Over the last three quarters the flow rose, rose again and then fell, so the steps disagree and the reading is unclear. |
 | 2026-09-12 | expert_data_market_run_rate | faster_than_normal | emerging | claude | Held at emerging by the band-edge rule: Mercor's $2.0B gross run-rate (Dealroom, 2026-06-30) is exactly the fast band's lower bound, so the reading sits on the line rather than past it. |
 | 2026-09-12 | aei_augmentation_share | consistent_with_normal | emerging | claude | Held at emerging by the band-edge rule: augmentation is 51.4% of classified conversations (Anthropic Economic Index, 2026-05-31), within 5% of the normal band's edge at 50%, so the reading cannot separate 'augmentation at least half' from the gap below it. |
