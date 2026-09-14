@@ -47,7 +47,7 @@ export default async function SeriesPage({ params }: { params: Promise<{ key: st
                 <td><Grade grade={o.grade} tier={o.tier as number} /></td>
                 {COLS.map((c) => <td key={c} className="whitespace-nowrap text-ink-2" title={o[c] === null || o[c] === undefined ? undefined : String(o[c])}>{cell(c, o[c])}</td>)}
                 <td><a href={String(o.url)} className="underline decoration-grid underline-offset-4">source page</a></td>
-                <td>{o.disputed ? <span className="text-slow">⚑ disputed: {String(o.dispute_text).slice(0, 120)}</span> : null}{o.run_rate_vs_booked ? <span className="ml-1">{String(o.run_rate_vs_booked)}</span> : null}{o.gross_vs_net ? <span className="ml-1">{String(o.gross_vs_net)}</span> : null}{o.note ? <div className="text-muted">{String(o.note)}</div> : null}</td>
+                <td>{o.disputed ? <span className="text-ink">⚑ disputed: {String(o.dispute_text).slice(0, 120)}</span> : null}{o.run_rate_vs_booked ? <span className="ml-1">{String(o.run_rate_vs_booked)}</span> : null}{o.gross_vs_net ? <span className="ml-1">{String(o.gross_vs_net)}</span> : null}{o.note ? <div className="text-muted">{String(o.note)}</div> : null}</td>
               </tr>
             ))}
           </tbody>
@@ -57,21 +57,21 @@ export default async function SeriesPage({ params }: { params: Promise<{ key: st
         <section aria-labelledby="withdrawn" className="text-xs">
           <h2 id="withdrawn" className="text-sm font-medium">Withdrawn rows</h2>
           <p className="text-ink-2 mt-1">Rows found to be wrong are kept, struck through, with the reason. They feed no number on this site.</p>
-          {oneReason ? <p className="text-slow mt-1">{String(s.withdrawn[0].dispute_text)}</p> : null}
+          {oneReason ? <p className="text-ink-2 mt-1">{String(s.withdrawn[0].dispute_text)}</p> : null}
           <ul className="mt-2 flex flex-col gap-1">
             {s.withdrawn.map((o) => (
               <li key={o.id} id={o.id} className="target:bg-fast/10">
                 <span className="font-mono text-muted">{o.id}</span>{" "}
                 <del className="num">{String(o.as_of_date)} · {o.value_numeric !== null ? fmt(o.value_numeric as number, String(o.unit)) : String(o.value_text)}</del>{" "}
                 <a href={String(o.url)} className="underline decoration-grid underline-offset-4">source page</a>
-                {oneReason ? null : <span className="text-slow"> — {String(o.dispute_text)}</span>}
+                {oneReason ? null : <span className="text-ink-2"> — {String(o.dispute_text)}</span>}
               </li>
             ))}
           </ul>
         </section>
       ) : null}
       <details className="text-xs"><summary className="cursor-pointer text-ink-2">Raw snippets and dispute text</summary>
-        <ul className="mt-2 flex flex-col gap-2 font-mono">{s.observations.map((o) => <li key={o.id}><span className="text-muted">{o.id}</span> {String(o.raw_snippet)}{o.dispute_text ? <span className="text-slow"> — {String(o.dispute_text)}</span> : null}</li>)}</ul>
+        <ul className="mt-2 flex flex-col gap-2 font-mono">{s.observations.map((o) => <li key={o.id}><span className="text-muted">{o.id}</span> {String(o.raw_snippet)}{o.dispute_text ? <span className="text-ink-2"> — {String(o.dispute_text)}</span> : null}</li>)}</ul>
       </details>
     </div>
   );

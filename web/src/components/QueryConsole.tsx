@@ -24,8 +24,8 @@ export function QueryConsole({ initial }: { initial: string }) {
         <span>Read-only, 200 rows, five seconds. Tables: observations, derived, status_events, indicators, metrics, entity_membership, venture_rounds.</span>
       </div>
       <div aria-live="polite">
-        {res === "offline" ? <p className="text-sm text-slow">The query service is offline; the saved analyses above are the nightly export.</p> : null}
-        {res && res !== "offline" && "error" in res ? <pre className="text-xs text-slow whitespace-pre-wrap">{res.error}</pre> : null}
+        {res === "offline" ? <p className="text-sm text-error">The query service is offline; the saved analyses above are the nightly export.</p> : null}
+        {res && res !== "offline" && "error" in res ? <pre className="text-xs text-error whitespace-pre-wrap">{res.error}</pre> : null}
         {res && res !== "offline" && "columns" in res ? (
           <div className="overflow-x-auto"><table className="data w-full text-xs"><thead><tr>{res.columns.map((c) => <th key={c} scope="col">{c}</th>)}</tr></thead>
             <tbody>{res.rows.map((r, i) => <tr key={i}>{r.map((v, j) => <td key={j} className="tabular-nums max-w-[24rem] truncate">{typeof v === "object" ? JSON.stringify(v) : String(v ?? "")}</td>)}</tr>)}</tbody></table>

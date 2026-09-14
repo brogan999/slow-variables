@@ -56,7 +56,7 @@ export function ChatDrawer() {
             <Button type="submit" size="sm" disabled={s.kind === "busy"}>{s.kind === "busy" ? "Asking…" : "Ask"}</Button>
           </div>
           <div aria-live="polite" className="text-sm leading-relaxed">
-            {s.kind === "error" ? <p className="text-slow">{s.text}</p> : null}
+            {s.kind === "error" ? <p className="text-error">{s.text}</p> : null}
             {s.kind === "answer" ? <AnswerView a={s.a} /> : null}
           </div>
         </form>
@@ -70,12 +70,12 @@ function AnswerView({ a }: { a: Answer }) {
   const byId = new Map(a.citations.map((c) => [`[${c.kind}:${c.id}]`, c]));
   return (
     <div className="flex flex-col gap-2">
-      {a.status === "blocked" ? <p className="text-slow text-xs">This answer failed the citation check after a revision and a fresh attempt; the unverified numbers are marked and should not be relied on.</p> : null}
+      {a.status === "blocked" ? <p className="text-error text-xs">This answer failed the citation check after a revision and a fresh attempt; the unverified numbers are marked and should not be relied on.</p> : null}
       <p>
         {parts.map((p, i) => {
           const c = byId.get(p);
           if (c) return c.href ? <Link key={i} href={c.href} className="font-mono text-[11px] text-ink-2 underline decoration-grid underline-offset-2">{c.kind}:{c.id.slice(0, 8)}</Link> : <span key={i} className="font-mono text-[11px] text-muted">{p}</span>;
-          if (p.startsWith("⟦")) return <mark key={i} className="bg-slow/15 text-slow">{p.slice(1, -1)}</mark>;
+          if (p.startsWith("⟦")) return <mark key={i} className="bg-error/10 text-error">{p.slice(1, -1)}</mark>;
           return <span key={i}>{p}</span>;
         })}
       </p>

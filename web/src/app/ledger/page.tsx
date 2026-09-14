@@ -30,7 +30,7 @@ export default function LedgerPage() {
                   <td className="whitespace-nowrap tabular-nums"><Link href={`/series/${r.series_key}#${r.obs_id}`} className="underline decoration-grid underline-offset-4">{r.value_numeric !== null ? fmt(r.value_numeric, r.unit === "shares" || r.unit === "GW" || r.unit === "bps" ? undefined : r.unit) : "—"}</Link>{r.unit === "shares" ? " shares" : r.unit === "GW" ? " GW" : r.unit === "bps" ? " bps" : ""}</td>
                   <td><Grade grade={r.grade} tier={r.tier} /></td>
                   <td className="text-xs"><a href={r.url} className="underline decoration-grid underline-offset-4">{src?.name ?? r.source_id}</a></td>
-                  <td className="text-xs">{r.disputed ? <span className="text-slow" title={r.dispute_text ?? ""}>⚑ reported / disputed</span> : null}</td>
+                  <td className="text-xs">{r.disputed ? <span className="text-ink" title={r.dispute_text ?? ""}>⚑ reported / disputed</span> : null}</td>
                   <td className="text-xs text-ink-2 max-w-md">{r.value_text ? <span className="italic">{r.value_text}. </span> : null}{r.raw_snippet.slice(0, 220)}{r.raw_snippet.length > 220 ? "…" : ""}</td>
                 </tr>
               );

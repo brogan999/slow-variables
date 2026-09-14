@@ -12,7 +12,7 @@ export function EvidenceLog({ items }: { items: Evidence[] }) {
         <li key={e.id} id={e.id} className="panel p-3">
           <div className="flex flex-wrap items-center gap-2 text-xs text-ink-2">
             <span className="tabular-nums text-muted">{e.as_of}</span>
-            <span className={e.stance === "against" ? "text-slow" : e.stance === "for" ? "text-ink" : "text-muted"}>{STANCE[e.stance] ?? e.stance}</span>
+            <span className={e.stance === "against" ? "text-ink font-medium" : e.stance === "for" ? "text-ink" : "text-muted"}>{STANCE[e.stance] ?? e.stance}</span>
             <Grade grade={e.grade} tier={e.tier} />
             <a href={e.url} className="underline decoration-grid underline-offset-4">source</a>
           </div>
