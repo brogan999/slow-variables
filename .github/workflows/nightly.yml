@@ -1,12 +1,30 @@
 name: nightly
 on:
-  schedule: [{ cron: "17 6 * * *" }]
+  # GitHub drops scheduled events without notice; the second slot catches a missed first one, and the gate below
+  # makes it a no-op on a day that already succeeded. 11:47 stays clear of Monday's 09:17 memo run.
+  schedule: [{ cron: "17 6 * * *" }, { cron: "47 11 * * *" }]
   workflow_dispatch:
 permissions: { contents: write, pull-requests: write, actions: write, issues: write }
 concurrency: nightly
 defaults: { run: { shell: bash } }  # bash -eo pipefail: a failing command inside a pipe fails its step
 jobs:
+  gate:
+    runs-on: ubuntu-latest
+    outputs:
+      run: ${{ steps.g.outputs.run }}
+    steps:
+      - id: g
+        env: { GH_TOKEN: "${{ github.token }}", EVENT: "${{ github.event_name }}" }
+        run: |
+          # a hand dispatch always runs; a scheduled run stands down if a nightly already succeeded today (UTC)
+          if [ "$EVENT" != schedule ]; then echo "run=true" >> "$GITHUB_OUTPUT"; exit 0; fi
+          today=$(date -u +%F)
+          done=$(gh run list -R "$GITHUB_REPOSITORY" --workflow nightly.yml --status success --limit 20 \
+            --json createdAt --jq "[.[] | select(.createdAt | startswith(\"$today\"))] | length")
+          if [ "${done:-0}" -gt 0 ]; then echo "run=false" >> "$GITHUB_OUTPUT"; echo "already succeeded today"; else echo "run=true" >> "$GITHUB_OUTPUT"; fi
   ingest:
+    needs: gate
+    if: needs.gate.outputs.run == 'true'
     runs-on: ubuntu-latest
     outputs:
       merged: ${{ steps.merge.outputs.outcome }}
