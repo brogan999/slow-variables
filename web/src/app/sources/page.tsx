@@ -15,7 +15,7 @@ export default function SourcesPage() {
           <tbody>
             {rows.map((s) => (
               <tr key={s.id} id={s.id} className="target:bg-fast/10">
-                <td><a href={s.url} className="font-medium underline decoration-grid underline-offset-4">{s.name}</a>{s.last_error ? <div className="text-xs text-slow">last run failed: {s.last_error}</div> : null}</td>
+                <td><a href={s.url} className="font-medium underline decoration-grid underline-offset-4">{s.name}</a>{s.last_error ? <div className="text-xs text-error">last run failed: {s.last_error}</div> : null}</td>
                 <td className="text-ink-2">{s.org}</td><td>{s.kind}</td><td className="tabular-nums">{s.default_tier}</td><td>{s.cadence.replace(/_/g, " ")}</td><td>{s.lens}</td>
                 <td><Health h={s.health} /></td>
                 <td className="whitespace-nowrap tabular-nums">{s.last_success_at ? s.last_success_at.slice(0, 16).replace("T", " ") : "never"}</td>
@@ -53,5 +53,5 @@ export default function SourcesPage() {
 
 function Health({ h }: { h: string }) {
   const label = h === "ok" ? "● fresh" : h === "stale" ? "◐ stale" : "○ never run";
-  return <span className={`text-xs whitespace-nowrap ${h === "stale" ? "text-slow" : h === "ok" ? "text-ink" : "text-muted"}`}>{label}</span>;
+  return <span className={`text-xs whitespace-nowrap ${h === "stale" ? "text-error" : h === "ok" ? "text-ink" : "text-muted"}`}>{label}</span>;
 }

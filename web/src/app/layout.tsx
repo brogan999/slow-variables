@@ -1,19 +1,17 @@
 import type { Metadata } from "next";
-import { Instrument_Sans, Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import { Fraunces, Geist, JetBrains_Mono } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
 import { ChatDrawer } from "@/components/ChatDrawer";
 import { Freshness } from "@/components/Freshness";
 import { MobileNav, SiteNav } from "@/components/SiteNav";
 import { ABOUT } from "@/lib/nav";
-import { ThemeToggle } from "@/components/ThemeToggle";
 import { meta } from "@/lib/data";
 import { SITE } from "@/lib/site";
 
-const serif = Instrument_Serif({ weight: "400", style: ["normal", "italic"], subsets: ["latin"], variable: "--font-instrument-serif", display: "swap" });
-const sans = Instrument_Sans({ subsets: ["latin"], variable: "--font-instrument-sans", display: "swap" });
+const serif = Fraunces({ subsets: ["latin"], style: ["normal", "italic"], axes: ["opsz", "SOFT"], variable: "--font-fraunces", display: "swap" });
+const sans = Geist({ subsets: ["latin"], variable: "--font-geist", display: "swap" });
 const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains-mono", display: "swap" });
-const THEME_SCRIPT = `(()=>{var t=null;try{t=localStorage.theme}catch(e){}try{var d=t?t==="dark":matchMedia("(prefers-color-scheme: dark)").matches,r=document.documentElement;r.classList.toggle("dark",d);r.style.colorScheme=d?"dark":"light"}catch(e){}})()`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -28,24 +26,22 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const generated = meta().generated_at;
   return (
-    <html lang="en" suppressHydrationWarning className={`${serif.variable} ${sans.variable} ${mono.variable} h-full antialiased`}>
+    <html lang="en" className={`${serif.variable} ${sans.variable} ${mono.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
-        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
         <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-50 focus:rounded focus:bg-surface focus:px-3 focus:py-1 focus:ring-hair">Skip to content</a>
         <header className="border-b border-grid">
-          <div className="mx-auto max-w-5xl px-4 py-4 flex items-center gap-x-6">
-            <Link href="/" className="display text-[1.375rem] tracking-tight shrink-0">{SITE.name}</Link>
+          <div className="mx-auto max-w-[82rem] px-4 md:px-8 py-4 flex items-center gap-x-6">
+            <Link href="/" className="display text-[1.375rem] shrink-0">{SITE.name}</Link>
             <div className="flex-1"><SiteNav /></div>
             <div className="flex items-center gap-x-1 shrink-0">
               <ChatDrawer />
-              <ThemeToggle />
               <MobileNav />
             </div>
           </div>
         </header>
-        <main id="main" className="mx-auto w-full max-w-5xl px-4 py-6 flex-1">{children}</main>
+        <main id="main" className="mx-auto w-full max-w-[82rem] px-4 md:px-8 py-8 md:py-12 flex-1">{children}</main>
         <footer className="border-t border-grid mt-16">
-          <div className="mx-auto max-w-5xl px-4 py-8 grid gap-6 md:grid-cols-[1fr_auto] text-sm">
+          <div className="mx-auto max-w-[82rem] px-4 md:px-8 py-10 grid gap-6 md:grid-cols-[1fr_auto] text-sm">
             <div className="flex flex-col gap-1.5 text-muted max-w-xl">
               <span className="display text-lg text-ink">{SITE.name}</span>
               <span>Every number links to the observation behind it. Fast is not good; concentrating is not good. Status colours carry no verdict.</span>

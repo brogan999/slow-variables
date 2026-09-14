@@ -44,7 +44,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
           {d.leading_lagging ? <span className="eyebrow">{d.leading_lagging}</span> : null}
         </div>
         <p className="text-xs text-muted">{RUBRIC(d.confidence)}</p>
-        {d.stale_as_of ? <p className="text-slow text-xs">stale as of {d.stale_as_of}</p> : null}
+        {d.stale_as_of ? <p className="text-error text-xs">stale as of {d.stale_as_of}</p> : null}
         {d.pending ? <p className="text-xs leading-snug"><PendingNote p={d.pending} /></p> : null}
         {d.stale_reason ? <p className="text-muted text-xs">refreshed irregularly: {d.stale_reason}</p> : null}
         {d.normal_band ? (
@@ -75,7 +75,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
           <ConfidenceDial value={d.confidence} />
           <Grade grade={d.grade} />
           {d.leading_lagging ? <span className="eyebrow">{d.leading_lagging}</span> : null}
-          {d.stale_as_of ? <span className="text-slow text-xs">stale as of {d.stale_as_of}</span> : null}
+          {d.stale_as_of ? <span className="text-error text-xs">stale as of {d.stale_as_of}</span> : null}
           <PendingNote p={d.pending} />
         </div>
         <p className="mt-3 text-lg leading-snug text-ink-2 max-w-[60ch]">{d.definition}</p>
@@ -150,7 +150,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
       {d.evidence.length ? <Section n={num("evidence-log")} id="evidence-log" title="Evidence log"><EvidenceLog items={d.evidence} /></Section> : null}
 
       <Section n={num("counterevidence")} id="counterevidence" title="Counterevidence">
-        <details open className="rounded-md border border-slow/40 p-4"><summary className="cursor-pointer text-sm font-medium">What cuts against this reading</summary><p className="mt-2">{d.counterevidence || "None recorded — this indicator cannot be published until it has some."}</p></details>
+        <details open className="rounded-md border border-axis p-4"><summary className="cursor-pointer text-sm font-medium">What cuts against this reading</summary><p className="mt-2">{d.counterevidence || "None recorded — this indicator cannot be published until it has some."}</p></details>
       </Section>
 
       <Section n={num("timeline")} id="timeline" title="Timeline notes">

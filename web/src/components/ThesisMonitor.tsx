@@ -10,7 +10,7 @@ export function ThesisMonitor({ verdicts, obsIndex }: { verdicts: ThesisVerdict[
     <div className="grid gap-3 md:grid-cols-2">
       {verdicts.map((v) => (
         <details key={v.id} className="panel p-3">
-          <summary className="cursor-pointer text-sm"><span className="font-medium">{v.name}</span> <span className={v.state === "untestable" ? "text-muted" : v.state === "contradicted" ? "text-slow" : "text-ink-2"}>· {WORD[v.state] ?? "untestable"}</span></summary>
+          <summary className="cursor-pointer text-sm"><span className="font-medium">{v.name}</span> <span className={v.state === "untestable" ? "text-muted" : v.state === "contradicted" ? "text-ink font-medium" : "text-ink-2"}>· {WORD[v.state] ?? "untestable"}</span></summary>
           <p className="mt-2 text-xs text-muted">{v.logic}</p>
           <ul className="mt-2 flex flex-col gap-1.5 text-xs">
             {v.conds.map((c) => (

@@ -17,7 +17,7 @@ export function IndicatorCard({ c, obsIndex }: { c: Card; obsIndex: Record<strin
         <StatusChip status={c.published ? c.status : null} />
         {c.leading_lagging ? <span className="eyebrow">{c.leading_lagging}</span> : null}
         <ConfidenceDial value={c.confidence} size={30} />
-        {c.stale_as_of ? <span className="text-slow">stale as of {c.stale_as_of}</span> : null}
+        {c.stale_as_of ? <span className="text-error">stale as of {c.stale_as_of}</span> : null}
         <PendingNote p={c.pending} />
       </div>
       {c.answers?.length ? <p className="text-xs text-muted">{c.answers.join(" · ")}</p> : null}

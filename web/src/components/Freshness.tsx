@@ -9,7 +9,7 @@ export function Freshness({ generatedAt }: { generatedAt: string }) {
   return (
     <span>
       Data generated {stamp}.
-      {days !== null && days > 3 ? <span className="text-slow"> Last update {days} days ago; the nightly job may have stalled.</span> : null}
+      {days !== null && days > 3 ? <span className="text-error"> Last update {days} days ago; the nightly job may have stalled.</span> : null}
     </span>
   );
 }
