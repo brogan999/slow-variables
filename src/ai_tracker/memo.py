@@ -23,7 +23,7 @@ from .query.citecheck import CITE, check
 log = logging.getLogger("ai-tracker.memo")
 MEMOS = Path("docs/memos")
 MODEL = os.environ.get("MEMO_MODEL", "claude-fable-5-1")
-PROMPT_VERSION = "1"
+PROMPT_VERSION = "2"
 SIGN = {"faster_than_normal": 1, "concentrating": 1, "slower_than_normal": -1, "dispersing": -1}
 
 
@@ -216,7 +216,11 @@ def digest(f: dict[str, Any]) -> str:
 
 PROMPT = """You write the weekly memo for an AI diffusion and value-capture tracker. Given the observations and evidence added since {since}, which indicators changed status or would under the band and direction rules? Which crosswalk pairs moved in opposite directions? Draft the memo, the L0 sentences for both lenses, and note the changelog entries.
 
-Rules: use only the facts below; never introduce a number that is not in them. Every number must be followed by the citation token given with it ([obs:...], [derived:...], [ind:...] or [event:...]); a status is cited with [ind:<id>]. Under 450 words. Markdown with these sections: an opening paragraph, "## What changed", "## New evidence", "## Watchlist", "## Thesis monitor", "## Crosswalk", and last "## Lens sentences" containing exactly two lines "Diffusion: ..." and "Capture: ...". Fast is not good and concentrating is not good; say what moved and what it means for the normal-technology reading, nothing more. Facts are ordered leading indicators first; lead with what moved among them, since they move before the coincident and lagging ones.
+Rules: use only the facts below; never introduce a number that is not in them. Every number must be followed by the citation token given with it ([obs:...], [derived:...], [ind:...] or [event:...]); a status is cited with [ind:<id>]. Under 450 words.
+
+Voice: write for a smart reader who knows nothing about AI or economics. Open on the mechanism behind the week's most important move, not on a list. Let one cause lead to the next. Introduce any person or organisation by what they do and what they found, and define every term the first time it appears (a band, a run-rate, gross profit, a filing). Say indicator names in plain words, never as ids. Land each section on a short, dry sentence that says what the move means. No hype and no hedging stacked on hedging.
+
+Structure: an opening paragraph first. Then sections whose "## " headings are short claims about what happened this week (for example "## Chip makers kept their share"), with no numbers or citation tokens in any heading, covering in this order what changed, the new evidence, the watchlist, the thesis monitor and the crosswalk; skip a section with nothing in it. Last, exactly "## Lens sentences" containing two lines "Diffusion: ..." and "Capture: ...". Fast is not good and concentrating is not good; say what moved and what it means for the normal-technology reading, nothing more. Facts are ordered leading indicators first; lead with what moved among them, since they move before the coincident and lagging ones.
 
 Facts (JSON):
 {facts}

@@ -87,3 +87,18 @@ def test_memo_facts_put_leading_indicators_first():
     f = facts(s, date(2020, 1, 1), date.today())
     ranks = [RANK.get(r["leading_lagging"] or "", 3) for r in f["by_indicator"]]
     assert ranks == sorted(ranks) and ranks[0] == 0
+
+
+def test_a_prose_memo_with_claim_headings_keeps_its_excerpt_and_heading_rules():
+    import re
+
+    from ai_tracker.memo import PROMPT
+
+    body = (
+        "Chip makers kept their grip this week, and the reason is a filing, not a forecast.\n\n"
+        "## Chip makers kept their share\n\nNVIDIA filed its quarter [obs:abc].\n\n"
+        "## Lens sentences\n\nDiffusion: ordinary pace.\nCapture: chips concentrating."
+    )
+    assert st._excerpt(body).startswith("Chip makers kept their grip")
+    assert not any(re.search(r"\d|\[", h) for h in re.findall(r"^## (.+)$", body, re.M))
+    assert '"## Lens sentences"' in PROMPT and "no numbers or citation tokens in any heading" in PROMPT
