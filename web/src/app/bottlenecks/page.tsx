@@ -14,7 +14,7 @@ export default function BottlenecksPage() {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="display text-[2.25rem] md:text-[3rem] leading-[1.05] tracking-[-0.015em]">Bottlenecks</h1>
+        <h1 className="display text-[2.5rem] md:text-[3.5rem] leading-[1.02] max-w-[24ch]">Bottlenecks</h1>
         <p className="text-lg leading-snug text-ink-2 max-w-[60ch]">Every barrier to AI diffusion that Narayanan and Kapoor name across eighteen essays: 89 items in nine families, each mapped to the diffusion stock it acts on. Where the tracker has an instrument for a bottleneck, its indicators are linked and carry their current status. Families with no linked indicator are the tracker&apos;s blind spots, listed on purpose.</p>
       </div>
       <div className="overflow-x-auto">

@@ -87,3 +87,12 @@ def test_memo_facts_put_leading_indicators_first():
     f = facts(s, date(2020, 1, 1), date.today())
     ranks = [RANK.get(r["leading_lagging"] or "", 3) for r in f["by_indicator"]]
     assert ranks == sorted(ranks) and ranks[0] == 0
+
+
+def test_a_heading_with_a_number_or_token_fails_and_a_claim_heading_passes():
+    from ai_tracker.memo import heading_problems
+
+    good = "Chip makers kept their grip.\n\n## Chip makers kept their share\n\nNVIDIA filed [obs:abc].\n\n## Lens sentences"
+    assert heading_problems(good) == []
+    assert st._excerpt(good).startswith("Chip makers kept their grip")
+    assert len(heading_problems("## Chips took 69.5% [derived:x]\n\n## Twelve months on")) == 1

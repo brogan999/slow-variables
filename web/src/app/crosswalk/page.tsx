@@ -8,7 +8,7 @@ export default function CrosswalkPage() {
   const { crosswalk, buckets, layers, sublayers, indicators } = index();
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="display text-[2.25rem] md:text-[3rem] leading-[1.05] tracking-[-0.015em]">Crosswalk</h1>
+      <h1 className="display text-[2.5rem] md:text-[3.5rem] leading-[1.02] max-w-[24ch]">Crosswalk</h1>
       <p className="text-lg leading-snug text-ink-2 max-w-[60ch]">The same observations carry a diffusion address (bucket, valve) and a capture address (layer, sub-layer). Diffusion asks how fast value moves; capture asks who keeps it. The leak on the diffusion diagram is the capture lens.</p>
       <div className="overflow-x-auto">
         <table className="data w-full text-sm">

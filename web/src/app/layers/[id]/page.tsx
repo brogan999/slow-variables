@@ -25,7 +25,7 @@ export default async function LayerPage({ params }: { params: Promise<{ id: stri
     <div className="flex flex-col gap-6">
       <div>
         <p className="text-xs text-muted"><Link href="/capture" className="hover:text-ink">Capture</Link> / layer {l.order}</p>
-        <h1 className="display text-[2.25rem] md:text-[3rem] leading-[1.05] tracking-[-0.015em]">{l.name}</h1>
+        <h1 className="display text-[2.5rem] md:text-[3.5rem] leading-[1.02] max-w-[24ch]">{l.name}</h1>
         <p className="mt-1 text-sm text-ink-2">{l.description}{l.dependency_tier ? ` Dependency tier ${l.dependency_tier}.` : ""}</p>
         {l.commoditisation ? (
           <p className="mt-2 text-sm max-w-[70ch]">

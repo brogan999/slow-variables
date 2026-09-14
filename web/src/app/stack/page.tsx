@@ -9,7 +9,7 @@ export default function StackPage() {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="display text-[2.25rem] md:text-[3rem] leading-[1.05] tracking-[-0.015em]">The stack</h1>
+        <h1 className="display text-[2.5rem] md:text-[3.5rem] leading-[1.02] max-w-[24ch]">The stack</h1>
         <p className="text-lg leading-snug text-ink-2 max-w-[60ch]">Seven layers, twenty-one sub-layers, and the companies the tracker follows in each. Membership is many-to-many and dated; an entity is <em>verified</em> once a filing or a dataset row attaches to it. Only the compute layer has segment filings today, so most sub-layers are lists of names waiting for a series.</p>
       </div>
       {layers.map((l) => (

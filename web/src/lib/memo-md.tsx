@@ -27,11 +27,11 @@ function inline(text: string, obsIndex: Record<string, string>) {
 export function MemoBody({ body, obsIndex }: { body: string; obsIndex: Record<string, string> }) {
   const blocks = body.split(/\n{2,}/).map((b) => b.trim()).filter(Boolean);
   return (
-    <div className="flex flex-col gap-4 text-[17px] leading-[1.65] max-w-[68ch]">
+    <div className="prose-folio drop-cap">
       {blocks.map((b, i) => {
-        if (b.startsWith("## ")) return <h2 key={i} id={slug(b.slice(3))} className="display text-2xl leading-tight border-t border-grid pt-6 mt-6 scroll-mt-6">{b.slice(3)}</h2>;
+        if (b.startsWith("## ")) return <h2 key={i} id={slug(b.slice(3))} className="display text-[1.625rem] leading-tight border-t border-grid pt-8 !mt-10 scroll-mt-6">{b.slice(3)}</h2>;
         if (b.startsWith("# ")) return <h2 key={i} className="display text-2xl leading-tight mt-6">{b.slice(2)}</h2>;
-        if (b.split("\n").every((l) => l.startsWith("- "))) return <ul key={i} className="list-disc pl-5 flex flex-col gap-2 text-base leading-[1.6]">{b.split("\n").map((l, j) => <li key={j}>{inline(l.slice(2), obsIndex)}</li>)}</ul>;
+        if (b.split("\n").every((l) => l.startsWith("- "))) return <ul key={i} className="flex flex-col gap-2 text-[1.0625rem] leading-[1.6]">{b.split("\n").map((l, j) => <li key={j}>{inline(l.slice(2), obsIndex)}</li>)}</ul>;
         return <p key={i}>{inline(b, obsIndex)}</p>;
       })}
     </div>

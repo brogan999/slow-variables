@@ -11,7 +11,7 @@ export default function QueryPage() {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="display text-[2.25rem] md:text-[3rem] leading-[1.05] tracking-[-0.015em]">Query</h1>
+        <h1 className="display text-[2.5rem] md:text-[3.5rem] leading-[1.02] max-w-[24ch]">Query</h1>
         <p className="text-lg leading-snug text-ink-2 max-w-[60ch]">Saved analyses are materialised by the nightly export from the semantic layer; each shows its latest value, the observations behind it and the formula. The console runs read-only SQL against the same store; the Ask button in the header puts a model in front of it, with every number checked against the record it cites.</p>
       </div>
       <section className="flex flex-col gap-3">

@@ -14,7 +14,7 @@ export function MarginStackChart({ rows, parts, unmeasured, obsIndex }: { rows: 
     <div className="flex flex-col gap-2">
       <div className="flex items-end gap-1 overflow-x-auto">
         {quarters.map((q) => (
-          <div key={q} className="flex flex-col items-center gap-1 min-w-[56px]">
+          <div key={q} className="flex flex-col items-center gap-1 min-w-[56px] flex-1 max-w-[110px]">
             <div className="w-full h-40 flex flex-col-reverse gap-[2px] rounded-sm overflow-hidden ring-hair">
               {parts.map((p) => {
                 const row = rows.find((r) => r.as_of === q && r.layer_id === p.id);

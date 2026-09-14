@@ -35,7 +35,7 @@ export function StockFlowDiagram({ buckets, valves }: Props) {
           <Link href={`/buckets/${b.id}`}>
             <rect x={X0} y={y(i)} width={BOX} height={H} rx={4} fill="var(--surface)" stroke="var(--grid)" />
             <text x={X0 + 12} y={y(i) + 24} fontSize="20" fontFamily="var(--font-display)" fill="var(--ink)">{b.order}. {b.name}</text>
-            <text x={X0 + 12} y={y(i) + 44} fontSize="14" fontFamily="var(--font-sans)" fill="var(--ink-2)">{GLYPH[b.status] ?? "○"} {words(b.status)} · {b.tally ? `${b.tally.scored} of ${b.tally.published} scored` : `${b.indicators.length} indicators`}</text>
+            <text x={X0 + 12} y={y(i) + 44} fontSize="14" fontFamily="var(--font-sans)" fill="var(--ink-2)">{GLYPH[b.status] ?? "○"} {words(b.status)} · {b.tally ? `${b.tally.scored} of ${b.tally.published} count` : `${b.indicators.length} indicators`}</text>
           </Link>
           {i < main.length - 1 ? <ValveArrow valve={v(b.valve)} x={X0 + BOX / 2} y1={y(i) + H} y2={y(i + 1)} /> : null}
         </g>
@@ -46,18 +46,18 @@ export function StockFlowDiagram({ buckets, valves }: Props) {
             stroke={STROKE[v("return_arrow")?.status ?? "unmeasured"]} strokeWidth="1.5" strokeDasharray={v("return_arrow")?.status === "unmeasured" ? "4 4" : undefined} markerEnd="url(#arr)" />
           <Link href={`/buckets/return_arrow`}>
             <text x={X0 - 58} y={(y(0) + y(main.length - 1)) / 2 + 20} fontSize="13" fontFamily="var(--font-mono)" fill="var(--ink)" transform={`rotate(-90 ${X0 - 58} ${(y(0) + y(main.length - 1)) / 2 + 20})`} textAnchor="middle">
-              5. Return arrow · {words(v("return_arrow")?.status)}
+              5. Feedback into methods · {words(v("return_arrow")?.status)}
             </text>
           </Link>
         </g>
       ) : null}
       {/* balancing loops on the right: B1 brakes (adoption back to methods), B2 goalposts (products back to methods); nested so nothing crosses */}
-      <Loop d={`M${X0 + BOX} ${y(2) + 18} H470 V${y(0) + 14} H${X0 + BOX + 4}`} status={brake?.status ?? "unmeasured"} x={X0 + BOX + 8} y={y(2) + 36} name="B1 backlash, brakes" href={brake ? "/indicators/safety_brake_events" : undefined} />
-      <Loop d={`M${X0 + BOX} ${y(1) + 18} H430 V${y(0) + 40} H${X0 + BOX + 4}`} status="unmeasured" x={X0 + BOX + 8} y={y(1) + 34} name="B2 goalposts" href="/predictions#nk_benchmarks_false_summits" />
+      <Loop d={`M${X0 + BOX} ${y(2) + 18} H470 V${y(0) + 14} H${X0 + BOX + 4}`} status={brake?.status ?? "unmeasured"} x={X0 + BOX + 8} y={y(2) + 36} name="Backlash and brakes" href={brake ? "/indicators/safety_brake_events" : undefined} />
+      <Loop d={`M${X0 + BOX} ${y(1) + 18} H430 V${y(0) + 40} H${X0 + BOX + 4}`} status="unmeasured" x={X0 + BOX + 8} y={y(1) + 34} name="Moving goalposts" href="/predictions#nk_benchmarks_false_summits" />
       <g>
         <path d={`M${X0 + BOX} ${y(main.length - 1) + H / 2} H${X0 + BOX + 44}`} fill="none" stroke={STROKE[v("leak")?.status ?? "unmeasured"]} strokeWidth="2" strokeDasharray="4 4" markerEnd="url(#arr)" />
         <Link href="/capture">
-          <text x={X0 + BOX + 50} y={y(main.length - 1) + H / 2 - 6} fontSize="15" fontFamily="var(--font-display)" fill="var(--ink)">Leak →</text>
+          <text x={X0 + BOX + 50} y={y(main.length - 1) + H / 2 - 6} fontSize="15" fontFamily="var(--font-display)" fill="var(--ink)">Profits →</text>
           <text x={X0 + BOX + 50} y={y(main.length - 1) + H / 2 + 11} fontSize="12" fontFamily="var(--font-sans)" fill="var(--ink-2)">who keeps it</text>
         </Link>
       </g>
