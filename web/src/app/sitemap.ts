@@ -1,8 +1,9 @@
 import type { MetadataRoute } from "next";
 import { index, memos, meta, seriesKeys } from "@/lib/data";
+import { EVIDENCE, PRIMARY } from "@/lib/nav";
 import { SITE } from "@/lib/site";
 
-const STATIC = ["", "/diffusion", "/capture", "/memos", "/query", "/stack", "/indicators", "/predictions", "/compare", "/bottlenecks", "/ledger", "/crosswalk", "/sources", "/methodology", "/changelog"];
+const STATIC = ["", ...[...PRIMARY, ...EVIDENCE].map(([href]) => href)];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date(meta().generated_at);

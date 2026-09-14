@@ -125,3 +125,16 @@ export const ladder = () => read<LadderDoc>("lens/ladder.json");
 // Server-only: which indicators have a page, so links to unpublished ones go to their row on /indicators instead of a 404.
 let _published: Set<string> | null = null;
 export const publishedIds = () => (_published ??= new Set(index().indicators.filter((c) => c.published).map((c) => c.id)));
+export type Fact = { value: number; unit: string; as_of: string; obs_ids: string[]; href: string; holds: boolean | null };
+export type ClockSeries = { id: string; label: string; name: string; unit: string; from: string; series: { as_of: string; value: number; obs_ids: string[] }[]; multiple: Fact };
+export type ArgumentDoc = {
+  as_of: string | null;
+  essay: { home: string; full: string };
+  facts: Record<string, Fact | null>;
+  slow_variables: { id: string; label: string; sentence: string }[];
+  clocks: { start: string; drawn: ClockSeries[]; listed: string[]; holds: boolean | null };
+  phase: { state: "installation" | "turning_point" | "deployment" | "untestable"; rule: string; as_of: string | null; history: { as_of: string; raw: string; state: string }[] };
+  exits: { monitor: string; label: string; text: string; state: string | null }[];
+  sources: { who: string; work: string; where: string; url: string }[];
+};
+export const argument = () => read<ArgumentDoc>("argument.json");

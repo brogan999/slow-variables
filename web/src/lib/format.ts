@@ -34,3 +34,7 @@ export const words = (s: string | null | undefined) => (s ?? "unmeasured").repla
 
 // Unpublished indicators have no page; link to their row on /indicators, which carries the reason.
 export const indicatorHref = (id: string, published: boolean | undefined) => (published ? `/indicators/${id}` : `/indicators#${id}`);
+
+// Thesis-monitor states in plain words for readers who have not met the monitor's logic.
+export const STATE_WORDS: Record<string, string> = { supported: "happening", unsupported: "not happening", contradicted: "ruled out by its own series", untestable: "can't be tested yet" };
+export const PHASE_WORDS: Record<string, string> = { installation: "installation", turning_point: "turning point", deployment: "deployment", untestable: "untestable" };

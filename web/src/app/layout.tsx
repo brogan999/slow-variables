@@ -5,7 +5,7 @@ import "./globals.css";
 import { ChatDrawer } from "@/components/ChatDrawer";
 import { Freshness } from "@/components/Freshness";
 import { MobileNav, SiteNav } from "@/components/SiteNav";
-import { ABOUT } from "@/lib/nav";
+import { EVIDENCE } from "@/lib/nav";
 import { meta } from "@/lib/data";
 import { SITE } from "@/lib/site";
 
@@ -47,10 +47,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <span>Every number links to the observation behind it. Fast is not good; concentrating is not good. Status colours carry no verdict.</span>
               <Freshness generatedAt={generated} />
             </div>
-            <nav aria-label="About" className="flex flex-wrap md:flex-col md:flex-nowrap gap-x-5 gap-y-1.5 text-ink-2">
-              {ABOUT.map(([href, label]) => <Link key={href} href={href} className="hover:text-ink">{label}</Link>)}
-              <Link href="/methodology#reuse" className="hover:text-ink">Reuse, cite, corrections</Link>
-              <Link href="/methodology#privacy" className="hover:text-ink">Privacy and disclaimers</Link>
+            <nav aria-label="Evidence and about" className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-8 gap-y-1.5 text-ink-2">
+              {EVIDENCE.map(([href, label]) => <Link key={href} href={href} className="hover:text-ink">{label}</Link>)}
+              <Link href="/methodology#reuse" className="hover:text-ink">Reuse and cite</Link>
+              <Link href="/methodology#privacy" className="hover:text-ink">Privacy</Link>
               <a href="/memos/feed.xml" className="hover:text-ink">Memo feed (RSS)</a>
             </nav>
           </div>

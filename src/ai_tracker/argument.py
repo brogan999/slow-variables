@@ -88,6 +88,12 @@ def clocks(s: Store, spec: dict[str, Any]) -> dict[str, Any]:
     for link in c["links"]:
         ind = next(i for i in s.seed.indicators if i.id == link["id"])
         pts = [p for p in s.headline(ind) if fnmatch(p["series_key"], link["series"]) and p["as_of"] >= start]
+        if link.get("frontier"):  # keep only readings that set a new best
+            best: list[dict[str, Any]] = []
+            for p in pts:
+                if not best or p["value"] > best[-1]["value"]:
+                    best.append(p)
+            pts = best
         if len(pts) < 3:
             listed.append(link["id"])
             continue
@@ -101,7 +107,7 @@ def clocks(s: Store, spec: dict[str, Any]) -> dict[str, Any]:
                 "series": [{"as_of": p["as_of"], "value": p["value"], "obs_ids": p["obs_ids"]} for p in pts],
                 "multiple": {
                     "value": last["value"] / first["value"],
-                    "unit": "multiple",
+                    "unit": "ratio",
                     "as_of": last["as_of"],
                     "obs_ids": first["obs_ids"] + last["obs_ids"],
                     "href": f"/indicators/{ind.id}",
@@ -153,7 +159,8 @@ def exits(spec: dict[str, Any]) -> list[dict[str, Any]]:
 
     states = {v["id"]: v.get("state") for v in read_jsonl(DATA / "thesis.jsonl")}
     return [
-        {"monitor": e["monitor"], "text": e["text"], "state": states.get(e["monitor"])} for e in spec["exits"]
+        {"monitor": e["monitor"], "label": e["label"], "text": e["text"], "state": states.get(e["monitor"])}
+        for e in spec["exits"]
     ]
 
 

@@ -4,6 +4,7 @@
   "drawn": [
    {
     "from": "2025-02-24",
+    "frontier": true,
     "id": "metr_horizon_50",
     "label": "Methods",
     "multiple": {
@@ -13,7 +14,7 @@
       "68864ed59f5d9a57",
       "a3cd6bcee336eaa3"
      ],
-     "unit": "multiple",
+     "unit": "ratio",
      "value": 17.300853383128768
     },
     "name": "METR 50% time horizon",
@@ -33,20 +34,6 @@
       "value": 119.732634
      },
      {
-      "as_of": "2025-05-22",
-      "obs_ids": [
-       "6af93ac0d37ce9a2"
-      ],
-      "value": 100.366123
-     },
-     {
-      "as_of": "2025-08-05",
-      "obs_ids": [
-       "ae5278061f1da61c"
-      ],
-      "value": 100.472004
-     },
-     {
       "as_of": "2025-08-07",
       "obs_ids": [
        "261c1f51f1f6b138"
@@ -59,13 +46,6 @@
        "3466aea4ed2495c4"
       ],
       "value": 224.325884
-     },
-     {
-      "as_of": "2025-11-19",
-      "obs_ids": [
-       "a2aa2e4df87f5448"
-      ],
-      "value": 223.714694
      },
      {
       "as_of": "2025-11-24",
@@ -89,27 +69,6 @@
       "value": 718.80683
      },
      {
-      "as_of": "2026-02-05",
-      "obs_ids": [
-       "e466aae4890e8f57"
-      ],
-      "value": 349.530732
-     },
-     {
-      "as_of": "2026-02-19",
-      "obs_ids": [
-       "2eb7c897f31e5b3e"
-      ],
-      "value": 384.147435
-     },
-     {
-      "as_of": "2026-03-05",
-      "obs_ids": [
-       "858c619bbf5d9edd"
-      ],
-      "value": 341.735276
-     },
-     {
       "as_of": "2026-04-07",
       "obs_ids": [
        "a3cd6bcee336eaa3"
@@ -130,7 +89,7 @@
       "0ba873b6fa3709ed",
       "9231eec2fa8791ca"
      ],
-     "unit": "multiple",
+     "unit": "ratio",
      "value": 1.3410404624277454
     },
     "name": "US firms using AI (Census BTOS)",
@@ -303,7 +262,7 @@
       "01ebb53cfc4f7d05",
       "7a1c89cb3f486453"
      ],
-     "unit": "multiple",
+     "unit": "ratio",
      "value": 1.5282164296754353
     },
     "name": "Share of work hours assisted by generative AI",
@@ -371,21 +330,25 @@
  },
  "exits": [
   {
+   "label": "AI is not an ordinary technology",
    "monitor": "normal_tech_falsified",
    "state": "unsupported",
    "text": "AI stops looking like an ordinary technology if three things happen together. Models become nearly as reliable on long jobs as on short ones, and not just because the tests have run out of longer tasks. Most of the labour-market trackers we follow break at the same time. And either the share of work hours done with AI passes a fifth, or productivity runs well above trend for years on end."
   },
   {
+   "label": "Profit moves up to the labs",
    "monitor": "rents_migrate_up",
    "state": "contradicted",
    "text": "The chip makers' hold on the profit loosens if, over a year, the labs' share of the industry's gross profit rises by five points while the chips' share falls by as much."
   },
   {
+   "label": "Users keep most of the value",
    "monitor": "consumers_keep_surplus",
    "state": "untestable",
    "text": "Users rather than sellers keep most of the value if what people say they would need to be paid to give AI up runs well above everything the industry charges for it."
   },
   {
+   "label": "AI speeds up its own invention",
    "monitor": "invention_side_warning",
    "state": "untestable",
    "text": "AI starts speeding up its own invention if independent tests show agents doing more than a day of research work for each day a person puts in, and needing a person's help on long tasks less than half the time."

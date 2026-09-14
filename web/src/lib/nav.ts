@@ -1,3 +1,3 @@
-export const PRIMARY = [["/diffusion", "Diffusion"], ["/capture", "Capture"], ["/indicators", "Indicators"], ["/memos", "Memos"]] as const;
-export const MORE = [["/stack", "Stack"], ["/predictions", "Predictions"], ["/compare", "Compare"], ["/bottlenecks", "Bottlenecks"], ["/ledger", "Ledger"], ["/crosswalk", "Crosswalk"], ["/query", "Query"]] as const;
-export const ABOUT = [["/sources", "Sources"], ["/methodology", "Methodology"], ["/changelog", "Changelog"]] as const;
+// Five places to read; everything else is evidence, linked from the footer and from the pages that use it.
+export const PRIMARY = [["/argument", "The argument"], ["/diffusion", "How fast"], ["/capture", "Who profits"], ["/memos", "Memos"], ["/methodology", "Method"]] as const;
+export const EVIDENCE = [["/indicators", "Indicators"], ["/predictions", "Predictions"], ["/compare", "Compare"], ["/bottlenecks", "Bottlenecks"], ["/stack", "Stack"], ["/ledger", "Ledger"], ["/crosswalk", "Crosswalk"], ["/sources", "Sources"], ["/changelog", "Changelog"], ["/query", "Query"]] as const;

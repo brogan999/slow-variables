@@ -31,10 +31,11 @@ slow_variables:
     sentence: What Americans say they would need to be paid to give up AI chatbots, added up over a year. Value users keep is value no company gets to charge for.
 
 # One shared log axis, "multiple of its first reading"; products has too few points per indicator to draw today.
+# `frontier` draws the running best, since a later, smaller model is not the frontier going backwards.
 clocks:
   start: 2024-12-31
   links:
-    - {id: metr_horizon_50, series: "metr.*.horizon_50.pt", label: Methods}
+    - {id: metr_horizon_50, series: "metr.*.horizon_50.pt", label: Methods, frontier: true}  # best model so far, not every release
     - {id: btos_firm_use, series: "census_btos.us.ai_use_share_v2.2w", label: Early adoption}
     - {id: bbd_work_hours_assisted, series: "fred.us_workers.hours_assisted_share.q", label: Adaptation}
   expect: {gt: [metr_horizon_50, bbd_work_hours_assisted]}
@@ -50,12 +51,16 @@ phase:
 
 exits:
   - monitor: normal_tech_falsified
+    label: AI is not an ordinary technology
     text: AI stops looking like an ordinary technology if three things happen together. Models become nearly as reliable on long jobs as on short ones, and not just because the tests have run out of longer tasks. Most of the labour-market trackers we follow break at the same time. And either the share of work hours done with AI passes a fifth, or productivity runs well above trend for years on end.
   - monitor: rents_migrate_up
+    label: Profit moves up to the labs
     text: The chip makers' hold on the profit loosens if, over a year, the labs' share of the industry's gross profit rises by five points while the chips' share falls by as much.
   - monitor: consumers_keep_surplus
+    label: Users keep most of the value
     text: Users rather than sellers keep most of the value if what people say they would need to be paid to give AI up runs well above everything the industry charges for it.
   - monitor: invention_side_warning
+    label: AI speeds up its own invention
     text: AI starts speeding up its own invention if independent tests show agents doing more than a day of research work for each day a person puts in, and needing a person's help on long tasks less than half the time.
 
 # Every URL fetched on 14 Sep 2026 while the essays were fact-checked; rendered at the end of /argument.
