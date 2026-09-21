@@ -15,16 +15,22 @@ URL = "https://openrouter.ai/rankings"
 
 
 def parse_payload(html: str) -> list[dict]:
+    """The model table is one of several dehydrated queries, and the page reorders them: take the first
+    `"data":[{"date":` array whose rows name a model."""
     s = html.replace('\\"', '"')
-    m = re.search(r'"queries":\[\{"dehydratedAt":\d+,"state":\{"data":(\[\{"date":.*)', s)
-    if not m:
-        return []
-    arr, depth = m.group(1), 0
-    for k, ch in enumerate(arr):
-        depth += ch == "["
-        depth -= ch == "]"
-        if depth == 0:
-            return json.loads(arr[: k + 1])
+    for m in re.finditer(r'"state":\{"data":(?=\[\{"date":)', s):
+        depth = 0
+        for k in range(m.end(), len(s)):
+            depth += s[k] == "["
+            depth -= s[k] == "]"
+            if depth == 0:
+                try:
+                    rows = json.loads(s[m.end() : k + 1])
+                except ValueError:
+                    break
+                if rows and "model_permaslug" in rows[0]:
+                    return rows
+                break
     return []
 
 

@@ -29,6 +29,7 @@ def test_ops_notes_list_a_waiting_crossing(monkeypatch, tmp_path):
     (tmp_path / "proposed_status_events.jsonl").write_text(
         json.dumps(
             {
+                "id": "p1",
                 "target_id": "btos_firm_use",
                 "old_status": None,
                 "new_status": "faster_than_normal",
