@@ -341,8 +341,13 @@ class Tools:
         return docs
 
     def fit_trend(self, series: str, since: str | None = None, model: str = "exponential") -> Any:
-        rows = self.store.observations(series)
-        rows = [r for r in rows if r["value_numeric"] is not None]
+        rows = [  # a row dated after today is a source's projection, never a reading to fit; a disputed epoch_dc row
+            r  # is one Epoch has withdrawn (elsewhere "disputed" flags a contested figure that still stands)
+            for r in self.store.observations(series)
+            if r["value_numeric"] is not None
+            and r["as_of_date"] <= date.today()
+            and not (r["disputed"] and r["source_ns"] == "epoch_dc")
+        ]
         keys, units = {r["series_key"] for r in rows}, {r["unit"] for r in rows}
         if not rows:
             return {"error": f"no approved numeric rows match {series}"}

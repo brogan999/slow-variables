@@ -289,3 +289,36 @@ def test_a_blocked_answer_retries_on_the_stronger_model_and_is_billed_at_its_rat
     assert res["status"] == "retried" and res["model"] == ESCALATE_MODEL and res["audit"]["model"] == ESCALATE_MODEL
     assert c.models[:2] == [MODEL, MODEL] and c.models[-1] == ESCALATE_MODEL  # only the fresh attempt escalates
     assert value is not None
+
+
+def test_fit_trend_never_fits_a_projection_or_a_row_epoch_withdrew(monkeypatch):
+    from datetime import date, timedelta
+
+    s = st.Store()
+    day = date.today()
+
+    def row(i: int, v: float, days: int, ns: str = "epoch_dc", disputed: bool = False) -> dict:
+        return {
+            "id": f"o{i}", "series_key": f"{ns}.x.power_mw.pt", "unit": "MW", "value_numeric": v,
+            "as_of_date": day + timedelta(days=days), "disputed": disputed, "source_ns": ns,
+        }  # fmt: skip
+
+    built = [row(1, 100.0, -720), row(2, 200.0, -360), row(3, 400.0, -1)]
+    monkeypatch.setattr(
+        s, "observations", lambda series: built + [row(4, 9000.0, 400), row(5, 1.0, -30, disputed=True)]
+    )
+    f = Tools(s).fit_trend("epoch_dc.x.power_mw.pt")
+    assert (
+        f["n_points"] == 3 and 300 < f["value"] < 420
+    )  # doubling about yearly: the projection and the withdrawn row are out
+    monkeypatch.setattr(
+        s,
+        "observations",
+        lambda series: [
+            row(i, v, d, ns="epoch", disputed=True)
+            for i, v, d in ((1, 1.0, -720), (2, 2.0, -360), (3, 4.0, -1))
+        ],
+    )
+    assert (
+        Tools(s).fit_trend("epoch.x.power_mw.pt")["n_points"] == 3
+    )  # elsewhere a disputed figure still stands
