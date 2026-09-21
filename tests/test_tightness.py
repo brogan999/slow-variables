@@ -118,6 +118,7 @@ def test_the_seed_is_whole():
     assert len(SPEC["inputs"]) == 23 and [i["n"] for i in SPEC["inputs"]] == list(range(1, 24))
     assert len(INPUTS) == 23 and {i["kind"] for i in SPEC["inputs"]} <= {k["id"] for k in SPEC["kinds"]}
     assert abs(sum(RULES["weights"].values()) - 0.77) < 1e-9 and RULES["words"][-1][0] == 0
+    assert INPUTS["energy"]["reads"].startswith("Demand only:")  # the page keeps this caveat open on a phone by its lead
     for i in SPEC["inputs"]:
         gs = i.get("gauges") or []
         assert gs or len(i["withheld"]["because"]) >= 40, i["id"]
