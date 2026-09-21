@@ -296,7 +296,7 @@ def _check(s: st.Store) -> tuple[list[str], list[str]]:
     for p in st.read_jsonl(st.DATA / "proposed_status_events.jsonl"):
         age = (datetime.now(timezone.utc) - datetime.fromisoformat(p["created_at"])).days
         if not p.get("reason", "").strip() and age > 14:
-            notes.append(f"{p['target_id']}: proposal {p['id']} has waited {age} days for a reason")
+            notes.append(f"{p['target_id']}: proposal {p.get('id', '?')} has waited {age} days for a reason")
     for ind in s.seed.indicators:
         if not ind.published:
             continue

@@ -22,6 +22,19 @@ def test_openrouter_rankings_parses_the_dehydrated_payload():
     assert int(obs[0].tier) == 3 and obs[0].as_of_date == date(2026, 9, 9)
 
 
+def test_openrouter_rankings_finds_the_model_table_when_another_query_comes_first():
+    # Sep 2026: the page began listing an app-rankings query, and one with dated rows but no model, ahead of it
+    html = Path("tests/fixtures/openrouter_rankings_min.html").read_text()
+    first = html.index('{\\"dehydratedAt\\"')
+    apps = (
+        '{\\"dehydratedAt\\":1,\\"state\\":{\\"data\\":{\\"day\\":[{\\"app_id\\":3067167,\\"rank\\":3}]}}},'
+    )
+    dated = '{\\"dehydratedAt\\":1,\\"state\\":{\\"data\\":[{\\"date\\":\\"2026-09-09\\",\\"app_id\\":1}]}},'
+    rows = parse_payload(html[:first] + apps + dated + html[first:])
+    assert len(rows) == 3 and rows[0]["model_permaslug"].startswith("meta/")
+    assert parse_payload(html[:first] + apps + "]}") == []
+
+
 def test_artificial_analysis_extracts_three_measures_per_model():
     body = json.dumps(
         {
