@@ -19,6 +19,13 @@ TABLE = [
     (7077, None, "7077"),
     (95_311, None, "95,311"),
     (0.85, "index", "0.85 index"),
+    (112.5, "MW", "113 MW"),  # a tie rounds up, as toFixed does in the browser; Python's own format gives 112
+    (2.5, "count", "3"),
+    (197812.5, "wafers", "197,813 wafers"),
+    (58.84, "pct", "58.8%"),
+    (0.0625, "ratio", "0.063×"),
+    (0.05, "ratio", "0.050×"),
+    (float("inf"), "ratio", "—"),
     (None, "USD", "—"),
 ]
 
@@ -26,6 +33,8 @@ TABLE = [
 def test_values_read_the_way_the_site_renders_them():
     for value, unit, want in TABLE:
         assert fmt(value, unit) == want, (value, unit)
+    # a value past the decimal context's reach still prints, never raises
+    assert fmt(3e30, "count").isdigit()
 
 
 def test_every_unit_the_web_formatter_names_is_handled_here():

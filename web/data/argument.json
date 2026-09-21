@@ -605,6 +605,1954 @@
    "state": "unsupported"
   }
  },
+ "migration": {
+  "scorecard": {
+   "inputs": [
+    {
+     "at_ceiling": false,
+     "ceiling": 50,
+     "ceiling_rationale": null,
+     "confidence": null,
+     "defined": 0,
+     "factors": null,
+     "gauges": [],
+     "hatched": false,
+     "id": "minerals",
+     "kind": "supply",
+     "n": 1,
+     "name": "Critical minerals",
+     "obs_ids": [],
+     "reads": null,
+     "score": null,
+     "used": 0,
+     "what": "Gallium, germanium, rare earths, copper and the other raw materials chips and power equipment are made from.",
+     "withheld": {
+      "because": "This site reads no series on how much of these minerals is mined or sold.",
+      "kind": "not_read_yet"
+     },
+     "word": null
+    },
+    {
+     "at_ceiling": true,
+     "ceiling": 40,
+     "ceiling_rationale": "Set low on purpose. The only gauge here measures demand for power, not its supply, so the score is a stand-in and is drawn hatched.",
+     "confidence": 40,
+     "defined": 1,
+     "factors": {
+      "coverage": 0.55,
+      "freshness": 0.44,
+      "source": 0.75
+     },
+     "gauges": [
+      {
+       "age_days": 264,
+       "grade": "C",
+       "id": "fleet_power_growth",
+       "knots": [
+        [
+         0.0,
+         15
+        ],
+        [
+         0.25,
+         35
+        ],
+        [
+         0.5,
+         55
+        ],
+        [
+         1.0,
+         75
+        ],
+        [
+         2.0,
+         92
+        ]
+       ],
+       "label": "Growth in the power drawn by AI chips sold",
+       "log10": false,
+       "max_age_days": 300,
+       "pinned": null,
+       "points": 81,
+       "reading": {
+        "as_of": "2025-12-31",
+        "href": "/query",
+        "obs_ids": [
+         "12b4b08147e58a60",
+         "7672c985ddbb80c9",
+         "824cc490abc85658",
+         "8e57ab916181d18a",
+         "93093d59651f2543",
+         "b9cb1eda27a95eb3",
+         "c6e993ba215a7f64",
+         "cb6ae7137a1c62d0",
+         "e23bff1aacc7a2d7",
+         "e34a7fb5fe644a7f",
+         "f6ba386254d8b199",
+         "f6e538aebb094189"
+        ],
+        "unit": "share",
+        "value": 1.369362660515466
+       },
+       "required": false,
+       "scale_rationale": "Growth of a quarter a year or less is the kind of new load a grid plans for in the ordinary way. A doubling within a year is more than new power stations can be built to serve in that time, which is when electricity stops being a bill and becomes a limit.",
+       "unavailable": null,
+       "unfed": null,
+       "unit": "share",
+       "weight": 0.55
+      }
+     ],
+     "hatched": true,
+     "id": "energy",
+     "kind": "supply",
+     "n": 2,
+     "name": "Electricity generation",
+     "obs_ids": [
+      "12b4b08147e58a60",
+      "7672c985ddbb80c9",
+      "824cc490abc85658",
+      "8e57ab916181d18a",
+      "93093d59651f2543",
+      "b9cb1eda27a95eb3",
+      "c6e993ba215a7f64",
+      "cb6ae7137a1c62d0",
+      "e23bff1aacc7a2d7",
+      "e34a7fb5fe644a7f",
+      "f6ba386254d8b199",
+      "f6e538aebb094189"
+     ],
+     "reads": "Demand only: how fast the electricity that all AI chips sold so far would draw is growing. It says nothing about how much power can be supplied.",
+     "score": 81,
+     "used": 1,
+     "what": "The power stations, turbines, reactors and solar farms the electricity comes from.",
+     "withheld": null,
+     "word": "severe"
+    },
+    {
+     "at_ceiling": false,
+     "ceiling": 40,
+     "ceiling_rationale": null,
+     "confidence": null,
+     "defined": 0,
+     "factors": null,
+     "gauges": [],
+     "hatched": false,
+     "id": "grid",
+     "kind": "supply",
+     "n": 3,
+     "name": "The grid and its hookups",
+     "obs_ids": [],
+     "reads": null,
+     "score": null,
+     "used": 0,
+     "what": "Transformers, switchgear, transmission lines and the queue to be connected. The wire between a power station and a rack of chips.",
+     "withheld": {
+      "because": "Grid operators publish their connection queues, but this site does not read them yet.",
+      "kind": "not_read_yet"
+     },
+     "word": null
+    },
+    {
+     "at_ceiling": true,
+     "ceiling": 60,
+     "ceiling_rationale": "Lower than the prototype's. Half of this ratio is Epoch's projection of sites not yet finished, and Epoch publishes wide error margins for its power figures.",
+     "confidence": 60,
+     "defined": 2,
+     "factors": {
+      "coverage": 0.6,
+      "freshness": 1.0,
+      "source": 0.75
+     },
+     "gauges": [
+      {
+       "age_days": 0,
+       "grade": "C",
+       "id": "planned_vs_built",
+       "knots": [
+        [
+         1.0,
+         20
+        ],
+        [
+         2.0,
+         40
+        ],
+        [
+         3.0,
+         60
+        ],
+        [
+         4.5,
+         78
+        ],
+        [
+         7.0,
+         92
+        ]
+       ],
+       "label": "Planned power against built power",
+       "log10": false,
+       "max_age_days": 120,
+       "pinned": null,
+       "points": 77,
+       "reading": {
+        "as_of": "2026-09-21",
+        "href": "/query",
+        "obs_ids": [
+         "00f68c80c7d9f20f",
+         "022ae02a52223194",
+         "02ef5dccb2928569",
+         "0ca108158d9f8f0f",
+         "10ac4ce15c476fa4",
+         "1106de7d7bc444c6",
+         "13742771ff36f9e8",
+         "15049fc6cfd25493",
+         "1b37a50700e2161b",
+         "1b3fb80ea1cb5f7d",
+         "1f58e1bc5f6e291c",
+         "2024049882e26760",
+         "206ca5fa349ea6a6",
+         "292ed5fb2fdb0b6e",
+         "2966fd74c1ccb7f4",
+         "2a0d8237fc8626eb",
+         "2cb839e376bb8a98",
+         "2ce5f9b301603c4c",
+         "3124cea47760f49d",
+         "31d6bac891c545cc",
+         "3296d54c08c3b393",
+         "336cf07d2db77117",
+         "36344141bcbfa20d",
+         "37cdf3a232ce9757",
+         "37d25593fbacacb4",
+         "3a5b99a673a20fdd",
+         "3b03cfd583f58d74",
+         "3f2aa13f54948de5",
+         "41a94ad91b715aef",
+         "42425975f77f09e9",
+         "424e0d2570b79bd2",
+         "4302388488cddd1a",
+         "43755ec6abf2a270",
+         "47f8f52e35497824",
+         "4a1a4245ff4e0d73",
+         "4e879bcc474ba549",
+         "50f57febb7bb7882",
+         "5740d307f80606f4",
+         "57b5247c0441881e",
+         "5b423d50cc2aa63a",
+         "5b9d98976d73f501",
+         "5c020df4dbb8fc06",
+         "5c17f72b2868f1fa",
+         "5e57b43bf5575466",
+         "5fd4dd2247a33893",
+         "60100cb32cbbe351",
+         "603f7928054271b6",
+         "65b2615f3059b8e1",
+         "69252633511d47ab",
+         "705da127ca860e6d",
+         "73dff0f078e4fc0c",
+         "750bc73995ede42b",
+         "78e284563f3b0fb9",
+         "79f784b1e4135bb4",
+         "7ac29042806ef827",
+         "7c102a3d9d6129c9",
+         "7fcebe0c32512dc6",
+         "81bff0f507d694e9",
+         "82074aaa491ae53b",
+         "84e7ab23a3a27c43",
+         "84e885b4b682d688",
+         "87fd8c4e1e099fb0",
+         "89da903de73c0a4c",
+         "89ffc8964fc23aa5",
+         "8a5bf43f0a36a8fd",
+         "8df0aef0848ff0a3",
+         "910c482537c4fb9d",
+         "9161cb49b570d659",
+         "92b2a60d1165394d",
+         "94466b4641c6407a",
+         "99c240b213ee2359",
+         "a64e867ec70fc7a0",
+         "a68f5da0d9e6bc57",
+         "a6dd53e2b2aa636d",
+         "ab93346fc845a8c8",
+         "ad6ed67013b7d1ab",
+         "b0a43bea2a141efd",
+         "ba968a41e3ff2e68",
+         "bc1ca2c5c28aee17",
+         "bfef2930067d7973",
+         "c193a6dfe9f40950",
+         "c247d8f86ac0f51f",
+         "c3c37d195b9ef601",
+         "ca57c2ebafb4e940",
+         "cbc49a25e497ccf7",
+         "d393cf6208c043da",
+         "d7c42b66838b2d88",
+         "d91a5af82945b8bc",
+         "ec5099dcb0c51abc",
+         "f6026e7368a6d775",
+         "f758d0b0cd8f4d68",
+         "fadd5c888dc04e6d"
+        ],
+        "unit": "ratio",
+        "value": 4.401005635222431
+       },
+       "required": true,
+       "scale_rationale": "A ratio near one means about as much stands as Epoch expects at the sites it tracks. Two or three times is ordinary for a growing business whose projects take years. Past four, far more is planned than stands, which is what a shortage of builders, equipment and grid connections would produce, though a fast, untroubled build-out would read the same. It measures the gap between plans and buildings, not demand, and the age limit is four months because Epoch revises the file about monthly.",
+       "unavailable": null,
+       "unfed": null,
+       "unit": "ratio",
+       "weight": 0.6
+      },
+      {
+       "age_days": null,
+       "grade": null,
+       "id": "built_power_growth",
+       "knots": null,
+       "label": "Growth in built power",
+       "log10": false,
+       "max_age_days": null,
+       "pinned": null,
+       "points": null,
+       "reading": null,
+       "required": false,
+       "scale_rationale": null,
+       "unavailable": "unfed",
+       "unfed": {
+        "because": "Built power at the sites Epoch tracks grows very fast partly because Epoch chooses sites that are growing, so it says little about the market as a whole.",
+        "kind": "gauge_unsound"
+       },
+       "unit": null,
+       "weight": 0.25
+      }
+     ],
+     "hatched": false,
+     "id": "data_centres",
+     "kind": "supply",
+     "n": 4,
+     "name": "Data-centre buildings",
+     "obs_ids": [
+      "00f68c80c7d9f20f",
+      "022ae02a52223194",
+      "02ef5dccb2928569",
+      "0ca108158d9f8f0f",
+      "10ac4ce15c476fa4",
+      "1106de7d7bc444c6",
+      "13742771ff36f9e8",
+      "15049fc6cfd25493",
+      "1b37a50700e2161b",
+      "1b3fb80ea1cb5f7d",
+      "1f58e1bc5f6e291c",
+      "2024049882e26760",
+      "206ca5fa349ea6a6",
+      "292ed5fb2fdb0b6e",
+      "2966fd74c1ccb7f4",
+      "2a0d8237fc8626eb",
+      "2cb839e376bb8a98",
+      "2ce5f9b301603c4c",
+      "3124cea47760f49d",
+      "31d6bac891c545cc",
+      "3296d54c08c3b393",
+      "336cf07d2db77117",
+      "36344141bcbfa20d",
+      "37cdf3a232ce9757",
+      "37d25593fbacacb4",
+      "3a5b99a673a20fdd",
+      "3b03cfd583f58d74",
+      "3f2aa13f54948de5",
+      "41a94ad91b715aef",
+      "42425975f77f09e9",
+      "424e0d2570b79bd2",
+      "4302388488cddd1a",
+      "43755ec6abf2a270",
+      "47f8f52e35497824",
+      "4a1a4245ff4e0d73",
+      "4e879bcc474ba549",
+      "50f57febb7bb7882",
+      "5740d307f80606f4",
+      "57b5247c0441881e",
+      "5b423d50cc2aa63a",
+      "5b9d98976d73f501",
+      "5c020df4dbb8fc06",
+      "5c17f72b2868f1fa",
+      "5e57b43bf5575466",
+      "5fd4dd2247a33893",
+      "60100cb32cbbe351",
+      "603f7928054271b6",
+      "65b2615f3059b8e1",
+      "69252633511d47ab",
+      "705da127ca860e6d",
+      "73dff0f078e4fc0c",
+      "750bc73995ede42b",
+      "78e284563f3b0fb9",
+      "79f784b1e4135bb4",
+      "7ac29042806ef827",
+      "7c102a3d9d6129c9",
+      "7fcebe0c32512dc6",
+      "81bff0f507d694e9",
+      "82074aaa491ae53b",
+      "84e7ab23a3a27c43",
+      "84e885b4b682d688",
+      "87fd8c4e1e099fb0",
+      "89da903de73c0a4c",
+      "89ffc8964fc23aa5",
+      "8a5bf43f0a36a8fd",
+      "8df0aef0848ff0a3",
+      "910c482537c4fb9d",
+      "9161cb49b570d659",
+      "92b2a60d1165394d",
+      "94466b4641c6407a",
+      "99c240b213ee2359",
+      "a64e867ec70fc7a0",
+      "a68f5da0d9e6bc57",
+      "a6dd53e2b2aa636d",
+      "ab93346fc845a8c8",
+      "ad6ed67013b7d1ab",
+      "b0a43bea2a141efd",
+      "ba968a41e3ff2e68",
+      "bc1ca2c5c28aee17",
+      "bfef2930067d7973",
+      "c193a6dfe9f40950",
+      "c247d8f86ac0f51f",
+      "c3c37d195b9ef601",
+      "ca57c2ebafb4e940",
+      "cbc49a25e497ccf7",
+      "d393cf6208c043da",
+      "d7c42b66838b2d88",
+      "d91a5af82945b8bc",
+      "ec5099dcb0c51abc",
+      "f6026e7368a6d775",
+      "f758d0b0cd8f4d68",
+      "fadd5c888dc04e6d"
+     ],
+     "reads": "The power Epoch expects at the large sites it tracks, against the power it counts as built there today.",
+     "score": 77,
+     "used": 1,
+     "what": "The shells, cooling and power hookups that racks of chips sit in.",
+     "withheld": null,
+     "word": "tight"
+    },
+    {
+     "at_ceiling": false,
+     "ceiling": 70,
+     "ceiling_rationale": null,
+     "confidence": null,
+     "defined": 0,
+     "factors": null,
+     "gauges": [],
+     "hatched": false,
+     "id": "chip_equipment",
+     "kind": "supply",
+     "n": 5,
+     "name": "Chip-making equipment",
+     "obs_ids": [],
+     "reads": null,
+     "score": null,
+     "used": 0,
+     "what": "The machines that print, deposit, etch and inspect chips, made by a handful of firms such as ASML.",
+     "withheld": {
+      "because": "The equipment makers file their orders and backlogs, but this site does not read them yet.",
+      "kind": "not_read_yet"
+     },
+     "word": null
+    },
+    {
+     "at_ceiling": false,
+     "ceiling": 85,
+     "ceiling_rationale": "Kept from the prototype: a direct supply estimate from a careful source, though only an estimate.",
+     "confidence": 53,
+     "defined": 1,
+     "factors": {
+      "coverage": 0.42,
+      "freshness": 0.44,
+      "source": 0.75
+     },
+     "gauges": [
+      {
+       "age_days": 264,
+       "grade": "C",
+       "id": "logic_supply_growth",
+       "knots": [
+        [
+         -0.05,
+         92
+        ],
+        [
+         0.05,
+         72
+        ],
+        [
+         0.15,
+         50
+        ],
+        [
+         0.3,
+         28
+        ]
+       ],
+       "label": "Growth in leading-edge logic supply",
+       "log10": false,
+       "max_age_days": 300,
+       "pinned": null,
+       "points": 28,
+       "reading": {
+        "as_of": "2025-12-31",
+        "href": "/query",
+        "obs_ids": [
+         "ed847c0b44085840",
+         "f4ec7412f5b8e4c7"
+        ],
+        "unit": "share",
+        "value": 0.2969888433515482
+       },
+       "required": false,
+       "scale_rationale": "Runs backwards: faster supply growth means a looser input. New foundry capacity takes years to build, so growth of a fifth a year is already fast for this business, and flat supply while demand races is the tight end.",
+       "unavailable": null,
+       "unfed": null,
+       "unit": "share",
+       "weight": 0.42
+      }
+     ],
+     "hatched": false,
+     "id": "foundry",
+     "kind": "supply",
+     "n": 6,
+     "name": "Chip foundries",
+     "obs_ids": [
+      "ed847c0b44085840",
+      "f4ec7412f5b8e4c7"
+     ],
+     "reads": "How fast the supply of leading-edge logic wafers is growing, year on year.",
+     "score": 28,
+     "used": 1,
+     "what": "The factories, above all TSMC's, that make the most advanced logic chips.",
+     "withheld": null,
+     "word": "easing"
+    },
+    {
+     "at_ceiling": false,
+     "ceiling": 90,
+     "ceiling_rationale": "Kept from the prototype: two gauges from one careful source, both estimates.",
+     "confidence": 65,
+     "defined": 2,
+     "factors": {
+      "coverage": 0.75,
+      "freshness": 0.44,
+      "source": 0.75
+     },
+     "gauges": [
+      {
+       "age_days": 264,
+       "grade": "C",
+       "id": "cowos_supply_growth",
+       "knots": [
+        [
+         -0.1,
+         95
+        ],
+        [
+         0.0,
+         80
+        ],
+        [
+         0.25,
+         60
+        ],
+        [
+         0.5,
+         40
+        ],
+        [
+         1.0,
+         20
+        ]
+       ],
+       "label": "Growth in packaging supply",
+       "log10": false,
+       "max_age_days": 300,
+       "pinned": null,
+       "points": 32,
+       "reading": {
+        "as_of": "2025-12-31",
+        "href": "/query",
+        "obs_ids": [
+         "00d887f89f3712c7",
+         "3e2681677c0c07fe"
+        ],
+        "unit": "share",
+        "value": 0.6907051282051282
+       },
+       "required": false,
+       "scale_rationale": "Runs backwards: faster supply growth means a looser input. Packaging lines can be added faster than foundries, so this scale asks for more: supply that doubles in a year is real relief, and supply that stands still while demand rises is the worst case.",
+       "unavailable": null,
+       "unfed": null,
+       "unit": "share",
+       "weight": 0.45
+      },
+      {
+       "age_days": 264,
+       "grade": "C",
+       "id": "cowos_buyer_concentration",
+       "knots": [
+        [
+         0.25,
+         20
+        ],
+        [
+         0.35,
+         42
+        ],
+        [
+         0.45,
+         65
+        ],
+        [
+         0.6,
+         85
+        ]
+       ],
+       "label": "How concentrated the buyers are",
+       "log10": false,
+       "max_age_days": 300,
+       "pinned": null,
+       "points": 52,
+       "reading": {
+        "as_of": "2025-12-31",
+        "href": "/query",
+        "obs_ids": [
+         "161ea4fdafd90a75",
+         "76bf915626395e59",
+         "80297d8996fde2c9",
+         "bf16b5cf84a172e5",
+         "ecca6a5c1dddfa29"
+        ],
+        "unit": "index",
+        "value": 0.392883420240717
+       },
+       "required": false,
+       "scale_rationale": "When one buyer takes most of the supply, everyone else is rationed even if the total looks adequate. The index is the sum of the squared shares: a quarter means several buyers of similar size, and above a half one buyer sets the terms.",
+       "unavailable": null,
+       "unfed": null,
+       "unit": "index",
+       "weight": 0.3
+      }
+     ],
+     "hatched": false,
+     "id": "packaging",
+     "kind": "supply",
+     "n": 7,
+     "name": "Advanced chip packaging",
+     "obs_ids": [
+      "00d887f89f3712c7",
+      "161ea4fdafd90a75",
+      "3e2681677c0c07fe",
+      "76bf915626395e59",
+      "80297d8996fde2c9",
+      "bf16b5cf84a172e5",
+      "ecca6a5c1dddfa29"
+     ],
+     "reads": "How fast packaging supply is growing, and how much of it a few buyers take.",
+     "score": 40,
+     "used": 2,
+     "what": "The step that joins processor dies to stacks of fast memory on one base. Nearly all of it is TSMC's process, called CoWoS.",
+     "withheld": null,
+     "word": "moderate"
+    },
+    {
+     "at_ceiling": false,
+     "ceiling": 75,
+     "ceiling_rationale": "Kept from the prototype, which set it below the other chip inputs because the supply is counted in dollars, not units.",
+     "confidence": 54,
+     "defined": 2,
+     "factors": {
+      "coverage": 0.45,
+      "freshness": 0.44,
+      "source": 0.75
+     },
+     "gauges": [
+      {
+       "age_days": 264,
+       "grade": "C",
+       "id": "hbm_supply_growth",
+       "knots": [
+        [
+         -0.1,
+         92
+        ],
+        [
+         0.1,
+         75
+        ],
+        [
+         0.4,
+         52
+        ],
+        [
+         0.8,
+         32
+        ],
+        [
+         1.5,
+         18
+        ]
+       ],
+       "label": "Growth in memory supply, in dollars",
+       "log10": false,
+       "max_age_days": 300,
+       "pinned": null,
+       "points": 46,
+       "reading": {
+        "as_of": "2025-12-31",
+        "href": "/query",
+        "obs_ids": [
+         "31aefba38b2b34fd",
+         "df139486611fb934"
+        ],
+        "unit": "share",
+        "value": 0.5281501340482573
+       },
+       "required": false,
+       "scale_rationale": "Runs backwards: faster supply growth means a looser input. Because the supply is counted in dollars, which mixes volume with price, the scale is gentler than a true volume scale would be: even growth of four fifths a year reads only as easing.",
+       "unavailable": null,
+       "unfed": null,
+       "unit": "share",
+       "weight": 0.45
+      },
+      {
+       "age_days": null,
+       "grade": null,
+       "id": "memory_per_compute",
+       "knots": null,
+       "label": "Memory per unit of computing power",
+       "log10": false,
+       "max_age_days": null,
+       "pinned": null,
+       "points": null,
+       "reading": null,
+       "required": false,
+       "scale_rationale": null,
+       "unavailable": "unfed",
+       "unfed": {
+        "because": "Epoch publishes each chip's memory, but this site does not read that column yet, and the prototype's scale for it was wrong by many orders of magnitude and would have to be rebuilt.",
+        "kind": "not_read_yet"
+       },
+       "unit": null,
+       "weight": 0.25
+      }
+     ],
+     "hatched": false,
+     "id": "memory",
+     "kind": "supply",
+     "n": 8,
+     "name": "Memory",
+     "obs_ids": [
+      "31aefba38b2b34fd",
+      "df139486611fb934"
+     ],
+     "reads": "How fast the supply of high-bandwidth memory is growing. Epoch counts it in dollars, so a price rise looks the same as more memory.",
+     "score": 46,
+     "used": 1,
+     "what": "The fast stacked memory, called high-bandwidth memory, that sits beside an AI chip, made by SK Hynix, Samsung and Micron.",
+     "withheld": null,
+     "word": "moderate"
+    },
+    {
+     "at_ceiling": false,
+     "ceiling": 88,
+     "ceiling_rationale": "Kept from the prototype: two gauges from one careful source, one an estimate of each designer's chip sales and one a long trend in the prices chips were released at. The gauge on chips for rent is left unfed.",
+     "confidence": 59,
+     "defined": 3,
+     "factors": {
+      "coverage": 0.45,
+      "freshness": 0.54,
+      "source": 0.82
+     },
+     "gauges": [
+      {
+       "age_days": 264,
+       "grade": "C",
+       "id": "designer_concentration",
+       "knots": [
+        [
+         0.3,
+         22
+        ],
+        [
+         0.5,
+         45
+        ],
+        [
+         0.7,
+         68
+        ],
+        [
+         0.85,
+         88
+        ]
+       ],
+       "label": "How concentrated chip supply is by designer",
+       "log10": false,
+       "max_age_days": 300,
+       "pinned": null,
+       "points": 44,
+       "reading": {
+        "as_of": "2025-12-31",
+        "href": "/query",
+        "obs_ids": [
+         "1c4820ae9106f46e",
+         "399214e48a15bb19",
+         "83fc6986a1630d10",
+         "c32215464bcb0e24",
+         "d0d1705763f944a5",
+         "e488feafb4588327"
+        ],
+        "unit": "index",
+        "value": 0.49129656906530583
+       },
+       "required": false,
+       "scale_rationale": "A single designer supplying most AI computing power leaves buyers no substitute, so that designer's choices about who gets chips become the market's supply. The index is the sum of the squared shares; well above four fifths is in effect one supplier.",
+       "unavailable": null,
+       "unfed": null,
+       "unit": "index",
+       "weight": 0.25
+      },
+      {
+       "age_days": 319,
+       "grade": "B",
+       "id": "cost_change",
+       "knots": [
+        [
+         -0.5,
+         15
+        ],
+        [
+         -0.3,
+         32
+        ],
+        [
+         -0.1,
+         58
+        ],
+        [
+         0.05,
+         78
+        ],
+        [
+         0.25,
+         92
+        ]
+       ],
+       "label": "Yearly change in the cost of computing power",
+       "log10": false,
+       "max_age_days": 700,
+       "pinned": null,
+       "points": 48,
+       "reading": {
+        "as_of": "2025-11-06",
+        "href": "/query",
+        "obs_ids": [
+         "022d95069a720995",
+         "1fdbef3268e75a56",
+         "27fd3c4783a02b89",
+         "28df34c0d3bcaf2b",
+         "2e880a726f281667",
+         "2feb92d7453ddf35",
+         "31bd3684b319cf1e",
+         "3918686e84cafd5d",
+         "3b6cabe10efe4e9f",
+         "3c78e4d11f6ddb21",
+         "4242fdcd0f30ce32",
+         "441605f18f26a5a3",
+         "4424f8477ba888b7",
+         "54b6367999be3a4e",
+         "57af1c5c84145f14",
+         "5898dc9a94fcb72e",
+         "5f67abf56d5838f5",
+         "6b3967693d44ccb4",
+         "6ba82593402f9cc4",
+         "77a0ee4619717aa3",
+         "78783a1bec024ccc",
+         "7e951b9d74733988",
+         "8ab3459c38a143b5",
+         "8c34260b78c46dfb",
+         "8e74957860871299",
+         "8f30bd5f73b76d32",
+         "8fd5f06222d9d2b7",
+         "981ea76b815308e5",
+         "a1a57bcef19f5af8",
+         "a24fedb2c340a66c",
+         "af053555458a0c2f",
+         "bf00b162da411612",
+         "c5d37dff46af5583",
+         "ca0d7fa32345d95c",
+         "d29860483000ace5",
+         "d83a3353e02b94d1",
+         "da2a2b98b39d1db4",
+         "e95523e7de1e6074",
+         "f5f878d6f616f2f9",
+         "f6102c632d05f6d2"
+        ],
+        "unit": "share",
+        "value": -0.1792532767998381
+       },
+       "required": false,
+       "scale_rationale": "The cost of a unit of computing power has fallen steeply with each generation of chips. Steep falls mean the input is loosening in the way that matters to buyers; a fall that stalls or reverses is what a supply that cannot keep up produces. The reading is a trend over more than a decade, so it moves slowly, and its age limit is long because few new chips have a published price.",
+       "unavailable": null,
+       "unfed": null,
+       "unit": "share",
+       "weight": 0.2
+      },
+      {
+       "age_days": null,
+       "grade": null,
+       "id": "rental_availability",
+       "knots": null,
+       "label": "Chips available to rent",
+       "log10": false,
+       "max_age_days": null,
+       "pinned": null,
+       "points": null,
+       "reading": null,
+       "required": false,
+       "scale_rationale": null,
+       "unavailable": "unfed",
+       "unfed": {
+        "because": "The one free feed of chips for rent returns a fixed page of offers, so counting them measures the page, not the market.",
+        "kind": "gauge_unsound"
+       },
+       "unit": null,
+       "weight": 0.3
+      }
+     ],
+     "hatched": false,
+     "id": "accelerators",
+     "kind": "supply",
+     "n": 9,
+     "name": "AI chips",
+     "obs_ids": [
+      "022d95069a720995",
+      "1c4820ae9106f46e",
+      "1fdbef3268e75a56",
+      "27fd3c4783a02b89",
+      "28df34c0d3bcaf2b",
+      "2e880a726f281667",
+      "2feb92d7453ddf35",
+      "31bd3684b319cf1e",
+      "3918686e84cafd5d",
+      "399214e48a15bb19",
+      "3b6cabe10efe4e9f",
+      "3c78e4d11f6ddb21",
+      "4242fdcd0f30ce32",
+      "441605f18f26a5a3",
+      "4424f8477ba888b7",
+      "54b6367999be3a4e",
+      "57af1c5c84145f14",
+      "5898dc9a94fcb72e",
+      "5f67abf56d5838f5",
+      "6b3967693d44ccb4",
+      "6ba82593402f9cc4",
+      "77a0ee4619717aa3",
+      "78783a1bec024ccc",
+      "7e951b9d74733988",
+      "83fc6986a1630d10",
+      "8ab3459c38a143b5",
+      "8c34260b78c46dfb",
+      "8e74957860871299",
+      "8f30bd5f73b76d32",
+      "8fd5f06222d9d2b7",
+      "981ea76b815308e5",
+      "a1a57bcef19f5af8",
+      "a24fedb2c340a66c",
+      "af053555458a0c2f",
+      "bf00b162da411612",
+      "c32215464bcb0e24",
+      "c5d37dff46af5583",
+      "ca0d7fa32345d95c",
+      "d0d1705763f944a5",
+      "d29860483000ace5",
+      "d83a3353e02b94d1",
+      "da2a2b98b39d1db4",
+      "e488feafb4588327",
+      "e95523e7de1e6074",
+      "f5f878d6f616f2f9",
+      "f6102c632d05f6d2"
+     ],
+     "reads": "How much of the chip supply one designer holds, and whether the cost of a unit of computing power is still falling.",
+     "score": 46,
+     "used": 2,
+     "what": "The processors that train and run models, from NVIDIA, AMD, Google, Amazon and others.",
+     "withheld": null,
+     "word": "moderate"
+    },
+    {
+     "at_ceiling": false,
+     "ceiling": 55,
+     "ceiling_rationale": null,
+     "confidence": null,
+     "defined": 0,
+     "factors": null,
+     "gauges": [],
+     "hatched": false,
+     "id": "networking",
+     "kind": "supply",
+     "n": 10,
+     "name": "Networking and optics",
+     "obs_ids": [],
+     "reads": null,
+     "score": null,
+     "used": 0,
+     "what": "The switches, cables and optical links that join thousands of chips into one machine.",
+     "withheld": {
+      "because": "This site reads no series on networking gear for AI clusters.",
+      "kind": "not_read_yet"
+     },
+     "word": null
+    },
+    {
+     "at_ceiling": false,
+     "ceiling": 55,
+     "ceiling_rationale": null,
+     "confidence": null,
+     "defined": 1,
+     "factors": null,
+     "gauges": [
+      {
+       "age_days": null,
+       "grade": null,
+       "id": "commit_velocity",
+       "knots": null,
+       "label": "Activity in the open-source projects",
+       "log10": false,
+       "max_age_days": null,
+       "pinned": null,
+       "points": null,
+       "reading": null,
+       "required": false,
+       "scale_rationale": null,
+       "unavailable": "unfed",
+       "unfed": {
+        "because": "The activity of the open-source projects is public, but this site does not read it, and more activity could mean either a shortage being fixed or none at all.",
+        "kind": "not_read_yet"
+       },
+       "unit": null,
+       "weight": 0.3
+      }
+     ],
+     "hatched": false,
+     "id": "systems_software",
+     "kind": "know_how",
+     "n": 11,
+     "name": "Systems software",
+     "obs_ids": [],
+     "reads": null,
+     "score": null,
+     "used": 0,
+     "what": "The low-level programs, such as NVIDIA's CUDA, that let models run fast on a given chip.",
+     "withheld": {
+      "because": "The activity of the open-source projects is public, but this site does not read it, and more activity could mean either a shortage being fixed or none at all.",
+      "kind": "not_read_yet"
+     },
+     "word": null
+    },
+    {
+     "at_ceiling": false,
+     "ceiling": 65,
+     "ceiling_rationale": null,
+     "confidence": null,
+     "defined": 1,
+     "factors": null,
+     "gauges": [
+      {
+       "age_days": null,
+       "grade": null,
+       "id": "training_utilisation",
+       "knots": null,
+       "label": "How fully training runs use their chips",
+       "log10": false,
+       "max_age_days": null,
+       "pinned": null,
+       "points": null,
+       "reading": null,
+       "required": false,
+       "scale_rationale": null,
+       "unavailable": "unfed",
+       "unfed": {
+        "because": "Epoch publishes how fully some training runs used their chips, but this site does not read that column yet.",
+        "kind": "not_read_yet"
+       },
+       "unit": null,
+       "weight": 0.5
+      }
+     ],
+     "hatched": false,
+     "id": "training_infrastructure",
+     "kind": "supply",
+     "n": 12,
+     "name": "Training infrastructure",
+     "obs_ids": [],
+     "reads": null,
+     "score": null,
+     "used": 0,
+     "what": "The software and know-how that keep tens of thousands of chips working on one training run without wasting them.",
+     "withheld": {
+      "because": "Epoch publishes how fully some training runs used their chips, but this site does not read that column yet.",
+      "kind": "not_read_yet"
+     },
+     "word": null
+    },
+    {
+     "at_ceiling": false,
+     "ceiling": 85,
+     "ceiling_rationale": null,
+     "confidence": null,
+     "defined": 1,
+     "factors": null,
+     "gauges": [
+      {
+       "age_days": null,
+       "grade": null,
+       "id": "frontier_compute_growth",
+       "knots": null,
+       "label": "Growth in the computing power behind the largest model",
+       "log10": false,
+       "max_age_days": null,
+       "pinned": null,
+       "points": null,
+       "reading": null,
+       "required": true,
+       "scale_rationale": null,
+       "unavailable": "unfed",
+       "unfed": {
+        "because": "The largest training run on Epoch's list of frontier models is still its own estimate for xAI's Grok model of July 2025. Labs no longer disclose this figure and Epoch has not yet estimated newer models, so a record that stands still says nothing about whether growth has stopped.",
+        "kind": "gauge_unsound"
+       },
+       "unit": null,
+       "weight": 0.45
+      }
+     ],
+     "hatched": false,
+     "id": "pretraining",
+     "kind": "know_how",
+     "n": 13,
+     "name": "Building frontier models",
+     "obs_ids": [],
+     "reads": null,
+     "score": null,
+     "used": 0,
+     "what": "The labs that train the largest models, such as OpenAI, Anthropic, Google DeepMind, xAI and Meta.",
+     "withheld": {
+      "because": "The largest training run on Epoch's list of frontier models is still its own estimate for xAI's Grok model of July 2025. Labs no longer disclose this figure and Epoch has not yet estimated newer models, so a record that stands still says nothing about whether growth has stopped.",
+      "kind": "gauge_unsound"
+     },
+     "word": null
+    },
+    {
+     "at_ceiling": false,
+     "ceiling": 40,
+     "ceiling_rationale": null,
+     "confidence": null,
+     "defined": 0,
+     "factors": null,
+     "gauges": [],
+     "hatched": false,
+     "id": "post_training",
+     "kind": "know_how",
+     "n": 14,
+     "name": "Post-training",
+     "obs_ids": [],
+     "reads": null,
+     "score": null,
+     "used": 0,
+     "what": "Everything done to a model after its first training to make it useful, including practice tasks with automatic graders and feedback from experts.",
+     "withheld": {
+      "because": "Nobody publishes what this work costs or how long buyers wait for it. This site counts the sellers and keeps a tally of disclosed deals, which says the business exists, not whether it is short.",
+      "kind": "no_public_series"
+     },
+     "word": null
+    },
+    {
+     "at_ceiling": false,
+     "ceiling": 30,
+     "ceiling_rationale": null,
+     "confidence": null,
+     "defined": 0,
+     "factors": null,
+     "gauges": [],
+     "hatched": false,
+     "id": "continual_learning",
+     "kind": "know_how",
+     "n": 15,
+     "name": "Continual learning",
+     "obs_ids": [],
+     "reads": null,
+     "score": null,
+     "used": 0,
+     "what": "Getting a model to keep learning from its use after release without forgetting what it knew.",
+     "withheld": {
+      "because": "No public test measures whether a model keeps learning after release. This site tracks what vendors claim, which is not a measure of scarcity.",
+      "kind": "no_public_series"
+     },
+     "word": null
+    },
+    {
+     "at_ceiling": false,
+     "ceiling": 90,
+     "ceiling_rationale": "Kept from the prototype: list prices are observed, not estimated.",
+     "confidence": 72,
+     "defined": 3,
+     "factors": {
+      "coverage": 0.45,
+      "freshness": 1.0,
+      "source": 0.9
+     },
+     "gauges": [
+      {
+       "age_days": 0,
+       "grade": "B",
+       "id": "basket_price",
+       "knots": [
+        [
+         0.5,
+         12
+        ],
+        [
+         2,
+         32
+        ],
+        [
+         8,
+         55
+        ],
+        [
+         32,
+         78
+        ],
+        [
+         128,
+         92
+        ]
+       ],
+       "label": "Cheapest model in the basket",
+       "log10": true,
+       "max_age_days": 7,
+       "pinned": "low",
+       "points": 12,
+       "reading": {
+        "as_of": "2026-09-10",
+        "href": "/query",
+        "obs_ids": [
+         "68b78be76d6c7dac"
+        ],
+        "unit": "USD",
+        "value": 0.39999999999999997
+       },
+       "required": true,
+       "scale_rationale": "Read on a scale where each knot is four times the last, because this price has fallen by whole multiples, not by percentages. Below about a dollar for a million tokens of output (a token is a word or a piece of one), the cost of running a model stops deciding what gets built; at thirty times that, cost is the limit on what products are possible. The reading is the price list as last fetched, so its age runs from the last successful fetch.",
+       "unavailable": null,
+       "unfed": null,
+       "unit": "USD",
+       "weight": 0.45
+      },
+      {
+       "age_days": null,
+       "grade": null,
+       "id": "price_trend",
+       "knots": null,
+       "label": "Change in that price over a month",
+       "log10": false,
+       "max_age_days": null,
+       "pinned": null,
+       "points": null,
+       "reading": null,
+       "required": false,
+       "scale_rationale": null,
+       "unavailable": "unfed",
+       "unfed": {
+        "because": "A month's change needs a month of price history, and this store's began in September of 2026.",
+        "kind": "not_read_yet"
+       },
+       "unit": null,
+       "weight": 0.25
+      },
+      {
+       "age_days": null,
+       "grade": null,
+       "id": "rental_availability",
+       "knots": null,
+       "label": "Chips available to rent",
+       "log10": false,
+       "max_age_days": null,
+       "pinned": null,
+       "points": null,
+       "reading": null,
+       "required": false,
+       "scale_rationale": null,
+       "unavailable": "unfed",
+       "unfed": {
+        "because": "The one free feed of chips for rent returns a fixed page of offers, so counting them measures the page, not the market.",
+        "kind": "gauge_unsound"
+       },
+       "unit": null,
+       "weight": 0.15
+      }
+     ],
+     "hatched": false,
+     "id": "inference",
+     "kind": "supply",
+     "n": 16,
+     "name": "Running models",
+     "obs_ids": [
+      "68b78be76d6c7dac"
+     ],
+     "reads": "The price, in dollars for a million tokens of output, of the cheapest model among a named basket of flagship models on one marketplace. A token is a word or a piece of one. One vendor sets it.",
+     "score": 12,
+     "used": 1,
+     "what": "Serving a trained model to users, which the industry calls inference.",
+     "withheld": null,
+     "word": "slack"
+    },
+    {
+     "at_ceiling": false,
+     "ceiling": 45,
+     "ceiling_rationale": null,
+     "confidence": null,
+     "defined": 1,
+     "factors": null,
+     "gauges": [
+      {
+       "age_days": null,
+       "grade": null,
+       "id": "price_dispersion",
+       "knots": null,
+       "label": "How widely model prices are spread",
+       "log10": false,
+       "max_age_days": null,
+       "pinned": null,
+       "points": null,
+       "reading": null,
+       "required": false,
+       "scale_rationale": null,
+       "unavailable": "unfed",
+       "unfed": {
+        "because": "The spread of list prices is set almost entirely by one very expensive model, so it says nothing dependable about how much a router can save.",
+        "kind": "gauge_unsound"
+       },
+       "unit": null,
+       "weight": 0.4
+      }
+     ],
+     "hatched": false,
+     "id": "routing",
+     "kind": "know_how",
+     "n": 17,
+     "name": "Routing between models",
+     "obs_ids": [],
+     "reads": null,
+     "score": null,
+     "used": 0,
+     "what": "Services that send each request to whichever model is cheapest or best for it.",
+     "withheld": {
+      "because": "The spread of list prices is set almost entirely by one very expensive model, so it says nothing dependable about how much a router can save.",
+      "kind": "gauge_unsound"
+     },
+     "word": null
+    },
+    {
+     "at_ceiling": false,
+     "ceiling": 35,
+     "ceiling_rationale": null,
+     "confidence": null,
+     "defined": 0,
+     "factors": null,
+     "gauges": [],
+     "hatched": false,
+     "id": "evaluations",
+     "kind": "know_how",
+     "n": 18,
+     "name": "Tests and evaluations",
+     "obs_ids": [],
+     "reads": null,
+     "score": null,
+     "used": 0,
+     "what": "The benchmarks and testing firms that say what a model can do.",
+     "withheld": {
+      "because": "This site holds many benchmark scores, but none of them measures whether good testing is itself in short supply.",
+      "kind": "no_public_series"
+     },
+     "word": null
+    },
+    {
+     "at_ceiling": false,
+     "ceiling": 50,
+     "ceiling_rationale": null,
+     "confidence": null,
+     "defined": 1,
+     "factors": null,
+     "gauges": [
+      {
+       "age_days": null,
+       "grade": null,
+       "id": "tool_capable_share",
+       "knots": null,
+       "label": "Share of models that can use tools",
+       "log10": false,
+       "max_age_days": null,
+       "pinned": null,
+       "points": null,
+       "reading": null,
+       "required": false,
+       "scale_rationale": null,
+       "unavailable": "unfed",
+       "unfed": {
+        "because": "The marketplace lists which models can use tools, but this site stores only their prices.",
+        "kind": "not_read_yet"
+       },
+       "unit": null,
+       "weight": 0.3
+      }
+     ],
+     "hatched": false,
+     "id": "agents",
+     "kind": "know_how",
+     "n": 19,
+     "name": "Agents and tool use",
+     "obs_ids": [],
+     "reads": null,
+     "score": null,
+     "used": 0,
+     "what": "Models that carry out tasks by using software tools, for minutes or hours at a time.",
+     "withheld": {
+      "because": "The marketplace lists which models can use tools, but this site stores only their prices.",
+      "kind": "not_read_yet"
+     },
+     "word": null
+    },
+    {
+     "at_ceiling": false,
+     "ceiling": 50,
+     "ceiling_rationale": null,
+     "confidence": null,
+     "defined": 0,
+     "factors": null,
+     "gauges": [],
+     "hatched": false,
+     "id": "training_data",
+     "kind": "supply",
+     "n": 20,
+     "name": "Training data",
+     "obs_ids": [],
+     "reads": null,
+     "score": null,
+     "used": 0,
+     "what": "Text written or checked by paid experts, generated data, and licensed archives.",
+     "withheld": {
+      "because": "Sellers' revenues, which this site tracks from press reports, show activity. Nobody publishes prices or waiting times, which are what scarcity would show up in.",
+      "kind": "no_public_series"
+     },
+     "word": null
+    },
+    {
+     "at_ceiling": false,
+     "ceiling": 45,
+     "ceiling_rationale": null,
+     "confidence": null,
+     "defined": 0,
+     "factors": null,
+     "gauges": [],
+     "hatched": false,
+     "id": "deployment_platforms",
+     "kind": "supply",
+     "n": 21,
+     "name": "Deployment platforms",
+     "obs_ids": [],
+     "reads": null,
+     "score": null,
+     "used": 0,
+     "what": "Companies that host and run models for other businesses.",
+     "withheld": {
+      "because": "No public series separates these platforms' capacity from the cost of running models, which the row for running models reads.",
+      "kind": "no_public_series"
+     },
+     "word": null
+    },
+    {
+     "at_ceiling": false,
+     "ceiling": 60,
+     "ceiling_rationale": null,
+     "confidence": null,
+     "defined": 0,
+     "factors": null,
+     "gauges": [],
+     "hatched": false,
+     "id": "applications",
+     "kind": "money",
+     "n": 22,
+     "name": "Applications",
+     "obs_ids": [],
+     "reads": null,
+     "score": null,
+     "used": 0,
+     "what": "The products people and companies use, from coding assistants to legal and medical tools.",
+     "withheld": {
+      "because": "Most of these companies are private, and too few publish their finances to say how hard money is for them to raise.",
+      "kind": "no_public_series"
+     },
+     "word": null
+    },
+    {
+     "at_ceiling": false,
+     "ceiling": 80,
+     "ceiling_rationale": "Kept from the prototype: filed figures, the best evidence on the card, but one gauge.",
+     "confidence": 72,
+     "defined": 1,
+     "factors": {
+      "coverage": 0.59,
+      "freshness": 0.68,
+      "source": 0.9
+     },
+     "gauges": [
+      {
+       "age_days": 83,
+       "grade": "B",
+       "id": "capex_growth",
+       "knots": [
+        [
+         -0.2,
+         92
+        ],
+        [
+         0.0,
+         72
+        ],
+        [
+         0.2,
+         50
+        ],
+        [
+         0.5,
+         28
+        ],
+        [
+         1.0,
+         12
+        ]
+       ],
+       "label": "Growth in the largest builders' spending",
+       "log10": false,
+       "max_age_days": 200,
+       "pinned": null,
+       "points": 18,
+       "reading": {
+        "as_of": "2026-06-30",
+        "href": "/query",
+        "obs_ids": [
+         "027237d89717d303",
+         "02cd9c6c8be6294e",
+         "0b3b7c04c602d791",
+         "0d4c08bd4c8d676f",
+         "196a6174924b2821",
+         "22f1089618415146",
+         "29221e0928c0242d",
+         "2ae407dac517d1b4",
+         "2f666320753d9925",
+         "32e64259c1e4e50d",
+         "37011deae1bc7f27",
+         "390ce991d51355e3",
+         "416fff663e911055",
+         "4dc8ee6d073b8430",
+         "56bbd6095db8cd50",
+         "62c15a189c85b219",
+         "63f00590a394882c",
+         "6ce68ef4458d01e8",
+         "75543ae9e018ed01",
+         "7beca16f8e97e38a",
+         "8065a41f15722c18",
+         "8b365444d28ae498",
+         "8e8f93b71a707eaf",
+         "8f56415d4215a050",
+         "9175ae9b2ac0af90",
+         "9ed913072660dffd",
+         "a6e80dc3975f1268",
+         "aa9108fb71b5dbf3",
+         "b965137f0c59e1db",
+         "c2b3a023a57c6672",
+         "c2c40a32f6af336b",
+         "c3dc9a8eb030c5c7",
+         "ca1e24ce18cc78e4",
+         "ccc7b379ab5ac2f2",
+         "cfb9de6ad89c59cc",
+         "d0aab6e876c0d174",
+         "d2f98ef9a6eab885",
+         "d4b7a1f4bb171ba8",
+         "d8cce3657e064a83",
+         "e917679d8ad7817e",
+         "ee8e059d6b7db9a1",
+         "f2df3324fcaa3dd6",
+         "f40379629b22656f",
+         "f77a3da7ccf46854",
+         "f87fbd907ad6c419",
+         "f8dcd682b518ca4d"
+        ],
+        "unit": "share",
+        "value": 0.8120001023790329
+       },
+       "required": false,
+       "scale_rationale": "Runs backwards, and reads how plentiful money is, not whether it is well spent. Flat or falling spending means the money has turned and financing is what holds the build-out back. Spending that grows by half or more in a year means money is plentiful. The reading is a total over four quarters, so it turns about two quarters after a single quarter would.",
+       "unavailable": null,
+       "unfed": null,
+       "unit": "share",
+       "weight": 0.5
+      }
+     ],
+     "hatched": false,
+     "id": "capital",
+     "kind": "money",
+     "n": 23,
+     "name": "Capital",
+     "obs_ids": [
+      "027237d89717d303",
+      "02cd9c6c8be6294e",
+      "0b3b7c04c602d791",
+      "0d4c08bd4c8d676f",
+      "196a6174924b2821",
+      "22f1089618415146",
+      "29221e0928c0242d",
+      "2ae407dac517d1b4",
+      "2f666320753d9925",
+      "32e64259c1e4e50d",
+      "37011deae1bc7f27",
+      "390ce991d51355e3",
+      "416fff663e911055",
+      "4dc8ee6d073b8430",
+      "56bbd6095db8cd50",
+      "62c15a189c85b219",
+      "63f00590a394882c",
+      "6ce68ef4458d01e8",
+      "75543ae9e018ed01",
+      "7beca16f8e97e38a",
+      "8065a41f15722c18",
+      "8b365444d28ae498",
+      "8e8f93b71a707eaf",
+      "8f56415d4215a050",
+      "9175ae9b2ac0af90",
+      "9ed913072660dffd",
+      "a6e80dc3975f1268",
+      "aa9108fb71b5dbf3",
+      "b965137f0c59e1db",
+      "c2b3a023a57c6672",
+      "c2c40a32f6af336b",
+      "c3dc9a8eb030c5c7",
+      "ca1e24ce18cc78e4",
+      "ccc7b379ab5ac2f2",
+      "cfb9de6ad89c59cc",
+      "d0aab6e876c0d174",
+      "d2f98ef9a6eab885",
+      "d4b7a1f4bb171ba8",
+      "d8cce3657e064a83",
+      "e917679d8ad7817e",
+      "ee8e059d6b7db9a1",
+      "f2df3324fcaa3dd6",
+      "f40379629b22656f",
+      "f77a3da7ccf46854",
+      "f87fbd907ad6c419",
+      "f8dcd682b518ca4d"
+     ],
+     "reads": "How fast Microsoft, Alphabet, Amazon, Meta and Oracle are raising their spending on buildings and equipment, over the past four quarters against the four before.",
+     "score": 18,
+     "used": 1,
+     "what": "The money behind all of it, above all the spending of the five largest builders of data centres.",
+     "withheld": null,
+     "word": "slack"
+    }
+   ],
+   "kinds": [
+    {
+     "id": "supply",
+     "name": "Supply",
+     "tight_means": "Tight means the thing itself is hard to get: supply is growing slowly, a few buyers take most of it, or far more is promised than built."
+    },
+    {
+     "id": "know_how",
+     "name": "Know-how",
+     "tight_means": "Tight means few people or firms can do it well yet, so skill rather than material is what is short."
+    },
+    {
+     "id": "money",
+     "name": "Money",
+     "tight_means": "Tight means money is hard to raise. Slack means it is plentiful, which is not the same as well spent."
+    }
+   ],
+   "method": {
+    "confidence_floor": 20,
+    "confidence_floor_rationale": "A backstop. A score this weakly supported would mislead, so it is withheld. Under these weights the coverage rule usually withholds an input first.",
+    "epoch_quarterly_rationale": "The limit on Epoch's quarterly chip gauges is set by the publisher's calendar. When Epoch last updated its chip-components file, the newest complete quarter in it was already more than two quarters old. This site has read only that one version, so it cannot yet say how often a newer quarter arrives. Its chip-sales file lists newer quarters, but only for some designers, and a share or a total across designers is read only from a quarter in which every designer reported. A tighter limit would drop every one of these gauges for no reason but that calendar; this one admits a complete quarter until it is about ten months old and drops the gauge after that, until a newer complete quarter arrives.",
+    "factor_floor": 0.05,
+    "grade_quality": {
+     "A": 1.0,
+     "B": 0.9,
+     "C": 0.75,
+     "D": 0.5
+    },
+    "grade_quality_rationale": "An editorial table, not a measurement: it turns the site's evidence grade for a gauge's weakest input into a factor between nought and one. An audited annual filing counts in full; a quarterly filing, which is a company's own unaudited statement, counts for nine tenths, and a gauge takes the grade of its weakest row, so a total over four quarters is graded as a quarterly filing. A respected group's estimate, which is what most of these gauges rest on, counts for three quarters.",
+    "half_life_ratio": 0.75,
+    "half_life_rationale": "Freshness halves each time a reading ages by three quarters of its gauge's age limit, so a reading at its limit still counts for about two fifths and one past it is dropped.",
+    "hatch_rationale": "A bar is hatched when its confidence is low. With these weights that happens only where an input's ceiling is set low, which is done on purpose for scores that rest on a stand-in.",
+    "hatch_under": 45,
+    "min_coverage": 0.35,
+    "min_coverage_rationale": "An input scores only when at least about a third of its intended evidence has a usable reading.",
+    "reasons": {
+     "confidence": "The evidence behind it is too weak to show a score.",
+     "coverage": "Too little of its intended evidence has a usable reading today.",
+     "nothing": "None of its gauges has a usable reading today: each is missing or older than its age limit.",
+     "required": "The gauge this input depends on has no usable reading today."
+    },
+    "weights": {
+     "coverage": 0.28,
+     "freshness": 0.2,
+     "source": 0.29
+    },
+    "weights_rationale": "Because the three are multiplied, one weak factor drags the whole figure down. Coverage and source quality count most, and about equally, because a score resting on a small part of the intended evidence, or on a weak source, is the easiest to misread; freshness counts least. The prototype also weighed the width of each source's error range and the agreement between news reports; this store carries neither, so those are left out and the rest are rescaled.",
+    "words": [
+     [
+      80,
+      "severe"
+     ],
+     [
+      60,
+      "tight"
+     ],
+     [
+      40,
+      "moderate"
+     ],
+     [
+      20,
+      "easing"
+     ],
+     [
+      0,
+      "slack"
+     ]
+    ]
+   },
+   "scored": {
+    "as_of": "2026-09-21",
+    "href": "/methodology#tightness",
+    "obs_ids": [
+     "00d887f89f3712c7",
+     "00f68c80c7d9f20f",
+     "022ae02a52223194",
+     "022d95069a720995",
+     "027237d89717d303",
+     "02cd9c6c8be6294e",
+     "02ef5dccb2928569",
+     "0b3b7c04c602d791",
+     "0ca108158d9f8f0f",
+     "0d4c08bd4c8d676f",
+     "10ac4ce15c476fa4",
+     "1106de7d7bc444c6",
+     "12b4b08147e58a60",
+     "13742771ff36f9e8",
+     "15049fc6cfd25493",
+     "161ea4fdafd90a75",
+     "196a6174924b2821",
+     "1b37a50700e2161b",
+     "1b3fb80ea1cb5f7d",
+     "1c4820ae9106f46e",
+     "1f58e1bc5f6e291c",
+     "1fdbef3268e75a56",
+     "2024049882e26760",
+     "206ca5fa349ea6a6",
+     "22f1089618415146",
+     "27fd3c4783a02b89",
+     "28df34c0d3bcaf2b",
+     "29221e0928c0242d",
+     "292ed5fb2fdb0b6e",
+     "2966fd74c1ccb7f4",
+     "2a0d8237fc8626eb",
+     "2ae407dac517d1b4",
+     "2cb839e376bb8a98",
+     "2ce5f9b301603c4c",
+     "2e880a726f281667",
+     "2f666320753d9925",
+     "2feb92d7453ddf35",
+     "3124cea47760f49d",
+     "31aefba38b2b34fd",
+     "31bd3684b319cf1e",
+     "31d6bac891c545cc",
+     "3296d54c08c3b393",
+     "32e64259c1e4e50d",
+     "336cf07d2db77117",
+     "36344141bcbfa20d",
+     "37011deae1bc7f27",
+     "37cdf3a232ce9757",
+     "37d25593fbacacb4",
+     "390ce991d51355e3",
+     "3918686e84cafd5d",
+     "399214e48a15bb19",
+     "3a5b99a673a20fdd",
+     "3b03cfd583f58d74",
+     "3b6cabe10efe4e9f",
+     "3c78e4d11f6ddb21",
+     "3e2681677c0c07fe",
+     "3f2aa13f54948de5",
+     "416fff663e911055",
+     "41a94ad91b715aef",
+     "42425975f77f09e9",
+     "4242fdcd0f30ce32",
+     "424e0d2570b79bd2",
+     "4302388488cddd1a",
+     "43755ec6abf2a270",
+     "441605f18f26a5a3",
+     "4424f8477ba888b7",
+     "47f8f52e35497824",
+     "4a1a4245ff4e0d73",
+     "4dc8ee6d073b8430",
+     "4e879bcc474ba549",
+     "50f57febb7bb7882",
+     "54b6367999be3a4e",
+     "56bbd6095db8cd50",
+     "5740d307f80606f4",
+     "57af1c5c84145f14",
+     "57b5247c0441881e",
+     "5898dc9a94fcb72e",
+     "5b423d50cc2aa63a",
+     "5b9d98976d73f501",
+     "5c020df4dbb8fc06",
+     "5c17f72b2868f1fa",
+     "5e57b43bf5575466",
+     "5f67abf56d5838f5",
+     "5fd4dd2247a33893",
+     "60100cb32cbbe351",
+     "603f7928054271b6",
+     "62c15a189c85b219",
+     "63f00590a394882c",
+     "65b2615f3059b8e1",
+     "68b78be76d6c7dac",
+     "69252633511d47ab",
+     "6b3967693d44ccb4",
+     "6ba82593402f9cc4",
+     "6ce68ef4458d01e8",
+     "705da127ca860e6d",
+     "73dff0f078e4fc0c",
+     "750bc73995ede42b",
+     "75543ae9e018ed01",
+     "7672c985ddbb80c9",
+     "76bf915626395e59",
+     "77a0ee4619717aa3",
+     "78783a1bec024ccc",
+     "78e284563f3b0fb9",
+     "79f784b1e4135bb4",
+     "7ac29042806ef827",
+     "7beca16f8e97e38a",
+     "7c102a3d9d6129c9",
+     "7e951b9d74733988",
+     "7fcebe0c32512dc6",
+     "80297d8996fde2c9",
+     "8065a41f15722c18",
+     "81bff0f507d694e9",
+     "82074aaa491ae53b",
+     "824cc490abc85658",
+     "83fc6986a1630d10",
+     "84e7ab23a3a27c43",
+     "84e885b4b682d688",
+     "87fd8c4e1e099fb0",
+     "89da903de73c0a4c",
+     "89ffc8964fc23aa5",
+     "8a5bf43f0a36a8fd",
+     "8ab3459c38a143b5",
+     "8b365444d28ae498",
+     "8c34260b78c46dfb",
+     "8df0aef0848ff0a3",
+     "8e57ab916181d18a",
+     "8e74957860871299",
+     "8e8f93b71a707eaf",
+     "8f30bd5f73b76d32",
+     "8f56415d4215a050",
+     "8fd5f06222d9d2b7",
+     "910c482537c4fb9d",
+     "9161cb49b570d659",
+     "9175ae9b2ac0af90",
+     "92b2a60d1165394d",
+     "93093d59651f2543",
+     "94466b4641c6407a",
+     "981ea76b815308e5",
+     "99c240b213ee2359",
+     "9ed913072660dffd",
+     "a1a57bcef19f5af8",
+     "a24fedb2c340a66c",
+     "a64e867ec70fc7a0",
+     "a68f5da0d9e6bc57",
+     "a6dd53e2b2aa636d",
+     "a6e80dc3975f1268",
+     "aa9108fb71b5dbf3",
+     "ab93346fc845a8c8",
+     "ad6ed67013b7d1ab",
+     "af053555458a0c2f",
+     "b0a43bea2a141efd",
+     "b965137f0c59e1db",
+     "b9cb1eda27a95eb3",
+     "ba968a41e3ff2e68",
+     "bc1ca2c5c28aee17",
+     "bf00b162da411612",
+     "bf16b5cf84a172e5",
+     "bfef2930067d7973",
+     "c193a6dfe9f40950",
+     "c247d8f86ac0f51f",
+     "c2b3a023a57c6672",
+     "c2c40a32f6af336b",
+     "c32215464bcb0e24",
+     "c3c37d195b9ef601",
+     "c3dc9a8eb030c5c7",
+     "c5d37dff46af5583",
+     "c6e993ba215a7f64",
+     "ca0d7fa32345d95c",
+     "ca1e24ce18cc78e4",
+     "ca57c2ebafb4e940",
+     "cb6ae7137a1c62d0",
+     "cbc49a25e497ccf7",
+     "ccc7b379ab5ac2f2",
+     "cfb9de6ad89c59cc",
+     "d0aab6e876c0d174",
+     "d0d1705763f944a5",
+     "d29860483000ace5",
+     "d2f98ef9a6eab885",
+     "d393cf6208c043da",
+     "d4b7a1f4bb171ba8",
+     "d7c42b66838b2d88",
+     "d83a3353e02b94d1",
+     "d8cce3657e064a83",
+     "d91a5af82945b8bc",
+     "da2a2b98b39d1db4",
+     "df139486611fb934",
+     "e23bff1aacc7a2d7",
+     "e34a7fb5fe644a7f",
+     "e488feafb4588327",
+     "e917679d8ad7817e",
+     "e95523e7de1e6074",
+     "ec5099dcb0c51abc",
+     "ecca6a5c1dddfa29",
+     "ed847c0b44085840",
+     "ee8e059d6b7db9a1",
+     "f2df3324fcaa3dd6",
+     "f40379629b22656f",
+     "f4ec7412f5b8e4c7",
+     "f5f878d6f616f2f9",
+     "f6026e7368a6d775",
+     "f6102c632d05f6d2",
+     "f6ba386254d8b199",
+     "f6e538aebb094189",
+     "f758d0b0cd8f4d68",
+     "f77a3da7ccf46854",
+     "f87fbd907ad6c419",
+     "f8dcd682b518ca4d",
+     "fadd5c888dc04e6d"
+    ],
+    "unit": "count",
+    "value": 8
+   },
+   "total": 23
+  }
+ },
  "phase": {
   "as_of": "2026-06-30",
   "history": [

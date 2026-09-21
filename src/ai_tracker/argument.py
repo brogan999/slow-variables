@@ -15,6 +15,7 @@ if TYPE_CHECKING:
     from .store import Store
 
 SPEC = Path("seed/argument.yaml")
+TIGHTNESS = Path("seed/tightness.yaml")
 ESSAYS = {"home": Path("docs/argument/home.md"), "full": Path("docs/argument/full.md")}
 PLATES = {"clocks", "perez", "stack"}
 TOKEN = re.compile(r"\[(fact|plate):([a-z0-9_]+)\]")
@@ -229,10 +230,188 @@ def essay_shape(text: str) -> list[str]:
     return bad
 
 
-def build(s: Store) -> dict[str, Any]:
+def _age(s: Store, as_of: date, today: date, fetched_from: str | None = None) -> int:
+    """Whole days since a reading was current. A series of change points (a price list) is as fresh as its source's
+    last successful fetch, not as old as the last change."""
+    ok = [x.finished_at.date() for x in s.fetchlog if fetched_from and x.source_id == fetched_from and x.ok]
+    return max(0, (today - max([as_of, *ok])).days)
+
+
+def _worst_grade(s: Store, ids: list[str]) -> str:
+    from .store import _grade
+
+    rows = s.con.execute(
+        "SELECT DISTINCT tier, audited_vs_reported FROM observations WHERE id IN (SELECT unnest(?))", [ids]
+    ).fetchall()
+    return max((_grade({"tier": t, "audited_vs_reported": b}) for t, b in rows), default="D")
+
+
+def scorecard(s: Store, today: date) -> dict[str, Any]:
+    """The tightness scorecard: every gauge's newest metric reading, scored by analysis/tightness.py."""
+    from .analysis.tightness import half_up, score_input
+
+    spec = yaml.safe_load(TIGHTNESS.read_text())
+    rules, inputs, all_ids, newest = spec["rules"], [], set(), []
+    for inp in spec["inputs"]:
+        readings, shown = {}, {}
+        for g in inp.get("gauges") or []:
+            rows = s.derived_for(g["metric"], g.get("dims")) if "metric" in g else []
+            if not rows:
+                continue
+            d = rows[-1]
+            age = _age(s, d.as_of_date, today, g.get("fetched_from"))
+            grade = _worst_grade(s, d.input_observation_ids)
+            readings[g["id"]] = {"x": d.value, "age": age, "grade": grade}
+            shown[g["id"]] = {
+                "reading": {
+                    "value": d.value,
+                    "unit": s.metric_spec(g["metric"]).get("unit"),
+                    "as_of": min(d.as_of_date, today).isoformat(),
+                    "obs_ids": d.input_observation_ids,
+                    "href": _metric_href(s, g["metric"]),
+                },
+                "age_days": age,
+                "grade": grade,
+            }
+        r = score_input(inp, readings, rules)
+        used = {g["id"] for g in r["gauges"] if g["points"] is not None}
+        ids = sorted({i for k in used for i in shown[k]["reading"]["obs_ids"]})
+        unfed = [g["unfed"] for g in inp.get("gauges") or [] if "unfed" in g]
+        if r["withheld"] is None:
+            why = None
+            all_ids.update(ids)
+            newest += [shown[k]["reading"]["as_of"] for k in used]
+        elif "withheld" in inp:
+            why = inp["withheld"]
+        elif unfed and len(unfed) == len(inp["gauges"]):  # no gauge here has a metric: the seed's own reasons
+            why = {"kind": unfed[0]["kind"], "because": " ".join(u["because"] for u in unfed)}
+        else:
+            why = {"kind": "stale_or_thin", "because": rules["reasons"][r["withheld"]]}
+        gauges = []
+        for g, row in zip(inp.get("gauges") or [], r["gauges"]):
+            gauges.append(
+                {
+                    **{
+                        k: g.get(k)
+                        for k in (
+                            "id",
+                            "label",
+                            "weight",
+                            "max_age_days",
+                            "knots",
+                            "scale_rationale",
+                            "unfed",
+                        )
+                    },
+                    "required": bool(g.get("required")),
+                    "log10": bool(g.get("log10")),
+                    "unit": s.metric_spec(g.get("metric")).get("unit"),
+                    "reading": None,
+                    "age_days": None,
+                    "grade": None,
+                    **shown.get(g["id"], {}),
+                    "points": None if row["points"] is None else half_up(row["points"]),
+                    "pinned": row["pinned"],
+                    "unavailable": row["unavailable"],
+                }
+            )
+        inputs.append(
+            {
+                **{
+                    k: inp.get(k)
+                    for k in ("id", "n", "name", "kind", "what", "reads", "ceiling", "ceiling_rationale")
+                },
+                **{
+                    k: r[k]
+                    for k in (
+                        "score",
+                        "word",
+                        "confidence",
+                        "at_ceiling",
+                        "hatched",
+                        "used",
+                        "defined",
+                        "factors",
+                    )
+                },
+                "obs_ids": ids if r["withheld"] is None else [],
+                "withheld": why,
+                "gauges": gauges,
+            }
+        )
+    n = sum(1 for i in inputs if i["score"] is not None)
+    return {
+        "kinds": spec["kinds"],
+        "inputs": inputs,
+        "scored": {
+            "value": n or None,  # no score anywhere is a gap, never a zero with nothing behind it
+            "unit": "count",
+            "as_of": max(newest, default=None),
+            "obs_ids": sorted(all_ids),
+            "href": "/methodology#tightness",
+        },
+        "total": len(inputs),
+        "method": rules,
+    }
+
+
+def tightness_problems(s: Store, today: date) -> tuple[list[str], list[str]]:
+    spec = yaml.safe_load(TIGHTNESS.read_text())
+    errors, notes = [], []
+    kinds = {k["id"] for k in spec["kinds"]}
+    for inp in spec["inputs"]:
+        where = f"tightness: {inp['id']}"
+        if inp["kind"] not in kinds:
+            errors.append(f"{where} has an unknown kind")
+        if not inp.get("gauges") and len((inp.get("withheld") or {}).get("because", "")) < 40:
+            errors.append(f"{where} has no gauges and no sentence saying why it is withheld")
+        if any("metric" in g for g in inp.get("gauges") or []) and len(inp.get("ceiling_rationale", "")) < 40:
+            errors.append(f"{where} scores without a ceiling rationale")
+        for g in inp.get("gauges") or []:
+            if not 0 < g["weight"] <= 1:
+                errors.append(f"{where}.{g['id']} has a weight outside (0, 1]")
+            if "unfed" in g:
+                if len(g["unfed"].get("because", "")) < 40:
+                    errors.append(f"{where}.{g['id']} is unfed without a sentence saying why")
+                continue
+            if not s.metric_spec(g["metric"]):
+                errors.append(f"{where}.{g['id']} names unknown metric {g['metric']}")
+            xs, ps = [k[0] for k in g["knots"]], [k[1] for k in g["knots"]]
+            rising, falling = ps == sorted(ps), ps == sorted(ps, reverse=True)
+            if (
+                len(xs) < 3
+                or xs != sorted(set(xs))
+                or not (rising or falling)
+                or not all(0 <= p <= 100 for p in ps)
+            ):
+                errors.append(f"{where}.{g['id']} has a malformed scale")
+            if len(g.get("scale_rationale", "")) < 40:
+                errors.append(f"{where}.{g['id']} has no scale rationale")
+    if errors:
+        return errors, []
+    lost = []
+    for i in scorecard(s, today)["inputs"]:
+        fed = [g for g in i["gauges"] if g["unfed"] is None]
+        if i["score"] is None and fed:
+            why = [f"{g['id']} {g['unavailable']}" for g in fed if g["unavailable"]]
+            lost.append(i["id"] + (f" ({', '.join(why)})" if why else ""))
+        for g in fed if i["score"] is not None else []:
+            if g["unavailable"] is None and g["age_days"] > 0.9 * g["max_age_days"]:
+                last = today + timedelta(days=g["max_age_days"] - g["age_days"])
+                notes.append(f"tightness: {i['id']}.{g['id']} passes its age limit after {last.isoformat()}")
+    if (
+        lost
+    ):  # one line however many: after a publisher's quiet spell this would otherwise print nightly per input
+        notes.append("tightness: inputs with a gauge and no score: " + "; ".join(lost))
+    return [], notes
+
+
+def build(s: Store, today: date | None = None) -> dict[str, Any]:
     spec = load()
     f = facts(s, spec)
+    today = today or date.today()
     return {
+        "migration": {"scorecard": scorecard(s, today)},
         "as_of": max((x["as_of"] for x in f.values() if x), default=None),
         "essay": {k: p.read_text() for k, p in ESSAYS.items()},
         "facts": f,
@@ -298,4 +477,7 @@ def problems(s: Store) -> tuple[list[str], list[str]]:
             notes.append(
                 f"argument: the essays say {k} reads {w}, but it now reads {got.get(k)}; rewrite them"
             )
+    t_errors, t_notes = tightness_problems(s, date.today())
+    errors += t_errors
+    notes += t_notes
     return errors, notes
