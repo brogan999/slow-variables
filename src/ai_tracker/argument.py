@@ -283,7 +283,7 @@ def scorecard(s: Store, today: date) -> dict[str, Any]:
             newest += [shown[k]["reading"]["as_of"] for k in used]
         elif "withheld" in inp:
             why = inp["withheld"]
-        elif unfed and not readings:
+        elif unfed and len(unfed) == len(inp["gauges"]):  # no gauge here has a metric: the seed's own reasons
             why = {"kind": unfed[0]["kind"], "because": " ".join(u["because"] for u in unfed)}
         else:
             why = {"kind": "stale_or_thin", "because": rules["reasons"][r["withheld"]]}
@@ -305,6 +305,7 @@ def scorecard(s: Store, today: date) -> dict[str, Any]:
                     },
                     "required": bool(g.get("required")),
                     "log10": bool(g.get("log10")),
+                    "unit": s.metric_spec(g.get("metric")).get("unit"),
                     "reading": None,
                     "age_days": None,
                     "grade": None,
@@ -364,7 +365,7 @@ def tightness_problems(s: Store, today: date) -> tuple[list[str], list[str]]:
             errors.append(f"{where} has an unknown kind")
         if not inp.get("gauges") and len((inp.get("withheld") or {}).get("because", "")) < 40:
             errors.append(f"{where} has no gauges and no sentence saying why it is withheld")
-        if any("metric" in g for g in inp.get("gauges") or []) and len(inp.get("ceiling_rationale", "")) < 20:
+        if any("metric" in g for g in inp.get("gauges") or []) and len(inp.get("ceiling_rationale", "")) < 40:
             errors.append(f"{where} scores without a ceiling rationale")
         for g in inp.get("gauges") or []:
             if not 0 < g["weight"] <= 1:
@@ -388,18 +389,20 @@ def tightness_problems(s: Store, today: date) -> tuple[list[str], list[str]]:
                 errors.append(f"{where}.{g['id']} has no scale rationale")
     if errors:
         return errors, []
+    lost = []
     for i in scorecard(s, today)["inputs"]:
-        fed = [g for g in i["gauges"] if g["reading"] is not None]
+        fed = [g for g in i["gauges"] if g["unfed"] is None]
         if i["score"] is None and fed:
-            late = [g["id"] for g in fed if g["unavailable"] == "past its age limit"]
-            notes.append(
-                f"tightness: {i['id']} is withheld though it has readings"
-                + (f" ({', '.join(late)} past the age limit)" if late else "")
-            )
+            why = [f"{g['id']} {g['unavailable']}" for g in fed if g["unavailable"]]
+            lost.append(i["id"] + (f" ({', '.join(why)})" if why else ""))
         for g in fed if i["score"] is not None else []:
             if g["unavailable"] is None and g["age_days"] > 0.9 * g["max_age_days"]:
                 last = today + timedelta(days=g["max_age_days"] - g["age_days"])
                 notes.append(f"tightness: {i['id']}.{g['id']} passes its age limit after {last.isoformat()}")
+    if (
+        lost
+    ):  # one line however many: after a publisher's quiet spell this would otherwise print nightly per input
+        notes.append("tightness: inputs with a gauge and no score: " + "; ".join(lost))
     return [], notes
 
 

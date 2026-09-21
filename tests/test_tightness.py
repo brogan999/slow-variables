@@ -11,6 +11,7 @@ from ai_tracker.analysis.tightness import half_up, scale, score_input, word
 SPEC = yaml.safe_load(open("seed/tightness.yaml"))
 RULES = SPEC["rules"]
 INPUTS = {i["id"]: i for i in SPEC["inputs"]}
+KINDS = {"no_public_series", "not_read_yet", "gauge_unsound"}
 
 
 def gauge(inp: str, g: str) -> dict:
@@ -97,7 +98,7 @@ def test_confidence_falls_with_age_and_grade_and_is_capped_by_the_ceiling():
     assert new["confidence"] > old["confidence"] and new["confidence"] > weak["confidence"]
     capped = score_input({**inp, "ceiling": 30}, {"capex_growth": fresh(0.8)}, RULES)
     assert (capped["confidence"], capped["at_ceiling"], capped["hatched"]) == (30, True, True)
-    assert new["at_ceiling"] and not old["at_ceiling"]  # fresh filed figures reach this input's own ceiling
+    assert new["at_ceiling"] and not old["at_ceiling"]  # a fresh grade-A reading reaches this input's ceiling
 
 
 def test_the_hatch_is_strictly_under_the_threshold_and_the_floor_applies_after_the_ceiling():
@@ -121,11 +122,41 @@ def test_the_seed_is_whole():
         gs = i.get("gauges") or []
         assert gs or len(i["withheld"]["because"]) >= 40, i["id"]
         total = sum(g["weight"] for g in gs) + i["hand_judged_weight"]
-        assert 0 < total <= 1.0001, i[
+        want = {"pretraining": 0.75, "capital": 0.85}.get(
+            i["id"], 1.0
+        )  # under one only where the prototype left a gap
+        assert not gs or abs(total - want) < 1e-4, i[
             "id"
-        ]  # under one only where a gauge was deleted or the prototype left a gap
+        ]  # an input with no gauges keeps the prototype's share alone
+        assert "withheld" not in i or i["withheld"]["kind"] in KINDS, i[
+            "id"
+        ]  # stale_or_thin is the engine's alone
         for g in gs:
             if "unfed" in g:
-                assert g["unfed"]["kind"] in {"no_public_series", "not_read_yet", "gauge_unsound"}
+                assert g["unfed"]["kind"] in KINDS
                 continue
             assert g["metric"] in metrics and len(g["scale_rationale"]) >= 40, (i["id"], g["id"])
+
+
+def test_an_input_whose_metric_gives_nothing_is_the_engines_to_explain_not_the_seeds():
+    from datetime import date
+    from types import SimpleNamespace
+
+    from ai_tracker import argument as ar
+
+    empty = SimpleNamespace(
+        derived_for=lambda m, dims=None: [],
+        metric_spec=lambda m: {"unit": "ratio"} if m else {},
+        fetchlog=[],
+        _chart_sources=lambda ids: {"metric": None, "sources": []},
+    )
+    card = {i["id"]: i for i in ar.scorecard(empty, date(2026, 9, 21))["inputs"]}
+    dc = card["data_centres"]  # one fed gauge with no rows tonight, one unfed gauge with a seeded reason
+    assert dc["score"] is None and dc["withheld"]["kind"] == "stale_or_thin"
+    assert dc["withheld"]["because"] == RULES["reasons"]["nothing"]
+    assert (
+        card["routing"]["withheld"]["kind"] == "gauge_unsound"
+    )  # every gauge unfed: the seed's own reason stands
+    assert card["minerals"]["withheld"]["kind"] == "not_read_yet"
+    errors, notes = ar.tightness_problems(empty, date(2026, 9, 21))
+    assert errors == [] and len(notes) == 1 and "data_centres (planned_vs_built no reading)" in notes[0]

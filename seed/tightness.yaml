@@ -4,19 +4,20 @@
 # this page came from; each scale's rationale was re-checked against the metric that feeds it here. They change only by
 # reviewed PR. Everything a reader can see is written without digits: the page renders the numbers from the constants.
 #
-# `hand_judged_weight` is the share of an input's evidence the prototype gave to reported events (deals, shortages in
-# the news). This store does not collect those, so that share counts as missing when confidence is worked out.
+# `hand_judged_weight` is the share of an input's evidence this store cannot feed and does not list as a gauge: what the
+# prototype gave to reported events (deals, shortages in the news), plus the weight of any prototype gauge deleted because
+# its concept was wrong. That share counts as missing when confidence is worked out.
 # A gauge with `unfed` has no metric here; it stays listed so "n of m gauges" tells the truth.
 # Reason kinds: no_public_series (nobody publishes it), not_read_yet (published, not ingested here),
 # gauge_unsound (a reading exists but does not measure what it claims). The engine adds stale_or_thin itself.
 
 rules:
   weights: {coverage: 0.28, freshness: 0.20, source: 0.29}
-  weights_rationale: "Confidence multiplies three things together, each raised to its weight, so one weak factor drags the whole figure down. Coverage counts most, because a score resting on a small part of the intended evidence is the easiest to misread. The prototype also weighed the width of each source's error range and the agreement between news reports; this store carries neither, so those are left out and the rest are rescaled."
+  weights_rationale: "Because the three are multiplied, one weak factor drags the whole figure down. Coverage and source quality count most, and about equally, because a score resting on a small part of the intended evidence, or on a weak source, is the easiest to misread; freshness counts least. The prototype also weighed the width of each source's error range and the agreement between news reports; this store carries neither, so those are left out and the rest are rescaled."
   grade_quality: {A: 1.0, B: 0.9, C: 0.75, D: 0.5}
-  grade_quality_rationale: "An editorial table, not a measurement: it turns the site's evidence grade for a gauge's weakest input into a factor between nought and one. Filed figures count in full; a respected group's estimate, which is what most of these gauges rest on, counts for three quarters."
+  grade_quality_rationale: "An editorial table, not a measurement: it turns the site's evidence grade for a gauge's weakest input into a factor between nought and one. An audited annual filing counts in full; a quarterly filing, which is a company's own unaudited statement, counts for nine tenths, and a gauge takes the grade of its weakest row, so a total over four quarters is graded as a quarterly filing. A respected group's estimate, which is what most of these gauges rest on, counts for three quarters."
   half_life_ratio: 0.75
-  half_life_rationale: "Freshness halves each time a reading ages by three quarters of its gauge's age limit, so a reading at its limit still counts for a little under half and one past it is dropped."
+  half_life_rationale: "Freshness halves each time a reading ages by three quarters of its gauge's age limit, so a reading at its limit still counts for about two fifths and one past it is dropped."
   factor_floor: 0.05
   confidence_floor: 20
   confidence_floor_rationale: "A backstop. A score this weakly supported would mislead, so it is withheld. Under these weights the coverage rule usually withholds an input first."
@@ -30,7 +31,7 @@ rules:
     required: "The gauge this input depends on has no usable reading today."
     coverage: "Too little of its intended evidence has a usable reading today."
     confidence: "The evidence behind it is too weak to show a score."
-  epoch_quarterly_rationale: "The limit on Epoch's quarterly chip gauges is set by the publisher's calendar. Its chip-components file has been released once, and its newest complete quarter was already more than two quarters old on the day it came out. Its chip-sales file lists newer quarters, but only for some designers, and a share or a total across designers is read only from a quarter in which every designer reported. A tighter limit would withhold every one of these gauges for no reason but that calendar; this one admits the newest complete quarter and drops it if no newer one arrives within about a month."
+  epoch_quarterly_rationale: "The limit on Epoch's quarterly chip gauges is set by the publisher's calendar. When Epoch last updated its chip-components file, the newest complete quarter in it was already more than two quarters old. This site has read only that one version, so it cannot yet say how often a newer quarter arrives. Its chip-sales file lists newer quarters, but only for some designers, and a share or a total across designers is read only from a quarter in which every designer reported. A tighter limit would drop every one of these gauges for no reason but that calendar; this one admits a complete quarter until it is about ten months old and drops the gauge after that, until a newer complete quarter arrives."
 
 kinds:
   - {id: supply, name: Supply, tight_means: "Tight means the thing itself is hard to get: supply is growing slowly, a few buyers take most of it, or far more is promised than built."}
@@ -44,7 +45,7 @@ inputs:
     kind: supply
     what: Gallium, germanium, rare earths, copper and the other raw materials chips and power equipment are made from.
     ceiling: 50
-    hand_judged_weight: 1.0
+    hand_judged_weight: 0.70
     withheld: {kind: not_read_yet, because: "This site reads no series on how much of these minerals is mined or sold."}
 
   - id: energy
@@ -71,7 +72,7 @@ inputs:
     kind: supply
     what: Transformers, switchgear, transmission lines and the queue to be connected. The wire between a power station and a rack of chips.
     ceiling: 40
-    hand_judged_weight: 1.0
+    hand_judged_weight: 0.90
     withheld: {kind: not_read_yet, because: "Grid operators publish their connection queues, but this site does not read them yet."}
 
   - id: data_centres
@@ -81,7 +82,7 @@ inputs:
     what: The shells, cooling and power hookups that racks of chips sit in.
     reads: "The power Epoch expects at the large sites it tracks, against the power it counts as built there today."
     ceiling: 60
-    ceiling_rationale: "Lower than the prototype's. Half of this ratio is Epoch's projection of sites not yet finished, and Epoch says its power figures can be off by a factor of about one and a half."
+    ceiling_rationale: "Lower than the prototype's. Half of this ratio is Epoch's projection of sites not yet finished, and Epoch publishes wide error margins for its power figures."
     hand_judged_weight: 0.15
     gauges:
       - id: planned_vs_built
@@ -92,7 +93,7 @@ inputs:
         required: true
         max_age_days: 120
         knots: [[1.0, 20], [2.0, 40], [3.0, 60], [4.5, 78], [7.0, 92]]
-        scale_rationale: "A ratio near one means the industry is building about what it said it would. Two or three times is ordinary for a growing business whose projects take years. Past four, far more has been promised than builders, equipment makers and power companies can deliver on time, which shows up later as slipped dates. It measures the delivery gap, not demand, and the age limit is four months because Epoch revises the file about monthly."
+        scale_rationale: "A ratio near one means about as much stands as Epoch expects at the sites it tracks. Two or three times is ordinary for a growing business whose projects take years. Past four, far more is planned than stands, which is what a shortage of builders, equipment and grid connections would produce, though a fast, untroubled build-out would read the same. It measures the gap between plans and buildings, not demand, and the age limit is four months because Epoch revises the file about monthly."
       - id: built_power_growth
         label: Growth in built power
         weight: 0.25
@@ -104,7 +105,7 @@ inputs:
     kind: supply
     what: The machines that print, deposit, etch and inspect chips, made by a handful of firms such as ASML.
     ceiling: 70
-    hand_judged_weight: 1.0
+    hand_judged_weight: 0.60
     withheld: {kind: not_read_yet, because: "The equipment makers file their orders and backlogs, but this site does not read them yet."}
 
   - id: foundry
@@ -115,7 +116,7 @@ inputs:
     reads: "How fast the supply of leading-edge logic wafers is growing, year on year."
     ceiling: 85
     ceiling_rationale: "Kept from the prototype: a direct supply estimate from a careful source, though only an estimate."
-    hand_judged_weight: 0.27
+    hand_judged_weight: 0.58  # the prototype's 0.27 for reported events plus the 0.31 it gave a buyer-concentration gauge, deleted here
     gauges:
       - id: logic_supply_growth
         label: Growth in leading-edge logic supply
@@ -124,7 +125,7 @@ inputs:
         weight: 0.42
         max_age_days: 300
         knots: [[-0.05, 92], [0.05, 72], [0.15, 50], [0.3, 28]]
-        scale_rationale: "Runs backwards: faster supply growth means a looser input. New foundry capacity takes three to five years to build, so growth of a fifth a year is already fast for this business, and flat supply while demand races is the tight end."
+        scale_rationale: "Runs backwards: faster supply growth means a looser input. New foundry capacity takes years to build, so growth of a fifth a year is already fast for this business, and flat supply while demand races is the tight end."
 
   - id: packaging
     n: 7
@@ -143,7 +144,7 @@ inputs:
         weight: 0.45
         max_age_days: 300
         knots: [[-0.1, 95], [0.0, 80], [0.25, 60], [0.5, 40], [1.0, 20]]
-        scale_rationale: "Runs backwards: faster supply growth means a looser input. A packaging line takes about a year and a half to add, so supply that doubles in a year is real relief, and supply that stands still while demand rises is the worst case."
+        scale_rationale: "Runs backwards: faster supply growth means a looser input. Packaging lines can be added faster than foundries, so this scale asks for more: supply that doubles in a year is real relief, and supply that stands still while demand rises is the worst case."
       - id: cowos_buyer_concentration
         label: How concentrated the buyers are
         metric: cowos_buyer_hhi
@@ -182,7 +183,7 @@ inputs:
     what: The processors that train and run models, from NVIDIA, AMD, Google, Amazon and others.
     reads: "How much of the chip supply one designer holds, and whether the cost of a unit of computing power is still falling."
     ceiling: 88
-    ceiling_rationale: "Kept from the prototype."
+    ceiling_rationale: "Kept from the prototype: two gauges from one careful source, one an estimate of each designer's chip sales and one a long trend in the prices chips were released at. The gauge on chips for rent is left unfed."
     hand_judged_weight: 0.25
     gauges:
       - id: designer_concentration
@@ -210,7 +211,7 @@ inputs:
     kind: supply
     what: The switches, cables and optical links that join thousands of chips into one machine.
     ceiling: 55
-    hand_judged_weight: 1.0
+    hand_judged_weight: 0.75
     withheld: {kind: not_read_yet, because: "This site reads no series on networking gear for AI clusters."}
 
   - id: systems_software
@@ -251,7 +252,7 @@ inputs:
         label: Growth in the computing power behind the largest model
         weight: 0.45
         required: true
-        unfed: {kind: no_public_series, because: "No lab has published the computing power behind a record-setting model since xAI's Grok model in July of 2025, so growth at the frontier cannot be read."}
+        unfed: {kind: gauge_unsound, because: "The largest training run on Epoch's list of frontier models is still its own estimate for xAI's Grok model of July 2025. Labs no longer disclose this figure and Epoch has not yet estimated newer models, so a record that stands still says nothing about whether growth has stopped."}
 
   - id: post_training
     n: 14
@@ -259,7 +260,7 @@ inputs:
     kind: know_how
     what: Everything done to a model after its first training to make it useful, including practice tasks with automatic graders and feedback from experts.
     ceiling: 40
-    hand_judged_weight: 1.0
+    hand_judged_weight: 0.85
     withheld: {kind: no_public_series, because: "Nobody publishes what this work costs or how long buyers wait for it. This site counts the sellers and keeps a tally of disclosed deals, which says the business exists, not whether it is short."}
 
   - id: continual_learning
@@ -268,7 +269,7 @@ inputs:
     kind: know_how
     what: Getting a model to keep learning from its use after release without forgetting what it knew.
     ceiling: 30
-    hand_judged_weight: 1.0
+    hand_judged_weight: 0.95
     withheld: {kind: no_public_series, because: "No public test measures whether a model keeps learning after release. This site tracks what vendors claim, which is not a measure of scarcity."}
 
   - id: inference
@@ -276,7 +277,7 @@ inputs:
     name: Running models
     kind: supply
     what: Serving a trained model to users, which the industry calls inference.
-    reads: "The price of the cheapest model among a named basket of flagship models on one marketplace. One vendor sets it."
+    reads: "The price, in dollars for a million tokens of output, of the cheapest model among a named basket of flagship models on one marketplace. A token is a word or a piece of one. One vendor sets it."
     ceiling: 90
     ceiling_rationale: "Kept from the prototype: list prices are observed, not estimated."
     hand_judged_weight: 0.15
@@ -290,7 +291,7 @@ inputs:
         fetched_from: openrouter
         log10: true
         knots: [[0.5, 12], [2, 32], [8, 55], [32, 78], [128, 92]]
-        scale_rationale: "Read on a scale where each knot is four times the last, because this price has fallen by whole multiples, not by percentages. Below about a dollar for a million words of output, the cost of running a model stops deciding what gets built; at thirty times that, cost is the limit on what products are possible. The reading is the price list as last fetched, so its age runs from the last successful fetch."
+        scale_rationale: "Read on a scale where each knot is four times the last, because this price has fallen by whole multiples, not by percentages. Below about a dollar for a million tokens of output (a token is a word or a piece of one), the cost of running a model stops deciding what gets built; at thirty times that, cost is the limit on what products are possible. The reading is the price list as last fetched, so its age runs from the last successful fetch."
       - id: price_trend
         label: Change in that price over a month
         weight: 0.25
@@ -319,7 +320,7 @@ inputs:
     kind: know_how
     what: The benchmarks and testing firms that say what a model can do.
     ceiling: 35
-    hand_judged_weight: 1.0
+    hand_judged_weight: 0.95
     withheld: {kind: no_public_series, because: "This site holds many benchmark scores, but none of them measures whether good testing is itself in short supply."}
 
   - id: agents
@@ -341,7 +342,7 @@ inputs:
     kind: supply
     what: Text written or checked by paid experts, generated data, and licensed archives.
     ceiling: 50
-    hand_judged_weight: 1.0
+    hand_judged_weight: 0.80
     withheld: {kind: no_public_series, because: "Sellers' revenues, which this site tracks from press reports, show activity. Nobody publishes prices or waiting times, which are what scarcity would show up in."}
 
   - id: deployment_platforms
@@ -350,7 +351,7 @@ inputs:
     kind: supply
     what: Companies that host and run models for other businesses.
     ceiling: 45
-    hand_judged_weight: 1.0
+    hand_judged_weight: 0.75
     withheld: {kind: no_public_series, because: "No public series separates these platforms' capacity from the cost of running models, which the row for running models reads."}
 
   - id: applications
@@ -359,7 +360,7 @@ inputs:
     kind: money
     what: The products people and companies use, from coding assistants to legal and medical tools.
     ceiling: 60
-    hand_judged_weight: 1.0
+    hand_judged_weight: 0.70
     withheld: {kind: no_public_series, because: "Most of these companies are private, and too few publish their finances to say how hard money is for them to raise."}
 
   - id: capital

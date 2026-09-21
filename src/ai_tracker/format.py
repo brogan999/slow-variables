@@ -3,11 +3,18 @@ what `tests/test_format.py` checks. Anything that prints a value for a human goe
 
 from __future__ import annotations
 
-from decimal import ROUND_HALF_UP, Decimal
+import math
+from decimal import ROUND_HALF_UP, Context, Decimal
+
+_TWO = Context(prec=2, rounding=ROUND_HALF_UP)
 
 
 def _fixed(v: float, places: int) -> str:
     """JavaScript's toFixed: a tie rounds away from zero (112.5 reads 113), where Python's format rounds it to even."""
+    if (
+        abs(v) >= 2**53
+    ):  # whole numbers at this size, so no tie exists, and quantize would overflow its context
+        return f"{v:.{places}f}"
     return str(Decimal(v).quantize(Decimal(1).scaleb(-places), rounding=ROUND_HALF_UP))
 
 
@@ -20,11 +27,11 @@ def _sig(v: float) -> str:
         return _fixed(v, 1)
     if a >= 0.1 or v == 0:
         return _fixed(v, 2)
-    return f"{v:.2g}"
+    return format(_TWO.create_decimal_from_float(v), "f")  # toPrecision(2): 0.0625 reads 0.063
 
 
 def fmt(v: float | None, unit: str | None = None) -> str:
-    if v is None:
+    if v is None or not math.isfinite(v):  # the web prints a dash for NaN too
         return "—"
     if unit in ("share",):
         return f"{_fixed(v * 100, 1)}%"
