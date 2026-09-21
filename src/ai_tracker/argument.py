@@ -591,7 +591,8 @@ def problems(s: Store) -> tuple[list[str], list[str]]:
         t = p.get("test")
         if t and t.get("fact") not in block["facts"] or not t and len(p.get("text", "")) < 40:
             errors.append(f"argument: prediction {p['id']} names an unknown fact, or has no test and no text")
-        if t and (bad := _bad_test({k: v for k, v in t.items() if k != "fact"}, block["facts"])):
+        ops = {k: v for k, v in (t or {}).items() if k != "fact"}
+        if t and (bad := _bad_test(ops, block["facts"]) if ops else "needs exactly one of gt, gte, lt, lte"):
             errors.append(f"argument: prediction {p['id']}'s test {bad}")
         if p.get("expect_state") not in STATES or p.get("when") not in ("now", "next", "watch"):
             errors.append(f"argument: prediction {p['id']} has an unknown expect_state or when")
@@ -606,10 +607,13 @@ def problems(s: Store) -> tuple[list[str], list[str]]:
     ]
     if errors:
         return errors, []
-    seed_text = " ".join(
-        [p["claim"] + " " + p["text"] for p in block["predictions"]]
-        + [sp["because"] for r in block["strip"]["rows"] for sp in r["spans"]]
-    )
+    errors += [  # the strip plate prints a span's reason as plain text, so a token there would show as written
+        f"argument: strip row {r['id']} has a token in a span's reason, which the plate cannot render"
+        for r in block["strip"]["rows"]
+        for sp in r["spans"]
+        if TOKEN.search(sp["because"])
+    ]
+    seed_text = " ".join(p["claim"] + " " + p["text"] for p in block["predictions"])
     for name, path in ESSAYS.items():
         text = path.read_text() if path.exists() else ""
         if not text:

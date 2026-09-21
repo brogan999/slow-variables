@@ -208,6 +208,8 @@ def test_a_malformed_migration_seed_is_an_error_line_never_a_crash(monkeypatch):
         (lambda m: m["predictions"][0].update(when="soon"), "unknown expect_state or when"),
         (lambda m: m["says"].update(capital=["loose"]), "unknown word loose"),
         (lambda m: m["facts"].update(orphan={"dims": {}}), "names no metric"),
+        (lambda m: m["predictions"][0].update(test={"fact": "dc_gap"}), "needs exactly one of"),
+        (lambda m: m["strip"]["rows"][0]["spans"][0].update(because="See [fact:dc_gap]."), "token in a span"),
     ]:
         spec = copy.deepcopy(base)
         change(spec["migration"])
