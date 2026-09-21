@@ -53,6 +53,7 @@
 | epoch_bench | Epoch AI benchmarks and Capabilities Index | Epoch AI | csv | 1 | weekly | CC BY 4.0 | Epoch AI, Benchmarking Hub and Epoch Capabilities Index (CC BY 4.0) |
 | epoch_blog | Epoch AI research posts | Epoch AI | html | 6 | irregular | CC BY 4.0 | Epoch AI (CC BY 4.0) |
 | epoch_chips | Epoch AI chip sales | Epoch AI | csv | 6 | monthly | CC BY 4.0 | Epoch AI, AI Chip Sales (CC BY 4.0) |
+| epoch_components | Epoch AI chip components | Epoch AI | csv | 6 | quarterly | CC BY 4.0 | Epoch AI, Data on AI Chip Components (CC BY 4.0) |
 | epoch_hardware | Epoch AI ML hardware | Epoch AI | csv | 2 | monthly | CC BY 4.0 | Epoch AI, Machine Learning Hardware (CC BY 4.0) |
 | epoch_models | Epoch AI notable and frontier models | Epoch AI | csv | 6 | weekly | CC BY 4.0 | Epoch AI, Notable AI Models (CC BY 4.0) |
 | epoch_prices | Epoch AI LLM inference price trends | Epoch AI | csv | 6 | monthly | CC BY 4.0 | Epoch AI, LLM inference price trends (CC BY 4.0) |
