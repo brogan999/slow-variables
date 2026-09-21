@@ -65,7 +65,7 @@ RAW = re.compile(r"observation_all", re.I)
 TOOLS = [
     {
         "name": "sql",
-        "description": "Read-only DuckDB SQL over the semantic layer. Tables: observations (approved, non-superseded rows: id, series_key, subject, entity_id, value_numeric, value_text, value_low, value_high, unit, as_of_date, published_date, source_id, tier, audited_vs_reported, disputed, dispute_text, raw_snippet, url), derived (id, metric, value, value_low, value_high, as_of_date, dims JSON text, obs_ids), status_events (target_type, target_id, old_status, new_status, new_conf, reason, evidence_ids, author, created_at), indicators (id, name, lens, bucket_id, layer_id, unit, metric, band_input, status, confidence, published), metrics (name, description, unit, grain, caveats), entity_membership (entity_id, layer_id, sublayer_id, is_primary, from_date, to_date), venture_rounds (entity_id, as_of_date, v, id, source, kind: one row per round, Form D preferred over Epoch in an entity-quarter). Rows are capped at 200; one statement, no writes.",
+        "description": "Read-only DuckDB SQL over the semantic layer. Tables: observations (approved, non-superseded rows: id, series_key, subject, entity_id, value_numeric, value_text, value_low, value_high, unit, as_of_date, published_date, source_id, tier, audited_vs_reported, disputed, dispute_text, raw_snippet, url), derived (id, metric, value, value_low, value_high, as_of_date, dims JSON text, obs_ids), status_events (target_type, target_id, old_status, new_status, new_conf, reason, evidence_ids, author, created_at), indicators (id, name, lens, bucket_id, layer_id, unit, metric, band_input, status, confidence, published), metrics (name, description, unit, grain, caveats), entity_membership (entity_id, layer_id, sublayer_id, is_primary, from_date, to_date), venture_rounds (entity_id, as_of_date, v, id, source, kind: one row per round, Form D preferred over Epoch in an entity-quarter). Observations of source epoch_datacenters dated after today are Epoch's projections, not readings; their note says so. Rows are capped at 200; one statement, no writes.",
         "input_schema": {
             "type": "object",
             "properties": {"query": {"type": "string"}},
@@ -341,8 +341,13 @@ class Tools:
         return docs
 
     def fit_trend(self, series: str, since: str | None = None, model: str = "exponential") -> Any:
-        rows = self.store.observations(series)
-        rows = [r for r in rows if r["value_numeric"] is not None]
+        rows = [  # a row dated after today is a source's projection, never a reading to fit; a disputed epoch_dc row
+            r  # is one Epoch has withdrawn (elsewhere "disputed" flags a contested figure that still stands)
+            for r in self.store.observations(series)
+            if r["value_numeric"] is not None
+            and r["as_of_date"] <= date.today()
+            and not (r["disputed"] and r["source_ns"] == "epoch_dc")
+        ]
         keys, units = {r["series_key"] for r in rows}, {r["unit"] for r in rows}
         if not rows:
             return {"error": f"no approved numeric rows match {series}"}

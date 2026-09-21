@@ -1,11 +1,19 @@
 import io
+import json
 import zipfile
 from datetime import date, datetime, timezone
 
 import pytest
 
 from ai_tracker.ingest.base import LayoutChanged, RawItem
-from ai_tracker.ingest.connectors.epoch_tables import EpochBench, EpochChips, EpochComponents, EpochPrices
+from ai_tracker.ingest.connectors.epoch_tables import (
+    PROJECTION,
+    EpochBench,
+    EpochChips,
+    EpochComponents,
+    EpochDataCenters,
+    EpochPrices,
+)
 
 
 def _item(body: bytes) -> RawItem:
@@ -181,3 +189,99 @@ def test_hardware_stores_fp16_flops_and_price_as_published_with_real_headers():
         "epoch_hw.nvidia_gb300_blackwell_ultra.fp16_flops.pt": 2.5e15,
         "epoch_hw.nvidia_gb300_blackwell_ultra.release_price_usd.pt": 43000,
     }
+
+
+DC_HEAD = "Data center,Date,Construction status,Buildings operational,IT power (MW),Power (MW)\n"
+
+
+def _dc(rows: str, ledger: list[dict] | None = None, tmp_path=None) -> list:
+    p = tmp_path / "epoch_datacenters.jsonl"
+    p.write_text("".join(json.dumps(r) + "\n" for r in ledger or []))
+    z = _zip({"data_center_timelines.csv": DC_HEAD + rows})
+    return EpochDataCenters(ledger=p).extract([_item(z)])  # read on 2026-09-11
+
+
+def _ledger(obs: list, **changes) -> list[dict]:
+    return [{**json.loads(o.model_dump_json()), **changes} for o in obs]
+
+
+def test_datacentres_keep_zeros_mark_projections_and_drop_the_status_prose(tmp_path):
+    rows = _dc(
+        "Hyperion,2026-06-01,Land cleared and a very long status note,0,0.0,0.0\n"
+        "Hyperion,2028-01-01,Expected online,4,1700,2262\n"
+        "Cedar Rapids,2026-04-16,Blank power,1,,\n",
+        tmp_path=tmp_path,
+    )
+    assert [(r.series_key, r.as_of_date, r.value_numeric) for r in rows] == [
+        ("epoch_dc.hyperion.power_mw.pt", date(2026, 6, 1), 0.0),  # a cleared site is a reading, not a blank
+        ("epoch_dc.hyperion.power_mw.pt", date(2028, 1, 1), 2262.0),
+    ]
+    built, planned = rows
+    assert built.note is None and built.published_date == date(2026, 6, 1)
+    assert planned.note == PROJECTION and planned.published_date == date(2026, 9, 11)  # never a future date
+    assert (planned.unit, int(planned.tier), planned.audited_vs_reported.value) == ("MW", 6, "estimated")
+    assert "status note" not in built.raw_snippet and "Construction status" not in built.raw_snippet
+
+
+def test_a_row_epoch_removes_is_disputed_once_and_clears_if_it_returns(tmp_path):
+    rest = "".join(
+        f"S{i},2026-01-01,s,1,8,10\n" for i in range(4)
+    )  # enough rows that losing one is ordinary churn
+    both = rest + "B,2026-02-01,s,1,40,50\n"
+    first = _dc(both, tmp_path=tmp_path)
+    b = first[-1]
+    gone = _dc(rest, ledger=_ledger(first), tmp_path=tmp_path)
+    flagged = [r for r in gone if r.disputed]
+    assert [r.series_key for r in flagged] == ["epoch_dc.b.power_mw.pt"] and flagged[0].id == b.id
+    assert "removed or re-dated" in flagged[0].dispute_text and "2026-09-11" in flagged[0].dispute_text
+    after = _ledger(first[:-1]) + _ledger([b], disputed=True, dispute_text=flagged[0].dispute_text)
+    assert not [
+        r for r in _dc(rest, ledger=after, tmp_path=tmp_path) if r.disputed
+    ]  # flagged once, not nightly
+    back = _dc(
+        both, ledger=after, tmp_path=tmp_path
+    )  # Epoch restores the row: emitted clean, so the flag clears
+    assert [(r.id, r.disputed) for r in back][-1] == (b.id, False) and not any(r.disputed for r in back)
+
+
+def test_a_revised_value_is_left_for_the_store_to_supersede_and_a_revert_disputes_the_live_row(tmp_path):
+    a = _dc("A,2026-01-01,s,1,80,100\n", tmp_path=tmp_path)
+    revised = _dc("A,2026-01-01,s,1,80,120\n", ledger=_ledger(a), tmp_path=tmp_path)
+    assert len(revised) == 1 and not revised[0].disputed and revised[0].id != a[0].id  # never "removed"
+    ledger = _ledger(a) + _ledger(revised, supersedes_id=a[0].id)
+    reverted = _dc("A,2026-01-01,s,1,80,100\n", ledger=ledger, tmp_path=tmp_path)  # A, then B, then A again
+    flagged = [r for r in reverted if r.disputed]
+    assert [r.id for r in flagged] == [revised[0].id] and "reverted" in flagged[0].dispute_text
+
+
+def test_a_shrunken_file_or_two_names_for_one_site_withdraw_nothing(tmp_path):
+    five = "".join(f"S{i},2026-01-01,s,1,8,10\n" for i in range(5))
+    ledger = _ledger(_dc(five, tmp_path=tmp_path))
+    with pytest.raises(LayoutChanged, match="rows against"):
+        _dc("S0,2026-01-01,s,1,8,10\n", ledger=ledger, tmp_path=tmp_path)
+    with pytest.raises(LayoutChanged, match="share a series key"):
+        _dc("Meta Hyperion,2026-01-01,s,1,8,10\nMeta  hyperion,2026-02-01,s,1,8,10\n", tmp_path=tmp_path)
+
+
+def test_the_ledger_flags_a_withdrawn_row_in_place_and_clears_it_on_return(tmp_path, monkeypatch):
+    from ai_tracker import store as st
+
+    monkeypatch.setattr(st, "OBS", tmp_path)
+    rest = "".join(f"S{i},2026-01-01,s,1,8,10\n" for i in range(4))
+    ledger = tmp_path / "epoch_datacenters.jsonl"
+
+    def night(rows: str) -> list[dict]:
+        z = _zip({"data_center_timelines.csv": DC_HEAD + rows})
+        st.append_observations("epoch_datacenters", EpochDataCenters(ledger=ledger).extract([_item(z)]))
+        return st.read_jsonl(ledger)
+
+    assert len(night(rest + "B,2026-02-01,s,1,40,50\n")) == 5
+    after = {r["series_key"]: r for r in night(rest)}
+    assert len(after) == 5 and after["epoch_dc.b.power_mw.pt"]["disputed"] is True  # flagged, never deleted
+    back = {r["series_key"]: r for r in night(rest + "B,2026-02-01,s,1,40,50\n")}
+    assert len(back) == 5 and back["epoch_dc.b.power_mw.pt"]["disputed"] is False
+    revised = night(rest + "B,2026-02-01,s,1,40,60\n")
+    old, new = sorted(
+        (r for r in revised if r["series_key"].endswith(".b.power_mw.pt")), key=lambda r: r["value_numeric"]
+    )
+    assert new["supersedes_id"] == old["id"] and not old["disputed"] and not new["disputed"]
