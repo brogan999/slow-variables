@@ -62,6 +62,7 @@ ai-tracker/
 | Query service (M5) | Python on Fly (DuckDB + semantic layer live there); web calls it | Decided now so the JSON contract doesn't move |
 | CI blocking | `ruff`, `pytest`, `ai-tracker check`, `next build`. `mypy --strict` advisory for month 1 | duckdb/pydantic stub fights |
 | Models | `claude-sonnet-5` routine, `claude-fable-5-1` synthesis (M5). From 11 Sep 2026 an Ask answer the citation check still blocks gets its one fresh attempt on `claude-opus-5`, so only the worst answers pay the higher rate | `P1`'s sonnet-4-6 is stale; Sonnet alone left one golden question of twelve blocked per run, a different one each time |
+| Tightness scores (20 Sep 2026) | A nought-to-a-hundred tightness score with a computed confidence exists on one page only, `/argument/migration`. It reads metrics through hand-set scales in `seed/tightness.yaml`, never moves an indicator's status, and withholds an input that has no usable data | The owner kept the prototype's scores for the migrating-bottleneck page; scoping them to that page keeps the speed ranges and statuses the only instrument everywhere else |
 
 Repo `CLAUDE.md` = `v2` §10 verbatim + `P1` rule 3 (prompt-injection scrub) + `P1` rule 5 (robots.txt) + the prototype's AGENTS.md warning: read `node_modules/next/dist/docs/` before writing Next 16 routes.
 
@@ -393,3 +394,46 @@ Deliberately not done:
 - new routes beyond `/argument`
 - a doubling-time comparison across chain links
 - a Perez position finer than the phase
+
+## Part 10 status (21 Sep 2026): the migrating bottleneck
+
+A private prototype had built a standalone page, "The Migrating Bottleneck", on its own database. The owner wanted that page on this site with this store as the only source of truth, and the prototype retired. The page argues one mechanism: when every input to AI is needed at once, the scarcest one sets the pace and its owner collects the profit, and relieving it moves the shortage somewhere else.
+
+Owner decisions, 20 September:
+- Keep the nought-to-a-hundred scores, bars and confidence, through a minimal port: whole numbers with a word, confidence beside every score, hatching under 45, no data means no score, scoped to this page.
+- Forecasts become predictions with falsifiers, re-tested nightly. No buy, sell, size or enter language.
+- Conflicts: still none, so no disclosure line.
+- The age limit for Epoch's lagged quarterly files is about 300 days, with a written rationale; the chip-power column is added; no OpenRouter or Epoch-models extension.
+- The data-centre ratio is shown both ways (all sites, and only those with something built); the falsifier is the headline falling under 2.
+
+What the mapping pass found, which shaped the rest: most of the prototype's scores were artefacts or stale. Scored honestly from this store, eight of twenty-three inputs score. Not ported, each for a stated reason: the logic-buyer concentration index (most of it is an "Other" bucket), both GPU-rental gauges (a page cap; no connector here), commit velocity, memory per unit of compute (scale wrong by nine orders), built-power growth, frontier-compute growth (the record is unchanged since mid-2025) and routing (one listing sets the price spread).
+
+What shipped, one PR per step:
+- **Step 0.** The nightly had been red since 16 Sep on a date-bomb test fixture; the OpenRouter rankings parser now finds the model table wherever the page lists it.
+- **Step 1.** `epoch_components` (each designer's share of packaging, logic and memory supply, and the three supply totals) and a chip-power measure on `epoch_chips`. Zip members are matched exactly, so a file whose name ends the same way is never read by mistake.
+- **Step 2.** `epoch_datacenters`: power per site at dated milestones. Zeros are data and are kept. Rows dated after the day they were read are Epoch's projections: they carry a note, the series page prints "projection", and Ask's trend tool never fits them. Epoch removes and re-dates rows monthly, so a row missing from tonight's file is flagged `disputed` (never deleted) and clears if it returns; a revision is left to the store's usual supersession; two guards stop a truncated download from withdrawing the panel.
+- **Step 3.** Nine metrics, two store views (`hyperscaler_capex_ttm`, `dc_sites`) and a signed yearly-rate fit. A share or sum across designers is read only from a quarter in which every designer that has started reporting is present and at least three are.
+- **Step 4.** `analysis/tightness.py` (pure, about 120 lines) and `seed/tightness.yaml`: piecewise-linear scales set by hand, a weighted mean over the gauges that have a usable reading, and a confidence computed from coverage, freshness and source quality under an editorial ceiling. An input with no usable data is withheld with one of four reasons, never shown at fifty. Python now rounds ties half up, as the browser does.
+- **Step 5.** `/argument/migration`: the essay in `docs/argument/migration.md`, fifteen facts, a strip plate (where the bottleneck has sat, by year, each span with its reason and source), the scorecard plate, five predictions with their nightly state, and `/methodology#tightness`. A fact past its age limit shows its date and stops testing its sentence.
+
+Judgement calls the owner may reverse, in the order they matter:
+- **The age cliff.** At 300 days, five of the eight scores lapse on 28 Oct 2026 unless Epoch publishes a newer complete quarter of chip components and the three late designers report the first quarter of 2026. The page is written to read correctly at eight, three or two scores.
+- **The central "next" prediction fails its own test on day one.** The hand-kept tally of disclosed lab purchases from training-input sellers is no higher than a year before. The page says so.
+- The strip draws a span as "the bottleneck" only where a fetched source says that input was the limit; elsewhere it draws "short".
+- Two ceilings are lower than the prototype's (electricity, whose only gauge measures demand; data centres, half of whose ratio is a projection).
+- The share of evidence the prototype judged by hand counts as missing coverage.
+
+How it was checked: a mapping pass with each report re-checked by a skeptic; three competing designs scored by three judges; three adversarial plan reviews; a fact-check of every person, work and dated claim against pages fetched in session; an adversarial review of the whole diff (54 confirmed findings, all fixed) and a second pass confirming each fix landed. Screenshots at 375 and 1280 in three states (today, after the age cliff, nothing scored); axe clean.
+
+Deliberately not done:
+- momentum, qualitative signals, score intervals, or the prototype's precision and agreement factors
+- any GPU-rental, commit-velocity or tool-capability gauge; OpenRouter or Epoch-models extensions
+- scores as derived rows (they are invisible to Ask and `/query`; their only history is git)
+- a custom share image; thesis rules; repointing `capex_to_revenue_stack` at the new view
+
+Known limits:
+- Confidence decays daily, so a whole number can move on a day with no new data.
+- Packaging sits on a word line; add one point of hysteresis if it flickers.
+- The price gauge is pinned at the end of its scale by one vendor's price; the row says so.
+- After a revert (a value, a revision, then the first value again) one site-date goes unread.
+- `custom_silicon_share` still publishes a quarter that only three of six designers have reported, and `lab_vertical_integration_events_4q` compares against quarters that predate our coverage. Each moves a published reading, so each needs its own reviewed PR.

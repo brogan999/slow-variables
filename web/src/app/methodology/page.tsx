@@ -2,7 +2,8 @@ import Link from "next/link";
 export const metadata = { title: "How to read this", description: "What a reading is, what the status words mean, when a reading is held back, and how every number links to its source." };
 
 import { PageHeader } from "@/components/PageHeader";
-import { skippedSources, sources } from "@/lib/data";
+import { argument, skippedSources, sources } from "@/lib/data";
+import { fmt } from "@/lib/format";
 
 const TIERS: [string, string, string][] = [
   ["1", "benchmark", "Benchmark or independent evaluation (METR horizons, Epoch benchmarks)"],
@@ -15,6 +16,9 @@ const TIERS: [string, string, string][] = [
 ];
 
 export default function Methodology() {
+  const card = argument().migration.scorecard;
+  const t = card.method as unknown as { words: [number, string][]; min_coverage: number; confidence_floor: number; weights: Record<string, number>; weights_rationale: string; half_life_rationale: string; grade_quality_rationale: string; hatch_rationale: string; epoch_quarterly_rationale: string };
+  const pc = (x: number) => `${Math.round(x * 100)}%`;
   const registry: [string | null, string | null][] = [...sources().map((x) => [x.attribution, x.license] as [string | null, string | null]), ...skippedSources().map((x) => [x.attribution, null] as [string | null, string | null])];
   const credits = [...new Map(registry.filter(([a]) => a) as [string, string | null][]).entries()].map(([a, l]) => (l && /CC BY/i.test(l) ? `${a} (${l})` : a));
   return (
@@ -49,7 +53,7 @@ export default function Methodology() {
       <H>Confidence, 0–95, independent of status</H>
       <p>90–95 multiple strong independent sources; 70–89 good evidence with some ambiguity; 50–69 mixed or hard to operationalise; below 50 limited or vague.</p>
       <H id="framing">How we frame value capture</H>
-      <p>The capture lens asks who keeps the value AI creates. Five ideas organise the reading, and none of them supplies a number. <strong>The value stick:</strong> a transaction creates value between what a buyer would pay and what a supplier would accept, and each firm keeps the slice it can defend against rivals, buyers and suppliers (Brandenburger and Stuart, 1996). <strong>Schumpeterian profits:</strong> innovators have kept only a small share of the surplus their innovations create, and most of it reaches users (Nordhaus, 2004). <strong>Complementary assets:</strong> when imitation is easy, the owners of distribution, manufacturing, data and customer relationships capture the profits rather than the inventor (Teece, 1986). <strong>Installation and deployment:</strong> a technological revolution&apos;s installation period, financed by speculative capital, ends in a turning point, after which the technology spreads through the wider economy (Perez, 2002). <strong>Kinds of rent:</strong> scarcity rents on a constrained input, scale and network rents, switching-cost rents and regulatory rents, which migrate as bottlenecks move. The Ask model is given the same framing and may use it to organise an answer, never as the source of a figure.</p>
+      <p>The capture lens asks who keeps the value AI creates. Five ideas organise the reading, and none of them supplies a number. <strong>The value stick:</strong> a transaction creates value between what a buyer would pay and what a supplier would accept, and each firm keeps the slice it can defend against rivals, buyers and suppliers (Brandenburger and Stuart, 1996). <strong>Schumpeterian profits:</strong> innovators have kept only a small share of the surplus their innovations create, and most of it reaches users (Nordhaus, 2004). <strong>Complementary assets:</strong> when imitation is easy, the owners of distribution, manufacturing, data and customer relationships capture the profits rather than the inventor (Teece, 1986). <strong>Installation and deployment:</strong> a technological revolution&apos;s installation period, financed by speculative capital, ends in a turning point, after which the technology spreads through the wider economy (Perez, 2002). <strong>Kinds of rent:</strong> scarcity rents on a constrained input, scale and network rents, switching-cost rents and regulatory rents, which <Link href="/argument/migration" className="underline decoration-grid underline-offset-4">migrate as bottlenecks move</Link>. The Ask model is given the same framing and may use it to organise an answer, never as the source of a figure.</p>
       <H>Discipline, enforced in code</H>
       <ul className="list-disc pl-5">
         <li>Every observation carries a URL that resolved at ingestion, its HTTP status, a content hash, the retrieval time, the tier, an audited/company-stated/reported/estimated flag, the extraction method and the raw snippet.</li>
@@ -72,7 +76,38 @@ export default function Methodology() {
       <p>Method after the <a href="https://ai2027-tracker.com/methodology/" className="underline decoration-grid underline-offset-4">AI 2027 tracker</a> (independent, not affiliated).</p>
       <p className="text-sm text-ink-2">Data credits, generated from the source registry: {credits.join("; ")}.</p>
       <H id="charts">How the charts read</H>
-      <p>Series marks are two neutrals, graphite and stone, and the two accents are reserved for meaning: violet for faster and concentrating, rust for slower and dispersing. Colour never carries a verdict on its own, so every status also has an icon and a word, and no chart uses red and green. The marks were checked for colour-vision separation: on the parchment ground the two neutrals are about 24 apart in perceptual distance for normal, protan, deutan and tritan vision, and the two accents 24 to 26. An estimated layer is hatched rather than tinted. Every chart has one vertical scale, names its sources beneath it, and repeats its numbers as text: each one links to the row it came from, and each series has a table and a CSV.</p>
+      <p>Series marks are two neutrals, graphite and stone, and the two accents are reserved for meaning: violet for faster and concentrating, rust for slower and dispersing. Colour never carries a verdict on its own, so every status also has an icon and a word, and no chart uses red and green. The marks were checked for colour-vision separation: on the parchment ground the two neutrals are about 24 apart in perceptual distance for normal, protan, deutan and tritan vision, and the two accents 24 to 26. Hatching marks what is not firmly known. On the capture charts that is an estimated layer, hatched rather than tinted. On the tightness scorecard every score already rests partly on estimates, which its grade says, so hatching there marks a score whose confidence is low. Every chart has one vertical scale, names its sources beneath it, and repeats its numbers as text: each one links to the row it came from, and each series has a table and a CSV.</p>
+      <H id="tightness">Tightness scores</H>
+      <p><Link href="/argument/migration" className="underline decoration-grid underline-offset-4">The migrating bottleneck</Link> scores twenty-three inputs to AI, from minerals to money, on how hard each is to get. The scale runs from nought to a hundred and is read in five words: {t.words.slice().reverse().map(([floor, w]) => `${w} from ${floor}`).join(", ")}. It belongs to that page only. It is a different thing from the speed ranges above, and it never moves an indicator&apos;s status.</p>
+      <p><strong className="font-medium">Gauges.</strong> Each input is read by a few gauges. A gauge takes one figure from the store, such as how fast the supply of chip packaging is growing, and turns it into points on a scale set by hand: a list of readings and the points each is worth, with straight lines between them and a flat line beyond either end. A reading off the end of its scale is marked as such. An input&apos;s tightness is the average of its gauges&apos; points, weighted, shown as a whole number. Every scale, with the reasoning behind it, is listed below; they were set by judgement and change only in public, with a written reason.</p>
+      <p><strong className="font-medium">No data, no score.</strong> A gauge is dropped when it has no reading or its reading is older than its age limit. An input is withheld, never shown at fifty, when none of its gauges has a usable reading, when the one it depends on is missing, or when less than {pc(t.min_coverage)} of its intended evidence is fed. Each withheld input says why, and the reasons are kept apart: nobody publishes a series; one is published and this site does not read it yet; the gauge available does not measure what it claims; or the readings are too old or too few today.</p>
+      <p><strong className="font-medium">Confidence.</strong> Beside every score is a confidence from nought to a hundred. It is worked out, not set by hand, and so it differs from the confidence on indicator pages. It rests on three things, multiplied together, each raised to a weight:</p>
+      <ul className="list-disc pl-5 flex flex-col gap-2">
+        <li><strong className="font-medium">Coverage ({t.weights.coverage}).</strong> How much of the intended evidence has a usable reading.</li>
+        <li><strong className="font-medium">Freshness ({t.weights.freshness}).</strong> {t.half_life_rationale}</li>
+        <li><strong className="font-medium">Source ({t.weights.source}).</strong> {t.grade_quality_rationale}</li>
+      </ul>
+      <p>{t.weights_rationale}</p>
+      <p>The result cannot exceed the input&apos;s ceiling, which is set by hand and explained below. {t.hatch_rationale} A score whose confidence fell under {t.confidence_floor} would be withheld. Most of these gauges share one source, so their confidence moves together, and a gap of under ten points between two inputs means nothing.</p>
+      <p><strong className="font-medium">Age limits.</strong> {t.epoch_quarterly_rationale}</p>
+      <details className="text-sm">
+        <summary className="cursor-pointer text-ink-2 hover:text-ink">Every gauge, its scale and the reasoning</summary>
+        <div className="mt-3 flex flex-col gap-4">
+          {card.inputs.filter((i) => i.gauges.some((g) => g.knots)).map((i) => (
+            <section key={i.id}>
+              <h3 className="font-medium text-ink">{i.name} <span className="font-normal text-muted">· ceiling {i.ceiling}</span></h3>
+              <p className="text-ink-2">{i.ceiling_rationale}</p>
+              {i.gauges.filter((g) => g.knots).map((g) => (
+                <div key={g.id} className="mt-2 border-l border-grid pl-3">
+                  <p className="text-ink">{g.label} <span className="text-muted">· weight {g.weight} · age limit {g.max_age_days} days{g.required ? " · required" : ""}</span></p>
+                  <p className="num text-xs text-ink-2">{g.knots!.map(([x, pts]) => `${fmt(x, g.unit ?? undefined)} → ${pts}`).join(" · ")}{g.log10 ? "   (read on a multiplying scale)" : ""}</p>
+                  <p className="text-ink-2">{g.scale_rationale}</p>
+                </div>
+              ))}
+            </section>
+          ))}
+        </div>
+      </details>
       <H id="reuse">Reuse, citation and corrections</H>
       <p>Code is MIT licensed. The compiled dataset (observations, derived values, status events) is CC BY 4.0; each observation also carries its upstream source and licence, which govern that row. Cite the site by URL and the observation ids you rely on. Corrections: open an issue or pull request on the repository; every change to a number or a status leaves a dated event in the changelog.</p>
       <H id="not-measured">Not measured, and why</H>

@@ -16,8 +16,31 @@ if TYPE_CHECKING:
 
 SPEC = Path("seed/argument.yaml")
 TIGHTNESS = Path("seed/tightness.yaml")
-ESSAYS = {"home": Path("docs/argument/home.md"), "full": Path("docs/argument/full.md")}
-PLATES = {"clocks", "perez", "stack"}
+ESSAYS = {
+    "home": Path("docs/argument/home.md"),
+    "full": Path("docs/argument/full.md"),
+    "migration": Path("docs/argument/migration.md"),
+}
+# each essay's own plates and facts: the migration essay keeps its facts apart, so the home page's date never moves
+PLATES = {
+    "home": {"clocks", "perez", "stack"},
+    "full": {"clocks", "perez", "stack"},
+    "migration": {"strip", "scorecard"},
+}
+STATES = ("holding", "failing", "untestable")
+OPS = ("gt", "gte", "lt", "lte")
+
+
+def _bad_test(test: dict[str, Any] | None, known: dict[str, Any]) -> str | None:
+    """Why an `expect` or a prediction's test cannot be run, checked whether or not a reading exists tonight."""
+    if not test:
+        return None
+    if len(test) != 1 or next(iter(test)) not in OPS:
+        return "needs exactly one of gt, gte, lt, lte"
+    rhs = next(iter(test.values()))
+    return f"is tested against unknown fact {rhs}" if isinstance(rhs, str) and rhs not in known else None
+
+
 TOKEN = re.compile(r"\[(fact|plate):([a-z0-9_]+)\]")
 
 
@@ -29,10 +52,29 @@ def _metric_href(s: Store, metric: str) -> str:
     ind = next(
         (i for i in s.seed.indicators if i.published and metric in (i.metric, (i.band_input or "")[7:])), None
     )
-    return f"/indicators/{ind.id}" if ind else "/query"
+    return (
+        f"/indicators/{ind.id}" if ind else f"/query#{metric}"
+    )  # /query anchors each saved analysis by its metric
 
 
-def fact(s: Store, spec: dict[str, Any]) -> dict[str, Any] | None:
+def fact(s: Store, spec: dict[str, Any], today: date | None = None) -> dict[str, Any] | None:
+    if (
+        "series" in spec
+    ):  # one published figure, read straight from its series: the newest numeric row not in dispute
+        row = s.con.execute(
+            "SELECT id, value_numeric, unit, as_of_date FROM observations WHERE series_key = ? AND value_numeric IS NOT NULL"
+            " AND NOT coalesce(disputed, false) AND as_of_date <= ? ORDER BY as_of_date DESC, id LIMIT 1",
+            [spec["series"], today or date.today()],
+        ).fetchone()
+        if not row:
+            return None
+        return {
+            "value": row[1],
+            "unit": row[2],
+            "as_of": row[3].isoformat(),
+            "obs_ids": [row[0]],
+            "href": f"/series/{spec['series']}#{row[0]}",
+        }
     if "indicator" in spec:
         ind = next(i for i in s.seed.indicators if i.id == spec["indicator"])
         pts = s.headline(ind)
@@ -68,7 +110,9 @@ def fact(s: Store, spec: dict[str, Any]) -> dict[str, Any] | None:
     return {
         "value": d.value,
         "unit": s.metric_spec(spec["metric"]).get("unit"),
-        "as_of": d.as_of_date.isoformat(),
+        "as_of": min(
+            d.as_of_date, today or date.today()
+        ).isoformat(),  # a quarter still running is dated today
         "obs_ids": d.input_observation_ids,
         "href": _metric_href(s, spec["metric"]),
     }
@@ -84,12 +128,28 @@ def _holds(expect: dict[str, Any] | None, value: float, other: dict[str, float |
     return {"gt": value > rhs, "gte": value >= rhs, "lt": value < rhs, "lte": value <= rhs}[op]
 
 
-def facts(s: Store, spec: dict[str, Any]) -> dict[str, dict[str, Any] | None]:
-    out = {k: fact(s, v) for k, v in spec["facts"].items()}
+def facts(
+    s: Store, spec: dict[str, Any], today: date | None = None, computed: dict[str, Any] | None = None
+) -> dict[str, dict[str, Any] | None]:
+    """`computed` supplies facts worked out at export (the scorecard's count). A fact with `max_age_days` that has
+    aged past it is marked stale and its `expect` is not tested: a falsifier on a frozen series would hold for ever."""
+    today = today or date.today()
+    out = {
+        k: (dict(computed[v["computed"]]) if "computed" in v else fact(s, v, today))
+        if "computed" not in v or (computed or {}).get(v["computed"], {}).get("value") is not None
+        else None
+        for k, v in spec["facts"].items()
+    }
     values = {k: (f["value"] if f else None) for k, f in out.items()}
     for k, f in out.items():
-        if f:
-            f["holds"] = _holds(spec["facts"][k].get("expect"), f["value"], values)
+        if not f:
+            continue
+        v = spec["facts"][k]
+        f["holds"] = _holds(v.get("expect"), f["value"], values)
+        if "max_age_days" in v and f["as_of"]:
+            age = _age(s, date.fromisoformat(f["as_of"]), today, v.get("fetched_from"))
+            if age > v["max_age_days"]:
+                f["stale"], f["holds"] = True, None
     return out
 
 
@@ -352,6 +412,71 @@ def scorecard(s: Store, today: date) -> dict[str, Any]:
         },
         "total": len(inputs),
         "method": rules,
+        "chart_sources": s._chart_sources(sorted(all_ids)),
+    }
+
+
+def predictions(block: dict[str, Any], f: dict[str, dict[str, Any] | None]) -> list[dict[str, Any]]:
+    """Each prediction carries its own test, a fact and one operator; one with no test says what would prove it wrong."""
+    values = {k: (x["value"] if x else None) for k, x in f.items()}
+    out = []
+    for p in block["predictions"]:
+        t = p.get("test")
+        tested = f.get(t["fact"]) if t else None
+        holds = None
+        if tested and not tested.get("stale"):
+            holds = _holds({k: v for k, v in t.items() if k != "fact"}, tested["value"], values)
+        state = "untestable" if holds is None else "holding" if holds else "failing"
+        out.append(
+            {
+                **{k: p[k] for k in ("id", "when", "claim", "text")},
+                "fact": t["fact"] if t else None,
+                "state": state,
+            }
+        )
+    return out
+
+
+def _decimal_year(d: date) -> float:
+    start, end = date(d.year, 1, 1), date(d.year + 1, 1, 1)
+    return round(d.year + (d - start).days / (end - start).days, 3)
+
+
+def strip(block: dict[str, Any], today: date) -> dict[str, Any]:
+    """The record of where the bottleneck has sat. Years and levels are this site's reading of dated events, each
+    with its reason; a span still running ends at today, so no solid ink passes the now line."""
+    st, now = block["strip"], _decimal_year(today)
+    held = {p["row"] for p in block["predictions"] if p.get("row")}
+    rows = [
+        {
+            "id": r["id"],
+            "label": r["label"],
+            "predicted": r["id"] in held,
+            "spans": [
+                {**sp, "to": min(sp["to"] or now, now), "running": sp["to"] is None} for sp in r["spans"]
+            ],
+        }
+        for r in st["rows"]
+    ]
+    return {"from": st["from"], "to": st["to"], "now": now, "rows": rows}
+
+
+def migration(s: Store, spec: dict[str, Any], today: date) -> dict[str, Any]:
+    block = spec["migration"]
+    card = scorecard(s, today)
+    f = facts(s, block, today, computed={"scored": card["scored"]})
+    preds = predictions(block, f)
+    return {
+        "as_of": min(
+            max((x["as_of"] for x in f.values() if x and x["as_of"]), default=today.isoformat()),
+            today.isoformat(),
+        ),
+        "facts": f,
+        "scorecard": card,
+        "strip": strip(block, today),
+        "predictions": preds,
+        "tally": {k: sum(1 for p in preds if p["state"] == k) for k in STATES},
+        "sources": block["sources"],
     }
 
 
@@ -411,7 +536,7 @@ def build(s: Store, today: date | None = None) -> dict[str, Any]:
     f = facts(s, spec)
     today = today or date.today()
     return {
-        "migration": {"scorecard": scorecard(s, today)},
+        "migration": migration(s, spec, today),
         "as_of": max((x["as_of"] for x in f.values() if x), default=None),
         "essay": {k: p.read_text() for k, p in ESSAYS.items()},
         "facts": f,
@@ -433,6 +558,8 @@ def problems(s: Store) -> tuple[list[str], list[str]]:
     for k, v in spec["facts"].items():
         if "indicator" in v and v["indicator"] not in ids or "metric" in v and not s.metric_spec(v["metric"]):
             errors.append(f"argument: fact {k} names an unknown indicator or metric")
+        if bad := _bad_test(v.get("expect"), spec["facts"]):
+            errors.append(f"argument: fact {k} {bad}")
     for x in spec["slow_variables"] + spec["clocks"]["links"]:
         if x["id"] not in published:
             errors.append(f"argument: {x['id']} is not a published indicator")
@@ -445,13 +572,56 @@ def problems(s: Store) -> tuple[list[str], list[str]]:
     for page, h in spec["headlines"].items():
         if h["monitor"] not in monitors or "untestable" not in h["claims"]:
             errors.append(f"argument: {page} headline names an unknown monitor or has no untestable claim")
-    for path in ESSAYS.values():
+    block = spec["migration"]
+    for k, v in block["facts"].items():
+        if "indicator" in v and v["indicator"] not in ids or "metric" in v and not s.metric_spec(v["metric"]):
+            errors.append(f"argument: migration fact {k} names an unknown indicator or metric")
+        if not any(x in v for x in ("metric", "indicator", "series", "computed")):
+            errors.append(
+                f"argument: migration fact {k} names no metric, indicator, series or computed value"
+            )
+        if bad := _bad_test(v.get("expect"), block["facts"]):
+            errors.append(f"argument: migration fact {k} {bad}")
+        if v.get("expect") and "computed" not in v and "max_age_days" not in v:
+            errors.append(f"argument: migration fact {k} has an expect and no max_age_days")
+    tight = yaml.safe_load(TIGHTNESS.read_text())
+    card_ids, words = {i["id"] for i in tight["inputs"]}, {w for _, w in tight["rules"]["words"]}
+    rows = {r["id"] for r in block["strip"]["rows"]}
+    for p in block["predictions"]:
+        t = p.get("test")
+        if t and t.get("fact") not in block["facts"] or not t and len(p.get("text", "")) < 40:
+            errors.append(f"argument: prediction {p['id']} names an unknown fact, or has no test and no text")
+        ops = {k: v for k, v in (t or {}).items() if k != "fact"}
+        if t and (bad := _bad_test(ops, block["facts"]) if ops else "needs exactly one of gt, gte, lt, lte"):
+            errors.append(f"argument: prediction {p['id']}'s test {bad}")
+        if p.get("expect_state") not in STATES or p.get("when") not in ("now", "next", "watch"):
+            errors.append(f"argument: prediction {p['id']} has an unknown expect_state or when")
+        if p.get("row") and p["row"] not in rows:
+            errors.append(f"argument: prediction {p['id']} names an unknown strip row")
+    errors += [f"argument: says names unknown input {k}" for k in block["says"] if k not in card_ids]
+    errors += [
+        f"argument: says calls {k} an unknown word {w}"
+        for k, ws in block["says"].items()
+        for w in ws
+        if w not in words
+    ]
+    if errors:
+        return errors, []
+    errors += [  # the strip plate prints a span's reason as plain text, so a token there would show as written
+        f"argument: strip row {r['id']} has a token in a span's reason, which the plate cannot render"
+        for r in block["strip"]["rows"]
+        for sp in r["spans"]
+        if TOKEN.search(sp["because"])
+    ]
+    seed_text = " ".join(p["claim"] + " " + p["text"] for p in block["predictions"])
+    for name, path in ESSAYS.items():
         text = path.read_text() if path.exists() else ""
         if not text:
             errors.append(f"argument: {path} is missing")
         errors += [f"argument: {path} {b}" for b in essay_shape(text)] if text else []
-        for kind, key in TOKEN.findall(text):
-            if kind == "fact" and key not in spec["facts"] or kind == "plate" and key not in PLATES:
+        known = block["facts"] if name == "migration" else spec["facts"]
+        for kind, key in TOKEN.findall(text + (seed_text if name == "migration" else "")):
+            if kind == "fact" and key not in known or kind == "plate" and key not in PLATES[name]:
                 errors.append(f"argument: {path} has an unknown [{kind}:{key}]")
     if errors:
         return errors, []
@@ -477,7 +647,39 @@ def problems(s: Store) -> tuple[list[str], list[str]]:
             notes.append(
                 f"argument: the essays say {k} reads {w}, but it now reads {got.get(k)}; rewrite them"
             )
-    t_errors, t_notes = tightness_problems(s, date.today())
+    today = date.today()
+    t_errors, t_notes = tightness_problems(s, today)
     errors += t_errors
     notes += t_notes
+    if t_errors:
+        return errors, notes
+    m = migration(s, spec, today)
+    for k, f in m["facts"].items():
+        if f is None:
+            notes.append(f"argument: migration fact {k} has no reading; the essay shows a gap there")
+        elif f.get("stale"):
+            notes.append(
+                f"argument: migration fact {k} is older than its limit; its sentence is no longer tested"
+            )
+        elif f["holds"] is False:
+            notes.append(
+                f"argument: migration fact {k} no longer meets {block['facts'][k]['expect']}; rewrite its sentence"
+            )
+    want_state = {p["id"]: p["expect_state"] for p in block["predictions"]}
+    for p in m["predictions"]:
+        if p["state"] != want_state[p["id"]]:
+            notes.append(
+                f"argument: prediction {p['id']} now reads {p['state']}, not {want_state[p['id']]}; the page says so, check the essay"
+            )
+    words = {i["id"]: i["word"] for i in m["scorecard"]["inputs"]}
+    for k, allowed in block["says"].items():
+        if words.get(k) not in allowed:
+            notes.append(
+                f"argument: the essay calls {k} {' or '.join(allowed)}, but it now reads {words.get(k)}"
+            )
+    sites = (m["facts"].get("dc_sites") or {}).get("value")
+    if sites is not None and sites < 25:
+        notes.append(
+            f"argument: only {sites:.0f} data-centre sites compare; under twenty the gap has no reading"
+        )
     return errors, notes

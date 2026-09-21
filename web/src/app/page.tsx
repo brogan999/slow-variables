@@ -28,6 +28,7 @@ export default function Home() {
     >
       <Folios folios={folios} facts={doc.facts} plates={plates} />
       <p className="mt-10 font-serif text-lg"><Link href="/argument" className="underline decoration-axis underline-offset-4 hover:decoration-ink">Read the full argument, with its sources →</Link></p>
+      <p className="mt-3 font-serif text-lg"><Link href="/argument/migration" className="underline decoration-axis underline-offset-4 hover:decoration-ink">Then: the migrating bottleneck, on what is scarce in making AI →</Link></p>
 
       <section id="slow-variables" className="mt-24 scroll-mt-8">
         <div className="eyebrow">What the site measures</div>
