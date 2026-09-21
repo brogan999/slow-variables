@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ArticleLayout } from "@/components/ArticleLayout";
 import { Exits, ReadingMargin, StackPlate } from "@/components/ArgumentParts";
 import { Folios, Inline, parseEssay } from "@/components/Essay";
@@ -28,6 +29,7 @@ export default function ArgumentPage() {
         <h2 className="eyebrow mb-2">The list, re-tested every night</h2>
         <Exits doc={doc} />
       </section>
+      <p className="mt-12 font-serif text-lg"><Link href="/argument/migration" className="underline decoration-axis underline-offset-4 hover:decoration-ink">Read next: the migrating bottleneck, on what is scarce in making AI and where that shortage moves →</Link></p>
       <section id="sources" className="mt-20 border-t border-grid pt-8 scroll-mt-8">
         <h2 className="display text-[1.5rem] mb-4">Sources</h2>
         <ol className="flex flex-col gap-3 font-serif text-[1.0625rem] leading-relaxed">

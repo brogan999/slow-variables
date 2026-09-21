@@ -37,4 +37,5 @@ export const indicatorHref = (id: string, published: boolean | undefined) => (pu
 
 // Thesis-monitor states in plain words for readers who have not met the monitor's logic.
 export const STATE_WORDS: Record<string, string> = { supported: "happening", unsupported: "not happening", contradicted: "running the other way", untestable: "can't be tested yet" };
+export const PREDICTION_WORDS: Record<string, string> = { holding: "holding so far", failing: "failing its test", untestable: "can't be tested yet" };
 export const PHASE_WORDS: Record<string, string> = { installation: "installation", turning_point: "turning point", deployment: "deployment", untestable: "untestable" };

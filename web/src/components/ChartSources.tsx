@@ -12,7 +12,7 @@ export function ChartSources({ cs }: { cs?: ChartSourcesT | null }) {
       {cs.sources.map((s, i) => (
         <span key={s.id}>{i ? "; " : ""}<Link href={`/sources#${s.id}`} className="underline decoration-grid underline-offset-2 hover:text-ink">{s.name}</Link></span>
       ))}
-      .{credits.map((s) => <span key={s.id}> {s.attribution}</span>)}
+      .{credits.map((s) => <span key={s.id}> {s.attribution}.</span>)}
     </p>
   );
 }

@@ -125,11 +125,32 @@ export const ladder = () => read<LadderDoc>("lens/ladder.json");
 // Server-only: which indicators have a page, so links to unpublished ones go to their row on /indicators instead of a 404.
 let _published: Set<string> | null = null;
 export const publishedIds = () => (_published ??= new Set(index().indicators.filter((c) => c.published).map((c) => c.id)));
-export type Fact = { value: number; unit: string; as_of: string; obs_ids: string[]; href: string; holds: boolean | null };
+export type Fact = { value: number; unit: string; as_of: string; obs_ids: string[]; href: string; holds?: boolean | null; stale?: boolean };
 export type ClockSeries = { id: string; label: string; name: string; unit: string; from: string; series: { as_of: string; value: number; obs_ids: string[] }[]; multiple: Fact };
+export type Gauge = {
+  id: string; label: string; weight: number; max_age_days: number | null; knots: [number, number][] | null; scale_rationale: string | null;
+  unfed: { kind: string; because: string } | null; required: boolean; log10: boolean; reading: Fact | null; age_days: number | null;
+  grade: string | null; points: number | null; pinned: "low" | "high" | null; unavailable: string | null;
+};
+export type TightInput = {
+  id: string; n: number; name: string; kind: string; what: string; reads: string | null; ceiling: number; ceiling_rationale: string | null;
+  score: number | null; word: string | null; confidence: number | null; at_ceiling: boolean; hatched: boolean; used: number; defined: number;
+  factors: { coverage: number; freshness: number; source: number } | null; obs_ids: string[]; withheld: { kind: string; because: string } | null; gauges: Gauge[];
+};
+export type Scorecard = {
+  kinds: { id: string; name: string; tight_means: string }[]; inputs: TightInput[]; scored: Fact; total: number;
+  method: Record<string, unknown> & { words: [number, string][]; hatch_under: number }; chart_sources: ChartSourcesT;
+};
+export type StripRow = { id: string; label: string; predicted: boolean; spans: { from: number; to: number; running: boolean; level: "binding" | "present"; because: string; source: string }[] };
+export type OwnPrediction = { id: string; when: "now" | "next" | "watch"; claim: string; text: string; fact: string | null; state: "holding" | "failing" | "untestable" };
+export type MigrationDoc = {
+  as_of: string; facts: Record<string, Fact | null>; scorecard: Scorecard; strip: { from: number; to: number; now: number; rows: StripRow[] };
+  predictions: OwnPrediction[]; tally: Record<"holding" | "failing" | "untestable", number>; sources: { who: string; work: string; where: string; url: string }[];
+};
 export type ArgumentDoc = {
   as_of: string | null;
-  essay: { home: string; full: string };
+  essay: { home: string; full: string; migration: string };
+  migration: MigrationDoc;
   facts: Record<string, Fact | null>;
   slow_variables: { id: string; label: string; sentence: string }[];
   clocks: { start: string; drawn: ClockSeries[]; listed: string[]; holds: boolean | null };

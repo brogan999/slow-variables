@@ -96,3 +96,130 @@ sources:
   - {who: "Carlota Perez", work: "Technological Revolutions and Financial Capital", where: "Edward Elgar, 2002", url: "https://en.wikipedia.org/wiki/Technological_Revolutions_and_Financial_Capital"}
   - {who: "David J. Teece", work: "Profiting from technological innovation", where: "Research Policy 15(6), 1986", url: "https://doi.org/10.1016/0048-7333(86)90027-2"}
   - {who: "William D. Nordhaus", work: "Schumpeterian Profits in the American Economy: Theory and Measurement", where: "NBER Working Paper 10433, 2004", url: "https://www.nber.org/papers/w10433"}
+
+# --- The migrating bottleneck (/argument/migration, docs/argument/migration.md). Kept apart from the facts above so the
+# home page's date and facts never move when this essay's do. A fact with an `expect` also carries `max_age_days`: a
+# reading that has aged past it is shown with its date and no longer tested, because a test on a frozen series would
+# hold for ever. `says` lists the only tightness words the prose asserts; each accepts its neighbour where a score sits
+# near a line. A prediction carries its own test (a fact and one operator) and the state the page was written for.
+migration:
+  facts:
+    nvda_margin: {metric: gross_margin, dims: {entity: nvda}, expect: {gt: 0.5}, max_age_days: 200}
+    meta_scale_price: {series: acq.meta.scale_ai.pt}  # the newest row is the carrying value in Meta's audited accounts
+    surge_revenue: {series: yahoo_finance.surge_ai.revenue_usd.fy}
+    lab_deals_4q: {metric: lab_vertical_integration_events_4q, expect: {gt: lab_deals_year_ago}, max_age_days: 200}
+    lab_deals_year_ago: {metric: lab_vertical_integration_events_4q, pick: year_ago}
+    procurement_4q: {metric: lab_procurement_signal_4q, expect: {lte: procurement_year_ago}, max_age_days: 200}  # guards "no higher than a year ago"; not printed
+    procurement_year_ago: {metric: lab_procurement_signal_4q, pick: year_ago}
+    rl_vendor_count: {indicator: rl_environment_vendor_count}
+    inputs_scored: {computed: scored}
+    dc_gap: {metric: dc_projected_to_observed_power, dims: {sites: all}, expect: {gt: 2}, max_age_days: 120}
+    dc_gap_built: {metric: dc_projected_to_observed_power, dims: {sites: built}, expect: {lt: dc_gap}, max_age_days: 120}
+    dc_sites: {metric: dc_sites_compared, dims: {sites: all}, expect: {gte: 20}, max_age_days: 120}
+    dc_sites_unbuilt: {metric: dc_sites_compared, dims: {sites: unbuilt}}
+    hbm_supply_growth: {metric: chip_input_supply_yoy, dims: {input: hbm_supply_usd}, expect: {gt: 0}, max_age_days: 300}
+    capex_growth: {metric: hyperscaler_capex_ttm_yoy, expect: {gt: 0.2}, max_age_days: 200}
+    capex_to_revenue: {metric: capex_to_revenue_stack}
+
+  says: {data_centres: [tight, severe], capital: [slack, easing]}
+
+  predictions:
+    - id: data_centres_now
+      when: now
+      row: power
+      claim: Data-centre buildings and their power hookups are the bottleneck.
+      text: "Epoch expects more than twice the built power at the sites it tracks: [fact:dc_gap] today. Proved wrong if that ratio falls below two while at least twenty sites still compare. Only Epoch's revisions can move it, by raising what it counts as built or by cutting what it expects, and a fast, untroubled build-out would read the same as a shortage, so this is a weak test of a strong claim."
+      test: {fact: dc_gap, gt: 2}
+      expect_state: holding
+    - id: capital_now
+      when: now
+      claim: Money is not what is scarce.
+      text: "The five largest builders of data centres are still raising their spending by more than a fifth a year: [fact:capex_growth]. Proved wrong if that growth falls below a fifth, the point on this site's scale where money stops reading as plentiful."
+      test: {fact: capex_growth, gt: 0.2}
+      expect_state: holding
+    - id: memory_packaging_now
+      when: now
+      row: packaging_memory
+      claim: Memory and chip packaging are short.
+      text: "This cannot be tested yet. Memory supply is published in dollars, so a price rise and a volume rise look the same, and packaging supply is published without any measure of demand. It would be proved wrong if memory supply counted in units grew faster than chip shipments for two quarters running."
+      expect_state: untestable
+    - id: practice_next
+      when: next
+      row: practice
+      claim: Practice tasks with automatic graders, and the expert-written data they consume, are where the shortage goes next.
+      text: "The test is whether the labs' disclosed buying from the firms that sell these inputs is rising on a year before. It is not, so this prediction is failing its test today. The tally is kept by hand from public announcements, and most such buying is never announced, so the test undercounts. It is still the only one available."
+      test: {fact: procurement_4q, gt: procurement_year_ago}
+      expect_state: failing
+    - id: agent_proof_watch
+      when: watch
+      claim: Proof of what an AI agent did, and who answers for it, becomes a bottleneck once agents handle money.
+      text: "This cannot be tested yet, because no public series exists. In April 2025 Mastercard and Visa each announced a system for verifying an AI agent before it pays on a person's behalf. The prediction would be proved wrong if the card networks' own systems come to cover this before any specialist firm sells it to a lab or a large company."
+      expect_state: untestable
+
+  # Where the bottleneck has sat. Whole years; two levels (binding: what held things back; present: short, but not what
+  # held things back). Every span is a judgement anchored on a dated, sourced event, and says so. `to: null` runs to today.
+  strip:
+    from: 2012
+    to: 2029
+    rows:
+      - id: people
+        label: People who could build it
+        spans:
+          - {from: 2012, to: 2017, level: binding, source: "https://www.technologyreview.com/2014/01/29/174403/is-google-cornering-the-market-on-deep-learning/", because: "From the 2012 contest win to the years when Google bought whole research teams; a leading researcher then put the world's experts at about fifty. The end year is a judgement: no single event marks it."}
+      - id: chips
+        label: AI chips
+        spans:
+          - {from: 2020, to: 2023, level: present, source: "https://arxiv.org/abs/2001.08361", because: "In January 2020 OpenAI's scaling-laws paper showed that more computing power reliably buys a better model, which made chips worth queuing for."}
+          - {from: 2023, to: null, level: binding, source: "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2024", because: "NVIDIA's sales to data centres more than tripled in the year to January 2024 while analysts reported waits of most of a year for servers built on its chips."}
+      - id: packaging_memory
+        label: Packaging and memory
+        spans:
+          - {from: 2023, to: null, level: binding, source: "https://investor.tsmc.com/english/encrypt/files/encrypt_file/reports/2023-07/7ec677062ca442e429b632ccd6d4f31ad53b1ce7/TSMC%202Q23%20Transcript.pdf", because: "In July 2023 TSMC said its advanced packaging capacity was very tight; in May 2024 SK Hynix said its fast memory was sold out for that year and almost sold out for the next."}
+      - id: text
+        label: Public text
+        spans:
+          - {from: 2022, to: 2023, level: binding, source: "https://arxiv.org/abs/2203.15556", because: "In 2022 DeepMind found large models had been given too little text for their size, and Epoch estimated the stock of high-quality text would run out within a few years."}
+          - {from: 2023, to: null, level: present, source: "https://epoch.ai/blog/will-we-run-out-of-ml-data-evidence-from-projecting-dataset", because: "Still finite, but labs turned to paying for written data, so text stopped being what held them back. The year is a judgement."}
+      - id: expert_data
+        label: Expert-written data
+        spans:
+          - {from: 2022, to: 2023, level: present, source: "https://arxiv.org/abs/2203.02155", because: "A 2022 OpenAI paper showed that feedback from a few dozen hired contractors could matter more than a hundredfold increase in model size."}
+          - {from: 2023, to: null, level: binding, source: "https://www.theverge.com/features/23764584/ai-artificial-intelligence-data-notation-labor-scale-surge-remotasks-openai-chatbots", because: "By the middle of 2023 data firms were recruiting people with expertise in law, finance and programming; in 2025 Meta took a large minority stake in one of them."}
+      - id: serving
+        label: Running and routing models
+        spans:
+          - {from: 2023, to: 2025, level: present, source: "https://epoch.ai/data-insights/llm-inference-price-trends", because: "A marketplace for routing between models started in 2023. By early 2025 Epoch found the price of a fixed level of performance falling many times over each year, so cost stopped deciding what could be built."}
+      - id: practice
+        label: Practice tasks and graders
+        spans:
+          - {from: 2025, to: null, level: present, source: "https://techcrunch.com/2025/09/21/silicon-valley-bets-big-on-environments-to-train-ai-agents/", because: "In September 2025 TechCrunch reported the leading labs demanding more simulated tasks with automatic grading, and one lab's leaders discussing more than a billion dollars a year for them."}
+      - id: power
+        label: Power and data-centre sites
+        spans:
+          - {from: 2022, to: 2024, level: present, source: "https://www.datacenterfrontier.com/energy/article/11436951/dominion-resumes-new-connections-but-loudoun-faces-lengthy-power-constraints", because: "In July 2022 a Virginia utility began telling data-centre companies that power for some new sites would be delayed for years."}
+          - {from: 2024, to: null, level: binding, source: "https://www.energy.gov/sites/default/files/2024-10/EXEC-2022-001242%20-%20Large%20Power%20Transformer%20Resilience%20Report%20signed%20by%20Secretary%20Granholm%20on%207-10-24.pdf", because: "In 2024 the United States Department of Energy reported waits of about three years for large transformers, and Epoch's site timelines show plans running far ahead of what is built."}
+
+  sources:
+    - {who: "Eliyahu M. Goldratt", work: "The Five Steps of Focusing", where: "North River Press, adapted from What Is This Thing Called Theory of Constraints, 1990; The Goal, written with Jeff Cox, was first published in 1984", url: "https://northriverpress.com/wp-content/uploads/2018/01/Free-download-5FS.pdf"}
+    - {who: "David Ricardo", work: "On the Principles of Political Economy, and Taxation", where: "John Murray, London, 1817, chapter two, On Rent", url: "https://www.gutenberg.org/files/33310/33310-h/33310-h.htm"}
+    - {who: "Alex Krizhevsky, Ilya Sutskever and Geoffrey Hinton", work: "ImageNet Classification with Deep Convolutional Neural Networks", where: "Advances in Neural Information Processing Systems, 2012", url: "https://papers.nips.cc/paper_files/paper/2012/file/c399862d3b9d6b76c8436e924a68c45b-Paper.pdf"}
+    - {who: "Antonio Regalado", work: "Is Google Cornering the Market on Deep Learning?", where: "MIT Technology Review, January 2014", url: "https://www.technologyreview.com/2014/01/29/174403/is-google-cornering-the-market-on-deep-learning/"}
+    - {who: "Jared Kaplan and colleagues", work: "Scaling Laws for Neural Language Models", where: "arXiv, January 2020", url: "https://arxiv.org/abs/2001.08361"}
+    - {who: "NVIDIA", work: "Financial results for the fourth quarter and fiscal 2024", where: "press release, February 2024", url: "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2024"}
+    - {who: "TSMC", work: "Second-quarter 2023 earnings call transcript", where: "July 2023", url: "https://investor.tsmc.com/english/encrypt/files/encrypt_file/reports/2023-07/7ec677062ca442e429b632ccd6d4f31ad53b1ce7/TSMC%202Q23%20Transcript.pdf"}
+    - {who: "Kim Boram", work: "SK hynix to mass-produce industry-leading 12H HBM for AI chip leadership: CEO", where: "Yonhap News Agency, May 2024", url: "https://en.yna.co.kr/view/AEN20240502007100320"}
+    - {who: "Jordan Hoffmann and colleagues", work: "Training Compute-Optimal Large Language Models", where: "arXiv, 2022", url: "https://arxiv.org/abs/2203.15556"}
+    - {who: "Pablo Villalobos and colleagues", work: "Will we run out of data?", where: "arXiv, first version, 2022", url: "https://arxiv.org/abs/2211.04325v1"}
+    - {who: "Long Ouyang and colleagues", work: "Training language models to follow instructions with human feedback", where: "arXiv, 2022", url: "https://arxiv.org/abs/2203.02155"}
+    - {who: "Josh Dzieza", work: "AI Is a Lot of Work", where: "The Verge, June 2023", url: "https://www.theverge.com/features/23764584/ai-artificial-intelligence-data-notation-labor-scale-surge-remotasks-openai-chatbots"}
+    - {who: "Ben Cottier, Ben Snodin, David Owen and Tom Adamczewski", work: "LLM inference prices have fallen rapidly but unequally across tasks", where: "Epoch AI data insight, March 2025", url: "https://epoch.ai/data-insights/llm-inference-price-trends"}
+    - {who: "Stripe", work: "Stripe agrees to acquire OpenRouter", where: "newsroom, August 2026", url: "https://stripe.com/newsroom/news/stripe-agrees-to-acquire-openrouter"}
+    - {who: "Rich Miller", work: "Dominion Resumes New Connections, But Loudoun Faces Lengthy Power Constraints", where: "Data Center Frontier, September 2022", url: "https://www.datacenterfrontier.com/energy/article/11436951/dominion-resumes-new-connections-but-loudoun-faces-lengthy-power-constraints"}
+    - {who: "United States Department of Energy", work: "Large Power Transformer Resilience, report to Congress", where: "July 2024", url: "https://www.energy.gov/sites/default/files/2024-10/EXEC-2022-001242%20-%20Large%20Power%20Transformer%20Resilience%20Report%20signed%20by%20Secretary%20Granholm%20on%207-10-24.pdf"}
+    - {who: "International Energy Agency", work: "Energy and AI", where: "April 2025", url: "https://www.iea.org/reports/energy-and-ai/executive-summary"}
+    - {who: "Maxwell Zeff", work: "Silicon Valley bets big on environments to train AI agents", where: "TechCrunch, September 2025", url: "https://techcrunch.com/2025/09/21/silicon-valley-bets-big-on-environments-to-train-ai-agents/"}
+    - {who: "Mastercard", work: "Mastercard unveils Agent Pay", where: "press release, April 2025", url: "https://www.mastercard.com/global/en/news-and-trends/press/2025/april/mastercard-unveils-agent-pay-pioneering-agentic-payments-technology-to-power-commerce-in-the-age-of-ai.html"}
+    - {who: "Visa", work: "Find and Buy with AI: Visa Unveils New Era of Commerce", where: "press release, April 2025", url: "https://usa.visa.com/about-visa/newsroom/press-releases.releaseId.21361.html"}
+    - {who: "Epoch AI", work: "AI Data Centers", where: "database and its notes on accuracy and coverage", url: "https://epoch.ai/data/ai-data-centers"}
+    - {who: "Epoch AI", work: "Data on AI Chip Components", where: "database", url: "https://epoch.ai/data/ai-chip-components"}
+

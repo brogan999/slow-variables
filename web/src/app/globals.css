@@ -51,8 +51,8 @@ body { background: var(--background); color: var(--ink); font-family: var(--font
   & > * + * { margin-top: 1.1em; }
   & a { text-decoration: underline; text-decoration-color: var(--axis); text-underline-offset: 3px; }
   & a:hover { text-decoration-color: var(--ink); }
-  & ul, & ol { padding-left: 1.25em; }
-  & ul { list-style: disc; } & ol { list-style: decimal; }
+  & > ul, & > ol { padding-left: 1.25em; } /* direct children only: a plate inside the prose lays out its own lists */
+  & > ul { list-style: disc; } & > ol { list-style: decimal; }
   & blockquote { border-left: 1px solid var(--gild); padding-left: 1em; color: var(--ink-2); font-style: italic; }
 }
 @utility drop-cap {

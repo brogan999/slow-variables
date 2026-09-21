@@ -11,3 +11,8 @@ export function Fact({ f }: { f: FactT | null | undefined }) {
     </Link>
   );
 }
+
+// A reading that has aged past its limit still shows, with its date in plain sight: a touch screen never shows a title.
+export function FactDated({ f }: { f: FactT | null | undefined }) {
+  return <><Fact f={f} />{f?.stale ? <span className="text-muted text-[0.8em]"> (as of {f.as_of})</span> : null}</>;
+}
