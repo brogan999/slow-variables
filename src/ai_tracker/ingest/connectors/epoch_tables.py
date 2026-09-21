@@ -1,5 +1,6 @@
 """Epoch AI's other tables (CC BY 4.0): frontier model compute and power, ML hardware price-performance, lowest
-inference price at fixed capability, benchmark scores (ECI, ARC-AGI-2, CL-bench) and cumulative chip sales.
+inference price at fixed capability, benchmark scores (ECI, ARC-AGI-2, CL-bench), cumulative chip sales and the
+chip components (packaging, logic wafers, memory) those chips consume.
 One small connector per table so a layout change in one file never blocks the others.
 """
 
@@ -12,14 +13,16 @@ import zipfile
 from datetime import date
 
 from ...schema import Basis, Extraction, Observation, Tier
-from ..base import Connector, RawItem, expect, slug
+from ..base import Connector, RawItem, expect, series_key, slug
 
 
 def _csv(body: bytes, member: str | None = None) -> list[dict[str, str]]:
     if member:
         z = zipfile.ZipFile(io.BytesIO(body))
-        name = next(n for n in z.namelist() if n.endswith(member))
-        body = z.read(name)
+        # the whole file name, never a suffix: "cumulative_supply_denominators.csv" ends with "supply_denominators.csv"
+        names = [n for n in z.namelist() if n == member or n.endswith("/" + member)]
+        expect({member} if names else set(), {member}, "zip members")
+        body = z.read(names[0])
     return list(csv.DictReader(io.StringIO(body.decode("utf-8", "ignore"))))
 
 
@@ -65,7 +68,7 @@ class _EpochTable(Connector):
             series_key=series_key,
             unit=unit,
             as_of_date=as_of,
-            published_date=as_of,
+            published_date=kw.pop("published_date", as_of),
             value_numeric=value,
             tier=tier,
             audited_vs_reported=basis,
@@ -288,7 +291,8 @@ class EpochBench(_EpochTable):
 
 
 class EpochChips(_EpochTable):
-    """Cumulative AI chip sales in H100-equivalents by designer, with Epoch's 5th-95th percentile range; incomplete quarters skipped."""
+    """Cumulative AI chip sales by designer, in H100-equivalents and in the megawatts those chips draw, each with
+    Epoch's 5th-95th percentile range; incomplete quarters skipped."""
 
     source_id = "epoch_chips"
     urls = ["https://epoch.ai/data/ai_chip_sales.zip"]
@@ -299,6 +303,7 @@ class EpochChips(_EpochTable):
         "Start date",
         "End date",
         "Compute estimate in H100e (median)",
+        "Power in MW (median)",
         "Incomplete",
     }
 
@@ -336,4 +341,113 @@ class EpochChips(_EpochTable):
                     value_high=_num(r.get("Compute estimate in H100e (95th percentile)")),
                 )
             )
+            mw = _num(r.get("Power in MW (median)"))
+            if mw is None:
+                continue
+            out.append(
+                self.emit(
+                    items[0],
+                    r,
+                    series_key("epoch_chips", r["Chip manufacturer"], "power_mw_cumulative", "pt"),
+                    "MW",
+                    e,
+                    mw,
+                    Tier.PUBLISHED_ANALYSIS,
+                    Basis.estimated,
+                    [
+                        "Name",
+                        "Chip manufacturer",
+                        "Start date",
+                        "End date",
+                        "Power in MW (median)",
+                        "Power in MW (5th percentile)",
+                        "Power in MW (95th percentile)",
+                    ],
+                    period_start=s,
+                    value_low=_num(r.get("Power in MW (5th percentile)")),
+                    value_high=_num(r.get("Power in MW (95th percentile)")),
+                )
+            )
+        return out
+
+
+class EpochComponents(_EpochTable):
+    """What AI chips consume, by quarter: each designer's share of advanced packaging (CoWoS), leading-edge logic
+    wafers and high-bandwidth memory, and the supply of each. Epoch's estimates with 5th-95th percentile ranges.
+    The shares of one input sum to 100 across designers by construction ("Other" is the residual), so a
+    consumed-over-supply ratio would always read 1; per-designer wafer counts are not stored for that reason.
+    """
+
+    source_id = "epoch_components"
+    urls = ["https://epoch.ai/data/ai_chip_components.zip"]
+    expect_series = ["epoch_components.nvidia.cowos_share_pct.q", "epoch_components.global.hbm_supply_usd.q"]
+
+    def extract(self, items: list[RawItem]) -> list[Observation]:
+        item, out = items[0], []
+        read_on = item.retrieved_at.date()
+        shares = {"cowos": "CoWoS share (%)", "logic": "Logic share (%)", "hbm": "HBM share (%)"}
+        self.member = "quarterly_by_designer.csv"
+        self.columns = {"Designer", "Start date", "End date"} | {f"{c} (median)" for c in shares.values()}
+        for r in self.rows(item):
+            s, e = _date(r.get("Start date", "")), _date(r.get("End date", ""))
+            if not s or not e or e > read_on:
+                continue
+            for m, col in shares.items():
+                v = _num(r.get(f"{col} (median)"))
+                if v is None:  # a quarter Epoch has not finished lists some designers with blank shares
+                    continue
+                out.append(
+                    self.emit(
+                        item,
+                        r,
+                        series_key("epoch_components", r["Designer"], f"{m}_share_pct", "q"),
+                        "pct",
+                        e,
+                        v,
+                        Tier.PUBLISHED_ANALYSIS,
+                        Basis.estimated,
+                        [
+                            "Designer",
+                            "Quarter",
+                            f"{col} (5th percentile)",
+                            f"{col} (median)",
+                            f"{col} (95th percentile)",
+                        ],
+                        period_start=s,
+                        value_low=_num(r.get(f"{col} (5th percentile)")),
+                        value_high=_num(r.get(f"{col} (95th percentile)")),
+                    )
+                )
+        supply = {
+            "cowos_supply_wafers": ("CoWoS supply", "wafers"),
+            "logic_supply_wafers": ("Logic supply", "wafers"),
+            "hbm_supply_usd": ("HBM supply (USD)", "USD"),
+        }
+        self.member = "supply_denominators.csv"
+        # Quarter and Start date are absent from the cumulative file of nearly the same name
+        self.columns = {"Quarter", "Start date", "End date"} | {f"{c} (median)" for c, _ in supply.values()}
+        for r in self.rows(item):
+            s, e = _date(r.get("Start date", "")), _date(r.get("End date", ""))
+            if not s or not e or e > read_on:
+                continue
+            for measure, (col, unit) in supply.items():
+                v = _num(r.get(f"{col} (median)"))
+                if v is None:
+                    continue
+                out.append(
+                    self.emit(
+                        item,
+                        r,
+                        series_key("epoch_components", "global", measure, "q"),
+                        unit,
+                        e,
+                        v,
+                        Tier.PUBLISHED_ANALYSIS,
+                        Basis.estimated,
+                        ["Quarter", f"{col} (5th percentile)", f"{col} (median)", f"{col} (95th percentile)"],
+                        period_start=s,
+                        value_low=_num(r.get(f"{col} (5th percentile)")),
+                        value_high=_num(r.get(f"{col} (95th percentile)")),
+                    )
+                )
         return out

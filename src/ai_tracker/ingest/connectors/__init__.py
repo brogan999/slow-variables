@@ -5,7 +5,7 @@ from .cait import Cait
 from .canaries import Canaries
 from .census_btos import CensusBtos
 from .epoch import Epoch
-from .epoch_tables import EpochBench, EpochChips, EpochHardware, EpochModels, EpochPrices
+from .epoch_tables import EpochBench, EpochChips, EpochComponents, EpochHardware, EpochModels, EpochPrices
 from .feeds import Feeds
 from .formd import FormD
 from .fred import Fred
@@ -45,6 +45,7 @@ CONNECTORS = {
         EpochPrices,
         EpochBench,
         EpochChips,
+        EpochComponents,
         FdaDevices,
         Ncsl,
         RlList,
