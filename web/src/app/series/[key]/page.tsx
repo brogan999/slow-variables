@@ -48,7 +48,7 @@ export default async function SeriesPage({ params }: { params: Promise<{ key: st
                 <td><Grade grade={o.grade} tier={o.tier as number} /></td>
                 {COLS.map((c) => <td key={c} className="whitespace-nowrap text-ink-2" title={o[c] === null || o[c] === undefined ? undefined : String(o[c])}>{cell(c, o[c])}</td>)}
                 <td><a href={String(o.url)} className="underline decoration-grid underline-offset-4">source page</a></td>
-                <td>{o.disputed ? <span className="text-ink">⚑ disputed: {String(o.dispute_text).slice(0, 120)}</span> : null}{o.run_rate_vs_booked ? <span className="ml-1">{String(o.run_rate_vs_booked)}</span> : null}{o.gross_vs_net ? <span className="ml-1">{String(o.gross_vs_net)}</span> : null}{o.note ? <div className="text-muted">{String(o.note)}</div> : null}</td>
+                <td className={o.disputed || o.note ? "min-w-[16rem]" : undefined}>{o.disputed ? <span className="text-ink">⚑ disputed: {String(o.dispute_text).slice(0, 120)}</span> : null}{o.run_rate_vs_booked ? <span className="ml-1">{String(o.run_rate_vs_booked)}</span> : null}{o.gross_vs_net ? <span className="ml-1">{String(o.gross_vs_net)}</span> : null}{o.note ? <div className="text-muted">{String(o.note)}</div> : null}</td>
               </tr>
             ))}
           </tbody>

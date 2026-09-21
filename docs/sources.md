@@ -54,6 +54,7 @@
 | epoch_blog | Epoch AI research posts | Epoch AI | html | 6 | irregular | CC BY 4.0 | Epoch AI (CC BY 4.0) |
 | epoch_chips | Epoch AI chip sales | Epoch AI | csv | 6 | monthly | CC BY 4.0 | Epoch AI, AI Chip Sales (CC BY 4.0) |
 | epoch_components | Epoch AI chip components | Epoch AI | csv | 6 | quarterly | CC BY 4.0 | Epoch AI, Data on AI Chip Components (CC BY 4.0) |
+| epoch_datacenters | Epoch AI data centres | Epoch AI | csv | 6 | monthly | CC BY 4.0 | Epoch AI, AI Data Centers (CC BY 4.0) |
 | epoch_hardware | Epoch AI ML hardware | Epoch AI | csv | 2 | monthly | CC BY 4.0 | Epoch AI, Machine Learning Hardware (CC BY 4.0) |
 | epoch_models | Epoch AI notable and frontier models | Epoch AI | csv | 6 | weekly | CC BY 4.0 | Epoch AI, Notable AI Models (CC BY 4.0) |
 | epoch_prices | Epoch AI LLM inference price trends | Epoch AI | csv | 6 | monthly | CC BY 4.0 | Epoch AI, LLM inference price trends (CC BY 4.0) |
@@ -142,7 +143,7 @@
 | cleverhack | cleverhack.com AI lab trackers and Awesome-AI-Market-Maps | Category directories, not data (P1 §5.3). The neolab directory seeded the neolabs sub-layer's entity list on 11 Sep 2026; the frontier tracker's lab list overlaps the seed list; the coding landscape mixes models, agents, IDEs and benchmarks, so it is not mapped. |
 | crunchbase | Crunchbase (paid) | Paid; stub off. Would unlock founding dates and stage labels. |
 | dealroom_api | Dealroom API (paid) | Paid; stub off. Dealroom's public news pages are read as a manual source. |
-| epoch_clusters_datacenters | Epoch AI GPU clusters and data centres | No indicator uses them yet; a table reader is a short addition to the Epoch connectors when one does. |
+| epoch_gpu_clusters | Epoch AI GPU clusters | Not read. The measures here need power per site at dated milestones, built and projected, which Epoch's data-centre timelines (epoch_datacenters) give. |
 | eu_ai_office | EU AI Office | No numeric series the diffusion lens scores. |
 | forge_equityzen_notice | Forge, EquityZen and Notice (secondary marks) | Secondary-market marks sit behind accounts and paid tiers; the indicator that would use them stays unpublished. |
 | goldman | Goldman Sachs Top of Mind | Client research; the public issue is a claim on the prediction ledger. |
