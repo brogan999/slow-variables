@@ -1,0 +1,381 @@
+# The tightness scorecard on /argument/migration: twenty-three inputs to AI, each read by a few gauges.
+# A gauge turns one metric from semantic/metrics.yaml into points on a hand-set scale (`knots`: reading -> points,
+# straight lines between them, flat beyond the ends). Scales, weights and ceilings were set by hand in the prototype
+# this page came from; each scale's rationale was re-checked against the metric that feeds it here. They change only by
+# reviewed PR. Everything a reader can see is written without digits: the page renders the numbers from the constants.
+#
+# `hand_judged_weight` is the share of an input's evidence the prototype gave to reported events (deals, shortages in
+# the news). This store does not collect those, so that share counts as missing when confidence is worked out.
+# A gauge with `unfed` has no metric here; it stays listed so "n of m gauges" tells the truth.
+# Reason kinds: no_public_series (nobody publishes it), not_read_yet (published, not ingested here),
+# gauge_unsound (a reading exists but does not measure what it claims). The engine adds stale_or_thin itself.
+
+rules:
+  weights: {coverage: 0.28, freshness: 0.20, source: 0.29}
+  weights_rationale: "Confidence multiplies three things together, each raised to its weight, so one weak factor drags the whole figure down. Coverage counts most, because a score resting on a small part of the intended evidence is the easiest to misread. The prototype also weighed the width of each source's error range and the agreement between news reports; this store carries neither, so those are left out and the rest are rescaled."
+  grade_quality: {A: 1.0, B: 0.9, C: 0.75, D: 0.5}
+  grade_quality_rationale: "An editorial table, not a measurement: it turns the site's evidence grade for a gauge's weakest input into a factor between nought and one. Filed figures count in full; a respected group's estimate, which is what most of these gauges rest on, counts for three quarters."
+  half_life_ratio: 0.75
+  half_life_rationale: "Freshness halves each time a reading ages by three quarters of its gauge's age limit, so a reading at its limit still counts for a little under half and one past it is dropped."
+  factor_floor: 0.05
+  confidence_floor: 20
+  confidence_floor_rationale: "A backstop. A score this weakly supported would mislead, so it is withheld. Under these weights the coverage rule usually withholds an input first."
+  hatch_under: 45
+  hatch_rationale: "A bar is hatched when its confidence is low. With these weights that happens only where an input's ceiling is set low, which is done on purpose for scores that rest on a stand-in."
+  min_coverage: 0.35
+  min_coverage_rationale: "An input scores only when at least about a third of its intended evidence has a usable reading."
+  words: [[80, severe], [60, tight], [40, moderate], [20, easing], [0, slack]]
+  reasons:
+    nothing: "None of its gauges has a usable reading today: each is missing or older than its age limit."
+    required: "The gauge this input depends on has no usable reading today."
+    coverage: "Too little of its intended evidence has a usable reading today."
+    confidence: "The evidence behind it is too weak to show a score."
+  epoch_quarterly_rationale: "The limit on Epoch's quarterly chip gauges is set by the publisher's calendar. Its chip-components file has been released once, and its newest complete quarter was already more than two quarters old on the day it came out. Its chip-sales file lists newer quarters, but only for some designers, and a share or a total across designers is read only from a quarter in which every designer reported. A tighter limit would withhold every one of these gauges for no reason but that calendar; this one admits the newest complete quarter and drops it if no newer one arrives within about a month."
+
+kinds:
+  - {id: supply, name: Supply, tight_means: "Tight means the thing itself is hard to get: supply is growing slowly, a few buyers take most of it, or far more is promised than built."}
+  - {id: know_how, name: Know-how, tight_means: "Tight means few people or firms can do it well yet, so skill rather than material is what is short."}
+  - {id: money, name: Money, tight_means: "Tight means money is hard to raise. Slack means it is plentiful, which is not the same as well spent."}
+
+inputs:
+  - id: minerals
+    n: 1
+    name: Critical minerals
+    kind: supply
+    what: Gallium, germanium, rare earths, copper and the other raw materials chips and power equipment are made from.
+    ceiling: 50
+    hand_judged_weight: 1.0
+    withheld: {kind: not_read_yet, because: "This site reads no series on how much of these minerals is mined or sold."}
+
+  - id: energy
+    n: 2
+    name: Electricity generation
+    kind: supply
+    what: The power stations, turbines, reactors and solar farms the electricity comes from.
+    reads: "Demand only: how fast the electricity that all AI chips sold so far would draw is growing. It says nothing about how much power can be supplied."
+    ceiling: 40
+    ceiling_rationale: "Set low on purpose. The only gauge here measures demand for power, not its supply, so the score is a stand-in and is drawn hatched."
+    hand_judged_weight: 0.45
+    gauges:
+      - id: fleet_power_growth
+        label: Growth in the power drawn by AI chips sold
+        metric: chip_fleet_power_yoy
+        weight: 0.55
+        max_age_days: 300
+        knots: [[0.0, 15], [0.25, 35], [0.5, 55], [1.0, 75], [2.0, 92]]
+        scale_rationale: "Growth of a quarter a year or less is the kind of new load a grid plans for in the ordinary way. A doubling within a year is more than new power stations can be built to serve in that time, which is when electricity stops being a bill and becomes a limit."
+
+  - id: grid
+    n: 3
+    name: The grid and its hookups
+    kind: supply
+    what: Transformers, switchgear, transmission lines and the queue to be connected. The wire between a power station and a rack of chips.
+    ceiling: 40
+    hand_judged_weight: 1.0
+    withheld: {kind: not_read_yet, because: "Grid operators publish their connection queues, but this site does not read them yet."}
+
+  - id: data_centres
+    n: 4
+    name: Data-centre buildings
+    kind: supply
+    what: The shells, cooling and power hookups that racks of chips sit in.
+    reads: "The power Epoch expects at the large sites it tracks, against the power it counts as built there today."
+    ceiling: 60
+    ceiling_rationale: "Lower than the prototype's. Half of this ratio is Epoch's projection of sites not yet finished, and Epoch says its power figures can be off by a factor of about one and a half."
+    hand_judged_weight: 0.15
+    gauges:
+      - id: planned_vs_built
+        label: Planned power against built power
+        metric: dc_projected_to_observed_power
+        dims: {sites: all}
+        weight: 0.60
+        required: true
+        max_age_days: 120
+        knots: [[1.0, 20], [2.0, 40], [3.0, 60], [4.5, 78], [7.0, 92]]
+        scale_rationale: "A ratio near one means the industry is building about what it said it would. Two or three times is ordinary for a growing business whose projects take years. Past four, far more has been promised than builders, equipment makers and power companies can deliver on time, which shows up later as slipped dates. It measures the delivery gap, not demand, and the age limit is four months because Epoch revises the file about monthly."
+      - id: built_power_growth
+        label: Growth in built power
+        weight: 0.25
+        unfed: {kind: gauge_unsound, because: "Built power at the sites Epoch tracks grows very fast partly because Epoch chooses sites that are growing, so it says little about the market as a whole."}
+
+  - id: chip_equipment
+    n: 5
+    name: Chip-making equipment
+    kind: supply
+    what: The machines that print, deposit, etch and inspect chips, made by a handful of firms such as ASML.
+    ceiling: 70
+    hand_judged_weight: 1.0
+    withheld: {kind: not_read_yet, because: "The equipment makers file their orders and backlogs, but this site does not read them yet."}
+
+  - id: foundry
+    n: 6
+    name: Chip foundries
+    kind: supply
+    what: The factories, above all TSMC's, that make the most advanced logic chips.
+    reads: "How fast the supply of leading-edge logic wafers is growing, year on year."
+    ceiling: 85
+    ceiling_rationale: "Kept from the prototype: a direct supply estimate from a careful source, though only an estimate."
+    hand_judged_weight: 0.27
+    gauges:
+      - id: logic_supply_growth
+        label: Growth in leading-edge logic supply
+        metric: chip_input_supply_yoy
+        dims: {input: logic_supply_wafers}
+        weight: 0.42
+        max_age_days: 300
+        knots: [[-0.05, 92], [0.05, 72], [0.15, 50], [0.3, 28]]
+        scale_rationale: "Runs backwards: faster supply growth means a looser input. New foundry capacity takes three to five years to build, so growth of a fifth a year is already fast for this business, and flat supply while demand races is the tight end."
+
+  - id: packaging
+    n: 7
+    name: Advanced chip packaging
+    kind: supply
+    what: The step that joins processor dies to stacks of fast memory on one base. Nearly all of it is TSMC's process, called CoWoS.
+    reads: "How fast packaging supply is growing, and how much of it a few buyers take."
+    ceiling: 90
+    ceiling_rationale: "Kept from the prototype: two gauges from one careful source, both estimates."
+    hand_judged_weight: 0.25
+    gauges:
+      - id: cowos_supply_growth
+        label: Growth in packaging supply
+        metric: chip_input_supply_yoy
+        dims: {input: cowos_supply_wafers}
+        weight: 0.45
+        max_age_days: 300
+        knots: [[-0.1, 95], [0.0, 80], [0.25, 60], [0.5, 40], [1.0, 20]]
+        scale_rationale: "Runs backwards: faster supply growth means a looser input. A packaging line takes about a year and a half to add, so supply that doubles in a year is real relief, and supply that stands still while demand rises is the worst case."
+      - id: cowos_buyer_concentration
+        label: How concentrated the buyers are
+        metric: cowos_buyer_hhi
+        weight: 0.30
+        max_age_days: 300
+        knots: [[0.25, 20], [0.35, 42], [0.45, 65], [0.6, 85]]
+        scale_rationale: "When one buyer takes most of the supply, everyone else is rationed even if the total looks adequate. The index is the sum of the squared shares: a quarter means several buyers of similar size, and above a half one buyer sets the terms."
+
+  - id: memory
+    n: 8
+    name: Memory
+    kind: supply
+    what: The fast stacked memory, called high-bandwidth memory, that sits beside an AI chip, made by SK Hynix, Samsung and Micron.
+    reads: "How fast the supply of high-bandwidth memory is growing. Epoch counts it in dollars, so a price rise looks the same as more memory."
+    ceiling: 75
+    ceiling_rationale: "Kept from the prototype, which set it below the other chip inputs because the supply is counted in dollars, not units."
+    hand_judged_weight: 0.30
+    gauges:
+      - id: hbm_supply_growth
+        label: Growth in memory supply, in dollars
+        metric: chip_input_supply_yoy
+        dims: {input: hbm_supply_usd}
+        weight: 0.45
+        max_age_days: 300
+        knots: [[-0.1, 92], [0.1, 75], [0.4, 52], [0.8, 32], [1.5, 18]]
+        scale_rationale: "Runs backwards: faster supply growth means a looser input. Because the supply is counted in dollars, which mixes volume with price, the scale is gentler than a true volume scale would be: even growth of four fifths a year reads only as easing."
+      - id: memory_per_compute
+        label: Memory per unit of computing power
+        weight: 0.25
+        unfed: {kind: not_read_yet, because: "Epoch publishes each chip's memory, but this site does not read that column yet, and the prototype's scale for it was wrong by many orders of magnitude and would have to be rebuilt."}
+
+  - id: accelerators
+    n: 9
+    name: AI chips
+    kind: supply
+    what: The processors that train and run models, from NVIDIA, AMD, Google, Amazon and others.
+    reads: "How much of the chip supply one designer holds, and whether the cost of a unit of computing power is still falling."
+    ceiling: 88
+    ceiling_rationale: "Kept from the prototype."
+    hand_judged_weight: 0.25
+    gauges:
+      - id: designer_concentration
+        label: How concentrated chip supply is by designer
+        metric: chip_designer_hhi
+        weight: 0.25
+        max_age_days: 300
+        knots: [[0.3, 22], [0.5, 45], [0.7, 68], [0.85, 88]]
+        scale_rationale: "A single designer supplying most AI computing power leaves buyers no substitute, so that designer's choices about who gets chips become the market's supply. The index is the sum of the squared shares; well above four fifths is in effect one supplier."
+      - id: cost_change
+        label: Yearly change in the cost of computing power
+        metric: accelerator_cost_per_flop_annual_change
+        weight: 0.20
+        max_age_days: 700
+        knots: [[-0.5, 15], [-0.3, 32], [-0.1, 58], [0.05, 78], [0.25, 92]]
+        scale_rationale: "The cost of a unit of computing power has fallen steeply with each generation of chips. Steep falls mean the input is loosening in the way that matters to buyers; a fall that stalls or reverses is what a supply that cannot keep up produces. The reading is a trend over more than a decade, so it moves slowly, and its age limit is long because few new chips have a published price."
+      - id: rental_availability
+        label: Chips available to rent
+        weight: 0.30
+        unfed: {kind: gauge_unsound, because: "The one free feed of chips for rent returns a fixed page of offers, so counting them measures the page, not the market."}
+
+  - id: networking
+    n: 10
+    name: Networking and optics
+    kind: supply
+    what: The switches, cables and optical links that join thousands of chips into one machine.
+    ceiling: 55
+    hand_judged_weight: 1.0
+    withheld: {kind: not_read_yet, because: "This site reads no series on networking gear for AI clusters."}
+
+  - id: systems_software
+    n: 11
+    name: Systems software
+    kind: know_how
+    what: The low-level programs, such as NVIDIA's CUDA, that let models run fast on a given chip.
+    ceiling: 55
+    hand_judged_weight: 0.70
+    gauges:
+      - id: commit_velocity
+        label: Activity in the open-source projects
+        weight: 0.30
+        unfed: {kind: not_read_yet, because: "The activity of the open-source projects is public, but this site does not read it, and more activity could mean either a shortage being fixed or none at all."}
+
+  - id: training_infrastructure
+    n: 12
+    name: Training infrastructure
+    kind: supply
+    what: The software and know-how that keep tens of thousands of chips working on one training run without wasting them.
+    ceiling: 65
+    hand_judged_weight: 0.50
+    gauges:
+      - id: training_utilisation
+        label: How fully training runs use their chips
+        weight: 0.50
+        unfed: {kind: not_read_yet, because: "Epoch publishes how fully some training runs used their chips, but this site does not read that column yet."}
+
+  - id: pretraining
+    n: 13
+    name: Building frontier models
+    kind: know_how
+    what: The labs that train the largest models, such as OpenAI, Anthropic, Google DeepMind, xAI and Meta.
+    ceiling: 85
+    hand_judged_weight: 0.30
+    gauges:
+      - id: frontier_compute_growth
+        label: Growth in the computing power behind the largest model
+        weight: 0.45
+        required: true
+        unfed: {kind: no_public_series, because: "No lab has published the computing power behind a record-setting model since xAI's Grok model in July of 2025, so growth at the frontier cannot be read."}
+
+  - id: post_training
+    n: 14
+    name: Post-training
+    kind: know_how
+    what: Everything done to a model after its first training to make it useful, including practice tasks with automatic graders and feedback from experts.
+    ceiling: 40
+    hand_judged_weight: 1.0
+    withheld: {kind: no_public_series, because: "Nobody publishes what this work costs or how long buyers wait for it. This site counts the sellers and keeps a tally of disclosed deals, which says the business exists, not whether it is short."}
+
+  - id: continual_learning
+    n: 15
+    name: Continual learning
+    kind: know_how
+    what: Getting a model to keep learning from its use after release without forgetting what it knew.
+    ceiling: 30
+    hand_judged_weight: 1.0
+    withheld: {kind: no_public_series, because: "No public test measures whether a model keeps learning after release. This site tracks what vendors claim, which is not a measure of scarcity."}
+
+  - id: inference
+    n: 16
+    name: Running models
+    kind: supply
+    what: Serving a trained model to users, which the industry calls inference.
+    reads: "The price of the cheapest model among a named basket of flagship models on one marketplace. One vendor sets it."
+    ceiling: 90
+    ceiling_rationale: "Kept from the prototype: list prices are observed, not estimated."
+    hand_judged_weight: 0.15
+    gauges:
+      - id: basket_price
+        label: Cheapest model in the basket
+        metric: basket_min_output_price_per_mtok
+        weight: 0.45
+        required: true
+        max_age_days: 7
+        fetched_from: openrouter
+        log10: true
+        knots: [[0.5, 12], [2, 32], [8, 55], [32, 78], [128, 92]]
+        scale_rationale: "Read on a scale where each knot is four times the last, because this price has fallen by whole multiples, not by percentages. Below about a dollar for a million words of output, the cost of running a model stops deciding what gets built; at thirty times that, cost is the limit on what products are possible. The reading is the price list as last fetched, so its age runs from the last successful fetch."
+      - id: price_trend
+        label: Change in that price over a month
+        weight: 0.25
+        unfed: {kind: not_read_yet, because: "A month's change needs a month of price history, and this store's began in September of 2026."}
+      - id: rental_availability
+        label: Chips available to rent
+        weight: 0.15
+        unfed: {kind: gauge_unsound, because: "The one free feed of chips for rent returns a fixed page of offers, so counting them measures the page, not the market."}
+
+  - id: routing
+    n: 17
+    name: Routing between models
+    kind: know_how
+    what: Services that send each request to whichever model is cheapest or best for it.
+    ceiling: 45
+    hand_judged_weight: 0.60
+    gauges:
+      - id: price_dispersion
+        label: How widely model prices are spread
+        weight: 0.40
+        unfed: {kind: gauge_unsound, because: "The spread of list prices is set almost entirely by one very expensive model, so it says nothing dependable about how much a router can save."}
+
+  - id: evaluations
+    n: 18
+    name: Tests and evaluations
+    kind: know_how
+    what: The benchmarks and testing firms that say what a model can do.
+    ceiling: 35
+    hand_judged_weight: 1.0
+    withheld: {kind: no_public_series, because: "This site holds many benchmark scores, but none of them measures whether good testing is itself in short supply."}
+
+  - id: agents
+    n: 19
+    name: Agents and tool use
+    kind: know_how
+    what: Models that carry out tasks by using software tools, for minutes or hours at a time.
+    ceiling: 50
+    hand_judged_weight: 0.70
+    gauges:
+      - id: tool_capable_share
+        label: Share of models that can use tools
+        weight: 0.30
+        unfed: {kind: not_read_yet, because: "The marketplace lists which models can use tools, but this site stores only their prices."}
+
+  - id: training_data
+    n: 20
+    name: Training data
+    kind: supply
+    what: Text written or checked by paid experts, generated data, and licensed archives.
+    ceiling: 50
+    hand_judged_weight: 1.0
+    withheld: {kind: no_public_series, because: "Sellers' revenues, which this site tracks from press reports, show activity. Nobody publishes prices or waiting times, which are what scarcity would show up in."}
+
+  - id: deployment_platforms
+    n: 21
+    name: Deployment platforms
+    kind: supply
+    what: Companies that host and run models for other businesses.
+    ceiling: 45
+    hand_judged_weight: 1.0
+    withheld: {kind: no_public_series, because: "No public series separates these platforms' capacity from the cost of running models, which the row for running models reads."}
+
+  - id: applications
+    n: 22
+    name: Applications
+    kind: money
+    what: The products people and companies use, from coding assistants to legal and medical tools.
+    ceiling: 60
+    hand_judged_weight: 1.0
+    withheld: {kind: no_public_series, because: "Most of these companies are private, and too few publish their finances to say how hard money is for them to raise."}
+
+  - id: capital
+    n: 23
+    name: Capital
+    kind: money
+    what: The money behind all of it, above all the spending of the five largest builders of data centres.
+    reads: "How fast Microsoft, Alphabet, Amazon, Meta and Oracle are raising their spending on buildings and equipment, over the past four quarters against the four before."
+    ceiling: 80
+    ceiling_rationale: "Kept from the prototype: filed figures, the best evidence on the card, but one gauge."
+    hand_judged_weight: 0.35
+    gauges:
+      - id: capex_growth
+        label: Growth in the largest builders' spending
+        metric: hyperscaler_capex_ttm_yoy
+        weight: 0.50
+        max_age_days: 200
+        knots: [[-0.2, 92], [0.0, 72], [0.2, 50], [0.5, 28], [1.0, 12]]
+        scale_rationale: "Runs backwards, and reads how plentiful money is, not whether it is well spent. Flat or falling spending means the money has turned and financing is what holds the build-out back. Spending that grows by half or more in a year means money is plentiful. The reading is a total over four quarters, so it turns about two quarters after a single quarter would."
