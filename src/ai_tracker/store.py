@@ -451,7 +451,7 @@ class Store:
                     ",".join(m.get("grain", [])),
                     m.get("lead_lag"),
                     m.get("caveats"),
-                    "\n".join(x for x in (m.get("python") and f"python: {m['python']}", m.get("sql")) if x),
+                    _formula(m),
                 )
                 for k, m in spec.items()
             ]
@@ -1190,8 +1190,7 @@ class Store:
                 "related_latest": {m: latest(m, None) for m in a.get("related", [])},
                 "description": metrics.get(a["metric"], {}).get("description"),
                 "caveats": metrics.get(a["metric"], {}).get("caveats"),
-                "sql": metrics.get(a["metric"], {}).get("sql")
-                or f"python: {metrics.get(a['metric'], {}).get('python')}",
+                "sql": _formula(metrics.get(a["metric"], {})),
             }
             for a in spec
         ]
@@ -1653,6 +1652,17 @@ def _excerpt(body: str, limit: int = 400) -> str:
     cut = text[:limit]
     stop = max(cut.rfind(". "), cut.rfind("; "))
     return (cut[: stop + 1] if stop > limit // 2 else cut[: cut.rfind(" ")].rstrip(",;") + "…").strip()
+
+
+def _formula(m: dict[str, Any]) -> str:
+    """A metric's formula as a reader sees it: the fit and its arguments, then the SQL whose rows it runs over."""
+    py = m.get("python") and (
+        f"python: {m['python']}("
+        + ", ".join(f"{k}={v}" for k, v in (m.get("args") or {}).items())
+        + ")"
+        + (" over the rows of:" if m.get("sql") else "")
+    )
+    return "\n".join(x for x in (py, m.get("sql")) if x)
 
 
 def _grade(o: dict[str, Any]) -> str:

@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, timedelta
 
 import duckdb
 import yaml
@@ -377,6 +377,9 @@ def test_the_basket_keeps_gemini_pro_and_drops_small_tiers_and_variants():
         price("v", "openai/gpt-5:batch", 0.1),
         price("o", "meta-llama/llama-3.2-1b-instruct", 0.01),  # not in the basket at all
         price("d", "deepseek/deepseek-v3.2", 0.4, "2026-09-15"),
+        price("e", "deepseek/deepseek-v4-pro", 0.4, "2026-09-15"),  # a tie: the lower id is cited, every run
+        price("x", "deepseek/deepseek-v3.2-exp", 0.2, "2026-09-15"),  # experimental and image builds are out
+        price("i", "openai/gpt-5-image", 0.1, "2026-09-15"),
     ]
     out = {str(d): (v, ids) for d, v, ids in run("basket_min_output_price_per_mtok", rows)}
     assert out == {"2026-09-10": (10.0, ["g"]), "2026-09-15": (0.4, ["d"])}
@@ -400,96 +403,64 @@ def test_supply_growth_is_per_input_against_the_same_quarter_a_year_before():
     ]
 
 
+def _yr(k: int) -> str:
+    return str(
+        date.today() + timedelta(days=365 * k)
+    )  # never date.replace(year=...): it raises on 29 February
+
+
+READ = "2026-09-01T00:00:00+00:00"
+
+
 def _dc_ratio(sites: list[tuple[str, float, float]], extra: list[tuple] = ()) -> dict:
     con = duckdb.connect()
     con.execute(
         "CREATE TABLE obs_raw (id VARCHAR, series_key VARCHAR, subject VARCHAR, as_of_date DATE, value_numeric DOUBLE, retrieved_at VARCHAR, disputed BOOLEAN)"
     )
-    today = date.today()
     rows = []
     for name, built, planned in sites:
         key = f"epoch_dc.{name}.power_mw.pt"
         rows += [
-            (
-                f"{name}b0",
-                key,
-                name,
-                str(today.replace(year=today.year - 2)),
-                1.0,
-                "2026-09-01T00:00:00+00:00",
-                False,
-            ),
-            (
-                f"{name}b",
-                key,
-                name,
-                str(today.replace(year=today.year - 1)),
-                built,
-                "2026-09-01T00:00:00+00:00",
-                False,
-            ),
-            (
-                f"{name}p",
-                key,
-                name,
-                str(today.replace(year=today.year + 1)),
-                planned,
-                "2026-09-02T00:00:00+00:00",
-                False,
-            ),
-            (
-                f"{name}p2",
-                key,
-                name,
-                str(today.replace(year=today.year + 2)),
-                planned / 2,
-                "2026-09-01T00:00:00+00:00",
-                False,
-            ),
+            (f"{name}b0", key, name, _yr(-2), 1.0, READ, False),
+            (f"{name}b", key, name, _yr(-1), built, READ, False),
+            (f"{name}p", key, name, _yr(1), planned, "2026-09-02T00:00:00+00:00", False),
+            (f"{name}p2", key, name, _yr(2), planned / 2, READ, False),
         ]
     con.executemany("INSERT INTO obs_raw VALUES (?, ?, ?, ?, ?, ?, ?)", rows + list(extra))
     con.execute(KEY_SPLIT)
     con.execute(DC_SITES)
-    ratio = {
-        s_: (d, v, ids)
-        for d, s_, v, ids in con.execute(METRICS["dc_projected_to_observed_power"]["sql"]).fetchall()
-    }
+    sql = METRICS["dc_projected_to_observed_power"]["sql"]
+    ratio = {s_: (d, v, ids) for d, s_, v, ids in con.execute(sql).fetchall()}
     count = {s_: v for _, s_, v, _ in con.execute(METRICS["dc_sites_compared"]["sql"]).fetchall()}
     return {"ratio": ratio, "count": count}
 
 
 def test_the_data_centre_gap_sums_peak_plans_over_newest_builds_and_shows_the_bare_sites():
-    today = date.today()
     sites = [(f"s{i}", 100.0, 300.0) for i in range(20)] + [(f"z{i}", 0.0, 500.0) for i in range(5)]
+    soon = str(date.today() + timedelta(days=30))
     extra = [
+        ("onlybuilt", "epoch_dc.ob.power_mw.pt", "ob", _yr(-1), 999.0, READ, False),  # no plan: not compared
+        ("gone", "epoch_dc.s0.power_mw.pt", "s0", _yr(3), 9999.0, READ, True),  # a plan Epoch withdrew
         (
-            "onlybuilt",
-            "epoch_dc.ob.power_mw.pt",
-            "ob",
-            str(today.replace(year=today.year - 1)),
-            999.0,
-            "2026-09-01T00:00:00+00:00",
+            "s1p_early",
+            "epoch_dc.s1.power_mw.pt",
+            "s1",
+            soon,
+            300.0,
+            READ,
             False,
-        ),
-        (
-            "gone",
-            "epoch_dc.s0.power_mw.pt",
-            "s0",
-            str(today.replace(year=today.year + 3)),
-            9999.0,
-            "2026-09-01T00:00:00+00:00",
-            True,
-        ),
+        ),  # the same peak, reached sooner
     ]
     out = _dc_ratio(sites, extra)
     d, v, ids = out["ratio"]["all"]
-    assert (
-        abs(v - (20 * 300 + 5 * 500) / (20 * 100)) < 1e-9
-    )  # a withdrawn plan and a site with no plan count for nothing
+    assert abs(v - (20 * 300 + 5 * 500) / (20 * 100)) < 1e-9
     assert abs(out["ratio"]["built"][1] - 3.0) < 1e-9 and out["count"] == {"all": 25, "unbuilt": 5}
     assert (
         str(d) == "2026-09-02" and "s0b" in ids and "s0p" in ids and "s0b0" not in ids and "gone" not in ids
     )
+    assert (
+        "s1p_early" in ids and "s1p" not in ids
+    )  # a tie on planned power cites the earlier milestone, every run
 
 
 def test_too_few_sites_give_no_ratio():
