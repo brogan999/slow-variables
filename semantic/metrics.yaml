@@ -663,7 +663,7 @@ metrics:
     args: {since: "2012-01-01"}
     caveats: Only accelerators with a public release price; recent data-centre GPUs have no list price, so the series may end years before today.
     python: fits.loglinear
-    sql: |
+    sql: &perf_sql |
       SELECT f.as_of_date, f.value_numeric / p.value_numeric AS value, [f.id, p.id] AS obs_ids
       FROM observations f JOIN observations p ON p.subject = f.subject AND p.as_of_date = f.as_of_date
       WHERE f.series_key LIKE 'epoch_hw.%.fp16_flops.pt' AND p.series_key LIKE 'epoch_hw.%.release_price_usd.pt'
@@ -1082,3 +1082,152 @@ metrics:
       lm AS (SELECT d.as_of_date, arg_max(m.v, m.as_of_date) AS v, arg_max(m.id, m.as_of_date) AS id FROM d JOIN m ON m.as_of_date <= d.as_of_date AND m.as_of_date > d.as_of_date - INTERVAL 18 MONTH GROUP BY 1)
       SELECT lr.as_of_date, sum(lr.v) + max(lm.v) AS value, list_append(list(lr.id ORDER BY lr.id), max(lm.id)) AS obs_ids
       FROM lr JOIN lm USING (as_of_date) GROUP BY 1
+  # --- The migrating bottleneck (/argument/migration): gauges behind the tightness scorecard and the facts in its essay.
+  # Every share or sum across designers uses the full-panel rule: a designer that has started reporting must be present
+  # on a date for that date to count, and a panel has at least three members (Epoch's chip-sales file has one designer
+  # in early 2022 and two through 2023; its newest quarters list only some designers).
+  chip_designer_hhi:
+    description: "Concentration of AI chip supply by designer: the Herfindahl index (sum of squared shares) over each designer's cumulative chip sales in H100-equivalents, on each quarter end where every designer that has started reporting is present."
+    rationale: "A chip layer with one dominant designer is the clearest case of a scarce input with a single owner; the index falls as custom silicon and rivals take share."
+    grain: [as_of_date]
+    unit: index
+    lead_lag: lagging
+    formula_version: 1
+    inputs: ["epoch_chips.*.h100e_cumulative.pt"]
+    caveats: "A stock of chips sold to date, not the flow of new sales, so it moves slowly. Epoch's estimates. The newest full panel lags the newest partial one by up to three quarters."
+    sql: |
+      WITH x AS (SELECT subject, as_of_date, value_numeric AS v, id FROM observations
+                 WHERE source_ns = 'epoch_chips' AND measure = 'h100e_cumulative' AND NOT coalesce(disputed, false)),
+      first AS (SELECT subject, min(as_of_date) AS f FROM x GROUP BY 1),
+      need AS (SELECT d.as_of_date, count(*) AS n FROM (SELECT DISTINCT as_of_date FROM x) d JOIN first ON first.f <= d.as_of_date GROUP BY 1),
+      have AS (SELECT as_of_date, count(*) AS n, sum(v) AS tot, list(id ORDER BY id) AS ids FROM x GROUP BY 1),
+      panel AS (SELECT have.* FROM have JOIN need USING (as_of_date) WHERE have.n = need.n AND have.n >= 3)
+      SELECT p.as_of_date, sum((x.v / p.tot) * (x.v / p.tot)) AS value, p.ids AS obs_ids
+      FROM panel p JOIN x USING (as_of_date) GROUP BY p.as_of_date, p.ids
+  chip_fleet_power_yoy:
+    description: "Growth over twelve months in the power drawn by all AI chips sold to date (megawatts, summed across designers), on quarter ends where the same full panel of designers reported on both dates. A fraction: 1.0 is a doubling."
+    rationale: "How fast the chip fleet's appetite for electricity is growing; the demand side of the power question."
+    grain: [as_of_date]
+    unit: share
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["epoch_chips.*.power_mw_cumulative.pt"]
+    caveats: "Demand only: the power chips would draw, not the power the grid can supply. Rated draw of chips sold, whether or not they are switched on. Epoch's estimates."
+    sql: |
+      WITH x AS (SELECT subject, as_of_date, value_numeric AS v, id FROM observations
+                 WHERE source_ns = 'epoch_chips' AND measure = 'power_mw_cumulative' AND NOT coalesce(disputed, false)),
+      first AS (SELECT subject, min(as_of_date) AS f FROM x GROUP BY 1),
+      need AS (SELECT d.as_of_date, count(*) AS n FROM (SELECT DISTINCT as_of_date FROM x) d JOIN first ON first.f <= d.as_of_date GROUP BY 1),
+      have AS (SELECT as_of_date, count(*) AS n, sum(v) AS tot, list(id ORDER BY id) AS ids FROM x GROUP BY 1),
+      panel AS (SELECT have.* FROM have JOIN need USING (as_of_date) WHERE have.n = need.n AND have.n >= 3)
+      SELECT a.as_of_date, a.tot / b.tot - 1 AS value, list_concat(a.ids, b.ids) AS obs_ids
+      FROM panel a JOIN panel b ON b.as_of_date = a.as_of_date - INTERVAL 12 MONTH AND b.n = a.n
+  accelerator_cost_per_flop_annual_change:
+    description: "Yearly change in the release price of a unit of accelerator compute (dollars per FP16 FLOP per second), from a log-linear fit across chips by release date. A fraction: -0.2 is twenty percent cheaper each year."
+    rationale: "Whether the cost of compute is still falling at its usual pace. A signed rate, because a doubling time cannot show a stall or a reversal."
+    grain: [as_of_date]
+    unit: share
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["epoch_hw.*.fp16_flops.pt", "epoch_hw.*.release_price_usd.pt"]
+    args: {since: "2012-01-01", invert: true}
+    caveats: "A trend since 2012, so it is slow to show a stall. Only accelerators with a public release price; recent data-centre GPUs have none, so the series may end well before today."
+    python: fits.annual_rate
+    sql: *perf_sql
+  basket_min_output_price_per_mtok:
+    description: "The cheapest output price, in dollars per million tokens, among a named basket of flagship models on OpenRouter, each model's latest price carried forward, on each date a price changed."
+    rationale: "What the cheapest capable model costs to run: when it is low, the cost of running models is not what holds anyone back."
+    grain: [as_of_date]
+    unit: USD
+    lead_lag: coincident
+    formula_version: 1
+    inputs: ["openrouter.*.price_completion_usd_per_mtok.pt"]
+    caveats: "The basket is editorial: flagship families by name, with small tiers (nano, mini, lite, flash, haiku and the like) and variants left out, and it ages as families turn over. List prices on one router, from the six vendors the connector keeps. One cheap model sets the minimum. A delisted model keeps its last price, because the ledger holds price changes and has no last-seen date."
+    sql: |
+      WITH p AS (
+        SELECT subject, as_of_date, value_numeric AS usd, id, split_part(raw_snippet, ' ', 1) AS model
+        FROM observations WHERE source_ns = 'openrouter' AND measure = 'price_completion_usd_per_mtok' AND value_numeric > 0),
+      basket AS (
+        SELECT * FROM p
+        WHERE regexp_matches(model, '^(openai/(gpt-5|o3)|anthropic/claude-(opus|sonnet)|google/gemini-(2\.5-pro|3)|x-ai/grok-4|deepseek/deepseek-(r1|v3)|qwen/qwen3-max|moonshotai/kimi-k2)')
+          AND NOT contains(model, ':')
+          AND NOT regexp_matches(split_part(model, '/', 2), '(^|[-_.])(nano|mini|lite|flash|haiku|small|tiny|8b|4b|distill)([-_.]|$)')),
+      d AS (SELECT DISTINCT as_of_date FROM basket),
+      cp AS (SELECT d.as_of_date, b.subject, arg_max(b.usd, b.as_of_date) AS usd, arg_max(b.id, b.as_of_date) AS pid
+             FROM d JOIN basket b ON b.as_of_date <= d.as_of_date GROUP BY 1, 2),
+      r AS (SELECT as_of_date, min(usd) AS value, [arg_min(pid, usd)] AS obs_ids FROM cp GROUP BY as_of_date)
+      SELECT * FROM r QUALIFY value IS DISTINCT FROM lag(value) OVER (ORDER BY as_of_date)  -- change points only
+  hyperscaler_capex_ttm_yoy:
+    description: "Growth over twelve months in the trailing four quarters of capital spending by Microsoft, Alphabet, Amazon, Meta and Oracle (filed), at each quarter end. A fraction: 0.5 is up by half."
+    rationale: "Whether money is scarce for the companies building the data centres: spending that keeps rising fast says capital is not the constraint."
+    grain: [as_of_date]
+    unit: share
+    lead_lag: coincident
+    formula_version: 1
+    inputs: ["sec.*.capex.q", "sec.*.capex.h1", "sec.*.capex.9m", "sec.*.capex.fy"]
+    caveats: "Not all of this spending is for AI. A trailing total turns about two quarters after a single quarter would. Quarters are differenced from year-to-date filings exactly as in capex_to_revenue_stack."
+    sql: |
+      SELECT (a.cq + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE AS as_of_date, a.v / b.v - 1 AS value,
+             list_distinct(list_concat(a.ids, b.ids)) AS obs_ids
+      FROM hyperscaler_capex_ttm a JOIN hyperscaler_capex_ttm b ON b.cq = a.cq - INTERVAL 12 MONTH
+  cowos_buyer_hhi:
+    description: "Concentration among the buyers of advanced chip packaging (TSMC's CoWoS): the Herfindahl index over each designer's share of packaging supply, per quarter, on a full panel."
+    rationale: "When one buyer takes most of a scarce input, everyone else is rationed; the index says how lopsided the queue is."
+    grain: [as_of_date]
+    unit: index
+    lead_lag: coincident
+    formula_version: 1
+    inputs: ["epoch_components.*.cowos_share_pct.q"]
+    caveats: "Epoch's 'Other' bucket is counted as one buyer though it is many, which overstates the index a little: treating it as many small buyers gives about 0.37, leaving it out about 0.52, against 0.39 here (last quarter of 2025). Epoch's estimates; medians only."
+    sql: |
+      WITH x AS (SELECT subject, as_of_date, value_numeric AS v, id FROM observations
+                 WHERE source_ns = 'epoch_components' AND measure = 'cowos_share_pct' AND NOT coalesce(disputed, false)),
+      first AS (SELECT subject, min(as_of_date) AS f FROM x GROUP BY 1),
+      need AS (SELECT d.as_of_date, count(*) AS n FROM (SELECT DISTINCT as_of_date FROM x) d JOIN first ON first.f <= d.as_of_date GROUP BY 1),
+      have AS (SELECT as_of_date, count(*) AS n, sum(v) AS tot, list(id ORDER BY id) AS ids FROM x GROUP BY 1),
+      panel AS (SELECT have.* FROM have JOIN need USING (as_of_date) WHERE have.n = need.n AND have.n >= 3)
+      SELECT p.as_of_date, sum((x.v / p.tot) * (x.v / p.tot)) AS value, p.ids AS obs_ids
+      FROM panel p JOIN x USING (as_of_date) GROUP BY p.as_of_date, p.ids
+  chip_input_supply_yoy:
+    description: "Growth over twelve months in the quarterly supply of each input AI chips consume: advanced packaging and leading-edge logic in wafers, high-bandwidth memory in dollars. A fraction: 0.5 is up by half."
+    rationale: "Supply growing fast eases a shortage; supply growing slowly while chip demand races tightens it."
+    grain: [as_of_date, input]
+    unit: share
+    lead_lag: coincident
+    formula_version: 1
+    inputs: ["epoch_components.global.*"]
+    caveats: "Memory supply is published in dollars, so a price rise reads as a supply rise. Supply alone says nothing about demand. Epoch's estimates, which it says are firmer by year than by quarter."
+    sql: |
+      SELECT a.as_of_date, a.measure AS input, a.value_numeric / b.value_numeric - 1 AS value, [a.id, b.id] AS obs_ids
+      FROM observations a JOIN observations b
+        ON b.series_key = a.series_key AND b.as_of_date = a.as_of_date - INTERVAL 12 MONTH
+      WHERE a.source_ns = 'epoch_components' AND a.subject = 'global' AND b.value_numeric > 0
+        AND NOT coalesce(a.disputed, false) AND NOT coalesce(b.disputed, false)
+  dc_projected_to_observed_power:
+    description: "Across the AI data-centre sites Epoch tracks that have both figures: the sum of each site's largest planned power divided by the sum of each site's newest built power. `sites: all` keeps sites where nothing is built yet; `sites: built` leaves them out."
+    rationale: "How far what has been promised runs ahead of what stands: the delivery gap in buildings and their power hookups."
+    grain: [as_of_date, sites]
+    unit: ratio
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["epoch_dc.*.power_mw.pt"]
+    caveats: "Epoch's estimates, not verified builds: it states power within a factor of 1.4 and dates within six months, and covers roughly half of capacity, mostly the largest sites. 'Built' means dated on or before today; 'planned' means dated after it. A finished site leaves the comparison, so the ratio does not drift toward one with the calendar. A fast build-out with no shortage would read the same. Dated by the day Epoch's file last changed in our ledger; a revision that only removes rows does not advance it. No reading when fewer than twenty sites compare, because one campus could then carry the ratio."
+    sql: |
+      WITH s AS (SELECT 'all' AS sites, * FROM dc_sites UNION ALL SELECT 'built', * FROM dc_sites WHERE built_mw > 0)
+      SELECT any_value(read_on) AS as_of_date, sites, sum(planned_mw) / sum(built_mw) AS value,
+             list_sort(list_concat(list(built_id), list(planned_id))) AS obs_ids
+      FROM s GROUP BY sites HAVING count(*) >= 20 AND sum(built_mw) > 0
+  dc_sites_compared:
+    description: "How many data-centre sites stand behind dc_projected_to_observed_power: `sites: all` is every site with both a built and a planned figure; `sites: unbuilt` is those among them where nothing is built yet."
+    rationale: "The panel behind the ratio, so a reader can see how much of it rests on sites that are still bare ground."
+    grain: [as_of_date, sites]
+    unit: count
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["epoch_dc.*.power_mw.pt"]
+    caveats: "Same dating and definitions as dc_projected_to_observed_power."
+    sql: |
+      WITH s AS (SELECT 'all' AS sites, * FROM dc_sites UNION ALL SELECT 'unbuilt', * FROM dc_sites WHERE built_mw = 0)
+      SELECT any_value(read_on) AS as_of_date, sites, count(*) AS value,
+             list_sort(list_concat(list(built_id), list(planned_id))) AS obs_ids
+      FROM s GROUP BY sites

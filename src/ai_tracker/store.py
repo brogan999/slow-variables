@@ -55,6 +55,43 @@ e AS (SELECT entity_id, as_of_date, value_numeric AS v, id, 'epoch' AS source, '
 SELECT * FROM f UNION ALL SELECT * FROM d
 UNION ALL SELECT * FROM e WHERE NOT EXISTS (
   SELECT 1 FROM f WHERE f.entity_id = e.entity_id AND date_trunc('quarter', f.as_of_date) = date_trunc('quarter', e.as_of_date))"""
+# Trailing four quarters of capital spending by the five hyperscalers, one row per quarter in which all five have four
+# quarters. The same differencing of year-to-date filings as capex_to_revenue_stack (a test holds the two equal).
+# ponytail: two copies of these CTEs; repoint capex_to_revenue_stack here in its own PR.
+CAPEX_TTM = """CREATE OR REPLACE VIEW hyperscaler_capex_ttm AS
+WITH cum AS (
+  SELECT subject, as_of_date, period_start, value_numeric AS v, id FROM observations
+  WHERE source_ns = 'sec' AND measure = 'capex' AND grain IN ('q', 'h1', '9m', 'fy')
+    AND subject IN ('msft', 'googl', 'amzn', 'meta', 'orcl')),
+diffed AS (
+  SELECT subject, as_of_date, v - coalesce(lag(v) OVER w, 0) AS v,
+         list_filter([id, lag(id) OVER w], x -> x IS NOT NULL) AS ids,
+         date_diff('day', coalesce(lag(as_of_date) OVER w, period_start), as_of_date) AS days
+  FROM cum WINDOW w AS (PARTITION BY subject, period_start ORDER BY as_of_date)),
+capex AS (
+  SELECT date_trunc('quarter', as_of_date) AS cq, subject, v, ids FROM diffed WHERE days BETWEEN 80 AND 100
+  QUALIFY row_number() OVER (PARTITION BY subject, as_of_date ORDER BY len(ids), ids) = 1),
+qs AS (SELECT DISTINCT cq FROM capex),
+per AS (
+  SELECT q.cq, c.subject, sum(c.v) AS v, flatten(list(c.ids)) AS ids
+  FROM qs q JOIN capex c ON c.cq > q.cq - INTERVAL 12 MONTH AND c.cq <= q.cq
+  GROUP BY q.cq, c.subject HAVING count(*) = 4)
+SELECT cq, sum(v) AS v, list_sort(flatten(list(ids))) AS ids FROM per GROUP BY cq HAVING count(*) = 5"""
+# Each data-centre site Epoch tracks that has both a built figure and a planned one: the newest reading dated on or
+# before today, and the largest figure dated after it. Rows Epoch has withdrawn are flagged disputed and left out.
+DC_SITES = """CREATE OR REPLACE VIEW dc_sites AS
+WITH x AS (
+  SELECT subject, as_of_date, value_numeric AS mw, id, retrieved_at FROM observations
+  WHERE source_ns = 'epoch_dc' AND measure = 'power_mw' AND NOT coalesce(disputed, false)),
+built AS (
+  SELECT subject, arg_max(mw, as_of_date) AS built_mw, arg_max(id, as_of_date) AS built_id
+  FROM x WHERE as_of_date <= current_date GROUP BY subject),
+planned AS (
+  SELECT subject, mw AS planned_mw, id AS planned_id FROM x WHERE as_of_date > current_date
+  QUALIFY row_number() OVER (PARTITION BY subject ORDER BY mw DESC, as_of_date, id) = 1)
+SELECT b.subject, b.built_mw, b.built_id, p.planned_mw, p.planned_id,
+       (SELECT least(CAST(substr(max(retrieved_at), 1, 10) AS DATE), current_date) FROM x) AS read_on
+FROM built b JOIN planned p USING (subject)"""
 OBS_COLUMNS = {
     "id": "VARCHAR",
     "series_key": "VARCHAR",
@@ -310,6 +347,8 @@ class Store:
         if not any(e.memberships for e in self.seed.entities):
             self.con.execute("DELETE FROM entity_membership")
         self.con.execute(VENTURE_ROUNDS)
+        self.con.execute(CAPEX_TTM)
+        self.con.execute(DC_SITES)
         self.derived = [Derived(**r) for r in read_jsonl(DATA / "derived.jsonl")]
         self.events = [StatusEvent(**r) for r in read_jsonl(DATA / "status_events.jsonl")]
         self.fetchlog = [FetchLog(**r) for r in read_jsonl(DATA / "fetchlog.jsonl")]

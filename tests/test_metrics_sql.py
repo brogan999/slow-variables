@@ -3,7 +3,7 @@ from datetime import date
 import duckdb
 import yaml
 
-from ai_tracker.store import VENTURE_ROUNDS
+from ai_tracker.store import CAPEX_TTM, DC_SITES, VENTURE_ROUNDS
 
 METRICS = yaml.safe_load(open("semantic/metrics.yaml"))["metrics"]
 
@@ -273,6 +273,24 @@ def test_capex_to_revenue_differences_year_to_date_capex_and_needs_four_quarters
     v, ids = out["2025-12-31"]
     assert abs(v - (70 + 4 * 20) / (40 + 10)) < 1e-9
     assert {"g1", "g2", "g3", "g4", "rr", "me"} <= set(ids) and "mh1" not in ids
+    # the store's view holds a second copy of the differencing: it must give the same trailing total
+    con.execute(CAPEX_TTM)
+    assert con.execute("SELECT cq::DATE, v FROM hyperscaler_capex_ttm").fetchall() == [
+        (date(2025, 10, 1), 150.0)
+    ]
+
+    # a year on, every filer spends half as much again: the growth metric reads the same view
+    def year_on(d: str) -> str:
+        return str(date.fromisoformat(d).replace(year=date.fromisoformat(d).year + 1))
+
+    later = [
+        (f"{i}y", k, s_, e_, year_on(a_), year_on(p_), x * 1.5)
+        for i, k, s_, e_, a_, p_, x in rows
+        if ".capex." in k
+    ]
+    con.executemany("INSERT INTO obs_raw VALUES (?, ?, ?, ?, ?, ?, ?)", later)
+    ((d, g, gids),) = con.execute(METRICS["hyperscaler_capex_ttm_yoy"]["sql"]).fetchall()
+    assert str(d) == "2026-12-31" and abs(g - 0.5) < 1e-9 and {"g4", "g4y"} <= set(gids)
 
 
 def test_vendor_financing_flow_reads_every_completed_quarter_so_it_can_fall():
@@ -281,7 +299,199 @@ def test_vendor_financing_flow_reads_every_completed_quarter_so_it_can_fall():
         ("d2", "circular.amd_openai.commitment_usd.pt", "amd_openai", "2025-08-20", 50.0, ""),
     ]
     out = {str(d): (v, ids) for d, v, ids in run("circular_commitments_new_4q", rows)}
-    assert out["2025-03-31"] == (100.0, ["d1"]) and out["2025-06-30"] == (100.0, ["d1"])  # a quiet quarter still reads
+    assert out["2025-03-31"] == (100.0, ["d1"]) and out["2025-06-30"] == (
+        100.0,
+        ["d1"],
+    )  # a quiet quarter still reads
     assert out["2025-09-30"] == (150.0, ["d1", "d2"])
     assert out["2026-03-31"] == (50.0, ["d2"])  # the February deal has left the window: the flow falls
-    assert "2026-09-30" not in out and "2026-12-31" not in out  # nothing left to cite a year after the last deal
+    assert (
+        "2026-09-30" not in out and "2026-12-31" not in out
+    )  # nothing left to cite a year after the last deal
+
+
+def _chips(measure: str, by_date: dict[str, dict[str, float]]) -> list[tuple]:
+    return [
+        (f"{d}{n}", f"epoch_chips.{n}.{measure}.pt", n, d, v, "")
+        for d, names in by_date.items()
+        for n, v in names.items()
+    ]
+
+
+def test_designer_shares_wait_for_a_full_panel_of_at_least_three():
+    rows = _chips(
+        "h100e_cumulative",
+        {
+            "2023-12-31": {"nvidia": 90, "google": 10},  # a complete panel of two: too few to call a market
+            "2024-12-31": {"nvidia": 60, "google": 30, "amd": 10},
+            "2025-03-31": {
+                "nvidia": 70,
+                "amd": 10,
+            },  # google has started reporting and is missing: not a panel
+        },
+    )
+    out = {str(d): v for d, v, _ in run("chip_designer_hhi", rows)}
+    assert list(out) == ["2024-12-31"] and abs(out["2024-12-31"] - (0.36 + 0.09 + 0.01)) < 1e-9
+
+
+def test_fleet_power_growth_compares_like_panels_only():
+    rows = _chips(
+        "power_mw_cumulative",
+        {
+            "2023-12-31": {"nvidia": 100, "google": 20, "amd": 5},
+            "2024-12-31": {"nvidia": 200, "google": 40, "amd": 10, "amazon": 50},  # a fourth designer joins
+            "2025-12-31": {"nvidia": 400, "google": 80, "amd": 20, "amazon": 100},
+        },
+    )
+    out = {str(d): v for d, v, _ in run("chip_fleet_power_yoy", rows)}
+    assert (
+        list(out) == ["2025-12-31"] and abs(out["2025-12-31"] - 1.0) < 1e-9
+    )  # 2024 over 2023 would mix panels
+
+
+def test_cowos_buyer_hhi_counts_other_as_one_buyer_and_ignores_the_unit():
+    rows = [
+        (f"s{n}", f"epoch_components.{n}.cowos_share_pct.q", n, "2025-12-31", v, "")
+        for n, v in {"nvidia": 60.0, "google": 20.0, "other": 20.0}.items()
+    ]
+    ((_, v, ids),) = run("cowos_buyer_hhi", rows)
+    assert abs(v - (0.36 + 0.04 + 0.04)) < 1e-9 and sorted(ids) == ["sgoogle", "snvidia", "sother"]
+
+
+def test_the_basket_keeps_gemini_pro_and_drops_small_tiers_and_variants():
+    def price(i: str, model: str, usd: float, d: str = "2026-09-10") -> tuple:
+        subject = model.replace("/", "_").replace("-", "_").replace(".", "_").replace(":", "_")
+        return (
+            i,
+            f"openrouter.{subject}.price_completion_usd_per_mtok.pt",
+            subject,
+            d,
+            usd,
+            f"{model} pricing.completion x",
+        )
+
+    rows = [
+        price("g", "google/gemini-2.5-pro", 10.0),  # "gemini" contains "mini": it must stay
+        price("m", "openai/gpt-5-mini", 2.0),
+        price("f", "google/gemini-3-flash-lite", 0.3),
+        price("v", "openai/gpt-5:batch", 0.1),
+        price("o", "meta-llama/llama-3.2-1b-instruct", 0.01),  # not in the basket at all
+        price("d", "deepseek/deepseek-v3.2", 0.4, "2026-09-15"),
+    ]
+    out = {str(d): (v, ids) for d, v, ids in run("basket_min_output_price_per_mtok", rows)}
+    assert out == {"2026-09-10": (10.0, ["g"]), "2026-09-15": (0.4, ["d"])}
+
+
+def test_supply_growth_is_per_input_against_the_same_quarter_a_year_before():
+    rows = [
+        ("c0", "epoch_components.global.cowos_supply_wafers.q", "global", "2024-12-31", 100.0, ""),
+        ("c1", "epoch_components.global.cowos_supply_wafers.q", "global", "2025-12-31", 170.0, ""),
+        (
+            "h1",
+            "epoch_components.global.hbm_supply_usd.q",
+            "global",
+            "2025-12-31",
+            9.0,
+            "",
+        ),  # no year-ago row
+    ]
+    assert run("chip_input_supply_yoy", rows) == [
+        (date(2025, 12, 31), "cowos_supply_wafers", 0.7, ["c1", "c0"])
+    ]
+
+
+def _dc_ratio(sites: list[tuple[str, float, float]], extra: list[tuple] = ()) -> dict:
+    con = duckdb.connect()
+    con.execute(
+        "CREATE TABLE obs_raw (id VARCHAR, series_key VARCHAR, subject VARCHAR, as_of_date DATE, value_numeric DOUBLE, retrieved_at VARCHAR, disputed BOOLEAN)"
+    )
+    today = date.today()
+    rows = []
+    for name, built, planned in sites:
+        key = f"epoch_dc.{name}.power_mw.pt"
+        rows += [
+            (
+                f"{name}b0",
+                key,
+                name,
+                str(today.replace(year=today.year - 2)),
+                1.0,
+                "2026-09-01T00:00:00+00:00",
+                False,
+            ),
+            (
+                f"{name}b",
+                key,
+                name,
+                str(today.replace(year=today.year - 1)),
+                built,
+                "2026-09-01T00:00:00+00:00",
+                False,
+            ),
+            (
+                f"{name}p",
+                key,
+                name,
+                str(today.replace(year=today.year + 1)),
+                planned,
+                "2026-09-02T00:00:00+00:00",
+                False,
+            ),
+            (
+                f"{name}p2",
+                key,
+                name,
+                str(today.replace(year=today.year + 2)),
+                planned / 2,
+                "2026-09-01T00:00:00+00:00",
+                False,
+            ),
+        ]
+    con.executemany("INSERT INTO obs_raw VALUES (?, ?, ?, ?, ?, ?, ?)", rows + list(extra))
+    con.execute(KEY_SPLIT)
+    con.execute(DC_SITES)
+    ratio = {
+        s_: (d, v, ids)
+        for d, s_, v, ids in con.execute(METRICS["dc_projected_to_observed_power"]["sql"]).fetchall()
+    }
+    count = {s_: v for _, s_, v, _ in con.execute(METRICS["dc_sites_compared"]["sql"]).fetchall()}
+    return {"ratio": ratio, "count": count}
+
+
+def test_the_data_centre_gap_sums_peak_plans_over_newest_builds_and_shows_the_bare_sites():
+    today = date.today()
+    sites = [(f"s{i}", 100.0, 300.0) for i in range(20)] + [(f"z{i}", 0.0, 500.0) for i in range(5)]
+    extra = [
+        (
+            "onlybuilt",
+            "epoch_dc.ob.power_mw.pt",
+            "ob",
+            str(today.replace(year=today.year - 1)),
+            999.0,
+            "2026-09-01T00:00:00+00:00",
+            False,
+        ),
+        (
+            "gone",
+            "epoch_dc.s0.power_mw.pt",
+            "s0",
+            str(today.replace(year=today.year + 3)),
+            9999.0,
+            "2026-09-01T00:00:00+00:00",
+            True,
+        ),
+    ]
+    out = _dc_ratio(sites, extra)
+    d, v, ids = out["ratio"]["all"]
+    assert (
+        abs(v - (20 * 300 + 5 * 500) / (20 * 100)) < 1e-9
+    )  # a withdrawn plan and a site with no plan count for nothing
+    assert abs(out["ratio"]["built"][1] - 3.0) < 1e-9 and out["count"] == {"all": 25, "unbuilt": 5}
+    assert (
+        str(d) == "2026-09-02" and "s0b" in ids and "s0p" in ids and "s0b0" not in ids and "gone" not in ids
+    )
+
+
+def test_too_few_sites_give_no_ratio():
+    out = _dc_ratio([(f"s{i}", 100.0, 300.0) for i in range(19)])
+    assert out["ratio"] == {} and out["count"] == {"all": 19}
