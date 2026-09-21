@@ -129,7 +129,7 @@ export type Fact = { value: number; unit: string; as_of: string; obs_ids: string
 export type ClockSeries = { id: string; label: string; name: string; unit: string; from: string; series: { as_of: string; value: number; obs_ids: string[] }[]; multiple: Fact };
 export type Gauge = {
   id: string; label: string; weight: number; max_age_days: number | null; knots: [number, number][] | null; scale_rationale: string | null;
-  unfed: { kind: string; because: string } | null; required: boolean; log10: boolean; reading: Fact | null; age_days: number | null;
+  unfed: { kind: string; because: string } | null; required: boolean; log10: boolean; unit: string | null; reading: Fact | null; age_days: number | null;
   grade: string | null; points: number | null; pinned: "low" | "high" | null; unavailable: string | null;
 };
 export type TightInput = {
@@ -138,7 +138,8 @@ export type TightInput = {
   factors: { coverage: number; freshness: number; source: number } | null; obs_ids: string[]; withheld: { kind: string; because: string } | null; gauges: Gauge[];
 };
 export type Scorecard = {
-  kinds: { id: string; name: string; tight_means: string }[]; inputs: TightInput[]; scored: Fact; total: number;
+  kinds: { id: string; name: string; tight_means: string }[]; inputs: TightInput[]; total: number;
+  scored: Omit<Fact, "value" | "as_of"> & { value: number | null; as_of: string | null };
   method: Record<string, unknown> & { words: [number, string][]; hatch_under: number }; chart_sources: ChartSourcesT;
 };
 export type StripRow = { id: string; label: string; predicted: boolean; spans: { from: number; to: number; running: boolean; level: "binding" | "present"; because: string; source: string }[] };

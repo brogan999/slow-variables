@@ -28,6 +28,19 @@ PLATES = {
     "migration": {"strip", "scorecard"},
 }
 STATES = ("holding", "failing", "untestable")
+OPS = ("gt", "gte", "lt", "lte")
+
+
+def _bad_test(test: dict[str, Any] | None, known: dict[str, Any]) -> str | None:
+    """Why an `expect` or a prediction's test cannot be run, checked whether or not a reading exists tonight."""
+    if not test:
+        return None
+    if len(test) != 1 or next(iter(test)) not in OPS:
+        return "needs exactly one of gt, gte, lt, lte"
+    rhs = next(iter(test.values()))
+    return f"is tested against unknown fact {rhs}" if isinstance(rhs, str) and rhs not in known else None
+
+
 TOKEN = re.compile(r"\[(fact|plate):([a-z0-9_]+)\]")
 
 
@@ -545,6 +558,8 @@ def problems(s: Store) -> tuple[list[str], list[str]]:
     for k, v in spec["facts"].items():
         if "indicator" in v and v["indicator"] not in ids or "metric" in v and not s.metric_spec(v["metric"]):
             errors.append(f"argument: fact {k} names an unknown indicator or metric")
+        if bad := _bad_test(v.get("expect"), spec["facts"]):
+            errors.append(f"argument: fact {k} {bad}")
     for x in spec["slow_variables"] + spec["clocks"]["links"]:
         if x["id"] not in published:
             errors.append(f"argument: {x['id']} is not a published indicator")
@@ -561,20 +576,36 @@ def problems(s: Store) -> tuple[list[str], list[str]]:
     for k, v in block["facts"].items():
         if "indicator" in v and v["indicator"] not in ids or "metric" in v and not s.metric_spec(v["metric"]):
             errors.append(f"argument: migration fact {k} names an unknown indicator or metric")
-        rhs = next(iter((v.get("expect") or {}).values()), None)
-        if isinstance(rhs, str) and rhs not in block["facts"]:
-            errors.append(f"argument: migration fact {k} is tested against unknown fact {rhs}")
+        if not any(x in v for x in ("metric", "indicator", "series", "computed")):
+            errors.append(
+                f"argument: migration fact {k} names no metric, indicator, series or computed value"
+            )
+        if bad := _bad_test(v.get("expect"), block["facts"]):
+            errors.append(f"argument: migration fact {k} {bad}")
         if v.get("expect") and "computed" not in v and "max_age_days" not in v:
             errors.append(f"argument: migration fact {k} has an expect and no max_age_days")
-    card_ids = {i["id"] for i in yaml.safe_load(TIGHTNESS.read_text())["inputs"]}
+    tight = yaml.safe_load(TIGHTNESS.read_text())
+    card_ids, words = {i["id"] for i in tight["inputs"]}, {w for _, w in tight["rules"]["words"]}
     rows = {r["id"] for r in block["strip"]["rows"]}
     for p in block["predictions"]:
         t = p.get("test")
-        if t and t["fact"] not in block["facts"] or not t and len(p.get("text", "")) < 40:
+        if t and t.get("fact") not in block["facts"] or not t and len(p.get("text", "")) < 40:
             errors.append(f"argument: prediction {p['id']} names an unknown fact, or has no test and no text")
-        if p.get("expect_state") not in STATES or p.get("row") and p["row"] not in rows:
-            errors.append(f"argument: prediction {p['id']} has an unknown expect_state or strip row")
+        if t and (bad := _bad_test({k: v for k, v in t.items() if k != "fact"}, block["facts"])):
+            errors.append(f"argument: prediction {p['id']}'s test {bad}")
+        if p.get("expect_state") not in STATES or p.get("when") not in ("now", "next", "watch"):
+            errors.append(f"argument: prediction {p['id']} has an unknown expect_state or when")
+        if p.get("row") and p["row"] not in rows:
+            errors.append(f"argument: prediction {p['id']} names an unknown strip row")
     errors += [f"argument: says names unknown input {k}" for k in block["says"] if k not in card_ids]
+    errors += [
+        f"argument: says calls {k} an unknown word {w}"
+        for k, ws in block["says"].items()
+        for w in ws
+        if w not in words
+    ]
+    if errors:
+        return errors, []
     seed_text = " ".join(
         [p["claim"] + " " + p["text"] for p in block["predictions"]]
         + [sp["because"] for r in block["strip"]["rows"] for sp in r["spans"]]

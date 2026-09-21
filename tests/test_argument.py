@@ -189,3 +189,28 @@ def test_no_solid_span_passes_today_and_predicted_rows_come_from_the_predictions
     assert {r["id"] for r in st_["rows"] if r["predicted"]} == {
         p["row"] for p in spec["migration"]["predictions"] if p.get("row")
     }
+
+
+def test_a_malformed_migration_seed_is_an_error_line_never_a_crash(monkeypatch):
+    import copy
+
+    s = st.Store()
+    base = ar.load()
+    for change, want in [
+        (
+            lambda m: m["facts"]["dc_gap"].update(expect={"ge": 2}),
+            "needs exactly one of",
+        ),  # no reading needed to catch it
+        (
+            lambda m: m["predictions"][3]["test"].update(gt="procurement_last_year"),
+            "unknown fact procurement_last_year",
+        ),
+        (lambda m: m["predictions"][0].update(when="soon"), "unknown expect_state or when"),
+        (lambda m: m["says"].update(capital=["loose"]), "unknown word loose"),
+        (lambda m: m["facts"].update(orphan={"dims": {}}), "names no metric"),
+    ]:
+        spec = copy.deepcopy(base)
+        change(spec["migration"])
+        monkeypatch.setattr(ar, "load", lambda spec=spec: spec)
+        errors, _ = ar.problems(s)
+        assert any(want in e for e in errors), (want, errors)

@@ -3,6 +3,7 @@ export const metadata = { title: "How to read this", description: "What a readin
 
 import { PageHeader } from "@/components/PageHeader";
 import { argument, skippedSources, sources } from "@/lib/data";
+import { fmt } from "@/lib/format";
 
 const TIERS: [string, string, string][] = [
   ["1", "benchmark", "Benchmark or independent evaluation (METR horizons, Epoch benchmarks)"],
@@ -99,7 +100,7 @@ export default function Methodology() {
               {i.gauges.filter((g) => g.knots).map((g) => (
                 <div key={g.id} className="mt-2 border-l border-grid pl-3">
                   <p className="text-ink">{g.label} <span className="text-muted">· weight {g.weight} · age limit {g.max_age_days} days{g.required ? " · required" : ""}</span></p>
-                  <p className="num text-xs text-ink-2">{g.knots!.map(([x, pts]) => `${x} → ${pts}`).join("   ")}{g.log10 ? "   (read on a multiplying scale)" : ""}</p>
+                  <p className="num text-xs text-ink-2">{g.knots!.map(([x, pts]) => `${fmt(x, g.unit ?? undefined)} → ${pts}`).join(" · ")}{g.log10 ? "   (read on a multiplying scale)" : ""}</p>
                   <p className="text-ink-2">{g.scale_rationale}</p>
                 </div>
               ))}

@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   title: { default: SITE.name, template: `%s · ${SITE.name}` },
   description: SITE.description,
   openGraph: { type: "website", siteName: SITE.name, title: SITE.name, description: SITE.description, url: SITE.url },
-  twitter: { card: "summary_large_image", title: SITE.name, description: SITE.description },
+  twitter: { card: "summary_large_image" }, // title, description and image come from each page's openGraph
   alternates: { types: { "application/rss+xml": "/memos/feed.xml" } },
 };
 
