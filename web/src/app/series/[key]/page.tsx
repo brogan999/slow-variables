@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { QueryThis } from "@/components/QueryThis";
 import { Grade } from "@/components/StatusChip";
-import { fmt, series, seriesKeys } from "@/lib/data";
+import { fmt, meta, series, seriesKeys } from "@/lib/data";
 
 export const dynamicParams = false;
 export async function generateMetadata({ params }: { params: Promise<{ key: string }> }) {
@@ -24,6 +24,7 @@ export default async function SeriesPage({ params }: { params: Promise<{ key: st
   const { key } = await params;
   const s = series(decodeURIComponent(key));
   const oneReason = new Set(s.withdrawn.map((o) => o.dispute_text)).size === 1;
+  const generated = meta().generated_at.slice(0, 10); // a row dated after the data was built is a projection, not a reading
   return (
     <div className="flex flex-col gap-4">
       <div>
@@ -43,7 +44,7 @@ export default async function SeriesPage({ params }: { params: Promise<{ key: st
             {s.observations.map((o) => (
               <tr key={o.id} id={o.id} className="target:bg-fast/10">
                 <td className="font-mono">{o.id}</td>
-                <td className={o.value_numeric !== null ? "tabular-nums whitespace-nowrap" : "max-w-md"}>{o.value_numeric !== null ? fmt(o.value_numeric as number, String(o.unit)) : String(o.value_text)}{o.value_low != null ? <span className="text-muted"> ({fmt(o.value_low as number)}–{fmt(o.value_high as number)})</span> : null}</td>
+                <td className={o.value_numeric !== null ? "tabular-nums whitespace-nowrap" : "max-w-md"}>{o.value_numeric !== null ? fmt(o.value_numeric as number, String(o.unit)) : String(o.value_text)}{o.value_low != null ? <span className="text-muted"> ({fmt(o.value_low as number)}–{fmt(o.value_high as number)})</span> : null}{String(o.as_of_date) > generated ? <span className="ml-1.5 text-muted">projection</span> : null}</td>
                 <td><Grade grade={o.grade} tier={o.tier as number} /></td>
                 {COLS.map((c) => <td key={c} className="whitespace-nowrap text-ink-2" title={o[c] === null || o[c] === undefined ? undefined : String(o[c])}>{cell(c, o[c])}</td>)}
                 <td><a href={String(o.url)} className="underline decoration-grid underline-offset-4">source page</a></td>

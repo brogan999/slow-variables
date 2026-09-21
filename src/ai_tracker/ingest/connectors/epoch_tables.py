@@ -11,9 +11,10 @@ import io
 import json
 import zipfile
 from datetime import date
+from pathlib import Path
 
-from ...schema import Basis, Extraction, Observation, Tier
-from ..base import Connector, RawItem, expect, series_key, slug
+from ...schema import Basis, Extraction, Observation, Review, Tier
+from ..base import Connector, LayoutChanged, RawItem, expect, series_key, slug
 
 
 def _csv(body: bytes, member: str | None = None) -> list[dict[str, str]]:
@@ -450,4 +451,91 @@ class EpochComponents(_EpochTable):
                         value_high=_num(r.get(f"{col} (95th percentile)")),
                     )
                 )
+        return out
+
+
+PROJECTION = "Epoch's projection: this date had not arrived when the file was read"
+
+
+class EpochDataCenters(_EpochTable):
+    """Epoch's timeline for each large AI data centre it tracks: total facility power in megawatts at dated
+    milestones. A past date is Epoch's estimate of what stood there then; a future date is what Epoch expects, and
+    is stored with a note saying so. A zero is a reading (a cleared site), not a blank. The status prose beside
+    each row runs to a thousand characters and is rewritten monthly, so it is not copied into the snippet.
+
+    Epoch removes and re-dates rows as its estimates change. An append-only ledger would keep those rows for ever,
+    so a row that is no longer in the file is flagged disputed (never deleted) and clears if Epoch restores it.
+
+    No Indicator may point at an `epoch_dc` series: its newest row is a projection, not the latest reading.
+    """
+
+    source_id = "epoch_datacenters"
+    urls = ["https://epoch.ai/data/data_centers/data_centers.zip"]
+    member = "data_center_timelines.csv"
+    columns = {"Data center", "Date", "Power (MW)"}
+    expect_series = ["epoch_dc.*.power_mw.pt"]
+    SHRINK = 0.75  # Epoch drops about 7% of rows a month; far fewer than the ledger holds means a broken file
+
+    def __init__(self, ledger: Path = Path("data/observations/epoch_datacenters.jsonl")) -> None:
+        super().__init__()
+        self.ledger = [json.loads(x) for x in ledger.read_text().splitlines()] if ledger.exists() else []
+
+    def extract(self, items: list[RawItem]) -> list[Observation]:
+        item, out, sites = items[0], [], {}
+        read_on = item.retrieved_at.date()
+        for r in self.rows(item):
+            d, v = _date(r.get("Date", "")), _num(r.get("Power (MW)"))
+            if d is None or v is None:
+                continue
+            site = r["Data center"].strip()
+            if sites.setdefault(slug(site), site) != site:
+                raise LayoutChanged(
+                    f"epoch_datacenters: '{site}' and '{sites[slug(site)]}' share a series key"
+                )
+            out.append(
+                self.emit(
+                    item,
+                    r,
+                    series_key("epoch_dc", site, "power_mw", "pt"),
+                    "MW",
+                    d,
+                    v,
+                    Tier.PUBLISHED_ANALYSIS,
+                    Basis.estimated,
+                    ["Data center", "Date", "Power (MW)", "IT power (MW)", "Buildings operational"],
+                    published_date=min(d, read_on),
+                    note=PROJECTION if d > read_on else None,
+                )
+            )
+        return out + self._withdrawn(out, read_on)
+
+    def _withdrawn(self, tonight: list[Observation], read_on: date) -> list[Observation]:
+        """Ledger rows Epoch no longer publishes, re-emitted under their own ids with a dispute flag."""
+        superseded = {r["supersedes_id"] for r in self.ledger if r.get("supersedes_id")}
+        live = [
+            r
+            for r in self.ledger
+            if r["id"] not in superseded
+            and not r.get("disputed")
+            and r.get("review_status") == Review.approved.value
+        ]
+        if len(tonight) < self.SHRINK * len(live):
+            raise LayoutChanged(f"epoch_datacenters: {len(tonight)} rows against {len(live)} in the ledger")
+        ids = {o.id for o in tonight}
+        by_key = {(o.series_key, o.as_of_date.isoformat()): o.id for o in tonight}
+        known = {r["id"] for r in self.ledger}
+        out = []
+        for r in live:
+            if r["id"] in ids:
+                continue
+            now = by_key.get((r["series_key"], r["as_of_date"]))
+            if now is None:
+                why = f"Absent from Epoch's file when read on {read_on}: removed or re-dated by Epoch."
+            elif now in known:
+                # ponytail: Epoch went back to a value it published before; the store cannot re-admit that
+                # superseded row, so this site-date goes unread. Fix in append_observations if it ever bites.
+                why = f"Epoch reverted this value to an earlier figure, as read on {read_on}."
+            else:
+                continue  # a revised value: the store supersedes this row tonight
+            out.append(Observation(**{**r, "disputed": True, "dispute_text": why}))
         return out

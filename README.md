@@ -11,7 +11,7 @@ One tracker, two lenses: how fast AI value moves through the diffusion stages (N
 ```bash
 cp .env.example .env            # SEC EDGAR needs a User-Agent with a contact address
 uv sync
-uv run ai-tracker ingest --all  # every connector (28 today; `ingest --help` lists them) -> data/observations/*.jsonl
+uv run ai-tracker ingest --all  # every connector (29 today; `ingest --help` lists them) -> data/observations/*.jsonl
 uv run ai-tracker build         # seed YAML + JSONL -> DuckDB (in memory), prints counts
 uv run ai-tracker evaluate      # derived metrics; proposes StatusEvents into data/proposed_status_events.jsonl
 #   ...write a `reason` on each proposal (or delete the row), then:
