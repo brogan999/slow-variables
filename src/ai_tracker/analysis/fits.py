@@ -87,6 +87,22 @@ def loglinear(points: list[tuple[date, float]], since: date | None = None) -> Fi
     return Fit(dd, lo, hi if math.isfinite(hi) else None, len(pts), r2, _aic(resid, 2))
 
 
+def annual_rate(points: list[tuple[date, float]], since: date | None = None) -> Fit | None:
+    """Signed growth per year from the same log-linear fit: -0.5 halves each year, 1.0 doubles. `loglinear` gives up
+    on a flat or falling trend because a doubling time has no meaning there; a rate does, so nothing is dropped."""
+    pts = sorted((d, y) for d, y in points if y > 0 and (since is None or d >= since))
+    if len(pts) < 3:
+        return None
+    t0 = pts[0][0]
+    xs = [float((d - t0).days) for d, _ in pts]
+    ys = [math.log(y) for _, y in pts]
+    b, a, se, r2 = _ols(xs, ys)
+    t = t95(len(pts) - 2)
+    lo, hi = (math.expm1(365.25 * (b + k * t * se)) if math.isfinite(se) else None for k in (-1, 1))
+    resid = [y - (a + b * x) for x, y in zip(xs, ys)]
+    return Fit(math.expm1(365.25 * b), lo, hi, len(pts), r2, _aic(resid, 2))
+
+
 def hyperbolic(points: list[tuple[date, float]], since: date | None = None) -> Fit | None:
     """y = 1 / (a - b t): the horizon diverges at t* = a / b. Fit OLS on 1/y; report t* as a decimal year."""
     pts = sorted((d, y) for d, y in points if y > 0 and (since is None or d >= since))

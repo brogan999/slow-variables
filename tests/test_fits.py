@@ -1,7 +1,7 @@
 import math
 from datetime import date, timedelta
 
-from ai_tracker.analysis.fits import hyperbolic, loglinear
+from ai_tracker.analysis.fits import annual_rate, hyperbolic, loglinear
 
 
 def test_loglinear_recovers_doubling_time():
@@ -25,3 +25,13 @@ def test_hyperbolic_finds_blow_up_and_aic_prefers_true_form():
     h, lg = hyperbolic(hyper), loglinear(hyper)
     assert h and abs(h.value - (2024 + 1000 / 365.25)) < 0.02 and lg
     assert h.aic < lg.aic
+
+
+def test_annual_rate_is_signed_and_keeps_a_falling_trend():
+    halving = [(date(2020, 1, 1) + timedelta(days=round(365.25 * i)), 100 * 0.5**i) for i in range(5)]
+    f = annual_rate(halving)
+    assert f and abs(f.value + 0.5) < 1e-3 and f.low <= f.value <= f.high
+    assert loglinear(halving) is None  # a doubling time cannot describe it
+    doubling = [(d, 1 / y) for d, y in halving]
+    assert abs(annual_rate(doubling).value - 1.0) < 5e-3
+    assert annual_rate(halving[:2]) is None

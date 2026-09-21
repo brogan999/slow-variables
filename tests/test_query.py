@@ -112,6 +112,11 @@ def test_sql_tool_cannot_read_files_the_network_or_raw_rows():
     n = s.con.execute("SELECT count(*) FROM observations").fetchone()[0]
     assert t.sql("SELECT count(*) FROM observations")["rows"] == [[n]]
     assert t.sql("SELECT count(*) FROM venture_rounds")["rows"][0][0] > 0
+    for view in (
+        "hyperscaler_capex_ttm",
+        "dc_sites",
+    ):  # the views three saved formulas read must run in the console too
+        assert "error" not in t.sql(f"SELECT count(*) FROM {view}"), view
     assert "error" in t.sql(
         "SELECT getenv('QUERY_TOKEN')"
     )  # a DuckDB upgrade that adds getenv must fail here
