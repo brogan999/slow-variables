@@ -8,7 +8,7 @@ The state logic is pure and tested on made-up facts; `build` resolves the facts 
 from __future__ import annotations
 
 import re
-from datetime import date
+from datetime import date, timedelta
 from pathlib import Path
 from typing import Any
 
@@ -46,27 +46,34 @@ def _on(d: Any) -> date:
 
 
 def state(claim: dict[str, Any], f: dict[str, dict[str, Any] | None], today: date | None = None) -> str:
-    """A claim with a `due` date is about reaching a level by then: short of it, it cannot be tested until a reading
-    dated on or after the due date says it fell short (the calendar alone never fails it, since the last quarter is
-    published weeks later). A rival test stops applying after `rival_until`, when the rival no longer expects the same
-    reading; while it applies, a rival test that cannot run leaves the claim untestable, not a win."""
+    """A claim with a `due` date is about reaching a level by then: short of it, it cannot be tested until the date has
+    passed on the reading's own clock. A rival test stops applying after `rival_until` on the same clock. The clock is
+    the newest reading's date (a quarterly figure is published weeks after its quarter ends), or, for a running record
+    that only moves when it is broken, the calendar plus `grace_days` for results to be published. While a rival test
+    applies but cannot run, the claim cannot claim a win."""
     today = today or date.today()
     own = _run(claim.get("test"), f)
     if own is None:
         return "untestable"
+    reading = f.get(claim["test"]["fact"]) or {}
+    grace = claim.get("grace_days")
+    clock = (
+        (today - timedelta(days=grace))
+        if grace is not None
+        else _on(reading.get("newest") or reading.get("as_of") or today)
+    )
     rt = (
         claim.get("rival_test")
-        if not claim.get("rival_until") or today <= _on(claim["rival_until"])
+        if not claim.get("rival_until") or clock <= _on(claim["rival_until"])
         else None
     )
     rival = _run(rt, f)
-    if rt and rival is None:
-        return "untestable"
+    if rt and rival is None and own:
+        return "untestable"  # a win needs the rival's reading too
     if own and rival:
         return "both"  # the reading both sides expect settles nothing
     due = claim.get("due")
-    reading = f.get(claim["test"]["fact"]) or {}
-    if not own and due and _on(reading.get("newest") or reading.get("as_of") or today) < _on(due):
+    if not own and due and clock < _on(due):
         return "untestable"
     return "holding" if own else "failing"
 
@@ -87,12 +94,13 @@ def claims(
                 "horizon_years": c.get("horizon_years"),
                 "due": str(c["due"]) if c.get("due") else None,
                 "rival_until": str(c["rival_until"]) if c.get("rival_until") else None,
+                "grace_days": c.get("grace_days"),
                 "test": c.get("test"),
                 "rival_test": c.get("rival_test"),
                 "fact": (c.get("test") or {}).get("fact"),
                 "rival": p.get("rival"),
                 "folio": p["folio"],
-                "holders": p["holders"],
+                "holders": c.get("holders") or p["holders"],
                 "attribution": p["attribution"],
                 "state": s,
                 "expected": c.get("expect_state"),
@@ -248,6 +256,7 @@ def problems(
         where = f"outlook: claim {c['id']}"
         if c.get("position") not in positions:
             errors.append(f"{where} names an unknown position")
+        errors += [f"{where} names unknown source {h}" for h in c.get("holders") or [] if h not in sources]
         if c.get("row") and c["row"] not in rows:
             errors.append(f"{where} names an unknown map row {c['row']}")
         if c.get("stage") and c["stage"] not in stages:
@@ -327,11 +336,15 @@ def check(s: Any) -> tuple[list[str], list[str]]:
         if v and v.get("holds") is False
     ]
     notes += [f"outlook: fact {k} is past its age limit" for k, v in f.items() if v and v.get("stale")]
-    notes += [
-        f"outlook: claim {c['id']} reads {c['state']}; the page was written for {c['expected']}, so rewrite the sentence"
-        for c in claims(spec, f)
-        if c["expected"] and c["state"] != c["expected"]
-    ]
+    for c in claims(spec, f):
+        if not c["expected"] or c["state"] == c["expected"]:
+            continue
+        stale = (f.get(c["fact"]) or {}).get("stale") if c["fact"] else False
+        notes.append(
+            f"outlook: claim {c['id']} cannot be tested while fact {c['fact']} is past its age limit"
+            if stale
+            else f"outlook: claim {c['id']} reads {c['state']}; the page was written for {c['expected']}, so rewrite the sentence"
+        )
     return errors, notes
 
 

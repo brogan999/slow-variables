@@ -15,21 +15,18 @@ facts:
   insurer_ledger: {metric: ledger_events_12m, dims: {target: insurer_ai_exclusions, stance: for}}
   fences_ledger: {metric: ledger_events_12m, dims: {target: agent_access_fences, stance: for}}
   openings_ledger: {metric: ledger_events_12m, dims: {target: agent_access_fences, stance: against}}
-  procurement_4q: {metric: lab_procurement_signal_4q, max_age_days: 200}
-  procurement_year_ago: {metric: lab_procurement_signal_4q, pick: year_ago}
   firms_using_ai: {indicator: btos_firm_use, max_age_days: 60}
   paid_share: {metric: chatgpt_paid_share, max_age_days: 400, expect: {lt: 0.1}}
   junior_gap: {metric: canaries_junior_senior_gap, dims: {quintile: most_exposed}, max_age_days: 200}
   junior_gap_control: {metric: canaries_junior_senior_gap, dims: {quintile: least_exposed}, max_age_days: 200}
   gdp_pc_over_peak: {metric: real_gdp_per_capita_over_peak, max_age_days: 200, expect: {gte: 0}}
   gdp_pc_over_peak_best: {metric: real_gdp_per_capita_over_peak, pick: max, since: 2026-04-01}
-  gdp_pc_yoy: {metric: real_gdp_per_capita_yoy, max_age_days: 200}
+  gdp_pc_yoy: {metric: real_gdp_per_capita_yoy, max_age_days: 200, expect: {gt: 0}}
   open_share: {metric: open_share_of_routed_tokens, max_age_days: 30}
   open_lag: {indicator: open_weights_lag_months, max_age_days: 60}
   open_premium: {metric: closed_over_open_price_premium, max_age_days: 60, expect: {lt: 1}}
   chips_gp_share: {indicator: gross_profit_semis_share, max_age_days: 200}
   capex_to_revenue: {metric: capex_to_revenue_stack, max_age_days: 200, expect: {gt: 1}}
-  crawl_ratio: {series: crawl.anthropic.crawl_to_refer.pt}
 
 sources:
   # I · capability
@@ -202,12 +199,20 @@ sources:
   - id: bet_fast_side
     who: William MacAskill, Samuel Albanie, Tom Cohen and Jan Kulveit
     short: the fast side of the growth bet
-    field: the four who took the fast side of the growth bet; MacAskill is a philosopher at Oxford
+    field: the four who took the fast side of the growth bet; MacAskill is a moral philosopher at Forethought, a research group that studies how to prepare for advanced AI
     finding: They bet that in some quarter before 2034 American real output per person will stand fifteen percent or more above the highest level it had reached a year or more before.
     work: Growth bet terms
     venue: benjaminmoll.com
     year: 2026
     url: https://benjaminmoll.com/wp-content/uploads/2026/08/growth_bet.pdf
+  - id: macaskill_moorhouse
+    who: William MacAskill and Fin Moorhouse
+    field: researchers at Forethought, a research group that studies how to prepare for advanced AI; MacAskill, a moral philosopher, taught at Oxford until 2024
+    finding: Once AI's thinking rivals the whole of humanity's, it will keep growing far faster than the number of people, so a century of technological progress could be compressed into a decade, followed by an explosion in industry.
+    work: Preparing for the Intelligence Explosion
+    venue: Forethought
+    year: 2025
+    url: https://www.forethought.org/research/preparing-for-the-intelligence-explosion
   - id: korinek_etal
     who: Anton Korinek, Charles Jones, Peter McCrory and colleagues
     short: Korinek, McCrory and colleagues
@@ -361,7 +366,7 @@ sources:
   - id: cahn_2024
     who: David Cahn
     field: an investor at Sequoia Capital who backs AI and infrastructure companies
-    finding: The revenue AI must earn to pay back a year's spending on data centres runs far ahead of what it earns; the chips lose value fast and computing rented by the hour has little pricing power, so if the revenue comes late the investors, not the builders, take the loss.
+    finding: The revenue AI must earn to pay back a year's spending on data centres runs far ahead of what it earns; the chips lose value fast and computing rented by the hour has little pricing power, so if the revenue comes late the investors take the loss, while founders building on cheap computing gain.
     work: AI's $600B Question
     venue: Sequoia Capital
     year: 2024
@@ -394,8 +399,8 @@ sources:
     who: Dan Sundheim
     field: the founder of an investment firm that holds stakes in OpenAI and Anthropic
     finding: The old worry that selling access to AI models would become a commodity business no longer matters; customers could switch between models but mostly do not, margins are high, and only a handful of labs will matter because staying at the frontier costs too much capital. The open question is whether the returns on the spending arrive in time.
-    work: Invest Like the Best, "The Art of Public and Private Market Investing"
-    venue: a podcast interview with Patrick O'Shaughnessy
+    work: "Inside Dan Sundheim's Bets on Anthropic, OpenAI, and SpaceX"
+    venue: Invest Like the Best, a podcast, on YouTube
     year: 2026
     url: https://www.youtube.com/watch?v=mBtmTmCC0ZM
   - id: jones_tonetti
@@ -452,16 +457,32 @@ sources:
   - id: colorado_sb26_189
     who: The Colorado General Assembly
     field: a state law
-    finding: Repeals the state's AI Act and replaces it with a narrower law on automated decisions about jobs, housing, lending and the like, dropping the general duty of care, from January 2027.
+    finding: Repeals the state's AI Act and replaces it with a narrower law on automated decisions about jobs, housing, lending and the like, from January 2027.
     work: SB26-189, Automated Decision-Making Technology
     venue: Colorado General Assembly
     year: 2026
     url: https://leg.colorado.gov/bills/sb26-189
+  - id: cloudflare_crawl
+    who: Cloudflare
+    field: a company that stands between many websites and their visitors, reporting on its own traffic
+    finding: AI companies' crawlers, the programs that read websites for them, take far more pages than they send visitors back, including on news and publication sites, where Anthropic's crawler took thousands of pages for each visitor it sent.
+    work: "A deeper look at AI crawlers: breaking down traffic by purpose and industry"
+    venue: the Cloudflare blog
+    year: 2025
+    url: https://blog.cloudflare.com/ai-crawler-traffic-by-purpose-and-industry/
+  - id: cloudflare_ratio
+    who: Cloudflare
+    field: a company that stands between many websites and their visitors, reporting on its own traffic
+    finding: Its count of pages crawled for each visitor sent back may overstate the gap where an app, such as Anthropic's, does not say where its visitors came from, by an amount it cannot tell.
+    work: "The crawl before the fall of referrals: understanding AI's impact on content providers"
+    venue: the Cloudflare blog
+    year: 2025
+    url: https://blog.cloudflare.com/ai-search-crawl-refer-ratio-on-radar/
   - id: cloudflare_human_native
     who: CNBC
     field: a news report
     finding: Cloudflare bought Human Native, a British start-up that handles payments from AI developers to the creators whose work they train on, to build a system in which AI developers pay for the content they use.
-    work: Cloudflare buys AI data marketplace Human Native
+    work: Cloudflare acquires AI data marketplace Human Native
     venue: CNBC
     year: 2026
     url: https://www.cnbc.com/2026/01/15/cloudflare-ai-human-native-acquisition.html
@@ -638,7 +659,7 @@ positions:
     holders: []
     attribution: site
     mechanism: Interest rates, the hiring boom after the pandemic and its unwinding hit young workers first, whatever AI does.
-    case: The study itself describes a pattern rather than proving its cause, and the gap narrows once workers' education is taken into account.
+    case: The study itself describes a pattern rather than proving its cause; the gap survives controls for firms' exposure to interest rates but narrows once workers' education is taken into account.
     kill_shot: The gap staying confined to the most exposed jobs as those other causes fade.
     rival: junior_first
     visible: false
@@ -686,11 +707,11 @@ positions:
     visible: true
   - id: fast_growth
     folio: reorganisation
-    title: Growth explodes before 2034
-    holders: [bet_fast_side]
+    title: AI compresses a century of progress into a decade
+    holders: [macaskill_moorhouse]
     attribution: author
-    mechanism: Once AI can do most tasks, output grows with the computing power put to work rather than with the number of workers, so growth can leap within a few years; the fastest of Korinek and colleagues' scenarios unfolds this way [cite:korinek_etal].
-    case: Those scenarios look like the others until about 2027, so slow readings now do not count against it.
+    mechanism: Once AI's thinking rivals the whole of humanity's, it keeps growing far faster than the number of people, research speeds up enormously and industry follows, so output can break away within a decade.
+    case: MacAskill and three others have put money on growth exploding before 2034 [cite:bet_fast_side], and in Korinek and colleagues' model a fast path looks like the others until about 2027 [cite:korinek_etal], so slow readings now do not count against it.
     kill_shot: No qualifying quarter before 2034, on the bet's own terms.
     rival: modest_growth
     visible: true
@@ -760,7 +781,7 @@ positions:
     holders: [stiglitz_ventura_bolet]
     attribution: author
     mechanism: Sites that produce information are paid by visits, and AI that answers directly sends fewer of them.
-    case: By Cloudflare's count, Anthropic's crawler took pages at [fact:crawl_ratio] the rate it sent visitors back.
+    case: Cloudflare counts AI companies' crawlers, the programs that read websites for them, taking far more pages than they send visitors back, on news sites as elsewhere [cite:cloudflare_crawl], though it warns the count may be overstated where an app does not say where its visitors came from [cite:cloudflare_ratio].
     kill_shot: Visits to publishers from search and AI answers rising.
     rival: paid_access
     visible: false
@@ -799,7 +820,7 @@ positions:
   - id: up_the_stack
     folio: value
     title: Labs escape by moving up the stack, and lock their customers in
-    holders: [nk_up_the_stack, athey_scott_morton]
+    holders: [nk_up_the_stack]
     attribution: author
     mechanism: Selling access to a model is a commodity business, so labs move into products and into deployments built into their customers' work, where switching is costly; Athey and Scott Morton add that a supplier with market power can raise its price later [cite:athey_scott_morton].
     case: Cloud computing escaped the same trap by becoming software, and the leading chip foundry by being almost alone.
@@ -884,6 +905,7 @@ claims:
     text: As the scenario is written, AI completes most real, paid freelance projects end to end by the end of 2027.
     test: {fact: rli_record, gt: 0.5}
     due: 2027-12-31
+    grace_days: 90
     falsifier: No model completing most of the Remote Labor Index's projects by the end of 2027.
     expect_state: untestable
   - id: horizon_fast
@@ -899,6 +921,7 @@ claims:
     test: {fact: rli_record, lt: 0.5}
     rival_test: {fact: rli_record, lt: 0.5}
     rival_until: 2027-12-31
+    grace_days: 90
     row: family_8
     stage: methods
     falsifier: The best score on whole projects catching up with the best scores on single skills.
@@ -944,13 +967,10 @@ claims:
     falsifier: A lab selling to apps below its public prices, or apps' margins holding as their use grows.
   - id: agents_fenced
     position: fences
-    text: Large platforms move to keep outside agents off them at least as often as they let them in.
-    test: {fact: fences_ledger, gte: openings_ledger}
-    rival_test: {fact: openings_ledger, gte: fences_ledger}
+    text: Large platforms move to keep outside agents off them more often than they let them in.
     row: agents
     stage: early_adoption
-    falsifier: Platforms opening to outside agents more often than they block them.
-    expect_state: both
+    falsifier: Platforms opening to outside agents more often than they block them, counted under one rule for both; this site's hand-kept ledger does not yet sweep both sides that way, so it tests nothing yet.
   - id: data_next
     position: verified_data
     text: Labs spend more each year with the firms that sell practice tasks, graders and expert data.
@@ -995,6 +1015,7 @@ claims:
   - id: no_growth_jump
     position: modest_growth
     text: In no quarter before 2034 does American real output per person stand [test:no_growth_jump] or more above the highest level it had reached a year or more before.
+    holders: [moll_imas_bet]
     test: {fact: gdp_pc_over_peak_best, lt: 0.15}
     rival_test: {fact: gdp_pc_over_peak_best, lt: 0.15}
     rival_until: 2033-12-31
@@ -1002,19 +1023,12 @@ claims:
     expect_state: both
   - id: bet_fast_side
     position: fast_growth
+    holders: [bet_fast_side]
     text: In some quarter before 2034, output per person stands [test:bet_fast_side] or more above the highest level it had reached a year or more before, which wins the bet's fast side.
     test: {fact: gdp_pc_over_peak_best, gte: 0.15}
     due: 2033-12-31
     falsifier: No qualifying quarter by the time the last one the bet counts is published.
     expect_state: untestable
-  - id: growth_splits
-    position: modest_growth
-    text: Growth in output per person stays below [test:growth_splits] a year through 2030, which in Jones and Tonetti's model means AI following the pattern of past automation rather than improving everywhere at once.
-    test: {fact: gdp_pc_yoy, lt: 0.07}
-    rival_test: {fact: gdp_pc_yoy, lt: 0.07}
-    rival_until: 2029-12-31
-    falsifier: Growth in output per person above that line before 2030, which in their model means machines improving everywhere at once.
-    expect_state: both
   - id: hours_rise_first
     position: intensity_first
     text: Work in the jobs most exposed to AI grows more intense before it grows shorter.
@@ -1059,7 +1073,7 @@ claims:
     test: {fact: open_lag, lt: 9}
     rival_test: {fact: open_lag, lt: 9}
     falsifier: The best closed models pulling away from open ones by that gap or more.
-    expect_state: untestable
+    expect_state: both
   - id: lock_in
     position: up_the_stack
     text: The labs earn a growing share of their revenue from products and deployments inside their customers' firms rather than from selling access to their models.
@@ -1142,7 +1156,7 @@ scenarios:
       binds_next: [family_3]
     - progress: automated_research
       rules: unclear
-      argued_by: [ai_2027, restrepo, bet_fast_side]
+      argued_by: [ai_2027, restrepo, macaskill_moorhouse]
       says: Each model speeds up the research behind the next, output breaks away, and wages settle at the cost of the computing that could replace a person.
       signposts: [rli_reached, horizon_fast, bet_fast_side]
       binds_next: [energy, data_centres, accelerators]
@@ -1163,8 +1177,8 @@ agree:
     holders: [hobart_round_trip, nk_up_the_stack]
     dissent: [sundheim, larson_durability]
     dissent_text: Sundheim, whose firm holds stakes in two of the labs, says their businesses are durable and their margins high; Larson argues a lab can keep its price, and so its margin, even as open models take the volume.
-  - id: liability_sets_pace
-    text: Who answers for AI's mistakes will shape how fast firms use it.
+  - id: someone_answers
+    text: Someone has to answer for what an AI agent does before it can be trusted with work that matters.
     holders: [hadfield_koh, normal_tech]
     dissent: []
   - id: checking_costs

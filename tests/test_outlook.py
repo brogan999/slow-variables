@@ -31,12 +31,20 @@ def test_a_level_due_by_a_date_cannot_fail_before_it():
     assert state(c, best, date(2028, 2, 1)) == "failing"
 
 
-def test_a_rival_test_stops_applying_after_its_date_and_blocks_a_verdict_while_it_cannot_run():
+def test_a_rival_test_stops_applying_after_its_date_and_blocks_only_a_win_while_it_cannot_run():
     from datetime import date
 
     c = {"test": {"fact": "rli", "lt": 0.5}, "rival_test": {"fact": "rli", "lt": 0.5}, "rival_until": "2027-12-31"}
-    assert state(c, F, date(2026, 9, 22)) == "both" and state(c, F, date(2028, 1, 2)) == "holding"
+    assert state(c, F, date(2028, 1, 2)) == "both"  # on the reading's own clock a 2026 reading is inside the date
+    late = {**F, "rli": {"value": 0.21, "as_of": "2028-01-05"}}
+    assert state(c, late, date(2028, 2, 1)) == "holding"
+    record = {**c, "grace_days": 90}  # a running record: the calendar, less time for results to be published
+    assert state(record, F, date(2028, 3, 1)) == "both" and state(record, F, date(2028, 4, 1)) == "holding"
+    due = {"test": {"fact": "rli", "gt": 0.5}, "due": "2027-12-31", "grace_days": 90}
+    assert state(due, F, date(2028, 3, 1)) == "untestable" and state(due, F, date(2028, 4, 1)) == "failing"
     assert state({**c, "rival_test": {"fact": "missing", "lt": 0.5}}, F, date(2026, 9, 22)) == "untestable"
+    lost = {"test": {"fact": "rli", "gt": 0.5}, "rival_test": {"fact": "missing", "lt": 0.5}}
+    assert state(lost, F) == "failing"  # an unrunnable rival blocks a win, not a loss
     stale_rhs = {"test": {"fact": "rli", "gt": "old"}}  # a stale reading on the right-hand side tests nothing
     assert state(stale_rhs, F) == "untestable"
 

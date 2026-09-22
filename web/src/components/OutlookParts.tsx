@@ -56,7 +56,7 @@ function ClaimTest({ doc, c }: { doc: OutlookDoc; c: OutlookClaim }) {
   return (
     <p className="text-[13.5px] leading-relaxed text-ink-2">
       {c.test ? <>Tonight {f ? <Fact f={f} /> : "no reading"}; the test is <Threshold doc={doc} t={c.test} />{c.due ? <> by {c.due}</> : null}. </> : <>No reading tests this yet. </>}
-      {c.state === "both" ? <>Its rival expects the same reading{c.rival_until ? <> until {c.rival_until}</> : null}, so tonight settles nothing. </> : null}
+      {c.state === "both" ? <>Its rival can live with the same reading{c.rival_until ? <> until {c.rival_until}</> : null}, so tonight settles nothing. </> : null}
       {c.falsifier ? <>Proved wrong by: {c.falsifier}</> : null}
     </p>
   );
