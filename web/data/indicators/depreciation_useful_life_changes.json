@@ -16,6 +16,69 @@
  },
  "bucket_id": null,
  "cadence_expected": "annual",
+ "chart": {
+  "bands": [],
+  "change": null,
+  "dead": null,
+  "drawn": {
+   "metric": null,
+   "others": 3,
+   "series": "sec_filing.amzn.server_useful_life_years.fy",
+   "total": 4
+  },
+  "line": true,
+  "n_drawn": 1,
+  "needs": 3,
+  "stamps": [
+   "measured"
+  ],
+  "x": {
+   "ticks": [
+    {
+     "label": "Dec 2025",
+     "minor": false,
+     "x": 18.75
+    },
+    {
+     "label": "2026",
+     "minor": false,
+     "x": 51.04
+    },
+    {
+     "label": "Feb",
+     "minor": false,
+     "x": 83.33
+    }
+   ]
+  },
+  "y": {
+   "chars": 3,
+   "log": false,
+   "ticks": [
+    {
+     "label": "4.6",
+     "y": 100.0
+    },
+    {
+     "label": "4.8",
+     "y": 75.0
+    },
+    {
+     "label": "5.0",
+     "y": 50.0
+    },
+    {
+     "label": "5.2",
+     "y": 25.0
+    },
+    {
+     "label": "5.4",
+     "y": 0.0
+    }
+   ],
+   "unit": "years"
+  }
+ },
  "chart_sources": {
   "metric": null,
   "sources": [
@@ -83,16 +146,21 @@
   {
    "as_of": "2025-12-31",
    "disputed": false,
+   "faint": false,
    "grade": "A",
    "high": null,
+   "href": "/series/sec_filing.amzn.server_useful_life_years.fy#81efc38c88434c53",
    "low": null,
    "obs_ids": [
     "81efc38c88434c53"
    ],
    "series_key": "sec_filing.amzn.server_useful_life_years.fy",
+   "stamp": "measured",
    "subject": "amzn",
    "unit": "years",
-   "value": 5.0
+   "value": 5.0,
+   "x": 50.0,
+   "y": 50.0
   }
  ],
  "prediction_rows": [],
@@ -196,22 +264,7 @@
  "source_ids": [
   "sec_edgar_filings"
  ],
- "sparkline": [
-  {
-   "as_of": "2025-12-31",
-   "disputed": false,
-   "grade": "A",
-   "high": null,
-   "low": null,
-   "obs_ids": [
-    "81efc38c88434c53"
-   ],
-   "series_key": "sec_filing.amzn.server_useful_life_years.fy",
-   "subject": "amzn",
-   "unit": "years",
-   "value": 5.0
-  }
- ],
+ "spark": null,
  "stale_as_of": null,
  "stale_ok": true,
  "stale_reason": "Annual filings; each change is quoted by hand from the 10-K notes.",

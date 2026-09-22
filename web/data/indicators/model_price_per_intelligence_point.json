@@ -17,6 +17,65 @@
  },
  "bucket_id": null,
  "cadence_expected": "daily",
+ "chart": {
+  "bands": [],
+  "change": null,
+  "dead": null,
+  "drawn": {
+   "metric": "aa_frontier_price_per_point",
+   "others": 0,
+   "series": null,
+   "total": 0
+  },
+  "line": true,
+  "n_drawn": 1,
+  "needs": 5,
+  "stamps": [
+   "measured"
+  ],
+  "x": {
+   "ticks": [
+    {
+     "label": "Aug 2026",
+     "minor": false,
+     "x": 7.29
+    },
+    {
+     "label": "Sep",
+     "minor": false,
+     "x": 39.58
+    },
+    {
+     "label": "Oct",
+     "minor": false,
+     "x": 70.83
+    }
+   ]
+  },
+  "y": {
+   "chars": 7,
+   "log": false,
+   "ticks": [
+    {
+     "label": "$0.0050",
+     "y": 100.0
+    },
+    {
+     "label": "$0.0055",
+     "y": 66.67
+    },
+    {
+     "label": "$0.0060",
+     "y": 33.33
+    },
+    {
+     "label": "$0.0065",
+     "y": 0.0
+    }
+   ],
+   "unit": null
+  }
+ },
  "chart_sources": {
   "metric": "aa_frontier_price_per_point",
   "sources": [
@@ -100,12 +159,17 @@
   {
    "as_of": "2026-09-11",
    "dims": {},
+   "faint": false,
+   "href": "/series/aa.glm_5_3_flash.price_blended_usd_per_mtok.pt#237e985e770d8c70",
    "obs_ids": [
     "237e985e770d8c70",
     "eaeb03ee334f3a26"
    ],
+   "stamp": "measured",
    "unit": "USD",
-   "value": 0.005669856459330143
+   "value": 0.005669856459330143,
+   "x": 50.0,
+   "y": 55.34
   }
  ],
  "prediction_rows": [],
@@ -127,18 +191,7 @@
  "source_ids": [
   "artificial_analysis"
  ],
- "sparkline": [
-  {
-   "as_of": "2026-09-11",
-   "dims": {},
-   "obs_ids": [
-    "237e985e770d8c70",
-    "eaeb03ee334f3a26"
-   ],
-   "unit": "USD",
-   "value": 0.005669856459330143
-  }
- ],
+ "spark": null,
  "stale_as_of": null,
  "stale_ok": true,
  "stale_reason": "Change-point series: a quiet month means prices held; fetch freshness is on /sources.",

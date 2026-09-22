@@ -17,6 +17,76 @@
  },
  "bucket_id": "return_arrow",
  "cadence_expected": "quarterly",
+ "chart": {
+  "bands": [
+   {
+    "height": 33.33,
+    "name": "normal",
+    "y": 0.0
+   },
+   {
+    "height": 16.67,
+    "name": "fast",
+    "y": 83.33
+   }
+  ],
+  "change": null,
+  "dead": null,
+  "drawn": {
+   "metric": "cl_refresh_cadence_hours",
+   "others": 0,
+   "series": null,
+   "total": 0
+  },
+  "line": false,
+  "n_drawn": 1,
+  "needs": null,
+  "stamps": [
+   "reported"
+  ],
+  "x": {
+   "ticks": [
+    {
+     "label": "May 2026",
+     "minor": false,
+     "x": 22.92
+    },
+    {
+     "label": "Jun",
+     "minor": false,
+     "x": 55.21
+    },
+    {
+     "label": "Jul",
+     "minor": false,
+     "x": 86.46
+    }
+   ]
+  },
+  "y": {
+   "chars": 3,
+   "log": false,
+   "ticks": [
+    {
+     "label": "0",
+     "y": 100.0
+    },
+    {
+     "label": "0.5",
+     "y": 66.67
+    },
+    {
+     "label": "1.0",
+     "y": 33.33
+    },
+    {
+     "label": "1.5",
+     "y": 0.0
+    }
+   ],
+   "unit": "hours"
+  }
+ },
  "chart_sources": {
   "metric": "cl_refresh_cadence_hours",
   "sources": [
@@ -118,11 +188,15 @@
   {
    "as_of": "2026-05-27",
    "dims": {},
+   "href": "/series/cl_refresh.trajectory.cadence_hours.pt#73920f270a9efb8f",
    "obs_ids": [
     "73920f270a9efb8f"
    ],
+   "stamp": "reported",
    "unit": "hours",
-   "value": 1.0
+   "value": 1.0,
+   "x": 50.0,
+   "y": 33.33
   }
  ],
  "prediction_rows": [],
@@ -145,17 +219,7 @@
  "source_ids": [
   "baseten_blog"
  ],
- "sparkline": [
-  {
-   "as_of": "2026-05-27",
-   "dims": {},
-   "obs_ids": [
-    "73920f270a9efb8f"
-   ],
-   "unit": "hours",
-   "value": 1.0
-  }
- ],
+ "spark": null,
  "stale_as_of": null,
  "stale_ok": true,
  "stale_reason": "Event-driven: a vendor describes its pipeline once; a quiet quarter means nothing new was described.",

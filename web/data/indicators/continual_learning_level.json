@@ -18,6 +18,76 @@
  },
  "bucket_id": "return_arrow",
  "cadence_expected": "quarterly",
+ "chart": {
+  "bands": [
+   {
+    "height": 50.0,
+    "name": "normal",
+    "y": 50.0
+   },
+   {
+    "height": 16.67,
+    "name": "fast",
+    "y": 0.0
+   }
+  ],
+  "change": null,
+  "dead": null,
+  "drawn": {
+   "metric": "continual_learning_level",
+   "others": 0,
+   "series": null,
+   "total": 0
+  },
+  "line": false,
+  "n_drawn": 2,
+  "needs": null,
+  "stamps": [
+   "reported"
+  ],
+  "x": {
+   "ticks": [
+    {
+     "label": "Oct 2025",
+     "minor": false,
+     "x": 9.89
+    },
+    {
+     "label": "2026",
+     "minor": false,
+     "x": 43.59
+    },
+    {
+     "label": "Apr",
+     "minor": false,
+     "x": 76.56
+    }
+   ]
+  },
+  "y": {
+   "chars": 1,
+   "log": false,
+   "ticks": [
+    {
+     "label": "0",
+     "y": 100.0
+    },
+    {
+     "label": "2",
+     "y": 66.67
+    },
+    {
+     "label": "4",
+     "y": 33.33
+    },
+    {
+     "label": "6",
+     "y": 0.0
+    }
+   ],
+   "unit": "rung"
+  }
+ },
  "chart_sources": {
   "metric": "continual_learning_level",
   "sources": [
@@ -147,21 +217,29 @@
   {
    "as_of": "2025-09-12",
    "dims": {},
+   "href": "/series/cl_ladder.anysphere.rung.pt#dc983a8178691c42",
    "obs_ids": [
     "dc983a8178691c42"
    ],
+   "stamp": "reported",
    "unit": "rung",
-   "value": 2.0
+   "value": 2.0,
+   "x": 2.93,
+   "y": 66.67
   },
   {
    "as_of": "2026-05-27",
    "dims": {},
+   "href": "/series/cl_ladder.trajectory.rung.pt#1b7d08dbce2be548",
    "obs_ids": [
     "1b7d08dbce2be548",
     "dc983a8178691c42"
    ],
+   "stamp": "reported",
    "unit": "rung",
-   "value": 3.0
+   "value": 3.0,
+   "x": 97.07,
+   "y": 50.0
   }
  ],
  "prediction_rows": [
@@ -192,27 +270,13 @@
   "baseten_blog",
   "cursor_blog"
  ],
- "sparkline": [
-  {
-   "as_of": "2025-09-12",
-   "dims": {},
-   "obs_ids": [
-    "dc983a8178691c42"
-   ],
-   "unit": "rung",
-   "value": 2.0
-  },
-  {
-   "as_of": "2026-05-27",
-   "dims": {},
-   "obs_ids": [
-    "1b7d08dbce2be548",
-    "dc983a8178691c42"
-   ],
-   "unit": "rung",
-   "value": 3.0
-  }
- ],
+ "spark": {
+  "d": "M1.0,26.0 L95.0,2.0",
+  "end": [
+   95.0,
+   2.0
+  ]
+ },
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,

@@ -35,6 +35,83 @@
  },
  "bucket_id": null,
  "cadence_expected": "weekly",
+ "chart": {
+  "bands": [],
+  "change": null,
+  "dead": null,
+  "drawn": {
+   "metric": "lab_token_hhi",
+   "others": 0,
+   "series": null,
+   "total": 0
+  },
+  "line": true,
+  "n_drawn": 2,
+  "needs": 5,
+  "stamps": [
+   "measured"
+  ],
+  "x": {
+   "ticks": [
+    {
+     "label": "13 Sep 2026",
+     "minor": false,
+     "x": 11.11
+    },
+    {
+     "label": "15 Sep",
+     "minor": true,
+     "x": 33.33
+    },
+    {
+     "label": "17 Sep",
+     "minor": false,
+     "x": 55.56
+    },
+    {
+     "label": "19 Sep",
+     "minor": true,
+     "x": 77.78
+    },
+    {
+     "label": "21 Sep",
+     "minor": false,
+     "x": 100.0
+    }
+   ]
+  },
+  "y": {
+   "chars": 4,
+   "log": false,
+   "ticks": [
+    {
+     "label": "0.14",
+     "y": 100.0
+    },
+    {
+     "label": "0.15",
+     "y": 80.0
+    },
+    {
+     "label": "0.16",
+     "y": 60.0
+    },
+    {
+     "label": "0.17",
+     "y": 40.0
+    },
+    {
+     "label": "0.18",
+     "y": 20.0
+    },
+    {
+     "label": "0.19",
+     "y": 0.0
+    }
+   ],
+   "unit": "index"
+  }
+ },
  "chart_sources": {
   "metric": "lab_token_hhi",
   "sources": [
@@ -227,6 +304,8 @@
   {
    "as_of": "2026-09-13",
    "dims": {},
+   "faint": false,
+   "href": "/series/openrouter_rankings.openai_gpt_5_6_sol_20260709.tokens.d#1047099a77d0ef37",
    "obs_ids": [
     "1047099a77d0ef37",
     "11fb748d66059705",
@@ -249,12 +328,17 @@
     "ed0f9366f51fcf34",
     "ed4aef3d5107870e"
    ],
+   "stamp": "measured",
    "unit": "index",
-   "value": 0.1606597186038078
+   "value": 0.1606597186038078,
+   "x": 11.11,
+   "y": 58.68
   },
   {
    "as_of": "2026-09-20",
    "dims": {},
+   "faint": false,
+   "href": "/series/openrouter_rankings.upstage_solar_pro4_20260810.tokens.d#0e8d524b845d0d1c",
    "obs_ids": [
     "0e8d524b845d0d1c",
     "1a66e7046947e67f",
@@ -277,8 +361,11 @@
     "f61d6023c9f7e534",
     "f8cce0b3219c5b1e"
    ],
+   "stamp": "measured",
    "unit": "index",
-   "value": 0.1701800311911384
+   "value": 0.1701800311911384,
+   "x": 88.89,
+   "y": 39.64
   }
  ],
  "prediction_rows": [],
@@ -302,64 +389,13 @@
  "source_ids": [
   "openrouter_rankings"
  ],
- "sparkline": [
-  {
-   "as_of": "2026-09-13",
-   "dims": {},
-   "obs_ids": [
-    "1047099a77d0ef37",
-    "11fb748d66059705",
-    "30f2898b47b1d818",
-    "48bc5114d916e10b",
-    "7204a213e4b6c2fe",
-    "73ebceeec501e207",
-    "7f8204794c7a5105",
-    "7fd2f5f83874a6d2",
-    "9174bfe7c2fa7abc",
-    "9615adf621f2bfd5",
-    "b8212e03617ddb2f",
-    "c459a50d884fc0d9",
-    "c74700b8466662f6",
-    "dbf51f5cf3eb2675",
-    "dc63876d05ef6bca",
-    "e9c75172762897c7",
-    "eaa522a6e3fd6987",
-    "eb792b459b28410a",
-    "ed0f9366f51fcf34",
-    "ed4aef3d5107870e"
-   ],
-   "unit": "index",
-   "value": 0.1606597186038078
-  },
-  {
-   "as_of": "2026-09-20",
-   "dims": {},
-   "obs_ids": [
-    "0e8d524b845d0d1c",
-    "1a66e7046947e67f",
-    "1b3e413d582dffab",
-    "42258172c5f7790e",
-    "4be1895d03a81fca",
-    "53ecb77d7154e7cc",
-    "579dab429e0d8867",
-    "6bc2275ef005777e",
-    "701780a1ecfa5832",
-    "8084024731d84fd8",
-    "90c5cb14d2b4bce9",
-    "98a5cdc6113cfc19",
-    "9f1a63f73c1f15a2",
-    "b747ff015d15f489",
-    "baf6fcfd072e98d0",
-    "cea9224daeaefec3",
-    "df84ac213aaa4f5b",
-    "f33b11bea63d3c2a",
-    "f61d6023c9f7e534",
-    "f8cce0b3219c5b1e"
-   ],
-   "unit": "index",
-   "value": 0.1701800311911384
-  }
- ],
+ "spark": {
+  "d": "M1.0,26.0 L95.0,2.0",
+  "end": [
+   95.0,
+   2.0
+  ]
+ },
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,

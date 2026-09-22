@@ -18,6 +18,95 @@
  },
  "bucket_id": "products",
  "cadence_expected": "annual",
+ "chart": {
+  "bands": [],
+  "change": {
+   "dead_band": "\u00b15.0 pts",
+   "label": "+18.0 pts"
+  },
+  "dead": {
+   "height": 33.33,
+   "width": 94.32,
+   "x": 2.84,
+   "y": 55.56
+  },
+  "drawn": {
+   "metric": "enterprise_app_spend_share",
+   "others": 2,
+   "series": null,
+   "total": 2
+  },
+  "line": true,
+  "n_drawn": 2,
+  "needs": 2,
+  "stamps": [
+   "reported"
+  ],
+  "x": {
+   "ticks": [
+    {
+     "label": "2025",
+     "minor": false,
+     "x": 3.1
+    },
+    {
+     "label": "Apr",
+     "minor": true,
+     "x": 26.36
+    },
+    {
+     "label": "Jul",
+     "minor": false,
+     "x": 49.87
+    },
+    {
+     "label": "Oct",
+     "minor": true,
+     "x": 73.64
+    },
+    {
+     "label": "2026",
+     "minor": false,
+     "x": 97.42
+    }
+   ]
+  },
+  "y": {
+   "chars": 3,
+   "log": false,
+   "ticks": [
+    {
+     "label": "25%",
+     "y": 100.0
+    },
+    {
+     "label": "30%",
+     "y": 83.33
+    },
+    {
+     "label": "35%",
+     "y": 66.67
+    },
+    {
+     "label": "40%",
+     "y": 50.0
+    },
+    {
+     "label": "45%",
+     "y": 33.33
+    },
+    {
+     "label": "50%",
+     "y": 16.67
+    },
+    {
+     "label": "55%",
+     "y": 0.0
+    }
+   ],
+   "unit": null
+  }
+ },
  "chart_sources": {
   "metric": "enterprise_app_spend_share",
   "sources": [
@@ -134,22 +223,32 @@
   {
    "as_of": "2024-12-31",
    "dims": {},
+   "faint": false,
+   "href": "/series/menlo.us_enterprise.genai_spend_usd.fy#eb8d37a9275b0137",
    "obs_ids": [
     "eb8d37a9275b0137",
     "fbc90648f2532e9c"
    ],
+   "stamp": "reported",
    "unit": "share",
-   "value": 0.3333333333333333
+   "value": 0.3333333333333333,
+   "x": 2.84,
+   "y": 72.22
   },
   {
    "as_of": "2025-12-31",
    "dims": {},
+   "faint": false,
+   "href": "/series/menlo.us_enterprise.genai_spend_usd.fy#6012e72e8105bfc4",
    "obs_ids": [
     "6012e72e8105bfc4",
     "790ba59ba69990e5"
    ],
+   "stamp": "reported",
    "unit": "share",
-   "value": 0.5135135135135135
+   "value": 0.5135135135135135,
+   "x": 97.16,
+   "y": 12.16
   }
  ],
  "prediction_rows": [],
@@ -242,28 +341,13 @@
  "source_ids": [
   "menlo"
  ],
- "sparkline": [
-  {
-   "as_of": "2024-12-31",
-   "dims": {},
-   "obs_ids": [
-    "eb8d37a9275b0137",
-    "fbc90648f2532e9c"
-   ],
-   "unit": "share",
-   "value": 0.3333333333333333
-  },
-  {
-   "as_of": "2025-12-31",
-   "dims": {},
-   "obs_ids": [
-    "6012e72e8105bfc4",
-    "790ba59ba69990e5"
-   ],
-   "unit": "share",
-   "value": 0.5135135135135135
-  }
- ],
+ "spark": {
+  "d": "M1.0,26.0 L95.0,2.0",
+  "end": [
+   95.0,
+   2.0
+  ]
+ },
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,

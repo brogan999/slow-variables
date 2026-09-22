@@ -18,6 +18,90 @@
  },
  "bucket_id": "return_arrow",
  "cadence_expected": "quarterly",
+ "chart": {
+  "bands": [
+   {
+    "height": 37.5,
+    "name": "normal",
+    "y": 62.5
+   },
+   {
+    "height": 25.0,
+    "name": "fast",
+    "y": 0.0
+   }
+  ],
+  "change": null,
+  "dead": null,
+  "drawn": {
+   "metric": "cl_lab_release_claims_12m",
+   "others": 0,
+   "series": null,
+   "total": 0
+  },
+  "line": false,
+  "n_drawn": 4,
+  "needs": null,
+  "stamps": [
+   "reported"
+  ],
+  "x": {
+   "ticks": [
+    {
+     "label": "Oct 2025",
+     "minor": false,
+     "x": 7.56
+    },
+    {
+     "label": "2026",
+     "minor": true,
+     "x": 30.73
+    },
+    {
+     "label": "Apr",
+     "minor": false,
+     "x": 53.4
+    },
+    {
+     "label": "Jul",
+     "minor": true,
+     "x": 76.32
+    },
+    {
+     "label": "Oct",
+     "minor": false,
+     "x": 99.5
+    }
+   ]
+  },
+  "y": {
+   "chars": 1,
+   "log": false,
+   "ticks": [
+    {
+     "label": "0",
+     "y": 100.0
+    },
+    {
+     "label": "2",
+     "y": 75.0
+    },
+    {
+     "label": "4",
+     "y": 50.0
+    },
+    {
+     "label": "6",
+     "y": 25.0
+    },
+    {
+     "label": "8",
+     "y": 0.0
+    }
+   ],
+   "unit": "count"
+  }
+ },
  "chart_sources": {
   "metric": "cl_lab_release_claims_12m",
   "sources": [
@@ -187,42 +271,58 @@
   {
    "as_of": "2025-09-12",
    "dims": {},
+   "href": "/series/cl_ladder.anysphere.rung.pt#dc983a8178691c42",
    "obs_ids": [
     "dc983a8178691c42"
    ],
+   "stamp": "reported",
    "unit": "count",
-   "value": 1.0
+   "value": 1.0,
+   "x": 2.77,
+   "y": 87.5
   },
   {
    "as_of": "2026-05-27",
    "dims": {},
+   "href": "/series/cl_ladder.trajectory.rung.pt#1b7d08dbce2be548",
    "obs_ids": [
     "1b7d08dbce2be548",
     "dc983a8178691c42"
    ],
+   "stamp": "reported",
    "unit": "count",
-   "value": 2.0
+   "value": 2.0,
+   "x": 67.51,
+   "y": 75.0
   },
   {
    "as_of": "2026-06-25",
    "dims": {},
+   "href": "/series/cl_ladder.baseten_draft.rung.pt#0bdf1920b1feb93e",
    "obs_ids": [
     "0bdf1920b1feb93e",
     "1b7d08dbce2be548",
     "dc983a8178691c42"
    ],
+   "stamp": "reported",
    "unit": "count",
-   "value": 3.0
+   "value": 3.0,
+   "x": 74.81,
+   "y": 62.5
   },
   {
    "as_of": "2026-09-22",
    "dims": {},
+   "href": "/series/cl_ladder.baseten_draft.rung.pt#0bdf1920b1feb93e",
    "obs_ids": [
     "0bdf1920b1feb93e",
     "1b7d08dbce2be548"
    ],
+   "stamp": "reported",
    "unit": "count",
-   "value": 2.0
+   "value": 2.0,
+   "x": 97.23,
+   "y": 75.0
   }
  ],
  "prediction_rows": [
@@ -252,48 +352,13 @@
   "baseten_blog",
   "cursor_blog"
  ],
- "sparkline": [
-  {
-   "as_of": "2025-09-12",
-   "dims": {},
-   "obs_ids": [
-    "dc983a8178691c42"
-   ],
-   "unit": "count",
-   "value": 1.0
-  },
-  {
-   "as_of": "2026-05-27",
-   "dims": {},
-   "obs_ids": [
-    "1b7d08dbce2be548",
-    "dc983a8178691c42"
-   ],
-   "unit": "count",
-   "value": 2.0
-  },
-  {
-   "as_of": "2026-06-25",
-   "dims": {},
-   "obs_ids": [
-    "0bdf1920b1feb93e",
-    "1b7d08dbce2be548",
-    "dc983a8178691c42"
-   ],
-   "unit": "count",
-   "value": 3.0
-  },
-  {
-   "as_of": "2026-09-22",
-   "dims": {},
-   "obs_ids": [
-    "0bdf1920b1feb93e",
-    "1b7d08dbce2be548"
-   ],
-   "unit": "count",
-   "value": 2.0
-  }
- ],
+ "spark": {
+  "d": "M1.0,26.0 L32.3,14.0 L63.7,2.0 L95.0,14.0",
+  "end": [
+   95.0,
+   14.0
+  ]
+ },
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,

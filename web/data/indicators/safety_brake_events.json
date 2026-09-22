@@ -19,6 +19,80 @@
  },
  "bucket_id": "adaptation",
  "cadence_expected": "quarterly",
+ "chart": {
+  "bands": [
+   {
+    "height": 50.0,
+    "name": "normal",
+    "y": 0.0
+   },
+   {
+    "height": 25.0,
+    "name": "fast",
+    "y": 75.0
+   }
+  ],
+  "change": null,
+  "dead": null,
+  "drawn": {
+   "metric": "safety_brake_events_12m",
+   "others": 0,
+   "series": null,
+   "total": 0
+  },
+  "line": false,
+  "n_drawn": 4,
+  "needs": null,
+  "stamps": [
+   "reported"
+  ],
+  "x": {
+   "ticks": [
+    {
+     "label": "16 Aug 2026",
+     "minor": false,
+     "x": 20.83
+    },
+    {
+     "label": "30 Aug",
+     "minor": false,
+     "x": 50.0
+    },
+    {
+     "label": "13 Sep",
+     "minor": false,
+     "x": 79.17
+    }
+   ]
+  },
+  "y": {
+   "chars": 2,
+   "log": false,
+   "ticks": [
+    {
+     "label": "-1",
+     "y": 100.0
+    },
+    {
+     "label": "0",
+     "y": 75.0
+    },
+    {
+     "label": "1",
+     "y": 50.0
+    },
+    {
+     "label": "2",
+     "y": 25.0
+    },
+    {
+     "label": "3",
+     "y": 0.0
+    }
+   ],
+   "unit": "count"
+  }
+ },
  "chart_sources": {
   "metric": "safety_brake_events_12m",
   "sources": [
@@ -227,43 +301,59 @@
   {
    "as_of": "2026-08-07",
    "dims": {},
+   "href": "/series/evidence.safety_brake_events.for.pt#67d75927e7d23e32",
    "obs_ids": [
     "67d75927e7d23e32"
    ],
+   "stamp": "reported",
    "unit": "count",
-   "value": 1.0
+   "value": 1.0,
+   "x": 2.08,
+   "y": 50.0
   },
   {
    "as_of": "2026-08-18",
    "dims": {},
+   "href": "/series/evidence.safety_brake_events.for.pt#67d75927e7d23e32",
    "obs_ids": [
     "67d75927e7d23e32",
     "82685d1efcfba981"
    ],
+   "stamp": "reported",
    "unit": "count",
-   "value": 2.0
+   "value": 2.0,
+   "x": 25.0,
+   "y": 25.0
   },
   {
    "as_of": "2026-09-01",
    "dims": {},
+   "href": "/series/evidence.safety_brake_events.for.pt#2ab8fec44e7914a5",
    "obs_ids": [
     "2ab8fec44e7914a5",
     "67d75927e7d23e32",
     "82685d1efcfba981"
    ],
+   "stamp": "reported",
    "unit": "count",
-   "value": 3.0
+   "value": 3.0,
+   "x": 54.17,
+   "y": 0.0
   },
   {
    "as_of": "2026-09-22",
    "dims": {},
+   "href": "/series/evidence.safety_brake_events.for.pt#2ab8fec44e7914a5",
    "obs_ids": [
     "2ab8fec44e7914a5",
     "67d75927e7d23e32",
     "82685d1efcfba981"
    ],
+   "stamp": "reported",
    "unit": "count",
-   "value": 3.0
+   "value": 3.0,
+   "x": 97.92,
+   "y": 0.0
   }
  ],
  "prediction_rows": [],
@@ -286,49 +376,13 @@
  "source_ids": [
   "openai_blog"
  ],
- "sparkline": [
-  {
-   "as_of": "2026-08-07",
-   "dims": {},
-   "obs_ids": [
-    "67d75927e7d23e32"
-   ],
-   "unit": "count",
-   "value": 1.0
-  },
-  {
-   "as_of": "2026-08-18",
-   "dims": {},
-   "obs_ids": [
-    "67d75927e7d23e32",
-    "82685d1efcfba981"
-   ],
-   "unit": "count",
-   "value": 2.0
-  },
-  {
-   "as_of": "2026-09-01",
-   "dims": {},
-   "obs_ids": [
-    "2ab8fec44e7914a5",
-    "67d75927e7d23e32",
-    "82685d1efcfba981"
-   ],
-   "unit": "count",
-   "value": 3.0
-  },
-  {
-   "as_of": "2026-09-22",
-   "dims": {},
-   "obs_ids": [
-    "2ab8fec44e7914a5",
-    "67d75927e7d23e32",
-    "82685d1efcfba981"
-   ],
-   "unit": "count",
-   "value": 3.0
-  }
- ],
+ "spark": {
+  "d": "M1.0,26.0 L32.3,14.0 L63.7,2.0 L95.0,2.0",
+  "end": [
+   95.0,
+   2.0
+  ]
+ },
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,
