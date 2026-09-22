@@ -89,9 +89,13 @@ def fact(s: Store, spec: dict[str, Any], today: date | None = None) -> dict[str,
             "href": f"/indicators/{ind.id}",
         }
     rows = s.derived_for(spec["metric"], spec.get("dims"))
+    if spec.get("since"):  # only readings from a date on, such as the day a bet was agreed
+        rows = [r for r in rows if r.as_of_date >= date.fromisoformat(str(spec["since"]))]
     if not rows:
         return None
     d = rows[-1]
+    if spec.get("pick") == "max":  # the best reading in the window: a bet settled by any quarter stays settled
+        d = max(reversed(rows), key=lambda r: r.value)
     if spec.get("pick") == "quarter_end":  # the latest reading dated on a calendar quarter's last day
         d = next(
             (
@@ -115,7 +119,7 @@ def fact(s: Store, spec: dict[str, Any], today: date | None = None) -> dict[str,
         ).isoformat(),  # a quarter still running is dated today
         "obs_ids": d.input_observation_ids,
         "href": _metric_href(s, spec["metric"]),
-    }
+    } | ({"newest": min(rows[-1].as_of_date, today or date.today()).isoformat()} if spec.get("pick") == "max" else {})
 
 
 def _holds(expect: dict[str, Any] | None, value: float, other: dict[str, float | None]) -> bool | None:

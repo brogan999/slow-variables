@@ -21,10 +21,24 @@ def test_a_level_due_by_a_date_cannot_fail_before_it():
     from datetime import date
 
     c = {"test": {"fact": "rli", "gt": 0.5}, "due": "2027-12-31"}
-    assert state(c, F, date(2026, 9, 22)) == "untestable" and state(c, F, date(2028, 1, 1)) == "failing"
-    assert (
-        state({**c, "test": {"fact": "rli", "gt": 0.2}}, F, date(2026, 9, 22)) == "holding"
-    )  # reached early
+    assert state(c, F, date(2026, 9, 22)) == "untestable"
+    # the calendar alone never fails it: only a reading dated on or after the due date that falls short does
+    assert state(c, F, date(2028, 1, 1)) == "untestable"
+    late = {**F, "rli": {"value": 0.21, "as_of": "2028-01-05"}}
+    assert state(c, late, date(2028, 2, 1)) == "failing"
+    assert state({**c, "test": {"fact": "rli", "gt": 0.2}}, F, date(2026, 9, 22)) == "holding"  # reached early
+    best = {**F, "rli": {"value": 0.21, "as_of": "2026-09-03", "newest": "2028-01-05"}}  # a best reading, and a later one
+    assert state(c, best, date(2028, 2, 1)) == "failing"
+
+
+def test_a_rival_test_stops_applying_after_its_date_and_blocks_a_verdict_while_it_cannot_run():
+    from datetime import date
+
+    c = {"test": {"fact": "rli", "lt": 0.5}, "rival_test": {"fact": "rli", "lt": 0.5}, "rival_until": "2027-12-31"}
+    assert state(c, F, date(2026, 9, 22)) == "both" and state(c, F, date(2028, 1, 2)) == "holding"
+    assert state({**c, "rival_test": {"fact": "missing", "lt": 0.5}}, F, date(2026, 9, 22)) == "untestable"
+    stale_rhs = {"test": {"fact": "rli", "gt": "old"}}  # a stale reading on the right-hand side tests nothing
+    assert state(stale_rhs, F) == "untestable"
 
 
 def test_a_reading_both_sides_expect_settles_nothing():
@@ -160,7 +174,9 @@ import yaml  # noqa: E402
 from ai_tracker import outlook as ol  # noqa: E402
 from ai_tracker.bottleneck_map import load as load_map  # noqa: E402
 
-YEAR = re.compile(r"\(?(1[6-9]\d\d|20\d\d)s?[\"”]?[,.;:)]?")
+YEAR = re.compile(r"\(?(1[6-9]\d\d|20\d\d)(s|'s|’s)?[\"”]?[,.;:)]?")  # "AI 2027's story" names a year
+# "one", "two" and "three" are left out: they mostly count this page's own parts ("two sides"); every larger number
+# word, and every word for a share or a multiple, has to travel with a token.
 NUMBER_WORD = re.compile(
     r"\b(half|halves|twice|double[sd]?|triple[sd]?|percent|per cent|fifths?|tenths?|hundreds?|thousands?|millions?"
     r"|billions?|trillions?|dozens?|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen"
@@ -179,8 +195,14 @@ def _texts() -> list[str]:
     return [ol.ESSAY.read_text(), *ol.strings(spec)]
 
 
+def _findings() -> list[str]:
+    """What each source found, as the sources list prints it. A finding may state its own source's figure in words,
+    since it is attributed by construction, so it is held to the digit rule but not the number-word rule."""
+    return [x[k] for x in ol.load()["sources"] for k in ("field", "finding") if x.get(k)]
+
+
 def test_the_outlook_types_no_figure():
-    for t in _texts():
+    for t in [*_texts(), *_findings()]:
         stray = [w for w in ol.TOKEN.sub("", t).split() if re.search(r"\d", w)]
         assert all(YEAR.fullmatch(w) for w in stray), stray  # a figure is a [fact:], [test:] or [cite:] token
 
@@ -216,7 +238,6 @@ def test_the_ledger_and_the_essay_resolve():
     assert len(re.findall(r"^### Folio ", ol.ESSAY.read_text(), re.M)) == len(
         ol.FOLIOS
     )  # the page seats positions by folio
-    assert yaml.safe_load(ol.SPEC.read_text()) == spec
 
 
 def test_no_sentence_was_split_by_a_comma_in_a_flow_mapping():

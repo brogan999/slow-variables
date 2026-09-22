@@ -653,8 +653,10 @@ def test_ledger_counts_events_for_and_against_and_falls_as_they_age_out():
         ("2026-03-09", "for", 0, ["f2"]),  # the window is empty: the reading cites the event that left it
     ]
 
-def test_output_per_person_is_read_against_its_highest_earlier_quarter():
+def test_output_per_person_is_read_against_its_highest_quarter_up_to_a_year_before():
     rows = [(f"g{k}", "fred.us.real_gdp_per_capita.q", "us", d, v, "") for k, (d, v) in
-            enumerate([("2025-03-31", 100.0), ("2025-06-30", 102.0), ("2025-09-30", 101.0), ("2025-12-31", 103.0)])]
+            enumerate([("2025-03-31", 100.0), ("2025-06-30", 102.0), ("2025-09-30", 101.0), ("2025-12-31", 103.0),
+                       ("2026-03-31", 104.0), ("2026-06-30", 110.0)])]
     got = [(str(d), round(v, 4), ids) for d, v, ids in run("real_gdp_per_capita_over_peak", rows)]
-    assert got == [("2025-06-30", 0.02, ["g1", "g0"]), ("2025-09-30", -0.0098, ["g2", "g1"]), ("2025-12-31", 0.0098, ["g3", "g1"])]
+    # the bet's terms: the peak is the highest quarter up to and including Q-4, so the last three quarters never count
+    assert got == [("2026-03-31", 0.04, ["g4", "g0"]), ("2026-06-30", 0.0784, ["g5", "g1"])]

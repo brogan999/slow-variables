@@ -31,26 +31,42 @@ def load() -> dict[str, Any]:
 
 
 def _run(test: dict[str, Any] | None, f: dict[str, dict[str, Any] | None]) -> bool | None:
-    """A test's verdict tonight: None when it has no test, no reading, or a reading gone stale."""
+    """A test's verdict tonight: None when it has no test, no reading, or a reading gone stale on either side."""
     if not test:
         return None
     reading = f.get(test["fact"])
     if not reading or reading.get("stale") or reading.get("value") is None:
         return None
-    values = {k: (x["value"] if x else None) for k, x in f.items()}
+    values = {k: (x["value"] if x and not x.get("stale") else None) for k, x in f.items()}
     return _holds({k: v for k, v in test.items() if k != "fact"}, reading["value"], values)
 
 
+def _on(d: Any) -> date:
+    return d if isinstance(d, date) else date.fromisoformat(str(d))
+
+
 def state(claim: dict[str, Any], f: dict[str, dict[str, Any] | None], today: date | None = None) -> str:
-    """A claim with a `due` date is one about reaching a level by then: short of it before the date, it cannot be
-    tested yet; past the date, it fails."""
-    own, rival = _run(claim.get("test"), f), _run(claim.get("rival_test"), f)
+    """A claim with a `due` date is about reaching a level by then: short of it, it cannot be tested until a reading
+    dated on or after the due date says it fell short (the calendar alone never fails it, since the last quarter is
+    published weeks later). A rival test stops applying after `rival_until`, when the rival no longer expects the same
+    reading; while it applies, a rival test that cannot run leaves the claim untestable, not a win."""
+    today = today or date.today()
+    own = _run(claim.get("test"), f)
     if own is None:
+        return "untestable"
+    rt = (
+        claim.get("rival_test")
+        if not claim.get("rival_until") or today <= _on(claim["rival_until"])
+        else None
+    )
+    rival = _run(rt, f)
+    if rt and rival is None:
         return "untestable"
     if own and rival:
         return "both"  # the reading both sides expect settles nothing
     due = claim.get("due")
-    if not own and due and (today or date.today()) <= date.fromisoformat(str(due)):
+    reading = f.get(claim["test"]["fact"]) or {}
+    if not own and due and _on(reading.get("newest") or reading.get("as_of") or today) < _on(due):
         return "untestable"
     return "holding" if own else "failing"
 
@@ -70,6 +86,7 @@ def claims(
                 "stage": c.get("stage"),
                 "horizon_years": c.get("horizon_years"),
                 "due": str(c["due"]) if c.get("due") else None,
+                "rival_until": str(c["rival_until"]) if c.get("rival_until") else None,
                 "test": c.get("test"),
                 "rival_test": c.get("rival_test"),
                 "fact": (c.get("test") or {}).get("fact"),
@@ -90,7 +107,14 @@ def scenarios(spec: dict[str, Any], cl: list[dict[str, Any]]) -> dict[str, Any]:
     cells = []
     for c in sc.get("cells") or []:
         signs = [{"claim": k, "state": states[k]} for k in c.get("signposts") or []]
-        cells.append({**c, "signposts": signs, "consistent": all(x["state"] != "failing" for x in signs)})
+        cells.append(
+            {
+                **c,
+                "signposts": signs,
+                "tested": any(x["state"] != "untestable" for x in signs),
+                "consistent": all(x["state"] != "failing" for x in signs),
+            }
+        )
     return {**sc, "cells": cells}
 
 
@@ -124,11 +148,14 @@ def essay_problems(text: str, spec: dict[str, Any]) -> list[str]:
     errors = [f"outlook: [{k}:{v}] does not resolve" for k, v in TOKEN.findall(text) if v not in known[k]]
     quotes = {x["quote"].rstrip(".").strip(): x["id"] for x in spec.get("sources") or [] if x.get("quote")}
     seen: dict[str, int] = {}
-    for q in QUOTED.findall(" ".join([text, *strings(spec)])):
-        k = quotes.get(q.rstrip(".,").strip())
-        if not k:
-            errors.append(f"outlook: quoted words that are no source's checked quote: {q[:50]}")
-        seen[k or ""] = seen.get(k or "", 0) + 1
+    for sentence in re.split(r"(?<=[.!?])\s+(?=[A-Z\[\"“])", " ".join([text, *strings(spec)])):
+        for q in QUOTED.findall(sentence):
+            k = quotes.get(q.rstrip(".,").strip())
+            if not k:
+                errors.append(f"outlook: quoted words that are no source's checked quote: {q[:50]}")
+            elif f"[cite:{k}]" not in sentence:
+                errors.append(f"outlook: a quote from {k} sits in a sentence that does not cite it")
+            seen[k or ""] = seen.get(k or "", 0) + 1
     errors += [f"outlook: source {k} is quoted more than once" for k, n in seen.items() if k and n > 1]
     return errors
 
@@ -155,7 +182,7 @@ def _thresholds(
             "unit"
         )
         if unit:
-            out[c["id"]] = {"value": rhs, "unit": unit}
+            out[c["id"]] = {"line": rhs, "unit": unit}
     return out
 
 
@@ -211,8 +238,10 @@ def problems(
         if p.get("attribution") not in ATTRIBUTIONS:
             errors.append(f"{where} needs an attribution of author, extension or site")
         errors += [f"{where} names unknown source {h}" for h in p.get("holders") or [] if h not in sources]
-        if p.get("attribution") == "author" and not p.get("holders"):
+        if p.get("attribution") in ("author", "extension") and not p.get("holders"):
             errors.append(f"{where} is credited to an author but names none")
+        if p.get("attribution") == "site" and p.get("holders"):
+            errors.append(f"{where} is marked as this site's own but names holders")
         if p.get("rival") not in positions:
             errors.append(f"{where} has no rival position")
     for c in spec.get("claims") or []:
@@ -231,6 +260,15 @@ def problems(
                 errors.append(f"{where}: {key} {bad}")
         if not c.get("test") and not c.get("falsifier"):
             errors.append(f"{where} has neither a test nor the outcome that would prove it wrong")
+        if c.get("test") and c.get("expect_state") not in STATES:
+            errors.append(f"{where} has a test but no expect_state for the sentence the page was written for")
+        for key in ("due", "rival_until"):
+            try:
+                _on(c[key]) if c.get(key) else None
+            except ValueError:
+                errors.append(f"{where}: {key} is not a date")
+        if c.get("rival_until") and not c.get("rival_test"):
+            errors.append(f"{where} has rival_until but no rival_test")
         if c.get("expect_state") and c["expect_state"] not in STATES:
             errors.append(f"{where} expects an unknown state")
     claim_ids = {c["id"] for c in spec.get("claims") or []}
@@ -283,6 +321,11 @@ def check(s: Any) -> tuple[list[str], list[str]]:
         return errors, []
     f = facts(s, spec)
     notes = [f"outlook: fact {k} has no reading" for k, v in f.items() if v is None]
+    notes += [
+        f"outlook: fact {k} no longer reads as the essay says; rewrite the sentence"
+        for k, v in f.items()
+        if v and v.get("holds") is False
+    ]
     notes += [f"outlook: fact {k} is past its age limit" for k, v in f.items() if v and v.get("stale")]
     notes += [
         f"outlook: claim {c['id']} reads {c['state']}; the page was written for {c['expected']}, so rewrite the sentence"

@@ -8,25 +8,28 @@
 
 facts:
   rli_record: {metric: benchmark_frontier, dims: {test: epoch_bench.rli}, max_age_days: 400}
-  hal_accuracy_trend: {metric: hal_trend_per_year, dims: {measure: accuracy}, max_age_days: 400}
-  hal_reliability_trend: {metric: hal_trend_per_year, dims: {measure: reliability}, max_age_days: 400}
-  horizon_doubling: {metric: horizon_doubling_days_50_since_2024, max_age_days: 400}
+  hal_accuracy_trend: {metric: hal_trend_per_year, dims: {measure: accuracy}, max_age_days: 400, expect: {gt: 0}}
+  hal_reliability_trend: {metric: hal_trend_per_year, dims: {measure: reliability}, max_age_days: 400, expect: {gt: 0}}
+  horizon_doubling: {metric: horizon_doubling_days_50_since_2024, max_age_days: 400, expect: {lte: 122}}
   evals_ledger: {metric: ledger_events_12m, dims: {target: ai_evaluation_market, stance: for}}
   insurer_ledger: {metric: ledger_events_12m, dims: {target: insurer_ai_exclusions, stance: for}}
   fences_ledger: {metric: ledger_events_12m, dims: {target: agent_access_fences, stance: for}}
+  openings_ledger: {metric: ledger_events_12m, dims: {target: agent_access_fences, stance: against}}
   procurement_4q: {metric: lab_procurement_signal_4q, max_age_days: 200}
   procurement_year_ago: {metric: lab_procurement_signal_4q, pick: year_ago}
-  firms_using_ai: {indicator: btos_firm_use}
-  paid_share: {metric: chatgpt_paid_share, max_age_days: 400}
+  firms_using_ai: {indicator: btos_firm_use, max_age_days: 60}
+  paid_share: {metric: chatgpt_paid_share, max_age_days: 400, expect: {lt: 0.1}}
   junior_gap: {metric: canaries_junior_senior_gap, dims: {quintile: most_exposed}, max_age_days: 200}
   junior_gap_control: {metric: canaries_junior_senior_gap, dims: {quintile: least_exposed}, max_age_days: 200}
-  gdp_pc_over_peak: {metric: real_gdp_per_capita_over_peak, max_age_days: 200}
-  productivity_yoy: {indicator: bls_labor_productivity_yoy}
+  gdp_pc_over_peak: {metric: real_gdp_per_capita_over_peak, max_age_days: 200, expect: {gte: 0}}
+  gdp_pc_over_peak_best: {metric: real_gdp_per_capita_over_peak, pick: max, since: 2026-04-01}
+  gdp_pc_yoy: {metric: real_gdp_per_capita_yoy, max_age_days: 200}
   open_share: {metric: open_share_of_routed_tokens, max_age_days: 30}
-  open_lag: {indicator: open_weights_lag_months}
-  open_premium: {metric: closed_over_open_price_premium, max_age_days: 60}
-  chips_gp_share: {indicator: gross_profit_semis_share}
-  capex_to_revenue: {metric: capex_to_revenue_stack}
+  open_lag: {indicator: open_weights_lag_months, max_age_days: 60}
+  open_premium: {metric: closed_over_open_price_premium, max_age_days: 60, expect: {lt: 1}}
+  chips_gp_share: {indicator: gross_profit_semis_share, max_age_days: 200}
+  capex_to_revenue: {metric: capex_to_revenue_stack, max_age_days: 200, expect: {gt: 1}}
+  crawl_ratio: {series: crawl.anthropic.crawl_to_refer.pt}
 
 sources:
   # I · capability
@@ -48,6 +51,15 @@ sources:
     venue: AI Futures Project blog
     year: 2026
     url: https://blog.aifutures.org/p/q1-2026-timelines-update
+  - id: ai_futures_q25
+    who: Eli Lifland, Daniel Kokotajlo and colleagues
+    short: the authors of AI 2027
+    field: the same forecasters, checking their story against events
+    finding: Checked against what has happened, the story is roughly on track but running a little slower, at around three quarters of its pace.
+    work: "Q2.5 2026 Timelines Update: Uplift and Revenue"
+    venue: AI Futures Project blog
+    year: 2026
+    url: https://blog.aifutures.org/p/q25-2026-timelines-update-uplift
   - id: jones_b
     who: Benjamin Jones
     field: an economist at Northwestern who studies where growth and scientific progress come from
@@ -69,7 +81,7 @@ sources:
     who: Stephan Rabanser, Sayash Kapoor, Arvind Narayanan and colleagues
     short: Rabanser, Kapoor, Narayanan and colleagues
     field: Princeton researchers who test AI agents
-    finding: Large gains in how often agents solve tasks brought only small gains in how dependably they do it; agents still answer differently on repeat runs, break when instructions are reworded and cannot tell when they will fail.
+    finding: Large gains in how often agents solve tasks brought only small gains in how dependably they do it; agents still answer differently on repeat runs and break when instructions are reworded, and though they have become better at telling when they will fail, they are not much more consistent.
     work: Towards a Science of AI Agent Reliability
     venue: arXiv
     year: 2026
@@ -85,7 +97,7 @@ sources:
   - id: scaling_myths
     who: Arvind Narayanan and Sayash Kapoor
     field: computer scientists at Princeton who study what AI can and cannot do
-    finding: Scaling laws predict better guessing of the next word, not new abilities, and good data is running out, so making models bigger will not on its own produce general intelligence.
+    finding: Scale has brought new abilities before, but scaling laws predict only how well a model guesses the next word, not which abilities appear, and good data is running out, so making models bigger is unlikely on its own to produce general intelligence.
     work: AI scaling myths
     venue: AI Snake Oil
     year: 2024
@@ -128,15 +140,15 @@ sources:
   - id: shahidi_etal
     who: Peyman Shahidi, Gili Rusak, Benjamin Manning, Andrey Fradkin and John Horton
     short: Shahidi, Horton and colleagues
-    field: economists and computer scientists who study online markets
-    finding: Agents could slash the cost of searching, bargaining and contracting; they will be taken up first where people already hire human agents and can state simply what they want, and platforms may block agents that are not their own.
+    field: economists and computer scientists who study online markets; Fradkin works for Amazon and Horton advises Anthropic
+    finding: Agents could slash the cost of searching, bargaining and contracting; they will be taken up first where people already hire human agents and can state simply what they want, and platforms will set rules for how outside agents may use them, much as websites tell search engines' crawlers what they may read, though some already block them.
     work: The Coasean Singularity?
     venue: The Economics of Transformative AI (National Bureau of Economic Research)
     year: 2026
     url: https://peymanshahidi.github.io/assets/pdf/NBER_TAI_Chapter_Shahidi.pdf
   - id: hobart_inference
     who: Byrne Hobart and Nikhil Davar
-    field: Hobart, a former equity analyst, writes The Diff, a newsletter on finance and technology
+    field: writers of The Diff, a newsletter on finance and technology; Hobart discloses that he holds shares in Amazon
     finding: Amazon blocked Meta's shopping assistant from its site; the authors read it as a sign that companies gain enough from controlling their customers' dealings with AI to pay for the computing themselves rather than let another firm's agent in.
     work: Forward Deployed (the section Fighting for Inference)
     venue: The Diff
@@ -174,15 +186,24 @@ sources:
   - id: moll_imas
     who: Benjamin Moll and Alex Imas
     field: Moll is a macroeconomist at the London School of Economics; Imas studies behavioural economics and AI at Chicago Booth
-    finding: Growth far above its usual pace in the next decade or so would need several unlikely things at once, from fast automation across the economy to AI that automates research itself, and they have bet on it not happening.
+    finding: Growth of more than ten percent a year in the next decade or so is extremely unlikely even if AI's abilities leap, because it would need several unlikely things at once, from fast automation across the economy to AI that automates research itself; four to five percent a year would already be massive. They are bullish on AI's abilities and have bet against an explosion.
     work: Will AI soon lead to double-digit growth?
     venue: Ghosts of Electricity
     year: 2026
     url: https://aleximas.substack.com/p/will-ai-soon-lead-to-double-digit
   - id: moll_imas_bet
-    who: Benjamin Moll and Alex Imas
-    field: the terms of their public bet
-    finding: The side betting on fast growth wins if, in any quarter before 2034, American real output per person stands far enough above its previous peak; otherwise the other side wins.
+    who: Benjamin Moll, Alex Imas and five others
+    field: the terms of a public bet agreed in August 2026
+    finding: Seven people, Moll and Imas among them, bet against four others that in no quarter before 2034 will American real output per person stand fifteen percent or more above the highest level it had reached a year or more before; the fast side wins as soon as one quarter does, and nothing reopens it.
+    work: Growth bet terms
+    venue: benjaminmoll.com
+    year: 2026
+    url: https://benjaminmoll.com/wp-content/uploads/2026/08/growth_bet.pdf
+  - id: bet_fast_side
+    who: William MacAskill, Samuel Albanie, Tom Cohen and Jan Kulveit
+    short: the fast side of the growth bet
+    field: the four who took the fast side of the growth bet; MacAskill is a philosopher at Oxford
+    finding: They bet that in some quarter before 2034 American real output per person will stand fifteen percent or more above the highest level it had reached a year or more before.
     work: Growth bet terms
     venue: benjaminmoll.com
     year: 2026
@@ -195,16 +216,8 @@ sources:
     work: Economic Scenarios for Transformative AI
     venue: Anthropic Institute
     year: 2026
-    url: https://www.anthropic.com/institute/econ-scenarios
+    url: https://www-cdn.anthropic.com/files/4zrzovbb/website/cf58f84d46a4a76bf5a5b039ac695fba6b80041c.pdf
     quote: Across scenarios, almost all of the divergence comes after 2027.
-  - id: amodei
-    who: Dario Amodei
-    field: the chief executive of Anthropic
-    finding: Powerful AI could compress generations of biological progress into a few years and, in a hoped-for case, lift growth in poorer countries far above anything seen; he calls this a goal, not what happens by default.
-    work: Machines of Loving Grace
-    venue: darioamodei.com
-    year: 2024
-    url: https://darioamodei.com/essay/machines-of-loving-grace
   - id: stevenson
     who: Betsey Stevenson
     field: a labour economist at the University of Michigan
@@ -216,7 +229,7 @@ sources:
   - id: keynes
     who: John Maynard Keynes
     field: the economist whose work founded modern macroeconomics
-    finding: Within a century, technical progress would raise living standards so far that the economic problem would be largely solved, and people would share out the little work left in shifts of a few hours, perhaps a fifteen-hour week.
+    finding: Within a century, technical progress would raise living standards so far that the economic problem would be largely solved, and he suggested people might share out the little work left in three-hour shifts, a fifteen-hour week.
     work: Economic Possibilities for our Grandchildren
     venue: an essay, reprinted in his Essays in Persuasion
     year: 1930
@@ -231,7 +244,7 @@ sources:
     url: https://aleximas.substack.com/p/what-will-be-scarce
   - id: restrepo
     who: Pascual Restrepo
-    field: a Yale economist who studies how technology shapes work and pay
+    field: a Yale economist who studies how technology shapes work and pay, and a member of Anthropic's economic advisory council
     finding: Once AI can turn computing power into any kind of work, wages settle at what the computing to replace a person costs and labour's share of income heads towards nothing even as total wages rise; the path is jagged when better algorithms, not more computing, set the pace.
     work: We Won't Be Missed
     venue: The Economics of Transformative AI (National Bureau of Economic Research)
@@ -247,7 +260,7 @@ sources:
     url: https://conference.nber.org/conf_papers/f227494.pdf
   - id: brynjolfsson_hitzig
     who: Erik Brynjolfsson and Zoë Hitzig
-    field: Brynjolfsson directs Stanford's Digital Economy Lab; Hitzig studies AI's effects on society
+    field: Brynjolfsson directs Stanford's Digital Economy Lab; Hitzig studies AI's effects on society, now at the Anthropic Institute and at OpenAI when the chapter was written
     finding: AI can capture the local, unwritten knowledge that once argued for leaving decisions to people on the spot, so decisions centralise, with bigger firms, more concentrated industries and less room for local managers.
     work: AI's Use of Knowledge in Society
     venue: The Economics of Transformative AI (National Bureau of Economic Research)
@@ -263,7 +276,7 @@ sources:
     url: https://www.econlib.org/library/Essays/hykKnw.html
   - id: stiglitz_ventura_bolet
     who: Joseph Stiglitz and Màxim Ventura-Bolet
-    field: Stiglitz won the Nobel prize for work on markets where one side knows more than the other; Ventura-Bolet is an economist at Columbia
+    field: Stiglitz won the Nobel prize for work on markets where one side knows more than the other; Ventura-Bolet is a doctoral fellow at Columbia
     finding: News and other information is paid for by visits, and AI that answers directly diverts them, so without rules on credit and accountability less true information gets made.
     work: The Impact of AI and Digital Platforms on the Information Ecosystem
     venue: The Economics of Transformative AI (National Bureau of Economic Research)
@@ -273,7 +286,7 @@ sources:
   # V · value
   - id: hobart_round_trip
     who: Byrne Hobart
-    field: a former equity analyst who writes The Diff, a newsletter on finance and technology
+    field: the writer of The Diff, a newsletter on finance and technology, after work in digital advertising and investment research
     finding: Once some AI labs give their models away as open weights, the price of the cheapest models is set by the chips and power that run them; he reads a chip-equipment maker's investment in an open-model lab as keeping AI labs many and chip demand high.
     work: The Autistic Half-Century (the section Round-Tripping)
     venue: The Diff
@@ -281,15 +294,15 @@ sources:
     url: https://www.thediff.co/archive/the-autistic-half-century/
   - id: hobart_pacing
     who: Byrne Hobart
-    field: a former equity analyst who writes The Diff, a newsletter on finance and technology
-    finding: Models have pricing power only where they are the best tool for a particular job; labs that agree to slow their best releases are also agreeing not to widen their lead over open models.
+    field: the writer of The Diff, a newsletter on finance and technology, after work in digital advertising and investment research
+    finding: Models have more pricing power where they are the best tool for a particular job; labs that agree to slow their best releases are also agreeing not to widen their lead over open models.
     work: The Economics and Politics of Pacing the Frontier
     venue: The Diff
     year: 2026
     url: https://www.thediff.co/archive/the-economics-and-politics-of-pacing-the-frontier/
   - id: hobart_complements
     who: Byrne Hobart
-    field: a former equity analyst who writes The Diff, a newsletter on finance and technology
+    field: the writer of The Diff, a newsletter on finance and technology; he discloses that he holds shares in Meta and Alphabet
     finding: For the biggest social network, the ideal is not owning the best model but having the best distribution for models that are good enough, then selling its users up to better ones, built in-house or not.
     work: Rumor Markets (the section AI and Complements)
     venue: The Diff
@@ -336,7 +349,7 @@ sources:
     work: Technological Revolutions and Financial Capital
     venue: Edward Elgar
     year: 2002
-    url: https://carlotaperez.org/wp-content/downloads/books/btr-en/PEREZ_TRFC_Intro.pdf
+    url: https://carlotaperez.org/wp-content/downloads/books/btr-en/PEREZ_TRFC_Ch%207.pdf
   - id: nordhaus
     who: William Nordhaus
     field: a Yale economist who studies growth and productivity, and who won the Nobel prize for bringing climate change into long-run economics
@@ -345,10 +358,26 @@ sources:
     venue: National Bureau of Economic Research working paper
     year: 2004
     url: https://www.nber.org/papers/w10433
-  - id: cahn
+  - id: cahn_2024
     who: David Cahn
     field: an investor at Sequoia Capital who backs AI and infrastructure companies
-    finding: Keeps a running estimate of the revenue AI must earn to pay back each year's spending on data centres, and by his own rough arithmetic it has grown every year since he first posed the question in 2023; the chips lose value fast, so if the revenue is late the investors take the loss.
+    finding: The revenue AI must earn to pay back a year's spending on data centres runs far ahead of what it earns; the chips lose value fast and computing rented by the hour has little pricing power, so if the revenue comes late the investors, not the builders, take the loss.
+    work: AI's $600B Question
+    venue: Sequoia Capital
+    year: 2024
+    url: https://sequoiacap.com/article/ais-600b-question/
+  - id: cahn_2025
+    who: David Cahn
+    field: an investor at Sequoia Capital who backs AI and infrastructure companies
+    finding: Expects the coming year to bring delays, with data centres finished late while use keeps rising; the cloud companies storing new chips instead of installing them would be the sign the delays had begun.
+    work: "AI in 2026: A Tale of Two AIs"
+    venue: Sequoia Capital
+    year: 2025
+    url: https://sequoiacap.com/article/ai-in-2026-the-tale-of-two-ais/
+  - id: cahn_2026
+    who: David Cahn
+    field: an investor at Sequoia Capital who backs AI and infrastructure companies
+    finding: His running estimate of the revenue needed to pay back each year's spending has grown every year since he first posed the question in 2023, though he now sees in AI's help with writing code a clearer way to earn it back.
     work: AI's $1.5T Question
     venue: his newsletter
     year: 2026
@@ -356,19 +385,19 @@ sources:
   - id: covello
     who: Jim Covello
     field: the head of global equity research at Goldman Sachs, and a former analyst of chip makers
-    finding: Spending of more than a trillion dollars on AI's infrastructure has to be paid back by solving hard, valuable problems, and he doubted AI was built to do that, or that its costs would fall as those of past technologies did; he still expected the spending to go on for a while.
+    finding: Spending of about a trillion dollars on AI's infrastructure has to be paid back by solving hard, valuable problems, and he doubted AI was built to do that, or that its costs would fall as those of past technologies did; he still expected the spending to go on for a while.
     work: "Gen AI: too much spend, too little benefit?"
     venue: Goldman Sachs Top of Mind
     year: 2024
     url: https://www.goldmansachs.com/insights/top-of-mind/gen-ai-too-much-spend-too-little-benefit
   - id: sundheim
     who: Dan Sundheim
-    field: the founder of D1 Capital Partners, an investment firm that holds stakes in OpenAI and Anthropic
+    field: the founder of an investment firm that holds stakes in OpenAI and Anthropic
     finding: The old worry that selling access to AI models would become a commodity business no longer matters; customers could switch between models but mostly do not, margins are high, and only a handful of labs will matter because staying at the frontier costs too much capital. The open question is whether the returns on the spending arrive in time.
     work: Invest Like the Best, "The Art of Public and Private Market Investing"
     venue: a podcast interview with Patrick O'Shaughnessy
     year: 2026
-    url: https://podcasts.apple.com/us/podcast/dan-sundheim-the-art-of-public-and-private-market-investing/id1154105909?i=1000751164673
+    url: https://www.youtube.com/watch?v=mBtmTmCC0ZM
   - id: jones_tonetti
     who: Charles Jones and Christopher Tonetti
     field: economists at Stanford who study long-run growth
@@ -380,7 +409,7 @@ sources:
   - id: comin_mestieri
     who: Diego Comin and Martí Mestieri
     field: economists who study how technologies spread between countries
-    finding: Across two centuries of technologies, the time a new technology takes to reach a country has shrunk and converged between rich and poor countries, while how intensively it is used has diverged; the depth of use, not the arrival, explains most of the gap in incomes.
+    finding: Across two centuries, new technologies have come to reach poor countries almost as fast as rich ones, but poor countries use them far less intensively, and that gap in the depth of use explains most of the divergence in incomes.
     work: If Technology Has Arrived Everywhere, Why Has Income Diverged?
     venue: American Economic Journal, Macroeconomics
     year: 2018
@@ -407,7 +436,7 @@ sources:
   - id: eo_14365
     who: The President of the United States
     field: an executive order
-    finding: Sets out a light national standard for AI and moves against state AI laws, through a federal task force to challenge them in court, a list of burdensome state laws and conditions on federal grants, and names Colorado's law as the kind it means.
+    finding: Calls for a light national standard for AI, to be proposed to Congress, and moves against state AI laws through a federal task force to challenge them in court, a list of burdensome state laws and conditions on federal grants; it names Colorado's law as the kind it means.
     work: "Executive Order 14365: Ensuring a National Policy Framework for Artificial Intelligence"
     venue: Federal Register
     year: 2025
@@ -428,6 +457,14 @@ sources:
     venue: Colorado General Assembly
     year: 2026
     url: https://leg.colorado.gov/bills/sb26-189
+  - id: cloudflare_human_native
+    who: CNBC
+    field: a news report
+    finding: Cloudflare bought Human Native, a British start-up that handles payments from AI developers to the creators whose work they train on, to build a system in which AI developers pay for the content they use.
+    work: Cloudflare buys AI data marketplace Human Native
+    venue: CNBC
+    year: 2026
+    url: https://www.cnbc.com/2026/01/15/cloudflare-ai-human-native-acquisition.html
 
 positions:
   # I · capability
@@ -437,7 +474,7 @@ positions:
     holders: [ai_2027]
     attribution: author
     mechanism: Each model helps write the code and run the experiments that build the next one, so progress feeds on itself.
-    case: AI coding agents improved faster in 2026 than even these forecasters expected, and they brought their dates forward again [cite:ai_futures_update].
+    case: AI coding agents improved faster in 2026 than even these forecasters expected, and they brought their dates forward again [cite:ai_futures_update], though their own check finds events running a little slower than the story [cite:ai_futures_q25].
     kill_shot: Whole jobs staying far out of reach while single skills race ahead, which is the pattern a pace set by the slowest step predicts.
     rival: slowest_task
     visible: true
@@ -476,7 +513,7 @@ positions:
     title: Bigger models alone will not get there
     holders: [scaling_myths]
     attribution: author
-    mechanism: Making models bigger improves how well they guess the next word, not what else they can do, and good data is running out.
+    mechanism: Scaling laws promise better guessing of the next word, not any particular new ability, and good data is running out.
     case: What scaling laws measure is how well a model guesses the next word, not whether it can do a job.
     kill_shot: Size alone producing abilities that no change in method explains.
     rival: compounding
@@ -526,20 +563,20 @@ positions:
   - id: fences
     folio: products
     title: Big platforms fence out agents that are not their own
-    holders: [shahidi_etal, hobart_inference]
+    holders: [hobart_inference, larson_coasean]
     attribution: author
-    mechanism: A platform that owns the customer loses that tie if someone else's agent does the shopping, so it pays to keep the agent out.
+    mechanism: A platform that owns the customer loses that tie if someone else's agent does the shopping, so it pays to keep outside agents out and run its own.
     case: Amazon went to court to keep an AI browser's shopping agent off its site, and later blocked Meta's shopping assistant.
     kill_shot: Platforms opening to outside agents through shared rules and protocols.
     rival: opens
     visible: true
   - id: opens
     folio: products
-    title: Platforms let outside agents in on their own terms
-    holders: []
-    attribution: site
-    mechanism: A platform that lets agents in, through deals and shared protocols, keeps the sale even when a chatbot finds the product.
-    case: The biggest American retailer has announced a deal to let shoppers buy through OpenAI's chatbot.
+    title: Platforms set terms for outside agents and let them in
+    holders: [shahidi_etal]
+    attribution: author
+    mechanism: Platforms will set rules for how outside agents may use them, much as websites tell search engines' crawlers what they may read, and a platform that lets agents in keeps the sale when a chatbot finds the product.
+    case: Etsy and Walmart have agreed to let shoppers buy through OpenAI's chatbot, Etsy on an open standard for agents to pay.
     kill_shot: Platforms blocking or suing outside agents more often than they sign them up.
     rival: fences
     visible: false
@@ -601,7 +638,7 @@ positions:
     holders: []
     attribution: site
     mechanism: Interest rates, the hiring boom after the pandemic and its unwinding hit young workers first, whatever AI does.
-    case: The study itself describes a pattern and does not claim to have proved its cause.
+    case: The study itself describes a pattern rather than proving its cause, and the gap narrows once workers' education is taken into account.
     kill_shot: The gap staying confined to the most exposed jobs as those other causes fade.
     rival: junior_first
     visible: false
@@ -639,22 +676,22 @@ positions:
   # IV · reorganisation
   - id: modest_growth
     folio: reorganisation
-    title: Growth stays near its usual pace
+    title: Growth rises, but does not explode
     holders: [moll_imas, jones_tonetti]
     attribution: author
-    mechanism: A jump in growth needs fast automation everywhere, spending that follows it and no costly accidents, all at once.
-    case: Past general-purpose technologies, from electricity to computers, took decades to show up in growth.
-    kill_shot: Output per person jumping far above its previous peak before 2034, the terms of their own bet.
+    mechanism: An explosion would need fast automation across the economy, spending that follows it, demand that absorbs the output, no costly accidents and AI that automates research, all at once; and work is a chain of tasks that substitute poorly for one another, so AI that follows the pattern of past automation raises growth only slowly [cite:jones_tonetti].
+    case: Moll and Imas expect AI's abilities to keep leaping and still think growth of four to five percent a year, which would itself be historic, is the reasonable expectation [cite:moll_imas].
+    kill_shot: A quarter before 2034 in which output per person clears the bet's line above its level of a year or more before.
     rival: fast_growth
     visible: true
   - id: fast_growth
     folio: reorganisation
-    title: Growth breaks away, mostly after 2027
-    holders: [korinek_etal, amodei]
+    title: Growth explodes before 2034
+    holders: [bet_fast_side]
     attribution: author
-    mechanism: Once AI can do a large share of tasks, output grows with computing power rather than with the number of workers.
-    case: The scenarios that lead there look the same as the others until about 2027.
-    kill_shot: Output per person still growing at its usual pace well after 2030.
+    mechanism: Once AI can do most tasks, output grows with the computing power put to work rather than with the number of workers, so growth can leap within a few years; the fastest of Korinek and colleagues' scenarios unfolds this way [cite:korinek_etal].
+    case: Those scenarios look like the others until about 2027, so slow readings now do not count against it.
+    kill_shot: No qualifying quarter before 2034, on the bet's own terms.
     rival: modest_growth
     visible: true
   - id: intensity_first
@@ -671,8 +708,8 @@ positions:
     folio: reorganisation
     title: Machines buy people time
     holders: [keynes]
-    attribution: author
-    mechanism: As output per hour rises, people take part of the gain as leisure and share out the work that remains.
+    attribution: extension
+    mechanism: As output per hour rises, people take part of the gain as leisure and share out the work that remains. Keynes argued it of machines in general in 1930; this site carries it to AI.
     case: If AI multiplies what an hour of work produces, the same needs can be met with fewer hours.
     kill_shot: Hours in the most exposed work rising as AI spreads.
     rival: intensity_first
@@ -692,7 +729,7 @@ positions:
     title: Wages follow a jagged path, and the displaced can lose again
     holders: [restrepo, athey_scott_morton]
     attribution: author
-    mechanism: Where better algorithms set the pace, wages jump and fall as tasks are automated; where AI is sold with market power, workers pay again when its price rises.
+    mechanism: Where better algorithms set the pace, wages jump and fall as tasks are automated [cite:restrepo]; where AI is sold with market power, Athey and Scott Morton add, workers pay again when its price rises [cite:athey_scott_morton].
     case: In Restrepo's model labour's share of income heads towards nothing once computing can do any work, even as total wages rise.
     kill_shot: Wages rising smoothly with output as AI spreads.
     rival: relational
@@ -723,7 +760,7 @@ positions:
     holders: [stiglitz_ventura_bolet]
     attribution: author
     mechanism: Sites that produce information are paid by visits, and AI that answers directly sends fewer of them.
-    case: AI companies' crawlers take far more pages than they send visitors back.
+    case: By Cloudflare's count, Anthropic's crawler took pages at [fact:crawl_ratio] the rate it sent visitors back.
     kill_shot: Visits to publishers from search and AI answers rising.
     rival: paid_access
     visible: false
@@ -733,7 +770,7 @@ positions:
     holders: []
     attribution: site
     mechanism: As answers replace visits, publishers charge the AI companies directly, by licence or by the page.
-    case: Cloudflare, which stands between many websites and their visitors, bought an AI data marketplace, where AI firms pay for what they train on.
+    case: Cloudflare, which stands between many websites and their visitors, bought an AI data marketplace to build a system in which AI developers pay for the content they train on [cite:cloudflare_human_native].
     kill_shot: Publishers' income falling even where they charge AI companies.
     rival: referrals_fall
     visible: false
@@ -744,7 +781,7 @@ positions:
     title: Tokens become a commodity
     holders: [hobart_round_trip, hobart_pacing]
     attribution: author
-    mechanism: Where some labs give their models away, the cheapest price is set by the chips and power that run them, and a lab can charge more only where its model is the best tool for the job.
+    mechanism: Where some labs give their models away, the cheapest price is set by the chips and power that run them, and a lab has more pricing power where its model is the best tool for the job.
     case: Open models trail the best closed ones by [fact:open_lag], months rather than years.
     kill_shot: The labs' prices holding while open models close the gap.
     rival: price_holds
@@ -752,9 +789,9 @@ positions:
   - id: price_holds
     folio: value
     title: The price holds, and the volume leaves
-    holders: [larson_durability, board_pycia]
+    holders: [larson_durability]
     attribution: author
-    mechanism: Buyers who will not pay a lab's price leave for an open model rather than wait for a discount, so the lab keeps its price and serves fewer of them.
+    mechanism: Buyers who will not pay a lab's price leave for an open model rather than wait for a discount, so the lab keeps its price and serves fewer of them; Simon Board and Marek Pycia proved the result for any seller whose buyers can walk away [cite:board_pycia].
     case: Near-frontier open models sell for a small fraction of the best model's price without, as Larson reads it, denting the best model's sales.
     kill_shot: Open models improving fast enough that buyers wait for them rather than pay, the condition Larson himself states.
     rival: commodity
@@ -764,7 +801,7 @@ positions:
     title: Labs escape by moving up the stack, and lock their customers in
     holders: [nk_up_the_stack, athey_scott_morton]
     attribution: author
-    mechanism: Selling access to a model is a commodity business, so labs move into products and into deployments built into their customers' work, where switching is costly; a supplier with market power can raise its price later.
+    mechanism: Selling access to a model is a commodity business, so labs move into products and into deployments built into their customers' work, where switching is costly; Athey and Scott Morton add that a supplier with market power can raise its price later [cite:athey_scott_morton].
     case: Cloud computing escaped the same trap by becoming software, and the leading chip foundry by being almost alone.
     kill_shot: The labs' revenue staying mostly in selling access to their models.
     rival: commodity
@@ -813,7 +850,7 @@ positions:
   - id: money_runs_out
     folio: value
     title: The money runs out before the revenue arrives
-    holders: [cahn, covello]
+    holders: [cahn_2024, covello]
     attribution: author
     mechanism: The spending on data centres has to be paid back by revenue that has not arrived yet, and the chips it buys lose value fast, so if the revenue comes late the investors take the loss.
     case: The biggest cloud and platform companies spend [fact:capex_to_revenue] as much a year on buildings and equipment as AI earns in revenue.
@@ -834,8 +871,8 @@ positions:
     folio: value
     title: Consumers keep most of the value
     holders: [nordhaus]
-    attribution: author
-    mechanism: Competition and imitation pass most of an innovation's value to the people who use it, through lower prices; the innovators keep a sliver.
+    attribution: extension
+    mechanism: Competition and imitation pass most of an innovation's value to the people who use it, through lower prices; the innovators keep a sliver. Nordhaus measured it across American business after the Second World War; this site carries it to AI.
     case: Across American business after the Second World War, innovators kept about two cents of each dollar of value they created [cite:nordhaus].
     kill_shot: AI firms' profits growing as fast as the value their users get.
     rival: price_holds
@@ -861,6 +898,7 @@ claims:
     text: Whole projects stay far behind single skills, with the best score on real freelance projects below [test:frontier_uneven].
     test: {fact: rli_record, lt: 0.5}
     rival_test: {fact: rli_record, lt: 0.5}
+    rival_until: 2027-12-31
     row: family_8
     stage: methods
     falsifier: The best score on whole projects catching up with the best scores on single skills.
@@ -869,10 +907,11 @@ claims:
     position: not_reliability
     text: The agents Princeton's tracker tests grow more dependable far more slowly than they grow more accurate.
     test: {fact: hal_reliability_trend, lt: hal_accuracy_trend}
+    rival_test: {fact: hal_reliability_trend, lt: hal_accuracy_trend}
     row: family_0
     stage: products
     falsifier: Reliability rising as fast as accuracy across the next models the tracker tests.
-    expect_state: holding
+    expect_state: both
   - id: lossy_loop
     position: lossy
     text: AI's help with AI research brings steady gains, not accelerating ones.
@@ -883,18 +922,20 @@ claims:
     position: assurance_layer
     text: Checking AI's work is sold as a category of its own.
     test: {fact: evals_ledger, gte: 1}
+    rival_test: {fact: evals_ledger, gte: 1}
     row: verification
     stage: products
     falsifier: No independent category forming, the checks staying inside the labs' and clouds' own platforms.
-    expect_state: holding
+    expect_state: both
   - id: insurers_exclude
     position: assurance_layer
     text: Insurers write AI's mistakes out of their standard policies, so the cover has to be bought and priced on its own.
     test: {fact: insurer_ledger, gte: 1}
+    rival_test: {fact: insurer_ledger, gte: 1}
     row: verification
     stage: early_adoption
     falsifier: Standard policies going on covering AI's mistakes at no extra price.
-    expect_state: holding
+    expect_state: both
   - id: apps_squeezed
     position: smart_squeeze
     text: Apps that resell the labs' models see their margins shrink as their use grows.
@@ -903,30 +944,29 @@ claims:
     falsifier: A lab selling to apps below its public prices, or apps' margins holding as their use grows.
   - id: agents_fenced
     position: fences
-    text: Large platforms move to keep agents that are not their own off them.
-    test: {fact: fences_ledger, gte: 1}
+    text: Large platforms move to keep outside agents off them at least as often as they let them in.
+    test: {fact: fences_ledger, gte: openings_ledger}
+    rival_test: {fact: openings_ledger, gte: fences_ledger}
     row: agents
     stage: early_adoption
     falsifier: Platforms opening to outside agents more often than they block them.
-    expect_state: holding
+    expect_state: both
   - id: data_next
     position: verified_data
-    text: Labs' disclosed buying from the firms that sell practice tasks, graders and expert data rises on the year before.
-    test: {fact: procurement_4q, gt: procurement_year_ago}
+    text: Labs spend more each year with the firms that sell practice tasks, graders and expert data.
     row: post_training
     stage: methods
-    falsifier: That disclosed buying staying flat or falling as models improve.
-    expect_state: failing
+    falsifier: That spending falling once each firm counted a year ago has reported again; the hand-kept tally of disclosed deals is too thin to test it yet.
 
   # III · adoption
   - id: firms_normal
     position: frictions
-    text: The share of American firms using AI stays below [test:firms_normal], the level this site calls fast.
-    test: {fact: firms_using_ai, lt: 0.5}
-    rival_test: {fact: firms_using_ai, lt: 0.5}
+    text: The share of American firms using AI stays within the pace this site calls normal, below [test:firms_normal].
+    test: {fact: firms_using_ai, lt: 0.35}
+    rival_test: {fact: firms_using_ai, lt: 0.35}
     row: family_1
     stage: early_adoption
-    falsifier: The share of firms using AI reaching the level this site calls fast.
+    falsifier: The share of firms using AI climbing past that pace.
     expect_state: both
   - id: use_unpriced
     position: invisible
@@ -940,7 +980,7 @@ claims:
   - id: juniors_behind
     position: junior_first
     text: In the jobs most exposed to AI, workers in their early twenties fall behind workers over fifty [cite:canaries], while in the least exposed jobs they do not.
-    test: {fact: junior_gap, lt: 0}
+    test: {fact: junior_gap, lt: junior_gap_control}
     rival_test: {fact: junior_gap_control, lt: 0}
     row: work_and_pay
     stage: adaptation
@@ -954,31 +994,33 @@ claims:
   # IV · reorganisation
   - id: no_growth_jump
     position: modest_growth
-    text: American real output per person does not stand [test:no_growth_jump] or more above its previous peak in any quarter before 2034.
-    test: {fact: gdp_pc_over_peak, lt: 0.15}
-    rival_test: {fact: gdp_pc_over_peak, lt: 0.15}
-    falsifier: Output per person standing at the bet's threshold or more above its previous peak in any quarter before 2034.
+    text: In no quarter before 2034 does American real output per person stand [test:no_growth_jump] or more above the highest level it had reached a year or more before.
+    test: {fact: gdp_pc_over_peak_best, lt: 0.15}
+    rival_test: {fact: gdp_pc_over_peak_best, lt: 0.15}
+    rival_until: 2033-12-31
+    falsifier: A quarter before 2034 that clears the bet's line.
     expect_state: both
   - id: bet_fast_side
     position: fast_growth
-    text: Output per person stands [test:bet_fast_side] or more above its previous peak in some quarter before 2034, which would win the fast side of the Moll and Imas bet.
-    test: {fact: gdp_pc_over_peak, gte: 0.15}
+    text: In some quarter before 2034, output per person stands [test:bet_fast_side] or more above the highest level it had reached a year or more before, which wins the bet's fast side.
+    test: {fact: gdp_pc_over_peak_best, gte: 0.15}
     due: 2033-12-31
-    falsifier: No quarter before 2034 in which output per person stands that far above its previous peak.
+    falsifier: No qualifying quarter by the time the last one the bet counts is published.
     expect_state: untestable
-  - id: productivity_fast
-    position: fast_growth
-    text: Output per hour grows by more than [test:productivity_fast] a year, the pace this site calls fast, before 2030.
-    test: {fact: productivity_yoy, gt: 3.5}
-    due: 2029-12-31
-    falsifier: Output per hour still growing at a normal pace at the end of 2029.
-    expect_state: untestable
+  - id: growth_splits
+    position: modest_growth
+    text: Growth in output per person stays below [test:growth_splits] a year through 2030, which in Jones and Tonetti's model means AI following the pattern of past automation rather than improving everywhere at once.
+    test: {fact: gdp_pc_yoy, lt: 0.07}
+    rival_test: {fact: gdp_pc_yoy, lt: 0.07}
+    rival_until: 2029-12-31
+    falsifier: Growth in output per person above that line before 2030, which in their model means machines improving everywhere at once.
+    expect_state: both
   - id: hours_rise_first
     position: intensity_first
-    text: Paid hours in the work most exposed to AI rise before they fall.
+    text: Work in the jobs most exposed to AI grows more intense before it grows shorter.
     row: work_and_pay
     stage: adaptation
-    falsifier: Paid hours in the most exposed work falling before output rises.
+    falsifier: Paid hours in the most exposed work falling before output per worker rises.
   - id: relational_pay
     position: relational
     text: Pay in work built on people dealing with people rises relative to pay elsewhere as AI spreads.
@@ -1009,17 +1051,15 @@ claims:
     text: Open models carry most of the tokens routed to OpenRouter's busiest models.
     test: {fact: open_share, gt: 0.5}
     rival_test: {fact: open_share, gt: 0.5}
-    row: inference
-    stage: products
     falsifier: The closed models' share of those tokens climbing back as the gap to open models closes.
     expect_state: both
   - id: gap_stays_short
     position: commodity
-    text: Open models trail the best closed ones by less than [test:gap_stays_short], the gap this site calls normal.
+    text: Open models trail the best closed ones by less than [test:gap_stays_short], a shorter gap than this site calls normal.
     test: {fact: open_lag, lt: 9}
     rival_test: {fact: open_lag, lt: 9}
-    falsifier: The best closed models pulling away from open ones by more than that gap.
-    expect_state: both
+    falsifier: The best closed models pulling away from open ones by that gap or more.
+    expect_state: untestable
   - id: lock_in
     position: up_the_stack
     text: The labs earn a growing share of their revenue from products and deployments inside their customers' firms rather than from selling access to their models.
@@ -1028,10 +1068,11 @@ claims:
     position: scarce_input_collects
     text: The chip makers take more than [test:chips_collect] of the gross profit shared by chips, cloud and the labs.
     test: {fact: chips_gp_share, gt: 0.5}
+    rival_test: {fact: chips_gp_share, gt: 0.5}
     row: accelerators
     stage: methods
     falsifier: The chip makers' share falling below that line while chips stay short.
-    expect_state: holding
+    expect_state: both
   - id: capex_ahead
     position: money_runs_out
     text: The biggest cloud and platform companies spend more each year on buildings and equipment than AI earns in revenue.
@@ -1043,7 +1084,7 @@ claims:
     expect_state: both
   - id: chips_stored
     position: money_runs_out
-    text: The cloud companies start storing new chips instead of installing them, the sign Cahn watches for that the build-out is slowing.
+    text: The cloud companies start storing new chips instead of installing them, the sign Cahn watches for that the build-out is slowing [cite:cahn_2025].
     row: data_centres
     stage: methods
     falsifier: New chips going into service as fast as they arrive.
@@ -1077,14 +1118,14 @@ scenarios:
       binds_next: [family_2]
     - progress: stall_money
       rules: unclear
-      argued_by: [cahn, covello]
+      argued_by: [cahn_2024, covello]
       says: The spending outruns the revenue it needs, the builders slow down before the uses arrive, and the losses fall on their investors.
-      signposts: [capex_ahead]
+      signposts: [capex_ahead, chips_stored]
       binds_next: [capital]
     - progress: steady
       rules: unclear
       argued_by: [moll_imas, normal_tech, jones_tonetti]
-      says: Capability keeps improving, firms adopt it at the pace of past technologies, and growth stays near its usual pace.
+      says: Capability keeps improving, firms adopt it at the pace of past technologies, and growth rises without exploding.
       signposts: [no_growth_jump, firms_normal]
       binds_next: [family_2, family_3]
     - progress: steady
@@ -1101,9 +1142,9 @@ scenarios:
       binds_next: [family_3]
     - progress: automated_research
       rules: unclear
-      argued_by: [ai_2027, restrepo]
-      says: Each model speeds up the research behind the next, and wages settle at the cost of the computing that could replace a person.
-      signposts: [rli_reached, horizon_fast]
+      argued_by: [ai_2027, restrepo, bet_fast_side]
+      says: Each model speeds up the research behind the next, output breaks away, and wages settle at the cost of the computing that could replace a person.
+      signposts: [rli_reached, horizon_fast, bet_fast_side]
       binds_next: [energy, data_centres, accelerators]
     - progress: automated_research
       rules: licensed
@@ -1112,26 +1153,26 @@ scenarios:
       signposts: [rli_reached]
       binds_next: [family_5]
   anchors:
-    - {source: eo_14365, date: 2025-12-11, text: The United States set out to override state AI laws in favour of a light federal standard.}
+    - {source: eo_14365, date: 2025-12-11, text: The American president ordered moves against state AI laws and called for a light national standard.}
     - {source: colorado_sb26_189, date: 2026-05-14, text: "Colorado replaced its AI Act with a narrower law on automated decisions, which applies from January 2027."}
-    - {source: eu_2026_1744, date: 2026-07-08, text: The European Union put off its rules for high-risk AI until December 2027 and August 2028.}
+    - {source: eu_2026_1744, date: 2026-07-27, text: "The European Union's changes to its AI Act came into force, putting off its rules for high-risk AI until December 2027 and August 2028."}
 
 agree:
   - id: tokens_thin
     text: Selling access to a model, token by token, is a thin business.
-    holders: [larson_squeeze, hobart_pacing, nk_up_the_stack]
-    dissent: [sundheim]
-    dissent_text: Sundheim, whose firm holds stakes in two of the labs, says their coding tools and paid access to their models are durable businesses with high margins.
-  - id: operator_answers
-    text: The money goes to whoever runs the operating business and answers for it.
-    holders: [hadfield_koh, larson_coasean, normal_tech]
+    holders: [hobart_round_trip, nk_up_the_stack]
+    dissent: [sundheim, larson_durability]
+    dissent_text: Sundheim, whose firm holds stakes in two of the labs, says their businesses are durable and their margins high; Larson argues a lab can keep its price, and so its margin, even as open models take the volume.
+  - id: liability_sets_pace
+    text: Who answers for AI's mistakes will shape how fast firms use it.
+    holders: [hadfield_koh, normal_tech]
     dissent: []
-  - id: checking_scarce
-    text: Checking AI's work becomes scarce.
-    holders: [jones_b, cai_data, hadfield_koh]
+  - id: checking_costs
+    text: Checking AI's work becomes a costly task of its own.
+    holders: [jones_b, cai_data]
     dissent: []
   - id: use_first
     text: People use AI well before firms reorganise around it.
     holders: [normal_tech, stevenson, brs_jcurve]
     dissent: [ai_2027, korinek_etal]
-    dissent_text: In AI 2027, and in the fastest of Korinek and colleagues' scenarios, the economy is remade within a few years.
+    dissent_text: AI 2027's story, and the most extreme of Korinek and colleagues' scenarios, remake the economy within a few years.

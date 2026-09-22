@@ -56,7 +56,7 @@ function ClaimTest({ doc, c }: { doc: OutlookDoc; c: OutlookClaim }) {
   return (
     <p className="text-[13.5px] leading-relaxed text-ink-2">
       {c.test ? <>Tonight {f ? <Fact f={f} /> : "no reading"}; the test is <Threshold doc={doc} t={c.test} />{c.due ? <> by {c.due}</> : null}. </> : <>No reading tests this yet. </>}
-      {c.state === "both" ? <>Its rival expects the same reading, so tonight settles nothing. </> : null}
+      {c.state === "both" ? <>Its rival expects the same reading{c.rival_until ? <> until {c.rival_until}</> : null}, so tonight settles nothing. </> : null}
       {c.falsifier ? <>Proved wrong by: {c.falsifier}</> : null}
     </p>
   );
@@ -141,7 +141,7 @@ export function ScenarioGrid({ doc }: { doc: OutlookDoc }) {
     if (!c) return <span className="text-[13px] text-muted">No source here argues this.</span>;
     return (
       <div className="flex flex-col gap-2">
-        <span className={`self-start rounded-[2px] border px-1.5 py-0.5 text-[11px] font-mono uppercase tracking-[0.07em] ${c.consistent ? "border-ink text-ink" : "border-dashed border-muted text-muted"}`}>{c.consistent ? "still open" : "ruled out tonight"}</span>
+        <span className={`self-start rounded-[2px] border px-1.5 py-0.5 text-[11px] font-mono uppercase tracking-[0.07em] ${!c.consistent ? "border-dashed border-muted text-muted" : c.tested ? "border-ink text-ink" : "border-muted text-ink-2"}`}>{!c.consistent ? "ruled out tonight" : c.tested ? "still open" : "open, not yet tested"}</span>
         <p className="font-serif text-[15px] leading-snug text-ink">{c.says}</p>
         <p className="text-[12.5px] leading-relaxed text-ink-2">Argued by {names(doc, c.argued_by)}.</p>
         {c.signposts.length ? (

@@ -125,7 +125,7 @@ def test_an_outlook_claim_marks_its_cell_in_plain_words_with_its_threshold_writt
 
     doc = {
         "sources": [{"id": "hk", "who": "Gillian Hadfield and Andrew Koh"}],
-        "tests": {"c1": {"value": 0.5, "unit": "share"}},
+        "tests": {"c1": {"line": 0.5, "unit": "share"}},
         "claims": [
             {"id": "c1", "row": "chips", "stage": "products", "attribution": "author", "holders": ["hk"], "state": "both",
              "text": "Chips take more than [test:c1] of the profit [cite:hk]."},

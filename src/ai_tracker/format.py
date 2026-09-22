@@ -60,6 +60,8 @@ def fmt(v: float | None, unit: str | None = None) -> str:
         return f"{_fixed(v / 60, 1)} h" if v >= 60 else f"{_sig(v)} min"
     if unit == "days":
         return f"{_fixed(v, 0)} days"
+    if unit == "months":  # a whole number of months reads whole; a measured gap keeps its tenth
+        return f"{_fixed(v, 0) if v == int(v) else _fixed(v, 1)} months"
     if unit == "year":  # a whole year reads whole; a fitted one keeps its tenth
         return _fixed(v, 0) if v == int(v) else _fixed(v, 1)
     if unit == "count":

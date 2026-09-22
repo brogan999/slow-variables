@@ -240,14 +240,14 @@ export type OutlookPosition = {
   mechanism: string; case: string; kill_shot: string; rival: string; visible: boolean;
 };
 export type OutlookClaim = {
-  id: string; position: string; text: string; falsifier?: string; row: string | null; stage: string | null; due: string | null;
+  id: string; position: string; text: string; falsifier?: string; row: string | null; stage: string | null; due: string | null; rival_until: string | null;
   test: OutlookTest | null; rival_test: OutlookTest | null; fact: string | null; rival: string; folio: string;
   holders: string[]; attribution: string; state: OutlookState; expected: OutlookState | null;
 };
-export type OutlookCell = { progress: string; rules: string; argued_by: string[]; says: string; signposts: { claim: string; state: OutlookState }[]; binds_next: string[]; consistent: boolean };
+export type OutlookCell = { progress: string; rules: string; argued_by: string[]; says: string; signposts: { claim: string; state: OutlookState }[]; binds_next: string[]; tested: boolean; consistent: boolean };
 export type OutlookDoc = {
   as_of: string; essay: string; facts: Record<string, Fact | null>; sources: OutlookSource[]; positions: OutlookPosition[];
-  claims: OutlookClaim[]; tally: Record<OutlookState, number>; tests: Record<string, { value: number; unit: string }>;
+  claims: OutlookClaim[]; tally: Record<OutlookState, number>; tests: Record<string, { line: number; unit: string }>;
   folios: { id: string; kicker: string }[];
   scenarios: { progress: { id: string; label: string }[]; rules: { id: string; label: string }[]; cells: OutlookCell[]; anchors: { source: string; date: string; text: string }[] };
   agree: { id: string; text: string; holders: string[]; dissent: string[]; dissent_text?: string }[];

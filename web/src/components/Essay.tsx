@@ -8,7 +8,7 @@ import type { ArgumentDoc } from "@/lib/data";
 // against, [cite:id] the source a sentence rests on (numbered by the export in order of first citation).
 const TOKEN = /(\[(?:fact|test|cite):[a-z0-9_]+\])/g;
 export type Cites = Record<string, { n: number; who: string; work: string }>;
-export type Tests = Record<string, { value: number; unit: string }>;
+export type Tests = Record<string, { line: number; unit: string }>;
 
 export function parseEssay(md: string) {
   const blocks = md.split(/\n{2,}/).map((b) => b.trim()).filter(Boolean);
@@ -30,7 +30,7 @@ export function Inline({ text, facts, cites, tests }: { text: string; facts: Arg
     if (m[1] === "fact") return <Fact key={i} f={facts[m[2]]} />;
     if (m[1] === "test") {
       const t = tests?.[m[2]];
-      return t ? <span key={i} className="num text-[0.92em] whitespace-nowrap">{fmt(t.value, t.unit)}</span> : null;
+      return t ? <span key={i} className="num text-[0.92em] whitespace-nowrap">{fmt(t.line, t.unit)}</span> : null;
     }
     const c = cites?.[m[2]];
     return c ? <sup key={i} className="ml-px"><a href={`#source-${m[2]}`} title={`${c.who}, ${c.work}`} aria-label={`source ${c.n}: ${c.who}, ${c.work}`} className="num text-[0.7em] text-ink-2 hover:text-ink no-underline">{c.n}</a></sup> : null;
