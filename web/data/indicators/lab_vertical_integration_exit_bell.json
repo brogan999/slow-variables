@@ -24,6 +24,89 @@
  },
  "bucket_id": null,
  "cadence_expected": "quarterly",
+ "chart": {
+  "bands": [],
+  "change": {
+   "dead_band": "\u00b11",
+   "label": "+4",
+   "steps": "2 of 4 steps rose"
+  },
+  "dead": {
+   "height": 25.0,
+   "width": 75.25,
+   "x": 21.86,
+   "y": 50.0
+  },
+  "drawn": {
+   "metric": "lab_vertical_integration_events_4q",
+   "others": 1,
+   "series": null,
+   "total": 1
+  },
+  "line": true,
+  "n_drawn": 6,
+  "needs": 5,
+  "partial": true,
+  "stamps": [
+   "reported"
+  ],
+  "x": {
+   "ticks": [
+    {
+     "label": "Jul 2025",
+     "minor": false,
+     "x": 3.09
+    },
+    {
+     "label": "Oct",
+     "minor": true,
+     "x": 22.06
+    },
+    {
+     "label": "2026",
+     "minor": false,
+     "x": 41.03
+    },
+    {
+     "label": "Apr",
+     "minor": true,
+     "x": 59.59
+    },
+    {
+     "label": "Jul",
+     "minor": false,
+     "x": 78.35
+    }
+   ]
+  },
+  "y": {
+   "chars": 2,
+   "log": false,
+   "ticks": [
+    {
+     "label": "2",
+     "y": 100.0
+    },
+    {
+     "label": "4",
+     "y": 75.0
+    },
+    {
+     "label": "6",
+     "y": 50.0
+    },
+    {
+     "label": "8",
+     "y": 25.0
+    },
+    {
+     "label": "10",
+     "y": 0.0
+    }
+   ],
+   "unit": "count"
+  }
+ },
  "chart_sources": {
   "metric": "lab_vertical_integration_events_4q",
   "sources": [
@@ -94,7 +177,7 @@
  "derived": [
   {
    "as_of_date": "2025-06-30",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "031c97c9ba26722b",
@@ -117,7 +200,7 @@
   },
   {
    "as_of_date": "2025-09-30",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "2b3c6d5c6a2c16a2",
@@ -144,7 +227,7 @@
   },
   {
    "as_of_date": "2025-12-31",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "07a2140b23878346",
@@ -173,7 +256,7 @@
   },
   {
    "as_of_date": "2026-03-31",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "db8b47f57a52e7f6",
@@ -208,7 +291,7 @@
   },
   {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "5e8c00219959cbbf",
@@ -241,7 +324,7 @@
   },
   {
    "as_of_date": "2026-09-30",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "b340dd5ceb0c4fcb",
@@ -274,6 +357,7 @@
   }
  ],
  "direction": null,
+ "direction_readings": 5,
  "direction_rule": {
   "dead_band": 1.0,
   "higher_is": "concentrating",
@@ -289,6 +373,7 @@
  "id": "lab_vertical_integration_exit_bell",
  "latest": {
   "as_of": "2026-09-30",
+  "derived_id": "b340dd5ceb0c4fcb",
   "dims": {},
   "obs_ids": [
    "07e3555c39a96050",
@@ -316,19 +401,28 @@
  "points": [
   {
    "as_of": "2025-06-30",
+   "derived_id": "031c97c9ba26722b",
    "dims": {},
+   "faint": true,
+   "href": "#d-031c97c9ba26722b",
    "obs_ids": [
     "10c4c0b2d0426e32",
     "5e4305fd8756819b",
     "87066654f5416275",
     "f94c91c13afa2caa"
    ],
+   "stamp": "reported",
    "unit": "count",
-   "value": 3.0
+   "value": 3.0,
+   "x": 2.89,
+   "y": 87.5
   },
   {
    "as_of": "2025-09-30",
+   "derived_id": "2b3c6d5c6a2c16a2",
    "dims": {},
+   "faint": false,
+   "href": "#d-2b3c6d5c6a2c16a2",
    "obs_ids": [
     "10c4c0b2d0426e32",
     "5e4305fd8756819b",
@@ -337,12 +431,18 @@
     "d6dd36d1a3dc9f36",
     "f94c91c13afa2caa"
    ],
+   "stamp": "reported",
    "unit": "count",
-   "value": 5.0
+   "value": 5.0,
+   "x": 21.86,
+   "y": 62.5
   },
   {
    "as_of": "2025-12-31",
+   "derived_id": "07a2140b23878346",
    "dims": {},
+   "faint": false,
+   "href": "#d-07a2140b23878346",
    "obs_ids": [
     "10c4c0b2d0426e32",
     "129c29f7c904cd92",
@@ -352,12 +452,18 @@
     "d6dd36d1a3dc9f36",
     "f94c91c13afa2caa"
    ],
+   "stamp": "reported",
    "unit": "count",
-   "value": 6.0
+   "value": 6.0,
+   "x": 40.82,
+   "y": 50.0
   },
   {
    "as_of": "2026-03-31",
+   "derived_id": "db8b47f57a52e7f6",
    "dims": {},
+   "faint": false,
+   "href": "#d-db8b47f57a52e7f6",
    "obs_ids": [
     "10c4c0b2d0426e32",
     "129c29f7c904cd92",
@@ -370,12 +476,18 @@
     "ef40bd94a06afa5d",
     "f94c91c13afa2caa"
    ],
+   "stamp": "reported",
    "unit": "count",
-   "value": 9.0
+   "value": 9.0,
+   "x": 59.38,
+   "y": 12.5
   },
   {
    "as_of": "2026-06-30",
+   "derived_id": "5e8c00219959cbbf",
    "dims": {},
+   "faint": false,
+   "href": "#d-5e8c00219959cbbf",
    "obs_ids": [
     "07e3555c39a96050",
     "129c29f7c904cd92",
@@ -387,12 +499,18 @@
     "d7e2c8855360a39c",
     "ef40bd94a06afa5d"
    ],
+   "stamp": "reported",
    "unit": "count",
-   "value": 9.0
+   "value": 9.0,
+   "x": 78.14,
+   "y": 12.5
   },
   {
    "as_of": "2026-09-30",
+   "derived_id": "b340dd5ceb0c4fcb",
    "dims": {},
+   "faint": false,
+   "href": "#d-b340dd5ceb0c4fcb",
    "obs_ids": [
     "07e3555c39a96050",
     "129c29f7c904cd92",
@@ -404,8 +522,12 @@
     "d7e2c8855360a39c",
     "ef40bd94a06afa5d"
    ],
+   "partial": true,
+   "stamp": "reported",
    "unit": "count",
-   "value": 9.0
+   "value": 9.0,
+   "x": 97.11,
+   "y": 12.5
   }
  ],
  "prediction_rows": [],
@@ -809,101 +931,13 @@
   "stripe_newsroom",
   "techcrunch"
  ],
- "sparkline": [
-  {
-   "as_of": "2025-06-30",
-   "dims": {},
-   "obs_ids": [
-    "10c4c0b2d0426e32",
-    "5e4305fd8756819b",
-    "87066654f5416275",
-    "f94c91c13afa2caa"
-   ],
-   "unit": "count",
-   "value": 3.0
-  },
-  {
-   "as_of": "2025-09-30",
-   "dims": {},
-   "obs_ids": [
-    "10c4c0b2d0426e32",
-    "5e4305fd8756819b",
-    "8646dd26d8b7dcec",
-    "87066654f5416275",
-    "d6dd36d1a3dc9f36",
-    "f94c91c13afa2caa"
-   ],
-   "unit": "count",
-   "value": 5.0
-  },
-  {
-   "as_of": "2025-12-31",
-   "dims": {},
-   "obs_ids": [
-    "10c4c0b2d0426e32",
-    "129c29f7c904cd92",
-    "5e4305fd8756819b",
-    "8646dd26d8b7dcec",
-    "87066654f5416275",
-    "d6dd36d1a3dc9f36",
-    "f94c91c13afa2caa"
-   ],
-   "unit": "count",
-   "value": 6.0
-  },
-  {
-   "as_of": "2026-03-31",
-   "dims": {},
-   "obs_ids": [
-    "10c4c0b2d0426e32",
-    "129c29f7c904cd92",
-    "5e4305fd8756819b",
-    "63fe32e4118fa976",
-    "8646dd26d8b7dcec",
-    "87066654f5416275",
-    "d6dd36d1a3dc9f36",
-    "d7e2c8855360a39c",
-    "ef40bd94a06afa5d",
-    "f94c91c13afa2caa"
-   ],
-   "unit": "count",
-   "value": 9.0
-  },
-  {
-   "as_of": "2026-06-30",
-   "dims": {},
-   "obs_ids": [
-    "07e3555c39a96050",
-    "129c29f7c904cd92",
-    "323f4b23d02dc306",
-    "63fe32e4118fa976",
-    "8646dd26d8b7dcec",
-    "9ea06530e32d0e37",
-    "d6dd36d1a3dc9f36",
-    "d7e2c8855360a39c",
-    "ef40bd94a06afa5d"
-   ],
-   "unit": "count",
-   "value": 9.0
-  },
-  {
-   "as_of": "2026-09-30",
-   "dims": {},
-   "obs_ids": [
-    "07e3555c39a96050",
-    "129c29f7c904cd92",
-    "323f4b23d02dc306",
-    "63fe32e4118fa976",
-    "708f5f947cf75c74",
-    "9ea06530e32d0e37",
-    "bb8f74b796a1d779",
-    "d7e2c8855360a39c",
-    "ef40bd94a06afa5d"
-   ],
-   "unit": "count",
-   "value": 9.0
-  }
- ],
+ "spark": {
+  "d": "M1.0,26.0 L19.8,18.0 L38.6,14.0 L57.4,2.0 L76.2,2.0 L95.0,2.0",
+  "end": [
+   95.0,
+   2.0
+  ]
+ },
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,

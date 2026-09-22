@@ -46,6 +46,78 @@
  },
  "bucket_id": null,
  "cadence_expected": "quarterly",
+ "chart": {
+  "bands": [],
+  "change": {
+   "dead_band": "\u00b10.30",
+   "label": "\u22125.96",
+   "steps": "4 of 4 steps fell"
+  },
+  "dead": {
+   "height": 6.0,
+   "width": 63.15,
+   "x": 34.08,
+   "y": 26.12
+  },
+  "drawn": {
+   "metric": "capex_to_revenue_stack",
+   "others": 0,
+   "series": null,
+   "total": 0
+  },
+  "line": true,
+  "n_drawn": 7,
+  "needs": 5,
+  "partial": false,
+  "stamps": [
+   "estimate"
+  ],
+  "x": {
+   "ticks": [
+    {
+     "label": "Jul 2025",
+     "minor": false,
+     "x": 34.26
+    },
+    {
+     "label": "2026",
+     "minor": false,
+     "x": 66.09
+    }
+   ]
+  },
+  "y": {
+   "chars": 3,
+   "log": false,
+   "ticks": [
+    {
+     "label": "4\u00d7",
+     "y": 100.0
+    },
+    {
+     "label": "6\u00d7",
+     "y": 80.0
+    },
+    {
+     "label": "8\u00d7",
+     "y": 60.0
+    },
+    {
+     "label": "10\u00d7",
+     "y": 40.0
+    },
+    {
+     "label": "12\u00d7",
+     "y": 20.0
+    },
+    {
+     "label": "14\u00d7",
+     "y": 0.0
+    }
+   ],
+   "unit": null
+  }
+ },
  "chart_sources": {
   "metric": "capex_to_revenue_stack",
   "sources": [
@@ -90,7 +162,7 @@
  "derived": [
   {
    "as_of_date": "2024-12-31",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "ca0db96dc37294a8",
@@ -161,7 +233,7 @@
   },
   {
    "as_of_date": "2025-03-31",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "03a595647b4ef4a9",
@@ -236,7 +308,7 @@
   },
   {
    "as_of_date": "2025-06-30",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "9b8e91ebb8aeb547",
@@ -311,7 +383,7 @@
   },
   {
    "as_of_date": "2025-09-30",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "86a7060a7c9a1b8d",
@@ -388,7 +460,7 @@
   },
   {
    "as_of_date": "2025-12-31",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "643d9ae527a64760",
@@ -461,7 +533,7 @@
   },
   {
    "as_of_date": "2026-03-31",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "f23f9776afb42bc0",
@@ -538,7 +610,7 @@
   },
   {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "7867e6c6b3b7fe32",
@@ -615,6 +687,7 @@
   }
  ],
  "direction": null,
+ "direction_readings": 5,
  "direction_rule": {
   "dead_band": 0.3,
   "higher_is": "concentrating",
@@ -630,6 +703,7 @@
  "id": "capex_to_revenue_stack",
  "latest": {
   "as_of": "2026-06-30",
+  "derived_id": "7867e6c6b3b7fe32",
   "dims": {},
   "obs_ids": [
    "027237d89717d303",
@@ -679,7 +753,10 @@
  "points": [
   {
    "as_of": "2024-12-31",
+   "derived_id": "ca0db96dc37294a8",
    "dims": {},
+   "faint": true,
+   "href": "#d-ca0db96dc37294a8",
    "obs_ids": [
     "02cd9c6c8be6294e",
     "06e7c5aaf6470c9a",
@@ -710,12 +787,18 @@
     "f40379629b22656f",
     "fc97ca51a2689d53"
    ],
+   "stamp": "estimate",
    "unit": "ratio",
-   "value": 11.698446483180428
+   "value": 11.698446483180428,
+   "x": 2.77,
+   "y": 23.02
   },
   {
    "as_of": "2025-03-31",
+   "derived_id": "03a595647b4ef4a9",
    "dims": {},
+   "faint": true,
+   "href": "#d-03a595647b4ef4a9",
    "obs_ids": [
     "02cd9c6c8be6294e",
     "06e7c5aaf6470c9a",
@@ -748,12 +831,18 @@
     "eb8d37a9275b0137",
     "f40379629b22656f"
    ],
+   "stamp": "estimate",
    "unit": "ratio",
-   "value": 12.58463296678792
+   "value": 12.58463296678792,
+   "x": 18.34,
+   "y": 14.15
   },
   {
    "as_of": "2025-06-30",
+   "derived_id": "9b8e91ebb8aeb547",
    "dims": {},
+   "faint": false,
+   "href": "#d-9b8e91ebb8aeb547",
    "obs_ids": [
     "02cd9c6c8be6294e",
     "0b3b7c04c602d791",
@@ -786,12 +875,18 @@
     "f40379629b22656f",
     "f8dcd682b518ca4d"
    ],
+   "stamp": "estimate",
    "unit": "ratio",
-   "value": 11.08803695019032
+   "value": 11.08803695019032,
+   "x": 34.08,
+   "y": 29.12
   },
   {
    "as_of": "2025-09-30",
+   "derived_id": "86a7060a7c9a1b8d",
    "dims": {},
+   "faint": false,
+   "href": "#d-86a7060a7c9a1b8d",
    "obs_ids": [
     "02cd9c6c8be6294e",
     "0b3b7c04c602d791",
@@ -825,12 +920,18 @@
     "f40379629b22656f",
     "f8dcd682b518ca4d"
    ],
+   "stamp": "estimate",
    "unit": "ratio",
-   "value": 10.99633631969459
+   "value": 10.99633631969459,
+   "x": 50.0,
+   "y": 30.04
   },
   {
    "as_of": "2025-12-31",
+   "derived_id": "643d9ae527a64760",
    "dims": {},
+   "faint": false,
+   "href": "#d-643d9ae527a64760",
    "obs_ids": [
     "0b3b7c04c602d791",
     "0d4c08bd4c8d676f",
@@ -862,12 +963,18 @@
     "f2df3324fcaa3dd6",
     "f8dcd682b518ca4d"
    ],
+   "stamp": "estimate",
    "unit": "ratio",
-   "value": 6.04468206988734
+   "value": 6.04468206988734,
+   "x": 65.92,
+   "y": 79.55
   },
   {
    "as_of": "2026-03-31",
+   "derived_id": "f23f9776afb42bc0",
    "dims": {},
+   "faint": false,
+   "href": "#d-f23f9776afb42bc0",
    "obs_ids": [
     "027237d89717d303",
     "0d4c08bd4c8d676f",
@@ -901,12 +1008,18 @@
     "f87fbd907ad6c419",
     "f8dcd682b518ca4d"
    ],
+   "stamp": "estimate",
    "unit": "ratio",
-   "value": 5.871845771628995
+   "value": 5.871845771628995,
+   "x": 81.49,
+   "y": 81.28
   },
   {
    "as_of": "2026-06-30",
+   "derived_id": "7867e6c6b3b7fe32",
    "dims": {},
+   "faint": false,
+   "href": "#d-7867e6c6b3b7fe32",
    "obs_ids": [
     "027237d89717d303",
     "143dcf3ea59eb522",
@@ -940,8 +1053,11 @@
     "f77a3da7ccf46854",
     "f87fbd907ad6c419"
    ],
+   "stamp": "estimate",
    "unit": "ratio",
-   "value": 5.129569249719234
+   "value": 5.129569249719234,
+   "x": 97.23,
+   "y": 88.7
   }
  ],
  "prediction_rows": [],
@@ -966,274 +1082,13 @@
   "menlo",
   "sec_xbrl"
  ],
- "sparkline": [
-  {
-   "as_of": "2024-12-31",
-   "dims": {},
-   "obs_ids": [
-    "02cd9c6c8be6294e",
-    "06e7c5aaf6470c9a",
-    "0b064977a302c2e4",
-    "1d99c21cc854f536",
-    "2ae407dac517d1b4",
-    "37011deae1bc7f27",
-    "3d4fdb8c742413f2",
-    "44b7986ae7f0d011",
-    "56bbd6095db8cd50",
-    "62c15a189c85b219",
-    "6ce68ef4458d01e8",
-    "8b68a53fbc5ff928",
-    "8e099edb3045e1f8",
-    "9175ae9b2ac0af90",
-    "958b612484b51d2f",
-    "9ed913072660dffd",
-    "a5c2685b5a940944",
-    "a6e80dc3975f1268",
-    "c83f8e96510d0977",
-    "cb9aea146ae3d2e7",
-    "cfb9de6ad89c59cc",
-    "d4b7a1f4bb171ba8",
-    "d8cce3657e064a83",
-    "dec473f382fe2293",
-    "e40f748174fd91fb",
-    "eb8d37a9275b0137",
-    "f40379629b22656f",
-    "fc97ca51a2689d53"
-   ],
-   "unit": "ratio",
-   "value": 11.698446483180428
-  },
-  {
-   "as_of": "2025-03-31",
-   "dims": {},
-   "obs_ids": [
-    "02cd9c6c8be6294e",
-    "06e7c5aaf6470c9a",
-    "0b3b7c04c602d791",
-    "1d99c21cc854f536",
-    "1f3af8f3789bcc56",
-    "2ae407dac517d1b4",
-    "37011deae1bc7f27",
-    "390ce991d51355e3",
-    "3d4fdb8c742413f2",
-    "44b7986ae7f0d011",
-    "53e1455f45a9b9fe",
-    "56bbd6095db8cd50",
-    "62c15a189c85b219",
-    "69de1ab8b7416221",
-    "6ce68ef4458d01e8",
-    "7beca16f8e97e38a",
-    "8b68a53fbc5ff928",
-    "8e8f93b71a707eaf",
-    "9175ae9b2ac0af90",
-    "9ed913072660dffd",
-    "a5c2685b5a940944",
-    "a6e80dc3975f1268",
-    "ca1e24ce18cc78e4",
-    "cb9aea146ae3d2e7",
-    "cfb9de6ad89c59cc",
-    "d4b7a1f4bb171ba8",
-    "d8cce3657e064a83",
-    "dec473f382fe2293",
-    "eb8d37a9275b0137",
-    "f40379629b22656f"
-   ],
-   "unit": "ratio",
-   "value": 12.58463296678792
-  },
-  {
-   "as_of": "2025-06-30",
-   "dims": {},
-   "obs_ids": [
-    "02cd9c6c8be6294e",
-    "0b3b7c04c602d791",
-    "0d4c08bd4c8d676f",
-    "2412462cf7923632",
-    "2ae407dac517d1b4",
-    "2f666320753d9925",
-    "37011deae1bc7f27",
-    "390ce991d51355e3",
-    "46820cf03ef990ef",
-    "53e1455f45a9b9fe",
-    "56bbd6095db8cd50",
-    "57fb6b694e86144e",
-    "62c15a189c85b219",
-    "63f00590a394882c",
-    "6ce68ef4458d01e8",
-    "75543ae9e018ed01",
-    "7beca16f8e97e38a",
-    "8e8f93b71a707eaf",
-    "9175ae9b2ac0af90",
-    "9ed913072660dffd",
-    "a6e80dc3975f1268",
-    "aa9108fb71b5dbf3",
-    "b821527346a7ba3c",
-    "ca1e24ce18cc78e4",
-    "cfb9de6ad89c59cc",
-    "d4b7a1f4bb171ba8",
-    "d8cce3657e064a83",
-    "eb8d37a9275b0137",
-    "f40379629b22656f",
-    "f8dcd682b518ca4d"
-   ],
-   "unit": "ratio",
-   "value": 11.08803695019032
-  },
-  {
-   "as_of": "2025-09-30",
-   "dims": {},
-   "obs_ids": [
-    "02cd9c6c8be6294e",
-    "0b3b7c04c602d791",
-    "0d4c08bd4c8d676f",
-    "0dfac555b5f950a6",
-    "143dcf3ea59eb522",
-    "196a6174924b2821",
-    "29221e0928c0242d",
-    "2ae407dac517d1b4",
-    "2f666320753d9925",
-    "32e64259c1e4e50d",
-    "37011deae1bc7f27",
-    "390ce991d51355e3",
-    "57fb6b694e86144e",
-    "63f00590a394882c",
-    "6ce68ef4458d01e8",
-    "75543ae9e018ed01",
-    "7beca16f8e97e38a",
-    "8e8f93b71a707eaf",
-    "9175ae9b2ac0af90",
-    "9ed913072660dffd",
-    "aa4afbcf23f9c215",
-    "aa9108fb71b5dbf3",
-    "ca1e24ce18cc78e4",
-    "d1b25741f036bb1b",
-    "d4b7a1f4bb171ba8",
-    "d8cce3657e064a83",
-    "eb8d37a9275b0137",
-    "ee8e059d6b7db9a1",
-    "f2df3324fcaa3dd6",
-    "f40379629b22656f",
-    "f8dcd682b518ca4d"
-   ],
-   "unit": "ratio",
-   "value": 10.99633631969459
-  },
-  {
-   "as_of": "2025-12-31",
-   "dims": {},
-   "obs_ids": [
-    "0b3b7c04c602d791",
-    "0d4c08bd4c8d676f",
-    "143dcf3ea59eb522",
-    "196a6174924b2821",
-    "206dd0605a5540c9",
-    "22f1089618415146",
-    "29221e0928c0242d",
-    "2f666320753d9925",
-    "32e64259c1e4e50d",
-    "390ce991d51355e3",
-    "416fff663e911055",
-    "57fb6b694e86144e",
-    "6012e72e8105bfc4",
-    "63f00590a394882c",
-    "75543ae9e018ed01",
-    "7beca16f8e97e38a",
-    "8e8f93b71a707eaf",
-    "8f56415d4215a050",
-    "9175ae9b2ac0af90",
-    "aa9108fb71b5dbf3",
-    "afadf59ee9cbb7ff",
-    "b965137f0c59e1db",
-    "c2c40a32f6af336b",
-    "ca1e24ce18cc78e4",
-    "d1b25741f036bb1b",
-    "d2f98ef9a6eab885",
-    "ee8e059d6b7db9a1",
-    "f2df3324fcaa3dd6",
-    "f8dcd682b518ca4d"
-   ],
-   "unit": "ratio",
-   "value": 6.04468206988734
-  },
-  {
-   "as_of": "2026-03-31",
-   "dims": {},
-   "obs_ids": [
-    "027237d89717d303",
-    "0d4c08bd4c8d676f",
-    "143dcf3ea59eb522",
-    "196a6174924b2821",
-    "22f1089618415146",
-    "29221e0928c0242d",
-    "2f666320753d9925",
-    "32e64259c1e4e50d",
-    "416fff663e911055",
-    "4910df35443940aa",
-    "4dc8ee6d073b8430",
-    "6012e72e8105bfc4",
-    "63f00590a394882c",
-    "75543ae9e018ed01",
-    "7beca16f8e97e38a",
-    "8065a41f15722c18",
-    "8e8f93b71a707eaf",
-    "8f56415d4215a050",
-    "aa9108fb71b5dbf3",
-    "b965137f0c59e1db",
-    "c2c40a32f6af336b",
-    "c3dc9a8eb030c5c7",
-    "ca1e24ce18cc78e4",
-    "ce2a8065b1d4c7ac",
-    "d2f98ef9a6eab885",
-    "d66a0f883d6c9603",
-    "ee8e059d6b7db9a1",
-    "f2df3324fcaa3dd6",
-    "f64560a6646757a8",
-    "f87fbd907ad6c419",
-    "f8dcd682b518ca4d"
-   ],
-   "unit": "ratio",
-   "value": 5.871845771628995
-  },
-  {
-   "as_of": "2026-06-30",
-   "dims": {},
-   "obs_ids": [
-    "027237d89717d303",
-    "143dcf3ea59eb522",
-    "196a6174924b2821",
-    "22f1089618415146",
-    "29221e0928c0242d",
-    "32e64259c1e4e50d",
-    "416fff663e911055",
-    "4910df35443940aa",
-    "4dc8ee6d073b8430",
-    "6012e72e8105bfc4",
-    "63f00590a394882c",
-    "75543ae9e018ed01",
-    "8065a41f15722c18",
-    "8b365444d28ae498",
-    "8f56415d4215a050",
-    "9fbab158355685d5",
-    "b965137f0c59e1db",
-    "c2b3a023a57c6672",
-    "c2c40a32f6af336b",
-    "c3dc9a8eb030c5c7",
-    "c72d56dfb070b2b7",
-    "ccc7b379ab5ac2f2",
-    "ce2a8065b1d4c7ac",
-    "d0aab6e876c0d174",
-    "d2f98ef9a6eab885",
-    "e917679d8ad7817e",
-    "ee8e059d6b7db9a1",
-    "f2df3324fcaa3dd6",
-    "f64560a6646757a8",
-    "f77a3da7ccf46854",
-    "f87fbd907ad6c419"
-   ],
-   "unit": "ratio",
-   "value": 5.129569249719234
-  }
- ],
+ "spark": {
+  "d": "M1.0,4.9 L16.7,2.0 L32.3,6.8 L48.0,7.1 L63.7,23.1 L79.3,23.6 L95.0,26.0",
+  "end": [
+   95.0,
+   26.0
+  ]
+ },
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,

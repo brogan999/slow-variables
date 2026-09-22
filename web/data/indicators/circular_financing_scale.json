@@ -24,6 +24,84 @@
  },
  "bucket_id": null,
  "cadence_expected": "quarterly",
+ "chart": {
+  "bands": [],
+  "change": {
+   "dead_band": "\u00b1$20.0B",
+   "label": "\u2212$75.9B",
+   "steps": "1 of 3 steps fell"
+  },
+  "dead": {
+   "height": 5.0,
+   "width": 36.35,
+   "x": 60.79,
+   "y": 18.39
+  },
+  "drawn": {
+   "metric": "circular_commitments_new_4q",
+   "others": 0,
+   "series": null,
+   "total": 0
+  },
+  "line": true,
+  "n_drawn": 8,
+  "needs": 4,
+  "partial": false,
+  "stamps": [
+   "reported"
+  ],
+  "x": {
+   "ticks": [
+    {
+     "label": "2025",
+     "minor": false,
+     "x": 3.02
+    },
+    {
+     "label": "Jul",
+     "minor": false,
+     "x": 31.75
+    },
+    {
+     "label": "2026",
+     "minor": false,
+     "x": 60.95
+    },
+    {
+     "label": "Jul",
+     "minor": false,
+     "x": 89.68
+    }
+   ]
+  },
+  "y": {
+   "chars": 5,
+   "log": false,
+   "ticks": [
+    {
+     "label": "$0",
+     "y": 100.0
+    },
+    {
+     "label": "$200B",
+     "y": 75.0
+    },
+    {
+     "label": "$400B",
+     "y": 50.0
+    },
+    {
+     "label": "$600B",
+     "y": 25.0
+    },
+    {
+     "label": "$800B",
+     "y": 0.0
+    }
+   ],
+   "unit": null
+  }
+ },
  "chart_sources": {
   "metric": "circular_commitments_new_4q",
   "sources": [
@@ -100,7 +178,7 @@
  "derived": [
   {
    "as_of_date": "2024-12-31",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "0cf8c0212905feba",
@@ -117,7 +195,7 @@
   },
   {
    "as_of_date": "2025-03-31",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "6aa1e7b91abbb0d3",
@@ -134,7 +212,7 @@
   },
   {
    "as_of_date": "2025-06-30",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "d383b6ee69ba1c24",
@@ -151,7 +229,7 @@
   },
   {
    "as_of_date": "2025-09-30",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "5b7ca7373d578142",
@@ -176,7 +254,7 @@
   },
   {
    "as_of_date": "2025-12-31",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "0f96be518f7e43b9",
@@ -207,7 +285,7 @@
   },
   {
    "as_of_date": "2026-03-31",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "f9a5ee48a938101f",
@@ -242,7 +320,7 @@
   },
   {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "cbcca0e50717b506",
@@ -281,7 +359,7 @@
   },
   {
    "as_of_date": "2026-08-17",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "febe8edbad38ae2e",
@@ -314,6 +392,7 @@
   }
  ],
  "direction": null,
+ "direction_readings": 4,
  "direction_rule": {
   "dead_band": 20000000000.0,
   "higher_is": "concentrating",
@@ -326,7 +405,7 @@
  "fits": [
   {
    "as_of_date": "2026-08-17",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "f6d2b4cee03aed99",
@@ -374,6 +453,7 @@
  "id": "circular_financing_scale",
  "latest": {
   "as_of": "2026-08-17",
+  "derived_id": "febe8edbad38ae2e",
   "dims": {},
   "obs_ids": [
    "0020effe4dfd27db",
@@ -401,34 +481,55 @@
  "points": [
   {
    "as_of": "2024-12-31",
+   "derived_id": "0cf8c0212905feba",
    "dims": {},
+   "faint": true,
+   "href": "/series/circular.amazon_anthropic.equity_usd.pt#bb4e60191fef03e2",
    "obs_ids": [
     "bb4e60191fef03e2"
    ],
+   "stamp": "reported",
    "unit": "USD",
-   "value": 8000000000.0
+   "value": 8000000000.0,
+   "x": 2.86,
+   "y": 99.0
   },
   {
    "as_of": "2025-03-31",
+   "derived_id": "6aa1e7b91abbb0d3",
    "dims": {},
+   "faint": true,
+   "href": "/series/circular.amazon_anthropic.equity_usd.pt#bb4e60191fef03e2",
    "obs_ids": [
     "bb4e60191fef03e2"
    ],
+   "stamp": "reported",
    "unit": "USD",
-   "value": 8000000000.0
+   "value": 8000000000.0,
+   "x": 17.14,
+   "y": 99.0
   },
   {
    "as_of": "2025-06-30",
+   "derived_id": "d383b6ee69ba1c24",
    "dims": {},
+   "faint": true,
+   "href": "/series/circular.amazon_anthropic.equity_usd.pt#bb4e60191fef03e2",
    "obs_ids": [
     "bb4e60191fef03e2"
    ],
+   "stamp": "reported",
    "unit": "USD",
-   "value": 8000000000.0
+   "value": 8000000000.0,
+   "x": 31.59,
+   "y": 99.0
   },
   {
    "as_of": "2025-09-30",
+   "derived_id": "5b7ca7373d578142",
    "dims": {},
+   "faint": true,
+   "href": "#d-5b7ca7373d578142",
    "obs_ids": [
     "15768aa04a91e520",
     "15f854e53d8ab33a",
@@ -436,12 +537,18 @@
     "e89b6535dc8c7e2b",
     "f280c45df7f10d10"
    ],
+   "stamp": "reported",
    "unit": "USD",
-   "value": 345900000000.0
+   "value": 345900000000.0,
+   "x": 46.19,
+   "y": 56.76
   },
   {
    "as_of": "2025-12-31",
+   "derived_id": "0f96be518f7e43b9",
    "dims": {},
+   "faint": false,
+   "href": "#d-0f96be518f7e43b9",
    "obs_ids": [
     "15768aa04a91e520",
     "15f854e53d8ab33a",
@@ -452,12 +559,18 @@
     "e89b6535dc8c7e2b",
     "f280c45df7f10d10"
    ],
+   "stamp": "reported",
    "unit": "USD",
-   "value": 632900000000.0
+   "value": 632900000000.0,
+   "x": 60.79,
+   "y": 20.89
   },
   {
    "as_of": "2026-03-31",
+   "derived_id": "f9a5ee48a938101f",
    "dims": {},
+   "faint": false,
+   "href": "#d-f9a5ee48a938101f",
    "obs_ids": [
     "15768aa04a91e520",
     "15f854e53d8ab33a",
@@ -470,12 +583,18 @@
     "f2652bb8a224e740",
     "f280c45df7f10d10"
    ],
+   "stamp": "reported",
    "unit": "USD",
-   "value": 664900000000.0
+   "value": 664900000000.0,
+   "x": 75.08,
+   "y": 16.89
   },
   {
    "as_of": "2026-06-30",
+   "derived_id": "cbcca0e50717b506",
    "dims": {},
+   "faint": false,
+   "href": "#d-cbcca0e50717b506",
    "obs_ids": [
     "15768aa04a91e520",
     "15f854e53d8ab33a",
@@ -490,12 +609,18 @@
     "f2652bb8a224e740",
     "f280c45df7f10d10"
    ],
+   "stamp": "reported",
    "unit": "USD",
-   "value": 789900000000.0
+   "value": 789900000000.0,
+   "x": 89.52,
+   "y": 1.26
   },
   {
    "as_of": "2026-08-17",
+   "derived_id": "febe8edbad38ae2e",
    "dims": {},
+   "faint": false,
+   "href": "#d-febe8edbad38ae2e",
    "obs_ids": [
     "0020effe4dfd27db",
     "47769aec0def968f",
@@ -507,8 +632,11 @@
     "d4a1c4d05ce13c70",
     "f2652bb8a224e740"
    ],
+   "stamp": "reported",
    "unit": "USD",
-   "value": 557000000000.0
+   "value": 557000000000.0,
+   "x": 97.14,
+   "y": 30.38
   }
  ],
  "prediction_rows": [
@@ -577,119 +705,13 @@
   "sec_edgar_filings",
   "siliconangle"
  ],
- "sparkline": [
-  {
-   "as_of": "2024-12-31",
-   "dims": {},
-   "obs_ids": [
-    "bb4e60191fef03e2"
-   ],
-   "unit": "USD",
-   "value": 8000000000.0
-  },
-  {
-   "as_of": "2025-03-31",
-   "dims": {},
-   "obs_ids": [
-    "bb4e60191fef03e2"
-   ],
-   "unit": "USD",
-   "value": 8000000000.0
-  },
-  {
-   "as_of": "2025-06-30",
-   "dims": {},
-   "obs_ids": [
-    "bb4e60191fef03e2"
-   ],
-   "unit": "USD",
-   "value": 8000000000.0
-  },
-  {
-   "as_of": "2025-09-30",
-   "dims": {},
-   "obs_ids": [
-    "15768aa04a91e520",
-    "15f854e53d8ab33a",
-    "bb4e60191fef03e2",
-    "e89b6535dc8c7e2b",
-    "f280c45df7f10d10"
-   ],
-   "unit": "USD",
-   "value": 345900000000.0
-  },
-  {
-   "as_of": "2025-12-31",
-   "dims": {},
-   "obs_ids": [
-    "15768aa04a91e520",
-    "15f854e53d8ab33a",
-    "5b741dc1c66e44b9",
-    "8f6d7f9ec8d190d8",
-    "ade7ee6fe91208ab",
-    "d46842ce12c8b89f",
-    "e89b6535dc8c7e2b",
-    "f280c45df7f10d10"
-   ],
-   "unit": "USD",
-   "value": 632900000000.0
-  },
-  {
-   "as_of": "2026-03-31",
-   "dims": {},
-   "obs_ids": [
-    "15768aa04a91e520",
-    "15f854e53d8ab33a",
-    "47769aec0def968f",
-    "5b741dc1c66e44b9",
-    "8f6d7f9ec8d190d8",
-    "ade7ee6fe91208ab",
-    "d46842ce12c8b89f",
-    "e89b6535dc8c7e2b",
-    "f2652bb8a224e740",
-    "f280c45df7f10d10"
-   ],
-   "unit": "USD",
-   "value": 664900000000.0
-  },
-  {
-   "as_of": "2026-06-30",
-   "dims": {},
-   "obs_ids": [
-    "15768aa04a91e520",
-    "15f854e53d8ab33a",
-    "47769aec0def968f",
-    "5b741dc1c66e44b9",
-    "86bf3cb0a6332e69",
-    "8f6d7f9ec8d190d8",
-    "ade7ee6fe91208ab",
-    "d46842ce12c8b89f",
-    "d4a1c4d05ce13c70",
-    "e89b6535dc8c7e2b",
-    "f2652bb8a224e740",
-    "f280c45df7f10d10"
-   ],
-   "unit": "USD",
-   "value": 789900000000.0
-  },
-  {
-   "as_of": "2026-08-17",
-   "dims": {},
-   "obs_ids": [
-    "0020effe4dfd27db",
-    "47769aec0def968f",
-    "5b741dc1c66e44b9",
-    "86bf3cb0a6332e69",
-    "8f6d7f9ec8d190d8",
-    "ade7ee6fe91208ab",
-    "d46842ce12c8b89f",
-    "d4a1c4d05ce13c70",
-    "f2652bb8a224e740"
-   ],
-   "unit": "USD",
-   "value": 557000000000.0
-  }
- ],
+ "spark": {
+  "d": "M1.0,26.0 L14.4,26.0 L27.9,26.0 L41.3,15.6 L54.7,6.8 L68.1,5.8 L81.6,2.0 L95.0,9.1",
+  "end": [
+   95.0,
+   9.1
+  ]
+ },
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,

@@ -17,6 +17,71 @@
  },
  "bucket_id": null,
  "cadence_expected": "quarterly",
+ "chart": {
+  "bands": [],
+  "change": {
+   "dead_band": "\u00b11.00 score",
+   "label": "\u22121.00 score",
+   "steps": "2 of 4 steps fell"
+  },
+  "dead": {
+   "height": 66.67,
+   "width": 63.15,
+   "x": 34.08,
+   "y": 0.0
+  },
+  "drawn": {
+   "metric": "lab_procurement_signal_4q",
+   "others": 1,
+   "series": null,
+   "total": 1
+  },
+  "line": true,
+  "n_drawn": 7,
+  "needs": 5,
+  "partial": false,
+  "stamps": [
+   "estimate",
+   "reported"
+  ],
+  "x": {
+   "ticks": [
+    {
+     "label": "Jul 2025",
+     "minor": false,
+     "x": 34.26
+    },
+    {
+     "label": "2026",
+     "minor": false,
+     "x": 66.09
+    }
+   ]
+  },
+  "y": {
+   "chars": 1,
+   "log": false,
+   "ticks": [
+    {
+     "label": "2",
+     "y": 100.0
+    },
+    {
+     "label": "3",
+     "y": 66.67
+    },
+    {
+     "label": "4",
+     "y": 33.33
+    },
+    {
+     "label": "5",
+     "y": 0.0
+    }
+   ],
+   "unit": "score"
+  }
+ },
  "chart_sources": {
   "metric": "lab_procurement_signal_4q",
   "sources": [
@@ -77,7 +142,7 @@
  "derived": [
   {
    "as_of_date": "2024-12-31",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "9e88b96290d5665e",
@@ -94,7 +159,7 @@
   },
   {
    "as_of_date": "2025-03-31",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "01e9eac69e973cfa",
@@ -113,7 +178,7 @@
   },
   {
    "as_of_date": "2025-06-30",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "85ec09695f9d26f6",
@@ -134,7 +199,7 @@
   },
   {
    "as_of_date": "2025-09-30",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "e71004c50465a760",
@@ -157,7 +222,7 @@
   },
   {
    "as_of_date": "2025-12-31",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "87b525dee327f080",
@@ -178,7 +243,7 @@
   },
   {
    "as_of_date": "2026-03-31",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "3fd873c1124d8811",
@@ -197,7 +262,7 @@
   },
   {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "e796a27d3c398ad6",
@@ -216,6 +281,7 @@
   }
  ],
  "direction": null,
+ "direction_readings": 5,
  "direction_rule": {
   "dead_band": 1.0,
   "higher_is": "concentrating",
@@ -231,6 +297,7 @@
  "id": "lab_procurement_signal",
  "latest": {
   "as_of": "2026-06-30",
+  "derived_id": "e796a27d3c398ad6",
   "dims": {},
   "obs_ids": [
    "6ba3229c63091f93",
@@ -251,76 +318,118 @@
  "points": [
   {
    "as_of": "2024-12-31",
+   "derived_id": "9e88b96290d5665e",
    "dims": {},
+   "faint": true,
+   "href": "/series/procurement.surge_ai.signal.pt#6be245b72d765ecd",
    "obs_ids": [
     "6be245b72d765ecd"
    ],
+   "stamp": "estimate",
    "unit": "score",
-   "value": 2.0
+   "value": 2.0,
+   "x": 2.77,
+   "y": 100.0
   },
   {
    "as_of": "2025-03-31",
+   "derived_id": "01e9eac69e973cfa",
    "dims": {},
+   "faint": true,
+   "href": "#d-01e9eac69e973cfa",
    "obs_ids": [
     "6be245b72d765ecd",
     "a56ea8fc9fccc482"
    ],
+   "stamp": "estimate",
    "unit": "score",
-   "value": 3.0
+   "value": 3.0,
+   "x": 18.34,
+   "y": 66.67
   },
   {
    "as_of": "2025-06-30",
+   "derived_id": "85ec09695f9d26f6",
    "dims": {},
+   "faint": false,
+   "href": "#d-85ec09695f9d26f6",
    "obs_ids": [
     "6be245b72d765ecd",
     "a56ea8fc9fccc482",
     "b1d9b7eed4af1512"
    ],
+   "stamp": "estimate",
    "unit": "score",
-   "value": 4.0
+   "value": 4.0,
+   "x": 34.08,
+   "y": 33.33
   },
   {
    "as_of": "2025-09-30",
+   "derived_id": "e71004c50465a760",
    "dims": {},
+   "faint": false,
+   "href": "#d-e71004c50465a760",
    "obs_ids": [
     "6be245b72d765ecd",
     "a56ea8fc9fccc482",
     "a86b4d5b977580c2",
     "b1d9b7eed4af1512"
    ],
+   "stamp": "estimate",
    "unit": "score",
-   "value": 4.0
+   "value": 4.0,
+   "x": 50.0,
+   "y": 33.33
   },
   {
    "as_of": "2025-12-31",
+   "derived_id": "87b525dee327f080",
    "dims": {},
+   "faint": false,
+   "href": "#d-87b525dee327f080",
    "obs_ids": [
     "a56ea8fc9fccc482",
     "a86b4d5b977580c2",
     "b1d9b7eed4af1512"
    ],
+   "stamp": "reported",
    "unit": "score",
-   "value": 3.0
+   "value": 3.0,
+   "x": 65.92,
+   "y": 66.67
   },
   {
    "as_of": "2026-03-31",
+   "derived_id": "3fd873c1124d8811",
    "dims": {},
+   "faint": false,
+   "href": "#d-3fd873c1124d8811",
    "obs_ids": [
     "a86b4d5b977580c2",
     "b1d9b7eed4af1512"
    ],
+   "stamp": "reported",
    "unit": "score",
-   "value": 2.0
+   "value": 2.0,
+   "x": 81.49,
+   "y": 100.0
   },
   {
    "as_of": "2026-06-30",
+   "derived_id": "e796a27d3c398ad6",
    "dims": {},
+   "faint": false,
+   "href": "#d-e796a27d3c398ad6",
    "obs_ids": [
     "6ba3229c63091f93",
     "a86b4d5b977580c2"
    ],
+   "stamp": "reported",
    "unit": "score",
-   "value": 3.0
+   "value": 3.0,
+   "x": 97.23,
+   "y": 66.67
   }
  ],
  "prediction_rows": [],
@@ -440,81 +549,13 @@
   "techcrunch",
   "theaiinsider"
  ],
- "sparkline": [
-  {
-   "as_of": "2024-12-31",
-   "dims": {},
-   "obs_ids": [
-    "6be245b72d765ecd"
-   ],
-   "unit": "score",
-   "value": 2.0
-  },
-  {
-   "as_of": "2025-03-31",
-   "dims": {},
-   "obs_ids": [
-    "6be245b72d765ecd",
-    "a56ea8fc9fccc482"
-   ],
-   "unit": "score",
-   "value": 3.0
-  },
-  {
-   "as_of": "2025-06-30",
-   "dims": {},
-   "obs_ids": [
-    "6be245b72d765ecd",
-    "a56ea8fc9fccc482",
-    "b1d9b7eed4af1512"
-   ],
-   "unit": "score",
-   "value": 4.0
-  },
-  {
-   "as_of": "2025-09-30",
-   "dims": {},
-   "obs_ids": [
-    "6be245b72d765ecd",
-    "a56ea8fc9fccc482",
-    "a86b4d5b977580c2",
-    "b1d9b7eed4af1512"
-   ],
-   "unit": "score",
-   "value": 4.0
-  },
-  {
-   "as_of": "2025-12-31",
-   "dims": {},
-   "obs_ids": [
-    "a56ea8fc9fccc482",
-    "a86b4d5b977580c2",
-    "b1d9b7eed4af1512"
-   ],
-   "unit": "score",
-   "value": 3.0
-  },
-  {
-   "as_of": "2026-03-31",
-   "dims": {},
-   "obs_ids": [
-    "a86b4d5b977580c2",
-    "b1d9b7eed4af1512"
-   ],
-   "unit": "score",
-   "value": 2.0
-  },
-  {
-   "as_of": "2026-06-30",
-   "dims": {},
-   "obs_ids": [
-    "6ba3229c63091f93",
-    "a86b4d5b977580c2"
-   ],
-   "unit": "score",
-   "value": 3.0
-  }
- ],
+ "spark": {
+  "d": "M1.0,26.0 L16.7,14.0 L32.3,2.0 L48.0,2.0 L63.7,14.0 L79.3,26.0 L95.0,14.0",
+  "end": [
+   95.0,
+   14.0
+  ]
+ },
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,

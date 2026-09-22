@@ -17,6 +17,81 @@
  },
  "bucket_id": "return_arrow",
  "cadence_expected": "quarterly",
+ "chart": {
+  "bands": [
+   {
+    "height": 25.0,
+    "name": "normal",
+    "y": 75.0
+   },
+   {
+    "height": 25.0,
+    "name": "fast",
+    "y": 0.0
+   }
+  ],
+  "change": null,
+  "dead": null,
+  "drawn": {
+   "metric": null,
+   "others": 0,
+   "series": "openai_blog.openai.rsi_agent_workdays_per_human.pt",
+   "total": 1
+  },
+  "line": false,
+  "n_drawn": 1,
+  "needs": null,
+  "partial": false,
+  "stamps": [
+   "reported"
+  ],
+  "x": {
+   "ticks": [
+    {
+     "label": "Jul 2026",
+     "minor": false,
+     "x": 3.12
+    },
+    {
+     "label": "Aug",
+     "minor": false,
+     "x": 35.42
+    },
+    {
+     "label": "Sep",
+     "minor": false,
+     "x": 67.71
+    }
+   ]
+  },
+  "y": {
+   "chars": 2,
+   "log": false,
+   "ticks": [
+    {
+     "label": "0\u00d7",
+     "y": 100.0
+    },
+    {
+     "label": "1\u00d7",
+     "y": 75.0
+    },
+    {
+     "label": "2\u00d7",
+     "y": 50.0
+    },
+    {
+     "label": "3\u00d7",
+     "y": 25.0
+    },
+    {
+     "label": "4\u00d7",
+     "y": 0.0
+    }
+   ],
+   "unit": null
+  }
+ },
  "chart_sources": {
   "metric": null,
   "sources": [
@@ -58,6 +133,7 @@
  "definition": "Agent effort used by a frontier lab's research organisation, in standard eight-hour workdays, per workday of human labour. Today only OpenAI reports it, about itself.",
  "derived": [],
  "direction": null,
+ "direction_readings": null,
  "direction_rule": null,
  "evidence": [],
  "falsifying_band": null,
@@ -109,14 +185,18 @@
    ],
    "grade": "D",
    "high": null,
+   "href": "/series/openai_blog.openai.rsi_agent_workdays_per_human.pt#6cd4efa01b7ac70e",
    "low": null,
    "obs_ids": [
     "6cd4efa01b7ac70e"
    ],
    "series_key": "openai_blog.openai.rsi_agent_workdays_per_human.pt",
+   "stamp": "reported",
    "subject": "openai",
    "unit": "ratio",
-   "value": 3.1
+   "value": 3.1,
+   "x": 50.0,
+   "y": 22.5
   }
  ],
  "prediction_rows": [],
@@ -168,26 +248,7 @@
  "source_ids": [
   "openai_blog"
  ],
- "sparkline": [
-  {
-   "as_of": "2026-08-15",
-   "dispute_text": "OpenAI measuring its own research organisation and publishing the result itself; no independent check (tier 7).",
-   "disputed": true,
-   "flags": [
-    "disputed"
-   ],
-   "grade": "D",
-   "high": null,
-   "low": null,
-   "obs_ids": [
-    "6cd4efa01b7ac70e"
-   ],
-   "series_key": "openai_blog.openai.rsi_agent_workdays_per_human.pt",
-   "subject": "openai",
-   "unit": "ratio",
-   "value": 3.1
-  }
- ],
+ "spark": null,
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,

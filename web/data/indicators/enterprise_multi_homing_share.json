@@ -17,6 +17,78 @@
  },
  "bucket_id": "early_adoption",
  "cadence_expected": "annual",
+ "chart": {
+  "bands": [],
+  "change": null,
+  "dead": null,
+  "drawn": {
+   "metric": null,
+   "others": 2,
+   "series": "menlo.enterprise.multi_model_share.pt",
+   "total": 3
+  },
+  "line": true,
+  "n_drawn": 1,
+  "needs": 3,
+  "partial": false,
+  "stamps": [
+   "reported"
+  ],
+  "x": {
+   "ticks": [
+    {
+     "label": "Oct 2023",
+     "minor": false,
+     "x": 8.33
+    },
+    {
+     "label": "Nov",
+     "minor": false,
+     "x": 40.62
+    },
+    {
+     "label": "Dec",
+     "minor": false,
+     "x": 71.88
+    }
+   ]
+  },
+  "y": {
+   "chars": 3,
+   "log": false,
+   "ticks": [
+    {
+     "label": "54%",
+     "y": 100.0
+    },
+    {
+     "label": "56%",
+     "y": 83.33
+    },
+    {
+     "label": "58%",
+     "y": 66.67
+    },
+    {
+     "label": "60%",
+     "y": 50.0
+    },
+    {
+     "label": "62%",
+     "y": 33.33
+    },
+    {
+     "label": "64%",
+     "y": 16.67
+    },
+    {
+     "label": "66%",
+     "y": 0.0
+    }
+   ],
+   "unit": null
+  }
+ },
  "chart_sources": {
   "metric": null,
   "sources": [
@@ -55,6 +127,7 @@
  "definition": "Share of enterprises using more than one foundation model, from Menlo Ventures' enterprise surveys (60% in the 2023 wave, restated in 2024); the 2024 wave states 'three or more models' without a share and the 2025 mid-year update gives the share that switched vendors (11%), shown alongside.",
  "derived": [],
  "direction": null,
+ "direction_readings": 3,
  "direction_rule": {
   "dead_band": 0.05,
   "higher_is": "dispersing",
@@ -95,16 +168,21 @@
   {
    "as_of": "2023-11-10",
    "disputed": false,
+   "faint": false,
    "grade": "B",
    "high": null,
+   "href": "/series/menlo.enterprise.multi_model_share.pt#5a3caabee92bfad9",
    "low": null,
    "obs_ids": [
     "5a3caabee92bfad9"
    ],
    "series_key": "menlo.enterprise.multi_model_share.pt",
+   "stamp": "reported",
    "subject": "enterprise",
    "unit": "share",
-   "value": 0.6
+   "value": 0.6,
+   "x": 50.0,
+   "y": 50.0
   }
  ],
  "prediction_rows": [],
@@ -189,22 +267,7 @@
  "source_ids": [
   "menlo"
  ],
- "sparkline": [
-  {
-   "as_of": "2023-11-10",
-   "disputed": false,
-   "grade": "B",
-   "high": null,
-   "low": null,
-   "obs_ids": [
-    "5a3caabee92bfad9"
-   ],
-   "series_key": "menlo.enterprise.multi_model_share.pt",
-   "subject": "enterprise",
-   "unit": "share",
-   "value": 0.6
-  }
- ],
+ "spark": null,
  "stale_as_of": null,
  "stale_ok": true,
  "stale_reason": "Menlo's later waves state the pattern without a share; the row is refreshed when a wave publishes one.",

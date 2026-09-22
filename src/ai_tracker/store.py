@@ -10,14 +10,20 @@ from collections import Counter
 from dataclasses import dataclass, field
 from datetime import date, datetime, timezone
 from fnmatch import fnmatch
+from functools import cached_property
 from pathlib import Path
 from typing import Any
 
 import duckdb
 import yaml
 
+from . import chart
+from .analysis.direction import window
 from .schema import (
+    CONFIDENCE_RUBRIC,
+    STAMPS,
     UNVOTED,
+    Basis,
     Bottleneck,
     Bucket,
     CompareRow,
@@ -25,6 +31,7 @@ from .schema import (
     Derived,
     Entity,
     Essay,
+    Extraction,
     FetchLog,
     Indicator,
     Layer,
@@ -37,6 +44,7 @@ from .schema import (
     StatusEvent,
     Sublayer,
     Tier,
+    stamp,
 )
 
 SEED, DATA, WEB = Path("seed"), Path("data"), Path("web/data")
@@ -553,6 +561,130 @@ class Store:
         t = self.con.execute(q, ids).fetchone()
         return Tier(t[0]) if t and t[0] else Tier.ACTOR_STATEMENT
 
+    @cached_property
+    def _obs_meta(self) -> dict[str, tuple[str, str]]:
+        """Every row's series key and stamp, for a point's link and the firmness word a figure prints."""
+        rows = self.con.execute(
+            "SELECT id, series_key, tier, audited_vs_reported, extraction_method FROM observation_all"
+        ).fetchall()
+        return {i: (k, stamp(Tier(t), Basis(b), Extraction(x))) for i, k, t, b, x in rows}
+
+    def stamp_of(self, ids: list[str]) -> str | None:
+        """The weakest stamp among the rows behind a number: a ratio of a filing and an estimate is an estimate."""
+        got = [self._obs_meta[i][1] for i in ids if i in self._obs_meta]
+        return min(got, key=STAMPS.index) if got else None
+
+    def href_of(self, ids: list[str]) -> str | None:
+        """A row's record on its series page (the first of `ids` the store holds)."""
+        first = next((i for i in ids if i in self._obs_meta), None)
+        return f"/series/{self._obs_meta[first][0]}#{first}" if first else None
+
+    def _chart(self, ind: Indicator, pts: list[dict[str, Any]]) -> dict[str, Any] | None:
+        """The indicator chart, laid out here so the page only draws: axes, the bands or the direction rule's window,
+        and each point's position, link and stamp, written onto the point itself."""
+        today, log = date.today(), ind.unit == "minutes"
+        for p in pts:
+            day = date.fromisoformat(p["as_of"])
+            # a reading's record is its row; a number derived from several rows links to its derived row, which
+            # lists them all (picking one input would be arbitrary)
+            many = p.get("derived_id") and len(p["obs_ids"]) > 1
+            p["href"] = f"#d-{p['derived_id']}" if many else self.href_of(p["obs_ids"])
+            p["stamp"] = self.stamp_of(p["obs_ids"])
+            if day > today:  # a quarter still running, dated at its end
+                p["partial"] = True
+        drawn = [
+            p
+            for p in pts
+            if p["value"] is not None and math.isfinite(p["value"]) and (p["value"] > 0 or not log)
+        ]
+        if not drawn:
+            return None
+        rule, when = ind.direction_rule, [date.fromisoformat(p["as_of"]) for p in drawn]
+        win = window(list(zip(when, (p["value"] for p in drawn))), rule) if rule else []
+        on_chart = [("normal", ind.normal_band), ("fast", ind.fast_band)] if not rule and ind.band_input and (
+            ind.band_input == f"metric:{ind.metric}" or ind.band_input == (ind.series_keys or [None])[0]
+        ) else []  # fmt: skip
+        extra = (
+            [win[0][1] - rule.dead_band, win[0][1] + rule.dead_band]
+            if win
+            else [e for _, b in on_chart if b for e in (b.lo, b.hi) if e is not None]
+        )
+        # a range open at one end shows a sliver past its edge, or a fast range at the axis's top would draw nothing
+        vals = [
+            v
+            for p in drawn
+            for v in (p["value"], p.get("low"), p.get("high"))
+            if v is not None and math.isfinite(v)
+        ]
+        vals += extra
+        reach = (max(vals) - min(vals)) * 0.08
+        extra += [b.lo + reach for _, b in on_chart if b and b.hi is None and b.lo is not None]
+        extra += [b.hi - reach for _, b in on_chart if b and b.lo is None and b.hi is not None]
+        xa = chart.time_axis(when)
+        ya = chart.axis(
+            [v for p in drawn for v in (p["value"], p.get("low"), p.get("high"))] + extra,
+            ind.unit,
+            log=log,
+            zero=not rule and not log,
+        )
+        left = Counter(win)  # a point is in the window when its (date, value) is; ties are identical readings
+        for d, p in zip(when, drawn):
+            p["x"], p["y"] = chart.x(d, xa["lo"], xa["hi"]), chart.y(p["value"], ya)
+            if all(
+                p.get(k) is not None and math.isfinite(p[k]) and (p[k] > 0 or not log)
+                for k in ("low", "high")
+            ):
+                p["y_low"], p["y_high"] = chart.y(p["low"], ya), chart.y(p["high"], ya)
+            if rule:
+                p["faint"] = not left[(d, p["value"])]
+                left[(d, p["value"])] -= 1
+        bands = [
+            {"name": name, "y": (top := chart.y(ya["hi"] if b.hi is None else b.hi, ya)),
+             "height": round(chart.y(ya["lo"] if b.lo is None else b.lo, ya) - top, 2)}
+            for name, b in on_chart if b
+        ]  # fmt: skip
+        dead = change = None
+        if rule and len(win) == rule.periods + 1:
+            (d0, base), (d1, last) = win[0], win[-1]
+            top, x0 = chart.y(base + rule.dead_band, ya), chart.x(d0, xa["lo"], xa["hi"])
+            dead = {
+                "x": x0,
+                "width": round(chart.x(d1, xa["lo"], xa["hi"]) - x0, 2),
+                "y": top,
+                "height": round(chart.y(base - rule.dead_band, ya) - top, 2),
+            }
+            steps = [b[1] - a[1] for a, b in zip(win, win[1:])]
+            change = {
+                "label": chart.change_label(last - base, ind.unit),
+                "dead_band": "±" + chart.change_label(rule.dead_band, ind.unit)[1:],
+                # the rule's second test: more than half the steps must move the way the window moved
+                "steps": f"{sum(1 for x in steps if x * (last - base) > 0)} of {len(steps)} steps "
+                + ("rose" if last > base else "fell"),
+            }
+        series = None if ind.metric else (ind.series_keys or [None])[0]
+        return {
+            "x": {"ticks": xa["ticks"]},
+            "y": {
+                **{k: ya[k] for k in ("ticks", "unit", "log")},
+                "chars": max(len(t["label"]) for t in ya["ticks"]),
+            },
+            "bands": bands,
+            "dead": dead,
+            "change": change,
+            "line": bool(rule)
+            and len(set(when)) == len(when),  # a single series in time order: join the dots
+            "drawn": {
+                "metric": ind.metric,
+                "series": series,
+                "others": len(ind.series_keys) - (1 if series else 0),
+                "total": len(ind.series_keys),
+            },
+            "needs": rule.periods + 1 if rule else None,  # readings the direction rule compares
+            "partial": any(p.get("partial") for p in drawn),
+            "n_drawn": len(drawn),
+            "stamps": sorted({p["stamp"] for p in drawn if p["stamp"]}, key=STAMPS.index),
+        }
+
     def headline(self, ind: Indicator) -> list[dict[str, Any]]:
         """Points for the indicator's chart: derived metric if set, else observations of the first series glob."""
         if ind.metric:
@@ -563,6 +695,7 @@ class Store:
                     "obs_ids": d.input_observation_ids,
                     "dims": d.dims,
                     "unit": ind.unit,
+                    "derived_id": d.id,
                 }
                 for d in self.derived_for(ind.metric, ind.metric_dims)
             ]
@@ -585,10 +718,13 @@ class Store:
                 (e for e in self.events if e.target_id == ind.id), key=lambda e: e.created_at, reverse=True
             )
             bv, b_as_of, b_ids, _ = self.band_input(ind)
+            pts = self.headline(ind)
             doc = {
                 **_jsonable(ind.model_dump()),
                 **cards[ind.id],
-                "points": self.headline(ind),
+                "points": pts,
+                "chart": self._chart(ind, pts),
+                "direction_readings": ind.direction_rule.periods + 1 if ind.direction_rule else None,
                 # the ids of the sources actually behind the rows: a series namespace is not always a source id
                 "source_ids": sorted({o["source_id"] for o in self.evidence_obs(ind)}),
                 "band_value": {
@@ -611,9 +747,7 @@ class Store:
                     if (r := self.derived_for(m, ind.metric_dims))
                 ],
                 "series": [{"series_key": k, "points": v} for k, v in sorted(series.items())],
-                "chart_sources": self._chart_sources(
-                    [i for p in self.headline(ind) for i in p["obs_ids"]], ind.metric
-                ),
+                "chart_sources": self._chart_sources([i for p in pts for i in p["obs_ids"]], ind.metric),
                 "confidence_basis": {
                     **self._confidence_basis(ind),
                     "stale_as_of": cards[ind.id]["stale_as_of"],
@@ -828,6 +962,7 @@ class Store:
                     "generated_at": datetime.now(timezone.utc).isoformat(),
                     "observations": self.con.execute("SELECT count(*) FROM observations").fetchone()[0],
                     "indicators_published": sum(1 for i in self.seed.indicators if i.published),
+                    "confidence_rubric": [{**b, "span": b["hi"] - b["lo"] + 1} for b in CONFIDENCE_RUBRIC],
                     "sources": len(self.seed.sources),
                 }
             )
@@ -872,7 +1007,7 @@ class Store:
             "band_value": band_value,
             "grade": _best_grade(ev_obs),
             "latest": latest,
-            "sparkline": pts[-24:],
+            "spark": _spark(pts),
             "stale_as_of": None if ind.stale_ok else stale,
             "stale_reason": ind.stale_reason,
             "pending": self._awaiting().get(ind.id),
@@ -1735,6 +1870,22 @@ def _band_text(b: Any) -> str:
 
 def _utc_naive(t: datetime) -> datetime:
     return t.astimezone(timezone.utc).replace(tzinfo=None) if t.tzinfo else t
+
+
+def _spark(pts: list[dict[str, Any]], w: float = 96, h: float = 28) -> dict[str, Any] | None:
+    """A card's sparkline as an SVG path in a w × h box: the last 24 readings, scaled to their own range."""
+    vs = [p["value"] for p in pts if p["value"] is not None][-24:]
+    if len(vs) < 2:
+        return None
+    lo, hi = min(vs), max(vs)
+    xy = [
+        (1 + i * (w - 2) / (len(vs) - 1), h / 2 if hi == lo else h - 2 - (v - lo) / (hi - lo) * (h - 4))
+        for i, v in enumerate(vs)
+    ]
+    return {
+        "d": " ".join(f"{'M' if i == 0 else 'L'}{a:.1f},{b:.1f}" for i, (a, b) in enumerate(xy)),
+        "end": [round(xy[-1][0], 1), round(xy[-1][1], 1)],
+    }
 
 
 def _point(o: dict[str, Any]) -> dict[str, Any]:

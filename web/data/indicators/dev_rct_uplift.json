@@ -17,6 +17,70 @@
  },
  "bucket_id": "products",
  "cadence_expected": "annual",
+ "chart": {
+  "bands": [],
+  "change": null,
+  "dead": null,
+  "drawn": {
+   "metric": null,
+   "others": 0,
+   "series": "metr_blog.rct_*.dev_speed_change.pt",
+   "total": 1
+  },
+  "line": false,
+  "n_drawn": 2,
+  "needs": null,
+  "partial": false,
+  "stamps": [
+   "measured"
+  ],
+  "x": {
+   "ticks": [
+    {
+     "label": "Jul 2025",
+     "minor": false,
+     "x": 3.16
+    },
+    {
+     "label": "Oct",
+     "minor": false,
+     "x": 39.53
+    },
+    {
+     "label": "2026",
+     "minor": false,
+     "x": 75.89
+    }
+   ]
+  },
+  "y": {
+   "chars": 4,
+   "log": false,
+   "ticks": [
+    {
+     "label": "-20%",
+     "y": 100.0
+    },
+    {
+     "label": "-15%",
+     "y": 75.0
+    },
+    {
+     "label": "-10%",
+     "y": 50.0
+    },
+    {
+     "label": "-5%",
+     "y": 25.0
+    },
+    {
+     "label": "0%",
+     "y": 0.0
+    }
+   ],
+   "unit": null
+  }
+ },
  "chart_sources": {
   "metric": null,
   "sources": [
@@ -58,6 +122,7 @@
  "definition": "Measured speed change for experienced developers using AI tools versus not, from METR's randomised trials. Negative means slower. The band applies to the newest estimate (Feb 2026, newly recruited developers).",
  "derived": [],
  "direction": null,
+ "direction_readings": null,
  "direction_rule": null,
  "evidence": [],
  "falsifying_band": null,
@@ -109,14 +174,18 @@
    ],
    "grade": "A",
    "high": null,
+   "href": "/series/metr_blog.rct_2025.dev_speed_change.pt#3b8cf0acd1ec2093",
    "low": null,
    "obs_ids": [
     "3b8cf0acd1ec2093"
    ],
    "series_key": "metr_blog.rct_2025.dev_speed_change.pt",
+   "stamp": "measured",
    "subject": "rct_2025",
    "unit": "share",
-   "value": -0.19
+   "value": -0.19,
+   "x": 2.77,
+   "y": 95.0
   },
   {
    "as_of": "2026-02-24",
@@ -127,14 +196,18 @@
    ],
    "grade": "A",
    "high": null,
+   "href": "/series/metr_blog.rct_2026.dev_speed_change.pt#432914bd5a0024ff",
    "low": null,
    "obs_ids": [
     "432914bd5a0024ff"
    ],
    "series_key": "metr_blog.rct_2026.dev_speed_change.pt",
+   "stamp": "measured",
    "subject": "rct_2026",
    "unit": "share",
-   "value": -0.04
+   "value": -0.04,
+   "x": 97.23,
+   "y": 20.0
   }
  ],
  "prediction_rows": [
@@ -239,44 +312,13 @@
  "source_ids": [
   "metr_blog"
  ],
- "sparkline": [
-  {
-   "as_of": "2025-06-30",
-   "dispute_text": "Sixteen experienced open-source maintainers working on their own large repositories with early-2025 tools; METR cautions against reading it as a general productivity effect.",
-   "disputed": true,
-   "flags": [
-    "disputed"
-   ],
-   "grade": "A",
-   "high": null,
-   "low": null,
-   "obs_ids": [
-    "3b8cf0acd1ec2093"
-   ],
-   "series_key": "metr_blog.rct_2025.dev_speed_change.pt",
-   "subject": "rct_2025",
-   "unit": "share",
-   "value": -0.19
-  },
-  {
-   "as_of": "2026-02-24",
-   "dispute_text": "METR itself calls this 'very weak evidence' because developers refusing the no-AI arm biases the sample.",
-   "disputed": true,
-   "flags": [
-    "disputed"
-   ],
-   "grade": "A",
-   "high": null,
-   "low": null,
-   "obs_ids": [
-    "432914bd5a0024ff"
-   ],
-   "series_key": "metr_blog.rct_2026.dev_speed_change.pt",
-   "subject": "rct_2026",
-   "unit": "share",
-   "value": -0.04
-  }
- ],
+ "spark": {
+  "d": "M1.0,26.0 L95.0,2.0",
+  "end": [
+   95.0,
+   2.0
+  ]
+ },
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,

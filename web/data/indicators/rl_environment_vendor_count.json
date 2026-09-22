@@ -17,6 +17,81 @@
  },
  "bucket_id": "return_arrow",
  "cadence_expected": "quarterly",
+ "chart": {
+  "bands": [
+   {
+    "height": 30.0,
+    "name": "normal",
+    "y": 70.0
+   },
+   {
+    "height": 25.0,
+    "name": "fast",
+    "y": 0.0
+   }
+  ],
+  "change": null,
+  "dead": null,
+  "drawn": {
+   "metric": null,
+   "others": 0,
+   "series": "rl_list.commercial.active_vendor_count.pt",
+   "total": 1
+  },
+  "line": false,
+  "n_drawn": 1,
+  "needs": null,
+  "partial": false,
+  "stamps": [
+   "reported"
+  ],
+  "x": {
+   "ticks": [
+    {
+     "label": "Jun 2026",
+     "minor": false,
+     "x": 4.17
+    },
+    {
+     "label": "Jul",
+     "minor": false,
+     "x": 35.42
+    },
+    {
+     "label": "Aug",
+     "minor": false,
+     "x": 67.71
+    }
+   ]
+  },
+  "y": {
+   "chars": 3,
+   "log": false,
+   "ticks": [
+    {
+     "label": "0",
+     "y": 100.0
+    },
+    {
+     "label": "50",
+     "y": 75.0
+    },
+    {
+     "label": "100",
+     "y": 50.0
+    },
+    {
+     "label": "150",
+     "y": 25.0
+    },
+    {
+     "label": "200",
+     "y": 0.0
+    }
+   ],
+   "unit": "count"
+  }
+ },
  "chart_sources": {
   "metric": null,
   "sources": [
@@ -64,6 +139,7 @@
  "definition": "Active commercial vendors in rl-list.com's directory of reinforcement-learning environment suppliers, at each directory release.",
  "derived": [],
  "direction": null,
+ "direction_readings": null,
  "direction_rule": null,
  "evidence": [],
  "falsifying_band": null,
@@ -107,14 +183,18 @@
    "disputed": false,
    "grade": "B",
    "high": null,
+   "href": "/series/rl_list.commercial.active_vendor_count.pt#9d5a213e73989490",
    "low": null,
    "obs_ids": [
     "9d5a213e73989490"
    ],
    "series_key": "rl_list.commercial.active_vendor_count.pt",
+   "stamp": "reported",
    "subject": "commercial",
    "unit": "count",
-   "value": 24.0
+   "value": 24.0,
+   "x": 50.0,
+   "y": 88.0
   }
  ],
  "prediction_rows": [],
@@ -157,22 +237,7 @@
  "source_ids": [
   "rl_list"
  ],
- "sparkline": [
-  {
-   "as_of": "2026-07-15",
-   "disputed": false,
-   "grade": "B",
-   "high": null,
-   "low": null,
-   "obs_ids": [
-    "9d5a213e73989490"
-   ],
-   "series_key": "rl_list.commercial.active_vendor_count.pt",
-   "subject": "commercial",
-   "unit": "count",
-   "value": 24.0
-  }
- ],
+ "spark": null,
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,

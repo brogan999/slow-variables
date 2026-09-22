@@ -35,6 +35,79 @@
  },
  "bucket_id": null,
  "cadence_expected": "weekly",
+ "chart": {
+  "bands": [],
+  "change": null,
+  "dead": null,
+  "drawn": {
+   "metric": "model_token_hhi_top10",
+   "others": 0,
+   "series": null,
+   "total": 0
+  },
+  "line": true,
+  "n_drawn": 2,
+  "needs": 5,
+  "partial": false,
+  "stamps": [
+   "measured"
+  ],
+  "x": {
+   "ticks": [
+    {
+     "label": "13 Sep 2026",
+     "minor": false,
+     "x": 11.11
+    },
+    {
+     "label": "15 Sep",
+     "minor": false,
+     "x": 33.33
+    },
+    {
+     "label": "17 Sep",
+     "minor": false,
+     "x": 55.56
+    },
+    {
+     "label": "19 Sep",
+     "minor": false,
+     "x": 77.78
+    }
+   ]
+  },
+  "y": {
+   "chars": 4,
+   "log": false,
+   "ticks": [
+    {
+     "label": "0.08",
+     "y": 100.0
+    },
+    {
+     "label": "0.09",
+     "y": 80.0
+    },
+    {
+     "label": "0.10",
+     "y": 60.0
+    },
+    {
+     "label": "0.11",
+     "y": 40.0
+    },
+    {
+     "label": "0.12",
+     "y": 20.0
+    },
+    {
+     "label": "0.13",
+     "y": 0.0
+    }
+   ],
+   "unit": "index"
+  }
+ },
  "chart_sources": {
   "metric": "model_token_hhi_top10",
   "sources": [
@@ -63,7 +136,7 @@
  "derived": [
   {
    "as_of_date": "2026-09-13",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "57e072016944906b",
@@ -118,7 +191,7 @@
   },
   {
    "as_of_date": "2026-09-20",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "effbd6df138272c4",
@@ -173,6 +246,7 @@
   }
  ],
  "direction": null,
+ "direction_readings": 5,
  "direction_rule": {
   "dead_band": 0.02,
   "higher_is": "concentrating",
@@ -188,6 +262,7 @@
  "id": "model_token_concentration",
  "latest": {
   "as_of": "2026-09-20",
+  "derived_id": "effbd6df138272c4",
   "dims": {},
   "obs_ids": [
    "0e8d524b845d0d1c",
@@ -226,7 +301,10 @@
  "points": [
   {
    "as_of": "2026-09-13",
+   "derived_id": "57e072016944906b",
    "dims": {},
+   "faint": false,
+   "href": "#d-57e072016944906b",
    "obs_ids": [
     "1047099a77d0ef37",
     "11fb748d66059705",
@@ -249,12 +327,18 @@
     "ed0f9366f51fcf34",
     "ed4aef3d5107870e"
    ],
+   "stamp": "measured",
    "unit": "index",
-   "value": 0.1015489305958837
+   "value": 0.1015489305958837,
+   "x": 11.11,
+   "y": 56.9
   },
   {
    "as_of": "2026-09-20",
+   "derived_id": "effbd6df138272c4",
    "dims": {},
+   "faint": false,
+   "href": "#d-effbd6df138272c4",
    "obs_ids": [
     "0e8d524b845d0d1c",
     "1a66e7046947e67f",
@@ -277,8 +361,11 @@
     "f61d6023c9f7e534",
     "f8cce0b3219c5b1e"
    ],
+   "stamp": "measured",
    "unit": "index",
-   "value": 0.0900372324658987
+   "value": 0.0900372324658987,
+   "x": 88.89,
+   "y": 79.93
   }
  ],
  "prediction_rows": [],
@@ -301,64 +388,13 @@
  "source_ids": [
   "openrouter_rankings"
  ],
- "sparkline": [
-  {
-   "as_of": "2026-09-13",
-   "dims": {},
-   "obs_ids": [
-    "1047099a77d0ef37",
-    "11fb748d66059705",
-    "30f2898b47b1d818",
-    "48bc5114d916e10b",
-    "7204a213e4b6c2fe",
-    "73ebceeec501e207",
-    "7f8204794c7a5105",
-    "7fd2f5f83874a6d2",
-    "9174bfe7c2fa7abc",
-    "9615adf621f2bfd5",
-    "b8212e03617ddb2f",
-    "c459a50d884fc0d9",
-    "c74700b8466662f6",
-    "dbf51f5cf3eb2675",
-    "dc63876d05ef6bca",
-    "e9c75172762897c7",
-    "eaa522a6e3fd6987",
-    "eb792b459b28410a",
-    "ed0f9366f51fcf34",
-    "ed4aef3d5107870e"
-   ],
-   "unit": "index",
-   "value": 0.1015489305958837
-  },
-  {
-   "as_of": "2026-09-20",
-   "dims": {},
-   "obs_ids": [
-    "0e8d524b845d0d1c",
-    "1a66e7046947e67f",
-    "1b3e413d582dffab",
-    "42258172c5f7790e",
-    "4be1895d03a81fca",
-    "53ecb77d7154e7cc",
-    "579dab429e0d8867",
-    "6bc2275ef005777e",
-    "701780a1ecfa5832",
-    "8084024731d84fd8",
-    "90c5cb14d2b4bce9",
-    "98a5cdc6113cfc19",
-    "9f1a63f73c1f15a2",
-    "b747ff015d15f489",
-    "baf6fcfd072e98d0",
-    "cea9224daeaefec3",
-    "df84ac213aaa4f5b",
-    "f33b11bea63d3c2a",
-    "f61d6023c9f7e534",
-    "f8cce0b3219c5b1e"
-   ],
-   "unit": "index",
-   "value": 0.0900372324658987
-  }
- ],
+ "spark": {
+  "d": "M1.0,2.0 L95.0,26.0",
+  "end": [
+   95.0,
+   26.0
+  ]
+ },
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,

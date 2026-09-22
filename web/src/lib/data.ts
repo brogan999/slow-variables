@@ -8,13 +8,25 @@ export type Point = {
   as_of: string; value: number | null; low?: number | null; high?: number | null; obs_ids: string[];
   subject?: string; unit?: string; disputed?: boolean; grade?: string; dims?: Record<string, string>; series_key?: string;
   flags?: string[]; dispute_text?: string | null;
+  // laid out by the export: the record, how firm the number is, and where the chart draws it (percent from top left)
+  href?: string | null; stamp?: Stamp | null; x?: number; y?: number; y_low?: number; y_high?: number; faint?: boolean; partial?: boolean;
+};
+export type Stamp = "measured" | "reported" | "estimate";
+export type Tick = { label: string; x?: number; y?: number; minor?: boolean };
+export type ChartT = {
+  x: { ticks: Tick[] }; y: { ticks: Tick[]; unit: string | null; log: boolean; chars: number };
+  bands: { name: "normal" | "fast"; y: number; height: number }[];
+  dead: { x: number; width: number; y: number; height: number } | null;
+  change: { label: string; dead_band: string; steps: string } | null; line: boolean; partial: boolean;
+  drawn: { metric: string | null; series: string | null; others: number; total: number }; needs: number | null;
+  n_drawn: number; stamps: Stamp[];
 };
 export type BandValue = { value: number; unit: string; as_of: string; obs_ids: string[] };
 export type Card = {
   unpublished_reason?: string | null; answers?: string[];
   id: string; name: string; bucket_id: string | null; layer_id: string | null; valve_measured: string | null;
   unit: string; published: boolean; status: string | null; confidence: number | null; leading_lagging: string | null;
-  grade: string | null; latest: Point | null; sparkline: Point[]; stale_as_of: string | null; stale_reason?: string | null; n_observations: number;
+  grade: string | null; latest: Point | null; spark: { d: string; end: [number, number] } | null; stale_as_of: string | null; stale_reason?: string | null; n_observations: number;
   pending?: { new_status: string; since: string } | null;
   source_cluster?: string | null; band_value?: BandValue | null;
 };
@@ -32,8 +44,8 @@ export type IndicatorDoc = Card & {
   proposed_status: string | null; override_note: string | null; timing_rationale?: string | null; related_bottlenecks: number[]; related_indicators: string[];
   related_predictions: string[]; updated_at: string;
   series: { series_key: string; points: Point[] }[];
-  derived: (Point & { metric: string; as_of_date: string; input_observation_ids: string[] })[];
-  status_events: StatusEvent[]; crosswalk: Crosswalk[]; evidence: Evidence[];
+  derived: (Point & { id: string; metric: string; as_of_date: string; input_observation_ids: string[] })[];
+  status_events: StatusEvent[]; crosswalk: Crosswalk[]; evidence: Evidence[]; chart: ChartT | null; direction_readings: number | null;
 };
 export type Bucket = { id: string; name: string; order: number; stock: string; valve: string; speed_limit: string };
 export type Tally = { scored: number; published: number; margin: number; only: string | null };
@@ -70,7 +82,8 @@ export const sources = () => read<Source[]>("sources.json");
 export type Skipped = { id: string; name: string; url: string | null; reason: string; attribution: string | null; people?: string[] };
 export const skippedSources = () => read<Skipped[]>("skipped_sources.json");
 export const changelog = () => read<StatusEvent[]>("changelog.json");
-export const meta = () => read<{ generated_at: string; observations: number; indicators_published: number; sources: number }>("meta.json");
+export type RubricBand = { lo: number; hi: number; label: string; span: number };
+export const meta = () => read<{ generated_at: string; observations: number; indicators_published: number; sources: number; confidence_rubric: RubricBand[] }>("meta.json");
 
 export { fmt, words } from "./format";
 export const obsIndex = () => read<Record<string, string>>("obs_index.json");

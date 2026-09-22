@@ -1,15 +1,13 @@
 import Link from "next/link";
 import { indicatorHref } from "@/lib/format";
-import { ConfidenceDial } from "@/components/ConfidenceDial";
-import { DirectionChart } from "@/components/DirectionChart";
+import { ConfidenceBar, rubricWords } from "@/components/ConfidenceBar";
 import { EvidenceLog } from "@/components/EvidenceLog";
-import { BandChart } from "@/components/BandChart";
-import { ChartSources } from "@/components/ChartSources";
+import { TimeChart } from "@/components/TimeChart";
 import { ChangelogList } from "@/components/Changelog";
 import { Num, ObsLinks } from "@/components/Provenance";
 import { ArticleLayout, MarginPanel } from "@/components/ArticleLayout";
 import { Grade, PendingNote, StatusChip } from "@/components/StatusChip";
-import { fmt, index, indicator, obsIndex, sources, words, type Band } from "@/lib/data";
+import { fmt, index, indicator, meta, obsIndex, sources, words, type Band } from "@/lib/data";
 
 export const dynamicParams = false;
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -20,7 +18,6 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export function generateStaticParams() { return index().indicators.filter((i) => i.published).map((i) => ({ slug: i.id })); }
 
 const band = (b: Band, unit: string) => (b ? [b.lo != null ? `≥ ${fmt(b.lo, unit)}` : null, b.hi != null ? `≤ ${fmt(b.hi, unit)}` : null].filter(Boolean).join(" and ") : "—");
-const RUBRIC = (c: number | null) => c === null ? "no status yet" : c >= 90 ? "multiple strong independent sources" : c >= 70 ? "good evidence, some ambiguity" : c >= 50 ? "mixed or hard to operationalise" : "limited or vague evidence";
 
 // Seed prose sometimes names a status as a `code_word`; readers see the word.
 const plain = (t: string | null | undefined) => (t ?? "").replace(/`([a-z_]+)`/g, (_, w: string) => w.replace(/_/g, " "));
@@ -35,7 +32,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
   const idx = obsIndex();
   const { buckets, layers, indicators } = index();
   const srcs = sources();
-  const bandOnChart = d.band_input && (d.band_input === `metric:${d.metric}` || d.band_input === d.series_keys[0]);
+  const rubric = meta().confidence_rubric;
   const bandUnit = d.band_value?.unit ?? d.unit;
   const current = d.status_events[0];
   const seriesSources = (d.source_ids ?? []).map((id) => srcs.find((s) => s.id === id)).filter(Boolean);
@@ -66,8 +63,8 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
           </MarginPanel>
           <MarginPanel title="The rule">
             {d.normal_band ? <p>Normal {band(d.normal_band, bandUnit)}; fast {band(d.fast_band, bandUnit)}{d.falsifying_band ? `; falsifying ${band(d.falsifying_band, bandUnit)}` : ""}. Between them it reads emerging.</p> : null}
-            {d.direction_rule ? <p>Direction over {d.direction_rule.periods} readings; moves under {fmt(d.direction_rule.dead_band, d.unit)} count as stable; higher means {d.direction_rule.higher_is}.</p> : null}
-            <p className="flex items-center gap-3"><ConfidenceDial value={d.confidence} size={40} /><span>Confidence {d.confidence ?? "—"} of 95: {RUBRIC(d.confidence)}. <Grade grade={d.grade} /></span></p>
+            {d.direction_rule ? <p>Direction over {d.direction_readings} readings; moves under {fmt(d.direction_rule.dead_band, d.unit)} count as stable; higher means {d.direction_rule.higher_is}.</p> : null}
+            <p className="flex items-center gap-3"><ConfidenceBar value={d.confidence} rubric={rubric} /><span>Confidence {d.confidence ?? "—"} of 95: {rubricWords(d.confidence, rubric)}. <Grade grade={d.grade} /></span></p>
             {d.leading_lagging ? <p>{d.timing_rationale}</p> : null}
             <p className="text-muted">Updated {d.updated_at}</p>
           </MarginPanel>
@@ -78,11 +75,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
         <section>
           <H2 id="reading">The reading</H2>
           <p className="font-serif text-[1.0625rem] leading-relaxed mb-6">{plain(d.tracker_interpretation)}</p>
-          <figure className="plate">
-            {d.direction_rule ? <DirectionChart points={d.points} unit={d.unit} rule={d.direction_rule} /> : <BandChart series={[{ name: d.name, points: d.points }]} unit={d.unit} log={d.unit === "minutes"} bands={bandOnChart ? { normal: d.normal_band, fast: d.fast_band } : null} />}
-            <figcaption className="mt-2 text-xs text-muted">{d.n_observations} observations; hollow points are disputed; every point links to its record.</figcaption>
-            <ChartSources cs={d.chart_sources} />
-          </figure>
+          <TimeChart d={d} />
           {d.override_note ? <p className="mt-3 text-sm text-ink-2">Override: {d.override_note}</p> : null}
         </section>
 
@@ -113,7 +106,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
               <div className="mt-4 overflow-x-auto">
                 <div className="text-xs text-muted mb-1">Model comparison (lower AIC fits better; both on ln(horizon) residuals)</div>
                 <table className="data w-full text-xs"><thead><tr><th scope="col">fit</th><th scope="col">estimate</th><th scope="col">95% interval</th><th scope="col">n</th><th scope="col">R²</th><th scope="col">AIC</th><th scope="col">inputs</th></tr></thead><tbody>
-                  {d.fits.map((f) => { const u = f.unit ?? "days"; const show = (v: number | null) => v == null ? "—" : u === "year" ? v.toFixed(1) : `${v.toFixed(0)} days`; return (
+                  {d.fits.map((f) => { const show = (v: number | null) => fmt(v, f.unit ?? "days"); return (
                     <tr key={f.metric}><td><code>{f.metric}</code></td><td className="tabular-nums">{show(f.value)}</td><td className="tabular-nums">{show(f.value_low)}–{show(f.value_high)}</td><td className="tabular-nums">{f.dims.n}</td><td className="tabular-nums">{f.dims.r2}</td><td className="tabular-nums">{f.dims.aic}</td><td><ObsLinks ids={f.obs_ids} obsIndex={idx} max={2} /></td></tr>
                   ); })}
                 </tbody></table>
@@ -121,7 +114,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
             ) : null}
             {d.derived.length ? <details className="mt-3 text-xs"><summary className="cursor-pointer text-ink-2">Derived rows ({d.derived.length})</summary>
               <table className="data w-full mt-1"><thead><tr><th scope="col">as of</th><th scope="col">dims</th><th scope="col">value</th><th scope="col">inputs</th></tr></thead><tbody>
-                {d.derived.slice().reverse().map((r) => <tr key={r.as_of_date + JSON.stringify(r.dims)}><td>{r.as_of_date}</td><td>{Object.values(r.dims ?? {}).join(" ")}</td><td className="tabular-nums">{fmt(r.value, d.unit)}</td><td><ObsLinks ids={r.obs_ids} obsIndex={idx} max={3} /></td></tr>)}
+                {d.derived.slice().reverse().map((r) => <tr key={r.id} id={`d-${r.id}`} className="scroll-mt-24 target:bg-surface-2"><td>{r.as_of_date}</td><td>{Object.values(r.dims ?? {}).join(" ")}</td><td className="tabular-nums">{fmt(r.value, d.unit)}</td><td><ObsLinks ids={r.obs_ids} obsIndex={idx} max={3} /></td></tr>)}
               </tbody></table></details> : null}
           </details>
           <details id="timeline">
@@ -144,7 +137,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
                 {d.confidence_basis.stale_as_of ? <>; stale since {d.confidence_basis.stale_as_of}</> : <>; current</>}.
               </p>
             ) : null}
-            <p className="mt-1 text-xs text-muted">Confidence is independent of status: 90–95 multiple strong independent sources; 70–89 good evidence, some ambiguity; 50–69 mixed or hard to operationalise; below 50 limited or vague.</p>
+            <p className="mt-1 text-xs text-muted">Confidence is independent of status: {rubric.slice().reverse().map((b) => `${b.lo}–${b.hi} ${b.label}`).join("; ")}.</p>
           </details>
           <details id="related">
             <summary className="cursor-pointer display text-xl">Related</summary>

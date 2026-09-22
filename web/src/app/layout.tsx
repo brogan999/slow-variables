@@ -4,6 +4,7 @@ import Link from "next/link";
 import "./globals.css";
 import { ChatDrawer } from "@/components/ChatDrawer";
 import { Freshness } from "@/components/Freshness";
+import { HoverLayer } from "@/components/HoverLayer";
 import { MobileNav, SiteNav } from "@/components/SiteNav";
 import { EVIDENCE } from "@/lib/nav";
 import { meta } from "@/lib/data";
@@ -55,6 +56,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </nav>
           </div>
         </footer>
+        <HoverLayer />
       </body>
     </html>
   );

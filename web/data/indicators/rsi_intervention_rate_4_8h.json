@@ -17,6 +17,77 @@
  },
  "bucket_id": "return_arrow",
  "cadence_expected": "quarterly",
+ "chart": {
+  "bands": [
+   {
+    "height": 16.67,
+    "name": "normal",
+    "y": 0.0
+   },
+   {
+    "height": 41.67,
+    "name": "fast",
+    "y": 58.33
+   }
+  ],
+  "change": null,
+  "dead": null,
+  "drawn": {
+   "metric": null,
+   "others": 0,
+   "series": "openai_blog.openai.rsi_intervention_rate_4_8h.pt",
+   "total": 1
+  },
+  "line": false,
+  "n_drawn": 1,
+  "needs": null,
+  "partial": false,
+  "stamps": [
+   "reported"
+  ],
+  "x": {
+   "ticks": [
+    {
+     "label": "Jul 2026",
+     "minor": false,
+     "x": 18.75
+    },
+    {
+     "label": "Aug",
+     "minor": false,
+     "x": 51.04
+    },
+    {
+     "label": "Sep",
+     "minor": false,
+     "x": 83.33
+    }
+   ]
+  },
+  "y": {
+   "chars": 3,
+   "log": false,
+   "ticks": [
+    {
+     "label": "0%",
+     "y": 100.0
+    },
+    {
+     "label": "20%",
+     "y": 66.67
+    },
+    {
+     "label": "40%",
+     "y": 33.33
+    },
+    {
+     "label": "60%",
+     "y": 0.0
+    }
+   ],
+   "unit": null
+  }
+ },
  "chart_sources": {
   "metric": null,
   "sources": [
@@ -58,6 +129,7 @@
  "definition": "Share of successful four-to-eight-hour agent tasks inside a frontier lab's research organisation that needed at least one human intervention. Today only OpenAI reports it, about itself, and only as 'over half'.",
  "derived": [],
  "direction": null,
+ "direction_readings": null,
  "direction_rule": null,
  "evidence": [],
  "falsifying_band": null,
@@ -109,14 +181,18 @@
    ],
    "grade": "D",
    "high": null,
+   "href": "/series/openai_blog.openai.rsi_intervention_rate_4_8h.pt#fcf1e544553a333f",
    "low": null,
    "obs_ids": [
     "fcf1e544553a333f"
    ],
    "series_key": "openai_blog.openai.rsi_intervention_rate_4_8h.pt",
+   "stamp": "reported",
    "subject": "openai",
    "unit": "share",
-   "value": 0.5
+   "value": 0.5,
+   "x": 50.0,
+   "y": 16.67
   }
  ],
  "prediction_rows": [],
@@ -171,26 +247,7 @@
  "source_ids": [
   "openai_blog"
  ],
- "sparkline": [
-  {
-   "as_of": "2026-07-31",
-   "dispute_text": "OpenAI measuring its own research organisation and publishing the result itself; no independent check (tier 7).",
-   "disputed": true,
-   "flags": [
-    "disputed"
-   ],
-   "grade": "D",
-   "high": null,
-   "low": null,
-   "obs_ids": [
-    "fcf1e544553a333f"
-   ],
-   "series_key": "openai_blog.openai.rsi_intervention_rate_4_8h.pt",
-   "subject": "openai",
-   "unit": "share",
-   "value": 0.5
-  }
- ],
+ "spark": null,
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,

@@ -17,6 +17,77 @@
  },
  "bucket_id": "adaptation",
  "cadence_expected": "annual",
+ "chart": {
+  "bands": [
+   {
+    "height": 33.33,
+    "name": "normal",
+    "y": 50.0
+   },
+   {
+    "height": 33.33,
+    "name": "fast",
+    "y": 0.0
+   }
+  ],
+  "change": null,
+  "dead": null,
+  "drawn": {
+   "metric": null,
+   "others": 1,
+   "series": "pwc.ai_skilled_workers.wage_premium.fy",
+   "total": 2
+  },
+  "line": false,
+  "n_drawn": 1,
+  "needs": null,
+  "partial": false,
+  "stamps": [
+   "reported"
+  ],
+  "x": {
+   "ticks": [
+    {
+     "label": "Dec 2025",
+     "minor": false,
+     "x": 18.75
+    },
+    {
+     "label": "2026",
+     "minor": false,
+     "x": 51.04
+    },
+    {
+     "label": "Feb",
+     "minor": false,
+     "x": 83.33
+    }
+   ]
+  },
+  "y": {
+   "chars": 4,
+   "log": false,
+   "ticks": [
+    {
+     "label": "0%",
+     "y": 100.0
+    },
+    {
+     "label": "50%",
+     "y": 66.67
+    },
+    {
+     "label": "100%",
+     "y": 33.33
+    },
+    {
+     "label": "150%",
+     "y": 0.0
+    }
+   ],
+   "unit": null
+  }
+ },
  "chart_sources": {
   "metric": null,
   "sources": [
@@ -70,6 +141,7 @@
  "definition": "Average wage premium for jobs requiring specific AI skills over comparable jobs without them, from PwC's Global AI Jobs Barometer (one billion job ads, 27 countries), with a press restatement alongside.",
  "derived": [],
  "direction": null,
+ "direction_readings": null,
  "direction_rule": null,
  "evidence": [],
  "falsifying_band": null,
@@ -121,14 +193,18 @@
    ],
    "grade": "D",
    "high": null,
+   "href": "/series/pwc.ai_skilled_workers.wage_premium.fy#3289e34cb683153a",
    "low": null,
    "obs_ids": [
     "3289e34cb683153a"
    ],
    "series_key": "pwc.ai_skilled_workers.wage_premium.fy",
+   "stamp": "reported",
    "subject": "ai_skilled_workers",
    "unit": "share",
-   "value": 0.62
+   "value": 0.62,
+   "x": 50.0,
+   "y": 58.67
   }
  ],
  "prediction_rows": [],
@@ -197,26 +273,7 @@
   "outsource_accelerator",
   "pwc"
  ],
- "sparkline": [
-  {
-   "as_of": "2025-12-31",
-   "dispute_text": "PwC compares pay in job postings that ask for AI skills with postings that do not: a posting premium, not a measured effect of AI on wages.",
-   "disputed": true,
-   "flags": [
-    "disputed"
-   ],
-   "grade": "D",
-   "high": null,
-   "low": null,
-   "obs_ids": [
-    "3289e34cb683153a"
-   ],
-   "series_key": "pwc.ai_skilled_workers.wage_premium.fy",
-   "subject": "ai_skilled_workers",
-   "unit": "share",
-   "value": 0.62
-  }
- ],
+ "spark": null,
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,

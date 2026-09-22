@@ -19,6 +19,77 @@
  },
  "bucket_id": "adaptation",
  "cadence_expected": "quarterly",
+ "chart": {
+  "bands": [
+   {
+    "height": 20.0,
+    "name": "normal",
+    "y": 80.0
+   },
+   {
+    "height": 33.33,
+    "name": "fast",
+    "y": 0.0
+   }
+  ],
+  "change": null,
+  "dead": null,
+  "drawn": {
+   "metric": "fda_llm_devices_count",
+   "others": 3,
+   "series": null,
+   "total": 3
+  },
+  "line": false,
+  "n_drawn": 1,
+  "needs": null,
+  "partial": false,
+  "stamps": [
+   "reported"
+  ],
+  "x": {
+   "ticks": [
+    {
+     "label": "Dec 2025",
+     "minor": false,
+     "x": 27.08
+    },
+    {
+     "label": "2026",
+     "minor": false,
+     "x": 59.38
+    },
+    {
+     "label": "Feb",
+     "minor": false,
+     "x": 91.67
+    }
+   ]
+  },
+  "y": {
+   "chars": 2,
+   "log": false,
+   "ticks": [
+    {
+     "label": "0",
+     "y": 100.0
+    },
+    {
+     "label": "5",
+     "y": 66.67
+    },
+    {
+     "label": "10",
+     "y": 33.33
+    },
+    {
+     "label": "15",
+     "y": 0.0
+    }
+   ],
+   "unit": "count"
+  }
+ },
  "chart_sources": {
   "metric": "fda_llm_devices_count",
   "sources": [
@@ -83,7 +154,7 @@
  "derived": [
   {
    "as_of_date": "2025-12-23",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "1",
    "id": "3429d58ec336b7fe",
@@ -104,6 +175,7 @@
   }
  ],
  "direction": null,
+ "direction_readings": null,
  "direction_rule": null,
  "evidence": [],
  "falsifying_band": null,
@@ -117,6 +189,7 @@
  "id": "fda_first_llm_device",
  "latest": {
   "as_of": "2025-12-23",
+  "derived_id": "3429d58ec336b7fe",
   "dims": {},
   "obs_ids": [
    "678d971e84b1de53",
@@ -141,14 +214,19 @@
  "points": [
   {
    "as_of": "2025-12-23",
+   "derived_id": "3429d58ec336b7fe",
    "dims": {},
+   "href": "#d-3429d58ec336b7fe",
    "obs_ids": [
     "678d971e84b1de53",
     "8da46094b2c903b1",
     "f98335f057fe8c67"
    ],
+   "stamp": "reported",
    "unit": "count",
-   "value": 1.0
+   "value": 1.0,
+   "x": 50.0,
+   "y": 93.33
   }
  ],
  "prediction_rows": [],
@@ -234,19 +312,7 @@
   "innolitics",
   "statnews"
  ],
- "sparkline": [
-  {
-   "as_of": "2025-12-23",
-   "dims": {},
-   "obs_ids": [
-    "678d971e84b1de53",
-    "8da46094b2c903b1",
-    "f98335f057fe8c67"
-   ],
-   "unit": "count",
-   "value": 1.0
-  }
- ],
+ "spark": null,
  "stale_as_of": null,
  "stale_ok": true,
  "stale_reason": "An event-driven count; it moves only when a new LLM-based device is authorised.",

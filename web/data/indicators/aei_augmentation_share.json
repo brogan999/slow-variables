@@ -17,6 +17,72 @@
  },
  "bucket_id": "early_adoption",
  "cadence_expected": "quarterly",
+ "chart": {
+  "bands": [
+   {
+    "height": 16.67,
+    "name": "normal",
+    "y": 0.0
+   },
+   {
+    "height": 66.67,
+    "name": "fast",
+    "y": 33.33
+   }
+  ],
+  "change": null,
+  "dead": null,
+  "drawn": {
+   "metric": null,
+   "others": 4,
+   "series": "anthropic_ei.global.augmentation_share.pt",
+   "total": 5
+  },
+  "line": false,
+  "n_drawn": 4,
+  "needs": null,
+  "partial": false,
+  "stamps": [
+   "reported"
+  ],
+  "x": {
+   "ticks": [
+    {
+     "label": "2026",
+     "minor": false,
+     "x": 23.9
+    },
+    {
+     "label": "Apr",
+     "minor": false,
+     "x": 67.8
+    }
+   ]
+  },
+  "y": {
+   "chars": 3,
+   "log": false,
+   "ticks": [
+    {
+     "label": "0%",
+     "y": 100.0
+    },
+    {
+     "label": "20%",
+     "y": 66.67
+    },
+    {
+     "label": "40%",
+     "y": 33.33
+    },
+    {
+     "label": "60%",
+     "y": 0.0
+    }
+   ],
+   "unit": null
+  }
+ },
  "chart_sources": {
   "metric": null,
   "sources": [
@@ -64,6 +130,7 @@
  "definition": "Share of classified Claude.ai conversations in the augmentation bucket (learning, task iteration, validation) versus automation (directive, feedback loop), computed from Anthropic's Economic Index open dataset for each 2026 release; the blog-reported shares and the share of occupations with at least a quarter of their tasks used are shown alongside.",
  "derived": [],
  "direction": null,
+ "direction_readings": null,
  "direction_rule": null,
  "evidence": [],
  "falsifying_band": null,
@@ -107,56 +174,72 @@
    "disputed": false,
    "grade": "B",
    "high": null,
+   "href": "/series/anthropic_ei.global.augmentation_share.pt#713109bb8bd3873e",
    "low": null,
    "obs_ids": [
     "713109bb8bd3873e"
    ],
    "series_key": "anthropic_ei.global.augmentation_share.pt",
+   "stamp": "reported",
    "subject": "global",
    "unit": "share",
-   "value": 0.5326
+   "value": 0.5326,
+   "x": 2.93,
+   "y": 11.23
   },
   {
    "as_of": "2026-02-11",
    "disputed": false,
    "grade": "B",
    "high": null,
+   "href": "/series/anthropic_ei.global.augmentation_share.pt#22c1000f899dffdd",
    "low": null,
    "obs_ids": [
     "22c1000f899dffdd"
    ],
    "series_key": "anthropic_ei.global.augmentation_share.pt",
+   "stamp": "reported",
    "subject": "global",
    "unit": "share",
-   "value": 0.5445
+   "value": 0.5445,
+   "x": 43.9,
+   "y": 9.25
   },
   {
    "as_of": "2026-04-30",
    "disputed": false,
    "grade": "B",
    "high": null,
+   "href": "/series/anthropic_ei.global.augmentation_share.pt#73edeb921df0ec08",
    "low": null,
    "obs_ids": [
     "73edeb921df0ec08"
    ],
    "series_key": "anthropic_ei.global.augmentation_share.pt",
+   "stamp": "reported",
    "subject": "global",
    "unit": "share",
-   "value": 0.5102
+   "value": 0.5102,
+   "x": 81.95,
+   "y": 14.97
   },
   {
    "as_of": "2026-05-31",
    "disputed": false,
    "grade": "B",
    "high": null,
+   "href": "/series/anthropic_ei.global.augmentation_share.pt#3c4c0eb291611df7",
    "low": null,
    "obs_ids": [
     "3c4c0eb291611df7"
    ],
    "series_key": "anthropic_ei.global.augmentation_share.pt",
+   "stamp": "reported",
    "subject": "global",
    "unit": "share",
-   "value": 0.5138
+   "value": 0.5138,
+   "x": 97.07,
+   "y": 14.37
   }
  ],
  "prediction_rows": [],
@@ -366,64 +449,13 @@
  "source_ids": [
   "anthropic_ei"
  ],
- "sparkline": [
-  {
-   "as_of": "2025-11-19",
-   "disputed": false,
-   "grade": "B",
-   "high": null,
-   "low": null,
-   "obs_ids": [
-    "713109bb8bd3873e"
-   ],
-   "series_key": "anthropic_ei.global.augmentation_share.pt",
-   "subject": "global",
-   "unit": "share",
-   "value": 0.5326
-  },
-  {
-   "as_of": "2026-02-11",
-   "disputed": false,
-   "grade": "B",
-   "high": null,
-   "low": null,
-   "obs_ids": [
-    "22c1000f899dffdd"
-   ],
-   "series_key": "anthropic_ei.global.augmentation_share.pt",
-   "subject": "global",
-   "unit": "share",
-   "value": 0.5445
-  },
-  {
-   "as_of": "2026-04-30",
-   "disputed": false,
-   "grade": "B",
-   "high": null,
-   "low": null,
-   "obs_ids": [
-    "73edeb921df0ec08"
-   ],
-   "series_key": "anthropic_ei.global.augmentation_share.pt",
-   "subject": "global",
-   "unit": "share",
-   "value": 0.5102
-  },
-  {
-   "as_of": "2026-05-31",
-   "disputed": false,
-   "grade": "B",
-   "high": null,
-   "low": null,
-   "obs_ids": [
-    "3c4c0eb291611df7"
-   ],
-   "series_key": "anthropic_ei.global.augmentation_share.pt",
-   "subject": "global",
-   "unit": "share",
-   "value": 0.5138
-  }
- ],
+ "spark": {
+  "d": "M1.0,10.3 L32.3,2.0 L63.7,26.0 L95.0,23.5",
+  "end": [
+   95.0,
+   23.5
+  ]
+ },
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,

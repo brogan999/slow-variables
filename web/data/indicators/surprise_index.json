@@ -18,6 +18,85 @@
  },
  "bucket_id": "methods",
  "cadence_expected": "annual",
+ "chart": {
+  "bands": [
+   {
+    "height": 60.0,
+    "name": "normal",
+    "y": 40.0
+   },
+   {
+    "height": 10.0,
+    "name": "fast",
+    "y": 0.0
+   }
+  ],
+  "change": null,
+  "dead": null,
+  "drawn": {
+   "metric": "surprise_index",
+   "others": 2,
+   "series": null,
+   "total": 2
+  },
+  "line": false,
+  "n_drawn": 1,
+  "needs": null,
+  "partial": false,
+  "stamps": [
+   "estimate"
+  ],
+  "x": {
+   "ticks": [
+    {
+     "label": "Jul 2026",
+     "minor": false,
+     "x": 18.75
+    },
+    {
+     "label": "Aug",
+     "minor": false,
+     "x": 51.04
+    },
+    {
+     "label": "Sep",
+     "minor": false,
+     "x": 83.33
+    }
+   ]
+  },
+  "y": {
+   "chars": 4,
+   "log": false,
+   "ticks": [
+    {
+     "label": "0%",
+     "y": 100.0
+    },
+    {
+     "label": "20%",
+     "y": 80.0
+    },
+    {
+     "label": "40%",
+     "y": 60.0
+    },
+    {
+     "label": "60%",
+     "y": 40.0
+    },
+    {
+     "label": "80%",
+     "y": 20.0
+    },
+    {
+     "label": "100%",
+     "y": 0.0
+    }
+   ],
+   "unit": null
+  }
+ },
  "chart_sources": {
   "metric": "surprise_index",
   "sources": [
@@ -75,7 +154,7 @@
  "derived": [
   {
    "as_of_date": "2026-07-31",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "1",
    "id": "7ffbab052765a202",
@@ -94,6 +173,7 @@
   }
  ],
  "direction": null,
+ "direction_readings": null,
  "direction_rule": null,
  "evidence": [],
  "falsifying_band": null,
@@ -107,6 +187,7 @@
  "id": "surprise_index",
  "latest": {
   "as_of": "2026-07-31",
+  "derived_id": "7ffbab052765a202",
   "dims": {},
   "obs_ids": [
    "86d58f4a839a1c59",
@@ -130,13 +211,18 @@
  "points": [
   {
    "as_of": "2026-07-31",
+   "derived_id": "7ffbab052765a202",
    "dims": {},
+   "href": "#d-7ffbab052765a202",
    "obs_ids": [
     "86d58f4a839a1c59",
     "8f07be35b7fe2867"
    ],
+   "stamp": "estimate",
    "unit": "share",
-   "value": 0.7
+   "value": 0.7,
+   "x": 50.0,
+   "y": 30.0
   }
  ],
  "prediction_rows": [],
@@ -215,18 +301,7 @@
   "ai2027_tracker",
   "aifutures_blog"
  ],
- "sparkline": [
-  {
-   "as_of": "2026-07-31",
-   "dims": {},
-   "obs_ids": [
-    "86d58f4a839a1c59",
-    "8f07be35b7fe2867"
-   ],
-   "unit": "share",
-   "value": 0.7
-  }
- ],
+ "spark": null,
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,

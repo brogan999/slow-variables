@@ -17,6 +17,77 @@
  },
  "bucket_id": "adaptation",
  "cadence_expected": "annual",
+ "chart": {
+  "bands": [
+   {
+    "height": 33.33,
+    "name": "normal",
+    "y": 66.67
+   },
+   {
+    "height": 16.67,
+    "name": "fast",
+    "y": 0.0
+   }
+  ],
+  "change": null,
+  "dead": null,
+  "drawn": {
+   "metric": null,
+   "others": 1,
+   "series": "nber.customer_support_agents.productivity_uplift.pt",
+   "total": 2
+  },
+  "line": false,
+  "n_drawn": 1,
+  "needs": null,
+  "partial": false,
+  "stamps": [
+   "estimate"
+  ],
+  "x": {
+   "ticks": [
+    {
+     "label": "Apr 2023",
+     "minor": false,
+     "x": 19.79
+    },
+    {
+     "label": "May",
+     "minor": false,
+     "x": 51.04
+    },
+    {
+     "label": "Jun",
+     "minor": false,
+     "x": 83.33
+    }
+   ]
+  },
+  "y": {
+   "chars": 3,
+   "log": false,
+   "ticks": [
+    {
+     "label": "0%",
+     "y": 100.0
+    },
+    {
+     "label": "20%",
+     "y": 66.67
+    },
+    {
+     "label": "40%",
+     "y": 33.33
+    },
+    {
+     "label": "60%",
+     "y": 0.0
+    }
+   ],
+   "unit": null
+  }
+ },
  "chart_sources": {
   "metric": null,
   "sources": [
@@ -59,6 +130,7 @@
  "definition": "Change in issues resolved per hour when support agents get a generative-AI assistant, from the Brynjolfsson, Li and Raymond field experiment (NBER WP 31161), with the novice effect and MIT Sloan's restatement shown alongside.",
  "derived": [],
  "direction": null,
+ "direction_readings": null,
  "direction_rule": null,
  "evidence": [],
  "falsifying_band": null,
@@ -102,14 +174,18 @@
    "disputed": false,
    "grade": "C",
    "high": null,
+   "href": "/series/nber.customer_support_agents.productivity_uplift.pt#15a42a777f78ef32",
    "low": null,
    "obs_ids": [
     "15a42a777f78ef32"
    ],
    "series_key": "nber.customer_support_agents.productivity_uplift.pt",
+   "stamp": "estimate",
    "subject": "customer_support_agents",
    "unit": "share",
-   "value": 0.14
+   "value": 0.14,
+   "x": 50.0,
+   "y": 76.67
   }
  ],
  "prediction_rows": [],
@@ -175,22 +251,7 @@
   "mitsloan",
   "nber"
  ],
- "sparkline": [
-  {
-   "as_of": "2023-04-30",
-   "disputed": false,
-   "grade": "C",
-   "high": null,
-   "low": null,
-   "obs_ids": [
-    "15a42a777f78ef32"
-   ],
-   "series_key": "nber.customer_support_agents.productivity_uplift.pt",
-   "subject": "customer_support_agents",
-   "unit": "share",
-   "value": 0.14
-  }
- ],
+ "spark": null,
  "stale_as_of": null,
  "stale_ok": true,
  "stale_reason": "A one-off field experiment; refreshed only when a comparable randomised study publishes.",

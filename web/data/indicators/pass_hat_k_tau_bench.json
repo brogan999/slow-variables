@@ -17,6 +17,85 @@
  },
  "bucket_id": "products",
  "cadence_expected": "quarterly",
+ "chart": {
+  "bands": [
+   {
+    "height": 70.0,
+    "name": "normal",
+    "y": 30.0
+   },
+   {
+    "height": 10.0,
+    "name": "fast",
+    "y": 0.0
+   }
+  ],
+  "change": null,
+  "dead": null,
+  "drawn": {
+   "metric": null,
+   "others": 3,
+   "series": "automation_anywhere.tau_bench_leaderboard_1.pass_hat_4.pt",
+   "total": 4
+  },
+  "line": false,
+  "n_drawn": 1,
+  "needs": null,
+  "partial": false,
+  "stamps": [
+   "reported"
+  ],
+  "x": {
+   "ticks": [
+    {
+     "label": "May 2026",
+     "minor": false,
+     "x": 32.29
+    },
+    {
+     "label": "Jun",
+     "minor": false,
+     "x": 64.58
+    },
+    {
+     "label": "Jul",
+     "minor": false,
+     "x": 95.83
+    }
+   ]
+  },
+  "y": {
+   "chars": 4,
+   "log": false,
+   "ticks": [
+    {
+     "label": "0%",
+     "y": 100.0
+    },
+    {
+     "label": "20%",
+     "y": 80.0
+    },
+    {
+     "label": "40%",
+     "y": 60.0
+    },
+    {
+     "label": "60%",
+     "y": 40.0
+    },
+    {
+     "label": "80%",
+     "y": 20.0
+    },
+    {
+     "label": "100%",
+     "y": 0.0
+    }
+   ],
+   "unit": null
+  }
+ },
  "chart_sources": {
   "metric": null,
   "sources": [
@@ -60,6 +139,7 @@
  "definition": "Share of tau-bench tasks an agent passes on every one of k attempts. The 2024 paper's gpt-4o figures (pass^1 61%, pass^8 under 25%) set the baseline; the 2026 point is the leaderboard leader's pass^1 and pass^4 as tabulated by Automation Anywhere.",
  "derived": [],
  "direction": null,
+ "direction_readings": null,
  "direction_rule": null,
  "evidence": [],
  "falsifying_band": null,
@@ -103,14 +183,18 @@
    "disputed": false,
    "grade": "D",
    "high": null,
+   "href": "/series/automation_anywhere.tau_bench_leaderboard_1.pass_hat_4.pt#77cbd0ec9267f9c7",
    "low": null,
    "obs_ids": [
     "77cbd0ec9267f9c7"
    ],
    "series_key": "automation_anywhere.tau_bench_leaderboard_1.pass_hat_4.pt",
+   "stamp": "reported",
    "subject": "tau_bench_leaderboard_1",
    "unit": "share",
-   "value": 0.562
+   "value": 0.562,
+   "x": 50.0,
+   "y": 43.8
   }
  ],
  "prediction_rows": [],
@@ -215,22 +299,7 @@
   "arxiv",
   "automation_anywhere"
  ],
- "sparkline": [
-  {
-   "as_of": "2026-05-18",
-   "disputed": false,
-   "grade": "D",
-   "high": null,
-   "low": null,
-   "obs_ids": [
-    "77cbd0ec9267f9c7"
-   ],
-   "series_key": "automation_anywhere.tau_bench_leaderboard_1.pass_hat_4.pt",
-   "subject": "tau_bench_leaderboard_1",
-   "unit": "share",
-   "value": 0.562
-  }
- ],
+ "spark": null,
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,

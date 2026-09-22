@@ -82,6 +82,22 @@ def test_capture_readings_meta_counts_and_chart_sources(tmp_path):
         ("margin_stack_series", "margin_stack_sources"),
     ):
         assert not cap[series] or cap[sources]["sources"], series
+    # every indicator chart is laid out by the export: ticks and marks inside the plot, every mark a record
+    for f in (d / "indicators").glob("*.json"):
+        doc = json.loads(f.read_text())
+        drawn = [p for p in doc["points"] if "x" in p]
+        assert bool(drawn) == bool(doc["chart"]), f.name
+        if not drawn:
+            continue
+        c = doc["chart"]
+        assert c["n_drawn"] == len(drawn) and len(c["y"]["ticks"]) >= 2, f.name
+        assert all(0 <= t["y"] <= 100 for t in c["y"]["ticks"]) and all(0 <= t["x"] <= 100 for t in c["x"]["ticks"])
+        for p in drawn:
+            assert all(0 <= p[k] <= 100 for k in ("x", "y", "y_low", "y_high") if k in p), (f.name, p)
+            # a reading links to its row; a number derived from several rows, to its derived row on this page
+            assert p["href"].startswith("/series/") or p["href"] == f"#d-{p['derived_id']}", (f.name, p)
+            assert p["stamp"] in ("measured", "reported", "estimate"), (f.name, p)
+        assert all(0 <= b["y"] and b["height"] >= 0 and b["y"] + b["height"] <= 100.01 for b in c["bands"]), f.name
     lad = json.loads((d / "lens" / "ladder.json").read_text())
     assert not any(r["production"] or r["research"] for r in lad["rungs"]) or lad["chart_sources"]["sources"]
 

@@ -21,6 +21,79 @@
  },
  "bucket_id": null,
  "cadence_expected": "quarterly",
+ "chart": {
+  "bands": [],
+  "change": {
+   "dead_band": "\u00b10.20",
+   "label": "\u22123.76",
+   "steps": "3 of 4 steps fell"
+  },
+  "dead": {
+   "height": 1.0,
+   "width": 78.79,
+   "x": 18.45,
+   "y": 87.5
+  },
+  "drawn": {
+   "metric": "vertical_vs_horizontal_apps",
+   "others": 0,
+   "series": null,
+   "total": 0
+  },
+  "line": true,
+  "n_drawn": 6,
+  "needs": 5,
+  "partial": true,
+  "stamps": [
+   "reported"
+  ],
+  "x": {
+   "ticks": [
+    {
+     "label": "Jul 2025",
+     "minor": false,
+     "x": 18.62
+    },
+    {
+     "label": "2026",
+     "minor": false,
+     "x": 50.34
+    },
+    {
+     "label": "Jul",
+     "minor": false,
+     "x": 81.55
+    }
+   ]
+  },
+  "y": {
+   "chars": 3,
+   "log": false,
+   "ticks": [
+    {
+     "label": "0\u00d7",
+     "y": 100.0
+    },
+    {
+     "label": "10\u00d7",
+     "y": 75.0
+    },
+    {
+     "label": "20\u00d7",
+     "y": 50.0
+    },
+    {
+     "label": "30\u00d7",
+     "y": 25.0
+    },
+    {
+     "label": "40\u00d7",
+     "y": 0.0
+    }
+   ],
+   "unit": null
+  }
+ },
  "chart_sources": {
   "metric": "vertical_vs_horizontal_apps",
   "sources": [
@@ -49,7 +122,7 @@
  "derived": [
   {
    "as_of_date": "2025-03-31",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "1",
    "id": "4ea2f7bd97e44421",
@@ -80,7 +153,7 @@
   },
   {
    "as_of_date": "2025-06-30",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "1",
    "id": "aeaeaf3a49f3e446",
@@ -117,7 +190,7 @@
   },
   {
    "as_of_date": "2025-09-30",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "1",
    "id": "78e77f08b7b90f0e",
@@ -154,7 +227,7 @@
   },
   {
    "as_of_date": "2025-12-31",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "1",
    "id": "c84de98567d9a770",
@@ -189,7 +262,7 @@
   },
   {
    "as_of_date": "2026-03-31",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "1",
    "id": "e6eaa38a7de3a518",
@@ -226,7 +299,7 @@
   },
   {
    "as_of_date": "2026-09-30",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "1",
    "id": "bdf252a75e3caefa",
@@ -253,6 +326,7 @@
   }
  ],
  "direction": null,
+ "direction_readings": 5,
  "direction_rule": {
   "dead_band": 0.2,
   "higher_is": "concentrating",
@@ -268,6 +342,7 @@
  "id": "vertical_vs_horizontal_apps",
  "latest": {
   "as_of": "2026-09-30",
+  "derived_id": "bdf252a75e3caefa",
   "dims": {},
   "obs_ids": [
    "4ee36a381bf7a709",
@@ -292,7 +367,10 @@
  "points": [
   {
    "as_of": "2025-03-31",
+   "derived_id": "4ea2f7bd97e44421",
    "dims": {},
+   "faint": true,
+   "href": "#d-4ea2f7bd97e44421",
    "obs_ids": [
     "01ea4c9da2ed9585",
     "2730c9ad654e49ef",
@@ -303,12 +381,18 @@
     "ba1c891cb9cc4aa8",
     "f8edabd4f56e7537"
    ],
+   "stamp": "reported",
    "unit": "ratio",
-   "value": 31.714925956746114
+   "value": 31.714925956746114,
+   "x": 2.76,
+   "y": 20.71
   },
   {
    "as_of": "2025-06-30",
+   "derived_id": "aeaeaf3a49f3e446",
    "dims": {},
+   "faint": false,
+   "href": "#d-aeaeaf3a49f3e446",
    "obs_ids": [
     "171e230553b41a5c",
     "1ba7108c020361c8",
@@ -322,12 +406,18 @@
     "dfb6dcb6578a4963",
     "f8edabd4f56e7537"
    ],
+   "stamp": "reported",
    "unit": "ratio",
-   "value": 4.799840387216872
+   "value": 4.799840387216872,
+   "x": 18.45,
+   "y": 88.0
   },
   {
    "as_of": "2025-09-30",
+   "derived_id": "78e77f08b7b90f0e",
    "dims": {},
+   "faint": false,
+   "href": "#d-78e77f08b7b90f0e",
    "obs_ids": [
     "021fc48d9f5c57ea",
     "171e230553b41a5c",
@@ -341,12 +431,18 @@
     "dfb6dcb6578a4963",
     "f8edabd4f56e7537"
    ],
+   "stamp": "reported",
    "unit": "ratio",
-   "value": 4.717020651126815
+   "value": 4.717020651126815,
+   "x": 34.31,
+   "y": 88.21
   },
   {
    "as_of": "2025-12-31",
+   "derived_id": "c84de98567d9a770",
    "dims": {},
+   "faint": false,
+   "href": "#d-c84de98567d9a770",
    "obs_ids": [
     "021fc48d9f5c57ea",
     "171e230553b41a5c",
@@ -359,12 +455,18 @@
     "d63ceef65148616b",
     "dfb6dcb6578a4963"
    ],
+   "stamp": "reported",
    "unit": "ratio",
-   "value": 1.6112695375646497
+   "value": 1.6112695375646497,
+   "x": 50.17,
+   "y": 95.97
   },
   {
    "as_of": "2026-03-31",
+   "derived_id": "e6eaa38a7de3a518",
    "dims": {},
+   "faint": false,
+   "href": "#d-e6eaa38a7de3a518",
    "obs_ids": [
     "021fc48d9f5c57ea",
     "171e230553b41a5c",
@@ -378,12 +480,18 @@
     "dfb6dcb6578a4963",
     "e70e4f4487065633"
    ],
+   "stamp": "reported",
    "unit": "ratio",
-   "value": 2.297649444366911
+   "value": 2.297649444366911,
+   "x": 65.69,
+   "y": 94.26
   },
   {
    "as_of": "2026-09-30",
+   "derived_id": "bdf252a75e3caefa",
    "dims": {},
+   "faint": false,
+   "href": "#d-bdf252a75e3caefa",
    "obs_ids": [
     "4ee36a381bf7a709",
     "93886e926dd246a7",
@@ -392,8 +500,12 @@
     "d63ceef65148616b",
     "e70e4f4487065633"
    ],
+   "partial": true,
+   "stamp": "reported",
    "unit": "ratio",
-   "value": 1.0425681266444398
+   "value": 1.0425681266444398,
+   "x": 97.24,
+   "y": 97.39
   }
  ],
  "prediction_rows": [],
@@ -415,113 +527,13 @@
  "source_ids": [
   "formd"
  ],
- "sparkline": [
-  {
-   "as_of": "2025-03-31",
-   "dims": {},
-   "obs_ids": [
-    "01ea4c9da2ed9585",
-    "2730c9ad654e49ef",
-    "39532a8ededb482c",
-    "8aea32b69fc79267",
-    "8e2f348da11c41bd",
-    "ae5e4a6a6a2e712e",
-    "ba1c891cb9cc4aa8",
-    "f8edabd4f56e7537"
-   ],
-   "unit": "ratio",
-   "value": 31.714925956746114
-  },
-  {
-   "as_of": "2025-06-30",
-   "dims": {},
-   "obs_ids": [
-    "171e230553b41a5c",
-    "1ba7108c020361c8",
-    "23cfc0b25ea90cf1",
-    "2730c9ad654e49ef",
-    "4cf34e73076c1eea",
-    "8aea32b69fc79267",
-    "8e2f348da11c41bd",
-    "ae5e4a6a6a2e712e",
-    "ba1c891cb9cc4aa8",
-    "dfb6dcb6578a4963",
-    "f8edabd4f56e7537"
-   ],
-   "unit": "ratio",
-   "value": 4.799840387216872
-  },
-  {
-   "as_of": "2025-09-30",
-   "dims": {},
-   "obs_ids": [
-    "021fc48d9f5c57ea",
-    "171e230553b41a5c",
-    "1ba7108c020361c8",
-    "23cfc0b25ea90cf1",
-    "2730c9ad654e49ef",
-    "4cf34e73076c1eea",
-    "8e2f348da11c41bd",
-    "ae5e4a6a6a2e712e",
-    "ba1c891cb9cc4aa8",
-    "dfb6dcb6578a4963",
-    "f8edabd4f56e7537"
-   ],
-   "unit": "ratio",
-   "value": 4.717020651126815
-  },
-  {
-   "as_of": "2025-12-31",
-   "dims": {},
-   "obs_ids": [
-    "021fc48d9f5c57ea",
-    "171e230553b41a5c",
-    "1ba7108c020361c8",
-    "23cfc0b25ea90cf1",
-    "2730c9ad654e49ef",
-    "4cf34e73076c1eea",
-    "9ab4c2103637ae6e",
-    "ba1c891cb9cc4aa8",
-    "d63ceef65148616b",
-    "dfb6dcb6578a4963"
-   ],
-   "unit": "ratio",
-   "value": 1.6112695375646497
-  },
-  {
-   "as_of": "2026-03-31",
-   "dims": {},
-   "obs_ids": [
-    "021fc48d9f5c57ea",
-    "171e230553b41a5c",
-    "1ba7108c020361c8",
-    "23cfc0b25ea90cf1",
-    "4cf34e73076c1eea",
-    "4ee36a381bf7a709",
-    "9ab4c2103637ae6e",
-    "ad9d9ef14b8eae98",
-    "d63ceef65148616b",
-    "dfb6dcb6578a4963",
-    "e70e4f4487065633"
-   ],
-   "unit": "ratio",
-   "value": 2.297649444366911
-  },
-  {
-   "as_of": "2026-09-30",
-   "dims": {},
-   "obs_ids": [
-    "4ee36a381bf7a709",
-    "93886e926dd246a7",
-    "9ab4c2103637ae6e",
-    "ad9d9ef14b8eae98",
-    "d63ceef65148616b",
-    "e70e4f4487065633"
-   ],
-   "unit": "ratio",
-   "value": 1.0425681266444398
-  }
- ],
+ "spark": {
+  "d": "M1.0,2.0 L19.8,23.1 L38.6,23.1 L57.4,25.6 L76.2,25.0 L95.0,26.0",
+  "end": [
+   95.0,
+   26.0
+  ]
+ },
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,

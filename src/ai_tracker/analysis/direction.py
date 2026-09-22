@@ -7,10 +7,15 @@ from datetime import date
 from ..schema import Direction, DirectionRule, Tier, cap_status_by_tier
 
 
+def window(points: list[tuple[date, float]], rule: DirectionRule) -> list[tuple[date, float]]:
+    """The readings the rule compares: the last `periods + 1` in date order. The chart draws the same window."""
+    return sorted(points)[-(rule.periods + 1) :]
+
+
 def direction(
     points: list[tuple[date, float]], rule: DirectionRule, best_tier: Tier = Tier.OFFICIAL_FILING
 ) -> Direction:
-    pts = sorted(points)[-(rule.periods + 1) :]
+    pts = window(points, rule)
     if len(pts) < rule.periods + 1:
         return Direction.not_yet_measurable
     delta = pts[-1][1] - pts[0][1]

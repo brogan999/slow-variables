@@ -58,7 +58,9 @@ def fmt(v: float | None, unit: str | None = None) -> str:
         return f"{_fixed(v / 60, 1)} h" if v >= 60 else f"{_sig(v)} min"
     if unit == "days":
         return f"{_fixed(v, 0)} days"
+    if unit == "year":  # a whole year reads whole; a fitted one keeps its tenth
+        return _fixed(v, 0) if v == int(v) else _fixed(v, 1)
     if unit == "count":
-        return _fixed(v, 0)
+        return f"{int(_fixed(v, 0)):,}" if abs(v) >= 1e4 else _fixed(v, 0)
     n = f"{int(_fixed(v, 0)):,}" if abs(v) >= 1e4 else _sig(v)
     return f"{n} {unit.replace('_', ' ')}" if unit else n
