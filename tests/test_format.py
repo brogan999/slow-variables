@@ -5,6 +5,7 @@ from ai_tracker.format import fmt
 
 TABLE = [
     (0.063, "share", "6.3%"),
+    (0.2247, "pts_a_year", "22.5 pts a year"),
     (-3.4, "pct_change_yoy", "-3.4%"),
     (172_000_000_000, "USD", "$172B"),
     (2_575_000_000, "USD", "$2.6B"),

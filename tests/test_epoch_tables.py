@@ -14,6 +14,7 @@ from ai_tracker.ingest.connectors.epoch_tables import (
     EpochDataCenters,
     EpochPrices,
 )
+from ai_tracker.schema import Tier
 
 
 def _item(body: bytes) -> RawItem:
@@ -72,7 +73,7 @@ def test_two_runs_of_one_model_version_on_one_day_are_both_kept():
     )
     c = EpochBench()
     arc = sorted(r.value_numeric for r in c.extract([_item(z)]) if r.series_key.endswith(".arc_agi_2.pt"))
-    assert arc == [0.8833, 0.9042] and not c.errors
+    assert arc == [0.8833, 0.9042] and not [e for e in c.errors if "two rows share" in e]
 
 
 def test_a_missing_or_reshaped_test_file_is_an_error_and_the_rest_still_read():
@@ -83,12 +84,44 @@ def test_a_missing_or_reshaped_test_file_is_an_error_and_the_rest_still_read():
     assert any("id" in e for e in c.errors) and any("cl_bench_external.csv" in e for e in c.errors)
 
 
-def test_the_same_row_twice_is_an_error_not_a_hidden_row():
-    c = EpochBench()
+def test_an_identical_repeat_is_one_row_and_a_conflicting_one_is_an_error():
     row = "gpt-6-astra_max,0.95,2026-09-03,OpenAI,GPT-6 Astra,,recA1\n"
+    c = EpochBench()  # SciCode's file repeats three rows word for word: one row, nothing to report
     z = _zip({ECI: ECI_ROWS, "arc_agi_2_external.csv": ARC_HEAD + row + row, "cl_bench_external.csv": CL})
     assert sum(r.series_key.endswith(".arc_agi_2.pt") for r in c.extract([_item(z)])) == 1
+    assert not [e for e in c.errors if "two rows share" in e]
+    c = EpochBench()  # the same run with a different score is a conflict the ledger would hide: say so
+    other = row.replace(",0.95,", ",0.91,")
+    z = _zip({ECI: ECI_ROWS, "arc_agi_2_external.csv": ARC_HEAD + row + other, "cl_bench_external.csv": CL})
+    assert sum(r.series_key.endswith(".arc_agi_2.pt") for r in c.extract([_item(z)])) == 1
     assert any("two rows share" in e for e in c.errors)
+
+
+def test_the_new_tests_are_read_with_their_keys_tiers_and_run_dates():
+    z = _zip(
+        {
+            ECI: ECI_ROWS,
+            "arc_agi_2_external.csv": ARC_HEAD,
+            "cl_bench_external.csv": CL,
+            # Epoch runs FrontierMath itself: tier 1, published when the run started
+            # (never before the model's release: a pre-release run is published on release day)
+            "frontiermath_tier_4_v2.csv": "Model version,mean_score,Best score (across scorers),Release date,Started at,id\n"
+            "gpt-6-astra_high,0.9,0.976,2026-09-03,2026-09-05T10:00:00,recF1\n"
+            "gpt-6-astra_low,0.8,0.9,2026-09-03,2026-08-20T10:00:00,recF2\n",
+            # FrontierSWE carries no row id: its model version and harness name the run
+            "frontierswe_external.csv": "Model version,Harness,Score,Release date,Name\n"
+            "gpt-6-astra_max,proximus,0.655,2026-09-03,GPT-6 Astra\ngpt-6-astra_max,codex,0.61,2026-09-03,GPT-6 Astra\n",
+        }
+    )
+    c = EpochBench()
+    rows = {r.series_key: r for r in c.extract([_item(z)])}
+    fm = rows["epoch_bench.gpt_6_astra_high_recf1.frontiermath_t4.pt"]
+    assert (fm.tier, fm.published_date, fm.value_numeric) == (Tier.BENCHMARK, date(2026, 9, 5), 0.976)
+    assert rows["epoch_bench.gpt_6_astra_low_recf2.frontiermath_t4.pt"].published_date == date(2026, 9, 3)
+    swe = rows["epoch_bench.gpt_6_astra_max_proximus.frontierswe.pt"]
+    assert swe.tier == Tier.PUBLISHED_ANALYSIS and "proximus" in swe.raw_snippet
+    assert rows["epoch_bench.gpt_6_astra_max_codex.frontierswe.pt"].value_numeric == 0.61  # a second harness, kept
+    assert any("apex_agents_external.csv" in e for e in c.errors)  # a file not in this zip is named, not fatal
 
 
 def test_chips_skip_incomplete_quarters_and_keep_ranges():

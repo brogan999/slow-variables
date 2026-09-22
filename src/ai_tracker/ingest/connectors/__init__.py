@@ -17,6 +17,7 @@ from .epoch_tables import (
 from .feeds import Feeds
 from .formd import FormD
 from .fred import Fred
+from .hal_reliability import HalReliability
 from .manual import Manual
 from .metr import Metr
 from .openrouter import OpenRouter
@@ -31,6 +32,7 @@ CONNECTORS = {
     c.source_id: c
     for c in (
         Metr,
+        HalReliability,
         Ramp,
         Canaries,
         Cait,

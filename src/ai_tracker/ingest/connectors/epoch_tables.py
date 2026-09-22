@@ -222,14 +222,26 @@ class EpochPrices(_EpochTable):
         return out
 
 
-EXTERNAL = (  # (member of benchmark_data.zip, measure, score column) for Epoch's compilations of external results
-    ("arc_agi_2_external.csv", "arc_agi_2", "Score"),
-    ("cl_bench_external.csv", "cl_bench", "Overall"),
+# (member of benchmark_data.zip, measure, score column, the column that names a run, tier). Epoch's compilations of
+# other groups' results are tier 6; a test Epoch runs itself is tier 1 and dated by when it ran. A file without
+# Epoch's row id is keyed on the model version, which is unique in it.
+EXTERNAL = (
+    ("arc_agi_2_external.csv", "arc_agi_2", "Score", "id", Tier.PUBLISHED_ANALYSIS),
+    ("cl_bench_external.csv", "cl_bench", "Overall", "id", Tier.PUBLISHED_ANALYSIS),
+    ("apex_agents_external.csv", "apex_agents", "Pass@1 score", "id", Tier.PUBLISHED_ANALYSIS),
+    ("posttrainbench_external.csv", "posttrainbench", "Average (%)", "id", Tier.PUBLISHED_ANALYSIS),
+    ("gdpval_external.csv", "gdpval", "Win Rate (%)", "id", Tier.PUBLISHED_ANALYSIS),
+    ("rli_external.csv", "rli", "Score", "id", Tier.PUBLISHED_ANALYSIS),
+    ("critpt_external.csv", "critpt", "Accuracy", "id", Tier.PUBLISHED_ANALYSIS),
+    ("frontierswe_external.csv", "frontierswe", "Score", "Harness", Tier.PUBLISHED_ANALYSIS),
+    ("scicode_external.csv", "scicode", "Score", "Model version", Tier.PUBLISHED_ANALYSIS),
+    ("frontiermath_tier_4_v2.csv", "frontiermath_t4", "Best score (across scorers)", "id", Tier.BENCHMARK),
 )
 
 
 class EpochBench(_EpochTable):
-    """Epoch Capabilities Index (Epoch-run: tier 1) with open/closed split, plus ARC-AGI-2 and CL-bench external results (tier 6)."""
+    """Epoch Capabilities Index (Epoch-run: tier 1) with open/closed split, FrontierMath Tier 4 (Epoch-run: tier 1),
+    and Epoch's compilations of external results (tier 6): the tests in EXTERNAL."""
 
     source_id = "epoch_bench"
     urls = ["https://epoch.ai/data/benchmark_data.zip"]
@@ -272,11 +284,12 @@ class EpochBench(_EpochTable):
                     value_high=_num(r.get("eci_ci_high")),
                 )
             )
-        seen: set[tuple[str, date]] = set()
-        for member, measure, col in EXTERNAL:
-            # keyed on Epoch's own row id: one model version recurs across evaluation runs (effort settings,
-            # re-tested snapshots), and two rows sharing a key and a date would hide each other in the ledger
-            self.member, self.columns = member, {"Model version", col, "Release date", "id"}
+        seen: dict[tuple[str, date], float] = {}
+        for member, measure, col, run, tier in EXTERNAL:
+            # keyed on Epoch's own row id, or on the column that names a run where a file has none (FrontierSWE's
+            # harness): one model version recurs across evaluation runs (effort settings, re-tested snapshots, harnesses),
+            # and two rows sharing a key and a date would hide each other in the ledger
+            self.member, self.columns = member, {"Model version", col, "Release date", run}
             try:  # one missing or reshaped file must not stop the index and the other tests
                 rows = self.rows(item)
             except LayoutChanged as e:
@@ -286,11 +299,15 @@ class EpochBench(_EpochTable):
                 d, v = _date(r.get("Release date", "")), _num(r.get(col))
                 if not d or v is None:
                     continue
-                key = series_key("epoch_bench", f"{r['Model version']}_{r['id']}", measure, "pt")
-                if (key, d) in seen:
-                    self.errors.append(f"{member}: two rows share {key} on {d}")
+                name = r["Model version"] if run == "Model version" else f"{r['Model version']}_{r[run]}"
+                key = series_key("epoch_bench", name, measure, "pt")
+                if (key, d) in seen:  # an identical repeat is one row; two different scores are a conflict
+                    if seen[(key, d)] != v:
+                        self.errors.append(f"{member}: two rows share {key} on {d}")
                     continue
-                seen.add((key, d))
+                seen[(key, d)] = v
+                # Epoch's own run is published when it ran, but never before the model it scores was released
+                ran = max(_date(r.get("Started at", "")[:10]) or d, d) if tier == Tier.BENCHMARK else None
                 out.append(
                     self.emit(
                         item,
@@ -299,9 +316,11 @@ class EpochBench(_EpochTable):
                         "share",
                         d,
                         v,
-                        Tier.PUBLISHED_ANALYSIS,
+                        tier,
                         Basis.reported,
-                        ["Model version", "Name", col, "Release date", "Organization", "Cost per task", "id"],
+                        ["Model version", "Name", col, "Release date", "Organization", "Cost per task", "id"]
+                        + [c for c in ("Scaffold", "Harness", "Started at", "Source") if c in r],
+                        **({"published_date": ran} if ran else {}),
                     )
                 )
         return out

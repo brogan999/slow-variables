@@ -110,6 +110,15 @@ def test_capture_readings_meta_counts_and_chart_sources(tmp_path):
             assert p["href"].startswith("/series/") or p["href"] == f"#d-{p['derived_id']}", (f.name, p)
             assert p["stamp"] in ("measured", "reported", "estimate"), (f.name, p)
         assert all(0 <= b["y"] and b["height"] >= 0 and b["y"] + b["height"] <= 100.01 for b in c["bands"]), f.name
+    # every capability signpost is a test the seed names, placed on its percent scale, with its newest row by it
+    sp = json.loads((d / "signposts.json").read_text())
+    named = {t["test"] for t in __import__("yaml").safe_load(open("seed/signposts.yaml"))["tests"]}
+    for t in sp["tests"]:
+        assert t["test"] in named and 0 <= t["x"] <= 100 and t["newest"] >= t["as_of"] and t["href"], t
+    if sp["reliability"]:
+        assert all(0 <= p["x"] <= 100 and 0 <= p["y"] <= 100 and p["href"] for p in sp["reliability"]["points"])
+        for t in sp["reliability"]["trends"]:  # a trend stays on the plot and its record is its row in the figure
+            assert all(0 <= t[k] <= 100 for k in ("x1", "y1", "x2", "y2", "label_y")) and t["href"] == f"#d-{t['id']}"
     lad = json.loads((d / "lens" / "ladder.json").read_text())
     assert not any(r["production"] or r["research"] for r in lad["rungs"]) or lad["chart_sources"]["sources"]
 

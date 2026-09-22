@@ -5,6 +5,7 @@ export function fmt(v: number | null | undefined, unit?: string): string {
   if (v === null || v === undefined || Number.isNaN(v)) return "—";
   switch (unit) {
     case "share": return `${(v * 100).toFixed(1)}%`;
+    case "pts_a_year": return `${(v * 100).toFixed(1)} pts a year`; // a share's slope per year, never a percentage rise
     case "pct": case "pct_change_yoy": case "pct_change_qoq_saar": return `${v.toFixed(1)}%`;
     case "USD": case "usd": {
       const a = Math.abs(v);

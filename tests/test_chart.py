@@ -3,7 +3,7 @@
 from datetime import date
 
 from ai_tracker.analysis.direction import window
-from ai_tracker.chart import axis, change_label, time_axis, x, y
+from ai_tracker.chart import axis, change_label, spread, time_axis, x, y
 from ai_tracker.schema import Basis, DirectionRule, Extraction, Tier, stamp
 
 
@@ -93,3 +93,8 @@ def test_the_chart_draws_the_window_the_rule_compares():
     rule = DirectionRule(periods=2, dead_band=0.1, higher_is="concentrating", rationale="test rationale here")
     pts = [(date(2026, m, 1), float(m)) for m in (3, 1, 2, 4)]
     assert window(pts, rule) == [(date(2026, 2, 1), 2.0), (date(2026, 3, 1), 3.0), (date(2026, 4, 1), 4.0)]
+
+
+def test_spread_places_nothing_when_there_is_nothing_to_label():
+    assert spread([], 10.0) == []  # a figure whose derived rows are not built yet (CI runs before evaluate)
+    assert spread([50.0, 52.0], 10.0) == [50.0, 60.0]

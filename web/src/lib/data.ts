@@ -185,3 +185,18 @@ export type ArgumentDoc = {
   sources: { who: string; work: string; where: string; url: string }[];
 };
 export const argument = () => read<ArgumentDoc>("argument.json");
+
+export type SignpostTest = {
+  test: string; name: string; what: string; whose: string; value: number; unit: string; as_of: string; obs_ids: string[];
+  href: string | null; stamp: Stamp | null; newest: string; stale: boolean; x: number;
+};
+export type HalPoint = { measure: "accuracy" | "reliability"; unit: string; as_of: string; value: number; obs_ids: string[]; label: string; x: number; y: number; href: string | null };
+export type HalTrend = {
+  id: string; measure: "accuracy" | "reliability"; value: number; label: string; as_of: string; n: number; obs_ids: string[]; href: string;
+  x1: number; y1: number; x2: number; y2: number; label_y: number;
+};
+export type Signposts = {
+  stale_after_days: number; tests: SignpostTest[]; axis: { ticks: Tick[] }; chart_sources: ChartSourcesT;
+  reliability: { points: HalPoint[]; trends: HalTrend[]; x: { ticks: Tick[] }; y: Axis; stamps: Stamp[]; chart_sources: ChartSourcesT } | null;
+};
+export const signposts = () => read<Signposts>("signposts.json");

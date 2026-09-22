@@ -79,3 +79,26 @@ def test_artificial_analysis_extracts_three_measures_per_model():
         int(keys["aa.o3_mini.intelligence_index.pt"].tier) == 1
         and int(keys["aa.o3_mini.price_blended_usd_per_mtok.pt"].tier) == 3
     )
+
+
+def test_hal_reads_every_reliability_dimension_and_accuracy_per_agent():
+    from ai_tracker.ingest.connectors.hal_reliability import HalReliability
+
+    body = Path("tests/fixtures/hal_reliability_min.html").read_bytes()
+    rows = HalReliability().extract([item(body, "https://hal.cs.princeton.edu/reliability/")])
+    keys = {(r.series_key, str(r.as_of_date), r.value_numeric) for r in rows}
+    assert ("hal_reliability.claude_opus_4_5.reliability.pt", "2025-11-24", 0.86) in keys
+    assert ("hal_reliability.gpt_5_5.accuracy.pt", "2026-04-23", 0.79) in keys
+    assert len(rows) == 12 and all(r.tier == 1 for r in rows)  # five dimensions and accuracy, two agents
+    assert not {v for *_, v in keys} & {0.11, 0.12}  # the all-benchmarks view, read by name, not the first one listed
+    assert all(r.published_date == r.retrieved_at.date() for r in rows)  # published when fetched, not at release
+
+
+def test_hal_without_its_chart_data_is_a_layout_change():
+    import pytest
+
+    from ai_tracker.ingest.base import LayoutChanged
+    from ai_tracker.ingest.connectors.hal_reliability import HalReliability
+
+    with pytest.raises(LayoutChanged):
+        HalReliability().extract([item(b"<html>redesigned</html>", "https://hal.cs.princeton.edu/reliability/")])

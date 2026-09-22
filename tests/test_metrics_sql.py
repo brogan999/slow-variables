@@ -490,3 +490,43 @@ def test_the_runner_drops_a_period_still_running(tmp_path):
     sql = "SELECT DATE '2026-06-30' AS as_of_date, 1.0 AS value, ['o1'] AS obs_ids UNION ALL SELECT current_date + 30, 2.0, ['o2']"
     spec.write_text(yaml.safe_dump({"metrics": {"q": {"inputs": ["x.*.m.q"], "formula_version": 1, "sql": sql}}}))
     assert [r.as_of_date for r in run_metrics(con, spec)] == [date(2026, 6, 30)]
+
+
+def test_benchmark_frontier_keeps_records_per_test_and_cites_the_row_that_set_each():
+    rows = [
+        ("a1", "epoch_bench.m1.apex_agents.pt", "m1", "2026-01-01", 0.40, ""),
+        ("a2", "epoch_bench.m2.apex_agents.pt", "m2", "2026-02-01", 0.35, ""),  # no record: below the best so far
+        ("a3", "epoch_bench.m3.apex_agents.pt", "m3", "2026-03-01", 0.55, ""),
+        ("a4", "epoch_bench.m4.apex_agents.pt", "m4", "2026-03-01", 0.55, ""),  # a tie on the record's day: smallest id
+        ("h1", "hal_reliability.m1.accuracy.pt", "m1", "2026-01-15", 0.60, ""),
+        ("h2", "hal_reliability.m1.reliability.pt", "m1", "2026-01-15", 0.80, ""),  # an index, not tasks solved
+        ("x1", "epoch_bench.m1.eci_closed.pt", "m1", "2026-01-01", 150.0, ""),  # not a test this metric reads
+    ]
+    got = sorted(run("benchmark_frontier", rows))
+    assert [(str(d), t, v, ids) for d, t, v, ids in got] == [
+        ("2026-01-01", "epoch_bench.apex_agents", 0.40, ["a1"]),
+        ("2026-01-15", "hal_reliability.accuracy", 0.60, ["h1"]),
+        ("2026-03-01", "epoch_bench.apex_agents", 0.55, ["a3"]),
+    ]
+
+
+def test_hal_trend_is_the_least_squares_slope_per_year_for_each_score():
+    from datetime import date, timedelta
+
+    start = date(2024, 1, 1)
+    at = lambda k: str(start + timedelta(days=round(365.25 * k / 2)))  # noqa: E731, one agent every half year
+    acc = [0.3, 0.4, 0.5, 0.6, 1.0]  # off the line at the end: least squares gives 0.32 a year, the endpoints 0.35
+    rows = [(f"a{k}", f"hal_reliability.m{k}.accuracy.pt", f"m{k}", at(k), v, "") for k, v in enumerate(acc)]
+    # reliability has five agents but one is disputed, so four remain: too few for a line
+    rows += [(f"r{k}", f"hal_reliability.m{k}.reliability.pt", f"m{k}", at(k), 0.8, "") for k in range(5)]
+    con = duckdb.connect()
+    con.execute(
+        "CREATE TABLE obs_raw (id VARCHAR, series_key VARCHAR, subject VARCHAR, as_of_date DATE, value_numeric DOUBLE, raw_snippet VARCHAR, disputed BOOLEAN)"
+    )
+    con.executemany("INSERT INTO obs_raw VALUES (?, ?, ?, ?, ?, ?, false)", rows)
+    con.execute("UPDATE obs_raw SET disputed = true WHERE id = 'r4'")
+    con.execute(KEY_SPLIT)
+    got = con.execute(METRICS["hal_trend_per_year"]["sql"]).fetchall()
+    assert [(str(d), m, round(v, 3), ids) for d, m, v, ids in got] == [
+        ("2025-12-31", "accuracy", 0.32, ["a0", "a1", "a2", "a3", "a4"])
+    ]

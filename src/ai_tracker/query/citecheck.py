@@ -47,8 +47,8 @@ class Result:
 def _candidates(v: float, unit: str) -> list[float]:
     """Every rendering the site could give a value, in base units the extractor also produces."""
     out = {v}
-    if unit == "share":
-        out.add(v * 100)  # 0.063 renders as 6.3%
+    if unit in ("share", "pts_a_year"):
+        out.add(v * 100)  # 0.063 renders as 6.3%; a slope of 0.225 as 22.5 pts a year
     if unit in ("minutes",):
         out.add(v / 60)  # 186 min renders as 3.1 h
     if unit in ("days",):

@@ -895,6 +895,7 @@ class Store:
         _write(out / "ledger.json", self._ledger())
         _write(out / "stack.json", self._stack(cards))
         _write(out / "lens" / "ladder.json", self._ladder())
+        _write(out / "signposts.json", self._signposts())
         _write(out / "analyses.json", self._analyses())
         from .memo import load_memos
 
@@ -1078,7 +1079,10 @@ class Store:
                     [
                         i
                         for ind in self.seed.indicators
-                        if ind.published and ind.bucket_id and not ind.direction_rule and cards[ind.id].get("latest")
+                        if ind.published
+                        and ind.bucket_id
+                        and not ind.direction_rule
+                        and cards[ind.id].get("latest")
                         for i in cards[ind.id]["latest"]["obs_ids"]
                     ]
                 )["sources"]
@@ -1400,6 +1404,125 @@ class Store:
             for a in spec
         ]
 
+    def _signposts(self) -> dict[str, Any]:
+        """Capability signposts (Part 11, section B): each test's record on one percent scale with the date of its
+        newest row, so a record nobody has challenged in a year shows as stale; and HAL's accuracy and reliability
+        for each agent by release date. No status: a signpost is dated and tested only through claims."""
+        spec = yaml.safe_load((SEED / "signposts.yaml").read_text())
+        rows = self.derived_for("benchmark_frontier")
+        newest = {
+            f"{ns}.{m}": d
+            for ns, m, d in self.con.execute(
+                "SELECT source_ns, measure, max(as_of_date) FROM observations WHERE source_ns IN "
+                "('epoch_bench', 'hal_reliability') AND grain = 'pt' AND NOT coalesce(disputed, false) GROUP BY 1, 2"
+            ).fetchall()
+        }
+        today, tests = date.today(), []
+        for t in spec["tests"]:
+            recs = [r for r in rows if r.dims.get("test") == t["test"]]
+            if not recs:
+                continue
+            rec, new = recs[-1], newest[t["test"]]
+            tests.append(
+                {
+                    **t,
+                    "value": rec.value,
+                    "unit": "share",
+                    "as_of": rec.as_of_date.isoformat(),
+                    "obs_ids": rec.input_observation_ids,
+                    "href": self.href_of(rec.input_observation_ids),
+                    "stamp": self.stamp_of(rec.input_observation_ids),
+                    "newest": new.isoformat(),
+                    "stale": (today - new).days > spec["stale_after_days"],
+                    "x": round(100 * rec.value, 2),
+                }
+            )
+        tests.sort(key=lambda t: (-t["value"], t["test"]))  # the jagged edge, from furthest along to least
+        return {
+            "stale_after_days": spec["stale_after_days"],
+            "tests": tests,
+            "axis": {"ticks": [{"x": v, "label": f"{v}%"} for v in (0, 25, 50, 75, 100)]},
+            "reliability": self._hal_gap(),
+            "chart_sources": self._chart_sources(
+                [i for t in tests for i in t["obs_ids"]], "benchmark_frontier"
+            ),
+        }
+
+    def _hal_gap(self) -> dict[str, Any] | None:
+        """HAL's accuracy and overall reliability for each agent, by its model's release, with a straight-line trend
+        through each. Both run from 0 to 1 but measure different things, so the figure is read by its slopes, not its
+        heights. Each line runs through the mean of exactly the rows `hal_trend_per_year` fitted, at that slope, and
+        its record is a row of the figure's own table (`#d-<derived id>`)."""
+        pts = [
+            {
+                "measure": m,
+                "unit": unit,
+                "as_of": d.isoformat(),
+                "value": v,
+                "obs_ids": [i],
+                "label": json.loads(snip).get("label") or sub,  # HAL's own name for the agent, not our slug
+            }
+            for i, sub, m, unit, d, v, snip in self.con.execute(
+                "SELECT id, subject, measure, unit, as_of_date, value_numeric, raw_snippet FROM observations "
+                "WHERE source_ns = 'hal_reliability' AND measure IN ('accuracy', 'reliability') "
+                "AND value_numeric IS NOT NULL AND NOT coalesce(disputed, false) ORDER BY as_of_date, subject, measure"
+            ).fetchall()
+        ]
+        if not pts:
+            return None
+        trends = []
+        for d in {d.dims["measure"]: d for d in self.derived_for("hal_trend_per_year")}.values():
+            fitted = set(d.input_observation_ids)
+            mine = [p for p in pts if p["obs_ids"][0] in fitted]
+            if not mine:
+                continue
+            days = [date.fromisoformat(p["as_of"]).toordinal() for p in mine]
+            # a least-squares line runs through the mean of the points it was fitted to
+            mid, ybar = sum(days) / len(days), sum(p["value"] for p in mine) / len(mine)
+            trends.append(
+                {
+                    "id": d.id,
+                    "measure": d.dims["measure"],
+                    "value": d.value,
+                    "label": chart.change_label(d.value, "share") + " a year",
+                    "as_of": d.as_of_date.isoformat(),
+                    "n": len(mine),
+                    "obs_ids": d.input_observation_ids,
+                    "href": f"#d-{d.id}",
+                    "ends": [(t, ybar + d.value * (t - mid) / 365.25) for t in (min(days), max(days))],
+                }
+            )
+        xa = chart.time_axis([date.fromisoformat(p["as_of"]) for p in pts])
+        ya = chart.axis(
+            [p["value"] for p in pts] + [v for t in trends for _, v in t["ends"]], "index", zero=True
+        )
+        for p in pts:
+            p["x"] = chart.x(date.fromisoformat(p["as_of"]), xa["lo"], xa["hi"])
+            p["y"] = chart.y(p["value"], ya)
+            p["href"] = self.href_of(p["obs_ids"])
+        for t in trends:
+            (t1, v1), (t2, v2) = t.pop("ends")
+            t["x1"], t["y1"] = chart.x(date.fromordinal(t1), xa["lo"], xa["hi"]), chart.y(v1, ya)
+            t["x2"], t["y2"] = chart.x(date.fromordinal(t2), xa["lo"], xa["hi"]), chart.y(v2, ya)
+        trends.sort(key=lambda t: t["y2"])
+        for t, y in zip(trends, chart.spread([t["y2"] for t in trends], 16.0)):  # two-line labels
+            t["label_y"] = y
+        return {
+            "points": pts,
+            "trends": trends,
+            "x": {"ticks": xa["ticks"]},
+            "y": {
+                "ticks": ya["ticks"],
+                "log": ya["log"],
+                "unit": "score, 0 to 1",
+                "chars": max(len(t["label"]) for t in ya["ticks"]),
+            },
+            "stamps": sorted({self.stamp_of(p["obs_ids"]) for p in pts} - {None}, key=STAMPS.index),
+            "chart_sources": self._chart_sources(
+                [i for p in pts for i in p["obs_ids"]], "hal_trend_per_year"
+            ),
+        }
+
     def _ladder(self) -> dict[str, Any]:
         """Appendix E rungs with the production and research rows that sit on each, plus the current level."""
         rungs = (yaml.safe_load((SEED / "ladder.yaml").read_text()) or {}).get("rungs", [])
@@ -1416,7 +1539,8 @@ class Store:
                     "obs_id": r[0],
                     "subject": r[1].split(".")[1],
                     # a product row is its company's name; a research row is its paper's subject, in words
-                    "name": (names.get(r[2]) if not research else None) or r[1].split(".")[1].replace("_", " "),
+                    "name": (names.get(r[2]) if not research else None)
+                    or r[1].split(".")[1].replace("_", " "),
                     "href": self.href_of([r[0]]),
                     "entity_id": r[2],
                     "as_of": r[3].isoformat(),

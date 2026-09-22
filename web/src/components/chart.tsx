@@ -36,13 +36,13 @@ export function Marks({ children }: { children: React.ReactNode }) {
 // One reading: a dot inside a hit target three times its size, linked to its record. `tip` is what the hover layer
 // shows and what a screen reader hears. Every mark ships focusable with a <title>, so with JavaScript off each is
 // reachable and shows its tip; HoverLayer then makes the group one tab stop (at `stop`) and draws its own tip.
-export function Mark({ p, tip, stop, hollow = false, dashed = false, faint = false, r = 4, stroke = "var(--s1)" }: {
-  p: Pick<Point, "x" | "y" | "href">; tip: string; stop: boolean; hollow?: boolean; dashed?: boolean; faint?: boolean; r?: number; stroke?: string;
+export function Mark({ p, tip, stop, hollow = false, dashed = false, faint = false, r = 4, stroke = "var(--s1)", fill }: {
+  p: Pick<Point, "x" | "y" | "href">; tip: string; stop: boolean; hollow?: boolean; dashed?: boolean; faint?: boolean; r?: number; stroke?: string; fill?: string;
 }) {
   const body = (
     <>
       <circle cx={`${p.x}%`} cy={`${p.y}%`} r={Math.max(12, r * 3)} fill="transparent" />
-      <circle cx={`${p.x}%`} cy={`${p.y}%`} r={r} fill={hollow || dashed ? "var(--surface)" : stroke} stroke={stroke} strokeWidth="1.5" strokeDasharray={dashed ? "2 1.5" : undefined} opacity={faint ? 0.35 : 1} />
+      <circle cx={`${p.x}%`} cy={`${p.y}%`} r={r} fill={hollow || dashed ? "var(--surface)" : (fill ?? stroke)} stroke={stroke} strokeWidth="1.5" strokeDasharray={dashed ? "2 1.5" : undefined} opacity={faint ? 0.35 : 1} />
     </>
   );
   return <Linked href={p.href} tip={tip} stop={stop}>{body}</Linked>;
