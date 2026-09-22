@@ -5,7 +5,7 @@ import { ContextFigures } from "@/components/ContextFigure";
 import { Folios, Inline, parseEssay } from "@/components/Essay";
 import { Agreements, cites, FalsifierBoard, FolioPositions, OutlookMargin, OutlookSources, ScenarioGrid } from "@/components/OutlookParts";
 import { JaggedFrontier, ReliabilityGap } from "@/components/Signposts";
-import { context, outlook, signposts } from "@/lib/data";
+import { bottleneckMap, context, outlook, signposts } from "@/lib/data";
 import { SITE } from "@/lib/site";
 
 const title = "What happens from here";
@@ -20,13 +20,14 @@ export const metadata = {
 export default function OutlookPage() {
   const doc = outlook();
   const sp = signposts();
+  const rows = Object.fromEntries(bottleneckMap().groups.flatMap((g) => g.sections.flatMap((s) => s.rows.map((r) => [r.id, r.name]))));
   const { title: h1, lede, folios } = parseEssay(doc.essay);
   const plates = {
     reliability: sp.reliability ? <ReliabilityGap doc={sp} /> : null,
     frontier: <JaggedFrontier doc={sp} />,
     adoption: <ContextFigures figures={context().figures.filter((f) => f.id === "adoption_measures")} />,
     stack: <StackPlate />,
-    scenarios: <ScenarioGrid doc={doc} />,
+    scenarios: <ScenarioGrid doc={doc} rows={rows} />,
     board: <FalsifierBoard doc={doc} />,
   };
   const after = (label: string, i: number) => {
@@ -47,7 +48,7 @@ export default function OutlookPage() {
     >
       <Folios folios={folios} facts={doc.facts} plates={plates} cites={cites(doc)} tests={doc.tests} after={after} />
       <p className="mt-12 font-serif text-[1.0625rem] leading-relaxed text-ink-2 max-w-[62ch]">
-        Read next: <Link href="/bottlenecks" className="underline decoration-axis underline-offset-2 hover:decoration-ink">the bottleneck map</Link>, where these claims mark the stage each expects to bind, and <Link href="/argument" className="underline decoration-axis underline-offset-2 hover:decoration-ink">the argument</Link> this site tests.
+        Read next: <Link href="/bottlenecks" className="underline decoration-axis underline-offset-2 hover:decoration-ink">the bottleneck map</Link>, where the claims that say something will bind mark the stage they expect it at, and <Link href="/argument" className="underline decoration-axis underline-offset-2 hover:decoration-ink">the argument</Link> this site tests.
       </p>
       <section id="sources" className="mt-20 border-t border-grid pt-8 scroll-mt-8">
         <h2 className="display text-[1.5rem] mb-4">Sources</h2>

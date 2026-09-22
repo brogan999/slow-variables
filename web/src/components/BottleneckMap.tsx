@@ -10,7 +10,8 @@ const KIND: Record<string, string> = { supply: "supply", know_how: "know-how", m
 
 // A cell's marks are shapes, so no meaning rides on colour: a filled square where the row acts on this stage and the
 // site measures the row, an open square where nothing the site reads measures it, a hatched square for each named
-// writer who expects the row to bind here, and a plus where the stage is this site's placement, not an author's.
+// writer, or this site, that expects the row to bind here, and a plus where the stage is this site's placement, not an
+// author's. A claim about what happens on a row without saying it binds is listed under the row and marks no cell.
 function Glyph({ kind }: { kind: "measured" | "unmeasured" | "writer" }) {
   return (
     <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden className="inline-block align-middle">
@@ -84,7 +85,7 @@ export function BottleneckMap({ doc }: { doc: MapDoc }) {
       keys={<>
         <Key swatch={<Glyph kind="measured" />}>acts on this stage, and the site measures it</Key>
         <Key swatch={<Glyph kind="unmeasured" />}>acts on it, but nothing the site reads measures it</Key>
-        <Key swatch={<Glyph kind="writer" />}>a named writer expects it to bind here, one square each</Key>
+        <Key swatch={<Glyph kind="writer" />}>a named writer, or this site, expects it to bind here, one square each</Key>
         <Key swatch={<span className="num text-[12px] text-ink-2">+</span>}>placed at this stage by this site, not by the author</Key>
       </>}
       foot={<>
@@ -145,6 +146,7 @@ export function MapReasons({ doc }: { doc: MapDoc }) {
                 {r.claims.length ? (
                   <p><span className="text-ink">Expected:</span> {r.claims.map((w, k) => <span key={k}>{k ? " " : ""}{w.who}: &ldquo;{w.text}&rdquo; <Link href={w.href} prefetch={false} className={link}>{CLAIM_WORDS[w.state] ?? words(w.state)}</Link>.</span>)}</p>
                 ) : null}
+                {r.note ? <p className="text-muted">{r.note}</p> : null}
                 {r.domains && Object.keys(r.domains).length ? (
                   <p><span className="text-ink">Their barriers by domain:</span> {Object.entries(r.domains).map(([d, ids], k) => <span key={d}>{k ? "; " : ""}{d} {ids.map((n, j) => <span key={n}>{j ? " " : ""}<a href={`#b${n}`} className={link}>{n}</a></span>)}</span>)}</p>
                 ) : null}

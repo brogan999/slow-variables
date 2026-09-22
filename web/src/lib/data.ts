@@ -218,7 +218,7 @@ export type MapReading =
   | { kind: "withheld"; because: string | null; tag: string | null; kind_of_tight: string }
   | { kind: "tally"; instruments: number; fast: number; normal: number; other: number; readings: number };
 export type MapRow = {
-  id: string; name: string; what?: string; reads?: string | null; family?: string; source?: string; href: string | null;
+  id: string; name: string; what?: string; reads?: string | null; note?: string | null; family?: string; source?: string; href: string | null;
   layer?: { id: string; name: string }; sublayer?: { id: string; name: string } | null;
   reading: MapReading; cells: Record<string, MapCell>; claims: MapWriter[]; domains?: Record<string, number[]>;
   instruments: { label: string; href: string | null; status?: string | null; unpublished?: boolean }[];

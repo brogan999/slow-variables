@@ -1,5 +1,7 @@
 """The outlook's claim states are pure: a claim is tested on made-up facts, never on a live store."""
 
+from datetime import date
+
 from ai_tracker.outlook import claims, problems, state
 
 F = {
@@ -65,6 +67,9 @@ SPEC = {
             "work": "w",
             "year": 2026,
             "url": "https://ex.test",
+            "retrieved_at": date(2026, 9, 22),
+            "http_status": 200,
+            "content_hash": "0" * 64,
             "quote": "research moves at the pace of its slowest task",
         }
     ],
@@ -104,7 +109,9 @@ def test_a_ledger_that_cannot_resolve_names_each_problem():
             {
                 **SPEC["sources"][0],
                 "quote": "one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen",
-            }
+            },
+            {**SPEC["sources"][0], "id": "gone", "http_status": 403},
+            {**SPEC["sources"][0], "id": "unread", "content_hash": None},
         ],
         "positions": [
             {"id": "slow", "folio": "later", "holders": ["nobody"], "attribution": "author", "rival": "ghost"}
@@ -117,6 +124,8 @@ def test_a_ledger_that_cannot_resolve_names_each_problem():
     errs = problems(bad, F, {"pretraining"}, {"methods"})
     for needle in (
         "quotes fifteen words",
+        "gone answered 403 when fetched",
+        "unread has no fetch record",
         "unknown folio",
         "unknown source nobody",
         "no rival position",
@@ -257,3 +266,11 @@ def test_no_sentence_was_split_by_a_comma_in_a_flow_mapping():
                 yield from keys(v)
 
     assert [k for k in keys(ol.load()) if " " in str(k)] == []  # {text: a, b} parses as text "a" and a key "b"
+
+
+def test_every_fact_a_claim_reads_links_to_a_record():
+    import yaml
+
+    analyses = {a["metric"] for a in yaml.safe_load(open("seed/analyses.yaml"))["analyses"]}
+    missing = sorted({f["metric"] for f in ol.load()["facts"].values() if "metric" in f} - analyses)
+    assert missing == [], missing  # a metric fact links to /query#<metric>, which only an analyses row puts there

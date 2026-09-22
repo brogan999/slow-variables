@@ -1,14 +1,15 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-/* The prototype's research-note look, re-stepped by the dataviz validator: text is always ink; the three role hues
-   (binding orange, faster violet, slower teal) mark data only and pass colour-blind checks together on white. */
+/* The prototype's research-note look, re-stepped by the dataviz validator: text is always ink; violet (faster) and teal
+   (slower) mark data only, orange appears only as the one-hue tightness ramp, and they pass colour-blind checks together
+   on white and on the ground. */
 :root {
   color-scheme: light;
   --background: #f2f0ec; --surface: #ffffff; --surface-2: #e7e4de;
   --ink: #161d22; --ink-2: #3a454d; --muted: #56626a;
   --grid: #d2cec6; --axis: #b6b1a7; --hairline: rgba(22, 29, 34, 0.14);
-  --fast: #4a3aa7; --slow: #00897b; --bind: #c06818;
+  --fast: #4a3aa7; --slow: #00897b;
   --s1: #161d22; --s2: #36444f; --s3: #9dadb9;
   --tight-1: #de9a5e; --tight-2: #cf7b36; --tight-3: #b8621a; --tight-4: #8f4a12; --tight-5: #66330c;
   --error: #9b2c2c;
@@ -26,7 +27,7 @@
   --color-destructive: var(--error); --color-error: var(--error);
   --color-border: var(--grid); --color-input: var(--ink-2); --color-ring: var(--ink);
   --color-ink: var(--ink); --color-ink-2: var(--ink-2); --color-grid: var(--grid); --color-axis: var(--axis);
-  --color-fast: var(--fast); --color-slow: var(--slow); --color-bind: var(--bind);
+  --color-fast: var(--fast); --color-slow: var(--slow);
   --color-s1: var(--s1); --color-s2: var(--s2); --color-s3: var(--s3);
   --color-tight-1: var(--tight-1); --color-tight-2: var(--tight-2); --color-tight-3: var(--tight-3); --color-tight-4: var(--tight-4); --color-tight-5: var(--tight-5);
   --font-sans: var(--font-archivo), "Helvetica Neue", Arial, sans-serif;

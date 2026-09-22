@@ -2,7 +2,7 @@ import Link from "next/link";
 export const metadata = { title: "How to read this", description: "What a reading is, what the status words mean, when a reading is held back, and how every number links to its source." };
 
 import { PageHeader } from "@/components/PageHeader";
-import { argument, skippedSources, sources } from "@/lib/data";
+import { argument, meta, skippedSources, sources } from "@/lib/data";
 import { fmt } from "@/lib/format";
 
 const TIERS: [string, string, string][] = [
@@ -50,7 +50,7 @@ export default function Methodology() {
       <H>Bands</H>
       <p>Each diffusion indicator names the single series or derived metric its bands apply to (shown as &ldquo;applied to&rdquo; on the indicator page), a normal band anchored on the pace of an earlier general-purpose technology at the same age, a fast band anchored on the pace the AI 2027 scenario needs, and where one exists a falsifying threshold. The rationale is written next to the numbers. Bands change only through a reviewed pull request that states why; the evaluator never moves them.</p>
       <H>Confidence, 0–95, independent of status</H>
-      <p>90–95 multiple strong independent sources; 70–89 good evidence with some ambiguity; 50–69 mixed or hard to operationalise; below 50 limited or vague.</p>
+      <p>{meta().confidence_rubric.slice().reverse().map((b, i) => <span key={b.lo}>{i ? "; " : ""}<span className="num">{b.lo}–{b.hi}</span> {b.label}</span>)}.</p>
       <H id="framing">How we frame value capture</H>
       <p>The capture lens asks who keeps the value AI creates. Five ideas organise the reading, and none of them supplies a number. <strong>The value stick:</strong> a transaction creates value between what a buyer would pay and what a supplier would accept, and each firm keeps the slice it can defend against rivals, buyers and suppliers (Brandenburger and Stuart, 1996). <strong>Schumpeterian profits:</strong> innovators have kept only a small share of the surplus their innovations create, and most of it reaches users (Nordhaus, 2004). <strong>Complementary assets:</strong> when imitation is easy, the owners of distribution, manufacturing, data and customer relationships capture the profits rather than the inventor (Teece, 1986). <strong>Installation and deployment:</strong> a technological revolution&apos;s installation period, financed by speculative capital, ends in a turning point, after which the technology spreads through the wider economy (Perez, 2002). <strong>Kinds of rent:</strong> scarcity rents on a constrained input, scale and network rents, switching-cost rents and regulatory rents, which <Link href="/argument/migration" className="underline decoration-grid underline-offset-4">migrate as bottlenecks move</Link>. The Ask model is given the same framing and may use it to organise an answer, never as the source of a figure.</p>
       <H>Discipline, enforced in code</H>
@@ -108,7 +108,7 @@ export default function Methodology() {
         </div>
       </details>
       <H id="map">The bottleneck map</H>
-      <p><Link href="/bottlenecks" className="underline decoration-grid underline-offset-4">The bottleneck map</Link> lays the chain of inputs AI is made from, and the frictions Arvind Narayanan and Sayash Kapoor describe beyond it, against the stages of diffusion. On that page a bottleneck is whatever sets the pace, a scarce input upstream or a slow institution downstream. Each row prints today&apos;s reading once: an input&apos;s tightness score, or, for a friction, how many of its published indicators read faster than normal, normal or neither. A cell carries marks, never a colour: the row acts on that stage; nothing this site reads measures it; a named writer, or this site, expects it to bind there; the writers split. Where a stage is this site&apos;s placement rather than the author&apos;s, the cell says so.</p>
+      <p><Link href="/bottlenecks" className="underline decoration-grid underline-offset-4">The bottleneck map</Link> lays the chain of inputs AI is made from, and the frictions Arvind Narayanan and Sayash Kapoor describe beyond it, against the stages of diffusion. On that page a bottleneck is whatever sets the pace, a scarce input upstream or a slow institution downstream. Each row prints today&apos;s reading once: an input&apos;s tightness score, or, for a friction, how many of its published indicators read faster than normal, normal or neither. A cell carries marks, never a colour: the row acts on that stage; nothing this site reads measures it; a named writer, or this site, expects it to bind there, one mark each. A claim about what happens on a row that does not say the row will bind, such as who gains or loses, is listed under the row and marks no cell. Where a stage is this site&apos;s placement rather than the author&apos;s, the cell says so.</p>
       <H id="signposts">Signposts</H>
       <p>Some readings are dated records of what AI can do, such as the best score on each capability test, or how fast agents grow more accurate against how fast they grow more reliable. They carry no faster-or-slower status, because nobody has yet defended a normal pace for them. They are tested only through the claims on the outlook page.</p>
       <H id="outlook">Claims about what happens next</H>
@@ -119,6 +119,7 @@ export default function Methodology() {
       <ul className="list-disc pl-5 flex flex-col gap-2">
         <li><strong className="font-medium">Return on capital against its cost, by layer.</strong> Invested capital is not filed by segment, the labs publish neither capital employed nor a cost of capital, and any cost of capital would be our assumption laid on theirs.</li>
         <li><strong className="font-medium">Markups.</strong> The marginal cost of a token is not public, and list prices are not transaction prices.</li>
+        <li><strong className="font-medium">Abilities no public, dated test reads.</strong> Reasoning about cause and effect, memory that lasts from one session to the next, whether a model knows when it is wrong, how far training on generated data can go, whether models do what their makers intend, and sudden jumps in ability. The outlook makes no claim about them until a test does; the nearest readings are named where they exist, such as the predictability score inside the reliability index kept by HAL, Princeton&apos;s tracker of AI agents, and a benchmark of learning inside one task, which is not memory across sessions.</li>
         <li><strong className="font-medium">Anything that needs paid data.</strong> Lab and app gross margins, GPU rental prices, private valuations between rounds and market-wide round data are paywalled; each affected indicator says so on /indicators, and the paid sources are listed on /sources.</li>
       </ul>
       <H id="privacy">Privacy</H>
