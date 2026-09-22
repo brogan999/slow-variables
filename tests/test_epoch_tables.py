@@ -33,8 +33,8 @@ def test_bench_splits_eci_by_accessibility_and_reads_external_scores():
         {
             "epoch_capabilities_index/eci_scores.csv": "Model,Display name,eci,eci_ci_low,eci_ci_high,date,Organization,Accessibility group\n"
             "gpt-6-astra,GPT-6 Astra,166.57,160,170,2026-09-03,OpenAI,Closed weights\nkimi-k3,Kimi K3,150.1,145,155,2026-05-01,Moonshot,Open weights\n",
-            "arc_agi_2_external.csv": "Model version,Score,Release date,Organization,Name,Cost per task\ngpt-6-astra_max,0.95,2026-09-03,OpenAI,GPT-6 Astra,\n",
-            "cl_bench_external.csv": "Model version,Overall,Release date,Organization,Name\nMiniMax-M2.5,0.114,2026-02-12,MiniMax,MiniMax M2.5\n",
+            "arc_agi_2_external.csv": "Model version,Score,Release date,Organization,Name,Cost per task,id\ngpt-6-astra_max,0.95,2026-09-03,OpenAI,GPT-6 Astra,,recA1\n",
+            "cl_bench_external.csv": "Model version,Overall,Release date,Organization,Name,id\nMiniMax-M2.5,0.114,2026-02-12,MiniMax,MiniMax M2.5,recC1\n",
         }
     )
     rows = {r.series_key: r for r in EpochBench().extract([_item(z)])}
@@ -47,10 +47,48 @@ def test_bench_splits_eci_by_accessibility_and_reads_external_scores():
     )
     assert "epoch_bench.kimi_k3.eci_open.pt" in rows
     assert (
-        rows["epoch_bench.gpt_6_astra_max.arc_agi_2.pt"].value_numeric == 0.95
-        and rows["epoch_bench.gpt_6_astra_max.arc_agi_2.pt"].tier == 6
+        rows["epoch_bench.gpt_6_astra_max_reca1.arc_agi_2.pt"].value_numeric == 0.95
+        and rows["epoch_bench.gpt_6_astra_max_reca1.arc_agi_2.pt"].tier == 6
     )
-    assert rows["epoch_bench.minimax_m2_5.cl_bench.pt"].value_numeric == 0.114
+    assert rows["epoch_bench.minimax_m2_5_recc1.cl_bench.pt"].value_numeric == 0.114
+
+
+ECI = "epoch_capabilities_index/eci_scores.csv"
+ECI_ROWS = "Model,Display name,eci,eci_ci_low,eci_ci_high,date,Organization,Accessibility group\nkimi-k3,Kimi K3,150.1,145,155,2026-05-01,Moonshot,Open weights\n"
+ARC_HEAD = "Model version,Score,Release date,Organization,Name,Cost per task,id\n"
+CL = "Model version,Overall,Release date,Organization,Name,id\nMiniMax-M2.5,0.114,2026-02-12,MiniMax,MiniMax M2.5,recC1\n"
+
+
+def test_two_runs_of_one_model_version_on_one_day_are_both_kept():
+    # Epoch lists Opus 5 at Max and High effort under one model version; keyed by version, the second hid the first
+    z = _zip(
+        {
+            ECI: ECI_ROWS,
+            "arc_agi_2_external.csv": ARC_HEAD
+            + "claude-opus-5_max,0.9042,2026-07-24,Anthropic,Claude Opus 5 (Max),,recMax\n"
+            + "claude-opus-5_max,0.8833,2026-07-24,Anthropic,Claude Opus 5 (High),,recHigh\n",
+            "cl_bench_external.csv": CL,
+        }
+    )
+    c = EpochBench()
+    arc = sorted(r.value_numeric for r in c.extract([_item(z)]) if r.series_key.endswith(".arc_agi_2.pt"))
+    assert arc == [0.8833, 0.9042] and not c.errors
+
+
+def test_a_missing_or_reshaped_test_file_is_an_error_and_the_rest_still_read():
+    c = EpochBench()
+    z = _zip({ECI: ECI_ROWS, "arc_agi_2_external.csv": "Model version,Score,Release date\nx,0.5,2026-01-01\n"})
+    keys = {r.series_key for r in c.extract([_item(z)])}
+    assert keys == {"epoch_bench.kimi_k3.eci_open.pt"}
+    assert any("id" in e for e in c.errors) and any("cl_bench_external.csv" in e for e in c.errors)
+
+
+def test_the_same_row_twice_is_an_error_not_a_hidden_row():
+    c = EpochBench()
+    row = "gpt-6-astra_max,0.95,2026-09-03,OpenAI,GPT-6 Astra,,recA1\n"
+    z = _zip({ECI: ECI_ROWS, "arc_agi_2_external.csv": ARC_HEAD + row + row, "cl_bench_external.csv": CL})
+    assert sum(r.series_key.endswith(".arc_agi_2.pt") for r in c.extract([_item(z)])) == 1
+    assert any("two rows share" in e for e in c.errors)
 
 
 def test_chips_skip_incomplete_quarters_and_keep_ranges():

@@ -774,17 +774,19 @@ metrics:
                                                (SELECT arg_max(id, v) FROM o WHERE o.as_of_date <= d.as_of_date)])) AS obs_ids
       FROM d WHERE EXISTS (SELECT 1 FROM c WHERE c.as_of_date <= d.as_of_date)
   arc_agi_frontier:
-    description: Running best ARC-AGI-2 score by release date, from Epoch's compilation of external results.
+    description: Running best ARC-AGI-2 score by release date, from Epoch's compilation of external results, on each date a new record was set.
     rationale: The brief's one serious proxy for out-of-distribution generalisation.
     grain: [as_of_date]
     unit: share
     lead_lag: leading
-    formula_version: 1
+    formula_version: 2
     inputs: ["epoch_bench.*.arc_agi_2.pt"]
-    caveats: External, compute-unconstrained results; cost per task is not in the score.
+    caveats: External, compute-unconstrained results; cost per task is not in the score. Each record cites the one row that set it; a tie on one date keeps the row with the smallest id.
     sql: |
-      SELECT as_of_date, max(value_numeric) OVER (ORDER BY as_of_date) AS value, list(id) OVER (ORDER BY as_of_date) AS obs_ids
-      FROM observations WHERE series_key LIKE 'epoch_bench.%.arc_agi_2.pt' QUALIFY value_numeric = value
+      WITH d AS (SELECT as_of_date, max(value_numeric) AS v, list(id ORDER BY value_numeric DESC, id)[1] AS id
+                 FROM observations WHERE series_key LIKE 'epoch_bench.%.arc_agi_2.pt' GROUP BY 1)
+      SELECT as_of_date, v AS value, [id] AS obs_ids FROM d
+      QUALIFY v > coalesce(max(v) OVER (ORDER BY as_of_date ROWS BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING), -1)
   custom_silicon_share:
     description: Non-Nvidia designers' share of cumulative AI compute shipped, in H100-equivalents, at each complete quarter end (Epoch chip sales).
     rationale: Custom silicon share is the leading indicator of Nvidia rent decay.

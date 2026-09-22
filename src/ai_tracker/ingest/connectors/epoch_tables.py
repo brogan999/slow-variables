@@ -222,6 +222,12 @@ class EpochPrices(_EpochTable):
         return out
 
 
+EXTERNAL = (  # (member of benchmark_data.zip, measure, score column) for Epoch's compilations of external results
+    ("arc_agi_2_external.csv", "arc_agi_2", "Score"),
+    ("cl_bench_external.csv", "cl_bench", "Overall"),
+)
+
+
 class EpochBench(_EpochTable):
     """Epoch Capabilities Index (Epoch-run: tier 1) with open/closed split, plus ARC-AGI-2 and CL-bench external results (tier 6)."""
 
@@ -266,26 +272,36 @@ class EpochBench(_EpochTable):
                     value_high=_num(r.get("eci_ci_high")),
                 )
             )
-        for member, measure, col in (
-            ("arc_agi_2_external.csv", "arc_agi_2", "Score"),
-            ("cl_bench_external.csv", "cl_bench", "Overall"),
-        ):
-            self.member, self.columns = member, {"Model version", col, "Release date"}
-            for r in self.rows(item):
+        seen: set[tuple[str, date]] = set()
+        for member, measure, col in EXTERNAL:
+            # keyed on Epoch's own row id: one model version recurs across evaluation runs (effort settings,
+            # re-tested snapshots), and two rows sharing a key and a date would hide each other in the ledger
+            self.member, self.columns = member, {"Model version", col, "Release date", "id"}
+            try:  # one missing or reshaped file must not stop the index and the other tests
+                rows = self.rows(item)
+            except LayoutChanged as e:
+                self.errors.append(str(e))
+                continue
+            for r in rows:
                 d, v = _date(r.get("Release date", "")), _num(r.get(col))
                 if not d or v is None:
                     continue
+                key = series_key("epoch_bench", f"{r['Model version']}_{r['id']}", measure, "pt")
+                if (key, d) in seen:
+                    self.errors.append(f"{member}: two rows share {key} on {d}")
+                    continue
+                seen.add((key, d))
                 out.append(
                     self.emit(
                         item,
                         r,
-                        f"epoch_bench.{slug(r['Model version'])}.{measure}.pt",
+                        key,
                         "share",
                         d,
                         v,
                         Tier.PUBLISHED_ANALYSIS,
                         Basis.reported,
-                        ["Model version", "Name", col, "Release date", "Organization", "Cost per task"],
+                        ["Model version", "Name", col, "Release date", "Organization", "Cost per task", "id"],
                     )
                 )
         return out

@@ -24,14 +24,29 @@ def quarter_end(d: date) -> date:
     return first_next - timedelta(days=1)
 
 
+def _url(sid: str) -> str:
+    return f"https://fred.stlouisfed.org/graph/fredgraph.csv?id={sid}"
+
+
 class Fred(Connector):
     source_id = "fred"
-    urls = [f"https://fred.stlouisfed.org/graph/fredgraph.csv?id={sid}" for sid in SERIES]
+    urls = [_url(sid) for sid in SERIES]
     expect_series = ["fred.us_workers.hours_assisted_share.q", "fred.us_adults.any_use_share.q"]
+
+    def fetch(self, day: date, refetch: bool = False) -> list[RawItem]:
+        out: list[RawItem] = []
+        for url in self.urls:
+            try:  # one failing series must not stop the rest
+                out.append(self.fetch_one(url, day, refetch))
+            except Exception as e:
+                self.errors.append(f"{url}: {type(e).__name__}: {e}")
+        return out
 
     def extract(self, items: list[RawItem]) -> list[Observation]:
         rows: list[Observation] = []
-        for sid, item in zip(SERIES, items):
+        by_url = {_url(sid): sid for sid in SERIES}  # paired by URL: a skipped series must not shift the next
+        for item in items:
+            sid = by_url[item.url]
             suffix, unit, div, tier = SERIES[sid]
             recs = list(csv.DictReader(io.StringIO(item.body.decode("utf-8", "ignore"))))
             expect(set(recs[0]) if recs else set(), {"observation_date", sid}, f"fred {sid}")
