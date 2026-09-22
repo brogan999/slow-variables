@@ -38,6 +38,8 @@ def run_metrics(
             ids = d.pop("obs_ids")
             if d.get("value") is None or not ids:
                 continue
+            if d["as_of_date"] > now.date():  # a period still running, dated at its end, is not a reading yet
+                continue
             out.append(
                 Derived(
                     metric=name,

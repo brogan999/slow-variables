@@ -2945,6 +2945,30 @@
  ],
  "recent_status_events": [
   {
+   "author": "claude",
+   "counterevidence_considered": "The tally is kept by hand from fetched announcements, so it undercounts deals never announced and can rise with disclosure as much as with buying; the latest quarter added no deal; and the reading moved because a partial quarter left the window, not because a new deal arrived.",
+   "created_at": "2026-09-22T09:32:07.718039Z",
+   "evidence_ids": [
+    "07e3555c39a96050",
+    "129c29f7c904cd92",
+    "323f4b23d02dc306",
+    "63fe32e4118fa976",
+    "8646dd26d8b7dcec",
+    "9ea06530e32d0e37",
+    "d6dd36d1a3dc9f36",
+    "d7e2c8855360a39c",
+    "ef40bd94a06afa5d"
+   ],
+   "id": "fabb5a429b78a879",
+   "new_conf": 55,
+   "new_status": "concentrating",
+   "old_conf": 55,
+   "old_status": "unclear",
+   "reason": "The rule's window is now the five complete quarters from the second quarter of 2025 to the second quarter of 2026, after the metrics runner stopped emitting the quarter still under way (it had been dated 30 Sep 2026 and counted while partial). Trailing-four-quarter deal counts over that window: 3, 5, 6, 9 and 9. The count rose by 6, past the dead band of 1, and three of the four steps rose, so the direction rule reads concentrating.",
+   "target_id": "lab_vertical_integration_exit_bell",
+   "target_type": "indicator"
+  },
+  {
    "author": "evaluate",
    "counterevidence_considered": null,
    "created_at": "2026-09-14T02:51:44.268036Z",
@@ -2997,22 +3021,6 @@
    "old_status": "concentrating",
    "reason": "The direction now reads the flow, not the stock: commitments signed in the trailing four quarters ($557B to 2026-08-17), where it previously read the cumulative total. A cumulative total can only rise, so the old rule could never return dispersing. Over the last three quarters the flow rose, rose again and then fell, so the steps disagree and the reading is unclear.",
    "target_id": "circular_financing_scale",
-   "target_type": "indicator"
-  },
-  {
-   "author": "claude",
-   "counterevidence_considered": "TechCrunch reports the same $2.0B nine days later, so the figure itself is corroborated; what is uncertain is the band, not the number. The figure is also gross of the 60-70% paid out to experts, so the vendor's own revenue would sit inside the normal band. A higher reading, or a band set on net revenue, would score.",
-   "created_at": "2026-09-12T01:10:31.817487Z",
-   "evidence_ids": [
-    "944743051df0e9df"
-   ],
-   "id": "bd478eedc26405d2",
-   "new_conf": 70,
-   "new_status": "emerging",
-   "old_conf": 70,
-   "old_status": "faster_than_normal",
-   "reason": "Held at emerging by the band-edge rule: Mercor's $2.0B gross run-rate (Dealroom, 2026-06-30) is exactly the fast band's lower bound, so the reading sits on the line rather than past it.",
-   "target_id": "expert_data_market_run_rate",
    "target_type": "indicator"
   }
  ],
