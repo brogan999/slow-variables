@@ -4,7 +4,7 @@ import { MarginPanel } from "@/components/ArticleLayout";
 import { type Cites, Inline, type Tests } from "@/components/Essay";
 import { Fact } from "@/components/Fact";
 import type { OutlookClaim, OutlookDoc, OutlookPosition, OutlookState, OutlookTest } from "@/lib/data";
-import { CLAIM_WORDS, fmt } from "@/lib/format";
+import { CLAIM_WORDS, fmtLine } from "@/lib/format";
 
 // What happens from here: named writers' positions on each question, the claims they imply, and tonight's reading of
 // each claim. Every number comes from the export; a claim's state is the export's, never worked out here.
@@ -39,7 +39,7 @@ function Threshold({ doc, t }: { doc: OutlookDoc; t: OutlookTest }) {
   const [op, rhs] = Object.entries(t).find(([k]) => k in OP) ?? [];
   if (!op) return null;
   const unit = doc.facts[t.fact]?.unit;
-  return <>{OP[op]} {typeof rhs === "string" ? <Fact f={doc.facts[rhs]} /> : <span className="num">{fmt(rhs as number, unit)}</span>}</>;
+  return <>{OP[op]} {typeof rhs === "string" ? <Fact f={doc.facts[rhs]} /> : <span className="num">{fmtLine(rhs as number, unit)}</span>}</>;
 }
 
 function ClaimLine({ doc, c, tests }: { doc: OutlookDoc; c: OutlookClaim; tests: Tests }) {

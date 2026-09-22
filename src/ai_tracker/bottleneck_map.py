@@ -284,10 +284,10 @@ def problems(
 
 def _plain(text: str, tests: dict[str, dict[str, Any]]) -> str:
     """A claim's sentence as plain text for the map: its threshold written in, its citation marks dropped."""
-    from .format import fmt
+    from .format import fmt_line
 
     text = re.sub(r"\s*\[cite:[a-z0-9_]+\]", "", text)
-    return re.sub(r"\[test:([a-z0-9_]+)\]", lambda m: fmt(tests[m[1]]["line"], tests[m[1]]["unit"]) if m[1] in tests else "", text)
+    return re.sub(r"\[test:([a-z0-9_]+)\]", lambda m: fmt_line(tests[m[1]]["line"], tests[m[1]]["unit"]) if m[1] in tests else "", text)
 
 
 def outlook_claims(outlook: dict[str, Any]) -> list[dict[str, Any]]:

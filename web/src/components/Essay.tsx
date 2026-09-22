@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { Fact } from "@/components/Fact";
-import { fmt } from "@/lib/format";
+import { fmtLine } from "@/lib/format";
 import type { ArgumentDoc } from "@/lib/data";
 
 // The argument essays: "# title", a lede, then folios of "### label", "## claim", paragraphs and "[plate:x]" lines.
@@ -30,7 +30,7 @@ export function Inline({ text, facts, cites, tests }: { text: string; facts: Arg
     if (m[1] === "fact") return <Fact key={i} f={facts[m[2]]} />;
     if (m[1] === "test") {
       const t = tests?.[m[2]];
-      return t ? <span key={i} className="num text-[0.92em] whitespace-nowrap">{fmt(t.line, t.unit)}</span> : null;
+      return t ? <span key={i} className="num text-[0.92em] whitespace-nowrap">{fmtLine(t.line, t.unit)}</span> : null;
     }
     const c = cites?.[m[2]];
     return c ? <sup key={i} className="ml-px"><a href={`#source-${m[2]}`} title={`${c.who}, ${c.work}`} aria-label={`source ${c.n}: ${c.who}, ${c.work}`} className="num text-[0.7em] text-ink-2 hover:text-ink no-underline">{c.n}</a></sup> : null;

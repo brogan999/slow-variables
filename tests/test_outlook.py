@@ -169,8 +169,6 @@ def test_an_essay_token_or_quote_that_does_not_resolve_is_named():
 # The real ledger and essay, read without a Store: nothing here depends on tonight's data.
 import re  # noqa: E402
 
-import yaml  # noqa: E402
-
 from ai_tracker import outlook as ol  # noqa: E402
 from ai_tracker.bottleneck_map import load as load_map  # noqa: E402
 

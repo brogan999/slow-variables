@@ -27,6 +27,9 @@ export function fmt(v: number | null | undefined, unit?: string): string {
 
 export const words = (s: string | null | undefined) => (s ?? "unmeasured").replace(/_/g, " ");
 
+// A line a claim is tested against reads as a round number when it is one: "15%", not "15.0%".
+export const fmtLine = (v: number, unit?: string) => fmt(v, unit).replace(/\.0(?=%| )/, "");
+
 
 // Unpublished indicators have no page; link to their row on /indicators, which carries the reason.
 export const indicatorHref = (id: string, published: boolean | undefined) => (published ? `/indicators/${id}` : `/indicators#${id}`);

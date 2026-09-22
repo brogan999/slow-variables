@@ -68,3 +68,10 @@ def fmt(v: float | None, unit: str | None = None) -> str:
         return f"{int(_fixed(v, 0)):,}" if abs(v) >= 1e4 else _fixed(v, 0)
     n = f"{int(_fixed(v, 0)):,}" if abs(v) >= 1e4 else _sig(v)
     return f"{n} {unit.replace('_', ' ')}" if unit else n
+
+
+def fmt_line(v: float, unit: str | None = None) -> str:
+    """A line a claim is tested against reads as a round number when it is one: "15%", not "15.0%" (as format.ts)."""
+    import re
+
+    return re.sub(r"\.0(?=%| )", "", fmt(v, unit), count=1)
