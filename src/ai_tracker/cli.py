@@ -330,10 +330,24 @@ def _check(s: st.Store) -> tuple[list[str], list[str]]:
             notes.append(
                 f"{ind.id}: stale since {stale} (cadence {ind.cadence_expected}); set stale_ok with a reason or refresh"
             )
-    from .argument import problems
+    import yaml
+
+    from .argument import TIGHTNESS, problems
+    from .argument import load as load_argument
+    from .bottleneck_map import load as load_map
+    from .bottleneck_map import problems as map_problems
 
     a_errors, a_notes = problems(s)
-    return errors + a_errors, notes + a_notes
+    m_errors = map_problems(
+        load_map(),
+        {i["id"] for i in yaml.safe_load(TIGHTNESS.read_text())["inputs"]},
+        {b.section for b in s.seed.bottlenecks},
+        {i.id for i in s.seed.indicators},
+        {x.id for x in [*s.seed.layers, *s.seed.sublayers]},
+        {p["id"] for p in (load_argument().get("migration") or {}).get("predictions") or []},
+        {b.id for b in s.seed.buckets},
+    )
+    return errors + a_errors + m_errors, notes + a_notes
 
 
 def cmd_check(a: argparse.Namespace) -> int:

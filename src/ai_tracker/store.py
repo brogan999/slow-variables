@@ -914,12 +914,17 @@ class Store:
         (out / "venture").mkdir(parents=True, exist_ok=True)
         for sub_id, doc in self._venture().items():
             _write(out / "venture" / f"{sub_id}.json", doc)
-        _write(out / "bottlenecks.json", self._bottlenecks(cards))
+        bottlenecks = self._bottlenecks(cards)
+        _write(out / "bottlenecks.json", bottlenecks)
         _write(out / "compare.json", self._compare(cards))
         _write(out / "thesis.json", read_jsonl(DATA / "thesis.jsonl"))
         from .argument import build
 
-        _write(out / "argument.json", build(self))
+        argument = build(self)
+        _write(out / "argument.json", argument)
+        from .bottleneck_map import from_store
+
+        _write(out / "map.json", from_store(self, cards, bottlenecks, argument))
         _write(out / "sources.json", [self._source_health(s) for s in self.seed.sources])
         _write(out / "skipped_sources.json", [dump(s) for s in self.seed.skipped])
         _write(

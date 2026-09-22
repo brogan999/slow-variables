@@ -33,4 +33,11 @@ export const indicatorHref = (id: string, published: boolean | undefined) => (pu
 // Thesis-monitor states in plain words for readers who have not met the monitor's logic.
 export const STATE_WORDS: Record<string, string> = { supported: "happening", unsupported: "not happening", contradicted: "running the other way", untestable: "can't be tested yet" };
 export const PREDICTION_WORDS: Record<string, string> = { holding: "holding so far", failing: "failing its test", untestable: "can't be tested yet" };
+// Why a tightness input carries no score, one wording site-wide (the scorecard and the bottleneck map).
+export const WITHHELD_WORDS: Record<string, string> = {
+  no_public_series: "nobody publishes a series that would measure it",
+  not_read_yet: "published, but this site does not read it yet",
+  gauge_unsound: "the gauge available does not measure what it claims",
+  stale_or_thin: "its readings are too old or too few today",
+};
 export const PHASE_WORDS: Record<string, string> = { installation: "installation", turning_point: "turning point", deployment: "deployment", untestable: "untestable" };

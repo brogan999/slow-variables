@@ -1,0 +1,231 @@
+# The bottleneck map (Part 11, section C): where in the chain, and at which stage of diffusion, something slows AI
+# down today, how sure the site is, and who expects what to bind next. On this page a bottleneck is whatever sets the
+# pace: a scarce input upstream or a slow institution downstream.
+#
+# Rows come in two groups. Inside the chain: the twenty-three inputs of seed/tightness.yaml, each placed under its
+# capture layer (and sub-layer where one fits), with the stages it slows and why. Outside the chain: Narayanan and
+# Kapoor's nine families of barriers (bottlenecks.json), each at the stage its own essays put it, plus four rows the
+# NBER volume adds. A cell carries marks, never a colour. `bites` means the row acts on that stage: when it is short,
+# that stage grows more slowly; the row's own reading says whether it is short today. The export adds whether
+# anything the site reads measures the row, and which named writers expect it to bind (to be the scarce thing that
+# sets the pace).
+stages:
+  - {id: methods, label: Making it work}
+  - {id: products, label: Turning it into products}
+  - {id: early_adoption, label: Getting people and firms to use it}
+  - {id: adaptation, label: Reorganising around it}
+
+chain:
+  - input: minerals
+    layer: compute_physical
+    bites:
+      methods: Chips, power plants and the grid are built from them; a shortage slows how fast computing capacity can grow.
+  - input: energy
+    layer: compute_physical
+    sublayer: dc_power
+    bites:
+      methods: Training a frontier model draws power for months; without the electricity, the computers cannot run.
+      products: Serving a product to everyone who uses it draws power every day, on top of training.
+  - input: grid
+    layer: compute_physical
+    sublayer: dc_power
+    bites:
+      methods: A new site waits in line to be connected before it can draw power from the grid.
+      products: The same wait holds back the sites built to serve products.
+  - input: data_centres
+    layer: compute_physical
+    sublayer: dc_power
+    bites:
+      methods: The buildings, cooling and hookups that house the chips take a long time to put up.
+      products: Serving capacity needs the same buildings.
+  - input: chip_equipment
+    layer: compute_physical
+    sublayer: semis
+    bites:
+      methods: A handful of firms make the machines that print advanced chips, and each new factory needs them.
+  - input: foundry
+    layer: compute_physical
+    sublayer: semis
+    bites:
+      methods: Almost all advanced AI chips come out of a few factories, so their capacity caps how many chips exist.
+      products: Chips for serving models come out of the same factories.
+  - input: packaging
+    layer: compute_physical
+    sublayer: semis
+    bites:
+      methods: The step that joins a chip to its memory has capped how many AI chips could ship.
+      products: Chips for serving pass through the same step.
+  - input: memory
+    layer: compute_physical
+    sublayer: memory_networking
+    bites:
+      methods: The fast memory stacked beside each AI chip comes from a few makers.
+      products: Serving large models is limited by memory as much as by arithmetic.
+  - input: accelerators
+    layer: compute_physical
+    sublayer: semis
+    bites:
+      methods: The chips that train models are the input labs compete for most directly.
+      products: The same chips serve the products.
+  - input: networking
+    layer: compute_physical
+    bites:
+      methods: Training one model means wiring a building's worth of chips together.
+  - input: systems_software
+    layer: model
+    bites:
+      methods: The software that makes chips usable decides which chips a lab can switch to.
+  - input: training_infrastructure
+    layer: model
+    bites:
+      methods: Running one training job across a whole building of chips without failing is its own skill.
+  - input: pretraining
+    layer: model
+    sublayer: frontier_labs
+    bites:
+      methods: A handful of teams know how to build a frontier model from scratch.
+  - input: post_training
+    layer: training_input
+    sublayer: post_training
+    also_sublayers: [rl_environments, human_data]  # the practice tasks and expert data it is built from
+    bites:
+      methods: Turning a raw model into a useful one needs data, graders and practice tasks built by people.
+      products: A model is shaped for each kind of work in the same way.
+  - input: continual_learning
+    layer: training_input
+    sublayer: post_training
+    bites:
+      methods: Models do not yet learn on the job; each improvement waits for the next training run.
+      products: A product cannot get better from its own use without it.
+      early_adoption: Firms adopt faster what adapts to them, and today's systems mostly do not.
+  - input: evaluations
+    layer: training_input
+    sublayer: evals
+    bites:
+      methods: Labs can only improve what they can test.
+      products: A product is shipped only once its builders can tell it works.
+      early_adoption: Checking an AI system's work is a cost every buyer pays before trusting it.
+  - input: training_data
+    layer: training_input
+    sublayer: data_licensing
+    bites:
+      methods: The stock of public text is running out, so new data increasingly has to be licensed, made or bought.
+  - input: inference
+    layer: serving_orchestration
+    sublayer: inference_serving
+    bites:
+      products: Every answer a product gives costs computing time.
+      early_adoption: What a firm pays per answer decides where using AI is worth it.
+  - input: routing
+    layer: serving_orchestration
+    sublayer: routing_gateways
+    bites:
+      products: Picking the right model for each request is part of making a product cheap enough.
+      early_adoption: A firm that can switch models easily pays less and risks less.
+  - input: agents
+    layer: serving_orchestration
+    sublayer: agent_infra
+    bites:
+      products: A system that acts for people needs tools, permissions and a record of what it did.
+      early_adoption: Firms hand work to agents only as far as they can see and undo what the agents do.
+  - input: deployment_platforms
+    layer: serving_orchestration
+    bites:
+      products: The platforms that host models for firms decide how quickly a product can reach them.
+      early_adoption: Security reviews and contracts for those platforms set how fast firms can start.
+  - input: applications
+    layer: deployment_application
+    bites:
+      early_adoption: Many firms first use AI inside products they already buy, for tasks they already have.
+      adaptation: A firm changes how it works only once products fit its own processes.
+  - input: capital
+    layer: compute_physical
+    bites:
+      methods: Frontier training runs are paid for long before they earn anything.
+      products: Serving capacity is built ahead of the demand it is meant for.
+
+# Narayanan and Kapoor's families, named as bottlenecks.json names them, each at the stage it is drawn in (the stock
+# the family acts on). `placed: author` where the stage is their own; `site` where they say the limits act across
+# stages and this site chose where to draw them. `also` adds a stage, credited to whoever argued it.
+families:
+  - name: "Stage 1: Methods → products (the model-to-product gap)"
+    label: From a working model to a product
+    placed: author
+    why: Their own first stage, from a method that works in the lab to a product people can use.
+  - name: "Stage 2: Product → individual adoption"
+    label: People taking up the products
+    placed: author
+    why: Their own second stage, people choosing to use the products.
+  - name: "Stage 3: Organizational and structural adaptation"
+    label: Firms reorganising around the tools
+    placed: author
+    why: Their own third stage, organisations changing how they work.
+  - name: "Regulatory, legal, and institutional limits"
+    label: Law, regulation and institutions
+    placed: site
+    why: They say these limits act across every stage; this site draws them where firms reorganise.
+    also:
+      early_adoption: {by: author, why: "One of their own items: not knowing who is liable when AI errs deters firms from adopting it."}
+  - name: "External-world and physical speed limits"
+    label: The physical world's own speed
+    placed: site
+    why: They say these limits act across every stage; this site draws them where firms reorganise.
+  - name: "Safety speed limits (deliberate brakes)"
+    label: Deliberate safety brakes
+    placed: site
+    why: They say these limits act across every stage; this site draws them where firms reorganise.
+  - name: "Market and economic limits"
+    label: Markets and prices
+    placed: site
+    why: They say these limits act across every stage; this site draws them where firms reorganise.
+  - name: "Science-specific bottlenecks"
+    label: How science itself moves
+    placed: site
+    why: They say these limits act across every stage; this site draws them where firms reorganise.
+  - name: "Upstream: why AI cannot simply accelerate its own diffusion"
+    label: Limits on AI speeding up its own spread
+    placed: site
+    why: Their reasons AI cannot simply hurry its own spread; this site draws them where AI is made.
+
+# Rows the NBER volume The Economics of Transformative AI (2026) adds; each names the indicators that read it.
+nber:
+  - id: verification
+    label: Verification and assurance
+    what: Someone has to check an AI system's work and answer for it when it is wrong.
+    bites:
+      products: A product that cannot be checked cannot be sold for work that matters.
+      early_adoption: Firms adopt where checking the work costs less than doing it.
+    indicators: []
+    ledgers: [ai_evaluation_market, insurer_ai_exclusions]
+  - id: measuring_returns
+    label: Measuring the returns
+    what: The statistics that count output miss much of what free and cheap AI tools do.
+    bites:
+      early_adoption: Firms invest where they can see a return, and much of it goes unmeasured.
+      adaptation: Reorganisation shows up in the numbers late, if at all.
+    indicators: []  # the output statistics are the blind spot this row names, so they cannot read it
+  - id: work_and_pay
+    label: Work and pay
+    what: Who does the work, and how the income from it is split between workers and owners.
+    bites:
+      adaptation: Jobs and pay change slowly, through hiring, training and contracts.
+    indicators: [labor_share_nonfarm, canaries_exposed_employment_yoy]
+  - id: information
+    label: The information ecosystem
+    what: The web that AI learns from, and the traffic that pays for it.
+    bites:
+      adaptation: If answers replace visits, the sites that produce new information lose the income that funds it.
+    indicators: []
+    series:
+      - {key: crawl.all_crawlers.ai_training_share.pt, label: "AI training's share of crawler requests (Cloudflare)"}
+      - {key: crawl.anthropic.crawl_to_refer.pt, label: "pages Anthropic's crawler takes for each visitor it sends back (Cloudflare)"}
+      - {key: crawl.openai.crawl_to_refer.pt, label: "pages OpenAI's crawler takes for each visitor it sends back (Cloudflare)"}
+
+# The site's own predictions (the migration essay's), marking the cells they name. `rows` lists a row without marking
+# a cell, for a prediction that something does not bind.
+predictions:
+  - {id: data_centres_now, cells: {data_centres: methods, grid: methods}}
+  - {id: capital_now, rows: [capital]}
+  - {id: memory_packaging_now, cells: {memory: methods, packaging: methods}}
+  - {id: practice_next, cells: {post_training: methods, training_data: methods}}
+  - {id: agent_proof_watch, cells: {agents: early_adoption}}
