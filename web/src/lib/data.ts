@@ -210,3 +210,24 @@ export type ContextDoc = {
   figures: { id: string; title: string; unit: string; caption: string; page: string; note: string; lines: { label: string; points: ContextPoint[]; label_y: number }[]; x: { ticks: Tick[] }; y: Axis; stamps: Stamp[]; chart_sources: ChartSourcesT }[];
 };
 export const context = () => read<ContextDoc>("context.json");
+
+export type MapWriter = { who: string; text: string; state: string; href: string };
+export type MapCell = { bites: boolean; measured: boolean; why: string | null; site: boolean; writers: MapWriter[] };
+export type MapReading =
+  | { kind: "scored"; score: number; word: string; confidence: number; hatched: boolean; kind_of_tight: string; obs_ids: string[] }
+  | { kind: "withheld"; because: string | null; tag: string | null; kind_of_tight: string }
+  | { kind: "tally"; instruments: number; fast: number; normal: number; other: number; readings: number };
+export type MapRow = {
+  id: string; name: string; what?: string; reads?: string | null; family?: string; source?: string; href: string | null;
+  layer?: { id: string; name: string }; sublayer?: { id: string; name: string } | null;
+  reading: MapReading; cells: Record<string, MapCell>; claims: MapWriter[]; domains?: Record<string, number[]>;
+  instruments: { label: string; href: string | null; status?: string | null; unpublished?: boolean }[];
+  readings?: { label: string; value: number; unit: string; as_of: string; obs_ids: string[]; href: string | null }[];
+};
+export type MapDoc = {
+  stages: { id: string; label: string; n: number }[]; scored: number;
+  groups: { id: string; label: string; sections: { id: string; name: string; rows: MapRow[] }[] }[];
+  bets: { sublayer: { id: string; name: string }; rows: string[]; firms: number; as_of: string | null;
+    venture: { value: number; unit: string; as_of: string; obs_ids: string[]; href: string } | null }[];
+};
+export const bottleneckMap = () => read<MapDoc>("map.json");

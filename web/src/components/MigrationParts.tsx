@@ -6,7 +6,7 @@ import { Fact } from "@/components/Fact";
 import { Figure, Key } from "@/components/Figure";
 import { Grade } from "@/components/StatusChip";
 import type { MigrationDoc, TightInput } from "@/lib/data";
-import { PREDICTION_WORDS } from "@/lib/format";
+import { PREDICTION_WORDS, WITHHELD_WORDS } from "@/lib/format";
 
 const lower = (name: string) => (/^[A-Z]{2}/.test(name) ? name : name[0].toLowerCase() + name.slice(1)); // "AI chips" keeps its capitals
 
@@ -79,12 +79,7 @@ export function StripPlate({ strip }: { strip: MigrationDoc["strip"] }) {
   );
 }
 
-const WHY: Record<string, string> = {
-  no_public_series: "nobody publishes a series that would measure it",
-  not_read_yet: "published, but this site does not read it yet",
-  gauge_unsound: "the gauge available does not measure what it claims",
-  stale_or_thin: "its readings are too old or too few today",
-};
+const WHY = WITHHELD_WORDS;
 // the five tightness words on the one-hue ramp, slack lightest
 const TONE: Record<string, string> = { slack: "var(--tight-1)", easing: "var(--tight-2)", moderate: "var(--tight-3)", tight: "var(--tight-4)", severe: "var(--tight-5)" };
 
@@ -145,7 +140,7 @@ export function ScorecardPlate({ card }: { card: MigrationDoc["scorecard"] }) {
             <tbody key={k.id}>
               <tr><th scope="rowgroup" colSpan={4} className="pt-4!"><span className="block font-sans text-[12px] text-ink">{k.name}</span><span className="block mt-0.5 font-serif normal-case tracking-normal text-[13px] font-normal text-ink-2">{k.tight_means}</span></th></tr>
               {card.inputs.filter((i) => i.kind === k.id).map((i) => i.score !== null ? (
-                <tr key={i.id}>
+                <tr key={i.id} id={`input-${i.id}`} className="scroll-mt-24 target:bg-surface-2">
                   <td className="sm:min-w-[9rem]">
                     <span className="text-ink font-medium"><span className="num text-muted mr-1.5 text-[11px]">{String(i.n).padStart(2, "0")}</span>{i.name}</span>
                     <span className="sm:hidden block text-[11px] text-ink-2">confidence <span className="num">{i.confidence}</span>{i.hatched ? " (low)" : ""} · {i.used} of {i.defined} gauge{i.defined === 1 ? "" : "s"}</span>
@@ -156,7 +151,7 @@ export function ScorecardPlate({ card }: { card: MigrationDoc["scorecard"] }) {
                   <td className="max-sm:hidden num whitespace-nowrap">{i.used} of {i.defined}</td>
                 </tr>
               ) : (
-                <tr key={i.id}>
+                <tr key={i.id} id={`input-${i.id}`} className="scroll-mt-24 target:bg-surface-2">
                   <td colSpan={4} className="text-ink-2">
                     <span className="num text-muted mr-1.5 text-[11px]">{String(i.n).padStart(2, "0")}</span>{i.name}
                     <span className="block text-[12px] leading-snug"><span className="text-muted">Not scored: {i.withheld ? WHY[i.withheld.kind] : "no reading"}.</span> {i.withheld?.because}</span>
