@@ -6,6 +6,8 @@ import type { MapCell, MapDoc, MapReading, MapRow } from "@/lib/data";
 import { CLAIM_WORDS, fmt, WITHHELD_WORDS, words } from "@/lib/format";
 
 const link = "underline decoration-grid underline-offset-2 hover:decoration-ink";
+// A claim's state read beside a row: "both sides expect this" would there read as both sides expecting the row to bind.
+const tonight = (s: string) => (s === "both" ? "tonight's reading fits both sides" : CLAIM_WORDS[s] ?? words(s));
 const KIND: Record<string, string> = { supply: "supply", know_how: "know-how", money: "money" };
 
 // A cell's marks are shapes, so no meaning rides on colour: a filled square where the row acts on this stage and the
@@ -26,7 +28,7 @@ function said(c: MapCell): string {
   const parts = [];
   if (c.bites) parts.push(c.measured ? "acts here, and the site measures it" : "acts here, but nothing the site reads measures it");
   if (c.site) parts.push("placed here by this site");
-  if (c.writers.length) parts.push(`expected to bind by ${c.writers.map((w) => `${w.who} (${CLAIM_WORDS[w.state] ?? words(w.state)})`).join(", ")}`);
+  if (c.writers.length) parts.push(`expected to bind by ${c.writers.map((w) => `${w.who} (${tonight(w.state)})`).join(", ")}`);
   return parts.join("; ");
 }
 
@@ -54,7 +56,7 @@ function Reading({ r }: { r: MapReading }) {
   if (!r.instruments && !r.readings) return <span className="block text-[12px] leading-snug text-muted">Nothing the site reads measures it yet.</span>;
   return (
     <span className="block text-[12px] leading-snug text-ink-2">
-      {r.instruments ? <><span className="num">{r.instruments}</span> indicator{r.instruments === 1 ? "" : "s"}: <span className="num">{r.fast}</span> faster than normal, <span className="num">{r.normal}</span> consistent or slower, <span className="num">{r.other}</span> emerging or unclear</> : null}
+      {r.instruments ? <><span className="num">{r.instruments}</span> indicator{r.instruments === 1 ? "" : "s"}: <span className="num">{r.fast}</span> faster than normal, <span className="num">{r.normal}</span> consistent or slower, <span className="num">{r.other}</span> with other statuses</> : null}
       {r.instruments && r.readings ? "; " : ""}
       {r.readings ? <><span className="num">{r.readings}</span> reading{r.readings === 1 ? "" : "s"} with no status</> : null}
     </span>
@@ -144,7 +146,7 @@ export function MapReasons({ doc }: { doc: MapDoc }) {
                   ))}</p>
                 ) : null}
                 {r.claims.length ? (
-                  <p><span className="text-ink">Expected:</span> {r.claims.map((w, k) => <span key={k}>{k ? " " : ""}{w.who}: &ldquo;{w.text}&rdquo; <Link href={w.href} prefetch={false} className={link}>{CLAIM_WORDS[w.state] ?? words(w.state)}</Link>.</span>)}</p>
+                  <p><span className="text-ink">Expected:</span> {r.claims.map((w, k) => <span key={k}>{k ? " " : ""}{w.who}: &ldquo;{w.text}&rdquo; <Link href={w.href} prefetch={false} className={link}>{tonight(w.state)}</Link>.</span>)}</p>
                 ) : null}
                 {r.note ? <p className="text-muted">{r.note}</p> : null}
                 {r.domains && Object.keys(r.domains).length ? (

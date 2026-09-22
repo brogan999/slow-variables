@@ -57,3 +57,10 @@ def test_every_unit_the_web_formatter_names_is_handled_here():
     py = Path("src/ai_tracker/format.py").read_text()
     missing = [u for u in units if f'"{u}"' not in py]
     assert not missing, f"web formats these units and Python does not: {missing}"
+
+
+def test_index_points_keep_one_decimal_and_large_ratios_get_separators():
+    from ai_tracker.format import fmt
+
+    assert fmt(2.4, "index_points") == "2.4 index points" and fmt(-16.3, "index_points") == "-16.3 index points"
+    assert fmt(50000.0, "ratio") == "50,000×" and fmt(887.0, "ratio") == "887×" and fmt(4.4, "ratio") == "4.40×"

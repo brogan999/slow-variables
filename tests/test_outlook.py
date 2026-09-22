@@ -49,6 +49,9 @@ def test_a_rival_test_stops_applying_after_its_date_and_blocks_only_a_win_while_
     assert state(lost, F) == "failing"  # an unrunnable rival blocks a win, not a loss
     stale_rhs = {"test": {"fact": "rli", "gt": "old"}}  # a stale reading on the right-hand side tests nothing
     assert state(stale_rhs, F) == "untestable"
+    last = {**F, "rli": {"value": 0.21, "as_of": "2027-12-31"}}  # the last day both sides counted
+    assert state(c, last, date(2028, 2, 1)) == "holding"
+    assert state({"test": {"fact": "rli", "gt": 0.5}, "due": "2027-12-31"}, last, date(2028, 2, 1)) == "failing"
 
 
 def test_a_reading_both_sides_expect_settles_nothing():
@@ -101,6 +104,14 @@ def test_claims_carry_their_position_and_state():
         "holding",
     )
 
+
+
+def test_a_claim_can_be_this_sites_own_reading_of_an_authors_position():
+    spec = {**SPEC, "claims": [{**SPEC["claims"][0], "attribution": "site"}]}
+    [c] = claims(spec, F)
+    assert c["attribution"] == "site" and c["holders"] == []  # credited to this site, not to the position's author
+    bad = {**spec, "claims": [{**spec["claims"][0], "holders": ["jones"]}]}
+    assert any("this site's own reading but names holders" in e for e in problems(bad, F, {"pretraining"}, {"methods"}))
 
 def test_a_ledger_that_cannot_resolve_names_each_problem():
     assert problems(SPEC, F, {"pretraining"}, {"methods"}) == []

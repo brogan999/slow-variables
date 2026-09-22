@@ -30,11 +30,16 @@ function names(doc: OutlookDoc, ids: string[]) {
 }
 const capital = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
-// A claim can name its own makers (a bet's parties), who then take the credit instead of the position's holders.
-const ownMakers = (p: OutlookPosition, c?: OutlookClaim) => !!c && c.holders.join() !== p.holders.join();
+// A claim is credited as its position is, unless it names its own makers (a bet's parties), who then take the credit,
+// or is this site's own reading of an author's position.
+function claimCredit(doc: OutlookDoc, p: OutlookPosition, c: OutlookClaim): string | null {
+  if (c.attribution === "site" && p.attribution !== "site") return "This site's reading";
+  return c.holders.join() !== p.holders.join() ? capital(names(doc, c.holders)) : null;
+}
 
 function Whose({ doc, p, c }: { doc: OutlookDoc; p: OutlookPosition; c?: OutlookClaim }) {
-  if (ownMakers(p, c)) return <>{capital(names(doc, c!.holders))}</>;
+  const own = c ? claimCredit(doc, p, c) : null;
+  if (own) return <>{own}</>;
   if (p.attribution === "site") return <>This site&apos;s own position</>;
   const who = capital(names(doc, p.holders));
   return p.attribution === "extension" ? <>An argument of {names(doc, p.holders)}, carried further by this site</> : <>{who}</>;
@@ -53,7 +58,7 @@ function ClaimLine({ doc, p, c, tests }: { doc: OutlookDoc; p: OutlookPosition; 
       <span className="shrink-0"><ClaimState state={c.state} /></span>
       <span className="font-serif text-[1.0625rem] leading-snug text-ink">
         <Inline text={c.text} facts={doc.facts} cites={cites(doc)} tests={tests} />
-        {ownMakers(p, c) ? <span className="block font-sans text-[13px] text-ink-2">Claimed by {names(doc, c.holders)}</span> : null}
+        {claimCredit(doc, p, c) ? <span className="block font-sans text-[13px] text-ink-2">{c.attribution === "site" && p.attribution !== "site" ? "This site's reading, not the author's" : `Claimed by ${names(doc, c.holders)}`}</span> : null}
       </span>
     </li>
   );
@@ -63,7 +68,7 @@ function ClaimTest({ doc, c }: { doc: OutlookDoc; c: OutlookClaim }) {
   const f = c.test ? doc.facts[c.test.fact] : null;
   return (
     <p className="text-[13.5px] leading-relaxed text-ink-2">
-      {c.test ? <>Tonight {f ? <Fact f={f} /> : "no reading"}{f?.stale ? ", too old to test," : ""}; the test is <Threshold doc={doc} t={c.test} />{c.due ? <> by <span className="whitespace-nowrap">{c.due}</span></> : null}. </> : <>No reading tests this yet. </>}
+      {c.test ? <>Tonight {f ? <Fact f={f} /> : "no reading"}{f?.stale ? ", too old to test" : ""}; the test is <Threshold doc={doc} t={c.test} />{c.due ? <> by <span className="whitespace-nowrap">{c.due}</span></> : null}. </> : <>No reading tests this yet. </>}
       {c.state === "both" ? <>Its rival can live with the same reading{c.rival_until ? <> until <span className="whitespace-nowrap">{c.rival_until}</span></> : null}, so tonight settles nothing. </> : null}
       {c.falsifier ? <>Proved wrong by: {c.falsifier}</> : null}
     </p>
