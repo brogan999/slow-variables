@@ -363,10 +363,10 @@ sources:
     work: The Use of Knowledge in Society
     venue: American Economic Review
     year: 1945
-    url: https://web.archive.org/web/20260920204610/https://www.econlib.org/library/Essays/hykKnw.html
+    url: https://web.archive.org/web/20260920204610id_/https://www.econlib.org/library/Essays/hykKnw.html
     retrieved_at: 2026-09-22
     http_status: 200
-    content_hash: fa319a0f79b40c0fd48f72863297ca8e775a529437e0cbdcbc39c57e4c3749fe
+    content_hash: 3c4edd88fc40284ea123d1de1474052a41dd1d85571fd4152c701c0ce7975555
   - id: stiglitz_ventura_bolet
     who: Joseph Stiglitz and Màxim Ventura-Bolet
     field: Stiglitz won the Nobel prize for work on markets where one side knows more than the other; Ventura-Bolet is a doctoral fellow at Columbia
@@ -698,8 +698,8 @@ positions:
     title: The missing steps can be bought
     holders: [jones_b]
     attribution: extension
-    mechanism: If progress moves at the pace of the steps AI cannot take [cite:jones_b], the scarce thing is the next step a model can be taught, and that can be paid for, with practice tasks and graders sold to the labs, and with the work of fitting a model to the steps a firm's own jobs need.
-    case: Firms that sell the labs expert-written practice work have grown fast; Surge AI was reported in 2025 to have passed [fact:surge_revenue] in yearly revenue.
+    mechanism: If progress moves at the pace of the steps AI cannot take [cite:jones_b], the scarce thing is the next step a model can be taught, and that can be paid for, with practice tasks (exercises a model is scored on while it trains) and graders (programs that do the scoring) sold to the labs, and with the work of fitting a model to the steps a firm's own jobs need.
+    case: One firm that sells the labs expert-written practice work, Surge AI, was reported in 2025 to have passed [fact:surge_revenue] in yearly revenue.
     kill_shot: The next model taking the missing steps by itself, so that paying to teach them buys nothing a lab would not soon have anyway.
     rival: compounding
     visible: false
@@ -1193,7 +1193,6 @@ claims:
     test: {fact: paid_share, lt: 0.1}
     rival_test: {fact: paid_share, lt: 0.1}
     row: measuring_returns
-    stage: early_adoption
     falsifier: The paid share rising to where most use shows up in someone's revenue.
     expect_state: both
   - id: juniors_behind
@@ -1246,13 +1245,11 @@ claims:
   - id: firms_centralise
     position: centralises
     text: Firms using AI grow larger and take decisions further from the people on the spot.
-    stage: adaptation
     falsifier: Firms getting smaller and more decentralised as they adopt AI.
   - id: visits_fall
     position: referrals_fall
     text: Publishers lose the visits that pay for what they produce.
     row: information
-    stage: adaptation
     falsifier: Visits to publishers from search and AI answers rising.
 
   # V · value
@@ -1302,7 +1299,6 @@ claims:
     position: durable_labs
     text: Only a handful of labs stay at the frontier, because it costs too much capital for more.
     row: pretraining
-    stage: methods
     falsifier: More than a handful of labs keeping pace with the best models.
   - id: surplus_to_users
     position: consumers_keep
@@ -1364,7 +1360,7 @@ scenarios:
       binds_next: [family_5]
   anchors:
     - {source: eo_14365, date: 2025-12-11, text: The American president ordered moves against state AI laws and called for a light national standard.}
-    - {source: iso_exclusions, date: 2026-01-01, text: Standard exclusions for harm caused by generative AI became available for insurers to attach to general liability policies.}
+    - {source: iso_exclusions, date: 2026-01, text: Standard exclusions for harm caused by generative AI became available for insurers to attach to general liability policies.}
     - {source: colorado_sb26_189, date: 2026-05-14, text: "Colorado replaced its AI Act with a narrower law on automated decisions, which applies from January 2027."}
     - {source: eu_2026_1744, date: 2026-07-27, text: "The European Union's changes to its AI Act came into force, putting off its rules for high-risk AI until December 2027 and August 2028."}
 

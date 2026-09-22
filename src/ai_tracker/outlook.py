@@ -263,6 +263,8 @@ def problems(
             errors.append(f"{where} names an unknown map row {c['row']}")
         if c.get("stage") and c["stage"] not in stages:
             errors.append(f"{where} names an unknown stage {c['stage']}")
+        if c.get("stage") and not c.get("row"):
+            errors.append(f"{where} names a stage but no map row, so the map cannot mark it")
         for key in ("test", "rival_test"):
             t = c.get(key)
             if t and t.get("fact") not in known_facts:
@@ -327,6 +329,10 @@ def check(s: Any) -> tuple[list[str], list[str]]:
     for k, v in spec["facts"].items():
         if "indicator" in v and v["indicator"] not in ids or "metric" in v and not s.metric_spec(v["metric"]):
             errors.append(f"outlook: fact {k} names an unknown indicator or metric")
+        if "series" in v and not s.con.execute(
+            "SELECT 1 FROM observations WHERE series_key = ? LIMIT 1", [v["series"]]
+        ).fetchone():
+            errors.append(f"outlook: fact {k} names a series with no observations")
     errors += essay_problems(ESSAY.read_text() if ESSAY.exists() else "", spec)
     if errors:
         return errors, []

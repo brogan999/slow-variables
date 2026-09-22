@@ -48,7 +48,7 @@ export default function OutlookPage() {
     >
       <Folios folios={folios} facts={doc.facts} plates={plates} cites={cites(doc)} tests={doc.tests} after={after} />
       <p className="mt-12 font-serif text-[1.0625rem] leading-relaxed text-ink-2 max-w-[62ch]">
-        Read next: <Link href="/bottlenecks" className="underline decoration-axis underline-offset-2 hover:decoration-ink">the bottleneck map</Link>, where these claims mark the stage each expects to bind, and <Link href="/argument" className="underline decoration-axis underline-offset-2 hover:decoration-ink">the argument</Link> this site tests.
+        Read next: <Link href="/bottlenecks" className="underline decoration-axis underline-offset-2 hover:decoration-ink">the bottleneck map</Link>, where the claims that say something will bind mark the stage they expect it at, and <Link href="/argument" className="underline decoration-axis underline-offset-2 hover:decoration-ink">the argument</Link> this site tests.
       </p>
       <section id="sources" className="mt-20 border-t border-grid pt-8 scroll-mt-8">
         <h2 className="display text-[1.5rem] mb-4">Sources</h2>

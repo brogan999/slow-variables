@@ -63,8 +63,8 @@ function ClaimTest({ doc, c }: { doc: OutlookDoc; c: OutlookClaim }) {
   const f = c.test ? doc.facts[c.test.fact] : null;
   return (
     <p className="text-[13.5px] leading-relaxed text-ink-2">
-      {c.test ? <>Tonight {f ? <Fact f={f} /> : "no reading"}; the test is <Threshold doc={doc} t={c.test} />{c.due ? <> by {c.due}</> : null}. </> : <>No reading tests this yet. </>}
-      {c.state === "both" ? <>Its rival can live with the same reading{c.rival_until ? <> until {c.rival_until}</> : null}, so tonight settles nothing. </> : null}
+      {c.test ? <>Tonight {f ? <Fact f={f} /> : "no reading"}{f?.stale ? ", too old to test," : ""}; the test is <Threshold doc={doc} t={c.test} />{c.due ? <> by <span className="whitespace-nowrap">{c.due}</span></> : null}. </> : <>No reading tests this yet. </>}
+      {c.state === "both" ? <>Its rival can live with the same reading{c.rival_until ? <> until <span className="whitespace-nowrap">{c.rival_until}</span></> : null}, so tonight settles nothing. </> : null}
       {c.falsifier ? <>Proved wrong by: {c.falsifier}</> : null}
     </p>
   );
@@ -157,7 +157,7 @@ export function ScenarioGrid({ doc, rows }: { doc: OutlookDoc; rows: Record<stri
             {c.signposts.map((g) => <li key={g.claim} className="flex items-baseline gap-2"><span aria-hidden>{GLYPH[g.state]}</span><a href={`#claim-${g.claim}`} className="text-ink-2 underline decoration-grid underline-offset-2 hover:text-ink">{claim(g.claim) ? <Inline text={claim(g.claim)!.text} facts={doc.facts} tests={doc.tests} /> : g.claim}</a><span className="sr-only">: {CLAIM_WORDS[g.state]}</span></li>)}
           </ul>
         ) : <p className="text-[12.5px] text-muted">No signpost yet.</p>}
-        {c.binds_next.length ? <p className="text-[12.5px] leading-snug text-ink-2">Binds next: {c.binds_next.map((id, k) => <span key={id}>{k ? ", " : ""}<Link href={`/bottlenecks#why-${id}`} prefetch={false} className="underline decoration-grid underline-offset-2 hover:text-ink">{rows[id] ?? id}</Link></span>)}.</p> : null}
+        {c.binds_next.length ? <p className="text-[12.5px] leading-snug text-ink-2">Binds next: {c.binds_next.map((id, k) => <span key={id}>{k ? "; " : ""}<Link href={`/bottlenecks#why-${id}`} prefetch={false} className="underline decoration-grid underline-offset-2 hover:text-ink">{rows[id] ?? id}</Link></span>)}.</p> : null}
       </div>
     );
   };
@@ -197,7 +197,7 @@ export function ScenarioGrid({ doc, rows }: { doc: OutlookDoc; rows: Record<stri
 // Every claim on the page in one list, with tonight's state and what would prove it wrong.
 export function FalsifierBoard({ doc }: { doc: OutlookDoc }) {
   const pos = Object.fromEntries(doc.positions.map((p) => [p.id, p]));
-  const Text = ({ c }: { c: OutlookClaim }) => <a href={`#claim-${c.id}`} className="hover:underline underline-offset-2 decoration-axis"><Inline text={c.text} facts={doc.facts} tests={doc.tests} /></a>;
+  const text = (c: OutlookClaim) => <a href={`#claim-${c.id}`} className="hover:underline underline-offset-2 decoration-axis"><Inline text={c.text} facts={doc.facts} tests={doc.tests} /></a>;
   return (
     <Figure title="Every claim, with tonight's state, its test and what would prove it wrong" note="by question · each claim links to its position">
       <div className="hidden md:block overflow-x-auto">
@@ -209,7 +209,7 @@ export function FalsifierBoard({ doc }: { doc: OutlookDoc }) {
                 <tr><th scope="colgroup" colSpan={3} className="pt-5 text-left">{fo.kicker}</th></tr>
                 {doc.claims.filter((c) => c.folio === fo.id).map((c) => (
                   <tr key={c.id}>
-                    <td className="min-w-[16rem]"><Text c={c} /><div className="mt-1"><ClaimTest doc={doc} c={c} /></div></td>
+                    <td className="min-w-[16rem]">{text(c)}<div className="mt-1"><ClaimTest doc={doc} c={c} /></div></td>
                     <td className="min-w-[9rem] text-ink-2">{pos[c.position] ? <Whose doc={doc} p={pos[c.position]} c={c} /> : null}</td>
                     <td className="whitespace-nowrap"><ClaimState state={c.state} /></td>
                   </tr>
@@ -227,7 +227,7 @@ export function FalsifierBoard({ doc }: { doc: OutlookDoc }) {
               {doc.claims.filter((c) => c.folio === fo.id).map((c) => (
                 <li key={c.id} className="py-3 border-t border-grid flex flex-col gap-1.5">
                   <span className="self-start"><ClaimState state={c.state} /></span>
-                  <span className="text-[15px] leading-snug"><Text c={c} /></span>
+                  <span className="text-[15px] leading-snug">{text(c)}</span>
                   <span className="text-[13px] text-ink-2">{pos[c.position] ? <Whose doc={doc} p={pos[c.position]} c={c} /> : null}</span>
                   <ClaimTest doc={doc} c={c} />
                 </li>
