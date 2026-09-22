@@ -2,7 +2,7 @@ from .anthropic_ei import AnthropicEi
 from .artificial_analysis import ArtificialAnalysis
 from .bls import Bls
 from .cait import Cait
-from .canaries import Canaries
+from .canaries import Canaries, CanariesAge
 from .census_btos import CensusBtos
 from .epoch import Epoch
 from .epoch_tables import (
@@ -16,7 +16,7 @@ from .epoch_tables import (
 )
 from .feeds import Feeds
 from .formd import FormD
-from .fred import Fred
+from .fred import Fred, FredOfficial
 from .hal_reliability import HalReliability
 from .manual import Manual
 from .metr import Metr
@@ -35,6 +35,7 @@ CONNECTORS = {
         HalReliability,
         Ramp,
         Canaries,
+        CanariesAge,
         Cait,
         YaleDissimilarity,
         OpenRouterRankings,
@@ -44,6 +45,7 @@ CONNECTORS = {
         Bls,
         Epoch,
         Fred,
+        FredOfficial,
         CensusBtos,
         AnthropicEi,
         SecSegments,

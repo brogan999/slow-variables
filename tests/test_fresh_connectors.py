@@ -7,7 +7,7 @@ import pytest
 
 from ai_tracker.ingest.base import LayoutChanged, RawItem
 from ai_tracker.ingest.connectors.cait import Cait
-from ai_tracker.ingest.connectors.canaries import MEMBER, Canaries
+from ai_tracker.ingest.connectors.canaries import AGE_MEMBER, MEMBER, Canaries, CanariesAge
 from ai_tracker.ingest.connectors.ramp import Ramp
 
 
@@ -45,6 +45,22 @@ def test_canaries_reads_quintile_yoy_changes_with_the_vintage_as_published_date(
     q5 = rows["canaries.us_exposure_q5.employment_yoy.m"]
     assert q5.value_numeric == 0.0009634 and q5.as_of_date == date(2026, 7, 31) and q5.published_date == date(2026, 8, 12)
     assert len(rows) == 5
+
+
+def test_canaries_age_keeps_the_most_and_least_exposed_quintiles_by_age():
+    head = "observation_date,exposure_quintile,Early Career 1 (22-25),Early Career 2 (26-30),Developing (31-34),Mid-Career 1 (35-40),Mid-Career 2 (41-49),Senior (50+),vintage\n"
+    body = (
+        "2026-07-01,Quintile 1 (least exposed),101.2,100.4,99.8,100.1,100.9,102.3,2026-08-12\n"
+        "2026-07-01,Quintile 3,99.0,99.1,99.2,99.3,99.4,99.5,2026-08-12\n"  # a middle quintile: left in the package
+        "2026-07-01,Quintile 5 (most exposed),84.1,,95.2,98.0,99.7,103.6,2026-08-12\n"  # a blank cell is skipped
+    )
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w") as z:
+        z.writestr(AGE_MEMBER, head + body)
+    rows = {r.series_key: r for r in CanariesAge().extract([_item(buf.getvalue())])}
+    young = rows["canaries.us_exposure_q5_age_22_25.employment_index.m"]
+    assert (young.value_numeric, young.as_of_date, young.published_date) == (84.1, date(2026, 7, 31), date(2026, 8, 12))
+    assert len(rows) == 11 and not any("q3" in k for k in rows)
 
 
 def test_cait_keeps_top_quartile_counts_under_both_measures_and_skips_suppressed_cells():

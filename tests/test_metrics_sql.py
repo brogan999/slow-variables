@@ -530,3 +530,50 @@ def test_hal_trend_is_the_least_squares_slope_per_year_for_each_score():
     assert [(str(d), m, round(v, 3), ids) for d, m, v, ids in got] == [
         ("2025-12-31", "accuracy", 0.32, ["a0", "a1", "a2", "a3", "a4"])
     ]
+
+
+def _periods(rows: list[tuple]) -> duckdb.DuckDBPyConnection:
+    """A store with period starts, which the year-on-year metrics join on."""
+    con = duckdb.connect()
+    con.execute(
+        "CREATE TABLE obs_raw (id VARCHAR, series_key VARCHAR, subject VARCHAR, as_of_date DATE, value_numeric DOUBLE, raw_snippet VARCHAR, disputed BOOLEAN, period_start DATE)"
+    )
+    con.executemany("INSERT INTO obs_raw VALUES (?, ?, ?, ?, ?, '', false, ?)", rows)
+    con.execute(KEY_SPLIT)
+    return con
+
+
+def test_year_on_year_pairs_the_same_quarter_a_year_apart_and_skips_a_missing_base():
+    rows = [
+        ("g1", "fred.us.real_gdp.q", "us", "2025-06-30", 100.0, "2025-04-01"),
+        ("g2", "fred.us.real_gdp.q", "us", "2026-06-30", 102.0, "2026-04-01"),
+        ("g3", "fred.us.real_gdp.q", "us", "2026-03-31", 101.0, "2026-01-01"),  # its quarter a year before is missing
+    ]
+    got = _periods(rows).execute(METRICS["real_gdp_yoy"]["sql"]).fetchall()
+    assert [(str(d), round(v, 4), ids) for d, v, ids in got] == [("2026-06-30", 0.02, ["g2", "g1"])]
+
+
+def test_electricity_compares_twelve_month_totals_and_a_missing_month_gives_no_reading():
+    from datetime import date, timedelta
+
+    ends = [date(2024 + m // 12, m % 12 + 1, 28) for m in range(36)]
+    ends = [(d.replace(day=1) + timedelta(days=32)).replace(day=1) - timedelta(days=1) for d in ends]  # month ends
+    rows = [
+        (f"e{k}", "fred.us.electric_power_generation.m", "us", str(d), 100.0 if k < 24 else 110.0, str(d.replace(day=1)))
+        for k, d in enumerate(ends)
+    ]
+    got = {str(d): v for d, v, _ in _periods(rows).execute(METRICS["electricity_generation_yoy"]["sql"]).fetchall()}
+    assert len(got) == 13 and round(got["2026-12-31"], 6) == 0.1 and got["2025-12-31"] == 0.0
+    gap = _periods([r for r in rows if r[3] != "2026-06-30"]).execute(METRICS["electricity_generation_yoy"]["sql"]).fetchall()
+    assert "2026-12-31" not in {str(d) for d, *_ in gap} and "2026-05-31" in {str(d) for d, *_ in gap}
+
+
+def test_the_canaries_spread_has_its_least_exposed_control():
+    rows = [
+        ("y5", "canaries.us_exposure_q5_age_22_25.employment_index.m", "us_exposure_q5_age_22_25", "2026-07-31", 88.5, ""),
+        ("o5", "canaries.us_exposure_q5_age_50_plus.employment_index.m", "us_exposure_q5_age_50_plus", "2026-07-31", 104.8, ""),
+        ("y1", "canaries.us_exposure_q1_age_22_25.employment_index.m", "us_exposure_q1_age_22_25", "2026-07-31", 103.0, ""),
+        ("o1", "canaries.us_exposure_q1_age_50_plus.employment_index.m", "us_exposure_q1_age_50_plus", "2026-07-31", 99.0, ""),
+    ]
+    got = {q: (round(v, 1), ids) for _, q, v, ids in run("canaries_junior_senior_gap", rows)}
+    assert got == {"most_exposed": (-16.3, ["y5", "o5"]), "least_exposed": (4.0, ["y1", "o1"])}

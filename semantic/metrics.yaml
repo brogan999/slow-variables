@@ -822,6 +822,96 @@ metrics:
       WHERE source_ns = 'hal_reliability' AND measure IN ('accuracy', 'reliability') AND grain = 'pt'
         AND value_numeric IS NOT NULL AND NOT coalesce(disputed, false)
       GROUP BY measure HAVING count(*) >= 5
+  electricity_generation_yoy:
+    description: Output of US power plants (the Federal Reserve's industrial production index for electric power generation, NAICS 22111), the latest twelve months against the twelve before, monthly, from FRED.
+    rationale: Context on the adaptation stage's page, read beside the claims about what happens next; no status of its own. Twelve-month totals, because a single month's generation swings with the weather.
+    grain: [as_of_date]
+    unit: share
+    lead_lag: coincident
+    formula_version: 1
+    inputs: ["fred.us.electric_power_generation.m"]
+    caveats: An official statistic, revised as its agency revises it; the change reads the stored release of every month in both windows, and a window with a missing month gives no reading.
+    sql: |
+      WITH m AS (SELECT as_of_date, value_numeric AS v, id FROM observations WHERE series_key = 'fred.us.electric_power_generation.m'),
+      t AS (SELECT as_of_date, sum(v) OVER w AS s, count(*) OVER w AS n, min(as_of_date) OVER w AS first, list(id) OVER w AS ids
+            FROM m WINDOW w AS (ORDER BY as_of_date ROWS BETWEEN 11 PRECEDING AND CURRENT ROW))
+      SELECT a.as_of_date, a.s / b.s - 1 AS value, list_concat(a.ids, b.ids) AS obs_ids
+      FROM t a JOIN t b ON b.as_of_date = last_day(a.as_of_date - INTERVAL 12 MONTH)
+      WHERE a.n = 12 AND b.n = 12 AND a.first = last_day(a.as_of_date - INTERVAL 11 MONTH)
+        AND b.first = last_day(b.as_of_date - INTERVAL 11 MONTH)
+  real_gdp_yoy:
+    description: US real gross domestic product, year on year, from FRED (quarterly, BEA).
+    rationale: Context on the adaptation stage's page, read beside the claims about what happens next; no status of its own.
+    grain: [as_of_date]
+    unit: share
+    lead_lag: coincident
+    formula_version: 1
+    inputs: ["fred.us.real_gdp.q"]
+    caveats: An official statistic, revised as its agency revises it; the year-on-year change reads the stored release of both ends.
+    sql: |
+      SELECT a.as_of_date, a.value_numeric / b.value_numeric - 1 AS value, [a.id, b.id] AS obs_ids
+      FROM observations a JOIN observations b ON b.series_key = a.series_key AND b.period_start = a.period_start - INTERVAL 12 MONTH
+      WHERE a.series_key = 'fred.us.real_gdp.q' AND b.value_numeric > 0
+  real_gdp_per_capita_yoy:
+    description: US real output per person, year on year, from FRED (quarterly, BEA).
+    rationale: Context on the adaptation stage's page, read beside the claims about what happens next; no status of its own.
+    grain: [as_of_date]
+    unit: share
+    lead_lag: coincident
+    formula_version: 1
+    inputs: ["fred.us.real_gdp_per_capita.q"]
+    caveats: An official statistic, revised as its agency revises it; the year-on-year change reads the stored release of both ends.
+    sql: |
+      SELECT a.as_of_date, a.value_numeric / b.value_numeric - 1 AS value, [a.id, b.id] AS obs_ids
+      FROM observations a JOIN observations b ON b.series_key = a.series_key AND b.period_start = a.period_start - INTERVAL 12 MONTH
+      WHERE a.series_key = 'fred.us.real_gdp_per_capita.q' AND b.value_numeric > 0
+  real_weekly_earnings_yoy:
+    description: Median usual weekly earnings of full-time workers in constant dollars, year on year, from FRED (quarterly, BLS).
+    rationale: Context on the adaptation stage's page, read beside the claims about what happens next; no status of its own.
+    grain: [as_of_date]
+    unit: share
+    lead_lag: coincident
+    formula_version: 1
+    inputs: ["fred.us.median_real_weekly_earnings.q"]
+    caveats: An official statistic, revised as its agency revises it; the year-on-year change reads the stored release of both ends.
+    sql: |
+      SELECT a.as_of_date, a.value_numeric / b.value_numeric - 1 AS value, [a.id, b.id] AS obs_ids
+      FROM observations a JOIN observations b ON b.series_key = a.series_key AND b.period_start = a.period_start - INTERVAL 12 MONTH
+      WHERE a.series_key = 'fred.us.median_real_weekly_earnings.q' AND b.value_numeric > 0
+  relational_work_share:
+    description: Jobs in private education and health services plus leisure and hospitality, as a share of all nonfarm payroll jobs, monthly (BLS via FRED); public schools and hospitals count in government, so only in the total.
+    rationale: The work built on people dealing with people; context for the claim that relational work becomes scarcer and better paid.
+    grain: [as_of_date]
+    unit: share
+    lead_lag: lagging
+    formula_version: 1
+    inputs: ["fred.us.jobs_nonfarm.m", "fred.us.jobs_education_health.m", "fred.us.jobs_leisure_hospitality.m"]
+    caveats: Two broad sectors stand in for relational work; many relational jobs sit elsewhere and some of these are not relational.
+    sql: |
+      SELECT p.as_of_date, (e.value_numeric + l.value_numeric) / p.value_numeric AS value, [e.id, l.id, p.id] AS obs_ids
+      FROM observations p
+      JOIN observations e ON e.series_key = 'fred.us.jobs_education_health.m' AND e.as_of_date = p.as_of_date
+      JOIN observations l ON l.series_key = 'fred.us.jobs_leisure_hospitality.m' AND l.as_of_date = p.as_of_date
+      WHERE p.series_key = 'fred.us.jobs_nonfarm.m' AND p.value_numeric > 0
+  canaries_junior_senior_gap:
+    description: Within a fifth of occupations ranked by exposure to AI, the employment index of workers aged 22 to 25 minus that of workers aged 50 and over, monthly; each index is set to 100 in November 2022, so the spread is zero there by construction (Stanford Digital Economy Lab and ADP Research). One row for the most exposed fifth and one for the least, its control.
+    rationale: Early-career workers in exposed jobs are where the Canaries work first found a decline. The spread against the oldest workers in the same jobs tells a hiring freeze at the bottom from a fall across the whole occupation, and the same spread in the least exposed fifth tells an AI effect from one that hits the young everywhere.
+    grain: [as_of_date, quintile]
+    unit: index_points
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["canaries.us_exposure_q5_age_22_25.employment_index.m", "canaries.us_exposure_q5_age_50_plus.employment_index.m", "canaries.us_exposure_q1_age_22_25.employment_index.m", "canaries.us_exposure_q1_age_50_plus.employment_index.m"]
+    caveats: ADP payroll records, not the whole labour market; the spread is measured from November 2022 and moves with anything that treats young and old workers differently, not only AI.
+    sql: |
+      SELECT j.as_of_date, 'most_exposed' AS quintile, j.value_numeric - s.value_numeric AS value, [j.id, s.id] AS obs_ids
+      FROM observations j JOIN observations s
+        ON s.as_of_date = j.as_of_date AND s.series_key = 'canaries.us_exposure_q5_age_50_plus.employment_index.m'
+      WHERE j.series_key = 'canaries.us_exposure_q5_age_22_25.employment_index.m'
+      UNION ALL
+      SELECT j.as_of_date, 'least_exposed', j.value_numeric - s.value_numeric, [j.id, s.id]
+      FROM observations j JOIN observations s
+        ON s.as_of_date = j.as_of_date AND s.series_key = 'canaries.us_exposure_q1_age_50_plus.employment_index.m'
+      WHERE j.series_key = 'canaries.us_exposure_q1_age_22_25.employment_index.m'
   custom_silicon_share:
     description: Non-Nvidia designers' share of cumulative AI compute shipped, in H100-equivalents, at each complete quarter end (Epoch chip sales).
     rationale: Custom silicon share is the leading indicator of Nvidia rent decay.

@@ -119,6 +119,13 @@ def test_capture_readings_meta_counts_and_chart_sources(tmp_path):
         assert all(0 <= p["x"] <= 100 and 0 <= p["y"] <= 100 and p["href"] for p in sp["reliability"]["points"])
         for t in sp["reliability"]["trends"]:  # a trend stays on the plot and its record is its row in the figure
             assert all(0 <= t[k] <= 100 for k in ("x1", "y1", "x2", "y2", "label_y")) and t["href"] == f"#d-{t['id']}"
+    # a context line's point sits on its plot; a computed one links to its row in the figure's table, which links its inputs
+    for f in json.loads((d / "context.json").read_text())["figures"]:
+        for ln in f["lines"]:
+            for p in ln["points"]:
+                assert 0 <= p["x"] <= 100 and 0 <= p["y"] <= 100, (f["id"], p)
+                assert p["href"] == f"#d-{p['id']}" and all(r["href"] for r in p["inputs"]) if "id" in p else p["href"].startswith("/series/")
+                assert isinstance(p["joined"], bool)
     lad = json.loads((d / "lens" / "ladder.json").read_text())
     assert not any(r["production"] or r["research"] for r in lad["rungs"]) or lad["chart_sources"]["sources"]
 

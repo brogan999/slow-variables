@@ -94,7 +94,7 @@ export function ReliabilityGap({ doc }: { doc: Signposts }) {
           <thead><tr><th scope="col">agent</th><th scope="col">released</th><th scope="col">measure</th><th scope="col">score</th></tr></thead>
           {r.trends.length ? (
             <tbody>{r.trends.map((t) => (
-              <tr key={t.id} id={`d-${t.id}`}><td>trend in {t.measure}, fitted to the {t.n} {t.measure} rows below</td><td className="num whitespace-nowrap">to {t.as_of}</td><td>{t.measure}</td><td className="num whitespace-nowrap">{t.label}</td></tr>
+              <tr key={t.id} id={`d-${t.id}`} className="scroll-mt-24 target:bg-surface-2"><td>trend in {t.measure}, fitted to the {t.n} {t.measure} rows below</td><td className="num whitespace-nowrap">to {t.as_of}</td><td>{t.measure}</td><td className="num whitespace-nowrap">{t.label}</td></tr>
             ))}</tbody>
           ) : null}
           <tbody>{r.points.slice().reverse().map((p) => (
