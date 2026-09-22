@@ -3,8 +3,16 @@ import { BottleneckMap, Bets, MapReasons } from "@/components/BottleneckMap";
 import { StatusChip } from "@/components/StatusChip";
 import { bottleneckMap, bottlenecks, index, words } from "@/lib/data";
 import { indicatorHref } from "@/lib/format";
+import { SITE } from "@/lib/site";
 
-export const metadata = { title: "Bottlenecks" };
+const title = "Bottlenecks";
+const description = "Where AI is being held up today, and at which stage of its spread: the chain of inputs it is made from and the frictions that slow it, with today's reading of each and who expects what to bind next.";
+// a page's openGraph replaces the site's wholesale, so the share image is named again here
+export const metadata = {
+  title,
+  description,
+  openGraph: { title: `${title} · ${SITE.name}`, description, url: "/bottlenecks", siteName: SITE.name, type: "article", images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: SITE.name }] },
+};
 
 export default function BottlenecksPage() {
   const doc = bottleneckMap();

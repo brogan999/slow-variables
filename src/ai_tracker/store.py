@@ -922,12 +922,13 @@ class Store:
 
         argument = build(self)
         _write(out / "argument.json", argument)
-        from .bottleneck_map import from_store
-
-        _write(out / "map.json", from_store(self, cards, bottlenecks, argument))
         from .outlook import build as build_outlook
 
-        _write(out / "outlook.json", build_outlook(self))
+        outlook = build_outlook(self)
+        _write(out / "outlook.json", outlook)
+        from .bottleneck_map import from_store
+
+        _write(out / "map.json", from_store(self, cards, bottlenecks, argument, outlook))
         _write(out / "sources.json", [self._source_health(s) for s in self.seed.sources])
         _write(out / "skipped_sources.json", [dump(s) for s in self.seed.skipped])
         _write(

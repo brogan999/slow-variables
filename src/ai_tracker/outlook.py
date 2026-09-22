@@ -133,6 +133,32 @@ def essay_problems(text: str, spec: dict[str, Any]) -> list[str]:
     return errors
 
 
+def _numbered(sources: list[dict[str, Any]], essay: str) -> list[dict[str, Any]]:
+    """Sources numbered in the order the essay first cites them, then the rest in ledger order."""
+    first = list(dict.fromkeys(v for k, v in TOKEN.findall(essay) if k == "cite"))
+    order = sorted(sources, key=lambda x: first.index(x["id"]) if x["id"] in first else len(first))
+    return [{**x, "n": n} for n, x in enumerate(order, 1)]
+
+
+def _thresholds(
+    s: Any, spec: dict[str, Any], f: dict[str, dict[str, Any] | None]
+) -> dict[str, dict[str, Any]]:
+    """The number each [test:] token prints: a claim's threshold, in its fact's unit."""
+    out = {}
+    for c in spec.get("claims") or []:
+        t = c.get("test") or {}
+        rhs = next((v for k, v in t.items() if k in OPS), None)
+        if isinstance(rhs, str) or rhs is None:
+            continue
+        fact = f.get(t["fact"]) or {}
+        unit = fact.get("unit") or (s.metric_spec(spec["facts"][t["fact"]].get("metric", "")) or {}).get(
+            "unit"
+        )
+        if unit:
+            out[c["id"]] = {"value": rhs, "unit": unit}
+    return out
+
+
 def build(s: Any, today: date | None = None) -> dict[str, Any]:
     spec = load()
     if not spec:
@@ -140,14 +166,20 @@ def build(s: Any, today: date | None = None) -> dict[str, Any]:
     today = today or date.today()
     f = facts(s, spec, today)
     cl = claims(spec, f, today)
+    essay = ESSAY.read_text() if ESSAY.exists() else ""
     return {
         "as_of": min(
             max((x["as_of"] for x in f.values() if x and x["as_of"]), default=today.isoformat()),
             today.isoformat(),
         ),
-        "essay": ESSAY.read_text() if ESSAY.exists() else "",
+        "essay": essay,
         "facts": f,
-        "sources": spec["sources"],
+        "sources": _numbered(spec["sources"], essay),
+        "tests": _thresholds(s, spec, f),
+        "folios": [
+            {"id": k, "kicker": m}
+            for k, m in zip(FOLIOS, re.findall(r"^### Folio [IVX]+ · (.+)$", essay, re.M))
+        ],
         "positions": spec["positions"],
         "claims": cl,
         "tally": {k: sum(1 for c in cl if c["state"] == k) for k in STATES},

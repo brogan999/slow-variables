@@ -118,3 +118,23 @@ def test_the_seed_resolves_and_a_broken_one_names_each_problem():
                    "bucket new_bucket is drawn at no stage", "unknown indicator draft", "unknown ledger unknown_ledger",
                    "no prediction nobody", "unknown row phantom", "unknown stage someday", "lists an unknown row phantom"):
         assert any(needle in e for e in errs), needle
+
+
+def test_an_outlook_claim_marks_its_cell_in_plain_words_with_its_threshold_written_in():
+    from ai_tracker.bottleneck_map import outlook_claims
+
+    doc = {
+        "sources": [{"id": "hk", "who": "Gillian Hadfield and Andrew Koh"}],
+        "tests": {"c1": {"value": 0.5, "unit": "share"}},
+        "claims": [
+            {"id": "c1", "row": "chips", "stage": "products", "attribution": "author", "holders": ["hk"], "state": "both",
+             "text": "Chips take more than [test:c1] of the profit [cite:hk]."},
+            {"id": "c2", "row": None, "stage": "methods", "attribution": "site", "holders": [], "state": "holding", "text": "x"},
+        ],
+    }
+    claims = outlook_claims(doc)
+    assert claims == [{"row": "chips", "stage": "products", "who": "Gillian Hadfield and Andrew Koh", "state": "both",
+                       "text": "Chips take more than 50.0% of the profit.", "href": "/outlook#claim-c1"}]
+    m = build(SPEC, SCORECARD, PREDICTIONS, BOTTLENECKS, CARDS, READINGS, NAMES, [], claims)
+    chips = {r["id"]: r for sec in m["groups"][0]["sections"] for r in sec["rows"]}["chips"]
+    assert chips["cells"]["products"]["writers"][0]["href"] == "/outlook#claim-c1"  # a stage it does not act on, marked

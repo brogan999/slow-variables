@@ -217,3 +217,16 @@ def test_the_ledger_and_the_essay_resolve():
         ol.FOLIOS
     )  # the page seats positions by folio
     assert yaml.safe_load(ol.SPEC.read_text()) == spec
+
+
+def test_no_sentence_was_split_by_a_comma_in_a_flow_mapping():
+    def keys(x):
+        if isinstance(x, dict):
+            yield from x
+            for v in x.values():
+                yield from keys(v)
+        elif isinstance(x, list):
+            for v in x:
+                yield from keys(v)
+
+    assert [k for k in keys(ol.load()) if " " in str(k)] == []  # {text: a, b} parses as text "a" and a key "b"

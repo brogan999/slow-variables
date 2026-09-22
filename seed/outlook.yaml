@@ -32,6 +32,7 @@ sources:
   # I · capability
   - id: ai_2027
     who: Daniel Kokotajlo, Eli Lifland, Thomas Larsen and Romeo Dean, with Scott Alexander
+    short: the authors of AI 2027
     field: forecasters of AI progress at the AI Futures Project; Kokotajlo worked on governance at OpenAI
     finding: A dated story in which AI labs use each model to speed up the research that builds the next, ending with AI that outdoes people at almost everything by the end of 2027. The authors say 2027 was their single most likely year, and their middle estimates were later.
     work: AI 2027
@@ -40,6 +41,7 @@ sources:
     url: https://ai-2027.com/
   - id: ai_futures_update
     who: Eli Lifland, Daniel Kokotajlo and colleagues
+    short: the authors of AI 2027
     field: the same forecasters, revising their own dates
     finding: After pushing their dates for fully automated coding later at the end of 2025, the authors brought them forward again, because AI coding agents had improved faster than they expected.
     work: Q1 2026 Timelines Update
@@ -65,6 +67,7 @@ sources:
     url: https://knightcolumbia.org/content/ai-as-normal-technology
   - id: agent_reliability
     who: Stephan Rabanser, Sayash Kapoor, Arvind Narayanan and colleagues
+    short: Rabanser, Kapoor, Narayanan and colleagues
     field: Princeton researchers who test AI agents
     finding: Large gains in how often agents solve tasks brought only small gains in how dependably they do it; agents still answer differently on repeat runs, break when instructions are reworded and cannot tell when they will fail.
     work: Towards a Science of AI Agent Reliability
@@ -124,6 +127,7 @@ sources:
     quote: To my knowledge labs do not offer special wholesale pricing
   - id: shahidi_etal
     who: Peyman Shahidi, Gili Rusak, Benjamin Manning, Andrey Fradkin and John Horton
+    short: Shahidi, Horton and colleagues
     field: economists and computer scientists who study online markets
     finding: Agents could slash the cost of searching, bargaining and contracting; they will be taken up first where people already hire human agents and can state simply what they want, and platforms may block agents that are not their own.
     work: The Coasean Singularity?
@@ -150,6 +154,7 @@ sources:
     url: https://conference.nber.org/conf_papers/f227496.pdf
   - id: canaries
     who: Erik Brynjolfsson, Bharat Chandar and Ruyu Chen
+    short: Brynjolfsson, Chandar and Chen
     field: economists at Stanford's Digital Economy Lab who study AI and work through payroll records
     finding: Employment of workers in their early twenties in the jobs most exposed to AI has fallen behind that of their less exposed peers, mostly through less hiring, while experienced workers show no such gap. The authors describe the pattern; they do not claim to have proved its cause.
     work: Canaries in the Coal Mine?
@@ -184,6 +189,7 @@ sources:
     url: https://benjaminmoll.com/wp-content/uploads/2026/08/growth_bet.pdf
   - id: korinek_etal
     who: Anton Korinek, Charles Jones, Peter McCrory and colleagues
+    short: Korinek, McCrory and colleagues
     field: economists who model growth under advanced AI; several work for or advise Anthropic
     finding: A model that turns assumptions about AI into paths for the economy to 2030, from barely changed to growing far faster than today; the authors present them as scenarios, not predictions.
     work: Economic Scenarios for Transformative AI
@@ -381,6 +387,7 @@ sources:
     url: https://dcomin.host.dartmouth.edu/Publications_files/CM_rev_71917.pdf
   - id: brs_jcurve
     who: Erik Brynjolfsson, Daniel Rock and Chad Syverson
+    short: Brynjolfsson, Rock and Syverson
     field: economists who study technology, firms and productivity
     finding: A general-purpose technology needs large investments in new processes, skills and ways of doing business that the national accounts mostly miss, so measured productivity looks weak in the technology's early years and strong later, when the investments pay off.
     work: "The Productivity J-Curve: How Intangibles Complement General Purpose Technologies"
@@ -427,10 +434,10 @@ positions:
   - id: compounding
     folio: capability
     title: AI speeds up its own research, and the gains compound
-    holders: [ai_2027, ai_futures_update]
+    holders: [ai_2027]
     attribution: author
     mechanism: Each model helps write the code and run the experiments that build the next one, so progress feeds on itself.
-    case: AI coding agents improved faster in 2026 than even these forecasters expected, and they brought their dates forward again.
+    case: AI coding agents improved faster in 2026 than even these forecasters expected, and they brought their dates forward again [cite:ai_futures_update].
     kill_shot: Whole jobs staying far out of reach while single skills race ahead, which is the pattern a pace set by the slowest step predicts.
     rival: slowest_task
     visible: true
@@ -447,7 +454,7 @@ positions:
   - id: not_reliability
     folio: capability
     title: Getting a task right is not getting it right every time
-    holders: [agent_reliability, normal_tech]
+    holders: [agent_reliability]
     attribution: author
     mechanism: A firm hands work to an agent only when it behaves the same way each time, and that has improved far more slowly than accuracy.
     case: The same agents that solve more tasks each year still give different answers when the same task is run again.
@@ -633,7 +640,7 @@ positions:
   - id: modest_growth
     folio: reorganisation
     title: Growth stays near its usual pace
-    holders: [moll_imas, moll_imas_bet, jones_tonetti]
+    holders: [moll_imas, jones_tonetti]
     attribution: author
     mechanism: A jump in growth needs fast automation everywhere, spending that follows it and no costly accidents, all at once.
     case: Past general-purpose technologies, from electricity to computers, took decades to show up in growth.
@@ -1106,7 +1113,7 @@ scenarios:
       binds_next: [family_5]
   anchors:
     - {source: eo_14365, date: 2025-12-11, text: The United States set out to override state AI laws in favour of a light federal standard.}
-    - {source: colorado_sb26_189, date: 2026-05-14, text: Colorado replaced its AI Act with a narrower law on automated decisions, which applies from January 2027.}
+    - {source: colorado_sb26_189, date: 2026-05-14, text: "Colorado replaced its AI Act with a narrower law on automated decisions, which applies from January 2027."}
     - {source: eu_2026_1744, date: 2026-07-08, text: The European Union put off its rules for high-risk AI until December 2027 and August 2028.}
 
 agree:
