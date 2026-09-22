@@ -4,7 +4,7 @@ from datetime import date
 
 from ai_tracker.analysis.direction import window
 from ai_tracker.chart import axis, change_label, time_axis, x, y
-from ai_tracker.schema import Basis, DirectionRule, Tier, stamp
+from ai_tracker.schema import Basis, DirectionRule, Extraction, Tier, stamp
 
 
 def labels(ax):
@@ -31,11 +31,19 @@ def test_a_task_horizon_ticks_at_durations_people_know():
     ax = axis([0.03, 1045, 2800], "minutes", log=True)
     assert labels(ax) == ["1 s", "10 s", "1 min", "10 min", "1 h", "8 h", "1 day", "1 week"]
     assert y(60, ax) == ax["ticks"][4]["y"]  # an hour sits on the hour line
+    # GPT-2's 80% horizon and its interval sit below a second: the ladder reaches down rather than pin them
+    low = axis([0.0128, 0.0015, 1045], "minutes", log=True)
+    assert labels(low)[:2] == ["0.01 s", "0.1 s"] and 0 <= y(0.0015, low) <= 100
+    assert labels(axis([60, 60], "minutes", log=True)) == [
+        "1 h",
+        "8 h",
+    ]  # one reading on a rung still spans two
 
 
-def test_positions_are_percent_from_the_top_left_and_pin_to_the_edges():
+def test_positions_are_percent_from_the_top_left_and_never_pinned():
     ax = axis([0, 10], "count", zero=True)
-    assert (y(0, ax), y(10, ax), y(5, ax), y(99, ax)) == (100.0, 0.0, 50.0, 0.0)
+    assert (y(0, ax), y(10, ax), y(5, ax)) == (100.0, 0.0, 50.0)
+    assert y(99, ax) < 0  # off the axis is off the plot, for the export test to catch, not hidden on the edge
     assert x(date(2026, 1, 11), date(2026, 1, 1), date(2026, 1, 21)) == 50.0
 
 
@@ -55,17 +63,28 @@ def test_a_time_axis_ticks_years_or_months_and_the_first_tick_names_its_year():
     assert labels(weeks)[0] == "3 Sep 2026" and len(weeks["ticks"]) >= 2
     one = time_axis([date(2026, 8, 1)])
     assert labels(one) == ["Jul 2026", "Aug", "Sep"]
+    # a phone never drops the first tick or a year, and no tick crowds either edge
+    mid = time_axis([date(2024, 6, 1), date(2026, 8, 1)])
+    assert [(t["label"], t["minor"]) for t in mid["ticks"]] == [
+        ("Jul 2024", False), ("2025", False), ("Jul", True), ("2026", False), ("Jul", True)
+    ]  # fmt: skip
+    assert all(3 <= t["x"] <= 96 for t in weeks["ticks"] + mid["ticks"] + long["ticks"])
 
 
 def test_a_change_moves_in_points_for_shares_and_in_its_unit_otherwise():
     assert change_label(0.021, "share") == "+2.1 pts"
     assert change_label(-0.4, "pct_change_yoy") == "−0.4 pts"
     assert change_label(-1.2e9, "USD") == "−$1.2B"
+    assert change_label(-5.96, "ratio") == "−5.96"  # a difference of ratios is not a multiplier
 
 
 def test_a_stamp_says_how_firm_a_number_is():
     assert stamp(Tier.BENCHMARK, Basis.reported) == "measured"
-    assert stamp(Tier.OFFICIAL_FILING, Basis.company_stated) == "measured"
+    assert (
+        stamp(Tier.OFFICIAL_FILING, Basis.company_stated, Extraction.xbrl) == "measured"
+    )  # a filed statement
+    assert stamp(Tier.OFFICIAL_FILING, Basis.company_stated, Extraction.api) == "reported"  # a Form D amount
+    assert stamp(Tier.OFFICIAL_FILING, Basis.reported) == "measured"  # an official statistic
     assert stamp(Tier.CREDIBLE_REPORTING, Basis.reported) == "reported"
     assert stamp(Tier.OFFICIAL_FILING, Basis.estimated) == "estimate"
 

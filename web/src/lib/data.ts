@@ -9,7 +9,7 @@ export type Point = {
   subject?: string; unit?: string; disputed?: boolean; grade?: string; dims?: Record<string, string>; series_key?: string;
   flags?: string[]; dispute_text?: string | null;
   // laid out by the export: the record, how firm the number is, and where the chart draws it (percent from top left)
-  href?: string | null; stamp?: Stamp | null; x?: number; y?: number; y_low?: number; y_high?: number; faint?: boolean;
+  href?: string | null; stamp?: Stamp | null; x?: number; y?: number; y_low?: number; y_high?: number; faint?: boolean; partial?: boolean;
 };
 export type Stamp = "measured" | "reported" | "estimate";
 export type Tick = { label: string; x?: number; y?: number; minor?: boolean };
@@ -17,7 +17,7 @@ export type ChartT = {
   x: { ticks: Tick[] }; y: { ticks: Tick[]; unit: string | null; log: boolean; chars: number };
   bands: { name: "normal" | "fast"; y: number; height: number }[];
   dead: { x: number; width: number; y: number; height: number } | null;
-  change: { label: string; dead_band: string } | null; line: boolean;
+  change: { label: string; dead_band: string; steps: string } | null; line: boolean; partial: boolean;
   drawn: { metric: string | null; series: string | null; others: number; total: number }; needs: number | null;
   n_drawn: number; stamps: Stamp[];
 };
@@ -44,8 +44,8 @@ export type IndicatorDoc = Card & {
   proposed_status: string | null; override_note: string | null; timing_rationale?: string | null; related_bottlenecks: number[]; related_indicators: string[];
   related_predictions: string[]; updated_at: string;
   series: { series_key: string; points: Point[] }[];
-  derived: (Point & { metric: string; as_of_date: string; input_observation_ids: string[] })[];
-  status_events: StatusEvent[]; crosswalk: Crosswalk[]; evidence: Evidence[]; chart: ChartT | null;
+  derived: (Point & { id: string; metric: string; as_of_date: string; input_observation_ids: string[] })[];
+  status_events: StatusEvent[]; crosswalk: Crosswalk[]; evidence: Evidence[]; chart: ChartT | null; direction_readings: number | null;
 };
 export type Bucket = { id: string; name: string; order: number; stock: string; valve: string; speed_limit: string };
 export type Tally = { scored: number; published: number; margin: number; only: string | null };

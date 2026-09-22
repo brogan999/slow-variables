@@ -82,24 +82,22 @@ def test_capture_readings_meta_counts_and_chart_sources(tmp_path):
         ("margin_stack_series", "margin_stack_sources"),
     ):
         assert not cap[series] or cap[sources]["sources"], series
-    # every indicator chart is laid out by the export: ticks and marks inside the plot, and every mark a link
+    # every indicator chart is laid out by the export: ticks and marks inside the plot, every mark a record
     for f in (d / "indicators").glob("*.json"):
         doc = json.loads(f.read_text())
-        drawn = [p for p in doc["points"] if p["value"] is not None]
+        drawn = [p for p in doc["points"] if "x" in p]
         assert bool(drawn) == bool(doc["chart"]), f.name
         if not drawn:
             continue
         c = doc["chart"]
         assert c["n_drawn"] == len(drawn) and len(c["y"]["ticks"]) >= 2, f.name
-        assert all(0 <= t["y"] <= 100 for t in c["y"]["ticks"]) and all(
-            0 <= t["x"] <= 100 for t in c["x"]["ticks"]
-        )
+        assert all(0 <= t["y"] <= 100 for t in c["y"]["ticks"]) and all(0 <= t["x"] <= 100 for t in c["x"]["ticks"])
         for p in drawn:
-            assert 0 <= p["x"] <= 100 and 0 <= p["y"] <= 100 and p["href"].startswith("/series/"), (f.name, p)
+            assert all(0 <= p[k] <= 100 for k in ("x", "y", "y_low", "y_high") if k in p), (f.name, p)
+            # a reading links to its row; a number derived from several rows, to its derived row on this page
+            assert p["href"].startswith("/series/") or p["href"] == f"#d-{p['derived_id']}", (f.name, p)
             assert p["stamp"] in ("measured", "reported", "estimate"), (f.name, p)
-        assert all(0 <= b["y"] and b["height"] >= 0 and b["y"] + b["height"] <= 100.01 for b in c["bands"]), (
-            f.name
-        )
+        assert all(0 <= b["y"] and b["height"] >= 0 and b["y"] + b["height"] <= 100.01 for b in c["bands"]), f.name
     lad = json.loads((d / "lens" / "ladder.json").read_text())
     assert not any(r["production"] or r["research"] for r in lad["rungs"]) or lad["chart_sources"]["sources"]
 
@@ -110,30 +108,14 @@ def test_layer_venture_reads_the_latest_covered_quarter_not_the_last_non_empty_o
     from ai_tracker.schema import Derived
 
     def d(day, layer, value):
-        return Derived(
-            metric="venture_dollars_4q",
-            value=value,
-            as_of_date=day,
-            input_observation_ids=[f"{layer}{day}"],
-            formula_version="1",
-            computed_at=datetime.now(timezone.utc),
-            dims={"layer_id": layer, "sublayer_id": "all"},
-        )
+        return Derived(metric="venture_dollars_4q", value=value, as_of_date=day, input_observation_ids=[f"{layer}{day}"],
+                       formula_version="1", computed_at=datetime.now(timezone.utc), dims={"layer_id": layer, "sublayer_id": "all"})
 
     s = st.Store()
-    s.derived = [
-        d(date(2025, 3, 31), "old", 5e8),
-        d(date(2025, 6, 30), "old", 5e8),
-        d(date(2025, 6, 30), "new", 1e8),
-        d(date(2026, 6, 30), "new", 3e8),
-    ]
+    s.derived = [d(date(2025, 3, 31), "old", 5e8), d(date(2025, 6, 30), "old", 5e8), d(date(2025, 6, 30), "new", 1e8),
+                 d(date(2026, 6, 30), "new", 3e8)]
     old = s._layer_venture("old")  # rounds stopped: the four quarters to 30 Jun 2026 hold none
-    assert (
-        old["value"] is None
-        and old["as_of"] == "2026-06-30"
-        and old["arrow"] == "down"
-        and old["obs_ids"] == []
-    )
+    assert old["value"] is None and old["as_of"] == "2026-06-30" and old["arrow"] == "down" and old["obs_ids"] == []
     s.derived = [d(date(2025, 3, 31), "old", 5e8), d(date(2026, 6, 30), "new", 3e8)]
     assert s._layer_venture("new")["arrow"] == "up"  # the year-earlier window was covered and empty
 
@@ -142,45 +124,25 @@ def test_one_instrument_casts_one_vote_and_the_tally_names_a_lone_reading():
     from ai_tracker.store import _summarise, _tally
 
     def card(i, status, cluster=None, conf=50):
-        return {
-            "id": i,
-            "name": i.upper(),
-            "status": status,
-            "source_cluster": cluster,
-            "confidence": conf,
-            "published": True,
-        }
+        return {"id": i, "name": i.upper(), "status": status, "source_cluster": cluster, "confidence": conf, "published": True}
 
-    survey = [
-        card("a", "faster_than_normal", "one_survey", 60),
-        card("b", "faster_than_normal", "one_survey", 40),
-        card("c", "faster_than_normal", "one_survey", 30),
-    ]
+    survey = [card("a", "faster_than_normal", "one_survey", 60), card("b", "faster_than_normal", "one_survey", 40),
+              card("c", "faster_than_normal", "one_survey", 30)]
     other = [card("d", "consistent_with_normal")]
-    assert (
-        _summarise(survey + other) == "mixed"
-    )  # three readings of one survey do not outvote another instrument
+    assert _summarise(survey + other) == "mixed"  # three readings of one survey do not outvote another instrument
     assert _tally(survey + other) == {"scored": 2, "published": 4, "margin": 0, "only": None}
-    assert (
-        _summarise(survey) == "faster_than_normal" and _tally(survey)["only"] == "A"
-    )  # the most confident speaks
-    assert (
-        _summarise([card("e", "unclear"), card("f", "dispersing")]) == "dispersing"
-    )  # unclear is not a reading
+    assert _summarise(survey) == "faster_than_normal" and _tally(survey)["only"] == "A"  # the most confident speaks
+    assert _summarise([card("e", "unclear"), card("f", "dispersing")]) == "dispersing"  # unclear is not a reading
     assert _tally([card("e", "unclear"), card("f", "dispersing")])["scored"] == 1
 
 
 def test_the_bands_table_carries_every_indicator_band_from_seed():
     s = st.Store()
-    rows = s.con.execute(
-        "SELECT indicator_id, band_input, fast_lo, fast_hi FROM bands WHERE fast_lo IS NOT NULL OR fast_hi IS NOT NULL"
-    ).fetchall()
+    rows = s.con.execute("SELECT indicator_id, band_input, fast_lo, fast_hi FROM bands WHERE fast_lo IS NOT NULL OR fast_hi IS NOT NULL").fetchall()
     seeded = {i.id: i.fast_band for i in s.seed.indicators if i.fast_band}
     assert {r[0] for r in rows} == set(seeded)
     for iid, _bi, lo, hi in rows:
         assert (lo, hi) == (seeded[iid].lo, seeded[iid].hi)
     # the concordance count reads those bands rather than restating them
-    sql = __import__("yaml").safe_load(open("semantic/metrics.yaml"))["metrics"]["cross_tracker_concordance"][
-        "sql"
-    ]
+    sql = __import__("yaml").safe_load(open("semantic/metrics.yaml"))["metrics"]["cross_tracker_concordance"]["sql"]
     assert "JOIN bands" in sql and "-0.03" not in sql

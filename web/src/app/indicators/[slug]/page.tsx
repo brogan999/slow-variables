@@ -63,7 +63,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
           </MarginPanel>
           <MarginPanel title="The rule">
             {d.normal_band ? <p>Normal {band(d.normal_band, bandUnit)}; fast {band(d.fast_band, bandUnit)}{d.falsifying_band ? `; falsifying ${band(d.falsifying_band, bandUnit)}` : ""}. Between them it reads emerging.</p> : null}
-            {d.direction_rule ? <p>Direction over {d.direction_rule.periods} readings; moves under {fmt(d.direction_rule.dead_band, d.unit)} count as stable; higher means {d.direction_rule.higher_is}.</p> : null}
+            {d.direction_rule ? <p>Direction over {d.direction_readings} readings; moves under {fmt(d.direction_rule.dead_band, d.unit)} count as stable; higher means {d.direction_rule.higher_is}.</p> : null}
             <p className="flex items-center gap-3"><ConfidenceBar value={d.confidence} rubric={rubric} /><span>Confidence {d.confidence ?? "—"} of 95: {rubricWords(d.confidence, rubric)}. <Grade grade={d.grade} /></span></p>
             {d.leading_lagging ? <p>{d.timing_rationale}</p> : null}
             <p className="text-muted">Updated {d.updated_at}</p>
@@ -114,7 +114,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
             ) : null}
             {d.derived.length ? <details className="mt-3 text-xs"><summary className="cursor-pointer text-ink-2">Derived rows ({d.derived.length})</summary>
               <table className="data w-full mt-1"><thead><tr><th scope="col">as of</th><th scope="col">dims</th><th scope="col">value</th><th scope="col">inputs</th></tr></thead><tbody>
-                {d.derived.slice().reverse().map((r) => <tr key={r.as_of_date + JSON.stringify(r.dims)}><td>{r.as_of_date}</td><td>{Object.values(r.dims ?? {}).join(" ")}</td><td className="tabular-nums">{fmt(r.value, d.unit)}</td><td><ObsLinks ids={r.obs_ids} obsIndex={idx} max={3} /></td></tr>)}
+                {d.derived.slice().reverse().map((r) => <tr key={r.id} id={`d-${r.id}`} className="scroll-mt-24 target:bg-surface-2"><td>{r.as_of_date}</td><td>{Object.values(r.dims ?? {}).join(" ")}</td><td className="tabular-nums">{fmt(r.value, d.unit)}</td><td><ObsLinks ids={r.obs_ids} obsIndex={idx} max={3} /></td></tr>)}
               </tbody></table></details> : null}
           </details>
           <details id="timeline">

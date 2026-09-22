@@ -17,7 +17,7 @@ export default function MemosPage() {
               <div className="flex flex-col gap-2 max-w-[68ch]">
                 <h2 className="display text-2xl md:text-[1.75rem] leading-tight"><Link href={`/memos/${m.date}`} className="hover:underline underline-offset-4 decoration-grid">{m.title}</Link></h2>
                 <p className="text-ink-2">{m.summary}</p>
-                <p className="eyebrow">{m.since} → {m.date} · {m.mode === "prose" ? `drafted by ${m.model}` : "deterministic digest"} · {m.events} status events · {fmt(m.new_observations)} new observations</p>
+                <p className="eyebrow">{m.since} → {m.date} · {m.mode === "prose" ? `drafted by ${m.model}` : "deterministic digest"} · {m.events} status events · {fmt(m.new_observations, "count")} new observations</p>
               </div>
             </li>
           ))}

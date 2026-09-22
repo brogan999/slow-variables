@@ -16,7 +16,9 @@ TABLE = [
     (31.0, "minutes", "31.0 min"),
     (107.99, "days", "108 days"),
     (24.0, "count", "24"),
-    (2028.4, "year", "2028"),
+    (2028.0, "year", "2028"),
+    (2025.84, "year", "2025.8"),
+    (12345, "count", "12,345"),
     (7077, None, "7077"),
     (95_311, None, "95,311"),
     (0.85, "index", "0.85 index"),
@@ -35,7 +37,7 @@ def test_values_read_the_way_the_site_renders_them():
     for value, unit, want in TABLE:
         assert fmt(value, unit) == want, (value, unit)
     # a value past the decimal context's reach still prints, never raises
-    assert fmt(3e30, "count").isdigit()
+    assert fmt(3e30, "count").replace(",", "").isdigit()
 
 
 def test_every_unit_the_web_formatter_names_is_handled_here():

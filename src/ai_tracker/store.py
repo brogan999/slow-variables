@@ -31,6 +31,7 @@ from .schema import (
     Derived,
     Entity,
     Essay,
+    Extraction,
     FetchLog,
     Indicator,
     Layer,
@@ -564,9 +565,9 @@ class Store:
     def _obs_meta(self) -> dict[str, tuple[str, str]]:
         """Every row's series key and stamp, for a point's link and the firmness word a figure prints."""
         rows = self.con.execute(
-            "SELECT id, series_key, tier, audited_vs_reported FROM observation_all"
+            "SELECT id, series_key, tier, audited_vs_reported, extraction_method FROM observation_all"
         ).fetchall()
-        return {i: (k, stamp(Tier(t), Basis(b))) for i, k, t, b in rows}
+        return {i: (k, stamp(Tier(t), Basis(b), Extraction(x))) for i, k, t, b, x in rows}
 
     def stamp_of(self, ids: list[str]) -> str | None:
         """The weakest stamp among the rows behind a number: a ratio of a filing and an estimate is an estimate."""
@@ -574,16 +575,28 @@ class Store:
         return min(got, key=STAMPS.index) if got else None
 
     def href_of(self, ids: list[str]) -> str | None:
-        """A number's record: the first row behind it, on its series page."""
+        """A row's record on its series page (the first of `ids` the store holds)."""
         first = next((i for i in ids if i in self._obs_meta), None)
         return f"/series/{self._obs_meta[first][0]}#{first}" if first else None
 
     def _chart(self, ind: Indicator, pts: list[dict[str, Any]]) -> dict[str, Any] | None:
         """The indicator chart, laid out here so the page only draws: axes, the bands or the direction rule's window,
         and each point's position, link and stamp, written onto the point itself."""
+        today, log = date.today(), ind.unit == "minutes"
         for p in pts:
-            p["href"], p["stamp"] = self.href_of(p["obs_ids"]), self.stamp_of(p["obs_ids"])
-        drawn = [p for p in pts if p["value"] is not None and math.isfinite(p["value"])]
+            day = date.fromisoformat(p["as_of"])
+            # a reading's record is its row; a number derived from several rows links to its derived row, which
+            # lists them all (picking one input would be arbitrary)
+            many = p.get("derived_id") and len(p["obs_ids"]) > 1
+            p["href"] = f"#d-{p['derived_id']}" if many else self.href_of(p["obs_ids"])
+            p["stamp"] = self.stamp_of(p["obs_ids"])
+            if day > today:  # a quarter still running, dated at its end
+                p["partial"] = True
+        drawn = [
+            p
+            for p in pts
+            if p["value"] is not None and math.isfinite(p["value"]) and (p["value"] > 0 or not log)
+        ]
         if not drawn:
             return None
         rule, when = ind.direction_rule, [date.fromisoformat(p["as_of"]) for p in drawn]
@@ -597,7 +610,13 @@ class Store:
             else [e for _, b in on_chart if b for e in (b.lo, b.hi) if e is not None]
         )
         # a range open at one end shows a sliver past its edge, or a fast range at the axis's top would draw nothing
-        vals = [v for p in drawn for v in (p["value"], p.get("low"), p.get("high")) if v is not None] + extra
+        vals = [
+            v
+            for p in drawn
+            for v in (p["value"], p.get("low"), p.get("high"))
+            if v is not None and math.isfinite(v)
+        ]
+        vals += extra
         reach = (max(vals) - min(vals)) * 0.08
         extra += [b.lo + reach for _, b in on_chart if b and b.hi is None and b.lo is not None]
         extra += [b.hi - reach for _, b in on_chart if b and b.lo is None and b.hi is not None]
@@ -605,13 +624,16 @@ class Store:
         ya = chart.axis(
             [v for p in drawn for v in (p["value"], p.get("low"), p.get("high"))] + extra,
             ind.unit,
-            log=ind.unit == "minutes",
-            zero=not rule and ind.unit != "minutes",
+            log=log,
+            zero=not rule and not log,
         )
         left = Counter(win)  # a point is in the window when its (date, value) is; ties are identical readings
         for d, p in zip(when, drawn):
             p["x"], p["y"] = chart.x(d, xa["lo"], xa["hi"]), chart.y(p["value"], ya)
-            if all(p.get(k) is not None and math.isfinite(p[k]) for k in ("low", "high")):
+            if all(
+                p.get(k) is not None and math.isfinite(p[k]) and (p[k] > 0 or not log)
+                for k in ("low", "high")
+            ):
                 p["y_low"], p["y_high"] = chart.y(p["low"], ya), chart.y(p["high"], ya)
             if rule:
                 p["faint"] = not left[(d, p["value"])]
@@ -631,9 +653,13 @@ class Store:
                 "y": top,
                 "height": round(chart.y(base - rule.dead_band, ya) - top, 2),
             }
+            steps = [b[1] - a[1] for a, b in zip(win, win[1:])]
             change = {
                 "label": chart.change_label(last - base, ind.unit),
                 "dead_band": "±" + chart.change_label(rule.dead_band, ind.unit)[1:],
+                # the rule's second test: more than half the steps must move the way the window moved
+                "steps": f"{sum(1 for x in steps if x * (last - base) > 0)} of {len(steps)} steps "
+                + ("rose" if last > base else "fell"),
             }
         series = None if ind.metric else (ind.series_keys or [None])[0]
         return {
@@ -645,7 +671,8 @@ class Store:
             "bands": bands,
             "dead": dead,
             "change": change,
-            "line": bool(rule) and len(set(when)) == len(when),  # a single series in time order: join the dots
+            "line": bool(rule)
+            and len(set(when)) == len(when),  # a single series in time order: join the dots
             "drawn": {
                 "metric": ind.metric,
                 "series": series,
@@ -653,6 +680,7 @@ class Store:
                 "total": len(ind.series_keys),
             },
             "needs": rule.periods + 1 if rule else None,  # readings the direction rule compares
+            "partial": any(p.get("partial") for p in drawn),
             "n_drawn": len(drawn),
             "stamps": sorted({p["stamp"] for p in drawn if p["stamp"]}, key=STAMPS.index),
         }
@@ -667,6 +695,7 @@ class Store:
                     "obs_ids": d.input_observation_ids,
                     "dims": d.dims,
                     "unit": ind.unit,
+                    "derived_id": d.id,
                 }
                 for d in self.derived_for(ind.metric, ind.metric_dims)
             ]
@@ -695,6 +724,7 @@ class Store:
                 **cards[ind.id],
                 "points": pts,
                 "chart": self._chart(ind, pts),
+                "direction_readings": ind.direction_rule.periods + 1 if ind.direction_rule else None,
                 # the ids of the sources actually behind the rows: a series namespace is not always a source id
                 "source_ids": sorted({o["source_id"] for o in self.evidence_obs(ind)}),
                 "band_value": {

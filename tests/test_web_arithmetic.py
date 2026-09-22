@@ -10,11 +10,12 @@ ROOT = Path("web/src")
 ALLOWED = {"lib/format.ts", "components/chart.tsx", "components/HoverLayer.tsx", "components/Freshness.tsx"}
 PENDING = {
     "components/FourClocks.tsx",
+    "components/MarginStackChart.tsx",
     "components/MigrationParts.tsx",
     "components/VentureFlowStrip.tsx",
     "app/methodology/page.tsx",
 }
-TELLS = re.compile(r"Math\.|\.reduce\(|toFixed\(|toLocale\w*String\(")
+TELLS = re.compile(r"Math\.|\.reduce\(|toFixed\(|toLocale\w*String\(|\*\s*100\b")
 
 
 def test_the_web_computes_no_number():

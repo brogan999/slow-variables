@@ -28,7 +28,8 @@
   "bands": [],
   "change": {
    "dead_band": "\u00b1$20.0B",
-   "label": "\u2212$75.9B"
+   "label": "\u2212$75.9B",
+   "steps": "1 of 3 steps fell"
   },
   "dead": {
    "height": 5.0,
@@ -45,9 +46,9 @@
   "line": true,
   "n_drawn": 8,
   "needs": 4,
+  "partial": false,
   "stamps": [
-   "reported",
-   "measured"
+   "reported"
   ],
   "x": {
    "ticks": [
@@ -177,7 +178,7 @@
  "derived": [
   {
    "as_of_date": "2024-12-31",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "0cf8c0212905feba",
@@ -194,7 +195,7 @@
   },
   {
    "as_of_date": "2025-03-31",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "6aa1e7b91abbb0d3",
@@ -211,7 +212,7 @@
   },
   {
    "as_of_date": "2025-06-30",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "d383b6ee69ba1c24",
@@ -228,7 +229,7 @@
   },
   {
    "as_of_date": "2025-09-30",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "5b7ca7373d578142",
@@ -253,7 +254,7 @@
   },
   {
    "as_of_date": "2025-12-31",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "0f96be518f7e43b9",
@@ -284,7 +285,7 @@
   },
   {
    "as_of_date": "2026-03-31",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "f9a5ee48a938101f",
@@ -319,7 +320,7 @@
   },
   {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "cbcca0e50717b506",
@@ -358,7 +359,7 @@
   },
   {
    "as_of_date": "2026-08-17",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "febe8edbad38ae2e",
@@ -391,6 +392,7 @@
   }
  ],
  "direction": null,
+ "direction_readings": 4,
  "direction_rule": {
   "dead_band": 20000000000.0,
   "higher_is": "concentrating",
@@ -403,7 +405,7 @@
  "fits": [
   {
    "as_of_date": "2026-08-17",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "f6d2b4cee03aed99",
@@ -451,6 +453,7 @@
  "id": "circular_financing_scale",
  "latest": {
   "as_of": "2026-08-17",
+  "derived_id": "febe8edbad38ae2e",
   "dims": {},
   "obs_ids": [
    "0020effe4dfd27db",
@@ -478,13 +481,14 @@
  "points": [
   {
    "as_of": "2024-12-31",
+   "derived_id": "0cf8c0212905feba",
    "dims": {},
    "faint": true,
    "href": "/series/circular.amazon_anthropic.equity_usd.pt#bb4e60191fef03e2",
    "obs_ids": [
     "bb4e60191fef03e2"
    ],
-   "stamp": "measured",
+   "stamp": "reported",
    "unit": "USD",
    "value": 8000000000.0,
    "x": 2.86,
@@ -492,13 +496,14 @@
   },
   {
    "as_of": "2025-03-31",
+   "derived_id": "6aa1e7b91abbb0d3",
    "dims": {},
    "faint": true,
    "href": "/series/circular.amazon_anthropic.equity_usd.pt#bb4e60191fef03e2",
    "obs_ids": [
     "bb4e60191fef03e2"
    ],
-   "stamp": "measured",
+   "stamp": "reported",
    "unit": "USD",
    "value": 8000000000.0,
    "x": 17.14,
@@ -506,13 +511,14 @@
   },
   {
    "as_of": "2025-06-30",
+   "derived_id": "d383b6ee69ba1c24",
    "dims": {},
    "faint": true,
    "href": "/series/circular.amazon_anthropic.equity_usd.pt#bb4e60191fef03e2",
    "obs_ids": [
     "bb4e60191fef03e2"
    ],
-   "stamp": "measured",
+   "stamp": "reported",
    "unit": "USD",
    "value": 8000000000.0,
    "x": 31.59,
@@ -520,9 +526,10 @@
   },
   {
    "as_of": "2025-09-30",
+   "derived_id": "5b7ca7373d578142",
    "dims": {},
    "faint": true,
-   "href": "/series/circular.meta_coreweave.contract_usd.pt#15768aa04a91e520",
+   "href": "#d-5b7ca7373d578142",
    "obs_ids": [
     "15768aa04a91e520",
     "15f854e53d8ab33a",
@@ -538,9 +545,10 @@
   },
   {
    "as_of": "2025-12-31",
+   "derived_id": "0f96be518f7e43b9",
    "dims": {},
    "faint": false,
-   "href": "/series/circular.meta_coreweave.contract_usd.pt#15768aa04a91e520",
+   "href": "#d-0f96be518f7e43b9",
    "obs_ids": [
     "15768aa04a91e520",
     "15f854e53d8ab33a",
@@ -559,9 +567,10 @@
   },
   {
    "as_of": "2026-03-31",
+   "derived_id": "f9a5ee48a938101f",
    "dims": {},
    "faint": false,
-   "href": "/series/circular.meta_coreweave.contract_usd.pt#15768aa04a91e520",
+   "href": "#d-f9a5ee48a938101f",
    "obs_ids": [
     "15768aa04a91e520",
     "15f854e53d8ab33a",
@@ -582,9 +591,10 @@
   },
   {
    "as_of": "2026-06-30",
+   "derived_id": "cbcca0e50717b506",
    "dims": {},
    "faint": false,
-   "href": "/series/circular.meta_coreweave.contract_usd.pt#15768aa04a91e520",
+   "href": "#d-cbcca0e50717b506",
    "obs_ids": [
     "15768aa04a91e520",
     "15f854e53d8ab33a",
@@ -607,9 +617,10 @@
   },
   {
    "as_of": "2026-08-17",
+   "derived_id": "febe8edbad38ae2e",
    "dims": {},
    "faint": false,
-   "href": "/series/circular.nvidia_openai.guarantee_usd.pt#0020effe4dfd27db",
+   "href": "#d-febe8edbad38ae2e",
    "obs_ids": [
     "0020effe4dfd27db",
     "47769aec0def968f",

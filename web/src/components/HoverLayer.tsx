@@ -12,6 +12,13 @@ export function HoverLayer() {
     tip.setAttribute("aria-hidden", "true");
     tip.hidden = true;
     document.body.appendChild(tip);
+    // with JavaScript on, each chart is one tab stop and this layer draws the tip, so the no-script fallbacks go
+    document.querySelectorAll("[data-tip] > title").forEach((t) => t.remove());
+    document.querySelectorAll("[data-marks]").forEach((g) => {
+      const marks = Array.from(g.querySelectorAll("[data-tip]"));
+      const stop = marks.find((m) => m.hasAttribute("data-stop")) ?? marks[0];
+      marks.forEach((m) => m.setAttribute("tabindex", m === stop ? "0" : "-1"));
+    });
 
     const show = (el: Element) => {
       tip.textContent = el.getAttribute("data-tip");
@@ -40,6 +47,13 @@ export function HoverLayer() {
       next.setAttribute("tabindex", "0");
       next.focus();
     };
+    // a link into a closed disclosure (a chart dot's derived row, a strip span's reason) opens it
+    const reveal = () => {
+      let d = location.hash ? document.getElementById(decodeURIComponent(location.hash.slice(1)))?.closest("details") : null;
+      for (; d; d = d.parentElement?.closest("details")) d.open = true;
+    };
+    reveal();
+    addEventListener("hashchange", reveal);
     document.addEventListener("pointerover", over);
     document.addEventListener("focusin", over);
     document.addEventListener("keydown", keys);
@@ -49,6 +63,7 @@ export function HoverLayer() {
       document.removeEventListener("focusin", over);
       document.removeEventListener("keydown", keys);
       removeEventListener("scroll", hide);
+      removeEventListener("hashchange", reveal);
       tip.remove();
     };
   }, []);

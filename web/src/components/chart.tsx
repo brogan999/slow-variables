@@ -32,14 +32,17 @@ export function Marks({ children }: { children: React.ReactNode }) {
 }
 
 // One reading: a dot inside a hit target three times its size, linked to its record. `tip` is what the hover layer
-// shows and what a screen reader hears.
-export function Mark({ p, tip, stop, hollow = false, faint = false }: { p: Point; tip: string; stop: boolean; hollow?: boolean; faint?: boolean }) {
+// shows and what a screen reader hears. Every mark ships focusable with a <title>, so with JavaScript off each is
+// reachable and shows its tip; HoverLayer then makes the group one tab stop (at `stop`) and draws its own tip.
+export function Mark({ p, tip, stop, hollow = false, dashed = false, faint = false }: { p: Point; tip: string; stop: boolean; hollow?: boolean; dashed?: boolean; faint?: boolean }) {
   const body = (
     <>
       <circle cx={`${p.x}%`} cy={`${p.y}%`} r="12" fill="transparent" />
-      <circle cx={`${p.x}%`} cy={`${p.y}%`} r="4" fill={hollow ? "var(--surface)" : "var(--s1)"} stroke="var(--s1)" strokeWidth="1.5" opacity={faint ? 0.35 : 1} />
+      <circle cx={`${p.x}%`} cy={`${p.y}%`} r="4" fill={hollow || dashed ? "var(--surface)" : "var(--s1)"} stroke="var(--s1)" strokeWidth="1.5" strokeDasharray={dashed ? "2 1.5" : undefined} opacity={faint ? 0.35 : 1} />
     </>
   );
-  const common = { "data-tip": tip, "aria-label": tip, tabIndex: stop ? 0 : -1, className: "mark" };
-  return p.href ? <Link href={p.href} prefetch={false} {...common}>{body}</Link> : <g role="img" {...common}>{body}</g>;
+  const common = { "data-tip": tip, "aria-label": tip, "data-stop": stop || undefined, tabIndex: 0, className: "mark" };
+  const inner = <><title>{tip}</title>{body}</>;
+  // an in-page anchor stays a plain link, so the browser's own fragment navigation (and HoverLayer's reveal) runs
+  return !p.href ? <g role="img" {...common}>{inner}</g> : p.href.startsWith("#") ? <a href={p.href} {...common}>{inner}</a> : <Link href={p.href} prefetch={false} {...common}>{inner}</Link>;
 }

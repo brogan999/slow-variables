@@ -133,14 +133,17 @@ CONFIDENCE_RUBRIC = [
 STAMPS = ("estimate", "reported", "measured")  # weakest first
 
 
-def stamp(tier: Tier, basis: Basis) -> str:
-    """The word a figure prints for how firm a number is: measured (an independent evaluator, observed product
-    behaviour or a filing), reported (a lab, company, the press or a compiler says so), or estimate (modelled)."""
+def stamp(tier: Tier, basis: Basis, extraction: Extraction | None = None) -> str:
+    """The word a figure prints for how firm a number is. measured: an independent evaluator, observed product
+    behaviour, an official statistic, or a financial statement filed in XBRL; reported: what a lab, a company (a
+    Form D or a press release included), the press or a compiler says; estimate: anything modelled."""
     if basis == Basis.estimated:
         return "estimate"
-    return (
-        "measured" if tier in (Tier.BENCHMARK, Tier.PRODUCT_BEHAVIOUR, Tier.OFFICIAL_FILING) else "reported"
-    )
+    if tier in (Tier.BENCHMARK, Tier.PRODUCT_BEHAVIOUR):
+        return "measured"
+    if tier == Tier.OFFICIAL_FILING and (basis != Basis.company_stated or extraction == Extraction.xbrl):
+        return "measured"
+    return "reported"
 
 
 def cap_status_by_tier(status: str, best_tier: Tier) -> str:

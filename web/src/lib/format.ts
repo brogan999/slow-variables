@@ -14,7 +14,8 @@ export function fmt(v: number | null | undefined, unit?: string): string {
     case "ratio": return `${sig(v)}×`;
     case "minutes": return v >= 60 ? `${(v / 60).toFixed(1)} h` : `${sig(v)} min`;
     case "days": return `${v.toFixed(0)} days`;
-    case "count": case "year": return v.toFixed(0);
+    case "year": return Number.isInteger(v) ? v.toFixed(0) : v.toFixed(1); // a fitted year keeps its tenth
+    case "count": return Math.abs(v) >= 1e4 ? Math.round(v).toLocaleString("en-US") : v.toFixed(0);
     default: {
       const n = Math.abs(v) >= 1e4 ? Math.round(v).toLocaleString("en-US") : sig(v);
       return unit ? `${n} ${unit.replace(/_/g, " ")}` : n;

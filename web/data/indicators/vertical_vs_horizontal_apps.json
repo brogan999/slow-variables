@@ -24,8 +24,9 @@
  "chart": {
   "bands": [],
   "change": {
-   "dead_band": "\u00b10.20\u00d7",
-   "label": "\u22123.76\u00d7"
+   "dead_band": "\u00b10.20",
+   "label": "\u22123.76",
+   "steps": "3 of 4 steps fell"
   },
   "dead": {
    "height": 1.0,
@@ -42,8 +43,9 @@
   "line": true,
   "n_drawn": 6,
   "needs": 5,
+  "partial": true,
   "stamps": [
-   "measured"
+   "reported"
   ],
   "x": {
    "ticks": [
@@ -120,7 +122,7 @@
  "derived": [
   {
    "as_of_date": "2025-03-31",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "1",
    "id": "4ea2f7bd97e44421",
@@ -151,7 +153,7 @@
   },
   {
    "as_of_date": "2025-06-30",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "1",
    "id": "aeaeaf3a49f3e446",
@@ -188,7 +190,7 @@
   },
   {
    "as_of_date": "2025-09-30",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "1",
    "id": "78e77f08b7b90f0e",
@@ -225,7 +227,7 @@
   },
   {
    "as_of_date": "2025-12-31",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "1",
    "id": "c84de98567d9a770",
@@ -260,7 +262,7 @@
   },
   {
    "as_of_date": "2026-03-31",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "1",
    "id": "e6eaa38a7de3a518",
@@ -297,7 +299,7 @@
   },
   {
    "as_of_date": "2026-09-30",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "1",
    "id": "bdf252a75e3caefa",
@@ -324,6 +326,7 @@
   }
  ],
  "direction": null,
+ "direction_readings": 5,
  "direction_rule": {
   "dead_band": 0.2,
   "higher_is": "concentrating",
@@ -339,6 +342,7 @@
  "id": "vertical_vs_horizontal_apps",
  "latest": {
   "as_of": "2026-09-30",
+  "derived_id": "bdf252a75e3caefa",
   "dims": {},
   "obs_ids": [
    "4ee36a381bf7a709",
@@ -363,9 +367,10 @@
  "points": [
   {
    "as_of": "2025-03-31",
+   "derived_id": "4ea2f7bd97e44421",
    "dims": {},
    "faint": true,
-   "href": "/series/formd.hebbia.amount_sold_usd.pt#01ea4c9da2ed9585",
+   "href": "#d-4ea2f7bd97e44421",
    "obs_ids": [
     "01ea4c9da2ed9585",
     "2730c9ad654e49ef",
@@ -376,7 +381,7 @@
     "ba1c891cb9cc4aa8",
     "f8edabd4f56e7537"
    ],
-   "stamp": "measured",
+   "stamp": "reported",
    "unit": "ratio",
    "value": 31.714925956746114,
    "x": 2.76,
@@ -384,9 +389,10 @@
   },
   {
    "as_of": "2025-06-30",
+   "derived_id": "aeaeaf3a49f3e446",
    "dims": {},
    "faint": false,
-   "href": "/series/formd.legora.amount_sold_usd.pt#171e230553b41a5c",
+   "href": "#d-aeaeaf3a49f3e446",
    "obs_ids": [
     "171e230553b41a5c",
     "1ba7108c020361c8",
@@ -400,7 +406,7 @@
     "dfb6dcb6578a4963",
     "f8edabd4f56e7537"
    ],
-   "stamp": "measured",
+   "stamp": "reported",
    "unit": "ratio",
    "value": 4.799840387216872,
    "x": 18.45,
@@ -408,9 +414,10 @@
   },
   {
    "as_of": "2025-09-30",
+   "derived_id": "78e77f08b7b90f0e",
    "dims": {},
    "faint": false,
-   "href": "/series/formd.exa.amount_sold_usd.pt#021fc48d9f5c57ea",
+   "href": "#d-78e77f08b7b90f0e",
    "obs_ids": [
     "021fc48d9f5c57ea",
     "171e230553b41a5c",
@@ -424,7 +431,7 @@
     "dfb6dcb6578a4963",
     "f8edabd4f56e7537"
    ],
-   "stamp": "measured",
+   "stamp": "reported",
    "unit": "ratio",
    "value": 4.717020651126815,
    "x": 34.31,
@@ -432,9 +439,10 @@
   },
   {
    "as_of": "2025-12-31",
+   "derived_id": "c84de98567d9a770",
    "dims": {},
    "faint": false,
-   "href": "/series/formd.exa.amount_sold_usd.pt#021fc48d9f5c57ea",
+   "href": "#d-c84de98567d9a770",
    "obs_ids": [
     "021fc48d9f5c57ea",
     "171e230553b41a5c",
@@ -447,7 +455,7 @@
     "d63ceef65148616b",
     "dfb6dcb6578a4963"
    ],
-   "stamp": "measured",
+   "stamp": "reported",
    "unit": "ratio",
    "value": 1.6112695375646497,
    "x": 50.17,
@@ -455,9 +463,10 @@
   },
   {
    "as_of": "2026-03-31",
+   "derived_id": "e6eaa38a7de3a518",
    "dims": {},
    "faint": false,
-   "href": "/series/formd.exa.amount_sold_usd.pt#021fc48d9f5c57ea",
+   "href": "#d-e6eaa38a7de3a518",
    "obs_ids": [
     "021fc48d9f5c57ea",
     "171e230553b41a5c",
@@ -471,7 +480,7 @@
     "dfb6dcb6578a4963",
     "e70e4f4487065633"
    ],
-   "stamp": "measured",
+   "stamp": "reported",
    "unit": "ratio",
    "value": 2.297649444366911,
    "x": 65.69,
@@ -479,9 +488,10 @@
   },
   {
    "as_of": "2026-09-30",
+   "derived_id": "bdf252a75e3caefa",
    "dims": {},
    "faint": false,
-   "href": "/series/formd.legora.amount_sold_usd.pt#4ee36a381bf7a709",
+   "href": "#d-bdf252a75e3caefa",
    "obs_ids": [
     "4ee36a381bf7a709",
     "93886e926dd246a7",
@@ -490,7 +500,8 @@
     "d63ceef65148616b",
     "e70e4f4487065633"
    ],
-   "stamp": "measured",
+   "partial": true,
+   "stamp": "reported",
    "unit": "ratio",
    "value": 1.0425681266444398,
    "x": 97.24,

@@ -18,8 +18,8 @@ PCT = ("pct", "pct_change_yoy", "pct_change_qoq_saar")
 NO_ZERO = {"year"}
 SELF_LABELLED = {"share", "USD", "usd", "ratio", "minutes", *PCT}
 # a task horizon reads best on durations people know, not on powers of ten
-DURATIONS = [(1 / 60, "1 s"), (1 / 6, "10 s"), (1.0, "1 min"), (10.0, "10 min"), (60.0, "1 h"), (480.0, "8 h"),
-             (1440.0, "1 day"), (10080.0, "1 week"), (43200.0, "1 month")]  # fmt: skip
+DURATIONS = [(1 / 600, "0.1 s"), (1 / 60, "1 s"), (1 / 6, "10 s"), (1.0, "1 min"), (10.0, "10 min"), (60.0, "1 h"),
+             (480.0, "8 h"), (1440.0, "1 day"), (10080.0, "1 week"), (43200.0, "1 month"), (525600.0, "1 year")]  # fmt: skip
 
 
 def _step(span: float, n: int = 5) -> float:
@@ -66,9 +66,15 @@ def axis(
     lo, hi = min(vs), max(vs)
     if log:
         if unit == "minutes":
-            lo_v = max([m for m, _ in DURATIONS if m <= lo], default=DURATIONS[0][0])
-            hi_v = min([m for m, _ in DURATIONS if m >= hi], default=DURATIONS[-1][0])
-            marks = [(m, label) for m, label in DURATIONS if lo_v <= m <= hi_v]
+            ladder = list(DURATIONS)
+            while ladder[0][0] > lo:  # below a tenth of a second or past a year, powers of ten carry on
+                ladder.insert(0, (ladder[0][0] / 10, f"{_num(ladder[0][0] * 6, ladder[0][0] * 6)} s"))
+            while ladder[-1][0] < hi:
+                ladder.append((ladder[-1][0] * 10, f"{round(ladder[-1][0] * 10 / 525600):,} years"))
+            rungs = [m for m, _ in ladder]
+            lo_v = max(m for m in rungs if m <= lo)
+            hi_v = min(m for m in rungs if m >= hi and m > lo_v)
+            marks = [(m, label) for m, label in ladder if lo_v <= m <= hi_v]
         else:
             k0, k1 = (
                 math.floor(math.log10(lo)),
@@ -99,8 +105,9 @@ def _unit_label(unit: str | None) -> str | None:
 
 
 def y(v: float, ax: dict[str, Any]) -> float:
-    """Distance from the top of the plot, in percent. A value off the axis pins to its edge."""
-    lo, hi, v = ax["lo"], ax["hi"], min(max(v, ax["lo"]), ax["hi"])
+    """Distance from the top of the plot, in percent. Nothing is pinned: every chart builds its axis from all it
+    draws, so a value off the axis is a bug for `tests/test_store.py` to catch, not a dot to hide on the edge."""
+    lo, hi = ax["lo"], ax["hi"]
     if ax["log"]:
         v, lo, hi = math.log10(v), math.log10(lo), math.log10(hi)
     return round(100 * (hi - v) / (hi - lo), 2)
@@ -122,12 +129,10 @@ def time_axis(dates: list[date]) -> dict[str, Any]:
         return {
             "lo": lo,
             "hi": hi,
-            "ticks": [
-                {"x": x(d, lo, hi), "label": f"{d.day} {MONTHS[d.month - 1]}" + (f" {d.year}" if i == 0 else ""),
-                 "minor": len(keep) > 4 and i % 2 == 1}
-                for i, d in enumerate(keep)
-            ],
-        }  # fmt: skip
+            "ticks": _ticks(
+                keep, lo, hi, lambda d, f: f"{d.day} {MONTHS[d.month - 1]}" + (f" {d.year}" if f else "")
+            ),
+        }
     step = next((s for s in (1, 3, 6, 12, 24, 60, 120) if months / s <= 6), 240)
     starts = [
         date(lo.year + (lo.month - 1 + k) // 12, (lo.month - 1 + k) % 12 + 1, 1)
@@ -137,15 +142,32 @@ def time_axis(dates: list[date]) -> dict[str, Any]:
         d for d in starts
         if lo <= d <= hi and ((d.month - 1) % step == 0 if step < 12 else d.month == 1 and d.year % (step // 12) == 0)
     ]  # fmt: skip
-    ticks = [
-        {
-            "x": x(d, lo, hi),
-            "label": str(d.year) if d.month == 1 else MONTHS[d.month - 1] + (f" {d.year}" if i == 0 else ""),
-            "minor": len(keep) > 4 and i % 2 == 1,
-        }
-        for i, d in enumerate(keep)
-    ]  # fmt: skip  (the first tick says which year)
-    return {"lo": lo, "hi": hi, "ticks": ticks}
+    return {
+        "lo": lo,
+        "hi": hi,
+        "ticks": _ticks(
+            keep,
+            lo,
+            hi,
+            lambda d, first: (
+                str(d.year) if d.month == 1 else MONTHS[d.month - 1] + (f" {d.year}" if first else "")
+            ),
+        ),
+    }
+
+
+def _ticks(days: list[date], lo: date, hi: date, label: Any) -> list[dict[str, Any]]:
+    """Ticks away from the plot's edges (a label centred there would run off the card). The first says which year;
+    on a phone every other label drops, but never the first or a year's."""
+    days = [d for d in days if 3 <= x(d, lo, hi) <= 96]
+    out, alt = [], False
+    for i, d in enumerate(days):
+        yearly = i == 0 or (d.month == 1 and d.day == 1)
+        alt = False if yearly else not alt
+        out.append(
+            {"x": x(d, lo, hi), "label": label(d, i == 0), "minor": len(days) > 4 and not yearly and alt}
+        )
+    return out
 
 
 def x(d: date, lo: date, hi: date) -> float:
@@ -159,4 +181,6 @@ def change_label(v: float, unit: str | None) -> str:
         return f"{sign}{_fixed(abs(v) * 100, 1)} pts"
     if unit in PCT:
         return f"{sign}{_fixed(abs(v), 1)} pts"
+    if unit == "ratio":
+        return sign + fmt(abs(v))
     return sign + fmt(abs(v), unit)

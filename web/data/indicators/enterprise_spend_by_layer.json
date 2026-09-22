@@ -22,7 +22,8 @@
   "bands": [],
   "change": {
    "dead_band": "\u00b15.0 pts",
-   "label": "+18.0 pts"
+   "label": "+18.0 pts",
+   "steps": "1 of 1 steps rose"
   },
   "dead": {
    "height": 33.33,
@@ -39,6 +40,7 @@
   "line": true,
   "n_drawn": 2,
   "needs": 2,
+  "partial": false,
   "stamps": [
    "reported"
   ],
@@ -51,7 +53,7 @@
     },
     {
      "label": "Apr",
-     "minor": true,
+     "minor": false,
      "x": 26.36
     },
     {
@@ -61,13 +63,8 @@
     },
     {
      "label": "Oct",
-     "minor": true,
-     "x": 73.64
-    },
-    {
-     "label": "2026",
      "minor": false,
-     "x": 97.42
+     "x": 73.64
     }
    ]
   },
@@ -149,7 +146,7 @@
  "derived": [
   {
    "as_of_date": "2024-12-31",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "1",
    "id": "9dcbe30bf6fb6d4d",
@@ -168,7 +165,7 @@
   },
   {
    "as_of_date": "2025-12-31",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "1",
    "id": "0be29ea5ec20d20a",
@@ -187,6 +184,7 @@
   }
  ],
  "direction": null,
+ "direction_readings": 2,
  "direction_rule": {
   "dead_band": 0.05,
   "higher_is": "concentrating",
@@ -202,6 +200,7 @@
  "id": "enterprise_spend_by_layer",
  "latest": {
   "as_of": "2025-12-31",
+  "derived_id": "0be29ea5ec20d20a",
   "dims": {},
   "obs_ids": [
    "6012e72e8105bfc4",
@@ -222,9 +221,10 @@
  "points": [
   {
    "as_of": "2024-12-31",
+   "derived_id": "9dcbe30bf6fb6d4d",
    "dims": {},
    "faint": false,
-   "href": "/series/menlo.us_enterprise.genai_spend_usd.fy#eb8d37a9275b0137",
+   "href": "#d-9dcbe30bf6fb6d4d",
    "obs_ids": [
     "eb8d37a9275b0137",
     "fbc90648f2532e9c"
@@ -237,9 +237,10 @@
   },
   {
    "as_of": "2025-12-31",
+   "derived_id": "0be29ea5ec20d20a",
    "dims": {},
    "faint": false,
-   "href": "/series/menlo.us_enterprise.genai_spend_usd.fy#6012e72e8105bfc4",
+   "href": "#d-0be29ea5ec20d20a",
    "obs_ids": [
     "6012e72e8105bfc4",
     "790ba59ba69990e5"

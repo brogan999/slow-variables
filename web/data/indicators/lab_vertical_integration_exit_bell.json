@@ -28,7 +28,8 @@
   "bands": [],
   "change": {
    "dead_band": "\u00b11",
-   "label": "+4"
+   "label": "+4",
+   "steps": "2 of 4 steps rose"
   },
   "dead": {
    "height": 25.0,
@@ -45,6 +46,7 @@
   "line": true,
   "n_drawn": 6,
   "needs": 5,
+  "partial": true,
   "stamps": [
    "reported"
   ],
@@ -74,11 +76,6 @@
      "label": "Jul",
      "minor": false,
      "x": 78.35
-    },
-    {
-     "label": "Oct",
-     "minor": true,
-     "x": 97.32
     }
    ]
   },
@@ -180,7 +177,7 @@
  "derived": [
   {
    "as_of_date": "2025-06-30",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "031c97c9ba26722b",
@@ -203,7 +200,7 @@
   },
   {
    "as_of_date": "2025-09-30",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "2b3c6d5c6a2c16a2",
@@ -230,7 +227,7 @@
   },
   {
    "as_of_date": "2025-12-31",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "07a2140b23878346",
@@ -259,7 +256,7 @@
   },
   {
    "as_of_date": "2026-03-31",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "db8b47f57a52e7f6",
@@ -294,7 +291,7 @@
   },
   {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "5e8c00219959cbbf",
@@ -327,7 +324,7 @@
   },
   {
    "as_of_date": "2026-09-30",
-   "computed_at": "2026-09-22T07:45:19.708160Z",
+   "computed_at": "2026-09-22T08:38:28.916788Z",
    "dims": {},
    "formula_version": "2",
    "id": "b340dd5ceb0c4fcb",
@@ -360,6 +357,7 @@
   }
  ],
  "direction": null,
+ "direction_readings": 5,
  "direction_rule": {
   "dead_band": 1.0,
   "higher_is": "concentrating",
@@ -375,6 +373,7 @@
  "id": "lab_vertical_integration_exit_bell",
  "latest": {
   "as_of": "2026-09-30",
+  "derived_id": "b340dd5ceb0c4fcb",
   "dims": {},
   "obs_ids": [
    "07e3555c39a96050",
@@ -402,9 +401,10 @@
  "points": [
   {
    "as_of": "2025-06-30",
+   "derived_id": "031c97c9ba26722b",
    "dims": {},
    "faint": true,
-   "href": "/series/acq.meta.scale_ai.pt#10c4c0b2d0426e32",
+   "href": "#d-031c97c9ba26722b",
    "obs_ids": [
     "10c4c0b2d0426e32",
     "5e4305fd8756819b",
@@ -419,9 +419,10 @@
   },
   {
    "as_of": "2025-09-30",
+   "derived_id": "2b3c6d5c6a2c16a2",
    "dims": {},
    "faint": false,
-   "href": "/series/acq.meta.scale_ai.pt#10c4c0b2d0426e32",
+   "href": "#d-2b3c6d5c6a2c16a2",
    "obs_ids": [
     "10c4c0b2d0426e32",
     "5e4305fd8756819b",
@@ -438,9 +439,10 @@
   },
   {
    "as_of": "2025-12-31",
+   "derived_id": "07a2140b23878346",
    "dims": {},
    "faint": false,
-   "href": "/series/acq.meta.scale_ai.pt#10c4c0b2d0426e32",
+   "href": "#d-07a2140b23878346",
    "obs_ids": [
     "10c4c0b2d0426e32",
     "129c29f7c904cd92",
@@ -458,9 +460,10 @@
   },
   {
    "as_of": "2026-03-31",
+   "derived_id": "db8b47f57a52e7f6",
    "dims": {},
    "faint": false,
-   "href": "/series/acq.meta.scale_ai.pt#10c4c0b2d0426e32",
+   "href": "#d-db8b47f57a52e7f6",
    "obs_ids": [
     "10c4c0b2d0426e32",
     "129c29f7c904cd92",
@@ -481,9 +484,10 @@
   },
   {
    "as_of": "2026-06-30",
+   "derived_id": "5e8c00219959cbbf",
    "dims": {},
    "faint": false,
-   "href": "/series/acq.openai.ona.pt#07e3555c39a96050",
+   "href": "#d-5e8c00219959cbbf",
    "obs_ids": [
     "07e3555c39a96050",
     "129c29f7c904cd92",
@@ -503,9 +507,10 @@
   },
   {
    "as_of": "2026-09-30",
+   "derived_id": "b340dd5ceb0c4fcb",
    "dims": {},
    "faint": false,
-   "href": "/series/acq.openai.ona.pt#07e3555c39a96050",
+   "href": "#d-b340dd5ceb0c4fcb",
    "obs_ids": [
     "07e3555c39a96050",
     "129c29f7c904cd92",
@@ -517,6 +522,7 @@
     "d7e2c8855360a39c",
     "ef40bd94a06afa5d"
    ],
+   "partial": true,
    "stamp": "reported",
    "unit": "count",
    "value": 9.0,
