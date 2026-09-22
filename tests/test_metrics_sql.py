@@ -466,3 +466,14 @@ def test_the_data_centre_gap_sums_peak_plans_over_newest_builds_and_shows_the_ba
 def test_too_few_sites_give_no_ratio():
     out = _dc_ratio([(f"s{i}", 100.0, 300.0) for i in range(19)])
     assert out["ratio"] == {} and out["count"] == {"all": 19}
+
+
+def test_the_arc_frontier_emits_one_record_per_new_high_citing_the_row_that_set_it():
+    rows = [
+        ("r2", "epoch_bench.b_r2.arc_agi_2.pt", "b_r2", "2026-01-01", 0.5, ""),
+        ("r1", "epoch_bench.a_r1.arc_agi_2.pt", "a_r1", "2026-01-01", 0.5, ""),  # a tie on one date
+        ("r3", "epoch_bench.c_r3.arc_agi_2.pt", "c_r3", "2026-02-01", 0.4, ""),  # below the record: no row
+        ("r4", "epoch_bench.d_r4.arc_agi_2.pt", "d_r4", "2026-03-01", 0.7, ""),
+    ]
+    out = [(str(d), v, ids) for d, v, ids in run("arc_agi_frontier", rows)]
+    assert out == [("2026-01-01", 0.5, ["r1"]), ("2026-03-01", 0.7, ["r4"])]
