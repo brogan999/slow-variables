@@ -8,7 +8,7 @@ export function PageHeader({ eyebrow, title, lede, action, children }: { eyebrow
         <h1 className="display text-[2.5rem] md:text-[3.5rem] leading-[1.02] max-w-[22ch]">{title}</h1>
         {action ? <div className="text-sm text-ink-2">{action}</div> : null}
       </div>
-      {lede ? <p className="text-lg md:text-xl leading-relaxed text-ink-2 max-w-[62ch]">{lede}</p> : null}
+      {lede ? <p className="font-serif text-lg md:text-[1.3rem] leading-relaxed text-ink-2 max-w-[62ch]">{lede}</p> : null}
       {children}
     </header>
   );

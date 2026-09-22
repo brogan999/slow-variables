@@ -42,7 +42,7 @@ export default async function SeriesPage({ params }: { params: Promise<{ key: st
           <thead><tr><th scope="col">id</th><th scope="col">{s.observations.every((o) => o.value_numeric === null) ? "text" : "value"}</th><th scope="col">grade</th>{COLS.map((c) => <th scope="col" key={c}>{c.replace(/_/g, " ")}</th>)}<th scope="col">url</th><th scope="col">flags</th></tr></thead>
           <tbody>
             {s.observations.map((o) => (
-              <tr key={o.id} id={o.id} className="target:bg-fast/10">
+              <tr key={o.id} id={o.id} className="target:bg-surface-2">
                 <td className="font-mono">{o.id}</td>
                 <td className={o.value_numeric !== null ? "tabular-nums whitespace-nowrap" : "max-w-md"}>{o.value_numeric !== null ? fmt(o.value_numeric as number, String(o.unit)) : String(o.value_text)}{o.value_low != null ? <span className="text-muted"> ({fmt(o.value_low as number)}–{fmt(o.value_high as number)})</span> : null}{String(o.as_of_date) > generated ? <span className="ml-1.5 text-muted">projection</span> : null}</td>
                 <td><Grade grade={o.grade} tier={o.tier as number} /></td>
@@ -61,7 +61,7 @@ export default async function SeriesPage({ params }: { params: Promise<{ key: st
           {oneReason ? <p className="text-ink-2 mt-1">{String(s.withdrawn[0].dispute_text)}</p> : null}
           <ul className="mt-2 flex flex-col gap-1">
             {s.withdrawn.map((o) => (
-              <li key={o.id} id={o.id} className="target:bg-fast/10">
+              <li key={o.id} id={o.id} className="target:bg-surface-2">
                 <span className="font-mono text-muted">{o.id}</span>{" "}
                 <del className="num">{String(o.as_of_date)} · {o.value_numeric !== null ? fmt(o.value_numeric as number, String(o.unit)) : String(o.value_text)}</del>{" "}
                 <a href={String(o.url)} className="underline decoration-grid underline-offset-4">source page</a>

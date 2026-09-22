@@ -42,7 +42,7 @@ export function ChatDrawer() {
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
-      <SheetTrigger render={<Button variant="outline" size="sm" className="rounded-full" />}>Ask</SheetTrigger>
+      <SheetTrigger render={<Button variant="outline" size="sm" className="rounded-[3px]" />}>Ask</SheetTrigger>
       <SheetContent side="right" aria-describedby="ask-desc" className="bg-surface overflow-y-auto p-5 data-[side=right]:sm:max-w-md">
         <SheetHeader className="p-0">
           <SheetTitle className="display text-2xl">Ask the data</SheetTitle>

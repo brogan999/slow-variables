@@ -29,11 +29,11 @@ export function Inline({ text, facts }: { text: string; facts: ArgumentDoc["fact
 export function Folios({ folios, facts, plates }: { folios: ReturnType<typeof parseEssay>["folios"]; facts: ArgumentDoc["facts"]; plates: Record<string, ReactNode> }) {
   return (
     <>
-      {folios.map((f, n) => (
+      {folios.map((f) => (
         <section key={f.label} id={`folio-${f.label.split("·").pop()?.trim().replace(/^the /, "").replace(/\s+/g, "-")}`} className="border-t border-grid pt-10 mt-12 first:mt-0 first:border-0 first:pt-0 scroll-mt-8">
           <div className="eyebrow">{f.label}</div>
           <h2 className="display text-[1.875rem] md:text-[2.375rem] leading-[1.08] mt-3 mb-6 max-w-[24ch]">{f.claim}</h2>
-          <div className={`prose-folio ${n === 0 ? "drop-cap" : ""}`}>
+          <div className="prose-folio">
             {f.blocks.map((b, i) => {
               const plate = b.match(/^\[plate:([a-z]+)\]$/);
               return plate ? <div key={i} className="my-8">{plates[plate[1]]}</div> : <p key={i}><Inline text={b} facts={facts} /></p>;
