@@ -290,14 +290,19 @@ def _plain(text: str, tests: dict[str, dict[str, Any]]) -> str:
     return re.sub(r"\[test:([a-z0-9_]+)\]", lambda m: fmt_line(tests[m[1]]["line"], tests[m[1]]["unit"]) if m[1] in tests else "", text)
 
 
+def _byline(names: Any) -> str:
+    s = "; ".join(dict.fromkeys(names))
+    return s[:1].upper() + s[1:]
+
+
 def outlook_claims(outlook: dict[str, Any]) -> list[dict[str, Any]]:
     """The outlook's claims that name a map row, with who makes each and a link to it."""
-    who = {x["id"]: x["who"] for x in outlook.get("sources") or []}
+    who = {x["id"]: x.get("short") or x["who"] for x in outlook.get("sources") or []}  # a long author list, shortened
     return [
         {
             "row": c["row"],
             "stage": c.get("stage"),
-            "who": SITE if c["attribution"] == "site" else "; ".join(dict.fromkeys(who[h] for h in c["holders"])),
+            "who": SITE if c["attribution"] == "site" else _byline(who[h] for h in c["holders"]),
             "text": _plain(c["text"], outlook.get("tests") or {}),
             "state": c["state"],
             "href": f"/outlook#claim-{c['id']}",
