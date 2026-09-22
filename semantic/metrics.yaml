@@ -787,6 +787,41 @@ metrics:
                  FROM observations WHERE series_key LIKE 'epoch_bench.%.arc_agi_2.pt' GROUP BY 1)
       SELECT as_of_date, v AS value, [id] AS obs_ids FROM d
       QUALIFY v > coalesce(max(v) OVER (ORDER BY as_of_date ROWS BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING), -1)
+  benchmark_frontier:
+    description: The running best score on each capability test the site reads, by release date, on each date a new record was set; one row per test per record. Tests are share-valued and higher is better. Epoch's compilations of external results (ARC-AGI-2, CL-bench, APEX-Agents, PostTrainBench, GDPval, the Remote Labor Index and FrontierSWE, plus SciCode and CritPt as Artificial Analysis scores them), Epoch's own FrontierMath Tier 4 runs, and HAL's accuracy for the agents it evaluates. HAL's reliability index is left out, since it is not a share of tasks solved.
+    rationale: Signposts, not statuses. Each record is dated and cites the one row that set it, so how jagged the frontier is (far along on one test, barely started on another) and how stale a test has gone can both be read off the rows.
+    grain: [as_of_date, test]
+    unit: share
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["epoch_bench.*.arc_agi_2.pt", "hal_reliability.*.accuracy.pt"]
+    caveats: Scores sit at model release dates, often from runs with no compute limit and from mixed scaffolds; a test that stopped getting rows keeps its old record, which is why each test's newest row is exported beside it. A tie on one date keeps the row with the smallest id. Scores on different tests are not comparable to each other.
+    sql: |
+      WITH pts AS (
+        SELECT source_ns || '.' || measure AS test, as_of_date, value_numeric AS v, id FROM observations
+        WHERE value_numeric IS NOT NULL AND NOT coalesce(disputed, false) AND grain = 'pt' AND (
+          (source_ns = 'epoch_bench' AND measure IN ('arc_agi_2', 'cl_bench', 'apex_agents', 'posttrainbench', 'gdpval', 'rli',
+                                                     'critpt', 'frontierswe', 'scicode', 'frontiermath_t4'))
+          OR (source_ns = 'hal_reliability' AND measure = 'accuracy'))
+      ), d AS (SELECT test, as_of_date, max(v) AS v, list(id ORDER BY v DESC, id)[1] AS id FROM pts GROUP BY 1, 2)
+      SELECT as_of_date, test, v AS value, [id] AS obs_ids FROM d
+      QUALIFY v > coalesce(max(v) OVER (PARTITION BY test ORDER BY as_of_date ROWS BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING), -1)
+  hal_trend_per_year:
+    description: How fast HAL's scores have risen across model releases, per year, as the slope of a least-squares line through every agent HAL evaluates against its model's release date; one row for accuracy and one for overall reliability, dated at the newest release. Both scores run from 0 to 1 (accuracy as a share of tasks), so the slope is in points, hundredths of that range, a year.
+    rationale: HAL scores accuracy as a share of tasks solved and reliability as an index averaged from consistency, predictability and robustness. The two are on different scales, so the height of one against the other means nothing; how steeply each has risen across model generations can be compared.
+    grain: [as_of_date, measure]
+    unit: pts_a_year
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["hal_reliability.*.accuracy.pt", "hal_reliability.*.reliability.pt"]
+    caveats: One evaluator's agents, each dated by its model's release (one model can appear at two settings); a straight line through a handful of points, so one new agent can move it. HAL draws its own trend lines with the same fit.
+    sql: |
+      SELECT max(as_of_date) AS as_of_date, measure, regr_slope(value_numeric, datediff('day', DATE '2000-01-01', as_of_date)) * 365.25 AS value,
+             list(id ORDER BY id) AS obs_ids
+      FROM observations
+      WHERE source_ns = 'hal_reliability' AND measure IN ('accuracy', 'reliability') AND grain = 'pt'
+        AND value_numeric IS NOT NULL AND NOT coalesce(disputed, false)
+      GROUP BY measure HAVING count(*) >= 5
   custom_silicon_share:
     description: Non-Nvidia designers' share of cumulative AI compute shipped, in H100-equivalents, at each complete quarter end (Epoch chip sales).
     rationale: Custom silicon share is the leading indicator of Nvidia rent decay.

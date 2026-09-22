@@ -1,0 +1,18 @@
+# Capability signposts (Part 11, section B): the tests the benchmark frontier reads, what each measures in plain
+# words, and whose figure it is. A signpost carries no status: it is dated, and tested only through the claims on
+# /outlook. Rows are dated by model release, so a test whose newest scored model was released more than
+# `stale_after_days` ago has stopped getting scores: its bar and dot are drawn faded, its record standing alone.
+# Descriptions checked against Epoch's benchmark pages and HAL's tracker, 22 Sep 2026.
+stale_after_days: 300
+tests:
+  - {test: epoch_bench.frontiermath_t4, name: FrontierMath Tier 4, what: "exceptionally hard research-level mathematics problems", whose: "Epoch runs it"}
+  - {test: epoch_bench.arc_agi_2, name: ARC-AGI-2, what: "reasoning about new patterns from a few examples, on grid puzzles", whose: "results compiled by Epoch"}
+  - {test: epoch_bench.apex_agents, name: APEX-Agents, what: "long professional tasks in banking, consulting and corporate law, in simulated workplaces", whose: "results compiled by Epoch"}
+  - {test: epoch_bench.frontierswe, name: FrontierSWE, what: "very long software-engineering projects, each with a budget of many hours", whose: "results compiled by Epoch"}
+  - {test: epoch_bench.scicode, name: SciCode, what: "research-coding problems from across the natural sciences", whose: "Artificial Analysis's scores, compiled by Epoch"}
+  - {test: epoch_bench.gdpval, name: GDPval, what: "well-specified tasks from real occupations, scored by how often graders prefer the model's work to a professional's", whose: "results compiled by Epoch"}
+  - {test: epoch_bench.posttrainbench, name: PostTrainBench, what: "an agent post-training a small base model within a fixed compute budget", whose: "results compiled by Epoch"}
+  - {test: epoch_bench.critpt, name: CritPt, what: "open-ended research-level physics problems", whose: "Artificial Analysis's scores, compiled by Epoch"}
+  - {test: epoch_bench.cl_bench, name: CL-bench, what: "learning new knowledge from context within one task and applying it, not memory across sessions", whose: "results compiled by Epoch"}
+  - {test: epoch_bench.rli, name: Remote Labor Index, what: "real paid freelance projects, completed end to end", whose: "results compiled by Epoch"}
+  - {test: hal_reliability.accuracy, name: HAL accuracy, what: "the share of tasks solved in HAL's own runs of each agent", whose: "HAL runs it"}

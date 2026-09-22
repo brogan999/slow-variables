@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { IndicatorCard } from "@/components/IndicatorCard";
 import { LadderView } from "@/components/LadderView";
-import { bucket, index, ladder, obsIndex } from "@/lib/data";
+import { JaggedFrontier, ReliabilityGap } from "@/components/Signposts";
+import { bucket, index, ladder, obsIndex, signposts } from "@/lib/data";
 
 export const dynamicParams = false;
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
@@ -30,6 +31,16 @@ export default async function BucketPage({ params }: { params: Promise<{ id: str
         <h2 className="display text-2xl leading-tight mb-3 mt-2">Indicators</h2>
         {b.indicators.length ? <div className="grid gap-3 md:grid-cols-2">{b.indicators.map((c) => <IndicatorCard key={c.id} c={c} obsIndex={idx} />)}</div> : <p className="text-sm text-muted">None published yet.</p>}
       </section>
+      {id === "methods" ? (
+        <section className="flex flex-col gap-6">
+          <div>
+            <h2 className="display text-2xl leading-tight mb-2 mt-2">Capability signposts</h2>
+            <p className="text-sm text-ink-2 max-w-[62ch]">Dated readings of what the best models can do, with no status of their own: no normal pace for them can be defended yet. They test the claims about what happens next rather than moving any reading on this page.</p>
+          </div>
+          <JaggedFrontier doc={signposts()} />
+          <ReliabilityGap doc={signposts()} />
+        </section>
+      ) : null}
       {id === "return_arrow" ? (
         <section>
           <h2 className="display text-2xl leading-tight mb-3 mt-2">Continual-learning ladder</h2>

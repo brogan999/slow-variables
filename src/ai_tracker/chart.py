@@ -195,6 +195,8 @@ def change_label(v: float, unit: str | None) -> str:
 def spread(ys: list[float], gap: float) -> list[float]:
     """Label places as close to `ys` (sorted, percent of the plot) as they can be while `gap` apart and inside it:
     push down, pull back from the bottom, then keep the top on the plot."""
+    if not ys:
+        return []
     out = list(ys)
     for i in range(1, len(out)):
         out[i] = max(out[i], out[i - 1] + gap)

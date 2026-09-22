@@ -66,6 +66,7 @@
 | fortune | Fortune | Fortune Media | html | 5 | irregular | Fortune Media; short quotation | Fortune, 'MIT report: 95% of generative AI pilots at companies are failing' (18 Aug 2025) |
 | fred | FRED (Federal Reserve Economic Data) | Federal Reserve Bank of St. Louis | csv | 6 | quarterly | FRED terms of use; RPS series by Bick, Blandin & Deming | Bick, Blandin & Deming, Real-Time Population Survey, retrieved from FRED |
 | google_research_blog | Google Research blog | Google | html | 7 | irregular | Google; short quotation | Google Research |
+| hal_reliability | HAL AI Agent Reliability Tracker (reliability scores by agent) | Princeton University, HAL | html | 1 | irregular | HAL (Princeton); cited with attribution | HAL: Holistic Agent Leaderboard, AI Agent Reliability Tracker, Princeton University |
 | harvey_blog | Harvey research and insights posts | Harvey | html | 7 | irregular | Harvey; short quotation | Harvey |
 | hsbc | HSBC Insights (Global Investment Research) | HSBC | html | 5 | irregular | HSBC; short quotation | HSBC Insights, 'The billions of AI consumer surplus' (10 Aug 2026) |
 | humlum_pdf | Humlum working-paper PDFs (author site) | Anders Humlum | pdf | 6 | irregular | Author preprint; short quotation | Humlum & Vestergaard |

@@ -29,7 +29,7 @@ export function Figure({ title, note, keys, stamps, foot, table, tableLabel = "T
 
 // One entry in a key strip: a swatch drawn the way the chart draws it, and its meaning.
 export function Key({ swatch, children }: { swatch: React.ReactNode; children: React.ReactNode }) {
-  return <span className="inline-flex items-center gap-1.5">{swatch}<span>{children}</span></span>;
+  return <span className="inline-flex items-center gap-1.5"><span className="flex shrink-0">{swatch}</span><span>{children}</span></span>;
 }
 
 // The prototype's labelled box: a spending signal, an override note, the bells. `id` makes it a section with its

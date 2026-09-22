@@ -35,6 +35,8 @@ def fmt(v: float | None, unit: str | None = None) -> str:
         return "—"
     if unit in ("share",):
         return f"{_fixed(v * 100, 1)}%"
+    if unit == "pts_a_year":  # a share's slope per year, in points: never a percentage rise
+        return f"{_fixed(v * 100, 1)} pts a year"
     if unit in ("pct", "pct_change_yoy", "pct_change_qoq_saar"):
         return f"{_fixed(v, 1)}%"
     if unit in ("USD", "usd"):
