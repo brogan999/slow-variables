@@ -58,7 +58,7 @@ def fmt(v: float | None, unit: str | None = None) -> str:
         return f"{_fixed(v / 60, 1)} h" if v >= 60 else f"{_sig(v)} min"
     if unit == "days":
         return f"{_fixed(v, 0)} days"
-    if unit == "count":
+    if unit in ("count", "year"):
         return _fixed(v, 0)
     n = f"{int(_fixed(v, 0)):,}" if abs(v) >= 1e4 else _sig(v)
     return f"{n} {unit.replace('_', ' ')}" if unit else n

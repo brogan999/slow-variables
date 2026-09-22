@@ -123,6 +123,26 @@ def grade_from_tier(tier: Tier, basis: Basis = Basis.reported, single_source: bo
     return "C"
 
 
+# what an indicator's confidence (0 to 95) says, lowest band first; the site prints the words beside the number
+CONFIDENCE_RUBRIC = [
+    {"lo": 0, "hi": 49, "label": "limited or vague evidence"},
+    {"lo": 50, "hi": 69, "label": "mixed or hard to operationalise"},
+    {"lo": 70, "hi": 89, "label": "good evidence, some ambiguity"},
+    {"lo": 90, "hi": 95, "label": "multiple strong independent sources"},
+]
+STAMPS = ("estimate", "reported", "measured")  # weakest first
+
+
+def stamp(tier: Tier, basis: Basis) -> str:
+    """The word a figure prints for how firm a number is: measured (an independent evaluator, observed product
+    behaviour or a filing), reported (a lab, company, the press or a compiler says so), or estimate (modelled)."""
+    if basis == Basis.estimated:
+        return "estimate"
+    return (
+        "measured" if tier in (Tier.BENCHMARK, Tier.PRODUCT_BEHAVIOUR, Tier.OFFICIAL_FILING) else "reported"
+    )
+
+
 def cap_status_by_tier(status: str, best_tier: Tier) -> str:
     """Tier-7 evidence (actor statements) proposes at most `emerging`."""
     return "emerging" if best_tier == Tier.ACTOR_STATEMENT and status not in UNSCORED else status

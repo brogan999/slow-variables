@@ -14,20 +14,13 @@ export function fmt(v: number | null | undefined, unit?: string): string {
     case "ratio": return `${sig(v)}×`;
     case "minutes": return v >= 60 ? `${(v / 60).toFixed(1)} h` : `${sig(v)} min`;
     case "days": return `${v.toFixed(0)} days`;
-    case "count": return v.toFixed(0);
+    case "count": case "year": return v.toFixed(0);
     default: {
       const n = Math.abs(v) >= 1e4 ? Math.round(v).toLocaleString("en-US") : sig(v);
       return unit ? `${n} ${unit.replace(/_/g, " ")}` : n;
     }
   }
 }
-
-export const tick = (unit: string) => (v: number) => {
-  if (unit === "share") return `${Math.round(v * 100)}%`;
-  if (unit === "USD" || unit === "usd") return fmt(v, unit);
-  if (unit === "minutes") return v >= 60 ? `${(v / 60).toFixed(v >= 6000 ? 0 : 1)}h` : `${sig(v)}m`;
-  return sig(v);
-};
 
 export const words = (s: string | null | undefined) => (s ?? "unmeasured").replace(/_/g, " ");
 

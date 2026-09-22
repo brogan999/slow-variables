@@ -16,6 +16,7 @@ TABLE = [
     (31.0, "minutes", "31.0 min"),
     (107.99, "days", "108 days"),
     (24.0, "count", "24"),
+    (2028.4, "year", "2028"),
     (7077, None, "7077"),
     (95_311, None, "95,311"),
     (0.85, "index", "0.85 index"),
@@ -39,7 +40,7 @@ def test_values_read_the_way_the_site_renders_them():
 
 def test_every_unit_the_web_formatter_names_is_handled_here():
     ts = Path("web/src/lib/format.ts").read_text()
-    body = ts[ts.index("export function fmt") : ts.index("export const tick")]
+    body = ts[ts.index("export function fmt") : ts.index("export const words")]
     units = {u for m in re.finditer(r'case "([a-z_]+)":', body) for u in [m.group(1)]}
     py = Path("src/ai_tracker/format.py").read_text()
     missing = [u for u in units if f'"{u}"' not in py]
