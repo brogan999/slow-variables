@@ -203,7 +203,7 @@ export function MigrationMargin({ doc }: { doc: MigrationDoc }) {
       <MarginPanel title="Instrument">
         <p>Tightness runs from nought to a hundred and is scored only where a published series supports it. It is a different thing from the speed readings elsewhere on this site and never changes one.</p>
         <p><Link href="/methodology#tightness" className="text-ink underline decoration-axis underline-offset-2">How the scores are made →</Link></p>
-        <p>A different list: <Link href="/bottlenecks" className="text-ink underline decoration-axis underline-offset-2">the barriers to adoption</Link> that Arvind Narayanan and Sayash Kapoor describe are about why firms are slow to use AI, not about what is scarce in making it.</p>
+        <p><Link href="/bottlenecks" className="text-ink underline decoration-axis underline-offset-2">The bottleneck map</Link> lays these inputs against the stages of diffusion, beside the frictions Arvind Narayanan and Sayash Kapoor describe, which are about why firms are slow to use AI rather than what is scarce in making it.</p>
         <p>The two tallies of what labs buy are kept on <Link href="/layers/model" className="text-ink underline decoration-axis underline-offset-2">the model layer&apos;s page</Link>.</p>
       </MarginPanel>
     </>

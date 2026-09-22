@@ -3,7 +3,7 @@ import { Figure, Key } from "./Figure";
 import { Fact } from "./Fact";
 import { StatusChip } from "./StatusChip";
 import type { MapCell, MapDoc, MapReading, MapRow } from "@/lib/data";
-import { fmt, PREDICTION_WORDS, WITHHELD_WORDS, words } from "@/lib/format";
+import { CLAIM_WORDS, fmt, WITHHELD_WORDS, words } from "@/lib/format";
 
 const link = "underline decoration-grid underline-offset-2 hover:decoration-ink";
 const KIND: Record<string, string> = { supply: "supply", know_how: "know-how", money: "money" };
@@ -25,7 +25,7 @@ function said(c: MapCell): string {
   const parts = [];
   if (c.bites) parts.push(c.measured ? "acts here, and the site measures it" : "acts here, but nothing the site reads measures it");
   if (c.site) parts.push("placed here by this site");
-  if (c.writers.length) parts.push(`expected to bind by ${c.writers.map((w) => `${w.who} (${PREDICTION_WORDS[w.state] ?? words(w.state)})`).join(", ")}`);
+  if (c.writers.length) parts.push(`expected to bind by ${c.writers.map((w) => `${w.who} (${CLAIM_WORDS[w.state] ?? words(w.state)})`).join(", ")}`);
   return parts.join("; ");
 }
 
@@ -143,7 +143,7 @@ export function MapReasons({ doc }: { doc: MapDoc }) {
                   ))}</p>
                 ) : null}
                 {r.claims.length ? (
-                  <p><span className="text-ink">Expected:</span> {r.claims.map((w, k) => <span key={k}>{k ? " " : ""}{w.who}: &ldquo;{w.text}&rdquo; <Link href={w.href} prefetch={false} className={link}>{PREDICTION_WORDS[w.state] ?? words(w.state)}</Link>.</span>)}</p>
+                  <p><span className="text-ink">Expected:</span> {r.claims.map((w, k) => <span key={k}>{k ? " " : ""}{w.who}: &ldquo;{w.text}&rdquo; <Link href={w.href} prefetch={false} className={link}>{CLAIM_WORDS[w.state] ?? words(w.state)}</Link>.</span>)}</p>
                 ) : null}
                 {r.domains && Object.keys(r.domains).length ? (
                   <p><span className="text-ink">Their barriers by domain:</span> {Object.entries(r.domains).map(([d, ids], k) => <span key={d}>{k ? "; " : ""}{d} {ids.map((n, j) => <span key={n}>{j ? " " : ""}<a href={`#b${n}`} className={link}>{n}</a></span>)}</span>)}</p>

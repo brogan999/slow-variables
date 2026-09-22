@@ -880,7 +880,7 @@ metrics:
       WHERE a.series_key = 'fred.us.median_real_weekly_earnings.q' AND b.value_numeric > 0
   relational_work_share:
     description: Jobs in private education and health services plus leisure and hospitality, as a share of all nonfarm payroll jobs, monthly (BLS via FRED); public schools and hospitals count in government, so only in the total.
-    rationale: The work built on people dealing with people; context for the claim that relational work becomes scarcer and better paid.
+    rationale: The work built on people dealing with people; context for the claim that, as AI cheapens other things, relational work becomes more sought after and relatively dearer.
     grain: [as_of_date]
     unit: share
     lead_lag: lagging
@@ -1021,6 +1021,21 @@ metrics:
             FROM d LEFT JOIN e ON e.target = d.target AND e.stance = d.stance AND e.as_of_date <= d.day AND e.as_of_date > d.day - INTERVAL 1 YEAR
             GROUP BY 1, 2, 3)
       SELECT day AS as_of_date, target, stance, n AS value, CASE WHEN n = 0 THEN [gone] ELSE ids END AS obs_ids FROM c
+  real_gdp_per_capita_over_peak:
+    description: US real gross domestic product per person (BEA, quarterly, via FRED) over its previous peak, minus one, where the previous peak is the highest quarter up to and including the same quarter a year before; the measure the growth bet between Benjamin Moll, Alex Imas and others reads.
+    rationale: The bet's fast-growth side wins if, in any quarter up to and including 2033Q4, output per person stands at least fifteen percent above the highest quarter up to a year before it (the bet's terms, section 2), so this gap is the reading that settles it.
+    grain: [as_of_date]
+    unit: share
+    lead_lag: lagging
+    formula_version: 2
+    inputs: ["fred.us.real_gdp_per_capita.q"]
+    caveats: The peak is the highest quarter since this site's FRED history begins in 2015; each quarter reads the stored release of both quarters, which BEA revises, and the bet itself reads BEA's third estimate in a close call.
+    sql: |
+      WITH q AS (SELECT as_of_date, value_numeric AS v, id FROM observations WHERE series_key = 'fred.us.real_gdp_per_capita.q'),
+      p AS (SELECT as_of_date, v, id,
+                   max(v) OVER w AS peak, arg_max(id, v) OVER w AS peak_id
+            FROM q WINDOW w AS (ORDER BY as_of_date RANGE BETWEEN UNBOUNDED PRECEDING AND INTERVAL 1 YEAR PRECEDING))
+      SELECT as_of_date, v / peak - 1 AS value, [id, peak_id] AS obs_ids FROM p WHERE peak IS NOT NULL
   custom_silicon_share:
     description: Non-Nvidia designers' share of cumulative AI compute shipped, in H100-equivalents, at each complete quarter end (Epoch chip sales).
     rationale: Custom silicon share is the leading indicator of Nvidia rent decay.

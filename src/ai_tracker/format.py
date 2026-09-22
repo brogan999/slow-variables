@@ -60,9 +60,18 @@ def fmt(v: float | None, unit: str | None = None) -> str:
         return f"{_fixed(v / 60, 1)} h" if v >= 60 else f"{_sig(v)} min"
     if unit == "days":
         return f"{_fixed(v, 0)} days"
+    if unit == "months":  # a whole number of months reads whole; a measured gap keeps its tenth
+        return f"{_fixed(v, 0) if v == int(v) else _fixed(v, 1)} months"
     if unit == "year":  # a whole year reads whole; a fitted one keeps its tenth
         return _fixed(v, 0) if v == int(v) else _fixed(v, 1)
     if unit == "count":
         return f"{int(_fixed(v, 0)):,}" if abs(v) >= 1e4 else _fixed(v, 0)
     n = f"{int(_fixed(v, 0)):,}" if abs(v) >= 1e4 else _sig(v)
     return f"{n} {unit.replace('_', ' ')}" if unit else n
+
+
+def fmt_line(v: float, unit: str | None = None) -> str:
+    """A line a claim is tested against reads as a round number when it is one: "15%", not "15.0%" (as format.ts)."""
+    import re
+
+    return re.sub(r"\.0(?=%| )", "", fmt(v, unit), count=1)

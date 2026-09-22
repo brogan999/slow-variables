@@ -60,7 +60,7 @@ export function JaggedFrontier({ doc }: { doc: Signposts }) {
       </ol>
       <div className="hidden sm:grid grid-cols-[15rem_minmax(0,1fr)_4.5rem] gap-x-4" aria-hidden>
         <div />
-        <div className="relative h-5">{doc.axis.ticks.map((k) => <span key={k.x} className="absolute top-1 -translate-x-1/2 num text-[10px] text-muted" style={{ left: `${k.x}%` }}>{k.label}</span>)}</div>
+        <div className="relative h-5">{doc.axis.ticks.map((k) => <span key={k.x} className="absolute top-1 -translate-x-1/2 whitespace-nowrap num text-[10px] text-muted" style={{ left: `${k.x}%` }}>{k.label}</span>)}</div>
       </div>
     </Figure>
   );

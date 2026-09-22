@@ -3,12 +3,13 @@ against the four stages of diffusion. Today's reading sits once per row: an inpu
 migration scorecard, or, for a friction, the statuses of the published indicators that read it. A cell carries
 marks, never a colour: the row acts on that stage (with the reason), whether anything the site reads measures the
 row, whether the stage is the site's placement or an author's, and which named writers expect the row to bind. The
-site's own predictions are the writers today; the outlook's claims join them later.
+site's own predictions and the outlook's claims are the writers.
 
 `build` is pure: everything it reads is passed in, so it is tested without a Store. `from_store` gathers the inputs."""
 
 from __future__ import annotations
 
+import re
 from datetime import date
 from pathlib import Path
 from typing import Any
@@ -50,6 +51,7 @@ def build(
     readings: dict[str, dict[str, Any]],
     names: dict[str, str],
     bets: list[dict[str, Any]],
+    claims: list[dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     stages = [s["id"] for s in spec["stages"]]
     inputs = {i["id"]: i for i in scorecard["inputs"]}
@@ -71,6 +73,11 @@ def build(
             by_row.setdefault(row, []).append(claim)
         for row in link.get("rows") or []:  # a prediction that the row does not bind: listed, never marked
             by_row.setdefault(row, []).append(claim)
+    for c in claims or []:  # the outlook's claims: a row and a stage mark the cell; a row alone lists it
+        claim = {k: c[k] for k in ("who", "text", "state", "href")}
+        if c.get("stage"):
+            by_cell.setdefault((c["row"], c["stage"]), []).append(claim)
+        by_row.setdefault(c["row"], []).append(claim)
 
     def cells(row: str, bites: dict[str, str], measured: bool, site: set[str] | None = None) -> dict[str, Any]:
         out: dict[str, Any] = {}
@@ -275,8 +282,42 @@ def problems(
     return errors
 
 
+def _plain(text: str, tests: dict[str, dict[str, Any]]) -> str:
+    """A claim's sentence as plain text for the map: its threshold written in, its citation marks dropped."""
+    from .format import fmt_line
+
+    text = re.sub(r"\s*\[cite:[a-z0-9_]+\]", "", text)
+    return re.sub(r"\[test:([a-z0-9_]+)\]", lambda m: fmt_line(tests[m[1]]["line"], tests[m[1]]["unit"]) if m[1] in tests else "", text)
+
+
+def _byline(names: Any) -> str:
+    s = "; ".join(dict.fromkeys(names))
+    return s[:1].upper() + s[1:]
+
+
+def outlook_claims(outlook: dict[str, Any]) -> list[dict[str, Any]]:
+    """The outlook's claims that name a map row, with who makes each and a link to it."""
+    who = {x["id"]: x.get("short") or x["who"] for x in outlook.get("sources") or []}  # a long author list, shortened
+    return [
+        {
+            "row": c["row"],
+            "stage": c.get("stage"),
+            "who": SITE if c["attribution"] == "site" else _byline(who[h] for h in c["holders"]),
+            "text": _plain(c["text"], outlook.get("tests") or {}),
+            "state": c["state"],
+            "href": f"/outlook#claim-{c['id']}",
+        }
+        for c in outlook.get("claims") or []
+        if c.get("row")
+    ]
+
+
 def from_store(
-    s: Any, cards: dict[str, dict[str, Any]], bottlenecks: dict[str, Any], argument: dict[str, Any]
+    s: Any,
+    cards: dict[str, dict[str, Any]],
+    bottlenecks: dict[str, Any],
+    argument: dict[str, Any],
+    outlook: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Gather the map's inputs from the store: the scorecard and predictions already built for argument.json, the
     ledgers' latest counts and the series the NBER rows name, layer names, and the startup money under each
@@ -336,4 +377,4 @@ def from_store(
             }
         )
     m = argument["migration"]
-    return build(spec, m["scorecard"], m["predictions"], bottlenecks, cards, readings, names, bets)
+    return build(spec, m["scorecard"], m["predictions"], bottlenecks, cards, readings, names, bets, outlook_claims(outlook or {}))

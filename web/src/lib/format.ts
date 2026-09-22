@@ -15,6 +15,7 @@ export function fmt(v: number | null | undefined, unit?: string): string {
     case "ratio": return `${sig(v)}×`;
     case "minutes": return v >= 60 ? `${(v / 60).toFixed(1)} h` : `${sig(v)} min`;
     case "days": return `${v.toFixed(0)} days`;
+    case "months": return `${Number.isInteger(v) ? v.toFixed(0) : v.toFixed(1)} months`; // a measured gap keeps its tenth
     case "year": return Number.isInteger(v) ? v.toFixed(0) : v.toFixed(1); // a fitted year keeps its tenth
     case "count": return Math.abs(v) >= 1e4 ? Math.round(v).toLocaleString("en-US") : v.toFixed(0);
     default: {
@@ -26,6 +27,9 @@ export function fmt(v: number | null | undefined, unit?: string): string {
 
 export const words = (s: string | null | undefined) => (s ?? "unmeasured").replace(/_/g, " ");
 
+// A line a claim is tested against reads as a round number when it is one: "15%", not "15.0%".
+export const fmtLine = (v: number, unit?: string) => fmt(v, unit).replace(/\.0(?=%| )/, "");
+
 
 // Unpublished indicators have no page; link to their row on /indicators, which carries the reason.
 export const indicatorHref = (id: string, published: boolean | undefined) => (published ? `/indicators/${id}` : `/indicators#${id}`);
@@ -33,6 +37,7 @@ export const indicatorHref = (id: string, published: boolean | undefined) => (pu
 // Thesis-monitor states in plain words for readers who have not met the monitor's logic.
 export const STATE_WORDS: Record<string, string> = { supported: "happening", unsupported: "not happening", contradicted: "running the other way", untestable: "can't be tested yet" };
 export const PREDICTION_WORDS: Record<string, string> = { holding: "holding so far", failing: "failing its test", untestable: "can't be tested yet" };
+export const CLAIM_WORDS: Record<string, string> = { ...PREDICTION_WORDS, both: "both sides expect this" };
 // Why a tightness input carries no score, one wording site-wide (the scorecard and the bottleneck map).
 export const WITHHELD_WORDS: Record<string, string> = {
   no_public_series: "nobody publishes a series that would measure it",

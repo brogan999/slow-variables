@@ -30,6 +30,7 @@ export default function ArgumentPage() {
         <Exits doc={doc} />
       </section>
       <p className="mt-12 font-serif text-lg"><Link href="/argument/migration" className="underline decoration-axis underline-offset-4 hover:decoration-ink">Read next: the migrating bottleneck, on what is scarce in making AI and where that shortage moves →</Link></p>
+      <p className="mt-4 font-serif text-lg"><Link href="/outlook" className="underline decoration-axis underline-offset-4 hover:decoration-ink">And then: what happens from here, on where the people who think hardest about AI disagree, and tonight&apos;s reading of every claim →</Link></p>
       <section id="sources" className="mt-20 border-t border-grid pt-8 scroll-mt-8">
         <h2 className="display text-[1.5rem] mb-4">Sources</h2>
         <ol className="flex flex-col gap-3 font-serif text-[1.0625rem] leading-relaxed">

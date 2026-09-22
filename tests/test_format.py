@@ -16,6 +16,8 @@ TABLE = [
     (1044.78, "minutes", "17.4 h"),
     (31.0, "minutes", "31.0 min"),
     (107.99, "days", "108 days"),
+    (9, "months", "9 months"),
+    (4.3693, "months", "4.4 months"),
     (24.0, "count", "24"),
     (2028.0, "year", "2028"),
     (2025.84, "year", "2025.8"),
@@ -32,6 +34,13 @@ TABLE = [
     (float("inf"), "ratio", "—"),
     (None, "USD", "—"),
 ]
+
+
+def test_a_tested_line_reads_as_a_round_number_when_it_is_one():
+    from ai_tracker.format import fmt_line
+
+    assert [fmt_line(0.15, "share"), fmt_line(0.035, "share"), fmt_line(3.5, "pct_change_yoy"), fmt_line(9, "months")] == [
+        "15%", "3.5%", "3.5%", "9 months"]
 
 
 def test_values_read_the_way_the_site_renders_them():

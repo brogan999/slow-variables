@@ -2568,7 +2568,7 @@ observations:
     basis: reported
     raw_snippet: A federal judge in San Francisco granted Amazon a preliminary injunction Monday blocking Perplexity from using its Comet browser’s AI agent to access password-protected sections of the Amazon website to shop on behalf of customers.
     note: 'GeekWire, 10 Mar 2026: a preliminary injunction in the case already counted, stayed seven days for an appeal; context, not a second move by the platform.'
-  - series_key: evidence.agent_access_fences.context.pt
+  - series_key: evidence.agent_access_fences.against.pt
     source_id: cnbc
     value_text: Walmart announces a deal with OpenAI to let shoppers buy through ChatGPT (Oct 2025)
     unit: event
@@ -2578,7 +2578,30 @@ observations:
     tier: 5
     basis: reported
     raw_snippet: Walmart said Tuesday that it has reached a deal with OpenAI to allow shoppers to buy items directly through ChatGPT.
-    note: 'CNBC, 14 Oct 2025: a deal with one AI company, announced without a date for when shoppers could start; context, not yet an opening to outside agents.'
+    note: 'CNBC, 14 Oct 2025: an announced deal to let shoppers buy through OpenAI''s chatbot, with no terms or start date disclosed; counted as an opening (it was context until 22 Sep 2026).'
+  - series_key: evidence.agent_access_fences.against.pt
+    source_id: stripe_newsroom
+    value_text: OpenAI and Stripe let ChatGPT users buy from Etsy merchants in the chat, on an open protocol (Sep 2025)
+    unit: event
+    as_of_date: '2025-09-29'
+    published_date: '2025-09-29'
+    url: https://stripe.com/newsroom/news/stripe-openai-instant-checkout
+    tier: 4
+    basis: company_stated
+    raw_snippet: ChatGPT users in the United States can buy from Etsy merchants (and, soon, from Shopify merchants) in the chat using checkout powered by Stripe.
+    note: 'Stripe, 29 Sep 2025: a marketplace opened to an outside AI agent through the Agentic Commerce Protocol, an open standard Stripe and OpenAI released the same day.'
+  - series_key: evidence.agent_access_fences.for.pt
+    source_id: geekwire
+    entity_id: amzn
+    value_text: Amazon blocks Meta's Muse assistant from shopping on Amazon (Sep 2026)
+    unit: event
+    as_of_date: '2026-09-20'
+    published_date: '2026-09-20'
+    url: https://www.geekwire.com/2026/amazon-blocks-metas-muse-ai-assistant-in-new-standoff-over-agentic-shopping/
+    tier: 5
+    basis: reported
+    raw_snippet: As of Sunday night, people trying to use Muse to shop on Amazon were seeing the popup
+    note: 'GeekWire, 21 Sep 2026: Amazon began turning Muse away on the night of Sunday 20 September.'
   - series_key: usage.openai_chatgpt.weekly_active_users.pt
     source_id: techcrunch
     entity_id: openai
