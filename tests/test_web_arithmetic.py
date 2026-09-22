@@ -8,13 +8,7 @@ from pathlib import Path
 ROOT = Path("web/src")
 # formatting, the chart primitives, placing a tooltip, and the footer's "updated N days ago"
 ALLOWED = {"lib/format.ts", "components/chart.tsx", "components/HoverLayer.tsx", "components/Freshness.tsx"}
-PENDING = {
-    "components/FourClocks.tsx",
-    "components/MarginStackChart.tsx",
-    "components/MigrationParts.tsx",
-    "components/VentureFlowStrip.tsx",
-    "app/methodology/page.tsx",
-}
+PENDING: set[str] = set()  # every figure is laid out by the export now
 TELLS = re.compile(r"Math\.|\.reduce\(|toFixed\(|toLocale\w*String\(|\*\s*100\b")
 
 

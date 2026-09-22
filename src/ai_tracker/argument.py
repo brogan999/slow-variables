@@ -194,7 +194,47 @@ def clocks(s: Store, spec: dict[str, Any]) -> dict[str, Any]:
     mult = {d["id"]: d["multiple"]["value"] for d in drawn}
     a, b = c.get("expect", {}).get("gt", [None, None])
     holds = mult[a] > mult[b] if a in mult and b in mult else None
-    return {"start": start, "drawn": drawn, "listed": listed, "holds": holds}
+    return {
+        "start": start,
+        "drawn": drawn,
+        "listed": listed,
+        "holds": holds,
+        "chart": _lay_clocks(s, drawn) if drawn else None,
+        "chart_sources": s._chart_sources([i for d in drawn for p in d["series"] for i in p["obs_ids"]]),
+    }
+
+
+def _lay_clocks(s: Store, drawn: list[dict[str, Any]]) -> dict[str, Any]:
+    """Every line as a multiple of its own first reading, on one log axis whose dates cover every point (a line
+    that starts from the best reading before the start date starts where its first point is, not off the axis).
+    Positions and the end labels' places are written onto the series; labels are nudged apart, never overlapped."""
+    from . import chart
+
+    when = [date.fromisoformat(p["as_of"]) for d in drawn for p in d["series"]]
+    xa = chart.time_axis(when)
+    for d in drawn:
+        for p in d["series"]:
+            p["multiple"] = p["value"] / d["series"][0]["value"]
+    ya = chart.axis([p["multiple"] for d in drawn for p in d["series"]] + [1.0], "ratio", log=True)
+    for d in drawn:
+        for p in d["series"]:
+            p["x"], p["y"] = (
+                chart.x(date.fromisoformat(p["as_of"]), xa["lo"], xa["hi"]),
+                chart.y(p["multiple"], ya),
+            )
+            p["href"] = s.href_of(p["obs_ids"])
+        d["stamp"] = s.stamp_of([i for p in d["series"] for i in p["obs_ids"]])
+    ends = sorted(drawn, key=lambda d: d["series"][-1]["y"])
+    for d, y in zip(ends, chart.spread([d["series"][-1]["y"] for d in ends], 10.0)):
+        d["label_y"] = y
+    return {
+        "x": {"ticks": xa["ticks"]},
+        "y": {
+            **{k: ya[k] for k in ("ticks", "log")},
+            "unit": "multiple of its first reading",
+            "chars": max(len(t["label"]) for t in ya["ticks"]),
+        },
+    }
 
 
 def _raw_phase(capex: float, fin: float | None, fin_year_ago: float | None) -> str:
@@ -228,9 +268,25 @@ def phase(s: Store, spec: dict[str, Any]) -> dict[str, Any]:
         if state is None or (raw != state and history and history[-1]["raw"] == raw):
             state = raw
         history.append({"as_of": c.as_of_date.isoformat(), "raw": raw, "state": state})
+    ids = (capex[-1].input_observation_ids if capex else []) + (
+        max(fin.values(), key=lambda d: d.as_of_date).input_observation_ids if fin else []
+    )
+    cs = s._chart_sources(ids)
     if not capex or not fin:
-        return {"state": "untestable", "rule": p["rule"], "as_of": None, "history": history}
-    return {"state": state, "rule": p["rule"], "as_of": history[-1]["as_of"], "history": history}
+        return {
+            "state": "untestable",
+            "rule": p["rule"],
+            "as_of": None,
+            "history": history,
+            "chart_sources": cs,
+        }
+    return {
+        "state": state,
+        "rule": p["rule"],
+        "as_of": history[-1]["as_of"],
+        "history": history,
+        "chart_sources": cs,
+    }
 
 
 def exits(spec: dict[str, Any]) -> list[dict[str, Any]]:
@@ -411,7 +467,8 @@ def scorecard(s: Store, today: date) -> dict[str, Any]:
             "href": "/methodology#tightness",
         },
         "total": len(inputs),
-        "method": rules,
+        # the one rule the methodology page prints as a percentage, worded here so the page computes nothing
+        "method": {**rules, "min_coverage_label": f"{rules['min_coverage']:.0%}"},
         "chart_sources": s._chart_sources(sorted(all_ids)),
     }
 
@@ -458,7 +515,23 @@ def strip(block: dict[str, Any], today: date) -> dict[str, Any]:
         }
         for r in st["rows"]
     ]
-    return {"from": st["from"], "to": st["to"], "now": now, "rows": rows}
+    span = st["to"] - st["from"]
+
+    def pct(year: float) -> float:
+        return round(100 * (year - st["from"]) / span, 2)
+
+    for r in rows:  # each span's place on its track, and the anchor of its row in the table
+        for i, sp in enumerate(r["spans"]):
+            sp.update(
+                left=pct(sp["from"]),
+                width=round(pct(sp["to"]) - pct(sp["from"]), 2),
+                anchor=f"span-{r['id']}-{i}",
+            )
+    ticks = [
+        {"x": pct(y), "label": str(y), "minor": i % 2 == 1}
+        for i, y in enumerate(range(st["from"], st["to"] + 1, 2))
+    ]
+    return {"from": st["from"], "to": st["to"], "now": now, "now_x": pct(now), "ticks": ticks, "rows": rows}
 
 
 def migration(s: Store, spec: dict[str, Any], today: date) -> dict[str, Any]:

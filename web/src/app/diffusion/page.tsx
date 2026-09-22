@@ -18,10 +18,7 @@ export default function DiffusionPage() {
       <PageHeader eyebrow="How fast · the diffusion lens" title={argument().headlines.diffusion.claim}
         lede={<>Arvind Narayanan and Sayash Kapoor, two Princeton computer scientists, argue that AI will spread the way electricity did: over decades, through stages. This page times each stage separately, from new methods to reorganised work. A stage carries a status only when a published indicator measures it; otherwise it reads unmeasured.</>} />
 
-      <figure className="plate flex flex-col items-center gap-3">
-        <StockFlowDiagram buckets={d.buckets} valves={d.valves} />
-        <figcaption className="text-sm text-ink-2 max-w-[62ch] self-start">Each box is a stage the technology has to pass through, each arrow the flow from one stage to the next. On the right, two things that push back: public backlash and safety brakes, and tests that keep moving the goalposts. Down the left, what use feeds back into better methods.</figcaption>
-      </figure>
+      <StockFlowDiagram buckets={d.buckets} valves={d.valves} sources={d.n_sources} />
 
       {d.buckets.map((b) => (
         <section key={b.id} id={b.id} className="border-t border-grid pt-8 scroll-mt-8">
@@ -34,7 +31,7 @@ export default function DiffusionPage() {
               {[...b.indicators].sort((x, y) => (y.confidence ?? 0) - (x.confidence ?? 0)).slice(0, 4).map((c) => <IndicatorCard key={c.id} c={c} obsIndex={idx} />)}
             </div>
           ) : <p className="text-sm text-muted">No published indicator for this stage yet.</p>}
-          {b.indicators.length > 4 ? <p className="mt-4 text-sm"><Link href={`/buckets/${b.id}`} className="underline decoration-axis underline-offset-4">All {b.indicators.length} indicators for this stage →</Link></p> : null}
+          {b.n_indicators > 4 ? <p className="mt-4 text-sm"><Link href={`/buckets/${b.id}`} className="underline decoration-axis underline-offset-4">All {b.n_indicators} indicators for this stage →</Link></p> : null}
         </section>
       ))}
 

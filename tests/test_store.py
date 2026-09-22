@@ -77,11 +77,23 @@ def test_capture_readings_meta_counts_and_chart_sources(tmp_path):
     for f in (d / "venture").glob("*.json"):
         doc = json.loads(f.read_text())
         assert not any(q.get("by_source") for q in doc["quarters"]) or doc["chart_sources"]["sources"], f.name
-    for series, sources in (
-        ("gross_profit_stack_series", "gross_profit_stack_sources"),
-        ("margin_stack_series", "margin_stack_sources"),
-    ):
-        assert not cap[series] or cap[sources]["sources"], series
+    # every strip shares one quarter axis, and each quarter's equity stack stands on the baseline without gaps
+    strips = [json.loads(f.read_text()) for f in (d / "venture").glob("*.json")]
+    assert len({tuple(q["as_of"] for q in v["quarters"]) for v in strips}) <= 1
+    for v in strips:
+        for q in v["quarters"]:
+            eq = [x for x in q.get("by_source", []) if x["kind"] == "equity"]
+            if eq:
+                assert abs(max(x["y"] + x["height"] for x in eq) - 100) < 0.05, (v["sublayer_id"], q["as_of"])
+                assert abs(sum(x["height"] for x in eq) - (100 - q["top"])) < 0.05, (v["sublayer_id"], q["as_of"])
+    for name in ("gross_profit_stack", "margin_stack"):  # every column sums to the whole, every part links
+        st_ = cap[name]
+        assert not st_["quarters"] or st_["sources"]["sources"], name
+        for q in st_["quarters"]:
+            if q["parts"]:
+                assert abs(sum(p["value"] for p in q["parts"]) - 1) < 1e-6, (name, q["as_of"])
+                assert abs(sum(p["height"] for p in q["parts"]) - 100) < 0.1 and q["parts"][-1]["y"] >= -0.01, (name, q)
+            assert all(p["href"] and p["stamp"] for p in q["parts"]), (name, q["as_of"])
     # every indicator chart is laid out by the export: ticks and marks inside the plot, every mark a record
     for f in (d / "indicators").glob("*.json"):
         doc = json.loads(f.read_text())

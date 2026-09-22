@@ -73,10 +73,12 @@ def test_a_fact_without_data_is_attention_not_an_error(monkeypatch):
 
 def _fake(capex, fin):
     rows = {
-        "c": [SimpleNamespace(as_of_date=date.fromisoformat(d), value=v) for d, v in capex],
-        "f": [SimpleNamespace(as_of_date=date.fromisoformat(d), value=v) for d, v in fin],
+        "c": [SimpleNamespace(as_of_date=date.fromisoformat(d), value=v, input_observation_ids=[]) for d, v in capex],
+        "f": [SimpleNamespace(as_of_date=date.fromisoformat(d), value=v, input_observation_ids=[]) for d, v in fin],
     }
-    return SimpleNamespace(derived_for=lambda m, dims=None: rows[m])
+    return SimpleNamespace(
+        derived_for=lambda m, dims=None: rows[m], _chart_sources=lambda ids, metric=None: {"sources": []}
+    )
 
 
 SPEC = {"phase": {"capex": "c", "financing": "f", "rule": "r"}}
@@ -189,6 +191,29 @@ def test_no_solid_span_passes_today_and_predicted_rows_come_from_the_predictions
     assert {r["id"] for r in st_["rows"] if r["predicted"]} == {
         p["row"] for p in spec["migration"]["predictions"] if p.get("row")
     }
+    # the export places every span: inside the track, ending by today, and anchored to its row in the table
+    for r in st_["rows"]:
+        for sp in r["spans"]:
+            assert 0 <= sp["left"] and sp["left"] + sp["width"] <= st_["now_x"] + 0.01, (r["id"], sp)
+    anchors = [sp["anchor"] for r in st_["rows"] for sp in r["spans"]]
+    assert len(set(anchors)) == len(anchors) and all(0 <= t["x"] <= 100 for t in st_["ticks"])
+
+
+def test_the_clocks_draw_every_point_on_one_axis_and_their_end_labels_never_overlap():
+    fake = SimpleNamespace(href_of=lambda ids: f"/series/x#{ids[0]}", stamp_of=lambda ids: "measured")
+
+    def line(i, start, values):
+        return {"id": f"c{i}", "series": [{"as_of": f"{start + k}-06-30", "value": v, "obs_ids": [f"o{i}{k}"]} for k, v in enumerate(values)]}
+
+    # three lines ending within a hair of each other, one starting a year before the rest
+    drawn = [line(0, 2023, [1, 3, 9]), line(1, 2024, [2, 2.1]), line(2, 2024, [4, 4.2])]
+    lay = ar._lay_clocks(fake, drawn)
+    pts = [p for d in drawn for p in d["series"]]
+    assert all(0 <= p["x"] <= 100 and 0 <= p["y"] <= 100 for p in pts)  # the earliest point is on the axis
+    assert drawn[0]["series"][-1]["multiple"] == 9 and drawn[1]["series"][0]["multiple"] == 1
+    ys = sorted(d["label_y"] for d in drawn)
+    assert all(b - a >= 9.99 for a, b in zip(ys, ys[1:])) and 0 <= ys[0] and ys[-1] <= 100
+    assert lay["y"]["log"] and [t["label"] for t in lay["y"]["ticks"]][0] == "1×"
 
 
 def test_a_malformed_migration_seed_is_an_error_line_never_a_crash(monkeypatch):

@@ -52,12 +52,12 @@ export function Stamp({ kind }: { kind: "measured" | "reported" | "estimate" }) 
 export function Chip({ name, meta, href, exit }: { name: string; meta?: string; href?: string; exit?: boolean }) {
   const body = (
     <>
-      {exit ? <span aria-hidden>→ </span> : null}
+      {exit ? <span aria-hidden>→</span> : null}
       <span className="text-ink">{name}</span>
-      {meta ? <span className="text-muted"> · {meta}</span> : null}
+      {meta ? <span className="text-muted">· {meta}</span> : null}
     </>
   );
-  const cls = `inline-flex items-center rounded-[2px] bg-surface-2 px-2 py-0.5 font-mono text-[11px] text-ink-2 whitespace-nowrap ${exit ? "ring-1 ring-ink" : "ring-1 ring-axis"}`;
+  const cls = `inline-flex items-center gap-1 rounded-[2px] bg-surface-2 px-2 py-0.5 font-mono text-[11px] text-ink-2 whitespace-nowrap ${exit ? "ring-1 ring-ink" : "ring-1 ring-axis"}`;
   return href ? <a href={href} className={`${cls} hover:ring-ink`}>{body}</a> : <span className={cls}>{body}</span>;
 }
 

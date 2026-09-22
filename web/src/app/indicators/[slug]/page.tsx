@@ -2,6 +2,7 @@ import Link from "next/link";
 import { indicatorHref } from "@/lib/format";
 import { ConfidenceBar, rubricWords } from "@/components/ConfidenceBar";
 import { EvidenceLog } from "@/components/EvidenceLog";
+import { Callout } from "@/components/Figure";
 import { TimeChart } from "@/components/TimeChart";
 import { ChangelogList } from "@/components/Changelog";
 import { Num, ObsLinks } from "@/components/Provenance";
@@ -76,7 +77,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
           <H2 id="reading">The reading</H2>
           <p className="font-serif text-[1.0625rem] leading-relaxed mb-6">{plain(d.tracker_interpretation)}</p>
           <TimeChart d={d} />
-          {d.override_note ? <p className="mt-3 text-sm text-ink-2">Override: {d.override_note}</p> : null}
+          {d.override_note ? <div className="mt-3"><Callout label="Held by an override note"><p className="text-sm text-ink-2">{d.override_note}</p></Callout></div> : null}
         </section>
 
         <section>

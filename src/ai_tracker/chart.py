@@ -75,14 +75,20 @@ def axis(
             lo_v = max(m for m in rungs if m <= lo)
             hi_v = min(m for m in rungs if m >= hi and m > lo_v)
             marks = [(m, label) for m, label in ladder if lo_v <= m <= hi_v]
-        else:
-            k0, k1 = (
-                math.floor(math.log10(lo)),
-                max(math.ceil(math.log10(hi)), math.floor(math.log10(lo)) + 1),
-            )
-            lo_v, hi_v = 10.0**k0, 10.0**k1
+        else:  # ends on the nearest 1, 2 or 5; ticks at each of those when the axis spans two decades or less
+            rungs = [
+                m * 10.0**k
+                for k in range(math.floor(math.log10(lo)) - 1, math.ceil(math.log10(hi)) + 2)
+                for m in (1, 2, 5)
+            ]
+            lo_v = max(r for r in rungs if r <= lo * 1.000001)
+            hi_v = min(r for r in rungs if r >= hi / 1.000001 and r > lo_v)
+            few = math.log10(hi_v / lo_v) <= 2.0001
             marks = [
-                (10.0**k, tick_label(10.0**k, unit, 10.0 ** min(k, 0), 10.0**k)) for k in range(k0, k1 + 1)
+                (r, tick_label(r, unit, r, r))
+                for r in rungs
+                if lo_v <= r <= hi_v
+                and (few or r in (lo_v, hi_v) or abs(math.log10(r) - round(math.log10(r))) < 1e-9)
             ]
         ax = {"lo": lo_v, "hi": hi_v, "log": True}
         return {**ax, "ticks": [{"y": y(m, ax), "label": s} for m, s in marks], "unit": _unit_label(unit)}
@@ -184,3 +190,18 @@ def change_label(v: float, unit: str | None) -> str:
     if unit == "ratio":
         return sign + fmt(abs(v))
     return sign + fmt(abs(v), unit)
+
+
+def spread(ys: list[float], gap: float) -> list[float]:
+    """Label places as close to `ys` (sorted, percent of the plot) as they can be while `gap` apart and inside it:
+    push down, pull back from the bottom, then keep the top on the plot."""
+    out = list(ys)
+    for i in range(1, len(out)):
+        out[i] = max(out[i], out[i - 1] + gap)
+    out[-1] = min(out[-1], 100.0)
+    for i in range(len(out) - 2, -1, -1):
+        out[i] = min(out[i], out[i + 1] - gap)
+    out[0] = max(out[0], 0.0)
+    for i in range(1, len(out)):
+        out[i] = max(out[i], out[i - 1] + gap)
+    return [round(y, 2) for y in out]

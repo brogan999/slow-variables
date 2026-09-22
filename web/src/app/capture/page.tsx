@@ -1,9 +1,8 @@
 import Link from "next/link";
 import { StackPlate } from "@/components/ArgumentParts";
 import { ChangelogList } from "@/components/Changelog";
-import { ChartSources } from "@/components/ChartSources";
 import { IndicatorCard } from "@/components/IndicatorCard";
-import { MarginStackChart } from "@/components/MarginStackChart";
+import { StackChart } from "@/components/StackChart";
 import { PageHeader } from "@/components/PageHeader";
 import { StatusChip } from "@/components/StatusChip";
 import { argument, capture, obsIndex } from "@/lib/data";
@@ -37,19 +36,14 @@ export default function CaptureLens() {
                 {[...published].sort((a, b) => (b.confidence ?? 0) - (a.confidence ?? 0)).slice(0, 4).map((i) => <IndicatorCard key={i.id} c={i} obsIndex={idx} />)}
               </div>
             ) : <p className="text-sm text-muted">No published indicator for this layer yet.</p>}
-            {published.length > 4 ? <p className="mt-4 text-sm"><Link href={`/layers/${l.id}`} className="underline decoration-axis underline-offset-4">All {published.length} indicators on this layer →</Link></p> : null}
+            {l.n_published > 4 ? <p className="mt-4 text-sm"><Link href={`/layers/${l.id}`} className="underline decoration-axis underline-offset-4">All {l.n_published} indicators on this layer →</Link></p> : null}
           </section>
         );
       })}
 
       <section className="border-t border-grid pt-8 flex flex-col gap-4">
-        <details>
-          <summary className="cursor-pointer display text-xl">The all-filed check: operating income, five segments</summary>
-          <div className="mt-4">
-            <MarginStackChart rows={c.margin_stack_series} obsIndex={idx} parts={[{ id: "compute_semis", name: "Chip segments", fill: "var(--s1)", prefix: "sec_seg.nvda." }, { id: "compute_cloud", name: "Cloud segments", fill: "var(--s2)", prefix: "sec_seg.amzn." }]} unmeasured="NVIDIA Compute & Networking and AMD Data Center against AWS, Google Cloud and Microsoft Intelligent Cloud; labs and apps file no segments." />
-            <ChartSources cs={c.margin_stack_sources} />
-          </div>
-        </details>
+        <StackChart stack={c.margin_stack} title="The all-filed check: operating income, five segments" what="operating income"
+          unmeasured="NVIDIA Compute & Networking and AMD Data Center against AWS, Google Cloud and Microsoft Intelligent Cloud; labs and apps file no segments." />
         {c.verdict ? <details><summary className="cursor-pointer display text-xl">Every layer&apos;s reading</summary><p className="mt-4 text-ink-2 max-w-[75ch]">{c.verdict}</p></details> : null}
         <details>
           <summary className="cursor-pointer display text-xl">Recent changes</summary>

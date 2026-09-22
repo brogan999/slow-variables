@@ -33,7 +33,7 @@ export default async function BucketPage({ params }: { params: Promise<{ id: str
       {id === "return_arrow" ? (
         <section>
           <h2 className="display text-2xl leading-tight mb-3 mt-2">Continual-learning ladder</h2>
-          <LadderView doc={ladder()} obsIndex={idx} />
+          <LadderView doc={ladder()} />
         </section>
       ) : null}
       <section>
