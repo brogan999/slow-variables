@@ -36,7 +36,7 @@ export function Folios({ folios, facts, plates }: { folios: ReturnType<typeof pa
           <div className="prose-folio">
             {f.blocks.map((b, i) => {
               const plate = b.match(/^\[plate:([a-z]+)\]$/);
-              return plate ? <div key={i} className="my-8">{plates[plate[1]]}</div> : <p key={i}><Inline text={b} facts={facts} /></p>;
+              return plate ? <div key={i} className="fig-slot">{plates[plate[1]]}</div> : <p key={i}><Inline text={b} facts={facts} /></p>;
             })}
           </div>
         </section>

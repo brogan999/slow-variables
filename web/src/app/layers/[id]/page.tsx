@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { IndicatorCard } from "@/components/IndicatorCard";
+import { Callout } from "@/components/Figure";
 import { LadderView } from "@/components/LadderView";
 import { VentureFlowStrip } from "@/components/VentureFlowStrip";
 import { index, ladder, layer, obsIndex, venture } from "@/lib/data";
@@ -37,11 +38,10 @@ export default async function LayerPage({ params }: { params: Promise<{ id: stri
         ) : null}
       </div>
       {bells.length ? (
-        <section>
-          <h2 className="display text-2xl leading-tight mb-2 mt-2">Entry and exit bells</h2>
+        <Callout label="Entry and exit bells" id="bells">
           <p className="text-sm text-ink-2 mb-3 max-w-[60ch]">The entry bell rings when the labs start buying from the layers around them (data and training environments); the exit bell rings when they buy those companies outright.</p>
           <div className="grid gap-3 md:grid-cols-2">{bells.map((c) => <IndicatorCard key={c.id} c={c} obsIndex={idx} />)}</div>
-        </section>
+        </Callout>
       ) : null}
       <section>
         <h2 className="display text-2xl leading-tight mb-3 mt-2">Indicators</h2>
@@ -50,7 +50,7 @@ export default async function LayerPage({ params }: { params: Promise<{ id: stri
       {id === "training_input" ? (
         <section>
           <h2 className="display text-2xl leading-tight mb-3 mt-2">Continual-learning ladder</h2>
-          <LadderView doc={ladder()} obsIndex={idx} />
+          <LadderView doc={ladder()} />
         </section>
       ) : null}
       {l.sublayers.length ? (
@@ -62,7 +62,7 @@ export default async function LayerPage({ params }: { params: Promise<{ id: stri
               return (
                 <li key={s.id}>
                   <h3 className="text-sm font-medium mb-2"><span className="text-muted tabular-nums">{s.order}.</span> <Link href={`/stack/${s.id}`} className="hover:underline">{s.name}</Link></h3>
-                  {v ? <VentureFlowStrip doc={v} note={false} /> : <p className="text-xs text-muted">No primary rounds on file.</p>}
+                  {v ? <VentureFlowStrip doc={v} name={s.name} note={false} /> : <p className="text-xs text-muted">No primary rounds on file.</p>}
                 </li>
               );
             })}

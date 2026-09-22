@@ -69,15 +69,19 @@ export const layer = (id: string) => read<Layer & { tally?: Tally; indicators: C
 export const series = (key: string) => read<{ series_key: string; unit: string; source: Source | null; observations: Observation[]; withdrawn: Observation[] }>(`series/${key}.json`);
 export const seriesKeys = () => fs.readdirSync(path.join(ROOT, "series")).map((f) => f.replace(/\.json$/, ""));
 export const diffusion = () => read<{
-  as_of: string; verdict: string; buckets: (Bucket & { indicators: Card[]; status: string; tally: Tally })[];
+  as_of: string; verdict: string; buckets: (Bucket & { indicators: Card[]; n_indicators: number; status: string; tally: Tally })[]; n_sources: number;
   valves: { id: string; from: string; to: string; name: string; status: string; tally: Tally; indicator_ids: string[] }[];
   recent_status_events: StatusEvent[]; what_would_change: string[];
 }>("lens/diffusion.json");
 export type ChartSourcesT = { metric: string | null; sources: { id: string; name: string; org: string; license: string | null; attribution: string | null }[] };
-export type StackPart = { label: string; value: number; estimated: boolean; grade: string | null; href: string; obs_ids: string[] };
-export type StackBar = { value: number; as_of: string; estimated: boolean; parts: StackPart[]; obs_ids: string[] };
-export type StackRow = { as_of: string; layer_id: string | null; basis?: string; value: number; obs_ids: string[] };
-export const capture = () => read<{ as_of: string; verdict?: string; what_would_change: string[]; layers: (Layer & { indicators: Card[]; status: string; tally: Tally; venture: LayerVenture | null; reading: string })[]; recent_status_events: StatusEvent[]; stack_bars: Record<string, StackBar>; gross_profit_stack_series: StackRow[]; margin_stack_series: StackRow[]; gross_profit_stack_sources: ChartSourcesT; margin_stack_sources: ChartSourcesT }>("lens/capture.json");
+export type StackPart = { id: string; name: string; value: number; unit: string; as_of: string; obs_ids: string[]; estimated: boolean; stamp: Stamp | null; href: string; y: number; height: number };
+export type Stack = {
+  quarters: { as_of: string; name: string; label: string; minor: boolean; x: number; cx: number; width: number; parts: StackPart[] }[];
+  axis: Axis | null; keys: { id: string; name: string; estimate: boolean }[];
+  ends: { id: string; name: string; value: number; unit: string; as_of: string; obs_ids: string[]; y: number }[];
+  stamps?: Stamp[]; sources: ChartSourcesT;
+};
+export const capture = () => read<{ as_of: string; verdict?: string; what_would_change: string[]; layers: (Layer & { indicators: Card[]; n_published: number; status: string; tally: Tally; venture: LayerVenture | null; reading: string })[]; recent_status_events: StatusEvent[]; gross_profit_stack: Stack; margin_stack: Stack }>("lens/capture.json");
 export const sources = () => read<Source[]>("sources.json");
 export type Skipped = { id: string; name: string; url: string | null; reason: string; attribution: string | null; people?: string[] };
 export const skippedSources = () => read<Skipped[]>("skipped_sources.json");
@@ -108,7 +112,7 @@ export type ComparePred = { id: string; claimant: string; status: string | null 
 export type CompareRow = { indicator: string; card: Card; leans: "nk" | "ai2027" | "open" | null; columns: Record<"nk" | "ai2027" | "lab" | "capture", { text: string; predictions: ComparePred[] }> };
 export const compare = () => read<{ rows: CompareRow[]; tally: { nk: number; ai2027: number; open: number } }>("compare.json");
 export type StackEntity = { id: string; name: string; kind: string; cik: string | null; aliases: string[]; verified: boolean; notes: string | null; founded: number | null; is_primary: boolean; from_date: string | null; to_date: string | null; latest: { series_key: string; value: number | null; value_text: string | null; unit: string; as_of: string; obs_ids: string[] } | null };
-export type StackSublayer = Sublayer & { entities: StackEntity[]; indicators: Card[] };
+export type StackSublayer = Sublayer & { entities: StackEntity[]; indicators: Card[]; n_entities: number; n_verified: number; n_indicators: number };
 export type StackDoc = { layers: (Layer & { sublayers: StackSublayer[] })[] };
 export const stack = () => read<StackDoc>("stack.json");
 export type Analysis = {
@@ -126,12 +130,15 @@ export function memo(date: string): Memo | null {
   const p = path.join(ROOT, "memos", `${date}.json`);
   return fs.existsSync(p) ? (JSON.parse(fs.readFileSync(p, "utf8")) as Memo) : null;
 }
-export type VentureSeg = { source: string; kind: string; value: number; obs_ids: string[]; href: string | null };
-export type VentureQuarter = { as_of: string; venture_dollars?: { value: number; obs_ids: string[] }; round_count?: { value: number; obs_ids: string[] }; venture_dollars_incl_debt?: { value: number; obs_ids: string[] }; by_source?: VentureSeg[] };
+export type VentureSeg = { source: string; kind: string; value: number; obs_ids: string[]; href: string | null; stamp: Stamp | null; y?: number; height?: number };
+export type VentureQuarter = {
+  as_of: string; name: string; label: string; minor: boolean; label_minor: boolean; x: number; cx: number; width: number; top: number | null;
+  venture_dollars?: { value: number; obs_ids: string[] }; round_count?: { value: number; obs_ids: string[] }; venture_dollars_incl_debt?: { value: number; obs_ids: string[] }; by_source?: VentureSeg[];
+};
 export type LayerVenture = { value: number | null; as_of: string; obs_ids: string[]; prior: { value: number; as_of: string; obs_ids: string[] } | null; arrow: "up" | "down" | "flat" | null; sublayers: { sublayer_id: string; name: string; value: number; as_of: string; obs_ids: string[] }[] };
 export type VentureDoc = { sublayer_id: string; quarters: VentureQuarter[]; chart_sources?: ChartSourcesT };
 export const venture = (sublayerId: string): VentureDoc | null => { try { return read<VentureDoc>(`venture/${sublayerId}.json`); } catch { return null; } };
-export type LadderRow = { obs_id: string; subject: string; entity_id: string | null; as_of: string; tier: number; url: string; snippet: string };
+export type LadderRow = { obs_id: string; subject: string; name: string; href: string | null; entity_id: string | null; as_of: string; tier: number; url: string; snippet: string };
 export type LadderDoc = { current: { value: number; as_of: string; obs_ids: string[] } | null; rungs: { level: number; name: string; description: string; observables: string; production: LadderRow[]; research: LadderRow[] }[]; chart_sources?: ChartSourcesT };
 export const ladder = () => read<LadderDoc>("lens/ladder.json");
 
@@ -139,7 +146,11 @@ export const ladder = () => read<LadderDoc>("lens/ladder.json");
 let _published: Set<string> | null = null;
 export const publishedIds = () => (_published ??= new Set(index().indicators.filter((c) => c.published).map((c) => c.id)));
 export type Fact = { value: number; unit: string; as_of: string; obs_ids: string[]; href: string; holds?: boolean | null; stale?: boolean };
-export type ClockSeries = { id: string; label: string; name: string; unit: string; from: string; series: { as_of: string; value: number; obs_ids: string[] }[]; multiple: Fact };
+export type ClockSeries = {
+  id: string; label: string; name: string; unit: string; from: string; multiple: Fact; stamp: Stamp | null; label_y: number;
+  series: { as_of: string; value: number; obs_ids: string[]; multiple: number; x: number; y: number; href: string | null }[];
+};
+export type Axis = { ticks: Tick[]; unit: string | null; log: boolean; chars: number };
 export type Gauge = {
   id: string; label: string; weight: number; max_age_days: number | null; knots: [number, number][] | null; scale_rationale: string | null;
   unfed: { kind: string; because: string } | null; required: boolean; log10: boolean; unit: string | null; reading: Fact | null; age_days: number | null;
@@ -155,10 +166,10 @@ export type Scorecard = {
   scored: Omit<Fact, "value" | "as_of"> & { value: number | null; as_of: string | null };
   method: Record<string, unknown> & { words: [number, string][]; hatch_under: number }; chart_sources: ChartSourcesT;
 };
-export type StripRow = { id: string; label: string; predicted: boolean; spans: { from: number; to: number; running: boolean; level: "binding" | "present"; because: string; source: string }[] };
+export type StripRow = { id: string; label: string; predicted: boolean; spans: { from: number; to: number; running: boolean; level: "binding" | "present"; because: string; source: string; left: number; width: number; anchor: string }[] };
 export type OwnPrediction = { id: string; when: "now" | "next" | "watch"; claim: string; text: string; fact: string | null; state: "holding" | "failing" | "untestable" };
 export type MigrationDoc = {
-  as_of: string; facts: Record<string, Fact | null>; scorecard: Scorecard; strip: { from: number; to: number; now: number; rows: StripRow[] };
+  as_of: string; facts: Record<string, Fact | null>; scorecard: Scorecard; strip: { from: number; to: number; now: number; now_x: number; ticks: Tick[]; rows: StripRow[] };
   predictions: OwnPrediction[]; tally: Record<"holding" | "failing" | "untestable", number>; sources: { who: string; work: string; where: string; url: string }[];
 };
 export type ArgumentDoc = {
@@ -167,8 +178,8 @@ export type ArgumentDoc = {
   migration: MigrationDoc;
   facts: Record<string, Fact | null>;
   slow_variables: { id: string; label: string; sentence: string }[];
-  clocks: { start: string; drawn: ClockSeries[]; listed: string[]; holds: boolean | null };
-  phase: { state: "installation" | "turning_point" | "deployment" | "untestable"; rule: string; as_of: string | null; history: { as_of: string; raw: string; state: string }[] };
+  clocks: { start: string; drawn: ClockSeries[]; listed: string[]; holds: boolean | null; chart: { x: { ticks: Tick[] }; y: Axis } | null; chart_sources: ChartSourcesT };
+  phase: { state: "installation" | "turning_point" | "deployment" | "untestable"; rule: string; as_of: string | null; history: { as_of: string; raw: string; state: string }[]; chart_sources: ChartSourcesT };
   exits: { monitor: string; label: string; text: string; state: string | null }[];
   headlines: Record<"diffusion" | "capture", { monitor: string; state: string; claim: string }>;
   sources: { who: string; work: string; where: string; url: string }[];

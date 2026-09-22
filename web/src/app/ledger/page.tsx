@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Grade } from "@/components/StatusChip";
+import { Chip, Grade } from "@/components/StatusChip";
 import { ledger, sources } from "@/lib/data";
 import { fmt } from "@/lib/format";
 
@@ -25,7 +25,7 @@ export default function LedgerPage() {
               return (
                 <tr key={r.obs_id} id={r.obs_id}>
                   <td className="whitespace-nowrap tabular-nums">{r.as_of_date}</td>
-                  <td className="whitespace-nowrap">{r.parties.map((p, i) => <span key={p.slug}>{i ? " → " : ""}{p.href ? <Link href={p.href} className="hover:underline">{p.name}</Link> : p.name}</span>)}</td>
+                  <td><span className="inline-flex flex-wrap items-center gap-1">{r.parties.map((p, i) => <span key={p.slug} className="inline-flex items-center gap-1">{i ? <span aria-hidden className="text-muted">→</span> : null}<Chip name={p.name} href={p.href ?? undefined} /></span>)}</span></td>
                   <td className="whitespace-nowrap text-ink-2">{INSTR[r.instrument] ?? r.instrument.replace(/_/g, " ")}</td>
                   <td className="whitespace-nowrap tabular-nums"><Link href={`/series/${r.series_key}#${r.obs_id}`} className="underline decoration-grid underline-offset-4">{r.value_numeric !== null ? fmt(r.value_numeric, r.unit === "shares" || r.unit === "GW" || r.unit === "bps" ? undefined : r.unit) : "—"}</Link>{r.unit === "shares" ? " shares" : r.unit === "GW" ? " GW" : r.unit === "bps" ? " bps" : ""}</td>
                   <td><Grade grade={r.grade} tier={r.tier} /></td>

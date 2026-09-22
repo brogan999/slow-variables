@@ -8,7 +8,7 @@ import math
 import threading
 from collections import Counter
 from dataclasses import dataclass, field
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from fnmatch import fnmatch
 from functools import cached_property
 from pathlib import Path
@@ -48,6 +48,9 @@ from .schema import (
 )
 
 SEED, DATA, WEB = Path("seed"), Path("data"), Path("web/data")
+# the two profit stacks, bottom first: (layer id in the metric's dims, label)
+GROSS_PROFIT_PARTS = [("compute_semis", "Chips"), ("compute_cloud", "Cloud"), ("model", "Labs")]
+MARGIN_PARTS = [("compute_semis", "Chip segments"), ("compute_cloud", "Cloud segments")]
 Path = Path  # re-exported for cli
 OBS = DATA / "observations"
 
@@ -853,42 +856,8 @@ class Store:
                     if i.published and i.layer_id and i.direction_rule
                 ],
                 "recent_status_events": recent,
-                "stack_bars": self._stack_bars(),
-                "gross_profit_stack_series": [
-                    {
-                        "as_of": d.as_of_date.isoformat(),
-                        "layer_id": d.dims.get("layer_id"),
-                        "basis": d.dims.get("basis"),
-                        "value": d.value,
-                        "obs_ids": d.input_observation_ids,
-                    }
-                    for d in self.derived_for("gross_profit_share_by_layer")
-                ],
-                "gross_profit_stack_sources": self._chart_sources(
-                    [
-                        i
-                        for d in self.derived_for("gross_profit_share_by_layer")
-                        for i in d.input_observation_ids
-                    ],
-                    "gross_profit_share_by_layer",
-                ),
-                "margin_stack_sources": self._chart_sources(
-                    [
-                        i
-                        for d in self.derived_for("margin_stack_share_by_layer")
-                        for i in d.input_observation_ids
-                    ],
-                    "margin_stack_share_by_layer",
-                ),
-                "margin_stack_series": [
-                    {
-                        "as_of": d.as_of_date.isoformat(),
-                        "layer_id": d.dims.get("layer_id"),
-                        "value": d.value,
-                        "obs_ids": d.input_observation_ids,
-                    }
-                    for d in self.derived_for("margin_stack_share_by_layer")
-                ],
+                "gross_profit_stack": self._profit_stack("gross_profit_share_by_layer", GROSS_PROFIT_PARTS),
+                "margin_stack": self._profit_stack("margin_stack_share_by_layer", MARGIN_PARTS),
                 "layers": [self._capture_layer(layer, cards) for layer in self.seed.layers],
             },
         )
@@ -1070,6 +1039,7 @@ class Store:
                 {
                     **dump(b),
                     "indicators": [cards[i.id] for i in mine],
+                    "n_indicators": len(mine),
                     "status": _summarise(flow),
                     "tally": _tally(flow),
                 }
@@ -1101,6 +1071,18 @@ class Store:
             "verdict": verdict,
             "buckets": buckets,
             "valves": valves,
+            # how many sources the stage statuses rest on (flow indicators only: a capture card on a stage page does not
+            # vote); each stage's page names them, indicator by indicator
+            "n_sources": len(
+                self._chart_sources(
+                    [
+                        i
+                        for ind in self.seed.indicators
+                        if ind.published and ind.bucket_id and not ind.direction_rule and cards[ind.id].get("latest")
+                        for i in cards[ind.id]["latest"]["obs_ids"]
+                    ]
+                )["sources"]
+            ),
             "recent_status_events": recent,
             "what_would_change": [
                 f"{i.name}: {i.band_rationale}"
@@ -1185,46 +1167,128 @@ class Store:
                 json.dumps(model.model_json_schema(), indent=2, sort_keys=True) + "\n"
             )
 
-    def _stack_bars(self) -> dict[str, Any]:
-        """Latest complete quarter of the gross-profit stack as one bar per layer, summed here so the web never adds."""
-        rows = self.derived_for("gross_profit_share_by_layer")
-        if not rows:
-            return {}
-        latest = max(r.as_of_date for r in rows)
-        keys = {o["id"]: o["series_key"] for o in self.observations("sec.*", "sec_seg.*", "epoch.*")}
-        # part -> (layer, label, the series whose row the part links to)
-        part = {
-            "compute_semis": ("compute_physical", "chips", "sec.nvda.gross_profit."),
-            "compute_cloud": ("compute_physical", "cloud", "sec_seg.msft.intelligent_cloud.revenue."),
-            "model": ("model", "labs", "epoch."),
+    def _derived_href(self, d: Derived) -> str:
+        """A derived number's record: its row in the derived table of the published indicator that reads it (every
+        input listed there), else the metric's saved analysis on /query."""
+        ind = next(
+            (
+                i
+                for i in self.seed.indicators
+                if i.published
+                and i.metric == d.metric
+                and all(d.dims.get(k) == v for k, v in (i.metric_dims or {}).items())
+            ),
+            None,
+        )
+        return f"/indicators/{ind.id}#d-{d.id}" if ind else f"/query#{d.metric}"
+
+    def _profit_stack(self, metric: str, parts: list[tuple[str, str]]) -> dict[str, Any]:
+        """One stacked column per calendar quarter, shares from the bottom in `parts` order, laid out here so the
+        page only draws: each part's height, place, stamp and record. A quarter with no row stays on the axis as a
+        gap, never closed up. A share is as firm as the weakest figure in its total, so every part of a quarter
+        whose total includes an estimate is an estimate; the part that is itself estimated is the hatched one."""
+        rows = [r for r in self.derived_for(metric) if r.dims.get("layer_id") in {pid for pid, _ in parts}]
+        empty = {
+            "quarters": [],
+            "axis": None,
+            "keys": [],
+            "ends": [],
+            "stamps": [],
+            "sources": self._chart_sources([], metric),
         }
-        bars: dict[str, Any] = {}
-        for r in sorted(
-            (r for r in rows if r.as_of_date == latest), key=lambda r: r.dims["layer_id"], reverse=True
-        ):
-            layer, label, prefix = part[r.dims["layer_id"]]
-            est = r.dims.get("basis") == "estimated"
-            b = bars.setdefault(
-                layer,
-                {"value": 0.0, "as_of": latest.isoformat(), "estimated": False, "parts": [], "obs_ids": []},
-            )
-            b["value"] += r.value
-            b["estimated"] = b["estimated"] or est
-            link = next((i for i in r.input_observation_ids if keys.get(i, "").startswith(prefix)), None)
-            b["parts"].append(
+        if not rows:
+            return empty
+        spine = [min(r.as_of_date for r in rows)]
+        while spine[-1] < max(r.as_of_date for r in rows):
+            spine.append(_next_quarter_end(spine[-1]))
+        off = sorted({r.as_of_date for r in rows} - set(spine))
+        if (
+            off
+        ):  # a formula that dates a row off a quarter end would drop it silently; fail the export instead
+            raise ValueError(f"{metric}: rows dated off a quarter end: {off[:3]}")
+        slot, quarters, alt = 100 / len(spine), [], False
+        for i, q in enumerate(spine):
+            cum, col = 0.0, []
+            for pid, name in parts:
+                r = next((r for r in rows if r.as_of_date == q and r.dims.get("layer_id") == pid), None)
+                if r is None:
+                    continue
+                bottom = 100 - 100 * cum
+                cum += r.value
+                top = round(100 - 100 * cum, 2)
+                col.append(
+                    {
+                        "id": pid,
+                        "name": name,
+                        "value": r.value,
+                        "unit": "share",
+                        "as_of": q.isoformat(),
+                        "obs_ids": r.input_observation_ids,
+                        "estimated": r.dims.get("basis") == "estimated",
+                        "stamp": self.stamp_of(r.input_observation_ids),
+                        "href": self._derived_href(r),
+                        "y": top,
+                        "height": round(bottom - top, 2),
+                    }
+                )
+            yearly = i == 0 or q.month == 3  # a phone keeps the first label and each first quarter's
+            alt = False if yearly else not alt
+            quarters.append(
                 {
-                    "label": label,
-                    "value": r.value,
-                    "estimated": est,
-                    "grade": "C"
-                    if est
-                    else None,  # filed parts mix 10-K (A) and 10-Q (B) rows; the page shows neither
-                    "href": f"/series/{keys[link]}#{link}" if link else "/query#gross_profit_share_by_layer",
-                    "obs_ids": r.input_observation_ids,
+                    "as_of": q.isoformat(),
+                    "name": f"Q{(q.month - 1) // 3 + 1} {q.year}",
+                    "label": f"Q{(q.month - 1) // 3 + 1}" + (f" {q.year}" if yearly else ""),
+                    "minor": len(spine) > 5 and not yearly and alt,
+                    "x": round(i * slot + slot * 0.14, 2),
+                    "cx": round(i * slot + slot / 2, 2),
+                    "width": round(slot * 0.72, 2),
+                    "parts": col,
                 }
             )
-            b["obs_ids"] = sorted(set(b["obs_ids"]) | set(r.input_observation_ids))
-        return bars
+        newest = next((q for q in reversed(quarters) if q["parts"]), None)
+        if newest is None:
+            return empty
+        mids = [p["y"] + p["height"] / 2 for p in newest["parts"]]
+        order = sorted(range(len(mids)), key=lambda k: mids[k])
+        placed = dict(zip(order, chart.spread([mids[k] for k in order], 7.0)))
+        return {
+            "quarters": quarters,
+            "axis": {
+                "ticks": [
+                    {"y": y, "label": label} for y, label in ((0.0, "100%"), (50.0, "50%"), (100.0, "0%"))
+                ],
+                "unit": None,
+                "log": False,
+                "chars": 4,
+            },
+            # which parts appear, and which is itself an estimate (hatched), for the key strip
+            "keys": [
+                {
+                    "id": pid,
+                    "name": name,
+                    "estimate": any(p["estimated"] for qq in quarters for p in qq["parts"] if p["id"] == pid),
+                }
+                for pid, name in parts
+                if any(p["id"] == pid for qq in quarters for p in qq["parts"])
+            ],
+            # the newest column's shares, labelled beside it and spread so thin parts never collide
+            "ends": [
+                {
+                    "id": p["id"],
+                    "name": p["name"],
+                    "value": p["value"],
+                    "unit": "share",
+                    "as_of": p["as_of"],
+                    "obs_ids": p["obs_ids"],
+                    "y": placed[k],
+                }
+                for k, p in enumerate(newest["parts"])
+            ],
+            "stamps": sorted(
+                {p["stamp"] for qq in quarters for p in qq["parts"] if p["stamp"]}, key=STAMPS.index
+            ),
+            "sources": self._chart_sources([i for r in rows for i in r.input_observation_ids], metric),
+        }
 
     def evidence_for(self, *targets: str) -> list[dict[str, Any]]:
         """Dated evidence records: observations whose series is evidence.<target>.<for|against|context>.pt."""
@@ -1281,7 +1345,7 @@ class Store:
                 "latest": latest.get(e.id),
             }
 
-        return {
+        doc = {
             "layers": [
                 {
                     **dump(layer),
@@ -1308,6 +1372,12 @@ class Store:
                 for layer in self.seed.layers
             ]
         }
+        for layer in doc["layers"]:  # the counts a page prints, so the page counts nothing
+            for sl in layer["sublayers"]:
+                sl["n_entities"] = len(sl["entities"])
+                sl["n_verified"] = sum(1 for e in sl["entities"] if e["verified"])
+                sl["n_indicators"] = len(sl["indicators"])
+        return doc
 
     def _analyses(self) -> list[dict[str, Any]]:
         """Saved analyses: each metric's latest derived rows with provenance and the formula text, for /query."""
@@ -1338,11 +1408,16 @@ class Store:
             "WHERE series_key LIKE 'cl_ladder.%' ORDER BY as_of_date"
         ).fetchall()
 
+        names = {e.id: e.name for e in self.seed.entities}
+
         def at(level: int, research: bool) -> list[dict[str, Any]]:
             return [
                 {
                     "obs_id": r[0],
                     "subject": r[1].split(".")[1],
+                    # a product row is its company's name; a research row is its paper's subject, in words
+                    "name": (names.get(r[2]) if not research else None) or r[1].split(".")[1].replace("_", " "),
+                    "href": self.href_of([r[0]]),
                     "entity_id": r[2],
                     "as_of": r[3].isoformat(),
                     "tier": r[5],
@@ -1381,17 +1456,13 @@ class Store:
                 )
                 q[metric] = {"value": d.value, "obs_ids": d.input_observation_ids}
         self._by_source(out)
+        self._lay_venture(out)
         return {
             k: {
                 **v,
-                "quarters": [v["quarters"][d] for d in sorted(v["quarters"])],
+                "quarters": v["quarters"],
                 "chart_sources": self._chart_sources(
-                    [
-                        i
-                        for q in v["quarters"].values()
-                        for seg in q.get("by_source", [])
-                        for i in seg["obs_ids"]
-                    ],
+                    [i for q in v["quarters"] for seg in q.get("by_source", []) for i in seg["obs_ids"]],
                     "venture_dollars_by_source",
                 ),
             }
@@ -1422,6 +1493,58 @@ class Store:
                 if x.id in found
             ],
         }
+
+    def _lay_venture(self, docs: dict[str, dict[str, Any]]) -> None:
+        """Every strip on one quarter spine, so strips side by side line up and a quarter with no round stays as a
+        gap. Equity segments stack by source (Form D below, Epoch above), scaled to the strip's own largest quarter;
+        Form D debt is named under its quarter, not drawn into the equity total. Rewrites `quarters` as a list."""
+        days = sorted({date.fromisoformat(d) for v in docs.values() for d in v["quarters"]})
+        if not days:
+            for v in docs.values():
+                v["quarters"] = []
+            return
+        spine = [days[0]]
+        while spine[-1] < days[-1]:
+            spine.append(_next_quarter_end(spine[-1]))
+        slot = 100 / len(spine)
+        for v in docs.values():
+            equity = {
+                d: sum(seg["value"] for seg in q.get("by_source", []) if seg["kind"] == "equity")
+                for d, q in v["quarters"].items()
+            }
+            top = max(equity.values(), default=0.0) or 1.0
+            filled = [d.isoformat() for d in spine if equity.get(d.isoformat())]
+            keep = {filled[-1], max(filled, key=lambda d: (equity[d], d))} if filled else set()
+            quarters, alt = [], False
+            for i, day in enumerate(spine):
+                q = v["quarters"].get(day.isoformat(), {"as_of": day.isoformat()})
+                yearly = i == 0 or day.month == 3
+                alt = False if yearly else not alt
+                cum = 0.0
+                for seg in sorted(
+                    q.get("by_source", []),
+                    key=lambda seg: (seg["kind"] != "equity", seg["source"] != "formd"),
+                ):
+                    seg["stamp"] = self.stamp_of(seg["obs_ids"])
+                    if seg["kind"] == "equity":
+                        cum += seg["value"]
+                        seg["y"], seg["height"] = (
+                            round(100 - 100 * cum / top, 2),
+                            round(100 * seg["value"] / top, 2),
+                        )
+                q.update(
+                    name=f"Q{(day.month - 1) // 3 + 1} {day.year}",
+                    label=f"Q{(day.month - 1) // 3 + 1}" + (f" {day.year}" if yearly else ""),
+                    minor=len(spine) > 5 and not yearly and alt,
+                    x=round(i * slot + slot * 0.14, 2),
+                    cx=round(i * slot + slot / 2, 2),
+                    width=round(slot * 0.72, 2),
+                    top=round(100 - 100 * cum / top, 2) if cum else None,
+                    # a phone keeps the value labels of the newest and the largest quarter only
+                    label_minor=day.isoformat() not in keep,
+                )
+                quarters.append(q)
+            v["quarters"] = quarters
 
     def _by_source(self, out: dict[str, dict[str, Any]]) -> None:
         """Stacked segments per quarter: source x kind, each linking to its first round's row."""
@@ -1496,6 +1619,7 @@ class Store:
         return {
             **dump(layer),
             "indicators": [cards[i.id] for i in mine],
+            "n_published": len(mine),
             "status": status,
             "tally": _tally(directions),
             "venture": self._layer_venture(layer.id),
@@ -1870,6 +1994,12 @@ def _band_text(b: Any) -> str:
 
 def _utc_naive(t: datetime) -> datetime:
     return t.astimezone(timezone.utc).replace(tzinfo=None) if t.tzinfo else t
+
+
+def _next_quarter_end(q: date) -> date:
+    m = q.month + 3
+    y, m = q.year + (m - 1) // 12, (m - 1) % 12 + 1
+    return date(y + (m == 12), m % 12 + 1, 1) - timedelta(days=1)
 
 
 def _spark(pts: list[dict[str, Any]], w: float = 96, h: float = 28) -> dict[str, Any] | None:

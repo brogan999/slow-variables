@@ -18,11 +18,10 @@ export default function StackPage() {
           {l.sublayers.length ? (
             <ul className="grid gap-2 md:grid-cols-2">
               {l.sublayers.map((s) => {
-                const verified = s.entities.filter((e) => e.verified).length;
                 return (
                   <li key={s.id} className="min-w-0 panel p-3 text-sm">
                     <Link href={`/stack/${s.id}`} className="font-medium hover:underline">{s.order}. {s.name}</Link>
-                    <div className="mt-1 text-xs text-ink-2">{s.entities.length} entit{s.entities.length === 1 ? "y" : "ies"} · {verified} verified{s.indicators.length ? ` · ${s.indicators.length} indicator${s.indicators.length === 1 ? "" : "s"}` : ""}</div>
+                    <div className="mt-1 text-xs text-ink-2">{s.n_entities} entit{s.n_entities === 1 ? "y" : "ies"} · {s.n_verified} verified{s.n_indicators ? ` · ${s.n_indicators} indicator${s.n_indicators === 1 ? "" : "s"}` : ""}</div>
                     {s.indicators.length ? <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-1 text-xs">{s.indicators.map((c) => <span key={c.id}><Link href={c.published ? `/indicators/${c.id}` : "#"} className="hover:underline">{c.name}</Link> <StatusChip status={c.published ? c.status : null} /></span>)}</div> : null}
                     {s.entities.length ? <div className="mt-2 flex flex-wrap gap-1.5">{s.entities.slice(0, 8).map((e) => <Chip key={e.id} name={e.name} />)}{s.entities.length > 8 ? <Link href={`/stack/${s.id}`} className="self-center text-xs text-ink-2 underline decoration-axis underline-offset-2">all companies</Link> : null}</div> : null}
                   </li>

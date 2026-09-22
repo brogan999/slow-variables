@@ -43,18 +43,16 @@ body { background: var(--background); color: var(--ink); font-family: var(--font
 @utility num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
 @utility eyebrow { font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
 @utility display { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.024em; text-wrap: balance; }
-/* transitional: every figure moves to <Figure> over the next steps, then this goes */
-@utility plate { border-radius: var(--radius-md); background: var(--surface); box-shadow: 0 0 0 1px var(--grid); padding: 1rem; }
 /* the thing hatched keeps its own colour: an estimate or a projection, never a hue of its own */
 @utility hatch { background-image: repeating-linear-gradient(45deg, currentColor 0 1.5px, transparent 1.5px 5px); }
 @utility prose-folio {
   font-family: var(--font-serif); font-size: 1.125rem; line-height: 1.62; color: var(--ink); overflow-wrap: anywhere;
   & > * { max-width: 66ch; } /* the line length lives on the text, so a figure can take the whole column */
-  & > figure { max-width: none; margin-block: 2rem; }
+  & > figure, & > .fig-slot { max-width: none; margin-block: 2rem; }
   & > * + * { margin-top: 1.1em; }
   & a { text-decoration: underline; text-decoration-color: var(--axis); text-underline-offset: 3px; }
   & a:hover { text-decoration-color: var(--ink); }
-  & > ul, & > ol { padding-left: 1.25em; } /* direct children only: a plate inside the prose lays out its own lists */
+  & > ul, & > ol { padding-left: 1.25em; } /* direct children only: a figure inside the prose lays out its own lists */
   & > ul { list-style: disc; } & > ol { list-style: decimal; }
   & blockquote { border-left: 2px solid var(--axis); padding-left: 1em; color: var(--ink-2); font-style: italic; }
 }
@@ -86,18 +84,28 @@ main { counter-reset: fig; }
 .fig-table { padding: 0.5rem 1rem 0.75rem; border-top: 1px solid var(--grid); font-size: 12px; }
 .fig-table summary { cursor: pointer; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); }
 
+.callout { background: var(--surface); box-shadow: 0 0 0 1px var(--grid); border-left: 3px solid var(--ink); border-radius: var(--radius-sm); padding: 0.75rem 1rem; }
+
 /* A plot: HTML tick labels beside an SVG whose marks are placed in percent, so text stays its real size. */
 .plot { display: grid; grid-template-columns: calc(var(--ychars) * 1ch + 0.6rem) minmax(0, 1fr); font-family: var(--font-mono); font-size: 11px; line-height: 1; color: var(--muted); }
 .plot-unit { grid-column: 1 / -1; padding-bottom: 0.6rem; }
 .plot-y { position: relative; }
 .plot-y > span { position: absolute; right: 0.6rem; transform: translateY(-50%); white-space: nowrap; }
 .plot-area { position: relative; }
+.plot-r { grid-template-columns: calc(var(--ychars) * 1ch + 0.6rem) minmax(0, 1fr) var(--rightw, 8.5rem); }
+.plot-right { position: relative; }
+@media (max-width: 639px) { /* on a phone, end labels give way to the plot unless the chart keeps them */
+  .plot-r:not(.plot-keep) { grid-template-columns: calc(var(--ychars) * 1ch + 0.6rem) minmax(0, 1fr); }
+  .plot-r:not(.plot-keep) .plot-right, .plot-r:not(.plot-keep) .plot-leader { display: none; }
+}
+.plot-right > * { position: absolute; left: 0.5rem; right: 0; transform: translateY(-50%); line-height: 1.25; color: var(--ink-2); }
 .plot-x { grid-column: 2; position: relative; height: 1.6rem; }
 .plot-x > span { position: absolute; top: 0.5rem; transform: translateX(-50%); white-space: nowrap; }
 .mark { cursor: pointer; }
 .mark:hover circle + circle { stroke: var(--ink); stroke-width: 3; }
 .mark:focus-visible { outline: none; } /* the ring is drawn on the hit target instead, around the dot */
 .mark:focus-visible circle:first-child { stroke: var(--ink); stroke-width: 2; }
+.mark:focus-visible rect { stroke: var(--ink); stroke-width: 3; }
 .hover-tip { position: absolute; z-index: 50; pointer-events: none; max-width: 20rem; padding: 0.3rem 0.5rem; border-radius: var(--radius-sm); background: var(--ink); color: var(--surface); font-family: var(--font-mono); font-size: 11px; line-height: 1.35; }
 
 :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }

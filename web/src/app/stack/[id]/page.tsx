@@ -1,3 +1,4 @@
+import { Chip } from "@/components/StatusChip";
 import Link from "next/link";
 import { IndicatorCard } from "@/components/IndicatorCard";
 import { VentureFlowStrip } from "@/components/VentureFlowStrip";
@@ -30,18 +31,18 @@ export default async function SublayerPage({ params }: { params: Promise<{ id: s
       {v ? (
         <section>
           <h2 className="display text-2xl leading-tight mb-3 mt-2">Venture flow</h2>
-          <VentureFlowStrip doc={v} />
+          <VentureFlowStrip doc={v} name={s.name} />
         </section>
       ) : null}
       <section>
-        <h2 className="display text-2xl leading-tight mb-3 mt-2">Entities <span className="text-muted">· {s.entities.length}</span></h2>
+        <h2 className="display text-2xl leading-tight mb-3 mt-2">Entities <span className="text-muted">· {s.n_entities}</span></h2>
         <div className="overflow-x-auto">
           <table className="data w-full text-sm">
             <thead><tr><th scope="col">Entity</th><th scope="col">Role</th><th scope="col">Since</th><th scope="col">Verified</th><th scope="col">Latest observation</th></tr></thead>
             <tbody>
               {s.entities.map((e) => (
                 <tr key={e.id} id={e.id} className="target:bg-surface-2">
-                  <td><span className="font-medium">{e.name}</span>{e.cik ? <span className="ml-2 text-xs text-muted font-mono">CIK {e.cik}</span> : null}{e.notes ? <div className="text-xs text-ink-2">{e.notes}</div> : null}</td>
+                  <td><Chip name={e.name} exit={!!e.to_date} />{e.cik ? <span className="ml-2 text-xs text-muted font-mono">CIK {e.cik}</span> : null}{e.notes ? <div className="text-xs text-ink-2">{e.notes}</div> : null}</td>
                   <td className="text-ink-2">{e.is_primary ? "primary" : "secondary"}</td>
                   <td className="tabular-nums text-ink-2">{e.from_date ?? "—"}{e.to_date ? ` → ${e.to_date}` : ""}</td>
                   <td>{e.verified ? <span>● yes</span> : <span className="text-muted">○ not yet</span>}</td>

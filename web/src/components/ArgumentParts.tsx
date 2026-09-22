@@ -1,22 +1,18 @@
 import Link from "next/link";
 import { Fact } from "@/components/Fact";
 import { MarginPanel } from "@/components/ArticleLayout";
-import { ChartSources } from "@/components/ChartSources";
-import { MarginStackChart } from "@/components/MarginStackChart";
+import { StackChart } from "@/components/StackChart";
 import { StatusChip } from "@/components/StatusChip";
 import type { ArgumentDoc, Card } from "@/lib/data";
-import { capture, obsIndex } from "@/lib/data";
+import { capture } from "@/lib/data";
 import { PHASE_WORDS, STATE_WORDS } from "@/lib/format";
 
 
 export function StackPlate() {
-  const c = capture();
   return (
-    <figure className="plate">
-      <MarginStackChart rows={c.gross_profit_stack_series} obsIndex={obsIndex()} parts={[{ id: "compute_semis", name: "Chips", fill: "var(--s1)", prefix: "sec.nvda.gross_profit." }, { id: "compute_cloud", name: "Cloud", fill: "var(--s2)", prefix: "sec_seg.msft.intelligent_cloud.revenue." }, { id: "model", name: "Labs", fill: "var(--s1)", prefix: "epoch." }]} unmeasured="Apps publish no gross profit we can use, so they are left out rather than guessed." />
-      <figcaption className="mt-3 text-sm text-ink-2 leading-relaxed">Each bar is one quarter&apos;s gross profit across the parts we can measure: NVIDIA and AMD at the bottom, Microsoft&apos;s cloud business above them, and an estimate for OpenAI and Anthropic, hatched, at the top.</figcaption>
-      <details className="mt-2 text-xs text-muted"><summary className="cursor-pointer hover:text-ink">Sources</summary><ChartSources cs={c.gross_profit_stack_sources} /></details>
-    </figure>
+    <StackChart stack={capture().gross_profit_stack} title="Who keeps the gross profit, quarter by quarter" what="gross profit"
+      unmeasured="Apps publish no gross profit we can use, so they are left out rather than guessed."
+      caption="Each column is one quarter's gross profit across the parts we can measure: NVIDIA and AMD at the bottom, Microsoft's cloud business above them, and an estimate for OpenAI and Anthropic, hatched, at the top." />
   );
 }
 

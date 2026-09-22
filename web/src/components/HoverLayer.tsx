@@ -1,11 +1,13 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 // The site's one chart island. Any element with `data-tip` shows its text on hover or focus; inside a `data-marks`
 // group, arrows, Home and End move focus mark to mark (one tab stop per group), Enter follows the link, Escape hides.
 // The tip is aria-hidden: each mark's aria-label already says the same thing.
 export function HoverLayer() {
+  const path = usePathname(); // a client-side navigation brings new marks: set them up again
   useEffect(() => {
     const tip = document.createElement("div");
     tip.className = "hover-tip";
@@ -14,6 +16,7 @@ export function HoverLayer() {
     document.body.appendChild(tip);
     // with JavaScript on, each chart is one tab stop and this layer draws the tip, so the no-script fallbacks go
     document.querySelectorAll("[data-tip] > title").forEach((t) => t.remove());
+    document.querySelectorAll("[data-tip][title]").forEach((el) => el.removeAttribute("title"));
     document.querySelectorAll("[data-marks]").forEach((g) => {
       const marks = Array.from(g.querySelectorAll("[data-tip]"));
       const stop = marks.find((m) => m.hasAttribute("data-stop")) ?? marks[0];
@@ -49,8 +52,9 @@ export function HoverLayer() {
     };
     // a link into a closed disclosure (a chart dot's derived row, a strip span's reason) opens it
     const reveal = () => {
-      let d = location.hash ? document.getElementById(decodeURIComponent(location.hash.slice(1)))?.closest("details") : null;
-      for (; d; d = d.parentElement?.closest("details")) d.open = true;
+      const target = location.hash ? document.getElementById(decodeURIComponent(location.hash.slice(1))) : null;
+      for (let d = target?.closest("details"); d; d = d.parentElement?.closest("details")) d.open = true;
+      target?.scrollIntoView({ block: "center" });
     };
     reveal();
     addEventListener("hashchange", reveal);
@@ -66,6 +70,6 @@ export function HoverLayer() {
       removeEventListener("hashchange", reveal);
       tip.remove();
     };
-  }, []);
+  }, [path]);
   return null;
 }
