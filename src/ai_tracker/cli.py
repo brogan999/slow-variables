@@ -347,7 +347,10 @@ def _check(s: st.Store) -> tuple[list[str], list[str]]:
         {p["id"] for p in (load_argument().get("migration") or {}).get("predictions") or []},
         {b.id for b in s.seed.buckets},
     )
-    return errors + a_errors + m_errors, notes + a_notes
+    from .outlook import check as outlook_check
+
+    o_errors, o_notes = outlook_check(s)
+    return errors + a_errors + m_errors + o_errors, notes + a_notes + o_notes
 
 
 def cmd_check(a: argparse.Namespace) -> int:
