@@ -282,6 +282,13 @@ def _check(s: st.Store) -> tuple[list[str], list[str]]:
         tag = ind.leading_lagging.value if ind.leading_lagging else None
         if not ind.published and (not tag or not (ind.timing_rationale or "").lower().startswith(tag + ":")):
             errors.append(f"{ind.id}: no timing_rationale that opens with its tag ({tag})")
+    valves, buckets = {v["id"] for v in st.VALVES}, {b.id for b in s.seed.buckets}
+    for ind in s.seed.indicators:  # an unknown valve reads as measuring nothing on the diagram, silently
+        if ind.valve_measured and ind.valve_measured not in valves:
+            errors.append(f"{ind.id}: valve_measured '{ind.valve_measured}' is not a valve ({sorted(valves)})")
+    for c in s.seed.crosswalk:  # `leak` is the diagram's exit to the capture lens, a bucket only here
+        if c.bucket_id not in buckets | {"leak"}:
+            errors.append(f"crosswalk {c.bucket_id} -> {c.layer_id}: '{c.bucket_id}' is not a bucket or the leak")
     shared = {i for c in s.seed.crosswalk for i in c.shared_indicators}  # the same match /crosswalk renders
     for ind in s.seed.indicators:  # v2 §0/§10: a shared indicator's two addresses need a crosswalk row
         if ind.bucket_id and ind.layer_id and ind.id not in shared:
@@ -375,8 +382,8 @@ def cmd_approve(a: argparse.Namespace) -> int:
             held.append(p["target_id"])
             keep.append(p)
             continue
-        with (st.DATA / "status_events.jsonl").open("a") as f:
-            f.write(json.dumps(p, sort_keys=True) + "\n")
+        with (st.DATA / "status_events.jsonl").open("a") as f:  # a hand-written proposal may carry no id yet
+            f.write(json.dumps({**p, "id": p.get("id") or StatusEvent(**p).id}, sort_keys=True) + "\n")
         moved += 1
     st.write_jsonl(st.DATA / "proposed_status_events.jsonl", keep)
     print(f"approved {n} observations; {moved} status events committed, {len(keep)} still need a reason")

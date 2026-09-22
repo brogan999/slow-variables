@@ -133,3 +133,30 @@ def test_one_staleness_rule_serves_the_cards_the_sources_the_memo_and_the_thesis
     assert is_stale((today - timedelta(days=200)).isoformat(), "monthly")  # a string reads the same
     assert not is_stale(today - timedelta(days=9999), "irregular")  # no cadence on file, never stale
     assert not is_stale(today - timedelta(days=9999), None)
+
+
+def test_an_unknown_valve_or_crosswalk_bucket_is_an_error():
+    s = st.Store()
+    ind = next(i for i in s.seed.indicators if i.valve_measured)
+    ind.valve_measured = "products_to_early_adoption"  # the misspelling the diagram silently ignored
+    s.seed.crosswalk[0].bucket_id = "adoption"
+    errs = check_errors(s)
+    assert any(e.startswith(f"{ind.id}: valve_measured 'products_to_early_adoption'") for e in errs)
+    assert any("'adoption' is not a bucket or the leak" in e for e in errs)
+    assert not [e for e in check_errors(st.Store()) if "is not a valve" in e or "is not a bucket" in e]
+
+
+def test_approve_gives_a_hand_written_proposal_the_id_its_model_computes(monkeypatch, tmp_path):
+    import argparse
+
+    from ai_tracker import cli
+
+    monkeypatch.setattr(st, "DATA", tmp_path)
+    monkeypatch.setattr(st, "approve_pending", lambda reviewer: 0)
+    p = {"target_id": "x", "target_type": "prediction", "old_status": "emerging", "new_status": "on_track",
+         "old_conf": 40, "new_conf": 50, "reason": "r", "counterevidence_considered": "c", "evidence_ids": [],
+         "author": "claude", "created_at": "2026-09-22T10:00:00Z"}  # fmt: skip
+    (tmp_path / "proposed_status_events.jsonl").write_text(json.dumps(p) + "\n")
+    cli.cmd_approve(argparse.Namespace(reviewer="claude"))
+    row = json.loads((tmp_path / "status_events.jsonl").read_text())
+    assert row["id"] and row["id"] == StatusEvent(**p).id

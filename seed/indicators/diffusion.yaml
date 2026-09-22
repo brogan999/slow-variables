@@ -9,7 +9,7 @@ indicators:
     unit: days
     cadence_expected: weekly
     bucket_id: early_adoption
-    valve_measured: products_to_early_adoption
+    valve_measured: product_to_adoption
     leading_lagging: coincident
     timing_rationale: "Coincident: routed volume moves as the work moves, with no reporting lag beyond the router's own window."
     tracker_interpretation: Not published.
@@ -1115,7 +1115,7 @@ indicators:
     updated_at: 2026-09-10
   - id: exposed_low_adaptive_workers
     name: Workers highly exposed to AI with low adaptive capacity
-    definition: Number of US workers who are both in the top exposure quartile and have low measured capacity to move occupations, from Manning and Aguirre's NBER chapter (January 2026).
+    definition: Number of US workers who are both in the top exposure quartile and have low measured capacity to move occupations, from Manning and Aguirre's NBER working paper (January 2026).
     why_it_matters: Displacement is a distribution question. The workers who cannot adapt are where a fast scenario turns from a productivity story into a welfare one.
     proxy_types: [welfare]
     unit: workers
@@ -1127,8 +1127,8 @@ indicators:
     normal_band: {hi: 5000000}
     fast_band: {lo: 10000000}
     band_rationale: "Normal = under five million workers (about 3% of the workforce), the scale of the China trade shock spread over a decade; fast = ten million or more. Between is `emerging`."
-    tracker_interpretation: 3.3 million, or 2.5% of the sample. One estimate, one method; the working-paper version revises the split.
-    counterevidence: Single source (tier 6); exposure and adaptive capacity are both modelled; the WP 34705 abstract gives different totals from the chapter page.
+    tracker_interpretation: 6.1 million, or 4.2% of the sample, in the working paper; the NBER chapter page still carries an earlier draft's 3.3 million, which this indicator read until 22 Sep 2026. One estimate, one method.
+    counterevidence: Single source (tier 6); exposure and adaptive capacity are both modelled; the chapter page and the working paper give different totals, so the figure has already been revised once.
     layer_id: labour_consumers
     leading_lagging: leading
     timing_rationale: "Leading: it counts workers likely to struggle before displacement happens, from exposure and adaptive capacity measured now."
