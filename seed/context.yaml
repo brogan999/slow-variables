@@ -4,8 +4,10 @@
 # sign is the point (a year-on-year change). A line reads a metric's derived rows or one series' observations; a
 # name that matches neither is an error, not an empty line.
 # The figures start in 2022, the year ChatGPT was released: the pandemic's swings would otherwise set the scale.
+# Each figure sits on `page` and says whose figures it draws in `note` (the defaults below unless it names others).
 start: "2022-01-01"
-bucket: adaptation
+page: buckets/adaptation
+note: official statistics
 figures:
   - id: power_and_output
     title: Electricity generated against real output, year on year
@@ -68,3 +70,33 @@ figures:
       services. A new tool can first make work more intense before it frees any time, and paid hours falling here
       would be one sign of time being freed; salaried staff are paid for their contracted hours, so time freed for
       them would not show.
+  - id: backlog_clouds
+    page: layers/compute_physical
+    note: company filings
+    title: Revenue contracted but not yet delivered, in years of revenue, at the clouds
+    unit: ratio
+    zero: true
+    lines:
+      - {metric: rpo_to_trailing_revenue, dims: {entity: crwv}, label: CoreWeave}
+      - {metric: rpo_to_trailing_revenue, dims: {entity: orcl}, label: Oracle}
+      - {metric: rpo_to_trailing_revenue, dims: {entity: msft}, label: Microsoft}
+    caption: >-
+      Remaining performance obligations are revenue a company has contracted but not yet delivered, from its own
+      filings; each is divided here by its revenue in the last four fiscal quarters, so a reading of one means a year
+      of current revenue is already sold. CoreWeave only rents out computing capacity; Oracle's and Microsoft's
+      backlogs also hold the software and services they sell. Companies define and disclose backlog differently, so
+      read each line against its own past; a line breaks where a quarter is missing here.
+  - id: backlog_chips
+    page: layers/compute_physical
+    note: company filings
+    title: Revenue contracted but not yet delivered, in years of revenue, at the chip makers
+    unit: ratio
+    zero: true
+    lines:
+      - {metric: rpo_to_trailing_revenue, dims: {entity: broadcom}, label: Broadcom}
+      - {metric: rpo_to_trailing_revenue, dims: {entity: nvda}, label: NVIDIA}
+      - {metric: rpo_to_trailing_revenue, dims: {entity: amd}, label: AMD}
+    caption: >-
+      The same measure for chip makers, from their filings. Broadcom reports a large backlog, which also holds its
+      software subscriptions; NVIDIA and AMD report very little, so this measure shows how each company contracts
+      with its buyers, not how much demand it faces.

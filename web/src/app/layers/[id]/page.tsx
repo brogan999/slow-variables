@@ -2,8 +2,9 @@ import Link from "next/link";
 import { IndicatorCard } from "@/components/IndicatorCard";
 import { Callout } from "@/components/Figure";
 import { LadderView } from "@/components/LadderView";
+import { ContextFigures } from "@/components/ContextFigure";
 import { VentureFlowStrip } from "@/components/VentureFlowStrip";
-import { index, ladder, layer, obsIndex, venture } from "@/lib/data";
+import { context, index, ladder, layer, obsIndex, venture } from "@/lib/data";
 
 // P1 §6.3: the labs' enter bell (buying from the layer below) and exit bell (buying it outright), read together
 const BELLS = ["lab_procurement_signal", "lab_vertical_integration_exit_bell"];
@@ -47,6 +48,15 @@ export default async function LayerPage({ params }: { params: Promise<{ id: stri
         <h2 className="display text-2xl leading-tight mb-3 mt-2">Indicators</h2>
         {shown.length ? <div className="grid gap-3 md:grid-cols-2">{shown.map((c) => <IndicatorCard key={c.id} c={c} obsIndex={idx} />)}</div> : <p className="text-sm text-muted">None published yet.</p>}
       </section>
+      {context().figures.some((f) => f.page === `layers/${id}`) ? (
+        <section className="flex flex-col gap-6">
+          <div>
+            <h2 className="display text-2xl leading-tight mb-2 mt-2">Revenue already contracted</h2>
+            <p className="text-sm text-ink-2 max-w-[62ch]">How much future revenue the companies at this layer have already signed, from their own filings. Context with no status of its own: a backlog reads contracts, not the demand behind them.</p>
+          </div>
+          <ContextFigures figures={context().figures.filter((f) => f.page === `layers/${id}`)} />
+        </section>
+      ) : null}
       {id === "training_input" ? (
         <section>
           <h2 className="display text-2xl leading-tight mb-3 mt-2">Continual-learning ladder</h2>

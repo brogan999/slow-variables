@@ -1,4 +1,6 @@
 """OpenRouter list prices per model (public API, no key). The series records change-points, not daily snapshots.
+The same list names a Hugging Face repository for each model whose weights are published; that is stored as text,
+under the model's dated slug (the key its token rankings use), and it is what counts a model as open.
 
 Models METR has measured are keyed by METR's model id so the price joins the horizon series on `subject`
 (semantic metric frontier_price_per_horizon_hour); everything else is keyed by its OpenRouter id.
@@ -10,7 +12,7 @@ import json
 from pathlib import Path
 
 from ...schema import Basis, Extraction, Observation, Tier
-from ..base import Connector, RawItem, expect, slug
+from ..base import Connector, RawItem, expect, series_key, slug
 
 URL = "https://openrouter.ai/api/v1/models"
 VENDORS = {
@@ -56,7 +58,7 @@ def _latest(ledger: Path) -> dict[str, tuple[str, float]]:
 class OpenRouter(Connector):
     source_id = "openrouter"
     urls = [URL]
-    expect_series = ["openrouter.gpt_5_4.price_prompt_usd_per_mtok.pt"]
+    expect_series = ["openrouter.gpt_5_4.price_prompt_usd_per_mtok.pt", "openrouter.*.hugging_face_id.pt"]
 
     def __init__(self, ledger: Path = Path("data/observations/openrouter.jsonl")) -> None:
         super().__init__()
@@ -97,4 +99,24 @@ class OpenRouter(Connector):
                         raw_snippet=f"{m['id']} pricing.{side} {m['pricing'][side]}",
                     )
                 )
+        for m in models:  # every vendor: the open share of routed tokens reads the whole table
+            repo, dated = m.get("hugging_face_id"), m.get("canonical_slug")
+            if not repo or not dated or ":" in m["id"]:  # a :free or :batch variant repeats its model's row
+                continue
+            key = series_key("openrouter", dated, "hugging_face_id", "pt")
+            seen = (self.latest.get(key) or (today,))[0]  # dated when first seen: the list says not when it was named
+            out.append(
+                self.obs(
+                    item,
+                    series_key=key,
+                    unit="repository",
+                    as_of_date=seen,
+                    published_date=seen,
+                    value_text=repo,
+                    tier=Tier.PRODUCT_BEHAVIOUR,
+                    audited_vs_reported=Basis.reported,
+                    extraction_method=Extraction.api,
+                    raw_snippet=f"{dated} hugging_face_id {repo}",
+                )
+            )
         return out
