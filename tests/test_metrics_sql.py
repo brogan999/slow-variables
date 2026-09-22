@@ -477,3 +477,16 @@ def test_the_arc_frontier_emits_one_record_per_new_high_citing_the_row_that_set_
     ]
     out = [(str(d), v, ids) for d, v, ids in run("arc_agi_frontier", rows)]
     assert out == [("2026-01-01", 0.5, ["r1"]), ("2026-03-01", 0.7, ["r4"])]
+
+
+def test_the_runner_drops_a_period_still_running(tmp_path):
+    """A quarterly formula dates each quarter at its end; the quarter under way would be a partial reading dated
+    in the future, and a direction rule would count it."""
+    from ai_tracker.analysis.metrics import run_metrics
+
+    con = duckdb.connect()
+    con.execute("CREATE TABLE observations AS SELECT 'x.a.m.q' AS series_key")
+    spec = tmp_path / "m.yaml"
+    sql = "SELECT DATE '2026-06-30' AS as_of_date, 1.0 AS value, ['o1'] AS obs_ids UNION ALL SELECT current_date + 30, 2.0, ['o2']"
+    spec.write_text(yaml.safe_dump({"metrics": {"q": {"inputs": ["x.*.m.q"], "formula_version": 1, "sql": sql}}}))
+    assert [r.as_of_date for r in run_metrics(con, spec)] == [date(2026, 6, 30)]
