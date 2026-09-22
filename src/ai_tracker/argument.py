@@ -31,6 +31,15 @@ STATES = ("holding", "failing", "untestable")
 OPS = ("gt", "gte", "lt", "lte")
 
 
+def unfetched(x: dict[str, Any]) -> str | None:
+    """Why a source's URL lacks proof it was read: the day it was fetched, a 200, and a hash of what came back."""
+    if not isinstance(x.get("retrieved_at"), date) or not re.fullmatch(r"[0-9a-f]{64}", str(x.get("content_hash") or "")):
+        return "has no fetch record (retrieved_at, http_status, content_hash)"
+    if x.get("http_status") != 200:
+        return f"answered {x.get('http_status')} when fetched; link a copy that loads"
+    return None
+
+
 def _bad_test(test: dict[str, Any] | None, known: dict[str, Any]) -> str | None:
     """Why an `expect` or a prediction's test cannot be run, checked whether or not a reading exists tonight."""
     if not test:
@@ -640,6 +649,9 @@ def problems(s: Store) -> tuple[list[str], list[str]]:
     for x in spec["slow_variables"] + spec["clocks"]["links"]:
         if x["id"] not in published:
             errors.append(f"argument: {x['id']} is not a published indicator")
+    for x in (spec.get("sources") or []) + ((spec.get("migration") or {}).get("sources") or []):
+        if bad := unfetched(x):
+            errors.append(f"argument: source {x['url']} {bad}")
     from .thesis import RULES
 
     monitors = {r.__name__ for r in RULES}

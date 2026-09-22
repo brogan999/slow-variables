@@ -75,7 +75,7 @@ export function PendingNote({ p }: { p: { new_status: string; since: string } | 
 export function Grade({ grade, tier }: { grade: string | null | undefined; tier?: number }) {
   if (!grade) return null;
   return (
-    <span className={`inline-flex items-center rounded-[2px] border ${grade === "D" ? "border-bind" : "border-grid"} px-1.5 py-0.5 num text-[11px] font-medium text-ink-2`}
+    <span className={`inline-flex items-center rounded-[2px] border ${grade === "D" ? "border-dashed border-ink-2" : "border-grid"} px-1.5 py-0.5 num text-[11px] font-medium text-ink-2`}
       title={tier ? `Evidence tier ${tier}; grade ${grade} is derived from the tier` : `Grade ${grade}, derived from evidence tier`}>
       <span aria-hidden>{grade}{tier ? <span className="ml-1 text-muted">t{tier}</span> : null}</span>
       <span className="sr-only">grade {grade}{tier ? `, evidence tier ${tier}` : ""}</span>

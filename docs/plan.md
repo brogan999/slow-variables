@@ -63,6 +63,7 @@ ai-tracker/
 | CI blocking | `ruff`, `pytest`, `ai-tracker check`, `next build`. `mypy --strict` advisory for month 1 | duckdb/pydantic stub fights |
 | Models | `claude-sonnet-5` routine, `claude-fable-5-1` synthesis (M5). From 11 Sep 2026 an Ask answer the citation check still blocks gets its one fresh attempt on `claude-opus-5`, so only the worst answers pay the higher rate | `P1`'s sonnet-4-6 is stale; Sonnet alone left one golden question of twelve blocked per run, a different one each time |
 | Tightness scores (20 Sep 2026) | A nought-to-a-hundred tightness score with a computed confidence exists on one page only, `/argument/migration`. It reads metrics through hand-set scales in `seed/tightness.yaml`, never moves an indicator's status, and withholds an input that has no usable data | The owner kept the prototype's scores for the migrating-bottleneck page; scoping them to that page keeps the speed ranges and statuses the only instrument everywhere else |
+| Outlook claims (22 Sep 2026) | Named writers' positions, and this site's own, live in `seed/outlook.yaml`. A claim is tested nightly by one fact and one line; where its rival would accept the same reading it says "both sides expect this" instead of scoring a win. Claims never move an indicator's status, and new capability and economy series are signposts with no status until a normal pace can be defended | The owner asked what informed writers expect next; a claim tested against a reading both sides predicted would crown one side on no evidence |
 
 Repo `CLAUDE.md` = `v2` §10 verbatim + `P1` rule 3 (prompt-injection scrub) + `P1` rule 5 (robots.txt) + the prototype's AGENTS.md warning: read `node_modules/next/dist/docs/` before writing Next 16 routes.
 
@@ -86,7 +87,7 @@ ai-tracker/
     cli.py               ingest [src|--all] [--day] [--refetch] · build · evaluate · export · check · approve
   data/observations/<source>.jsonl  data/status_events.jsonl  data/proposed_status_events.jsonl  data/fetchlog.jsonl
   ingest/cache/<source>/<YYYY-MM-DD>/<sha8(url)>.<ext> + .meta.json          gitignored
-  web/                   Next 16 + TS + Tailwind + Recharts; web/data/*.json committed; web/public/data/<series>.csv
+  web/                   Next 16 + TS + Tailwind (charts are server-rendered SVG laid out in Python; Recharts left in Part 11); web/data/*.json committed; web/public/data/<series>.csv
   tests/  tests/fixtures/
 ```
 
@@ -437,3 +438,52 @@ Known limits:
 - The price gauge is pinned at the end of its scale by one vendor's price; the row says so.
 - After a revert (a value, a revision, then the first value again) one site-date goes unread.
 - `custom_silicon_share` still publishes a quarter that only three of six designers have reported, and `lab_vertical_integration_events_4q` compares against quarters that predate our coverage. Each moves a published reading, so each needs its own reviewed PR.
+
+## Part 11 status (22 Sep 2026): the prototype's look, the missing instruments, the bottleneck map, what happens from here
+
+The owner asked for four things: the prototype's visuals on every page; the instruments the site was missing across capability, products, adoption, reorganisation and value capture; a section on what informed writers say happens next, where they agree and disagree and what would change the outlook; and one page laying the value chain against the stages of diffusion, with today's bottlenecks and the predicted ones.
+
+Owner decisions, 22 September:
+- The prototype's look goes on the whole site: its ground, fonts, figure cards, stamps and chips. The layouts stay.
+- Two pages: `/bottlenecks` becomes the map, with Narayanan and Kapoor's barriers as its rows outside the chain; `/outlook` joins the primary nav. Both read one claim ledger.
+- Signposts first: new capability and economy readings are dated and tested only through claims, with no faster-or-slower status until a normal pace can be defended.
+- Ideas of this site's own are published, labelled as the site's, each with a rival.
+
+On the map a bottleneck is whatever sets the pace: a scarce input upstream or a slow institution downstream. That is wider than the migration essay's sense (the scarcest input), and the migration page's margin now says what the map adds.
+
+What shipped, one PR per step:
+- **Step 1 (#47).** Epoch's benchmark rows are keyed on Epoch's own row id, so two runs of one model no longer hide each other; the ARC-AGI-2 frontier was wrong and is corrected; one missing Epoch file or FRED series no longer stops the rest.
+- **Step 2 (#48).** The whole-site look: warm-grey ground, white figure cards, Archivo, Newsreader and IBM Plex Mono; three role colours checked against colour blindness (binding orange, faster violet, slower teal) and a one-hue tightness ramp. Rust left the site.
+- **Step 3 (#49, #50).** Indicator charts are drawn on the server from a Python layout, and Recharts is gone. The metrics runner drops rows dated after today.
+- **Step 4 (#51).** Every figure on the figure card, laid out by the export; the web computes no number anywhere, and a test enforces it.
+- **Step 5 (#52).** Capability signposts: eight more Epoch tests, HAL's reliability tracker, the frontier by test, accuracy against reliability.
+- **Step 6 (#54, #55).** Official statistics as context on the adaptation page; Canaries by age; the open share of routed tokens, the closed-over-open price premium, backlog against revenue; three hand-kept event ledgers (checking AI's work sold as a category, insurers' exclusions, platforms fencing out agents).
+- **Step 7 (#56).** The bottleneck map: the twenty-three inputs under their capture layers and Narayanan and Kapoor's families, against the four stages, today's reading once per row, marks instead of colour.
+- **Steps 8 and 9 (#57).** `seed/outlook.yaml` and `/outlook`: fifty-four public sources, forty positions each with a rival and marked as the author's, an extension of it, or this site's own, twenty-nine claims tested nightly, a scenario grid of progress against the rules, four agreements with their dissents, and an essay whose title is its method, "A reading both sides predicted settles nothing". The map now marks every claim that names a row. Two staff reviews found fifteen must-fixes between them, all fixed before merge; the largest was the growth bet read against the wrong peak.
+- **Step 10 (close-out).** An audit of the whole part against its plan. Fixed: David Cahn's stored-chips sign, which is about data centres running late, had been filed under the position that the money runs out and credited to Jim Covello too, so it now has its own position, whose rival is that one; claims about what happens on a row (who gains, who loses) no longer mark map cells as if they said the row would bind; claims that carry an author further are credited on the map as this site's extension, and a claim that names its own makers, such as the growth bet's parties, is credited to them on the claims board; the scenario grid and the claims board became figure cards, the board lists each claim's test and falsifier and reads as a list on a phone, and each scenario names the map rows it expects to bind next; the rules anchors gained the insurers' standard exclusions of January 2026; the owner's approved extension, that the steps AI cannot yet take can be bought, is now a position; every source in the essay seeds carries the day it was fetched, its status and a hash of the page, and `check` refuses one that does not; three sources that refuse scripted requests point at archived copies. The ledger now holds fifty-five sources, forty-two positions and thirty claims.
+
+Judgement calls the owner may reverse, in the order they matter:
+- **Eleven of the twelve tested claims read "both sides expect this".** Where the rival would accept the same reading, the claim says tonight settles nothing instead of scoring a win for one side. It is the page's finding: the readings that would separate the positions (whole jobs done end to end, the best model's price as open models close in, independent firms winning the checking, output per person breaking away) have not arrived. One claim holds: young workers fall behind in the jobs most exposed to AI and not in the least exposed.
+- **Positions of this site's own.** Where no named writer takes the other side, the rival is labelled as this site's; three positions carry an author's argument further than the author did, and say so.
+- **Thresholds.** Most come from the site's own bands or from an author's own terms (the growth bet, whose previous peak is the highest quarter up to a year before); one reads a story as written (AI 2027 needs most real freelance projects completed end to end by the end of 2027), and says so.
+- **The fence ledger tests nothing yet.** It now counts openings as well as fences, but it is kept by hand and does not sweep both sides under one rule, so its claim is untestable and the page only reports the counts.
+- **The map's marks.** A claim with a stage says its row will bind there; a claim about what happens on a row names the row without a stage and is listed, not marked. So the adaptation column carries few writers' marks: most claims there are about who gains and who loses, not about what holds AI up.
+- **The essay's length.** About two thousand seven hundred words against a plan of fifteen hundred; the reviews' definitions, caveats and the paragraph on the rules added most of it, and the positions sit in disclosures.
+- **Sources left out.** No private chat, private memo or paid text; The Diff only from posts that read in full logged out; Cai only on training data; a claim not found in a free text is not attributed, such as a condition on competitive supply that Restrepo's chapter does not state.
+
+How it was checked: three read-only research passes and three adversarial reviews of the plan; every quote checked against its source; an eight-word check of all new prose against the private and paid texts; staff reviews of each step's diff, with screenshots at phone and desktop widths and axe on every touched route; at close-out, an audit of the part against its plan, the palette validator on the white card and the warm-grey ground (the three role colours, the tightness ramp and the slate series ramp all pass), two exports in a row that differ only in `meta.json`'s time stamp, and axe on one page of every route at both widths with disclosures closed and open.
+
+Deliberately not done:
+- statuses for signposts; a gap metric between surveys that ask different questions; an application-layer concentration index (no app-vendor shares are published)
+- a column matching outlook claims to entries on `/predictions`, which scores other people's dated forecasts and is kept apart; the migration page's predictions and the home page's exits as rows on the outlook's board (they keep their own lists, and the map shows the migration predictions beside the outlook's claims); a horizon in years on each claim (a claim that names a date carries it)
+- a map mark for writers who split over a cell (a claim that a row will not bind is listed under the row, beside its rival's), and a worked-example row above the map (its key names the marks)
+- claims about abilities no public, dated test reads: reasoning about cause and effect, memory across sessions, a model knowing when it is wrong, training on generated data, alignment and sudden jumps; `/methodology` says so under "Not measured"
+- counts of the practice-environment sellers by focus and by lab tie, the Epoch data-centre owners connector, and a figure of the labs' self-improvement rows, each deferred in its step's pull request
+- a now line on indicator charts (no indicator reads a projection) and hover tips on the stock-flow diagram and the map, which label every mark directly
+
+Known limits:
+- The fence, evaluation and insurance ledgers are kept by hand from dated public reports, so they undercount, and each reading falls when its events age out of the trailing year.
+- The capability signposts read Epoch's compilation of external results at model release dates, often from runs with no limit on compute.
+- Five of the migration page's eight tightness scores lapse on 28 Oct 2026 unless Epoch publishes a newer quarter.
+- The fence ledger's two openings age out of its trailing year on 29 Sep and 14 Oct 2026, and the open-model gap reading has been stale since mid-July 2026, so the claim that reads it cannot be tested until it refreshes.
+- A source's fetch record is a snapshot of the day it was written, not re-fetched nightly.

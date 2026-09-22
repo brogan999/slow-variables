@@ -106,6 +106,7 @@ def build(
                 "id": r["input"],
                 "name": i["name"],
                 "what": i["what"],
+                "note": r.get("note"),  # where two claims on this row read one tally differently
                 "reads": i.get("reads"),
                 "layer": {"id": r["layer"], "name": names[r["layer"]]},
                 "sublayer": {"id": r["sublayer"], "name": names[r["sublayer"]]} if r.get("sublayer") else None,
@@ -295,14 +296,34 @@ def _byline(names: Any) -> str:
     return s[:1].upper() + s[1:]
 
 
+# The outlook's hand-kept ledgers, by what an event on each side of them is.
+LEDGER_NAMES = {
+    ("ai_evaluation_market", "for"): "Checking AI's work sold as its own category",
+    ("insurer_ai_exclusions", "for"): "Insurers writing AI's mistakes out of standard policies",
+    ("agent_access_fences", "for"): "Platforms fencing outside agents out",
+    ("agent_access_fences", "against"): "Platforms letting outside agents in",
+}
+
+
+def _whose(c: dict[str, Any], pos: dict[str, Any], who: dict[str, str]) -> str:
+    """Who a claim is credited to: this site, this site carrying an author further, or the author; a claim that
+    names its own makers (a bet's parties, one author of a pair) is theirs outright."""
+    if c["attribution"] == "site":
+        return SITE
+    names = _byline(who[h] for h in c["holders"])
+    own = c["holders"] != pos.get(c.get("position"), {}).get("holders")
+    return f"This site, extending {names}" if c["attribution"] == "extension" and not own else names
+
+
 def outlook_claims(outlook: dict[str, Any]) -> list[dict[str, Any]]:
     """The outlook's claims that name a map row, with who makes each and a link to it."""
     who = {x["id"]: x.get("short") or x["who"] for x in outlook.get("sources") or []}  # a long author list, shortened
+    pos = {p["id"]: p for p in outlook.get("positions") or []}
     return [
         {
             "row": c["row"],
             "stage": c.get("stage"),
-            "who": SITE if c["attribution"] == "site" else _byline(who[h] for h in c["holders"]),
+            "who": _whose(c, pos, who),
             "text": _plain(c["text"], outlook.get("tests") or {}),
             "state": c["state"],
             "href": f"/outlook#claim-{c['id']}",
@@ -333,7 +354,7 @@ def from_store(
         if d.as_of_date <= today:  # rows arrive in date order, so the last kept is the latest
             key = f"ledger:{d.dims['target']}:{d.dims['stance']}"
             readings[key] = {
-                "label": f"{d.dims['target'].replace('_', ' ')}, events {'for' if d.dims['stance'] == 'for' else 'against'} in the year to",
+                "label": f"{LEDGER_NAMES.get((d.dims['target'], d.dims['stance']), d.dims['target'].replace('_', ' '))}, events in the latest twelve months:",
                 "value": d.value,
                 "unit": "count",
                 "as_of": d.as_of_date.isoformat(),

@@ -135,6 +135,16 @@ def test_an_outlook_claim_marks_its_cell_in_plain_words_with_its_threshold_writt
     claims = outlook_claims(doc)
     assert claims == [{"row": "chips", "stage": "products", "who": "Gillian Hadfield and Andrew Koh", "state": "both",
                        "text": "Chips take more than 50% of the profit.", "href": "/outlook#claim-c1"}]
+    doc["sources"].append({"id": "r", "who": "Pascual Restrepo"})
+    doc["positions"] = [{"id": "pair", "holders": ["hk", "r"]}]
+    doc["claims"] = [
+        {"id": "e1", "position": "pair", "row": "grid", "attribution": "extension", "holders": ["hk", "r"], "state": "untestable", "text": "x"},
+        {"id": "e2", "position": "pair", "row": "grid", "attribution": "extension", "holders": ["r"], "state": "untestable", "text": "y"},
+    ]
+    assert [c["who"] for c in outlook_claims(doc)] == [
+        "This site, extending Gillian Hadfield and Andrew Koh; Pascual Restrepo",  # the position is the site's reach
+        "Pascual Restrepo",  # a claim naming its own maker is theirs outright
+    ]
     m = build(SPEC, SCORECARD, PREDICTIONS, BOTTLENECKS, CARDS, READINGS, NAMES, [], claims)
     chips = {r["id"]: r for sec in m["groups"][0]["sections"] for r in sec["rows"]}["chips"]
     assert chips["cells"]["products"]["writers"][0]["href"] == "/outlook#claim-c1"  # a stage it does not act on, marked

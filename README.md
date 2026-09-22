@@ -11,7 +11,7 @@ One tracker, two lenses: how fast AI value moves through the diffusion stages (N
 ```bash
 cp .env.example .env            # SEC EDGAR needs a User-Agent with a contact address
 uv sync
-uv run ai-tracker ingest --all  # every connector (29 today; `ingest --help` lists them) -> data/observations/*.jsonl
+uv run ai-tracker ingest --all  # every connector (32 today; `ingest --help` lists them) -> data/observations/*.jsonl
 uv run ai-tracker build         # seed YAML + JSONL -> DuckDB (in memory), prints counts
 uv run ai-tracker evaluate      # derived metrics; proposes StatusEvents into data/proposed_status_events.jsonl
 #   ...write a `reason` on each proposal (or delete the row), then:
@@ -42,3 +42,8 @@ Services: the query service runs on Fly (`fly.toml`, `Dockerfile`, deployed by `
 | Observations (append-only, superseded never deleted) | `data/observations/*.jsonl` |
 | Query service, citation post-check, golden questions | `src/ai_tracker/query/`, `seed/golden.yaml`, `seed/analyses.yaml` |
 | Weekly memo | `src/ai_tracker/memo.py`, `docs/memos/` |
+| The argument essays and their facts | `docs/argument/*.md`, `seed/argument.yaml`, `src/ai_tracker/argument.py` |
+| Tightness scorecard (the migration page only) | `seed/tightness.yaml`, `src/ai_tracker/analysis/tightness.py` |
+| Bottleneck map | `seed/map.yaml`, `src/ai_tracker/bottleneck_map.py` |
+| What happens from here: positions, claims tested nightly, scenarios | `seed/outlook.yaml`, `src/ai_tracker/outlook.py`, `docs/argument/outlook.md` |
+| Capability signposts and context figures (no status) | `seed/signposts.yaml`, `seed/context.yaml`, `Store._signposts` in `src/ai_tracker/store.py` |

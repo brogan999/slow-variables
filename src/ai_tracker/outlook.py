@@ -14,7 +14,7 @@ from typing import Any
 
 import yaml
 
-from .argument import OPS, _bad_test, _holds, facts
+from .argument import OPS, _bad_test, _holds, facts, unfetched
 
 SPEC = Path(__file__).resolve().parents[2] / "seed" / "outlook.yaml"
 ESSAY = Path(__file__).resolve().parents[2] / "docs" / "argument" / "outlook.md"
@@ -236,6 +236,8 @@ def problems(
         for k in ("who", "field", "finding", "work", "year", "url"):
             if not x.get(k):
                 errors.append(f"outlook: source {x['id']} has no {k}")
+        if bad := unfetched(x):
+            errors.append(f"outlook: source {x['id']} {bad}")
         q = x.get("quote")
         if q and len(q.split()) >= 15:
             errors.append(f"outlook: source {x['id']} quotes fifteen words or more")

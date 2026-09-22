@@ -7,6 +7,7 @@
 # reaching a level by that date. Quotes: at most one per source, under fifteen words, checked against the source.
 
 facts:
+  surge_revenue: {series: yahoo_finance.surge_ai.revenue_usd.fy}
   rli_record: {metric: benchmark_frontier, dims: {test: epoch_bench.rli}, max_age_days: 400}
   hal_accuracy_trend: {metric: hal_trend_per_year, dims: {measure: accuracy}, max_age_days: 400, expect: {gt: 0}}
   hal_reliability_trend: {metric: hal_trend_per_year, dims: {measure: reliability}, max_age_days: 400, expect: {gt: 0}}
@@ -39,6 +40,9 @@ sources:
     venue: AI Futures Project
     year: 2025
     url: https://ai-2027.com/
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: d12c71f77cff8065569fe35a71dbb8b59da149b0ce2bb747523ae49663262994
   - id: ai_futures_update
     who: Eli Lifland, Daniel Kokotajlo and colleagues
     short: the authors of AI 2027
@@ -48,6 +52,9 @@ sources:
     venue: AI Futures Project blog
     year: 2026
     url: https://blog.aifutures.org/p/q1-2026-timelines-update
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: 429bf581aaa39092c81f698810ff0cfbc2035159f8abf50feda1d10c8d2cadf2
   - id: ai_futures_q25
     who: Eli Lifland, Daniel Kokotajlo and colleagues
     short: the authors of AI 2027
@@ -57,6 +64,9 @@ sources:
     venue: AI Futures Project blog
     year: 2026
     url: https://blog.aifutures.org/p/q25-2026-timelines-update-uplift
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: 15e21f1f6694abaae76322e0cb9a1b89291c50ded832b667e548b0848ac2fd2e
   - id: jones_b
     who: Benjamin Jones
     field: an economist at Northwestern who studies where growth and scientific progress come from
@@ -65,6 +75,9 @@ sources:
     venue: The Economics of Transformative AI (National Bureau of Economic Research)
     year: 2026
     url: https://www.kellogg.northwestern.edu/faculty/jones-ben/htm/Artificial_Intelligence_in_Research_and_Development.pdf
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: 5e249e2daf50e4b847602dba19a31104428f24693a7ae07b90885d9bd1d5edb4
     quote: bottlenecks severely mute the effect of extremely productive AI
   - id: normal_tech
     who: Arvind Narayanan and Sayash Kapoor
@@ -74,6 +87,9 @@ sources:
     venue: Knight First Amendment Institute
     year: 2025
     url: https://knightcolumbia.org/content/ai-as-normal-technology
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: 0e97b621be9c4ea29687ade9a4dba7eb920b135448b216935639486a61186a62
   - id: agent_reliability
     who: Stephan Rabanser, Sayash Kapoor, Arvind Narayanan and colleagues
     short: Rabanser, Kapoor, Narayanan and colleagues
@@ -83,6 +99,9 @@ sources:
     venue: arXiv
     year: 2026
     url: https://arxiv.org/abs/2602.16666
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: 95b9a26416d2300c391617dd6336e26c8760ab4efe15d9b4804a74871f0f8680
   - id: lambert
     who: Nathan Lambert
     field: a machine-learning researcher who builds and writes about open language models
@@ -91,6 +110,9 @@ sources:
     venue: Interconnects
     year: 2026
     url: https://www.interconnects.ai/p/lossy-self-improvement
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: 6ee918f0755858479879117b6d36f548d3d66a001f4dc0887b30e74ff00b3427
   - id: scaling_myths
     who: Arvind Narayanan and Sayash Kapoor
     field: computer scientists at Princeton who study what AI can and cannot do
@@ -99,6 +121,9 @@ sources:
     venue: AI Snake Oil
     year: 2024
     url: https://www.normaltech.ai/p/ai-scaling-myths
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: 906b175b8d99fd510c8337beeca62695bed2d9e9488349a136ed7015544af30f
   - id: jones_c
     who: Charles Jones
     field: an economist at Stanford who studies long-run growth and the economics of AI's risks
@@ -107,6 +132,9 @@ sources:
     venue: The Economics of Transformative AI (National Bureau of Economic Research)
     year: 2026
     url: https://web.stanford.edu/~chadj/reduce_xrisk.pdf
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: 5e3a90e4e628bd48cd23c6c0427ee98cc0318004cfdf479af19d295cfa13037e
 
   # II · products
   - id: hadfield_koh
@@ -117,6 +145,9 @@ sources:
     venue: The Economics of Transformative AI (National Bureau of Economic Research)
     year: 2026
     url: https://arxiv.org/abs/2509.01063
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: f02048cd546c1c6b011de245099c4494df4e82044e5892a2988f7b2158a6c119
   - id: cai_data
     who: Sean Cai
     field: an investor and writer who works in the market for training data
@@ -125,6 +156,9 @@ sources:
     venue: his newsletter
     year: 2026
     url: https://seanzcai.substack.com/p/an-ai-bubble-is-a-human-data-problem
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: e4bbf8bd768ebc1b92a29f31e5e858a3709be0bf0b630d60bdae36a4b12d1e78
   - id: larson_squeeze
     who: Soren Larson
     field: a co-founder of an AI gateway company who writes about how money moves between AI labs and the apps built on them
@@ -133,6 +167,9 @@ sources:
     venue: hypersoren.xyz
     year: 2025
     url: https://hypersoren.xyz/posts/smart-squeeze/
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: e11c4cd50d46273cecb17a7c051c7965bbb4da08a9e8d6e55682455d588454c0
     quote: To my knowledge labs do not offer special wholesale pricing
   - id: shahidi_etal
     who: Peyman Shahidi, Gili Rusak, Benjamin Manning, Andrey Fradkin and John Horton
@@ -143,6 +180,9 @@ sources:
     venue: The Economics of Transformative AI (National Bureau of Economic Research)
     year: 2026
     url: https://peymanshahidi.github.io/assets/pdf/NBER_TAI_Chapter_Shahidi.pdf
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: a9cba7bbfac6c3c47fd2ce0c409f9974c39437b144bd330782accb852fd04844
   - id: hobart_inference
     who: Byrne Hobart and Nikhil Davar
     field: writers of The Diff, a newsletter on finance and technology; Hobart discloses that he holds shares in Amazon
@@ -151,6 +191,9 @@ sources:
     venue: The Diff
     year: 2026
     url: https://www.thediff.co/archive/forward-deployed/
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: 7c40df1e1ec61c5a5eceb22ce8665c9517d16c08d9cab25a10a1eec8f02c9b9e
 
   # III · adoption
   - id: coyle_poquiz
@@ -161,6 +204,9 @@ sources:
     venue: The Economics of Transformative AI (National Bureau of Economic Research)
     year: 2026
     url: https://conference.nber.org/conf_papers/f227496.pdf
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: d28f14724c1b456353d832a6b2aea57de719822d8a31a5a3695f2da49a3ed02d
   - id: canaries
     who: Erik Brynjolfsson, Bharat Chandar and Ruyu Chen
     short: Brynjolfsson, Chandar and Chen
@@ -170,6 +216,9 @@ sources:
     venue: Stanford Digital Economy Lab
     year: 2026
     url: https://digitaleconomy.stanford.edu/publication/canaries-in-the-coal-mine-six-facts-about-the-recent-employment-effects-of-artificial-intelligence/
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: df71c6772283e86d5c6d28cc111638a8dcfe6b85a6e0aee88febd7c4a550b3d9
   - id: larson_coasean
     who: Soren Larson
     field: a co-founder of an AI gateway company who writes about how money moves between AI labs and the apps built on them
@@ -178,6 +227,9 @@ sources:
     venue: hypersoren.xyz
     year: 2026
     url: https://hypersoren.xyz/posts/against-coasean-singularity/
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: 33126d46c3b2fcaffc675498c128ef047ed2dbd3e26ee2223c5250908e96f064
 
   # IV · reorganisation
   - id: moll_imas
@@ -188,6 +240,9 @@ sources:
     venue: Ghosts of Electricity
     year: 2026
     url: https://aleximas.substack.com/p/will-ai-soon-lead-to-double-digit
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: 26a0f53d5266db352f6c59caccd8cc0a099270569fb81b6da18d2dcbb1bf55ea
   - id: moll_imas_bet
     who: Benjamin Moll, Alex Imas and five others
     field: the terms of a public bet agreed in August 2026
@@ -196,6 +251,9 @@ sources:
     venue: benjaminmoll.com
     year: 2026
     url: https://benjaminmoll.com/wp-content/uploads/2026/08/growth_bet.pdf
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: 2430ae73077a3a0daf36711fb6f823728588ec41dcf352717bc7c45bee3a8277
   - id: bet_fast_side
     who: William MacAskill, Samuel Albanie, Tom Cohen and Jan Kulveit
     short: the fast side of the growth bet
@@ -205,6 +263,9 @@ sources:
     venue: benjaminmoll.com
     year: 2026
     url: https://benjaminmoll.com/wp-content/uploads/2026/08/growth_bet.pdf
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: 2430ae73077a3a0daf36711fb6f823728588ec41dcf352717bc7c45bee3a8277
   - id: macaskill_moorhouse
     who: William MacAskill and Fin Moorhouse
     field: researchers at Forethought, a research group that studies how to prepare for advanced AI; MacAskill, a moral philosopher, taught at Oxford until 2024
@@ -213,6 +274,9 @@ sources:
     venue: Forethought
     year: 2025
     url: https://www.forethought.org/research/preparing-for-the-intelligence-explosion
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: ae3c4d99e534ad6766821b80268591c829437ed60e667b09faee431400d1b5db
   - id: korinek_etal
     who: Anton Korinek, Charles Jones, Peter McCrory and colleagues
     short: Korinek, McCrory and colleagues
@@ -222,6 +286,9 @@ sources:
     venue: Anthropic Institute
     year: 2026
     url: https://www-cdn.anthropic.com/files/4zrzovbb/website/cf58f84d46a4a76bf5a5b039ac695fba6b80041c.pdf
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: 9fe6667ec24b8a1dce3cde7c8ae5d5e6631bb95f68dae82dbd827cbfa2410327
     quote: Across scenarios, almost all of the divergence comes after 2027.
   - id: stevenson
     who: Betsey Stevenson
@@ -231,6 +298,9 @@ sources:
     venue: The Economics of Transformative AI (National Bureau of Economic Research)
     year: 2026
     url: https://betseystevenson.com/papers/what-is-there-to-fear-post-agi.pdf
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: 5e94aea4deb8545ef877f0e1a8f4cfa88bdee24bf7f33f12852baa0651f3a7e9
   - id: keynes
     who: John Maynard Keynes
     field: the economist whose work founded modern macroeconomics
@@ -239,6 +309,9 @@ sources:
     venue: an essay, reprinted in his Essays in Persuasion
     year: 1930
     url: http://www.econ.yale.edu/smith/econ116a/keynes1.pdf
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: 642c276674fdfb24d025fcd3fa9cafd7892900c9a09f39b5e9a9ef5ea3b97ece
   - id: imas_scarce
     who: Alex Imas
     field: an economist at Chicago Booth who studies behaviour and AI
@@ -247,6 +320,9 @@ sources:
     venue: Ghosts of Electricity
     year: 2026
     url: https://aleximas.substack.com/p/what-will-be-scarce
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: a0337dd71dbe4881fc1b812aac5a034efd064a26f4e534325722f42cea6b9cf6
   - id: restrepo
     who: Pascual Restrepo
     field: a Yale economist who studies how technology shapes work and pay, and a member of Anthropic's economic advisory council
@@ -255,6 +331,9 @@ sources:
     venue: The Economics of Transformative AI (National Bureau of Economic Research)
     year: 2026
     url: https://campuspress.yale.edu/pascualrestrepo/files/2025/10/AGI_v4.pdf
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: c66c833b1ef6a36e76dcce20a81693da0ca0eeedf5cc0f524f474090814c55c8
   - id: athey_scott_morton
     who: Susan Athey and Fiona Scott Morton
     field: economists who study competition and technology; both served as chief economist of the US antitrust division
@@ -263,6 +342,9 @@ sources:
     venue: The Economics of Transformative AI (National Bureau of Economic Research)
     year: 2026
     url: https://conference.nber.org/conf_papers/f227494.pdf
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: 54322bef1c0df886a5fcd8a6982abb8a8d9de99c760b397a7c32b109d75ee12d
   - id: brynjolfsson_hitzig
     who: Erik Brynjolfsson and Zoë Hitzig
     field: Brynjolfsson directs Stanford's Digital Economy Lab; Hitzig studies AI's effects on society, now at the Anthropic Institute and at OpenAI when the chapter was written
@@ -271,6 +353,9 @@ sources:
     venue: The Economics of Transformative AI (National Bureau of Economic Research)
     year: 2026
     url: https://www.nber.org/books-and-chapters/economics-transformative-ai/ais-use-knowledge-society
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: de868e5a6179ffd52965ac16b6aa3457b8ba52775fc6322c18b9916fcc99c6de
   - id: hayek
     who: Friedrich Hayek
     field: an economist who studied how prices carry what people know
@@ -278,7 +363,10 @@ sources:
     work: The Use of Knowledge in Society
     venue: American Economic Review
     year: 1945
-    url: https://www.econlib.org/library/Essays/hykKnw.html
+    url: https://web.archive.org/web/20260920204610/https://www.econlib.org/library/Essays/hykKnw.html
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: fa319a0f79b40c0fd48f72863297ca8e775a529437e0cbdcbc39c57e4c3749fe
   - id: stiglitz_ventura_bolet
     who: Joseph Stiglitz and Màxim Ventura-Bolet
     field: Stiglitz won the Nobel prize for work on markets where one side knows more than the other; Ventura-Bolet is a doctoral fellow at Columbia
@@ -287,6 +375,9 @@ sources:
     venue: The Economics of Transformative AI (National Bureau of Economic Research)
     year: 2026
     url: https://back.nber.org/appendix/w34318/AI_digital_platforms_infoecosystem.pdf
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: 98ebe790486133096393de6ceaf0944d1012b437d4a1fb239b319a6262947702
 
   # V · value
   - id: hobart_round_trip
@@ -297,6 +388,9 @@ sources:
     venue: The Diff
     year: 2025
     url: https://www.thediff.co/archive/the-autistic-half-century/
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: 0a3831906da3bd89191ed8da2602a01fb749073dff7c1b5a62f11e83daba722f
   - id: hobart_pacing
     who: Byrne Hobart
     field: the writer of The Diff, a newsletter on finance and technology, after work in digital advertising and investment research
@@ -305,6 +399,9 @@ sources:
     venue: The Diff
     year: 2026
     url: https://www.thediff.co/archive/the-economics-and-politics-of-pacing-the-frontier/
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: 529289ede58cca6698e43ccce21f0a8cc2343f02a63bf73a9dd3f4f82fe11cbd
   - id: hobart_complements
     who: Byrne Hobart
     field: the writer of The Diff, a newsletter on finance and technology; he discloses that he holds shares in Meta and Alphabet
@@ -313,6 +410,9 @@ sources:
     venue: The Diff
     year: 2025
     url: https://www.thediff.co/archive/rumor-markets/
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: a80ff4722b5e62ea3e0be61cf4a5a36398a0bf2cb6ef4e4e58534dfde30270d5
   - id: larson_durability
     who: Soren Larson
     field: a co-founder of an AI gateway company who writes about how money moves between AI labs and the apps built on them
@@ -321,6 +421,9 @@ sources:
     venue: hypersoren.xyz
     year: 2026
     url: https://hypersoren.xyz/posts/durability-of-frontier-ai/
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: c33072f7ed47217a9e47bc2d279849c04e4240745c684d2d9637804cfab07e3c
   - id: board_pycia
     who: Simon Board and Marek Pycia
     field: economic theorists who study bargaining and how sellers set prices over time
@@ -329,6 +432,9 @@ sources:
     venue: American Economic Review
     year: 2014
     url: https://www.aeaweb.org/articles?id=10.1257/aer.104.2.656
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: 1ce9fb79ac09548ed216d369cc2614388bddf283e17c5390d7a10de732a78fa1
     quote: the seller charges a constant price in every period equal to the monopoly price
   - id: nk_up_the_stack
     who: Arvind Narayanan and Akash Kapur
@@ -338,6 +444,9 @@ sources:
     venue: AI as Normal Technology
     year: 2026
     url: https://www.normaltech.ai/p/up-the-stack-how-ais-escape-from
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: 9c50bc8cd4ce8d82febe8d0c463d4cff8a939c54290f9c85333c5d88352db664
   - id: larson_router
     who: Soren Larson
     field: a co-founder of an AI gateway company who writes about how money moves between AI labs and the apps built on them
@@ -346,6 +455,9 @@ sources:
     venue: hypersoren.xyz
     year: 2026
     url: https://hypersoren.xyz/posts/router-power/
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: 6f39ccf64873a76c42ca15f2da509dd3d23f4cea5965564237e89f8355a80cee
 
   - id: perez
     who: Carlota Perez
@@ -355,6 +467,9 @@ sources:
     venue: Edward Elgar
     year: 2002
     url: https://carlotaperez.org/wp-content/downloads/books/btr-en/PEREZ_TRFC_Ch%207.pdf
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: 53bcf200518f7da2147a6b04151f9490409a1c6f204cf626665e08b839daa760
   - id: nordhaus
     who: William Nordhaus
     field: a Yale economist who studies growth and productivity, and who won the Nobel prize for bringing climate change into long-run economics
@@ -363,6 +478,9 @@ sources:
     venue: National Bureau of Economic Research working paper
     year: 2004
     url: https://www.nber.org/papers/w10433
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: 218e55bd1ec56d1c29688a6b056900422c74fbafabf37ef8643c13cb147b7b62
   - id: cahn_2024
     who: David Cahn
     field: an investor at Sequoia Capital who backs AI and infrastructure companies
@@ -371,6 +489,20 @@ sources:
     venue: Sequoia Capital
     year: 2024
     url: https://sequoiacap.com/article/ais-600b-question/
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: b93585f1cee298c097dc06978d2107883e4c40f78a75e295b3e72d391ea64e95
+  - id: iso_exclusions
+    who: Nancy Germond
+    field: a writer for the Independent Insurance Agents and Brokers of America, reporting on the standard policy wordings that ISO, a unit of Verisk, drafts for insurers
+    finding: New optional endorsements with a January 2026 edition date let insurers exclude harm arising from generative AI from general liability policies; each insurer chooses whether to attach them.
+    work: Verisk to Roll Out New General Liability Exclusions for Generative AI Exposures
+    venue: IndependentAgent.com
+    year: 2025
+    url: https://www.independentagent.com/vu_resource/verisk-to-roll-out-new-general-liability-exclusions-for-generative-ai-exposures/
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: 306f1f5a1d8a92d49d5833fd3ed9fcb4e2eab7a8f29e1f8cb6fa74d3c347d8e7
   - id: cahn_2025
     who: David Cahn
     field: an investor at Sequoia Capital who backs AI and infrastructure companies
@@ -379,6 +511,9 @@ sources:
     venue: Sequoia Capital
     year: 2025
     url: https://sequoiacap.com/article/ai-in-2026-the-tale-of-two-ais/
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: f26d291022998776708bfd68c6d436f8925183db570a889e02e01d0be9ad3412
   - id: cahn_2026
     who: David Cahn
     field: an investor at Sequoia Capital who backs AI and infrastructure companies
@@ -387,6 +522,9 @@ sources:
     venue: his newsletter
     year: 2026
     url: https://dcahn.substack.com/p/ais-15t-question
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: 42d6ca37719112644e02d3f380470915d6b9aae8b1abb0bebed73644655d7a46
   - id: covello
     who: Jim Covello
     field: the head of global equity research at Goldman Sachs, and a former analyst of chip makers
@@ -395,6 +533,9 @@ sources:
     venue: Goldman Sachs Top of Mind
     year: 2024
     url: https://www.goldmansachs.com/insights/top-of-mind/gen-ai-too-much-spend-too-little-benefit
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: 56a6a549dffd5da896cd9de6924befb03de18741247dc36f53b90a959a754628
   - id: sundheim
     who: Dan Sundheim
     field: the founder of an investment firm that holds stakes in OpenAI and Anthropic
@@ -403,6 +544,9 @@ sources:
     venue: Invest Like the Best, a podcast, on YouTube
     year: 2026
     url: https://www.youtube.com/watch?v=mBtmTmCC0ZM
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: c01449f054ab9722936a7efcf86c8bb320911e631089a2fe8b03c1b57c2b5d75
   - id: jones_tonetti
     who: Charles Jones and Christopher Tonetti
     field: economists at Stanford who study long-run growth
@@ -411,6 +555,9 @@ sources:
     venue: a working paper
     year: 2026
     url: https://christophertonetti.com/files/papers/JonesTonetti_Automation.pdf
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: 9423ce1f512f3ff29899129556bf3e339f2b852094d4b4b4fdbe2f35671b2835
   - id: comin_mestieri
     who: Diego Comin and Martí Mestieri
     field: economists who study how technologies spread between countries
@@ -419,6 +566,9 @@ sources:
     venue: American Economic Journal, Macroeconomics
     year: 2018
     url: https://dcomin.host.dartmouth.edu/Publications_files/CM_rev_71917.pdf
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: acf11f70cc563af0bdbf034470d3a12053fd7f59a5105730c98322869eb40f30
   - id: brs_jcurve
     who: Erik Brynjolfsson, Daniel Rock and Chad Syverson
     short: Brynjolfsson, Rock and Syverson
@@ -428,6 +578,9 @@ sources:
     venue: American Economic Journal, Macroeconomics
     year: 2021
     url: https://www.nber.org/papers/w25148
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: 5a566b7c8b9a56600895d15f3852c81271811ac952d8c5697f3d753282c39d88
 
   # the rules
   - id: nk_licensing
@@ -438,6 +591,9 @@ sources:
     venue: AI Snake Oil
     year: 2023
     url: https://www.normaltech.ai/p/licensing-is-neither-feasible-nor
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: 00e19696561ec6c449affa32b931432a0ae2dbea588d8a5a927c103d24eabbd1
   - id: eo_14365
     who: The President of the United States
     field: an executive order
@@ -446,6 +602,9 @@ sources:
     venue: Federal Register
     year: 2025
     url: https://www.federalregister.gov/documents/2025/12/16/2025-23092/ensuring-a-national-policy-framework-for-artificial-intelligence
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: 33924f80c3aece09aad7f49caf6376a93efa4a948c90faecdc266da65b3ff8f8
   - id: eu_2026_1744
     who: The European Parliament and the Council of the European Union
     field: a regulation amending the EU's AI Act
@@ -454,6 +613,9 @@ sources:
     venue: European Commission
     year: 2026
     url: https://digital-strategy.ec.europa.eu/en/news/ai-omnibus-enters-force
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: af6b1eb9e36f6fbd9d0af74faf0827a363fa85bad261ab765386b93d18dcbe08
   - id: colorado_sb26_189
     who: The Colorado General Assembly
     field: a state law
@@ -462,6 +624,9 @@ sources:
     venue: Colorado General Assembly
     year: 2026
     url: https://leg.colorado.gov/bills/sb26-189
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: f026575e02c78fbcc44653ae6c15bb8033311a9e159fa0173fe36c168be1c506
   - id: cloudflare_crawl
     who: Cloudflare
     field: a company that stands between many websites and their visitors, reporting on its own traffic
@@ -470,6 +635,9 @@ sources:
     venue: the Cloudflare blog
     year: 2025
     url: https://blog.cloudflare.com/ai-crawler-traffic-by-purpose-and-industry/
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: a549dfffa4e0b71ecd0f89e6f805b79e1c11b8425fbdb56e0c1f751ebaa02b20
   - id: cloudflare_ratio
     who: Cloudflare
     field: a company that stands between many websites and their visitors, reporting on its own traffic
@@ -478,6 +646,9 @@ sources:
     venue: the Cloudflare blog
     year: 2025
     url: https://blog.cloudflare.com/ai-search-crawl-refer-ratio-on-radar/
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: 1796894f6a2dfce72ffd758d157f091b178098900a076c32227c58a3eeb30b8a
   - id: cloudflare_human_native
     who: CNBC
     field: a news report
@@ -486,6 +657,9 @@ sources:
     venue: CNBC
     year: 2026
     url: https://www.cnbc.com/2026/01/15/cloudflare-ai-human-native-acquisition.html
+    retrieved_at: 2026-09-22
+    http_status: 200
+    content_hash: 10fbb9d5daa4c69200c478f079de44e305aaf444683cc9e22dbff61ae99f348d
 
 positions:
   # I · capability
@@ -519,6 +693,16 @@ positions:
     kill_shot: Reliability rising as fast as accuracy.
     rival: compounding
     visible: true
+  - id: coverage_bought
+    folio: capability
+    title: The missing steps can be bought
+    holders: [jones_b]
+    attribution: extension
+    mechanism: If progress moves at the pace of the steps AI cannot take [cite:jones_b], the scarce thing is the next step a model can be taught, and that can be paid for, with practice tasks and graders sold to the labs, and with the work of fitting a model to the steps a firm's own jobs need.
+    case: Firms that sell the labs expert-written practice work have grown fast; Surge AI was reported in 2025 to have passed [fact:surge_revenue] in yearly revenue.
+    kill_shot: The next model taking the missing steps by itself, so that paying to teach them buys nothing a lab would not soon have anyway.
+    rival: compounding
+    visible: false
   - id: lossy
     folio: capability
     title: Self-improvement leaks
@@ -749,7 +933,7 @@ positions:
     folio: reorganisation
     title: Wages follow a jagged path, and the displaced can lose again
     holders: [restrepo, athey_scott_morton]
-    attribution: author
+    attribution: extension
     mechanism: Where better algorithms set the pace, wages jump and fall as tasks are automated [cite:restrepo]; where AI is sold with market power, Athey and Scott Morton add, workers pay again when its price rises [cite:athey_scott_morton].
     case: In Restrepo's model labour's share of income heads towards nothing once computing can do any work, even as total wages rise.
     kill_shot: Wages rising smoothly with output as AI spreads.
@@ -878,6 +1062,16 @@ positions:
     kill_shot: AI's revenue growing into the spending before the chips it bought are out of date.
     rival: durable_labs
     visible: false
+  - id: build_runs_late
+    folio: value
+    title: The build-out runs late while use keeps rising
+    holders: [cahn_2025]
+    attribution: author
+    mechanism: Demand for computing runs into a supply chain that has not grown as fast, from the few firms that make the most advanced chips and the machines that make them to generators, cooling and skilled builders, so data centres are finished late while use keeps rising.
+    case: Cahn wrote in December 2025 that a few such delays had already been reported publicly.
+    kill_shot: The new capacity coming online on schedule, with the price of computing falling as it arrives, the other outcome Cahn names.
+    rival: money_runs_out
+    visible: false
   - id: durable_labs
     folio: value
     title: The labs are durable businesses with high margins
@@ -899,6 +1093,8 @@ positions:
     rival: price_holds
     visible: false
 claims:
+  # A claim with a `stage` says its map row binds there; a claim about what happens on a row, such as who gains or
+  # loses, names the row without a stage, so the map lists it under the row and marks no cell.
   # I · capability
   - id: rli_reached
     position: compounding
@@ -935,6 +1131,10 @@ claims:
     stage: products
     falsifier: Reliability rising as fast as accuracy across the next models the tracker tests.
     expect_state: both
+  - id: coverage_sold
+    position: coverage_bought
+    text: Labs and companies keep paying more for the steps models cannot yet take, even as each new model takes more of them on its own.
+    falsifier: What labs and companies pay for practice work and for fitting models falling as the models improve.
   - id: lossy_loop
     position: lossy
     text: AI's help with AI research brings steady gains, not accelerating ones.
@@ -963,7 +1163,6 @@ claims:
     position: smart_squeeze
     text: Apps that resell the labs' models see their margins shrink as their use grows.
     row: applications
-    stage: products
     falsifier: A lab selling to apps below its public prices, or apps' margins holding as their use grows.
   - id: agents_fenced
     position: fences
@@ -1003,7 +1202,6 @@ claims:
     test: {fact: junior_gap, lt: junior_gap_control}
     rival_test: {fact: junior_gap_control, lt: 0}
     row: work_and_pay
-    stage: adaptation
     falsifier: The same gap opening in the least exposed jobs.
     expect_state: holding
   - id: simple_markets_first
@@ -1033,19 +1231,17 @@ claims:
     position: intensity_first
     text: Work in the jobs most exposed to AI grows more intense before it grows shorter.
     row: work_and_pay
-    stage: adaptation
     falsifier: Paid hours in the most exposed work falling before output per worker rises.
   - id: relational_pay
     position: relational
     text: Pay in work built on people dealing with people rises relative to pay elsewhere as AI spreads.
     row: work_and_pay
-    stage: adaptation
     falsifier: That pay falling behind as AI spreads.
   - id: labour_share_falls
     position: jagged_wages
+    holders: [restrepo]
     text: Labour's share of income falls as AI takes on more tasks, even as wages rise.
     row: work_and_pay
-    stage: adaptation
     falsifier: Labour's share holding while AI does a growing share of tasks.
   - id: firms_centralise
     position: centralises
@@ -1097,8 +1293,8 @@ claims:
     falsifier: AI's revenue overtaking that spending.
     expect_state: both
   - id: chips_stored
-    position: money_runs_out
-    text: The cloud companies start storing new chips instead of installing them, the sign Cahn watches for that the build-out is slowing [cite:cahn_2025].
+    position: build_runs_late
+    text: The cloud companies start storing new chips instead of installing them, the sign Cahn watches for that data centres are running late [cite:cahn_2025].
     row: data_centres
     stage: methods
     falsifier: New chips going into service as fast as they arrive.
@@ -1134,7 +1330,7 @@ scenarios:
       rules: unclear
       argued_by: [cahn_2024, covello]
       says: The spending outruns the revenue it needs, the builders slow down before the uses arrive, and the losses fall on their investors.
-      signposts: [capex_ahead, chips_stored]
+      signposts: [capex_ahead]
       binds_next: [capital]
     - progress: steady
       rules: unclear
@@ -1168,6 +1364,7 @@ scenarios:
       binds_next: [family_5]
   anchors:
     - {source: eo_14365, date: 2025-12-11, text: The American president ordered moves against state AI laws and called for a light national standard.}
+    - {source: iso_exclusions, date: 2026-01-01, text: Standard exclusions for harm caused by generative AI became available for insurers to attach to general liability policies.}
     - {source: colorado_sb26_189, date: 2026-05-14, text: "Colorado replaced its AI Act with a narrower law on automated decisions, which applies from January 2027."}
     - {source: eu_2026_1744, date: 2026-07-27, text: "The European Union's changes to its AI Act came into force, putting off its rules for high-risk AI until December 2027 and August 2028."}
 

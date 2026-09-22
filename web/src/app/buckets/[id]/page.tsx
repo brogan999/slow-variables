@@ -46,7 +46,7 @@ export default async function BucketPage({ params }: { params: Promise<{ id: str
         <section className="flex flex-col gap-6">
           <div>
             <h2 className="display text-2xl leading-tight mb-2 mt-2">The wider economy</h2>
-            <p className="text-sm text-ink-2 max-w-[62ch]">Official statistics read beside the claims about what happens next. They carry no status of their own, and none measures AI alone; where one is also the reading behind an indicator on this page, its caption says so.</p>
+            <p className="text-sm text-ink-2 max-w-[62ch]">Official statistics and data companies publish, read beside the claims about what happens next. They carry no status of their own, and none measures AI alone; where one is also the reading behind an indicator on this page, its caption says so.</p>
           </div>
           <ContextFigures figures={context().figures.filter((f) => f.page === `buckets/${id}`)} />
         </section>

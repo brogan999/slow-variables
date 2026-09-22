@@ -27,7 +27,7 @@ export default function PredictionsPage() {
             {items.length ? (
               <ol className="flex flex-col gap-3">
                 {items.map((p) => (
-                  <li key={p.id} id={p.id} className="panel p-4 scroll-mt-4 target:ring-2 target:ring-fast/40">
+                  <li key={p.id} id={p.id} className="panel p-4 scroll-mt-4 target:bg-surface-2">
                     <div className="flex flex-wrap items-center gap-2 text-xs text-ink-2">
                       <h3 className="font-medium text-ink">{p.claimant}</h3>
                       <span className="tabular-nums">{p.claim_date}</span>

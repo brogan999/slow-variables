@@ -5,7 +5,7 @@ import { ContextFigures } from "@/components/ContextFigure";
 import { Folios, Inline, parseEssay } from "@/components/Essay";
 import { Agreements, cites, FalsifierBoard, FolioPositions, OutlookMargin, OutlookSources, ScenarioGrid } from "@/components/OutlookParts";
 import { JaggedFrontier, ReliabilityGap } from "@/components/Signposts";
-import { context, outlook, signposts } from "@/lib/data";
+import { bottleneckMap, context, outlook, signposts } from "@/lib/data";
 import { SITE } from "@/lib/site";
 
 const title = "What happens from here";
@@ -20,13 +20,14 @@ export const metadata = {
 export default function OutlookPage() {
   const doc = outlook();
   const sp = signposts();
+  const rows = Object.fromEntries(bottleneckMap().groups.flatMap((g) => g.sections.flatMap((s) => s.rows.map((r) => [r.id, r.name]))));
   const { title: h1, lede, folios } = parseEssay(doc.essay);
   const plates = {
     reliability: sp.reliability ? <ReliabilityGap doc={sp} /> : null,
     frontier: <JaggedFrontier doc={sp} />,
     adoption: <ContextFigures figures={context().figures.filter((f) => f.id === "adoption_measures")} />,
     stack: <StackPlate />,
-    scenarios: <ScenarioGrid doc={doc} />,
+    scenarios: <ScenarioGrid doc={doc} rows={rows} />,
     board: <FalsifierBoard doc={doc} />,
   };
   const after = (label: string, i: number) => {

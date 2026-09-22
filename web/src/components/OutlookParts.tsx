@@ -3,6 +3,7 @@ import { Fragment } from "react";
 import { MarginPanel } from "@/components/ArticleLayout";
 import { type Cites, Inline, type Tests } from "@/components/Essay";
 import { Fact } from "@/components/Fact";
+import { Figure } from "@/components/Figure";
 import type { OutlookClaim, OutlookDoc, OutlookPosition, OutlookState, OutlookTest } from "@/lib/data";
 import { CLAIM_WORDS, fmtLine } from "@/lib/format";
 
@@ -29,7 +30,11 @@ function names(doc: OutlookDoc, ids: string[]) {
 }
 const capital = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
-function Whose({ doc, p }: { doc: OutlookDoc; p: OutlookPosition }) {
+// A claim can name its own makers (a bet's parties), who then take the credit instead of the position's holders.
+const ownMakers = (p: OutlookPosition, c?: OutlookClaim) => !!c && c.holders.join() !== p.holders.join();
+
+function Whose({ doc, p, c }: { doc: OutlookDoc; p: OutlookPosition; c?: OutlookClaim }) {
+  if (ownMakers(p, c)) return <>{capital(names(doc, c!.holders))}</>;
   if (p.attribution === "site") return <>This site&apos;s own position</>;
   const who = capital(names(doc, p.holders));
   return p.attribution === "extension" ? <>An argument of {names(doc, p.holders)}, carried further by this site</> : <>{who}</>;
@@ -42,11 +47,14 @@ function Threshold({ doc, t }: { doc: OutlookDoc; t: OutlookTest }) {
   return <>{OP[op]} {typeof rhs === "string" ? <Fact f={doc.facts[rhs]} /> : <span className="num">{fmtLine(rhs as number, unit)}</span>}</>;
 }
 
-function ClaimLine({ doc, c, tests }: { doc: OutlookDoc; c: OutlookClaim; tests: Tests }) {
+function ClaimLine({ doc, p, c, tests }: { doc: OutlookDoc; p: OutlookPosition; c: OutlookClaim; tests: Tests }) {
   return (
     <li id={`claim-${c.id}`} className="scroll-mt-24 target:bg-surface-2 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-3">
       <span className="shrink-0"><ClaimState state={c.state} /></span>
-      <span className="font-serif text-[1.0625rem] leading-snug text-ink"><Inline text={c.text} facts={doc.facts} cites={cites(doc)} tests={tests} /></span>
+      <span className="font-serif text-[1.0625rem] leading-snug text-ink">
+        <Inline text={c.text} facts={doc.facts} cites={cites(doc)} tests={tests} />
+        {ownMakers(p, c) ? <span className="block font-sans text-[13px] text-ink-2">Claimed by {names(doc, c.holders)}</span> : null}
+      </span>
     </li>
   );
 }
@@ -72,7 +80,7 @@ function Position({ doc, p, tests }: { doc: OutlookDoc; p: OutlookPosition; test
         <p className="text-[13px] text-ink-2"><Whose doc={doc} p={p} /></p>
       </div>
       <p className="font-serif text-[1.0625rem] leading-relaxed text-ink"><Inline text={p.mechanism} facts={doc.facts} cites={cites(doc)} tests={tests} /></p>
-      {own.length ? <ul className="flex flex-col gap-2">{own.map((c) => <ClaimLine key={c.id} doc={doc} c={c} tests={tests} />)}</ul> : null}
+      {own.length ? <ul className="flex flex-col gap-2">{own.map((c) => <ClaimLine key={c.id} doc={doc} p={p} c={c} tests={tests} />)}</ul> : null}
       <details className="group">
         <summary className="cursor-pointer text-[13px] text-ink-2 hover:text-ink underline decoration-grid underline-offset-4">The case, the tests and what would refute it</summary>
         <dl className="mt-3 grid gap-x-4 gap-y-1.5 text-[14px] leading-relaxed sm:grid-cols-[9.5rem_minmax(0,1fr)]">
@@ -132,7 +140,7 @@ export function Agreements({ doc }: { doc: OutlookDoc }) {
 
 // Progress crossed with the rules. A cell is filled only where a named writer argues it, and every cell tonight's
 // readings still allow is marked, never just one.
-export function ScenarioGrid({ doc }: { doc: OutlookDoc }) {
+export function ScenarioGrid({ doc, rows }: { doc: OutlookDoc; rows: Record<string, string> }) {
   const s = doc.scenarios;
   const cell = (p: string, r: string) => s.cells.find((c) => c.progress === p && c.rules === r);
   const claim = (id: string) => doc.claims.find((c) => c.id === id);
@@ -149,15 +157,12 @@ export function ScenarioGrid({ doc }: { doc: OutlookDoc }) {
             {c.signposts.map((g) => <li key={g.claim} className="flex items-baseline gap-2"><span aria-hidden>{GLYPH[g.state]}</span><a href={`#claim-${g.claim}`} className="text-ink-2 underline decoration-grid underline-offset-2 hover:text-ink">{claim(g.claim) ? <Inline text={claim(g.claim)!.text} facts={doc.facts} tests={doc.tests} /> : g.claim}</a><span className="sr-only">: {CLAIM_WORDS[g.state]}</span></li>)}
           </ul>
         ) : <p className="text-[12.5px] text-muted">No signpost yet.</p>}
+        {c.binds_next.length ? <p className="text-[12.5px] leading-snug text-ink-2">Binds next: {c.binds_next.map((id, k) => <span key={id}>{k ? ", " : ""}<Link href={`/bottlenecks#why-${id}`} prefetch={false} className="underline decoration-grid underline-offset-2 hover:text-ink">{rows[id] ?? id}</Link></span>)}.</p> : null}
       </div>
     );
   };
   return (
-    <figure className="plate">
-      <figcaption className="flex flex-col gap-1 mb-4">
-        <span className="eyebrow">Scenarios</span>
-        <span className="display text-[1.3rem] leading-tight">Which futures tonight&apos;s readings still allow</span>
-      </figcaption>
+    <Figure title="Which futures tonight's readings still allow" note="how far capability goes, down · how the rules settle, across · a cell is filled only where a named writer argues it">
       <div className="hidden md:block overflow-x-auto">
         <table className="data w-full">
           <thead><tr><th scope="col">Progress</th>{s.rules.map((r) => <th key={r.id} scope="col">{r.label}</th>)}</tr></thead>
@@ -185,20 +190,17 @@ export function ScenarioGrid({ doc }: { doc: OutlookDoc }) {
           {s.anchors.map((a) => <li key={a.source}><span className="num text-ink">{a.date}</span> · {a.text} <a href={`#source-${a.source}`} className="underline decoration-grid underline-offset-2 hover:text-ink">source</a></li>)}
         </ul>
       </div>
-    </figure>
+    </Figure>
   );
 }
 
 // Every claim on the page in one list, with tonight's state and what would prove it wrong.
 export function FalsifierBoard({ doc }: { doc: OutlookDoc }) {
   const pos = Object.fromEntries(doc.positions.map((p) => [p.id, p]));
+  const Text = ({ c }: { c: OutlookClaim }) => <a href={`#claim-${c.id}`} className="hover:underline underline-offset-2 decoration-axis"><Inline text={c.text} facts={doc.facts} tests={doc.tests} /></a>;
   return (
-    <figure className="plate">
-      <figcaption className="flex flex-col gap-1 mb-4">
-        <span className="eyebrow">Every claim</span>
-        <span className="display text-[1.3rem] leading-tight">Tonight&apos;s state of each claim; each links to its test and what would prove it wrong</span>
-      </figcaption>
-      <div className="overflow-x-auto">
+    <Figure title="Every claim, with tonight's state, its test and what would prove it wrong" note="by question · each claim links to its position">
+      <div className="hidden md:block overflow-x-auto">
         <table className="data w-full">
           <thead><tr><th scope="col">Claim</th><th scope="col">Whose</th><th scope="col">Tonight</th></tr></thead>
           <tbody>
@@ -207,8 +209,8 @@ export function FalsifierBoard({ doc }: { doc: OutlookDoc }) {
                 <tr><th scope="colgroup" colSpan={3} className="pt-5 text-left">{fo.kicker}</th></tr>
                 {doc.claims.filter((c) => c.folio === fo.id).map((c) => (
                   <tr key={c.id}>
-                    <td className="min-w-[16rem]"><a href={`#claim-${c.id}`} className="hover:underline underline-offset-2 decoration-axis"><Inline text={c.text} facts={doc.facts} tests={doc.tests} /></a></td>
-                    <td className="min-w-[9rem] text-ink-2">{pos[c.position] ? <Whose doc={doc} p={pos[c.position]} /> : null}</td>
+                    <td className="min-w-[16rem]"><Text c={c} /><div className="mt-1"><ClaimTest doc={doc} c={c} /></div></td>
+                    <td className="min-w-[9rem] text-ink-2">{pos[c.position] ? <Whose doc={doc} p={pos[c.position]} c={c} /> : null}</td>
                     <td className="whitespace-nowrap"><ClaimState state={c.state} /></td>
                   </tr>
                 ))}
@@ -217,7 +219,24 @@ export function FalsifierBoard({ doc }: { doc: OutlookDoc }) {
           </tbody>
         </table>
       </div>
-    </figure>
+      <div className="md:hidden flex flex-col">
+        {doc.folios.map((fo) => (
+          <section key={fo.id} className="flex flex-col">
+            <h3 className="eyebrow pt-5 pb-2">{fo.kicker}</h3>
+            <ul className="flex flex-col">
+              {doc.claims.filter((c) => c.folio === fo.id).map((c) => (
+                <li key={c.id} className="py-3 border-t border-grid flex flex-col gap-1.5">
+                  <span className="self-start"><ClaimState state={c.state} /></span>
+                  <span className="text-[15px] leading-snug"><Text c={c} /></span>
+                  <span className="text-[13px] text-ink-2">{pos[c.position] ? <Whose doc={doc} p={pos[c.position]} c={c} /> : null}</span>
+                  <ClaimTest doc={doc} c={c} />
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))}
+      </div>
+    </Figure>
   );
 }
 
