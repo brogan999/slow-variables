@@ -22,6 +22,7 @@
 | baseten_blog | Baseten blog and research posts | Baseten | html | 7 | irregular | Baseten; short quotation | Baseten |
 | baseten_research_watch | Baseten research (page watch) | Baseten | html | 7 | weekly | Publisher terms; change notices only | Baseten |
 | bbd | Bick–Blandin–Deming Real-Time Population Survey (via FRED) | Federal Reserve Bank of St. Louis | csv | 6 | quarterly | FRED terms of use; RPS by Bick, Blandin & Deming | Bick, Blandin & Deming, Real-Time Population Survey, via FRED |
+| big_i | IndependentAgent.com | Independent Insurance Agents & Brokers of America | html | 5 | irregular | Short quotation | Independent Insurance Agents & Brokers of America, IndependentAgent.com |
 | bls | BLS productivity and costs; total factor productivity | U.S. Bureau of Labor Statistics | api | 4 | quarterly | Public domain (U.S. government) | U.S. Bureau of Labor Statistics, Productivity and Costs (PRS85006092/93, PRS85006173), Total Factor Productivity (MPU4910012) |
 | cait | California AI-Unemployment Tracker (CAIT) | California Policy Lab with California EDD | csv | 6 | monthly | California Policy Lab; monthly claims workbook, cited as the Lab suggests | Hyman, von Wachter et al. (2026), Tracking AI-Related Job Loss Using Unemployment Insurance Claims Data in California, California Policy Lab |
 | canaries | Canaries Dashboard data (by exposure) | Stanford Digital Economy Lab and ADP Research | csv | 6 | monthly | Stanford Digital Economy Lab; free public data, cited as the Lab asks | Stanford Digital Economy Lab and ADP Research, AI Economic Indicators: Canaries Dashboard |
@@ -29,9 +30,12 @@
 | census_btos | Census Business Trends and Outlook Survey | U.S. Census Bureau | csv | 4 | biweekly | Public domain (U.S. government) | U.S. Census Bureau, Business Trends and Outlook Survey |
 | cepr_voxeu | CEPR VoxEU columns (via Wayback; cepr.org 403s bots) | CEPR | html | 6 | irregular | CEPR; short quotation | CEPR VoxEU |
 | chicago_booth | Chicago Booth Center for Applied AI | University of Chicago Booth School of Business | html | 6 | irregular | Chicago Booth; short quotation | Chicago Booth |
+| claims_journal | Claims Journal | Wells Media Group | html | 5 | irregular | Claims Journal; short quotation | Claims Journal |
 | cleverhack_neolab_watch | cleverhack neolab directory (page watch) | cleverhack.com (Joy Larkin) | html | 7 | monthly | Publisher terms; change notices only | Joy Larkin, cleverhack.com |
 | clouded_judgment | Clouded Judgement (weekly cloud software multiples; retired 11 Sep 2026: the feed refuses cloud runners) | Jamin Ball / Altimeter | rss | 6 | weekly | Substack; figures quoted with attribution | Jamin Ball, Clouded Judgement |
+| cloudflare_blog | Cloudflare blog (Radar) | Cloudflare | html | 3 | irregular | Cloudflare; short quotation | Cloudflare Radar, via the Cloudflare blog |
 | cnbc | CNBC | CNBC LLC | html | 5 | irregular | CNBC; short quotation | CNBC |
+| comet_blog | Comet blog | Comet ML | html | 7 | irregular | Comet; short quotation | Comet |
 | coreweave_news | CoreWeave newsroom | CoreWeave | html | 7 | irregular | CoreWeave press release; short quotation | CoreWeave (company announcement) |
 | crunchbase_news_feed | Crunchbase News feed (watchlist) | Crunchbase | rss | 5 | daily | Publisher terms; titles and links only | Crunchbase News |
 | cursor_blog | Cursor research blog | Anysphere | html | 7 | irregular | Cursor; short quotation | Cursor (Anysphere) |
@@ -67,12 +71,14 @@
 | fortune | Fortune | Fortune Media | html | 5 | irregular | Fortune Media; short quotation | Fortune, 'MIT report: 95% of generative AI pilots at companies are failing' (18 Aug 2025) |
 | fred | FRED (Federal Reserve Economic Data) | Federal Reserve Bank of St. Louis | csv | 6 | quarterly | FRED terms of use; RPS series by Bick, Blandin & Deming | Bick, Blandin & Deming, Real-Time Population Survey, retrieved from FRED |
 | fred_official | FRED (official statistics) | Federal Reserve Bank of St. Louis | csv | 4 | monthly | FRED terms of use; the series are their agencies' public data | Federal Reserve Board, Bureau of Economic Analysis and Bureau of Labor Statistics series, retrieved from FRED |
+| geekwire | GeekWire | GeekWire | html | 5 | irregular | GeekWire; short quotation | GeekWire |
 | google_research_blog | Google Research blog | Google | html | 7 | irregular | Google; short quotation | Google Research |
 | hal_reliability | HAL AI Agent Reliability Tracker (reliability scores by agent) | Princeton University, HAL | html | 1 | irregular | HAL (Princeton); cited with attribution | HAL: Holistic Agent Leaderboard, AI Agent Reliability Tracker, Princeton University |
 | harvey_blog | Harvey research and insights posts | Harvey | html | 7 | irregular | Harvey; short quotation | Harvey |
 | hsbc | HSBC Insights (Global Investment Research) | HSBC | html | 5 | irregular | HSBC; short quotation | HSBC Insights, 'The billions of AI consumer surplus' (10 Aug 2026) |
 | humlum_pdf | Humlum working-paper PDFs (author site) | Anders Humlum | pdf | 6 | irregular | Author preprint; short quotation | Humlum & Vestergaard |
 | innolitics | Innolitics regulatory articles | Innolitics | html | 6 | irregular | Innolitics; short quotation | Innolitics |
+| insurance_journal | Insurance Journal | Wells Media Group | html | 5 | irregular | Insurance Journal; short quotation | Insurance Journal |
 | leonis | The Thesis by Leonis | Leonis Capital | html | 6 | irregular | Substack; figures quoted with attribution | Leonis Capital, The Thesis |
 | menlo | Menlo Ventures, State of Generative AI in the Enterprise | Menlo Ventures | html | 6 | annual | Report | Menlo Ventures, '2025: The State of Generative AI in the Enterprise' |
 | mercor_blog | Mercor blog | Mercor | html | 7 | irregular | Mercor; short quotation | Mercor (company announcement) |
@@ -114,7 +120,7 @@
 | statnews | STAT News | Boston Globe Media | html | 5 | irregular | STAT; short quotation | STAT News |
 | stlouisfed_blog | FRED Blog | Federal Reserve Bank of St. Louis | html | 6 | irregular | FRED terms of use | FRED Blog, 'Does generative AI save time at work?' (27 Aug 2026) |
 | stripe_newsroom | Stripe newsroom | Stripe | html | 4 | irregular | Stripe; short quotation | Stripe newsroom |
-| techcrunch | TechCrunch | Yahoo Inc. | html | 7 | irregular | TechCrunch; short quotation | TechCrunch (quoting Sam Altman on X) |
+| techcrunch | TechCrunch | Yahoo Inc. | html | 7 | irregular | TechCrunch; short quotation | TechCrunch |
 | techcrunch_ai_feed | TechCrunch AI feed (watchlist) | Yahoo Inc. | rss | 5 | daily | Publisher terms; titles and links only | TechCrunch |
 | theaiinsider | The AI Insider | Resonance | html | 5 | irregular | The AI Insider; short quotation | The AI Insider |
 | thinking_machines_blog | Thinking Machines Connectionism posts | Thinking Machines Lab | html | 7 | irregular | Thinking Machines; short quotation | Thinking Machines Lab |

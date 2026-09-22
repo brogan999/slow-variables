@@ -1532,8 +1532,11 @@ class Store:
         missing period (`joined` false). A name in the seed that matches no metric or series is an error."""
         spec = yaml.safe_load((SEED / "context.yaml").read_text())
         known = set((yaml.safe_load(Path("semantic/metrics.yaml").read_text()) or {}).get("metrics", {}))
+        pages = {f"buckets/{b.id}" for b in self.seed.buckets} | {f"layers/{x.id}" for x in self.seed.layers}
         start, figures = date.fromisoformat(spec["start"]), []
         for f in spec["figures"]:
+            if f.get("page", spec["page"]) not in pages:
+                raise ValueError(f"context.yaml {f['id']}: no page {f.get('page', spec['page'])}")
             lines = []
             for ln in f["lines"]:
                 if "metric" in ln:
@@ -1590,10 +1593,12 @@ class Store:
             ):  # two-line labels
                 ln["label_y"] = y
             ids = [i for ln in lines for p in ln["points"] for i in p["obs_ids"]]
-            metrics = ", ".join(ln["metric"] for ln in f["lines"] if "metric" in ln)
+            metrics = ", ".join(dict.fromkeys(ln["metric"] for ln in f["lines"] if "metric" in ln))
             figures.append(
                 {
                     **{k: f[k] for k in ("id", "title", "unit", "caption")},
+                    "page": f.get("page", spec["page"]),
+                    "note": f.get("note", spec["note"]),
                     "lines": lines,
                     "x": {"ticks": xa["ticks"]},
                     "y": {
@@ -1604,7 +1609,7 @@ class Store:
                     "chart_sources": self._chart_sources(ids, metrics or None),
                 }
             )
-        return {"bucket": spec["bucket"], "start": spec["start"], "figures": figures}
+        return {"start": spec["start"], "figures": figures}
 
     def _input_links(self, ids: list[str]) -> list[dict[str, Any]]:
         """The rows a derived number was computed from, grouped by series: each row by its series and month where a

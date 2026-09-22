@@ -912,6 +912,115 @@ metrics:
       FROM observations j JOIN observations s
         ON s.as_of_date = j.as_of_date AND s.series_key = 'canaries.us_exposure_q1_age_50_plus.employment_index.m'
       WHERE j.series_key = 'canaries.us_exposure_q1_age_22_25.employment_index.m'
+  open_share_of_routed_tokens:
+    description: The share of tokens routed through OpenRouter that went to models whose weights are published, among the models in OpenRouter's daily top table, the last reading in each week. A model counts as open when OpenRouter lists a Hugging Face repository for it.
+    rationale: Whether open models take the volume as the capability gap closes is the crux of who keeps the model layer's margin; routed tokens are the one public, frequent reading of where volume goes.
+    grain: [as_of_date]
+    unit: share
+    lead_lag: coincident
+    formula_version: 1
+    inputs: ["openrouter_rankings.*.tokens.d", "openrouter.*.hugging_face_id.pt"]
+    caveats: One router with a developer-heavy, price-sensitive mix and free promotions that favour open models; only the day's listed models; enterprise traffic that goes direct to the labs never appears; a model counts as closed if OpenRouter names no repository for it, including a delisted one.
+    sql: |
+      WITH hf AS (SELECT subject, arg_max(id, as_of_date) AS hid FROM observations
+                  WHERE source_ns = 'openrouter' AND measure = 'hugging_face_id' GROUP BY 1),
+      t AS (SELECT r.as_of_date, r.id, r.value_numeric AS v, hf.hid
+            FROM observations r LEFT JOIN hf ON hf.subject = r.subject
+            WHERE r.source_ns = 'openrouter_rankings' AND r.measure = 'tokens' AND r.value_numeric > 0),
+      d AS (SELECT as_of_date, sum(CASE WHEN hid IS NOT NULL THEN v ELSE 0 END) / sum(v) AS value,
+                   list_concat(list(id ORDER BY id), list(hid ORDER BY hid) FILTER (WHERE hid IS NOT NULL)) AS obs_ids
+            FROM t GROUP BY 1 HAVING count(*) >= 5)
+      SELECT * FROM d QUALIFY as_of_date = max(as_of_date) OVER (PARTITION BY date_trunc('week', as_of_date))
+  rpo_to_trailing_revenue:
+    description: Remaining performance obligations (revenue contracted but not yet delivered) at each quarter end, over revenue in the four fiscal quarters to that date, per filer, from XBRL company facts; a fiscal fourth quarter filed only inside the 10-K is the full year minus the three quarters inside it.
+    rationale: Contracted backlog in years of current revenue shows how much of the build-out is already sold, and to whom; a rising ratio at the clouds is demand committed ahead of delivery, at the chip makers it is supply committed ahead of production.
+    grain: [as_of_date, entity]
+    unit: ratio
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["sec.*.rpo.q", "sec.*.revenue.q", "sec.*.revenue.fy"]
+    caveats: Whole-company figures; filers define and disclose backlog differently, and some count only contracts over a year; fiscal quarters differ by filer; a quarter window must hold exactly four fiscal quarters.
+    sql: |
+      WITH q AS (SELECT subject, as_of_date, value_numeric AS rev, [id] AS ids FROM observations
+                 WHERE source_ns = 'sec' AND measure = 'revenue' AND grain = 'q' AND value_numeric > 0),
+      fy AS (SELECT subject, as_of_date, period_start, value_numeric AS rev, id FROM observations
+             WHERE source_ns = 'sec' AND measure = 'revenue' AND grain = 'fy'),
+      fill AS (  -- a fiscal Q4 filed only inside the 10-K: the full year minus the three quarters inside it
+        SELECT f.subject, f.as_of_date, f.rev - sum(q.rev) AS rev, flatten(list_prepend([f.id], list(q.ids))) AS ids
+        FROM fy f JOIN q ON q.subject = f.subject AND q.as_of_date > f.period_start AND q.as_of_date < f.as_of_date
+        GROUP BY f.subject, f.as_of_date, f.rev, f.id
+        HAVING count(*) = 3 AND NOT EXISTS (SELECT 1 FROM q q2 WHERE q2.subject = f.subject AND q2.as_of_date = f.as_of_date)),
+      qs AS (SELECT * FROM q UNION ALL SELECT * FROM fill),
+      ttm AS (  -- four quarter ends inside ten and a half months: exactly the four fiscal quarters to this date
+        SELECT a.subject, a.as_of_date, sum(b.rev) AS rev, flatten(list(b.ids)) AS ids
+        FROM qs a JOIN qs b ON b.subject = a.subject AND b.as_of_date <= a.as_of_date AND b.as_of_date > a.as_of_date - INTERVAL 320 DAY
+        GROUP BY a.subject, a.as_of_date HAVING count(*) = 4 AND count(DISTINCT b.as_of_date) = 4)
+      SELECT r.as_of_date, r.subject AS entity, r.value_numeric / t.rev AS value, list_prepend(r.id, t.ids) AS obs_ids
+      FROM observations r JOIN ttm t ON t.subject = r.subject AND t.as_of_date = r.as_of_date
+      WHERE r.source_ns = 'sec' AND r.measure = 'rpo' AND r.grain = 'q' AND t.rev > 0
+  closed_over_open_price_premium:
+    description: On each price change date, for every open model, the cheapest closed model scoring at least as high on the Artificial Analysis Intelligence Index, its blended price (USD per million tokens, 3:1 input to output) over the open model's; the median across open models. Models are open or closed as Epoch's capability index groups them, matched by name.
+    rationale: What a buyer pays a closed lab over the outside option at the same capability is the labs' pricing power in one number; above one, closed capability carries a premium; below one, the labs' cheaper models undercut what open models cost to run.
+    grain: [as_of_date]
+    unit: ratio
+    lead_lag: coincident
+    formula_version: 1
+    inputs: ["aa.*.price_blended_usd_per_mtok.pt", "aa.*.intelligence_index.pt", "epoch_bench.*.eci_open.pt", "epoch_bench.*.eci_closed.pt"]
+    caveats: List prices, and an open model's price is what its hosts charge, not its makers; only models Artificial Analysis and Epoch name alike count, a minority of the open ones, old ones included; Artificial Analysis re-scores every model on its current index, so past dates use today's scores; a model it stops listing keeps its last price, so a dropped cheap model can stay the rival; at least five open models must have a closed rival; the series starts in September 2026 and records change points.
+    sql: |
+      WITH g AS (SELECT subject, bool_or(measure = 'eci_open') AS open, min(id) AS gid FROM observations
+                 WHERE source_ns = 'epoch_bench' AND measure IN ('eci_open', 'eci_closed') GROUP BY 1),
+      i AS (SELECT subject, arg_max(value_numeric, as_of_date) AS idx, arg_max(id, as_of_date) AS iid
+            FROM observations WHERE series_key LIKE 'aa.%.intelligence_index.pt' AND value_numeric > 0 GROUP BY 1),
+      p AS (SELECT subject, as_of_date, value_numeric AS usd, id FROM observations
+            WHERE series_key LIKE 'aa.%.price_blended_usd_per_mtok.pt' AND value_numeric > 0),
+      d AS (SELECT DISTINCT as_of_date FROM p),
+      cp AS (SELECT d.as_of_date, p.subject, arg_max(p.usd, p.as_of_date) AS usd, arg_max(p.id, p.as_of_date) AS pid
+             FROM d JOIN p ON p.as_of_date <= d.as_of_date GROUP BY 1, 2),
+      m AS (SELECT cp.*, i.idx, i.iid, g.open, g.gid FROM cp JOIN i USING (subject) JOIN g USING (subject)),
+      pr AS (SELECT o.as_of_date, o.subject, o.usd, o.pid, o.iid, o.gid, list(c ORDER BY c.usd, c.subject)[1] AS rival
+             FROM m o JOIN m c ON c.as_of_date = o.as_of_date AND NOT c.open AND c.idx >= o.idx
+             WHERE o.open GROUP BY o.as_of_date, o.subject, o.usd, o.pid, o.iid, o.gid),
+      r AS (SELECT as_of_date, median(rival.usd / usd) AS value,  -- each row cited once, the grouping rows included
+                   list_sort(list_distinct(flatten(list([pid, iid, gid, rival.pid, rival.iid, rival.gid])))) AS obs_ids
+            FROM pr GROUP BY 1 HAVING count(*) >= 5)
+      SELECT * FROM r QUALIFY value IS DISTINCT FROM lag(value) OVER (ORDER BY as_of_date)
+  chatgpt_paid_share:
+    description: ChatGPT's paying consumer subscribers over its weekly active users, on each date OpenAI states both; paying business users are counted apart and are not in it.
+    rationale: Most use of AI assistants is unpriced, so it never shows in measured output; the paid share is the one public reading of how much of that use is bought.
+    grain: [as_of_date]
+    unit: share
+    lead_lag: coincident
+    formula_version: 1
+    inputs: ["usage.openai_chatgpt.paying_subscribers.pt", "usage.openai_chatgpt.weekly_active_users.pt"]
+    caveats: OpenAI's own figures as reported by the press; subscribers and weekly users are different counts (a subscriber need not be weekly, and business seats are counted apart), so the ratio is a rough share, not a conversion rate.
+    sql: |
+      SELECT s.as_of_date, s.value_numeric / u.value_numeric AS value, [s.id, u.id] AS obs_ids
+      FROM observations s JOIN observations u
+        ON u.as_of_date = s.as_of_date AND u.series_key = 'usage.openai_chatgpt.weekly_active_users.pt'
+      WHERE s.series_key = 'usage.openai_chatgpt.paying_subscribers.pt' AND u.value_numeric > 0
+  ledger_events_12m:
+    description: For each of the outlook's hand-kept event ledgers (checking AI's work sold as a category, insurers' AI exclusions, platforms fencing out outside agents), the number of events for and against in the twelve months to each date on which an event lands or one leaves the window.
+    rationale: The ledgers test claims about markets that no statistic tracks yet; a count over a trailing year turns dated events into a reading that rises when an event lands and falls when one ages out.
+    grain: [as_of_date, target, stance]
+    unit: count
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["evidence.ai_evaluation_market.*.pt", "evidence.insurer_ai_exclusions.*.pt", "evidence.agent_access_fences.*.pt"]
+    caveats: Hand-kept from dated public reports, so it undercounts; an event is counted once on its own date, and a court's ruling in a case already counted is context, not a second event. When the window empties, the reading cites the event that left it.
+    sql: |
+      WITH e AS (SELECT subject AS target, measure AS stance, as_of_date, id FROM observations
+                 WHERE source_ns = 'evidence' AND subject IN ('ai_evaluation_market', 'insurer_ai_exclusions', 'agent_access_fences')
+                   AND measure IN ('for', 'against')),
+      d AS (SELECT target, stance, as_of_date AS day, NULL AS gone FROM e
+            UNION ALL  -- the day an event ages out of the trailing year, up to today
+            SELECT target, stance, CAST(as_of_date + INTERVAL 1 YEAR AS DATE), id FROM e
+            WHERE as_of_date + INTERVAL 1 YEAR <= current_date),
+      c AS (SELECT d.target, d.stance, d.day, count(DISTINCT e.id) AS n, list(DISTINCT e.id ORDER BY e.id) FILTER (WHERE e.id IS NOT NULL) AS ids,
+                   max(d.gone) AS gone
+            FROM d LEFT JOIN e ON e.target = d.target AND e.stance = d.stance AND e.as_of_date <= d.day AND e.as_of_date > d.day - INTERVAL 1 YEAR
+            GROUP BY 1, 2, 3)
+      SELECT day AS as_of_date, target, stance, n AS value, CASE WHEN n = 0 THEN [gone] ELSE ids END AS obs_ids FROM c
   custom_silicon_share:
     description: Non-Nvidia designers' share of cumulative AI compute shipped, in H100-equivalents, at each complete quarter end (Epoch chip sales).
     rationale: Custom silicon share is the leading indicator of Nvidia rent decay.

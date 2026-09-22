@@ -2510,4 +2510,156 @@ observations:
     basis: reported
     raw_snippet: "Mercor doubles to $2B gross revenue run rate as AI labs buy expert data"
     coding: "Score 2 on the procurement rubric: the headline attributes the growth to AI labs buying expert data, without a named contract."
-
+  # --- Part 11 step 6: the outlook's event ledgers (checking as a category, insurers' exclusions, platforms and outside agents), ChatGPT's users and subscribers, and Cloudflare's crawl readings. Each fetched 22 Sep 2026 ---
+  - series_key: evidence.ai_evaluation_market.for.pt
+    source_id: comet_blog
+    value_text: Gartner publishes a Market Guide for AI evaluation and observability platforms (2 Feb 2026)
+    unit: event
+    as_of_date: '2026-02-02'
+    published_date: '2026-02-17'
+    url: https://www.comet.com/site/blog/gartner-market-guide-february2026/
+    tier: 7
+    basis: company_stated
+    raw_snippet: We are excited to announce that Comet has been included as a Representative Vendor in the Gartner Market Guide for AI Evaluation and Observability Platforms, published February 2, 2026, for our flagship product, Opik.
+    note: A vendor listed in the guide announcing it; Gartner's own page is for its clients. Evidence that checking AI's work is being sold as its own category.
+  - series_key: evidence.insurer_ai_exclusions.for.pt
+    source_id: big_i
+    value_text: ISO's generative-AI exclusion endorsements for general liability take effect (January 2026)
+    unit: event
+    as_of_date: '2026-01-01'
+    published_date: '2025-10-21'
+    url: https://www.independentagent.com/vu_resource/verisk-to-roll-out-new-general-liability-exclusions-for-generative-ai-exposures/
+    tier: 5
+    basis: reported
+    raw_snippet: Verisk’s ISO Core Lines and Emerging Issues teams developed new general liability endorsements that allow carriers to exclude generative AI exposures.
+    note: Verisk's ISO forms CG 40 47, CG 40 48 and CG 35 08, edition date January 2026; optional, so each insurer chooses whether to attach them.
+  - series_key: evidence.insurer_ai_exclusions.for.pt
+    source_id: claims_journal
+    value_text: An insurance lawyer reports carriers increasingly filing to use ISO's generative-AI exclusions (Jul 2026)
+    unit: event
+    as_of_date: '2026-07-20'
+    published_date: '2026-07-20'
+    url: https://www.claimsjournal.com/news/national/2026/07/20/338950.htm
+    tier: 5
+    basis: reported
+    raw_snippet: She has seen carriers increasingly submit filings with state insurance regulators to be able to use three ISO endorsements.
+    note: Claims Journal, 20 Jul 2026, quoting an attorney who practises in the cyber space.
+  - series_key: evidence.agent_access_fences.for.pt
+    source_id: insurance_journal
+    entity_id: amzn
+    value_text: Amazon sues Perplexity to stop its Comet browser's agent shopping on Amazon (Nov 2025)
+    unit: event
+    as_of_date: '2025-11-04'
+    published_date: '2025-11-05'
+    url: https://www.insurancejournal.com/news/national/2025/11/05/846503.htm
+    tier: 5
+    basis: reported
+    raw_snippet: In the suit, Amazon accused Perplexity of covertly accessing private Amazon customer accounts through its Comet browser and associated AI agent, and of disguising automated activity as human browsing.
+    note: 'Reuters via Insurance Journal: filed in the U.S. District Court for the Northern District of California.'
+  - series_key: evidence.agent_access_fences.context.pt
+    source_id: geekwire
+    entity_id: amzn
+    value_text: A court bars Perplexity's agent from password-protected parts of Amazon's site, stayed for an appeal (Mar 2026)
+    unit: event
+    as_of_date: '2026-03-09'
+    published_date: '2026-03-10'
+    url: https://www.geekwire.com/2026/judge-blocks-perplexitys-ai-bot-from-shopping-on-amazon-in-early-test-of-agentic-commerce/
+    tier: 5
+    basis: reported
+    raw_snippet: A federal judge in San Francisco granted Amazon a preliminary injunction Monday blocking Perplexity from using its Comet browser’s AI agent to access password-protected sections of the Amazon website to shop on behalf of customers.
+    note: 'GeekWire, 10 Mar 2026: a preliminary injunction in the case already counted, stayed seven days for an appeal; context, not a second move by the platform.'
+  - series_key: evidence.agent_access_fences.context.pt
+    source_id: cnbc
+    value_text: Walmart announces a deal with OpenAI to let shoppers buy through ChatGPT (Oct 2025)
+    unit: event
+    as_of_date: '2025-10-14'
+    published_date: '2025-10-14'
+    url: https://www.cnbc.com/2025/10/14/walmart-openai-chatgpt-shopping.html
+    tier: 5
+    basis: reported
+    raw_snippet: Walmart said Tuesday that it has reached a deal with OpenAI to allow shoppers to buy items directly through ChatGPT.
+    note: 'CNBC, 14 Oct 2025: a deal with one AI company, announced without a date for when shoppers could start; context, not yet an opening to outside agents.'
+  - series_key: usage.openai_chatgpt.weekly_active_users.pt
+    source_id: techcrunch
+    entity_id: openai
+    value: 900000000
+    unit: users
+    as_of_date: '2026-02-27'
+    published_date: '2026-02-27'
+    url: https://techcrunch.com/2026/02/27/chatgpt-reaches-900m-weekly-active-users/
+    tier: 5
+    basis: reported
+    raw_snippet: ChatGPT has reached 900 million weekly active users, OpenAI announced Friday, putting the AI chatbot within striking distance of 1 billion.
+    note: OpenAI's own figure, announced with its funding round and reported by TechCrunch.
+  - series_key: usage.openai_chatgpt.paying_subscribers.pt
+    source_id: techcrunch
+    entity_id: openai
+    value: 50000000
+    unit: subscribers
+    as_of_date: '2026-02-27'
+    published_date: '2026-02-27'
+    url: https://techcrunch.com/2026/02/27/chatgpt-reaches-900m-weekly-active-users/
+    tier: 5
+    basis: reported
+    raw_snippet: OpenAI also shared that it now has 50 million paying subscribers.
+    note: OpenAI's own figure, reported by TechCrunch; OpenAI's post also counts paying business users separately.
+  - series_key: crawl.anthropic.crawl_to_refer.pt
+    source_id: cloudflare_blog
+    entity_id: anthropic
+    value: 70900
+    unit: ratio
+    as_of_date: '2025-06-26'
+    published_date: '2025-07-01'
+    url: https://blog.cloudflare.com/ai-search-crawl-refer-ratio-on-radar/
+    tier: 3
+    basis: reported
+    raw_snippet: the ratios range from Anthropic’s 70,900:1 down to Mistral’s 0.1:1.
+    note: 'Cloudflare Radar, week of 19-26 June 2025: HTML pages crawled for each page referral sent back. Claude''s app sends no Referer header, so Cloudflare says the ratio may be overstated, by an unclear amount.'
+  - series_key: crawl.anthropic.crawl_to_refer.pt
+    source_id: cloudflare_blog
+    entity_id: anthropic
+    value: 50000
+    unit: ratio
+    as_of_date: '2025-08-07'
+    published_date: '2025-08-28'
+    url: https://blog.cloudflare.com/ai-crawler-traffic-by-purpose-and-industry/
+    tier: 3
+    basis: reported
+    raw_snippet: For the default view, Anthropic had the highest crawl-to-refer ratio at nearly 50,000:1, followed by OpenAI at 887:1 and Perplexity at 118:1.
+    note: Cloudflare Radar, first week of August 2025, all industries.
+    coding: '''nearly 50,000:1'' stored as 50,000.'
+  - series_key: crawl.openai.crawl_to_refer.pt
+    source_id: cloudflare_blog
+    entity_id: openai
+    value: 887
+    unit: ratio
+    as_of_date: '2025-08-07'
+    published_date: '2025-08-28'
+    url: https://blog.cloudflare.com/ai-crawler-traffic-by-purpose-and-industry/
+    tier: 3
+    basis: reported
+    raw_snippet: For the default view, Anthropic had the highest crawl-to-refer ratio at nearly 50,000:1, followed by OpenAI at 887:1 and Perplexity at 118:1.
+    note: Cloudflare Radar, first week of August 2025, all industries.
+  - series_key: crawl.perplexity.crawl_to_refer.pt
+    source_id: cloudflare_blog
+    entity_id: perplexity
+    value: 118
+    unit: ratio
+    as_of_date: '2025-08-07'
+    published_date: '2025-08-28'
+    url: https://blog.cloudflare.com/ai-crawler-traffic-by-purpose-and-industry/
+    tier: 3
+    basis: reported
+    raw_snippet: For the default view, Anthropic had the highest crawl-to-refer ratio at nearly 50,000:1, followed by OpenAI at 887:1 and Perplexity at 118:1.
+    note: Cloudflare Radar, first week of August 2025, all industries.
+  - series_key: crawl.all_crawlers.ai_training_share.pt
+    source_id: cloudflare_blog
+    value: 0.52
+    unit: share
+    as_of_date: '2026-06-30'
+    published_date: '2026-07-01'
+    url: https://blog.cloudflare.com/agentic-internet-bot-report/
+    tier: 3
+    basis: reported
+    raw_snippet: 52% of crawler requests are now for AI training as of June 2026, up from 22% in Spring 2025.
+    note: 'Cloudflare Radar: the share of requests from crawlers Cloudflare identifies by purpose that are for AI training, June 2026.'

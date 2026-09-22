@@ -4,22 +4,24 @@ import { Mark, Marks, Plot } from "./chart";
 import type { ContextDoc } from "@/lib/data";
 import { fmt } from "@/lib/format";
 
-const LINE = [{ c: "var(--s1)", dash: undefined }, { c: "var(--s2)", dash: "5 3" }, { c: "var(--s2)", dash: "1.5 3" }];
-const style = (i: number) => LINE[i % LINE.length]; // a fourth line repeats the first style; the key and labels still name it
+const LINE = [
+  { c: "var(--s1)", dash: undefined }, { c: "var(--s2)", dash: "5 3" }, { c: "var(--s1)", dash: "1.5 3" }, { c: "var(--s2)", dash: "7 2 1.5 2" },
+];
+const style = (i: number) => LINE[i % LINE.length]; // a fifth line repeats the first style; the key and labels still name it
 const link = "underline decoration-grid underline-offset-2 hover:decoration-ink";
 
-// Official statistics read beside the claims about what happens next: no status, one axis per figure. A point computed
+// Official statistics and filings read beside the claims about what happens next: no status, one axis per figure. A point computed
 // from other rows (a year-on-year change, a share) links to its own row in the table below, which links those rows.
 // A line is not drawn across a missing period.
-export function ContextFigures({ doc }: { doc: ContextDoc }) {
-  return <>{doc.figures.map((f) => <ContextFigure key={f.id} f={f} />)}</>;
+export function ContextFigures({ figures }: { figures: ContextDoc["figures"] }) {
+  return <>{figures.map((f) => <ContextFigure key={f.id} f={f} />)}</>;
 }
 
 function ContextFigure({ f }: { f: ContextDoc["figures"][number] }) {
   return (
     <Figure
       title={f.title}
-      note="official statistics · each dot links to its row"
+      note={`${f.note} · each dot links to its row`}
       stamps={f.stamps}
       keys={f.lines.length > 1 ? <>{f.lines.map((ln, i) => (
         <Key key={ln.label} swatch={<svg width="18" height="10" aria-hidden><line x1="0" x2="18" y1="5" y2="5" stroke={style(i).c} strokeWidth="1.75" strokeDasharray={style(i).dash} /></svg>}>{ln.label}</Key>

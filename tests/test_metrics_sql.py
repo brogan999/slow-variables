@@ -577,3 +577,78 @@ def test_the_canaries_spread_has_its_least_exposed_control():
     ]
     got = {q: (round(v, 1), ids) for _, q, v, ids in run("canaries_junior_senior_gap", rows)}
     assert got == {"most_exposed": (-16.3, ["y5", "o5"]), "least_exposed": (4.0, ["y1", "o1"])}
+
+
+def test_open_share_counts_models_with_a_repository_and_keeps_the_last_day_of_the_week():
+    day = {"2026-09-14": (30, 20, 25, 15, 10), "2026-09-16": (40, 20, 20, 10, 10)}  # a Monday and a Wednesday
+    rows = [
+        (f"t{d[-2:]}{m}", f"openrouter_rankings.{m}.tokens.d", m, d, float(v), "")
+        for d, vs in day.items()
+        for m, v in zip(("a", "b", "c", "d", "e"), vs)
+    ]
+    rows += [(f"h{m}", f"openrouter.{m}.hugging_face_id.pt", m, "2026-08-01", None, "") for m in ("a", "b")]
+    got = run("open_share_of_routed_tokens", rows)
+    assert [(str(d), v) for d, v, _ in got] == [("2026-09-16", 0.6)]
+    assert {"ha", "hb", "t16a", "t16e"} <= set(got[0][2])  # the repositories that made two of them open are cited
+
+
+def test_backlog_is_read_against_the_four_fiscal_quarters_to_its_date_with_a_filled_fourth():
+    rows = [
+        ("q1", "sec.x.revenue.q", "x", "2025-03-31", 25.0, "2025-01-01"),
+        ("q2", "sec.x.revenue.q", "x", "2025-06-30", 25.0, "2025-04-01"),
+        ("q3", "sec.x.revenue.q", "x", "2025-09-30", 25.0, "2025-07-01"),
+        ("fy", "sec.x.revenue.fy", "x", "2025-12-31", 110.0, "2025-01-01"),  # its fourth quarter is 35
+        ("q5", "sec.x.revenue.q", "x", "2026-03-31", 30.0, "2026-01-01"),
+        ("r3", "sec.x.rpo.q", "x", "2025-09-30", 200.0, None),  # three quarters behind it: no reading
+        ("r4", "sec.x.rpo.q", "x", "2025-12-31", 220.0, None),
+        ("r5", "sec.x.rpo.q", "x", "2026-03-31", 230.0, None),
+    ]
+    got = _periods(rows).execute(METRICS["rpo_to_trailing_revenue"]["sql"]).fetchall()
+    assert sorted((str(d), e, round(v, 4)) for d, e, v, _ in got) == [("2025-12-31", "x", 2.0), ("2026-03-31", "x", 2.0)]
+    # a quarter filed twice (a restated row under another id) and a missing one: four rows, three quarter ends
+    dup = [r for r in rows if r[0] != "q3"] + [("q2b", "sec.x.revenue.q", "x", "2025-06-30", 25.0, "2025-04-01")]
+    got = _periods(dup).execute(METRICS["rpo_to_trailing_revenue"]["sql"]).fetchall()
+    assert not [d for d, *_ in got if str(d) == "2026-03-31"]
+
+
+def test_the_premium_is_the_median_price_of_the_cheapest_closed_model_as_capable_as_each_open_one():
+    opens = {"o1": (50, 1.0), "o2": (40, 0.5), "o3": (30, 0.5), "o4": (20, 0.2), "o5": (10, 0.1)}
+    closeds = {"c1": (55, 10.0), "c2": (45, 3.0), "c3": (25, 0.4)}
+    rows = [(f"g{m}", f"epoch_bench.{m}.eci_{'open' if m[0] == 'o' else 'closed'}.pt", m, "2026-01-01", 1.0, "") for m in (*opens, *closeds)]
+    rows += [(f"i{m}", f"aa.{m}.intelligence_index.pt", m, "2026-01-01", float(v), "") for m, (v, _) in {**opens, **closeds}.items()]
+    rows += [(f"p{m}", f"aa.{m}.price_blended_usd_per_mtok.pt", m, "2026-09-10", usd, "") for m, (_, usd) in {**opens, **closeds}.items()]
+    # rivals: o1 -> c1 (10x), o2 -> c2 (6x), o3 -> c2 (6x), o4 -> c3 (2x), o5 -> c3 (4x); median 6
+    rows += [("pc2b", "aa.c2.price_blended_usd_per_mtok.pt", "c2", "2026-09-20", 1.0, "")]  # c2 cuts its price: o2, o3 -> 2x, median 2
+    got = [(str(d), v, ids) for d, v, ids in run("closed_over_open_price_premium", rows)]
+    assert [(d, v) for d, v, _ in got] == [("2026-09-10", 6.0), ("2026-09-20", 2.0)]
+    ids = got[1][2]
+    assert ids == sorted(set(ids)) and {"go1", "gc1", "po1", "io1", "pc2b"} <= set(ids)  # each row once, groupings cited
+    top = rows + [("go9", "epoch_bench.o9.eci_open.pt", "o9", "2026-01-01", 1.0, ""), ("io9", "aa.o9.intelligence_index.pt", "o9", "2026-01-01", 99.0, ""),
+                  ("po9", "aa.o9.price_blended_usd_per_mtok.pt", "o9", "2026-09-10", 1.0, "")]
+    assert [(str(d), v) for d, v, _ in run("closed_over_open_price_premium", top)] == [("2026-09-10", 6.0), ("2026-09-20", 2.0)]  # no rival: left out
+
+
+def test_paid_share_pairs_subscribers_and_weekly_users_stated_on_one_date():
+    rows = [
+        ("s1", "usage.openai_chatgpt.paying_subscribers.pt", "openai_chatgpt", "2026-02-27", 50e6, ""),
+        ("u1", "usage.openai_chatgpt.weekly_active_users.pt", "openai_chatgpt", "2026-02-27", 900e6, ""),
+        ("u0", "usage.openai_chatgpt.weekly_active_users.pt", "openai_chatgpt", "2025-10-06", 800e6, ""),  # no subscribers then
+    ]
+    got = run("chatgpt_paid_share", rows)
+    assert [(str(d), round(v, 4), ids) for d, v, ids in got] == [("2026-02-27", 0.0556, ["s1", "u1"])]
+
+
+def test_ledger_counts_events_for_and_against_and_falls_as_they_age_out():
+    rows = [
+        ("f1", "evidence.agent_access_fences.for.pt", "agent_access_fences", "2025-01-04", None, ""),
+        ("f2", "evidence.agent_access_fences.for.pt", "agent_access_fences", "2025-03-09", None, ""),
+        ("c1", "evidence.agent_access_fences.context.pt", "agent_access_fences", "2025-03-10", None, ""),  # context: not counted
+        ("x1", "evidence.safety_brake_events.for.pt", "safety_brake_events", "2025-08-07", None, ""),  # another ledger
+    ]
+    got = sorted((str(d), s, v, ids) for d, t, s, v, ids in run("ledger_events_12m", rows))
+    assert got == [
+        ("2025-01-04", "for", 1, ["f1"]),
+        ("2025-03-09", "for", 2, ["f1", "f2"]),
+        ("2026-01-04", "for", 1, ["f2"]),  # the first ages out
+        ("2026-03-09", "for", 0, ["f2"]),  # the window is empty: the reading cites the event that left it
+    ]

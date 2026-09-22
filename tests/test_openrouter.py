@@ -11,6 +11,12 @@ BODY = json.dumps(
             {"id": "openai/gpt-5.4:batch", "pricing": {"prompt": "0.00000125", "completion": "0.0000075"}},
             {"id": "nex-agi/nex-n2.5-mini:free", "pricing": {"prompt": "0", "completion": "0"}},
             {"id": "deepseek/deepseek-v4-pro", "pricing": {"prompt": "0.0000003", "completion": "0.0000012"}},
+            {"id": "z-ai/glm-5.3", "canonical_slug": "z-ai/glm-5.3-20260816", "created": 1755302400,
+             "hugging_face_id": "zai-org/GLM-5.3", "pricing": {"prompt": "0.0000004", "completion": "0.0000016"}},
+            {"id": "z-ai/glm-5.3:free", "canonical_slug": "z-ai/glm-5.3-20260816", "created": 1755302400,
+             "hugging_face_id": "zai-org/GLM-5.3", "pricing": {"prompt": "0", "completion": "0"}},
+            {"id": "openai/gpt-5.4-pro", "canonical_slug": "openai/gpt-5.4-pro-20260801", "created": 1754006400,
+             "hugging_face_id": None, "pricing": {"prompt": "0", "completion": "0"}},
         ]
     }
 ).encode()
@@ -33,7 +39,17 @@ def test_metr_alias_and_vendor_filter(tmp_path):
         None,
         "2026-09-10",
     )
-    assert len(rows) == 4 and all(":" not in r.raw_snippet for r in rows)
+    assert len([r for r in rows if r.value_numeric]) == 4 and all(":" not in r.raw_snippet for r in rows)
+
+
+def test_an_open_model_is_named_by_its_repository_under_its_dated_slug(tmp_path):
+    rows = [r for r in _rows(tmp_path) if r.series_key.endswith(".hugging_face_id.pt")]
+    assert [(r.series_key, r.value_text, r.as_of_date.isoformat()) for r in rows] == [
+        ("openrouter.z_ai_glm_5_3_20260816.hugging_face_id.pt", "zai-org/GLM-5.3", "2026-09-10")
+    ]  # the key the token rankings use, dated when first seen; its :free variant and a closed model add no row
+    prior = {"series_key": "openrouter.z_ai_glm_5_3_20260816.hugging_face_id.pt", "as_of_date": "2026-09-01", "value_numeric": None}
+    (again,) = [r for r in _rows(tmp_path, [prior]) if r.series_key.endswith(".hugging_face_id.pt")]
+    assert again.as_of_date.isoformat() == "2026-09-01"  # a later night reuses the first sighting, so the row is one row
 
 
 def test_unchanged_price_reuses_the_ledger_date(tmp_path):
