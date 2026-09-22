@@ -38,27 +38,35 @@ def _run(test: dict[str, Any] | None, f: dict[str, dict[str, Any] | None]) -> bo
     return _holds({k: v for k, v in test.items() if k != "fact"}, reading["value"], values)
 
 
-def state(claim: dict[str, Any], f: dict[str, dict[str, Any] | None]) -> str:
+def state(claim: dict[str, Any], f: dict[str, dict[str, Any] | None], today: date | None = None) -> str:
+    """A claim with a `due` date is one about reaching a level by then: short of it before the date, it cannot be
+    tested yet; past the date, it fails."""
     own, rival = _run(claim.get("test"), f), _run(claim.get("rival_test"), f)
     if own is None:
         return "untestable"
     if own and rival:
         return "both"  # the reading both sides expect settles nothing
+    due = claim.get("due")
+    if not own and due and (today or date.today()) <= date.fromisoformat(str(due)):
+        return "untestable"
     return "holding" if own else "failing"
 
 
-def claims(spec: dict[str, Any], f: dict[str, dict[str, Any] | None]) -> list[dict[str, Any]]:
+def claims(spec: dict[str, Any], f: dict[str, dict[str, Any] | None], today: date | None = None) -> list[dict[str, Any]]:
     positions = {p["id"]: p for p in spec.get("positions") or []}
     out = []
     for c in spec.get("claims") or []:
         p = positions[c["position"]]
-        s = state(c, f)
+        s = state(c, f, today)
         out.append(
             {
                 **{k: c[k] for k in ("id", "position", "text", "falsifier") if k in c},
                 "row": c.get("row"),
                 "stage": c.get("stage"),
                 "horizon_years": c.get("horizon_years"),
+                "due": str(c["due"]) if c.get("due") else None,
+                "test": c.get("test"),
+                "rival_test": c.get("rival_test"),
                 "fact": (c.get("test") or {}).get("fact"),
                 "rival": p.get("rival"),
                 "folio": p["folio"],
@@ -77,7 +85,7 @@ def build(s: Any, today: date | None = None) -> dict[str, Any]:
         return {}
     today = today or date.today()
     f = facts(s, spec, today)
-    cl = claims(spec, f)
+    cl = claims(spec, f, today)
     return {
         "as_of": min(max((x["as_of"] for x in f.values() if x and x["as_of"]), default=today.isoformat()), today.isoformat()),
         "essay": ESSAY.read_text() if ESSAY.exists() else "",

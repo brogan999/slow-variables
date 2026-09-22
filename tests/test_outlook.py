@@ -17,6 +17,14 @@ def test_a_claim_holds_fails_or_cannot_be_tested():
     assert state({"falsifier": "Proved wrong if X."}, F) == "untestable"
 
 
+def test_a_level_due_by_a_date_cannot_fail_before_it():
+    from datetime import date
+
+    c = {"test": {"fact": "rli", "gt": 0.5}, "due": "2027-12-31"}
+    assert state(c, F, date(2026, 9, 22)) == "untestable" and state(c, F, date(2028, 1, 1)) == "failing"
+    assert state({**c, "test": {"fact": "rli", "gt": 0.2}}, F, date(2026, 9, 22)) == "holding"  # reached early
+
+
 def test_a_reading_both_sides_expect_settles_nothing():
     c = {"test": {"fact": "gap", "gt": 2}, "rival_test": {"fact": "gap", "gt": 1}}
     assert state(c, F) == "both"
