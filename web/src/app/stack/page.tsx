@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { StatusChip } from "@/components/StatusChip";
+import { Chip, StatusChip } from "@/components/StatusChip";
 import { stack } from "@/lib/data";
 
 export const metadata = { title: "Stack" };
@@ -24,7 +24,7 @@ export default function StackPage() {
                     <Link href={`/stack/${s.id}`} className="font-medium hover:underline">{s.order}. {s.name}</Link>
                     <div className="mt-1 text-xs text-ink-2">{s.entities.length} entit{s.entities.length === 1 ? "y" : "ies"} · {verified} verified{s.indicators.length ? ` · ${s.indicators.length} indicator${s.indicators.length === 1 ? "" : "s"}` : ""}</div>
                     {s.indicators.length ? <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-1 text-xs">{s.indicators.map((c) => <span key={c.id}><Link href={c.published ? `/indicators/${c.id}` : "#"} className="hover:underline">{c.name}</Link> <StatusChip status={c.published ? c.status : null} /></span>)}</div> : null}
-                    <p className="mt-1.5 text-xs text-muted truncate">{s.entities.slice(0, 8).map((e) => e.name).join(", ")}{s.entities.length > 8 ? ", …" : ""}</p>
+                    {s.entities.length ? <div className="mt-2 flex flex-wrap gap-1.5">{s.entities.slice(0, 8).map((e) => <Chip key={e.id} name={e.name} />)}{s.entities.length > 8 ? <Link href={`/stack/${s.id}`} className="self-center text-xs text-ink-2 underline decoration-axis underline-offset-2">all companies</Link> : null}</div> : null}
                   </li>
                 );
               })}

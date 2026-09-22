@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Geist, JetBrains_Mono } from "next/font/google";
+import { Archivo, IBM_Plex_Mono, Newsreader } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
 import { ChatDrawer } from "@/components/ChatDrawer";
@@ -9,9 +9,9 @@ import { EVIDENCE } from "@/lib/nav";
 import { meta } from "@/lib/data";
 import { SITE } from "@/lib/site";
 
-const serif = Fraunces({ subsets: ["latin"], style: ["normal", "italic"], axes: ["opsz", "SOFT"], variable: "--font-fraunces", display: "swap" });
-const sans = Geist({ subsets: ["latin"], variable: "--font-geist", display: "swap" });
-const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains-mono", display: "swap" });
+const sans = Archivo({ subsets: ["latin"], variable: "--font-archivo", display: "swap" });
+const serif = Newsreader({ subsets: ["latin"], style: ["normal", "italic"], axes: ["opsz"], variable: "--font-newsreader", display: "swap" });
+const mono = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-plex-mono", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),

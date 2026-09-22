@@ -22,7 +22,7 @@ function Curve({ phase, compact }: { phase: ArgumentDoc["phase"]; compact: boole
       {mark ? (
         <g>
           <line x1={mark[0]} y1={mark[1]} x2={mark[0]} y2="212" stroke="var(--ink)" strokeDasharray="2 3" strokeWidth={compact ? 2 : 1} />
-          <circle cx={mark[0]} cy={mark[1]} r={compact ? 14 : 9} fill="none" stroke="var(--gild)" strokeWidth={compact ? 3 : 2} />
+          <circle cx={mark[0]} cy={mark[1]} r={compact ? 14 : 9} fill="none" stroke="var(--ink)" strokeWidth={compact ? 3 : 2} />
           <circle cx={mark[0]} cy={mark[1]} r={compact ? 7 : 4.5} fill="var(--ink)" />
           <text x={mark[0]} y={mark[1] - (compact ? 26 : 18)} textAnchor="middle" className="font-mono" fontSize={small} fill="var(--ink)">{compact ? "we are here" : "the readings put us here"}</text>
         </g>

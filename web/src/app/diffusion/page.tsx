@@ -13,7 +13,6 @@ export default function DiffusionPage() {
   const d = diffusion();
   const idx = obsIndex();
   const verdicts = thesis();
-  const test = verdicts.find((v) => v.id === "normal_tech_falsified");
   return (
     <div className="flex flex-col gap-16">
       <PageHeader eyebrow="How fast · the diffusion lens" title={argument().headlines.diffusion.claim}

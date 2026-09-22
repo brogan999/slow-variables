@@ -27,7 +27,7 @@ function inline(text: string, obsIndex: Record<string, string>) {
 export function MemoBody({ body, obsIndex }: { body: string; obsIndex: Record<string, string> }) {
   const blocks = body.split(/\n{2,}/).map((b) => b.trim()).filter(Boolean);
   return (
-    <div className="prose-folio drop-cap">
+    <div className="prose-folio">
       {blocks.map((b, i) => {
         if (b.startsWith("## ")) return <h2 key={i} id={slug(b.slice(3))} className="display text-[1.625rem] leading-tight border-t border-grid pt-8 !mt-10 scroll-mt-6">{b.slice(3)}</h2>;
         if (b.startsWith("# ")) return <h2 key={i} className="display text-2xl leading-tight mt-6">{b.slice(2)}</h2>;

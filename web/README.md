@@ -18,7 +18,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to self-host its three font families at build time.
 
 ## Learn More
 
@@ -37,4 +37,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## Design tokens
 
-Colours live in `src/app/globals.css` as raw variables (`--background`, `--surface`, `--ink`, `--ink-2`, `--muted`, `--grid`, `--axis`, `--fast`, `--slow`, `--s1`, `--s2`) with a light block on `:root` and a dark block on `.dark`; the `@theme inline` block maps them onto both the site's own utilities (`text-ink-2`, `bg-surface`, `text-fast`) and shadcn's semantic names. Two rules: `--muted` is a **text** colour here, so any generated shadcn component that uses `bg-muted` as a surface is edited to `bg-surface-2`; and status is never colour alone (icon + word, see `StatusChip`). Fonts come from `next/font` (Instrument Serif for display, Instrument Sans for text, JetBrains Mono for figures via the `num` utility). Components under `src/components/ui/` are shadcn/Magic UI registry files (`components.json`); everything else is hand-built.
+Colours live in `src/app/globals.css` as raw variables on `:root` (light only): the ground and surfaces (`--background`, `--surface`, `--surface-2`), text (`--ink`, `--ink-2`, `--muted`), rules (`--grid`, `--axis`), the three role hues that carry meaning and nothing else (`--fast` violet for faster or concentrating, `--slow` teal for slower or dispersing, `--bind` orange for how tightly an input binds, with the one-hue ramp `--tight-1..5`), and a slate identity ramp for series (`--s1`, `--s2`, `--s3`). The role hues were validated together for colour-blind separation on white; text is always ink, and a role hue appears only on a mark, a glyph or a border. The `@theme inline` block maps them onto the site's utilities (`text-ink-2`, `bg-surface`, `border-fast`, `bg-tight-3`) and shadcn's semantic names; `--muted` is a **text** colour, so a generated shadcn component that uses `bg-muted` as a surface is edited to `bg-surface-2`. Status is never colour alone (glyph + word, see `StatusChip`). Fonts come from `next/font`: Archivo for headings and UI, Newsreader for reading text, IBM Plex Mono for figures (the `num` utility); the share image loads static copies from `src/app/fonts/`. Components under `src/components/ui/` are shadcn/Magic UI registry files (`components.json`); everything else is hand-built.
