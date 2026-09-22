@@ -22,9 +22,10 @@
 | baseten_blog | Baseten blog and research posts | Baseten | html | 7 | irregular | Baseten; short quotation | Baseten |
 | baseten_research_watch | Baseten research (page watch) | Baseten | html | 7 | weekly | Publisher terms; change notices only | Baseten |
 | bbd | Bick–Blandin–Deming Real-Time Population Survey (via FRED) | Federal Reserve Bank of St. Louis | csv | 6 | quarterly | FRED terms of use; RPS by Bick, Blandin & Deming | Bick, Blandin & Deming, Real-Time Population Survey, via FRED |
-| bls | BLS productivity and costs; total factor productivity | U.S. Bureau of Labor Statistics | api | 4 | quarterly | Public domain (U.S. government) | U.S. Bureau of Labor Statistics, Productivity and Costs (PRS85006092/93), Total Factor Productivity (MPU4910012) |
+| bls | BLS productivity and costs; total factor productivity | U.S. Bureau of Labor Statistics | api | 4 | quarterly | Public domain (U.S. government) | U.S. Bureau of Labor Statistics, Productivity and Costs (PRS85006092/93, PRS85006173), Total Factor Productivity (MPU4910012) |
 | cait | California AI-Unemployment Tracker (CAIT) | California Policy Lab with California EDD | csv | 6 | monthly | California Policy Lab; monthly claims workbook, cited as the Lab suggests | Hyman, von Wachter et al. (2026), Tracking AI-Related Job Loss Using Unemployment Insurance Claims Data in California, California Policy Lab |
 | canaries | Canaries Dashboard data (by exposure) | Stanford Digital Economy Lab and ADP Research | csv | 6 | monthly | Stanford Digital Economy Lab; free public data, cited as the Lab asks | Stanford Digital Economy Lab and ADP Research, AI Economic Indicators: Canaries Dashboard |
+| canaries_age | Canaries Dashboard data (age by exposure) | Stanford Digital Economy Lab and ADP Research | csv | 6 | monthly | Stanford Digital Economy Lab; free public data, cited as the Lab asks | Stanford Digital Economy Lab and ADP Research, AI Economic Indicators: Canaries Dashboard |
 | census_btos | Census Business Trends and Outlook Survey | U.S. Census Bureau | csv | 4 | biweekly | Public domain (U.S. government) | U.S. Census Bureau, Business Trends and Outlook Survey |
 | cepr_voxeu | CEPR VoxEU columns (via Wayback; cepr.org 403s bots) | CEPR | html | 6 | irregular | CEPR; short quotation | CEPR VoxEU |
 | chicago_booth | Chicago Booth Center for Applied AI | University of Chicago Booth School of Business | html | 6 | irregular | Chicago Booth; short quotation | Chicago Booth |
@@ -65,6 +66,7 @@
 | formd | SEC EDGAR Form D (private offerings) | U.S. Securities and Exchange Commission | formd | 4 | daily | Public domain (U.S. government work) | SEC EDGAR Form D data sets |
 | fortune | Fortune | Fortune Media | html | 5 | irregular | Fortune Media; short quotation | Fortune, 'MIT report: 95% of generative AI pilots at companies are failing' (18 Aug 2025) |
 | fred | FRED (Federal Reserve Economic Data) | Federal Reserve Bank of St. Louis | csv | 6 | quarterly | FRED terms of use; RPS series by Bick, Blandin & Deming | Bick, Blandin & Deming, Real-Time Population Survey, retrieved from FRED |
+| fred_official | FRED (official statistics) | Federal Reserve Bank of St. Louis | csv | 4 | monthly | FRED terms of use; the series are their agencies' public data | Federal Reserve Board, Bureau of Economic Analysis and Bureau of Labor Statistics series, retrieved from FRED |
 | google_research_blog | Google Research blog | Google | html | 7 | irregular | Google; short quotation | Google Research |
 | hal_reliability | HAL AI Agent Reliability Tracker (reliability scores by agent) | Princeton University, HAL | html | 1 | irregular | HAL (Princeton); cited with attribution | HAL: Holistic Agent Leaderboard, AI Agent Reliability Tracker, Princeton University |
 | harvey_blog | Harvey research and insights posts | Harvey | html | 7 | irregular | Harvey; short quotation | Harvey |
@@ -183,6 +185,7 @@
 - Alexander Bick, Adam Blandin, David Deming: Bick–Blandin–Deming Real-Time Population Survey (via FRED)
 - Till von Wachter: California AI-Unemployment Tracker (CAIT)
 - Erik Brynjolfsson, Bharat Chandar, Ruyu Chen, Nela Richardson: Canaries Dashboard data (by exposure)
+- Erik Brynjolfsson, Bharat Chandar, Ruyu Chen, Nela Richardson: Canaries Dashboard data (age by exposure)
 - Xiang Hui, Oren Reshef, Luofeng Zhou: CEPR VoxEU columns (via Wayback; cepr.org 403s bots)
 - Joy Larkin: cleverhack neolab directory (page watch)
 - Jamin Ball: Clouded Judgement (weekly cloud software multiples; retired 11 Sep 2026: the feed refuses cloud runners)

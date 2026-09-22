@@ -1,0 +1,70 @@
+# Context figures (Part 11, section B): official statistics read beside the claims about what happens next, on the
+# adaptation stage's page. They carry no status and test nothing by themselves; each caption says what it is
+# context for. One unit per figure, so every line on it shares one axis; `zero` keeps zero on the axis where the
+# sign is the point (a year-on-year change). A line reads a metric's derived rows or one series' observations; a
+# name that matches neither is an error, not an empty line.
+# The figures start in 2022, the year ChatGPT was released: the pandemic's swings would otherwise set the scale.
+start: "2022-01-01"
+bucket: adaptation
+figures:
+  - id: power_and_output
+    title: Electricity generated against real output, year on year
+    unit: share
+    zero: true
+    lines:
+      - {metric: electricity_generation_yoy, label: electricity generated}
+      - {metric: real_gdp_yoy, label: real output}
+    caption: >-
+      Electricity generated is the Federal Reserve's index of output from US power plants, each month's last twelve
+      months against the twelve before, since a single month swings with the weather; real output is gross domestic
+      product after inflation, each quarter against the same quarter a year before, from the Bureau of Economic
+      Analysis. If building and running data centres were pulling power demand ahead of the rest of the economy,
+      electricity would grow faster than output.
+  - id: output_per_person
+    title: Real output per person, year on year
+    unit: share
+    zero: true
+    lines:
+      - {metric: real_gdp_per_capita_yoy, label: output per person}
+    caption: >-
+      Gross domestic product per person after inflation, from the Bureau of Economic Analysis. Economists who expect
+      AI to change the rate of growth itself look for this to climb well above its recent pace; those who expect an
+      ordinary new technology expect it to stay near that pace for years.
+  - id: pay_and_share
+    title: Labour's share of output and real pay, year on year
+    unit: share
+    zero: true
+    lines:
+      - {metric: bls_labor_share_yoy, label: labour's share}
+      - {metric: real_weekly_earnings_yoy, label: median real pay}
+    caption: >-
+      Labour's share is the part of business output paid to workers as wages and benefits (the Bureau of Labor
+      Statistics' index for nonfarm businesses); median real pay is the usual weekly earnings of the middle
+      full-time worker, after inflation. If machines took over work and its income went to their owners, labour's
+      share would fall while output kept rising. Labour's share is also the reading behind the labour-share
+      indicator on this page.
+  - id: relational_work
+    title: Jobs in private education and health, and in leisure and hospitality, as a share of all payroll jobs
+    unit: share
+    zero: false
+    lines:
+      - {metric: relational_work_share, label: share of payroll jobs}
+    caption: >-
+      Payroll jobs in private education and health services and in leisure and hospitality, as a share of all US
+      payroll jobs, from the Bureau of Labor Statistics; public schools and hospitals count as government jobs, so
+      they sit only in the total. The two sectors stand in, roughly, for work built on people dealing with people,
+      which some economists expect to be in more demand, and better paid, as machines take on other tasks: that view
+      expects this share to rise. Many such jobs sit in other sectors, and not every job in these two is of that
+      kind.
+  - id: hours
+    title: Weekly hours in professional and business services
+    unit: hours
+    zero: false
+    lines:
+      - {series: fred.us.weekly_hours_professional_business.m, label: average weekly hours}
+    caption: >-
+      Average weekly hours paid to all employees in professional and business services, from the Bureau of Labor
+      Statistics: a sector that holds much of the office work most exposed to AI, alongside administrative and waste
+      services. A new tool can first make work more intense before it frees any time, and paid hours falling here
+      would be one sign of time being freed; salaried staff are paid for their contracted hours, so time freed for
+      them would not show.

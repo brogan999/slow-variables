@@ -27,13 +27,13 @@ predictions:
     window_start: 2025-04-15
     window_end: 2030-04-15
     operationalisation: "FDA AI device clearances, Waymo paid rides, and safety-brake events (lab pauses, GPU reallocation) as evidence that high-consequence deployment is gated; a rapid, ungated deployment in a regulated domain would count against it."
-    related_indicators: []
+    related_indicators: [fda_ai_devices_cumulative, waymo_weekly_paid_rides, safety_brake_events]
     proxy_types: [policy, deployment]
     confidence: 75
     counterevidence: "Waymo scaled to hundreds of thousands of paid rides a week; medical-device clearances now exceed a thousand; the safety brakes observed in 2026 were inside labs, not in deployment."
     direction_assessment: "High-consequence deployment still passes through approval and gating: device clearances, robotaxi permits and lab safety pauses."
     magnitude_assessment: "No ungated deployment in high-consequence work has been observed."
-    timing_assessment: "No reading yet separates the claim from its alternative inside the window."
+    timing_assessment: "Inside the window the instruments read a normal pace; the claim fails only if a regulated domain deploys fast and ungated before the window closes."
     published: true
   - id: nk_rsi_external_limits
     ledger: nk
@@ -261,8 +261,8 @@ predictions:
     claim_date: 2024-06-20
     window_start: 2024-06-20
     window_end: 2026-12-31
-    operationalisation: "Capex-to-revenue gap for the stack: Nvidia data-centre run-rate doubled for the rest of the data centre and doubled again for a 50% margin, minus AI ecosystem revenue. Tracked as a gap, not pass/fail, once the capex_to_revenue_stack metric lands."
-    related_indicators: [circular_financing_scale, margin_stack_semis_share, cloud_rpo_backlog]
+    operationalisation: "Capex-to-revenue gap for the stack: Nvidia data-centre run-rate doubled for the rest of the data centre and doubled again for a 50% margin, minus AI ecosystem revenue. Tracked as a gap, not pass/fail, on the capex_to_revenue_stack metric."
+    related_indicators: [capex_to_revenue_stack, circular_financing_scale, margin_stack_semis_share, cloud_rpo_backlog]
     proxy_types: [capital_flow, market_structure]
     confidence: 40
     counterevidence: "Cloud AI revenue is growing (AWS, Google Cloud and Intelligent Cloud segment revenue in the ledger); neither the 'double it twice' multiplier nor the 50% margin assumption is an observed quantity, so the gap is an accounting construct."
@@ -280,7 +280,7 @@ predictions:
     window_start: 2026-07-08
     window_end: 2030-12-31
     operationalisation: "Same gap measure: about $3T of cumulative lifetime revenue required against realised AI revenue."
-    related_indicators: [circular_financing_scale, margin_stack_semis_share]
+    related_indicators: [capex_to_revenue_stack, circular_financing_scale, margin_stack_semis_share]
     proxy_types: [capital_flow]
     confidence: 40
     counterevidence: "The required-revenue figure depends on assumed hardware lifetimes and margins; the labs' run-rates ($65B Anthropic, $40B OpenAI in mid-2026) are growing several-fold a year, which the static gap arithmetic does not project forward."

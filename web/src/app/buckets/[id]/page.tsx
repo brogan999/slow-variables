@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { IndicatorCard } from "@/components/IndicatorCard";
 import { LadderView } from "@/components/LadderView";
+import { ContextFigures } from "@/components/ContextFigure";
 import { JaggedFrontier, ReliabilityGap } from "@/components/Signposts";
-import { bucket, index, ladder, obsIndex, signposts } from "@/lib/data";
+import { bucket, context, index, ladder, obsIndex, signposts } from "@/lib/data";
 
 export const dynamicParams = false;
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
@@ -39,6 +40,15 @@ export default async function BucketPage({ params }: { params: Promise<{ id: str
           </div>
           <JaggedFrontier doc={signposts()} />
           <ReliabilityGap doc={signposts()} />
+        </section>
+      ) : null}
+      {id === context().bucket ? (
+        <section className="flex flex-col gap-6">
+          <div>
+            <h2 className="display text-2xl leading-tight mb-2 mt-2">The wider economy</h2>
+            <p className="text-sm text-ink-2 max-w-[62ch]">Official statistics read beside the claims about what happens next. They carry no status of their own, and none measures AI alone; where one is also the reading behind an indicator on this page, its caption says so.</p>
+          </div>
+          <ContextFigures doc={context()} />
         </section>
       ) : null}
       {id === "return_arrow" ? (

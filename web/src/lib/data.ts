@@ -200,3 +200,13 @@ export type Signposts = {
   reliability: { points: HalPoint[]; trends: HalTrend[]; x: { ticks: Tick[] }; y: Axis; stamps: Stamp[]; chart_sources: ChartSourcesT } | null;
 };
 export const signposts = () => read<Signposts>("signposts.json");
+
+export type ContextPoint = {
+  as_of: string; value: number; obs_ids: string[]; href: string | null; x: number; y: number; joined: boolean;
+  id?: string; inputs?: { label: string; href: string | null }[];
+};
+export type ContextDoc = {
+  bucket: string; start: string;
+  figures: { id: string; title: string; unit: string; caption: string; lines: { label: string; points: ContextPoint[]; label_y: number }[]; x: { ticks: Tick[] }; y: Axis; stamps: Stamp[]; chart_sources: ChartSourcesT }[];
+};
+export const context = () => read<ContextDoc>("context.json");

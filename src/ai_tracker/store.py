@@ -896,6 +896,7 @@ class Store:
         _write(out / "stack.json", self._stack(cards))
         _write(out / "lens" / "ladder.json", self._ladder())
         _write(out / "signposts.json", self._signposts())
+        _write(out / "context.json", self._context())
         _write(out / "analyses.json", self._analyses())
         from .memo import load_memos
 
@@ -1522,6 +1523,109 @@ class Store:
                 [i for p in pts for i in p["obs_ids"]], "hal_trend_per_year"
             ),
         }
+
+    def _context(self) -> dict[str, Any]:
+        """Context figures (seed/context.yaml): official series drawn beside the outlook's claims, with no status.
+        Every line on a figure shares one axis. A point read from a metric is a derived row, so its record is its
+        row in the figure's own table (`#d-<derived id>`), which links the observations it was computed from: each
+        row by series and month, or the series page where a window holds more than a few. A line does not bridge a
+        missing period (`joined` false). A name in the seed that matches no metric or series is an error."""
+        spec = yaml.safe_load((SEED / "context.yaml").read_text())
+        known = set((yaml.safe_load(Path("semantic/metrics.yaml").read_text()) or {}).get("metrics", {}))
+        start, figures = date.fromisoformat(spec["start"]), []
+        for f in spec["figures"]:
+            lines = []
+            for ln in f["lines"]:
+                if "metric" in ln:
+                    if ln["metric"] not in known:
+                        raise ValueError(f"context.yaml {f['id']}: no metric {ln['metric']}")
+                    rows = [
+                        d for d in self.derived_for(ln["metric"], ln.get("dims")) if d.as_of_date >= start
+                    ]
+                    pts = [
+                        {
+                            "as_of": d.as_of_date.isoformat(),
+                            "value": d.value,
+                            "obs_ids": d.input_observation_ids,
+                            "id": d.id,
+                            "href": f"#d-{d.id}",
+                            "inputs": self._input_links(d.input_observation_ids),
+                        }
+                        for d in rows
+                    ]
+                else:
+                    if not self.con.execute(
+                        "SELECT 1 FROM observation_all WHERE series_key = ? LIMIT 1", [ln["series"]]
+                    ).fetchone():
+                        raise ValueError(f"context.yaml {f['id']}: no series {ln['series']}")
+                    pts = [
+                        {"as_of": d.isoformat(), "value": v, "obs_ids": [i], "href": self.href_of([i])}
+                        for i, d, v in self.con.execute(
+                            "SELECT id, as_of_date, value_numeric FROM observations WHERE series_key = ? "
+                            "AND as_of_date >= ? AND value_numeric IS NOT NULL AND NOT coalesce(disputed, false) "
+                            "ORDER BY as_of_date",
+                            [ln["series"], start],
+                        ).fetchall()
+                    ]
+                if pts:  # a metric's rows exist only after `evaluate`; the figure is drawn without the line till then
+                    days = [date.fromisoformat(p["as_of"]).toordinal() for p in pts]
+                    steps = sorted(b - a for a, b in zip(days, days[1:]))
+                    usual = steps[len(steps) // 2] if steps else 0
+                    for k, p in enumerate(pts):  # a gap half again the usual step is a missing period
+                        p["joined"] = k > 0 and days[k] - days[k - 1] <= 1.5 * usual
+                    lines.append({"label": ln["label"], "points": pts})
+            if not lines:
+                continue
+            xa = chart.time_axis([date.fromisoformat(p["as_of"]) for ln in lines for p in ln["points"]])
+            ya = chart.axis([p["value"] for ln in lines for p in ln["points"]], f["unit"], zero=f["zero"])
+            for ln in lines:
+                for p in ln["points"]:
+                    p["x"], p["y"] = (
+                        chart.x(date.fromisoformat(p["as_of"]), xa["lo"], xa["hi"]),
+                        chart.y(p["value"], ya),
+                    )
+            ends = sorted(lines, key=lambda ln: ln["points"][-1]["y"])
+            for ln, y in zip(
+                ends, chart.spread([ln["points"][-1]["y"] for ln in ends], 16.0)
+            ):  # two-line labels
+                ln["label_y"] = y
+            ids = [i for ln in lines for p in ln["points"] for i in p["obs_ids"]]
+            metrics = ", ".join(ln["metric"] for ln in f["lines"] if "metric" in ln)
+            figures.append(
+                {
+                    **{k: f[k] for k in ("id", "title", "unit", "caption")},
+                    "lines": lines,
+                    "x": {"ticks": xa["ticks"]},
+                    "y": {
+                        **{k: ya[k] for k in ("ticks", "unit", "log")},
+                        "chars": max(len(t["label"]) for t in ya["ticks"]),
+                    },
+                    "stamps": sorted({self.stamp_of(ids)} - {None}, key=STAMPS.index),
+                    "chart_sources": self._chart_sources(ids, metrics or None),
+                }
+            )
+        return {"bucket": spec["bucket"], "start": spec["start"], "figures": figures}
+
+    def _input_links(self, ids: list[str]) -> list[dict[str, Any]]:
+        """The rows a derived number was computed from, grouped by series: each row by its series and month where a
+        series gives three or fewer, else the series page with the count (a twelve-month window gives twelve rows)."""
+        rows = self.con.execute(
+            "SELECT id, series_key, as_of_date FROM observation_all WHERE id IN ("
+            + ",".join("?" * len(ids))
+            + ")"
+            " ORDER BY series_key, as_of_date",
+            ids,
+        ).fetchall()
+        by: dict[str, list[tuple[str, date]]] = {}
+        for i, k, d in rows:
+            by.setdefault(k, []).append((i, d))
+        out = []
+        for k, rs in by.items():
+            if len(rs) <= 3:
+                out += [{"label": f"{k} {d:%b %Y}", "href": self.href_of([i])} for i, d in rs]
+            else:
+                out.append({"label": f"{k}, {len(rs)} rows", "href": f"/series/{k}"})
+        return out
 
     def _ladder(self) -> dict[str, Any]:
         """Appendix E rungs with the production and research rows that sit on each, plus the current level."""
