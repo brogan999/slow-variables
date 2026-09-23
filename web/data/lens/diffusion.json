@@ -1412,9 +1412,9 @@
       "high": null,
       "low": null,
       "obs_ids": [
-       "3c4c0eb291611df7"
+       "93f0cbc341ac2f26"
       ],
-      "series_key": "anthropic_ei.global.augmentation_share.pt",
+      "series_key": "anthropic_ei.global.augmentation_share.m",
       "subject": "global",
       "unit": "share",
       "value": 0.5138
@@ -1427,10 +1427,10 @@
      "published": true,
      "source_cluster": "anthropic_ei",
      "spark": {
-      "d": "M1.0,10.3 L32.3,2.0 L63.7,26.0 L95.0,23.5",
+      "d": "M1.0,26.0 L95.0,2.0",
       "end": [
        95.0,
-       23.5
+       2.0
       ]
      },
      "stale_as_of": null,
@@ -2953,6 +2953,23 @@
  "recent_status_events": [
   {
    "author": "claude",
+   "counterevidence_considered": "April read 51.0% on the same monthly series, so both monthly readings sit just above the edge; the weekly readings of 53.3% and 54.5% came from seven-day samples of Claude.ai conversations, so the step between them cannot be read as a trend. One provider's consumer plans, classified by a model.",
+   "created_at": "2026-09-23T00:55:42.953312Z",
+   "evidence_ids": [
+    "0e523d323e77e2ac",
+    "93f0cbc341ac2f26"
+   ],
+   "id": "38644e153e823ae5",
+   "new_conf": 60,
+   "new_status": "emerging",
+   "old_conf": 60,
+   "old_status": "emerging",
+   "reason": "The Economic Index's monthly readings now sit on a series of their own: from its June 2026 release the dataset samples Claude chat and Cowork conversations every day and reports them by calendar month, where earlier releases drew one seven-day sample of Claude.ai conversations, so the two are no longer drawn as one line. The reading is unchanged: augmentation is 51.4% of classified conversations in May 2026, within 5% of the normal band's edge at 50%, so the band-edge rule still holds the status at emerging.",
+   "target_id": "aei_augmentation_share",
+   "target_type": "indicator"
+  },
+  {
+   "author": "claude",
    "counterevidence_considered": "The ledger is kept by hand and has gaps, so its count is a floor; even five quarters inside it will compare a thinner 2025 with a fuller 2026 unless the ledger is searched again under a written rule.",
    "created_at": "2026-09-23T00:10:09.543535Z",
    "evidence_ids": [
@@ -2996,24 +3013,6 @@
    "old_status": "emerging",
    "reason": "The share is now read only on quarters every designer has reported, as the designer-concentration index is: 32.8% at 31 Dec 2025, with all six reported. The earlier reason quoted 26% at the end of March 2026, a quarter only three of the six had reported, so the share appeared to fall seven points; among those three it fell less than half a point, and the full panel's March quarter is not yet known. Over the four quarters to December 2025 the full-panel share rose from 29.6% to 32.8%, which the direction rule reads as dispersing, but Epoch is the one source and not a primary one, so the two-source rule holds the status at emerging.",
    "target_id": "custom_silicon_share",
-   "target_type": "indicator"
-  },
-  {
-   "author": "claude",
-   "counterevidence_considered": "One composite index run by one organisation; open releases often land after internal use, so the lag at release overstates how long a capability was closed.",
-   "created_at": "2026-09-23T00:10:09.543535Z",
-   "evidence_ids": [
-    "0d7f85d31686010b",
-    "4a5ecf6f5e9ad21f",
-    "da57bc3c9519e42e"
-   ],
-   "id": "e3cf6abebfd87a24",
-   "new_conf": 45,
-   "new_status": "emerging",
-   "old_conf": 45,
-   "old_status": "emerging",
-   "reason": "The lag is now read at the newest model in Epoch's file as well as at each open record: 6.2 months at 9 Sep 2026, since a closed model first matched the best open score, set by Kimi K3 on 16 Jul 2026, on 5 Mar 2026. The earlier reason quoted 4.4 months, the lag on the day of that record, which stayed frozen while the true lag grew. It sits between the fast band (3 months or less) and the normal band (9 months or more), so the status stays emerging.",
-   "target_id": "open_weights_lag_months",
    "target_type": "indicator"
   }
  ],
