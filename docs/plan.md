@@ -516,3 +516,71 @@ Known limits:
 - The acquisitions count is a floor: the ledger is kept by hand from public announcements.
 - "Occupations with a quarter of their tasks using Claude" rests on a figure the June 2026 Economic Index report did not restate; it stays on the Monday list until a report does.
 - Five of the migration page's eight tightness scores still lapse on 28 Oct 2026 unless Epoch publishes a newer quarter.
+
+## Part 13 status (23 Sep 2026): the acquisitions ledger, searched under a written rule
+
+The owner asked whether to back-fill the acquisitions ledger under a written search rule, so that the exit bell could compare 2025 with 2026 fairly, and left the call to the build.
+
+The rule was written down before the search, from the plan's staff review:
+- **Buyers:** the 120 buyers whose main membership is in the model or compute layers.
+- **Dates:** deals from 1 January 2025, each dated at its first confirmation by a party or a filing. A notification to the European Commission under the Digital Markets Act counts as a filing.
+- **Deal types:**
+  - purchases;
+  - acquihires, where a party confirms the founders or team are joining and the company's own product ends or passes to the buyer;
+  - licence or stake deals that bring the company's leaders.
+- **Targets:** only those in the fourteen sublayers above the model layer.
+
+The rule, the searches and every deal considered and left out sit at the head of the ledger's rows.
+
+What shipped (#65):
+- **The search.** Four research agents searched every buyer. An adversarial review then re-searched the heaviest buyers through other channels. It found four missed deals, one deal counted against the rule, and the dating and acquihire lines each drawn two ways. All were fixed, and OpenAI, Meta and Mistral were searched a third time, which found nothing new.
+- **The ledger.** It gained 49 deals and lost two outside its scope: TBPN (a media company) and DuckLabs (a database maker), both withdrawn in place.
+- **The count.** It reads 27, 38 and 43 in the years to December 2025, March 2026 and June 2026. The hand-kept ledger had 8, 10 and 11.
+- **Formula v4.** It reads only quarters a sweep has covered, through 30 June 2026, a date written into its SQL. So a new quarter's reading comes in a reviewed PR, not the nightly.
+- **Dead band.** Seven deals.
+
+Judgement calls the owner may reverse:
+- The acquihire line: Crossing Minds and Alex Codes are in; Convogo is out.
+- Dating by EU filings, which moves ProducerAI into December 2025 and Fintool into March 2026.
+- General cluster schedulers count as compute, so Nvidia–SchedMD is out.
+- Four deals meet the rule but have no citable page; they are listed and not counted.
+
+Known limits:
+- The count is a floor. Before the third search, the review estimated coverage at about 95% for 2025 and 88% for the first half of 2026.
+- The exit bell reads its direction only after five searched quarters, so from the sweep after the end of 2026.
+- Each quarter's sweep is run by hand. In between, the Monday watchlist names candidates from TechCrunch, Crunchbase News and 8-K Item 2.01.
+- A few dates inside a quarter are a few days off their first confirmation (WavTool, Cove, Bun). XCore Sigma's Q3 date is unconfirmed. None of these moves a reading.
+
+## Part 13 status (23 Sep 2026): the acquisitions ledger, searched under a written rule
+
+The owner asked whether to back-fill the acquisitions ledger under a written search rule, so that the exit bell could compare 2025 with 2026 fairly, and left the call to the build.
+
+The rule was written down before the search, from the plan's staff review:
+- **Buyers:** the 120 buyers whose main membership is in the model or compute layers.
+- **Dates:** deals from 1 January 2025, each dated at its first confirmation by a party or a filing. A notification to the European Commission under the Digital Markets Act counts as a filing.
+- **Deal types:**
+  - purchases;
+  - acquihires, where a party confirms the founders or team are joining and the company's own product ends or passes to the buyer;
+  - licence or stake deals that bring the company's leaders.
+- **Targets:** only those in the fourteen sublayers above the model layer.
+
+The rule, the searches and every deal considered and left out sit at the head of the ledger's rows.
+
+What shipped (#65):
+- **The search.** Four research agents searched every buyer. An adversarial review then re-searched the heaviest buyers through other channels. It found four missed deals, one deal counted against the rule, and the dating and acquihire lines each drawn two ways. All were fixed, and OpenAI, Meta and Mistral were searched a third time, which found nothing new.
+- **The ledger.** It gained 49 deals and lost two outside its scope: TBPN (a media company) and DuckLabs (a database maker), both withdrawn in place.
+- **The count.** It reads 27, 38 and 43 in the years to December 2025, March 2026 and June 2026. The hand-kept ledger had 8, 10 and 11.
+- **Formula v4.** It reads only quarters a sweep has covered, through 30 June 2026, a date written into its SQL. So a new quarter's reading comes in a reviewed PR, not the nightly.
+- **Dead band.** Seven deals.
+
+Judgement calls the owner may reverse:
+- The acquihire line: Crossing Minds and Alex Codes are in; Convogo is out.
+- Dating by EU filings, which moves ProducerAI into December 2025 and Fintool into March 2026.
+- General cluster schedulers count as compute, so Nvidia–SchedMD is out.
+- Four deals meet the rule but have no citable page; they are listed and not counted.
+
+Known limits:
+- The count is a floor. Before the third search, the review estimated coverage at about 95% for 2025 and 88% for the first half of 2026.
+- The exit bell reads its direction only after five searched quarters, so from the sweep after the end of 2026.
+- Each quarter's sweep is run by hand. In between, the Monday watchlist names candidates from TechCrunch, Crunchbase News and 8-K Item 2.01.
+- A few dates inside a quarter are a few days off their first confirmation (WavTool, Cove, Bun). XCore Sigma's Q3 date is unconfirmed. None of these moves a reading.

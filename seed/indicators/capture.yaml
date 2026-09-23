@@ -432,7 +432,7 @@ indicators:
     updated_at: 2026-09-11
   - id: lab_vertical_integration_exit_bell
     name: "Lab vertical integration (acquisitions and acquihires, trailing four quarters)"
-    definition: "Distinct acquisitions or acquihires by AI labs and hyperscalers of application, tooling, data or infrastructure companies announced in the trailing four quarters, derived metric lab_vertical_integration_events_4q over the acquisition ledger (acq.<acquirer>.<target>.pt rows, each with a fetched announcement)."
+    definition: "Deals in the trailing four quarters by which an AI lab or a compute company took a company in the layers above the model layer (training input, serving and orchestration, deployment and application), by purchase, acquihire, or a licence or stake that came with its leaders; derived metric lab_vertical_integration_events_4q over the acquisition ledger (acq.<acquirer>.<target>.pt rows, each with a fetched announcement), searched under a written rule and read only for quarters a search has covered."
     why_it_matters: "The application layer's exit bell. When the labs buy the layer above them, the surplus that layer was capturing moves down the stack; a rising count is the capture thesis's clearest leading signal."
     proxy_types: [capital_flow, market_structure]
     unit: count
@@ -442,15 +442,15 @@ indicators:
     band_input: "metric:lab_vertical_integration_events_4q"
     layer_id: model
     sublayer_id: frontier_labs
-    direction_rule: {periods: 4, dead_band: 1, higher_is: concentrating, rationale: "Four quarters; one event is not a trend. More deals per year concentrate the application layer into the labs."}
+    direction_rule: {periods: 4, dead_band: 7, higher_is: concentrating, rationale: "Four quarters. A yearly count of rare events varies between two years with no trend by about the square root of twice its level, which at the December 2025 count after the September 2026 search is about seven, so a smaller move is stable. More deals per year concentrate the application layer into the labs."}
     leading_lagging: leading
     timing_rationale: "Leading: an acquisition is announced before the acquired layer's economics change, so the count moves ahead of margins."
-    tracker_interpretation: "The ledger holds deals from March 2025 on, among them Meta's stake in Scale AI, Google's Windsurf licence and Nvidia's purchase of Hugging Face. It is kept by hand and has gaps, so its count is a floor, and its trailing year is read only from the end of 2025, the first year lying wholly after the ledger's start; the direction rule waits for five such quarters."
-    counterevidence: "The ledger holds what the press and filings announce, and has gaps: two OpenAI purchases from late 2025 were added only in September 2026, so a rising count can reflect the care taken over the ledger as much as more buying. Undisclosed prices count as events; Stripe is a payments company, in the ledger because OpenRouter is a routing layer."
+    tracker_interpretation: "A search of every counted buyer's deals since January 2025, under a rule written down first, more than tripled the count in September 2026: the labs, OpenAI above all, and the compute companies are taking coding tools, evaluation and inference software, agents and consumer apps at a steady clip since late 2025, after a slower first half of 2025. The trailing year is read only from the end of 2025, and the direction rule waits for five quarters a search has covered."
+    counterevidence: "The ledger holds what parties and filings confirm, so quiet deals are missed until they surface, and acquihires surface late; a rise can reflect how thoroughly a quarter was searched. Many deals are small team hires that say little about margins, and one buyer's spree (OpenAI's) moves the count on its own."
     confidence: 55
     related_indicators: [frontier_capital_concentration, lab_hhi, model_token_concentration]
     published: true
-    updated_at: 2026-09-22
+    updated_at: 2026-09-23
   - id: vc_flow_revenue_lag
     name: Venture flow to revenue lag
     definition: Cross-correlation lag, in quarters, between primary-round dollars into a sub-layer and its members' revenue (P1 seed indicator 13).

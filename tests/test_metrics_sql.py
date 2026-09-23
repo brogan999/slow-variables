@@ -1,3 +1,4 @@
+import re
 from datetime import date, timedelta
 
 import duckdb
@@ -702,6 +703,13 @@ def test_lab_deals_count_from_each_deals_earliest_date_in_completed_quarters_ins
     today = date.today()
     this_quarter = date(today.year, 3 * ((today.month - 1) // 3) + 1, 1)
     assert all(date.fromisoformat(d) < this_quarter for d in out)  # the quarter under way is never read
+    sql = METRICS["lab_vertical_integration_events_4q"]["sql"]
+    swept = re.search(r"DATE '(\d{4}-\d{2}-\d{2})' AS through", sql)
+    assert swept  # the last swept quarter end is written into the SQL, and each sweep's PR raises it
+    through = date.fromisoformat(swept.group(1))
+    assert (through + timedelta(days=1)).day == 1 and through.month in (3, 6, 9, 12)  # a quarter end
+    earlier = sql.replace(swept.group(0), "DATE '2025-12-31' AS through")
+    assert [str(d) for d, *_ in con.execute(earlier).fetchall()] == ["2025-12-31"]  # no quarter past the sweep is read
 
 
 def test_the_open_lag_is_read_at_the_newest_row_and_never_twice_on_one_date():
