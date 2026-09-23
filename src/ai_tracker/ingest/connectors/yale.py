@@ -1,10 +1,10 @@
 """Yale Budget Lab occupational-mix dissimilarity index, from the chart data behind its AI labour-market tracker.
 
 The tracker lists each chart's data in its manifest, as a CSV at a stable path under its data folder.
-`total-labor-force-recent` holds the whole-workforce index (percentage points, a 12-month moving average) in long
-form by months from each baseline, of which "Baseline Nov 2022 (AI)" is the AI series and "Baseline Jan 2021" the
-pre-AI comparison; `new-vs-older-grads-recent` holds the index between recent and older graduates (a 3-month
-moving average) by month.
+`total-labor-force-recent` holds the whole-workforce index (percentage points, computed from a 12-month moving
+average of employment) in long form by months from each baseline, of which "Baseline Nov 2022 (AI)" is the AI series
+and "Baseline Jan 2021" the pre-AI comparison; `new-vs-older-grads-recent` holds the index between recent and older
+graduates (from a 3-month moving average) by month.
 """
 
 from __future__ import annotations
@@ -62,7 +62,7 @@ class YaleDissimilarity(Connector):
                 month = date.fromisoformat(r["time"]).replace(day=1)
                 out.append(self._obs(graduates, "recent_vs_older_grads", "occupation_dissimilarity_pp", month, r))
         newest = max((o.as_of_date for o in out), default=None)
-        # rows are dated at the month's start and land about six weeks later, so a quarter means a release was missed
+        # rows are dated at the month's start and land about two weeks after it ends: past 92 days a release is late
         if newest and (workforce.retrieved_at.date() - newest).days > 92:
             self.errors.append(f"newest month {newest}; the tracker may have moved, so check its manifest")
         return out

@@ -130,7 +130,7 @@
 | wustl_olin | WashU Olin Business School news | Washington University in St. Louis | html | 6 | irregular | WashU; short quotation | WashU Olin Business School |
 | yahoo_finance | Yahoo Finance (syndicated Investing.com) | Yahoo Inc. | html | 5 | irregular | Syndicated; short quotation | Investing.com via Yahoo Finance; CDS data ICE Data Services |
 | yale_budget_lab | The Budget Lab at Yale | Yale University | html | 6 | monthly | Budget Lab; short quotation | The Budget Lab at Yale |
-| yale_budget_lab_data | Budget Lab at Yale AI labour-market tracker (dissimilarity index chart data) | Yale University | csv | 6 | quarterly | Budget Lab; data reproduced with attribution | The Budget Lab at Yale |
+| yale_budget_lab_data | Budget Lab at Yale AI labour-market tracker (dissimilarity index chart data) | Yale University | csv | 6 | monthly | Budget Lab; data reproduced with attribution | The Budget Lab at Yale |
 
 ## Read, not ingested
 

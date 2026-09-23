@@ -1140,7 +1140,7 @@ indicators:
   - id: yale_occupational_mix_dissimilarity
     source_cluster: labour_trackers
     name: "Occupational-mix dissimilarity since ChatGPT (Yale Budget Lab)"
-    definition: "How far the occupational mix of the US workforce has moved from its November 2022 baseline, in percentage points, the Budget Lab's dissimilarity index (a 12-month moving average) from the chart data of its AI labour-market tracker; the same index from a January 2021 baseline is shown alongside as the pre-AI comparison at the same age, and the tracker's index between recent and older graduates (a 3-month moving average) beside it."
+    definition: "How far the occupational mix of the US workforce has moved from its November 2022 baseline, in percentage points, the Budget Lab's dissimilarity index (computed from a 12-month moving average of employment) from the chart data of its AI labour-market tracker; the same index from a January 2021 baseline is shown alongside as the pre-AI comparison at the same age, and the tracker's index between recent and older graduates (from a 3-month moving average) beside it."
     why_it_matters: "If AI were reshaping work, the mix of occupations would move faster than in prior technology transitions. The Budget Lab finds it moving at about the historical pace."
     proxy_types: [deployment, welfare]
     unit: pp
@@ -1152,11 +1152,11 @@ indicators:
     normal_band: {hi: 7.5}
     fast_band: {lo: 10}
     band_rationale: "Normal = within one and a half times the pre-AI baseline's reading at the same age (the January 2021 baseline sat near 5 pp forty months in); fast = 10 pp or more, twice the pre-AI pace. Between is `emerging`."
-    tracker_interpretation: "Forty-five months after ChatGPT the occupational mix has moved slightly more than it had at the same age from the January 2021 baseline, a curve that began before AI. The index between recent and older graduates, which the Budget Lab described in 2025 as rarely leaving a range of 30 to 33, has read a little above it every month since March 2026; the Lab's September 2026 update still finds its measures flat, within historical ranges or on pre-AI trends."
+    tracker_interpretation: "In August 2026, forty-five months after ChatGPT, the occupational mix had moved slightly more than it had at the same age from the January 2021 baseline, a curve that began before AI. The index between recent and older graduates read above 33 from March to August 2026, its longest run above that line since 2021; the Lab's September 2026 update still finds its measures flat, within historical ranges or on pre-AI trends."
     counterevidence: "Occupational mix moves slowly by construction; a CPS-based index cannot see within-occupation task change."
     layer_id: labour_consumers
     leading_lagging: lagging
-    timing_rationale: "Lagging: the occupational mix moves only as workers change jobs over years, and the Budget Lab updates the index about six weeks after each month."
+    timing_rationale: "Lagging: the occupational mix moves only as workers change jobs over years, and the Budget Lab updates the index about two weeks after each month ends."
     confidence: 65
     proposed_status: consistent_with_normal
     related_indicators: [canaries_exposed_employment_yoy, humlum_precise_null]
