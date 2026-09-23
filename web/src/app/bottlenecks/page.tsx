@@ -33,7 +33,7 @@ export default function BottlenecksPage() {
       </section>
       <section className="flex flex-col gap-3">
         <h2 className="display text-2xl leading-tight mt-2">Where startup money is going</h2>
-        <p className="text-sm text-ink-2 max-w-[62ch]">Money startups raised by selling new shares, in each sub-layer the chain&apos;s inputs sit in (a sub-layer is a group of companies doing the same job within a layer of the chain). Startup money only: the physical build-out is paid for with big companies&apos; capital spending and debt, which this table misses; the capital row reads the builders&apos; spending.</p>
+        <p className="text-sm text-ink-2 max-w-[62ch]">Money startups raised by selling new shares, in each sub-layer the chain&apos;s inputs sit in (a sub-layer is a group of companies doing the same job within a layer of the chain). Startup money only: the physical build-out is paid for with big companies&apos; capital spending and debt, which this table misses; the capital row reads the builders&apos; spending. Each firm is counted once, in its main sub-layer, for both its count and its money.</p>
         <Bets doc={doc} />
       </section>
       <details className="group">

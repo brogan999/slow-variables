@@ -445,12 +445,12 @@ indicators:
     direction_rule: {periods: 4, dead_band: 1, higher_is: concentrating, rationale: "Four quarters; one event is not a trend. More deals per year concentrate the application layer into the labs."}
     leading_lagging: leading
     timing_rationale: "Leading: an acquisition is announced before the acquired layer's economics change, so the count moves ahead of margins."
-    tracker_interpretation: "Fifteen deals in the ledger, from Meta's $14.3B Scale stake and Google's $2.4B Windsurf licence to Nvidia's $12.9B Hugging Face purchase and Stripe's $7B-plus OpenRouter deal; the pace roughly doubled in 2026."
-    counterevidence: "The ledger holds what the press and filings announce; undisclosed prices count as events; Stripe is a payments company, in the ledger because OpenRouter is a routing layer."
+    tracker_interpretation: "The ledger holds deals from March 2025 on, among them Meta's stake in Scale AI, Google's Windsurf licence and Nvidia's purchase of Hugging Face. It is kept by hand and has gaps, so its count is a floor, and its trailing year is read only from the end of 2025, the first year lying wholly after the ledger's start; the direction rule waits for five such quarters."
+    counterevidence: "The ledger holds what the press and filings announce, and has gaps: two OpenAI purchases from late 2025 were added only in September 2026, so a rising count can reflect the care taken over the ledger as much as more buying. Undisclosed prices count as events; Stripe is a payments company, in the ledger because OpenRouter is a routing layer."
     confidence: 55
     related_indicators: [frontier_capital_concentration, lab_hhi, model_token_concentration]
     published: true
-    updated_at: 2026-09-10
+    updated_at: 2026-09-22
   - id: vc_flow_revenue_lag
     name: Venture flow to revenue lag
     definition: Cross-correlation lag, in quarters, between primary-round dollars into a sub-layer and its members' revenue (P1 seed indicator 13).
@@ -492,7 +492,7 @@ indicators:
     updated_at: 2026-09-11
   - id: custom_silicon_share
     name: Non-Nvidia share of AI compute shipped (H100-equivalents)
-    definition: Non-Nvidia designers' share of cumulative AI compute shipped, in H100-equivalents, at each complete quarter end, from Epoch's chip-sales estimates. Derived metric custom_silicon_share.
+    definition: Non-Nvidia designers' share of cumulative AI compute shipped, in H100-equivalents, on each quarter end that every designer has reported, from Epoch's chip-sales estimates. Derived metric custom_silicon_share.
     why_it_matters: The leading indicator of Nvidia rent decay; TPUs, Trainium and AMD are the routes around the chokepoint.
     proxy_types: [market_structure]
     unit: share
@@ -509,7 +509,7 @@ indicators:
     confidence: 50
     related_indicators: [semis_rent_concentration, semis_hhi]
     published: true
-    updated_at: 2026-09-11
+    updated_at: 2026-09-22
   - id: capex_to_revenue_stack
     name: Hyperscaler capex to AI revenue (trailing year)
     definition: "Trailing four quarters of filed capex at Microsoft, Alphabet, Amazon, Meta and Oracle divided by AI revenue, taken as the frontier labs' latest run-rates plus Menlo's enterprise generative-AI spend. Derived metric capex_to_revenue_stack."

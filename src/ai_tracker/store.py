@@ -54,8 +54,11 @@ MARGIN_PARTS = [("compute_semis", "Chip segments"), ("compute_cloud", "Cloud seg
 Path = Path  # re-exported for cli
 OBS = DATA / "observations"
 
-# Every venture metric reads rounds from this one view: Form D equity and debt, and Epoch's equity rounds for an
-# entity-quarter with no Form D filing (Form D is tier 4, Epoch tier 5; the better source wins the quarter).
+# Every venture metric reads rounds from this one view: Form D equity and debt, and Epoch's equity rounds with no Form D
+# row for the same entity in the same calendar quarter or within 45 days (Form D is tier 4, Epoch tier 5; the better
+# source wins). The quarter match alone counted xAI's Series E twice: its Form D dates the first sale in December and
+# Epoch dates the round in January.
+# ponytail: the match reads dates, not amounts, so a small filing beside a separate large reported round would hide it.
 VENTURE_ROUNDS = """CREATE OR REPLACE VIEW venture_rounds AS
 WITH f AS (SELECT entity_id, as_of_date, value_numeric AS v, id, 'formd' AS source, 'equity' AS kind FROM observations
            WHERE series_key LIKE 'formd.%.amount_sold_usd.pt' AND entity_id IS NOT NULL),
@@ -64,8 +67,9 @@ d AS (SELECT entity_id, as_of_date, value_numeric AS v, id, 'formd' AS source, '
 e AS (SELECT entity_id, as_of_date, value_numeric AS v, id, 'epoch' AS source, 'equity' AS kind FROM observations
       WHERE series_key LIKE 'epoch.%.round_equity_usd.pt' AND entity_id IS NOT NULL)
 SELECT * FROM f UNION ALL SELECT * FROM d
-UNION ALL SELECT * FROM e WHERE NOT EXISTS (
-  SELECT 1 FROM f WHERE f.entity_id = e.entity_id AND date_trunc('quarter', f.as_of_date) = date_trunc('quarter', e.as_of_date))"""
+UNION ALL SELECT * FROM e WHERE NOT EXISTS (  -- one round reported twice: a filing and Epoch's row
+  SELECT 1 FROM f WHERE f.entity_id = e.entity_id AND (date_trunc('quarter', f.as_of_date) = date_trunc('quarter', e.as_of_date)
+                                                      OR abs(date_diff('day', f.as_of_date, e.as_of_date)) <= 45))"""
 # Trailing four quarters of capital spending by the five hyperscalers, one row per quarter in which all five have four
 # quarters. The same differencing of year-to-date filings as capex_to_revenue_stack (a test holds the two equal).
 # ponytail: two copies of these CTEs; repoint capex_to_revenue_stack here in its own PR.

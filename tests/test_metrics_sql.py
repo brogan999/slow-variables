@@ -660,3 +660,81 @@ def test_output_per_person_is_read_against_its_highest_quarter_up_to_a_year_befo
     got = [(str(d), round(v, 4), ids) for d, v, ids in run("real_gdp_per_capita_over_peak", rows)]
     # the bet's terms: the peak is the highest quarter up to and including Q-4, so the last three quarters never count
     assert got == [("2026-03-31", 0.04, ["g4", "g0"]), ("2026-06-30", 0.0784, ["g5", "g1"])]
+
+
+def test_custom_silicon_share_reads_only_a_full_panel_of_designers():
+    rows = _chips(
+        "h100e_cumulative",
+        {
+            "2025-12-31": {"nvidia": 60, "google": 20, "amd": 10, "amazon": 10},
+            "2026-03-31": {"nvidia": 70, "google": 20, "amd": 10},  # amazon has not reported yet: not a panel
+        },
+    )
+    out = {str(d): v for d, v, _ in run("custom_silicon_share", rows)}
+    assert list(out) == ["2025-12-31"] and abs(out["2025-12-31"] - 0.4) < 1e-9
+
+
+def test_lab_deals_count_from_each_deals_earliest_date_in_completed_quarters_inside_the_ledger():
+    con = duckdb.connect()
+    con.execute(
+        "CREATE TABLE obs_raw (id VARCHAR, series_key VARCHAR, subject VARCHAR, as_of_date DATE, value_numeric DOUBLE, raw_snippet VARCHAR, disputed BOOLEAN)"
+    )
+    con.executemany(
+        "INSERT INTO obs_raw VALUES (?, ?, ?, ?, NULL, '', false)",
+        [
+            ("w1", "acq.crwv.wandb.pt", "crwv", "2025-03-04"),  # announced
+            ("w2", "acq.crwv.wandb.pt", "crwv", "2025-05-05"),  # closed: the same deal, dated from its announcement
+            ("s1", "acq.openai.sky.pt", "openai", "2025-10-23"),
+            ("x1", "acq.stripe.router.pt", "stripe", "2025-11-01"),  # a payments company: not counted
+        ],
+    )
+    con.execute(KEY_SPLIT)
+    con.execute("CREATE TABLE entity_membership (entity_id VARCHAR, layer_id VARCHAR, is_primary BOOLEAN)")
+    con.executemany(
+        "INSERT INTO entity_membership VALUES (?, ?, true)",
+        [("crwv", "compute_physical"), ("openai", "model"), ("stripe", "payments")],
+    )
+    out = {
+        str(d): (v, sorted(ids)) for d, v, ids in con.execute(METRICS["lab_vertical_integration_events_4q"]["sql"]).fetchall()
+    }
+    assert "2025-09-30" not in out  # its year began before the ledger did
+    assert out["2025-12-31"] == (2, ["s1", "w1", "w2"]) and out["2026-03-31"] == (1, ["s1"])
+    today = date.today()
+    this_quarter = date(today.year, 3 * ((today.month - 1) // 3) + 1, 1)
+    assert all(date.fromisoformat(d) < this_quarter for d in out)  # the quarter under way is never read
+
+
+def test_the_open_lag_is_read_at_the_newest_row_and_never_twice_on_one_date():
+    rows = [
+        ("c1", "epoch_bench.closed_a.eci_closed.pt", "closed_a", "2026-01-01", 150.0, ""),
+        ("o1", "epoch_bench.open_a.eci_open.pt", "open_a", "2026-04-01", 150.0, ""),  # a record, matched on 1 Jan
+        ("c2", "epoch_bench.closed_b.eci_closed.pt", "closed_b", "2026-07-01", 160.0, ""),  # newest row, no new record
+    ]
+    out = [(str(d), round(v, 2), ids) for d, v, ids in run("open_weights_lag_months", rows)]
+    assert [x[:2] for x in out] == [("2026-04-01", round(90 / 30.44, 2)), ("2026-07-01", round(181 / 30.44, 2))]
+    assert "c2" in out[1][2]  # the reading cites the row that dates it
+    rows2 = rows[:2] + [
+        ("c3", "epoch_bench.closed_c.eci_closed.pt", "closed_c", "2026-05-01", 156.0, ""),
+        ("o2", "epoch_bench.open_b.eci_open.pt", "open_b", "2026-07-01", 155.0, ""),  # a record on the newest date
+    ]
+    dates = [str(d) for d, _, _ in run("open_weights_lag_months", rows2)]
+    assert dates == ["2026-04-01", "2026-07-01"]
+
+
+def test_a_round_filed_and_reported_counts_once_in_one_quarter_or_within_forty_five_days():
+    con = duckdb.connect()
+    con.execute(
+        "CREATE TABLE observations (id VARCHAR, series_key VARCHAR, entity_id VARCHAR, as_of_date DATE, value_numeric DOUBLE)"
+    )
+    con.execute(VENTURE_ROUNDS)
+    con.executemany(
+        "INSERT INTO observations VALUES (?, ?, 'x', ?, ?)",
+        [
+            ("f1", "formd.x.amount_sold_usd.pt", "2025-12-19", 16.6),
+            ("e1", "epoch.x.round_equity_usd.pt", "2026-01-06", 20.0),  # the same round, 18 days later, next quarter
+            ("e2", "epoch.x.round_equity_usd.pt", "2026-05-06", 30.0),  # a separate round, months after the filing
+            ("f2", "formd.x.amount_sold_usd.pt", "2026-07-01", 40.0),
+            ("e3", "epoch.x.round_equity_usd.pt", "2026-08-30", 40.0),  # 60 days on, but the same quarter as f2
+        ],
+    )
+    assert sorted(r[0] for r in con.execute("SELECT id FROM venture_rounds").fetchall()) == ["e2", "f1", "f2"]

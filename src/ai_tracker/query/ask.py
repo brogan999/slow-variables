@@ -35,7 +35,7 @@ log = logging.getLogger("ai-tracker.ask")
 MODEL = os.environ.get("QUERY_MODEL", "claude-sonnet-5")
 # a blocked answer gets its fresh attempt on the stronger model: rare, so the bill stays near Sonnet's
 ESCALATE_MODEL = os.environ.get("QUERY_ESCALATE_MODEL", "claude-opus-5")
-PROMPT_VERSION = "3"
+PROMPT_VERSION = "4"
 # Opus 5 list price, for the escalated retry only
 ESCALATE_USD_PER_MTOK_IN, ESCALATE_USD_PER_MTOK_OUT = (
     float(x) for x in os.environ.get("QUERY_ESCALATE_USD_PER_MTOK", "5,25").split(",")
@@ -75,7 +75,7 @@ RAW = re.compile(r"observation_all", re.I)
 TOOLS = [
     {
         "name": "sql",
-        "description": "Read-only DuckDB SQL over the semantic layer. Tables: observations (approved, non-superseded rows: id, series_key, subject, entity_id, value_numeric, value_text, value_low, value_high, unit, as_of_date, published_date, source_id, tier, audited_vs_reported, disputed, dispute_text, raw_snippet, url), derived (id, metric, value, value_low, value_high, as_of_date, dims JSON text, obs_ids), status_events (target_type, target_id, old_status, new_status, new_conf, reason, evidence_ids, author, created_at), indicators (id, name, lens, bucket_id, layer_id, unit, metric, band_input, status, confidence, published), metrics (name, description, unit, grain, caveats), entity_membership (entity_id, layer_id, sublayer_id, is_primary, from_date, to_date), venture_rounds (entity_id, as_of_date, v, id, source, kind: one row per round, Form D preferred over Epoch in an entity-quarter), hyperscaler_capex_ttm (cq, v, ids: trailing four quarters of capital spending by the five hyperscalers; ids are observation ids), dc_sites (subject, built_mw, built_id, planned_mw, planned_id, read_on: one row per Epoch data-centre site with both a built and a planned figure). Observations of source epoch_datacenters dated after today are Epoch's projections, not readings; their note says so. Rows are capped at 200; one statement, no writes.",
+        "description": "Read-only DuckDB SQL over the semantic layer. Tables: observations (approved, non-superseded rows: id, series_key, subject, entity_id, value_numeric, value_text, value_low, value_high, unit, as_of_date, published_date, source_id, tier, audited_vs_reported, disputed, dispute_text, raw_snippet, url), derived (id, metric, value, value_low, value_high, as_of_date, dims JSON text, obs_ids), status_events (target_type, target_id, old_status, new_status, new_conf, reason, evidence_ids, author, created_at), indicators (id, name, lens, bucket_id, layer_id, unit, metric, band_input, status, confidence, published), metrics (name, description, unit, grain, caveats), entity_membership (entity_id, layer_id, sublayer_id, is_primary, from_date, to_date), venture_rounds (entity_id, as_of_date, v, id, source, kind: one row per round, Form D preferred over an Epoch row for the same entity in the same quarter or within 45 days), hyperscaler_capex_ttm (cq, v, ids: trailing four quarters of capital spending by the five hyperscalers; ids are observation ids), dc_sites (subject, built_mw, built_id, planned_mw, planned_id, read_on: one row per Epoch data-centre site with both a built and a planned figure). Observations of source epoch_datacenters dated after today are Epoch's projections, not readings; their note says so. Rows are capped at 200; one statement, no writes.",
         "input_schema": {
             "type": "object",
             "properties": {"query": {"type": "string"}},

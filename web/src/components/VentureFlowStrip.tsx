@@ -23,7 +23,7 @@ export function VentureFlowStrip({ doc, name, note = true }: { doc: VentureDoc; 
       note="each segment links to its first round's record"
       keys={sources.map((s) => <Key key={s} swatch={<span aria-hidden className="inline-block h-2.5 w-4" style={{ background: FILL[s] }} />}>{NAME[s]}</Key>)}
       foot={<>
-        {note ? <p>Primary-round equity per calendar quarter: Form D amount sold where the entity files, Epoch&apos;s press-compiled rounds for an entity-quarter with no filing. Amendments replace their originals; SPVs and secondaries are excluded; Form D debt is listed in the table, not drawn.</p> : null}
+        {note ? <p>Primary-round equity per calendar quarter: Form D amount sold where the entity files, Epoch&apos;s press-compiled rounds where the entity has no filing in the same quarter or within 45 days. Amendments replace their originals; SPVs and secondaries are excluded; Form D debt is listed in the table, not drawn.</p> : null}
         <ChartSources cs={doc.chart_sources} />
       </>}
       table={
