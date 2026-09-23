@@ -30,7 +30,10 @@ class Service:
         if not self.store.derived:
             self.store.derived = run_metrics(self.store.con)
             self.store.semantic_tables()
-        self.store.prediction_table()  # the board's rows, so SQL can join a prediction to its reading
+        try:  # the board's rows, so SQL can join a prediction to its reading; a failure here never stops the service
+            self.store.prediction_table()
+        except Exception as e:  # noqa: BLE001
+            print(f"predictions table not built: {type(e).__name__}: {e}", flush=True)
         self.tools = ask_mod.Tools(self.store)
         self.token = os.environ.get("QUERY_TOKEN", "")
         self.cap = float(os.environ.get("QUERY_DAILY_USD_CAP", "5"))
