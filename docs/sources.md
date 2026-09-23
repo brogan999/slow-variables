@@ -5,7 +5,7 @@
 | id | name | org | kind | tier | cadence | licence | attribution |
 |---|---|---|---|---|---|---|---|
 | a16z | Andreessen Horowitz (a16z) essays | Andreessen Horowitz | html | 6 | irregular | a16z; short quotation | Andreessen Horowitz |
-| adp_research | ADP Research, Canaries Dashboard releases | ADP Research | html | 6 | monthly | ADP Research; short quotation | Canaries Dashboard, a project of the Stanford Digital Economy Lab and ADP Research |
+| adp_research | ADP Research, Canaries Dashboard releases | ADP Research | html | 6 | irregular | ADP Research; short quotation | Canaries Dashboard, a project of the Stanford Digital Economy Lab and ADP Research |
 | ai2027_tracker | AI 2027 Tracker (independent) | ai2027-tracker.com | html | 6 | irregular | Site terms; short quotation | AI 2027 Tracker |
 | aifutures_blog | AI Futures Project blog | AI Futures Project | html | 7 | irregular | Substack; short quotation | AI Futures Project |
 | amazon_news | About Amazon company news | Amazon | html | 4 | irregular | Amazon; short quotation | About Amazon |

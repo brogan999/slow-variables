@@ -488,7 +488,31 @@ observations:
     basis: company_stated
     url: https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q2
     raw_snippet: Commercial remaining performance obligation, which continues to be reported net of reserves, increased to $625 billion and was up 110% year-over-year
-    note: Microsoft FY26 Q2 earnings call (CFO Amy Hood); the 10-Q figure in sec_xbrl supersedes for the series.
+    note: Microsoft FY26 Q2 earnings call (CFO Amy Hood). The filed RevenueRemainingPerformanceObligation in sec_xbrl is total RPO, $6B higher, so this hand series is the only source for commercial RPO.
+  - series_key: circular.microsoft.commercial_rpo_usd.pt
+    source_id: microsoft_ir
+    entity_id: msft
+    value: 627000000000
+    unit: USD
+    as_of_date: 2026-03-31
+    published_date: 2026-04-29
+    tier: 4
+    basis: company_stated
+    url: https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q3
+    raw_snippet: RPO increased to $627 billion and was up 99% year-over-year
+    note: Microsoft FY26 Q3 earnings call (CFO Amy Hood), where "RPO" follows her sentence on commercial remaining performance obligation. The filed RevenueRemainingPerformanceObligation in sec_xbrl is total RPO, $6B higher, so this hand series is the only source for commercial RPO.
+  - series_key: circular.microsoft.commercial_rpo_usd.pt
+    source_id: microsoft_ir
+    entity_id: msft
+    value: 678000000000
+    unit: USD
+    as_of_date: 2026-06-30
+    published_date: 2026-07-29
+    tier: 4
+    basis: company_stated
+    url: https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q4
+    raw_snippet: Commercial remaining performance obligation grew 84% to $678 billion
+    note: Microsoft FY26 Q4 earnings call (CFO Amy Hood). The filed RevenueRemainingPerformanceObligation in sec_xbrl is total RPO, $6B higher, so this hand series is the only source for commercial RPO.
   - series_key: circular.microsoft_openai.rpo_share.pt
     source_id: microsoft_ir
     entity_id: msft
@@ -1824,17 +1848,6 @@ observations:
     basis: reported
     raw_snippet: "60% of enterprises adopt multiple models (and route prompts to the most performant model)."
     note: "Menlo Ventures, '2023: The State of Generative AI in the Enterprise' (10 Nov 2023). The only Menlo wave that publishes a multi-model share as a number; the 2024 and 2025 waves describe the pattern without a share."
-  - series_key: menlo.enterprise.multi_model_share.pt
-    source_id: menlo
-    value: 0.60
-    unit: share
-    as_of_date: 2023-11-10
-    published_date: 2024-01-18
-    url: https://menlovc.com/perspective/the-modern-ai-stack-design-principles-for-the-future-of-enterprise-ai-architectures/
-    tier: 6
-    basis: reported
-    raw_snippet: "According to Menlo’s Enterprise AI report, 60% of enterprises use multiple models and route prompts to the most performant model."
-    note: "Menlo, 'The Modern AI Stack' (18 Jan 2024), restating the 2023 enterprise survey figure."
   - series_key: menlo.enterprise.models_deployed_typical.pt
     source_id: menlo
     value_text: "three or more foundation models (typical enterprise stack)"

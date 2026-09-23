@@ -76,6 +76,7 @@ def test_refresh_list_names_hand_entered_series_but_not_connector_fed_or_one_off
     )  # hand-entered, monthly, behind a published indicator
     assert "ramp.us_businesses.paid_ai_adoption_share.m" not in due  # the connector now writes its newest row
     assert "metr_blog.rct_2025" not in due  # a one-off study is never due
+    assert "menlo.enterprise.multi_model_share.pt" not in due  # its source no longer states the figure (NOT_DUE)
 
 
 def test_memo_facts_put_leading_indicators_first():
