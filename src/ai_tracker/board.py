@@ -47,6 +47,12 @@ def _who(c: dict[str, Any], sources: dict[str, dict[str, Any]]) -> str:
     return f"This site, extending {lead}" if c.get("attribution") == "extension" else lead
 
 
+def _indicator(f: dict[str, Any] | None) -> list[str]:
+    """The indicator a reading belongs to: a fact links to its published indicator's page when it has one."""
+    href = (f or {}).get("href") or ""
+    return [href.split("/indicators/", 1)[1]] if href.startswith("/indicators/") else []
+
+
 def _test(t: dict[str, Any] | None) -> dict[str, Any] | None:
     if not t:
         return None
@@ -80,6 +86,7 @@ def rows(
                 "test": None,
                 "reading": None,
                 "sources": [p["claim_url"]] if p.get("claim_url") else [],
+                "indicators": list(p.get("related_indicators") or []),
                 "href": f"/predictions#{p['id']}",
             }
         )
@@ -87,11 +94,12 @@ def rows(
     facts = outlook.get("facts") or {}
     for c in outlook.get("claims") or []:
         t = _test(c.get("test"))
+        f = facts.get(t["fact"]) if t else None
         out.append(
             {
                 "id": c["id"],
                 "kind": "outlook",
-                "folio": c["folio"],
+                "folio": (spec.get("folio_overrides") or {}).get(c["id"], c["folio"]),
                 "stage": c.get("stage"),
                 "row": c.get("row"),
                 "who": _who(c, srcs),
@@ -100,8 +108,9 @@ def rows(
                 "state": c["state"],
                 "settles": c.get("due") or c.get("falsifier"),
                 "test": t,
-                "reading": facts.get(t["fact"]) if t else None,
+                "reading": f,
                 "sources": [srcs[h]["url"] for h in c.get("holders") or [] if h in srcs],
+                "indicators": _indicator(f) + list((spec.get("claim_indicators") or {}).get(c["id"]) or []),
                 "href": f"/outlook#claim-{c['id']}",
             }
         )
@@ -110,6 +119,7 @@ def rows(
         m = spec["migration"].get(p["id"])
         if not m:
             continue
+        f = (mig.get("facts") or {}).get(p.get("fact")) if p.get("fact") else None
         out.append(
             {
                 "id": p["id"],
@@ -121,8 +131,9 @@ def rows(
                 "state": p["state"],
                 "settles": None,
                 "test": None,
-                "reading": (mig.get("facts") or {}).get(p.get("fact")) if p.get("fact") else None,
+                "reading": f,
                 "sources": [],
+                "indicators": _indicator(f),
                 "href": "/argument/migration",
             }
         )
@@ -144,6 +155,7 @@ def rows(
                 "test": None,
                 "reading": None,
                 "sources": [],
+                "indicators": list(x.get("indicators") or []),
                 "href": "/#exits",
             }
         )
@@ -192,7 +204,13 @@ def build(
 
 
 def problems(
-    spec: dict[str, Any], ledger_ids: set[str], migration_ids: set[str], monitors: set[str], published: set[str]
+    spec: dict[str, Any],
+    ledger_ids: set[str],
+    migration_ids: set[str],
+    monitors: set[str],
+    published: set[str],
+    claim_ids: set[str] | None = None,
+    indicator_ids: set[str] | None = None,
 ) -> list[str]:
     errors = []
     folios = {f["id"] for f in spec["folios"]}
@@ -202,6 +220,21 @@ def problems(
                 errors.append(f"board: {group} entry {k} names nothing on the site")
             if v.get("folio") not in folios:
                 errors.append(f"board: {group} entry {k} has an unknown folio")
+    for k, v in (spec.get("folio_overrides") or {}).items():
+        if claim_ids is not None and k not in claim_ids:
+            errors.append(f"board: folio override {k} names no outlook claim")
+        if v not in folios:
+            errors.append(f"board: folio override {k} names an unknown folio")
+    for k, v in (spec.get("claim_indicators") or {}).items():
+        if claim_ids is not None and k not in claim_ids:
+            errors.append(f"board: claim_indicators names no outlook claim {k}")
+        for i in v:
+            if indicator_ids is not None and i not in indicator_ids:
+                errors.append(f"board: claim {k} names an unknown indicator {i}")
+    for k, v in spec["exits"].items():
+        for i in v.get("indicators") or []:
+            if indicator_ids is not None and i not in indicator_ids:
+                errors.append(f"board: exit {k} names an unknown indicator {i}")
     for k in published - set(spec["ledger"]):
         errors.append(f"board: ledger prediction {k} has no line on the board")
     if set(spec["words"]) != set(ORDER):

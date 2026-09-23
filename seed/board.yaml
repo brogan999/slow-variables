@@ -4,11 +4,30 @@
 # bring their own text. Status words are mapped from each family's vocabulary in src/ai_tracker/board.py.
 
 folios:
-  - {id: capability, label: "Making it work", question: "Can AI do whole tasks, and reliably?"}
-  - {id: products, label: "Turning it into products", question: "What gets built on it, and who sells it?"}
-  - {id: adoption, label: "Getting firms to use it", question: "How fast do firms and people take it up?"}
-  - {id: reorganisation, label: "Reorganising around it", question: "What happens to work, pay and output?"}
-  - {id: value, label: "Who keeps the money", question: "Where do the profits end up?"}
+  - {id: capability, label: "Capability / invention", question: "Can AI do whole tasks, and reliably?"}
+  - {id: products, label: "Innovation: products and applications", question: "What gets built on it, and who sells it?"}
+  - {id: adoption, label: "Diffusion: early adoption", question: "How fast do firms and people take it up?"}
+  - {id: reorganisation, label: "Diffusion: adaptation", question: "What happens to work, pay and output as firms reorganise?"}
+  - {id: value, label: "Value capture", question: "Where do the profits end up?"}
+
+# Outlook claims whose position sits in one folio but which the owner's Grand Theory page files under another.
+folio_overrides:
+  apps_squeezed: value
+  margins_below_software: value
+
+# Untested outlook claims whose subject a published indicator measures directly: linked, not tested.
+claim_indicators:
+  labour_share_falls: [labor_share_nonfarm]
+  data_drives_pretraining: [epoch_data_exhaustion_year]
+  lossy_loop: [rsi_agent_workdays_per_human]
+  software_jobs_hold: [canaries_exposed_employment_yoy]
+  hours_rise_first: [bbd_work_hours_assisted]
+  data_next: [rl_environment_vendor_count, expert_data_market_run_rate]
+  few_labs: [frontier_capital_concentration]
+  surplus_to_users: [consumer_surplus_wta]
+  own_models: [open_vs_closed_gap]
+  self_hosting: [open_vs_closed_gap]
+  chips_concentrate: [semis_hhi]
 
 words:
   happening: {label: "Happening", meaning: "Tonight's reading is what the prediction says."}
@@ -50,12 +69,13 @@ migration:
   practice_next: {folio: products}
   agent_proof_watch: {folio: products}
 
+# Each exit's indicators: the published ones its thesis rule reads (src/ai_tracker/thesis.py).
 exits:
-  normal_tech_falsified: {folio: adoption}
-  rents_migrate_up: {folio: value}
-  consumers_keep_surplus: {folio: value}
-  invention_side_warning: {folio: capability}
-  real_wages_fall: {folio: reorganisation}
+  normal_tech_falsified: {folio: adoption, indicators: [horizon_ratio_80_50, cross_tracker_concordance, bbd_work_hours_assisted, bls_tfp_private_nonfarm]}
+  rents_migrate_up: {folio: value, indicators: [gross_profit_semis_share]}
+  consumers_keep_surplus: {folio: value, indicators: [consumer_surplus_wta]}
+  invention_side_warning: {folio: capability, indicators: [rsi_agent_workdays_per_human, rsi_intervention_rate_4_8h]}
+  real_wages_fall: {folio: reorganisation, indicators: [labor_share_nonfarm]}
 
 # The ten questions the owner asks of capability, and the instrument this site reads for each, if any.
 questions:

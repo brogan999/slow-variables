@@ -257,7 +257,7 @@ export type Word = "happening" | "not_happening" | "slower" | "both" | "too_earl
 export type BoardRow = {
   id: string; kind: "ledger" | "outlook" | "migration" | "exit"; folio: string; who: string; attribution: string; line: string;
   state: string | null; word: Word; settles: string | null; test: { fact: string; op: string; against: number | string } | null;
-  reading: Fact | null; sources: string[]; href: string;
+  reading: Fact | null; sources: string[]; indicators: string[]; href: string;
 };
 export type BoardDoc = {
   as_of: string; words: { id: Word; label: string; meaning: string }[]; mapping: { kind: string; state: string; word: Word }[];

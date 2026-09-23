@@ -2,13 +2,14 @@ import Link from "next/link";
 import { indicatorHref } from "@/lib/format";
 import { ConfidenceBar, rubricWords } from "@/components/ConfidenceBar";
 import { EvidenceLog } from "@/components/EvidenceLog";
+import { Inline } from "@/components/Essay";
 import { Callout } from "@/components/Figure";
 import { TimeChart } from "@/components/TimeChart";
 import { ChangelogList } from "@/components/Changelog";
 import { Num, ObsLinks } from "@/components/Provenance";
 import { ArticleLayout, MarginPanel } from "@/components/ArticleLayout";
-import { Grade, PendingNote, StatusChip } from "@/components/StatusChip";
-import { fmt, index, indicator, meta, obsIndex, sources, words, type Band } from "@/lib/data";
+import { Grade, PendingNote, StatusChip, WordChip } from "@/components/StatusChip";
+import { board, fmt, index, outlook, indicator, meta, obsIndex, sources, words, type Band } from "@/lib/data";
 
 export const dynamicParams = false;
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -140,12 +141,30 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
             ) : null}
             <p className="mt-1 text-xs text-muted">Confidence is independent of status: {rubric.slice().reverse().map((b) => `${b.lo}–${b.hi} ${b.label}`).join("; ")}.</p>
           </details>
+          {(() => {
+            const b = board();
+            const o = outlook();
+            const label = Object.fromEntries(b.words.map((w) => [w.id, w.label]));
+            const rows = b.folios.flatMap((f) => f.rows).filter((r) => r.indicators.includes(d.id));
+            return rows.length ? (
+              <section id="predictions" aria-labelledby="predictions-h">
+                <h2 id="predictions-h" className="display text-xl">Predictions that lean on this</h2>
+                <ul className="mt-2">
+                  {rows.map((r) => (
+                    <li key={`${r.kind}-${r.id}`} className="border-t border-grid py-2 grid gap-x-3 gap-y-1 sm:grid-cols-[11rem_minmax(0,1fr)] text-sm">
+                      <div><WordChip word={r.word} label={label[r.word]} /></div>
+                      <div className="min-w-0"><Link href={r.href} className="text-ink hover:underline"><Inline text={r.line} facts={{}} tests={o.tests} /></Link> <span className="text-xs text-ink-2">· {r.who}</span></div>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ) : null;
+          })()}
           <details id="related">
             <summary className="cursor-pointer display text-xl">Related</summary>
             <ul className="mt-3 text-sm flex flex-col gap-1">
               {d.related_indicators.map((r) => { const c = indicators.find((i) => i.id === r); return <li key={r}><Link href={indicatorHref(r, c?.published)} className="hover:underline">{c?.name ?? r}</Link> <StatusChip status={c?.published ? c.status : "unpublished"} /></li>; })}
               {d.related_bottlenecks.length ? <li className="text-ink-2">Bottlenecks {d.related_bottlenecks.map((n, i) => <span key={n}>{i ? ", " : ""}<Link href={`/bottlenecks#b${n}`} className="hover:underline">#{n}</Link></span>)} <span className="text-muted">(Narayanan &amp; Kapoor&apos;s list)</span></li> : null}
-              {d.prediction_rows?.map((p) => <li key={p.id} className="text-ink-2">Prediction: <Link href={`/predictions#${p.id}`} className="hover:underline">{p.claimant}</Link> <span className="text-muted">({p.ledger === "nk" ? "Narayanan and Kapoor" : p.ledger === "ai2027" ? "AI 2027" : p.ledger === "lab" ? "lab timelines" : "capture theses"})</span> <StatusChip status={p.status} /></li>)}
               {d.crosswalk.map((c, i) => <li key={i} className="text-ink-2">Crosswalk: <Link href={`/buckets/${c.bucket_id}`} className="hover:underline">{buckets.find((b) => b.id === c.bucket_id)?.name}</Link> ⇄ <Link href={`/layers/${c.layer_id}`} className="hover:underline">{layers.find((l) => l.id === c.layer_id)?.name}</Link> <span className="text-muted">({words(c.relation)})</span></li>)}
             </ul>
           </details>
