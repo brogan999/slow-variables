@@ -422,7 +422,7 @@ metrics:
       WHERE a.series_key = 'menlo.us_enterprise.genai_app_spend_usd.fy' AND t.series_key = 'menlo.us_enterprise.genai_spend_usd.fy'
   hhi_by_layer:
     description: Herfindahl index (sum of squared revenue shares, 0-1) among the filers the tracker covers in a layer, per calendar quarter. Semis = NVIDIA Data Center vs AMD Data Center; cloud = AWS vs Google Cloud vs Microsoft Intelligent Cloud; model = Ramp's share of businesses paying each lab, normalised.
-    rationale: Capture flows toward the layer that stays concentrated while its neighbours fragment (P1 cross-layer indicator). Coverage is partial, so read the trend, not the level.
+    rationale: When one layer keeps few sellers and the layers beside it have many, profit tends to move to the few. Coverage is partial, so read the trend, not the level.
     grain: [as_of_date, layer_id]
     unit: index
     lead_lag: leading
@@ -1066,7 +1066,7 @@ metrics:
       FROM have JOIN need USING (as_of_date) WHERE have.n = need.n AND have.n >= 3
   continual_learning_level:
     description: The highest ladder rung (Appendix E, L0-L6) with a shipped, production system on record, at each date a new production row lands.
-    rationale: The return arrow made mechanical - if deployment data feeds weights automatically, the fourth-to-first-stage loop stops depending on human data vendors. The thesis rule 'strengthened' needs this at or below L4.
+    rationale: If what a deployed model learns in use flows back into its weights automatically, improving the next model no longer waits on human data vendors, and the return arrow runs by itself. The thesis rule 'strengthened' needs this at or below L4.
     grain: [as_of_date]
     unit: rung
     lead_lag: leading
@@ -1127,7 +1127,7 @@ metrics:
       FROM capex4 c JOIN ent_latest e USING (cq)
   ord_half_life_misfit:
     description: "How far the observed 50%/80% horizon ratio departs from the constant-hazard (Ord half-life) prediction of ln(0.5)/ln(0.8) = 3.11: the ratio divided by 3.11, per model."
-    rationale: "Ord's reframing says every model has a task-length half-life; if success decays at a constant hazard the 50% and 80% horizons sit a fixed 3.1x apart. A misfit above 1 says reliability degrades faster than a constant hazard at long horizons."
+    rationale: "Toby Ord argues that an agent's chance of finishing a task halves with each fixed step in task length; if success decays at a constant hazard the 50% and 80% horizons sit a fixed 3.1x apart. A misfit above 1 says reliability degrades faster than a constant hazard at long horizons."
     grain: [as_of_date, model]
     unit: ratio
     lead_lag: leading
