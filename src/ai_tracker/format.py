@@ -55,7 +55,9 @@ def fmt(v: float | None, unit: str | None = None) -> str:
         body = (_fixed(d, 0) if abs(d) >= 100 else _fixed(d, 1)) if s else _sig(d)
         return f"${body}{s}"
     if unit == "ratio":
-        return f"{_sig(v)}×"
+        return f"{int(_fixed(v, 0)):,}×" if abs(v) >= 1e3 else f"{_sig(v)}×"
+    if unit == "index_points":  # one decimal throughout, so a gap and its control read alike
+        return f"{_fixed(v, 1)} index points"
     if unit == "minutes":
         return f"{_fixed(v / 60, 1)} h" if v >= 60 else f"{_sig(v)} min"
     if unit == "days":

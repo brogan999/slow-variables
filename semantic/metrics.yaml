@@ -986,14 +986,14 @@ metrics:
             FROM pr GROUP BY 1 HAVING count(*) >= 5)
       SELECT * FROM r QUALIFY value IS DISTINCT FROM lag(value) OVER (ORDER BY as_of_date)
   chatgpt_paid_share:
-    description: ChatGPT's paying consumer subscribers over its weekly active users, on each date OpenAI states both; paying business users are counted apart and are not in it.
-    rationale: Most use of AI assistants is unpriced, so it never shows in measured output; the paid share is the one public reading of how much of that use is bought.
+    description: ChatGPT's paying subscribers over its weekly active users, as OpenAI states them, on each date OpenAI states both.
+    rationale: Most use of AI assistants is unpriced, so it never shows in measured output; this ratio is the one public sign of how much of that use is bought.
     grain: [as_of_date]
     unit: share
     lead_lag: coincident
     formula_version: 1
     inputs: ["usage.openai_chatgpt.paying_subscribers.pt", "usage.openai_chatgpt.weekly_active_users.pt"]
-    caveats: OpenAI's own figures as reported by the press; subscribers and weekly users are different counts (a subscriber need not be weekly, and business seats are counted apart), so the ratio is a rough share, not a conversion rate.
+    caveats: OpenAI's own figures as reported by the press; subscribers and weekly users are different counts (a subscriber need not use it every week), so the ratio compares two counts and is not the share of users who pay.
     sql: |
       SELECT s.as_of_date, s.value_numeric / u.value_numeric AS value, [s.id, u.id] AS obs_ids
       FROM observations s JOIN observations u

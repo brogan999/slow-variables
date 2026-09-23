@@ -47,10 +47,11 @@ def _on(d: Any) -> date:
 
 def state(claim: dict[str, Any], f: dict[str, dict[str, Any] | None], today: date | None = None) -> str:
     """A claim with a `due` date is about reaching a level by then: short of it, it cannot be tested until the date has
-    passed on the reading's own clock. A rival test stops applying after `rival_until` on the same clock. The clock is
+    passed on the reading's own clock. A rival test stops applying on `rival_until`, on the same clock. The clock is
     the newest reading's date (a quarterly figure is published weeks after its quarter ends), or, for a running record
     that only moves when it is broken, the calendar plus `grace_days` for results to be published. While a rival test
-    applies but cannot run, the claim cannot claim a win."""
+    applies but cannot run, the claim cannot claim a win. A rival's date and a `due` date are read alike, so a
+    reading dated on the last day both sides counted reads the same way for both."""
     today = today or date.today()
     own = _run(claim.get("test"), f)
     if own is None:
@@ -64,7 +65,7 @@ def state(claim: dict[str, Any], f: dict[str, dict[str, Any] | None], today: dat
     )
     rt = (
         claim.get("rival_test")
-        if not claim.get("rival_until") or clock <= _on(claim["rival_until"])
+        if not claim.get("rival_until") or clock < _on(claim["rival_until"])
         else None
     )
     rival = _run(rt, f)
@@ -86,6 +87,7 @@ def claims(
     for c in spec.get("claims") or []:
         p = positions[c["position"]]
         s = state(c, f, today)
+        who = c.get("attribution") or p["attribution"]  # a claim can be this site's own reading of an author's position
         out.append(
             {
                 **{k: c[k] for k in ("id", "position", "text", "falsifier") if k in c},
@@ -100,8 +102,8 @@ def claims(
                 "fact": (c.get("test") or {}).get("fact"),
                 "rival": p.get("rival"),
                 "folio": p["folio"],
-                "holders": c.get("holders") or p["holders"],
-                "attribution": p["attribution"],
+                "holders": [] if who == "site" else c.get("holders") or p["holders"],
+                "attribution": who,
                 "state": s,
                 "expected": c.get("expect_state"),
             }
@@ -259,6 +261,10 @@ def problems(
         if c.get("position") not in positions:
             errors.append(f"{where} names an unknown position")
         errors += [f"{where} names unknown source {h}" for h in c.get("holders") or [] if h not in sources]
+        if c.get("attribution") and c["attribution"] not in ATTRIBUTIONS:
+            errors.append(f"{where} has an unknown attribution")
+        if c.get("attribution") == "site" and c.get("holders"):
+            errors.append(f"{where} is this site's own reading but names holders")
         if c.get("row") and c["row"] not in rows:
             errors.append(f"{where} names an unknown map row {c['row']}")
         if c.get("stage") and c["stage"] not in stages:

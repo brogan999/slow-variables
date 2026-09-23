@@ -12,7 +12,8 @@ export function fmt(v: number | null | undefined, unit?: string): string {
       const [d, s] = a >= 1e12 ? [v / 1e12, "T"] : a >= 1e9 ? [v / 1e9, "B"] : a >= 1e6 ? [v / 1e6, "M"] : a >= 1e3 ? [v / 1e3, "k"] : [v, ""];
       return `$${s ? (Math.abs(d) >= 100 ? d.toFixed(0) : d.toFixed(1)) : sig(d)}${s}`;
     }
-    case "ratio": return `${sig(v)}×`;
+    case "ratio": return Math.abs(v) >= 1e3 ? `${Math.round(v).toLocaleString("en-US")}×` : `${sig(v)}×`;
+    case "index_points": return `${v.toFixed(1)} index points`; // one decimal throughout, so a gap and its control read alike
     case "minutes": return v >= 60 ? `${(v / 60).toFixed(1)} h` : `${sig(v)} min`;
     case "days": return `${v.toFixed(0)} days`;
     case "months": return `${Number.isInteger(v) ? v.toFixed(0) : v.toFixed(1)} months`; // a measured gap keeps its tenth
