@@ -1,9 +1,9 @@
 {
- "as_of": "2026-09-22",
+ "as_of": "2026-09-21",
  "folios": [
   {
    "id": "capability",
-   "label": "Making it work",
+   "label": "Capability / invention",
    "question": "Can AI do whole tasks, and reliably?",
    "rows": [
     {
@@ -11,6 +11,10 @@
      "folio": "capability",
      "href": "/predictions#ai2027_horizon_doubling_4mo",
      "id": "ai2027_horizon_doubling_4mo",
+     "indicators": [
+      "metr_horizon_50",
+      "metr_horizon_80"
+     ],
      "kind": "ledger",
      "line": "The length of task AI can finish keeps doubling about every four months.",
      "reading": null,
@@ -28,6 +32,10 @@
      "folio": "capability",
      "href": "/predictions#continual_learning_unsolved",
      "id": "continual_learning_unsolved",
+     "indicators": [
+      "continual_learning_level",
+      "cl_lab_release_claims"
+     ],
      "kind": "ledger",
      "line": "Models still cannot learn on the job the way people do, and it holds them back.",
      "reading": null,
@@ -45,6 +53,11 @@
      "folio": "capability",
      "href": "/predictions#nk_benchmarks_false_summits",
      "id": "nk_benchmarks_false_summits",
+     "indicators": [
+      "horizon_ratio_80_50",
+      "dev_rct_uplift",
+      "enterprise_pilot_to_production"
+     ],
      "kind": "ledger",
      "line": "Each test AI passes shows the test's limits, not that AI has arrived.",
      "reading": null,
@@ -62,11 +75,12 @@
      "folio": "capability",
      "href": "/argument/migration",
      "id": "data_centres_now",
+     "indicators": [],
      "kind": "migration",
      "line": "Data-centre buildings and their power hookups are the bottleneck.",
      "reading": {
-      "as_of": "2026-09-23",
-      "derived_id": "6273f04b99e8664b",
+      "as_of": "2026-09-22",
+      "derived_id": "7ed427e253dde39c",
       "holds": true,
       "href": "/query#dc_projected_to_observed_power",
       "obs_ids": [
@@ -82,6 +96,7 @@
        "1b3fb80ea1cb5f7d",
        "1f58e1bc5f6e291c",
        "2024049882e26760",
+       "206ca5fa349ea6a6",
        "232971bc1eb09c73",
        "292ed5fb2fdb0b6e",
        "2966fd74c1ccb7f4",
@@ -109,7 +124,6 @@
        "4caa9c139e5521b0",
        "4e879bcc474ba549",
        "50f57febb7bb7882",
-       "54b88bd33f47cd04",
        "5740d307f80606f4",
        "57b5247c0441881e",
        "5b423d50cc2aa63a",
@@ -130,26 +144,21 @@
        "7ac29042806ef827",
        "7c102a3d9d6129c9",
        "7fcebe0c32512dc6",
+       "81bff0f507d694e9",
        "82074aaa491ae53b",
-       "827f16e2026ecca9",
        "84e7ab23a3a27c43",
        "84e885b4b682d688",
-       "87de30b3f1b29605",
        "87fd8c4e1e099fb0",
-       "89988d9571abb133",
        "89da903de73c0a4c",
        "89ffc8964fc23aa5",
        "8a5bf43f0a36a8fd",
        "8df0aef0848ff0a3",
-       "90729a34eb5385f1",
        "910c482537c4fb9d",
        "9161cb49b570d659",
-       "91fba21c8fc5802c",
        "92b2a60d1165394d",
        "94466b4641c6407a",
        "99c240b213ee2359",
        "a64e867ec70fc7a0",
-       "a66dec24007516ec",
        "a68f5da0d9e6bc57",
        "a6dd53e2b2aa636d",
        "ab93346fc845a8c8",
@@ -165,18 +174,15 @@
        "cbc49a25e497ccf7",
        "d393cf6208c043da",
        "d7c42b66838b2d88",
-       "d908e371b6358144",
        "d91a5af82945b8bc",
        "e40344378f94cfb3",
-       "e8ea181549f1045e",
        "ec5099dcb0c51abc",
        "f6026e7368a6d775",
-       "f6d1124ec34c31e3",
        "f758d0b0cd8f4d68",
        "fadd5c888dc04e6d"
       ],
       "unit": "ratio",
-      "value": 4.419557192340197
+      "value": 4.308062430127798
      },
      "settles": null,
      "sources": [],
@@ -190,6 +196,10 @@
      "folio": "capability",
      "href": "/predictions#ai2027_80pct_years_by_mar_2027",
      "id": "ai2027_80pct_years_by_mar_2027",
+     "indicators": [
+      "metr_horizon_80",
+      "horizon_ratio_80_50"
+     ],
      "kind": "ledger",
      "line": "If the trend speeds up, by March 2027 AI could reliably do software tasks that take people years.",
      "reading": null,
@@ -207,6 +217,11 @@
      "folio": "capability",
      "href": "/predictions#amodei_swe_end_to_end_6_12mo",
      "id": "amodei_swe_end_to_end_6_12mo",
+     "indicators": [
+      "metr_horizon_80",
+      "dev_rct_uplift",
+      "horizon_ratio_80_50"
+     ],
      "kind": "ledger",
      "line": "Models might do most of a software engineer's work end to end within six to twelve months.",
      "reading": null,
@@ -224,6 +239,7 @@
      "folio": "capability",
      "href": "/outlook#claim-frontier_uneven",
      "id": "frontier_uneven",
+     "indicators": [],
      "kind": "outlook",
      "line": "Whole projects stay far behind single skills, with the best score on real freelance projects below [test:frontier_uneven].",
      "reading": {
@@ -257,6 +273,9 @@
      "folio": "capability",
      "href": "/outlook#claim-horizon_fast",
      "id": "horizon_fast",
+     "indicators": [
+      "metr_horizon_50"
+     ],
      "kind": "outlook",
      "line": "The length of the software tasks AI can finish keeps doubling at least as fast as the scenario assumes, every [test:horizon_fast] or less.",
      "reading": {
@@ -314,6 +333,7 @@
      "folio": "capability",
      "href": "/outlook#claim-reliability_lags",
      "id": "reliability_lags",
+     "indicators": [],
      "kind": "outlook",
      "line": "The agents Princeton's tracker tests grow more dependable far more slowly than they grow more accurate.",
      "reading": {
@@ -361,6 +381,10 @@
      "folio": "capability",
      "href": "/#exits",
      "id": "invention_side_warning",
+     "indicators": [
+      "rsi_agent_workdays_per_human",
+      "rsi_intervention_rate_4_8h"
+     ],
      "kind": "exit",
      "line": "AI speeds up its own invention",
      "reading": null,
@@ -376,6 +400,10 @@
      "folio": "capability",
      "href": "/predictions#ai2027_superhuman_coder_2027",
      "id": "ai2027_superhuman_coder_2027",
+     "indicators": [
+      "metr_horizon_80",
+      "metr_horizon_50"
+     ],
      "kind": "ledger",
      "line": "An AI that codes better than the best people arrives in 2027.",
      "reading": null,
@@ -393,6 +421,10 @@
      "folio": "capability",
      "href": "/predictions#amodei_country_of_geniuses_1_2y",
      "id": "amodei_country_of_geniuses_1_2y",
+     "indicators": [
+      "metr_horizon_80",
+      "metr_horizon_50"
+     ],
      "kind": "ledger",
      "line": "If scaling continues, AI as able as a country of geniuses arrives within a year or two.",
      "reading": null,
@@ -410,6 +442,10 @@
      "folio": "capability",
      "href": "/predictions#nk_rsi_external_limits",
      "id": "nk_rsi_external_limits",
+     "indicators": [
+      "metr_horizon_50",
+      "horizon_ratio_80_50"
+     ],
      "kind": "ledger",
      "line": "AI improving itself cannot get past limits that sit outside the lab.",
      "reading": null,
@@ -427,6 +463,9 @@
      "folio": "capability",
      "href": "/predictions#openai_automated_researcher_mar_2028",
      "id": "openai_automated_researcher_mar_2028",
+     "indicators": [
+      "metr_horizon_80"
+     ],
      "kind": "ledger",
      "line": "OpenAI builds an automated AI researcher by March 2028.",
      "reading": null,
@@ -444,6 +483,10 @@
      "folio": "capability",
      "href": "/predictions#openai_research_intern_sep_2026",
      "id": "openai_research_intern_sep_2026",
+     "indicators": [
+      "metr_horizon_80",
+      "dev_rct_uplift"
+     ],
      "kind": "ledger",
      "line": "OpenAI has an automated AI research intern by September 2026.",
      "reading": null,
@@ -461,6 +504,7 @@
      "folio": "capability",
      "href": "/argument/migration",
      "id": "memory_packaging_now",
+     "indicators": [],
      "kind": "migration",
      "line": "Memory and chip packaging are short.",
      "reading": null,
@@ -476,6 +520,7 @@
      "folio": "capability",
      "href": "/outlook#claim-coverage_sold",
      "id": "coverage_sold",
+     "indicators": [],
      "kind": "outlook",
      "line": "Labs and companies keep paying more for the steps models cannot yet take, even as each new model takes more of them on its own.",
      "reading": null,
@@ -495,6 +540,9 @@
      "folio": "capability",
      "href": "/outlook#claim-data_drives_pretraining",
      "id": "data_drives_pretraining",
+     "indicators": [
+      "epoch_data_exhaustion_year"
+     ],
      "kind": "outlook",
      "line": "Better data, more than better model designs, drives how much a model learns from its training, so progress comes to rest on finding new data.",
      "reading": null,
@@ -514,6 +562,7 @@
      "folio": "capability",
      "href": "/outlook#claim-field_divergence",
      "id": "field_divergence",
+     "indicators": [],
      "kind": "outlook",
      "line": "Research speeds up far more in software and mathematics than in drug development, materials or physics, where the slowest steps are experiments.",
      "reading": null,
@@ -533,6 +582,9 @@
      "folio": "capability",
      "href": "/outlook#claim-lossy_loop",
      "id": "lossy_loop",
+     "indicators": [
+      "rsi_agent_workdays_per_human"
+     ],
      "kind": "outlook",
      "line": "AI's help with AI research brings steady gains, not accelerating ones.",
      "reading": null,
@@ -552,6 +604,7 @@
      "folio": "capability",
      "href": "/outlook#claim-rli_reached",
      "id": "rli_reached",
+     "indicators": [],
      "kind": "outlook",
      "line": "As the scenario is written, AI completes most real, paid freelance projects end to end by the end of 2027.",
      "reading": {
@@ -585,44 +638,17 @@
   },
   {
    "id": "products",
-   "label": "Turning it into products",
+   "label": "Innovation: products and applications",
    "question": "What gets built on it, and who sells it?",
    "rows": [
     {
      "attribution": "site",
      "folio": "products",
-     "href": "/outlook#claim-margins_below_software",
-     "id": "margins_below_software",
-     "kind": "outlook",
-     "line": "Companies selling AI products keep lower gross margins than classic software, because every use costs them the model's price.",
-     "reading": {
-      "as_of": "2025-12-31",
-      "holds": null,
-      "href": "/series/iconiq.ai_products.gross_margin.fy#b7ce9a9d822a66fb",
-      "obs_ids": [
-       "b7ce9a9d822a66fb"
-      ],
-      "unit": "share",
-      "value": 0.45
-     },
-     "row": "applications",
-     "settles": "AI product margins reaching those of classic software.",
-     "sources": [],
-     "stage": null,
-     "state": "holding",
-     "test": {
-      "against": 0.7,
-      "fact": "ai_app_margin",
-      "op": "lt"
-     },
-     "who": "This site",
-     "word": "happening"
-    },
-    {
-     "attribution": "site",
-     "folio": "products",
      "href": "/argument/migration",
      "id": "practice_next",
+     "indicators": [
+      "lab_procurement_signal"
+     ],
      "kind": "migration",
      "line": "Practice tasks with automatic graders, and the expert-written data they consume, are where the shortage goes next.",
      "reading": {
@@ -649,6 +675,7 @@
      "folio": "products",
      "href": "/outlook#claim-checking_sold",
      "id": "checking_sold",
+     "indicators": [],
      "kind": "outlook",
      "line": "Checking AI's work is sold as a category of its own.",
      "reading": {
@@ -682,6 +709,7 @@
      "folio": "products",
      "href": "/outlook#claim-insurers_exclude",
      "id": "insurers_exclude",
+     "indicators": [],
      "kind": "outlook",
      "line": "Insurers write AI's mistakes out of their standard policies, so the cover has to be bought and priced on its own.",
      "reading": {
@@ -716,6 +744,7 @@
      "folio": "products",
      "href": "/argument/migration",
      "id": "agent_proof_watch",
+     "indicators": [],
      "kind": "migration",
      "line": "Proof of what an AI agent (a model that carries out tasks with software tools on a person's behalf) did, and who answers for it, becomes a bottleneck once agents handle money.",
      "reading": null,
@@ -731,6 +760,7 @@
      "folio": "products",
      "href": "/outlook#claim-agents_fenced",
      "id": "agents_fenced",
+     "indicators": [],
      "kind": "outlook",
      "line": "Large platforms move to keep outside agents off them more often than they let them in.",
      "reading": null,
@@ -749,27 +779,12 @@
     {
      "attribution": "author",
      "folio": "products",
-     "href": "/outlook#claim-apps_squeezed",
-     "id": "apps_squeezed",
-     "kind": "outlook",
-     "line": "Apps that resell the labs' models see their margins shrink as their use grows.",
-     "reading": null,
-     "row": "applications",
-     "settles": "A lab selling to apps below its public prices, or apps' margins holding as their use grows.",
-     "sources": [
-      "https://hypersoren.xyz/posts/smart-squeeze/"
-     ],
-     "stage": null,
-     "state": "untestable",
-     "test": null,
-     "who": "Soren Larson",
-     "word": "too_early"
-    },
-    {
-     "attribution": "author",
-     "folio": "products",
      "href": "/outlook#claim-data_next",
      "id": "data_next",
+     "indicators": [
+      "rl_environment_vendor_count",
+      "expert_data_market_run_rate"
+     ],
      "kind": "outlook",
      "line": "Labs spend more each year with the firms that sell practice tasks, graders and expert data.",
      "reading": null,
@@ -789,6 +804,7 @@
      "folio": "products",
      "href": "/outlook#claim-insurers_cover",
      "id": "insurers_cover",
+     "indicators": [],
      "kind": "outlook",
      "line": "Insurers sell cover written for AI's mistakes, not only exclusions from standard policies.",
      "reading": null,
@@ -806,6 +822,7 @@
      "folio": "products",
      "href": "/outlook#claim-training_cheapens",
      "id": "training_cheapens",
+     "indicators": [],
      "kind": "outlook",
      "line": "If training a model further on a firm's own work keeps getting cheaper, apps train their own instead of renting the best.",
      "reading": null,
@@ -825,6 +842,7 @@
      "folio": "products",
      "href": "/outlook#claim-verification_first",
      "id": "verification_first",
+     "indicators": [],
      "kind": "outlook",
      "line": "The first large failure of a market run by AI agents comes from no one being able to check what an agent did, not from agents lacking skill.",
      "reading": null,
@@ -840,11 +858,11 @@
      "word": "too_early"
     }
    ],
-   "too_early": 7
+   "too_early": 6
   },
   {
    "id": "adoption",
-   "label": "Getting firms to use it",
+   "label": "Diffusion: early adoption",
    "question": "How fast do firms and people take it up?",
    "rows": [
     {
@@ -852,6 +870,12 @@
      "folio": "adoption",
      "href": "/predictions#nk_adoption_decades",
      "id": "nk_adoption_decades",
+     "indicators": [
+      "btos_firm_use",
+      "bbd_work_hours_assisted",
+      "bls_labor_productivity_yoy",
+      "bls_tfp_private_nonfarm"
+     ],
      "kind": "ledger",
      "line": "AI's big economic effects arrive over decades, not years.",
      "reading": null,
@@ -869,6 +893,11 @@
      "folio": "adoption",
      "href": "/predictions#nk_safety_speed_limits",
      "id": "nk_safety_speed_limits",
+     "indicators": [
+      "fda_ai_devices_cumulative",
+      "waymo_weekly_paid_rides",
+      "safety_brake_events"
+     ],
      "kind": "ledger",
      "line": "Adoption stays slow wherever mistakes are costly.",
      "reading": null,
@@ -886,19 +915,20 @@
      "folio": "adoption",
      "href": "/outlook#claim-juniors_behind",
      "id": "juniors_behind",
+     "indicators": [],
      "kind": "outlook",
      "line": "In the jobs most exposed to AI, workers in their early twenties fall behind workers over fifty [cite:canaries], while in the least exposed jobs they do not.",
      "reading": {
-      "as_of": "2026-08-31",
-      "derived_id": "89d9e905e40bb3c8",
+      "as_of": "2026-07-31",
+      "derived_id": "2cc07f7394b0488a",
       "holds": null,
       "href": "/query#canaries_junior_senior_gap",
       "obs_ids": [
-       "11b6c27fffad5ce9",
-       "1e44b7fa407b31b5"
+       "c64a7adef7acf36f",
+       "fc7f7b7236add51d"
       ],
       "unit": "index_points",
-      "value": -17.57000000000002
+      "value": -16.30000000000001
      },
      "row": "work_and_pay",
      "settles": "The same gap opening in the least exposed jobs.",
@@ -920,6 +950,12 @@
      "folio": "adoption",
      "href": "/#exits",
      "id": "normal_tech_falsified",
+     "indicators": [
+      "horizon_ratio_80_50",
+      "cross_tracker_concordance",
+      "bbd_work_hours_assisted",
+      "bls_tfp_private_nonfarm"
+     ],
      "kind": "exit",
      "line": "AI is not an ordinary technology",
      "reading": null,
@@ -935,6 +971,9 @@
      "folio": "adoption",
      "href": "/outlook#claim-firms_normal",
      "id": "firms_normal",
+     "indicators": [
+      "btos_firm_use"
+     ],
      "kind": "outlook",
      "line": "The share of American firms using AI stays within the pace this site calls normal, below [test:firms_normal].",
      "reading": {
@@ -967,6 +1006,10 @@
      "folio": "adoption",
      "href": "/predictions#nk_agi_not_milestone",
      "id": "nk_agi_not_milestone",
+     "indicators": [
+      "cross_tracker_concordance",
+      "bbd_work_hours_assisted"
+     ],
      "kind": "ledger",
      "line": "No single leap in ability unlocks AI's economic value.",
      "reading": null,
@@ -984,6 +1027,7 @@
      "folio": "adoption",
      "href": "/outlook#claim-simple_markets_first",
      "id": "simple_markets_first",
+     "indicators": [],
      "kind": "outlook",
      "line": "Agents take hold first in job search, property and other matching markets.",
      "reading": null,
@@ -1003,6 +1047,9 @@
      "folio": "adoption",
      "href": "/outlook#claim-software_jobs_hold",
      "id": "software_jobs_hold",
+     "indicators": [
+      "canaries_exposed_employment_yoy"
+     ],
      "kind": "outlook",
      "line": "AI does not wipe out software engineering jobs, and demand for engineers may rise as software gets cheaper to make.",
      "reading": null,
@@ -1022,6 +1069,7 @@
      "folio": "adoption",
      "href": "/outlook#claim-use_unpriced",
      "id": "use_unpriced",
+     "indicators": [],
      "kind": "outlook",
      "line": "Official output statistics miss most of AI's gains, which come as better quality and saved time that no price records.",
      "reading": null,
@@ -1041,14 +1089,17 @@
   },
   {
    "id": "reorganisation",
-   "label": "Reorganising around it",
-   "question": "What happens to work, pay and output?",
+   "label": "Diffusion: adaptation",
+   "question": "What happens to work, pay and output as firms reorganise?",
    "rows": [
     {
      "attribution": "site",
      "folio": "reorganisation",
      "href": "/#exits",
      "id": "real_wages_fall",
+     "indicators": [
+      "labor_share_nonfarm"
+     ],
      "kind": "exit",
      "line": "Workers stop sharing the gains",
      "reading": null,
@@ -1064,6 +1115,7 @@
      "folio": "reorganisation",
      "href": "/outlook#claim-no_growth_jump",
      "id": "no_growth_jump",
+     "indicators": [],
      "kind": "outlook",
      "line": "In no quarter before 2034 does American real output per person stand [test:no_growth_jump] or more above the highest level it had reached a year or more before.",
      "reading": {
@@ -1099,6 +1151,11 @@
      "folio": "reorganisation",
      "href": "/predictions#korinek_divergence_after_2027",
      "id": "korinek_divergence_after_2027",
+     "indicators": [
+      "bls_tfp_private_nonfarm",
+      "labor_share_nonfarm",
+      "cross_tracker_concordance"
+     ],
      "kind": "ledger",
      "line": "The economists' scenarios only pull apart after 2027.",
      "reading": null,
@@ -1116,6 +1173,11 @@
      "folio": "reorganisation",
      "href": "/predictions#korinek_extreme_scenario",
      "id": "korinek_extreme_scenario",
+     "indicators": [
+      "labor_share_nonfarm",
+      "bls_labor_productivity_yoy",
+      "new_grad_unemployment"
+     ],
      "kind": "ledger",
      "line": "Extreme case: growth soars and workers' share of income falls sharply.",
      "reading": null,
@@ -1133,6 +1195,11 @@
      "folio": "reorganisation",
      "href": "/predictions#korinek_modest_scenario",
      "id": "korinek_modest_scenario",
+     "indicators": [
+      "bls_tfp_private_nonfarm",
+      "bls_labor_productivity_yoy",
+      "labor_share_nonfarm"
+     ],
      "kind": "ledger",
      "line": "Modest case: AI adds under half a point a year to growth by 2030.",
      "reading": null,
@@ -1150,6 +1217,11 @@
      "folio": "reorganisation",
      "href": "/predictions#korinek_substantial_scenario",
      "id": "korinek_substantial_scenario",
+     "indicators": [
+      "bls_tfp_private_nonfarm",
+      "cross_tracker_concordance",
+      "canaries_entry_level_gap"
+     ],
      "kind": "ledger",
      "line": "Substantial case: output rises and some office jobs go by 2030.",
      "reading": null,
@@ -1167,6 +1239,7 @@
      "folio": "reorganisation",
      "href": "/outlook#claim-ai_taxed",
      "id": "ai_taxed",
+     "indicators": [],
      "kind": "outlook",
      "line": "As AI takes over paid work, governments move tax from wages towards spending, and later towards AI itself.",
      "reading": null,
@@ -1186,6 +1259,7 @@
      "folio": "reorganisation",
      "href": "/outlook#claim-bet_fast_side",
      "id": "bet_fast_side",
+     "indicators": [],
      "kind": "outlook",
      "line": "In some quarter before 2034, output per person stands [test:bet_fast_side] or more above the highest level it had reached a year or more before, which wins the bet's fast side.",
      "reading": {
@@ -1221,6 +1295,7 @@
      "folio": "reorganisation",
      "href": "/outlook#claim-firms_centralise",
      "id": "firms_centralise",
+     "indicators": [],
      "kind": "outlook",
      "line": "Firms using AI grow larger and take decisions further from the people on the spot.",
      "reading": null,
@@ -1240,6 +1315,9 @@
      "folio": "reorganisation",
      "href": "/outlook#claim-hours_rise_first",
      "id": "hours_rise_first",
+     "indicators": [
+      "bbd_work_hours_assisted"
+     ],
      "kind": "outlook",
      "line": "Work in the jobs most exposed to AI grows more intense before it grows shorter.",
      "reading": null,
@@ -1259,6 +1337,9 @@
      "folio": "reorganisation",
      "href": "/outlook#claim-labour_share_falls",
      "id": "labour_share_falls",
+     "indicators": [
+      "labor_share_nonfarm"
+     ],
      "kind": "outlook",
      "line": "Labour's share of income falls as AI takes on more tasks, even as wages rise.",
      "reading": null,
@@ -1278,6 +1359,7 @@
      "folio": "reorganisation",
      "href": "/outlook#claim-relational_share",
      "id": "relational_share",
+     "indicators": [],
      "kind": "outlook",
      "line": "Care, teaching, hospitality and other work where the person is part of what is bought take a rising share of spending and jobs as AI spreads.",
      "reading": null,
@@ -1297,6 +1379,7 @@
      "folio": "reorganisation",
      "href": "/outlook#claim-visits_fall",
      "id": "visits_fall",
+     "indicators": [],
      "kind": "outlook",
      "line": "Publishers lose the visits that pay for what they produce.",
      "reading": null,
@@ -1316,7 +1399,7 @@
   },
   {
    "id": "value",
-   "label": "Who keeps the money",
+   "label": "Value capture",
    "question": "Where do the profits end up?",
    "rows": [
     {
@@ -1324,6 +1407,9 @@
      "folio": "value",
      "href": "/predictions#anthropic_10x_per_year",
      "id": "anthropic_10x_per_year",
+     "indicators": [
+      "circular_financing_scale"
+     ],
      "kind": "ledger",
      "line": "Anthropic's revenue keeps growing about tenfold a year.",
      "reading": null,
@@ -1341,6 +1427,7 @@
      "folio": "value",
      "href": "/argument/migration",
      "id": "capital_now",
+     "indicators": [],
      "kind": "migration",
      "line": "Money is not what is scarce.",
      "reading": {
@@ -1411,6 +1498,7 @@
      "folio": "value",
      "href": "/outlook#claim-contracts_shift",
      "id": "contracts_shift",
+     "indicators": [],
      "kind": "outlook",
      "line": "Buyers sign up for AI capacity well ahead of using it, so Microsoft's contracted but undelivered business keeps growing faster than its revenue.",
      "reading": {
@@ -1447,8 +1535,42 @@
     {
      "attribution": "site",
      "folio": "value",
+     "href": "/outlook#claim-margins_below_software",
+     "id": "margins_below_software",
+     "indicators": [],
+     "kind": "outlook",
+     "line": "Companies selling AI products keep lower gross margins than classic software, because every use costs them the model's price.",
+     "reading": {
+      "as_of": "2025-12-31",
+      "holds": null,
+      "href": "/series/iconiq.ai_products.gross_margin.fy#b7ce9a9d822a66fb",
+      "obs_ids": [
+       "b7ce9a9d822a66fb"
+      ],
+      "unit": "share",
+      "value": 0.45
+     },
+     "row": "applications",
+     "settles": "AI product margins reaching those of classic software.",
+     "sources": [],
+     "stage": null,
+     "state": "holding",
+     "test": {
+      "against": 0.7,
+      "fact": "ai_app_margin",
+      "op": "lt"
+     },
+     "who": "This site",
+     "word": "happening"
+    },
+    {
+     "attribution": "site",
+     "folio": "value",
      "href": "/#exits",
      "id": "rents_migrate_up",
+     "indicators": [
+      "gross_profit_semis_share"
+     ],
      "kind": "exit",
      "line": "Profit moves up to the labs",
      "reading": null,
@@ -1464,6 +1586,9 @@
      "folio": "value",
      "href": "/outlook#claim-capex_ahead",
      "id": "capex_ahead",
+     "indicators": [
+      "capex_to_revenue_stack"
+     ],
      "kind": "outlook",
      "line": "The biggest cloud and platform companies spend more each year on buildings and equipment than AI earns in revenue.",
      "reading": {
@@ -1528,6 +1653,9 @@
      "folio": "value",
      "href": "/outlook#claim-chips_collect",
      "id": "chips_collect",
+     "indicators": [
+      "gross_profit_semis_share"
+     ],
      "kind": "outlook",
      "line": "NVIDIA and AMD take more than [test:chips_collect] of the gross profit they share with Microsoft's cloud arm and the estimates for OpenAI and Anthropic.",
      "reading": {
@@ -1573,6 +1701,9 @@
      "folio": "value",
      "href": "/outlook#claim-gap_stays_short",
      "id": "gap_stays_short",
+     "indicators": [
+      "open_weights_lag_months"
+     ],
      "kind": "outlook",
      "line": "Open models trail the best closed ones by less than [test:gap_stays_short], a shorter gap than this site calls normal.",
      "reading": {
@@ -1605,50 +1736,51 @@
      "folio": "value",
      "href": "/outlook#claim-open_takes_volume",
      "id": "open_takes_volume",
+     "indicators": [],
      "kind": "outlook",
      "line": "Open models carry most of the tokens routed to OpenRouter's busiest models.",
      "reading": {
-      "as_of": "2026-09-22",
-      "derived_id": "4b0c0243d24138bb",
+      "as_of": "2026-09-21",
+      "derived_id": "f80ae3e940928e19",
       "holds": null,
       "href": "/query#open_share_of_routed_tokens",
       "obs_ids": [
        "025baee5c67d8593",
        "05ca16becd23d9eb",
+       "0b547adba394dfdb",
+       "121d24cacf48e569",
+       "131b2b82a7c23b98",
        "1b4377dc73c16fe5",
        "20c99a8c45b6e954",
        "260fda2e15e97284",
+       "2866784e392b4b46",
+       "2b40793a069295e6",
        "2bb5a68c3df3e356",
        "2fa86ab54e9ecdee",
-       "3ef74631cd0eb7ee",
-       "5286b39a59414717",
-       "56edb9077d8bf898",
-       "5e281c29eeb9c533",
+       "3b2797a8c24dfb40",
+       "498878976d0176b5",
+       "5117ed4f6639b652",
        "66aa80954fbd86cf",
-       "6bac4c4bd8bd4e65",
-       "6d915de1c57174b0",
+       "6e1a5bd91e68f297",
        "6edfeef5de774f1e",
        "716c1b6834dfa042",
+       "7416d551cca79565",
        "81325042cbbd3243",
-       "837282ee1a9f4a4d",
-       "9034f737e0838f26",
+       "83ab130598e13ccb",
        "92e5649c573304b8",
-       "9ce7867fda52b5ba",
-       "a1e16ef0de87a98a",
-       "ae7b2e4a6743b8f3",
-       "b2d6659cf130f2f5",
-       "c0be50ac1413ae59",
-       "e111fb110b35683c",
-       "e9accd1182f65f26",
-       "ec1a0385572f3458",
-       "ec76e15053cef0c3",
-       "ed7d1bcc412b9d07",
-       "f761df06cd02250d",
-       "fd3b61b363d6e5e2",
-       "ff9f317577cdc06e"
+       "af2563e0c41557c7",
+       "b9e4decb039c76cd",
+       "bd11fa3f0643c149",
+       "bd58d2a2ea783812",
+       "c04ba8adfa1882a7",
+       "cc08de46e89ec7ce",
+       "f6988aec485c3594",
+       "f6b415ef16aff321",
+       "f90ebbe2d45880d4",
+       "fd3b61b363d6e5e2"
       ],
       "unit": "share",
-      "value": 0.8111253924113272
+      "value": 0.8083828290469658
      },
      "row": null,
      "settles": "The closed models' share of those tokens climbing back as the gap to open models closes.",
@@ -1668,6 +1800,9 @@
      "folio": "value",
      "href": "/#exits",
      "id": "consumers_keep_surplus",
+     "indicators": [
+      "consumer_surplus_wta"
+     ],
      "kind": "exit",
      "line": "Users keep most of the value",
      "reading": null,
@@ -1683,6 +1818,10 @@
      "folio": "value",
      "href": "/predictions#amodei_trillions_before_2030",
      "id": "amodei_trillions_before_2030",
+     "indicators": [
+      "circular_financing_scale",
+      "cloud_rpo_backlog"
+     ],
      "kind": "ledger",
      "line": "AI earns trillions of dollars a year in revenue before 2030.",
      "reading": null,
@@ -1700,6 +1839,10 @@
      "folio": "value",
      "href": "/predictions#bain_2t_revenue_2030",
      "id": "bain_2t_revenue_2030",
+     "indicators": [
+      "circular_financing_scale",
+      "cloud_rpo_backlog"
+     ],
      "kind": "ledger",
      "line": "AI needs about two trillion dollars of revenue a year by 2030 and falls short.",
      "reading": null,
@@ -1717,6 +1860,11 @@
      "folio": "value",
      "href": "/predictions#cahn_1_5t_question",
      "id": "cahn_1_5t_question",
+     "indicators": [
+      "capex_to_revenue_stack",
+      "circular_financing_scale",
+      "margin_stack_semis_share"
+     ],
      "kind": "ledger",
      "line": "The gap between AI spending and the revenue to repay it keeps widening.",
      "reading": null,
@@ -1734,6 +1882,12 @@
      "folio": "value",
      "href": "/predictions#cahn_600b_question",
      "id": "cahn_600b_question",
+     "indicators": [
+      "capex_to_revenue_stack",
+      "circular_financing_scale",
+      "margin_stack_semis_share",
+      "cloud_rpo_backlog"
+     ],
      "kind": "ledger",
      "line": "AI's revenue falls far short of what the spending on it needs to repay.",
      "reading": null,
@@ -1751,6 +1905,11 @@
      "folio": "value",
      "href": "/predictions#covello_too_much_spend",
      "id": "covello_too_much_spend",
+     "indicators": [
+      "dev_rct_uplift",
+      "metr_horizon_50",
+      "margin_stack_semis_share"
+     ],
      "kind": "ledger",
      "line": "AI costs too much for the problems it can solve today.",
      "reading": null,
@@ -1768,6 +1927,11 @@
      "folio": "value",
      "href": "/predictions#tunguz_12x_infra_per_revenue",
      "id": "tunguz_12x_infra_per_revenue",
+     "indicators": [
+      "cloud_segment_margins",
+      "cloud_rpo_backlog",
+      "circular_financing_scale"
+     ],
      "kind": "ledger",
      "line": "The largest cloud companies spend many times more on AI buildings and chips than AI earns.",
      "reading": null,
@@ -1781,10 +1945,33 @@
      "word": "too_early"
     },
     {
+     "attribution": "author",
+     "folio": "value",
+     "href": "/outlook#claim-apps_squeezed",
+     "id": "apps_squeezed",
+     "indicators": [],
+     "kind": "outlook",
+     "line": "Apps that resell the labs' models see their margins shrink as their use grows.",
+     "reading": null,
+     "row": "applications",
+     "settles": "A lab selling to apps below its public prices, or apps' margins holding as their use grows.",
+     "sources": [
+      "https://hypersoren.xyz/posts/smart-squeeze/"
+     ],
+     "stage": null,
+     "state": "untestable",
+     "test": null,
+     "who": "Soren Larson",
+     "word": "too_early"
+    },
+    {
      "attribution": "site",
      "folio": "value",
      "href": "/outlook#claim-chips_concentrate",
      "id": "chips_concentrate",
+     "indicators": [
+      "semis_hhi"
+     ],
      "kind": "outlook",
      "line": "NVIDIA's lead over other chip makers in sales for data centres keeps widening as AI spending grows.",
      "reading": null,
@@ -1802,6 +1989,7 @@
      "folio": "value",
      "href": "/outlook#claim-chips_stored",
      "id": "chips_stored",
+     "indicators": [],
      "kind": "outlook",
      "line": "The cloud companies start storing new chips instead of installing them, the sign Cahn watches for that data centres are running late [cite:cahn_2025].",
      "reading": null,
@@ -1821,6 +2009,7 @@
      "folio": "value",
      "href": "/outlook#claim-edge_inference",
      "id": "edge_inference",
+     "indicators": [],
      "kind": "outlook",
      "line": "Much of AI's everyday work moves out of distant data centres onto people's own phones and laptops.",
      "reading": null,
@@ -1840,6 +2029,9 @@
      "folio": "value",
      "href": "/outlook#claim-few_labs",
      "id": "few_labs",
+     "indicators": [
+      "frontier_capital_concentration"
+     ],
      "kind": "outlook",
      "line": "Only a handful of labs stay at the frontier, because it costs too much capital for more.",
      "reading": null,
@@ -1859,6 +2051,9 @@
      "folio": "value",
      "href": "/outlook#claim-labs_buy_exits",
      "id": "labs_buy_exits",
+     "indicators": [
+      "lab_vertical_integration_exit_bell"
+     ],
      "kind": "outlook",
      "line": "Being bought by a lab or a compute company becomes the usual way out for the start-ups that sell them data and tools.",
      "reading": {
@@ -1932,6 +2127,7 @@
      "folio": "value",
      "href": "/outlook#claim-lock_in",
      "id": "lock_in",
+     "indicators": [],
      "kind": "outlook",
      "line": "The labs earn a growing share of their revenue from products and deployments inside their customers' firms rather than from selling access to their models by the token.",
      "reading": null,
@@ -1951,6 +2147,9 @@
      "folio": "value",
      "href": "/outlook#claim-own_models",
      "id": "own_models",
+     "indicators": [
+      "open_vs_closed_gap"
+     ],
      "kind": "outlook",
      "line": "Every firm ends up with a model of its own, trained on its own work.",
      "reading": null,
@@ -1970,6 +2169,9 @@
      "folio": "value",
      "href": "/outlook#claim-self_hosting",
      "id": "self_hosting",
+     "indicators": [
+      "open_vs_closed_gap"
+     ],
      "kind": "outlook",
      "line": "Most businesses end up running models on machines they control rather than renting a lab's.",
      "reading": null,
@@ -1987,6 +2189,7 @@
      "folio": "value",
      "href": "/outlook#claim-states_buy_in",
      "id": "states_buy_in",
+     "indicators": [],
      "kind": "outlook",
      "line": "Governments take direct stakes in the companies that make chips, power and models.",
      "reading": null,
@@ -2004,6 +2207,9 @@
      "folio": "value",
      "href": "/outlook#claim-surplus_to_users",
      "id": "surplus_to_users",
+     "indicators": [
+      "consumer_surplus_wta"
+     ],
      "kind": "outlook",
      "line": "The people who use AI keep far more of its value than the firms that make it.",
      "reading": null,
@@ -2019,7 +2225,7 @@
      "word": "too_early"
     }
    ],
-   "too_early": 17
+   "too_early": 18
   }
  ],
  "mapping": [

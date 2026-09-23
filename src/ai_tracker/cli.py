@@ -351,6 +351,7 @@ def _check(s: st.Store) -> tuple[list[str], list[str]]:
 
     o_errors, o_notes = outlook_check(s)
     from . import board
+    from .outlook import load as load_outlook
     from .thesis import RULES
 
     b_errors = board.problems(
@@ -359,6 +360,8 @@ def _check(s: st.Store) -> tuple[list[str], list[str]]:
         {p["id"] for p in (load_argument().get("migration") or {}).get("predictions") or []},
         {r.__name__ for r in RULES},
         {pr.id for pr in s.seed.predictions if pr.published},
+        {c["id"] for c in load_outlook().get("claims") or []},
+        {i.id for i in s.seed.indicators if i.published},
     )
     return errors + a_errors + m_errors + o_errors + b_errors, notes + a_notes + o_notes
 

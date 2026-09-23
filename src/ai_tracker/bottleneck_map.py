@@ -203,6 +203,10 @@ def build(
                 "href": None,
             }
         )
+    for r in chain + outside:  # the filter "what binds now or is expected to": a word from the export, never the page's
+        now = r["reading"].get("word") in ("tight", "severe")
+        predicted = any(c["writers"] for c in r["cells"].values())
+        r["focus"] = "both" if now and predicted else "now" if now else "predicted" if predicted else None
     return {
         "stages": [{**s, "n": k} for k, s in enumerate(spec["stages"], 1)],
         "groups": [

@@ -7,13 +7,14 @@ SPEC = {
     "words": {w: {"label": w, "meaning": w} for w in board.ORDER},
     "ledger": {"p1": {"folio": "capability", "line": "A plain line."}},
     "migration": {"m1": {"folio": "value"}},
-    "exits": {"e1": {"folio": "value"}},
+    "exits": {"e1": {"folio": "value", "indicators": ["i2"]}},
+    "folio_overrides": {"c2": "value"},
     "questions": [{"question": "Q?", "indicator": "i1"}, {"question": "R?", "indicator": None, "note": "none"}],
 }
 OUTLOOK = {
     "as_of": "2026-09-23",
     "sources": [{"id": "s1", "who": "Ann Author", "url": "https://example.org/a"}],
-    "facts": {"f1": {"value": 0.4, "unit": "share", "as_of": "2026-06-30", "obs_ids": ["o1"]}},
+    "facts": {"f1": {"value": 0.4, "unit": "share", "as_of": "2026-06-30", "obs_ids": ["o1"], "href": "/indicators/i3"}},
     "claims": [
         {"id": "c1", "folio": "value", "attribution": "author", "holders": ["s1"], "text": "It holds.",
          "state": "both", "test": {"fact": "f1", "lt": 0.7}, "falsifier": "It stops."},
@@ -27,7 +28,8 @@ ARGUMENT = {"migration": {"predictions": [{"id": "m1", "claim": "Power binds.", 
 def test_every_family_maps_to_one_word_and_the_board_groups_by_folio():
     doc = board.build(
         SPEC,
-        [{"id": "p1", "claimant": "Lab", "status": "behind", "window_end": "2027-01-01", "claim_url": None}],
+        [{"id": "p1", "claimant": "Lab", "status": "behind", "window_end": "2027-01-01", "claim_url": None,
+          "related_indicators": ["i1"]}],
         OUTLOOK,
         ARGUMENT,
         [{"id": "e1", "state": "contradicted"}],
@@ -40,7 +42,8 @@ def test_every_family_maps_to_one_word_and_the_board_groups_by_folio():
     }
     assert rows["c1"]["who"] == "Ann Author" and rows["c2"]["who"] == "This site"
     assert rows["c1"]["reading"]["obs_ids"] == ["o1"] and rows["c1"]["test"] == {"fact": "f1", "op": "lt", "against": 0.7}
-    assert [r["folio"] for f in doc["folios"] for r in f["rows"]] == ["capability"] * 2 + ["value"] * 3
+    assert rows["c2"]["folio"] == "value"  # the owner's page files it there, whatever its position's folio
+    assert [rows[k]["indicators"] for k in ("p1", "c1", "c2", "e1")] == [["i1"], ["i3"], [], ["i2"]]
     assert doc["questions"][0]["status"] == "emerging" and doc["questions"][1]["href"] is None
     assert sum(doc["tally"].values()) == 5
 

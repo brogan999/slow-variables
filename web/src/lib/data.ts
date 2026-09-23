@@ -218,6 +218,7 @@ export type MapReading =
   | { kind: "withheld"; because: string | null; tag: string | null; kind_of_tight: string }
   | { kind: "tally"; instruments: number; fast: number; normal: number; other: number; readings: number };
 export type MapRow = {
+  focus?: "now" | "predicted" | "both" | null;
   id: string; name: string; what?: string; reads?: string | null; note?: string | null; family?: string; source?: string; href: string | null;
   layer?: { id: string; name: string }; sublayer?: { id: string; name: string } | null;
   reading: MapReading; cells: Record<string, MapCell>; claims: MapWriter[]; domains?: Record<string, number[]>;
@@ -257,7 +258,7 @@ export type Word = "happening" | "not_happening" | "slower" | "both" | "too_earl
 export type BoardRow = {
   id: string; kind: "ledger" | "outlook" | "migration" | "exit"; folio: string; who: string; attribution: string; line: string;
   state: string | null; word: Word; settles: string | null; test: { fact: string; op: string; against: number | string } | null;
-  reading: Fact | null; sources: string[]; href: string;
+  reading: Fact | null; sources: string[]; indicators: string[]; href: string;
 };
 export type BoardDoc = {
   as_of: string; words: { id: Word; label: string; meaning: string }[]; mapping: { kind: string; state: string; word: Word }[];
