@@ -285,12 +285,57 @@ def consumers_keep_surplus(d: Data) -> Verdict:
     )
 
 
+def _quarter_ends_back(last: date, n: int) -> list[date]:
+    out, y, m = [], last.year, last.month
+    for _ in range(n):
+        out.append(date(y, m, 31 if m in (3, 12) else 30))
+        y, m = (y - 1, 12) if m == 3 else (y, m - 3)
+    return out
+
+
+PAY_BASE = date(2022, 12, 31)  # the quarter ChatGPT launched in: the level "before such AI" the pay is read against
+
+
+def real_wages_fall(d: Data) -> Verdict:
+    """Restrepo: total pay never falls below its level before AGI unless something else binds. This site reads the
+    typical full-time worker's real weekly pay against its level at the end of 2022, over four consecutive quarters."""
+    rows = {o["as_of_date"]: o for o in d.s.observations("fred.us.median_real_weekly_earnings.q")}
+    base = rows.get(PAY_BASE)
+    last = max(rows) if rows else None
+    qs = _quarter_ends_back(last, 4) if last else []
+    got = [rows.get(q) for q in qs]
+    if base is None or not qs:
+        below = None
+    elif any(o is not None and o["value_numeric"] >= base["value_numeric"] for o in got):
+        below = False
+    else:
+        below = True if all(got) else None  # a missing quarter leaves "four running" unproved either way
+    conds = [
+        Cond(
+            "median real weekly pay below its end-2022 level in each of the last four quarters",
+            below,
+            [base["id"]] + [o["id"] for o in got if o] if base else [],
+            ", ".join(f"{q} {o['value_numeric']:.0f}" if o else f"{q} missing" for q, o in zip(qs, got))
+            + (f" against {base['value_numeric']:.0f} at {PAY_BASE}" if base else "; no end-2022 level"),
+        ),
+        _cond("real output above a year before", d.metric("real_gdp_yoy"), lambda v: v > 0, "{:+.1%}"),
+    ]
+    return Verdict(
+        "real_wages_fall",
+        "Workers' pay falls below its level before AI while output grows",
+        _all(conds),
+        conds,
+        "real pay below its end-2022 level in four consecutive quarters AND real output up on a year before",
+    )
+
+
 RULES = [
     normal_tech_falsified,
     normal_tech_strengthened,
     invention_side_warning,
     rents_migrate_up,
     consumers_keep_surplus,
+    real_wages_fall,
 ]
 
 

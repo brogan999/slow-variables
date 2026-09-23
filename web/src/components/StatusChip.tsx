@@ -82,3 +82,24 @@ export function Grade({ grade, tier }: { grade: string | null | undefined; tier?
     </span>
   );
 }
+
+// The predictions board's five words. No hue: violet and teal mean faster and slower elsewhere, so the glyph and the
+// border's line carry the word here.
+const WORD: Record<string, { glyph: string; cls: string }> = {
+  happening: { glyph: "●", cls: "border-ink text-ink" },
+  not_happening: { glyph: "✕", cls: "border-ink-2 text-ink" },
+  slower: { glyph: "◔", cls: "border-muted text-ink" },
+  both: { glyph: "◑", cls: "border-muted text-ink-2" },
+  too_early: { glyph: "○", cls: "border-dashed border-muted text-muted" },
+};
+
+// The label comes from board.json (seed/board.yaml), so the words are written once.
+export function WordChip({ word, label }: { word: string; label: string }) {
+  const w = WORD[word] ?? WORD.too_early;
+  return (
+    <span className={`inline-flex items-center gap-1.5 rounded-[2px] border px-1.5 py-0.5 text-xs whitespace-nowrap ${w.cls}`}>
+      <span aria-hidden>{w.glyph}</span>
+      <span>{label}</span>
+    </span>
+  );
+}

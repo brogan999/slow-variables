@@ -253,3 +253,15 @@ export type OutlookDoc = {
   agree: { id: string; text: string; holders: string[]; dissent: string[]; dissent_text?: string }[];
 };
 export const outlook = () => read<OutlookDoc>("outlook.json");
+export type Word = "happening" | "not_happening" | "slower" | "both" | "too_early";
+export type BoardRow = {
+  id: string; kind: "ledger" | "outlook" | "migration" | "exit"; folio: string; who: string; attribution: string; line: string;
+  state: string | null; word: Word; settles: string | null; test: { fact: string; op: string; against: number | string } | null;
+  reading: Fact | null; sources: string[]; href: string;
+};
+export type BoardDoc = {
+  as_of: string; words: { id: Word; label: string; meaning: string }[]; mapping: { kind: string; state: string; word: Word }[];
+  tally: Record<Word, number>; folios: { id: string; label: string; question: string; rows: BoardRow[]; too_early: number }[];
+  questions: { question: string; indicator: string | null; note?: string; status: string | null; href: string | null }[];
+};
+export const board = () => read<BoardDoc>("board.json");

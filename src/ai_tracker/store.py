@@ -930,6 +930,7 @@ class Store:
 
         outlook = build_outlook(self)
         _write(out / "outlook.json", outlook)
+        _write(out / "board.json", self.board(cards, argument, outlook))
         from .bottleneck_map import from_store
 
         _write(out / "map.json", from_store(self, cards, bottlenecks, argument, outlook))
@@ -952,6 +953,73 @@ class Store:
             )
             + "\n"
         )
+
+    def _ledger_rows(self) -> list[dict[str, Any]]:
+        return [
+            {**_jsonable(pr.model_dump()), "status": ev.new_status if (ev := self.current(pr.id)) else None}
+            for pr in self.seed.predictions
+        ]
+
+    def board(
+        self,
+        cards: dict[str, dict[str, Any]] | None = None,
+        argument: dict[str, Any] | None = None,
+        outlook: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Every prediction on the site with one status word (src/ai_tracker/board.py)."""
+        from . import board
+        from .argument import build as build_argument
+        from .argument import load as load_argument
+        from .outlook import build as build_outlook
+
+        argument = argument if argument is not None else build_argument(self)
+        return board.build(
+            board.load(),
+            self._ledger_rows(),
+            outlook if outlook is not None else build_outlook(self),
+            argument,
+            read_jsonl(DATA / "thesis.jsonl"),
+            load_argument()["exits"],
+            cards if cards is not None else {},
+        )
+
+    def prediction_table(self) -> None:
+        """The board's rows as a table the query service copies, so SQL can join a prediction to its reading."""
+        import re
+
+        from .format import fmt_line
+        from .outlook import build as build_outlook
+
+        ol = build_outlook(self)
+        tests = ol.get("tests") or {}
+
+        def plain(text: str) -> str:  # the threshold a [test:] token prints on the page; other tokens drop out
+            text = re.sub(
+                r"\[test:([a-z0-9_]+)\]",
+                lambda m: fmt_line(tests[m[1]]["line"], tests[m[1]]["unit"]) if m[1] in tests else "",
+                text,
+            )
+            return re.sub(r"\s*\[(?:cite|fact|plate):[a-z0-9_]+\]", "", text)
+
+        rows = [r for f in self.board(outlook=ol)["folios"] for r in f["rows"]]
+        self.con.execute(
+            "CREATE OR REPLACE TABLE predictions (id VARCHAR, kind VARCHAR, folio VARCHAR, stage VARCHAR, row VARCHAR,"
+            " who VARCHAR, attribution VARCHAR, line VARCHAR, state VARCHAR, word VARCHAR, settles VARCHAR,"
+            " test_fact VARCHAR, test_op VARCHAR, test_against VARCHAR, reading_value DOUBLE, reading_unit VARCHAR,"
+            " reading_as_of VARCHAR, reading_derived_id VARCHAR, obs_ids VARCHAR[], sources VARCHAR[], href VARCHAR)"
+        )
+        for r in rows:
+            t, rd = r.get("test") or {}, r.get("reading") or {}
+            self.con.execute(
+                "INSERT INTO predictions VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                [
+                    r["id"], r["kind"], r["folio"], r.get("stage"), r.get("row"), r["who"], r["attribution"],
+                    plain(r["line"]), r["state"], r["word"], None if r["settles"] is None else plain(str(r["settles"])),
+                    t.get("fact"), t.get("op"), None if t.get("against") is None else str(t["against"]),
+                    rd.get("value") if isinstance(rd.get("value"), (int, float)) else None, rd.get("unit"),
+                    rd.get("as_of"), rd.get("derived_id"), rd.get("obs_ids") or [], r["sources"], r["href"],
+                ],
+            )
 
     def _card(self, ind: Indicator) -> dict[str, Any]:
         pts = self.headline(ind)
