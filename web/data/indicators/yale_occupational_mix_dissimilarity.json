@@ -6,14 +6,14 @@
  "band_input": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
  "band_rationale": "Normal = within one and a half times the pre-AI baseline's reading at the same age (the January 2021 baseline sat near 5 pp forty months in); fast = 10 pp or more, twice the pre-AI pace. Between is `emerging`.",
  "band_value": {
-  "as_of": "2026-03-01",
+  "as_of": "2026-08-01",
   "high": null,
   "low": null,
   "obs_ids": [
-   "e024995d58fffc7f"
+   "0ffaef967260f398"
   ],
   "unit": "pp",
-  "value": 5.26009156585592
+  "value": 5.501739
  },
  "bucket_id": "adaptation",
  "cadence_expected": "quarterly",
@@ -34,12 +34,12 @@
   "dead": null,
   "drawn": {
    "metric": null,
-   "others": 2,
+   "others": 3,
    "series": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
-   "total": 3
+   "total": 4
   },
   "line": false,
-  "n_drawn": 40,
+  "n_drawn": 45,
   "needs": null,
   "partial": false,
   "stamps": [
@@ -50,22 +50,22 @@
     {
      "label": "2023",
      "minor": false,
-     "x": 7.53
+     "x": 7.03
     },
     {
      "label": "2024",
      "minor": false,
-     "x": 35.87
+     "x": 32.18
     },
     {
      "label": "2025",
      "minor": false,
-     "x": 64.29
+     "x": 57.41
     },
     {
      "label": "2026",
      "minor": false,
-     "x": 92.62
+     "x": 82.56
     }
    ]
   },
@@ -100,7 +100,7 @@
     "attribution": "The Budget Lab at Yale",
     "id": "yale_budget_lab_data",
     "license": "Budget Lab; data reproduced with attribution",
-    "name": "Budget Lab at Yale labour-market update workbook (dissimilarity index)",
+    "name": "Budget Lab at Yale AI labour-market tracker (dissimilarity index chart data)",
     "org": "Yale University"
    }
   ]
@@ -109,14 +109,14 @@
  "confidence_basis": {
   "best_tier": 6,
   "grade": "B",
-  "n_observations": 103,
+  "n_observations": 180,
   "sources": [
-   "Budget Lab at Yale labour-market update workbook (dissimilarity index)",
+   "Budget Lab at Yale AI labour-market tracker (dissimilarity index chart data)",
    "The Budget Lab at Yale"
   ],
   "stale_as_of": null
  },
- "counterevidence": "Occupational mix moves slowly by construction; a CPS-based index cannot see within-occupation task change; the workbook URL changes with each update, so the series is refreshed by hand.",
+ "counterevidence": "Occupational mix moves slowly by construction; a CPS-based index cannot see within-occupation task change.",
  "crosswalk": [
   {
    "bucket_id": "adaptation",
@@ -143,7 +143,7 @@
    "sublayer_id": null
   }
  ],
- "definition": "How far the occupational mix of the US workforce has moved from its November 2022 baseline, in percentage points, the Budget Lab's dissimilarity index from its monthly labour-market update workbook; the same index from a January 2021 baseline is shown alongside as the pre-AI comparison at the same age.",
+ "definition": "How far the occupational mix of the US workforce has moved from its November 2022 baseline, in percentage points, the Budget Lab's dissimilarity index (computed from a 12-month moving average of employment) from the chart data of its AI labour-market tracker; the same index from a January 2021 baseline is shown alongside as the pre-AI comparison at the same age, and the tracker's index between recent and older graduates (from a 3-month moving average) beside it.",
  "derived": [],
  "direction": null,
  "direction_readings": null,
@@ -159,24 +159,24 @@
  "grade": "B",
  "id": "yale_occupational_mix_dissimilarity",
  "latest": {
-  "as_of": "2026-03-01",
+  "as_of": "2026-08-01",
   "disputed": false,
   "grade": "C",
   "high": null,
   "low": null,
   "obs_ids": [
-   "e024995d58fffc7f"
+   "0ffaef967260f398"
   ],
   "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
   "subject": "us_workers",
   "unit": "pp",
-  "value": 5.26009156585592
+  "value": 5.501739
  },
  "layer_id": "labour_consumers",
  "leading_lagging": "lagging",
  "metric": null,
  "metric_dims": {},
- "n_observations": 103,
+ "n_observations": 180,
  "name": "Occupational-mix dissimilarity since ChatGPT (Yale Budget Lab)",
  "normal_band": {
   "hi": 7.5,
@@ -200,7 +200,7 @@
    "subject": "us_workers",
    "unit": "pp",
    "value": 0.0,
-   "x": 2.8,
+   "x": 2.83,
    "y": 100.0
   },
   {
@@ -208,17 +208,17 @@
    "disputed": false,
    "grade": "C",
    "high": null,
-   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#d36542009fa8359d",
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#269acadee1f54fb1",
    "low": null,
    "obs_ids": [
-    "d36542009fa8359d"
+    "269acadee1f54fb1"
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
    "stamp": "estimate",
    "subject": "us_workers",
    "unit": "pp",
-   "value": 0.466880827347915,
-   "x": 5.12,
+   "value": 0.466881,
+   "x": 4.89,
    "y": 96.89
   },
   {
@@ -226,17 +226,17 @@
    "disputed": false,
    "grade": "C",
    "high": null,
-   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#7c259ee43caa7ea6",
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#9f266075650299eb",
    "low": null,
    "obs_ids": [
-    "7c259ee43caa7ea6"
+    "9f266075650299eb"
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
    "stamp": "estimate",
    "subject": "us_workers",
    "unit": "pp",
-   "value": 0.852353912392152,
-   "x": 7.53,
+   "value": 0.852354,
+   "x": 7.03,
    "y": 94.32
   },
   {
@@ -244,17 +244,17 @@
    "disputed": false,
    "grade": "C",
    "high": null,
-   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#e4b183da80e00baf",
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#8b9d439712543364",
    "low": null,
    "obs_ids": [
-    "e4b183da80e00baf"
+    "8b9d439712543364"
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
    "stamp": "estimate",
    "subject": "us_workers",
    "unit": "pp",
-   "value": 1.20165059085859,
-   "x": 9.94,
+   "value": 1.201651,
+   "x": 9.17,
    "y": 91.99
   },
   {
@@ -262,17 +262,17 @@
    "disputed": false,
    "grade": "C",
    "high": null,
-   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#56f8fc3434aef58e",
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#a8b0a5b46d528cab",
    "low": null,
    "obs_ids": [
-    "56f8fc3434aef58e"
+    "a8b0a5b46d528cab"
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
    "stamp": "estimate",
    "subject": "us_workers",
    "unit": "pp",
-   "value": 1.49778243807573,
-   "x": 12.11,
+   "value": 1.497782,
+   "x": 11.1,
    "y": 90.01
   },
   {
@@ -280,17 +280,17 @@
    "disputed": false,
    "grade": "C",
    "high": null,
-   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#02965604f29f9511",
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#cc978f5b49be7634",
    "low": null,
    "obs_ids": [
-    "02965604f29f9511"
+    "cc978f5b49be7634"
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
    "stamp": "estimate",
    "subject": "us_workers",
    "unit": "pp",
-   "value": 1.72234185168056,
-   "x": 14.52,
+   "value": 1.722342,
+   "x": 13.23,
    "y": 88.52
   },
   {
@@ -298,17 +298,17 @@
    "disputed": false,
    "grade": "C",
    "high": null,
-   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#84609f40cfea5407",
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#347d8ec04c28f47b",
    "low": null,
    "obs_ids": [
-    "84609f40cfea5407"
+    "347d8ec04c28f47b"
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
    "stamp": "estimate",
    "subject": "us_workers",
    "unit": "pp",
-   "value": 1.99687391621043,
-   "x": 16.85,
+   "value": 1.996874,
+   "x": 15.3,
    "y": 86.69
   },
   {
@@ -316,17 +316,17 @@
    "disputed": false,
    "grade": "C",
    "high": null,
-   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#43d886778fb90e1e",
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#0380a5f7c5faba72",
    "low": null,
    "obs_ids": [
-    "43d886778fb90e1e"
+    "0380a5f7c5faba72"
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
    "stamp": "estimate",
    "subject": "us_workers",
    "unit": "pp",
-   "value": 2.17983812197032,
-   "x": 19.25,
+   "value": 2.179838,
+   "x": 17.44,
    "y": 85.47
   },
   {
@@ -334,17 +334,17 @@
    "disputed": false,
    "grade": "C",
    "high": null,
-   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#33e88f07830ac5ce",
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#cb7cefbd053c6f83",
    "low": null,
    "obs_ids": [
-    "33e88f07830ac5ce"
+    "cb7cefbd053c6f83"
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
    "stamp": "estimate",
    "subject": "us_workers",
    "unit": "pp",
-   "value": 2.39216394984388,
-   "x": 21.58,
+   "value": 2.392164,
+   "x": 19.5,
    "y": 84.05
   },
   {
@@ -352,17 +352,17 @@
    "disputed": false,
    "grade": "C",
    "high": null,
-   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#fc3f2f37b3aec145",
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#3910242ec70d830c",
    "low": null,
    "obs_ids": [
-    "fc3f2f37b3aec145"
+    "3910242ec70d830c"
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
    "stamp": "estimate",
    "subject": "us_workers",
    "unit": "pp",
-   "value": 2.54614805757251,
-   "x": 23.99,
+   "value": 2.546148,
+   "x": 21.64,
    "y": 83.03
   },
   {
@@ -370,17 +370,17 @@
    "disputed": false,
    "grade": "C",
    "high": null,
-   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#4fbddd99b1ec8f30",
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#1b6332c42459d473",
    "low": null,
    "obs_ids": [
-    "4fbddd99b1ec8f30"
+    "1b6332c42459d473"
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
    "stamp": "estimate",
    "subject": "us_workers",
    "unit": "pp",
-   "value": 2.74511202826228,
-   "x": 26.4,
+   "value": 2.745112,
+   "x": 23.78,
    "y": 81.7
   },
   {
@@ -388,17 +388,17 @@
    "disputed": false,
    "grade": "C",
    "high": null,
-   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#0c9a8edbbcc24db4",
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#cf50605436436ea5",
    "low": null,
    "obs_ids": [
-    "0c9a8edbbcc24db4"
+    "cf50605436436ea5"
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
    "stamp": "estimate",
    "subject": "us_workers",
    "unit": "pp",
-   "value": 2.90610759615925,
-   "x": 28.73,
+   "value": 2.906108,
+   "x": 25.84,
    "y": 80.63
   },
   {
@@ -406,17 +406,17 @@
    "disputed": false,
    "grade": "C",
    "high": null,
-   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#e4a4a69e968d7fad",
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#27e3225edf10f5b0",
    "low": null,
    "obs_ids": [
-    "e4a4a69e968d7fad"
+    "27e3225edf10f5b0"
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
    "stamp": "estimate",
    "subject": "us_workers",
    "unit": "pp",
-   "value": 3.05012284110422,
-   "x": 31.13,
+   "value": 3.050123,
+   "x": 27.98,
    "y": 79.67
   },
   {
@@ -424,17 +424,17 @@
    "disputed": false,
    "grade": "C",
    "high": null,
-   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#0d2f8875a1dfa786",
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#99ead7eca684dbe4",
    "low": null,
    "obs_ids": [
-    "0d2f8875a1dfa786"
+    "99ead7eca684dbe4"
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
    "stamp": "estimate",
    "subject": "us_workers",
    "unit": "pp",
-   "value": 3.1678371089109,
-   "x": 33.46,
+   "value": 3.167837,
+   "x": 30.05,
    "y": 78.88
   },
   {
@@ -442,17 +442,17 @@
    "disputed": false,
    "grade": "C",
    "high": null,
-   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#26cd84859426aa4a",
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#2c50460eeb3ebf68",
    "low": null,
    "obs_ids": [
-    "26cd84859426aa4a"
+    "2c50460eeb3ebf68"
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
    "stamp": "estimate",
    "subject": "us_workers",
    "unit": "pp",
-   "value": 3.25513182859789,
-   "x": 35.87,
+   "value": 3.255132,
+   "x": 32.18,
    "y": 78.3
   },
   {
@@ -460,17 +460,17 @@
    "disputed": false,
    "grade": "C",
    "high": null,
-   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#0bccd9294fd772e5",
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#ef237df27827c0af",
    "low": null,
    "obs_ids": [
-    "0bccd9294fd772e5"
+    "ef237df27827c0af"
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
    "stamp": "estimate",
    "subject": "us_workers",
    "unit": "pp",
-   "value": 3.33360645275824,
-   "x": 38.28,
+   "value": 3.333606,
+   "x": 34.32,
    "y": 77.78
   },
   {
@@ -478,17 +478,17 @@
    "disputed": false,
    "grade": "C",
    "high": null,
-   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#b48acb018f13a2fd",
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#a4866fce2e501135",
    "low": null,
    "obs_ids": [
-    "b48acb018f13a2fd"
+    "a4866fce2e501135"
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
    "stamp": "estimate",
    "subject": "us_workers",
    "unit": "pp",
-   "value": 3.3832942979251,
-   "x": 40.53,
+   "value": 3.383294,
+   "x": 36.32,
    "y": 77.44
   },
   {
@@ -496,17 +496,17 @@
    "disputed": false,
    "grade": "C",
    "high": null,
-   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#9ae2dd73658fbad2",
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#154e18b4366f3368",
    "low": null,
    "obs_ids": [
-    "9ae2dd73658fbad2"
+    "154e18b4366f3368"
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
    "stamp": "estimate",
    "subject": "us_workers",
    "unit": "pp",
-   "value": 3.41557938572316,
-   "x": 42.93,
+   "value": 3.415579,
+   "x": 38.46,
    "y": 77.23
   },
   {
@@ -514,17 +514,17 @@
    "disputed": false,
    "grade": "C",
    "high": null,
-   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#70be2c7ca5675d2b",
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#18b2016c7bcf01df",
    "low": null,
    "obs_ids": [
-    "70be2c7ca5675d2b"
+    "18b2016c7bcf01df"
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
    "stamp": "estimate",
    "subject": "us_workers",
    "unit": "pp",
-   "value": 3.47419784136644,
-   "x": 45.26,
+   "value": 3.474198,
+   "x": 40.52,
    "y": 76.84
   },
   {
@@ -532,17 +532,17 @@
    "disputed": false,
    "grade": "C",
    "high": null,
-   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#cdd09f9f5cf13c24",
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#99e12570397ea9ac",
    "low": null,
    "obs_ids": [
-    "cdd09f9f5cf13c24"
+    "99e12570397ea9ac"
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
    "stamp": "estimate",
    "subject": "us_workers",
    "unit": "pp",
-   "value": 3.52331606596222,
-   "x": 47.67,
+   "value": 3.523316,
+   "x": 42.66,
    "y": 76.51
   },
   {
@@ -550,17 +550,17 @@
    "disputed": false,
    "grade": "C",
    "high": null,
-   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#385d43fd06cc7d04",
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#51f5e8de70b85747",
    "low": null,
    "obs_ids": [
-    "385d43fd06cc7d04"
+    "51f5e8de70b85747"
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
    "stamp": "estimate",
    "subject": "us_workers",
    "unit": "pp",
-   "value": 3.56967765977809,
-   "x": 50.0,
+   "value": 3.569678,
+   "x": 44.73,
    "y": 76.2
   },
   {
@@ -568,17 +568,17 @@
    "disputed": false,
    "grade": "C",
    "high": null,
-   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#b7f08bf0d30f6376",
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#0cef760582d1eb4b",
    "low": null,
    "obs_ids": [
-    "b7f08bf0d30f6376"
+    "0cef760582d1eb4b"
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
    "stamp": "estimate",
    "subject": "us_workers",
    "unit": "pp",
-   "value": 3.58915652603769,
-   "x": 52.41,
+   "value": 3.589157,
+   "x": 46.86,
    "y": 76.07
   },
   {
@@ -586,17 +586,17 @@
    "disputed": false,
    "grade": "C",
    "high": null,
-   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#422946aed4f1b93e",
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#0466fc6fe40445c6",
    "low": null,
    "obs_ids": [
-    "422946aed4f1b93e"
+    "0466fc6fe40445c6"
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
    "stamp": "estimate",
    "subject": "us_workers",
    "unit": "pp",
-   "value": 3.63401499949485,
-   "x": 54.81,
+   "value": 3.634015,
+   "x": 49.0,
    "y": 75.77
   },
   {
@@ -604,17 +604,17 @@
    "disputed": false,
    "grade": "C",
    "high": null,
-   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#dee084c073480e8b",
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#c74620521849e704",
    "low": null,
    "obs_ids": [
-    "dee084c073480e8b"
+    "c74620521849e704"
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
    "stamp": "estimate",
    "subject": "us_workers",
    "unit": "pp",
-   "value": 3.72455697668765,
-   "x": 57.14,
+   "value": 3.724557,
+   "x": 51.07,
    "y": 75.17
   },
   {
@@ -622,17 +622,17 @@
    "disputed": false,
    "grade": "C",
    "high": null,
-   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#e6c4bea7b2ec6230",
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#65b665d669de959b",
    "low": null,
    "obs_ids": [
-    "e6c4bea7b2ec6230"
+    "65b665d669de959b"
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
    "stamp": "estimate",
    "subject": "us_workers",
    "unit": "pp",
-   "value": 3.8252761944534,
-   "x": 59.55,
+   "value": 3.825276,
+   "x": 53.2,
    "y": 74.5
   },
   {
@@ -640,17 +640,17 @@
    "disputed": false,
    "grade": "C",
    "high": null,
-   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#2f29d87cb25d0d50",
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#d4e7b7d6bc7cb865",
    "low": null,
    "obs_ids": [
-    "2f29d87cb25d0d50"
+    "d4e7b7d6bc7cb865"
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
    "stamp": "estimate",
    "subject": "us_workers",
    "unit": "pp",
-   "value": 3.91953706559289,
-   "x": 61.88,
+   "value": 3.919537,
+   "x": 55.27,
    "y": 73.87
   },
   {
@@ -658,17 +658,17 @@
    "disputed": false,
    "grade": "C",
    "high": null,
-   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#b10aa3e6c2f3b31a",
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#41b80ac379411096",
    "low": null,
    "obs_ids": [
-    "b10aa3e6c2f3b31a"
+    "41b80ac379411096"
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
    "stamp": "estimate",
    "subject": "us_workers",
    "unit": "pp",
-   "value": 4.01633560470353,
-   "x": 64.29,
+   "value": 4.016336,
+   "x": 57.41,
    "y": 73.22
   },
   {
@@ -676,17 +676,17 @@
    "disputed": false,
    "grade": "C",
    "high": null,
-   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#015355cdb4f135a7",
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#f16758b1dd8b4694",
    "low": null,
    "obs_ids": [
-    "015355cdb4f135a7"
+    "f16758b1dd8b4694"
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
    "stamp": "estimate",
    "subject": "us_workers",
    "unit": "pp",
-   "value": 4.10163521099451,
-   "x": 66.69,
+   "value": 4.101635,
+   "x": 59.55,
    "y": 72.66
   },
   {
@@ -694,17 +694,17 @@
    "disputed": false,
    "grade": "C",
    "high": null,
-   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#a33ea55a62ee3a8e",
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#0a809f09c0e7ce04",
    "low": null,
    "obs_ids": [
-    "a33ea55a62ee3a8e"
+    "0a809f09c0e7ce04"
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
    "stamp": "estimate",
    "subject": "us_workers",
    "unit": "pp",
-   "value": 4.1861094362248,
-   "x": 68.87,
+   "value": 4.186109,
+   "x": 61.47,
    "y": 72.09
   },
   {
@@ -712,17 +712,17 @@
    "disputed": false,
    "grade": "C",
    "high": null,
-   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#a77c93344f87ee15",
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#795a6af89713134d",
    "low": null,
    "obs_ids": [
-    "a77c93344f87ee15"
+    "795a6af89713134d"
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
    "stamp": "estimate",
    "subject": "us_workers",
    "unit": "pp",
-   "value": 4.27737930165123,
-   "x": 71.27,
+   "value": 4.277379,
+   "x": 63.61,
    "y": 71.48
   },
   {
@@ -730,17 +730,17 @@
    "disputed": false,
    "grade": "C",
    "high": null,
-   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#ac965b9573f761c4",
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#ab9bfd805d1c309c",
    "low": null,
    "obs_ids": [
-    "ac965b9573f761c4"
+    "ab9bfd805d1c309c"
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
    "stamp": "estimate",
    "subject": "us_workers",
    "unit": "pp",
-   "value": 4.3725653138804,
-   "x": 73.6,
+   "value": 4.372565,
+   "x": 65.68,
    "y": 70.85
   },
   {
@@ -748,17 +748,17 @@
    "disputed": false,
    "grade": "C",
    "high": null,
-   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#59560ed166c25d21",
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#8fb7cb1a579005e6",
    "low": null,
    "obs_ids": [
-    "59560ed166c25d21"
+    "8fb7cb1a579005e6"
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
    "stamp": "estimate",
    "subject": "us_workers",
    "unit": "pp",
-   "value": 4.49019831903315,
-   "x": 76.01,
+   "value": 4.490198,
+   "x": 67.82,
    "y": 70.07
   },
   {
@@ -766,17 +766,17 @@
    "disputed": false,
    "grade": "C",
    "high": null,
-   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#f7996f743c12cd00",
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#bffe6d5c36f2d51e",
    "low": null,
    "obs_ids": [
-    "f7996f743c12cd00"
+    "bffe6d5c36f2d51e"
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
    "stamp": "estimate",
    "subject": "us_workers",
    "unit": "pp",
-   "value": 4.60744268957926,
-   "x": 78.34,
+   "value": 4.607443,
+   "x": 69.88,
    "y": 69.28
   },
   {
@@ -784,17 +784,17 @@
    "disputed": false,
    "grade": "C",
    "high": null,
-   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#6f3884ce41a47b9d",
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#9d355dd1fc96df05",
    "low": null,
    "obs_ids": [
-    "6f3884ce41a47b9d"
+    "9d355dd1fc96df05"
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
    "stamp": "estimate",
    "subject": "us_workers",
    "unit": "pp",
-   "value": 4.75705281952333,
-   "x": 80.75,
+   "value": 4.757053,
+   "x": 72.02,
    "y": 68.29
   },
   {
@@ -802,17 +802,17 @@
    "disputed": false,
    "grade": "C",
    "high": null,
-   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#ff3cc74dde8fe7d6",
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#2268146390d3a873",
    "low": null,
    "obs_ids": [
-    "ff3cc74dde8fe7d6"
+    "2268146390d3a873"
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
    "stamp": "estimate",
    "subject": "us_workers",
    "unit": "pp",
-   "value": 4.83837659200214,
-   "x": 83.15,
+   "value": 4.838377,
+   "x": 74.16,
    "y": 67.74
   },
   {
@@ -820,17 +820,17 @@
    "disputed": false,
    "grade": "C",
    "high": null,
-   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#22e74d3494a86004",
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#eceeeba6b1642569",
    "low": null,
    "obs_ids": [
-    "22e74d3494a86004"
+    "eceeeba6b1642569"
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
    "stamp": "estimate",
    "subject": "us_workers",
    "unit": "pp",
-   "value": 4.9449984579901,
-   "x": 87.89,
+   "value": 4.944998,
+   "x": 78.36,
    "y": 67.03
   },
   {
@@ -838,17 +838,17 @@
    "disputed": false,
    "grade": "C",
    "high": null,
-   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#3192d4211d1e3c7f",
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#bfae53e56eb642b6",
    "low": null,
    "obs_ids": [
-    "3192d4211d1e3c7f"
+    "bfae53e56eb642b6"
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
    "stamp": "estimate",
    "subject": "us_workers",
    "unit": "pp",
-   "value": 5.05690117088805,
-   "x": 90.22,
+   "value": 5.056901,
+   "x": 80.43,
    "y": 66.29
   },
   {
@@ -856,17 +856,17 @@
    "disputed": false,
    "grade": "C",
    "high": null,
-   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#911e0c15cd82a590",
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#b19a2f5d69f45051",
    "low": null,
    "obs_ids": [
-    "911e0c15cd82a590"
+    "b19a2f5d69f45051"
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
    "stamp": "estimate",
    "subject": "us_workers",
    "unit": "pp",
-   "value": 5.13304097642731,
-   "x": 92.62,
+   "value": 5.133041,
+   "x": 82.56,
    "y": 65.78
   },
   {
@@ -874,17 +874,17 @@
    "disputed": false,
    "grade": "C",
    "high": null,
-   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#07b4779cdaf5e92a",
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#d071fc1c97d68fc3",
    "low": null,
    "obs_ids": [
-    "07b4779cdaf5e92a"
+    "d071fc1c97d68fc3"
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
    "stamp": "estimate",
    "subject": "us_workers",
    "unit": "pp",
-   "value": 5.17145769074961,
-   "x": 95.03,
+   "value": 5.171458,
+   "x": 84.7,
    "y": 65.52
   },
   {
@@ -892,18 +892,108 @@
    "disputed": false,
    "grade": "C",
    "high": null,
-   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#e024995d58fffc7f",
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#6616d0d4d2845a4e",
    "low": null,
    "obs_ids": [
-    "e024995d58fffc7f"
+    "6616d0d4d2845a4e"
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
    "stamp": "estimate",
    "subject": "us_workers",
    "unit": "pp",
-   "value": 5.26009156585592,
-   "x": 97.2,
-   "y": 64.93
+   "value": 5.256051,
+   "x": 86.63,
+   "y": 64.96
+  },
+  {
+   "as_of": "2026-04-01",
+   "disputed": false,
+   "grade": "C",
+   "high": null,
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#5a3babb51a78a779",
+   "low": null,
+   "obs_ids": [
+    "5a3babb51a78a779"
+   ],
+   "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
+   "stamp": "estimate",
+   "subject": "us_workers",
+   "unit": "pp",
+   "value": 5.305724,
+   "x": 88.77,
+   "y": 64.63
+  },
+  {
+   "as_of": "2026-05-01",
+   "disputed": false,
+   "grade": "C",
+   "high": null,
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#51a7c9f6950dbcd7",
+   "low": null,
+   "obs_ids": [
+    "51a7c9f6950dbcd7"
+   ],
+   "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
+   "stamp": "estimate",
+   "subject": "us_workers",
+   "unit": "pp",
+   "value": 5.385228,
+   "x": 90.83,
+   "y": 64.1
+  },
+  {
+   "as_of": "2026-06-01",
+   "disputed": false,
+   "grade": "C",
+   "high": null,
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#d08c78b69a8f0a02",
+   "low": null,
+   "obs_ids": [
+    "d08c78b69a8f0a02"
+   ],
+   "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
+   "stamp": "estimate",
+   "subject": "us_workers",
+   "unit": "pp",
+   "value": 5.444533,
+   "x": 92.97,
+   "y": 63.7
+  },
+  {
+   "as_of": "2026-07-01",
+   "disputed": false,
+   "grade": "C",
+   "high": null,
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#e32b9b7f42d12014",
+   "low": null,
+   "obs_ids": [
+    "e32b9b7f42d12014"
+   ],
+   "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
+   "stamp": "estimate",
+   "subject": "us_workers",
+   "unit": "pp",
+   "value": 5.480818,
+   "x": 95.04,
+   "y": 63.46
+  },
+  {
+   "as_of": "2026-08-01",
+   "disputed": false,
+   "grade": "C",
+   "high": null,
+   "href": "/series/yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m#0ffaef967260f398",
+   "low": null,
+   "obs_ids": [
+    "0ffaef967260f398"
+   ],
+   "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
+   "stamp": "estimate",
+   "subject": "us_workers",
+   "unit": "pp",
+   "value": 5.501739,
+   "x": 97.17,
+   "y": 63.32
   }
  ],
  "prediction_rows": [],
@@ -943,6 +1033,949 @@
   {
    "points": [
     {
+     "as_of": "2021-01-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "59a9945dc6193cb3"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 32.0135
+    },
+    {
+     "as_of": "2021-02-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "fe70beae78d1f6f0"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 32.5509
+    },
+    {
+     "as_of": "2021-03-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "3d038566a00038e1"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 32.335
+    },
+    {
+     "as_of": "2021-04-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "96014704c45c9842"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 31.4859
+    },
+    {
+     "as_of": "2021-05-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "d118f9ad0667be38"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 31.2741
+    },
+    {
+     "as_of": "2021-06-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "4eace37c2fa3be48"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 33.4893
+    },
+    {
+     "as_of": "2021-07-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "ee112dca4e329623"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 34.2133
+    },
+    {
+     "as_of": "2021-08-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "ef7acf002fcb2db7"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 33.2965
+    },
+    {
+     "as_of": "2021-09-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "ef47cfca6a03042d"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 32.179
+    },
+    {
+     "as_of": "2021-10-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "51d7dfad3f6243bf"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 31.0285
+    },
+    {
+     "as_of": "2021-11-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "dbc23e1cb46d6afc"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 31.399
+    },
+    {
+     "as_of": "2021-12-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "5c0bd05806ebd1a5"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 30.9515
+    },
+    {
+     "as_of": "2022-01-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "46afc213472a4c22"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 31.3227
+    },
+    {
+     "as_of": "2022-02-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "3f89e4577500ad58"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 30.0757
+    },
+    {
+     "as_of": "2022-03-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "5bcc76b4c2f0d971"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 30.8142
+    },
+    {
+     "as_of": "2022-04-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "b2502a64c45a0465"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 30.7724
+    },
+    {
+     "as_of": "2022-05-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "09467778029b7e7c"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 30.5029
+    },
+    {
+     "as_of": "2022-06-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "aca08eb2bdb68f13"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 31.1518
+    },
+    {
+     "as_of": "2022-07-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "7f5c2964f9cf0293"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 30.9388
+    },
+    {
+     "as_of": "2022-08-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "e26d7529f1da0b17"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 32.3683
+    },
+    {
+     "as_of": "2022-09-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "25b9dbcb1faadb5d"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 31.7934
+    },
+    {
+     "as_of": "2022-10-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "24abd1aad18941fb"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 30.168
+    },
+    {
+     "as_of": "2022-11-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "aaa0b5549e720494"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 30.3113
+    },
+    {
+     "as_of": "2022-12-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "bff1b41a2174d8c4"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 30.4515
+    },
+    {
+     "as_of": "2023-01-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "2b5643799bdce22a"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 29.1563
+    },
+    {
+     "as_of": "2023-02-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "4440fd3096834664"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 29.1185
+    },
+    {
+     "as_of": "2023-03-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "2812b286e610f7b7"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 29.693
+    },
+    {
+     "as_of": "2023-04-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "572b4a4a1eedbe6d"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 30.9988
+    },
+    {
+     "as_of": "2023-05-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "de58307acf05d77a"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 30.9084
+    },
+    {
+     "as_of": "2023-06-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "9b08a561d5ccc79f"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 30.9715
+    },
+    {
+     "as_of": "2023-07-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "70c029cb1d7af63e"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 31.2532
+    },
+    {
+     "as_of": "2023-08-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "2c7b34961071fef8"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 32.6803
+    },
+    {
+     "as_of": "2023-09-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "5e49e60fb57b54dd"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 33.0067
+    },
+    {
+     "as_of": "2023-10-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "159f869e8503e2b4"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 33.242
+    },
+    {
+     "as_of": "2023-11-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "f1efc70deec1c18a"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 33.4653
+    },
+    {
+     "as_of": "2023-12-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "3c6441e617ff1f13"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 33.6152
+    },
+    {
+     "as_of": "2024-01-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "538428945161f827"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 33.6417
+    },
+    {
+     "as_of": "2024-02-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "85c7193f141329ae"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 32.4344
+    },
+    {
+     "as_of": "2024-03-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "7dda8e40a05ff3e6"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 30.7416
+    },
+    {
+     "as_of": "2024-04-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "620c4c0d047f747d"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 30.8045
+    },
+    {
+     "as_of": "2024-05-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "205847c33500b0fb"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 31.061
+    },
+    {
+     "as_of": "2024-06-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "3ec94c821b3a6096"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 32.9999
+    },
+    {
+     "as_of": "2024-07-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "8afafebe62e58e03"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 33.818
+    },
+    {
+     "as_of": "2024-08-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "ccf3006d2e79ad14"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 33.9884
+    },
+    {
+     "as_of": "2024-09-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "ad0c56a8695d8dc1"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 33.1383
+    },
+    {
+     "as_of": "2024-10-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "ef9e0b6875c18bb3"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 32.3104
+    },
+    {
+     "as_of": "2024-11-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "d32a00843ff396ab"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 30.9918
+    },
+    {
+     "as_of": "2024-12-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "6b29d1a1c05cf0d5"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 31.1477
+    },
+    {
+     "as_of": "2025-01-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "35e8f41c90608416"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 32.3067
+    },
+    {
+     "as_of": "2025-02-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "22011323657113ad"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 32.6796
+    },
+    {
+     "as_of": "2025-03-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "fce6a47fe26b5c14"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 34.0626
+    },
+    {
+     "as_of": "2025-04-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "8a8eb650a06b3e87"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 33.9048
+    },
+    {
+     "as_of": "2025-05-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "541101a9c325b0a9"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 32.9771
+    },
+    {
+     "as_of": "2025-06-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "28fa9039c1e2bd38"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 33.0717
+    },
+    {
+     "as_of": "2025-07-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "0712d76900fed411"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 33.3396
+    },
+    {
+     "as_of": "2025-08-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "fa4c2c39569939a9"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 32.4866
+    },
+    {
+     "as_of": "2025-09-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "909eab37b1125e86"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 31.7864
+    },
+    {
+     "as_of": "2025-11-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "d075a9538b0f42f4"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 32.8983
+    },
+    {
+     "as_of": "2025-12-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "0dd86e4a4032ab57"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 32.8243
+    },
+    {
+     "as_of": "2026-01-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "d3b5575138491309"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 31.0587
+    },
+    {
+     "as_of": "2026-02-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "b64f2d48fc105749"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 32.9404
+    },
+    {
+     "as_of": "2026-03-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "2df03c964b73bed9"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 33.9549
+    },
+    {
+     "as_of": "2026-04-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "c1b1e62e52151ccb"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 35.029
+    },
+    {
+     "as_of": "2026-05-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "9479d4f0f3c93f92"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 34.3648
+    },
+    {
+     "as_of": "2026-06-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "482ceae058ad779a"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 34.0095
+    },
+    {
+     "as_of": "2026-07-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "769e1df308e59b22"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 33.9584
+    },
+    {
+     "as_of": "2026-08-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "92a6dd0e0368df1f"
+     ],
+     "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
+     "subject": "recent_vs_older_grads",
+     "unit": "pp",
+     "value": 33.5484
+    }
+   ],
+   "series_key": "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m"
+  },
+  {
+   "points": [
+    {
      "as_of": "2022-11-01",
      "disputed": false,
      "grade": "C",
@@ -963,12 +1996,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "d36542009fa8359d"
+      "269acadee1f54fb1"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 0.466880827347915
+     "value": 0.466881
     },
     {
      "as_of": "2023-01-01",
@@ -977,12 +2010,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "7c259ee43caa7ea6"
+      "9f266075650299eb"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 0.852353912392152
+     "value": 0.852354
     },
     {
      "as_of": "2023-02-01",
@@ -991,12 +2024,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "e4b183da80e00baf"
+      "8b9d439712543364"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 1.20165059085859
+     "value": 1.201651
     },
     {
      "as_of": "2023-03-01",
@@ -1005,12 +2038,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "56f8fc3434aef58e"
+      "a8b0a5b46d528cab"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 1.49778243807573
+     "value": 1.497782
     },
     {
      "as_of": "2023-04-01",
@@ -1019,12 +2052,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "02965604f29f9511"
+      "cc978f5b49be7634"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 1.72234185168056
+     "value": 1.722342
     },
     {
      "as_of": "2023-05-01",
@@ -1033,12 +2066,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "84609f40cfea5407"
+      "347d8ec04c28f47b"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 1.99687391621043
+     "value": 1.996874
     },
     {
      "as_of": "2023-06-01",
@@ -1047,12 +2080,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "43d886778fb90e1e"
+      "0380a5f7c5faba72"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 2.17983812197032
+     "value": 2.179838
     },
     {
      "as_of": "2023-07-01",
@@ -1061,12 +2094,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "33e88f07830ac5ce"
+      "cb7cefbd053c6f83"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 2.39216394984388
+     "value": 2.392164
     },
     {
      "as_of": "2023-08-01",
@@ -1075,12 +2108,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "fc3f2f37b3aec145"
+      "3910242ec70d830c"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 2.54614805757251
+     "value": 2.546148
     },
     {
      "as_of": "2023-09-01",
@@ -1089,12 +2122,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "4fbddd99b1ec8f30"
+      "1b6332c42459d473"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 2.74511202826228
+     "value": 2.745112
     },
     {
      "as_of": "2023-10-01",
@@ -1103,12 +2136,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "0c9a8edbbcc24db4"
+      "cf50605436436ea5"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 2.90610759615925
+     "value": 2.906108
     },
     {
      "as_of": "2023-11-01",
@@ -1117,12 +2150,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "e4a4a69e968d7fad"
+      "27e3225edf10f5b0"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 3.05012284110422
+     "value": 3.050123
     },
     {
      "as_of": "2023-12-01",
@@ -1131,12 +2164,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "0d2f8875a1dfa786"
+      "99ead7eca684dbe4"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 3.1678371089109
+     "value": 3.167837
     },
     {
      "as_of": "2024-01-01",
@@ -1145,12 +2178,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "26cd84859426aa4a"
+      "2c50460eeb3ebf68"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 3.25513182859789
+     "value": 3.255132
     },
     {
      "as_of": "2024-02-01",
@@ -1159,12 +2192,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "0bccd9294fd772e5"
+      "ef237df27827c0af"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 3.33360645275824
+     "value": 3.333606
     },
     {
      "as_of": "2024-03-01",
@@ -1173,12 +2206,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "b48acb018f13a2fd"
+      "a4866fce2e501135"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 3.3832942979251
+     "value": 3.383294
     },
     {
      "as_of": "2024-04-01",
@@ -1187,12 +2220,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "9ae2dd73658fbad2"
+      "154e18b4366f3368"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 3.41557938572316
+     "value": 3.415579
     },
     {
      "as_of": "2024-05-01",
@@ -1201,12 +2234,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "70be2c7ca5675d2b"
+      "18b2016c7bcf01df"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 3.47419784136644
+     "value": 3.474198
     },
     {
      "as_of": "2024-06-01",
@@ -1215,12 +2248,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "cdd09f9f5cf13c24"
+      "99e12570397ea9ac"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 3.52331606596222
+     "value": 3.523316
     },
     {
      "as_of": "2024-07-01",
@@ -1229,12 +2262,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "385d43fd06cc7d04"
+      "51f5e8de70b85747"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 3.56967765977809
+     "value": 3.569678
     },
     {
      "as_of": "2024-08-01",
@@ -1243,12 +2276,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "b7f08bf0d30f6376"
+      "0cef760582d1eb4b"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 3.58915652603769
+     "value": 3.589157
     },
     {
      "as_of": "2024-09-01",
@@ -1257,12 +2290,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "422946aed4f1b93e"
+      "0466fc6fe40445c6"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 3.63401499949485
+     "value": 3.634015
     },
     {
      "as_of": "2024-10-01",
@@ -1271,12 +2304,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "dee084c073480e8b"
+      "c74620521849e704"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 3.72455697668765
+     "value": 3.724557
     },
     {
      "as_of": "2024-11-01",
@@ -1285,12 +2318,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "e6c4bea7b2ec6230"
+      "65b665d669de959b"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 3.8252761944534
+     "value": 3.825276
     },
     {
      "as_of": "2024-12-01",
@@ -1299,12 +2332,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "2f29d87cb25d0d50"
+      "d4e7b7d6bc7cb865"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 3.91953706559289
+     "value": 3.919537
     },
     {
      "as_of": "2025-01-01",
@@ -1313,12 +2346,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "b10aa3e6c2f3b31a"
+      "41b80ac379411096"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 4.01633560470353
+     "value": 4.016336
     },
     {
      "as_of": "2025-02-01",
@@ -1327,12 +2360,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "015355cdb4f135a7"
+      "f16758b1dd8b4694"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 4.10163521099451
+     "value": 4.101635
     },
     {
      "as_of": "2025-03-01",
@@ -1341,12 +2374,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "a33ea55a62ee3a8e"
+      "0a809f09c0e7ce04"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 4.1861094362248
+     "value": 4.186109
     },
     {
      "as_of": "2025-04-01",
@@ -1355,12 +2388,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "a77c93344f87ee15"
+      "795a6af89713134d"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 4.27737930165123
+     "value": 4.277379
     },
     {
      "as_of": "2025-05-01",
@@ -1369,12 +2402,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "ac965b9573f761c4"
+      "ab9bfd805d1c309c"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 4.3725653138804
+     "value": 4.372565
     },
     {
      "as_of": "2025-06-01",
@@ -1383,12 +2416,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "59560ed166c25d21"
+      "8fb7cb1a579005e6"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 4.49019831903315
+     "value": 4.490198
     },
     {
      "as_of": "2025-07-01",
@@ -1397,12 +2430,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "f7996f743c12cd00"
+      "bffe6d5c36f2d51e"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 4.60744268957926
+     "value": 4.607443
     },
     {
      "as_of": "2025-08-01",
@@ -1411,12 +2444,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "6f3884ce41a47b9d"
+      "9d355dd1fc96df05"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 4.75705281952333
+     "value": 4.757053
     },
     {
      "as_of": "2025-09-01",
@@ -1425,12 +2458,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "ff3cc74dde8fe7d6"
+      "2268146390d3a873"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 4.83837659200214
+     "value": 4.838377
     },
     {
      "as_of": "2025-11-01",
@@ -1439,12 +2472,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "22e74d3494a86004"
+      "eceeeba6b1642569"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 4.9449984579901
+     "value": 4.944998
     },
     {
      "as_of": "2025-12-01",
@@ -1453,12 +2486,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "3192d4211d1e3c7f"
+      "bfae53e56eb642b6"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 5.05690117088805
+     "value": 5.056901
     },
     {
      "as_of": "2026-01-01",
@@ -1467,12 +2500,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "911e0c15cd82a590"
+      "b19a2f5d69f45051"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 5.13304097642731
+     "value": 5.133041
     },
     {
      "as_of": "2026-02-01",
@@ -1481,12 +2514,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "07b4779cdaf5e92a"
+      "d071fc1c97d68fc3"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 5.17145769074961
+     "value": 5.171458
     },
     {
      "as_of": "2026-03-01",
@@ -1495,12 +2528,82 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "e024995d58fffc7f"
+      "6616d0d4d2845a4e"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 5.26009156585592
+     "value": 5.256051
+    },
+    {
+     "as_of": "2026-04-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "5a3babb51a78a779"
+     ],
+     "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
+     "subject": "us_workers",
+     "unit": "pp",
+     "value": 5.305724
+    },
+    {
+     "as_of": "2026-05-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "51a7c9f6950dbcd7"
+     ],
+     "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
+     "subject": "us_workers",
+     "unit": "pp",
+     "value": 5.385228
+    },
+    {
+     "as_of": "2026-06-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "d08c78b69a8f0a02"
+     ],
+     "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
+     "subject": "us_workers",
+     "unit": "pp",
+     "value": 5.444533
+    },
+    {
+     "as_of": "2026-07-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "e32b9b7f42d12014"
+     ],
+     "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
+     "subject": "us_workers",
+     "unit": "pp",
+     "value": 5.480818
+    },
+    {
+     "as_of": "2026-08-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "0ffaef967260f398"
+     ],
+     "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
+     "subject": "us_workers",
+     "unit": "pp",
+     "value": 5.501739
     }
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m"
@@ -1528,12 +2631,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "2d3ae000e205872d"
+      "28e315d732624c0f"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 0.493556344370285
+     "value": 0.493556
     },
     {
      "as_of": "2021-03-01",
@@ -1542,12 +2645,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "be83db5bad2cfc98"
+      "64d60aa2edbf4ac3"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 0.864928899792558
+     "value": 0.864929
     },
     {
      "as_of": "2021-04-01",
@@ -1556,12 +2659,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "0bb60512a9052c93"
+      "c09f4e5e8730a12d"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 1.21732681745011
+     "value": 1.217327
     },
     {
      "as_of": "2021-05-01",
@@ -1570,12 +2673,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "4e13aa6ded2652a7"
+      "47b0b6ddf6900077"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 1.5832158365892
+     "value": 1.583216
     },
     {
      "as_of": "2021-06-01",
@@ -1584,12 +2687,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "7a6479aa9600f14f"
+      "0d0214bd3d3f9dab"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 1.91869929459722
+     "value": 1.918699
     },
     {
      "as_of": "2021-07-01",
@@ -1598,12 +2701,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "b79dc662b31fa200"
+      "d0072450aab7d703"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 2.20738107566792
+     "value": 2.207381
     },
     {
      "as_of": "2021-08-01",
@@ -1612,12 +2715,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "96337586b6302158"
+      "82439f5983037ade"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 2.45966696023279
+     "value": 2.459667
     },
     {
      "as_of": "2021-09-01",
@@ -1626,12 +2729,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "5f79c1d210596be2"
+      "2f5dd6f49e6e16aa"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 2.64824319462236
+     "value": 2.648243
     },
     {
      "as_of": "2021-10-01",
@@ -1640,12 +2743,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "f174aafcf875c90d"
+      "157c8b5a9c3d0af3"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 2.82220724679615
+     "value": 2.822207
     },
     {
      "as_of": "2021-11-01",
@@ -1654,12 +2757,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "6bd48ee92e701b90"
+      "7d8481a3e43c993c"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 2.99107425072089
+     "value": 2.991074
     },
     {
      "as_of": "2021-12-01",
@@ -1668,12 +2771,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "336b5f97d3138cf8"
+      "3f22b31ce35b2d32"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 3.12309075865849
+     "value": 3.123091
     },
     {
      "as_of": "2022-01-01",
@@ -1682,12 +2785,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "28d72a3c69785ddf"
+      "0f0c01e5cd1f05df"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 3.27637707861041
+     "value": 3.276377
     },
     {
      "as_of": "2022-02-01",
@@ -1696,12 +2799,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "67e8497b2705fb5e"
+      "163b1ead744ae90a"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 3.35351926447081
+     "value": 3.353519
     },
     {
      "as_of": "2022-03-01",
@@ -1710,12 +2813,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "c78ce7367f46bbd4"
+      "90eb38b08aee3478"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 3.40269627861084
+     "value": 3.402696
     },
     {
      "as_of": "2022-04-01",
@@ -1724,12 +2827,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "6b307ee26d2bace4"
+      "a0f8a0a80b739651"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 3.43846089563601
+     "value": 3.438461
     },
     {
      "as_of": "2022-05-01",
@@ -1738,12 +2841,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "159585a180941758"
+      "79ebcbc528835923"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 3.51169013833102
+     "value": 3.51169
     },
     {
      "as_of": "2022-06-01",
@@ -1752,12 +2855,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "0f63f2ccf11fe840"
+      "a5d6d4745ac6120b"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 3.54928580843711
+     "value": 3.549286
     },
     {
      "as_of": "2022-07-01",
@@ -1766,12 +2869,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "84fe0f64adbc373c"
+      "50aea8e72bc1f9c7"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 3.60217934275326
+     "value": 3.602179
     },
     {
      "as_of": "2022-08-01",
@@ -1780,12 +2883,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "c298238cf4a6eec2"
+      "abaab623383de75b"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 3.65783203289531
+     "value": 3.657832
     },
     {
      "as_of": "2022-09-01",
@@ -1794,12 +2897,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "e42932f695e9221e"
+      "69bb35b22af96b68"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 3.68347101997642
+     "value": 3.683471
     },
     {
      "as_of": "2022-10-01",
@@ -1808,12 +2911,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "b748d932dae9e52e"
+      "3f7389e9ca0a6b83"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 3.7408035218892
+     "value": 3.740804
     },
     {
      "as_of": "2022-11-01",
@@ -1822,12 +2925,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "f81f75b8d26b978f"
+      "b15d712e04c2cff1"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 3.76822050108261
+     "value": 3.768221
     },
     {
      "as_of": "2022-12-01",
@@ -1836,12 +2939,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "f09a3e0f00e73bf4"
+      "202d76007f332b87"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 3.85758301714551
+     "value": 3.857583
     },
     {
      "as_of": "2023-01-01",
@@ -1850,12 +2953,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "d2c946ee77739b31"
+      "8cb3529909b724f4"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 3.96678070434113
+     "value": 3.966781
     },
     {
      "as_of": "2023-02-01",
@@ -1864,12 +2967,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "959a2a4f33caf93d"
+      "ebfe8ed3257c9aae"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 4.07309471404652
+     "value": 4.073095
     },
     {
      "as_of": "2023-03-01",
@@ -1878,12 +2981,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "916fc66b20b372c8"
+      "7d67a25757f43236"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 4.16032214734229
+     "value": 4.160322
     },
     {
      "as_of": "2023-04-01",
@@ -1892,12 +2995,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "3ef9ecf59db7b622"
+      "73c38b3abaae6b3f"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 4.22182756424963
+     "value": 4.221828
     },
     {
      "as_of": "2023-05-01",
@@ -1906,12 +3009,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "d8508d152bdc2469"
+      "8a24615d754e95f5"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 4.30646255526591
+     "value": 4.306463
     },
     {
      "as_of": "2023-06-01",
@@ -1920,12 +3023,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "11c10910101dc0b6"
+      "727515c7e08411f4"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 4.34454960246895
+     "value": 4.34455
     },
     {
      "as_of": "2023-07-01",
@@ -1934,12 +3037,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "ffa8f8f9116dee82"
+      "16b9883540e9667f"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 4.40097324264607
+     "value": 4.400973
     },
     {
      "as_of": "2023-08-01",
@@ -1948,12 +3051,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "100f92cf6eebadb8"
+      "96eb1c3241705579"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 4.42972726828018
+     "value": 4.429727
     },
     {
      "as_of": "2023-09-01",
@@ -1962,12 +3065,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "29accb434fb72506"
+      "66428edc855a7742"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 4.51623594702872
+     "value": 4.516236
     },
     {
      "as_of": "2023-10-01",
@@ -1976,12 +3079,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "8bd1ab726a589ce4"
+      "b40f85ae5a5abd7f"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 4.58838680023193
+     "value": 4.588387
     },
     {
      "as_of": "2023-11-01",
@@ -1990,12 +3093,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "2e4c909e2834ff2d"
+      "96be81e4b865cd9d"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 4.67512683291264
+     "value": 4.675127
     },
     {
      "as_of": "2023-12-01",
@@ -2004,12 +3107,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "fe69e15cabecb45a"
+      "c87256abc6d677bc"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 4.77655365306759
+     "value": 4.776554
     },
     {
      "as_of": "2024-01-01",
@@ -2018,12 +3121,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "eeea297ea5feebfc"
+      "4a89d8f9a1c92bc0"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 4.83749312733158
+     "value": 4.837493
     },
     {
      "as_of": "2024-02-01",
@@ -2032,12 +3135,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "0b4a0fa5692bf9ba"
+      "8c8b71889ce82e01"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 4.87482681444778
+     "value": 4.874827
     },
     {
      "as_of": "2024-03-01",
@@ -2046,12 +3149,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "3ea9074c13157247"
+      "6d9f1971eb2bea54"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 4.93487089214067
+     "value": 4.934871
     },
     {
      "as_of": "2024-04-01",
@@ -2060,12 +3163,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "a45d7da1b96f859c"
+      "881a0d4495eef958"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 4.95924365343783
+     "value": 4.959244
     },
     {
      "as_of": "2024-05-01",
@@ -2074,12 +3177,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "84de315afc7a1409"
+      "f8abf0e82507ceea"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 4.98260336853633
+     "value": 4.982603
     },
     {
      "as_of": "2024-06-01",
@@ -2088,12 +3191,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "6115f73c7ace7a26"
+      "29e3ba627ffee799"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 4.98655124846226
+     "value": 4.986551
     },
     {
      "as_of": "2024-07-01",
@@ -2102,12 +3205,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "8bb3b2aed8f54adc"
+      "7336157a0d3db0aa"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 5.02622966710253
+     "value": 5.02623
     },
     {
      "as_of": "2024-08-01",
@@ -2116,12 +3219,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "da5a60e6cb9f4541"
+      "cfe39a61452939e7"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 5.04898387195525
+     "value": 5.048984
     },
     {
      "as_of": "2024-09-01",
@@ -2130,12 +3233,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "e6024d8b2ad62c28"
+      "161f1da5b2ad2172"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 5.08835674095558
+     "value": 5.088357
     },
     {
      "as_of": "2024-10-01",
@@ -2144,12 +3247,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "261b33354a04af60"
+      "3dba92e75227a8f1"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 5.16711404577734
+     "value": 5.167114
     },
     {
      "as_of": "2024-11-01",
@@ -2158,12 +3261,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "5cd125dbccc41fb5"
+      "6789e6dcb86f7f68"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 5.22146594964683
+     "value": 5.221466
     },
     {
      "as_of": "2024-12-01",
@@ -2172,12 +3275,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "2a26768a3c460287"
+      "266faa4c411e49d1"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 5.23767884896832
+     "value": 5.237679
     },
     {
      "as_of": "2025-01-01",
@@ -2186,12 +3289,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "e6463256b74e4e1e"
+      "af344a19ee5c6109"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 5.28734469434414
+     "value": 5.287345
     },
     {
      "as_of": "2025-02-01",
@@ -2200,12 +3303,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "ab033d27d61c0dee"
+      "ab0e19938711da06"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 5.33136528224124
+     "value": 5.331365
     },
     {
      "as_of": "2025-03-01",
@@ -2214,12 +3317,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "5c80f8f3d4659f54"
+      "6289942bd056a61c"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 5.4004298453396
+     "value": 5.40043
     },
     {
      "as_of": "2025-04-01",
@@ -2228,12 +3331,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "a38f858cc086c78d"
+      "2b2676f90cb62f55"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 5.43984029099736
+     "value": 5.43984
     },
     {
      "as_of": "2025-05-01",
@@ -2242,12 +3345,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "76e6a1ecea3711d2"
+      "8e3a0571582b982d"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 5.46948887466379
+     "value": 5.469489
     },
     {
      "as_of": "2025-06-01",
@@ -2256,12 +3359,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "9f1c08a53bf05065"
+      "5849458940854e73"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 5.56174706710703
+     "value": 5.561747
     },
     {
      "as_of": "2025-07-01",
@@ -2270,12 +3373,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "1eb409648a0e41fb"
+      "c2290527caa204ba"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 5.62493872120799
+     "value": 5.624939
     },
     {
      "as_of": "2025-08-01",
@@ -2284,12 +3387,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "f5e2be647ea3335e"
+      "1aa374f5ac4646c2"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 5.69815857240129
+     "value": 5.698159
     },
     {
      "as_of": "2025-09-01",
@@ -2298,12 +3401,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "0d1cc0cde9fbcb26"
+      "434176cdb5fb4a00"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 5.7610909464623
+     "value": 5.761091
     },
     {
      "as_of": "2025-11-01",
@@ -2312,12 +3415,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "7d0b5c966c9603e8"
+      "8410f2de9d9667d2"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 5.89992915080135
+     "value": 5.899929
     },
     {
      "as_of": "2025-12-01",
@@ -2326,12 +3429,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "9e49d392a486947c"
+      "c2e1a61ae755b819"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 6.00227205135046
+     "value": 6.002272
     },
     {
      "as_of": "2026-01-01",
@@ -2340,12 +3443,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "936ca6d9caaca074"
+      "3af41f11f3d3b6f6"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 6.10697877423828
+     "value": 6.106979
     },
     {
      "as_of": "2026-02-01",
@@ -2354,12 +3457,12 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "73ace2087205e446"
+      "c426c549ad53d9cf"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 6.13996175393856
+     "value": 6.139962
     },
     {
      "as_of": "2026-03-01",
@@ -2368,12 +3471,82 @@
      "high": null,
      "low": null,
      "obs_ids": [
-      "191892028f5b509c"
+      "b60ccdc415dad055"
      ],
      "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
      "subject": "us_workers",
      "unit": "pp",
-     "value": 6.19849507312255
+     "value": 6.229979
+    },
+    {
+     "as_of": "2026-04-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "d9161c38ff19b4ec"
+     ],
+     "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
+     "subject": "us_workers",
+     "unit": "pp",
+     "value": 6.297725
+    },
+    {
+     "as_of": "2026-05-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "f4eb8bcd7022c0f3"
+     ],
+     "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
+     "subject": "us_workers",
+     "unit": "pp",
+     "value": 6.379255
+    },
+    {
+     "as_of": "2026-06-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "360f7fa81b51a826"
+     ],
+     "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
+     "subject": "us_workers",
+     "unit": "pp",
+     "value": 6.456651
+    },
+    {
+     "as_of": "2026-07-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "4ab254a5f3740acb"
+     ],
+     "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
+     "subject": "us_workers",
+     "unit": "pp",
+     "value": 6.485201
+    },
+    {
+     "as_of": "2026-08-01",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "7992ec698995bbdf"
+     ],
+     "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
+     "subject": "us_workers",
+     "unit": "pp",
+     "value": 6.553643
     }
    ],
    "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m"
@@ -2382,6 +3555,7 @@
  "series_keys": [
   "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
   "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp_jan2021.m",
+  "yale_budget_lab_data.recent_vs_older_grads.occupation_dissimilarity_pp.m",
   "yale_budget_lab.recent_vs_older_grads.occupation_dissimilarity_range.pt"
  ],
  "source_cluster": "labour_trackers",
@@ -2390,17 +3564,34 @@
   "yale_budget_lab_data"
  ],
  "spark": {
-  "d": "M1.0,26.0 L5.1,25.6 L9.2,24.8 L13.3,24.2 L17.3,23.6 L21.4,23.4 L25.5,22.8 L29.6,21.6 L33.7,20.3 L37.8,19.1 L41.9,17.9 L46.0,16.8 L50.0,15.7 L54.1,14.6 L58.2,13.3 L62.3,11.8 L66.4,10.3 L70.5,8.4 L74.6,7.4 L78.7,6.0 L82.7,4.6 L86.8,3.6 L90.9,3.1 L95.0,2.0",
+  "d": "M1.0,26.0 L5.1,25.4 L9.2,24.3 L13.3,23.0 L17.3,21.9 L21.4,20.6 L25.5,19.6 L29.6,18.5 L33.7,17.4 L37.8,16.2 L41.9,14.7 L46.0,13.2 L50.0,11.3 L54.1,10.3 L58.2,9.0 L62.3,7.6 L66.4,6.6 L70.5,6.1 L74.6,5.1 L78.7,4.5 L82.7,3.5 L86.8,2.7 L90.9,2.3 L95.0,2.0",
   "end": [
    95.0,
    2.0
   ]
  },
  "stale_as_of": null,
- "stale_ok": true,
- "stale_reason": "The Budget Lab's update pages block fetchers and the workbook URL changes each release; the source row is moved forward by hand.",
+ "stale_ok": false,
+ "stale_reason": null,
  "status": "consistent_with_normal",
  "status_events": [
+  {
+   "author": "claude",
+   "counterevidence_considered": "Occupational mix moves slowly by construction, and a CPS-based index cannot see task change within an occupation. The index between recent and older graduates read above 33 from March to August 2026, its longest run above that line since 2021, which the Lab's September update does not read as disruption.",
+   "created_at": "2026-09-23T01:30:39.620348Z",
+   "evidence_ids": [
+    "0ffaef967260f398",
+    "3dba92e75227a8f1"
+   ],
+   "id": "0a4dba13f5d613cd",
+   "new_conf": 65,
+   "new_status": "consistent_with_normal",
+   "old_conf": 65,
+   "old_status": "consistent_with_normal",
+   "reason": "The index now comes from the chart data of the Budget Lab's AI labour-market tracker, current to August 2026: 5.50 pp forty-five months after November 2022, inside the normal band (7.5 pp or less), against 5.17 pp for the January 2021 baseline at the same age. The event before cited the March 2026 row of the Lab's workbook, which the tracker's data revise from 5.26 to 5.256.",
+   "target_id": "yale_occupational_mix_dissimilarity",
+   "target_type": "indicator"
+  },
   {
    "author": "evaluate",
    "counterevidence_considered": null,
@@ -2419,11 +3610,11 @@
   }
  ],
  "sublayer_id": null,
- "timing_rationale": "Lagging: the occupational mix moves only as workers change jobs over years, and the index is updated a few times a year.",
- "tracker_interpretation": "5.3 pp forty months after ChatGPT against 5.0 pp for the January 2021 baseline at the same age: slightly above the norm, and the curve predates AI.",
+ "timing_rationale": "Lagging: the occupational mix moves only as workers change jobs over years, and the Budget Lab updates the index about two weeks after each month ends.",
+ "tracker_interpretation": "In August 2026, forty-five months after ChatGPT, the occupational mix had moved slightly more than it had at the same age from the January 2021 baseline, a curve that began before AI. The index between recent and older graduates read above 33 from March to August 2026, its longest run above that line since 2021; the Lab's September 2026 update still finds its measures flat, within historical ranges or on pre-AI trends.",
  "unit": "pp",
  "unpublished_reason": null,
- "updated_at": "2026-09-10",
+ "updated_at": "2026-09-22",
  "valve_measured": "adoption_to_adaptation",
  "why_it_matters": "If AI were reshaping work, the mix of occupations would move faster than in prior technology transitions. The Budget Lab finds it moving at about the historical pace."
 }

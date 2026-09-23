@@ -18,7 +18,7 @@ export default function QueryPage() {
         <h2 className="display text-2xl leading-tight">Saved analyses</h2>
         <ul className="grid gap-3 md:grid-cols-2">
           {rows.map((a) => (
-            <li key={a.id} id={a.metric} className="panel p-3 text-sm flex flex-col gap-1.5">
+            <li key={a.id} id={a.metric} className="panel p-3 text-sm flex flex-col gap-1.5 min-w-0">
               <div className="font-medium">{a.name}</div>
               <p className="text-xs text-ink-2">{a.question}</p>
               {a.latest ? (

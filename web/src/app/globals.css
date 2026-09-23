@@ -63,6 +63,7 @@ body { background: var(--background); color: var(--ink); font-family: var(--font
 
 .prose-tight p + p { margin-top: 0.5rem; }
 main p { max-width: 75ch; } /* a wide shell must not make a long line */
+code { overflow-wrap: break-word; } /* a long series key wraps rather than pushing a phone page sideways */
 .display.italic, .display em { font-family: var(--font-serif); font-weight: 400; font-style: italic; letter-spacing: -0.01em; }
 table.data { font-variant-numeric: tabular-nums; overflow-wrap: normal; } /* a table inside .prose-folio must not break a number per character */
 table.data th, table.data td { padding: 0.45rem 0.75rem; border-bottom: 1px solid var(--grid); text-align: left; vertical-align: top; }

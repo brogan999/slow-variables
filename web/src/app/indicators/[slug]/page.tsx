@@ -114,9 +114,9 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
               </div>
             ) : null}
             {d.derived.length ? <details className="mt-3 text-xs"><summary className="cursor-pointer text-ink-2">Derived rows ({d.derived.length})</summary>
-              <table className="data w-full mt-1"><thead><tr><th scope="col">as of</th><th scope="col">dims</th><th scope="col">value</th><th scope="col">inputs</th></tr></thead><tbody>
+              <div className="overflow-x-auto"><table className="data w-full mt-1"><thead><tr><th scope="col">as of</th><th scope="col">dims</th><th scope="col">value</th><th scope="col">inputs</th></tr></thead><tbody>
                 {d.derived.slice().reverse().map((r) => <tr key={r.id} id={`d-${r.id}`} className="scroll-mt-24 target:bg-surface-2"><td>{r.as_of_date}</td><td>{Object.values(r.dims ?? {}).join(" ")}</td><td className="tabular-nums">{fmt(r.value, d.unit)}</td><td><ObsLinks ids={r.obs_ids} obsIndex={idx} max={3} /></td></tr>)}
-              </tbody></table></details> : null}
+              </tbody></table></div></details> : null}
           </details>
           <details id="timeline">
             <summary className="cursor-pointer display text-xl">Latest readings</summary>

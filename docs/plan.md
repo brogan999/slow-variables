@@ -487,3 +487,32 @@ Known limits:
 - Five of the migration page's eight tightness scores lapse on 28 Oct 2026 unless Epoch publishes a newer quarter.
 - The fence ledger's two openings age out of its trailing year on 29 Sep and 14 Oct 2026, and the open-model gap reading has been stale since mid-July 2026, so the claim that reads it cannot be tested until it refreshes.
 - A source's fetch record is a snapshot of the day it was written, not re-fetched nightly.
+
+## Part 12 status (23 Sep 2026): upkeep, after a check of everything shipped
+
+The owner asked for the work to go on, and then for a check that nothing already shipped was wrong. Four fact-checkers read every outlook source against the original, fetched that day, and a fifth recomputed every number on `/outlook` and the map from the raw observations. They found twenty-three must-fixes and about seventy-five smaller problems in how the page described named people and their work, and three number errors. The site's own lists named the rest: two published readings flagged in Part 10 as wrong, one frozen reading, and eight hand-entered series listed as overdue.
+
+What shipped, one PR per step:
+- **Step 0 (#59).** The outlook's content corrected against its sources: out-of-date descriptions of people (roles that had changed, a start-up that had shut), positions and agreements credited to people who do not hold them, and findings that overstated or reversed a work. A claim can now be this site's own reading of an author's position, and says so on the board, the cards and the map. The Census figure names the question it comes from, the chip share names the group it is measured over, and the paid-subscriber ratio is printed as two counts rather than a conversion rate.
+- **Step 1 (#60).** Readings that were wrong or frozen. The non-Nvidia share of compute reads only quarters every chip designer has reported (it had read a three-of-six quarter as a seven-point fall). The acquisitions count reads completed quarters whose trailing year lies after the hand-kept ledger begins, so the exit bell moved from concentrating to not yet measurable until five such quarters exist. The open-model lag is read at Epoch's newest row as well as at each record, so it no longer freezes between records. xAI's Series E, filed on Form D and reported by Epoch, counts once. The map counts firms by main sub-layer, as it counts money.
+- **Step 2 (#62).** From its June 2026 release Anthropic's Economic Index samples chat and Cowork conversations every day and reports them by month, where earlier releases drew one seven-day sample; the monthly figures now sit on a series of their own instead of continuing the weekly one, and the sixteen rows filed under the old keys were withdrawn in place.
+- **Step 3 (#63).** Microsoft's commercial backlog for March and June 2026, and a corrected note: the filed figure is total backlog, six billion dollars higher. The Monday refresh list stops asking for figures no source states any more; ADP's articles become a second source read by hand when needed; a Menlo row that could never land is gone.
+- **Step 4 (#64).** Yale's dissimilarity index is read from the chart data of the Budget Lab's AI labour-market tracker, current to August 2026, with the index between recent and older graduates as a series of its own; the hand chore of moving a workbook URL each release is gone. Pages that scrolled sideways on a phone (sixteen indicator pages with long series keys, a derived-rows table, a saved analysis on `/query`) now fit.
+
+Judgement calls the owner may reverse, in the order they matter:
+- **The exit bell is unscored until the end of 2026.** Its ledger starts in 2025, so earlier windows were the ledger filling up, not labs buying less. Back-filling the ledger under a written search rule would let it compare 2025 with 2026 fairly; that is offered as the next data task.
+- **The silicon share shows as stale.** Its newest full panel is December 2025. `stale_ok` would hide a designer Epoch drops, so the attention line stays until Epoch publishes a quarter all six have reported.
+- **The venture-round match reads dates, not amounts.** A reported round within the same quarter as a Form D, or within 45 days of it, is taken to be the same round; a small filing beside a separate large reported round would hide it (none does today).
+- **The occupations figure stays on the refresh list.** It is the only input of a published indicator and each new Economic Index report must be checked for it.
+- **Yale's cadences.** The source is monthly, as the tracker is updated; the indicator stays quarterly, because its rows are dated at the month's start and land about two weeks after the month ends, so a monthly allowance would read the card stale for part of each month.
+
+How it was checked: a staff review of every step's diff, given its screenshots, with every should-fix applied; the reviews caught, among others, a wording that set a monthly count against a weekly sample, two status reasons that overstated what was wrong, a restamped retrieval date, ADP returning as a stale source every Monday, and a misreading of how a source's cadence is used. The full suite ran after each step, and every published indicator page and fifteen other routes were measured at 375 pixels with disclosures closed and open.
+
+Deliberately not done: a back-filled acquisitions ledger; a second source for the silicon share (no free source publishes designer shares); new keys for the June Economic Index report's own headline figures (its text states none).
+
+Part 11's known limit on the open-model gap is gone: the lag is read at Epoch's newest row, and the outlook claim that reads it is testable again.
+
+Known limits:
+- The acquisitions count is a floor: the ledger is kept by hand from public announcements.
+- "Occupations with a quarter of their tasks using Claude" rests on a figure the June 2026 Economic Index report did not restate; it stays on the Monday list until a report does.
+- Five of the migration page's eight tightness scores still lapse on 28 Oct 2026 unless Epoch publishes a newer quarter.

@@ -334,6 +334,8 @@ NOT_DUE = {
     "dataset connector reads both monthly (22 Sep 2026)",
     "anthropic_ei.global.automation_share_reported.pt": "later reports state neither share in text, and the "
     "dataset connector reads both monthly (22 Sep 2026)",
+    "yale_budget_lab.recent_vs_older_grads.occupation_dissimilarity_range.pt": "the graduates index now comes from the "
+    "tracker's chart data, which the yale_budget_lab_data connector reads (22 Sep 2026)",
 }
 
 

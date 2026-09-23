@@ -1817,7 +1817,7 @@
        "f90ebbe2d45880d4"
       ],
       "unit": "index",
-      "value": 0.17312777541701263
+      "value": 0.1731277754170126
      },
      "layer_id": "model",
      "leading_lagging": "leading",
@@ -4739,12 +4739,12 @@
       "derived_id": "4881d3f62fa619ee",
       "dims": {},
       "obs_ids": [
+       "0ffaef967260f398",
        "14ca8a23f3a7fee5",
        "1fce2bb84f849403",
        "3f6ee98960396449",
        "4b51d49e30e2619d",
        "a9276b9dfc5babca",
-       "e024995d58fffc7f",
        "f03af856e9a46333"
       ],
       "unit": "count",
@@ -4857,35 +4857,35 @@
      "grade": "B",
      "id": "yale_occupational_mix_dissimilarity",
      "latest": {
-      "as_of": "2026-03-01",
+      "as_of": "2026-08-01",
       "disputed": false,
       "grade": "C",
       "high": null,
       "low": null,
       "obs_ids": [
-       "e024995d58fffc7f"
+       "0ffaef967260f398"
       ],
       "series_key": "yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m",
       "subject": "us_workers",
       "unit": "pp",
-      "value": 5.26009156585592
+      "value": 5.501739
      },
      "layer_id": "labour_consumers",
      "leading_lagging": "lagging",
-     "n_observations": 103,
+     "n_observations": 180,
      "name": "Occupational-mix dissimilarity since ChatGPT (Yale Budget Lab)",
      "pending": null,
      "published": true,
      "source_cluster": "labour_trackers",
      "spark": {
-      "d": "M1.0,26.0 L5.1,25.6 L9.2,24.8 L13.3,24.2 L17.3,23.6 L21.4,23.4 L25.5,22.8 L29.6,21.6 L33.7,20.3 L37.8,19.1 L41.9,17.9 L46.0,16.8 L50.0,15.7 L54.1,14.6 L58.2,13.3 L62.3,11.8 L66.4,10.3 L70.5,8.4 L74.6,7.4 L78.7,6.0 L82.7,4.6 L86.8,3.6 L90.9,3.1 L95.0,2.0",
+      "d": "M1.0,26.0 L5.1,25.4 L9.2,24.3 L13.3,23.0 L17.3,21.9 L21.4,20.6 L25.5,19.6 L29.6,18.5 L33.7,17.4 L37.8,16.2 L41.9,14.7 L46.0,13.2 L50.0,11.3 L54.1,10.3 L58.2,9.0 L62.3,7.6 L66.4,6.6 L70.5,6.1 L74.6,5.1 L78.7,4.5 L82.7,3.5 L86.8,2.7 L90.9,2.3 L95.0,2.0",
       "end": [
        95.0,
        2.0
       ]
      },
      "stale_as_of": null,
-     "stale_reason": "The Budget Lab's update pages block fetchers and the workbook URL changes each release; the source row is moved forward by hand.",
+     "stale_reason": null,
      "status": "consistent_with_normal",
      "unit": "pp",
      "unpublished_reason": null,
@@ -5511,6 +5511,23 @@
  "recent_status_events": [
   {
    "author": "claude",
+   "counterevidence_considered": "Occupational mix moves slowly by construction, and a CPS-based index cannot see task change within an occupation. The index between recent and older graduates read above 33 from March to August 2026, its longest run above that line since 2021, which the Lab's September update does not read as disruption.",
+   "created_at": "2026-09-23T01:30:39.620348Z",
+   "evidence_ids": [
+    "0ffaef967260f398",
+    "3dba92e75227a8f1"
+   ],
+   "id": "0a4dba13f5d613cd",
+   "new_conf": 65,
+   "new_status": "consistent_with_normal",
+   "old_conf": 65,
+   "old_status": "consistent_with_normal",
+   "reason": "The index now comes from the chart data of the Budget Lab's AI labour-market tracker, current to August 2026: 5.50 pp forty-five months after November 2022, inside the normal band (7.5 pp or less), against 5.17 pp for the January 2021 baseline at the same age. The event before cited the March 2026 row of the Lab's workbook, which the tracker's data revise from 5.26 to 5.256.",
+   "target_id": "yale_occupational_mix_dissimilarity",
+   "target_type": "indicator"
+  },
+  {
+   "author": "claude",
    "counterevidence_considered": "April read 51.0% on the same monthly series, so both monthly readings sit just above the edge; the weekly readings of 53.3% and 54.5% came from seven-day samples of Claude.ai conversations, so the step between them cannot be read as a trend. One provider's consumer plans, classified by a model.",
    "created_at": "2026-09-23T00:55:42.953312Z",
    "evidence_ids": [
@@ -5550,27 +5567,6 @@
    "old_status": "concentrating",
    "reason": "The count now reads only completed quarters whose trailing year lies wholly after 1 January 2025, when the ledger begins: 8 at 31 Dec 2025, 10 at 31 Mar 2026 and 11 at 30 Jun 2026. The direction rule compares five such quarters, so it cannot be read until the end of 2026. The earlier reading of concentrating compared counts of 3, 5, 6, 9 and 9, the first two from windows that began before the ledger did. The check of 22 Sep 2026 also found two OpenAI purchases missing (Sky in October 2025, Neptune in December 2025) and Weights & Biases dated at its close rather than its announcement; all three are now in the ledger.",
    "target_id": "lab_vertical_integration_exit_bell",
-   "target_type": "indicator"
-  },
-  {
-   "author": "claude",
-   "counterevidence_considered": "Epoch's estimates carry wide ranges, and the newest full panel lags the newest partial one by up to three quarters, so the reading is already old when it lands.",
-   "created_at": "2026-09-23T00:10:09.543535Z",
-   "evidence_ids": [
-    "1c4820ae9106f46e",
-    "399214e48a15bb19",
-    "83fc6986a1630d10",
-    "c32215464bcb0e24",
-    "d0d1705763f944a5",
-    "e488feafb4588327"
-   ],
-   "id": "ddd855d9360c5a3a",
-   "new_conf": 50,
-   "new_status": "emerging",
-   "old_conf": 50,
-   "old_status": "emerging",
-   "reason": "The share is now read only on quarters every designer has reported, as the designer-concentration index is: 32.8% at 31 Dec 2025, with all six reported. The earlier reason quoted 26% at the end of March 2026, a quarter only three of the six had reported, so the share appeared to fall seven points; among those three it fell less than half a point, and the full panel's March quarter is not yet known. Over the four quarters to December 2025 the full-panel share rose from 29.6% to 32.8%, which the direction rule reads as dispersing, but Epoch is the one source and not a primary one, so the two-source rule holds the status at emerging.",
-   "target_id": "custom_silicon_share",
    "target_type": "indicator"
   }
  ],
