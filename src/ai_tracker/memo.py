@@ -324,6 +324,17 @@ def write(store: st.Store, today: date | None = None, since: date | None = None)
 REFRESH_NOTES = {
     "revelio": "Revelio's terms forbid automated access: take the figure from a Wayback snapshot"
 }
+# Hand-entered series whose source no longer states the figure, or whose figure a connector now reads: listing them
+# would ask for a refresh that cannot, or need not, happen. Each reason was checked on the date it gives.
+# ponytail: a source that states the figure again needs its entry removed by hand.
+NOT_DUE = {
+    "menlo.enterprise.multi_model_share.pt": "later waves report a typical model count instead (22 Sep 2026)",
+    "anthropic_ei.global.augmentation_share_reported.pt": "later reports state neither share in text (22 Sep 2026)",
+    "anthropic_ei.global.automation_share_reported.pt": "later reports state neither share in text (22 Sep 2026)",
+    "anthropic_ei.global.occupations_25pct_tasks_share.pt": "no later report states it (22 Sep 2026)",
+    "adp_research.us_high_exposure.employment_yoy.m": "the canaries connector reads Stanford's own files for these figures monthly",
+    "adp_research.us_low_exposure.employment_yoy.m": "the canaries connector reads Stanford's own files for these figures monthly",
+}
 
 
 def due_for_refresh(store: st.Store, today: date) -> list[str]:
@@ -349,7 +360,11 @@ def due_for_refresh(store: st.Store, today: date) -> list[str]:
         name, cad = cadence.get(src, (src, None))
         days = st.CADENCE_DAYS.get(cad or "")
         if (
-            method != "manual" or not days or cad == "per_release" or not any(fnmatch(key, g) for g in globs)
+            method != "manual"
+            or key in NOT_DUE
+            or not days
+            or cad == "per_release"
+            or not any(fnmatch(key, g) for g in globs)
         ):  # a one-off study is not due
             continue
         if st.is_stale(as_of, cad, today):
