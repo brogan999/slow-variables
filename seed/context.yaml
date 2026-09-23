@@ -80,12 +80,14 @@ figures:
       - {metric: rpo_to_trailing_revenue, dims: {entity: crwv}, label: CoreWeave}
       - {metric: rpo_to_trailing_revenue, dims: {entity: orcl}, label: Oracle}
       - {metric: rpo_to_trailing_revenue, dims: {entity: msft}, label: Microsoft}
+      - {metric: rpo_to_trailing_revenue, dims: {entity: googl}, label: Alphabet}
     caption: >-
       Remaining performance obligations are revenue a company has contracted but not yet delivered, from its own
       filings; each is divided here by its revenue in the last four fiscal quarters, so a reading of one means a year
-      of current revenue is already sold. CoreWeave only rents out computing capacity; Oracle's and Microsoft's
-      backlogs also hold the software and services they sell. Companies define and disclose backlog differently, so
-      read each line against its own past; a line breaks where a quarter is missing here.
+      of current revenue is already sold. CoreWeave only rents out computing capacity; Oracle's, Microsoft's and
+      Alphabet's backlogs also hold the software and services they sell, and Alphabet's is divided by revenue that
+      comes mostly from advertising. Companies define and disclose backlog differently, so read each line against its
+      own past; a line breaks where a quarter is missing here.
   - id: backlog_chips
     page: layers/compute_physical
     note: company filings
