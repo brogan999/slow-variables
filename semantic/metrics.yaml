@@ -466,7 +466,7 @@ metrics:
       FROM cp JOIN h USING (subject) GROUP BY cp.as_of_date)
       SELECT * FROM r QUALIFY value IS DISTINCT FROM lag(value) OVER (ORDER BY as_of_date)  -- change points only
   venture_dollars:
-    description: Primary-round dollars per calendar quarter and sub-layer. Form D amount sold (tier 4) where an entity files; Epoch's press-compiled equity rounds (tier 5) only for entity-quarters with no Form D row. Sub-layer from the entity's primary membership.
+    description: Primary-round dollars per calendar quarter and sub-layer. Form D amount sold (tier 4) where an entity files; Epoch's press-compiled equity rounds (tier 5) only where the entity has no Form D row in the same quarter or within 45 days. Sub-layer from the entity's primary membership.
     rationale: The venture-flow strip and the concentration metrics start here (P1 §7 #8-#13). Filed amounts first; press only where filings are absent (most frontier labs raise via SPVs and offshore vehicles that never file).
     grain: [as_of_date, sublayer_id]
     unit: USD
@@ -487,7 +487,7 @@ metrics:
     lead_lag: leading
     formula_version: 1
     inputs: ["formd.*.amount_sold_usd.pt", "formd.*.debt_sold_usd.pt", "epoch.*.round_equity_usd.pt"]
-    caveats: Epoch rows count only for an entity-quarter with no Form D filing, so the two sources never double-count a round.
+    caveats: Epoch rows count only where the entity has no Form D row in the same quarter or within 45 days; the match reads dates, not amounts, so a small filing beside a separate large reported round would hide it.
     sql: |
       SELECT (date_trunc('quarter', r.as_of_date) + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE AS as_of_date, m.sublayer_id, r.source, r.kind,
              sum(r.v) AS value, list(r.id ORDER BY r.id) AS obs_ids
@@ -519,7 +519,7 @@ metrics:
     lead_lag: leading
     formula_version: 1
     inputs: ["formd.*.amount_sold_usd.pt", "formd.*.debt_sold_usd.pt", "epoch.*.round_equity_usd.pt"]
-    caveats: Only Form D debt, so bank facilities and bonds are missing; Epoch's press rows stay equity-only and are suppressed only by a Form D equity row in the same entity-quarter.
+    caveats: Only Form D debt, so bank facilities and bonds are missing; Epoch's press rows stay equity-only and are suppressed only by a Form D equity row for the same entity in the same quarter or within 45 days.
     sql: |
       WITH rounds AS (SELECT entity_id, as_of_date, v, id FROM venture_rounds),
       m AS (SELECT entity_id, sublayer_id FROM entity_membership WHERE is_primary AND sublayer_id IS NOT NULL)
@@ -1253,7 +1253,7 @@ metrics:
       SELECT * FROM r QUALIFY value IS DISTINCT FROM lag(value) OVER (ORDER BY as_of_date)  -- change points only
   lab_vertical_integration_events_4q:
     description: Distinct acquisitions or acquihires by AI labs and hyperscalers of application, tooling or data companies announced in the trailing four quarters, counted from the acquisition ledger (one per acquirer-target pair) at each quarter end. Only acquirers whose primary membership is in the model or compute layer count; the ledger keeps every deal.
-    rationale: The exit bell for the application layer rings when labs buy the layer above them; a rising count is vertical integration, the capture thesis's clearest signal.
+    rationale: The exit bell for the application layer rings when labs buy the layer above them; a rising count is vertical integration, the capture thesis's clearest signal. v3 reads only completed quarters whose trailing year lies wholly after 1 January 2025, when the hand-kept ledger begins, so a window the ledger does not cover is never read as a quiet year, and keys deals by column.
     grain: [as_of_date]
     unit: count
     lead_lag: leading

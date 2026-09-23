@@ -721,7 +721,7 @@ def test_the_open_lag_is_read_at_the_newest_row_and_never_twice_on_one_date():
     assert dates == ["2026-04-01", "2026-07-01"]
 
 
-def test_a_round_filed_and_reported_counts_once_within_forty_five_days_even_across_a_quarter():
+def test_a_round_filed_and_reported_counts_once_in_one_quarter_or_within_forty_five_days():
     con = duckdb.connect()
     con.execute(
         "CREATE TABLE observations (id VARCHAR, series_key VARCHAR, entity_id VARCHAR, as_of_date DATE, value_numeric DOUBLE)"
@@ -733,6 +733,8 @@ def test_a_round_filed_and_reported_counts_once_within_forty_five_days_even_acro
             ("f1", "formd.x.amount_sold_usd.pt", "2025-12-19", 16.6),
             ("e1", "epoch.x.round_equity_usd.pt", "2026-01-06", 20.0),  # the same round, 18 days later, next quarter
             ("e2", "epoch.x.round_equity_usd.pt", "2026-05-06", 30.0),  # a separate round, months after the filing
+            ("f2", "formd.x.amount_sold_usd.pt", "2026-07-01", 40.0),
+            ("e3", "epoch.x.round_equity_usd.pt", "2026-08-30", 40.0),  # 60 days on, but the same quarter as f2
         ],
     )
-    assert sorted(r[0] for r in con.execute("SELECT id FROM venture_rounds").fetchall()) == ["e2", "f1"]
+    assert sorted(r[0] for r in con.execute("SELECT id FROM venture_rounds").fetchall()) == ["e2", "f1", "f2"]
