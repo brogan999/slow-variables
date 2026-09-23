@@ -9,6 +9,7 @@
 | ai2027_tracker | AI 2027 Tracker (independent) | ai2027-tracker.com | html | 6 | irregular | Site terms; short quotation | AI 2027 Tracker |
 | aifutures_blog | AI Futures Project blog | AI Futures Project | html | 7 | irregular | Substack; short quotation | AI Futures Project |
 | amazon_news | About Amazon company news | Amazon | html | 4 | irregular | Amazon; short quotation | About Amazon |
+| amd_blog | AMD blog | AMD | html | 4 | irregular | AMD; short quotation | AMD blog |
 | anthropic_ei | Anthropic Economic Index (open dataset and reports) | Anthropic | csv | 2 | quarterly | CC BY 4.0 (dataset) | Anthropic Economic Index, open dataset on Hugging Face (CC BY 4.0) and the 2026 reports |
 | anthropic_news | Anthropic newsroom | Anthropic | html | 4 | irregular | Anthropic; short quotation | Anthropic newsroom |
 | anthropic_system_card | Anthropic system cards | Anthropic | pdf | 7 | irregular | Anthropic; short quotation | Anthropic, Claude Fable 5.1 & Claude Mythos 5.1 System Card (1 Sep 2026) |
@@ -25,6 +26,7 @@
 | big_i | IndependentAgent.com | Independent Insurance Agents & Brokers of America | html | 5 | irregular | Short quotation | Independent Insurance Agents & Brokers of America, IndependentAgent.com |
 | bls | BLS productivity and costs; total factor productivity | U.S. Bureau of Labor Statistics | api | 4 | quarterly | Public domain (U.S. government) | U.S. Bureau of Labor Statistics, Productivity and Costs (PRS85006092/93, PRS85006173), Total Factor Productivity (MPU4910012) |
 | cait | California AI-Unemployment Tracker (CAIT) | California Policy Lab with California EDD | csv | 6 | monthly | California Policy Lab; monthly claims workbook, cited as the Lab suggests | Hyman, von Wachter et al. (2026), Tracking AI-Related Job Loss Using Unemployment Insurance Claims Data in California, California Policy Lab |
+| calcalist_ctech | Calcalist Ctech | Calcalist | html | 7 | irregular | Calcalist; short quotation | Calcalist Ctech |
 | canaries | Canaries Dashboard data (by exposure) | Stanford Digital Economy Lab and ADP Research | csv | 6 | monthly | Stanford Digital Economy Lab; free public data, cited as the Lab asks | Stanford Digital Economy Lab and ADP Research, AI Economic Indicators: Canaries Dashboard |
 | canaries_age | Canaries Dashboard data (age by exposure) | Stanford Digital Economy Lab and ADP Research | csv | 6 | monthly | Stanford Digital Economy Lab; free public data, cited as the Lab asks | Stanford Digital Economy Lab and ADP Research, AI Economic Indicators: Canaries Dashboard |
 | census_btos | Census Business Trends and Outlook Survey | U.S. Census Bureau | csv | 4 | biweekly | Public domain (U.S. government) | U.S. Census Bureau, Business Trends and Outlook Survey |
@@ -38,7 +40,9 @@
 | comet_blog | Comet blog | Comet ML | html | 7 | irregular | Comet; short quotation | Comet |
 | coreweave_news | CoreWeave newsroom | CoreWeave | html | 7 | irregular | CoreWeave press release; short quotation | CoreWeave (company announcement) |
 | crunchbase_news_feed | Crunchbase News feed (watchlist) | Crunchbase | rss | 5 | daily | Publisher terms; titles and links only | Crunchbase News |
+| crusoe_newsroom | Crusoe newsroom | Crusoe | html | 4 | irregular | Crusoe; short quotation | Crusoe newsroom |
 | cursor_blog | Cursor research blog | Anysphere | html | 7 | irregular | Cursor; short quotation | Cursor (Anysphere) |
+| d_matrix_newsroom | d-Matrix announcements | d-Matrix | html | 4 | irregular | d-Matrix; short quotation | d-Matrix announcements |
 | dealroom | Dealroom news | Dealroom.co | html | 5 | irregular | Dealroom; short quotation | Dealroom |
 | decagon_blog | Decagon blog | Decagon | html | 7 | irregular | Decagon; short quotation | Decagon |
 | deepmind_blog_feed | Google DeepMind blog feed (watchlist) | Google DeepMind | rss | 7 | irregular | Publisher terms; titles and links only | Google DeepMind |
@@ -53,6 +57,7 @@
 | edgar_8k_nvda | SEC EDGAR 8-K feed, NVDA (watchlist) | U.S. Securities and Exchange Commission | rss | 4 | weekly | Public domain (U.S. government) | SEC EDGAR |
 | edgar_8k_orcl | SEC EDGAR 8-K feed, ORCL (watchlist) | U.S. Securities and Exchange Commission | rss | 4 | weekly | Public domain (U.S. government) | SEC EDGAR |
 | electrek | Electrek | 9to5 Media | html | 5 | irregular | Electrek; short quotation | Electrek |
+| emmi_ai_news | Emmi AI news | Emmi AI | html | 4 | irregular | Emmi AI; short quotation | Emmi AI news |
 | engram_blog | Engram blog | Engram | html | 7 | irregular | Engram; short quotation | Engram |
 | epoch | Epoch AI data hub — AI companies | Epoch AI | csv | 5 | daily | CC BY 4.0 | Epoch AI, 'Data on AI Companies' (CC BY 4.0), epoch.ai/data |
 | epoch_bench | Epoch AI benchmarks and Capabilities Index | Epoch AI | csv | 1 | weekly | CC BY 4.0 | Epoch AI, Benchmarking Hub and Epoch Capabilities Index (CC BY 4.0) |
@@ -66,20 +71,30 @@
 | fda_510k | FDA 510(k) premarket notification database | U.S. Food and Drug Administration | html | 4 | irregular | Public domain (U.S. government work) | FDA 510(k) database |
 | fda_devices | FDA AI-enabled medical device list | U.S. Food and Drug Administration | csv | 4 | monthly | Public domain (U.S. government work) | FDA, Artificial Intelligence-Enabled Medical Devices list |
 | fed_board | Federal Reserve Board, FEDS Notes | Board of Governors of the Federal Reserve System | html | 6 | irregular | Public (U.S. government) | Federal Reserve Board, FEDS Notes |
+| fintool_founder_blog | Nicolas Bustamante's blog (Fintool founder) | Fintool | html | 4 | irregular | Fintool; short quotation | Nicolas Bustamante's blog (Fintool founder) |
 | fireworks_watch | Fireworks AI blog (page watch) | Fireworks AI | html | 7 | weekly | Publisher terms; change notices only | Fireworks AI |
 | formd | SEC EDGAR Form D (private offerings) | U.S. Securities and Exchange Commission | formd | 4 | daily | Public domain (U.S. government work) | SEC EDGAR Form D data sets |
 | fortune | Fortune | Fortune Media | html | 5 | irregular | Fortune Media; short quotation | Fortune, 'MIT report: 95% of generative AI pilots at companies are failing' (18 Aug 2025) |
 | fred | FRED (Federal Reserve Economic Data) | Federal Reserve Bank of St. Louis | csv | 6 | quarterly | FRED terms of use; RPS series by Bick, Blandin & Deming | Bick, Blandin & Deming, Real-Time Population Survey, retrieved from FRED |
 | fred_official | FRED (official statistics) | Federal Reserve Bank of St. Louis | csv | 4 | monthly | FRED terms of use; the series are their agencies' public data | Federal Reserve Board, Bureau of Economic Analysis and Bureau of Labor Statistics series, retrieved from FRED |
 | geekwire | GeekWire | GeekWire | html | 5 | irregular | GeekWire; short quotation | GeekWire |
+| git_ai_blog | Git AI blog | Git AI | html | 4 | irregular | Git AI; short quotation | Git AI blog |
+| google_blog | Google blog (The Keyword) | Google | html | 4 | irregular | Google; short quotation | Google blog (The Keyword) |
 | google_research_blog | Google Research blog | Google | html | 7 | irregular | Google; short quotation | Google Research |
+| gretel_blog | Gretel blog | Gretel | html | 4 | irregular | Gretel; short quotation | Gretel blog |
 | hal_reliability | HAL AI Agent Reliability Tracker (reliability scores by agent) | Princeton University, HAL | html | 1 | irregular | HAL (Princeton); cited with attribution | HAL: Holistic Agent Leaderboard, AI Agent Reliability Tracker, Princeton University |
 | harvey_blog | Harvey research and insights posts | Harvey | html | 7 | irregular | Harvey; short quotation | Harvey |
+| hkexnews | HKEXnews (listed-company filings) | Hong Kong Exchanges and Clearing | pdf | 4 | irregular | Hong Kong Exchanges and Clearing; short quotation | HKEXnews (listed-company filings) |
 | hsbc | HSBC Insights (Global Investment Research) | HSBC | html | 5 | irregular | HSBC; short quotation | HSBC Insights, 'The billions of AI consumer surplus' (10 Aug 2026) |
+| humanloop_site | Humanloop website | Humanloop | html | 4 | irregular | Humanloop; short quotation | Humanloop website |
 | humlum_pdf | Humlum working-paper PDFs (author site) | Anders Humlum | pdf | 6 | irregular | Author preprint; short quotation | Humlum & Vestergaard |
 | innolitics | Innolitics regulatory articles | Innolitics | html | 6 | irregular | Innolitics; short quotation | Innolitics |
 | insurance_journal | Insurance Journal | Wells Media Group | html | 5 | irregular | Insurance Journal; short quotation | Insurance Journal |
+| koyeb_blog | Koyeb blog | Koyeb | html | 4 | irregular | Koyeb; short quotation | Koyeb blog |
 | leonis | The Thesis by Leonis | Leonis Capital | html | 6 | irregular | Substack; figures quoted with attribution | Leonis Capital, The Thesis |
+| limitless_site | Limitless website | Limitless | html | 4 | irregular | Limitless; short quotation | Limitless website |
+| manus_blog | Manus blog | Manus | html | 4 | irregular | Manus; short quotation | Manus blog |
+| mendral_blog | Mendral blog | Mendral | html | 4 | irregular | Mendral; short quotation | Mendral blog |
 | menlo | Menlo Ventures, State of Generative AI in the Enterprise | Menlo Ventures | html | 6 | annual | Report | Menlo Ventures, '2025: The State of Generative AI in the Enterprise' |
 | mercor_blog | Mercor blog | Mercor | html | 7 | irregular | Mercor; short quotation | Mercor (company announcement) |
 | metr | METR time horizons (v1.1) | METR | api | 1 | per_release | METR; analysis code MIT at https://github.com/METR/eval-analysis-public | METR, Measuring AI Ability to Complete Long Tasks (Horizon v1.1) |
@@ -92,10 +107,14 @@
 | nanda | MIT NANDA, The GenAI Divide | MIT Media Lab | pdf | 6 | annual | Report | MIT NANDA, 'The GenAI Divide: State of AI in Business 2025' |
 | nber | NBER working papers and chapters | National Bureau of Economic Research | html | 6 | irregular | NBER; abstract quotation | NBER |
 | ncsl | NCSL artificial intelligence legislation tracker | National Conference of State Legislatures | html | 6 | monthly | NCSL; counts only | NCSL, Artificial Intelligence 2025 Legislation |
+| nebius_newsroom | Nebius newsroom | Nebius | html | 4 | irregular | Nebius; short quotation | Nebius newsroom |
+| nextslide_site | NextSlide website | NextSlide | html | 4 | irregular | NextSlide; short quotation | NextSlide website |
+| nscale_press | Nscale press releases | Nscale | html | 4 | irregular | Nscale; short quotation | Nscale press releases |
 | nvidia_blog | NVIDIA Blog (blogs.nvidia.com) | NVIDIA | html | 4 | irregular | NVIDIA; short quotation | NVIDIA Blog |
 | nvidia_ir | NVIDIA Newsroom | NVIDIA | html | 4 | irregular | NVIDIA; short quotation | NVIDIA Newsroom |
 | nyfed | The Labor Market for Recent College Graduates | Federal Reserve Bank of New York | html | 4 | quarterly | Public domain (U.S. Federal Reserve) | Federal Reserve Bank of New York, The Labor Market for Recent College Graduates |
 | openai_blog | OpenAI research posts | OpenAI | html | 7 | irregular | OpenAI; short quotation | OpenAI |
+| openai_deployment_co_news | The OpenAI Deployment Company newsroom | The OpenAI Deployment Company | html | 4 | irregular | The OpenAI Deployment Company; short quotation | The OpenAI Deployment Company newsroom |
 | openai_news_feed | OpenAI news feed (watchlist) | OpenAI | rss | 7 | irregular | Publisher terms; titles and links only | OpenAI |
 | openrouter | OpenRouter model prices | OpenRouter | api | 3 | daily | Public API | OpenRouter list prices |
 | openrouter_rankings | OpenRouter rankings (token totals, top models by day) | OpenRouter | html | 3 | daily | OpenRouter terms; public page | OpenRouter |
@@ -103,6 +122,7 @@
 | owid | Our World in Data AI investment | Our World in Data | csv | 6 | monthly | CC BY 4.0 (OWID; underlying data AI Index / Quid) | Our World in Data, AI investment (CC BY 4.0), from the Stanford AI Index |
 | pehub_feed | PE Hub feed (watchlist) | PE Hub | rss | 5 | daily | Publisher terms; titles and links only | PE Hub |
 | peoplematters | People Matters | People Matters Media | html | 5 | irregular | People Matters; short quotation | People Matters |
+| poolside_blog | Poolside blog | Poolside | html | 4 | irregular | Poolside; short quotation | Poolside blog |
 | pwc | PwC Global AI Jobs Barometer (via Wayback; pwc.com 403s bots) | PwC | html | 7 | annual | PwC; short quotation | PwC 2026 Global AI Jobs Barometer |
 | pymnts | PYMNTS | PYMNTS.com | html | 5 | irregular | PYMNTS; short quotation | PYMNTS (relaying Bloomberg) |
 | ramp | Ramp AI Index (Ramp Economics Lab) | Ramp | html | 3 | monthly | Ramp Economics Lab; cited with attribution | Ramp AI Index, Ramp Economics Lab |
@@ -114,12 +134,15 @@
 | sec_seg | SEC EDGAR 10-Q/10-K XBRL instances (segment data) | U.S. Securities and Exchange Commission | xbrl | 4 | quarterly | Public domain (U.S. government); fair-access policy requires a descriptive User-Agent | SEC EDGAR, inline XBRL filings (segment disclosures) |
 | sec_xbrl | SEC EDGAR XBRL company facts | U.S. Securities and Exchange Commission | xbrl | 4 | quarterly | Public domain (U.S. government); fair-access policy requires a descriptive User-Agent | SEC EDGAR, XBRL company facts API |
 | siepr | Stanford Institute for Economic Policy Research (policy briefs) | Stanford University | html | 6 | irregular | SIEPR; short quotation | Stanford Institute for Economic Policy Research |
+| silicon_republic | Silicon Republic | Silicon Republic | html | 7 | irregular | Silicon Republic; short quotation | Silicon Republic |
 | siliconangle | SiliconANGLE | SiliconANGLE Media | html | 5 | irregular | SiliconANGLE; short quotation | SiliconANGLE (relaying the WSJ report) |
 | stanford_del | Stanford Digital Economy Lab | Stanford University | html | 6 | annual | Working paper | Brynjolfsson, Collis, Eggers, Kazinnik & Nguyen, 'What is Generative AI Worth?' (2026) |
 | stanford_hai_ai_index | Stanford HAI AI Index (report PDF) | Stanford HAI | pdf | 6 | annual | Stanford HAI; cited with attribution | Stanford HAI, AI Index Report 2025 |
 | statnews | STAT News | Boston Globe Media | html | 5 | irregular | STAT; short quotation | STAT News |
+| stilla_blog | Stilla blog | Stilla | html | 4 | irregular | Stilla; short quotation | Stilla blog |
 | stlouisfed_blog | FRED Blog | Federal Reserve Bank of St. Louis | html | 6 | irregular | FRED terms of use | FRED Blog, 'Does generative AI save time at work?' (27 Aug 2026) |
 | stripe_newsroom | Stripe newsroom | Stripe | html | 4 | irregular | Stripe; short quotation | Stripe newsroom |
+| suno_blog | Suno blog | Suno | html | 4 | irregular | Suno; short quotation | Suno blog |
 | techcrunch | TechCrunch | Yahoo Inc. | html | 7 | irregular | TechCrunch; short quotation | TechCrunch |
 | techcrunch_ai_feed | TechCrunch AI feed (watchlist) | Yahoo Inc. | rss | 5 | daily | Publisher terms; titles and links only | TechCrunch |
 | theaiinsider | The AI Insider | Resonance | html | 5 | irregular | The AI Insider; short quotation | The AI Insider |
@@ -127,6 +150,8 @@
 | thinking_machines_watch | Thinking Machines blog (page watch) | Thinking Machines Lab | html | 7 | weekly | Publisher terms; change notices only | Thinking Machines Lab |
 | time_magazine | TIME | TIME USA | html | 5 | irregular | TIME; short quotation | TIME |
 | transparency_coalition | Transparency Coalition reports | Transparency Coalition.AI | html | 6 | irregular | Transparency Coalition; short quotation | Transparency Coalition.AI |
+| workshop_labs_blog | Workshop Labs blog | Workshop Labs | html | 4 | irregular | Workshop Labs; short quotation | Workshop Labs blog |
+| world_labs_blog | World Labs blog | World Labs | html | 4 | irregular | World Labs; short quotation | World Labs blog |
 | wustl_olin | WashU Olin Business School news | Washington University in St. Louis | html | 6 | irregular | WashU; short quotation | WashU Olin Business School |
 | yahoo_finance | Yahoo Finance (syndicated Investing.com) | Yahoo Inc. | html | 5 | irregular | Syndicated; short quotation | Investing.com via Yahoo Finance; CDS data ICE Data Services |
 | yale_budget_lab | The Budget Lab at Yale | Yale University | html | 6 | monthly | Budget Lab; short quotation | The Budget Lab at Yale |

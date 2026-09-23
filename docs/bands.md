@@ -305,7 +305,7 @@
 ## Lab vertical integration (acquisitions and acquihires, trailing four quarters) (`lab_vertical_integration_exit_bell`)
 
 - Band input: `metric:lab_vertical_integration_events_4q` (count)
-- Rule: direction over 4 periods, dead band 1.0, higher is concentrating. Four quarters; one event is not a trend. More deals per year concentrate the application layer into the labs.
+- Rule: direction over 4 periods, dead band 7.0, higher is concentrating. Four quarters. A yearly count of rare events varies between two years with no trend by about the square root of twice its level, which at the December 2025 count after the September 2026 search is about seven, so a smaller move is stable. More deals per year concentrate the application layer into the labs.
 - Timing: Leading: an acquisition is announced before the acquired layer's economics change, so the count moves ahead of margins.
 
 ## US labour share of income, year on year (`labor_share_nonfarm`)

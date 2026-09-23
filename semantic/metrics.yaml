@@ -1252,22 +1252,23 @@ metrics:
       FROM cp JOIN h USING (subject) GROUP BY 1)
       SELECT * FROM r QUALIFY value IS DISTINCT FROM lag(value) OVER (ORDER BY as_of_date)  -- change points only
   lab_vertical_integration_events_4q:
-    description: Distinct acquisitions or acquihires by AI labs and hyperscalers of application, tooling or data companies announced in the trailing four quarters, counted from the acquisition ledger (one per acquirer-target pair) at each quarter end. Only acquirers whose primary membership is in the model or compute layer count; the ledger keeps every deal.
-    rationale: The exit bell for the application layer rings when labs buy the layer above them; a rising count is vertical integration, the capture thesis's clearest signal. v3 reads only completed quarters whose trailing year lies wholly after 1 January 2025, when the hand-kept ledger begins, so a window the ledger does not cover is never read as a quiet year, and keys deals by column.
+    description: Distinct deals in the trailing four quarters by which a buyer (an entity whose primary membership is in the model or compute layer) took a company in one of the fourteen sublayers above the model layer (training input, serving and orchestration, deployment and application), by purchase, acquihire, or a licence or stake that came with its leaders; counted from the acquisition ledger (one per acquirer-target pair) at each quarter end a sweep has covered. The ledger's written rule is at the head of its rows in seed/manual_observations.yaml; deals by anyone else stay in the ledger uncounted.
+    rationale: The exit bell for the application layer rings when labs buy the layer above them; a rising count is vertical integration, the capture thesis's clearest signal. v3 reads only completed quarters whose trailing year lies wholly after 1 January 2025, when the hand-kept ledger begins, so a window the ledger does not cover is never read as a quiet year, and keys deals by column. v4 reads only quarters that a sweep under the ledger's written rule has covered, so the newest quarter is never read on the feeds alone while earlier ones had a full search, and a new quarter's status move comes with its sweep's reviewed PR.
     grain: [as_of_date]
     unit: count
     lead_lag: leading
-    formula_version: 3
+    formula_version: 4
     inputs: ["acq.*.*.pt"]
-    caveats: "A floor: the ledger is kept by hand from fetched announcements and has gaps, so it undercounts, and it can rise with the care taken over it as well as with buying. Each deal counts from its earliest dated row, its announcement where one is on file. Only completed calendar quarters are read, and only those whose trailing year lies wholly after 1 January 2025; that date is a convention for when the ledger begins, not a fact about its coverage. Undisclosed prices still count as events; Stripe (a payments company) is in the ledger for the OpenRouter deal but, with no model or compute membership, is not counted."
+    caveats: "A floor. The ledger was searched under its written rule on 23 Sep 2026 for every buyer from 1 January 2025 (the rule, the searches and every deal considered and left out are at the head of its rows in seed/manual_observations.yaml); a quarter is read only once a sweep has covered it. Six deals met the rule but no citable page states them (five in 2025, one in 2026), so they are not counted. Acquihires surface late, so a sweep can add deals to quarters already read. Each deal counts from its earliest dated row. Undisclosed prices still count as events; deals by companies outside the buyer set (Stripe, Cloudflare, Cognition, Mercor) stay in the ledger uncounted."
     sql: |
       WITH buyers AS (SELECT DISTINCT entity_id FROM entity_membership WHERE is_primary AND layer_id IN ('model', 'compute_physical')),
       deals AS (
         SELECT subject || '/' || measure AS deal, min(as_of_date) AS announced, list(id ORDER BY id) AS ids
         FROM observations WHERE source_ns = 'acq' AND subject IN (SELECT entity_id FROM buyers) GROUP BY 1),
-      spine AS (  -- every completed calendar quarter from the ledger's start; the quarter under way is never read
+      swept AS (SELECT DATE '2026-06-30' AS through),  -- the last quarter end a sweep has covered (23 Sep 2026); each sweep's PR raises it
+      spine AS (  -- every completed, swept calendar quarter from the ledger's start; the quarter under way is never read
         SELECT (range + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE AS q
-        FROM range(DATE '2025-01-01', date_trunc('quarter', current_date)::DATE, INTERVAL 3 MONTH))
+        FROM range(DATE '2025-01-01', least(date_trunc('quarter', current_date)::DATE, (SELECT through FROM swept) + 1), INTERVAL 3 MONTH))
       SELECT s.q AS as_of_date, count(*) AS value, flatten(list(d.ids ORDER BY d.deal)) AS obs_ids
       FROM spine s JOIN deals d ON d.announced <= s.q AND d.announced > s.q - INTERVAL 12 MONTH
       WHERE s.q - INTERVAL 12 MONTH >= DATE '2024-12-31'
