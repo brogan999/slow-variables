@@ -138,7 +138,7 @@ sources:
     content_hash: f02048cd546c1c6b011de245099c4494df4e82044e5892a2988f7b2158a6c119
   - id: cai_data
     who: Sean Cai
-    field: an investor and writer who works in the market for training data and sells evaluations of data quality in it
+    field: an investor and writer who works in the market for training data
     finding: The scarce input is realistic, well-checked training data, meaning practice tasks, grading rubrics and quality checks for long work whose results are hard to verify.
     work: An AI Bubble is a human data problem
     venue: his newsletter
@@ -256,7 +256,7 @@ sources:
     content_hash: 2430ae73077a3a0daf36711fb6f823728588ec41dcf352717bc7c45bee3a8277
   - id: macaskill_moorhouse
     who: William MacAskill and Fin Moorhouse
-    field: MacAskill, a moral philosopher who taught at Oxford until 2024, is a senior research fellow at Forethought, a research group that studies how to prepare for advanced AI; Moorhouse was a researcher there until June 2026
+    field: MacAskill, a moral philosopher who taught at Oxford until 2024, is a senior research fellow at Forethought, a research group that studies how to prepare for advanced AI; Moorhouse was a researcher there until June 2026 and is now at Google DeepMind
     finding: Once AI's thinking rivals the whole of humanity's, it will keep growing far faster than the number of people, so a century of technological progress could be compressed into a decade, followed by an explosion in industry.
     work: Preparing for the Intelligence Explosion
     venue: Forethought
@@ -404,7 +404,7 @@ sources:
   - id: larson_durability
     who: Soren Larson
     field: a writer on how money moves between AI labs and the apps built on them, who co-founded Crosshatch, a personalised-AI start-up that shut down in July 2025
-    finding: Applying Board and Pycia, buyers who will not pay a lab's price leave for an open model rather than wait for a discount, so the lab keeps charging a monopoly price instead of being bid down by waiting buyers; but that price reflects only its lead over the open alternative, so as open models close the gap its price and its market both shrink, and its revenue erodes faster than its lead.
+    finding: Applying Board and Pycia, buyers who will not pay a lab's price leave for an open model rather than wait for a discount, so the lab keeps charging a monopoly price instead of being bid down by waiting buyers; but that price reflects only its lead over the open alternative, so as open models close the gap its price and its market both shrink, and its revenue erodes faster than its lead; and if open models improve fast enough that buyers would rather wait for them, a pace he judges low, the lab is bid down after all, so he doubts today's high margins will last.
     work: Durability of Frontier AI
     venue: hypersoren.xyz
     year: 2026
@@ -538,7 +538,7 @@ sources:
   - id: jones_tonetti
     who: Charles Jones and Christopher Tonetti
     field: economists at Stanford who study long-run growth
-    finding: Past automation raised productivity through ever better machines, but work is a chain of tasks that substitute poorly for one another, so weak links tame the explosion; if AI follows the pattern of past automation, growth rises only slowly, and even if machines everywhere improve as fast as computers have, growth passes seven percent by 2030 but explodes only decades later.
+    finding: Past automation raised productivity through ever better machines, but work is a chain of tasks that substitute poorly for one another, so weak links tame the explosion; if AI follows the pattern of past automation, growth rises only slowly, and even if machines everywhere improve as fast as they have in making computers, growth passes seven percent by 2030 but explodes only decades later.
     work: "Past Automation and Future A.I.: How Weak Links Tame the Growth Explosion"
     venue: a working paper
     year: 2026
@@ -697,7 +697,7 @@ positions:
     holders: [lambert]
     attribution: author
     mechanism: The research AI can automate is narrow, and the judgement of a few top researchers, not more agents, still sets the pace.
-    case: AI already helps build AI, yet Lambert sees no take-off coming and expects the trend, looked back on, to seem closer to a steady line.
+    case: AI already helps build AI, yet Lambert sees no fast take-off coming and expects the trend, looked back on, to seem closer to a steady line.
     kill_shot: Each new model's gains on AI research arriving faster than the last's, with nothing lost along the way.
     rival: compounding
     visible: false
@@ -765,7 +765,7 @@ positions:
     visible: true
   - id: opens
     folio: products
-    title: Platforms set terms for outside agents
+    title: Platforms let outside agents in, on terms they set
     holders: [shahidi_etal]
     attribution: author
     mechanism: Platforms will set rules for how outside agents may use them, much as websites tell search engines' crawlers what they may read.
@@ -811,7 +811,7 @@ positions:
     holders: [coyle_poquiz]
     attribution: author
     mechanism: Most use of AI is free and its gains come as quality and saved time, which the official statistics do not price.
-    case: The biggest AI assistant counts far more weekly users than paying subscribers, so most of its use is never priced.
+    case: The biggest AI assistant counts far more weekly users than paying subscribers, so most of its weekly users pay nothing.
     kill_shot: Official statistics capturing AI's gains in quality and saved time as use spreads.
     rival: frictions
     visible: true
@@ -976,7 +976,7 @@ positions:
     attribution: author
     mechanism: Where some labs give their models away, the marginal cost of serving the cheapest models comes down to the chips and power that run them, and a lab has more pricing power where its model is the best tool for the job.
     case: Open models trail the best closed ones by [fact:open_lag], months rather than years.
-    kill_shot: Labs keeping a premium for their lead and letting buyers go, rather than cutting the price to keep them.
+    kill_shot: Labs keeping a premium on models that open ones already match.
     rival: price_holds
     visible: true
   - id: price_holds
@@ -986,7 +986,7 @@ positions:
     attribution: author
     mechanism: Buyers who will not pay a lab's price leave for an open model rather than wait for a discount, so the lab is not bid down to cost; it charges what its lead over the open alternative is worth and serves fewer buyers, and as open models close the gap its price and its market both shrink. Simon Board and Marek Pycia proved the first step for a monopolist selling a durable good whose buyers all have another option [cite:board_pycia].
     case: Near-frontier open models sell for a small fraction of the best model's price without, as Larson reads it, forcing the best model's price down.
-    kill_shot: Labs cutting the best model's price to keep their sales as open models close in.
+    kill_shot: Labs cutting the best model's price to keep its sales while open models still improve too slowly for buyers to wait for them.
     rival: commodity
     visible: true
   - id: up_the_stack
@@ -1353,9 +1353,9 @@ scenarios:
 agree:
   - id: tokens_thin
     text: Selling access to a model that others can match, token by token, is a thin business.
-    holders: [hobart_round_trip, nk_up_the_stack]
-    dissent: [sundheim, larson_durability]
-    dissent_text: Sundheim, whose firm holds stakes in two of the labs, says customers mostly stay and margins are high; Larson argues a lab keeps charging for its lead rather than being bid down, though he expects that price to shrink as open models close in.
+    holders: [hobart_pacing, nk_up_the_stack]
+    dissent: [sundheim]
+    dissent_text: Sundheim, whose firm holds stakes in two of the labs, says customers mostly stay with a lab even when they could switch, and margins are high.
   - id: someone_answers
     text: Someone has to answer for what an AI agent does before it can be trusted with work that matters.
     holders: [hadfield_koh, normal_tech]
@@ -1368,4 +1368,4 @@ agree:
     text: People use AI well before firms reorganise around it.
     holders: [normal_tech, brs_jcurve]
     dissent: [ai_2027]
-    dissent_text: The authors of AI 2027 agree that use spreads gradually before AI can do the work of the best researchers, but in their story the economy is remade within a few years once it can.
+    dissent_text: In AI 2027's story the economy is remade within a few years once AI can do the work of the best researchers.
