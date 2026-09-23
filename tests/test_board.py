@@ -55,3 +55,8 @@ def test_the_seed_resolves_and_its_lines_type_no_number_but_years():
         assert not re.search(r"\d", re.sub(r"\b(19|20)\d\d\b", "", v["line"])), k
     for q in spec["questions"]:
         assert q.get("indicator") or q.get("note"), q["question"]
+
+
+def test_an_author_named_by_two_posts_is_named_once():
+    srcs = {"a": {"who": "Ann Author"}, "b": {"who": "Ann Author"}, "c": {"who": "Bo Writer"}}
+    assert board._who({"holders": ["a", "b", "c"], "attribution": "author"}, srcs) == "Ann Author and Bo Writer"

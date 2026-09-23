@@ -618,3 +618,33 @@ Judgement calls:
 
 Known limits:
 - About two thirds of the board is "too early to tell". Most new claims name an outcome no public series measures yet: on-device inference share, AI insurance premiums, AI-specific taxes and causal reasoning.
+
+## Part 15 status (23 Sep 2026): the board in the owner's five stages
+
+What shipped (#70):
+- The board's five groups carry the owner's stage names: Capability / invention; Innovation: products and applications; Diffusion: early adoption; Diffusion: adaptation; Value capture.
+- `folio_overrides` moves the two app-margin claims to value capture.
+- Rows link to the indicators they lean on (ledger `related_indicators`, the indicator behind a test fact, `claim_indicators`, exit indicators). The `predictions` table gains `indicators`, and each indicator page lists "Predictions that lean on this".
+- The bottleneck map's columns use the same stage names, with a filter to the rows that bind now or are predicted to.
+
+## Part 16 status (23 Sep 2026): Sean Cai and The Diff, reworded and credited
+
+Decision (owner, 23 Sep): predictions from Cai's and The Diff's posts, paid posts included, are published as credited claims in fresh wording, never quoted, each linked to its post and tested like the rest. Cai's private memo and the private interview stay out unless Cai agrees. This replaces the earlier "free posts only" rule for these two sources; the leak check (no eight-word run shared with the paid texts) is the guard that the wording is the site's.
+
+What shipped:
+- Eight read-only agents read all 23 Cai posts and the 127 Diff issues that touch AI and extracted 858 forward-looking claims (367 major). The full annotated list is private, in `docs/private/predictions-cai-diff.jsonl`.
+- 32 claims, de-duplicated from the major ones not already on the board, went into `seed/outlook.yaml` with 32 sources, each fetched, and 30 positions (four of them the site's own rivals, all hidden).
+- Where a claim names an input or barrier it expects to bind, it marks the map: grid, data-centre buildings, training data, applications, law, safety brakes, verification.
+- A series fact can now read its value a year earlier (`pick: year_ago`), so "firms' AI spending per employee keeps rising" is tested against Ramp's median.
+- An author named by two posts is named once on the board.
+
+Staff review (all must-fixes applied):
+- Claims narrowed to what the posts say. Cai's compute-cost point is about capability, not adoption. Hobart's supply-chain point is that some link proves easier to expand, not that it gluts. The industry-divergence claim is one possibility he raises. The chip-financing claim is about NVIDIA only. The pause claim is "loosely in step".
+- The grid claim was restated as Hobart's own point; the grid-queue argument he linked belongs to someone else.
+- Three tests were dropped because they did not measure what the author said: Menlo's start-up share, the circular-financing total, and the safety-brake count. Those claims now carry a falsifier and a link to the nearest indicator.
+- Unsourced lines in site-written positions were rewritten as arguments or tied to a `[fact:]`.
+
+Known limits:
+- Several rivals are the nearest competing view on the site, not a direct opposite.
+- Cai appears on both sides of one pair: tuning open models for firms, against general models overtaking models built for one field.
+- Two Diff issues (The Rocketship, FP&A) survive only as their summary lines in the saved copy.

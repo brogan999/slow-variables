@@ -1,5 +1,5 @@
 {
- "as_of": "2026-09-21",
+ "as_of": "2026-09-22",
  "folios": [
   {
    "id": "capability",
@@ -79,8 +79,8 @@
      "kind": "migration",
      "line": "Data-centre buildings and their power hookups are the bottleneck.",
      "reading": {
-      "as_of": "2026-09-22",
-      "derived_id": "7ed427e253dde39c",
+      "as_of": "2026-09-23",
+      "derived_id": "6273f04b99e8664b",
       "holds": true,
       "href": "/query#dc_projected_to_observed_power",
       "obs_ids": [
@@ -96,7 +96,6 @@
        "1b3fb80ea1cb5f7d",
        "1f58e1bc5f6e291c",
        "2024049882e26760",
-       "206ca5fa349ea6a6",
        "232971bc1eb09c73",
        "292ed5fb2fdb0b6e",
        "2966fd74c1ccb7f4",
@@ -124,6 +123,7 @@
        "4caa9c139e5521b0",
        "4e879bcc474ba549",
        "50f57febb7bb7882",
+       "54b88bd33f47cd04",
        "5740d307f80606f4",
        "57b5247c0441881e",
        "5b423d50cc2aa63a",
@@ -144,21 +144,26 @@
        "7ac29042806ef827",
        "7c102a3d9d6129c9",
        "7fcebe0c32512dc6",
-       "81bff0f507d694e9",
        "82074aaa491ae53b",
+       "827f16e2026ecca9",
        "84e7ab23a3a27c43",
        "84e885b4b682d688",
+       "87de30b3f1b29605",
        "87fd8c4e1e099fb0",
+       "89988d9571abb133",
        "89da903de73c0a4c",
        "89ffc8964fc23aa5",
        "8a5bf43f0a36a8fd",
        "8df0aef0848ff0a3",
+       "90729a34eb5385f1",
        "910c482537c4fb9d",
        "9161cb49b570d659",
+       "91fba21c8fc5802c",
        "92b2a60d1165394d",
        "94466b4641c6407a",
        "99c240b213ee2359",
        "a64e867ec70fc7a0",
+       "a66dec24007516ec",
        "a68f5da0d9e6bc57",
        "a6dd53e2b2aa636d",
        "ab93346fc845a8c8",
@@ -174,15 +179,18 @@
        "cbc49a25e497ccf7",
        "d393cf6208c043da",
        "d7c42b66838b2d88",
+       "d908e371b6358144",
        "d91a5af82945b8bc",
        "e40344378f94cfb3",
+       "e8ea181549f1045e",
        "ec5099dcb0c51abc",
        "f6026e7368a6d775",
+       "f6d1124ec34c31e3",
        "f758d0b0cd8f4d68",
        "fadd5c888dc04e6d"
       ],
       "unit": "ratio",
-      "value": 4.308062430127798
+      "value": 4.419557192340198
      },
      "settles": null,
      "sources": [],
@@ -516,6 +524,28 @@
      "word": "too_early"
     },
     {
+     "attribution": "author",
+     "folio": "capability",
+     "href": "/outlook#claim-compute_cost_binds",
+     "id": "compute_cost_binds",
+     "indicators": [
+      "model_price_per_horizon_hour"
+     ],
+     "kind": "outlook",
+     "line": "With many agents working on a task at once, most valuable office work comes to turn on the cost of computing and the systems around it, not on whether models are good enough.",
+     "reading": null,
+     "row": "inference",
+     "settles": "Valuable office tasks staying out of AI's reach even where computing is cheap.",
+     "sources": [
+      "https://seanzcai.substack.com/p/state-of-data-june-2026"
+     ],
+     "stage": null,
+     "state": "untestable",
+     "test": null,
+     "who": "Sean Cai",
+     "word": "too_early"
+    },
+    {
      "attribution": "extension",
      "folio": "capability",
      "href": "/outlook#claim-coverage_sold",
@@ -580,6 +610,26 @@
     {
      "attribution": "author",
      "folio": "capability",
+     "href": "/outlook#claim-grid_hookups",
+     "id": "grid_hookups",
+     "indicators": [],
+     "kind": "outlook",
+     "line": "Data centres arrive faster and with less warning than the grid's planners assume, so getting connected holds back new American sites.",
+     "reading": null,
+     "row": "grid",
+     "settles": "New sites being connected to the grid as fast as they are built.",
+     "sources": [
+      "https://www.thediff.co/archive/longreads-open-thread-188/"
+     ],
+     "stage": "methods",
+     "state": "untestable",
+     "test": null,
+     "who": "Byrne Hobart",
+     "word": "too_early"
+    },
+    {
+     "attribution": "author",
+     "folio": "capability",
      "href": "/outlook#claim-lossy_loop",
      "id": "lossy_loop",
      "indicators": [
@@ -597,6 +647,49 @@
      "state": "untestable",
      "test": null,
      "who": "Nathan Lambert",
+     "word": "too_early"
+    },
+    {
+     "attribution": "author",
+     "folio": "capability",
+     "href": "/outlook#claim-no_chinese_lead",
+     "id": "no_chinese_lead",
+     "indicators": [
+      "open_weights_lag_months"
+     ],
+     "kind": "outlook",
+     "line": "Chinese labs do not take the lead at the frontier while the best chips, the tests that matter and the paying customers stay American.",
+     "reading": null,
+     "row": null,
+     "settles": "A Chinese lab's model becoming the best at the frontier.",
+     "sources": [
+      "https://seanzcai.substack.com/p/state-of-data-july-2026",
+      "https://www.thediff.co/archive/nomentum/"
+     ],
+     "stage": null,
+     "state": "untestable",
+     "test": null,
+     "who": "Sean Cai and Byrne Hobart",
+     "word": "too_early"
+    },
+    {
+     "attribution": "author",
+     "folio": "capability",
+     "href": "/outlook#claim-real_work_data",
+     "id": "real_work_data",
+     "indicators": [],
+     "kind": "outlook",
+     "line": "Training for long work whose results are hard to check, in fields such as biology, security and matters of taste, comes to rest on records of real work inside firms, because tasks staged by contractors stop teaching models.",
+     "reading": null,
+     "row": "training_data",
+     "settles": "Staged practice tasks going on improving models at long office work.",
+     "sources": [
+      "https://seanzcai.substack.com/p/state-of-data-march-2026"
+     ],
+     "stage": "methods",
+     "state": "untestable",
+     "test": null,
+     "who": "Sean Cai",
      "word": "too_early"
     },
     {
@@ -632,9 +725,29 @@
      },
      "who": "the authors of AI 2027",
      "word": "too_early"
+    },
+    {
+     "attribution": "author",
+     "folio": "capability",
+     "href": "/outlook#claim-trades_short",
+     "id": "trades_short",
+     "indicators": [],
+     "kind": "outlook",
+     "line": "Too few electricians, welders and other tradespeople hold back the building of data centres, so the largest technology firms keep paying to train them.",
+     "reading": null,
+     "row": "data_centres",
+     "settles": "Data-centre projects facing no delays tied to shortages of skilled trades.",
+     "sources": [
+      "https://www.thediff.co/archive/skilled-labor-supply-chains/"
+     ],
+     "stage": "methods",
+     "state": "untestable",
+     "test": null,
+     "who": "Byrne Hobart",
+     "word": "too_early"
     }
    ],
-   "too_early": 12
+   "too_early": 17
   },
   {
    "id": "products",
@@ -800,6 +913,49 @@
      "word": "too_early"
     },
     {
+     "attribution": "author",
+     "folio": "products",
+     "href": "/outlook#claim-field_models_fade",
+     "id": "field_models_fade",
+     "indicators": [],
+     "kind": "outlook",
+     "line": "Start-ups that build a model for one field fall behind as the labs' general models improve, outside a few regulated niches where data is scarce.",
+     "reading": null,
+     "row": null,
+     "settles": "Models built for one field keeping their lead over each new general release.",
+     "sources": [
+      "https://seancai.com/philosophy/verifiable_domains",
+      "https://seanzcai.substack.com/p/state-of-data-march-2026"
+     ],
+     "stage": null,
+     "state": "untestable",
+     "test": null,
+     "who": "Sean Cai",
+     "word": "too_early"
+    },
+    {
+     "attribution": "author",
+     "folio": "products",
+     "href": "/outlook#claim-firms_buy_data",
+     "id": "firms_buy_data",
+     "indicators": [
+      "expert_data_market_run_rate"
+     ],
+     "kind": "outlook",
+     "line": "Firms outside the labs become large buyers of training data and practice tasks, so the labs stop being almost the only customers.",
+     "reading": null,
+     "row": "training_data",
+     "settles": "The labs remaining almost all of the spending on training data and practice tasks.",
+     "sources": [
+      "https://seancai.com/philosophy/verifiable_domains"
+     ],
+     "stage": null,
+     "state": "untestable",
+     "test": null,
+     "who": "Sean Cai",
+     "word": "too_early"
+    },
+    {
      "attribution": "site",
      "folio": "products",
      "href": "/outlook#claim-insurers_cover",
@@ -815,6 +971,28 @@
      "state": "untestable",
      "test": null,
      "who": "This site",
+     "word": "too_early"
+    },
+    {
+     "attribution": "author",
+     "folio": "products",
+     "href": "/outlook#claim-models_held_back",
+     "id": "models_held_back",
+     "indicators": [
+      "safety_brake_events"
+     ],
+     "kind": "outlook",
+     "line": "A formal pause looks unlikely; instead the biggest labs, loosely in step, slow the public release of their most powerful models.",
+     "reading": null,
+     "row": "family_5",
+     "settles": "Labs releasing their best models to the public as soon as they are trained.",
+     "sources": [
+      "https://www.thediff.co/archive/fp-a-as-the-telemetry-and-counterespionage/"
+     ],
+     "stage": "products",
+     "state": "untestable",
+     "test": null,
+     "who": "Byrne Hobart",
      "word": "too_early"
     },
     {
@@ -838,6 +1016,26 @@
      "word": "too_early"
     },
     {
+     "attribution": "author",
+     "folio": "products",
+     "href": "/outlook#claim-tuning_converges",
+     "id": "tuning_converges",
+     "indicators": [],
+     "kind": "outlook",
+     "line": "Leading firms that host models, sell training data or do custom training, such as Baseten, Mercor and Applied Compute, converge on one business, tuning open models for firms and selling them the use.",
+     "reading": null,
+     "row": null,
+     "settles": "These firms staying in separate businesses.",
+     "sources": [
+      "https://seanzcai.substack.com/p/state-of-data-july-2026"
+     ],
+     "stage": null,
+     "state": "untestable",
+     "test": null,
+     "who": "Sean Cai",
+     "word": "too_early"
+    },
+    {
      "attribution": "extension",
      "folio": "products",
      "href": "/outlook#claim-verification_first",
@@ -858,7 +1056,7 @@
      "word": "too_early"
     }
    ],
-   "too_early": 6
+   "too_early": 10
   },
   {
    "id": "adoption",
@@ -919,16 +1117,16 @@
      "kind": "outlook",
      "line": "In the jobs most exposed to AI, workers in their early twenties fall behind workers over fifty [cite:canaries], while in the least exposed jobs they do not.",
      "reading": {
-      "as_of": "2026-07-31",
-      "derived_id": "2cc07f7394b0488a",
+      "as_of": "2026-08-31",
+      "derived_id": "89d9e905e40bb3c8",
       "holds": null,
       "href": "/query#canaries_junior_senior_gap",
       "obs_ids": [
-       "c64a7adef7acf36f",
-       "fc7f7b7236add51d"
+       "11b6c27fffad5ce9",
+       "1e44b7fa407b31b5"
       ],
       "unit": "index_points",
-      "value": -16.30000000000001
+      "value": -17.57000000000002
      },
      "row": "work_and_pay",
      "settles": "The same gap opening in the least exposed jobs.",
@@ -1025,6 +1223,49 @@
     {
      "attribution": "author",
      "folio": "adoption",
+     "href": "/outlook#claim-deployers_paid",
+     "id": "deployers_paid",
+     "indicators": [],
+     "kind": "outlook",
+     "line": "Engineers who fit AI into each customer's own work stay scarce, so their pay rises or employers settle for weaker hires.",
+     "reading": null,
+     "row": "applications",
+     "settles": "These roles becoming easy to fill, and their pay premium fading.",
+     "sources": [
+      "https://www.thediff.co/archive/could-there-be-a-forward-deployed-engineer-supply-crunch/",
+      "https://seancai.com/philosophy/pre-seed_I_like"
+     ],
+     "stage": "early_adoption",
+     "state": "untestable",
+     "test": null,
+     "who": "Byrne Hobart and Sean Cai",
+     "word": "too_early"
+    },
+    {
+     "attribution": "author",
+     "folio": "adoption",
+     "href": "/outlook#claim-labs_buy_deployers",
+     "id": "labs_buy_deployers",
+     "indicators": [
+      "lab_vertical_integration_exit_bell"
+     ],
+     "kind": "outlook",
+     "line": "Labs keep buying the consultancies that put AI to work inside companies, to get their staff faster than hiring allows.",
+     "reading": null,
+     "row": null,
+     "settles": "Labs building these teams by hiring and buying no such firms.",
+     "sources": [
+      "https://www.thediff.co/archive/nomentum/"
+     ],
+     "stage": null,
+     "state": "untestable",
+     "test": null,
+     "who": "Byrne Hobart",
+     "word": "too_early"
+    },
+    {
+     "attribution": "author",
+     "folio": "adoption",
      "href": "/outlook#claim-simple_markets_first",
      "id": "simple_markets_first",
      "indicators": [],
@@ -1067,6 +1308,27 @@
     {
      "attribution": "author",
      "folio": "adoption",
+     "href": "/outlook#claim-through_incumbents",
+     "id": "through_incumbents",
+     "indicators": [],
+     "kind": "outlook",
+     "line": "Firms increasingly buy AI's work through a party with assets and a licence that can be held liable, such as an established service firm.",
+     "reading": null,
+     "row": "verification",
+     "settles": "Buyers taking AI's work on long, unpredictable tasks from parties that cannot answer for its mistakes.",
+     "sources": [
+      "https://www.thediff.co/archive/paying-up-for-the-right-to-be-sued/",
+      "https://www.thediff.co/archive/should-you-trust-the-hacker-news-peanut-gallery/"
+     ],
+     "stage": "early_adoption",
+     "state": "untestable",
+     "test": null,
+     "who": "Byrne Hobart",
+     "word": "too_early"
+    },
+    {
+     "attribution": "author",
+     "folio": "adoption",
      "href": "/outlook#claim-use_unpriced",
      "id": "use_unpriced",
      "indicators": [],
@@ -1085,7 +1347,7 @@
      "word": "too_early"
     }
    ],
-   "too_early": 4
+   "too_early": 7
   },
   {
    "id": "reorganisation",
@@ -1257,6 +1519,30 @@
     {
      "attribution": "author",
      "folio": "reorganisation",
+     "href": "/outlook#claim-ai_unpopular",
+     "id": "ai_unpopular",
+     "indicators": [
+      "state_ai_bills_introduced"
+     ],
+     "kind": "outlook",
+     "line": "AI grows more unpopular even as more people use it, giving politicians on both the left and the right reason to campaign against it.",
+     "reading": null,
+     "row": "family_3",
+     "settles": "Public approval of AI rising clearly and politicians campaigning in its favour.",
+     "sources": [
+      "https://www.thediff.co/archive/are-the-ai-labs-ready-for-the-ai-backlash/",
+      "https://www.thediff.co/archive/the-politics-of-visible-and-invisible-ai/",
+      "https://www.thediff.co/archive/longreads-open-thread-188/"
+     ],
+     "stage": "adaptation",
+     "state": "untestable",
+     "test": null,
+     "who": "Byrne Hobart",
+     "word": "too_early"
+    },
+    {
+     "attribution": "author",
+     "folio": "reorganisation",
      "href": "/outlook#claim-bet_fast_side",
      "id": "bet_fast_side",
      "indicators": [],
@@ -1313,6 +1599,28 @@
     {
      "attribution": "author",
      "folio": "reorganisation",
+     "href": "/outlook#claim-generalists_gain",
+     "id": "generalists_gain",
+     "indicators": [
+      "pwc_ai_skill_wage_premium"
+     ],
+     "kind": "outlook",
+     "line": "The gap in value between versatile workers who manage AI and narrow specialists keeps widening.",
+     "reading": null,
+     "row": null,
+     "settles": "Specialists keeping their value over versatile workers.",
+     "sources": [
+      "https://seancai.com/philosophy/serviceable_domains"
+     ],
+     "stage": null,
+     "state": "untestable",
+     "test": null,
+     "who": "Sean Cai",
+     "word": "too_early"
+    },
+    {
+     "attribution": "author",
+     "folio": "reorganisation",
      "href": "/outlook#claim-hours_rise_first",
      "id": "hours_rise_first",
      "indicators": [
@@ -1330,6 +1638,26 @@
      "state": "untestable",
      "test": null,
      "who": "Betsey Stevenson",
+     "word": "too_early"
+    },
+    {
+     "attribution": "author",
+     "folio": "reorganisation",
+     "href": "/outlook#claim-jobs_become_data",
+     "id": "jobs_become_data",
+     "indicators": [],
+     "kind": "outlook",
+     "line": "Some jobs move from doing the work to supplying the data that trains AI to do it.",
+     "reading": null,
+     "row": null,
+     "settles": "Few occupations showing workers shifting to producing training data.",
+     "sources": [
+      "https://www.thediff.co/archive/the-market-for-contrarian-talent-doesnt-clear/"
+     ],
+     "stage": null,
+     "state": "untestable",
+     "test": null,
+     "who": "Byrne Hobart",
      "word": "too_early"
     },
     {
@@ -1357,6 +1685,28 @@
     {
      "attribution": "author",
      "folio": "reorganisation",
+     "href": "/outlook#claim-niches_filled",
+     "id": "niches_filled",
+     "indicators": [],
+     "kind": "outlook",
+     "line": "Cheap AI makes many small services worth selling that were never worth paying a person for, and filling these niches is how AI lifts growth.",
+     "reading": null,
+     "row": null,
+     "settles": "New businesses in small information niches not rising as AI's costs fall.",
+     "sources": [
+      "https://www.thediff.co/archive/decentralized-pundit-calibration-as-a-vision-of-long-term-economic-growth/",
+      "https://www.thediff.co/archive/the-coasian-margin-frontier/",
+      "https://seanzcai.substack.com/p/victoria-3-and-why-data-markets-must"
+     ],
+     "stage": null,
+     "state": "untestable",
+     "test": null,
+     "who": "Byrne Hobart and Sean Cai",
+     "word": "too_early"
+    },
+    {
+     "attribution": "author",
+     "folio": "reorganisation",
      "href": "/outlook#claim-relational_share",
      "id": "relational_share",
      "indicators": [],
@@ -1372,6 +1722,26 @@
      "state": "untestable",
      "test": null,
      "who": "Alex Imas",
+     "word": "too_early"
+    },
+    {
+     "attribution": "author",
+     "folio": "reorganisation",
+     "href": "/outlook#claim-trades_scattered",
+     "id": "trades_scattered",
+     "indicators": [],
+     "kind": "outlook",
+     "line": "Law, contracting and other trades scattered by place stay split among many small firms, while the AI tools each trade uses gather around a few vendors.",
+     "reading": null,
+     "row": null,
+     "settles": "A handful of labs ending up running, and profiting from, most professional work directly.",
+     "sources": [
+      "https://www.thediff.co/archive/n-1/"
+     ],
+     "stage": null,
+     "state": "untestable",
+     "test": null,
+     "who": "Byrne Hobart",
      "word": "too_early"
     },
     {
@@ -1395,7 +1765,7 @@
      "word": "too_early"
     }
    ],
-   "too_early": 11
+   "too_early": 16
   },
   {
    "id": "value",
@@ -1491,6 +1861,41 @@
      "state": "holding",
      "test": null,
      "who": "This site",
+     "word": "happening"
+    },
+    {
+     "attribution": "author",
+     "folio": "value",
+     "href": "/outlook#claim-ai_bills_rise",
+     "id": "ai_bills_rise",
+     "indicators": [],
+     "kind": "outlook",
+     "line": "Firms' spending on AI per employee keeps rising, because what they use grows faster than the price of each unit falls.",
+     "reading": {
+      "as_of": "2026-08-31",
+      "holds": null,
+      "href": "/series/ramp.us_businesses.ai_spend_per_employee_median_usd.m#77d0913d06d27fd0",
+      "obs_ids": [
+       "77d0913d06d27fd0"
+      ],
+      "unit": "USD",
+      "value": 12.5
+     },
+     "row": null,
+     "settles": "Spending on AI per employee levelling off or falling while prices keep dropping.",
+     "sources": [
+      "https://www.thediff.co/archive/convergent-evolution-in-the-architecture-of-intelligence/",
+      "https://www.thediff.co/archive/could-there-be-a-forward-deployed-engineer-supply-crunch/",
+      "https://seanzcai.substack.com/p/victoria-3-and-why-data-markets-must"
+     ],
+     "stage": null,
+     "state": "holding",
+     "test": {
+      "against": "ramp_spend_year_ago",
+      "fact": "ramp_spend",
+      "op": "gt"
+     },
+     "who": "Byrne Hobart and Sean Cai",
      "word": "happening"
     },
     {
@@ -1740,47 +2145,47 @@
      "kind": "outlook",
      "line": "Open models carry most of the tokens routed to OpenRouter's busiest models.",
      "reading": {
-      "as_of": "2026-09-21",
-      "derived_id": "f80ae3e940928e19",
+      "as_of": "2026-09-22",
+      "derived_id": "4b0c0243d24138bb",
       "holds": null,
       "href": "/query#open_share_of_routed_tokens",
       "obs_ids": [
        "025baee5c67d8593",
        "05ca16becd23d9eb",
-       "0b547adba394dfdb",
-       "121d24cacf48e569",
-       "131b2b82a7c23b98",
        "1b4377dc73c16fe5",
        "20c99a8c45b6e954",
        "260fda2e15e97284",
-       "2866784e392b4b46",
-       "2b40793a069295e6",
        "2bb5a68c3df3e356",
        "2fa86ab54e9ecdee",
-       "3b2797a8c24dfb40",
-       "498878976d0176b5",
-       "5117ed4f6639b652",
+       "3ef74631cd0eb7ee",
+       "5286b39a59414717",
+       "56edb9077d8bf898",
+       "5e281c29eeb9c533",
        "66aa80954fbd86cf",
-       "6e1a5bd91e68f297",
+       "6bac4c4bd8bd4e65",
+       "6d915de1c57174b0",
        "6edfeef5de774f1e",
        "716c1b6834dfa042",
-       "7416d551cca79565",
        "81325042cbbd3243",
-       "83ab130598e13ccb",
+       "837282ee1a9f4a4d",
+       "9034f737e0838f26",
        "92e5649c573304b8",
-       "af2563e0c41557c7",
-       "b9e4decb039c76cd",
-       "bd11fa3f0643c149",
-       "bd58d2a2ea783812",
-       "c04ba8adfa1882a7",
-       "cc08de46e89ec7ce",
-       "f6988aec485c3594",
-       "f6b415ef16aff321",
-       "f90ebbe2d45880d4",
-       "fd3b61b363d6e5e2"
+       "9ce7867fda52b5ba",
+       "a1e16ef0de87a98a",
+       "ae7b2e4a6743b8f3",
+       "b2d6659cf130f2f5",
+       "c0be50ac1413ae59",
+       "e111fb110b35683c",
+       "e9accd1182f65f26",
+       "ec1a0385572f3458",
+       "ec76e15053cef0c3",
+       "ed7d1bcc412b9d07",
+       "f761df06cd02250d",
+       "fd3b61b363d6e5e2",
+       "ff9f317577cdc06e"
       ],
       "unit": "share",
-      "value": 0.8083828290469658
+      "value": 0.8111253924113272
      },
      "row": null,
      "settles": "The closed models' share of those tokens climbing back as the gap to open models closes.",
@@ -1947,6 +2352,27 @@
     {
      "attribution": "author",
      "folio": "value",
+     "href": "/outlook#claim-ads_pay",
+     "id": "ads_pay",
+     "indicators": [],
+     "kind": "outlook",
+     "line": "Advertising comes to pay for free AI assistants, because they can spot what people want to buy before search does, though keeping users' trust will be hard.",
+     "reading": null,
+     "row": null,
+     "settles": "Ads in assistants driving users away or earning far less per user than ads in search.",
+     "sources": [
+      "https://www.thediff.co/archive/the-rocketship/",
+      "https://www.thediff.co/archive/should-you-trust-the-hacker-news-peanut-gallery/"
+     ],
+     "stage": null,
+     "state": "untestable",
+     "test": null,
+     "who": "Byrne Hobart",
+     "word": "too_early"
+    },
+    {
+     "attribution": "author",
+     "folio": "value",
      "href": "/outlook#claim-apps_squeezed",
      "id": "apps_squeezed",
      "indicators": [],
@@ -1987,6 +2413,29 @@
     {
      "attribution": "author",
      "folio": "value",
+     "href": "/outlook#claim-chips_finance_buyers",
+     "id": "chips_finance_buyers",
+     "indicators": [
+      "circular_financing_scale"
+     ],
+     "kind": "outlook",
+     "line": "NVIDIA keeps financing its own customers in return for a share of their income, and uses such deals to gain a say over who gets computing capacity.",
+     "reading": null,
+     "row": null,
+     "settles": "NVIDIA's revenue staying almost wholly one-off sales of hardware.",
+     "sources": [
+      "https://www.thediff.co/archive/toll-collectors-on-the-road-to-abundance/",
+      "https://www.thediff.co/archive/in-the-future-every-ai-lab-is-a-neocloud-for-fifteen-minutes/"
+     ],
+     "stage": null,
+     "state": "untestable",
+     "test": null,
+     "who": "Byrne Hobart",
+     "word": "too_early"
+    },
+    {
+     "attribution": "author",
+     "folio": "value",
      "href": "/outlook#claim-chips_stored",
      "id": "chips_stored",
      "indicators": [],
@@ -2002,6 +2451,48 @@
      "state": "untestable",
      "test": null,
      "who": "David Cahn",
+     "word": "too_early"
+    },
+    {
+     "attribution": "author",
+     "folio": "value",
+     "href": "/outlook#claim-compute_no_crash",
+     "id": "compute_no_crash",
+     "indicators": [],
+     "kind": "outlook",
+     "line": "The price of rented computing does not crash the way internet bandwidth did, because physical capacity cannot be multiplied overnight.",
+     "reading": null,
+     "row": null,
+     "settles": "A sudden glut sending the rent for AI chips down by most of its value within a year.",
+     "sources": [
+      "https://seanzcai.substack.com/p/new-age-commodities"
+     ],
+     "stage": null,
+     "state": "untestable",
+     "test": null,
+     "who": "Sean Cai",
+     "word": "too_early"
+    },
+    {
+     "attribution": "author",
+     "folio": "value",
+     "href": "/outlook#claim-data_split",
+     "id": "data_split",
+     "indicators": [
+      "rl_environment_vendor_count"
+     ],
+     "kind": "outlook",
+     "line": "The market for training data stays split among many specialist sellers rather than gathering around one or two.",
+     "reading": null,
+     "row": "training_data",
+     "settles": "One or two sellers coming to handle most of what the frontier labs buy.",
+     "sources": [
+      "https://seanzcai.substack.com/p/new-age-commodities"
+     ],
+     "stage": null,
+     "state": "untestable",
+     "test": null,
+     "who": "Sean Cai",
      "word": "too_early"
     },
     {
@@ -2044,6 +2535,28 @@
      "state": "untestable",
      "test": null,
      "who": "Dan Sundheim",
+     "word": "too_early"
+    },
+    {
+     "attribution": "author",
+     "folio": "value",
+     "href": "/outlook#claim-lab_margins_below",
+     "id": "lab_margins_below",
+     "indicators": [
+      "lab_recoupment_ratio"
+     ],
+     "kind": "outlook",
+     "line": "The labs' margins are pulled down because the staff who deploy their models grow with their customers, which a pure software business avoids.",
+     "reading": null,
+     "row": null,
+     "settles": "Labs reporting gross margins at or above classic software's while running large teams inside their customers.",
+     "sources": [
+      "https://www.thediff.co/archive/the-coasian-margin-frontier/"
+     ],
+     "stage": null,
+     "state": "untestable",
+     "test": null,
+     "who": "Byrne Hobart",
      "word": "too_early"
     },
     {
@@ -2125,6 +2638,89 @@
     {
      "attribution": "author",
      "folio": "value",
+     "href": "/outlook#claim-labs_buy_records",
+     "id": "labs_buy_records",
+     "indicators": [
+      "expert_data_market_run_rate",
+      "lab_procurement_signal"
+     ],
+     "kind": "outlook",
+     "line": "Labs buy more of their training data straight from leading app companies and specialists, squeezing the firms that sell general practice environments.",
+     "reading": null,
+     "row": "training_data",
+     "settles": "General environment sellers keeping their share of the labs' data budgets.",
+     "sources": [
+      "https://seanzcai.substack.com/p/state-of-data-may-2026"
+     ],
+     "stage": null,
+     "state": "untestable",
+     "test": null,
+     "who": "Sean Cai",
+     "word": "too_early"
+    },
+    {
+     "attribution": "author",
+     "folio": "value",
+     "href": "/outlook#claim-labs_by_industry",
+     "id": "labs_by_industry",
+     "indicators": [],
+     "kind": "outlook",
+     "line": "The leading labs may pull apart by industry, each strongest where it has bought the most specialist business records.",
+     "reading": null,
+     "row": null,
+     "settles": "The labs staying interchangeable in every industry, with none ahead in a trade because of the data it bought.",
+     "sources": [
+      "https://www.thediff.co/archive/data-scarcity/"
+     ],
+     "stage": null,
+     "state": "untestable",
+     "test": null,
+     "who": "Byrne Hobart",
+     "word": "too_early"
+    },
+    {
+     "attribution": "author",
+     "folio": "value",
+     "href": "/outlook#claim-lead_changes",
+     "id": "lead_changes",
+     "indicators": [],
+     "kind": "outlook",
+     "line": "The lab with the best model keeps changing, because the leader uses its chips to serve its popular model while rivals train the next one.",
+     "reading": null,
+     "row": null,
+     "settles": "One lab keeping the best model for several years running.",
+     "sources": [
+      "https://www.thediff.co/archive/court-philosophers/"
+     ],
+     "stage": null,
+     "state": "untestable",
+     "test": null,
+     "who": "Byrne Hobart",
+     "word": "too_early"
+    },
+    {
+     "attribution": "author",
+     "folio": "value",
+     "href": "/outlook#claim-link_overshoots",
+     "id": "link_overshoots",
+     "indicators": [],
+     "kind": "outlook",
+     "line": "Somewhere along the chip supply chain, a part AI has made scarce proves easier to expand than expected, and its price turns.",
+     "reading": null,
+     "row": null,
+     "settles": "Every part squeezed by AI's demand staying scarce and rising in price.",
+     "sources": [
+      "https://www.thediff.co/archive/in-the-court-of-the-technoking/"
+     ],
+     "stage": null,
+     "state": "untestable",
+     "test": null,
+     "who": "Byrne Hobart",
+     "word": "too_early"
+    },
+    {
+     "attribution": "author",
+     "folio": "value",
      "href": "/outlook#claim-lock_in",
      "id": "lock_in",
      "indicators": [],
@@ -2140,6 +2736,52 @@
      "state": "untestable",
      "test": null,
      "who": "Arvind Narayanan and Akash Kapur",
+     "word": "too_early"
+    },
+    {
+     "attribution": "author",
+     "folio": "value",
+     "href": "/outlook#claim-lock_in_fails",
+     "id": "lock_in_fails",
+     "indicators": [
+      "enterprise_multi_homing_share"
+     ],
+     "kind": "outlook",
+     "line": "Labs' efforts to tie customers down, through exclusive deals and bans on copying their models, eventually fail, and moving between labs stays cheap.",
+     "reading": null,
+     "row": null,
+     "settles": "Customers becoming bound to one lab by exclusive deals and bans on copying.",
+     "sources": [
+      "https://seanzcai.substack.com/p/state-of-data-june-2026",
+      "https://seanzcai.substack.com/p/state-of-data-may-2026"
+     ],
+     "stage": null,
+     "state": "untestable",
+     "test": null,
+     "who": "Sean Cai",
+     "word": "too_early"
+    },
+    {
+     "attribution": "author",
+     "folio": "value",
+     "href": "/outlook#claim-models_not_utility",
+     "id": "models_not_utility",
+     "indicators": [
+      "enterprise_multi_homing_share"
+     ],
+     "kind": "outlook",
+     "line": "Models keep differing in efficiency and in the kinds of input they handle, so they do not become an interchangeable utility like electricity.",
+     "reading": null,
+     "row": null,
+     "settles": "Buyers treating models as interchangeable and choosing on the price of a token alone.",
+     "sources": [
+      "https://seanzcai.substack.com/p/state-of-data-april-2026",
+      "https://seanzcai.substack.com/p/mythos-small-models-and-how-theyll"
+     ],
+     "stage": null,
+     "state": "untestable",
+     "test": null,
+     "who": "Sean Cai",
      "word": "too_early"
     },
     {
@@ -2162,6 +2804,46 @@
      "state": "untestable",
      "test": null,
      "who": "Satya Nadella",
+     "word": "too_early"
+    },
+    {
+     "attribution": "author",
+     "folio": "value",
+     "href": "/outlook#claim-records_gain",
+     "id": "records_gain",
+     "indicators": [],
+     "kind": "outlook",
+     "line": "Coding agents slow new firms' purchases of ready-made software but make the programs that hold a business's core records worth more.",
+     "reading": null,
+     "row": null,
+     "settles": "Software that holds a business's records losing customers as fast as other software.",
+     "sources": [
+      "https://www.thediff.co/archive/customers-as-r-d/"
+     ],
+     "stage": null,
+     "state": "untestable",
+     "test": null,
+     "who": "Byrne Hobart",
+     "word": "too_early"
+    },
+    {
+     "attribution": "author",
+     "folio": "value",
+     "href": "/outlook#claim-rent_surplus",
+     "id": "rent_surplus",
+     "indicators": [],
+     "kind": "outlook",
+     "line": "The largest technology firms build more computing than they need and rent the spare to rivals, so the industry becomes one shared bet on demand for AI.",
+     "reading": null,
+     "row": null,
+     "settles": "The largest firms keeping their computing for their own use and renting none of it out.",
+     "sources": [
+      "https://www.thediff.co/archive/in-the-future-every-ai-lab-is-a-neocloud-for-fifteen-minutes/"
+     ],
+     "stage": null,
+     "state": "untestable",
+     "test": null,
+     "who": "Byrne Hobart",
      "word": "too_early"
     },
     {
@@ -2223,9 +2905,29 @@
      "test": null,
      "who": "This site, extending William Nordhaus",
      "word": "too_early"
+    },
+    {
+     "attribution": "author",
+     "folio": "value",
+     "href": "/outlook#claim-tasks_distilled",
+     "id": "tasks_distilled",
+     "indicators": [],
+     "kind": "outlook",
+     "line": "Much narrow work AI does is turned into cheap fixed routines, so spending on each such task rises for a while and then stops.",
+     "reading": null,
+     "row": null,
+     "settles": "Spending on well-defined tasks staying high after they are solved.",
+     "sources": [
+      "https://www.thediff.co/archive/the-ghost-in-the-finite-state-machine-design-pattern/"
+     ],
+     "stage": null,
+     "state": "untestable",
+     "test": null,
+     "who": "Byrne Hobart",
+     "word": "too_early"
     }
    ],
-   "too_early": 18
+   "too_early": 32
   }
  ],
  "mapping": [
@@ -2389,10 +3091,10 @@
  ],
  "tally": {
   "both": 11,
-  "happening": 11,
+  "happening": 12,
   "not_happening": 4,
   "slower": 2,
-  "too_early": 51
+  "too_early": 82
  },
  "words": [
   {

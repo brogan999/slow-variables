@@ -74,11 +74,14 @@ def fact(s: Store, spec: dict[str, Any], today: date | None = None) -> dict[str,
     if (
         "series" in spec
     ):  # one published figure, read straight from its series: the newest numeric row not in dispute
-        row = s.con.execute(
+        rows = s.con.execute(
             "SELECT id, value_numeric, unit, as_of_date FROM observations WHERE series_key = ? AND value_numeric IS NOT NULL"
-            " AND NOT coalesce(disputed, false) AND as_of_date <= ? ORDER BY as_of_date DESC, id LIMIT 1",
+            " AND NOT coalesce(disputed, false) AND as_of_date <= ? ORDER BY as_of_date DESC, id",
             [spec["series"], today or date.today()],
-        ).fetchone()
+        ).fetchall()
+        row = rows[0] if rows else None
+        if row and spec.get("pick") == "year_ago":  # the row a year before the newest, as for a metric
+            row = next((r for r in rows if 355 <= (rows[0][3] - r[3]).days <= 375), None)
         if not row:
             return None
         return {
