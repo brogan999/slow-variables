@@ -1876,14 +1876,18 @@ observations:
   #    are googl, Microsoft units msft, Amazon units amzn; a lab's parent never stands in for the lab, nor a lab for its parent.
   # R2 it was first confirmed on the record by a party or a filing on or after 1 Jan 2025, and is dated then, never at a
   #    report of talks.
-  # R3 it is a purchase (whole or controlling); an acquihire (a deal with the company on the record, most of its team
-  #    joining, its product ending or becoming the buyer's); or a licence or stake with money paid, the founder, chief
-  #    executive or most of the team joining, and a party or filing confirming it. A confirmed deal later terminated
-  #    counts at its confirmation; a deal only reported never counts; a joint purchase counts only if one buyer controls it.
+  # R3 it is a purchase (whole or controlling); an acquihire, where a party confirms that the company's founders or its
+  #    team are joining the buyer and the company's own product ends or passes to the buyer (people leaving a company
+  #    that carries on, or is sold to someone else, do not count); or a licence or stake with money paid, the founder,
+  #    chief executive or most of the team joining, and a party or filing confirming it. A confirmed deal later
+  #    terminated counts at its confirmation; a deal only reported never counts; a joint purchase counts only if one
+  #    buyer controls it. A deal notified to the European Commission under the Digital Markets Act is dated no later
+  #    than its notification (a filing), in Brussels time.
   # R4 its target is in one of the fourteen sublayers above the model layer (training input, serving and orchestration,
   #    deployment and application), named in the row's note; a target that is an entity is classed by its primary
-  #    membership (so robot makers, filed as labs, are out). Chips, clouds, data centres, power, other labs, databases and
-  #    data tools, and non-AI or non-technology businesses are listed below as considered, not counted.
+  #    membership (so robot makers, filed as labs, are out). Software built for AI workloads counts; general cluster and
+  #    HPC schedulers count as compute. Chips, clouds, data centres, power, other labs, databases and data tools, and
+  #    non-AI or non-technology businesses are listed below as considered, not counted.
   # R5 one row per deal, from the acquirer's or target's announcement, else CNBC or Fortune, else TechCrunch; a page that
   #    refuses scripted requests or no longer exists is cited from a raw archive capture.
   # R6 searched: newsrooms and blogs, Wikipedia's M&A lists and the EU's DMA notices (discovery only), 8-K Items
@@ -2516,6 +2520,18 @@ observations:
     basis: company_stated
     raw_snippet: AMD Acquires Brium to Strengthen Open AI Software Ecosystem
     note: Advanced Micro Devices -> Brium (AI compiler and inference-optimisation software); sublayer inference_serving; acquisition; cited from a raw archive capture because amd.com drops the tracker's requests. Ledger sweep of 23 Sep 2026.
+  - series_key: acq.openai.crossing_minds.pt
+    source_id: techcrunch
+    entity_id: openai
+    value_text: acquihired Crossing Minds (Vertical AI by domain)
+    unit: text
+    as_of_date: 2025-06-26
+    published_date: 2025-06-27
+    url: https://techcrunch.com/2025/06/27/openai-hires-team-behind-ai-recommendation-startup-crossing-minds/
+    tier: 7
+    basis: reported
+    raw_snippet: 'Crossing Minds, a startup that provides AI recommendation systems to e-commerce businesses, said on Thursday that its team is joining OpenAI.'
+    note: 'OpenAI -> Crossing Minds (AI recommendation systems for e-commerce); sublayer vertical_ai; acquihire; the company said its team was joining OpenAI and it stopped taking clients. Ledger sweep of 23 Sep 2026.'
   - series_key: acq.suno.wavtool.pt
     source_id: suno_blog
     entity_id: suno
@@ -2564,6 +2580,18 @@ observations:
     basis: company_stated
     raw_snippet: Crusoe, the industry’s first vertically integrated AI infrastructure provider, today announced it has acquired Atero, a company specializing in GPU management and memory optimization for AI workloads.
     note: Crusoe -> Atero (GPU memory and KV-cache optimisation software for inference); sublayer inference_serving; acquisition. Ledger sweep of 23 Sep 2026.
+  - series_key: acq.openai.alex_codes.pt
+    source_id: techcrunch
+    entity_id: openai
+    value_text: acquihired Alex (Alex Codes) (Coding agents & dev tools)
+    unit: text
+    as_of_date: 2025-09-02
+    published_date: 2025-09-05
+    url: https://techcrunch.com/2025/09/05/openai-hires-the-team-behind-xcode-coding-assistant-alex-codes/
+    tier: 7
+    basis: reported
+    raw_snippet: 'In a post on X, Alex’s founder Daniel Edrisian said the startup’s team is joining OpenAI’s Codex division, which is building the company’s AI coding agent.'
+    note: 'OpenAI -> Alex (Alex Codes) (AI coding assistant for Xcode); sublayer coding_agents; acquihire; the team joined OpenAI''s Codex division and the app stopped being offered after 1 Oct 2025; dated at the startup''s own post of 2 Sep 2025. Ledger sweep of 23 Sep 2026.'
   - series_key: acq.crwv.openpipe.pt
     source_id: coreweave_news
     entity_id: crwv
@@ -2612,6 +2640,18 @@ observations:
     basis: company_stated
     raw_snippet: CoreWeave, Inc. (Nasdaq:CRWV), The Essential Cloud for AI, today announced a definitive agreement to acquire Marimo Inc., the creator of the open-source marimo notebook
     note: CoreWeave Inc. -> Marimo (open-source AI-native Python notebook); sublayer coding_agents; acquisition. Ledger sweep of 23 Sep 2026.
+  - series_key: acq.openai.jams.pt
+    source_id: jams_site
+    entity_id: openai
+    value_text: acquihired Jams (Consumer AI)
+    unit: text
+    as_of_date: 2025-11-06
+    published_date: 2025-11-06
+    url: https://jamshq.com/
+    tier: 4
+    basis: company_stated
+    raw_snippet: 'Jams Update: Joining OpenAI to continue our mission.'
+    note: 'OpenAI -> Jams (Potrero Labs) (consumer generative-AI video apps, Jams and Hubble); sublayer consumer_ai; acquihire; its founders joined OpenAI and both apps were wound down, though not all staff joined; dated at its chief executive''s post of 6 Nov 2025; the page is undated. Ledger sweep of 23 Sep 2026.'
   - series_key: acq.amd.mk1.pt
     source_id: amd_blog
     entity_id: amd
@@ -2648,6 +2688,18 @@ observations:
     basis: company_stated
     raw_snippet: I'm excited to share that Limitless has been acquired by Meta.
     note: Meta Platforms -> Limitless (AI wearable pendant and meeting-memory app); sublayer consumer_ai; acquisition. Ledger sweep of 23 Sep 2026.
+  - series_key: acq.googl.producerai.pt
+    source_id: google_blog
+    entity_id: googl
+    value_text: acquired ProducerAI (assets of Corpusant, Inc.; formerly Riffusion) (Consumer AI)
+    unit: text
+    as_of_date: 2025-12-19
+    published_date: 2026-02-24
+    url: https://blog.google/innovation-and-ai/models-and-research/google-labs/producerai/
+    tier: 4
+    basis: company_stated
+    raw_snippet: ProducerAI, a platform that allows you to create and refine music using generative AI, is joining Google Labs.
+    note: Alphabet Inc. -> ProducerAI (assets of Corpusant, Inc.; formerly Riffusion) (generative-AI music creation app); sublayer consumer_ai; acquisition; Google bought the product's assets and hired the team; dated at Google's notification to the European Commission under the Digital Markets Act, 19 Dec 2025. Ledger sweep of 23 Sep 2026.
   - series_key: acq.meta.manus.pt
     source_id: manus_blog
     entity_id: meta
@@ -2660,18 +2712,6 @@ observations:
     basis: company_stated
     raw_snippet: 'The news is out, and it''s big: Manus is joining Meta.'
     note: 'Meta Platforms -> Manus (Butterfly Effect) (general-purpose AI agent app); sublayer consumer_ai; acquisition; later terminated: China ordered the deal unwound in April 2026, and Manus said in August 2026 it would resume as an independent company. Ledger sweep of 23 Sep 2026.'
-  - series_key: acq.openai.convogo.pt
-    source_id: techcrunch
-    entity_id: openai
-    value_text: agreed to acquire Convogo (Vertical AI by domain)
-    unit: text
-    as_of_date: 2026-01-08
-    published_date: 2026-01-08
-    url: https://techcrunch.com/2026/01/08/openai-to-acquire-the-team-behind-executive-coaching-ai-tool-convogo/
-    tier: 7
-    basis: reported
-    raw_snippet: OpenAI to acquire the team behind executive coaching AI tool Convogo
-    note: OpenAI -> Convogo (executive-coaching AI tool); sublayer vertical_ai; acquihire; OpenAI took on the team; the product wound down. Ledger sweep of 23 Sep 2026.
   - series_key: acq.openai.torch.pt
     source_id: cnbc
     entity_id: openai
@@ -2720,18 +2760,18 @@ observations:
     basis: company_stated
     raw_snippet: Today, we’re thrilled to announce that Koyeb has entered into a definitive agreement to join Mistral AI to advance cutting-edge AI infrastructure.
     note: Mistral AI -> Koyeb (serverless platform for deploying AI apps and inference); sublayer inference_serving; acquisition. Ledger sweep of 23 Sep 2026.
-  - series_key: acq.googl.producerai.pt
-    source_id: google_blog
-    entity_id: googl
-    value_text: acquired ProducerAI (assets of Corpusant, Inc.; formerly Riffusion) (Consumer AI)
+  - series_key: acq.meta.gizmo.pt
+    source_id: business_insider
+    entity_id: meta
+    value_text: 'licensed the technology of, and hired the team from, Gizmo (Atma Sciences) (Consumer AI)'
     unit: text
-    as_of_date: 2026-02-24
-    published_date: 2026-02-24
-    url: https://blog.google/innovation-and-ai/models-and-research/google-labs/producerai/
-    tier: 4
-    basis: company_stated
-    raw_snippet: ProducerAI, a platform that allows you to create and refine music using generative AI, is joining Google Labs.
-    note: Alphabet Inc. -> ProducerAI (assets of Corpusant, Inc.; formerly Riffusion) (generative-AI music creation app); sublayer consumer_ai; acquisition; Google bought the product's assets and hired the team. Ledger sweep of 23 Sep 2026.
+    as_of_date: 2026-03-05
+    published_date: 2026-03-05
+    url: https://www.businessinsider.com/ex-snapchat-engineers-behind-gizmo-join-meta-superintelligence-labs-2026-3
+    tier: 7
+    basis: reported
+    raw_snippet: 'Ex-Snapchat Engineers Behind Gizmo Join Meta''s Superintelligence Labs'
+    note: 'Meta Platforms -> Gizmo (Atma Sciences Inc.) (app for making small interactive games and mini-apps from a prompt); sublayer consumer_ai; licence and hire; a Meta spokesperson confirmed the team had joined and that Meta has a licence to Atma''s technology, and Meta later shut the original app. Ledger sweep of 23 Sep 2026.'
   - series_key: acq.meta.moltbook.pt
     source_id: techcrunch
     entity_id: meta
@@ -2744,6 +2784,18 @@ observations:
     basis: reported
     raw_snippet: Moltbook is joining Meta Superintelligence Labs, a Meta spokesperson told us.
     note: Meta Platforms -> Moltbook (network where AI agents post and talk to each other); sublayer agent_infra; acquisition. Ledger sweep of 23 Sep 2026.
+  - series_key: acq.msft.fintool.pt
+    source_id: fintool_founder_blog
+    entity_id: msft
+    value_text: acquired Fintool (Blocktool Inc.) (Vertical AI by domain)
+    unit: text
+    as_of_date: 2026-03-13
+    published_date: 2026-04-18
+    url: https://nicolasbustamante.com/blog/microsoft-has-acquired-fintool
+    tier: 4
+    basis: company_stated
+    raw_snippet: Microsoft Has Acquired Fintool
+    note: Microsoft Corp -> Fintool (Blocktool Inc.) (AI agents for equity research); sublayer vertical_ai; acquisition; dated at Microsoft's notification to the European Commission under the Digital Markets Act, 13 Mar 2026, which says Microsoft had bought all of Blocktool's shares; the founder's post is of 18 Apr 2026. Ledger sweep of 23 Sep 2026.
   - series_key: acq.msft.cove.pt
     source_id: techcrunch
     entity_id: msft
@@ -2768,6 +2820,30 @@ observations:
     basis: reported
     raw_snippet: Ex Stripe CTO David Singleton and Dreamer team join Meta
     note: Meta Platforms -> Dreamer (consumer platform for building AI agents); sublayer consumer_ai; licence and hire; a licence of Dreamer's technology, with its chief executive and team joining Meta. Ledger sweep of 23 Sep 2026.
+  - series_key: acq.amzn.nlx.pt
+    source_id: aws_contact_center_blog
+    entity_id: amzn
+    value_text: acquired NLX (Vertical AI by domain)
+    unit: text
+    as_of_date: 2026-04-07
+    published_date: 2026-04-23
+    url: https://aws.amazon.com/blogs/contact-center/amazon-connect-deploy-conversational-ai-in-weeks-not-months/
+    tier: 4
+    basis: company_stated
+    raw_snippet: NLX (nlx.ai) is joining Amazon Connect, accelerating the value customers get from Connect’s agentic AI solution.
+    note: Amazon.com Inc. -> NLX (no-code conversational AI for customer self-service, folded into Amazon Connect); sublayer vertical_ai; acquisition; dated at Amazon's notification to the European Commission under the Digital Markets Act, 7 Apr 2026. Ledger sweep of 23 Sep 2026.
+  - series_key: acq.openai.cirrus_labs.pt
+    source_id: cirrus_labs_site
+    entity_id: openai
+    value_text: acquihired Cirrus Labs (Agent infrastructure)
+    unit: text
+    as_of_date: 2026-04-07
+    published_date: 2026-04-07
+    url: https://cirruslabs.org/
+    tier: 4
+    basis: company_stated
+    raw_snippet: Cirrus Labs to join OpenAI
+    note: 'OpenAI -> Cirrus Labs (virtual machines and CI for software builds and agents: Cirrus CI, Tart, Orchard); sublayer agent_infra; acquihire; the company entered an agreement to join OpenAI''s Agent Infrastructure team, and Cirrus CI shut down on 1 Jun 2026. Ledger sweep of 23 Sep 2026.'
   - series_key: acq.openai.hiro_finance.pt
     source_id: techcrunch
     entity_id: openai
@@ -2792,30 +2868,6 @@ observations:
     basis: company_stated
     raw_snippet: Today, we’re excited to announce that Workshop Labs is joining Thinking Machines to advance that mission.
     note: Thinking Machines Lab -> Workshop Labs (post-training stack for tailoring models to a user's own data); sublayer post_training; acquihire. Ledger sweep of 23 Sep 2026.
-  - series_key: acq.msft.fintool.pt
-    source_id: fintool_founder_blog
-    entity_id: msft
-    value_text: acquired Fintool (Blocktool Inc.) (Vertical AI by domain)
-    unit: text
-    as_of_date: 2026-04-17
-    published_date: 2026-04-17
-    url: https://nicolasbustamante.com/blog/microsoft-has-acquired-fintool
-    tier: 4
-    basis: company_stated
-    raw_snippet: Microsoft Has Acquired Fintool
-    note: Microsoft Corp -> Fintool (Blocktool Inc.) (AI agents for equity research); sublayer vertical_ai; acquisition; first confirmed in a Microsoft executive's post of 17 Apr 2026; the founder's post and Microsoft's acquisition history give 18 Apr. Ledger sweep of 23 Sep 2026.
-  - series_key: acq.amzn.nlx.pt
-    source_id: aws_blog
-    entity_id: amzn
-    value_text: acquired NLX (Vertical AI by domain)
-    unit: text
-    as_of_date: 2026-04-23
-    published_date: 2026-04-23
-    url: https://aws.amazon.com/blogs/contact-center/amazon-connect-deploy-conversational-ai-in-weeks-not-months/
-    tier: 4
-    basis: company_stated
-    raw_snippet: NLX (nlx.ai) is joining Amazon Connect, accelerating the value customers get from Connect’s agentic AI solution.
-    note: Amazon.com Inc. -> NLX (no-code conversational AI for customer self-service, folded into Amazon Connect); sublayer vertical_ai; acquisition. Ledger sweep of 23 Sep 2026.
   - series_key: acq.anthropic.runhouse.pt
     source_id: calcalist_ctech
     entity_id: anthropic
@@ -2876,6 +2928,18 @@ observations:
     basis: company_stated
     raw_snippet: Mistral AI Acquires Emmi AI to Create the Leading AI Stack for Industrial Engineering European AI leader Mistral AI is acquiring Emmi AI in one of Europe’s most important and strategic AI acquisitions to date.
     note: Mistral AI -> Emmi AI (physics-AI models and products for industrial engineering); sublayer vertical_ai; acquisition. Ledger sweep of 23 Sep 2026.
+  - series_key: acq.openai.weights.pt
+    source_id: weights_site
+    entity_id: openai
+    value_text: acquihired Weights (Consumer AI)
+    unit: text
+    as_of_date: 2026-05-22
+    published_date: 2026-05-22
+    url: https://www.weights.com/
+    tier: 4
+    basis: company_stated
+    raw_snippet: 'We''re excited to announce that Weights and its team are joining OpenAI.'
+    note: 'OpenAI -> Weights (Weights.gg) (consumer AI voice and image creation app); sublayer consumer_ai; acquihire; the company and its team joined OpenAI and its products were wound down; dated at a co-founder''s post of 22 May 2026; the page is undated. Ledger sweep of 23 Sep 2026.'
   - series_key: acq.openai.northslope.pt
     source_id: openai_deployment_co_news
     entity_id: openai
@@ -2927,7 +2991,7 @@ observations:
   - series_key: acq.nscale.anyscale.pt
     source_id: nscale_press
     entity_id: nscale
-    value_text: agreed to acquire Anyscale (RLaaS / post-training / continual-learning infra)
+    value_text: agreed to acquire Anyscale (Inference serving)
     unit: text
     as_of_date: 2026-07-30
     published_date: 2026-07-30
@@ -2935,7 +2999,7 @@ observations:
     tier: 4
     basis: company_stated
     raw_snippet: Nscale, a full-stack AI cloud platform, today announced it has entered into a definitive agreement to acquire Anyscale, the platform for scaling any AI workload - data processing, training, inference and reinforcement learning - across thousands of GPUs.
-    note: Nscale -> Anyscale (Ray-based compute platform for AI training, reinforcement learning and inference); sublayer post_training; acquisition; closing is tied to Nscale's IPO. Ledger sweep of 23 Sep 2026.
+    note: Nscale -> Anyscale (Ray-based compute platform for AI training, reinforcement learning and inference); sublayer inference_serving, its entity's primary membership; acquisition; closing is tied to Nscale's IPO. Ledger sweep of 23 Sep 2026.
   - series_key: acq.d_matrix.wallaroo_ai.pt
     source_id: d_matrix_newsroom
     entity_id: d_matrix
@@ -2996,38 +3060,58 @@ observations:
     basis: company_stated
     raw_snippet: Git AI is joining the Codex team at OpenAI.
     note: OpenAI -> Git AI (AI-code attribution tool); sublayer coding_agents; acquihire; the company joined OpenAI's Codex team. Ledger sweep of 23 Sep 2026.
+  - series_key: acq.mistral.pimento.pt
+    source_id: the_media_leader_fr
+    entity_id: mistral
+    value_text: agreed to acquire Pimento (Vertical AI by domain)
+    unit: text
+    as_of_date: 2026-09-21
+    published_date: 2026-09-22
+    url: https://fr.themedialeader.com/mistral-rachete-pimento-specialiste-de-la-publicite-par-ia/
+    tier: 7
+    basis: reported
+    raw_snippet: 'Mistral va racheter « pour plusieurs millions d’euros » la start-up Pimento, spécialisée dans la création de campagnes publicitaires grâce à l’IA, a indiqué l’entreprise lundi à l’AFP, confirmant une information du média L’Informé.'
+    note: 'Mistral AI -> Pimento (AI tool that makes advertising campaigns for brands); sublayer vertical_ai; acquisition; Mistral confirmed it to AFP on 21 Sep 2026, and Pimento''s team joins Mistral''s Vibe assistant. Ledger sweep of 23 Sep 2026.'
   # --- sweep of 23 Sep 2026: met the rule but no citable page states them (counted by year in the metric's caveat) ---
-  #   msft Mahi Labs (2025-04-29; agent_infra)
-  #   googl Upollo (2025-09-09; vertical_ai)
-  #   amzn Pixwise (assets of Pixwise Inc./Pixwise Ltd) (2025-09-28; human_data)
-  #   googl Big Sur AI (2025-10-23; vertical_ai)
-  #   msft Pi Labs (2025-12-05; evals)
-  #   googl Contextual AI (2026-04-05; agent_infra)
+  #   (dated at their notifications to the European Commission, Brussels time)
+  #   msft Mahi Labs (2025-04-30; agent_infra)
+  #   googl Big Sur AI (2025-10-24; vertical_ai)
+  #   msft Pi Labs (2025-11-25; evals)
+  #   googl Contextual AI (2026-04-06; agent_infra)
   # --- sweep of 23 Sep 2026: considered and not counted ---
   #   1x Kind Humanoid (2025-01-27): R4: humanoid-robot developer (a peer robotics builder, not one of the 14 sublayers)
   #   amd ZT Systems (2024-08-19): R2: first confirmed Aug 2024 (closed 2025-03-31); R4: servers
   #   amd Enosemi (2025-05-28): R4: photonics (co-packaged optics)
   #   amd Untether AI (team) (2025-06-05): R4: chips (AI inference silicon)
-  #   amd Lamini (team) (2025-06-11): R3: hire only; AMD said it was strictly a hiring, not an acquisition (no money paid on the record)
+  #   amd Lamini (team) (2025-06-11): R3: AMD said it hired Lamini's chief executive and several staff and did not acquire the team; no party says Lamini's product ended
+  #   amd AMD, Cisco and HUMAIN joint venture (2025-11-19): R3: a joint venture, not a purchase; R4: data centres
+  #   amd Nutanix (stake) (2026-02-25): R3: a minority stake; R4: cloud software
   #   amd MEXT (2026-06-15): R4: memory (AI-driven memory tiering that makes flash behave like DRAM for compute infrastructure)
+  #   amd Anthropic (equity commitment) (2026-07-22): R3: a stake, no team joins; R4: other AI model lab
   #   amd Taalas (2026-08-06): R4: chips (model-hardwired inference silicon)
   #   amzn Axio (Capital Float) (2025-01-15): R4: consumer lending / BNPL (fintech)
+  #   amzn Pixwise (certain assets) (2025-09-29): R3 not shown: its EU notice names only certain assets and the possible hiring of certain staff
   #   amzn Viziotix (2025-11-03): R4: barcode-reading software for scanners/cameras (non-AI enterprise software)
   #   amzn Feenix.ai (2025-11-28): R4: software-procurement and marketplace-sales tooling (non-AI enterprise software)
+  #   amzn Rightbot (2026-01-06): R4: a robot maker
   #   amzn OpenAI (Series C preferred stake) (2026-02-27): R3: minority stake, no team joins; R4: other AI model labs
   #   amzn Rivr (RIVR Technologies AG) (2026-03-19): R4: a robot maker; the tracker files robot makers as model labs
   #   amzn Fauna Robotics (2026-03-24): R4: a robot maker; the tracker files robot makers as model labs
   #   amzn Globalstar (2026-04-14): R4: satellite communications
   #   amzn 3Laws Robotics (2026-04-29): R4: robot safety/control software (control-barrier-function guardrails), not an AI sublayer
+  #   amzn DuckLabs (2026-08-26): R4: an analytical database (DuckDB); withdrawn from the count on 23 Sep 2026
+  #   anthropic MarketStreet (2026-05-05): R4: borderline; a small-business networking and directory community
   #   anthropic Fractional AI (2026-05-21): R1/R3: buyer is Ode, the Anthropic–Blackstone–Hellman & Friedman services JV (tracker entity anthropic_services_venture); no single buyer controls it
+  #   anthropic Akiva AI (2026-08-06): R3: its founder joined and the company carries on
   #   anthropic Decart (2026-08-13): R3: talks only (Bloomberg, people familiar); Anthropic walked away 7-8 Sep 2026
   #   anthropic Casper Studios (2026-08-20): R1/R3: buyer is Ode with Anthropic (the JV), not Anthropic; no single buyer controls it
-  #   anthropic Coefficient Bio (2026-09-18): R4: other AI model lab (AI-for-biology models; tracker classes Isomorphic Labs/Lila Sciences as neolabs) - borderline vs vertical_ai
+  #   anthropic Coefficient Bio (2026-09-18): R4: borderline; an AI-for-biology company (reported bought in April 2026, confirmed by Anthropic in September), and the tracker files AI-for-science builders such as Isomorphic Labs with the model labs
   #   applied_digital EKSO Bionics Holdings (renamed ChronoScale) (2025-12-29): R4: non-AI (medical exoskeletons); the combined vehicle is Applied Digital's GPU cloud (clouds)
   #   astera_labs aiXscale Photonics (2025-10-22): R4: photonics
   #   baichuan Guangzhou Taoka Technology Co., Ltd. (广州涛喀科技, renamed 百川医疗) (undated): R4: non-technology business (health-consulting / medical-supplies licence vehicle); evidence is a registry lookup
   #   core_scientific Polaris DS LLC (2026-05-06): R4: data centres / power
   #   crwv Core Scientific (2025-07-07): R4: data centres / power
+  #   crwv Bufstream (2026-05-08): R4: a Kafka-compatible streaming platform (data tools); also a product line bought from Buf, which stays independent
   #   d_matrix GigaIO data center business (2026-04-02): R4: servers / networking (SuperNODE, FabreX PCIe memory fabric)
   #   elevenlabs Omnivore (2024-10-29): R2: first confirmed before 2025
   #   firmus Benmax fabrication, design and projects businesses (2026-08-13): R4: data-centre fabrication and construction (non-AI engineering business)
@@ -3041,37 +3125,49 @@ observations:
   #   googl Galileo AI (2025-03-21): R2: the DMA notification dates it November 2024
   #   googl Specs (Spectacles) (2025-03-27): R2: the DMA notification dates it November 2024
   #   googl deepsense.ai (2025-07-25): R3: only a portion of technical staff hired; not founder/CEO/most of team
+  #   googl Upollo (2025-09-10): R3 not shown: its EU notice names a portion of its engineers and its product manager and a non-exclusive licence
   #   googl Atlantic Quantum (2025-10-02): R4: chips (quantum hardware)
   #   googl Intrinsic-Foxconn joint venture (Hon Chi International) (2025-11-20): R3: new JV, not a purchase of a company (control not stated); R4: industrial robotics hardware
   #   googl Intersect (Intersect Power) (2025-12-22): R4: power / data centres
   #   googl Hume AI (2026-01-22): R4: other AI model labs (voice/emotion models)
   #   googl Common Sense Machines (2026-01-23): R4: other AI model labs (3D generative models)
   #   googl Prestige LLC (2026-06-23): R3: unverified; no party confirmation found
+  #   googl Relay.app (2026-08): R3: its site says only that it shut down; no party confirms its team joined Google
   #   googl Mechanize (2026-09-11): R3: reported only; no party confirmation
   #   iren Mirantis (2026-05-05): R4: clouds (cloud-infrastructure / Kubernetes software and support for IREN's AI Cloud)
   #   meta FuriosaAI (2025-02-12): R3: talks only, offer (~$800M) rejected; R4: chips
   #   meta NFDG (Daniel Gross/Nat Friedman fund stake) (2025-06-19): R4: venture fund stake plus individual hires, not a company in the 14 sublayers; only sources, no party detail
   #   meta PlayAI (2025-07-11): R4: other AI model lab (voice/speech models; tracker classes ElevenLabs/Cartesia as neolabs)
   #   meta WaveForms (2025-08-08): R4: other AI model lab (audio/'emotional' voice models); party confirmation not found
+  #   meta Midjourney (licence) (2025-08-22): R3: a licence only; Midjourney says it stays independent and no team joins; R4: other AI model lab
   #   meta Rivos (2025-09-30): R4: chips (RISC-V accelerators)
+  #   meta Reliance Enterprise Intelligence (30% of a joint venture) (2026-02-25): R3: a minority stake in a joint venture Reliance controls
+  #   meta Confer (certain assets) (2026-03-16): R3: an asset purchase; Confer says it stays independent
   #   meta Assured Robot Intelligence (ARI) (2026-05-01): R4: robotics foundation-model lab (tracker classes Physical Intelligence/Skild as neolabs)
+  #   meta CRED (stake) (2026-06-22): R4: consumer fintech (the stake test is met: about a fifth bought, and its founder joined Meta)
+  #   meta AppsFlyer (stake) (2026-06-22): R3: a minority, non-controlling stake; R4: ad measurement
   #   meta Virtue AI (team) (2026-06-25): R3: co-founders and some staff hired; no payment, licence or acquisition on record; company site still operating - borderline
   #   minimax Luying Technology (Avolution.ai) (undated): R3: reported only, never confirmed by a party
+  #   mistral Ekimetrics (2026-01-28): R3: talks only; Ekimetrics denied a sale
+  #   mistral LE_VECTOR (2026-09-03): R3: a team move posted only on LinkedIn; nothing citable
   #   moonshot Unnamed Hong Kong-listed shell company (借壳上市) (undated): R3: reported only (and R4: a listed shell is not in any sublayer)
   #   msft Tumult Labs (2025-03-23): R4: differential-privacy / data-privacy software (security-type)
   #   msft Bluesky Data (2025-03-27): R4: Snowflake workload/cost optimisation (analytics), not AI; R3: one employee hired
   #   msft Robin AI (2025-12-04): R3: hired former employees; no purchase or payment
+  #   msft Ai2 researchers (2026): R3: individual hires from a non-profit
   #   msft Osmos (42Layers Corp) (2026-01-05): R4: data engineering / ETL for analytics (Fabric), closest to analytics databases
   #   msft Inception (Inception Labs) (2026-05-13): R3: talks only, never confirmed; R4: other AI model labs (diffusion LLMs)
   #   nbis AI21 Labs (2026-04-08): R3: talks only; R4: other AI model lab
+  #   nbis Decart (2026-08-10): R3: reported interest only; R4: other AI model lab
   #   nscale Future-tech (2025-12-15): R4: data centres (data-centre engineering consultancy)
   #   nscale American Intelligence & Power Corp (AIPCorp) (2026-03-16): R4: power / data-centre campus (Monarch Compute Campus)
   #   nvda Augtera Networks (2025-02-28): R4: networking (AIOps for network operations), outside the fourteen; also R3: no party statement found
   #   nvda Lepton AI (2025-04-07): R4: cloud (GPU-rental platform, relaunched as DGX Cloud Lepton compute marketplace); also R3: no party confirmation found
+  #   nvda Nexusflow (2025-06): R3: confirmed only by investors and a co-founder's page; R4: borderline, it trained its own models
   #   nvda CentML (2025-06-27): R3: reported only; Nvidia declined comment and the CEO did not respond; no party confirmation found
   #   nvda Solver (2025-09-02): R3: reported only (The Information); no party confirmation found
   #   nvda Enfabrica (2025-09-18): R4: networking (AI networking silicon); also R3: CNBC report citing people familiar, no party statement
-  #   nvda SchedMD (2025-12-15): R4: HPC/AI cluster workload manager (Slurm), compute-orchestration software outside the fourteen; borderline vs post_training 'ML training tooling'
+  #   nvda SchedMD (2025-12-15): R4: a general cluster and HPC workload manager (Slurm), which counts as compute
   #   nvda Groq (2025-12-24): R4: chips (LPU inference silicon)
   #   nvda AI21 Labs (2025-12-30): R3: talks only (never confirmed; AI21 denied, talks lapsed); R4: other AI model lab
   #   nvda Illumex (2026-02-23): R4: enterprise data management / semantic layer and metadata governance (analytics-data tooling), outside the fourteen; borderline vs agent_infra
@@ -3084,13 +3180,17 @@ observations:
   #   oklo ARMEC (2026-06-08): R4: non-AI (nuclear precision manufacturing)
   #   oklo Creative Engineers, Inc. (CEI) (2026-06-30): R4: non-AI (chemical process / liquid-metal engineering)
   #   openai Windsurf (Codeium) (2025-04-16): R3: reported ~$3B deal never confirmed by a party; collapsed July 2025
-  #   openai Crossing Minds (2025-06-26): R3: a team hire; the report states no deal with the company and it is not clear most of the team joined
-  #   openai Alex (Alex Codes) (2025-09-02): R3: a team hire; the report says OpenAI hired the team rather than buying the company
+  #   openai Operator (operator.xyz) (2025-11): R3 not shown: one co-founder's profile says OpenAI acquired it, the other did not join, and no page states it
   #   openai Thrive Holdings (stake) (2025-12-01): R3: minority stake taken for services, no money paid, no founder joins OpenAI
+  #   openai Convogo (2026-01-08): R3: OpenAI hired its founders but said it was not acquiring Convogo's IP or technology, and Hogan Assessments bought Convogo in July 2026
+  #   openai Merge Labs (stake) (2026-01-15): R3: a minority stake, no team joins; R4: brain-computer-interface research
+  #   openai Cline (2026-01-29): R3: Cline said it is operating and there was no transaction
   #   openai OpenClaw (Peter Steinberger) (2026-02-15): R3: individual hire; no company bought, project moved to an independent foundation, no payment on record
-  #   openai Weights.gg (2026-05-15): R3: reported only (NYT, anonymous sources); no party confirmation found
+  #   openai TensorPool (2026-07-02): R3: confirmed only by an investor; R4: GPU cloud
   #   openai Reve (2026-07-27): R4: other AI model lab (image generation); also R3 fails (company stays independent; only some researchers join)
+  #   openai Rain AI (patents) (2026-08-06): R3: patents only, reported; R4: chips
   #   openai Instant (InstantDB) (2026-08-22): R4: a database and backend for app builders, outside the fourteen sublayers (like DuckLabs)
+  #   openai Kairos Computer (2026-08-31): R3: its two co-founders joined; no party says the company's team joined or its product ended
   #   openai Glass Imaging (2026-09-14): R3/R2: reported only (WSJ, people familiar); neither party has confirmed
   #   orcl TikTok USDS Joint Venture LLC (15% stake) (2026-01-22): R3: joint purchase where no single buyer controls the vehicle (Oracle 15%); R4: social media
   #   runway Kinetix (2026-09-08): R4: other AI model labs
@@ -3106,6 +3206,7 @@ observations:
   #   voltage_park Lightning AI (2026-01-21): R3: merger with no identifiable buyer; combined company runs as Lightning AI under Lightning's founder-CEO
   #   xai Hotshot (2025-03-17): R4: other AI model lab (text-to-video foundation models; tracker classes Pika/Luma/Runway as neolabs)
   #   xai X Corp. (2025-03-28): R4: social media/media
+  #   xai Firebender (2026-03-15): R3: its founder joined; the product still runs
   #   xai Cursor (Anysphere) (2026-06-16): R1: buyer is SpaceX, xAI's parent (a lab's parent never stands in for the lab)
   #   xai Mesh Optical Technologies (2026-06-26): R1: buyer is Musk/SpaceX, not xAI; R4: networking hardware (optical transceivers)
   #   zhipu Beijing Hongzuan Technology Development Co., Ltd. (北京紅鑽科技發展) (2026-04-14): R4: non-technology business (property-holding company)

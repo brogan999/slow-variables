@@ -1259,7 +1259,7 @@ metrics:
     lead_lag: leading
     formula_version: 4
     inputs: ["acq.*.*.pt"]
-    caveats: "A floor. The ledger was searched under its written rule on 23 Sep 2026 for every buyer from 1 January 2025 (the rule, the searches and every deal considered and left out are at the head of its rows in seed/manual_observations.yaml); a quarter is read only once a sweep has covered it. Six deals met the rule but no citable page states them (five in 2025, one in 2026), so they are not counted. Acquihires surface late, so a sweep can add deals to quarters already read. Each deal counts from its earliest dated row. Undisclosed prices still count as events; deals by companies outside the buyer set (Stripe, Cloudflare, Cognition, Mercor) stay in the ledger uncounted."
+    caveats: "A floor. The ledger was searched under its written rule on 23 Sep 2026 for every buyer from 1 January 2025 (the rule, the searches and every deal considered and left out are at the head of its rows in seed/manual_observations.yaml); a quarter is read only once a sweep has covered it. Four deals met the rule but no citable page states them (three in 2025, one in 2026), so they are not counted. Acquihires surface late, so a sweep can add deals to quarters already read. Each deal counts from its earliest dated row. Undisclosed prices still count as events; deals by companies outside the buyer set (Stripe, Cloudflare, Cognition, Mercor) stay in the ledger uncounted."
     sql: |
       WITH buyers AS (SELECT DISTINCT entity_id FROM entity_membership WHERE is_primary AND layer_id IN ('model', 'compute_physical')),
       deals AS (

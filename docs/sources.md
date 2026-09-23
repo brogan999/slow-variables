@@ -20,11 +20,13 @@
 | arxiv_continual_feed | arXiv query feed - continual learning (watchlist) | arXiv | rss | 6 | daily | arXiv API terms | arXiv |
 | automation_anywhere | Automation Anywhere blog | Automation Anywhere | html | 7 | irregular | Automation Anywhere; short quotation | Automation Anywhere |
 | aws_blog | AWS Big Data Blog | Amazon Web Services | html | 4 | irregular | AWS; short quotation | AWS Big Data Blog |
+| aws_contact_center_blog | AWS Contact Center Blog | Amazon Web Services | html | 4 | irregular | AWS; short quotation | AWS Contact Center Blog |
 | baseten_blog | Baseten blog and research posts | Baseten | html | 7 | irregular | Baseten; short quotation | Baseten |
 | baseten_research_watch | Baseten research (page watch) | Baseten | html | 7 | weekly | Publisher terms; change notices only | Baseten |
 | bbd | Bick–Blandin–Deming Real-Time Population Survey (via FRED) | Federal Reserve Bank of St. Louis | csv | 6 | quarterly | FRED terms of use; RPS by Bick, Blandin & Deming | Bick, Blandin & Deming, Real-Time Population Survey, via FRED |
 | big_i | IndependentAgent.com | Independent Insurance Agents & Brokers of America | html | 5 | irregular | Short quotation | Independent Insurance Agents & Brokers of America, IndependentAgent.com |
 | bls | BLS productivity and costs; total factor productivity | U.S. Bureau of Labor Statistics | api | 4 | quarterly | Public domain (U.S. government) | U.S. Bureau of Labor Statistics, Productivity and Costs (PRS85006092/93, PRS85006173), Total Factor Productivity (MPU4910012) |
+| business_insider | Business Insider | Business Insider | html | 7 | irregular | Business Insider; short quotation | Business Insider |
 | cait | California AI-Unemployment Tracker (CAIT) | California Policy Lab with California EDD | csv | 6 | monthly | California Policy Lab; monthly claims workbook, cited as the Lab suggests | Hyman, von Wachter et al. (2026), Tracking AI-Related Job Loss Using Unemployment Insurance Claims Data in California, California Policy Lab |
 | calcalist_ctech | Calcalist Ctech | Calcalist | html | 7 | irregular | Calcalist; short quotation | Calcalist Ctech |
 | canaries | Canaries Dashboard data (by exposure) | Stanford Digital Economy Lab and ADP Research | csv | 6 | monthly | Stanford Digital Economy Lab; free public data, cited as the Lab asks | Stanford Digital Economy Lab and ADP Research, AI Economic Indicators: Canaries Dashboard |
@@ -32,6 +34,7 @@
 | census_btos | Census Business Trends and Outlook Survey | U.S. Census Bureau | csv | 4 | biweekly | Public domain (U.S. government) | U.S. Census Bureau, Business Trends and Outlook Survey |
 | cepr_voxeu | CEPR VoxEU columns (via Wayback; cepr.org 403s bots) | CEPR | html | 6 | irregular | CEPR; short quotation | CEPR VoxEU |
 | chicago_booth | Chicago Booth Center for Applied AI | University of Chicago Booth School of Business | html | 6 | irregular | Chicago Booth; short quotation | Chicago Booth |
+| cirrus_labs_site | Cirrus Labs website | Cirrus Labs | html | 4 | irregular | Cirrus Labs; short quotation | Cirrus Labs website |
 | claims_journal | Claims Journal | Wells Media Group | html | 5 | irregular | Claims Journal; short quotation | Claims Journal |
 | cleverhack_neolab_watch | cleverhack neolab directory (page watch) | cleverhack.com (Joy Larkin) | html | 7 | monthly | Publisher terms; change notices only | Joy Larkin, cleverhack.com |
 | clouded_judgment | Clouded Judgement (weekly cloud software multiples; retired 11 Sep 2026: the feed refuses cloud runners) | Jamin Ball / Altimeter | rss | 6 | weekly | Substack; figures quoted with attribution | Jamin Ball, Clouded Judgement |
@@ -90,6 +93,7 @@
 | humlum_pdf | Humlum working-paper PDFs (author site) | Anders Humlum | pdf | 6 | irregular | Author preprint; short quotation | Humlum & Vestergaard |
 | innolitics | Innolitics regulatory articles | Innolitics | html | 6 | irregular | Innolitics; short quotation | Innolitics |
 | insurance_journal | Insurance Journal | Wells Media Group | html | 5 | irregular | Insurance Journal; short quotation | Insurance Journal |
+| jams_site | Jams website | Potrero Labs | html | 4 | irregular | Potrero Labs; short quotation | Jams website |
 | koyeb_blog | Koyeb blog | Koyeb | html | 4 | irregular | Koyeb; short quotation | Koyeb blog |
 | leonis | The Thesis by Leonis | Leonis Capital | html | 6 | irregular | Substack; figures quoted with attribution | Leonis Capital, The Thesis |
 | limitless_site | Limitless website | Limitless | html | 4 | irregular | Limitless; short quotation | Limitless website |
@@ -145,11 +149,13 @@
 | suno_blog | Suno blog | Suno | html | 4 | irregular | Suno; short quotation | Suno blog |
 | techcrunch | TechCrunch | Yahoo Inc. | html | 7 | irregular | TechCrunch; short quotation | TechCrunch |
 | techcrunch_ai_feed | TechCrunch AI feed (watchlist) | Yahoo Inc. | rss | 5 | daily | Publisher terms; titles and links only | TechCrunch |
+| the_media_leader_fr | The Media Leader FR | Adwanted Media Solutions | html | 7 | irregular | The Media Leader; short quotation | The Media Leader FR (with AFP) |
 | theaiinsider | The AI Insider | Resonance | html | 5 | irregular | The AI Insider; short quotation | The AI Insider |
 | thinking_machines_blog | Thinking Machines Connectionism posts | Thinking Machines Lab | html | 7 | irregular | Thinking Machines; short quotation | Thinking Machines Lab |
 | thinking_machines_watch | Thinking Machines blog (page watch) | Thinking Machines Lab | html | 7 | weekly | Publisher terms; change notices only | Thinking Machines Lab |
 | time_magazine | TIME | TIME USA | html | 5 | irregular | TIME; short quotation | TIME |
 | transparency_coalition | Transparency Coalition reports | Transparency Coalition.AI | html | 6 | irregular | Transparency Coalition; short quotation | Transparency Coalition.AI |
+| weights_site | Weights website | Weights | html | 4 | irregular | Weights; short quotation | Weights website |
 | workshop_labs_blog | Workshop Labs blog | Workshop Labs | html | 4 | irregular | Workshop Labs; short quotation | Workshop Labs blog |
 | world_labs_blog | World Labs blog | World Labs | html | 4 | irregular | World Labs; short quotation | World Labs blog |
 | wustl_olin | WashU Olin Business School news | Washington University in St. Louis | html | 6 | irregular | WashU; short quotation | WashU Olin Business School |
