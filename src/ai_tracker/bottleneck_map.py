@@ -367,7 +367,7 @@ def from_store(
                 readings[f"series:{x['key']}"] = {**f, "label": x["label"]}
     firms = dict(
         s.con.execute(
-            "SELECT sublayer_id, count(DISTINCT entity_id) FROM entity_membership WHERE to_date IS NULL GROUP BY 1"
+            "SELECT sublayer_id, count(DISTINCT entity_id) FROM entity_membership WHERE to_date IS NULL AND is_primary GROUP BY 1"
         ).fetchall()
     )
     subs: dict[str, list[str]] = {}

@@ -6,15 +6,16 @@
  "band_input": "metric:open_weights_lag_months",
  "band_rationale": "Normal = open weights at least nine months behind, roughly a model generation; fast = three months or less, when a closed lead lasts about one release cycle. Between is emerging.",
  "band_value": {
-  "as_of": "2026-07-16",
+  "as_of": "2026-09-09",
   "high": null,
   "low": null,
   "obs_ids": [
+   "0d7f85d31686010b",
    "4a5ecf6f5e9ad21f",
    "da57bc3c9519e42e"
   ],
   "unit": "months",
-  "value": 4.369250985545335
+  "value": 6.176084099868594
  },
  "bucket_id": "methods",
  "cadence_expected": "monthly",
@@ -40,7 +41,7 @@
    "total": 0
   },
   "line": false,
-  "n_drawn": 24,
+  "n_drawn": 25,
   "needs": null,
   "partial": false,
   "stamps": [
@@ -51,17 +52,17 @@
     {
      "label": "2024",
      "minor": false,
-     "x": 17.24
+     "x": 16.52
     },
     {
      "label": "2025",
      "minor": false,
-     "x": 48.79
+     "x": 46.59
     },
     {
      "label": "2026",
      "minor": false,
-     "x": 80.26
+     "x": 76.58
     }
    ]
   },
@@ -105,11 +106,11 @@
  "confidence_basis": {
   "best_tier": 1,
   "grade": "A",
-  "n_observations": 34,
+  "n_observations": 35,
   "sources": [
    "Epoch AI benchmarks and Capabilities Index"
   ],
-  "stale_as_of": "2026-07-16"
+  "stale_as_of": null
  },
  "counterevidence": "One composite index run by one organisation; open releases often land after internal use, so the lag at release overstates how long the capability was closed; a Chinese lab's release depends on compute export rules as much as on methods.",
  "crosswalk": [
@@ -134,13 +135,13 @@
    "sublayer_id": null
   }
  ],
- "definition": "At each new open-weights record on Epoch's Capabilities Index, the months since a closed model first scored as high. Derived metric open_weights_lag_months; the time version of the open-vs-closed gap.",
+ "definition": "At each new open-weights record on Epoch's Capabilities Index, and at the newest model in Epoch's file, the months since a closed model first scored as high as the best open model to that date. Derived metric open_weights_lag_months; the time version of the open-vs-closed gap.",
  "derived": [
   {
    "as_of_date": "2023-07-18",
-   "computed_at": "2026-09-22T13:25:54.513323Z",
+   "computed_at": "2026-09-23T00:16:01.125056Z",
    "dims": {},
-   "formula_version": "1",
+   "formula_version": "2",
    "id": "bdc2ac2cd2d49515",
    "input_observation_ids": [
     "5288aeb3dd0f1540",
@@ -157,9 +158,9 @@
   },
   {
    "as_of_date": "2023-07-20",
-   "computed_at": "2026-09-22T13:25:54.513323Z",
+   "computed_at": "2026-09-23T00:16:01.125056Z",
    "dims": {},
-   "formula_version": "1",
+   "formula_version": "2",
    "id": "06be15f36c3b6a40",
    "input_observation_ids": [
     "5288aeb3dd0f1540",
@@ -176,9 +177,9 @@
   },
   {
    "as_of_date": "2023-11-02",
-   "computed_at": "2026-09-22T13:25:54.513323Z",
+   "computed_at": "2026-09-23T00:16:01.125056Z",
    "dims": {},
-   "formula_version": "1",
+   "formula_version": "2",
    "id": "e91f9a4f7b1f216e",
    "input_observation_ids": [
     "4feb2a78b05635ef",
@@ -195,9 +196,9 @@
   },
   {
    "as_of_date": "2023-12-11",
-   "computed_at": "2026-09-22T13:25:54.513323Z",
+   "computed_at": "2026-09-23T00:16:01.125056Z",
    "dims": {},
-   "formula_version": "1",
+   "formula_version": "2",
    "id": "2f2b216da368e490",
    "input_observation_ids": [
     "5288aeb3dd0f1540",
@@ -214,9 +215,9 @@
   },
   {
    "as_of_date": "2024-04-17",
-   "computed_at": "2026-09-22T13:25:54.513323Z",
+   "computed_at": "2026-09-23T00:16:01.125056Z",
    "dims": {},
-   "formula_version": "1",
+   "formula_version": "2",
    "id": "c33c021a7d892666",
    "input_observation_ids": [
     "5288aeb3dd0f1540",
@@ -233,9 +234,9 @@
   },
   {
    "as_of_date": "2024-04-18",
-   "computed_at": "2026-09-22T13:25:54.513323Z",
+   "computed_at": "2026-09-23T00:16:01.125056Z",
    "dims": {},
-   "formula_version": "1",
+   "formula_version": "2",
    "id": "1bc01992ee40a1c2",
    "input_observation_ids": [
     "320b1d080e4f9a45",
@@ -252,9 +253,9 @@
   },
   {
    "as_of_date": "2024-05-07",
-   "computed_at": "2026-09-22T13:25:54.513323Z",
+   "computed_at": "2026-09-23T00:16:01.125056Z",
    "dims": {},
-   "formula_version": "1",
+   "formula_version": "2",
    "id": "500ba798834f944d",
    "input_observation_ids": [
     "5288aeb3dd0f1540",
@@ -271,9 +272,9 @@
   },
   {
    "as_of_date": "2024-06-07",
-   "computed_at": "2026-09-22T13:25:54.513323Z",
+   "computed_at": "2026-09-23T00:16:01.125056Z",
    "dims": {},
-   "formula_version": "1",
+   "formula_version": "2",
    "id": "43560d4d76f149cb",
    "input_observation_ids": [
     "5288aeb3dd0f1540",
@@ -290,9 +291,9 @@
   },
   {
    "as_of_date": "2024-07-23",
-   "computed_at": "2026-09-22T13:25:54.513323Z",
+   "computed_at": "2026-09-23T00:16:01.125056Z",
    "dims": {},
-   "formula_version": "1",
+   "formula_version": "2",
    "id": "fe705d2e1eefc919",
    "input_observation_ids": [
     "7d6328da319bf63f",
@@ -309,9 +310,9 @@
   },
   {
    "as_of_date": "2024-09-19",
-   "computed_at": "2026-09-22T13:25:54.513323Z",
+   "computed_at": "2026-09-23T00:16:01.125056Z",
    "dims": {},
-   "formula_version": "1",
+   "formula_version": "2",
    "id": "57229f15d91500d7",
    "input_observation_ids": [
     "5f1d2054f14efcf8",
@@ -328,9 +329,9 @@
   },
   {
    "as_of_date": "2024-12-12",
-   "computed_at": "2026-09-22T13:25:54.513323Z",
+   "computed_at": "2026-09-23T00:16:01.125056Z",
    "dims": {},
-   "formula_version": "1",
+   "formula_version": "2",
    "id": "cb71a0a260422ec2",
    "input_observation_ids": [
     "dac3d9444956aa8f",
@@ -347,9 +348,9 @@
   },
   {
    "as_of_date": "2024-12-26",
-   "computed_at": "2026-09-22T13:25:54.513323Z",
+   "computed_at": "2026-09-23T00:16:01.125056Z",
    "dims": {},
-   "formula_version": "1",
+   "formula_version": "2",
    "id": "33fb7f75de4a3a8c",
    "input_observation_ids": [
     "8445390d748dca03",
@@ -366,9 +367,9 @@
   },
   {
    "as_of_date": "2025-01-20",
-   "computed_at": "2026-09-22T13:25:54.513323Z",
+   "computed_at": "2026-09-23T00:16:01.125056Z",
    "dims": {},
-   "formula_version": "1",
+   "formula_version": "2",
    "id": "1c6bb741f178c994",
    "input_observation_ids": [
     "0dcc8e2e00bc23ac",
@@ -385,9 +386,9 @@
   },
   {
    "as_of_date": "2025-04-28",
-   "computed_at": "2026-09-22T13:25:54.513323Z",
+   "computed_at": "2026-09-23T00:16:01.125056Z",
    "dims": {},
-   "formula_version": "1",
+   "formula_version": "2",
    "id": "f43063b2ac791695",
    "input_observation_ids": [
     "0dcc8e2e00bc23ac",
@@ -404,9 +405,9 @@
   },
   {
    "as_of_date": "2025-05-28",
-   "computed_at": "2026-09-22T13:25:54.513323Z",
+   "computed_at": "2026-09-23T00:16:01.125056Z",
    "dims": {},
-   "formula_version": "1",
+   "formula_version": "2",
    "id": "a84162280d36df27",
    "input_observation_ids": [
     "0dcc8e2e00bc23ac",
@@ -423,9 +424,9 @@
   },
   {
    "as_of_date": "2025-07-25",
-   "computed_at": "2026-09-22T13:25:54.513323Z",
+   "computed_at": "2026-09-23T00:16:01.125056Z",
    "dims": {},
-   "formula_version": "1",
+   "formula_version": "2",
    "id": "d71c4daaf93c2c3d",
    "input_observation_ids": [
     "11396c3f6bc1f782",
@@ -442,9 +443,9 @@
   },
   {
    "as_of_date": "2025-09-29",
-   "computed_at": "2026-09-22T13:25:54.513323Z",
+   "computed_at": "2026-09-23T00:16:01.125056Z",
    "dims": {},
-   "formula_version": "1",
+   "formula_version": "2",
    "id": "3487a7fe9111c54a",
    "input_observation_ids": [
     "7c20be705d40eea4",
@@ -461,9 +462,9 @@
   },
   {
    "as_of_date": "2025-11-06",
-   "computed_at": "2026-09-22T13:25:54.513323Z",
+   "computed_at": "2026-09-23T00:16:01.125056Z",
    "dims": {},
-   "formula_version": "1",
+   "formula_version": "2",
    "id": "4e6cbdc0f4eb1075",
    "input_observation_ids": [
     "06299522b386b574",
@@ -480,9 +481,9 @@
   },
   {
    "as_of_date": "2025-12-01",
-   "computed_at": "2026-09-22T13:25:54.513323Z",
+   "computed_at": "2026-09-23T00:16:01.125056Z",
    "dims": {},
-   "formula_version": "1",
+   "formula_version": "2",
    "id": "49c01167798508d4",
    "input_observation_ids": [
     "0247986df6beb18b",
@@ -499,9 +500,9 @@
   },
   {
    "as_of_date": "2026-01-27",
-   "computed_at": "2026-09-22T13:25:54.513323Z",
+   "computed_at": "2026-09-23T00:16:01.125056Z",
    "dims": {},
-   "formula_version": "1",
+   "formula_version": "2",
    "id": "5eb80e87316fc0c4",
    "input_observation_ids": [
     "419a9a57febb5dee",
@@ -518,9 +519,9 @@
   },
   {
    "as_of_date": "2026-04-07",
-   "computed_at": "2026-09-22T13:25:54.513323Z",
+   "computed_at": "2026-09-23T00:16:01.125056Z",
    "dims": {},
-   "formula_version": "1",
+   "formula_version": "2",
    "id": "9d424e2755392a04",
    "input_observation_ids": [
     "419a9a57febb5dee",
@@ -537,9 +538,9 @@
   },
   {
    "as_of_date": "2026-04-20",
-   "computed_at": "2026-09-22T13:25:54.513323Z",
+   "computed_at": "2026-09-23T00:16:01.125056Z",
    "dims": {},
-   "formula_version": "1",
+   "formula_version": "2",
    "id": "4a70f4ce02450fd9",
    "input_observation_ids": [
     "180de92690c54711",
@@ -556,9 +557,9 @@
   },
   {
    "as_of_date": "2026-06-16",
-   "computed_at": "2026-09-22T13:25:54.513323Z",
+   "computed_at": "2026-09-23T00:16:01.125056Z",
    "dims": {},
-   "formula_version": "1",
+   "formula_version": "2",
    "id": "a27d9fd09cb40b44",
    "input_observation_ids": [
     "a2a707169fba28a5",
@@ -575,9 +576,9 @@
   },
   {
    "as_of_date": "2026-07-16",
-   "computed_at": "2026-09-22T13:25:54.513323Z",
+   "computed_at": "2026-09-23T00:16:01.125056Z",
    "dims": {},
-   "formula_version": "1",
+   "formula_version": "2",
    "id": "8080cadec2d4e822",
    "input_observation_ids": [
     "4a5ecf6f5e9ad21f",
@@ -589,6 +590,27 @@
     "da57bc3c9519e42e"
    ],
    "value": 4.369250985545335,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2026-09-09",
+   "computed_at": "2026-09-23T00:16:01.125056Z",
+   "dims": {},
+   "formula_version": "2",
+   "id": "e45376fc982ec29e",
+   "input_observation_ids": [
+    "0d7f85d31686010b",
+    "4a5ecf6f5e9ad21f",
+    "da57bc3c9519e42e"
+   ],
+   "metric": "open_weights_lag_months",
+   "obs_ids": [
+    "0d7f85d31686010b",
+    "4a5ecf6f5e9ad21f",
+    "da57bc3c9519e42e"
+   ],
+   "value": 6.176084099868594,
    "value_high": null,
    "value_low": null
   }
@@ -607,21 +629,22 @@
  "grade": "A",
  "id": "open_weights_lag_months",
  "latest": {
-  "as_of": "2026-07-16",
-  "derived_id": "8080cadec2d4e822",
+  "as_of": "2026-09-09",
+  "derived_id": "e45376fc982ec29e",
   "dims": {},
   "obs_ids": [
+   "0d7f85d31686010b",
    "4a5ecf6f5e9ad21f",
    "da57bc3c9519e42e"
   ],
   "unit": "months",
-  "value": 4.369250985545335
+  "value": 6.176084099868594
  },
  "layer_id": "model",
  "leading_lagging": "leading",
  "metric": "open_weights_lag_months",
  "metric_dims": {},
- "n_observations": 34,
+ "n_observations": 35,
  "name": "Open-weights lag behind the closed frontier (months)",
  "normal_band": {
   "hi": null,
@@ -642,7 +665,7 @@
    "stamp": "measured",
    "unit": "months",
    "value": 4.139290407358739,
-   "x": 2.84,
+   "x": 2.79,
    "y": 72.4
   },
   {
@@ -657,7 +680,7 @@
    "stamp": "measured",
    "unit": "months",
    "value": 4.204993429697766,
-   "x": 3.02,
+   "x": 2.96,
    "y": 71.97
   },
   {
@@ -672,7 +695,7 @@
    "stamp": "measured",
    "unit": "months",
    "value": 7.654402102496714,
-   "x": 12.07,
+   "x": 11.59,
    "y": 48.97
   },
   {
@@ -687,7 +710,7 @@
    "stamp": "measured",
    "unit": "months",
    "value": 8.935611038107753,
-   "x": 15.43,
+   "x": 14.79,
    "y": 40.43
   },
   {
@@ -702,7 +725,7 @@
    "stamp": "measured",
    "unit": "months",
    "value": 13.140604467805518,
-   "x": 26.47,
+   "x": 25.31,
    "y": 12.4
   },
   {
@@ -717,7 +740,7 @@
    "stamp": "measured",
    "unit": "months",
    "value": 13.173455978975033,
-   "x": 26.55,
+   "x": 25.39,
    "y": 12.18
   },
   {
@@ -732,7 +755,7 @@
    "stamp": "measured",
    "unit": "months",
    "value": 13.797634691195794,
-   "x": 28.19,
+   "x": 26.95,
    "y": 8.02
   },
   {
@@ -747,7 +770,7 @@
    "stamp": "measured",
    "unit": "months",
    "value": 14.816031537450723,
-   "x": 30.86,
+   "x": 29.5,
    "y": 1.23
   },
   {
@@ -762,7 +785,7 @@
    "stamp": "measured",
    "unit": "months",
    "value": 2.3324572930354797,
-   "x": 34.83,
+   "x": 33.28,
    "y": 84.45
   },
   {
@@ -777,7 +800,7 @@
    "stamp": "measured",
    "unit": "months",
    "value": 2.9894875164257555,
-   "x": 39.83,
+   "x": 38.04,
    "y": 80.07
   },
   {
@@ -792,7 +815,7 @@
    "stamp": "measured",
    "unit": "months",
    "value": 2.9894875164257555,
-   "x": 47.07,
+   "x": 44.95,
    "y": 80.07
   },
   {
@@ -807,7 +830,7 @@
    "stamp": "measured",
    "unit": "months",
    "value": 3.4494086727989486,
-   "x": 48.28,
+   "x": 46.1,
    "y": 77.0
   },
   {
@@ -822,7 +845,7 @@
    "stamp": "measured",
    "unit": "months",
    "value": 1.1169513797634691,
-   "x": 50.43,
+   "x": 48.15,
    "y": 92.55
   },
   {
@@ -837,7 +860,7 @@
    "stamp": "measured",
    "unit": "months",
    "value": 4.336399474375821,
-   "x": 58.88,
+   "x": 56.2,
    "y": 71.09
   },
   {
@@ -852,7 +875,7 @@
    "stamp": "measured",
    "unit": "months",
    "value": 5.321944809461235,
-   "x": 61.47,
+   "x": 58.67,
    "y": 64.52
   },
   {
@@ -867,7 +890,7 @@
    "stamp": "measured",
    "unit": "months",
    "value": 3.8107752956636003,
-   "x": 66.47,
+   "x": 63.43,
    "y": 74.59
   },
   {
@@ -882,7 +905,7 @@
    "stamp": "measured",
    "unit": "months",
    "value": 5.45335085413929,
-   "x": 72.16,
+   "x": 68.86,
    "y": 63.64
   },
   {
@@ -897,7 +920,7 @@
    "stamp": "measured",
    "unit": "months",
    "value": 6.701708278580814,
-   "x": 75.43,
+   "x": 71.98,
    "y": 55.32
   },
   {
@@ -912,7 +935,7 @@
    "stamp": "measured",
    "unit": "months",
    "value": 7.522996057818659,
-   "x": 77.59,
+   "x": 74.03,
    "y": 49.85
   },
   {
@@ -927,7 +950,7 @@
    "stamp": "measured",
    "unit": "months",
    "value": 5.683311432325887,
-   "x": 82.5,
+   "x": 78.72,
    "y": 62.11
   },
   {
@@ -942,7 +965,7 @@
    "stamp": "measured",
    "unit": "months",
    "value": 7.982917214191852,
-   "x": 88.53,
+   "x": 84.47,
    "y": 46.78
   },
   {
@@ -957,7 +980,7 @@
    "stamp": "measured",
    "unit": "months",
    "value": 5.026281208935611,
-   "x": 89.66,
+   "x": 85.54,
    "y": 66.49
   },
   {
@@ -972,7 +995,7 @@
    "stamp": "measured",
    "unit": "months",
    "value": 6.898817345597897,
-   "x": 94.57,
+   "x": 90.22,
    "y": 54.01
   },
   {
@@ -987,8 +1010,24 @@
    "stamp": "measured",
    "unit": "months",
    "value": 4.369250985545335,
-   "x": 97.16,
+   "x": 92.69,
    "y": 70.87
+  },
+  {
+   "as_of": "2026-09-09",
+   "derived_id": "e45376fc982ec29e",
+   "dims": {},
+   "href": "#d-e45376fc982ec29e",
+   "obs_ids": [
+    "0d7f85d31686010b",
+    "4a5ecf6f5e9ad21f",
+    "da57bc3c9519e42e"
+   ],
+   "stamp": "measured",
+   "unit": "months",
+   "value": 6.176084099868594,
+   "x": 97.21,
+   "y": 58.83
   }
  ],
  "prediction_rows": [],
@@ -1012,17 +1051,35 @@
   "epoch_bench"
  ],
  "spark": {
-  "d": "M1.0,20.7 L5.1,20.6 L9.2,14.5 L13.3,12.3 L17.3,4.9 L21.4,4.9 L25.5,3.8 L29.6,2.0 L33.7,23.9 L37.8,22.7 L41.9,22.7 L46.0,21.9 L50.0,26.0 L54.1,20.4 L58.2,18.6 L62.3,21.3 L66.4,18.4 L70.5,16.2 L74.6,14.8 L78.7,18.0 L82.7,14.0 L86.8,19.2 L90.9,15.9 L95.0,20.3",
+  "d": "M1.0,20.6 L5.1,14.5 L9.2,12.3 L13.3,4.9 L17.3,4.9 L21.4,3.8 L25.5,2.0 L29.6,23.9 L33.7,22.7 L37.8,22.7 L41.9,21.9 L46.0,26.0 L50.0,20.4 L54.1,18.6 L58.2,21.3 L62.3,18.4 L66.4,16.2 L70.5,14.8 L74.6,18.0 L78.7,14.0 L82.7,19.2 L86.8,15.9 L90.9,20.3 L95.0,17.1",
   "end": [
    95.0,
-   20.3
+   17.1
   ]
  },
- "stale_as_of": "2026-07-16",
+ "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,
  "status": "emerging",
  "status_events": [
+  {
+   "author": "claude",
+   "counterevidence_considered": "One composite index run by one organisation; open releases often land after internal use, so the lag at release overstates how long a capability was closed.",
+   "created_at": "2026-09-23T00:10:09.543535Z",
+   "evidence_ids": [
+    "0d7f85d31686010b",
+    "4a5ecf6f5e9ad21f",
+    "da57bc3c9519e42e"
+   ],
+   "id": "e3cf6abebfd87a24",
+   "new_conf": 45,
+   "new_status": "emerging",
+   "old_conf": 45,
+   "old_status": "emerging",
+   "reason": "The lag is now read at the newest model in Epoch's file as well as at each open record: 6.2 months at 9 Sep 2026, since a closed model first matched the best open score, set by Kimi K3 on 16 Jul 2026, on 5 Mar 2026. The earlier reason quoted 4.4 months, the lag on the day of that record, which stayed frozen while the true lag grew. It sits between the fast band (3 months or less) and the normal band (9 months or more), so the status stays emerging.",
+   "target_id": "open_weights_lag_months",
+   "target_type": "indicator"
+  },
   {
    "author": "claude",
    "counterevidence_considered": null,
@@ -1043,7 +1100,7 @@
  ],
  "sublayer_id": "open_weight_labs",
  "timing_rationale": "Leading: an open model that matches the frontier arrives before prices and market shares in the model layer adjust to it.",
- "tracker_interpretation": "Read at open-weights records only, so a quiet quarter shows no reading even as the true lag widens; the ECI points gap on the capture lens is the companion reading.",
+ "tracker_interpretation": "Read at each open-weights record and at the newest model in Epoch's file, so the lag keeps growing through a stretch with no new record; the ECI points gap on the capture lens is the companion reading.",
  "unit": "months",
  "unpublished_reason": null,
  "updated_at": "2026-09-11",

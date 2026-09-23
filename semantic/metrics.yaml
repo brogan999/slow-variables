@@ -705,23 +705,33 @@ metrics:
     caveats: Six-ish points; list prices; the cheapest model at a fixed threshold is not the frontier.
     python: fits.loglinear
   open_weights_lag_months:
-    description: How far the open-weights frontier trails the closed one in time, on Epoch's Capabilities Index - at each new open-weights record, the months since a closed model first scored as high.
-    rationale: v2 Appendix A's open-weights lag; the time version of the open-vs-closed gap, so it reads in months rather than index points.
+    description: How far the open-weights frontier trails the closed one in time, on Epoch's Capabilities Index - at each new open-weights record, and at the newest row in Epoch's file, the months since a closed model first scored as high as the best open model to that date.
+    rationale: v2 Appendix A's open-weights lag; the time version of the open-vs-closed gap, so it reads in months rather than index points. v2 adds the reading at Epoch's newest row, because between records the lag keeps growing with the calendar and a reading frozen at the last record understates it.
     grain: [as_of_date]
     unit: months
     lead_lag: leading
-    formula_version: 1
+    formula_version: 2
     inputs: ["epoch_bench.*.eci_open.pt", "epoch_bench.*.eci_closed.pt"]
-    caveats: Measured only when the open frontier sets a record; between records the true lag grows with the calendar. A 30.44-day month. ECI carries its own confidence intervals.
+    caveats: The newest reading is dated by the newest model in Epoch's file, open or closed, and cites that row; it is skipped when a record falls on that date. A 30.44-day month. ECI carries its own confidence intervals.
     sql: |
       WITH o AS (SELECT as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'epoch_bench.%.eci_open.pt'),
       c AS (SELECT as_of_date, value_numeric AS v, id FROM observations WHERE series_key LIKE 'epoch_bench.%.eci_closed.pt'),
       daily AS (SELECT as_of_date, max(v) AS v, arg_max(id, v) AS id FROM o GROUP BY as_of_date),
       rec AS (SELECT d.* FROM daily d WHERE d.v > coalesce((SELECT max(v) FROM daily d2 WHERE d2.as_of_date < d.as_of_date), -1e9)),
-      m AS (SELECT r.as_of_date, r.id, (SELECT arg_min(c.id, c.as_of_date) FROM c WHERE c.v >= r.v) AS cid,
-                   (SELECT min(c.as_of_date) FROM c WHERE c.v >= r.v) AS cdate FROM rec r)
-      SELECT as_of_date, date_diff('day', cdate, as_of_date) / 30.44 AS value, [id, cid] AS obs_ids
+      rows AS (SELECT as_of_date, id FROM o UNION ALL SELECT as_of_date, id FROM c),
+      latest AS (SELECT max(as_of_date) AS d FROM rows),
+      pts AS (  -- the records, and one reading at the newest row unless a record already falls on that date
+        SELECT as_of_date, v, id, NULL AS dated_by FROM rec
+        UNION ALL
+        SELECT l.d, (SELECT max(v) FROM o WHERE o.as_of_date <= l.d), (SELECT arg_max(id, v) FROM o WHERE o.as_of_date <= l.d),
+               (SELECT min(id) FROM rows WHERE rows.as_of_date = l.d)
+        FROM latest l WHERE l.d NOT IN (SELECT as_of_date FROM rec)),
+      m AS (SELECT p.as_of_date, p.id, p.dated_by, (SELECT arg_min(c.id, c.as_of_date) FROM c WHERE c.v >= p.v) AS cid,
+                   (SELECT min(c.as_of_date) FROM c WHERE c.v >= p.v) AS cdate FROM pts p)
+      SELECT as_of_date, date_diff('day', cdate, as_of_date) / 30.44 AS value,
+             list_distinct(list_filter([id, cid, dated_by], x -> x IS NOT NULL)) AS obs_ids
       FROM m WHERE cdate IS NOT NULL AND cdate <= as_of_date
+      ORDER BY as_of_date
   customer_concentration:
     description: The largest direct customer's share of a filer's total revenue per fiscal quarter, from the customer-concentration facts in its 10-Q and 10-K (P1 §6, semis).
     rationale: A chokepoint's rent is only as durable as its buyers are many; a few buyers' capex plans can move it.
@@ -1037,17 +1047,23 @@ metrics:
             FROM q WINDOW w AS (ORDER BY as_of_date RANGE BETWEEN UNBOUNDED PRECEDING AND INTERVAL 1 YEAR PRECEDING))
       SELECT as_of_date, v / peak - 1 AS value, [id, peak_id] AS obs_ids FROM p WHERE peak IS NOT NULL
   custom_silicon_share:
-    description: Non-Nvidia designers' share of cumulative AI compute shipped, in H100-equivalents, at each complete quarter end (Epoch chip sales).
-    rationale: Custom silicon share is the leading indicator of Nvidia rent decay.
+    description: Non-Nvidia designers' share of cumulative AI compute shipped, in H100-equivalents, on each quarter end where every designer that has started reporting is present and at least three are (Epoch chip sales).
+    rationale: Custom silicon share is the leading indicator of Nvidia rent decay. v2 reads only full panels, as chip_designer_hhi does, because a quarter some designers have not yet reported makes the share appear to fall when nothing fell.
     grain: [as_of_date]
     unit: share
     lead_lag: leading
-    formula_version: 1
+    formula_version: 2
     inputs: ["epoch_chips.*.h100e_cumulative.pt"]
-    caveats: Epoch estimates with wide ranges; incomplete quarters skipped; Google TPUs are internal, not sold, so the share overstates merchant competition.
+    caveats: Epoch estimates with wide ranges; Epoch reports designers up to three quarters apart, so the newest full panel lags the newest partial one; Google TPUs are internal, not sold, so the share overstates merchant competition.
     sql: |
-      SELECT as_of_date, sum(CASE WHEN subject <> 'nvidia' THEN value_numeric ELSE 0 END) / sum(value_numeric) AS value, list(id ORDER BY id) AS obs_ids
-      FROM observations WHERE series_key LIKE 'epoch_chips.%.h100e_cumulative.pt' GROUP BY 1 HAVING count(*) >= 3
+      WITH x AS (SELECT subject, as_of_date, value_numeric AS v, id FROM observations
+                 WHERE source_ns = 'epoch_chips' AND measure = 'h100e_cumulative' AND NOT coalesce(disputed, false)),
+      first AS (SELECT subject, min(as_of_date) AS f FROM x GROUP BY 1),
+      need AS (SELECT d.as_of_date, count(*) AS n FROM (SELECT DISTINCT as_of_date FROM x) d JOIN first ON first.f <= d.as_of_date GROUP BY 1),
+      have AS (SELECT as_of_date, count(*) AS n, sum(v) AS tot, sum(v) FILTER (WHERE subject <> 'nvidia') AS other,
+                      list(id ORDER BY id) AS ids FROM x GROUP BY 1)
+      SELECT have.as_of_date, have.other / have.tot AS value, have.ids AS obs_ids
+      FROM have JOIN need USING (as_of_date) WHERE have.n = need.n AND have.n >= 3
   continual_learning_level:
     description: The highest ladder rung (Appendix E, L0-L6) with a shipped, production system on record, at each date a new production row lands.
     rationale: The return arrow made mechanical - if deployment data feeds weights automatically, the fourth-to-first-stage loop stops depending on human data vendors. The thesis rule 'strengthened' needs this at or below L4.
@@ -1241,20 +1257,21 @@ metrics:
     grain: [as_of_date]
     unit: count
     lead_lag: leading
-    formula_version: 2
+    formula_version: 3
     inputs: ["acq.*.*.pt"]
-    caveats: Only deals with a fetched announcement are counted; undisclosed prices still count as events; Stripe (a payments company) is in the ledger for the OpenRouter deal but, with no model or compute membership, is not counted.
+    caveats: "A floor: the ledger is kept by hand from fetched announcements and has gaps, so it undercounts, and it can rise with the care taken over it as well as with buying. Each deal counts from its earliest dated row, its announcement where one is on file. Only completed calendar quarters are read, and only those whose trailing year lies wholly after 1 January 2025; that date is a convention for when the ledger begins, not a fact about its coverage. Undisclosed prices still count as events; Stripe (a payments company) is in the ledger for the OpenRouter deal but, with no model or compute membership, is not counted."
     sql: |
       WITH buyers AS (SELECT DISTINCT entity_id FROM entity_membership WHERE is_primary AND layer_id IN ('model', 'compute_physical')),
       deals AS (
-        SELECT split_part(series_key, '.', 2) || '/' || split_part(series_key, '.', 3) AS deal, min(as_of_date) AS announced, list(id) AS ids
-        FROM observations WHERE series_key LIKE 'acq.%.pt' AND split_part(series_key, '.', 2) IN (SELECT entity_id FROM buyers) GROUP BY 1
-      ), qends AS (
-        SELECT DISTINCT (date_trunc('quarter', announced) + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE AS q FROM deals
-      )
-      SELECT q AS as_of_date, count(*) AS value, flatten(list(ids)) AS obs_ids
-      FROM qends JOIN deals ON deals.announced <= qends.q AND deals.announced > qends.q - INTERVAL 12 MONTH
-      GROUP BY q ORDER BY q
+        SELECT subject || '/' || measure AS deal, min(as_of_date) AS announced, list(id ORDER BY id) AS ids
+        FROM observations WHERE source_ns = 'acq' AND subject IN (SELECT entity_id FROM buyers) GROUP BY 1),
+      spine AS (  -- every completed calendar quarter from the ledger's start; the quarter under way is never read
+        SELECT (range + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE AS q
+        FROM range(DATE '2025-01-01', date_trunc('quarter', current_date)::DATE, INTERVAL 3 MONTH))
+      SELECT s.q AS as_of_date, count(*) AS value, flatten(list(d.ids ORDER BY d.deal)) AS obs_ids
+      FROM spine s JOIN deals d ON d.announced <= s.q AND d.announced > s.q - INTERVAL 12 MONTH
+      WHERE s.q - INTERVAL 12 MONTH >= DATE '2024-12-31'
+      GROUP BY s.q ORDER BY s.q
   neocloud_weighted_facility_rate:
     description: Simple average of the effective interest rates CoreWeave reports on its delayed-draw term-loan facilities at each quarter end.
     rationale: What the neocloud layer pays for capital; rising rates say the compute build is being financed at the margin by lenders who price it as risk.

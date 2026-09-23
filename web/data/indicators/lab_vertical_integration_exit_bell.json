@@ -9,34 +9,27 @@
   "high": null,
   "low": null,
   "obs_ids": [
+   "028c23aca616e732",
    "07e3555c39a96050",
    "129c29f7c904cd92",
    "323f4b23d02dc306",
    "63fe32e4118fa976",
    "8646dd26d8b7dcec",
+   "8a639fbc3195d799",
    "9ea06530e32d0e37",
    "d6dd36d1a3dc9f36",
    "d7e2c8855360a39c",
    "ef40bd94a06afa5d"
   ],
   "unit": "count",
-  "value": 9.0
+  "value": 11.0
  },
  "bucket_id": null,
  "cadence_expected": "quarterly",
  "chart": {
   "bands": [],
-  "change": {
-   "dead_band": "\u00b11",
-   "label": "+6",
-   "steps": "3 of 4 steps rose"
-  },
-  "dead": {
-   "height": 25.0,
-   "width": 94.32,
-   "x": 2.84,
-   "y": 75.0
-  },
+  "change": null,
+  "dead": null,
   "drawn": {
    "metric": "lab_vertical_integration_events_4q",
    "others": 1,
@@ -44,7 +37,7 @@
    "total": 1
   },
   "line": true,
-  "n_drawn": 5,
+  "n_drawn": 3,
   "needs": 5,
   "partial": false,
   "stamps": [
@@ -53,24 +46,14 @@
   "x": {
    "ticks": [
     {
-     "label": "Jul 2025",
-     "minor": false,
-     "x": 3.1
-    },
-    {
-     "label": "Oct",
-     "minor": false,
-     "x": 26.87
-    },
-    {
      "label": "2026",
      "minor": false,
-     "x": 50.65
+     "x": 3.14
     },
     {
      "label": "Apr",
      "minor": false,
-     "x": 73.9
+     "x": 50.26
     }
    ]
   },
@@ -79,23 +62,23 @@
    "log": false,
    "ticks": [
     {
-     "label": "2",
+     "label": "7",
      "y": 100.0
     },
     {
-     "label": "4",
+     "label": "8",
      "y": 75.0
     },
     {
-     "label": "6",
+     "label": "9",
      "y": 50.0
     },
     {
-     "label": "8",
+     "label": "10",
      "y": 25.0
     },
     {
-     "label": "10",
+     "label": "11",
      "y": 0.0
     }
    ],
@@ -134,6 +117,13 @@
     "org": "Yahoo Inc."
    },
    {
+    "attribution": "OpenAI",
+    "id": "openai_blog",
+    "license": "OpenAI; short quotation",
+    "name": "OpenAI research posts",
+    "org": "OpenAI"
+   },
+   {
     "attribution": "CoreWeave (company announcement)",
     "id": "coreweave_news",
     "license": "CoreWeave press release; short quotation",
@@ -146,115 +136,73 @@
  "confidence_basis": {
   "best_tier": 4,
   "grade": "A",
-  "n_observations": 20,
+  "n_observations": 23,
   "sources": [
    "About Amazon company news",
    "Anthropic newsroom",
    "CNBC",
    "CoreWeave newsroom",
    "Fortune",
+   "OpenAI research posts",
    "SEC EDGAR filings (8-K, 6-K, 10-Q exhibits)",
    "Stripe newsroom",
    "TechCrunch"
   ],
   "stale_as_of": null
  },
- "counterevidence": "The ledger holds what the press and filings announce; undisclosed prices count as events; Stripe is a payments company, in the ledger because OpenRouter is a routing layer.",
+ "counterevidence": "The ledger holds what the press and filings announce, and has gaps: two OpenAI purchases from late 2025 were added only in September 2026, so a rising count can reflect the care taken over the ledger as much as more buying. Undisclosed prices count as events; Stripe is a payments company, in the ledger because OpenRouter is a routing layer.",
  "crosswalk": [],
  "definition": "Distinct acquisitions or acquihires by AI labs and hyperscalers of application, tooling, data or infrastructure companies announced in the trailing four quarters, derived metric lab_vertical_integration_events_4q over the acquisition ledger (acq.<acquirer>.<target>.pt rows, each with a fetched announcement).",
  "derived": [
   {
-   "as_of_date": "2025-06-30",
-   "computed_at": "2026-09-22T13:25:54.513323Z",
-   "dims": {},
-   "formula_version": "2",
-   "id": "031c97c9ba26722b",
-   "input_observation_ids": [
-    "10c4c0b2d0426e32",
-    "5e4305fd8756819b",
-    "87066654f5416275",
-    "f94c91c13afa2caa"
-   ],
-   "metric": "lab_vertical_integration_events_4q",
-   "obs_ids": [
-    "10c4c0b2d0426e32",
-    "5e4305fd8756819b",
-    "87066654f5416275",
-    "f94c91c13afa2caa"
-   ],
-   "value": 3.0,
-   "value_high": null,
-   "value_low": null
-  },
-  {
-   "as_of_date": "2025-09-30",
-   "computed_at": "2026-09-22T13:25:54.513323Z",
-   "dims": {},
-   "formula_version": "2",
-   "id": "2b3c6d5c6a2c16a2",
-   "input_observation_ids": [
-    "10c4c0b2d0426e32",
-    "5e4305fd8756819b",
-    "8646dd26d8b7dcec",
-    "87066654f5416275",
-    "d6dd36d1a3dc9f36",
-    "f94c91c13afa2caa"
-   ],
-   "metric": "lab_vertical_integration_events_4q",
-   "obs_ids": [
-    "10c4c0b2d0426e32",
-    "5e4305fd8756819b",
-    "8646dd26d8b7dcec",
-    "87066654f5416275",
-    "d6dd36d1a3dc9f36",
-    "f94c91c13afa2caa"
-   ],
-   "value": 5.0,
-   "value_high": null,
-   "value_low": null
-  },
-  {
    "as_of_date": "2025-12-31",
-   "computed_at": "2026-09-22T13:25:54.513323Z",
+   "computed_at": "2026-09-23T00:16:01.125056Z",
    "dims": {},
-   "formula_version": "2",
+   "formula_version": "3",
    "id": "07a2140b23878346",
    "input_observation_ids": [
+    "028c23aca616e732",
     "10c4c0b2d0426e32",
     "129c29f7c904cd92",
+    "53b050220b2755dc",
     "5e4305fd8756819b",
     "8646dd26d8b7dcec",
     "87066654f5416275",
+    "8a639fbc3195d799",
     "d6dd36d1a3dc9f36",
     "f94c91c13afa2caa"
    ],
    "metric": "lab_vertical_integration_events_4q",
    "obs_ids": [
+    "028c23aca616e732",
     "10c4c0b2d0426e32",
     "129c29f7c904cd92",
+    "53b050220b2755dc",
     "5e4305fd8756819b",
     "8646dd26d8b7dcec",
     "87066654f5416275",
+    "8a639fbc3195d799",
     "d6dd36d1a3dc9f36",
     "f94c91c13afa2caa"
    ],
-   "value": 6.0,
+   "value": 8.0,
    "value_high": null,
    "value_low": null
   },
   {
    "as_of_date": "2026-03-31",
-   "computed_at": "2026-09-22T13:25:54.513323Z",
+   "computed_at": "2026-09-23T00:16:01.125056Z",
    "dims": {},
-   "formula_version": "2",
+   "formula_version": "3",
    "id": "db8b47f57a52e7f6",
    "input_observation_ids": [
+    "028c23aca616e732",
     "10c4c0b2d0426e32",
     "129c29f7c904cd92",
-    "5e4305fd8756819b",
     "63fe32e4118fa976",
     "8646dd26d8b7dcec",
     "87066654f5416275",
+    "8a639fbc3195d799",
     "d6dd36d1a3dc9f36",
     "d7e2c8855360a39c",
     "ef40bd94a06afa5d",
@@ -262,33 +210,36 @@
    ],
    "metric": "lab_vertical_integration_events_4q",
    "obs_ids": [
+    "028c23aca616e732",
     "10c4c0b2d0426e32",
     "129c29f7c904cd92",
-    "5e4305fd8756819b",
     "63fe32e4118fa976",
     "8646dd26d8b7dcec",
     "87066654f5416275",
+    "8a639fbc3195d799",
     "d6dd36d1a3dc9f36",
     "d7e2c8855360a39c",
     "ef40bd94a06afa5d",
     "f94c91c13afa2caa"
    ],
-   "value": 9.0,
+   "value": 10.0,
    "value_high": null,
    "value_low": null
   },
   {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-22T13:25:54.513323Z",
+   "computed_at": "2026-09-23T00:16:01.125056Z",
    "dims": {},
-   "formula_version": "2",
+   "formula_version": "3",
    "id": "5e8c00219959cbbf",
    "input_observation_ids": [
+    "028c23aca616e732",
     "07e3555c39a96050",
     "129c29f7c904cd92",
     "323f4b23d02dc306",
     "63fe32e4118fa976",
     "8646dd26d8b7dcec",
+    "8a639fbc3195d799",
     "9ea06530e32d0e37",
     "d6dd36d1a3dc9f36",
     "d7e2c8855360a39c",
@@ -296,17 +247,19 @@
    ],
    "metric": "lab_vertical_integration_events_4q",
    "obs_ids": [
+    "028c23aca616e732",
     "07e3555c39a96050",
     "129c29f7c904cd92",
     "323f4b23d02dc306",
     "63fe32e4118fa976",
     "8646dd26d8b7dcec",
+    "8a639fbc3195d799",
     "9ea06530e32d0e37",
     "d6dd36d1a3dc9f36",
     "d7e2c8855360a39c",
     "ef40bd94a06afa5d"
    ],
-   "value": 9.0,
+   "value": 11.0,
    "value_high": null,
    "value_low": null
   }
@@ -331,67 +284,31 @@
   "derived_id": "5e8c00219959cbbf",
   "dims": {},
   "obs_ids": [
+   "028c23aca616e732",
    "07e3555c39a96050",
    "129c29f7c904cd92",
    "323f4b23d02dc306",
    "63fe32e4118fa976",
    "8646dd26d8b7dcec",
+   "8a639fbc3195d799",
    "9ea06530e32d0e37",
    "d6dd36d1a3dc9f36",
    "d7e2c8855360a39c",
    "ef40bd94a06afa5d"
   ],
   "unit": "count",
-  "value": 9.0
+  "value": 11.0
  },
  "layer_id": "model",
  "leading_lagging": "leading",
  "metric": "lab_vertical_integration_events_4q",
  "metric_dims": {},
- "n_observations": 20,
+ "n_observations": 23,
  "name": "Lab vertical integration (acquisitions and acquihires, trailing four quarters)",
  "normal_band": null,
  "override_note": null,
  "pending": null,
  "points": [
-  {
-   "as_of": "2025-06-30",
-   "derived_id": "031c97c9ba26722b",
-   "dims": {},
-   "faint": false,
-   "href": "#d-031c97c9ba26722b",
-   "obs_ids": [
-    "10c4c0b2d0426e32",
-    "5e4305fd8756819b",
-    "87066654f5416275",
-    "f94c91c13afa2caa"
-   ],
-   "stamp": "reported",
-   "unit": "count",
-   "value": 3.0,
-   "x": 2.84,
-   "y": 87.5
-  },
-  {
-   "as_of": "2025-09-30",
-   "derived_id": "2b3c6d5c6a2c16a2",
-   "dims": {},
-   "faint": false,
-   "href": "#d-2b3c6d5c6a2c16a2",
-   "obs_ids": [
-    "10c4c0b2d0426e32",
-    "5e4305fd8756819b",
-    "8646dd26d8b7dcec",
-    "87066654f5416275",
-    "d6dd36d1a3dc9f36",
-    "f94c91c13afa2caa"
-   ],
-   "stamp": "reported",
-   "unit": "count",
-   "value": 5.0,
-   "x": 26.61,
-   "y": 62.5
-  },
   {
    "as_of": "2025-12-31",
    "derived_id": "07a2140b23878346",
@@ -399,19 +316,22 @@
    "faint": false,
    "href": "#d-07a2140b23878346",
    "obs_ids": [
+    "028c23aca616e732",
     "10c4c0b2d0426e32",
     "129c29f7c904cd92",
+    "53b050220b2755dc",
     "5e4305fd8756819b",
     "8646dd26d8b7dcec",
     "87066654f5416275",
+    "8a639fbc3195d799",
     "d6dd36d1a3dc9f36",
     "f94c91c13afa2caa"
    ],
    "stamp": "reported",
    "unit": "count",
-   "value": 6.0,
-   "x": 50.39,
-   "y": 50.0
+   "value": 8.0,
+   "x": 2.62,
+   "y": 75.0
   },
   {
    "as_of": "2026-03-31",
@@ -420,12 +340,13 @@
    "faint": false,
    "href": "#d-db8b47f57a52e7f6",
    "obs_ids": [
+    "028c23aca616e732",
     "10c4c0b2d0426e32",
     "129c29f7c904cd92",
-    "5e4305fd8756819b",
     "63fe32e4118fa976",
     "8646dd26d8b7dcec",
     "87066654f5416275",
+    "8a639fbc3195d799",
     "d6dd36d1a3dc9f36",
     "d7e2c8855360a39c",
     "ef40bd94a06afa5d",
@@ -433,9 +354,9 @@
    ],
    "stamp": "reported",
    "unit": "count",
-   "value": 9.0,
-   "x": 73.64,
-   "y": 12.5
+   "value": 10.0,
+   "x": 49.74,
+   "y": 25.0
   },
   {
    "as_of": "2026-06-30",
@@ -444,11 +365,13 @@
    "faint": false,
    "href": "#d-5e8c00219959cbbf",
    "obs_ids": [
+    "028c23aca616e732",
     "07e3555c39a96050",
     "129c29f7c904cd92",
     "323f4b23d02dc306",
     "63fe32e4118fa976",
     "8646dd26d8b7dcec",
+    "8a639fbc3195d799",
     "9ea06530e32d0e37",
     "d6dd36d1a3dc9f36",
     "d7e2c8855360a39c",
@@ -456,9 +379,9 @@
    ],
    "stamp": "reported",
    "unit": "count",
-   "value": 9.0,
-   "x": 97.16,
-   "y": 12.5
+   "value": 11.0,
+   "x": 97.38,
+   "y": 0.0
   }
  ],
  "prediction_rows": [],
@@ -593,6 +516,20 @@
   },
   {
    "points": [
+    {
+     "as_of": "2025-03-04",
+     "disputed": false,
+     "grade": "C",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "53b050220b2755dc"
+     ],
+     "series_key": "acq.crwv.weights_and_biases.pt",
+     "subject": "crwv",
+     "unit": "text",
+     "value": null
+    },
     {
      "as_of": "2025-05-05",
      "disputed": false,
@@ -741,6 +678,25 @@
   {
    "points": [
     {
+     "as_of": "2025-12-03",
+     "disputed": false,
+     "grade": "D",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "8a639fbc3195d799"
+     ],
+     "series_key": "acq.openai.neptune.pt",
+     "subject": "openai",
+     "unit": "text",
+     "value": null
+    }
+   ],
+   "series_key": "acq.openai.neptune.pt"
+  },
+  {
+   "points": [
+    {
      "as_of": "2026-06-11",
      "disputed": false,
      "grade": "C",
@@ -775,6 +731,25 @@
     }
    ],
    "series_key": "acq.openai.promptfoo.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2025-10-23",
+     "disputed": false,
+     "grade": "D",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "028c23aca616e732"
+     ],
+     "series_key": "acq.openai.sky.pt",
+     "subject": "openai",
+     "unit": "text",
+     "value": null
+    }
+   ],
+   "series_key": "acq.openai.sky.pt"
   },
   {
    "points": [
@@ -858,12 +833,13 @@
   "cnbc",
   "coreweave_news",
   "fortune",
+  "openai_blog",
   "sec_edgar_filings",
   "stripe_newsroom",
   "techcrunch"
  ],
  "spark": {
-  "d": "M1.0,26.0 L24.5,18.0 L48.0,14.0 L71.5,2.0 L95.0,2.0",
+  "d": "M1.0,26.0 L48.0,10.0 L95.0,2.0",
   "end": [
    95.0,
    2.0
@@ -872,8 +848,34 @@
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,
- "status": "concentrating",
+ "status": "not_yet_measurable",
  "status_events": [
+  {
+   "author": "claude",
+   "counterevidence_considered": "The ledger is kept by hand and has gaps, so its count is a floor; even five quarters inside it will compare a thinner 2025 with a fuller 2026 unless the ledger is searched again under a written rule.",
+   "created_at": "2026-09-23T00:10:09.543535Z",
+   "evidence_ids": [
+    "028c23aca616e732",
+    "07e3555c39a96050",
+    "129c29f7c904cd92",
+    "323f4b23d02dc306",
+    "63fe32e4118fa976",
+    "8646dd26d8b7dcec",
+    "8a639fbc3195d799",
+    "9ea06530e32d0e37",
+    "d6dd36d1a3dc9f36",
+    "d7e2c8855360a39c",
+    "ef40bd94a06afa5d"
+   ],
+   "id": "056913b55b6986d2",
+   "new_conf": 55,
+   "new_status": "not_yet_measurable",
+   "old_conf": 55,
+   "old_status": "concentrating",
+   "reason": "The count now reads only completed quarters whose trailing year lies wholly after 1 January 2025, when the ledger begins: 8 at 31 Dec 2025, 10 at 31 Mar 2026 and 11 at 30 Jun 2026. The direction rule compares five such quarters, so it cannot be read until the end of 2026. The earlier reading of concentrating compared counts of 3, 5, 6, 9 and 9, the first of them from windows that began before the ledger did. The check of 22 Sep 2026 also found two OpenAI purchases missing (Sky in October 2025, Neptune in December 2025) and Weights & Biases dated at its close rather than its announcement; all three are now in the ledger.",
+   "target_id": "lab_vertical_integration_exit_bell",
+   "target_type": "indicator"
+  },
   {
    "author": "claude",
    "counterevidence_considered": "The tally is kept by hand from fetched announcements, so it undercounts deals never announced and can rise with disclosure as much as with buying; the latest quarter added no deal; and the reading moved because a partial quarter left the window, not because a new deal arrived.",
@@ -951,7 +953,7 @@
  ],
  "sublayer_id": "frontier_labs",
  "timing_rationale": "Leading: an acquisition is announced before the acquired layer's economics change, so the count moves ahead of margins.",
- "tracker_interpretation": "Fifteen deals in the ledger, from Meta's $14.3B Scale stake and Google's $2.4B Windsurf licence to Nvidia's $12.9B Hugging Face purchase and Stripe's $7B-plus OpenRouter deal; the pace roughly doubled in 2026.",
+ "tracker_interpretation": "The ledger runs from Meta's stake in Scale AI and Google's Windsurf licence to Nvidia's purchase of Hugging Face. It is kept by hand and has gaps, so its count is a floor, and its trailing year is read only from the end of 2025, the first year lying wholly after the ledger's start; the direction rule waits for five such quarters.",
  "unit": "count",
  "unpublished_reason": null,
  "updated_at": "2026-09-10",
