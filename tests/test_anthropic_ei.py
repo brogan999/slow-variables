@@ -16,11 +16,11 @@ def test_raw_release_buckets_follow_anthropic_definition(raw):
         abs(rows[("anthropic_ei.global.automation_share.pt", date(2025, 11, 19))].value_numeric - 0.4673)
         < 0.001
     )
-    may = rows[("anthropic_ei.global.augmentation_share.pt", date(2026, 5, 31))]
+    may = rows[("anthropic_ei.global.augmentation_share.m", date(2026, 5, 31))]
     assert may.value_numeric == 0.5138  # the published bucket metric is used as-is
     # published bucket equals the mode sum normalised without `none`, so the two formats agree
     modes = {
-        k: rows[(f"anthropic_ei.global.mode_{k}_share.pt", date(2026, 5, 31))].value_numeric
+        k: rows[(f"anthropic_ei.global.mode_{k}_share.m", date(2026, 5, 31))].value_numeric
         for k in ("learning", "task_iteration", "validation", "none")
     }
     assert (
@@ -29,3 +29,12 @@ def test_raw_release_buckets_follow_anthropic_definition(raw):
         )
         < 0.002
     )
+
+
+def test_the_monthly_sample_never_shares_a_series_with_the_weekly_one(raw):
+    c = AnthropicEi()
+    names = ["anthropic_ei_raw.csv", "anthropic_ei_raw.csv", "anthropic_ei_monthly.csv"]
+    rows = c.extract([raw(n, u) for n, (_, u) in zip(names, FILES)])
+    monthly = {r.series_key for r in rows if r.url == FILES[2][1]}
+    weekly = {r.series_key for r in rows if r.url != FILES[2][1]}
+    assert monthly and weekly and all(k.endswith(".m") for k in monthly) and all(k.endswith(".pt") for k in weekly)

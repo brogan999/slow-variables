@@ -4,9 +4,9 @@
 
 ## Augmentation vs automation share (Anthropic Economic Index) (`aei_augmentation_share`)
 
-- Band input: `anthropic_ei.global.augmentation_share.pt` (share)
+- Band input: `anthropic_ei.global.augmentation_share.m` (share)
 - Rule: normal 0.5 to inf; fast -inf to 0.4; falsifying none. Normal = augmentation at least half of classified use; fast = automation clearly dominant (augmentation under 40%). Between is `emerging`.
-- Timing: Coincident: the report classifies conversations from its sampling week, published within weeks.
+- Timing: Coincident: each release classifies the conversations of the months it covers and is published within weeks of the last.
 
 ## Occupations with a quarter of their tasks using Claude (`aei_occupation_depth_25`)
 

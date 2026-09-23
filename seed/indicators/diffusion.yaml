@@ -894,27 +894,27 @@ indicators:
   - id: aei_augmentation_share
     source_cluster: anthropic_ei
     name: Augmentation vs automation share (Anthropic Economic Index)
-    definition: Share of classified Claude.ai conversations in the augmentation bucket (learning, task iteration, validation) versus automation (directive, feedback loop), computed from Anthropic's Economic Index open dataset for each 2026 release; the blog-reported shares and the share of occupations with at least a quarter of their tasks used are shown alongside.
+    definition: Share of classified conversations in the augmentation bucket (learning, task iteration, validation) versus automation (directive, feedback loop), computed from Anthropic's Economic Index open dataset. From its June 2026 release the dataset counts Claude chat and Cowork conversations by calendar month, where earlier releases sampled one week of Claude.ai conversations, so the monthly readings are a series of their own and the reading is the newest month; the weekly samples, the blog-reported shares and the share of occupations with at least a quarter of their tasks used are shown alongside.
     why_it_matters: The paper's bet is that AI diffuses as a tool people use, not a replacement; this is the only large-scale usage classification that speaks to it directly.
     proxy_types: [behaviour, product]
     unit: share
     cadence_expected: quarterly
-    series_keys: ["anthropic_ei.global.augmentation_share.pt", "anthropic_ei.global.automation_share.pt", "anthropic_ei.global.augmentation_share_reported.pt", "anthropic_ei.global.automation_share_reported.pt", "anthropic_ei.global.occupations_25pct_tasks_share.pt"]
-    band_input: anthropic_ei.global.augmentation_share.pt
+    series_keys: ["anthropic_ei.global.augmentation_share.m", "anthropic_ei.global.automation_share.m", "anthropic_ei.global.augmentation_share.pt", "anthropic_ei.global.automation_share.pt", "anthropic_ei.global.augmentation_share_reported.pt", "anthropic_ei.global.automation_share_reported.pt", "anthropic_ei.global.occupations_25pct_tasks_share.pt"]
+    band_input: anthropic_ei.global.augmentation_share.m
     bucket_id: early_adoption
     valve_measured: product_to_adoption
     normal_band: {lo: 0.5}
     fast_band: {hi: 0.4}
     band_rationale: "Normal = augmentation at least half of classified use; fast = automation clearly dominant (augmentation under 40%). Between is `emerging`."
-    tracker_interpretation: Augmentation has held just above half of classified use through the 2026 releases (53% in Nov 2025, 54% in Feb 2026, 51% in Apr-May 2026); automation is gaining slowly on the monthly data.
-    counterevidence: One provider's consumer product; classification is model-based; API usage (where automation concentrates) is reported separately and skews the other way.
+    tracker_interpretation: Augmentation has stayed just above half of classified use in every release. The monthly sample reads a little lower than the two weekly ones, but it counts other conversations (Cowork as well as chat, a whole month rather than one week), so the step between them is not a trend; the monthly series has two months so far.
+    counterevidence: One provider's consumer plans (chat and, from the June 2026 release, Cowork); classification is model-based; API usage (where automation concentrates) is reported separately and skews the other way.
     layer_id: adopters
     leading_lagging: coincident
-    timing_rationale: "Coincident: the report classifies conversations from its sampling week, published within weeks."
+    timing_rationale: "Coincident: each release classifies the conversations of the months it covers and is published within weeks of the last."
     confidence: 60
     related_indicators: [bbd_work_hours_assisted]
     published: true
-    updated_at: 2026-09-10
+    updated_at: 2026-09-22
   - id: labor_share_nonfarm
     name: US labour share of income, year on year
     definition: Year-on-year change in the BLS nonfarm business labor share index (PRS85006173), derived metric bls_labor_share_yoy. The share of output paid to labour rather than capital.

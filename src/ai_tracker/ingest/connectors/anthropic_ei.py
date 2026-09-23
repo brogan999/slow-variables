@@ -1,8 +1,10 @@
 """Anthropic Economic Index open dataset (Hugging Face): the augmentation/automation split of Claude.ai use.
 
-Provider-published usage classification: tier 2, company_stated. Two file formats:
-  raw weekly samples (Jan/Mar 2026 releases): facet=collaboration, variable=collaboration_pct, one row per mode
-  monthly aggregates (Jun 2026+): metric_id=collaboration_*_pct at category_name=overall
+Provider-published usage classification: tier 2, company_stated. Two file formats, two samples:
+  raw weekly samples (Jan/Mar 2026 releases): one week of Claude.ai conversations; facet=collaboration,
+    variable=collaboration_pct, one row per mode; series grain .pt
+  monthly aggregates (Jun 2026+): Claude chat and Cowork conversations by calendar month;
+    metric_id=collaboration_*_pct at category_name=overall; series grain .m, so the two samples never share a line
 Buckets follow Anthropic's definition: automation = directive + feedback loop; augmentation = learning +
 task iteration + validation; both normalised to classified conversations (the `none` share excluded),
 which is what the published `collaboration_bucket_*` metrics do. The raw files are 100-220 MB, so they are
@@ -21,7 +23,7 @@ import duckdb
 import httpx
 
 from ...schema import Basis, Extraction, Observation, Tier
-from ..base import CACHE, Connector, RawItem, expect, ua
+from ..base import CACHE, Connector, RawItem, expect, series_key, ua
 
 HF = "https://huggingface.co/datasets/Anthropic/EconomicIndex/resolve/main/"
 FILES = [
@@ -43,7 +45,12 @@ QUERY = {
 class AnthropicEi(Connector):
     source_id = "anthropic_ei"
     urls = [u for _, u in FILES]
-    expect_series = ["anthropic_ei.global.augmentation_share.pt", "anthropic_ei.global.automation_share.pt"]
+    expect_series = [
+        "anthropic_ei.global.augmentation_share.pt",
+        "anthropic_ei.global.automation_share.pt",
+        "anthropic_ei.global.augmentation_share.m",
+        "anthropic_ei.global.automation_share.m",
+    ]
 
     def fetch(self, day: date, refetch: bool = False) -> list[RawItem]:
         items: list[RawItem] = []
@@ -152,7 +159,7 @@ class AnthropicEi(Connector):
                     rows.append(
                         self.obs(
                             item,
-                            series_key=f"anthropic_ei.global.{name}.pt",
+                            series_key=series_key("anthropic_ei", "global", name, "m" if kind == "monthly" else "pt"),
                             unit="share",
                             as_of_date=as_of,
                             period_start=date.fromisoformat(start),

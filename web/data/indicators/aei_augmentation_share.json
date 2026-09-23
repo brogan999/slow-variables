@@ -3,14 +3,14 @@
   "Valve: Product \u2192 adoption",
   "Who keeps it: Adopters"
  ],
- "band_input": "anthropic_ei.global.augmentation_share.pt",
+ "band_input": "anthropic_ei.global.augmentation_share.m",
  "band_rationale": "Normal = augmentation at least half of classified use; fast = automation clearly dominant (augmentation under 40%). Between is `emerging`.",
  "band_value": {
   "as_of": "2026-05-31",
   "high": null,
   "low": null,
   "obs_ids": [
-   "3c4c0eb291611df7"
+   "93f0cbc341ac2f26"
   ],
   "unit": "share",
   "value": 0.5138
@@ -34,12 +34,12 @@
   "dead": null,
   "drawn": {
    "metric": null,
-   "others": 4,
-   "series": "anthropic_ei.global.augmentation_share.pt",
-   "total": 5
+   "others": 6,
+   "series": "anthropic_ei.global.augmentation_share.m",
+   "total": 7
   },
   "line": false,
-  "n_drawn": 4,
+  "n_drawn": 2,
   "needs": null,
   "partial": false,
   "stamps": [
@@ -48,14 +48,24 @@
   "x": {
    "ticks": [
     {
-     "label": "2026",
+     "label": "3 May 2026",
      "minor": false,
-     "x": 23.9
+     "x": 12.12
     },
     {
-     "label": "Apr",
+     "label": "10 May",
      "minor": false,
-     "x": 67.8
+     "x": 33.33
+    },
+    {
+     "label": "17 May",
+     "minor": false,
+     "x": 54.55
+    },
+    {
+     "label": "24 May",
+     "minor": false,
+     "x": 75.76
     }
    ]
   },
@@ -105,7 +115,7 @@
   ],
   "stale_as_of": null
  },
- "counterevidence": "One provider's consumer product; classification is model-based; API usage (where automation concentrates) is reported separately and skews the other way.",
+ "counterevidence": "One provider's consumer plans (chat and, from the June 2026 release, Cowork); classification is model-based; API usage (where automation concentrates) is reported separately and skews the other way.",
  "crosswalk": [
   {
    "bucket_id": "early_adoption",
@@ -127,7 +137,7 @@
    "sublayer_id": null
   }
  ],
- "definition": "Share of classified Claude.ai conversations in the augmentation bucket (learning, task iteration, validation) versus automation (directive, feedback loop), computed from Anthropic's Economic Index open dataset for each 2026 release; the blog-reported shares and the share of occupations with at least a quarter of their tasks used are shown alongside.",
+ "definition": "Share of classified conversations in the augmentation bucket (learning, task iteration, validation) versus automation (directive, feedback loop), computed from Anthropic's Economic Index open dataset. From its June 2026 release the dataset counts Claude chat and Cowork conversations by calendar month, where earlier releases sampled one week of Claude.ai conversations, so the monthly readings are a series of their own and the reading is the newest month; the weekly samples, the blog-reported shares and the share of occupations with at least a quarter of their tasks used are shown alongside.",
  "derived": [],
  "direction": null,
  "direction_readings": null,
@@ -149,9 +159,9 @@
   "high": null,
   "low": null,
   "obs_ids": [
-   "3c4c0eb291611df7"
+   "93f0cbc341ac2f26"
   ],
-  "series_key": "anthropic_ei.global.augmentation_share.pt",
+  "series_key": "anthropic_ei.global.augmentation_share.m",
   "subject": "global",
   "unit": "share",
   "value": 0.5138
@@ -170,57 +180,21 @@
  "pending": null,
  "points": [
   {
-   "as_of": "2025-11-19",
-   "disputed": false,
-   "grade": "B",
-   "high": null,
-   "href": "/series/anthropic_ei.global.augmentation_share.pt#713109bb8bd3873e",
-   "low": null,
-   "obs_ids": [
-    "713109bb8bd3873e"
-   ],
-   "series_key": "anthropic_ei.global.augmentation_share.pt",
-   "stamp": "reported",
-   "subject": "global",
-   "unit": "share",
-   "value": 0.5326,
-   "x": 2.93,
-   "y": 11.23
-  },
-  {
-   "as_of": "2026-02-11",
-   "disputed": false,
-   "grade": "B",
-   "high": null,
-   "href": "/series/anthropic_ei.global.augmentation_share.pt#22c1000f899dffdd",
-   "low": null,
-   "obs_ids": [
-    "22c1000f899dffdd"
-   ],
-   "series_key": "anthropic_ei.global.augmentation_share.pt",
-   "stamp": "reported",
-   "subject": "global",
-   "unit": "share",
-   "value": 0.5445,
-   "x": 43.9,
-   "y": 9.25
-  },
-  {
    "as_of": "2026-04-30",
    "disputed": false,
    "grade": "B",
    "high": null,
-   "href": "/series/anthropic_ei.global.augmentation_share.pt#73edeb921df0ec08",
+   "href": "/series/anthropic_ei.global.augmentation_share.m#0e523d323e77e2ac",
    "low": null,
    "obs_ids": [
-    "73edeb921df0ec08"
+    "0e523d323e77e2ac"
    ],
-   "series_key": "anthropic_ei.global.augmentation_share.pt",
+   "series_key": "anthropic_ei.global.augmentation_share.m",
    "stamp": "reported",
    "subject": "global",
    "unit": "share",
    "value": 0.5102,
-   "x": 81.95,
+   "x": 3.03,
    "y": 14.97
   },
   {
@@ -228,17 +202,17 @@
    "disputed": false,
    "grade": "B",
    "high": null,
-   "href": "/series/anthropic_ei.global.augmentation_share.pt#3c4c0eb291611df7",
+   "href": "/series/anthropic_ei.global.augmentation_share.m#93f0cbc341ac2f26",
    "low": null,
    "obs_ids": [
-    "3c4c0eb291611df7"
+    "93f0cbc341ac2f26"
    ],
-   "series_key": "anthropic_ei.global.augmentation_share.pt",
+   "series_key": "anthropic_ei.global.augmentation_share.m",
    "stamp": "reported",
    "subject": "global",
    "unit": "share",
    "value": 0.5138,
-   "x": 97.07,
+   "x": 96.97,
    "y": 14.37
   }
  ],
@@ -258,6 +232,39 @@
  "related_metrics": [],
  "related_predictions": [],
  "series": [
+  {
+   "points": [
+    {
+     "as_of": "2026-04-30",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "0e523d323e77e2ac"
+     ],
+     "series_key": "anthropic_ei.global.augmentation_share.m",
+     "subject": "global",
+     "unit": "share",
+     "value": 0.5102
+    },
+    {
+     "as_of": "2026-05-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "93f0cbc341ac2f26"
+     ],
+     "series_key": "anthropic_ei.global.augmentation_share.m",
+     "subject": "global",
+     "unit": "share",
+     "value": 0.5138
+    }
+   ],
+   "series_key": "anthropic_ei.global.augmentation_share.m"
+  },
   {
    "points": [
     {
@@ -287,34 +294,6 @@
      "subject": "global",
      "unit": "share",
      "value": 0.5445
-    },
-    {
-     "as_of": "2026-04-30",
-     "disputed": false,
-     "grade": "B",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "73edeb921df0ec08"
-     ],
-     "series_key": "anthropic_ei.global.augmentation_share.pt",
-     "subject": "global",
-     "unit": "share",
-     "value": 0.5102
-    },
-    {
-     "as_of": "2026-05-31",
-     "disputed": false,
-     "grade": "B",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "3c4c0eb291611df7"
-     ],
-     "series_key": "anthropic_ei.global.augmentation_share.pt",
-     "subject": "global",
-     "unit": "share",
-     "value": 0.5138
     }
    ],
    "series_key": "anthropic_ei.global.augmentation_share.pt"
@@ -337,6 +316,39 @@
     }
    ],
    "series_key": "anthropic_ei.global.augmentation_share_reported.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-04-30",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "8141f1e19bbda7b0"
+     ],
+     "series_key": "anthropic_ei.global.automation_share.m",
+     "subject": "global",
+     "unit": "share",
+     "value": 0.4898
+    },
+    {
+     "as_of": "2026-05-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "68b53c47051ef8be"
+     ],
+     "series_key": "anthropic_ei.global.automation_share.m",
+     "subject": "global",
+     "unit": "share",
+     "value": 0.4862
+    }
+   ],
+   "series_key": "anthropic_ei.global.automation_share.m"
   },
   {
    "points": [
@@ -367,34 +379,6 @@
      "subject": "global",
      "unit": "share",
      "value": 0.4555
-    },
-    {
-     "as_of": "2026-04-30",
-     "disputed": false,
-     "grade": "B",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "372c9bb1c4325550"
-     ],
-     "series_key": "anthropic_ei.global.automation_share.pt",
-     "subject": "global",
-     "unit": "share",
-     "value": 0.4898
-    },
-    {
-     "as_of": "2026-05-31",
-     "disputed": false,
-     "grade": "B",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "f0f4ba8663dc674d"
-     ],
-     "series_key": "anthropic_ei.global.automation_share.pt",
-     "subject": "global",
-     "unit": "share",
-     "value": 0.4862
     }
    ],
    "series_key": "anthropic_ei.global.automation_share.pt"
@@ -439,6 +423,8 @@
   }
  ],
  "series_keys": [
+  "anthropic_ei.global.augmentation_share.m",
+  "anthropic_ei.global.automation_share.m",
   "anthropic_ei.global.augmentation_share.pt",
   "anthropic_ei.global.automation_share.pt",
   "anthropic_ei.global.augmentation_share_reported.pt",
@@ -450,10 +436,10 @@
   "anthropic_ei"
  ],
  "spark": {
-  "d": "M1.0,10.3 L32.3,2.0 L63.7,26.0 L95.0,23.5",
+  "d": "M1.0,26.0 L95.0,2.0",
   "end": [
    95.0,
-   23.5
+   2.0
   ]
  },
  "stale_as_of": null,
@@ -461,6 +447,23 @@
  "stale_reason": null,
  "status": "emerging",
  "status_events": [
+  {
+   "author": "claude",
+   "counterevidence_considered": "April read 51.0% on the same monthly sample, so both monthly readings sit just above the edge; the weekly samples' 53.3% and 54.5% counted other conversations and are not a trend against them. One provider's consumer plans, classified by a model.",
+   "created_at": "2026-09-23T00:55:42.953312Z",
+   "evidence_ids": [
+    "0e523d323e77e2ac",
+    "93f0cbc341ac2f26"
+   ],
+   "id": "38644e153e823ae5",
+   "new_conf": 60,
+   "new_status": "emerging",
+   "old_conf": 60,
+   "old_status": "emerging",
+   "reason": "The Economic Index's monthly readings now sit on a series of their own: from its June 2026 release the dataset counts Claude chat and Cowork conversations by calendar month, where earlier releases sampled one week of Claude.ai conversations, so the two are no longer drawn as one line. The reading is unchanged: augmentation is 51.4% of classified conversations in May 2026, within 5% of the normal band's edge at 50%, so the band-edge rule still holds the status at emerging.",
+   "target_id": "aei_augmentation_share",
+   "target_type": "indicator"
+  },
   {
    "author": "claude",
    "counterevidence_considered": "The three earlier waves read 53.3%, 54.5% and 51.0%, so the series has stayed above the edge rather than crossing it, and the value is unchanged on the card and the series page. What the rule denies is a scored status this close to the line, not the reading itself.",
@@ -495,11 +498,11 @@
   }
  ],
  "sublayer_id": null,
- "timing_rationale": "Coincident: the report classifies conversations from its sampling week, published within weeks.",
- "tracker_interpretation": "Augmentation has held just above half of classified use through the 2026 releases (53% in Nov 2025, 54% in Feb 2026, 51% in Apr-May 2026); automation is gaining slowly on the monthly data.",
+ "timing_rationale": "Coincident: each release classifies the conversations of the months it covers and is published within weeks of the last.",
+ "tracker_interpretation": "Augmentation has stayed just above half of classified use in every release. The monthly sample reads a little lower than the two weekly ones, but it counts other conversations (Cowork as well as chat, a whole month rather than one week), so the step between them is not a trend; the monthly series has two months so far.",
  "unit": "share",
  "unpublished_reason": null,
- "updated_at": "2026-09-10",
+ "updated_at": "2026-09-22",
  "valve_measured": "product_to_adoption",
  "why_it_matters": "The paper's bet is that AI diffuses as a tool people use, not a replacement; this is the only large-scale usage classification that speaks to it directly."
 }
