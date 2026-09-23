@@ -65,11 +65,12 @@ function Reading({ r }: { r: MapReading }) {
 
 function Row({ r, stages }: { r: MapRow; stages: MapDoc["stages"] }) {
   return (
-    <tr className="align-top">
+    <tr className="align-top" data-focus={r.focus ? "1" : "0"}>
       <th scope="row" className="text-left min-w-[11rem]">
         <a href={`#why-${r.id}`} className="font-sans font-semibold text-[14px] text-ink hover:underline underline-offset-2 decoration-grid">{r.name}</a>
         {r.sublayer ? <span className="block text-[11px] text-muted">{r.sublayer.name}</span> : null}
         <Reading r={r.reading} />
+        {r.focus ? <span className="block text-[11px] text-ink-2">{r.focus === "both" ? "Binding now, and predicted to bind" : r.focus === "now" ? "Binding now" : "Predicted to bind"}</span> : null}
         <span className="sm:hidden mt-1.5 flex flex-wrap gap-x-3 gap-y-1">
           {stages.map((s) => <span key={s.id} className="inline-flex items-center gap-1"><span aria-hidden className="num text-[11px] text-muted">{s.n}</span><span className="sr-only">{s.label}:</span><Cell c={r.cells[s.id]} /></span>)}
         </span>
@@ -81,6 +82,7 @@ function Row({ r, stages }: { r: MapRow; stages: MapDoc["stages"] }) {
 
 export function BottleneckMap({ doc }: { doc: MapDoc }) {
   return (
+    <div className="map-focus">
     <Figure
       title="Where AI is held up, and at which stage"
       note="today's reading once per row · a row's name opens why"
@@ -95,6 +97,10 @@ export function BottleneckMap({ doc }: { doc: MapDoc }) {
         <p>Narayanan and Kapoor are computer scientists at Princeton who argue that AI will spread slowly, like earlier general-purpose technologies, because of barriers outside the models. The National Bureau of Economic Research is a network of American economists; its 2026 volume on transformative AI adds the last four rows.</p>
       </>}
     >
+      <label className="mb-3 inline-flex items-center gap-2 text-sm text-ink cursor-pointer">
+        <input id="map-focus" type="checkbox" className="h-4 w-4 accent-[var(--ink)]" />
+        Show only what binds now (scored tight or severe) or a writer expects to bind
+      </label>
       <p className="sm:hidden text-[12px] text-ink-2 mb-2">The stages, numbered: {doc.stages.map((s, i) => <span key={s.id}>{i ? ", " : ""}<span className="num">{s.n}</span> {s.label.toLowerCase()}</span>)}.</p>
       <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="The bottleneck map, as a table">
         <table className="data w-full [&_th]:max-sm:px-2">
@@ -105,7 +111,7 @@ export function BottleneckMap({ doc }: { doc: MapDoc }) {
             </tr>
           </thead>
           {doc.groups.map((g) => g.sections.filter((sec) => sec.rows.length).map((sec) => (
-            <tbody key={`${g.id}-${sec.id}`}>
+            <tbody key={`${g.id}-${sec.id}`} data-focus={sec.rows.some((r) => r.focus) ? "1" : "0"}>
               <tr><th scope="rowgroup" colSpan={doc.stages.length + 1} className="text-left pt-4!"><span className="block font-sans text-[12px] text-ink">{g.label}: {sec.name}</span></th></tr>
               {sec.rows.map((r) => <Row key={r.id} r={r} stages={doc.stages} />)}
             </tbody>
@@ -113,6 +119,7 @@ export function BottleneckMap({ doc }: { doc: MapDoc }) {
         </table>
       </div>
     </Figure>
+    </div>
   );
 }
 

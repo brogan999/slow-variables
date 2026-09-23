@@ -116,3 +116,6 @@ main { counter-reset: fig; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
 
 .overflow-x-auto { position: relative; } /* absolutely positioned sr-only text inside a scroller must be clipped by it */
+
+/* The bottleneck map's filter: with the box ticked, rows (and whole sections) the export does not flag are hidden. */
+.map-focus:has(#map-focus:checked) [data-focus="0"] { display: none; }
