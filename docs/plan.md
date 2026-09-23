@@ -584,3 +584,37 @@ Known limits:
 - The exit bell reads its direction only after five searched quarters, so from the sweep after the end of 2026.
 - Each quarter's sweep is run by hand. In between, the Monday watchlist names candidates from TechCrunch, Crunchbase News and 8-K Item 2.01.
 - A few dates inside a quarter are a few days off their first confirmation (WavTool, Cove, Bun). XCore Sigma's Q3 date is unconfirmed. None of these moves a reading.
+
+## Part 14 status (23 Sep 2026): every prediction on one board, and in the database
+
+The owner shared the Grand Theory page and asked three things:
+- whether every major prediction in his sources was on the site;
+- how the predictions would be shown, simply;
+- how they would reach a database that informs the rest of the work.
+
+Most of the page was already on the site, since Part 11 was built from it. What was missing were his own notes, the page's scoreboard items and its whole-structure falsifiers.
+
+What shipped (#67):
+- **Fifteen claims on `/outlook`, each with its source fetched.** Examples include:
+  - pretraining progress rests on data (Dwarkesh Patel);
+  - every firm gets its own model (Nadella);
+  - software engineering jobs hold (Narayanan and Kapoor);
+  - inference moves to the edge (Paik);
+  - training a firm's own model gets cheaper (Cai, from a free post);
+  - buyers sign up for capacity ahead of use (tested against Microsoft's backlog);
+  - AI products keep lower margins than classic software (tested against ICONIQ's survey);
+  - governments take stakes, insurers sell AI cover, and AI gets taxed (Korinek and Lockwood).
+- **The owner's own ideas are published as this site's claims.** They are reworded, never quoted from his notes.
+- **A new exit, `real_wages_fall`.** It reads the typical worker's real pay below its end-2022 level in four consecutive quarters while output grows. Restrepo finds workers' total pay never falls below its pre-AI level unless something, such as market power over computing, gets in the way; the typical worker's pay is the nearest measure the site reads.
+- **`/predictions` is now one board.** All 79 predictions (the dated ledger, outlook claims, migration predictions and exits) are grouped by folio. Each carries one of five words: Happening, Not happening, Slower than said, Both sides expect this, Too early to tell. The mapping is printed on the page.
+- **A `predictions` table in the query service,** so Ask and `/query` can join each prediction to the reading and records behind it.
+- **The ten capability questions** are shown with the instrument for each, or "no public test".
+
+Judgement calls:
+- The owner's notes are published as this site's claims.
+- Three claims were narrowed to what their sources and data support: the data-drives-pretraining finding (small models only), the contracts claim (this site's reading of Microsoft's backlog, not Athey and Scott Morton's), and chip concentration (left untested, because the measure covers only NVIDIA and AMD).
+- The "labs become the standard exit" test waits for a year-ago swept quarter.
+- Claims no series can test carry a falsifier and read "too early".
+
+Known limits:
+- About two thirds of the board is "too early to tell". Most new claims name an outcome no public series measures yet: on-device inference share, AI insurance premiums, AI-specific taxes and causal reasoning.

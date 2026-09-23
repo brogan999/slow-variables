@@ -29,6 +29,11 @@ facts:
   chips_gp_share: {indicator: gross_profit_semis_share, max_age_days: 200}
   capex_to_revenue: {metric: capex_to_revenue_stack, max_age_days: 200, expect: {gt: 1}}
 
+  lab_deals_now: {metric: lab_vertical_integration_events_4q, max_age_days: 200}
+  lab_deals_year_ago: {metric: lab_vertical_integration_events_4q, pick: year_ago}
+  msft_backlog: {metric: rpo_to_trailing_revenue, dims: {entity: msft}, max_age_days: 200}
+  msft_backlog_year_ago: {metric: rpo_to_trailing_revenue, dims: {entity: msft}, pick: year_ago}
+  ai_app_margin: {series: iconiq.ai_products.gross_margin.fy, max_age_days: 500}
 sources:
   # I · capability
   - id: ai_2027
@@ -649,6 +654,85 @@ sources:
     http_status: 200
     content_hash: 10fbb9d5daa4c69200c478f079de44e305aaf444683cc9e22dbff61ae99f348d
 
+  - id: dwarkesh_data
+    who: Dwarkesh Patel and Jerry Han
+    field: a podcaster who interviews AI researchers and a researcher working with him, who trained small models on each year's recipes and data
+    finding: In small models trained on each year's recipes from 2019 to 2025, most of the gain in how much a model learns per unit of computing came from better training data rather than better designs; whether that holds for the largest models, and whether data made by machines can keep it going, they leave open.
+    work: Pretraining progress is mostly coming from data
+    venue: the Dwarkesh Podcast blog
+    year: 2026
+    url: https://www.dwarkesh.com/p/pretraining-progress-is-mostly-data
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: ee4fa5f95f8f36ab4dc36832a2366d2a36dfbdeb10d42d15c67d57a6d187e53e
+  - id: nadella_models
+    who: Satya Nadella
+    field: the chief executive of Microsoft, which sells access to many labs' models on its cloud
+    finding: Every company should build AI models fitted to its own business rather than lean on a few labs, because a firm is a system that learns.
+    work: Microsoft's Satya Nadella says every company should build its own AI model
+    venue: Business Insider (Katherine Li), as syndicated by Yahoo Tech, reporting his interview with Yash Patil of Applied Compute
+    year: 2026
+    url: https://tech.yahoo.com/ai/copilot/articles/microsofts-satya-nadella-says-every-084101935.html
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: ee7d8087a7122a87a008ee21b1a01205e22b934ed14fe7dd663f828960dec68f
+    quote: there should be as many models in the world as firms in the world
+  - id: nk_swe
+    who: Arvind Narayanan and Sayash Kapoor
+    field: computer scientists at Princeton who study what AI can and cannot do in practice
+    finding: AI has not replaced software engineers because deciding what to build and answering for what ships do not shrink, and cheaper software raises demand for it, so demand for engineers may even rise.
+    work: Why AI hasn't replaced software engineers
+    venue: the AI as Normal Technology newsletter
+    year: 2026
+    url: https://www.normaltech.ai/p/why-ai-hasnt-replaced-software-engineers
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: 0fee7823aa76ff9027e7cdf34d54f1d9a6f1aa01be5b195efc18255f5b9f0e73
+  - id: altman_inertia
+    who: Sam Altman
+    field: the chief executive of OpenAI
+    finding: The industry has been too ambitious about timelines, because the economy changes more slowly than the technology.
+    work: Sam Altman says AI still has not had its iPhone moment
+    venue: The Next Web, reporting his interview on David Senra's podcast
+    year: 2026
+    url: https://thenextweb.com/news/sam-altman-ai-timelines-wrong-inertia-senra-podcast
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: c11d2c42b1512f2f87ce19a4ed8b3b636fc36d14459dc95354cf46f56e76257d
+    quote: The economy just has so much inertia.
+  - id: cai_mythos
+    who: Sean Cai
+    field: an investor and writer who works in the market for training data
+    finding: Open models have caught up enough that firms will run systems of small models they train further on their own work, provided that further training keeps getting cheaper.
+    work: Mythos, Small Models, and how they'll impact the frontier data industry
+    venue: his newsletter
+    year: 2026
+    url: https://seanzcai.substack.com/p/mythos-small-models-and-how-theyll
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: fff5b33d477d628444f92908f3a69ddeff927c73b5252788445fcff88785e3fe
+  - id: paik_edge
+    who: Chris Paik
+    field: an investor at Pace Capital who writes about where computing happens
+    finding: For much everyday work the cheapest and fastest place to run AI will be the device that already holds the data, so demand for inference in distant data centres will turn over slowly, then suddenly.
+    work: The End of Cloud Inference
+    venue: an essay he shared as a public document
+    year: 2025
+    url: https://docs.google.com/document/d/1HllKKBULFOAe8e780ISuaUbqKAR8KjRc7XTzO69MOcs/export?format=txt
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: 8bb42a75e7e2ace553cf2308509359264f585df7b4fda420c68022b1b9803d8f
+  - id: korinek_lockwood
+    who: Anton Korinek and Lee M. Lockwood
+    field: economists who study taxation and the economics of AI
+    finding: As AI takes over paid work, taxes on wages lose their base and taxes on spending carry more of the load, until machines consume enough of the output that taxing people's spending falls short too.
+    work: Public Finance in the Age of AI, a primer
+    venue: The Economics of Transformative AI, NBER
+    year: 2026
+    url: https://www.nber.org/books-and-chapters/economics-transformative-ai/public-finance-age-ai-primer
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: 3fd3c9a32b0d9545b7101ddebddbafbe66f8391818efa10a7b984a8a006b2f6d
 positions:
   # I · capability
   - id: compounding
@@ -801,7 +885,7 @@ positions:
     holders: [normal_tech]
     attribution: author
     mechanism: Firms have to rebuild processes, train people and learn where liability falls before a tool pays, and that takes decades, not years.
-    case: The share of American firms using AI has risen at the pace of past technologies, not faster.
+    case: The share of American firms using AI has risen at the pace of past technologies, not faster, and OpenAI's chief executive has said the whole industry was too ambitious about timelines [cite:altman_inertia].
     kill_shot: Measured adoption jumping to the pace this site calls fast.
     rival: invisible
     visible: true
@@ -1080,6 +1164,26 @@ positions:
     kill_shot: AI firms' profits growing as fast as the value their users get.
     rival: price_holds
     visible: false
+  - id: edge
+    folio: value
+    title: AI's everyday work moves onto people's own devices
+    holders: [paik_edge]
+    attribution: author
+    mechanism: Once a small model on a phone or laptop is good enough, running it there is cheaper and faster than paying a data centre for each request, and the meter stops.
+    case: Open models a few steps behind the best keep getting better, and each release widens what a device can do on its own.
+    kill_shot: Everyday use staying in cloud data centres even as capable open models shrink.
+    rival: cloud_keeps
+    visible: false
+  - id: cloud_keeps
+    folio: value
+    title: The cloud keeps the thinking
+    holders: []
+    attribution: site
+    mechanism: The best models stay too large for a device, and people want the best model for work that matters.
+    case: Almost all paid use today runs through the labs' and clouds' own services.
+    kill_shot: A large share of everyday requests answered on the device.
+    rival: edge
+    visible: false
 claims:
   # A claim with a `stage` says its map row binds there; a claim about what happens on a row, such as who gains or
   # loses, names the row without a stage, so the map lists it under the row and marks no cell.
@@ -1291,6 +1395,92 @@ claims:
     text: The people who use AI keep far more of its value than the firms that make it.
     falsifier: AI firms' profits growing as fast as the value their users get.
 
+  - id: field_divergence
+    position: slowest_task
+    text: Research speeds up far more in software and mathematics than in drug development, materials or physics, where the slowest steps are experiments.
+    falsifier: A broad speed-up in the experiment-heavy sciences at the same time as in software.
+  - id: data_drives_pretraining
+    position: scaling_limits
+    holders: [dwarkesh_data]
+    text: Better data, more than better model designs, drives how much a model learns from its training, so progress comes to rest on finding new data.
+    row: training_data
+    stage: methods
+    falsifier: Design changes, not data, turning out to carry the gains at the largest scale.
+  - id: labs_buy_exits
+    position: up_the_stack
+    attribution: site
+    text: Being bought by a lab or a compute company becomes the usual way out for the start-ups that sell them data and tools.
+    test: {fact: lab_deals_now, gt: lab_deals_year_ago}
+    falsifier: The yearly count flattening, read only over quarters searched the same way. A later search that turns up deals missed earlier also raises the count, so it is not by itself a sign of more buying.
+    expect_state: untestable
+  - id: contracts_shift
+    position: up_the_stack
+    attribution: site
+    text: Buyers sign up for AI capacity well ahead of using it, so Microsoft's contracted but undelivered business keeps growing faster than its revenue.
+    test: {fact: msft_backlog, gt: msft_backlog_year_ago}
+    falsifier: The backlog shrinking against revenue; it is one company's figure and counts contracts of every kind, much of it OpenAI's commitment to Microsoft's cloud.
+    expect_state: holding
+  - id: own_models
+    position: commodity
+    holders: [nadella_models]
+    text: Every firm ends up with a model of its own, trained on its own work.
+    falsifier: Businesses' use of open models, the easiest kind to make one's own, falling further.
+  - id: self_hosting
+    position: commodity
+    attribution: site
+    text: Most businesses end up running models on machines they control rather than renting a lab's.
+    falsifier: Businesses sticking with rented frontier models even as open models improve.
+  - id: training_cheapens
+    position: apps_keep
+    attribution: extension
+    holders: [cai_mythos]
+    text: If training a model further on a firm's own work keeps getting cheaper, apps train their own instead of renting the best.
+    falsifier: Apps built on open models still paying labs' prices because training their own stays too costly.
+  - id: edge_inference
+    position: edge
+    text: Much of AI's everyday work moves out of distant data centres onto people's own phones and laptops.
+    falsifier: Everyday use staying in cloud data centres as capable open models get smaller.
+  - id: margins_below_software
+    position: smart_squeeze
+    attribution: site
+    text: Companies selling AI products keep lower gross margins than classic software, because every use costs them the model's price.
+    test: {fact: ai_app_margin, lt: 0.7}
+    rival_test: {fact: ai_app_margin, gte: 0.7}
+    row: applications
+    falsifier: AI product margins reaching those of classic software.
+    expect_state: holding
+  - id: verification_first
+    position: assurance_layer
+    holders: [hadfield_koh]
+    text: The first large failure of a market run by AI agents comes from no one being able to check what an agent did, not from agents lacking skill.
+    falsifier: The first large agent failure traced to agents that could not do the work.
+  - id: insurers_cover
+    position: assurance_layer
+    attribution: site
+    text: Insurers sell cover written for AI's mistakes, not only exclusions from standard policies.
+    falsifier: AI cover staying a niche product that large buyers do not purchase.
+  - id: software_jobs_hold
+    position: frictions
+    holders: [nk_swe]
+    text: AI does not wipe out software engineering jobs, and demand for engineers may rise as software gets cheaper to make.
+    row: work_and_pay
+    falsifier: Software engineering employment falling as AI coding tools spread.
+  - id: chips_concentrate
+    position: scarce_input_collects
+    attribution: site
+    text: NVIDIA's lead over other chip makers in sales for data centres keeps widening as AI spending grows.
+    falsifier: Rival chip makers taking a growing share of data-centre chip sales while spending rises.
+  - id: states_buy_in
+    position: scarce_input_collects
+    attribution: site
+    text: Governments take direct stakes in the companies that make chips, power and models.
+    falsifier: States staying lenders and buyers rather than owners.
+  - id: ai_taxed
+    position: jagged_wages
+    attribution: extension
+    holders: [korinek_lockwood]
+    text: As AI takes over paid work, governments move tax from wages towards spending, and later towards AI itself.
+    falsifier: Tax systems unchanged as AI does a growing share of the work.
 scenarios:
   progress:
     - {id: stall_capability, label: Capability stalls}

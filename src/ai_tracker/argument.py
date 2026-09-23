@@ -131,6 +131,7 @@ def fact(s: Store, spec: dict[str, Any], today: date | None = None) -> dict[str,
             d.as_of_date, today or date.today()
         ).isoformat(),  # a quarter still running is dated today
         "obs_ids": d.input_observation_ids,
+        "derived_id": getattr(d, "id", None),
         "href": _metric_href(s, spec["metric"]),
     } | ({"newest": min(rows[-1].as_of_date, today or date.today()).isoformat()} if spec.get("pick") == "max" else {})
 

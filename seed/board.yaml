@@ -1,0 +1,71 @@
+# The predictions board (/predictions): every prediction on the site in one list, grouped by the outlook's five
+# folios, each with one status word. Lines here are short, plain and digit-free except years; the ledger's own
+# wording, quoted, stays on each prediction's card below the board. Outlook claims, migration predictions and exits
+# bring their own text. Status words are mapped from each family's vocabulary in src/ai_tracker/board.py.
+
+folios:
+  - {id: capability, label: "Making it work", question: "Can AI do whole tasks, and reliably?"}
+  - {id: products, label: "Turning it into products", question: "What gets built on it, and who sells it?"}
+  - {id: adoption, label: "Getting firms to use it", question: "How fast do firms and people take it up?"}
+  - {id: reorganisation, label: "Reorganising around it", question: "What happens to work, pay and output?"}
+  - {id: value, label: "Who keeps the money", question: "Where do the profits end up?"}
+
+words:
+  happening: {label: "Happening", meaning: "Tonight's reading is what the prediction says."}
+  not_happening: {label: "Not happening", meaning: "Tonight's reading is against it, or its own test fails."}
+  slower: {label: "Slower than said", meaning: "Moving the way it says, but behind the timetable it gave."}
+  both: {label: "Both sides expect this", meaning: "The reading fits this prediction and its rival alike, so it settles nothing yet."}
+  too_early: {label: "Too early to tell", meaning: "No reading can test it yet, the reading is too old, or its date has not come."}
+
+ledger:
+  nk_adoption_decades: {folio: adoption, line: "AI's big economic effects arrive over decades, not years."}
+  nk_safety_speed_limits: {folio: adoption, line: "Adoption stays slow wherever mistakes are costly."}
+  nk_rsi_external_limits: {folio: capability, line: "AI improving itself cannot get past limits that sit outside the lab."}
+  nk_benchmarks_false_summits: {folio: capability, line: "Each test AI passes shows the test's limits, not that AI has arrived."}
+  nk_agi_not_milestone: {folio: adoption, line: "No single leap in ability unlocks AI's economic value."}
+  openai_research_intern_sep_2026: {folio: capability, line: "OpenAI has an automated AI research intern by September 2026."}
+  openai_automated_researcher_mar_2028: {folio: capability, line: "OpenAI builds an automated AI researcher by March 2028."}
+  amodei_swe_end_to_end_6_12mo: {folio: capability, line: "Models might do most of a software engineer's work end to end within six to twelve months."}
+  amodei_country_of_geniuses_1_2y: {folio: capability, line: "If scaling continues, AI as able as a country of geniuses arrives within a year or two."}
+  amodei_trillions_before_2030: {folio: value, line: "AI earns trillions of dollars a year in revenue before 2030."}
+  anthropic_10x_per_year: {folio: value, line: "Anthropic's revenue keeps growing about tenfold a year."}
+  ai2027_horizon_doubling_4mo: {folio: capability, line: "The length of task AI can finish keeps doubling about every four months."}
+  ai2027_80pct_years_by_mar_2027: {folio: capability, line: "If the trend speeds up, by March 2027 AI could reliably do software tasks that take people years."}
+  ai2027_superhuman_coder_2027: {folio: capability, line: "An AI that codes better than the best people arrives in 2027."}
+  cahn_600b_question: {folio: value, line: "AI's revenue falls far short of what the spending on it needs to repay."}
+  cahn_1_5t_question: {folio: value, line: "The gap between AI spending and the revenue to repay it keeps widening."}
+  bain_2t_revenue_2030: {folio: value, line: "AI needs about two trillion dollars of revenue a year by 2030 and falls short."}
+  covello_too_much_spend: {folio: value, line: "AI costs too much for the problems it can solve today."}
+  tunguz_12x_infra_per_revenue: {folio: value, line: "The largest cloud companies spend many times more on AI buildings and chips than AI earns."}
+  korinek_modest_scenario: {folio: reorganisation, line: "Modest case: AI adds under half a point a year to growth by 2030."}
+  korinek_substantial_scenario: {folio: reorganisation, line: "Substantial case: output rises and some office jobs go by 2030."}
+  korinek_extreme_scenario: {folio: reorganisation, line: "Extreme case: growth soars and workers' share of income falls sharply."}
+  korinek_divergence_after_2027: {folio: reorganisation, line: "The economists' scenarios only pull apart after 2027."}
+  continual_learning_unsolved: {folio: capability, line: "Models still cannot learn on the job the way people do, and it holds them back."}
+
+migration:
+  data_centres_now: {folio: capability}
+  capital_now: {folio: value}
+  memory_packaging_now: {folio: capability}
+  practice_next: {folio: products}
+  agent_proof_watch: {folio: products}
+
+exits:
+  normal_tech_falsified: {folio: adoption}
+  rents_migrate_up: {folio: value}
+  consumers_keep_surplus: {folio: value}
+  invention_side_warning: {folio: capability}
+  real_wages_fall: {folio: reorganisation}
+
+# The ten questions the owner asks of capability, and the instrument this site reads for each, if any.
+questions:
+  - {question: "Can models handle genuinely new problems?", indicator: arc_agi_frontier}
+  - {question: "Can they keep learning without forgetting?", indicator: continual_learning_level}
+  - {question: "Can they tell cause from coincidence?", indicator: null, note: "No public test measures it yet."}
+  - {question: "Can they carry a long project through on their own?", indicator: metr_horizon_50}
+  - {question: "Do they know when they are unsure?", indicator: null, note: "HAL, a Princeton benchmark, scores how predictable agents' failures are; this site stores it but does not draw it yet."}
+  - {question: "Is AI speeding up its own research?", indicator: rsi_agent_workdays_per_human}
+  - {question: "Will data and computing run short?", indicator: epoch_data_exhaustion_year, note: "Whether data made by machines keeps its quality has no public test."}
+  - {question: "Are they reliable enough for work where mistakes are costly?", indicator: pass_hat_k_tau_bench, note: "HAL also scores consistency, robustness and safety; only accuracy and overall reliability are drawn."}
+  - {question: "Can we verify what they are aiming at?", indicator: null, note: "No public test verifies a model's goals."}
+  - {question: "Do bigger models still surprise us?", indicator: surprise_index}

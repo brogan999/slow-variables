@@ -350,7 +350,17 @@ def _check(s: st.Store) -> tuple[list[str], list[str]]:
     from .outlook import check as outlook_check
 
     o_errors, o_notes = outlook_check(s)
-    return errors + a_errors + m_errors + o_errors, notes + a_notes + o_notes
+    from . import board
+    from .thesis import RULES
+
+    b_errors = board.problems(
+        board.load(),
+        {pr.id for pr in s.seed.predictions},
+        {p["id"] for p in (load_argument().get("migration") or {}).get("predictions") or []},
+        {r.__name__ for r in RULES},
+        {pr.id for pr in s.seed.predictions if pr.published},
+    )
+    return errors + a_errors + m_errors + o_errors + b_errors, notes + a_notes + o_notes
 
 
 def cmd_check(a: argparse.Namespace) -> int:
@@ -416,6 +426,7 @@ def cmd_ask(a: argparse.Namespace) -> int:
     if not s.derived:
         s.derived = run_metrics(s.con)
         s.semantic_tables()
+    s.prediction_table()
     res = ask(s, a.question)
     print(res["answer"])
     print(f"\n[{res['status']}] {len(res['citations'])} citations, ${res['usage']['usd']:.4f}")
@@ -431,6 +442,7 @@ def cmd_golden(a: argparse.Namespace) -> int:
     if not s.derived:
         s.derived = run_metrics(s.con)
         s.semantic_tables()
+    s.prediction_table()
     res = golden(s)
     for r in res:
         tag = " (informational)" if r["informational"] else ""

@@ -91,6 +91,7 @@
 | hsbc | HSBC Insights (Global Investment Research) | HSBC | html | 5 | irregular | HSBC; short quotation | HSBC Insights, 'The billions of AI consumer surplus' (10 Aug 2026) |
 | humanloop_site | Humanloop website | Humanloop | html | 4 | irregular | Humanloop; short quotation | Humanloop website |
 | humlum_pdf | Humlum working-paper PDFs (author site) | Anders Humlum | pdf | 6 | irregular | Author preprint; short quotation | Humlum & Vestergaard |
+| iconiq | ICONIQ, State of AI 2026 | ICONIQ Venture & Growth | html | 6 | annual | Report | ICONIQ, 'State of AI: The Builder's Economy' (2026), a survey of over 300 software executives building AI products |
 | innolitics | Innolitics regulatory articles | Innolitics | html | 6 | irregular | Innolitics; short quotation | Innolitics |
 | insurance_journal | Insurance Journal | Wells Media Group | html | 5 | irregular | Insurance Journal; short quotation | Insurance Journal |
 | jams_site | Jams website | Potrero Labs | html | 4 | irregular | Potrero Labs; short quotation | Jams website |
@@ -172,7 +173,7 @@
 | allianz | Allianz Research | Occasional PDFs with no series; quoted by hand when a figure is needed. |
 | axios_pro_rata | Axios Pro Rata | An email newsletter; the deals database behind it is paid. |
 | bain | Bain & Company technology report | Annual report; its revenue-needed claim sits on the prediction ledger with its own URL. |
-| bessemer_iconiq | Bessemer and ICONIQ state-of-AI reports | Portfolio benchmarks published annually, not refreshable series. |
+| bessemer | Bessemer state-of-AI reports | Portfolio benchmarks published annually, not refreshable series. |
 | bloomberg_circular_map | Bloomberg circular-deals graphic | Paywalled graphic; each deal on the circular ledger enters from its own filing or announcement instead. |
 | bls_oews | BLS Occupational Employment and Wage Statistics | Annual and about eleven months late; the monthly labour trackers cover the same occupations sooner. |
 | caplight | Caplight (paid) | Paid; stub off. Would unlock secondary marks between rounds. |
