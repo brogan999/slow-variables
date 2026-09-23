@@ -241,3 +241,19 @@ def test_a_malformed_migration_seed_is_an_error_line_never_a_crash(monkeypatch):
         monkeypatch.setattr(ar, "load", lambda spec=spec: spec)
         errors, _ = ar.problems(s)
         assert any(want in e for e in errors), (want, errors)
+
+
+def test_a_series_fact_reads_its_row_a_year_back():
+    import duckdb
+
+    con = duckdb.connect()
+    con.execute(
+        "CREATE TABLE observations AS SELECT * FROM (VALUES ('a', 10.0, 'usd', DATE '2025-08-31', false),"
+        " ('b', 12.0, 'usd', DATE '2026-02-28', false), ('c', 20.0, 'usd', DATE '2026-08-31', false))"
+        " t(id, value_numeric, unit, as_of_date, disputed)"
+    )
+    con.execute("ALTER TABLE observations ADD COLUMN series_key VARCHAR DEFAULT 'k'")
+    s = SimpleNamespace(con=con)
+    assert ar.fact(s, {"series": "k"}, date(2026, 9, 1))["value"] == 20
+    assert ar.fact(s, {"series": "k", "pick": "year_ago"}, date(2026, 9, 1))["obs_ids"] == ["a"]
+    assert ar.fact(s, {"series": "k", "pick": "year_ago"}, date(2026, 3, 1)) is None

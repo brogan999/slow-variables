@@ -34,6 +34,10 @@ facts:
   msft_backlog: {metric: rpo_to_trailing_revenue, dims: {entity: msft}, max_age_days: 200}
   msft_backlog_year_ago: {metric: rpo_to_trailing_revenue, dims: {entity: msft}, pick: year_ago}
   ai_app_margin: {series: iconiq.ai_products.gross_margin.fy, max_age_days: 500}
+  # Part 16: readings for the claims taken from Sean Cai and The Diff
+  startup_app_share: {series: menlo.us_enterprise.startup_app_revenue_share.fy, max_age_days: 500}
+  ramp_spend: {series: ramp.us_businesses.ai_spend_per_employee_median_usd.m, max_age_days: 90}
+  ramp_spend_year_ago: {series: ramp.us_businesses.ai_spend_per_employee_median_usd.m, pick: year_ago}
 sources:
   # I · capability
   - id: ai_2027
@@ -733,6 +737,359 @@ sources:
     retrieved_at: 2026-09-23
     http_status: 200
     content_hash: 3fd3c9a32b0d9545b7101ddebddbafbe66f8391818efa10a7b984a8a006b2f6d
+  # Part 16: Sean Cai's and The Diff's posts, paid ones included; each claim below is reworded, never quoted.
+  - id: cai_commodities
+    who: Sean Cai
+    field: an investor and writer who works in the market for training data
+    finding: Training data is bought from many specialist sellers, each strong in one field or kind of data, and computing capacity cannot be multiplied overnight the way new fibre equipment multiplied internet bandwidth.
+    work: New Age Commodities
+    venue: his newsletter
+    year: 2025
+    url: https://seanzcai.substack.com/p/new-age-commodities
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: a40f4774dcabe27b4a4d65332747b5d0e140fdf8a1102b466f1542304a4a7a50
+  - id: cai_victoria
+    who: Sean Cai
+    field: an investor and writer who works in the market for training data
+    finding: Each fall in the price of a model widens the set of builders who can afford agent systems, so total demand for AI rises, and cheap AI opens services that were never worth paying a person for.
+    work: Victoria 3 and why data markets must be unbundled
+    venue: his newsletter
+    year: 2026
+    url: https://seanzcai.substack.com/p/victoria-3-and-why-data-markets-must
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: 72023e02b21bcb88c308eb182c3bdfa2269bc2ac3549996509863842a93a832e
+  - id: cai_mar26
+    who: Sean Cai
+    field: an investor and writer who works in the market for training data
+    finding: Practice tasks staged by contractors stop teaching models long work that is hard to check, in fields such as biology, security and matters of taste, so labs turn to records of real work inside firms.
+    work: State of Data (March 2026)
+    venue: his newsletter
+    year: 2026
+    url: https://seanzcai.substack.com/p/state-of-data-march-2026
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: c806c157476190e58dc525c8f2fd2208eabff8e8818cb4d2f5ff21a29bdb1c6f
+  - id: cai_apr26
+    who: Sean Cai
+    field: an investor and writer who works in the market for training data
+    finding: Models keep differing in efficiency and in the kinds of input they handle, so they do not become an interchangeable utility.
+    work: State of Data (April 2026)
+    venue: his newsletter
+    year: 2026
+    url: https://seanzcai.substack.com/p/state-of-data-april-2026
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: 51302c8e2629f6229e0c99c4240a01ae07138cc7c7f6200801875e5fc0448d95
+  - id: cai_may26
+    who: Sean Cai
+    field: an investor and writer who works in the market for training data
+    finding: Labs buy more of their training data straight from leading app companies and specialists, and the cost of switching labs will not grow enough to lock customers in.
+    work: State of Data (May 2026)
+    venue: his newsletter
+    year: 2026
+    url: https://seanzcai.substack.com/p/state-of-data-may-2026
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: b1cfc2bce2a9709069992eb926b3662a5641be1a2a1d535a37a20ab0f0b09f1c
+  - id: cai_jun26
+    who: Sean Cai
+    field: an investor and writer who works in the market for training data
+    finding: With many agents working on a task at once, most valuable office work will turn on the cost of computing and the systems around it rather than on what models can do; labs' attempts to tie customers down will not last.
+    work: State of Data (June 2026)
+    venue: his newsletter
+    year: 2026
+    url: https://seanzcai.substack.com/p/state-of-data-june-2026
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: 9adea6c6f30a167a6a863872249a2bd833991293cbca6a07313e1f5a88c219a1
+  - id: cai_jul26
+    who: Sean Cai
+    field: an investor and writer who works in the market for training data
+    finding: Leading hosts, data sellers and custom-training firms are converging on one business, tuning open models for firms; Chinese labs will not take the frontier lead while the tests and paying buyers are American.
+    work: State of Data (July 2026)
+    venue: his newsletter
+    year: 2026
+    url: https://seanzcai.substack.com/p/state-of-data-july-2026
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: a16d4a2e4e3eaf663864afdc0da56c72e756ecaa1a6643d59e81eb428a13ddc6
+  - id: cai_preseed
+    who: Sean Cai
+    field: an investor and writer who works in the market for training data
+    finding: Getting firms to use AI comes down to the engineering work of fitting models to each firm, and the machine-learning engineers who can do it are scarce.
+    work: A B2B AI-native pre-seed
+    venue: his website
+    year: 2025
+    url: https://seancai.com/philosophy/pre-seed_I_like
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: 54787d512c63f00588b302e4871e44902ebcf211225c4d8ddafd43e200268c25
+  - id: cai_verifiable
+    who: Sean Cai
+    field: an investor and writer who works in the market for training data
+    finding: Startups building a model for one field fall behind as the labs' general models improve, while firms outside the labs begin buying training data and practice tasks.
+    work: A World of Verifiable Domains
+    venue: his website
+    year: 2025
+    url: https://seancai.com/philosophy/verifiable_domains
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: b5dd28cb5cd3ac0d5dcd75437759dfdd5e0a767a7714218a3995a20c273a804c
+  - id: cai_serviceable
+    who: Sean Cai
+    field: an investor and writer who works in the market for training data
+    finding: Versatile workers who manage AI gain on narrow specialists, and the pay gap between them widens.
+    work: A World of Serviceable Domains
+    venue: his website
+    year: 2025
+    url: https://seancai.com/philosophy/serviceable_domains
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: 3aa8f1d5d82331931709afb6ea2dc8b57913ae1fcdd449d5eec9c9e1d6b1bcd3
+  - id: hobart_pundit
+    who: Byrne Hobart
+    field: the writer of The Diff, a newsletter on finance and technology, after work in digital advertising and investment research
+    finding: Cheap information processing makes many small businesses viable that never paid before, and that steady filling of niches is how AI lifts long-run growth.
+    work: Decentralized Pundit Calibration as a Vision of Long-Term Economic Growth
+    venue: The Diff
+    year: 2026
+    url: https://www.thediff.co/archive/decentralized-pundit-calibration-as-a-vision-of-long-term-economic-growth/
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: 50fea6aab987528770c5ea3007286936036de80cf68b521a21eeb0ed82dd89c1
+  - id: hobart_sued
+    who: Byrne Hobart
+    field: the writer of The Diff, a newsletter on finance and technology, after work in digital advertising and investment research
+    finding: As agents take on long, unpredictable work, buyers pay for a party with assets that can be held liable, so established service firms stand between AI and the customer.
+    work: Paying Up for the Right to be Sued
+    venue: The Diff
+    year: 2026
+    url: https://www.thediff.co/archive/paying-up-for-the-right-to-be-sued/
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: 0661485acbd10c6389bd5c37b97011574c74158013a44f9fcb0629a4e1cf3f0a
+  - id: hobart_backlash
+    who: Byrne Hobart
+    field: the writer of The Diff, a newsletter on finance and technology, after work in digital advertising and investment research
+    finding: Those facing automation outnumber those doing it, so politicians of left and right have reason to campaign against AI.
+    work: Are the AI Labs Ready for the AI Backlash?
+    venue: The Diff
+    year: 2026
+    url: https://www.thediff.co/archive/are-the-ai-labs-ready-for-the-ai-backlash/
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: 318980835ac51405f767f2b718f06ded6e56ddcd15ae370c9c10f4d6248444b6
+  - id: hobart_fde
+    who: Byrne Hobart
+    field: the writer of The Diff, a newsletter on finance and technology, after work in digital advertising and investment research
+    finding: Engineers who fit AI into a customer's own work are scarce and courted by labs, investors and software firms, while firms' AI bills rise because use grows faster than prices fall.
+    work: Could There be a Forward-Deployed Engineer Supply Crunch?
+    venue: The Diff
+    year: 2026
+    url: https://www.thediff.co/archive/could-there-be-a-forward-deployed-engineer-supply-crunch/
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: 632efd1df4cc16b04a71c35fdb87e3c4141c42b6ffa988f557ddcdebeaa80585
+  - id: hobart_contrarian
+    who: Byrne Hobart
+    field: the writer of The Diff, a newsletter on finance and technology, after work in digital advertising and investment research
+    finding: Some jobs may shift from people doing the work to people supplying the data that trains AI to do it.
+    work: The Market for Contrarian Talent Doesn't Clear
+    venue: The Diff
+    year: 2026
+    url: https://www.thediff.co/archive/the-market-for-contrarian-talent-doesnt-clear/
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: cd712a20ba51582b2735d13b0d9b45bf7ab5d370848d0c2a4f036376a769d9c2
+  - id: hobart_technoking
+    who: Byrne Hobart
+    field: the writer of The Diff, a newsletter on finance and technology, after work in digital advertising and investment research
+    finding: The shortages AI creates along the chip supply chain will eventually meet a link whose supply proves easier to expand than expected, and how prices move there will be telling.
+    work: In the Court of the Technoking
+    venue: The Diff
+    year: 2026
+    url: https://www.thediff.co/archive/in-the-court-of-the-technoking/
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: 87d18492b9526b6ca01554bf9490dbd27714980fa3c71ded6876efe7bf9bacca
+  - id: hobart_rocketship
+    who: Byrne Hobart
+    field: the writer of The Diff, a newsletter on finance and technology, after work in digital advertising and investment research
+    finding: Free AI for consumers will be funded by advertising, while the paid kind runs on different economics.
+    work: The Rocketship
+    venue: The Diff
+    year: 2026
+    url: https://www.thediff.co/archive/the-rocketship/
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: d818e09cd6ad095de8a9b5e9d85ce6e40a4b573618c57e6856cf9a893b95b0bc
+  - id: hobart_coasian
+    who: Byrne Hobart
+    field: the writer of The Diff, a newsletter on finance and technology, after work in digital advertising and investment research
+    finding: Firms keep buying AI for any task where it returns more than it costs, and because the staff who deploy the labs' models grow with their customers, the labs' margins sit below pure software's.
+    work: The Coasian Margin Frontier
+    venue: The Diff
+    year: 2026
+    url: https://www.thediff.co/archive/the-coasian-margin-frontier/
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: 8a2c1683161c99ab4c92582b5855fa27aa26ceb140ed506dc4acb48ce1e5d0d9
+  - id: hobart_n1
+    who: Byrne Hobart
+    field: the writer of The Diff, a newsletter on finance and technology, after work in digital advertising and investment research
+    finding: Trades that are scattered by place, such as law and contracting, stay split among many firms, while the AI tools each one uses gather around a few vendors.
+    work: N > 1
+    venue: The Diff
+    year: 2026
+    url: https://www.thediff.co/archive/n-1/
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: b54bb305a505ee94065fb2b5947440b5e2d7f2717060de669a05c67c1c8d7c57
+  - id: hobart_peanut
+    who: Byrne Hobart
+    field: the writer of The Diff, a newsletter on finance and technology, after work in digital advertising and investment research
+    finding: AI spreads through industries wrapped inside existing structures such as firms and licences, and ads in chat assistants can work because assistants see what people want to buy earlier than search does.
+    work: Should You Trust the Hacker News Peanut Gallery?
+    venue: The Diff
+    year: 2026
+    url: https://www.thediff.co/archive/should-you-trust-the-hacker-news-peanut-gallery/
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: e54898c99662f92450f3fae19b1df6dd785d922600507ed03e067a07f42c89b5
+  - id: hobart_court
+    who: Byrne Hobart
+    field: the writer of The Diff, a newsletter on finance and technology, after work in digital advertising and investment research
+    finding: The lab with the most popular product has little computing left to train its next model, so the lead keeps changing hands.
+    work: Court Philosophers
+    venue: The Diff
+    year: 2026
+    url: https://www.thediff.co/archive/court-philosophers/
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: 972b6cbabf7de3dd6e07e733644dc702e0ece32e52aa3783c57476ac13c2a98c
+  - id: hobart_lr188
+    who: Byrne Hobart
+    field: the writer of The Diff, a newsletter on finance and technology, after work in digital advertising and investment research
+    finding: The grid is planned on the assumption that little changes and that changes come with warning, and the rush of data centres breaks both assumptions; AI is also growing politically unpopular.
+    work: Longreads + Open Thread
+    venue: The Diff
+    year: 2026
+    url: https://www.thediff.co/archive/longreads-open-thread-188/
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: 3cc1025147dbd9d9e38f9486b8bc44428f2b6f1b25f05f7080ebadec71f856da
+  - id: hobart_skilled
+    who: Byrne Hobart
+    field: the writer of The Diff, a newsletter on finance and technology, after work in digital advertising and investment research
+    finding: Too few electricians, welders and other tradespeople hold back the building of data centres, so the largest technology firms pay to train them.
+    work: Skilled Labor Supply Chains
+    venue: The Diff
+    year: 2026
+    url: https://www.thediff.co/archive/skilled-labor-supply-chains/
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: 456c91e41e10e7eba15530893483a41d72aaa4c122f011d5d78b59b5492459fe
+  - id: hobart_neocloud
+    who: Byrne Hobart
+    field: the writer of The Diff, a newsletter on finance and technology, after work in digital advertising and investment research
+    finding: The large technology firms build more computing than they need and rent the spare to rivals, making the industry one shared bet on demand, and NVIDIA finances its customers in exchange for a share of their income.
+    work: In the Future, Every AI Lab is a Neocloud for Fifteen Minutes
+    venue: The Diff
+    year: 2026
+    url: https://www.thediff.co/archive/in-the-future-every-ai-lab-is-a-neocloud-for-fifteen-minutes/
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: 330479a6fbc33480385fb47a6092b099ebd3507cc99f39dbf63980d65a4735e1
+  - id: hobart_ghost
+    who: Byrne Hobart
+    field: the writer of The Diff, a newsletter on finance and technology, after work in digital advertising and investment research
+    finding: Production systems put fixed, checkable logic in charge and use a model only to steer and explain it, so much work stops paying a model for every step.
+    work: The Ghost-in-the-Finite-State-Machine Design Pattern
+    venue: The Diff
+    year: 2026
+    url: https://www.thediff.co/archive/the-ghost-in-the-finite-state-machine-design-pattern/
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: 7e45e7e326a0a2a529f85f1db6140e847443ff5ae9cb0c8dce681251d26c81dd
+  - id: hobart_nomentum
+    who: Byrne Hobart
+    field: the writer of The Diff, a newsletter on finance and technology, after work in digital advertising and investment research
+    finding: Labs buy consultancies that deploy AI to get implementation staff faster than hiring allows, and Chinese labs' progress turns on access to American chips.
+    work: Nomentum
+    venue: The Diff
+    year: 2026
+    url: https://www.thediff.co/archive/nomentum/
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: 16d2f16155a6eb6c6c472135c2e244328ecf1ed8c8ff2d89ffb19ed55c350822
+  - id: hobart_visible
+    who: Byrne Hobart
+    field: the writer of The Diff, a newsletter on finance and technology, after work in digital advertising and investment research
+    finding: AI stays unpopular even as its use grows, because most of its benefits are hard to see.
+    work: The Politics of Visible and Invisible AI
+    venue: The Diff
+    year: 2026
+    url: https://www.thediff.co/archive/the-politics-of-visible-and-invisible-ai/
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: ec86493f2cb764829e0af5f6d27d07cc18b51bce42b9b82b1dc37ec69843da50
+  - id: hobart_convergent
+    who: Byrne Hobart
+    field: the writer of The Diff, a newsletter on finance and technology, after work in digital advertising and investment research
+    finding: Spending on any narrow task rises and then falls once it is turned into a fixed program, yet total spending on running AI keeps rising as cheaper intelligence finds new uses.
+    work: Convergent Evolution in the Architecture of Intelligence
+    venue: The Diff
+    year: 2026
+    url: https://www.thediff.co/archive/convergent-evolution-in-the-architecture-of-intelligence/
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: d241ec9f5f77bd3294f67ab0d13fcf5fc9198c1d08bf33fc5975d7acf4fc539a
+  - id: hobart_fpa
+    who: Byrne Hobart
+    field: the writer of The Diff, a newsletter on finance and technology, after work in digital advertising and investment research
+    finding: A formal pause on AI looks unlikely; the largest labs are instead loosely in step in slowing the public release of their most powerful models.
+    work: FP&A as the Telemetry and Counterespionage
+    venue: The Diff
+    year: 2026
+    url: https://www.thediff.co/archive/fp-a-as-the-telemetry-and-counterespionage/
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: d614d023e5519776327ecec0cbe93e4beefea651b65f14793eb03d75e15ebf6c
+  - id: hobart_toll
+    who: Byrne Hobart
+    field: the writer of The Diff, a newsletter on finance and technology, after work in digital advertising and investment research
+    finding: By financing data-centre programmes alongside outside lenders, NVIDIA presumably gains a say over who gets computing capacity.
+    work: Toll Collectors on the Road to Abundance
+    venue: The Diff
+    year: 2026
+    url: https://www.thediff.co/archive/toll-collectors-on-the-road-to-abundance/
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: eea5c55abd77a2631717b62dfc47be17c315df53f8332b00e1582d5236de246e
+  - id: hobart_rnd
+    who: Byrne Hobart
+    field: the writer of The Diff, a newsletter on finance and technology, after work in digital advertising and investment research
+    finding: Coding agents slow new firms' purchases of software but make the programs that hold a business's core records more valuable.
+    work: Customers as R&D
+    venue: The Diff
+    year: 2026
+    url: https://www.thediff.co/archive/customers-as-r-d/
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: ddcb2b1210109f6a2bf511eaa040d08d63c9143f33e3a976225b51192913ce17
+  - id: hobart_scarcity
+    who: Byrne Hobart
+    field: the writer of The Diff, a newsletter on finance and technology, after work in digital advertising and investment research
+    finding: One direction the labs may take is to pull apart by industry, each strongest where it has bought the most specialist business records, while their general skills stay close.
+    work: Data Scarcity
+    venue: The Diff
+    year: 2026
+    url: https://www.thediff.co/archive/data-scarcity/
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: fdca6b34a23e6d6eae0faf0100827f84411bbe1a9ff0a4fe38432c4260fda542
 positions:
   # I · capability
   - id: compounding
@@ -1184,6 +1541,317 @@ positions:
     kill_shot: A large share of everyday requests answered on the device.
     rival: edge
     visible: false
+  # Part 16: positions from Sean Cai's and The Diff's posts, paid ones included, in fresh wording and never quoted.
+  - id: real_work
+    folio: capability
+    title: Training data comes from real work inside firms
+    holders: [cai_mar26]
+    attribution: author
+    mechanism: Practice tasks written by outside contractors cannot teach a model long work whose results are hard to check, in fields such as biology and security; only records of how experts actually do that work can.
+    case: The labs are turning from staged practice tasks towards records of real work, and pay for access to them.
+    kill_shot: Staged practice tasks going on improving models at long, hard-to-check office work.
+    rival: verified_data
+    visible: false
+  - id: data_moats
+    folio: value
+    title: Labs may pull apart by industry, on the records they buy
+    holders: [hobart_scarcity]
+    attribution: author
+    mechanism: The labs' general skills converge, so what separates them is the specialist business records each has bought, and each grows strongest in the trades it bought most from.
+    case: Labs are buying records from an airline and from start-ups that have wound down, and the gains may spill into neighbouring fields.
+    kill_shot: The labs staying interchangeable in every industry, with none ahead in a trade because of the data it bought.
+    rival: commodity
+    visible: false
+  - id: data_fragments
+    folio: value
+    title: The data market stays split among specialists
+    holders: [cai_commodities]
+    attribution: author
+    mechanism: Each field and each kind of data needs its own experts and its own checks, so no one seller can be best at all of them.
+    case: Sellers focused on one field keep winning lab budgets from the large all-purpose vendors.
+    kill_shot: One or two sellers coming to handle most of what the frontier labs buy.
+    rival: data_consolidates
+    visible: false
+  - id: data_consolidates
+    folio: value
+    title: A few large sellers take most of the data market
+    holders: []
+    attribution: site
+    mechanism: Labs want one supplier that can recruit experts at volume, check quality and pass security reviews, and those costs favour the largest sellers.
+    case: Recruiting, checking and security reviews may cost less per task the larger the seller.
+    kill_shot: Specialist sellers taking a growing share of the labs' data budgets.
+    rival: data_fragments
+    visible: false
+  - id: firms_train
+    folio: products
+    title: Tuning open models for firms becomes one business
+    holders: [cai_jul26]
+    attribution: author
+    mechanism: Hosting models, selling data and custom training each lead to the same product, an open model fitted to a firm's own work and billed by use.
+    case: Firms want models fitted to their own work and run where they control them, and open models are good enough to start from.
+    kill_shot: These firms staying in separate businesses rather than converging on selling tuned models by use.
+    rival: general_wins
+    visible: false
+  - id: general_wins
+    folio: products
+    title: General models overtake models built for one field
+    holders: [cai_verifiable, cai_mar26]
+    attribution: author
+    mechanism: Each new general model from the labs learns many fields at once, so a model trained for one field keeps its edge only until the next release.
+    case: Cai expects the gains from custom training to be nearly wiped out by each general release, outside regulated niches where data is scarce.
+    kill_shot: Models built for one field keeping their lead over each new general release.
+    rival: firms_train
+    visible: false
+  - id: cost_binds
+    folio: capability
+    title: Cost, not ability, becomes the limit
+    holders: [cai_jun26]
+    attribution: author
+    mechanism: Once many agents can work on a task at once, what limits the work is the cost of the computing and the systems around it, not what a single model can do.
+    case: Agents working in parallel multiply what a model can finish, at a price.
+    kill_shot: Valuable office tasks staying out of AI's reach even where computing is cheap.
+    rival: not_reliability
+    visible: false
+  - id: deployers_scarce
+    folio: adoption
+    title: Engineers who fit AI to each firm are the scarce ingredient
+    holders: [hobart_fde, cai_preseed]
+    attribution: author
+    mechanism: Every firm's work is different, and fitting a model to it takes engineers who understand both the model and the firm, of whom there are few.
+    case: Labs, investors and software firms all compete for these engineers, and labs buy the consultancies that employ them.
+    kill_shot: These roles becoming easy to fill, and their pay premium fading.
+    rival: frictions
+    visible: false
+  - id: us_lead
+    folio: capability
+    title: Chinese labs do not take the lead
+    holders: [cai_jul26, hobart_nomentum]
+    attribution: author
+    mechanism: The tests that define the frontier, the work it is judged on and the customers who pay are mostly American, and the most advanced chips stay hard for Chinese labs to get.
+    case: Chinese labs release strong open models, yet the best closed models from American labs have stayed ahead of them.
+    kill_shot: A Chinese lab's model becoming the best at the frontier.
+    rival: commodity
+    visible: false
+  - id: lock_fails
+    folio: value
+    title: Labs cannot lock their customers in
+    holders: [cai_jun26, cai_may26]
+    attribution: author
+    mechanism: Competition among the frontier labs keeps switching cheap, and bans on copying models and exclusive deals leak.
+    case: Rival labs are close enough that a customer's cost of switching between them stays small.
+    kill_shot: Customers becoming bound to one lab by exclusive deals and bans on copying.
+    rival: up_the_stack
+    visible: false
+  - id: models_differ
+    folio: value
+    title: Models stay different, not interchangeable
+    holders: [cai_apr26, cai_mythos]
+    attribution: author
+    mechanism: Models differ in efficiency and in the kinds of input they handle, and a system built from several models needs each one to fit its part.
+    case: A system built from several models needs each to fit its part.
+    kill_shot: Buyers treating models as interchangeable and choosing on the price of a token alone.
+    rival: commodity
+    visible: false
+  - id: no_glut
+    folio: value
+    title: Computing cannot flood the market overnight
+    holders: [cai_commodities]
+    attribution: author
+    mechanism: New capacity takes years to plan, power and build, so it cannot be multiplied overnight the way new fibre equipment multiplied internet bandwidth.
+    case: Adding capacity means new buildings, power and chips, none of which can be added at once.
+    kill_shot: A sudden glut sending the rent for AI chips down by most of its value within a year.
+    rival: glut_somewhere
+    visible: false
+  - id: glut_somewhere
+    folio: value
+    title: Some link in the chip chain proves easier to expand
+    holders: [hobart_technoking]
+    attribution: author
+    mechanism: AI's demand strains every link from memory to power at once; somewhere supply will prove easier to expand than expected, and prices there will turn.
+    case: Each shortage draws investment, and some suppliers respond faster than expected.
+    kill_shot: Every part squeezed by AI's demand staying scarce and rising in price.
+    rival: no_glut
+    visible: false
+  - id: builders_bind
+    folio: capability
+    title: The grid and tradespeople set the pace of building
+    holders: [hobart_lr188, hobart_skilled]
+    attribution: author
+    mechanism: A data centre can be financed and designed quickly, but the grid is planned for slow change with warning, and electricians and welders are few; neither can be hurried.
+    case: The largest technology firms already pay to train electricians and other tradespeople.
+    kill_shot: Data centres being finished on time once the money is committed.
+    rival: build_runs_late
+    visible: false
+  - id: lead_rotates
+    folio: value
+    title: The lead among labs keeps changing hands
+    holders: [hobart_court]
+    attribution: author
+    mechanism: The lab with the most popular model spends its chips serving it, leaving less to train the next, while rivals with spare chips train theirs.
+    case: The title of best model has already passed between labs several times.
+    kill_shot: One lab keeping the best model for several years running.
+    rival: durable_labs
+    visible: false
+  - id: held_back
+    folio: products
+    title: Labs hold back their strongest models
+    holders: [hobart_fpa]
+    attribution: author
+    mechanism: No government agrees a pause, but the largest labs, loosely in step, slow the public release of their most powerful models.
+    case: Labs have already gated models they judged too capable to publish at once.
+    kill_shot: Labs releasing their best models to the public as soon as they are trained.
+    rival: released_fast
+    visible: false
+  - id: released_fast
+    folio: products
+    title: The best models go to everyone at once
+    holders: []
+    attribution: site
+    mechanism: Labs compete for users and revenue, so a model kept back is revenue handed to a rival.
+    case: Every lab that waits hands its customers to a rival that does not.
+    kill_shot: Labs keeping their best models back from the public.
+    rival: held_back
+    visible: false
+  - id: liable_wrappers
+    folio: adoption
+    title: AI's work is bought through firms that can be sued
+    holders: [hobart_sued, hobart_peanut]
+    attribution: author
+    mechanism: When an agent does long, unpredictable work, the buyer wants someone with assets and a licence who answers for its mistakes, so AI reaches customers through such parties.
+    case: Hobart expects labs to buy operating firms in the trades they serve, gaining customers and assets that can answer for mistakes.
+    kill_shot: Buyers taking AI's work on long, unpredictable tasks from parties that cannot answer for its mistakes.
+    rival: startups_sell
+    visible: false
+  - id: startups_sell
+    folio: adoption
+    title: Firms buy AI straight from the start-ups that build it
+    holders: []
+    attribution: site
+    mechanism: Start-ups built around AI are cheaper and faster, and contracts and insurance can carry the liability.
+    case: Start-ups take [fact:startup_app_share] of what American firms spend on AI apps, by Menlo Ventures' survey, though the survey leaves out AI built into incumbents' existing software.
+    kill_shot: Established firms taking most of what firms spend on AI apps.
+    rival: liable_wrappers
+    visible: false
+  - id: tokens_climb
+    folio: value
+    title: Firms' AI bills keep rising as prices fall
+    holders: [hobart_convergent, hobart_fde, cai_victoria]
+    attribution: author
+    mechanism: Each fall in price makes AI worth using for more work, and use grows faster than the price falls.
+    case: Ramp, which handles firms' card spending, counts their median AI spending per employee at [fact:ramp_spend], up on a year before.
+    kill_shot: Firms' AI spending levelling off or falling while prices keep dropping.
+    rival: spend_plateaus
+    visible: false
+  - id: spend_plateaus
+    folio: value
+    title: Firms' AI spending levels off as prices fall
+    holders: []
+    attribution: site
+    mechanism: Work gets moved to cheaper models and fixed routines, so falling prices cut the bill faster than new uses add to it.
+    case: Each generation of models does last year's work for a fraction of the price.
+    kill_shot: Firms' spending on AI per employee rising year after year.
+    rival: tokens_climb
+    visible: false
+  - id: backlash
+    folio: reorganisation
+    title: AI grows unpopular, and its rules come late
+    holders: [hobart_backlash, hobart_visible, hobart_lr188]
+    attribution: author
+    mechanism: Most of AI's benefits are hard to see, while those facing automation outnumber those doing it, so politicians gain by opposing it.
+    case: AI's use keeps growing while the public grows warier of it.
+    kill_shot: Public approval of AI rising clearly and politicians campaigning in its favour.
+    rival: quiet_rules
+    visible: false
+  - id: quiet_rules
+    folio: reorganisation
+    title: AI's rules are settled quietly
+    holders: []
+    attribution: site
+    mechanism: Agencies, courts and industry standards set AI's rules before it becomes a voting issue.
+    case: Rules for a technology often come from agencies, courts and standards bodies long before voters take it up.
+    kill_shot: AI becoming a central issue in national elections.
+    rival: backlash
+    visible: false
+  - id: train_replacements
+    folio: reorganisation
+    title: Some workers turn into trainers of their replacements
+    holders: [hobart_contrarian]
+    attribution: author
+    mechanism: The fastest way to teach a model a job is to record people doing it, so in some jobs the work becomes producing that record.
+    case: Labs and data sellers already pay experts to set down how they do their work.
+    kill_shot: Few occupations showing workers shifting to producing training data.
+    rival: relational
+    visible: false
+  - id: vendor_finance
+    folio: value
+    title: NVIDIA finances its customers
+    holders: [hobart_toll, hobart_neocloud]
+    attribution: author
+    mechanism: NVIDIA lends to and invests in the data centres that buy its chips in return for a share of their income, turning one-off sales into a stream and gaining a say over who gets capacity.
+    case: NVIDIA has invested in cloud companies that rent out its chips and in labs that buy them.
+    kill_shot: NVIDIA's revenue staying almost wholly one-off sales of hardware.
+    rival: scarce_input_collects
+    visible: false
+  - id: shared_bet
+    folio: value
+    title: The builders overbuild and rent out the rest
+    holders: [hobart_neocloud]
+    attribution: author
+    mechanism: The largest technology firms build more computing than they need and rent the spare to rivals, turning each firm's bet into one bet, shared across the industry, that demand for AI keeps growing.
+    case: Labs and clouds already buy capacity from one another in every direction.
+    kill_shot: The largest firms keeping their computing for their own use and renting none of it out.
+    rival: money_runs_out
+    visible: false
+  - id: ads_fund
+    folio: value
+    title: Advertising pays for free AI
+    holders: [hobart_rocketship, hobart_peanut]
+    attribution: author
+    mechanism: Assistants can see what people want to buy earlier than search does, so advertisers will pay to reach them, and ads fund the free versions.
+    case: Search shows how much advertisers pay for a clear sign of what someone wants; assistants can see that want earlier.
+    kill_shot: Ads in assistants driving users away or earning far less per user than ads in search.
+    rival: consumers_keep
+    visible: false
+  - id: records_hold
+    folio: value
+    title: The software that keeps the records gains
+    holders: [hobart_rnd]
+    attribution: author
+    mechanism: Coding agents let firms build their own tools instead of buying them, but the programs that hold a business's core records are hard to replace and every new tool needs them.
+    case: Firms build more of their own software with coding agents while still running on the same systems of record.
+    kill_shot: Software that holds a business's records losing customers as fast as other software.
+    rival: up_the_stack
+    visible: false
+  - id: labs_below_software
+    folio: value
+    title: Deployment staff pull the labs' margins down
+    holders: [hobart_coasian]
+    attribution: author
+    mechanism: Labs need staff inside their customers to deploy their models, and that staff grows with the customers.
+    case: The labs keep adding engineers who work inside customers' firms.
+    kill_shot: Labs reporting gross margins as high as software firms' while running large teams inside their customers.
+    rival: durable_labs
+    visible: false
+  - id: niches_open
+    folio: reorganisation
+    title: Cheap AI fills niches no one served
+    holders: [hobart_pundit, hobart_coasian, cai_victoria]
+    attribution: author
+    mechanism: Once a task costs less by machine than any worker would, services appear that were never worth paying a person for, and growth comes from filling them.
+    case: Firms buy AI for any task where it returns more than it costs, however small.
+    kill_shot: New businesses in small information niches not rising as AI's costs fall.
+    rival: fast_growth
+    visible: false
+  - id: generalists
+    folio: reorganisation
+    title: Versatile workers pull ahead of specialists
+    holders: [cai_serviceable]
+    attribution: author
+    mechanism: When AI does the specialised steps, the valuable worker is the one who can direct it across many of them.
+    case: Firms building around AI hire for range more than for depth.
+    kill_shot: Specialists keeping their value over versatile workers.
+    rival: jagged_wages
+    visible: false
 claims:
   # A claim with a `stage` says its map row binds there; a claim about what happens on a row, such as who gains or
   # loses, names the row without a stage, so the map lists it under the row and marks no cell.
@@ -1481,6 +2149,169 @@ claims:
     holders: [korinek_lockwood]
     text: As AI takes over paid work, governments move tax from wages towards spending, and later towards AI itself.
     falsifier: Tax systems unchanged as AI does a growing share of the work.
+  # Part 16: claims from Sean Cai and The Diff, reworded, credited and linked to the post each came from
+  - id: real_work_data
+    position: real_work
+    text: Training for long work whose results are hard to check, in fields such as biology, security and matters of taste, comes to rest on records of real work inside firms, because tasks staged by contractors stop teaching models.
+    row: training_data
+    stage: methods
+    falsifier: Staged practice tasks going on improving models at long office work.
+  - id: labs_by_industry
+    position: data_moats
+    text: The leading labs may pull apart by industry, each strongest where it has bought the most specialist business records.
+    falsifier: The labs staying interchangeable in every industry, with none ahead in a trade because of the data it bought.
+  - id: labs_buy_records
+    position: data_moats
+    attribution: author
+    holders: [cai_may26]
+    text: Labs buy more of their training data straight from leading app companies and specialists, squeezing the firms that sell general practice environments.
+    row: training_data
+    falsifier: General environment sellers keeping their share of the labs' data budgets.
+  - id: data_split
+    position: data_fragments
+    text: The market for training data stays split among many specialist sellers rather than gathering around one or two.
+    row: training_data
+    falsifier: One or two sellers coming to handle most of what the frontier labs buy.
+  - id: tuning_converges
+    position: firms_train
+    text: Leading firms that host models, sell training data or do custom training, such as Baseten, Mercor and Applied Compute, converge on one business, tuning open models for firms and selling them the use.
+    falsifier: These firms staying in separate businesses.
+  - id: firms_buy_data
+    position: firms_train
+    attribution: author
+    holders: [cai_verifiable]
+    text: Firms outside the labs become large buyers of training data and practice tasks, so the labs stop being almost the only customers.
+    row: training_data
+    falsifier: The labs remaining almost all of the spending on training data and practice tasks.
+  - id: field_models_fade
+    position: general_wins
+    text: Start-ups that build a model for one field fall behind as the labs' general models improve, outside a few regulated niches where data is scarce.
+    falsifier: Models built for one field keeping their lead over each new general release.
+  - id: compute_cost_binds
+    position: cost_binds
+    text: With many agents working on a task at once, most valuable office work comes to turn on the cost of computing and the systems around it, not on whether models are good enough.
+    row: inference
+    falsifier: Valuable office tasks staying out of AI's reach even where computing is cheap.
+  - id: deployers_paid
+    position: deployers_scarce
+    text: Engineers who fit AI into each customer's own work stay scarce, so their pay rises or employers settle for weaker hires.
+    row: applications
+    stage: early_adoption
+    falsifier: These roles becoming easy to fill, and their pay premium fading.
+  - id: labs_buy_deployers
+    position: deployers_scarce
+    attribution: author
+    holders: [hobart_nomentum]
+    text: Labs keep buying the consultancies that put AI to work inside companies, to get their staff faster than hiring allows.
+    falsifier: Labs building these teams by hiring and buying no such firms.
+  - id: no_chinese_lead
+    position: us_lead
+    text: Chinese labs do not take the lead at the frontier while the best chips, the tests that matter and the paying customers stay American.
+    falsifier: A Chinese lab's model becoming the best at the frontier.
+  - id: lock_in_fails
+    position: lock_fails
+    text: Labs' efforts to tie customers down, through exclusive deals and bans on copying their models, eventually fail, and moving between labs stays cheap.
+    falsifier: Customers becoming bound to one lab by exclusive deals and bans on copying.
+  - id: models_not_utility
+    position: models_differ
+    text: Models keep differing in efficiency and in the kinds of input they handle, so they do not become an interchangeable utility like electricity.
+    falsifier: Buyers treating models as interchangeable and choosing on the price of a token alone.
+  - id: compute_no_crash
+    position: no_glut
+    text: The price of rented computing does not crash the way internet bandwidth did, because physical capacity cannot be multiplied overnight.
+    falsifier: A sudden glut sending the rent for AI chips down by most of its value within a year.
+  - id: link_overshoots
+    position: glut_somewhere
+    text: Somewhere along the chip supply chain, a part AI has made scarce proves easier to expand than expected, and its price turns.
+    falsifier: Every part squeezed by AI's demand staying scarce and rising in price.
+  - id: grid_hookups
+    position: builders_bind
+    attribution: author
+    holders: [hobart_lr188]
+    text: Data centres arrive faster and with less warning than the grid's planners assume, so getting connected holds back new American sites.
+    row: grid
+    stage: methods
+    falsifier: New sites being connected to the grid as fast as they are built.
+  - id: trades_short
+    position: builders_bind
+    attribution: author
+    holders: [hobart_skilled]
+    text: Too few electricians, welders and other tradespeople hold back the building of data centres, so the largest technology firms keep paying to train them.
+    row: data_centres
+    stage: methods
+    falsifier: Data-centre projects facing no delays tied to shortages of skilled trades.
+  - id: lead_changes
+    position: lead_rotates
+    text: The lab with the best model keeps changing, because the leader uses its chips to serve its popular model while rivals train the next one.
+    falsifier: One lab keeping the best model for several years running.
+  - id: models_held_back
+    position: held_back
+    text: A formal pause looks unlikely; instead the biggest labs, loosely in step, slow the public release of their most powerful models.
+    row: family_5
+    stage: products
+    falsifier: Labs releasing their best models to the public as soon as they are trained.
+  - id: through_incumbents
+    position: liable_wrappers
+    text: Firms increasingly buy AI's work through a party with assets and a licence that can be held liable, such as an established service firm.
+    row: verification
+    stage: early_adoption
+    falsifier: Buyers taking AI's work on long, unpredictable tasks from parties that cannot answer for its mistakes.
+  - id: ai_bills_rise
+    position: tokens_climb
+    text: Firms' spending on AI per employee keeps rising, because what they use grows faster than the price of each unit falls.
+    test: {fact: ramp_spend, gt: ramp_spend_year_ago}
+    expect_state: holding
+    falsifier: Spending on AI per employee levelling off or falling while prices keep dropping.
+  - id: tasks_distilled
+    position: tokens_climb
+    text: Much narrow work AI does is turned into cheap fixed routines, so spending on each such task rises for a while and then stops.
+    falsifier: Spending on well-defined tasks staying high after they are solved.
+    attribution: author
+    holders: [hobart_ghost]
+  - id: ai_unpopular
+    position: backlash
+    text: AI grows more unpopular even as more people use it, giving politicians on both the left and the right reason to campaign against it.
+    row: family_3
+    stage: adaptation
+    falsifier: Public approval of AI rising clearly and politicians campaigning in its favour.
+  - id: jobs_become_data
+    position: train_replacements
+    text: Some jobs move from doing the work to supplying the data that trains AI to do it.
+    falsifier: Few occupations showing workers shifting to producing training data.
+  - id: chips_finance_buyers
+    position: vendor_finance
+    text: NVIDIA keeps financing its own customers in return for a share of their income, and uses such deals to gain a say over who gets computing capacity.
+    falsifier: NVIDIA's revenue staying almost wholly one-off sales of hardware.
+  - id: rent_surplus
+    position: shared_bet
+    text: The largest technology firms build more computing than they need and rent the spare to rivals, so the industry becomes one shared bet on demand for AI.
+    falsifier: The largest firms keeping their computing for their own use and renting none of it out.
+  - id: ads_pay
+    position: ads_fund
+    text: Advertising comes to pay for free AI assistants, because they can spot what people want to buy before search does, though keeping users' trust will be hard.
+    falsifier: Ads in assistants driving users away or earning far less per user than ads in search.
+  - id: trades_scattered
+    position: local_knowledge
+    attribution: author
+    holders: [hobart_n1]
+    text: Law, contracting and other trades scattered by place stay split among many small firms, while the AI tools each trade uses gather around a few vendors.
+    falsifier: A handful of labs ending up running, and profiting from, most professional work directly.
+  - id: records_gain
+    position: records_hold
+    text: Coding agents slow new firms' purchases of ready-made software but make the programs that hold a business's core records worth more.
+    falsifier: Software that holds a business's records losing customers as fast as other software.
+  - id: lab_margins_below
+    position: labs_below_software
+    text: The labs' margins are pulled down because the staff who deploy their models grow with their customers, which a pure software business avoids.
+    falsifier: Labs reporting gross margins at or above classic software's while running large teams inside their customers.
+  - id: niches_filled
+    position: niches_open
+    text: Cheap AI makes many small services worth selling that were never worth paying a person for, and filling these niches is how AI lifts growth.
+    falsifier: New businesses in small information niches not rising as AI's costs fall.
+  - id: generalists_gain
+    position: generalists
+    text: The gap in value between versatile workers who manage AI and narrow specialists keeps widening.
+    falsifier: Specialists keeping their value over versatile workers.
 scenarios:
   progress:
     - {id: stall_capability, label: Capability stalls}

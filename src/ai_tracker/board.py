@@ -22,7 +22,12 @@ WORDS = {
         "not_yet_testable": "too_early",
         None: "too_early",
     },
-    "outlook": {"holding": "happening", "failing": "not_happening", "both": "both", "untestable": "too_early"},
+    "outlook": {
+        "holding": "happening",
+        "failing": "not_happening",
+        "both": "both",
+        "untestable": "too_early",
+    },
     "migration": {"holding": "happening", "failing": "not_happening", "untestable": "too_early"},
     "exit": {
         "supported": "happening",
@@ -40,7 +45,11 @@ def load() -> dict[str, Any]:
 
 
 def _who(c: dict[str, Any], sources: dict[str, dict[str, Any]]) -> str:
-    names = [sources[h].get("short") or sources[h]["who"] for h in c.get("holders") or [] if h in sources]
+    names = list(
+        dict.fromkeys(
+            sources[h].get("short") or sources[h]["who"] for h in c.get("holders") or [] if h in sources
+        )
+    )
     if c.get("attribution") == "site" or not names:
         return "This site"
     lead = " and ".join(names)
@@ -186,7 +195,8 @@ def build(
             {
                 **f,
                 "rows": sorted(
-                    (r for r in rs if r["folio"] == f["id"]), key=lambda r: (rank[r["word"]], r["kind"], r["id"])
+                    (r for r in rs if r["folio"] == f["id"]),
+                    key=lambda r: (rank[r["word"]], r["kind"], r["id"]),
                 ),
                 "too_early": sum(1 for r in rs if r["folio"] == f["id"] and r["word"] == "too_early"),
             }
