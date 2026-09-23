@@ -486,4 +486,4 @@
 
 - Band input: `yale_budget_lab_data.us_workers.occupation_dissimilarity_pp.m` (pp)
 - Rule: normal -inf to 7.5; fast 10.0 to inf; falsifying none. Normal = within one and a half times the pre-AI baseline's reading at the same age (the January 2021 baseline sat near 5 pp forty months in); fast = 10 pp or more, twice the pre-AI pace. Between is `emerging`.
-- Timing: Lagging: the occupational mix moves only as workers change jobs over years, and the index is updated a few times a year.
+- Timing: Lagging: the occupational mix moves only as workers change jobs over years, and the Budget Lab updates the index about six weeks after each month.
