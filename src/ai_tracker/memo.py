@@ -328,12 +328,12 @@ REFRESH_NOTES = {
 # would ask for a refresh that cannot, or need not, happen. Each reason was checked on the date it gives.
 # ponytail: a source that states the figure again needs its entry removed by hand.
 NOT_DUE = {
-    "menlo.enterprise.multi_model_share.pt": "later waves report a typical model count instead (22 Sep 2026)",
-    "anthropic_ei.global.augmentation_share_reported.pt": "later reports state neither share in text (22 Sep 2026)",
-    "anthropic_ei.global.automation_share_reported.pt": "later reports state neither share in text (22 Sep 2026)",
-    "anthropic_ei.global.occupations_25pct_tasks_share.pt": "no later report states it (22 Sep 2026)",
-    "adp_research.us_high_exposure.employment_yoy.m": "the canaries connector reads Stanford's own files for these figures monthly",
-    "adp_research.us_low_exposure.employment_yoy.m": "the canaries connector reads Stanford's own files for these figures monthly",
+    "menlo.enterprise.multi_model_share.pt": "only the 2023 wave states a share; the 2024 wave gives a typical model "
+    "count and the 2025 reports neither (22 Sep 2026)",
+    "anthropic_ei.global.augmentation_share_reported.pt": "later reports state neither share in text, and the "
+    "dataset connector reads both monthly (22 Sep 2026)",
+    "anthropic_ei.global.automation_share_reported.pt": "later reports state neither share in text, and the "
+    "dataset connector reads both monthly (22 Sep 2026)",
 }
 
 
