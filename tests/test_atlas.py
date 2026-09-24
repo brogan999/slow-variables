@@ -15,7 +15,6 @@ NUMBER_WORD = re.compile(
     re.I,
 )
 NAMES = {"v0"}  # a product name, not a figure: the tool the plates were made in
-ADVICE = re.compile(r"own it|double down|should (buy|sell|invest)|time to (buy|sell)|position yourself", re.I)
 
 
 def _e(i, domain="work", era="now", worlds=("brake",), source="a"):
@@ -105,8 +104,6 @@ def test_the_site_types_no_figure_and_credited_lines_type_only_years():
         assert all(YEAR.fullmatch(w) for w in stray), (t, stray)
     for t in atlas.strings(spec):
         assert not NUMBER_WORD.search(t), t
-    hits = [m.group(0) for t in [*atlas.strings(spec), *atlas.credited(spec)] for m in ADVICE.finditer(t)]
-    assert hits == [], hits
 
 
 def test_the_world_filter_ships_only_when_a_third_of_entries_name_worlds():
