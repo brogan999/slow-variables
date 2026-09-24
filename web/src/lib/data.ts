@@ -322,25 +322,34 @@ export type CensusFunction = {
   share_goes: number; band_lo: number; band_hi: number; verifier_queue: number; roles: number;
 };
 export type CensusIndustry = {
-  naics: string; title: string; ref: string; payroll: number; knowledge_payroll: number; freed: number; agreed3: number;
+  naics: string; title: string; ref: string; payroll: number; knowledge_payroll: number; freed: number; agreed3: number | null;
   verifier_queue: number; share_total: number;
 };
 export type CensusCard = {
   key: string; name: string; naics: string; invoice: string; why: string; kill: string[]; comps: string[]; scope: string;
   excl: string; anchored: boolean; stance: string; stance_why: string; sources: { cited_as: string; href: string }[];
-  payroll: number; freed: number; freed_lo: number; freed_hi: number; agreed3: number;
-  roles: { title: string; wage_bill: number; share_goes: number; freed: number; agreed3: number }[];
+  payroll: number; freed: number; freed_lo: number; freed_hi: number; agreed3: number | null;
+  roles: { title: string; wage_bill: number; share_goes: number; freed: number; agreed3: number | null }[];
 };
 export type CensusIndex = {
-  version: string; generated_at: string; manifest_sha256: string; sources: string[]; scorers: string[];
-  prose: { title: string; lede: string; rule: string; agreed: string; caveats: string[]; sections: Record<string, { title: string; lede: string }> };
+  version: string; generated_at: string; manifest_sha256: string; sources: string[]; scorers: string[]; scorer_names: Record<string, string>;
+  prose: { title: string; lede: string; rule: string; agreed: string; caveats: string[]; sections: Record<string, { title: string; lede: string }>; method_notes: Record<string, string> };
   headline: { freed: number; agreed3: number; payroll: number; agreed: number; contested: number; verifier_queue: number; without_gemini: number; physical_removed: number; ref: string };
   dial: { rule: string; freed: number; agreed3: number; alone: number; alone_rest: number; headline: boolean }[];
   dial_fields: Record<string, string>;
   functions: CensusFunction[]; industries: CensusIndustry[]; roles: CensusRole[];
   deals: { cards: CensusCard[]; not_carded: { name: string; why: string }[] };
-  method: Record<string, unknown>;
+  method: CensusMethod;
   csv: Record<string, string>;
+};
+export type CensusMethod = {
+  gates: { g: string; v: string; t: string; p: boolean | "x" | null; n: string }[];
+  adjudication: { scorer: string; tasks: number; stakes_vs_workers: number; grader_vs_workers: number; alone_consumer: number }[];
+  placebo: { method: string; noise_median: number; trusted: boolean }[];
+  stability: { start: number; industry: string; b: number; ci: number }[];
+  channel: { runs: { period: string; scorer: string; n: number; coef: number; z: number }[] };
+  physical_gate: { removed_usd: number; spotcheck: { sample: number; error_rate: number; ci90: number[]; headline_low_by_usd: number[] } };
+  sigma: { sigma: number; before: number; after: number }[];
 };
 export type CensusTask = {
   id: string; ref: string; task: string; goes: boolean; why: string; physical: boolean; contested: boolean;

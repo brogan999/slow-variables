@@ -40,7 +40,7 @@ export default async function CensusRolePage({ params }: { params: Promise<{ occ
     <ArticleLayout
       head={
         <PageHeader
-          eyebrow={<><Link href="/census" className="hover:text-ink">Census</Link> · {r.function} · SOC {r.occ}</>}
+          eyebrow={<><Link href="/census" className="hover:text-ink">Census</Link> · {r.function} · occupation code {r.occ}</>}
           title={r.title}
           lede={`Every task in this role, whether AI can take it on today under the census rule, and why. The share that can go is a range, not a rank: tightening or loosening the rule moves it.`}
         />

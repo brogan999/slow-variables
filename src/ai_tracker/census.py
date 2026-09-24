@@ -30,6 +30,9 @@ TABLES = {
     "census_functions": "functions.csv",
 }
 TEXT_COLUMNS = {"occ", "naics", "occ_title", "naics_title", "title", "function", "task", "why"}
+# The one `why` phrase that is shorthand rather than words; the rest of the census's fixed phrases read plainly.
+PLAIN_WHY = {"checkable fast, verifier exists, survivable if wrong": "quick to check, software can check it, and a mistake is cheap"}
+MODEL_NAMES = {"claude-sonnet": "Claude Sonnet", "claude-haiku": "Claude Haiku", "gemini": "Gemini"}
 METHOD = ["gates", "adjudication", "placebo", "stability", "channel", "physical_gate", "sigma"]  # sigma is modelled; shown only here
 
 
@@ -179,7 +182,7 @@ def build(spec: dict[str, Any], fetched: dict[str, Any]) -> tuple[dict[str, Any]
                     "ref": ref(spec, "tasks.csv", t["task_id"]),
                     "task": t["task"],
                     "goes": truth(t["goes"]),
-                    "why": t["why"],
+                    "why": PLAIN_WHY.get(t["why"], t["why"]),
                     "physical": truth(t["physical"]),
                     "contested": truth(t["contested"]),
                     "agreed_all_three": truth(t["agreed_all_three"]),
@@ -196,7 +199,7 @@ def build(spec: dict[str, Any], fetched: dict[str, Any]) -> tuple[dict[str, Any]
             ],
             "csv": csv_href("tasks.csv"),
         }
-    roles.sort(key=lambda x: (x["function"], -(x["freed"] or 0), x["occ"]))
+    roles.sort(key=lambda x: (x["function"], x["title"]))  # bands, not ranks: alphabetical within a function
 
     h = m["headline"]
     index = {
@@ -205,7 +208,8 @@ def build(spec: dict[str, Any], fetched: dict[str, Any]) -> tuple[dict[str, Any]
         "manifest_sha256": hashlib.sha256((d / "manifest.json").read_bytes()).hexdigest(),
         "sources": m["sources"],
         "scorers": spec["scorers"],
-        "prose": {k: spec[k] for k in ("title", "lede", "rule", "agreed", "sections", "caveats")},
+        "scorer_names": {k: next((n for p, n in MODEL_NAMES.items() if v.startswith(p)), v) for k, v in val["scorers"].items()},
+        "prose": {k: spec[k] for k in ("title", "lede", "rule", "agreed", "sections", "caveats", "method_notes")},
         "headline": {
             "freed": h["freed_usd"],
             "agreed3": h["agreed_all_three_usd"],
@@ -251,7 +255,7 @@ def build(spec: dict[str, Any], fetched: dict[str, Any]) -> tuple[dict[str, Any]
                     "payroll": num(r["total"]),
                     "knowledge_payroll": num(r["know"]),
                     "freed": num(r["freed"]),
-                    "agreed3": num(r["agreed3"]),
+                    "agreed3": num(r["agreed3"]) if (num(r["payroll_scored_by_three"]) or 0) > 0 else None,
                     "verifier_queue": num(r["blocked"]),
                     "share_total": num(r["share_total"]),
                 }
@@ -269,8 +273,8 @@ def build(spec: dict[str, Any], fetched: dict[str, Any]) -> tuple[dict[str, Any]
                     "freed": c["freed"],
                     "freed_lo": c["freed_lo"],
                     "freed_hi": c["freed_hi"],
-                    "agreed3": c["freed_agreed3"],
-                    "roles": [{"title": x["t"], "wage_bill": x["b"], "share_goes": x["g"], "freed": x["f"], "agreed3": x["a3"]} for x in c["roles"]],
+                    "agreed3": c["freed_agreed3"] if c["payroll_scored_by_three"] > 0 else None,
+                    "roles": [{"title": x["t"], "wage_bill": x["b"], "share_goes": x["g"], "freed": x["f"], "agreed3": x["a3"] if x["s3"] > 0 else None} for x in c["roles"]],
                 }
                 for c in deals["cards"]
             ],
@@ -287,4 +291,4 @@ def strings(spec: dict[str, Any]) -> list[str]:
     if not spec:
         return []
     s = spec["sections"]
-    return [spec["title"], spec["lede"], spec["rule"], spec["agreed"], *spec["caveats"], *(x[k] for x in s.values() for k in ("title", "lede"))]
+    return [spec["title"], spec["lede"], spec["rule"], spec["agreed"], *spec["caveats"], *spec["method_notes"].values(), *(x[k] for x in s.values() for k in ("title", "lede"))]
