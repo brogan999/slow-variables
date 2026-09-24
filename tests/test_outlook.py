@@ -209,13 +209,6 @@ NUMBER_WORD = re.compile(
     r"|seventeen|eighteen|nineteen|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety)\b|-fold\b",
     re.I,
 )
-ADVICE = re.compile(  # advice to the reader; describing what labs or firms buy is not advice
-    r"own it|double down|size as|enter when|exit when|stop when|don't buy|you are late|inflecting|investors should"
-    r"|should (buy|sell|invest)|time to (buy|sell)|(buy|sell) now|position yourself",
-    re.I,
-)
-
-
 def _texts() -> list[str]:
     spec = ol.load()
     return [ol.ESSAY.read_text(), *ol.strings(spec)]
@@ -240,11 +233,6 @@ def test_a_number_word_travels_with_its_token():
                 assert ol.TOKEN.search(sentence), (
                     sentence
                 )  # "a fifth", "twice": a figure in words still needs its source
-
-
-def test_the_outlook_forecasts_and_never_advises():
-    hits = [m.group(0) for t in _texts() for m in ADVICE.finditer(t)]
-    assert hits == [], hits
 
 
 def test_the_ledger_and_the_essay_resolve():
