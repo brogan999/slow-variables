@@ -229,3 +229,182 @@ def forecast_problems(rows: list[dict[str, Any]], sources: list[dict[str, Any]],
         if r.get("ledger_id") and r["ledger_id"] not in ledger:
             errors.append(f"futures canon: {rid} links unknown ledger entry {r['ledger_id']}")
     return errors
+
+
+CATEGORY_NAMES = {
+    "space": "Space travel and habitats", "computing_ai": "Computing, AI and virtual worlds",
+    "communication_media": "Communication, media and displays", "robotics_automation": "Robotics and automation",
+    "medicine_biotech": "Medicine, biotech and longevity", "mind_neurotech": "Mind and neurotechnology",
+    "transport": "Transport and mobility", "energy": "Energy and power",
+    "materials_manufacturing": "Materials, manufacturing and construction", "weapons_warfare": "Weapons and warfare",
+    "surveillance_identity": "Surveillance, identity and control", "food_environment": "Food, agriculture and environment",
+    "home_everyday": "Home and everyday life", "exotic_physics": "Exotic physics", "society_economy": "Society and economy",
+}
+TIER_WORDS = {"none": "none", "thin": "thin", "moderate": "moderate", "fat": "fat", "monopoly_like": "monopoly-like"}
+POOLS_WORDS = {"innovator": "the maker", "incumbents": "incumbent firms", "platforms": "platforms",
+               "regulators_licensees": "licence holders"}
+# How an idea's profit reads: users collecting it and there being no lasting profit are different results.
+PROFIT_WORDS = ["fat", "moderate", "thin", "monopoly-like", "no lasting profit", "competed away to users", "not judged"]
+
+
+def profit(x: dict[str, Any]) -> str:
+    if not x["tier"]:
+        return "not judged"
+    if x["pools"] == "users":
+        return "competed away to users"
+    return "no lasting profit" if x["tier"] == "none" else TIER_WORDS[x["tier"]]
+
+
+def profit_text(x: dict[str, Any]) -> str:
+    p = profit(x)
+    if p in ("fat", "moderate", "thin", "monopoly-like"):
+        return f"a {p} profit, kept by {POOLS_WORDS[x['pools']]}"
+    return {"not judged": "not judged (not a technology, not something sold, not physically possible, or unclear)"}.get(p, p)
+
+
+def built(state: str) -> bool:
+    """Built after it was imagined; a real thing that came first is 'already existed', not built since."""
+    return state in ("marked_built", "marked_built_date_unclear")
+EARLY = 1850  # everything imagined before this decade shares one bucket
+IMAGES = ROOT / "seed" / "futures" / "images.yaml"
+CREDITS = ROOT / "seed" / "futures" / "credits.yaml"
+
+
+def imagined_key(year: int) -> str:
+    return "before-1850" if year < EARLY else f"{year // 10 * 10}s"
+
+
+def _arrival(a: dict[str, Any]) -> str:
+    when = str(a["year"]) if a.get("year") else (f"the {a['decade']}s" if a.get("decade") else "")
+    if a["state"] == "marked_built":
+        lag = f"{a['lag_years']} years" if "lag_years" in a else f"about {a['lag_decades'] * 10} years"
+        return f"built in {when}, {lag} after it was imagined"
+    return {"already_existed": f"already existed before the story ({when})", "marked_built_date_unclear": "built since, date unclear",
+            "not_marked_built": "not yet built"}[a["state"]]
+
+
+def _judged(key: str) -> str:
+    return {"impossible": "AI models judge it not physically possible", "cannot-judge": "AI models could not judge when it may arrive"}.get(
+        key, f"AI models' likeliest decade: {phrase(key)}")
+
+
+def phrase(key: str) -> str:
+    """A decade key as a phrase that reads inside a sentence."""
+    return {"before-1850": "before 1850", "2100-or-later": "2100 or later", "impossible": "not physically possible",
+            "cannot-judge": "no judgement"}.get(key, f"the {key}")
+
+
+def _when(w: dict[str, Any]) -> str:
+    k = w["kind"]
+    if k == "year":
+        return str(w["year"])
+    if k == "by":
+        return f"by {w['year']}"
+    if k == "decade":
+        return f"the {w['low']}s"
+    return f"{w['low']} to {w['high']}" if w.get("high") else f"from {w['low']}"
+
+
+def expected_key(r: dict[str, Any]) -> str:
+    """The decade a forecast or an unbuilt idea is expected in; for a stated range, its first year."""
+    if "when" in r:
+        y = r["when"].get("year") or r["when"]["low"]
+        return "2100-or-later" if y >= 2100 else f"{y // 10 * 10}s"
+    d = r["arrival_decade"]
+    return {"after_2100": "2100-or-later", "not_physically_possible": "impossible", "cannot_judge": "cannot-judge"}.get(d, d)
+
+
+EXPECTED_LABELS = {"2100-or-later": "2100 or later", "impossible": "not physically possible", "cannot-judge": "cannot judge"}
+
+
+def build() -> dict[str, Any]:
+    """web/data/futures/: counts and bar widths for the two decade strips, and one document per decade and category.
+    The web renders; every count, share and label is decided here."""
+    every, fcs = ideas(), forecasts()
+    if not every:
+        return {}
+    imgs = {x["stem"]: x for x in (yaml.safe_load(IMAGES.read_text()) or {}).get("images", [])} if IMAGES.exists() else {}
+    imgs = {k: x for k, x in imgs.items() if not x.get("withheld")}  # failed review: the category image stands in
+    by_idea = {x["idea"]: f"/futures/{x['stem']}" for x in imgs.values() if x.get("idea")}
+    works = {s["id"]: s for s in canon_sources()}
+
+    def card(x: dict[str, Any]) -> dict[str, Any]:
+        return {
+            "id": x["id"], "name": x["name"], "work": x["work"], "author": x["author"], "imagined": x["imagined"],
+            "line": x["line"], "arrival": _arrival(x["arrival"]),
+            "built": x["arrival"]["state"] != "not_marked_built",
+            "judged": _judged(expected_key(x)) if x["arrival"]["state"] == "not_marked_built" else None,
+            "profit": profit_text(x),
+            "image": by_idea.get(x["id"]),
+        }
+
+    def forecast(f: dict[str, Any]) -> dict[str, Any]:
+        return {
+            "id": f["id"], "who": f["who"], "line": f["line"],
+            "when": _when(f["when"]), "odds": f["odds"], "quote": f["quote"],
+            "ledger": f"/predictions#{f['ledger_id']}" if f["ledger_id"] else None,
+            "works": [{"title": works[w]["title"], "author": works[w]["author"], "year": works[w]["year"], "url": works[w].get("url")} for w in f["works"]],
+        }
+
+    def grouped(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        out = []
+        for cid, name in CATEGORY_NAMES.items():
+            rs = sorted((card(x) for x in rows if x["category"] == cid), key=lambda c: (c["imagined"], c["name"]))
+            if rs:
+                out.append({"id": cid, "name": name, "n": len(rs), "ideas": rs})
+        rest = sorted((card(x) for x in rows if x["category"] not in CATEGORY_NAMES), key=lambda c: (c["imagined"], c["name"]))
+        if rest:  # the models could not place these
+            out.append({"id": "unclassified", "name": "Not classified", "n": len(rest), "ideas": rest})
+        return out
+
+    imagined_keys = ["before-1850"] + [f"{d}s" for d in range(EARLY, 2030, 10)]
+    peak = max(sum(1 for x in every if imagined_key(x["imagined"]) == k) for k in imagined_keys)
+    imagined, decade_docs = [], {}
+    for k in imagined_keys:
+        rows = [x for x in every if imagined_key(x["imagined"]) == k]
+        n_built = sum(1 for x in rows if built(x["arrival"]["state"]))
+        label = "before 1850" if k == "before-1850" else k
+        imagined.append({"key": k, "label": label, "n": len(rows), "built": n_built, "width": round(100 * len(rows) / peak, 1),
+                         "built_width": round(100 * n_built / peak, 1), "href": f"/futures/imagined/{k}" if rows else None})
+        if rows:
+            decade_docs[f"imagined/{k}"] = {"kind": "imagined", "key": k, "label": label, "title": f"Imagined {'before 1850' if k == 'before-1850' else 'in ' + phrase(k)}",
+                                            "n": len(rows), "built": n_built, "groups": grouped(rows)}
+
+    unbuilt = [x for x in every if x["arrival"]["state"] == "not_marked_built"]
+    keys = sorted({expected_key(x) for x in unbuilt} | {expected_key(f) for f in fcs}, key=lambda k: (k in EXPECTED_LABELS, k))
+    judged = {k: [x for x in unbuilt if expected_key(x) == k] for k in keys}
+    stated = {k: [f for f in fcs if expected_key(f) == k] for k in keys}
+    peak_e = max(max(len(v) for v in judged.values()), max(len(v) for v in stated.values()))
+    expected = []
+    for k in keys:
+        label = EXPECTED_LABELS.get(k, k)
+        if k[:4].isdigit() and int(k[:4]) < 2020:
+            label += ", passed"
+        expected.append({"key": k, "label": label, "judged": len(judged[k]), "stated": len(stated[k]),
+                         "judged_width": round(100 * len(judged[k]) / peak_e, 1), "stated_width": round(100 * len(stated[k]) / peak_e, 1),
+                         "href": f"/futures/expected/{k}"})
+        title = {"impossible": "Judged not physically possible", "cannot-judge": "Arrival not judged"}.get(k, f"Expected {'in ' if k[:4].isdigit() else ''}{phrase(k)}")
+        decade_docs[f"expected/{k}"] = {"kind": "expected", "key": k, "label": label, "title": title, "phrase": phrase(k), "judged": len(judged[k]),
+                                        "stated": len(stated[k]), "groups": grouped(judged[k]),
+                                        "forecasts": sorted((forecast(f) for f in stated[k]), key=lambda f: (f["when"], f["who"]))}
+
+    categories, category_docs = [], {}
+    for cid, name in CATEGORY_NAMES.items():
+        rows = [x for x in every if x["category"] == cid]
+        tiers = {w: sum(1 for x in rows if profit(x) == w) for w in PROFIT_WORDS}
+        img = f"/futures/cat-{cid}" if f"cat-{cid}" in imgs else None
+        categories.append({"id": cid, "name": name, "n": len(rows), "built": sum(1 for x in rows if built(x["arrival"]["state"])),
+                           "tiers": tiers, "image": img, "href": f"/futures/category/{cid}"})
+        category_docs[cid] = {"id": cid, "name": name, "image": img, "n": len(rows), "tiers": tiers,
+                              "ideas": sorted((card(x) for x in rows), key=lambda c: (c["imagined"], c["name"])),
+                              "forecasts": sorted((forecast(f) for f in fcs if f["category"] == cid), key=lambda f: (f["when"], f["who"]))}
+    featured = [card(x) for x in sorted(every, key=lambda x: x["imagined"]) if x["shortlist"] and by_idea.get(x["id"])][:12]
+    return {
+        "index": {"n_ideas": len(every), "n_forecasts": len(fcs), "n_idea_images": len(by_idea),
+                  "n_category_images": sum(1 for k in imgs if k.startswith("cat-")),
+                  "imagined": imagined, "expected": expected, "categories": categories, "featured": featured,
+                  "tier_words": PROFIT_WORDS,
+                  "credits": [{"name": c["name"], "url": c["url"], "archived": "web.archive.org" in c["url"]} for c in (yaml.safe_load(CREDITS.read_text()) or {}).get("credits", [])] if CREDITS.exists() else []},
+        "decades": decade_docs,
+        "categories": category_docs,
+    }

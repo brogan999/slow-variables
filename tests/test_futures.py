@@ -162,3 +162,26 @@ def test_the_canon_seed_passes_its_checks():
 
     ledger = {p["id"] for p in yaml.safe_load(open(fu.ROOT / "seed" / "predictions.yaml"))["predictions"]}
     assert fu.forecast_problems(fu.forecasts(), fu.canon_sources(), fu.rubric(), ledger) == []
+
+
+def test_the_futures_export_counts_every_idea_once_and_withholds_failed_images():
+    import yaml
+
+    b = fu.build()
+    i = b["index"]
+    assert sum(d["n"] for d in i["imagined"]) == len(fu.ideas())
+    assert sum(c["n"] for c in i["categories"]) + sum(x["category"] not in fu.CATEGORY_NAMES for x in fu.ideas()) == len(fu.ideas())
+    on_pages = {x["id"] for k, d in b["decades"].items() if k.startswith("imagined/") for g in d["groups"] for x in g["ideas"]}
+    assert on_pages == {x["id"] for x in fu.ideas()}
+    assert sum(d["stated"] for d in i["expected"]) == len(fu.forecasts())
+    withheld = {x["idea"] for x in yaml.safe_load(fu.IMAGES.read_text())["images"] if x.get("withheld") and x.get("idea")}
+    shown = {x["id"] for d in b["decades"].values() for g in d["groups"] for x in g["ideas"] if x["image"]}
+    assert withheld and not withheld & shown
+    assert all(0 <= d["width"] <= 100 for d in i["imagined"]) and max(d["width"] for d in i["imagined"]) == 100
+    assert len(i["credits"]) == 2 and all(c["url"].startswith("https://") for c in i["credits"])
+
+
+def test_futures_is_in_the_nav_and_the_sitemap():
+    web = fu.ROOT / "web" / "src"
+    assert '"/futures"' in (web / "lib" / "nav.ts").read_text()
+    assert "futures()" in (web / "app" / "sitemap.ts").read_text()
