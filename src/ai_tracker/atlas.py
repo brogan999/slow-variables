@@ -125,7 +125,8 @@ def build(
         d = doms[did]
         mine = [e for e in entries if e["domain"] == did]
         readings = [
-            {"id": k, "label": v, "reading": singularity.reading(s, k, facts, today)}
+            {"id": k, "label": v, "reading": (r := singularity.reading(s, k, facts, today))}
+            | {"year": r["as_of"][:4] if r else None}  # annual series read "Latest, 2025", never "tonight"
             for k, v in (d.get("readings") or {}).items()
         ]
         inds = {k for k in d.get("readings") or {} if k not in facts}
@@ -190,14 +191,17 @@ def build(
                     {
                         "era": era,
                         "href": f"/singularity/atlas/{did}#{era}",
-                        **{
-                            w: {
+                        "counts": [  # "all" first, then each world; the page shows one set at a time
+                            {
+                                "world": w,
                                 "n": n,
                                 "level": level(n),
-                                "label": f"{d['name']}, {eras[era]['label'].lower()}: {n} sourced {'work' if n == 1 else 'works'}",
+                                "label": f"{d['name']}, {eras[era]['label'].lower()}"
+                                + ("" if w == "all" else f", {wlabel[w].lower()}")
+                                + f": {n} sourced {'work' if n == 1 else 'works'}",
                             }
                             for w, n in (counts.get((did, era)) or dict.fromkeys(["all", *wids], 0)).items()
-                        },
+                        ],
                     }
                     for era in ERAS
                 ],
