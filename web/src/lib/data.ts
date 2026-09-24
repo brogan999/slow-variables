@@ -361,3 +361,26 @@ export type CensusRoleDoc = {
 };
 export const census = () => read<CensusIndex>("census/index.json");
 export const censusRole = (occ: string) => read<CensusRoleDoc>(`census/roles/${occ}.json`);
+
+// Futures (plan Part 20): imagined and expected technologies by decade, model-judged, rendered as exported.
+export type FuIdea = {
+  id: string; name: string; work: string; author: string; imagined: number; line: string; category: string;
+  arrival: string; built: boolean; expected: string | null; tier: string | null; pools: string | null; image: string | null; shortlist: boolean;
+};
+export type FuForecast = {
+  id: string; who: string; technology: string; line: string; category: string; when: string; odds: string | null; quote: string | null;
+  ledger: string | null; works: { title: string; author: string; year: number; url?: string }[];
+};
+export type FuGroup = { id: string; name: string; n: number; ideas: FuIdea[] };
+export type FuIndex = {
+  n_ideas: number; n_forecasts: number; n_images: number; n_shortlist: number; tier_words: string[];
+  imagined: { key: string; label: string; n: number; built: number; width: number; built_width: number; href: string | null }[];
+  expected: { key: string; label: string; judged: number; stated: number; judged_width: number; stated_width: number; href: string }[];
+  categories: { id: string; name: string; n: number; built: number; tiers: Record<string, number>; image: string | null; href: string }[];
+  featured: FuIdea[]; credits: { name: string; url: string }[];
+};
+export type FuDecade = { kind: "imagined" | "expected"; key: string; label: string; n?: number; built?: number; judged?: number; stated?: number; groups: FuGroup[]; forecasts?: FuForecast[] };
+export type FuCategory = { id: string; name: string; image: string | null; n: number; tiers: Record<string, number>; ideas: FuIdea[]; forecasts: FuForecast[] };
+export const futures = () => read<FuIndex>("futures/index.json");
+export const futuresDecade = (kind: string, key: string) => read<FuDecade>(`futures/${kind}/${key}.json`);
+export const futuresCategory = (id: string) => read<FuCategory>(`futures/category/${id}.json`);

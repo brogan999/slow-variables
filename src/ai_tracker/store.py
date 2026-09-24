@@ -938,6 +938,17 @@ class Store:
         from .atlas import build as build_atlas
 
         _write(out / "atlas.json", build_atlas(self, outlook=outlook, board_doc=board_doc))
+        from . import futures as fut
+
+        fu_doc = fut.build()
+        if fu_doc:
+            for sub in ("imagined", "expected", "category"):
+                (out / "futures" / sub).mkdir(parents=True, exist_ok=True)
+            _write(out / "futures" / "index.json", fu_doc["index"])
+            for k, d in fu_doc["decades"].items():
+                _write(out / "futures" / f"{k}.json", d)
+            for k, d in fu_doc["categories"].items():
+                _write(out / "futures" / "category" / f"{k}.json", d)
         from . import census
 
         index, roles = census.build(census.load(), census.fetches())
