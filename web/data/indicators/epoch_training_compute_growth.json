@@ -6,9 +6,9 @@
  "band_input": "metric:training_compute_doubling_days",
  "band_rationale": "Normal = doubling no faster than every 300 days (about 2.3x a year, the pre-2010 pace of compute growth); fast = every 182 days or less (4x a year or more, Epoch's 2010-2025 trend). Between is emerging.",
  "band_value": {
-  "as_of": "2025-07-09",
-  "high": 192.46062082988894,
-  "low": 151.69548199827196,
+  "as_of": "2026-09-03",
+  "high": 190.42126742640994,
+  "low": 153.12215375957246,
   "obs_ids": [
    "01535b1443f7c06e",
    "032a5a5d039447dd",
@@ -35,6 +35,7 @@
    "4192730052dfbd11",
    "421cbd4bbfac729f",
    "43f4433ed594b14a",
+   "4a3a28818fe771be",
    "4f550644ac95375f",
    "51bb9006ed0c0e6c",
    "57f6ba2fefe35e2f",
@@ -78,7 +79,7 @@
    "fc5fd5669bbe4b2c"
   ],
   "unit": "days",
-  "value": 169.6637450421973
+  "value": 169.74689539564457
  },
  "bucket_id": "methods",
  "cadence_expected": "annual",
@@ -113,19 +114,19 @@
   "x": {
    "ticks": [
     {
-     "label": "Jun 2025",
+     "label": "Aug 2026",
      "minor": false,
-     "x": 10.42
+     "x": 15.62
     },
     {
-     "label": "Jul",
+     "label": "Sep",
      "minor": false,
-     "x": 41.67
+     "x": 47.92
     },
     {
-     "label": "Aug",
+     "label": "Oct",
      "minor": false,
-     "x": 73.96
+     "x": 79.17
     }
    ]
   },
@@ -173,7 +174,7 @@
  "confidence_basis": {
   "best_tier": 6,
   "grade": "B",
-  "n_observations": 66,
+  "n_observations": 67,
   "sources": [
    "Epoch AI notable and frontier models"
   ],
@@ -205,15 +206,15 @@
  "definition": "Doubling time of frontier models' training compute, fitted log-linearly against publication date from 2020 on Epoch's frontier-model table. Derived metric training_compute_doubling_days.",
  "derived": [
   {
-   "as_of_date": "2025-07-09",
-   "computed_at": "2026-09-23T23:58:29.989506Z",
+   "as_of_date": "2026-09-03",
+   "computed_at": "2026-09-24T11:58:34.053869Z",
    "dims": {
-    "aic": "-10.0",
-    "n": "38",
-    "r2": "0.884"
+    "aic": "-11.4",
+    "n": "39",
+    "r2": "0.898"
    },
    "formula_version": "1",
-   "id": "3a87092c735c1405",
+   "id": "ff8adff7a71f32e9",
    "input_observation_ids": [
     "01535b1443f7c06e",
     "032a5a5d039447dd",
@@ -240,6 +241,7 @@
     "4192730052dfbd11",
     "421cbd4bbfac729f",
     "43f4433ed594b14a",
+    "4a3a28818fe771be",
     "4f550644ac95375f",
     "51bb9006ed0c0e6c",
     "57f6ba2fefe35e2f",
@@ -309,6 +311,7 @@
     "4192730052dfbd11",
     "421cbd4bbfac729f",
     "43f4433ed594b14a",
+    "4a3a28818fe771be",
     "4f550644ac95375f",
     "51bb9006ed0c0e6c",
     "57f6ba2fefe35e2f",
@@ -351,9 +354,9 @@
     "f109ad8f8e60d9f7",
     "fc5fd5669bbe4b2c"
    ],
-   "value": 169.6637450421973,
-   "value_high": 192.46062082988894,
-   "value_low": 151.69548199827196
+   "value": 169.74689539564457,
+   "value_high": 190.42126742640994,
+   "value_low": 153.12215375957246
   }
  ],
  "direction": null,
@@ -370,12 +373,12 @@
  "grade": "B",
  "id": "epoch_training_compute_growth",
  "latest": {
-  "as_of": "2025-07-09",
-  "derived_id": "3a87092c735c1405",
+  "as_of": "2026-09-03",
+  "derived_id": "ff8adff7a71f32e9",
   "dims": {
-   "aic": "-10.0",
-   "n": "38",
-   "r2": "0.884"
+   "aic": "-11.4",
+   "n": "39",
+   "r2": "0.898"
   },
   "obs_ids": [
    "01535b1443f7c06e",
@@ -403,6 +406,7 @@
    "4192730052dfbd11",
    "421cbd4bbfac729f",
    "43f4433ed594b14a",
+   "4a3a28818fe771be",
    "4f550644ac95375f",
    "51bb9006ed0c0e6c",
    "57f6ba2fefe35e2f",
@@ -446,13 +450,13 @@
    "fc5fd5669bbe4b2c"
   ],
   "unit": "days",
-  "value": 169.6637450421973
+  "value": 169.74689539564457
  },
  "layer_id": "model",
  "leading_lagging": "leading",
  "metric": "training_compute_doubling_days",
  "metric_dims": {},
- "n_observations": 66,
+ "n_observations": 67,
  "name": "Frontier training compute growth (doubling time)",
  "normal_band": {
   "hi": null,
@@ -462,14 +466,14 @@
  "pending": null,
  "points": [
   {
-   "as_of": "2025-07-09",
-   "derived_id": "3a87092c735c1405",
+   "as_of": "2026-09-03",
+   "derived_id": "ff8adff7a71f32e9",
    "dims": {
-    "aic": "-10.0",
-    "n": "38",
-    "r2": "0.884"
+    "aic": "-11.4",
+    "n": "39",
+    "r2": "0.898"
    },
-   "href": "#d-3a87092c735c1405",
+   "href": "#d-ff8adff7a71f32e9",
    "obs_ids": [
     "01535b1443f7c06e",
     "032a5a5d039447dd",
@@ -496,6 +500,7 @@
     "4192730052dfbd11",
     "421cbd4bbfac729f",
     "43f4433ed594b14a",
+    "4a3a28818fe771be",
     "4f550644ac95375f",
     "51bb9006ed0c0e6c",
     "57f6ba2fefe35e2f",
@@ -540,9 +545,9 @@
    ],
    "stamp": "estimate",
    "unit": "days",
-   "value": 169.6637450421973,
+   "value": 169.74689539564457,
    "x": 50.0,
-   "y": 57.58
+   "y": 57.56
   }
  ],
  "prediction_rows": [
