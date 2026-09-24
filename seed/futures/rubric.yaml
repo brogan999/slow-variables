@@ -1,5 +1,8 @@
-# The rent rubric for the Futures section (plan Part 20). Models answer only the inputs below, with three votes
-# and majority rule; code derives where the rent pools and how large it is from these rules, never a model.
+# The rent rubric for the Futures section (plan Part 20). A model answers only the inputs below; code derives where
+# the rent pools and how large it is from these rules, never a model. Category, arrival decade and needs take three
+# scorers' votes with majority rule; where the three split, Claude Opus's vote decides and the row says so. The rent inputs are one scorer's answers (Claude Opus), given with the
+# instruction to judge each market as if the thing already existed and was on sale: a first pass with three votes
+# and no such instruction mostly marked unbuilt ideas hard to copy, so "hard to copy" came to mean "not built yet".
 # Changed only by a reviewed pull request, with the rationale updated.
 inputs:
   rent_kind: [scarcity, scale_network, switching_cost, regulatory, none]
@@ -7,6 +10,13 @@ inputs:
   complementary_assets: [specialised, generic]  # does reaching customers need assets only a few hold?
   asset_owner: [innovator, incumbents, platforms, regulators_licensees]  # who holds those assets
   durability: [short, medium, long]       # how long before the bottleneck moves: under five years, five to twenty, decades
+market:
+  words: [sold, one_off, banned, cannot_judge]
+  rationale: >-
+    A rent needs a market. Asked only where the rules would otherwise give a rent: would the thing, once built, be
+    sold to buyers (sold), built once for its owner's own use with no market of buyers (one_off: a generation ship,
+    a moon-sized battle station), or outlawed outright (banned: biological weapons)? Anything but sold gets no rent
+    result.
 pools:
   rationale: >-
     After Teece (1986): an innovator keeps the gains when it can stop imitation, or when it already owns the

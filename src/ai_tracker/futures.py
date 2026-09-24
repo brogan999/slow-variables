@@ -5,6 +5,7 @@ here by fixed rules, and dates are normalised by fixed rules, never judged."""
 
 from __future__ import annotations
 
+import json
 import re
 from pathlib import Path
 from typing import Any
@@ -13,6 +14,25 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
 RUBRIC = ROOT / "seed" / "futures" / "rubric.yaml"
+IDEAS = ROOT / "seed" / "futures" / "ideas.jsonl"
+FIELDS = [
+    "category",
+    "rent_kind",
+    "appropriability",
+    "complementary_assets",
+    "asset_owner",
+    "durability",
+    "arrival_decade",
+    "needs",
+]
+VOTED = ["category", "arrival_decade", "needs"]  # three scorers, majority rule
+RENT = [
+    "rent_kind",
+    "appropriability",
+    "complementary_assets",
+    "asset_owner",
+    "durability",
+]  # one scorer, pass two
 
 
 def rubric() -> dict[str, Any]:
@@ -78,3 +98,83 @@ def problems(spec: dict[str, Any]) -> list[str]:
     if spec["pools"]["rules"][-1]["when"]:
         errors.append("futures rubric: the last pools rule must match everything")
     return errors
+
+
+def ideas() -> list[dict[str, Any]]:
+    """The scored idea-bank rows (scripts/futures_seed.py), one per line, or none before the seed exists."""
+    return [json.loads(line) for line in IDEAS.read_text().splitlines()] if IDEAS.exists() else []
+
+
+def idea_problems(rows: list[dict[str, Any]], spec: dict[str, Any]) -> list[str]:
+    """Every answer is a rubric word (or cannot_judge, or no_majority where three scorers voted); a voted answer is
+    the majority of its votes unless an override gives the reason; where the rent pools and its tier are what the
+    rules give; the site's lines type no digit."""
+    errors: list[str] = []
+    words = {
+        **spec["inputs"],
+        "category": spec["categories"],
+        "arrival_decade": spec["arrival"]["decades"],
+        "needs": spec["arrival"]["needs"],
+    }
+    seen: set[str] = set()
+    for r in rows:
+        rid = r["id"]
+        if rid in seen:
+            errors.append(f"futures: duplicate id {rid}")
+        seen.add(rid)
+        if not r.get("line") or re.search(r"\d", r["line"]):
+            errors.append(f"futures: {rid} line missing or types a digit")
+        if r.get("technology") not in ("yes", "no"):
+            errors.append(f"futures: {rid} technology must be yes or no")
+        if r.get("market") not in {None, *spec["market"]["words"]}:
+            errors.append(f"futures: {rid} market {r.get('market')!r} is not a rubric word")
+        unknown = [
+            k
+            for k in FIELDS
+            if r[k] not in {*words[k], "cannot_judge", *(["no_majority"] if k in VOTED else [])}
+        ]
+        errors += [f"futures: {rid} {k} {r[k]!r} is not a rubric word" for k in unknown]
+        overrides = r.get("overrides") or {}
+        errors += [
+            f"futures: {rid} override of {k} gives no reason" for k, why in overrides.items() if not why
+        ]
+        for k in VOTED:
+            votes = r["votes"][k]
+            if k in overrides:
+                continue
+            if k in (r.get("tiebreak") or []):
+                ok = len(votes) == 3 and max(votes.count(v) for v in votes) < 2 and r[k] == votes[0]
+            else:
+                ok = len(votes) == 3 and (r[k] == "no_majority" or votes.count(r[k]) >= 2)
+            if not ok:
+                errors.append(f"futures: {rid} {k} is neither the majority of its votes nor a tiebreak")
+        if not unknown and (r["pools"], r["tier"]) != judged(r, spec):
+            errors.append(f"futures: {rid} pools or tier does not follow the rubric's rules")
+    return errors
+
+
+def judged(r: dict[str, Any], spec: dict[str, Any]) -> tuple[str | None, str | None]:
+    """Where the rent pools and its tier from majority answers. A split or cannot_judge blocks a result only where
+    the rule needs that answer; exotic physics, anything judged physically impossible, anything that is not a
+    technology, and anything with no market of buyers (one_off, banned) get neither."""
+    unknown = {"no_majority", "cannot_judge"}
+    if (
+        r.get("technology") == "no"
+        or r.get("market") in ("one_off", "banned", "cannot_judge")
+        or r["category"] == "exotic_physics"
+        or r["arrival_decade"] == "not_physically_possible"
+    ):
+        return None, None
+    need = ["appropriability"]
+    if r["appropriability"] == "weak":
+        need.append("complementary_assets")
+        if r["complementary_assets"] == "specialised":
+            need.append("asset_owner")
+    if any(r[k] in unknown for k in need):
+        return None, None
+    where = pools(r, spec)
+    if where == "users":
+        return where, "none"
+    if {r["rent_kind"], r["durability"]} & unknown:
+        return where, None
+    return where, tier(r, spec)

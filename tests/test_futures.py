@@ -78,3 +78,61 @@ def test_the_tier_follows_rent_kind_and_durability_and_is_none_when_competed_awa
 
 def test_the_rubric_is_total():
     assert fu.problems(fu.rubric()) == []
+
+
+def _idea(**kw):
+    base = {
+        "id": "tv-x",
+        "line": "A flying car.",
+        "category": "transport",
+        "rent_kind": "scarcity",
+        "appropriability": "tight",
+        "complementary_assets": "generic",
+        "asset_owner": "innovator",
+        "durability": "medium",
+        "arrival_decade": "2030s",
+        "needs": "cost_decline",
+    }
+    base |= {"technology": "yes"} | kw
+    base["votes"] = {k: [base[k]] * 3 for k in fu.VOTED}
+    base["pools"], base["tier"] = fu.judged(base, fu.rubric())
+    return base
+
+
+def test_the_seed_checks_catch_a_tier_that_does_not_follow_the_rules():
+    spec = fu.rubric()
+    good = _idea()
+    assert (good["pools"], good["tier"]) == ("innovator", "moderate")
+    assert fu.idea_problems([good], spec) == []
+    assert fu.idea_problems([{**good, "tier": "fat"}], spec)
+    assert fu.idea_problems([{**good, "line": "A car from 2050."}], spec)
+    assert fu.idea_problems([{**good, "rent_kind": "tight"}], spec)
+    assert fu.idea_problems([{**good, "rent_kind": "no_majority"}], spec)  # one scorer: nothing to split
+    moved = {**good, "arrival_decade": "2020s"}
+    assert fu.idea_problems([moved], spec)
+    assert fu.idea_problems([{**moved, "overrides": {"arrival_decade": "It is sold today."}}], spec) == []
+
+
+def test_a_split_blocks_a_result_only_where_the_rule_needs_it():
+    spec = fu.rubric()
+    assert fu.judged(_idea(asset_owner="no_majority"), spec) == ("innovator", "moderate")
+    assert fu.judged(_idea(appropriability="cannot_judge"), spec) == (None, None)
+    assert fu.judged(
+        _idea(appropriability="weak", complementary_assets="generic", rent_kind="no_majority"), spec
+    ) == ("users", "none")
+    assert fu.judged(_idea(durability="no_majority"), spec) == ("innovator", None)
+    assert fu.judged(_idea(category="exotic_physics"), spec) == (None, None)
+    assert fu.judged(_idea(arrival_decade="not_physically_possible"), spec) == (None, None)
+    assert fu.judged(_idea(technology="no"), spec) == (None, None)
+
+
+def test_a_split_takes_opus_vote_only_when_marked_and_no_market_means_no_rent():
+    spec = fu.rubric()
+    split = _idea(arrival_decade="2040s")
+    split["votes"]["arrival_decade"] = ["2040s", "2030s", "2050s"]
+    assert fu.idea_problems([split], spec)  # a split answered without saying so
+    assert fu.idea_problems([{**split, "tiebreak": ["arrival_decade"]}], spec) == []
+    assert fu.idea_problems([{**split, "arrival_decade": "2030s", "tiebreak": ["arrival_decade"]}], spec)
+    for m in ("one_off", "banned", "cannot_judge"):
+        assert fu.judged(_idea(market=m), spec) == (None, None)
+    assert fu.judged(_idea(market="sold"), spec) == ("innovator", "moderate")

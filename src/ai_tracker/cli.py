@@ -386,6 +386,9 @@ def _check(s: st.Store) -> tuple[list[str], list[str]]:
         {f["id"] for f in board.load()["folios"]},
     )
     errors += at_errors
+    from . import futures
+
+    errors += futures.idea_problems(futures.ideas(), futures.rubric())
     return errors + a_errors + m_errors + o_errors + b_errors + s_errors, notes + a_notes + o_notes
 
 

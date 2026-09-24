@@ -3,9 +3,10 @@
     uv run python scripts/futures_votes.py <votes dir> <tag> <out.jsonl>
 
 Reads <votes dir>/{opus,sonnet,haiku}-<tag>.jsonl (written by scoring agents in the session, one JSON object per
-row). Each field takes the value at least two scorers gave, else "no_majority". Where the rent pools and its tier
-are then derived by futures.pools and futures.tier from the majority answers, never voted on; a row with any rubric
-field in no_majority gets neither. Prints agreement per field."""
+row). A vote outside the rubric's words (or cannot_judge, which every field allows) is spoiled, except the spelling
+"specialized", which is read as "specialised". Each field takes the value at least two valid votes gave, else
+"no_majority". Where the rent pools and its tier
+are then derived by futures.judged from the majority answers, never voted on. Prints agreement per field."""
 
 from __future__ import annotations
 
@@ -14,19 +15,9 @@ import sys
 from collections import Counter
 from pathlib import Path
 
-from ai_tracker.futures import pools, rubric, tier
+from ai_tracker.futures import FIELDS, judged, rubric
 
 SCORERS = ["opus", "sonnet", "haiku"]
-FIELDS = [
-    "category",
-    "rent_kind",
-    "appropriability",
-    "complementary_assets",
-    "asset_owner",
-    "durability",
-    "arrival_decade",
-    "needs",
-]
 
 
 def load(path: Path) -> dict[str, dict]:
@@ -37,33 +28,26 @@ def load(path: Path) -> dict[str, dict]:
     )
 
 
-def derive(rec: dict, spec: dict) -> tuple[str | None, str | None]:
-    """Where the rent pools and its tier, from majority answers. A split vote blocks a result only where the rule
-    needs that answer: who owns the assets matters only when copying is easy and the assets are specialised."""
-    if rec["category"] == "exotic_physics":
-        return None, None
-    need = ["appropriability"]
-    if rec["appropriability"] == "weak":
-        need.append("complementary_assets")
-        if rec["complementary_assets"] == "specialised":
-            need.append("asset_owner")
-    if any(rec[k] == "no_majority" for k in need):
-        return None, None
-    where = pools(rec, spec)
-    if where == "users":
-        return where, "none"
-    if rec["rent_kind"] == "no_majority" or rec["durability"] == "no_majority":
-        return where, None
-    return where, tier(rec, spec)
+def allowed(spec: dict) -> dict[str, set[str]]:
+    words = {**spec["inputs"], "category": spec["categories"], "arrival_decade": spec["arrival"]["decades"]}
+    words["needs"] = spec["arrival"]["needs"]
+    return {k: {*v, "cannot_judge"} for k, v in words.items()}
 
 
-def majority(values: list[str]) -> str:
-    v, n = Counter(values).most_common(1)[0]
+def clean(value: object, words: set[str]) -> str | None:
+    value = "specialised" if value == "specialized" else value
+    return value if value in words else None
+
+
+def majority(values: list[str | None]) -> str:
+    counts = Counter(v for v in values if v is not None)
+    v, n = counts.most_common(1)[0] if counts else (None, 0)
     return v if n >= 2 else "no_majority"
 
 
 def main(votes: str, tag: str, out: str) -> None:
     spec = rubric()
+    words = allowed(spec)
     by = {s: load(Path(votes) / f"{s}-{tag}.jsonl") for s in SCORERS}
     ids = sorted(set().union(*by.values()))
     agree = Counter()
@@ -75,11 +59,11 @@ def main(votes: str, tag: str, out: str) -> None:
                 continue
             rec = {"id": i, "line": by["opus"][i].get("line")}
             for k in FIELDS:
-                vals = [g.get(k) for g in got]
+                vals = [clean(g.get(k), words[k]) for g in got]
                 rec[k] = majority(vals)
                 rec[f"{k}_votes"] = vals
                 agree[k] += len(set(vals)) == 1
-            rec["pools"], rec["tier"] = derive(rec, spec)
+            rec["pools"], rec["tier"] = judged(rec, spec)
             f.write(json.dumps(rec, ensure_ascii=False) + "\n")
     n = len(ids)
     print(f"{n} rows; all three agree: " + ", ".join(f"{k} {agree[k]}/{n}" for k in FIELDS))
