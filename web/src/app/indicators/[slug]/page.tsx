@@ -1,3 +1,4 @@
+import { ReasonLink } from "@/components/ReasonLink";
 import Link from "next/link";
 import { indicatorHref } from "@/lib/format";
 import { ConfidenceBar, rubricWords } from "@/components/ConfidenceBar";
@@ -49,6 +50,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
           </p>
           <h1 className="display text-[2.25rem] md:text-[3.25rem] leading-[1.04] max-w-[24ch]">{d.name}</h1>
           <p className="font-serif text-lg md:text-xl leading-relaxed text-ink-2 max-w-[62ch]">{d.definition}</p>
+          <ReasonLink q={`What does "${d.name}" show tonight, how far can it be trusted, and which predictions lean on it?`} from={`/indicators/${d.id}`} className="self-start" />
         </header>
       }
       margin={
