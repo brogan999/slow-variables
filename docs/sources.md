@@ -125,6 +125,7 @@
 | openrouter_rankings | OpenRouter rankings (token totals, top models by day) | OpenRouter | html | 3 | daily | OpenRouter terms; public page | OpenRouter |
 | outsource_accelerator | Outsource Accelerator news | Outsource Accelerator | html | 5 | irregular | Short quotation | Outsource Accelerator |
 | owid | Our World in Data AI investment | Our World in Data | csv | 6 | monthly | CC BY 4.0 (OWID; underlying data AI Index / Quid) | Our World in Data, AI investment (CC BY 4.0), from the Stanford AI Index |
+| owid_context | Our World in Data context series (life expectancy, democracy, labour share) | Our World in Data | csv | 4 | annual | OWID charts CC BY 4.0; UN World Population Prospects CC BY 3.0 IGO; V-Dem CC BY-SA 4.0; ILO CC BY 4.0 | UN World Population Prospects (2024), V-Dem (2026) and the International Labour Organization, processed by Our World in Data |
 | pehub_feed | PE Hub feed (watchlist) | PE Hub | rss | 5 | daily | Publisher terms; titles and links only | PE Hub |
 | peoplematters | People Matters | People Matters Media | html | 5 | irregular | People Matters; short quotation | People Matters |
 | poolside_blog | Poolside blog | Poolside | html | 4 | irregular | Poolside; short quotation | Poolside blog |
