@@ -125,8 +125,9 @@ class Handler(BaseHTTPRequestHandler):
             try:
                 res = ask_mod.ask(self.svc.store, q, self.svc.tools)
             except Exception as e:  # noqa: BLE001 - surfaced to the drawer as offline
-                log.exception("ask failed")
-                return self._send(502, {"error": "model error", "detail": str(e)[:200]})
+                line, payload = model_error(e)
+                log.error(line)
+                return self._send(502, payload)
             self.svc.add_spend(res["usage"]["usd"])
             self.svc.record(res["audit"])
             return self._send(200, res)
@@ -134,6 +135,13 @@ class Handler(BaseHTTPRequestHandler):
 
     def log_message(self, fmt: str, *args: object) -> None:
         log.info("%s %s", self.address_string(), fmt % args)
+
+
+def model_error(e: Exception) -> tuple[str, dict[str, str]]:
+    """What an ask failure logs and returns: the exception's class and request id, never its message or traceback,
+    which can carry the question's text (the privacy notice promises the question is never recorded)."""
+    rid = getattr(e, "request_id", None)
+    return f"ask failed: {type(e).__name__} request_id={rid}", {"error": "model error", "detail": type(e).__name__}
 
 
 def serve(port: int = 8080) -> None:

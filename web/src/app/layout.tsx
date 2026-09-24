@@ -52,7 +52,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <nav aria-label="Evidence and about" className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-8 gap-y-1.5 text-ink-2">
               {EVIDENCE.map(([href, label]) => <Link key={href} href={href} className="hover:text-ink">{label}</Link>)}
               <Link href="/methodology#reuse" className="hover:text-ink">Reuse and cite</Link>
-              <Link href="/methodology#privacy" className="hover:text-ink">Privacy</Link>
+              <Link href="/legal" className="hover:text-ink">Legal</Link>
+              <Link href="/legal#privacy" className="hover:text-ink">Privacy</Link>
+              <a href={SITE.repo} className="hover:text-ink">Source code</a>
               <a href="/memos/feed.xml" className="hover:text-ink">Memo feed (RSS)</a>
             </nav>
           </div>

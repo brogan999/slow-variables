@@ -49,7 +49,7 @@ export function ChatDrawer() {
           <SheetDescription id="ask-desc" className="text-muted">Answers come from the same store as the site. Every number is checked against the record it cites; the sentence around it is not.</SheetDescription>
         </SheetHeader>
         <form onSubmit={submit} className="flex flex-col gap-3">
-          <p id="ask-note" className="text-xs text-muted">Sent with this page&apos;s path to an Anthropic model through the site&apos;s query service, which records the answer&apos;s outcome and cited ids, never your question. <Link href="/methodology#privacy" className="underline decoration-grid underline-offset-2">Privacy</Link></p>
+          <p id="ask-note" className="text-xs text-muted">Sent with this page&apos;s path to an Anthropic model through the site&apos;s query service, which records the answer&apos;s outcome and cited ids, never your question. <Link href="/legal#privacy" className="underline decoration-grid underline-offset-2">Privacy</Link> · <Link href="/legal#ai" className="underline decoration-grid underline-offset-2">AI content</Link></p>
           <Textarea value={q} onChange={(e) => setQ(e.target.value)} rows={3} placeholder="What is the latest 50% horizon and its doubling time?" aria-label="Question" aria-describedby="ask-note" className="bg-background" />
           <div className="flex items-center justify-between gap-3">
             <span className="eyebrow">{path}</span>

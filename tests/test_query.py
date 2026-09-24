@@ -327,3 +327,15 @@ def test_fit_trend_never_fits_a_projection_or_a_row_epoch_withdrew(monkeypatch):
     assert (
         Tools(s).fit_trend("epoch.x.power_mw.pt")["n_points"] == 3
     )  # elsewhere a disputed figure still stands
+
+
+def test_a_model_error_never_logs_or_returns_the_question():
+    from ai_tracker.query.server import model_error
+
+    class APIError(Exception):
+        request_id = "req_1"
+
+    question = "what is my salary at Acme"
+    line, payload = model_error(APIError(f"bad request: {question}"))
+    assert question not in line and question not in json.dumps(payload)
+    assert line == "ask failed: APIError request_id=req_1" and payload["detail"] == "APIError"
