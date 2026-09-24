@@ -27,7 +27,7 @@
   --color-destructive: var(--error); --color-error: var(--error);
   --color-border: var(--grid); --color-input: var(--ink-2); --color-ring: var(--ink);
   --color-ink: var(--ink); --color-ink-2: var(--ink-2); --color-grid: var(--grid); --color-axis: var(--axis);
-  --color-fast: var(--fast); --color-slow: var(--slow);
+  --color-fast: var(--fast); --color-slow: var(--slow); --color-gild: var(--gild); --color-gild-ink: var(--gild-ink);
   --color-s1: var(--s1); --color-s2: var(--s2); --color-s3: var(--s3);
   --color-tight-1: var(--tight-1); --color-tight-2: var(--tight-2); --color-tight-3: var(--tight-3); --color-tight-4: var(--tight-4); --color-tight-5: var(--tight-5);
   --font-sans: var(--font-archivo), "Helvetica Neue", Arial, sans-serif;
@@ -119,3 +119,22 @@ main { counter-reset: fig; }
 
 /* The bottleneck map's filter: with the box ticked, rows (and whole sections) the export does not flag are hidden. */
 .map-focus:has(#map-focus:checked) [data-focus="0"] { display: none; }
+
+/* The singularity section wears the Illuminated Manuscript look (Part 17), scoped to its route: parchment ground,
+   vellum panels, iron-gall ink, Fraunces for reading. Gold is ornament only (rules, drop caps), never text or a mark.
+   The status hues and the tightness ramp stay the site's, so a status reads the same on every page. */
+body:has(.theme-manuscript) {
+  --background: #efe6d4; --surface: #f7f1e3; --surface-2: #e6dac3;
+  --ink: #3a322a; --ink-2: #5c5246; --muted: #625a4d;
+  --grid: #d5c7ac; --axis: #b9a887; --hairline: rgba(58, 50, 42, 0.14);
+  --s1: #3a322a; --s2: #5c5246; --s3: #a8977a;
+  --error: #9b2c2c;
+  --gild: #b8913f; --gild-ink: #7d5e22;
+}
+.theme-manuscript {
+  --font-newsreader: var(--font-fraunces);
+  & .display { font-family: var(--font-fraunces), Georgia, serif; font-weight: 500; letter-spacing: -0.012em; }
+  & .gild-rule { height: 1px; background: linear-gradient(90deg, transparent, var(--gild), transparent); }
+  & .drop-cap::first-letter { float: left; font-family: var(--font-fraunces), Georgia, serif; font-size: 3.4em; line-height: 0.82; padding: 0.06em 0.1em 0 0; color: var(--gild-ink); }
+  & .sg-mark[data-later] { opacity: 0.12; }
+}

@@ -85,7 +85,7 @@ export function Grade({ grade, tier }: { grade: string | null | undefined; tier?
 
 // The predictions board's five words. No hue: violet and teal mean faster and slower elsewhere, so the glyph and the
 // border's line carry the word here.
-const WORD: Record<string, { glyph: string; cls: string }> = {
+export const WORD: Record<string, { glyph: string; cls: string }> = {
   happening: { glyph: "●", cls: "border-ink text-ink" },
   not_happening: { glyph: "✕", cls: "border-ink-2 text-ink" },
   slower: { glyph: "◔", cls: "border-muted text-ink" },
