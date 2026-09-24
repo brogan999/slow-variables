@@ -13,6 +13,8 @@ jobs:
       - uses: astral-sh/setup-uv@v5
       - run: uv sync
       - run: uv run ruff check src tests
+      - name: No database file in the repo (the analyst index holds paid and book text)
+        run: "! git ls-files | grep -E '\\.(db|sqlite3?|duckdb)$'"
       - run: uv run pytest -q
       - run: uv run ai-tracker evaluate && uv run ai-tracker check
       - run: uv run mypy src || true  # advisory for month 1
