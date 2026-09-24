@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { FuForecast, FuIdea } from "@/lib/data";
+import { futures, type FuForecast, type FuIdea } from "@/lib/data";
 
 export const link = "underline decoration-grid underline-offset-4 hover:decoration-ink";
 
@@ -11,19 +11,28 @@ export function Plate({ src, alt, sizes = "(min-width: 768px) 480px, 100vw", eag
   );
 }
 
-export const Credit = () => <span className="text-[11px] text-muted">Illustration made with ChatGPT image generation; not evidence.</span>;
+export const Credit = () => <span className="text-[11px] text-muted">Illustrations made by the site&apos;s owner with ChatGPT image generation; not evidence.</span>;
 
-export function IdeaCard({ x, withImage = true }: { x: FuIdea; withImage?: boolean }) {
+// Every Futures page names where the ideas come from: names, works, authors and years are the glossary's.
+export function Sources() {
+  const [glossary, bank] = futures().credits;
+  const a = (c: { name: string; url: string; archived: boolean }) => <><a href={c.url} className={link}>{c.name}</a>{c.archived ? " (archived copy)" : ""}</>;
+  return (
+    <p className="text-[12px] text-muted max-w-[66ch]">
+      Ideas from {a(glossary)}, as compiled in {a(bank)}; names, works, authors and years are theirs and every description is this site&apos;s rewording. Categories, arrival decades and profit are judged by AI models, not people. <Link href="/methodology#futures" className={link}>Method</Link>
+    </p>
+  );
+}
+
+export function IdeaCard({ x }: { x: FuIdea }) {
   return (
     <article id={x.id} className="flex flex-col gap-1.5 py-3 border-t border-grid first:border-0 scroll-mt-8">
-      {withImage && x.image ? <Plate src={x.image} alt={`Illustration of ${x.name}: ${x.line}`} sizes="(min-width: 768px) 360px, 100vw" className="max-w-[360px]" /> : null}
+      {x.image ? <figure className="flex flex-col gap-0.5 max-w-[360px]"><Plate src={x.image} alt={`Illustration of ${x.name}: ${x.line}`} sizes="(min-width: 768px) 360px, 100vw" /><Credit /></figure> : null}
       <h3 className="font-medium text-[15px]">{x.name}</h3>
       <p className="text-[12px] text-muted">{x.work}{x.work ? ", " : ""}{x.author} · {x.imagined}</p>
       <p className="text-[14px] text-ink-2">{x.line}</p>
-      <p className="text-[12px] text-ink-2">
-        {x.built ? x.arrival : <>not yet built · expected {x.expected}</>}
-        {x.tier ? <> · rent {x.tier}{x.pools ? `, kept by ${x.pools}` : ""}</> : null}
-      </p>
+      <p className="text-[12px] text-ink-2">{x.built ? x.arrival : <>{x.arrival} · {x.judged}</>}</p>
+      <p className="text-[12px] text-ink-2">Profit, as AI models judge it: {x.profit}</p>
     </article>
   );
 }
