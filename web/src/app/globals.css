@@ -138,3 +138,26 @@ body:has(.theme-manuscript) {
   & .drop-cap::first-letter { float: left; font-family: var(--font-fraunces), Georgia, serif; font-size: 3.4em; line-height: 0.82; padding: 0.06em 0.1em 0 0; color: var(--gild-ink); }
   & .sg-mark[data-later] { opacity: 0.12; }
 }
+
+/* The Singularity Atlas map (Part 18): each cell holds a count for "all" and one per world; the radios show one set at
+   a time. Tints step by fixed counts of sourced works (atlas.LEVELS), ink mixed into vellum; the numeral carries the
+   count, so the tint never carries it alone. */
+.atlas-n { display: none; padding: 0.7rem 0.5rem; text-align: center; font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--ink); }
+.atlas-map [data-w="all"] { display: block; } /* without :has() support, the map still shows every work */
+.atlas-map:has(input:checked:not(#aw-all)) [data-w="all"] { display: none; }
+.atlas-map:has(#aw-managed_explosion:checked) [data-w="managed_explosion"],
+.atlas-map:has(#aw-long_diffusion:checked) [data-w="long_diffusion"],
+.atlas-map:has(#aw-loss_of_control:checked) [data-w="loss_of_control"],
+.atlas-map:has(#aw-brake:checked) [data-w="brake"] { display: block; }
+.atlas-n.lvl-0 { background: var(--surface); color: var(--muted); }
+.atlas-n.lvl-1 { background: color-mix(in srgb, var(--ink) 6%, var(--surface)); }
+.atlas-n.lvl-2 { background: color-mix(in srgb, var(--ink) 12%, var(--surface)); }
+.atlas-n.lvl-3 { background: color-mix(in srgb, var(--ink) 20%, var(--surface)); }
+.atlas-n.lvl-4 { background: color-mix(in srgb, var(--ink) 30%, var(--surface)); }
+.atlas-table { table-layout: fixed; }
+.atlas-table th:first-child { width: 38%; }
+@media (max-width: 639px) { .atlas-table th { font-size: 10px; letter-spacing: 0.04em; } .atlas-table th:first-child { width: 36%; } }
+.atlas-table td { border-left: 2px solid var(--background); }
+.atlas-map input[type="radio"] { accent-color: var(--ink); }
+.atlas-table td a:hover .atlas-n, .atlas-table td a:focus-visible .atlas-n { outline: 2px solid var(--ink); outline-offset: -2px; }
+.world-chip { display: inline-flex; border: 1px solid var(--axis); padding: 0.05rem 0.4rem; font-family: var(--font-mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-2); }

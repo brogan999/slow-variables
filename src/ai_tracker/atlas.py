@@ -23,6 +23,7 @@ ERAS = ["now", "first_decade", "long_run"]
 # sourced works at which a cell's tint steps up: fixed, so every world's map reads the same way
 LEVELS = (1, 2, 4, 7)
 WIDTHS = (480, 768, 1024)
+FICTION = 8  # novels listed on a part of life's page; the rest are on the timeline
 FILTER_SHARE = 1 / 3  # the world filter ships only if this share of entries names specific worlds
 
 
@@ -39,8 +40,10 @@ def cells(expectations: list[dict[str, Any]], worlds: list[str]) -> dict[tuple[s
     way things go counts in every world; two lines from one work count once."""
     seen: dict[tuple[str, str], dict[str, set[str]]] = {}
     for e in expectations:
-        c = seen.setdefault((e["domain"], e["era"]), {k: set() for k in ["all", *worlds]})
+        c = seen.setdefault((e["domain"], e["era"]), {k: set() for k in ["all", *worlds, "any"]})
         c["all"].add(e["source"])
+        if e["worlds"] == ["any"]:
+            c["any"].add(e["source"])
         for w in worlds if e["worlds"] == ["any"] else e["worlds"]:
             c[w].add(e["source"])
     return {k: {w: len(v) for w, v in c.items()} for k, c in seen.items()}
@@ -93,10 +96,10 @@ def build(
     rows = {r["id"]: r for r in board_rows}
     eras = {e["id"]: e for e in spec["eras"]}
     doms = {d["id"]: d for d in spec["domains"]}
+    labels = {k: v for d in spec["domains"] for k, v in (d.get("readings") or {}).items()}
 
     def entry(e: dict[str, Any]) -> dict[str, Any]:
         x = srcs[e["source"]]
-        r = rows.get(e.get("prediction") or "")
         return {
             "id": e["id"],
             "domain": e["domain"],
@@ -111,14 +114,14 @@ def build(
             "any": e["worlds"] == ["any"],
             "world_labels": [] if e["worlds"] == ["any"] else [wlabel[w] for w in e["worlds"]],
             "reads": [
-                {"id": k, "reading": singularity.reading(s, k, facts, today)} for k in e.get("reads") or []
+                {"id": k, "label": labels[k], "reading": singularity.reading(s, k, facts, today)}
+                for k in e.get("reads") or []
             ],
-            "prediction": {"word": r["word"], "href": r["href"]} if r else None,
         }
 
     entries = [entry(e) for e in spec["expectations"]]
     counts = cells(spec["expectations"], wids)
-    fic_urls = {x["id"]: x["url"] for x in sing.get("sources") or []}
+    words = {w["id"]: w["label"] for w in (board_doc or {}).get("words") or []}
     specific = sum(1 for e in spec["expectations"] if e["worlds"] != ["any"])
     domains, map_rows = [], []
     for i, did in enumerate(DOMAINS):
@@ -130,11 +133,25 @@ def build(
             for k, v in (d.get("readings") or {}).items()
         ]
         inds = {k for k in d.get("readings") or {} if k not in facts}
-        leaning = [
-            {"id": r["id"], "line": r["line"], "who": r["who"], "word": r["word"], "href": r["href"]}
-            for r in board_rows
-            if inds & set(r.get("indicators") or [])
-        ][:6]
+        leaning = sorted(  # a named author's forecast before the site's own theses; the four most relevant
+            (
+                {
+                    "id": r["id"],
+                    "line": r["line"],
+                    "who": r["who"],
+                    "word": r["word"],
+                    "word_label": words[r["word"]],
+                    "href": r["href"],
+                }
+                for r in board_rows
+                if inds & set(r.get("indicators") or []) and r["folio"] in (d.get("board_folios") or [])
+            ),
+            key=lambda r: (rows[r["id"]].get("attribution") != "author", r["id"]),
+        )[:4]
+        fic = sorted(  # works whose strongest subject is this part of life first, then the rest, capped
+            (f for f in sing.get("fiction") or [] if did in (f.get("domains") or [])),
+            key=lambda f: (f["domains"][0] != did, f["year_written"], f["title"]),
+        )
         names = {e["id"]: e["who"] for e in mine}
         dis = d.get("disagreement")
         domains.append(
@@ -146,7 +163,16 @@ def build(
                 "thesis_from": sorted({names[k] for k in d["thesis_from"]}),
                 "plate": _plate(spec["plates"][did]),
                 "readings": readings,
-                "eras": [{**eras[era], "entries": [e for e in mine if e["era"] == era]} for era in ERAS],
+                "eras": [
+                    {
+                        **eras[era],
+                        "entries": [e for e in mine if e["era"] == era],
+                        "works": len(
+                            {e["source"] for e in mine if e["era"] == era}
+                        ),  # as the map counts them
+                    }
+                    for era in ERAS
+                ],
                 "disagreement": dis
                 and {
                     "question": dis["question"],
@@ -161,12 +187,11 @@ def build(
                         "author": f["author"],
                         "year": f["year_written"],
                         "line": f["line"],
-                        "url": fic_urls.get(f["source"]),
                         "href": f"/singularity#fic-{f['source']}",
                     }
-                    for f in sing.get("fiction") or []
-                    if did in (f.get("domains") or [])
+                    for f in fic[:FICTION]
                 ],
+                "fiction_more": max(len(fic) - FICTION, 0),
                 "leaning": leaning,
                 "sources": sorted(
                     {
@@ -179,14 +204,12 @@ def build(
                 "next": DOMAINS[i + 1] if i + 1 < len(DOMAINS) else None,
             }
         )
-        head = next((r for r in readings if r["reading"]), None)
         map_rows.append(
             {
                 "id": did,
                 "name": d["name"],
                 "href": f"/singularity/atlas/{did}",
                 "plate": _plate(spec["plates"][did]),
-                "headline": head,
                 "cells": [
                     {
                         "era": era,
@@ -198,9 +221,19 @@ def build(
                                 "level": level(n),
                                 "label": f"{d['name']}, {eras[era]['label'].lower()}"
                                 + ("" if w == "all" else f", {wlabel[w].lower()}")
-                                + f": {n} sourced {'work' if n == 1 else 'works'}",
+                                + f": {n} sourced {'work' if n == 1 else 'works'}"
+                                + (
+                                    f", {c['any']} of them in any world"
+                                    if w != "all" and n and c["any"]
+                                    else ""
+                                ),
+                                "any": 0
+                                if w == "all"
+                                else c["any"],  # works that hold whichever way things go
                             }
-                            for w, n in (counts.get((did, era)) or dict.fromkeys(["all", *wids], 0)).items()
+                            for c in [counts.get((did, era)) or dict.fromkeys(["all", *wids, "any"], 0)]
+                            for w, n in c.items()
+                            if w != "any"
                         ],
                     }
                     for era in ERAS
@@ -214,11 +247,14 @@ def build(
         "hero": _plate(spec["plates"]["hero"]),
         "eras": [eras[e] for e in ERAS],
         "worlds": worlds,
-        "levels": list(LEVELS),
         "filter": specific >= FILTER_SHARE * len(entries),
         "map": map_rows,
         "domains": domains,
-        "count": {"expectations": len(entries), "sources": len({e["source"] for e in entries})},
+        "count": {
+            "expectations": len(entries),
+            "sources": len({e["source"] for e in entries}),
+            "domains": len(DOMAINS),
+        },
     }
 
 
@@ -227,7 +263,7 @@ def problems(
     outlook_spec: dict[str, Any],
     known_facts: set[str],
     indicator_ids: set[str],
-    prediction_ids: set[str],
+    board_folios: set[str],
 ) -> list[str]:
     """Errors CI catches before a page names a source, reading or plate it cannot resolve."""
     if not spec:
@@ -244,6 +280,7 @@ def problems(
     worlds = {w["id"] for w in sing.get("worlds") or []}
     readable = known_facts | set(spec.get("facts") or {}) | indicator_ids
     exp = {e["id"]: e for e in spec.get("expectations") or []}
+    labels = {k for d in spec.get("domains") or [] for k in d.get("readings") or {}}
     if len(exp) != len(spec.get("expectations") or []):
         errors.append("atlas: two expectations share an id")
     for e in exp.values():
@@ -263,8 +300,11 @@ def problems(
             for k in e.get("reads") or []
             if k not in readable
         ]
-        if e.get("prediction") and e["prediction"] not in prediction_ids:
-            errors.append(f"{where} links unknown prediction {e['prediction']}")
+        errors += [
+            f"{where} reads {k}, which no domain's readings label"
+            for k in e.get("reads") or []
+            if k not in labels
+        ]
     if {d["id"] for d in spec.get("domains") or []} != set(DOMAINS):
         errors.append("atlas: domains must be exactly the eight")
     for d in spec.get("domains") or []:
@@ -293,6 +333,8 @@ def problems(
             for k in d.get("readings") or {}
             if k not in readable
         ]
+        if not d.get("board_folios") or not set(d["board_folios"]) <= board_folios:
+            errors.append(f"{where} needs board_folios drawn from the board's folios")
         if d["id"] not in (spec.get("plates") or {}):
             errors.append(f"{where} has no plate")
     for k, p in (spec.get("plates") or {}).items():
@@ -314,7 +356,7 @@ def problems(
 def strings(spec: dict[str, Any]) -> list[str]:
     """The site's own sentences, held to the no-digit and no-number-word rules."""
     out = [spec.get("intro") or "", spec.get("provenance") or ""]
-    out += [e[k] for e in spec.get("eras") or [] for k in ("label", "definition")]
+    out += [e[k] for e in spec.get("eras") or [] for k in ("label", "short", "definition") if e.get(k)]
     out += [d[k] for d in spec.get("domains") or [] for k in ("name", "thesis")]
     out += [(d.get("disagreement") or {}).get("question") or "" for d in spec.get("domains") or []]
     out += [v for d in spec.get("domains") or [] for v in (d.get("readings") or {}).values()]

@@ -63,7 +63,7 @@ export default function SingularityPage() {
       <Folio n="IV" id="watch" label="ten things to watch" title="What would tell the fast story from the slow one" lede="Each question names what this site reads tonight, and what a fast or a slow answer would look like.">
         <Questions doc={d} />
       </Folio>
-      <Folio n="V" id="worlds" label="four worlds for 2036" title="Four ways the next decade could go" lede={<>Each world maps onto the cells of the <Link href="/outlook#scenarios" className="underline decoration-axis underline-offset-2 hover:decoration-ink">scenario grid</Link>. None is crowned: a world reads consistent until one of its signposts fails.</>}>
+      <Folio n="V" id="worlds" label="four worlds for 2036" title="Four ways the next decade could go" lede={<>Each world maps onto the cells of the <Link href="/outlook#scenarios" className="underline decoration-axis underline-offset-2 hover:decoration-ink">scenario grid</Link>. None is crowned: a world reads consistent until one of its signposts fails. <Link href="/singularity/atlas" className="underline decoration-axis underline-offset-2 hover:decoration-ink">What each world would change, part of life by part of life →</Link></>}>
         <Worlds doc={d} />
       </Folio>
       <Folio n="VI" id="fiction" label="imagined futures" title="What the novelists imagined" lede="Stories, not forecasts: none is scored. Those set in a named year sit on the timeline's last row.">

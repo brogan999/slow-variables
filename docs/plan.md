@@ -685,3 +685,16 @@ Reviews:
 Known limits:
 - Most forecasts read "too early to tell". A historical call whose window closed without its milestone reads "slower than said", because the ledger vocabulary has no word for wrong.
 - The phone layout puts the slider after the sources, far from the chart.
+
+## Part 18 status (24 Sep 2026): the Singularity Atlas
+
+Decision (owner, 24 Sep): the Atlas prototype's idea (how each part of life changes, under which future) comes to the site built from sourced material, not the prototype's invented scores. Frame: the site's four worlds. Intensity: a count of sourced works plus live readings. Imagery: the owner's plates, made in v0 (the files came in the v0 project export, stamped 11 Sep 2026), recorded by sha256. Data: a few public series for the thin domains.
+
+What shipped (PR 1 context series, PR 2 data and engine, PR 3 pages):
+- **Series:** `owid_context` (a subclass of the existing `Owid`, optional, paired by URL, named rows and columns): world life expectancy at 65 (UN WPP), liberal democracy (V-Dem, population-weighted), labour share of GDP (ILO modelled estimates). Reported AI incidents from the AI Index 2025 and 2026 PDFs as manual rows. Signposts only, no bands.
+- **`seed/atlas.yaml`:** 118 expectations across eight domains, each a named writer's view in the site's words, credited to a fetched source (13 new, the rest reused from the singularity and outlook ledgers), placed by era (now, the first decade after, the long run) and world; a thesis and the sharpest split per domain; the readings each domain leans on; plate provenance by sha256. The timeline's fiction gained domain tags.
+- **How it was built:** four survey agents read the canon (374 candidate expectations, 74% naming specific worlds, so the world filter ships); a consolidation pass chose and reworded; three faithfulness reviewers checked every line against its source text (9 must-fixes, about 30 should-fixes, all applied); the leak check shows only titles and URLs.
+- **`src/ai_tracker/atlas.py`:** counts distinct sourced works per domain × era × world at fixed tint levels; resolves readings through the outlook and atlas facts and published indicators; `problems()` in `check` covers ids, worlds, sources, fetch records, cross-file URL clashes, thesis and split writers, readings and plate files.
+- **Pages:** `/singularity/atlas` (hero after Michelangelo, the map with a CSS-only world filter, eight plate cards) and `/singularity/atlas/[domain]` (thesis, plate, dated readings, entries by era with world chips, the split, the novelists' version, sources). Linked from `/singularity` and `/methodology#atlas`; in the sitemap. Plates are WebP at three widths with the white canvas trimmed (`scripts/atlas_plates.py`).
+
+Deliberately not done: an `expectations` SQL table, per-page share images, pips, a section nav, bands for the new series, a culture proxy, AVIF.
