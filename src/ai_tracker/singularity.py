@@ -82,7 +82,7 @@ def _years(m: dict[str, Any]) -> str:
     return str(m["mid"]) if m["mid"] else f"by {m['high']}"
 
 
-def _reading(s: Any, sign: str, facts: dict[str, Any], today: date) -> dict[str, Any] | None:
+def reading(s: Any, sign: str, facts: dict[str, Any], today: date) -> dict[str, Any] | None:
     if sign in facts:
         return facts[sign]
     return argument.fact(s, {"indicator": sign}, today)
@@ -148,7 +148,7 @@ def build(s: Any, today: date | None = None, outlook: dict[str, Any] | None = No
                 "undated": [m for m in marks if m["x"] is None],
                 "slots": slots,
                 "signposts": [
-                    {"id": k, "reading": _reading(s, k, facts, today)} for k in lane.get("signposts") or []
+                    {"id": k, "reading": reading(s, k, facts, today)} for k in lane.get("signposts") or []
                 ],
             }
         )
@@ -228,7 +228,7 @@ def build(s: Any, today: date | None = None, outlook: dict[str, Any] | None = No
         "stops": stops,
         "tallies": tallies,
         "questions": [
-            q | {"reading": _reading(s, q["reads"], facts, today) if q.get("reads") else None}
+            q | {"reading": reading(s, q["reads"], facts, today) if q.get("reads") else None}
             for q in spec.get("questions") or []
         ],
         "worlds": worlds,
