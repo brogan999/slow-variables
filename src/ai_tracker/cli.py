@@ -464,6 +464,8 @@ def cmd_ask(a: argparse.Namespace) -> int:
     s.prediction_table()
     res = ask(s, a.question)
     print(res["answer"])
+    for q in res["followups"]:
+        print(f"  > {q}")
     print(f"\n[{res['status']}] {len(res['citations'])} citations, ${res['usage']['usd']:.4f}")
     for f in res["checks"]["failures"]:
         print("  !", f)

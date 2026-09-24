@@ -225,6 +225,26 @@ def build(s: Any, today: date | None = None) -> dict[str, Any]:
     }
 
 
+def plain(text: str, ol: dict[str, Any], facts: bool = False) -> str:
+    """A claim as plain text: a [test:] token prints its line; with `facts`, a [fact:] token prints its reading;
+    every other token drops out."""
+    from .format import fmt, fmt_line
+
+    tests, fs = ol.get("tests") or {}, ol.get("facts") or {}
+    text = re.sub(
+        r"\[test:([a-z0-9_]+)\]",
+        lambda m: fmt_line(tests[m[1]]["line"], tests[m[1]]["unit"]) if m[1] in tests else "",
+        text,
+    )
+    if facts:
+        text = re.sub(
+            r"\[fact:([a-z0-9_]+)\]",
+            lambda m: fmt(fs[m[1]]["value"], fs[m[1]]["unit"]) if (fs.get(m[1]) or {}).get("value") is not None else "",
+            text,
+        )
+    return re.sub(r"\s*\[(?:cite|fact|plate):[a-z0-9_]+\]", "", text)
+
+
 def source_problems(sources: list[dict[str, Any]], where: str) -> list[str]:
     """A cited work needs its credits and a fetch record, and may carry one quote of under fifteen words."""
     errors = []

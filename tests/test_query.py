@@ -71,7 +71,7 @@ def test_records_carry_dispute_text_so_quoted_caveats_verify():
         "SELECT id FROM observation_all WHERE dispute_text IS NOT NULL AND dispute_text <> '' LIMIT 1"
     ).fetchone()
     assert row, "fixture data has a disputed row"
-    rec = t.records([("obs", row[0])])[row[0]]
+    rec = t.records([("obs", row[0])])[f"obs:{row[0]}"]
     dispute = s.con.execute("SELECT dispute_text FROM observation_all WHERE id = ?", [row[0]]).fetchone()[0]
     assert dispute[:20] in rec.snippet
 
@@ -81,7 +81,7 @@ def test_derived_records_carry_their_description_and_the_indicator_tool_names_it
     s.derived = run_metrics(s.con)
     t = Tools(s)
     c = next(d for d in s.derived if d.metric == "cross_tracker_concordance")
-    assert "-3%" in t.records([("derived", c.id)])[c.id].snippet  # g05: a quoted threshold verifies
+    assert "-3%" in t.records([("derived", c.id)])[f"derived:{c.id}"].snippet  # g05: a quoted threshold verifies
     bi = t.indicator("margin_stack_semis_share")["band_input"]
     fit = s.band_fit(next(i for i in s.seed.indicators if i.id == "margin_stack_semis_share"))
     assert bi["derived_id"] == fit.id and bi["dims"] == {"layer_id": "compute_semis"}  # g07: cite this row
@@ -206,7 +206,7 @@ def test_golden_survives_a_hallucinated_id_and_flags_informational_questions():
 
     s = st.Store()
     res = golden(s, Tools(s), ScriptClient(["No record [obs:deadbeef00000000]."]))
-    assert {r["id"] for r in res if r["informational"]} == {"g14", "g15"}
+    assert {r["id"] for r in res if r["informational"]} == {"g14", "g15", "g17", "g18", "g19", "g20"}
     assert not any(r["ok"] for r in res if r["id"] not in ("g16",))
 
 
@@ -277,7 +277,7 @@ def test_an_indicator_record_carries_its_own_reading_and_status_reason():
     t = Tools(s)
     ind = next(i for i in s.seed.indicators if i.id == "btos_firm_use")
     value, _as_of, _ids, _tier = s.band_input(ind)
-    rec = t.records([("ind", "btos_firm_use")])["btos_firm_use"]
+    rec = t.records([("ind", "btos_firm_use")])["ind:btos_firm_use"]
     assert value in rec.values and rec.snippet == s.current("btos_firm_use").reason  # the card's own number verifies
 
 
@@ -339,3 +339,100 @@ def test_a_model_error_never_logs_or_returns_the_question():
     line, payload = model_error(APIError(f"bad request: {question}"))
     assert question not in line and question not in json.dumps(payload)
     assert line == "ask failed: APIError request_id=req_1" and payload["detail"] == "APIError"
+
+
+def _tools_with_board():
+    s = st.Store()
+    s.derived = run_metrics(s.con)
+    s.semantic_tables()
+    s.prediction_table()
+    return Tools(s)
+
+
+def test_the_outlook_tools_cite_writers_claims_and_predictions_and_the_ids_verify():
+    from ai_tracker.query.citecheck import check
+
+    t = _tools_with_board()
+    cells = t.scenarios()["cells"]
+    assert cells and all(isinstance(c["consistent_with_tonight"], bool) for c in cells)
+    src = next(a["cite"] for c in cells for a in c["argued_by"])
+    sign = next(g for c in cells for g in c["signposts"])
+    assert "[" not in sign["text"]  # tokens rendered or dropped, never shown raw
+    hits = t.claims("open models catch up margins", k=3)
+    assert hits[0]["cite"].startswith("pos:") and all("[fact:" not in h["case"] for h in hits)
+    claim = next(c for h in hits for c in h["claims"] if c["tested_against"])
+    kind, cid = claim["cite"].split(":")
+    ok = f"Tonight it is tested against {claim['tested_against']} [claim:{cid}]."
+    assert check(ok, t.records([(kind, cid)])).ok
+    skind, sid = src.split(":")
+    assert t.records([(skind, sid)])[src].snippet and t.href(skind, sid) == f"/outlook#source-{sid}"
+    assert t.href("pos", "commodity") == "/outlook#position-commodity"
+    pid = t.pub.execute("SELECT id FROM predictions LIMIT 1").fetchone()[0]
+    assert t.records([("pred", pid)]) and t.href("pred", pid)
+    assert t.detail("claim", cid)["snippet"] and t.detail("pred", pid)["label"] and "2027-" not in t.detail("pred", pid)["label"][-12:]
+
+
+def test_prose_records_match_numbers_only_as_whole_tokens():
+    from ai_tracker.query.citecheck import Record, check
+
+    recs = {"c1": Record("c1", "claim", [], "", "Adoption stays below 15% by 2030, far short of 150 firms.")}
+    assert check("It stays below 15% [claim:c1].", recs).ok
+    assert not check("It stays below 5% [claim:c1].", recs).ok  # 5 sits inside 15 and 150
+    assert not check("It stays below 15x [claim:c1].", recs).ok  # the unit must match too
+    assert not check("Some 20 firms [claim:c1].", recs).ok  # 20 sits inside 2030
+
+
+def test_the_company_card_carries_rounds_indicators_and_leaning_predictions():
+    from ai_tracker.query.citecheck import check
+
+    t = _tools_with_board()
+    card = t.entity("Harvey")
+    r = card["venture_rounds"][0]
+    oid = r["cite"].split(":")[1]
+    assert check(f"It raised ${r['usd'] / 1e6:.0f}M [obs:{oid}].", t.records([("obs", oid)])).ok
+    assert card["layer_indicators"] and all(p["cite"].startswith("pred:") for p in card["predictions"])
+    assert "error" in t.entity("No Such Company Ltd")
+
+
+def test_the_rent_rubric_derives_where_rent_pools_by_the_fixed_rules():
+    t = Tools(st.Store())
+    assert set(t.rent_rubric()) == {"inputs", "pools", "tiers"}
+    easy_copy = dict(appropriability="weak", complementary_assets="specialised", asset_owner="incumbents")
+    r = t.rent_rubric(**easy_copy, rent_kind="switching_cost", durability="medium")
+    assert (r["rent_pools_with"], r["tier"]) == ("incumbents", "moderate")
+    assert t.rent_rubric(appropriability="weak", complementary_assets="generic")["tier"] == "none"
+    assert "error" in t.rent_rubric(appropriability="loose")
+
+
+def test_history_is_trimmed_and_follow_ups_are_split_off_before_the_check():
+    from ai_tracker.query.ask import HISTORY_TURNS, _conversation, split_followups
+
+    turns = [{"q": f"q{i}", "a": "a" * 5000} for i in range(6)] + [{"q": "blank", "a": "  "}]
+    (msg,) = _conversation("now", turns)
+    body = msg["content"]
+    assert msg["role"] == "user" and body.endswith("The question now: now")  # never stands as the model's own turn
+    assert body.count("Q: ") == HISTORY_TURNS - 1 and "Q: q2" not in body and "blank" not in body and "a" * 1501 not in body
+    assert _conversation("now", None) == [{"role": "user", "content": "now"}]
+    body, qs = split_followups("The answer.\n\nFollow-ups:\n- Why?\n- Is 47% of work gone?\n- What next?\n- Who else?\n")
+    assert body == "The answer." and qs == ["Why?", "What next?", "Who else?"]  # an unchecked number never shows
+    assert split_followups("Just an answer.") == ("Just an answer.", [])
+    s = st.Store()
+    res = ask(s, "q", Tools(s), ScriptClient(["No record.\n\nFollow-ups:\n- Which layer?"]), history=turns)
+    assert res["followups"] == ["Which layer?"] and res["answer"] == "No record."
+
+
+def test_a_prose_citation_needs_the_whole_token_and_kinds_never_overwrite_each_other():
+    from ai_tracker.query.citecheck import Record, check
+
+    bill = {"src:b": Record("b", "src", [], "", "Colorado SB26-189, issue 129, every 122 days")}
+    for bad in ("$189B [src:b].", "$129B [src:b].", "$122B [src:b]."):
+        assert not check(f"Revenue will be {bad}", bill).ok
+    assert check("It runs every 122 days [src:b].", bill).ok
+    test_line = {"claim:c": Record("c", "claim", [0.5], "share", "most projects, tested against 50%")}
+    assert check("The line is 50% [claim:c].", test_line).ok
+    assert not check("The line is 1% [claim:c].", test_line).ok  # no loose tolerance on a test line
+    t = _tools_with_board()
+    shared = t.pub.execute("SELECT id FROM predictions WHERE kind = 'outlook' AND test_fact IS NOT NULL LIMIT 1").fetchone()[0]
+    recs = t.records([("claim", shared), ("pred", shared)])
+    assert {f"claim:{shared}", f"pred:{shared}"} <= set(recs)  # same id, two records
+    assert not any(x in recs[f"claim:{shared}"].snippet for x in ("[fact:",))

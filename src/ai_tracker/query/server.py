@@ -2,13 +2,14 @@
 
 GET  /health              -> {ok, observations, census_tasks, model, spent_today_usd}
 POST /sql   {query}       -> read-only SQL (bearer token)
-POST /ask   {question}    -> ask() (bearer token; daily spend cap)
+POST /ask   {question, history?} -> ask() (bearer token; daily spend cap; history is the page's last few turns)
 GET  /golden              -> golden run (bearer token)
 GET  /audit               -> the last seven days of answer records (bearer token; the nightly copies them)
 """
 
 from __future__ import annotations
 
+import hmac
 import json
 import logging
 import os
@@ -72,7 +73,8 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(raw)
 
     def _authed(self) -> bool:
-        return bool(self.svc.token) and self.headers.get("Authorization") == f"Bearer {self.svc.token}"
+        got = self.headers.get("Authorization") or ""
+        return bool(self.svc.token) and hmac.compare_digest(got.encode(), f"Bearer {self.svc.token}".encode())
 
     def do_GET(self) -> None:  # noqa: N802
         if self.path == "/health":
@@ -127,8 +129,11 @@ class Handler(BaseHTTPRequestHandler):
                 return self._send(503, {"error": "offline", "detail": "no model key configured"})
             if self.svc.spent_today() >= self.svc.cap:
                 return self._send(429, {"error": "daily cap reached", "cap_usd": self.svc.cap})
+            history = body.get("history") or []
+            if not isinstance(history, list) or not all(isinstance(h, dict) for h in history):
+                return self._send(400, {"error": "history must be a list of {q, a} turns"})
             try:
-                res = ask_mod.ask(self.svc.store, q, self.svc.tools)
+                res = ask_mod.ask(self.svc.store, q, self.svc.tools, history=history)
             except Exception as e:  # noqa: BLE001 - surfaced to the drawer as offline
                 line, payload = model_error(e)
                 log.error(line)

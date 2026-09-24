@@ -1011,21 +1011,13 @@ class Store:
 
     def prediction_table(self) -> None:
         """The board's rows as a table the query service copies, so SQL can join a prediction to its reading."""
-        import re
-
-        from .format import fmt_line
         from .outlook import build as build_outlook
+        from .outlook import plain as plain_text
 
         ol = build_outlook(self)
-        tests = ol.get("tests") or {}
 
-        def plain(text: str) -> str:  # the threshold a [test:] token prints on the page; other tokens drop out
-            text = re.sub(
-                r"\[test:([a-z0-9_]+)\]",
-                lambda m: fmt_line(tests[m[1]]["line"], tests[m[1]]["unit"]) if m[1] in tests else "",
-                text,
-            )
-            return re.sub(r"\s*\[(?:cite|fact|plate):[a-z0-9_]+\]", "", text)
+        def plain(text: str) -> str:
+            return plain_text(text, ol)
 
         rows = [r for f in self.board(outlook=ol)["folios"] for r in f["rows"]]
         self.con.execute(

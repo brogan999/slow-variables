@@ -70,3 +70,23 @@ questions:
     informational: true
     question: "Which layer of the stack is CoreWeave in, and what is its latest quarterly revenue?"
     expect: {tool: entity, series: ["sec.crwv.revenue.q"]}
+  - id: g17
+    lens: capture
+    informational: true
+    question: "Which futures do tonight's readings still allow, and who argues for each?"
+    expect: {tool: scenarios, cites: ["src:*", "claim:*"]}
+  - id: g18
+    lens: capture
+    informational: true
+    question: "Do labs keep their margins as open models catch up? Who says what, and what does the data show?"
+    expect: {tool: claims, cites: ["pos:*", "claim:*", "src:*"]}
+  - id: g19
+    lens: capture
+    informational: true
+    question: "What does the tracker hold on Harvey, and which of its predictions lean on Harvey's layer?"
+    expect: {tool: entity, cites: ["obs:*", "pred:*"]}
+  - id: g20
+    lens: capture
+    informational: true
+    question: "If legal AI is easy to copy but the law firms own the client relationships, who keeps the profit under the site's rent rule?"
+    expect: {tool: rent_rubric, mentions: ["judgement"]}
