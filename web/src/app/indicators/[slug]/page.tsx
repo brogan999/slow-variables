@@ -149,14 +149,22 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
             return rows.length ? (
               <section id="predictions" aria-labelledby="predictions-h">
                 <h2 id="predictions-h" className="display text-xl">Predictions that lean on this</h2>
-                <ul className="mt-2">
-                  {rows.map((r) => (
+                {(() => {
+                  const item = (r: (typeof rows)[number]) => (
                     <li key={`${r.kind}-${r.id}`} className="border-t border-grid py-2 grid gap-x-3 gap-y-1 sm:grid-cols-[11rem_minmax(0,1fr)] text-sm">
                       <div><WordChip word={r.word} label={label[r.word]} /></div>
                       <div className="min-w-0"><Link href={r.href} className="text-ink hover:underline"><Inline text={r.line} facts={{}} tests={o.tests} /></Link> <span className="text-xs text-ink-2">· {r.who}</span></div>
                     </li>
-                  ))}
-                </ul>
+                  );
+                  return (
+                    <>
+                      <ul className="mt-2">{rows.slice(0, 5).map(item)}</ul>
+                      {rows.length > 5 ? (
+                        <details className="text-sm"><summary className="cursor-pointer text-ink-2 py-2">More predictions that lean on this</summary><ul>{rows.slice(5).map(item)}</ul></details>
+                      ) : null}
+                    </>
+                  );
+                })()}
               </section>
             ) : null;
           })()}

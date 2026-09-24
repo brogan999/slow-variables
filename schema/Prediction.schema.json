@@ -89,7 +89,8 @@
         "nk",
         "lab",
         "ai2027",
-        "capture"
+        "capture",
+        "singularity"
       ],
       "title": "Ledger",
       "type": "string"
@@ -167,6 +168,19 @@
       ],
       "default": null,
       "title": "Window End"
+    },
+    "window_mid": {
+      "anyOf": [
+        {
+          "format": "date",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Window Mid"
     },
     "window_start": {
       "anyOf": [

@@ -442,14 +442,15 @@ class PredStatus(str, Enum):
 
 class Prediction(BaseModel):
     id: str
-    ledger: Literal["nk", "lab", "ai2027", "capture"]
+    ledger: Literal["nk", "lab", "ai2027", "capture", "singularity"]
     claimant: str
     claimant_entity_id: str | None = None
-    claim_text: str = Field(min_length=20)  # verbatim
+    claim_text: str = Field(min_length=20)  # verbatim, except the singularity ledger, which is in the site's words
     claim_url: str | None = None
     claim_date: date
     window_start: date | None = None
     window_end: date | None = None
+    window_mid: date | None = None  # a stated median between a stated low and high
     operationalisation: str
     related_indicators: list[str] = []
     proxy_types: list[ProxyType] = []

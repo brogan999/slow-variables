@@ -225,6 +225,21 @@ def build(s: Any, today: date | None = None) -> dict[str, Any]:
     }
 
 
+def source_problems(sources: list[dict[str, Any]], where: str) -> list[str]:
+    """A cited work needs its credits and a fetch record, and may carry one quote of under fifteen words."""
+    errors = []
+    for x in sources:
+        for k in ("who", "field", "finding", "work", "year", "url"):
+            if not x.get(k):
+                errors.append(f"{where}: source {x['id']} has no {k}")
+        if bad := unfetched(x):
+            errors.append(f"{where}: source {x['id']} {bad}")
+        q = x.get("quote")
+        if q and len(q.split()) >= 15:
+            errors.append(f"{where}: source {x['id']} quotes fifteen words or more")
+    return errors
+
+
 def problems(
     spec: dict[str, Any], known_facts: dict[str, Any], rows: set[str], stages: set[str]
 ) -> list[str]:
@@ -234,15 +249,7 @@ def problems(
     errors = []
     sources = {x["id"] for x in spec.get("sources") or []}
     positions = {p["id"]: p for p in spec.get("positions") or []}
-    for x in spec.get("sources") or []:
-        for k in ("who", "field", "finding", "work", "year", "url"):
-            if not x.get(k):
-                errors.append(f"outlook: source {x['id']} has no {k}")
-        if bad := unfetched(x):
-            errors.append(f"outlook: source {x['id']} {bad}")
-        q = x.get("quote")
-        if q and len(q.split()) >= 15:
-            errors.append(f"outlook: source {x['id']} quotes fifteen words or more")
+    errors += source_problems(spec.get("sources") or [], "outlook")
     for p in positions.values():
         where = f"outlook: position {p['id']}"
         if p.get("folio") not in FOLIOS:

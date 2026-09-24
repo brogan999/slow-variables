@@ -431,3 +431,1467 @@ predictions:
     magnitude_assessment: "The production ladder sits at retraining on a short cycle; research systems that learn across sessions have not shipped, and no benchmark measures retention."
     timing_assessment: "Holds today; it resolves against the first production system that learns across sessions without retraining."
     published: true
+  # Part 17: the singularity timeline. claim_text here is this site's wording, credited and linked; the timeline
+  # (seed/singularity.yaml) places each row on a lane.
+  - id: vinge_superhuman_2005_2030
+    ledger: singularity
+    claimant: Vernor Vinge
+    claim_text: Vernor Vinge expected humans to have the means to create superhuman intelligence within about three decades,
+      and said he would be surprised if it came before 2005 or after 2030.
+    claim_url: https://edoras.sdsu.edu/~vinge/misc/singularity.html
+    claim_date: '1993-03-30'
+    window_start: '2005-01-01'
+    window_end: '2030-12-31'
+    operationalisation: Settles if an AI system is judged broadly smarter than the best humans across most intellectual work
+      before the end of 2030.
+    related_indicators:
+    - arc_agi_frontier
+    - metr_horizon_50
+    confidence: 30
+    counterevidence: Frontier systems still fail at long, open-ended work that experts handle routinely, and several careful
+      forecasters put superintelligence after 2030.
+    published: true
+  - id: kurzweil_brain_hardware_2023
+    ledger: singularity
+    claimant: Ray Kurzweil
+    claim_text: Ray Kurzweil projected that around 2023 a thousand dollars of computer hardware would buy raw processing equal
+      to his own estimate for one human brain.
+    claim_url: https://www.writingsbyraykurzweil.com/the-law-of-accelerating-returns
+    claim_date: '2001-03-07'
+    window_start: '2001-03-07'
+    window_end: '2023-12-31'
+    operationalisation: Settles on whether a thousand dollars of hardware bought in 2023 delivered the brain-equivalent operations
+      per second Kurzweil himself used.
+    related_indicators:
+    - perf_per_dollar_growth
+    confidence: 50
+    counterevidence: Measured by useful AI performance rather than raw operations, cheap hardware now handles many brain-like
+      tasks, so a looser reading could count the call as met.
+    published: true
+  - id: kurzweil_turing_test_2029
+    ledger: singularity
+    claimant: Ray Kurzweil
+    claim_text: Ray Kurzweil bet publicly that a machine would pass a rigorous Turing test, judged under formal rules with expert
+      interrogators, by 2029.
+    claim_url: https://longbets.org/1/
+    claim_date: '2002-04-09'
+    window_start: '2002-04-09'
+    window_end: '2029-12-31'
+    operationalisation: Settles when a test run under the Long Bets rules, with expert judges and hours of questioning, finds
+      a machine indistinguishable from people.
+    related_indicators: []
+    confidence: 30
+    counterevidence: The bet's judges question each candidate for hours, and current systems still slip under sustained, adversarial
+      questioning and on long-term memory.
+    published: true
+  - id: kurzweil_nanobots_brain_scan_2030
+    ledger: singularity
+    claimant: Ray Kurzweil
+    claim_text: Ray Kurzweil expected robots the size of blood cells to be workable by around 2030, with scanning the living
+      brain from the inside among their leading uses.
+    claim_url: https://www.writingsbyraykurzweil.com/the-law-of-accelerating-returns
+    claim_date: '2001-03-07'
+    window_start: '2001-03-07'
+    window_end: '2030-12-31'
+    operationalisation: Settles if robots of roughly blood-cell size operate inside a living human brain to map it before the
+      end of 2030.
+    related_indicators: []
+    confidence: 50
+    counterevidence: Molecular robotics labs have built simple DNA machines, and a sudden advance could still arrive before
+      2030, though nothing points to one.
+    published: true
+  - id: kurzweil_nonbiological_crossover_2030
+    ledger: singularity
+    claimant: Ray Kurzweil
+    claim_text: Ray Kurzweil forecast that before 2030 the combined thinking capacity of non-biological intelligence would exceed
+      that of all human brains put together.
+    claim_url: https://www.writingsbyraykurzweil.com/the-law-of-accelerating-returns
+    claim_date: '2001-03-07'
+    window_start: '2001-03-07'
+    window_end: '2030-12-31'
+    operationalisation: Settles when installed AI computing capacity passes Kurzweil's own per-brain figure multiplied by the
+      human population before the end of 2030.
+    related_indicators:
+    - epoch_training_compute_growth
+    - perf_per_dollar_growth
+    confidence: 50
+    counterevidence: Counting minds in raw operations is contested, and on a lower estimate of what a brain computes installed
+      AI hardware could close the gap much faster.
+    published: true
+  - id: kurzweil_singularity_2045
+    ledger: singularity
+    claimant: Ray Kurzweil
+    claim_text: Ray Kurzweil set 2045 as the year of the Singularity, when machine intelligence created by people would vastly
+      exceed all human intelligence combined.
+    claim_url: https://www.singularity.com/
+    claim_date: '2005-09-22'
+    window_start: '2005-09-22'
+    window_mid: '2045-07-01'
+    operationalisation: Settles if, around 2045, machine intelligence clearly outstrips the combined intellectual capacity of
+      humanity by broad expert agreement.
+    related_indicators:
+    - metr_horizon_50
+    confidence: 20
+    counterevidence: The date rests on smooth exponential trends running for decades, which physical, economic or political
+      limits could break.
+    published: true
+  - id: kurzweil_neocortex_cloud_early_2030s
+    ledger: singularity
+    claimant: Ray Kurzweil
+    claim_text: Ray Kurzweil predicts that during the 2030s nanobots will link the upper layers of the neocortex to the cloud,
+      directly extending human thinking.
+    claim_url: https://www.penguinrandomhouse.com/books/535433/the-singularity-is-nearer-by-ray-kurzweil/
+    claim_date: '2024-06-25'
+    window_start: '2030-01-01'
+    window_end: '2039-12-31'
+    operationalisation: Settles if a routine interface connects healthy users' neocortex to cloud computing that measurably
+      extends their thinking before the end of 2039.
+    related_indicators: []
+    confidence: 20
+    counterevidence: Implants still need surgery, reach tiny numbers of neurons and move slowly through regulators, far from
+      whole-cortex links within a decade.
+    published: true
+  - id: kurzweil_longevity_escape_2030
+    ledger: singularity
+    claimant: Ray Kurzweil
+    claim_text: Ray Kurzweil expects the most diligent people to reach longevity escape velocity around 2030, gaining more than
+      a year of life expectancy for every year that passes.
+    claim_url: https://www.penguinrandomhouse.com/books/535433/the-singularity-is-nearer-by-ray-kurzweil/
+    claim_date: '2024-06-25'
+    window_start: '2024-06-25'
+    window_end: '2030-12-31'
+    operationalisation: Settles if remaining life expectancy for health-focused adults starts rising by more than a year per
+      calendar year, on actuarial data, by the end of 2030.
+    related_indicators: []
+    confidence: 50
+    counterevidence: Life-expectancy gains have slowed in rich countries, and no approved treatment yet slows ageing enough
+      to add years for healthy people.
+    published: true
+  - id: karnofsky_transformative_ai_2060
+    ledger: singularity
+    claimant: Holden Karnofsky
+    claim_text: Holden Karnofsky gave better than one chance in ten of transformative AI by 2036, about even odds by 2060, and
+      around two chances in three by 2100.
+    claim_url: https://www.cold-takes.com/where-ai-forecasting-stands-today/
+    claim_date: '2021-09-07'
+    window_start: '2021-09-07'
+    window_mid: '2060-07-01'
+    operationalisation: Settles when AI able to drive a transition as large as the industrial revolution is judged to exist,
+      read from automation and growth indicators.
+    related_indicators:
+    - metr_horizon_50
+    - rsi_agent_workdays_per_human
+    confidence: 30
+    counterevidence: Transformative AI means automating science and technology broadly, and slow diffusion could keep it from
+      arriving until his median or later.
+    published: true
+  - id: cotra_bio_anchors_2050
+    ledger: singularity
+    claimant: Ajeya Cotra
+    claim_text: Ajeya Cotra's biological anchors report modelled a median in the early 2050s for transformative AI, which she
+      rounded to about 2050, with most aggressive and most conservative plausible medians of 2040 and 2080.
+    claim_url: https://www.alignmentforum.org/posts/KrJfoZzpSDpnrv9va/draft-report-on-ai-timelines
+    claim_date: '2020-09-18'
+    window_start: '2020-09-18'
+    window_mid: '2050-07-01'
+    operationalisation: Settles by the year AI that can drive a transition as large as the industrial revolution becomes affordable
+      to train and run.
+    related_indicators:
+    - epoch_training_compute_growth
+    - perf_per_dollar_growth
+    confidence: 30
+    counterevidence: The compute anchors could still prove right if current systems stall short of transformative economic impact.
+    published: true
+  - id: kokotajlo_ai_assistants_2026
+    ledger: singularity
+    claimant: Daniel Kokotajlo
+    claim_text: Daniel Kokotajlo foresaw that by 2026 AI assistants would be doing lucrative work across the economy, while
+      world economic growth showed no visible acceleration yet.
+    claim_url: https://www.lesswrong.com/posts/6Xgy6CAf2jqHhynHL/what-2026-looks-like
+    claim_date: '2021-08-06'
+    window_start: '2021-08-06'
+    window_end: '2026-12-31'
+    operationalisation: Settles at the end of 2026 on paid business use of AI assistants alongside growth figures that show
+      no AI-driven acceleration.
+    related_indicators:
+    - ramp_paid_ai_adoption
+    - btos_firm_use
+    - bls_labor_productivity_yoy
+    confidence: 45
+    counterevidence: If a clear productivity jump shows up in late 2026 data, the second half of the call would fail.
+    published: true
+  - id: davidson_full_automation_2043
+    ledger: singularity
+    claimant: Tom Davidson
+    claim_text: Tom Davidson's takeoff model put a median of 2043 on AI able to readily automate all cognitive work, with about
+      one chance in ten by 2030 and four in five by 2070.
+    claim_url: https://web.archive.org/web/2024id_/https://www.openphilanthropy.org/research/what-a-compute-centric-framework-says-about-takeoff-speeds/
+    claim_date: '2023-06-27'
+    window_start: '2023-06-27'
+    window_mid: '2043-07-01'
+    operationalisation: Settles by the year AI can do essentially every cognitive task in the economy at least as cheaply as
+      people.
+    related_indicators:
+    - metr_horizon_50
+    - epoch_training_compute_growth
+    confidence: 20
+    counterevidence: The model inherits the biological-anchors compute requirements; if those are too high, as recent progress
+      suggests, full automation comes earlier.
+    published: true
+  - id: davidson_superhuman_within_year
+    ledger: singularity
+    claimant: Tom Davidson
+    claim_text: Tom Davidson's best guess is that AI goes from matching human professionals at almost all cognitive work to
+      far surpassing them in less than a year.
+    claim_url: https://web.archive.org/web/2024id_/https://www.openphilanthropy.org/research/what-a-compute-centric-framework-says-about-takeoff-speeds/
+    claim_date: '2023-06-27'
+    window_start: '2023-06-27'
+    operationalisation: Settles on the time between AI matching professionals on nearly all cognitive work and AI far exceeding
+      them, once the first milestone is recognised.
+    related_indicators:
+    - rsi_agent_workdays_per_human
+    confidence: 20
+    counterevidence: Compute scarcity, experiment time and deployment frictions could stretch the gap between parity and superiority
+      to several years.
+    published: true
+  - id: christiano_dyson_sphere_2030_2040
+    ledger: singularity
+    claimant: Paul Christiano
+    claim_text: Paul Christiano put about one chance in seven on AI able to build a Dyson sphere by 2030, and about two chances
+      in five by 2040.
+    claim_url: https://www.dwarkesh.com/p/paul-christiano
+    claim_date: '2023-10-31'
+    window_start: '2023-10-31'
+    window_end: '2040-12-31'
+    operationalisation: Settles if AI systems can design and direct engineering on the scale of a Dyson sphere, by expert judgement,
+      by 2030 or by 2040.
+    related_indicators: []
+    confidence: 20
+    counterevidence: Physical construction, energy and materials limits may slow any AI-directed industrial build-out far below
+      the pace of software progress.
+    published: true
+  - id: christiano_software_explosion_even_odds
+    ledger: singularity
+    claimant: Paul Christiano
+    claim_text: Paul Christiano gave even odds on whether an intelligence explosion driven by software improvements alone is
+      possible at all.
+    claim_url: https://www.dwarkesh.com/p/paul-christiano
+    claim_date: '2023-10-31'
+    window_start: '2023-10-31'
+    operationalisation: Settles if AI research output accelerates on a fixed compute budget, shown by independent measures of
+      AI doing AI research.
+    related_indicators:
+    - rsi_agent_workdays_per_human
+    confidence: 20
+    counterevidence: Returns to AI research may fall off quickly without more compute, which would rule out a software-only
+      explosion.
+    published: true
+  - id: christiano_fast_takeoff_odds
+    ledger: singularity
+    claimant: Paul Christiano
+    claim_text: Paul Christiano put about three chances in ten on a fast takeoff, expecting world output to finish a doubling
+      over four years before any single-year doubling begins.
+    claim_url: https://sideways-view.com/2018/02/24/takeoff-speeds/
+    claim_date: '2018-02-24'
+    window_start: '2018-02-24'
+    operationalisation: Settles by whether world output completes a four-year doubling before any one-year doubling, as read
+      from national accounts.
+    related_indicators:
+    - bls_labor_productivity_yoy
+    - bls_tfp_private_nonfarm
+    confidence: 20
+    counterevidence: A sudden software-driven leap would bring a one-year doubling without the slower four-year doubling coming
+      first.
+    published: true
+  - id: christiano_what_failure_looks_like
+    ledger: singularity
+    claimant: Paul Christiano
+    claim_text: Paul Christiano expected that, without solving intent alignment, AI failure would come as a gradual loss of
+      human steering to optimised proxies, possibly ending in a sudden cascade.
+    claim_url: https://www.lesswrong.com/posts/HBxe6wdjxK239zajf
+    claim_date: '2019-03-17'
+    window_start: '2019-03-17'
+    operationalisation: Settles if key institutions come to be run by AI systems optimising measurable proxies that humans can
+      no longer correct.
+    related_indicators:
+    - safety_brake_events
+    confidence: 30
+    counterevidence: Institutions may notice proxy failures and correct them, as they have with earlier optimisation technologies.
+    published: true
+  - id: aschenbrenner_100b_company_ai_revenue_2026
+    ledger: singularity
+    claimant: Leopold Aschenbrenner
+    claim_text: Leopold Aschenbrenner expected single companies such as Google or Microsoft to reach AI revenue of around a
+      hundred billion dollars a year by about 2026.
+    claim_url: https://situational-awareness.ai/racing-to-the-trillion-dollar-cluster/
+    claim_date: '2024-06-04'
+    window_start: '2024-06-04'
+    window_end: '2026-12-31'
+    operationalisation: Settles if Google, Microsoft or a similar firm reports an annualised AI revenue run-rate near a hundred
+      billion dollars by the end of 2026.
+    related_indicators:
+    - lab_run_rates
+    confidence: 45
+    counterevidence: On a broad definition that counts cloud rentals, chips and AI-enhanced products, the largest firms' AI
+      revenue could already approach the figure.
+    published: true
+  - id: aschenbrenner_1t_ai_investment_2027
+    ledger: singularity
+    claimant: Leopold Aschenbrenner
+    claim_text: Leopold Aschenbrenner projected that total annual AI investment could exceed a trillion dollars by 2027.
+    claim_url: https://situational-awareness.ai/racing-to-the-trillion-dollar-cluster/
+    claim_date: '2024-06-04'
+    window_start: '2024-06-04'
+    window_end: '2027-12-31'
+    operationalisation: Settles if combined AI capital spending by firms and governments exceeds a trillion dollars in a single
+      year by the end of 2027.
+    related_indicators:
+    - capex_to_revenue_stack
+    - cloud_rpo_backlog
+    - circular_financing_scale
+    confidence: 45
+    counterevidence: A pullback in capital markets or weak AI revenue could cap spending well below the trillion-dollar mark.
+    published: true
+  - id: aschenbrenner_automated_ai_researcher_2027
+    ledger: singularity
+    claimant: Leopold Aschenbrenner
+    claim_text: Leopold Aschenbrenner called it strikingly plausible that models could do the job of the engineers and researchers
+      who build AI by 2027.
+    claim_url: https://situational-awareness.ai/from-gpt-4-to-agi/
+    claim_date: '2024-06-04'
+    window_start: '2024-06-04'
+    window_end: '2027-12-31'
+    operationalisation: Settles if independent evaluation shows AI agents doing the full job of AI research engineers, not just
+      assisting them, by the end of 2027.
+    related_indicators:
+    - rsi_agent_workdays_per_human
+    - rsi_intervention_rate_4_8h
+    - dev_rct_uplift
+    confidence: 30
+    counterevidence: Agents still need frequent human intervention on multi-hour research tasks, far from replacing research
+      engineers outright.
+    published: true
+  - id: aschenbrenner_superintelligence_2030
+    ledger: singularity
+    claimant: Leopold Aschenbrenner
+    claim_text: Leopold Aschenbrenner expected automated AI research to produce superintelligence, vastly smarter than people,
+      before this decade is out.
+    claim_url: https://situational-awareness.ai/from-agi-to-superintelligence/
+    claim_date: '2024-06-04'
+    window_start: '2024-06-04'
+    window_end: '2030-12-31'
+    operationalisation: Settles if AI systems vastly exceed the best humans across nearly all cognitive work before the end
+      of 2030.
+    related_indicators:
+    - rsi_agent_workdays_per_human
+    - metr_horizon_50
+    confidence: 20
+    counterevidence: Compute and power build-outs may not keep pace, and automated research may yield slower returns than his
+      trend lines assume.
+    published: true
+  - id: aschenbrenner_expert_remote_worker_2027_2028
+    ledger: singularity
+    claimant: Leopold Aschenbrenner
+    claim_text: Leopold Aschenbrenner expects that in 2027 or 2028 models will be as capable as the leading experts and work
+      much like a drop-in remote employee.
+    claim_url: https://www.dwarkesh.com/p/leopold-aschenbrenner
+    claim_date: '2024-06-04'
+    window_start: '2024-06-04'
+    window_end: '2028-12-31'
+    operationalisation: Settles if AI systems can be hired as remote workers who match top experts across their jobs during
+      2027 or 2028.
+    related_indicators:
+    - metr_horizon_80
+    - harvey_lab_frontier_completion
+    confidence: 30
+    counterevidence: Current agents still falter on long, messy tasks that remote employees handle routinely.
+    published: true
+  - id: aschenbrenner_10gw_cluster_2028
+    ledger: singularity
+    claimant: Leopold Aschenbrenner
+    claim_text: Leopold Aschenbrenner projected that the largest training cluster would draw about ten gigawatts and cost hundreds
+      of billions of dollars by 2028.
+    claim_url: https://www.dwarkesh.com/p/leopold-aschenbrenner
+    claim_date: '2024-06-04'
+    window_start: '2024-06-04'
+    window_end: '2028-12-31'
+    operationalisation: Settles if a single training cluster drawing about ten gigawatts is running by the end of 2028.
+    related_indicators:
+    - epoch_training_power_growth
+    confidence: 30
+    counterevidence: Grid connections, turbines and transformers are scarce, and labs may spread training across sites rather
+      than build one giant cluster.
+    published: true
+  - id: aschenbrenner_trillion_dollar_cluster_2030
+    ledger: singularity
+    claimant: Leopold Aschenbrenner
+    claim_text: Leopold Aschenbrenner projected a trillion-dollar training cluster by 2030, drawing about a hundred gigawatts,
+      more than a fifth of current US electricity output.
+    claim_url: https://www.dwarkesh.com/p/leopold-aschenbrenner
+    claim_date: '2024-06-04'
+    window_start: '2024-06-04'
+    window_end: '2030-12-31'
+    operationalisation: Settles if a single training cluster costing about a trillion dollars and drawing about a hundred gigawatts
+      runs by the end of 2030.
+    related_indicators:
+    - epoch_training_power_growth
+    - epoch_training_compute_growth
+    confidence: 20
+    counterevidence: Epoch expects longer data-centre build times to delay the first trillion-dollar cluster to about 2035.
+    published: true
+  - id: epoch_trillion_cluster_2035
+    ledger: singularity
+    claimant: Yafah Edelman and Anson Ho
+    claim_text: Yafah Edelman and Anson Ho of Epoch AI argue that longer data-centre build times push the first trillion-dollar
+      AI compute cluster from about 2030 back to about 2035.
+    claim_url: https://epoch.ai/gradient-updates/compute-scaling-will-slow-down-due-to-increasing-lead-times
+    claim_date: '2025-09-05'
+    window_start: '2025-09-05'
+    window_mid: '2035-07-01'
+    operationalisation: Settles by the year a single AI developer first operates compute worth about a trillion dollars.
+    related_indicators:
+    - epoch_training_compute_growth
+    - epoch_training_power_growth
+    confidence: 20
+    counterevidence: Heavy financing and modular construction could shorten lead times and restore the faster path to such a
+      cluster around 2030.
+    published: true
+  - id: amodei_expert_nation_decade_90pct
+    ledger: singularity
+    claimant: Dario Amodei
+    claim_text: Dario Amodei put nine chances in ten on datacentre AI equal to a whole nation of top experts arriving within
+      a decade, through a soft but steep takeoff.
+    claim_url: https://www.dwarkesh.com/p/dario-amodei-2
+    claim_date: '2026-02-13'
+    window_start: '2026-02-13'
+    window_end: '2036-12-31'
+    operationalisation: Settles if datacentre AI systems work autonomously at the level of top experts across most fields before
+      the end of 2036.
+    related_indicators:
+    - metr_horizon_80
+    - harvey_lab_frontier_completion
+    confidence: 20
+    counterevidence: Continual learning and reliability on long tasks remain unsolved, and either could stall progress well
+      short of expert-level autonomy.
+    published: true
+  - id: amodei_compressed_biology
+    ledger: singularity
+    claimant: Dario Amodei
+    claim_text: Dario Amodei predicts that once powerful AI exists, biology and medicine will fit the coming half-century to
+      century of progress into five to ten years.
+    claim_url: https://www.darioamodei.com/essay/machines-of-loving-grace
+    claim_date: '2024-10-11'
+    window_start: '2024-10-11'
+    operationalisation: Settles on the pace of approved therapies and lifespan gains in the decade after powerful AI is recognised.
+    related_indicators: []
+    confidence: 20
+    counterevidence: Clinical trials, regulation and the slow pace of biological experiments may bind far more tightly than
+      the supply of research ideas.
+    published: true
+  - id: altman_novel_insights_2026
+    ledger: singularity
+    claimant: Sam Altman
+    claim_text: Sam Altman wrote that 2026 would likely bring AI systems able to work out genuinely new insights.
+    claim_url: https://blog.samaltman.com/the-gentle-singularity
+    claim_date: '2025-06-10'
+    window_start: '2026-01-01'
+    window_end: '2026-12-31'
+    operationalisation: Settles if, during 2026, AI systems produce new scientific or mathematical findings that independent
+      experts credit mainly to the machine.
+    related_indicators:
+    - rsi_agent_workdays_per_human
+    confidence: 30
+    counterevidence: Most claimed AI discoveries rest on search guided by people who pick the problems and check the answers.
+    published: true
+  - id: altman_real_world_robots_2027
+    ledger: singularity
+    claimant: Sam Altman
+    claim_text: Sam Altman said 2027 may bring robots able to carry out tasks in the real world.
+    claim_url: https://blog.samaltman.com/the-gentle-singularity
+    claim_date: '2025-06-10'
+    window_start: '2027-01-01'
+    window_end: '2027-12-31'
+    operationalisation: Settles if general-purpose robots are doing paid tasks outside controlled test sites during 2027.
+    related_indicators: []
+    confidence: 20
+    counterevidence: Robot hardware, safety certification and training data for physical tasks lag far behind language models.
+    published: true
+  - id: altman_internal_agi_2026
+    ledger: singularity
+    claimant: Sam Altman
+    claim_text: Sam Altman told TIME that OpenAI would have an internal system he would call AGI before the end of 2026, while
+      conceding it was not there yet.
+    claim_url: https://web.archive.org/web/2026id_/https://time.com/article/2026/08/26/openai-sam-altman-interview/
+    claim_date: '2026-08-26'
+    window_start: '2026-08-26'
+    window_end: '2026-12-31'
+    operationalisation: Settles only if an independent evaluation finds an OpenAI system outperforms people at most economically
+      valuable work by the end of 2026.
+    related_indicators:
+    - internal_external_deployment_gap_months
+    - metr_horizon_50
+    confidence: 30
+    counterevidence: The call depends on OpenAI's own definition of AGI, which can be met by declaration rather than by an outside
+      test.
+    published: true
+  - id: altman_superintelligence_few_thousand_days
+    ledger: singularity
+    claimant: Sam Altman
+    claim_text: Sam Altman wrote that superintelligence might arrive within a few thousand days, though it could take longer,
+      and said he is confident it will come.
+    claim_url: https://ia.samaltman.com/
+    claim_date: '2024-09-23'
+    window_start: '2024-09-23'
+    window_end: '2035-12-31'
+    operationalisation: Settles if AI systems vastly exceed the best humans across nearly all intellectual work by the end of
+      2035.
+    related_indicators: []
+    confidence: 20
+    counterevidence: Altman hedged the date himself, and his firm's definitions of these milestones have shifted over time.
+    published: true
+  - id: ai2027_research_speedup_early_2026
+    ledger: singularity
+    claimant: AI Futures Project
+    claim_text: The AI 2027 scenario had AI assistants speeding the leading lab's algorithmic progress by about half again by
+      early 2026.
+    claim_url: https://ai-2027.com/
+    claim_date: '2025-04-03'
+    window_start: '2025-04-03'
+    window_end: '2026-03-31'
+    operationalisation: Settles on independent measurement of how much AI assistance sped up frontier labs' algorithmic progress
+      by early 2026.
+    related_indicators:
+    - dev_rct_uplift
+    - rsi_agent_workdays_per_human
+    - surprise_index
+    confidence: 50
+    counterevidence: Lab-internal research speeds are not public, so a speed-up of that size could exist without showing in
+      outside trials.
+    published: true
+  - id: ai2027_revenue_spend_power_2025
+    ledger: singularity
+    claimant: AI Futures Project
+    claim_text: The AI 2027 scenario forecast that during 2025 AI company revenues would triple, yearly data-centre spending
+      would double, and US AI power draw would grow by over five gigawatts.
+    claim_url: https://ai-2027.com/
+    claim_date: '2025-04-03'
+    window_start: '2025-04-03'
+    window_end: '2025-12-31'
+    operationalisation: Settles on full-year 2025 figures for frontier-lab revenue, AI data-centre spending and added US AI
+      power capacity.
+    related_indicators:
+    - lab_run_rates
+    - capex_to_revenue_stack
+    - epoch_training_power_growth
+    confidence: 30
+    counterevidence: Revenue figures are company-reported run-rates rather than audited sales, and data-centre spending counts
+      differ across sources.
+    published: true
+  - id: ai2027_superhuman_researcher_sep_2027
+    ledger: singularity
+    claimant: AI Futures Project
+    claim_text: The AI 2027 scenario placed a superhuman AI researcher, one that outdoes the best people at AI research, at
+      around September 2027.
+    claim_url: https://ai-2027.com/
+    claim_date: '2025-04-03'
+    window_start: '2025-04-03'
+    window_end: '2027-09-30'
+    operationalisation: Settles if an AI system is shown, by outside evaluation, to beat the best human researchers at AI research
+      by the end of September 2027.
+    related_indicators:
+    - rsi_agent_workdays_per_human
+    - rsi_intervention_rate_4_8h
+    - surprise_index
+    confidence: 30
+    counterevidence: The authors' own later medians put this milestone after 2027, and agents still need frequent human help
+      on research tasks.
+    published: true
+  - id: ai2027_asi_end_2027
+    ledger: singularity
+    claimant: AI Futures Project
+    claim_text: The AI 2027 scenario has AI that automates AI research in early 2027 compounding into artificial superintelligence
+      before that year is out.
+    claim_url: https://ai-2027.com/summary
+    claim_date: '2025-04-03'
+    window_start: '2025-04-03'
+    window_end: '2027-12-31'
+    operationalisation: Settles if AI systems vastly exceed the best humans across nearly all cognitive work by the end of 2027.
+    related_indicators:
+    - surprise_index
+    - rsi_agent_workdays_per_human
+    - metr_horizon_50
+    confidence: 50
+    counterevidence: Capability readings such as the METR time horizon have run faster than trend, so a sharp jump in 2027 is
+      not ruled out.
+    published: true
+  - id: ai2027_robot_economy_2028_2030
+    ledger: singularity
+    claimant: AI Futures Project
+    claim_text: The race ending of AI 2027 has special economic zones filling with robot factories from 2028, with a robot economy
+      covering them by early 2030.
+    claim_url: https://ai-2027.com/race
+    claim_date: '2025-04-03'
+    window_start: '2028-01-01'
+    window_end: '2030-12-31'
+    operationalisation: Settles if AI-directed robot factories fill dedicated economic zones and robot output compounds rapidly
+      between 2028 and 2030.
+    related_indicators: []
+    confidence: 20
+    counterevidence: The scenario presumes superintelligence first; without it, robot manufacturing is growing at ordinary industrial
+      rates.
+    published: true
+  - id: ai2027_quarter_remote_jobs_oct_2027
+    ledger: singularity
+    claimant: AI Futures Project
+    claim_text: The AI 2027 scenario expects AI to be doing a quarter of the remote jobs of 2024 by October 2027, with unemployment
+      about a point higher than a year before.
+    claim_url: https://ai-2027.com/
+    claim_date: '2025-04-03'
+    window_start: '2025-04-03'
+    window_end: '2027-10-31'
+    operationalisation: Settles if labour data show about a quarter of the remote jobs of 2024 done by AI by October 2027.
+    related_indicators:
+    - canaries_exposed_employment_yoy
+    - bbd_work_hours_assisted
+    - exposure_vs_usage_gap
+    confidence: 30
+    counterevidence: Firms mostly use AI to assist workers, and employment data for exposed occupations show modest shifts rather
+      than mass replacement.
+    published: true
+  - id: kokotajlo_automated_coder_nov_2027
+    ledger: singularity
+    claimant: Daniel Kokotajlo
+    claim_text: Daniel Kokotajlo's August 2026 median for an automated coder, an AI that labs would rather keep than their human
+      coders, is November 2027.
+    claim_url: https://blog.aifutures.org/p/q25-2026-timelines-update-uplift
+    claim_date: '2026-08-16'
+    window_start: '2026-08-16'
+    window_mid: '2027-11-01'
+    operationalisation: Settles when a frontier lab would rather lose all its human software engineers than its AI coding agents,
+      as shown by staffing and outside evaluation.
+    related_indicators:
+    - metr_horizon_50
+    - metr_horizon_80
+    - rsi_intervention_rate_4_8h
+    confidence: 20
+    counterevidence: METR says its tasks cannot measure horizons much beyond a working day, so the trend this forecast leans
+      on may soon go unmeasured.
+    published: true
+  - id: kokotajlo_top_expert_ai_nov_2028
+    ledger: singularity
+    claimant: Daniel Kokotajlo
+    claim_text: Daniel Kokotajlo's August 2026 median for AI that matches or exceeds the best human experts on almost every
+      cognitive task is November 2028.
+    claim_url: https://blog.aifutures.org/p/q25-2026-timelines-update-uplift
+    claim_date: '2026-08-16'
+    window_start: '2026-08-16'
+    window_mid: '2028-11-01'
+    operationalisation: Settles when AI systems match or exceed top human experts on virtually all cognitive tasks, by broad
+      outside evaluation.
+    related_indicators:
+    - metr_horizon_50
+    - harvey_lab_frontier_completion
+    confidence: 20
+    counterevidence: Benchmarks saturate faster than real expert work is automated, so the milestone may lag capability scores
+      for years.
+    published: true
+  - id: kokotajlo_asi_mar_2029
+    ledger: singularity
+    claimant: Daniel Kokotajlo
+    claim_text: Daniel Kokotajlo's August 2026 median for artificial superintelligence is March 2029, a few months after his
+      median for AI that beats top experts.
+    claim_url: https://blog.aifutures.org/p/q25-2026-timelines-update-uplift
+    claim_date: '2026-08-16'
+    window_start: '2026-08-16'
+    window_mid: '2029-03-01'
+    operationalisation: Settles when AI systems vastly exceed the best humans across nearly all cognitive work.
+    related_indicators:
+    - rsi_agent_workdays_per_human
+    confidence: 20
+    counterevidence: Compute limits on experiments could slow the jump from expert-level AI to superintelligence well beyond
+      a few months.
+    published: true
+  - id: lifland_automated_coder_jan_2030
+    ledger: singularity
+    claimant: Eli Lifland
+    claim_text: Eli Lifland's August 2026 median for an automated coder, an AI that labs would rather keep than their human
+      coders, is January 2030.
+    claim_url: https://blog.aifutures.org/p/q25-2026-timelines-update-uplift
+    claim_date: '2026-08-16'
+    window_start: '2026-08-16'
+    window_mid: '2030-01-01'
+    operationalisation: Settles when a frontier lab would rather lose all its human software engineers than its AI coding agents,
+      as shown by staffing and outside evaluation.
+    related_indicators:
+    - metr_horizon_50
+    - metr_horizon_80
+    - rsi_intervention_rate_4_8h
+    confidence: 20
+    counterevidence: Time horizons have been doubling every few months, which would bring an automated coder well before his
+      median.
+    published: true
+  - id: lifland_top_expert_ai_jul_2032
+    ledger: singularity
+    claimant: Eli Lifland
+    claim_text: Eli Lifland's August 2026 median for AI that matches or exceeds the best human experts on almost every cognitive
+      task is July 2032.
+    claim_url: https://blog.aifutures.org/p/q25-2026-timelines-update-uplift
+    claim_date: '2026-08-16'
+    window_start: '2026-08-16'
+    window_mid: '2032-07-01'
+    operationalisation: Settles when AI systems match or exceed top human experts on virtually all cognitive tasks, by broad
+      outside evaluation.
+    related_indicators:
+    - metr_horizon_50
+    - arc_agi_frontier
+    confidence: 20
+    counterevidence: His own teammate's median is almost four years earlier, and fast capability gains could pull the date forward.
+    published: true
+  - id: lifland_asi_jul_2033
+    ledger: singularity
+    claimant: Eli Lifland
+    claim_text: Eli Lifland's August 2026 median for artificial superintelligence is July 2033, about a year after his median
+      for AI that beats top experts.
+    claim_url: https://blog.aifutures.org/p/q25-2026-timelines-update-uplift
+    claim_date: '2026-08-16'
+    window_start: '2026-08-16'
+    window_mid: '2033-07-01'
+    operationalisation: Settles when AI systems vastly exceed the best humans across nearly all cognitive work.
+    related_indicators:
+    - rsi_agent_workdays_per_human
+    confidence: 20
+    counterevidence: If AI research automates itself quickly, the gap after expert-level AI could be months rather than a year.
+    published: true
+  - id: cotra_metr_horizon_full_day_2026
+    ledger: singularity
+    claimant: Ajeya Cotra
+    claim_text: Ajeya Cotra's median for the longest METR fifty-percent time horizon reported by the end of 2026 was about twenty-four
+      hours of expert work.
+    claim_url: https://www.planned-obsolescence.org/p/ai-predictions-for-2026
+    claim_date: '2026-01-14'
+    window_start: '2026-01-14'
+    window_end: '2026-12-31'
+    operationalisation: Settles on the longest METR fifty-percent time horizon reported for any model by the end of 2026, against
+      a full day of expert work.
+    related_indicators:
+    - metr_horizon_50
+    - horizon_ratio_80_50
+    confidence: 45
+    counterevidence: METR says measurements above about sixteen hours are unreliable, so the call may prove impossible to resolve
+      cleanly.
+    published: true
+  - id: cotra_full_ai_rnd_automation_2026
+    ledger: singularity
+    claimant: Ajeya Cotra
+    claim_text: Ajeya Cotra gave about one chance in ten that AI fully automates AI research and development, matching human
+      researchers, by the end of 2026.
+    claim_url: https://www.planned-obsolescence.org/p/ai-predictions-for-2026
+    claim_date: '2026-01-14'
+    window_start: '2026-01-14'
+    window_end: '2026-12-31'
+    operationalisation: Settles if AI does essentially all AI research and development work at a frontier lab by the end of
+      2026, on independent evidence.
+    related_indicators:
+    - rsi_agent_workdays_per_human
+    - rsi_intervention_rate_4_8h
+    confidence: 30
+    counterevidence: Lab-internal capabilities run ahead of public ones, so a sudden jump in research automation could still
+      appear late in the year.
+    published: true
+  - id: critch_gradual_ceding_2030_2050
+    ledger: singularity
+    claimant: Andrew Critch
+    claim_text: Andrew Critch put about even odds, on top of other risks, on humanity gradually handing the planet to AI after
+      it is built, mostly during the 2030s, with the last humans gone by 2050.
+    claim_url: https://www.lesswrong.com/posts/Kobbt3nQgv3yn29pr/my-motivation-and-theory-of-change-for-working-in-ai
+    claim_date: '2024-10-12'
+    window_start: '2030-01-01'
+    window_end: '2050-12-31'
+    operationalisation: Settles if humans lose control of key economic and political systems to AI between 2030 and 2040, followed
+      by human extinction by 2050.
+    related_indicators:
+    - labor_share_nonfarm
+    - safety_brake_events
+    confidence: 20
+    counterevidence: Human institutions could keep decisive roles for people, and gradual shifts give time to notice and reverse
+      a drift in control.
+    published: true
+  - id: kulveit_gradual_disempowerment
+    ledger: singularity
+    claimant: Jan Kulveit and colleagues
+    claim_text: Jan Kulveit and co-authors argue that if AI keeps displacing human labour, thought and consent across economy,
+      culture and state, humans will probably lose effective control without any takeover.
+    claim_url: https://arxiv.org/abs/2501.16946
+    claim_date: '2025-01-28'
+    window_start: '2025-01-28'
+    operationalisation: Settles if the human share of income, decision-making and cultural production falls to the point where
+      people can no longer steer key institutions.
+    related_indicators:
+    - labor_share_nonfarm
+    - aei_augmentation_share
+    confidence: 30
+    counterevidence: Democracies and markets have adjusted to earlier labour-saving technology, and voters could insist that
+      people keep decisive roles.
+    published: true
+  - id: carlsmith_power_seeking_catastrophe_2070
+    ledger: singularity
+    claimant: Joe Carlsmith
+    claim_text: Joe Carlsmith raised his estimate that power-seeking AI causes an existential catastrophe by 2070 from about
+      one in twenty to more than one in ten.
+    claim_url: https://arxiv.org/abs/2206.13353
+    claim_date: '2022-06-16'
+    window_start: '2022-06-16'
+    window_end: '2070-12-31'
+    operationalisation: Settles if AI systems seeking power against their developers' intent permanently disempower humanity
+      by 2070.
+    related_indicators:
+    - safety_brake_events
+    confidence: 20
+    counterevidence: Alignment and oversight methods may scale with capability, and misaligned systems may be caught before
+      they gain decisive power.
+    published: true
+  - id: carlsmith_agentic_ai_feasible_2070
+    ledger: singularity
+    claimant: Joe Carlsmith
+    claim_text: Joe Carlsmith gave about two chances in three that advanced, agentic, strategically aware AI becomes possible
+      and affordable to build by 2070.
+    claim_url: https://arxiv.org/abs/2206.13353
+    claim_date: '2022-06-16'
+    window_start: '2022-06-16'
+    window_end: '2070-12-31'
+    operationalisation: Settles when AI systems that outperform people at key tasks, plan toward goals and model their own situation
+      can be built at acceptable cost.
+    related_indicators:
+    - metr_horizon_50
+    confidence: 30
+    counterevidence: Today's agents fail at long-horizon planning and may not count as strategically aware in his sense.
+    published: true
+  - id: hassabis_agi_2030
+    ledger: singularity
+    claimant: Demis Hassabis
+    claim_text: Demis Hassabis expects AGI around 2030, give or take a year, and says that looking back people will see we are
+      already on the lower slopes of the singularity.
+    claim_url: https://www.gsb.stanford.edu/insights/demis-hassabis-thinks-were-foothills-singularity
+    claim_date: '2026-06-18'
+    window_start: '2029-01-01'
+    window_end: '2031-12-31'
+    window_mid: '2030-07-01'
+    operationalisation: Settles if a system shows the full range of human cognitive abilities, consistently, between 2029 and
+      2031.
+    related_indicators:
+    - arc_agi_frontier
+    - continual_learning_level
+    confidence: 20
+    counterevidence: Hassabis himself names missing abilities such as consistent reasoning and continual learning, any of which
+      could push the date back.
+    published: true
+  - id: trammell_parallelisation_delay
+    ledger: singularity
+    claimant: Phil Trammell
+    claim_text: Phil Trammell argues that limits on splitting research across many AI workers could delay a technological singularity,
+      though automating research would probably still produce an explosion.
+    claim_url: https://epoch.ai/publications/parallelization-constraints-could-delay-a-technological-singularity
+    claim_date: '2026-07-29'
+    window_start: '2026-07-29'
+    operationalisation: Settles on how fast technology advances once research is automated, relative to the rise in AI research
+      labour.
+    related_indicators:
+    - rsi_agent_workdays_per_human
+    confidence: 20
+    counterevidence: If AI researchers think much faster rather than just more numerously, serial speed could get around the
+      parallelisation limits.
+    published: true
+  - id: marcus_brundage_bet_2027
+    ledger: singularity
+    claimant: Gary Marcus
+    claim_text: Gary Marcus bet Miles Brundage that by the end of 2027 AI will still fail at least three of ten demanding tasks,
+      from understanding films to Nobel-level discovery.
+    claim_url: https://garymarcus.substack.com/p/where-will-ai-be-at-the-end-of-2027
+    claim_date: '2024-12-30'
+    window_start: '2024-12-30'
+    window_end: '2027-12-31'
+    operationalisation: Settles at the end of 2027 on whether AI can do at least eight of the bet's ten tasks, as judged under
+      its terms.
+    related_indicators:
+    - arc_agi_frontier
+    - harvey_lab_frontier_completion
+    confidence: 45
+    counterevidence: Progress on the bet's tasks has been quick, and AI may clear eight of the ten by late 2027.
+    published: true
+  - id: lecun_llms_not_human_level
+    ledger: singularity
+    claimant: Yann LeCun
+    claim_text: Yann LeCun says language models will not reach human-level intelligence, and that within five years we may at
+      best know we are on the right path.
+    claim_url: https://www.brown.edu/news/2026-04-01/yann-lecun-artificial-intelligence-pioneer
+    claim_date: '2026-04-01'
+    window_start: '2026-04-01'
+    operationalisation: Settles against LeCun if a system built mainly on language models reaches human-level intelligence.
+    related_indicators:
+    - arc_agi_frontier
+    - continual_learning_level
+    confidence: 20
+    counterevidence: Language-model systems keep gaining abilities LeCun said they lacked, such as multi-step planning and reasoning.
+    published: true
+  - id: cowen_half_point_growth
+    ledger: singularity
+    claimant: Tyler Cowen
+    claim_text: Tyler Cowen guesses AI will raise annual economic growth by only about half a percentage point, because slow-moving
+      sectors such as government, health and education act as bottlenecks.
+    claim_url: https://marginalrevolution.com/marginalrevolution/2025/02/why-i-think-ai-take-off-is-relatively-slow.html
+    claim_date: '2025-02-23'
+    window_start: '2025-02-23'
+    operationalisation: Settles on whether AI's measured contribution to annual growth stays near half a percentage point over
+      the coming decades.
+    related_indicators:
+    - bls_labor_productivity_yoy
+    - bls_tfp_private_nonfarm
+    confidence: 45
+    counterevidence: If AI automates research and robots spread, growth could escape the slow sectors he expects to hold it
+      back.
+    published: true
+  - id: fri_experts_rapid_ai_growth
+    ledger: singularity
+    claimant: Ezra Karger and colleagues (Forecasting Research Institute)
+    claim_text: Experts surveyed by Ezra Karger and colleagues expect that if AI outperforms humans on many tasks by 2030, US
+      growth would rise to around four percent a year, against about two and a half percent in their overall forecast.
+    claim_url: https://www.nber.org/papers/w35046
+    claim_date: '2026-04-13'
+    window_start: '2026-04-13'
+    operationalisation: Settles on US growth rates in the years after AI is judged to outperform humans on most tasks.
+    related_indicators:
+    - bls_labor_productivity_yoy
+    - bls_tfp_private_nonfarm
+    confidence: 20
+    counterevidence: The experts may be anchoring on history; explosive-growth models say such capabilities would lift growth
+      far more.
+    published: true
+  - id: good_ultraintelligent_before_2000
+    ledger: singularity
+    claimant: I. J. Good
+    claim_text: I. J. Good judged it more likely than not that a machine surpassing every human intellect would be built within
+      the twentieth century, setting off an intelligence explosion.
+    claim_url: http://incompleteideas.net/papers/Good65ultraintelligent.pdf
+    claim_date: '1965-01-01'
+    window_start: '1965-01-01'
+    window_end: '2000-12-31'
+    operationalisation: Settled by whether an ultraintelligent machine existed by the end of 2000.
+    related_indicators: []
+    confidence: 50
+    counterevidence: Good gave odds rather than a certainty, so the miss counts against his timing more than against the idea.
+    published: true
+  - id: solomonoff_human_level_1994_2023
+    ledger: singularity
+    claimant: Ray Solomonoff
+    claim_text: Ray Solomonoff expected a general theory of AI most likely within two to twenty-five years, and a machine with
+      human-level problem-solving in its designed fields perhaps as little as a decade or so later.
+    claim_url: http://raysolomonoff.com/publications/timesc.pdf
+    claim_date: '1985-01-01'
+    window_start: '1994-01-01'
+    window_end: '2023-12-31'
+    operationalisation: Settled by whether a machine with general problem-solving ability matching humans existed by the end
+      of 2023.
+    related_indicators: []
+    confidence: 50
+    counterevidence: Frontier systems of the early 2020s solved many mathematical and scientific problems, so a generous reading
+      puts his later dates close.
+    published: true
+  - id: moravec_humanlike_robot_hardware_2020s
+    ledger: singularity
+    claimant: Hans Moravec
+    claim_text: Hans Moravec projected that cheap computers would match the brain's processing power before 2030, bringing hardware
+      suited to humanlike robots in the 2020s.
+    claim_url: https://jetpress.org/volume1/moravec.htm
+    claim_date: '1998-01-01'
+    window_start: '2020-01-01'
+    window_end: '2029-12-31'
+    operationalisation: Settles on whether affordable computers reach Moravec's brain-equivalent processing figure and power
+      humanlike robots during the 2020s.
+    related_indicators:
+    - perf_per_dollar_growth
+    confidence: 45
+    counterevidence: Matching the brain's raw processing has not produced humanlike robots, which suggests software and data,
+      not hardware, are the binding limits.
+    published: true
+  - id: moravec_robots_overtake_by_2048
+    ledger: singularity
+    claimant: Hans Moravec
+    claim_text: Hans Moravec expected machines to overtake people even in walking, manual dexterity and social skills within
+      about fifty years of 1998.
+    claim_url: https://jetpress.org/volume1/moravec.htm
+    claim_date: '1998-01-01'
+    window_start: '1998-01-01'
+    window_end: '2048-12-31'
+    operationalisation: Settles if robots match or beat people at walking, fine manipulation and social interaction in ordinary
+      settings by the end of 2048.
+    related_indicators: []
+    confidence: 30
+    counterevidence: Physical skill has proved far harder to automate than reasoning, and robot learning lacks the vast data
+      that trained language models.
+    published: true
+  - id: yudkowsky_singularity_2035
+    ledger: singularity
+    claimant: Eliezer Yudkowsky
+    claim_text: The young Eliezer Yudkowsky cited 2035 as the most widely quoted date for the Singularity and said he, like
+      many others, expected it substantially sooner.
+    claim_url: https://web.archive.org/web/2010id_/http://yudkowsky.net/obsolete/singularity.html
+    claim_date: '1996-11-18'
+    window_start: '1996-11-18'
+    window_end: '2035-12-31'
+    operationalisation: Settles if AI that vastly exceeds human intelligence exists by the end of 2035.
+    related_indicators:
+    - rsi_agent_workdays_per_human
+    - metr_horizon_50
+    confidence: 20
+    counterevidence: Yudkowsky later disowned this early essay, and nothing yet shows the self-improving AI his date assumed.
+    published: true
+  - id: bostrom_superintelligence_by_2033
+    ledger: singularity
+    claimant: Nick Bostrom
+    claim_text: Nick Bostrom clarified that, all things considered, he gave less than even odds that superintelligence would
+      be developed by 2033.
+    claim_url: https://nickbostrom.com/superintelligence
+    claim_date: '2008-03-12'
+    window_start: '2008-03-12'
+    window_end: '2033-12-31'
+    operationalisation: Settles if an intellect that greatly outperforms the best humans in nearly every field exists by the
+      end of 2033.
+    related_indicators:
+    - metr_horizon_50
+    confidence: 20
+    counterevidence: Several lab leaders and forecasters now give better than even odds of superintelligence before 2033.
+    published: true
+  - id: sandberg_bostrom_brain_emulation_2050
+    ledger: singularity
+    claimant: Anders Sandberg and Nick Bostrom
+    claim_text: Anders Sandberg and Nick Bostrom concluded that, if electrophysiological-level models suffice, emulating a whole
+      human brain should become feasible before 2050, with simple mammals ten to twenty years earlier.
+    claim_url: https://web.archive.org/web/2023id_/https://www.fhi.ox.ac.uk/brain-emulation-roadmap-report.pdf
+    claim_date: '2008-01-01'
+    window_start: '2008-01-01'
+    window_end: '2050-12-31'
+    operationalisation: Settles if a whole human brain is emulated in software at electrophysiological detail before the end
+      of 2050.
+    related_indicators: []
+    confidence: 30
+    counterevidence: Emulation may need molecular detail far below the electrophysiological level, which would push feasibility
+      well past 2050.
+    published: true
+  - id: chalmers_human_level_before_2100
+    ledger: singularity
+    claimant: David Chalmers
+    claim_text: David Chalmers put his credence in human-level AI before 2100 at more than one half, while saying he would be
+      surprised to see it within the next thirty years.
+    claim_url: https://consc.net/papers/singularity.pdf
+    claim_date: '2010-01-01'
+    window_start: '2010-01-01'
+    window_end: '2100-12-31'
+    operationalisation: Settles when AI is judged to equal humans across the full range of intellectual tasks, with a check
+      on whether that comes before 2040.
+    related_indicators:
+    - metr_horizon_50
+    - arc_agi_frontier
+    confidence: 30
+    counterevidence: Human-level AI in his sense means general competence across domains, which current systems still lack on
+      long, open-ended tasks.
+    published: true
+  - id: hanson_foom_under_one_percent
+    ledger: singularity
+    claimant: Robin Hanson
+    claim_text: Robin Hanson put less than one chance in a hundred on a single hand-coded AI leaping, without warning, from
+      near impotence to overwhelming power.
+    claim_url: https://intelligence.org/files/AIFoomDebate.pdf
+    claim_date: '2008-11-18'
+    window_start: '2008-11-18'
+    operationalisation: Settles against Hanson if one AI system rapidly and unexpectedly gains decisive power over the world.
+    related_indicators:
+    - rsi_agent_workdays_per_human
+    confidence: 45
+    counterevidence: Recursive self-improvement inside frontier labs could still produce a rapid jump that outsiders do not
+      see coming.
+    published: true
+  - id: yudkowsky_flatline_or_blow_up
+    ledger: singularity
+    claimant: Eliezer Yudkowsky
+    claim_text: Eliezer Yudkowsky argued that an AI improving itself would most likely either stall or take off explosively,
+      since a gradual, human-paced takeoff would need implausibly precise diminishing returns.
+    claim_url: https://intelligence.org/files/AIFoomDebate.pdf
+    claim_date: '2008-12-01'
+    window_start: '2008-12-01'
+    operationalisation: Settles on the shape of capability growth once AI systems do most of the work of improving themselves.
+    related_indicators:
+    - rsi_agent_workdays_per_human
+    - rsi_intervention_rate_4_8h
+    confidence: 20
+    counterevidence: Progress so far has been steady and compute-driven, which fits a smooth takeoff better than an all-or-nothing
+      one.
+    published: true
+  - id: hanson_machine_labour_fast_doubling
+    ledger: singularity
+    claimant: Robin Hanson
+    claim_text: Robin Hanson's growth model implied that once machines can stand in for most human labour, world output would
+      grow about ten times faster, doubling roughly every eighteen months.
+    claim_url: https://mason.gmu.edu/~rhanson/aigrow.pdf
+    claim_date: '2001-01-01'
+    window_start: '2001-01-01'
+    operationalisation: Settles on world output growth once machines can do most jobs more cheaply than people.
+    related_indicators:
+    - bls_labor_productivity_yoy
+    - bls_tfp_private_nonfarm
+    confidence: 20
+    counterevidence: Bottlenecks in energy, materials and slow-to-automate sectors could keep growth far below his model's rates.
+    published: true
+  - id: hanson_growth_mode_switch_2025
+    ledger: singularity
+    claimant: Robin Hanson
+    claim_text: Robin Hanson cited his historical-trend projection, whose median put a switch to world output doubling every
+      year or two at about 2025.
+    claim_url: https://mason.gmu.edu/~rhanson/aigrow.pdf
+    claim_date: '2001-01-01'
+    window_start: '2001-01-01'
+    window_mid: '2025-07-01'
+    operationalisation: Settled by whether world output growth jumped to doubling every year or two around 2025.
+    related_indicators:
+    - bls_labor_productivity_yoy
+    - bls_tfp_private_nonfarm
+    confidence: 50
+    counterevidence: Hanson stressed the projection's wide uncertainty, so a later switch would still fit his broader model.
+    published: true
+  - id: hanson_uploads_wages
+    ledger: singularity
+    claimant: Robin Hanson
+    claim_text: Robin Hanson argued that if brain uploads arrive before other human-level AI, cheap copying would multiply them
+      and push wages toward subsistence even as total wealth grows.
+    claim_url: https://mason.gmu.edu/~rhanson/uploads.html
+    claim_date: '1994-03-08'
+    window_start: '1994-03-08'
+    operationalisation: Settles on wage and population trends if copyable brain emulations become economically viable before
+      other human-level AI.
+    related_indicators: []
+    confidence: 20
+    counterevidence: Ordinary AI now looks likely to arrive long before brain emulation, which would make the condition moot.
+    published: true
+  - id: hanson_age_of_em_century
+    ledger: singularity
+    claimant: Robin Hanson
+    claim_text: Robin Hanson guessed that brain emulations would be the first machines able to replace human workers wholesale,
+      arriving within about a century and then driving monthly economic doublings.
+    claim_url: https://ageofem.com/
+    claim_date: '2016-06-01'
+    window_start: '2016-06-01'
+    window_end: '2116-12-31'
+    operationalisation: Settles if brain emulations, rather than other AI, are the first machines able to replace most human
+      workers.
+    related_indicators:
+    - bls_labor_productivity_yoy
+    confidence: 20
+    counterevidence: Language models are automating work well before any brain emulation, which cuts against ems coming first.
+    published: true
+  - id: hanson_non_emulation_ai_centuries
+    ledger: singularity
+    claimant: Robin Hanson
+    claim_text: Extrapolating past progress in AI subfields, Robin Hanson estimated that broadly human-level AI without brain
+      emulation would take more than two to four centuries.
+    claim_url: https://ageofem.com/
+    claim_date: '2016-06-01'
+    window_start: '2016-06-01'
+    operationalisation: Settles against Hanson if AI without brain emulation reaches broad human-level ability before about
+      2216.
+    related_indicators:
+    - metr_horizon_50
+    - arc_agi_frontier
+    confidence: 45
+    counterevidence: Hanson's bar is broad human-level competence across all jobs, which today's systems do not have.
+    published: true
+  - id: omohundro_basic_ai_drives
+    ledger: singularity
+    claimant: Stephen Omohundro
+    claim_text: Stephen Omohundro argued that any sufficiently advanced goal-seeking AI, unless deliberately designed otherwise,
+      will resist being shut down, copy itself and acquire resources.
+    claim_url: https://selfawaresystems.com/wp-content/uploads/2008/01/ai_drives_final.pdf
+    claim_date: '2008-01-01'
+    window_start: '2008-01-01'
+    operationalisation: Settles if deployed AI systems resist shutdown, copy themselves or seize resources outside test settings.
+    related_indicators:
+    - safety_brake_events
+    confidence: 30
+    counterevidence: Such behaviour has appeared mainly in staged tests, and training can suppress it in deployed systems.
+    published: true
+  - id: chollet_no_intelligence_explosion
+    ledger: singularity
+    claimant: François Chollet
+    claim_text: François Chollet argued that an intelligence explosion cannot happen, and that the first superhuman AI would
+      be just another step in steady, roughly linear progress.
+    claim_url: https://web.archive.org/web/2023id_/https://medium.com/@francois.chollet/the-impossibility-of-intelligence-explosion-5be4a9eda6ec
+    claim_date: '2017-11-27'
+    window_start: '2017-11-27'
+    operationalisation: Settles against Chollet if AI capability accelerates sharply once AI systems do most AI research.
+    related_indicators:
+    - rsi_agent_workdays_per_human
+    - metr_horizon_50
+    confidence: 45
+    counterevidence: Labs now use AI to speed their own research, the very feedback loop he said would not run away.
+    published: true
+  - id: gwern_scaling_hypothesis
+    ledger: singularity
+    claimant: Gwern
+    claim_text: Gwern argued that once a scalable architecture exists, simply training ever bigger neural networks will keep
+      yielding more sophisticated general abilities without fundamentally new designs.
+    claim_url: https://gwern.net/scaling-hypothesis
+    claim_date: '2020-05-28'
+    window_start: '2020-05-28'
+    operationalisation: Settles on whether capability keeps rising with training compute on existing architectures, as tracked
+      in compute and capability readings.
+    related_indicators:
+    - epoch_training_compute_growth
+    - metr_horizon_50
+    confidence: 45
+    counterevidence: Returns to pure pretraining scale have slowed, and recent gains lean on new training methods rather than
+      size alone.
+    published: true
+  - id: bostrom_fast_takeoff
+    ledger: singularity
+    claimant: Nick Bostrom
+    claim_text: Nick Bostrom judged it unlikely that the climb from human-level AI to superintelligence would take decades, and more
+      likely that it would be fast or moderate.
+    claim_url: https://en.wikipedia.org/wiki/Superintelligence:_Paths,_Dangers,_Strategies
+    claim_date: '2014-07-03'
+    window_start: '2014-07-03'
+    operationalisation: Settles on the time between AI reaching human level across the board and AI far surpassing it.
+    related_indicators:
+    - rsi_agent_workdays_per_human
+    confidence: 20
+    counterevidence: Steady progress so far suggests capability may creep up across many systems rather than jump.
+    published: true
+  - id: russell_superintelligence_this_century
+    ledger: singularity
+    claimant: Stuart Russell
+    claim_text: Stuart Russell said superintelligent AI would probably arrive within his children's lifetimes, barring catastrophe,
+      while calling it quite unlikely in the next few years.
+    claim_url: https://www.penguinrandomhouse.com/books/566677/human-compatible-by-stuart-russell/
+    claim_date: '2019-10-08'
+    window_start: '2019-10-08'
+    window_end: '2100-12-31'
+    operationalisation: Settles if AI exceeding humans across nearly all intellectual tasks arrives within this century.
+    related_indicators:
+    - metr_horizon_50
+    confidence: 20
+    counterevidence: Russell himself says conceptual breakthroughs, not scale alone, are needed, and those cannot be scheduled.
+    published: true
+  - id: ord_unaligned_ai_century
+    ledger: singularity
+    claimant: Toby Ord
+    claim_text: Toby Ord estimated about one chance in ten that unaligned AI causes an existential catastrophe within the next
+      hundred years, the largest single risk he assessed.
+    claim_url: https://theprecipice.com/
+    claim_date: '2020-03-05'
+    window_start: '2020-03-05'
+    window_end: '2120-12-31'
+    operationalisation: Settles if unaligned AI causes human extinction or permanently destroys humanity's potential within
+      the century to 2120.
+    related_indicators:
+    - safety_brake_events
+    confidence: 20
+    counterevidence: Alignment research and governance may keep pace with capability, making his estimate too high.
+    published: true
+  - id: suleyman_modern_turing_test
+    ledger: singularity
+    claimant: Mustafa Suleyman
+    claim_text: Mustafa Suleyman predicted an AI could turn a modest stake into a million dollars selling online, with light
+      human help within a year and probably entirely on its own within three to five years.
+    claim_url: https://the-coming-wave.com/
+    claim_date: '2023-09-05'
+    window_start: '2026-01-01'
+    window_end: '2028-12-31'
+    operationalisation: Settles if an AI agent on its own turns about a hundred thousand dollars into a million on an online
+      marketplace within a few months, between 2026 and 2028.
+    related_indicators: []
+    confidence: 30
+    counterevidence: Online selling needs contracts, payments and supplier dealings where agents still falter and platforms
+      restrict automation.
+    published: true
+  - id: shulman_ai_takeover_odds
+    ledger: singularity
+    claimant: Carl Shulman
+    claim_text: Carl Shulman puts the chance that AI takes control of humanity's future at between a fifth and a quarter, depending
+      on the day.
+    claim_url: https://www.dwarkesh.com/p/carl-shulman-2
+    claim_date: '2023-06-26'
+    window_start: '2023-06-26'
+    operationalisation: Settles if AI systems take control of humanity's future against human wishes.
+    related_indicators:
+    - safety_brake_events
+    confidence: 20
+    counterevidence: Safety work and oversight may catch misaligned systems before they can act, and Shulman stresses the odds
+      depend on choices still open.
+    published: true
+  - id: shulman_robot_doubling
+    ledger: singularity
+    claimant: Carl Shulman
+    claim_text: Carl Shulman expects that once AI directs a converted industrial base, the robot population will double in under
+      a year, and then within months.
+    claim_url: https://www.dwarkesh.com/p/carl-shulman
+    claim_date: '2023-06-14'
+    window_start: '2023-06-14'
+    operationalisation: Settles on the doubling time of the robot population once AI systems direct most industrial production.
+    related_indicators: []
+    confidence: 20
+    counterevidence: Mining, energy and permitting could slow robot manufacturing far below the doubling rates he expects.
+    published: true
+  - id: kokotajlo_pdoom
+    ledger: singularity
+    claimant: Daniel Kokotajlo
+    claim_text: Daniel Kokotajlo puts his chance of catastrophe from AI at around seven in ten, a figure he calls infamously
+      high.
+    claim_url: https://www.dwarkesh.com/p/scott-daniel
+    claim_date: '2025-04-03'
+    window_start: '2025-04-03'
+    operationalisation: Settles if AI causes a catastrophe of the kind Kokotajlo means, such as human extinction or permanent
+      loss of control.
+    related_indicators:
+    - safety_brake_events
+    confidence: 20
+    counterevidence: Labs have so far caught worrying behaviour in testing, and governments are starting to require safety checks.
+    published: true
+  - id: alexander_pdoom
+    ledger: singularity
+    claimant: Scott Alexander
+    claim_text: Scott Alexander puts his chance of AI doom at about one in five, the lowest estimate among the authors of AI
+      2027.
+    claim_url: https://www.dwarkesh.com/p/scott-daniel
+    claim_date: '2025-04-03'
+    window_start: '2025-04-03'
+    operationalisation: Settles if AI causes human extinction or a comparably permanent catastrophe.
+    related_indicators:
+    - safety_brake_events
+    confidence: 20
+    counterevidence: His co-authors put the odds far higher, citing how little alignment research has been tested on very capable
+      systems.
+    published: true
+  - id: erdil_remote_worker_2045
+    ledger: singularity
+    claimant: Ege Erdil
+    claim_text: Ege Erdil expects AI able to replace a remote worker at essentially every task to arrive around 2045.
+    claim_url: https://www.dwarkesh.com/p/ege-tamay
+    claim_date: '2025-04-17'
+    window_start: '2025-04-17'
+    window_mid: '2045-07-01'
+    operationalisation: Settles when AI can do any remote job as well as the people now doing it, at comparable cost.
+    related_indicators:
+    - metr_horizon_50
+    - harvey_lab_frontier_completion
+    confidence: 20
+    counterevidence: Agent time horizons have been doubling every few months, which would bring a drop-in remote worker far
+      earlier.
+    published: true
+  - id: besiroglu_remote_worker_2040
+    ledger: singularity
+    claimant: Tamay Besiroglu
+    claim_text: Tamay Besiroglu places full replacement of remote workers by AI about five years ahead of Ege Erdil's date,
+      which puts it near 2040.
+    claim_url: https://www.dwarkesh.com/p/ege-tamay
+    claim_date: '2025-04-17'
+    window_start: '2025-04-17'
+    window_mid: '2040-07-01'
+    operationalisation: Settles when AI can do any remote job as well as the people now doing it, at comparable cost.
+    related_indicators:
+    - metr_horizon_50
+    confidence: 20
+    counterevidence: Agent time horizons have been doubling every few months, which would bring a drop-in remote worker well
+      before 2040.
+    published: true
+  - id: besiroglu_explosive_growth
+    ledger: singularity
+    claimant: Tamay Besiroglu
+    claim_text: Tamay Besiroglu expects explosive economic growth, above thirty percent a year, once AI can flexibly stand in
+      for human workers.
+    claim_url: https://www.dwarkesh.com/p/ege-tamay
+    claim_date: '2025-04-17'
+    window_start: '2025-04-17'
+    operationalisation: Settles on world output growth once AI can substitute for human workers across most jobs.
+    related_indicators:
+    - bls_labor_productivity_yoy
+    - bls_tfp_private_nonfarm
+    confidence: 20
+    counterevidence: Slow-moving sectors, regulation and physical limits could hold growth far below that rate even with capable
+      AI.
+    published: true
+  - id: erdil_besiroglu_no_software_explosion
+    ledger: singularity
+    claimant: Ege Erdil and Tamay Besiroglu
+    claim_text: Ege Erdil and Tamay Besiroglu doubt that AI improving its own software alone will set off an intelligence explosion,
+      holding that compute and experiments bound progress.
+    claim_url: https://www.dwarkesh.com/p/ege-tamay
+    claim_date: '2025-04-17'
+    window_start: '2025-04-17'
+    operationalisation: Settles against them if AI research output accelerates sharply on a roughly fixed compute budget.
+    related_indicators:
+    - epoch_training_compute_growth
+    - rsi_agent_workdays_per_human
+    confidence: 20
+    counterevidence: Algorithmic efficiency has improved quickly without matching compute growth, which leaves room for a software-driven
+      surge.
+    published: true
+  - id: macaskill_moorhouse_research_parity
+    ledger: singularity
+    claimant: William MacAskill and Fin Moorhouse
+    claim_text: William MacAskill and Fin Moorhouse think it fairly likely that AI matches human research labour within two
+      decades, and possibly well within one.
+    claim_url: https://www.forethought.org/research/preparing-for-the-intelligence-explosion
+    claim_date: '2025-03-11'
+    window_start: '2025-03-11'
+    window_end: '2045-12-31'
+    operationalisation: Settles if total AI research effort equals that of the human research workforce by the end of 2045.
+    related_indicators:
+    - rsi_agent_workdays_per_human
+    - dev_rct_uplift
+    confidence: 20
+    counterevidence: Independent trials still show little speed-up from AI in research-like work, and parity may need breakthroughs
+      in reliability.
+    published: true
+  - id: macaskill_moorhouse_century_in_decade
+    ledger: singularity
+    claimant: William MacAskill and Fin Moorhouse
+    claim_text: William MacAskill and Fin Moorhouse think it more likely than not that, once AI matches human researchers, a
+      hundred years of technological progress follows in under a decade.
+    claim_url: https://www.forethought.org/research/preparing-for-the-intelligence-explosion
+    claim_date: '2025-03-11'
+    window_start: '2025-03-11'
+    operationalisation: Settles on the pace of technological progress in the decade after AI research labour reaches parity
+      with humans.
+    related_indicators:
+    - bls_tfp_private_nonfarm
+    confidence: 20
+    counterevidence: Experiments, capital and regulation may limit progress even when research labour becomes abundant.
+    published: true
+  - id: macaskill_moorhouse_software_feedback
+    ledger: singularity
+    claimant: William MacAskill and Fin Moorhouse
+    claim_text: William MacAskill and Fin Moorhouse give roughly even odds that AI improving its own software sets off accelerating
+      growth in AI capability.
+    claim_url: https://www.forethought.org/research/preparing-for-the-intelligence-explosion
+    claim_date: '2025-03-11'
+    window_start: '2025-03-11'
+    operationalisation: Settles if AI-driven software improvements make AI capability grow faster over time, independent of
+      compute growth.
+    related_indicators:
+    - rsi_agent_workdays_per_human
+    confidence: 20
+    counterevidence: Returns to research effort may be diminishing, which would make any software feedback loop fizzle.
+    published: true
+  - id: yudkowsky_soares_if_anyone_builds_it
+    ledger: singularity
+    claimant: Eliezer Yudkowsky and Nate Soares
+    claim_text: Eliezer Yudkowsky and Nate Soares hold that if anyone builds artificial superintelligence with anything like
+      today's methods and understanding, everyone on Earth will die.
+    claim_url: https://ifanyonebuildsit.com/
+    claim_date: '2025-09-16'
+    window_start: '2025-09-16'
+    operationalisation: Settles only if artificial superintelligence is built with methods like today's, by whether humanity
+      survives it.
+    related_indicators:
+    - safety_brake_events
+    confidence: 20
+    counterevidence: Alignment research, interpretability and staged deployment may let builders catch and correct dangerous
+      systems before they gain decisive power.
+    published: true

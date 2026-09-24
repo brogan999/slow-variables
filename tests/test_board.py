@@ -51,10 +51,16 @@ def test_every_family_maps_to_one_word_and_the_board_groups_by_folio():
 def test_the_seed_resolves_and_its_lines_type_no_number_but_years():
     spec = board.load()
     assert board.problems(spec, set(spec["ledger"]), set(spec["migration"]), set(spec["exits"]), set(spec["ledger"])) == []
-    for k, v in spec["ledger"].items():
-        assert not re.search(r"\d", re.sub(r"\b(19|20)\d\d\b", "", v["line"])), k
+    for k, v in spec["ledger"].items():  # a singularity row has no line: its claim text is already the site's words
+        assert not re.search(r"\d", re.sub(r"\b(19|20)\d\d\b", "", v.get("line", ""))), k
     for q in spec["questions"]:
         assert q.get("indicator") or q.get("note"), q["question"]
+
+
+def test_a_row_without_a_line_reads_its_claim_text():
+    spec = {**SPEC, "ledger": {"p1": {"folio": "capability"}}}
+    rows = board.rows(spec, [{"id": "p1", "claimant": "A", "claim_text": "Our words for it.", "status": None}], {}, {}, [], [])
+    assert rows[0]["line"] == "Our words for it."
 
 
 def test_an_author_named_by_two_posts_is_named_once():

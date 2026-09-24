@@ -1090,6 +1090,28 @@ sources:
     retrieved_at: 2026-09-23
     http_status: 200
     content_hash: fdca6b34a23e6d6eae0faf0100827f84411bbe1a9ff0a4fe38432c4260fda542
+  - id: critch_2024
+    who: Andrew Critch
+    field: an AI safety researcher and founder of the Berkeley Existential Risk Initiative who studies multi-agent risks
+    finding: Andrew Critch put about even odds, on top of other risks, on humanity gradually handing the planet to AI after it is built, mostly during the 2030s, with the last humans gone by 2050.
+    work: My motivation and theory of change for working in AI healthtech (LessWrong)
+    year: 2024
+    url: https://www.lesswrong.com/posts/Kobbt3nQgv3yn29pr/my-motivation-and-theory-of-change-for-working-in-ai
+    retrieved_at: 2026-09-24
+    http_status: 200
+    content_hash: 957621b90a773d945fcefd9dcbb930855d6c0a8eb4970afd77c578093e80ef16
+    quote: humanity will gradually cede control of the Earth to AGI after it's developed
+  - id: kulveit_gradual
+    who: Jan Kulveit and colleagues
+    field: researchers led by Jan Kulveit of Charles University who study how AI could gradually erode human control
+    finding: Jan Kulveit and co-authors argue that if AI keeps displacing human labour, thought and consent across economy, culture and state, humans will probably lose effective control without any takeover.
+    work: Gradual Disempowerment
+    year: 2025
+    url: https://arxiv.org/abs/2501.16946
+    retrieved_at: 2026-09-24
+    http_status: 200
+    content_hash: 1be2cb06304de6320f63808e66c63c9ff18a6933ab12da97ba5eb2ff19d6ec8f
+    quote: this would likely culminate in humans becoming disempowered
 positions:
   # I · capability
   - id: compounding
@@ -2318,6 +2340,7 @@ scenarios:
     - {id: stall_money, label: The money stalls}
     - {id: steady, label: Steady progress}
     - {id: automated_research, label: AI automates research}
+    - {id: loss_of_control, label: Control slips away}
   rules:
     - {id: unclear, label: The rules stay unsettled}
     - {id: priced, label: Courts and insurers price the risk}
@@ -2365,6 +2388,12 @@ scenarios:
       says: In the story's slower ending, a committee of the leading lab and the government slows the race until the systems can be checked.
       signposts: [rli_reached]
       binds_next: [family_5]
+    - progress: loss_of_control
+      rules: unclear
+      argued_by: [kulveit_gradual, critch_2024]
+      says: Either a race produces systems nobody can check, or people are slowly made irrelevant as AI takes over the work, thought and choices that gave them a say.
+      signposts: []
+      binds_next: []
   anchors:
     - {source: eo_14365, date: 2025-12-11, text: The American president ordered moves against state AI laws and called for a light national standard.}
     - {source: iso_exclusions, date: 2026-01, text: Standard exclusions for harm caused by generative AI became available for insurers to attach to general liability policies.}

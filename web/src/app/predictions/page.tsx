@@ -80,7 +80,7 @@ function Board() {
   );
 }
 
-const LEDGERS: Record<string, string> = { nk: "Narayanan & Kapoor", lab: "Lab timelines", ai2027: "AI 2027", capture: "Capture theses" };
+const LEDGERS: Record<string, string> = { nk: "Narayanan & Kapoor", lab: "Lab timelines", ai2027: "AI 2027", capture: "Capture theses", singularity: "Timelines to the singularity" };
 
 export default function PredictionsPage() {
   const rows = predictions();
@@ -95,13 +95,14 @@ export default function PredictionsPage() {
       <Board />
       <div>
         <h2 className="display text-[1.75rem] leading-tight mt-4">The dated claims in their own words</h2>
-        <p className="text-sm text-ink-2 max-w-[60ch]">Other people&apos;s claims with a date attached, quoted from the linked source and scored with the AI 2027 tracker&apos;s vocabulary (confirmed, ahead, on track, behind, emerging, not yet testable). A claimant&apos;s self-assessment never resolves a claim.</p>
+        <p className="text-sm text-ink-2 max-w-[60ch]">Other people&apos;s claims with a date attached, quoted from the linked source (the singularity forecasts are in this site&apos;s words, credited and linked) and scored with the AI 2027 tracker&apos;s vocabulary (confirmed, ahead, on track, behind, emerging, not yet testable). A claimant&apos;s self-assessment never resolves a claim.</p>
       </div>
       {Object.entries(LEDGERS).map(([ledger, name]) => {
         const items = rows.filter((p) => p.ledger === ledger && p.published);
-        return (
-          <section key={ledger}>
-            <h3 className="display text-xl leading-tight mb-3 mt-2">{name} <span className="text-muted">· {items.length}</span></h3>
+        const ours = ledger === "singularity";
+        const head = <h3 className="display text-xl leading-tight mb-3 mt-2 inline">{name} <span className="text-muted">· {items.length}</span></h3>;
+        const body = (
+          <>
             {items.length ? (
               <ol className="flex flex-col gap-3">
                 {items.map((p) => (
@@ -113,7 +114,11 @@ export default function PredictionsPage() {
                       <StatusChip status={p.status} />
                       {p.confidence_now !== null ? <span>conf {p.confidence_now}</span> : null}
                     </div>
-                    <blockquote className="mt-2 border-l-2 border-grid pl-3 text-base leading-[1.6]">&ldquo;{p.claim_text}&rdquo; {p.claim_url ? <a href={p.claim_url} className="text-xs text-ink-2 underline decoration-grid underline-offset-4">source</a> : null}</blockquote>
+                    {ours ? (
+                      <p className="mt-2 border-l-2 border-grid pl-3 text-base leading-[1.6]">{p.claim_text} <span className="text-xs text-muted">In this site&apos;s words.</span> {p.claim_url ? <a href={p.claim_url} className="text-xs text-ink-2 underline decoration-grid underline-offset-4">source</a> : null}</p>
+                    ) : (
+                      <blockquote className="mt-2 border-l-2 border-grid pl-3 text-base leading-[1.6]">&ldquo;{p.claim_text}&rdquo; {p.claim_url ? <a href={p.claim_url} className="text-xs text-ink-2 underline decoration-grid underline-offset-4">source</a> : null}</blockquote>
+                    )}
                     <p className="mt-2 text-sm"><span className="text-muted">How we track it.</span> {p.operationalisation}</p>
                     {p.direction_assessment || p.magnitude_assessment || p.timing_assessment ? (
                       <dl className="mt-2 grid gap-x-3 gap-y-1 text-sm sm:grid-cols-[6rem_minmax(0,1fr)]">
@@ -130,7 +135,15 @@ export default function PredictionsPage() {
                 ))}
               </ol>
             ) : <p className="text-sm text-muted">No sourced claims yet in this family.</p>}
-          </section>
+          </>
+        );
+        return ours ? (
+          <details key={ledger} id="singularity-ledger" className="group">
+            <summary className="cursor-pointer">{head} <span className="text-sm text-ink-2">— forecasts of when AI reaches each milestone, from the 1960s to this year; open to read them all</span></summary>
+            <div className="mt-3">{body}</div>
+          </details>
+        ) : (
+          <section key={ledger}>{head}{body}</section>
         );
       })}
     </div>
