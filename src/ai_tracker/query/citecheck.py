@@ -66,6 +66,10 @@ def _close(a: float, b: float, rel: float = 0.005, absolute: float = 0.05) -> bo
 def _rendered_matches(token: float, rec: Record) -> bool:
     for v in rec.values:
         for c in _candidates(v, rec.unit):
+            if rec.kind in PROSE_KINDS:  # a claim's test line is exact: 50% must not pass for 1%
+                if _close(token, c) or _close(round(token, 1), round(c, 1), rel=0.02, absolute=0.0):
+                    return True
+                continue
             # the site rounds: 172.0B, 6.3%, 6.34x, 3.1 h -> accept within the rounding of the shorter form
             if (
                 _close(token, c)
@@ -90,13 +94,14 @@ def _parse(m: re.Match) -> float | None:
     return v
 
 
-def _in_snippet(num: str, suffix: str, rec: Record) -> bool:
+def _in_snippet(num: str, token: str, rec: Record) -> bool:
+    """A number in a record's text. For prose records the whole token must appear, currency and suffix included,
+    so "$189B" never matches a bill numbered 189 and "15%" never matches inside "2015"."""
     if not rec.snippet:
         return False
     if rec.kind not in PROSE_KINDS:
         return num in rec.snippet
-    unit = re.escape(suffix.strip()) if suffix.strip() in ("%", "×", "x") else ""
-    return bool(re.search(rf"(?<![\d.,]){re.escape(num)}(?![\d]|[.,]\d){unit}", rec.snippet))
+    return bool(re.search(rf"(?<![\w.,$€£]){re.escape(token)}(?![\w]|[.,]\d)", rec.snippet))
 
 
 def _wrap(text: str, token: str) -> str:
@@ -112,7 +117,8 @@ def check(text: str, records: dict[str, Record]) -> Result:
             [line] if line.lstrip().startswith("- ") else re.split(r"(?<=[.!?])\s+", line)
         )  # a bullet is one claim
     for sentence in units:
-        cited = [records.get(i) for _, i in CITE.findall(sentence)]
+        # records are keyed "kind:id" (a claim and a prediction can share an id); a hand-built dict may use bare ids
+        cited = [records.get(f"{k}:{i}") or records.get(i) for k, i in CITE.findall(sentence)]
         cited = [r for r in cited if r]
         for m in NUM.finditer(
             DATE.sub(" ", CIK.sub(" ", URL.sub(" ", CITE.sub(" ", sentence))))
@@ -136,7 +142,7 @@ def check(text: str, records: dict[str, Record]) -> Result:
                 failures.append(f"uncited number: {token_text}")
                 annotated = _wrap(annotated, token_text)
                 continue
-            snippet_hit = any(_in_snippet(num, m.group("suffix") or "", r) for r in cited)
+            snippet_hit = any(_in_snippet(num, token_text, r) for r in cited)
             if not snippet_hit and not any(_rendered_matches(v, r) for r in cited):
                 failures.append(f"{token_text} not found in cited records {[r.id for r in cited]}")
                 annotated = _wrap(annotated, token_text)

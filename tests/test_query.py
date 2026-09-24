@@ -71,7 +71,7 @@ def test_records_carry_dispute_text_so_quoted_caveats_verify():
         "SELECT id FROM observation_all WHERE dispute_text IS NOT NULL AND dispute_text <> '' LIMIT 1"
     ).fetchone()
     assert row, "fixture data has a disputed row"
-    rec = t.records([("obs", row[0])])[row[0]]
+    rec = t.records([("obs", row[0])])[f"obs:{row[0]}"]
     dispute = s.con.execute("SELECT dispute_text FROM observation_all WHERE id = ?", [row[0]]).fetchone()[0]
     assert dispute[:20] in rec.snippet
 
@@ -81,7 +81,7 @@ def test_derived_records_carry_their_description_and_the_indicator_tool_names_it
     s.derived = run_metrics(s.con)
     t = Tools(s)
     c = next(d for d in s.derived if d.metric == "cross_tracker_concordance")
-    assert "-3%" in t.records([("derived", c.id)])[c.id].snippet  # g05: a quoted threshold verifies
+    assert "-3%" in t.records([("derived", c.id)])[f"derived:{c.id}"].snippet  # g05: a quoted threshold verifies
     bi = t.indicator("margin_stack_semis_share")["band_input"]
     fit = s.band_fit(next(i for i in s.seed.indicators if i.id == "margin_stack_semis_share"))
     assert bi["derived_id"] == fit.id and bi["dims"] == {"layer_id": "compute_semis"}  # g07: cite this row
@@ -277,7 +277,7 @@ def test_an_indicator_record_carries_its_own_reading_and_status_reason():
     t = Tools(s)
     ind = next(i for i in s.seed.indicators if i.id == "btos_firm_use")
     value, _as_of, _ids, _tier = s.band_input(ind)
-    rec = t.records([("ind", "btos_firm_use")])["btos_firm_use"]
+    rec = t.records([("ind", "btos_firm_use")])["ind:btos_firm_use"]
     assert value in rec.values and rec.snippet == s.current("btos_firm_use").reason  # the card's own number verifies
 
 
@@ -365,11 +365,11 @@ def test_the_outlook_tools_cite_writers_claims_and_predictions_and_the_ids_verif
     ok = f"Tonight it is tested against {claim['tested_against']} [claim:{cid}]."
     assert check(ok, t.records([(kind, cid)])).ok
     skind, sid = src.split(":")
-    assert t.records([(skind, sid)])[sid].snippet and t.href(skind, sid) == f"/outlook#source-{sid}"
+    assert t.records([(skind, sid)])[src].snippet and t.href(skind, sid) == f"/outlook#source-{sid}"
     assert t.href("pos", "commodity") == "/outlook#position-commodity"
     pid = t.pub.execute("SELECT id FROM predictions LIMIT 1").fetchone()[0]
     assert t.records([("pred", pid)]) and t.href("pred", pid)
-    assert t.detail("claim", cid)["snippet"] and t.detail("pred", pid)["label"] == "prediction"
+    assert t.detail("claim", cid)["snippet"] and t.detail("pred", pid)["label"] and "2027-" not in t.detail("pred", pid)["label"][-12:]
 
 
 def test_prose_records_match_numbers_only_as_whole_tokens():
@@ -407,12 +407,32 @@ def test_the_rent_rubric_derives_where_rent_pools_by_the_fixed_rules():
 def test_history_is_trimmed_and_follow_ups_are_split_off_before_the_check():
     from ai_tracker.query.ask import HISTORY_TURNS, _conversation, split_followups
 
-    turns = [{"q": f"q{i}", "a": "a" * 5000} for i in range(6)]
-    msgs = _conversation("now", turns)
-    assert len(msgs) == 2 * HISTORY_TURNS + 1 and msgs[0]["content"] == "q2" and len(msgs[1]["content"]) == 3000
-    body, qs = split_followups("The answer.\n\nFollow-ups:\n- Why?\n- What next?\n- Who else?\n")
-    assert body == "The answer." and qs == ["Why?", "What next?", "Who else?"]
+    turns = [{"q": f"q{i}", "a": "a" * 5000} for i in range(6)] + [{"q": "blank", "a": "  "}]
+    (msg,) = _conversation("now", turns)
+    body = msg["content"]
+    assert msg["role"] == "user" and body.endswith("The question now: now")  # never stands as the model's own turn
+    assert body.count("Q: ") == HISTORY_TURNS - 1 and "Q: q2" not in body and "blank" not in body and "a" * 1501 not in body
+    assert _conversation("now", None) == [{"role": "user", "content": "now"}]
+    body, qs = split_followups("The answer.\n\nFollow-ups:\n- Why?\n- Is 47% of work gone?\n- What next?\n- Who else?\n")
+    assert body == "The answer." and qs == ["Why?", "What next?", "Who else?"]  # an unchecked number never shows
     assert split_followups("Just an answer.") == ("Just an answer.", [])
     s = st.Store()
     res = ask(s, "q", Tools(s), ScriptClient(["No record.\n\nFollow-ups:\n- Which layer?"]), history=turns)
     assert res["followups"] == ["Which layer?"] and res["answer"] == "No record."
+
+
+def test_a_prose_citation_needs_the_whole_token_and_kinds_never_overwrite_each_other():
+    from ai_tracker.query.citecheck import Record, check
+
+    bill = {"src:b": Record("b", "src", [], "", "Colorado SB26-189, issue 129, every 122 days")}
+    for bad in ("$189B [src:b].", "$129B [src:b].", "$122B [src:b]."):
+        assert not check(f"Revenue will be {bad}", bill).ok
+    assert check("It runs every 122 days [src:b].", bill).ok
+    test_line = {"claim:c": Record("c", "claim", [0.5], "share", "most projects, tested against 50%")}
+    assert check("The line is 50% [claim:c].", test_line).ok
+    assert not check("The line is 1% [claim:c].", test_line).ok  # no loose tolerance on a test line
+    t = _tools_with_board()
+    shared = t.pub.execute("SELECT id FROM predictions WHERE kind = 'outlook' AND test_fact IS NOT NULL LIMIT 1").fetchone()[0]
+    recs = t.records([("claim", shared), ("pred", shared)])
+    assert {f"claim:{shared}", f"pred:{shared}"} <= set(recs)  # same id, two records
+    assert not any(x in recs[f"claim:{shared}"].snippet for x in ("[fact:",))
