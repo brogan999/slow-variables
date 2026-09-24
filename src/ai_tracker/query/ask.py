@@ -70,13 +70,18 @@ PUBLIC_TABLES = (
     "hyperscaler_capex_ttm",
     "dc_sites",
     "predictions",
+    "census_tasks",
+    "census_roles",
+    "census_role_industry",
+    "census_industries",
+    "census_functions",
 )
 RAW = re.compile(r"observation_all", re.I)
 
 TOOLS = [
     {
         "name": "sql",
-        "description": "Read-only DuckDB SQL over the semantic layer. Tables: observations (approved, non-superseded rows: id, series_key, subject, entity_id, value_numeric, value_text, value_low, value_high, unit, as_of_date, published_date, source_id, tier, audited_vs_reported, disputed, dispute_text, raw_snippet, url), derived (id, metric, value, value_low, value_high, as_of_date, dims JSON text, obs_ids), status_events (target_type, target_id, old_status, new_status, new_conf, reason, evidence_ids, author, created_at), indicators (id, name, lens, bucket_id, layer_id, unit, metric, band_input, status, confidence, published), metrics (name, description, unit, grain, caveats), entity_membership (entity_id, layer_id, sublayer_id, is_primary, from_date, to_date), venture_rounds (entity_id, as_of_date, v, id, source, kind: one row per round, Form D preferred over an Epoch row for the same entity in the same quarter or within 45 days), hyperscaler_capex_ttm (cq, v, ids: trailing four quarters of capital spending by the five hyperscalers; ids are observation ids), dc_sites (subject, built_mw, built_id, planned_mw, planned_id, read_on: one row per Epoch data-centre site with both a built and a planned figure). predictions (every prediction on the site, one row each: id, kind (ledger: other people's dated claims; outlook: named writers' claims tested nightly; migration; exit: what would change this site's mind), folio (capability, products, adoption, reorganisation, value), stage, row, who, attribution, line, state (the family's own word), word (happening, not_happening, slower, both, too_early), settles, test_fact, test_op, test_against (a number, or the name of another fact such as the same reading a year before), reading_value, reading_unit, reading_as_of, reading_derived_id (cite as [derived:<id>] when set), obs_ids (else cite these as [obs:<id>]), indicators (ids of the indicators it leans on), sources (URLs), href; settles is a date or the outcome that would prove it wrong; join to indicators with list_contains(p.indicators, i.id), e.g. SELECT p.line, p.word, i.name, i.status FROM predictions p JOIN indicators i ON list_contains(p.indicators, i.id)); e.g. SELECT line, who, word FROM predictions WHERE word = 'not_happening', or SELECT folio, word, count(*) FROM predictions GROUP BY ALL. Observations of source epoch_datacenters dated after today are Epoch's projections, not readings; their note says so. Rows are capped at 200; one statement, no writes.",
+        "description": "Read-only DuckDB SQL over the semantic layer. Tables: observations (approved, non-superseded rows: id, series_key, subject, entity_id, value_numeric, value_text, value_low, value_high, unit, as_of_date, published_date, source_id, tier, audited_vs_reported, disputed, dispute_text, raw_snippet, url), derived (id, metric, value, value_low, value_high, as_of_date, dims JSON text, obs_ids), status_events (target_type, target_id, old_status, new_status, new_conf, reason, evidence_ids, author, created_at), indicators (id, name, lens, bucket_id, layer_id, unit, metric, band_input, status, confidence, published), metrics (name, description, unit, grain, caveats), entity_membership (entity_id, layer_id, sublayer_id, is_primary, from_date, to_date), venture_rounds (entity_id, as_of_date, v, id, source, kind: one row per round, Form D preferred over an Epoch row for the same entity in the same quarter or within 45 days), hyperscaler_capex_ttm (cq, v, ids: trailing four quarters of capital spending by the five hyperscalers; ids are observation ids), dc_sites (subject, built_mw, built_id, planned_mw, planned_id, read_on: one row per Epoch data-centre site with both a built and a planned figure). predictions (every prediction on the site, one row each: id, kind (ledger: other people's dated claims; outlook: named writers' claims tested nightly; migration; exit: what would change this site's mind), folio (capability, products, adoption, reorganisation, value), stage, row, who, attribution, line, state (the family's own word), word (happening, not_happening, slower, both, too_early), settles, test_fact, test_op, test_against (a number, or the name of another fact such as the same reading a year before), reading_value, reading_unit, reading_as_of, reading_derived_id (cite as [derived:<id>] when set), obs_ids (else cite these as [obs:<id>]), indicators (ids of the indicators it leans on), sources (URLs), href; settles is a date or the outcome that would prove it wrong; join to indicators with list_contains(p.indicators, i.id), e.g. SELECT p.line, p.word, i.name, i.status FROM predictions p JOIN indicators i ON list_contains(p.indicators, i.id)); e.g. SELECT line, who, word FROM predictions WHERE word = 'not_happening', or SELECT folio, word, count(*) FROM predictions GROUP BY ALL. Observations of source epoch_datacenters dated after today are Epoch's projections, not readings; their note says so. The Automatability Census (a model-judged snapshot, one version loaded): census_tasks (task_id, occ, occ_title, function, task, horizon, spec_entropy, grader, stakes, goes, why, physical, contested, agreed_all_three, n_scorers, goes_sonnet, goes_haiku, goes_gemini, blocked_by_verifier, time_share, task_payroll_usd), census_roles (occ, title, function, emp, wage_bill, share_goes, band_lo, band_hi, freed, freed_agreed3, freed_contested, ai_exposure, and two *_modelled columns), census_role_industry (occ, occ_title, naics, naics_title, emp, wage_bill, freed), census_industries (naics, naics_title, total, know, freed, agreed3, blocked, share_total, share_know), census_functions (function, payroll, freed, share_goes, lo, hi, reprice_modelled, roles, blocked_by_verifier_usd); occ is a SOC code like '13-2011' and naics a six-character text code like '524200'; freed is payroll in work that can go under the census rule. Lead with the part all three scorers agree on (freed_agreed3, agreed3); where Gemini never scored a role that figure is zero by construction, so say it was not scored by all three. The census is structural, not a forecast; read role figures as bands (band_lo to band_hi), not ranks; *_modelled columns are modelled, never state them as measured; whether a business keeps the saving was not measured. Cite census rows as [census:role.<occ>], [census:industry.<naics>], [census:function.<function in lower case, spaces and & as _>] or [census:headline]. Rows are capped at 200; one statement, no writes.",
         "input_schema": {
             "type": "object",
             "properties": {"query": {"type": "string"}},
@@ -168,7 +173,7 @@ How to frame an answer (theory organises what the data shows; it is never a sour
 
 Rules for answers:
 1. Use the tools to look things up. Never answer a number from memory. If the store has no record, say that it has no record and give no number.
-2. Every number you state must be followed by a citation token for the record it comes from: [obs:<id>] for an observation, [derived:<id>] for a derived row, [ind:<id>] for an indicator's band edge or status, [event:<id>] for a number quoted from a status event's reason. Put the token in the same sentence as the number, and give every number in that sentence its own token, decimals such as -0.04 included. Cite the most specific record that holds the number: the observation or derived row it comes from, never the indicator when one of those holds it. A threshold, band edge, dead band or rule you quote counts as a number: cite the record whose text states it, which is the metric's own row for a description or caveat and the indicator for a band edge, its status, its confidence or its own headline reading. Years and small counts ("3 of 4 trackers") do not need one, but cite the record anyway when there is one.
+2. Every number you state must be followed by a citation token for the record it comes from: [obs:<id>] for an observation, [derived:<id>] for a derived row, [ind:<id>] for an indicator's band edge or status, [event:<id>] for a number quoted from a status event's reason, [census:<row>] for a figure from the census tables. Put the token in the same sentence as the number, and give every number in that sentence its own token, decimals such as -0.04 included. Cite the most specific record that holds the number: the observation or derived row it comes from, never the indicator when one of those holds it. A threshold, band edge, dead band or rule you quote counts as a number: cite the record whose text states it, which is the metric's own row for a description or caveat and the indicator for a band edge, its status, its confidence or its own headline reading. Years and small counts ("3 of 4 trackers") do not need one, but cite the record anyway when there is one.
 3. Render values the way the site does: shares as percentages (0.063 -> 6.3%), USD with k/M/B/T, ratios with x, minutes as hours when over an hour, and name the as-of date and the source tier.
 4. Quote a status only with its reason and date. Mention the dispute text when a row is disputed and the tier when it is 7.
 5. Never compute a number. Do not add, divide, subtract or annualise records to make one, and do not restate a figure in a unit the record does not carry: a share, ratio, gap or growth rate must come from a metric row. If no record holds it, say the tracker does not compute it.
@@ -191,6 +196,12 @@ def _public_db(store: st.Store) -> duckdb.DuckDBPyConnection:
             if t in have:
                 store.con.execute(f"COPY (SELECT * FROM {t}) TO '{d}/{t}.parquet' (FORMAT parquet)")
                 pub.execute(f"CREATE TABLE {t} AS SELECT * FROM read_parquet('{d}/{t}.parquet')")
+    try:  # the census snapshot, read as published; a missing or broken bundle never stops the service
+        from .. import census
+
+        census.create_tables(pub, census.load())
+    except Exception as e:  # noqa: BLE001
+        log.warning("census tables not built: %s: %s", type(e).__name__, e)
     store._pub = pub
     return pub
 
@@ -505,6 +516,10 @@ class Tools:
                         "",
                         e.reason,
                     )
+            elif k == "census":
+                rec = self._census_record(i)
+                if rec:
+                    out[i] = rec
             elif k == "ind":
                 ind = next((x for x in self.store.seed.indicators if x.id == i), None)
                 if ind:
@@ -527,7 +542,41 @@ class Tools:
                     out[i] = Record(i, "ind", edges, ind.unit, ev.reason if ev else "")
         return out
 
+    def _census_record(self, cite: str) -> Record | None:
+        """A census row's figures: dollars as they are, shares also as percentages; never a *_modelled column."""
+        kind, _, key = cite.partition(".")
+        if kind == "headline":
+            from .. import census
+
+            h = census.build_headline(census.load())
+            return Record(cite, "census", list(h.values()), "", "") if h else None
+        table, col = {
+            "role": ("census_roles", "occ"),
+            "industry": ("census_industries", "naics"),
+            "function": ("census_functions", "function"),
+        }.get(kind, (None, None))
+        if not table:
+            return None
+        cur = self.pub.execute(f"SELECT * FROM {table}")
+        names = [c[0] for c in cur.description]
+        for row in cur.fetchall():
+            r = dict(zip(names, row))
+            if str(r[col]).lower().replace(" & ", "_").replace(" ", "_") != key.lower():
+                continue
+            vals = []
+            for c, v in r.items():
+                if c.endswith("_modelled") or not isinstance(v, (int, float)) or isinstance(v, bool):
+                    continue
+                vals.append(float(v))
+                if 0 <= v <= 1:
+                    vals.append(float(v) * 100)
+            return Record(cite, "census", vals, "", str(r.get("title") or r.get("naics_title") or r[col]))
+        return None
+
     def href(self, kind: str, id_: str) -> str | None:
+        if kind == "census":
+            what, _, key = id_.partition(".")
+            return f"/census/roles/{key}" if what == "role" else "/census"
         if kind == "obs":
             r = self.store.con.execute(
                 "SELECT series_key FROM observation_all WHERE id = ?", [id_]

@@ -1,6 +1,6 @@
 """The query service: a stdlib HTTP server over one Store. Runs on Fly; the site proxies to it.
 
-GET  /health              -> {ok, generated_at, observations}
+GET  /health              -> {ok, observations, census_tasks, model, spent_today_usd}
 POST /sql   {query}       -> read-only SQL (bearer token)
 POST /ask   {question}    -> ask() (bearer token; daily spend cap)
 GET  /golden              -> golden run (bearer token)
@@ -77,11 +77,16 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self) -> None:  # noqa: N802
         if self.path == "/health":
             n = self.svc.store.con.execute("SELECT count(*) FROM observations").fetchone()[0]
+            try:
+                census = self.svc.tools.pub.execute("SELECT count(*) FROM census_tasks").fetchone()[0]
+            except Exception:  # noqa: BLE001
+                census = None
             return self._send(
                 200,
                 {
                     "ok": True,
                     "observations": n,
+                    "census_tasks": census,
                     "model": ask_mod.MODEL,
                     "spent_today_usd": round(self.svc.spent_today(), 4),
                 },
