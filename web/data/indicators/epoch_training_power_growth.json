@@ -6,9 +6,9 @@
  "band_input": "metric:training_power_doubling_days",
  "band_rationale": "Normal = doubling no faster than yearly (grid-connection pace); fast = every 230 days or less (3x a year, the pace a runaway buildout needs). Between is emerging.",
  "band_value": {
-  "as_of": "2026-08-07",
-  "high": 1067.394156957195,
-  "low": 331.8266910679686,
+  "as_of": "2026-09-03",
+  "high": 865.8231115899216,
+  "low": 310.93765334020304,
   "obs_ids": [
    "0064d6a330f0ca94",
    "0345be86776a534d",
@@ -39,6 +39,7 @@
    "2c4b837d77b3d596",
    "2c6de7b534e32ca1",
    "2cd10dbb77351fa5",
+   "2e3ced9debb478ab",
    "301c32ab36a10d02",
    "30973636079d1c51",
    "30ef1be908f1b537",
@@ -225,21 +226,21 @@
    "ff96cf7424de5ba4"
   ],
   "unit": "days",
-  "value": 506.2672867807644
+  "value": 457.55605480519046
  },
  "bucket_id": "methods",
  "cadence_expected": "monthly",
  "chart": {
   "bands": [
    {
-    "height": 39.17,
+    "height": 27.0,
     "name": "normal",
     "y": 0.0
    },
    {
-    "height": 38.33,
+    "height": 46.0,
     "name": "fast",
-    "y": 61.67
+    "y": 54.0
    }
   ],
   "change": null,
@@ -260,19 +261,19 @@
   "x": {
    "ticks": [
     {
-     "label": "Jul 2026",
+     "label": "Aug 2026",
      "minor": false,
-     "x": 11.46
-    },
-    {
-     "label": "Aug",
-     "minor": false,
-     "x": 43.75
+     "x": 15.62
     },
     {
      "label": "Sep",
      "minor": false,
-     "x": 76.04
+     "x": 47.92
+    },
+    {
+     "label": "Oct",
+     "minor": false,
+     "x": 79.17
     }
    ]
   },
@@ -285,15 +286,23 @@
      "y": 100.0
     },
     {
+     "label": "100",
+     "y": 80.0
+    },
+    {
      "label": "200",
-     "y": 66.67
+     "y": 60.0
+    },
+    {
+     "label": "300",
+     "y": 40.0
     },
     {
      "label": "400",
-     "y": 33.33
+     "y": 20.0
     },
     {
-     "label": "600",
+     "label": "500",
      "y": 0.0
     }
    ],
@@ -316,7 +325,7 @@
  "confidence_basis": {
   "best_tier": 6,
   "grade": "C",
-  "n_observations": 213,
+  "n_observations": 214,
   "sources": [
    "Epoch AI notable and frontier models"
   ],
@@ -339,15 +348,15 @@
  "definition": "Doubling time of notable models' estimated training power draw, fitted log-linearly from 2020 on Epoch's notable-model table. Derived metric training_power_doubling_days.",
  "derived": [
   {
-   "as_of_date": "2026-08-07",
-   "computed_at": "2026-09-23T23:58:29.989506Z",
+   "as_of_date": "2026-09-03",
+   "computed_at": "2026-09-24T11:58:34.053869Z",
    "dims": {
-    "aic": "330.8",
-    "n": "168",
-    "r2": "0.077"
+    "aic": "336.2",
+    "n": "169",
+    "r2": "0.094"
    },
    "formula_version": "1",
-   "id": "a39ac75a19755e93",
+   "id": "3eb22e7fa8d29b98",
    "input_observation_ids": [
     "0064d6a330f0ca94",
     "0345be86776a534d",
@@ -378,6 +387,7 @@
     "2c4b837d77b3d596",
     "2c6de7b534e32ca1",
     "2cd10dbb77351fa5",
+    "2e3ced9debb478ab",
     "301c32ab36a10d02",
     "30973636079d1c51",
     "30ef1be908f1b537",
@@ -594,6 +604,7 @@
     "2c4b837d77b3d596",
     "2c6de7b534e32ca1",
     "2cd10dbb77351fa5",
+    "2e3ced9debb478ab",
     "301c32ab36a10d02",
     "30973636079d1c51",
     "30ef1be908f1b537",
@@ -779,9 +790,9 @@
     "ff8a3cc4d316d6d2",
     "ff96cf7424de5ba4"
    ],
-   "value": 506.2672867807644,
-   "value_high": 1067.394156957195,
-   "value_low": 331.8266910679686
+   "value": 457.55605480519046,
+   "value_high": 865.8231115899216,
+   "value_low": 310.93765334020304
   }
  ],
  "direction": null,
@@ -798,12 +809,12 @@
  "grade": "C",
  "id": "epoch_training_power_growth",
  "latest": {
-  "as_of": "2026-08-07",
-  "derived_id": "a39ac75a19755e93",
+  "as_of": "2026-09-03",
+  "derived_id": "3eb22e7fa8d29b98",
   "dims": {
-   "aic": "330.8",
-   "n": "168",
-   "r2": "0.077"
+   "aic": "336.2",
+   "n": "169",
+   "r2": "0.094"
   },
   "obs_ids": [
    "0064d6a330f0ca94",
@@ -835,6 +846,7 @@
    "2c4b837d77b3d596",
    "2c6de7b534e32ca1",
    "2cd10dbb77351fa5",
+   "2e3ced9debb478ab",
    "301c32ab36a10d02",
    "30973636079d1c51",
    "30ef1be908f1b537",
@@ -1021,13 +1033,13 @@
    "ff96cf7424de5ba4"
   ],
   "unit": "days",
-  "value": 506.2672867807644
+  "value": 457.55605480519046
  },
  "layer_id": "compute_physical",
  "leading_lagging": "leading",
  "metric": "training_power_doubling_days",
  "metric_dims": {},
- "n_observations": 213,
+ "n_observations": 214,
  "name": "Training power draw growth (doubling time)",
  "normal_band": {
   "hi": null,
@@ -1037,14 +1049,14 @@
  "pending": null,
  "points": [
   {
-   "as_of": "2026-08-07",
-   "derived_id": "a39ac75a19755e93",
+   "as_of": "2026-09-03",
+   "derived_id": "3eb22e7fa8d29b98",
    "dims": {
-    "aic": "330.8",
-    "n": "168",
-    "r2": "0.077"
+    "aic": "336.2",
+    "n": "169",
+    "r2": "0.094"
    },
-   "href": "#d-a39ac75a19755e93",
+   "href": "#d-3eb22e7fa8d29b98",
    "obs_ids": [
     "0064d6a330f0ca94",
     "0345be86776a534d",
@@ -1075,6 +1087,7 @@
     "2c4b837d77b3d596",
     "2c6de7b534e32ca1",
     "2cd10dbb77351fa5",
+    "2e3ced9debb478ab",
     "301c32ab36a10d02",
     "30973636079d1c51",
     "30ef1be908f1b537",
@@ -1262,9 +1275,9 @@
    ],
    "stamp": "estimate",
    "unit": "days",
-   "value": 506.2672867807644,
+   "value": 457.55605480519046,
    "x": 50.0,
-   "y": 15.62
+   "y": 8.49
   }
  ],
  "prediction_rows": [
