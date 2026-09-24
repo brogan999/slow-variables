@@ -206,7 +206,7 @@ def test_golden_survives_a_hallucinated_id_and_flags_informational_questions():
 
     s = st.Store()
     res = golden(s, Tools(s), ScriptClient(["No record [obs:deadbeef00000000]."]))
-    assert {r["id"] for r in res if r["informational"]} == {"g14", "g15"}
+    assert {r["id"] for r in res if r["informational"]} == {"g14", "g15", "g17", "g18", "g19", "g20"}
     assert not any(r["ok"] for r in res if r["id"] not in ("g16",))
 
 
@@ -339,3 +339,80 @@ def test_a_model_error_never_logs_or_returns_the_question():
     line, payload = model_error(APIError(f"bad request: {question}"))
     assert question not in line and question not in json.dumps(payload)
     assert line == "ask failed: APIError request_id=req_1" and payload["detail"] == "APIError"
+
+
+def _tools_with_board():
+    s = st.Store()
+    s.derived = run_metrics(s.con)
+    s.semantic_tables()
+    s.prediction_table()
+    return Tools(s)
+
+
+def test_the_outlook_tools_cite_writers_claims_and_predictions_and_the_ids_verify():
+    from ai_tracker.query.citecheck import check
+
+    t = _tools_with_board()
+    cells = t.scenarios()["cells"]
+    assert cells and all(isinstance(c["consistent_with_tonight"], bool) for c in cells)
+    src = next(a["cite"] for c in cells for a in c["argued_by"])
+    sign = next(g for c in cells for g in c["signposts"])
+    assert "[" not in sign["text"]  # tokens rendered or dropped, never shown raw
+    hits = t.claims("open models catch up margins", k=3)
+    assert hits[0]["cite"].startswith("pos:") and all("[fact:" not in h["case"] for h in hits)
+    claim = next(c for h in hits for c in h["claims"] if c["tested_against"])
+    kind, cid = claim["cite"].split(":")
+    ok = f"Tonight it is tested against {claim['tested_against']} [claim:{cid}]."
+    assert check(ok, t.records([(kind, cid)])).ok
+    skind, sid = src.split(":")
+    assert t.records([(skind, sid)])[sid].snippet and t.href(skind, sid) == f"/outlook#source-{sid}"
+    assert t.href("pos", "commodity") == "/outlook#position-commodity"
+    pid = t.pub.execute("SELECT id FROM predictions LIMIT 1").fetchone()[0]
+    assert t.records([("pred", pid)]) and t.href("pred", pid)
+    assert t.detail("claim", cid)["snippet"] and t.detail("pred", pid)["label"] == "prediction"
+
+
+def test_prose_records_match_numbers_only_as_whole_tokens():
+    from ai_tracker.query.citecheck import Record, check
+
+    recs = {"c1": Record("c1", "claim", [], "", "Adoption stays below 15% by 2030, far short of 150 firms.")}
+    assert check("It stays below 15% [claim:c1].", recs).ok
+    assert not check("It stays below 5% [claim:c1].", recs).ok  # 5 sits inside 15 and 150
+    assert not check("It stays below 15x [claim:c1].", recs).ok  # the unit must match too
+    assert not check("Some 20 firms [claim:c1].", recs).ok  # 20 sits inside 2030
+
+
+def test_the_company_card_carries_rounds_indicators_and_leaning_predictions():
+    from ai_tracker.query.citecheck import check
+
+    t = _tools_with_board()
+    card = t.entity("Harvey")
+    r = card["venture_rounds"][0]
+    oid = r["cite"].split(":")[1]
+    assert check(f"It raised ${r['usd'] / 1e6:.0f}M [obs:{oid}].", t.records([("obs", oid)])).ok
+    assert card["layer_indicators"] and all(p["cite"].startswith("pred:") for p in card["predictions"])
+    assert "error" in t.entity("No Such Company Ltd")
+
+
+def test_the_rent_rubric_derives_where_rent_pools_by_the_fixed_rules():
+    t = Tools(st.Store())
+    assert set(t.rent_rubric()) == {"inputs", "pools", "tiers"}
+    easy_copy = dict(appropriability="weak", complementary_assets="specialised", asset_owner="incumbents")
+    r = t.rent_rubric(**easy_copy, rent_kind="switching_cost", durability="medium")
+    assert (r["rent_pools_with"], r["tier"]) == ("incumbents", "moderate")
+    assert t.rent_rubric(appropriability="weak", complementary_assets="generic")["tier"] == "none"
+    assert "error" in t.rent_rubric(appropriability="loose")
+
+
+def test_history_is_trimmed_and_follow_ups_are_split_off_before_the_check():
+    from ai_tracker.query.ask import HISTORY_TURNS, _conversation, split_followups
+
+    turns = [{"q": f"q{i}", "a": "a" * 5000} for i in range(6)]
+    msgs = _conversation("now", turns)
+    assert len(msgs) == 2 * HISTORY_TURNS + 1 and msgs[0]["content"] == "q2" and len(msgs[1]["content"]) == 3000
+    body, qs = split_followups("The answer.\n\nFollow-ups:\n- Why?\n- What next?\n- Who else?\n")
+    assert body == "The answer." and qs == ["Why?", "What next?", "Who else?"]
+    assert split_followups("Just an answer.") == ("Just an answer.", [])
+    s = st.Store()
+    res = ask(s, "q", Tools(s), ScriptClient(["No record.\n\nFollow-ups:\n- Which layer?"]), history=turns)
+    assert res["followups"] == ["Which layer?"] and res["answer"] == "No record."

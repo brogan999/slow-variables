@@ -3,7 +3,7 @@
 `check(text, records)` extracts numeric tokens from prose, normalises units the way the site renders them
 (format.ts: shares as percentages, USD with k/M/B/T suffixes, ratios with x, minutes as hours), and matches each
 against the values (and CI bounds, band edges or verbatim snippets) of the records the answer cites. A sentence
-that carries a number but no [obs:..] / [derived:..] / [ind:..] token fails; so does a number that matches nothing.
+that carries a number but no citation token fails; so does a number that matches nothing.
 """
 
 from __future__ import annotations
@@ -17,7 +17,10 @@ _MON = r"(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?"
 DATE = re.compile(  # "Aug 17, 2026" and "17 August 2026": the day is part of a date, not a claim
     rf"\b(?:\d{{1,2}}(?:st|nd|rd|th)?\s+{_MON}|{_MON}\s+\d{{1,2}}(?:st|nd|rd|th)?)(?:,?\s+(?:19|20)\d\d)?\b"
 )
-CITE = re.compile(r"\[(obs|derived|ind|event|census):([A-Za-z0-9_.\-]+)\]")
+CITE = re.compile(r"\[(obs|derived|ind|event|census|src|pos|claim|pred):([A-Za-z0-9_.\-]+)\]")
+# prose records (a writer's work, a position, a claim, a prediction): a number must appear in the text as a whole
+# token with its unit, so "15%" never matches inside "2015" or "150"
+PROSE_KINDS = {"src", "pos", "claim", "pred"}
 NUM = re.compile(
     r"(?<![\w.\-#])(?P<sign>[-−–])?(?P<cur>\$|€|£)?(?P<num>\d{1,3}(?:,\d{3})+|\d+(?:\.\d+)?)(?P<suffix>\s?(?:%|×|x\b|[kKmMbBtT](?!\w)|h\b|hours?\b|min\b|minutes?\b|days?\b|pp\b|points?\b|bn\b|trillion|billion|million))?(?![A-Za-z0-9]|-[A-Za-z0-9])",
 )
@@ -30,7 +33,7 @@ class Record:
     """One cited thing: an observation, a derived row or an indicator (whose band edges count as numbers)."""
 
     id: str
-    kind: str  # obs | derived | ind | event | census
+    kind: str  # obs | derived | ind | event | census | src | pos | claim | pred
     values: list[float] = field(default_factory=list)  # value, low, high, band edges
     unit: str = ""
     snippet: str = ""
@@ -87,6 +90,15 @@ def _parse(m: re.Match) -> float | None:
     return v
 
 
+def _in_snippet(num: str, suffix: str, rec: Record) -> bool:
+    if not rec.snippet:
+        return False
+    if rec.kind not in PROSE_KINDS:
+        return num in rec.snippet
+    unit = re.escape(suffix.strip()) if suffix.strip() in ("%", "×", "x") else ""
+    return bool(re.search(rf"(?<![\d.,]){re.escape(num)}(?![\d]|[.,]\d){unit}", rec.snippet))
+
+
 def _wrap(text: str, token: str) -> str:
     """Mark the first occurrence of `token` that is not already inside an ⟦unverified⟧ marker."""
     return re.sub(r"(?<!unverified: )" + re.escape(token) + r"(?!⟧)", f"⟦unverified: {token}⟧", text, count=1)
@@ -124,7 +136,7 @@ def check(text: str, records: dict[str, Record]) -> Result:
                 failures.append(f"uncited number: {token_text}")
                 annotated = _wrap(annotated, token_text)
                 continue
-            snippet_hit = any(num in r.snippet for r in cited if r.snippet)
+            snippet_hit = any(_in_snippet(num, m.group("suffix") or "", r) for r in cited)
             if not snippet_hit and not any(_rendered_matches(v, r) for r in cited):
                 failures.append(f"{token_text} not found in cited records {[r.id for r in cited]}")
                 annotated = _wrap(annotated, token_text)
