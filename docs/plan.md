@@ -402,7 +402,7 @@ A private prototype had built a standalone page, "The Migrating Bottleneck", on 
 
 Owner decisions, 20 September:
 - Keep the nought-to-a-hundred scores, bars and confidence, through a minimal port: whole numbers with a word, confidence beside every score, hatching under 45, no data means no score, scoped to this page.
-- Forecasts become predictions with falsifiers, re-tested nightly. No buy, sell, size or enter language.
+- Forecasts become predictions with falsifiers, re-tested nightly. No buy, sell, size or enter language. *(24 Sep 2026, owner: the ban on advice wording is lifted site-wide; the phrase tests are removed. The /methodology "Not advice" disclaimer stays.)*
 - Conflicts: still none, so no disclosure line.
 - The age limit for Epoch's lagged quarterly files is about 300 days, with a written rationale; the chip-power column is added; no OpenRouter or Epoch-models extension.
 - The data-centre ratio is shown both ways (all sites, and only those with something built); the falsifier is the headline falling under 2.

@@ -129,7 +129,7 @@ def scenarios(spec: dict[str, Any], cl: list[dict[str, Any]]) -> dict[str, Any]:
 
 
 def strings(spec: dict[str, Any]) -> list[str]:
-    """Every sentence the ledger puts in front of a reader, for the tests that keep figures and advice out."""
+    """Every sentence the ledger puts in front of a reader, for the tests that keep figures out."""
     out = [
         p[k]
         for p in spec.get("positions") or []

@@ -308,7 +308,7 @@ def problems(
 
 
 def strings(spec: dict[str, Any]) -> list[str]:
-    """Every sentence the section puts in front of a reader, for the no-figure and no-advice tests."""
+    """Every sentence the section puts in front of a reader, for the no-figure tests."""
     out = [spec.get("intro") or ""]
     out += [lane[k] for lane in spec.get("lanes") or [] for k in ("label", "definition")]
     out += [q[k] for q in spec.get("questions") or [] for k in ("question", "fast", "slow") if q.get(k)]
