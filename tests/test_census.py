@@ -59,11 +59,11 @@ def test_every_can_go_figure_travels_with_the_three_way_figure_and_nothing_model
     assert "sigma" in index["method"]
 
 
-def test_a_role_no_scorer_trio_saw_has_no_three_way_figure_rather_than_a_zero():
-    index, roles = census.build(census.load(), census.fetches())
-    for r in index["roles"]:
-        assert (r["agreed3"] is None) == (not r["scored_by_three"])
-        assert r["scored_by_three"] == any(t["n_scorers"] == 3 for t in roles[r["occ"]]["tasks"])
+def test_no_three_way_figure_only_where_nothing_was_scored_by_all_three():
+    index, _ = census.build(census.load(), census.fetches())
+    for r in [*index["roles"], *index["functions"]]:
+        assert (r["agreed3"] is None) == (r["payroll_scored_by_three"] == 0)
+    assert any(r["agreed3"] == 0 for r in index["roles"])  # scored by all three, none unanimous: a real zero
 
 
 def test_tables_keep_codes_as_text_and_answer_after_file_access_is_locked():

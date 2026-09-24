@@ -99,68 +99,6 @@
    "n": "occupation-level worker survey used instead"
   }
  ],
- "dial": [
-  {
-   "vh": 0,
-   "g": 2,
-   "l": 1,
-   "rule": "can be checked instantly, by software, and a failure costs up to about $1k",
-   "alone": 0.6791776,
-   "alone_rest": 0.4922838663484486,
-   "freed": 247148215698.20605,
-   "headline": false
-  },
-  {
-   "vh": 0,
-   "g": 2,
-   "l": 2,
-   "rule": "can be checked instantly, by software, and a failure costs up to about $10k",
-   "alone": 0.685754,
-   "alone_rest": 0.48955014492753623,
-   "freed": 299724068645.6629,
-   "headline": false
-  },
-  {
-   "vh": 1,
-   "g": 2,
-   "l": 2,
-   "rule": "can be checked within hours, by software, and a failure costs up to about $10k",
-   "alone": 0.6314955,
-   "alone_rest": 0.47452401098901104,
-   "freed": 1014476426108.4851,
-   "headline": true
-  },
-  {
-   "vh": 1,
-   "g": 1,
-   "l": 2,
-   "rule": "can be checked within hours \u2014 by software or an expert \u2014 and a failure costs up to about $10k",
-   "alone": 0.5698821473158552,
-   "alone_rest": 0.46494453840732913,
-   "freed": 1733833900223.9185,
-   "headline": false
-  },
-  {
-   "vh": 2,
-   "g": 1,
-   "l": 2,
-   "rule": "can be checked within days \u2014 by software or an expert \u2014 and a failure costs up to about $10k",
-   "alone": 0.5438910278745646,
-   "alone_rest": 0.4588106343283582,
-   "freed": 2772962429533.588,
-   "headline": false
-  },
-  {
-   "vh": 2,
-   "g": 1,
-   "l": 3,
-   "rule": "can be checked within days \u2014 by software or an expert \u2014 and a failure costs up to about $100k",
-   "alone": 0.5396160606060606,
-   "alone_rest": 0.44882077777777785,
-   "freed": 3252383162938.8936,
-   "headline": false
-  }
- ],
  "sigma": [
   {
    "sigma": 0.5,
@@ -488,5 +426,100 @@
    "b": -0.5388044870989123,
    "ci": 0.2071786133697651
   }
- ]
+ ],
+ "dial": [
+  {
+   "vh": 0,
+   "g": 2,
+   "l": 1,
+   "rule": "can be checked instantly, by software, and a failure costs up to about $1k",
+   "alone": 0.6791776,
+   "alone_rest": 0.4922838663484486,
+   "freed": 247148215698.20605,
+   "headline": false,
+   "agreed3": 18970641321.363712
+  },
+  {
+   "vh": 0,
+   "g": 2,
+   "l": 2,
+   "rule": "can be checked instantly, by software, and a failure costs up to about $10k",
+   "alone": 0.685754,
+   "alone_rest": 0.48955014492753623,
+   "freed": 299724068645.6629,
+   "headline": false,
+   "agreed3": 38681013350.995804
+  },
+  {
+   "vh": 1,
+   "g": 2,
+   "l": 2,
+   "rule": "can be checked within hours, by software, and a failure costs up to about $10k",
+   "alone": 0.6314955,
+   "alone_rest": 0.47452401098901104,
+   "freed": 1014476426108.4851,
+   "headline": true,
+   "agreed3": 212671102443.42316
+  },
+  {
+   "vh": 1,
+   "g": 1,
+   "l": 2,
+   "rule": "can be checked within hours \u2014 by software or an expert \u2014 and a failure costs up to about $10k",
+   "alone": 0.5698821473158552,
+   "alone_rest": 0.46494453840732913,
+   "freed": 1733833900223.9185,
+   "headline": false,
+   "agreed3": 459999314373.4593
+  },
+  {
+   "vh": 2,
+   "g": 1,
+   "l": 2,
+   "rule": "can be checked within days \u2014 by software or an expert \u2014 and a failure costs up to about $10k",
+   "alone": 0.5438910278745646,
+   "alone_rest": 0.4588106343283582,
+   "freed": 2772962429533.588,
+   "headline": false,
+   "agreed3": 902977732157.4766
+  },
+  {
+   "vh": 2,
+   "g": 1,
+   "l": 3,
+   "rule": "can be checked within days \u2014 by software or an expert \u2014 and a failure costs up to about $100k",
+   "alone": 0.5396160606060606,
+   "alone_rest": 0.44882077777777785,
+   "freed": 3252383162938.8936,
+   "headline": false,
+   "agreed3": 1335326659141.5225
+  }
+ ],
+ "dial_fields": {
+  "freed": "payroll in knowledge tasks this step's rule marks as going, by the scorers' vote; physical tasks excluded",
+  "agreed3": "the part of freed that all three scorers, each applying this step's rule, say goes",
+  "alone": "mean share of observed AI use that is AI working alone (Anthropic Economic Index automation share, claude.ai, May 2026) across tasks this step marks as going that have usage data",
+  "alone_rest": "the same mean across every other knowledge task with usage data, physical tasks included"
+ },
+ "physical_gate": {
+  "removed_usd": 403145576796.41113,
+  "removed_by_label_only_usd": 252795261155.9227,
+  "spotcheck": {
+   "removed_usd": 403145576796.4112,
+   "sample": 60,
+   "wrong": 6,
+   "error_rate": 0.1,
+   "ci90": [
+    0.04445296776894622,
+    0.18785738198898227
+   ],
+   "headline_low_by_usd": [
+    17921017331.5241,
+    40314557679.64112,
+    75733872617.412
+   ],
+   "method": "60 payroll-weighted draws with replacement (seed 7) from the tasks the physical gate removed; each judged 'does this mainly need a body?'; 'no' = the gate was wrong. Clopper-Pearson 90% interval.",
+   "labels": "rubric/physical_spotcheck_labels.csv"
+  }
+ }
 }

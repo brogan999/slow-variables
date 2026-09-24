@@ -2,8 +2,9 @@
 
 The site never recomputes a verdict, share or band. It checks the bundle against its own manifest, loads its tables for
 SQL, and writes web/data/census/ by selecting, sorting and joining. Every "can go" figure travels with the part all
-three scorers agree on (`agreed3`); where a version of the bundle does not report it, the field is None and the page
-says so rather than printing a zero."""
+three scorers agree on (`agreed3`). Where none of a role's or function's payroll was scored by all three, agreed3 is
+None and the page says "not scored by all three"; where it was scored and no going task was unanimous, agreed3 is a
+real zero."""
 
 from __future__ import annotations
 
@@ -29,7 +30,7 @@ TABLES = {
     "census_functions": "functions.csv",
 }
 TEXT_COLUMNS = {"occ", "naics", "occ_title", "naics_title", "title", "function", "task", "why"}
-METHOD = ["gates", "adjudication", "placebo", "stability", "channel", "sigma"]  # sigma is modelled; shown only here
+METHOD = ["gates", "adjudication", "placebo", "stability", "channel", "physical_gate", "sigma"]  # sigma is modelled; shown only here
 
 
 def load() -> dict[str, Any]:
@@ -82,6 +83,17 @@ def problems(spec: dict[str, Any], fetched: dict[str, Any]) -> list[str]:
     sums = {"tasks.csv": sum(num(r["task_payroll_usd"]) or 0 for r in rows(d / "tasks.csv") if truth(r["goes"]))}
     sums |= {f: sum(num(r["freed"]) or 0 for r in rows(d / f)) for f in TABLES.values() if f != "tasks.csv"}
     errors += [f"census: {f} sums to {v:.0f}, not the headline" for f, v in sums.items() if abs(v - head) > 1]
+    head3 = m["headline"]["agreed_all_three_usd"]
+    agreed = {
+        "tasks.csv": sum(
+            num(r["task_payroll_usd"]) or 0
+            for r in rows(d / "tasks.csv")
+            if truth(r["goes"]) and truth(r["agreed_all_three"])
+        ),
+        "roles.csv": sum(num(r["freed_agreed3"]) or 0 for r in rows(d / "roles.csv")),
+    }
+    agreed |= {f: sum(num(r["agreed3"]) or 0 for r in rows(d / f)) for f in ("role_industry.csv", "industries.csv", "functions.csv")}
+    errors += [f"census: {f} agreed3 sums to {v:.0f}, not the headline" for f, v in agreed.items() if abs(v - head3) > 1]
     cited = {x["cited_as"]: x for x in fetched.get("fetches") or []}
     for card in json.loads((d / "deal_sheets.json").read_text())["cards"]:
         for u in card["sources"]:
@@ -137,7 +149,7 @@ def build(spec: dict[str, Any], fetched: dict[str, Any]) -> tuple[dict[str, Any]
     roles = []
     docs = {}
     for r in rows(d / "roles.csv"):
-        scored3 = any(t["n_scorers"] == "3" for t in by_occ.get(r["occ"], []))
+        scored3 = (num(r["payroll_scored_by_three"]) or 0) > 0  # none of its payroll scored by all three: no figure, not $0
         role = {
             "occ": r["occ"],
             "title": r["title"],
@@ -152,6 +164,7 @@ def build(spec: dict[str, Any], fetched: dict[str, Any]) -> tuple[dict[str, Any]
             "freed": num(r["freed"]),
             "agreed3": num(r["freed_agreed3"]) if scored3 else None,
             "scored_by_three": scored3,
+            "payroll_scored_by_three": num(r["payroll_scored_by_three"]),
             "contested": num(r["freed_contested"]),
             "ai_exposure": num(r["ai_exposure"]),
         }
@@ -178,7 +191,7 @@ def build(spec: dict[str, Any], fetched: dict[str, Any]) -> tuple[dict[str, Any]
                 for t in ts
             ],
             "industries": [
-                {"naics": x["naics"], "title": x["naics_title"], "emp": num(x["emp"]), "wage_bill": num(x["wage_bill"]), "freed": num(x["freed"]), "agreed3": num(x.get("agreed3"))}
+                {"naics": x["naics"], "title": x["naics_title"], "emp": num(x["emp"]), "wage_bill": num(x["wage_bill"]), "freed": num(x["freed"]), "agreed3": num(x["agreed3"])}
                 for x in sorted(staffing.get(r["occ"], []), key=lambda x: (-(num(x["wage_bill"]) or 0), x["naics"]))[:10]
             ],
             "csv": csv_href("tasks.csv"),
@@ -205,9 +218,10 @@ def build(spec: dict[str, Any], fetched: dict[str, Any]) -> tuple[dict[str, Any]
             "ref": ref(spec, "manifest.json", "headline"),
         },
         "dial": [
-            {"rule": x["rule"], "freed": x["freed"], "agreed3": x.get("agreed3"), "headline": x["headline"]}
+            {"rule": x["rule"], "freed": x["freed"], "agreed3": x["agreed3"], "alone": x["alone"], "alone_rest": x["alone_rest"], "headline": x["headline"]}
             for x in val["dial"]
         ],
+        "dial_fields": val["dial_fields"],
         "functions": sorted(
             (
                 {
@@ -215,7 +229,9 @@ def build(spec: dict[str, Any], fetched: dict[str, Any]) -> tuple[dict[str, Any]
                     "ref": ref(spec, "functions.csv", r["function"]),
                     "payroll": num(r["payroll"]),
                     "freed": num(r["freed"]),
-                    "agreed3": num(r.get("agreed3")),
+                    "agreed3": num(r["agreed3"]) if (num(r["payroll_scored_by_three"]) or 0) > 0 else None,
+                    "scored_by_three": (num(r["payroll_scored_by_three"]) or 0) > 0,
+                    "payroll_scored_by_three": num(r["payroll_scored_by_three"]),
                     "share_goes": num(r["share_goes"]),
                     "band_lo": num(r["lo"]),
                     "band_hi": num(r["hi"]),
@@ -253,8 +269,8 @@ def build(spec: dict[str, Any], fetched: dict[str, Any]) -> tuple[dict[str, Any]
                     "freed": c["freed"],
                     "freed_lo": c["freed_lo"],
                     "freed_hi": c["freed_hi"],
-                    "agreed3": c.get("agreed3"),
-                    "roles": [{"title": x["t"], "wage_bill": x["b"], "share_goes": x["g"], "freed": x["f"], "agreed3": x.get("agreed3")} for x in c["roles"]],
+                    "agreed3": c["freed_agreed3"],
+                    "roles": [{"title": x["t"], "wage_bill": x["b"], "share_goes": x["g"], "freed": x["f"], "agreed3": x["a3"]} for x in c["roles"]],
                 }
                 for c in deals["cards"]
             ],

@@ -16,12 +16,12 @@ scored by up to three models (Sonnet, Haiku, Gemini); the verdict is a vote, tie
 | file | grain | key columns |
 |---|---|---|
 | `tasks.csv` | one O*NET task (10,752 knowledge tasks) | `horizon` 0 instant … 5 never; `spec_entropy` 1–5; `grader` 0 none / 1 expert only / 2 automated; `stakes` 0 <$100 … 4 ≥$1M or irreversible; `goes`, `why`, `physical`, `contested`, `agreed_all_three`, per-scorer votes; `blocked_by_verifier` (fast, cheap to get wrong, but only an expert can check it today); `time_share` of the role's task time; `task_payroll_usd` = time_share × role wage bill |
-| `roles.csv` | SOC occupation (425) | `share_goes` with `band_lo`–`band_hi` (strict/loose rule); `freed` (can go, $), `freed_agreed3` (all three scorers agree), `freed_contested`; `ai_exposure` (task time AI already touches, ρ 0.878 vs the published measure); `cost_share_stays_after_modelled` is **modelled** at σ = 0.5 |
-| `role_industry.csv` | occupation × 4-digit NAICS (22,001) | OEWS staffing: `emp`, `wage_bill`, and `freed` = wage_bill × the role's share that goes. Sums to the headline |
+| `roles.csv` | SOC occupation (425) | `share_goes` with `band_lo`–`band_hi` (strict/loose rule); `freed` (can go, $), `freed_agreed3` (all three scorers agree), `freed_contested`; `payroll_scored_by_three` (payroll in tasks all three scored — 0 means Gemini never scored the role, so a 0 `freed_agreed3` there means *not scored by all three*, not *nobody agrees*); `ai_exposure` (task time AI already touches, ρ 0.878 vs the published measure); `cost_share_stays_after_modelled` is **modelled** at σ = 0.5 |
+| `role_industry.csv` | occupation × 4-digit NAICS (22,001) | OEWS staffing: `emp`, `wage_bill`, `freed` = wage_bill × the role's share that goes, `agreed3` the same for the all-three-agree share. Both sum to their headlines |
 | `industries.csv` | 4-digit NAICS (247) | `total` payroll (every worker), `know` (scored knowledge roles), `freed`, `agreed3`, `blocked`, `share_total` |
-| `functions.csv` | business function (22) | `payroll`, `freed`, `share_goes` + range, `blocked_by_verifier_usd` |
-| `deal_sheets.json` | 9 archetype cards + 5 not carded | stance keeps / check / passes is **reasoned from invoice structure, not measured**; two cards are occupation-anchored (sized by one occupation, not an industry); comps illustrate revenue models, are not researched targets; every factual claim has a source URL |
-| `validation.json` | — | pre-registered gates (passed and failed), confidence dial, σ table, the exploratory API-vs-chat channel test, scorer adjudication, retention placebo |
+| `functions.csv` | business function (22) | `payroll`, `freed`, `agreed3`, `payroll_scored_by_three`, `share_goes` + range, `blocked_by_verifier_usd` |
+| `deal_sheets.json` | 9 archetype cards + 5 not carded | stance keeps / check / passes is **reasoned from invoice structure, not measured**; each card and each of its roles carries `freed_agreed3` / `a3`; two cards are occupation-anchored (sized by one occupation, not an industry); comps illustrate revenue models, are not researched targets; every factual claim has a source URL |
+| `validation.json` | — | pre-registered gates (passed and failed), confidence dial (each step with `agreed3`; field meanings in `dial_fields`), `physical_gate` (removed payroll and the spot-check), σ table, the exploratory API-vs-chat channel test, scorer adjudication, retention placebo |
 
 ## Caveats that must travel with any figure
 - **Structural, not a forecast.** Says what *can* go by the rule today — not when, how fast, or who keeps the saving.
@@ -34,7 +34,10 @@ scored by up to three models (Sonnet, Haiku, Gemini); the verdict is a vote, tie
   API) is **exploratory**: designed after seeing the data; pre-committed to one unchanged re-run on the next Economic Index release.
 - No human has judged individual tasks; the human anchor is the Labor Department's occupation-level worker survey.
 - O*NET under-describes coordination and exception handling, which biases "can go" upward.
-- Physical-work gate: ~5% label error on a spot-check (headline may be ~$10–50bn low).
+- Physical-work gate: a reproducible spot-check (60 payroll-weighted draws, seed 7, labels in the census repo's
+  `rubric/physical_spotcheck_labels.csv`) found 10% of the removed payroll is really desk work (90% interval 4–19%),
+  so the headline may be ~$18–76bn low. Figures in `validation.json` → `physical_gate`.
+- "Agreed by all three" is only as wide as Gemini's coverage: where `payroll_scored_by_three` is 0 it cannot be positive.
 
 ## Identifiers
 - `task_id` is O*NET's own **Task ID** (Task Statements, database 30.2), unique per row: e.g. 1 = Sales Managers,
