@@ -93,3 +93,12 @@ def test_the_site_types_no_figure_on_the_census_pages():
     for s in census.strings(census.load()):
         assert all(YEAR.fullmatch(w) for w in s.split() if re.search(r"\d", w)), s
         assert not NUMBER_WORD.search(s), s
+
+
+def test_the_census_pages_are_in_the_nav_and_the_sitemap():
+    from pathlib import Path
+
+    web = Path(__file__).resolve().parents[1] / "web" / "src"
+    assert '"/census"' in (web / "lib" / "nav.ts").read_text()
+    assert "census().roles" in (web / "app" / "sitemap.ts").read_text()
+    assert (web / "app" / "census" / "roles" / "[occ]" / "page.tsx").exists()

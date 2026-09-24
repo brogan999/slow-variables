@@ -310,3 +310,45 @@ export type AtlasDoc = {
   filter: boolean; map: AtMapRow[]; domains: AtDomain[]; count: { expectations: number; sources: number; domains: number };
 };
 export const atlas = () => read<AtlasDoc>("atlas.json");
+
+// The automatability census (plan Part 21): a judged snapshot imported as published; agreed3 null = not scored by all three.
+export type CensusRole = {
+  occ: string; title: string; function: string; href: string; ref: string; emp: number; wage_bill: number;
+  share_goes: number; band_lo: number; band_hi: number; freed: number; agreed3: number | null; scored_by_three: boolean;
+  payroll_scored_by_three: number; contested: number; ai_exposure: number | null;
+};
+export type CensusFunction = {
+  function: string; ref: string; payroll: number; freed: number; agreed3: number | null; scored_by_three: boolean;
+  share_goes: number; band_lo: number; band_hi: number; verifier_queue: number; roles: number;
+};
+export type CensusIndustry = {
+  naics: string; title: string; ref: string; payroll: number; knowledge_payroll: number; freed: number; agreed3: number;
+  verifier_queue: number; share_total: number;
+};
+export type CensusCard = {
+  key: string; name: string; naics: string; invoice: string; why: string; kill: string[]; comps: string[]; scope: string;
+  excl: string; anchored: boolean; stance: string; stance_why: string; sources: { cited_as: string; href: string }[];
+  payroll: number; freed: number; freed_lo: number; freed_hi: number; agreed3: number;
+  roles: { title: string; wage_bill: number; share_goes: number; freed: number; agreed3: number }[];
+};
+export type CensusIndex = {
+  version: string; generated_at: string; manifest_sha256: string; sources: string[]; scorers: string[];
+  prose: { title: string; lede: string; rule: string; agreed: string; caveats: string[]; sections: Record<string, { title: string; lede: string }> };
+  headline: { freed: number; agreed3: number; payroll: number; agreed: number; contested: number; verifier_queue: number; without_gemini: number; physical_removed: number; ref: string };
+  dial: { rule: string; freed: number; agreed3: number; alone: number; alone_rest: number; headline: boolean }[];
+  dial_fields: Record<string, string>;
+  functions: CensusFunction[]; industries: CensusIndustry[]; roles: CensusRole[];
+  deals: { cards: CensusCard[]; not_carded: { name: string; why: string }[] };
+  method: Record<string, unknown>;
+  csv: Record<string, string>;
+};
+export type CensusTask = {
+  id: string; ref: string; task: string; goes: boolean; why: string; physical: boolean; contested: boolean;
+  agreed_all_three: boolean; blocked_by_verifier: boolean; n_scorers: number; time_share: number; payroll: number;
+};
+export type CensusRoleDoc = {
+  version: string; role: CensusRole; tasks: CensusTask[]; csv: string;
+  industries: { naics: string; title: string; emp: number; wage_bill: number; freed: number; agreed3: number }[];
+};
+export const census = () => read<CensusIndex>("census/index.json");
+export const censusRole = (occ: string) => read<CensusRoleDoc>(`census/roles/${occ}.json`);
