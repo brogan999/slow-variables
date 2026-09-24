@@ -5,6 +5,6 @@ export const SITE = {
   description: "How fast AI value moves through the diffusion stages, and who keeps it. Every number traces to a dated, graded observation.",
   operator: "Alex Brogan",
   repo: "https://github.com/brogan999/slow-variables",
-  // The private address for privacy requests and rights notices only; tests/test_legal.py fails while it is empty.
-  legalEmail: "",
+  // The address for privacy requests and rights notices only.
+  legalEmail: "info@baldlabs.co",
 };
