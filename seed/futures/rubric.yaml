@@ -1,0 +1,42 @@
+# The rent rubric for the Futures section (plan Part 20). Models answer only the inputs below, with three votes
+# and majority rule; code derives where the rent pools and how large it is from these rules, never a model.
+# Changed only by a reviewed pull request, with the rationale updated.
+inputs:
+  rent_kind: [scarcity, scale_network, switching_cost, regulatory, none]
+  appropriability: [tight, weak]          # can the maker stop others copying it (patents, secrecy, hard know-how)?
+  complementary_assets: [specialised, generic]  # does reaching customers need assets only a few hold?
+  asset_owner: [innovator, incumbents, platforms, regulators_licensees]  # who holds those assets
+  durability: [short, medium, long]       # how long before the bottleneck moves: under five years, five to twenty, decades
+pools:
+  rationale: >-
+    After Teece (1986): an innovator keeps the gains when it can stop imitation, or when it already owns the
+    specialised assets customers need to be reached; when imitation is easy and those assets belong to someone
+    else, their owner collects (EMI invented the CT scanner and General Electric kept the profits); when
+    imitation is easy and the assets are generic, competition passes the gains to users.
+  rules:  # first match wins
+    - {when: {appropriability: tight}, pools: innovator}
+    - {when: {complementary_assets: specialised, asset_owner: innovator}, pools: innovator}
+    - {when: {complementary_assets: specialised}, pools: asset_owner}
+    - {when: {}, pools: users}
+tiers:
+  words: [none, thin, moderate, fat, monopoly_like]
+  rationale: >-
+    The tier is the rent kept by whoever collects it, set by the kind of rent and how long it lasts (Ricardo:
+    rent goes to what cannot be expanded; Goldratt: relieving one bottleneck moves the shortage elsewhere, so
+    rent is temporary). Network and regulatory rents compound and are harder to compete away than scarcity or
+    switching-cost rents, so they step one tier higher at the same durability. Rent competed away to users is
+    none. For an innovator collecting a typical rent, moderate is the anchor Nordhaus (2004) measured: innovators
+    keep a small share of the value they create, around two cents in the dollar, the rest going to users.
+  rules:  # rent_kind -> durability -> tier
+    none: {short: none, medium: none, long: none}
+    scarcity: {short: thin, medium: moderate, long: fat}
+    switching_cost: {short: thin, medium: moderate, long: fat}
+    scale_network: {short: moderate, medium: fat, long: monopoly_like}
+    regulatory: {short: moderate, medium: fat, long: monopoly_like}
+arrival:
+  decades: [2020s, 2030s, 2040s, 2050s, 2060s, 2070s, 2080s, 2090s, after_2100, not_physically_possible, cannot_judge]
+  needs: [nothing_new, engineering_scale_up, cost_decline, materials_breakthrough, energy_breakthrough,
+    biology_breakthrough, computing_breakthrough, ai_capability, regulation_or_acceptance, new_physics]
+categories: [space, computing_ai, communication_media, robotics_automation, medicine_biotech, mind_neurotech,
+  transport, energy, materials_manufacturing, weapons_warfare, surveillance_identity, food_environment,
+  home_everyday, exotic_physics, society_economy]
