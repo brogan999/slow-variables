@@ -648,3 +648,40 @@ Known limits:
 - Several rivals are the nearest competing view on the site, not a direct opposite.
 - Cai appears on both sides of one pair: tuning open models for firms, against general models overtaking models built for one field.
 - Two Diff issues (The Rocketship, FP&A) survive only as their summary lines in the saved copy.
+
+## Part 17 status (24 Sep 2026): the singularity timeline, in the manuscript style
+
+Decision (owner, 24 Sep): the Singularity Canon's prediction material becomes a section of the site. It uses the Illuminated Manuscript design on its own route only, and covers forecasters' dated calls, the four 2036 worlds, ten things to watch and an unscored lane of fiction. Books are reworded and credited; a public work may carry one exact quote of under fifteen words, with no figure.
+
+What shipped (#72 data, #73 page):
+- **A fifth ledger, `singularity`: 89 forecasts** from the canon, the ten-year brief and forecasters' 2026 statements, in the site's words, credited and linked. Each has a reasoned status. They sit on the board and in the `predictions` table, and indicator pages cap their backlinks at five.
+- **`seed/singularity.yaml`:**
+  - nine lanes (coder, AI researcher, general AI, superintelligence, explosive growth, loss of control, robots, the build-out, minds), each with the readings it leans on;
+  - ten things to watch, each with tonight's reading;
+  - four worlds mapped onto the outlook's scenario grid, which gained a loss-of-control row credited to Kulveit et al. and Critch;
+  - 44 works of fiction;
+  - 99 fetched sources.
+- **`/singularity`:**
+  - a timeline plate on a piecewise year axis laid out in Python, with an "as of" slider;
+  - the calls whose time has come;
+  - a forecaster-by-milestone table;
+  - the ten things to watch;
+  - the worlds;
+  - the fiction and the sources.
+  - The palette sits on `body:has(.theme-manuscript)`, so it stays on this route; Fraunces is scoped to the page.
+
+Reviews:
+- **Data.** Faithfulness review of every row against its source: 11 must-fixes and 41 should-fixes, all applied. Four errors in the private brief were kept off the site, then corrected in the brief itself:
+  - the gradual-disempowerment figure is Critch's, not Kulveit's;
+  - AI 2027's five gigawatts is power added in 2025;
+  - Aschenbrenner's run-rate is per company;
+  - Bio Anchors' model median is 2052.
+- **Page.** Staff review of code, screenshots and data: all must-fixes applied.
+  - Calls that give only odds or bet against a date are listed, not placed.
+  - Stepping-stone claims are drawn lighter and kept out of the forecaster table.
+  - The chart has one tab stop.
+  - Each reading on the page is labelled.
+
+Known limits:
+- Most forecasts read "too early to tell". A historical call whose window closed without its milestone reads "slower than said", because the ledger vocabulary has no word for wrong.
+- The phone layout puts the slider after the sources, far from the chart.

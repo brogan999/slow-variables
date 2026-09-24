@@ -18,6 +18,7 @@ stops:
 lanes:
 - id: superhuman_coder
   label: A machine that out-codes the best programmers
+  short: Coder
   definition: An AI system a lab would rather use than its best human engineers for writing and fixing software.
   signposts:
   - horizon_doubling
@@ -28,14 +29,17 @@ lanes:
     mid: 2027
   - id: ai2027_horizon_doubling_4mo
     high: 2027
+    step: true
   - id: kokotajlo_automated_coder_nov_2027
     mid: 2027
   - id: lifland_automated_coder_jan_2030
     mid: 2030
   - id: cotra_metr_horizon_full_day_2026
     high: 2026
+    step: true
 - id: automated_researcher
   label: AI that does AI research
+  short: AI researcher
   definition: A system that can carry out the work of an AI research team, so each model helps build the next.
   signposts:
   - rsi_agent_workdays_per_human
@@ -49,15 +53,18 @@ lanes:
     high: 2026
   - id: ai2027_research_speedup_early_2026
     high: 2026
+    step: true
   - id: ai2027_superhuman_researcher_sep_2027
     high: 2027
   - id: cotra_full_ai_rnd_automation_2026
     high: 2026
+    odds: true
   - id: macaskill_moorhouse_research_parity
     low: 2035
     high: 2045
 - id: agi
   label: General or transformative AI
+  short: General AI
   definition: AI that matches people at almost all cognitive work, or does enough of it to transform the economy the way the
     industrial revolution did.
   signposts:
@@ -102,8 +109,10 @@ lanes:
     mid: 2030
     high: 2031
   - id: marcus_brundage_bet_2027
+    doubts: true
     high: 2027
   - id: lecun_llms_not_human_level
+    doubts: true
   - id: solomonoff_human_level_1994_2023
     low: 1994
     high: 2023
@@ -112,6 +121,7 @@ lanes:
     high: 2100
   - id: hanson_non_emulation_ai_centuries
     low: 2216
+    doubts: true
   - id: gwern_scaling_hypothesis
   - id: suleyman_modern_turing_test
     low: 2026
@@ -122,6 +132,7 @@ lanes:
     mid: 2040
 - id: superintelligence
   label: Superintelligence
+  short: Superintelligence
   definition: AI far smarter than the best humans in every field, and how fast the step from human level to that would be.
   signposts:
   - arc_agi_frontier
@@ -136,6 +147,7 @@ lanes:
   - id: christiano_dyson_sphere_2030_2040
     low: 2030
     high: 2040
+    odds: true
   - id: christiano_software_explosion_even_odds
   - id: aschenbrenner_superintelligence_2030
     high: 2030
@@ -193,9 +205,11 @@ lanes:
   - id: kulveit_gradual_disempowerment
   - id: carlsmith_power_seeking_catastrophe_2070
     high: 2070
+    odds: true
   - id: omohundro_basic_ai_drives
   - id: ord_unaligned_ai_century
     high: 2120
+    odds: true
   - id: shulman_ai_takeover_odds
   - id: kokotajlo_pdoom
   - id: alexander_pdoom
@@ -210,9 +224,6 @@ lanes:
   - id: ai2027_robot_economy_2028_2030
     low: 2028
     high: 2030
-  - id: moravec_humanlike_robot_hardware_2020s
-    low: 2020
-    high: 2029
   - id: moravec_robots_overtake_by_2048
     high: 2048
   - id: shulman_robot_doubling
@@ -243,6 +254,9 @@ lanes:
     mid: 2035
   - id: ai2027_revenue_spend_power_2025
     high: 2025
+  - id: moravec_humanlike_robot_hardware_2020s
+    low: 2020
+    high: 2029
 - id: minds
   label: Minds, uploads and longer lives
   definition: Copies of human minds running on computers, links between brains and machines, and medicine that outruns ageing.
@@ -267,46 +281,55 @@ questions:
   reads: horizon_doubling
   fast: Doubling at or faster than the pace the fastest scenarios assume.
   slow: The doubling time stretching out, or the horizon stalling at a day or two of work.
+  label: doubling time of the task length
 - id: uplift
   question: Does AI speed up the people who build it, when that is tested in a controlled trial?
   reads: dev_rct_uplift
   fast: Trials showing developers finishing work much faster with AI than without it.
   slow: Trials showing little or no gain, as the first one did.
+  label: speed-up in the latest controlled trial
 - id: researcher
   question: Does any lab reach an AI that does the work of its own researchers?
   reads: rsi_agent_workdays_per_human
   fast: Independent tests showing agents doing more research work than the people overseeing them.
   slow: The measure staying a lab's own claim, with no outside test.
+  label: a lab's own count of AI workdays per human workday
 - id: power
   question: Does the power for the largest training runs actually get built?
   reads: epoch_training_power_growth
   fast: The power drawn by the largest training runs keeps growing at its recent pace.
   slow: The growth slowing as grid connections and turbines run short.
+  label: doubling time of the power the largest training runs draw
 - id: money
   question: Does the spending on computing survive, and does revenue catch up with it?
   reads: capex_to_revenue
   fast: Spending staying high while the revenue it is meant to earn closes the gap.
   slow: A cut in spending plans, or revenue falling further behind.
+  label: building and equipment spending against AI revenue
 - id: rivals
   question: Do open and Chinese models stay only a few months behind the best closed ones?
   reads: open_lag
   fast: The gap staying short, so no single lab can pull away.
   slow: The gap widening as the leading labs hold their best models back.
+  label: months open models trail the best closed ones
 - id: brakes
   question: Do the labs keep pulling their own brakes, pausing a run or holding a model back?
   reads: safety_brake_events
   fast: Few brakes, and releases that go ahead as soon as the models are ready.
   slow: More pauses and gated releases, of the kind a lab announces itself.
+  label: brakes the labs announced in the last year
 - id: jobs
   question: Do young workers in the jobs most exposed to AI fall further behind?
   reads: junior_gap
   fast: Hiring of young workers in exposed jobs falling well behind older workers.
   slow: The gap staying small, or closing.
+  label: gap between young and older workers in exposed jobs
 - id: growth
   question: Does output per person break away from its old growth rate?
   reads: gdp_pc_yoy
   fast: Growth in output per person well above its long-run pace.
   slow: Growth near its usual rate, year after year.
+  label: output per person, change on a year
 - id: robots
   question: Do robots leave the lab and do useful physical work at scale?
   fast: Robots doing everyday physical work outside factories, sold in large numbers.

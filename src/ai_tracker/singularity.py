@@ -6,6 +6,7 @@ things to watch, the four worlds (read through the outlook's scenario grid) and 
 
 from __future__ import annotations
 
+import re
 from datetime import date
 from pathlib import Path
 from typing import Any
@@ -21,7 +22,7 @@ SPEC = Path(__file__).resolve().parents[2] / "seed" / "singularity.yaml"
 # before 1950, 1950 to 2020 compressed, 2020 to 2050 open, 2050 to 2100 compressed, and a bin for later or never.
 PIECES = [(1950, 2020, 5.0, 30.0), (2020, 2050, 30.0, 80.0), (2050, 2100, 80.0, 94.0)]
 BEFORE, AFTER = 2.5, 97.5
-TICKS = [1950, 1970, 1990, 2010, 2020, 2025, 2030, 2035, 2040, 2045, 2050, 2075, 2100]
+TICKS = [1950, 1970, 1990, 2020, 2025, 2030, 2035, 2040, 2045, 2050, 2075, 2100]
 
 
 def load() -> dict[str, Any]:
@@ -55,6 +56,32 @@ def axis() -> dict[str, Any]:
     }
 
 
+TABLE_LANES = ["superhuman_coder", "automated_researcher", "agi", "superintelligence"]
+WORDS = ["happening", "slower", "too_early"]  # the words a ledger status can map to (board.WORDS["ledger"])
+GAP = 3.0  # percent of the axis two marks on one row must keep apart, so their glyphs never touch
+
+
+def _stack(marks: list[dict[str, Any]]) -> int:
+    """Give each placed mark the lowest row its whole stated range clears by GAP; return how many rows the lane needs."""
+    ends: list[float] = []
+    for m in sorted(marks, key=lambda m: (m.get("x_low") if m.get("x_low") is not None else m["x"], m["x"])):
+        start = m.get("x_low") if m.get("x_low") is not None else m["x"]
+        end = max(m["x"], m.get("x_high") or m["x"])
+        row = next((i for i, e in enumerate(ends) if start - e >= GAP), len(ends))
+        if row == len(ends):
+            ends.append(end)
+        else:
+            ends[row] = end
+        m["slot"] = row
+    return max(len(ends), 1)
+
+
+def _years(m: dict[str, Any]) -> str:
+    if m["low"] and m["high"]:
+        return f"{m['low']}–{m['high']}" + (f", most likely {m['mid']}" if m["mid"] else "")
+    return str(m["mid"]) if m["mid"] else f"by {m['high']}"
+
+
 def _reading(s: Any, sign: str, facts: dict[str, Any], today: date) -> dict[str, Any] | None:
     if sign in facts:
         return facts[sign]
@@ -67,7 +94,10 @@ def build(s: Any, today: date | None = None, outlook: dict[str, Any] | None = No
         return {}
     today = today or date.today()
     preds = {r["id"]: r for r in s._ledger_rows()}
-    facts = {**((outlook or {}).get("facts") or {}), **argument.facts(s, {"facts": spec.get("facts") or {}}, today)}
+    facts = {
+        **((outlook or {}).get("facts") or {}),
+        **argument.facts(s, {"facts": spec.get("facts") or {}}, today),
+    }
     lanes, flat = [], []
     for lane in spec["lanes"]:
         marks = []
@@ -77,16 +107,18 @@ def build(s: Any, today: date | None = None, outlook: dict[str, Any] | None = No
             end = _year(p.get("window_end"))
             mid = f.get("mid") or (_year(p["window_mid"]) if p.get("window_mid") else None)
             low, high = f.get("low"), f.get("high") or (int(end) if end else None)
-            at = mid or high  # None: a call with odds but no date, listed under its lane rather than placed
+            # None: a call with odds but no date, or one that doubts a date (a bet against it), listed rather than placed
+            at = None if f.get("doubts") or f.get("odds") else mid or high
             word = board.WORDS["ledger"].get(p.get("status"), "too_early")
             m = {
                 "id": p["id"],
                 "who": p["claimant"],
                 "line": p["claim_text"],
                 "ledger": p["ledger"],
+                "quoted": p["ledger"] != "singularity",  # the other ledgers keep the claimant's own words
                 "made": p["claim_date"],
                 "made_year": int(made),
-                "x_made": x(made),
+                "step": bool(f.get("step")),  # a step toward the milestone, not a date for it
                 "low": low,
                 "mid": mid,
                 "high": high,
@@ -96,45 +128,103 @@ def build(s: Any, today: date | None = None, outlook: dict[str, Any] | None = No
                 "status": p.get("status"),
                 "word": word,
                 "settles": p.get("window_end"),
+                "years": None,
                 "href": f"/predictions#{p['id']}",
             }
+            m["years"] = _years(m) if at is not None else None
+            if m["x_low"] is not None and m["x_high"] is not None:
+                m["span_width"] = round(m["x_high"] - m["x_low"], 2)
             marks.append(m)
             flat.append({**m, "lane": lane["id"]})
         marks.sort(key=lambda m: (m["x"] is None, m["x"] or 0, m["made"]))
+        placed = [m for m in marks if m["x"] is not None]
+        slots = _stack(placed)
         lanes.append(
             {
                 "id": lane["id"],
                 "label": lane["label"],
                 "definition": lane["definition"],
-                "forecasts": marks,
+                "forecasts": placed,
+                "undated": [m for m in marks if m["x"] is None],
+                "slots": slots,
                 "signposts": [
                     {"id": k, "reading": _reading(s, k, facts, today)} for k in lane.get("signposts") or []
                 ],
             }
         )
-    due = sorted((m for m in flat if m["settles"] and m["settles"] < today.isoformat()), key=lambda m: m["settles"])
+    due = sorted(
+        (m for m in flat if m["settles"] and m["settles"] < today.isoformat()), key=lambda m: m["settles"]
+    )
     latest: dict[tuple[str, str], dict[str, Any]] = {}
-    for m in flat:
-        k = (m["who"], m["lane"])
-        if k not in latest or m["made"] > latest[k]["made"]:
+    for m in (
+        flat
+    ):  # the brief's forecaster table: each forecaster's latest dated call on each milestone, since 2023
+        if m["step"] or m["x"] is None or m["made"] < "2023-01-01":
+            continue
+        k = (re.sub(r"\s*\(.*\)$", "", m["who"]), m["lane"])
+        if k not in latest or (m["made"], m["x"]) > (latest[k]["made"], latest[k]["x"]):
             latest[k] = m
+    short = {la["id"]: la.get("short") or la["label"] for la in spec["lanes"]}
+    cols = [c for c in TABLE_LANES if c in short]
+    table: dict[str, dict[str, Any]] = {}
+    for (who, lane_id), m in latest.items():
+        if lane_id in cols:
+            table.setdefault(who, {})[lane_id] = {
+                "text": _years(m),
+                "href": m["href"],
+                "word": m["word"],
+                "made": m["made"][:7],
+                "x": m["x"],
+            }
+    rows = sorted(table.items(), key=lambda kv: (kv[1].get("agi", {}).get("x", 1000), kv[0]))
     stops = sorted({*spec.get("stops", []), today.year})
     tallies = {
-        str(y): {w: sum(1 for m in flat if m["made_year"] <= y and m["word"] == w) for w in board.ORDER}
+        str(y): {w: sum(1 for m in flat if m["made_year"] <= y and m["word"] == w) for w in WORDS}
         for y in stops
     }
-    cells = {(c["progress"], c["rules"]): c for c in ((outlook or {}).get("scenarios") or {}).get("cells") or []}
+    cells = {
+        (c["progress"], c["rules"]): c for c in ((outlook or {}).get("scenarios") or {}).get("cells") or []
+    }
+    names = {
+        x["id"]: x.get("short") or x["who"]
+        for x in [*((outlook or {}).get("sources") or []), *spec.get("sources", [])]
+    }
     worlds = []
     for w in spec.get("worlds") or []:
         cs = [cells[(c["progress"], c["rules"])] for c in w["cells"] if (c["progress"], c["rules"]) in cells]
-        worlds.append({**w, "consistent": all(c["consistent"] for c in cs), "grid": w["cells"]})
+        worlds.append(
+            {
+                **w,
+                "consistent": all(c["consistent"] for c in cs),
+                "grid": w["cells"],
+                "argued_by": [names.get(h, h) for h in w.get("argued_by") or []],
+            }
+        )
+    fic_urls = {x["id"]: x["url"] for x in spec.get("sources") or []}
+    fiction = sorted(
+        (
+            f
+            | {
+                "x": x(f["set_in_year"]) if f.get("set_in_year") else None,
+                "url": fic_urls.get(f["source"]),
+                "anchor": "fic-" + f["source"],
+            }
+            for f in spec.get("fiction") or []
+        ),
+        key=lambda f: (f.get("set_in_year") or 10**4, f["title"]),
+    )
+    fic_placed = [f for f in fiction if f["x"] is not None]
+    fic_slots = _stack(fic_placed)
     return {
         "as_of": today.isoformat(),
         "intro": spec.get("intro"),
         "axis": axis() | {"today": x(_year(today))},
         "lanes": lanes,
         "due": due,
-        "latest": sorted(latest.values(), key=lambda m: (m["lane"], m["x"] is None, m["x"] or 0)),
+        "table": {
+            "cols": [{"id": c, "label": short[c]} for c in cols],
+            "rows": [{"who": w, "cells": c} for w, c in rows],
+        },
         "stops": stops,
         "tallies": tallies,
         "questions": [
@@ -142,12 +232,14 @@ def build(s: Any, today: date | None = None, outlook: dict[str, Any] | None = No
             for q in spec.get("questions") or []
         ],
         "worlds": worlds,
-        "fiction": sorted(
-            (f | {"x": x(f["set_in_year"]) if f.get("set_in_year") else None} for f in spec.get("fiction") or []),
-            key=lambda f: (f.get("set_in_year") or 10**4, f["title"]),
-        ),
-        "sources": spec.get("sources") or [],
-        "words": {w: board.load()["words"][w]["label"] for w in board.ORDER},
+        "fiction": fiction,
+        "fiction_slots": fic_slots,
+        "sources": [
+            x
+            for x in spec.get("sources") or []
+            if x["id"] not in {f["source"] for f in spec.get("fiction") or []}
+        ],
+        "words": {w: board.load()["words"][w]["label"] for w in WORDS},
     }
 
 
@@ -202,7 +294,11 @@ def problems(
         ]
     srcs = {x["id"] for x in spec.get("sources") or []} | {x["id"] for x in outlook_spec.get("sources") or []}
     for w in spec.get("worlds") or []:
-        errors += [f"singularity: world {w['id']} names unknown source {h}" for h in w.get("argued_by") or [] if h not in srcs]
+        errors += [
+            f"singularity: world {w['id']} names unknown source {h}"
+            for h in w.get("argued_by") or []
+            if h not in srcs
+        ]
     errors += [
         f"singularity: fiction {f['title']} names unknown source {f.get('source')}"
         for f in spec.get("fiction") or []

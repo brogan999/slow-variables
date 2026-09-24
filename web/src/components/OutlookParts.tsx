@@ -167,7 +167,8 @@ export function ScenarioGrid({ doc, rows }: { doc: OutlookDoc; rows: Record<stri
     );
   };
   return (
-    <Figure title="Which futures tonight's readings still allow" note="how far capability goes, down · how the rules settle, across · a cell is filled only where a named writer argues it">
+    <Figure id="scenarios" title="Which futures tonight's readings still allow" note="how far capability goes, down · how the rules settle, across · a cell is filled only where a named writer argues it"
+      foot={<p>The long view: every dated forecast of each milestone, from the 1960s to this year, sits on <Link href="/singularity" className="underline decoration-axis underline-offset-2 hover:decoration-ink">one timeline</Link>, where four worlds for 2036 map onto these cells.</p>}>
       <div className="hidden md:block overflow-x-auto">
         <table className="data w-full">
           <thead><tr><th scope="col">Progress</th>{s.rules.map((r) => <th key={r.id} scope="col">{r.label}</th>)}</tr></thead>

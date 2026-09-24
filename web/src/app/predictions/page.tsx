@@ -139,7 +139,7 @@ export default function PredictionsPage() {
         );
         return ours ? (
           <details key={ledger} id="singularity-ledger" className="group">
-            <summary className="cursor-pointer">{head} <span className="text-sm text-ink-2">— forecasts of when AI reaches each milestone, from the 1960s to this year; open to read them all</span></summary>
+            <summary className="cursor-pointer">{head} <span className="text-sm text-ink-2">— every forecast placed on <Link href="/singularity" className="underline decoration-grid underline-offset-4">the singularity timeline</Link>; open to read them all</span></summary>
             <div className="mt-3">{body}</div>
           </details>
         ) : (
