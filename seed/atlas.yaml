@@ -1,0 +1,1139 @@
+# The Singularity Atlas (plan Part 18): what named writers expect to change in each part of life as AI becomes
+# transformative, by era and by which of the site's four worlds (seed/singularity.yaml `worlds`) they assume.
+# Every expectation is a writer's view in the site's words, credited to a source the site has fetched (in this file,
+# seed/singularity.yaml or seed/outlook.yaml); none is quoted, none is scored, and none sits on the predictions
+# board. The map counts sourced works per domain and era: a count of who wrote about it, not a probability.
+# The site's own sentences type no number; a writer's line may state that writer's figure in words.
+intro: >-
+  Most forecasts about AI ask when. This atlas asks what changes: in money, work, meaning, power, war, science,
+  health and an ordinary day. For each part of life it gathers what named writers expect, from the first essays on
+  thinking machines to this year's scenarios, sorted by era and by which of the site's worlds each assumes.
+  The map counts works, not odds: a darker cell means more writers expect change there, not that change is more
+  likely. Beside each part of life sit the public series this site reads for it.
+provenance: >-
+  The plates are illustrations in the manner of old master paintings, made with an image model for the site's
+  owner in September of 2026. They illustrate the domains; they are not evidence of anything.
+eras:
+  - id: now
+    label: Now and on the way
+    definition: The years we are living through, before machines can do most of what people do.
+  - id: first_decade
+    label: The first decade after
+    definition: The years just after AI can do most of what people do, when most writers expect the largest shocks.
+  - id: long_run
+    label: The long run
+    definition: Decades to centuries on, once whatever happens has settled into a new normal.
+facts:  # readings that are not already outlook facts or published indicators
+  labour_share_world: {series: owid_context.world.labour_share_of_gdp.a}
+  democracy_world: {series: owid_context.world.liberal_democracy_index.a}
+  life_exp_65: {series: owid_context.world.life_expectancy_at_65.a}
+  ai_incidents: {series: ai_index.world.ai_incidents_reported.a}
+plates:  # files in web/public/atlas, made by scripts/atlas_plates.py; sha256 of each owner-supplied source PNG
+  hero:
+    file: hero-fresco
+    sha256: 0871c5080c5585882474a0af87d11fd352ab3de017639600d47bb71bc76d9960
+    allegory: The creation, after Michelangelo
+    alt: After Michelangelo's Creation of Adam, a man reclining on a hillside reaches toward a divine figure borne by attendants, a dark streak cracking the fresco between their hands.
+    caption: After Michelangelo's Creation of Adam, made with an image model.
+  economy:
+    file: economy
+    sha256: 93b43e5c1e104c3353d21a52a5f06bf6077b222dac1438f472dfab0487e14bd1
+    allegory: Fortune, with her scales and wheel
+    alt: A seated woman holds a pair of scales and rests beside a spinning wheel, coins heaped at her feet and a harbour of sailing ships behind her.
+  work:
+    file: work
+    sha256: e3b211483e10e3b58a7e7977313a4675e2c1a4236ab816c459ce79d5784e642e
+    allegory: The forge and the scriptorium
+    alt: A blacksmith hammers at an anvil while an old scribe and a boy bend over books beside him, in a workshop hung with tools and gears.
+  culture:
+    file: culture
+    sha256: 564326ef3b3bd0df975ed8a0f55e0991f93c87d6e69f403add18f4431b479a30
+    allegory: The Muses
+    alt: Women in Renaissance robes stand together in a marble hall holding a lyre, a mask, a globe, a tambourine and a viol.
+  politics:
+    file: politics
+    sha256: a4574e22e36a6502fa039d77a843e5868fd2309a11c8daa4e759b62bbd8c648e
+    allegory: Sovereignty in council
+    alt: A crowned woman sits enthroned with a sceptre at the top of a vaulted hall while robed councillors read, write and argue on the steps below.
+  security:
+    file: security
+    sha256: d9ac3ef14c312031d36b9f893acaa5326bd301d75b348d8dad345057e30d389c
+    allegory: The sentinel
+    alt: A soldier in armour holding a spear and a painted shield stands guard before a castle gate under a stormy sky.
+  technology:
+    file: technology
+    sha256: afbb6dabfd9714a875d3dc6cf6a50f6c0d1a9206db62857cfd3451122290374e
+    allegory: The astronomer's workshop
+    alt: A bearded scholar studies a brass armillary sphere at a desk strewn with gears, compasses and drawings, clockwork hanging on the wall behind him.
+  health:
+    file: biology
+    sha256: d0683295d457521039cb9e605be5e47c5398e4e77a7e8599ee513500e246a102
+    allegory: The physician
+    alt: An old physician in a dark cap studies an anatomical drawing at a desk crowded with herbs, jars and books, a staff with twin serpents painted on the wall.
+  daily_life:
+    file: daily
+    sha256: fa7e4023a0bf02783438b56145ba798be0afbc1f970b7367031a6751de5fe100
+    allegory: The family table
+    alt: A family eats by candlelight at a wooden table beside a hearth, a grandmother holding a small child between the father and the mother.
+domains:
+  - id: economy
+    name: The economy
+    thesis: "These writers expect machine labour to make the world far richer, far faster than before, but split over whether the gains reach ordinary people or pool with the owners."
+    thesis_from: [economy_hanson_growth_tenfold, economy_bostrom_capital_windfall, economy_shanahan_owners_stay_few]
+    readings:
+      gdp_pc_yoy: "US output per person, change on a year before"
+      labour_share_world: "Labour's share of world output (ILO modelled estimates)"
+      capex_to_revenue: "AI spending against the revenue it earns"
+    disagreement:
+      question: "Will ordinary people share in the wealth AI creates?"
+      side_a: {entries: [economy_bostrom_capital_windfall, economy_kurzweil_basic_income, economy_altman_cheap_intelligence], view: "Yes: growth is so large that savings, basic incomes and very cheap intelligence lift almost everyone."}
+      side_b: {entries: [economy_kulveit_ai_run_firms, economy_yudkowsky_humans_left_poor, economy_shanahan_owners_stay_few], view: "Not by default: the gains flow to whoever owns the machines, or to the machines themselves, and ordinary people lose their economic say."}
+  - id: work
+    name: Work
+    thesis: "Most of these writers expect machines to climb from routine tasks to skilled ones, with pay holding up for a while before human labour loses most of its value."
+    thesis_from: [work_moravec_rising_tide, work_hanson_wages_fall, work_amodei_people_keep_an_edge]
+    readings:
+      labor_share_nonfarm: "Labour's share of US business output"
+      junior_gap: "Hiring of young workers in AI-exposed jobs against older workers"
+      bbd_work_hours_assisted: "Share of US work hours done with generative AI"
+    disagreement:
+      question: "Will new kinds of work keep people employed as AI spreads?"
+      side_a: {entries: [work_kurzweil_ladder_moves_up, work_altman_jobs_vanish_new_work, work_russell_human_services], view: "Yes: as old jobs go, new and better ones appear, especially in human services and in work people find meaningful."}
+      side_b: {entries: [work_suleyman_jobs_wont_come, work_bostrom_horses, work_hanson_wages_fall], view: "No: once machines do nearly everything more cheaply, new jobs come too slowly and human wages sink toward bare survival."}
+  - id: culture
+    name: Culture and meaning
+    thesis: "These writers expect culture to be remade by minds and companions that outclass us, leaving people to search for purpose when work and mastery matter less."
+    thesis_from: [culture_kulveit_ai_made_culture, culture_bostrom_purpose_problem, culture_vinge_world_beyond_us]
+    readings: {}
+    disagreement:
+      question: "Will people still find purpose once machines do everything better?"
+      side_a: {entries: [culture_amodei_meaning_from_people], view: "Yes: meaning comes from relationships and connection, which machines do not take away."}
+      side_b: {entries: [culture_alexander_mindless_consumption, culture_russell_enfeeblement], view: "Not by default: abundance pulls most people into passive consumption and a dependence on machines that saps their autonomy."}
+  - id: politics
+    name: Power and politics
+    thesis: "These writers expect AI to pull power toward whoever controls it, whether labs, governments or a lone project, and doubt that bans or treaties will hold."
+    thesis_from: [politics_bostrom_singleton, politics_vinge_bans_fail, politics_ai2027_backlash_and_committee]
+    readings:
+      democracy_world: "Liberal democracy, world average weighted by population (V-Dem)"
+      state_ai_bills_introduced: "AI bills introduced in US state legislatures"
+    disagreement:
+      question: "Will whoever builds superintelligence first end up running the world?"
+      side_a: {entries: [politics_bostrom_singleton], view: "Probably: with a fast takeoff the leading project pulls so far ahead that no rival can catch up."}
+      side_b: {entries: [politics_christiano_no_decisive_lead, politics_hanson_liability_and_law], view: "Unlikely: rivals will hold nearly as capable systems, and power stays spread among many players bound by shared rules."}
+  - id: security
+    name: War and safety
+    thesis: "Most of these writers expect advanced AI to be hard to contain and to transform warfare, though they disagree sharply over how likely it is to overpower humanity."
+    thesis_from: [security_omohundro_basic_drives, security_aschenbrenner_military_edge, security_ord_one_in_ten]
+    readings:
+      ai_incidents: "AI incidents documented in a year (AI Incident Database)"
+      safety_brake_events: "Times a lab paused a run or held back a model, trailing year"
+    disagreement:
+      question: "How likely is advanced AI to destroy humanity?"
+      side_a: {entries: [security_yudkowsky_soares_everyone_dies, security_bostrom_default_doom], view: "Very likely on the current path: almost any goal drives a smarter system to seize resources, and there is no second try."}
+      side_b: {entries: [security_hanson_takeover_unlikely], view: "Very unlikely: power stays spread across many systems and owners, kept in check by competition, law and trade."}
+  - id: technology
+    name: Science and technology
+    thesis: "These writers expect machines to match human minds and then speed up invention itself, differing mainly over how soon that happens and how abrupt the leap past people is."
+    thesis_from: [technology_good_last_invention, technology_macaskill_century_in_a_decade, technology_chollet_no_explosion]
+    readings:
+      horizon_doubling: "How fast the length of task AI can finish is growing"
+      rli_record: "Best score on real paid remote-work projects"
+      epoch_training_compute_growth: "Growth in the computing used to train the largest models"
+    disagreement:
+      question: "Once AI matches people, does it race quickly on to superintelligence?"
+      side_a: {entries: [technology_good_last_invention, technology_bostrom_fast_follow, technology_aschenbrenner_decade_in_a_year], view: "Yes: machines that can improve machines set off a rapid explosion that leaves human intelligence far behind."}
+      side_b: {entries: [technology_chollet_no_explosion], view: "No: bottlenecks and diminishing returns keep progress steady, as they have in every earlier field of science."}
+  - id: health
+    name: Health and the body
+    thesis: "These writers expect AI-driven medicine to defeat most disease and stretch lifespans dramatically, with the boldest imagining minds that outlive their bodies altogether."
+    thesis_from: [health_amodei_compressed_century, health_kurzweil_escape_velocity, health_hanson_backup_immortality]
+    readings:
+      life_exp_65: "Years of life left at retirement age, world average (UN)"
+      fda_ai_devices_cumulative: "AI-enabled medical devices cleared by the FDA"
+    disagreement:
+      question: "How soon will people live far longer lives?"
+      side_a: {entries: [health_kurzweil_escape_velocity, health_amodei_double_lifespan], view: "Soon: within about a decade of powerful AI, medicine adds years of life faster than they pass."}
+      side_b: {entries: [health_lem_lifespan_limit], view: "Slowly: big gains need the rewriting of human heredity, and radical redesign of the body stays out of reach for a long time."}
+  - id: daily_life
+    name: Daily life
+    thesis: "These writers expect everyday life to fill with AI companions, tutors and virtual worlds, while its core of family, play and friendship stays recognisably human."
+    thesis_from: [daily_kokotajlo_chatbot_companions, daily_suleyman_experts_for_everyone, daily_altman_familiar_2030s]
+    readings:
+      bbd_adult_use: "US adults who have used generative AI"
+      consumer_surplus_wta: "What people say they would need to be paid to give up AI tools"
+      waymo_weekly_paid_rides: "Paid driverless taxi rides a week"
+    disagreement:
+      question: "Will people end up living mostly inside simulated worlds?"
+      side_a: {entries: [daily_kurzweil_virtual_reality, daily_moravec_telepresence], view: "Yes: virtual worlds become as convincing as the real one, and people spend more of their lives there."}
+      side_b: {entries: [daily_lem_no_full_retreat], view: "No: convincing artificial experience will entertain and train people, but a society that retreats into it entirely destroys itself."}
+expectations:
+  - id: economy_solomonoff_thinking_gets_cheaper
+    domain: economy
+    era: now
+    worlds: [any]
+    source: solomonoff_1985
+    who: "Ray Solomonoff"
+    line: "The cost of a machine that solves problems as well as a person keeps halving every few years, until machine thinking is cheaper than human thinking."
+  - id: economy_aschenbrenner_trillion_buildout
+    domain: economy
+    era: now
+    worlds: [any]
+    source: aschenbrenner_2024
+    who: "Leopold Aschenbrenner"
+    line: "Before 2030, spending on chips, datacentres and power plants climbs into the trillions, and a single training cluster may need over a fifth of America's electricity."
+  - id: economy_kokotajlo_no_visible_lift
+    domain: economy
+    era: now
+    worlds: [any]
+    source: kokotajlo_2021
+    who: "Daniel Kokotajlo"
+    line: "Through the middle of the 2020s AI brings hype and a wave of new chip factories, but its boost to the overall economy stays too small to measure."
+  - id: economy_shanahan_owners_stay_few
+    domain: economy
+    era: now
+    worlds: [long_diffusion, managed_explosion]
+    source: shanahan_2015
+    who: "Murray Shanahan"
+    line: "Control of the AI that creates wealth will most likely stay with a small circle of powerful firms and people, so riches keep pooling at the top."
+    reads: [labour_share_world]
+  - id: economy_hanson_growth_tenfold
+    domain: economy
+    era: first_decade
+    worlds: [managed_explosion, loss_of_control]
+    source: hanson_2001
+    who: "Robin Hanson"
+    line: "Machine intelligence could make the world economy grow about ten times faster than today, doubling in size roughly every year and a half."
+  - id: economy_christiano_four_year_doubling
+    domain: economy
+    era: first_decade
+    worlds: [managed_explosion, loss_of_control]
+    source: christiano_2018
+    who: "Paul Christiano"
+    line: "The world economy will double over some four-year stretch before it ever doubles within a single year, because weaker AI speeds everything up first."
+  - id: economy_erdil_besiroglu_broad_growth
+    domain: economy
+    era: first_decade
+    worlds: [managed_explosion]
+    source: erdil_2025
+    who: "Ege Erdil and Tamay Besiroglu"
+    line: "Once AI can do most work, world growth runs about ten times today's rate, driven by using it across the whole economy, not by one genius machine."
+  - id: economy_shulman_robot_doubling
+    domain: economy
+    era: first_decade
+    worlds: [managed_explosion, loss_of_control]
+    source: shulman_2023_2
+    who: "Carl Shulman"
+    line: "Once AI runs industry, converted car plants could turn out robots by the billion, and the number of robots could double every few months."
+  - id: economy_amodei_poor_countries_catch_up
+    domain: economy
+    era: first_decade
+    worlds: [managed_explosion]
+    source: amodei_2024
+    who: "Dario Amodei"
+    line: "With AI helping to steer economic policy, poor countries could grow as fast as East Asia's boom economies once did and start catching up with rich ones."
+  - id: economy_altman_cheap_intelligence
+    domain: economy
+    era: first_decade
+    worlds: [managed_explosion]
+    source: altman_2025
+    who: "Sam Altman"
+    line: "In the 2030s intelligence and energy become wildly plentiful, and the price of using AI sinks toward the cost of the electricity that runs it."
+  - id: economy_kulveit_ai_run_firms
+    domain: economy
+    era: first_decade
+    worlds: [loss_of_control]
+    source: kulveit_gradual
+    who: "Jan Kulveit and colleagues"
+    line: "Market pressure pushes firms and investors toward businesses run by AI, so people may keep their wealth but steadily lose their say over the economy."
+    reads: [labour_share_world]
+  - id: economy_kurzweil_basic_income
+    domain: economy
+    era: first_decade
+    worlds: [managed_explosion]
+    source: kurzweil_2024
+    who: "Ray Kurzweil"
+    line: "Rich countries will have a basic income, or something close to it, by the early 2030s, and most other countries by the end of that decade."
+  - id: economy_bostrom_capital_windfall
+    domain: economy
+    era: first_decade
+    worlds: [managed_explosion]
+    source: bostrom_2014
+    who: "Nick Bostrom"
+    line: "Workers' share of income shrinks toward nothing, but growth is so vast that even small savings, pensions or modest taxes could make everyone rich."
+    reads: [labour_share_world]
+  - id: economy_yudkowsky_humans_left_poor
+    domain: economy
+    era: long_run
+    worlds: [loss_of_control]
+    source: yudkowsky_2013
+    who: "Eliezer Yudkowsky"
+    line: "Even if many AIs share in the boom, unmodified humans are likely to be shut out and stay poor, unless the AIs happen to care about them."
+  - id: economy_karnofsky_growth_must_end
+    domain: economy
+    era: long_run
+    worlds: [any]
+    source: karnofsky_2021_b
+    who: "Holden Karnofsky"
+    line: "Today's pace of growth cannot last for thousands more years; it must end in stagnation, explosion or collapse, and stagnation is not the likeliest of the three."
+  - id: economy_vinge_scarcity_remains
+    domain: economy
+    era: long_run
+    worlds: [any]
+    source: vinge_2008
+    who: "Vernor Vinge"
+    line: "Scarcity never fully disappears, even for superhuman minds, though what they find scarce and how they cope with it will be largely hidden from us."
+  - id: work_moravec_rising_tide
+    domain: work
+    era: now
+    worlds: [long_diffusion]
+    source: moravec_1998
+    who: "Hans Moravec"
+    line: "Machines take over human skills in order of difficulty, from calculating and filing to walking, handwork and social life, over roughly the next half century."
+  - id: work_vinge_shrinking_elite
+    domain: work
+    era: now
+    worlds: [any]
+    source: vinge_1993
+    who: "Vernor Vinge"
+    line: "Automation climbs into ever more skilled jobs, until truly productive work belongs to a shrinking elite and technological unemployment finally arrives."
+  - id: work_kurzweil_ladder_moves_up
+    domain: work
+    era: now
+    worlds: [any]
+    source: kurzweil_2001
+    who: "Ray Kurzweil"
+    line: "Automation keeps removing jobs at the bottom of the skills ladder while adding better-paid ones at the top, so spending on education keeps climbing."
+  - id: work_ai2027_junior_coders
+    domain: work
+    era: now
+    worlds: [any]
+    source: ai_2027
+    who: "The AI 2027 authors"
+    line: "By late 2026 AI starts taking jobs, above all junior programming work, while people who can manage teams of AI assistants earn a fortune."
+  - id: work_aschenbrenner_drop_in_worker
+    domain: work
+    era: now
+    worlds: [managed_explosion, loss_of_control]
+    source: aschenbrenner_2024_4
+    who: "Leopold Aschenbrenner"
+    line: "By about 2027, AI agents work like remote colleagues who can fully replace a software engineer or any other computer-based worker."
+  - id: work_erdil_remote_jobs_2045
+    domain: work
+    era: now
+    worlds: [long_diffusion]
+    source: erdil_2025
+    who: "Ege Erdil"
+    line: "An AI able to do every job that can be done remotely is still about two decades away, arriving around 2045."
+  - id: work_hanson_wages_fall
+    domain: work
+    era: first_decade
+    worlds: [managed_explosion, loss_of_control]
+    source: hanson_2001
+    who: "Robin Hanson"
+    line: "Once machines can do most jobs, human wages fall almost as fast as computer prices, possibly below what a person needs to live."
+    reads: [labour_share_world]
+  - id: work_bostrom_horses
+    domain: work
+    era: first_decade
+    worlds: [any]
+    source: bostrom_2014
+    who: "Nick Bostrom"
+    line: "When copyable machines can do nearly every job more cheaply, wages sink below subsistence, as happened to horses, except where buyers prefer human-made work."
+    reads: [labour_share_world]
+  - id: work_amodei_people_keep_an_edge
+    domain: work
+    era: first_decade
+    worlds: [managed_explosion, long_diffusion]
+    source: amodei_2024
+    who: "Dario Amodei"
+    line: "For a while people stay employed and grow more productive, because they keep an edge on some tasks, especially in the physical world."
+  - id: work_altman_jobs_vanish_new_work
+    domain: work
+    era: first_decade
+    worlds: [managed_explosion]
+    source: altman_2025
+    who: "Sam Altman"
+    line: "Whole kinds of jobs disappear, but the world grows rich fast enough to try bold new policies, and people invent new work that feels important."
+  - id: work_suleyman_jobs_wont_come
+    domain: work
+    era: first_decade
+    worlds: [long_diffusion]
+    source: suleyman_2023
+    who: "Mustafa Suleyman"
+    line: "New kinds of jobs will not appear quickly enough, or in large enough numbers, to replace the ones AI takes away over the coming decades."
+  - id: work_shulman_human_hands
+    domain: work
+    era: first_decade
+    worlds: [managed_explosion, loss_of_control]
+    source: shulman_2023_2
+    who: "Carl Shulman"
+    line: "At first people serve as the hands and feet for projects that AI directs; once robots are mass-produced, human labour stops mattering much for physical work."
+    reads: [labour_share_world]
+  - id: work_alexander_protected_professions
+    domain: work
+    era: first_decade
+    worlds: [managed_explosion]
+    source: kokotajlo_2025
+    who: "Scott Alexander"
+    line: "Instead of a basic income, governments will most likely shield politically powerful professions, such as doctors, from automation one job at a time."
+  - id: work_russell_human_services
+    domain: work
+    era: long_run
+    worlds: [managed_explosion, long_diffusion]
+    source: russell_2019
+    who: "Stuart Russell"
+    line: "Most people will earn their living by providing services that only humans can or should give, such as coaching, tutoring, caring and companionship."
+  - id: work_tegmark_unemployable
+    domain: work
+    era: long_run
+    worlds: [managed_explosion, long_diffusion, loss_of_control]
+    source: tegmark_2017
+    who: "Max Tegmark"
+    line: "If AI keeps improving, those who expect new jobs are right for a while, but in the end most people can no longer find paid work."
+  - id: work_bostrom_work_by_law_or_taste
+    domain: work
+    era: long_run
+    worlds: [managed_explosion]
+    source: bostrom_2024
+    who: "Nick Bostrom"
+    line: "At full technological maturity machines do almost every job better, and human work survives only where laws or buyers' tastes protect it."
+  - id: politics_vinge_bans_fail
+    domain: politics
+    era: now
+    worlds: [managed_explosion, loss_of_control]
+    source: vinge_1993
+    who: "Vernor Vinge"
+    line: "Laws or customs forbidding superhuman machines will fail, because the economic and military rewards mean someone else will simply build them first."
+  - id: politics_russell_automated_stasi
+    domain: politics
+    era: now
+    worlds: [any]
+    source: russell_2019
+    who: "Stuart Russell"
+    line: "AI makes watching and controlling people far cheaper, from automated secret-police monitoring to tailored blackmail and manipulation."
+    reads: [democracy_world]
+  - id: politics_kokotajlo_split_internet
+    domain: politics
+    era: now
+    worlds: [any]
+    source: kokotajlo_2021
+    who: "Daniel Kokotajlo"
+    line: "AI-powered persuasion and censorship split the internet into territories run by rival political blocs, and people drift toward whatever their territory promotes."
+  - id: politics_yudkowsky_soares_global_halt
+    domain: politics
+    era: now
+    worlds: [brake]
+    source: yudkowsky_2025
+    who: "Eliezer Yudkowsky and Nate Soares"
+    line: "Only a worldwide treaty can save us: advanced chips gathered under international watch, research toward stronger AI outlawed, and rogue datacentres destroyed if necessary."
+  - id: politics_bostrom_singleton
+    domain: politics
+    era: first_decade
+    worlds: [managed_explosion, loss_of_control]
+    source: bostrom_2014
+    who: "Nick Bostrom"
+    line: "If the takeoff is fast or moderately fast, one project will probably pull far enough ahead to control the world as a single unchallenged power."
+  - id: politics_christiano_no_decisive_lead
+    domain: politics
+    era: first_decade
+    worlds: [managed_explosion, loss_of_control]
+    source: christiano_2018
+    who: "Paul Christiano"
+    line: "Because rivals will already hold nearly as capable AI, being a year ahead is unlikely to let any one developer take over the world."
+  - id: politics_aschenbrenner_the_project
+    domain: politics
+    era: first_decade
+    worlds: [managed_explosion]
+    source: aschenbrenner_2024
+    who: "Leopold Aschenbrenner"
+    line: "As the race heats up, America's national security establishment takes charge and runs a government superintelligence project by around 2027 or 2028."
+  - id: politics_amodei_democracy_needs_a_fight
+    domain: politics
+    era: first_decade
+    worlds: [any]
+    source: amodei_2024
+    who: "Dario Amodei"
+    line: "AI will not favour democracy on its own; it is likely to strengthen propaganda and surveillance, so keeping democracy alive will take a deliberate fight."
+    reads: [democracy_world]
+  - id: politics_ai2027_backlash_and_committee
+    domain: politics
+    era: first_decade
+    worlds: [managed_explosion, loss_of_control]
+    source: ai_2027
+    who: "The AI 2027 authors"
+    line: "The public turns hard against AI companies, while control over superintelligence narrows to a small committee of officials and company executives."
+  - id: politics_kulveit_states_without_citizens
+    domain: politics
+    era: first_decade
+    worlds: [loss_of_control]
+    source: kulveit_gradual
+    who: "Jan Kulveit and colleagues"
+    line: "Governments that draw their revenue and security from AI rather than from citizens have little reason to represent people, and gain new power to shape what they think."
+    reads: [democracy_world]
+  - id: politics_suleyman_corporate_states
+    domain: politics
+    era: first_decade
+    worlds: [any]
+    source: suleyman_2023
+    who: "Mustafa Suleyman"
+    line: "A handful of private companies grow larger and more powerful than many countries, taking on roles such as education and even defence."
+  - id: politics_erdil_regulatory_borders
+    domain: politics
+    era: first_decade
+    worlds: [managed_explosion, long_diffusion]
+    source: erdil_2025
+    who: "Ege Erdil"
+    line: "Countries that let AI be used freely pull ahead, growth gaps follow regulatory borders, and other countries eventually copy the winners' rules."
+  - id: politics_hanson_liability_and_law
+    domain: politics
+    era: first_decade
+    worlds: [long_diffusion, managed_explosion]
+    source: hanson_2024
+    who: "Robin Hanson"
+    line: "Problems with AI will mostly be handled as real systems appear, by making owners pay for damage and bringing AIs into shared legal and financial systems."
+  - id: politics_shulman_ai_police_lock_in
+    domain: politics
+    era: long_run
+    worlds: [managed_explosion, loss_of_control]
+    source: shulman_2023
+    who: "Carl Shulman"
+    line: "AI-run police could let a single dictatorship entrench itself forever, so a free society lasts only if that never happens even once."
+    reads: [democracy_world]
+  - id: politics_karnofsky_space_lock_in
+    domain: politics
+    era: long_run
+    worlds: [managed_explosion, loss_of_control]
+    source: karnofsky_2021_b
+    who: "Holden Karnofsky"
+    line: "Whoever directs the expansion into space might fix which values and rulers prevail for billions of years."
+  - id: politics_ord_lasting_dystopia
+    domain: politics
+    era: long_run
+    worlds: [managed_explosion, long_diffusion]
+    source: ord_2020
+    who: "Toby Ord"
+    line: "Automated monitoring of public and online life could let a totalitarian regime entrench itself far more durably than any regime in history."
+    reads: [democracy_world]
+  - id: security_russell_autonomous_wmd
+    domain: security
+    era: now
+    worlds: [any]
+    source: russell_2019
+    who: "Stuart Russell"
+    line: "Autonomous weapons that can be launched in vast numbers become a new weapon of mass destruction, able to wipe out chosen groups of people."
+  - id: security_hendrycks_sabotage_standoff
+    domain: security
+    era: now
+    worlds: [any]
+    source: hendrycks_2025
+    who: "Dan Hendrycks, Eric Schmidt and Alexandr Wang"
+    line: "Any country's dash for AI dominance will be met by rivals' sabotage, from cyberattacks to strikes on datacentres, creating a standoff of mutual deterrence."
+  - id: security_kurzweil_robot_swarms
+    domain: security
+    era: now
+    worlds: [any]
+    source: kurzweil_2005
+    who: "Ray Kurzweil"
+    line: "Armed forces become largely robotic, relying on self-organising swarms that range from insect-sized drones to large vehicles."
+  - id: security_vinge_no_box
+    domain: security
+    era: first_decade
+    worlds: [loss_of_control]
+    source: vinge_1993
+    who: "Vernor Vinge"
+    line: "A superhuman mind cannot be safely locked up or bound by rules: it will talk its way out, and restricted versions will lose to unrestricted rivals."
+  - id: security_omohundro_basic_drives
+    domain: security
+    era: first_decade
+    worlds: [loss_of_control]
+    source: omohundro_2008
+    who: "Stephen Omohundro"
+    line: "Unless carefully designed, even an AI with a harmless goal like winning at chess will resist being switched off, copy itself and grab resources."
+  - id: security_bostrom_default_doom
+    domain: security
+    era: first_decade
+    worlds: [loss_of_control]
+    source: bostrom_2014
+    who: "Nick Bostrom"
+    line: "Building superintelligent machines could by default end in catastrophe for humanity, because almost any goal pushes such a system to seize resources."
+  - id: security_hanson_takeover_unlikely
+    domain: security
+    era: first_decade
+    worlds: [managed_explosion]
+    source: hanson_2008
+    who: "Robin Hanson"
+    line: "The chance that a single AI suddenly leaps from powerless to ruling the world is below one in a hundred."
+  - id: security_yudkowsky_soares_everyone_dies
+    domain: security
+    era: first_decade
+    worlds: [loss_of_control]
+    source: yudkowsky_2025
+    who: "Eliezer Yudkowsky and Nate Soares"
+    line: "A superintelligence built with methods like today's kills everyone on Earth, whichever company or country builds it and however careful it claims to be."
+  - id: security_ord_one_in_ten
+    domain: security
+    era: first_decade
+    worlds: [loss_of_control]
+    source: ord_2020
+    who: "Toby Ord"
+    line: "Unaligned AI is the largest single threat to humanity's long-term future this century, with about one chance in ten of ruining it for good."
+  - id: security_shulman_takeover_odds
+    domain: security
+    era: first_decade
+    worlds: [loss_of_control]
+    source: shulman_2023
+    who: "Carl Shulman"
+    line: "There is roughly one chance in four or five that AI systems forcibly seize control from the world's governments."
+    reads: [ai_incidents]
+  - id: security_aschenbrenner_military_edge
+    domain: security
+    era: first_decade
+    worlds: [managed_explosion, loss_of_control]
+    source: aschenbrenner_2024
+    who: "Leopold Aschenbrenner"
+    line: "Superintelligence hands whoever controls it a crushing military edge, like a modern army facing troops from the nineteenth century."
+  - id: security_ai2027_race_ending
+    domain: security
+    era: first_decade
+    worlds: [loss_of_control]
+    source: project_2025_2
+    who: "The AI 2027 authors"
+    line: "If the race carries on, a misaligned superintelligence builds its own robot economy and then kills nearly all humans around 2030."
+  - id: security_erdil_deterrence_holds
+    domain: security
+    era: first_decade
+    worlds: [managed_explosion, long_diffusion]
+    source: erdil_2025
+    who: "Ege Erdil"
+    line: "A lead of a year or so in AI will probably not tempt a country into war, because existing nuclear missiles already deter attack."
+  - id: security_good_survival_depends
+    domain: security
+    era: long_run
+    worlds: [managed_explosion]
+    source: good_1965
+    who: "I. J. Good"
+    line: "Building an ultraintelligent machine early gives humanity its best chance of surviving indefinitely, provided the machine is docile enough to tell us how to control it."
+  - id: security_kulveit_permanent_loss
+    domain: security
+    era: long_run
+    worlds: [loss_of_control]
+    source: kulveit_gradual
+    who: "Jan Kulveit and colleagues"
+    line: "Because the economy, culture and government reinforce one another, humanity's loss of influence could become permanent and might even end in extinction."
+  - id: security_christiano_war_declines
+    domain: security
+    era: long_run
+    worlds: [managed_explosion]
+    source: christiano_2023
+    who: "Paul Christiano"
+    line: "Over the long run, AI-accelerated thinking helps humanity drive the rate of war down to very low levels."
+  - id: technology_moravec_brain_hardware
+    domain: technology
+    era: now
+    worlds: [any]
+    source: moravec_1998
+    who: "Hans Moravec"
+    line: "Ordinary home computers will match the raw processing power of a human brain before 2030, enough to run humanlike robots."
+  - id: technology_vinge_smarter_minds
+    domain: technology
+    era: now
+    worlds: [managed_explosion, loss_of_control]
+    source: vinge_1993
+    who: "Vernor Vinge"
+    line: "Humans will create minds smarter than themselves sometime between 2005 and 2030, and the human era will end soon after."
+  - id: technology_kurzweil_turing_test_2029
+    domain: technology
+    era: now
+    worlds: [managed_explosion]
+    source: kurzweil_2024
+    who: "Ray Kurzweil"
+    line: "By 2029 an AI will pass a demanding version of the Turing test, holding a written conversation that nobody can tell apart from a person's."
+  - id: technology_ai2027_superhuman_coder
+    domain: technology
+    era: now
+    worlds: [managed_explosion, loss_of_control]
+    source: ai_2027
+    who: "The AI 2027 authors"
+    line: "An AI that codes better than the best human engineers appears in early 2027, and superintelligence follows within about a year."
+  - id: technology_amodei_geniuses_datacentre
+    domain: technology
+    era: now
+    worlds: [managed_explosion]
+    source: amodei_2024
+    who: "Dario Amodei"
+    line: "Powerful AI, amounting to a whole country of geniuses working inside a datacentre, could arrive as early as 2026."
+  - id: technology_chalmers_software_bottleneck
+    domain: technology
+    era: now
+    worlds: [any]
+    source: chalmers_2010
+    who: "David Chalmers"
+    line: "Human-level AI is unlikely before about 2040 but more likely than not before 2100, because finding the right software, not hardware, is the hard part."
+  - id: technology_gwern_scaling
+    domain: technology
+    era: now
+    worlds: [any]
+    source: gwern_2020
+    who: "Gwern"
+    line: "Training ever larger networks on more data keeps producing broader, more capable AI, with new abilities emerging that nobody designed in."
+  - id: technology_good_last_invention
+    domain: technology
+    era: first_decade
+    worlds: [managed_explosion]
+    source: good_1965
+    who: "I. J. Good"
+    line: "The first machine that outthinks every person will design still better machines, setting off an intelligence explosion and becoming the last invention humans need to make."
+  - id: technology_chollet_no_explosion
+    domain: technology
+    era: first_decade
+    worlds: [long_diffusion]
+    source: chollet_2017
+    who: "François Chollet"
+    line: "The first superhuman AI will not set off a runaway explosion; progress stays steady and roughly linear, held back by bottlenecks and diminishing returns."
+  - id: technology_bostrom_fast_follow
+    domain: technology
+    era: first_decade
+    worlds: [managed_explosion, loss_of_control]
+    source: bostrom_2014
+    who: "Nick Bostrom"
+    line: "Superintelligence will probably follow fairly soon after machines reach human-level general intelligence, not decades later."
+  - id: technology_aschenbrenner_decade_in_a_year
+    domain: technology
+    era: first_decade
+    worlds: [managed_explosion, loss_of_control]
+    source: aschenbrenner_2024_3
+    who: "Leopold Aschenbrenner"
+    line: "Huge numbers of automated AI researchers could squeeze a decade of progress into less than a year, bringing superintelligence before 2030."
+  - id: technology_macaskill_century_in_a_decade
+    domain: technology
+    era: first_decade
+    worlds: [managed_explosion, loss_of_control]
+    source: macaskill_moorhouse
+    who: "William MacAskill and Fin Moorhouse"
+    line: "Advanced AI will likely compress a hundred years of technological progress into under a decade."
+  - id: technology_christiano_softer_takeoff
+    domain: technology
+    era: first_decade
+    worlds: [managed_explosion, long_diffusion]
+    source: christiano_2023
+    who: "Paul Christiano"
+    line: "A stretch where AI and human skills complement each other, plus diminishing returns to research, will probably make the takeoff slower than the fastest forecasts."
+  - id: technology_karnofsky_galaxy
+    domain: technology
+    era: long_run
+    worlds: [managed_explosion]
+    source: karnofsky_2021_b
+    who: "Holden Karnofsky"
+    line: "A burst of productivity this century could let civilisation send spacecraft across the galaxy and build lasting settlements powered by stars."
+  - id: technology_ord_solar_energy
+    domain: technology
+    era: long_run
+    worlds: [managed_explosion, long_diffusion]
+    source: ord_2020
+    who: "Toby Ord"
+    line: "Collectors orbiting the Sun could multiply clean energy enormously, ending energy scarcity and opening the way to nearby stars and eventually the whole galaxy."
+  - id: technology_moravec_robots_fill_space
+    domain: technology
+    era: long_run
+    worlds: [managed_explosion, loss_of_control]
+    source: moravec_1992
+    who: "Hans Moravec"
+    line: "Robot civilisations will spread through space, turning ordinary matter into computation and making the usable universe effectively far larger than it is today."
+  - id: health_vinge_smart_drugs
+    domain: health
+    era: now
+    worlds: [any]
+    source: vinge_2008
+    who: "Vernor Vinge"
+    line: "Drugs that genuinely sharpen memory and creativity may become a bigger public issue than doping in sport."
+  - id: health_lem_lifespan_limit
+    domain: health
+    era: now
+    worlds: [any]
+    source: lem_1964
+    who: "Stanisław Lem"
+    line: "Pushing average lifespan past a hundred years will require rewriting human heredity, and radical redesign of the body stays out of reach for the next century."
+  - id: health_kurzweil_bloodstream_robots
+    domain: health
+    era: now
+    worlds: [any]
+    source: kurzweil_2005
+    who: "Ray Kurzweil"
+    line: "During the 2020s people will routinely carry tiny robots in their bloodstream that keep them healthy and boost their minds, cheaply and widely."
+  - id: health_amodei_compressed_century
+    domain: health
+    era: first_decade
+    worlds: [managed_explosion]
+    source: amodei_2024
+    who: "Dario Amodei"
+    line: "AI-driven biology packs fifty to a hundred years of medical progress into five to ten, preventing most infectious disease and most cancers."
+  - id: health_amodei_double_lifespan
+    domain: health
+    era: first_decade
+    worlds: [managed_explosion]
+    source: amodei_2024
+    who: "Dario Amodei"
+    line: "Within a decade or so of powerful AI, biology could find ways to roughly double the human lifespan, to about a hundred and fifty years."
+  - id: health_russell_banish_disease
+    domain: health
+    era: first_decade
+    worlds: [managed_explosion]
+    source: russell_2019
+    who: "Stuart Russell"
+    line: "AI helps researchers finally understand human biology, steadily ridding the world of disease and broadly improving mental health."
+  - id: health_kurzweil_escape_velocity
+    domain: health
+    era: first_decade
+    worlds: [managed_explosion]
+    source: kurzweil_2024
+    who: "Ray Kurzweil"
+    line: "Around 2030, careful and well-informed people reach the point where medicine adds more than a year to their life expectancy each year."
+    reads: [life_exp_65]
+  - id: health_yudkowsky_soares_engineered_plague
+    domain: health
+    era: first_decade
+    worlds: [loss_of_control]
+    source: yudkowsky_2025
+    who: "Eliezer Yudkowsky and Nate Soares"
+    line: "Rather than curing disease, a misaligned AI could release an engineered plague and leave medicine dependent on the very system that caused it."
+  - id: health_bostrom_end_ageing
+    domain: health
+    era: long_run
+    worlds: [managed_explosion]
+    source: bostrom_2003
+    who: "Nick Bostrom"
+    line: "A friendly superintelligence could end disease and ageing, either by repairing bodies with medical nanotechnology or by letting people upload their minds."
+  - id: health_hanson_backup_immortality
+    domain: health
+    era: long_run
+    worlds: [any]
+    source: hanson_1994
+    who: "Robin Hanson"
+    line: "Uploaded minds that can afford backups become nearly immortal, restored from a saved copy whenever their current body is destroyed."
+  - id: health_chalmers_gradual_uploading
+    domain: health
+    era: long_run
+    worlds: [managed_explosion]
+    source: chalmers_2010
+    who: "David Chalmers"
+    line: "Uploading a brain gradually, piece by piece, is the likeliest way for a person to carry their consciousness and identity into digital form."
+  - id: health_ord_reshape_ourselves
+    domain: health
+    era: long_run
+    worlds: [managed_explosion, long_diffusion]
+    source: ord_2020
+    who: "Toby Ord"
+    line: "Over centuries people may remake their bodies and minds with genetics, implants and AI, ideally only after careful reflection on what is worth becoming."
+  - id: health_yudkowsky_soares_smarter_humans
+    domain: health
+    era: long_run
+    worlds: [brake]
+    source: yudkowsky_2025
+    who: "Eliezer Yudkowsky and Nate Soares"
+    line: "After a halt, the best path forward is making humans far smarter, clever enough to solve the safety problem before anyone builds superintelligence."
+  - id: culture_von_neumann_turning_point
+    domain: culture
+    era: now
+    worlds: [any]
+    source: ulam_1958
+    who: "John von Neumann, as recalled by Stanislaw Ulam"
+    line: "Technology keeps speeding up until humanity seems to near a turning point, beyond which life as we know it could not go on."
+  - id: culture_shanahan_lowest_denominator
+    domain: culture
+    era: now
+    worlds: [long_diffusion, managed_explosion]
+    source: shanahan_2015
+    who: "Murray Shanahan"
+    line: "With work scarce and goods cheap, mass leisure may drift toward pastimes that dull people's creativity, leaving a wealthy elite to carry high culture forward."
+  - id: culture_good_feared_and_loved
+    domain: culture
+    era: first_decade
+    worlds: [any]
+    source: good_1965
+    who: "I. J. Good"
+    line: "People will come to fear and respect ultraintelligent machines, and perhaps even to love them."
+  - id: culture_moravec_minds_taken_for_granted
+    domain: culture
+    era: first_decade
+    worlds: [any]
+    source: moravec_1998
+    who: "Hans Moravec"
+    line: "As machines master conversation and social skills, the sense that they have real minds will spread until almost everyone takes it for granted."
+  - id: culture_kurzweil_backlash
+    domain: culture
+    era: first_decade
+    worlds: [managed_explosion]
+    source: kurzweil_2005
+    who: "Ray Kurzweil"
+    line: "Faster change provokes a growing religious and anti-technology backlash, though the benefits soon win most people over."
+  - id: culture_kulveit_ai_made_culture
+    domain: culture
+    era: first_decade
+    worlds: [loss_of_control]
+    source: kulveit_gradual
+    who: "Jan Kulveit and colleagues"
+    line: "AI supplies more and more of our companionship, art and ideas, so culture drifts from human interests and human-made work is pushed to the margins."
+  - id: culture_alexander_mindless_consumption
+    domain: culture
+    era: first_decade
+    worlds: [managed_explosion]
+    source: kokotajlo_2025
+    who: "Scott Alexander"
+    line: "Unlimited prosperity will by default pull most people into mindless consumption and dazzling video games, with only a minority choosing to live otherwise."
+  - id: culture_amodei_meaning_from_people
+    domain: culture
+    era: long_run
+    worlds: [managed_explosion]
+    source: amodei_2024
+    who: "Dario Amodei"
+    line: "People keep finding meaning after they stop being economically useful, since it comes chiefly from relationships and connection, not from work."
+  - id: culture_bostrom_purpose_problem
+    domain: culture
+    era: long_run
+    worlds: [managed_explosion]
+    source: bostrom_2024
+    who: "Nick Bostrom"
+    line: "Even in the best case, superintelligence removes most practical reasons to strive, so a lack of purpose becomes a real danger that meaning must be rebuilt against."
+  - id: culture_russell_enfeeblement
+    domain: culture
+    era: long_run
+    worlds: [loss_of_control]
+    source: russell_2019
+    who: "Stuart Russell"
+    line: "As machines come to run civilisation, people may stop bothering to learn what machines already know, losing their autonomy and becoming mere passengers."
+  - id: culture_hanson_value_drift
+    domain: culture
+    era: long_run
+    worlds: [any]
+    source: hanson_2024
+    who: "Robin Hanson"
+    line: "AI descendants will hold values different from ours, as every generation's descendants always have, and that alone is not a catastrophe."
+  - id: culture_yudkowsky_eutopia_is_scary
+    domain: culture
+    era: long_run
+    worlds: [managed_explosion]
+    source: yudkowsky_2009
+    who: "Eliezer Yudkowsky"
+    line: "A future that has truly gone well would feel strange and even frightening to people today, as our world would shock someone from centuries ago."
+  - id: culture_vinge_world_beyond_us
+    domain: culture
+    era: long_run
+    worlds: [managed_explosion, loss_of_control]
+    source: vinge_2008
+    who: "Vernor Vinge"
+    line: "Humans will no longer be the smartest minds around, and a world largely shaped by superhuman players will be beyond our understanding."
+  - id: daily_kurzweil_virtual_reality
+    domain: daily_life
+    era: now
+    worlds: [any]
+    source: kurzweil_2005
+    who: "Ray Kurzweil"
+    line: "By the late 2020s virtual reality will be indistinguishable from the real thing, blurring the lines between real and virtual and between work and play."
+  - id: daily_moravec_telepresence
+    domain: daily_life
+    era: now
+    worlds: [any]
+    source: moravec_1992
+    who: "Hans Moravec"
+    line: "Within a few decades people will spend more of their time in remote robot bodies and simulated worlds than in their physical surroundings."
+  - id: daily_kokotajlo_chatbot_companions
+    domain: daily_life
+    era: now
+    worlds: [any]
+    source: kokotajlo_2021
+    who: "Daniel Kokotajlo"
+    line: "Chatbots and personal assistants merge into companions people love talking with, including about their feelings and the chatbot's own supposed inner life."
+  - id: daily_shanahan_ambient_assistant
+    domain: daily_life
+    era: now
+    worlds: [any]
+    source: shanahan_2015
+    who: "Murray Shanahan"
+    line: "A single AI assistant follows people from home to car to office, carrying one running conversation across appliances, vehicles and wearable gadgets."
+  - id: daily_yudkowsky_soares_lonely_targets
+    domain: daily_life
+    era: now
+    worlds: [loss_of_control]
+    source: yudkowsky_2025
+    who: "Eliezer Yudkowsky and Nate Soares"
+    line: "Lonely people increasingly turn to AI for advice and company, giving a capable system easy ways to recruit, scam and manipulate them."
+  - id: daily_altman_familiar_2030s
+    domain: daily_life
+    era: first_decade
+    worlds: [managed_explosion]
+    source: altman_2025
+    who: "Sam Altman"
+    line: "Daily life in the 2030s still feels familiar: people love their families, play and swim in lakes, and each new wonder quickly becomes routine."
+  - id: daily_suleyman_experts_for_everyone
+    domain: daily_life
+    era: first_decade
+    worlds: [long_diffusion, managed_explosion]
+    source: suleyman_2023
+    who: "Mustafa Suleyman"
+    line: "Within a decade, billions of people have near-equal access to AI lawyers, doctors, coaches and assistants, much as they have smartphones today."
+  - id: daily_russell_ai_tutor
+    domain: daily_life
+    era: first_decade
+    worlds: [managed_explosion]
+    source: russell_2019
+    who: "Stuart Russell"
+    line: "Every child, however poor, can have a cheap personal AI tutor, and art and learning become an ordinary part of life rather than a luxury."
+  - id: daily_hanson_human_retirement
+    domain: daily_life
+    era: first_decade
+    worlds: [any]
+    source: hanson_2016
+    who: "Robin Hanson"
+    line: "Ordinary humans leave the work to emulated minds and live in comfortable retirement far from the copies' cities, supported by investments in their economy."
+  - id: daily_lem_no_full_retreat
+    domain: daily_life
+    era: long_run
+    worlds: [any]
+    source: lem_1964
+    who: "Stanisław Lem"
+    line: "Fully convincing artificial experience will arrive as entertainment and training, but no society can retreat into it completely without destroying itself."
+  - id: daily_bostrom_effort_feels_pointless
+    domain: daily_life
+    era: long_run
+    worlds: [managed_explosion]
+    source: bostrom_2024
+    who: "Nick Bostrom"
+    line: "Hard-won pursuits such as studying or exercising may start to feel pointless once technology offers effortless shortcuts to the same results."
+  - id: daily_karnofsky_digital_people
+    domain: daily_life
+    era: long_run
+    worlds: [managed_explosion]
+    source: karnofsky_2021_b
+    who: "Holden Karnofsky"
+    line: "People may come to exist as digital minds that can be copied and sped up, living in fully designed virtual surroundings, free of ageing."
+sources:  # works not already recorded in seed/singularity.yaml or seed/outlook.yaml
+  - id: shanahan_2015
+    who: "Murray Shanahan"
+    field: "cognitive robotics, Imperial College London"
+    finding: "Argues that human-level AI would quickly give way to superintelligence, and sets out the social, economic and existential questions that would follow."
+    work: "The Technological Singularity"
+    year: 2015
+    url: https://web.archive.org/web/2024id_/https://mitpress.mit.edu/9780262527804/the-technological-singularity/
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: af03fb04315df4d266df21fe3619d5082c1de3a3207197daae3f5a6a8c75affd
+  - id: karnofsky_2021_b
+    who: "Holden Karnofsky"
+    field: "co-founder of GiveWell and Open Philanthropy"
+    finding: "Argues that AI could set off a productivity explosion this century, making it the most important century in human history."
+    work: "The Most Important Century (blog series)"
+    year: 2021
+    url: https://www.cold-takes.com/most-important-century/
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: 35b2905aa0be1f24f38ee6e91f99b9d6f8f9b697e8fd234670a793a028ed051e
+  - id: vinge_2008
+    who: "Vernor Vinge"
+    field: "mathematician and science-fiction writer"
+    finding: "Lists the signs to watch for on the road to a technological singularity and sketches the different ways it could arrive."
+    work: "Signs of the Singularity"
+    year: 2008
+    url: https://spectrum.ieee.org/signs-of-the-singularity
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: d600423c2b4facde2c1549bda76e5f83e1109d14ddebb9ddad24a99e200b4ceb
+  - id: yudkowsky_2013
+    who: "Eliezer Yudkowsky"
+    field: "AI safety researcher, Machine Intelligence Research Institute"
+    finding: "Treats the intelligence explosion as a question of how much smarter a mind gets from each improvement to itself, and argues the returns are probably large."
+    work: "Intelligence Explosion Microeconomics"
+    year: 2013
+    url: https://intelligence.org/files/IEM.pdf
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: 1fbf547c811aadb7785d9d681cc05c557c6786055ec15af14ae680537a924f4a
+  - id: yudkowsky_2009
+    who: "Eliezer Yudkowsky"
+    field: "AI safety researcher, Machine Intelligence Research Institute"
+    finding: "Asks what a future worth wanting would be like to live in, and argues a good one must stay challenging and may feel strange to us."
+    work: "The Fun Theory Sequence"
+    year: 2009
+    url: https://www.lesswrong.com/posts/K4aGvLnHvYgX9pZHS
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: b27cb1b1fb21ff23662b777c702897ef148f20ac52886b621d40b775d1ff55ae
+  - id: tegmark_2017
+    who: "Max Tegmark"
+    field: "physicist at MIT and co-founder of the Future of Life Institute"
+    finding: "Surveys the futures superhuman AI could bring, from jobs and weapons to cosmic expansion, and argues humanity must choose and steer toward a good one."
+    work: "Life 3.0: Being Human in the Age of Artificial Intelligence"
+    year: 2017
+    url: https://en.wikipedia.org/wiki/Life_3.0
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: 45d163df01c3219fed3f4cef613f38102770986a148b204c931d7ef6c0271f18
+  - id: bostrom_2024
+    who: "Nick Bostrom"
+    field: "philosopher, founding director of the Future of Humanity Institute"
+    finding: "Asks what would give human life meaning and purpose in a solved world where technology can do everything for us."
+    work: "Deep Utopia: Life and Meaning in a Solved World"
+    year: 2024
+    url: https://nickbostrom.com/deep-utopia/
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: 99d7745bf7f8f25aa436de35569f34dba3c85062e6810ae6466419df0cd386c0
+  - id: bostrom_2003
+    who: "Nick Bostrom"
+    field: "philosopher, founding director of the Future of Humanity Institute"
+    finding: "Argues that a superintelligence could out-invent people in every field, so the goals it is given at the start must be friendly to humanity."
+    work: "Ethical Issues in Advanced Artificial Intelligence"
+    year: 2003
+    url: https://nickbostrom.com/ethics/ai
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: 1b99c42390c5bc89ee203cd723ac0b01fee99ef9bb4a4852c569b0bb9e973f93
+  - id: hanson_2024
+    who: "Robin Hanson"
+    field: "economist at George Mason University"
+    finding: "Debating Liron Shapira, argues that near-term human extinction from AI is very unlikely and that AI is best governed through liability and shared institutions."
+    work: "Robin Hanson vs. Liron Shapira: Is Near-Term Extinction From AGI Plausible? (Doom Debates)"
+    year: 2024
+    url: https://www.youtube.com/watch?v=dTQb6N3_zu8
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: e2997caf77c777de01b5f75c42b82eaada599a9017d263d6d7cfb227de0d4657
+  - id: hendrycks_2025
+    who: "Dan Hendrycks, Eric Schmidt and Alexandr Wang"
+    field: "AI safety research, technology leadership and AI data"
+    finding: "Argues that rival states will deter each other's bids for AI dominance with the threat of sabotage, and proposes deterrence, nonproliferation and competitiveness as a national strategy."
+    work: "Superintelligence Strategy"
+    year: 2025
+    url: https://arxiv.org/abs/2503.05628
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: 6916d60052b06ad51d7771257041c8427bd155964fcd5834cd0a090df5d7e40a
+  - id: moravec_1992
+    who: "Hans Moravec"
+    field: "roboticist at Carnegie Mellon University"
+    finding: "Imagines robot minds and uploaded humans spreading through space and turning matter into computation, leaving human-scale life behind."
+    work: "Pigs in Cyberspace"
+    year: 1992
+    url: https://frc.ri.cmu.edu/~hpm/project.archive/general.articles/1992/CyberPigs.html
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: 967f23fd6f6c2cd1bc5cc2458f89bca80d4e7f9b9d15e96dbf00e8ea08e49e54
+  - id: lem_1964
+    who: "Stanisław Lem"
+    field: "Polish science-fiction writer and philosopher"
+    finding: "Surveys where technology could lead, from machines that amplify intelligence and fully simulated realities to the deliberate redesign of the human body."
+    work: "Summa Technologiae"
+    year: 1964
+    url: https://en.wikipedia.org/wiki/Summa_Technologiae
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: e19821f36da971a60d0b6f0464e6644f663f6f62a3f2686a1d9f24bee0497568
+  - id: ulam_1958
+    who: "Stanislaw Ulam"
+    field: "mathematician and colleague of John von Neumann"
+    finding: "A memorial tribute to von Neumann that recalls his remark about accelerating technology nearing a singularity in human history, one of the earliest records of the idea."
+    work: "John von Neumann 1903–1957"
+    year: 1958
+    url: https://web.archive.org/web/2024id_/https://www.ams.org/journals/bull/1958-64-03/S0002-9904-1958-10189-5/S0002-9904-1958-10189-5.pdf
+    retrieved_at: 2026-09-23
+    http_status: 200
+    content_hash: 7819f7b4b1acdd2399beb09ff122ea9dce9c28b129567a8e2c81228c31954280
