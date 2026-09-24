@@ -1,0 +1,492 @@
+{
+ "gates": [
+  {
+   "g": "R4 within-occupation scramble (17 Sep validation set, two scorers)",
+   "v": "1.31",
+   "t": ">1.15",
+   "p": true,
+   "n": "beats 100% of 200 scrambles \u2014 the task scores carry real information"
+  },
+  {
+   "g": "Inter-rater agreement on horizon, three pairs",
+   "v": "AB 0.76 / AC 0.74 / BC 0.67",
+   "t": "each \u22650.75",
+   "p": false,
+   "n": "A\u2013B passes; the pairs with Gemini fall short \u2014 scorers read horizon differently, which is why the verdict is a vote"
+  },
+  {
+   "g": "\u03c4 stability across three constructions",
+   "v": "\u03c1 0.99",
+   "t": "stable",
+   "p": true,
+   "n": ""
+  },
+  {
+   "g": "Exposure vs the published measure",
+   "v": "\u03c1 0.878",
+   "t": "\u2014",
+   "p": true,
+   "n": "751 occupations"
+  },
+  {
+   "g": "Stakes predict wages",
+   "v": "z +10.19",
+   "t": "p<0.05",
+   "p": true,
+   "n": "externally validated"
+  },
+  {
+   "g": "Grader-exists predicts wages",
+   "v": "z -3.09",
+   "t": "p<0.05",
+   "p": true,
+   "n": "correct sign"
+  },
+  {
+   "g": "Horizon predicts wages",
+   "v": "z -0.37",
+   "t": "p<0.05",
+   "p": false,
+   "n": "horizon doesn't set pay \u2014 and the rule doesn't use it for that; it predicts whether AI works alone"
+  },
+  {
+   "g": "R3 incremental validity (17 Sep, two scorers)",
+   "v": "\u0394R\u00b2 0.020",
+   "t": "\u22650.03",
+   "p": false,
+   "n": "below the pre-registered gate"
+  },
+  {
+   "g": "Specification entropy governs what's handed over \u2014 same task, API vs chat",
+   "v": "z -3.9",
+   "t": "z < \u22122",
+   "p": "x",
+   "n": "harder-to-specify work gets less of its AI use through the API; holds within the same job in 7 of 8 runs (3 scorers + vote \u00d7 2 months). Designed after the chat result \u2014 to be re-run unchanged on the next release"
+  },
+  {
+   "g": "Rule separates what AI does alone \u2014 consumer traffic",
+   "v": "63% vs 47%",
+   "t": "p<0.05",
+   "p": true,
+   "n": "n=2,220 tasks"
+  },
+  {
+   "g": "Rule separates what AI does alone \u2014 enterprise API traffic",
+   "v": "94% vs 91%",
+   "t": "p<0.05",
+   "p": true,
+   "n": "a second, automation-heavy population"
+  },
+  {
+   "g": "Scorer stakes track worker-reported consequence of error",
+   "v": "\u03c1 0.55/0.54/0.61",
+   "t": "\u03c1>0",
+   "p": true,
+   "n": "Dept of Labor survey the scorers never saw"
+  },
+  {
+   "g": "Industry retention (cost pass-through)",
+   "v": "not identified",
+   "t": "placebo \u2248 0",
+   "p": false,
+   "n": "3 of 4 estimators fail a noise placebo; the 4th flips sign with start year"
+  },
+  {
+   "g": "Human-rated gold set, task level",
+   "v": "not run",
+   "t": "\u03b1\u22650.67",
+   "p": null,
+   "n": "occupation-level worker survey used instead"
+  }
+ ],
+ "dial": [
+  {
+   "vh": 0,
+   "g": 2,
+   "l": 1,
+   "rule": "can be checked instantly, by software, and a failure costs up to about $1k",
+   "alone": 0.6791776,
+   "alone_rest": 0.4922838663484486,
+   "freed": 247148215698.20605,
+   "headline": false
+  },
+  {
+   "vh": 0,
+   "g": 2,
+   "l": 2,
+   "rule": "can be checked instantly, by software, and a failure costs up to about $10k",
+   "alone": 0.685754,
+   "alone_rest": 0.48955014492753623,
+   "freed": 299724068645.6629,
+   "headline": false
+  },
+  {
+   "vh": 1,
+   "g": 2,
+   "l": 2,
+   "rule": "can be checked within hours, by software, and a failure costs up to about $10k",
+   "alone": 0.6314955,
+   "alone_rest": 0.47452401098901104,
+   "freed": 1014476426108.4851,
+   "headline": true
+  },
+  {
+   "vh": 1,
+   "g": 1,
+   "l": 2,
+   "rule": "can be checked within hours \u2014 by software or an expert \u2014 and a failure costs up to about $10k",
+   "alone": 0.5698821473158552,
+   "alone_rest": 0.46494453840732913,
+   "freed": 1733833900223.9185,
+   "headline": false
+  },
+  {
+   "vh": 2,
+   "g": 1,
+   "l": 2,
+   "rule": "can be checked within days \u2014 by software or an expert \u2014 and a failure costs up to about $10k",
+   "alone": 0.5438910278745646,
+   "alone_rest": 0.4588106343283582,
+   "freed": 2772962429533.588,
+   "headline": false
+  },
+  {
+   "vh": 2,
+   "g": 1,
+   "l": 3,
+   "rule": "can be checked within days \u2014 by software or an expert \u2014 and a failure costs up to about $100k",
+   "alone": 0.5396160606060606,
+   "alone_rest": 0.44882077777777785,
+   "freed": 3252383162938.8936,
+   "headline": false
+  }
+ ],
+ "sigma": [
+  {
+   "sigma": 0.5,
+   "before": 0.8666666666666667,
+   "after": 0.8905919785850511
+  },
+  {
+   "sigma": 1.0,
+   "before": 0.8666666666666667,
+   "after": 0.8666666666666667
+  },
+  {
+   "sigma": 1.5,
+   "before": 0.8666666666666667,
+   "after": 0.8384583869843028
+  }
+ ],
+ "channel": {
+  "runs": [
+   {
+    "period": "2026-05",
+    "scorer": "vote",
+    "n": 609,
+    "coef": -0.37987446171803263,
+    "z": -3.93284196499287,
+    "coef_occ": -0.44195585791820147,
+    "z_occ": -2.827061011132968,
+    "share": {
+     "1": 0.47368421052631576,
+     "2": 0.5378755210579272,
+     "3": 0.4060815480304078,
+     "4": 0.2565674255691769
+    }
+   },
+   {
+    "period": "2026-05",
+    "scorer": "A",
+    "n": 545,
+    "coef": -0.30404148859383207,
+    "z": -2.9562663122681956,
+    "coef_occ": -0.3538561790840692,
+    "z_occ": -2.001153049237217,
+    "share": {
+     "1": 0.5180722891566264,
+     "2": 0.47857648725212465,
+     "3": 0.4045199453966328,
+     "4": 0.18846694796061886
+    }
+   },
+   {
+    "period": "2026-05",
+    "scorer": "B",
+    "n": 607,
+    "coef": -0.23863710353606224,
+    "z": -2.424919917704029,
+    "coef_occ": -0.340745156412542,
+    "z_occ": -2.2427025388481847,
+    "share": {
+     "1": 0.5,
+     "2": 0.5599536270288175,
+     "3": 0.40490470478475277,
+     "4": 0.30578947368421056
+    }
+   },
+   {
+    "period": "2026-05",
+    "scorer": "C",
+    "n": 463,
+    "coef": -0.34566275429462384,
+    "z": -4.733797457185576,
+    "coef_occ": -0.3980187109171796,
+    "z_occ": -3.028292247547489,
+    "share": {
+     "1": 0.644808743169399,
+     "2": 0.5322480939624974,
+     "3": 0.3773942327930962,
+     "4": 0.3694681282988226
+    }
+   },
+   {
+    "period": "2026-04",
+    "scorer": "vote",
+    "n": 592,
+    "coef": -0.38494022909995645,
+    "z": -4.061214185126306,
+    "coef_occ": -0.4613562472842516,
+    "z_occ": -2.9671557181089807,
+    "share": {
+     "1": 0.46419753086419757,
+     "2": 0.5331909049290402,
+     "3": 0.42504689078055113,
+     "4": 0.2586206896551724
+    }
+   },
+   {
+    "period": "2026-04",
+    "scorer": "A",
+    "n": 532,
+    "coef": -0.27447840800684403,
+    "z": -2.789263180329517,
+    "coef_occ": -0.3006716896194443,
+    "z_occ": -1.6574548635472144,
+    "share": {
+     "1": 0.51252408477842,
+     "2": 0.4768137621540764,
+     "3": 0.4257269279393173,
+     "4": 0.20923076923076925
+    }
+   },
+   {
+    "period": "2026-04",
+    "scorer": "B",
+    "n": 590,
+    "coef": -0.2893538003995882,
+    "z": -2.940234073514175,
+    "coef_occ": -0.393222300484042,
+    "z_occ": -2.642839306611211,
+    "share": {
+     "1": 0.5018450184501846,
+     "2": 0.5513918629550321,
+     "3": 0.42156996587030715,
+     "4": 0.32761679479597877
+    }
+   },
+   {
+    "period": "2026-04",
+    "scorer": "C",
+    "n": 447,
+    "coef": -0.3682948242634865,
+    "z": -5.18534193287488,
+    "coef_occ": -0.40989715612696087,
+    "z_occ": -3.3158171499526135,
+    "share": {
+     "1": 0.6363636363636365,
+     "2": 0.5315295657866027,
+     "3": 0.39095744680851063,
+     "4": 0.3777589134125637
+    }
+   }
+  ],
+  "api_alone": 0.9096962972689075
+ },
+ "se_test": {
+  "n_cop": 110,
+  "ratio": 3.809145821130878,
+  "ratio_trim": 2.3668854896812035,
+  "used_cop": 0.5545454545454546,
+  "used_tool": 0.38929440389294406,
+  "psi_lo": 0.678860975609756,
+  "psi_hi": 0.4306749226006192,
+  "horizon_share": 0.8301490394063678
+ },
+ "adjudication": [
+  {
+   "scorer": "A",
+   "tasks": 9479,
+   "stakes_vs_workers": 0.554803823006418,
+   "grader_vs_workers": 0.4786816978511908,
+   "alone_consumer": 0.6258376657824933,
+   "gap_consumer": 0.15494168840977174,
+   "gap_api": 0.03707252648388493,
+   "flags": 0.13587931216373036
+  },
+  {
+   "scorer": "B",
+   "tasks": 10708,
+   "stakes_vs_workers": 0.5376270387290266,
+   "grader_vs_workers": 0.4428116005892132,
+   "alone_consumer": 0.5746425333333334,
+   "gap_consumer": 0.10854909968080262,
+   "gap_api": 0.031140588799386304,
+   "flags": 0.24505042958535675
+  },
+  {
+   "scorer": "C",
+   "tasks": 8360,
+   "stakes_vs_workers": 0.6138599665409954,
+   "grader_vs_workers": 0.37959297715125184,
+   "alone_consumer": 0.659951052631579,
+   "gap_consumer": 0.19509996924352913,
+   "gap_api": 0.04840632785662047,
+   "flags": 0.08157894736842106
+  }
+ ],
+ "third": {
+  "n_tasks": 7385,
+  "payroll_cov": 0.627948796327159,
+  "n_split": 1054,
+  "sides_A": 0.8292220113851992,
+  "sides_B": 0.17077798861480076,
+  "freed_A": 434212669023.6987,
+  "freed_B": 1114184333699.8848,
+  "freed_C": 369858839082.2382,
+  "freed_maj": 498046628348.259,
+  "agree_all": 0.8100203114421124
+ },
+ "irr": {
+  "VH": {
+   "AB": 0.7648451348339534,
+   "AC": 0.7402156644920349,
+   "BC": 0.6711043900434263
+  },
+  "G": {
+   "AB": 0.6550893598371198,
+   "AC": 0.6549238491497688,
+   "BC": 0.5496828093469904
+  },
+  "loss": {
+   "AB": 0.7621916155263132,
+   "AC": 0.7943434859927485,
+   "BC": 0.7090813847094883
+  }
+ },
+ "ext": {
+  "n": 425,
+  "z_loss": 10.191189769141431,
+  "z_G": -3.087392426496511,
+  "z_VH": -0.3701060637412823,
+  "dr2": 0.16245815794043905
+ },
+ "psi_z": {
+  "SE": -2.3473794514013426,
+  "VH": -9.988972127005903,
+  "G": 4.416961947351514,
+  "loss": 1.5833228599808056
+ },
+ "api": {
+  "n": 1852,
+  "goes": 0.9428209718670078,
+  "stays": 0.9059728952772075,
+  "p": 9.023018569573e-10
+ },
+ "placebo": [
+  {
+   "method": "original",
+   "noise_median": 0.5703595610829014,
+   "trusted": false
+  },
+  {
+   "method": "W",
+   "noise_median": -0.00757436580844198,
+   "trusted": true
+  },
+  {
+   "method": "L",
+   "noise_median": 0.44774271438514557,
+   "trusted": false
+  },
+  {
+   "method": "IV",
+   "noise_median": 0.8187256386958834,
+   "trusted": false
+  }
+ ],
+ "stability": [
+  {
+   "start": 1997,
+   "industry": "CPAs",
+   "b": 0.7763856121549998,
+   "ci": 0.3105485725302642
+  },
+  {
+   "start": 1997,
+   "industry": "Tax preparation",
+   "b": -0.022028784060341478,
+   "ci": 0.1741006545378733
+  },
+  {
+   "start": 1997,
+   "industry": "Placement & search",
+   "b": -0.38626634561888623,
+   "ci": 0.2992243433486366
+  },
+  {
+   "start": 1999,
+   "industry": "CPAs",
+   "b": -0.6081149594617374,
+   "ci": 0.4532060787484101
+  },
+  {
+   "start": 1999,
+   "industry": "Tax preparation",
+   "b": -0.0070396637054368355,
+   "ci": 0.16462555022205094
+  },
+  {
+   "start": 1999,
+   "industry": "Placement & search",
+   "b": -0.42111910157111027,
+   "ci": 0.28489133110143106
+  },
+  {
+   "start": 2002,
+   "industry": "CPAs",
+   "b": -0.6606410991684051,
+   "ci": 0.45724260730485194
+  },
+  {
+   "start": 2002,
+   "industry": "Tax preparation",
+   "b": -0.02667043706815185,
+   "ci": 0.26150495227161846
+  },
+  {
+   "start": 2002,
+   "industry": "Placement & search",
+   "b": -0.4235201385179408,
+   "ci": 0.2858678553611752
+  },
+  {
+   "start": 2005,
+   "industry": "CPAs",
+   "b": -0.6795563373521712,
+   "ci": 0.4637612355226
+  },
+  {
+   "start": 2005,
+   "industry": "Tax preparation",
+   "b": -0.33102218508344083,
+   "ci": 0.24670443900248962
+  },
+  {
+   "start": 2005,
+   "industry": "Placement & search",
+   "b": -0.5388044870989123,
+   "ci": 0.2071786133697651
+  }
+ ]
+}

@@ -938,6 +938,14 @@ class Store:
         from .atlas import build as build_atlas
 
         _write(out / "atlas.json", build_atlas(self, outlook=outlook, board_doc=board_doc))
+        from . import census
+
+        index, roles = census.build(census.load(), census.fetches())
+        if index:
+            (out / "census" / "roles").mkdir(parents=True, exist_ok=True)
+            _write(out / "census" / "index.json", index)
+            for occ, doc in roles.items():
+                _write(out / "census" / "roles" / f"{occ}.json", doc)
         from .bottleneck_map import from_store
 
         _write(out / "map.json", from_store(self, cards, bottlenecks, argument, outlook))

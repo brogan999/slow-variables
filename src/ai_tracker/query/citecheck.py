@@ -17,7 +17,7 @@ _MON = r"(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?"
 DATE = re.compile(  # "Aug 17, 2026" and "17 August 2026": the day is part of a date, not a claim
     rf"\b(?:\d{{1,2}}(?:st|nd|rd|th)?\s+{_MON}|{_MON}\s+\d{{1,2}}(?:st|nd|rd|th)?)(?:,?\s+(?:19|20)\d\d)?\b"
 )
-CITE = re.compile(r"\[(obs|derived|ind|event):([A-Za-z0-9_.\-]+)\]")
+CITE = re.compile(r"\[(obs|derived|ind|event|census):([A-Za-z0-9_.\-]+)\]")
 NUM = re.compile(
     r"(?<![\w.\-#])(?P<sign>[-−–])?(?P<cur>\$|€|£)?(?P<num>\d{1,3}(?:,\d{3})+|\d+(?:\.\d+)?)(?P<suffix>\s?(?:%|×|x\b|[kKmMbBtT](?!\w)|h\b|hours?\b|min\b|minutes?\b|days?\b|pp\b|points?\b|bn\b|trillion|billion|million))?(?![A-Za-z0-9]|-[A-Za-z0-9])",
 )
@@ -30,7 +30,7 @@ class Record:
     """One cited thing: an observation, a derived row or an indicator (whose band edges count as numbers)."""
 
     id: str
-    kind: str  # obs | derived | ind | event
+    kind: str  # obs | derived | ind | event | census
     values: list[float] = field(default_factory=list)  # value, low, high, band edges
     unit: str = ""
     snippet: str = ""
