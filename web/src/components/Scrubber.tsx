@@ -16,7 +16,7 @@ export function Scrubber({ stops, tallies, words, order }: { stops: number[]; ta
   };
   return (
     <div className="flex flex-col gap-2">
-      <label htmlFor="sg-asof" className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-2">Forecasts made by <span className="text-ink">{i === stops.length - 1 ? "today" : stop}</span></label>
+      <label htmlFor="sg-asof" className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-2">Forecasts made by <span className="text-ink">{i === stops.length - 1 ? "today" : stop}</span>, as they read tonight</label>
       <input id="sg-asof" type="range" min={0} max={stops.length - 1} step={1} value={i} onChange={(e) => move(Number(e.target.value))}
         aria-valuetext={i === stops.length - 1 ? "today" : String(stop)} className="w-full accent-[var(--ink)]" />
       <dl className="grid grid-cols-[1fr_auto] gap-x-3 gap-y-1 text-sm" aria-live="polite">

@@ -58,7 +58,7 @@ def axis() -> dict[str, Any]:
 
 TABLE_LANES = ["superhuman_coder", "automated_researcher", "agi", "superintelligence"]
 WORDS = ["happening", "slower", "too_early"]  # the words a ledger status can map to (board.WORDS["ledger"])
-GAP = 2.2  # percent of the axis two marks on one row must keep apart, so their glyphs never touch
+GAP = 3.0  # percent of the axis two marks on one row must keep apart, so their glyphs never touch
 
 
 def _stack(marks: list[dict[str, Any]]) -> int:
@@ -79,7 +79,7 @@ def _stack(marks: list[dict[str, Any]]) -> int:
 def _years(m: dict[str, Any]) -> str:
     if m["low"] and m["high"]:
         return f"{m['low']}–{m['high']}" + (f", most likely {m['mid']}" if m["mid"] else "")
-    return str(m["mid"] or m["high"])
+    return str(m["mid"]) if m["mid"] else f"by {m['high']}"
 
 
 def _reading(s: Any, sign: str, facts: dict[str, Any], today: date) -> dict[str, Any] | None:
@@ -108,7 +108,7 @@ def build(s: Any, today: date | None = None, outlook: dict[str, Any] | None = No
             mid = f.get("mid") or (_year(p["window_mid"]) if p.get("window_mid") else None)
             low, high = f.get("low"), f.get("high") or (int(end) if end else None)
             # None: a call with odds but no date, or one that doubts a date (a bet against it), listed rather than placed
-            at = None if f.get("doubts") else mid or high
+            at = None if f.get("doubts") or f.get("odds") else mid or high
             word = board.WORDS["ledger"].get(p.get("status"), "too_early")
             m = {
                 "id": p["id"],
@@ -118,7 +118,7 @@ def build(s: Any, today: date | None = None, outlook: dict[str, Any] | None = No
                 "quoted": p["ledger"] != "singularity",  # the other ledgers keep the claimant's own words
                 "made": p["claim_date"],
                 "made_year": int(made),
-                "x_made": x(made),
+                "step": bool(f.get("step")),  # a step toward the milestone, not a date for it
                 "low": low,
                 "mid": mid,
                 "high": high,
@@ -156,27 +156,27 @@ def build(s: Any, today: date | None = None, outlook: dict[str, Any] | None = No
         (m for m in flat if m["settles"] and m["settles"] < today.isoformat()), key=lambda m: m["settles"]
     )
     latest: dict[tuple[str, str], dict[str, Any]] = {}
-    for m in flat:
-        k = (m["who"], m["lane"])
-        if k not in latest or m["made"] > latest[k]["made"]:
+    for m in (
+        flat
+    ):  # the brief's forecaster table: each forecaster's latest dated call on each milestone, since 2023
+        if m["step"] or m["x"] is None or m["made"] < "2023-01-01":
+            continue
+        k = (re.sub(r"\s*\(.*\)$", "", m["who"]), m["lane"])
+        if k not in latest or (m["made"], m["x"]) > (latest[k]["made"], latest[k]["x"]):
             latest[k] = m
     short = {la["id"]: la.get("short") or la["label"] for la in spec["lanes"]}
-    cols = [c for c in TABLE_LANES if any(lane["id"] == c for lane in spec["lanes"])]
-    table = {}
-    for (
-        who,
-        lane_id,
-    ), m in latest.items():  # the brief's forecaster table, rebuilt from dated forecasts since 2023
-        if lane_id in cols and m["made"] >= "2023-01-01" and m["x"] is not None:
-            table.setdefault(re.sub(r"\s*\(.*\)$", "", who), {})[lane_id] = {
+    cols = [c for c in TABLE_LANES if c in short]
+    table: dict[str, dict[str, Any]] = {}
+    for (who, lane_id), m in latest.items():
+        if lane_id in cols:
+            table.setdefault(who, {})[lane_id] = {
                 "text": _years(m),
                 "href": m["href"],
                 "word": m["word"],
                 "made": m["made"][:7],
+                "x": m["x"],
             }
-    rows = sorted(
-        table.items(), key=lambda kv: min((v["text"] for k, v in kv[1].items() if k == "agi"), default="9999")
-    )
+    rows = sorted(table.items(), key=lambda kv: (kv[1].get("agi", {}).get("x", 1000), kv[0]))
     stops = sorted({*spec.get("stops", []), today.year})
     tallies = {
         str(y): {w: sum(1 for m in flat if m["made_year"] <= y and m["word"] == w) for w in WORDS}

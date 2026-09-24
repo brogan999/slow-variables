@@ -6,7 +6,7 @@ import { singularity } from "@/lib/data";
 import { SITE } from "@/lib/site";
 
 const title = "Timelines to the singularity";
-const description = "Everyone who has dared to date the arrival of machines smarter than us, from the 1960s to this year, on one timeline, each read against what this site measures tonight.";
+const description = "The people who have dared to date the arrival of machines smarter than us, from the 1960s to this year, on one timeline, each read against what this site measures tonight.";
 // a page's openGraph replaces the site's wholesale, so the share image is named again here
 export const metadata = {
   title,
@@ -47,14 +47,14 @@ export default function SingularityPage() {
         </MarginPanel>
       </>}
     >
-      <Folio n="I" id="timeline" label="the timeline" title="Every date anyone has dared to give, on one line" lede="Each row is a milestone; each mark, one forecaster's year for it. The glyph is how the forecast reads tonight.">
+      <Folio n="I" id="timeline" label="the timeline" title="The dates people have dared to give, on one line" lede="Each row is a milestone; each mark, one forecaster's year for it. The glyph is how the forecast reads tonight.">
         <TimelinePlate doc={d} />
         <details className="mt-4">
           <summary className="cursor-pointer text-sm text-ink-2">Calls that give odds, or doubt a date, but name no year</summary>
           <div className="mt-3"><Undated doc={d} /></div>
         </details>
       </Folio>
-      <Folio n="II" id="due" label="the calls whose time has come" title="The dates that have already come" lede="Forecasts whose window has closed, and how each reads now.">
+      <Folio n="II" id="due" label="the calls whose time has come" title="The dates that have already come" lede="Forecasts whose window has closed. Happening means the milestone arrived as said; slower than said means its date passed without it.">
         <Due doc={d} />
       </Folio>
       <Folio n="III" id="now" label="where the forecasters sit now" title="The latest word from each forecaster" lede="The most recent year each forecaster has given for each milestone, among forecasts made since 2023. The glyph is how the forecast reads tonight; each links to it.">

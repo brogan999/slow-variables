@@ -269,8 +269,8 @@ export const board = () => read<BoardDoc>("board.json");
 
 // The singularity timeline (src/ai_tracker/singularity.py): every position is laid out in Python.
 export type SgMark = {
-  id: string; who: string; line: string; ledger: string; made: string; made_year: number; x_made: number;
-  low: number | null; mid: number | null; high: number | null; x_low: number | null; x_high: number | null; x: number | null;
+  id: string; who: string; line: string; ledger: string; made: string; made_year: number;
+  step: boolean; low: number | null; mid: number | null; high: number | null; x_low: number | null; x_high: number | null; x: number | null;
   status: string | null; word: string; settles: string | null; href: string; slot?: number; lane?: string;
   span_width?: number; quoted: boolean; years: string | null;
 };
@@ -282,7 +282,7 @@ export type SingularityDoc = {
   axis: { ticks: { year: number; x: number }[]; breaks: number[]; bins: { label: string; x: number }[]; today: number };
   lanes: SgLane[]; due: SgMark[];
   table: { cols: { id: string; label: string }[]; rows: { who: string; cells: Record<string, { text: string; href: string; word: string; made: string }> }[] }; stops: number[]; tallies: Record<string, Record<string, number>>;
-  questions: { id: string; question: string; reads?: string; fast: string; slow: string; reading: Fact | null }[];
+  questions: { id: string; question: string; reads?: string; label?: string; fast: string; slow: string; reading: Fact | null }[];
   worlds: { id: string; label: string; text: string; argued_by: string[]; consistent: boolean; grid: { progress: string; rules: string }[] }[];
   fiction: SgFiction[]; fiction_slots: number; sources: SgSource[]; words: Record<string, string>;
 };

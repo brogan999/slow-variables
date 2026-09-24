@@ -4,7 +4,7 @@ import { Figure, Key } from "./Figure";
 import { Fact } from "./Fact";
 import { WORD, WordChip } from "./StatusChip";
 
-export const ORDER = ["happening", "slower", "too_early"]; // the words a ledger status can take
+export const ORDER = ["happening", "slower", "too_early"]; // the words a ledger status can take (singularity.WORDS)
 const ROW = 14; // pixels per stacked row of marks
 const glyph = (w: string) => (WORD[w] ?? WORD.too_early).glyph;
 const years = (m: SgMark) => m.years ?? "no date";
@@ -26,11 +26,12 @@ export function TimelinePlate({ doc }: { doc: SingularityDoc }) {
   return (
     <Figure
       title="When each forecaster expected each milestone"
-      note="a mark sits at the year forecast, a bar spans a stated range; hover or tap for who said it and when"
+      note="a mark sits at the year forecast, a bar spans a stated range; hover for who said it, tap to open it"
       keys={<>
         {ORDER.map((w) => <Key key={w} swatch={<span aria-hidden className="font-mono text-sm leading-none">{glyph(w)}</span>}>{doc.words[w]}</Key>)}
         <Key swatch={<span aria-hidden className="inline-block h-[3px] w-5 bg-s3" />}>the range stated</Key>
         <Key swatch={<span aria-hidden className="font-mono text-sm leading-none text-muted">◇</span>}>set in a story, not a forecast</Key>
+        <Key swatch={<span aria-hidden className="font-mono text-sm leading-none text-muted">●</span>}>lighter: a step toward the milestone, not a date for it</Key>
       </>}
       foot={<p>The scale is not even: the half century from 1950 and the half century from 2050 are squeezed so the years around now get most of the width (dashed lines mark where it changes). A call that gives odds, or bets against a date, without naming a year is listed under the chart. Shaded: the years still to come.</p>}
       tableLabel="Every forecast placed on the chart"
@@ -45,7 +46,7 @@ export function TimelinePlate({ doc }: { doc: SingularityDoc }) {
         </table>
       }
     >
-      <div className="font-sans text-sm" role="group" aria-label={`${placed.length ? "Forecasts of AI milestones placed by the year forecast, one row per milestone, with an unscored row of fiction below." : ""} Each mark links to the forecast.`}>
+      <div className="font-sans text-sm" role="group" data-marks aria-label="Forecasts of AI milestones placed by the year forecast, one row per milestone, with an unscored row of fiction below. Use the arrow keys to move between marks; each opens its forecast.">
         <div className="relative h-5 sm:ml-[calc(11rem+0.75rem)]" aria-hidden>
           <span className="absolute -translate-x-1/2 font-mono text-[10px] uppercase tracking-[0.1em] text-ink" style={{ left: `${doc.axis.today}%` }}>today</span>
         </div>
@@ -54,13 +55,13 @@ export function TimelinePlate({ doc }: { doc: SingularityDoc }) {
             <div className="text-[12.5px] leading-tight text-ink-2 pb-1 sm:pb-0 sm:pt-1 sm:text-right">{l.label}</div>
             <Track doc={doc} height={l.slots * ROW + 6}>
               {l.forecasts.map((m) => {
-                const tip = `${m.who}, said ${m.made.slice(0, 4)}: ${years(m)}. ${doc.words[m.word]}.`;
+                const tip = `${l.label}: ${m.who}, said ${m.made.slice(0, 4)}${m.step ? ", a step toward it" : ""}: ${years(m)}. ${doc.words[m.word]}.`;
                 const top = (m.slot ?? 0) * ROW + 3;
                 return (
                   <span key={m.id} className="sg-mark" data-made={m.made_year}>
                     {m.span_width !== undefined ? <span aria-hidden className="absolute h-[3px] bg-s3" style={{ top: top + 5, left: `${m.x_low}%`, width: `${m.span_width}%` }} /> : null}
-                    <Link href={m.href} prefetch={false} data-tip={tip} aria-label={tip} title={tip}
-                      className="absolute -translate-x-1/2 font-mono text-[13px] leading-none text-ink hover:text-ink focus-visible:outline-2" style={{ top, left: `${m.x}%` }}>{glyph(m.word)}</Link>
+                    <Link href={m.href} prefetch={false} data-tip={tip} aria-label={tip} title={tip} data-stop={m.id === placed[0]?.id || undefined}
+                      className={`absolute -translate-x-1/2 font-mono text-[13px] leading-none hover:text-ink focus-visible:outline-2 ${m.step ? "text-muted" : "text-ink"}`} style={{ top, left: `${m.x}%` }}>{glyph(m.word)}</Link>
                   </span>
                 );
               })}
@@ -77,8 +78,9 @@ export function TimelinePlate({ doc }: { doc: SingularityDoc }) {
             })}
           </Track>
         </div>
-        <div className="relative h-5 sm:ml-[calc(11rem+0.75rem)]" aria-hidden>
+        <div className="relative h-9 sm:ml-[calc(11rem+0.75rem)]" aria-hidden>
           {doc.axis.ticks.map((t) => <span key={t.year} className={`absolute -translate-x-1/2 font-mono text-[10px] text-muted ${[1970, 2025, 2035, 2045, 2075].includes(t.year) ? "max-sm:hidden" : ""}`} style={{ left: `${t.x}%` }}>{t.year}</span>)}
+          <span className="absolute right-0 top-4 font-mono text-[10px] text-muted">{doc.axis.bins[1]?.label} →</span>
         </div>
       </div>
     </Figure>
@@ -129,14 +131,14 @@ export function Latest({ doc }: { doc: SingularityDoc }) {
   return (
     <div className="overflow-x-auto">
       <table className="data w-full">
-        <thead><tr><th scope="col">Forecaster</th>{t.cols.map((c) => <th key={c.id} scope="col">{c.label}</th>)}</tr></thead>
+        <thead><tr><th scope="col" className="sticky left-0 bg-background">Forecaster</th>{t.cols.map((c) => <th key={c.id} scope="col">{c.label}</th>)}</tr></thead>
         <tbody>
           {t.rows.map((r) => (
             <tr key={r.who}>
-              <th scope="row" className="font-normal text-left whitespace-nowrap">{r.who}</th>
+              <th scope="row" className="font-normal text-left sticky left-0 bg-background max-w-[7.5rem] sm:max-w-none sm:whitespace-nowrap">{r.who}</th>
               {t.cols.map((c) => {
                 const v = r.cells[c.id];
-                return <td key={c.id} className="num whitespace-nowrap">{v ? <Link href={v.href} className="hover:underline" title={`said ${v.made}; ${doc.words[v.word]}`}><span aria-hidden className="mr-1">{glyph(v.word)}</span>{v.text}</Link> : <span className="text-muted">·</span>}</td>;
+                return <td key={c.id} className="num whitespace-nowrap">{v ? <Link href={v.href} className="hover:underline" title={`said ${v.made}; ${doc.words[v.word]}`}><span aria-hidden className="mr-1">{glyph(v.word)}</span>{v.text}<span className="sr-only"> ({doc.words[v.word]})</span></Link> : <span className="text-muted">·</span>}</td>;
               })}
             </tr>
           ))}
@@ -156,7 +158,7 @@ export function Questions({ doc }: { doc: SingularityDoc }) {
             <p className="font-serif text-[1.05rem] leading-snug text-ink">{q.question}</p>
             <p className="mt-1 text-sm text-ink-2"><span className="text-muted">Fast:</span> {q.fast} <span className="text-muted">Slow:</span> {q.slow}</p>
           </div>
-          <div className="text-sm sm:text-right">{q.reading ? <><span className="text-muted text-xs block">Tonight</span><Fact f={q.reading} /></> : <span className="text-muted">No public series yet</span>}</div>
+          <div className="text-sm sm:text-right">{q.reading ? <><span className="text-muted text-xs block">Tonight{q.label ? `, ${q.label}` : ""}</span><Fact f={q.reading} /></> : <span className="text-muted">No public series yet</span>}</div>
         </li>
       ))}
     </ol>
@@ -183,7 +185,7 @@ export function Fiction({ doc }: { doc: SingularityDoc }) {
     <ul className="grid gap-x-8 sm:grid-cols-2">
       {doc.fiction.map((f) => (
         <li key={f.anchor} id={f.anchor} className="border-t border-grid py-2.5 scroll-mt-24 target:bg-surface-2">
-          <p className="font-serif text-[1rem]"><a href={f.url ?? undefined} className="italic underline decoration-axis underline-offset-2 hover:decoration-ink">{f.title}</a> <span className="text-ink-2">· {f.author}, {f.year_written}</span></p>
+          <p className="font-serif text-[1rem]">{f.url ? <a href={f.url} className="italic underline decoration-axis underline-offset-2 hover:decoration-ink">{f.title}</a> : <span className="italic">{f.title}</span>} <span className="text-ink-2">· {f.author}, {f.year_written}</span></p>
           <p className="text-sm text-ink-2 mt-0.5">{f.line} <span className="text-muted">Set {f.set_in_year ? `in ${f.set_in_year}` : f.set_in_words}.</span></p>
         </li>
       ))}

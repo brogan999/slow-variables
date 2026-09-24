@@ -4,6 +4,7 @@
 
 | date | target | from | to | author | reason |
 |---|---|---|---|---|---|
+| 2026-09-24 | hanson_non_emulation_ai_centuries | ahead | emerging | claude | His call was that broadly human-level AI without brain emulation would take centuries; capability readings and most forecasters now point far sooner, so the evidence leans against it, though nothing has settled it. |
 | 2026-09-23 | ai2027_revenue_spend_power_2025 | emerging | confirmed | claude | Frontier-lab revenues roughly tripled and big-cloud data-centre spending neared the projected level in 2025, and Epoch AI's estimates for the data centres it tracks show several gigawatts of facility power added during the year, more than the scenario's figure. |
 | 2026-09-23 | ai2027_quarter_remote_jobs_oct_2027 |  | emerging | claude | Employment in AI-exposed occupations is softening for young workers, but nothing close to a quarter of remote jobs has been automated. |
 | 2026-09-23 | besiroglu_explosive_growth |  | not_yet_testable | claude | AI cannot yet substitute flexibly for most workers, so the condition has not arisen. |

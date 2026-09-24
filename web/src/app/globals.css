@@ -121,13 +121,13 @@ main { counter-reset: fig; }
 .map-focus:has(#map-focus:checked) [data-focus="0"] { display: none; }
 
 /* The singularity section wears the Illuminated Manuscript look (Part 17), scoped to its route: parchment ground,
-   vellum panels, iron-gall ink, Fraunces for reading. Gold is ornament only (rules, drop caps), never text or a mark.
+   vellum panels, iron-gall ink, Fraunces for reading. Gold is ornament (rules, drop caps, folio numerals in the darker gild ink, which passes AA), never a mark.
    The status hues and the tightness ramp stay the site's, so a status reads the same on every page. */
 body:has(.theme-manuscript) {
   --background: #efe6d4; --surface: #f7f1e3; --surface-2: #e6dac3;
   --ink: #3a322a; --ink-2: #5c5246; --muted: #625a4d;
   --grid: #d5c7ac; --axis: #b9a887; --hairline: rgba(58, 50, 42, 0.14);
-  --s1: #3a322a; --s2: #5c5246; --s3: #a8977a;
+  --s1: #3a322a; --s2: #5c5246; --s3: #857355; /* range bars: 3.7:1 on parchment, 3.6:1 on the shaded years */
   --error: #9b2c2c;
   --gild: #b8913f; --gild-ink: #7d5e22;
 }
