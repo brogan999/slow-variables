@@ -1,8 +1,10 @@
 import json
 from datetime import date, datetime, timezone
 
-from ai_tracker.ingest.base import RawItem
-from ai_tracker.ingest.connectors.regulatory import FdaDevices, Ncsl, Owid, RlList
+import pytest
+
+from ai_tracker.ingest.base import LayoutChanged, RawItem
+from ai_tracker.ingest.connectors.regulatory import FdaDevices, Ncsl, Owid, OwidContext, RlList
 
 
 def _item(body: bytes, url: str = "u") -> RawItem:
@@ -52,3 +54,46 @@ def test_owid_series_per_entity_and_year():
         "owid.world.private_ai_investment_usd.a"
     ].as_of_date == date(2025, 12, 31)
     assert "owid.total.corporate_ai_investment_usd.a" in rows
+
+
+def test_owid_context_reads_named_world_row_and_column_paired_by_url():
+    g = "https://ourworldindata.org/grapher/"
+    le = b"Entity,Code,Year,Age 0 (birth),Age 65\nWorld,OWID_WRL,1989,60.1,14.0\nWorld,OWID_WRL,2023,73.2,17.5661\nChad,TCD,2023,55,12\n"
+    vd = b"Entity,Code,Year,Liberal democracy index,World region according to OWID\nWorld,OWID_WRL,2025,0.4,\nWorld (population-weighted),,2025,0.2726435,\n"
+    ls = b"Entity,Code,Year,10.4.1 - Labour share of GDP (%) - SL_EMP_GTOTL\nWorld,OWID_WRL,2025,52.6\n"
+    items = [  # out of order and one file missing: pairing must follow the URL, never the position
+        _item(ls, g + "labor-share-of-gdp.csv"),
+        _item(vd, g + "liberal-democracy-index.csv"),
+        _item(le, g + "remaining-life-expectancy-at-different-ages.csv"),
+    ]
+    rows = {(r.series_key, r.as_of_date.year): r for r in OwidContext().extract(items)}
+    assert rows[("owid_context.world.life_expectancy_at_65.a", 2023)].value_numeric == 17.5661
+    assert ("owid_context.world.life_expectancy_at_65.a", 1989) not in rows  # before the start year
+    assert (
+        rows[("owid_context.world.liberal_democracy_index.a", 2025)].value_numeric == 0.2726435
+    )  # not "World"
+    lab = rows[("owid_context.world.labour_share_of_gdp.a", 2025)]
+    assert lab.value_numeric == 0.526 and lab.unit == "share" and "modelled" in lab.note
+    assert OwidContext().extract(items[:1])[0].series_key == "owid_context.world.labour_share_of_gdp.a"
+
+
+def test_owid_context_raises_on_a_renamed_column_or_missing_world_row():
+    g = "https://ourworldindata.org/grapher/"
+    with pytest.raises(LayoutChanged):
+        OwidContext().extract(
+            [
+                _item(
+                    b"Entity,Code,Year,Age 60\nWorld,W,2023,20\n",
+                    g + "remaining-life-expectancy-at-different-ages.csv",
+                )
+            ]
+        )
+    with pytest.raises(LayoutChanged):
+        OwidContext().extract(
+            [
+                _item(
+                    b"Entity,Code,Year,Liberal democracy index\nWorld,W,2025,0.4\n",
+                    g + "liberal-democracy-index.csv",
+                )
+            ]
+        )

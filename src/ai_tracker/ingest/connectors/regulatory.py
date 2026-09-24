@@ -1,5 +1,6 @@
 """Regulatory and directory sources: FDA's AI-enabled device list (CSV), NCSL's state AI legislation table (HTML),
-rl-list.com's RL-environment vendor directory (JSON) and Our World in Data's AI investment series (CSV)."""
+rl-list.com's RL-environment vendor directory (JSON) and Our World in Data's series (CSV): AI investment, and the
+world-level context the Singularity Atlas reads (life expectancy, democracy, labour's share of output)."""
 
 from __future__ import annotations
 
@@ -10,7 +11,7 @@ import re
 from datetime import date, datetime
 
 from ...schema import Basis, Extraction, Observation, Tier
-from ..base import Connector, RawItem, expect
+from ..base import Connector, LayoutChanged, RawItem, expect, series_key
 
 
 def _month_end(d: date) -> date:
@@ -160,6 +161,95 @@ class Owid(Connector):
                         audited_vs_reported=Basis.reported,
                         extraction_method=Extraction.api,
                         raw_snippet=f"{r['Entity']} {r['Year']}: {col} = {r[col]}",
+                    )
+                )
+        return out
+
+
+# grapher slug -> (entity, column, measure, unit, divisor, tier, note). Each file names its world row and column
+# explicitly: the first column after Year is not always the one wanted, and V-Dem's world row is population-weighted.
+CONTEXT = {
+    "remaining-life-expectancy-at-different-ages": (
+        "World",
+        "Age 65",
+        "life_expectancy_at_65",
+        "years",
+        1,
+        Tier.OFFICIAL_FILING,
+        "UN World Population Prospects: years a person aged 65 can expect to live",
+    ),
+    "liberal-democracy-index": (
+        "World (population-weighted)",
+        "Liberal democracy index",
+        "liberal_democracy_index",
+        "index",
+        1,
+        Tier.PUBLISHED_ANALYSIS,
+        "V-Dem expert-coded index, from 0 to 1, averaged over countries by population",
+    ),
+    "labor-share-of-gdp": (
+        "World",
+        "10.4.1 - Labour share of GDP (%) - SL_EMP_GTOTL",
+        "labour_share_of_gdp",
+        "share",
+        100,
+        Tier.OFFICIAL_FILING,
+        "ILO modelled estimates (SDG indicator 10.4.1)",
+    ),
+}
+CONTEXT_START = 1990  # V-Dem runs back to 1789; the site reads these from here
+
+
+def _owid_url(slug: str) -> str:
+    return f"https://ourworldindata.org/grapher/{slug}.csv"
+
+
+class OwidContext(Owid):
+    """Our World in Data's world-level context series, each credited to its producer (UN WPP, V-Dem, ILO). Optional:
+    context for the Atlas, so an outage never fails the nightly."""
+
+    source_id = "owid_context"
+    optional = True
+    urls = [_owid_url(s) for s in CONTEXT]
+    expect_series = [series_key("owid_context", "world", m[2], "a") for m in CONTEXT.values()]
+
+    def fetch(self, day, refetch: bool = False) -> list[RawItem]:
+        out: list[RawItem] = []
+        for url in self.urls:
+            try:  # one failing file must not stop the rest
+                out.append(self.fetch_one(url, day, refetch))
+            except Exception as e:
+                self.errors.append(f"{url}: {type(e).__name__}: {e}")
+        return out
+
+    def extract(self, items: list[RawItem]) -> list[Observation]:
+        out = []
+        by_url = {_owid_url(s): s for s in CONTEXT}  # paired by URL: a skipped file must not shift the next
+        for item in items:
+            entity, col, measure, unit, div, tier, note = CONTEXT[by_url[item.url]]
+            rows = list(csv.DictReader(io.StringIO(item.body.decode("utf-8-sig", "ignore"))))
+            expect(set(rows[0]) if rows else set(), {"Entity", "Year", col}, f"owid {measure}")
+            mine = [r for r in rows if r["Entity"] == entity and r[col] and int(r["Year"]) >= CONTEXT_START]
+            if not mine:
+                raise LayoutChanged(f"owid {measure}: no {entity!r} rows")
+            for r in mine:
+                y = int(r["Year"])
+                out.append(
+                    self.obs(
+                        item,
+                        series_key=series_key("owid_context", "world", measure, "a"),
+                        unit=unit,
+                        as_of_date=date(y, 12, 31),
+                        period_start=date(y, 1, 1),
+                        published_date=item.published_date,
+                        value_numeric=float(r[col]) / div,
+                        tier=tier,
+                        audited_vs_reported=Basis.estimated
+                        if tier == Tier.PUBLISHED_ANALYSIS
+                        else Basis.reported,
+                        extraction_method=Extraction.api,
+                        raw_snippet=f"{entity} {y}: {col} = {r[col]}",
+                        note=note,
                     )
                 )
         return out

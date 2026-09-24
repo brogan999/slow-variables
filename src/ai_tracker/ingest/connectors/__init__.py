@@ -23,7 +23,7 @@ from .metr import Metr
 from .openrouter import OpenRouter
 from .openrouter_rankings import OpenRouterRankings
 from .ramp import Ramp
-from .regulatory import FdaDevices, Ncsl, Owid, RlList
+from .regulatory import FdaDevices, Ncsl, Owid, OwidContext, RlList
 from .sec_segments import SecSegments
 from .sec_xbrl import SecXbrl
 from .yale import YaleDissimilarity
@@ -63,5 +63,6 @@ CONNECTORS = {
         Ncsl,
         RlList,
         Owid,
+        OwidContext,
     )
 }
