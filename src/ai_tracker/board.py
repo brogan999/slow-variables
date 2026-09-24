@@ -89,7 +89,7 @@ def rows(
                 "folio": lines[p["id"]]["folio"],
                 "who": p["claimant"],
                 "attribution": "author",
-                "line": lines[p["id"]]["line"],
+                "line": lines[p["id"]].get("line") or p["claim_text"],  # the singularity ledger is already in the site's words
                 "state": p.get("status"),
                 "settles": p.get("window_end"),
                 "test": None,

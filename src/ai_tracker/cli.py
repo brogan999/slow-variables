@@ -363,7 +363,20 @@ def _check(s: st.Store) -> tuple[list[str], list[str]]:
         {c["id"] for c in load_outlook().get("claims") or []},
         {i.id for i in s.seed.indicators if i.published},
     )
-    return errors + a_errors + m_errors + o_errors + b_errors, notes + a_notes + o_notes
+    from datetime import date as _date
+
+    from . import singularity
+
+    s_errors = singularity.problems(
+        singularity.load(),
+        s.seed.predictions,
+        load_outlook(),
+        {i.id for i in s.seed.indicators if i.published},
+        {k for r in s.seed.compare for f, v in r.model_dump().items() if f.endswith("predictions") for k in v or []},
+        {pr.id: (ev.new_status if (ev := s.current(pr.id)) else None) for pr in s.seed.predictions},
+        _date.today(),
+    )
+    return errors + a_errors + m_errors + o_errors + b_errors + s_errors, notes + a_notes + o_notes
 
 
 def cmd_check(a: argparse.Namespace) -> int:

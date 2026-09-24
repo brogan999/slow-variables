@@ -931,6 +931,9 @@ class Store:
         outlook = build_outlook(self)
         _write(out / "outlook.json", outlook)
         _write(out / "board.json", self.board(cards, argument, outlook))
+        from .singularity import build as build_singularity
+
+        _write(out / "singularity.json", build_singularity(self, outlook=outlook))
         from .bottleneck_map import from_store
 
         _write(out / "map.json", from_store(self, cards, bottlenecks, argument, outlook))

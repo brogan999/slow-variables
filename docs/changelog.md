@@ -4,6 +4,96 @@
 
 | date | target | from | to | author | reason |
 |---|---|---|---|---|---|
+| 2026-09-23 | ai2027_revenue_spend_power_2025 | emerging | confirmed | claude | Frontier-lab revenues roughly tripled and big-cloud data-centre spending neared the projected level in 2025, and Epoch AI's estimates for the data centres it tracks show several gigawatts of facility power added during the year, more than the scenario's figure. |
+| 2026-09-23 | ai2027_quarter_remote_jobs_oct_2027 |  | emerging | claude | Employment in AI-exposed occupations is softening for young workers, but nothing close to a quarter of remote jobs has been automated. |
+| 2026-09-23 | besiroglu_explosive_growth |  | not_yet_testable | claude | AI cannot yet substitute flexibly for most workers, so the condition has not arisen. |
+| 2026-09-23 | chalmers_human_level_before_2100 |  | emerging | claude | Frontier systems match people on many expert tests, but not across the full range of intellectual tasks he means. |
+| 2026-09-23 | macaskill_moorhouse_research_parity |  | not_yet_testable | claude | AI assists research but does not yet match the human research workforce, and the window runs to 2045. |
+| 2026-09-23 | kurzweil_singularity_2045 |  | not_yet_testable | claude | The date lies nearly two decades away and no current reading measures intelligence across people and machines combined. |
+| 2026-09-23 | erdil_besiroglu_no_software_explosion |  | not_yet_testable | claude | AI does not yet do most AI research, so a software-only explosion cannot yet be observed. |
+| 2026-09-23 | yudkowsky_singularity_2035 |  | not_yet_testable | claude | The window runs to 2035 and superintelligence has not arrived. |
+| 2026-09-23 | yudkowsky_flatline_or_blow_up |  | not_yet_testable | claude | No AI yet improves itself without human researchers in the loop, so the takeoff shape cannot be observed. |
+| 2026-09-23 | christiano_fast_takeoff_odds |  | not_yet_testable | claude | World output growth remains near its historical pace, so neither kind of doubling has begun. |
+| 2026-09-23 | cotra_full_ai_rnd_automation_2026 |  | emerging | claude | Labs report partial research automation, but nothing near her bar of progress barely slowing without human technical staff. |
+| 2026-09-23 | fri_experts_rapid_ai_growth |  | not_yet_testable | claude | Its condition, AI beating humans on many tasks by 2030, has not yet been met. |
+| 2026-09-23 | lifland_top_expert_ai_jul_2032 |  | not_yet_testable | claude | The median lies in 2032, and current systems still trail top experts on long, open-ended work. |
+| 2026-09-23 | altman_novel_insights_2026 |  | emerging | claude | AI systems are credited with helping on new mathematical results, though researchers still dispute how much of the insight came from the machine. |
+| 2026-09-23 | carlsmith_agentic_ai_feasible_2070 |  | emerging | claude | Commercial agents now plan and act toward goals, but whether they meet his bar for advanced capability and strategic awareness is disputed. |
+| 2026-09-23 | lecun_llms_not_human_level |  | not_yet_testable | claude | The claim concerns a limit of language models that no current reading can settle. |
+| 2026-09-23 | aschenbrenner_superintelligence_2030 |  | not_yet_testable | claude | Its precondition, automated AI research, has not been independently shown, so the call cannot be graded before 2030. |
+| 2026-09-23 | kokotajlo_automated_coder_nov_2027 |  | not_yet_testable | claude | The median falls in late 2027, and the time-horizon readings it leans on are rising fast but have not reached that level. |
+| 2026-09-23 | shulman_robot_doubling |  | not_yet_testable | claude | AI does not yet direct industrial production, so the condition has not arisen. |
+| 2026-09-23 | kurzweil_neocortex_cloud_early_2030s |  | not_yet_testable | claude | The window opens in 2030; implanted interfaces so far help a few paralysed patients and none connects the neocortex to cloud computing. |
+| 2026-09-23 | ai2027_research_speedup_early_2026 |  | behind | claude | Independent developer trials in early 2026 found no clear speed-up, and lab claims of faster progress are self-reported. |
+| 2026-09-23 | kokotajlo_pdoom |  | not_yet_testable | claude | No such catastrophe has happened, and the call carries no date to grade against. |
+| 2026-09-23 | cowen_half_point_growth |  | on_track | claude | US productivity and output growth show no AI-driven jump so far, consistent with a modest boost. |
+| 2026-09-23 | bostrom_superintelligence_by_2033 |  | not_yet_testable | claude | The window runs to 2033 and superintelligence has not arrived. |
+| 2026-09-23 | critch_gradual_ceding_2030_2050 |  | not_yet_testable | claude | The window opens in 2030. |
+| 2026-09-23 | carlsmith_power_seeking_catastrophe_2070 |  | not_yet_testable | claude | The window runs to 2070 and no catastrophe of that kind has occurred. |
+| 2026-09-23 | epoch_trillion_cluster_2035 |  | not_yet_testable | claude | Build times have lengthened as sites grow larger, but the milestone itself lies years away. |
+| 2026-09-23 | besiroglu_remote_worker_2040 |  | not_yet_testable | claude | The median lies well over a decade away, and current agents handle only parts of remote jobs. |
+| 2026-09-23 | ai2027_asi_end_2027 |  | behind | claude | Earlier markers of the scenario, such as the research speed-up it expected by early 2026, have not shown up in independent measurement. |
+| 2026-09-23 | yudkowsky_soares_if_anyone_builds_it |  | not_yet_testable | claude | Superintelligence has not been built, so the condition has not arisen. |
+| 2026-09-23 | hanson_foom_under_one_percent |  | on_track | claude | AI capability has so far grown through large, visible efforts across many labs rather than one system's sudden leap. |
+| 2026-09-23 | ai2027_revenue_spend_power_2025 |  | emerging | claude | Frontier-lab revenues roughly tripled and big-cloud data-centre spending neared the projected level in 2025, but the added-power part has not been checked independently, so the row is not graded confirmed. |
+| 2026-09-23 | hanson_age_of_em_century |  | not_yet_testable | claude | No brain has been emulated, and the window runs to about 2116. |
+| 2026-09-23 | cotra_metr_horizon_full_day_2026 |  | on_track | claude | The April 2026 METR reading was about seventeen hours, most of the way to her median, though METR warns its tasks cannot measure reliably at that length. |
+| 2026-09-23 | lifland_automated_coder_jan_2030 |  | not_yet_testable | claude | The median lies in 2030, and no lab could yet do without its human engineers. |
+| 2026-09-23 | moravec_robots_overtake_by_2048 |  | emerging | claude | Robots are improving at walking and grasping, but none matches human dexterity or social skill outside narrow settings. |
+| 2026-09-23 | christiano_dyson_sphere_2030_2040 |  | not_yet_testable | claude | No system can direct engineering at anything near that scale, and the first checkpoint is not until 2030. |
+| 2026-09-23 | kulveit_gradual_disempowerment |  | emerging | claude | Labour share and entry-level jobs in exposed fields show early softening, but people still control the economy and the state. |
+| 2026-09-23 | erdil_remote_worker_2045 |  | not_yet_testable | claude | The median lies nearly two decades away, and current agents handle only parts of remote jobs. |
+| 2026-09-23 | karnofsky_transformative_ai_2060 |  | emerging | claude | Capability readings have risen quickly since 2021, but AI has not yet driven a transition on the scale he defined. |
+| 2026-09-23 | trammell_parallelisation_delay |  | not_yet_testable | claude | Research is not yet automated, so the size of any parallelisation drag cannot be measured. |
+| 2026-09-23 | russell_superintelligence_this_century |  | not_yet_testable | claude | The window runs through this century and superintelligence has not arrived. |
+| 2026-09-23 | altman_internal_agi_2026 |  | emerging | claude | Altman says OpenAI is not there yet, and any declaration would rest on the lab's own definition rather than an outside test. |
+| 2026-09-23 | aschenbrenner_expert_remote_worker_2027_2028 |  | emerging | claude | Frontier models match experts on many tests, but none yet works as a drop-in remote employee at the level of top experts. |
+| 2026-09-23 | davidson_superhuman_within_year |  | not_yet_testable | claude | The clock only starts once AI matches professionals on nearly all cognitive work, which has not happened. |
+| 2026-09-23 | macaskill_moorhouse_software_feedback |  | not_yet_testable | claude | AI does not yet drive most software progress in AI, so the feedback loop cannot yet be observed. |
+| 2026-09-23 | amodei_compressed_biology |  | not_yet_testable | claude | Its trigger, powerful AI, has not arrived, so the compression cannot yet be measured. |
+| 2026-09-23 | altman_real_world_robots_2027 |  | not_yet_testable | claude | The window opens in 2027. |
+| 2026-09-23 | moravec_humanlike_robot_hardware_2020s |  | on_track | claude | Consumer graphics chips now exceed his estimate of brain-equivalent processing, though robots with humanlike ability have not yet followed. |
+| 2026-09-23 | altman_superintelligence_few_thousand_days |  | not_yet_testable | claude | A few thousand days from late 2024 lands in the early to mid 2030s, well after today. |
+| 2026-09-23 | hanson_machine_labour_fast_doubling |  | not_yet_testable | claude | Machines do not yet substitute for most human labour, so the model's condition is unmet. |
+| 2026-09-23 | kurzweil_brain_hardware_2023 |  | behind | claude | On the tracker's rough check of 2023 hardware prices, a thousand dollars bought far less processing than he assigned to one brain. |
+| 2026-09-23 | omohundro_basic_ai_drives |  | emerging | claude | Lab and outside tests have recorded frontier models resisting shutdown or copying themselves in contrived settings. |
+| 2026-09-23 | bostrom_fast_takeoff |  | not_yet_testable | claude | AI has not reached human level across the board, so the takeoff has not begun. |
+| 2026-09-23 | hanson_non_emulation_ai_centuries |  | ahead | claude | AI systems already rival people on many professional tests without brain emulation, far sooner than his extrapolation allowed. |
+| 2026-09-23 | gwern_scaling_hypothesis |  | on_track | claude | Bigger models trained with more compute kept gaining general abilities through the early 2020s, though labs now add reinforcement learning on top. |
+| 2026-09-23 | aschenbrenner_automated_ai_researcher_2027 |  | emerging | claude | OpenAI reports an automated research intern, but that is a self-grade, and independent trials show no clear speed-up for engineers. |
+| 2026-09-23 | ai2027_superhuman_researcher_sep_2027 |  | emerging | claude | Labs report agents doing research work, but no independent test shows an AI beating top researchers. |
+| 2026-09-23 | good_ultraintelligent_before_2000 |  | behind | claude | The century ended with no machine that surpassed human intellect in general. |
+| 2026-09-23 | alexander_pdoom |  | not_yet_testable | claude | No such catastrophe has happened, and the call carries no date to grade against. |
+| 2026-09-23 | hanson_uploads_wages |  | not_yet_testable | claude | No brain has been uploaded, so the condition has not arisen. |
+| 2026-09-23 | cotra_bio_anchors_2050 |  | emerging | claude | Training compute and capability have grown faster than the report assumed, but transformative AI is not here, so arrival timing can't yet be graded. |
+| 2026-09-23 | ai2027_robot_economy_2028_2030 |  | not_yet_testable | claude | The window opens in 2028. |
+| 2026-09-23 | hanson_growth_mode_switch_2025 |  | behind | claude | World output in 2025 still grew at a few percent a year, nowhere near doubling every year or two. |
+| 2026-09-23 | kokotajlo_asi_mar_2029 |  | not_yet_testable | claude | The median lies in 2029, after milestones that have not yet been reached. |
+| 2026-09-23 | kokotajlo_top_expert_ai_nov_2028 |  | not_yet_testable | claude | The median lies in late 2028, and current systems still trail top experts on long, open-ended work. |
+| 2026-09-23 | kurzweil_longevity_escape_2030 |  | behind | claude | Remaining life expectancy in rich countries still gains well under a year per year, and no approved therapy slows ageing enough to change that before 2030. |
+| 2026-09-23 | christiano_what_failure_looks_like |  | emerging | claude | Reports of reward hacking and proxy gaming in deployed systems are growing, though humans still steer the institutions that use them. |
+| 2026-09-23 | marcus_brundage_bet_2027 |  | on_track | claude | AI still cannot reliably do several of the bet's tasks, such as writing award-level books or making Nobel-calibre discoveries. |
+| 2026-09-23 | kurzweil_nanobots_brain_scan_2030 |  | behind | claude | No robot of that size has entered human use, and brain mapping still relies on slicing preserved tissue. |
+| 2026-09-23 | aschenbrenner_10gw_cluster_2028 |  | emerging | claude | The largest announced campuses are planned at several gigawatts, but no single training cluster yet draws close to ten. |
+| 2026-09-23 | chollet_no_intelligence_explosion |  | on_track | claude | AI progress has so far come through steady scaling across many labs rather than a runaway self-improving system. |
+| 2026-09-23 | hassabis_agi_2030 |  | not_yet_testable | claude | The window opens in 2029, and current systems remain uneven across the abilities he counts toward AGI. |
+| 2026-09-23 | aschenbrenner_1t_ai_investment_2027 |  | on_track | claude | Hyperscaler capital spending and lab compute commitments in 2026 already run at a large fraction of that level and are still rising. |
+| 2026-09-23 | aschenbrenner_trillion_dollar_cluster_2030 |  | not_yet_testable | claude | No cluster approaches that scale yet, and the call cannot be graded before 2030. |
+| 2026-09-23 | amodei_expert_nation_decade_90pct |  | not_yet_testable | claude | The window runs to 2036 and no system yet works at the level of top experts across fields. |
+| 2026-09-23 | lifland_asi_jul_2033 |  | not_yet_testable | claude | The median lies in 2033, after milestones that have not yet been reached. |
+| 2026-09-23 | shulman_ai_takeover_odds |  | not_yet_testable | claude | No AI takeover has happened, and the call carries no date to grade against. |
+| 2026-09-23 | sandberg_bostrom_brain_emulation_2050 |  | emerging | claude | Complete wiring maps now exist for the fruit fly and for a piece of mouse cortex, but no mammal brain has been emulated. |
+| 2026-09-23 | davidson_full_automation_2043 |  | not_yet_testable | claude | AI does not yet automate most cognitive work, and the median lies in 2043. |
+| 2026-09-23 | aschenbrenner_100b_company_ai_revenue_2026 |  | on_track | claude | One lab's reported run-rate reached about two thirds of that level by the middle of 2026 and was still climbing steeply, though such figures are self-reported annualised months. |
+| 2026-09-23 | macaskill_moorhouse_century_in_decade |  | not_yet_testable | claude | AI research labour has not reached parity with humans, so the condition has not arisen. |
+| 2026-09-23 | suleyman_modern_turing_test |  | emerging | claude | Agents now run parts of online stores, but no public case shows an AI turning a modest stake into a million dollars on its own. |
+| 2026-09-23 | christiano_software_explosion_even_odds |  | not_yet_testable | claude | Labs report AI speeding their own research, but no independent reading yet shows self-sustaining software-only acceleration. |
+| 2026-09-23 | kurzweil_turing_test_2029 |  | emerging | claude | Chatbots passed an informal Turing test in 2025, but the bet's long, formally judged protocol has not been run. |
+| 2026-09-23 | vinge_superhuman_2005_2030 |  | emerging | claude | No system is broadly superhuman yet, but frontier models now beat experts on many narrow tests and the window runs to 2030. |
+| 2026-09-23 | kokotajlo_ai_assistants_2026 |  | on_track | claude | Businesses now pay for AI assistants at scale, and US productivity and growth readings show no clear AI acceleration so far. |
+| 2026-09-23 | kurzweil_nonbiological_crossover_2030 |  | behind | claude | The tracker's rough count puts world AI computing several orders of magnitude below his figure for all human brains combined. |
+| 2026-09-23 | solomonoff_human_level_1994_2023 |  | behind | claude | No machine had human-level general problem-solving ability by the end of 2023. |
+| 2026-09-23 | ord_unaligned_ai_century |  | not_yet_testable | claude | The window runs to 2120 and no such catastrophe has occurred. |
 | 2026-09-23 | lab_vertical_integration_exit_bell | not_yet_measurable | not_yet_measurable | claude | The ledger was searched on 23 Sep 2026 under a rule written down first, for all 120 counted buyers from January 2025, and an independent review re-searched the heaviest buyers: it gained 49 deals and lost two that fall outside its scope (TBPN, a media company, and DuckLabs, a database maker). The count now reads 27 at 31 Dec 2025, 38 at 31 Mar 2026 and 43 at 30 Jun 2026. The direction rule compares five quarters a search has covered, so it cannot be read until the search after the end of 2026. |
 | 2026-09-23 | yale_occupational_mix_dissimilarity | consistent_with_normal | consistent_with_normal | claude | The index now comes from the chart data of the Budget Lab's AI labour-market tracker, current to August 2026: 5.50 pp forty-five months after November 2022, inside the normal band (7.5 pp or less), against 5.17 pp for the January 2021 baseline at the same age. The event before cited the March 2026 row of the Lab's workbook, which the tracker's data revise from 5.26 to 5.256. |
 | 2026-09-23 | aei_augmentation_share | emerging | emerging | claude | The Economic Index's monthly readings now sit on a series of their own: from its June 2026 release the dataset samples Claude chat and Cowork conversations every day and reports them by calendar month, where earlier releases drew one seven-day sample of Claude.ai conversations, so the two are no longer drawn as one line. The reading is unchanged: augmentation is 51.4% of classified conversations in May 2026, within 5% of the normal band's edge at 50%, so the band-edge rule still holds the status at emerging. |
