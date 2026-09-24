@@ -1000,9 +1000,7 @@ class Store:
         ol = build_outlook(self)
         tests = ol.get("tests") or {}
 
-        def plain(
-            text: str,
-        ) -> str:  # the threshold a [test:] token prints on the page; other tokens drop out
+        def plain(text: str) -> str:  # the threshold a [test:] token prints on the page; other tokens drop out
             text = re.sub(
                 r"\[test:([a-z0-9_]+)\]",
                 lambda m: fmt_line(tests[m[1]]["line"], tests[m[1]]["unit"]) if m[1] in tests else "",
@@ -1023,28 +1021,11 @@ class Store:
             self.con.execute(
                 "INSERT INTO predictions VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 [
-                    r["id"],
-                    r["kind"],
-                    r["folio"],
-                    r.get("stage"),
-                    r.get("row"),
-                    r["who"],
-                    r["attribution"],
-                    plain(r["line"]),
-                    r["state"],
-                    r["word"],
-                    None if r["settles"] is None else plain(str(r["settles"])),
-                    t.get("fact"),
-                    t.get("op"),
-                    None if t.get("against") is None else str(t["against"]),
-                    rd.get("value") if isinstance(rd.get("value"), (int, float)) else None,
-                    rd.get("unit"),
-                    rd.get("as_of"),
-                    rd.get("derived_id"),
-                    rd.get("obs_ids") or [],
-                    r["indicators"],
-                    r["sources"],
-                    r["href"],
+                    r["id"], r["kind"], r["folio"], r.get("stage"), r.get("row"), r["who"], r["attribution"],
+                    plain(r["line"]), r["state"], r["word"], None if r["settles"] is None else plain(str(r["settles"])),
+                    t.get("fact"), t.get("op"), None if t.get("against") is None else str(t["against"]),
+                    rd.get("value") if isinstance(rd.get("value"), (int, float)) else None, rd.get("unit"),
+                    rd.get("as_of"), rd.get("derived_id"), rd.get("obs_ids") or [], r["indicators"], r["sources"], r["href"],
                 ],
             )
 

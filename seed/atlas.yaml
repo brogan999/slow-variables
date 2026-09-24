@@ -11,8 +11,8 @@ intro: >-
   The map counts works, not odds: a darker cell means more sourced works expect change there, not that change is more
   likely. Beside each part of life sit the public series this site reads for it.
 provenance: >-
-  The plates are illustrations in the manner of old master paintings, made with an image model for the site's
-  owner in September of 2026. They illustrate the domains; they are not evidence of anything.
+  The plates are illustrations in the manner of old master paintings, made in v0, Vercel's AI design tool, for
+  the site's owner in September of 2026. They illustrate the domains; they are not evidence of anything.
 eras:
   - id: now
     label: Now and on the way
@@ -38,7 +38,7 @@ plates:  # files in web/public/atlas, made by scripts/atlas_plates.py; sha256 of
     sha256: 0871c5080c5585882474a0af87d11fd352ab3de017639600d47bb71bc76d9960
     allegory: The creation, after Michelangelo
     alt: After Michelangelo's Creation of Adam, a man reclining on a hillside reaches toward a divine figure borne by attendants, a dark streak cracking the fresco between their hands.
-    caption: After Michelangelo's Creation of Adam, made with an image model; an illustration, not evidence.
+    caption: After Michelangelo's Creation of Adam, made in v0; an illustration, not evidence.
   economy:
     file: economy
     height: 1347  # at 1024 wide, after trimming the canvas
@@ -90,6 +90,7 @@ plates:  # files in web/public/atlas, made by scripts/atlas_plates.py; sha256 of
 domains:
   - id: economy
     name: The economy
+    board_folios: [value, reorganisation]  # which of the board's folios bear on this part of life
     thesis: "These writers expect machine labour to make the world far richer, far faster than before, but split over whether the gains reach ordinary people or pool with the owners."
     thesis_from: [economy_hanson_growth_tenfold, economy_bostrom_capital_windfall, economy_shanahan_owners_stay_few]
     readings:
@@ -102,6 +103,7 @@ domains:
       side_b: {entries: [economy_kulveit_ai_run_firms, economy_yudkowsky_humans_left_poor, economy_shanahan_owners_stay_few], view: "Not by default: the gains flow to whoever owns the machines, or to the machines themselves, and ordinary people lose their economic say."}
   - id: work
     name: Work
+    board_folios: [reorganisation, adoption]  # which of the board's folios bear on this part of life
     thesis: "Most of these writers expect machines to climb from routine tasks to skilled ones, with pay holding up for a while before human labour loses most of its value."
     thesis_from: [work_moravec_rising_tide, work_hanson_wages_fall, work_amodei_people_keep_an_edge]
     readings:
@@ -114,6 +116,7 @@ domains:
       side_b: {entries: [work_suleyman_jobs_wont_come, work_bostrom_horses, work_hanson_wages_fall], view: "No: once machines do nearly everything more cheaply, new jobs come too slowly and human wages sink toward bare survival."}
   - id: culture
     name: Culture and meaning
+    board_folios: [reorganisation]  # which of the board's folios bear on this part of life
     thesis: "These writers expect culture to be remade by minds and companions that outclass us, leaving people to search for purpose when work and mastery matter less."
     thesis_from: [culture_kulveit_ai_made_culture, culture_bostrom_purpose_problem, culture_vinge_world_beyond_us]
     readings: {}
@@ -123,6 +126,7 @@ domains:
       side_b: {entries: [culture_alexander_mindless_consumption, culture_russell_enfeeblement], view: "Not by default: abundance pulls most people into passive consumption and a dependence on machines that saps their autonomy."}
   - id: politics
     name: Power and politics
+    board_folios: [reorganisation, value, adoption]  # which of the board's folios bear on this part of life
     thesis: "Many of these writers expect AI to concentrate power in whoever controls it, whether labs, governments or a single project, though others think rivals and law keep it spread."
     thesis_from: [politics_bostrom_singleton, politics_vinge_bans_fail, politics_ai2027_backlash_and_committee]
     readings:
@@ -134,6 +138,7 @@ domains:
       side_b: {entries: [politics_christiano_no_decisive_lead, politics_hanson_liability_and_law], view: "Unlikely: rivals will hold nearly as capable systems, and power stays spread among many players bound by shared rules."}
   - id: security
     name: War and safety
+    board_folios: [capability]  # which of the board's folios bear on this part of life
     thesis: "Most of these writers expect advanced AI to be hard to contain and to transform warfare, though they disagree sharply over how likely it is to overpower humanity."
     thesis_from: [security_omohundro_basic_drives, security_aschenbrenner_military_edge, security_ord_one_in_ten]
     readings:
@@ -145,6 +150,7 @@ domains:
       side_b: {entries: [security_hanson_takeover_unlikely], view: "Very unlikely: power stays spread across many systems and owners, kept in check by competition, law and trade."}
   - id: technology
     name: Science and technology
+    board_folios: [capability, value]  # which of the board's folios bear on this part of life
     thesis: "These writers expect machines to match human minds and then speed up invention itself, differing mainly over how soon that happens and how abrupt the leap past people is."
     thesis_from: [technology_good_last_invention, technology_macaskill_century_in_a_decade, technology_chollet_no_explosion]
     readings:
@@ -157,6 +163,7 @@ domains:
       side_b: {entries: [technology_chollet_no_explosion], view: "No: bottlenecks and diminishing returns keep progress steady, as they have in every earlier field of science."}
   - id: health
     name: Health and the body
+    board_folios: [adoption, reorganisation]  # which of the board's folios bear on this part of life
     thesis: "Most of these writers expect AI-driven medicine to defeat most disease and stretch lifespans dramatically, with the boldest imagining minds that outlive their bodies altogether."
     thesis_from: [health_amodei_compressed_century, health_kurzweil_escape_velocity, health_hanson_backup_immortality]
     readings:
@@ -168,6 +175,7 @@ domains:
       side_b: {entries: [health_lem_lifespan_limit], view: "Slowly: big gains need the rewriting of human heredity, and radical redesign of the body stays out of reach for a long time."}
   - id: daily_life
     name: Daily life
+    board_folios: [adoption, value, reorganisation]  # which of the board's folios bear on this part of life
     thesis: "These writers expect everyday life to fill with AI companions and expert helpers, while in the nearer term its core of family and play feels familiar."
     thesis_from: [daily_kokotajlo_chatbot_companions, daily_suleyman_experts_for_everyone, daily_altman_familiar_2030s]
     readings:

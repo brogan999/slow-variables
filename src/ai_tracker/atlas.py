@@ -40,8 +40,10 @@ def cells(expectations: list[dict[str, Any]], worlds: list[str]) -> dict[tuple[s
     way things go counts in every world; two lines from one work count once."""
     seen: dict[tuple[str, str], dict[str, set[str]]] = {}
     for e in expectations:
-        c = seen.setdefault((e["domain"], e["era"]), {k: set() for k in ["all", *worlds]})
+        c = seen.setdefault((e["domain"], e["era"]), {k: set() for k in ["all", *worlds, "any"]})
         c["all"].add(e["source"])
+        if e["worlds"] == ["any"]:
+            c["any"].add(e["source"])
         for w in worlds if e["worlds"] == ["any"] else e["worlds"]:
             c[w].add(e["source"])
     return {k: {w: len(v) for w, v in c.items()} for k, c in seen.items()}
@@ -142,7 +144,7 @@ def build(
                     "href": r["href"],
                 }
                 for r in board_rows
-                if inds & set(r.get("indicators") or [])
+                if inds & set(r.get("indicators") or []) and r["folio"] in (d.get("board_folios") or [])
             ),
             key=lambda r: (rows[r["id"]].get("attribution") != "author", r["id"]),
         )[:4]
@@ -219,9 +221,19 @@ def build(
                                 "level": level(n),
                                 "label": f"{d['name']}, {eras[era]['label'].lower()}"
                                 + ("" if w == "all" else f", {wlabel[w].lower()}")
-                                + f": {n} sourced {'work' if n == 1 else 'works'}",
+                                + f": {n} sourced {'work' if n == 1 else 'works'}"
+                                + (
+                                    f", {c['any']} of them in any world"
+                                    if w != "all" and n and c["any"]
+                                    else ""
+                                ),
+                                "any": 0
+                                if w == "all"
+                                else c["any"],  # works that hold whichever way things go
                             }
-                            for w, n in (counts.get((did, era)) or dict.fromkeys(["all", *wids], 0)).items()
+                            for c in [counts.get((did, era)) or dict.fromkeys(["all", *wids, "any"], 0)]
+                            for w, n in c.items()
+                            if w != "any"
                         ],
                     }
                     for era in ERAS
@@ -251,6 +263,7 @@ def problems(
     outlook_spec: dict[str, Any],
     known_facts: set[str],
     indicator_ids: set[str],
+    board_folios: set[str],
 ) -> list[str]:
     """Errors CI catches before a page names a source, reading or plate it cannot resolve."""
     if not spec:
@@ -320,6 +333,8 @@ def problems(
             for k in d.get("readings") or {}
             if k not in readable
         ]
+        if not d.get("board_folios") or not set(d["board_folios"]) <= board_folios:
+            errors.append(f"{where} needs board_folios drawn from the board's folios")
         if d["id"] not in (spec.get("plates") or {}):
             errors.append(f"{where} has no plate")
     for k, p in (spec.get("plates") or {}).items():

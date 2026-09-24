@@ -290,7 +290,7 @@ export const singularity = () => read<SingularityDoc>("singularity.json");
 
 // The Singularity Atlas (src/ai_tracker/atlas.py): every count, level and label is worked out in Python.
 export type AtPlate = { file: string; height: number; alt: string; allegory: string; caption?: string; src: string; srcset: string };
-export type AtCount = { world: string; n: number; level: number; label: string };
+export type AtCount = { world: string; n: number; level: number; label: string; any: number };
 export type AtReading = { id: string; label: string; reading: Fact | null; year: string | null };
 export type AtEntry = {
   id: string; domain: string; era: string; line: string; who: string; work: string; year: number; url: string; source: string;

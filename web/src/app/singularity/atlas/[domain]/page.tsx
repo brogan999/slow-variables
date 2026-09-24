@@ -45,7 +45,7 @@ export default async function AtlasDomainPage({ params }: { params: Promise<{ do
             </div>
             <figure className="panel overflow-hidden max-w-[20rem]">
               <Plate p={d.plate} sizes="(min-width: 768px) 272px, 320px" eager />
-              <figcaption className="px-4 py-2 text-xs text-ink-2">{d.plate.allegory}. An illustration made with an image model, not evidence.</figcaption>
+              <figcaption className="px-4 py-2 text-xs text-ink-2">{d.plate.allegory}. An illustration made in v0, not evidence.</figcaption>
             </figure>
           </div>
         </header>

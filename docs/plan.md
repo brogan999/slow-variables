@@ -688,7 +688,7 @@ Known limits:
 
 ## Part 18 status (24 Sep 2026): the Singularity Atlas
 
-Decision (owner, 24 Sep): the Atlas prototype's idea (how each part of life changes, under which future) comes to the site built from sourced material, not the prototype's invented scores. Frame: the site's four worlds. Intensity: a count of sourced works plus live readings. Imagery: the owner's plates, with provenance. Data: a few public series for the thin domains.
+Decision (owner, 24 Sep): the Atlas prototype's idea (how each part of life changes, under which future) comes to the site built from sourced material, not the prototype's invented scores. Frame: the site's four worlds. Intensity: a count of sourced works plus live readings. Imagery: the owner's plates, made in v0 (the files came in the v0 project export, stamped 11 Sep 2026), recorded by sha256. Data: a few public series for the thin domains.
 
 What shipped (PR 1 context series, PR 2 data and engine, PR 3 pages):
 - **Series:** `owid_context` (a subclass of the existing `Owid`, optional, paired by URL, named rows and columns): world life expectancy at 65 (UN WPP), liberal democracy (V-Dem, population-weighted), labour share of GDP (ILO modelled estimates). Reported AI incidents from the AI Index 2025 and 2026 PDFs as manual rows. Signposts only, no bands.
