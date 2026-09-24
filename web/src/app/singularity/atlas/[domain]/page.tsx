@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArticleLayout, MarginPanel } from "@/components/ArticleLayout";
 import { EraSection, Plate, Reading, roman } from "@/components/AtlasParts";
+import { WordChip } from "@/components/StatusChip";
 import { atlas } from "@/lib/data";
 import { SITE } from "@/lib/site";
 
@@ -25,32 +26,41 @@ export default async function AtlasDomainPage({ params }: { params: Promise<{ do
   const d = doc.domains.find((x) => x.id === domain);
   if (!d) notFound();
   const name = (id: string | null) => doc.domains.find((x) => x.id === id)?.name;
+  // On wide screens the readings sit in the margin; on narrow ones, above the eras rather than after the sources.
+  const moving = (
+    <MarginPanel title="Already moving">
+      {d.readings.length ? d.readings.map((r) => <Reading key={r.id} r={r} />) : <p>No public series yet. Nothing this site reads measures this part of life.</p>}
+    </MarginPanel>
+  );
   return (
     <ArticleLayout
       head={
         <header className="flex flex-col gap-5 pt-4 md:pt-10">
           <nav aria-label="Breadcrumb" className="eyebrow"><Link href="/singularity" className={link}>Singularity</Link> / <Link href="/singularity/atlas" className={link}>Atlas</Link> / <span className="text-gild-ink">{roman(d.n)}</span></nav>
-          <h1 className="display text-[2.5rem] md:text-[3.75rem] leading-[1] max-w-[18ch]">{d.name}</h1>
-          <p className="drop-cap font-serif text-xl md:text-[1.3rem] leading-[1.55] text-ink max-w-[60ch]">{d.thesis}</p>
-          <p className="text-sm text-ink-2">After {d.thesis_from.join(", ")}.</p>
-          <figure className="panel overflow-hidden mt-2 max-w-[400px]">
-            <Plate p={d.plate} sizes="(min-width: 640px) 400px, 100vw" eager />
-            <figcaption className="px-4 py-2 text-xs text-ink-2">{d.plate.allegory}. An illustration made with an image model, not evidence.</figcaption>
-          </figure>
+          <div className="grid gap-6 md:grid-cols-[minmax(0,1fr)_17rem] md:items-start">
+            <div className="flex flex-col gap-5">
+              <h1 className="display text-[2.5rem] md:text-[3.75rem] leading-[1] max-w-[18ch]">{d.name}</h1>
+              <p className="drop-cap font-serif text-xl md:text-[1.3rem] leading-[1.55] text-ink max-w-[60ch]">{d.thesis}</p>
+              <p className="text-sm text-ink-2">After {d.thesis_from.join(", ")}.</p>
+            </div>
+            <figure className="panel overflow-hidden max-w-[20rem]">
+              <Plate p={d.plate} sizes="(min-width: 768px) 272px, 320px" eager />
+              <figcaption className="px-4 py-2 text-xs text-ink-2">{d.plate.allegory}. An illustration made with an image model, not evidence.</figcaption>
+            </figure>
+          </div>
         </header>
       }
       margin={<>
-        <MarginPanel title="Already moving">
-          {d.readings.length ? d.readings.map((r) => <Reading key={r.id} r={r} />) : <p>No public series yet. Nothing this site reads measures this part of life.</p>}
-        </MarginPanel>
+        <div className="hidden lg:block">{moving}</div>
         <MarginPanel title="Eras">
-          <ul className="flex flex-col gap-1">{d.eras.map((e) => <li key={e.id}><a href={`#${e.id}`} className={link}>{e.label}</a> <span className="text-muted">· {e.entries.length}</span></li>)}</ul>
+          <ul className="flex flex-col gap-1">{d.eras.map((e) => <li key={e.id}><a href={`#${e.id}`} className={link}>{e.label}</a> <span className="text-muted">· {e.works} {e.works === 1 ? "work" : "works"}</span></li>)}</ul>
         </MarginPanel>
         <MarginPanel title="Parts of life">
           <ol className="flex flex-col gap-1">{doc.domains.map((x) => <li key={x.id}>{x.id === d.id ? <span aria-current="page" className="text-ink font-medium">{x.name}</span> : <Link href={`/singularity/atlas/${x.id}`} className={link}>{x.name}</Link>}</li>)}</ol>
         </MarginPanel>
       </>}
     >
+      <div className="lg:hidden">{moving}</div>
       {d.eras.map((e) => <EraSection key={e.id} era={e} />)}
       {d.disagreement ? (
         <section aria-labelledby="split-h" className="mt-14">
@@ -80,14 +90,15 @@ export default async function AtlasDomainPage({ params }: { params: Promise<{ do
               </li>
             ))}
           </ul>
+          {d.fiction_more ? <p className="mt-2 text-sm text-ink-2"><Link href="/singularity#fiction" className={link}>More novels on the timeline →</Link></p> : null}
         </section>
       ) : null}
       {d.leaning.length ? (
         <section aria-labelledby="lean-h" className="mt-14">
           <div className="gild-rule mb-5" aria-hidden />
-          <h2 id="lean-h" className="display text-[1.6rem] leading-tight">Dated predictions on the same readings</h2>
+          <h2 id="lean-h" className="display text-[1.6rem] leading-tight">Forecasts on the board that read these series</h2>
           <ul className="mt-3">
-            {d.leaning.map((r) => <li key={r.id} className="border-t border-grid py-2.5 text-sm"><Link href={r.href} className={link}>{r.line}</Link> <span className="text-ink-2">· {r.who}</span></li>)}
+            {d.leaning.map((r) => <li key={r.id} className="border-t border-grid py-2.5 text-sm flex flex-wrap items-baseline gap-x-2 gap-y-1"><WordChip word={r.word} label={r.word_label} /><Link href={r.href} className={link}>{r.line}</Link> <span className="text-ink-2">· {r.who}</span></li>)}
           </ul>
         </section>
       ) : null}

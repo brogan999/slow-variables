@@ -23,6 +23,7 @@ ERAS = ["now", "first_decade", "long_run"]
 # sourced works at which a cell's tint steps up: fixed, so every world's map reads the same way
 LEVELS = (1, 2, 4, 7)
 WIDTHS = (480, 768, 1024)
+FICTION = 8  # novels listed on a part of life's page; the rest are on the timeline
 FILTER_SHARE = 1 / 3  # the world filter ships only if this share of entries names specific worlds
 
 
@@ -97,7 +98,6 @@ def build(
 
     def entry(e: dict[str, Any]) -> dict[str, Any]:
         x = srcs[e["source"]]
-        r = rows.get(e.get("prediction") or "")
         return {
             "id": e["id"],
             "domain": e["domain"],
@@ -115,12 +115,11 @@ def build(
                 {"id": k, "label": labels[k], "reading": singularity.reading(s, k, facts, today)}
                 for k in e.get("reads") or []
             ],
-            "prediction": {"word": r["word"], "href": r["href"]} if r else None,
         }
 
     entries = [entry(e) for e in spec["expectations"]]
     counts = cells(spec["expectations"], wids)
-    fic_urls = {x["id"]: x["url"] for x in sing.get("sources") or []}
+    words = {w["id"]: w["label"] for w in (board_doc or {}).get("words") or []}
     specific = sum(1 for e in spec["expectations"] if e["worlds"] != ["any"])
     domains, map_rows = [], []
     for i, did in enumerate(DOMAINS):
@@ -132,11 +131,25 @@ def build(
             for k, v in (d.get("readings") or {}).items()
         ]
         inds = {k for k in d.get("readings") or {} if k not in facts}
-        leaning = [
-            {"id": r["id"], "line": r["line"], "who": r["who"], "word": r["word"], "href": r["href"]}
-            for r in board_rows
-            if inds & set(r.get("indicators") or [])
-        ][:6]
+        leaning = sorted(  # a named author's forecast before the site's own theses; the four most relevant
+            (
+                {
+                    "id": r["id"],
+                    "line": r["line"],
+                    "who": r["who"],
+                    "word": r["word"],
+                    "word_label": words[r["word"]],
+                    "href": r["href"],
+                }
+                for r in board_rows
+                if inds & set(r.get("indicators") or [])
+            ),
+            key=lambda r: (rows[r["id"]].get("attribution") != "author", r["id"]),
+        )[:4]
+        fic = sorted(  # works whose strongest subject is this part of life first, then the rest, capped
+            (f for f in sing.get("fiction") or [] if did in (f.get("domains") or [])),
+            key=lambda f: (f["domains"][0] != did, f["year_written"], f["title"]),
+        )
         names = {e["id"]: e["who"] for e in mine}
         dis = d.get("disagreement")
         domains.append(
@@ -148,7 +161,16 @@ def build(
                 "thesis_from": sorted({names[k] for k in d["thesis_from"]}),
                 "plate": _plate(spec["plates"][did]),
                 "readings": readings,
-                "eras": [{**eras[era], "entries": [e for e in mine if e["era"] == era]} for era in ERAS],
+                "eras": [
+                    {
+                        **eras[era],
+                        "entries": [e for e in mine if e["era"] == era],
+                        "works": len(
+                            {e["source"] for e in mine if e["era"] == era}
+                        ),  # as the map counts them
+                    }
+                    for era in ERAS
+                ],
                 "disagreement": dis
                 and {
                     "question": dis["question"],
@@ -163,12 +185,11 @@ def build(
                         "author": f["author"],
                         "year": f["year_written"],
                         "line": f["line"],
-                        "url": fic_urls.get(f["source"]),
                         "href": f"/singularity#fic-{f['source']}",
                     }
-                    for f in sing.get("fiction") or []
-                    if did in (f.get("domains") or [])
+                    for f in fic[:FICTION]
                 ],
+                "fiction_more": max(len(fic) - FICTION, 0),
                 "leaning": leaning,
                 "sources": sorted(
                     {
@@ -181,14 +202,12 @@ def build(
                 "next": DOMAINS[i + 1] if i + 1 < len(DOMAINS) else None,
             }
         )
-        head = next((r for r in readings if r["reading"]), None)
         map_rows.append(
             {
                 "id": did,
                 "name": d["name"],
                 "href": f"/singularity/atlas/{did}",
                 "plate": _plate(spec["plates"][did]),
-                "headline": head,
                 "cells": [
                     {
                         "era": era,
@@ -216,11 +235,14 @@ def build(
         "hero": _plate(spec["plates"]["hero"]),
         "eras": [eras[e] for e in ERAS],
         "worlds": worlds,
-        "levels": list(LEVELS),
         "filter": specific >= FILTER_SHARE * len(entries),
         "map": map_rows,
         "domains": domains,
-        "count": {"expectations": len(entries), "sources": len({e["source"] for e in entries})},
+        "count": {
+            "expectations": len(entries),
+            "sources": len({e["source"] for e in entries}),
+            "domains": len(DOMAINS),
+        },
     }
 
 
@@ -229,7 +251,6 @@ def problems(
     outlook_spec: dict[str, Any],
     known_facts: set[str],
     indicator_ids: set[str],
-    prediction_ids: set[str],
 ) -> list[str]:
     """Errors CI catches before a page names a source, reading or plate it cannot resolve."""
     if not spec:
@@ -271,8 +292,6 @@ def problems(
             for k in e.get("reads") or []
             if k not in labels
         ]
-        if e.get("prediction") and e["prediction"] not in prediction_ids:
-            errors.append(f"{where} links unknown prediction {e['prediction']}")
     if {d["id"] for d in spec.get("domains") or []} != set(DOMAINS):
         errors.append("atlas: domains must be exactly the eight")
     for d in spec.get("domains") or []:

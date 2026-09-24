@@ -56,7 +56,7 @@ def _published() -> set[str]:
 
 def _problems(spec):
     ol = load_outlook()
-    return atlas.problems(spec, ol, set(ol.get("facts") or {}), _published(), {"p1"})
+    return atlas.problems(spec, ol, set(ol.get("facts") or {}), _published())
 
 
 def test_the_seed_resolves():

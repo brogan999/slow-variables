@@ -7,10 +7,11 @@ const link = "underline decoration-axis underline-offset-2 hover:decoration-ink"
 
 // A plate: WebP at three widths, laid out by the browser from srcset. Plain <img>, not next/image: the files are already
 // sized and the site serves no image optimiser.
-export function Plate({ p, sizes, eager, className = "" }: { p: AtPlate; sizes: string; eager?: boolean; className?: string }) {
+// `decorative` when a link beside it already names the plate, so the link is not read out with the whole alt text.
+export function Plate({ p, sizes, eager, decorative, className = "" }: { p: AtPlate; sizes: string; eager?: boolean; decorative?: boolean; className?: string }) {
   return (
     // eslint-disable-next-line @next/next/no-img-element
-    <img src={p.src} srcSet={p.srcset} sizes={sizes} alt={p.alt} width={1024} height={p.height} loading={eager ? "eager" : "lazy"}
+    <img src={p.src} srcSet={p.srcset} sizes={sizes} alt={decorative ? "" : p.alt} width={1024} height={p.height} loading={eager ? "eager" : "lazy"}
       fetchPriority={eager ? "high" : undefined} className={`block w-full h-auto ${className}`} />
   );
 }
@@ -19,7 +20,7 @@ export function Reading({ r }: { r: AtReading }) {
   return (
     <div className="border-t border-grid pt-2 first:border-0 first:pt-0">
       <p className="text-ink-2 text-[13px]">{r.label}</p>
-      {r.reading ? <p className="text-[13px]"><Fact f={r.reading} /> <span className="text-muted">latest, {r.year}</span></p> : <p className="text-muted text-[13px]">No public series yet</p>}
+      {r.reading ? <p className="text-[13px]"><Fact f={r.reading} /> <span className="text-muted">· {r.year}</span></p> : <p className="text-muted text-[13px]">No public series yet</p>}
     </div>
   );
 }
@@ -34,7 +35,7 @@ export function AtlasMap({ doc }: { doc: AtlasDoc }) {
       {doc.filter ? (
         <fieldset className="flex flex-wrap items-center gap-x-4 gap-y-2 mb-3 text-sm">
           <legend className="eyebrow mb-2">Show the works that assume</legend>
-          <label className="inline-flex items-center gap-1.5"><input type="radio" name="atlas-world" value="all" id="aw-all" defaultChecked /> any world</label>
+          <label className="inline-flex items-center gap-1.5"><input type="radio" name="atlas-world" value="all" id="aw-all" defaultChecked /> all works</label>
           {doc.worlds.map((w) => (
             <label key={w.id} className="inline-flex items-center gap-1.5"><input type="radio" name="atlas-world" value={w.id} id={`aw-${w.id}`} /> {w.short.toLowerCase()}</label>
           ))}
@@ -42,8 +43,8 @@ export function AtlasMap({ doc }: { doc: AtlasDoc }) {
       ) : null}
       <Figure
         title="How many sourced works expect change, by part of life and era"
-        note="a darker cell means more writers expect change there, not that change is more likely"
-        foot={<span>Counts distinct works in the canon; a work that expects the change whichever way things go counts in every world.</span>}
+        note="a darker cell means more sourced works expect change there, not that change is more likely"
+        foot={<span>Counts distinct works in the canon; a work that expects the change whichever way things go counts in every world. An empty cell means no work in this canon places a change there, not that none will happen: the canon leans to writers who expect transformative AI, and the later eras assume it arrives, which the brake doubts.</span>}
       >
         <div className="overflow-x-auto">
           <table className="data atlas-table w-full">
@@ -65,7 +66,7 @@ function MapRow({ r }: { r: AtMapRow }) {
     <tr>
       <th scope="row" className="text-left font-normal">
         <Link href={r.href} className="flex items-center gap-2.5">
-          <span className="hidden sm:block w-9 h-9 shrink-0 overflow-hidden rounded-full border border-axis"><Plate p={r.plate} sizes="36px" className="h-full object-cover" /></span>
+          <span className="hidden sm:block w-9 h-9 shrink-0 overflow-hidden rounded-full border border-axis"><Plate p={r.plate} sizes="36px" decorative className="h-full object-cover" /></span>
           <span className="font-serif text-[1rem] text-ink underline decoration-axis underline-offset-2">{r.name}</span>
         </Link>
       </th>
@@ -81,7 +82,7 @@ function MapRow({ r }: { r: AtMapRow }) {
                   </span>
                 ))}
               </Link>
-            ) : <span className="atlas-n lvl-0" style={{ display: "block" }}>—</span>}
+            ) : <span className="atlas-n lvl-0" style={{ display: "block" }}><span aria-hidden>—</span><span className="sr-only">{all.label}</span></span>}
           </td>
         );
       })}
@@ -95,7 +96,7 @@ export function PlateCards({ doc }: { doc: AtlasDoc }) {
       {doc.domains.map((d) => (
         <li key={d.id} className="panel overflow-hidden flex flex-col">
           <Link href={`/singularity/atlas/${d.id}`} className="group flex flex-col h-full">
-            <Plate p={d.plate} sizes="(min-width: 1024px) 420px, (min-width: 640px) 45vw, 100vw" className="aspect-[4/5] object-cover" />
+            <Plate p={d.plate} sizes="(min-width: 1024px) 420px, (min-width: 640px) 45vw, 100vw" decorative className="aspect-[4/3] object-cover object-[center_30%]" />
             <div className="p-4 flex flex-col gap-1.5">
               <p className="eyebrow"><span className="text-gild-ink">{roman(d.n)}</span> · {d.plate.allegory}</p>
               <h3 className="display text-xl leading-tight group-hover:underline decoration-axis underline-offset-4">{d.name}</h3>

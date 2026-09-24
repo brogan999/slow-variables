@@ -393,7 +393,6 @@ def _check(s: st.Store) -> tuple[list[str], list[str]]:
         load_outlook(),
         set(load_outlook().get("facts") or {}),
         {i.id for i in s.seed.indicators if i.published},
-        {pr.id for pr in s.seed.predictions} | {c["id"] for c in load_outlook().get("claims") or []},
     )
     return (
         errors + a_errors + m_errors + o_errors + b_errors + s_errors + at_errors,

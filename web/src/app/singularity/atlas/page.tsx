@@ -29,7 +29,7 @@ export default function AtlasPage() {
         </header>
       }
       margin={<>
-        <MarginPanel title="Instrument" rows={[["Expectations", d.count.expectations], ["Sourced works", d.count.sources], ["Parts of life", d.domains.length]]}>
+        <MarginPanel title="Instrument" rows={[["Expectations", d.count.expectations], ["Sourced works", d.count.sources], ["Parts of life", d.count.domains]]}>
           <p>Each expectation is a writer&apos;s view in this site&apos;s words, credited and linked. None is scored: most name no date and no test, so they sit here rather than on <Link href="/predictions" className={link}>the predictions board</Link>.</p>
           <p><Link href="/methodology#atlas" className={link}>How the atlas is built →</Link></p>
         </MarginPanel>
@@ -42,7 +42,7 @@ export default function AtlasPage() {
       <section id="map" aria-labelledby="map-h" className="scroll-mt-8">
         <div className="gild-rule mb-6" aria-hidden />
         <p className="eyebrow mb-1"><span className="text-gild-ink">I</span> · the map</p>
-        <h2 id="map-h" className="display text-[1.75rem] md:text-[2.1rem] leading-tight mb-3">Where the writers expect change, and when</h2>
+        <h2 id="map-h" className="display text-[1.75rem] md:text-[2.1rem] leading-tight mb-3">Where the sourced works expect change, and when</h2>
         <p className="font-serif text-[1.0625rem] leading-relaxed text-ink-2 max-w-[62ch] mb-4">Rows are parts of life, columns are eras. Pick a world to see only the works that assume it; open a cell to read them.</p>
         <AtlasMap doc={d} />
       </section>

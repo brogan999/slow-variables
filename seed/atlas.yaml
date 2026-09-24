@@ -8,7 +8,7 @@ intro: >-
   Most forecasts about AI ask when. This atlas asks what changes: in money, work, meaning, power, war, science,
   health and an ordinary day. For each part of life it gathers what named writers expect, from the first essays on
   thinking machines to this year's scenarios, sorted by era and by which of the site's worlds each assumes.
-  The map counts works, not odds: a darker cell means more writers expect change there, not that change is more
+  The map counts works, not odds: a darker cell means more sourced works expect change there, not that change is more
   likely. Beside each part of life sit the public series this site reads for it.
 provenance: >-
   The plates are illustrations in the manner of old master paintings, made with an image model for the site's
@@ -38,7 +38,7 @@ plates:  # files in web/public/atlas, made by scripts/atlas_plates.py; sha256 of
     sha256: 0871c5080c5585882474a0af87d11fd352ab3de017639600d47bb71bc76d9960
     allegory: The creation, after Michelangelo
     alt: After Michelangelo's Creation of Adam, a man reclining on a hillside reaches toward a divine figure borne by attendants, a dark streak cracking the fresco between their hands.
-    caption: After Michelangelo's Creation of Adam, made with an image model.
+    caption: After Michelangelo's Creation of Adam, made with an image model; an illustration, not evidence.
   economy:
     file: economy
     height: 1347  # at 1024 wide, after trimming the canvas
@@ -160,7 +160,7 @@ domains:
     thesis: "Most of these writers expect AI-driven medicine to defeat most disease and stretch lifespans dramatically, with the boldest imagining minds that outlive their bodies altogether."
     thesis_from: [health_amodei_compressed_century, health_kurzweil_escape_velocity, health_hanson_backup_immortality]
     readings:
-      life_exp_65: "Years of life left at retirement age, world average (UN)"
+      life_exp_65: "Remaining life expectancy of older people, world average (UN)"
       fda_ai_devices_cumulative: "AI-enabled medical devices cleared by the FDA, change on a year before"
     disagreement:
       question: "How soon will people live far longer lives?"
@@ -286,7 +286,7 @@ expectations:
     worlds: [any]
     source: karnofsky_2021_b
     who: "Holden Karnofsky"
-    line: "Today's pace of growth cannot last for thousands more years; it must end in stagnation, explosion or collapse, and stagnation is not the likeliest of the three."
+    line: "Today's pace of growth cannot last for thousands more years; it must end in stagnation, explosion or collapse."
   - id: economy_vinge_scarcity_remains
     domain: economy
     era: long_run
@@ -444,7 +444,7 @@ expectations:
     worlds: [managed_explosion, loss_of_control]
     source: bostrom_2014
     who: "Nick Bostrom"
-    line: "If the takeoff is fast or moderately fast, one project will probably pull far enough ahead that it could rule the world as a single unchallenged power."
+    line: "If the takeoff is fast, one project will probably pull far enough ahead to rule the world as a single unchallenged power; if moderate, it could go either way."
   - id: politics_christiano_no_decisive_lead
     domain: politics
     era: first_decade
@@ -571,7 +571,7 @@ expectations:
   - id: security_hanson_takeover_unlikely
     domain: security
     era: first_decade
-    worlds: [managed_explosion]
+    worlds: [any]
     source: hanson_2008
     who: "Robin Hanson"
     line: "The chance that a single hand-built AI suddenly leaps, without warning, from nearly powerless to overwhelmingly powerful is below one in a hundred."
@@ -585,7 +585,7 @@ expectations:
   - id: security_ord_one_in_ten
     domain: security
     era: first_decade
-    worlds: [loss_of_control]
+    worlds: [any]
     source: ord_2020
     who: "Toby Ord"
     line: "Unaligned AI is the largest single threat to humanity's long-term future this century, with about one chance in ten of ruining it for good."
