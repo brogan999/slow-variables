@@ -285,10 +285,14 @@ def _check(s: st.Store) -> tuple[list[str], list[str]]:
     valves, buckets = {v["id"] for v in st.VALVES}, {b.id for b in s.seed.buckets}
     for ind in s.seed.indicators:  # an unknown valve reads as measuring nothing on the diagram, silently
         if ind.valve_measured and ind.valve_measured not in valves:
-            errors.append(f"{ind.id}: valve_measured '{ind.valve_measured}' is not a valve ({sorted(valves)})")
+            errors.append(
+                f"{ind.id}: valve_measured '{ind.valve_measured}' is not a valve ({sorted(valves)})"
+            )
     for c in s.seed.crosswalk:  # `leak` is the diagram's exit to the capture lens, a bucket only here
         if c.bucket_id not in buckets | {"leak"}:
-            errors.append(f"crosswalk {c.bucket_id} -> {c.layer_id}: '{c.bucket_id}' is not a bucket or the leak")
+            errors.append(
+                f"crosswalk {c.bucket_id} -> {c.layer_id}: '{c.bucket_id}' is not a bucket or the leak"
+            )
     shared = {i for c in s.seed.crosswalk for i in c.shared_indicators}  # the same match /crosswalk renders
     for ind in s.seed.indicators:  # v2 §0/§10: a shared indicator's two addresses need a crosswalk row
         if ind.bucket_id and ind.layer_id and ind.id not in shared:
@@ -372,11 +376,29 @@ def _check(s: st.Store) -> tuple[list[str], list[str]]:
         s.seed.predictions,
         load_outlook(),
         {i.id for i in s.seed.indicators if i.published},
-        {k for r in s.seed.compare for f, v in r.model_dump().items() if f.endswith("predictions") for k in v or []},
+        {
+            k
+            for r in s.seed.compare
+            for f, v in r.model_dump().items()
+            if f.endswith("predictions")
+            for k in v or []
+        },
         {pr.id: (ev.new_status if (ev := s.current(pr.id)) else None) for pr in s.seed.predictions},
         _date.today(),
     )
-    return errors + a_errors + m_errors + o_errors + b_errors + s_errors, notes + a_notes + o_notes
+    from . import atlas
+
+    at_errors = atlas.problems(
+        atlas.load(),
+        load_outlook(),
+        set(load_outlook().get("facts") or {}),
+        {i.id for i in s.seed.indicators if i.published},
+        {pr.id for pr in s.seed.predictions} | {c["id"] for c in load_outlook().get("claims") or []},
+    )
+    return (
+        errors + a_errors + m_errors + o_errors + b_errors + s_errors + at_errors,
+        notes + a_notes + o_notes,
+    )
 
 
 def cmd_check(a: argparse.Namespace) -> int:

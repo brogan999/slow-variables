@@ -930,10 +930,14 @@ class Store:
 
         outlook = build_outlook(self)
         _write(out / "outlook.json", outlook)
-        _write(out / "board.json", self.board(cards, argument, outlook))
+        board_doc = self.board(cards, argument, outlook)
+        _write(out / "board.json", board_doc)
         from .singularity import build as build_singularity
 
         _write(out / "singularity.json", build_singularity(self, outlook=outlook))
+        from .atlas import build as build_atlas
+
+        _write(out / "atlas.json", build_atlas(self, outlook=outlook, board_doc=board_doc))
         from .bottleneck_map import from_store
 
         _write(out / "map.json", from_store(self, cards, bottlenecks, argument, outlook))
@@ -996,7 +1000,9 @@ class Store:
         ol = build_outlook(self)
         tests = ol.get("tests") or {}
 
-        def plain(text: str) -> str:  # the threshold a [test:] token prints on the page; other tokens drop out
+        def plain(
+            text: str,
+        ) -> str:  # the threshold a [test:] token prints on the page; other tokens drop out
             text = re.sub(
                 r"\[test:([a-z0-9_]+)\]",
                 lambda m: fmt_line(tests[m[1]]["line"], tests[m[1]]["unit"]) if m[1] in tests else "",
@@ -1017,11 +1023,28 @@ class Store:
             self.con.execute(
                 "INSERT INTO predictions VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 [
-                    r["id"], r["kind"], r["folio"], r.get("stage"), r.get("row"), r["who"], r["attribution"],
-                    plain(r["line"]), r["state"], r["word"], None if r["settles"] is None else plain(str(r["settles"])),
-                    t.get("fact"), t.get("op"), None if t.get("against") is None else str(t["against"]),
-                    rd.get("value") if isinstance(rd.get("value"), (int, float)) else None, rd.get("unit"),
-                    rd.get("as_of"), rd.get("derived_id"), rd.get("obs_ids") or [], r["indicators"], r["sources"], r["href"],
+                    r["id"],
+                    r["kind"],
+                    r["folio"],
+                    r.get("stage"),
+                    r.get("row"),
+                    r["who"],
+                    r["attribution"],
+                    plain(r["line"]),
+                    r["state"],
+                    r["word"],
+                    None if r["settles"] is None else plain(str(r["settles"])),
+                    t.get("fact"),
+                    t.get("op"),
+                    None if t.get("against") is None else str(t["against"]),
+                    rd.get("value") if isinstance(rd.get("value"), (int, float)) else None,
+                    rd.get("unit"),
+                    rd.get("as_of"),
+                    rd.get("derived_id"),
+                    rd.get("obs_ids") or [],
+                    r["indicators"],
+                    r["sources"],
+                    r["href"],
                 ],
             )
 
