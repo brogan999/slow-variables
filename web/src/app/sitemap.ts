@@ -1,9 +1,9 @@
 import type { MetadataRoute } from "next";
-import { index, memos, meta, seriesKeys } from "@/lib/data";
+import { atlas, index, memos, meta, seriesKeys } from "@/lib/data";
 import { EVIDENCE, PRIMARY } from "@/lib/nav";
 import { SITE } from "@/lib/site";
 
-const STATIC = ["", ...[...PRIMARY, ...EVIDENCE].map(([href]) => href), "/argument/migration"];
+const STATIC = ["", ...[...PRIMARY, ...EVIDENCE].map(([href]) => href), "/argument/migration", "/singularity/atlas"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date(meta().generated_at);
@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const url = (p: string) => `${SITE.url}${p}`;
   return [
     ...STATIC.map((p) => ({ url: url(p), lastModified, changeFrequency: "daily" as const, priority: p === "" ? 1 : 0.8 })),
+    ...atlas().domains.map((d) => ({ url: url(`/singularity/atlas/${d.id}`), lastModified, changeFrequency: "weekly" as const, priority: 0.7 })),
     ...memos().map((m) => ({ url: url(`/memos/${m.date}`), lastModified, changeFrequency: "weekly" as const, priority: 0.7 })),
     ...buckets.map((b) => ({ url: url(`/buckets/${b.id}`), lastModified, changeFrequency: "daily" as const, priority: 0.7 })),
     ...layers.map((l) => ({ url: url(`/layers/${l.id}`), lastModified, changeFrequency: "daily" as const, priority: 0.7 })),

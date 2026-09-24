@@ -16,12 +16,15 @@ provenance: >-
 eras:
   - id: now
     label: Now and on the way
+    short: Now
     definition: The years we are living through, before machines can do most of what people do.
   - id: first_decade
     label: The first decade after
+    short: First decade
     definition: The years just after AI can do most of what people do, when most writers expect the largest shocks.
   - id: long_run
     label: The long run
+    short: Long run
     definition: Decades to centuries on, once whatever happens has settled into a new normal.
 facts:  # readings that are not already outlook facts or published indicators
   labour_share_world: {series: owid_context.world.labour_share_of_gdp.a}
@@ -31,47 +34,56 @@ facts:  # readings that are not already outlook facts or published indicators
 plates:  # files in web/public/atlas, made by scripts/atlas_plates.py; sha256 of each owner-supplied source PNG
   hero:
     file: hero-fresco
+    height: 1024  # at 1024 wide, after trimming the canvas
     sha256: 0871c5080c5585882474a0af87d11fd352ab3de017639600d47bb71bc76d9960
     allegory: The creation, after Michelangelo
     alt: After Michelangelo's Creation of Adam, a man reclining on a hillside reaches toward a divine figure borne by attendants, a dark streak cracking the fresco between their hands.
     caption: After Michelangelo's Creation of Adam, made with an image model.
   economy:
     file: economy
+    height: 1347  # at 1024 wide, after trimming the canvas
     sha256: 93b43e5c1e104c3353d21a52a5f06bf6077b222dac1438f472dfab0487e14bd1
     allegory: Fortune, with her scales and wheel
     alt: A seated woman holds a pair of scales and rests beside a spinning wheel, coins heaped at her feet and a harbour of sailing ships behind her.
   work:
     file: work
+    height: 1516  # at 1024 wide, after trimming the canvas
     sha256: e3b211483e10e3b58a7e7977313a4675e2c1a4236ab816c459ce79d5784e642e
     allegory: The forge and the scriptorium
     alt: A blacksmith hammers at an anvil while an old scribe and a boy bend over books beside him, in a workshop hung with tools and gears.
   culture:
     file: culture
+    height: 1236  # at 1024 wide, after trimming the canvas
     sha256: 564326ef3b3bd0df975ed8a0f55e0991f93c87d6e69f403add18f4431b479a30
     allegory: The Muses
     alt: Women in Renaissance robes stand together in a marble hall holding a lyre, a mask, a globe, a tambourine and a viol.
   politics:
     file: politics
+    height: 1401  # at 1024 wide, after trimming the canvas
     sha256: a4574e22e36a6502fa039d77a843e5868fd2309a11c8daa4e759b62bbd8c648e
     allegory: Sovereignty in council
     alt: A crowned woman sits enthroned with a sceptre at the top of a vaulted hall while robed councillors read, write and argue on the steps below.
   security:
     file: security
+    height: 1608  # at 1024 wide, after trimming the canvas
     sha256: d9ac3ef14c312031d36b9f893acaa5326bd301d75b348d8dad345057e30d389c
     allegory: The sentinel
     alt: A soldier in armour holding a spear and a painted shield stands guard before a castle gate under a stormy sky.
   technology:
     file: technology
+    height: 1339  # at 1024 wide, after trimming the canvas
     sha256: afbb6dabfd9714a875d3dc6cf6a50f6c0d1a9206db62857cfd3451122290374e
     allegory: The astronomer's workshop
     alt: A bearded scholar studies a brass armillary sphere at a desk strewn with gears, compasses and drawings, clockwork hanging on the wall behind him.
   health:
     file: biology
+    height: 1024  # at 1024 wide, after trimming the canvas
     sha256: d0683295d457521039cb9e605be5e47c5398e4e77a7e8599ee513500e246a102
     allegory: The physician
     alt: An old physician in a dark cap studies an anatomical drawing at a desk crowded with herbs, jars and books, a staff with twin serpents painted on the wall.
   daily_life:
     file: daily
+    height: 1424  # at 1024 wide, after trimming the canvas
     sha256: fa7e4023a0bf02783438b56145ba798be0afbc1f970b7367031a6751de5fe100
     allegory: The family table
     alt: A family eats by candlelight at a wooden table beside a hearth, a grandmother holding a small child between the father and the mother.
@@ -93,8 +105,8 @@ domains:
     thesis: "Most of these writers expect machines to climb from routine tasks to skilled ones, with pay holding up for a while before human labour loses most of its value."
     thesis_from: [work_moravec_rising_tide, work_hanson_wages_fall, work_amodei_people_keep_an_edge]
     readings:
-      labor_share_nonfarm: "Labour's share of US business output"
-      junior_gap: "Hiring of young workers in AI-exposed jobs against older workers"
+      labor_share_nonfarm: "Labour's share of US business output, change on a year before"
+      junior_gap: "Employment of young workers against older ones in the most AI-exposed jobs, gap in index points"
       bbd_work_hours_assisted: "Share of US work hours done with generative AI"
     disagreement:
       question: "Will new kinds of work keep people employed as AI spreads?"
@@ -136,9 +148,9 @@ domains:
     thesis: "These writers expect machines to match human minds and then speed up invention itself, differing mainly over how soon that happens and how abrupt the leap past people is."
     thesis_from: [technology_good_last_invention, technology_macaskill_century_in_a_decade, technology_chollet_no_explosion]
     readings:
-      horizon_doubling: "How fast the length of task AI can finish is growing"
+      horizon_doubling: "Doubling time, in days, of the length of task AI can finish"
       rli_record: "Best score on real paid remote-work projects"
-      epoch_training_compute_growth: "Growth in the computing used to train the largest models"
+      epoch_training_compute_growth: "Doubling time, in days, of the computing used to train the largest models"
     disagreement:
       question: "Once AI matches people, does it race quickly on to superintelligence?"
       side_a: {entries: [technology_good_last_invention, technology_bostrom_fast_follow, technology_aschenbrenner_decade_in_a_year], view: "Yes: machines that can improve machines set off a rapid explosion that leaves human intelligence far behind."}
@@ -149,7 +161,7 @@ domains:
     thesis_from: [health_amodei_compressed_century, health_kurzweil_escape_velocity, health_hanson_backup_immortality]
     readings:
       life_exp_65: "Years of life left at retirement age, world average (UN)"
-      fda_ai_devices_cumulative: "AI-enabled medical devices cleared by the FDA"
+      fda_ai_devices_cumulative: "AI-enabled medical devices cleared by the FDA, change on a year before"
     disagreement:
       question: "How soon will people live far longer lives?"
       side_a: {entries: [health_kurzweil_escape_velocity, health_amodei_double_lifespan], view: "Soon: within about a decade of powerful AI, medicine could double lifespans, and the most diligent may gain years of life faster than they pass."}
@@ -160,7 +172,7 @@ domains:
     thesis_from: [daily_kokotajlo_chatbot_companions, daily_suleyman_experts_for_everyone, daily_altman_familiar_2030s]
     readings:
       bbd_adult_use: "US adults who have used generative AI"
-      consumer_surplus_wta: "What people say they would need to be paid to give up AI tools"
+      consumer_surplus_wta: "What US users say they would need to be paid to give up AI tools, all users together"
       waymo_weekly_paid_rides: "Paid driverless taxi rides a week"
     disagreement:
       question: "Will people end up living mostly inside simulated worlds?"

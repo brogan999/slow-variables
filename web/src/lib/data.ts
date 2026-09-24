@@ -287,3 +287,26 @@ export type SingularityDoc = {
   fiction: SgFiction[]; fiction_slots: number; sources: SgSource[]; words: Record<string, string>;
 };
 export const singularity = () => read<SingularityDoc>("singularity.json");
+
+// The Singularity Atlas (src/ai_tracker/atlas.py): every count, level and label is worked out in Python.
+export type AtPlate = { file: string; height: number; alt: string; allegory: string; caption?: string; src: string; srcset: string };
+export type AtCount = { world: string; n: number; level: number; label: string };
+export type AtReading = { id: string; label: string; reading: Fact | null; year: string | null };
+export type AtEntry = {
+  id: string; domain: string; era: string; line: string; who: string; work: string; year: number; url: string; source: string;
+  worlds: string[]; any: boolean; world_labels: string[]; reads: { id: string; label: string; reading: Fact | null }[]; prediction: { word: string; href: string } | null;
+};
+export type AtEra = { id: string; label: string; short: string; definition: string };
+export type AtDomain = {
+  id: string; n: number; name: string; thesis: string; thesis_from: string[]; plate: AtPlate; readings: AtReading[];
+  eras: (AtEra & { entries: AtEntry[] })[]; disagreement: { question: string; sides: { view: string; who: string[] }[] } | null;
+  fiction: { title: string; author: string; year: number; line: string; url: string | null; href: string }[];
+  leaning: { id: string; line: string; who: string; word: string; href: string }[];
+  sources: { id: string; who: string; work: string; year: number; url: string }[]; prev: string | null; next: string | null;
+};
+export type AtMapRow = { id: string; name: string; href: string; plate: AtPlate; headline: AtReading | null; cells: { era: string; href: string; counts: AtCount[] }[] };
+export type AtlasDoc = {
+  as_of: string; intro: string; provenance: string; hero: AtPlate; eras: AtEra[]; worlds: { id: string; label: string; short: string }[];
+  levels: number[]; filter: boolean; map: AtMapRow[]; domains: AtDomain[]; count: { expectations: number; sources: number };
+};
+export const atlas = () => read<AtlasDoc>("atlas.json");

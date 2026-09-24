@@ -93,6 +93,7 @@ def build(
     rows = {r["id"]: r for r in board_rows}
     eras = {e["id"]: e for e in spec["eras"]}
     doms = {d["id"]: d for d in spec["domains"]}
+    labels = {k: v for d in spec["domains"] for k, v in (d.get("readings") or {}).items()}
 
     def entry(e: dict[str, Any]) -> dict[str, Any]:
         x = srcs[e["source"]]
@@ -111,7 +112,8 @@ def build(
             "any": e["worlds"] == ["any"],
             "world_labels": [] if e["worlds"] == ["any"] else [wlabel[w] for w in e["worlds"]],
             "reads": [
-                {"id": k, "reading": singularity.reading(s, k, facts, today)} for k in e.get("reads") or []
+                {"id": k, "label": labels[k], "reading": singularity.reading(s, k, facts, today)}
+                for k in e.get("reads") or []
             ],
             "prediction": {"word": r["word"], "href": r["href"]} if r else None,
         }
@@ -244,6 +246,7 @@ def problems(
     worlds = {w["id"] for w in sing.get("worlds") or []}
     readable = known_facts | set(spec.get("facts") or {}) | indicator_ids
     exp = {e["id"]: e for e in spec.get("expectations") or []}
+    labels = {k for d in spec.get("domains") or [] for k in d.get("readings") or {}}
     if len(exp) != len(spec.get("expectations") or []):
         errors.append("atlas: two expectations share an id")
     for e in exp.values():
@@ -262,6 +265,11 @@ def problems(
             f"{where} reads {k}, no fact or published indicator"
             for k in e.get("reads") or []
             if k not in readable
+        ]
+        errors += [
+            f"{where} reads {k}, which no domain's readings label"
+            for k in e.get("reads") or []
+            if k not in labels
         ]
         if e.get("prediction") and e["prediction"] not in prediction_ids:
             errors.append(f"{where} links unknown prediction {e['prediction']}")
@@ -314,7 +322,7 @@ def problems(
 def strings(spec: dict[str, Any]) -> list[str]:
     """The site's own sentences, held to the no-digit and no-number-word rules."""
     out = [spec.get("intro") or "", spec.get("provenance") or ""]
-    out += [e[k] for e in spec.get("eras") or [] for k in ("label", "definition")]
+    out += [e[k] for e in spec.get("eras") or [] for k in ("label", "short", "definition") if e.get(k)]
     out += [d[k] for d in spec.get("domains") or [] for k in ("name", "thesis")]
     out += [(d.get("disagreement") or {}).get("question") or "" for d in spec.get("domains") or []]
     out += [v for d in spec.get("domains") or [] for v in (d.get("readings") or {}).values()]
