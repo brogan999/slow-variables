@@ -136,3 +136,29 @@ def test_a_split_takes_opus_vote_only_when_marked_and_no_market_means_no_rent():
     for m in ("one_off", "banned", "cannot_judge"):
         assert fu.judged(_idea(market=m), spec) == (None, None)
     assert fu.judged(_idea(market="sold"), spec) == ("innovator", "moderate")
+
+
+def _fc(**kw):
+    base = {"id": "cf-x", "who": "A", "technology": "t", "line": "A expects brain uploads by 2045.", "category": "mind_neurotech",
+            "when": {"kind": "by", "year": 2045, "low": None, "high": None}, "odds": None, "quote": None,
+            "ai_milestone": False, "ledger_id": None, "works": ["w"]}
+    return base | kw
+
+
+def test_canon_forecasts_date_themselves_as_stated_and_follow_the_text_rules():
+    spec, src = fu.rubric(), [{"id": "w", "title": "T", "author": "A", "year": 2001}]
+    assert fu.forecast_problems([_fc()], src, spec, set()) == []
+    assert fu.forecast_problems([_fc(line="A expects a 10x rise by 2045.")], src, spec, set())
+    assert fu.forecast_problems([_fc(line="A expects GPT-4's successor by mid-2027.")], src, spec, set()) == []
+    assert fu.forecast_problems([_fc(odds="10%")], src, spec, set())
+    assert fu.forecast_problems([_fc(when={"kind": "midpoint", "year": 2040})], src, spec, set())
+    assert fu.forecast_problems([_fc(works=["missing"])], src, spec, set())
+    assert fu.forecast_problems([_fc(ledger_id="nope")], src, spec, set())
+    assert fu.forecast_problems([_fc(ledger_id="known")], src, spec, {"known"}) == []
+
+
+def test_the_canon_seed_passes_its_checks():
+    import yaml
+
+    ledger = {p["id"] for p in yaml.safe_load(open(fu.ROOT / "seed" / "predictions.yaml"))["predictions"]}
+    assert fu.forecast_problems(fu.forecasts(), fu.canon_sources(), fu.rubric(), ledger) == []

@@ -178,3 +178,54 @@ def judged(r: dict[str, Any], spec: dict[str, Any]) -> tuple[str | None, str | N
     if {r["rent_kind"], r["durability"]} & unknown:
         return where, None
     return where, tier(r, spec)
+
+
+FORECASTS = ROOT / "seed" / "futures" / "forecasts.jsonl"
+CANON = ROOT / "seed" / "futures" / "canon_sources.yaml"
+NAMES = {"GPT-4"}  # a model's name, not a figure
+WHEN_KINDS = {"year", "by", "range", "decade"}
+
+
+def forecasts() -> list[dict[str, Any]]:
+    """Dated technology forecasts from the singularity canon (scripts/futures_canon.py), reviewed against their sources."""
+    return [json.loads(line) for line in FORECASTS.read_text().splitlines()] if FORECASTS.exists() else []
+
+
+def canon_sources() -> list[dict[str, Any]]:
+    return (yaml.safe_load(CANON.read_text()) or {}).get("sources", []) if CANON.exists() else []
+
+
+def _stray_digits(text: str) -> list[str]:
+    """Digits other than a year ("2027", "the 2030s", "mid-2040s") or a named model ("GPT-4's")."""
+    words = [re.sub(r"(['’]s)?[.]?$", "", w) for w in re.findall(r"[^\s,;:()]*\d[^\s,;:()]*", text)]
+    year = r"((early|mid|late)-)?(1[6-9]\d\d|2[0-2]\d\d)s?"
+    return [w for w in words if w not in NAMES and not re.fullmatch(year, w)]
+
+
+def forecast_problems(rows: list[dict[str, Any]], sources: list[dict[str, Any]], spec: dict[str, Any], ledger: set[str]) -> list[str]:
+    """Each forecast names a known category and work, dates itself as stated, and its words follow the site's rules."""
+    from .argument import unfetched
+
+    errors: list[str] = []
+    works = {s["id"]: s for s in sources}
+    errors += [f"futures canon: source {s['id']} {why}" for s in sources if s.get("url") and (why := unfetched(s))]
+    seen: set[str] = set()
+    for r in rows:
+        rid = r["id"]
+        if rid in seen:
+            errors.append(f"futures canon: duplicate id {rid}")
+        seen.add(rid)
+        if r["category"] not in spec["categories"]:
+            errors.append(f"futures canon: {rid} category {r['category']!r} is not a rubric category")
+        w = r["when"]
+        dated = w.get("year") if w.get("kind") in ("year", "by") else w.get("low")
+        if w.get("kind") not in WHEN_KINDS or not isinstance(dated, int):
+            errors.append(f"futures canon: {rid} has no date as stated")
+        if len(r["line"].split()) > 30 or _stray_digits(r["line"]) or _stray_digits(r.get("odds") or ""):
+            errors.append(f"futures canon: {rid} line or odds breaks the text rules")
+        if r.get("quote") and len(r["quote"].split()) >= 15:
+            errors.append(f"futures canon: {rid} quote is fifteen words or more")
+        errors += [f"futures canon: {rid} names unknown work {x}" for x in r["works"] if x not in works]
+        if r.get("ledger_id") and r["ledger_id"] not in ledger:
+            errors.append(f"futures canon: {rid} links unknown ledger entry {r['ledger_id']}")
+    return errors

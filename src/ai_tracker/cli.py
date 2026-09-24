@@ -389,6 +389,9 @@ def _check(s: st.Store) -> tuple[list[str], list[str]]:
     from . import futures
 
     errors += futures.idea_problems(futures.ideas(), futures.rubric())
+    errors += futures.forecast_problems(
+        futures.forecasts(), futures.canon_sources(), futures.rubric(), {pr.id for pr in s.seed.predictions}
+    )
     from . import census
 
     errors += census.problems(census.load(), census.fetches())
