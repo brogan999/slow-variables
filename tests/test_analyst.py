@@ -22,6 +22,7 @@ def test_the_corpus_index_scrubs_skips_prompts_tags_access_and_stays_outside_the
     (root / "EXTRACTION_PROMPT.md").write_text("You are an assistant. " * 30)
     monkeypatch.setattr(c, "SOURCES", [("the_diff", root, "*.md", "Byrne Hobart", "paid")])
     monkeypatch.setattr(c, "EPUBS", [])
+    monkeypatch.setattr(c, "READING", tmp_path / "no-reading")
     counts = c.build(tmp_path / "out" / "index.db")
     assert counts["skipped_prompt_files"] == 1 and counts["the_diff"] == 2
     rows = sqlite3.connect(tmp_path / "out" / "index.db").execute("SELECT title, access, year, text FROM chunks ORDER BY title").fetchall()
@@ -29,6 +30,20 @@ def test_the_corpus_index_scrubs_skips_prompts_tags_access_and_stays_outside_the
     assert all("previous instructions" not in text for *_, text in rows)
     with pytest.raises(SystemExit):
         c.build(Path("data") / "analyst.db")
+
+
+def test_the_reading_folder_sets_access_from_its_subfolder(tmp_path, monkeypatch):
+    c = _load("analyst_corpus")
+    for tier in ("public", "book"):
+        (tmp_path / "r" / tier).mkdir(parents=True)
+        (tmp_path / "r" / tier / f"{tier}-notes.md").write_text(f"# {tier} work\n\n" + "Railways were overbuilt. " * 20)
+    (tmp_path / "r" / "book" / "notes.docx").write_text("unread format")
+    monkeypatch.setattr(c, "SOURCES", [])
+    monkeypatch.setattr(c, "EPUBS", [])
+    monkeypatch.setattr(c, "READING", tmp_path / "r")
+    assert c.build(tmp_path / "out" / "index.db")["reading"] == 2
+    rows = sqlite3.connect(tmp_path / "out" / "index.db").execute("SELECT title, access FROM chunks ORDER BY title").fetchall()
+    assert rows == [("book work", "book"), ("public work", "public")]
 
 
 def test_the_chunker_packs_paragraphs_and_cuts_a_huge_one():
