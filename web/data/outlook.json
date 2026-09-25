@@ -1458,8 +1458,8 @@
   {
    "attribution": "author",
    "due": null,
-   "expected": null,
-   "fact": null,
+   "expected": "holding",
+   "fact": "h100_rent_yoy",
    "falsifier": "A sudden glut sending the rent for AI chips down by most of its value within a year.",
    "folio": "value",
    "grace_days": null,
@@ -1474,8 +1474,11 @@
    "rival_until": null,
    "row": null,
    "stage": null,
-   "state": "untestable",
-   "test": null,
+   "state": "holding",
+   "test": {
+    "fact": "h100_rent_yoy",
+    "gt": -0.5
+   },
    "text": "The price of rented computing does not crash the way internet bandwidth did, because physical capacity cannot be multiplied overnight."
   },
   {
@@ -2053,6 +2056,18 @@
    ],
    "unit": "share",
    "value": 0.01811672346115678
+  },
+  "h100_rent_yoy": {
+   "as_of": "2026-09-21",
+   "derived_id": "40b90cfb2512c7cf",
+   "holds": null,
+   "href": "/query#gpu_rent_yoy",
+   "obs_ids": [
+    "076dd44066ae084c",
+    "19f553d19637cdec"
+   ],
+   "unit": "share",
+   "value": 0.08776622760979236
   },
   "hal_accuracy_trend": {
    "as_of": "2026-05-19",
@@ -5180,8 +5195,8 @@
  "tally": {
   "both": 11,
   "failing": 0,
-  "holding": 4,
-  "untestable": 62
+  "holding": 5,
+  "untestable": 61
  },
  "tests": {
   "bet_fast_side": {
@@ -5198,6 +5213,10 @@
   },
   "chips_collect": {
    "line": 0.5,
+   "unit": "share"
+  },
+  "compute_no_crash": {
+   "line": -0.5,
    "unit": "share"
   },
   "firms_normal": {

@@ -678,23 +678,24 @@ indicators:
     updated_at: 2026-09-11
   - id: gpu_rental_price_per_hour
     name: "GPU rental price per hour"
-    definition: "Market rental price for H100-class GPUs per hour (SemiAnalysis index)."
-    why_it_matters: "The cloud layer's price per unit of compute; falling rental prices are the neoclouds' rent eroding."
+    definition: "Weekly median on-demand rental price per H100 GPU-hour across the cloud providers GetDeploying tracks; H200 and B200 alongside."
+    why_it_matters: "The cloud layer's price per unit of compute; falling rental prices are the neoclouds' rent eroding, and a crash would be the glut that bandwidth went through in 2001."
     proxy_types: [price]
-    unit: ratio
-    cadence_expected: quarterly
+    unit: USD
+    cadence_expected: weekly
+    series_keys: ["getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w", "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w", "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w"]
+    band_input: getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w
     layer_id: compute_physical
     sublayer_id: hyperscalers_neoclouds
-    direction_rule: {periods: 4, dead_band: 0.05, higher_is: concentrating, rationale: "Placeholder until the series exists; bands are set with the first observation."}
+    direction_rule: {periods: 4, dead_band: 0.15, higher_is: concentrating, rationale: "Four weekly readings, a month. A move of fifteen cents an hour or less is noise in a median across some forty providers whose panel changes week to week; rising rents mean the owners of GPUs keep more of the value."}
     leading_lagging: leading
     timing_rationale: "Leading: rental prices fall as capacity outruns demand, ahead of neocloud earnings."
-    tracker_interpretation: "Unpublished; see the reason."
-    unpublished_reason: "Not measurable from free sources: the SemiAnalysis index is paywalled; the paid stub is off."
-    counterevidence: "Spot and contracted prices diverge; list prices are not transaction prices."
-    confidence: 20
-    proposed_status: not_yet_measurable
-    published: false
-    updated_at: 2026-09-11
+    tracker_interpretation: "The H100's median rent fell by about a sixth into the spring and has since climbed back above where it stood a year before; newer chips rent for more. No sign of the glut that follows an overbuild."
+    counterevidence: "List prices, not what contracted buyers pay; spot and reserved prices diverge from on-demand; one aggregator, and its panel of providers changes week to week; an older chip's rent falls as newer chips arrive, with no glut."
+    confidence: 35
+    related_indicators: [capex_to_revenue_stack, neocloud_debt_terms]
+    published: true
+    updated_at: 2026-09-25
   - id: secondary_marks_between_rounds
     name: "Secondary-market marks between rounds"
     definition: "Implied valuations from secondary trades between primary rounds (Caplight, Forge, EquityZen)."

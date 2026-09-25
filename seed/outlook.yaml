@@ -10,6 +10,7 @@ facts:
   surge_revenue: {series: yahoo_finance.surge_ai.revenue_usd.fy}
   rli_record: {metric: benchmark_frontier, dims: {test: epoch_bench.rli}, max_age_days: 400}
   hal_accuracy_trend: {metric: hal_trend_per_year, dims: {measure: accuracy}, max_age_days: 400, expect: {gt: 0}}
+  h100_rent_yoy: {metric: gpu_rent_yoy, dims: {gpu: nvidia_h100}, max_age_days: 30}
   hal_reliability_trend: {metric: hal_trend_per_year, dims: {measure: reliability}, max_age_days: 400, expect: {gt: 0}}
   horizon_doubling: {metric: horizon_doubling_days_50_since_2024, max_age_days: 400, expect: {lte: 122}}
   evals_ledger: {metric: ledger_events_12m, dims: {target: ai_evaluation_market, stance: for}}
@@ -2241,7 +2242,9 @@ claims:
   - id: compute_no_crash
     position: no_glut
     text: The price of rented computing does not crash the way internet bandwidth did, because physical capacity cannot be multiplied overnight.
+    test: {fact: h100_rent_yoy, gt: -0.5}
     falsifier: A sudden glut sending the rent for AI chips down by most of its value within a year.
+    expect_state: holding
   - id: link_overshoots
     position: glut_somewhere
     text: Somewhere along the chip supply chain, a part AI has made scarce proves easier to expand than expected, and its price turns.

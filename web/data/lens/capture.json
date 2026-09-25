@@ -1,5 +1,5 @@
 {
- "as_of": "2026-09-24",
+ "as_of": "2026-09-25",
  "gross_profit_stack": {
   "axis": {
    "chars": 4,
@@ -1283,6 +1283,50 @@
     },
     {
      "answers": [
+      "Who keeps it: Compute & physical / Hyperscalers"
+     ],
+     "band_value": null,
+     "bucket_id": null,
+     "confidence": 35,
+     "grade": "B",
+     "id": "gpu_rental_price_per_hour",
+     "latest": {
+      "as_of": "2026-09-21",
+      "disputed": false,
+      "grade": "B",
+      "high": null,
+      "low": null,
+      "obs_ids": [
+       "076dd44066ae084c"
+      ],
+      "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+      "subject": "nvidia_h100",
+      "unit": "USD",
+      "value": 3.2125
+     },
+     "layer_id": "compute_physical",
+     "leading_lagging": "leading",
+     "n_observations": 159,
+     "name": "GPU rental price per hour",
+     "pending": null,
+     "published": true,
+     "source_cluster": null,
+     "spark": {
+      "d": "M1.0,26.0 L5.1,23.1 L9.2,25.8 L13.3,23.1 L17.3,21.6 L21.4,15.0 L25.5,16.7 L29.6,12.6 L33.7,18.0 L37.8,16.7 L41.9,18.9 L46.0,14.6 L50.0,11.1 L54.1,14.1 L58.2,11.1 L62.3,7.4 L66.4,3.2 L70.5,2.0 L74.6,3.2 L78.7,4.7 L82.7,6.6 L86.8,4.7 L90.9,6.2 L95.0,4.3",
+      "end": [
+       95.0,
+       4.3
+      ]
+     },
+     "stale_as_of": null,
+     "stale_reason": null,
+     "status": "emerging",
+     "unit": "USD",
+     "unpublished_reason": null,
+     "valve_measured": null
+    },
+    {
+     "answers": [
       "Valve: Invention \u2192 product",
       "Who keeps it: Compute & physical"
      ],
@@ -1612,7 +1656,7 @@
      "valve_measured": "invention_to_product"
     }
    ],
-   "n_published": 14,
+   "n_published": 15,
    "name": "Compute & physical",
    "order": 1,
    "reading": "Toward concentration: Rent concentration in semiconductors, Cloud backlog (remaining performance obligations) and others; toward dispersion: Concentration among covered cloud filers (HHI) and Hyperscaler capex to AI revenue (trailing year).",
@@ -1620,7 +1664,7 @@
    "tally": {
     "margin": 0,
     "only": null,
-    "published": 12,
+    "published": 13,
     "scored": 5
    },
    "venture": {
@@ -2562,8 +2606,8 @@
      "grade": "D",
      "id": "safety_brake_events",
      "latest": {
-      "as_of": "2026-09-24",
-      "derived_id": "fe798368a584fea5",
+      "as_of": "2026-09-25",
+      "derived_id": "36314296491fe1d2",
       "dims": {},
       "obs_ids": [
        "2ab8fec44e7914a5",
@@ -2848,7 +2892,7 @@
      "band_value": null,
      "bucket_id": "products",
      "confidence": 55,
-     "grade": "B",
+     "grade": "A",
      "id": "pass_hat_k_tau_bench",
      "latest": {
       "as_of": "2026-05-18",
@@ -2866,7 +2910,7 @@
      },
      "layer_id": "model",
      "leading_lagging": "leading",
-     "n_observations": 4,
+     "n_observations": 102,
      "name": "Agent reliability across repeated runs (tau-bench pass^k)",
      "pending": null,
      "published": true,
@@ -3280,8 +3324,8 @@
      "grade": "D",
      "id": "cl_lab_release_claims",
      "latest": {
-      "as_of": "2026-09-24",
-      "derived_id": "bce7dd6d2684ad2c",
+      "as_of": "2026-09-25",
+      "derived_id": "5be8e18f4e8d2108",
       "dims": {},
       "obs_ids": [
        "0bdf1920b1feb93e",
@@ -5592,6 +5636,24 @@
   },
   {
    "author": "claude",
+   "counterevidence_considered": "List prices, not contracted prices; reserved and spot prices sit well below on-demand, so a glut could show there first.",
+   "created_at": "2026-09-25T06:26:34.048277Z",
+   "evidence_ids": [
+    "93ccad277ec4b7c0",
+    "076dd44066ae084c",
+    "19f553d19637cdec"
+   ],
+   "id": "7afb9337dea3b2b7",
+   "new_conf": 35,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "First reading, from GetDeploying's weekly median of on-demand list prices across the cloud providers it tracks. An H100 rented for $3.21 an hour in the week of 21 Sep 2026, against $3.20 four weeks before (inside the fifteen-cent dead band, so stable) and $2.95 a year before (up about 9%). One aggregator at tier 3 caps the status at emerging.",
+   "target_id": "gpu_rental_price_per_hour",
+   "target_type": "indicator"
+  },
+  {
+   "author": "claude",
    "counterevidence_considered": "Human-level AI has not arrived, and progress could stall well short of it, which would leave his long horizon standing.",
    "created_at": "2026-09-24T00:32:44.987733Z",
    "evidence_ids": [],
@@ -5603,36 +5665,9 @@
    "reason": "His call was that broadly human-level AI without brain emulation would take centuries; capability readings and most forecasters now point far sooner, so the evidence leans against it, though nothing has settled it.",
    "target_id": "hanson_non_emulation_ai_centuries",
    "target_type": "prediction"
-  },
-  {
-   "author": "claude",
-   "counterevidence_considered": "Epoch's power figures are estimates with wide error, cover only the sites it tracks, include sites outside America, and count facility power rather than power drawn for AI alone; the revenue part rests partly on companies' own run-rates.",
-   "created_at": "2026-09-23T23:58:27.359022Z",
-   "evidence_ids": [
-    "c665f6fd4a84cb5b",
-    "6b63094eebbbb7f8",
-    "60ad097c1a122197",
-    "e4028b150fc10ef8",
-    "8ff24d31ae167311",
-    "0b2cc9aaed45c11d",
-    "4563a0e52cd9e1d3",
-    "7aff90f9dfa874b2",
-    "4ab783a3c15cd9b1",
-    "190b629e4e88934d",
-    "067b73bd73432f6d",
-    "3a1de8e2fa29e08c"
-   ],
-   "id": "4f2d4a0bbc0c4561",
-   "new_conf": 60,
-   "new_status": "confirmed",
-   "old_conf": 30,
-   "old_status": "emerging",
-   "reason": "Frontier-lab revenues roughly tripled and big-cloud data-centre spending neared the projected level in 2025, and Epoch AI's estimates for the data centres it tracks show several gigawatts of facility power added during the year, more than the scenario's figure.",
-   "target_id": "ai2027_revenue_spend_power_2025",
-   "target_type": "prediction"
   }
  ],
- "verdict": "As of 2026-09-24: compute & physical mixed, model mixed, training input emerging, serving & orchestration unmeasured, deployment & application dispersing (one reading), adopters (no capture rule yet), labour & consumers dispersing (one reading).",
+ "verdict": "As of 2026-09-25: compute & physical mixed, model mixed, training input emerging, serving & orchestration unmeasured, deployment & application dispersing (one reading), adopters (no capture rule yet), labour & consumers dispersing (one reading).",
  "what_would_change": [
   "Rent concentration in semiconductors: Four fiscal quarters; a move under one point of margin is noise. Rising margin = rent concentrating at the chip layer.",
   "Cloud backlog (remaining performance obligations): Four quarters; moves under $10B are noise at this scale. Growing backlog concentrates future cloud revenue in a few contracts.",
@@ -5660,6 +5695,7 @@
   "Neocloud borrowing cost (CoreWeave facility rates): Three quarter-ends; moves under a percentage point are facility mix. Rising rates concentrate the compute layer's returns with its lenders.",
   "Enterprise multi-model usage share (Menlo): Annual waves; a move under five points is survey noise. More multi-homing disperses the model layer's pricing power.",
   "Startups' share of enterprise AI application revenue: Two annual waves, so the trend is one step; under five points is survey error. Rising startup share = value dispersing away from incumbents.",
+  "GPU rental price per hour: Four weekly readings, a month. A move of fifteen cents an hour or less is noise in a median across some forty providers whose panel changes week to week; rising rents mean the owners of GPUs keep more of the value.",
   "Model-layer token concentration on OpenRouter (HHI, top table): Weekly readings; moves under 0.02 in the index are table churn. A rising index means routed tokens concentrating on fewer models.",
   "Labs buying from the training-input layer (enter bell): Four quarters; a one-point move is one vendor's single disclosure. Rising = the labs buying more from the training-input layer."
  ]

@@ -1,5 +1,5 @@
 {
- "as_of": "2026-09-24",
+ "as_of": "2026-09-25",
  "buckets": [
   {
    "id": "methods",
@@ -1148,7 +1148,7 @@
      "band_value": null,
      "bucket_id": "products",
      "confidence": 55,
-     "grade": "B",
+     "grade": "A",
      "id": "pass_hat_k_tau_bench",
      "latest": {
       "as_of": "2026-05-18",
@@ -1166,7 +1166,7 @@
      },
      "layer_id": "model",
      "leading_lagging": "leading",
-     "n_observations": 4,
+     "n_observations": 102,
      "name": "Agent reliability across repeated runs (tau-bench pass^k)",
      "pending": null,
      "published": true,
@@ -1820,8 +1820,8 @@
      "grade": "D",
      "id": "safety_brake_events",
      "latest": {
-      "as_of": "2026-09-24",
-      "derived_id": "fe798368a584fea5",
+      "as_of": "2026-09-25",
+      "derived_id": "36314296491fe1d2",
       "dims": {},
       "obs_ids": [
        "2ab8fec44e7914a5",
@@ -2882,8 +2882,8 @@
      "grade": "D",
      "id": "cl_lab_release_claims",
      "latest": {
-      "as_of": "2026-09-24",
-      "derived_id": "bce7dd6d2684ad2c",
+      "as_of": "2026-09-25",
+      "derived_id": "5be8e18f4e8d2108",
       "dims": {},
       "obs_ids": [
        "0bdf1920b1feb93e",
@@ -3002,6 +3002,24 @@
   },
   {
    "author": "claude",
+   "counterevidence_considered": "List prices, not contracted prices; reserved and spot prices sit well below on-demand, so a glut could show there first.",
+   "created_at": "2026-09-25T06:26:34.048277Z",
+   "evidence_ids": [
+    "93ccad277ec4b7c0",
+    "076dd44066ae084c",
+    "19f553d19637cdec"
+   ],
+   "id": "7afb9337dea3b2b7",
+   "new_conf": 35,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "First reading, from GetDeploying's weekly median of on-demand list prices across the cloud providers it tracks. An H100 rented for $3.21 an hour in the week of 21 Sep 2026, against $3.20 four weeks before (inside the fifteen-cent dead band, so stable) and $2.95 a year before (up about 9%). One aggregator at tier 3 caps the status at emerging.",
+   "target_id": "gpu_rental_price_per_hour",
+   "target_type": "indicator"
+  },
+  {
+   "author": "claude",
    "counterevidence_considered": "Human-level AI has not arrived, and progress could stall well short of it, which would leave his long horizon standing.",
    "created_at": "2026-09-24T00:32:44.987733Z",
    "evidence_ids": [],
@@ -3012,33 +3030,6 @@
    "old_status": "ahead",
    "reason": "His call was that broadly human-level AI without brain emulation would take centuries; capability readings and most forecasters now point far sooner, so the evidence leans against it, though nothing has settled it.",
    "target_id": "hanson_non_emulation_ai_centuries",
-   "target_type": "prediction"
-  },
-  {
-   "author": "claude",
-   "counterevidence_considered": "Epoch's power figures are estimates with wide error, cover only the sites it tracks, include sites outside America, and count facility power rather than power drawn for AI alone; the revenue part rests partly on companies' own run-rates.",
-   "created_at": "2026-09-23T23:58:27.359022Z",
-   "evidence_ids": [
-    "c665f6fd4a84cb5b",
-    "6b63094eebbbb7f8",
-    "60ad097c1a122197",
-    "e4028b150fc10ef8",
-    "8ff24d31ae167311",
-    "0b2cc9aaed45c11d",
-    "4563a0e52cd9e1d3",
-    "7aff90f9dfa874b2",
-    "4ab783a3c15cd9b1",
-    "190b629e4e88934d",
-    "067b73bd73432f6d",
-    "3a1de8e2fa29e08c"
-   ],
-   "id": "4f2d4a0bbc0c4561",
-   "new_conf": 60,
-   "new_status": "confirmed",
-   "old_conf": 30,
-   "old_status": "emerging",
-   "reason": "Frontier-lab revenues roughly tripled and big-cloud data-centre spending neared the projected level in 2025, and Epoch AI's estimates for the data centres it tracks show several gigawatts of facility power added during the year, more than the scenario's figure.",
-   "target_id": "ai2027_revenue_spend_power_2025",
    "target_type": "prediction"
   }
  ],
@@ -3171,7 +3162,7 @@
    "to": "capture"
   }
  ],
- "verdict": "As of 2026-09-24: methods mixed, products consistent with normal, early adoption consistent with normal, adaptation consistent with normal, return arrow emerging. Thesis: holding.",
+ "verdict": "As of 2026-09-25: methods mixed, products consistent with normal, early adoption consistent with normal, adaptation consistent with normal, return arrow emerging. Thesis: holding.",
  "what_would_change": [
   "METR 50% time horizon: Normal = doubling time \u2265 7 months (\u2248213 days, METR's 2019\u20132025 trend); fast = \u2264 4 months (\u2248122 days), the AI 2027 assumption. Between the two is `emerging`. The bands are about the current pace, so the input is a log-linear fit over the 2024-onward window, the most recent window METR reports (89 days in the TH1.1 post of 29 Jan 2026), recomputed from METR's corrected data. On the 2023-onward window METR's published figure is 128.7 days, in the gap between the bands: the reading is window-sensitive and both numbers are shown.",
   "METR 80% time horizon: Same bands and same 2024-onward window as the 50% horizon, applied to our own fit because METR publishes doubling times for the 50% series only. The 2023-onward fit (horizon_doubling_days_80) sits in the gap between the bands.",

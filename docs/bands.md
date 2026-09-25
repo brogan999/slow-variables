@@ -242,6 +242,12 @@
 - Rule: direction over 4 periods, dead band 0.05, higher is concentrating. Four quarters; a move under five points is a single round's timing. Rising = capital concentrating in the frontier labs.
 - Timing: Leading: venture rounds fund capacity and hiring that produce revenue a year or more later.
 
+## GPU rental price per hour (`gpu_rental_price_per_hour`)
+
+- Band input: `getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w` (USD)
+- Rule: direction over 4 periods, dead band 0.15, higher is concentrating. Four weekly readings, a month. A move of fifteen cents an hour or less is noise in a median across some forty providers whose panel changes week to week; rising rents mean the owners of GPUs keep more of the value.
+- Timing: Leading: rental prices fall as capacity outruns demand, ahead of neocloud earnings.
+
 ## Chips' share of the stack's gross profit (`gross_profit_semis_share`)
 
 - Band input: `metric:gross_profit_share_by_layer` (share)

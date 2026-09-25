@@ -115,3 +115,28 @@ def test_hal_without_its_chart_data_is_a_layout_change():
 
     with pytest.raises(LayoutChanged):
         HalReliability().extract([item(b"<html>redesigned</html>", "https://hal.cs.princeton.edu/reliability/")])
+
+
+def test_tau2_bench_reads_pass_1_and_pass_4_per_domain_as_shares():
+    from ai_tracker.ingest.connectors.tau2_bench import Tau2Bench
+
+    body = Path("tests/fixtures/tau2_submission_min.json").read_bytes()
+    c = Tau2Bench.__new__(Tau2Bench)
+    c.scrubbed, c.errors = [], []
+    rows = Tau2Bench.extract(c, [item(b"{}"), item(body)])  # the first item is the manifest
+    keys = {r.series_key: r for r in rows}
+    assert len(rows) == 8 and keys["tau2_bench.claude_opus_4_5.telecom_pass_4.pt"].value_numeric == 0.7807
+    assert keys["tau2_bench.claude_opus_4_5.airline_pass_1.pt"].as_of_date == date(2026, 2, 26)
+    assert "(Sierra)" in keys["tau2_bench.claude_opus_4_5.retail_pass_4.pt"].raw_snippet
+
+
+def test_getdeploying_keeps_only_the_on_demand_median():
+    from ai_tracker.ingest.connectors.gpu_rents import GpuRents
+
+    body = Path("tests/fixtures/getdeploying_h100_min.csv").read_bytes()
+    c = GpuRents.__new__(GpuRents)
+    c.scrubbed, c.errors = [], []
+    rows = GpuRents.extract(c, [item(body)])
+    assert [(r.series_key, str(r.as_of_date), r.value_numeric) for r in rows] == [
+        ("getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w", "2025-09-22", 2.9533)
+    ]
