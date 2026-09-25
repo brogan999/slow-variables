@@ -31,7 +31,7 @@ from ..base import Connector, RawItem, expect
 CONCEPTS = {
     "revenue": ["Revenues", "RevenueFromContractWithCustomerExcludingAssessedTax"],
     "gross_profit": ["GrossProfit"],
-    "cost_of_revenue": ["CostOfRevenue"],
+    "cost_of_revenue": ["CostOfRevenue", "CostOfGoodsAndServicesSold"],  # CoreWeave files the second, and no gross profit
     "capex": [
         "PaymentsToAcquirePropertyPlantAndEquipment",
         "PaymentsToAcquireProductiveAssets",

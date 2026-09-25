@@ -300,6 +300,12 @@ def _check(s: st.Store) -> tuple[list[str], list[str]]:
                 errors.append(
                     f"ledger {r['series_key']}: party '{p['slug']}' is not an entity id, name or alias"
                 )
+    ids = {e.id for e in s.seed.entities}
+    for key, fund, company, eid in s.con.execute(  # investments: lead.<fund>.<company> and portfolio.<fund>.<company>
+        "SELECT series_key, subject, measure, entity_id FROM observations WHERE source_ns IN ('lead', 'portfolio')"
+    ).fetchall():
+        if fund not in ids or company not in ids or eid != fund:
+            errors.append(f"{key}: the fund ({fund}) and company ({company}) must both be entities, with entity_id the fund")
     for p in st.read_jsonl(st.DATA / "proposed_status_events.jsonl"):
         age = (datetime.now(timezone.utc) - datetime.fromisoformat(p["created_at"])).days
         if not p.get("reason", "").strip() and age > 14:

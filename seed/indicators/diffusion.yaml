@@ -1541,4 +1541,24 @@ indicators:
     unpublished_reason: "A yes/no, not a series: Epoch's CL-bench rows score learning from material supplied within one task (domain reasoning, rule application, procedure, empirical discovery), not retention across sessions, so they do not meet the L6 six-month-employee test."
     published: false
     updated_at: 2026-09-11
-
+  - id: pilots_reaching_production
+    name: Enterprise AI pilots reaching production (surveys)
+    definition: Survey figures on how many enterprise AI pilots or proofs of concept reach production, and how many are abandoned, from Menlo Ventures, IDC with Lenovo, Gartner, S&P Global Market Intelligence and McKinsey, each checked against its page.
+    why_it_matters: The step between a pilot and reorganised work is where diffusion stalls; the P&L measure beside it (MIT NANDA) asks a harder question, so the two are read together.
+    proxy_types: [deployment, behaviour]
+    unit: share
+    cadence_expected: annual
+    series_keys: ["menlo.us_enterprise.pilots_reaching_production_share.pt", "menlo.us_enterprise.saas_deals_reaching_production_share.pt", "gartner.enterprise.poc_abandoned_share.pt", "sp_global_mi.enterprise.initiatives_abandoned_share.pt", "sp_global_mi.enterprise.initiatives_abandoned_share.pt", "sp_global_mi.enterprise.poc_abandoned_share.pt", "cio_dive.enterprise.initiatives_abandoned_share.pt", "cio_com.enterprise.pocs_not_reaching_production_share.pt", "lenovo_news.enterprise.pilots_reaching_production_share.pt", "mckinsey.enterprise.ai_scaling_share.pt", "mckinsey.enterprise.ai_scaling_share.pt"]
+    band_input: menlo.us_enterprise.pilots_reaching_production_share.pt
+    bucket_id: early_adoption
+    valve_measured: product_to_adoption
+    leading_lagging: coincident
+    timing_rationale: "Coincident: the surveys describe the year they are taken in and are published within months."
+    tracker_interpretation: The surveys disagree by their definitions more than by their findings; production rates near half (Menlo, IDC in 2026) sit beside abandonment rates of a third to a half (Gartner's forecast, S&P Global), and McKinsey's share of firms scaling AI is a different measure again.
+    counterevidence: Each survey defines a pilot, production and abandonment differently, samples different firms and regions, and some are vendors' surveys; Gartner's figure is a forecast.
+    confidence: 30
+    proposed_status: emerging
+    related_indicators: [enterprise_pilot_to_production, btos_firm_use]
+    unpublished_reason: "The surveys measure different things (production, abandonment, scaling), so no band can be written over them yet; the rows are on /series and in Ask, and the indicator publishes once two surveys with the same definition exist for two years."
+    published: false
+    updated_at: 2026-09-25

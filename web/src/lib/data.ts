@@ -111,7 +111,7 @@ export const bottlenecks = () => read<BottleneckDoc>("bottlenecks.json");
 export type ComparePred = { id: string; claimant: string; status: string | null };
 export type CompareRow = { indicator: string; card: Card; leans: "nk" | "ai2027" | "open" | null; columns: Record<"nk" | "ai2027" | "lab" | "capture", { text: string; predictions: ComparePred[] }> };
 export const compare = () => read<{ rows: CompareRow[]; tally: { nk: number; ai2027: number; open: number } }>("compare.json");
-export type StackEntity = { id: string; name: string; kind: string; cik: string | null; aliases: string[]; verified: boolean; notes: string | null; founded: number | null; is_primary: boolean; from_date: string | null; to_date: string | null; latest: { series_key: string; value: number | null; value_text: string | null; unit: string; as_of: string; obs_ids: string[] } | null };
+export type StackEntity = { id: string; name: string; kind: string; cik: string | null; aliases: string[]; verified: boolean; notes: string | null; founded: number | null; is_primary: boolean; from_date: string | null; to_date: string | null; latest: { series_key: string; value: number | null; value_text: string | null; unit: string; as_of: string; obs_ids: string[] } | null; led_by: { id: string; name: string; href: string }[] };
 export type StackSublayer = Sublayer & { entities: StackEntity[]; indicators: Card[]; n_entities: number; n_verified: number; n_indicators: number };
 export type StackDoc = { layers: (Layer & { sublayers: StackSublayer[] })[] };
 export const stack = () => read<StackDoc>("stack.json");

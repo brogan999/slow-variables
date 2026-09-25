@@ -883,4 +883,44 @@ indicators:
     unpublished_reason: "Not measurable: seed/entities.yaml carries no founding dates, and the only run-rate series (Epoch, labs) dates a figure when the press reports it, not when the company crossed a hundred million."
     published: false
     updated_at: 2026-09-11
-
+  - id: app_run_rates
+    name: Application-company revenue run-rates
+    definition: Annualised revenue run-rates, ARR and annual revenue for leading AI application companies (Harvey, Cursor, Glean, Sierra, Decagon, Abridge, Hebbia, Perplexity, Replit, Lovable, Legora, Cognition, OpenEvidence, Clay), hand-entered from company statements, press reports and Sacra's estimates, each checked against its page.
+    why_it_matters: Whether the application layer keeps a share of the surplus depends on its revenue growing as model prices fall. Until now the tracker had no revenue for any application company.
+    proxy_types: [capital_flow, market_structure]
+    unit: USD
+    cadence_expected: irregular
+    series_keys: ["cnbc.harvey.arr_usd.pt", "pymnts.harvey.revenue_run_rate_usd.pt", "lawnext.harvey.arr_usd.pt", "techstartups.harvey.arr_usd.pt", "techcrunch.anysphere.revenue_run_rate_usd.pt", "dealroom.anysphere.revenue_run_rate_usd.pt", "dealroom.anysphere.revenue_run_rate_usd.pt", "forbes.anysphere.revenue_run_rate_usd.pt", "glean_press.glean.arr_usd.pt", "glean_press.glean.arr_usd.pt", "techcrunch.glean.arr_usd.pt", "techcrunch.sierra.arr_usd.pt", "sierra_blog.sierra.arr_usd.pt", "newcomer.sierra.revenue_run_rate_usd.pt", "sacra_free.decagon.revenue_run_rate_usd.pt", "sacra_free.decagon.revenue_run_rate_usd.pt", "newcomer.decagon.revenue_run_rate_usd.pt", "techcrunch.abridge.arr_usd.pt", "sacra_free.abridge.arr_usd.pt", "techcrunch.hebbia.arr_usd.pt", "sacra_free.hebbia.arr_usd.pt", "yahoo_finance.perplexity.arr_usd.pt", "yahoo_finance.perplexity.revenue_run_rate_usd.pt", "wallst_247.perplexity.revenue_run_rate_usd.pt", "techcrunch.replit.revenue_run_rate_usd.pt", "cnbc.replit.arr_usd.pt", "sacra_free.replit.revenue_run_rate_usd.pt", "lovable_blog.lovable.arr_usd.pt", "techcrunch.lovable.arr_usd.pt", "techcrunch.lovable.revenue_run_rate_usd.pt", "elevenlabs_blog.elevenlabs.arr_usd.pt", "elevenlabs_blog.elevenlabs.arr_usd.pt", "techcrunch.elevenlabs.arr_usd.pt", "legora_newsroom.legora.arr_usd.pt", "runtimewire.legora.arr_usd.pt", "techcrunch.cognition.revenue_run_rate_usd.pt", "techcrunch.cognition.revenue_run_rate_usd.pt", "cnbc.openevidence.revenue_run_rate_usd.pt", "sacra_free.openevidence.revenue_run_rate_usd.pt", "clay_blog.clay.arr_usd.pt", "sacra_free.clay.arr_usd.pt"]
+    band_input: cnbc.harvey.arr_usd.pt
+    layer_id: deployment_application
+    leading_lagging: coincident
+    timing_rationale: "Coincident: an annualised month of revenue moves with current usage and is reported within weeks, when it is reported at all."
+    tracker_interpretation: Several application companies report run-rates in the hundreds of millions within two or three years of launch, but every figure is a company statement, a press leak or an analyst's estimate, and definitions differ (run-rate, ARR, contracted ARR, bookings).
+    counterevidence: No figure is audited; run-rates annualise one month; companies choose when to disclose, so the series over-represents success; Sacra's figures are estimates.
+    confidence: 35
+    proposed_status: emerging
+    related_indicators: [lab_run_rates, startup_share_of_app_revenue, enterprise_spend_by_layer]
+    unpublished_reason: "No direction rule fits yet: each company reports on its own irregular dates and definitions, so there is no single series to read for a trend. The rows are on /series and in Ask; the indicator publishes once a rule over companies with like definitions is written and reviewed."
+    published: false
+    updated_at: 2026-09-25
+  - id: inference_run_rates
+    name: Inference-layer revenue run-rates
+    definition: Annualised revenue, bookings and run-rates for inference clouds, serving platforms and routers (Fireworks, Baseten, Together, Modal, RunPod, OpenRouter, Groq), hand-entered from company statements, press reports and Sacra's estimates, each checked against its page.
+    why_it_matters: The serving layer sits between the model makers and the applications; whether it keeps margin as token prices fall decides whether it is a durable business or a pass-through.
+    proxy_types: [capital_flow, market_structure]
+    unit: USD
+    cadence_expected: irregular
+    series_keys: ["fireworks_blog.fireworks.revenue_run_rate_usd.pt", "cnbc.fireworks.revenue_run_rate_usd.pt", "sacra_free.fireworks.revenue_run_rate_usd.pt", "sacra_free.fireworks.revenue_run_rate_usd.pt", "pymnts.baseten.revenue_run_rate_usd.pt", "pymnts.baseten.revenue_run_rate_usd.pt", "sacra_free.baseten.revenue_run_rate_usd.pt", "techcrunch.together.annual_bookings_usd.pt", "sacra_free.together.revenue_run_rate_usd.pt", "sacra_free.together.revenue_run_rate_usd.pt", "crunchbase_news.together.revenue_run_rate_usd.pt", "crunchbase_news.together.revenue_run_rate_usd.pt", "yahoo_finance.modal.revenue_run_rate_usd.pt", "yahoo_finance.modal.revenue_run_rate_usd.pt", "techcrunch.modal.revenue_run_rate_usd.pt", "runpod_press.runpod.revenue_run_rate_usd.pt", "thenextweb.runpod.revenue_run_rate_usd.pt", "pymnts.openrouter.revenue_run_rate_usd.pt", "sacra_free.openrouter.revenue_run_rate_usd.pt", "sacra_free.openrouter.revenue_run_rate_usd.pt", "sacra_free.groq.revenue_usd.fy"]
+    band_input: fireworks_blog.fireworks.revenue_run_rate_usd.pt
+    layer_id: serving_orchestration
+    sublayer_id: inference_serving
+    leading_lagging: coincident
+    timing_rationale: "Coincident: revenue moves with the tokens served in the same months, and firms disclose it within weeks when they disclose it at all."
+    tracker_interpretation: Several inference platforms report run-rates between a few hundred million and about a billion dollars, growing several-fold in a year, while the price of a token at fixed capability falls; revenue says nothing about their margins, which none publishes.
+    counterevidence: No figure is audited; bookings, run-rates and net router fees are different measures; OpenRouter's figure is its fee on spend, not the spend; Groq sits in the chips layer.
+    confidence: 35
+    proposed_status: emerging
+    related_indicators: [model_price_per_intelligence_point, model_token_hhi_top10]
+    unpublished_reason: "No direction rule fits yet: the firms report different measures on irregular dates, so there is no single series to read for a trend. The rows are on /series and in Ask; margins, which would settle whether the layer keeps its rent, are not published by any of them."
+    published: false
+    updated_at: 2026-09-25

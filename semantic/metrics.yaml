@@ -18,22 +18,32 @@ metrics:
       WHERE a.series_key LIKE 'metr.%.horizon_50.pt' AND b.series_key LIKE 'metr.%.horizon_80.pt'
         AND NOT a.disputed AND NOT b.disputed AND b.value_numeric > 0
   gross_margin:
-    description: Gross profit divided by revenue per filer per fiscal quarter, from XBRL company facts; a fiscal Q4 filed only inside the 10-K is the full year minus the three quarters inside it.
-    rationale: The margin is the rent; its direction at each layer is the capture question in one number.
+    description: Gross profit divided by revenue per filer per fiscal quarter, from XBRL company facts; where a filer reports cost of revenue but no gross profit, gross profit is revenue minus cost of revenue. A fiscal Q4 filed only inside the 10-K is the full year minus the three quarters inside it.
+    rationale: The margin is the rent; its direction at each layer is the capture question in one number. Filers such as CoreWeave, Alphabet and Meta report cost of revenue rather than gross profit, and leaving them out would hide the neocloud and hyperscaler margins the capture question needs.
     grain: [as_of_date, entity]
     unit: share
     lead_lag: lagging
-    formula_version: 2
-    inputs: ["sec.*.gross_profit.q", "sec.*.revenue.q", "sec.*.gross_profit.fy", "sec.*.revenue.fy"]
-    caveats: Fiscal quarters differ by filer (NVDA ends late Jan/Apr/Jul/Oct). Whole-company, not segment, margin. A filled Q4 cites the 10-K and the three 10-Qs it subtracts.
+    formula_version: 3
+    inputs: ["sec.*.gross_profit.q", "sec.*.revenue.q", "sec.*.gross_profit.fy", "sec.*.revenue.fy", "sec.*.cost_of_revenue.q", "sec.*.cost_of_revenue.fy"]
+    caveats: Fiscal quarters differ by filer (NVDA ends late Jan/Apr/Jul/Oct). Whole-company, not segment, margin. A filled Q4 cites the 10-K and the three 10-Qs it subtracts. What a filer puts in cost of revenue differs (CoreWeave's may leave out the depreciation of its GPUs), so a margin from cost of revenue need not compare with a filed gross profit.
     sql: |
-      WITH p AS (  -- gross profit and revenue for the same filer, grain and period end
+      WITH g AS (  -- gross profit as filed, else revenue minus cost of revenue for the same period
+        SELECT subject, grain, as_of_date, period_start, value_numeric AS gp, [id] AS gids
+        FROM observations WHERE source_ns = 'sec' AND measure = 'gross_profit' AND grain IN ('q', 'fy')
+        UNION ALL
+        SELECT c.subject, c.grain, c.as_of_date, c.period_start, r.value_numeric - c.value_numeric, [c.id]
+        FROM observations c JOIN observations r
+          ON r.source_ns = 'sec' AND r.subject = c.subject AND r.grain = c.grain AND r.as_of_date = c.as_of_date AND r.measure = 'revenue'
+        WHERE c.source_ns = 'sec' AND c.measure = 'cost_of_revenue' AND c.grain IN ('q', 'fy')
+          AND NOT EXISTS (SELECT 1 FROM observations x WHERE x.source_ns = 'sec' AND x.measure = 'gross_profit'
+                          AND x.subject = c.subject AND x.grain = c.grain AND x.as_of_date = c.as_of_date)),
+      p AS (  -- gross profit and revenue for the same filer, grain and period end
         SELECT g.subject, g.grain = 'fy' AS is_fy, g.as_of_date, g.period_start,
-               g.value_numeric AS gp, r.value_numeric AS rev, [g.id, r.id] AS ids
-        FROM observations g JOIN observations r
-          ON r.source_ns = g.source_ns AND r.subject = g.subject AND r.grain = g.grain
+               g.gp, r.value_numeric AS rev, list_concat(g.gids, [r.id]) AS ids
+        FROM g JOIN observations r
+          ON r.source_ns = 'sec' AND r.subject = g.subject AND r.grain = g.grain
          AND r.as_of_date = g.as_of_date AND r.measure = 'revenue'
-        WHERE g.source_ns = 'sec' AND g.measure = 'gross_profit' AND g.grain IN ('q', 'fy') AND r.value_numeric > 0),
+        WHERE r.value_numeric > 0),
       q AS (SELECT * FROM p WHERE NOT is_fy),
       fill AS (  -- a fiscal Q4 filed only inside the 10-K: full year minus the three quarters inside it
         SELECT f.subject, f.as_of_date, f.gp - sum(q.gp) AS gp, f.rev - sum(q.rev) AS rev, flatten(list_prepend(f.ids, list(q.ids))) AS ids
