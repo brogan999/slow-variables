@@ -1,3 +1,4 @@
+import { ReasonLink } from "@/components/ReasonLink";
 import { Chip } from "@/components/StatusChip";
 import Link from "next/link";
 import { IndicatorCard } from "@/components/IndicatorCard";
@@ -42,7 +43,7 @@ export default async function SublayerPage({ params }: { params: Promise<{ id: s
             <tbody>
               {s.entities.map((e) => (
                 <tr key={e.id} id={e.id} className="target:bg-surface-2">
-                  <td><Chip name={e.name} exit={!!e.to_date} />{e.cik ? <span className="ml-2 text-xs text-muted font-mono">CIK {e.cik}</span> : null}{e.notes ? <div className="text-xs text-ink-2">{e.notes}</div> : null}</td>
+                  <td><Chip name={e.name} exit={!!e.to_date} />{e.cik ? <span className="ml-2 text-xs text-muted font-mono">CIK {e.cik}</span> : null}{e.notes ? <div className="text-xs text-ink-2">{e.notes}</div> : null}<div><ReasonLink q={`War-game ${e.name}: which bottleneck it depends on, who keeps the profit in its layer, and how it fares in each future the site tracks.`} from={`/stack/${s.id}#${e.id}`} /></div></td>
                   <td className="text-ink-2">{e.is_primary ? "primary" : "secondary"}</td>
                   <td className="tabular-nums text-ink-2">{e.from_date ?? "—"}{e.to_date ? ` → ${e.to_date}` : ""}</td>
                   <td>{e.verified ? <span>● yes</span> : <span className="text-muted">○ not yet</span>}</td>

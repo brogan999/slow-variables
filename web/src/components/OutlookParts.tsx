@@ -1,3 +1,4 @@
+import { ReasonLink } from "@/components/ReasonLink";
 import Link from "next/link";
 import { Fragment } from "react";
 import { MarginPanel } from "@/components/ArticleLayout";
@@ -86,6 +87,7 @@ function Position({ doc, p, tests }: { doc: OutlookDoc; p: OutlookPosition; test
       </div>
       <p className="font-serif text-[1.0625rem] leading-relaxed text-ink"><Inline text={p.mechanism} facts={doc.facts} cites={cites(doc)} tests={tests} /></p>
       {own.length ? <ul className="flex flex-col gap-2">{own.map((c) => <ClaimLine key={c.id} doc={doc} p={p} c={c} tests={tests} />)}</ul> : null}
+      <ReasonLink q={`Reason through "${p.title}": who holds it, what tonight's readings say, and what would settle it against its rival.`} from={`/outlook#position-${p.id}`} className="self-start" />
       <details className="group">
         <summary className="cursor-pointer text-[13px] text-ink-2 hover:text-ink underline decoration-grid underline-offset-4">The case, the tests and what would refute it</summary>
         <dl className="mt-3 grid gap-x-4 gap-y-1.5 text-[14px] leading-relaxed sm:grid-cols-[9.5rem_minmax(0,1fr)]">

@@ -3,18 +3,18 @@ import { publishedIds } from "@/lib/data";
 import { indicatorHref } from "@/lib/format";
 
 // The memo body is markdown written by the memo job (a model or the digest); this renders the subset it uses:
-// headings, paragraphs, bullet lists, bold, and citation tokens [obs:id] / [derived:id] / [ind:id] / [event:id] as links.
-const TOKEN = /(\[(?:obs|derived|ind|event):[A-Za-z0-9_.-]+\]|\*\*[^*]+\*\*|https?:\/\/[^\s)]+)/g;
+// headings, paragraphs, bullet lists, bold, and citation tokens [obs:id] / [derived:id] / [ind:id] / [event:id] / [census:row] as links.
+const TOKEN = /(\[(?:obs|derived|ind|event|census):[A-Za-z0-9_.-]+\]|\*\*[^*]+\*\*|https?:\/\/[^\s)]+)/g;
 
 export const slug = (t: string) => t.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 export const headings = (body: string) => body.split(/\n{2,}/).map((b) => b.trim()).filter((b) => b.startsWith("## ")).map((b) => b.slice(3));
 
 function inline(text: string, obsIndex: Record<string, string>) {
   return text.split(TOKEN).map((p, i) => {
-    const m = p.match(/^\[(obs|derived|ind|event):([A-Za-z0-9_.-]+)\]$/);
+    const m = p.match(/^\[(obs|derived|ind|event|census):([A-Za-z0-9_.-]+)\]$/);
     if (m) {
       const [, kind, id] = m;
-      const href = kind === "obs" ? (obsIndex[id] ? `/series/${obsIndex[id]}#${id}` : null) : kind === "ind" ? indicatorHref(id, publishedIds().has(id)) : kind === "event" ? "/changelog" : "/query";
+      const href = kind === "obs" ? (obsIndex[id] ? `/series/${obsIndex[id]}#${id}` : null) : kind === "ind" ? indicatorHref(id, publishedIds().has(id)) : kind === "event" ? "/changelog" : kind === "census" ? (id.startsWith("role.") ? `/census/roles/${id.slice(5)}` : "/census") : "/query";
       const label = `${kind}:${id.slice(0, 8)}`;
       return href ? <Link key={i} href={href} className="num text-[11px] text-ink-2 underline decoration-grid underline-offset-2">{label}</Link> : <span key={i} className="num text-[11px] text-muted">{label}</span>;
     }

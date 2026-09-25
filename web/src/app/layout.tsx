@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Archivo, IBM_Plex_Mono, Newsreader } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
-import { ChatDrawer } from "@/components/ChatDrawer";
 import { Freshness } from "@/components/Freshness";
 import { HoverLayer } from "@/components/HoverLayer";
 import { HatchDefs } from "@/components/chart";
@@ -36,7 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Link href="/" className="display text-[1.375rem] shrink-0">{SITE.name}</Link>
             <div className="flex-1"><SiteNav /></div>
             <div className="flex items-center gap-x-1 shrink-0">
-              <ChatDrawer />
+              <Link href="/ask" className="inline-flex h-7 items-center rounded-[3px] border border-border bg-background px-2.5 text-[0.8rem] font-medium hover:bg-surface-2">Ask</Link>
               <MobileNav />
             </div>
           </div>
