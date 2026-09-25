@@ -92,10 +92,10 @@ export function Chat() {
           <label htmlFor="ask-q" className="sr-only">Your question</label>
           <textarea
             id="ask-q" ref={box} value={q} rows={1} aria-describedby="ask-note"
-            onChange={(e) => { setQ(e.target.value); e.target.style.height = "auto"; e.target.style.height = `${Math.min(e.target.scrollHeight, 200)}px`; }}
+            onChange={(e) => setQ(e.target.value)}
             onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing) { e.preventDefault(); void send(q); } }}
             placeholder={turns.length ? "Ask a follow-up…" : "Ask about AI's pace, who profits, or what happens next…"}
-            className="flex-1 resize-none bg-transparent px-2 py-1.5 text-[1rem] leading-relaxed outline-none placeholder:text-muted"
+            className="flex-1 resize-none field-sizing-content max-h-[200px] bg-transparent px-2 py-1.5 text-[1rem] leading-relaxed outline-none placeholder:text-muted"
           />
           {busy
             ? <Button type="button" size="icon" variant="outline" onClick={() => abort.current?.abort()} aria-label="Stop"><Square /></Button>
