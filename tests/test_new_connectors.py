@@ -83,17 +83,15 @@ def test_artificial_analysis_extracts_three_measures_per_model():
     )
 
 
-def test_artificial_analysis_gpqa_outside_zero_to_one_is_a_layout_change():
-    import pytest
-
-    from ai_tracker.ingest.base import LayoutChanged
-
-    m = {"slug": "m", "release_date": "2025-01-31", "model_creator": {"slug": "x"}, "pricing": {}}
-    body = json.dumps({"data": [{**m, "evaluations": {"gpqa": 74.8}}]}).encode()  # a percent, not a share
+def test_artificial_analysis_gpqa_outside_zero_to_one_is_an_error_and_the_rest_survives():
+    m = {"slug": "m", "release_date": "2025-01-31", "model_creator": {"slug": "x"}, "pricing": {"price_1m_blended_3_to_1": 1.0}}
+    ev = {"gpqa": 74.8, "artificial_analysis_intelligence_index": 50.0}  # a percent, not a share
+    body = json.dumps({"data": [{**m, "evaluations": ev}]}).encode()
     c = ArtificialAnalysis.__new__(ArtificialAnalysis)
     c.scrubbed, c.errors, c.latest = [], [], {}
-    with pytest.raises(LayoutChanged):
-        ArtificialAnalysis.extract(c, [item(body)])
+    keys = {o.series_key for o in ArtificialAnalysis.extract(c, [item(body)])}
+    assert keys == {"aa.m.intelligence_index.pt", "aa.m.price_blended_usd_per_mtok.pt"}
+    assert c.errors == ["gpqa for m is 74.8, not a share"]
 
 
 def test_hal_reads_every_reliability_dimension_and_accuracy_per_agent():

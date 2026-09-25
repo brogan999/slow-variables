@@ -753,7 +753,7 @@ def _run_retrieved(metric: str, rows: list[tuple]) -> list[tuple]:
     con.execute(
         "CREATE TABLE obs_raw (id VARCHAR, series_key VARCHAR, subject VARCHAR, as_of_date DATE, value_numeric DOUBLE, retrieved_at VARCHAR, disputed BOOLEAN)"
     )
-    con.executemany("INSERT INTO obs_raw VALUES (?, ?, ?, ?, ?, ?, false)", rows)
+    con.executemany("INSERT INTO obs_raw VALUES (?, ?, ?, ?, ?, ?, ?)", [r if len(r) == 7 else (*r, False) for r in rows])
     con.execute(KEY_SPLIT)
     return con.execute(METRICS[metric]["sql"]).fetchall()
 
@@ -764,24 +764,30 @@ def test_price_at_gpt4_level_continues_epoch_with_models_that_undercut_every_one
     rows = [
         ("e1", ep, "gpqa_diamond_gpt_4_0314", "2023-03-14", 37.5, r1),
         ("e2", ep, "gpqa_diamond_gpt_4_0314", "2024-12-13", 0.12, r1),
+        ("cov", "epoch_price.mmlu_gpt_3.lowest_usd_per_mtok.pt", "mmlu_gpt_3", "2025-02-05", 0.01, r1),  # Epoch's coverage end
         ("t", "aa.gpt_4.gpqa.pt", "gpt_4", "2023-03-14", 0.35, r1),
-        ("old", "aa.old.gpqa.pt", "old", "2024-06-01", 0.5, r1),  # before Epoch's last row: Epoch covers it
-        ("a", "aa.a.gpqa.pt", "a", "2025-02-01", 0.4, r1),
-        ("weak", "aa.weak.gpqa.pt", "weak", "2025-03-01", 0.2, r1),  # below GPT-4: never counts
-        ("b", "aa.b.gpqa.pt", "b", "2025-04-01", 0.6, r1),  # dearer than a: not a new low
+        ("covered", "aa.covered.gpqa.pt", "covered", "2025-01-30", 0.5, r1),  # Epoch judged it at launch: not counted
+        ("a", "aa.a.gpqa.pt", "a", "2025-03-01", 0.4, r1),
+        ("weak", "aa.weak.gpqa.pt", "weak", "2025-03-02", 0.2, r1),  # below GPT-4: never counts
+        ("b", "aa.b.gpqa.pt", "b", "2025-04-01", 0.6, r1),  # the same price as a: not a new low
+        ("bad", "aa.bad.gpqa.pt", "bad", "2025-04-15", 0.9, r1, True),  # disputed: never counts
         ("c1", "aa.c.gpqa.pt", "c", "2025-05-01", 0.5, r1),
         ("c2", "aa.c.gpqa.pt", "c", "2025-06-01", 0.5, r2),  # AA moved c's release date; the newer row stands
+        ("d", "aa.d.gpqa.pt", "d", "2025-07-01", 0.5, r1),
+        ("e", "aa.e.gpqa.pt", "e", "2025-07-01", 0.5, r1),  # ties d on date and price: the smaller id is cited
     ]
     rows += [
         (f"p{m}", f"aa.{m}.price_blended_usd_per_mtok.pt", m, "2026-09-10", v, r1)
-        for m, v in [("old", 0.01), ("a", 0.1), ("weak", 0.001), ("b", 0.2), ("c", 0.05)]
+        for m, v in [("covered", 0.01), ("a", 0.1), ("weak", 0.001), ("b", 0.1), ("bad", 0.001), ("c", 0.05), ("d", 0.02), ("e", 0.02)]
     ]
+    rows.append(("pa2", "aa.a.price_blended_usd_per_mtok.pt", "a", "2026-09-01", 0.5, r1))  # an older price for a
     out = {str(d): (v, sorted(ids)) for d, v, ids in _run_retrieved("inference_price_halving_days", rows)}
     assert out == {
         "2023-03-14": (37.5, ["e1"]),
         "2024-12-13": (0.12, ["e2"]),
-        "2025-02-01": (0.1, ["a", "pa", "t"]),
+        "2025-03-01": (0.1, ["a", "pa", "t"]),
         "2025-06-01": (0.05, ["c2", "pc", "t"]),
+        "2025-07-01": (0.02, ["d", "pd", "t"]),
     }
 
 

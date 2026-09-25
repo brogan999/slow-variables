@@ -16,7 +16,7 @@ from datetime import date
 from pathlib import Path
 
 from ...schema import Basis, Extraction, Observation, Tier
-from ..base import Connector, LayoutChanged, RawItem, expect, slug
+from ..base import Connector, RawItem, expect, slug
 from .openrouter import _latest
 
 URL = "https://artificialanalysis.ai/api/v2/data/llms/models"
@@ -75,7 +75,8 @@ class ArtificialAnalysis(Connector):
                 if v is None or (measure != "intelligence_index" and v <= 0):
                     continue
                 if measure == "gpqa" and not 0 < v <= 1:
-                    raise LayoutChanged(f"artificial analysis gpqa for {m['slug']} is {v}, not a share")
+                    self.errors.append(f"gpqa for {m['slug']} is {v}, not a share")
+                    continue
                 key = f"aa.{subject}.{measure}.pt"
                 prev = self.latest.get(key)
                 published = (

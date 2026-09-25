@@ -411,7 +411,7 @@ indicators:
     updated_at: 2026-09-11
   - id: epoch_inference_price_fixed_capability
     name: Inference price at fixed capability (halving time)
-    definition: Halving time of the lowest price per million tokens among models at least as good as GPT-4 on GPQA Diamond, fitted from 2023. Epoch's price-trend series to its last row (Epoch stopped updating it in February 2025), then each later model on Artificial Analysis that clears GPT-4's own score there and undercuts every model before it. Derived metric inference_price_halving_days.
+    definition: Halving time of the lowest price per million tokens among models at least as good as GPT-4 on GPQA Diamond, fitted from 2023. Epoch's price-trend series while Epoch covered new models (it stopped in February 2025), then each later model on Artificial Analysis that clears GPT-4's own score there and undercuts every model before it. Derived metric inference_price_halving_days.
     why_it_matters: Price per unit of capability on a benchmark axis, the lab layer's capture proxy; the brief cites about 40x a year at this threshold.
     proxy_types: [price]
     unit: days
@@ -424,7 +424,7 @@ indicators:
     fast_band: {hi: 110}
     band_rationale: "Normal = halving no faster than every 230 days (about 3x a year, the hardware pace); fast = every 110 days or less (10x a year or more). Between is emerging."
     tracker_interpretation: Few points, and the cheapest model at a fixed threshold is rarely the frontier; the METR-hour price series on OpenRouter is the companion reading.
-    counterevidence: Few points on one benchmark threshold; list prices; a threshold fixed in 2023 measures commodity capability, not frontier capability. Artificial Analysis gives today's price, not the launch price, so its points for models released before 10 Sep 2026 sit low and the halving reads slower than it was; the two sources run GPQA with different harnesses.
+    counterevidence: Few points on one benchmark threshold; list prices; a threshold fixed in 2023 measures commodity capability, not frontier capability. Artificial Analysis gives today's price, not the launch price, so its points for models released before 10 Sep 2026 probably sit low and the halving probably reads slower than it was, and a later price cut on an old model can make it a record after the fact; the two sources run GPQA with different harnesses, each held to its own GPT-4, so the direction of that difference is unknown.
     layer_id: model
     leading_lagging: coincident
     timing_rationale: "Coincident: prices fall the day a cheaper model matches the benchmark, when buyers can switch."
