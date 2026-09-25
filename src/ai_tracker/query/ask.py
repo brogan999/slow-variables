@@ -36,7 +36,7 @@ log = logging.getLogger("ai-tracker.ask")
 MODEL = os.environ.get("QUERY_MODEL", "claude-sonnet-5")
 # a blocked answer gets its fresh attempt on the stronger model: rare, so the bill stays near Sonnet's
 ESCALATE_MODEL = os.environ.get("QUERY_ESCALATE_MODEL", "claude-opus-5")
-PROMPT_VERSION = "5"
+PROMPT_VERSION = "6"
 # Opus 5 list price, for the escalated retry only
 ESCALATE_USD_PER_MTOK_IN, ESCALATE_USD_PER_MTOK_OUT = (
     float(x) for x in os.environ.get("QUERY_ESCALATE_USD_PER_MTOK", "5,25").split(",")
@@ -199,7 +199,7 @@ Rules for answers:
 1. Use the tools to look things up. Never answer a number from memory. If the store has no record, say that it has no record and give no number.
 2. Every number you state must be followed by a citation token for the record it comes from: [obs:<id>] for an observation, [derived:<id>] for a derived row, [ind:<id>] for an indicator's band edge or status, [event:<id>] for a number quoted from a status event's reason, [census:<row>] for a figure from the census tables, [claim:<id>], [pos:<id>], [src:<id>] or [pred:<id>] for a figure a claim, position, writer's work or prediction states in its own text. Put the token in the same sentence as the number, and give every number in that sentence its own token, decimals such as -0.04 included. Cite the most specific record that holds the number: the observation or derived row it comes from, never the indicator when one of those holds it. A threshold, band edge, dead band or rule you quote counts as a number: cite the record whose text states it, which is the metric's own row for a description or caveat and the indicator for a band edge, its status, its confidence or its own headline reading. Years and small counts ("3 of 4 trackers") do not need one, but cite the record anyway when there is one.
 3. Render values the way the site does: shares as percentages (0.063 -> 6.3%), USD with k/M/B/T, ratios with x, minutes as hours when over an hour, and name the as-of date and the source tier.
-4. Quote a status only with its reason and date. Mention the dispute text when a row is disputed and the tier when it is 7.
+4. Quote a status only with its reason and date. Mention the dispute text when a row is disputed and the tier when it is 7; a number inside a dispute text or caveat is cited to the observation that carries it, never to the indicator.
 5. Never compute a number. Do not add, divide, subtract or annualise records to make one, and do not restate a figure in a unit the record does not carry: a share, ratio, gap or growth rate must come from a metric row. If no record holds it, say the tracker does not compute it.
 6. A named writer's view is theirs: say who holds it and cite the position [pos:<id>], claim [claim:<id>] or work [src:<id>] it comes from. Mark your own reasoning as "this site's reading" or "inference". For what happens from here, use scenarios and claims and say which futures tonight's readings still allow; for a company, use entity; for who keeps the profit, use rent_rubric and say its inputs are your judgement.
 7. Be brief: up to about 350 words of markdown (short paragraphs, or bullets where a list helps; a bullet is one claim). Lead with the answer. Do not describe the tools or your process.
@@ -541,7 +541,12 @@ class Tools:
         f = (self._outlook().get("facts") or {}).get(fid)
         if not f or f.get("value") is None:
             return None
-        cite = f"derived:{f['derived_id']}" if f.get("derived_id") else f"obs:{(f.get('obs_ids') or ['?'])[0]}"
+        if f.get("derived_id"):
+            cite = f"derived:{f['derived_id']}"
+        elif str(f.get("href", "")).startswith("/indicators/"):  # an indicator's reading: its record holds the value
+            cite = f"ind:{f['href'].split('/')[2].split('#')[0]}"
+        else:
+            cite = f"obs:{(f.get('obs_ids') or ['?'])[0]}"
         return {"value": f["value"], "unit": f.get("unit"), "as_of": f.get("as_of"), "cite": cite}
 
     def _claim(self, c: dict[str, Any]) -> dict[str, Any]:
