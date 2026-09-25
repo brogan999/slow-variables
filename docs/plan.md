@@ -698,3 +698,30 @@ What shipped (PR 1 context series, PR 2 data and engine, PR 3 pages):
 - **Pages:** `/singularity/atlas` (hero after Michelangelo, the map with a CSS-only world filter, eight plate cards) and `/singularity/atlas/[domain]` (thesis, plate, dated readings, entries by era with world chips, the split, the novelists' version, sources). Linked from `/singularity` and `/methodology#atlas`; in the sitemap. Plates are WebP at three widths with the white canvas trimmed (`scripts/atlas_plates.py`).
 
 Deliberately not done: an `expectations` SQL table, per-page share images, pips, a section nav, bands for the new series, a culture proxy, AVIF.
+
+## Parts 19–21 status (24 Sep 2026): a legal notice, Futures, and the Automatability Census
+
+- **Legal (#79):** `/legal` covers who runs the site, not advice, forecasts, no warranty, AI content, sources and removal, licences, links, conflicts, acceptable use, liability, privacy (EU and UK included), accessibility and governing law (California). Old `#disclaimers` and `#privacy` anchors point to it. The query service logs only an error's class, never its text.
+- **Futures (#80, #82, #83):** 3,746 imagined technologies from Technovelgy's glossary as compiled in Not Boring's Sci-Fi Idea Bank, each reworded and credited, plus 171 dated forecasts from the singularity canon.
+  - Category, arrival decade and needs are three-model majority votes.
+  - The rent inputs were re-scored by one model told to judge each market as if the thing already existed.
+  - Where the rent pools, and its tier, come from fixed rules after Teece, Ricardo and Nordhaus (`seed/futures/rubric.yaml`).
+  - 156 owner-made illustrations; three are withheld until they are regenerated.
+- **Census (#81):** the first census bundle imported as published and checked against its manifest, with five `census_*` tables for SQL and Ask, `/census` and 425 role pages.
+
+## Part 22 status (25 Sep 2026): Ask rebuilt, and a private analyst
+
+- **Engine (#85):** Ask gains `scenarios`, `claims`, `rent_rubric` and a company card on `entity`. Prose citation kinds (`src`, `pos`, `claim`, `pred`) match numbers as whole tokens with their unit. Records are keyed by kind and id. Follow-ups carrying a number are dropped. The page's last four turns are quoted inside the new question, never as the model's own turns. The bearer check uses `hmac.compare_digest`.
+- **Page (#86):** `/ask` is a full conversation page with numbered citation cards, a sources list, follow-ups and copy. The header's Ask links to it; "Reason through this" links on outlook positions, stack company rows and indicator pages open it with a question; the series box is a plain form to it. The Ask sheet is gone.
+- **Private analyst (#87):** `scripts/analyst_corpus.py` builds a local full-text index of the owner's reading, outside the repo, with every passage tagged public, paid, book or own. `scripts/analyst_mcp.py` serves the Ask tools plus passage search and a draft check to Claude Code. The index is never in git or the image, and CI fails if a database file is tracked. The analyst's skill lives outside the repo.
+
+## Part 23 status (25 Sep 2026): census v3.2, the structural hand-over screen
+
+- The census session rebuilt the census after a methodology review. Three scorers now score every task. The rule was frozen before any version-three score, but it was shaped after seeing earlier usage data, so tests against that data are post hoc. The claim is structural, not a capability claim.
+- **Site:** "passes the structural hand-over screen" replaces "can go" everywhere. Each total sits beside the part all three models pass, each model's own total, agreement across the models and the re-score rate. The modelled saving is shown labelled and cannot be cited. Method gates are grouped by when they were written, and the physical filter is checked both ways. Role pages show which models pass each task.
+- **Import:** refuses drafts, and requires the published per-scorer columns to reproduce every verdict. Per-model totals, the re-score rate and named deal-card fields were added to the bundle by the census session on request; none is computed here.
+
+## Part 24 status (25 Sep 2026): upkeep
+
+- The age limit on Epoch's quarterly gauges moves from 300 to 330 days, with its rationale, before any gauge passed the old limit; the scorecard's cutoff moves from late October to late November.
+- This close-out of Parts 19–23.

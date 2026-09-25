@@ -73,7 +73,7 @@ def test_no_usable_data_means_no_score_never_fifty():
         None,
         "nothing",
     )
-    stale = score_input(inp, {"cowos_supply_growth": fresh(0.5, age=301)}, RULES)
+    stale = score_input(inp, {"cowos_supply_growth": fresh(0.5, age=331)}, RULES)
     assert stale["withheld"] == "nothing" and stale["gauges"][0]["unavailable"] == "past its age limit"
     nan = score_input(inp, {"cowos_supply_growth": fresh(math.nan)}, RULES)
     assert nan["withheld"] == "nothing" and nan["gauges"][0]["unavailable"] == "no reading"
