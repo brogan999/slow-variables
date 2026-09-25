@@ -15,6 +15,11 @@ dependencies = [
 [project.scripts]
 ai-tracker = "ai_tracker.cli:main"
 
+[project.optional-dependencies]
+analyst = [
+    "mcp>=2",
+]
+
 [dependency-groups]
 dev = ["pytest>=8", "ruff>=0.6", "mypy>=1.11"]
 
