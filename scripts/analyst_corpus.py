@@ -2,6 +2,7 @@
 
     uv run python scripts/analyst_corpus.py [--db ~/.ai-tracker/analyst.db]
 
+Also reads ~/.ai-tracker/reading/{public,book}/ (PDF, epub, md, txt), the tier set by the folder.
 Each chunk (about 1,500 tokens) keeps its collection, title, author, year, URL and access tier: public, paid (a paid
 newsletter post), book, or own (the owner's notes). Every chunk passes through ingest/scrub.py; files that are prompts
 addressed to a model are skipped. Nothing here is published: paid and book text is for paraphrase with credit, and
@@ -36,6 +37,7 @@ SOURCES = [
     ("sales_canon", HOME / "sales-canon", "phase*/**/*.md", "Startup Sales Canon (book-derived notes)", "book"),
     ("tracker_private", HOME / "ai-tracker" / "docs" / "private", "**/*.md", "Alex Brogan (notes)", "own"),
 ]
+READING = HOME / ".ai-tracker" / "reading"  # drop folder: public/ and book/ set the access tier, never guessed
 EPUBS = [("inference_engineering", HOME / "Downloads" / "Inference Engineering.epub", "book")]
 
 
@@ -96,6 +98,13 @@ def epub_text(path: Path) -> Iterator[tuple[str, str]]:
                 yield Path(n).stem, text
 
 
+def pdf_text(path: Path) -> str:
+    import pdfplumber
+
+    with pdfplumber.open(path) as pdf:
+        return "\n\n".join(p.extract_text() or "" for p in pdf.pages)
+
+
 def build(db: Path) -> dict[str, int]:
     if REPO in db.resolve().parents:  # paid posts and book text must never sit where git or the image can take them
         raise SystemExit(f"refusing to write the analyst index inside the repo: {db}")
@@ -133,6 +142,18 @@ def build(db: Path) -> dict[str, int]:
             who = epub_author(path)
             for name, text in epub_text(path):
                 add(collection, f"{path}#{name}", {"title": f"{path.stem}: {name}", "author": who, "year": "", "url": "", "access": access}, text)
+    for access in ("public", "book"):
+        for f in sorted((READING / access).glob("*")):
+            meta = {"title": f.stem, "author": "", "year": "", "url": "", "access": access}
+            if f.suffix == ".epub":
+                meta["author"] = epub_author(f)
+                for name, text in epub_text(f):
+                    add("reading", f"{f}#{name}", {**meta, "title": f"{f.stem}: {name}"}, text)
+            elif f.suffix == ".pdf":
+                add("reading", str(f), meta, pdf_text(f))
+            elif f.suffix in (".md", ".txt"):
+                d, body = describe("reading", f, f.read_text(errors="ignore"), None, access)
+                add("reading", str(f), {**d, "access": access}, body)
     con.commit()
     con.close()
     tmp.replace(db)

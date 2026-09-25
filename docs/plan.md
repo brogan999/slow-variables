@@ -725,3 +725,13 @@ Deliberately not done: an `expectations` SQL table, per-page share images, pips,
 
 - The age limit on Epoch's quarterly gauges moves from 300 to 330 days, with its rationale, before any gauge passed the old limit; the scorecard's cutoff moves from late October to late November.
 - This close-out of Parts 19–23.
+
+## Part 25 status (25 Sep 2026): data gaps
+
+- App and inference run-rates, pilot surveys and lead investors (#90), unpublished signposts where the two-source rule does not yet hold; Base10 removed after the owner meant Baseten (#91).
+
+## Part 26 status (25 Sep 2026): fresh sources where publishers stopped, and past technology waves
+
+- **Inference price (#92):** Epoch's price chart stopped in February 2025. The halving time now continues on Artificial Analysis models that clear GPT-4's own GPQA score and undercut every earlier model: 122 days (CI 89–192), still emerging. AA's GPQA is stored; one row per model where AA moves release dates.
+- **Second sources (#93):** Sierra's tau2-bench pass^k beside the vendor table; GetDeploying's weekly GPU rents publish `gpu_rental_price_per_hour` and test the outlook's no-glut claim. No free, dated accelerator list price exists after November 2025; recorded on the skipped list.
+- **Past waves (#94):** Folio IV of the full argument gains the historical record and its two exceptions; a case-record note for Ask; the analyst reads a local reading folder.
