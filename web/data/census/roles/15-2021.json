@@ -1,250 +1,341 @@
 {
- "csv": "/data/census/2026-09-25.1/tasks.csv",
+ "csv": "/data/census/v3.1-2026-09-24/tasks.csv",
  "industries": [
   {
-   "agreed3": 16047929.783018623,
+   "agreed3": 0.0,
    "emp": 1130.0,
-   "freed": 16047929.783018623,
    "naics": "999100",
+   "passes": 16047929.783018623,
    "title": "Federal Executive Branch (OEWS Designation)",
    "wage_bill": 152595200.0
   },
   {
-   "agreed3": 4645811.478445559,
+   "agreed3": 0.0,
    "emp": 290.0,
-   "freed": 4645811.478445559,
    "naics": "541700",
+   "passes": 4645811.478445559,
    "title": "Scientific Research and Development Services",
    "wage_bill": 44175700.0
   },
   {
-   "agreed3": 2542109.897959325,
+   "agreed3": 0.0,
    "emp": 390.0,
-   "freed": 2542109.897959325,
    "naics": "611300",
+   "passes": 2542109.897959325,
    "title": "Colleges, Universities, and Professional Schools",
    "wage_bill": 24172200.0
   },
   {
-   "agreed3": 1692720.7318156438,
+   "agreed3": 0.0,
    "emp": 90.0,
-   "freed": 1692720.7318156438,
    "naics": "336400",
+   "passes": 1692720.7318156438,
    "title": "Aerospace Product and Parts Manufacturing",
    "wage_bill": 16095600.0
   },
   {
-   "agreed3": 835696.4650774021,
+   "agreed3": 0.0,
    "emp": 70.0,
-   "freed": 835696.4650774021,
    "naics": "339900",
+   "passes": 835696.4650774021,
    "title": "Other Miscellaneous Manufacturing",
    "wage_bill": 7946400.0
   },
   {
-   "agreed3": 669175.5521100762,
+   "agreed3": 0.0,
    "emp": 60.0,
-   "freed": 669175.5521100762,
    "naics": "541300",
+   "passes": 669175.5521100762,
    "title": "Architectural, Engineering, and Related Services",
    "wage_bill": 6363000.0
   },
   {
-   "agreed3": 248025.0859808901,
+   "agreed3": 0.0,
    "emp": 40.0,
-   "freed": 248025.0859808901,
    "naics": "999200",
+   "passes": 248025.0859808901,
    "title": "State Government, excluding Schools and Hospitals (OEWS Designation)",
    "wage_bill": 2358400.0
   }
  ],
  "role": {
-  "agreed3": 26681468.99440752,
+  "accountable_removed": 0.0,
+  "agreed3": 0.0,
   "ai_exposure": 0.4241,
-  "band_hi": 0.4735927923507126,
-  "band_lo": 0.0,
-  "contested": 53421875.96613885,
+  "by_scorer": {
+   "gemini": 0.10516667485621188,
+   "gpt6": 0.0,
+   "sonnet": 0.10516667485621188
+  },
+  "contested": 26681468.99440752,
   "emp": 2070.0,
-  "freed": 26681468.99440752,
   "function": "Data & analytics",
   "href": "/census/roles/15-2021",
+  "n_passes": 1,
+  "n_tasks": 12,
+  "not_called": 0.0,
   "occ": "15-2021",
+  "passes": 26681468.99440752,
   "payroll_scored_by_three": 253706500.0,
-  "ref": "census:2026-09-25.1/roles.csv#15-2021",
+  "physical_removed": 0.0,
+  "ref": "census:v3.1-2026-09-24/roles.csv#15-2021",
+  "rule_loose": 0.10516667485621188,
+  "rule_strict": 0.0,
   "scored_by_three": true,
-  "share_goes": 0.10516667485621188,
+  "scorer_max": 0.10516667485621188,
+  "scorer_min": 0.0,
+  "share_passes": 0.10516667485621188,
+  "split": "direct",
+  "time_share_basis": "rated",
   "title": "Mathematicians",
   "wage_bill": 253706500.0
  },
+ "scorers": [
+  "sonnet",
+  "gemini",
+  "gpt6"
+ ],
  "tasks": [
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "7373",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 32568909.410938073,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7373",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#7373",
    "task": "Address the relationships of quantities, magnitudes, and forms through the use of numbers and symbols.",
    "time_share": 0.12837238861021721,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
-   "agreed_all_three": true,
-   "blocked_by_verifier": false,
-   "contested": false,
-   "goes": true,
+   "accountable": false,
+   "agreed_all_three": false,
+   "blocked_by_missing_check": false,
+   "contested": true,
    "id": "7370",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": true,
+   "passes_by": {
+    "gemini": true,
+    "gpt6": false,
+    "sonnet": true
+   },
    "payroll": 26681468.99440752,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7370",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#7370",
    "task": "Perform computations and apply methods of numerical analysis to data.",
    "time_share": 0.10516667485621188,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "quick to check, an existing check settles it, and a mistake is cheap"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7374",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 25606587.597462602,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7374",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#7374",
    "task": "Develop new principles and new relationships between existing mathematical principles to advance mathematical science.",
    "time_share": 0.10092996276194185,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7372",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 25217209.857645776,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7372",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#7372",
    "task": "Assemble sets of assumptions, and explore the consequences of each set.",
    "time_share": 0.09939520610487226,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "24002",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 24963936.82380683,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#24002",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#24002",
    "task": "Mentor others on mathematical techniques.",
    "time_share": 0.09839691463879258,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "7369",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 20852966.555200767,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7369",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#7369",
    "task": "Maintain knowledge in the field by reading professional journals, talking with other mathematicians, and attending professional conferences.",
    "time_share": 0.08219326881731752,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7376",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 20080541.347836226,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7376",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#7376",
    "task": "Conduct research to extend mathematical knowledge in traditional areas, such as algebra, geometry, probability, and logic.",
    "time_share": 0.07914870666631019,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7367",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 19722954.02026294,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7367",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#7367",
    "task": "Apply mathematical theories and techniques to the solution of practical problems in business, engineering, the sciences, or other fields.",
    "time_share": 0.07773925390269047,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7371",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 19505408.11857933,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7371",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#7371",
    "task": "Develop mathematical or statistical models of phenomena to be used for analysis or for computational simulation.",
    "time_share": 0.07688178315722827,
-   "why": "nobody can tell quickly whether it worked"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7368",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 15963027.489271764,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7368",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#7368",
    "task": "Develop computational methods for solving problems that occur in areas of science and engineering or that come from applications in business or industry.",
    "time_share": 0.0629192688767208,
-   "why": "nobody can tell quickly whether it worked"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "20191",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 11469150.820864294,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#20191",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#20191",
    "task": "Disseminate research by writing reports, publishing papers, or presenting at professional conferences.",
    "time_share": 0.045206373588632116,
-   "why": "no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7375",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 11074338.963723883,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7375",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#7375",
    "task": "Design, analyze, and decipher encryption systems designed to transmit military, political, financial, or law-enforcement-related information in code.",
    "time_share": 0.043650198019064876,
-   "why": "a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   }
  ],
- "version": "2026-09-25.1"
+ "version": "v3.1-2026-09-24"
 }

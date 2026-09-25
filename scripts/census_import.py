@@ -48,6 +48,7 @@ def main(bundle: str) -> None:
     src = Path(bundle).expanduser().resolve()
     manifest = json.loads((src / "manifest.json").read_text())
     version = manifest["version"]
+    assert not manifest.get("draft"), f"{version} is a draft export; the site imports only released versions"
     for name, meta in manifest["files"].items():
         assert sha(src / name) == meta["sha256"], f"{name} does not match the bundle's manifest"
     data = ROOT / "data" / "census" / version

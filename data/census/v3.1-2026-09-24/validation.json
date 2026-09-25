@@ -1,0 +1,669 @@
+{
+ "gates": [
+  {
+   "k": "pre17",
+   "g": "R1 held-out prediction of AI uptake",
+   "v": "\u03c1 0.147",
+   "t": "\u22650.30",
+   "p": false,
+   "n": "baseline 0.121"
+  },
+  {
+   "k": "pre17",
+   "g": "R1 uptake falls as specification entropy rises",
+   "v": "non-monotone",
+   "t": "decreasing",
+   "p": false,
+   "n": ""
+  },
+  {
+   "k": "pre17",
+   "g": "R1 uptake falls as the checking horizon lengthens",
+   "v": "non-monotone",
+   "t": "decreasing",
+   "p": false,
+   "n": ""
+  },
+  {
+   "k": "pre17",
+   "g": "R1 easy-to-specify, quick-to-check work sees the most uptake",
+   "v": "Copilot highest",
+   "t": "Tool highest",
+   "p": false,
+   "n": ""
+  },
+  {
+   "k": "pre17",
+   "g": "R3 incremental validity over importance + wage",
+   "v": "\u0394R\u00b2 0.019",
+   "t": "\u22650.03",
+   "p": false,
+   "n": "below the gate"
+  },
+  {
+   "k": "pre17",
+   "g": "R4 within-occupation scramble",
+   "v": "1.31",
+   "t": ">1.15",
+   "p": true,
+   "n": "beats 100% of 200 scrambles"
+  },
+  {
+   "k": "pre17",
+   "g": "Human-rated gold set, task level",
+   "v": "not run",
+   "t": "\u03b1\u22650.67",
+   "p": null,
+   "n": "occupation-level worker survey used instead"
+  },
+  {
+   "k": "pre24",
+   "g": "Not-called payroll within the stop rule",
+   "v": "0.00%",
+   "t": "\u22640.5%",
+   "p": true,
+   "n": "tasks without three valid scores"
+  },
+  {
+   "k": "pre24",
+   "g": "Channel test on the next Economic Index release",
+   "v": "pending",
+   "t": "no threshold set",
+   "p": null,
+   "n": "pre-committed to run once, unchanged; the within-occupation z will be reported whatever it is"
+  },
+  {
+   "k": "pre24",
+   "g": "AI-alone test on the next Economic Index release",
+   "v": "pending",
+   "t": "no threshold set",
+   "p": null,
+   "n": "pre-committed to run once, unchanged; raw and within-occupation effects will be reported"
+  },
+  {
+   "k": "post",
+   "g": "R1 held-out prediction, v3 rerun",
+   "v": "\u03c1 0.115",
+   "t": "\u22650.30",
+   "p": false,
+   "n": "baseline 0.121"
+  },
+  {
+   "k": "post",
+   "g": "R1 easy-to-specify, quick-to-check work sees the most uptake, v3",
+   "v": "Copilot highest",
+   "t": "Tool highest",
+   "p": false,
+   "n": ""
+  },
+  {
+   "k": "post",
+   "g": "R3 incremental validity, v3 rerun",
+   "v": "\u0394R\u00b2 0.019",
+   "t": "\u22650.03",
+   "p": false,
+   "n": "automation share \u0394R\u00b2 0.021"
+  },
+  {
+   "k": "post",
+   "g": "R4 within-occupation scramble, v3 rerun",
+   "v": "1.28",
+   "t": ">1.15",
+   "p": true,
+   "n": "beats 100% of 200 scrambles"
+  },
+  {
+   "k": "post",
+   "g": "AI works alone more on work that passes \u2014 consumer traffic (in-sample)",
+   "v": "66% vs 49%",
+   "t": "t>2 (set post hoc)",
+   "p": true,
+   "n": "within occupation +13.3pp, t 7.2; n=2,306; these tasks informed the rule"
+  },
+  {
+   "k": "post",
+   "g": "AI works alone more on work that passes \u2014 enterprise API traffic",
+   "v": "95% vs 91%",
+   "t": "t>2 (set post hoc)",
+   "p": true,
+   "n": "within occupation +2.4pp, t 3.8; an automation-heavy population"
+  },
+  {
+   "k": "post",
+   "g": "Harder-to-specify work gets less of its AI use through the API",
+   "v": "z -4.9",
+   "t": "z < \u22122 (set post hoc)",
+   "p": true,
+   "n": "two-part model, within occupation; whether a task gets any API use at all: z -1.9. Designed after the chat result; confirmatory only on the next release"
+  },
+  {
+   "k": "post",
+   "g": "Scorers' stakes track worker-reported consequence of error",
+   "v": "\u03c1 0.62/0.69/0.57",
+   "t": "\u03c1>0",
+   "p": true,
+   "n": "Dept of Labor survey the scorers never saw"
+  },
+  {
+   "k": "post",
+   "g": "Stakes predict wages",
+   "v": "z +11.05",
+   "t": "p<0.05",
+   "p": true,
+   "n": ""
+  },
+  {
+   "k": "post",
+   "g": "An existing check predicts wages",
+   "v": "z -1.59",
+   "t": "p<0.05",
+   "p": false,
+   "n": ""
+  },
+  {
+   "k": "post",
+   "g": "Verdict agreement across three scorers (the structural rule, before the shared gates)",
+   "v": "Fleiss \u03ba 0.41",
+   "t": "descriptive",
+   "p": null,
+   "n": "pairwise Cohen \u03ba sonnet\u2013gemini 0.47, sonnet\u2013gpt6 0.36, gemini\u2013gpt6 0.44"
+  },
+  {
+   "k": "post",
+   "g": "\u03c4 stability across three constructions",
+   "v": "\u03c1 0.96",
+   "t": "stable",
+   "p": true,
+   "n": "lowest pairwise rank correlation of role shares across the three time-weight constructions, v3"
+  },
+  {
+   "k": "post",
+   "g": "Industry retention (cost pass-through)",
+   "v": "not identified",
+   "t": "placebo \u2248 0",
+   "p": false,
+   "n": "3 of 4 estimators fail a noise placebo; the 4th flips sign with start year"
+  }
+ ],
+ "validation": {
+  "ai_alone_api": {
+   "n": 1936,
+   "passes": 0.9507867816091953,
+   "fails": 0.9102501135073781,
+   "within_occ_pp": 2.4383747669965294,
+   "within_occ_t": 3.8353605309843113
+  },
+  "ai_alone": {
+   "n": 2306,
+   "passes": 0.6589677595628416,
+   "fails": 0.49148144135657085,
+   "within_occ_pp": 13.316114209175492,
+   "within_occ_t": 7.209432037968827,
+   "label": "in-sample, post hoc: these tasks informed the rule; confirmatory on the next release"
+  },
+  "agreement": {
+   "n_called": 11176,
+   "fleiss_verdict": 0.41163900796960196,
+   "cohen_verdict": {
+    "sonnet-gemini": 0.4666440467051342,
+    "sonnet-gpt6": 0.35796574517109625,
+    "gemini-gpt6": 0.437639478540832
+   },
+   "weighted_kappa": {
+    "VH": {
+     "sonnet-gemini": 0.7390942941124906,
+     "sonnet-gpt6": 0.7096729800928261,
+     "gemini-gpt6": 0.7345198327232527
+    },
+    "G": {
+     "sonnet-gemini": 0.5623460555710265,
+     "sonnet-gpt6": 0.538846682392924,
+     "gemini-gpt6": 0.5028941611885982
+    },
+    "loss": {
+     "sonnet-gemini": 0.6600251341778185,
+     "sonnet-gpt6": 0.3888473186166781,
+     "gemini-gpt6": 0.665586361505814
+    }
+   },
+   "mean_score": {
+    "sonnet": {
+     "VH": 2.312007874015748,
+     "G": 0.9462240515390121,
+     "loss": 1.5637974230493916,
+     "SE_sum": 4.642895490336435
+    },
+    "gemini": {
+     "VH": 2.0268432355046526,
+     "G": 0.9880100214745884,
+     "loss": 2.28248031496063,
+     "SE_sum": 5.786864710093057
+    },
+    "gpt6": {
+     "VH": 2.225662133142448,
+     "G": 0.8913743736578382,
+     "loss": 2.8833214030064425,
+     "SE_sum": 5.758052970651396
+    }
+   },
+   "flag_rate": {
+    "sonnet": 0.16383321403006443,
+    "gemini": 0.07471367215461704,
+    "gpt6": 0.04983894058697208
+   },
+   "note": "descriptive only: with a plain majority and no tie-break, no result depends on ranking the scorers"
+  },
+  "r_gates_v3": {
+   "src": "scores_val_v3.parquet",
+   "n_tasks": 2645,
+   "R1_dR2": 0.01928473834444644,
+   "R2_dR2": 0.020501997703709196,
+   "R1_monotone_SE": false,
+   "R1_monotone_VH": false,
+   "R1_tool_highest": false,
+   "R1_top_quadrant": "Copilot",
+   "R1_heldout_rho": 0.11497771887889133,
+   "R1_heldout_baseline": 0.1213205865464673,
+   "R4_ratio": 1.2796196019294717,
+   "R4_beats": 1.0
+  },
+  "r_gates_17sep": {
+   "R1_heldout_rho": 0.147,
+   "R1_heldout_baseline": 0.121,
+   "R1_monotone_SE": false,
+   "R1_monotone_VH": false,
+   "R1_tool_highest": false,
+   "R1_top_quadrant": "Copilot",
+   "R3_dR2_diffusion": 0.0195,
+   "R3_dR2_automation": 0.0186,
+   "R4_ratio": 1.31,
+   "R4_beats": 1.0,
+   "source": "FINDINGS.md 'Gate results' (17 Sep, two scorers, pre-registered)"
+  }
+ },
+ "channel": {
+  "runs": [
+   {
+    "period": "2026-05",
+    "n_a": 1032,
+    "n_b": 898,
+    "n_pos": 659,
+    "a_coef": -0.2172307745622449,
+    "a_z": -1.8982128846708126,
+    "b_coef": -0.2693106769188709,
+    "b_z": -4.868938027279361,
+    "pos_coef": -0.20320053059238796,
+    "pos_z": -3.9290344040976866,
+    "share_by_se": {
+     "1": 0.4646464646464646,
+     "2": 0.599012519837771,
+     "3": 0.4194910545616179,
+     "4": 0.2751351351351351
+    }
+   },
+   {
+    "period": "2026-04",
+    "n_a": 998,
+    "n_b": 848,
+    "n_pos": 635,
+    "a_coef": -0.2535765891383037,
+    "a_z": -2.168336632267792,
+    "b_coef": -0.2751545276045707,
+    "b_z": -5.085811213118336,
+    "pos_coef": -0.18768813665496628,
+    "pos_z": -3.4603807656327787,
+    "share_by_se": {
+     "1": 0.4534883720930233,
+     "2": 0.5953177257525084,
+     "3": 0.4305522914218566,
+     "4": 0.28100113765642776
+    }
+   }
+  ],
+  "api_alone": 0.9096962972689075,
+  "headline": {
+   "period": "2026-05",
+   "z": -4.868938027279361,
+   "label": "post hoc (current release); confirmatory on the next"
+  }
+ },
+ "se_test": {
+  "n_cop": 473,
+  "ratio": 2.1163022387872505,
+  "ratio_trim": 2.440118198472229,
+  "used_cop": 0.5264270613107822,
+  "used_tool": 0.3552123552123552
+ },
+ "adjudication": [
+  {
+   "scorer": "gemini",
+   "tasks": 11176,
+   "stakes_vs_workers": 0.6194031494775075,
+   "grader_vs_workers": 0.41878916387930115,
+   "alone_consumer": 0.6528661202185793,
+   "gap_consumer": 0.16085872502310117,
+   "gap_api": 0.03600676039646633,
+   "flags": 0.050286327845382964
+  },
+  {
+   "scorer": "gpt6",
+   "tasks": 11176,
+   "stakes_vs_workers": 0.6858173447711363,
+   "grader_vs_workers": 0.34528656955766407,
+   "alone_consumer": 0.6594093457943926,
+   "gap_consumer": 0.16216086921412887,
+   "gap_api": 0.03869129815306249,
+   "flags": 0.029438081603435935
+  },
+  {
+   "scorer": "sonnet",
+   "tasks": 11176,
+   "stakes_vs_workers": 0.5702337652387017,
+   "grader_vs_workers": 0.5124178990199135,
+   "alone_consumer": 0.6494106312292359,
+   "gap_consumer": 0.16635147910953518,
+   "gap_api": 0.043415514840585256,
+   "flags": 0.0898353614889048
+  }
+ ],
+ "ext": {
+  "n": 425,
+  "z_loss": 11.049659654881854,
+  "z_G": -1.5945420210734482,
+  "z_VH": 0.750040234714019,
+  "dr2": 0.167691021693112
+ },
+ "psi_z": {
+  "SE": -8.011412551820507,
+  "VH": -5.615946924180214,
+  "G": 5.5816924606569716,
+  "loss": 0.6187073684974121
+ },
+ "api": {
+  "n": 1936,
+  "goes": 0.9507867816091953,
+  "stays": 0.9102501135073781,
+  "p": 6.082652721506455e-06
+ },
+ "placebo": [
+  {
+   "method": "original",
+   "noise_median": 0.5703595610829014,
+   "trusted": false
+  },
+  {
+   "method": "W",
+   "noise_median": -0.00757436580844198,
+   "trusted": true
+  },
+  {
+   "method": "L",
+   "noise_median": 0.44774271438514557,
+   "trusted": false
+  },
+  {
+   "method": "IV",
+   "noise_median": 0.8187256386958834,
+   "trusted": false
+  }
+ ],
+ "stability": [
+  {
+   "start": 1997,
+   "industry": "CPAs",
+   "b": 0.7763856121549998,
+   "ci": 0.3105485725302642
+  },
+  {
+   "start": 1997,
+   "industry": "Tax preparation",
+   "b": -0.022028784060341478,
+   "ci": 0.1741006545378733
+  },
+  {
+   "start": 1997,
+   "industry": "Placement & search",
+   "b": -0.38626634561888623,
+   "ci": 0.2992243433486366
+  },
+  {
+   "start": 1999,
+   "industry": "CPAs",
+   "b": -0.6081149594617374,
+   "ci": 0.4532060787484101
+  },
+  {
+   "start": 1999,
+   "industry": "Tax preparation",
+   "b": -0.0070396637054368355,
+   "ci": 0.16462555022205094
+  },
+  {
+   "start": 1999,
+   "industry": "Placement & search",
+   "b": -0.42111910157111027,
+   "ci": 0.28489133110143106
+  },
+  {
+   "start": 2002,
+   "industry": "CPAs",
+   "b": -0.6606410991684051,
+   "ci": 0.45724260730485194
+  },
+  {
+   "start": 2002,
+   "industry": "Tax preparation",
+   "b": -0.02667043706815185,
+   "ci": 0.26150495227161846
+  },
+  {
+   "start": 2002,
+   "industry": "Placement & search",
+   "b": -0.4235201385179408,
+   "ci": 0.2858678553611752
+  },
+  {
+   "start": 2005,
+   "industry": "CPAs",
+   "b": -0.6795563373521712,
+   "ci": 0.4637612355226
+  },
+  {
+   "start": 2005,
+   "industry": "Tax preparation",
+   "b": -0.33102218508344083,
+   "ci": 0.24670443900248962
+  },
+  {
+   "start": 2005,
+   "industry": "Placement & search",
+   "b": -0.5388044870989123,
+   "ci": 0.2071786133697651
+  }
+ ],
+ "sigma": [
+  {
+   "sigma": 0.5,
+   "before": 0.9307058144058753,
+   "after": 0.9438839966854025
+  },
+  {
+   "sigma": 1.0,
+   "before": 0.9307058144058753,
+   "after": 0.9307058144058753
+  },
+  {
+   "sigma": 1.5,
+   "before": 0.9307058144058753,
+   "after": 0.9147125258766066
+  }
+ ],
+ "dial": [
+  {
+   "vh": 0,
+   "g": 2,
+   "l": 1,
+   "rule": "can be checked instantly, by an existing check, and a failure costs up to about $1k",
+   "freed": 115026067576.71378,
+   "agreed3": 4598944622.603205,
+   "alone": 0.7027724137931035,
+   "alone_rest": 0.49966432384341636,
+   "headline": false
+  },
+  {
+   "vh": 0,
+   "g": 2,
+   "l": 2,
+   "rule": "can be checked instantly, by an existing check, and a failure costs up to about $10k",
+   "freed": 171839085955.99167,
+   "agreed3": 77966695863.09009,
+   "alone": 0.6720010869565219,
+   "alone_rest": 0.49782389340560074,
+   "headline": false
+  },
+  {
+   "vh": 1,
+   "g": 2,
+   "l": 2,
+   "rule": "can be checked within hours, by an existing check, and a failure costs up to about $10k",
+   "freed": 388648621524.1933,
+   "agreed3": 158386271953.58893,
+   "alone": 0.6589677595628416,
+   "alone_rest": 0.49148144135657085,
+   "headline": true
+  },
+  {
+   "vh": 1,
+   "g": 1,
+   "l": 2,
+   "rule": "can be checked within hours \u2014 by an existing check or an expert \u2014 and a failure costs up to about $10k",
+   "freed": 1295896086566.0398,
+   "agreed3": 696749693323.8652,
+   "alone": 0.5610779310344828,
+   "alone_rest": 0.4789530044275775,
+   "headline": false
+  },
+  {
+   "vh": 2,
+   "g": 1,
+   "l": 2,
+   "rule": "can be checked within days \u2014 by an existing check or an expert \u2014 and a failure costs up to about $10k",
+   "freed": 1946257049374.957,
+   "agreed3": 1099036444168.5375,
+   "alone": 0.5565248421052631,
+   "alone_rest": 0.4685159292035398,
+   "headline": false
+  },
+  {
+   "vh": 2,
+   "g": 1,
+   "l": 3,
+   "rule": "can be checked within days \u2014 by an existing check or an expert \u2014 and a failure costs up to about $100k",
+   "freed": 2428965366697.0347,
+   "agreed3": 1582359194979.0542,
+   "alone": 0.5511335016835016,
+   "alone_rest": 0.45550948121645796,
+   "headline": false
+  }
+ ],
+ "dial_fields": {
+  "freed": "payroll in knowledge tasks this step's rule passes by the three-scorer vote; physical, accountability and not-called tasks excluded",
+  "agreed3": "the part of freed that all three scorers, each applying this step's rule, pass",
+  "alone": "mean share of observed AI use that is AI working alone (Economic Index automation share, claude.ai, latest month) across tasks this step passes that have usage data \u2014 post hoc",
+  "alone_rest": "the same mean across every other knowledge task with usage data"
+ },
+ "scorers": {
+  "sonnet": {
+   "model": "claude-sonnet-5",
+   "name": "Claude Sonnet"
+  },
+  "gemini": {
+   "model": "gemini-3.1-pro-preview",
+   "name": "Gemini 3.1 Pro"
+  },
+  "gpt6": {
+   "model": "gpt-6-sol",
+   "name": "GPT-6 Sol"
+  }
+ },
+ "physical_gate": {
+  "removed_usd": 201424737159.88364,
+  "removed_by_label_only_usd": 145576618545.19098,
+  "sensitivity_grid_usd": {
+   "gate_on__physical_either": 388648621524.1933,
+   "gate_on__physical_both": 417563639077.36676,
+   "gate_off__physical_either": 390274010074.2682,
+   "gate_off__physical_both": 419189027627.44165
+  },
+  "spotcheck": {
+   "removed": {
+    "set_usd": 201424737159.8836,
+    "draws": 60,
+    "wrong": 10,
+    "error_rate": 0.16666666666666666,
+    "ci95": [
+     0.08292881015906371,
+     0.2852192548287028
+    ],
+    "effect_usd": [
+     16703913789.271294,
+     33570789526.647266,
+     57450213436.809326
+    ]
+   },
+   "kept": {
+    "set_usd": 388648621524.1933,
+    "draws": 60,
+    "wrong": 0,
+    "error_rate": 0.0,
+    "ci95": [
+     0.0,
+     0.05962949228616691
+    ],
+    "effect_usd": [
+     0.0,
+     0.0,
+     23174919979.206287
+    ]
+   },
+   "method": "60 payroll-weighted draws with replacement (seed 7) per side; judged by Gemini (not a labeller) on the labellers' question; owner overrides applied. removed: 'not physical' = wrongly removed (headline low by effect_usd); kept: 'physical' = leak (headline high by effect_usd). Clopper-Pearson 95%."
+  }
+ },
+ "not_called": {
+  "usd": 0.0,
+  "upper_bound_usd": 0.0,
+  "share": 0.0
+ },
+ "by_scorer": {
+  "sonnet": {
+   "passes_usd": 696093487096.4381,
+   "note": "payroll this scorer alone would pass (its own verdict under the rule, with the shared gates)"
+  },
+  "gemini": {
+   "passes_usd": 400159520328.0381,
+   "note": "payroll this scorer alone would pass (its own verdict under the rule, with the shared gates)"
+  },
+  "gpt6": {
+   "passes_usd": 244176428225.98343,
+   "note": "payroll this scorer alone would pass (its own verdict under the rule, with the shared gates)"
+  }
+ },
+ "rescore_stability": {
+  "scorer": "sonnet",
+  "n_tasks": 849,
+  "rubric": "v1 (both runs)",
+  "share_verdicts_unchanged": 0.8716136631330977,
+  "share_verdicts_changed": 0.12838633686690226,
+  "note": "the same scorer re-scoring the same tasks under the same rubric, weeks apart and in smaller batches; the unweighted share of pass/fail verdicts that flipped"
+ },
+ "bridge": {
+  "n": 849,
+  "flag_v1_old_run": 0.23792697290930506,
+  "flag_v1_new_run": 0.18021201413427562,
+  "flag_v2_rubric": 0.19081272084805653,
+  "G2_v1_old": 0.30153121319199055,
+  "G2_v1_new": 0.30742049469964666,
+  "G2_v2": 0.2308598351001178,
+  "same_run_agreement_v1": 0.8716136631330977
+ }
+}

@@ -1,372 +1,505 @@
 {
- "csv": "/data/census/2026-09-25.1/tasks.csv",
+ "csv": "/data/census/v3.1-2026-09-24/tasks.csv",
  "industries": [
   {
    "agreed3": 0.0,
    "emp": 53600.0,
-   "freed": 1017160069.5514783,
    "naics": "611100",
+   "passes": 0.0,
    "title": "Elementary and Secondary Schools",
    "wage_bill": 4952640000.0
   },
   {
    "agreed3": 0.0,
    "emp": 4030.0,
-   "freed": 85034889.05901642,
    "naics": "611700",
+   "passes": 0.0,
    "title": "Educational Support Services",
    "wage_bill": 414042200.0
   },
   {
    "agreed3": 0.0,
    "emp": 1400.0,
-   "freed": 25558389.468122713,
    "naics": "611300",
+   "passes": 0.0,
    "title": "Colleges, Universities, and Professional Schools",
    "wage_bill": 124446000.0
   },
   {
    "agreed3": 0.0,
    "emp": 1040.0,
-   "freed": 24103907.08851031,
    "naics": "621300",
+   "passes": 0.0,
    "title": "Offices of Other Health Practitioners",
    "wage_bill": 117364000.0
   },
   {
    "agreed3": 0.0,
    "emp": 880.0,
-   "freed": 17923199.02228502,
    "naics": "999300",
+   "passes": 0.0,
    "title": "Local Government, excluding Schools and Hospitals (OEWS Designation)",
    "wage_bill": 87269600.0
   },
   {
    "agreed3": 0.0,
    "emp": 220.0,
-   "freed": 4841360.227986892,
    "naics": "624400",
+   "passes": 0.0,
    "title": "Child Care Services",
    "wage_bill": 23573000.0
   },
   {
    "agreed3": 0.0,
    "emp": 250.0,
-   "freed": 4294440.349858139,
    "naics": "551100",
+   "passes": 0.0,
    "title": "Management of Companies and Enterprises",
    "wage_bill": 20910000.0
   },
   {
    "agreed3": 0.0,
    "emp": 290.0,
-   "freed": 3665287.3815293284,
    "naics": "624100",
+   "passes": 0.0,
    "title": "Individual and Family Services",
    "wage_bill": 17846600.0
   },
   {
    "agreed3": 0.0,
    "emp": 80.0,
-   "freed": 2143975.212828268,
    "naics": "621100",
+   "passes": 0.0,
    "title": "Offices of Physicians",
    "wage_bill": 10439200.0
   },
   {
    "agreed3": 0.0,
    "emp": 60.0,
-   "freed": 1094004.0581360273,
    "naics": "622100",
+   "passes": 0.0,
    "title": "General Medical and Surgical Hospitals",
    "wage_bill": 5326800.0
   }
  ],
  "role": {
+  "accountable_removed": 0.0,
   "agreed3": 0.0,
   "ai_exposure": 0.0467,
-  "band_hi": 0.5026586302642616,
-  "band_lo": 0.012179086716097545,
-  "contested": 1612496702.278801,
+  "by_scorer": {
+   "gemini": 0.012179086716097545,
+   "gpt6": 0.0,
+   "sonnet": 0.061026905120327324
+  },
+  "contested": 423430103.8859402,
   "emp": 61980.0,
-  "freed": 1187921229.97433,
   "function": "Research",
   "href": "/census/roles/19-3034",
+  "n_passes": 0,
+  "n_tasks": 19,
+  "not_called": 0.0,
   "occ": "19-3034",
+  "passes": 0.0,
   "payroll_scored_by_three": 5784090800.0,
-  "ref": "census:2026-09-25.1/roles.csv#19-3034",
+  "physical_removed": 0.0,
+  "ref": "census:v3.1-2026-09-24/roles.csv#19-3034",
+  "rule_loose": 0.28179518489140465,
+  "rule_strict": 0.0,
   "scored_by_three": true,
-  "share_goes": 0.2053773481519913,
+  "scorer_max": 0.061026905120327324,
+  "scorer_min": 0.0,
+  "share_passes": 0.0,
+  "split": "direct",
+  "time_share_basis": "rated",
   "title": "School Psychologists",
   "wage_bill": 5784090800.0
  },
+ "scorers": [
+  "sonnet",
+  "gemini",
+  "gpt6"
+ ],
  "tasks": [
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": true,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "5455",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 764491126.0883896,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#5455",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#5455",
    "task": "Maintain student records, including special education reports, confidential records, records of services provided, and behavioral data.",
    "time_share": 0.13217135631556642,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "5461",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 424575472.3044712,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#5461",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#5461",
    "task": "Collect and analyze data to evaluate the effectiveness of academic programs and other services, such as behavioral management systems.",
    "time_share": 0.07340401231330448,
-   "why": "nobody can tell quickly whether it worked"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "5448",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 421908606.51486206,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#5448",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#5448",
    "task": "Assess an individual child's needs, limitations, and potential, using observation, review of school records, and consultation with parents and school personnel.",
    "time_share": 0.07294294317005917,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "5446",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 384360787.86470103,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#5446",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#5446",
    "task": "Compile and interpret students' test results, along with information from teachers and parents, to diagnose conditions and to help assess eligibility for special services.",
    "time_share": 0.0664513751866933,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "5453",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 368491819.40495944,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#5453",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#5453",
    "task": "Counsel children and families to help solve conflicts and problems in learning and adjustment.",
    "time_share": 0.06370782066646662,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "5451",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 365341252.5819989,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#5451",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#5451",
    "task": "Promote an understanding of child development and its relationship to learning and behavior.",
    "time_share": 0.06316312540978763,
-   "why": "no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "5452",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 365175919.3837647,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#5452",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#5452",
    "task": "Collaborate with other educational professionals to develop teaching strategies and school programs.",
    "time_share": 0.06313454128067365,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "18619",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 354836343.80760396,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#18619",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#18619",
    "task": "Interpret test results and prepare psychological reports for teachers, administrators, and parents.",
    "time_share": 0.06134695254223947,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": true,
-   "goes": true,
    "id": "5449",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": true
+   },
    "payroll": 352985160.45895815,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#5449",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#5449",
    "task": "Select, administer, and score psychological tests.",
    "time_share": 0.061026905120327324,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "5450",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 344633131.96806514,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#5450",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#5450",
    "task": "Provide consultation to parents, teachers, administrators, and others on topics such as learning styles and behavior modification techniques.",
    "time_share": 0.05958293946009028,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "5454",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 317699419.5555185,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#5454",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#5454",
    "task": "Develop individualized educational plans in collaboration with teachers and other staff members.",
    "time_share": 0.054926423277366,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "5458",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 246337054.96846336,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#5458",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#5458",
    "task": "Design classes and programs to meet the needs of special students.",
    "time_share": 0.04258872543433505,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "5459",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 240696771.13510188,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#5459",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#5459",
    "task": "Refer students and their families to appropriate community agencies for medical, vocational, or social services.",
    "time_share": 0.0416135879359124,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "5456",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 221314394.79065478,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#5456",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#5456",
    "task": "Serve as a resource to help families and schools deal with crises, such as separation and loss.",
    "time_share": 0.03826260728663782,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "5460",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 197055091.74967077,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#5460",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#5460",
    "task": "Initiate and direct efforts to foster tolerance, understanding, and appreciation of diversity in school communities.",
    "time_share": 0.034068464442098795,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "5463",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 156757881.4683853,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#5463",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#5463",
    "task": "Conduct research to generate new knowledge that can be used to address learning and behavior issues.",
    "time_share": 0.027101559586233556,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "5447",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 99814259.8947101,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#5447",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#5447",
    "task": "Report any pertinent information to the proper authorities in cases of child endangerment, neglect, or abuse.",
    "time_share": 0.01725668965893656,
    "why": "a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "5462",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 87171362.63273907,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#5462",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#5462",
    "task": "Provide educational programs on topics such as classroom management, teaching strategies, or parenting skills.",
    "time_share": 0.015070884197173921,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": true,
-   "goes": true,
    "id": "5457",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": true,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 70444943.42698202,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#5457",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#5457",
    "task": "Attend workshops, seminars, or professional meetings to remain informed of new developments in school psychology.",
    "time_share": 0.012179086716097545,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   }
  ],
- "version": "2026-09-25.1"
+ "version": "v3.1-2026-09-24"
 }

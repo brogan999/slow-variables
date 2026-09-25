@@ -1,294 +1,421 @@
 {
- "csv": "/data/census/2026-09-25.1/tasks.csv",
+ "csv": "/data/census/v3.1-2026-09-24/tasks.csv",
  "industries": [
   {
-   "agreed3": 23133904.158553466,
+   "agreed3": 0.0,
    "emp": 7440.0,
-   "freed": 64706482.84730079,
    "naics": "999200",
+   "passes": 23133904.158553466,
    "title": "State Government, excluding Schools and Hospitals (OEWS Designation)",
    "wage_bill": 568490400.0
   },
   {
-   "agreed3": 14267926.77940843,
+   "agreed3": 0.0,
    "emp": 5730.0,
-   "freed": 39907978.91660599,
    "naics": "999300",
+   "passes": 14267926.77940843,
    "title": "Local Government, excluding Schools and Hospitals (OEWS Designation)",
    "wage_bill": 350618700.0
   }
  ],
  "role": {
-  "agreed3": 37401830.9379619,
+  "accountable_removed": 0.0,
+  "agreed3": 0.0,
   "ai_exposure": 0.1704,
-  "band_hi": 0.8373257337322051,
-  "band_lo": 0.06534784869267025,
-  "contested": 255101806.09633204,
+  "by_scorer": {
+   "gemini": 0.040693570478153133,
+   "gpt6": 0.0,
+   "sonnet": 0.06534784869267025
+  },
+  "contested": 60061802.398856334,
   "emp": 13170.0,
-  "freed": 104614461.76390678,
   "function": "Legal & compliance",
   "href": "/census/roles/23-1012",
+  "n_passes": 1,
+  "n_tasks": 18,
+  "not_called": 0.0,
   "occ": "23-1012",
+  "passes": 37401830.9379619,
   "payroll_scored_by_three": 919109100.0,
-  "ref": "census:2026-09-25.1/roles.csv#23-1012",
+  "physical_removed": 0.0,
+  "ref": "census:v3.1-2026-09-24/roles.csv#23-1012",
+  "rule_loose": 0.32719772569141514,
+  "rule_strict": 0.0,
   "scored_by_three": true,
-  "share_goes": 0.1138215928488868,
+  "scorer_max": 0.06534784869267025,
+  "scorer_min": 0.0,
+  "share_passes": 0.040693570478153133,
+  "split": "direct",
+  "time_share_basis": "rated",
   "title": "Judicial Law Clerks",
   "wage_bill": 919109100.0
  },
+ "scorers": [
+  "sonnet",
+  "gemini",
+  "gpt6"
+ ],
  "tasks": [
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "19051",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 142451510.28999287,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#19051",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#19051",
    "task": "Research laws, court decisions, documents, opinions, briefs, or other information related to cases before the court.",
    "time_share": 0.15498868446628683,
-   "why": "no automated way to check it, and a failure is too expensive"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "19050",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 141045530.29688874,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#19050",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#19050",
    "task": "Prepare briefs, legal memoranda, or statements of issues involved in cases, including appropriate suggestions or recommendations.",
    "time_share": 0.15345896400861306,
-   "why": "no automated way to check it, and a failure is too expensive"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "19052",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 113329108.27475975,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#19052",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#19052",
    "task": "Review complaints, petitions, motions, or pleadings that have been filed to determine issues involved or basis for relief.",
    "time_share": 0.12330321642420879,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "19047",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 108014248.2669825,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#19047",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#19047",
    "task": "Draft or proofread judicial opinions, decisions, or citations.",
    "time_share": 0.11752059496199363,
-   "why": "no automated way to check it, and a failure is too expensive"
+   "why": "no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "19046",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 97081329.22314498,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#19046",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#19046",
    "task": "Confer with judges concerning legal questions, construction of documents, or granting of orders.",
    "time_share": 0.10562546842713774,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": true,
+   "contested": false,
    "id": "19061",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 40265763.83889052,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#19061",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#19061",
    "task": "Respond to questions from judicial officers or court staff on general legal issues.",
    "time_share": 0.04380955845055883,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": true,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "19053",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 39563164.43561227,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#19053",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#19053",
    "task": "Review dockets of pending litigation to ensure adequate progress.",
    "time_share": 0.04304512319115573,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "nobody can tell quickly whether it worked"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "19048",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 38068207.41512409,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#19048",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#19048",
    "task": "Keep abreast of changes in the law and inform judges when cases are affected by such changes.",
    "time_share": 0.04141859482745203,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
-   "agreed_all_three": true,
-   "blocked_by_verifier": false,
-   "contested": false,
-   "goes": true,
+   "accountable": false,
+   "agreed_all_three": false,
+   "blocked_by_missing_check": false,
+   "contested": true,
    "id": "19057",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": true,
+   "passes_by": {
+    "gemini": true,
+    "gpt6": false,
+    "sonnet": true
+   },
    "payroll": 37401830.9379619,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#19057",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#19057",
    "task": "Enter information into computerized court calendar, filing, or case management systems.",
    "time_share": 0.040693570478153133,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "quick to check, an existing check settles it, and a mistake is cheap"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "19044",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 34294303.15673691,
-   "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#19044",
+   "physical": true,
+   "ref": "census:v3.1-2026-09-24/tasks.csv#19044",
    "task": "Attend court sessions to hear oral arguments or record necessary case information.",
    "time_share": 0.03731254881138366,
-   "why": "no automated way to check it"
+   "why": "physical work \u2014 out of reach whatever its structure"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "19045",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 32889500.389237273,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#19045",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#19045",
    "task": "Communicate with counsel regarding case management or procedural requirements.",
    "time_share": 0.035784109187078306,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": true,
-   "goes": true,
    "id": "19056",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": true
+   },
    "payroll": 22659971.46089444,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#19056",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#19056",
    "task": "Coordinate judges' meeting and appointment schedules.",
    "time_share": 0.02465427821451712,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "19054",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 22291838.092220273,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#19054",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#19054",
    "task": "Verify that all files, complaints, or other papers are available and in the proper order.",
    "time_share": 0.024253745384764738,
    "why": "physical work \u2014 out of reach whatever its structure"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "19049",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 19141126.67165963,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#19049",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#19049",
    "task": "Participate in conferences or discussions between trial attorneys and judges.",
    "time_share": 0.020825739481482263,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "19060",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 14621067.84492727,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#19060",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#19060",
    "task": "Prepare periodic reports on court proceedings, as required.",
    "time_share": 0.01590786974574321,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "19062",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 7179253.657603477,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#19062",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#19062",
    "task": "Supervise law students, volunteers, or other personnel assigned to the court.",
    "time_share": 0.007811100616459436,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": true,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "19059",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 4989494.929438168,
-   "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#19059",
+   "physical": true,
+   "ref": "census:v3.1-2026-09-24/tasks.csv#19059",
    "task": "Perform courtroom duties, including calling calendars, administering oaths, and swearing in jury panels and witnesses.",
    "time_share": 0.005428620965060805,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "physical work \u2014 out of reach whatever its structure"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "19058",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 3821850.8179249116,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#19058",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#19058",
    "task": "Maintain judges' law libraries by assembling or updating appropriate documents.",
    "time_share": 0.004158212357950663,
    "why": "physical work \u2014 out of reach whatever its structure"
   }
  ],
- "version": "2026-09-25.1"
+ "version": "v3.1-2026-09-24"
 }

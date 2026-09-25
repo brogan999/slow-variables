@@ -90,3 +90,8 @@ questions:
     informational: true
     question: "If legal AI is easy to copy but the law firms own the client relationships, who keeps the profit under the site's rent rule?"
     expect: {tool: rent_rubric, mentions: ["judgement"]}
+  - id: g21
+    lens: capture
+    informational: true
+    question: "In insurance carriers (industry 524200), which roles have the most payroll that passes the census's hand-over screen with all three scorers agreeing?"
+    expect: {tool: sql, cites: ["census:*"], mentions: ["pass"]}

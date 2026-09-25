@@ -311,53 +311,64 @@ export type AtlasDoc = {
 };
 export const atlas = () => read<AtlasDoc>("atlas.json");
 
-// The automatability census (plan Part 21): a judged snapshot imported as published; agreed3 null = not scored by all three.
+// The automatability census (plans Part 21, Part 23): a judged snapshot imported as published. "Passes" means passes the
+// structural hand-over screen; agreed3 null = not scored by all three. The only modelled figure is headline.modelled_saving.
 export type CensusRole = {
   occ: string; title: string; function: string; href: string; ref: string; emp: number; wage_bill: number;
-  share_goes: number; band_lo: number; band_hi: number; freed: number; agreed3: number | null; scored_by_three: boolean;
-  payroll_scored_by_three: number; contested: number; ai_exposure: number | null;
+  share_passes: number; rule_strict: number; rule_loose: number; scorer_min: number; scorer_max: number; by_scorer: Record<string, number>;
+  passes: number; agreed3: number | null; scored_by_three: boolean; payroll_scored_by_three: number; contested: number;
+  not_called: number; physical_removed: number; accountable_removed: number; ai_exposure: number | null;
+  n_tasks: number; n_passes: number; time_share_basis: string; split: string;
 };
 export type CensusFunction = {
-  function: string; ref: string; payroll: number; freed: number; agreed3: number | null; scored_by_three: boolean;
-  share_goes: number; band_lo: number; band_hi: number; verifier_queue: number; roles: number;
+  function: string; ref: string; payroll: number; passes: number; agreed3: number | null; scored_by_three: boolean;
+  payroll_scored_by_three: number; share_passes: number; rule_strict: number; rule_loose: number; blocked_by_missing_check: number; roles: number;
 };
 export type CensusIndustry = {
-  naics: string; title: string; ref: string; payroll: number; knowledge_payroll: number; freed: number; agreed3: number | null;
-  verifier_queue: number; share_total: number;
+  naics: string; title: string; ref: string; payroll: number; knowledge_payroll: number; passes: number; agreed3: number | null;
+  blocked_by_missing_check: number; share_total: number;
 };
 export type CensusCard = {
   key: string; name: string; naics: string; invoice: string; why: string; kill: string[]; comps: string[]; scope: string;
   excl: string; anchored: boolean; stance: string; stance_why: string; sources: { cited_as: string; href: string }[];
-  payroll: number; freed: number; freed_lo: number; freed_hi: number; agreed3: number | null;
-  roles: { title: string; wage_bill: number; share_goes: number; freed: number; agreed3: number | null }[];
+  payroll: number; passes: number; passes_strict: number; passes_loose: number; agreed3: number | null;
+  roles: { title: string; wage_bill: number; share_passes: number; passes: number; agreed3: number | null }[];
 };
 export type CensusIndex = {
   version: string; generated_at: string; manifest_sha256: string; sources: string[]; scorers: string[]; scorer_names: Record<string, string>;
   prose: { title: string; lede: string; rule: string; agreed: string; caveats: string[]; sections: Record<string, { title: string; lede: string }>; method_notes: Record<string, string> };
-  headline: { freed: number; agreed3: number; payroll: number; agreed: number; contested: number; verifier_queue: number; without_gemini: number; physical_removed: number; ref: string };
-  dial: { rule: string; freed: number; agreed3: number; alone: number; alone_rest: number; headline: boolean }[];
-  dial_fields: Record<string, string>;
+  headline: {
+    passes: number; agreed3: number; payroll: number; contested: number; blocked_by_missing_check: number; physical_removed: number;
+    accountable_removed: number; not_called: number; by_scorer: Record<string, number>; rescore_changed: number; fleiss_kappa: number;
+    modelled_saving: number; ref: string;
+  };
+  dial: { rule: string; passes: number; agreed3: number; alone: number; alone_rest: number; headline: boolean }[];
   functions: CensusFunction[]; industries: CensusIndustry[]; roles: CensusRole[];
   deals: { cards: CensusCard[]; not_carded: { name: string; why: string }[] };
   method: CensusMethod;
   csv: Record<string, string>;
 };
+type AloneTest = { n: number; passes: number; fails: number; within_occ_pp: number; within_occ_t: number; label?: string };
 export type CensusMethod = {
-  gates: { g: string; v: string; t: string; p: boolean | "x" | null; n: string }[];
+  gates: { k: "pre17" | "pre24" | "post"; g: string; v: string; t: string; p: boolean | null; n: string }[];
+  validation: { ai_alone: AloneTest; ai_alone_api: AloneTest; agreement: { n_called: number; fleiss_verdict: number; cohen_verdict: Record<string, number> } };
   adjudication: { scorer: string; tasks: number; stakes_vs_workers: number; grader_vs_workers: number; alone_consumer: number }[];
   placebo: { method: string; noise_median: number; trusted: boolean }[];
   stability: { start: number; industry: string; b: number; ci: number }[];
-  channel: { runs: { period: string; scorer: string; n: number; coef: number; z: number }[] };
-  physical_gate: { removed_usd: number; spotcheck: { sample: number; error_rate: number; ci90: number[]; headline_low_by_usd: number[] } };
+  channel: { runs: { period: string; n_a: number; n_b: number; a_coef: number; a_z: number; b_coef: number; b_z: number }[]; headline: { period: string; z: number; label: string } };
+  by_scorer: Record<string, { passes_usd: number; note: string }>;
+  rescore_stability: { scorer: string; n_tasks: number; share_verdicts_changed: number; note: string };
+  physical_gate: { removed_usd: number; spotcheck: Record<"removed" | "kept", { set_usd: number; draws: number; wrong: number; error_rate: number; ci95: number[]; effect_usd: number[] }> };
+  not_called: { usd: number; share: number };
   sigma: { sigma: number; before: number; after: number }[];
 };
 export type CensusTask = {
-  id: string; ref: string; task: string; goes: boolean; why: string; physical: boolean; contested: boolean;
-  agreed_all_three: boolean; blocked_by_verifier: boolean; n_scorers: number; time_share: number; payroll: number;
+  id: string; ref: string; task: string; passes: boolean; why: string; physical: boolean; accountable: boolean; not_called: boolean;
+  contested: boolean; agreed_all_three: boolean; blocked_by_missing_check: boolean; passes_by: Record<string, boolean>; time_share: number; payroll: number;
 };
 export type CensusRoleDoc = {
-  version: string; role: CensusRole; tasks: CensusTask[]; csv: string;
-  industries: { naics: string; title: string; emp: number; wage_bill: number; freed: number; agreed3: number }[];
+  version: string; role: CensusRole; scorers: string[]; tasks: CensusTask[]; csv: string;
+  industries: { naics: string; title: string; emp: number; wage_bill: number; passes: number; agreed3: number | null }[];
 };
 export const census = () => read<CensusIndex>("census/index.json");
 export const censusRole = (occ: string) => read<CensusRoleDoc>(`census/roles/${occ}.json`);

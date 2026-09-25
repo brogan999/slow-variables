@@ -1,348 +1,481 @@
 {
- "csv": "/data/census/2026-09-25.1/tasks.csv",
+ "csv": "/data/census/v3.1-2026-09-24/tasks.csv",
  "industries": [
   {
    "agreed3": 0.0,
    "emp": 3920.0,
-   "freed": 0.0,
    "naics": "621500",
+   "passes": 0.0,
    "title": "Medical and Diagnostic Laboratories",
    "wage_bill": 1174549600.0
   },
   {
    "agreed3": 0.0,
    "emp": 3810.0,
-   "freed": 0.0,
    "naics": "621100",
+   "passes": 0.0,
    "title": "Offices of Physicians",
    "wage_bill": 986980500.0
   },
   {
    "agreed3": 0.0,
    "emp": 410.0,
-   "freed": 0.0,
    "naics": "999300",
+   "passes": 0.0,
    "title": "Local Government, excluding Schools and Hospitals (OEWS Designation)",
    "wage_bill": 93398000.0
   },
   {
    "agreed3": 0.0,
    "emp": 350.0,
-   "freed": 0.0,
    "naics": "611300",
+   "passes": 0.0,
    "title": "Colleges, Universities, and Professional Schools",
    "wage_bill": 64729000.0
   },
   {
    "agreed3": 0.0,
    "emp": 240.0,
-   "freed": 0.0,
    "naics": "541700",
+   "passes": 0.0,
    "title": "Scientific Research and Development Services",
    "wage_bill": 42362400.0
   },
   {
    "agreed3": 0.0,
    "emp": 80.0,
-   "freed": 0.0,
    "naics": "999200",
+   "passes": 0.0,
    "title": "State Government, excluding Schools and Hospitals (OEWS Designation)",
    "wage_bill": 20675200.0
   },
   {
    "agreed3": 0.0,
    "emp": 30.0,
-   "freed": 0.0,
    "naics": "621400",
+   "passes": 0.0,
    "title": "Outpatient Care Centers",
    "wage_bill": 7980600.0
   }
  ],
  "role": {
+  "accountable_removed": 0.0,
   "agreed3": 0.0,
   "ai_exposure": 0.1577,
-  "band_hi": 0.35731025959636586,
-  "band_lo": 0.0,
-  "contested": 462915130.63769287,
+  "by_scorer": {
+   "gemini": 0.0,
+   "gpt6": 0.0,
+   "sonnet": 0.0
+  },
+  "contested": 0.0,
   "emp": 8840.0,
-  "freed": 0.0,
   "function": "Clinical",
   "href": "/census/roles/29-1222",
+  "n_passes": 0,
+  "n_tasks": 19,
+  "not_called": 0.0,
   "occ": "29-1222",
+  "passes": 0.0,
   "payroll_scored_by_three": 2390675300.0,
-  "ref": "census:2026-09-25.1/roles.csv#29-1222",
+  "physical_removed": 0.0,
+  "ref": "census:v3.1-2026-09-24/roles.csv#29-1222",
+  "rule_loose": 0.045319330320291694,
+  "rule_strict": 0.0,
   "scored_by_three": true,
-  "share_goes": 0.0,
+  "scorer_max": 0.0,
+  "scorer_min": 0.0,
+  "share_passes": 0.0,
+  "split": "direct",
+  "time_share_basis": "rated",
   "title": "Physicians, Pathologists",
   "wage_bill": 2390675300.0
  },
+ "scorers": [
+  "sonnet",
+  "gemini",
+  "gpt6"
+ ],
  "tasks": [
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "17194",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 289004873.70250547,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#17194",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#17194",
    "task": "Examine microscopic samples to identify diseases or other abnormalities.",
    "time_share": 0.12088838400702323,
    "why": "physical work \u2014 out of reach whatever its structure"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "17195",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 287231463.5912072,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#17195",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#17195",
    "task": "Diagnose diseases or study medical conditions, using techniques such as gross pathology, histology, cytology, cytopathology, clinical chemistry, immunology, flow cytometry, or molecular biology.",
    "time_share": 0.1201465810062986,
    "why": "physical work \u2014 out of reach whatever its structure"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "17190",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 277510527.30548465,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#17190",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#17190",
    "task": "Write pathology reports summarizing analyses, results, and conclusions.",
    "time_share": 0.11608039255915877,
-   "why": "no automated way to check it, and a failure is too expensive"
+   "why": "no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "17187",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 237701819.79267573,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#17187",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#17187",
    "task": "Identify the etiology, pathogenesis, morphological change, and clinical significance of diseases.",
    "time_share": 0.09942873454737904,
-   "why": "no automated way to check it, and a failure is too expensive"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "17192",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 185404603.33220825,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#17192",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#17192",
    "task": "Communicate pathologic findings to surgeons or other physicians.",
    "time_share": 0.07755323499272705,
-   "why": "no automated way to check it, and a failure is too expensive"
+   "why": "no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "17193",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 146730037.49482632,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#17193",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#17193",
    "task": "Consult with physicians about ordering and interpreting tests or providing treatments.",
    "time_share": 0.06137597920337669,
-   "why": "no automated way to check it, and a failure is too expensive"
+   "why": "no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "17191",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 136223840.31183833,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#17191",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#17191",
    "task": "Analyze and interpret results from tests, such as microbial or parasite tests, urine analyses, hormonal assays, fine needle aspirations (FNAs), and polymerase chain reactions (PCRs).",
    "time_share": 0.05698132252081173,
-   "why": "a failure is too expensive"
+   "why": "no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "17180",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 135160551.2580717,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#17180",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#17180",
    "task": "Read current literature, talk with colleagues, or participate in professional organizations or conferences to keep abreast of developments in pathology.",
    "time_share": 0.05653655737275225,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "17178",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 108343803.60926244,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#17178",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#17178",
    "task": "Review cases by analyzing autopsies, laboratory findings, or case investigation reports.",
    "time_share": 0.045319330320291694,
-   "why": "a failure is too expensive"
+   "why": "no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "17179",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 103770375.87373267,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#17179",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#17179",
    "task": "Manage medical laboratories.",
    "time_share": 0.04340630276045127,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "17182",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 88075827.94463477,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#17182",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#17182",
    "task": "Educate physicians, students, and other personnel in medical laboratory professions, such as medical technology, cytotechnology, or histotechnology.",
    "time_share": 0.036841401232795924,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "17185",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 85061389.86442873,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#17185",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#17185",
    "task": "Plan and supervise the work of the pathology staff, residents, or visiting pathologists.",
    "time_share": 0.035580486343933335,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "17188",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 74555037.70997852,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#17188",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#17188",
    "task": "Diagnose infections, such as Hepatitis B and Acquired Immune Deficiency Syndrome (AIDS), by conducting tests to detect the antibodies that patients' immune systems make to fight such infections.",
    "time_share": 0.03118576483806836,
    "why": "physical work \u2014 out of reach whatever its structure"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "17186",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 59474403.524579935,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#17186",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#17186",
    "task": "Obtain specimens by performing procedures, such as biopsies or fine needle aspirations (FNAs) of superficial nodules.",
    "time_share": 0.02487765842754971,
    "why": "physical work \u2014 out of reach whatever its structure"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "17181",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 58596015.299042135,
-   "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#17181",
+   "physical": true,
+   "ref": "census:v3.1-2026-09-24/tasks.csv#17181",
    "task": "Develop or adopt new tests or instruments to improve diagnosis of diseases.",
    "time_share": 0.02451023578946172,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "physical work \u2014 out of reach whatever its structure"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "17189",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 50557755.63142229,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#17189",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#17189",
    "task": "Conduct genetic analyses of deoxyribonucleic acid (DNA) or chromosomes to diagnose small biopsies and cell samples.",
    "time_share": 0.02114789726209255,
    "why": "physical work \u2014 out of reach whatever its structure"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "17183",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 35097457.17355561,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#17183",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#17183",
    "task": "Conduct research and present scientific findings.",
    "time_share": 0.014680980379709288,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "17184",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 19982825.53443719,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#17184",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#17184",
    "task": "Perform autopsies to determine causes of deaths.",
    "time_share": 0.008358653111293362,
    "why": "physical work \u2014 out of reach whatever its structure"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "17177",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 12192691.046108034,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#17177",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#17177",
    "task": "Testify in depositions or trials as an expert witness.",
    "time_share": 0.00510010332482543,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   }
  ],
- "version": "2026-09-25.1"
+ "version": "v3.1-2026-09-24"
 }

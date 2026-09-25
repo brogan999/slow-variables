@@ -1,132 +1,193 @@
 {
- "csv": "/data/census/2026-09-25.1/tasks.csv",
+ "csv": "/data/census/v3.1-2026-09-24/tasks.csv",
  "industries": [
   {
    "agreed3": 0.0,
    "emp": 350.0,
-   "freed": 0.0,
    "naics": "115100",
+   "passes": 3384260.6058909246,
    "title": "Support Activities for Crop Production",
    "wage_bill": 19337500.0
   }
  ],
  "role": {
+  "accountable_removed": 0.0,
   "agreed3": 0.0,
   "ai_exposure": 0.0,
-  "band_hi": 0.17501024464852874,
-  "band_lo": 0.0,
-  "contested": 0.0,
+  "by_scorer": {
+   "gemini": 0.17501024464852874,
+   "gpt6": 0.0,
+   "sonnet": 0.17501024464852874
+  },
+  "contested": 3384260.6058909246,
   "emp": 350.0,
-  "freed": 0.0,
   "function": "Operations",
   "href": "/census/roles/13-1074",
+  "n_passes": 1,
+  "n_tasks": 7,
+  "not_called": 0.0,
   "occ": "13-1074",
+  "passes": 3384260.6058909246,
   "payroll_scored_by_three": 19337500.0,
-  "ref": "census:2026-09-25.1/roles.csv#13-1074",
+  "physical_removed": 0.0,
+  "ref": "census:v3.1-2026-09-24/roles.csv#13-1074",
+  "rule_loose": 0.17501024464852874,
+  "rule_strict": 0.0,
   "scored_by_three": true,
-  "share_goes": 0.0,
+  "scorer_max": 0.17501024464852874,
+  "scorer_min": 0.0,
+  "share_passes": 0.17501024464852874,
+  "split": "direct",
+  "time_share_basis": "rated",
   "title": "Farm Labor Contractors",
   "wage_bill": 19337500.0
  },
+ "scorers": [
+  "sonnet",
+  "gemini",
+  "gpt6"
+ ],
  "tasks": [
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "14842",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 3708173.829879669,
-   "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#14842",
+   "physical": true,
+   "ref": "census:v3.1-2026-09-24/tasks.csv#14842",
    "task": "Supervise the work of contracted employees.",
    "time_share": 0.19176076689746188,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "physical work \u2014 out of reach whatever its structure"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": false,
-   "goes": false,
+   "blocked_by_missing_check": false,
+   "contested": true,
    "id": "14838",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": true,
+   "passes_by": {
+    "gemini": true,
+    "gpt6": false,
+    "sonnet": true
+   },
    "payroll": 3384260.6058909246,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#14838",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#14838",
    "task": "Pay wages of contracted farm laborers.",
    "time_share": 0.17501024464852874,
-   "why": "a failure is too expensive"
+   "why": "quick to check, an existing check settles it, and a mistake is cheap"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "14841",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 3157763.089563878,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#14841",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#14841",
    "task": "Employ foremen to deal directly with workers when recruiting, hiring, instructing, assigning tasks, and enforcing work rules.",
    "time_share": 0.16329738019722703,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "14839",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 3072206.1808983656,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#14839",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#14839",
    "task": "Provide food, drinking water, and field sanitation facilities to contracted workers.",
    "time_share": 0.15887297638776293,
    "why": "physical work \u2014 out of reach whatever its structure"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "14840",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 2767772.4947920376,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#14840",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#14840",
    "task": "Recruit and hire agricultural workers.",
    "time_share": 0.14312979934283324,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "14843",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 1874554.7982935193,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#14843",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#14843",
    "task": "Furnish tools for employee use.",
    "time_share": 0.0969388389550624,
    "why": "physical work \u2014 out of reach whatever its structure"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "14844",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 1372769.0006816054,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#14844",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#14844",
    "task": "Direct and transport workers to appropriate work sites.",
    "time_share": 0.07098999357112375,
    "why": "physical work \u2014 out of reach whatever its structure"
   }
  ],
- "version": "2026-09-25.1"
+ "version": "v3.1-2026-09-24"
 }

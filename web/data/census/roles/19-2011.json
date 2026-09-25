@@ -1,288 +1,409 @@
 {
- "csv": "/data/census/2026-09-25.1/tasks.csv",
+ "csv": "/data/census/v3.1-2026-09-24/tasks.csv",
  "industries": [
   {
-   "agreed3": 2801368.851504787,
+   "agreed3": 0.0,
    "emp": 660.0,
-   "freed": 2801368.851504787,
    "naics": "541700",
+   "passes": 2801368.851504787,
    "title": "Scientific Research and Development Services",
    "wage_bill": 86044200.0
   },
   {
-   "agreed3": 2648212.6904707043,
+   "agreed3": 0.0,
    "emp": 490.0,
-   "freed": 2648212.6904707043,
    "naics": "999100",
+   "passes": 2648212.6904707043,
    "title": "Federal Executive Branch (OEWS Designation)",
    "wage_bill": 81340000.0
   },
   {
-   "agreed3": 1248348.7092695753,
+   "agreed3": 0.0,
    "emp": 370.0,
-   "freed": 1248348.7092695753,
    "naics": "611300",
+   "passes": 1248348.7092695753,
    "title": "Colleges, Universities, and Professional Schools",
    "wage_bill": 38343100.0
   }
  ],
  "role": {
-  "agreed3": 6697930.2512450665,
+  "accountable_removed": 0.0,
+  "agreed3": 0.0,
   "ai_exposure": 0.3849,
-  "band_hi": 0.3031944279074835,
-  "band_lo": 0.0,
-  "contested": 43627159.44053157,
+  "by_scorer": {
+   "gemini": 0.03255732346288055,
+   "gpt6": 0.0,
+   "sonnet": 0.03255732346288055
+  },
+  "contested": 6697930.2512450665,
   "emp": 1520.0,
-  "freed": 6697930.2512450665,
   "function": "Research",
   "href": "/census/roles/19-2011",
+  "n_passes": 1,
+  "n_tasks": 17,
+  "not_called": 0.0,
   "occ": "19-2011",
+  "passes": 6697930.2512450665,
   "payroll_scored_by_three": 205727300.0,
-  "ref": "census:2026-09-25.1/roles.csv#19-2011",
+  "physical_removed": 0.0,
+  "ref": "census:v3.1-2026-09-24/roles.csv#19-2011",
+  "rule_loose": 0.10742774273717375,
+  "rule_strict": 0.0,
   "scored_by_three": true,
-  "share_goes": 0.03255732346288055,
+  "scorer_max": 0.03255732346288055,
+  "scorer_min": 0.0,
+  "share_passes": 0.03255732346288055,
+  "split": "direct",
+  "time_share_basis": "rated",
   "title": "Astronomers",
   "wage_bill": 205727300.0
  },
+ "scorers": [
+  "sonnet",
+  "gemini",
+  "gpt6"
+ ],
  "tasks": [
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "7525",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 34436174.44387327,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7525",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#7525",
    "task": "Analyze research data to determine its significance, using computers.",
    "time_share": 0.16738748063029685,
-   "why": "no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7524",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 23399460.798638746,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#7524",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#7524",
    "task": "Study celestial phenomena, using a variety of ground-based and space-borne telescopes and scientific instruments.",
    "time_share": 0.11374018323595725,
    "why": "physical work \u2014 out of reach whatever its structure"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7530",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 20336246.88666542,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7530",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#7530",
    "task": "Collaborate with other astronomers to carry out research projects.",
    "time_share": 0.09885050203189086,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "21172",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 20000398.03606194,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#21172",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#21172",
    "task": "Supervise students' research on celestial and astronomical phenomena.",
    "time_share": 0.09721800673056973,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7528",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 18185009.981441304,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7528",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#7528",
    "task": "Develop theories based on personal observations or on observations and theories of other astronomers.",
    "time_share": 0.08839376194331673,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "21171",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 17067246.25133828,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#21171",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#21171",
    "task": "Mentor graduate students and junior colleagues.",
    "time_share": 0.08296053198257247,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7532",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 16517055.905958831,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7532",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#7532",
    "task": "Teach astronomy or astrophysics.",
    "time_share": 0.0802861647722924,
-   "why": "nobody can tell quickly whether it worked"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7531",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 11698565.434362797,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#7531",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#7531",
    "task": "Develop instrumentation and software for astronomical observation and analysis.",
    "time_share": 0.056864428952126414,
    "why": "physical work \u2014 out of reach whatever its structure"
   },
   {
-   "agreed_all_three": true,
-   "blocked_by_verifier": false,
-   "contested": false,
-   "goes": true,
+   "accountable": false,
+   "agreed_all_three": false,
+   "blocked_by_missing_check": false,
+   "contested": true,
    "id": "7534",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": true,
+   "passes_by": {
+    "gemini": true,
+    "gpt6": false,
+    "sonnet": true
+   },
    "payroll": 6697930.2512450665,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7534",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#7534",
    "task": "Calculate orbits and determine sizes, shapes, brightness, and motions of different celestial bodies.",
    "time_share": 0.03255732346288055,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "quick to check, an existing check settles it, and a mistake is cheap"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7527",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 6635987.904996279,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#7527",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#7527",
    "task": "Measure radio, infrared, gamma, and x-ray emissions from extraterrestrial sources.",
    "time_share": 0.03225623388337998,
    "why": "physical work \u2014 out of reach whatever its structure"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": true,
    "contested": false,
-   "goes": false,
    "id": "20049",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 6466040.650620325,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#20049",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#20049",
    "task": "Review scientific proposals and research papers.",
    "time_share": 0.0314301536578778,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "7526",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 5838377.1261645965,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7526",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#7526",
    "task": "Present research findings at scientific conferences and in papers written for scientific journals.",
    "time_share": 0.028379204540012904,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7533",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 5584240.686054275,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7533",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#7533",
    "task": "Develop and modify astronomy-related programs for public presentation.",
    "time_share": 0.027143897217599584,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7529",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 3871817.3108414197,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7529",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#7529",
    "task": "Raise funds for scientific research.",
    "time_share": 0.018820143514455396,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "20050",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 3585555.020010787,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#20050",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#20050",
    "task": "Serve on professional panels and committees.",
    "time_share": 0.01742867874127929,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": true,
+   "contested": false,
    "id": "21173",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 3352607.8704936975,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#21173",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#21173",
    "task": "Conduct question-and-answer presentations on astronomy topics with public audiences.",
    "time_share": 0.0162963683988158,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7535",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 2054585.4412329737,
-   "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7535",
+   "physical": true,
+   "ref": "census:v3.1-2026-09-24/tasks.csv#7535",
    "task": "Direct the operations of a planetarium.",
    "time_share": 0.009986936304676014,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "physical work \u2014 out of reach whatever its structure"
   }
  ],
- "version": "2026-09-25.1"
+ "version": "v3.1-2026-09-24"
 }

@@ -1,258 +1,349 @@
 {
- "csv": "/data/census/2026-09-25.1/tasks.csv",
+ "csv": "/data/census/v3.1-2026-09-24/tasks.csv",
  "industries": [
   {
-   "agreed3": 0.0,
+   "agreed3": 35095305.58565429,
    "emp": 9350.0,
-   "freed": 147631639.9060206,
    "naics": "999300",
+   "passes": 48223924.00475373,
    "title": "Local Government, excluding Schools and Hospitals (OEWS Designation)",
    "wage_bill": 469557000.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 20172395.716402624,
    "emp": 3580.0,
-   "freed": 84857043.15003997,
    "naics": "221100",
+   "passes": 27718581.21159266,
    "title": "Electric Power Generation, Transmission and Distribution",
    "wage_bill": 269896200.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 8114664.092824697,
    "emp": 1750.0,
-   "freed": 34135082.94966672,
    "naics": "221200",
+   "passes": 11150236.135753727,
    "title": "Natural Gas Distribution",
    "wage_bill": 108570000.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 7716965.579073935,
    "emp": 2230.0,
-   "freed": 32462127.47048116,
    "naics": "561900",
+   "passes": 10603764.675144482,
    "title": "Other Support Services",
    "wage_bill": 103249000.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 6405352.741588877,
    "emp": 1610.0,
-   "freed": 26944707.09506607,
    "naics": "221300",
+   "passes": 8801497.48461762,
    "title": "Water, Sewage and Other Systems",
    "wage_bill": 85700300.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 1366570.1231758934,
    "emp": 280.0,
-   "freed": 5748603.266571856,
    "naics": "551100",
+   "passes": 1877783.1583874102,
    "title": "Management of Companies and Enterprises",
    "wage_bill": 18284000.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 1208716.4751695772,
    "emp": 400.0,
-   "freed": 5084577.336851895,
    "naics": "561300",
+   "passes": 1660878.868816517,
    "title": "Employment Services",
    "wage_bill": 16172000.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 421518.5694418665,
    "emp": 110.0,
-   "freed": 1773156.7404553322,
    "naics": "237100",
+   "passes": 579202.2357447756,
    "title": "Utility System Construction",
    "wage_bill": 5639700.0
   }
  ],
  "role": {
-  "agreed3": null,
+  "accountable_removed": 0.0,
+  "agreed3": 80501488.88333176,
   "ai_exposure": 0.0,
-  "band_hi": 0.6147493760411745,
-  "band_lo": 0.3144062167234662,
-  "contested": 96740856.2395861,
+  "by_scorer": {
+   "gemini": 0.07474131060905127,
+   "gpt6": 0.10270089468318805,
+   "sonnet": 0.15483500144616288
+  },
+  "contested": 86266367.4212843,
   "emp": 19310.0,
-  "freed": 338636937.9151536,
   "function": "Supply chain",
   "href": "/census/roles/43-5041",
+  "n_passes": 2,
+  "n_tasks": 12,
+  "not_called": 0.0,
   "occ": "43-5041",
-  "payroll_scored_by_three": 0.0,
-  "ref": "census:2026-09-25.1/roles.csv#43-5041",
-  "scored_by_three": false,
-  "share_goes": 0.3144062167234662,
+  "passes": 110615867.77481093,
+  "payroll_scored_by_three": 1077068199.9999998,
+  "physical_removed": 171869081.61053753,
+  "ref": "census:v3.1-2026-09-24/roles.csv#43-5041",
+  "rule_loose": 0.3708661175197187,
+  "rule_strict": 0.07474131060905127,
+  "scored_by_three": true,
+  "scorer_max": 0.15483500144616288,
+  "scorer_min": 0.07474131060905127,
+  "share_passes": 0.10270089468318805,
+  "split": "direct",
+  "time_share_basis": "rated",
   "title": "Meter Readers, Utilities",
   "wage_bill": 1077068200.0
  },
+ "scorers": [
+  "sonnet",
+  "gemini",
+  "gpt6"
+ ],
  "tasks": [
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": true,
    "id": "11309",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 171869081.61053753,
-   "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#11309",
+   "physical": true,
+   "ref": "census:v3.1-2026-09-24/tasks.csv#11309",
    "task": "Read electric, gas, water, or steam consumption meters and enter data in route books or hand-held computers.",
    "time_share": 0.15957121527730325,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "physical work \u2014 out of reach whatever its structure"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "11310",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 163398262.21778977,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#11310",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#11310",
    "task": "Walk or drive vehicles along established routes to take readings of meter dials.",
    "time_share": 0.1517065142372505,
    "why": "physical work \u2014 out of reach whatever its structure"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "11313",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 136185493.49782994,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#11313",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#11313",
    "task": "Inspect meters for unauthorized connections, defects, and damage, such as broken seals.",
    "time_share": 0.1264409194309422,
    "why": "physical work \u2014 out of reach whatever its structure"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": true,
+   "contested": false,
    "id": "11314",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 96740856.2395861,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#11314",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#11314",
    "task": "Report to service departments any problems, such as meter irregularities, damaged equipment, or impediments to meter access, including dogs.",
    "time_share": 0.08981869136939155,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "11312",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 90809820.6553016,
-   "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#11312",
+   "physical": true,
+   "ref": "census:v3.1-2026-09-24/tasks.csv#11312",
    "task": "Verify readings in cases where consumption appears to be abnormal, and record possible reasons for fluctuations.",
    "time_share": 0.0843120432441526,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "physical work \u2014 out of reach whatever its structure"
   },
   {
-   "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "accountable": false,
+   "agreed_all_three": true,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": true,
    "id": "11311",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": true,
+   "passes_by": {
+    "gemini": true,
+    "gpt6": true,
+    "sonnet": true
+   },
    "payroll": 80501488.88333176,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#11311",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#11311",
    "task": "Upload into office computers all information collected on hand-held computers during meter rounds, or return route books or hand-held computers to business offices so that data can be compiled.",
    "time_share": 0.07474131060905127,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "quick to check, an existing check settles it, and a mistake is cheap"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
+   "blocked_by_missing_check": true,
    "contested": false,
-   "goes": false,
    "id": "11315",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 72692284.96820697,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#11315",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#11315",
    "task": "Answer customers' questions about services and charges, or direct them to customer service centers.",
    "time_share": 0.06749088402034985,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "11317",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 63247104.12554277,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#11317",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#11317",
    "task": "Leave messages to arrange different times to read meters in cases in which meters are not accessible.",
    "time_share": 0.05872154068381442,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "20904",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 58753503.09312845,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#20904",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#20904",
    "task": "Perform preventative maintenance or minor repairs on meters.",
    "time_share": 0.05454947336958649,
    "why": "physical work \u2014 out of reach whatever its structure"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "11318",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 56603937.28746079,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#11318",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#11318",
    "task": "Connect and disconnect utility services at specific locations.",
    "time_share": 0.05255371692104621,
    "why": "physical work \u2014 out of reach whatever its structure"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": false,
-   "goes": true,
+   "blocked_by_missing_check": false,
+   "contested": true,
    "id": "11316",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": true
+   },
    "payroll": 56151988.52980514,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#11316",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#11316",
    "task": "Update client address and meter location information.",
    "time_share": 0.05213410676297484,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": false,
-   "goes": true,
+   "blocked_by_missing_check": false,
+   "contested": true,
    "id": "11320",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": true,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": true,
+    "sonnet": true
+   },
    "payroll": 30114378.891479157,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#11320",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#11320",
    "task": "Report lost or broken keys.",
    "time_share": 0.02795958407413677,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "quick to check, an existing check settles it, and a mistake is cheap"
   }
  ],
- "version": "2026-09-25.1"
+ "version": "v3.1-2026-09-24"
 }

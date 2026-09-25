@@ -1,266 +1,357 @@
 {
- "csv": "/data/census/2026-09-25.1/tasks.csv",
+ "csv": "/data/census/v3.1-2026-09-24/tasks.csv",
  "industries": [
   {
-   "agreed3": 1235251028.1564872,
+   "agreed3": 0.0,
    "emp": 70260.0,
-   "freed": 1600194126.9932108,
    "naics": "541200",
+   "passes": 467535489.05177623,
    "title": "Accounting, Tax Preparation, Bookkeeping, and Payroll Services",
    "wage_bill": 4091239800.0
   },
   {
-   "agreed3": 19496559.42733472,
+   "agreed3": 0.0,
    "emp": 830.0,
-   "freed": 25256631.389941894,
    "naics": "541600",
+   "passes": 7379336.862637433,
    "title": "Management, Scientific, and Technical Consulting Services",
    "wage_bill": 64574000.0
   },
   {
-   "agreed3": 14509348.342057131,
+   "agreed3": 0.0,
    "emp": 800.0,
-   "freed": 18795996.50130157,
    "naics": "513200",
+   "passes": 5491705.830069447,
    "title": "Software Publishers",
    "wage_bill": 48056000.0
   },
   {
-   "agreed3": 8396557.711682389,
+   "agreed3": 0.0,
    "emp": 360.0,
-   "freed": 10877240.35918921,
    "naics": "523000",
+   "passes": 3178049.341065243,
    "title": "Securities, Commodity Contracts, and Other Financial Investments and Related Activities",
    "wage_bill": 27810000.0
   },
   {
-   "agreed3": 8316758.711207823,
+   "agreed3": 0.0,
    "emp": 390.0,
-   "freed": 10773865.507447617,
    "naics": "541100",
+   "passes": 3147845.873217579,
    "title": "Legal Services",
    "wage_bill": 27545700.0
   },
   {
-   "agreed3": 1924777.2532173758,
+   "agreed3": 0.0,
    "emp": 100.0,
-   "freed": 2493434.278670666,
    "naics": "551100",
+   "passes": 728517.2437716981,
    "title": "Management of Companies and Enterprises",
    "wage_bill": 6375000.0
   },
   {
-   "agreed3": 1741266.725451804,
+   "agreed3": 0.0,
    "emp": 90.0,
-   "freed": 2255707.321090112,
    "naics": "541500",
+   "passes": 659059.5526713941,
    "title": "Computer Systems Design and Related Services",
    "wage_bill": 5767200.0
   },
   {
-   "agreed3": 973680.6531608965,
+   "agreed3": 0.0,
    "emp": 70.0,
-   "freed": 1261345.2871035342,
    "naics": "624100",
+   "passes": 368532.5897159763,
    "title": "Individual and Family Services",
    "wage_bill": 3224900.0
   },
   {
-   "agreed3": 929629.6725735373,
+   "agreed3": 0.0,
    "emp": 50.0,
-   "freed": 1204279.8657297224,
    "naics": "524100",
+   "passes": 351859.54408989154,
    "title": "Insurance Carriers",
    "wage_bill": 3079000.0
   }
  ],
  "role": {
-  "agreed3": 1291539606.653173,
+  "accountable_removed": 0.0,
+  "agreed3": 0.0,
   "ai_exposure": 0.1283,
-  "band_hi": 0.5175243505057496,
-  "band_lo": 0.043148171626477584,
-  "contested": 922259609.813718,
+  "by_scorer": {
+   "gemini": 0.2587776720154637,
+   "gpt6": 0.043148171626477584,
+   "sonnet": 0.11427721470928598
+  },
+  "contested": 1291539606.653173,
   "emp": 72950.0,
-  "freed": 1673112627.5036852,
   "function": "Finance",
   "href": "/census/roles/13-2082",
+  "n_passes": 2,
+  "n_tasks": 12,
+  "not_called": 0.0,
   "occ": "13-2082",
+  "passes": 488840395.8890149,
   "payroll_scored_by_three": 4277671600.0,
-  "ref": "census:2026-09-25.1/roles.csv#13-2082",
+  "physical_removed": 0.0,
+  "ref": "census:v3.1-2026-09-24/roles.csv#13-2082",
+  "rule_loose": 0.3525317275361843,
+  "rule_strict": 0.0,
   "scored_by_three": true,
-  "share_goes": 0.39112694567382994,
+  "scorer_max": 0.2587776720154637,
+  "scorer_min": 0.043148171626477584,
+  "share_passes": 0.11427721470928598,
+  "split": "direct",
+  "time_share_basis": "rated",
   "title": "Tax Preparers",
   "wage_bill": 4277671600.0
  },
+ "scorers": [
+  "sonnet",
+  "gemini",
+  "gpt6"
+ ],
  "tasks": [
   {
-   "agreed_all_three": true,
-   "blocked_by_verifier": false,
-   "contested": false,
-   "goes": true,
+   "accountable": false,
+   "agreed_all_three": false,
+   "blocked_by_missing_check": false,
+   "contested": true,
    "id": "7358",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": true,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 548937609.5991685,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7358",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#7358",
    "task": "Compute taxes owed or overpaid, using adding machines or personal computers, and complete entries on forms, following tax form instructions and tax tables.",
    "time_share": 0.12832626272647216,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "nobody can tell quickly whether it worked, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7360",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 511104959.840284,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7360",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#7360",
    "task": "Use all appropriate adjustments, deductions, and credits to keep clients' taxes to a minimum.",
    "time_share": 0.11948204715861872,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7359",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 457263125.1998438,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7359",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#7359",
    "task": "Prepare or assist in preparing simple to complex tax returns for individuals or small businesses.",
    "time_share": 0.10689533184357673,
-   "why": "nobody can tell quickly whether it worked"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7363",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 410055649.2643531,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7363",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#7363",
    "task": "Furnish taxpayers with sufficient information and advice to ensure correct tax form completion.",
    "time_share": 0.09585954407167514,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "7361",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 383839941.0759567,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7361",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#7361",
    "task": "Interview clients to obtain additional information on taxable income and deductible expenses and allowances.",
    "time_share": 0.08973104458882648,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": true,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "7362",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 381573020.8505125,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7362",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#7362",
    "task": "Review financial records, such as income statements and documentation of expenditures to determine forms needed to prepare tax returns.",
    "time_share": 0.08920110203188868,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "20364",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 357925008.2680413,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#20364",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#20364",
    "task": "Explain federal and state tax laws to individuals and companies.",
    "time_share": 0.08367285797910277,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "20363",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 327523640.96058714,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#20363",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#20363",
    "task": "Answer questions and provide future tax planning to clients.",
    "time_share": 0.07656586844127707,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
-   "agreed_all_three": true,
-   "blocked_by_verifier": false,
-   "contested": false,
-   "goes": true,
+   "accountable": false,
+   "agreed_all_three": false,
+   "blocked_by_missing_check": false,
+   "contested": true,
    "id": "7366",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": true,
+   "passes_by": {
+    "gemini": true,
+    "gpt6": false,
+    "sonnet": true
+   },
    "payroll": 304266687.5305059,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7366",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#7366",
    "task": "Check data input or verify totals on forms prepared by others to detect errors in arithmetic, data entry, or procedures.",
    "time_share": 0.07112904308280839,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "quick to check, an existing check settles it, and a mistake is cheap"
   },
   {
-   "agreed_all_three": true,
-   "blocked_by_verifier": false,
-   "contested": false,
-   "goes": true,
+   "accountable": false,
+   "agreed_all_three": false,
+   "blocked_by_missing_check": true,
+   "contested": true,
    "id": "7365",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": true,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 253761601.16498947,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7365",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#7365",
    "task": "Calculate form preparation fees according to return complexity and processing time required.",
    "time_share": 0.05932236620618316,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "no existing check settles it"
   },
   {
-   "agreed_all_three": true,
-   "blocked_by_verifier": false,
-   "contested": false,
-   "goes": true,
+   "accountable": false,
+   "agreed_all_three": false,
+   "blocked_by_missing_check": false,
+   "contested": true,
    "id": "21165",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": true,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": true,
+    "sonnet": true
+   },
    "payroll": 184573708.35850897,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#21165",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#21165",
    "task": "Schedule appointments with clients.",
    "time_share": 0.043148171626477584,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "quick to check, an existing check settles it, and a mistake is cheap"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "7364",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 156846647.88724872,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7364",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#7364",
    "task": "Consult tax law handbooks or bulletins to determine procedures for preparation of atypical returns.",
    "time_share": 0.036666360243093166,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   }
  ],
- "version": "2026-09-25.1"
+ "version": "v3.1-2026-09-24"
 }

@@ -1,274 +1,365 @@
 {
- "csv": "/data/census/2026-09-25.1/tasks.csv",
+ "csv": "/data/census/v3.1-2026-09-24/tasks.csv",
  "industries": [
   {
-   "agreed3": 269098362.46335715,
+   "agreed3": 0.0,
    "emp": 7160.0,
-   "freed": 269098362.46335715,
    "naics": "621100",
+   "passes": 0.0,
    "title": "Offices of Physicians",
    "wage_bill": 2122295600.0
   },
   {
-   "agreed3": 131470006.40643682,
+   "agreed3": 0.0,
    "emp": 4730.0,
-   "freed": 131470006.40643682,
    "naics": "622100",
+   "passes": 0.0,
    "title": "General Medical and Surgical Hospitals",
    "wage_bill": 1036863300.0
   },
   {
-   "agreed3": 115275318.16426821,
+   "agreed3": 0.0,
    "emp": 3020.0,
-   "freed": 115275318.16426821,
    "naics": "621400",
+   "passes": 0.0,
    "title": "Outpatient Care Centers",
    "wage_bill": 909140800.0
   },
   {
-   "agreed3": 99118453.13651086,
+   "agreed3": 0.0,
    "emp": 2940.0,
-   "freed": 99118453.13651086,
    "naics": "622200",
+   "passes": 0.0,
    "title": "Psychiatric and Substance Abuse Hospitals",
    "wage_bill": 781716600.0
   },
   {
-   "agreed3": 50412461.48081352,
+   "agreed3": 0.0,
    "emp": 1250.0,
-   "freed": 50412461.48081352,
    "naics": "999300",
+   "passes": 0.0,
    "title": "Local Government, excluding Schools and Hospitals (OEWS Designation)",
    "wage_bill": 397587500.0
   },
   {
-   "agreed3": 44393574.63130521,
+   "agreed3": 0.0,
    "emp": 1360.0,
-   "freed": 44393574.63130521,
    "naics": "999200",
+   "passes": 0.0,
    "title": "State Government, excluding Schools and Hospitals (OEWS Designation)",
    "wage_bill": 350118400.0
   },
   {
-   "agreed3": 42728567.06268408,
+   "agreed3": 0.0,
    "emp": 1260.0,
-   "freed": 42728567.06268408,
    "naics": "621300",
+   "passes": 0.0,
    "title": "Offices of Other Health Practitioners",
    "wage_bill": 336987000.0
   },
   {
-   "agreed3": 24131996.92889439,
+   "agreed3": 0.0,
    "emp": 1120.0,
-   "freed": 24131996.92889439,
    "naics": "611300",
+   "passes": 0.0,
    "title": "Colleges, Universities, and Professional Schools",
    "wage_bill": 190321600.0
   },
   {
-   "agreed3": 18196985.56156185,
+   "agreed3": 0.0,
    "emp": 510.0,
-   "freed": 18196985.56156185,
    "naics": "624100",
+   "passes": 0.0,
    "title": "Individual and Family Services",
    "wage_bill": 143514000.0
   },
   {
-   "agreed3": 16110762.041636255,
+   "agreed3": 0.0,
    "emp": 380.0,
-   "freed": 16110762.041636255,
    "naics": "622300",
+   "passes": 0.0,
    "title": "Specialty (except Psychiatric and Substance Abuse) Hospitals",
    "wage_bill": 127060600.0
   }
  ],
  "role": {
-  "agreed3": 837483185.7626066,
+  "accountable_removed": 0.0,
+  "agreed3": 0.0,
   "ai_exposure": 0.0,
-  "band_hi": 0.32967015394524984,
-  "band_lo": 0.0,
-  "contested": 185271774.1580065,
+  "by_scorer": {
+   "gemini": 0.0,
+   "gpt6": 0.0,
+   "sonnet": 0.0
+  },
+  "contested": 0.0,
   "emp": 24440.0,
-  "freed": 837483185.7626066,
   "function": "Clinical",
   "href": "/census/roles/29-1223",
+  "n_passes": 0,
+  "n_tasks": 12,
+  "not_called": 0.0,
   "occ": "29-1223",
-  "payroll_scored_by_three": 6604971000.000001,
-  "ref": "census:2026-09-25.1/roles.csv#29-1223",
+  "passes": 0.0,
+  "payroll_scored_by_three": 6604971000.000002,
+  "physical_removed": 0.0,
+  "ref": "census:v3.1-2026-09-24/roles.csv#29-1223",
+  "rule_loose": 0.3200685804381209,
+  "rule_strict": 0.0,
   "scored_by_three": true,
-  "share_goes": 0.1267958914221738,
+  "scorer_max": 0.0,
+  "scorer_min": 0.0,
+  "share_passes": 0.0,
+  "split": "direct",
+  "time_share_basis": "rated",
   "title": "Psychiatrists",
   "wage_bill": 6604971000.0
  },
+ "scorers": [
+  "sonnet",
+  "gemini",
+  "gpt6"
+ ],
  "tasks": [
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "1828",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 1065544935.1166387,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#1828",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#1828",
    "task": "Prescribe, direct, or administer psychotherapeutic treatments or medications to treat mental, emotional, or behavioral disorders.",
    "time_share": 0.1613246954629534,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
-   "agreed_all_three": true,
-   "blocked_by_verifier": false,
+   "accountable": false,
+   "agreed_all_three": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": true,
    "id": "1830",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 837483185.7626066,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#1830",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#1830",
    "task": "Gather and maintain patient information and records, including social or medical history obtained from patients, relatives, or other professionals.",
    "time_share": 0.1267958914221738,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "1829",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 801889107.158938,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#1829",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#1829",
    "task": "Collaborate with physicians, psychologists, social workers, psychiatric nurses, or other professionals to discuss treatment plans and progress.",
    "time_share": 0.12140690809375818,
-   "why": "no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "1832",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 713977518.3594866,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#1832",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#1832",
    "task": "Design individualized care plans, using a variety of treatments.",
    "time_share": 0.10809699518127885,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "1831",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 694231985.4619852,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#1831",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#1831",
    "task": "Counsel outpatients or other patients during office visits.",
    "time_share": 0.10510749940642967,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "1827",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 680035447.5698868,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#1827",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#1827",
    "task": "Analyze and evaluate patient data or test findings to diagnose nature or extent of mental disorder.",
    "time_share": 0.10295812768441932,
-   "why": "nobody can tell quickly whether it worked, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "1833",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 571203329.443063,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#1833",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#1833",
    "task": "Examine or conduct laboratory or diagnostic tests on patients to provide information on general physical condition or mental disorder.",
    "time_share": 0.08648082322285185,
    "why": "physical work \u2014 out of reach whatever its structure"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": true,
    "contested": false,
-   "goes": false,
    "id": "1834",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 474671398.8834112,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#1834",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#1834",
    "task": "Advise or inform guardians, relatives, or significant others of patients' conditions or treatment.",
    "time_share": 0.07186578092218894,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "1835",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 286288801.3380162,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#1835",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#1835",
    "task": "Review and evaluate treatment procedures and outcomes of other psychiatrists or medical professionals.",
    "time_share": 0.043344444864029864,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "15230",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 232144656.91881657,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#15230",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#15230",
    "task": "Teach, take continuing education classes, attend conferences or seminars, or conduct research and publish findings to increase understanding of mental, emotional, or behavioral states or disorders.",
    "time_share": 0.035146960814637425,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "1837",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 185271774.1580065,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#1837",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#1837",
    "task": "Prepare and submit case reports or summaries to government or mental health agencies.",
    "time_share": 0.028050353916467836,
    "why": "nobody can tell quickly whether it worked"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "1838",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 62228859.82914507,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#1838",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#1838",
    "task": "Serve on committees to promote or maintain community mental health services or delivery systems.",
    "time_share": 0.00942151900881095,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   }
  ],
- "version": "2026-09-25.1"
+ "version": "v3.1-2026-09-24"
 }

@@ -1,274 +1,365 @@
 {
- "csv": "/data/census/2026-09-25.1/tasks.csv",
+ "csv": "/data/census/v3.1-2026-09-24/tasks.csv",
  "industries": [
   {
    "agreed3": 0.0,
    "emp": 41300.0,
-   "freed": 1087562806.7166853,
    "naics": "484000",
+   "passes": 487050643.3687795,
    "title": "Truck Transportation",
    "wage_bill": 2409442000.0
   },
   {
    "agreed3": 0.0,
    "emp": 15360.0,
-   "freed": 336464599.452071,
    "naics": "238200",
+   "passes": 150681228.35929245,
    "title": "Building Equipment Contractors",
    "wage_bill": 745420800.0
   },
   {
    "agreed3": 0.0,
    "emp": 9940.0,
-   "freed": 275661085.39489686,
    "naics": "999300",
+   "passes": 123451177.40707743,
    "title": "Local Government, excluding Schools and Hospitals (OEWS Designation)",
    "wage_bill": 610713600.0
   },
   {
    "agreed3": 0.0,
    "emp": 8560.0,
-   "freed": 162548941.99759418,
    "naics": "488400",
+   "passes": 72795397.46109273,
    "title": "Support Activities for Road Transportation",
    "wage_bill": 360119200.0
   },
   {
    "agreed3": 0.0,
    "emp": 8580.0,
-   "freed": 162541449.16622847,
    "naics": "561600",
+   "passes": 72792041.89549707,
    "title": "Investigation and Security Services",
    "wage_bill": 360102600.0
   },
   {
    "agreed3": 0.0,
    "emp": 6290.0,
-   "freed": 152377242.8684681,
    "naics": "488500",
+   "passes": 68240136.30799125,
    "title": "Freight Transportation Arrangement",
    "wage_bill": 337584300.0
   },
   {
    "agreed3": 0.0,
    "emp": 5920.0,
-   "freed": 151804402.36929685,
    "naics": "492100",
+   "passes": 67983597.25392841,
    "title": "Couriers and Express Delivery Services",
    "wage_bill": 336315200.0
   },
   {
    "agreed3": 0.0,
    "emp": 4140.0,
-   "freed": 117092371.52880685,
    "naics": "327000",
+   "passes": 52438272.56179612,
    "title": "Nonmetallic Mineral Product Manufacturing",
    "wage_bill": 259412400.0
   },
   {
    "agreed3": 0.0,
    "emp": 5340.0,
-   "freed": 104199194.80008015,
    "naics": "485900",
+   "passes": 46664233.59870239,
    "title": "Other Transit and Ground Passenger Transportation",
    "wage_bill": 230848200.0
   },
   {
    "agreed3": 0.0,
    "emp": 3410.0,
-   "freed": 87272076.26921542,
    "naics": "551100",
+   "passes": 39083647.06161153,
    "title": "Management of Companies and Enterprises",
    "wage_bill": 193347000.0
   }
  ],
  "role": {
-  "agreed3": null,
+  "accountable_removed": 0.0,
+  "agreed3": 0.0,
   "ai_exposure": 0.2258,
-  "band_hi": 0.9415113184782077,
-  "band_lo": 0.20214250576223852,
-  "contested": 4808357630.233639,
+  "by_scorer": {
+   "gemini": 0.0,
+   "gpt6": 0.20214250576223852,
+   "sonnet": 0.20214250576223852
+  },
+  "contested": 2251893206.5038195,
   "emp": 209460.0,
-  "freed": 5028379141.750085,
   "function": "Supply chain",
   "href": "/census/roles/43-5032",
+  "n_passes": 2,
+  "n_tasks": 12,
+  "not_called": 0.0,
   "occ": "43-5032",
-  "payroll_scored_by_three": 0.0,
-  "ref": "census:2026-09-25.1/roles.csv#43-5032",
-  "scored_by_three": false,
-  "share_goes": 0.45137538347745465,
+  "passes": 2251893206.5038195,
+  "payroll_scored_by_three": 11140127100.0,
+  "physical_removed": 0.0,
+  "ref": "census:v3.1-2026-09-24/roles.csv#43-5032",
+  "rule_loose": 0.9263211462571622,
+  "rule_strict": 0.0,
+  "scored_by_three": true,
+  "scorer_max": 0.20214250576223852,
+  "scorer_min": 0.0,
+  "share_passes": 0.20214250576223852,
+  "split": "direct",
+  "time_share_basis": "rated",
   "title": "Dispatchers, Except Police, Fire, and Ambulance",
   "wage_bill": 11140127100.0
  },
+ "scorers": [
+  "sonnet",
+  "gemini",
+  "gpt6"
+ ],
  "tasks": [
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": true,
+   "contested": false,
    "id": "2723",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 1582341833.1994183,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#2723",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#2723",
    "task": "Schedule or dispatch workers, work crews, equipment, or service vehicles to appropriate locations, according to customer requests, specifications, or needs, using radios or telephones.",
    "time_share": 0.14203983661904704,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "2727",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 1318108562.2120268,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#2727",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#2727",
    "task": "Prepare daily work and run schedules.",
    "time_share": 0.11832078309160644,
-   "why": "no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": true,
-   "goes": true,
    "id": "2725",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": true,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": true,
+    "sonnet": true
+   },
    "payroll": 1226409927.9627929,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#2725",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#2725",
    "task": "Relay work orders, messages, or information to or from work crews, supervisors, or field inspectors, using telephones or two-way radios.",
    "time_share": 0.11008940175941016,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "quick to check, an existing check settles it, and a mistake is cheap"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "2726",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 1128881613.5011258,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#2726",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#2726",
    "task": "Confer with customers or supervising personnel to address questions, problems, or requests for service or equipment.",
    "time_share": 0.10133471578624322,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": true,
    "id": "2730",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 1074416916.777372,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#2730",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#2730",
    "task": "Monitor personnel or equipment locations and utilization to coordinate service and schedules.",
    "time_share": 0.09644566055062082,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": false,
-   "goes": true,
+   "blocked_by_missing_check": false,
+   "contested": true,
    "id": "2731",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": true,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": true,
+    "sonnet": true
+   },
    "payroll": 1025483278.5410267,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#2731",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#2731",
    "task": "Record and maintain files or records of customer requests, work or services performed, charges, expenses, inventory, or other dispatch information.",
    "time_share": 0.09205310400282836,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "quick to check, an existing check settles it, and a mistake is cheap"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": true,
    "contested": false,
-   "goes": true,
    "id": "2728",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 851351262.396157,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#2728",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#2728",
    "task": "Receive or prepare work orders.",
    "time_share": 0.0764220421144169,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "2732",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 775765180.2027403,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#2732",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#2732",
    "task": "Determine types or amounts of equipment, vehicles, materials, or personnel required, according to work orders or specifications.",
    "time_share": 0.06963701340559574,
-   "why": "no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": true,
+   "blocked_by_missing_check": true,
+   "contested": false,
    "id": "2733",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 681497306.8594007,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#2733",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#2733",
    "task": "Advise personnel about traffic problems, such as construction areas, accidents, congestion, weather conditions, or other hazards.",
    "time_share": 0.06117500282913296,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "2724",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 655079423.0704161,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#2724",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#2724",
    "task": "Arrange for necessary repairs to restore service and schedules.",
    "time_share": 0.05880358609826059,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "2729",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 651571346.0641887,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#2729",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#2729",
    "task": "Oversee all communications within specifically assigned territories.",
    "time_share": 0.0584886815217924,
    "why": "physical work \u2014 out of reach whatever its structure"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": true,
    "id": "2735",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 169220449.21333572,
-   "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#2735",
+   "physical": true,
+   "ref": "census:v3.1-2026-09-24/tasks.csv#2735",
    "task": "Order supplies or equipment and issue them to personnel.",
    "time_share": 0.01519017222104546,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "physical work \u2014 out of reach whatever its structure"
   }
  ],
- "version": "2026-09-25.1"
+ "version": "v3.1-2026-09-24"
 }

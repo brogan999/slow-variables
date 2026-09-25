@@ -1,364 +1,521 @@
 {
- "csv": "/data/census/2026-09-25.1/tasks.csv",
+ "csv": "/data/census/v3.1-2026-09-24/tasks.csv",
  "industries": [
   {
    "agreed3": 11962768.824136568,
    "emp": 2020.0,
-   "freed": 15354961.574557632,
    "naics": "611300",
+   "passes": 11962768.824136568,
    "title": "Colleges, Universities, and Professional Schools",
    "wage_bill": 161499000.0
   },
   {
    "agreed3": 4414622.359153253,
    "emp": 600.0,
-   "freed": 5666443.75457734,
    "naics": "611200",
+   "passes": 4414622.359153253,
    "title": "Junior Colleges",
    "wage_bill": 59598000.0
   }
  ],
  "role": {
+  "accountable_removed": 0.0,
   "agreed3": 16377391.18328982,
   "ai_exposure": 0.0,
-  "band_hi": 0.31998851393583405,
-  "band_lo": 0.07407333063447184,
-  "contested": 54371109.28238128,
+  "by_scorer": {
+   "gemini": 0.07407333063447184,
+   "gpt6": 0.07407333063447184,
+   "sonnet": 0.07407333063447184
+  },
+  "contested": 0.0,
   "emp": 2620.0,
-  "freed": 21021405.32913497,
   "function": "Education",
   "href": "/census/roles/25-1192",
+  "n_passes": 1,
+  "n_tasks": 23,
+  "not_called": 0.0,
   "occ": "25-1192",
-  "payroll_scored_by_three": 221097000.0,
-  "ref": "census:2026-09-25.1/roles.csv#25-1192",
+  "passes": 16377391.18328982,
+  "payroll_scored_by_three": 221097000.00000006,
+  "physical_removed": 0.0,
+  "ref": "census:v3.1-2026-09-24/roles.csv#25-1192",
+  "rule_loose": 0.3717068298234164,
+  "rule_strict": 0.07407333063447184,
   "scored_by_three": true,
-  "share_goes": 0.09507775016908855,
+  "scorer_max": 0.07407333063447184,
+  "scorer_min": 0.07407333063447184,
+  "share_passes": 0.07407333063447184,
+  "split": "direct",
+  "time_share_basis": "rated",
   "title": "Family and Consumer Sciences Teachers, Postsecondary",
   "wage_bill": 221097000.0
  },
+ "scorers": [
+  "sonnet",
+  "gemini",
+  "gpt6"
+ ],
  "tasks": [
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": true,
+   "contested": false,
    "id": "6400",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 18842202.910596102,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#6400",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#6400",
    "task": "Evaluate and grade students' class work, laboratory work, projects, assignments, and papers.",
    "time_share": 0.08522143181769135,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": true,
    "contested": false,
-   "goes": false,
    "id": "6401",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 17698863.299344704,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#6401",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#6401",
    "task": "Initiate, facilitate, and moderate classroom discussions.",
    "time_share": 0.08005021913162415,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "6409",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 17093104.710096072,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#6409",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#6409",
    "task": "Maintain regularly scheduled office hours to advise and assist students.",
    "time_share": 0.07731043257075434,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": true,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": true,
    "id": "6405",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": true,
+   "passes_by": {
+    "gemini": true,
+    "gpt6": true,
+    "sonnet": true
+   },
    "payroll": 16377391.18328982,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#6405",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#6405",
    "task": "Maintain student attendance records, grades, and other required records.",
    "time_share": 0.07407333063447184,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "quick to check, an existing check settles it, and a mistake is cheap"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "6402",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 13980775.54160498,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#6402",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#6402",
    "task": "Prepare and deliver lectures to undergraduate or graduate students on topics such as food science, nutrition, and child care.",
    "time_share": 0.06323367364371738,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "6408",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 13049432.007068725,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#6408",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#6408",
    "task": "Advise students on academic and vocational curricula and on career issues.",
    "time_share": 0.05902129837613683,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": true,
+   "contested": false,
    "id": "6403",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 12892264.394988485,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#6403",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#6403",
    "task": "Prepare course materials, such as syllabi, homework assignments, and handouts.",
    "time_share": 0.05831044471425883,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "6404",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 12641112.079042215,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#6404",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#6404",
    "task": "Keep abreast of developments in the field by reading current literature, talking with colleagues, and participating in professional conferences.",
    "time_share": 0.05717450747428601,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "6407",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 11728529.019403627,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#6407",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#6407",
    "task": "Compile, administer, and grade examinations, or assign this work to others.",
    "time_share": 0.053046983990753506,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "6413",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 10630827.11665393,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#6413",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#6413",
    "task": "Collaborate with colleagues to address teaching and research issues.",
    "time_share": 0.04808218617463796,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "6406",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 9615540.865949372,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#6406",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#6406",
    "task": "Plan, evaluate, and revise curricula, course content, course materials, and methods of instruction.",
    "time_share": 0.043490146252320803,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "6410",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 8540528.671710584,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#6410",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#6410",
    "task": "Supervise undergraduate or graduate teaching, internship, and research work.",
    "time_share": 0.038627971757692704,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "6419",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 7653378.121034228,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#6419",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#6419",
    "task": "Perform administrative duties, such as serving as department head.",
    "time_share": 0.034615477012506855,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "6416",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 7609837.806590843,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#6416",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#6416",
    "task": "Serve on academic or administrative committees that deal with institutional policies, departmental matters, and academic issues.",
    "time_share": 0.03441854844973402,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "6417",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 6907273.093002836,
-   "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#6417",
+   "physical": true,
+   "ref": "census:v3.1-2026-09-24/tasks.csv#6417",
    "task": "Participate in campus and community events.",
    "time_share": 0.03124091730327791,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "physical work \u2014 out of reach whatever its structure"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "6411",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 6264098.811547915,
-   "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#6411",
+   "physical": true,
+   "ref": "census:v3.1-2026-09-24/tasks.csv#6411",
    "task": "Select and obtain materials and supplies, such as textbooks.",
    "time_share": 0.028331903244041824,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "physical work \u2014 out of reach whatever its structure"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "6412",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 5963772.42525922,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#6412",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#6412",
    "task": "Conduct research in a particular field of knowledge and publish findings in professional journals, books, or electronic media.",
    "time_share": 0.02697355651709078,
-   "why": "nobody can tell quickly whether it worked"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "6415",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 5330274.3133291,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#6415",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#6415",
    "task": "Participate in student recruitment, registration, and placement activities.",
    "time_share": 0.02410830682157198,
-   "why": "nobody can tell quickly whether it worked"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "6421",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 4815575.305369491,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#6421",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#6421",
    "task": "Provide professional consulting services to government or industry.",
    "time_share": 0.021780373796883225,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": true,
+   "blocked_by_missing_check": true,
+   "contested": false,
    "id": "6418",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 4644014.145845151,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#6418",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#6418",
    "task": "Compile bibliographies of specialized materials for outside reading assignments.",
    "time_share": 0.02100441953461671,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "21132",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 3713769.84047825,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#21132",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#21132",
    "task": "Conduct faculty performance evaluations.",
    "time_share": 0.016797015972529025,
-   "why": "nobody can tell quickly whether it worked"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "6414",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 3517418.372991584,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#6414",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#6414",
    "task": "Act as advisers to student organizations.",
    "time_share": 0.015908937583918297,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "6420",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 1587015.9648027627,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#6420",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#6420",
    "task": "Write grant proposals to procure external research funding.",
    "time_share": 0.007177917225483669,
-   "why": "nobody can tell quickly whether it worked"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   }
  ],
- "version": "2026-09-25.1"
+ "version": "v3.1-2026-09-24"
 }

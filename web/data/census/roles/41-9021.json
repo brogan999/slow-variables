@@ -1,344 +1,465 @@
 {
- "csv": "/data/census/2026-09-25.1/tasks.csv",
+ "csv": "/data/census/v3.1-2026-09-24/tasks.csv",
  "industries": [
   {
    "agreed3": 0.0,
    "emp": 42960.0,
-   "freed": 425312309.6584652,
    "naics": "531000",
+   "passes": 323258757.9555216,
    "title": "Real Estate",
    "wage_bill": 3952749600.0
   },
   {
    "agreed3": 0.0,
    "emp": 1010.0,
-   "freed": 13091001.77498552,
    "naics": "236100",
+   "passes": 9949820.115889797,
    "title": "Residential Building Construction",
    "wage_bill": 121664600.0
   },
   {
    "agreed3": 0.0,
    "emp": 1500.0,
-   "freed": 12740809.735749228,
    "naics": "5220A1",
+   "passes": 9683656.543666037,
    "title": "Credit Intermediation and Related Activities (5221 and 5223 only)",
    "wage_bill": 118410000.0
   },
   {
    "agreed3": 0.0,
    "emp": 510.0,
-   "freed": 4829047.723506675,
    "naics": "551100",
+   "passes": 3670319.2777614365,
    "title": "Management of Companies and Enterprises",
    "wage_bill": 44880000.0
   },
   {
    "agreed3": 0.0,
    "emp": 450.0,
-   "freed": 4176190.1686408827,
    "naics": "522200",
+   "passes": 3174114.6828902797,
    "title": "Nondepository Credit Intermediation",
    "wage_bill": 38812500.0
   },
   {
    "agreed3": 0.0,
    "emp": 350.0,
-   "freed": 1950395.1328017768,
    "naics": "541100",
+   "passes": 1482398.448938117,
    "title": "Legal Services",
    "wage_bill": 18126500.0
   },
   {
    "agreed3": 0.0,
    "emp": 100.0,
-   "freed": 1253314.3467782028,
    "naics": "237200",
+   "passes": 952581.9729805083,
    "title": "Land Subdivision",
    "wage_bill": 11648000.0
   },
   {
    "agreed3": 0.0,
    "emp": 140.0,
-   "freed": 1248644.5457265053,
    "naics": "999300",
+   "passes": 949032.6891869511,
    "title": "Local Government, excluding Schools and Hospitals (OEWS Designation)",
    "wage_bill": 11604600.0
   },
   {
    "agreed3": 0.0,
    "emp": 100.0,
-   "freed": 885217.8168736501,
    "naics": "561300",
+   "passes": 672810.0868570263,
    "title": "Employment Services",
    "wage_bill": 8227000.0
   },
   {
    "agreed3": 0.0,
    "emp": 40.0,
-   "freed": 447224.9099372358,
    "naics": "525900",
+   "passes": 339913.4368557851,
    "title": "Other Investment Pools and Funds",
    "wage_bill": 4156400.0
   }
  ],
  "role": {
-  "agreed3": null,
+  "accountable_removed": 0.0,
+  "agreed3": 0.0,
   "ai_exposure": 0.2609,
-  "band_hi": 0.45055673848692346,
-  "band_lo": 0.0,
-  "contested": 96295764.28894913,
+  "by_scorer": {
+   "gemini": 0.081780732570442,
+   "gpt6": 0.0,
+   "sonnet": 0.1475715020305022
+  },
+  "contested": 639483203.625985,
   "emp": 47210.0,
-  "freed": 466267659.231892,
   "function": "Sales",
   "href": "/census/roles/41-9021",
+  "n_passes": 1,
+  "n_tasks": 17,
+  "not_called": 0.0,
   "occ": "41-9021",
-  "payroll_scored_by_three": 0.0,
-  "ref": "census:2026-09-25.1/roles.csv#41-9021",
-  "scored_by_three": false,
-  "share_goes": 0.10759910257367813,
+  "passes": 354386884.59114957,
+  "payroll_scored_by_three": 4333378700.0,
+  "physical_removed": 0.0,
+  "ref": "census:v3.1-2026-09-24/roles.csv#41-9021",
+  "rule_loose": 0.16979336883594645,
+  "rule_strict": 0.0,
+  "scored_by_three": true,
+  "scorer_max": 0.1475715020305022,
+  "scorer_min": 0.0,
+  "share_passes": 0.081780732570442,
+  "split": "direct",
+  "time_share_basis": "rated",
   "title": "Real Estate Brokers",
   "wage_bill": 4333378700.0
  },
+ "scorers": [
+  "sonnet",
+  "gemini",
+  "gpt6"
+ ],
  "tasks": [
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "4599",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 467933363.83126783,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#4599",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#4599",
    "task": "Sell, for a fee, real estate owned by others.",
    "time_share": 0.10798349191850411,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": false,
-   "goes": true,
+   "blocked_by_missing_check": false,
+   "contested": true,
    "id": "4604",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": true,
+   "passes_by": {
+    "gemini": true,
+    "gpt6": false,
+    "sonnet": true
+   },
    "payroll": 354386884.59114957,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#4604",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#4604",
    "task": "Generate lists of properties for sale, their locations, descriptions, and available financing options, using computers.",
    "time_share": 0.081780732570442,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "quick to check, an existing check settles it, and a mistake is cheap"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "4610",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 351853818.75726247,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#4610",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#4610",
    "task": "Manage or operate real estate offices, handling associated business details.",
    "time_share": 0.08119618503623108,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "4602",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 346361535.16576797,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#4602",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#4602",
    "task": "Compare a property with similar properties that have recently sold to determine its competitive market price.",
    "time_share": 0.07992874824574367,
-   "why": "nobody can tell quickly whether it worked"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "4601",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 341945097.490017,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#4601",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#4601",
    "task": "Monitor fulfillment of purchase contract terms to ensure that they are handled in a timely manner.",
    "time_share": 0.07890958099046755,
-   "why": "nobody can tell quickly whether it worked"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "4605",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 340102611.2030792,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#4605",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#4605",
    "task": "Maintain knowledge of real estate law, local economies, fair housing laws, types of available mortgages, financing options, and government programs.",
    "time_share": 0.07848439629868473,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "4603",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 324904251.76842695,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#4603",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#4603",
    "task": "Act as an intermediary in negotiations between buyers and sellers over property prices and settlement details and during the closing of sales.",
    "time_share": 0.074977119301488,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "4611",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 287919699.7663857,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#4611",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#4611",
    "task": "Supervise agents who handle real estate transactions.",
    "time_share": 0.06644231203849912,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": false,
-   "goes": false,
+   "blocked_by_missing_check": false,
+   "contested": true,
    "id": "4600",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": true
+   },
    "payroll": 285096319.0348354,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#4600",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#4600",
    "task": "Obtain agreements from property owners to place properties for sale with real estate firms.",
    "time_share": 0.06579076946006021,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "4612",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 270479898.24818414,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#4612",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#4612",
    "task": "Rent properties or manage rental properties.",
    "time_share": 0.06241778459108228,
-   "why": "nobody can tell quickly whether it worked"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "4606",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 232099153.35623273,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#4606",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#4606",
    "task": "Check work completed by loan officers, attorneys, or other professionals to ensure that it is performed properly.",
    "time_share": 0.053560782342017034,
-   "why": "no automated way to check it, and a failure is too expensive"
+   "why": "no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "4609",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 219073357.89710915,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#4609",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#4609",
    "task": "Maintain awareness of current income tax regulations, local zoning, building and tax laws, and growth possibilities of a property's area.",
    "time_share": 0.05055486101344181,
-   "why": "no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "4608",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 118678724.82757984,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#4608",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#4608",
    "task": "Appraise property values, assessing income potential when relevant.",
    "time_share": 0.02738711131514535,
-   "why": "nobody can tell quickly whether it worked"
+   "why": "no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": true,
    "id": "4613",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 111880774.64074239,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#4613",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#4613",
    "task": "Arrange for title searches of properties being sold.",
    "time_share": 0.025818370003236134,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "4607",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 99080542.31243002,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#4607",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#4607",
    "task": "Arrange for financing of property purchases.",
    "time_share": 0.02286450115989863,
-   "why": "nobody can tell quickly whether it worked"
+   "why": "nobody can tell quickly whether it worked, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": true,
+   "contested": false,
    "id": "4614",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 96295764.28894913,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#4614",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#4614",
    "task": "Give buyers virtual tours of properties in which they are interested, using computers.",
    "time_share": 0.022221866805444246,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "4615",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 85286902.82058026,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#4615",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#4615",
    "task": "Review property details to ensure that environmental regulations are met.",
    "time_share": 0.01968138690961403,
-   "why": "a failure is too expensive"
+   "why": "no existing check settles it, and a failure is too expensive"
   }
  ],
- "version": "2026-09-25.1"
+ "version": "v3.1-2026-09-24"
 }

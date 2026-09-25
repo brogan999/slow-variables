@@ -1,156 +1,217 @@
 {
- "csv": "/data/census/2026-09-25.1/tasks.csv",
+ "csv": "/data/census/v3.1-2026-09-24/tasks.csv",
  "industries": [
   {
    "agreed3": 0.0,
    "emp": 3810.0,
-   "freed": 97044866.2933067,
    "naics": "524100",
+   "passes": 0.0,
    "title": "Insurance Carriers",
    "wage_bill": 297751500.0
   },
   {
    "agreed3": 0.0,
    "emp": 3460.0,
-   "freed": 86776740.05334659,
    "naics": "524200",
+   "passes": 0.0,
    "title": "Agencies, Brokerages, and Other Insurance Related Activities",
    "wage_bill": 266247000.0
   },
   {
    "agreed3": 0.0,
    "emp": 180.0,
-   "freed": 3573970.8643814856,
    "naics": "441100",
+   "passes": 0.0,
    "title": "Automobile Dealers",
    "wage_bill": 10965600.0
   },
   {
    "agreed3": 0.0,
    "emp": 30.0,
-   "freed": 864746.0692873128,
    "naics": "551100",
+   "passes": 0.0,
    "title": "Management of Companies and Enterprises",
    "wage_bill": 2653200.0
   }
  ],
  "role": {
+  "accountable_removed": 0.0,
   "agreed3": 0.0,
   "ai_exposure": 0.0,
-  "band_hi": 0.8217691348043081,
-  "band_lo": 0.17593746030727314,
-  "contested": 193915496.76580963,
+  "by_scorer": {
+   "gemini": 0.0,
+   "gpt6": 0.0,
+   "sonnet": 0.17593746030727314
+  },
+  "contested": 101624520.79154429,
   "emp": 7480.0,
-  "freed": 188260323.28032207,
   "function": "Claims & underwriting",
   "href": "/census/roles/13-1032",
+  "n_passes": 0,
+  "n_tasks": 7,
+  "not_called": 0.0,
   "occ": "13-1032",
-  "payroll_scored_by_three": 107279694.2770318,
-  "ref": "census:2026-09-25.1/roles.csv#13-1032",
+  "passes": 0.0,
+  "payroll_scored_by_three": 577617300.0,
+  "physical_removed": 0.0,
+  "ref": "census:v3.1-2026-09-24/roles.csv#13-1032",
+  "rule_loose": 0.8217691348043082,
+  "rule_strict": 0.0,
   "scored_by_three": true,
-  "share_goes": 0.32592570077163907,
+  "scorer_max": 0.17593746030727314,
+  "scorer_min": 0.0,
+  "share_passes": 0.0,
+  "split": "direct",
+  "time_share_basis": "rated",
   "title": "Insurance Appraisers, Auto Damage",
   "wage_bill": 577617300.0
  },
+ "scorers": [
+  "sonnet",
+  "gemini",
+  "gpt6"
+ ],
  "tasks": [
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "7246",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 107279694.2770318,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7246",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#7246",
    "task": "Estimate parts and labor to repair damage, using standard automotive labor and parts cost manuals and knowledge of automotive repair.",
    "time_share": 0.1857279798874303,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7247",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 106464000.05796666,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7247",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#7247",
    "task": "Review repair cost estimates with automobile repair shop to secure agreement on cost of repairs.",
    "time_share": 0.18431580920094787,
-   "why": "no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7248",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 102949231.13099946,
-   "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7248",
+   "physical": true,
+   "ref": "census:v3.1-2026-09-24/tasks.csv#7248",
    "task": "Examine damaged vehicle to determine extent of structural, body, mechanical, electrical, or interior damage.",
    "time_share": 0.17823086519569178,
-   "why": "no automated way to check it"
+   "why": "physical work \u2014 out of reach whatever its structure"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": false,
-   "goes": true,
+   "blocked_by_missing_check": true,
+   "contested": true,
    "id": "7251",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": true
+   },
    "payroll": 101624520.79154429,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7251",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#7251",
    "task": "Prepare insurance forms to indicate repair cost estimates and recommendations.",
    "time_share": 0.17593746030727314,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": true,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "7249",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 86635802.4887778,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7249",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#7249",
    "task": "Evaluate practicality of repair as opposed to payment of market value of vehicle before accident.",
    "time_share": 0.14998824046436593,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7250",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 51367381.865960516,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7250",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#7250",
    "task": "Determine salvage value on total-loss vehicle.",
    "time_share": 0.08892978424635224,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7252",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 21296669.387719475,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7252",
+   "ref": "census:v3.1-2026-09-24/tasks.csv#7252",
    "task": "Arrange to have damage appraised by another appraiser to resolve disagreement with shop on repair cost.",
    "time_share": 0.03686986069793871,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "no existing check settles it"
   }
  ],
- "version": "2026-09-25.1"
+ "version": "v3.1-2026-09-24"
 }
