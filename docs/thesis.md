@@ -42,7 +42,7 @@ Rule: supported when labs are up ≥ 5pp and chips down, on gross profit; contra
 
 Rule: surplus above twice the approximate revenue ceiling holds, below the enterprise-spend floor fails, in between is untestable; the doubling covers the willingness-to-accept wedge and the consumer subscriptions the ceiling omits
 
-- ? consumer surplus (WTA) > twice the approximate revenue ceiling, bracketed — $172B surplus against a floor of $37B (US enterprise spend) and a bar of $295B, twice the $147B ceiling (lab run-rates plus enterprise spend; consumer subscriptions sit outside it, and a WTA estimate runs at least twice WTP) (obs: 2d481469, 6012e72e, 143dcf3e…)
+- ? consumer surplus (WTA) > twice the approximate revenue ceiling, bracketed — $172B surplus against a floor of $37B (US enterprise spend) and a bar of $296B, twice the $148B ceiling (lab run-rates plus enterprise spend; consumer subscriptions sit outside it, and a WTA estimate runs at least twice WTP) (obs: 2d481469, 6012e72e, 143dcf3e…)
 
 ## Workers' pay falls below its level before AI while output grows: **does not hold**
 
