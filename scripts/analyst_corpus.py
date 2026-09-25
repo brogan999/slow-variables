@@ -60,7 +60,8 @@ def describe(collection: str, path: Path, text: str, author: str | None, access:
         access = "paid"
     elif re.search(r"\(free\)|\[free\]", head) and access == "paid":
         access = "public"
-    return {"title": title, "author": meta.get("author") or author or "", "year": str(year), "url": url, "access": access}, body
+    byline = next(iter(re.findall(r"^By (.+)$", head, re.M)), None)  # a post's own byline beats the collection's default
+    return {"title": title, "author": meta.get("author") or byline or author or "", "year": str(year), "url": url, "access": access}, body
 
 
 def chunks(body: str) -> Iterator[str]:
@@ -76,6 +77,13 @@ def chunks(body: str) -> Iterator[str]:
         buf += para + "\n\n"
     if buf.strip():
         yield buf
+
+
+def epub_author(path: Path) -> str:
+    with zipfile.ZipFile(path) as z:
+        opf = next((n for n in z.namelist() if n.endswith(".opf")), None)
+        text = z.read(opf).decode("utf-8", errors="ignore") if opf else ""
+    return ", ".join(re.findall(r"<dc:creator[^>]*>([^<]+)</dc:creator>", text))
 
 
 def epub_text(path: Path) -> Iterator[tuple[str, str]]:
@@ -118,12 +126,13 @@ def build(db: Path) -> dict[str, int]:
             if PROMPTY.search(f.name):
                 counts["skipped_prompt_files"] += 1
                 continue
-            d, body = describe(collection, f, f.read_text(errors="ignore"), author, access)
+            d, body = describe(collection, f, f.read_text(errors="ignore").replace("\\$", "$"), author, access)
             add(collection, str(f), d, body)
     for collection, path, access in EPUBS:
         if path.exists():
+            who = epub_author(path)
             for name, text in epub_text(path):
-                add(collection, f"{path}#{name}", {"title": f"{path.stem}: {name}", "author": "", "year": "", "url": "", "access": access}, text)
+                add(collection, f"{path}#{name}", {"title": f"{path.stem}: {name}", "author": who, "year": "", "url": "", "access": access}, text)
     con.commit()
     con.close()
     tmp.replace(db)

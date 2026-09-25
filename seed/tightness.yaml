@@ -31,7 +31,7 @@ rules:
     required: "The gauge this input depends on has no usable reading today."
     coverage: "Too little of its intended evidence has a usable reading today."
     confidence: "The evidence behind it is too weak to show a score."
-  epoch_quarterly_rationale: "The limit on Epoch's quarterly chip gauges is set by the publisher's calendar. When Epoch last updated its chip-components file, the newest complete quarter in it was already more than two quarters old. This site has read only that one version, so it cannot yet say how often a newer quarter arrives. Its chip-sales file lists newer quarters, but only for some designers, and a share or a total across designers is read only from a quarter in which every designer reported. A tighter limit would drop every one of these gauges for no reason but that calendar; this one admits a complete quarter until it is about ten months old and drops the gauge after that, until a newer complete quarter arrives."
+  epoch_quarterly_rationale: "The limit on Epoch's quarterly chip gauges is set by the publisher's calendar. When Epoch last updated its chip-components file, the newest complete quarter in it was already more than two quarters old. This site has read only that one version, so it cannot yet say how often a newer quarter arrives. Its chip-sales file lists newer quarters, but only for some designers, and a share or a total across designers is read only from a quarter in which every designer reported. A tighter limit would drop every one of these gauges for no reason but that calendar; this one admits a complete quarter until it is about eleven months old and drops the gauge after that, until a newer complete quarter arrives. It was widened by a month before any Epoch gauge had passed the earlier limit, to allow for the gap between a quarter's end and Epoch's release, which the single version read so far suggests is long."
 
 kinds:
   - {id: supply, name: Supply, tight_means: "Tight means the thing itself is hard to get: supply is growing slowly, a few buyers take most of it, or far more is promised than built."}
@@ -62,7 +62,7 @@ inputs:
         label: Growth in the power drawn by AI chips sold
         metric: chip_fleet_power_yoy
         weight: 0.55
-        max_age_days: 300
+        max_age_days: 330
         knots: [[0.0, 15], [0.25, 35], [0.5, 55], [1.0, 75], [2.0, 92]]
         scale_rationale: "Growth of a quarter a year or less is the kind of new load a grid plans for in the ordinary way. A doubling within a year is more than new power stations can be built to serve in that time, which is when electricity stops being a bill and becomes a limit."
 
@@ -123,7 +123,7 @@ inputs:
         metric: chip_input_supply_yoy
         dims: {input: logic_supply_wafers}
         weight: 0.42
-        max_age_days: 300
+        max_age_days: 330
         knots: [[-0.05, 92], [0.05, 72], [0.15, 50], [0.3, 28]]
         scale_rationale: "Runs backwards: faster supply growth means a looser input. New foundry capacity takes years to build, so growth of a fifth a year is already fast for this business, and flat supply while demand races is the tight end."
 
@@ -142,14 +142,14 @@ inputs:
         metric: chip_input_supply_yoy
         dims: {input: cowos_supply_wafers}
         weight: 0.45
-        max_age_days: 300
+        max_age_days: 330
         knots: [[-0.1, 95], [0.0, 80], [0.25, 60], [0.5, 40], [1.0, 20]]
         scale_rationale: "Runs backwards: faster supply growth means a looser input. Packaging lines can be added faster than foundries, so this scale asks for more: supply that doubles in a year is real relief, and supply that stands still while demand rises is the worst case."
       - id: cowos_buyer_concentration
         label: How concentrated the buyers are
         metric: cowos_buyer_hhi
         weight: 0.30
-        max_age_days: 300
+        max_age_days: 330
         knots: [[0.25, 20], [0.35, 42], [0.45, 65], [0.6, 85]]
         scale_rationale: "When one buyer takes most of the supply, everyone else is rationed even if the total looks adequate. The index is the sum of the squared shares: a quarter means several buyers of similar size, and above a half one buyer sets the terms."
 
@@ -168,7 +168,7 @@ inputs:
         metric: chip_input_supply_yoy
         dims: {input: hbm_supply_usd}
         weight: 0.45
-        max_age_days: 300
+        max_age_days: 330
         knots: [[-0.1, 92], [0.1, 75], [0.4, 52], [0.8, 32], [1.5, 18]]
         scale_rationale: "Runs backwards: faster supply growth means a looser input. Because the supply is counted in dollars, which mixes volume with price, the scale is gentler than a true volume scale would be: even growth of four fifths a year reads only as easing."
       - id: memory_per_compute
@@ -190,7 +190,7 @@ inputs:
         label: How concentrated chip supply is by designer
         metric: chip_designer_hhi
         weight: 0.25
-        max_age_days: 300
+        max_age_days: 330
         knots: [[0.3, 22], [0.5, 45], [0.7, 68], [0.85, 88]]
         scale_rationale: "A single designer supplying most AI computing power leaves buyers no substitute, so that designer's choices about who gets chips become the market's supply. The index is the sum of the squared shares; well above four fifths is in effect one supplier."
       - id: cost_change

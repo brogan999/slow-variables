@@ -126,7 +126,13 @@ def check_answer(text: str) -> dict[str, Any]:
                 recs[f"corpus:{i}"] = Record(i, "corpus", [], "", r[0])
     res = check(text, recs)
     missing = sorted({f"{k}:{i}" for k, i in ids} - set(recs))
-    return {"ok": res.ok and not missing, "failures": res.failures, "unresolved_citations": missing, "annotated": res.annotated}
+    return {
+        "ok": res.ok and not missing,
+        "numbers_checked": len(res.numbers),
+        "failures": res.failures,
+        "unresolved_citations": missing,
+        "annotated": res.annotated,
+    }
 
 
 if __name__ == "__main__":
