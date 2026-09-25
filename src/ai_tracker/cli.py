@@ -302,7 +302,7 @@ def _check(s: st.Store) -> tuple[list[str], list[str]]:
                 )
     ids = {e.id for e in s.seed.entities}
     for key, fund, company, eid in s.con.execute(  # investments: lead.<fund>.<company> and portfolio.<fund>.<company>
-        "SELECT series_key, subject, measure, entity_id FROM observation_all WHERE source_ns IN ('lead', 'portfolio')"
+        "SELECT series_key, subject, measure, entity_id FROM observations WHERE source_ns IN ('lead', 'portfolio')"
     ).fetchall():
         if fund not in ids or company not in ids or eid != fund:
             errors.append(f"{key}: the fund ({fund}) and company ({company}) must both be entities, with entity_id the fund")
