@@ -14,7 +14,8 @@ rule: >-
   within hours, a check that already exists settles it, and a single failure is cheap. Work that needs a body is left
   out, and so are sign-offs a person is accountable for: approving, authorising, certifying or assigning others' work.
   A task without three valid scores is not called and never passes. The rule was written down and frozen before any
-  task was scored.
+  score in this version existed, but it was shaped after seeing earlier usage data, so tests against that data are post
+  hoc.
 agreed: >-
   The firmest figure is the part all three models pass. It sits beside every total on these pages. Each model's own
   total is shown too, because they disagree a great deal.
@@ -61,10 +62,11 @@ caveats:
     Lead with the part all three pass, and treat small differences between roles as noise.
   - The tests against observed AI use were shaped after seeing that data, so they are post hoc. They are committed to
     run once more, unchanged, on the next release; until then read them as associations, not proof.
-  - The filter that removes physical work errs both ways. A spot-check found desk work among the removed tasks, so the
-    headline may be too low; the filter also counts talking with people in person as desk work, which the spot-check
+  - The filter that removes physical work errs both ways. A spot-check by one of the models found desk work among the
+    removed tasks, so the headline may be too low; the filter also counts talking with people in person as desk work, which the spot-check
     cannot measure.
-  - Whether a business keeps the saving was not measured; every method tried failed a basic noise test.
+  - Whether a business keeps the saving was not measured; every method tried either failed a basic noise test or gave
+    estimates that change sign with the years used.
   - No person has judged individual tasks; the check against people is a Labor Department survey of whole jobs.
   - The public task lists under-describe coordination and exception handling, which pushes the total up.
 method_notes:

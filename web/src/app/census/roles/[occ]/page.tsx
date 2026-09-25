@@ -15,8 +15,8 @@ export async function generateMetadata({ params }: { params: Promise<{ occ: stri
 const usd = (v: number | null | undefined) => (v === 0 ? "$0" : fmt(v, "USD"));
 const link = "underline decoration-grid underline-offset-4 hover:decoration-ink";
 
-function Task({ t, names }: { t: CensusTask; names: Record<string, string> }) {
-  const passing = Object.entries(t.passes_by).filter(([, ok]) => ok).map(([k]) => names[k] ?? k);
+function Task({ t, names, order }: { t: CensusTask; names: Record<string, string>; order: string[] }) {
+  const passing = order.filter((k) => t.passes_by[k]).map((k) => names[k] ?? k);
   const flags = [
     t.passes && t.agreed_all_three ? "all three pass it" : passing.length ? `passed by ${passing.join(", ")}` : null,
     t.contested ? "the models disagreed" : null,
@@ -52,7 +52,7 @@ export default async function CensusRolePage({ params }: { params: Promise<{ occ
           <MarginPanel title={`Census · version ${d.version}`} rows={[
             ["Share of the work that passes", fmt(r.share_passes, "share")],
             ["Under the stricter and looser rules", `${fmt(r.rule_strict, "share")} and ${fmt(r.rule_loose, "share")}`],
-            ...Object.entries(r.by_scorer).map(([k, v]) => [`Under ${names[k] ?? k} alone`, fmt(v, "share")] as [string, string]),
+            ...d.scorers.map((k) => [`Under ${names[k] ?? k} alone`, fmt(r.by_scorer[k], "share")] as [string, string]),
             ["Payroll that passes the screen", usd(r.passes)],
             ["Of which all three models pass", r.agreed3 === null ? <span key="n" className="text-muted">not scored by all three</span> : usd(r.agreed3)],
             ["Observed AI use in this role", r.ai_exposure === null ? "—" : fmt(r.ai_exposure, "share")],
@@ -61,7 +61,7 @@ export default async function CensusRolePage({ params }: { params: Promise<{ occ
             ["Workers", fmt(r.emp, "count")],
           ]} />
           <MarginPanel title="Instrument">
-            <p>Each task was scored by three AI models and the verdict is their vote, under a rule frozen before any task was scored; no person judged individual tasks.{r.split === "equal" ? " The Labor Department publishes this role only with related ones, so its payroll is split evenly among them." : ""}</p>
+            <p>Each task was scored by three AI models and the verdict is their vote, under a rule frozen before this version's scores; no person judged individual tasks.{r.split === "equal" ? " The Labor Department publishes this role only with related ones, so its payroll is split evenly among them." : ""}</p>
             <p><a href={d.csv} className={link}>All tasks as CSV</a> · <Link href="/census#method" className={link}>Method and what failed</Link></p>
           </MarginPanel>
         </>
@@ -71,11 +71,11 @@ export default async function CensusRolePage({ params }: { params: Promise<{ occ
         <div className="grid gap-6 md:grid-cols-2 items-start">
           <section aria-labelledby="goes-h" className="panel px-4 py-4">
             <h2 id="goes-h" className="display text-[1.4rem] leading-tight">Passes the screen <span className="text-muted text-base">· {fmt(r.n_passes, "count")} of {fmt(r.n_tasks, "count")} tasks</span></h2>
-            {passes.length ? <ul>{passes.map((t) => <Task key={t.id} t={t} names={names} />)}</ul> : <p className="text-sm text-ink-2 mt-2">No task in this role passes the screen.</p>}
+            {passes.length ? <ul>{passes.map((t) => <Task key={t.id} t={t} names={names} order={d.scorers} />)}</ul> : <p className="text-sm text-ink-2 mt-2">No task in this role passes the screen.</p>}
           </section>
           <section aria-labelledby="stays-h" className="panel px-4 py-4 bg-surface-2">
             <h2 id="stays-h" className="display text-[1.4rem] leading-tight">Does not pass</h2>
-            <ul>{stays.map((t) => <Task key={t.id} t={t} names={names} />)}</ul>
+            <ul>{stays.map((t) => <Task key={t.id} t={t} names={names} order={d.scorers} />)}</ul>
           </section>
         </div>
         {d.industries.length ? (

@@ -30,10 +30,13 @@ TABLES = {
     "census_functions": "functions.csv",
 }
 TEXT_COLUMNS = {"occ", "naics", "occ_title", "naics_title", "title", "function", "task", "why", "time_share_basis", "split"}
-# The one `why` phrase that is shorthand rather than words; the rest of the census's fixed phrases read plainly.
-PLAIN_WHY = {"checkable fast, an existing check settles it, survivable if wrong": "quick to check, an existing check settles it, and a mistake is cheap"}
+# `why` phrases reworded: one is shorthand, one speaks of reach (capability); the rest read plainly as given.
+PLAIN_WHY = {
+    "checkable fast, an existing check settles it, survivable if wrong": "quick to check, an existing check settles it, and a mistake is cheap",
+    "physical work — out of reach whatever its structure": "physical work, outside the screen",
+}
 METHOD = [
-    "gates", "validation", "channel", "by_scorer", "rescore_stability", "bridge", "adjudication", "placebo",
+    "gates", "validation", "channel", "by_scorer", "rescore_stability", "adjudication", "placebo",
     "stability", "physical_gate", "not_called", "sigma",
 ]  # sigma is modelled; shown only here
 

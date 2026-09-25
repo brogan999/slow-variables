@@ -71,7 +71,7 @@ function Method({ c }: { c: CensusIndex }) {
         <Rows head={["Check", "Tasks", "Where the task passes", "Where it fails", "Gap within the same job, in points", "Strength"]} rows={[["AI working alone, in chat", v.ai_alone], ["AI working alone, through programmatic access", v.ai_alone_api]] as const} row={([label, t]) => (
           <tr key={label}><th scope="row">{label}</th><td className="tabular-nums">{fmt(t.n, "count")}</td><td className="tabular-nums">{fmt(t.passes, "share")}</td><td className="tabular-nums">{fmt(t.fails, "share")}</td><td className="tabular-nums">{fmt(t.within_occ_pp)}</td><td className="tabular-nums">{fmt(t.within_occ_t)}</td></tr>
         )} />
-        <p className="text-sm text-ink-2 mt-2">The census labels this test: {v.ai_alone.label}. Agreement across the three models: {fmt(v.agreement.fleiss_verdict)} over {fmt(v.agreement.n_called, "count")} tasks.</p>
+        <p className="text-sm text-ink-2 mt-2">The census labels the chat test: {v.ai_alone.label}. Agreement across the three models (Fleiss κ): {fmt(v.agreement.fleiss_verdict)} over {fmt(v.agreement.n_called, "count")} tasks.</p>
       </div>
       <div>
         <h3 className="font-medium mb-2">Each model alone, and the same model twice</h3>
@@ -104,7 +104,7 @@ function Method({ c }: { c: CensusIndex }) {
       </div>
       <div>
         <h3 className="font-medium mb-2">The physical-work filter, checked both ways</h3>
-        <p className="text-sm text-ink-2 max-w-[66ch]">Work that needs a body was removed before the vote: {usd(m.physical_gate.removed_usd)} of payroll. A spot check of {fmt(sc.removed.draws, "count")} removed tasks found {fmt(sc.removed.error_rate, "share")} were really desk work (a ninety-five percent interval of {interval(sc.removed.ci95)}), so the payroll that passes may be {usd(sc.removed.effect_usd[0])} to {usd(sc.removed.effect_usd[2])} too low. A spot check of {fmt(sc.kept.draws, "count")} kept tasks found {fmt(sc.kept.wrong, "count")} that were really physical (an interval of {interval(sc.kept.ci95)}). The filter counts talking with people in person as desk work, which neither check can measure.</p>
+        <p className="text-sm text-ink-2 max-w-[66ch]">Work that needs a body was removed before the vote: {usd(m.physical_gate.removed_usd)} of payroll. A spot check by {who("gemini")} of {fmt(sc.removed.draws, "count")} removed tasks found {fmt(sc.removed.error_rate, "share")} were really desk work (a ninety-five percent interval of {interval(sc.removed.ci95)}), so the payroll that passes may be {usd(sc.removed.effect_usd[0])} to {usd(sc.removed.effect_usd[2])} too low. The same check of {fmt(sc.kept.draws, "count")} kept tasks found {fmt(sc.kept.wrong, "count")} that were really physical (an interval of {interval(sc.kept.ci95)}), so the payroll that passes may also be up to {usd(sc.kept.effect_usd[2])} too high. The filter counts talking with people in person as desk work, which neither check can measure.</p>
       </div>
       <div>
         <h3 className="font-medium mb-2">Modelled, not measured: what the remaining work costs</h3>
@@ -115,7 +115,7 @@ function Method({ c }: { c: CensusIndex }) {
   );
 }
 
-const STANCE: Record<string, string> = { keeps: "the owner likely keeps the saving", check: "check before buying", passes: "the saving likely passes to clients" };
+const STANCE: Record<string, string> = { keeps: "the owner likely keeps the saving", check: "check before buying", passes: "the saving likely goes to clients" };
 
 export default function CensusPage() {
   const c = census();
@@ -132,7 +132,7 @@ export default function CensusPage() {
             ["Of which all three models pass", usd(h.agreed3)],
             ["Knowledge payroll scored", usd(h.payroll)],
             ...c.scorers.map((k) => [`${c.scorer_names[k]} alone would pass`, usd(h.by_scorer[k])] as [string, string]),
-            ["Agreement across the three models", fmt(h.fleiss_kappa)],
+            ["Agreement across the three models (Fleiss κ: one is perfect, zero is chance)", fmt(h.fleiss_kappa)],
             ["Verdicts that changed when the same model re-scored", fmt(h.rescore_changed, "share")],
             ["Waiting on a check", usd(h.blocked_by_missing_check)],
             ["Removed as physical work", usd(h.physical_removed)],
@@ -140,7 +140,7 @@ export default function CensusPage() {
             ["Modelled saving (modelled, not measured: passing is not saving)", usd(h.modelled_saving)],
           ]} />
           <MarginPanel title="Instrument">
-            <p>Judged by {c.scorers.map((k) => c.scorer_names[k]).join(", ")}; the verdict on each task is their vote, under a rule frozen before any task was scored. Imported as published from the census&apos;s own files and checked against their published hashes.</p>
+            <p>Judged by {c.scorers.map((k) => c.scorer_names[k]).join(", ")}; the verdict on each task is their vote, under a rule frozen before this version's scores and shaped after seeing earlier usage data. Imported as published from the census&apos;s own files and checked against their published hashes.</p>
             <p>Download: {Object.entries(c.csv).map(([f, href], i) => <span key={f}>{i ? ", " : ""}<a href={href} className={link}>{f}</a></span>)}.</p>
             <p>Query every table in the <Link href="/query" className={link}>SQL console</Link>, e.g. <code className="text-[12px]">SELECT title, share_passes, rule_strict, rule_loose, passes_usd, agreed3_usd FROM census_roles WHERE function = &apos;Finance&apos;</code>.</p>
             <p><Link href="/methodology#census" className={link}>How the census is imported</Link></p>

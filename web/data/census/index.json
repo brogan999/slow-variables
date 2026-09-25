@@ -3768,16 +3768,6 @@
     "tasks": 11176
    }
   ],
-  "bridge": {
-   "G2_v1_new": 0.30742049469964666,
-   "G2_v1_old": 0.30153121319199055,
-   "G2_v2": 0.2308598351001178,
-   "flag_v1_new_run": 0.18021201413427562,
-   "flag_v1_old_run": 0.23792697290930506,
-   "flag_v2_rubric": 0.19081272084805653,
-   "n": 849,
-   "same_run_agreement_v1": 0.8716136631330977
-  },
   "by_scorer": {
    "gemini": {
     "note": "payroll this scorer alone would pass (its own verdict under the rule, with the shared gates)",
@@ -4297,8 +4287,8 @@
    "Passing is not saving. The modelled saving beside the headline assumes a cost cut and how easily one kind of work stands in for another; it is modelled, not measured, and far below the payroll that passes.",
    "The models disagree a great deal, and the same model re-scoring the same tasks changed a share of its verdicts. Lead with the part all three pass, and treat small differences between roles as noise.",
    "The tests against observed AI use were shaped after seeing that data, so they are post hoc. They are committed to run once more, unchanged, on the next release; until then read them as associations, not proof.",
-   "The filter that removes physical work errs both ways. A spot-check found desk work among the removed tasks, so the headline may be too low; the filter also counts talking with people in person as desk work, which the spot-check cannot measure.",
-   "Whether a business keeps the saving was not measured; every method tried failed a basic noise test.",
+   "The filter that removes physical work errs both ways. A spot-check by one of the models found desk work among the removed tasks, so the headline may be too low; the filter also counts talking with people in person as desk work, which the spot-check cannot measure.",
+   "Whether a business keeps the saving was not measured; every method tried either failed a basic noise test or gave estimates that change sign with the years used.",
    "No person has judged individual tasks; the check against people is a Labor Department survey of whole jobs.",
    "The public task lists under-describe coordination and exception handling, which pushes the total up."
   ],
@@ -4312,7 +4302,7 @@
    "sigma": "If the work that stays is needed alongside the work that passes, it becomes a larger share of what a job costs. How much larger depends on how easily one kind of work can stand in for another, which economists call the elasticity; published estimates fall on both sides of the value where the effect reverses, so these figures are conditional.",
    "validation": "Two checks on the screen itself. Agreement: how often the three models give the same verdict, as a statistic that is one for perfect agreement and zero for chance. AI working alone: in observed use, AI works alone more often on tasks that pass than on tasks that fail, even within the same job. The census's own label says this test is in sample and post hoc."
   },
-  "rule": "A task passes when at least two of three AI models each find three things: whether it was done right can be told within hours, a check that already exists settles it, and a single failure is cheap. Work that needs a body is left out, and so are sign-offs a person is accountable for: approving, authorising, certifying or assigning others' work. A task without three valid scores is not called and never passes. The rule was written down and frozen before any task was scored.",
+  "rule": "A task passes when at least two of three AI models each find three things: whether it was done right can be told within hours, a check that already exists settles it, and a single failure is cheap. Work that needs a body is left out, and so are sign-offs a person is accountable for: approving, authorising, certifying or assigning others' work. A task without three valid scores is not called and never passes. The rule was written down and frozen before any score in this version existed, but it was shaped after seeing earlier usage data, so tests against that data are post hoc.",
   "sections": {
    "deals": {
     "lede": "Two tests, and both must pass: does the work pass the screen, and would the owner keep the saving? The census answers the first. The second it could not measure, so each card's stance is reasoned from how the business prices its work, not measured. Named companies illustrate the pricing model and are not researched targets.",
