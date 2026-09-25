@@ -704,16 +704,35 @@ metrics:
       SELECT as_of_date, sum(value_numeric) AS value, list(id ORDER BY id) AS obs_ids
       FROM observations WHERE series_key LIKE 'openrouter_rankings.%.tokens.d' GROUP BY as_of_date
   inference_price_halving_days:
-    description: Halving time, in days, of the lowest price per million tokens among models clearing GPT-4-0314's GPQA Diamond score, from Epoch's price-trend series (fit on the inverse price).
-    rationale: Price per unit of capability on a fixed benchmark axis; the brief cites ~40x a year at this threshold.
+    description: Halving time, in days, of the lowest price per million tokens among models at least as good as GPT-4 on GPQA Diamond - Epoch's series while Epoch covered new models, then each later model on Artificial Analysis that clears GPT-4's own Artificial Analysis score and costs less than every model before it (fit on the inverse price).
+    rationale: Price per unit of capability on a fixed benchmark axis; the brief cites ~40x a year at this threshold. v2 stitches Artificial Analysis onto Epoch because Epoch stopped updating its price chart in February 2025; each source is held to its own measurement of GPT-4, so the line stays at GPT-4's level on both.
     grain: [as_of_date]
     unit: days
     lead_lag: coincident
-    formula_version: 1
-    inputs: ["epoch_price.gpqa_diamond_gpt_4_0314.lowest_usd_per_mtok.pt"]
+    formula_version: 2
+    inputs: ["epoch_price.gpqa_diamond_gpt_4_0314.lowest_usd_per_mtok.pt", "aa.gpt_4.gpqa.pt", "aa.*.gpqa.pt", "aa.*.price_blended_usd_per_mtok.pt"]
     args: {since: "2023-01-01", invert: true}
-    caveats: Six-ish points; list prices; the cheapest model at a fixed threshold is not the frontier.
     python: fits.loglinear
+    caveats: List prices, not what large buyers pay; the cheapest model at a fixed threshold is not the frontier. Artificial Analysis gives today's price, not the launch price, so its points for models released before its ledger began (10 Sep 2026) carry today's price at the release date; prices usually fall after launch, so the fitted halving probably reads slower than it was, and a later price cut on an old model can make it a record after the fact and move the history. The two sources run GPQA with different harnesses, each held to its own GPT-4, so the direction of that difference is unknown. If Artificial Analysis moves a model's release date and later moves it back, the date it moved to stands.
+    sql: |
+      WITH ep AS (SELECT as_of_date, value_numeric AS v, [id] AS ids FROM observations
+                  WHERE series_key = 'epoch_price.gpqa_diamond_gpt_4_0314.lowest_usd_per_mtok.pt'
+                    AND NOT coalesce(disputed, false) AND value_numeric > 0),
+      last AS (SELECT (SELECT max(as_of_date) FROM observations WHERE series_key LIKE 'epoch_price.%') AS d, min(v) AS floor FROM ep),
+      one AS (SELECT subject, as_of_date, value_numeric AS g, id FROM observations
+              WHERE series_key LIKE 'aa.%.gpqa.pt' AND NOT coalesce(disputed, false)
+              QUALIFY row_number() OVER (PARTITION BY subject ORDER BY retrieved_at DESC, as_of_date DESC, id) = 1),
+      thr AS (SELECT g, id FROM one WHERE subject = 'gpt_4'),
+      price AS (SELECT subject, arg_max(value_numeric, as_of_date) AS usd, arg_max(id, as_of_date) AS id FROM observations
+                WHERE series_key LIKE 'aa.%.price_blended_usd_per_mtok.pt' AND value_numeric > 0 AND NOT coalesce(disputed, false)
+                GROUP BY 1),
+      cand AS (SELECT o.as_of_date, p.usd, [o.id, p.id, thr.id] AS ids FROM one o JOIN price p USING (subject), thr, last
+               WHERE o.g >= thr.g AND o.as_of_date > last.d),
+      daily AS (SELECT as_of_date, min(usd) AS v, arg_min(ids, (usd, ids[1])) AS ids FROM cand GROUP BY 1),
+      rec AS (SELECT d.as_of_date, d.v, d.ids FROM daily d, last
+              WHERE d.v < coalesce((SELECT min(v) FROM daily d2 WHERE d2.as_of_date < d.as_of_date AND d2.v < last.floor), last.floor))
+      SELECT as_of_date, v AS value, ids AS obs_ids FROM ep
+      UNION ALL SELECT as_of_date, v, ids FROM rec
   open_weights_lag_months:
     description: How far the open-weights frontier trails the closed one in time, on Epoch's Capabilities Index - at each new open-weights record, and at the newest row in Epoch's file, the months since a closed model first scored as high as the best open model to that date.
     rationale: v2 Appendix A's open-weights lag; the time version of the open-vs-closed gap, so it reads in months rather than index points. v2 adds the reading at Epoch's newest row, because between records the lag keeps growing with the calendar and a reading frozen at the last record understates it.
@@ -1212,12 +1231,14 @@ metrics:
     grain: [as_of_date]
     unit: index
     lead_lag: leading
-    formula_version: 2
+    formula_version: 3
     inputs: ["aa.*.intelligence_index.pt"]
-    caveats: The index composition changes between Artificial Analysis versions and every model is re-scored on the current version, so the history is today's scores placed at release dates, not what was measured then.
+    caveats: The index composition changes between Artificial Analysis versions and every model is re-scored on the current version, so the history is today's scores placed at release dates, not what was measured then. Artificial Analysis sometimes moves a model's release date; v3 keeps only each model's most recently retrieved row.
     sql: |
-      WITH x AS (SELECT as_of_date, max(value_numeric) AS v, arg_max(id, value_numeric) AS id
-                 FROM observations WHERE series_key LIKE 'aa.%.intelligence_index.pt' GROUP BY 1)
+      WITH one AS (SELECT subject, as_of_date, value_numeric, id FROM observations
+                   WHERE series_key LIKE 'aa.%.intelligence_index.pt' AND NOT coalesce(disputed, false)
+                   QUALIFY row_number() OVER (PARTITION BY subject ORDER BY retrieved_at DESC, as_of_date DESC, id) = 1),
+      x AS (SELECT as_of_date, max(value_numeric) AS v, arg_max(id, value_numeric) AS id FROM one GROUP BY 1)
       SELECT as_of_date, v AS value, [id] AS obs_ids FROM x QUALIFY v >= max(v) OVER (ORDER BY as_of_date)
   aa_frontier_price_per_point:
     description: Cheapest near-frontier capability - on each price change date, the lowest Artificial Analysis blended price (USD per million tokens, 3:1 input to output, each model's latest price carried forward) divided by the model's Intelligence Index, among models in the top decile of the index.

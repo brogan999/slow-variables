@@ -46,7 +46,7 @@ def test_artificial_analysis_extracts_three_measures_per_model():
                     "slug": "o3-mini",
                     "release_date": "2025-01-31",
                     "model_creator": {"slug": "openai"},
-                    "evaluations": {"artificial_analysis_intelligence_index": 62.9},
+                    "evaluations": {"artificial_analysis_intelligence_index": 62.9, "gpqa": 0.748},
                     "pricing": {"price_1m_blended_3_to_1": 1.925},
                     "median_output_tokens_per_second": 153.8,
                 },
@@ -69,16 +69,29 @@ def test_artificial_analysis_extracts_three_measures_per_model():
     keys = {o.series_key: o for o in obs}
     assert set(keys) == {
         "aa.o3_mini.intelligence_index.pt",
+        "aa.o3_mini.gpqa.pt",
         "aa.o3_mini.price_blended_usd_per_mtok.pt",
         "aa.o3_mini.output_tokens_per_second.pt",
         "aa.unpriced.intelligence_index.pt",  # a zero price or speed means unpriced, not free
     }
     assert keys["aa.o3_mini.intelligence_index.pt"].as_of_date == date(2025, 1, 31)  # dated by release
+    assert keys["aa.o3_mini.gpqa.pt"].as_of_date == date(2025, 1, 31) and keys["aa.o3_mini.gpqa.pt"].value_numeric == 0.748
     assert keys["aa.o3_mini.intelligence_index.pt"].published_date == date(2026, 1, 1)  # unchanged value
     assert (
         int(keys["aa.o3_mini.intelligence_index.pt"].tier) == 1
         and int(keys["aa.o3_mini.price_blended_usd_per_mtok.pt"].tier) == 3
     )
+
+
+def test_artificial_analysis_gpqa_outside_zero_to_one_is_an_error_and_the_rest_survives():
+    m = {"slug": "m", "release_date": "2025-01-31", "model_creator": {"slug": "x"}, "pricing": {"price_1m_blended_3_to_1": 1.0}}
+    ev = {"gpqa": 74.8, "artificial_analysis_intelligence_index": 50.0}  # a percent, not a share
+    body = json.dumps({"data": [{**m, "evaluations": ev}]}).encode()
+    c = ArtificialAnalysis.__new__(ArtificialAnalysis)
+    c.scrubbed, c.errors, c.latest = [], [], {}
+    keys = {o.series_key for o in ArtificialAnalysis.extract(c, [item(body)])}
+    assert keys == {"aa.m.intelligence_index.pt", "aa.m.price_blended_usd_per_mtok.pt"}
+    assert c.errors == ["gpqa for m is 74.8, not a share"]
 
 
 def test_hal_reads_every_reliability_dimension_and_accuracy_per_agent():
