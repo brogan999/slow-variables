@@ -1,7 +1,8 @@
 """Artificial Analysis API v2 (needs ARTIFICIAL_ANALYSIS_API_KEY; optional so the nightly stays green without it).
 
 `GET /api/v2/data/llms/models` with `x-api-key`. Per model: the Intelligence Index (tier 1, independent evals),
-the blended price per million tokens (tier 3) and median output speed. Index rows are dated by the model's release
+GPQA Diamond as a share (tier 1; a fixed test, so unlike the index it is not rescaled between versions), the
+blended price per million tokens (tier 3) and median output speed. Index and GPQA rows are dated by the model's release
 date (like METR), so a re-score supersedes in place. Price and speed are a change-point ledger like the OpenRouter
 price connector: an unchanged value reuses its existing as_of. AA reports an unpriced model as 0; those are skipped.
 """
@@ -15,7 +16,7 @@ from datetime import date
 from pathlib import Path
 
 from ...schema import Basis, Extraction, Observation, Tier
-from ..base import Connector, RawItem, expect, slug
+from ..base import Connector, LayoutChanged, RawItem, expect, slug
 from .openrouter import _latest
 
 URL = "https://artificialanalysis.ai/api/v2/data/llms/models"
@@ -25,6 +26,7 @@ FIELDS = {
         "index",
         Tier.BENCHMARK,
     ),
+    "gpqa": (("evaluations", "gpqa"), "share", Tier.BENCHMARK),
     "price_blended_usd_per_mtok": (("pricing", "price_1m_blended_3_to_1"), "USD", Tier.PRODUCT_BEHAVIOUR),
     "output_tokens_per_second": (
         ("median_output_tokens_per_second",),
@@ -72,6 +74,8 @@ class ArtificialAnalysis(Connector):
                     v = (v or {}).get(k) if isinstance(v, dict) else None
                 if v is None or (measure != "intelligence_index" and v <= 0):
                     continue
+                if measure == "gpqa" and not 0 < v <= 1:
+                    raise LayoutChanged(f"artificial analysis gpqa for {m['slug']} is {v}, not a share")
                 key = f"aa.{subject}.{measure}.pt"
                 prev = self.latest.get(key)
                 published = (
@@ -79,7 +83,7 @@ class ArtificialAnalysis(Connector):
                 )
                 as_of = (
                     date.fromisoformat(m["release_date"])
-                    if measure == "intelligence_index" and m.get("release_date")
+                    if measure in ("intelligence_index", "gpqa") and m.get("release_date")
                     else published
                 )
                 out.append(

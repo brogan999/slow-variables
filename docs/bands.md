@@ -185,7 +185,7 @@
 ## Inference price at fixed capability (halving time) (`epoch_inference_price_fixed_capability`)
 
 - Band input: `metric:inference_price_halving_days` (days)
-- Rule: normal 230.0 to inf; fast -inf to 110.0; falsifying none. Normal = halving no faster than every 230 days (about 3x a year, the hardware pace); fast = every 110 days or less (10x a year or more; Epoch's reading at this threshold is faster still). Between is emerging.
+- Rule: normal 230.0 to inf; fast -inf to 110.0; falsifying none. Normal = halving no faster than every 230 days (about 3x a year, the hardware pace); fast = every 110 days or less (10x a year or more). Between is emerging.
 - Timing: Coincident: prices fall the day a cheaper model matches the benchmark, when buyers can switch.
 
 ## Frontier training compute growth (doubling time) (`epoch_training_compute_growth`)

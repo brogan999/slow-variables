@@ -741,30 +741,37 @@
      "band_value": null,
      "bucket_id": "methods",
      "confidence": 45,
-     "grade": "B",
+     "grade": "A",
      "id": "epoch_inference_price_fixed_capability",
      "latest": {
-      "as_of": "2024-12-13",
-      "derived_id": "140079e0384d50de",
+      "as_of": "2026-04-03",
+      "derived_id": "9137702dc165b828",
       "dims": {
-       "aic": "5.3",
-       "n": "6",
-       "r2": "0.757"
+       "aic": "8.5",
+       "n": "9",
+       "r2": "0.739"
       },
       "obs_ids": [
+       "34d7ea93d75260f5",
        "4a9a97e9e9737be4",
+       "5c5f4fd4051a29b6",
        "6a8f4f1548195e2a",
        "6c3cb247818774a1",
+       "92b9f5cc48224cce",
        "93ea2ba859db9022",
+       "9f0995d1b8f25f87",
+       "aab4d704ee566024",
        "b00f8e81289db3fe",
+       "bd890021fe9f6373",
+       "e8c219c57139ffa0",
        "fd3ecddb2daa910a"
       ],
       "unit": "days",
-      "value": 67.68070430901466
+      "value": 113.79615299687278
      },
      "layer_id": "model",
      "leading_lagging": "coincident",
-     "n_observations": 6,
+     "n_observations": 13,
      "name": "Inference price at fixed capability (halving time)",
      "pending": null,
      "published": true,
@@ -2951,8 +2958,36 @@
    "valve": "leak"
   }
  ],
- "n_sources": 41,
+ "n_sources": 42,
  "recent_status_events": [
+  {
+   "author": "claude",
+   "counterevidence_considered": "Artificial Analysis's points use current list prices, not launch prices, and its GPQA harness differs from Epoch's; both push the reading towards slower, so the true pace may still sit inside the fast band.",
+   "created_at": "2026-09-25T06:02:13.570102Z",
+   "evidence_ids": [
+    "34d7ea93d75260f5",
+    "4a9a97e9e9737be4",
+    "5c5f4fd4051a29b6",
+    "6a8f4f1548195e2a",
+    "6c3cb247818774a1",
+    "92b9f5cc48224cce",
+    "93ea2ba859db9022",
+    "9f0995d1b8f25f87",
+    "aab4d704ee566024",
+    "b00f8e81289db3fe",
+    "bd890021fe9f6373",
+    "e8c219c57139ffa0",
+    "fd3ecddb2daa910a"
+   ],
+   "id": "479e434b7876b783",
+   "new_conf": 45,
+   "new_status": "emerging",
+   "old_conf": 45,
+   "old_status": "emerging",
+   "reason": "Epoch stopped updating its price chart in February 2025, so the series now continues on Artificial Analysis: each later model that clears GPT-4's own GPQA Diamond score there and undercuts every model before it. On nine points from 2023 to April 2026 the lowest price halves every 114 days (CI 74-243), just outside the fast band (110 days or less) and well inside the gap before normal (230 days or more), so the status stays emerging. The Epoch-only fit read 68 days; the stitched points carry today's price at their release dates, which reads slower than the launch-price history would.",
+   "target_id": "epoch_inference_price_fixed_capability",
+   "target_type": "indicator"
+  },
   {
    "author": "claude",
    "counterevidence_considered": "Human-level AI has not arrived, and progress could stall well short of it, which would leave his long horizon standing.",
@@ -2992,20 +3027,6 @@
    "old_status": "emerging",
    "reason": "Frontier-lab revenues roughly tripled and big-cloud data-centre spending neared the projected level in 2025, and Epoch AI's estimates for the data centres it tracks show several gigawatts of facility power added during the year, more than the scenario's figure.",
    "target_id": "ai2027_revenue_spend_power_2025",
-   "target_type": "prediction"
-  },
-  {
-   "author": "claude",
-   "counterevidence_considered": "Frontier systems still fail at long, open-ended work that experts handle routinely, and several careful forecasters put superintelligence after 2030.",
-   "created_at": "2026-09-23T23:55:06.038144Z",
-   "evidence_ids": [],
-   "id": "0354a1b46b5fcafc",
-   "new_conf": 30,
-   "new_status": "emerging",
-   "old_conf": null,
-   "old_status": null,
-   "reason": "No system is broadly superhuman yet, but frontier models now beat experts on many narrow tests and the window runs to 2030.",
-   "target_id": "vinge_superhuman_2005_2030",
    "target_type": "prediction"
   }
  ],
@@ -3156,7 +3177,7 @@
   "Frontier training compute growth (doubling time): Normal = doubling no faster than every 300 days (about 2.3x a year, the pre-2010 pace of compute growth); fast = every 182 days or less (4x a year or more, Epoch's 2010-2025 trend). Between is emerging.",
   "Training power draw growth (doubling time): Normal = doubling no faster than yearly (grid-connection pace); fast = every 230 days or less (3x a year, the pace a runaway buildout needs). Between is emerging.",
   "Hardware price-performance growth (doubling time): Normal = doubling no faster than every 500 days (roughly the +49% a year Epoch reports); fast = yearly or faster. Between is emerging.",
-  "Inference price at fixed capability (halving time): Normal = halving no faster than every 230 days (about 3x a year, the hardware pace); fast = every 110 days or less (10x a year or more; Epoch's reading at this threshold is faster still). Between is emerging.",
+  "Inference price at fixed capability (halving time): Normal = halving no faster than every 230 days (about 3x a year, the hardware pace); fast = every 110 days or less (10x a year or more). Between is emerging.",
   "Open-weights lag behind the closed frontier (months): Normal = open weights at least nine months behind, roughly a model generation; fast = three months or less, when a closed lead lasts about one release cycle. Between is emerging.",
   "Public text data exhaustion year (Epoch projection): Normal = exhaustion in 2028 or later (the paper's compute-optimal case); fast = 2026 or earlier (the overtrained case, which is what the AI 2027 scenario's compute path implies). Between is emerging.",
   "ARC-AGI-2 best score: Normal = under half (the 2025 frontier); fast = 85% or above (the ARC Prize grand-prize bar). Between is emerging.",
