@@ -298,11 +298,14 @@ def build(spec: dict[str, Any], fetched: dict[str, Any]) -> tuple[dict[str, Any]
                     **{k: c[k] for k in ("key", "name", "naics", "invoice", "why", "kill", "comps", "scope", "excl", "anchored", "stance", "stance_why")},
                     "sources": [{"cited_as": u, "href": links.get(u, u)} for u in c["sources"]],
                     "payroll": c["ind_payroll"],
-                    "passes": c["freed"],
-                    "passes_strict": c["freed_lo"],
-                    "passes_loose": c["freed_hi"],
-                    "agreed3": c["freed_agreed3"] if c["payroll_scored_by_three"] > 0 else None,
-                    "roles": [{"title": x["t"], "wage_bill": x["b"], "share_passes": x["g"], "passes": x["f"], "agreed3": x["a3"] if x["s3"] > 0 else None} for x in c["roles"]],
+                    "passes": c["passes_usd"],
+                    "passes_strict": c["rule_strict_usd"],
+                    "passes_loose": c["rule_loose_usd"],
+                    "agreed3": c["agreed3_usd"] if c["payroll_scored_by_three"] > 0 else None,
+                    "roles": [
+                        {"title": x["title"], "wage_bill": x["wage_bill"], "share_passes": x["share_passes"], "passes": x["passes_usd"], "agreed3": x["agreed3_usd"] if x["payroll_scored_by_three"] > 0 else None}
+                        for x in c["roles"]
+                    ],
                 }
                 for c in deals["cards"]
             ],
