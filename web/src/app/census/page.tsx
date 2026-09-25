@@ -25,9 +25,9 @@ function Section({ id, n, title, lede, children }: { id: string; n: string; titl
 }
 
 // A table that may scroll sideways on a phone is a labelled region keyboard users can focus and scroll.
-function Rows<T>({ head, rows, row }: { head: string[]; rows: T[]; row: (r: T) => React.ReactNode }) {
+function Rows<T>({ head, rows, row, label }: { head: string[]; rows: T[]; row: (r: T) => React.ReactNode; label?: string }) {
   return (
-    <div className="overflow-x-auto" tabIndex={0} role="region" aria-label={`Table: ${head.join(", ")}`}>
+    <div className="overflow-x-auto" tabIndex={0} role="region" aria-label={label ?? `Table: ${head.join(", ")}`}>
       <table className="data w-full text-sm">
         <thead><tr>{head.map((h) => <th key={h} scope="col">{h}</th>)}</tr></thead>
         <tbody>{rows.map(row)}</tbody>
@@ -59,8 +59,8 @@ function Method({ c }: { c: CensusIndex }) {
         {(["pre17", "pre24", "post"] as const).map((k) => (
           <div key={k} className="mb-4">
             <h4 className="eyebrow mb-1">{WHEN[k]}</h4>
-            <Rows head={["Test", "Result", "Needed", "Outcome", "Note"]} rows={m.gates.filter((g) => g.k === k)} row={(g) => (
-              <tr key={g.g}><th scope="row">{g.g}</th><td className="tabular-nums">{g.v}</td><td className="tabular-nums">{g.t}</td><td>{OUTCOME(g.p)}</td><td className="text-ink-2">{g.n}</td></tr>
+            <Rows label={`Tests: ${WHEN[k]}`} head={["Test", "Result", "Needed", "Outcome", "Note"]} rows={m.gates.filter((g) => g.k === k)} row={(g) => (
+              <tr key={`${g.g}|${g.v}`}><th scope="row">{g.g}</th><td className="tabular-nums">{g.v}</td><td className="tabular-nums">{g.t}</td><td>{OUTCOME(g.p)}</td><td className="text-ink-2">{g.n}</td></tr>
             )} />
           </div>
         ))}
@@ -71,7 +71,7 @@ function Method({ c }: { c: CensusIndex }) {
         <Rows head={["Check", "Tasks", "Where the task passes", "Where it fails", "Gap within the same job, in points", "Strength"]} rows={[["AI working alone, in chat", v.ai_alone], ["AI working alone, through programmatic access", v.ai_alone_api]] as const} row={([label, t]) => (
           <tr key={label}><th scope="row">{label}</th><td className="tabular-nums">{fmt(t.n, "count")}</td><td className="tabular-nums">{fmt(t.passes, "share")}</td><td className="tabular-nums">{fmt(t.fails, "share")}</td><td className="tabular-nums">{fmt(t.within_occ_pp)}</td><td className="tabular-nums">{fmt(t.within_occ_t)}</td></tr>
         )} />
-        <p className="text-sm text-ink-2 mt-2">{v.ai_alone.label}. Agreement across the three models: {fmt(v.agreement.fleiss_verdict)} over {fmt(v.agreement.n_called, "count")} tasks.</p>
+        <p className="text-sm text-ink-2 mt-2">The census labels this test: {v.ai_alone.label}. Agreement across the three models: {fmt(v.agreement.fleiss_verdict)} over {fmt(v.agreement.n_called, "count")} tasks.</p>
       </div>
       <div>
         <h3 className="font-medium mb-2">Each model alone, and the same model twice</h3>
@@ -99,7 +99,7 @@ function Method({ c }: { c: CensusIndex }) {
         <h3 className="font-medium mb-2">How hard a task is to describe: found after seeing the data</h3>
         <p className={note}>{n.channel}</p>
         <details className="panel px-4 py-3"><summary className="cursor-pointer">The numbers ({m.channel.headline.label})</summary>
-          <Rows head={["Month", "Tasks with any programmatic use", "Effect on any use", "Strength", "Tasks with some", "Effect on how much", "Strength"]} rows={m.channel.runs} row={(r) => <tr key={r.period}><td className="tabular-nums">{r.period}</td><td className="tabular-nums">{fmt(r.n_a, "count")}</td><td className="tabular-nums">{fmt(r.a_coef)}</td><td className="tabular-nums">{fmt(r.a_z)}</td><td className="tabular-nums">{fmt(r.n_b, "count")}</td><td className="tabular-nums">{fmt(r.b_coef)}</td><td className="tabular-nums">{fmt(r.b_z)}</td></tr>} />
+          <Rows head={["Month", "Tasks with any programmatic use", "Effect on any use", "Its strength", "Tasks with some", "Effect on how much", "Strength of that effect"]} rows={m.channel.runs} row={(r) => <tr key={r.period}><td className="tabular-nums">{r.period}</td><td className="tabular-nums">{fmt(r.n_a, "count")}</td><td className="tabular-nums">{fmt(r.a_coef)}</td><td className="tabular-nums">{fmt(r.a_z)}</td><td className="tabular-nums">{fmt(r.n_b, "count")}</td><td className="tabular-nums">{fmt(r.b_coef)}</td><td className="tabular-nums">{fmt(r.b_z)}</td></tr>} />
         </details>
       </div>
       <div>

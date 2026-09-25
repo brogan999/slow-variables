@@ -81,7 +81,7 @@ export default async function CensusRolePage({ params }: { params: Promise<{ occ
         {d.industries.length ? (
           <section aria-labelledby="ind-h">
             <h2 id="ind-h" className="display text-[1.4rem] leading-tight mb-3">Where this role works</h2>
-            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Where this role works">
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Table: industries employing this role">
               <table className="data w-full text-sm">
                 <thead><tr><th scope="col">Industry</th><th scope="col">Workers</th><th scope="col">Wage bill</th><th scope="col">Passes the screen</th><th scope="col">All three pass</th></tr></thead>
                 <tbody>{d.industries.map((i) => (
