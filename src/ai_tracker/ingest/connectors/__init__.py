@@ -17,6 +17,7 @@ from .epoch_tables import (
 from .feeds import Feeds
 from .formd import FormD
 from .fred import Fred, FredOfficial
+from .gpu_rents import GpuRents
 from .hal_reliability import HalReliability
 from .manual import Manual
 from .metr import Metr
@@ -26,6 +27,7 @@ from .ramp import Ramp
 from .regulatory import FdaDevices, Ncsl, Owid, OwidContext, RlList
 from .sec_segments import SecSegments
 from .sec_xbrl import SecXbrl
+from .tau2_bench import Tau2Bench
 from .yale import YaleDissimilarity
 
 CONNECTORS = {
@@ -33,6 +35,8 @@ CONNECTORS = {
     for c in (
         Metr,
         HalReliability,
+        Tau2Bench,
+        GpuRents,
         Ramp,
         Canaries,
         CanariesAge,

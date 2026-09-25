@@ -34,9 +34,9 @@
   "dead": null,
   "drawn": {
    "metric": null,
-   "others": 3,
+   "others": 5,
    "series": "automation_anywhere.tau_bench_leaderboard_1.pass_hat_4.pt",
-   "total": 4
+   "total": 6
   },
   "line": false,
   "n_drawn": 1,
@@ -110,16 +110,17 @@
  },
  "confidence": 55,
  "confidence_basis": {
-  "best_tier": 6,
-  "grade": "B",
-  "n_observations": 4,
+  "best_tier": 1,
+  "grade": "A",
+  "n_observations": 110,
   "sources": [
    "Automation Anywhere blog",
+   "Sierra tau2-bench leaderboard (pass^k per model and domain)",
    "arXiv abstract pages"
   ],
   "stale_as_of": null
  },
- "counterevidence": "The 2026 point is vendor-tabulated and the model is unnamed; tau-bench domains are narrow; pass^k penalises benign variation.",
+ "counterevidence": "The 2026 point is vendor-tabulated and the model is unnamed; tau-bench domains are narrow, and on Sierra's leaderboard the best pass^4 ranges from about a third in banking to over nine in ten in telecom, so the domain decides the reading; since March 2026 new models are run on banking only; pass^k penalises benign variation.",
  "crosswalk": [
   {
    "bucket_id": "products",
@@ -136,7 +137,7 @@
    "sublayer_id": null
   }
  ],
- "definition": "Share of tau-bench tasks an agent passes on every one of k attempts. The 2024 paper's gpt-4o figures (pass^1 61%, pass^8 under 25%) set the baseline; the 2026 point is the leaderboard leader's pass^1 and pass^4 as tabulated by Automation Anywhere.",
+ "definition": "Share of tau-bench tasks an agent passes on every one of k attempts. The 2024 paper's gpt-4o figures (pass^1 61%, pass^8 under 25%) set the baseline; the 2026 point is the leaderboard leader's pass^1 and pass^4 as tabulated by Automation Anywhere. Sierra's own tau2-bench leaderboard adds pass^1 and pass^4 per model and domain, dated by submission.",
  "derived": [],
  "direction": null,
  "direction_readings": null,
@@ -149,7 +150,7 @@
  },
  "fits": [],
  "flow_status": null,
- "grade": "B",
+ "grade": "A",
  "id": "pass_hat_k_tau_bench",
  "latest": {
   "as_of": "2026-05-18",
@@ -169,7 +170,7 @@
  "leading_lagging": "leading",
  "metric": null,
  "metric_dims": {},
- "n_observations": 4,
+ "n_observations": 110,
  "name": "Agent reliability across repeated runs (tau-bench pass^k)",
  "normal_band": {
   "hi": 0.7,
@@ -286,18 +287,2035 @@
     }
    ],
    "series_key": "automation_anywhere.tau_bench_leaderboard_1.pass_hat_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-08-04",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "7205a827bd6efa21"
+     ],
+     "series_key": "tau2_bench.claude_fable_5.banking_knowledge_pass_1.pt",
+     "subject": "claude_fable_5",
+     "unit": "share",
+     "value": 0.3969072164948454
+    }
+   ],
+   "series_key": "tau2_bench.claude_fable_5.banking_knowledge_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-08-04",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "78ebcf8af21d77d8"
+     ],
+     "series_key": "tau2_bench.claude_fable_5.banking_knowledge_pass_4.pt",
+     "subject": "claude_fable_5",
+     "unit": "share",
+     "value": 0.28865979381443296
+    }
+   ],
+   "series_key": "tau2_bench.claude_fable_5.banking_knowledge_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-02-26",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "643442796b0dfc62"
+     ],
+     "series_key": "tau2_bench.claude_opus_4_5.airline_pass_1.pt",
+     "subject": "claude_opus_4_5",
+     "unit": "share",
+     "value": 0.84
+    }
+   ],
+   "series_key": "tau2_bench.claude_opus_4_5.airline_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-02-26",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "d471edd0b106ea0c"
+     ],
+     "series_key": "tau2_bench.claude_opus_4_5.airline_pass_4.pt",
+     "subject": "claude_opus_4_5",
+     "unit": "share",
+     "value": 0.7
+    }
+   ],
+   "series_key": "tau2_bench.claude_opus_4_5.airline_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-02-26",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "5b0ef556b8646a7b"
+     ],
+     "series_key": "tau2_bench.claude_opus_4_5.banking_knowledge_pass_1.pt",
+     "subject": "claude_opus_4_5",
+     "unit": "share",
+     "value": 0.24739999999999998
+    }
+   ],
+   "series_key": "tau2_bench.claude_opus_4_5.banking_knowledge_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-02-26",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "550289bd3a1679cc"
+     ],
+     "series_key": "tau2_bench.claude_opus_4_5.banking_knowledge_pass_4.pt",
+     "subject": "claude_opus_4_5",
+     "unit": "share",
+     "value": 0.1134
+    }
+   ],
+   "series_key": "tau2_bench.claude_opus_4_5.banking_knowledge_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-02-26",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "26064d24dc314b05"
+     ],
+     "series_key": "tau2_bench.claude_opus_4_5.retail_pass_1.pt",
+     "subject": "claude_opus_4_5",
+     "unit": "share",
+     "value": 0.7961
+    }
+   ],
+   "series_key": "tau2_bench.claude_opus_4_5.retail_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-02-26",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "29be493a7366b69f"
+     ],
+     "series_key": "tau2_bench.claude_opus_4_5.retail_pass_4.pt",
+     "subject": "claude_opus_4_5",
+     "unit": "share",
+     "value": 0.5175
+    }
+   ],
+   "series_key": "tau2_bench.claude_opus_4_5.retail_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-02-26",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "362b7397e90f215f"
+     ],
+     "series_key": "tau2_bench.claude_opus_4_5.telecom_pass_1.pt",
+     "subject": "claude_opus_4_5",
+     "unit": "share",
+     "value": 0.9231999999999999
+    }
+   ],
+   "series_key": "tau2_bench.claude_opus_4_5.telecom_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-02-26",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "83308fa097e60b0f"
+     ],
+     "series_key": "tau2_bench.claude_opus_4_5.telecom_pass_4.pt",
+     "subject": "claude_opus_4_5",
+     "unit": "share",
+     "value": 0.7807
+    }
+   ],
+   "series_key": "tau2_bench.claude_opus_4_5.telecom_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-05-05",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "e58dd94f7006b2b5"
+     ],
+     "series_key": "tau2_bench.claude_opus_4_6.banking_knowledge_pass_1.pt",
+     "subject": "claude_opus_4_6",
+     "unit": "share",
+     "value": 0.2732
+    }
+   ],
+   "series_key": "tau2_bench.claude_opus_4_6.banking_knowledge_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-05-05",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "243d34829325a0bd"
+     ],
+     "series_key": "tau2_bench.claude_opus_4_6.banking_knowledge_pass_4.pt",
+     "subject": "claude_opus_4_6",
+     "unit": "share",
+     "value": 0.1134
+    }
+   ],
+   "series_key": "tau2_bench.claude_opus_4_6.banking_knowledge_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-05-05",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "49abe02382023be5"
+     ],
+     "series_key": "tau2_bench.claude_opus_4_7.banking_knowledge_pass_1.pt",
+     "subject": "claude_opus_4_7",
+     "unit": "share",
+     "value": 0.4020618556701031
+    }
+   ],
+   "series_key": "tau2_bench.claude_opus_4_7.banking_knowledge_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-05-05",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "446c22d9cf3f1e1a"
+     ],
+     "series_key": "tau2_bench.claude_opus_4_7.banking_knowledge_pass_4.pt",
+     "subject": "claude_opus_4_7",
+     "unit": "share",
+     "value": 0.24742268041237114
+    }
+   ],
+   "series_key": "tau2_bench.claude_opus_4_7.banking_knowledge_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-08-04",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "72621e0be6d66760"
+     ],
+     "series_key": "tau2_bench.claude_opus_4_8.banking_knowledge_pass_1.pt",
+     "subject": "claude_opus_4_8",
+     "unit": "share",
+     "value": 0.3969072164948454
+    }
+   ],
+   "series_key": "tau2_bench.claude_opus_4_8.banking_knowledge_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-08-04",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "916d4834e6ce911f"
+     ],
+     "series_key": "tau2_bench.claude_opus_4_8.banking_knowledge_pass_4.pt",
+     "subject": "claude_opus_4_8",
+     "unit": "share",
+     "value": 0.2268041237113402
+    }
+   ],
+   "series_key": "tau2_bench.claude_opus_4_8.banking_knowledge_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-08-04",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "9f465b2feceb1856"
+     ],
+     "series_key": "tau2_bench.claude_opus_5.banking_knowledge_pass_1.pt",
+     "subject": "claude_opus_5",
+     "unit": "share",
+     "value": 0.48711340206185566
+    }
+   ],
+   "series_key": "tau2_bench.claude_opus_5.banking_knowledge_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-08-04",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "9a3ef6361e12e088"
+     ],
+     "series_key": "tau2_bench.claude_opus_5.banking_knowledge_pass_4.pt",
+     "subject": "claude_opus_5",
+     "unit": "share",
+     "value": 0.31958762886597936
+    }
+   ],
+   "series_key": "tau2_bench.claude_opus_5.banking_knowledge_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-02-26",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "2fb0816efb162224"
+     ],
+     "series_key": "tau2_bench.claude_sonnet_4_5.airline_pass_1.pt",
+     "subject": "claude_sonnet_4_5",
+     "unit": "share",
+     "value": 0.72
+    }
+   ],
+   "series_key": "tau2_bench.claude_sonnet_4_5.airline_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-02-26",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "33d1c9c02d0cde40"
+     ],
+     "series_key": "tau2_bench.claude_sonnet_4_5.airline_pass_4.pt",
+     "subject": "claude_sonnet_4_5",
+     "unit": "share",
+     "value": 0.48
+    }
+   ],
+   "series_key": "tau2_bench.claude_sonnet_4_5.airline_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-02-26",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "d68296666241d5f5"
+     ],
+     "series_key": "tau2_bench.claude_sonnet_4_5.banking_knowledge_pass_1.pt",
+     "subject": "claude_sonnet_4_5",
+     "unit": "share",
+     "value": 0.2526
+    }
+   ],
+   "series_key": "tau2_bench.claude_sonnet_4_5.banking_knowledge_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-02-26",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "5d6e412f5a0f2f38"
+     ],
+     "series_key": "tau2_bench.claude_sonnet_4_5.banking_knowledge_pass_4.pt",
+     "subject": "claude_sonnet_4_5",
+     "unit": "share",
+     "value": 0.10310000000000001
+    }
+   ],
+   "series_key": "tau2_bench.claude_sonnet_4_5.banking_knowledge_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-02-26",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "41a3c233dba769ba"
+     ],
+     "series_key": "tau2_bench.claude_sonnet_4_5.retail_pass_1.pt",
+     "subject": "claude_sonnet_4_5",
+     "unit": "share",
+     "value": 0.7237
+    }
+   ],
+   "series_key": "tau2_bench.claude_sonnet_4_5.retail_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-02-26",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "086ab079a51b455c"
+     ],
+     "series_key": "tau2_bench.claude_sonnet_4_5.retail_pass_4.pt",
+     "subject": "claude_sonnet_4_5",
+     "unit": "share",
+     "value": 0.3947
+    }
+   ],
+   "series_key": "tau2_bench.claude_sonnet_4_5.retail_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-02-26",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "f17d7d8d8889b062"
+     ],
+     "series_key": "tau2_bench.claude_sonnet_4_5.telecom_pass_1.pt",
+     "subject": "claude_sonnet_4_5",
+     "unit": "share",
+     "value": 0.8487
+    }
+   ],
+   "series_key": "tau2_bench.claude_sonnet_4_5.telecom_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-02-26",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "283401c1b346a66c"
+     ],
+     "series_key": "tau2_bench.claude_sonnet_4_5.telecom_pass_4.pt",
+     "subject": "claude_sonnet_4_5",
+     "unit": "share",
+     "value": 0.6404000000000001
+    }
+   ],
+   "series_key": "tau2_bench.claude_sonnet_4_5.telecom_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-25",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "1c16081d27335d2d"
+     ],
+     "series_key": "tau2_bench.distyl_buttonagent.banking_knowledge_pass_1.pt",
+     "subject": "distyl_buttonagent",
+     "unit": "share",
+     "value": 0.3119
+    }
+   ],
+   "series_key": "tau2_bench.distyl_buttonagent.banking_knowledge_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-25",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "bfa585cc78a5f937"
+     ],
+     "series_key": "tau2_bench.distyl_buttonagent.banking_knowledge_pass_4.pt",
+     "subject": "distyl_buttonagent",
+     "unit": "share",
+     "value": 0.134
+    }
+   ],
+   "series_key": "tau2_bench.distyl_buttonagent.banking_knowledge_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-05-05",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "33b4f6d067cf1286"
+     ],
+     "series_key": "tau2_bench.gemini_2_5_pro.banking_knowledge_pass_1.pt",
+     "subject": "gemini_2_5_pro",
+     "unit": "share",
+     "value": 0.1366
+    }
+   ],
+   "series_key": "tau2_bench.gemini_2_5_pro.banking_knowledge_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-05-05",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "af74c72709a107a6"
+     ],
+     "series_key": "tau2_bench.gemini_2_5_pro.banking_knowledge_pass_4.pt",
+     "subject": "gemini_2_5_pro",
+     "unit": "share",
+     "value": 0.0103
+    }
+   ],
+   "series_key": "tau2_bench.gemini_2_5_pro.banking_knowledge_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-05-05",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "bfc8f067ccfa8b3e"
+     ],
+     "series_key": "tau2_bench.gemini_3_1_pro_preview.banking_knowledge_pass_1.pt",
+     "subject": "gemini_3_1_pro_preview",
+     "unit": "share",
+     "value": 0.26030000000000003
+    }
+   ],
+   "series_key": "tau2_bench.gemini_3_1_pro_preview.banking_knowledge_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-05-05",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "63fc8e8435c20785"
+     ],
+     "series_key": "tau2_bench.gemini_3_1_pro_preview.banking_knowledge_pass_4.pt",
+     "subject": "gemini_3_1_pro_preview",
+     "unit": "share",
+     "value": 0.0928
+    }
+   ],
+   "series_key": "tau2_bench.gemini_3_1_pro_preview.banking_knowledge_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-02",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "59eaaca0f2865ed8"
+     ],
+     "series_key": "tau2_bench.gemini_3_flash.airline_pass_1.pt",
+     "subject": "gemini_3_flash",
+     "unit": "share",
+     "value": 0.825
+    }
+   ],
+   "series_key": "tau2_bench.gemini_3_flash.airline_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-02",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "6962dfc5ee9b9d88"
+     ],
+     "series_key": "tau2_bench.gemini_3_flash.airline_pass_4.pt",
+     "subject": "gemini_3_flash",
+     "unit": "share",
+     "value": 0.68
+    }
+   ],
+   "series_key": "tau2_bench.gemini_3_flash.airline_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-02",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "807ad1e7b33d15f0"
+     ],
+     "series_key": "tau2_bench.gemini_3_flash.banking_knowledge_pass_1.pt",
+     "subject": "gemini_3_flash",
+     "unit": "share",
+     "value": 0.2732
+    }
+   ],
+   "series_key": "tau2_bench.gemini_3_flash.banking_knowledge_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-02",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "c3990eeb0592276b"
+     ],
+     "series_key": "tau2_bench.gemini_3_flash.banking_knowledge_pass_4.pt",
+     "subject": "gemini_3_flash",
+     "unit": "share",
+     "value": 0.0722
+    }
+   ],
+   "series_key": "tau2_bench.gemini_3_flash.banking_knowledge_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-02",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "dd10482a1086c1a2"
+     ],
+     "series_key": "tau2_bench.gemini_3_flash.retail_pass_1.pt",
+     "subject": "gemini_3_flash",
+     "unit": "share",
+     "value": 0.7675
+    }
+   ],
+   "series_key": "tau2_bench.gemini_3_flash.retail_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-02",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "530f88bde5b0d604"
+     ],
+     "series_key": "tau2_bench.gemini_3_flash.retail_pass_4.pt",
+     "subject": "gemini_3_flash",
+     "unit": "share",
+     "value": 0.5175
+    }
+   ],
+   "series_key": "tau2_bench.gemini_3_flash.retail_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-02",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "954d83fc662f4cf6"
+     ],
+     "series_key": "tau2_bench.gemini_3_flash.telecom_pass_1.pt",
+     "subject": "gemini_3_flash",
+     "unit": "share",
+     "value": 0.9123
+    }
+   ],
+   "series_key": "tau2_bench.gemini_3_flash.telecom_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-02",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "6d42c298bd3fdd90"
+     ],
+     "series_key": "tau2_bench.gemini_3_flash.telecom_pass_4.pt",
+     "subject": "gemini_3_flash",
+     "unit": "share",
+     "value": 0.7018000000000001
+    }
+   ],
+   "series_key": "tau2_bench.gemini_3_flash.telecom_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-02",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "72c0d87b0eb87f88"
+     ],
+     "series_key": "tau2_bench.gemini_3_pro.airline_pass_1.pt",
+     "subject": "gemini_3_pro",
+     "unit": "share",
+     "value": 0.805
+    }
+   ],
+   "series_key": "tau2_bench.gemini_3_pro.airline_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-02",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "1d90d46cb74b5e85"
+     ],
+     "series_key": "tau2_bench.gemini_3_pro.airline_pass_4.pt",
+     "subject": "gemini_3_pro",
+     "unit": "share",
+     "value": 0.66
+    }
+   ],
+   "series_key": "tau2_bench.gemini_3_pro.airline_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-02",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "06967a061aff4691"
+     ],
+     "series_key": "tau2_bench.gemini_3_pro.banking_knowledge_pass_1.pt",
+     "subject": "gemini_3_pro",
+     "unit": "share",
+     "value": 0.1804
+    }
+   ],
+   "series_key": "tau2_bench.gemini_3_pro.banking_knowledge_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-02",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "7329107caac4a334"
+     ],
+     "series_key": "tau2_bench.gemini_3_pro.banking_knowledge_pass_4.pt",
+     "subject": "gemini_3_pro",
+     "unit": "share",
+     "value": 0.0412
+    }
+   ],
+   "series_key": "tau2_bench.gemini_3_pro.banking_knowledge_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-02",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "0984ee554f419b38"
+     ],
+     "series_key": "tau2_bench.gemini_3_pro.retail_pass_1.pt",
+     "subject": "gemini_3_pro",
+     "unit": "share",
+     "value": 0.7587999999999999
+    }
+   ],
+   "series_key": "tau2_bench.gemini_3_pro.retail_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-02",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "77d5a1e440b9b37a"
+     ],
+     "series_key": "tau2_bench.gemini_3_pro.retail_pass_4.pt",
+     "subject": "gemini_3_pro",
+     "unit": "share",
+     "value": 0.47369999999999995
+    }
+   ],
+   "series_key": "tau2_bench.gemini_3_pro.retail_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-02",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "e23d63ecf3753c7d"
+     ],
+     "series_key": "tau2_bench.gemini_3_pro.telecom_pass_1.pt",
+     "subject": "gemini_3_pro",
+     "unit": "share",
+     "value": 0.9101
+    }
+   ],
+   "series_key": "tau2_bench.gemini_3_pro.telecom_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-02",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "29be9d1b886b2629"
+     ],
+     "series_key": "tau2_bench.gemini_3_pro.telecom_pass_4.pt",
+     "subject": "gemini_3_pro",
+     "unit": "share",
+     "value": 0.7456
+    }
+   ],
+   "series_key": "tau2_bench.gemini_3_pro.telecom_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-08-04",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "425ffe870f9acea8"
+     ],
+     "series_key": "tau2_bench.glm_5_2.banking_knowledge_pass_1.pt",
+     "subject": "glm_5_2",
+     "unit": "share",
+     "value": 0.3711340206185567
+    }
+   ],
+   "series_key": "tau2_bench.glm_5_2.banking_knowledge_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-08-04",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "d34fe421814f398e"
+     ],
+     "series_key": "tau2_bench.glm_5_2.banking_knowledge_pass_4.pt",
+     "subject": "glm_5_2",
+     "unit": "share",
+     "value": 0.13402061855670103
+    }
+   ],
+   "series_key": "tau2_bench.glm_5_2.banking_knowledge_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-02",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "cf187b79a208792a"
+     ],
+     "series_key": "tau2_bench.glm_5_think.airline_pass_1.pt",
+     "subject": "glm_5_think",
+     "unit": "share",
+     "value": 0.825
+    }
+   ],
+   "series_key": "tau2_bench.glm_5_think.airline_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-02",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "c28c6746a6969eb6"
+     ],
+     "series_key": "tau2_bench.glm_5_think.airline_pass_4.pt",
+     "subject": "glm_5_think",
+     "unit": "share",
+     "value": 0.7
+    }
+   ],
+   "series_key": "tau2_bench.glm_5_think.airline_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-02",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "54a69dc957f4b236"
+     ],
+     "series_key": "tau2_bench.glm_5_think.banking_knowledge_pass_1.pt",
+     "subject": "glm_5_think",
+     "unit": "share",
+     "value": 0.09789999999999999
+    }
+   ],
+   "series_key": "tau2_bench.glm_5_think.banking_knowledge_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-02",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "c1e24b16ff1d90e2"
+     ],
+     "series_key": "tau2_bench.glm_5_think.banking_knowledge_pass_4.pt",
+     "subject": "glm_5_think",
+     "unit": "share",
+     "value": 0.030899999999999997
+    }
+   ],
+   "series_key": "tau2_bench.glm_5_think.banking_knowledge_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-02",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "517f56569be57e83"
+     ],
+     "series_key": "tau2_bench.glm_5_think.retail_pass_1.pt",
+     "subject": "glm_5_think",
+     "unit": "share",
+     "value": 0.7368000000000001
+    }
+   ],
+   "series_key": "tau2_bench.glm_5_think.retail_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-02",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "a7053ebbc03d05c9"
+     ],
+     "series_key": "tau2_bench.glm_5_think.retail_pass_4.pt",
+     "subject": "glm_5_think",
+     "unit": "share",
+     "value": 0.4386
+    }
+   ],
+   "series_key": "tau2_bench.glm_5_think.retail_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-02",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "0db3fb61ffe001f7"
+     ],
+     "series_key": "tau2_bench.glm_5_think.telecom_pass_1.pt",
+     "subject": "glm_5_think",
+     "unit": "share",
+     "value": 0.8684000000000001
+    }
+   ],
+   "series_key": "tau2_bench.glm_5_think.telecom_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-02",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "d47ecd4fc90ab3d1"
+     ],
+     "series_key": "tau2_bench.glm_5_think.telecom_pass_4.pt",
+     "subject": "glm_5_think",
+     "unit": "share",
+     "value": 0.6228
+    }
+   ],
+   "series_key": "tau2_bench.glm_5_think.telecom_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-02-26",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "99ed10796cd6083c"
+     ],
+     "series_key": "tau2_bench.gpt_5_2.airline_pass_1.pt",
+     "subject": "gpt_5_2",
+     "unit": "share",
+     "value": 0.83
+    }
+   ],
+   "series_key": "tau2_bench.gpt_5_2.airline_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-02-26",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "91eda6c07ff49b03"
+     ],
+     "series_key": "tau2_bench.gpt_5_2.airline_pass_4.pt",
+     "subject": "gpt_5_2",
+     "unit": "share",
+     "value": 0.72
+    }
+   ],
+   "series_key": "tau2_bench.gpt_5_2.airline_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-02-26",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "e0c043f6ae89bcfa"
+     ],
+     "series_key": "tau2_bench.gpt_5_2.banking_knowledge_pass_1.pt",
+     "subject": "gpt_5_2",
+     "unit": "share",
+     "value": 0.3222
+    }
+   ],
+   "series_key": "tau2_bench.gpt_5_2.banking_knowledge_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-02-26",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "7498baa9deb2b799"
+     ],
+     "series_key": "tau2_bench.gpt_5_2.banking_knowledge_pass_4.pt",
+     "subject": "gpt_5_2",
+     "unit": "share",
+     "value": 0.1856
+    }
+   ],
+   "series_key": "tau2_bench.gpt_5_2.banking_knowledge_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-02-26",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "c37a806887083319"
+     ],
+     "series_key": "tau2_bench.gpt_5_2.retail_pass_1.pt",
+     "subject": "gpt_5_2",
+     "unit": "share",
+     "value": 0.8158
+    }
+   ],
+   "series_key": "tau2_bench.gpt_5_2.retail_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-02-26",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "44765503277fe390"
+     ],
+     "series_key": "tau2_bench.gpt_5_2.retail_pass_4.pt",
+     "subject": "gpt_5_2",
+     "unit": "share",
+     "value": 0.5175
+    }
+   ],
+   "series_key": "tau2_bench.gpt_5_2.retail_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-02-26",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "f5da2ea21197a5c5"
+     ],
+     "series_key": "tau2_bench.gpt_5_2.telecom_pass_1.pt",
+     "subject": "gpt_5_2",
+     "unit": "share",
+     "value": 0.8969
+    }
+   ],
+   "series_key": "tau2_bench.gpt_5_2.telecom_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-02-26",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "ddfae04f5ffdeb64"
+     ],
+     "series_key": "tau2_bench.gpt_5_2.telecom_pass_4.pt",
+     "subject": "gpt_5_2",
+     "unit": "share",
+     "value": 0.7193
+    }
+   ],
+   "series_key": "tau2_bench.gpt_5_2.telecom_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-02-26",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "f2f958261c33034d"
+     ],
+     "series_key": "tau2_bench.gpt_5_2_none.airline_pass_1.pt",
+     "subject": "gpt_5_2_none",
+     "unit": "share",
+     "value": 0.525
+    }
+   ],
+   "series_key": "tau2_bench.gpt_5_2_none.airline_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-02-26",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "dcb44b602dca5e8a"
+     ],
+     "series_key": "tau2_bench.gpt_5_2_none.airline_pass_4.pt",
+     "subject": "gpt_5_2_none",
+     "unit": "share",
+     "value": 0.22
+    }
+   ],
+   "series_key": "tau2_bench.gpt_5_2_none.airline_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-02-26",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "97bf913d06c94236"
+     ],
+     "series_key": "tau2_bench.gpt_5_2_none.banking_knowledge_pass_1.pt",
+     "subject": "gpt_5_2_none",
+     "unit": "share",
+     "value": 0.1263
+    }
+   ],
+   "series_key": "tau2_bench.gpt_5_2_none.banking_knowledge_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-02-26",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "db768c8ea2bc5a8a"
+     ],
+     "series_key": "tau2_bench.gpt_5_2_none.banking_knowledge_pass_4.pt",
+     "subject": "gpt_5_2_none",
+     "unit": "share",
+     "value": 0.0412
+    }
+   ],
+   "series_key": "tau2_bench.gpt_5_2_none.banking_knowledge_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-02-26",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "b78a1b98bb4154b3"
+     ],
+     "series_key": "tau2_bench.gpt_5_2_none.retail_pass_1.pt",
+     "subject": "gpt_5_2_none",
+     "unit": "share",
+     "value": 0.75
+    }
+   ],
+   "series_key": "tau2_bench.gpt_5_2_none.retail_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-02-26",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "5ac34624b2bb7881"
+     ],
+     "series_key": "tau2_bench.gpt_5_2_none.retail_pass_4.pt",
+     "subject": "gpt_5_2_none",
+     "unit": "share",
+     "value": 0.45614035087719296
+    }
+   ],
+   "series_key": "tau2_bench.gpt_5_2_none.retail_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-02-26",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "c192d549070d7a24"
+     ],
+     "series_key": "tau2_bench.gpt_5_2_none.telecom_pass_1.pt",
+     "subject": "gpt_5_2_none",
+     "unit": "share",
+     "value": 0.5723684210526315
+    }
+   ],
+   "series_key": "tau2_bench.gpt_5_2_none.telecom_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-02-26",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "c99c4c365a5c9c41"
+     ],
+     "series_key": "tau2_bench.gpt_5_2_none.telecom_pass_4.pt",
+     "subject": "gpt_5_2_none",
+     "unit": "share",
+     "value": 0.30701754385964913
+    }
+   ],
+   "series_key": "tau2_bench.gpt_5_2_none.telecom_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-25",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "3676db502e8fe6b8"
+     ],
+     "series_key": "tau2_bench.gpt_5_4.banking_knowledge_pass_1.pt",
+     "subject": "gpt_5_4",
+     "unit": "share",
+     "value": 0.3943
+    }
+   ],
+   "series_key": "tau2_bench.gpt_5_4.banking_knowledge_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-25",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "fb13d2789344199b"
+     ],
+     "series_key": "tau2_bench.gpt_5_4.banking_knowledge_pass_4.pt",
+     "subject": "gpt_5_4",
+     "unit": "share",
+     "value": 0.2165
+    }
+   ],
+   "series_key": "tau2_bench.gpt_5_4.banking_knowledge_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-05-05",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "ae04bbfe21277dee"
+     ],
+     "series_key": "tau2_bench.gpt_5_5.banking_knowledge_pass_1.pt",
+     "subject": "gpt_5_5",
+     "unit": "share",
+     "value": 0.44587628865979384
+    }
+   ],
+   "series_key": "tau2_bench.gpt_5_5.banking_knowledge_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-05-05",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "fb7d43802c798333"
+     ],
+     "series_key": "tau2_bench.gpt_5_5.banking_knowledge_pass_4.pt",
+     "subject": "gpt_5_5",
+     "unit": "share",
+     "value": 0.29896907216494845
+    }
+   ],
+   "series_key": "tau2_bench.gpt_5_5.banking_knowledge_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-08-04",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "4ce994f4e4b124bd"
+     ],
+     "series_key": "tau2_bench.gpt_5_6_sol.banking_knowledge_pass_1.pt",
+     "subject": "gpt_5_6_sol",
+     "unit": "share",
+     "value": 0.46907216494845355
+    }
+   ],
+   "series_key": "tau2_bench.gpt_5_6_sol.banking_knowledge_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-08-04",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "b5a25443787d2860"
+     ],
+     "series_key": "tau2_bench.gpt_5_6_sol.banking_knowledge_pass_4.pt",
+     "subject": "gpt_5_6_sol",
+     "unit": "share",
+     "value": 0.27835051546391754
+    }
+   ],
+   "series_key": "tau2_bench.gpt_5_6_sol.banking_knowledge_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-05-05",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "cb573af73632130a"
+     ],
+     "series_key": "tau2_bench.grok_4_1_fast.banking_knowledge_pass_1.pt",
+     "subject": "grok_4_1_fast",
+     "unit": "share",
+     "value": 0.13140000000000002
+    }
+   ],
+   "series_key": "tau2_bench.grok_4_1_fast.banking_knowledge_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-05-05",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "505487776d4269fd"
+     ],
+     "series_key": "tau2_bench.grok_4_1_fast.banking_knowledge_pass_4.pt",
+     "subject": "grok_4_1_fast",
+     "unit": "share",
+     "value": 0.051500000000000004
+    }
+   ],
+   "series_key": "tau2_bench.grok_4_1_fast.banking_knowledge_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-05-05",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "8c580d75af2d7c64"
+     ],
+     "series_key": "tau2_bench.grok_4_2.banking_knowledge_pass_1.pt",
+     "subject": "grok_4_2",
+     "unit": "share",
+     "value": 0.1804
+    }
+   ],
+   "series_key": "tau2_bench.grok_4_2.banking_knowledge_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-05-05",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "0dedea67de2f6907"
+     ],
+     "series_key": "tau2_bench.grok_4_2.banking_knowledge_pass_4.pt",
+     "subject": "grok_4_2",
+     "unit": "share",
+     "value": 0.0825
+    }
+   ],
+   "series_key": "tau2_bench.grok_4_2.banking_knowledge_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-08-04",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "af794e686c0813a3"
+     ],
+     "series_key": "tau2_bench.grok_4_5.banking_knowledge_pass_1.pt",
+     "subject": "grok_4_5",
+     "unit": "share",
+     "value": 0.4793814432989691
+    }
+   ],
+   "series_key": "tau2_bench.grok_4_5.banking_knowledge_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-08-04",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "6c99ca0f653cb149"
+     ],
+     "series_key": "tau2_bench.grok_4_5.banking_knowledge_pass_4.pt",
+     "subject": "grok_4_5",
+     "unit": "share",
+     "value": 0.31958762886597936
+    }
+   ],
+   "series_key": "tau2_bench.grok_4_5.banking_knowledge_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-05-05",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "a61e2072bb634fba"
+     ],
+     "series_key": "tau2_bench.grok_4_fast.banking_knowledge_pass_1.pt",
+     "subject": "grok_4_fast",
+     "unit": "share",
+     "value": 0.1572
+    }
+   ],
+   "series_key": "tau2_bench.grok_4_fast.banking_knowledge_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-05-05",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "59680df62df26346"
+     ],
+     "series_key": "tau2_bench.grok_4_fast.banking_knowledge_pass_4.pt",
+     "subject": "grok_4_fast",
+     "unit": "share",
+     "value": 0.0412
+    }
+   ],
+   "series_key": "tau2_bench.grok_4_fast.banking_knowledge_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-08-04",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "0466d0262e00afdb"
+     ],
+     "series_key": "tau2_bench.inkling.banking_knowledge_pass_1.pt",
+     "subject": "inkling",
+     "unit": "share",
+     "value": 0.25
+    }
+   ],
+   "series_key": "tau2_bench.inkling.banking_knowledge_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-08-04",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "fe2331a3cc58b58c"
+     ],
+     "series_key": "tau2_bench.inkling.banking_knowledge_pass_4.pt",
+     "subject": "inkling",
+     "unit": "share",
+     "value": 0.1134020618556701
+    }
+   ],
+   "series_key": "tau2_bench.inkling.banking_knowledge_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-08-04",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "9fa73596375bd255"
+     ],
+     "series_key": "tau2_bench.kimi_k3.banking_knowledge_pass_1.pt",
+     "subject": "kimi_k3",
+     "unit": "share",
+     "value": 0.3711340206185567
+    }
+   ],
+   "series_key": "tau2_bench.kimi_k3.banking_knowledge_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-08-04",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "38e114ff6024b49c"
+     ],
+     "series_key": "tau2_bench.kimi_k3.banking_knowledge_pass_4.pt",
+     "subject": "kimi_k3",
+     "unit": "share",
+     "value": 0.17525773195876287
+    }
+   ],
+   "series_key": "tau2_bench.kimi_k3.banking_knowledge_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-08-04",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "e03059fcdd1dfd0f"
+     ],
+     "series_key": "tau2_bench.muse_spark_1_1.banking_knowledge_pass_1.pt",
+     "subject": "muse_spark_1_1",
+     "unit": "share",
+     "value": 0.40463917525773196
+    }
+   ],
+   "series_key": "tau2_bench.muse_spark_1_1.banking_knowledge_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-08-04",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "5c2dfd7a71477664"
+     ],
+     "series_key": "tau2_bench.muse_spark_1_1.banking_knowledge_pass_4.pt",
+     "subject": "muse_spark_1_1",
+     "unit": "share",
+     "value": 0.20618556701030927
+    }
+   ],
+   "series_key": "tau2_bench.muse_spark_1_1.banking_knowledge_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-02",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "fc530cfc6cc00856"
+     ],
+     "series_key": "tau2_bench.qwen3_5_397b_a17b_think.airline_pass_1.pt",
+     "subject": "qwen3_5_397b_a17b_think",
+     "unit": "share",
+     "value": 0.815
+    }
+   ],
+   "series_key": "tau2_bench.qwen3_5_397b_a17b_think.airline_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-02",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "429ad80eb125ae26"
+     ],
+     "series_key": "tau2_bench.qwen3_5_397b_a17b_think.airline_pass_4.pt",
+     "subject": "qwen3_5_397b_a17b_think",
+     "unit": "share",
+     "value": 0.68
+    }
+   ],
+   "series_key": "tau2_bench.qwen3_5_397b_a17b_think.airline_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-02",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "b881c06375eccd59"
+     ],
+     "series_key": "tau2_bench.qwen3_5_397b_a17b_think.banking_knowledge_pass_1.pt",
+     "subject": "qwen3_5_397b_a17b_think",
+     "unit": "share",
+     "value": 0.09789999999999999
+    }
+   ],
+   "series_key": "tau2_bench.qwen3_5_397b_a17b_think.banking_knowledge_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-02",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "de431cbf535eb87d"
+     ],
+     "series_key": "tau2_bench.qwen3_5_397b_a17b_think.banking_knowledge_pass_4.pt",
+     "subject": "qwen3_5_397b_a17b_think",
+     "unit": "share",
+     "value": 0.051500000000000004
+    }
+   ],
+   "series_key": "tau2_bench.qwen3_5_397b_a17b_think.banking_knowledge_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-02",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "f1b9fbedf441cd66"
+     ],
+     "series_key": "tau2_bench.qwen3_5_397b_a17b_think.retail_pass_1.pt",
+     "subject": "qwen3_5_397b_a17b_think",
+     "unit": "share",
+     "value": 0.8443
+    }
+   ],
+   "series_key": "tau2_bench.qwen3_5_397b_a17b_think.retail_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-02",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "4550e4b8dc0926df"
+     ],
+     "series_key": "tau2_bench.qwen3_5_397b_a17b_think.retail_pass_4.pt",
+     "subject": "qwen3_5_397b_a17b_think",
+     "unit": "share",
+     "value": 0.5965
+    }
+   ],
+   "series_key": "tau2_bench.qwen3_5_397b_a17b_think.retail_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-02",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "2e6ad14df16744d7"
+     ],
+     "series_key": "tau2_bench.qwen3_5_397b_a17b_think.telecom_pass_1.pt",
+     "subject": "qwen3_5_397b_a17b_think",
+     "unit": "share",
+     "value": 0.9781
+    }
+   ],
+   "series_key": "tau2_bench.qwen3_5_397b_a17b_think.telecom_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-03-02",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "0b8f53deeeeb09e6"
+     ],
+     "series_key": "tau2_bench.qwen3_5_397b_a17b_think.telecom_pass_4.pt",
+     "subject": "qwen3_5_397b_a17b_think",
+     "unit": "share",
+     "value": 0.9211
+    }
+   ],
+   "series_key": "tau2_bench.qwen3_5_397b_a17b_think.telecom_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-08-04",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "ee63ac912fd8d550"
+     ],
+     "series_key": "tau2_bench.qwen3_8_max.banking_knowledge_pass_1.pt",
+     "subject": "qwen3_8_max",
+     "unit": "share",
+     "value": 0.5515463917525774
+    }
+   ],
+   "series_key": "tau2_bench.qwen3_8_max.banking_knowledge_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-08-04",
+     "disputed": false,
+     "grade": "A",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "fa2fa63d3e2091ba"
+     ],
+     "series_key": "tau2_bench.qwen3_8_max.banking_knowledge_pass_4.pt",
+     "subject": "qwen3_8_max",
+     "unit": "share",
+     "value": 0.35051546391752575
+    }
+   ],
+   "series_key": "tau2_bench.qwen3_8_max.banking_knowledge_pass_4.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-04-30",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "7a489aae2fa9211d"
+     ],
+     "series_key": "tau2_bench.raft_30b_a3b.retail_pass_1.pt",
+     "subject": "raft_30b_a3b",
+     "unit": "share",
+     "value": 0.8245614035087719
+    }
+   ],
+   "series_key": "tau2_bench.raft_30b_a3b.retail_pass_1.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2026-04-30",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "4d96a329568c9745"
+     ],
+     "series_key": "tau2_bench.raft_30b_a3b.retail_pass_4.pt",
+     "subject": "raft_30b_a3b",
+     "unit": "share",
+     "value": 0.6140350877192983
+    }
+   ],
+   "series_key": "tau2_bench.raft_30b_a3b.retail_pass_4.pt"
   }
  ],
  "series_keys": [
   "automation_anywhere.tau_bench_leaderboard_1.pass_hat_4.pt",
   "automation_anywhere.tau_bench_leaderboard_1.pass_hat_1.pt",
   "arxiv.tau_bench_retail_gpt4o.pass_hat_1.pt",
-  "arxiv.tau_bench_retail_gpt4o.pass_hat_8.pt"
+  "arxiv.tau_bench_retail_gpt4o.pass_hat_8.pt",
+  "tau2_bench.*.*_pass_4.pt",
+  "tau2_bench.*.*_pass_1.pt"
  ],
  "source_cluster": null,
  "source_ids": [
   "arxiv",
-  "automation_anywhere"
+  "automation_anywhere",
+  "tau2_bench"
  ],
  "spark": null,
  "stale_as_of": null,
@@ -327,7 +2345,7 @@
  "tracker_interpretation": "Reliability still collapses with k - 70% once, 56% four times running - two years after the paper that named the problem.",
  "unit": "share",
  "unpublished_reason": null,
- "updated_at": "2026-09-10",
+ "updated_at": "2026-09-25",
  "valve_measured": "invention_to_product",
  "why_it_matters": "The 70% problem in one number - solving a task once is not solving it reliably. Deployment needs pass^k, not pass^1, and the gap between them is where the normal-technology speed limit lives."
 }

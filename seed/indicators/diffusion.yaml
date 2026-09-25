@@ -1017,12 +1017,12 @@ indicators:
     updated_at: 2026-09-10
   - id: pass_hat_k_tau_bench
     name: Agent reliability across repeated runs (tau-bench pass^k)
-    definition: Share of tau-bench tasks an agent passes on every one of k attempts. The 2024 paper's gpt-4o figures (pass^1 61%, pass^8 under 25%) set the baseline; the 2026 point is the leaderboard leader's pass^1 and pass^4 as tabulated by Automation Anywhere.
+    definition: Share of tau-bench tasks an agent passes on every one of k attempts. The 2024 paper's gpt-4o figures (pass^1 61%, pass^8 under 25%) set the baseline; the 2026 point is the leaderboard leader's pass^1 and pass^4 as tabulated by Automation Anywhere. Sierra's own tau2-bench leaderboard adds pass^1 and pass^4 per model and domain, dated by submission.
     why_it_matters: The 70% problem in one number - solving a task once is not solving it reliably. Deployment needs pass^k, not pass^1, and the gap between them is where the normal-technology speed limit lives.
     proxy_types: [benchmark]
     unit: share
     cadence_expected: quarterly
-    series_keys: ["automation_anywhere.tau_bench_leaderboard_1.pass_hat_4.pt", "automation_anywhere.tau_bench_leaderboard_1.pass_hat_1.pt", "arxiv.tau_bench_retail_gpt4o.pass_hat_1.pt", "arxiv.tau_bench_retail_gpt4o.pass_hat_8.pt"]
+    series_keys: ["automation_anywhere.tau_bench_leaderboard_1.pass_hat_4.pt", "automation_anywhere.tau_bench_leaderboard_1.pass_hat_1.pt", "arxiv.tau_bench_retail_gpt4o.pass_hat_1.pt", "arxiv.tau_bench_retail_gpt4o.pass_hat_8.pt", "tau2_bench.*.*_pass_4.pt", "tau2_bench.*.*_pass_1.pt"]
     band_input: automation_anywhere.tau_bench_leaderboard_1.pass_hat_4.pt
     bucket_id: products
     valve_measured: invention_to_product
@@ -1030,14 +1030,14 @@ indicators:
     fast_band: {lo: 0.9}
     band_rationale: "Normal = under 70% of tasks pass all four runs, so the best agent still fails one attempt in three; fast = 90% or more at k of four or higher, the reliability a workflow can be built on. Between is `emerging`."
     tracker_interpretation: Reliability still collapses with k - 70% once, 56% four times running - two years after the paper that named the problem.
-    counterevidence: The 2026 point is vendor-tabulated and the model is unnamed; tau-bench domains are narrow; pass^k penalises benign variation.
+    counterevidence: The 2026 point is vendor-tabulated and the model is unnamed; tau-bench domains are narrow, and on Sierra's leaderboard the best pass^4 ranges from about a third in banking to over nine in ten in telecom, so the domain decides the reading; since March 2026 new models are run on banking only; pass^k penalises benign variation.
     layer_id: model
     leading_lagging: leading
     timing_rationale: "Leading: reliability across repeated runs is what deployment needs, and it moves in benchmarks before agents ship widely."
     confidence: 55
     related_indicators: [harvey_lab_frontier_completion, horizon_ratio_80_50]
     published: true
-    updated_at: 2026-09-10
+    updated_at: 2026-09-25
   - id: surprise_index
     name: Progress against the AI 2027 quantitative predictions
     definition: The share of the pace AI 2027 predicted that its quantitative metrics actually achieved, as graded by the AI Futures Project itself (65% for 2025, revised to about 75% in July 2026) and restated by the independent AI 2027 Tracker.

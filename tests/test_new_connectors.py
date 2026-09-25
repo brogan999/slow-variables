@@ -115,3 +115,61 @@ def test_hal_without_its_chart_data_is_a_layout_change():
 
     with pytest.raises(LayoutChanged):
         HalReliability().extract([item(b"<html>redesigned</html>", "https://hal.cs.princeton.edu/reliability/")])
+
+
+def test_tau2_bench_reads_pass_1_and_pass_4_per_domain_as_shares_keyed_by_submission():
+    from ai_tracker.ingest.connectors.tau2_bench import BASE, Tau2Bench
+
+    body = json.loads(Path("tests/fixtures/tau2_submission_min.json").read_text())
+    none = {**body, "results": {"airline": {"pass_1": 30.0, "pass_4": 22.0}}}  # the same model, run without reasoning
+    vendor = {**none, "submitting_organization": "Distyl"}
+    c = Tau2Bench.__new__(Tau2Bench)
+    c.scrubbed, c.errors = [], []
+    rows = Tau2Bench.extract(
+        c,
+        [
+            item(b"{}"),  # the manifest
+            item(json.dumps(body).encode(), f"{BASE}/claude-opus-4-5_sierra_2026-02-26/submission.json"),
+            item(json.dumps(none).encode(), f"{BASE}/claude-opus-4-5-none_sierra_2026-02-26/submission.json"),
+            item(json.dumps(vendor).encode(), f"{BASE}/claude-opus-4-5-none_distyl_2026-02-26/submission.json"),
+        ],
+    )
+    keys = {r.series_key: r for r in rows}
+    assert keys["tau2_bench.claude_opus_4_5.telecom_pass_4.pt"].value_numeric == 0.7807
+    assert keys["tau2_bench.claude_opus_4_5.airline_pass_4.pt"].value_numeric == 0.7  # not hidden by the no-reasoning run
+    assert keys["tau2_bench.claude_opus_4_5_none.airline_pass_4.pt"].value_numeric == 0.22
+    assert keys["tau2_bench.claude_opus_4_5.airline_pass_1.pt"].as_of_date == date(2026, 2, 26)
+    assert int(keys["tau2_bench.claude_opus_4_5.retail_pass_4.pt"].tier) == 1
+    assert len(rows) == 10 and c.errors == [  # the vendor's repeat of an existing key is refused, not silently kept
+        "two submissions share tau2_bench.claude_opus_4_5_none.airline_pass_1.pt on 2026-02-26",
+        "two submissions share tau2_bench.claude_opus_4_5_none.airline_pass_4.pt on 2026-02-26",
+    ]
+
+
+def test_tau2_bench_keeps_the_submissions_it_could_fetch(monkeypatch):
+    from ai_tracker.ingest.connectors.tau2_bench import MANIFEST, Tau2Bench
+
+    def fetch_one(self, url, day, refetch=False):
+        if url == MANIFEST:
+            return item(json.dumps({"submissions": ["a_sierra_2026-01-01", "b_sierra_2026-01-01"]}).encode(), url)
+        if "/a_" in url:
+            raise RuntimeError("404")
+        return item(b"{}", url)
+
+    monkeypatch.setattr(Tau2Bench, "fetch_one", fetch_one)
+    c = Tau2Bench()
+    got = c.fetch(date(2026, 9, 10))
+    assert [i.url.rsplit("/", 2)[-2] for i in got[1:]] == ["b_sierra_2026-01-01"] and "404" in c.errors[0]
+
+
+def test_getdeploying_keeps_only_closed_weeks_of_the_on_demand_median():
+    from ai_tracker.ingest.connectors.gpu_rents import GpuRents
+
+    body = Path("tests/fixtures/getdeploying_h100_min.csv").read_bytes()
+    body += b"nvidia-h100,2026-09-07,ON_DEMAND,,1.3,12.29,3.2,3.35,41,140\n"  # its week ends after the fetch on 10 Sep
+    c = GpuRents.__new__(GpuRents)
+    c.scrubbed, c.errors = [], []
+    rows = GpuRents.extract(c, [item(body)])
+    assert [(r.series_key, str(r.as_of_date), r.value_numeric) for r in rows] == [
+        ("getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w", "2025-09-22", 2.9533)
+    ]

@@ -799,3 +799,14 @@ def test_frontier_index_keeps_one_row_per_model():
     ]
     out = [(str(d), v, ids) for d, v, ids in _run_retrieved("aa_frontier_intelligence_index", rows)]
     assert out == [("2026-09-01", 60.0, ["y"]), ("2026-09-22", 70.0, ["x2"])]
+def test_gpu_rent_change_is_read_against_the_same_week_a_year_before():
+    k = "getdeploying.{}.on_demand_median_usd_per_gpu_hour.w"
+    rows = [
+        ("a0", k.format("h100"), "h100", "2025-09-22", 3.0, ""),
+        ("a1", k.format("h100"), "h100", "2026-09-21", 3.3, ""),
+        ("b1", k.format("b200"), "b200", "2026-09-21", 6.0, ""),  # no week a year before: no reading
+        ("c0", k.format("h200"), "h200", "2025-09-20", 4.0, ""),  # the dates moved by two days: still the same week
+        ("c1", k.format("h200"), "h200", "2026-09-21", 5.0, ""),
+    ]
+    out = [(str(d), g, round(v, 6), ids) for d, g, v, ids in run("gpu_rent_yoy", rows)]
+    assert sorted(out) == [("2026-09-21", "h100", 0.1, ["a1", "a0"]), ("2026-09-21", "h200", 0.25, ["c1", "c0"])]

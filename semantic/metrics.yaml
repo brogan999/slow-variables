@@ -1225,6 +1225,21 @@ metrics:
       sh AS (SELECT *, v / sum(v) OVER (PARTITION BY as_of_date) AS s FROM l),
       d AS (SELECT as_of_date, sum(s * s) AS value, flatten(list(ids)) AS obs_ids FROM sh GROUP BY 1 HAVING sum(n) >= 5)
       SELECT * FROM d QUALIFY as_of_date = max(as_of_date) OVER (PARTITION BY date_trunc('week', as_of_date))
+  gpu_rent_yoy:
+    description: Change in the median on-demand rental price per GPU-hour over fifty-two weeks, per GPU model, across the cloud providers GetDeploying tracks.
+    rationale: Tests whether rented computing crashes the way bandwidth did in 2001; a fall of most of its value within a year would be the glut.
+    grain: [as_of_date, gpu]
+    unit: share
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["getdeploying.*.on_demand_median_usd_per_gpu_hour.w"]
+    caveats: List prices, not what contracted buyers pay; the panel of providers changes week to week; a newer GPU's arrival lowers the older one's rent without any glut.
+    sql: |
+      SELECT a.as_of_date, a.subject AS gpu, a.value_numeric / b.value_numeric - 1 AS value, [a.id, b.id] AS obs_ids
+      FROM observations a JOIN observations b ON a.subject = b.subject AND b.as_of_date BETWEEN a.as_of_date - 367 AND a.as_of_date - 361
+      WHERE a.series_key LIKE 'getdeploying.%.on_demand_median_usd_per_gpu_hour.w'
+        AND b.series_key LIKE 'getdeploying.%.on_demand_median_usd_per_gpu_hour.w' AND b.value_numeric > 0
+      QUALIFY row_number() OVER (PARTITION BY a.id ORDER BY abs(b.as_of_date - (a.as_of_date - 364)), b.as_of_date) = 1
   aa_frontier_intelligence_index:
     description: Highest Artificial Analysis Intelligence Index among models released on or before each date on which a new record was set (index rows are dated by model release).
     rationale: An independent, frequently refreshed capability axis to set beside METR's horizon.

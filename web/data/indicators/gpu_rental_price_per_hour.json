@@ -2,80 +2,3416 @@
  "answers": [
   "Who keeps it: Compute & physical / Hyperscalers"
  ],
- "band_input": null,
+ "band_input": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
  "band_rationale": null,
- "band_value": null,
+ "band_value": {
+  "as_of": "2026-09-14",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "2f84ee2a1f33cc99"
+  ],
+  "unit": "USD",
+  "value": 3.15
+ },
  "bucket_id": null,
- "cadence_expected": "quarterly",
- "chart": null,
+ "cadence_expected": "weekly",
+ "chart": {
+  "bands": [],
+  "change": {
+   "dead_band": "\u00b1$0.25",
+   "label": "+$0.16",
+   "steps": "4 of 8 steps rose"
+  },
+  "dead": {
+   "height": 50.0,
+   "width": 14.78,
+   "x": 82.32,
+   "y": 16.0
+  },
+  "drawn": {
+   "metric": null,
+   "others": 2,
+   "series": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "total": 3
+  },
+  "line": true,
+  "n_drawn": 52,
+  "needs": 9,
+  "partial": false,
+  "stamps": [
+   "measured"
+  ],
+  "x": {
+   "ticks": [
+    {
+     "label": "Oct 2025",
+     "minor": false,
+     "x": 5.28
+    },
+    {
+     "label": "2026",
+     "minor": false,
+     "x": 29.55
+    },
+    {
+     "label": "Apr",
+     "minor": false,
+     "x": 53.3
+    },
+    {
+     "label": "Jul",
+     "minor": false,
+     "x": 77.31
+    }
+   ]
+  },
+  "y": {
+   "chars": 4,
+   "log": false,
+   "ticks": [
+    {
+     "label": "$2.4",
+     "y": 100.0
+    },
+    {
+     "label": "$2.6",
+     "y": 80.0
+    },
+    {
+     "label": "$2.8",
+     "y": 60.0
+    },
+    {
+     "label": "$3.0",
+     "y": 40.0
+    },
+    {
+     "label": "$3.2",
+     "y": 20.0
+    },
+    {
+     "label": "$3.4",
+     "y": 0.0
+    }
+   ],
+   "unit": null
+  }
+ },
  "chart_sources": {
   "metric": null,
-  "sources": []
+  "sources": [
+   {
+    "attribution": "GetDeploying, GPU rental price history (CC BY 4.0)",
+    "id": "getdeploying",
+    "license": "CC BY 4.0",
+    "name": "GetDeploying GPU rental price history (weekly median on-demand price per GPU-hour)",
+    "org": "GetDeploying"
+   }
+  ]
  },
- "confidence": null,
+ "confidence": 35,
  "confidence_basis": {
-  "best_tier": null,
-  "grade": null,
-  "n_observations": 0,
-  "sources": [],
+  "best_tier": 3,
+  "grade": "B",
+  "n_observations": 156,
+  "sources": [
+   "GetDeploying GPU rental price history (weekly median on-demand price per GPU-hour)"
+  ],
   "stale_as_of": null
  },
- "counterevidence": "Spot and contracted prices diverge; list prices are not transaction prices.",
+ "counterevidence": "List prices, not what contracted buyers pay; spot and reserved prices diverge from on-demand; one aggregator, and its panel of providers changes week to week; an older chip's rent falls as newer chips arrive, with no glut.",
  "crosswalk": [],
- "definition": "Market rental price for H100-class GPUs per hour (SemiAnalysis index).",
+ "definition": "Weekly median on-demand rental price per H100 GPU-hour across the cloud providers GetDeploying tracks; H200 and B200 alongside.",
  "derived": [],
  "direction": null,
- "direction_readings": 5,
+ "direction_readings": 9,
  "direction_rule": {
-  "dead_band": 0.05,
+  "dead_band": 0.25,
   "higher_is": "concentrating",
-  "periods": 4,
-  "rationale": "Placeholder until the series exists; bands are set with the first observation."
+  "periods": 8,
+  "rationale": "Eight weekly readings, about two months. A move of a quarter an hour or less is noise in a median across some forty providers whose panel changes week to week (a third of four-week moves in the first year exceeded fifteen cents); rising rents mean the owners of GPUs keep more of the value."
  },
  "evidence": [],
  "falsifying_band": null,
  "fast_band": null,
  "fits": [],
  "flow_status": null,
- "grade": null,
+ "grade": "B",
  "id": "gpu_rental_price_per_hour",
- "latest": null,
+ "latest": {
+  "as_of": "2026-09-14",
+  "disputed": false,
+  "grade": "B",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "2f84ee2a1f33cc99"
+  ],
+  "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+  "subject": "nvidia_h100",
+  "unit": "USD",
+  "value": 3.15
+ },
  "layer_id": "compute_physical",
  "leading_lagging": "leading",
  "metric": null,
  "metric_dims": {},
- "n_observations": 0,
+ "n_observations": 156,
  "name": "GPU rental price per hour",
  "normal_band": null,
  "override_note": null,
  "pending": null,
- "points": [],
+ "points": [
+  {
+   "as_of": "2025-09-22",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#19f553d19637cdec",
+   "low": null,
+   "obs_ids": [
+    "19f553d19637cdec"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.9533,
+   "x": 2.9,
+   "y": 44.67
+  },
+  {
+   "as_of": "2025-09-29",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#1b56fd24e979464f",
+   "low": null,
+   "obs_ids": [
+    "1b56fd24e979464f"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.9533,
+   "x": 4.75,
+   "y": 44.67
+  },
+  {
+   "as_of": "2025-10-06",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#542cd91e97b20444",
+   "low": null,
+   "obs_ids": [
+    "542cd91e97b20444"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.98,
+   "x": 6.6,
+   "y": 42.0
+  },
+  {
+   "as_of": "2025-10-13",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#95fc572f928ac5fd",
+   "low": null,
+   "obs_ids": [
+    "95fc572f928ac5fd"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.98,
+   "x": 8.44,
+   "y": 42.0
+  },
+  {
+   "as_of": "2025-10-20",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#f34e3a171e411837",
+   "low": null,
+   "obs_ids": [
+    "f34e3a171e411837"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.98,
+   "x": 10.29,
+   "y": 42.0
+  },
+  {
+   "as_of": "2025-10-27",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#ab640c06ed6b07fc",
+   "low": null,
+   "obs_ids": [
+    "ab640c06ed6b07fc"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.98,
+   "x": 12.14,
+   "y": 42.0
+  },
+  {
+   "as_of": "2025-11-03",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#ab311007a1589ab9",
+   "low": null,
+   "obs_ids": [
+    "ab311007a1589ab9"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.98,
+   "x": 13.98,
+   "y": 42.0
+  },
+  {
+   "as_of": "2025-11-10",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#174833068e4ebb76",
+   "low": null,
+   "obs_ids": [
+    "174833068e4ebb76"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.9533,
+   "x": 15.83,
+   "y": 44.67
+  },
+  {
+   "as_of": "2025-11-17",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#7a404da4022fde22",
+   "low": null,
+   "obs_ids": [
+    "7a404da4022fde22"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.95,
+   "x": 17.68,
+   "y": 45.0
+  },
+  {
+   "as_of": "2025-11-24",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#1fccbc7ec9085cd6",
+   "low": null,
+   "obs_ids": [
+    "1fccbc7ec9085cd6"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.89,
+   "x": 19.53,
+   "y": 51.0
+  },
+  {
+   "as_of": "2025-12-01",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#af7f2528c4156dea",
+   "low": null,
+   "obs_ids": [
+    "af7f2528c4156dea"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.89,
+   "x": 21.37,
+   "y": 51.0
+  },
+  {
+   "as_of": "2025-12-08",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#0002fcbeccf409a5",
+   "low": null,
+   "obs_ids": [
+    "0002fcbeccf409a5"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.89,
+   "x": 23.22,
+   "y": 51.0
+  },
+  {
+   "as_of": "2025-12-15",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#3ac9b5d13d5d66a0",
+   "low": null,
+   "obs_ids": [
+    "3ac9b5d13d5d66a0"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.81,
+   "x": 25.07,
+   "y": 59.0
+  },
+  {
+   "as_of": "2025-12-22",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#833f58d5505c7ca5",
+   "low": null,
+   "obs_ids": [
+    "833f58d5505c7ca5"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.81,
+   "x": 26.91,
+   "y": 59.0
+  },
+  {
+   "as_of": "2025-12-29",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#e983c0ea771a73a5",
+   "low": null,
+   "obs_ids": [
+    "e983c0ea771a73a5"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.73,
+   "x": 28.76,
+   "y": 67.0
+  },
+  {
+   "as_of": "2026-01-05",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#f8f3dce5a146a536",
+   "low": null,
+   "obs_ids": [
+    "f8f3dce5a146a536"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.73,
+   "x": 30.61,
+   "y": 67.0
+  },
+  {
+   "as_of": "2026-01-12",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#7309ced966d685af",
+   "low": null,
+   "obs_ids": [
+    "7309ced966d685af"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.69,
+   "x": 32.45,
+   "y": 71.0
+  },
+  {
+   "as_of": "2026-01-19",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#bc1e44cf5aaca9f2",
+   "low": null,
+   "obs_ids": [
+    "bc1e44cf5aaca9f2"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.89,
+   "x": 34.3,
+   "y": 51.0
+  },
+  {
+   "as_of": "2026-01-26",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#ded50560d7f396d2",
+   "low": null,
+   "obs_ids": [
+    "ded50560d7f396d2"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.89,
+   "x": 36.15,
+   "y": 51.0
+  },
+  {
+   "as_of": "2026-02-02",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#dd9edc0b4ed8de74",
+   "low": null,
+   "obs_ids": [
+    "dd9edc0b4ed8de74"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.94,
+   "x": 37.99,
+   "y": 46.0
+  },
+  {
+   "as_of": "2026-02-09",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#7336daf80a6fa2c4",
+   "low": null,
+   "obs_ids": [
+    "7336daf80a6fa2c4"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.94,
+   "x": 39.84,
+   "y": 46.0
+  },
+  {
+   "as_of": "2026-02-16",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#f1c9c133fa046b56",
+   "low": null,
+   "obs_ids": [
+    "f1c9c133fa046b56"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.865,
+   "x": 41.69,
+   "y": 53.5
+  },
+  {
+   "as_of": "2026-02-23",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#f169d9afc7937874",
+   "low": null,
+   "obs_ids": [
+    "f169d9afc7937874"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.53,
+   "x": 43.54,
+   "y": 87.0
+  },
+  {
+   "as_of": "2026-03-02",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#59a92f57eb3c0bab",
+   "low": null,
+   "obs_ids": [
+    "59a92f57eb3c0bab"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.49,
+   "x": 45.38,
+   "y": 91.0
+  },
+  {
+   "as_of": "2026-03-09",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#7b18d5f76d1eae58",
+   "low": null,
+   "obs_ids": [
+    "7b18d5f76d1eae58"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.49,
+   "x": 47.23,
+   "y": 91.0
+  },
+  {
+   "as_of": "2026-03-16",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#8b0c115f4e4c55c0",
+   "low": null,
+   "obs_ids": [
+    "8b0c115f4e4c55c0"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.49,
+   "x": 49.08,
+   "y": 91.0
+  },
+  {
+   "as_of": "2026-03-23",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#9a90713a4e27c661",
+   "low": null,
+   "obs_ids": [
+    "9a90713a4e27c661"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.49,
+   "x": 50.92,
+   "y": 91.0
+  },
+  {
+   "as_of": "2026-03-30",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#d8bd974315f42148",
+   "low": null,
+   "obs_ids": [
+    "d8bd974315f42148"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.5,
+   "x": 52.77,
+   "y": 90.0
+  },
+  {
+   "as_of": "2026-04-06",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#02c8e31380fdbf85",
+   "low": null,
+   "obs_ids": [
+    "02c8e31380fdbf85"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.49,
+   "x": 54.62,
+   "y": 91.0
+  },
+  {
+   "as_of": "2026-04-13",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#6a70c2460f895541",
+   "low": null,
+   "obs_ids": [
+    "6a70c2460f895541"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.495,
+   "x": 56.46,
+   "y": 90.5
+  },
+  {
+   "as_of": "2026-04-20",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#b0cb11f3c28fa2b2",
+   "low": null,
+   "obs_ids": [
+    "b0cb11f3c28fa2b2"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.59,
+   "x": 58.31,
+   "y": 81.0
+  },
+  {
+   "as_of": "2026-04-27",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#7c5e9af69eb4c408",
+   "low": null,
+   "obs_ids": [
+    "7c5e9af69eb4c408"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.5,
+   "x": 60.16,
+   "y": 90.0
+  },
+  {
+   "as_of": "2026-05-04",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#9ea9c31c67942acc",
+   "low": null,
+   "obs_ids": [
+    "9ea9c31c67942acc"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.59,
+   "x": 62.01,
+   "y": 81.0
+  },
+  {
+   "as_of": "2026-05-11",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#c4e3e0b590bb8914",
+   "low": null,
+   "obs_ids": [
+    "c4e3e0b590bb8914"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.64,
+   "x": 63.85,
+   "y": 76.0
+  },
+  {
+   "as_of": "2026-05-18",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#dbcbe59439f58b99",
+   "low": null,
+   "obs_ids": [
+    "dbcbe59439f58b99"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.8578,
+   "x": 65.7,
+   "y": 54.22
+  },
+  {
+   "as_of": "2026-05-25",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#075f76a4ec4437d0",
+   "low": null,
+   "obs_ids": [
+    "075f76a4ec4437d0"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.8033,
+   "x": 67.55,
+   "y": 59.67
+  },
+  {
+   "as_of": "2026-06-01",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#cd41f3e727bb8b05",
+   "low": null,
+   "obs_ids": [
+    "cd41f3e727bb8b05"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.9375,
+   "x": 69.39,
+   "y": 46.25
+  },
+  {
+   "as_of": "2026-06-08",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#2d796fe9aecc223c",
+   "low": null,
+   "obs_ids": [
+    "2d796fe9aecc223c"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.76,
+   "x": 71.24,
+   "y": 64.0
+  },
+  {
+   "as_of": "2026-06-15",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#b547e4e717dd63a2",
+   "low": null,
+   "obs_ids": [
+    "b547e4e717dd63a2"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.8019,
+   "x": 73.09,
+   "y": 59.81
+  },
+  {
+   "as_of": "2026-06-22",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#ff8ce822dcd1c807",
+   "low": null,
+   "obs_ids": [
+    "ff8ce822dcd1c807"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.73,
+   "x": 74.93,
+   "y": 67.0
+  },
+  {
+   "as_of": "2026-06-29",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#b388750d2979af65",
+   "low": null,
+   "obs_ids": [
+    "b388750d2979af65"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.8725,
+   "x": 76.78,
+   "y": 52.75
+  },
+  {
+   "as_of": "2026-07-06",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#6d59c81551e212de",
+   "low": null,
+   "obs_ids": [
+    "6d59c81551e212de"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.99,
+   "x": 78.63,
+   "y": 41.0
+  },
+  {
+   "as_of": "2026-07-13",
+   "disputed": false,
+   "faint": true,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#b70ad77b97ecfad8",
+   "low": null,
+   "obs_ids": [
+    "b70ad77b97ecfad8"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.89,
+   "x": 80.47,
+   "y": 51.0
+  },
+  {
+   "as_of": "2026-07-20",
+   "disputed": false,
+   "faint": false,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#dda2c0fd4429285c",
+   "low": null,
+   "obs_ids": [
+    "dda2c0fd4429285c"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 2.99,
+   "x": 82.32,
+   "y": 41.0
+  },
+  {
+   "as_of": "2026-07-27",
+   "disputed": false,
+   "faint": false,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#f2f7e56724b9111d",
+   "low": null,
+   "obs_ids": [
+    "f2f7e56724b9111d"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 3.11,
+   "x": 84.17,
+   "y": 29.0
+  },
+  {
+   "as_of": "2026-08-03",
+   "disputed": false,
+   "faint": false,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#accf226add7633a4",
+   "low": null,
+   "obs_ids": [
+    "accf226add7633a4"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 3.25,
+   "x": 86.02,
+   "y": 15.0
+  },
+  {
+   "as_of": "2026-08-10",
+   "disputed": false,
+   "faint": false,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#05468a42b0238fa9",
+   "low": null,
+   "obs_ids": [
+    "05468a42b0238fa9"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 3.29,
+   "x": 87.86,
+   "y": 11.0
+  },
+  {
+   "as_of": "2026-08-17",
+   "disputed": false,
+   "faint": false,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#15a89b4d8aad5812",
+   "low": null,
+   "obs_ids": [
+    "15a89b4d8aad5812"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 3.25,
+   "x": 89.71,
+   "y": 15.0
+  },
+  {
+   "as_of": "2026-08-24",
+   "disputed": false,
+   "faint": false,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#93ccad277ec4b7c0",
+   "low": null,
+   "obs_ids": [
+    "93ccad277ec4b7c0"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 3.2,
+   "x": 91.56,
+   "y": 20.0
+  },
+  {
+   "as_of": "2026-08-31",
+   "disputed": false,
+   "faint": false,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#977ec682b17cd8ba",
+   "low": null,
+   "obs_ids": [
+    "977ec682b17cd8ba"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 3.1387,
+   "x": 93.4,
+   "y": 26.13
+  },
+  {
+   "as_of": "2026-09-07",
+   "disputed": false,
+   "faint": false,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#38dcf7cb7ed4ed4f",
+   "low": null,
+   "obs_ids": [
+    "38dcf7cb7ed4ed4f"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 3.2,
+   "x": 95.25,
+   "y": 20.0
+  },
+  {
+   "as_of": "2026-09-14",
+   "disputed": false,
+   "faint": false,
+   "grade": "B",
+   "high": null,
+   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#2f84ee2a1f33cc99",
+   "low": null,
+   "obs_ids": [
+    "2f84ee2a1f33cc99"
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+   "stamp": "measured",
+   "subject": "nvidia_h100",
+   "unit": "USD",
+   "value": 3.15,
+   "x": 97.1,
+   "y": 25.0
+  }
+ ],
  "prediction_rows": [],
- "proposed_status": "not_yet_measurable",
+ "proposed_status": null,
  "proxy_types": [
   "price"
  ],
- "published": false,
+ "published": true,
  "related_bottlenecks": [],
- "related_indicators": [],
+ "related_indicators": [
+  "capex_to_revenue_stack",
+  "neocloud_debt_terms"
+ ],
  "related_metrics": [],
  "related_predictions": [],
- "series": [],
- "series_keys": [],
+ "series": [
+  {
+   "points": [
+    {
+     "as_of": "2025-09-22",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "2ff28417c2bc082d"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 5.39
+    },
+    {
+     "as_of": "2025-09-29",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "cb093d642dee15b3"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 5.39
+    },
+    {
+     "as_of": "2025-10-06",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "c7f05c0f18af501f"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 5.39
+    },
+    {
+     "as_of": "2025-10-13",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "bf56e26d885c1352"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 5.39
+    },
+    {
+     "as_of": "2025-10-20",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "df578eb14e3703b7"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 5.39
+    },
+    {
+     "as_of": "2025-10-27",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "98a99961caa8dc8c"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 5.39
+    },
+    {
+     "as_of": "2025-11-03",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "7c4b6b98f88eb391"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 5.39
+    },
+    {
+     "as_of": "2025-11-10",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "8f8d4371a09f1877"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 5.39
+    },
+    {
+     "as_of": "2025-11-17",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "6e72267beb05654f"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 5.39
+    },
+    {
+     "as_of": "2025-11-24",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "07fac75e6e65b547"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 5.0206
+    },
+    {
+     "as_of": "2025-12-01",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "2cd52e686e623201"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 5.0206
+    },
+    {
+     "as_of": "2025-12-08",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "073f54d8870beac6"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 4.97
+    },
+    {
+     "as_of": "2025-12-15",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "f056ad3da69b6a8c"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 4.99
+    },
+    {
+     "as_of": "2025-12-22",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "b909c34cfbb18e6a"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 4.99
+    },
+    {
+     "as_of": "2025-12-29",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "e7d09650f4e93b15"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 5.09
+    },
+    {
+     "as_of": "2026-01-05",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "e2b9931b12abd4de"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 5.09
+    },
+    {
+     "as_of": "2026-01-12",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "6e78ea8a451b1a10"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 5.14
+    },
+    {
+     "as_of": "2026-01-19",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "fef36eb32df1245f"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 5.2275
+    },
+    {
+     "as_of": "2026-01-26",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "ab81987dac5546bc"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 5.19
+    },
+    {
+     "as_of": "2026-02-02",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "828f3ec73eca78e8"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 5.19
+    },
+    {
+     "as_of": "2026-02-09",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "d67893eeb5dfa290"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 4.99
+    },
+    {
+     "as_of": "2026-02-16",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "1812bb7349ea103e"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 4.99
+    },
+    {
+     "as_of": "2026-02-23",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "f2cff9c976b8e5fe"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 4.99
+    },
+    {
+     "as_of": "2026-03-02",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "9b558876a1a1c9ed"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 4.99
+    },
+    {
+     "as_of": "2026-03-09",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "55974f9800ccbc27"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 5.245
+    },
+    {
+     "as_of": "2026-03-16",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "f2fb156b6732636c"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 4.995
+    },
+    {
+     "as_of": "2026-03-23",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "f5192f1d0e6f24ab"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 5.5
+    },
+    {
+     "as_of": "2026-03-30",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "9c34f366073869ee"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 5.9375
+    },
+    {
+     "as_of": "2026-04-06",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "790789845cdd950a"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 4.89
+    },
+    {
+     "as_of": "2026-04-13",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "dce88c2c67a84809"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 4.89
+    },
+    {
+     "as_of": "2026-04-20",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "56114195f02ff423"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 5.2394
+    },
+    {
+     "as_of": "2026-04-27",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "aff54e3741d10be0"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 5.49
+    },
+    {
+     "as_of": "2026-05-04",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "ecf5c7cea3076988"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 5.49
+    },
+    {
+     "as_of": "2026-05-11",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "c02856e495ed13e6"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 5.49
+    },
+    {
+     "as_of": "2026-05-18",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "d43da5c70a987250"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 5.295
+    },
+    {
+     "as_of": "2026-05-25",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "7b23718f316a7924"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 5.2188
+    },
+    {
+     "as_of": "2026-06-01",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "4ee7ba48099c8a19"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 5.98
+    },
+    {
+     "as_of": "2026-06-08",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "ba18a782ce8dbd4d"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 5.89
+    },
+    {
+     "as_of": "2026-06-15",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "abf5dbadfe98175b"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 5.89
+    },
+    {
+     "as_of": "2026-06-22",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "1da5362df7098d2b"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 5.89
+    },
+    {
+     "as_of": "2026-06-29",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "cbf2f4e105e64b7d"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 5.89
+    },
+    {
+     "as_of": "2026-07-06",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "5c74d7fbbd13621a"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 5.98
+    },
+    {
+     "as_of": "2026-07-13",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "35036d1100ec8333"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 6.24
+    },
+    {
+     "as_of": "2026-07-20",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "205c8044b56e24d0"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 6.125
+    },
+    {
+     "as_of": "2026-07-27",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "24d5e26333c74424"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 5.9379
+    },
+    {
+     "as_of": "2026-08-03",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "eb43ccbdf54f793e"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 5.95
+    },
+    {
+     "as_of": "2026-08-10",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "79cee942e7204ce9"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 5.8762
+    },
+    {
+     "as_of": "2026-08-17",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "202ce5528a7defe7"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 6.49
+    },
+    {
+     "as_of": "2026-08-24",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "2e64ce649f871d47"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 6.012
+    },
+    {
+     "as_of": "2026-08-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "938a6a49489ac5e7"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 6.012
+    },
+    {
+     "as_of": "2026-09-07",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "f87583b169523a55"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 6.6263
+    },
+    {
+     "as_of": "2026-09-14",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "d7eb9fdc0fb12d99"
+     ],
+     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_b200",
+     "unit": "USD",
+     "value": 6.79
+    }
+   ],
+   "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2025-09-22",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "19f553d19637cdec"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.9533
+    },
+    {
+     "as_of": "2025-09-29",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "1b56fd24e979464f"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.9533
+    },
+    {
+     "as_of": "2025-10-06",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "542cd91e97b20444"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.98
+    },
+    {
+     "as_of": "2025-10-13",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "95fc572f928ac5fd"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.98
+    },
+    {
+     "as_of": "2025-10-20",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "f34e3a171e411837"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.98
+    },
+    {
+     "as_of": "2025-10-27",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "ab640c06ed6b07fc"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.98
+    },
+    {
+     "as_of": "2025-11-03",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "ab311007a1589ab9"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.98
+    },
+    {
+     "as_of": "2025-11-10",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "174833068e4ebb76"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.9533
+    },
+    {
+     "as_of": "2025-11-17",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "7a404da4022fde22"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.95
+    },
+    {
+     "as_of": "2025-11-24",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "1fccbc7ec9085cd6"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.89
+    },
+    {
+     "as_of": "2025-12-01",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "af7f2528c4156dea"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.89
+    },
+    {
+     "as_of": "2025-12-08",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "0002fcbeccf409a5"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.89
+    },
+    {
+     "as_of": "2025-12-15",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "3ac9b5d13d5d66a0"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.81
+    },
+    {
+     "as_of": "2025-12-22",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "833f58d5505c7ca5"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.81
+    },
+    {
+     "as_of": "2025-12-29",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "e983c0ea771a73a5"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.73
+    },
+    {
+     "as_of": "2026-01-05",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "f8f3dce5a146a536"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.73
+    },
+    {
+     "as_of": "2026-01-12",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "7309ced966d685af"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.69
+    },
+    {
+     "as_of": "2026-01-19",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "bc1e44cf5aaca9f2"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.89
+    },
+    {
+     "as_of": "2026-01-26",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "ded50560d7f396d2"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.89
+    },
+    {
+     "as_of": "2026-02-02",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "dd9edc0b4ed8de74"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.94
+    },
+    {
+     "as_of": "2026-02-09",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "7336daf80a6fa2c4"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.94
+    },
+    {
+     "as_of": "2026-02-16",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "f1c9c133fa046b56"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.865
+    },
+    {
+     "as_of": "2026-02-23",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "f169d9afc7937874"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.53
+    },
+    {
+     "as_of": "2026-03-02",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "59a92f57eb3c0bab"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.49
+    },
+    {
+     "as_of": "2026-03-09",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "7b18d5f76d1eae58"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.49
+    },
+    {
+     "as_of": "2026-03-16",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "8b0c115f4e4c55c0"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.49
+    },
+    {
+     "as_of": "2026-03-23",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "9a90713a4e27c661"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.49
+    },
+    {
+     "as_of": "2026-03-30",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "d8bd974315f42148"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.5
+    },
+    {
+     "as_of": "2026-04-06",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "02c8e31380fdbf85"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.49
+    },
+    {
+     "as_of": "2026-04-13",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "6a70c2460f895541"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.495
+    },
+    {
+     "as_of": "2026-04-20",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "b0cb11f3c28fa2b2"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.59
+    },
+    {
+     "as_of": "2026-04-27",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "7c5e9af69eb4c408"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.5
+    },
+    {
+     "as_of": "2026-05-04",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "9ea9c31c67942acc"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.59
+    },
+    {
+     "as_of": "2026-05-11",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "c4e3e0b590bb8914"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.64
+    },
+    {
+     "as_of": "2026-05-18",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "dbcbe59439f58b99"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.8578
+    },
+    {
+     "as_of": "2026-05-25",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "075f76a4ec4437d0"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.8033
+    },
+    {
+     "as_of": "2026-06-01",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "cd41f3e727bb8b05"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.9375
+    },
+    {
+     "as_of": "2026-06-08",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "2d796fe9aecc223c"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.76
+    },
+    {
+     "as_of": "2026-06-15",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "b547e4e717dd63a2"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.8019
+    },
+    {
+     "as_of": "2026-06-22",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "ff8ce822dcd1c807"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.73
+    },
+    {
+     "as_of": "2026-06-29",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "b388750d2979af65"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.8725
+    },
+    {
+     "as_of": "2026-07-06",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "6d59c81551e212de"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.99
+    },
+    {
+     "as_of": "2026-07-13",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "b70ad77b97ecfad8"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.89
+    },
+    {
+     "as_of": "2026-07-20",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "dda2c0fd4429285c"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 2.99
+    },
+    {
+     "as_of": "2026-07-27",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "f2f7e56724b9111d"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 3.11
+    },
+    {
+     "as_of": "2026-08-03",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "accf226add7633a4"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 3.25
+    },
+    {
+     "as_of": "2026-08-10",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "05468a42b0238fa9"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 3.29
+    },
+    {
+     "as_of": "2026-08-17",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "15a89b4d8aad5812"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 3.25
+    },
+    {
+     "as_of": "2026-08-24",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "93ccad277ec4b7c0"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 3.2
+    },
+    {
+     "as_of": "2026-08-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "977ec682b17cd8ba"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 3.1387
+    },
+    {
+     "as_of": "2026-09-07",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "38dcf7cb7ed4ed4f"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 3.2
+    },
+    {
+     "as_of": "2026-09-14",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "2f84ee2a1f33cc99"
+     ],
+     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h100",
+     "unit": "USD",
+     "value": 3.15
+    }
+   ],
+   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2025-09-22",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "a8cda60c343282bd"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.5
+    },
+    {
+     "as_of": "2025-09-29",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "a706772d622ddace"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.5
+    },
+    {
+     "as_of": "2025-10-06",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "e327d8f87cef82f9"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.5
+    },
+    {
+     "as_of": "2025-10-13",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "6c77b182df25a832"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.5
+    },
+    {
+     "as_of": "2025-10-20",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "c900c7b0f8da05af"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.5
+    },
+    {
+     "as_of": "2025-10-27",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "388719cd88195e39"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.5
+    },
+    {
+     "as_of": "2025-11-03",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "3937fbb7c84fbe24"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.5
+    },
+    {
+     "as_of": "2025-11-10",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "49060e155308fc6e"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.5
+    },
+    {
+     "as_of": "2025-11-17",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "3dc62f0dc48f7bd7"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.49
+    },
+    {
+     "as_of": "2025-11-24",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "3c7af570de07b15c"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.49
+    },
+    {
+     "as_of": "2025-12-01",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "e9ed7bcf2b0ee483"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.49
+    },
+    {
+     "as_of": "2025-12-08",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "21752ed1683681d1"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.49
+    },
+    {
+     "as_of": "2025-12-15",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "0ccde4db2132138c"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.49
+    },
+    {
+     "as_of": "2025-12-22",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "bda00f4898478831"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.49
+    },
+    {
+     "as_of": "2025-12-29",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "cbd1359788309189"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.49
+    },
+    {
+     "as_of": "2026-01-05",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "6709a90ced153920"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.49
+    },
+    {
+     "as_of": "2026-01-12",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "9f2bf342d0731e36"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.49
+    },
+    {
+     "as_of": "2026-01-19",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "2d48665c0275f499"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.49
+    },
+    {
+     "as_of": "2026-01-26",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "6badda5fda066e5a"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.49
+    },
+    {
+     "as_of": "2026-02-02",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "064322a046214464"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.495
+    },
+    {
+     "as_of": "2026-02-09",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "fab318d3d6d95a83"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.465
+    },
+    {
+     "as_of": "2026-02-16",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "89203fe9956c7cdc"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.465
+    },
+    {
+     "as_of": "2026-02-23",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "742efb8b51615e40"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.415
+    },
+    {
+     "as_of": "2026-03-02",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "d46bddfb5b07206f"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.245
+    },
+    {
+     "as_of": "2026-03-09",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "c7b2bdbb966c21ec"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.39
+    },
+    {
+     "as_of": "2026-03-16",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "933d655c4145d5be"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.345
+    },
+    {
+     "as_of": "2026-03-23",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "5044219ab0948c03"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.39
+    },
+    {
+     "as_of": "2026-03-30",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "22726438c961e572"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.39
+    },
+    {
+     "as_of": "2026-04-06",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "1f4b5999526d8a0b"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.39
+    },
+    {
+     "as_of": "2026-04-13",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "9ba69890f88fbb0c"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.39
+    },
+    {
+     "as_of": "2026-04-20",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "4117d87c691f63bb"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.19
+    },
+    {
+     "as_of": "2026-04-27",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "f45fe89ed57ddda1"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.39
+    },
+    {
+     "as_of": "2026-05-04",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "5dd339b197a524ad"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.39
+    },
+    {
+     "as_of": "2026-05-11",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "040ac46c2b3f1f41"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.39
+    },
+    {
+     "as_of": "2026-05-18",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "54b1929afd1eb047"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.49
+    },
+    {
+     "as_of": "2026-05-25",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "f0c2f12a372b473b"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.9476
+    },
+    {
+     "as_of": "2026-06-01",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "765f07531ab78510"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 4.0003
+    },
+    {
+     "as_of": "2026-06-08",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "62427103f9498340"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.7391
+    },
+    {
+     "as_of": "2026-06-15",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "59f874b4dc733f09"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.62
+    },
+    {
+     "as_of": "2026-06-22",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "85500bde0b5a28f0"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.5
+    },
+    {
+     "as_of": "2026-06-29",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "5aff3e6a838ce182"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.59
+    },
+    {
+     "as_of": "2026-07-06",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "27831d6c8c7e471d"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.62
+    },
+    {
+     "as_of": "2026-07-13",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "9cc5b1bf353c0648"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.78
+    },
+    {
+     "as_of": "2026-07-20",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "565505ed372a3133"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.935
+    },
+    {
+     "as_of": "2026-07-27",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "90a877568ca2cf07"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.99
+    },
+    {
+     "as_of": "2026-08-03",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "b38c292a0d943928"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 4.0
+    },
+    {
+     "as_of": "2026-08-10",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "0953d1afc77c59ee"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 4.0
+    },
+    {
+     "as_of": "2026-08-17",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "326a6d4879968be3"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 3.9629
+    },
+    {
+     "as_of": "2026-08-24",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "59e928b7b7d904e2"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 4.0
+    },
+    {
+     "as_of": "2026-08-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "0025b182aeec5a0f"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 4.1976
+    },
+    {
+     "as_of": "2026-09-07",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "c8b74036f5022916"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 4.1976
+    },
+    {
+     "as_of": "2026-09-14",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "54e8be4dd1ad8b8d"
+     ],
+     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+     "subject": "nvidia_h200",
+     "unit": "USD",
+     "value": 4.2374
+    }
+   ],
+   "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w"
+  }
+ ],
+ "series_keys": [
+  "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
+  "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
+  "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w"
+ ],
  "source_cluster": null,
- "source_ids": [],
- "spark": null,
+ "source_ids": [
+  "getdeploying"
+ ],
+ "spark": {
+  "d": "M1.0,26.0 L5.1,25.9 L9.2,23.0 L13.3,25.7 L17.3,23.0 L21.4,21.5 L25.5,15.0 L29.6,16.6 L33.7,12.6 L37.8,17.9 L41.9,16.6 L46.0,18.8 L50.0,14.5 L54.1,11.0 L58.2,14.0 L62.3,11.0 L66.4,7.4 L70.5,3.2 L74.6,2.0 L78.7,3.2 L82.7,4.7 L86.8,6.5 L90.9,4.7 L95.0,6.2",
+  "end": [
+   95.0,
+   6.2
+  ]
+ },
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,
- "status": null,
- "status_events": [],
+ "status": "emerging",
+ "status_events": [
+  {
+   "author": "claude",
+   "counterevidence_considered": "List prices, not contracted prices; reserved and spot prices sit well below on-demand, so a glut could show there first; the median fell by about a sixth into the spring before recovering.",
+   "created_at": "2026-09-25T07:33:07.945896Z",
+   "evidence_ids": [
+    "dda2c0fd4429285c",
+    "2f84ee2a1f33cc99",
+    "19f553d19637cdec"
+   ],
+   "id": "3ae3e27c1d0d0443",
+   "new_conf": 35,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "First reading, from GetDeploying's weekly median of on-demand list prices across the cloud providers it tracks, read only once a week has closed. An H100 rented for $3.15 an hour in the week of 14 Sep 2026, against $2.99 eight weeks before (inside the quarter-dollar dead band, so stable) and $2.95 in its first week on record, 22 Sep 2025. One aggregator at tier 3 caps the status at emerging.",
+   "target_id": "gpu_rental_price_per_hour",
+   "target_type": "indicator"
+  }
+ ],
  "sublayer_id": "hyperscalers_neoclouds",
  "timing_rationale": "Leading: rental prices fall as capacity outruns demand, ahead of neocloud earnings.",
- "tracker_interpretation": "Unpublished; see the reason.",
- "unit": "ratio",
- "unpublished_reason": "Not measurable from free sources: the SemiAnalysis index is paywalled; the paid stub is off.",
- "updated_at": "2026-09-11",
+ "tracker_interpretation": "The H100's median rent fell by about a sixth into the spring and has since climbed back above where it stood a year before; newer chips rent for more. No sign of the glut that follows an overbuild.",
+ "unit": "USD",
+ "unpublished_reason": null,
+ "updated_at": "2026-09-25",
  "valve_measured": null,
- "why_it_matters": "The cloud layer's price per unit of compute; falling rental prices are the neoclouds' rent eroding."
+ "why_it_matters": "The cloud layer's price per unit of compute; falling rental prices are the neoclouds' rent eroding, and a crash would be the glut that bandwidth went through in 2001."
 }

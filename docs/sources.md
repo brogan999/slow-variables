@@ -99,6 +99,7 @@
 | fred_official | FRED (official statistics) | Federal Reserve Bank of St. Louis | csv | 4 | monthly | FRED terms of use; the series are their agencies' public data | Federal Reserve Board, Bureau of Economic Analysis and Bureau of Labor Statistics series, retrieved from FRED |
 | gartner | Gartner newsroom | Gartner | html | 6 | irregular | Gartner; short quotation | Gartner |
 | geekwire | GeekWire | GeekWire | html | 5 | irregular | GeekWire; short quotation | GeekWire |
+| getdeploying | GetDeploying GPU rental price history (weekly median on-demand price per GPU-hour) | GetDeploying | csv | 3 | weekly | CC BY 4.0 | GetDeploying, GPU rental price history (CC BY 4.0) |
 | git_ai_blog | Git AI blog | Git AI | html | 4 | irregular | Git AI; short quotation | Git AI blog |
 | glean_press | Glean press releases | Glean | html | 5 | irregular | Glean; short quotation | Glean (company announcement) |
 | globenewswire | GlobeNewswire releases | GlobeNewswire (Notified) | html | 5 | irregular | GlobeNewswire (Notified); short quotation | GlobeNewswire (Notified) |
@@ -189,6 +190,7 @@
 | stlouisfed_blog | FRED Blog | Federal Reserve Bank of St. Louis | html | 6 | irregular | FRED terms of use | FRED Blog, 'Does generative AI save time at work?' (27 Aug 2026) |
 | stripe_newsroom | Stripe newsroom | Stripe | html | 4 | irregular | Stripe; short quotation | Stripe newsroom |
 | suno_blog | Suno blog | Suno | html | 4 | irregular | Suno; short quotation | Suno blog |
+| tau2_bench | Sierra tau2-bench leaderboard (pass^k per model and domain) | Sierra | api | 1 | irregular | Sierra; public leaderboard data, cited with attribution | Sierra, tau2-bench leaderboard |
 | techcrunch | TechCrunch | Yahoo Inc. | html | 7 | irregular | TechCrunch; short quotation | TechCrunch |
 | techcrunch_ai_feed | TechCrunch AI feed (watchlist) | Yahoo Inc. | rss | 5 | daily | Publisher terms; titles and links only | TechCrunch |
 | techstartups | Tech Startups | TechStartups.com | html | 5 | irregular | TechStartups; short quotation | Tech Startups |
@@ -214,6 +216,7 @@
 
 | id | name | why not ingested |
 |---|---|---|
+| accelerator_list_prices | Accelerator purchase prices since November 2025 | No free, dated, first-hand source: NVIDIA and AMD publish no list prices, and the free price pages found on 25 Sep 2026 were undated, unsourced or disallowed by robots.txt. Epoch's hardware table has priced no accelerator released since November 2025. |
 | aifunding | aifunding.me round tracker | Planned third round source for venture flows; not wired, so round coverage stays Form D plus Epoch. |
 | air_street | Air Street Capital State of AI | Annual report; single figures enter as manual rows when an indicator needs one. |
 | allianz | Allianz Research | Occasional PDFs with no series; quoted by hand when a figure is needed. |
@@ -234,6 +237,7 @@
 | eu_ai_office | EU AI Office | No numeric series the diffusion lens scores. |
 | forge_equityzen_notice | Forge, EquityZen and Notice (secondary marks) | Secondary-market marks sit behind accounts and paid tiers; the indicator that would use them stays unpublished. |
 | goldman | Goldman Sachs Top of Mind | Client research; the public issue is a claim on the prediction ledger. |
+| gpu_list_price_pages | Cloud providers' GPU price pages (Lambda, CoreWeave) and reseller listings | Undated list prices, one provider each; GetDeploying's weekly median across providers covers rents. |
 | hkex | HKEX filings (Zhipu, MiniMax) | No connector; the Chinese labs' run-rates come through Epoch. |
 | idc_synergy | IDC and Synergy Research (cloud and AI market shares) | Paid; press-release headlines only, so cloud share comes from filings instead (P1 §5.2, §6.1). |
 | jpm_cembalest | J.P. Morgan Eye on the Market (Michael Cembalest) | Commentary that cites filings the tracker ingests directly. |
@@ -248,11 +252,12 @@
 | readers_labour | Labour-market economists | Papers and posts read by hand; figures enter through the trackers and papers they publish (Lucy Wark's affiliation is to verify). |
 | sacra | Sacra (paid) | Paid; stub off. Would unlock private revenue estimates for app-layer valuation multiples. |
 | sec_13f | SEC 13F holdings | Forty-five-day lag and no indicator needs institutional marks. |
-| semianalysis | SemiAnalysis (paid) | Paid; stub off. Would unlock the GPU rental index and unit inference costs (the app model tax). |
+| semianalysis | SemiAnalysis (paid) | Paid; stub off. Would unlock unit inference costs (the app model tax); GPU rents come from GetDeploying's free index instead. |
 | sequoia_cahn | Sequoia (David Cahn, AI's $600B question) | A framework, not a series; the ratio it argues about is computed from filings (capex_to_revenue_stack). |
 | stanford_gdpb | Stanford GDP-B (consumer surplus) | Read through the Stanford Digital Economy Lab rows (consumer surplus and willingness to accept), not a separate feed. |
 | svb | SVB state of the markets | Aggregate venture commentary; the tracker counts rounds bottom-up from Form D and Epoch. |
 | the_information | The Information (paid) | Paid; stub off. Would unlock app-layer financials. |
+| toolathlon | Toolathlon leaderboard (Pass^3) | Not read yet. A second pass^k source in plain HTML; Sierra's tau2-bench covers the measure, and Toolathlon-Verified started a new series that is not comparable with older rows. |
 | tracxn | Tracxn | Login and paid tiers; no free data path. |
 | trajectory_blog | Trajectory field notes | Read for the continual-learning ladder; the Trajectory rung quotes Baseten's post about it, so no figure is taken from this page yet. |
 | tunguz | Tomasz Tunguz (blog) | Commentary rather than data; his infrastructure-to-revenue claim is on the prediction ledger. |
