@@ -12,7 +12,7 @@ export default function ArgumentPage() {
   const doc = argument();
   const cards = Object.fromEntries(index().indicators.map((c) => [c.id, c]));
   const { title, lede, folios } = parseEssay(doc.essay.full);
-  const plates = { clocks: <FourClocks clocks={doc.clocks} cards={cards} />, perez: <PerezCurve phase={doc.phase} facts={doc.facts} />, stack: <StackPlate /> };
+  const plates = { clocks: <FourClocks clocks={doc.clocks} cards={cards} />, perez: <PerezCurve phase={doc.phase} facts={doc.facts} />, stack: <StackPlate />, record: <CaseRecord rows={doc.record} /> };
   return (
     <ArticleLayout
       head={
@@ -42,3 +42,19 @@ export default function ArgumentPage() {
     </ArticleLayout>
   );
 }
+
+// The fuller record behind Folio IV, closed by default so the essay reads straight through
+function CaseRecord({ rows }: { rows: { title: string; text: string }[] }) {
+  return (
+    <details className="group panel p-4 not-prose">
+      <summary className="cursor-pointer list-none font-sans text-base font-medium"><span className="text-muted mr-2 inline-block transition-transform group-open:rotate-90">▸</span>Read the full record: who kept the money, stage by stage, and where the usual stories go too far</summary>
+      <div className="mt-4 flex flex-col gap-4">
+        {rows.map((r) => (
+          <p key={r.title} className="font-serif text-[1.05rem] leading-[1.6]"><strong className="font-sans font-semibold">{r.title}.</strong> {r.text.split(/\*([^*]+)\*/).map((t, i) => (i % 2 ? <em key={i}>{t}</em> : t))}</p>
+        ))}
+        <p className="text-sm text-ink-2">The works behind each paragraph are listed with the essay&apos;s sources below.</p>
+      </div>
+    </details>
+  );
+}
+

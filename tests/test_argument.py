@@ -31,7 +31,7 @@ def _migration_strings(spec: dict) -> list[str]:
 
 def test_essays_and_plain_sentences_type_no_number():
     spec = ar.load()
-    texts = [p.read_text() for p in ar.ESSAYS.values()]
+    texts = [p.read_text() for p in ar.ESSAYS.values()] + [r["text"] for r in ar.record()]
     texts += (
         [v["sentence"] for v in spec["slow_variables"]]
         + [e["text"] for e in spec["exits"]]
@@ -249,3 +249,9 @@ def test_a_series_fact_reads_its_row_a_year_back():
     assert ar.fact(s, {"series": "k"}, date(2026, 9, 1))["value"] == 20
     assert ar.fact(s, {"series": "k", "pick": "year_ago"}, date(2026, 9, 1))["obs_ids"] == ["a"]
     assert ar.fact(s, {"series": "k", "pick": "year_ago"}, date(2026, 3, 1)) is None
+
+
+def test_the_case_record_reaches_the_page_one_titled_paragraph_at_a_time():
+    rec = ar.record()
+    assert len(rec) >= 8 and all(r["title"] and r["text"] for r in rec)
+    assert not any("## Sources" in r["text"] or "https://" in r["text"] for r in rec)

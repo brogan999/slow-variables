@@ -21,10 +21,12 @@ ESSAYS = {
     "full": Path("docs/argument/full.md"),
     "migration": Path("docs/argument/migration.md"),
 }
+# the fuller case record behind Folio IV, shown on /argument as a fold-out and read by Ask's evidence search
+RECORD = Path("docs/interpretation/past-technology-waves.md")
 # each essay's own plates and facts: the migration essay keeps its facts apart, so the home page's date never moves
 PLATES = {
     "home": {"clocks", "perez", "stack"},
-    "full": {"clocks", "perez", "stack"},
+    "full": {"clocks", "perez", "stack", "record"},
     "migration": {"strip", "scorecard"},
 }
 STATES = ("holding", "failing", "untestable")
@@ -625,6 +627,12 @@ def tightness_problems(s: Store, today: date) -> tuple[list[str], list[str]]:
     return [], notes
 
 
+def record() -> list[dict[str, str]]:
+    """The note's "**Title.** text" paragraphs, before its source list."""
+    body = RECORD.read_text().split("## Sources")[0]
+    return [{"title": m[1], "text": m[2].strip()} for m in re.finditer(r"^\*\*(.+?)\.\*\* (.+)$", body, re.M)]
+
+
 def build(s: Store, today: date | None = None) -> dict[str, Any]:
     spec = load()
     f = facts(s, spec)
@@ -640,6 +648,7 @@ def build(s: Store, today: date | None = None) -> dict[str, Any]:
         "exits": exits(spec),
         "headlines": headlines(spec),
         "sources": spec["sources"],
+        "record": record(),
     }
 
 
