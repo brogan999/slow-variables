@@ -805,6 +805,8 @@ def test_gpu_rent_change_is_read_against_the_same_week_a_year_before():
         ("a0", k.format("h100"), "h100", "2025-09-22", 3.0, ""),
         ("a1", k.format("h100"), "h100", "2026-09-21", 3.3, ""),
         ("b1", k.format("b200"), "b200", "2026-09-21", 6.0, ""),  # no week a year before: no reading
+        ("c0", k.format("h200"), "h200", "2025-09-20", 4.0, ""),  # the dates moved by two days: still the same week
+        ("c1", k.format("h200"), "h200", "2026-09-21", 5.0, ""),
     ]
     out = [(str(d), g, round(v, 6), ids) for d, g, v, ids in run("gpu_rent_yoy", rows)]
-    assert out == [("2026-09-21", "h100", 0.1, ["a1", "a0"])]
+    assert sorted(out) == [("2026-09-21", "h100", 0.1, ["a1", "a0"]), ("2026-09-21", "h200", 0.25, ["c1", "c0"])]

@@ -1,6 +1,24 @@
 [
  {
   "author": "claude",
+  "counterevidence_considered": "List prices, not contracted prices; reserved and spot prices sit well below on-demand, so a glut could show there first; the median fell by about a sixth into the spring before recovering.",
+  "created_at": "2026-09-25T07:33:07.945896Z",
+  "evidence_ids": [
+   "dda2c0fd4429285c",
+   "2f84ee2a1f33cc99",
+   "19f553d19637cdec"
+  ],
+  "id": "3ae3e27c1d0d0443",
+  "new_conf": 35,
+  "new_status": "emerging",
+  "old_conf": null,
+  "old_status": null,
+  "reason": "First reading, from GetDeploying's weekly median of on-demand list prices across the cloud providers it tracks, read only once a week has closed. An H100 rented for $3.15 an hour in the week of 14 Sep 2026, against $2.99 eight weeks before (inside the quarter-dollar dead band, so stable) and $2.95 in its first week on record, 22 Sep 2025. One aggregator at tier 3 caps the status at emerging.",
+  "target_id": "gpu_rental_price_per_hour",
+  "target_type": "indicator"
+ },
+ {
+  "author": "claude",
   "counterevidence_considered": "Artificial Analysis's points use current list prices, not launch prices, which probably makes the halving read slower; a later price cut can turn an old model into a record after the fact; the two GPQA harnesses differ in a direction nobody has measured.",
   "created_at": "2026-09-25T06:28:58.107857Z",
   "evidence_ids": [
@@ -31,24 +49,6 @@
   "old_status": "emerging",
   "reason": "Epoch stopped updating its price chart in February 2025, so the series now continues on Artificial Analysis: each model released after Epoch's coverage ended that clears GPT-4's own GPQA Diamond score there and undercuts every model before it. On twelve points from 2023 to April 2026 the lowest price halves every 122 days (CI 89-192), just outside the fast band (110 days or less) and short of normal (230 days or more), so the status stays emerging; the interval does not reach either band. The Epoch-only fit read 68 days.",
   "target_id": "epoch_inference_price_fixed_capability",
-  "target_type": "indicator"
- },
- {
-  "author": "claude",
-  "counterevidence_considered": "List prices, not contracted prices; reserved and spot prices sit well below on-demand, so a glut could show there first.",
-  "created_at": "2026-09-25T06:26:34.048277Z",
-  "evidence_ids": [
-   "93ccad277ec4b7c0",
-   "076dd44066ae084c",
-   "19f553d19637cdec"
-  ],
-  "id": "7afb9337dea3b2b7",
-  "new_conf": 35,
-  "new_status": "emerging",
-  "old_conf": null,
-  "old_status": null,
-  "reason": "First reading, from GetDeploying's weekly median of on-demand list prices across the cloud providers it tracks. An H100 rented for $3.21 an hour in the week of 21 Sep 2026, against $3.20 four weeks before (inside the fifteen-cent dead band, so stable) and $2.95 a year before (up about 9%). One aggregator at tier 3 caps the status at emerging.",
-  "target_id": "gpu_rental_price_per_hour",
   "target_type": "indicator"
  },
  {

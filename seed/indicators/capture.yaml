@@ -687,7 +687,7 @@ indicators:
     band_input: getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w
     layer_id: compute_physical
     sublayer_id: hyperscalers_neoclouds
-    direction_rule: {periods: 4, dead_band: 0.15, higher_is: concentrating, rationale: "Four weekly readings, a month. A move of fifteen cents an hour or less is noise in a median across some forty providers whose panel changes week to week; rising rents mean the owners of GPUs keep more of the value."}
+    direction_rule: {periods: 8, dead_band: 0.25, higher_is: concentrating, rationale: "Eight weekly readings, about two months. A move of a quarter an hour or less is noise in a median across some forty providers whose panel changes week to week (a third of four-week moves in the first year exceeded fifteen cents); rising rents mean the owners of GPUs keep more of the value."}
     leading_lagging: leading
     timing_rationale: "Leading: rental prices fall as capacity outruns demand, ahead of neocloud earnings."
     tracker_interpretation: "The H100's median rent fell by about a sixth into the spring and has since climbed back above where it stood a year before; newer chips rent for more. No sign of the glut that follows an overbuild."

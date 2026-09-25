@@ -1236,9 +1236,10 @@ metrics:
     caveats: List prices, not what contracted buyers pay; the panel of providers changes week to week; a newer GPU's arrival lowers the older one's rent without any glut.
     sql: |
       SELECT a.as_of_date, a.subject AS gpu, a.value_numeric / b.value_numeric - 1 AS value, [a.id, b.id] AS obs_ids
-      FROM observations a JOIN observations b ON a.subject = b.subject AND b.as_of_date = a.as_of_date - 364
+      FROM observations a JOIN observations b ON a.subject = b.subject AND b.as_of_date BETWEEN a.as_of_date - 367 AND a.as_of_date - 361
       WHERE a.series_key LIKE 'getdeploying.%.on_demand_median_usd_per_gpu_hour.w'
         AND b.series_key LIKE 'getdeploying.%.on_demand_median_usd_per_gpu_hour.w' AND b.value_numeric > 0
+      QUALIFY row_number() OVER (PARTITION BY a.id ORDER BY abs(b.as_of_date - (a.as_of_date - 364)), b.as_of_date) = 1
   aa_frontier_intelligence_index:
     description: Highest Artificial Analysis Intelligence Index among models released on or before each date on which a new record was set (index rows are dated by model release).
     rationale: An independent, frequently refreshed capability axis to set beside METR's horizon.

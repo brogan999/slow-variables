@@ -1291,31 +1291,31 @@
      "grade": "B",
      "id": "gpu_rental_price_per_hour",
      "latest": {
-      "as_of": "2026-09-21",
+      "as_of": "2026-09-14",
       "disputed": false,
       "grade": "B",
       "high": null,
       "low": null,
       "obs_ids": [
-       "076dd44066ae084c"
+       "2f84ee2a1f33cc99"
       ],
       "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
       "subject": "nvidia_h100",
       "unit": "USD",
-      "value": 3.2125
+      "value": 3.15
      },
      "layer_id": "compute_physical",
      "leading_lagging": "leading",
-     "n_observations": 159,
+     "n_observations": 156,
      "name": "GPU rental price per hour",
      "pending": null,
      "published": true,
      "source_cluster": null,
      "spark": {
-      "d": "M1.0,26.0 L5.1,23.1 L9.2,25.8 L13.3,23.1 L17.3,21.6 L21.4,15.0 L25.5,16.7 L29.6,12.6 L33.7,18.0 L37.8,16.7 L41.9,18.9 L46.0,14.6 L50.0,11.1 L54.1,14.1 L58.2,11.1 L62.3,7.4 L66.4,3.2 L70.5,2.0 L74.6,3.2 L78.7,4.7 L82.7,6.6 L86.8,4.7 L90.9,6.2 L95.0,4.3",
+      "d": "M1.0,26.0 L5.1,25.9 L9.2,23.0 L13.3,25.7 L17.3,23.0 L21.4,21.5 L25.5,15.0 L29.6,16.6 L33.7,12.6 L37.8,17.9 L41.9,16.6 L46.0,18.8 L50.0,14.5 L54.1,11.0 L58.2,14.0 L62.3,11.0 L66.4,7.4 L70.5,3.2 L74.6,2.0 L78.7,3.2 L82.7,4.7 L86.8,6.5 L90.9,4.7 L95.0,6.2",
       "end": [
        95.0,
-       4.3
+       6.2
       ]
      },
      "stale_as_of": null,
@@ -2910,7 +2910,7 @@
      },
      "layer_id": "model",
      "leading_lagging": "leading",
-     "n_observations": 102,
+     "n_observations": 110,
      "name": "Agent reliability across repeated runs (tau-bench pass^k)",
      "pending": null,
      "published": true,
@@ -5602,6 +5602,24 @@
  "recent_status_events": [
   {
    "author": "claude",
+   "counterevidence_considered": "List prices, not contracted prices; reserved and spot prices sit well below on-demand, so a glut could show there first; the median fell by about a sixth into the spring before recovering.",
+   "created_at": "2026-09-25T07:33:07.945896Z",
+   "evidence_ids": [
+    "dda2c0fd4429285c",
+    "2f84ee2a1f33cc99",
+    "19f553d19637cdec"
+   ],
+   "id": "3ae3e27c1d0d0443",
+   "new_conf": 35,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "First reading, from GetDeploying's weekly median of on-demand list prices across the cloud providers it tracks, read only once a week has closed. An H100 rented for $3.15 an hour in the week of 14 Sep 2026, against $2.99 eight weeks before (inside the quarter-dollar dead band, so stable) and $2.95 in its first week on record, 22 Sep 2025. One aggregator at tier 3 caps the status at emerging.",
+   "target_id": "gpu_rental_price_per_hour",
+   "target_type": "indicator"
+  },
+  {
+   "author": "claude",
    "counterevidence_considered": "Artificial Analysis's points use current list prices, not launch prices, which probably makes the halving read slower; a later price cut can turn an old model into a record after the fact; the two GPQA harnesses differ in a direction nobody has measured.",
    "created_at": "2026-09-25T06:28:58.107857Z",
    "evidence_ids": [
@@ -5632,24 +5650,6 @@
    "old_status": "emerging",
    "reason": "Epoch stopped updating its price chart in February 2025, so the series now continues on Artificial Analysis: each model released after Epoch's coverage ended that clears GPT-4's own GPQA Diamond score there and undercuts every model before it. On twelve points from 2023 to April 2026 the lowest price halves every 122 days (CI 89-192), just outside the fast band (110 days or less) and short of normal (230 days or more), so the status stays emerging; the interval does not reach either band. The Epoch-only fit read 68 days.",
    "target_id": "epoch_inference_price_fixed_capability",
-   "target_type": "indicator"
-  },
-  {
-   "author": "claude",
-   "counterevidence_considered": "List prices, not contracted prices; reserved and spot prices sit well below on-demand, so a glut could show there first.",
-   "created_at": "2026-09-25T06:26:34.048277Z",
-   "evidence_ids": [
-    "93ccad277ec4b7c0",
-    "076dd44066ae084c",
-    "19f553d19637cdec"
-   ],
-   "id": "7afb9337dea3b2b7",
-   "new_conf": 35,
-   "new_status": "emerging",
-   "old_conf": null,
-   "old_status": null,
-   "reason": "First reading, from GetDeploying's weekly median of on-demand list prices across the cloud providers it tracks. An H100 rented for $3.21 an hour in the week of 21 Sep 2026, against $3.20 four weeks before (inside the fifteen-cent dead band, so stable) and $2.95 a year before (up about 9%). One aggregator at tier 3 caps the status at emerging.",
-   "target_id": "gpu_rental_price_per_hour",
    "target_type": "indicator"
   },
   {
@@ -5695,7 +5695,7 @@
   "Neocloud borrowing cost (CoreWeave facility rates): Three quarter-ends; moves under a percentage point are facility mix. Rising rates concentrate the compute layer's returns with its lenders.",
   "Enterprise multi-model usage share (Menlo): Annual waves; a move under five points is survey noise. More multi-homing disperses the model layer's pricing power.",
   "Startups' share of enterprise AI application revenue: Two annual waves, so the trend is one step; under five points is survey error. Rising startup share = value dispersing away from incumbents.",
-  "GPU rental price per hour: Four weekly readings, a month. A move of fifteen cents an hour or less is noise in a median across some forty providers whose panel changes week to week; rising rents mean the owners of GPUs keep more of the value.",
+  "GPU rental price per hour: Eight weekly readings, about two months. A move of a quarter an hour or less is noise in a median across some forty providers whose panel changes week to week (a third of four-week moves in the first year exceeded fifteen cents); rising rents mean the owners of GPUs keep more of the value.",
   "Model-layer token concentration on OpenRouter (HHI, top table): Weekly readings; moves under 0.02 in the index are table churn. A rising index means routed tokens concentrating on fewer models.",
   "Labs buying from the training-input layer (enter bell): Four quarters; a one-point move is one vendor's single disclosure. Rising = the labs buying more from the training-input layer."
  ]

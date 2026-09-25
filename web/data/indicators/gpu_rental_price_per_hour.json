@@ -5,29 +5,29 @@
  "band_input": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
  "band_rationale": null,
  "band_value": {
-  "as_of": "2026-09-21",
+  "as_of": "2026-09-14",
   "high": null,
   "low": null,
   "obs_ids": [
-   "076dd44066ae084c"
+   "2f84ee2a1f33cc99"
   ],
   "unit": "USD",
-  "value": 3.2125
+  "value": 3.15
  },
  "bucket_id": null,
  "cadence_expected": "weekly",
  "chart": {
   "bands": [],
   "change": {
-   "dead_band": "\u00b1$0.15",
-   "label": "+$0.012",
-   "steps": "2 of 4 steps rose"
+   "dead_band": "\u00b1$0.25",
+   "label": "+$0.16",
+   "steps": "4 of 8 steps rose"
   },
   "dead": {
-   "height": 30.0,
-   "width": 7.25,
-   "x": 89.9,
-   "y": 5.0
+   "height": 50.0,
+   "width": 14.78,
+   "x": 82.32,
+   "y": 16.0
   },
   "drawn": {
    "metric": null,
@@ -36,8 +36,8 @@
    "total": 3
   },
   "line": true,
-  "n_drawn": 53,
-  "needs": 5,
+  "n_drawn": 52,
+  "needs": 9,
   "partial": false,
   "stamps": [
    "measured"
@@ -47,22 +47,22 @@
     {
      "label": "Oct 2025",
      "minor": false,
-     "x": 5.18
+     "x": 5.28
     },
     {
      "label": "2026",
      "minor": false,
-     "x": 29.02
+     "x": 29.55
     },
     {
      "label": "Apr",
      "minor": false,
-     "x": 52.33
+     "x": 53.3
     },
     {
      "label": "Jul",
      "minor": false,
-     "x": 75.91
+     "x": 77.31
     }
    ]
   },
@@ -114,7 +114,7 @@
  "confidence_basis": {
   "best_tier": 3,
   "grade": "B",
-  "n_observations": 159,
+  "n_observations": 156,
   "sources": [
    "GetDeploying GPU rental price history (weekly median on-demand price per GPU-hour)"
   ],
@@ -125,12 +125,12 @@
  "definition": "Weekly median on-demand rental price per H100 GPU-hour across the cloud providers GetDeploying tracks; H200 and B200 alongside.",
  "derived": [],
  "direction": null,
- "direction_readings": 5,
+ "direction_readings": 9,
  "direction_rule": {
-  "dead_band": 0.15,
+  "dead_band": 0.25,
   "higher_is": "concentrating",
-  "periods": 4,
-  "rationale": "Four weekly readings, a month. A move of fifteen cents an hour or less is noise in a median across some forty providers whose panel changes week to week; rising rents mean the owners of GPUs keep more of the value."
+  "periods": 8,
+  "rationale": "Eight weekly readings, about two months. A move of a quarter an hour or less is noise in a median across some forty providers whose panel changes week to week (a third of four-week moves in the first year exceeded fifteen cents); rising rents mean the owners of GPUs keep more of the value."
  },
  "evidence": [],
  "falsifying_band": null,
@@ -140,24 +140,24 @@
  "grade": "B",
  "id": "gpu_rental_price_per_hour",
  "latest": {
-  "as_of": "2026-09-21",
+  "as_of": "2026-09-14",
   "disputed": false,
   "grade": "B",
   "high": null,
   "low": null,
   "obs_ids": [
-   "076dd44066ae084c"
+   "2f84ee2a1f33cc99"
   ],
   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
   "subject": "nvidia_h100",
   "unit": "USD",
-  "value": 3.2125
+  "value": 3.15
  },
  "layer_id": "compute_physical",
  "leading_lagging": "leading",
  "metric": null,
  "metric_dims": {},
- "n_observations": 159,
+ "n_observations": 156,
  "name": "GPU rental price per hour",
  "normal_band": null,
  "override_note": null,
@@ -179,7 +179,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.9533,
-   "x": 2.85,
+   "x": 2.9,
    "y": 44.67
   },
   {
@@ -198,7 +198,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.9533,
-   "x": 4.66,
+   "x": 4.75,
    "y": 44.67
   },
   {
@@ -217,7 +217,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.98,
-   "x": 6.48,
+   "x": 6.6,
    "y": 42.0
   },
   {
@@ -236,7 +236,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.98,
-   "x": 8.29,
+   "x": 8.44,
    "y": 42.0
   },
   {
@@ -255,7 +255,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.98,
-   "x": 10.1,
+   "x": 10.29,
    "y": 42.0
   },
   {
@@ -274,7 +274,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.98,
-   "x": 11.92,
+   "x": 12.14,
    "y": 42.0
   },
   {
@@ -293,7 +293,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.98,
-   "x": 13.73,
+   "x": 13.98,
    "y": 42.0
   },
   {
@@ -312,7 +312,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.9533,
-   "x": 15.54,
+   "x": 15.83,
    "y": 44.67
   },
   {
@@ -331,7 +331,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.95,
-   "x": 17.36,
+   "x": 17.68,
    "y": 45.0
   },
   {
@@ -350,7 +350,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.89,
-   "x": 19.17,
+   "x": 19.53,
    "y": 51.0
   },
   {
@@ -369,7 +369,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.89,
-   "x": 20.98,
+   "x": 21.37,
    "y": 51.0
   },
   {
@@ -388,7 +388,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.89,
-   "x": 22.8,
+   "x": 23.22,
    "y": 51.0
   },
   {
@@ -407,7 +407,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.81,
-   "x": 24.61,
+   "x": 25.07,
    "y": 59.0
   },
   {
@@ -426,7 +426,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.81,
-   "x": 26.42,
+   "x": 26.91,
    "y": 59.0
   },
   {
@@ -445,7 +445,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.73,
-   "x": 28.24,
+   "x": 28.76,
    "y": 67.0
   },
   {
@@ -464,7 +464,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.73,
-   "x": 30.05,
+   "x": 30.61,
    "y": 67.0
   },
   {
@@ -483,7 +483,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.69,
-   "x": 31.87,
+   "x": 32.45,
    "y": 71.0
   },
   {
@@ -502,7 +502,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.89,
-   "x": 33.68,
+   "x": 34.3,
    "y": 51.0
   },
   {
@@ -521,7 +521,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.89,
-   "x": 35.49,
+   "x": 36.15,
    "y": 51.0
   },
   {
@@ -540,7 +540,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.94,
-   "x": 37.31,
+   "x": 37.99,
    "y": 46.0
   },
   {
@@ -559,7 +559,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.94,
-   "x": 39.12,
+   "x": 39.84,
    "y": 46.0
   },
   {
@@ -578,7 +578,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.865,
-   "x": 40.93,
+   "x": 41.69,
    "y": 53.5
   },
   {
@@ -597,7 +597,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.53,
-   "x": 42.75,
+   "x": 43.54,
    "y": 87.0
   },
   {
@@ -616,7 +616,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.49,
-   "x": 44.56,
+   "x": 45.38,
    "y": 91.0
   },
   {
@@ -635,7 +635,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.49,
-   "x": 46.37,
+   "x": 47.23,
    "y": 91.0
   },
   {
@@ -654,7 +654,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.49,
-   "x": 48.19,
+   "x": 49.08,
    "y": 91.0
   },
   {
@@ -673,7 +673,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.49,
-   "x": 50.0,
+   "x": 50.92,
    "y": 91.0
   },
   {
@@ -692,7 +692,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.5,
-   "x": 51.81,
+   "x": 52.77,
    "y": 90.0
   },
   {
@@ -711,7 +711,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.49,
-   "x": 53.63,
+   "x": 54.62,
    "y": 91.0
   },
   {
@@ -730,7 +730,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.495,
-   "x": 55.44,
+   "x": 56.46,
    "y": 90.5
   },
   {
@@ -749,7 +749,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.59,
-   "x": 57.25,
+   "x": 58.31,
    "y": 81.0
   },
   {
@@ -768,7 +768,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.5,
-   "x": 59.07,
+   "x": 60.16,
    "y": 90.0
   },
   {
@@ -787,7 +787,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.59,
-   "x": 60.88,
+   "x": 62.01,
    "y": 81.0
   },
   {
@@ -806,7 +806,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.64,
-   "x": 62.69,
+   "x": 63.85,
    "y": 76.0
   },
   {
@@ -825,7 +825,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.8578,
-   "x": 64.51,
+   "x": 65.7,
    "y": 54.22
   },
   {
@@ -844,7 +844,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.8033,
-   "x": 66.32,
+   "x": 67.55,
    "y": 59.67
   },
   {
@@ -863,7 +863,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.9375,
-   "x": 68.13,
+   "x": 69.39,
    "y": 46.25
   },
   {
@@ -882,7 +882,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.76,
-   "x": 69.95,
+   "x": 71.24,
    "y": 64.0
   },
   {
@@ -901,7 +901,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.8019,
-   "x": 71.76,
+   "x": 73.09,
    "y": 59.81
   },
   {
@@ -920,7 +920,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.73,
-   "x": 73.58,
+   "x": 74.93,
    "y": 67.0
   },
   {
@@ -939,7 +939,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.8725,
-   "x": 75.39,
+   "x": 76.78,
    "y": 52.75
   },
   {
@@ -958,7 +958,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.99,
-   "x": 77.2,
+   "x": 78.63,
    "y": 41.0
   },
   {
@@ -977,13 +977,13 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.89,
-   "x": 79.02,
+   "x": 80.47,
    "y": 51.0
   },
   {
    "as_of": "2026-07-20",
    "disputed": false,
-   "faint": true,
+   "faint": false,
    "grade": "B",
    "high": null,
    "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#dda2c0fd4429285c",
@@ -996,13 +996,13 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 2.99,
-   "x": 80.83,
+   "x": 82.32,
    "y": 41.0
   },
   {
    "as_of": "2026-07-27",
    "disputed": false,
-   "faint": true,
+   "faint": false,
    "grade": "B",
    "high": null,
    "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#f2f7e56724b9111d",
@@ -1015,13 +1015,13 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 3.11,
-   "x": 82.64,
+   "x": 84.17,
    "y": 29.0
   },
   {
    "as_of": "2026-08-03",
    "disputed": false,
-   "faint": true,
+   "faint": false,
    "grade": "B",
    "high": null,
    "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#accf226add7633a4",
@@ -1034,13 +1034,13 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 3.25,
-   "x": 84.46,
+   "x": 86.02,
    "y": 15.0
   },
   {
    "as_of": "2026-08-10",
    "disputed": false,
-   "faint": true,
+   "faint": false,
    "grade": "B",
    "high": null,
    "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#05468a42b0238fa9",
@@ -1053,13 +1053,13 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 3.29,
-   "x": 86.27,
+   "x": 87.86,
    "y": 11.0
   },
   {
    "as_of": "2026-08-17",
    "disputed": false,
-   "faint": true,
+   "faint": false,
    "grade": "B",
    "high": null,
    "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#15a89b4d8aad5812",
@@ -1072,7 +1072,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 3.25,
-   "x": 88.08,
+   "x": 89.71,
    "y": 15.0
   },
   {
@@ -1091,7 +1091,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 3.2,
-   "x": 89.9,
+   "x": 91.56,
    "y": 20.0
   },
   {
@@ -1110,7 +1110,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 3.1387,
-   "x": 91.71,
+   "x": 93.4,
    "y": 26.13
   },
   {
@@ -1129,7 +1129,7 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 3.2,
-   "x": 93.52,
+   "x": 95.25,
    "y": 20.0
   },
   {
@@ -1148,27 +1148,8 @@
    "subject": "nvidia_h100",
    "unit": "USD",
    "value": 3.15,
-   "x": 95.34,
+   "x": 97.1,
    "y": 25.0
-  },
-  {
-   "as_of": "2026-09-21",
-   "disputed": false,
-   "faint": false,
-   "grade": "B",
-   "high": null,
-   "href": "/series/getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w#076dd44066ae084c",
-   "low": null,
-   "obs_ids": [
-    "076dd44066ae084c"
-   ],
-   "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
-   "stamp": "measured",
-   "subject": "nvidia_h100",
-   "unit": "USD",
-   "value": 3.2125,
-   "x": 97.15,
-   "y": 18.75
   }
  ],
  "prediction_rows": [],
@@ -1914,20 +1895,6 @@
      "subject": "nvidia_b200",
      "unit": "USD",
      "value": 6.79
-    },
-    {
-     "as_of": "2026-09-21",
-     "disputed": false,
-     "grade": "B",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "4020ce1f59073b4b"
-     ],
-     "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w",
-     "subject": "nvidia_b200",
-     "unit": "USD",
-     "value": 6.523
     }
    ],
    "series_key": "getdeploying.nvidia_b200.on_demand_median_usd_per_gpu_hour.w"
@@ -2661,20 +2628,6 @@
      "subject": "nvidia_h100",
      "unit": "USD",
      "value": 3.15
-    },
-    {
-     "as_of": "2026-09-21",
-     "disputed": false,
-     "grade": "B",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "076dd44066ae084c"
-     ],
-     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
-     "subject": "nvidia_h100",
-     "unit": "USD",
-     "value": 3.2125
     }
    ],
    "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w"
@@ -3408,20 +3361,6 @@
      "subject": "nvidia_h200",
      "unit": "USD",
      "value": 4.2374
-    },
-    {
-     "as_of": "2026-09-21",
-     "disputed": false,
-     "grade": "B",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "13258073e286a005"
-     ],
-     "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w",
-     "subject": "nvidia_h200",
-     "unit": "USD",
-     "value": 4.4068
     }
    ],
    "series_key": "getdeploying.nvidia_h200.on_demand_median_usd_per_gpu_hour.w"
@@ -3437,10 +3376,10 @@
   "getdeploying"
  ],
  "spark": {
-  "d": "M1.0,26.0 L5.1,23.1 L9.2,25.8 L13.3,23.1 L17.3,21.6 L21.4,15.0 L25.5,16.7 L29.6,12.6 L33.7,18.0 L37.8,16.7 L41.9,18.9 L46.0,14.6 L50.0,11.1 L54.1,14.1 L58.2,11.1 L62.3,7.4 L66.4,3.2 L70.5,2.0 L74.6,3.2 L78.7,4.7 L82.7,6.6 L86.8,4.7 L90.9,6.2 L95.0,4.3",
+  "d": "M1.0,26.0 L5.1,25.9 L9.2,23.0 L13.3,25.7 L17.3,23.0 L21.4,21.5 L25.5,15.0 L29.6,16.6 L33.7,12.6 L37.8,17.9 L41.9,16.6 L46.0,18.8 L50.0,14.5 L54.1,11.0 L58.2,14.0 L62.3,11.0 L66.4,7.4 L70.5,3.2 L74.6,2.0 L78.7,3.2 L82.7,4.7 L86.8,6.5 L90.9,4.7 L95.0,6.2",
   "end": [
    95.0,
-   4.3
+   6.2
   ]
  },
  "stale_as_of": null,
@@ -3450,19 +3389,19 @@
  "status_events": [
   {
    "author": "claude",
-   "counterevidence_considered": "List prices, not contracted prices; reserved and spot prices sit well below on-demand, so a glut could show there first.",
-   "created_at": "2026-09-25T06:26:34.048277Z",
+   "counterevidence_considered": "List prices, not contracted prices; reserved and spot prices sit well below on-demand, so a glut could show there first; the median fell by about a sixth into the spring before recovering.",
+   "created_at": "2026-09-25T07:33:07.945896Z",
    "evidence_ids": [
-    "93ccad277ec4b7c0",
-    "076dd44066ae084c",
+    "dda2c0fd4429285c",
+    "2f84ee2a1f33cc99",
     "19f553d19637cdec"
    ],
-   "id": "7afb9337dea3b2b7",
+   "id": "3ae3e27c1d0d0443",
    "new_conf": 35,
    "new_status": "emerging",
    "old_conf": null,
    "old_status": null,
-   "reason": "First reading, from GetDeploying's weekly median of on-demand list prices across the cloud providers it tracks. An H100 rented for $3.21 an hour in the week of 21 Sep 2026, against $3.20 four weeks before (inside the fifteen-cent dead band, so stable) and $2.95 a year before (up about 9%). One aggregator at tier 3 caps the status at emerging.",
+   "reason": "First reading, from GetDeploying's weekly median of on-demand list prices across the cloud providers it tracks, read only once a week has closed. An H100 rented for $3.15 an hour in the week of 14 Sep 2026, against $2.99 eight weeks before (inside the quarter-dollar dead band, so stable) and $2.95 in its first week on record, 22 Sep 2025. One aggregator at tier 3 caps the status at emerging.",
    "target_id": "gpu_rental_price_per_hour",
    "target_type": "indicator"
   }
