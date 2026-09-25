@@ -1436,10 +1436,19 @@ class Store:
             for r in self.con.execute(
                 "SELECT entity_id, series_key, value_numeric, value_text, unit, as_of_date, id FROM ("
                 "SELECT *, row_number() OVER (PARTITION BY entity_id ORDER BY as_of_date DESC, retrieved_at DESC) rn "
-                "FROM observations WHERE entity_id IS NOT NULL AND source_id <> 'openrouter') WHERE rn = 1"  # model prices are not entity facts
+                "FROM observations WHERE entity_id IS NOT NULL AND source_id <> 'openrouter' AND source_ns NOT IN ('lead', 'portfolio')) WHERE rn = 1"  # model prices and investments are not an entity's latest fact
             ).fetchall()
         }
         ents = {e.id: e for e in self.seed.entities}
+        leads: dict[str, list[dict[str, Any]]] = {}
+        for fund, company, oid in self.con.execute(  # lead.<fund>.<company>: who led the company's rounds
+            "SELECT DISTINCT ON (subject, measure) subject, measure, id FROM observations WHERE source_ns = 'lead' "
+            "ORDER BY subject, measure, as_of_date DESC"
+        ).fetchall():
+            if fund in ents:
+                leads.setdefault(company, []).append(
+                    {"id": fund, "name": ents[fund].name, "href": f"/series/lead.{fund}.{company}.pt#{oid}"}
+                )
 
         def entity(e: Entity, m: Membership) -> dict[str, Any]:
             return {
@@ -1448,6 +1457,7 @@ class Store:
                 "from_date": m.from_date.isoformat() if m.from_date else None,
                 "to_date": m.to_date.isoformat() if m.to_date else None,
                 "latest": latest.get(e.id),
+                "led_by": sorted(leads.get(e.id, []), key=lambda x: x["name"]),
             }
 
         doc = {

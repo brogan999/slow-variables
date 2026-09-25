@@ -142,7 +142,7 @@ TOOLS = [
     },
     {
         "name": "entity",
-        "description": "A company card: look up a company or organisation by id, name or alias. Returns its id, CIK, dated layer and sub-layer memberships, the series recorded for it, its venture rounds (cite each as [obs:<id>]), the published indicators for its layers with their status, and the predictions that lean on them (cite as [pred:<id>]); close matches when there is no exact hit. A company that is not found is not in the site's records: say so, and never describe it from memory.",
+        "description": "A company card: look up a company, fund or organisation by id, name or alias. Returns its id, CIK, dated layer and sub-layer memberships, the series recorded for it, its venture rounds (cite each as [obs:<id>]), the funds that led its rounds (investors) or, for a fund, the companies it led or lists (portfolio), each citable as [obs:<id>], the published indicators for its layers with their status, and the predictions that lean on them (cite as [pred:<id>]); close matches when there is no exact hit. A company that is not found is not in the site's records: say so, and never describe it from memory.",
         "input_schema": {"type": "object", "properties": {"name": {"type": "string"}}, "required": ["name"]},
     },
     {
@@ -498,6 +498,11 @@ class Tools:
             "SELECT as_of_date, v, id, source, kind FROM venture_rounds WHERE entity_id = ? ORDER BY as_of_date DESC LIMIT 12",
             [e.id],
         ).fetchall()
+        backers = self.store.con.execute(  # who led its rounds, and for a fund, what it backs (acq-style keys)
+            "SELECT source_ns, subject, measure, value_text, as_of_date, id FROM observations "
+            "WHERE source_ns IN ('lead', 'portfolio') AND (subject = ? OR measure = ?) ORDER BY as_of_date DESC",
+            [e.id, e.id],
+        ).fetchall()
         layers = {m.layer_id for m in e.memberships}
         inds = [i for i in self.store.seed.indicators if i.published and i.layer_id in layers]
         leaning = self._predictions(
@@ -520,6 +525,16 @@ class Tools:
                 for i in inds
             ],
             "predictions": [{"cite": f"pred:{i}", "line": ln, "word": w, "who": who} for i, ln, w, who in leaning],
+            "investors": [
+                {"fund": f, "role": ns, "round": t, "as_of": d.isoformat(), "cite": f"obs:{i}"}
+                for ns, f, c, t, d, i in backers
+                if c == e.id
+            ],
+            "portfolio": [
+                {"company": c, "role": ns, "round": t, "as_of": d.isoformat(), "cite": f"obs:{i}"}
+                for ns, f, c, t, d, i in backers
+                if f == e.id
+            ],
         }
 
     def _predictions(self, q: str, params: list[Any]) -> list[tuple]:
