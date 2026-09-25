@@ -1,358 +1,485 @@
 {
- "csv": "/data/census/2026-09-25.1/tasks.csv",
+ "csv": "/data/census/v3.2-2026-09-24/tasks.csv",
  "industries": [
   {
-   "agreed3": 0.0,
+   "agreed3": 7312857.745181956,
    "emp": 3810.0,
-   "freed": 23005197.864239585,
    "naics": "561400",
+   "passes": 30318055.609421544,
    "title": "Business Support Services",
    "wage_bill": 155257500.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 3693679.07659257,
    "emp": 1960.0,
-   "freed": 11619782.71216864,
    "naics": "423400",
+   "passes": 15313461.788761212,
    "title": "Professional and Commercial Equipment and Supplies Merchant Wholesalers",
    "wage_bill": 78419600.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 3413048.469724663,
    "emp": 2120.0,
-   "freed": 10736959.216523409,
    "naics": "518200",
+   "passes": 14150007.686248073,
    "title": "Computing Infrastructure Providers, Data Processing, Web Hosting, and Related Services",
    "wage_bill": 72461600.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 2463595.713598358,
    "emp": 1120.0,
-   "freed": 7750117.508598215,
    "naics": "541100",
+   "passes": 10213713.222196573,
    "title": "Legal Services",
    "wage_bill": 52304000.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 2129467.2478381097,
    "emp": 860.0,
-   "freed": 6698997.449281642,
    "naics": "999300",
+   "passes": 8828464.697119752,
    "title": "Local Government, excluding Schools and Hospitals (OEWS Designation)",
    "wage_bill": 45210200.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 1949045.0357522555,
    "emp": 1010.0,
-   "freed": 6131415.139770219,
    "naics": "561300",
+   "passes": 8080460.1755224755,
    "title": "Employment Services",
    "wage_bill": 41379700.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 1768566.3018926114,
    "emp": 900.0,
-   "freed": 5563655.020894115,
    "naics": "5220A1",
+   "passes": 7332221.322786726,
    "title": "Credit Intermediation and Related Activities (5221 and 5223 only)",
    "wage_bill": 37548000.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 1581290.8247347062,
    "emp": 770.0,
-   "freed": 4974513.325915021,
    "naics": "622100",
+   "passes": 6555804.150649727,
    "title": "General Medical and Surgical Hospitals",
    "wage_bill": 33572000.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 1574950.965774582,
    "emp": 690.0,
-   "freed": 4954569.042176544,
    "naics": "611100",
+   "passes": 6529520.007951126,
    "title": "Elementary and Secondary Schools",
    "wage_bill": 33437400.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 1504750.9227272626,
    "emp": 690.0,
-   "freed": 4733729.8112417245,
    "naics": "551100",
+   "passes": 6238480.733968987,
    "title": "Management of Companies and Enterprises",
    "wage_bill": 31947000.0
   }
  ],
  "role": {
-  "agreed3": null,
+  "accountable_removed": 0.0,
+  "agreed3": 41568759.54832103,
   "ai_exposure": 0.0239,
-  "band_hi": 0.1952759487266093,
-  "band_lo": 0.0,
-  "contested": 41568759.54832103,
+  "by_scorer": {
+   "gemini": 0.04710147815842685,
+   "gpt6": 0.1952759487266093,
+   "sonnet": 0.1952759487266093
+  },
+  "contested": 130769334.19225557,
   "emp": 21120.0,
-  "freed": 130769334.19225557,
   "function": "Admin",
   "href": "/census/roles/43-9071",
+  "n_passes": 3,
+  "n_tasks": 18,
+  "not_called": 0.0,
   "occ": "43-9071",
-  "payroll_scored_by_three": 0.0,
-  "ref": "census:2026-09-25.1/roles.csv#43-9071",
-  "scored_by_three": false,
-  "share_goes": 0.14817447056818245,
+  "passes": 172338093.74057662,
+  "payroll_scored_by_three": 882536200.0,
+  "physical_removed": 192674740.3281078,
+  "ref": "census:v3.2-2026-09-24/roles.csv#43-9071",
+  "rule_loose": 0.1952759487266093,
+  "rule_strict": 0.0,
+  "scored_by_three": true,
+  "scorer_max": 0.1952759487266093,
+  "scorer_min": 0.04710147815842685,
+  "share_passes": 0.1952759487266093,
+  "split": "direct",
+  "time_share_basis": "rated",
   "title": "Office Machine Operators, Except Computer",
   "wage_bill": 882536200.0
  },
+ "scorers": [
+  "sonnet",
+  "gemini",
+  "gpt6"
+ ],
  "tasks": [
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": false,
-   "goes": true,
+   "blocked_by_missing_check": false,
+   "contested": true,
    "id": "13288",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": true,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": true,
+    "sonnet": true
+   },
    "payroll": 85686781.81466386,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#13288",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#13288",
    "task": "Read job orders to determine the type of work to be done, the quantities to be produced, and the materials needed.",
    "time_share": 0.09709152079502671,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "quick to check, an existing check settles it, and a mistake is cheap"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "13289",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 74201892.12383258,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#13289",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#13289",
    "task": "Operate office machines such as high speed business photocopiers, readers, scanners, addressing machines, stencil-cutting machines, microfilm readers or printers, folding and inserting machines, bursters, and binder machines.",
    "time_share": 0.08407801529708649,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "13295",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 73183995.0272648,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#13295",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#13295",
    "task": "Load machines with materials such as blank paper or film.",
    "time_share": 0.0829246381363901,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "13292",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 71119355.72451735,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#13292",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#13292",
    "task": "Sort, assemble, and proof completed work.",
    "time_share": 0.08058519947908918,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "13293",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 63459289.74400403,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#13293",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#13293",
    "task": "Set up and adjust machines, regulating factors such as speed, ink flow, focus, and number of copies.",
    "time_share": 0.07190559406402143,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "13294",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 57048463.32448557,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#13294",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#13294",
    "task": "Monitor machine operation, and make adjustments as necessary to ensure proper operation.",
    "time_share": 0.06464149949258237,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "13299",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 56356537.29402354,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#13299",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#13299",
    "task": "Operate auxiliary machines such as collators, pad and tablet making machines, staplers, and paper punching, folding, cutting, and perforating machines.",
    "time_share": 0.06385747949378569,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "13290",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 54192821.59943293,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#13290",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#13290",
    "task": "Place original copies in feed trays, feed originals into feed rolls, or position originals on tables beneath camera lenses.",
    "time_share": 0.06140577757539343,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "13302",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 47715114.63295632,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#13302",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#13302",
    "task": "Prepare and process papers for use in scanning, microfilming, and microfiche.",
    "time_share": 0.05406590079019571,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "13301",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 45876068.719737574,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#13301",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#13301",
    "task": "Deliver completed work.",
    "time_share": 0.05198208155057841,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": false,
-   "goes": true,
+   "blocked_by_missing_check": false,
+   "contested": true,
    "id": "13300",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": true,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": true,
+    "sonnet": true
+   },
    "payroll": 45082552.37759172,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#13300",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#13300",
    "task": "Complete records of production, including work volumes and outputs, materials used, and any backlogs.",
    "time_share": 0.05108294977315573,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "quick to check, an existing check settles it, and a mistake is cheap"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "13297",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 42973856.77802417,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#13297",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#13297",
    "task": "File and store completed documents.",
    "time_share": 0.04869359101419768,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
-   "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": false,
+   "accountable": false,
+   "agreed_all_three": true,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "13291",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": true,
+   "passes_by": {
+    "gemini": true,
+    "gpt6": true,
+    "sonnet": true
+   },
    "payroll": 41568759.54832103,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#13291",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#13291",
    "task": "Compute prices for services and receive payment, or provide supervisors with billing information.",
    "time_share": 0.04710147815842685,
-   "why": "nobody can tell quickly whether it worked"
+   "why": "quick to check, an existing check settles it, and a mistake is cheap"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "13296",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 39622221.49918062,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#13296",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#13296",
    "task": "Maintain stock of supplies, and requisition any needed items.",
    "time_share": 0.044895859794964355,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "13298",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 32220477.82756176,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#13298",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#13298",
    "task": "Clean machines, perform minor repairs, and report major repair needs.",
    "time_share": 0.036508958870538975,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "13304",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 30360383.739581473,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#13304",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#13304",
    "task": "Clean and file master copies or plates.",
    "time_share": 0.03440128998627079,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "13303",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 19421854.98167249,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#13303",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#13303",
    "task": "Cut copies apart and write identifying information, such as page numbers or titles, on copies.",
    "time_share": 0.022006864966754323,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "13305",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 2445773.2431482384,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#13305",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#13305",
    "task": "Move heat units and clamping frames over screen beds to form Braille impressions on pages, raising frames to release individual copies.",
    "time_share": 0.0027713007615418365,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   }
  ],
- "version": "2026-09-25.1"
+ "version": "v3.2-2026-09-24"
 }

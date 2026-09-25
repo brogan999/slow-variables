@@ -1,456 +1,625 @@
 {
- "csv": "/data/census/2026-09-25.1/tasks.csv",
+ "csv": "/data/census/v3.2-2026-09-24/tasks.csv",
  "industries": [
   {
    "agreed3": 0.0,
    "emp": 11610.0,
-   "freed": 151573236.35594273,
    "naics": "541500",
+   "passes": 93199703.09384027,
    "title": "Computer Systems Design and Related Services",
    "wage_bill": 1580933700.0
   },
   {
    "agreed3": 0.0,
    "emp": 5130.0,
-   "freed": 61160639.97915876,
    "naics": "4230A1",
+   "passes": 37606596.151982,
    "title": "Merchant Wholesalers, Durable Goods (4232, 4233, 4235, 4236, 4237, and 4239 only)",
    "wage_bill": 637915500.0
   },
   {
    "agreed3": 0.0,
    "emp": 3340.0,
-   "freed": 52340788.17545943,
    "naics": "518200",
+   "passes": 32183425.22023445,
    "title": "Computing Infrastructure Providers, Data Processing, Web Hosting, and Related Services",
    "wage_bill": 545923000.0
   },
   {
    "agreed3": 0.0,
    "emp": 3350.0,
-   "freed": 51032898.85426298,
    "naics": "425100",
+   "passes": 31379227.201206442,
    "title": "Wholesale Trade Agents and Brokers",
    "wage_bill": 532281500.0
   },
   {
    "agreed3": 0.0,
    "emp": 3330.0,
-   "freed": 44579155.599394426,
    "naics": "423400",
+   "passes": 27410934.581359368,
    "title": "Professional and Commercial Equipment and Supplies Merchant Wholesalers",
    "wage_bill": 464967900.0
   },
   {
    "agreed3": 0.0,
    "emp": 2860.0,
-   "freed": 41640726.227050826,
    "naics": "513200",
+   "passes": 25604146.314191084,
    "title": "Software Publishers",
    "wage_bill": 434319600.0
   },
   {
    "agreed3": 0.0,
    "emp": 2970.0,
-   "freed": 29303729.313612897,
    "naics": "423800",
+   "passes": 18018345.040528703,
    "title": "Machinery, Equipment, and Supplies Merchant Wholesalers",
    "wage_bill": 305642700.0
   },
   {
    "agreed3": 0.0,
    "emp": 1580.0,
-   "freed": 24523698.969279002,
    "naics": "551100",
+   "passes": 15079188.896727072,
    "title": "Management of Companies and Enterprises",
    "wage_bill": 255786200.0
   },
   {
    "agreed3": 0.0,
    "emp": 2190.0,
-   "freed": 24408772.683363363,
    "naics": "517000",
+   "passes": 15008522.75551028,
    "title": "Telecommunications",
    "wage_bill": 254587500.0
   },
   {
    "agreed3": 0.0,
    "emp": 2070.0,
-   "freed": 19542636.30968031,
    "naics": "3330A1",
+   "passes": 12016421.536688372,
    "title": "Machinery Manufacturing (3331, 3332, 3334, and 3339 only)",
    "wage_bill": 203832900.0
   }
  ],
  "role": {
-  "agreed3": null,
+  "accountable_removed": 0.0,
+  "agreed3": 0.0,
   "ai_exposure": 0.3224,
-  "band_hi": 0.4012838590528139,
-  "band_lo": 0.012672629661549497,
-  "contested": 1237699003.6880555,
+  "by_scorer": {
+   "gemini": 0.0,
+   "gpt6": 0.058952316023018723,
+   "sonnet": 0.10760241020574182
+  },
+  "contested": 776699623.314576,
   "emp": 54760.0,
-  "freed": 692053965.8133327,
   "function": "Sales",
   "href": "/census/roles/41-9031",
+  "n_passes": 1,
+  "n_tasks": 25,
+  "not_called": 0.0,
   "occ": "41-9031",
-  "payroll_scored_by_three": 0.0,
-  "ref": "census:2026-09-25.1/roles.csv#41-9031",
-  "scored_by_three": false,
-  "share_goes": 0.09587577034757544,
+  "passes": 425531747.4864254,
+  "payroll_scored_by_three": 7218236300.0,
+  "physical_removed": 0.0,
+  "ref": "census:v3.2-2026-09-24/roles.csv#41-9031",
+  "rule_loose": 0.4012640157592603,
+  "rule_strict": 0.0,
+  "scored_by_three": true,
+  "scorer_max": 0.10760241020574182,
+  "scorer_min": 0.0,
+  "share_passes": 0.058952316023018723,
+  "split": "direct",
+  "time_share_basis": "rated",
   "title": "Sales Engineers",
   "wage_bill": 7218236300.0
  },
+ "scorers": [
+  "sonnet",
+  "gemini",
+  "gpt6"
+ ],
  "tasks": [
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "9682",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 682883740.8382624,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#9682",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#9682",
    "task": "Develop, present, or respond to proposals for specific customer requirements, including request for proposal responses and industry-specific solutions.",
    "time_share": 0.09460534574606022,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "9692",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 598643086.7209481,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#9692",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#9692",
    "task": "Keep informed on industry news and trends, products, services, competitors, relevant information about legacy, existing, and emerging technologies, and the latest product-line developments.",
    "time_share": 0.08293481424554473,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "9680",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 560554881.0970154,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#9680",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#9680",
    "task": "Collaborate with sales teams to understand customer requirements, to promote the sale of company products, and to provide sales support.",
    "time_share": 0.07765815052314308,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "9679",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 483480662.0829876,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#9679",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#9679",
    "task": "Confer with customers and engineers to assess equipment needs and to determine system requirements.",
    "time_share": 0.06698044258858464,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "9690",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 438800468.2211127,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#9690",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#9690",
    "task": "Create sales or service contracts for products or services.",
    "time_share": 0.06079053801842325,
-   "why": "a failure is too expensive"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": false,
-   "goes": true,
+   "blocked_by_missing_check": false,
+   "contested": true,
    "id": "9698",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": true,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": true,
+    "sonnet": true
+   },
    "payroll": 425531747.4864254,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#9698",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#9698",
    "task": "Document account activities, generate reports, and keep records of business transactions with customers and suppliers.",
    "time_share": 0.058952316023018723,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "quick to check, an existing check settles it, and a mistake is cheap"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "9683",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 339149105.65553164,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#9683",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#9683",
    "task": "Sell products requiring extensive technical expertise and support for installation and use, such as material handling equipment, numerical-control machinery, or computer systems.",
    "time_share": 0.04698503783473141,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "9678",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 336157141.82311314,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#9678",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#9678",
    "task": "Plan and modify product configurations to meet customer needs.",
    "time_share": 0.04657053715782526,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "9697",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 335343927.7503542,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#9697",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#9697",
    "task": "Identify resale opportunities and support them to achieve sales plans.",
    "time_share": 0.046457876108926245,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "9688",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 334267746.2910687,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#9688",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#9688",
    "task": "Research and identify potential customers for products or services.",
    "time_share": 0.04630878408498052,
-   "why": "nobody can tell quickly whether it worked"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "9687",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 311910262.86911184,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#9687",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#9687",
    "task": "Provide technical and non-technical support and services to clients or other staff members regarding the use, operation, and maintenance of equipment.",
    "time_share": 0.04321142311025643,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": true,
-   "goes": false,
    "id": "9681",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": true
+   },
    "payroll": 309845752.53623235,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#9681",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#9681",
    "task": "Secure and renew orders and arrange delivery.",
    "time_share": 0.042925409983631646,
    "why": "nobody can tell quickly whether it worked"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "9685",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 286507583.6425907,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#9685",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#9685",
    "task": "Recommend improved materials or machinery to customers, documenting how such changes will lower costs or increase production.",
    "time_share": 0.039692186807820454,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "9689",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 261803392.03631166,
-   "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#9689",
+   "physical": true,
+   "ref": "census:v3.2-2026-09-24/tasks.csv#9689",
    "task": "Visit prospective buyers at commercial, industrial, or other establishments to show samples or catalogs, and to inform them about product pricing, availability, and advantages.",
    "time_share": 0.036269717581331004,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
+   "blocked_by_missing_check": true,
    "contested": false,
-   "goes": false,
    "id": "9686",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 214752574.3409637,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#9686",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#9686",
    "task": "Prepare and deliver technical presentations that explain products or services to customers and prospective customers.",
    "time_share": 0.02975139153327021,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "9700",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 212331821.12068552,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#9700",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#9700",
    "task": "Maintain sales forecasting reports.",
    "time_share": 0.02941602523052418,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "9694",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 190718644.6562317,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#9694",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#9694",
    "task": "Provide information needed for the development of custom-made machinery.",
    "time_share": 0.026421779050961755,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": true,
    "contested": false,
-   "goes": true,
    "id": "9695",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 175048182.887454,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#9695",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#9695",
    "task": "Write technical documentation for products.",
    "time_share": 0.024250824663007223,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "9691",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 159569568.89794597,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#9691",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#9691",
    "task": "Arrange for demonstrations or trial installations of equipment.",
    "time_share": 0.022106448482151514,
-   "why": "nobody can tell quickly whether it worked"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "9699",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 123021528.44930114,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#9699",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#9699",
    "task": "Train team members in the customer applications of technologies.",
    "time_share": 0.01704315615842351,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "9684",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 114165430.60097975,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#9684",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#9684",
    "task": "Diagnose problems with installed equipment.",
    "time_share": 0.015816250099900408,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "9696",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 105286616.93681301,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#9696",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#9696",
    "task": "Develop sales plans to introduce products in new markets.",
    "time_share": 0.014586197037746327,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": true,
    "id": "9693",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 91474035.43945329,
-   "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#9693",
+   "physical": true,
+   "ref": "census:v3.2-2026-09-24/tasks.csv#9693",
    "task": "Attend company training seminars to become familiar with product lines.",
    "time_share": 0.012672629661549497,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "9701",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 85666274.3271878,
-   "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#9701",
+   "physical": true,
+   "ref": "census:v3.2-2026-09-24/tasks.csv#9701",
    "task": "Attend trade shows and seminars to promote products or to learn about industry developments.",
    "time_share": 0.011868034069096325,
-   "why": "no automated way to check it"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": true,
-   "goes": false,
    "id": "9702",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": true
+   },
    "payroll": 41322123.29191833,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#9702",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#9702",
    "task": "Report to supervisors about prospective firms' credit ratings.",
    "time_share": 0.00572468419909145,
-   "why": "nobody can tell quickly whether it worked"
+   "why": "a failure is too expensive"
   }
  ],
- "version": "2026-09-25.1"
+ "version": "v3.2-2026-09-24"
 }

@@ -1,302 +1,405 @@
 {
- "csv": "/data/census/2026-09-25.1/tasks.csv",
+ "csv": "/data/census/v3.2-2026-09-24/tasks.csv",
  "industries": [
   {
    "agreed3": 80356126.19796541,
    "emp": 13935.0,
-   "freed": 174475322.33866456,
    "naics": "999300",
+   "passes": 80356126.19796541,
    "title": "Local Government, excluding Schools and Hospitals (OEWS Designation)",
    "wage_bill": 1002065850.0
   },
   {
    "agreed3": 41969219.371489614,
    "emp": 7430.0,
-   "freed": 91126755.66394065,
    "naics": "531000",
+   "passes": 41969219.371489614,
    "title": "Real Estate",
    "wage_bill": 523369200.0
   },
   {
    "agreed3": 8128478.390329933,
    "emp": 1115.0,
-   "freed": 17649169.44579632,
    "naics": "5220A1",
+   "passes": 8128478.390329933,
    "title": "Credit Intermediation and Related Activities (5221 and 5223 only)",
    "wage_bill": 101364650.0
   },
   {
    "agreed3": 6050530.944537115,
    "emp": 1040.0,
-   "freed": 13137372.180777261,
    "naics": "999200",
+   "passes": 6050530.944537115,
    "title": "State Government, excluding Schools and Hospitals (OEWS Designation)",
    "wage_bill": 75452000.0
   },
   {
    "agreed3": 5714729.363972035,
    "emp": 755.0,
-   "freed": 12408254.292906644,
    "naics": "522200",
+   "passes": 5714729.363972035,
    "title": "Nondepository Credit Intermediation",
    "wage_bill": 71264450.0
   },
   {
    "agreed3": 4401831.027855063,
    "emp": 660.0,
-   "freed": 9557589.742109707,
    "naics": "541600",
+   "passes": 4401831.027855063,
    "title": "Management, Scientific, and Technical Consulting Services",
    "wage_bill": 54892200.0
   },
   {
    "agreed3": 4334904.0659944005,
    "emp": 720.0,
-   "freed": 9412272.841006001,
    "naics": "541900",
+   "passes": 4334904.0659944005,
    "title": "Other Professional, Scientific, and Technical Services",
    "wage_bill": 54057600.0
   },
   {
    "agreed3": 3021825.3013317944,
    "emp": 410.0,
-   "freed": 6561216.530051524,
    "naics": "551100",
+   "passes": 3021825.3013317944,
    "title": "Management of Companies and Enterprises",
    "wage_bill": 37683100.0
   },
   {
    "agreed3": 2688112.682372838,
    "emp": 280.0,
-   "freed": 5836634.354227099,
    "naics": "999100",
+   "passes": 2688112.682372838,
    "title": "Federal Executive Branch (OEWS Designation)",
    "wage_bill": 33521600.0
   },
   {
    "agreed3": 2428480.0147281387,
    "emp": 310.0,
-   "freed": 5272900.193307539,
    "naics": "541200",
+   "passes": 2428480.0147281387,
    "title": "Accounting, Tax Preparation, Bookkeeping, and Payroll Services",
    "wage_bill": 30283900.0
   }
  ],
  "role": {
+  "accountable_removed": 0.0,
   "agreed3": 169315622.7278938,
   "ai_exposure": null,
-  "band_hi": 0.6422657873628911,
-  "band_lo": 0.08019046472641037,
+  "by_scorer": {
+   "gemini": 0.08019046472641037,
+   "gpt6": 0.08019046472641037,
+   "sonnet": 0.1741156255735734
+  },
   "contested": 198315312.83565962,
   "emp": 28290.0,
-  "freed": 367630935.56355345,
   "function": "Finance",
   "href": "/census/roles/13-2022",
+  "n_passes": 1,
+  "n_tasks": 14,
+  "not_called": 0.0,
   "occ": "13-2022",
+  "passes": 169315622.7278938,
   "payroll_scored_by_three": 2111418400.0,
-  "ref": "census:2026-09-25.1/roles.csv#13-2022",
+  "physical_removed": 0.0,
+  "ref": "census:v3.2-2026-09-24/roles.csv#13-2022",
+  "rule_loose": 0.6422657873628911,
+  "rule_strict": 0.08019046472641037,
   "scored_by_three": true,
-  "share_goes": 0.1741156255735734,
+  "scorer_max": 0.1741156255735734,
+  "scorer_min": 0.08019046472641037,
+  "share_passes": 0.08019046472641037,
+  "split": "equal",
+  "time_share_basis": "rated",
   "title": "Appraisers of Personal and Business Property",
   "wage_bill": 2111418400.0
  },
+ "scorers": [
+  "sonnet",
+  "gemini",
+  "gpt6"
+ ],
  "tasks": [
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
+   "blocked_by_missing_check": true,
    "contested": false,
-   "goes": false,
    "id": "21548",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 252769672.90916753,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#21548",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#21548",
    "task": "Write descriptions of the property being appraised.",
    "time_share": 0.11971557740955915,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "21535",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 233360136.40885445,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#21535",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#21535",
    "task": "Calculate the value of property based on comparisons to recent sales, estimated cost to reproduce, and anticipated property income streams.",
    "time_share": 0.11052292449893136,
-   "why": "no automated way to check it, and a failure is too expensive"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "21538",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 231748314.18325466,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#21538",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#21538",
    "task": "Document physical characteristics of property such as measurements, quality, and design.",
    "time_share": 0.10975954087700224,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
+   "blocked_by_missing_check": true,
    "contested": false,
-   "goes": false,
    "id": "21537",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 219075164.9540293,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#21537",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#21537",
    "task": "Determine the appropriate type of valuation to make, such as fair market, replacement, or liquidation, based on the needs of the property owner.",
    "time_share": 0.10375734385663651,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": true,
    "contested": true,
-   "goes": true,
    "id": "21541",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": true
+   },
    "payroll": 198315312.83565962,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#21541",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#21541",
    "task": "Locate and record data on sales of comparable property using specialized software, internet searches, or personal records.",
    "time_share": 0.09392516084716304,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "21547",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 195530005.6026432,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#21547",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#21547",
    "task": "Write and submit appraisal reports for property, such as jewelry, art, antiques, collectibles, and equipment.",
    "time_share": 0.09260599680415932,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": true,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": true,
    "id": "21536",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": true,
+   "passes_by": {
+    "gemini": true,
+    "gpt6": true,
+    "sonnet": true
+   },
    "payroll": 169315622.7278938,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#21536",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#21536",
    "task": "Create and maintain a database of completed appraisals.",
    "time_share": 0.08019046472641037,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "quick to check, an existing check settles it, and a mistake is cheap"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "21540",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 150827887.88010302,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#21540",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#21540",
    "task": "Inspect personal or business property.",
    "time_share": 0.07143439115624976,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "21543",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 140381458.21830738,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#21543",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#21543",
    "task": "Take photographs of property.",
    "time_share": 0.06648680252966792,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "21546",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 129563978.60123739,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#21546",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#21546",
    "task": "Verify that property matches legal descriptions or certifications.",
    "time_share": 0.0613634789775619,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "21545",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 87725885.69024782,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#21545",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#21545",
    "task": "Update appraisals when property has been improved, damaged, or has otherwise changed.",
    "time_share": 0.04154831922003134,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "21539",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 65180709.07268951,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#21539",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#21539",
    "task": "Forecast the value of property.",
    "time_share": 0.0308705792621157,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "21542",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 25315703.74006856,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#21542",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#21542",
    "task": "Recommend loan amounts based on the value of property being used as collateral.",
    "time_share": 0.01198990391486053,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "21544",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 12308547.17584377,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#21544",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#21544",
    "task": "Testify in court as to the value of a piece of tangible property.",
    "time_share": 0.005829515919650871,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   }
  ],
- "version": "2026-09-25.1"
+ "version": "v3.2-2026-09-24"
 }

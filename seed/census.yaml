@@ -1,88 +1,102 @@
 # The Automatability Census (plan Part 21). The census itself is a snapshot bundle built in a separate project and
-# imported as published into data/census/<version>/ by scripts/census_import.py; the site never recomputes a verdict,
-# share or band. This file pins the version shown and holds the page's own words, which follow the site's text rules
+# imported as published into data/census/<version>/ by scripts/census_import.py; the site never recomputes a verdict
+# or share. This file pins the version shown and holds the page's own words, which follow the site's text rules
 # (no typed figures; every figure on the page comes from the bundle through the export).
-version: 2026-09-25.1
-scorers:
-  - Claude Sonnet
-  - Claude Haiku
-  - Gemini
+version: "v3.2-2026-09-24"
 title: The automatability census
 lede: >-
-  Which knowledge work AI can take on today, task by task, role by role and industry by industry. Every verdict was
-  judged by AI models, not by people. It says what can go under a stated rule today, not when or how fast: it is not a
-  forecast.
+  Which knowledge work passes a structural hand-over screen, task by task, role by role and industry by industry: work
+  whose shape would let it be handed to software. It is not a claim about what AI can do, and not a forecast. Every
+  verdict was judged by AI models, not by people, and a task can pass the screen and still be beyond the systems of
+  the day.
 rule: >-
-  A task counts as able to go when three things hold at once: someone can tell within hours whether it was done right,
-  something other than a human expert can check it, and a single mistake is cheap. Work that needs a body is left
-  out. Each task was scored by up to three AI models, and the verdict is their vote.
+  A task passes when at least two of three AI models each find three things: whether it was done right can be told
+  within hours, a check that already exists settles it, and a single failure is cheap. Work that needs a body is left
+  out, and so are sign-offs a person is accountable for: approving, authorising, certifying or assigning others' work.
+  A task without three valid scores is not called and never passes. The rule was written down and frozen before any
+  score in this version existed, but it was shaped after seeing earlier usage data, so tests against that data are post
+  hoc.
 agreed: >-
-  The firmest figure is the part all three models agree can go. It sits beside every total on these pages. Where one
-  model never scored a task, there is no three-way figure, and the page says so rather than printing a zero.
+  The firmest figure is the part all three models pass. It sits beside every total on these pages. Each model's own
+  total is shown too, because they disagree a great deal.
 sections:
   dial:
-    title: How sure do you want to be?
+    title: How strict should the screen be?
     lede: >-
-      Every threshold in the rule is a judgement. Each step below loosens one condition, and the total that can go
+      Every threshold in the rule is a judgement. Each step below loosens one condition, and the payroll that passes
       grows as it does. The census uses the step marked in the table.
   roles:
     title: What happens to a job
     lede: >-
-      Each role's figure is a range, not a rank: tightening or loosening the rule moves it. Open a role to see every
-      task, whether it can go, and why.
+      Each role's share moves with the rule: the stricter and looser rules re-vote every task, and each model alone
+      gives its own share. Differences between similar roles are within the models' noise. Open a role to see every
+      task, whether it passes, which models pass it, and why.
   functions:
     title: What to automate
     lede: >-
-      By business function. The verifier queue is work that is quick to check and cheap to get wrong, but today only a
-      human expert can check it. Whoever builds a reliable automated check for that work turns it into work that can
-      go.
+      By business function. Work waiting on a check is quick to judge and cheap to get wrong, but no existing check
+      settles it; whoever builds a reliable check for that work would bring it inside the screen.
   industries:
     title: Industry by industry
     lede: >-
       A task gets the same verdict wherever it is done; industries differ in whom they employ. Each industry's figure
-      is its own staffing times the share of each role's work that can go.
+      is its own staffing times the share of each role's work that passes.
   deals:
     title: What to buy
     lede: >-
-      Two tests, and both must pass: can the work go, and would the owner keep the saving? The census can answer the
-      first. The second it could not measure, so each card's stance is reasoned from how the business prices its
-      work, not measured. Named companies illustrate the pricing model and are not researched targets.
+      Two tests, and both must pass: does the work pass the screen, and would the owner keep the saving? The census
+      answers the first. The second it could not measure, so each card's stance is reasoned from how the business
+      prices its work, not measured. Named companies illustrate the pricing model and are not researched targets.
   method:
     title: Method, and what failed
     lede: >-
-      Every test the census set itself in advance, reported whether it passed or failed.
+      Every test the census set itself, marked by when it was written down: before the first scores, before this
+      version's scores, or after seeing the data. Tests still waiting on the next release of usage data have no
+      result yet.
 caveats:
-  - It says what can go under the rule today, not when, how fast, or who keeps the saving. It is not a forecast.
-  - The models disagree a great deal. Lead with the part all three agree on, and read each role's figure as a range.
-  - Gemini ran out of budget before scoring sales, office and administrative work, and part of healthcare, so part of
-    the total was decided by the two Claude models alone.
-  - Whether a business keeps the saving was not measured; every method tried failed a basic noise test.
-  - How hard a task is to specify is not part of the rule; the test that looks at it was designed after seeing the
-    data, so it is exploratory.
-  - Figures on repricing assume a value for how easily one kind of work substitutes for another, so they are
-    modelled, not measured.
+  - It is a structural screen, not a claim about what AI can do and not a forecast. A task can pass and still be beyond
+    the systems of the day.
+  - Passing is not saving. The modelled saving beside the headline assumes a cost cut and how easily one kind of work
+    stands in for another; it is modelled, not measured, and far below the payroll that passes.
+  - The models disagree a great deal, and the same model re-scoring the same tasks changed a share of its verdicts.
+    Lead with the part all three pass, and treat small differences between roles as noise.
+  - The tests against observed AI use were shaped after seeing that data, so they are post hoc. They are committed to
+    run once more, unchanged, on the next release; until then read them as associations, not proof.
+  - The filter that removes physical work errs both ways. A spot-check by one of the models found desk work among the
+    removed tasks, so the headline may be too low; the filter also counts talking with people in person as desk work, which the spot-check
+    cannot measure.
+  - Whether a business keeps the saving was not measured; every method tried either failed a basic noise test or gave
+    estimates that change sign with the years used.
   - No person has judged individual tasks; the check against people is a Labor Department survey of whole jobs.
   - The public task lists under-describe coordination and exception handling, which pushes the total up.
-  - The filter that removes physical work mislabels a small share of tasks, which pushes the total down.
 method_notes:
   gates: >-
-    Each test was written down before the results were known. The test names and symbols are the census's own; its
-    files define them.
+    Each test is marked by when it was written down. The test names and symbols are the census's own; its files define
+    them. A test waiting on the next release of usage data has no threshold and no result yet.
+  validation: >-
+    Two checks on the screen itself. Agreement: how often the three models give the same verdict, as a statistic
+    that is one for perfect agreement and zero for chance. AI working alone: in observed use, AI works alone more often
+    on tasks that pass than on tasks that fail, even within the same job. The census's own label says this test is in
+    sample and post hoc.
   adjudication: >-
     Each model was checked against evidence it never saw: how well its ratings of stakes and of whether work can be
     checked match what workers themselves report in a Labor Department survey (a correlation: the closer to its maximum,
-    the closer the match), and how much of observed AI use of the tasks it says can go is AI working alone.
+    the closer the match), and how much of observed AI use of the tasks it passes is AI working alone.
   retention: >-
     Whether a business keeps the saving would show up as prices falling when labour costs fall. A sound method for
     finding that should find nothing when fed random noise; most of the methods tried found something anyway, and the
     estimates from the one that passed change sign when the first year of data moves, so none is used.
   channel: >-
-    Not part of the rule. The test was designed after seeing the data: work that is harder to describe precisely sees
-    less of its AI use come through direct programmatic access rather than chat. A negative effect means less; the
-    larger the strength, the less likely the pattern is chance. It will be run once more, unchanged, on the next release of
-    the usage data.
+    Not part of the rule. Work that is harder to describe precisely is associated with less of its AI use coming
+    through direct programmatic access rather than chat. The model has two parts: whether a task sees any programmatic
+    use, and how much of its use is programmatic where it sees some. A negative effect means less; the larger the
+    strength, the less likely the pattern is chance. The first part is weak; the second is strong. It was found after
+    seeing the data and will be run once more, unchanged, on the next release.
+  rescore: >-
+    The same model re-scored a seeded sample of the same tasks under the same rubric, weeks apart and in smaller
+    batches, and some verdicts flipped. That share is the noise floor for comparing roles.
   sigma: >-
-    If the work that stays is needed alongside the work that goes, it becomes a larger share of what a job costs. How
-    much larger depends on how easily one kind of work can stand in for another, which economists call the
+    If the work that stays is needed alongside the work that passes, it becomes a larger share of what a job costs.
+    How much larger depends on how easily one kind of work can stand in for another, which economists call the
     elasticity; published estimates fall on both sides of the value where the effect reverses, so these figures are
     conditional.

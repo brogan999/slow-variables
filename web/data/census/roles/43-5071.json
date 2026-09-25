@@ -1,260 +1,345 @@
 {
- "csv": "/data/census/2026-09-25.1/tasks.csv",
+ "csv": "/data/census/v3.2-2026-09-24/tasks.csv",
  "industries": [
   {
-   "agreed3": 0.0,
+   "agreed3": 297172874.2595431,
    "emp": 92970.0,
-   "freed": 1509086577.1981947,
    "naics": "493100",
+   "passes": 297172874.2595431,
    "title": "Warehousing and Storage",
    "wage_bill": 4250588400.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 121259406.03877538,
    "emp": 38620.0,
-   "freed": 615772696.1725386,
    "naics": "4230A1",
+   "passes": 121259406.03877538,
    "title": "Merchant Wholesalers, Durable Goods (4232, 4233, 4235, 4236, 4237, and 4239 only)",
    "wage_bill": 1734424200.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 89831243.8576366,
    "emp": 33150.0,
-   "freed": 456175970.4897555,
    "naics": "561300",
+   "passes": 89831243.8576366,
    "title": "Employment Services",
    "wage_bill": 1284894000.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 76878523.35830717,
    "emp": 19490.0,
-   "freed": 390400193.7051413,
    "naics": "492100",
+   "passes": 76878523.35830717,
    "title": "Couriers and Express Delivery Services",
    "wage_bill": 1099625800.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 74609779.2220785,
    "emp": 25110.0,
-   "freed": 378879184.8256781,
    "naics": "4450A1",
+   "passes": 74609779.2220785,
    "title": "Food and Beverage Retailers (4451 and 4452 only)",
    "wage_bill": 1067175000.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 67539540.02134958,
    "emp": 28820.0,
-   "freed": 342975493.7435575,
    "naics": "458100",
+   "passes": 67539540.02134958,
    "title": "Clothing and Clothing Accessories Retailers",
    "wage_bill": 966046400.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 67513252.60177219,
    "emp": 20390.0,
-   "freed": 342842002.447852,
    "naics": "4240A1",
+   "passes": 67513252.60177219,
    "title": "Merchant Wholesalers, Nondurable Goods (4244 and 4248 only)",
    "wage_bill": 965670400.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 65590285.911676124,
    "emp": 21930.0,
-   "freed": 333076901.1489739,
    "naics": "455000",
+   "passes": 65590285.911676124,
    "title": "General Merchandise Retailers",
    "wage_bill": 938165400.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 64701645.28593044,
    "emp": 20180.0,
-   "freed": 328564256.3000548,
    "naics": "423800",
+   "passes": 64701645.28593044,
    "title": "Machinery, Equipment, and Supplies Merchant Wholesalers",
    "wage_bill": 925454800.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 60395947.73386375,
    "emp": 22890.0,
-   "freed": 306699305.141612,
    "naics": "449200",
+   "passes": 60395947.73386375,
    "title": "Electronics and Appliance Retailers",
    "wage_bill": 863868600.0
   }
  ],
  "role": {
-  "agreed3": null,
+  "accountable_removed": 0.0,
+  "agreed3": 2689644043.1697855,
   "ai_exposure": 0.0,
-  "band_hi": 0.5717606173688687,
-  "band_lo": 0.1784162111920013,
-  "contested": 2553205051.6294036,
+  "by_scorer": {
+   "gemini": 0.10439122905102419,
+   "gpt6": 0.06991334993986788,
+   "sonnet": 0.1784162111920013
+  },
+  "contested": 5500627518.734153,
   "emp": 856930.0,
-  "freed": 13658399115.673195,
   "function": "Supply chain",
   "href": "/census/roles/43-5071",
+  "n_passes": 1,
+  "n_tasks": 11,
+  "not_called": 0.0,
   "occ": "43-5071",
-  "payroll_scored_by_three": 0.0,
-  "ref": "census:2026-09-25.1/roles.csv#43-5071",
-  "scored_by_three": false,
-  "share_goes": 0.3550300417697923,
+  "passes": 2689644043.1697855,
+  "payroll_scored_by_three": 38471108099.99999,
+  "physical_removed": 8634181114.552595,
+  "ref": "census:v3.2-2026-09-24/roles.csv#43-5071",
+  "rule_loose": 0.5717606173688687,
+  "rule_strict": 0.06991334993986788,
+  "scored_by_three": true,
+  "scorer_max": 0.1784162111920013,
+  "scorer_min": 0.06991334993986788,
+  "share_passes": 0.06991334993986788,
+  "split": "direct",
+  "time_share_basis": "rated",
   "title": "Shipping, Receiving, and Inventory Clerks",
   "wage_bill": 38471108100.0
  },
+ "scorers": [
+  "sonnet",
+  "gemini",
+  "gpt6"
+ ],
  "tasks": [
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "20276",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 5480776168.255181,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#20276",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#20276",
    "task": "Examine shipment contents and compare with records, such as manifests, invoices, or orders, to verify accuracy.",
    "time_share": 0.1424647336387792,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "20277",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 4365370632.814,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#20277",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#20277",
    "task": "Pack, seal, label, or affix postage to prepare materials for shipping, using hand tools, power tools, or postage meter.",
    "time_share": 0.11347140356516013,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": true,
    "contested": false,
-   "goes": true,
    "id": "4737",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 4241324716.483881,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#4737",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#4737",
    "task": "Prepare documents, such as work orders, bills of lading, or shipping orders, to route materials.",
    "time_share": 0.11024701200337614,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": false,
-   "goes": true,
+   "blocked_by_missing_check": false,
+   "contested": true,
    "id": "4739",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": true
+   },
    "payroll": 4174225304.3901258,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#4739",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#4739",
    "task": "Record shipment data, such as weight, charges, space availability, damages, or discrepancies, for reporting, accounting, or recordkeeping purposes.",
    "time_share": 0.1085028612521334,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "4741",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 4061034888.076055,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#4741",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#4741",
    "task": "Confer or correspond with establishment representatives to rectify problems, such as damages, shortages, or nonconformance to specifications.",
    "time_share": 0.10556064248318481,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "4742",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 3475291834.512918,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#4742",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#4742",
    "task": "Requisition and store shipping materials and supplies to maintain inventory of stock.",
    "time_share": 0.0903351113640763,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "20278",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 3153404946.2974143,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#20278",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#20278",
    "task": "Deliver or route materials to departments using handtruck, conveyor, or sorting bins.",
    "time_share": 0.08196813406311565,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "20279",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 2950428300.0272117,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#20279",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#20279",
    "task": "Determine shipping methods, routes, or rates for materials to be shipped.",
    "time_share": 0.07669205400473535,
-   "why": "nobody can tell quickly whether it worked"
+   "why": "no existing check settles it"
   },
   {
-   "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "accountable": false,
+   "agreed_all_three": true,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": true,
    "id": "4744",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": true,
+   "passes_by": {
+    "gemini": true,
+    "gpt6": true,
+    "sonnet": true
+   },
    "payroll": 2689644043.1697855,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#4744",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#4744",
    "task": "Compute amounts, such as space available, shipping, storage, or demurrage charges, using computer or price list.",
    "time_share": 0.06991334993986788,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "quick to check, an existing check settles it, and a mistake is cheap"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": true,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "4740",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 2553205051.6294036,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#4740",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#4740",
    "task": "Contact carrier representatives to make arrangements or to issue instructions for shipping and delivery of materials.",
    "time_share": 0.0663668185744149,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": false,
-   "goes": false,
+   "blocked_by_missing_check": false,
+   "contested": true,
    "id": "19834",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": true,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 1326402214.3440263,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#19834",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#19834",
    "task": "Compare shipping routes or methods to determine which have the least environmental impact.",
    "time_share": 0.03447787911115631,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   }
  ],
- "version": "2026-09-25.1"
+ "version": "v3.2-2026-09-24"
 }

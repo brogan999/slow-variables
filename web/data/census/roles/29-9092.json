@@ -1,356 +1,489 @@
 {
- "csv": "/data/census/2026-09-25.1/tasks.csv",
+ "csv": "/data/census/v3.2-2026-09-24/tasks.csv",
  "industries": [
   {
    "agreed3": 0.0,
    "emp": 1460.0,
-   "freed": 17183087.38800102,
    "naics": "622100",
+   "passes": 0.0,
    "title": "General Medical and Surgical Hospitals",
    "wage_bill": 147825000.0
   },
   {
    "agreed3": 0.0,
    "emp": 840.0,
-   "freed": 9453609.860045712,
    "naics": "621100",
+   "passes": 0.0,
    "title": "Offices of Physicians",
    "wage_bill": 81328800.0
   },
   {
    "agreed3": 0.0,
    "emp": 250.0,
-   "freed": 3939352.8265134757,
    "naics": "621400",
+   "passes": 0.0,
    "title": "Outpatient Care Centers",
    "wage_bill": 33890000.0
   },
   {
    "agreed3": 0.0,
    "emp": 200.0,
-   "freed": 2645375.9700735817,
    "naics": "621500",
+   "passes": 0.0,
    "title": "Medical and Diagnostic Laboratories",
    "wage_bill": 22758000.0
   },
   {
    "agreed3": 0.0,
    "emp": 230.0,
-   "freed": 2559881.9009115673,
    "naics": "611300",
+   "passes": 0.0,
    "title": "Colleges, Universities, and Professional Schools",
    "wage_bill": 22022500.0
   },
   {
    "agreed3": 0.0,
    "emp": 110.0,
-   "freed": 1296406.2596288624,
    "naics": "541700",
+   "passes": 0.0,
    "title": "Scientific Research and Development Services",
    "wage_bill": 11152900.0
   },
   {
    "agreed3": 0.0,
    "emp": 90.0,
-   "freed": 1098671.4383487776,
    "naics": "622300",
+   "passes": 0.0,
    "title": "Specialty (except Psychiatric and Substance Abuse) Hospitals",
    "wage_bill": 9451800.0
   },
   {
    "agreed3": 0.0,
    "emp": 70.0,
-   "freed": 1026207.8044730473,
    "naics": "551100",
+   "passes": 0.0,
    "title": "Management of Companies and Enterprises",
    "wage_bill": 8828400.0
   }
  ],
  "role": {
-  "agreed3": null,
+  "accountable_removed": 0.0,
+  "agreed3": 0.0,
   "ai_exposure": 0.0123,
-  "band_hi": 0.523245399159796,
-  "band_lo": 0.0,
-  "contested": 43357007.67804531,
+  "by_scorer": {
+   "gemini": 0.0,
+   "gpt6": 0.0,
+   "sonnet": 0.11623938703197037
+  },
+  "contested": 39202593.44799604,
   "emp": 3250.0,
-  "freed": 39202593.44799604,
   "function": "Clinical",
   "href": "/census/roles/29-9092",
+  "n_passes": 0,
+  "n_tasks": 19,
+  "not_called": 0.0,
   "occ": "29-9092",
-  "payroll_scored_by_three": 0.0,
-  "ref": "census:2026-09-25.1/roles.csv#29-9092",
-  "scored_by_three": false,
-  "share_goes": 0.11623938703197037,
+  "passes": 0.0,
+  "payroll_scored_by_three": 337257400.00000006,
+  "physical_removed": 0.0,
+  "ref": "census:v3.2-2026-09-24/roles.csv#29-9092",
+  "rule_loose": 0.35596002849603725,
+  "rule_strict": 0.0,
+  "scored_by_three": true,
+  "scorer_max": 0.11623938703197037,
+  "scorer_min": 0.0,
+  "share_passes": 0.0,
+  "split": "direct",
+  "time_share_basis": "rated",
   "title": "Genetic Counselors",
   "wage_bill": 337257400.0
  },
+ "scorers": [
+  "sonnet",
+  "gemini",
+  "gpt6"
+ ],
  "tasks": [
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "17504",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 27585235.588631507,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#17504",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#17504",
    "task": "Provide counseling to patient and family members by providing information, education, or reassurance.",
    "time_share": 0.08179282526827138,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "17507",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 26791494.96228412,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#17507",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#17507",
    "task": "Interpret laboratory results and communicate findings to patients or physicians.",
    "time_share": 0.07943930944816666,
-   "why": "a failure is too expensive"
+   "why": "no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "17506",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 26637501.345606543,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#17506",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#17506",
    "task": "Discuss testing options and the associated risks, benefits and limitations with patients and families to assist them in making informed decisions.",
    "time_share": 0.07898270385055019,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "17500",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 26495358.13846524,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#17500",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#17500",
    "task": "Analyze genetic information to identify patients or families at risk for specific disorders or syndromes.",
    "time_share": 0.07856123583490011,
    "why": "a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "17508",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 25883917.038499944,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#17508",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#17508",
    "task": "Interview patients or review medical records to obtain comprehensive patient or family medical histories, and document findings.",
    "time_share": 0.07674825530440531,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "17505",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 25517061.708185088,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#17505",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#17505",
    "task": "Determine or coordinate treatment plans by requesting laboratory services, reviewing genetics or counseling literature, and considering histories or diagnostic data.",
    "time_share": 0.07566049464944309,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
+   "blocked_by_missing_check": true,
    "contested": false,
-   "goes": false,
    "id": "17511",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 25515793.796266668,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#17511",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#17511",
    "task": "Write detailed consultation reports to provide information on complex genetic concepts to patients or referring physicians.",
    "time_share": 0.07565673517101973,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "17502",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 24869329.36114588,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#17502",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#17502",
    "task": "Provide genetic counseling in specified areas of clinical genetics, such as obstetrics, pediatrics, oncology and neurology.",
    "time_share": 0.07373990714850402,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "17503",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 20782975.942498233,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#17503",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#17503",
    "task": "Assess patients' psychological or emotional needs, such as those relating to stress, fear of test results, financial issues, and marital conflicts to make referral recommendations or assist patients in managing test outcomes.",
    "time_share": 0.061623483850905075,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": false,
-   "goes": true,
+   "blocked_by_missing_check": false,
+   "contested": true,
    "id": "17509",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": true
+   },
    "payroll": 20772419.119320504,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#17509",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#17509",
    "task": "Provide patients with information about the inheritance of conditions such as cardiovascular disease, Alzheimer's disease, diabetes, and various forms of cancer.",
    "time_share": 0.061592181874498546,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": false,
-   "goes": true,
+   "blocked_by_missing_check": false,
+   "contested": true,
    "id": "17501",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": true
+   },
    "payroll": 18430174.32867554,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#17501",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#17501",
    "task": "Explain diagnostic procedures such as chorionic villus sampling (CVS), ultrasound, fetal blood sampling, and amniocentesis.",
    "time_share": 0.054647205157471825,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": true,
+   "contested": false,
    "id": "17518",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 17473090.639545377,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#17518",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#17518",
    "task": "Prepare or provide genetics-related educational materials to patients or medical personnel.",
    "time_share": 0.05180936175023995,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "17517",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 12452285.50589858,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#17517",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#17517",
    "task": "Read current literature, talk with colleagues, or participate in professional organizations or conferences to keep abreast of developments in genetics.",
    "time_share": 0.03692220098328037,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "17510",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 11974758.792191394,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#17510",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#17510",
    "task": "Refer patients to specialists or community resources.",
    "time_share": 0.035506289238401864,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "17515",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 11555736.253137494,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#17515",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#17515",
    "task": "Evaluate or make recommendations for standards of care or clinical operations, ensuring compliance with applicable regulations, ethics, legislation, or policies.",
    "time_share": 0.034263847889290176,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "17514",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 5092339.031720973,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#17514",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#17514",
    "task": "Engage in research activities related to the field of medical genetics or genetic counseling.",
    "time_share": 0.015099265521589661,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "17512",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 4992534.986027874,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#17512",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#17512",
    "task": "Design and conduct genetics training programs for physicians, graduate students, other health professions or the general community.",
    "time_share": 0.014803337112922872,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "17513",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 3131376.0673461696,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#17513",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#17513",
    "task": "Collect for, or share with, research projects patient data on specific genetic disorders or syndromes.",
    "time_share": 0.009284825380691928,
-   "why": "nobody can tell quickly whether it worked"
+   "why": "a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "17516",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 1304017.3945528937,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#17516",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#17516",
    "task": "Identify funding sources and write grant proposals for eligible programs or services.",
    "time_share": 0.003866534565447322,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   }
  ],
- "version": "2026-09-25.1"
+ "version": "v3.2-2026-09-24"
 }

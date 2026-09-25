@@ -1,336 +1,457 @@
 {
- "csv": "/data/census/2026-09-25.1/tasks.csv",
+ "csv": "/data/census/v3.2-2026-09-24/tasks.csv",
  "industries": [
   {
    "agreed3": 0.0,
    "emp": 17660.0,
-   "freed": 410417994.4022773,
    "naics": "621100",
+   "passes": 0.0,
    "title": "Offices of Physicians",
    "wage_bill": 5868594600.0
   },
   {
    "agreed3": 0.0,
    "emp": 11100.0,
-   "freed": 239302108.54771417,
    "naics": "622100",
+   "passes": 0.0,
    "title": "General Medical and Surgical Hospitals",
    "wage_bill": 3421797000.0
   },
   {
    "agreed3": 0.0,
    "emp": 3200.0,
-   "freed": 75531638.75560264,
    "naics": "621400",
+   "passes": 0.0,
    "title": "Outpatient Care Centers",
    "wage_bill": 1080032000.0
   },
   {
    "agreed3": 0.0,
    "emp": 400.0,
-   "freed": 9853229.948329648,
    "naics": "561300",
+   "passes": 0.0,
    "title": "Employment Services",
    "wage_bill": 140892000.0
   },
   {
    "agreed3": 0.0,
    "emp": 590.0,
-   "freed": 6565519.050997545,
    "naics": "611300",
+   "passes": 0.0,
    "title": "Colleges, Universities, and Professional Schools",
    "wage_bill": 93880800.0
   },
   {
    "agreed3": 0.0,
    "emp": 210.0,
-   "freed": 4709887.55451095,
    "naics": "551100",
+   "passes": 0.0,
    "title": "Management of Companies and Enterprises",
    "wage_bill": 67347000.0
   },
   {
    "agreed3": 0.0,
    "emp": 110.0,
-   "freed": 1774808.0441168032,
    "naics": "621900",
+   "passes": 0.0,
    "title": "Other Ambulatory Health Care Services",
    "wage_bill": 25378100.0
   },
   {
    "agreed3": 0.0,
    "emp": 30.0,
-   "freed": 585436.7781240748,
    "naics": "622300",
+   "passes": 0.0,
    "title": "Specialty (except Psychiatric and Substance Abuse) Hospitals",
    "wage_bill": 8371200.0
   },
   {
    "agreed3": 0.0,
    "emp": 40.0,
-   "freed": 566638.3494687147,
    "naics": "999300",
+   "passes": 0.0,
    "title": "Local Government, excluding Schools and Hospitals (OEWS Designation)",
    "wage_bill": 8102400.0
   }
  ],
  "role": {
+  "accountable_removed": 0.0,
   "agreed3": 0.0,
   "ai_exposure": null,
-  "band_hi": 0.3640718254431769,
-  "band_lo": 0.0,
-  "contested": 749307261.4311419,
+  "by_scorer": {
+   "gemini": 0.0,
+   "gpt6": 0.0,
+   "sonnet": 0.0
+  },
+  "contested": 0.0,
   "emp": 33340.0,
-  "freed": 749307261.4311419,
   "function": "Clinical",
   "href": "/census/roles/29-1214",
+  "n_passes": 0,
+  "n_tasks": 17,
+  "not_called": 0.0,
   "occ": "29-1214",
+  "passes": 0.0,
   "payroll_scored_by_three": 10714395100.0,
-  "ref": "census:2026-09-25.1/roles.csv#29-1214",
+  "physical_removed": 0.0,
+  "ref": "census:v3.2-2026-09-24/roles.csv#29-1214",
+  "rule_loose": 0.1563159357683681,
+  "rule_strict": 0.0,
   "scored_by_three": true,
-  "share_goes": 0.06993463041428646,
+  "scorer_max": 0.0,
+  "scorer_min": 0.0,
+  "share_passes": 0.0,
+  "split": "direct",
+  "time_share_basis": "rated",
   "title": "Emergency Medicine Physicians",
   "wage_bill": 10714395100.0
  },
+ "scorers": [
+  "sonnet",
+  "gemini",
+  "gpt6"
+ ],
  "tasks": [
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22723",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 819811008.130352,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#22723",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22723",
    "task": "Evaluate patients' vital signs or laboratory data to determine emergency intervention needs and priority of treatment.",
    "time_share": 0.07651491292591515,
-   "why": "no automated way to check it, and a failure is too expensive"
+   "why": "no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22730",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 819811008.130352,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#22730",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22730",
    "task": "Select, request, perform, or interpret diagnostic procedures, such as laboratory tests, electrocardiograms, emergency ultrasounds, and radiographs.",
    "time_share": 0.07651491292591515,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22715",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 782628482.0468389,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#22715",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22715",
    "task": "Analyze records, examination information, or test results to diagnose medical conditions.",
    "time_share": 0.0730445792545805,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22719",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 780024628.1786444,
-   "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#22719",
+   "physical": true,
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22719",
    "task": "Conduct primary patient assessments that include information from prior medical care.",
    "time_share": 0.0728015553746608,
-   "why": "a failure is too expensive"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22725",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 753928027.2113974,
-   "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#22725",
+   "physical": true,
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22725",
    "task": "Monitor patients' conditions, and reevaluate treatments, as necessary.",
    "time_share": 0.07036589748416104,
-   "why": "no automated way to check it, and a failure is too expensive"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": true,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "22717",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 749307261.4311419,
-   "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#22717",
+   "physical": true,
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22717",
    "task": "Collect and record patient information, such as medical history or examination results, in electronic or handwritten medical records.",
    "time_share": 0.06993463041428646,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22721",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 731365178.1573713,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#22721",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22721",
    "task": "Direct and coordinate activities of nurses, assistants, specialists, residents, and other medical staff.",
    "time_share": 0.06826005307171949,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22729",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 729766569.0814902,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#22729",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22729",
    "task": "Select and prescribe medications to address patient needs.",
    "time_share": 0.06811085108122344,
-   "why": "a failure is too expensive"
+   "why": "no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22718",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 663605664.9956131,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#22718",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22718",
    "task": "Communicate likely outcomes of medical diseases or traumatic conditions to patients or their representatives.",
    "time_share": 0.06193589640871215,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22724",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 634461381.7119422,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#22724",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22724",
    "task": "Identify factors that may affect patient management, such as age, gender, barriers to communication, and underlying disease.",
    "time_share": 0.05921579107269828,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22716",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 606321199.8662039,
-   "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#22716",
+   "physical": true,
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22716",
    "task": "Assess patients' pain levels or sedation requirements.",
    "time_share": 0.05658940091412197,
-   "why": "no automated way to check it"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22720",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 594940853.0586897,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#22720",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22720",
    "task": "Consult with hospitalists and other professionals, such as social workers, regarding patients' hospital admission, continued observation, transition of care, or discharge.",
    "time_share": 0.055527246055980306,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22728",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 535754058.3298077,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#22728",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22728",
    "task": "Refer patients to specialists or other practitioners.",
    "time_share": 0.050003201611429064,
-   "why": "nobody can tell quickly whether it worked"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22722",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 504615256.20676804,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#22722",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22722",
    "task": "Discuss patients' treatment plans with physicians and other medical professionals.",
    "time_share": 0.047096943084240755,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22731",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 445914212.7496568,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#22731",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22731",
    "task": "Stabilize patients in critical condition.",
    "time_share": 0.04161823496220116,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22726",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 363129434.01932615,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#22726",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22726",
    "task": "Perform emergency resuscitations on patients.",
    "time_share": 0.033891734496455724,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22727",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 199010876.6944045,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#22727",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22727",
    "task": "Perform such medical procedures as emergent cricothyrotomy, endotracheal intubation, and emergency thoracotomy.",
    "time_share": 0.01857415886169855,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   }
  ],
- "version": "2026-09-25.1"
+ "version": "v3.2-2026-09-24"
 }

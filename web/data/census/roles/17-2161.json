@@ -1,370 +1,509 @@
 {
- "csv": "/data/census/2026-09-25.1/tasks.csv",
+ "csv": "/data/census/v3.2-2026-09-24/tasks.csv",
  "industries": [
   {
    "agreed3": 0.0,
    "emp": 3300.0,
-   "freed": 0.0,
    "naics": "541700",
+   "passes": 0.0,
    "title": "Scientific Research and Development Services",
    "wage_bill": 471405000.0
   },
   {
    "agreed3": 0.0,
    "emp": 3430.0,
-   "freed": 0.0,
    "naics": "221100",
+   "passes": 0.0,
    "title": "Electric Power Generation, Transmission and Distribution",
    "wage_bill": 469086800.0
   },
   {
    "agreed3": 0.0,
    "emp": 2690.0,
-   "freed": 0.0,
    "naics": "541300",
+   "passes": 0.0,
    "title": "Architectural, Engineering, and Related Services",
    "wage_bill": 366942900.0
   },
   {
    "agreed3": 0.0,
    "emp": 2690.0,
-   "freed": 0.0,
    "naics": "999100",
+   "passes": 0.0,
    "title": "Federal Executive Branch (OEWS Designation)",
    "wage_bill": 326835000.0
   },
   {
    "agreed3": 0.0,
    "emp": 320.0,
-   "freed": 0.0,
    "naics": "551100",
+   "passes": 0.0,
    "title": "Management of Companies and Enterprises",
    "wage_bill": 44646400.0
   },
   {
    "agreed3": 0.0,
    "emp": 90.0,
-   "freed": 0.0,
    "naics": "999300",
+   "passes": 0.0,
    "title": "Local Government, excluding Schools and Hospitals (OEWS Designation)",
    "wage_bill": 12859200.0
   },
   {
    "agreed3": 0.0,
    "emp": 90.0,
-   "freed": 0.0,
    "naics": "611300",
+   "passes": 0.0,
    "title": "Colleges, Universities, and Professional Schools",
    "wage_bill": 8172900.0
   },
   {
    "agreed3": 0.0,
    "emp": 40.0,
-   "freed": 0.0,
    "naics": "561200",
+   "passes": 0.0,
    "title": "Facilities Support Services",
    "wage_bill": 5499200.0
   }
  ],
  "role": {
+  "accountable_removed": 0.0,
   "agreed3": 0.0,
   "ai_exposure": 0.0,
-  "band_hi": 0.11188603128638192,
-  "band_lo": 0.0,
-  "contested": 108150899.55386053,
+  "by_scorer": {
+   "gemini": 0.0,
+   "gpt6": 0.0,
+   "sonnet": 0.0
+  },
+  "contested": 0.0,
   "emp": 12650.0,
-  "freed": 0.0,
   "function": "Engineering",
   "href": "/census/roles/17-2161",
+  "n_passes": 0,
+  "n_tasks": 20,
+  "not_called": 0.0,
   "occ": "17-2161",
+  "passes": 0.0,
   "payroll_scored_by_three": 1705447400.0,
-  "ref": "census:2026-09-25.1/roles.csv#17-2161",
+  "physical_removed": 0.0,
+  "ref": "census:v3.2-2026-09-24/roles.csv#17-2161",
+  "rule_loose": 0.13207523307981534,
+  "rule_strict": 0.0,
   "scored_by_three": true,
-  "share_goes": 0.0,
+  "scorer_max": 0.0,
+  "scorer_min": 0.0,
+  "share_passes": 0.0,
+  "split": "direct",
+  "time_share_basis": "rated",
   "title": "Nuclear Engineers",
   "wage_bill": 1705447400.0
  },
+ "scorers": [
+  "sonnet",
+  "gemini",
+  "gpt6"
+ ],
  "tasks": [
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "5380",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 228709887.95522487,
-   "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#5380",
+   "physical": true,
+   "ref": "census:v3.2-2026-09-24/tasks.csv#5380",
    "task": "Monitor nuclear facility operations to identify any design, construction, or operation practices that violate safety regulations and laws or could jeopardize safe operations.",
    "time_share": 0.13410550683370526,
-   "why": "no automated way to check it, and a failure is too expensive"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "5389",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 227151034.68833503,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#5389",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#5389",
    "task": "Direct operating or maintenance activities of nuclear power plants to ensure efficiency and conformity to safety standards.",
    "time_share": 0.13319146324204137,
-   "why": "no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "5383",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 154024071.41815993,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#5383",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#5383",
    "task": "Design or oversee construction or operation of nuclear reactors, power plants, or nuclear fuels reprocessing and reclamation systems.",
    "time_share": 0.09031300022396464,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "20956",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 108150899.55386053,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#20956",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#20956",
    "task": "Prepare technical reports of findings or recommendations, based on synthesized analyses of test results.",
    "time_share": 0.06341497225529238,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "5384",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 88294426.36287118,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#5384",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#5384",
    "task": "Design or develop nuclear equipment, such as reactor cores, radiation shielding, or associated instrumentation or control mechanisms.",
    "time_share": 0.051772002093334095,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "19641",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 85565442.21205352,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#19641",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#19641",
    "task": "Develop or contribute to the development of plans to remediate or restore environments affected by nuclear radiation, such as waste disposal sites.",
    "time_share": 0.05017184476756863,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "19642",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 85038077.43891516,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#19642",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#19642",
    "task": "Direct environmental compliance activities associated with nuclear plant operations or maintenance.",
    "time_share": 0.04986262105704061,
-   "why": "nobody can tell quickly whether it worked, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "5387",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 84685210.16499113,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#5387",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#5387",
    "task": "Write operational instructions to be used in nuclear plant operation or nuclear fuel or waste handling and disposal.",
    "time_share": 0.04965571507218055,
-   "why": "a failure is too expensive"
+   "why": "no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "5386",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 82664841.59981817,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#5386",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#5386",
    "task": "Recommend preventive measures to be taken in the handling of nuclear technology, based on data obtained from operations monitoring or from evaluation of test results.",
    "time_share": 0.04847105903108954,
-   "why": "no automated way to check it, and a failure is too expensive"
+   "why": "no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "5381",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 76655961.5885533,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#5381",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#5381",
    "task": "Keep abreast of developments and changes in the nuclear field by reading technical journals or by independent study and research.",
    "time_share": 0.04494771377208895,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "5388",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 67937156.94172654,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#5388",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#5388",
    "task": "Conduct tests of nuclear fuel behavior and cycles or performance of nuclear machinery and equipment to optimize performance of existing plants.",
    "time_share": 0.03983538685609802,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "20958",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 66017530.184081726,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#20958",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#20958",
    "task": "Consult with other scientists to determine parameters of experimentation or suitability of analytical models.",
    "time_share": 0.03870980141872551,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "5385",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 55638865.37975142,
-   "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#5385",
+   "physical": true,
+   "ref": "census:v3.2-2026-09-24/tasks.csv#5385",
    "task": "Initiate corrective actions or order plant shutdowns in emergency situations.",
    "time_share": 0.0326242048741881,
-   "why": "a failure is too expensive"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "19640",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 55531936.628020465,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#19640",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#19640",
    "task": "Design fuel cycle models or processes to reduce the quantity of radioactive waste generated from nuclear activities.",
    "time_share": 0.03256150651613205,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "20959",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 51078933.12242279,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#20959",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#20959",
    "task": "Discuss construction project proposals with interested parties, such as vendors, contractors, or nuclear facility review boards.",
    "time_share": 0.029950459405797443,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "19643",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 50626087.70599092,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#19643",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#19643",
    "task": "Prepare environmental impact statements, reports, or presentations for regulatory or other agencies.",
    "time_share": 0.02968493059709195,
-   "why": "nobody can tell quickly whether it worked, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "5379",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 43208861.612027034,
-   "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#5379",
+   "physical": true,
+   "ref": "census:v3.2-2026-09-24/tasks.csv#5379",
    "task": "Examine accidents to obtain data for use in design of preventive measures.",
    "time_share": 0.025335792597313195,
-   "why": "a failure is too expensive"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "19639",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 38163476.440033376,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#19639",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#19639",
    "task": "Conduct environmental studies on topics such as nuclear power generation, nuclear waste disposal, or nuclear weapon deployment.",
    "time_share": 0.022377398704899003,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "5382",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 29099477.937391922,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#5382",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#5382",
    "task": "Perform experiments that will provide information about acceptable methods of nuclear material usage, nuclear fuel reclamation, or waste disposal.",
    "time_share": 0.01706266516187595,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "20957",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 27205221.065771073,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#20957",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#20957",
    "task": "Design or direct nuclear research projects to develop, test, modify, or discover new uses for theoretical models.",
    "time_share": 0.015951955519572795,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   }
  ],
- "version": "2026-09-25.1"
+ "version": "v3.2-2026-09-24"
 }

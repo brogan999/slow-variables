@@ -1,218 +1,309 @@
 {
- "csv": "/data/census/2026-09-25.1/tasks.csv",
+ "csv": "/data/census/v3.2-2026-09-24/tasks.csv",
  "industries": [
   {
-   "agreed3": 8969930.83556751,
+   "agreed3": 0.0,
    "emp": 950.0,
-   "freed": 24658268.654927474,
    "naics": "999100",
+   "passes": 8969930.83556751,
    "title": "Federal Executive Branch (OEWS Designation)",
    "wage_bill": 101412500.0
   },
   {
-   "agreed3": 996256.0430559808,
+   "agreed3": 0.0,
    "emp": 150.0,
-   "freed": 2738699.953110076,
    "naics": "611300",
+   "passes": 996256.0430559808,
    "title": "Colleges, Universities, and Professional Schools",
    "wage_bill": 11263500.0
   },
   {
-   "agreed3": 989887.6464563421,
+   "agreed3": 0.0,
    "emp": 150.0,
-   "freed": 2721193.2814162043,
    "naics": "999200",
+   "passes": 989887.6464563421,
    "title": "State Government, excluding Schools and Hospitals (OEWS Designation)",
    "wage_bill": 11191500.0
   }
  ],
  "role": {
-  "agreed3": 10956074.525079833,
+  "accountable_removed": 0.0,
+  "agreed3": 0.0,
   "ai_exposure": 0.1096,
-  "band_hi": 0.5686730673292342,
-  "band_lo": 0.08844995277275987,
-  "contested": 19162087.36437392,
+  "by_scorer": {
+   "gemini": 0.08844995277275987,
+   "gpt6": 0.0,
+   "sonnet": 0.08844995277275987
+  },
+  "contested": 10956074.525079833,
   "emp": 1250.0,
-  "freed": 30118161.889453754,
   "function": "Research",
   "href": "/census/roles/19-3092",
+  "n_passes": 1,
+  "n_tasks": 12,
+  "not_called": 0.0,
   "occ": "19-3092",
-  "payroll_scored_by_three": 123867500.0,
-  "ref": "census:2026-09-25.1/roles.csv#19-3092",
+  "passes": 10956074.525079833,
+  "payroll_scored_by_three": 123867500.00000003,
+  "physical_removed": 0.0,
+  "ref": "census:v3.2-2026-09-24/roles.csv#19-3092",
+  "rule_loose": 0.4714682766078256,
+  "rule_strict": 0.0,
   "scored_by_three": true,
-  "share_goes": 0.24314821797044223,
+  "scorer_max": 0.08844995277275987,
+  "scorer_min": 0.0,
+  "share_passes": 0.08844995277275987,
+  "split": "direct",
+  "time_share_basis": "rated",
   "title": "Geographers",
   "wage_bill": 123867500.0
  },
+ "scorers": [
+  "sonnet",
+  "gemini",
+  "gpt6"
+ ],
  "tasks": [
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": true,
+   "blocked_by_missing_check": true,
+   "contested": false,
    "id": "5503",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 19162087.36437392,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#5503",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#5503",
    "task": "Create and modify maps, graphs, or diagrams, using geographical information software and related equipment, and principles of cartography, such as coordinate systems, longitude, latitude, elevation, topography, and map scales.",
    "time_share": 0.15469826519768234,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "5509",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 13992890.29231827,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#5509",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#5509",
    "task": "Gather and compile geographic data from sources such as censuses, field observations, satellite imagery, aerial photographs, and existing maps.",
    "time_share": 0.11296659973211916,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "5508",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 13386625.26272171,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#5508",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#5508",
    "task": "Teach geography.",
    "time_share": 0.10807213565076965,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "5511",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 12040514.414684085,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#5511",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#5511",
    "task": "Study the economic, political, and cultural characteristics of a specific region's population.",
    "time_share": 0.09720479072140864,
-   "why": "no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "5505",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 11584713.59792345,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#5505",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#5505",
    "task": "Develop, operate, and maintain geographical information computer systems, including hardware, software, plotters, digitizers, printers, and video cameras.",
    "time_share": 0.0935250456974061,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "5514",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 11304736.128242128,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#5514",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#5514",
    "task": "Provide geographical information systems support to the private and public sectors.",
    "time_share": 0.09126474763955136,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
-   "agreed_all_three": true,
-   "blocked_by_verifier": false,
-   "contested": false,
-   "goes": true,
+   "accountable": false,
+   "agreed_all_three": false,
+   "blocked_by_missing_check": false,
+   "contested": true,
    "id": "5506",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": true,
+   "passes_by": {
+    "gemini": true,
+    "gpt6": false,
+    "sonnet": true
+   },
    "payroll": 10956074.525079833,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#5506",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#5506",
    "task": "Locate and obtain existing geographic information databases.",
    "time_share": 0.08844995277275987,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "quick to check, an existing check settles it, and a mistake is cheap"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "5507",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 9703657.786657508,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#5507",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#5507",
    "task": "Analyze geographic distributions of physical and cultural phenomena on local, regional, continental, or global scales.",
    "time_share": 0.07833901375790671,
-   "why": "no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
+   "blocked_by_missing_check": true,
    "contested": false,
-   "goes": false,
    "id": "5504",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 7273040.948366445,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#5504",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#5504",
    "task": "Write and present reports of research findings.",
    "time_share": 0.05871629723992528,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "5513",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 6018370.172229183,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#5513",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#5513",
    "task": "Collect data on physical characteristics of specified areas, such as geological formations, climates, and vegetation, using surveying or meteorological equipment.",
    "time_share": 0.04858716105700997,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "5512",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 4670683.7205175925,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#5512",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#5512",
    "task": "Provide consulting services in fields such as resource development and management, business location and market area analysis, environmental hazards, regional cultural history, and urban social planning.",
    "time_share": 0.03770709605439355,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "5510",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 3774105.7868858743,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#5510",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#5510",
    "task": "Conduct field work at outdoor sites.",
    "time_share": 0.030468894479067345,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   }
  ],
- "version": "2026-09-25.1"
+ "version": "v3.2-2026-09-24"
 }

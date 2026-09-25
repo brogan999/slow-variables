@@ -1,316 +1,425 @@
 {
- "csv": "/data/census/2026-09-25.1/tasks.csv",
+ "csv": "/data/census/v3.2-2026-09-24/tasks.csv",
  "industries": [
   {
-   "agreed3": 0.0,
+   "agreed3": 1710130506.6666667,
    "emp": 118190.0,
-   "freed": 5130391520.0,
    "naics": "541500",
+   "passes": 2565195760.0,
    "title": "Computer Systems Design and Related Services",
    "wage_bill": 12825978800.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 930758053.3333334,
    "emp": 79670.0,
-   "freed": 2792274160.0,
    "naics": "541600",
+   "passes": 1396137080.0,
    "title": "Management, Scientific, and Technical Consulting Services",
    "wage_bill": 6980685400.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 599966400.0,
    "emp": 41320.0,
-   "freed": 1799899200.0,
    "naics": "513200",
+   "passes": 899949600.0,
    "title": "Software Publishers",
    "wage_bill": 4499748000.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 591152640.0,
    "emp": 68760.0,
-   "freed": 1773457920.0,
    "naics": "517000",
+   "passes": 886728960.0,
    "title": "Telecommunications",
    "wage_bill": 4433644800.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 453563200.0,
    "emp": 40200.0,
-   "freed": 1360689600.0,
    "naics": "238200",
+   "passes": 680344800.0,
    "title": "Building Equipment Contractors",
    "wage_bill": 3401724000.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 452930933.3333333,
    "emp": 43900.0,
-   "freed": 1358792800.0,
    "naics": "561300",
+   "passes": 679396400.0,
    "title": "Employment Services",
    "wage_bill": 3396982000.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 447214680.0,
    "emp": 30690.0,
-   "freed": 1341644040.0,
    "naics": "518200",
+   "passes": 670822020.0,
    "title": "Computing Infrastructure Providers, Data Processing, Web Hosting, and Related Services",
    "wage_bill": 3354110100.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 418301920.0,
    "emp": 69240.0,
-   "freed": 1254905760.0,
    "naics": "449200",
+   "passes": 627452880.0,
    "title": "Electronics and Appliance Retailers",
    "wage_bill": 3137264400.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 367852346.6666667,
    "emp": 42820.0,
-   "freed": 1103557040.0,
    "naics": "561700",
+   "passes": 551778520.0,
    "title": "Services to Buildings and Dwellings",
    "wage_bill": 2758892600.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 300671573.3333333,
    "emp": 26480.0,
-   "freed": 902014720.0,
    "naics": "551100",
+   "passes": 451007360.0,
    "title": "Management of Companies and Enterprises",
    "wage_bill": 2255036800.0
   }
  ],
  "role": {
-  "agreed3": null,
+  "accountable_removed": 0.0,
+  "agreed3": 12869298026.666666,
   "ai_exposure": null,
-  "band_hi": 0.7333333333333333,
-  "band_lo": 0.13333333333333333,
-  "contested": 0.0,
+  "by_scorer": {
+   "gemini": 0.2,
+   "gpt6": 0.13333333333333333,
+   "sonnet": 0.2
+  },
+  "contested": 6434649013.333333,
   "emp": 1188040.0,
-  "freed": 38607894080.0,
   "function": "Sales",
   "href": "/census/roles/41-3091",
+  "n_passes": 3,
+  "n_tasks": 15,
+  "not_called": 0.0,
   "occ": "41-3091",
-  "payroll_scored_by_three": 0.0,
-  "ref": "census:2026-09-25.1/roles.csv#41-3091",
-  "scored_by_three": false,
-  "share_goes": 0.39999999999999997,
+  "passes": 19303947040.0,
+  "payroll_scored_by_three": 96519735199.99998,
+  "physical_removed": 0.0,
+  "ref": "census:v3.2-2026-09-24/roles.csv#41-3091",
+  "rule_loose": 0.7333333333333333,
+  "rule_strict": 0.06666666666666667,
+  "scored_by_three": true,
+  "scorer_max": 0.2,
+  "scorer_min": 0.13333333333333333,
+  "share_passes": 0.2,
+  "split": "direct",
+  "time_share_basis": "equal",
   "title": "Sales Representatives of Services, Except Advertising, Insurance, Financial Services, and Travel",
   "wage_bill": 96519735200.0
  },
+ "scorers": [
+  "sonnet",
+  "gemini",
+  "gpt6"
+ ],
  "tasks": [
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": true,
    "contested": false,
-   "goes": true,
    "id": "23222",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 6434649013.333333,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#23222",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#23222",
    "task": "Answer customers' questions about services, prices, availability, or credit terms.",
    "time_share": 0.06666666666666667,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "23223",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 6434649013.333333,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#23223",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#23223",
    "task": "Attend sales or trade meetings or read related publications to obtain information about market conditions, business trends, regulations, or industry developments.",
    "time_share": 0.06666666666666667,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
-   "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "accountable": false,
+   "agreed_all_three": true,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": true,
    "id": "23224",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": true,
+   "passes_by": {
+    "gemini": true,
+    "gpt6": true,
+    "sonnet": true
+   },
    "payroll": 6434649013.333333,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#23224",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#23224",
    "task": "Compute and compare costs of services.",
    "time_share": 0.06666666666666667,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "quick to check, an existing check settles it, and a mistake is cheap"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "23225",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 6434649013.333333,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#23225",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#23225",
    "task": "Consult with clients after sales or contract signings to resolve problems and provide ongoing support.",
    "time_share": 0.06666666666666667,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "23226",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 6434649013.333333,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#23226",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#23226",
    "task": "Contact prospective or existing customers to discuss how services can meet their needs.",
    "time_share": 0.06666666666666667,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": true,
    "contested": false,
-   "goes": true,
    "id": "23227",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 6434649013.333333,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#23227",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#23227",
    "task": "Create forms or agreements to complete sales.",
    "time_share": 0.06666666666666667,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "23228",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 6434649013.333333,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#23228",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#23228",
    "task": "Develop sales presentations or proposals to explain service specifications.",
    "time_share": 0.06666666666666667,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "23229",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 6434649013.333333,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#23229",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#23229",
    "task": "Distribute promotional materials at meetings, conferences, or trade shows.",
    "time_share": 0.06666666666666667,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "23230",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 6434649013.333333,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#23230",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#23230",
    "task": "Emphasize or recommend service features based on knowledge of customers' needs and vendor capabilities and limitations.",
    "time_share": 0.06666666666666667,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "23231",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 6434649013.333333,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#23231",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#23231",
    "task": "Identify prospective customers using business directories, leads from clients, or information from conferences or trade shows.",
    "time_share": 0.06666666666666667,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": true,
    "contested": false,
-   "goes": true,
    "id": "23232",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 6434649013.333333,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#23232",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#23232",
    "task": "Inform customers of contracts or other information pertaining to purchased services.",
    "time_share": 0.06666666666666667,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "no existing check settles it"
   },
   {
-   "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "accountable": false,
+   "agreed_all_three": true,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": true,
    "id": "23233",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": true,
+   "passes_by": {
+    "gemini": true,
+    "gpt6": true,
+    "sonnet": true
+   },
    "payroll": 6434649013.333333,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#23233",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#23233",
    "task": "Maintain customer records using automated systems.",
    "time_share": 0.06666666666666667,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "quick to check, an existing check settles it, and a mistake is cheap"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "23234",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 6434649013.333333,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#23234",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#23234",
    "task": "Monitor market conditions, innovations, and competitors' services, prices, and sales.",
    "time_share": 0.06666666666666667,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "23235",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 6434649013.333333,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#23235",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#23235",
    "task": "Negotiate prices or terms of sales or service agreements.",
    "time_share": 0.06666666666666667,
-   "why": "nobody can tell quickly whether it worked"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": false,
-   "goes": true,
+   "blocked_by_missing_check": false,
+   "contested": true,
    "id": "23236",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": true,
+   "passes_by": {
+    "gemini": true,
+    "gpt6": false,
+    "sonnet": true
+   },
    "payroll": 6434649013.333333,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#23236",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#23236",
    "task": "Quote prices, credit terms, contract terms, or fulfillment dates for services.",
    "time_share": 0.06666666666666667,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "quick to check, an existing check settles it, and a mistake is cheap"
   }
  ],
- "version": "2026-09-25.1"
+ "version": "v3.2-2026-09-24"
 }

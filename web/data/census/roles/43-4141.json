@@ -1,284 +1,393 @@
 {
- "csv": "/data/census/2026-09-25.1/tasks.csv",
+ "csv": "/data/census/v3.2-2026-09-24/tasks.csv",
  "industries": [
   {
    "agreed3": 0.0,
    "emp": 35240.0,
-   "freed": 589901500.3878193,
    "naics": "5220A1",
+   "passes": 39218193.62414843,
    "title": "Credit Intermediation and Related Activities (5221 and 5223 only)",
    "wage_bill": 1669318800.0
   },
   {
    "agreed3": 0.0,
    "emp": 900.0,
-   "freed": 18080614.839623667,
    "naics": "523000",
+   "passes": 1202046.5334599684,
    "title": "Securities, Commodity Contracts, and Other Financial Investments and Related Activities",
    "wage_bill": 51165000.0
   },
   {
    "agreed3": 0.0,
    "emp": 910.0,
-   "freed": 16207355.008394407,
    "naics": "551100",
+   "passes": 1077507.323572911,
    "title": "Management of Companies and Enterprises",
    "wage_bill": 45864000.0
   },
   {
    "agreed3": 0.0,
    "emp": 300.0,
-   "freed": 4331714.584268678,
    "naics": "522200",
+   "passes": 287983.70775241463,
    "title": "Nondepository Credit Intermediation",
    "wage_bill": 12258000.0
   },
   {
    "agreed3": 0.0,
    "emp": 130.0,
-   "freed": 2360356.860349503,
    "naics": "524100",
+   "passes": 156922.69355208665,
    "title": "Insurance Carriers",
    "wage_bill": 6679400.0
   },
   {
    "agreed3": 0.0,
    "emp": 80.0,
-   "freed": 1217318.5185094422,
    "naics": "561300",
+   "passes": 80930.51692490764,
    "title": "Employment Services",
    "wage_bill": 3444800.0
   }
  ],
  "role": {
-  "agreed3": null,
+  "accountable_removed": 0.0,
+  "agreed3": 0.0,
   "ai_exposure": 0.0,
-  "band_hi": 0.7512623866369416,
-  "band_lo": 0.02349353138786218,
-  "contested": 726346198.2305843,
+  "by_scorer": {
+   "gemini": 0.07963764423602643,
+   "gpt6": 0.0037053654795836627,
+   "sonnet": 0.02349353138786218
+  },
+  "contested": 149078141.76860324,
   "emp": 37560.0,
-  "freed": 632098860.198965,
   "function": "Finance",
   "href": "/census/roles/43-4141",
+  "n_passes": 1,
+  "n_tasks": 15,
+  "not_called": 0.0,
   "occ": "43-4141",
-  "payroll_scored_by_three": 0.0,
-  "ref": "census:2026-09-25.1/roles.csv#43-4141",
-  "scored_by_three": false,
-  "share_goes": 0.3533785759723183,
+  "passes": 42023584.39941072,
+  "payroll_scored_by_three": 1788730000.0,
+  "physical_removed": 481787074.9171335,
+  "ref": "census:v3.2-2026-09-24/roles.csv#43-4141",
+  "rule_loose": 0.5004968854609232,
+  "rule_strict": 0.0,
+  "scored_by_three": true,
+  "scorer_max": 0.07963764423602643,
+  "scorer_min": 0.0037053654795836627,
+  "share_passes": 0.02349353138786218,
+  "split": "direct",
+  "time_share_basis": "rated",
   "title": "New Accounts Clerks",
   "wage_bill": 1788730000.0
  },
+ "scorers": [
+  "sonnet",
+  "gemini",
+  "gpt6"
+ ],
  "tasks": [
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "4728",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 242198019.18735632,
-   "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#4728",
+   "physical": true,
+   "ref": "census:v3.2-2026-09-24/tasks.csv#4728",
    "task": "Collect and record customer deposits and fees and issue receipts, using computers.",
    "time_share": 0.13540222346992353,
-   "why": "nobody can tell quickly whether it worked"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "4730",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 216015105.19401678,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#4730",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#4730",
    "task": "Perform teller duties as required.",
    "time_share": 0.12076451180111968,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": true,
+   "blocked_by_missing_check": true,
+   "contested": false,
    "id": "4726",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 208357030.45565724,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#4726",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#4726",
    "task": "Inform customers of procedures for applying for services, such as ATM cards, direct deposit of checks, and certificates of deposit.",
    "time_share": 0.11648322019290627,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": true,
    "id": "4723",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 206353755.73122308,
-   "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#4723",
+   "physical": true,
+   "ref": "census:v3.2-2026-09-24/tasks.csv#4723",
    "task": "Compile information about new accounts, enter account information into computers, and file related forms or other documents.",
    "time_share": 0.11536327770609488,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
+   "blocked_by_missing_check": true,
    "contested": false,
-   "goes": false,
    "id": "4722",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 195528314.57593727,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#4722",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#4722",
    "task": "Answer customers' questions and explain available services, such as deposit accounts, bonds, and securities.",
    "time_share": 0.10931125132129348,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": true,
+   "blocked_by_missing_check": true,
+   "contested": false,
    "id": "4725",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 175364489.61267388,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#4725",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#4725",
    "task": "Interview customers to obtain information needed for opening accounts or renting safe-deposit boxes.",
    "time_share": 0.09803854668545497,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "4724",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 166925817.51764554,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#4724",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#4724",
    "task": "Refer customers to appropriate bank personnel to meet their financial needs.",
    "time_share": 0.09332085754565839,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": true,
-   "goes": false,
    "id": "4729",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": true,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 100426658.97489683,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#4729",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#4729",
    "task": "Investigate and correct errors upon customers' request, according to customer and bank records.",
    "time_share": 0.05614411284816424,
    "why": "nobody can tell quickly whether it worked"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "4733",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 82742199.0018056,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#4733",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#4733",
    "task": "Issue initial and replacement safe-deposit keys to customers, and admit customers to vaults.",
    "time_share": 0.04625751175515903,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "4731",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 78207785.60397358,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#4731",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#4731",
    "task": "Execute wire transfers of funds.",
    "time_share": 0.04372252134417916,
    "why": "a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": false,
-   "goes": true,
+   "blocked_by_missing_check": false,
+   "contested": true,
    "id": "4727",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": true,
+   "passes_by": {
+    "gemini": true,
+    "gpt6": false,
+    "sonnet": true
+   },
    "payroll": 42023584.39941072,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#4727",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#4727",
    "task": "Obtain credit records from reporting agencies.",
    "time_share": 0.02349353138786218,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "quick to check, an existing check settles it, and a mistake is cheap"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "20141",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 34724041.35255338,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#20141",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#20141",
    "task": "Process loan applications.",
    "time_share": 0.01941267902509232,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "4734",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 26143295.24901108,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#4734",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#4734",
    "task": "Perform foreign currency transactions and sell traveler's checks.",
    "time_share": 0.01461556257736555,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "4732",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 7092004.749542956,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#4732",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#4732",
    "task": "Duplicate records for distribution to branch offices.",
    "time_share": 0.003964826860142647,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": false,
-   "goes": false,
+   "blocked_by_missing_check": false,
+   "contested": true,
    "id": "4735",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": true,
+    "sonnet": false
+   },
    "payroll": 6627898.394295685,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#4735",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#4735",
    "task": "Schedule repairs for locks on safe-deposit boxes.",
    "time_share": 0.0037053654795836627,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   }
  ],
- "version": "2026-09-25.1"
+ "version": "v3.2-2026-09-24"
 }

@@ -1,246 +1,325 @@
 {
- "csv": "/data/census/2026-09-25.1/tasks.csv",
+ "csv": "/data/census/v3.2-2026-09-24/tasks.csv",
  "industries": [
   {
-   "agreed3": 345074201.5678842,
+   "agreed3": 0.0,
    "emp": 10020.0,
-   "freed": 345074201.56788415,
    "naics": "541700",
+   "passes": 0.0,
    "title": "Scientific Research and Development Services",
    "wage_bill": 1756105200.0
   },
   {
-   "agreed3": 84579615.54348013,
+   "agreed3": 0.0,
    "emp": 2980.0,
-   "freed": 84579615.54348011,
    "naics": "999100",
+   "passes": 0.0,
    "title": "Federal Executive Branch (OEWS Designation)",
    "wage_bill": 430431200.0
   },
   {
-   "agreed3": 67581799.20637989,
+   "agreed3": 0.0,
    "emp": 1540.0,
-   "freed": 67581799.20637988,
    "naics": "622100",
+   "passes": 0.0,
    "title": "General Medical and Surgical Hospitals",
    "wage_bill": 343928200.0
   },
   {
-   "agreed3": 65752976.19851436,
+   "agreed3": 0.0,
    "emp": 2820.0,
-   "freed": 65752976.19851435,
    "naics": "611300",
+   "passes": 0.0,
    "title": "Colleges, Universities, and Professional Schools",
    "wage_bill": 334621200.0
   },
   {
-   "agreed3": 37258039.12852392,
+   "agreed3": 0.0,
    "emp": 820.0,
-   "freed": 37258039.128523916,
    "naics": "621100",
+   "passes": 0.0,
    "title": "Offices of Physicians",
    "wage_bill": 189608600.0
   },
   {
-   "agreed3": 23528936.887151707,
+   "agreed3": 0.0,
    "emp": 790.0,
-   "freed": 23528936.887151703,
    "naics": "541300",
+   "passes": 0.0,
    "title": "Architectural, Engineering, and Related Services",
    "wage_bill": 119740300.0
   },
   {
-   "agreed3": 16409830.188348118,
+   "agreed3": 0.0,
    "emp": 490.0,
-   "freed": 16409830.188348114,
    "naics": "334500",
+   "passes": 0.0,
    "title": "Navigational, Measuring, Electromedical, and Control Instruments Manufacturing",
    "wage_bill": 83510700.0
   },
   {
-   "agreed3": 10374714.262391867,
+   "agreed3": 0.0,
    "emp": 240.0,
-   "freed": 10374714.262391867,
    "naics": "622300",
+   "passes": 0.0,
    "title": "Specialty (except Psychiatric and Substance Abuse) Hospitals",
    "wage_bill": 52797600.0
   },
   {
-   "agreed3": 7248265.972798434,
+   "agreed3": 0.0,
    "emp": 310.0,
-   "freed": 7248265.972798433,
    "naics": "541600",
+   "passes": 0.0,
    "title": "Management, Scientific, and Technical Consulting Services",
    "wage_bill": 36886900.0
   },
   {
-   "agreed3": 6130791.645579085,
+   "agreed3": 0.0,
    "emp": 150.0,
-   "freed": 6130791.645579084,
    "naics": "621400",
+   "passes": 0.0,
    "title": "Outpatient Care Centers",
    "wage_bill": 31200000.0
   }
  ],
  "role": {
-  "agreed3": 683522432.1649694,
+  "accountable_removed": 0.0,
+  "agreed3": 0.0,
   "ai_exposure": 0.2727,
-  "band_hi": 0.6392710069941592,
-  "band_lo": 0.0,
-  "contested": 469605885.91871256,
+  "by_scorer": {
+   "gemini": 0.0,
+   "gpt6": 0.19649973223009887,
+   "sonnet": 0.0
+  },
+  "contested": 683522432.1649694,
   "emp": 20970.0,
-  "freed": 683522432.1649694,
   "function": "Research",
   "href": "/census/roles/19-2012",
+  "n_passes": 0,
+  "n_tasks": 10,
+  "not_called": 0.0,
   "occ": "19-2012",
+  "passes": 0.0,
   "payroll_scored_by_three": 3478490400.0,
-  "ref": "census:2026-09-25.1/roles.csv#19-2012",
+  "physical_removed": 0.0,
+  "ref": "census:v3.2-2026-09-24/roles.csv#19-2012",
+  "rule_loose": 0.4995900433904017,
+  "rule_strict": 0.0,
   "scored_by_three": true,
-  "share_goes": 0.19649973223009887,
+  "scorer_max": 0.19649973223009887,
+  "scorer_min": 0.0,
+  "share_passes": 0.0,
+  "split": "direct",
+  "time_share_basis": "rated",
   "title": "Physicists",
   "wage_bill": 3478490400.0
  },
+ "scorers": [
+  "sonnet",
+  "gemini",
+  "gpt6"
+ ],
  "tasks": [
   {
-   "agreed_all_three": true,
-   "blocked_by_verifier": false,
-   "contested": false,
-   "goes": true,
+   "accountable": false,
+   "agreed_all_three": false,
+   "blocked_by_missing_check": false,
+   "contested": true,
    "id": "10903",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": true,
+    "sonnet": false
+   },
    "payroll": 683522432.1649694,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#10903",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#10903",
    "task": "Perform complex calculations as part of the analysis and evaluation of data, using computers.",
    "time_share": 0.19649973223009887,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
+   "blocked_by_missing_check": true,
    "contested": false,
-   "goes": false,
    "id": "10904",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 584690851.7854137,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#10904",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#10904",
    "task": "Describe and express observations and conclusions in mathematical terms.",
    "time_share": 0.16808752779234742,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "10907",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 485878890.9584199,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#10907",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#10907",
    "task": "Design computer simulations to model physical data so that it can be better understood.",
    "time_share": 0.1396809636037575,
-   "why": "nobody can tell quickly whether it worked"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "10905",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 469605885.91871256,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#10905",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#10905",
    "task": "Analyze data from research conducted to detect and measure physical phenomena.",
    "time_share": 0.1350027833679554,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "10912",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 325743004.73692733,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#10912",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#10912",
    "task": "Teach physics to students.",
    "time_share": 0.0936449342326566,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "10911",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 226416596.28592986,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#10911",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#10911",
    "task": "Develop theories and laws on the basis of observation and experiments, and apply these theories and laws to problems in areas such as nuclear energy, optics, and aerospace technology.",
    "time_share": 0.06509047611168622,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "10906",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 210716306.7815007,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#10906",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#10906",
    "task": "Report experimental results by writing papers for scientific journals or by presenting information at scientific conferences.",
    "time_share": 0.06057694072736285,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "10908",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 198347604.14258465,
-   "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#10908",
+   "physical": true,
+   "ref": "census:v3.2-2026-09-24/tasks.csv#10908",
    "task": "Collaborate with other scientists in the design, development, and testing of experimental, industrial, or medical equipment, instrumentation, and procedures.",
    "time_share": 0.05702117336376281,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "21174",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 171181725.6838368,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#21174",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#21174",
    "task": "Write research proposals to receive funding.",
    "time_share": 0.04921149866730602,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "10910",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 122387101.54170495,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#10910",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#10910",
    "task": "Observe the structure and properties of matter, and the transformation and propagation of energy, using equipment such as masers, lasers, and telescopes, to explore and identify the basic principles governing these phenomena.",
    "time_share": 0.03518396990306627,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   }
  ],
- "version": "2026-09-25.1"
+ "version": "v3.2-2026-09-24"
 }

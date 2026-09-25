@@ -1,392 +1,537 @@
 {
- "csv": "/data/census/2026-09-25.1/tasks.csv",
+ "csv": "/data/census/v3.2-2026-09-24/tasks.csv",
  "industries": [
   {
-   "agreed3": 340144167.20853114,
+   "agreed3": 0.0,
    "emp": 44450.0,
-   "freed": 499959900.59477234,
    "naics": "999200",
+   "passes": 0.0,
    "title": "State Government, excluding Schools and Hospitals (OEWS Designation)",
    "wage_bill": 3112389000.0
   },
   {
-   "agreed3": 325669716.1965914,
+   "agreed3": 0.0,
    "emp": 40010.0,
-   "freed": 478684671.4809456,
    "naics": "999300",
+   "passes": 0.0,
    "title": "Local Government, excluding Schools and Hospitals (OEWS Designation)",
    "wage_bill": 2979944800.0
   },
   {
-   "agreed3": 4814208.863256812,
+   "agreed3": 0.0,
    "emp": 980.0,
-   "freed": 7076150.693599135,
    "naics": "624100",
+   "passes": 0.0,
    "title": "Individual and Family Services",
    "wage_bill": 44051000.0
   },
   {
-   "agreed3": 3975244.0910481545,
+   "agreed3": 0.0,
    "emp": 670.0,
-   "freed": 5843000.79848773,
    "naics": "561200",
+   "passes": 0.0,
    "title": "Facilities Support Services",
    "wage_bill": 36374300.0
   },
   {
-   "agreed3": 1471442.3766745299,
+   "agreed3": 0.0,
    "emp": 300.0,
-   "freed": 2162795.235945126,
    "naics": "623900",
+   "passes": 0.0,
    "title": "Other Residential Care Facilities",
    "wage_bill": 13464000.0
   },
   {
-   "agreed3": 858527.1745723488,
+   "agreed3": 0.0,
    "emp": 170.0,
-   "freed": 1261903.6345078822,
    "naics": "623200",
+   "passes": 0.0,
    "title": "Residential Intellectual and Developmental Disability, Mental Health, and Substance Abuse Facilities",
    "wage_bill": 7855700.0
   },
   {
-   "agreed3": 486480.88202087063,
+   "agreed3": 0.0,
    "emp": 90.0,
-   "freed": 715052.4891032482,
    "naics": "813300",
+   "passes": 0.0,
    "title": "Social Advocacy Organizations",
    "wage_bill": 4451400.0
   },
   {
-   "agreed3": 236814.35576470877,
+   "agreed3": 0.0,
    "emp": 30.0,
-   "freed": 348080.88211300457,
    "naics": "622200",
+   "passes": 0.0,
    "title": "Psychiatric and Substance Abuse Hospitals",
    "wage_bill": 2166900.0
   },
   {
-   "agreed3": 195241.5185627635,
+   "agreed3": 0.0,
    "emp": 30.0,
-   "freed": 286975.1700100986,
    "naics": "621400",
+   "passes": 0.0,
    "title": "Outpatient Care Centers",
    "wage_bill": 1786500.0
   }
  ],
  "role": {
-  "agreed3": 677851842.6670227,
+  "accountable_removed": 0.0,
+  "agreed3": 0.0,
   "ai_exposure": 0.0,
-  "band_hi": 0.42201304414192164,
-  "band_lo": 0.0,
-  "contested": 977118475.7073588,
+  "by_scorer": {
+   "gemini": 0.0,
+   "gpt6": 0.0,
+   "sonnet": 0.12736971005079423
+  },
+  "contested": 790008537.7268064,
   "emp": 86730.0,
-  "freed": 996338530.9794841,
   "function": "Social services",
   "href": "/census/roles/21-1092",
+  "n_passes": 0,
+  "n_tasks": 21,
+  "not_called": 0.0,
   "occ": "21-1092",
-  "payroll_scored_by_three": 6202483600.0,
-  "ref": "census:2026-09-25.1/roles.csv#21-1092",
+  "passes": 0.0,
+  "payroll_scored_by_three": 6202483599.999999,
+  "physical_removed": 0.0,
+  "ref": "census:v3.2-2026-09-24/roles.csv#21-1092",
+  "rule_loose": 0.3594167806205957,
+  "rule_strict": 0.0,
   "scored_by_three": true,
-  "share_goes": 0.1606354156227812,
+  "scorer_max": 0.12736971005079423,
+  "scorer_min": 0.0,
+  "share_passes": 0.0,
+  "split": "direct",
+  "time_share_basis": "rated",
   "title": "Probation Officers and Correctional Treatment Specialists",
   "wage_bill": 6202483600.0
  },
+ "scorers": [
+  "sonnet",
+  "gemini",
+  "gpt6"
+ ],
  "tasks": [
   {
-   "agreed_all_three": true,
-   "blocked_by_verifier": false,
-   "contested": false,
-   "goes": true,
+   "accountable": false,
+   "agreed_all_three": false,
+   "blocked_by_missing_check": false,
+   "contested": true,
    "id": "1614",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": true
+   },
    "payroll": 471521849.41434497,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#1614",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#1614",
    "task": "Prepare and maintain case folder for each assigned inmate or offender.",
    "time_share": 0.07602145847098168,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "1617",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 459986437.5706721,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#1617",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#1617",
    "task": "Discuss with offenders how such issues as drug and alcohol abuse and anger management problems might have played roles in their criminal behavior.",
    "time_share": 0.07416165317562018,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "1618",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 432448903.65832657,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#1618",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#1618",
    "task": "Gather information about offenders' backgrounds by talking to offenders, their families and friends, and other people who have relevant information.",
    "time_share": 0.06972189392944571,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": true,
    "contested": false,
-   "goes": false,
    "id": "1615",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 403586752.60488945,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#1615",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#1615",
    "task": "Write reports describing offenders' progress.",
    "time_share": 0.0650685723062435,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "1620",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 402706814.0351868,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#1620",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#1620",
    "task": "Develop liaisons and networks with other parole officers, community agencies, correctional institutions, psychiatric facilities, and aftercare agencies to plan for helping offenders with life adjustments.",
    "time_share": 0.06492670356035876,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "1625",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 396902500.1213423,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#1625",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#1625",
    "task": "Interview probationers and parolees regularly to evaluate their progress in accomplishing goals and maintaining the terms specified in their probation contracts and rehabilitation plans.",
    "time_share": 0.06399089876212527,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "20056",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 393453294.73293436,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#20056",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#20056",
    "task": "Supervise people on community-based sentences, such as electronically monitored home detention, and provide field supervision of probationers by conducting curfew checks or visits to home, work, or school.",
    "time_share": 0.06343479807555386,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "20055",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 356786945.1585531,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#20055",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#20055",
    "task": "Administer drug and alcohol tests, including random drug screens of offenders, to verify compliance with substance abuse treatment programs.",
    "time_share": 0.05752323878108329,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "1621",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 332118237.2123643,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#1621",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#1621",
    "task": "Arrange for medical, mental health, or substance abuse treatment services according to individual needs or court orders.",
    "time_share": 0.053546008120418785,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": true,
-   "goes": true,
    "id": "1616",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": true
+   },
    "payroll": 318486688.3124614,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#1616",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#1616",
    "task": "Inform offenders or inmates of requirements of conditional release, such as office visits, restitution payments, or educational and employment stipulations.",
    "time_share": 0.05134825157981254,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "1628",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 291782667.5952786,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#1628",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#1628",
    "task": "Investigate alleged parole violations, using interviews, surveillance, and search and seizure.",
    "time_share": 0.047042876114219576,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "1631",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 288015423.4843752,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#1631",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#1631",
    "task": "Participate in decisions about whether cases should go before courts and which court should hear them.",
    "time_share": 0.04643549939968808,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "1624",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 256789304.0808788,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#1624",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#1624",
    "task": "Recommend remedial action or initiate court action in response to noncompliance with terms of probation or parole.",
    "time_share": 0.04140104523305451,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "1622",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 226182883.7365708,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#1622",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#1622",
    "task": "Provide offenders or inmates with assistance in matters concerning detainers, sentences in other jurisdictions, writs, and applications for social assistance.",
    "time_share": 0.03646650250499184,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "1629",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 218368496.96044424,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#1629",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#1629",
    "task": "Conduct prehearing and presentencing investigations and testify in court regarding offenders' backgrounds and recommended sentences and sentencing conditions.",
    "time_share": 0.03520662222475594,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
-   "agreed_all_three": true,
-   "blocked_by_verifier": false,
+   "accountable": false,
+   "agreed_all_three": false,
+   "blocked_by_missing_check": true,
    "contested": false,
-   "goes": true,
    "id": "1633",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 206329993.25267777,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#1633",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#1633",
    "task": "Develop and prepare packets containing information about social service agencies, assistance organizations, and programs that might be useful for inmates or offenders.",
    "time_share": 0.033265705571986964,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "1623",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 204729993.18084565,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#1623",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#1623",
    "task": "Arrange for postrelease services, such as employment, housing, counseling, education, and social activities.",
    "time_share": 0.033007744378533405,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "1619",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 199489965.96167722,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#1619",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#1619",
    "task": "Develop rehabilitation programs for assigned offenders or inmates, establishing rules of conduct, goals, and objectives.",
    "time_share": 0.032162917119470856,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": true,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "1632",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 162069414.17573163,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#1632",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#1632",
    "task": "Identify and approve work placements for offenders with community service sentences.",
    "time_share": 0.02612976101633411,
-   "why": "nobody can tell quickly whether it worked"
+   "why": "an accountable sign-off \u2014 stays with a person"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "1627",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 91230543.13933669,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#1627",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#1627",
    "task": "Assess the suitability of penitentiary inmates for release under parole and statutory release programs and submit recommendations to parole boards.",
    "time_share": 0.014708711706926027,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "1630",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 89496491.61110789,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#1630",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#1630",
    "task": "Recommend appropriate penitentiary for initial placement of an offender.",
    "time_share": 0.014429137968395093,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   }
  ],
- "version": "2026-09-25.1"
+ "version": "v3.2-2026-09-24"
 }

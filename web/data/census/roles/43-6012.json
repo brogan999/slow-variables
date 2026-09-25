@@ -1,302 +1,405 @@
 {
- "csv": "/data/census/2026-09-25.1/tasks.csv",
+ "csv": "/data/census/v3.2-2026-09-24/tasks.csv",
  "industries": [
   {
    "agreed3": 0.0,
    "emp": 124650.0,
-   "freed": 213341773.39867586,
    "naics": "541100",
+   "passes": 0.0,
    "title": "Legal Services",
    "wage_bill": 7574980500.0
   },
   {
    "agreed3": 0.0,
    "emp": 12310.0,
-   "freed": 19477542.894217085,
    "naics": "999300",
+   "passes": 0.0,
    "title": "Local Government, excluding Schools and Hospitals (OEWS Designation)",
    "wage_bill": 691575800.0
   },
   {
    "agreed3": 0.0,
    "emp": 7690.0,
-   "freed": 12531387.244896062,
    "naics": "999200",
+   "passes": 0.0,
    "title": "State Government, excluding Schools and Hospitals (OEWS Designation)",
    "wage_bill": 444943400.0
   },
   {
    "agreed3": 0.0,
    "emp": 1140.0,
-   "freed": 2258082.735970992,
    "naics": "551100",
+   "passes": 0.0,
    "title": "Management of Companies and Enterprises",
    "wage_bill": 80176200.0
   },
   {
    "agreed3": 0.0,
    "emp": 1100.0,
-   "freed": 2004122.2882720786,
    "naics": "524100",
+   "passes": 0.0,
    "title": "Insurance Carriers",
    "wage_bill": 71159000.0
   },
   {
    "agreed3": 0.0,
    "emp": 770.0,
-   "freed": 1094723.5303506288,
    "naics": "561300",
+   "passes": 0.0,
    "title": "Employment Services",
    "wage_bill": 38869600.0
   },
   {
    "agreed3": 0.0,
    "emp": 610.0,
-   "freed": 1033894.9167078002,
    "naics": "524200",
+   "passes": 0.0,
    "title": "Agencies, Brokerages, and Other Insurance Related Activities",
    "wage_bill": 36709800.0
   },
   {
    "agreed3": 0.0,
    "emp": 590.0,
-   "freed": 1022097.0158581934,
    "naics": "813900",
+   "passes": 0.0,
    "title": "Business, Professional, Labor, Political, and Similar Organizations",
    "wage_bill": 36290900.0
   },
   {
    "agreed3": 0.0,
    "emp": 630.0,
-   "freed": 745396.9521507514,
    "naics": "561400",
+   "passes": 0.0,
    "title": "Business Support Services",
    "wage_bill": 26466300.0
   },
   {
    "agreed3": 0.0,
    "emp": 440.0,
-   "freed": 685162.5989708656,
    "naics": "541900",
+   "passes": 0.0,
    "title": "Other Professional, Scientific, and Technical Services",
    "wage_bill": 24327600.0
   }
  ],
  "role": {
-  "agreed3": null,
+  "accountable_removed": 0.0,
+  "agreed3": 0.0,
   "ai_exposure": 0.0,
-  "band_hi": 0.5959137896893554,
-  "band_lo": 0.0,
-  "contested": 3752664718.462196,
+  "by_scorer": {
+   "gemini": 0.0,
+   "gpt6": 0.1300742383658132,
+   "sonnet": 0.028164002983067198
+  },
+  "contested": 1454641681.5762794,
   "emp": 152940.0,
-  "freed": 258904120.2049361,
   "function": "Admin",
   "href": "/census/roles/43-6012",
+  "n_passes": 0,
+  "n_tasks": 14,
+  "not_called": 0.0,
   "occ": "43-6012",
-  "payroll_scored_by_three": 0.0,
-  "ref": "census:2026-09-25.1/roles.csv#43-6012",
-  "scored_by_three": false,
-  "share_goes": 0.028164002983067198,
+  "passes": 0.0,
+  "payroll_scored_by_three": 9192731600.000002,
+  "physical_removed": 2085930655.8933594,
+  "ref": "census:v3.2-2026-09-24/roles.csv#43-6012",
+  "rule_loose": 0.6070038185633186,
+  "rule_strict": 0.0,
+  "scored_by_three": true,
+  "scorer_max": 0.1300742383658132,
+  "scorer_min": 0.0,
+  "share_passes": 0.0,
+  "split": "direct",
+  "time_share_basis": "rated",
   "title": "Legal Secretaries and Administrative Assistants",
   "wage_bill": 9192731600.0
  },
+ "scorers": [
+  "sonnet",
+  "gemini",
+  "gpt6"
+ ],
  "tasks": [
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
+   "blocked_by_missing_check": true,
    "contested": true,
-   "goes": false,
    "id": "765",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": true,
+    "sonnet": false
+   },
    "payroll": 1195737561.3713434,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#765",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#765",
    "task": "Receive and place telephone calls.",
    "time_share": 0.1300742383658132,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "767",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 1173969137.9524305,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#767",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#767",
    "task": "Make photocopies of correspondence, documents, and other printed matter.",
    "time_share": 0.12770623455953292,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "768",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 1130652232.865287,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#768",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#768",
    "task": "Organize and maintain law libraries, documents, and case files.",
    "time_share": 0.12299415256127863,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "764",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 911961517.9409293,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#764",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#764",
    "task": "Mail, fax, or arrange for delivery of legal correspondence to clients, witnesses, and court officials.",
    "time_share": 0.09920462791940203,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "21078",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 791174100.6369493,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#21078",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#21078",
    "task": "Prepare, proofread, or process legal documents, such as summonses, subpoenas, complaints, appeals, motions, or pretrial agreements.",
    "time_share": 0.08606518008607467,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": true,
+   "contested": false,
    "id": "766",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 744577240.7280657,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#766",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#766",
    "task": "Schedule and make appointments.",
    "time_share": 0.08099629937287256,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "774",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 625050288.7121683,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#774",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#774",
    "task": "Complete various forms, such as accident reports, trial and courtroom requests, and applications for clients.",
    "time_share": 0.06799396696322216,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "769",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 614681686.2675554,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#769",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#769",
    "task": "Assist attorneys in collecting information such as employment, medical, and other records.",
    "time_share": 0.06686605385798007,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
+   "blocked_by_missing_check": true,
    "contested": false,
-   "goes": false,
    "id": "771",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 507833215.17986065,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#771",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#771",
    "task": "Draft and type office memos.",
    "time_share": 0.05524290681780165,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "18780",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 396125527.0136695,
-   "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#18780",
+   "physical": true,
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18780",
    "task": "Prepare and distribute invoices to bill clients or pay account expenses.",
    "time_share": 0.043091166396468,
-   "why": "nobody can tell quickly whether it worked"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
+   "blocked_by_missing_check": true,
    "contested": false,
-   "goes": false,
    "id": "773",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 343991785.23854333,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#773",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#773",
    "task": "Submit articles and information from searches to attorneys for review and approval for use.",
    "time_share": 0.037419974846055915,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": true,
    "contested": false,
-   "goes": false,
    "id": "770",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 283033762.0492213,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#770",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#770",
    "task": "Attend legal meetings, such as client interviews, hearings, or depositions, and take notes.",
    "time_share": 0.03078886389429898,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": false,
-   "goes": true,
+   "blocked_by_missing_check": false,
+   "contested": true,
    "id": "21079",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": true
+   },
    "payroll": 258904120.2049361,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#21079",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#21079",
    "task": "Make travel arrangements for attorneys.",
    "time_share": 0.028164002983067198,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "772",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 215039423.83904135,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#772",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#772",
    "task": "Review legal publications and perform database searches to identify laws and court decisions relevant to pending cases.",
    "time_share": 0.023392331376132135,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   }
  ],
- "version": "2026-09-25.1"
+ "version": "v3.2-2026-09-24"
 }

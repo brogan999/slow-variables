@@ -1,344 +1,465 @@
 {
- "csv": "/data/census/2026-09-25.1/tasks.csv",
+ "csv": "/data/census/v3.2-2026-09-24/tasks.csv",
  "industries": [
   {
-   "agreed3": 0.0,
+   "agreed3": 181974923.11266276,
    "emp": 18180.0,
-   "freed": 562491604.9509183,
    "naics": "551100",
+   "passes": 398730962.01982576,
    "title": "Management of Companies and Enterprises",
    "wage_bill": 1242784800.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 112042238.16907102,
    "emp": 14550.0,
-   "freed": 346326940.50375086,
    "naics": "493100",
+   "passes": 245499262.46898043,
    "title": "Warehousing and Storage",
    "wage_bill": 765184500.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 84524051.4220223,
    "emp": 9300.0,
-   "freed": 261267148.94607863,
    "naics": "3330A1",
+   "passes": 185203300.32754377,
    "title": "Machinery Manufacturing (3331, 3332, 3334, and 3339 only)",
    "wage_bill": 577251000.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 84140344.37473886,
    "emp": 8850.0,
-   "freed": 260081095.4549401,
    "naics": "999300",
+   "passes": 184362547.7805437,
    "title": "Local Government, excluding Schools and Hospitals (OEWS Designation)",
    "wage_bill": 574630500.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 80143934.07788092,
    "emp": 10730.0,
-   "freed": 247728034.91521803,
    "naics": "561300",
+   "passes": 175605887.82413012,
    "title": "Employment Services",
    "wage_bill": 547337300.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 73659629.07784112,
    "emp": 7020.0,
-   "freed": 227684794.53860015,
    "naics": "541300",
+   "passes": 161397923.74605146,
    "title": "Architectural, Engineering, and Related Services",
    "wage_bill": 503053200.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 72514262.44351162,
    "emp": 6980.0,
-   "freed": 224144421.47300822,
    "naics": "336400",
+   "passes": 158888274.98698112,
    "title": "Aerospace Product and Parts Manufacturing",
    "wage_bill": 495231000.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 69384513.19281326,
    "emp": 8780.0,
-   "freed": 214470244.12479562,
    "naics": "622100",
+   "passes": 152030583.23327076,
    "title": "General Medical and Surgical Hospitals",
    "wage_bill": 473856600.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 68561574.68980148,
    "emp": 6140.0,
-   "freed": 211926509.0242817,
    "naics": "999100",
+   "passes": 150227416.8662989,
    "title": "Federal Executive Branch (OEWS Designation)",
    "wage_bill": 468236400.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 64823575.45840656,
    "emp": 7760.0,
-   "freed": 200372207.19517258,
    "naics": "4230A1",
+   "passes": 142036969.50097314,
    "title": "Merchant Wholesalers, Durable Goods (4232, 4233, 4235, 4236, 4237, and 4239 only)",
    "wage_bill": 442708000.0
   }
  ],
  "role": {
-  "agreed3": null,
+  "accountable_removed": 0.0,
+  "agreed3": 3394457416.635559,
   "ai_exposure": 0.0934,
-  "band_hi": 0.6897253009326451,
-  "band_lo": 0.12281111180884985,
-  "contested": 3051166972.3297596,
+  "by_scorer": {
+   "gemini": 0.18538150075416526,
+   "gpt6": 0.28188031732768487,
+   "sonnet": 0.4398641302159599
+  },
+  "contested": 6802563286.095995,
   "emp": 384010.0,
-  "freed": 10492400642.690645,
   "function": "Supply chain",
   "href": "/census/roles/43-5061",
+  "n_passes": 6,
+  "n_tasks": 17,
+  "not_called": 0.0,
   "occ": "43-5061",
-  "payroll_scored_by_three": 0.0,
-  "ref": "census:2026-09-25.1/roles.csv#43-5061",
-  "scored_by_three": false,
-  "share_goes": 0.4526057970381664,
+  "passes": 7437702119.167688,
+  "payroll_scored_by_three": 23182205600.0,
+  "physical_removed": 0.0,
+  "ref": "census:v3.2-2026-09-24/roles.csv#43-5061",
+  "rule_loose": 0.786546539524286,
+  "rule_strict": 0.14642512775555572,
+  "scored_by_three": true,
+  "scorer_max": 0.4398641302159599,
+  "scorer_min": 0.18538150075416526,
+  "share_passes": 0.3208366903262944,
+  "split": "direct",
+  "time_share_basis": "rated",
   "title": "Production, Planning, and Expediting Clerks",
   "wage_bill": 23182205600.0
  },
+ "scorers": [
+  "sonnet",
+  "gemini",
+  "gpt6"
+ ],
  "tasks": [
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": false,
-   "goes": true,
+   "blocked_by_missing_check": false,
+   "contested": true,
    "id": "11370",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": true,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": true,
+    "sonnet": true
+   },
    "payroll": 2346074433.6174006,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#11370",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#11370",
    "task": "Distribute production schedules or work orders to departments.",
    "time_share": 0.10120151956625735,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "quick to check, an existing check settles it, and a mistake is cheap"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "11364",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 2181763361.633151,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#11364",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#11364",
    "task": "Confer with department supervisors or other personnel to assess progress and discuss needed changes.",
    "time_share": 0.09411370942345326,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "11372",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 2108428929.955247,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#11372",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#11372",
    "task": "Arrange for delivery, assembly, or distribution of supplies or parts to expedite flow of materials and meet production schedules.",
    "time_share": 0.09095031621819655,
    "why": "nobody can tell quickly whether it worked"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "11365",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 1868067887.766824,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#11365",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#11365",
    "task": "Revise production schedules when required due to design changes, labor or material shortages, backlogs, or other interruptions, collaborating with management, marketing, sales, production, or engineering.",
    "time_share": 0.080581973950176,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": true,
+   "contested": false,
    "id": "11363",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 1715534938.3388255,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#11363",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#11363",
    "task": "Review documents, such as production schedules, work orders, or staffing tables, to determine personnel or materials requirements or material priorities.",
    "time_share": 0.07400223119144562,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "11366",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 1693778471.7949474,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#11366",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#11366",
    "task": "Confer with establishment personnel, vendors, or customers to coordinate production or shipping activities and to resolve complaints or eliminate delays.",
    "time_share": 0.0730637326327115,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": false,
-   "goes": true,
+   "blocked_by_missing_check": false,
+   "contested": true,
    "id": "11368",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": true
+   },
    "payroll": 1690899524.4246938,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#11368",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#11368",
    "task": "Requisition and maintain inventories of materials or supplies necessary to meet production demands.",
    "time_share": 0.07293954482159773,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "nobody can tell quickly whether it worked"
   },
   {
-   "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "accountable": false,
+   "agreed_all_three": true,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": true,
    "id": "11371",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": true,
+   "passes_by": {
+    "gemini": true,
+    "gpt6": true,
+    "sonnet": true
+   },
    "payroll": 1450519621.0022695,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#11371",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#11371",
    "task": "Compile information, such as production rates and progress, materials inventories, materials used, or customer information, so that status reports can be completed.",
    "time_share": 0.06257038894531543,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "quick to check, an existing check settles it, and a mistake is cheap"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "11375",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 1449242145.0626285,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#11375",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#11375",
    "task": "Plan production commitments or timetables for business units, specific programs, or jobs, using sales forecasts.",
    "time_share": 0.0625152830610142,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": true,
    "id": "11362",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 1089455560.589763,
-   "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#11362",
+   "physical": true,
+   "ref": "census:v3.2-2026-09-24/tasks.csv#11362",
    "task": "Examine documents, materials, or products and monitor work processes to assess completeness, accuracy, and conformance to standards and specifications.",
    "time_share": 0.04699533682807829,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": false,
-   "goes": true,
+   "blocked_by_missing_check": true,
+   "contested": true,
    "id": "11377",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": true
+   },
    "payroll": 1068419059.1391724,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#11377",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#11377",
    "task": "Compile and prepare documentation related to production sequences, transportation, personnel schedules, or purchase, maintenance, or repair orders.",
    "time_share": 0.04608789506806774,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "no existing check settles it"
   },
   {
-   "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "accountable": false,
+   "agreed_all_three": true,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": true,
    "id": "11367",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": true,
+   "passes_by": {
+    "gemini": true,
+    "gpt6": true,
+    "sonnet": true
+   },
    "payroll": 1038529956.7868493,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#11367",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#11367",
    "task": "Record production data, including volume produced, consumption of raw materials, or quality control measures.",
    "time_share": 0.04479858278829385,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "quick to check, an existing check settles it, and a mistake is cheap"
   },
   {
-   "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "accountable": false,
+   "agreed_all_three": true,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": true,
    "id": "11374",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": true,
+   "passes_by": {
+    "gemini": true,
+    "gpt6": true,
+    "sonnet": true
+   },
    "payroll": 905407838.8464408,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#11374",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#11374",
    "task": "Maintain files, such as maintenance records, bills of lading, or cost reports.",
    "time_share": 0.03905615602194645,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "quick to check, an existing check settles it, and a mistake is cheap"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": false,
-   "goes": true,
+   "blocked_by_missing_check": false,
+   "contested": true,
    "id": "11369",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": true,
+   "passes_by": {
+    "gemini": true,
+    "gpt6": false,
+    "sonnet": true
+   },
    "payroll": 903094648.2840549,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#11369",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#11369",
    "task": "Calculate figures, such as required amounts of labor or materials, manufacturing costs, or wages, using pricing schedules, adding machines, calculators, or computers.",
    "time_share": 0.03895637299860954,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "quick to check, an existing check settles it, and a mistake is cheap"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
+   "blocked_by_missing_check": false,
    "contested": true,
-   "goes": false,
    "id": "11373",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": true,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": true,
+    "sonnet": true
+   },
    "payroll": 794075620.630673,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#11373",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#11373",
    "task": "Contact suppliers to verify shipment details.",
    "time_share": 0.03425367000587179,
-   "why": "no automated way to check it"
+   "why": "quick to check, an existing check settles it, and a mistake is cheap"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "11376",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 541556413.360261,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#11376",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#11376",
    "task": "Establish and prepare product construction directions and locations and information on required tools, materials, equipment, numbers of workers needed, and cost projections.",
    "time_share": 0.02336086663644554,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": true,
    "contested": false,
-   "goes": false,
    "id": "11378",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 337357188.7667988,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#11378",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#11378",
    "task": "Provide documentation and information to account for delays, difficulties, or changes to cost estimates.",
    "time_share": 0.01455241984251916,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "no existing check settles it"
   }
  ],
- "version": "2026-09-25.1"
+ "version": "v3.2-2026-09-24"
 }

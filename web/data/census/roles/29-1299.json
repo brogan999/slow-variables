@@ -1,610 +1,845 @@
 {
- "csv": "/data/census/2026-09-25.1/tasks.csv",
+ "csv": "/data/census/v3.2-2026-09-24/tasks.csv",
  "industries": [
   {
    "agreed3": 0.0,
    "emp": 19850.0,
-   "freed": 56564714.160159074,
    "naics": "999100",
+   "passes": 51577278.379723296,
    "title": "Federal Executive Branch (OEWS Designation)",
    "wage_bill": 2533455500.0
   },
   {
    "agreed3": 0.0,
    "emp": 1820.0,
-   "freed": 6853959.745516405,
    "naics": "621300",
+   "passes": 6249630.9766011005,
    "title": "Offices of Other Health Practitioners",
    "wage_bill": 306979400.0
   },
   {
    "agreed3": 0.0,
    "emp": 310.0,
-   "freed": 1549009.540133433,
    "naics": "621400",
+   "passes": 1412429.9477249326,
    "title": "Outpatient Care Centers",
    "wage_bill": 69378000.0
   },
   {
    "agreed3": 0.0,
    "emp": 890.0,
-   "freed": 1543389.809076735,
    "naics": "611300",
+   "passes": 1407305.7207676498,
    "title": "Colleges, Universities, and Professional Schools",
    "wage_bill": 69126300.0
   },
   {
    "agreed3": 0.0,
    "emp": 360.0,
-   "freed": 1213299.2653280725,
    "naics": "999300",
+   "passes": 1106319.989323248,
    "title": "Local Government, excluding Schools and Hospitals (OEWS Designation)",
    "wage_bill": 54342000.0
   },
   {
    "agreed3": 0.0,
    "emp": 270.0,
-   "freed": 650395.119590489,
    "naics": "999200",
+   "passes": 593048.3453863127,
    "title": "State Government, excluding Schools and Hospitals (OEWS Designation)",
    "wage_bill": 29130300.0
   },
   {
    "agreed3": 0.0,
    "emp": 160.0,
-   "freed": 375774.02295052796,
    "naics": "622300",
+   "passes": 342641.19738518994,
    "title": "Specialty (except Psychiatric and Substance Abuse) Hospitals",
    "wage_bill": 16830400.0
   },
   {
    "agreed3": 0.0,
    "emp": 120.0,
-   "freed": 323439.30067440635,
    "naics": "541700",
+   "passes": 294920.9431624213,
    "title": "Scientific Research and Development Services",
    "wage_bill": 14486400.0
   },
   {
    "agreed3": 0.0,
    "emp": 60.0,
-   "freed": 265862.17533069366,
    "naics": "621500",
+   "passes": 242420.52012928316,
    "title": "Medical and Diagnostic Laboratories",
    "wage_bill": 11907600.0
   },
   {
    "agreed3": 0.0,
    "emp": 90.0,
-   "freed": 241434.09527851592,
    "naics": "551100",
+   "passes": 220146.31784893712,
    "title": "Management of Companies and Enterprises",
    "wage_bill": 10813500.0
   }
  ],
  "role": {
-  "agreed3": null,
+  "accountable_removed": 0.0,
+  "agreed3": 0.0,
   "ai_exposure": 0.0222,
-  "band_hi": 0.33234379140804915,
-  "band_lo": 0.0,
-  "contested": 585568407.7714912,
+  "by_scorer": {
+   "gemini": 0.020358470231556583,
+   "gpt6": 0.0,
+   "sonnet": 0.07253748464139795
+  },
+  "contested": 229322158.30860934,
   "emp": 24340.0,
-  "freed": 70585556.88779119,
   "function": "Clinical",
   "href": "/census/roles/29-1299",
+  "n_passes": 1,
+  "n_tasks": 36,
+  "not_called": 0.0,
   "occ": "29-1299",
-  "payroll_scored_by_three": 0.0,
-  "ref": "census:2026-09-25.1/roles.csv#29-1299",
-  "scored_by_three": false,
-  "share_goes": 0.022327099947150868,
+  "passes": 64361872.43660886,
+  "payroll_scored_by_three": 3161429699.9999995,
+  "physical_removed": 0.0,
+  "ref": "census:v3.2-2026-09-24/roles.csv#29-1299",
+  "rule_loose": 0.2280789103823373,
+  "rule_strict": 0.0,
+  "scored_by_three": true,
+  "scorer_max": 0.07253748464139795,
+  "scorer_min": 0.0,
+  "share_passes": 0.020358470231556583,
+  "split": "direct",
+  "time_share_basis": "rated",
   "title": "Healthcare Diagnosing or Treating Practitioners, All Other",
   "wage_bill": 3161429700.0
  },
+ "scorers": [
+  "sonnet",
+  "gemini",
+  "gpt6"
+ ],
  "tasks": [
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "18429",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 176751249.92377713,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#18429",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18429",
    "task": "Examine patients with problems related to ocular motility, binocular vision, amblyopia, or strabismus.",
    "time_share": 0.05590864472607983,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "18428",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 175721397.19622394,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#18428",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18428",
    "task": "Perform diagnostic tests or measurements, such as motor testing, visual acuity testing, lensometry, retinoscopy, and color vision testing.",
    "time_share": 0.05558288934788711,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "18430",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 171014895.35577554,
-   "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#18430",
+   "physical": true,
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18430",
    "task": "Evaluate, diagnose, or treat disorders of the visual system with an emphasis on binocular vision or abnormal eye movements.",
    "time_share": 0.05409416358547386,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "18411",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 165574845.11003542,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#18411",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18411",
    "task": "Interview patients to document symptoms and health histories.",
    "time_share": 0.05237340723092322,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
+   "blocked_by_missing_check": false,
    "contested": true,
-   "goes": false,
    "id": "18418",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": true
+   },
    "payroll": 164960285.8720005,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#18418",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18418",
    "task": "Document patients' histories, including identifying data, chief complaints, illnesses, previous medical or family histories, or psychosocial characteristics.",
    "time_share": 0.05217901440984137,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "18432",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 157751796.31446943,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#18432",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18432",
    "task": "Provide instructions to patients or family members concerning diagnoses or treatment plans.",
    "time_share": 0.04989887844555564,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "18412",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 157620279.26782197,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#18412",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18412",
    "task": "Educate patients about health care management.",
    "time_share": 0.049857277948588255,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "18426",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 153966035.85792848,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#18426",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18426",
    "task": "Provide nonsurgical interventions, including corrective lenses, patches, drops, fusion exercises, or stereograms, to treat conditions such as strabismus, heterophoria, and convergence insufficiency.",
    "time_share": 0.04870139477019795,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "18413",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 151961577.95614162,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#18413",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18413",
    "task": "Advise patients about therapeutic exercise and nutritional medicine regimens.",
    "time_share": 0.04806735951020566,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "18409",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 148094643.61201513,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#18409",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18409",
    "task": "Administer, dispense, or prescribe natural medicines, such as food or botanical extracts, herbs, dietary supplements, vitamins, nutraceuticals, and amino acids.",
    "time_share": 0.046844199512649336,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "18431",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 142052103.46273932,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#18431",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18431",
    "task": "Interpret clinical or diagnostic test results.",
    "time_share": 0.04493286801940885,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "18427",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 131079014.57575697,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#18427",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18427",
    "task": "Develop nonsurgical treatment plans for patients with conditions such as strabismus, nystagmus, and other visual disorders.",
    "time_share": 0.04146194191057197,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "18434",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 123828509.64003766,
-   "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#18434",
+   "physical": true,
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18434",
    "task": "Develop or use special test and communication techniques to facilitate diagnosis and treatment of children or patients with disabilities.",
    "time_share": 0.039168515953411094,
-   "why": "no automated way to check it"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "18414",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 121413669.84005369,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#18414",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18414",
    "task": "Diagnose health conditions, based on patients' symptoms and health histories, laboratory and diagnostic radiology test results, or other physiological measurements, such as electrocardiograms and electroencephalographs.",
    "time_share": 0.038404671734454096,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "18410",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 115801208.70832385,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#18410",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18410",
    "task": "Conduct physical examinations and physiological function tests for diagnostic purposes.",
    "time_share": 0.036629379646912236,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "18408",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 114639104.1116702,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#18408",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18408",
    "task": "Administer treatments or therapies, such as homeopathy, hydrotherapy, Oriental or Ayurvedic medicine, electrotherapy, and diathermy, using physical agents including air, heat, cold, water, sound, or ultraviolet light to catalyze the body to heal itself.",
    "time_share": 0.036261791338162666,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "18440",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 77365957.20379736,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#18440",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18440",
    "task": "Provide training related to clinical methods or orthoptics to students, resident physicians, or other health professionals.",
    "time_share": 0.02447182589693434,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "18435",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 69851993.42154075,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#18435",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18435",
    "task": "Collaborate with ophthalmologists, optometrists, or other specialists in the diagnosis, treatment, or management of conditions such as glaucoma, cataracts, and retinal diseases.",
    "time_share": 0.022095064591042702,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "18420",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 66160318.23885887,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#18420",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18420",
    "task": "Consult with other health professionals to provide optimal patient care, referring patients to traditional health care professionals as necessary.",
    "time_share": 0.020927341271848896,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": false,
-   "goes": true,
+   "blocked_by_missing_check": false,
+   "contested": true,
    "id": "18424",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": true,
+   "passes_by": {
+    "gemini": true,
+    "gpt6": false,
+    "sonnet": true
+   },
    "payroll": 64361872.43660886,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#18424",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18424",
    "task": "Obtain medical records from previous physicians or other health care providers for the purpose of patient evaluation.",
    "time_share": 0.020358470231556583,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "quick to check, an existing check settles it, and a mistake is cheap"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "18436",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 63283348.43693512,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#18436",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18436",
    "task": "Prepare diagnostic or treatment reports for other medical practitioners or therapists.",
    "time_share": 0.020017319517474996,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "18406",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 62757702.82837899,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#18406",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18406",
    "task": "Maintain professional development through activities such as postgraduate education, continuing education, preceptorships, and residency programs.",
    "time_share": 0.01985105119635556,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
-  },
-  {
-   "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": false,
-   "goes": false,
-   "id": "18423",
-   "n_scorers": 2,
-   "payroll": 50822203.95134847,
-   "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#18423",
-   "task": "Conduct periodic public health maintenance activities such as immunizations and screenings for diseases and disease risk factors.",
-   "time_share": 0.016075702695950655,
-   "why": "physical work \u2014 out of reach whatever its structure"
-  },
-  {
-   "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": false,
-   "id": "18407",
-   "n_scorers": 2,
-   "payroll": 49697824.88978081,
-   "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#18407",
-   "task": "Order diagnostic imaging procedures such as radiographs (x-rays), ultrasounds, mammograms, and bone densitometry tests, or refer patients to other health professionals for these procedures.",
-   "time_share": 0.01572004744871626,
    "why": "nobody can tell quickly whether it worked"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
+   "id": "18423",
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
+   "payroll": 50822203.95134847,
+   "physical": true,
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18423",
+   "task": "Conduct periodic public health maintenance activities such as immunizations and screenings for diseases and disease risk factors.",
+   "time_share": 0.016075702695950655,
+   "why": "physical work, outside the screen"
+  },
+  {
+   "accountable": false,
+   "agreed_all_three": false,
+   "blocked_by_missing_check": false,
+   "contested": false,
+   "id": "18407",
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
+   "payroll": 49697824.88978081,
+   "physical": false,
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18407",
+   "task": "Order diagnostic imaging procedures such as radiographs (x-rays), ultrasounds, mammograms, and bone densitometry tests, or refer patients to other health professionals for these procedures.",
+   "time_share": 0.01572004744871626,
+   "why": "no existing check settles it"
+  },
+  {
+   "accountable": false,
+   "agreed_all_three": false,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "18433",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 49201783.71534705,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#18433",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18433",
    "task": "Refer patients to ophthalmic surgeons or other physicians.",
    "time_share": 0.015563143382674949,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "18425",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 45897382.47097091,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#18425",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18425",
    "task": "Assist ophthalmologists in diagnostic ophthalmic procedures, such as ultrasonography, fundus photography, and tonometry.",
    "time_share": 0.014517919683923672,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "18417",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 31826297.883995794,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#18417",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18417",
    "task": "Prescribe synthetic drugs under the supervision of medical doctors or within the allowances of regulatory bodies.",
    "time_share": 0.010067058547591868,
-   "why": "nobody can tell quickly whether it worked, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "18405",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 29777089.194827233,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#18405",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18405",
    "task": "Perform mobilizations and high-velocity adjustments to joints or soft tissues, using principles of massage, stretching, or resistance.",
    "time_share": 0.00941886805037203,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "18415",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 28800060.256025057,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#18415",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18415",
    "task": "Perform venipuncture or skin pricking to collect blood samples.",
    "time_share": 0.009109821501336898,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "18437",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 28541111.20946324,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#18437",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18437",
    "task": "Participate in clinical research projects.",
    "time_share": 0.009027912659093206,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "18422",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 23106969.30556419,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#18422",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18422",
    "task": "Monitor updates from public health agencies to keep abreast of health trends.",
    "time_share": 0.007309025187422068,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "18416",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 15125358.673685335,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#18416",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18416",
    "task": "Treat minor cuts, abrasions, or contusions.",
    "time_share": 0.004784341297763266,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "18419",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 11989853.411681656,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#18419",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18419",
    "task": "Perform minor surgical procedures, such as removing warts, moles, or cysts, sampling tissues for skin cancer or lipomas, and applying or removing sutures.",
    "time_share": 0.003792541523754792,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "18438",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 9579746.875349103,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#18438",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18438",
    "task": "Present or publish scientific papers.",
    "time_share": 0.0030301944956578042,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": true,
    "id": "18421",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 6223684.45118232,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#18421",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18421",
    "task": "Report patterns of patients' health conditions, such as disease status and births, to public health agencies.",
    "time_share": 0.001968629715594283,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "nobody can tell quickly whether it worked"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "18439",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 4828524.339887979,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#18439",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18439",
    "task": "Perform vision screening of children in schools or community health centers.",
    "time_share": 0.0015273230146120216,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   }
  ],
- "version": "2026-09-25.1"
+ "version": "v3.2-2026-09-24"
 }

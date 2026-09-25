@@ -1,318 +1,445 @@
 {
- "csv": "/data/census/2026-09-25.1/tasks.csv",
+ "csv": "/data/census/v3.2-2026-09-24/tasks.csv",
  "industries": [
   {
    "agreed3": 0.0,
    "emp": 33770.0,
-   "freed": 1383239058.6964805,
    "naics": "621100",
+   "passes": 0.0,
    "title": "Offices of Physicians",
    "wage_bill": 11638155100.0
   },
   {
    "agreed3": 0.0,
    "emp": 6480.0,
-   "freed": 240501822.69587484,
    "naics": "622100",
+   "passes": 0.0,
    "title": "General Medical and Surgical Hospitals",
    "wage_bill": 2023509600.0
   },
   {
    "agreed3": 0.0,
    "emp": 680.0,
-   "freed": 18975058.084293496,
    "naics": "611300",
+   "passes": 0.0,
    "title": "Colleges, Universities, and Professional Schools",
    "wage_bill": 159650400.0
   },
   {
    "agreed3": 0.0,
    "emp": 280.0,
-   "freed": 12904290.790216504,
    "naics": "621400",
+   "passes": 0.0,
    "title": "Outpatient Care Centers",
    "wage_bill": 108572800.0
   },
   {
    "agreed3": 0.0,
    "emp": 210.0,
-   "freed": 8402298.686594447,
    "naics": "622300",
+   "passes": 0.0,
    "title": "Specialty (except Psychiatric and Substance Abuse) Hospitals",
    "wage_bill": 70694400.0
   }
  ],
  "role": {
+  "accountable_removed": 0.0,
   "agreed3": 0.0,
   "ai_exposure": 0.0,
-  "band_hi": 0.3245726694370259,
-  "band_lo": 0.0,
-  "contested": 2275672087.8062506,
+  "by_scorer": {
+   "gemini": 0.0,
+   "gpt6": 0.0,
+   "sonnet": 0.0
+  },
+  "contested": 0.0,
   "emp": 41420.0,
-  "freed": 1664022528.9534597,
   "function": "Clinical",
   "href": "/census/roles/29-1211",
+  "n_passes": 0,
+  "n_tasks": 18,
+  "not_called": 0.0,
   "occ": "29-1211",
-  "payroll_scored_by_three": 14000582300.0,
-  "ref": "census:2026-09-25.1/roles.csv#29-1211",
+  "passes": 0.0,
+  "payroll_scored_by_three": 14000582300.000004,
+  "physical_removed": 0.0,
+  "ref": "census:v3.2-2026-09-24/roles.csv#29-1211",
+  "rule_loose": 0.06272836619940034,
+  "rule_strict": 0.0,
   "scored_by_three": true,
-  "share_goes": 0.11885380859862234,
+  "scorer_max": 0.0,
+  "scorer_min": 0.0,
+  "share_passes": 0.0,
+  "split": "direct",
+  "time_share_basis": "rated",
   "title": "Anesthesiologists",
   "wage_bill": 14000582300.0
  },
+ "scorers": [
+  "sonnet",
+  "gemini",
+  "gpt6"
+ ],
  "tasks": [
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": true,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "7756",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 1397438434.2870076,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7756",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#7756",
    "task": "Record type and amount of anesthesia and patient condition throughout procedure.",
    "time_share": 0.09981287951766175,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7754",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 1279509737.8870513,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#7754",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#7754",
    "task": "Monitor patient before, during, and after anesthesia and counteract adverse reactions or complications.",
    "time_share": 0.09138975154533761,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7753",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 1192824406.437801,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#7753",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#7753",
    "task": "Administer anesthetic or sedation during medical procedures, using local, intravenous, spinal, or caudal methods.",
    "time_share": 0.08519819968043764,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7758",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 1105823745.8603225,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#7758",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#7758",
    "task": "Position patient on operating table to maximize patient comfort and surgical accessibility.",
    "time_share": 0.07898412524315668,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7757",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 1041864672.1923723,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#7757",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#7757",
    "task": "Examine patient, obtain medical history, and use diagnostic tests to determine risk during surgical, obstetrical, and other medical procedures.",
    "time_share": 0.07441580999044392,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7759",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 1035074741.8204596,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7759",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#7759",
    "task": "Decide when patients have recovered or stabilized enough to be sent to another room or ward or to be sent home following outpatient surgery.",
    "time_share": 0.07393083513536859,
-   "why": "no automated way to check it, and a failure is too expensive"
+   "why": "no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7760",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 1028251100.9620676,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7760",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#7760",
    "task": "Coordinate administration of anesthetics with surgeons during operation.",
    "time_share": 0.07344345248854882,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7755",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 933012350.5307475,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#7755",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#7755",
    "task": "Provide and maintain life support and airway management and help prepare patients for emergency surgery.",
    "time_share": 0.06664096753538226,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7761",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 757360413.5527301,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7761",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#7761",
    "task": "Confer with other medical professionals to determine type and method of anesthetic or sedation to render patient insensible to pain.",
    "time_share": 0.05409492243424262,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7767",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 751572648.3479233,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7767",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#7767",
    "task": "Inform students and staff of types and methods of anesthesia administration, signs of complications, and emergency methods to counteract reactions.",
    "time_share": 0.053681527828162066,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7762",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 633641383.7986094,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7762",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#7762",
    "task": "Coordinate and direct work of nurses, medical technicians, and other health care providers.",
    "time_share": 0.04525821642422754,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "7763",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 611649558.8527907,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7763",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#7763",
    "task": "Order laboratory tests, x-rays, and other diagnostic procedures.",
    "time_share": 0.04368743711843976,
-   "why": "nobody can tell quickly whether it worked"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7766",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 566537254.542726,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7766",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#7766",
    "task": "Provide medical care and consultation in many settings, prescribing medication and treatment and referring patients for surgery.",
    "time_share": 0.04046526368712008,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7765",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 551907459.014765,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7765",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#7765",
    "task": "Manage anesthesiological services, coordinating them with other medical activities and formulating plans and procedures.",
    "time_share": 0.03942032175438625,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7764",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 481886892.8091421,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7764",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#7764",
    "task": "Diagnose illnesses, using examinations, tests, and reports.",
    "time_share": 0.03441906075643312,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": true,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "7768",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 266584094.66645202,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7768",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#7768",
    "task": "Schedule and maintain use of surgical suite, including operating, wash-up, waiting rooms, or anesthetic and sterilizing equipment.",
    "time_share": 0.019040929080960584,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7769",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 262218796.71369582,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7769",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#7769",
    "task": "Instruct individuals and groups on ways to preserve health and prevent disease.",
    "time_share": 0.018729135052739616,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7770",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 103424607.72333623,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7770",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#7770",
    "task": "Conduct medical research to aid in controlling and curing disease, to investigate new medications, and to develop and test new medical techniques.",
    "time_share": 0.007387164726951123,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   }
  ],
- "version": "2026-09-25.1"
+ "version": "v3.2-2026-09-24"
 }

@@ -1,340 +1,473 @@
 {
- "csv": "/data/census/2026-09-25.1/tasks.csv",
+ "csv": "/data/census/v3.2-2026-09-24/tasks.csv",
  "industries": [
   {
    "agreed3": 0.0,
    "emp": 1670.0,
-   "freed": 12315412.677828223,
    "naics": "622100",
+   "passes": 0.0,
    "title": "General Medical and Surgical Hospitals",
    "wage_bill": 242617600.0
   },
   {
    "agreed3": 0.0,
    "emp": 1300.0,
-   "freed": 9355227.617190259,
    "naics": "621100",
+   "passes": 0.0,
    "title": "Offices of Physicians",
    "wage_bill": 184301000.0
   },
   {
    "agreed3": 0.0,
    "emp": 280.0,
-   "freed": 1998769.3216289142,
    "naics": "622300",
+   "passes": 0.0,
    "title": "Specialty (except Psychiatric and Substance Abuse) Hospitals",
    "wage_bill": 39376400.0
   },
   {
    "agreed3": 0.0,
    "emp": 130.0,
-   "freed": 1085185.28718836,
    "naics": "621400",
+   "passes": 0.0,
    "title": "Outpatient Care Centers",
    "wage_bill": 21378500.0
   },
   {
    "agreed3": 0.0,
    "emp": 70.0,
-   "freed": 485230.63813134556,
    "naics": "611300",
+   "passes": 0.0,
    "title": "Colleges, Universities, and Professional Schools",
    "wage_bill": 9559200.0
   },
   {
    "agreed3": 0.0,
    "emp": 60.0,
-   "freed": 411800.3676985892,
    "naics": "423400",
+   "passes": 0.0,
    "title": "Professional and Commercial Equipment and Supplies Merchant Wholesalers",
    "wage_bill": 8112600.0
   }
  ],
  "role": {
-  "agreed3": null,
+  "accountable_removed": 0.0,
+  "agreed3": 0.0,
   "ai_exposure": null,
-  "band_hi": 0.13480611349845906,
-  "band_lo": 0.0,
-  "contested": 0.0,
+  "by_scorer": {
+   "gemini": 0.0,
+   "gpt6": 0.0,
+   "sonnet": 0.05076059064893983
+  },
+  "contested": 25651625.909665693,
   "emp": 3510.0,
-  "freed": 25651625.909665693,
   "function": "Clinical",
   "href": "/census/roles/29-2036",
+  "n_passes": 0,
+  "n_tasks": 19,
+  "not_called": 0.0,
   "occ": "29-2036",
-  "payroll_scored_by_three": 0.0,
-  "ref": "census:2026-09-25.1/roles.csv#29-2036",
-  "scored_by_three": false,
-  "share_goes": 0.05076059064893983,
+  "passes": 0.0,
+  "payroll_scored_by_three": 505345299.99999994,
+  "physical_removed": 0.0,
+  "ref": "census:v3.2-2026-09-24/roles.csv#29-2036",
+  "rule_loose": 0.0,
+  "rule_strict": 0.0,
+  "scored_by_three": true,
+  "scorer_max": 0.05076059064893983,
+  "scorer_min": 0.0,
+  "share_passes": 0.0,
+  "split": "direct",
+  "time_share_basis": "rated",
   "title": "Medical Dosimetrists",
   "wage_bill": 505345300.0
  },
+ "scorers": [
+  "sonnet",
+  "gemini",
+  "gpt6"
+ ],
  "tasks": [
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22837",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 52710732.339810796,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#22837",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22837",
    "task": "Design the arrangement of radiation fields to reduce exposure to critical patient structures, such as organs, using computers, manuals, and guides.",
    "time_share": 0.10430636703222687,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22844",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 50386401.69128794,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#22844",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22844",
    "task": "Identify and outline bodily structures, using imaging procedures, such as x-ray, magnetic resonance imaging, computed tomography, or positron emission tomography.",
    "time_share": 0.09970687704286146,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22848",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 48283949.21426113,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#22848",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22848",
    "task": "Plan the use of beam modifying devices, such as compensators, shields, and wedge filters, to ensure safe and effective delivery of radiation treatment.",
    "time_share": 0.09554644955491054,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22834",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 48130259.86134206,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#22834",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22834",
    "task": "Calculate the delivery of radiation treatment, such as the amount or extent of radiation per session, based on the prescribed course of radiation therapy.",
    "time_share": 0.09524232215347023,
    "why": "a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22833",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 45817250.350541025,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#22833",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22833",
    "task": "Calculate, or verify calculations of, prescribed radiation doses.",
    "time_share": 0.09066523494042791,
    "why": "a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22838",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 42588053.668267965,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#22838",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22838",
    "task": "Develop radiation treatment plans in consultation with members of the radiation oncology team.",
    "time_share": 0.0842751553606375,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22836",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 36588356.79528108,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#22836",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22836",
    "task": "Create and transfer reference images and localization markers for treatment delivery, using image-guided radiation therapy.",
    "time_share": 0.0724026854415804,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22832",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 29970352.296941943,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#22832",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22832",
    "task": "Advise oncology team members on use of beam modifying or immobilization devices in radiation treatment plans.",
    "time_share": 0.059306680594322224,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22850",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 27081651.555957615,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#22850",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22850",
    "task": "Supervise or perform simulations for tumor localizations, using imaging methods such as magnetic resonance imaging, computed tomography, or positron emission tomography scans.",
    "time_share": 0.05359038969187527,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": false,
-   "goes": true,
+   "blocked_by_missing_check": false,
+   "contested": true,
    "id": "22849",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": true
+   },
    "payroll": 25651625.909665693,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#22849",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22849",
    "task": "Record patient information, such as radiation doses administered, in patient records.",
    "time_share": 0.05076059064893983,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22842",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 22557407.27693048,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#22842",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22842",
    "task": "Fabricate beam modifying devices, such as compensators, shields, and wedge filters.",
    "time_share": 0.04463761170219745,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22840",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 14458132.100404264,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#22840",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22840",
    "task": "Develop treatment plans, and calculate doses for brachytherapy procedures.",
    "time_share": 0.028610401838909484,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22851",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 13051833.530507447,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#22851",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22851",
    "task": "Teach medical dosimetry, including its application, to students, radiation therapists, or residents.",
    "time_share": 0.025827555001515692,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22839",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 12501657.66110521,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#22839",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22839",
    "task": "Develop requirements for the use of patient immobilization devices and positioning aides, such as molds or casts, as part of treatment plans to ensure accurate delivery of radiation and comfort of patient.",
    "time_share": 0.02473884225519701,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22846",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 12002356.880935857,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#22846",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22846",
    "task": "Measure the amount of radioactivity in patients or equipment, using radiation monitoring devices.",
    "time_share": 0.023750803422799928,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22843",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 8869697.067343408,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#22843",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22843",
    "task": "Fabricate patient immobilization devices, such as molds or casts, for radiation delivery.",
    "time_share": 0.01755175533905907,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22847",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 8262243.541026264,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#22847",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22847",
    "task": "Perform quality assurance system checks, such as calibrations, on treatment planning computers.",
    "time_share": 0.016349698990029717,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22841",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 4797929.5114915855,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#22841",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22841",
    "task": "Educate patients regarding treatment plans, physiological reactions to treatment, or post-treatment care.",
    "time_share": 0.00949435863258565,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22835",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 1635408.7468982404,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#22835",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22835",
    "task": "Conduct radiation oncology-related research, such as improving computer treatment planning systems or developing new treatment devices.",
    "time_share": 0.003236220356453776,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   }
  ],
- "version": "2026-09-25.1"
+ "version": "v3.2-2026-09-24"
 }

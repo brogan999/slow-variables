@@ -1,0 +1,91 @@
+{
+ "name": "automatability-census",
+ "version": "v3.2-2026-09-24",
+ "draft": false,
+ "generated_at": "2026-09-25T01:49:59+00:00",
+ "sources": [
+  "O*NET 30.2 (CC BY 4.0)",
+  "BLS OEWS May 2024 national + industry (public domain)",
+  "BLS industry productivity 1987-2025",
+  "Anthropic Economic Index release 2026-06-26 (claude.ai + 1P API, Apr-May 2026)"
+ ],
+ "scorers": {
+  "sonnet": "claude-sonnet-5",
+  "gemini": "gemini-3.1-pro-preview",
+  "gpt6": "gpt-6-sol"
+ },
+ "rule": "passes = at least 2 of 3 scorers find horizon<=1, check==2, stakes<=2; not physical (either labeller or O*NET codes); not an accountable sign-off (src/verb_gate.py); fewer than 3 valid scores = not called (never passes)",
+ "headline": {
+  "by_scorer_passes_usd": {
+   "sonnet": 696093487096.4381,
+   "gemini": 400159520328.0381,
+   "gpt6": 244176428225.98343
+  },
+  "passes_usd": 388648621524.19324,
+  "knowledge_payroll_usd": 7000349226400.0,
+  "agreed_all_three_usd": 158386271953.58896,
+  "contested_usd": 635008270219.0886,
+  "modelled_saving_usd": 153873367739.9433,
+  "blocked_by_missing_check_usd": 827206877342.698,
+  "physical_removed_usd": 201424737159.88364,
+  "accountable_removed_usd": 1625388550.0748892,
+  "not_called_usd": 0.0,
+  "rule_strict_usd": 115026067576.71375,
+  "rule_loose_usd": 2428965366697.034
+ },
+ "reconciliation": {
+  "headline_usd": 388648621524.19324,
+  "tasks_sum": 388648621524.1933,
+  "roles_sum": 388648621524.19324,
+  "role_industry_sum": 388648621524.19324,
+  "industries_sum": 388648621524.19324,
+  "functions_sum": 388648621524.19324,
+  "agreed3_headline_usd": 158386271953.58896,
+  "agreed3_tasks_sum": 158386271953.58893,
+  "agreed3_roles_sum": 158386271953.58896,
+  "agreed3_role_industry_sum": 158386271953.58896,
+  "agreed3_industries_sum": 158386271953.58893,
+  "agreed3_functions_sum": 158386271953.58893,
+  "agreed3_dial_headline_step": 158386271953.58893,
+  "payroll_scored_by_three_roles": 7000349226400.0,
+  "payroll_scored_by_three_functions": 7000349226400.0,
+  "payroll_scored_by_three_tasks": 7000349226399.999,
+  "payroll_scored_by_three_role_industry": 7000349226400.0,
+  "payroll_scored_by_three_industries": 7000349226400.0,
+  "verdicts_reproduced_from_published_columns": 1.0
+ },
+ "files": {
+  "README.md": {
+   "sha256": "422d568f4a30e21874ebe304ce76d778f78f244ea648678aad75884f1e05554b",
+   "rows": null
+  },
+  "deal_sheets.json": {
+   "sha256": "dbaf138522c060e286d9d46c84a56b12edcf847c3deb47c7b86d8484e21580e1",
+   "rows": null
+  },
+  "functions.csv": {
+   "sha256": "f1c05a88512fb5b044df8cb6d37f1ba306850d7e7d942960162438fb2f0ec746",
+   "rows": 22
+  },
+  "industries.csv": {
+   "sha256": "7ea70e092df77c13131e8d0b86b80e4d1702bbf1fe8ef8ed7b6056e039ff8480",
+   "rows": 247
+  },
+  "role_industry.csv": {
+   "sha256": "215aec820c0c5bb7dc60500f3a2be99400b58487c086692e99d809e2ad3dc84c",
+   "rows": 22001
+  },
+  "roles.csv": {
+   "sha256": "e7509a15f1d41e8ad1bd182e2bdc934d1c9b4cb48c24941d1415ad2f23efc89f",
+   "rows": 425
+  },
+  "tasks.csv": {
+   "sha256": "841edbe5344c9a532f2cefaeae59a63af25e84d8a667abb31fcfe866e268d651",
+   "rows": 11176
+  },
+  "validation.json": {
+   "sha256": "8e52df5a4fcb05027441d3a0f17eccd2b4d71e7ecae429ddad04490842aa34a0",
+   "rows": null
+  }
+ }
+}

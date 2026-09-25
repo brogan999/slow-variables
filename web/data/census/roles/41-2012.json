@@ -1,256 +1,353 @@
 {
- "csv": "/data/census/2026-09-25.1/tasks.csv",
+ "csv": "/data/census/v3.2-2026-09-24/tasks.csv",
  "industries": [
   {
-   "agreed3": 0.0,
+   "agreed3": 27535274.760249056,
    "emp": 11810.0,
-   "freed": 100971177.44658653,
    "naics": "713200",
+   "passes": 78007617.12473989,
    "title": "Gambling Industries",
    "wage_bill": 418782600.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 22111251.18455714,
    "emp": 8490.0,
-   "freed": 81081415.97864237,
    "naics": "721100",
+   "passes": 62641322.14304019,
    "title": "Traveler Accommodation",
    "wage_bill": 336288900.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 1171520.7641583332,
    "emp": 480.0,
-   "freed": 4295937.919274345,
    "naics": "711200",
+   "passes": 3318926.141825772,
    "title": "Spectator Sports",
    "wage_bill": 17817600.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 1065339.8597694542,
    "emp": 510.0,
-   "freed": 3906575.146182787,
    "naics": "813400",
+   "passes": 3018114.931200635,
    "title": "Civic and Social Organizations",
    "wage_bill": 16202700.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 489350.04081629374,
    "emp": 250.0,
-   "freed": 1794434.6019777812,
    "naics": "999300",
+   "passes": 1386331.930817748,
    "title": "Local Government, excluding Schools and Hospitals (OEWS Designation)",
    "wage_bill": 7442500.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 139950.4953815897,
    "emp": 90.0,
-   "freed": 513195.03531201975,
    "naics": "722400",
+   "passes": 396480.6872348776,
    "title": "Drinking Places (Alcoholic Beverages)",
    "wage_bill": 2128500.0
   }
  ],
  "role": {
-  "agreed3": null,
+  "accountable_removed": 0.0,
+  "agreed3": 52512687.10493187,
   "ai_exposure": 0.0,
-  "band_hi": 0.5019065080374977,
-  "band_lo": 0.06575076127864209,
-  "contested": 42943594.34689587,
+  "by_scorer": {
+   "gemini": 0.24004171385690554,
+   "gpt6": 0.06575076127864209,
+   "sonnet": 0.18627234542395002
+  },
+  "contested": 139199700.20082313,
   "emp": 21630.0,
-  "freed": 192562736.12797585,
   "function": "Retail front line",
   "href": "/census/roles/41-2012",
+  "n_passes": 2,
+  "n_tasks": 13,
+  "not_called": 0.0,
   "occ": "41-2012",
-  "payroll_scored_by_three": 0.0,
-  "ref": "census:2026-09-25.1/roles.csv#41-2012",
-  "scored_by_three": false,
-  "share_goes": 0.2411064295569743,
+  "passes": 148768792.95885912,
+  "payroll_scored_by_three": 798662800.0,
+  "physical_removed": 384071108.85154486,
+  "ref": "census:v3.2-2026-09-24/roles.csv#41-2012",
+  "rule_loose": 0.27574216664282525,
+  "rule_strict": 0.06575076127864209,
+  "scored_by_three": true,
+  "scorer_max": 0.24004171385690554,
+  "scorer_min": 0.06575076127864209,
+  "share_passes": 0.18627234542395002,
+  "split": "direct",
+  "time_share_basis": "rated",
   "title": "Gambling Change Persons and Booth Cashiers",
   "wage_bill": 798662800.0
  },
+ "scorers": [
+  "sonnet",
+  "gemini",
+  "gpt6"
+ ],
  "tasks": [
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "21152",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 114781648.08365273,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#21152",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#21152",
    "task": "Exchange money, credit, tickets, or casino chips and make change for customers.",
    "time_share": 0.14371728354400973,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": false,
-   "goes": true,
+   "blocked_by_missing_check": false,
+   "contested": true,
    "id": "6999",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": true,
+   "passes_by": {
+    "gemini": true,
+    "gpt6": false,
+    "sonnet": true
+   },
    "payroll": 96256105.85392724,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#6999",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#6999",
    "task": "Keep accurate records of monetary exchanges, authorization forms, and transaction reconciliations.",
    "time_share": 0.12052158414530793,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "quick to check, an existing check settles it, and a mistake is cheap"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7003",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 87667510.11028098,
-   "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7003",
+   "physical": true,
+   "ref": "census:v3.2-2026-09-24/tasks.csv#7003",
    "task": "Maintain cage security according to rules.",
    "time_share": 0.10976786462356951,
-   "why": "no automated way to check it, and a failure is too expensive"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "6998",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 87650790.19722565,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#6998",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#6998",
    "task": "Count money and audit money drawers.",
    "time_share": 0.10974692973959178,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "21153",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 77680216.46229772,
-   "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#21153",
+   "physical": true,
+   "ref": "census:v3.2-2026-09-24/tasks.csv#21153",
    "task": "Check identifications to verify age of players.",
    "time_share": 0.09726284542399836,
-   "why": "a failure is too expensive"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7006",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 56173020.76143755,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#7006",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#7006",
    "task": "Sell gambling chips, tokens, or tickets to patrons, or to other workers for resale to patrons.",
    "time_share": 0.07033383896362463,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
-   "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "accountable": false,
+   "agreed_all_three": true,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": true,
    "id": "7007",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": true,
+   "passes_by": {
+    "gemini": true,
+    "gpt6": true,
+    "sonnet": true
+   },
    "payroll": 52512687.10493187,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7007",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#7007",
    "task": "Calculate the value of chips won or lost by players.",
    "time_share": 0.06575076127864209,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "quick to check, an existing check settles it, and a mistake is cheap"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7002",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 44293138.10829474,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#7002",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#7002",
    "task": "Listen for jackpot alarm bells and issue payoffs to winners.",
    "time_share": 0.055459122558725336,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": true,
    "id": "7004",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 43793943.16911675,
-   "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7004",
+   "physical": true,
+   "ref": "census:v3.2-2026-09-24/tasks.csv#7004",
    "task": "Obtain customers' signatures on receipts when winnings exceed the amount held in a slot machine.",
    "time_share": 0.05483408413302429,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": true,
-   "goes": false,
    "id": "7005",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": true,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 42943594.34689587,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7005",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#7005",
    "task": "Reconcile daily summaries of transactions to balance books.",
    "time_share": 0.053769368432955524,
-   "why": "nobody can tell quickly whether it worked"
+   "why": "nobody can tell quickly whether it worked, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7008",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 37378568.53181739,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#7008",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#7008",
    "task": "Furnish change persons with a money bank at the start of each shift.",
    "time_share": 0.0468014392705124,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "21154",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 29018953.68685111,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#21154",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#21154",
    "task": "Clean casino areas.",
    "time_share": 0.036334425100118736,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "7009",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 28512623.583270453,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#7009",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#7009",
    "task": "Accept credit applications and verify credit references to provide check-cashing authorization or to establish house credit accounts.",
    "time_share": 0.03570045278591973,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and a failure is too expensive"
   }
  ],
- "version": "2026-09-25.1"
+ "version": "v3.2-2026-09-24"
 }

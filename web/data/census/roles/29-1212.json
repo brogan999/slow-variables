@@ -1,416 +1,585 @@
 {
- "csv": "/data/census/2026-09-25.1/tasks.csv",
+ "csv": "/data/census/v3.2-2026-09-24/tasks.csv",
  "industries": [
   {
    "agreed3": 0.0,
    "emp": 12210.0,
-   "freed": 885820848.0,
    "naics": "621100",
+   "passes": 0.0,
    "title": "Offices of Physicians",
    "wage_bill": 5536380300.0
   },
   {
    "agreed3": 0.0,
    "emp": 4950.0,
-   "freed": 316665360.0,
    "naics": "622100",
+   "passes": 0.0,
    "title": "General Medical and Surgical Hospitals",
    "wage_bill": 1979158500.0
   },
   {
    "agreed3": 0.0,
    "emp": 300.0,
-   "freed": 20759520.0,
    "naics": "621400",
+   "passes": 0.0,
    "title": "Outpatient Care Centers",
    "wage_bill": 129747000.0
   },
   {
    "agreed3": 0.0,
    "emp": 40.0,
-   "freed": 2767936.0,
    "naics": "621500",
+   "passes": 0.0,
    "title": "Medical and Diagnostic Laboratories",
    "wage_bill": 17299600.0
   },
   {
    "agreed3": 0.0,
    "emp": 40.0,
-   "freed": 2767936.0,
    "naics": "622300",
+   "passes": 0.0,
    "title": "Specialty (except Psychiatric and Substance Abuse) Hospitals",
    "wage_bill": 17299600.0
   }
  ],
  "role": {
+  "accountable_removed": 0.0,
   "agreed3": 0.0,
   "ai_exposure": null,
-  "band_hi": 0.24,
-  "band_lo": 0.0,
-  "contested": 1228781600.0,
+  "by_scorer": {
+   "gemini": 0.0,
+   "gpt6": 0.0,
+   "sonnet": 0.08
+  },
+  "contested": 614390800.0,
   "emp": 17540.0,
-  "freed": 1228781600.0,
   "function": "Clinical",
   "href": "/census/roles/29-1212",
+  "n_passes": 0,
+  "n_tasks": 25,
+  "not_called": 0.0,
   "occ": "29-1212",
+  "passes": 0.0,
   "payroll_scored_by_three": 7679885000.0,
-  "ref": "census:2026-09-25.1/roles.csv#29-1212",
+  "physical_removed": 0.0,
+  "ref": "census:v3.2-2026-09-24/roles.csv#29-1212",
+  "rule_loose": 0.16,
+  "rule_strict": 0.0,
   "scored_by_three": true,
-  "share_goes": 0.16,
+  "scorer_max": 0.08,
+  "scorer_min": 0.0,
+  "share_passes": 0.0,
+  "split": "direct",
+  "time_share_basis": "equal",
   "title": "Cardiologists",
   "wage_bill": 7679885000.0
  },
+ "scorers": [
+  "sonnet",
+  "gemini",
+  "gpt6"
+ ],
  "tasks": [
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22689",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 307195400.0,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#22689",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22689",
    "task": "Administer emergency cardiac care for life-threatening heart problems, such as cardiac arrest and heart attack.",
    "time_share": 0.04,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22690",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 307195400.0,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#22690",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22690",
    "task": "Advise patients and community members concerning diet, activity, hygiene, or disease prevention.",
    "time_share": 0.04,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22691",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 307195400.0,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#22691",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22691",
    "task": "Answer questions that patients have about their health and well-being.",
    "time_share": 0.04,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": true,
-   "goes": true,
    "id": "22692",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": true
+   },
    "payroll": 307195400.0,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#22692",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22692",
    "task": "Calculate valve areas from blood flow velocity measurements.",
    "time_share": 0.04,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": true,
-   "goes": true,
    "id": "22693",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": true
+   },
    "payroll": 307195400.0,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#22693",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22693",
    "task": "Compare measurements of heart wall thickness and chamber sizes to standards to identify abnormalities, using the results of an echocardiogram.",
    "time_share": 0.04,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22694",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 307195400.0,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#22694",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22694",
    "task": "Conduct electrocardiogram (EKG), phonocardiogram, echocardiogram, or other cardiovascular tests to record patients' cardiac activity, using specialized electronic test equipment, recording devices, or laboratory instruments.",
    "time_share": 0.04,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22695",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 307195400.0,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#22695",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22695",
    "task": "Conduct exercise electrocardiogram tests to monitor cardiovascular activity under stress.",
    "time_share": 0.04,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22696",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 307195400.0,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#22696",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22696",
    "task": "Conduct research to develop or test medications, treatments, or procedures that prevent or control disease or injury.",
    "time_share": 0.04,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22697",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 307195400.0,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#22697",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22697",
    "task": "Conduct tests of the pulmonary system, using a spirometer or other respiratory testing equipment.",
    "time_share": 0.04,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22698",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 307195400.0,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#22698",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22698",
    "task": "Design and explain treatment plans, based on patient information such as medical history, reports, and examination results.",
    "time_share": 0.04,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22699",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 307195400.0,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#22699",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22699",
    "task": "Diagnose cardiovascular conditions, using cardiac catheterization.",
    "time_share": 0.04,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22700",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 307195400.0,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#22700",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22700",
    "task": "Diagnose medical conditions of patients, using records, reports, test results, or examination information.",
    "time_share": 0.04,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22701",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 307195400.0,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#22701",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22701",
    "task": "Explain procedures and discuss test results or prescribed treatments with patients.",
    "time_share": 0.04,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22702",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 307195400.0,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#22702",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22702",
    "task": "Inject contrast media into patients' blood vessels.",
    "time_share": 0.04,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22704",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 307195400.0,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#22704",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22704",
    "task": "Monitor patients' conditions and progress, and reevaluate treatments, as necessary.",
    "time_share": 0.04,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22705",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 307195400.0,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#22705",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22705",
    "task": "Observe ultrasound display screen, and listen to signals to record vascular information, such as blood pressure, limb volume changes, oxygen saturation, and cerebral circulation.",
    "time_share": 0.04,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": true,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "22706",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 307195400.0,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#22706",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22706",
    "task": "Obtain and record patient information, including patient identification, medical history, and examination results.",
    "time_share": 0.04,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22707",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 307195400.0,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#22707",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22707",
    "task": "Operate diagnostic imaging equipment to produce contrast-enhanced radiographs of heart and cardiovascular system.",
    "time_share": 0.04,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": true,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "22708",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 307195400.0,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#22708",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22708",
    "task": "Order medical tests, such as echocardiograms, electrocardiograms, and angiograms.",
    "time_share": 0.04,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22709",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 307195400.0,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#22709",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22709",
    "task": "Perform minimally invasive surgical procedures, such as implanting pacemakers and defibrillators.",
    "time_share": 0.04,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22710",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 307195400.0,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#22710",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22710",
    "task": "Perform vascular procedures, such as balloon angioplasty and stents.",
    "time_share": 0.04,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22711",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 307195400.0,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#22711",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22711",
    "task": "Prescribe heart medication to treat or prevent heart problems.",
    "time_share": 0.04,
-   "why": "nobody can tell quickly whether it worked, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22712",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 307195400.0,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#22712",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22712",
    "task": "Recommend surgeons or surgical procedures.",
    "time_share": 0.04,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22713",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 307195400.0,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#22713",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22713",
    "task": "Supervise or train cardiology technologists or students.",
    "time_share": 0.04,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "22714",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 307195400.0,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#22714",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#22714",
    "task": "Talk to other physicians about patients to create a treatment plan.",
    "time_share": 0.04,
-   "why": "no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   }
  ],
- "version": "2026-09-25.1"
+ "version": "v3.2-2026-09-24"
 }

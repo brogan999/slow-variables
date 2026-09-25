@@ -206,7 +206,7 @@ def test_golden_survives_a_hallucinated_id_and_flags_informational_questions():
 
     s = st.Store()
     res = golden(s, Tools(s), ScriptClient(["No record [obs:deadbeef00000000]."]))
-    assert {r["id"] for r in res if r["informational"]} == {"g14", "g15", "g17", "g18", "g19", "g20"}
+    assert {r["id"] for r in res if r["informational"]} == {"g14", "g15", "g17", "g18", "g19", "g20", "g21"}
     assert not any(r["ok"] for r in res if r["id"] not in ("g16",))
 
 

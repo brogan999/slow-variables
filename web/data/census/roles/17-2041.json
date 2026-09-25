@@ -1,302 +1,405 @@
 {
- "csv": "/data/census/2026-09-25.1/tasks.csv",
+ "csv": "/data/census/v3.2-2026-09-24/tasks.csv",
  "industries": [
   {
    "agreed3": 0.0,
    "emp": 4720.0,
-   "freed": 110826547.66359597,
    "naics": "3250A1",
+   "passes": 0.0,
    "title": "Chemical Manufacturing (3251, 3252, 3253, and 3259 only)",
    "wage_bill": 568712800.0
   },
   {
    "agreed3": 0.0,
    "emp": 2580.0,
-   "freed": 66607146.294123925,
    "naics": "541300",
+   "passes": 0.0,
    "title": "Architectural, Engineering, and Related Services",
    "wage_bill": 341798400.0
   },
   {
    "agreed3": 0.0,
    "emp": 2140.0,
-   "freed": 52587153.292860694,
    "naics": "541700",
+   "passes": 0.0,
    "title": "Scientific Research and Development Services",
    "wage_bill": 269854000.0
   },
   {
    "agreed3": 0.0,
    "emp": 1300.0,
-   "freed": 36994421.40551329,
    "naics": "551100",
+   "passes": 0.0,
    "title": "Management of Companies and Enterprises",
    "wage_bill": 189839000.0
   },
   {
    "agreed3": 0.0,
    "emp": 1160.0,
-   "freed": 32257652.874790877,
    "naics": "324100",
+   "passes": 0.0,
    "title": "Petroleum and Coal Products Manufacturing",
    "wage_bill": 165532000.0
   },
   {
    "agreed3": 0.0,
    "emp": 910.0,
-   "freed": 23470164.83677175,
    "naics": "999100",
+   "passes": 0.0,
    "title": "Federal Executive Branch (OEWS Designation)",
    "wage_bill": 120438500.0
   },
   {
    "agreed3": 0.0,
    "emp": 840.0,
-   "freed": 19170086.337747853,
    "naics": "325400",
+   "passes": 0.0,
    "title": "Pharmaceutical and Medicine Manufacturing",
    "wage_bill": 98372400.0
   },
   {
    "agreed3": 0.0,
    "emp": 550.0,
-   "freed": 12988064.582388524,
    "naics": "4240A2",
+   "passes": 0.0,
    "title": "Merchant Wholesalers, Nondurable Goods (4242 and 4246 only)",
    "wage_bill": 66649000.0
   },
   {
    "agreed3": 0.0,
    "emp": 350.0,
-   "freed": 7620590.849474027,
    "naics": "3250A2",
+   "passes": 0.0,
    "title": "Chemical Manufacturing (3255 and 3256 only)",
    "wage_bill": 39105500.0
   },
   {
    "agreed3": 0.0,
    "emp": 310.0,
-   "freed": 7150791.961340337,
    "naics": "334400",
+   "passes": 0.0,
    "title": "Semiconductor and Other Electronic Component Manufacturing",
    "wage_bill": 36694700.0
   }
  ],
  "role": {
+  "accountable_removed": 0.0,
   "agreed3": 0.0,
   "ai_exposure": 0.0,
-  "band_hi": 0.4546679839407932,
-  "band_lo": 0.0,
-  "contested": 432088504.7591187,
+  "by_scorer": {
+   "gemini": 0.0,
+   "gpt6": 0.0,
+   "sonnet": 0.0
+  },
+  "contested": 0.0,
   "emp": 17770.0,
-  "freed": 432088504.7591187,
   "function": "Engineering",
   "href": "/census/roles/17-2041",
+  "n_passes": 0,
+  "n_tasks": 14,
+  "not_called": 0.0,
   "occ": "17-2041",
+  "passes": 0.0,
   "payroll_scored_by_three": 2217287000.0,
-  "ref": "census:2026-09-25.1/roles.csv#17-2041",
+  "physical_removed": 235848995.1475746,
+  "ref": "census:v3.2-2026-09-24/roles.csv#17-2041",
+  "rule_loose": 0.23603412920267827,
+  "rule_strict": 0.0,
   "scored_by_three": true,
-  "share_goes": 0.19487260997747188,
+  "scorer_max": 0.0,
+  "scorer_min": 0.0,
+  "share_passes": 0.0,
+  "split": "direct",
+  "time_share_basis": "rated",
   "title": "Chemical Engineers",
   "wage_bill": 2217287000.0
  },
+ "scorers": [
+  "sonnet",
+  "gemini",
+  "gpt6"
+ ],
  "tasks": [
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": true,
-   "goes": true,
+   "blocked_by_missing_check": false,
+   "contested": false,
    "id": "20955",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 432088504.7591187,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#20955",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#20955",
    "task": "Monitor and analyze data from processes and experiments.",
    "time_share": 0.19487260997747188,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "18471",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 265162300.86081976,
-   "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#18471",
+   "physical": true,
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18471",
    "task": "Troubleshoot problems with chemical manufacturing processes.",
    "time_share": 0.11958862378249625,
-   "why": "no automated way to check it, and a failure is too expensive"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "18472",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 258447390.40439987,
-   "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#18472",
+   "physical": true,
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18472",
    "task": "Evaluate chemical equipment and processes to identify ways to optimize performance or to ensure compliance with safety and environmental regulations.",
    "time_share": 0.11656018837633553,
-   "why": "nobody can tell quickly whether it worked, and a failure is too expensive"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "18473",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 235848995.1475746,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#18473",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#18473",
    "task": "Perform tests and monitor performance of processes throughout stages of production to determine degree of control over variables such as temperature, density, specific gravity, and pressure.",
    "time_share": 0.10636827580172283,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "3558",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 157709512.43085065,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#3558",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#3558",
    "task": "Conduct research to develop new and improved chemical manufacturing processes.",
    "time_share": 0.07112724353268235,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "3552",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 150919793.09167287,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#3552",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#3552",
    "task": "Develop safety procedures to be employed by workers operating equipment or working in close proximity to ongoing chemical reactions.",
    "time_share": 0.06806506920018603,
-   "why": "nobody can tell quickly whether it worked, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "3554",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 115396103.57927878,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#3554",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#3554",
    "task": "Prepare estimate of production costs and production progress reports for management.",
    "time_share": 0.052043828146414416,
-   "why": "nobody can tell quickly whether it worked"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "3555",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 104215599.43061218,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#3555",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#3555",
    "task": "Direct activities of workers who operate or are engaged in constructing and improving absorption, evaporation, or electromagnetic equipment.",
    "time_share": 0.0470014028092043,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "3560",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 101047263.47317684,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#3560",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#3560",
    "task": "Design and plan layout of equipment.",
    "time_share": 0.04557247820114258,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "24003",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 91266901.47830021,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#24003",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#24003",
    "task": "Develop computer models of chemical processes.",
    "time_share": 0.041161519225206396,
-   "why": "nobody can tell quickly whether it worked"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "3557",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 81757342.10816616,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#3557",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#3557",
    "task": "Develop processes to separate components of liquids or gases or generate electrical currents, using controlled chemical processes.",
    "time_share": 0.036872692668186914,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "3556",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 81739946.18298723,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#3556",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#3556",
    "task": "Perform laboratory studies of steps in manufacture of new products and test proposed processes in small-scale operation, such as a pilot plant.",
    "time_share": 0.03686484707797738,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "3553",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 79879597.96545155,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#3553",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#3553",
    "task": "Determine most effective arrangement of operations such as mixing, crushing, heat transfer, distillation, and drying.",
    "time_share": 0.0360258270424404,
-   "why": "nobody can tell quickly whether it worked, and no automated way to check it, and a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "3559",
-   "n_scorers": 3,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 61807749.08759058,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#3559",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#3559",
    "task": "Design measurement and control systems for chemical plants based on data collected in laboratory experiments and in pilot plant operations.",
    "time_share": 0.02787539415853274,
-   "why": "a failure is too expensive"
+   "why": "nobody can tell quickly whether it worked, and no existing check settles it, and a failure is too expensive"
   }
  ],
- "version": "2026-09-25.1"
+ "version": "v3.2-2026-09-24"
 }

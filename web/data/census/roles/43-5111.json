@@ -1,358 +1,485 @@
 {
- "csv": "/data/census/2026-09-25.1/tasks.csv",
+ "csv": "/data/census/v3.2-2026-09-24/tasks.csv",
  "industries": [
   {
-   "agreed3": 0.0,
+   "agreed3": 68023045.8504777,
    "emp": 12960.0,
-   "freed": 134674503.29974493,
    "naics": "493100",
+   "passes": 134674503.29974493,
    "title": "Warehousing and Storage",
    "wage_bill": 679363200.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 16120843.237843726,
    "emp": 3670.0,
-   "freed": 31916632.498372745,
    "naics": "4450A1",
+   "passes": 31916632.498372745,
    "title": "Food and Beverage Retailers (4451 and 4452 only)",
    "wage_bill": 161002900.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 13063054.716294203,
    "emp": 3020.0,
-   "freed": 25862711.43108417,
    "naics": "4230A1",
+   "passes": 25862711.43108417,
    "title": "Merchant Wholesalers, Durable Goods (4232, 4233, 4235, 4236, 4237, and 4239 only)",
    "wage_bill": 130464000.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 10608655.484750597,
    "emp": 2730.0,
-   "freed": 21003402.453153577,
    "naics": "561900",
+   "passes": 21003402.453153577,
    "title": "Other Support Services",
    "wage_bill": 105951300.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 9986582.373843431,
    "emp": 2150.0,
-   "freed": 19771799.454785906,
    "naics": "212300",
+   "passes": 19771799.454785906,
    "title": "Nonmetallic Mineral Mining and Quarrying",
    "wage_bill": 99738500.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 9737614.953313127,
    "emp": 2050.0,
-   "freed": 19278884.68923073,
    "naics": "999300",
+   "passes": 19278884.68923073,
    "title": "Local Government, excluding Schools and Hospitals (OEWS Designation)",
    "wage_bill": 97252000.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 9465668.235372124,
    "emp": 2020.0,
-   "freed": 18740474.673848517,
    "naics": "4240A1",
+   "passes": 18740474.673848517,
    "title": "Merchant Wholesalers, Nondurable Goods (4244 and 4248 only)",
    "wage_bill": 94536000.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 6684372.227416962,
    "emp": 1550.0,
-   "freed": 13233963.553716218,
    "naics": "562100",
+   "passes": 13233963.553716218,
    "title": "Waste Collection",
    "wage_bill": 66758500.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 4784650.180474894,
    "emp": 1230.0,
-   "freed": 9472824.664965605,
    "naics": "561300",
+   "passes": 9472824.664965605,
    "title": "Employment Services",
    "wage_bill": 47785500.0
   },
   {
-   "agreed3": 0.0,
+   "agreed3": 4719296.858383549,
    "emp": 1040.0,
-   "freed": 9343435.777984763,
    "naics": "562200",
+   "passes": 9343435.777984763,
    "title": "Waste Treatment and Disposal",
    "wage_bill": 47132800.0
   }
  ],
  "role": {
-  "agreed3": null,
+  "accountable_removed": 0.0,
+  "agreed3": 222916206.58557233,
   "ai_exposure": 0.0,
-  "band_hi": 0.36462541694087786,
-  "band_lo": 0.10012765756296145,
-  "contested": 146539637.10451198,
+  "by_scorer": {
+   "gemini": 0.10012765756296145,
+   "gpt6": 0.19823638268858973,
+   "sonnet": 0.19823638268858973
+  },
+  "contested": 218421416.92168877,
   "emp": 47760.0,
-  "freed": 441337623.5072611,
   "function": "Supply chain",
   "href": "/census/roles/43-5111",
+  "n_passes": 3,
+  "n_tasks": 18,
+  "not_called": 0.0,
   "occ": "43-5111",
-  "payroll_scored_by_three": 0.0,
-  "ref": "census:2026-09-25.1/roles.csv#43-5111",
-  "scored_by_three": false,
-  "share_goes": 0.19823638268858973,
+  "passes": 441337623.5072611,
+  "payroll_scored_by_three": 2226319999.9999995,
+  "physical_removed": 905893446.4654483,
+  "ref": "census:v3.2-2026-09-24/roles.csv#43-5111",
+  "rule_loose": 0.2984126269209363,
+  "rule_strict": 0.02775822640820852,
+  "scored_by_three": true,
+  "scorer_max": 0.19823638268858973,
+  "scorer_min": 0.10012765756296145,
+  "share_passes": 0.19823638268858973,
+  "split": "direct",
+  "time_share_basis": "rated",
   "title": "Weighers, Measurers, Checkers, and Samplers, Recordkeeping",
   "wage_bill": 2226320000.0
  },
+ "scorers": [
+  "sonnet",
+  "gemini",
+  "gpt6"
+ ],
  "tasks": [
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "11383",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 252192889.65356457,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#11383",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#11383",
    "task": "Weigh or measure materials, equipment, or products to maintain relevant records, using volume meters, scales, rules, or calipers.",
    "time_share": 0.11327791586724485,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
-   "contested": false,
-   "goes": true,
+   "blocked_by_missing_check": false,
+   "contested": true,
    "id": "11380",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": true,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": true,
+    "sonnet": true
+   },
    "payroll": 218421416.92168877,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#11380",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#11380",
    "task": "Document quantity, quality, type, weight, test result data, and value of materials or products to maintain shipping, receiving, and production records and files.",
    "time_share": 0.09810872512562828,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "quick to check, an existing check settles it, and a mistake is cheap"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "11397",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 166009829.81936726,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#11397",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#11397",
    "task": "Examine products or materials, parts, subassemblies, and packaging for damage, defects, or shortages, using specification sheets, gauges, and standards charts.",
    "time_share": 0.07456692201452049,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
-   "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "accountable": false,
+   "agreed_all_three": true,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": true,
    "id": "11381",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": true,
+   "passes_by": {
+    "gemini": true,
+    "gpt6": true,
+    "sonnet": true
+   },
    "payroll": 161117511.96844953,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#11381",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#11381",
    "task": "Compare product labels, tags, or tickets, shipping manifests, purchase orders, and bills of lading to verify accuracy of shipment contents, quality specifications, or weights.",
    "time_share": 0.07236943115475293,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "quick to check, an existing check settles it, and a mistake is cheap"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "11379",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 153584652.6384124,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#11379",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#11379",
    "task": "Collect or prepare measurement, weight, or identification labels and attach them to products.",
    "time_share": 0.06898588371771011,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "11400",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 147410858.67719632,
-   "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#11400",
+   "physical": true,
+   "ref": "census:v3.2-2026-09-24/tasks.csv#11400",
    "task": "Inspect products and examination records to determine the number of defects per worker and the reasons for examiners' rejections.",
    "time_share": 0.06621279001994157,
-   "why": "no automated way to check it"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": true,
-   "contested": true,
-   "goes": false,
+   "blocked_by_missing_check": true,
+   "contested": false,
    "id": "11391",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 146539637.10451198,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#11391",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#11391",
    "task": "Signal or instruct other workers to weigh, move, or check products.",
    "time_share": 0.0658214619212476,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "11394",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 127511853.06879362,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#11394",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#11394",
    "task": "Remove from stock products or loads not meeting quality standards, and notify supervisors or appropriate departments of discrepancies or shortages.",
    "time_share": 0.057274719298570566,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "11395",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 116065480.20472087,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#11395",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#11395",
    "task": "Maintain, monitor, and clean work areas, such as recycling collection sites, drop boxes, counters and windows, and areas around scale houses.",
    "time_share": 0.05213333222749689,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "11393",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 105802864.40431972,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#11393",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#11393",
    "task": "Store samples of finished products in labeled cartons and record their location.",
    "time_share": 0.04752365536145735,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "11382",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 102658787.00195985,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#11382",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#11382",
    "task": "Count or estimate quantities of materials, parts, or products received or shipped.",
    "time_share": 0.04611142468376507,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "11386",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 99066532.19785471,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#11386",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#11386",
    "task": "Collect product samples and prepare them for laboratory analysis or testing.",
    "time_share": 0.04449788538837845,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "11390",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 83468261.54633693,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#11390",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#11390",
    "task": "Sort products or materials into predetermined sequences or groupings for display, packing, shipping, or storage.",
    "time_share": 0.03749158321640058,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": true,
    "contested": false,
-   "goes": false,
    "id": "11384",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 76484738.9548458,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#11384",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#11384",
    "task": "Communicate with customers and vendors to exchange information regarding products, materials, and services.",
    "time_share": 0.034354782311098946,
-   "why": "no automated way to check it"
+   "why": "no existing check settles it"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "11389",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 73100552.94034857,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#11389",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#11389",
    "task": "Fill orders for products and samples, following order tickets, and forward or mail items.",
    "time_share": 0.03283470163334497,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "11398",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 72560149.46547203,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#11398",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#11398",
    "task": "Transport materials, products, or samples to processing, shipping, or storage areas, manually or using conveyors, pumps, or hand trucks.",
    "time_share": 0.032591967671076943,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
+   "accountable": false,
    "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": false,
    "id": "11387",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": false,
+   "passes_by": {
+    "gemini": false,
+    "gpt6": false,
+    "sonnet": false
+   },
    "payroll": 62525288.81503421,
    "physical": true,
-   "ref": "census:2026-09-25.1/tasks.csv#11387",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#11387",
    "task": "Unload or unpack incoming shipments.",
    "time_share": 0.028084591979155832,
-   "why": "physical work \u2014 out of reach whatever its structure"
+   "why": "physical work, outside the screen"
   },
   {
-   "agreed_all_three": false,
-   "blocked_by_verifier": false,
+   "accountable": false,
+   "agreed_all_three": true,
+   "blocked_by_missing_check": false,
    "contested": false,
-   "goes": true,
    "id": "11388",
-   "n_scorers": 2,
+   "not_called": false,
+   "passes": true,
+   "passes_by": {
+    "gemini": true,
+    "gpt6": true,
+    "sonnet": true
+   },
    "payroll": 61798694.61712279,
    "physical": false,
-   "ref": "census:2026-09-25.1/tasks.csv#11388",
+   "ref": "census:v3.2-2026-09-24/tasks.csv#11388",
    "task": "Operate scalehouse computers to obtain weight information about incoming shipments such as those from waste haulers.",
    "time_share": 0.02775822640820852,
-   "why": "quick to check, software can check it, and a mistake is cheap"
+   "why": "quick to check, an existing check settles it, and a mistake is cheap"
   }
  ],
- "version": "2026-09-25.1"
+ "version": "v3.2-2026-09-24"
 }
