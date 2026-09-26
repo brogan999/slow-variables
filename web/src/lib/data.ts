@@ -175,6 +175,7 @@ export type MigrationDoc = {
 export type ArgumentDoc = {
   as_of: string | null;
   essay: { home: string; full: string; migration: string };
+  record: { title: string; text: string }[];
   migration: MigrationDoc;
   facts: Record<string, Fact | null>;
   slow_variables: { id: string; label: string; sentence: string }[];
