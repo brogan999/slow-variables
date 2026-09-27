@@ -33,10 +33,10 @@ Rule: both conditions, on independently verified series (OpenAI's self-reported 
 
 Rule: supported when labs are up ≥ 5pp and chips down, on gross profit; contradicted when chips' share is flat or rising (the brief's app-margin branch needs margins net of inference, which are not public)
 
-- ✗ labs' share of stack gross profit up ≥ 5pp over four quarters (apps unmeasured) — 2.6% → 7.3%; the lab layer is a grade C estimate (run-rate × revenue-minus-inference margin) (obs: 0b6d0c8c, 1a2c7e77, 2a23fc81…)
-- ✗ chips' share of stack gross profit down ≥ 5pp over four quarters — 60.6% → 69.5% (obs: 0b6d0c8c, 1a2c7e77, 2a23fc81…)
+- ✗ labs' share of stack gross profit up ≥ 5pp over four quarters (apps unmeasured) — 2.2% → 6.6%; the lab layer is a grade C estimate (run-rate × revenue-minus-inference margin) (obs: 0b6d0c8c, 1a2c7e77, 2a23fc81…)
+- ✗ chips' share of stack gross profit down ≥ 5pp over four quarters — 65.7% → 72.6% (obs: 0b6d0c8c, 1a2c7e77, 2a23fc81…)
 - ? Contradicted when: — 
-- ✓ chips' share of stack gross profit flat or rising over four quarters — 60.6% → 69.5% (obs: 0b6d0c8c, 1a2c7e77, 2a23fc81…)
+- ✓ chips' share of stack gross profit flat or rising over four quarters — 65.7% → 72.6% (obs: 0b6d0c8c, 1a2c7e77, 2a23fc81…)
 
 ## Capture thesis 'consumers keep most of the surplus': **untestable**
 

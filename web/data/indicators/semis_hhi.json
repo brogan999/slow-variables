@@ -10,10 +10,10 @@
   "low": null,
   "obs_ids": [
    "005d040fe4b816e0",
-   "2faa719b05b9c22a"
+   "8f2976e4d50caea9"
   ],
   "unit": "index",
-  "value": 0.8495101795262834
+  "value": 0.8695102791386691
  },
  "bucket_id": null,
  "cadence_expected": "quarterly",
@@ -21,14 +21,14 @@
   "bands": [],
   "change": {
    "dead_band": "\u00b10.020 index",
-   "label": "+0.019 index",
+   "label": "+0.027 index",
    "steps": "3 of 4 steps rose"
   },
   "dead": {
-   "height": 40.0,
-   "width": 42.86,
-   "x": 54.32,
-   "y": 9.67
+   "height": 33.33,
+   "width": 39.24,
+   "x": 57.92,
+   "y": 14.16
   },
   "drawn": {
    "metric": "hhi_by_layer",
@@ -37,7 +37,7 @@
    "total": 0
   },
   "line": true,
-  "n_drawn": 8,
+  "n_drawn": 10,
   "needs": 5,
   "partial": false,
   "stamps": [
@@ -48,27 +48,17 @@
     {
      "label": "2024",
      "minor": false,
-     "x": 11.56
-    },
-    {
-     "label": "Jul",
-     "minor": true,
-     "x": 28.67
+     "x": 18.76
     },
     {
      "label": "2025",
      "minor": false,
-     "x": 45.96
-    },
-    {
-     "label": "Jul",
-     "minor": true,
-     "x": 62.97
+     "x": 50.26
     },
     {
      "label": "2026",
      "minor": false,
-     "x": 80.26
+     "x": 81.67
     }
    ]
   },
@@ -82,22 +72,26 @@
     },
     {
      "label": "0.78",
-     "y": 80.0
+     "y": 83.33
     },
     {
      "label": "0.80",
-     "y": 60.0
+     "y": 66.67
     },
     {
      "label": "0.82",
-     "y": 40.0
+     "y": 50.0
     },
     {
      "label": "0.84",
-     "y": 20.0
+     "y": 33.33
     },
     {
      "label": "0.86",
+     "y": 16.67
+    },
+    {
+     "label": "0.88",
      "y": 0.0
     }
    ],
@@ -119,8 +113,8 @@
  "confidence": 60,
  "confidence_basis": {
   "best_tier": 4,
-  "grade": "A",
-  "n_observations": 18,
+  "grade": "B",
+  "n_observations": 20,
   "sources": [
    "SEC EDGAR 10-Q/10-K XBRL instances (segment data)"
   ],
@@ -131,182 +125,212 @@
  "definition": "Herfindahl index of data-centre revenue between NVIDIA (Data Center segment) and AMD (Data Center segment), per calendar quarter, from filed segment disclosures. Derived metric hhi_by_layer, semis slice.",
  "derived": [
   {
-   "as_of_date": "2023-09-30",
-   "computed_at": "2026-09-27T12:13:21.842851Z",
+   "as_of_date": "2023-06-30",
+   "computed_at": "2026-09-27T23:03:37.759839Z",
    "dims": {
     "layer_id": "compute_semis"
    },
-   "formula_version": "2",
+   "formula_version": "3",
+   "id": "21205fe4495d63d2",
+   "input_observation_ids": [
+    "5deaa5e9e8ddd24e",
+    "855ffb049e696409"
+   ],
+   "metric": "hhi_by_layer",
+   "obs_ids": [
+    "5deaa5e9e8ddd24e",
+    "855ffb049e696409"
+   ],
+   "value": 0.7696533203125,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2023-09-30",
+   "computed_at": "2026-09-27T23:03:37.759839Z",
+   "dims": {
+    "layer_id": "compute_semis"
+   },
+   "formula_version": "3",
    "id": "8c3c7913e3fd47bd",
    "input_observation_ids": [
     "196f2f0424de7a94",
-    "5deaa5e9e8ddd24e"
+    "6de4b12d0b192ccf"
    ],
    "metric": "hhi_by_layer",
    "obs_ids": [
     "196f2f0424de7a94",
-    "5deaa5e9e8ddd24e"
+    "6de4b12d0b192ccf"
    ],
-   "value": 0.7777893696820575,
+   "value": 0.8296598353182119,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2024-03-31",
+   "computed_at": "2026-09-27T23:03:37.759839Z",
+   "dims": {
+    "layer_id": "compute_semis"
+   },
+   "formula_version": "3",
+   "id": "6233aeefa376fbce",
+   "input_observation_ids": [
+    "09d6b6a7052c2cfb",
+    "c6fb9dcd55d20506"
+   ],
+   "metric": "hhi_by_layer",
+   "obs_ids": [
+    "09d6b6a7052c2cfb",
+    "c6fb9dcd55d20506"
+   ],
+   "value": 0.8299068369865001,
    "value_high": null,
    "value_low": null
   },
   {
    "as_of_date": "2024-06-30",
-   "computed_at": "2026-09-27T12:13:21.842851Z",
+   "computed_at": "2026-09-27T23:03:37.759839Z",
    "dims": {
     "layer_id": "compute_semis"
    },
-   "formula_version": "2",
+   "formula_version": "3",
    "id": "4e35b0a61ed4d0ba",
    "input_observation_ids": [
-    "09d6b6a7052c2cfb",
+    "358f0bff93532e9e",
     "6cb012f77bd0712e"
    ],
    "metric": "hhi_by_layer",
    "obs_ids": [
-    "09d6b6a7052c2cfb",
+    "358f0bff93532e9e",
     "6cb012f77bd0712e"
    ],
-   "value": 0.8017277901600692,
+   "value": 0.8242246679584098,
    "value_high": null,
    "value_low": null
   },
   {
    "as_of_date": "2024-09-30",
-   "computed_at": "2026-09-27T12:13:21.842851Z",
+   "computed_at": "2026-09-27T23:03:37.759839Z",
    "dims": {
     "layer_id": "compute_semis"
    },
-   "formula_version": "2",
+   "formula_version": "3",
    "id": "3682a6cfb5dbc678",
    "input_observation_ids": [
-    "358f0bff93532e9e",
-    "35ee16d551982cd1"
+    "35ee16d551982cd1",
+    "73fc9be1b49923e4"
    ],
    "metric": "hhi_by_layer",
    "obs_ids": [
-    "358f0bff93532e9e",
-    "35ee16d551982cd1"
+    "35ee16d551982cd1",
+    "73fc9be1b49923e4"
    ],
-   "value": 0.7903066176210161,
+   "value": 0.8145686983471074,
    "value_high": null,
    "value_low": null
   },
   {
    "as_of_date": "2025-03-31",
-   "computed_at": "2026-09-27T12:13:21.842851Z",
+   "computed_at": "2026-09-27T23:03:37.759839Z",
    "dims": {
     "layer_id": "compute_semis"
    },
-   "formula_version": "2",
+   "formula_version": "3",
    "id": "c4deff342b922562",
    "input_observation_ids": [
-    "09d6b6a7052c2cfb",
-    "358f0bff93532e9e",
-    "73fc9be1b49923e4",
-    "860c57500d57c1ed",
-    "8ddb02935f54a6be"
+    "8ddb02935f54a6be",
+    "944782759e2d02d3"
    ],
    "metric": "hhi_by_layer",
    "obs_ids": [
-    "09d6b6a7052c2cfb",
-    "358f0bff93532e9e",
-    "73fc9be1b49923e4",
-    "860c57500d57c1ed",
-    "8ddb02935f54a6be"
+    "8ddb02935f54a6be",
+    "944782759e2d02d3"
    ],
-   "value": 0.830329142351599,
+   "value": 0.8430086231899843,
    "value_high": null,
    "value_low": null
   },
   {
    "as_of_date": "2025-06-30",
-   "computed_at": "2026-09-27T12:13:21.842851Z",
+   "computed_at": "2026-09-27T23:03:37.759839Z",
    "dims": {
     "layer_id": "compute_semis"
    },
-   "formula_version": "2",
+   "formula_version": "3",
    "id": "b4e2fdeab29c7d4e",
    "input_observation_ids": [
     "1e5e52fcf38b8f42",
-    "944782759e2d02d3"
+    "fbc2a23860888eb2"
    ],
    "metric": "hhi_by_layer",
    "obs_ids": [
     "1e5e52fcf38b8f42",
-    "944782759e2d02d3"
+    "fbc2a23860888eb2"
    ],
-   "value": 0.8587016201417834,
+   "value": 0.8645242569422622,
    "value_high": null,
    "value_low": null
   },
   {
    "as_of_date": "2025-09-30",
-   "computed_at": "2026-09-27T12:13:21.842851Z",
+   "computed_at": "2026-09-27T23:03:37.759839Z",
    "dims": {
     "layer_id": "compute_semis"
    },
-   "formula_version": "2",
+   "formula_version": "3",
    "id": "a5c96e3b3fcc81ec",
    "input_observation_ids": [
-    "8991d1b8489b9697",
-    "fbc2a23860888eb2"
+    "35bcc8b2beb92696",
+    "8991d1b8489b9697"
    ],
    "metric": "hhi_by_layer",
    "obs_ids": [
-    "8991d1b8489b9697",
-    "fbc2a23860888eb2"
+    "35bcc8b2beb92696",
+    "8991d1b8489b9697"
    ],
-   "value": 0.8271775984078173,
+   "value": 0.8559361489108375,
    "value_high": null,
    "value_low": null
   },
   {
    "as_of_date": "2026-03-31",
-   "computed_at": "2026-09-27T12:13:21.842851Z",
+   "computed_at": "2026-09-27T23:03:37.759839Z",
    "dims": {
     "layer_id": "compute_semis"
    },
-   "formula_version": "2",
+   "formula_version": "3",
    "id": "ff864e51933c3ad5",
    "input_observation_ids": [
-    "10682b11aa2ab089",
-    "35bcc8b2beb92696",
-    "4121165a8bff5027",
-    "944782759e2d02d3",
-    "fbc2a23860888eb2"
+    "2faa719b05b9c22a",
+    "4121165a8bff5027"
    ],
    "metric": "hhi_by_layer",
    "obs_ids": [
-    "10682b11aa2ab089",
-    "35bcc8b2beb92696",
-    "4121165a8bff5027",
-    "944782759e2d02d3",
-    "fbc2a23860888eb2"
+    "2faa719b05b9c22a",
+    "4121165a8bff5027"
    ],
-   "value": 0.8447564009962993,
+   "value": 0.8676054206287198,
    "value_high": null,
    "value_low": null
   },
   {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-27T12:13:21.842851Z",
+   "computed_at": "2026-09-27T23:03:37.759839Z",
    "dims": {
     "layer_id": "compute_semis"
    },
-   "formula_version": "2",
+   "formula_version": "3",
    "id": "f67404bbdcc6149e",
    "input_observation_ids": [
     "005d040fe4b816e0",
-    "2faa719b05b9c22a"
+    "8f2976e4d50caea9"
    ],
    "metric": "hhi_by_layer",
    "obs_ids": [
     "005d040fe4b816e0",
-    "2faa719b05b9c22a"
+    "8f2976e4d50caea9"
    ],
-   "value": 0.8495101795262834,
+   "value": 0.8695102791386691,
    "value_high": null,
    "value_low": null
   }
@@ -324,7 +348,7 @@
  "fast_band": null,
  "fits": [],
  "flow_status": null,
- "grade": "A",
+ "grade": "B",
  "id": "semis_hhi",
  "latest": {
   "as_of": "2026-06-30",
@@ -334,10 +358,10 @@
   },
   "obs_ids": [
    "005d040fe4b816e0",
-   "2faa719b05b9c22a"
+   "8f2976e4d50caea9"
   ],
   "unit": "index",
-  "value": 0.8495101795262834
+  "value": 0.8695102791386691
  },
  "layer_id": "compute_physical",
  "leading_lagging": "leading",
@@ -345,12 +369,30 @@
  "metric_dims": {
   "layer_id": "compute_semis"
  },
- "n_observations": 18,
+ "n_observations": 20,
  "name": "Concentration among covered chip filers (HHI)",
  "normal_band": null,
  "override_note": null,
  "pending": null,
  "points": [
+  {
+   "as_of": "2023-06-30",
+   "derived_id": "21205fe4495d63d2",
+   "dims": {
+    "layer_id": "compute_semis"
+   },
+   "faint": true,
+   "href": "#d-21205fe4495d63d2",
+   "obs_ids": [
+    "5deaa5e9e8ddd24e",
+    "855ffb049e696409"
+   ],
+   "stamp": "measured",
+   "unit": "index",
+   "value": 0.7696533203125,
+   "x": 2.84,
+   "y": 91.96
+  },
   {
    "as_of": "2023-09-30",
    "derived_id": "8c3c7913e3fd47bd",
@@ -361,13 +403,31 @@
    "href": "#d-8c3c7913e3fd47bd",
    "obs_ids": [
     "196f2f0424de7a94",
-    "5deaa5e9e8ddd24e"
+    "6de4b12d0b192ccf"
    ],
    "stamp": "measured",
    "unit": "index",
-   "value": 0.7777893696820575,
-   "x": 2.82,
-   "y": 82.21
+   "value": 0.8296598353182119,
+   "x": 10.76,
+   "y": 41.95
+  },
+  {
+   "as_of": "2024-03-31",
+   "derived_id": "6233aeefa376fbce",
+   "dims": {
+    "layer_id": "compute_semis"
+   },
+   "faint": true,
+   "href": "#d-6233aeefa376fbce",
+   "obs_ids": [
+    "09d6b6a7052c2cfb",
+    "c6fb9dcd55d20506"
+   ],
+   "stamp": "measured",
+   "unit": "index",
+   "value": 0.8299068369865001,
+   "x": 26.51,
+   "y": 41.74
   },
   {
    "as_of": "2024-06-30",
@@ -378,14 +438,14 @@
    "faint": true,
    "href": "#d-4e35b0a61ed4d0ba",
    "obs_ids": [
-    "09d6b6a7052c2cfb",
+    "358f0bff93532e9e",
     "6cb012f77bd0712e"
    ],
    "stamp": "measured",
    "unit": "index",
-   "value": 0.8017277901600692,
-   "x": 28.57,
-   "y": 58.27
+   "value": 0.8242246679584098,
+   "x": 34.34,
+   "y": 46.48
   },
   {
    "as_of": "2024-09-30",
@@ -396,14 +456,14 @@
    "faint": true,
    "href": "#d-3682a6cfb5dbc678",
    "obs_ids": [
-    "358f0bff93532e9e",
-    "35ee16d551982cd1"
+    "35ee16d551982cd1",
+    "73fc9be1b49923e4"
    ],
    "stamp": "measured",
    "unit": "index",
-   "value": 0.7903066176210161,
-   "x": 37.22,
-   "y": 69.69
+   "value": 0.8145686983471074,
+   "x": 42.25,
+   "y": 54.53
   },
   {
    "as_of": "2025-03-31",
@@ -414,17 +474,14 @@
    "faint": false,
    "href": "#d-c4deff342b922562",
    "obs_ids": [
-    "09d6b6a7052c2cfb",
-    "358f0bff93532e9e",
-    "73fc9be1b49923e4",
-    "860c57500d57c1ed",
-    "8ddb02935f54a6be"
+    "8ddb02935f54a6be",
+    "944782759e2d02d3"
    ],
    "stamp": "measured",
    "unit": "index",
-   "value": 0.830329142351599,
-   "x": 54.32,
-   "y": 29.67
+   "value": 0.8430086231899843,
+   "x": 57.92,
+   "y": 30.83
   },
   {
    "as_of": "2025-06-30",
@@ -436,13 +493,13 @@
    "href": "#d-b4e2fdeab29c7d4e",
    "obs_ids": [
     "1e5e52fcf38b8f42",
-    "944782759e2d02d3"
+    "fbc2a23860888eb2"
    ],
    "stamp": "measured",
    "unit": "index",
-   "value": 0.8587016201417834,
-   "x": 62.88,
-   "y": 1.3
+   "value": 0.8645242569422622,
+   "x": 65.75,
+   "y": 12.9
   },
   {
    "as_of": "2025-09-30",
@@ -453,14 +510,14 @@
    "faint": false,
    "href": "#d-a5c96e3b3fcc81ec",
    "obs_ids": [
-    "8991d1b8489b9697",
-    "fbc2a23860888eb2"
+    "35bcc8b2beb92696",
+    "8991d1b8489b9697"
    ],
    "stamp": "measured",
    "unit": "index",
-   "value": 0.8271775984078173,
-   "x": 71.52,
-   "y": 32.82
+   "value": 0.8559361489108375,
+   "x": 73.67,
+   "y": 20.05
   },
   {
    "as_of": "2026-03-31",
@@ -471,17 +528,14 @@
    "faint": false,
    "href": "#d-ff864e51933c3ad5",
    "obs_ids": [
-    "10682b11aa2ab089",
-    "35bcc8b2beb92696",
-    "4121165a8bff5027",
-    "944782759e2d02d3",
-    "fbc2a23860888eb2"
+    "2faa719b05b9c22a",
+    "4121165a8bff5027"
    ],
    "stamp": "measured",
    "unit": "index",
-   "value": 0.8447564009962993,
-   "x": 88.63,
-   "y": 15.24
+   "value": 0.8676054206287198,
+   "x": 89.33,
+   "y": 10.33
   },
   {
    "as_of": "2026-06-30",
@@ -493,13 +547,13 @@
    "href": "#d-f67404bbdcc6149e",
    "obs_ids": [
     "005d040fe4b816e0",
-    "2faa719b05b9c22a"
+    "8f2976e4d50caea9"
    ],
    "stamp": "measured",
    "unit": "index",
-   "value": 0.8495101795262834,
-   "x": 97.18,
-   "y": 10.49
+   "value": 0.8695102791386691,
+   "x": 97.16,
+   "y": 8.74
   }
  ],
  "prediction_rows": [],
@@ -522,17 +576,34 @@
   "sec_seg"
  ],
  "spark": {
-  "d": "M1.0,26.0 L14.4,18.9 L27.9,22.3 L41.3,10.4 L54.7,2.0 L68.1,11.4 L81.6,6.1 L95.0,4.7",
+  "d": "M1.0,26.0 L11.4,11.6 L21.9,11.5 L32.3,12.9 L42.8,15.2 L53.2,8.4 L63.7,3.2 L74.1,5.3 L84.6,2.5 L95.0,2.0",
   "end": [
    95.0,
-   4.7
+   2.0
   ]
  },
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,
- "status": "stable",
+ "status": "concentrating",
  "status_events": [
+  {
+   "author": "claude",
+   "counterevidence_considered": "The index covers two filers only, so it says nothing about Broadcom, TSMC or the clouds' own chips; Epoch's shipment data shows designers other than NVIDIA gaining share over 2025, so this is concentration against AMD, not across all AI chips.",
+   "created_at": "2026-09-27T22:36:40.836436Z",
+   "evidence_ids": [
+    "005d040fe4b816e0",
+    "8f2976e4d50caea9"
+   ],
+   "id": "c312842fdba6cead",
+   "new_conf": 60,
+   "new_status": "concentrating",
+   "old_conf": 60,
+   "old_status": "stable",
+   "reason": "Re-read on quarters paired by their midpoint (formula v3), so NVIDIA's May-to-July quarter now sits with AMD's April-to-June one instead of the next quarter. The NVIDIA-vs-AMD data-centre revenue HHI rises from 0.843 (Q1 2025) to 0.870 (Q2 2026), a move of 0.027 against a 0.02 dead band; on the old pairing it was 0.019, just inside. Three of four steps rise; Q4 2025 is missing because AMD files no full-year segment figures.",
+   "target_id": "semis_hhi",
+   "target_type": "indicator"
+  },
   {
    "author": "claude",
    "counterevidence_considered": "Only two chip makers are covered; Broadcom, TSMC and the custom-silicon designers are absent, so the level overstates concentration.",

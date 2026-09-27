@@ -91,9 +91,9 @@ metrics:
     grain: [as_of_date, layer_id, basis]
     unit: share
     lead_lag: lagging
-    formula_version: 1
+    formula_version: 2
     inputs: ["sec.nvda.gross_profit.*", "sec.amd.gross_profit.*", "sec_seg.msft.intelligent_cloud.revenue.*", "sec_seg.msft.intelligent_cloud.cost_of_revenue.*", "epoch.*.revenue_run_rate_usd.pt", "epoch.*.revenue_usd.fy", "epoch.*.inference_compute_usd.fy"]
-    caveats: Fiscal quarters mapped to the calendar quarter of their period end; a fiscal Q4 is the full year minus three quarters. Chips are whole-company, so they include gaming and client chips. Only quarters with all five inputs are kept. The lab estimate uses the run-rate as of the quarter's end (never a later one), and the margin of the year containing the quarter, else the latest earlier year; revenue minus inference compute overstates true gross margin.
+    caveats: Fiscal quarters mapped to the calendar quarter holding most of their months (period end less forty-five days), so NVIDIA's May-to-July quarter counts as Q2; a fiscal Q4 is the full year minus three quarters. Chips are whole-company, so they include gaming and client chips. Only quarters with all five inputs are kept. The lab estimate uses the run-rate as of the quarter's end (never a later one), and the margin of the year containing the quarter, else the latest earlier year; revenue minus inference compute overstates true gross margin.
     sql: |
       WITH gq AS (
         SELECT subject, as_of_date, period_start, value_numeric AS v, [id] AS ids FROM observations
@@ -117,7 +117,7 @@ metrics:
         GROUP BY f.subject, f.as_of_date, f.v, f.ids
         HAVING count(*) = 3 AND NOT EXISTS (SELECT 1 FROM gq q2 WHERE q2.subject = f.subject AND q2.as_of_date = f.as_of_date)),
       filed AS (
-        SELECT date_trunc('quarter', as_of_date) AS cq, subject, v, ids,
+        SELECT date_trunc('quarter', as_of_date - INTERVAL 45 DAY) AS cq, subject, v, ids,
                CASE WHEN subject = 'msft_ic' THEN 'compute_cloud' ELSE 'compute_semis' END AS layer_id
         FROM (SELECT subject, as_of_date, v, ids FROM gq UNION ALL SELECT subject, as_of_date, v, ids FROM fill)),
       qs AS (SELECT cq FROM filed GROUP BY cq HAVING count(DISTINCT subject) = 3),
@@ -344,14 +344,14 @@ metrics:
     grain: [as_of_date, layer_id]
     unit: share
     lead_lag: lagging
-    formula_version: 3
+    formula_version: 4
     inputs: ["sec_seg.*.operating_income.q", "sec_seg.*.operating_income.fy"]
-    caveats: Fiscal quarters mapped to the calendar quarter of their period end (NVIDIA's late-July quarter counts as Q3); a filer's unreported fiscal Q4 is filled as fiscal year minus its three reported quarters and cites all four filings; quarters where any of the five segments is still missing are dropped; segment operating income, not gross profit; only two layers so far.
+    caveats: Fiscal quarters mapped to the calendar quarter holding most of their months (NVIDIA's May-to-July quarter counts as Q2); a filer's unreported fiscal Q4 is filled as fiscal year minus its three reported quarters and cites all four filings; quarters where any of the five segments is still missing are dropped; segment operating income, not gross profit; only two layers so far.
     sql: |
       WITH allq AS (
         SELECT subject, as_of_date, v, ids FROM sec_segment_quarters WHERE series_key LIKE 'sec_seg.%.operating_income.q'),
       seg AS (
-        SELECT date_trunc('quarter', as_of_date - INTERVAL 7 DAY) AS cq, subject, v, ids,
+        SELECT date_trunc('quarter', as_of_date - INTERVAL 45 DAY) AS cq, subject, v, ids,
                CASE WHEN subject IN ('nvda', 'amd') THEN 'compute_semis' ELSE 'compute_cloud' END AS layer_id
         FROM allq),
       complete AS (SELECT cq FROM seg GROUP BY cq HAVING count(DISTINCT subject) = 5),
@@ -423,12 +423,12 @@ metrics:
     grain: [as_of_date, layer_id]
     unit: index
     lead_lag: leading
-    formula_version: 2
+    formula_version: 3
     inputs: ["sec_seg.*.revenue.q", "sec_seg.*.revenue.fy", "ramp.*.business_paid_share.m"]
-    caveats: Only covered filers; Broadcom, TSMC, Oracle and the neoclouds are absent, so levels overstate concentration. Fiscal quarters mapped to the calendar quarter of their period end; a fiscal Q4 filed only in the 10-K is the full year minus the three reported quarters (AMD files no full-year segment figures). Ramp lab shares allow multi-homing and are normalised to sum to one.
+    caveats: Only covered filers; Broadcom, TSMC, Oracle and the neoclouds are absent, so levels overstate concentration. Fiscal quarters mapped to the calendar quarter holding most of their months (NVIDIA's May-to-July quarter counts as Q2); a fiscal Q4 filed only in the 10-K is the full year minus the three reported quarters (AMD files no full-year segment figures). Ramp lab shares allow multi-homing and are normalised to sum to one.
     sql: |
       WITH rev AS (
-        SELECT date_trunc('quarter', as_of_date - INTERVAL 7 DAY) AS cq, subject, v, ids,
+        SELECT date_trunc('quarter', as_of_date - INTERVAL 45 DAY) AS cq, subject, v, ids,
                CASE WHEN subject IN ('nvda', 'amd') THEN 'compute_semis' ELSE 'compute_cloud' END AS layer_id,
                CASE WHEN subject IN ('nvda', 'amd') THEN 2 ELSE 3 END AS need
         FROM sec_segment_quarters

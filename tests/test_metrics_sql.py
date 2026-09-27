@@ -103,7 +103,7 @@ def run_p(metric: str, rows: list[tuple]) -> list[tuple]:
 
 def test_gross_profit_stack_by_hand_with_no_look_ahead():
     rows = [
-        ("n", "sec.nvda.gross_profit.q", "nvda", "2026-04-26", "2026-01-26", 60.0),
+        ("n", "sec.nvda.gross_profit.q", "nvda", "2026-07-26", "2026-04-27", 60.0),
         ("a", "sec.amd.gross_profit.q", "amd", "2026-06-27", "2026-03-29", 20.0),
         ("mr", "sec_seg.msft.intelligent_cloud.revenue.q", "msft", "2026-06-30", "2026-04-01", 50.0),
         ("mc", "sec_seg.msft.intelligent_cloud.cost_of_revenue.q", "msft", "2026-06-30", "2026-04-01", 30.0),
@@ -188,7 +188,7 @@ def test_venture_4q_sums_the_trailing_year_per_layer_and_sub_layer():
 
 def test_operating_income_stack_by_hand_with_a_fiscal_q4_fill():
     q = [  # five segments in calendar Q2 2026; AMD's quarter is missing and is filled from its fiscal year
-        ("n", "sec_seg.nvda.compute_networking.operating_income.q", "nvda", "2026-04-26", "2026-01-26", 30.0),
+        ("n", "sec_seg.nvda.compute_networking.operating_income.q", "nvda", "2026-07-26", "2026-04-27", 30.0),
         ("w", "sec_seg.amzn.aws.operating_income.q", "amzn", "2026-06-30", "2026-04-01", 10.0),
         ("g", "sec_seg.googl.cloud.operating_income.q", "googl", "2026-06-30", "2026-04-01", 5.0),
         ("m", "sec_seg.msft.intelligent_cloud.operating_income.q", "msft", "2026-06-30", "2026-04-01", 15.0),
@@ -211,7 +211,7 @@ def test_operating_income_stack_by_hand_with_a_fiscal_q4_fill():
 
 def test_hhi_by_layer_by_hand():
     rows = [
-        ("n", "sec_seg.nvda.data_center.revenue.q", "nvda", "2026-04-26", "2026-01-26", 60.0),
+        ("n", "sec_seg.nvda.data_center.revenue.q", "nvda", "2026-07-26", "2026-04-27", 60.0),
         ("a", "sec_seg.amd.data_center.revenue.q", "amd", "2026-06-27", "2026-03-29", 40.0),
         ("w", "sec_seg.amzn.aws.revenue.q", "amzn", "2026-06-30", "2026-04-01", 50.0),
         ("g", "sec_seg.googl.cloud.revenue.q", "googl", "2026-06-30", "2026-04-01", 25.0),
