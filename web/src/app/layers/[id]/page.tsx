@@ -46,7 +46,12 @@ export default async function LayerPage({ params }: { params: Promise<{ id: stri
       ) : null}
       <section>
         <h2 className="display text-2xl leading-tight mb-3 mt-2">Indicators</h2>
-        {shown.length ? <div className="grid gap-3 md:grid-cols-2">{shown.map((c) => <IndicatorCard key={c.id} c={c} obsIndex={idx} />)}</div> : <p className="text-sm text-muted">None published yet.</p>}
+        {shown.length ? <div className="grid gap-3 md:grid-cols-2">{shown.map((c) => <IndicatorCard key={c.id} c={c} obsIndex={idx} />)}</div> : l.held?.length ? (
+          <div className="text-sm text-ink-2 max-w-[62ch]">
+            <p>The site holds data for this layer but has not published a reading yet:</p>
+            <ul className="mt-2 list-disc pl-5 space-y-1">{l.held.map((h) => <li key={h.id}><span className="text-ink">{h.name}</span> ({h.n} records): {h.reason}</li>)}</ul>
+          </div>
+        ) : <p className="text-sm text-muted">None published yet.</p>}
       </section>
       {context().figures.some((f) => f.page === `layers/${id}`) ? (
         <section className="flex flex-col gap-6">

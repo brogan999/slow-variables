@@ -327,19 +327,21 @@ def exits(spec: dict[str, Any]) -> list[dict[str, Any]]:
     ]
 
 
-def headlines(spec: dict[str, Any]) -> dict[str, dict[str, Any]]:
-    """Each lens page's headline: the claim its monitor's current state supports, in the words the seed gives."""
+def headlines(spec: dict[str, Any], fast: set[str] | None = None) -> dict[str, dict[str, Any]]:
+    """Each lens page's headline: the claim its monitor's current state supports, in the words the seed gives.
+    `fast` holds the buckets with a published indicator reading faster than normal: a claim may name its bucket in
+    `when_fast`, so a page whose cards show fast capability never reads as if nothing were fast."""
     from .store import DATA, read_jsonl
 
     states = {v["id"]: v.get("state") for v in read_jsonl(DATA / "thesis.jsonl")}
     out = {}
     for page, h in spec["headlines"].items():
         state = states.get(h["monitor"]) or "untestable"
-        out[page] = {
-            "monitor": h["monitor"],
-            "state": state,
-            "claim": h["claims"].get(state) or h["claims"]["untestable"],
-        }
+        claim = h["claims"].get(state) or h["claims"]["untestable"]
+        for bucket, alt in (h.get("when_fast") or {}).get(state, {}).items():
+            if bucket in (fast or set()):
+                claim = alt
+        out[page] = {"monitor": h["monitor"], "state": state, "claim": claim}
     return out
 
 
@@ -646,7 +648,14 @@ def build(s: Store, today: date | None = None) -> dict[str, Any]:
         "clocks": clocks(s, spec),
         "phase": phase(s, spec),
         "exits": exits(spec),
-        "headlines": headlines(spec),
+        "headlines": headlines(
+            spec,
+            {
+                i.bucket_id
+                for i in s.seed.indicators
+                if i.published and i.bucket_id and (e := s.current(i.id)) and e.new_status == "faster_than_normal"
+            },
+        ),
         "sources": spec["sources"],
         "record": record(),
     }
@@ -678,6 +687,10 @@ def problems(s: Store) -> tuple[list[str], list[str]]:
     for page, h in spec["headlines"].items():
         if h["monitor"] not in monitors or "untestable" not in h["claims"]:
             errors.append(f"argument: {page} headline names an unknown monitor or has no untestable claim")
+        buckets = {b.id for b in s.seed.buckets}
+        for state, alts in (h.get("when_fast") or {}).items():
+            if state not in h["claims"] or not set(alts) <= buckets:
+                errors.append(f"argument: {page} headline's when_fast names an unknown state or bucket")
     block = spec["migration"]
     for k, v in block["facts"].items():
         if "indicator" in v and v["indicator"] not in ids or "metric" in v and not s.metric_spec(v["metric"]):

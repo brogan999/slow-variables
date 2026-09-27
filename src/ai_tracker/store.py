@@ -5,6 +5,7 @@ from __future__ import annotations
 import csv
 import json
 import math
+import re
 import threading
 from collections import Counter
 from dataclasses import dataclass, field
@@ -834,6 +835,7 @@ class Store:
                     "crosswalk": [dump(c) for c in self.seed.crosswalk if c.layer_id == layer.id],
                     "venture": self._layer_venture(layer.id),
                     "commoditisation": self._commoditisation(cards) if layer.id == "model" else None,
+                    "held": _held(self.seed.indicators, cards, layer.id),
                 },
             )
         recent = [dump(e) for e in sorted(self.events, key=lambda e: e.created_at, reverse=True)[:3]]
@@ -902,19 +904,6 @@ class Store:
         _write(out / "signposts.json", self._signposts())
         _write(out / "context.json", self._context())
         _write(out / "analyses.json", self._analyses())
-        from .memo import load_memos
-
-        memos = load_memos()
-        (out / "memos").mkdir(parents=True, exist_ok=True)
-        for m in memos:
-            _write(out / "memos" / f"{m['date']}.json", m)
-        _write(
-            out / "memos" / "index.json",
-            [
-                {k: v for k, v in m.items() if k != "body"} | {"summary": _excerpt(m["body"])}
-                for m in reversed(memos)
-            ],
-        )
         (out / "venture").mkdir(parents=True, exist_ok=True)
         for sub_id, doc in self._venture().items():
             _write(out / "venture" / f"{sub_id}.json", doc)
@@ -1477,7 +1466,9 @@ class Store:
                                 key=lambda x: (not x["is_primary"], x["name"].lower()),
                             ),
                             "indicators": [
-                                cards[i.id] for i in self.seed.indicators if i.sublayer_id == sub.id
+                                cards[i.id]
+                                for i in self.seed.indicators
+                                if i.sublayer_id == sub.id and i.published
                             ],
                         }
                         for sub in self.seed.sublayers
@@ -1967,6 +1958,7 @@ class Store:
             "tally": _tally(directions),
             "venture": self._layer_venture(layer.id),
             "reading": self._reading(layer, cards),
+            "held": _held(self.seed.indicators, cards, layer.id),
         }
 
     def _reading(self, layer: Any, cards: dict[str, Any]) -> str:
@@ -2195,11 +2187,43 @@ class Store:
         return {
             **dump(s),
             "last_success_at": last_ok.finished_at.isoformat() if last_ok else None,
-            "last_error": logs[-1].error if logs and not logs[-1].ok else None,
+            "last_error": plain_error(logs[-1].error, logs[-1].finished_at.date())
+            if logs and not logs[-1].ok
+            else None,
             "items_found": last_ok.items_found if last_ok else 0,
             "runs": len(logs),
-            "health": _health(last_ok.finished_at.isoformat() if last_ok else None, s.cadence),
+            # three failed runs in a row is failing, whatever the last success says; one bad night is noise
+            "health": "failing"
+            if len(logs) >= 3 and not any(fl.ok for fl in logs[-3:])
+            else _health(last_ok.finished_at.isoformat() if last_ok else None, s.cadence),
         }
+
+
+def plain_error(err: str | None, when: date) -> str:
+    """A fetch failure as a reader should read it; the raw exception stays in data/fetchlog.jsonl."""
+    e = err or ""
+    code = re.search(r"\b(4\d\d|5\d\d)\b", e)
+    if "not set" in e:
+        what = "an API key or setting it needs is not set"
+    elif "LayoutChanged" in e or "missing [" in e:
+        what = "the source's page or file changed layout, so the connector needs updating"
+    elif "snippet not found" in e:
+        what = "a quoted figure was no longer found on its page"
+    elif code and code.group(1) == "429":
+        what = "the source asked us to slow down (429)"
+    elif code and code.group(1) in ("401", "403"):
+        what = f"the source refused the request ({code.group(1)})"
+    elif code and code.group(1) == "404":
+        what = "the page was not found (404)"
+    elif code:
+        what = f"the source returned an error ({code.group(1)})"
+    elif "Timeout" in e or "timed out" in e:
+        what = "the request timed out"
+    elif "newest month" in e:
+        what = e.split(";")[0]  # the reader's half; the instruction after it is for the maintainer
+    else:
+        what = "the fetch failed"
+    return f"{what}, on {when.isoformat()}"
 
 
 def is_stale(as_of: date | str, cadence: str | None, today: date | None = None) -> bool:
@@ -2246,16 +2270,6 @@ VALVES = [
 ]
 
 
-def _excerpt(body: str, limit: int = 400) -> str:
-    """The memo's opening, cut at a sentence or a word rather than mid-word."""
-    text = body.split("\n\n")[0].strip()
-    if len(text) <= limit:
-        return text
-    cut = text[:limit]
-    stop = max(cut.rfind(". "), cut.rfind("; "))
-    return (cut[: stop + 1] if stop > limit // 2 else cut[: cut.rfind(" ")].rstrip(",;") + "…").strip()
-
-
 def _formula(m: dict[str, Any]) -> str:
     """A metric's formula as a reader sees it: the fit and its arguments, then the SQL whose rows it runs over."""
     py = m.get("python") and (
@@ -2297,6 +2311,15 @@ def _votes(cards: list[dict[str, Any]]) -> list[dict[str, Any]]:
         if c.get("status") and c["status"] not in UNVOTED:
             clusters.setdefault(c.get("source_cluster") or c["id"], []).append(c)
     return [max(v, key=lambda c: (c.get("confidence") or 0, c["id"])) for v in clusters.values()]
+
+
+def _held(indicators: list[Any], cards: dict[str, Any], layer_id: str) -> list[dict[str, Any]]:
+    """Indicators on a layer with data the site holds but does not yet publish, so a layer never reads as empty."""
+    return [
+        {"id": i.id, "name": i.name, "reason": i.unpublished_reason, "n": cards[i.id]["n_observations"]}
+        for i in indicators
+        if i.layer_id == layer_id and not i.published and cards[i.id].get("n_observations")
+    ]
 
 
 def _summarise(cards: list[dict[str, Any]]) -> str:

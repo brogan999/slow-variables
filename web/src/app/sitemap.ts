@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { atlas, census, futures, index, memos, meta, seriesKeys } from "@/lib/data";
+import { atlas, census, futures, index, meta, seriesKeys } from "@/lib/data";
 import { EVIDENCE, PRIMARY } from "@/lib/nav";
 import { SITE } from "@/lib/site";
 
@@ -14,7 +14,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...atlas().domains.map((d) => ({ url: url(`/singularity/atlas/${d.id}`), lastModified, changeFrequency: "weekly" as const, priority: 0.7 })),
     ...census().roles.map((r) => ({ url: url(r.href), lastModified, changeFrequency: "monthly" as const, priority: 0.5 })),
     ...[...futures().imagined.filter((d) => d.href).map((d) => d.href as string), ...futures().expected.map((d) => d.href), ...futures().categories.map((c) => c.href)].map((h) => ({ url: url(h), lastModified, changeFrequency: "monthly" as const, priority: 0.5 })),
-    ...memos().map((m) => ({ url: url(`/memos/${m.date}`), lastModified, changeFrequency: "weekly" as const, priority: 0.7 })),
     ...buckets.map((b) => ({ url: url(`/buckets/${b.id}`), lastModified, changeFrequency: "daily" as const, priority: 0.7 })),
     ...layers.map((l) => ({ url: url(`/layers/${l.id}`), lastModified, changeFrequency: "daily" as const, priority: 0.7 })),
     ...indicators.filter((i) => i.published).map((i) => ({ url: url(`/indicators/${i.id}`), lastModified, changeFrequency: "daily" as const, priority: 0.6 })),

@@ -111,7 +111,7 @@
  "derived": [
   {
    "as_of_date": "2026-06-30",
-   "computed_at": "2026-09-26T11:34:30.729440Z",
+   "computed_at": "2026-09-27T04:59:09.348638Z",
    "dims": {
     "entity": "crwv"
    },
@@ -199,7 +199,7 @@
   }
  ],
  "prediction_rows": [],
- "proposed_status": "not_yet_measurable",
+ "proposed_status": "emerging",
  "proxy_types": [
   "capital_flow",
   "market_structure"
@@ -459,8 +459,27 @@
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,
- "status": "not_yet_measurable",
+ "status": "emerging",
  "status_events": [
+  {
+   "author": "claude",
+   "counterevidence_considered": "None needed: no reading has changed; this corrects the word used for too few readings.",
+   "created_at": "2026-09-27T04:57:37.838980Z",
+   "evidence_ids": [
+    "07ff8ebabf22d060",
+    "5ecdd5795911ce93",
+    "61c7969e48db4455",
+    "83dde83bc0a515eb"
+   ],
+   "id": "22a436aaa5adea95",
+   "new_conf": 60,
+   "new_status": "emerging",
+   "old_conf": 60,
+   "old_status": "not_yet_measurable",
+   "reason": "It has 1 reading and its direction rule compares 4, so it reads emerging rather than not yet measurable: the site uses not yet measurable only for what cannot be measured at all. The status turns into a direction once enough readings exist.",
+   "target_id": "neocloud_debt_terms",
+   "target_type": "indicator"
+  },
   {
    "author": "evaluate",
    "counterevidence_considered": null,

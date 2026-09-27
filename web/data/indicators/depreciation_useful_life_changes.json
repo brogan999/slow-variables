@@ -166,7 +166,7 @@
   }
  ],
  "prediction_rows": [],
- "proposed_status": "not_yet_measurable",
+ "proposed_status": "emerging",
  "proxy_types": [
   "capital_flow"
  ],
@@ -270,8 +270,24 @@
  "stale_as_of": null,
  "stale_ok": true,
  "stale_reason": "Annual filings; each change is quoted by hand from the 10-K notes.",
- "status": "not_yet_measurable",
+ "status": "emerging",
  "status_events": [
+  {
+   "author": "claude",
+   "counterevidence_considered": "None needed: no reading has changed; this corrects the word used for too few readings.",
+   "created_at": "2026-09-27T04:57:37.838022Z",
+   "evidence_ids": [
+    "81efc38c88434c53"
+   ],
+   "id": "00a27d2805127775",
+   "new_conf": 65,
+   "new_status": "emerging",
+   "old_conf": 65,
+   "old_status": "not_yet_measurable",
+   "reason": "It has 1 reading and its direction rule compares 3, so it reads emerging rather than not yet measurable: the site uses not yet measurable only for what cannot be measured at all. The status turns into a direction once enough readings exist.",
+   "target_id": "depreciation_useful_life_changes",
+   "target_type": "indicator"
+  },
   {
    "author": "evaluate",
    "counterevidence_considered": null,

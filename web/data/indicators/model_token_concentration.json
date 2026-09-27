@@ -126,7 +126,7 @@
  "derived": [
   {
    "as_of_date": "2026-09-13",
-   "computed_at": "2026-09-26T11:34:30.729440Z",
+   "computed_at": "2026-09-27T04:59:09.348638Z",
    "dims": {},
    "formula_version": "2",
    "id": "57e072016944906b",
@@ -181,7 +181,7 @@
   },
   {
    "as_of_date": "2026-09-20",
-   "computed_at": "2026-09-26T11:34:30.729440Z",
+   "computed_at": "2026-09-27T04:59:09.348638Z",
    "dims": {},
    "formula_version": "2",
    "id": "effbd6df138272c4",
@@ -236,7 +236,7 @@
   },
   {
    "as_of_date": "2026-09-25",
-   "computed_at": "2026-09-26T11:34:30.729440Z",
+   "computed_at": "2026-09-27T04:59:09.348638Z",
    "dims": {},
    "formula_version": "2",
    "id": "5d21e9a423a0aa4c",
@@ -448,7 +448,7 @@
   }
  ],
  "prediction_rows": [],
- "proposed_status": "not_yet_measurable",
+ "proposed_status": "emerging",
  "proxy_types": [
   "market_structure",
   "product"
@@ -477,8 +477,43 @@
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,
- "status": "not_yet_measurable",
+ "status": "emerging",
  "status_events": [
+  {
+   "author": "claude",
+   "counterevidence_considered": "None needed: no reading has changed; this corrects the word used for too few readings.",
+   "created_at": "2026-09-27T04:57:38.389742Z",
+   "evidence_ids": [
+    "0e359ce00e4f64d5",
+    "107dda49df08c999",
+    "149825364dd940c7",
+    "2573cc95ba7849e2",
+    "37edda4ab17367ea",
+    "4aa56b2959a32860",
+    "4aafbab3266ba76d",
+    "5bd68601ec5a4b52",
+    "61d56c405372fadb",
+    "67dfe2c52341b5de",
+    "69f98577ad0c84bd",
+    "861c7756035120d1",
+    "992062f67aa96748",
+    "a04de78dbba23ad6",
+    "aa2050394d09c371",
+    "b66b86801a55ec20",
+    "c917382528ae83c1",
+    "d4138e7316596fc2",
+    "d83a978d97c0d9e3",
+    "f2e24061d26a7e1b"
+   ],
+   "id": "41eefccb2593bf82",
+   "new_conf": 40,
+   "new_status": "emerging",
+   "old_conf": 40,
+   "old_status": "not_yet_measurable",
+   "reason": "It has 3 readings and its direction rule compares 5, so it reads emerging rather than not yet measurable: the site uses not yet measurable only for what cannot be measured at all. The status turns into a direction once enough readings exist.",
+   "target_id": "model_token_concentration",
+   "target_type": "indicator"
+  },
   {
    "author": "evaluate",
    "counterevidence_considered": null,

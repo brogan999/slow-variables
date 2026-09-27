@@ -35,7 +35,8 @@ def test_direction():
     assert direction(list(zip(d, [0.6, 0.58, 0.55, 0.52, 0.5])), rule).value == "dispersing"
     assert direction(list(zip(d, [0.5, 0.51, 0.5, 0.51, 0.51])), rule).value == "stable"
     assert direction(list(zip(d, [0.5, 0.7, 0.4, 0.75, 0.55])), rule).value == "unclear"
-    assert direction(list(zip(d[:3], [0.5, 0.6, 0.7])), rule).value == "not_yet_measurable"
+    assert direction(list(zip(d[:3], [0.5, 0.6, 0.7])), rule).value == "emerging"  # readings, too few for a trend
+    assert direction([], rule).value == "not_yet_measurable"
     # one move then a flat tail is no trend, whichever way the move went (flat steps used to count as falling)
     assert direction(list(zip(d, [0.5, 0.5, 0.5, 0.5, 0.6])), rule).value == "unclear"
     assert direction(list(zip(d, [0.6, 0.6, 0.6, 0.6, 0.5])), rule).value == "unclear"

@@ -21,11 +21,15 @@ export function Num({ p, unit, obsIndex, compact = false }: { p: Point | null | 
   );
 }
 
+// Record links read as numbered sources, never as raw ids; hovering a number shows the series it belongs to.
 export function ObsLinks({ ids, obsIndex, max = 6 }: { ids: string[]; obsIndex: Record<string, string>; max?: number }) {
   return (
-    <span className="inline-flex flex-wrap gap-x-2 gap-y-0.5 num text-[11px]">
-      {ids.slice(0, max).map((id) => (
-        obsIndex[id] ? <Link key={id} href={`/series/${obsIndex[id]}#${id}`} className="text-ink-2 hover:text-ink">obs:{id.slice(0, 8)}</Link> : <span key={id} className="text-muted">obs:{id.slice(0, 8)}</span>
+    <span className="inline-flex flex-wrap items-baseline gap-x-1.5 gap-y-0.5 num text-[11px]">
+      <span className="text-muted">{ids.length === 1 ? "source" : "sources"}</span>
+      {ids.slice(0, max).map((id, i) => (
+        obsIndex[id]
+          ? <Link key={id} href={`/series/${obsIndex[id]}#${id}`} title={obsIndex[id]} aria-label={`source ${i + 1}: ${obsIndex[id]}`} className="text-ink-2 underline decoration-grid underline-offset-2 hover:text-ink">{i + 1}</Link>
+          : <span key={id} className="text-muted" title="record not published">{i + 1}</span>
       ))}
       {ids.length > max ? <span className="text-muted">+{ids.length - max} more</span> : null}
     </span>

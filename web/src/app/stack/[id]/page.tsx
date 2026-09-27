@@ -27,7 +27,7 @@ export default async function SublayerPage({ params }: { params: Promise<{ id: s
       </div>
       <section>
         <h2 className="display text-2xl leading-tight mb-3 mt-2">Indicators</h2>
-        {s.indicators.length ? <div className="grid gap-3 md:grid-cols-2">{s.indicators.filter((c) => c.published).map((c) => <IndicatorCard key={c.id} c={c} obsIndex={idx} />)}</div> : <p className="text-sm text-muted">No indicator addresses this sub-layer yet; its entities carry whatever filings and dataset rows attach to them.</p>}
+        {s.indicators.length ? <div className="grid gap-3 md:grid-cols-2">{s.indicators.map((c) => <IndicatorCard key={c.id} c={c} obsIndex={idx} />)}</div> : <p className="text-sm text-muted">No indicator addresses this sub-layer yet; its entities carry whatever filings and dataset rows attach to them.</p>}
       </section>
       {v ? (
         <section>

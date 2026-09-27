@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { publishedIds, type StatusEvent } from "@/lib/data";
-import { indicatorHref } from "@/lib/format";
+import { authorLabel, indicatorHref } from "@/lib/format";
 import { ObsLinks } from "./Provenance";
 import { StatusChip } from "./StatusChip";
 
@@ -14,7 +14,7 @@ export function ChangelogList({ events, obsIndex, showTarget = true }: { events:
             <span className="text-muted tabular-nums">{e.created_at.slice(0, 10)}</span>
             {showTarget ? <Link href={e.target_type === "prediction" ? `/predictions#${e.target_id}` : indicatorHref(e.target_id, publishedIds().has(e.target_id))} className="font-medium hover:underline">{e.target_id}</Link> : null}
             <StatusChip status={e.old_status} /> <span className="text-muted" aria-hidden>→</span><span className="sr-only">to</span> <StatusChip status={e.new_status} />
-            <span className="text-xs text-muted">conf {e.old_conf ?? "—"} → {e.new_conf} · {e.author}</span>
+            <span className="text-xs text-muted">conf {e.old_conf ?? "—"} → {e.new_conf} · {authorLabel(e.author)}</span>
           </div>
           <p className="text-ink-2 mt-1">{e.reason}</p>
           {e.counterevidence_considered ? <p className="text-xs text-muted mt-1">Weighed against it: {e.counterevidence_considered}</p> : null}
