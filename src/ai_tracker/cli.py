@@ -286,6 +286,9 @@ def _check(s: st.Store) -> tuple[list[str], list[str]]:
     for ind in s.seed.indicators:  # an unknown valve reads as measuring nothing on the diagram, silently
         if ind.valve_measured and ind.valve_measured not in valves:
             errors.append(f"{ind.id}: valve_measured '{ind.valve_measured}' is not a valve ({sorted(valves)})")
+        sub = next((x for x in s.seed.sublayers if x.id == ind.sublayer_id), None) if ind.sublayer_id else None
+        if ind.sublayer_id and (sub is None or sub.layer_id != ind.layer_id):
+            errors.append(f"{ind.id}: sublayer_id '{ind.sublayer_id}' is not a sub-layer of its layer '{ind.layer_id}'")
     for c in s.seed.crosswalk:  # `leak` is the diagram's exit to the capture lens, a bucket only here
         if c.bucket_id not in buckets | {"leak"}:
             errors.append(f"crosswalk {c.bucket_id} -> {c.layer_id}: '{c.bucket_id}' is not a bucket or the leak")

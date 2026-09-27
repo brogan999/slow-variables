@@ -1,5 +1,5 @@
 {
- "as_of": "2026-09-26",
+ "as_of": "2026-09-27",
  "buckets": [
   {
    "id": "methods",
@@ -406,7 +406,7 @@
     {
      "answers": [
       "Valve: Invention \u2192 product",
-      "Who keeps it: Compute & physical"
+      "Who keeps it: Compute & physical / Data-centre developers & power"
      ],
      "band_value": null,
      "bucket_id": "methods",
@@ -1012,7 +1012,7 @@
     {
      "answers": [
       "Valve: Invention \u2192 product",
-      "Who keeps it: Deployment & application"
+      "Who keeps it: Deployment & application / Coding agents & dev tools"
      ],
      "band_value": null,
      "bucket_id": "products",
@@ -1061,7 +1061,7 @@
     {
      "answers": [
       "Valve: Product \u2192 adoption",
-      "Who keeps it: Deployment & application"
+      "Who keeps it: Deployment & application / Deployment / FDE / implementation services"
      ],
      "band_value": null,
      "bucket_id": "products",
@@ -1820,8 +1820,8 @@
      "grade": "D",
      "id": "safety_brake_events",
      "latest": {
-      "as_of": "2026-09-26",
-      "derived_id": "fbc0cb8f24a8f0aa",
+      "as_of": "2026-09-27",
+      "derived_id": "4daa952ee4fe04ff",
       "dims": {},
       "obs_ids": [
        "2ab8fec44e7914a5",
@@ -2882,8 +2882,8 @@
      "grade": "D",
      "id": "cl_lab_release_claims",
      "latest": {
-      "as_of": "2026-09-26",
-      "derived_id": "cb230a0cb0a4d041",
+      "as_of": "2026-09-27",
+      "derived_id": "861dbfb8c243a0c8",
       "dims": {},
       "obs_ids": [
        "0bdf1920b1feb93e",
@@ -2968,6 +2968,40 @@
  "recent_status_events": [
   {
    "author": "claude",
+   "counterevidence_considered": "Run-rates are estimates annualised from one month; no serving firm publishes margins, so revenue growth says nothing yet about whether the layer keeps its rent.",
+   "created_at": "2026-09-27T06:29:39.567021Z",
+   "evidence_ids": [
+    "09f7a0828f93159f",
+    "87887dbf16ff47b3"
+   ],
+   "id": "9e7e778746b0fc37",
+   "new_conf": 35,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "First reading. Sacra estimates Fireworks, the largest serving firm the site tracks, at an annualised run-rate of $305M at the end of 2025 and $800M at the end of May 2026. Its direction rule compares three readings from the one estimator, so with two it reads emerging; the other firms (Together, Baseten, Modal, RunPod, OpenRouter) stay as evidence.",
+   "target_id": "inference_run_rates",
+   "target_type": "indicator"
+  },
+  {
+   "author": "claude",
+   "counterevidence_considered": "One company, and the most successful one, so the series over-represents success; run-rates annualise one month and are not audited.",
+   "created_at": "2026-09-27T06:29:39.460522Z",
+   "evidence_ids": [
+    "96c28baf4bc62ea8",
+    "3b096fafbaa71b07"
+   ],
+   "id": "eea461262f361635",
+   "new_conf": 35,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "First reading. Dealroom reports Anysphere (Cursor) at an annualised run-rate of $3.0B at the end of April 2026 and $4.0B in early June 2026. Its direction rule compares three readings from the one compiler, so with two it reads emerging; the other application companies stay as evidence.",
+   "target_id": "app_run_rates",
+   "target_type": "indicator"
+  },
+  {
+   "author": "claude",
    "counterevidence_considered": "Oracle and the neoclouds are absent; Google Cloud's faster growth is what pulls the index down, and a slightly wider window would read dispersing.",
    "created_at": "2026-09-27T05:46:02.239844Z",
    "evidence_ids": [
@@ -2985,40 +3019,6 @@
    "old_status": "dispersing",
    "reason": "With each filer's fiscal fourth quarter filled from the 10-K, the index across AWS, Google Cloud and Microsoft Intelligent Cloud eased from 0.367 (Q2 2025) to 0.349 (Q2 2026), a move of 1.8 points, inside the two-point dead band, so it reads stable rather than dispersing. The earlier reading rested on six quarters with gaps.",
    "target_id": "cloud_hhi",
-   "target_type": "indicator"
-  },
-  {
-   "author": "claude",
-   "counterevidence_considered": "Only two chip makers are covered; Broadcom, TSMC and the custom-silicon designers are absent, so the level overstates concentration.",
-   "created_at": "2026-09-27T05:46:02.233745Z",
-   "evidence_ids": [
-    "005d040fe4b816e0",
-    "2faa719b05b9c22a"
-   ],
-   "id": "0b86501fb98962cf",
-   "new_conf": 60,
-   "new_status": "stable",
-   "old_conf": 60,
-   "old_status": "unclear",
-   "reason": "With the fourth quarters filled where the filers publish full-year figures, NVIDIA's and AMD's data-centre revenue shares give an index of 0.830 (Q1 2025) and 0.849 (Q2 2026): a move of under two points, inside the dead band, so it reads stable. The earlier unclear reading compared a gappy series; AMD's fourth quarters stay missing because AMD files no full-year segment figures.",
-   "target_id": "semis_hhi",
-   "target_type": "indicator"
-  },
-  {
-   "author": "claude",
-   "counterevidence_considered": "Operating, not gross, margin; one filer's segment carries the reading, and AWS's rising margin may reflect its own depreciation schedule as much as AI demand.",
-   "created_at": "2026-09-27T05:46:02.223540Z",
-   "evidence_ids": [
-    "6fb0f8f0c93debba",
-    "89c26630d3de81d0"
-   ],
-   "id": "ccc338f6bc130d4c",
-   "new_conf": 75,
-   "new_status": "concentrating",
-   "old_conf": 75,
-   "old_status": "stable",
-   "reason": "AWS's segment operating margin, now read with the fiscal fourth quarters that are filed only in the 10-K, rose in each of the last four quarters: 32.9% (Q2 2025), 34.6%, 35.0%, 37.7% and 39.4% (Q2 2026). That is above the two-point dead band and every step agrees, so it reads concentrating; the earlier stable reading compared quarters with the fourth ones missing.",
-   "target_id": "cloud_segment_margins",
    "target_type": "indicator"
   }
  ],
@@ -3151,7 +3151,7 @@
    "to": "capture"
   }
  ],
- "verdict": "As of 2026-09-26: methods mixed, products consistent with normal, early adoption consistent with normal, adaptation consistent with normal, return arrow emerging. Thesis: holding.",
+ "verdict": "As of 2026-09-27: methods mixed, products consistent with normal, early adoption consistent with normal, adaptation consistent with normal, return arrow emerging. Thesis: holding.",
  "what_would_change": [
   "METR 50% time horizon: Normal = doubling time \u2265 7 months (\u2248213 days, METR's 2019\u20132025 trend); fast = \u2264 4 months (\u2248122 days), the AI 2027 assumption. Between the two is `emerging`. The bands are about the current pace, so the input is a log-linear fit over the 2024-onward window, the most recent window METR reports (89 days in the TH1.1 post of 29 Jan 2026), recomputed from METR's corrected data. On the 2023-onward window METR's published figure is 128.7 days, in the gap between the bands: the reading is window-sensitive and both numbers are shown.",
   "METR 80% time horizon: Same bands and same 2024-onward window as the 50% horizon, applied to our own fit because METR publishes doubling times for the 50% series only. The 2023-onward fit (horizon_doubling_days_80) sits in the gap between the bands.",

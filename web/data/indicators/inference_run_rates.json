@@ -2,17 +2,17 @@
  "answers": [
   "Who keeps it: Serving & orchestration / Inference serving"
  ],
- "band_input": "fireworks_blog.fireworks.revenue_run_rate_usd.pt",
+ "band_input": "sacra_free.fireworks.revenue_run_rate_usd.pt",
  "band_rationale": null,
  "band_value": {
-  "as_of": "2026-07-15",
+  "as_of": "2026-05-31",
   "high": null,
   "low": null,
   "obs_ids": [
-   "792083b1662fcbca"
+   "87887dbf16ff47b3"
   ],
   "unit": "USD",
-  "value": 1000000000.0
+  "value": 800000000.0
  },
  "bucket_id": null,
  "cadence_expected": "irregular",
@@ -22,33 +22,43 @@
   "dead": null,
   "drawn": {
    "metric": null,
-   "others": 20,
-   "series": "fireworks_blog.fireworks.revenue_run_rate_usd.pt",
-   "total": 21
+   "others": 14,
+   "series": "sacra_free.fireworks.revenue_run_rate_usd.pt",
+   "total": 15
   },
-  "line": false,
-  "n_drawn": 1,
-  "needs": null,
+  "line": true,
+  "n_drawn": 2,
+  "needs": 3,
   "partial": false,
   "stamps": [
-   "reported"
+   "estimate"
   ],
   "x": {
    "ticks": [
     {
-     "label": "Jun 2026",
+     "label": "2026",
      "minor": false,
-     "x": 4.17
+     "x": 3.73
     },
     {
-     "label": "Jul",
-     "minor": false,
-     "x": 35.42
+     "label": "Feb",
+     "minor": true,
+     "x": 22.98
     },
     {
-     "label": "Aug",
+     "label": "Mar",
      "minor": false,
-     "x": 67.71
+     "x": 40.37
+    },
+    {
+     "label": "Apr",
+     "minor": true,
+     "x": 59.63
+    },
+    {
+     "label": "May",
+     "minor": false,
+     "x": 78.26
     }
    ]
   },
@@ -57,27 +67,19 @@
    "log": false,
    "ticks": [
     {
-     "label": "$0",
+     "label": "$200M",
      "y": 100.0
     },
     {
-     "label": "$0.2B",
-     "y": 80.0
+     "label": "$400M",
+     "y": 66.67
     },
     {
-     "label": "$0.4B",
-     "y": 60.0
+     "label": "$600M",
+     "y": 33.33
     },
     {
-     "label": "$0.6B",
-     "y": 40.0
-    },
-    {
-     "label": "$0.8B",
-     "y": 20.0
-    },
-    {
-     "label": "$1.0B",
+     "label": "$800M",
      "y": 0.0
     }
    ],
@@ -88,15 +90,15 @@
   "metric": null,
   "sources": [
    {
-    "attribution": "Fireworks AI",
-    "id": "fireworks_blog",
-    "license": "Fireworks AI; short quotation",
-    "name": "Fireworks AI blog",
-    "org": "Fireworks AI"
+    "attribution": "Sacra estimates (free company page)",
+    "id": "sacra_free",
+    "license": "Sacra; short quotation of the free summary",
+    "name": "Sacra company pages (free summaries)",
+    "org": "Sacra"
    }
   ]
  },
- "confidence": null,
+ "confidence": 35,
  "confidence_basis": {
   "best_tier": 5,
   "grade": "C",
@@ -119,8 +121,13 @@
  "definition": "Annualised revenue, bookings and run-rates for inference clouds, serving platforms and routers (Fireworks, Baseten, Together, Modal, RunPod, OpenRouter, Groq), hand-entered from company statements, press reports and Sacra's estimates, each checked against its page.",
  "derived": [],
  "direction": null,
- "direction_readings": null,
- "direction_rule": null,
+ "direction_readings": 3,
+ "direction_rule": {
+  "dead_band": 100000000.0,
+  "higher_is": "concentrating",
+  "periods": 2,
+  "rationale": "The rule compares three estimates from one estimator (Sacra) for the largest serving firm; moves under $100M are estimation noise. Other publishers reporting the same firm (the Fireworks blog, CNBC) are the second source. Rising run-rate means the serving layer is keeping more of what passes through it."
+ },
  "evidence": [],
  "falsifying_band": null,
  "fast_band": null,
@@ -129,7 +136,7 @@
  "grade": "C",
  "id": "inference_run_rates",
  "latest": {
-  "as_of": "2026-07-15",
+  "as_of": "2026-05-31",
   "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
   "disputed": true,
   "flags": [
@@ -140,12 +147,12 @@
   "high": null,
   "low": null,
   "obs_ids": [
-   "792083b1662fcbca"
+   "87887dbf16ff47b3"
   ],
-  "series_key": "fireworks_blog.fireworks.revenue_run_rate_usd.pt",
+  "series_key": "sacra_free.fireworks.revenue_run_rate_usd.pt",
   "subject": "fireworks",
   "unit": "USD",
-  "value": 1000000000.0
+  "value": 800000000.0
  },
  "layer_id": "serving_orchestration",
  "leading_lagging": "coincident",
@@ -158,26 +165,51 @@
  "pending": null,
  "points": [
   {
-   "as_of": "2026-07-15",
+   "as_of": "2025-12-31",
    "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
    "disputed": true,
+   "faint": false,
    "flags": [
     "disputed",
     "run-rate"
    ],
    "grade": "C",
    "high": null,
-   "href": "/series/fireworks_blog.fireworks.revenue_run_rate_usd.pt#792083b1662fcbca",
+   "href": "/series/sacra_free.fireworks.revenue_run_rate_usd.pt#09f7a0828f93159f",
    "low": null,
    "obs_ids": [
-    "792083b1662fcbca"
+    "09f7a0828f93159f"
    ],
-   "series_key": "fireworks_blog.fireworks.revenue_run_rate_usd.pt",
-   "stamp": "reported",
+   "series_key": "sacra_free.fireworks.revenue_run_rate_usd.pt",
+   "stamp": "estimate",
    "subject": "fireworks",
    "unit": "USD",
-   "value": 1000000000.0,
-   "x": 50.0,
+   "value": 305000000.0,
+   "x": 3.11,
+   "y": 82.5
+  },
+  {
+   "as_of": "2026-05-31",
+   "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+   "disputed": true,
+   "faint": false,
+   "flags": [
+    "disputed",
+    "run-rate"
+   ],
+   "grade": "C",
+   "high": null,
+   "href": "/series/sacra_free.fireworks.revenue_run_rate_usd.pt#87887dbf16ff47b3",
+   "low": null,
+   "obs_ids": [
+    "87887dbf16ff47b3"
+   ],
+   "series_key": "sacra_free.fireworks.revenue_run_rate_usd.pt",
+   "stamp": "estimate",
+   "subject": "fireworks",
+   "unit": "USD",
+   "value": 800000000.0,
+   "x": 96.89,
    "y": 0.0
   }
  ],
@@ -187,7 +219,7 @@
   "capital_flow",
   "market_structure"
  ],
- "published": false,
+ "published": true,
  "related_bottlenecks": [],
  "related_indicators": [
   "model_price_per_intelligence_point",
@@ -259,44 +291,6 @@
      "subject": "together",
      "unit": "USD",
      "value": 100000000.0
-    },
-    {
-     "as_of": "2024-02-29",
-     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
-     "disputed": true,
-     "flags": [
-      "disputed",
-      "run-rate"
-     ],
-     "grade": "C",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "8ae6e24125c38640"
-     ],
-     "series_key": "crunchbase_news.together.revenue_run_rate_usd.pt",
-     "subject": "together",
-     "unit": "USD",
-     "value": 30000000.0
-    },
-    {
-     "as_of": "2025-02-20",
-     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
-     "disputed": true,
-     "flags": [
-      "disputed",
-      "run-rate"
-     ],
-     "grade": "C",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "55f3312d83630a77"
-     ],
-     "series_key": "crunchbase_news.together.revenue_run_rate_usd.pt",
-     "subject": "together",
-     "unit": "USD",
-     "value": 100000000.0
     }
    ],
    "series_key": "crunchbase_news.together.revenue_run_rate_usd.pt"
@@ -327,44 +321,6 @@
   },
   {
    "points": [
-    {
-     "as_of": "2025-12-31",
-     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
-     "disputed": true,
-     "flags": [
-      "disputed",
-      "run-rate"
-     ],
-     "grade": "C",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "3b1b84244b4589ea"
-     ],
-     "series_key": "pymnts.baseten.revenue_run_rate_usd.pt",
-     "subject": "baseten",
-     "unit": "USD",
-     "value": 200000000.0
-    },
-    {
-     "as_of": "2026-03-31",
-     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
-     "disputed": true,
-     "flags": [
-      "disputed",
-      "run-rate"
-     ],
-     "grade": "C",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "cc41eee22cf49496"
-     ],
-     "series_key": "pymnts.baseten.revenue_run_rate_usd.pt",
-     "subject": "baseten",
-     "unit": "USD",
-     "value": 600000000.0
-    },
     {
      "as_of": "2025-12-31",
      "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
@@ -518,44 +474,6 @@
      "subject": "fireworks",
      "unit": "USD",
      "value": 800000000.0
-    },
-    {
-     "as_of": "2025-12-31",
-     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
-     "disputed": true,
-     "flags": [
-      "disputed",
-      "run-rate"
-     ],
-     "grade": "C",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "09f7a0828f93159f"
-     ],
-     "series_key": "sacra_free.fireworks.revenue_run_rate_usd.pt",
-     "subject": "fireworks",
-     "unit": "USD",
-     "value": 305000000.0
-    },
-    {
-     "as_of": "2026-05-31",
-     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
-     "disputed": true,
-     "flags": [
-      "disputed",
-      "run-rate"
-     ],
-     "grade": "C",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "87887dbf16ff47b3"
-     ],
-     "series_key": "sacra_free.fireworks.revenue_run_rate_usd.pt",
-     "subject": "fireworks",
-     "unit": "USD",
-     "value": 800000000.0
     }
    ],
    "series_key": "sacra_free.fireworks.revenue_run_rate_usd.pt"
@@ -620,90 +538,12 @@
      "subject": "openrouter",
      "unit": "USD",
      "value": 160000000.0
-    },
-    {
-     "as_of": "2025-12-31",
-     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
-     "disputed": true,
-     "flags": [
-      "disputed",
-      "run-rate",
-      "net"
-     ],
-     "grade": "C",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "fbfd05df00273151"
-     ],
-     "series_key": "sacra_free.openrouter.revenue_run_rate_usd.pt",
-     "subject": "openrouter",
-     "unit": "USD",
-     "value": 50000000.0
-    },
-    {
-     "as_of": "2026-08-31",
-     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
-     "disputed": true,
-     "flags": [
-      "disputed",
-      "run-rate",
-      "net"
-     ],
-     "grade": "C",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "2f2e92a38002df8c"
-     ],
-     "series_key": "sacra_free.openrouter.revenue_run_rate_usd.pt",
-     "subject": "openrouter",
-     "unit": "USD",
-     "value": 160000000.0
     }
    ],
    "series_key": "sacra_free.openrouter.revenue_run_rate_usd.pt"
   },
   {
    "points": [
-    {
-     "as_of": "2025-12-31",
-     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
-     "disputed": true,
-     "flags": [
-      "disputed",
-      "run-rate"
-     ],
-     "grade": "C",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "fd29506ebcf35b7d"
-     ],
-     "series_key": "sacra_free.together.revenue_run_rate_usd.pt",
-     "subject": "together",
-     "unit": "USD",
-     "value": 618000000.0
-    },
-    {
-     "as_of": "2026-02-28",
-     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
-     "disputed": true,
-     "flags": [
-      "disputed",
-      "run-rate"
-     ],
-     "grade": "C",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "2fae4c5caacae943"
-     ],
-     "series_key": "sacra_free.together.revenue_run_rate_usd.pt",
-     "subject": "together",
-     "unit": "USD",
-     "value": 1000000000.0
-    },
     {
      "as_of": "2025-12-31",
      "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
@@ -855,69 +695,25 @@
      "subject": "modal",
      "unit": "USD",
      "value": 300000000.0
-    },
-    {
-     "as_of": "2025-09-30",
-     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
-     "disputed": true,
-     "flags": [
-      "disputed",
-      "run-rate"
-     ],
-     "grade": "C",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "3e613183a237a5a7"
-     ],
-     "series_key": "yahoo_finance.modal.revenue_run_rate_usd.pt",
-     "subject": "modal",
-     "unit": "USD",
-     "value": 60000000.0
-    },
-    {
-     "as_of": "2026-05-21",
-     "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
-     "disputed": true,
-     "flags": [
-      "disputed",
-      "run-rate"
-     ],
-     "grade": "C",
-     "high": null,
-     "low": null,
-     "obs_ids": [
-      "fd5282e81c8ce689"
-     ],
-     "series_key": "yahoo_finance.modal.revenue_run_rate_usd.pt",
-     "subject": "modal",
-     "unit": "USD",
-     "value": 300000000.0
     }
    ],
    "series_key": "yahoo_finance.modal.revenue_run_rate_usd.pt"
   }
  ],
  "series_keys": [
+  "sacra_free.fireworks.revenue_run_rate_usd.pt",
   "fireworks_blog.fireworks.revenue_run_rate_usd.pt",
   "cnbc.fireworks.revenue_run_rate_usd.pt",
-  "sacra_free.fireworks.revenue_run_rate_usd.pt",
-  "sacra_free.fireworks.revenue_run_rate_usd.pt",
-  "pymnts.baseten.revenue_run_rate_usd.pt",
   "pymnts.baseten.revenue_run_rate_usd.pt",
   "sacra_free.baseten.revenue_run_rate_usd.pt",
   "techcrunch.together.annual_bookings_usd.pt",
   "sacra_free.together.revenue_run_rate_usd.pt",
-  "sacra_free.together.revenue_run_rate_usd.pt",
   "crunchbase_news.together.revenue_run_rate_usd.pt",
-  "crunchbase_news.together.revenue_run_rate_usd.pt",
-  "yahoo_finance.modal.revenue_run_rate_usd.pt",
   "yahoo_finance.modal.revenue_run_rate_usd.pt",
   "techcrunch.modal.revenue_run_rate_usd.pt",
   "runpod_press.runpod.revenue_run_rate_usd.pt",
   "thenextweb.runpod.revenue_run_rate_usd.pt",
   "pymnts.openrouter.revenue_run_rate_usd.pt",
-  "sacra_free.openrouter.revenue_run_rate_usd.pt",
   "sacra_free.openrouter.revenue_run_rate_usd.pt",
   "sacra_free.groq.revenue_usd.fy"
  ],
@@ -933,18 +729,42 @@
   "thenextweb",
   "yahoo_finance"
  ],
- "spark": null,
+ "spark": {
+  "d": "M1.0,26.0 L95.0,2.0",
+  "end": [
+   95.0,
+   2.0
+  ]
+ },
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,
- "status": null,
- "status_events": [],
+ "status": "emerging",
+ "status_events": [
+  {
+   "author": "claude",
+   "counterevidence_considered": "Run-rates are estimates annualised from one month; no serving firm publishes margins, so revenue growth says nothing yet about whether the layer keeps its rent.",
+   "created_at": "2026-09-27T06:29:39.567021Z",
+   "evidence_ids": [
+    "09f7a0828f93159f",
+    "87887dbf16ff47b3"
+   ],
+   "id": "9e7e778746b0fc37",
+   "new_conf": 35,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "First reading. Sacra estimates Fireworks, the largest serving firm the site tracks, at an annualised run-rate of $305M at the end of 2025 and $800M at the end of May 2026. Its direction rule compares three readings from the one estimator, so with two it reads emerging; the other firms (Together, Baseten, Modal, RunPod, OpenRouter) stay as evidence.",
+   "target_id": "inference_run_rates",
+   "target_type": "indicator"
+  }
+ ],
  "sublayer_id": "inference_serving",
  "timing_rationale": "Coincident: revenue moves with the tokens served in the same months, and firms disclose it within weeks when they disclose it at all.",
- "tracker_interpretation": "Several inference platforms report run-rates between a few hundred million and about a billion dollars, growing several-fold in a year, while the price of a token at fixed capability falls; revenue says nothing about their margins, which none publishes.",
+ "tracker_interpretation": "Several inference platforms report run-rates between a few hundred million and about a billion dollars, growing several-fold in a year, while the price of a token at fixed capability falls; revenue says nothing about their margins, which none publishes. The direction reads Fireworks through Sacra's estimates, one estimator for one firm, so the other firms stay as evidence rather than votes.",
  "unit": "USD",
- "unpublished_reason": "No direction rule fits yet: the firms report different measures on irregular dates, so there is no single series to read for a trend. The rows are on /series and in Ask; margins, which would settle whether the layer keeps its rent, are not published by any of them.",
- "updated_at": "2026-09-25",
+ "unpublished_reason": null,
+ "updated_at": "2026-09-27",
  "valve_measured": null,
  "why_it_matters": "The serving layer sits between the model makers and the applications; whether it keeps margin as token prices fall decides whether it is a durable business or a pass-through."
 }

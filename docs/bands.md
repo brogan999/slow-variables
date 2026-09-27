@@ -14,6 +14,12 @@
 - Rule: normal -inf to 0.6; fast 0.8 to inf; falsifying none. The share only rises, so the question is how fast. Normal = under 60% of occupations with a quarter of their tasks in use four years in; fast = 80% or more. Anchor: 49% in the March 2026 report (data 5-12 February 2026).
 - Timing: Coincident: it classifies usage from the report's sampling week, published in that report.
 
+## Application-company revenue run-rates (`app_run_rates`)
+
+- Band input: `dealroom.anysphere.revenue_run_rate_usd.pt` (USD)
+- Rule: direction over 2 periods, dead band 300000000.0, higher is concentrating. The rule compares three readings from one compiler (Dealroom) for the largest application company, Anysphere (Cursor); moves under $300M are reporting noise. Other publishers reporting the same company (TechCrunch, Forbes) are the second source. Rising run-rate means the application layer is keeping more of the surplus.
+- Timing: Coincident: an annualised month of revenue moves with current usage and is reported within weeks, when it is reported at all.
+
 ## ARC-AGI-2 best score (`arc_agi_frontier`)
 
 - Band input: `metric:arc_agi_frontier` (share)
@@ -271,6 +277,12 @@
 - Band input: `humlum_pdf.denmark_exposed_workers.chatbot_effect_on_earnings.pt` (share)
 - Rule: normal -0.02 to 0.02; fast -inf to -0.05; falsifying none. Normal = earnings and hours effects within two percent two years in; fast = a decline of five percent or more for exposed workers. Between is `emerging`.
 - Timing: Lagging: administrative earnings records show effects years after adoption, published after linkage and review.
+
+## Inference-layer revenue run-rates (`inference_run_rates`)
+
+- Band input: `sacra_free.fireworks.revenue_run_rate_usd.pt` (USD)
+- Rule: direction over 2 periods, dead band 100000000.0, higher is concentrating. The rule compares three estimates from one estimator (Sacra) for the largest serving firm; moves under $100M are estimation noise. Other publishers reporting the same firm (the Fireworks blog, CNBC) are the second source. Rising run-rate means the serving layer is keeping more of what passes through it.
+- Timing: Coincident: revenue moves with the tokens served in the same months, and firms disclose it within weeks when they disclose it at all.
 
 ## Internal-to-public deployment gap at the frontier (`internal_external_deployment_gap_months`)
 

@@ -1444,7 +1444,7 @@ class Store:
             }
             for r in self.con.execute(
                 "SELECT entity_id, series_key, value_numeric, value_text, unit, as_of_date, id FROM ("
-                "SELECT *, row_number() OVER (PARTITION BY entity_id ORDER BY as_of_date DESC, retrieved_at DESC) rn "
+                "SELECT *, row_number() OVER (PARTITION BY entity_id ORDER BY value_numeric IS NULL, as_of_date DESC, retrieved_at DESC) rn "  # a figure before a bare filing notice
                 "FROM observations WHERE entity_id IS NOT NULL AND source_id <> 'openrouter' AND source_ns NOT IN ('lead', 'portfolio')) WHERE rn = 1"  # model prices and investments are not an entity's latest fact
             ).fetchall()
         }
