@@ -4,7 +4,7 @@ from datetime import date, timedelta
 import duckdb
 import yaml
 
-from ai_tracker.store import CAPEX_TTM, DC_SITES, VENTURE_ROUNDS
+from ai_tracker.store import CAPEX_TTM, DC_SITES, SEC_SEGMENT_QUARTERS, VENTURE_ROUNDS
 
 METRICS = yaml.safe_load(open("semantic/metrics.yaml"))["metrics"]
 
@@ -97,6 +97,7 @@ def run_p(metric: str, rows: list[tuple]) -> list[tuple]:
     )
     con.executemany("INSERT INTO obs_raw VALUES (?, ?, ?, ?, ?, ?)", rows)
     con.execute(KEY_SPLIT)
+    con.execute(SEC_SEGMENT_QUARTERS)
     return con.execute(METRICS[metric]["sql"]).fetchall()
 
 
@@ -222,6 +223,18 @@ def test_hhi_by_layer_by_hand():
     assert abs(out[("2026-06-30", "compute_semis")] - (0.6**2 + 0.4**2)) < 1e-9
     assert abs(out[("2026-06-30", "compute_cloud")] - (0.5**2 + 0.25**2 + 0.25**2)) < 1e-9
     assert abs(out[("2026-07-31", "model")] - (0.75**2 + 0.25**2)) < 1e-9  # lab shares renormalised to one
+
+
+def test_segment_readings_include_the_fiscal_q4_filed_only_in_the_10k():
+    k = "sec_seg.amzn.aws.{}.{}"
+    rows = [("fy_r", k.format("revenue", "fy"), "amzn", "2025-12-31", "2025-01-01", 100.0),
+            ("fy_o", k.format("operating_income", "fy"), "amzn", "2025-12-31", "2025-01-01", 40.0)]
+    for i, end in enumerate(["2025-03-31", "2025-06-30", "2025-09-30"]):
+        rows += [(f"r{i}", k.format("revenue", "q"), "amzn", end, None, 20.0),
+                 (f"o{i}", k.format("operating_income", "q"), "amzn", end, None, 8.0)]
+    out = {str(r[0]): (r[2], sorted(r[3])) for r in run_p("segment_operating_margin", rows)}
+    assert out["2025-12-31"] == ((40 - 24) / (100 - 60), sorted(["fy_o", "o0", "o1", "o2", "fy_r", "r0", "r1", "r2"]))
+    assert len(out) == 4  # three filed quarters and the filled fourth
 
 
 def test_hardware_price_performance_pairs_flops_and_price_by_chip_and_date():

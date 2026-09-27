@@ -325,44 +325,31 @@ metrics:
       QUALIFY lag(id, 4) OVER (ORDER BY as_of_date) IS NOT NULL
   segment_operating_margin:
     description: Segment operating income divided by segment revenue, per filer segment, per fiscal quarter (AWS, Google Cloud, Microsoft Intelligent Cloud, AMD Data Center, NVIDIA Compute & Networking).
-    rationale: The closest filed proxy for the margin each layer keeps; gross profit is not disclosed by segment.
+    rationale: The closest filed proxy for the margin each layer keeps; gross profit is not disclosed by segment. v2 reads the fiscal fourth quarters that are filed only inside the 10-K.
     grain: [as_of_date, segment]
     unit: share
     lead_lag: lagging
-    formula_version: 1
+    formula_version: 2
     inputs: ["sec_seg.*.operating_income.q", "sec_seg.*.revenue.q"]
-    caveats: Operating, not gross, margin; segment definitions differ (Intelligent Cloud includes server products and Windows Server).
+    caveats: Operating, not gross, margin; segment definitions differ (Intelligent Cloud includes server products and Windows Server). A fiscal Q4 filed only in the 10-K is the full year minus the three reported quarters and cites all four filings; AMD files no full-year segment figures, so its fourth quarters stay missing.
     sql: |
       SELECT oi.as_of_date, oi.subject || '.' || split_part(oi.series_key, '.', 3) AS segment,
-             oi.value_numeric / r.value_numeric AS value, [oi.id, r.id] AS obs_ids
-      FROM observations oi JOIN observations r
+             oi.v / r.v AS value, list_concat(oi.ids, r.ids) AS obs_ids
+      FROM sec_segment_quarters oi JOIN sec_segment_quarters r
         ON r.series_key = replace(oi.series_key, '.operating_income.q', '.revenue.q') AND r.as_of_date = oi.as_of_date
-      WHERE oi.series_key LIKE 'sec_seg.%.operating_income.q' AND r.value_numeric > 0
+      WHERE oi.series_key LIKE 'sec_seg.%.operating_income.q' AND r.v > 0
   margin_stack_share_by_layer:
     description: Each layer's share of the AI stack's filed segment operating income per calendar quarter. Semis = NVIDIA Compute & Networking + AMD Data Center; cloud = AWS + Google Cloud + Microsoft Intelligent Cloud. Labs and apps join when a filed or estimated series exists.
     rationale: The headline capture chart (P1 gap #1). Where operating income bulges is where the surplus sits; the thesis "rents migrate up the stack" needs the semis share to fall while labs and apps rise.
     grain: [as_of_date, layer_id]
     unit: share
     lead_lag: lagging
-    formula_version: 2
+    formula_version: 3
     inputs: ["sec_seg.*.operating_income.q", "sec_seg.*.operating_income.fy"]
     caveats: Fiscal quarters mapped to the calendar quarter of their period end (NVIDIA's late-July quarter counts as Q3); a filer's unreported fiscal Q4 is filled as fiscal year minus its three reported quarters and cites all four filings; quarters where any of the five segments is still missing are dropped; segment operating income, not gross profit; only two layers so far.
     sql: |
-      WITH q AS (
-        SELECT subject, series_key, as_of_date, period_start, value_numeric AS v, id
-        FROM observations WHERE series_key LIKE 'sec_seg.%.operating_income.q'),
-      fy AS (
-        SELECT subject, replace(series_key, '.fy', '.q') AS series_key, as_of_date, period_start, value_numeric AS v, id
-        FROM observations WHERE series_key LIKE 'sec_seg.%.operating_income.fy'),
-      fill AS (  -- FY minus the three quarters inside it, when exactly three are reported
-        SELECT fy.subject, fy.series_key, fy.as_of_date, fy.v - sum(q.v) AS v, list_prepend(fy.id, list(q.id ORDER BY q.id)) AS ids
-        FROM fy JOIN q ON q.subject = fy.subject AND q.series_key = fy.series_key
-                       AND q.as_of_date > fy.period_start AND q.as_of_date < fy.as_of_date
-        GROUP BY fy.subject, fy.series_key, fy.as_of_date, fy.v, fy.id
-        HAVING count(*) = 3 AND NOT EXISTS (SELECT 1 FROM q q2 WHERE q2.series_key = fy.series_key AND q2.as_of_date = fy.as_of_date)),
-      allq AS (
-        SELECT subject, as_of_date, v, [id] AS ids FROM q
-        UNION ALL SELECT subject, as_of_date, v, ids FROM fill),
+      WITH allq AS (
+        SELECT subject, as_of_date, v, ids FROM sec_segment_quarters WHERE series_key LIKE 'sec_seg.%.operating_income.q'),
       seg AS (
         SELECT date_trunc('quarter', as_of_date) AS cq, subject, v, ids,
                CASE WHEN subject IN ('nvda', 'amd') THEN 'compute_semis' ELSE 'compute_cloud' END AS layer_id
@@ -436,24 +423,24 @@ metrics:
     grain: [as_of_date, layer_id]
     unit: index
     lead_lag: leading
-    formula_version: 1
+    formula_version: 2
     inputs: ["sec_seg.*.revenue.q", "ramp.*.business_paid_share.m"]
-    caveats: Only covered filers; Broadcom, TSMC, Oracle and the neoclouds are absent, so levels overstate concentration. Fiscal quarters mapped to the calendar quarter of their period end. Ramp lab shares allow multi-homing and are normalised to sum to one.
+    caveats: Only covered filers; Broadcom, TSMC, Oracle and the neoclouds are absent, so levels overstate concentration. Fiscal quarters mapped to the calendar quarter of their period end; a fiscal Q4 filed only in the 10-K is the full year minus the three reported quarters (AMD files no full-year segment figures). Ramp lab shares allow multi-homing and are normalised to sum to one.
     sql: |
       WITH rev AS (
-        SELECT date_trunc('quarter', as_of_date) AS cq, subject, value_numeric AS v, id,
+        SELECT date_trunc('quarter', as_of_date) AS cq, subject, v, ids,
                CASE WHEN subject IN ('nvda', 'amd') THEN 'compute_semis' ELSE 'compute_cloud' END AS layer_id,
                CASE WHEN subject IN ('nvda', 'amd') THEN 2 ELSE 3 END AS need
-        FROM observations
+        FROM sec_segment_quarters
         WHERE series_key IN ('sec_seg.nvda.data_center.revenue.q', 'sec_seg.amd.data_center.revenue.q',
                              'sec_seg.amzn.aws.revenue.q', 'sec_seg.googl.cloud.revenue.q', 'sec_seg.msft.intelligent_cloud.revenue.q')),
       complete AS (SELECT cq, layer_id FROM rev GROUP BY cq, layer_id, need HAVING count(DISTINCT subject) = need),
       sh AS (SELECT (r.cq + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE AS as_of_date, r.layer_id,
-                    r.v / sum(r.v) OVER (PARTITION BY r.cq, r.layer_id) AS s, r.id
+                    r.v / sum(r.v) OVER (PARTITION BY r.cq, r.layer_id) AS s, r.ids
              FROM rev r JOIN complete c USING (cq, layer_id)),
-      lab AS (SELECT as_of_date, 'model' AS layer_id, value_numeric / sum(value_numeric) OVER (PARTITION BY as_of_date) AS s, id
+      lab AS (SELECT as_of_date, 'model' AS layer_id, value_numeric / sum(value_numeric) OVER (PARTITION BY as_of_date) AS s, [id] AS ids
               FROM observations WHERE series_key LIKE 'ramp.%.business_paid_share.m')
-      SELECT as_of_date, layer_id, sum(s * s) AS value, list(id ORDER BY id) AS obs_ids
+      SELECT as_of_date, layer_id, sum(s * s) AS value, list_sort(list_distinct(flatten(list(ids)))) AS obs_ids
       FROM (SELECT * FROM sh UNION ALL SELECT * FROM lab) GROUP BY 1, 2
   frontier_price_per_horizon_hour:
     description: Cheapest available capability-hour - on each price change date, the minimum over METR-measured models of OpenRouter prompt price (USD per million tokens, each model's latest price carried forward) divided by the model's latest 50% time horizon in hours.

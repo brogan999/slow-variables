@@ -74,6 +74,25 @@ UNION ALL SELECT * FROM e WHERE NOT EXISTS (  -- one round reported twice: a fil
 # Trailing four quarters of capital spending by the five hyperscalers, one row per quarter in which all five have four
 # quarters. The same differencing of year-to-date filings as capex_to_revenue_stack (a test holds the two equal).
 # ponytail: two copies of these CTEs; repoint capex_to_revenue_stack here in its own PR.
+# Each filer segment's quarters: those filed in 10-Qs, plus the fiscal Q4 filed only inside the 10-K, filled as the
+# full year minus the three quarters inside it (only when exactly three are reported and no Q4 row exists). Additive
+# measures only: a share of revenue cannot be subtracted. ids cite every filing a filled quarter rests on.
+SEC_SEGMENT_QUARTERS = """CREATE OR REPLACE VIEW sec_segment_quarters AS
+WITH q AS (
+  SELECT subject, series_key, as_of_date, value_numeric AS v, id FROM observations
+  WHERE series_key LIKE 'sec_seg.%.q'
+    AND (series_key LIKE '%.revenue.q' OR series_key LIKE '%.operating_income.q' OR series_key LIKE '%.cost_of_revenue.q')),
+fy AS (
+  SELECT subject, replace(series_key, '.fy', '.q') AS series_key, as_of_date, period_start, value_numeric AS v, id
+  FROM observations WHERE series_key LIKE 'sec_seg.%.fy'
+    AND (series_key LIKE '%.revenue.fy' OR series_key LIKE '%.operating_income.fy' OR series_key LIKE '%.cost_of_revenue.fy')),
+fill AS (
+  SELECT fy.subject, fy.series_key, fy.as_of_date, fy.v - sum(q.v) AS v, list_prepend(fy.id, list(q.id ORDER BY q.id)) AS ids
+  FROM fy JOIN q ON q.series_key = fy.series_key AND q.as_of_date > fy.period_start AND q.as_of_date < fy.as_of_date
+  GROUP BY fy.subject, fy.series_key, fy.as_of_date, fy.v, fy.id
+  HAVING count(*) = 3 AND NOT EXISTS (SELECT 1 FROM q q2 WHERE q2.series_key = fy.series_key AND q2.as_of_date = fy.as_of_date))
+SELECT subject, series_key, as_of_date, v, [id] AS ids, false AS filled FROM q
+UNION ALL SELECT subject, series_key, as_of_date, v, ids, true AS filled FROM fill"""
 CAPEX_TTM = """CREATE OR REPLACE VIEW hyperscaler_capex_ttm AS
 WITH cum AS (
   SELECT subject, as_of_date, period_start, value_numeric AS v, id FROM observations
@@ -364,6 +383,7 @@ class Store:
             self.con.execute("DELETE FROM entity_membership")
         self.con.execute(VENTURE_ROUNDS)
         self.con.execute(CAPEX_TTM)
+        self.con.execute(SEC_SEGMENT_QUARTERS)
         self.con.execute(DC_SITES)
         self.derived = [Derived(**r) for r in read_jsonl(DATA / "derived.jsonl")]
         self.events = [StatusEvent(**r) for r in read_jsonl(DATA / "status_events.jsonl")]
