@@ -131,3 +131,23 @@ def test_the_census_pages_are_in_the_nav_and_the_sitemap():
     assert '"/census"' in (web / "lib" / "nav.ts").read_text()
     assert "census().roles" in (web / "app" / "sitemap.ts").read_text()
     assert (web / "app" / "census" / "roles" / "[occ]" / "page.tsx").exists()
+
+
+def test_rollup_ranks_fragmented_industries_with_work_to_hand_over_and_skips_what_is_not_for_sale():
+    from types import SimpleNamespace
+
+    from ai_tracker.census import rollup
+
+    idx = {"industries": [
+        {"naics": "524200", "title": "Insurance agencies", "ref": "r1", "share_total": 0.10, "passes": 1e10},
+        {"naics": "541200", "title": "Accounting", "ref": "r2", "share_total": 0.12, "passes": 9e9},
+        {"naics": "813100", "title": "Religious organisations", "ref": "r3", "share_total": 0.20, "passes": 1e9},
+        {"naics": "5320A1", "title": "A composite code", "ref": "r4", "share_total": 0.30, "passes": 1e9},
+        {"naics": "481100", "title": "Airlines", "ref": "r5", "share_total": 0.14, "passes": 1e9},
+    ]}  # fmt: skip
+    small = {k: SimpleNamespace(value=v, id=f"d{k}", input_observation_ids=[f"o{k}"])
+             for k, v in {"5242": 0.5, "5412": 0.3, "8131": 0.9, "4811": 0.1}.items()}  # fmt: skip
+    firms = {k: {"value_numeric": v, "id": f"f{k}"} for k, v in {"5242": 3000, "5412": 4000, "8131": 9000, "4811": 50}.items()}
+    out = rollup(idx, small, firms)
+    assert [r["naics"] for r in out] == ["524200", "541200"]  # 0.05 then 0.036; nonprofits, composites, too few firms out
+    assert out[0]["rank"] == 1 and out[0]["small_share"]["derived_id"] == "d5242"

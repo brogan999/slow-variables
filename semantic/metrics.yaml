@@ -1227,6 +1227,20 @@ metrics:
       WHERE a.series_key LIKE 'getdeploying.%.on_demand_median_usd_per_gpu_hour.w'
         AND b.series_key LIKE 'getdeploying.%.on_demand_median_usd_per_gpu_hour.w' AND b.value_numeric > 0
       QUALIFY row_number() OVER (PARTITION BY a.id ORDER BY abs(b.as_of_date - (a.as_of_date - 364)), b.as_of_date) = 1
+  small_firm_employment_share:
+    description: Share of an industry's employment in firms with fewer than 500 employees, per four-digit NAICS industry (Census Statistics of US Businesses).
+    rationale: How fragmented an industry is. A rollup needs many owner-run firms to buy; an industry already held by a few large firms has little to consolidate.
+    grain: [as_of_date, naics]
+    unit: share
+    lead_lag: lagging
+    formula_version: 1
+    inputs: ["census_susb.*.employment.a", "census_susb.*.employment_under_500.a"]
+    caveats: Firm size is national enterprise size, so a large chain's local outlets count as one large firm; the latest reference year lags by about two years; cells withheld for confidentiality are skipped.
+    sql: |
+      SELECT t.as_of_date, replace(t.subject, 'naics_', '') AS naics, s.value_numeric / t.value_numeric AS value, [s.id, t.id] AS obs_ids
+      FROM observations t JOIN observations s ON s.subject = t.subject AND s.as_of_date = t.as_of_date
+      WHERE t.series_key LIKE 'census_susb.%.employment.a' AND s.series_key LIKE 'census_susb.%.employment_under_500.a'
+        AND t.value_numeric > 0
   aa_frontier_intelligence_index:
     description: Highest Artificial Analysis Intelligence Index among models released on or before each date on which a new record was set (index rows are dated by model release).
     rationale: An independent, frequently refreshed capability axis to set beside METR's horizon.

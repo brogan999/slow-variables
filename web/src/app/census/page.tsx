@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArticleLayout, MarginPanel } from "@/components/ArticleLayout";
 import { PageHeader } from "@/components/PageHeader";
-import { census, type CensusIndex } from "@/lib/data";
+import { census, censusRollup, type CensusIndex, type CensusRollup } from "@/lib/data";
 import { fmt } from "@/lib/format";
 
 export const metadata = { title: "The automatability census", description: "Which knowledge work passes a structural hand-over screen, task by task, role by role and industry by industry, with the part all three scoring models pass beside every total." };
@@ -119,6 +119,7 @@ const STANCE: Record<string, string> = { keeps: "the owner likely keeps the savi
 
 export default function CensusPage() {
   const c = census();
+  const rollups = censusRollup();
   const s = c.prose.sections;
   const h = c.headline;
   const fns = c.functions.map((f) => f.function);
@@ -185,6 +186,23 @@ export default function CensusPage() {
             <summary className="cursor-pointer font-medium">Every other industry, by payroll that passes</summary>
             <Rows head={industryHead} rows={c.industries.slice(15)} row={industryRow} />
           </details>
+        </Section>
+
+        <Section id="rollups" n="Part III · where a rollup could start" title="Industries with work to hand over and firms to buy" lede="A rollup buys many small, owner-run firms in one industry and runs them together. It needs two things: work that passes the hand-over screen, so owning the firms keeps a saving, and many firms small enough to buy. This list ranks industries by the share of their payroll that passes, times the share of their employment in firms under five hundred staff (from the Census Bureau's Statistics of US Businesses). It leaves out industries with fewer than two hundred firms of twenty to ninety-nine staff, or under half a billion dollars of payroll passing, and nonprofits and government, which are not for sale. It is a place to start looking, not a verdict: it does not say whether an owner keeps the saving or passes it to customers.">
+          <Rows<CensusRollup>
+            head={["#", "Industry", "Payroll that passes", "Employment in firms under 500 staff", "Firms with 20–99 staff"]}
+            rows={rollups}
+            label="Industries ranked for a rollup"
+            row={(r) => (
+              <tr key={r.naics}>
+                <td className="num">{r.rank}</td>
+                <td>{r.title} <span className="text-muted num text-[12px]">{r.naics}</span></td>
+                <td className="num">{fmt(r.share_total, "share")} <span className="text-muted">({usd(r.passes)})</span></td>
+                <td className="num"><Link href={`/query#small_firm_employment_share`} className={link}>{fmt(r.small_share.value, "share")}</Link></td>
+                <td className="num"><Link href={`/series/census_susb.naics_${r.naics.slice(0, 4)}.firms_20_99.a#${r.firms_20_99.obs_ids[0]}`} className={link}>{fmt(r.firms_20_99.value, "count")}</Link></td>
+              </tr>
+            )}
+          />
         </Section>
 
         <Section id="deals" n="Part IV · businesses" title={s.deals.title} lede={s.deals.lede}>

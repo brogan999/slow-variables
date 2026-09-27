@@ -173,3 +173,25 @@ def test_getdeploying_keeps_only_closed_weeks_of_the_on_demand_median():
     assert [(r.series_key, str(r.as_of_date), r.value_numeric) for r in rows] == [
         ("getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w", "2025-09-22", 2.9533)
     ]
+
+
+def test_susb_reads_four_digit_national_rows_for_three_size_measures():
+    from ai_tracker.ingest.connectors.census_susb import CensusSusb
+
+    cols = ["State", "NAICS", "NAICS Description", "Enterprise Size", "Firms", "Employment"]
+    base = {"State": "00", "NAICS Description": "Agencies, Brokerages"}
+    rows = [
+        {**base, "NAICS": "5242", "Enterprise Size": "01: Total", "Firms": "129253", "Employment": "1322268"},
+        {**base, "NAICS": "5242", "Enterprise Size": "08: <500 employees", "Firms": "128721", "Employment": "617366"},
+        {**base, "NAICS": "5242", "Enterprise Size": "06: 20-99 employees", "Firms": "3364", "Employment": "119994"},
+        {**base, "NAICS": "5242", "Enterprise Size": "02: <5 employees", "Firms": "97232", "Employment": "172323"},
+        {**base, "NAICS": "524210", "Enterprise Size": "01: Total", "Firms": "1", "Employment": "1"},  # six-digit: skipped
+    ]
+    c = CensusSusb.__new__(CensusSusb)
+    c.scrubbed, c.errors = [], []
+    out = {r.series_key: r.value_numeric for r in CensusSusb._from_rows(c, item(b"", "https://x"), cols, rows)}
+    assert out == {
+        "census_susb.naics_5242.employment.a": 1322268.0,
+        "census_susb.naics_5242.employment_under_500.a": 617366.0,
+        "census_susb.naics_5242.firms_20_99.a": 3364.0,
+    }

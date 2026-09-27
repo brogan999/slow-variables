@@ -966,6 +966,12 @@ class Store:
             _write(out / "census" / "index.json", index)
             for occ, doc in roles.items():
                 _write(out / "census" / "roles" / f"{occ}.json", doc)
+            small = {d.dims["naics"]: d for d in self.derived if d.metric == "small_firm_employment_share"}
+            firms = {
+                o["subject"].removeprefix("naics_"): o
+                for o in self.observations("census_susb.*.firms_20_99.a")
+            }
+            _write(out / "census" / "rollup.json", census.rollup(index, small, firms))
         from .bottleneck_map import from_store
 
         _write(out / "map.json", from_store(self, cards, bottlenecks, argument, outlook))
