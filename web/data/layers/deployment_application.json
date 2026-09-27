@@ -42,12 +42,6 @@
    "n": 40,
    "name": "Public cloud software valuation multiples (Clouded Judgement)",
    "reason": "Cannot refresh unattended: Clouded Judgement's Substack feed refuses the nightly's cloud fetches (HTTP 403 on every run since 10 Sep 2026), so the weekly series would sit stale; the history stays on /series, and the indicator publishes again if a fetchable copy of the weekly table appears."
-  },
-  {
-   "id": "app_run_rates",
-   "n": 41,
-   "name": "Application-company revenue run-rates",
-   "reason": "No direction rule fits yet: each company reports on its own irregular dates and definitions, so there is no single series to read for a trend. The rows are on /series and in Ask; the indicator publishes once a rule over companies with like definitions is written and reviewed."
   }
  ],
  "id": "deployment_application",
@@ -190,8 +184,57 @@
   },
   {
    "answers": [
-    "Valve: Invention \u2192 product",
     "Who keeps it: Deployment & application"
+   ],
+   "band_value": null,
+   "bucket_id": null,
+   "confidence": 35,
+   "grade": "C",
+   "id": "app_run_rates",
+   "latest": {
+    "as_of": "2026-06-05",
+    "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+    "disputed": true,
+    "flags": [
+     "disputed",
+     "run-rate"
+    ],
+    "grade": "C",
+    "high": null,
+    "low": null,
+    "obs_ids": [
+     "3b096fafbaa71b07"
+    ],
+    "series_key": "dealroom.anysphere.revenue_run_rate_usd.pt",
+    "subject": "anysphere",
+    "unit": "USD",
+    "value": 4000000000.0
+   },
+   "layer_id": "deployment_application",
+   "leading_lagging": "coincident",
+   "n_observations": 41,
+   "name": "Application-company revenue run-rates",
+   "pending": null,
+   "published": true,
+   "source_cluster": null,
+   "spark": {
+    "d": "M1.0,26.0 L95.0,2.0",
+    "end": [
+     95.0,
+     2.0
+    ]
+   },
+   "stale_as_of": null,
+   "stale_reason": null,
+   "status": "emerging",
+   "unit": "USD",
+   "unpublished_reason": null,
+   "valve_measured": null
+  },
+  {
+   "answers": [
+    "Valve: Invention \u2192 product",
+    "Who keeps it: Deployment & application / Coding agents & dev tools"
    ],
    "band_value": null,
    "bucket_id": "products",
@@ -240,7 +283,7 @@
   {
    "answers": [
     "Valve: Product \u2192 adoption",
-    "Who keeps it: Deployment & application"
+    "Who keeps it: Deployment & application / Deployment / FDE / implementation services"
    ],
    "band_value": null,
    "bucket_id": "products",

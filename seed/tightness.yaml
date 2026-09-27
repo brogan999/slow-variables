@@ -183,7 +183,7 @@ inputs:
     what: The processors that train and run models, from NVIDIA, AMD, Google, Amazon and others.
     reads: "How much of the chip supply one designer holds, and whether the cost of a unit of computing power is still falling."
     ceiling: 88
-    ceiling_rationale: "Kept from the prototype: two gauges from one careful source, one an estimate of each designer's chip sales and one a long trend in the prices chips were released at. The gauge on chips for rent is left unfed."
+    ceiling_rationale: "Kept from the prototype: two gauges from one careful source, one an estimate of each designer's chip sales and one a long trend in the prices chips were released at. The third gauge, rent for chips, reads GetDeploying's weekly price index."
     hand_judged_weight: 0.25
     gauges:
       - id: designer_concentration
@@ -200,10 +200,14 @@ inputs:
         max_age_days: 700
         knots: [[-0.5, 15], [-0.3, 32], [-0.1, 58], [0.05, 78], [0.25, 92]]
         scale_rationale: "The cost of a unit of computing power has fallen steeply with each generation of chips. Steep falls mean the input is loosening in the way that matters to buyers; a fall that stalls or reverses is what a supply that cannot keep up produces. The reading is a trend over more than a decade, so it moves slowly, and its age limit is long because few new chips have a published price."
-      - id: rental_availability
-        label: Chips available to rent
+      - id: rental_price_change
+        label: Yearly change in the rent for NVIDIA's most-rented AI chip
+        metric: gpu_rent_yoy
+        dims: {gpu: nvidia_h100}
         weight: 0.30
-        unfed: {kind: gauge_unsound, because: "The one free feed of chips for rent returns a fixed page of offers, so counting them measures the page, not the market."}
+        max_age_days: 21
+        knots: [[-0.5, 10], [-0.2, 30], [0, 50], [0.2, 70], [0.5, 90]]
+        scale_rationale: "Rent for a chip rising on a year before means buyers are competing for machines that are hard to add; rent falling by half or more within a year is a glut, the way bandwidth went in the early two-thousands. The reading is the weekly median of on-demand list prices across the cloud providers GetDeploying tracks."
 
   - id: networking
     n: 10
@@ -246,13 +250,17 @@ inputs:
     kind: know_how
     what: The labs that train the largest models, such as OpenAI, Anthropic, Google DeepMind, xAI and Meta.
     ceiling: 85
+    ceiling_rationale: "Kept from the prototype: one well-instrumented source, Epoch's frontier models, read as a trend. The estimates for closed models are Epoch's own, so the score is never fully confident."
     hand_judged_weight: 0.30
     gauges:
       - id: frontier_compute_growth
-        label: Growth in the computing power behind the largest model
+        label: How fast the computing power behind frontier models doubles
+        metric: training_compute_doubling_days
         weight: 0.45
         required: true
-        unfed: {kind: gauge_unsound, because: "The largest training run on Epoch's list of frontier models is still its own estimate for xAI's Grok model of July 2025. Labs no longer disclose this figure and Epoch has not yet estimated newer models, so a record that stands still says nothing about whether growth has stopped."}
+        max_age_days: 200
+        knots: [[141, 15], [183, 30], [276, 50], [624, 72], [2000, 90]]
+        scale_rationale: "Frontier training compute has grown several-fold a year through the scaling era. Doubling at that pace means nothing below the labs is binding; a doubling time that stretches toward years is the strongest single sign that the stack has hit a wall somewhere, so a longer doubling reads tighter. The knots are the prototype's yearly growth rates written as doubling times, and the reading is a trend fitted over Epoch's frontier models, so one record standing still does not stop it."
 
   - id: post_training
     n: 14
@@ -296,10 +304,14 @@ inputs:
         label: Change in that price over a month
         weight: 0.25
         unfed: {kind: not_read_yet, because: "A month's change needs a month of price history, and this store's began in September of 2026."}
-      - id: rental_availability
-        label: Chips available to rent
+      - id: rental_price_change
+        label: Yearly change in the rent for NVIDIA's most-rented AI chip
+        metric: gpu_rent_yoy
+        dims: {gpu: nvidia_h100}
         weight: 0.15
-        unfed: {kind: gauge_unsound, because: "The one free feed of chips for rent returns a fixed page of offers, so counting them measures the page, not the market."}
+        max_age_days: 21
+        knots: [[-0.5, 10], [-0.2, 30], [0, 50], [0.2, 70], [0.5, 90]]
+        scale_rationale: "Rent for a chip rising on a year before means buyers are competing for machines that are hard to add; rent falling by half or more within a year is a glut, the way bandwidth went in the early two-thousands. The reading is the weekly median of on-demand list prices across the cloud providers GetDeploying tracks."
 
   - id: routing
     n: 17

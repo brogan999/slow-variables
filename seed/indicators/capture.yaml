@@ -145,6 +145,7 @@ indicators:
     metric_dims: {layer_id: compute_semis}
     band_input: "metric:margin_stack_share_by_layer"
     layer_id: compute_physical
+    sublayer_id: semis
     direction_rule: {periods: 4, dead_band: 0.02, higher_is: concentrating, rationale: "Four calendar quarters; a move under two points is within fiscal-calendar noise. Rising semis share = rent concentrating at the chip layer; falling = migrating up."}
     leading_lagging: lagging
     timing_rationale: "Lagging: segment operating income is filed a quarter after it is earned and reflects contracts signed well before."
@@ -167,6 +168,7 @@ indicators:
     metric_dims: {layer_id: compute_semis, basis: filed}
     band_input: "metric:gross_profit_share_by_layer"
     layer_id: compute_physical
+    sublayer_id: semis
     direction_rule: {periods: 4, dead_band: 0.02, higher_is: concentrating, rationale: "Four calendar quarters, the same rule as the operating-income stack; a move under two points is fiscal-calendar noise. Rising = profit concentrating at the chip layer; falling = migrating up the stack."}
     leading_lagging: lagging
     timing_rationale: "Lagging: gross profit is filed a quarter after it is earned and reflects chip orders placed a year or more before."
@@ -273,6 +275,7 @@ indicators:
     metric: lab_token_hhi
     band_input: "metric:lab_token_hhi"
     layer_id: model
+    sublayer_id: frontier_labs
     direction_rule: {periods: 4, dead_band: 0.02, higher_is: concentrating, rationale: "Four weekly readings; under 0.02 in the index is table churn. Rising = routed tokens concentrating on fewer labs."}
     leading_lagging: leading
     timing_rationale: "Leading: developers move routed traffic between labs within days of a release, ahead of enterprise contracts and revenue."
@@ -337,6 +340,7 @@ indicators:
     metric: aa_frontier_price_per_point
     band_input: "metric:aa_frontier_price_per_point"
     layer_id: model
+    sublayer_id: frontier_labs
     direction_rule: {periods: 4, dead_band: 0.0006, higher_is: concentrating, rationale: "Four price change-points; a move under $0.0006 per million tokens per index point (about a tenth of the 11 Sep 2026 level) is one model's repricing. Rising = labs keeping the surplus from capability gains."}
     leading_lagging: coincident
     timing_rationale: "Coincident: a model's price and index arrive together at release, so the ratio moves when the market does."
@@ -765,6 +769,7 @@ indicators:
     metric: lab_procurement_signal_4q
     band_input: "metric:lab_procurement_signal_4q"
     layer_id: training_input
+    sublayer_id: human_data
     direction_rule: {periods: 4, dead_band: 1, higher_is: concentrating, rationale: "Four quarters; a one-point move is one vendor's single disclosure. Rising = the labs buying more from the training-input layer."}
     leading_lagging: leading
     timing_rationale: "Leading: labs buy data and environments for models released months later, so purchases precede capability and revenue."
@@ -891,19 +896,19 @@ indicators:
     proxy_types: [capital_flow, market_structure]
     unit: USD
     cadence_expected: irregular
-    series_keys: ["cnbc.harvey.arr_usd.pt", "pymnts.harvey.revenue_run_rate_usd.pt", "lawnext.harvey.arr_usd.pt", "techstartups.harvey.arr_usd.pt", "techcrunch.anysphere.revenue_run_rate_usd.pt", "dealroom.anysphere.revenue_run_rate_usd.pt", "dealroom.anysphere.revenue_run_rate_usd.pt", "forbes.anysphere.revenue_run_rate_usd.pt", "glean_press.glean.arr_usd.pt", "glean_press.glean.arr_usd.pt", "techcrunch.glean.arr_usd.pt", "techcrunch.sierra.arr_usd.pt", "sierra_blog.sierra.arr_usd.pt", "newcomer.sierra.revenue_run_rate_usd.pt", "sacra_free.decagon.revenue_run_rate_usd.pt", "sacra_free.decagon.revenue_run_rate_usd.pt", "newcomer.decagon.revenue_run_rate_usd.pt", "techcrunch.abridge.arr_usd.pt", "sacra_free.abridge.arr_usd.pt", "techcrunch.hebbia.arr_usd.pt", "sacra_free.hebbia.arr_usd.pt", "yahoo_finance.perplexity.arr_usd.pt", "yahoo_finance.perplexity.revenue_run_rate_usd.pt", "wallst_247.perplexity.revenue_run_rate_usd.pt", "techcrunch.replit.revenue_run_rate_usd.pt", "cnbc.replit.arr_usd.pt", "sacra_free.replit.revenue_run_rate_usd.pt", "lovable_blog.lovable.arr_usd.pt", "techcrunch.lovable.arr_usd.pt", "techcrunch.lovable.revenue_run_rate_usd.pt", "elevenlabs_blog.elevenlabs.arr_usd.pt", "elevenlabs_blog.elevenlabs.arr_usd.pt", "techcrunch.elevenlabs.arr_usd.pt", "legora_newsroom.legora.arr_usd.pt", "runtimewire.legora.arr_usd.pt", "techcrunch.cognition.revenue_run_rate_usd.pt", "techcrunch.cognition.revenue_run_rate_usd.pt", "cnbc.openevidence.revenue_run_rate_usd.pt", "sacra_free.openevidence.revenue_run_rate_usd.pt", "clay_blog.clay.arr_usd.pt", "sacra_free.clay.arr_usd.pt"]
-    band_input: cnbc.harvey.arr_usd.pt
+    series_keys: ["dealroom.anysphere.revenue_run_rate_usd.pt", "cnbc.harvey.arr_usd.pt", "pymnts.harvey.revenue_run_rate_usd.pt", "lawnext.harvey.arr_usd.pt", "techstartups.harvey.arr_usd.pt", "techcrunch.anysphere.revenue_run_rate_usd.pt", "forbes.anysphere.revenue_run_rate_usd.pt", "glean_press.glean.arr_usd.pt", "techcrunch.glean.arr_usd.pt", "techcrunch.sierra.arr_usd.pt", "sierra_blog.sierra.arr_usd.pt", "newcomer.sierra.revenue_run_rate_usd.pt", "sacra_free.decagon.revenue_run_rate_usd.pt", "newcomer.decagon.revenue_run_rate_usd.pt", "techcrunch.abridge.arr_usd.pt", "sacra_free.abridge.arr_usd.pt", "techcrunch.hebbia.arr_usd.pt", "sacra_free.hebbia.arr_usd.pt", "yahoo_finance.perplexity.arr_usd.pt", "yahoo_finance.perplexity.revenue_run_rate_usd.pt", "wallst_247.perplexity.revenue_run_rate_usd.pt", "techcrunch.replit.revenue_run_rate_usd.pt", "cnbc.replit.arr_usd.pt", "sacra_free.replit.revenue_run_rate_usd.pt", "lovable_blog.lovable.arr_usd.pt", "techcrunch.lovable.arr_usd.pt", "techcrunch.lovable.revenue_run_rate_usd.pt", "elevenlabs_blog.elevenlabs.arr_usd.pt", "techcrunch.elevenlabs.arr_usd.pt", "legora_newsroom.legora.arr_usd.pt", "runtimewire.legora.arr_usd.pt", "techcrunch.cognition.revenue_run_rate_usd.pt", "cnbc.openevidence.revenue_run_rate_usd.pt", "sacra_free.openevidence.revenue_run_rate_usd.pt", "clay_blog.clay.arr_usd.pt", "sacra_free.clay.arr_usd.pt"]
+    band_input: dealroom.anysphere.revenue_run_rate_usd.pt
     layer_id: deployment_application
+    direction_rule: {periods: 2, dead_band: 300000000, higher_is: concentrating, rationale: "The rule compares three readings from one compiler (Dealroom) for the largest application company, Anysphere (Cursor); moves under $300M are reporting noise. Other publishers reporting the same company (TechCrunch, Forbes) are the second source. Rising run-rate means the application layer is keeping more of the surplus."}
     leading_lagging: coincident
     timing_rationale: "Coincident: an annualised month of revenue moves with current usage and is reported within weeks, when it is reported at all."
-    tracker_interpretation: Several application companies report run-rates in the hundreds of millions within two or three years of launch, but every figure is a company statement, a press leak or an analyst's estimate, and definitions differ (run-rate, ARR, contracted ARR, bookings).
+    tracker_interpretation: Several application companies report run-rates in the hundreds of millions within two or three years of launch, but every figure is a company statement, a press leak or an analyst's estimate, and definitions differ (run-rate, ARR, contracted ARR, bookings). The direction reads Anysphere (Cursor) through one compiler, so the other companies stay as evidence rather than votes.
     counterevidence: No figure is audited; run-rates annualise one month; companies choose when to disclose, so the series over-represents success; Sacra's figures are estimates.
     confidence: 35
     proposed_status: emerging
     related_indicators: [lab_run_rates, startup_share_of_app_revenue, enterprise_spend_by_layer]
-    unpublished_reason: "No direction rule fits yet: each company reports on its own irregular dates and definitions, so there is no single series to read for a trend. The rows are on /series and in Ask; the indicator publishes once a rule over companies with like definitions is written and reviewed."
-    published: false
-    updated_at: 2026-09-25
+    published: true
+    updated_at: 2026-09-27
   - id: inference_run_rates
     name: Inference-layer revenue run-rates
     definition: Annualised revenue, bookings and run-rates for inference clouds, serving platforms and routers (Fireworks, Baseten, Together, Modal, RunPod, OpenRouter, Groq), hand-entered from company statements, press reports and Sacra's estimates, each checked against its page.
@@ -911,17 +916,17 @@ indicators:
     proxy_types: [capital_flow, market_structure]
     unit: USD
     cadence_expected: irregular
-    series_keys: ["fireworks_blog.fireworks.revenue_run_rate_usd.pt", "cnbc.fireworks.revenue_run_rate_usd.pt", "sacra_free.fireworks.revenue_run_rate_usd.pt", "sacra_free.fireworks.revenue_run_rate_usd.pt", "pymnts.baseten.revenue_run_rate_usd.pt", "pymnts.baseten.revenue_run_rate_usd.pt", "sacra_free.baseten.revenue_run_rate_usd.pt", "techcrunch.together.annual_bookings_usd.pt", "sacra_free.together.revenue_run_rate_usd.pt", "sacra_free.together.revenue_run_rate_usd.pt", "crunchbase_news.together.revenue_run_rate_usd.pt", "crunchbase_news.together.revenue_run_rate_usd.pt", "yahoo_finance.modal.revenue_run_rate_usd.pt", "yahoo_finance.modal.revenue_run_rate_usd.pt", "techcrunch.modal.revenue_run_rate_usd.pt", "runpod_press.runpod.revenue_run_rate_usd.pt", "thenextweb.runpod.revenue_run_rate_usd.pt", "pymnts.openrouter.revenue_run_rate_usd.pt", "sacra_free.openrouter.revenue_run_rate_usd.pt", "sacra_free.openrouter.revenue_run_rate_usd.pt", "sacra_free.groq.revenue_usd.fy"]
-    band_input: fireworks_blog.fireworks.revenue_run_rate_usd.pt
+    series_keys: ["sacra_free.fireworks.revenue_run_rate_usd.pt", "fireworks_blog.fireworks.revenue_run_rate_usd.pt", "cnbc.fireworks.revenue_run_rate_usd.pt", "pymnts.baseten.revenue_run_rate_usd.pt", "sacra_free.baseten.revenue_run_rate_usd.pt", "techcrunch.together.annual_bookings_usd.pt", "sacra_free.together.revenue_run_rate_usd.pt", "crunchbase_news.together.revenue_run_rate_usd.pt", "yahoo_finance.modal.revenue_run_rate_usd.pt", "techcrunch.modal.revenue_run_rate_usd.pt", "runpod_press.runpod.revenue_run_rate_usd.pt", "thenextweb.runpod.revenue_run_rate_usd.pt", "pymnts.openrouter.revenue_run_rate_usd.pt", "sacra_free.openrouter.revenue_run_rate_usd.pt", "sacra_free.groq.revenue_usd.fy"]
+    band_input: sacra_free.fireworks.revenue_run_rate_usd.pt
     layer_id: serving_orchestration
     sublayer_id: inference_serving
+    direction_rule: {periods: 2, dead_band: 100000000, higher_is: concentrating, rationale: "The rule compares three estimates from one estimator (Sacra) for the largest serving firm; moves under $100M are estimation noise. Other publishers reporting the same firm (the Fireworks blog, CNBC) are the second source. Rising run-rate means the serving layer is keeping more of what passes through it."}
     leading_lagging: coincident
     timing_rationale: "Coincident: revenue moves with the tokens served in the same months, and firms disclose it within weeks when they disclose it at all."
-    tracker_interpretation: Several inference platforms report run-rates between a few hundred million and about a billion dollars, growing several-fold in a year, while the price of a token at fixed capability falls; revenue says nothing about their margins, which none publishes.
+    tracker_interpretation: Several inference platforms report run-rates between a few hundred million and about a billion dollars, growing several-fold in a year, while the price of a token at fixed capability falls; revenue says nothing about their margins, which none publishes. The direction reads Fireworks through Sacra's estimates, one estimator for one firm, so the other firms stay as evidence rather than votes.
     counterevidence: No figure is audited; bookings, run-rates and net router fees are different measures; OpenRouter's figure is its fee on spend, not the spend; Groq sits in the chips layer.
     confidence: 35
     proposed_status: emerging
     related_indicators: [model_price_per_intelligence_point, model_token_hhi_top10]
-    unpublished_reason: "No direction rule fits yet: the firms report different measures on irregular dates, so there is no single series to read for a trend. The rows are on /series and in Ask; margins, which would settle whether the layer keeps its rent, are not published by any of them."
-    published: false
-    updated_at: 2026-09-25
+    published: true
+    updated_at: 2026-09-27

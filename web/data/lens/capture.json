@@ -1,5 +1,5 @@
 {
- "as_of": "2026-09-26",
+ "as_of": "2026-09-27",
  "gross_profit_stack": {
   "axis": {
    "chars": 4,
@@ -813,7 +813,7 @@
     },
     {
      "answers": [
-      "Who keeps it: Compute & physical"
+      "Who keeps it: Compute & physical / Semiconductors & AI chip startups"
      ],
      "band_value": null,
      "bucket_id": null,
@@ -862,7 +862,7 @@
     },
     {
      "answers": [
-      "Who keeps it: Compute & physical"
+      "Who keeps it: Compute & physical / Semiconductors & AI chip startups"
      ],
      "band_value": null,
      "bucket_id": null,
@@ -1339,7 +1339,7 @@
     {
      "answers": [
       "Valve: Invention \u2192 product",
-      "Who keeps it: Compute & physical"
+      "Who keeps it: Compute & physical / Data-centre developers & power"
      ],
      "band_value": null,
      "bucket_id": "methods",
@@ -1853,7 +1853,7 @@
     },
     {
      "answers": [
-      "Who keeps it: Model"
+      "Who keeps it: Model / Frontier labs"
      ],
      "band_value": null,
      "bucket_id": null,
@@ -1947,7 +1947,7 @@
     },
     {
      "answers": [
-      "Who keeps it: Model"
+      "Who keeps it: Model / Frontier labs"
      ],
      "band_value": null,
      "bucket_id": null,
@@ -2631,8 +2631,8 @@
      "grade": "D",
      "id": "safety_brake_events",
      "latest": {
-      "as_of": "2026-09-26",
-      "derived_id": "fbc0cb8f24a8f0aa",
+      "as_of": "2026-09-27",
+      "derived_id": "4daa952ee4fe04ff",
       "dims": {},
       "obs_ids": [
        "2ab8fec44e7914a5",
@@ -3135,7 +3135,7 @@
    "indicators": [
     {
      "answers": [
-      "Who keeps it: Training input"
+      "Who keeps it: Training input / Human/expert data & labelling"
      ],
      "band_value": null,
      "bucket_id": null,
@@ -3350,8 +3350,8 @@
      "grade": "D",
      "id": "cl_lab_release_claims",
      "latest": {
-      "as_of": "2026-09-26",
-      "derived_id": "cb230a0cb0a4d041",
+      "as_of": "2026-09-27",
+      "derived_id": "861dbfb8c243a0c8",
       "dims": {},
       "obs_ids": [
        "0bdf1920b1feb93e",
@@ -3458,25 +3458,68 @@
   {
    "dependency_tier": 3,
    "description": "The businesses that run models for others, route requests between them, and supply the plumbing for AI agents.",
-   "held": [
+   "held": [],
+   "id": "serving_orchestration",
+   "indicators": [
     {
+     "answers": [
+      "Who keeps it: Serving & orchestration / Inference serving"
+     ],
+     "band_value": null,
+     "bucket_id": null,
+     "confidence": 35,
+     "grade": "C",
      "id": "inference_run_rates",
-     "n": 21,
+     "latest": {
+      "as_of": "2026-05-31",
+      "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+      "disputed": true,
+      "flags": [
+       "disputed",
+       "run-rate"
+      ],
+      "grade": "C",
+      "high": null,
+      "low": null,
+      "obs_ids": [
+       "87887dbf16ff47b3"
+      ],
+      "series_key": "sacra_free.fireworks.revenue_run_rate_usd.pt",
+      "subject": "fireworks",
+      "unit": "USD",
+      "value": 800000000.0
+     },
+     "layer_id": "serving_orchestration",
+     "leading_lagging": "coincident",
+     "n_observations": 21,
      "name": "Inference-layer revenue run-rates",
-     "reason": "No direction rule fits yet: the firms report different measures on irregular dates, so there is no single series to read for a trend. The rows are on /series and in Ask; margins, which would settle whether the layer keeps its rent, are not published by any of them."
+     "pending": null,
+     "published": true,
+     "source_cluster": null,
+     "spark": {
+      "d": "M1.0,26.0 L95.0,2.0",
+      "end": [
+       95.0,
+       2.0
+      ]
+     },
+     "stale_as_of": null,
+     "stale_reason": null,
+     "status": "emerging",
+     "unit": "USD",
+     "unpublished_reason": null,
+     "valve_measured": null
     }
    ],
-   "id": "serving_orchestration",
-   "indicators": [],
-   "n_published": 0,
+   "n_published": 1,
    "name": "Serving & orchestration",
    "order": 4,
-   "reading": "Serving & orchestration is unmeasured.",
-   "status": "unmeasured",
+   "reading": "Serving & orchestration reads emerging.",
+   "status": "emerging",
    "tally": {
     "margin": 0,
     "only": null,
-    "published": 0,
+    "published": 1,
     "scored": 0
    },
    "venture": {
@@ -3532,12 +3575,6 @@
      "n": 40,
      "name": "Public cloud software valuation multiples (Clouded Judgement)",
      "reason": "Cannot refresh unattended: Clouded Judgement's Substack feed refuses the nightly's cloud fetches (HTTP 403 on every run since 10 Sep 2026), so the weekly series would sit stale; the history stays on /series, and the indicator publishes again if a fetchable copy of the weekly table appears."
-    },
-    {
-     "id": "app_run_rates",
-     "n": 41,
-     "name": "Application-company revenue run-rates",
-     "reason": "No direction rule fits yet: each company reports on its own irregular dates and definitions, so there is no single series to read for a trend. The rows are on /series and in Ask; the indicator publishes once a rule over companies with like definitions is written and reviewed."
     }
    ],
    "id": "deployment_application",
@@ -3680,8 +3717,57 @@
     },
     {
      "answers": [
-      "Valve: Invention \u2192 product",
       "Who keeps it: Deployment & application"
+     ],
+     "band_value": null,
+     "bucket_id": null,
+     "confidence": 35,
+     "grade": "C",
+     "id": "app_run_rates",
+     "latest": {
+      "as_of": "2026-06-05",
+      "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
+      "disputed": true,
+      "flags": [
+       "disputed",
+       "run-rate"
+      ],
+      "grade": "C",
+      "high": null,
+      "low": null,
+      "obs_ids": [
+       "3b096fafbaa71b07"
+      ],
+      "series_key": "dealroom.anysphere.revenue_run_rate_usd.pt",
+      "subject": "anysphere",
+      "unit": "USD",
+      "value": 4000000000.0
+     },
+     "layer_id": "deployment_application",
+     "leading_lagging": "coincident",
+     "n_observations": 41,
+     "name": "Application-company revenue run-rates",
+     "pending": null,
+     "published": true,
+     "source_cluster": null,
+     "spark": {
+      "d": "M1.0,26.0 L95.0,2.0",
+      "end": [
+       95.0,
+       2.0
+      ]
+     },
+     "stale_as_of": null,
+     "stale_reason": null,
+     "status": "emerging",
+     "unit": "USD",
+     "unpublished_reason": null,
+     "valve_measured": null
+    },
+    {
+     "answers": [
+      "Valve: Invention \u2192 product",
+      "Who keeps it: Deployment & application / Coding agents & dev tools"
      ],
      "band_value": null,
      "bucket_id": "products",
@@ -3730,7 +3816,7 @@
     {
      "answers": [
       "Valve: Product \u2192 adoption",
-      "Who keeps it: Deployment & application"
+      "Who keeps it: Deployment & application / Deployment / FDE / implementation services"
      ],
      "band_value": null,
      "bucket_id": "products",
@@ -3886,7 +3972,7 @@
      "valve_measured": "adoption_to_adaptation"
     }
    ],
-   "n_published": 8,
+   "n_published": 9,
    "name": "Deployment & application",
    "order": 5,
    "reading": "Toward dispersion: Vertical versus horizontal application funding.",
@@ -3894,7 +3980,7 @@
    "tally": {
     "margin": 1,
     "only": "Vertical versus horizontal application funding",
-    "published": 3,
+    "published": 4,
     "scored": 1
    },
    "venture": {
@@ -5659,6 +5745,40 @@
  "recent_status_events": [
   {
    "author": "claude",
+   "counterevidence_considered": "Run-rates are estimates annualised from one month; no serving firm publishes margins, so revenue growth says nothing yet about whether the layer keeps its rent.",
+   "created_at": "2026-09-27T06:29:39.567021Z",
+   "evidence_ids": [
+    "09f7a0828f93159f",
+    "87887dbf16ff47b3"
+   ],
+   "id": "9e7e778746b0fc37",
+   "new_conf": 35,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "First reading. Sacra estimates Fireworks, the largest serving firm the site tracks, at an annualised run-rate of $305M at the end of 2025 and $800M at the end of May 2026. Its direction rule compares three readings from the one estimator, so with two it reads emerging; the other firms (Together, Baseten, Modal, RunPod, OpenRouter) stay as evidence.",
+   "target_id": "inference_run_rates",
+   "target_type": "indicator"
+  },
+  {
+   "author": "claude",
+   "counterevidence_considered": "One company, and the most successful one, so the series over-represents success; run-rates annualise one month and are not audited.",
+   "created_at": "2026-09-27T06:29:39.460522Z",
+   "evidence_ids": [
+    "96c28baf4bc62ea8",
+    "3b096fafbaa71b07"
+   ],
+   "id": "eea461262f361635",
+   "new_conf": 35,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "First reading. Dealroom reports Anysphere (Cursor) at an annualised run-rate of $3.0B at the end of April 2026 and $4.0B in early June 2026. Its direction rule compares three readings from the one compiler, so with two it reads emerging; the other application companies stay as evidence.",
+   "target_id": "app_run_rates",
+   "target_type": "indicator"
+  },
+  {
+   "author": "claude",
    "counterevidence_considered": "Oracle and the neoclouds are absent; Google Cloud's faster growth is what pulls the index down, and a slightly wider window would read dispersing.",
    "created_at": "2026-09-27T05:46:02.239844Z",
    "evidence_ids": [
@@ -5677,43 +5797,9 @@
    "reason": "With each filer's fiscal fourth quarter filled from the 10-K, the index across AWS, Google Cloud and Microsoft Intelligent Cloud eased from 0.367 (Q2 2025) to 0.349 (Q2 2026), a move of 1.8 points, inside the two-point dead band, so it reads stable rather than dispersing. The earlier reading rested on six quarters with gaps.",
    "target_id": "cloud_hhi",
    "target_type": "indicator"
-  },
-  {
-   "author": "claude",
-   "counterevidence_considered": "Only two chip makers are covered; Broadcom, TSMC and the custom-silicon designers are absent, so the level overstates concentration.",
-   "created_at": "2026-09-27T05:46:02.233745Z",
-   "evidence_ids": [
-    "005d040fe4b816e0",
-    "2faa719b05b9c22a"
-   ],
-   "id": "0b86501fb98962cf",
-   "new_conf": 60,
-   "new_status": "stable",
-   "old_conf": 60,
-   "old_status": "unclear",
-   "reason": "With the fourth quarters filled where the filers publish full-year figures, NVIDIA's and AMD's data-centre revenue shares give an index of 0.830 (Q1 2025) and 0.849 (Q2 2026): a move of under two points, inside the dead band, so it reads stable. The earlier unclear reading compared a gappy series; AMD's fourth quarters stay missing because AMD files no full-year segment figures.",
-   "target_id": "semis_hhi",
-   "target_type": "indicator"
-  },
-  {
-   "author": "claude",
-   "counterevidence_considered": "Operating, not gross, margin; one filer's segment carries the reading, and AWS's rising margin may reflect its own depreciation schedule as much as AI demand.",
-   "created_at": "2026-09-27T05:46:02.223540Z",
-   "evidence_ids": [
-    "6fb0f8f0c93debba",
-    "89c26630d3de81d0"
-   ],
-   "id": "ccc338f6bc130d4c",
-   "new_conf": 75,
-   "new_status": "concentrating",
-   "old_conf": 75,
-   "old_status": "stable",
-   "reason": "AWS's segment operating margin, now read with the fiscal fourth quarters that are filed only in the 10-K, rose in each of the last four quarters: 32.9% (Q2 2025), 34.6%, 35.0%, 37.7% and 39.4% (Q2 2026). That is above the two-point dead band and every step agrees, so it reads concentrating; the earlier stable reading compared quarters with the fourth ones missing.",
-   "target_id": "cloud_segment_margins",
-   "target_type": "indicator"
   }
  ],
- "verdict": "As of 2026-09-26: compute & physical concentrating, model mixed, training input emerging, serving & orchestration unmeasured, deployment & application dispersing (one reading), adopters (no capture rule yet), labour & consumers dispersing (one reading).",
+ "verdict": "As of 2026-09-27: compute & physical concentrating, model mixed, training input emerging, serving & orchestration emerging, deployment & application dispersing (one reading), adopters (no capture rule yet), labour & consumers dispersing (one reading).",
  "what_would_change": [
   "Rent concentration in semiconductors: Four fiscal quarters; a move under one point of margin is noise. Rising margin = rent concentrating at the chip layer.",
   "Cloud backlog (remaining performance obligations): Four quarters; moves under $10B are noise at this scale. Growing backlog concentrates future cloud revenue in a few contracts.",
@@ -5743,6 +5829,8 @@
   "Startups' share of enterprise AI application revenue: Two annual waves, so the trend is one step; under five points is survey error. Rising startup share = value dispersing away from incumbents.",
   "GPU rental price per hour: Eight weekly readings, about two months. A move of a quarter an hour or less is noise in a median across some forty providers whose panel changes week to week (a third of four-week moves in the first year exceeded fifteen cents); rising rents mean the owners of GPUs keep more of the value.",
   "Model-layer token concentration on OpenRouter (HHI, top table): Weekly readings; moves under 0.02 in the index are table churn. A rising index means routed tokens concentrating on fewer models.",
-  "Labs buying from the training-input layer (enter bell): Four quarters; a one-point move is one vendor's single disclosure. Rising = the labs buying more from the training-input layer."
+  "Labs buying from the training-input layer (enter bell): Four quarters; a one-point move is one vendor's single disclosure. Rising = the labs buying more from the training-input layer.",
+  "Application-company revenue run-rates: The rule compares three readings from one compiler (Dealroom) for the largest application company, Anysphere (Cursor); moves under $300M are reporting noise. Other publishers reporting the same company (TechCrunch, Forbes) are the second source. Rising run-rate means the application layer is keeping more of the surplus.",
+  "Inference-layer revenue run-rates: The rule compares three estimates from one estimator (Sacra) for the largest serving firm; moves under $100M are estimation noise. Other publishers reporting the same firm (the Fireworks blog, CNBC) are the second source. Rising run-rate means the serving layer is keeping more of what passes through it."
  ]
 }

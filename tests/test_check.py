@@ -146,6 +146,14 @@ def test_an_unknown_valve_or_crosswalk_bucket_is_an_error():
     assert not [e for e in check_errors(st.Store()) if "is not a valve" in e or "is not a bucket" in e]
 
 
+def test_a_sublayer_outside_the_indicators_layer_is_an_error():
+    s = st.Store()
+    ind = next(i for i in s.seed.indicators if i.layer_id == "model")
+    ind.sublayer_id = "routing_gateways"  # a serving-layer sub-layer on a model-layer indicator
+    assert any(e.startswith(f"{ind.id}: sublayer_id 'routing_gateways' is not a sub-layer") for e in check_errors(s))
+    assert not [e for e in check_errors(st.Store()) if "is not a sub-layer" in e]
+
+
 def test_approve_gives_a_hand_written_proposal_the_id_its_model_computes(monkeypatch, tmp_path):
     import argparse
 
