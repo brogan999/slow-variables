@@ -318,7 +318,7 @@
        "fadd5c888dc04e6d"
       ],
       "unit": "ratio",
-      "value": 4.285936252771537
+      "value": 4.2859362527715374
      },
      "settles": null,
      "sources": [],
@@ -2719,6 +2719,80 @@
      "word": "happening"
     },
     {
+     "attribution": "extension",
+     "folio": "reorganisation",
+     "href": "/outlook#claim-labour_share_falls",
+     "id": "labour_share_falls",
+     "indicators": [
+      "labor_share_nonfarm",
+      "labor_share_nonfarm"
+     ],
+     "kind": "outlook",
+     "line": "Labour's share of income falls as AI takes on more tasks, even as wages rise.",
+     "reading": {
+      "as_of": "2026-06-30",
+      "derived_id": "c73a9c96e3a26d27",
+      "holds": null,
+      "href": "/indicators/labor_share_nonfarm",
+      "obs_ids": [
+       "7edc9801d49f9a1a",
+       "d589259f2640a81d"
+      ],
+      "unit": "share",
+      "value": -0.03388025598875144
+     },
+     "row": "work_and_pay",
+     "settles": "Labour's share holding while AI does a growing share of tasks.",
+     "sources": [
+      "https://campuspress.yale.edu/pascualrestrepo/files/2025/10/AGI_v4.pdf"
+     ],
+     "stage": null,
+     "state": "holding",
+     "test": {
+      "against": 0,
+      "fact": "labour_share_yoy",
+      "op": "lt"
+     },
+     "who": "This site, extending Pascual Restrepo",
+     "word": "happening"
+    },
+    {
+     "attribution": "author",
+     "folio": "reorganisation",
+     "href": "/outlook#claim-relational_share",
+     "id": "relational_share",
+     "indicators": [],
+     "kind": "outlook",
+     "line": "Care, teaching, hospitality and other work where the person is part of what is bought take a rising share of spending and jobs as AI spreads.",
+     "reading": {
+      "as_of": "2026-08-31",
+      "derived_id": "2b1a23cc7dcb4f75",
+      "holds": null,
+      "href": "/query#relational_work_share",
+      "obs_ids": [
+       "4675f66f65afeb51",
+       "8c5118ad8be76953",
+       "f6715e32b410d428"
+      ],
+      "unit": "share",
+      "value": 0.28272827282728275
+     },
+     "row": "work_and_pay",
+     "settles": "That work's share of spending and jobs falling as AI spreads.",
+     "sources": [
+      "https://aleximas.substack.com/p/what-will-be-scarce"
+     ],
+     "stage": null,
+     "state": "holding",
+     "test": {
+      "against": "relational_share_year_ago",
+      "fact": "relational_share_now",
+      "op": "gt"
+     },
+     "who": "Alex Imas",
+     "word": "happening"
+    },
+    {
      "attribution": "site",
      "folio": "reorganisation",
      "href": "/#exits",
@@ -3320,28 +3394,6 @@
      "word": "too_early"
     },
     {
-     "attribution": "extension",
-     "folio": "reorganisation",
-     "href": "/outlook#claim-labour_share_falls",
-     "id": "labour_share_falls",
-     "indicators": [
-      "labor_share_nonfarm"
-     ],
-     "kind": "outlook",
-     "line": "Labour's share of income falls as AI takes on more tasks, even as wages rise.",
-     "reading": null,
-     "row": "work_and_pay",
-     "settles": "Labour's share holding while AI does a growing share of tasks.",
-     "sources": [
-      "https://campuspress.yale.edu/pascualrestrepo/files/2025/10/AGI_v4.pdf"
-     ],
-     "stage": null,
-     "state": "untestable",
-     "test": null,
-     "who": "This site, extending Pascual Restrepo",
-     "word": "too_early"
-    },
-    {
      "attribution": "author",
      "folio": "reorganisation",
      "href": "/outlook#claim-niches_filled",
@@ -3361,26 +3413,6 @@
      "state": "untestable",
      "test": null,
      "who": "Byrne Hobart and Sean Cai",
-     "word": "too_early"
-    },
-    {
-     "attribution": "author",
-     "folio": "reorganisation",
-     "href": "/outlook#claim-relational_share",
-     "id": "relational_share",
-     "indicators": [],
-     "kind": "outlook",
-     "line": "Care, teaching, hospitality and other work where the person is part of what is bought take a rising share of spending and jobs as AI spreads.",
-     "reading": null,
-     "row": "work_and_pay",
-     "settles": "That work's share of spending and jobs falling as AI spreads.",
-     "sources": [
-      "https://aleximas.substack.com/p/what-will-be-scarce"
-     ],
-     "stage": null,
-     "state": "untestable",
-     "test": null,
-     "who": "Alex Imas",
      "word": "too_early"
     },
     {
@@ -3424,7 +3456,7 @@
      "word": "too_early"
     }
    ],
-   "too_early": 28
+   "too_early": 26
   },
   {
    "id": "value",
@@ -3728,6 +3760,46 @@
      "sources": [],
      "state": "contradicted",
      "test": null,
+     "who": "This site",
+     "word": "not_happening"
+    },
+    {
+     "attribution": "site",
+     "folio": "value",
+     "href": "/outlook#claim-chips_concentrate",
+     "id": "chips_concentrate",
+     "indicators": [
+      "custom_silicon_share",
+      "semis_hhi"
+     ],
+     "kind": "outlook",
+     "line": "NVIDIA's lead over other chip makers in sales for data centres keeps widening as AI spending grows.",
+     "reading": {
+      "as_of": "2025-12-31",
+      "derived_id": "051d3936f8f7c098",
+      "holds": null,
+      "href": "/indicators/custom_silicon_share",
+      "obs_ids": [
+       "1c4820ae9106f46e",
+       "399214e48a15bb19",
+       "83fc6986a1630d10",
+       "c32215464bcb0e24",
+       "d0d1705763f944a5",
+       "e488feafb4588327"
+      ],
+      "unit": "share",
+      "value": 0.3281813619319996
+     },
+     "row": null,
+     "settles": "Rival chip makers taking a growing share of data-centre chip sales while spending rises.",
+     "sources": [],
+     "stage": null,
+     "state": "failing",
+     "test": {
+      "against": "silicon_share_year_ago",
+      "fact": "silicon_share_now",
+      "op": "lt"
+     },
      "who": "This site",
      "word": "not_happening"
     },
@@ -4193,26 +4265,6 @@
      "state": "untestable",
      "test": null,
      "who": "Soren Larson",
-     "word": "too_early"
-    },
-    {
-     "attribution": "site",
-     "folio": "value",
-     "href": "/outlook#claim-chips_concentrate",
-     "id": "chips_concentrate",
-     "indicators": [
-      "semis_hhi"
-     ],
-     "kind": "outlook",
-     "line": "NVIDIA's lead over other chip makers in sales for data centres keeps widening as AI spending grows.",
-     "reading": null,
-     "row": null,
-     "settles": "Rival chip makers taking a growing share of data-centre chip sales while spending rises.",
-     "sources": [],
-     "stage": null,
-     "state": "untestable",
-     "test": null,
-     "who": "This site",
      "word": "too_early"
     },
     {
@@ -4736,7 +4788,7 @@
      "word": "too_early"
     }
    ],
-   "too_early": 35
+   "too_early": 34
   }
  ],
  "mapping": [
@@ -4900,10 +4952,10 @@
  ],
  "tally": {
   "both": 11,
-  "happening": 23,
-  "not_happening": 4,
+  "happening": 25,
+  "not_happening": 5,
   "slower": 11,
-  "too_early": 151
+  "too_early": 148
  },
  "words": [
   {

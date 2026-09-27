@@ -517,8 +517,8 @@
   {
    "attribution": "author",
    "due": null,
-   "expected": null,
-   "fact": null,
+   "expected": "holding",
+   "fact": "relational_share_now",
    "falsifier": "That work's share of spending and jobs falling as AI spreads.",
    "folio": "reorganisation",
    "grace_days": null,
@@ -533,15 +533,18 @@
    "rival_until": null,
    "row": "work_and_pay",
    "stage": null,
-   "state": "untestable",
-   "test": null,
+   "state": "holding",
+   "test": {
+    "fact": "relational_share_now",
+    "gt": "relational_share_year_ago"
+   },
    "text": "Care, teaching, hospitality and other work where the person is part of what is bought take a rising share of spending and jobs as AI spreads."
   },
   {
    "attribution": "extension",
    "due": null,
-   "expected": null,
-   "fact": null,
+   "expected": "holding",
+   "fact": "labour_share_yoy",
    "falsifier": "Labour's share holding while AI does a growing share of tasks.",
    "folio": "reorganisation",
    "grace_days": null,
@@ -556,8 +559,11 @@
    "rival_until": null,
    "row": "work_and_pay",
    "stage": null,
-   "state": "untestable",
-   "test": null,
+   "state": "holding",
+   "test": {
+    "fact": "labour_share_yoy",
+    "lt": 0
+   },
    "text": "Labour's share of income falls as AI takes on more tasks, even as wages rise."
   },
   {
@@ -1089,8 +1095,8 @@
   {
    "attribution": "site",
    "due": null,
-   "expected": null,
-   "fact": null,
+   "expected": "failing",
+   "fact": "silicon_share_now",
    "falsifier": "Rival chip makers taking a growing share of data-centre chip sales while spending rises.",
    "folio": "value",
    "grace_days": null,
@@ -1103,8 +1109,11 @@
    "rival_until": null,
    "row": null,
    "stage": null,
-   "state": "untestable",
-   "test": null,
+   "state": "failing",
+   "test": {
+    "fact": "silicon_share_now",
+    "lt": "silicon_share_year_ago"
+   },
    "text": "NVIDIA's lead over other chip makers in sales for data centres keeps widening as AI spending grows."
   },
   {
@@ -2233,6 +2242,18 @@
    "value": 43.0
   },
   "lab_deals_year_ago": null,
+  "labour_share_yoy": {
+   "as_of": "2026-06-30",
+   "derived_id": "c73a9c96e3a26d27",
+   "holds": null,
+   "href": "/indicators/labor_share_nonfarm",
+   "obs_ids": [
+    "7edc9801d49f9a1a",
+    "d589259f2640a81d"
+   ],
+   "unit": "share",
+   "value": -0.03388025598875144
+  },
   "msft_backlog": {
    "as_of": "2026-06-30",
    "derived_id": "170b33634e98c87e",
@@ -2502,6 +2523,32 @@
    "unit": "USD",
    "value": 4.71
   },
+  "relational_share_now": {
+   "as_of": "2026-08-31",
+   "derived_id": "2b1a23cc7dcb4f75",
+   "holds": null,
+   "href": "/query#relational_work_share",
+   "obs_ids": [
+    "4675f66f65afeb51",
+    "8c5118ad8be76953",
+    "f6715e32b410d428"
+   ],
+   "unit": "share",
+   "value": 0.28272827282728275
+  },
+  "relational_share_year_ago": {
+   "as_of": "2025-08-31",
+   "derived_id": "cc115e84601fac9f",
+   "holds": null,
+   "href": "/query#relational_work_share",
+   "obs_ids": [
+    "0ea092df377d047c",
+    "3a729957f985309e",
+    "6916738b9964e674"
+   ],
+   "unit": "share",
+   "value": 0.27957620273613004
+  },
   "rli_record": {
    "as_of": "2026-09-03",
    "derived_id": "f9cc3e7720a24550",
@@ -2512,6 +2559,38 @@
    ],
    "unit": "share",
    "value": 0.20829999999999999
+  },
+  "silicon_share_now": {
+   "as_of": "2025-12-31",
+   "derived_id": "051d3936f8f7c098",
+   "holds": null,
+   "href": "/indicators/custom_silicon_share",
+   "obs_ids": [
+    "1c4820ae9106f46e",
+    "399214e48a15bb19",
+    "83fc6986a1630d10",
+    "c32215464bcb0e24",
+    "d0d1705763f944a5",
+    "e488feafb4588327"
+   ],
+   "unit": "share",
+   "value": 0.3281813619319996
+  },
+  "silicon_share_year_ago": {
+   "as_of": "2024-12-31",
+   "derived_id": "a6dd1316646285b9",
+   "holds": null,
+   "href": "/indicators/custom_silicon_share",
+   "obs_ids": [
+    "12e721649d988ebb",
+    "7a76f7cf49b73863",
+    "8996cb4b79c3ef64",
+    "99a7bb7945f13936",
+    "daedd86feee06287",
+    "ea8d2c0dc2945241"
+   ],
+   "unit": "share",
+   "value": 0.2963811269578251
   },
   "startup_app_share": {
    "as_of": "2025-12-31",
@@ -5182,9 +5261,9 @@
  ],
  "tally": {
   "both": 11,
-  "failing": 0,
-  "holding": 4,
-  "untestable": 62
+  "failing": 1,
+  "holding": 6,
+  "untestable": 59
  },
  "tests": {
   "bet_fast_side": {
@@ -5226,6 +5305,10 @@
   "insurers_exclude": {
    "line": 1,
    "unit": "count"
+  },
+  "labour_share_falls": {
+   "line": 0,
+   "unit": "share"
   },
   "margins_below_software": {
    "line": 0.7,
