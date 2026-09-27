@@ -5,16 +5,19 @@
  "band_input": "metric:hhi_by_layer",
  "band_rationale": null,
  "band_value": {
-  "as_of": "2026-03-31",
+  "as_of": "2026-06-30",
   "high": null,
   "low": null,
   "obs_ids": [
-   "01a2687f35147ddf",
    "5b9948898bd3d1b5",
-   "a26cee82e25e94ff"
+   "6fb0f8f0c93debba",
+   "77e6d896399b59a9",
+   "aca02d0b916a89dd",
+   "ccf1eb0df321607f",
+   "d575d683afd39e24"
   ],
   "unit": "index",
-  "value": 0.3541300505045857
+  "value": 0.34881596944624144
  },
  "bucket_id": null,
  "cadence_expected": "quarterly",
@@ -22,14 +25,14 @@
   "bands": [],
   "change": {
    "dead_band": "\u00b10.020 index",
-   "label": "\u22120.021 index",
+   "label": "\u22120.018 index",
    "steps": "4 of 4 steps fell"
   },
   "dead": {
    "height": 80.0,
-   "width": 75.49,
-   "x": 21.72,
-   "y": 9.42
+   "width": 34.3,
+   "x": 62.88,
+   "y": 5.52
   },
   "drawn": {
    "metric": "hhi_by_layer",
@@ -38,7 +41,7 @@
    "total": 0
   },
   "line": true,
-  "n_drawn": 6,
+  "n_drawn": 11,
   "needs": 5,
   "partial": false,
   "stamps": [
@@ -49,27 +52,27 @@
     {
      "label": "2024",
      "minor": false,
-     "x": 12.41
+     "x": 11.56
     },
     {
      "label": "Jul",
      "minor": true,
-     "x": 31.23
+     "x": 28.67
     },
     {
      "label": "2025",
      "minor": false,
-     "x": 50.26
+     "x": 45.96
     },
     {
      "label": "Jul",
      "minor": true,
-     "x": 68.98
+     "x": 62.97
     },
     {
      "label": "2026",
      "minor": false,
-     "x": 88.0
+     "x": 80.26
     }
    ]
   },
@@ -78,27 +81,27 @@
    "log": false,
    "ticks": [
     {
-     "label": "0.35",
+     "label": "0.34",
      "y": 100.0
     },
     {
-     "label": "0.36",
+     "label": "0.35",
      "y": 80.0
     },
     {
-     "label": "0.37",
+     "label": "0.36",
      "y": 60.0
     },
     {
-     "label": "0.38",
+     "label": "0.37",
      "y": 40.0
     },
     {
-     "label": "0.39",
+     "label": "0.38",
      "y": 20.0
     },
     {
-     "label": "0.40",
+     "label": "0.39",
      "y": 0.0
     }
    ],
@@ -120,8 +123,8 @@
  "confidence": 60,
  "confidence_basis": {
   "best_tier": 4,
-  "grade": "B",
-  "n_observations": 18,
+  "grade": "A",
+  "n_observations": 34,
   "sources": [
    "SEC EDGAR 10-Q/10-K XBRL instances (segment data)"
   ],
@@ -133,11 +136,11 @@
  "derived": [
   {
    "as_of_date": "2023-09-30",
-   "computed_at": "2026-09-27T04:59:09.348638Z",
+   "computed_at": "2026-09-27T06:41:09.163537Z",
    "dims": {
     "layer_id": "compute_cloud"
    },
-   "formula_version": "1",
+   "formula_version": "2",
    "id": "73790153bfa603e3",
    "input_observation_ids": [
     "12d2979e6ccdddc1",
@@ -156,11 +159,11 @@
   },
   {
    "as_of_date": "2024-03-31",
-   "computed_at": "2026-09-27T04:59:09.348638Z",
+   "computed_at": "2026-09-27T06:41:09.163537Z",
    "dims": {
     "layer_id": "compute_cloud"
    },
-   "formula_version": "1",
+   "formula_version": "2",
    "id": "bafacce6add5d1f0",
    "input_observation_ids": [
     "5630e062e0d86064",
@@ -178,12 +181,41 @@
    "value_low": null
   },
   {
-   "as_of_date": "2024-09-30",
-   "computed_at": "2026-09-27T04:59:09.348638Z",
+   "as_of_date": "2024-06-30",
+   "computed_at": "2026-09-27T06:41:09.163537Z",
    "dims": {
     "layer_id": "compute_cloud"
    },
-   "formula_version": "1",
+   "formula_version": "2",
+   "id": "84022d3ded8ce1b7",
+   "input_observation_ids": [
+    "12d2979e6ccdddc1",
+    "48b581dd10ef31c3",
+    "5b591bbb7c773a62",
+    "7a365961a7c64d82",
+    "b732c8378630f7c7",
+    "ffce6f16d684267c"
+   ],
+   "metric": "hhi_by_layer",
+   "obs_ids": [
+    "12d2979e6ccdddc1",
+    "48b581dd10ef31c3",
+    "5b591bbb7c773a62",
+    "7a365961a7c64d82",
+    "b732c8378630f7c7",
+    "ffce6f16d684267c"
+   ],
+   "value": 0.3735830821543583,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2024-09-30",
+   "computed_at": "2026-09-27T06:41:09.163537Z",
+   "dims": {
+    "layer_id": "compute_cloud"
+   },
+   "formula_version": "2",
    "id": "df821b0139f56783",
    "input_observation_ids": [
     "78e3a8bb65070e37",
@@ -201,12 +233,47 @@
    "value_low": null
   },
   {
-   "as_of_date": "2025-03-31",
-   "computed_at": "2026-09-27T04:59:09.348638Z",
+   "as_of_date": "2024-12-31",
+   "computed_at": "2026-09-27T06:41:09.163537Z",
    "dims": {
     "layer_id": "compute_cloud"
    },
-   "formula_version": "1",
+   "formula_version": "2",
+   "id": "83d217a1f1b6ab57",
+   "input_observation_ids": [
+    "33091b171ab324bc",
+    "48b581dd10ef31c3",
+    "5630e062e0d86064",
+    "650a22847cd7c90c",
+    "7a234cd5506c11a1",
+    "ac9ceef946540a8f",
+    "b732c8378630f7c7",
+    "e4f122d1f53db3a8",
+    "e8369d0c003c2466"
+   ],
+   "metric": "hhi_by_layer",
+   "obs_ids": [
+    "33091b171ab324bc",
+    "48b581dd10ef31c3",
+    "5630e062e0d86064",
+    "650a22847cd7c90c",
+    "7a234cd5506c11a1",
+    "ac9ceef946540a8f",
+    "b732c8378630f7c7",
+    "e4f122d1f53db3a8",
+    "e8369d0c003c2466"
+   ],
+   "value": 0.36963181468944784,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-03-31",
+   "computed_at": "2026-09-27T06:41:09.163537Z",
+   "dims": {
+    "layer_id": "compute_cloud"
+   },
+   "formula_version": "2",
    "id": "20abe5eb019c1498",
    "input_observation_ids": [
     "2f2dda9da987485e",
@@ -224,12 +291,41 @@
    "value_low": null
   },
   {
-   "as_of_date": "2025-09-30",
-   "computed_at": "2026-09-27T04:59:09.348638Z",
+   "as_of_date": "2025-06-30",
+   "computed_at": "2026-09-27T06:41:09.163537Z",
    "dims": {
     "layer_id": "compute_cloud"
    },
-   "formula_version": "1",
+   "formula_version": "2",
+   "id": "78c7110900aa58b9",
+   "input_observation_ids": [
+    "4914dc73308bc047",
+    "59b9142f6738e0d8",
+    "650a22847cd7c90c",
+    "78e3a8bb65070e37",
+    "a5ad8299039b329f",
+    "d71a32c414d72e0b"
+   ],
+   "metric": "hhi_by_layer",
+   "obs_ids": [
+    "4914dc73308bc047",
+    "59b9142f6738e0d8",
+    "650a22847cd7c90c",
+    "78e3a8bb65070e37",
+    "a5ad8299039b329f",
+    "d71a32c414d72e0b"
+   ],
+   "value": 0.3672419317731799,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-09-30",
+   "computed_at": "2026-09-27T06:41:09.163537Z",
+   "dims": {
+    "layer_id": "compute_cloud"
+   },
+   "formula_version": "2",
    "id": "ba9273b73d45dac7",
    "input_observation_ids": [
     "0c0a639d7d53f326",
@@ -247,12 +343,47 @@
    "value_low": null
   },
   {
-   "as_of_date": "2026-03-31",
-   "computed_at": "2026-09-27T04:59:09.348638Z",
+   "as_of_date": "2025-12-31",
+   "computed_at": "2026-09-27T06:41:09.163537Z",
    "dims": {
     "layer_id": "compute_cloud"
    },
-   "formula_version": "1",
+   "formula_version": "2",
+   "id": "f668d99417eeb640",
+   "input_observation_ids": [
+    "0c0a639d7d53f326",
+    "2f2dda9da987485e",
+    "4ed8ddca0961556e",
+    "5023e66b21818fde",
+    "59b9142f6738e0d8",
+    "77e6d896399b59a9",
+    "88c696fbb0e30e12",
+    "a5ad8299039b329f",
+    "d7bb827ad3fff1b8"
+   ],
+   "metric": "hhi_by_layer",
+   "obs_ids": [
+    "0c0a639d7d53f326",
+    "2f2dda9da987485e",
+    "4ed8ddca0961556e",
+    "5023e66b21818fde",
+    "59b9142f6738e0d8",
+    "77e6d896399b59a9",
+    "88c696fbb0e30e12",
+    "a5ad8299039b329f",
+    "d7bb827ad3fff1b8"
+   ],
+   "value": 0.3585039639522503,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2026-03-31",
+   "computed_at": "2026-09-27T06:41:09.163537Z",
+   "dims": {
+    "layer_id": "compute_cloud"
+   },
+   "formula_version": "2",
    "id": "0f5f10649fdabeb8",
    "input_observation_ids": [
     "01a2687f35147ddf",
@@ -266,6 +397,35 @@
     "a26cee82e25e94ff"
    ],
    "value": 0.3541300505045857,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2026-06-30",
+   "computed_at": "2026-09-27T06:41:09.163537Z",
+   "dims": {
+    "layer_id": "compute_cloud"
+   },
+   "formula_version": "2",
+   "id": "801d7da1e84b1e54",
+   "input_observation_ids": [
+    "5b9948898bd3d1b5",
+    "6fb0f8f0c93debba",
+    "77e6d896399b59a9",
+    "aca02d0b916a89dd",
+    "ccf1eb0df321607f",
+    "d575d683afd39e24"
+   ],
+   "metric": "hhi_by_layer",
+   "obs_ids": [
+    "5b9948898bd3d1b5",
+    "6fb0f8f0c93debba",
+    "77e6d896399b59a9",
+    "aca02d0b916a89dd",
+    "ccf1eb0df321607f",
+    "d575d683afd39e24"
+   ],
+   "value": 0.34881596944624144,
    "value_high": null,
    "value_low": null
   }
@@ -283,21 +443,24 @@
  "fast_band": null,
  "fits": [],
  "flow_status": null,
- "grade": "B",
+ "grade": "A",
  "id": "cloud_hhi",
  "latest": {
-  "as_of": "2026-03-31",
-  "derived_id": "0f5f10649fdabeb8",
+  "as_of": "2026-06-30",
+  "derived_id": "801d7da1e84b1e54",
   "dims": {
    "layer_id": "compute_cloud"
   },
   "obs_ids": [
-   "01a2687f35147ddf",
    "5b9948898bd3d1b5",
-   "a26cee82e25e94ff"
+   "6fb0f8f0c93debba",
+   "77e6d896399b59a9",
+   "aca02d0b916a89dd",
+   "ccf1eb0df321607f",
+   "d575d683afd39e24"
   ],
   "unit": "index",
-  "value": 0.3541300505045857
+  "value": 0.34881596944624144
  },
  "layer_id": "compute_physical",
  "leading_lagging": "leading",
@@ -305,7 +468,7 @@
  "metric_dims": {
   "layer_id": "compute_cloud"
  },
- "n_observations": 18,
+ "n_observations": 34,
  "name": "Concentration among covered cloud filers (HHI)",
  "normal_band": null,
  "override_note": null,
@@ -327,8 +490,8 @@
    "stamp": "measured",
    "unit": "index",
    "value": 0.37841269196431765,
-   "x": 2.79,
-   "y": 43.17
+   "x": 2.82,
+   "y": 23.17
   },
   {
    "as_of": "2024-03-31",
@@ -336,7 +499,7 @@
    "dims": {
     "layer_id": "compute_cloud"
    },
-   "faint": false,
+   "faint": true,
    "href": "#d-bafacce6add5d1f0",
    "obs_ids": [
     "5630e062e0d86064",
@@ -346,8 +509,30 @@
    "stamp": "measured",
    "unit": "index",
    "value": 0.3752920594465524,
-   "x": 21.72,
-   "y": 49.42
+   "x": 20.02,
+   "y": 29.42
+  },
+  {
+   "as_of": "2024-06-30",
+   "derived_id": "84022d3ded8ce1b7",
+   "dims": {
+    "layer_id": "compute_cloud"
+   },
+   "faint": true,
+   "href": "#d-84022d3ded8ce1b7",
+   "obs_ids": [
+    "12d2979e6ccdddc1",
+    "48b581dd10ef31c3",
+    "5b591bbb7c773a62",
+    "7a365961a7c64d82",
+    "b732c8378630f7c7",
+    "ffce6f16d684267c"
+   ],
+   "stamp": "measured",
+   "unit": "index",
+   "value": 0.3735830821543583,
+   "x": 28.57,
+   "y": 32.83
   },
   {
    "as_of": "2024-09-30",
@@ -355,7 +540,7 @@
    "dims": {
     "layer_id": "compute_cloud"
    },
-   "faint": false,
+   "faint": true,
    "href": "#d-df821b0139f56783",
    "obs_ids": [
     "78e3a8bb65070e37",
@@ -365,8 +550,33 @@
    "stamp": "measured",
    "unit": "index",
    "value": 0.36979659208870796,
-   "x": 40.64,
-   "y": 60.41
+   "x": 37.22,
+   "y": 40.41
+  },
+  {
+   "as_of": "2024-12-31",
+   "derived_id": "83d217a1f1b6ab57",
+   "dims": {
+    "layer_id": "compute_cloud"
+   },
+   "faint": true,
+   "href": "#d-83d217a1f1b6ab57",
+   "obs_ids": [
+    "33091b171ab324bc",
+    "48b581dd10ef31c3",
+    "5630e062e0d86064",
+    "650a22847cd7c90c",
+    "7a234cd5506c11a1",
+    "ac9ceef946540a8f",
+    "b732c8378630f7c7",
+    "e4f122d1f53db3a8",
+    "e8369d0c003c2466"
+   ],
+   "stamp": "measured",
+   "unit": "index",
+   "value": 0.36963181468944784,
+   "x": 45.86,
+   "y": 40.74
   },
   {
    "as_of": "2025-03-31",
@@ -374,7 +584,7 @@
    "dims": {
     "layer_id": "compute_cloud"
    },
-   "faint": false,
+   "faint": true,
    "href": "#d-20abe5eb019c1498",
    "obs_ids": [
     "2f2dda9da987485e",
@@ -384,8 +594,30 @@
    "stamp": "measured",
    "unit": "index",
    "value": 0.3694816120661969,
-   "x": 59.46,
-   "y": 61.04
+   "x": 54.32,
+   "y": 41.04
+  },
+  {
+   "as_of": "2025-06-30",
+   "derived_id": "78c7110900aa58b9",
+   "dims": {
+    "layer_id": "compute_cloud"
+   },
+   "faint": false,
+   "href": "#d-78c7110900aa58b9",
+   "obs_ids": [
+    "4914dc73308bc047",
+    "59b9142f6738e0d8",
+    "650a22847cd7c90c",
+    "78e3a8bb65070e37",
+    "a5ad8299039b329f",
+    "d71a32c414d72e0b"
+   ],
+   "stamp": "measured",
+   "unit": "index",
+   "value": 0.3672419317731799,
+   "x": 62.88,
+   "y": 45.52
   },
   {
    "as_of": "2025-09-30",
@@ -403,8 +635,33 @@
    "stamp": "measured",
    "unit": "index",
    "value": 0.36377269976358306,
-   "x": 78.39,
-   "y": 72.45
+   "x": 71.52,
+   "y": 52.45
+  },
+  {
+   "as_of": "2025-12-31",
+   "derived_id": "f668d99417eeb640",
+   "dims": {
+    "layer_id": "compute_cloud"
+   },
+   "faint": false,
+   "href": "#d-f668d99417eeb640",
+   "obs_ids": [
+    "0c0a639d7d53f326",
+    "2f2dda9da987485e",
+    "4ed8ddca0961556e",
+    "5023e66b21818fde",
+    "59b9142f6738e0d8",
+    "77e6d896399b59a9",
+    "88c696fbb0e30e12",
+    "a5ad8299039b329f",
+    "d7bb827ad3fff1b8"
+   ],
+   "stamp": "measured",
+   "unit": "index",
+   "value": 0.3585039639522503,
+   "x": 80.17,
+   "y": 62.99
   },
   {
    "as_of": "2026-03-31",
@@ -422,8 +679,30 @@
    "stamp": "measured",
    "unit": "index",
    "value": 0.3541300505045857,
-   "x": 97.21,
-   "y": 91.74
+   "x": 88.63,
+   "y": 71.74
+  },
+  {
+   "as_of": "2026-06-30",
+   "derived_id": "801d7da1e84b1e54",
+   "dims": {
+    "layer_id": "compute_cloud"
+   },
+   "faint": false,
+   "href": "#d-801d7da1e84b1e54",
+   "obs_ids": [
+    "5b9948898bd3d1b5",
+    "6fb0f8f0c93debba",
+    "77e6d896399b59a9",
+    "aca02d0b916a89dd",
+    "ccf1eb0df321607f",
+    "d575d683afd39e24"
+   ],
+   "stamp": "measured",
+   "unit": "index",
+   "value": 0.34881596944624144,
+   "x": 97.18,
+   "y": 82.37
   }
  ],
  "prediction_rows": [],
@@ -446,7 +725,7 @@
   "sec_seg"
  ],
  "spark": {
-  "d": "M1.0,2.0 L19.8,5.1 L38.6,10.5 L57.4,10.8 L76.2,16.5 L95.0,26.0",
+  "d": "M1.0,2.0 L10.4,4.5 L19.8,5.9 L29.2,9.0 L38.6,9.1 L48.0,9.2 L57.4,11.1 L66.8,13.9 L76.2,18.1 L85.6,21.7 L95.0,26.0",
   "end": [
    95.0,
    26.0
@@ -455,8 +734,29 @@
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,
- "status": "dispersing",
+ "status": "stable",
  "status_events": [
+  {
+   "author": "claude",
+   "counterevidence_considered": "Oracle and the neoclouds are absent; Google Cloud's faster growth is what pulls the index down, and a slightly wider window would read dispersing.",
+   "created_at": "2026-09-27T05:46:02.239844Z",
+   "evidence_ids": [
+    "5b9948898bd3d1b5",
+    "6fb0f8f0c93debba",
+    "77e6d896399b59a9",
+    "aca02d0b916a89dd",
+    "ccf1eb0df321607f",
+    "d575d683afd39e24"
+   ],
+   "id": "1c092a2d6f3f811d",
+   "new_conf": 60,
+   "new_status": "stable",
+   "old_conf": 60,
+   "old_status": "dispersing",
+   "reason": "With each filer's fiscal fourth quarter filled from the 10-K, the index across AWS, Google Cloud and Microsoft Intelligent Cloud eased from 0.367 (Q2 2025) to 0.349 (Q2 2026), a move of 1.8 points, inside the two-point dead band, so it reads stable rather than dispersing. The earlier reading rested on six quarters with gaps.",
+   "target_id": "cloud_hhi",
+   "target_type": "indicator"
+  },
   {
    "author": "evaluate",
    "counterevidence_considered": null,

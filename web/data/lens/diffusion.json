@@ -2968,72 +2968,57 @@
  "recent_status_events": [
   {
    "author": "claude",
-   "counterevidence_considered": "None needed: no reading has changed; this corrects the word used for too few readings.",
-   "created_at": "2026-09-27T04:57:38.389742Z",
+   "counterevidence_considered": "Oracle and the neoclouds are absent; Google Cloud's faster growth is what pulls the index down, and a slightly wider window would read dispersing.",
+   "created_at": "2026-09-27T05:46:02.239844Z",
    "evidence_ids": [
-    "0e359ce00e4f64d5",
-    "107dda49df08c999",
-    "149825364dd940c7",
-    "2573cc95ba7849e2",
-    "37edda4ab17367ea",
-    "4aa56b2959a32860",
-    "4aafbab3266ba76d",
-    "5bd68601ec5a4b52",
-    "61d56c405372fadb",
-    "67dfe2c52341b5de",
-    "69f98577ad0c84bd",
-    "861c7756035120d1",
-    "992062f67aa96748",
-    "a04de78dbba23ad6",
-    "aa2050394d09c371",
-    "b66b86801a55ec20",
-    "c917382528ae83c1",
-    "d4138e7316596fc2",
-    "d83a978d97c0d9e3",
-    "f2e24061d26a7e1b"
+    "5b9948898bd3d1b5",
+    "6fb0f8f0c93debba",
+    "77e6d896399b59a9",
+    "aca02d0b916a89dd",
+    "ccf1eb0df321607f",
+    "d575d683afd39e24"
    ],
-   "id": "41eefccb2593bf82",
-   "new_conf": 40,
-   "new_status": "emerging",
-   "old_conf": 40,
-   "old_status": "not_yet_measurable",
-   "reason": "It has 3 readings and its direction rule compares 5, so it reads emerging rather than not yet measurable: the site uses not yet measurable only for what cannot be measured at all. The status turns into a direction once enough readings exist.",
-   "target_id": "model_token_concentration",
-   "target_type": "indicator"
-  },
-  {
-   "author": "claude",
-   "counterevidence_considered": "None needed: no reading has changed; this corrects the word used for too few readings.",
-   "created_at": "2026-09-27T04:57:37.946376Z",
-   "evidence_ids": [
-    "5a3caabee92bfad9"
-   ],
-   "id": "2fbf4e599373addf",
-   "new_conf": 45,
-   "new_status": "emerging",
-   "old_conf": 45,
-   "old_status": "not_yet_measurable",
-   "reason": "It has 1 reading and its direction rule compares 3, so it reads emerging rather than not yet measurable: the site uses not yet measurable only for what cannot be measured at all. The status turns into a direction once enough readings exist.",
-   "target_id": "enterprise_multi_homing_share",
-   "target_type": "indicator"
-  },
-  {
-   "author": "claude",
-   "counterevidence_considered": "None needed: no reading has changed; this corrects the word used for too few readings.",
-   "created_at": "2026-09-27T04:57:37.838980Z",
-   "evidence_ids": [
-    "07ff8ebabf22d060",
-    "5ecdd5795911ce93",
-    "61c7969e48db4455",
-    "83dde83bc0a515eb"
-   ],
-   "id": "22a436aaa5adea95",
+   "id": "1c092a2d6f3f811d",
    "new_conf": 60,
-   "new_status": "emerging",
+   "new_status": "stable",
    "old_conf": 60,
-   "old_status": "not_yet_measurable",
-   "reason": "It has 1 reading and its direction rule compares 4, so it reads emerging rather than not yet measurable: the site uses not yet measurable only for what cannot be measured at all. The status turns into a direction once enough readings exist.",
-   "target_id": "neocloud_debt_terms",
+   "old_status": "dispersing",
+   "reason": "With each filer's fiscal fourth quarter filled from the 10-K, the index across AWS, Google Cloud and Microsoft Intelligent Cloud eased from 0.367 (Q2 2025) to 0.349 (Q2 2026), a move of 1.8 points, inside the two-point dead band, so it reads stable rather than dispersing. The earlier reading rested on six quarters with gaps.",
+   "target_id": "cloud_hhi",
+   "target_type": "indicator"
+  },
+  {
+   "author": "claude",
+   "counterevidence_considered": "Only two chip makers are covered; Broadcom, TSMC and the custom-silicon designers are absent, so the level overstates concentration.",
+   "created_at": "2026-09-27T05:46:02.233745Z",
+   "evidence_ids": [
+    "005d040fe4b816e0",
+    "2faa719b05b9c22a"
+   ],
+   "id": "0b86501fb98962cf",
+   "new_conf": 60,
+   "new_status": "stable",
+   "old_conf": 60,
+   "old_status": "unclear",
+   "reason": "With the fourth quarters filled where the filers publish full-year figures, NVIDIA's and AMD's data-centre revenue shares give an index of 0.830 (Q1 2025) and 0.849 (Q2 2026): a move of under two points, inside the dead band, so it reads stable. The earlier unclear reading compared a gappy series; AMD's fourth quarters stay missing because AMD files no full-year segment figures.",
+   "target_id": "semis_hhi",
+   "target_type": "indicator"
+  },
+  {
+   "author": "claude",
+   "counterevidence_considered": "Operating, not gross, margin; one filer's segment carries the reading, and AWS's rising margin may reflect its own depreciation schedule as much as AI demand.",
+   "created_at": "2026-09-27T05:46:02.223540Z",
+   "evidence_ids": [
+    "6fb0f8f0c93debba",
+    "89c26630d3de81d0"
+   ],
+   "id": "ccc338f6bc130d4c",
+   "new_conf": 75,
+   "new_status": "concentrating",
+   "old_conf": 75,
+   "old_status": "stable",
+   "reason": "AWS's segment operating margin, now read with the fiscal fourth quarters that are filed only in the 10-K, rose in each of the last four quarters: 32.9% (Q2 2025), 34.6%, 35.0%, 37.7% and 39.4% (Q2 2026). That is above the two-point dead band and every step agrees, so it reads concentrating; the earlier stable reading compared quarters with the fourth ones missing.",
+   "target_id": "cloud_segment_margins",
    "target_type": "indicator"
   }
  ],
