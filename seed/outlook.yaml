@@ -7,6 +7,11 @@
 # reaching a level by that date. Quotes: at most one per source, under fifteen words, checked against the source.
 
 facts:
+  labour_share_yoy: {metric: bls_labor_share_yoy, max_age_days: 200}
+  relational_share_now: {metric: relational_work_share, max_age_days: 90}
+  relational_share_year_ago: {metric: relational_work_share, pick: year_ago}
+  silicon_share_now: {metric: custom_silicon_share, max_age_days: 400}
+  silicon_share_year_ago: {metric: custom_silicon_share, pick: year_ago}
   surge_revenue: {series: yahoo_finance.surge_ai.revenue_usd.fy}
   rli_record: {metric: benchmark_frontier, dims: {test: epoch_bench.rli}, max_age_days: 400}
   hal_accuracy_trend: {metric: hal_trend_per_year, dims: {measure: accuracy}, max_age_days: 400, expect: {gt: 0}}
@@ -2016,12 +2021,18 @@ claims:
     text: Care, teaching, hospitality and other work where the person is part of what is bought take a rising share of spending and jobs as AI spreads.
     row: work_and_pay
     falsifier: That work's share of spending and jobs falling as AI spreads.
+    # Test line from Imas's own words: jobs shift towards relational work (the jobs half; spending is not measured).
+    test: {fact: relational_share_now, gt: relational_share_year_ago}
+    expect_state: holding
   - id: labour_share_falls
     position: jagged_wages
     holders: [restrepo]
     text: Labour's share of income falls as AI takes on more tasks, even as wages rise.
     row: work_and_pay
     falsifier: Labour's share holding while AI does a growing share of tasks.
+    # Test line from Restrepo's own words: labour's share of income heads towards nothing even as total wages rise.
+    test: {fact: labour_share_yoy, lt: 0}
+    expect_state: holding
   - id: firms_centralise
     position: centralises
     text: Firms using AI grow larger and take decisions further from the people on the spot.
@@ -2161,6 +2172,9 @@ claims:
     attribution: site
     text: NVIDIA's lead over other chip makers in sales for data centres keeps widening as AI spending grows.
     falsifier: Rival chip makers taking a growing share of data-centre chip sales while spending rises.
+    # Test line from the claim itself (this site's): rivals' share of data-centre chips falling is NVIDIA's lead widening.
+    test: {fact: silicon_share_now, lt: silicon_share_year_ago}
+    expect_state: failing
   - id: states_buy_in
     position: scarce_input_collects
     attribution: site
