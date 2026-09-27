@@ -363,6 +363,11 @@ export type CensusRoleDoc = {
   industries: { naics: string; title: string; emp: number; wage_bill: number; passes: number; agreed3: number | null }[];
 };
 export const census = () => read<CensusIndex>("census/index.json");
+export type CensusRollup = {
+  rank: number; naics: string; title: string; ref: string; share_total: number; passes: number;
+  small_share: { value: number; derived_id: string; obs_ids: string[] }; firms_20_99: { value: number; obs_ids: string[] };
+};
+export const censusRollup = () => read<CensusRollup[]>("census/rollup.json");
 export const censusRole = (occ: string) => read<CensusRoleDoc>(`census/roles/${occ}.json`);
 
 // Futures (plan Part 20): imagined and expected technologies by decade, model-judged, rendered as exported.

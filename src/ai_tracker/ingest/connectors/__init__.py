@@ -4,6 +4,7 @@ from .bls import Bls
 from .cait import Cait
 from .canaries import Canaries, CanariesAge
 from .census_btos import CensusBtos
+from .census_susb import CensusSusb
 from .epoch import Epoch
 from .epoch_tables import (
     EpochBench,
@@ -51,6 +52,7 @@ CONNECTORS = {
         Fred,
         FredOfficial,
         CensusBtos,
+        CensusSusb,
         AnthropicEi,
         SecSegments,
         Feeds,

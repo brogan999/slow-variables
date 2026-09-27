@@ -43,3 +43,4 @@ analyses:
   - {id: accelerator_cost, name: "Cost of a unit of accelerator compute", question: "Is the price of compute still falling at its usual pace?", metric: accelerator_cost_per_flop_annual_change, shape: {unit: share}}
   - {id: basket_price, name: "Cheapest model in the flagship basket", question: "What does the cheapest capable model cost to run?", metric: basket_min_output_price_per_mtok, shape: {unit: USD}}
   - {id: capex_growth, name: "Growth in hyperscaler capital spending", question: "Are the five largest builders still raising their spending?", metric: hyperscaler_capex_ttm_yoy, shape: {unit: share}}
+  - {id: small_firm_employment_share, name: "How fragmented each industry is", question: "What share of each industry's employment is in firms with fewer than 500 staff?", metric: small_firm_employment_share, dims: {naics: "5242"}, shape: {unit: share}}

@@ -323,3 +323,40 @@ def strings(spec: dict[str, Any]) -> list[str]:
         return []
     s = spec["sections"]
     return [spec["title"], spec["lede"], spec["rule"], spec["agreed"], *spec["caveats"], *spec["method_notes"].values(), *(x[k] for x in s.values() for k in ("title", "lede"))]
+
+
+MIN_TARGETS = 200  # firms with 20 to 99 staff: fewer and there is not a rollup's worth to buy
+MIN_PASSES = 5e8  # payroll passing the screen: less and the saving is too small to pay for the effort
+NOT_FOR_SALE = ("813", "92")  # religious, civic and membership organisations, and government, are not bought
+
+
+def rollup(index: dict[str, Any], small: dict[str, Any], firms: dict[str, Any], limit: int = 20) -> list[dict[str, Any]]:
+    """Where a rollup could start: census industries ranked by the share of their payroll that passes the hand-over
+    screen times how fragmented they are (the share of employment in firms under 500 staff, from the Census
+    Statistics of US Businesses). Joins the census's own figure to a site metric; recomputes no census figure.
+    Census industries are six-character codes; one ending in 00 is a four-digit NAICS industry, the level SUSB is read at.
+    `small` maps a four-digit code to its derived row, `firms` to its firms-with-20-to-99-staff observation.
+    Only industries with enough to buy and enough to gain count: at least MIN_TARGETS firms of 20 to 99 staff and at
+    least MIN_PASSES of payroll passing the screen."""
+    rows = []
+    for x in index.get("industries") or []:
+        code = x["naics"]
+        if not (code.endswith("00") and code[:4] in small and x.get("share_total")) or code.startswith(NOT_FOR_SALE):
+            continue
+        d, f = small[code[:4]], firms.get(code[:4])
+        if not f or f["value_numeric"] < MIN_TARGETS or (x.get("passes") or 0) < MIN_PASSES:
+            continue
+        rows.append(
+            {
+                "naics": code,
+                "title": x["title"],
+                "ref": x["ref"],
+                "share_total": x["share_total"],
+                "passes": x["passes"],
+                "small_share": {"value": d.value, "derived_id": d.id, "obs_ids": d.input_observation_ids},
+                "firms_20_99": {"value": f["value_numeric"], "obs_ids": [f["id"]]},
+                "score": x["share_total"] * d.value,
+            }
+        )
+    rows.sort(key=lambda r: (-r["score"], r["naics"]))
+    return [{**r, "rank": i + 1} for i, r in enumerate(rows[:limit])]

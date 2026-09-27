@@ -36,6 +36,7 @@
 | canaries | Canaries Dashboard data (by exposure) | Stanford Digital Economy Lab and ADP Research | csv | 6 | monthly | Stanford Digital Economy Lab; free public data, cited as the Lab asks | Stanford Digital Economy Lab and ADP Research, AI Economic Indicators: Canaries Dashboard |
 | canaries_age | Canaries Dashboard data (age by exposure) | Stanford Digital Economy Lab and ADP Research | csv | 6 | monthly | Stanford Digital Economy Lab; free public data, cited as the Lab asks | Stanford Digital Economy Lab and ADP Research, AI Economic Indicators: Canaries Dashboard |
 | census_btos | Census Business Trends and Outlook Survey | U.S. Census Bureau | csv | 4 | biweekly | Public domain (U.S. government) | U.S. Census Bureau, Business Trends and Outlook Survey |
+| census_susb | Census Statistics of US Businesses (firms and employment by industry and enterprise size) | US Census Bureau | csv | 4 | annual | US government work; public domain | US Census Bureau, Statistics of US Businesses |
 | cepr_voxeu | CEPR VoxEU columns (via Wayback; cepr.org 403s bots) | CEPR | html | 6 | irregular | CEPR; short quotation | CEPR VoxEU |
 | chicago_booth | Chicago Booth Center for Applied AI | University of Chicago Booth School of Business | html | 6 | irregular | Chicago Booth; short quotation | Chicago Booth |
 | cio_com | CIO.com | Foundry | html | 5 | irregular | Foundry; short quotation | CIO.com |
