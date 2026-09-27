@@ -330,7 +330,7 @@ metrics:
     unit: share
     lead_lag: lagging
     formula_version: 2
-    inputs: ["sec_seg.*.operating_income.q", "sec_seg.*.revenue.q"]
+    inputs: ["sec_seg.*.operating_income.q", "sec_seg.*.revenue.q", "sec_seg.*.operating_income.fy", "sec_seg.*.revenue.fy"]
     caveats: Operating, not gross, margin; segment definitions differ (Intelligent Cloud includes server products and Windows Server). A fiscal Q4 filed only in the 10-K is the full year minus the three reported quarters and cites all four filings; AMD files no full-year segment figures, so its fourth quarters stay missing.
     sql: |
       SELECT oi.as_of_date, oi.subject || '.' || split_part(oi.series_key, '.', 3) AS segment,
@@ -351,7 +351,7 @@ metrics:
       WITH allq AS (
         SELECT subject, as_of_date, v, ids FROM sec_segment_quarters WHERE series_key LIKE 'sec_seg.%.operating_income.q'),
       seg AS (
-        SELECT date_trunc('quarter', as_of_date) AS cq, subject, v, ids,
+        SELECT date_trunc('quarter', as_of_date - INTERVAL 7 DAY) AS cq, subject, v, ids,
                CASE WHEN subject IN ('nvda', 'amd') THEN 'compute_semis' ELSE 'compute_cloud' END AS layer_id
         FROM allq),
       complete AS (SELECT cq FROM seg GROUP BY cq HAVING count(DISTINCT subject) = 5),
@@ -424,11 +424,11 @@ metrics:
     unit: index
     lead_lag: leading
     formula_version: 2
-    inputs: ["sec_seg.*.revenue.q", "ramp.*.business_paid_share.m"]
+    inputs: ["sec_seg.*.revenue.q", "sec_seg.*.revenue.fy", "ramp.*.business_paid_share.m"]
     caveats: Only covered filers; Broadcom, TSMC, Oracle and the neoclouds are absent, so levels overstate concentration. Fiscal quarters mapped to the calendar quarter of their period end; a fiscal Q4 filed only in the 10-K is the full year minus the three reported quarters (AMD files no full-year segment figures). Ramp lab shares allow multi-homing and are normalised to sum to one.
     sql: |
       WITH rev AS (
-        SELECT date_trunc('quarter', as_of_date) AS cq, subject, v, ids,
+        SELECT date_trunc('quarter', as_of_date - INTERVAL 7 DAY) AS cq, subject, v, ids,
                CASE WHEN subject IN ('nvda', 'amd') THEN 'compute_semis' ELSE 'compute_cloud' END AS layer_id,
                CASE WHEN subject IN ('nvda', 'amd') THEN 2 ELSE 3 END AS need
         FROM sec_segment_quarters
