@@ -47,3 +47,12 @@ export const WITHHELD_WORDS: Record<string, string> = {
   stale_or_thin: "its readings are too old or too few today",
 };
 export const PHASE_WORDS: Record<string, string> = { installation: "installation", turning_point: "turning point", deployment: "deployment", untestable: "untestable" };
+
+// Who wrote a status change, as a reader should see it: the model's authorship stays visible, in plain words.
+const AUTHORS: Record<string, string> = {
+  "claude-initial-seed": "initial seed (model-drafted)",
+  claude: "Claude (model)",
+  evaluate: "the evaluator (automatic)",
+  nightly: "the nightly run (automatic)",
+};
+export const authorLabel = (a: string) => AUTHORS[a] ?? a;

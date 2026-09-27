@@ -31,7 +31,7 @@
    "f2e24061d26a7e1b"
   ],
   "unit": "index",
-  "value": 0.16876945107906832
+  "value": 0.1687694510790683
  },
  "bucket_id": null,
  "cadence_expected": "weekly",
@@ -126,7 +126,7 @@
  "derived": [
   {
    "as_of_date": "2026-09-13",
-   "computed_at": "2026-09-26T11:34:30.729440Z",
+   "computed_at": "2026-09-27T04:59:09.348638Z",
    "dims": {},
    "formula_version": "1",
    "id": "1af829cfd616e4a8",
@@ -175,13 +175,13 @@
     "ed0f9366f51fcf34",
     "ed4aef3d5107870e"
    ],
-   "value": 0.16065971860380776,
+   "value": 0.16065971860380773,
    "value_high": null,
    "value_low": null
   },
   {
    "as_of_date": "2026-09-20",
-   "computed_at": "2026-09-26T11:34:30.729440Z",
+   "computed_at": "2026-09-27T04:59:09.348638Z",
    "dims": {},
    "formula_version": "1",
    "id": "f92a751ef59088f3",
@@ -230,13 +230,13 @@
     "f61d6023c9f7e534",
     "f8cce0b3219c5b1e"
    ],
-   "value": 0.17018003119113834,
+   "value": 0.17018003119113836,
    "value_high": null,
    "value_low": null
   },
   {
    "as_of_date": "2026-09-25",
-   "computed_at": "2026-09-26T11:34:30.729440Z",
+   "computed_at": "2026-09-27T04:59:09.348638Z",
    "dims": {},
    "formula_version": "1",
    "id": "1889186fc654a317",
@@ -285,7 +285,7 @@
     "d83a978d97c0d9e3",
     "f2e24061d26a7e1b"
    ],
-   "value": 0.16876945107906832,
+   "value": 0.1687694510790683,
    "value_high": null,
    "value_low": null
   }
@@ -332,7 +332,7 @@
    "f2e24061d26a7e1b"
   ],
   "unit": "index",
-  "value": 0.16876945107906832
+  "value": 0.1687694510790683
  },
  "layer_id": "model",
  "leading_lagging": "leading",
@@ -374,7 +374,7 @@
    ],
    "stamp": "measured",
    "unit": "index",
-   "value": 0.16065971860380776,
+   "value": 0.16065971860380773,
    "x": 7.14,
    "y": 58.68
   },
@@ -408,7 +408,7 @@
    ],
    "stamp": "measured",
    "unit": "index",
-   "value": 0.17018003119113834,
+   "value": 0.17018003119113836,
    "x": 57.14,
    "y": 39.64
   },
@@ -442,13 +442,13 @@
    ],
    "stamp": "measured",
    "unit": "index",
-   "value": 0.16876945107906832,
+   "value": 0.1687694510790683,
    "x": 92.86,
    "y": 42.46
   }
  ],
  "prediction_rows": [],
- "proposed_status": "not_yet_measurable",
+ "proposed_status": "emerging",
  "proxy_types": [
   "market_structure"
  ],
@@ -478,8 +478,43 @@
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,
- "status": "not_yet_measurable",
+ "status": "emerging",
  "status_events": [
+  {
+   "author": "claude",
+   "counterevidence_considered": "None needed: no reading has changed; this corrects the word used for too few readings.",
+   "created_at": "2026-09-27T04:57:37.671393Z",
+   "evidence_ids": [
+    "0e359ce00e4f64d5",
+    "107dda49df08c999",
+    "149825364dd940c7",
+    "2573cc95ba7849e2",
+    "37edda4ab17367ea",
+    "4aa56b2959a32860",
+    "4aafbab3266ba76d",
+    "5bd68601ec5a4b52",
+    "61d56c405372fadb",
+    "67dfe2c52341b5de",
+    "69f98577ad0c84bd",
+    "861c7756035120d1",
+    "992062f67aa96748",
+    "a04de78dbba23ad6",
+    "aa2050394d09c371",
+    "b66b86801a55ec20",
+    "c917382528ae83c1",
+    "d4138e7316596fc2",
+    "d83a978d97c0d9e3",
+    "f2e24061d26a7e1b"
+   ],
+   "id": "1c92f90862c939e1",
+   "new_conf": 40,
+   "new_status": "emerging",
+   "old_conf": 40,
+   "old_status": "not_yet_measurable",
+   "reason": "It has 3 readings and its direction rule compares 5, so it reads emerging rather than not yet measurable: the site uses not yet measurable only for what cannot be measured at all. The status turns into a direction once enough readings exist.",
+   "target_id": "lab_hhi",
+   "target_type": "indicator"
+  },
   {
    "author": "claude",
    "counterevidence_considered": null,

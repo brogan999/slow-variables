@@ -20,7 +20,6 @@ export const metadata: Metadata = {
   description: SITE.description,
   openGraph: { type: "website", siteName: SITE.name, title: SITE.name, description: SITE.description, url: SITE.url },
   twitter: { card: "summary_large_image" }, // title, description and image come from each page's openGraph
-  alternates: { types: { "application/rss+xml": "/memos/feed.xml" } },
 };
 
 
@@ -54,7 +53,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/legal" className="hover:text-ink">Legal</Link>
               <Link href="/legal#privacy" className="hover:text-ink">Privacy</Link>
               <a href={SITE.repo} className="hover:text-ink">Source code</a>
-              <a href="/memos/feed.xml" className="hover:text-ink">Memo feed (RSS)</a>
             </nav>
           </div>
         </footer>

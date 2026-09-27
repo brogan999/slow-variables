@@ -327,19 +327,21 @@ def exits(spec: dict[str, Any]) -> list[dict[str, Any]]:
     ]
 
 
-def headlines(spec: dict[str, Any]) -> dict[str, dict[str, Any]]:
-    """Each lens page's headline: the claim its monitor's current state supports, in the words the seed gives."""
+def headlines(spec: dict[str, Any], fast: set[str] | None = None) -> dict[str, dict[str, Any]]:
+    """Each lens page's headline: the claim its monitor's current state supports, in the words the seed gives.
+    `fast` holds the buckets with a published indicator reading faster than normal: a claim may name its bucket in
+    `when_fast`, so a page whose cards show fast capability never reads as if nothing were fast."""
     from .store import DATA, read_jsonl
 
     states = {v["id"]: v.get("state") for v in read_jsonl(DATA / "thesis.jsonl")}
     out = {}
     for page, h in spec["headlines"].items():
         state = states.get(h["monitor"]) or "untestable"
-        out[page] = {
-            "monitor": h["monitor"],
-            "state": state,
-            "claim": h["claims"].get(state) or h["claims"]["untestable"],
-        }
+        claim = h["claims"].get(state) or h["claims"]["untestable"]
+        for bucket, alt in (h.get("when_fast") or {}).get(state, {}).items():
+            if bucket in (fast or set()):
+                claim = alt
+        out[page] = {"monitor": h["monitor"], "state": state, "claim": claim}
     return out
 
 
@@ -646,7 +648,14 @@ def build(s: Store, today: date | None = None) -> dict[str, Any]:
         "clocks": clocks(s, spec),
         "phase": phase(s, spec),
         "exits": exits(spec),
-        "headlines": headlines(spec),
+        "headlines": headlines(
+            spec,
+            {
+                i.bucket_id
+                for i in s.seed.indicators
+                if i.published and i.bucket_id and (e := s.current(i.id)) and e.new_status == "faster_than_normal"
+            },
+        ),
         "sources": spec["sources"],
         "record": record(),
     }

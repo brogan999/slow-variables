@@ -735,3 +735,13 @@ Deliberately not done: an `expectations` SQL table, per-page share images, pips,
 - **Inference price (#92):** Epoch's price chart stopped in February 2025. The halving time now continues on Artificial Analysis models that clear GPT-4's own GPQA score and undercut every earlier model: 122 days (CI 89–192), still emerging. AA's GPQA is stored; one row per model where AA moves release dates.
 - **Second sources (#93):** Sierra's tau2-bench pass^k beside the vendor table; GetDeploying's weekly GPU rents publish `gpu_rental_price_per_hour` and test the outlook's no-glut claim. No free, dated accelerator list price exists after November 2025; recorded on the skipped list.
 - **Past waves (#94):** Folio IV of the full argument gains the historical record and its two exceptions; a case-record note for Ask; the analyst reads a local reading folder.
+
+## Part 27a status (27 Sep 2026): what a first-time reader sees
+
+- **The weekly memo is removed** (owner's call): the page, feed, nav item, workflow and code are gone. `ai-tracker ops-notes` keeps the operator notes on request.
+- **Readings.** An indicator with readings but too few for its direction rule reads "emerging"; "not yet measurable" is kept for no reading at all.
+- **Pages:**
+  - Layers with unpublished data say what is held and why.
+  - Fetch failures read as plain sentences, and a source failing three runs in a row reads "failing".
+  - Record links read as numbered sources, and status authors in plain words.
+  - `/diffusion` says capability is fast when its own cards show it.

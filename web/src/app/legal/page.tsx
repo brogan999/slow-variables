@@ -7,7 +7,7 @@ export const metadata = {
   description: "Who runs Slow Variables, what it is and is not, how its data and words may be used, and how it handles the little it records.",
 };
 
-const CHANGED = "24 September 2026"; // bump with every change to this page; the history is in the repository
+const CHANGED = "27 September 2026"; // bump with every change to this page; the history is in the repository
 const link = "underline decoration-axis underline-offset-2 hover:decoration-ink";
 
 function H({ id, children }: { id: string; children: React.ReactNode }) {
@@ -40,7 +40,7 @@ export default function Legal() {
         <p>Figures are shown as their sources published them and are collected by automated pipelines that can fail, lag or misread a source. The operator checks what can be checked but cannot vouch for any figure, quotation or source. The site, its data, its answers and its downloads are provided &ldquo;as is&rdquo; and &ldquo;as available&rdquo;, without warranties of any kind, express or implied, including accuracy, completeness, timeliness, merchantability, fitness for a particular purpose and non-infringement, to the fullest extent the law allows.</p>
 
         <H id="ai">AI-generated content</H>
-        <p>Parts of this site are written or judged by AI models, and are labelled where they appear. Ask answers are written by an Anthropic model; the site checks that each number matches the record it cites, not that the sentence around it is right, so a checked answer can still be wrong. Weekly memos marked as model-drafted, reworded summaries of sources, and model-judged fields (such as dates, categories, verdicts and rubric scores) can contain errors. The illustrations are made with image models, named in each caption, and are not evidence of anything. Much of the site&apos;s code and wording was drafted with AI assistance and reviewed by the operator.</p>
+        <p>Parts of this site are written or judged by AI models, and are labelled where they appear. Ask answers are written by an Anthropic model; the site checks that each number matches the record it cites, not that the sentence around it is right, so a checked answer can still be wrong. Reworded summaries of sources and model-judged fields (such as dates, categories, verdicts and rubric scores) can contain errors. The illustrations are made with image models, named in each caption, and are not evidence of anything. Much of the site&apos;s code and wording was drafted with AI assistance and reviewed by the operator.</p>
 
         <H id="sources">Sources, quotation and removal</H>
         <p>Every figure names its source. Books, papers and newsletters, including paid ones, are reworded in this site&apos;s words and credited to their authors, and exact quotations are kept short, for the purposes of commentary, criticism and research. Lists compiled by others (for example the science-fiction inventions catalogued by Technovelgy and compiled by Not Boring) are credited wherever they are used. If you hold rights in something used here and object to its use, write to {email} with the page, the material and your claim; the operator will review promptly and remove or correct material where that is right. This site does not host content uploaded by users.</p>

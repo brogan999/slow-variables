@@ -52,6 +52,6 @@ export default function SourcesPage() {
 }
 
 function Health({ h }: { h: string }) {
-  const label = h === "ok" ? "● fresh" : h === "stale" ? "◐ stale" : "○ never run";
-  return <span className={`text-xs whitespace-nowrap ${h === "stale" ? "text-error" : h === "ok" ? "text-ink" : "text-muted"}`}>{label}</span>;
+  const label = h === "ok" ? "● fresh" : h === "stale" ? "◐ stale" : h === "failing" ? "✕ failing" : "○ never run";
+  return <span className={`text-xs whitespace-nowrap ${h === "stale" || h === "failing" ? "text-error" : h === "ok" ? "text-ink" : "text-muted"}`}>{label}</span>;
 }

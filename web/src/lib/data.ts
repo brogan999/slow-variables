@@ -65,7 +65,7 @@ function read<T>(rel: string): T {
 export const index = () => read<{ indicators: Card[]; buckets: Bucket[]; layers: Layer[]; sublayers: Sublayer[]; crosswalk: Crosswalk[] }>("index.json");
 export const indicator = (id: string) => read<Doc>(`indicators/${id}.json`);
 export const bucket = (id: string) => read<Bucket & { indicators: Card[]; crosswalk: Crosswalk[] }>(`buckets/${id}.json`);
-export const layer = (id: string) => read<Layer & { tally?: Tally; indicators: Card[]; sublayers: Sublayer[]; crosswalk: Crosswalk[]; venture: LayerVenture | null; commoditisation: { proxies: { id: string; name: string; status: string | null }[]; line: string } | null }>(`layers/${id}.json`);
+export const layer = (id: string) => read<Layer & { tally?: Tally; indicators: Card[]; sublayers: Sublayer[]; crosswalk: Crosswalk[]; venture: LayerVenture | null; commoditisation: { proxies: { id: string; name: string; status: string | null }[]; line: string } | null; held?: { id: string; name: string; reason: string | null; n: number }[] }>(`layers/${id}.json`);
 export const series = (key: string) => read<{ series_key: string; unit: string; source: Source | null; observations: Observation[]; withdrawn: Observation[] }>(`series/${key}.json`);
 export const seriesKeys = () => fs.readdirSync(path.join(ROOT, "series")).map((f) => f.replace(/\.json$/, ""));
 export const diffusion = () => read<{
@@ -81,7 +81,7 @@ export type Stack = {
   ends: { id: string; name: string; value: number; unit: string; as_of: string; obs_ids: string[]; y: number }[];
   stamps?: Stamp[]; sources: ChartSourcesT;
 };
-export const capture = () => read<{ as_of: string; verdict?: string; what_would_change: string[]; layers: (Layer & { indicators: Card[]; n_published: number; status: string; tally: Tally; venture: LayerVenture | null; reading: string })[]; recent_status_events: StatusEvent[]; gross_profit_stack: Stack; margin_stack: Stack }>("lens/capture.json");
+export const capture = () => read<{ as_of: string; verdict?: string; what_would_change: string[]; layers: (Layer & { indicators: Card[]; n_published: number; status: string; tally: Tally; venture: LayerVenture | null; reading: string; held?: { id: string; name: string; reason: string | null; n: number }[] })[]; recent_status_events: StatusEvent[]; gross_profit_stack: Stack; margin_stack: Stack }>("lens/capture.json");
 export const sources = () => read<Source[]>("sources.json");
 export type Skipped = { id: string; name: string; url: string | null; reason: string; attribution: string | null; people?: string[] };
 export const skippedSources = () => read<Skipped[]>("skipped_sources.json");
@@ -121,15 +121,6 @@ export type Analysis = {
   latest: { as_of_date: string; value: number; value_low?: number | null; value_high?: number | null; obs_ids: string[] } | null;
 };
 export const analyses = () => read<Analysis[]>("analyses.json");
-export type Memo = {
-  date: string; since: string; title: string; mode: "prose" | "digest"; model: string | null; prompt_version: string; fallback_reason: string | null;
-  thesis: Record<string, boolean | string | null>; lens: { diffusion?: string; capture?: string }; events: number; new_observations: number; summary?: string; body: string;
-};
-export const memos = () => read<Memo[]>("memos/index.json");
-export function memo(date: string): Memo | null {
-  const p = path.join(ROOT, "memos", `${date}.json`);
-  return fs.existsSync(p) ? (JSON.parse(fs.readFileSync(p, "utf8")) as Memo) : null;
-}
 export type VentureSeg = { source: string; kind: string; value: number; obs_ids: string[]; href: string | null; stamp: Stamp | null; y?: number; height?: number };
 export type VentureQuarter = {
   as_of: string; name: string; label: string; minor: boolean; label_minor: boolean; x: number; cx: number; width: number; top: number | null;

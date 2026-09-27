@@ -1,7 +1,7 @@
 name: nightly
 on:
   # GitHub drops scheduled events without notice; the second slot catches a missed first one, and the gate below
-  # makes it a no-op on a day that already succeeded. 11:47 stays clear of Monday's 09:17 memo run.
+  # makes it a no-op on a day that already succeeded.
   schedule: [{ cron: "17 6 * * *" }, { cron: "47 11 * * *" }]
   workflow_dispatch:
 permissions: { contents: write, pull-requests: write, actions: write, issues: write }

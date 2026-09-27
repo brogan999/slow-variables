@@ -35,7 +35,12 @@ export default function CaptureLens() {
                 {/* the lens is a summary: the most confident readings, then the layer page for the rest */}
                 {[...published].sort((a, b) => (b.confidence ?? 0) - (a.confidence ?? 0)).slice(0, 4).map((i) => <IndicatorCard key={i.id} c={i} obsIndex={idx} />)}
               </div>
-            ) : <p className="text-sm text-muted">No published indicator for this layer yet.</p>}
+            ) : l.held?.length ? (
+              <div className="text-sm text-ink-2 max-w-[62ch]">
+                <p>The site holds data for this layer but has not published a reading yet:</p>
+                <ul className="mt-2 list-disc pl-5 space-y-1">{l.held.map((h) => <li key={h.id}><span className="text-ink">{h.name}</span> ({h.n} records): {h.reason}</li>)}</ul>
+              </div>
+            ) : <p className="text-sm text-muted">No data for this layer yet.</p>}
             {l.n_published > 4 ? <p className="mt-4 text-sm"><Link href={`/layers/${l.id}`} className="underline decoration-axis underline-offset-4">All {l.n_published} indicators on this layer →</Link></p> : null}
           </section>
         );

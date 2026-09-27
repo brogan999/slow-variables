@@ -4,7 +4,7 @@ import { Exits, ReadingMargin, SlowVariables, StackPlate } from "@/components/Ar
 import { Folios, Inline, parseEssay } from "@/components/Essay";
 import { FourClocks } from "@/components/FourClocks";
 import { PerezCurve } from "@/components/PerezCurve";
-import { argument, index, memos } from "@/lib/data";
+import { argument, index } from "@/lib/data";
 import { SITE } from "@/lib/site";
 
 export const metadata = { title: { absolute: `${SITE.name} · how fast AI lands, and who keeps the value` } };
@@ -13,7 +13,6 @@ export default function Home() {
   const doc = argument();
   const cards = Object.fromEntries(index().indicators.map((c) => [c.id, c]));
   const { title, lede, folios } = parseEssay(doc.essay.home);
-  const latest = memos()[0];
   const plates = { clocks: <FourClocks clocks={doc.clocks} cards={cards} />, perez: <PerezCurve phase={doc.phase} facts={doc.facts} />, stack: <StackPlate /> };
   return (
     <ArticleLayout
@@ -43,13 +42,6 @@ export default function Home() {
         <Exits doc={doc} />
       </section>
 
-      {latest ? (
-        <section className="mt-24 border-t border-grid pt-8">
-          <div className="eyebrow">This week</div>
-          <p className="mt-3 font-serif text-xl"><Link href={`/memos/${latest.date}`} className="underline decoration-axis underline-offset-4 hover:decoration-ink">{latest.title}</Link></p>
-          <p className="mt-1 text-sm text-muted">The weekly memo, {latest.since} to {latest.date}. <Link href="/memos" className="hover:text-ink">All memos →</Link></p>
-        </section>
-      ) : null}
     </ArticleLayout>
   );
 }

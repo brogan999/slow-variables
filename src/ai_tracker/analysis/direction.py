@@ -16,8 +16,10 @@ def direction(
     points: list[tuple[date, float]], rule: DirectionRule, best_tier: Tier = Tier.OFFICIAL_FILING
 ) -> Direction:
     pts = window(points, rule)
-    if len(pts) < rule.periods + 1:
+    if not pts:  # nothing to read: truly unmeasured
         return Direction.not_yet_measurable
+    if len(pts) < rule.periods + 1:  # a reading exists, but too few for a direction yet
+        return Direction.emerging
     delta = pts[-1][1] - pts[0][1]
     if abs(delta) <= rule.dead_band:
         return Direction.stable
