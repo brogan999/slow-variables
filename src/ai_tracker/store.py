@@ -2220,7 +2220,7 @@ def plain_error(err: str | None, when: date) -> str:
     elif "Timeout" in e or "timed out" in e:
         what = "the request timed out"
     elif "newest month" in e:
-        what = e  # already written for a reader
+        what = e.split(";")[0]  # the reader's half; the instruction after it is for the maintainer
     else:
         what = "the fetch failed"
     return f"{what}, on {when.isoformat()}"

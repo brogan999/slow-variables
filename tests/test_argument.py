@@ -255,3 +255,13 @@ def test_the_case_record_reaches_the_page_one_titled_paragraph_at_a_time():
     rec = ar.record()
     assert len(rec) >= 8 and all(r["title"] and r["text"] for r in rec)
     assert not any("## Sources" in r["text"] or "https://" in r["text"] for r in rec)
+
+
+def test_a_headline_names_fast_capability_when_its_bucket_reads_fast():
+    spec = {"headlines": {"diffusion": {"monitor": "m", "claims": {"untestable": "u", "unsupported": "slow"},
+                                        "when_fast": {"unsupported": {"methods": "fast models, slow spread"}}}}}
+    from unittest import mock
+
+    with mock.patch("ai_tracker.store.read_jsonl", return_value=[{"id": "m", "state": "unsupported"}]):
+        assert ar.headlines(spec, set())["diffusion"]["claim"] == "slow"
+        assert ar.headlines(spec, {"methods"})["diffusion"]["claim"] == "fast models, slow spread"

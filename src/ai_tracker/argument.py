@@ -687,6 +687,10 @@ def problems(s: Store) -> tuple[list[str], list[str]]:
     for page, h in spec["headlines"].items():
         if h["monitor"] not in monitors or "untestable" not in h["claims"]:
             errors.append(f"argument: {page} headline names an unknown monitor or has no untestable claim")
+        buckets = {b.id for b in s.seed.buckets}
+        for state, alts in (h.get("when_fast") or {}).items():
+            if state not in h["claims"] or not set(alts) <= buckets:
+                errors.append(f"argument: {page} headline's when_fast names an unknown state or bucket")
     block = spec["migration"]
     for k, v in block["facts"].items():
         if "indicator" in v and v["indicator"] not in ids or "metric" in v and not s.metric_spec(v["metric"]):

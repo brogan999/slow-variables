@@ -99,7 +99,7 @@ def ops_notes(store: st.Store, today: date | None = None) -> str:
         "Hand-entered series due for a refresh (fetch the page, add a row to seed/manual_observations.yaml)": due_for_refresh(
             store, today
         ),
-        "Sources stale or never fetched": [
+        "Sources stale, failing or never fetched": [
             f"- `{h['id']}`: {h['health']}, last success {str(h['last_success_at'] or 'never')[:10]}"
             for h in health
             if h["health"] != "ok"

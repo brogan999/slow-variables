@@ -56,7 +56,7 @@ export type Observation = Record<string, string | number | boolean | null> & { i
 export type Source = {
   id: string; name: string; org: string; url: string; kind: string; default_tier: number; cadence: string; lens: string;
   license: string | null; attribution: string | null; last_success_at: string | null; last_error: string | null;
-  items_found: number; runs: number; people: string[]; health: "ok" | "stale" | "never";
+  items_found: number; runs: number; people: string[]; health: "ok" | "stale" | "failing" | "never";
 };
 
 function read<T>(rel: string): T {
