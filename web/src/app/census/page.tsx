@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArticleLayout, MarginPanel } from "@/components/ArticleLayout";
+import { Figure } from "@/components/Figure";
 import { PageHeader } from "@/components/PageHeader";
 import { census, censusRollup, type CensusIndex, type CensusRollup } from "@/lib/data";
 import { fmt } from "@/lib/format";
@@ -154,6 +155,28 @@ export default function CensusPage() {
           <p>{c.prose.rule}</p>
           <p>{c.prose.agreed}</p>
         </div>
+
+        {c.figure ? (
+          <Figure title="Knowledge payroll that passes the hand-over screen, by who judges it" note={`of ${usd(h.payroll)} scored · version ${c.version}`}
+            foot={<p>The site&apos;s rule counts a task when two of the three models pass it. Each model alone would pass a different amount, which is why the part all three pass is shown beside every total.</p>}>
+            <div className="flex flex-col gap-2.5">
+              {c.figure.bars.map((b) => (
+                <div key={b.id} className="grid grid-cols-1 gap-1 md:grid-cols-[16rem_1fr] md:items-center md:gap-3">
+                  <span className={`text-sm ${b.id === "rule" ? "font-semibold text-ink" : "text-ink-2"}`}>{b.label}</span>
+                  <div className="flex items-center gap-2">
+                    <div className="relative h-4 flex-1 bg-surface-2" aria-hidden>
+                      <div className={`absolute inset-y-0 left-0 ${b.id === "rule" ? "bg-ink" : b.id === "agreed3" ? "bg-s2" : "bg-s3"}`} style={{ width: `${b.width}%` }} />
+                    </div>
+                    <span className="num w-16 text-right text-sm">{usd(b.usd)}</span>
+                  </div>
+                </div>
+              ))}
+              <div className="relative mr-[4.5rem] h-5 md:ml-[16.75rem]" aria-hidden>
+                {c.figure.ticks.map((t) => <span key={t.label} className="absolute top-0 -translate-x-1/2 font-mono text-[11px] text-muted" style={{ left: `${t.left}%` }}>{t.label}</span>)}
+              </div>
+            </div>
+          </Figure>
+        ) : null}
 
         <Section id="dial" n="The rule" title={s.dial.title} lede={s.dial.lede}>
           <Rows head={["Rule", "Passes the screen", "All three pass"]} rows={c.dial} row={(d) => (

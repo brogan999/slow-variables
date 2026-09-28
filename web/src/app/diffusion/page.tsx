@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ChangelogList } from "@/components/Changelog";
-import { IndicatorCard } from "@/components/IndicatorCard";
+import { StatusChip } from "@/components/StatusChip";
 import { PageHeader } from "@/components/PageHeader";
 import { StockFlowDiagram } from "@/components/StockFlowDiagram";
 import { ThesisMonitor } from "@/components/ThesisMonitor";
@@ -20,20 +20,28 @@ export default function DiffusionPage() {
 
       <StockFlowDiagram buckets={d.buckets} valves={d.valves} sources={d.n_sources} />
 
-      {d.buckets.map((b) => (
-        <section key={b.id} id={b.id} className="border-t border-grid pt-8 scroll-mt-8">
-          <div className="eyebrow">Stage {b.order}</div>
-          <h2 className="display text-[1.75rem] md:text-[2.125rem] leading-tight mt-2"><Link href={`/buckets/${b.id}`} className="hover:underline underline-offset-4 decoration-axis">{b.name}</Link></h2>
-          <p className="mt-2 mb-6 text-ink-2 max-w-[62ch]"><span className="text-muted">What limits its speed: </span>{b.speed_limit}</p>
-          {b.indicators.length ? (
-            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-              {/* the lens is a summary: the most confident readings, then the stage page for the rest */}
-              {[...b.indicators].sort((x, y) => (y.confidence ?? 0) - (x.confidence ?? 0)).slice(0, 4).map((c) => <IndicatorCard key={c.id} c={c} obsIndex={idx} />)}
-            </div>
-          ) : <p className="text-sm text-muted">No published indicator for this stage yet.</p>}
-          {b.n_indicators > 4 ? <p className="mt-4 text-sm"><Link href={`/buckets/${b.id}`} className="underline decoration-axis underline-offset-4">All {b.n_indicators} indicators for this stage →</Link></p> : null}
-        </section>
-      ))}
+      <section aria-labelledby="stages" className="flex flex-col gap-4">
+        <h2 id="stages" className="eyebrow">The stages, one card each</h2>
+        <p className="max-w-[62ch] font-serif text-lg text-ink-2">Why it matters: a technology changes the economy only as fast as its slowest stage, so a fast first stage says little on its own.</p>
+        <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+          {d.buckets.map((b) => (
+            <article key={b.id} id={b.id} className="flex scroll-mt-8 flex-col gap-3 rounded-[4px] border border-grid bg-surface p-5">
+              <div className="eyebrow">Stage {b.order}</div>
+              <h3 className="display text-[1.375rem] leading-tight"><Link href={`/buckets/${b.id}`} className="decoration-axis underline-offset-4 hover:underline">{b.name}</Link></h3>
+              <div className="flex flex-wrap items-center gap-2 text-sm"><StatusChip status={b.status} /><span className="text-muted">{b.tally.scored} of {b.tally.published} published readings count</span></div>
+              <p className="text-[15px] text-ink-2"><span className="text-muted">What limits its speed: </span>{b.speed_limit}</p>
+              {b.indicators.length ? (
+                <ul className="flex flex-col gap-1.5 border-t border-dashed border-grid pt-3 text-sm">
+                  {[...b.indicators].sort((x, y) => (y.confidence ?? 0) - (x.confidence ?? 0)).slice(0, 3).map((c) => (
+                    <li key={c.id} className="flex flex-wrap items-center justify-between gap-2"><Link href={`/indicators/${c.id}`} className="hover:underline">{c.name}</Link><StatusChip status={c.status} /></li>
+                  ))}
+                </ul>
+              ) : <p className="text-sm text-muted">No published indicator for this stage yet.</p>}
+              <Link href={`/buckets/${b.id}`} className="mt-auto text-sm font-medium underline decoration-axis underline-offset-4 hover:decoration-ink">{b.n_indicators > 3 ? `All ${b.n_indicators} gauges for this stage →` : "The stage in full →"}</Link>
+            </article>
+          ))}
+        </div>
+      </section>
 
       <section className="border-t border-grid pt-8 flex flex-col gap-4">
         <details>

@@ -2,7 +2,6 @@ import Link from "next/link";
 import { StackPlate } from "@/components/ArgumentParts";
 import { FourPlaces } from "@/components/FourPlaces";
 import { ChangelogList } from "@/components/Changelog";
-import { IndicatorCard } from "@/components/IndicatorCard";
 import { StackChart } from "@/components/StackChart";
 import { PageHeader } from "@/components/PageHeader";
 import { StatusChip } from "@/components/StatusChip";
@@ -22,31 +21,35 @@ export default function CaptureLens() {
       <FourPlaces shifts={outlook().shifts} />
       <StackPlate />
 
-      {c.layers.map((l) => {
-        const published = l.indicators.filter((i) => i.published);
-        return (
-          <section key={l.id} id={l.id} className="border-t border-grid pt-8 scroll-mt-8">
-            <div className="eyebrow flex items-center gap-3">Layer {l.order}{l.id === "training_input" ? <Link href="/buckets/return_arrow" className="normal-case tracking-normal font-sans text-ink-2 hover:text-ink">⇄ feeds back into methods</Link> : null}</div>
-            <div className="flex flex-wrap items-center gap-3 mt-2">
-              <h2 className="display text-[1.75rem] md:text-[2.125rem] leading-tight"><Link href={`/layers/${l.id}`} className="hover:underline underline-offset-4 decoration-axis">{l.name}</Link></h2>
-              <StatusChip status={l.status} />
-            </div>
-            <p className="mt-2 mb-6 text-ink-2 max-w-[62ch]">{l.description}</p>
-            {published.length ? (
-              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-                {/* the lens is a summary: the most confident readings, then the layer page for the rest */}
-                {[...published].sort((a, b) => (b.confidence ?? 0) - (a.confidence ?? 0)).slice(0, 4).map((i) => <IndicatorCard key={i.id} c={i} obsIndex={idx} />)}
-              </div>
-            ) : l.held?.length ? (
-              <div className="text-sm text-ink-2 max-w-[62ch]">
-                <p>The site holds data for this layer but has not published a reading yet:</p>
-                <ul className="mt-2 list-disc pl-5 space-y-1">{l.held.map((h) => <li key={h.id}><span className="text-ink">{h.name}</span> ({h.n} records): {h.reason}</li>)}</ul>
-              </div>
-            ) : <p className="text-sm text-muted">No data for this layer yet.</p>}
-            {l.n_published > 4 ? <p className="mt-4 text-sm"><Link href={`/layers/${l.id}`} className="underline decoration-axis underline-offset-4">All {l.n_published} indicators on this layer →</Link></p> : null}
-          </section>
-        );
-      })}
+      <section aria-labelledby="layers" className="flex flex-col gap-4">
+        <h2 id="layers" className="eyebrow">The layers, from the chips up</h2>
+        <p className="max-w-[62ch] font-serif text-lg text-ink-2">Why it matters: whichever layer holds the scarce part keeps the profit, and the four places above say where that is moving.</p>
+        <ol className="flex flex-col border-t border-grid">
+          {[...c.layers].sort((a, b) => a.order - b.order).map((l) => {
+            const published = [...l.indicators.filter((i) => i.published)].sort((a, b) => (b.confidence ?? 0) - (a.confidence ?? 0));
+            return (
+              <li key={l.id} id={l.id} className="grid scroll-mt-8 gap-3 border-b border-grid py-5 md:grid-cols-[18rem_1fr] md:gap-6">
+                <div className="flex flex-col items-start gap-2">
+                  <div className="eyebrow flex items-center gap-3">Layer {l.order}{l.id === "training_input" ? <Link href="/buckets/return_arrow" className="normal-case tracking-normal font-sans text-ink-2 hover:text-ink">⇄ feeds back into methods</Link> : null}</div>
+                  <h3 className="display text-[1.375rem] leading-tight"><Link href={`/layers/${l.id}`} className="decoration-axis underline-offset-4 hover:underline">{l.name}</Link></h3>
+                  <StatusChip status={l.status} />
+                </div>
+                <div className="flex flex-col gap-2 text-[15px]">
+                  <p className="text-ink-2">{l.description}</p>
+                  {published.length ? (
+                    <ul className="flex flex-col gap-1.5 text-sm">
+                      {published.slice(0, 3).map((i) => <li key={i.id} className="flex flex-wrap items-center justify-between gap-2"><Link href={`/indicators/${i.id}`} className="hover:underline">{i.name}</Link><StatusChip status={i.status} /></li>)}
+                    </ul>
+                  ) : l.held?.length ? (
+                    <p className="text-sm text-ink-2">Held, not yet published: {l.held.map((h, k) => <span key={h.id}>{k ? "; " : ""}<span className="text-ink">{h.name}</span> ({h.reason})</span>)}</p>
+                  ) : <p className="text-sm text-muted">No data for this layer yet.</p>}
+                  <Link href={`/layers/${l.id}`} className="self-start text-sm font-medium underline decoration-axis underline-offset-4 hover:decoration-ink">{l.n_published > 3 ? `All ${l.n_published} gauges on this layer →` : "The layer in full →"}</Link>
+                </div>
+              </li>
+            );
+          })}
+        </ol>
+      </section>
 
       <section className="border-t border-grid pt-8 flex flex-col gap-4">
         <StackChart stack={c.margin_stack} title="The all-filed check: operating income, five segments" what="operating income"
