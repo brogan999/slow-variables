@@ -59,13 +59,13 @@ def fetch(sid: str, entity: str, url: str, form: str, filed: str) -> dict:
 def main(args: list[str]) -> None:
     if not args or len(args) % 5:
         raise SystemExit(__doc__)
-    spec = yaml.safe_load(SEED.read_text()) if SEED.exists() else {}
-    have = {s["id"]: s for s in spec.get("sources") or []}
-    for i in range(0, len(args), 5):
-        rec = fetch(*args[i : i + 5])
-        have[rec["id"]] = rec
-    spec["sources"] = sorted(have.values(), key=lambda s: s["id"])
-    SEED.write_text(yaml.safe_dump(spec, sort_keys=False, allow_unicode=True, width=120))
+    text = SEED.read_text() if SEED.exists() else "companies: []\nsources:\n"
+    have = {s["id"] for s in (yaml.safe_load(text) or {}).get("sources") or []}
+    new = [fetch(*args[i : i + 5]) for i in range(0, len(args), 5)]
+    if again := [r["id"] for r in new if r["id"] in have]:
+        raise SystemExit(f"already recorded: {', '.join(again)}; a source is fetched once")
+    # appended as text, so the hand-edited profiles above keep their layout
+    SEED.write_text(text.rstrip("\n") + "\n" + yaml.safe_dump(new, sort_keys=False, allow_unicode=True, width=10000))
 
 
 if __name__ == "__main__":
