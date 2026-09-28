@@ -312,9 +312,9 @@
   {
    "attribution": "author",
    "due": null,
-   "expected": null,
-   "fact": null,
-   "falsifier": "That spending falling once each firm counted a year ago has reported again; the hand-kept tally of disclosed deals is too thin to test it yet.",
+   "expected": "holding",
+   "fact": "data_seller_growth",
+   "falsifier": "That spending falling once each firm counted a year ago has reported again.",
    "folio": "products",
    "grace_days": null,
    "holders": [
@@ -328,8 +328,11 @@
    "rival_until": null,
    "row": "post_training",
    "stage": "methods",
-   "state": "untestable",
-   "test": null,
+   "state": "holding",
+   "test": {
+    "fact": "data_seller_growth",
+    "gt": 0
+   },
    "text": "Labs spend more each year with the firms that sell practice tasks, graders and expert data."
   },
   {
@@ -2087,6 +2090,20 @@
    ],
    "unit": "share",
    "value": 0.726231349273251
+  },
+  "data_seller_growth": {
+   "as_of": "2026-07-09",
+   "derived_id": "e71464385f44c96a",
+   "holds": null,
+   "href": "/query#data_seller_panel_growth",
+   "obs_ids": [
+    "43fac39f9068e55f",
+    "7e52abbefaf891bd",
+    "d92648565e549eab",
+    "f310f75b5f4db517"
+   ],
+   "unit": "share",
+   "value": 4.454545454545454
   },
   "evals_ledger": {
    "as_of": "2026-02-02",
@@ -5434,8 +5451,8 @@
  "tally": {
   "both": 11,
   "failing": 1,
-  "holding": 6,
-  "untestable": 63
+  "holding": 7,
+  "untestable": 62
  },
  "tests": {
   "bet_fast_side": {
@@ -5456,6 +5473,10 @@
   },
   "compute_no_crash": {
    "line": -0.5,
+   "unit": "share"
+  },
+  "data_next": {
+   "line": 0,
    "unit": "share"
   },
   "firms_normal": {
