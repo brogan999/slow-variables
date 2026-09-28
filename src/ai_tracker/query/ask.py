@@ -660,7 +660,7 @@ class Tools:
                             "cite": f"derived:{g['reading']['derived_id']}",
                         }
                         for g in i["gauges"]
-                        if g.get("reading") and g["reading"].get("derived_id")
+                        if g.get("reading") and g["reading"].get("derived_id") and g.get("points") is not None  # only readings the score used
                     ],
                 }
                 for i in rows
