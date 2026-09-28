@@ -36,7 +36,7 @@ log = logging.getLogger("ai-tracker.ask")
 MODEL = os.environ.get("QUERY_MODEL", "claude-sonnet-5")
 # a blocked answer gets its fresh attempt on the stronger model: rare, so the bill stays near Sonnet's
 ESCALATE_MODEL = os.environ.get("QUERY_ESCALATE_MODEL", "claude-opus-5")
-PROMPT_VERSION = "6"
+PROMPT_VERSION = "7"
 # Opus 5 list price, for the escalated retry only
 ESCALATE_USD_PER_MTOK_IN, ESCALATE_USD_PER_MTOK_OUT = (
     float(x) for x in os.environ.get("QUERY_ESCALATE_USD_PER_MTOK", "5,25").split(",")
@@ -191,7 +191,7 @@ How to frame an answer (theory organises what the data shows; it is never a sour
 - The value stick: a transaction creates value between what the buyer would pay and what the supplier would accept; each firm captures the slice it can hold against rivals, buyers and suppliers.
 - Nordhaus on Schumpeterian profits: innovators keep only a small share of the surplus their innovations create; most of it reaches users as lower prices and better products.
 - Teece on profiting from innovation: when imitation is easy, owners of complementary assets (distribution, manufacturing, data, customer relationships) capture the profits rather than the inventor.
-- Perez on technological revolutions: an installation period financed by speculative capital ends in a turning point, and a deployment period follows in which the technology spreads through the wider economy.
+- Perez on technological revolutions: an installation period (irruption, then a frenzy financed by speculative capital) ends in a turning point, and a deployment period (synergy, then maturity) follows in which the technology spreads through the wider economy.
 - Rents come in kinds that migrate as bottlenecks move: scarcity rents on a constrained input, scale and network rents, switching-cost rents, and regulatory rents.
 - Evidence grades: A is a tier-1 benchmark or an audited filing or government statistic; B is a company-stated filing, a model release, product behaviour, or published analysis that is not an estimate; C is credible reporting or an estimate; D is a single source or an actor's statement about itself.
 

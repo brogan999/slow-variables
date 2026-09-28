@@ -46,7 +46,7 @@ export const WITHHELD_WORDS: Record<string, string> = {
   gauge_unsound: "the gauge available does not measure what it claims",
   stale_or_thin: "its readings are too old or too few today",
 };
-export const PHASE_WORDS: Record<string, string> = { installation: "installation", turning_point: "turning point", deployment: "deployment", untestable: "untestable" };
+export const PHASE_WORDS: Record<string, string> = { irruption: "irruption", frenzy: "frenzy", installation: "installation", turning_point: "turning point", synergy: "synergy", maturity: "maturity", deployment: "deployment", untestable: "untestable" };
 
 // Who wrote a status change, as a reader should see it: the model's authorship stays visible, in plain words.
 const AUTHORS: Record<string, string> = {
