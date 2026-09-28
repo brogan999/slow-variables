@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArticleLayout } from "@/components/ArticleLayout";
-import { Exits, ReadingMargin, StackPlate } from "@/components/ArgumentParts";
+import { Exits, ReadingMargin, SlowVariables, StackPlate } from "@/components/ArgumentParts";
 import { Folios, Inline, parseEssay } from "@/components/Essay";
 import { FourClocks } from "@/components/FourClocks";
 import { PerezCurve } from "@/components/PerezCurve";
@@ -26,6 +26,11 @@ export default function ArgumentPage() {
       margin={<ReadingMargin doc={doc} />}
     >
       <Folios folios={folios} facts={doc.facts} plates={plates} />
+      <section id="slow-variables" className="mt-16 scroll-mt-8">
+        <h2 className="eyebrow mb-2">The five slow variables</h2>
+        <p className="font-serif text-lg text-ink-2 leading-relaxed mb-6 max-w-[60ch]">Five numbers that change slowly and decide what the fast ones amount to. Each links to its sources, its history and the rule that grades it.</p>
+        <SlowVariables doc={doc} cards={cards} />
+      </section>
       <section id="exits" className="mt-16 scroll-mt-8">
         <h2 className="eyebrow mb-2">The list, re-tested every night</h2>
         <Exits doc={doc} />
