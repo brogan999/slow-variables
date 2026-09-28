@@ -42,7 +42,7 @@ function Inline({ text, nums }: { text: string; nums: Map<string, [Cite, number]
   });
 }
 
-export function AnswerBody({ text, cites }: { text: string; cites: Cite[] }) {
+export function AnswerBody({ text, cites, className = "text-[1rem] leading-[1.65]" }: { text: string; cites: Cite[]; className?: string }) {
   const nums = new Map(citeOrder(text, cites).map((c, i) => [`[${c.kind}:${c.id}]`, [c, i + 1] as [Cite, number]]));
   const blocks: ({ t: "p" | "h"; s: string } | { t: "ul"; s: string[] })[] = [];
   for (const line of text.split("\n")) {
@@ -55,7 +55,7 @@ export function AnswerBody({ text, cites }: { text: string; cites: Cite[] }) {
     if (last?.t === "p" && last.s) last.s += " " + l; else blocks.push({ t: "p", s: l });
   }
   return (
-    <div className="flex flex-col gap-3 text-[1rem] leading-[1.65] text-ink">
+    <div className={`flex flex-col gap-3 text-ink ${className}`}>
       {blocks.map((b, i) => b.t === "ul"
         ? <ul key={i} className="list-disc pl-5 flex flex-col gap-1.5 marker:text-muted">{b.s.map((x, j) => <li key={j}><Inline text={x} nums={nums} /></li>)}</ul>
         : b.t === "h" ? <h3 key={i} className="font-medium text-ink mt-1">{<Inline text={b.s} nums={nums} />}</h3>
