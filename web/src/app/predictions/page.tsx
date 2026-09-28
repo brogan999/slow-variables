@@ -4,6 +4,7 @@ import { ChangelogList } from "@/components/Changelog";
 import { EvidenceLog } from "@/components/EvidenceLog";
 import { Inline } from "@/components/Essay";
 import { Fact } from "@/components/Fact";
+import { PageHeader } from "@/components/PageHeader";
 import { StatusChip, WordChip } from "@/components/StatusChip";
 import { type BoardRow, board, index, obsIndex, outlook, predictions } from "@/lib/data";
 
@@ -16,7 +17,7 @@ function Rows({ rows, label }: { rows: BoardRow[]; label: Record<string, string>
   return (
     <ul>
       {rows.map((r) => (
-        <li key={`${r.kind}-${r.id}`} className="border-t border-grid py-3 grid gap-x-4 gap-y-1.5 sm:grid-cols-[12rem_minmax(0,1fr)]">
+        <li key={`${r.kind}-${r.id}`} data-word={r.word} className="border-t border-grid py-3 grid gap-x-4 gap-y-1.5 sm:grid-cols-[12rem_minmax(0,1fr)]">
           <div><WordChip word={r.word} label={label[r.word]} /></div>
           <div className="min-w-0">
             <p className="text-[15px] leading-snug text-ink"><Inline text={r.line} facts={o.facts} tests={o.tests} /></p>
@@ -36,8 +37,11 @@ function Board() {
   const b = board();
   const label = Object.fromEntries(b.words.map((w) => [w.id, w.label]));
   return (
-    <div className="flex flex-col gap-8">
-      <div role="group" className="flex flex-wrap items-center gap-2" aria-label="Tonight's tally">
+    <div className="board-filter flex flex-col gap-8">
+      <div className="flex h-3 w-full max-w-3xl gap-0.5" aria-hidden>
+        {b.words.map((w) => <span key={w.id} className={`h-full ${w.id === "happening" ? "bg-ink" : w.id === "not_happening" ? "bg-slow" : w.id === "too_early" ? "bg-surface-2 ring-1 ring-inset ring-axis" : "bg-s3"}`} style={{ flexGrow: b.tally[w.id] }} />)}
+      </div>
+      <div role="group" className="-mt-5 flex flex-wrap items-center gap-2" aria-label="Tonight's tally">
         {b.words.map((w) => <span key={w.id} className="inline-flex items-center gap-1.5"><WordChip word={w.id} label={w.label} /><span className="num text-sm text-ink-2">{b.tally[w.id]}</span></span>)}
       </div>
       <details className="text-sm -mt-5">
@@ -47,6 +51,11 @@ function Board() {
         </dl>
         <p className="mt-2 text-ink-2">Each family keeps its own vocabulary on its own page; the board maps it: {b.mapping.map((m) => `${m.kind} ${m.state.replaceAll("_", " ")} → ${b.words.find((w) => w.id === m.word)?.label.toLowerCase()}`).join("; ")}.</p>
       </details>
+      <fieldset className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
+        <legend className="eyebrow mb-2">Show</legend>
+        <label className="inline-flex items-center gap-1.5"><input type="radio" name="board-word" id="bw-all" defaultChecked className="accent-[var(--ink)]" />every forecast</label>
+        {b.words.filter((w) => w.id !== "too_early").map((w) => <label key={w.id} className="inline-flex items-center gap-1.5"><input type="radio" name="board-word" id={`bw-${w.id}`} className="accent-[var(--ink)]" />{w.label.toLowerCase()} only</label>)}
+      </fieldset>
       {b.folios.map((f) => (
         <section key={f.id} aria-labelledby={`folio-${f.id}`}>
           <h2 id={`folio-${f.id}`} className="display text-2xl leading-tight">{f.label}</h2>
@@ -83,15 +92,14 @@ function Board() {
 const LEDGERS: Record<string, string> = { nk: "Narayanan & Kapoor", lab: "Lab timelines", ai2027: "AI 2027", capture: "Capture theses", singularity: "Timelines to the singularity" };
 
 export default function PredictionsPage() {
+  const b = board();
   const rows = predictions();
   const idx = obsIndex();
   const { indicators } = index();
   return (
     <div className="flex flex-col gap-6">
-      <div>
-        <h1 className="display text-[2.5rem] md:text-[3.5rem] leading-[1.02] max-w-[24ch]">Predictions</h1>
-        <p className="text-lg leading-snug text-ink-2 max-w-[60ch]">Every prediction on this site in one place: what the labs, named writers and this site expect, each read against the latest data and given one word. Tap &ldquo;details&rdquo; for the test, the reading and the source.</p>
-      </div>
+      <PageHeader eyebrow="Who is right so far · every forecast on the site" title="Which forecasts are coming true, and which are not"
+        lede={<>{b.n ? <><span className="num">{b.n}</span> forecasts from the labs, named writers and this site, each read against the latest data and given one word. </> : "Every forecast from the labs, named writers and this site, each read against the latest data and given one word. "}Tap &ldquo;details&rdquo; for the test, the reading and the source.</>} />
       <Board />
       <div>
         <h2 className="display text-[1.75rem] leading-tight mt-4">The dated claims in their own words</h2>
@@ -139,7 +147,8 @@ export default function PredictionsPage() {
         );
         return ours ? (
           <details key={ledger} id="singularity-ledger" className="group">
-            <summary className="cursor-pointer">{head} <span className="text-sm text-ink-2">— every forecast placed on <Link href="/singularity" className="underline decoration-grid underline-offset-4">the singularity timeline</Link>; open to read them all</span></summary>
+            <summary className="cursor-pointer">{head} <span className="text-sm text-ink-2">— open to read them all</span></summary>
+            <p className="mt-2 text-sm text-ink-2">Every one is placed on <Link href="/singularity" className="underline decoration-grid underline-offset-4">the singularity timeline</Link>.</p>
             <div className="mt-3">{body}</div>
           </details>
         ) : (
