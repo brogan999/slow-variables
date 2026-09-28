@@ -32,8 +32,8 @@ def _zip(files: dict[str, str]) -> bytes:
 def test_bench_splits_eci_by_accessibility_and_reads_external_scores():
     z = _zip(
         {
-            "epoch_capabilities_index/eci_scores.csv": "Model,Display name,eci,eci_ci_low,eci_ci_high,date,Organization,Accessibility group\n"
-            "gpt-6-astra,GPT-6 Astra,166.57,160,170,2026-09-03,OpenAI,Closed weights\nkimi-k3,Kimi K3,150.1,145,155,2026-05-01,Moonshot,Open weights\n",
+            "epoch_capabilities_index/eci_scores.csv": "Model,Display name,eci,eci_ci_low,eci_ci_high,date,Organization,Accessibility group,Country (of organization)\n"
+            "gpt-6-astra,GPT-6 Astra,166.57,160,170,2026-09-03,OpenAI,Closed weights,United States of America\nkimi-k3,Kimi K3,150.1,145,155,2026-05-01,Moonshot,Open weights,China\n",
             "arc_agi_2_external.csv": "Model version,Score,Release date,Organization,Name,Cost per task,id\ngpt-6-astra_max,0.95,2026-09-03,OpenAI,GPT-6 Astra,,recA1\n",
             "cl_bench_external.csv": "Model version,Overall,Release date,Organization,Name,id\nMiniMax-M2.5,0.114,2026-02-12,MiniMax,MiniMax M2.5,recC1\n",
         }
@@ -52,10 +52,12 @@ def test_bench_splits_eci_by_accessibility_and_reads_external_scores():
         and rows["epoch_bench.gpt_6_astra_max_reca1.arc_agi_2.pt"].tier == 6
     )
     assert rows["epoch_bench.minimax_m2_5_recc1.cl_bench.pt"].value_numeric == 0.114
+    assert rows["epoch_bench.kimi_k3.country.pt"].value_text == "China"
+    assert rows["epoch_bench.kimi_k3.country.pt"].as_of_date == date(2026, 5, 1)
 
 
 ECI = "epoch_capabilities_index/eci_scores.csv"
-ECI_ROWS = "Model,Display name,eci,eci_ci_low,eci_ci_high,date,Organization,Accessibility group\nkimi-k3,Kimi K3,150.1,145,155,2026-05-01,Moonshot,Open weights\n"
+ECI_ROWS = "Model,Display name,eci,eci_ci_low,eci_ci_high,date,Organization,Accessibility group,Country (of organization)\nkimi-k3,Kimi K3,150.1,145,155,2026-05-01,Moonshot,Open weights,China\n"
 ARC_HEAD = "Model version,Score,Release date,Organization,Name,Cost per task,id\n"
 CL = "Model version,Overall,Release date,Organization,Name,id\nMiniMax-M2.5,0.114,2026-02-12,MiniMax,MiniMax M2.5,recC1\n"
 
@@ -80,7 +82,7 @@ def test_a_missing_or_reshaped_test_file_is_an_error_and_the_rest_still_read():
     c = EpochBench()
     z = _zip({ECI: ECI_ROWS, "arc_agi_2_external.csv": "Model version,Score,Release date\nx,0.5,2026-01-01\n"})
     keys = {r.series_key for r in c.extract([_item(z)])}
-    assert keys == {"epoch_bench.kimi_k3.eci_open.pt"}
+    assert keys == {"epoch_bench.kimi_k3.eci_open.pt", "epoch_bench.kimi_k3.country.pt"}
     assert any("id" in e for e in c.errors) and any("cl_bench_external.csv" in e for e in c.errors)
 
 

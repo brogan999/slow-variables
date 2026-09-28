@@ -1248,6 +1248,56 @@ metrics:
         GROUP BY l.subject, l.d, l.v, l.id)
       SELECT max(d) AS as_of_date, sum(v) / sum(ev) - 1 AS value, list_sort(list_concat(list(id), list(eid))) AS obs_ids
       FROM pair HAVING count(*) >= 2
+  china_eci_gap:
+    description: The best Epoch Capabilities Index score by a model from a Chinese organisation, minus the best score by any model, each the best to date; a negative value means a lab outside China leads.
+    rationale: Tests the claim that Chinese labs do not take the frontier lead; the gap reaching zero is the claim failing.
+    grain: [as_of_date]
+    unit: index
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["epoch_bench.*.eci_closed.pt", "epoch_bench.*.eci_open.pt", "epoch_bench.*.eci_other.pt", "epoch_bench.*.country.pt"]
+    caveats: Country is Epoch's coding of the organisation; about seventeen models have none and count as neither side. Scores are placed at release dates, so a gap can change when Epoch scores an older model late. Cites the leader's score, the best Chinese score and that model's country row.
+    sql: |
+      WITH e AS (
+        SELECT subject, as_of_date AS d, value_numeric AS v, value_low AS lo, value_high AS hi, id,
+               nullif(trim(split_part(json_extract_string(raw_snippet, '$.Organization'), ',', 1)), '') AS org
+        FROM observations WHERE series_key LIKE 'epoch_bench.%.eci\_%.pt' ESCAPE '\' AND value_numeric IS NOT NULL),
+      c AS (SELECT subject, value_text AS country, id AS cid FROM observations WHERE series_key LIKE 'epoch_bench.%.country.pt'),
+      ec AS (SELECT e.*, c.country, c.cid FROM e LEFT JOIN c USING (subject)),
+      dates AS (SELECT DISTINCT d FROM e),
+      best AS (
+        SELECT dt.d, max(ec.v) AS all_v, arg_max(ec.id, ec.v) AS all_id,
+               max(ec.v) FILTER (WHERE ec.country = 'China') AS cn_v,
+               arg_max(ec.id, ec.v) FILTER (WHERE ec.country = 'China') AS cn_id,
+               arg_max(ec.cid, ec.v) FILTER (WHERE ec.country = 'China') AS cn_cid
+        FROM dates dt JOIN ec ON ec.d <= dt.d GROUP BY dt.d)
+      SELECT d AS as_of_date, cn_v - all_v AS value, [all_id, cn_id, cn_cid] AS obs_ids FROM best WHERE cn_v IS NOT NULL
+      QUALIFY value IS DISTINCT FROM lag(value) OVER (ORDER BY d)
+  frontier_lab_count:
+    description: How many organisations have a model, released in the trailing twelve months, whose Epoch Capabilities Index interval reaches the lower bound of the leader's (the best model to date that Epoch gives an interval for).
+    rationale: Tests the claim that only a handful of labs stay at the frontier, counting labs statistically level with the leader.
+    grain: [as_of_date]
+    unit: count
+    lead_lag: coincident
+    formula_version: 1
+    inputs: ["epoch_bench.*.eci_closed.pt", "epoch_bench.*.eci_open.pt", "epoch_bench.*.eci_other.pt"]
+    caveats: Driven by how wide the leader's interval is and how new the leader is; a fresh leader with a narrow interval reads one. Organisation is the first one Epoch lists; models with no organisation are left out.
+    sql: |
+      WITH e AS (
+        SELECT as_of_date AS d, value_numeric AS v, value_low AS lo, coalesce(value_high, value_numeric) AS hi, id,
+               nullif(trim(split_part(json_extract_string(raw_snippet, '$.Organization'), ',', 1)), '') AS org
+        FROM observations WHERE series_key LIKE 'epoch_bench.%.eci\_%.pt' ESCAPE '\' AND value_numeric IS NOT NULL),
+      dates AS (SELECT DISTINCT d FROM e),
+      lead AS (  -- the best model to date that Epoch gives an interval for
+        SELECT dt.d, arg_max(e.lo, e.v) AS floor, arg_max(e.id, e.v) AS lead_id
+        FROM dates dt JOIN e ON e.d <= dt.d AND e.lo IS NOT NULL GROUP BY dt.d),
+      near AS (  -- each lab's best model in the trailing year whose interval reaches the leader's
+        SELECT l.d, e.org, arg_max(e.id, e.v) AS id, any_value(l.lead_id) AS lead_id
+        FROM lead l JOIN e ON e.d <= l.d AND e.d > l.d - INTERVAL 365 DAY AND e.hi >= l.floor AND e.org IS NOT NULL
+        GROUP BY l.d, e.org)
+      SELECT d AS as_of_date, count(*)::DOUBLE AS value, list_sort(list_distinct(list_append(list(id), any_value(lead_id)))) AS obs_ids
+      FROM near GROUP BY d
+      QUALIFY value IS DISTINCT FROM lag(value) OVER (ORDER BY d)
   small_firm_employment_share:
     description: Share of an industry's employment in firms with fewer than 500 employees, per four-digit NAICS industry (Census Statistics of US Businesses).
     rationale: How fragmented an industry is. A rollup needs many owner-run firms to buy; an industry already held by a few large firms has little to consolidate.
