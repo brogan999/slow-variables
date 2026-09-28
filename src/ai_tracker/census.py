@@ -154,7 +154,7 @@ def _figure(h: dict[str, Any], val: dict[str, Any], scorers: list[str]) -> dict[
     ax = axis([v for _, v, _ in bars], "USD", zero=True)
     return {
         "ticks": [{"left": round(100 - t["y"], 2), "label": t["label"]} for t in ax["ticks"]],
-        "bars": [{"label": lab, "value": v, "id": i, "width": round(100 - y(v, ax), 2)} for lab, v, i in bars],
+        "bars": [{"label": lab, "usd": v, "id": i, "width": round(100 - y(v, ax), 2)} for lab, v, i in bars],
     }
 
 
@@ -267,7 +267,7 @@ def build(spec: dict[str, Any], fetched: dict[str, Any]) -> tuple[dict[str, Any]
             "modelled_saving": h["modelled_saving_usd"],  # modelled: the page labels it so, and Ask cannot cite it
             "ref": ref(spec, "manifest.json", "headline"),
         },
-        "figure": _figure(h, val, scorers),
+        "figure": {**_figure(h, val, scorers), "ref": ref(spec, "manifest.json", "headline")},
         "dial": [
             {"rule": x["rule"], "passes": x["freed"], "agreed3": x["agreed3"], "alone": x["alone"], "alone_rest": x["alone_rest"], "headline": x["headline"]}
             for x in val["dial"]

@@ -167,7 +167,7 @@ export default function CensusPage() {
                     <div className="relative h-4 flex-1 bg-surface-2" aria-hidden>
                       <div className={`absolute inset-y-0 left-0 ${b.id === "rule" ? "bg-ink" : b.id === "agreed3" ? "bg-s2" : "bg-s3"}`} style={{ width: `${b.width}%` }} />
                     </div>
-                    <span className="num w-16 text-right text-sm">{usd(b.value)}</span>
+                    <span className="num w-16 text-right text-sm">{usd(b.usd)}</span>
                   </div>
                 </div>
               ))}
