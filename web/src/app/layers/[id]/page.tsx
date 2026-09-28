@@ -27,7 +27,7 @@ export default async function LayerPage({ params }: { params: Promise<{ id: stri
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <p className="text-xs text-muted"><Link href="/capture" className="hover:text-ink">Capture</Link> / layer {l.order}</p>
+        <p className="text-xs text-muted"><Link href="/capture" className="hover:text-ink">Capture</Link> / layer {l.order}{l.economics?.length ? <> · <Link href="/value-chain" className="hover:text-ink">The value chain</Link></> : null}</p>
         <h1 className="display text-[2.5rem] md:text-[3.5rem] leading-[1.02] max-w-[24ch]">{l.name}</h1>
         <p className="mt-1 text-sm text-ink-2">{l.description}{l.dependency_tier ? ` Dependency tier ${l.dependency_tier}.` : ""}</p>
         {l.commoditisation ? (
@@ -51,11 +51,11 @@ export default async function LayerPage({ params }: { params: Promise<{ id: stri
             <h2 className="display text-2xl leading-tight mb-2 mt-2">How the economics move</h2>
             <p className="text-sm text-ink-2 max-w-[66ch]">The site&apos;s judgement of each part of this layer, read against the readings below and the theory on the <Link href="/value-chain" className="underline decoration-grid underline-offset-4">value chain</Link> page: what is getting cheap and interchangeable, what stays scarce, and what would prove it wrong.</p>
           </div>
+          <PowersGlossary powers={valueChain().powers} />
           {l.economics.map((u) => <EconomicsUnitView key={u.id} u={u} />)}
           {l.profiles?.length ? (
             <>
               <h3 className="display text-xl leading-tight mt-4">The companies that matter here</h3>
-              <PowersGlossary powers={valueChain().powers} />
               <div className="flex flex-col gap-4 max-w-[52rem]">{l.profiles.map((c) => <ProfileCard key={c.entity} c={c} />)}</div>
             </>
           ) : null}

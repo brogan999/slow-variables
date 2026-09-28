@@ -33,7 +33,7 @@ def test_a_broken_seed_names_each_problem():
     errs = vc.problems(spec, {"positions": [unit]}, layers, subs, inputs, ents, futures.rubric())
     for needle in ("not in the value folio", "unknown layer nowhere", "unknown sublayer ghost", "needs a direction",
                    "unknown power charm", "unknown bottleneck unobtanium", "commoditising types 40", "cites unknown source nope",
-                   "source s1 has no fetch record", "acme is not an entity", "role of club or candidate", "unknown unit u9",
+                   "source s1 has no fetch record", "source s1 names no known filer", "acme is not an entity", "role of club or candidate", "unknown unit u9",
                    "customer concentration", "unknown power magic", "unknown input vibes", "rent_kind is not one of",
                    "types 3", "cites unknown source missing", "does not say who judged it"):
         assert any(needle in e for e in errs), needle

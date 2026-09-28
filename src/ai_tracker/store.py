@@ -2053,7 +2053,7 @@ class Store:
             c["name"] = names.get(c["entity"], c["entity"])
             c["depends_on"] = [{**b, "name": inputs.get(b["id"], b["id"])} for b in c["depends_on"]]
             c["source_links"] = [
-                {"id": i, "url": srcs[i]["url"], "label": f"{srcs[i]['form']}, {srcs[i].get('filed') or srcs[i].get('period_end')}"}
+                {"id": i, "url": srcs[i]["url"], "label": _source_label(names.get(srcs[i].get("entity"), c["name"]), srcs[i])}
                 for i in sorted({i for ids in c["sources"].values() for i in ids}) if i in srcs
             ]
         doc["powers"] = value_chain.POWER_GLOSS
@@ -2495,3 +2495,14 @@ def _jsonable(d: dict[str, Any]) -> dict[str, Any]:
 
 def _write(p: Path, doc: Any) -> None:
     p.write_text(json.dumps(doc, sort_keys=True, indent=1, default=str) + "\n")
+
+
+FORM_WORDS = {"10-K": "annual report (10-K)", "20-F": "annual report (20-F)", "business-report": "business report",
+              "company-post": "results post"}
+
+
+def _source_label(name: str, src: dict[str, Any]) -> str:
+    """A filing named the way a reader would: "Micron annual report (10-K), 3 Oct 2025"."""
+    d = src.get("filed") or src.get("period_end")
+    when = f"{d.day} {d:%b %Y}" if src.get("filed") else f"year to {d.day} {d:%b %Y}"
+    return f"{name} {FORM_WORDS.get(src['form'], src['form'])}, {when}"

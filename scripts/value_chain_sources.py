@@ -1,6 +1,6 @@
 """Fetch the primary sources behind the value-chain company profiles (seed/value_chain.yaml).
 
-    uv run python scripts/value_chain_sources.py <id> <url> <form> <filed YYYY-MM-DD> [<id> <url> <form> <filed> ...]
+    uv run python scripts/value_chain_sources.py <id> <entity> <url> <form> <filed YYYY-MM-DD> [...]
 
 Each source is fetched once, with the site's User-Agent and only where robots.txt allows. Its fetch record
 (retrieved_at, http_status, content_hash) is merged into the seed's `sources:` block. Its text, with any sentence
@@ -40,11 +40,11 @@ def text_of(body: bytes, url: str) -> str:
     return unescape(re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", html)))
 
 
-def fetch(sid: str, url: str, form: str, filed: str) -> dict:
+def fetch(sid: str, entity: str, url: str, form: str, filed: str) -> dict:
     if not robots_ok(url):
         raise SystemExit(f"{sid}: robots.txt disallows {url}")
     r = httpx.get(url, headers={"User-Agent": ua()}, follow_redirects=True, timeout=120)
-    rec = {"id": sid, "url": url, "form": form, "filed": date.fromisoformat(filed), "retrieved_at": date.today(), "http_status": r.status_code}
+    rec = {"id": sid, "entity": entity, "url": url, "form": form, "filed": date.fromisoformat(filed), "retrieved_at": date.today(), "http_status": r.status_code}
     if r.status_code == 200:
         rec["content_hash"] = hashlib.sha256(r.content).hexdigest()
         clean, flagged = scrub(text_of(r.content, url))
@@ -57,12 +57,12 @@ def fetch(sid: str, url: str, form: str, filed: str) -> dict:
 
 
 def main(args: list[str]) -> None:
-    if not args or len(args) % 4:
+    if not args or len(args) % 5:
         raise SystemExit(__doc__)
     spec = yaml.safe_load(SEED.read_text()) if SEED.exists() else {}
     have = {s["id"]: s for s in spec.get("sources") or []}
-    for i in range(0, len(args), 4):
-        rec = fetch(*args[i : i + 4])
+    for i in range(0, len(args), 5):
+        rec = fetch(*args[i : i + 5])
         have[rec["id"]] = rec
     spec["sources"] = sorted(have.values(), key=lambda s: s["id"])
     SEED.write_text(yaml.safe_dump(spec, sort_keys=False, allow_unicode=True, width=120))

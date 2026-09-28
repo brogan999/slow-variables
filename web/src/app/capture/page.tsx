@@ -17,6 +17,7 @@ export default function CaptureLens() {
     <div className="flex flex-col gap-16">
       <PageHeader eyebrow="Who profits · the capture lens" title={argument().headlines.capture.claim}
         lede="The AI industry is a stack of layers, from chips and data centres at the bottom to the apps people use at the top. This page follows where the profit settles, layer by layer. Gross profit is what is left of revenue after paying to deliver the product; where a layer publishes none, it is left out rather than guessed." />
+      <p className="-mt-10 text-ink-2 max-w-[62ch]">Where each layer&apos;s economics are heading, what is getting cheap and what stays scarce, is on <Link href="/value-chain" className="underline decoration-axis underline-offset-4">the value chain</Link>.</p>
 
       <StackPlate />
 
