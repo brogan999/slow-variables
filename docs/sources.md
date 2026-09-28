@@ -27,10 +27,12 @@
 | baseten_blog | Baseten blog and research posts | Baseten | html | 7 | irregular | Baseten; short quotation | Baseten |
 | baseten_research_watch | Baseten research (page watch) | Baseten | html | 7 | weekly | Publisher terms; change notices only | Baseten |
 | bbd | Bick–Blandin–Deming Real-Time Population Survey (via FRED) | Federal Reserve Bank of St. Louis | csv | 6 | quarterly | FRED terms of use; RPS by Bick, Blandin & Deming | Bick, Blandin & Deming, Real-Time Population Survey, via FRED |
+| betakit | BetaKit | BetaKit Inc. | html | 5 | irregular | BetaKit; short quotation | BetaKit |
 | big_i | IndependentAgent.com | Independent Insurance Agents & Brokers of America | html | 5 | irregular | Short quotation | Independent Insurance Agents & Brokers of America, IndependentAgent.com |
 | bls | BLS productivity and costs; total factor productivity | U.S. Bureau of Labor Statistics | api | 4 | quarterly | Public domain (U.S. government) | U.S. Bureau of Labor Statistics, Productivity and Costs (PRS85006092/93, PRS85006173), Total Factor Productivity (MPU4910012) |
 | browserbase_blog | Browserbase blog | Browserbase | html | 7 | irregular | Browserbase; short quotation | Browserbase |
 | business_insider | Business Insider | Business Insider | html | 7 | irregular | Business Insider; short quotation | Business Insider |
+| bvp_ai_datacenter_stack | Roadmap: The AI data center stack | Bessemer Venture Partners | html | 6 | irregular | Market map; company names only, read once | Lindsey Li, Josh Hechtman, David Cowan & Brielee Lu, Bessemer Venture Partners |
 | cait | California AI-Unemployment Tracker (CAIT) | California Policy Lab with California EDD | csv | 6 | monthly | California Policy Lab; monthly claims workbook, cited as the Lab suggests | Hyman, von Wachter et al. (2026), Tracking AI-Related Job Loss Using Unemployment Insurance Claims Data in California, California Policy Lab |
 | calcalist_ctech | Calcalist Ctech | Calcalist | html | 7 | irregular | Calcalist; short quotation | Calcalist Ctech |
 | canaries | Canaries Dashboard data (by exposure) | Stanford Digital Economy Lab and ADP Research | csv | 6 | monthly | Stanford Digital Economy Lab; free public data, cited as the Lab asks | Stanford Digital Economy Lab and ADP Research, AI Economic Indicators: Canaries Dashboard |
@@ -57,8 +59,11 @@
 | crusoe_newsroom | Crusoe newsroom | Crusoe | html | 4 | irregular | Crusoe; short quotation | Crusoe newsroom |
 | cursor_blog | Cursor research blog | Anysphere | html | 7 | irregular | Cursor; short quotation | Cursor (Anysphere) |
 | d_matrix_newsroom | d-Matrix announcements | d-Matrix | html | 4 | irregular | d-Matrix; short quotation | d-Matrix announcements |
+| dallasvc_inference_map | The Inference Market Map | Dallas VC | html | 6 | irregular | Market map; company names only, read once | Rishi Maheshwari, Dallas VC |
+| dallasvc_memory_map | Who Owns Memory? The Market Map for AI Agents' Missing State Layer | Dallas VC | html | 6 | irregular | Market map; company names only, read once | Rishi Maheshwari, Dallas VC |
 | dealroom | Dealroom news | Dealroom.co | html | 5 | irregular | Dealroom; short quotation | Dealroom |
 | decagon_blog | Decagon blog | Decagon | html | 7 | irregular | Decagon; short quotation | Decagon |
+| deepgram_news | Deepgram announcements | Deepgram | html | 7 | irregular | Deepgram; short quotation | Deepgram (company announcement) |
 | deepmind_blog_feed | Google DeepMind blog feed (watchlist) | Google DeepMind | rss | 7 | irregular | Publisher terms; titles and links only | Google DeepMind |
 | dwarkesh | Dwarkesh Podcast transcripts | Dwarkesh Patel | html | 6 | irregular | Substack; short quotation | Dwarkesh Podcast |
 | e2b_blog | E2B blog | E2B | html | 7 | irregular | E2B; short quotation | E2B |
@@ -117,9 +122,11 @@
 | humlum_pdf | Humlum working-paper PDFs (author site) | Anders Humlum | pdf | 6 | irregular | Author preprint; short quotation | Humlum & Vestergaard |
 | iconiq | ICONIQ, State of AI 2026 | ICONIQ Venture & Growth | html | 6 | annual | Report | ICONIQ, 'State of AI: The Builder's Economy' (2026), a survey of over 300 software executives building AI products |
 | innolitics | Innolitics regulatory articles | Innolitics | html | 6 | irregular | Innolitics; short quotation | Innolitics |
+| insight_agent_iam | Identity and Access Management (IAM) in the age of AI Agents | Insight Partners | html | 6 | irregular | Market map; company names only, read once | Thomas Krane & William Blackwell, Insight Partners |
 | institutional_investor | Institutional Investor | Institutional Investor LLC | html | 5 | irregular | Institutional Investor LLC; short quotation | Institutional Investor LLC |
 | insurance_journal | Insurance Journal | Wells Media Group | html | 5 | irregular | Insurance Journal; short quotation | Insurance Journal |
 | jams_site | Jams website | Potrero Labs | html | 4 | irregular | Potrero Labs; short quotation | Jams website |
+| kadan_ai_native_services | AI Native Services Market Map v2.0 | Kadan Capital | html | 6 | irregular | Market map; company names only, read once | Kadan Capital |
 | koyeb_blog | Koyeb blog | Koyeb | html | 4 | irregular | Koyeb; short quotation | Koyeb blog |
 | langchain_blog | LangChain blog | LangChain | html | 7 | irregular | LangChain; short quotation | LangChain |
 | lawnext | LawSites (LawNext) | LawNext | html | 5 | irregular | LawSites; short quotation | LawSites (Bob Ambrogi) |
@@ -139,6 +146,7 @@
 | metr_feed | METR feed (watchlist) | METR | rss | 6 | irregular | Publisher terms; titles and links only | METR |
 | microsoft_blog | Official Microsoft Blog | Microsoft | html | 4 | irregular | Microsoft; short quotation | Official Microsoft Blog |
 | microsoft_ir | Microsoft investor relations (earnings calls) | Microsoft | html | 4 | quarterly | Microsoft; short quotation | Microsoft Investor Relations |
+| midjourney_updates | Midjourney announcements | Midjourney | html | 7 | irregular | Midjourney; short quotation | Midjourney (company announcement) |
 | mitsloan | MIT Sloan Institute for Work and Employment Research | MIT Sloan | html | 6 | irregular | MIT Sloan; short quotation | MIT Sloan |
 | modal_blog | Modal blog | Modal Labs | html | 7 | irregular | Modal Labs; short quotation | Modal Labs |
 | multistate | MultiState AI legislation tracker | MultiState | html | 6 | irregular | MultiState; short quotation | MultiState |
@@ -146,6 +154,7 @@
 | nber | NBER working papers and chapters | National Bureau of Economic Research | html | 6 | irregular | NBER; abstract quotation | NBER |
 | ncsl | NCSL artificial intelligence legislation tracker | National Conference of State Legislatures | html | 6 | monthly | NCSL; counts only | NCSL, Artificial Intelligence 2025 Legislation |
 | nebius_newsroom | Nebius newsroom | Nebius | html | 4 | irregular | Nebius; short quotation | Nebius newsroom |
+| neolabs_fyi | neolabs.fyi | neolabs.fyi | html | 5 | monthly | Directory; names, founding year, HQ and valuation quoted with attribution | neolabs.fyi |
 | newcomer | Newcomer (free preview) | Newcomer | html | 5 | irregular | Newcomer; short quotation of the free preview | Newcomer |
 | nextslide_site | NextSlide website | NextSlide | html | 4 | irregular | NextSlide; short quotation | NextSlide website |
 | nscale_press | Nscale press releases | Nscale | html | 4 | irregular | Nscale; short quotation | Nscale press releases |
@@ -169,6 +178,7 @@
 | pwc | PwC Global AI Jobs Barometer (via Wayback; pwc.com 403s bots) | PwC | html | 7 | annual | PwC; short quotation | PwC 2026 Global AI Jobs Barometer |
 | pymnts | PYMNTS | PYMNTS.com | html | 5 | irregular | PYMNTS; short quotation | PYMNTS (relaying Bloomberg) |
 | ramp | Ramp AI Index (Ramp Economics Lab) | Ramp | html | 3 | monthly | Ramp Economics Lab; cited with attribution | Ramp AI Index, Ramp Economics Lab |
+| rebellions_news | Rebellions announcements | Rebellions | html | 7 | irregular | Rebellions; short quotation | Rebellions (company announcement) |
 | revelio | Revelio Labs AI Labor Market Tracker (US) | Revelio Labs | html | 6 | monthly | Revelio Labs; short quotation | Revelio Labs, AI Labor Market Tracker |
 | rl_list | rl-list.com RL-environment vendor directory | rl-list.com | api | 6 | monthly | Directory; counts only | rl-list.com |
 | rogo_news | Rogo news | Rogo | html | 7 | irregular | Rogo; short quotation | Rogo |
@@ -232,7 +242,7 @@
 | cb_insights | CB Insights (paid) | Paid; stub off. |
 | china_trackers | ITjuzi, 36Kr, Zero2IPO, SCMP, Caixin | Paywalled or Chinese-language compilations; the Chinese labs' rounds come through Epoch. |
 | citi_barclays | Citi and Barclays research | Client research behind a wall. |
-| cleverhack | cleverhack.com AI lab trackers and Awesome-AI-Market-Maps | Category directories, not data (P1 §5.3). The neolab directory seeded the neolabs sub-layer's entity list on 11 Sep 2026; the frontier tracker's lab list overlaps the seed list; the coding landscape mixes models, agents, IDEs and benchmarks, so it is not mapped. |
+| cleverhack | cleverhack.com AI lab trackers and Awesome-AI-Market-Maps | Category directories, not data (P1 §5.3). The neolab directory seeded the neolabs sub-layer's entity list on 11 Sep 2026; the frontier tracker's lab list overlaps the seed list; the coding landscape mixes models, agents, IDEs and benchmarks, so it is not mapped. Awesome-AI-Market-Maps lists 561 maps; on 28 Sep 2026 five were read for company names only (Kadan AI-native services, Bessemer AI data-centre stack, Dallas VC inference and memory maps, Insight Partners agent IAM), chosen for fit with the sub-layers and open pages; the rest are behind LinkedIn or X or were not read. |
 | crunchbase | Crunchbase (paid) | Paid; stub off. Would unlock founding dates and stage labels. |
 | dealroom_api | Dealroom API (paid) | Paid; stub off. Dealroom's public news pages are read as a manual source. |
 | epoch_gpu_clusters | Epoch AI GPU clusters | Not read. The measures here need power per site at dated milestones, built and projected, which Epoch's data-centre timelines (epoch_datacenters) give. |
