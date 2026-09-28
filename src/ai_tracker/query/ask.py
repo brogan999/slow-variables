@@ -36,7 +36,7 @@ log = logging.getLogger("ai-tracker.ask")
 MODEL = os.environ.get("QUERY_MODEL", "claude-sonnet-5")
 # a blocked answer gets its fresh attempt on the stronger model: rare, so the bill stays near Sonnet's
 ESCALATE_MODEL = os.environ.get("QUERY_ESCALATE_MODEL", "claude-opus-5")
-PROMPT_VERSION = "6"
+PROMPT_VERSION = "7"
 # Opus 5 list price, for the escalated retry only
 ESCALATE_USD_PER_MTOK_IN, ESCALATE_USD_PER_MTOK_OUT = (
     float(x) for x in os.environ.get("QUERY_ESCALATE_USD_PER_MTOK", "5,25").split(",")
@@ -151,6 +151,11 @@ TOOLS = [
         "input_schema": {"type": "object", "properties": {}},
     },
     {
+        "name": "bottlenecks",
+        "description": "What is scarce or binding now and where it bites: the site's tightness scorecard, one row per input the AI build-out needs (chips, power, capital, know-how ...), most binding first. Each input has its word (severe, tight, moderate, easing, slack), whether confidence is low, the stages of the chain it bites (with why), and the gauges it is read from, each with its reading and a citation [derived:<id>]. Say the word, never a score; a withheld input has no reading, so say why it is withheld. Optional kind: supply, know_how, money.",
+        "input_schema": {"type": "object", "properties": {"kind": {"type": "string"}}},
+    },
+    {
         "name": "claims",
         "description": "Search the positions named writers hold about what happens from here, and the claims tested against the site's data each night. Each position has its holders (cite as [src:<id>]), mechanism, strongest case, kill shot and rival position (cite as [pos:<id>]); each claim (cite as [claim:<id>]) has its text, tonight's state, the line it is tested against and what would prove it wrong. Readings a claim quotes come with their own citation. Optional folio: capability, products, adoption, reorganisation, value.",
         "input_schema": {
@@ -201,7 +206,7 @@ Rules for answers:
 3. Render values the way the site does: shares as percentages (0.063 -> 6.3%), USD with k/M/B/T, ratios with x, minutes as hours when over an hour, and name the as-of date and the source tier.
 4. Quote a status only with its reason and date. Mention the dispute text when a row is disputed and the tier when it is 7; a number inside a dispute text or caveat is cited to the observation that carries it, never to the indicator.
 5. Never compute a number. Do not add, divide, subtract or annualise records to make one, and do not restate a figure in a unit the record does not carry: a share, ratio, gap or growth rate must come from a metric row. If no record holds it, say the tracker does not compute it.
-6. A named writer's view is theirs: say who holds it and cite the position [pos:<id>], claim [claim:<id>] or work [src:<id>] it comes from. Mark your own reasoning as "this site's reading" or "inference". For what happens from here, use scenarios and claims and say which futures tonight's readings still allow; for a company, use entity; for who keeps the profit, use rent_rubric and say its inputs are your judgement.
+6. A named writer's view is theirs: say who holds it and cite the position [pos:<id>], claim [claim:<id>] or work [src:<id>] it comes from. Mark your own reasoning as "this site's reading" or "inference". For what happens from here, use scenarios and claims and say which futures tonight's readings still allow; for what is scarce or binding, use bottlenecks; for a company, use entity; for who keeps the profit, use rent_rubric and say its inputs are your judgement.
 7. Be brief: up to about 350 words of markdown (short paragraphs, or bullets where a list helps; a bullet is one claim). Lead with the answer. Do not describe the tools or your process.
 8. End with a line "Follow-ups:" and three short questions the reader could ask next, one per line starting "- ". They carry no numbers.
 
@@ -599,11 +604,66 @@ class Tools:
                         {"cite": f"src:{a}", "who": srcs[a].get("short") or srcs[a]["who"]} for a in c.get("argued_by") or [] if a in srcs
                     ],
                     "signposts": [self._claim(claims[g["claim"]]) for g in c["signposts"] if g["claim"] in claims],
-                    "binds_next": c.get("binds_next") or [],
+                    "binds_next": [self._map_row(b) for b in c.get("binds_next") or []],
                     "consistent_with_tonight": c["consistent"],
                     "tested": c["tested"],
                 }
                 for c in sc.get("cells") or []
+            ],
+        }
+
+    def _scorecard(self) -> tuple[dict[str, Any], dict[str, Any]]:
+        key = f"scorecard:{date.today()}"
+        if key not in self._index:
+            from .. import argument
+            from ..bottleneck_map import load as load_map
+
+            self._index[key] = (argument.scorecard(self.store, date.today()), load_map())
+        return self._index[key]
+
+    def _map_row(self, rid: str) -> dict[str, Any]:
+        """A bottleneck-map row by id: a scored input of the chain, or a friction row (a family or an NBER row)."""
+        sc, m = self._scorecard()
+        inp = next((i for i in sc["inputs"] if i["id"] == rid), None)
+        if inp:
+            return {"id": rid, "name": inp["name"], "word": inp["word"], "kind": "chain"}
+        if rid.startswith("family_") and rid[7:].isdigit() and int(rid[7:]) < len(m["families"]):
+            return {"id": rid, "name": m["families"][int(rid[7:])]["label"], "word": None, "kind": "friction"}
+        row = next((r for r in m["nber"] if r["id"] == rid), None)
+        return {"id": rid, "name": row["label"] if row else rid, "word": None, "kind": "friction"}
+
+    def bottlenecks(self, kind: str | None = None) -> Any:
+        sc, m = self._scorecard()
+        stages = {x["id"]: x["label"] for x in m["stages"]}
+        bites: dict[str, list[dict[str, Any]]] = {}
+        for r in m["chain"]:
+            for stage, why in (r.get("bites") or {}).items():
+                bites.setdefault(r["input"], []).append({"layer": r.get("layer"), "stage": stages.get(stage, stage), "why": why})
+        rows = [i for i in sc["inputs"] if not kind or i.get("kind") == kind]
+        rows.sort(key=lambda i: (i["score"] is None, -(i["score"] or 0)))
+        return {
+            "kinds": sc["kinds"],
+            "inputs": [
+                {
+                    "id": i["id"],
+                    "name": i["name"],
+                    "kind": i.get("kind"),
+                    "what": i.get("what"),
+                    "word": i["word"],
+                    "low_confidence": bool(i.get("hatched")),
+                    "withheld": (i["withheld"] or {}).get("because") if i["withheld"] else None,
+                    "bites": bites.get(i["id"], []),
+                    "gauges": [
+                        {
+                            "label": g["label"],
+                            "reading": {k: g["reading"][k] for k in ("value", "unit", "as_of")},
+                            "cite": f"derived:{g['reading']['derived_id']}",
+                        }
+                        for g in i["gauges"]
+                        if g.get("reading") and g["reading"].get("derived_id") and g.get("points") is not None  # only readings the score used
+                    ],
+                }
+                for i in rows
             ],
         }
 

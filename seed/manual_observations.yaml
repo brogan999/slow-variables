@@ -648,7 +648,7 @@ observations:
   - series_key: circular.amazon_anthropic.equity_usd.pt
     source_id: anthropic_news
     entity_id: amzn
-    value: 8000000000
+    value: 4000000000
     unit: USD
     as_of_date: 2024-11-22
     published_date: 2024-11-22
@@ -656,7 +656,7 @@ observations:
     basis: company_stated
     url: https://www.anthropic.com/news/anthropic-amazon-trainium
     raw_snippet: This expanded partnership includes a new $4 billion investment from Amazon and establishes AWS as our primary cloud and training partner. This will bring Amazon's total investment in Anthropic to $8 billion
-    note: Amazon -> Anthropic cumulative equity US$8B; AWS primary cloud and training partner.
+    note: Amazon -> Anthropic new equity US$4B (bringing its total to US$8B); AWS primary cloud and training partner. Only the new money counts.
   - series_key: circular.amazon_anthropic.equity_usd.pt
     coding: "Summed: $5 billion now plus up to $20 billion later."
     source_id: amazon_news
@@ -682,6 +682,506 @@ observations:
     url: https://www.aboutamazon.com/news/company-news/amazon-invests-additional-5-billion-anthropic-ai
     raw_snippet: a commitment from Anthropic to spend more than $100 billion over the next ten years on AWS technologies
     note: Anthropic -> Amazon AWS spend commitment, more than US$100B over ten years (floor value); up to 5 GW of Trainium.
+  # --- seller-funded deal ledger, swept 28 Sep 2026 under a written rule (Part 32). Parties: a supplier of AI chips,
+  # cloud or data-centre capacity, or power, and its AI customer. Counted: the seller's equity in its buyer, guarantees and
+  # backstops, and take-or-pay or committed-spend contracts, each with a stated dollar value, dated at first confirmation
+  # by a party or a filing, from 1 Jan 2024. Not counted: letters of intent, talks, unconfirmed reports, aggregates,
+  # backlog, deals with no dollar value. "Up to" amounts at face; totals that include earlier money count only the new.
+  # Considered and left out: Google lease backstops for Fluidstack (supplier link not stated), Amazon -> Anthropic
+  # Mar 2024 (completes a 2023 deal), Google -> Anthropic Jan 2025 and the Anthropic -> Google $200B (unconfirmed),
+  # Oracle -> OpenAI 4.5 GW and AMD -> OpenAI 6 GW (no dollar value), the Cipher Stingray lease (no agreement verb).
+  - series_key: circular.microsoft_mistral.equity_usd.pt
+    source_id: techcrunch
+    entity_id: msft
+    value: 16300000
+    unit: USD
+    as_of_date: '2024-02-27'
+    published_date: '2024-02-27'
+    tier: 5
+    basis: reported
+    url: https://techcrunch.com/2024/02/27/microsoft-made-a-16-million-investment-in-mistral-ai
+    raw_snippet: As part of the partnership, Microsoft is investing €15 million ($16.3 million at today’s exchange rate) in the French startup. Mistral AI says that this an addition to the Series A funding round
+    note: Microsoft -> Mistral AI equity (EUR 15M convertible into equity at the next round), part of the Azure distribution/compute partnership of 26 Feb 2024. Value is the USD stated on the page.
+  - series_key: circular.microsoft_g42.equity_usd.pt
+    source_id: microsoft_news
+    entity_id: msft
+    value: 1500000000
+    unit: USD
+    as_of_date: '2024-04-16'
+    published_date: '2024-04-16'
+    tier: 4
+    basis: company_stated
+    url: https://news.microsoft.com/source/2024/04/16/microsoft-invests-1-5-billion-in-abu-dhabis-g42-to-accelerate-ai-development-and-global-expansion/
+    raw_snippet: G42, the leading UAE-based artificial intelligence (AI) technology holding company, and Microsoft Corp. today announced a $1.5 billion strategic investment by Microsoft in G42
+    note: Microsoft -> G42 minority equity stake; same release says G42 will run its AI applications and services on Microsoft Azure (G42 builds the Jais LLM and runs data centres). New source_id microsoft_news (news.microsoft.com); entity for G42 not in entities.yaml.
+  - series_key: circular.core_scientific_coreweave.contract_usd.pt
+    source_id: sec_edgar_filings
+    entity_id: core_scientific
+    value: 3500000000
+    unit: USD
+    as_of_date: '2024-06-04'
+    published_date: '2024-06-04'
+    tier: 4
+    basis: company_stated
+    url: https://www.sec.gov/Archives/edgar/data/1839341/000162828024026483/corzcoreweavehpc.htm
+    raw_snippet: Once the approximately 200 MW of HPC infrastructure is operational, the project is estimated to generate total cumulative revenue for Core Scientific of over $3.5 billion during the initial 12-year terms of the contracts.
+    note: Core Scientific -> CoreWeave series of 12-year HPC hosting contracts, ~200 MW (signed 3 Jun 2024, announced 4 Jun); "over" US$3.5B, floor value; CoreWeave funds the retrofit capex. Core Scientific 8-K Ex. 99.1.
+  - series_key: circular.core_scientific_coreweave.contract_usd.pt
+    source_id: sec_edgar_filings
+    entity_id: core_scientific
+    value: 1225000000
+    unit: USD
+    as_of_date: '2024-06-25'
+    published_date: '2024-06-25'
+    tier: 4
+    basis: company_stated
+    url: https://www.sec.gov/Archives/edgar/data/1839341/000162828024029900/ex991-finalcorzhpcoptionre.htm
+    raw_snippet: the new contract with CoreWeave is expected to enhance earnings power and drive shareholder value, adding an additional $1.225 billion in projected cumulative revenue over the 12-year contract timeline
+    note: Core Scientific -> CoreWeave first option exercise, ~70 MW, 12-year hosting contract. Core Scientific 8-K Ex. 99.1.
+  - series_key: circular.core_scientific_coreweave.contract_usd.pt
+    source_id: sec_edgar_filings
+    entity_id: core_scientific
+    value: 2000000000
+    unit: USD
+    as_of_date: '2024-08-06'
+    published_date: '2024-08-06'
+    tier: 4
+    basis: company_stated
+    url: https://www.sec.gov/Archives/edgar/data/1839341/000162828024034989/exhibit991-corescientifich.htm
+    raw_snippet: The new contract with CoreWeave is expected to add approximately $2.0 billion in projected additional cumulative revenue over the hosting contract’s 12-year term
+    note: Core Scientific -> CoreWeave second option exercise, ~112 MW, 12-year hosting contract (total to ~US$6.7B). Core Scientific 8-K Ex. 99.1.
+  - series_key: circular.core_scientific_coreweave.contract_usd.pt
+    source_id: sec_edgar_filings
+    entity_id: core_scientific
+    value: 2000000000
+    unit: USD
+    as_of_date: '2024-10-22'
+    published_date: '2024-10-22'
+    tier: 4
+    basis: company_stated
+    url: https://www.sec.gov/Archives/edgar/data/1839341/000162828024043341/corescientifichpcoption3re.htm
+    raw_snippet: The new contract with CoreWeave is expected to add approximately $2.0 billion in projected additional cumulative revenue over the hosting contract’s 12-year term
+    note: Core Scientific -> CoreWeave final option exercise, ~120 MW, 12-year hosting contract (total to ~US$8.7B). Core Scientific 8-K Ex. 99.1.
+  - series_key: circular.core_scientific_coreweave.contract_usd.pt
+    source_id: sec_edgar_filings
+    entity_id: core_scientific
+    value: 1200000000
+    unit: USD
+    as_of_date: '2025-02-26'
+    published_date: '2025-02-26'
+    tier: 4
+    basis: company_stated
+    url: https://www.sec.gov/Archives/edgar/data/1839341/000162828025008312/ex991-coreweavepressrelease.htm
+    raw_snippet: today announced an expansion of its relationship with CoreWeave, an AI Hyperscaler. The new agreement brings $1.2 billion in contracted revenue across Core Scientific’s Denton TX location
+    note: Core Scientific -> CoreWeave 70 MW Denton expansion, 12-year term (total ~US$10.2B). Core Scientific 8-K Ex. 99.1.
+  - series_key: circular.coreweave_openai.contract_usd.pt
+    source_id: coreweave_news
+    entity_id: crwv
+    value: 11900000000
+    unit: USD
+    as_of_date: '2025-03-10'
+    published_date: '2025-03-10'
+    tier: 4
+    basis: company_stated
+    url: https://www.coreweave.com/news/coreweave-announces-agreement-with-openai-to-deliver-ai-infrastructure
+    raw_snippet: CoreWeave today announced a deal to deliver AI infrastructure to OpenAI, expanding OpenAI's compute capacity for training and delivering its latest models at scale to its hundreds of millions of users around the world. The contract value for this strategic deal is up to $11.9 billion.
+    note: CoreWeave -> OpenAI reserved-capacity master services agreement (signed 7 Mar 2025), up to US$11.9B through Oct 2030; "up to" at face. S-1/A of 12 Mar 2025 confirms.
+  - series_key: circular.softbank_openai.equity_usd.pt
+    source_id: softbank_group_press
+    value: 30000000000
+    unit: USD
+    as_of_date: '2025-03-31'
+    published_date: '2025-04-01'
+    tier: 4
+    basis: company_stated
+    url: https://group.softbank/en/news/press/20250401
+    raw_snippet: SBG is planning to syndicate out USD 10.0 billion of the up to USD 40.0 billion investment to co-investors. Accordingly, SBG’s effective investment amount is expected to be up to USD 30.0 billion
+    note: SoftBank -> OpenAI equity, SoftBank's own share (up to US$30B) of the US$40B round agreed 31 Mar 2025; funded US$7.5B Apr 2025 + US$22.5B Dec 2025. SoftBank is also OpenAI's Stargate / SB Energy partner. No SoftBank entity in entities.yaml.
+  - series_key: circular.coreweave_openai.contract_usd.pt
+    source_id: sec_edgar_filings
+    entity_id: crwv
+    value: 4000000000
+    unit: USD
+    as_of_date: '2025-05-15'
+    published_date: '2025-05-15'
+    tier: 4
+    basis: company_stated
+    url: https://www.sec.gov/Archives/edgar/data/1769628/000176962825000014/crwv-20250331.htm
+    raw_snippet: OpenAI has committed to pay the Company up to $4.0 billion through April 2029 related to this agreement
+    note: CoreWeave -> OpenAI second master services agreement (dated 8 May 2025), up to US$4.0B through Apr 2029; "up to" at face. First disclosed in the Q1 2025 10-Q.
+  - series_key: circular.applied_digital_coreweave.contract_usd.pt
+    source_id: sec_edgar_filings
+    entity_id: applied_digital
+    value: 7000000000
+    unit: USD
+    as_of_date: '2025-06-02'
+    published_date: '2025-06-02'
+    tier: 4
+    basis: company_stated
+    url: https://www.sec.gov/Archives/edgar/data/1144879/000164117225013199/ex99-2.htm
+    raw_snippet: has entered into two approximately 15-year lease agreements with CoreWeave, the AI Hyperscaler™. Under the lease agreements, Applied Digital will deliver 250 megawatts (MW) of critical IT load to host CoreWeave’s artificial intelligence (AI) and high-performance computing (HPC) infrastructure at its Ellendale, North Dakota data center campus. Over the approximately 15-year term, Applied Digital anticipates generating approximately $7 billion in total revenue from the leases.
+    note: Applied Digital -> CoreWeave two ~15-year data-centre leases, 250 MW at Polaris Forge 1 (signed 28 May 2025); 8-K splits it US$3B + US$4B. CoreWeave also got APLD warrants (buyer equity in seller, not counted).
+  - series_key: circular.terawulf_fluidstack.contract_usd.pt
+    source_id: sec_edgar_filings
+    entity_id: terawulf
+    value: 3700000000
+    unit: USD
+    as_of_date: '2025-08-14'
+    published_date: '2025-08-14'
+    tier: 4
+    basis: company_stated
+    url: https://www.sec.gov/Archives/edgar/data/1083301/000110465925078084/tm2523008d2_ex99-1.htm
+    raw_snippet: The agreements represent approximately $3.7 billion in contracted revenue over the initial 10-year terms and include two five-year extension options
+    note: TeraWulf -> Fluidstack two 10-year data-centre leases, CB-3/CB-4 at Lake Mariner, NY (signed 13 Aug 2025). TeraWulf 8-K Ex. 99.1.
+  - series_key: circular.terawulf_fluidstack.contract_usd.pt
+    coding: 'Split: US$6.7B contracted revenue after the expansion less US$3.7B from the 14 Aug 2025 leases = US$3.0B new.'
+    source_id: sec_edgar_filings
+    entity_id: terawulf
+    value: 3000000000
+    unit: USD
+    as_of_date: '2025-08-18'
+    published_date: '2025-08-18'
+    tier: 4
+    basis: company_stated
+    url: https://www.sec.gov/Archives/edgar/data/1083301/000110465925079463/tm2523651d3_ex99-1.htm
+    raw_snippet: TeraWulf Announces Fluidstack Expansion with 160 MW CB-5 Lease at Lake Mariner Total Contracted Capacity Increases to Over 360 MW of Critical IT Load Represents $6.7 Billion in Contracted Revenue
+    note: TeraWulf -> Fluidstack CB-5 lease, 160 MW, same terms as CB-3/CB-4. TeraWulf 8-K Ex. 99.1.
+  - series_key: circular.applied_digital_coreweave.contract_usd.pt
+    coding: 'Split: US$11B total contracted lease revenue less the US$7B from the May 2025 leases = US$4B new (the 8-K states the Building 4 lease at ~US$4.0B).'
+    source_id: sec_edgar_filings
+    entity_id: applied_digital
+    value: 4000000000
+    unit: USD
+    as_of_date: '2025-08-29'
+    published_date: '2025-08-29'
+    tier: 4
+    basis: company_stated
+    url: https://www.sec.gov/Archives/edgar/data/1144879/000149315225012458/ex99-1.htm
+    raw_snippet: This new lease agreement with CoreWeave brings Applied Digital’s total anticipated contracted lease revenue to approximately $11B, which includes $7B in revenue from the initial two approximately 15-year leases executed in May of this year.
+    note: Applied Digital -> CoreWeave third lease, 150 MW Building 4 at Polaris Forge 1 (signed 28 Aug 2025), ~15 years.
+  - series_key: circular.coreweave_openai.contract_usd.pt
+    source_id: sec_edgar_filings
+    entity_id: crwv
+    value: 6500000000
+    unit: USD
+    as_of_date: '2025-09-25'
+    published_date: '2025-09-25'
+    tier: 4
+    basis: company_stated
+    url: https://www.sec.gov/Archives/edgar/data/1769628/000119312525216497/d17274d8k.htm
+    raw_snippet: OpenAI has committed to pay the Company up to approximately $6.5 billion through May 31, 2031 under the Order Form
+    note: CoreWeave -> OpenAI order form (signed 23 Sep 2025) under the May 2025 MSA, up to US$6.5B through May 2031; brings the three OpenAI deals to ~US$22.4B. CoreWeave 8-K Item 1.01.
+  - series_key: circular.cipher_fluidstack.contract_usd.pt
+    coding: "The snippet states an approximate figure (~); the approximate value is stored."
+    source_id: sec_edgar_filings
+    value: 3000000000
+    unit: USD
+    as_of_date: '2025-09-25'
+    published_date: '2025-09-25'
+    tier: 4
+    basis: company_stated
+    url: https://www.sec.gov/Archives/edgar/data/1819989/000095010325012168/dp234624_ex9901.htm
+    raw_snippet: Cipher Mining Signs 168 MW, 10-Year AI Hosting Agreement with Fluidstack Transaction Secures ~$3 Billion in Contracted Revenue over 10-Year Term
+    note: Cipher -> Fluidstack 10-year HPC colocation, 168 MW at Barber Lake, TX. Cipher 8-K Ex. 99.1.
+  - series_key: circular.terawulf_fluidstack.contract_usd.pt
+    source_id: sec_edgar_filings
+    entity_id: terawulf
+    value: 9500000000
+    unit: USD
+    as_of_date: '2025-10-28'
+    published_date: '2025-10-28'
+    tier: 4
+    basis: company_stated
+    url: https://www.sec.gov/Archives/edgar/data/1083301/000110465925102858/tm2529509d1_ex99-1.htm
+    raw_snippet: TeraWulf Expands Strategic Partnership with Fluidstack Through New 168 MW AI Compute Joint Venture 25-year lease agreement represents approximately $9.5 billion in contracted revenue
+    note: TeraWulf/Fluidstack Abernathy, TX joint venture (TeraWulf 50.1%) leases 168 MW to Fluidstack for 25 years; TeraWulf sold its JV stake to Fluidstack in Jul 2026. TeraWulf 8-K Ex. 99.1.
+  - series_key: circular.amazon_openai.contract_usd.pt
+    source_id: amazon_news
+    entity_id: amzn
+    value: 38000000000
+    unit: USD
+    as_of_date: '2025-11-03'
+    published_date: '2025-11-03'
+    tier: 4
+    basis: company_stated
+    url: https://www.aboutamazon.com/news/aws/aws-open-ai-workloads-compute-infrastructure
+    raw_snippet: Under this new $38 billion agreement, which will have continued growth over the next seven years, OpenAI is accessing AWS compute comprising hundreds of thousands of state-of-the-art NVIDIA GPUs
+    note: AWS -> OpenAI multi-year committed compute agreement, $38B over seven years; no Amazon investment in the same transaction.
+  - series_key: circular.iren_microsoft.contract_usd.pt
+    source_id: sec_edgar_filings
+    entity_id: iren
+    value: 9700000000
+    unit: USD
+    as_of_date: '2025-11-03'
+    published_date: '2025-11-03'
+    tier: 4
+    basis: company_stated
+    url: https://www.sec.gov/Archives/edgar/data/1878848/000114036125040072/ef20058139_ex99-1.htm
+    raw_snippet: IREN will provide Microsoft with access to NVIDIA GB300 GPUs over a five-year term, with a total contract value of approximately $9.7 billion, including a 20% prepayment
+    note: IREN -> Microsoft dedicated GB300 capacity at Childress, TX (signed 2 Nov 2025), 5 years, 20% prepaid by Microsoft. IREN 8-K Ex. 99.1.
+  - series_key: circular.cipher_amazon.contract_usd.pt
+    source_id: sec_edgar_filings
+    value: 5500000000
+    unit: USD
+    as_of_date: '2025-11-03'
+    published_date: '2025-11-03'
+    tier: 4
+    basis: company_stated
+    url: https://www.sec.gov/Archives/edgar/data/1819989/000181998925000110/nov3_earningspressreleasex.htm
+    raw_snippet: Cipher today announced an approximately $5.5 billion, 15-year lease agreement with Amazon Web Services to provide turnkey space and power for AI workloads.
+    note: Cipher -> AWS 15-year turnkey data-centre lease, 300 MW (Black Pearl), Amazon.com parent guarantee. Cipher 8-K Ex. 99.1. No Cipher entity in entities.yaml.
+  - series_key: circular.nebius_meta.contract_usd.pt
+    source_id: sec_edgar_filings
+    entity_id: nbis
+    value: 2900000000
+    unit: USD
+    as_of_date: '2025-11-11'
+    published_date: '2025-11-12'
+    tier: 4
+    basis: company_stated
+    url: https://www.sec.gov/Archives/edgar/data/1513845/000110465925109803/tm2530882d2_6k.htm
+    raw_snippet: The Order has a total contract value of approximately $2.9 billion
+    note: Nebius -> Meta dedicated GPU capacity, 5-year term (agreement as of 1 Nov 2025). Nebius Form 6-K "Commercial agreement with Meta"; the same-day release rounds it to ~US$3B.
+  - series_key: circular.cipher_fluidstack.contract_usd.pt
+    coding: "The snippet states an approximate figure (~); the approximate value is stored."
+    source_id: sec_edgar_filings
+    value: 830000000
+    unit: USD
+    as_of_date: '2025-11-20'
+    published_date: '2025-11-20'
+    tier: 4
+    basis: company_stated
+    url: https://www.sec.gov/Archives/edgar/data/1819989/000095010325015073/dp237633_ex9901.htm
+    raw_snippet: Cipher Mining Signs Additional 56 MW, 10-Year AI Hosting Agreement with Fluidstack Transaction Secures ~$830 Million in Contracted Revenue Over Initial 10-Year Term
+    note: Cipher -> Fluidstack Barber Lake expansion, 56 MW, 10 years. Cipher 8-K Ex. 99.1.
+  - series_key: circular.hut8_fluidstack.contract_usd.pt
+    source_id: sec_edgar_filings
+    value: 7000000000
+    unit: USD
+    as_of_date: '2025-12-17'
+    published_date: '2025-12-17'
+    tier: 4
+    basis: company_stated
+    url: https://www.sec.gov/Archives/edgar/data/1964789/000110465925122052/hut-20251217xex99d1.htm
+    raw_snippet: today announced that it has signed a 15-year, $7.0 billion lease (the “Agreement”) with Fluidstack for 245 megawatts (MW) of IT capacity at its River Bend data center campus in Louisiana
+    note: Hut 8 -> Fluidstack 15-year lease, 245 MW at River Bend, LA, with a Google backstop of the lease payments (amount not stated separately). Hut 8 8-K Ex. 99.1. No Hut 8 entity in entities.yaml.
+  - series_key: circular.amazon_openai.equity_usd.pt
+    source_id: amazon_news
+    entity_id: amzn
+    value: 50000000000
+    unit: USD
+    as_of_date: '2026-02-27'
+    published_date: '2026-02-27'
+    tier: 4
+    basis: company_stated
+    url: https://www.aboutamazon.com/news/aws/amazon-open-ai-strategic-partnership-investment
+    raw_snippet: Amazon will also invest $50 billion in OpenAI, starting with an initial $15 billion investment and followed by another $35 billion in the coming months when certain conditions are met
+    note: Amazon -> OpenAI equity, $15B initial plus $35B conditional (anchor of the round that closed 31 Mar 2026); the existing Nvidia row's note mentions it but no Amazon row exists.
+  - series_key: circular.amazon_openai.commitment_usd.pt
+    source_id: amazon_news
+    entity_id: amzn
+    value: 100000000000
+    unit: USD
+    as_of_date: '2026-02-27'
+    published_date: '2026-02-27'
+    tier: 4
+    basis: company_stated
+    url: https://www.aboutamazon.com/news/aws/amazon-open-ai-strategic-partnership-investment
+    raw_snippet: OpenAI and AWS are expanding their existing $38 billion multi-year agreement by $100 billion over 8 years
+    note: OpenAI -> AWS committed spend, incremental $100B over 8 years (~2 GW Trainium), agreed in the same announcement as Amazon's $50B investment (type d). Only the new $100B counts; the $38B is its own row.
+  - series_key: circular.softbank_openai.equity_usd.pt
+    source_id: softbank_group_press
+    value: 30000000000
+    unit: USD
+    as_of_date: '2026-02-27'
+    published_date: '2026-02-27'
+    tier: 4
+    basis: company_stated
+    url: https://group.softbank/en/news/press/20260227
+    raw_snippet: it entered into a definitive agreement with OpenAI Group PBC (“OpenAI”), a U.S.-based company, to participate in OpenAI’s fundraising round, and to make follow-on investments of USD 30.0 billion
+    note: SoftBank -> OpenAI follow-on equity in the round that closed 31 Mar 2026 (already named in the note on circular.nvidia_openai.equity_usd.pt); cumulative SoftBank investment ~US$64.6B.
+  - series_key: circular.nvidia_nebius.equity_usd.pt
+    source_id: sec_edgar_filings
+    entity_id: nvda
+    value: 2000000000
+    unit: USD
+    as_of_date: '2026-03-11'
+    published_date: '2026-03-11'
+    tier: 4
+    basis: company_stated
+    url: https://www.sec.gov/Archives/edgar/data/1513845/000110465926026163/tm268532d1_6k.htm
+    raw_snippet: Nebius Group N.V. (the “Company”) entered into a securities purchase agreement (the “Securities Purchase Agreement”) with NVIDIA Corporation (the “Purchaser”). Pursuant to the Securities Purchase Agreement, the Company agreed to sell (the “Private Placement”) a pre-funded Class A ordinary shares purchase warrant (the “Warrant”) in a private placement for aggregate gross proceeds of approximately $2 billion
+    note: Nvidia -> Nebius equity via a US$2B pre-funded warrant (21.07M shares, exercise price $0.0001), alongside a partnership for more than 5 GW of Nvidia systems by 2030. Nebius Form 6-K.
+  - series_key: circular.nebius_meta.contract_usd.pt
+    source_id: sec_edgar_filings
+    entity_id: nbis
+    value: 12000000000
+    unit: USD
+    as_of_date: '2026-03-16'
+    published_date: '2026-03-16'
+    tier: 4
+    basis: company_stated
+    url: https://www.sec.gov/Archives/edgar/data/1513845/000110465926027886/tm268879d1_ex99-1.htm
+    raw_snippet: today announced a new long-term AI infrastructure supply agreement with Meta, strengthening the collaboration between the companies. Under the five-year agreement, Nebius will provide $12 billion of dedicated capacity across multiple locations
+    note: Nebius -> Meta dedicated Vera Rubin capacity from early 2027, 5 years (agreement signed 13 Mar 2026). Nebius 6-K Ex. 99.1.
+  - series_key: circular.nebius_meta.backstop_usd.pt
+    source_id: sec_edgar_filings
+    entity_id: nbis
+    value: 15000000000
+    unit: USD
+    as_of_date: '2026-03-16'
+    published_date: '2026-03-16'
+    tier: 4
+    basis: company_stated
+    url: https://www.sec.gov/Archives/edgar/data/1513845/000110465926027886/tm268879d1_ex99-1.htm
+    raw_snippet: Meta has committed to purchase additional available compute capacity across certain upcoming Nebius clusters up to a total of $15 billion over a five-year period
+    note: Meta obliged to buy Nebius's unsold capacity on named clusters, up to US$15B over 5 years; "up to" at face; same shape as the CoreWeave-Nvidia unsold-capacity row. Same 6-K as the US$12B row.
+  - series_key: circular.coreweave_meta.contract_usd.pt
+    source_id: sec_edgar_filings
+    entity_id: crwv
+    value: 21000000000
+    unit: USD
+    as_of_date: '2026-04-09'
+    published_date: '2026-04-09'
+    tier: 4
+    basis: company_stated
+    url: https://www.sec.gov/Archives/edgar/data/1769628/000176962826000154/crwv-20260331.htm
+    raw_snippet: Meta has initially committed to pay the Company approximately $21 billion, inclusive of (i) access to new computing capacity under the Order Form through December 20, 2032 and (ii) the exercise of an existing option to access additional computing capacity under a previous order form through April 10, 2032
+    note: CoreWeave -> Meta new order form (signed 31 Mar 2026) plus exercise of an earlier option; new money on top of the Sep 2025 US$14.2B order. CoreWeave 8-K Item 8.01.
+  - series_key: circular.cerebras_openai.contract_usd.pt
+    source_id: sec_edgar_filings
+    entity_id: cerebras
+    value: 20000000000
+    unit: USD
+    as_of_date: '2026-04-17'
+    published_date: '2026-04-17'
+    tier: 4
+    basis: company_stated
+    url: https://www.sec.gov/Archives/edgar/data/2021728/000162828026025762/cerebras-sx1april2026.htm
+    raw_snippet: In January 2026, we announced a multi-year deal with OpenAI valued at more than $20 billion dollars. OpenAI has agreed to deploy 750 megawatts of Cerebras’s high-speed AI compute
+    note: 'OpenAI -> Cerebras take-or-pay committed capacity (750 MW through 2028; option on 1.25 GW more) under the Master Revenue Agreement; counted as a floor ("more than"). The seller is also bound to the buyer: Cerebras gave OpenAI a warrant for 33.4M shares, and OpenAI lent Cerebras $1.0B. Cerebras Form S-1; the January public figure (over $10B) came from press reports only.'
+  - series_key: circular.google_anthropic.equity_usd.pt
+    source_id: cnbc
+    entity_id: googl
+    value: 40000000000
+    unit: USD
+    as_of_date: '2026-04-24'
+    published_date: '2026-04-24'
+    tier: 5
+    basis: reported
+    url: https://www.cnbc.com/2026/04/24/google-to-invest-up-to-40-billion-in-anthropic-as-search-giant-spreads-its-ai-bets.html
+    raw_snippet: Google plans to invest up to $40 billion in Anthropic, the companies confirmed on Friday
+    note: Google -> Anthropic equity, up to $40B at face ($10B now, up to $30B more on performance milestones); both companies confirmed; Google Cloud to deliver 5 GW over five years (no $ stated).
+  - series_key: circular.nvidia_iren.equity_usd.pt
+    source_id: nvidia_ir
+    entity_id: nvda
+    value: 2100000000
+    unit: USD
+    as_of_date: '2026-05-07'
+    published_date: '2026-05-07'
+    tier: 4
+    basis: company_stated
+    url: https://nvidianews.nvidia.com/news/nvidia-and-iren-announce-strategic-partnership-to-accelerate-deployment-of-up-to-5-gigawatts-of-ai-infrastructure
+    raw_snippet: As part of the partnership, IREN issued to NVIDIA a five-year right to purchase up to 30 million shares of ordinary stock at an exercise price of $70 per share, resulting in a right to invest up to $2.1 billion, subject to certain conditions including regulatory
+    note: Nvidia -> IREN, a right to invest up to US$2.1B (30M shares at $70, five years), counted at face as "up to"; it is an unexercised warrant, not money paid. Same deal as the US$3.4B cloud contract.
+  - series_key: circular.iren_nvidia.contract_usd.pt
+    source_id: sec_edgar_filings
+    entity_id: iren
+    value: 3400000000
+    unit: USD
+    as_of_date: '2026-05-07'
+    published_date: '2026-05-08'
+    tier: 4
+    basis: company_stated
+    url: https://www.sec.gov/Archives/edgar/data/1878848/000187884826000025/irenreportsq3fy26results.htm
+    raw_snippet: We also signed a 5-year, $3.4bn AI Cloud contract with NVIDIA and entered into a broader strategic partnership
+    note: IREN -> Nvidia managed GPU cloud for Nvidia's internal AI research, 5 years from early 2027; Nvidia is also IREN's GPU supplier and got a right to buy 30M IREN shares at US$70 (not dollar-valued). IREN 8-K Ex. 99.1.
+  - series_key: circular.terawulf_anthropic.contract_usd.pt
+    source_id: sec_edgar_filings
+    entity_id: terawulf
+    value: 19000000000
+    unit: USD
+    as_of_date: '2026-07-06'
+    published_date: '2026-07-06'
+    tier: 4
+    basis: company_stated
+    url: https://www.sec.gov/Archives/edgar/data/1083301/000110465926080583/tm2619468d1_ex99-1.htm
+    raw_snippet: The Company has executed a 20-year lease agreement with Anthropic at its Justified Data campus in Hawesville, Kentucky. The lease is expected to generate approximately $19 billion of contracted revenue over the initial lease term.
+    note: TeraWulf -> Anthropic 20-year lease, ~401 MW at Hawesville, KY, direct to Anthropic PBC (8-K names the tenant). TeraWulf 8-K Ex. 99.1.
+  - series_key: circular.nvidia_sharonai.contract_usd.pt
+    source_id: sec_edgar_filings
+    entity_id: nvda
+    value: 4880000000
+    unit: USD
+    as_of_date: '2026-07-31'
+    published_date: '2026-07-31'
+    tier: 4
+    basis: company_stated
+    url: https://www.sec.gov/Archives/edgar/data/0002068385/000149315226035629/forms-1.htm
+    raw_snippet: In June 2026, we announced a six-year strategic compute collaboration with NVIDIA pursuant to a Master Cloud Services Agreement and Order Form 1 dated June 8, 2026 (the “NVIDIA Agreement”), which has a contract value of up to $4.88 billion
+    note: Nvidia -> Sharon AI six-year cloud-services agreement (Nvidia as customer or backstop buyer) for a 72 MW, up to 40,000 GB300 build in Australia; counted at face as "up to". The June 12 announcement had no dollar value; the Sharon AI Form S-1 of 31 Jul 2026 is the first filing to state it.
+  - series_key: circular.nvidia_nscale.guarantee_usd.pt
+    source_id: sec_edgar_filings
+    entity_id: nvda
+    value: 860300000
+    unit: USD
+    as_of_date: '2026-09-18'
+    published_date: '2026-09-18'
+    tier: 4
+    basis: company_stated
+    url: https://www.sec.gov/Archives/edgar/data/0002110365/000119312526395475/ck0002110365-20260918.htm
+    raw_snippet: In consideration for the Non-Default and Default warrants, NVIDIA agreed to guarantee up to $860.3 million of our obligations under a lease agreement for a facility in Ward County, Texas
+    note: Nvidia -> Nscale guarantee of Nscale's Ward County, Texas data-center lease (first five years), signed 14 Oct 2025; Nscale paid with warrants and a $470M escrow. Nscale Form S-1. Nvidia's Q3 FY26 10-Q showed the same $860M guarantee without naming the partner.
+  - series_key: circular.nvidia_nscale.equity_round_usd.pt
+    coding: 'Summed: $300.0 million Pre-Series C SAFEs + $477.4 million Series C subscription = $777.4 million.'
+    source_id: sec_edgar_filings
+    entity_id: nvda
+    value: 777400000
+    unit: USD
+    as_of_date: '2026-09-18'
+    published_date: '2026-09-18'
+    tier: 4
+    basis: company_stated
+    url: https://www.sec.gov/Archives/edgar/data/0002110365/000119312526395475/ck0002110365-20260918.htm
+    raw_snippet: In connection with the Series C Financing, NVIDIA entered into Pre-Series C SAFEs for a principal amount of $300.0 million, which converted into 16,346,160 Series C preferred shares. NVIDIA subscribed for a further 23,410,920 Series C preferred shares for $477.4 million
+    note: Nvidia -> Nscale equity in the Series C (SAFE plus direct subscription). Nscale Form S-1 related-party section; no earlier party statement of Nvidia's amount found. Keyed apart from the same day's pre-IPO sale, which is a separate deal.
+  - series_key: circular.nvidia_nscale.equity_usd.pt
+    coding: Only the $1.0 billion issued to NVIDIA is counted; the other $2.1 billion of notes goes to other subscribers.
+    source_id: sec_edgar_filings
+    entity_id: nvda
+    value: 1000000000
+    unit: USD
+    as_of_date: '2026-09-18'
+    published_date: '2026-09-18'
+    tier: 4
+    basis: company_stated
+    url: https://www.sec.gov/Archives/edgar/data/0002110365/000119312526395475/ck0002110365-20260918.htm
+    raw_snippet: On September 15, 2026, we entered into a Subscription Agreement for subscriptions in an aggregate principal amount of a minimum of $3.1 billion, comprising of $2.1 billion of unsecured convertible loan notes (the “Convertible Loan Notes”) and a further $1.0 billion of unsecured convertible loan notes or Non-Voting Shares (as applicable) that will be issued to NVIDIA (the “NVIDIA Sale”)
+    note: Nvidia -> Nscale pre-IPO equity (convertible notes or non-voting shares), agreed 15 Sep 2026, closing around 16 Nov 2026. Nscale Form S-1.
+  - series_key: circular.nvidia_nscale.contract_usd.pt
+    source_id: sec_edgar_filings
+    entity_id: nvda
+    value: 1200000000
+    unit: USD
+    as_of_date: '2026-09-18'
+    published_date: '2026-09-18'
+    tier: 4
+    basis: company_stated
+    url: https://www.sec.gov/Archives/edgar/data/0002110365/000119312526395475/ck0002110365-20260918.htm
+    raw_snippet: In July 2025, we entered into a master cloud services agreement with NVIDIA Corporation (the “NVIDIA MSA”), pursuant to which we provide GPU cloud computing services across data center locations in Iceland, the United Kingdom, and Norway. Under the NVIDIA MSA and related order forms, we provide reserved GPU cluster capacity with initial service terms ranging from 12 to 48 months, for an aggregate amount of $1.2 billion
+    note: Nvidia buys reserved GPU capacity from Nscale, its own chip customer and portfolio company (MSA July 2025; the amount was first stated in the Nscale Form S-1).
+  - series_key: circular.nscale_anthropic.contract_usd.pt
+    source_id: sec_edgar_filings
+    entity_id: nscale
+    value: 44600000000
+    unit: USD
+    as_of_date: '2026-09-18'
+    published_date: '2026-09-18'
+    tier: 4
+    basis: company_stated
+    url: https://www.sec.gov/Archives/edgar/data/0002110365/000119312526395475/ck0002110365-20260918.htm
+    raw_snippet: The Anthropic Services Agreements provide for aggregate payments to us of up to approximately $44.6 billion
+    note: Nscale -> Anthropic dedicated GPU services at the Monarch campus (Vera Rubin NVL72), up to ~US$44.6B at face; first confirmed in the Nscale S-1.
   # --- Ramp AI Index + second sources (sourced 2026-09-10) ---
   - series_key: ramp.us_businesses.paid_ai_adoption_share.m
     source_id: ramp
@@ -6072,18 +6572,6 @@ observations:
     tier: 5
     basis: reported
     raw_snippet: Nous Research $1B 2023
-    note: neolabs.fyi directory valuation; an aggregator, so the round date is unknown and as_of is the day it was read.
-  - series_key: neolabs_fyi.merge_labs.post_money_usd.pt
-    source_id: neolabs_fyi
-    entity_id: merge_labs
-    value: 850000000
-    unit: USD
-    as_of_date: '2026-09-28'
-    published_date: '2026-09-28'
-    url: https://neolabs.fyi/
-    tier: 5
-    basis: reported
-    raw_snippet: Merge Labs $850M 2026
     note: neolabs.fyi directory valuation; an aggregator, so the round date is unknown and as_of is the day it was read.
   - series_key: neolabs_fyi.inferact.post_money_usd.pt
     source_id: neolabs_fyi

@@ -206,7 +206,7 @@ def test_golden_survives_a_hallucinated_id_and_flags_informational_questions():
 
     s = st.Store()
     res = golden(s, Tools(s), ScriptClient(["No record [obs:deadbeef00000000]."]))
-    assert {r["id"] for r in res if r["informational"]} == {"g14", "g15", "g17", "g18", "g19", "g20", "g21"}
+    assert {r["id"] for r in res if r["informational"]} == {"g14", "g15", "g17", "g18", "g19", "g20", "g21", "g22", "g23", "g24", "g25", "g26"}
     assert not any(r["ok"] for r in res if r["id"] not in ("g16",))
 
 
@@ -370,6 +370,22 @@ def test_the_outlook_tools_cite_writers_claims_and_predictions_and_the_ids_verif
     pid = t.pub.execute("SELECT id FROM predictions LIMIT 1").fetchone()[0]
     assert t.records([("pred", pid)]) and t.href("pred", pid)
     assert t.detail("claim", cid)["snippet"] and t.detail("pred", pid)["label"] and "2027-" not in t.detail("pred", pid)["label"][-12:]
+
+
+def test_the_bottleneck_tool_gives_words_and_citable_gauges_and_names_what_binds_next():
+    from ai_tracker.query.citecheck import check
+
+    t = _tools_with_board()
+    inputs = t.bottlenecks()["inputs"]
+    assert inputs and all("score" not in i and "confidence" not in i for i in inputs)
+    scored = [i for i in inputs if i["word"]]
+    assert scored and inputs.index(scored[-1]) < len(scored)  # withheld inputs come last
+    g = next(g for i in scored for g in i["gauges"])
+    kind, gid = g["cite"].split(":")
+    assert kind == "derived" and check(f"It reads {g['reading']['value']:.3g} [derived:{gid}].", t.records([(kind, gid)])).ok
+    rows = [b for c in t.scenarios()["cells"] for b in c["binds_next"]]
+    assert rows and all(b["name"] != b["id"] for b in rows)
+    assert {b["kind"] for b in rows} <= {"chain", "friction"}
 
 
 def test_prose_records_match_numbers_only_as_whole_tokens():

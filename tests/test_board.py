@@ -46,6 +46,7 @@ def test_every_family_maps_to_one_word_and_the_board_groups_by_folio():
     assert [rows[k]["indicators"] for k in ("p1", "c1", "c2", "e1")] == [["i1"], ["i3"], [], ["i2"]]
     assert doc["questions"][0]["status"] == "emerging" and doc["questions"][1]["href"] is None
     assert sum(doc["tally"].values()) == 5
+    assert doc["n"] == 5
 
 
 def test_the_seed_resolves_and_its_lines_type_no_number_but_years():
