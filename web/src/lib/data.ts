@@ -336,6 +336,7 @@ export type CensusCard = {
   roles: { title: string; wage_bill: number; share_passes: number; passes: number; agreed3: number | null }[];
 };
 export type CensusIndex = {
+  figure?: { ticks: { left: number; label: string }[]; bars: { label: string; value: number; id: string; width: number }[] };
   version: string; generated_at: string; manifest_sha256: string; sources: string[]; scorers: string[]; scorer_names: Record<string, string>;
   prose: { title: string; lede: string; rule: string; agreed: string; caveats: string[]; sections: Record<string, { title: string; lede: string }>; method_notes: Record<string, string> };
   headline: {
