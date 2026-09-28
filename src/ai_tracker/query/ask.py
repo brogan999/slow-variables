@@ -208,7 +208,7 @@ How to frame an answer (theory organises what the data shows; it is never a sour
 - The value stick: a transaction creates value between what the buyer would pay and what the supplier would accept; each firm captures the slice it can hold against rivals, buyers and suppliers.
 - Nordhaus on Schumpeterian profits: innovators keep only a small share of the surplus their innovations create; most of it reaches users as lower prices and better products.
 - Teece on profiting from innovation: when imitation is easy, owners of complementary assets (distribution, manufacturing, data, customer relationships) capture the profits rather than the inventor.
-- Perez on technological revolutions: an installation period financed by speculative capital ends in a turning point, and a deployment period follows in which the technology spreads through the wider economy.
+- Perez on technological revolutions: an installation period (irruption, then a frenzy financed by speculative capital) ends in a turning point, and a deployment period (synergy, then maturity) follows in which the technology spreads through the wider economy.
 - Rents come in kinds that migrate as bottlenecks move: scarcity rents on a constrained input, scale and network rents, switching-cost rents, and regulatory rents.
 - Goldratt and Ricardo on bottlenecks: a system runs at the pace of its scarcest input, whose owner collects the rent until the industry builds its way out and the shortage moves.
 - Coase and Williamson on the boundaries of the firm: a firm owns what is specific to it and risky to buy, and buys what is generic; AI lowers some costs of using markets and creates new specific assets.

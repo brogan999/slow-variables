@@ -260,12 +260,26 @@ def _lay_clocks(s: Store, drawn: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
-def _raw_phase(capex: float, fin: float | None, fin_year_ago: float | None) -> str:
+# Perez's two halves, and the phases inside them. When the finer phase cannot be told apart, the half is shown.
+HALF = {"irruption": "installation", "frenzy": "installation", "installation": "installation",
+        "turning_point": "turning_point", "synergy": "deployment", "maturity": "deployment",
+        "deployment": "deployment", "untestable": "untestable"}
+
+
+def _raw_phase(capex: float, fin: float | None, fin_year_ago: float | None, after_frenzy: bool = False) -> str:
+    """Spending per dollar of measured AI revenue, and seller-funded deals in the trailing year against the year
+    before. Frenzy when spending runs ahead and those deals are growing; once a frenzy has been confirmed, a cooling
+    reads as the turning point, never back to irruption. Synergy and maturity need a revenue-growth reading the site
+    does not yet hold, so deployment is shown as the half."""
     if fin is None:
         return "untestable"
-    if capex >= 1 and fin > 0:
-        return "installation"
-    if capex < 0.5 and fin_year_ago is not None and fin < fin_year_ago:
+    if capex >= 1:
+        if fin_year_ago is None:
+            return "installation"
+        if fin > fin_year_ago:
+            return "frenzy"
+        return "turning_point" if after_frenzy else "irruption"
+    if capex < 0.5 and fin_year_ago is not None and fin <= fin_year_ago:
         return "deployment"
     return "turning_point"
 
@@ -274,6 +288,7 @@ def phase(s: Store, spec: dict[str, Any]) -> dict[str, Any]:
     p = spec["phase"]
     capex = s.derived_for(p["capex"])
     fin = {d.as_of_date: d for d in s.derived_for(p["financing"])}
+    searched = date.fromisoformat(str(p["financing_searched_from"])) if p.get("financing_searched_from") else None
 
     def fin_at(day: date) -> Any:
         """The flow read at that quarter end, else the latest reading inside the quarter."""
@@ -286,8 +301,12 @@ def phase(s: Store, spec: dict[str, Any]) -> dict[str, Any]:
     history: list[dict[str, Any]] = []
     state = None
     for c in capex:
-        f, f0 = fin_at(c.as_of_date), fin_at(c.as_of_date.replace(year=c.as_of_date.year - 1))
-        raw = _raw_phase(c.value, f.value if f else None, f0.value if f0 else None)
+        ago = c.as_of_date.replace(year=c.as_of_date.year - 1)
+        f = fin_at(c.as_of_date)
+        # a year-ago flow counts only when the whole year behind it was searched
+        f0 = fin_at(ago) if searched is None or ago.replace(year=ago.year - 1) + timedelta(days=1) >= searched else None
+        raw = _raw_phase(c.value, f.value if f else None, f0.value if f0 else None,
+                         after_frenzy=any(h["state"] == "frenzy" for h in history))
         if state is None or (raw != state and history and history[-1]["raw"] == raw):
             state = raw
         history.append({"as_of": c.as_of_date.isoformat(), "raw": raw, "state": state})
@@ -298,6 +317,7 @@ def phase(s: Store, spec: dict[str, Any]) -> dict[str, Any]:
     if not capex or not fin:
         return {
             "state": "untestable",
+            "half": "untestable",
             "rule": p["rule"],
             "as_of": None,
             "history": history,
@@ -305,6 +325,7 @@ def phase(s: Store, spec: dict[str, Any]) -> dict[str, Any]:
         }
     return {
         "state": state,
+        "half": HALF[state],
         "rule": p["rule"],
         "as_of": history[-1]["as_of"],
         "history": history,
@@ -762,6 +783,8 @@ def problems(s: Store) -> tuple[list[str], list[str]]:
     want = {e["monitor"]: e["expect"] for e in spec["exits"] if e.get("expect")}
     if spec["phase"].get("expect"):
         got["phase"], want["phase"] = phase(s, spec)["state"], spec["phase"]["expect"]
+        if HALF.get(got["phase"]) == want["phase"]:  # the essays name the half; a finer phase inside it agrees
+            got["phase"] = want["phase"]
     for k, w in want.items():
         if got.get(k) != w:
             notes.append(

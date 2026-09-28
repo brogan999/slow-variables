@@ -60,7 +60,7 @@ export function Exits({ doc }: { doc: ArgumentDoc }) {
 export function ReadingMargin({ doc }: { doc: ArgumentDoc }) {
   return (
     <>
-      <MarginPanel title={`Reading · ${doc.as_of ?? "—"}`} rows={[["Which half, after Perez", PHASE_WORDS[doc.phase.state]], ["How fast", doc.headlines.diffusion.claim], ["Who profits", doc.headlines.capture.claim]]} />
+      <MarginPanel title={`Reading · ${doc.as_of ?? "—"}`} rows={[["Where we are, after Perez", PHASE_WORDS[doc.phase.state]], ["How fast", doc.headlines.diffusion.claim], ["Who profits", doc.headlines.capture.claim]]} />
       <MarginPanel title="Instrument">
         <p>Every figure links to the dated, graded records behind it, and is scored against a range published in advance.</p>
         <p>A reading on the edge of a range, or one whose uncertainty spans two, is held rather than scored. Four readings of one survey count once.</p>
