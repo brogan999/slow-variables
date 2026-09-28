@@ -843,6 +843,8 @@ class Store:
                     "crosswalk": [dump(c) for c in self.seed.crosswalk if c.bucket_id == b.id],
                 },
             )
+        vc_doc = self._value_chain()
+        _write(out / "value_chain.json", vc_doc)
         for layer in self.seed.layers:
             _write(
                 out / "layers" / f"{layer.id}.json",
@@ -856,6 +858,8 @@ class Store:
                     "venture": self._layer_venture(layer.id),
                     "commoditisation": self._commoditisation(cards) if layer.id == "model" else None,
                     "held": _held(self.seed.indicators, cards, layer.id),
+                    "economics": [u for u in vc_doc["units"] if u["layer"] == layer.id],
+                    "profiles": [c for c in vc_doc["companies"] if any(u["layer"] == layer.id and u["id"] in (c["units"] or []) for u in vc_doc["units"])],
                 },
             )
         recent = [dump(e) for e in sorted(self.events, key=lambda e: e.created_at, reverse=True)[:3]]
@@ -2028,6 +2032,32 @@ class Store:
             parts = [f"{layer.name} reads {status}"]
         out = "; ".join(parts) + "."
         return out[0].upper() + out[1:]
+
+    def _value_chain(self) -> dict[str, Any]:
+        """The value-chain assessment in the site's words: tightness words from tonight's scorecard, names for companies,
+        and each source's link, so the page computes nothing."""
+        from datetime import date as _d
+
+        from . import futures, value_chain
+        from .argument import scorecard
+        from .outlook import load as load_outlook
+
+        words = {i["id"]: i["word"] for i in scorecard(self, _d.today())["inputs"]}
+        doc = value_chain.build(value_chain.load(), load_outlook(), futures.rubric(), words)
+        names = {e.id: e.name for e in self.seed.entities}
+        inputs = {i["id"]: i["name"] for i in scorecard(self, _d.today())["inputs"]}
+        srcs = {x["id"]: x for x in doc["sources"]}
+        for u in doc["units"]:
+            u["binding"] = [{**b, "name": inputs.get(b["id"], b["id"])} for b in u["binding"]]
+        for c in doc["companies"]:
+            c["name"] = names.get(c["entity"], c["entity"])
+            c["depends_on"] = [{**b, "name": inputs.get(b["id"], b["id"])} for b in c["depends_on"]]
+            c["source_links"] = [
+                {"id": i, "url": srcs[i]["url"], "label": f"{srcs[i]['form']}, {srcs[i].get('filed') or srcs[i].get('period_end')}"}
+                for i in sorted({i for ids in c["sources"].values() for i in ids}) if i in srcs
+            ]
+        doc["powers"] = value_chain.POWER_GLOSS
+        return {k: v for k, v in doc.items() if k != "sources"}
 
     def _commoditisation(self, cards: dict[str, Any]) -> dict[str, Any]:
         """The model layer's four commoditisation proxies (Part 1's list), named with their own statuses; no composite."""

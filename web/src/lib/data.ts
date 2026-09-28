@@ -65,7 +65,20 @@ function read<T>(rel: string): T {
 export const index = () => read<{ indicators: Card[]; buckets: Bucket[]; layers: Layer[]; sublayers: Sublayer[]; crosswalk: Crosswalk[] }>("index.json");
 export const indicator = (id: string) => read<Doc>(`indicators/${id}.json`);
 export const bucket = (id: string) => read<Bucket & { indicators: Card[]; crosswalk: Crosswalk[] }>(`buckets/${id}.json`);
-export const layer = (id: string) => read<Layer & { tally?: Tally; indicators: Card[]; sublayers: Sublayer[]; crosswalk: Crosswalk[]; venture: LayerVenture | null; commoditisation: { proxies: { id: string; name: string; status: string | null }[]; line: string } | null; held?: { id: string; name: string; reason: string | null; n: number }[] }>(`layers/${id}.json`);
+export const layer = (id: string) => read<Layer & { tally?: Tally; indicators: Card[]; sublayers: Sublayer[]; crosswalk: Crosswalk[]; venture: LayerVenture | null; commoditisation: { proxies: { id: string; name: string; status: string | null }[]; line: string } | null; held?: { id: string; name: string; reason: string | null; n: number }[]; economics?: EconomicsUnit[]; profiles?: Profile[] }>(`layers/${id}.json`);
+export type Binding = { id: string; word: string | null; name: string };
+export type EconomicsUnit = {
+  id: string; layer: string; sublayer: string | null; direction: "commoditising" | "holding" | "tightening";
+  title: string; mechanism: string; case: string | null; kill_shot: string; commoditising: string; stays_scarce: string; converts_if: string;
+  powers: string[]; binding: Binding[]; rival: { id: string; title: string } | null;
+};
+export type Profile = {
+  entity: string; name: string; role: "club" | "candidate"; units: string[]; outside: string | null; market: string; customers: string;
+  concentration: string; powers: { power: string; why: string }[]; depends_on: Binding[]; rent: { reads: string };
+  must_be_true: string[]; would_disprove: string[]; judged_by: string; reviewed_by: string | null; reviewed: string | null; disclosure: string | null;
+  source_links: { id: string; url: string; label: string }[];
+};
+export const valueChain = () => read<{ units: EconomicsUnit[]; companies: Profile[]; powers: Record<string, string> }>("value_chain.json");
 export const series = (key: string) => read<{ series_key: string; unit: string; source: Source | null; observations: Observation[]; withdrawn: Observation[] }>(`series/${key}.json`);
 export const seriesKeys = () => fs.readdirSync(path.join(ROOT, "series")).map((f) => f.replace(/\.json$/, ""));
 export const diffusion = () => read<{
@@ -230,7 +243,7 @@ export type OutlookTest = { fact: string } & Partial<Record<"gt" | "gte" | "lt" 
 export type OutlookSource = { id: string; n: number; who: string; short?: string; field: string; finding: string; work: string; venue?: string; year: number; url: string; quote?: string };
 export type OutlookPosition = {
   id: string; folio: string; title: string; holders: string[]; attribution: "author" | "extension" | "site";
-  mechanism: string; case: string; kill_shot: string; rival: string; visible: boolean;
+  mechanism: string; case: string; kill_shot: string; rival: string; visible: boolean; layer?: string;
 };
 export type OutlookClaim = {
   id: string; position: string; text: string; falsifier?: string; row: string | null; stage: string | null; due: string | null; rival_until: string | null;

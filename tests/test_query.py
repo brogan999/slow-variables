@@ -437,6 +437,26 @@ def test_the_company_card_carries_the_trillion_dollar_test_with_citable_rows():
     assert t.entity("Anthropic")["valuation"]["private_multiple_to_1t"]["cite"].startswith("derived:")
 
 
+def test_the_value_chain_tool_is_compact_citable_and_links_units_to_their_layer():
+    import json
+
+    from ai_tracker.query.citecheck import check
+
+    t = _tools_with_board()
+    brief = t.value_chain()
+    assert brief and all(u["cite"].startswith("pos:") and u["rival"] for u in brief)
+    for out in (brief, t.value_chain(layer="compute_physical"), t.value_chain(companies=True)):
+        assert len(json.dumps(out, default=str)) < 20000
+    uid = brief[0]["cite"].split(":")[1]
+    assert t.href("pos", uid).startswith("/layers/compute_physical#assessment-")
+    assert check(f"This layer is judged to be holding [pos:{uid}].", t.records([("pos", uid)])).ok
+    prof = t.entity("Micron")["profile"]
+    sid = prof["cite"]["market"][0].split(":")[1]
+    assert t.records([("src", sid)]) and t.href("src", sid).startswith("https://www.sec.gov/Archives/")
+    assert not check(f"It sold 40% to one buyer [src:{sid}].", t.records([("src", sid)])).ok  # a filing backs words only
+    assert "error" in t.value_chain(layer="nowhere")
+
+
 def test_prose_records_match_numbers_only_as_whole_tokens():
     from ai_tracker.query.citecheck import Record, check
 

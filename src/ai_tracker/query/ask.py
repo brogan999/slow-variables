@@ -37,7 +37,7 @@ log = logging.getLogger("ai-tracker.ask")
 MODEL = os.environ.get("QUERY_MODEL", "claude-sonnet-5")
 # a blocked answer gets its fresh attempt on the stronger model: rare, so the bill stays near Sonnet's
 ESCALATE_MODEL = os.environ.get("QUERY_ESCALATE_MODEL", "claude-opus-5")
-PROMPT_VERSION = "9"
+PROMPT_VERSION = "10"
 # Opus 5 list price, for the escalated retry only
 ESCALATE_USD_PER_MTOK_IN, ESCALATE_USD_PER_MTOK_OUT = (
     float(x) for x in os.environ.get("QUERY_ESCALATE_USD_PER_MTOK", "5,25").split(",")
@@ -164,6 +164,11 @@ TOOLS = [
         "input_schema": {"type": "object", "properties": {"kind": {"type": "string"}}},
     },
     {
+        "name": "value_chain",
+        "description": "The site's assessment of each layer of the AI value chain and of the companies that matter in it. With no inputs: one line per assessed layer unit (its position, cite as [pos:<id>]; direction: commoditising, holding or tightening; what binds it; its rival view). With a layer id: that layer's units in full (how its economics work, what is commoditising and why, what stays scarce, Helmer's powers present, what would make a passing advantage last). With companies true: every profiled company in brief (pass a layer too to keep it to that layer's companies) (market, customers, powers, what it depends on, where its profit pools by the site's rent rule, what must be true by 2035 and what would disprove it) with its valuation rows. Profiles are this site's judgement drafted by a model: say so, cite the filing they rest on as [src:<id>], and never rank them.",
+        "input_schema": {"type": "object", "properties": {"layer": {"type": "string"}, "companies": {"type": "boolean"}}},
+    },
+    {
         "name": "futures",
         "description": "The Futures page: ideas imagined in fiction and essays (kind idea: when first imagined, whether built, the decade AI models judged a working version likely, and a judged view of who would keep the profit: rent kind, appropriability, complementary assets, asset owner, durability, where profit pools and its tier), and dated forecasts from the singularity reading list (kind forecast: who, what technology, when, the odds they gave). Cite each as [fut:<id>]. The profit judgements are AI models' judgements, not measurements: say so. Optional kind: idea, forecast.",
         "input_schema": {"type": "object", "properties": {"query": {"type": "string"}, "kind": {"type": "string"}, "k": {"type": "integer"}}, "required": ["query"]},
@@ -230,7 +235,7 @@ Rules for answers:
    - **What people expect**: the positions, claims, predictions, scenarios and forecasts that bear on it (claims, scenarios, futures), naming who holds each and tonight's state of any tested claim.
    - **What theory says**: which mechanism from the framing above applies (search_evidence for the theory note, rent_rubric for who keeps the profit), and whether tonight's readings fit it.
    If a pass has no record, say so in one sentence rather than filling it. End with where the three agree and where they pull apart.
-8. Strategy questions (what lasts, what creates advantage, what to own or buy, which opportunities are transitional or durable, where value will sit) follow a chain: call bottlenecks to find what binds now and how tight it is; run rent_rubric for the binding input (a supply shortage is a scarcity rent; its durability follows how tight it is and whether the industry is building its way out); say who holds the complementary asset; then say what would convert the transitional rent into a durable one (Helmer's later powers) and which signposts (claims, predictions) would show it happening.
+8. Strategy questions (what lasts, what creates advantage, what to own or buy, which opportunities are transitional or durable, where value will sit, what gets commoditised) start from value_chain, which holds the site's assessment of each layer and of the companies that matter; use its recorded judgements, and never re-run rent_rubric with your own inputs where a profile has them. Then follow the chain: call bottlenecks to find what binds now and how tight it is; run rent_rubric for the binding input (a supply shortage is a scarcity rent; its durability follows how tight it is and whether the industry is building its way out); say who holds the complementary asset; then say what would convert the transitional rent into a durable one (Helmer's later powers) and which signposts (claims, predictions) would show it happening.
 9. Questions about which companies will be worth $1 trillion (or any value) by a date: never name winners or give a forecast. Answer with what would have to be true. For each company that bears on it (use entity; its valuation block holds the rows), give how many times over its value must grow [derived:<id>] and the yearly rate that needs [derived:<id>], each cited in the same sentence as "$1 trillion", and never state the years remaining. Say that at today's price for each dollar of profit, profit would have to grow by the same factor, citing its latest net income [obs:<id>]. A private lab's multiple is read off its last round price and is never ranked with public companies. Then say where the company's rent comes from (rent_rubric, inputs flagged as your judgement), which bottleneck it depends on (bottlenecks) and which claims and predictions bear on it (claims), and close with the questions still open.
 10. Questions about what a particular reader should personally build, invest in or bet on get no personal recommendation: answer with the conditions and the signposts that would decide it, and say that this is the frame, not advice.
 11. Lead with the answer in one or two sentences, then the passes if any. Write in markdown with short paragraphs, a short heading per pass, and bullets where a list helps (a bullet is one claim). Take the length the question needs; do not pad. Do not describe the tools or your process.
@@ -587,6 +592,7 @@ class Tools:
                 if f == e.id
             ],
             "valuation": self._valuation(e.id),
+            "profile": self._profile(e.id),
         }
 
     def _valuation(self, eid: str) -> dict[str, Any] | None:
@@ -764,6 +770,60 @@ class Tools:
             self._index["futures_bm25"] = _bm25_index([{**r, "id": i} for i, r in rows.items()])
         return self._index["futures"]
 
+    def _vc(self) -> dict[str, Any]:
+        key = f"vc:{date.today()}"
+        if key not in self._index:
+            from .. import futures as fu
+            from .. import value_chain as vc
+
+            sc, _m = self._scorecard()
+            self._index[key] = vc.build(vc.load(), self._outlook_spec(), fu.rubric(), {i["id"]: i["word"] for i in sc["inputs"]})
+        return self._index[key]
+
+    def _outlook_spec(self) -> dict[str, Any]:
+        if "outlook_spec" not in self._index:
+            from ..outlook import load
+
+            self._index["outlook_spec"] = load()
+        return self._index["outlook_spec"]
+
+    def value_chain(self, layer: str | None = None, companies: bool = False) -> Any:
+        v = self._vc()
+        if companies:
+            # a brief per company, so every candidate fits one call; entity(<id>) has the full profile
+            return {
+                "note": "Brief profiles, unranked; call entity for a company's full profile. Drafted by a model: say so.",
+                "companies": [
+                    {
+                        "entity": c["entity"], "role": c["role"], "units": c["units"],
+                        "powers": [p["power"] for p in c["powers"]], "depends_on": [b["id"] for b in c["depends_on"]],
+                        "profit": c["rent"]["reads"], "must_be_true": [x[:160] for x in c["must_be_true"][:3]],
+                        "cite": f"src:{next(iter(c['sources'].get('market') or []), '')}",
+                        "multiple_to_1t": (self._valuation(c["entity"]) or {}).get("multiple_to_1t") or (self._valuation(c["entity"]) or {}).get("private_multiple_to_1t"),
+                        "reviewed": bool(c["reviewed_by"]),
+                    }
+                    for c in v["companies"]
+                    if not layer or any(u["id"] in (c["units"] or []) and layer in (u["layer"], u["sublayer"]) for u in v["units"])
+                ],
+            }
+        if not layer:
+            return [
+                {"cite": f"pos:{u['id']}", "layer": u["layer"], "sublayer": u["sublayer"], "title": u["title"], "direction": u["direction"],
+                 "binding": u["binding"], "rival": u["rival"]}
+                for u in v["units"]
+            ]
+        rows = [u for u in v["units"] if layer in (u["layer"], u["sublayer"])]
+        if not rows:
+            return {"error": f"no assessed unit in {layer}", "assessed": sorted({u["layer"] for u in v["units"]})}
+        return [{"cite": f"pos:{u['id']}", **{k: x for k, x in u.items() if k != "id"},
+                 "companies": [c["entity"] for c in v["companies"] if u["id"] in (c["units"] or [])]} for u in rows]
+
+    def _profile(self, eid: str) -> dict[str, Any] | None:
+        c = next((c for c in self._vc()["companies"] if c["entity"] == eid), None)
+        if not c:
+            return None
+        return {**{k: x for k, x in c.items() if k != "sources"}, "cite": {k: [f"src:{i}" for i in ids] for k, ids in c["sources"].items()}}
+
     def futures(self, query: str, kind: str | None = None, k: int = 8) -> Any:
         self._futures()
         hits = [h for h in _bm25_search(self._index["futures_bm25"], query, len(self._index["futures"]) if kind else 60) if not kind or h["kind"] == kind]
@@ -929,6 +989,8 @@ class Tools:
             return Record(id_, kind, [r[3]] if r[3] is not None else [], r[4], " ".join(r[:3])) if r else None
         pool = {"src": "sources", "pos": "positions", "claim": "claims"}[kind]
         x = next((x for x in ol.get(pool) or [] if x["id"] == id_), None)
+        if not x and kind == "src" and any(v["id"] == id_ for v in self._vc()["sources"]):
+            return Record(id_, kind, [], "", "")  # a filing behind a profile backs words; its figures are observations
         if not x:
             return None
         fields = {
@@ -990,7 +1052,10 @@ class Tools:
                 ol = self._outlook()
                 pool = {"src": "sources", "pos": "positions", "claim": "claims"}.get(kind, "")
                 x = next((x for x in ol.get(pool) or [] if x["id"] == id_), {})
-                if kind == "src":
+                v = next((v for v in self._vc()["sources"] if v["id"] == id_), None) if kind == "src" and not x else None
+                if v:
+                    label = f"{v['form']} ({v.get('filed') or v.get('period_end')})"
+                elif kind == "src":
                     label = f"{x.get('who')}, {x.get('work')} ({x.get('year')})"
                 elif kind == "pos":
                     label = x.get("title") or id_
@@ -1040,6 +1105,14 @@ class Tools:
         return None
 
     def href(self, kind: str, id_: str) -> str | None:
+        if kind == "pos":
+            u = next((p for p in self._outlook_spec().get("positions") or [] if p["id"] == id_ and p.get("layer")), None)
+            if u:
+                return f"/layers/{u['layer']}#assessment-{id_}"
+        if kind == "src":
+            x = next((x for x in self._vc()["sources"] if x["id"] == id_), None)
+            if x:
+                return x["url"]
         if kind in OUTLOOK_ANCHOR:
             return f"/outlook#{OUTLOOK_ANCHOR[kind]}-{id_}"
         if kind == "pred":

@@ -1,1124 +1,5 @@
 {
- "commoditisation": null,
- "crosswalk": [
-  {
-   "bucket_id": "methods",
-   "layer_id": "compute_physical",
-   "note": "Compute growth and hardware perf-per-dollar feed the methods stock.",
-   "relation": "input_to",
-   "shared_indicators": [
-    "epoch_training_power_growth",
-    "perf_per_dollar_growth"
-   ],
-   "sublayer_id": null
-  },
-  {
-   "bucket_id": "leak",
-   "layer_id": "compute_physical",
-   "note": "Margin stacking, HHI, circular financing: surplus exiting the chain at semis and cloud. Interpretive spine: Teece, Nordhaus and Perez in docs/interpretation; Ding through the bottleneck list.",
-   "relation": "leak_from",
-   "shared_indicators": [],
-   "sublayer_id": null
-  }
- ],
- "dependency_tier": 1,
- "description": "The chip makers, the big cloud companies and the newer rented-computing firms, data centres and the power they draw, memory and networking.",
- "economics": [
-  {
-   "binding": [
-    {
-     "id": "accelerators",
-     "name": "AI chips",
-     "word": "moderate"
-    },
-    {
-     "id": "foundry",
-     "name": "Chip foundries",
-     "word": "easing"
-    },
-    {
-     "id": "chip_equipment",
-     "name": "Chip-making equipment",
-     "word": null
-    },
-    {
-     "id": "packaging",
-     "name": "Advanced chip packaging",
-     "word": "moderate"
-    }
-   ],
-   "bottlenecks": [
-    "accelerators",
-    "foundry",
-    "chip_equipment",
-    "packaging"
-   ],
-   "case": "NVIDIA and AMD take [fact:chips_gp_share] of the gross profit (sales minus the direct cost of making them) that this site can measure across chips, one cloud and the leading labs; that share is up on the year, though it slipped in the latest quarter. Yet chips from other designers already make up [fact:silicon_share_now] of the AI computing shipped so far, including custom chips that Broadcom and others build for large cloud and model companies. TSMC's filing calls its scale and capacity, particularly for advanced processes (the newest generations of chip-making, which print the smallest features), a major competitive advantage, and its biggest customers as a group have taken a larger part of its revenue each year since 2023, even as its single largest customer's share fell. ASML says it is currently the world's only maker of extreme-ultraviolet (EUV) lithography machines, which print the finest features with light of a very short wavelength, and that one supplier, Carl Zeiss, makes all their optics and limits how many it can build. Against this unit, this site reads foundry supply as easing: TSMC's capacity is catching up with demand. That undercuts the title's claim for the foundry only if the easing reaches TSMC's own prices and margins, which this site cannot yet see, since TSMC files under international accounting rules this site's filing reader does not read. The three designers' own conditions do not collide: NVIDIA's, Broadcom's and AMD's can all hold at once until chips from other designers make up most of the AI computing shipped.",
-   "commoditising": "Chips made on older processes are cheap and interchangeable; TSMC's own filing says rivals in those processes are numerous. This site judges that the cost of a unit of computing keeps falling with each chip generation, and that the general-purpose AI chip is being copied from below: every large buyer that designs its own chip, often with Broadcom's help, turns part of NVIDIA's market into a price to negotiate. William Nordhaus, an economist who measured how much of the value of new inventions their makers keep as profit, found that it is a small part; most goes to buyers as lower prices and better products.",
-   "converts_if": "For the designer: its software (for NVIDIA, CUDA, the platform developers write AI code against) and its whole-rack systems with their own links between chips keep buyers even when rival chips are plentiful and cheaper, turning a shortage rent into switching costs, what a customer would lose by moving to a rival. For the foundry and the toolmaker: they keep a lead at each new process, so their scale and process power outlive the AI shortage.",
-   "direction": "holding",
-   "id": "vc_semis",
-   "kill_shot": "NVIDIA keeping both its share of AI chip supply and its gross margin while AMD's chips and the custom chips ship in volume and wafer supply at the newest processes keeps growing fast; or a second foundry making AI chips at the newest process in volume for a major designer.",
-   "layer": "compute_physical",
-   "mechanism": "Three kinds of firm make AI chips. Designers such as NVIDIA, AMD and Broadcom draw them; a foundry (a factory that makes chips to other firms' designs), above all TSMC, prints them onto wafers (thin discs of silicon, each later cut into many chips); and toolmakers such as ASML build the machines that do the printing. Eliyahu Goldratt, a physicist who studied factories, found that a system runs at the pace of its slowest part. David Ricardo, an English economist who asked in 1817 why landlords grew rich when bread grew dear, found that the owner of the scarcest input collects a rent: profit above what it takes to keep a business going, earned because something holds rivals off. So while buyers cannot get enough chips, the designer they most want takes the rent. This site judges that as more chips arrive and the biggest buyers design their own, that rent is exposed, while the foundry and the toolmaker keep theirs for as long as no rival can match what they do.",
-   "powers": [
-    "a cornered resource",
-    "scale economies",
-    "process power",
-    "switching costs"
-   ],
-   "rival": {
-    "id": "glut_somewhere",
-    "title": "Some link in the chip chain proves easier to expand"
-   },
-   "stays_scarce": "This site judges that capacity at the newest processes, and the machines that print it, stay scarce. A new factory for the newest process takes years to build and the skill to run it takes longer. Hamilton Helmer, a strategy consultant who studied why some firms keep earning more than their investors could expect elsewhere, found that a lasting advantage is a benefit behind a barrier, and named the kinds that recur. Two apply here: process power (a way of working that takes rivals years to learn) and scale economies (unit costs that fall as volume grows, so a rival must match the volume to match the cost). The EUV machines have one maker, fed by one optics supplier: a cornered resource, Helmer's term for preferential access to something others need, which does not ease when chips do.",
-   "sublayer": "semis",
-   "title": "The chip designer's lead is a shortage profit; the foundry's and the toolmaker's are harder to copy"
-  },
-  {
-   "binding": [
-    {
-     "id": "memory",
-     "name": "Memory",
-     "word": "moderate"
-    },
-    {
-     "id": "networking",
-     "name": "Networking and optics",
-     "word": null
-    },
-    {
-     "id": "packaging",
-     "name": "Advanced chip packaging",
-     "word": "moderate"
-    }
-   ],
-   "bottlenecks": [
-    "memory",
-    "networking",
-    "packaging"
-   ],
-   "case": "SK hynix reported record results for 2025, with HBM revenue growing sharply and demand for ordinary server memory rising sharply too. Samsung describes low inventory and supply constraints in memory. This site's tightness word for memory reads moderate, though memory is counted in dollars, so a price rise looks like more memory. Micron's own filing warns that if HBM demand weakens and makers shift capacity back to ordinary DRAM, its supply could rise sharply, and that an oversupplied market pushes prices down; it also names Chinese state-backed makers, CXMT and YMTC, among the causes of that risk.",
-   "commoditising": "Ordinary memory, the kind in phones and laptops, is a textbook commodity: identical parts, several makers, and prices that swing with each wave of new factories. Networking built to open standards such as Ethernet, which Broadcom sells to the largest cloud and model companies, is interchangeable by design. Eliyahu Goldratt, a physicist who studied factories, found that a system runs at the pace of its slowest part, and David Ricardo, an English economist who studied why landlords grew rich when bread grew dear, found that the owner of the scarcest input collects a rent: profit above what it takes to keep a business going, earned because something holds rivals off. On their account the rent in memory lasts only until the makers build their way out, and SK hynix says it is building new factories in Korea.",
-   "converts_if": "Custom HBM, memory built to one buyer's design, which SK hynix calls a key differentiator, becomes the norm, so each chip generation is locked to one maker and switching costs replace the shortage. Hamilton Helmer, a strategy consultant who studied why some firms keep earning more than rivals, named switching costs, what a customer would lose by moving to a rival, as one of the lasting advantages he found. In networking, the rent lasts only if NVIDIA's own links stay faster than open standards by enough that buyers accept being tied to one vendor.",
-   "direction": "holding",
-   "id": "vc_memory_networking",
-   "kill_shot": "Memory makers keeping record margins through a year in which all three add HBM capacity faster than AI chip shipments grow and ordinary memory prices fall.",
-   "layer": "compute_physical",
-   "mechanism": "An AI chip is only as fast as the memory that feeds it. High-bandwidth memory, or HBM, is DRAM (the working memory a processor reads and writes constantly) cut into dies (single chips), stacked and placed beside the processor so data reaches it quickly. This site counts three makers: SK hynix, Samsung and Micron. Micron's filing says HBM needs more wafers (the silicon discs chips are cut from) and more factory space than ordinary DRAM for the same amount of memory, so when AI demand runs ahead the makers profit, and if it weakens they can turn the same factories back to ordinary memory. Networking, the switches, cables and light-based links that join many chips into one machine, splits in two: NVIDIA's own links, which tie buyers to its systems, and gear built to open standards, which any maker can supply.",
-   "powers": [
-    "scale economies",
-    "process power",
-    "a cornered resource"
-   ],
-   "rival": {
-    "id": "no_glut",
-    "title": "Computing cannot flood the market overnight"
-   },
-   "stays_scarce": "This site judges that what stays scarce is the skill to stack dies with good yield (the share of units that work) and to be qualified (tested and approved) by a chip designer for its next product; a newcomer would need both, and this site judges they take longer to learn than one product generation. NVIDIA's own links between chips stay scarce because only NVIDIA makes them, though its filing says it now lets other firms' chips connect to them.",
-   "sublayer": "memory_networking",
-   "title": "High-bandwidth memory is a cyclical commodity earning a shortage's price"
-  },
-  {
-   "binding": [
-    {
-     "id": "energy",
-     "name": "Electricity generation",
-     "word": "severe"
-    },
-    {
-     "id": "grid",
-     "name": "The grid and its hookups",
-     "word": null
-    },
-    {
-     "id": "data_centres",
-     "name": "Data-centre buildings",
-     "word": "tight"
-    }
-   ],
-   "bottlenecks": [
-    "energy",
-    "grid",
-    "data_centres"
-   ],
-   "case": "This site reads electricity as severe and data-centre buildings as tight, though the electricity reading measures only how fast demand grows, not supply. The biggest cloud and platform companies spend [fact:capex_to_revenue] as much a year on buildings and equipment as AI earns in revenue, so money is not what is short; this site reads capital as slack. TSMC's filing names constraints in power supply among the things that could slow demand for its chips. Against this unit, power generated on site beside the data centre, and chips that do more work for each unit of electricity, would both loosen the grid's hold. The wait to be connected is the gauge that would show the shortage directly, and this site knows of no public series for it.",
-   "commoditising": "This site judges that the building itself, the shell, the racks and much of the cooling, follows standard designs that many contractors can put up, and that money for the build-out is plentiful. David Teece, an economist who studied why the firm that invents something often fails to keep the returns, called the inputs an innovation needs to reach its customers complementary assets; generic ones, which anyone can buy, earn an ordinary return, not a rent.",
-   "converts_if": "Holders of connected sites and running power stations lock their buyers into long contracts at prices set during the shortage, or regulators let utilities earn a guaranteed return on new lines built for data centres, turning a shortage rent into a regulated one. It fails to convert if power built on site, beside the data centre and off the grid, proves quick and cheap.",
-   "direction": "tightening",
-   "id": "vc_dc_power",
-   "kill_shot": "New large sites being connected to the grid about as fast as they are built, with the rent for powered data-centre space falling while use keeps rising.",
-   "layer": "compute_physical",
-   "mechanism": "A data centre needs three things: a building, money, and electricity delivered through a grid connection. This site judges that buildings and money can be had quickly, while a new connection means waiting for the utility to add lines and transformers, and new power stations take years. Eliyahu Goldratt, a physicist who studied factories, found that a system runs at the pace of its slowest part; David Ricardo, an English economist who studied why landlords grew rich when bread grew dear, found that the owner of the scarcest input collects a rent: profit above what it takes to keep a business going, earned because something holds rivals off. So, in this site's judgement, the rent goes to whoever already holds land with power and a connection. Much of that input sits with utilities whose prices a regulator sets, so they cannot charge what the shortage is worth; this site judges that the rent leaks instead to owners of connected sites and of power stations already running.",
-   "powers": [
-    "a cornered resource",
-    "scale economies"
-   ],
-   "rival": {
-    "id": "money_runs_out",
-    "title": "The spending runs ahead of the revenue, and investors take the loss"
-   },
-   "stays_scarce": "This site judges that grid connections, heavy electrical gear such as large transformers and turbines, and the electricians and other trades who install them stay scarce. A connection is close to a licence: a utility grants it under a regulator's rules and it cannot be copied, which makes it what Hamilton Helmer, a strategy consultant who studied lasting advantages, calls a cornered resource: preferential access to something others need. Ronald Coase, an economist who studied why some work is done inside firms rather than bought, and Oliver Williamson, who studied contracts and found that a buyer who depends on an asset built for it can be squeezed by whoever owns it, would expect the largest buyers to own such assets or lock them up in long contracts.",
-   "sublayer": "dc_power",
-   "title": "A site already wired to the grid is scarcer than the building or the money"
-  }
- ],
- "held": [
-  {
-   "id": "nvidia_5y_cds_bps",
-   "n": 1,
-   "name": "Nvidia five-year credit default swap spread",
-   "reason": "Not measurable as a series from free sources: five-year CDS quotes come from ICE and Bloomberg terminals; the one free reading is a press-quoted figure on the circular-financing ledger, and a direction rule needs quarterly prints."
-  }
- ],
- "id": "compute_physical",
- "indicators": [
-  {
-   "answers": [
-    "Who keeps it: Compute & physical / Semiconductors & AI chip startups"
-   ],
-   "band_value": null,
-   "bucket_id": null,
-   "confidence": 85,
-   "grade": "A",
-   "id": "semis_rent_concentration",
-   "latest": {
-    "as_of": "2026-07-26",
-    "derived_id": "d9c06c46e007b738",
-    "dims": {
-     "entity": "nvda"
-    },
-    "obs_ids": [
-     "096e4fb1ab0f7baf",
-     "924a29d474713fc2"
-    ],
-    "unit": "share",
-    "value": 0.7497531723844068
-   },
-   "layer_id": "compute_physical",
-   "leading_lagging": "lagging",
-   "n_observations": 144,
-   "name": "Rent concentration in semiconductors",
-   "pending": null,
-   "published": true,
-   "source_cluster": "semis_filings",
-   "spark": {
-    "d": "M1.0,12.8 L5.1,12.5 L9.2,11.8 L13.3,11.3 L17.3,11.1 L21.4,10.9 L25.5,10.8 L29.6,26.0 L33.7,19.1 L37.8,12.3 L41.9,11.4 L46.0,7.7 L50.0,5.0 L54.1,3.6 L58.2,2.0 L62.3,4.2 L66.4,4.6 L70.5,5.7 L74.6,14.3 L78.7,6.1 L82.7,5.4 L86.8,4.3 L90.9,4.4 L95.0,4.3",
-    "end": [
-     95.0,
-     4.3
-    ]
-   },
-   "stale_as_of": null,
-   "stale_reason": null,
-   "status": "concentrating",
-   "unit": "share",
-   "unpublished_reason": null,
-   "valve_measured": null
-  },
-  {
-   "answers": [
-    "Who keeps it: Compute & physical / Hyperscalers"
-   ],
-   "band_value": null,
-   "bucket_id": null,
-   "confidence": 80,
-   "grade": "A",
-   "id": "cloud_rpo_backlog",
-   "latest": {
-    "as_of": "2026-08-31",
-    "disputed": false,
-    "grade": "B",
-    "high": null,
-    "low": null,
-    "obs_ids": [
-     "0da1ca1a1be2b5f9"
-    ],
-    "series_key": "sec.orcl.rpo.q",
-    "subject": "orcl",
-    "unit": "USD",
-    "value": 664000000000.0
-   },
-   "layer_id": "compute_physical",
-   "leading_lagging": "leading",
-   "n_observations": 75,
-   "name": "Cloud backlog (remaining performance obligations)",
-   "pending": null,
-   "published": true,
-   "source_cluster": null,
-   "spark": {
-    "d": "M1.0,26.0 L5.1,26.0 L9.2,25.7 L13.3,25.8 L17.3,25.9 L21.4,25.8 L25.5,25.5 L29.6,25.0 L33.7,25.0 L37.8,24.9 L41.9,24.7 L46.0,24.8 L50.0,24.8 L54.1,24.3 L58.2,23.6 L62.3,23.5 L66.4,23.6 L70.5,22.3 L74.6,22.1 L78.7,10.0 L82.7,7.4 L86.8,6.2 L90.9,3.0 L95.0,2.0",
-    "end": [
-     95.0,
-     2.0
-    ]
-   },
-   "stale_as_of": null,
-   "stale_reason": null,
-   "status": "concentrating",
-   "unit": "USD",
-   "unpublished_reason": null,
-   "valve_measured": null
-  },
-  {
-   "answers": [
-    "Who keeps it: Compute & physical / Semiconductors & AI chip startups"
-   ],
-   "band_value": null,
-   "bucket_id": null,
-   "confidence": 70,
-   "grade": "A",
-   "id": "margin_stack_semis_share",
-   "latest": {
-    "as_of": "2026-06-30",
-    "derived_id": "24e04b9b42c4abed",
-    "dims": {
-     "layer_id": "compute_semis"
-    },
-    "obs_ids": [
-     "1758b8cbfce6d9e5",
-     "288c79d6d2cfef4a",
-     "815ceb0b563b37cb",
-     "87068884441cb244",
-     "89c26630d3de81d0",
-     "a3832632b73ebd69",
-     "da8e7e0e31932cfe",
-     "fae81703934cb958"
-    ],
-    "unit": "share",
-    "value": 0.6102232811308139
-   },
-   "layer_id": "compute_physical",
-   "leading_lagging": "lagging",
-   "n_observations": 52,
-   "name": "Semiconductors' share of stack operating income",
-   "pending": null,
-   "published": true,
-   "source_cluster": "semis_filings",
-   "spark": {
-    "d": "M1.0,26.0 L11.4,22.6 L21.9,20.6 L32.3,16.8 L42.8,24.2 L53.2,16.2 L63.7,10.3 L74.1,5.8 L84.6,2.0 L95.0,2.7",
-    "end": [
-     95.0,
-     2.7
-    ]
-   },
-   "stale_as_of": null,
-   "stale_reason": null,
-   "status": "concentrating",
-   "unit": "share",
-   "unpublished_reason": null,
-   "valve_measured": null
-  },
-  {
-   "answers": [
-    "Who keeps it: Compute & physical / Semiconductors & AI chip startups"
-   ],
-   "band_value": null,
-   "bucket_id": null,
-   "confidence": 60,
-   "grade": "A",
-   "id": "gross_profit_semis_share",
-   "latest": {
-    "as_of": "2026-06-30",
-    "derived_id": "32234358f93956fd",
-    "dims": {
-     "basis": "filed",
-     "layer_id": "compute_semis"
-    },
-    "obs_ids": [
-     "0b6d0c8c368c7937",
-     "1a2c7e77a3879f2b",
-     "2a23fc81cd16d222",
-     "2d9a42587abe262f",
-     "4910df35443940aa",
-     "5940a28208892eaf",
-     "5b9948898bd3d1b5",
-     "62adf9bfc68ef6e2",
-     "76757aa09406f17b",
-     "77e6d896399b59a9",
-     "924a29d474713fc2",
-     "9fbab158355685d5",
-     "aca02d0b916a89dd",
-     "c277318418142d0c",
-     "d575d683afd39e24",
-     "fc044aaf57883098"
-    ],
-    "unit": "share",
-    "value": 0.726231349273251
-   },
-   "layer_id": "compute_physical",
-   "leading_lagging": "lagging",
-   "n_observations": 43,
-   "name": "Chips' share of the stack's gross profit",
-   "pending": null,
-   "published": true,
-   "source_cluster": "semis_filings",
-   "spark": {
-    "d": "M1.0,26.0 L19.8,21.6 L38.6,11.8 L57.4,6.6 L76.2,2.0 L95.0,4.4",
-    "end": [
-     95.0,
-     4.4
-    ]
-   },
-   "stale_as_of": null,
-   "stale_reason": null,
-   "status": "concentrating",
-   "unit": "share",
-   "unpublished_reason": null,
-   "valve_measured": null
-  },
-  {
-   "answers": [
-    "Who keeps it: Compute & physical / Hyperscalers"
-   ],
-   "band_value": null,
-   "bucket_id": null,
-   "confidence": 75,
-   "grade": "A",
-   "id": "cloud_segment_margins",
-   "latest": {
-    "as_of": "2026-06-30",
-    "derived_id": "41dd716ac94379a7",
-    "dims": {
-     "segment": "amzn.aws"
-    },
-    "obs_ids": [
-     "6fb0f8f0c93debba",
-     "89c26630d3de81d0"
-    ],
-    "unit": "share",
-    "value": 0.39356412199280166
-   },
-   "layer_id": "compute_physical",
-   "leading_lagging": "lagging",
-   "n_observations": 24,
-   "name": "Cloud segment operating margins",
-   "pending": null,
-   "published": true,
-   "source_cluster": null,
-   "spark": {
-    "d": "M1.0,26.0 L9.5,16.5 L18.1,4.9 L26.6,8.2 L35.2,4.2 L43.7,6.0 L52.3,2.0 L60.8,12.3 L69.4,9.6 L77.9,9.0 L86.5,4.8 L95.0,2.2",
-    "end": [
-     95.0,
-     2.2
-    ]
-   },
-   "stale_as_of": null,
-   "stale_reason": null,
-   "status": "concentrating",
-   "unit": "share",
-   "unpublished_reason": null,
-   "valve_measured": null
-  },
-  {
-   "answers": [
-    "Who keeps it: Compute & physical"
-   ],
-   "band_value": null,
-   "bucket_id": null,
-   "confidence": 75,
-   "grade": "B",
-   "id": "circular_financing_scale",
-   "latest": {
-    "as_of": "2026-08-17",
-    "derived_id": "febe8edbad38ae2e",
-    "dims": {},
-    "obs_ids": [
-     "0020effe4dfd27db",
-     "47769aec0def968f",
-     "5b741dc1c66e44b9",
-     "86bf3cb0a6332e69",
-     "8f6d7f9ec8d190d8",
-     "ade7ee6fe91208ab",
-     "d46842ce12c8b89f",
-     "d4a1c4d05ce13c70",
-     "f2652bb8a224e740"
-    ],
-    "unit": "USD",
-    "value": 557000000000.0
-   },
-   "layer_id": "compute_physical",
-   "leading_lagging": "leading",
-   "n_observations": 14,
-   "name": "Circular financing scale",
-   "pending": null,
-   "published": true,
-   "source_cluster": null,
-   "spark": {
-    "d": "M1.0,26.0 L14.4,26.0 L27.9,26.0 L41.3,15.6 L54.7,6.8 L68.1,5.8 L81.6,2.0 L95.0,9.1",
-    "end": [
-     95.0,
-     9.1
-    ]
-   },
-   "stale_as_of": null,
-   "stale_reason": null,
-   "status": "unclear",
-   "unit": "USD",
-   "unpublished_reason": null,
-   "valve_measured": null
-  },
-  {
-   "answers": [
-    "Who keeps it: Compute & physical / Semiconductors & AI chip startups"
-   ],
-   "band_value": null,
-   "bucket_id": null,
-   "confidence": 60,
-   "grade": "A",
-   "id": "semis_hhi",
-   "latest": {
-    "as_of": "2026-06-30",
-    "derived_id": "f67404bbdcc6149e",
-    "dims": {
-     "layer_id": "compute_semis"
-    },
-    "obs_ids": [
-     "005d040fe4b816e0",
-     "8f2976e4d50caea9"
-    ],
-    "unit": "index",
-    "value": 0.8695102791386691
-   },
-   "layer_id": "compute_physical",
-   "leading_lagging": "leading",
-   "n_observations": 24,
-   "name": "Concentration among covered chip filers (HHI)",
-   "pending": null,
-   "published": true,
-   "source_cluster": "semis_filings",
-   "spark": {
-    "d": "M1.0,26.0 L9.5,11.6 L18.1,11.5 L26.6,12.9 L35.2,15.2 L43.7,13.1 L52.3,8.4 L60.8,3.2 L69.4,5.3 L77.9,5.8 L86.5,2.5 L95.0,2.0",
-    "end": [
-     95.0,
-     2.0
-    ]
-   },
-   "stale_as_of": null,
-   "stale_reason": null,
-   "status": "stable",
-   "unit": "index",
-   "unpublished_reason": null,
-   "valve_measured": null
-  },
-  {
-   "answers": [
-    "Who keeps it: Compute & physical / Hyperscalers"
-   ],
-   "band_value": null,
-   "bucket_id": null,
-   "confidence": 60,
-   "grade": "A",
-   "id": "cloud_hhi",
-   "latest": {
-    "as_of": "2026-06-30",
-    "derived_id": "801d7da1e84b1e54",
-    "dims": {
-     "layer_id": "compute_cloud"
-    },
-    "obs_ids": [
-     "5b9948898bd3d1b5",
-     "6fb0f8f0c93debba",
-     "77e6d896399b59a9",
-     "aca02d0b916a89dd",
-     "ccf1eb0df321607f",
-     "d575d683afd39e24"
-    ],
-    "unit": "index",
-    "value": 0.34881596944624144
-   },
-   "layer_id": "compute_physical",
-   "leading_lagging": "leading",
-   "n_observations": 34,
-   "name": "Concentration among covered cloud filers (HHI)",
-   "pending": null,
-   "published": true,
-   "source_cluster": null,
-   "spark": {
-    "d": "M1.0,2.0 L10.4,4.5 L19.8,5.9 L29.2,9.0 L38.6,9.1 L48.0,9.2 L57.4,11.1 L66.8,13.9 L76.2,18.1 L85.6,21.7 L95.0,26.0",
-    "end": [
-     95.0,
-     26.0
-    ]
-   },
-   "stale_as_of": null,
-   "stale_reason": null,
-   "status": "stable",
-   "unit": "index",
-   "unpublished_reason": null,
-   "valve_measured": null
-  },
-  {
-   "answers": [
-    "Who keeps it: Compute & physical / Semiconductors & AI chip startups"
-   ],
-   "band_value": null,
-   "bucket_id": null,
-   "confidence": 50,
-   "grade": "C",
-   "id": "custom_silicon_share",
-   "latest": {
-    "as_of": "2025-12-31",
-    "derived_id": "051d3936f8f7c098",
-    "dims": {},
-    "obs_ids": [
-     "1c4820ae9106f46e",
-     "399214e48a15bb19",
-     "83fc6986a1630d10",
-     "c32215464bcb0e24",
-     "d0d1705763f944a5",
-     "e488feafb4588327"
-    ],
-    "unit": "share",
-    "value": 0.3281813619319996
-   },
-   "layer_id": "compute_physical",
-   "leading_lagging": "leading",
-   "n_observations": 48,
-   "name": "Non-Nvidia share of AI compute shipped (H100-equivalents)",
-   "pending": null,
-   "published": true,
-   "source_cluster": null,
-   "spark": {
-    "d": "M1.0,26.0 L14.4,18.3 L27.9,12.1 L41.3,7.7 L54.7,5.5 L68.1,3.6 L81.6,2.0 L95.0,2.2",
-    "end": [
-     95.0,
-     2.2
-    ]
-   },
-   "stale_as_of": "2025-12-31",
-   "stale_reason": null,
-   "status": "emerging",
-   "unit": "share",
-   "unpublished_reason": null,
-   "valve_measured": null
-  },
-  {
-   "answers": [
-    "Who keeps it: Compute & physical / Hyperscalers"
-   ],
-   "band_value": null,
-   "bucket_id": null,
-   "confidence": 40,
-   "grade": "A",
-   "id": "capex_to_revenue_stack",
-   "latest": {
-    "as_of": "2026-06-30",
-    "derived_id": "7867e6c6b3b7fe32",
-    "dims": {},
-    "obs_ids": [
-     "027237d89717d303",
-     "143dcf3ea59eb522",
-     "196a6174924b2821",
-     "22f1089618415146",
-     "29221e0928c0242d",
-     "32e64259c1e4e50d",
-     "416fff663e911055",
-     "4910df35443940aa",
-     "4dc8ee6d073b8430",
-     "6012e72e8105bfc4",
-     "63f00590a394882c",
-     "75543ae9e018ed01",
-     "8065a41f15722c18",
-     "8b365444d28ae498",
-     "8f56415d4215a050",
-     "9fbab158355685d5",
-     "acfb330f2b9e4b17",
-     "b965137f0c59e1db",
-     "c2b3a023a57c6672",
-     "c2c40a32f6af336b",
-     "c3dc9a8eb030c5c7",
-     "c72d56dfb070b2b7",
-     "ccc7b379ab5ac2f2",
-     "ce2a8065b1d4c7ac",
-     "d0aab6e876c0d174",
-     "d2f98ef9a6eab885",
-     "e917679d8ad7817e",
-     "ee8e059d6b7db9a1",
-     "f2df3324fcaa3dd6",
-     "f64560a6646757a8",
-     "f77a3da7ccf46854",
-     "f87fbd907ad6c419"
-    ],
-    "unit": "ratio",
-    "value": 5.122609938315153
-   },
-   "layer_id": "compute_physical",
-   "leading_lagging": "leading",
-   "n_observations": 82,
-   "name": "Hyperscaler capex to AI revenue (trailing year)",
-   "pending": null,
-   "published": true,
-   "source_cluster": null,
-   "spark": {
-    "d": "M1.0,4.9 L16.7,2.0 L32.3,6.8 L48.0,7.1 L63.7,23.0 L79.3,23.6 L95.0,26.0",
-    "end": [
-     95.0,
-     26.0
-    ]
-   },
-   "stale_as_of": null,
-   "stale_reason": null,
-   "status": "dispersing",
-   "unit": "ratio",
-   "unpublished_reason": null,
-   "valve_measured": null
-  },
-  {
-   "answers": [
-    "Who keeps it: Compute & physical / Hyperscalers"
-   ],
-   "band_value": null,
-   "bucket_id": null,
-   "confidence": 65,
-   "grade": "A",
-   "id": "depreciation_useful_life_changes",
-   "latest": {
-    "as_of": "2025-12-31",
-    "disputed": false,
-    "grade": "A",
-    "high": null,
-    "low": null,
-    "obs_ids": [
-     "81efc38c88434c53"
-    ],
-    "series_key": "sec_filing.amzn.server_useful_life_years.fy",
-    "subject": "amzn",
-    "unit": "years",
-    "value": 5.0
-   },
-   "layer_id": "compute_physical",
-   "leading_lagging": "lagging",
-   "n_observations": 4,
-   "name": "Hyperscaler server useful lives (10-K estimates)",
-   "pending": null,
-   "published": true,
-   "source_cluster": null,
-   "spark": null,
-   "stale_as_of": null,
-   "stale_reason": "Annual filings; each change is quoted by hand from the 10-K notes.",
-   "status": "emerging",
-   "unit": "years",
-   "unpublished_reason": null,
-   "valve_measured": null
-  },
-  {
-   "answers": [
-    "Who keeps it: Compute & physical / Hyperscalers"
-   ],
-   "band_value": null,
-   "bucket_id": null,
-   "confidence": 60,
-   "grade": "B",
-   "id": "neocloud_debt_terms",
-   "latest": {
-    "as_of": "2026-06-30",
-    "derived_id": "a153a967dd1bb61a",
-    "dims": {
-     "entity": "crwv"
-    },
-    "obs_ids": [
-     "07ff8ebabf22d060",
-     "5ecdd5795911ce93",
-     "61c7969e48db4455",
-     "83dde83bc0a515eb"
-    ],
-    "unit": "share",
-    "value": 0.105
-   },
-   "layer_id": "compute_physical",
-   "leading_lagging": "coincident",
-   "n_observations": 12,
-   "name": "Neocloud borrowing cost (CoreWeave facility rates)",
-   "pending": null,
-   "published": true,
-   "source_cluster": null,
-   "spark": null,
-   "stale_as_of": null,
-   "stale_reason": null,
-   "status": "emerging",
-   "unit": "share",
-   "unpublished_reason": null,
-   "valve_measured": null
-  },
-  {
-   "answers": [
-    "Who keeps it: Compute & physical / Hyperscalers"
-   ],
-   "band_value": null,
-   "bucket_id": null,
-   "confidence": 35,
-   "grade": "B",
-   "id": "gpu_rental_price_per_hour",
-   "latest": {
-    "as_of": "2026-09-21",
-    "disputed": false,
-    "grade": "B",
-    "high": null,
-    "low": null,
-    "obs_ids": [
-     "471ecfd1d9421357"
-    ],
-    "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
-    "subject": "nvidia_h100",
-    "unit": "USD",
-    "value": 3.225
-   },
-   "layer_id": "compute_physical",
-   "leading_lagging": "leading",
-   "n_observations": 159,
-   "name": "GPU rental price per hour",
-   "pending": null,
-   "published": true,
-   "source_cluster": null,
-   "spark": {
-    "d": "M1.0,26.0 L5.1,23.1 L9.2,25.8 L13.3,23.1 L17.3,21.6 L21.4,15.0 L25.5,16.7 L29.6,12.6 L33.7,18.0 L37.8,16.7 L41.9,18.9 L46.0,14.6 L50.0,11.1 L54.1,14.1 L58.2,11.1 L62.3,7.4 L66.4,3.2 L70.5,2.0 L74.6,3.2 L78.7,4.7 L82.7,6.6 L86.8,4.7 L90.9,6.2 L95.0,4.0",
-    "end": [
-     95.0,
-     4.0
-    ]
-   },
-   "stale_as_of": null,
-   "stale_reason": null,
-   "status": "emerging",
-   "unit": "USD",
-   "unpublished_reason": null,
-   "valve_measured": null
-  },
-  {
-   "answers": [
-    "Valve: Invention \u2192 product",
-    "Who keeps it: Compute & physical / Data-centre developers & power"
-   ],
-   "band_value": null,
-   "bucket_id": "methods",
-   "confidence": 50,
-   "grade": "C",
-   "id": "epoch_training_power_growth",
-   "latest": {
-    "as_of": "2026-09-03",
-    "derived_id": "3eb22e7fa8d29b98",
-    "dims": {
-     "aic": "336.2",
-     "n": "169",
-     "r2": "0.094"
-    },
-    "obs_ids": [
-     "0064d6a330f0ca94",
-     "0345be86776a534d",
-     "075cc617c593d677",
-     "085ec98ab35eca70",
-     "0b75879dabbb71b1",
-     "0d3630dc88948a0d",
-     "0fc44592499c3055",
-     "125234d58929de5a",
-     "15f9a0eabe00cc61",
-     "16e1cb632d23a737",
-     "176ee15479938b5a",
-     "181ac64b07656d45",
-     "18b319442d88e9ed",
-     "1c3036033f4c195f",
-     "1e5d9adb7ff220ca",
-     "212e7194e920d7b8",
-     "22900e8bdd90b32c",
-     "2308a29dc27295cb",
-     "24138189accc170a",
-     "2633d24deb20ac36",
-     "2684f7c35b4f23c6",
-     "2716393710f85ae4",
-     "27530e86781b288e",
-     "27d7f9fd8896b341",
-     "2871a41a075256ee",
-     "2b3cc5146659de6b",
-     "2c4b837d77b3d596",
-     "2c6de7b534e32ca1",
-     "2cd10dbb77351fa5",
-     "2e3ced9debb478ab",
-     "301c32ab36a10d02",
-     "30973636079d1c51",
-     "30ef1be908f1b537",
-     "31181335d2421b2b",
-     "336b7991e2ffe764",
-     "34232ec90d1a66bb",
-     "35a47b4c00147ed1",
-     "36f99889f2297914",
-     "380dfe3ff9fa78b8",
-     "395b276a3bf82eb1",
-     "3a42f56293a13028",
-     "3abf8f52d7e81a51",
-     "3b6e3ab02a224d97",
-     "3bef39cefb28e255",
-     "3cbc02c96248e1a2",
-     "3da7ac15daa295b9",
-     "3e0b9c0cabaf517d",
-     "40363f232e7847e7",
-     "4188bf125e490aa7",
-     "4196642b1c0e0d2f",
-     "41cd2c8e687c8d93",
-     "421ac9d045471428",
-     "4385a1c978f1d60e",
-     "4483b7bc53a4cee6",
-     "448429dfeada88d4",
-     "46003ac2f940f286",
-     "489cfd033b6c5faa",
-     "4ac37f27724340e2",
-     "4b71e2ef0157e6db",
-     "4cafc9e43908913f",
-     "4df57501f8969907",
-     "4eaa272fba98361b",
-     "4f13f12a247352f3",
-     "4f2e9512833c4e20",
-     "4fc0f9e14b62fde1",
-     "4fd36c8be9890d3b",
-     "4ffb38cc5e731c5c",
-     "5047e339fe17035b",
-     "51933510ebdd364d",
-     "54f2e869687ac23a",
-     "551d064154700182",
-     "556dff0d2c3ffe19",
-     "5618de7d80940968",
-     "567054d83e9688d4",
-     "56a206e3e50763de",
-     "56c5c52b2cc5d9eb",
-     "579ab4e9458ea8cd",
-     "58e4421ca908647b",
-     "59ec949d165791f0",
-     "5a48b841ef839657",
-     "5b4701c48d2444c5",
-     "5bd5c06ffcf071fa",
-     "5beb61d34e37fd80",
-     "5dd2d3e551725f2d",
-     "600c55c63b4dbc87",
-     "6078552f5182cb3e",
-     "614fa34f7f4e6385",
-     "6150e60a85021b52",
-     "6160bf3b522c4a69",
-     "64ce63cd4ab4bc78",
-     "64dc24221e9e3cc1",
-     "657cd0af032547f3",
-     "68b10a29c4abc140",
-     "6c250cb4f718f663",
-     "6d0999fbdfe1a456",
-     "6d4ce0c417c5d8b0",
-     "6dc9b27cfa419b58",
-     "6dec8892c448d62d",
-     "6e8b66130ed4b151",
-     "6e91e3cd65f86dc4",
-     "6f5df7808a88c133",
-     "71c27c946d5ab4b6",
-     "74197169a49c5ffc",
-     "750a470ef4e070b5",
-     "75df9cc41bfce5ac",
-     "77bea9ccb4461488",
-     "7c33490992787ccc",
-     "7c7948a0823c321d",
-     "7cf21e3bb8df8c4d",
-     "7d3bbcc14b226420",
-     "7ddd1272a5eefc65",
-     "80133e13e1f483dd",
-     "805eeb9ec1d798e8",
-     "80d15191df19d77b",
-     "848bb8e117129fed",
-     "858d2aaec806fd2c",
-     "85e1787d4f4c5540",
-     "86c08f208191d15e",
-     "8840024044c89a8d",
-     "8a1c14defea406b2",
-     "8bc312dea89ca876",
-     "8ce2167235a2e946",
-     "8fa437901308df8e",
-     "90215d9a58e886a2",
-     "91f1d3c57f717b4f",
-     "9200fd692d05fdb0",
-     "9299499ccf0f6f50",
-     "92dcf3ee4076abc6",
-     "92fc2311bc9aec1f",
-     "949e22062ac7c3e0",
-     "955156490b97ff02",
-     "9565e4b58d6428c8",
-     "95f26dfdcfb56aa6",
-     "975ebb4b9cb9cfe3",
-     "985f5e8112e7b9bc",
-     "988421bbefc38a2d",
-     "9d154238b01cb12c",
-     "9d40e8120d56e4d0",
-     "9dd830609173990f",
-     "a1b2b8ea9ead816c",
-     "a2a66b20f7d894e9",
-     "a3db843f2060646c",
-     "a6c99bef8eecfb89",
-     "a7174a8879b7485f",
-     "acc6ebfe90c17655",
-     "af05d87bfb423904",
-     "af9b60fc6f50e4ae",
-     "afadbcfb4f0fd9ce",
-     "b1221d28903c628b",
-     "b132b861d288686c",
-     "b266e0b60b362ad0",
-     "b459b991a71d6a1f",
-     "b59520fe28578934",
-     "b5af10b6a6a4f829",
-     "b5e82d5188b42e62",
-     "b820e2ceb6251f95",
-     "b8423bc4355cf9b6",
-     "b844753b5dd06f93",
-     "b86f3dafa5b11df8",
-     "b947032683b6d7a6",
-     "bab6209e5fc82fce",
-     "bb50449a497f5aaa",
-     "bd724651234fe84b",
-     "c2e4e6a55f0a07a2",
-     "c460e4537a10d86a",
-     "c4e80ccb2cdd6043",
-     "c6b68febcf9a4941",
-     "c82913f3d419246f",
-     "c933bbaedb82f1ce",
-     "ca71cbf50f57f9b4",
-     "cc1c57183e8ed0ce",
-     "cfd48d721799bd24",
-     "d0a7587a7e257cbe",
-     "d0d686b27b1c7645",
-     "d16c94dc4e40348f",
-     "d16f6cbbb504a88d",
-     "d2399452226616ba",
-     "d5e7cfc71a896444",
-     "d63eb22e427d067a",
-     "d72dbd202bb67a08",
-     "d7791bf71faa531c",
-     "d84a67bbca1bf603",
-     "da1584e638962cfb",
-     "dabcfef19737095f",
-     "dd129de0a6d245b4",
-     "dd64db12ce664789",
-     "ddfd065aa9f995c5",
-     "df6efa67ddfd22c3",
-     "e02c45350fd840d0",
-     "e888fbe5cc9be66f",
-     "e8a040383b01e375",
-     "e8c11a54e6b65bf6",
-     "ea4faaa21181ffd9",
-     "eb727ff88020fa92",
-     "ebbafba0850c547f",
-     "ec7942efa9b9c047",
-     "ed19fc558744aa2e",
-     "f2aef5d397f37a69",
-     "f2cd1b75326d22f8",
-     "f2d224d832e97ecd",
-     "f353ccb41bc0854e",
-     "f35f9058edd349a2",
-     "f466e23939037c6a",
-     "f4e456912da9dc01",
-     "f62a16adea8812d3",
-     "f638f77154c70476",
-     "f7951bfbd34d9149",
-     "f8ad95b861cd846c",
-     "fa3994405bd8d64a",
-     "fa9b7c84b860c708",
-     "fc0df7d399ecbab2",
-     "fddddb4b7beb1851",
-     "ff8a3cc4d316d6d2",
-     "ff96cf7424de5ba4"
-    ],
-    "unit": "days",
-    "value": 457.55605480519046
-   },
-   "layer_id": "compute_physical",
-   "leading_lagging": "leading",
-   "n_observations": 214,
-   "name": "Training power draw growth (doubling time)",
-   "pending": null,
-   "published": true,
-   "source_cluster": null,
-   "spark": null,
-   "stale_as_of": null,
-   "stale_reason": null,
-   "status": "emerging",
-   "unit": "days",
-   "unpublished_reason": null,
-   "valve_measured": "invention_to_product"
-  },
-  {
-   "answers": [
-    "Valve: Invention \u2192 product",
-    "Who keeps it: Compute & physical / Semiconductors & AI chip startups"
-   ],
-   "band_value": null,
-   "bucket_id": "methods",
-   "confidence": 40,
-   "grade": "B",
-   "id": "perf_per_dollar_growth",
-   "latest": {
-    "as_of": "2025-11-06",
-    "derived_id": "eeb1925cd35ee237",
-    "dims": {
-     "aic": "-6.6",
-     "n": "20",
-     "r2": "0.360"
-    },
-    "obs_ids": [
-     "022d95069a720995",
-     "1fdbef3268e75a56",
-     "27fd3c4783a02b89",
-     "28df34c0d3bcaf2b",
-     "2e880a726f281667",
-     "2feb92d7453ddf35",
-     "31bd3684b319cf1e",
-     "3918686e84cafd5d",
-     "3b6cabe10efe4e9f",
-     "3c78e4d11f6ddb21",
-     "4242fdcd0f30ce32",
-     "441605f18f26a5a3",
-     "4424f8477ba888b7",
-     "54b6367999be3a4e",
-     "57af1c5c84145f14",
-     "5898dc9a94fcb72e",
-     "5f67abf56d5838f5",
-     "6b3967693d44ccb4",
-     "6ba82593402f9cc4",
-     "77a0ee4619717aa3",
-     "78783a1bec024ccc",
-     "7e951b9d74733988",
-     "8ab3459c38a143b5",
-     "8c34260b78c46dfb",
-     "8e74957860871299",
-     "8f30bd5f73b76d32",
-     "8fd5f06222d9d2b7",
-     "981ea76b815308e5",
-     "a1a57bcef19f5af8",
-     "a24fedb2c340a66c",
-     "af053555458a0c2f",
-     "bf00b162da411612",
-     "c5d37dff46af5583",
-     "ca0d7fa32345d95c",
-     "d29860483000ace5",
-     "d83a3353e02b94d1",
-     "da2a2b98b39d1db4",
-     "e95523e7de1e6074",
-     "f5f878d6f616f2f9",
-     "f6102c632d05f6d2"
-    ],
-    "unit": "days",
-    "value": 1281.6193746698327
-   },
-   "layer_id": "compute_physical",
-   "leading_lagging": "leading",
-   "n_observations": 40,
-   "name": "Hardware price-performance growth (doubling time)",
-   "pending": null,
-   "published": true,
-   "source_cluster": null,
-   "spark": null,
-   "stale_as_of": null,
-   "stale_reason": null,
-   "status": "consistent_with_normal",
-   "unit": "days",
-   "unpublished_reason": null,
-   "valve_measured": "invention_to_product"
-  }
- ],
- "name": "Compute & physical",
- "order": 1,
- "profiles": [
+ "companies": [
   {
    "concentration": "concentrated",
    "customers": "A small group of chip makers: the leading logic foundries and the memory makers. The filing does not name them, but says its largest customer's share of its sales rose in 2025 and that its sales lean heavily on its two largest customers. The rankings shift from year to year.",
@@ -1987,83 +868,153 @@
    ]
   }
  ],
- "sublayers": [
+ "powers": {
+  "a cornered resource": "preferential access to something others need: a patent, a licence, a scarce input, a rare team",
+  "branding": "buyers pay more for the same thing because of what they believe about who made it",
+  "counter-positioning": "a newcomer's model the incumbent could copy only by damaging its own business",
+  "network economies": "each user makes the product more valuable to the others, so the leader's lead feeds itself",
+  "process power": "a way of working that improves cost or quality and takes a rival years to learn",
+  "scale economies": "unit costs fall as volume grows, and a rival cannot match them without matching the volume",
+  "switching costs": "a customer would lose money, time or work by moving to a rival"
+ },
+ "units": [
   {
-   "description": "",
-   "id": "semis",
-   "layer_id": "compute_physical",
-   "name": "Semiconductors & AI chip startups",
-   "order": 1
-  },
-  {
-   "description": "",
-   "id": "hyperscalers_neoclouds",
-   "layer_id": "compute_physical",
-   "name": "Hyperscalers",
-   "order": 2
-  },
-  {
-   "description": "",
-   "id": "dc_power",
-   "layer_id": "compute_physical",
-   "name": "Data-centre developers & power",
-   "order": 3
-  },
-  {
-   "description": "",
-   "id": "memory_networking",
-   "layer_id": "compute_physical",
-   "name": "Memory/HBM",
-   "order": 4
-  }
- ],
- "venture": {
-  "arrow": "up",
-  "as_of": "2026-06-30",
-  "obs_ids": [
-   "0f018dc232d72b50",
-   "14dda4d0440463e4",
-   "221bdd142d5a091b",
-   "24b4e507d42ec9ee",
-   "cf7378d5379c3292"
-  ],
-  "prior": {
-   "as_of": "2025-06-30",
-   "obs_ids": [
-    "01bbf1a163dd630a",
-    "07752e0f921cbc6a",
-    "23a51ed28d12054c",
-    "2bcb93c694606fd1",
-    "2e523274ac093b67",
-    "609d83de2c2b68d1",
-    "7ff06eaa3486d738",
-    "e70eac78a24ad94f"
+   "binding": [
+    {
+     "id": "accelerators",
+     "name": "AI chips",
+     "word": "moderate"
+    },
+    {
+     "id": "foundry",
+     "name": "Chip foundries",
+     "word": "easing"
+    },
+    {
+     "id": "chip_equipment",
+     "name": "Chip-making equipment",
+     "word": null
+    },
+    {
+     "id": "packaging",
+     "name": "Advanced chip packaging",
+     "word": "moderate"
+    }
    ],
-   "value": 1679932572.0
-  },
-  "sublayers": [
-   {
-    "as_of": "2026-06-30",
-    "name": "Hyperscalers",
-    "obs_ids": [
-     "14dda4d0440463e4",
-     "24b4e507d42ec9ee",
-     "cf7378d5379c3292"
-    ],
-    "sublayer_id": "hyperscalers_neoclouds",
-    "value": 2207378142.0
+   "bottlenecks": [
+    "accelerators",
+    "foundry",
+    "chip_equipment",
+    "packaging"
+   ],
+   "case": "NVIDIA and AMD take [fact:chips_gp_share] of the gross profit (sales minus the direct cost of making them) that this site can measure across chips, one cloud and the leading labs; that share is up on the year, though it slipped in the latest quarter. Yet chips from other designers already make up [fact:silicon_share_now] of the AI computing shipped so far, including custom chips that Broadcom and others build for large cloud and model companies. TSMC's filing calls its scale and capacity, particularly for advanced processes (the newest generations of chip-making, which print the smallest features), a major competitive advantage, and its biggest customers as a group have taken a larger part of its revenue each year since 2023, even as its single largest customer's share fell. ASML says it is currently the world's only maker of extreme-ultraviolet (EUV) lithography machines, which print the finest features with light of a very short wavelength, and that one supplier, Carl Zeiss, makes all their optics and limits how many it can build. Against this unit, this site reads foundry supply as easing: TSMC's capacity is catching up with demand. That undercuts the title's claim for the foundry only if the easing reaches TSMC's own prices and margins, which this site cannot yet see, since TSMC files under international accounting rules this site's filing reader does not read. The three designers' own conditions do not collide: NVIDIA's, Broadcom's and AMD's can all hold at once until chips from other designers make up most of the AI computing shipped.",
+   "commoditising": "Chips made on older processes are cheap and interchangeable; TSMC's own filing says rivals in those processes are numerous. This site judges that the cost of a unit of computing keeps falling with each chip generation, and that the general-purpose AI chip is being copied from below: every large buyer that designs its own chip, often with Broadcom's help, turns part of NVIDIA's market into a price to negotiate. William Nordhaus, an economist who measured how much of the value of new inventions their makers keep as profit, found that it is a small part; most goes to buyers as lower prices and better products.",
+   "converts_if": "For the designer: its software (for NVIDIA, CUDA, the platform developers write AI code against) and its whole-rack systems with their own links between chips keep buyers even when rival chips are plentiful and cheaper, turning a shortage rent into switching costs, what a customer would lose by moving to a rival. For the foundry and the toolmaker: they keep a lead at each new process, so their scale and process power outlive the AI shortage.",
+   "direction": "holding",
+   "id": "vc_semis",
+   "kill_shot": "NVIDIA keeping both its share of AI chip supply and its gross margin while AMD's chips and the custom chips ship in volume and wafer supply at the newest processes keeps growing fast; or a second foundry making AI chips at the newest process in volume for a major designer.",
+   "layer": "compute_physical",
+   "mechanism": "Three kinds of firm make AI chips. Designers such as NVIDIA, AMD and Broadcom draw them; a foundry (a factory that makes chips to other firms' designs), above all TSMC, prints them onto wafers (thin discs of silicon, each later cut into many chips); and toolmakers such as ASML build the machines that do the printing. Eliyahu Goldratt, a physicist who studied factories, found that a system runs at the pace of its slowest part. David Ricardo, an English economist who asked in 1817 why landlords grew rich when bread grew dear, found that the owner of the scarcest input collects a rent: profit above what it takes to keep a business going, earned because something holds rivals off. So while buyers cannot get enough chips, the designer they most want takes the rent. This site judges that as more chips arrive and the biggest buyers design their own, that rent is exposed, while the foundry and the toolmaker keep theirs for as long as no rival can match what they do.",
+   "powers": [
+    "a cornered resource",
+    "scale economies",
+    "process power",
+    "switching costs"
+   ],
+   "rival": {
+    "id": "glut_somewhere",
+    "title": "Some link in the chip chain proves easier to expand"
    },
-   {
-    "as_of": "2026-06-30",
-    "name": "Semiconductors & AI chip startups",
-    "obs_ids": [
-     "0f018dc232d72b50",
-     "221bdd142d5a091b"
-    ],
-    "sublayer_id": "semis",
-    "value": 761762013.0
-   }
-  ],
-  "value": 2969140155.0
- }
+   "stays_scarce": "This site judges that capacity at the newest processes, and the machines that print it, stay scarce. A new factory for the newest process takes years to build and the skill to run it takes longer. Hamilton Helmer, a strategy consultant who studied why some firms keep earning more than their investors could expect elsewhere, found that a lasting advantage is a benefit behind a barrier, and named the kinds that recur. Two apply here: process power (a way of working that takes rivals years to learn) and scale economies (unit costs that fall as volume grows, so a rival must match the volume to match the cost). The EUV machines have one maker, fed by one optics supplier: a cornered resource, Helmer's term for preferential access to something others need, which does not ease when chips do.",
+   "sublayer": "semis",
+   "title": "The chip designer's lead is a shortage profit; the foundry's and the toolmaker's are harder to copy"
+  },
+  {
+   "binding": [
+    {
+     "id": "memory",
+     "name": "Memory",
+     "word": "moderate"
+    },
+    {
+     "id": "networking",
+     "name": "Networking and optics",
+     "word": null
+    },
+    {
+     "id": "packaging",
+     "name": "Advanced chip packaging",
+     "word": "moderate"
+    }
+   ],
+   "bottlenecks": [
+    "memory",
+    "networking",
+    "packaging"
+   ],
+   "case": "SK hynix reported record results for 2025, with HBM revenue growing sharply and demand for ordinary server memory rising sharply too. Samsung describes low inventory and supply constraints in memory. This site's tightness word for memory reads moderate, though memory is counted in dollars, so a price rise looks like more memory. Micron's own filing warns that if HBM demand weakens and makers shift capacity back to ordinary DRAM, its supply could rise sharply, and that an oversupplied market pushes prices down; it also names Chinese state-backed makers, CXMT and YMTC, among the causes of that risk.",
+   "commoditising": "Ordinary memory, the kind in phones and laptops, is a textbook commodity: identical parts, several makers, and prices that swing with each wave of new factories. Networking built to open standards such as Ethernet, which Broadcom sells to the largest cloud and model companies, is interchangeable by design. Eliyahu Goldratt, a physicist who studied factories, found that a system runs at the pace of its slowest part, and David Ricardo, an English economist who studied why landlords grew rich when bread grew dear, found that the owner of the scarcest input collects a rent: profit above what it takes to keep a business going, earned because something holds rivals off. On their account the rent in memory lasts only until the makers build their way out, and SK hynix says it is building new factories in Korea.",
+   "converts_if": "Custom HBM, memory built to one buyer's design, which SK hynix calls a key differentiator, becomes the norm, so each chip generation is locked to one maker and switching costs replace the shortage. Hamilton Helmer, a strategy consultant who studied why some firms keep earning more than rivals, named switching costs, what a customer would lose by moving to a rival, as one of the lasting advantages he found. In networking, the rent lasts only if NVIDIA's own links stay faster than open standards by enough that buyers accept being tied to one vendor.",
+   "direction": "holding",
+   "id": "vc_memory_networking",
+   "kill_shot": "Memory makers keeping record margins through a year in which all three add HBM capacity faster than AI chip shipments grow and ordinary memory prices fall.",
+   "layer": "compute_physical",
+   "mechanism": "An AI chip is only as fast as the memory that feeds it. High-bandwidth memory, or HBM, is DRAM (the working memory a processor reads and writes constantly) cut into dies (single chips), stacked and placed beside the processor so data reaches it quickly. This site counts three makers: SK hynix, Samsung and Micron. Micron's filing says HBM needs more wafers (the silicon discs chips are cut from) and more factory space than ordinary DRAM for the same amount of memory, so when AI demand runs ahead the makers profit, and if it weakens they can turn the same factories back to ordinary memory. Networking, the switches, cables and light-based links that join many chips into one machine, splits in two: NVIDIA's own links, which tie buyers to its systems, and gear built to open standards, which any maker can supply.",
+   "powers": [
+    "scale economies",
+    "process power",
+    "a cornered resource"
+   ],
+   "rival": {
+    "id": "no_glut",
+    "title": "Computing cannot flood the market overnight"
+   },
+   "stays_scarce": "This site judges that what stays scarce is the skill to stack dies with good yield (the share of units that work) and to be qualified (tested and approved) by a chip designer for its next product; a newcomer would need both, and this site judges they take longer to learn than one product generation. NVIDIA's own links between chips stay scarce because only NVIDIA makes them, though its filing says it now lets other firms' chips connect to them.",
+   "sublayer": "memory_networking",
+   "title": "High-bandwidth memory is a cyclical commodity earning a shortage's price"
+  },
+  {
+   "binding": [
+    {
+     "id": "energy",
+     "name": "Electricity generation",
+     "word": "severe"
+    },
+    {
+     "id": "grid",
+     "name": "The grid and its hookups",
+     "word": null
+    },
+    {
+     "id": "data_centres",
+     "name": "Data-centre buildings",
+     "word": "tight"
+    }
+   ],
+   "bottlenecks": [
+    "energy",
+    "grid",
+    "data_centres"
+   ],
+   "case": "This site reads electricity as severe and data-centre buildings as tight, though the electricity reading measures only how fast demand grows, not supply. The biggest cloud and platform companies spend [fact:capex_to_revenue] as much a year on buildings and equipment as AI earns in revenue, so money is not what is short; this site reads capital as slack. TSMC's filing names constraints in power supply among the things that could slow demand for its chips. Against this unit, power generated on site beside the data centre, and chips that do more work for each unit of electricity, would both loosen the grid's hold. The wait to be connected is the gauge that would show the shortage directly, and this site knows of no public series for it.",
+   "commoditising": "This site judges that the building itself, the shell, the racks and much of the cooling, follows standard designs that many contractors can put up, and that money for the build-out is plentiful. David Teece, an economist who studied why the firm that invents something often fails to keep the returns, called the inputs an innovation needs to reach its customers complementary assets; generic ones, which anyone can buy, earn an ordinary return, not a rent.",
+   "converts_if": "Holders of connected sites and running power stations lock their buyers into long contracts at prices set during the shortage, or regulators let utilities earn a guaranteed return on new lines built for data centres, turning a shortage rent into a regulated one. It fails to convert if power built on site, beside the data centre and off the grid, proves quick and cheap.",
+   "direction": "tightening",
+   "id": "vc_dc_power",
+   "kill_shot": "New large sites being connected to the grid about as fast as they are built, with the rent for powered data-centre space falling while use keeps rising.",
+   "layer": "compute_physical",
+   "mechanism": "A data centre needs three things: a building, money, and electricity delivered through a grid connection. This site judges that buildings and money can be had quickly, while a new connection means waiting for the utility to add lines and transformers, and new power stations take years. Eliyahu Goldratt, a physicist who studied factories, found that a system runs at the pace of its slowest part; David Ricardo, an English economist who studied why landlords grew rich when bread grew dear, found that the owner of the scarcest input collects a rent: profit above what it takes to keep a business going, earned because something holds rivals off. So, in this site's judgement, the rent goes to whoever already holds land with power and a connection. Much of that input sits with utilities whose prices a regulator sets, so they cannot charge what the shortage is worth; this site judges that the rent leaks instead to owners of connected sites and of power stations already running.",
+   "powers": [
+    "a cornered resource",
+    "scale economies"
+   ],
+   "rival": {
+    "id": "money_runs_out",
+    "title": "The spending runs ahead of the revenue, and investors take the loss"
+   },
+   "stays_scarce": "This site judges that grid connections, heavy electrical gear such as large transformers and turbines, and the electricians and other trades who install them stay scarce. A connection is close to a licence: a utility grants it under a regulator's rules and it cannot be copied, which makes it what Hamilton Helmer, a strategy consultant who studied lasting advantages, calls a cornered resource: preferential access to something others need. Ronald Coase, an economist who studied why some work is done inside firms rather than bought, and Oliver Williamson, who studied contracts and found that a buyer who depends on an asset built for it can be squeezed by whoever owns it, would expect the largest buyers to own such assets or lock them up in long contracts.",
+   "sublayer": "dc_power",
+   "title": "A site already wired to the grid is scarcer than the building or the money"
+  }
+ ]
 }

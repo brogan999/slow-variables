@@ -1943,6 +1943,91 @@ positions:
     kill_shot: AI-run groups trading below the sum of their parts, as conglomerates did.
     rival: barbell
     visible: false
+  - id: vc_semis
+    folio: value
+    layer: compute_physical
+    sublayer: semis
+    title: "The chip designer's lead is a shortage profit; the foundry's and the toolmaker's are harder to copy"
+    holders: []
+    attribution: site
+    mechanism: "Three kinds of firm make AI chips. Designers such as NVIDIA, AMD and Broadcom draw them; a foundry (a factory that makes chips to other firms' designs), above all TSMC, prints them onto wafers (thin discs of silicon, each later cut into many chips); and toolmakers such as ASML build the machines that do the printing. Eliyahu Goldratt, a physicist who studied factories, found that a system runs at the pace of its slowest part. David Ricardo, an English economist who asked in 1817 why landlords grew rich when bread grew dear, found that the owner of the scarcest input collects a rent: profit above what it takes to keep a business going, earned because something holds rivals off. So while buyers cannot get enough chips, the designer they most want takes the rent. This site judges that as more chips arrive and the biggest buyers design their own, that rent is exposed, while the foundry and the toolmaker keep theirs for as long as no rival can match what they do."
+    case: "NVIDIA and AMD take [fact:chips_gp_share] of the gross profit (sales minus the direct cost of making them) that this site can measure across chips, one cloud and the leading labs; that share is up on the year, though it slipped in the latest quarter. Yet chips from other designers already make up [fact:silicon_share_now] of the AI computing shipped so far, including custom chips that Broadcom and others build for large cloud and model companies. TSMC's filing calls its scale and capacity, particularly for advanced processes (the newest generations of chip-making, which print the smallest features), a major competitive advantage, and its biggest customers as a group have taken a larger part of its revenue each year since 2023, even as its single largest customer's share fell. ASML says it is currently the world's only maker of extreme-ultraviolet (EUV) lithography machines, which print the finest features with light of a very short wavelength, and that one supplier, Carl Zeiss, makes all their optics and limits how many it can build. Against this unit, this site reads foundry supply as easing: TSMC's capacity is catching up with demand. That undercuts the title's claim for the foundry only if the easing reaches TSMC's own prices and margins, which this site cannot yet see, since TSMC files under international accounting rules this site's filing reader does not read. The three designers' own conditions do not collide: NVIDIA's, Broadcom's and AMD's can all hold at once until chips from other designers make up most of the AI computing shipped."
+    kill_shot: "NVIDIA keeping both its share of AI chip supply and its gross margin while AMD's chips and the custom chips ship in volume and wafer supply at the newest processes keeps growing fast; or a second foundry making AI chips at the newest process in volume for a major designer."
+    rival: glut_somewhere
+    direction: holding
+    commoditising: "Chips made on older processes are cheap and interchangeable; TSMC's own filing says rivals in those processes are numerous. This site judges that the cost of a unit of computing keeps falling with each chip generation, and that the general-purpose AI chip is being copied from below: every large buyer that designs its own chip, often with Broadcom's help, turns part of NVIDIA's market into a price to negotiate. William Nordhaus, an economist who measured how much of the value of new inventions their makers keep as profit, found that it is a small part; most goes to buyers as lower prices and better products."
+    stays_scarce: "This site judges that capacity at the newest processes, and the machines that print it, stay scarce. A new factory for the newest process takes years to build and the skill to run it takes longer. Hamilton Helmer, a strategy consultant who studied why some firms keep earning more than their investors could expect elsewhere, found that a lasting advantage is a benefit behind a barrier, and named the kinds that recur. Two apply here: process power (a way of working that takes rivals years to learn) and scale economies (unit costs that fall as volume grows, so a rival must match the volume to match the cost). The EUV machines have one maker, fed by one optics supplier: a cornered resource, Helmer's term for preferential access to something others need, which does not ease when chips do."
+    powers:
+    - cornered_resource
+    - scale_economies
+    - process_power
+    - switching_costs
+    converts_if: "For the designer: its software (for NVIDIA, CUDA, the platform developers write AI code against) and its whole-rack systems with their own links between chips keep buyers even when rival chips are plentiful and cheaper, turning a shortage rent into switching costs, what a customer would lose by moving to a rival. For the foundry and the toolmaker: they keep a lead at each new process, so their scale and process power outlive the AI shortage."
+    bottlenecks:
+    - accelerators
+    - foundry
+    - chip_equipment
+    - packaging
+    visible: false
+    sources:
+    - asml_20f_2025
+    - broadcom_10k_fy25
+    - tsmc_20f_2025
+  - id: vc_memory_networking
+    folio: value
+    layer: compute_physical
+    sublayer: memory_networking
+    title: "High-bandwidth memory is a cyclical commodity earning a shortage's price"
+    holders: []
+    attribution: site
+    mechanism: "An AI chip is only as fast as the memory that feeds it. High-bandwidth memory, or HBM, is DRAM (the working memory a processor reads and writes constantly) cut into dies (single chips), stacked and placed beside the processor so data reaches it quickly. This site counts three makers: SK hynix, Samsung and Micron. Micron's filing says HBM needs more wafers (the silicon discs chips are cut from) and more factory space than ordinary DRAM for the same amount of memory, so when AI demand runs ahead the makers profit, and if it weakens they can turn the same factories back to ordinary memory. Networking, the switches, cables and light-based links that join many chips into one machine, splits in two: NVIDIA's own links, which tie buyers to its systems, and gear built to open standards, which any maker can supply."
+    case: "SK hynix reported record results for 2025, with HBM revenue growing sharply and demand for ordinary server memory rising sharply too. Samsung describes low inventory and supply constraints in memory. This site's tightness word for memory reads moderate, though memory is counted in dollars, so a price rise looks like more memory. Micron's own filing warns that if HBM demand weakens and makers shift capacity back to ordinary DRAM, its supply could rise sharply, and that an oversupplied market pushes prices down; it also names Chinese state-backed makers, CXMT and YMTC, among the causes of that risk."
+    kill_shot: "Memory makers keeping record margins through a year in which all three add HBM capacity faster than AI chip shipments grow and ordinary memory prices fall."
+    rival: no_glut
+    direction: holding
+    commoditising: "Ordinary memory, the kind in phones and laptops, is a textbook commodity: identical parts, several makers, and prices that swing with each wave of new factories. Networking built to open standards such as Ethernet, which Broadcom sells to the largest cloud and model companies, is interchangeable by design. Eliyahu Goldratt, a physicist who studied factories, found that a system runs at the pace of its slowest part, and David Ricardo, an English economist who studied why landlords grew rich when bread grew dear, found that the owner of the scarcest input collects a rent: profit above what it takes to keep a business going, earned because something holds rivals off. On their account the rent in memory lasts only until the makers build their way out, and SK hynix says it is building new factories in Korea."
+    stays_scarce: "This site judges that what stays scarce is the skill to stack dies with good yield (the share of units that work) and to be qualified (tested and approved) by a chip designer for its next product; a newcomer would need both, and this site judges they take longer to learn than one product generation. NVIDIA's own links between chips stay scarce because only NVIDIA makes them, though its filing says it now lets other firms' chips connect to them."
+    powers:
+    - scale_economies
+    - process_power
+    - cornered_resource
+    converts_if: "Custom HBM, memory built to one buyer's design, which SK hynix calls a key differentiator, becomes the norm, so each chip generation is locked to one maker and switching costs replace the shortage. Hamilton Helmer, a strategy consultant who studied why some firms keep earning more than rivals, named switching costs, what a customer would lose by moving to a rival, as one of the lasting advantages he found. In networking, the rent lasts only if NVIDIA's own links stay faster than open standards by enough that buyers accept being tied to one vendor."
+    bottlenecks:
+    - memory
+    - networking
+    - packaging
+    visible: false
+    sources:
+    - broadcom_10k_fy25
+    - micron_10k_fy25
+    - nvda_10k_fy26
+    - samsung_report_2025
+    - skhynix_fy25_results
+  - id: vc_dc_power
+    folio: value
+    layer: compute_physical
+    sublayer: dc_power
+    title: "A site already wired to the grid is scarcer than the building or the money"
+    holders: []
+    attribution: site
+    mechanism: "A data centre needs three things: a building, money, and electricity delivered through a grid connection. This site judges that buildings and money can be had quickly, while a new connection means waiting for the utility to add lines and transformers, and new power stations take years. Eliyahu Goldratt, a physicist who studied factories, found that a system runs at the pace of its slowest part; David Ricardo, an English economist who studied why landlords grew rich when bread grew dear, found that the owner of the scarcest input collects a rent: profit above what it takes to keep a business going, earned because something holds rivals off. So, in this site's judgement, the rent goes to whoever already holds land with power and a connection. Much of that input sits with utilities whose prices a regulator sets, so they cannot charge what the shortage is worth; this site judges that the rent leaks instead to owners of connected sites and of power stations already running."
+    case: "This site reads electricity as severe and data-centre buildings as tight, though the electricity reading measures only how fast demand grows, not supply. The biggest cloud and platform companies spend [fact:capex_to_revenue] as much a year on buildings and equipment as AI earns in revenue, so money is not what is short; this site reads capital as slack. TSMC's filing names constraints in power supply among the things that could slow demand for its chips. Against this unit, power generated on site beside the data centre, and chips that do more work for each unit of electricity, would both loosen the grid's hold. The wait to be connected is the gauge that would show the shortage directly, and this site knows of no public series for it."
+    kill_shot: "New large sites being connected to the grid about as fast as they are built, with the rent for powered data-centre space falling while use keeps rising."
+    rival: money_runs_out
+    direction: tightening
+    commoditising: "This site judges that the building itself, the shell, the racks and much of the cooling, follows standard designs that many contractors can put up, and that money for the build-out is plentiful. David Teece, an economist who studied why the firm that invents something often fails to keep the returns, called the inputs an innovation needs to reach its customers complementary assets; generic ones, which anyone can buy, earn an ordinary return, not a rent."
+    stays_scarce: "This site judges that grid connections, heavy electrical gear such as large transformers and turbines, and the electricians and other trades who install them stay scarce. A connection is close to a licence: a utility grants it under a regulator's rules and it cannot be copied, which makes it what Hamilton Helmer, a strategy consultant who studied lasting advantages, calls a cornered resource: preferential access to something others need. Ronald Coase, an economist who studied why some work is done inside firms rather than bought, and Oliver Williamson, who studied contracts and found that a buyer who depends on an asset built for it can be squeezed by whoever owns it, would expect the largest buyers to own such assets or lock them up in long contracts."
+    powers:
+    - cornered_resource
+    - scale_economies
+    converts_if: "Holders of connected sites and running power stations lock their buyers into long contracts at prices set during the shortage, or regulators let utilities earn a guaranteed return on new lines built for data centres, turning a shortage rent into a regulated one. It fails to convert if power built on site, beside the data centre and off the grid, proves quick and cheap."
+    bottlenecks:
+    - energy
+    - grid
+    - data_centres
+    visible: false
+    sources:
+    - tsmc_20f_2025
 claims:
   # A claim with a `stage` says its map row binds there; a claim about what happens on a row, such as who gains or
   # loses, names the row without a stage, so the map lists it under the row and marks no cell.

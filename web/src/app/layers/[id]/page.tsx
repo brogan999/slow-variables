@@ -4,7 +4,8 @@ import { Callout } from "@/components/Figure";
 import { LadderView } from "@/components/LadderView";
 import { ContextFigures } from "@/components/ContextFigure";
 import { VentureFlowStrip } from "@/components/VentureFlowStrip";
-import { context, index, ladder, layer, obsIndex, venture } from "@/lib/data";
+import { EconomicsUnitView, PowersGlossary, ProfileCard } from "@/components/ValueChain";
+import { context, index, ladder, layer, obsIndex, valueChain, venture } from "@/lib/data";
 
 // P1 §6.3: the labs' enter bell (buying from the layer below) and exit bell (buying it outright), read together
 const BELLS = ["lab_procurement_signal", "lab_vertical_integration_exit_bell"];
@@ -43,6 +44,22 @@ export default async function LayerPage({ params }: { params: Promise<{ id: stri
           <p className="text-sm text-ink-2 mb-3 max-w-[60ch]">The entry bell rings when the labs start buying from the layers around them (data and training environments); the exit bell rings when they buy those companies outright.</p>
           <div className="grid gap-3 md:grid-cols-2">{bells.map((c) => <IndicatorCard key={c.id} c={c} obsIndex={idx} />)}</div>
         </Callout>
+      ) : null}
+      {l.economics?.length ? (
+        <section id="economics" className="flex flex-col gap-4">
+          <div>
+            <h2 className="display text-2xl leading-tight mb-2 mt-2">How the economics move</h2>
+            <p className="text-sm text-ink-2 max-w-[66ch]">The site&apos;s judgement of each part of this layer, read against the readings below and the theory on the <Link href="/value-chain" className="underline decoration-grid underline-offset-4">value chain</Link> page: what is getting cheap and interchangeable, what stays scarce, and what would prove it wrong.</p>
+          </div>
+          {l.economics.map((u) => <EconomicsUnitView key={u.id} u={u} />)}
+          {l.profiles?.length ? (
+            <>
+              <h3 className="display text-xl leading-tight mt-4">The companies that matter here</h3>
+              <PowersGlossary powers={valueChain().powers} />
+              <div className="flex flex-col gap-4 max-w-[52rem]">{l.profiles.map((c) => <ProfileCard key={c.entity} c={c} />)}</div>
+            </>
+          ) : null}
+        </section>
       ) : null}
       <section>
         <h2 className="display text-2xl leading-tight mb-3 mt-2">Indicators</h2>
