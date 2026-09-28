@@ -409,6 +409,7 @@ def scorecard(s: Store, today: date) -> dict[str, Any]:
                     "unit": s.metric_spec(g["metric"]).get("unit"),
                     "as_of": min(d.as_of_date, today).isoformat(),
                     "obs_ids": d.input_observation_ids,
+                    "derived_id": d.id,
                     "href": _metric_href(s, g["metric"]),
                 },
                 "age_days": age,
