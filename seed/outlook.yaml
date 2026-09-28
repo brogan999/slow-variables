@@ -1118,6 +1118,46 @@ sources:
     http_status: 200
     content_hash: 1be2cb06304de6320f63808e66c63c9ff18a6933ab12da97ba5eb2ff19d6ec8f
     quote: this would likely culminate in humans becoming disempowered
+  - id: eilla_lazarov
+    who: Nikola Lazarov
+    field: writer on AI and deals at Eilla, which builds AI tools for investment bankers and deal teams
+    finding: Nikola Lazarov expects the labs to move from selling tools to professional-services firms towards owning such firms, and calls that within twenty-four months a frontier lab launches or majority-owns a professional services firm.
+    work: How OpenAI and Anthropic Take Over the $7TN Professional Services Market
+    year: 2026
+    url: https://blog.eilla.ai/how-openai-and-anthropic-take-over-the-7tn-professional-services-market/
+    retrieved_at: 2026-09-27
+    http_status: 200
+    content_hash: 53ee393225b30f370fae80fd87548c586de0e6385f76766210c10ed7dc4cd77a
+  - id: deloitte_ai_insurance
+    who: Deloitte Center for Financial Services
+    field: the research arm of Deloitte's financial-services practice, which advises insurers
+    finding: Deloitte projects that by 2032 insurers could write around four point seven billion dollars a year of AI insurance premiums worldwide, growing about eighty percent a year.
+    work: Using AI risk insurance to protect against potential gen AI hallucinations and failures
+    year: 2024
+    url: https://www.deloitte.com/us/en/insights/industry/financial-services/risk-insurance-for-ai.html
+    retrieved_at: 2026-09-27
+    http_status: 200
+    content_hash: b189617307e947a4421534fb6756ca773e2089038f10542f7b9f73bce10b4ab1
+  - id: walker_context
+    who: Chris Walker
+    field: writer on the economics of tacit knowledge and AI at the Out of Sample newsletter
+    finding: Chris Walker argues that feeding AI the right context stays costly, lossy and local, so by 2029 firms in AI-exposed industries grow larger at the infrastructure layer but split into smaller specialists at the application layer.
+    work: "Context Engineering: Why Hayek's Knowledge Problem Survives AI"
+    year: 2026
+    url: https://cpwalker.substack.com/p/context-engineering-why-hayeks-knowledge
+    retrieved_at: 2026-09-27
+    http_status: 200
+    content_hash: ad153729fd86a622227f2ba9dbf05684047062c206d98420110f6cfc70b0b5b9
+  - id: hoffman_conglomerate
+    who: Liz Hoffman
+    field: business and finance editor at Semafor
+    finding: Liz Hoffman argues that AI, by letting a chief executive see across a sprawling empire, is reviving the conglomerate, which may have been premature rather than a bad idea.
+    work: AI revives the conglomerate
+    year: 2026
+    url: https://www.semafor.com/article/06/11/2026/ai-revives-the-conglomerate
+    retrieved_at: 2026-09-27
+    http_status: 200
+    content_hash: c4680ddd28061bb07d105eecfd04d1d8295f5bac93354f6186060d1bee6e2cbd
 positions:
   # I · capability
   - id: compounding
@@ -1880,6 +1920,26 @@ positions:
     kill_shot: Specialists keeping their value over versatile workers.
     rival: jagged_wages
     visible: false
+  - id: barbell
+    folio: reorganisation
+    title: Big at the base, small at the top
+    holders: [walker_context]
+    attribution: author
+    mechanism: Codifying a firm's knowledge for AI is costly, lossy and needs upkeep, so scale pays where the work is generic, in computing and models, while firms closest to a trade's own knowledge win in applications.
+    case: Walker sets his prediction explicitly against the view that AI makes every firm bigger.
+    kill_shot: Firms growing larger across AI-exposed industries, applications included.
+    rival: centralises
+    visible: false
+  - id: conglomerate_returns
+    folio: reorganisation
+    title: The conglomerate comes back
+    holders: [hoffman_conglomerate]
+    attribution: author
+    mechanism: AI lets one centre see and run many unrelated businesses, removing the overhead that made conglomerates trade at a discount.
+    case: Hoffman points to founders folding their companies into AI-run groups and to industrial chiefs who say the old case for scale has run out.
+    kill_shot: AI-run groups trading below the sum of their parts, as conglomerates did.
+    rival: barbell
+    visible: false
 claims:
   # A claim with a `stage` says its map row binds there; a claim about what happens on a row, such as who gains or
   # loses, names the row without a stage, so the map lists it under the row and marks no cell.
@@ -2351,6 +2411,28 @@ claims:
     position: generalists
     text: The gap in value between versatile workers who manage AI and narrow specialists keeps widening.
     falsifier: Specialists keeping their value over versatile workers.
+  - id: lab_owns_services_firm
+    position: up_the_stack
+    holders: [eilla_lazarov]
+    text: A frontier lab launches or majority-owns a professional services firm, under its own brand or at arm's length, by September 2028.
+    due: 2028-09-11
+    falsifier: No frontier lab owning a professional services firm by September 2028.
+  - id: ai_premiums_2032
+    position: assurance_layer
+    holders: [deloitte_ai_insurance]
+    attribution: author
+    text: Insurers write several billion dollars a year of cover for AI's failures worldwide by 2032 [cite:deloitte_ai_insurance].
+    due: 2032-12-31
+    falsifier: AI cover staying a small line that insurers bundle into other policies through 2032.
+  - id: firm_size_barbell
+    position: barbell
+    text: Firms in AI-exposed industries do not all grow bigger by 2029; they consolidate in infrastructure and splinter in applications.
+    due: 2029-12-31
+    falsifier: Average firm size rising in AI-exposed industries, applications included, by 2029.
+  - id: conglomerate_premium
+    position: conglomerate_returns
+    text: Groups that run many unrelated businesses with AI come to be valued above the sum of their parts.
+    falsifier: AI-run groups trading at a discount to the sum of their parts.
 scenarios:
   progress:
     - {id: stall_capability, label: Capability stalls}
