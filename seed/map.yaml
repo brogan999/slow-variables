@@ -184,6 +184,11 @@ families:
     label: How science itself moves
     placed: site
     why: They say these limits act across every stage; this site draws them where firms reorganise.
+    # AI's capability on science tasks, read as signposts; none measures the pace of science itself.
+    facts:
+      - {metric: benchmark_frontier, dims: {test: epoch_bench.frontiermath_t4}, label: "AI capability on science tasks, not the pace of science itself: best score on FrontierMath's hardest, research-level maths problems"}
+      - {metric: benchmark_frontier, dims: {test: epoch_bench.scicode}, label: "best AI score on SciCode, code written to solve research problems across the sciences"}
+      - {metric: benchmark_frontier, dims: {test: epoch_bench.critpt}, label: "best AI score on CritPt, unpublished research-level physics problems"}
   - name: "Upstream: why AI cannot simply accelerate its own diffusion"
     label: Limits on AI speeding up its own spread
     placed: site

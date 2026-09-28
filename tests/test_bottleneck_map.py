@@ -148,3 +148,18 @@ def test_an_outlook_claim_marks_its_cell_in_plain_words_with_its_threshold_writt
     m = build(SPEC, SCORECARD, PREDICTIONS, BOTTLENECKS, CARDS, READINGS, NAMES, [], claims)
     chips = {r["id"]: r for sec in m["groups"][0]["sections"] for r in sec["rows"]}["chips"]
     assert chips["cells"]["products"]["writers"][0]["href"] == "/outlook#claim-c1"  # a stage it does not act on, marked
+
+
+def test_a_family_can_carry_metric_readings_and_counts_as_measured_by_them():
+    from ai_tracker.bottleneck_map import _fact_key
+
+    x = {"metric": "benchmark_frontier", "dims": {"test": "t4"}, "label": "best score"}
+    spec = {**SPEC, "families": [SPEC["families"][0], {**SPEC["families"][1], "facts": [x]}]}
+    reading = {"label": "best score", "value": 0.9, "unit": "share", "as_of": "2026-09-03", "obs_ids": ["b1"], "href": "/query#q"}
+    stage = {r["id"]: r for sec in build(spec, SCORECARD, PREDICTIONS, BOTTLENECKS, CARDS, {**READINGS, _fact_key(x): reading},
+                                         NAMES, [])["groups"][1]["sections"] for r in sec["rows"]}["family_1"]
+    assert stage["reading"]["readings"] == 1 and stage["readings"][0]["obs_ids"] == ["b1"]
+    assert stage["cells"]["early_adoption"]["measured"]
+    errs = problems({**spec, "families": [{**spec["families"][1], "facts": [{"metric": "ghost"}]}]}, set(), set(), set(),
+                    set(), set(), metrics={"benchmark_frontier"})
+    assert any("unknown metric" in e for e in errs)

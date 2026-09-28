@@ -149,6 +149,7 @@ def build(
                 related[i] = {"id": i, "name": cards[i]["name"], "published": cards[i]["published"], "status": cards[i]["status"]}
         linked = sorted(related.values(), key=lambda r: (not r["published"], r["name"]))
         tally = _tally([r["status"] for r in linked if r["published"]])
+        more = extra([_fact_key(x) for x in f.get("facts") or []])
         stage = STAGE_OF_BUCKET[sections[f["name"]]["bucket_id"]]
         bites = {stage: f["why"]} | {st: a["why"] for st, a in (f.get("also") or {}).items()}
         site = ({stage} if f["placed"] == "site" else set()) | {
@@ -159,8 +160,8 @@ def build(
                 "id": f"family_{k}",
                 "name": f["label"],
                 "family": f["name"],
-                "reading": {"kind": "tally", **tally, "readings": 0},
-                "cells": cells(f"family_{k}", bites, tally["instruments"] > 0, site),
+                "reading": {"kind": "tally", **tally, "readings": len(more)},
+                "cells": cells(f"family_{k}", bites, tally["instruments"] > 0 or bool(more), site),
                 "instruments": [
                     {
                         "label": r["name"],
@@ -170,6 +171,7 @@ def build(
                     }
                     for r in linked
                 ],
+                "readings": more,
                 "domains": {d: ids for d, ids in grid[f["name"]].items() if ids},
                 "claims": by_row.get(f"family_{k}", []),
                 "href": f"#s-{list(sections).index(f['name'])}",
@@ -240,6 +242,10 @@ def build(
     }
 
 
+def _fact_key(x: dict[str, Any]) -> str:
+    return f"fact:{x['metric']}:" + ",".join(f"{k}={v}" for k, v in sorted((x.get("dims") or {}).items()))
+
+
 def problems(
     spec: dict[str, Any],
     inputs: set[str],
@@ -248,6 +254,7 @@ def problems(
     names: set[str],
     predictions: set[str],
     buckets: set[str] | None = None,
+    metrics: set[str] | None = None,
 ) -> list[str]:
     """Errors for a map seed that cannot resolve; CI catches them before the export trips on them."""
     stages = {s["id"] for s in spec["stages"]}
@@ -260,6 +267,10 @@ def problems(
             if n and n not in names:
                 errors.append(f"map: {r['input']} names no layer or sub-layer {n}")
         errors += [f"map: {r['input']} bites at an unknown stage {st}" for st in r["bites"] if st not in stages]
+    for f in spec["families"]:
+        for x in f.get("facts") or []:
+            if metrics is not None and x.get("metric") not in metrics or not x.get("label"):
+                errors.append(f"map: family {f['name']} reads an unknown metric or has no label: {x}")
     listed = {f["name"] for f in spec["families"]}
     errors += [f"map: no family {n}" for n in sorted(listed - families)]
     errors += [f"map: family {n} is not on the map" for n in sorted(families - listed)]
@@ -370,6 +381,10 @@ def from_store(
         for x in r.get("series") or []:
             if f := fact(s, {"series": x["key"]}, today):
                 readings[f"series:{x['key']}"] = {**f, "label": x["label"]}
+    for fam in spec["families"]:
+        for x in fam.get("facts") or []:
+            if f := fact(s, {"metric": x["metric"], "dims": x.get("dims")}, today):
+                readings[_fact_key(x)] = {**f, "label": x["label"]}
     firms = dict(
         s.con.execute(
             "SELECT sublayer_id, count(DISTINCT entity_id) FROM entity_membership WHERE to_date IS NULL AND is_primary GROUP BY 1"
