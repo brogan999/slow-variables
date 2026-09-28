@@ -792,12 +792,12 @@ class Tools:
         if companies:
             # a brief per company, so every candidate fits one call; entity(<id>) has the full profile
             return {
-                "note": "Brief profiles, unranked; call entity for a company's full profile. Drafted by a model: say so.",
+                "note": "Brief profiles, unranked; pass a layer for what must hold, or call entity for a company's full profile. Drafted by a model: say so.",
                 "companies": [
                     {
                         "entity": c["entity"], "role": c["role"], "units": c["units"],
                         "powers": [p["power"] for p in c["powers"]], "depends_on": [b["id"] for b in c["depends_on"]],
-                        "profit": c["rent"]["reads"], "must_be_true": [x[:110] for x in c["must_be_true"][:2]],
+                        "profit": c["rent"]["reads"], **({"must_be_true": [x[:110] for x in c["must_be_true"][:2]]} if layer else {}),
                         "cite": f"src:{next(iter(c['sources'].get('market') or []), '')}",
                         "multiple_to_1t": (self._valuation(c["entity"]) or {}).get("multiple_to_1t") or (self._valuation(c["entity"]) or {}).get("private_multiple_to_1t"),
                         "reviewed": bool(c["reviewed_by"]),
