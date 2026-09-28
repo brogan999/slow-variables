@@ -12,7 +12,116 @@
  ],
  "dependency_tier": 3,
  "description": "The businesses that run models for others, route requests between them, and supply the plumbing for AI agents.",
- "economics": [],
+ "economics": [
+  {
+   "binding": [
+    {
+     "id": "inference",
+     "name": "Running models",
+     "word": "easing"
+    },
+    {
+     "id": "accelerators",
+     "name": "AI chips",
+     "word": "moderate"
+    },
+    {
+     "id": "data_centres",
+     "name": "Data-centre buildings",
+     "word": "tight"
+    }
+   ],
+   "bottlenecks": [
+    "inference",
+    "accelerators",
+    "data_centres"
+   ],
+   "case": "Prices are falling: this site reads the running-models input as easing, from the price of the cheapest flagship model on OpenRouter, a marketplace that routes developers' requests to many models. Open models, which any host can serve, took [fact:open_share] of the tokens among OpenRouter's most used models, though its users lean towards cheap models. Nebius's filing names Fireworks and Together as rivals to its own managed service, which runs all the major open models and lets customers bring their own, and warns that larger rivals may cut prices or bundle. The serving firms describe a way out: Fireworks says nearly all the tokens it serves come from models specialised on customers' own data, and Baseten says its engineers work inside customers to tune and serve their models; both grew revenue sharply and raised large rounds in 2026. Chip and cloud owners are buying serving firms: Nebius agreed in May 2026 to buy Eigen AI and that month took Clarifai's technology and leaders; Nscale agreed in July 2026 to buy Anyscale; Crusoe bought Atero in August 2025; AMD bought Brium in June 2025 and has since bought or taken on other firms that speed up serving; d-Matrix bought Wallaroo.ai in August 2026; and the model labs Mistral and Zhipu agreed in February and June 2026 to buy serving firms. This site holds these firms' reported revenue paces but does not yet publish a reading for the layer.",
+   "commoditising": "This site judges that an answer from a published model is becoming a commodity: the same good from many hosts, with the clouds, the neoclouds (newer cloud firms built to rent out AI chips) and the chip makers all offering it. William Nordhaus, an economist who measured how much of the value of new inventions their makers keep as profit, found that it is a small part; most goes to buyers as lower prices. David Teece, an economist who studied why the firm that invents something often fails to keep the returns, called the inputs a product needs to reach its customers complementary assets; the chips and powered buildings a serving firm needs are owned mostly by others, which is why their owners can absorb the software on top.",
+   "converts_if": "A host keeps its customers' tuned models, and the loop of data that improves them, so moving to a rival means rebuilding the model: switching costs in Helmer's sense (what a customer would lose by moving to a rival). That route holds only if a tuned model keeps beating each new general model. Ronald Coase, an economist who studied why some work is done inside firms rather than bought, and Oliver Williamson, an economist who studied contracts and found that a buyer that depends on an asset built for it can be squeezed by whoever owns it, would otherwise expect the owners of chips and clouds to keep buying the serving software, as they are.",
+   "direction": "commoditising",
+   "id": "vc_inference_serving",
+   "kill_shot": "Hosts of the same open model keeping different prices for long, with buyers staying with the dearer one; or serving firms keeping or widening their margins (what they keep from each sale after paying their costs) while chip rents fall and more hosts offer the same models.",
+   "layer": "serving_orchestration",
+   "mechanism": "Inference is running a trained model to answer requests. Serving firms such as Fireworks, Baseten, Together, Modal, Replicate, RunPod, DeepInfra and Hyperbolic rent or buy chips, load open-weight models (whose trained settings, the weights, are published) or a customer's own model, and sell the answers by the token (a fragment of a word) or by the hour of chip time. David Ricardo, an English economist who asked in 1817 why landlords grew rich when bread grew dear, found that the owner of the scarcest input collects a rent: profit above what it takes to keep a business going, earned because something holds rivals off. This site judges that serving a published model is close to a commodity, since many hosts offer the same model and compete on price towards the cost of chips and power; what a host adds is software that makes each chip answer faster and cheaper, which rivals learn.",
+   "powers": [],
+   "rival": {
+    "id": "models_differ",
+    "title": "Models stay different, not interchangeable"
+   },
+   "stays_scarce": "This site judges that what stays scarce is the engineering to run each new model fast on each new chip, and, for hosts that tune and run a customer's own model, the position of holding that model. Hamilton Helmer, a strategy consultant who studied why some firms keep earning more than their investors could expect elsewhere, found that a lasting advantage is a benefit behind a barrier. The likeliest here is scale economies (pooling many customers' uneven demand keeps shared chips busy, and a rival must match the volume to match the cost), but the chip and cloud owners can pool as well, so this site does not count it proven.",
+   "sublayer": "inference_serving",
+   "title": "Serving a published model is a price-taking business on rented chips; the serving firms are escaping into running each customer's own tuned model, and the chip and cloud owners are buying them"
+  },
+  {
+   "binding": [
+    {
+     "id": "routing",
+     "name": "Routing between models",
+     "word": null
+    },
+    {
+     "id": "inference",
+     "name": "Running models",
+     "word": "easing"
+    }
+   ],
+   "bottlenecks": [
+    "routing",
+    "inference"
+   ],
+   "case": "Developers on OpenRouter spread their tokens (the fragments of words that models read and write, by which use is billed) across many models: this site's first readings of how concentrated its traffic is show no single model dominating, though too few weeks have passed to read a direction, and open models took [fact:open_share] of the tokens among its most used models. Stripe's agreement in August 2026 to buy OpenRouter puts what Stripe calls a leading AI model gateway inside a payments firm, which fits the judgement that its value lies in the bill as much as in the choice. The clouds offer their own catalogues: Google's filing describes a platform with many models, its own, other firms' and open ones. This site cannot measure how much a router saves, because the spread of list prices is set almost entirely by one very expensive model, so its routing gauge carries no reading. The router positions this site records disagree on whether pooling many firms' outcomes makes a router choose better than any one firm can.",
+   "commoditising": "This site judges that picking a model for each request is becoming a commodity: open-source gateways do it, the clouds' catalogues do it, and the labs' own tools do it for their models. William Nordhaus, an economist who measured how much of the value of new inventions their makers keep as profit, found that it is a small part; most goes to buyers.",
+   "converts_if": "Pooling many firms' checked outcomes lets a router choose better than any firm alone, a network economy in Helmer's sense; or, inside Stripe, the marketplace becomes where AI agents themselves pay for models, so billing and credit create switching costs (what a customer would lose by moving to a rival).",
+   "direction": "commoditising",
+   "id": "vc_routing_gateways",
+   "kill_shot": "Routers charging more for the choice of model itself, and buyers paying it, because choices learned from many firms' outcomes beat what each firm manages alone.",
+   "layer": "serving_orchestration",
+   "mechanism": "A router or gateway sits between an app and the models: it sends each request to a model chosen for price, speed or quality, switches when one fails, and keeps one bill. OpenRouter, which the payments company Stripe agreed in August 2026 to buy, sells access to many models through one account; Martian and Not Diamond sell the choice of model; Portkey, Helicone, LiteLLM and TrueFoundry sell a gateway a firm runs itself, LiteLLM's as open source (code published for anyone to use and change for free). David Ricardo, an English economist who asked in 1817 why landlords grew rich when bread grew dear, found that the owner of the scarcest input collects a rent: profit above what it takes to keep a business going, earned because something holds rivals off. This site judges that the routing itself is easy to copy, while a marketplace that many developers and many model sellers both use can hold them the way a payments network does.",
+   "powers": [],
+   "rival": {
+    "id": "router_power",
+    "title": "Routers gain power"
+   },
+   "stays_scarce": "This site judges that what stays scarce is the marketplace itself: one account, one bill and one set of terms across many model sellers, and the record of what traffic went where. Hamilton Helmer, a strategy consultant who studied why some firms keep earning more than their investors could expect elsewhere, found that a lasting advantage is a benefit behind a barrier. Network economies (each user makes the product more valuable to the others) would fit a marketplace, but developers use several routers or go straight to the labs, so this site does not count the barrier proven.",
+   "sublayer": "routing_gateways",
+   "title": "Choosing a model is being given away; a gateway keeps a rent only as the place where developers pay for many models"
+  },
+  {
+   "binding": [
+    {
+     "id": "agents",
+     "name": "Agents and tool use",
+     "word": "easing"
+    },
+    {
+     "id": "deployment_platforms",
+     "name": "Deployment platforms",
+     "word": null
+    }
+   ],
+   "bottlenecks": [
+    "agents",
+    "deployment_platforms"
+   ],
+   "case": "The clouds sell agent building as part of their platforms: Microsoft's filing describes Azure AI Foundry as a platform to design, customise and manage AI applications and agents, Google's describes Vertex AI as one for building agents as well as models, and CoreWeave's describes its own agent-building tools. The labs and clouds are also buying the plumbing: Nebius agreed in February 2026 to buy Tavily, which gives agents web search; OpenAI took on the Cirrus Labs team in April 2026 and agreed in June 2026 to buy Ona, which gives agents secure cloud workspaces; Anthropic agreed in May 2026 to buy Stainless, which makes toolkits and servers for connecting models to other software; Meta took in Moltbook in March 2026 and Stilla in September 2026. Platforms are deciding whether to let outside agents in: this site's ledger of big platforms fencing out agents that are not their own records [fact:fences_ledger] such events so far. This site reads agents' ability as easing, meaning the length of task they can finish keeps growing fast; that gauge measures agents, not the economics of their plumbing, for which this site has no reading.",
+   "commoditising": "This site judges that frameworks, sandboxes and simple memory are becoming commodities: most began as open source, the clouds bundle them, and the labs buy the teams that build them. William Nordhaus, an economist who measured how much of the value of new inventions their makers keep as profit, found that it is a small part; most goes to buyers. David Teece, an economist who studied why the firm that invents something often fails to keep the returns, called the inputs a product needs to reach its customers complementary assets; a generic one, which anyone can supply, earns an ordinary return, not a rent.",
+   "converts_if": "A connector firm becomes the standard way agents are given permission into business software across many firms, which could give it network economies in Helmer's sense (each user makes the product more valuable to the others), or its links into each customer's systems become switching costs. Ronald Coase, an economist who studied why some work is done inside firms rather than bought, would otherwise expect the labs and clouds to keep absorbing this layer, as the buying so far suggests.",
+   "direction": "commoditising",
+   "id": "vc_agent_infra",
+   "kill_shot": "An open-source framework or sandbox firm earning a lasting margin (what it keeps from each sale after paying its costs) while the labs and clouds give the same thing away; or connector firms losing customers as fast as framework firms once the labs and clouds ship their own connectors.",
+   "layer": "serving_orchestration",
+   "mechanism": "An agent is a model that carries out a task by using software tools over minutes or hours. Agent infrastructure is what it needs, much of it open source (code published for anyone to use and change for free): frameworks for wiring model calls together (LangChain, CrewAI, Mastra), sandboxes where it can run code or a browser safely (Daytona, Browserbase and others), memory that lasts between sessions (Letta), and connectors that let it log in to and act in other software (Composio, Arcade, Nango, Merge). David Ricardo, an English economist who asked in 1817 why landlords grew rich when bread grew dear, found that the owner of the scarcest input collects a rent: profit above what it takes to keep a business going, earned because something holds rivals off. Oliver Williamson, an economist who studied contracts, found that an asset built for one buyer, worth far less anywhere else, ties that buyer to whoever holds it. This site judges that frameworks and sandboxes are generic, while connectors that hold a firm's permissions and links into its systems are specific to that firm, and harder to replace.",
+   "powers": [],
+   "rival": {
+    "id": "records_hold",
+    "title": "The software that keeps the records gains"
+   },
+   "stays_scarce": "This site judges that what stays scarce is the working link into a firm's own software: the permissions, the audit trail and the map of which system holds what. That context helps only the firm it came from, so it does not compound across customers, but it is specific in Williamson's sense. The software that keeps a firm's records can also refuse or charge for outside agents, which is where the rival view places the rent. Hamilton Helmer, a strategy consultant who studied why some firms keep earning more than their investors could expect elsewhere, found that a lasting advantage is a benefit behind a barrier; switching costs (what a customer would lose by moving to a rival) are the likeliest here, but this site does not count them proven for any connector firm yet.",
+   "sublayer": "agent_infra",
+   "title": "Agent plumbing is mostly open source that labs and clouds buy or copy; the rent sits with whoever holds the connections into customers' systems"
+  }
+ ],
  "held": [],
  "id": "serving_orchestration",
  "indicators": [
@@ -68,7 +177,226 @@
  ],
  "name": "Serving & orchestration",
  "order": 4,
- "profiles": [],
+ "profiles": [
+  {
+   "concentration": "moderate",
+   "customers": "Fast-growing AI application companies. It names Cursor, Notion, Lovable, Harvey, HubSpot, OpenEvidence, Abridge, Decagon and Parallel. SpaceX, which owns xAI, a frontier lab (a firm building the most capable AI systems), agreed in June 2026 to buy Cursor; the deal was awaiting regulatory approval at SpaceX's quarterly filing for the middle of 2026. The sources give no revenue by customer; this site judges a few large application companies weigh heavily.",
+   "depends_on": [
+    {
+     "id": "accelerators",
+     "name": "AI chips",
+     "word": "moderate"
+    },
+    {
+     "id": "data_centres",
+     "name": "Data-centre buildings",
+     "word": "tight"
+    },
+    {
+     "id": "inference",
+     "name": "Running models",
+     "word": "easing"
+    },
+    {
+     "id": "post_training",
+     "name": "Post-training",
+     "word": null
+    },
+    {
+     "id": "capital",
+     "name": "Capital",
+     "word": "slack"
+    }
+   ],
+   "disclosure": null,
+   "entity": "baseten",
+   "judged_by": "claude-opus-5.5",
+   "market": "Baseten sells inference (running a trained model to answer requests) and post-training (further training a finished model on a customer's own data and tasks) to companies building AI products. It runs models for customers on dedicated capacity or through ready-made model connections, in its cloud, in the customer's own or across both, and its engineers embed with customers to post-train and tune specialised models. Its case is that open-weight models (models whose trained settings are published so anyone can run them) are now good enough to replace closed models for many firms, which then want to own a model shaped by their own data. It says its revenue and the volume it serves both grew steeply over the past year; that is self-reported. This site's other readings, from a press report and an analyst's estimate, also show a steep rise in early 2026. Its Form D (the notice a private company files with the US regulator when it sells shares without a public offering) shows an offering of shares first sold in June 2026, mostly sold at filing, with no placement agent and revenue not disclosed. How big the market becomes depends on whether serving open models stays a skilled service or becomes a commodity (a product bought on price alone).",
+   "must_be_true": [
+    "Serving open models does not become a commodity. This site's records show open models carrying most of the tokens (the units of text models read and write) routed through OpenRouter (a service that passes each request to whichever model a buyer picks) to its busiest models, the price of a fixed level of capability falling fast, and many rival serving firms, so Baseten has to earn its price from post-training and reliability, not raw serving.",
+    "Post-training ties customers to it. Oliver Williamson, an economist who studied contracts, found that firms bring in-house the work tied closely to their own plans; a model tuned to one firm's work is worth little elsewhere, but the switching cost falls to whoever holds it, and Baseten itself says its customers want to own their models.",
+    "It keeps getting enough GPUs (graphics processing units, the chips most AI runs on) at a price below what it charges; this site judges it rents most of them, largely NVIDIA's, from clouds that also sell serving.",
+    "Its largest customers stay with it as they grow, rather than moving to a lab's own models or their own data centres; SpaceX's agreement in June 2026 to buy Cursor, still awaiting regulatory approval at SpaceX's quarterly filing for the middle of 2026, is the first test.",
+    "Chip makers and compute owners, which this site records buying several serving firms, do not bundle serving so cheaply that stand-alone firms lose the work."
+   ],
+   "name": "Baseten",
+   "outside": null,
+   "powers": [
+    {
+     "power": "switching costs",
+     "why": "Emerging, not proven: Hamilton Helmer, a strategist, listed seven sources of lasting profit and required each to have both a benefit and a barrier to copying. The benefit is repeat business from customers whose post-trained models and tuned serving run on Baseten. The barrier is weak: Baseten's own pitch is that customers own their models, and open-weight models run on many rivals' platforms. This site has no retention evidence."
+    }
+   ],
+   "rent": {
+    "appropriability": "weak",
+    "asset_owner": "incumbents",
+    "complementary_assets": "generic",
+    "durability": "short",
+    "pools": "users",
+    "reads": "competed away to users",
+    "rent_kind": "scarcity",
+    "tier": "none"
+   },
+   "reviewed": null,
+   "reviewed_by": null,
+   "role": "candidate",
+   "source_links": [
+    {
+     "id": "baseten_form_d_2026",
+     "label": "Baseten Form D, 30 Jun 2026",
+     "url": "https://www.sec.gov/Archives/edgar/data/1865393/000186539326000004/xslFormDX08/primary_doc.xml"
+    },
+    {
+     "id": "baseten_series_f_2026",
+     "label": "Baseten announcement, 22 Jun 2026",
+     "url": "https://www.baseten.co/blog/announcing-our-series-f/"
+    },
+    {
+     "id": "xai_spacex_10q_q2_2026",
+     "label": "SpaceX quarterly report (10-Q), 4 Aug 2026",
+     "url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026052535/spcx-20260630.htm"
+    }
+   ],
+   "sources": {
+    "customers": [
+     "baseten_series_f_2026",
+     "xai_spacex_10q_q2_2026"
+    ],
+    "market": [
+     "baseten_series_f_2026",
+     "baseten_form_d_2026"
+    ],
+    "must_be_true": [
+     "baseten_series_f_2026",
+     "baseten_form_d_2026",
+     "xai_spacex_10q_q2_2026"
+    ],
+    "powers": [
+     "baseten_series_f_2026",
+     "baseten_form_d_2026"
+    ]
+   },
+   "units": [
+    "vc_inference_serving"
+   ],
+   "would_disprove": [
+    "Price cuts on serving open models without a matching rise in volume.",
+    "Cursor or another named customer moving its models off Baseten after a change of owner.",
+    "Customers taking their post-trained models to rival platforms at little cost.",
+    "Clouds or chip makers offering the same post-training and serving as part of their compute."
+   ]
+  },
+  {
+   "concentration": "moderate",
+   "customers": "It names Samsung, Uber, DoorDash, Notion, Shopify and Upwork, and says Cursor's coding models and Harvey's legal AI are built with it; Harvey, in a post in this site's records, says it post-trained a model with Fireworks, starting from an open model. It says it serves many thousands of companies. SpaceX, which owns xAI, a frontier lab (a firm building the most capable AI systems), agreed in June 2026 to buy Cursor; the deal was awaiting regulatory approval at SpaceX's quarterly filing for the middle of 2026. The sources give no revenue by customer; this site judges the base is broad but that a few large application companies weigh heavily.",
+   "depends_on": [
+    {
+     "id": "accelerators",
+     "name": "AI chips",
+     "word": "moderate"
+    },
+    {
+     "id": "data_centres",
+     "name": "Data-centre buildings",
+     "word": "tight"
+    },
+    {
+     "id": "inference",
+     "name": "Running models",
+     "word": "easing"
+    },
+    {
+     "id": "post_training",
+     "name": "Post-training",
+     "word": null
+    },
+    {
+     "id": "capital",
+     "name": "Capital",
+     "word": "slack"
+    }
+   ],
+   "disclosure": null,
+   "entity": "fireworks",
+   "judged_by": "claude-opus-5.5",
+   "market": "Fireworks sells inference (running a trained model to answer requests) for companies' developer teams, plus tools to fine-tune models (further train them on a customer's own data), train them with reinforcement learning (rewarding good answers) and evaluate them. It serves hundreds of open-weight models (models whose trained settings are published so anyone can run them). Its founders, who had built AI infrastructure at Meta, left PyTorch, an AI software framework, in 2022 on the bet that open models would catch up with closed ones and firms would want to own their AI. It calls itself the market leader in AI inference; that is its own description. It says its annualised revenue run-rate (the latest month's revenue scaled up to a year) passed a large milestone in 2026, and that almost all the tokens (units of text a model reads and writes) it serves come from models specialised on customers' own data; both are self-reported. An analyst's estimate in this site's records also shows a steep rise through early 2026. NVIDIA and AMD, the chip makers, are among its investors. How big the market becomes depends on whether serving open models stays a skilled service or becomes a commodity (a product bought on price alone).",
+   "must_be_true": [
+    "Serving open models does not become a commodity. This site's records show open models carrying most of the tokens routed through OpenRouter (a service that passes each request to whichever model a buyer picks) to its busiest models, the price of a fixed level of capability falling fast, and many rival serving firms, so Fireworks has to earn its price from tuning and speed, not raw serving.",
+    "Its feedback loop, where users' corrections retrain each customer's model, ties customers to it. On the tests of Andrei Hagiu and Julian Wright, economists who set out tests for when data really keeps rivals out, among them whether what a firm learns from one customer improves the product for the others, that learning helps only the customer it came from, so it is a switching cost for whoever holds the model rather than a network that grows with every customer.",
+    "It keeps getting enough GPUs (graphics processing units, the chips most AI runs on) at a price below what it charges; its investors include the chip makers whose chips this site judges it runs on.",
+    "Its largest customers stay with it as they grow, rather than moving to a lab's own models or their own data centres; SpaceX's agreement in June 2026 to buy Cursor, still awaiting regulatory approval at SpaceX's quarterly filing for the middle of 2026, is the first test.",
+    "Chip makers and compute owners, which this site records buying several serving firms, do not bundle serving so cheaply that stand-alone firms lose the work."
+   ],
+   "name": "Fireworks",
+   "outside": null,
+   "powers": [
+    {
+     "power": "switching costs",
+     "why": "Emerging, not proven: Hamilton Helmer, a strategist, listed seven sources of lasting profit and required each to have both a benefit and a barrier to copying. The benefit is repeat business from models tuned on a customer's data and improved by its users' feedback on Fireworks' stack. The barrier is weak: Fireworks' own pitch is that customers own their models, and open-weight models run on many rivals' platforms. This site has no retention evidence."
+    }
+   ],
+   "rent": {
+    "appropriability": "weak",
+    "asset_owner": "incumbents",
+    "complementary_assets": "generic",
+    "durability": "short",
+    "pools": "users",
+    "reads": "competed away to users",
+    "rent_kind": "scarcity",
+    "tier": "none"
+   },
+   "reviewed": null,
+   "reviewed_by": null,
+   "role": "candidate",
+   "source_links": [
+    {
+     "id": "fireworks_series_c_2025",
+     "label": "Fireworks announcement, 28 Oct 2025",
+     "url": "https://fireworks.ai/blog/series-c"
+    },
+    {
+     "id": "fireworks_series_d_2026",
+     "label": "Fireworks announcement, 15 Jul 2026",
+     "url": "https://fireworks.ai/blog/series-d-announcement"
+    },
+    {
+     "id": "xai_spacex_10q_q2_2026",
+     "label": "SpaceX quarterly report (10-Q), 4 Aug 2026",
+     "url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026052535/spcx-20260630.htm"
+    }
+   ],
+   "sources": {
+    "customers": [
+     "fireworks_series_c_2025",
+     "fireworks_series_d_2026",
+     "xai_spacex_10q_q2_2026"
+    ],
+    "market": [
+     "fireworks_series_d_2026",
+     "fireworks_series_c_2025"
+    ],
+    "must_be_true": [
+     "fireworks_series_c_2025",
+     "fireworks_series_d_2026",
+     "xai_spacex_10q_q2_2026"
+    ],
+    "powers": [
+     "fireworks_series_c_2025",
+     "fireworks_series_d_2026",
+     "xai_spacex_10q_q2_2026"
+    ]
+   },
+   "units": [
+    "vc_inference_serving"
+   ],
+   "would_disprove": [
+    "Price cuts on serving open models without a matching rise in volume.",
+    "Cursor or another named customer moving its models off Fireworks after a change of owner.",
+    "Customers taking their tuned models to rival platforms at little cost.",
+    "Closed models winning back most of the traffic from open ones, shrinking the market it serves."
+   ]
+  }
+ ],
  "sublayers": [
   {
    "description": "",
