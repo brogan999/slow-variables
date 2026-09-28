@@ -754,3 +754,9 @@ Deliberately not done: an `expectations` SQL table, per-page share images, pips,
 - **Claim tests (#103):** labour's share, relational work's share of jobs and NVIDIA's chip lead now read nightly. Claims whose series does not measure the claim itself stay untested, with the reason in the PR.
 - **Crux claims (#104):** labs owning a services firm (Lazarov, due 2028), AI insurance premiums (Deloitte, 2032), the firm-size barbell (Walker, 2029) and the conglomerate premium (Hoffman), each with a dated falsifier. No fetchable forecast gives a number or date for the router fee.
 - **Private work (not in this repo):** the bet register, crux map, bet order and answers to the open questions live in the owner's Notion.
+
+## Parts 29–30 status (28 Sep 2026): instruments for the rows that read "no instrument"
+
+- **Part 29 (#104–#111):** seed priors dropped where the evaluator disagreed; Chinese lead and frontier-lab count read from Epoch's country column; lab gross margin published as a grade C estimate; AMD's fiscal Q4s filled from its 10-K member spelling; the data sellers' year-on-year panel; map families and NBER rows linked to the indicators that read them.
+- **Tightness (#113):** agents scored on METR's doubling time. Tool-capable share, training utilisation and the equipment makers' backlogs recorded as unsound gauges, with reasons; the grid has no public series of load-connection waits. The equipment makers are read as SEC filers.
+- **Science row:** family rows may carry metric readings; "How science itself moves" reads the FrontierMath Tier 4, SciCode and CritPt frontiers, labelled as AI capability on science tasks.

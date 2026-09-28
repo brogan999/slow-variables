@@ -355,6 +355,7 @@ def _check(s: st.Store) -> tuple[list[str], list[str]]:
         {x.id for x in [*s.seed.layers, *s.seed.sublayers]},
         {p["id"] for p in (load_argument().get("migration") or {}).get("predictions") or []},
         {b.id for b in s.seed.buckets},
+        set(yaml.safe_load(open("semantic/metrics.yaml"))["metrics"]),
     )
     from .outlook import check as outlook_check
 
