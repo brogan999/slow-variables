@@ -54,6 +54,47 @@ metrics:
       SELECT as_of_date, subject AS entity, gp / rev AS value, ids AS obs_ids FROM q
       UNION ALL SELECT as_of_date, subject, gp / rev, ids FROM fill WHERE rev > 0
 
+  multiple_to_1t:
+    description: How many times over a public filer's value must grow to reach $1 trillion, read as $1 trillion divided by the market value of its shares held by non-affiliates on the cover page of its latest 10-K (the public float), per filer at each float date.
+    rationale: The $1 trillion mark and the 2035 horizon define the question the owner asked (what would have to be true for a company to be worth $1 trillion in 2035); they are the question's own terms, like a bet's line, not an assumption about markets. The public float is the only market value SEC filings state; a live share price would replace it once a source passes robots.txt and its terms.
+    grain: [as_of_date, entity]
+    unit: ratio
+    lead_lag: coincident
+    formula_version: 1
+    inputs: ["sec.*.public_float.pt"]
+    caveats: The public float is dated at the end of the filer's second fiscal quarter and filed with the 10-K, so it can be over a year old; it leaves out shares held by officers, directors and large holders, so it understates the whole company's value, most for founder-controlled filers; filers round it. Below 1.0x the filer's float already exceeds $1 trillion.
+    sql: |
+      SELECT as_of_date, subject AS entity, 1e12 / value_numeric AS value, [id] AS obs_ids
+      FROM observations WHERE source_ns = 'sec' AND measure = 'public_float' AND grain = 'pt' AND value_numeric > 0
+
+  cagr_to_1t_2035:
+    description: The yearly growth in value a public filer would need, compounded from its public float's date to 31 December 2035, to reach $1 trillion; shown only where the float is below $1 trillion.
+    rationale: Turns the multiple into the rate a reader can compare with revenue and profit growth. The horizon is measured from each row's own float date, never from today, so a row's value does not drift while the service runs.
+    grain: [as_of_date, entity]
+    unit: share
+    lead_lag: coincident
+    formula_version: 1
+    inputs: ["sec.*.public_float.pt"]
+    caveats: Assumes growth is steady and the float stands for the whole company; carries every caveat of multiple_to_1t. It says what growth is needed, not what growth is likely.
+    sql: |
+      SELECT as_of_date, subject AS entity,
+             power(1e12 / value_numeric, 365.25 / (DATE '2035-12-31' - as_of_date)) - 1 AS value, [id] AS obs_ids
+      FROM observations WHERE source_ns = 'sec' AND measure = 'public_float' AND grain = 'pt'
+        AND value_numeric > 0 AND value_numeric < 1e12
+
+  private_multiple_to_1t:
+    description: How many times over a private lab's latest post-money valuation must grow to reach $1 trillion, per lab at each valuation date (Epoch's compiled funding rounds).
+    rationale: The frontier labs are among the likeliest companies to reach $1 trillion and file no public float; their round prices are the only valuation on record. Kept apart from multiple_to_1t because a round price is a different kind of number and must never be ranked with public market values.
+    grain: [as_of_date, entity]
+    unit: ratio
+    lead_lag: coincident
+    formula_version: 1
+    inputs: ["epoch.*.post_money_usd.pt"]
+    caveats: Tier 5, compiled from press reports; a post-money price is the headline price of preferred shares with protections common shares lack, so it overstates what the whole company would fetch; rounds are months apart, so the latest can be stale.
+    sql: |
+      SELECT as_of_date, entity_id AS entity, 1e12 / value_numeric AS value, [id] AS obs_ids
+      FROM observations WHERE series_key LIKE 'epoch.%.post_money_usd.pt' AND entity_id IS NOT NULL AND value_numeric > 0
+
   gross_margin_fy:
     description: Gross profit divided by revenue per filer per fiscal year, from the 10-K's XBRL company facts.
     rationale: The annual margin smooths fiscal-calendar noise and is the figure filers headline.

@@ -39,11 +39,16 @@ CONCEPTS = {
     ],
     "rpo": ["RevenueRemainingPerformanceObligation"],
     "da": ["DepreciationDepletionAndAmortization", "DepreciationAndAmortization"],
+    "net_income": ["NetIncomeLoss"],
+    "diluted_shares": ["WeightedAverageNumberOfDilutedSharesOutstanding"],
+    "public_float": ["EntityPublicFloat"],  # the cover page's market value of shares held by non-affiliates
 }
+NAMESPACE = {"public_float": "dei"}  # every other concept is us-gaap
+UNIT = {"diluted_shares": "shares"}  # every other concept is USD
 FRAME = re.compile(r"^CY(\d{4})(?:Q([1-4]))?(I?)$")
 FORMS = ("10-K", "10-Q", "10-K/A", "10-Q/A")
 YTD = {"capex"}  # cash-flow measures filed year to date
-INSTANT = {"rpo"}  # balances; a cash-flow tag framed at an instant is a tagging slip
+INSTANT = {"rpo", "public_float"}  # balances and cover-page values; a cash-flow tag framed at an instant is a tagging slip
 YTD_GRAIN = ((170, 195, "h1"), (260, 285, "9m"))
 FILL = {"revenue"}  # the capex and D&A tags name different things, so they never fill each other
 
@@ -81,9 +86,10 @@ class SecXbrl(Connector):
             ent = by_url[item.url]
             doc = json.loads(item.body)
             expect(set(doc), {"facts"}, f"sec {ent.id}")
-            gaap = doc["facts"].get("us-gaap") or {}
             for measure, tags in CONCEPTS.items():
-                got = [_periods(t, gaap[t]["units"].get("USD") or [], measure) for t in tags if t in gaap]
+                gaap = doc["facts"].get(NAMESPACE.get(measure, "us-gaap")) or {}
+                unit = UNIT.get(measure, "USD")
+                got = [_periods(t, gaap[t]["units"].get(unit) or [], measure) for t in tags if t in gaap]
                 ranked = sorted(
                     (p for p in got if p), key=lambda p: max(r["end"] for *_, r in p.values()), reverse=True
                 )  # filers retire tags: the one with the latest period leads
@@ -105,7 +111,7 @@ class SecXbrl(Connector):
                         self.obs(
                             item,
                             series_key=f"sec.{ent.id}.{measure}.{grain}",
-                            unit="USD",
+                            unit=unit,
                             as_of_date=date.fromisoformat(r["end"]),
                             period_start=date.fromisoformat(r["start"]) if r.get("start") else None,
                             published_date=date.fromisoformat(r["filed"]),
@@ -113,7 +119,7 @@ class SecXbrl(Connector):
                             entity_id=ent.id,
                             tier=Tier.OFFICIAL_FILING,
                             audited_vs_reported=Basis.audited
-                            if r["form"] == "10-K" and (grain == "fy" or not r.get("start"))
+                            if r["form"] == "10-K" and (grain == "fy" or not r.get("start")) and measure not in NAMESPACE  # the cover page is not audited
                             else Basis.company_stated,
                             extraction_method=Extraction.xbrl,
                             raw_snippet=json.dumps({tag: r}, sort_keys=True),
@@ -144,7 +150,7 @@ def _periods(tag: str, facts: list[dict], measure: str) -> dict[str | tuple, tup
                 r.get("accn"),
             )
         elif m.group(2) or p["form"].startswith("10-K"):
-            out[fr] = ("q" if m.group(2) else "fy", tag, p)
+            out[fr] = ("pt" if measure == "public_float" else "q" if m.group(2) else "fy", tag, p)
     for (start, end), r in latest.items() if measure in YTD else ():
         days = (date.fromisoformat(end) - date.fromisoformat(start)).days if start else 0
         for lo, hi, g in YTD_GRAIN:
