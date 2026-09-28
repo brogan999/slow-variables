@@ -27,6 +27,7 @@ export function PerezCurve({ phase, facts }: { phase: ArgumentDoc["phase"]; fact
   const span = at && "from" in at ? at : null;
   return (
     <Figure
+      id="perez"
       title="Where the readings put us in Perez's cycle"
       note="schematic, after Perez (2002) · not data"
       keys={<>
