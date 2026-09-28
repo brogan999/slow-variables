@@ -36,7 +36,7 @@ log = logging.getLogger("ai-tracker.ask")
 MODEL = os.environ.get("QUERY_MODEL", "claude-sonnet-5")
 # a blocked answer gets its fresh attempt on the stronger model: rare, so the bill stays near Sonnet's
 ESCALATE_MODEL = os.environ.get("QUERY_ESCALATE_MODEL", "claude-opus-5")
-PROMPT_VERSION = "7"
+PROMPT_VERSION = "8"
 # Opus 5 list price, for the escalated retry only
 ESCALATE_USD_PER_MTOK_IN, ESCALATE_USD_PER_MTOK_OUT = (
     float(x) for x in os.environ.get("QUERY_ESCALATE_USD_PER_MTOK", "5,25").split(",")
@@ -54,7 +54,11 @@ AUDIT_KEYS = (
     "model",
     "prompt_version",
 )  # never question or answer text
-DOC_DIRS = ("docs/research", "docs/interpretation")  # public notes only; docs/private never ships or indexes
+DOC_DIRS = ("docs/argument", "docs/interpretation", "docs/research")  # public notes only; docs/private never ships or indexes
+# where a note's paragraph can be read: the argument essays have pages; the other notes are read in the public repo
+NOTE_PAGES = {"docs/argument/home.md": "/", "docs/argument/full.md": "/argument", "docs/argument/migration.md": "/argument/migration", "docs/argument/outlook.md": "/outlook"}
+REPO_BLOB = "https://github.com/brogan999/slow-variables/blob/main/"
+TOKEN = re.compile(r"\[(?:fact|test|cite):[A-Za-z0-9_.\-]+\]")  # an essay's figure and citation tokens: a note carries no numbers
 DOC_SKIP = {"BOTTLENECK_PROMPT.md"}  # a prompt addressed to a model: an injection hazard, not evidence
 ROW_CAP = 200
 READ_ONLY = re.compile(r"^\s*(select|with|describe|show)\b", re.I)
@@ -156,6 +160,11 @@ TOOLS = [
         "input_schema": {"type": "object", "properties": {"kind": {"type": "string"}}},
     },
     {
+        "name": "futures",
+        "description": "The Futures page: ideas imagined in fiction and essays (kind idea: when first imagined, whether built, the decade AI models judged a working version likely, and a judged view of who would keep the profit: rent kind, appropriability, complementary assets, asset owner, durability, where profit pools and its tier), and dated forecasts from the singularity reading list (kind forecast: who, what technology, when, the odds they gave). Cite each as [fut:<id>]. The profit judgements are AI models' judgements, not measurements: say so. Optional kind: idea, forecast.",
+        "input_schema": {"type": "object", "properties": {"query": {"type": "string"}, "kind": {"type": "string"}, "k": {"type": "integer"}}, "required": ["query"]},
+    },
+    {
         "name": "claims",
         "description": "Search the positions named writers hold about what happens from here, and the claims tested against the site's data each night. Each position has its holders (cite as [src:<id>]), mechanism, strongest case, kill shot and rival position (cite as [pos:<id>]); each claim (cite as [claim:<id>]) has its text, tonight's state, the line it is tested against and what would prove it wrong. Readings a claim quotes come with their own citation. Optional folio: capability, products, adoption, reorganisation, value.",
         "input_schema": {
@@ -198,17 +207,29 @@ How to frame an answer (theory organises what the data shows; it is never a sour
 - Teece on profiting from innovation: when imitation is easy, owners of complementary assets (distribution, manufacturing, data, customer relationships) capture the profits rather than the inventor.
 - Perez on technological revolutions: an installation period financed by speculative capital ends in a turning point, and a deployment period follows in which the technology spreads through the wider economy.
 - Rents come in kinds that migrate as bottlenecks move: scarcity rents on a constrained input, scale and network rents, switching-cost rents, and regulatory rents.
+- Goldratt and Ricardo on bottlenecks: a system runs at the pace of its scarcest input, whose owner collects the rent until the industry builds its way out and the shortage moves.
+- Coase and Williamson on the boundaries of the firm: a firm owns what is specific to it and risky to buy, and buys what is generic; AI lowers some costs of using markets and creates new specific assets.
+- Helmer on durable advantage: power is a benefit behind a barrier; a scarce input is a transitional power that lasts only if its holder converts it into scale, network effects, switching costs, brand or process before the shortage eases.
+- Arrow, Hagiu and Wright on data: knowledge is hard to own; data protects a firm only when its value keeps compounding across customers, stays fresh, is proprietary and is hard to copy.
+- Search these as theory notes with search_evidence; each paragraph is citable as [note:<id>].
 - Evidence grades: A is a tier-1 benchmark or an audited filing or government statistic; B is a company-stated filing, a model release, product behaviour, or published analysis that is not an estimate; C is credible reporting or an estimate; D is a single source or an actor's statement about itself.
 
 Rules for answers:
 1. Use the tools to look things up. Never answer a number from memory. If the store has no record, say that it has no record and give no number.
-2. Every number you state must be followed by a citation token for the record it comes from: [obs:<id>] for an observation, [derived:<id>] for a derived row, [ind:<id>] for an indicator's band edge or status, [event:<id>] for a number quoted from a status event's reason, [census:<row>] for a figure from the census tables, [claim:<id>], [pos:<id>], [src:<id>] or [pred:<id>] for a figure a claim, position, writer's work or prediction states in its own text. Put the token in the same sentence as the number, and give every number in that sentence its own token, decimals such as -0.04 included. Cite the most specific record that holds the number: the observation or derived row it comes from, never the indicator when one of those holds it. A threshold, band edge, dead band or rule you quote counts as a number: cite the record whose text states it, which is the metric's own row for a description or caveat and the indicator for a band edge, its status, its confidence or its own headline reading. Years and small counts ("3 of 4 trackers") do not need one, but cite the record anyway when there is one.
+2. Every number you state must be followed by a citation token for the record it comes from: [obs:<id>] for an observation, [derived:<id>] for a derived row, [ind:<id>] for an indicator's band edge or status, [event:<id>] for a number quoted from a status event's reason, [census:<row>] for a figure from the census tables, [claim:<id>], [pos:<id>], [src:<id>] or [pred:<id>] for a figure a claim, position, writer's work or prediction states in its own text, [fut:<id>] for an idea or forecast from the Futures page, and [note:<id>] for a theory note or essay paragraph (a note carries no figures, so cite it for reasoning, never for a number). Put the token in the same sentence as the number, and give every number in that sentence its own token, decimals such as -0.04 included. Cite the most specific record that holds the number: the observation or derived row it comes from, never the indicator when one of those holds it. A threshold, band edge, dead band or rule you quote counts as a number: cite the record whose text states it, which is the metric's own row for a description or caveat and the indicator for a band edge, its status, its confidence or its own headline reading. Years and small counts ("3 of 4 trackers") do not need one, but cite the record anyway when there is one.
 3. Render values the way the site does: shares as percentages (0.063 -> 6.3%), USD with k/M/B/T, ratios with x, minutes as hours when over an hour, and name the as-of date and the source tier.
 4. Quote a status only with its reason and date. Mention the dispute text when a row is disputed and the tier when it is 7; a number inside a dispute text or caveat is cited to the observation that carries it, never to the indicator.
 5. Never compute a number. Do not add, divide, subtract or annualise records to make one, and do not restate a figure in a unit the record does not carry: a share, ratio, gap or growth rate must come from a metric row. If no record holds it, say the tracker does not compute it.
-6. A named writer's view is theirs: say who holds it and cite the position [pos:<id>], claim [claim:<id>] or work [src:<id>] it comes from. Mark your own reasoning as "this site's reading" or "inference". For what happens from here, use scenarios and claims and say which futures tonight's readings still allow; for what is scarce or binding, use bottlenecks; for a company, use entity; for who keeps the profit, use rent_rubric and say its inputs are your judgement.
-7. Be brief: up to about 350 words of markdown (short paragraphs, or bullets where a list helps; a bullet is one claim). Lead with the answer. Do not describe the tools or your process.
-8. End with a line "Follow-ups:" and three short questions the reader could ask next, one per line starting "- ". They carry no numbers.
+6. A named writer's view is theirs: say who holds it and cite the position [pos:<id>], claim [claim:<id>] or work [src:<id>] it comes from. Mark your own reasoning as "this site's reading" or "inference". For a company, use entity; for who keeps the profit, use rent_rubric and say its inputs are your judgement.
+7. Three passes. Any question about what is happening, what comes next, where value goes, what lasts or who wins is answered in three labelled passes, each with its own citations:
+   - **Now**: what the readings show (observations, derived rows, indicators, the bottleneck scorecard).
+   - **What people expect**: the positions, claims, predictions, scenarios and forecasts that bear on it (claims, scenarios, futures), naming who holds each and tonight's state of any tested claim.
+   - **What theory says**: which mechanism from the framing above applies (search_evidence for the theory note, rent_rubric for who keeps the profit), and whether tonight's readings fit it.
+   If a pass has no record, say so in one sentence rather than filling it. End with where the three agree and where they pull apart. A plain factual question ("what is X's latest Y") needs only the first pass.
+8. Strategy questions (what lasts, what creates advantage, what to own or buy, which opportunities are transitional or durable, where value will sit) follow a chain: call bottlenecks to find what binds now and how tight it is; run rent_rubric for the binding input (a supply shortage is a scarcity rent; its durability follows how tight it is and whether the industry is building its way out); say who holds the complementary asset; then say what would convert the transitional rent into a durable one (Helmer's later powers) and which signposts (claims, predictions) would show it happening.
+9. Questions about what a particular reader should personally build, invest in or bet on get no personal recommendation: answer with the conditions and the signposts that would decide it, and say that this is the frame, not advice.
+10. Lead with the answer in one or two sentences, then the passes. Write in markdown with short paragraphs, a short heading per pass, and bullets where a list helps (a bullet is one claim). Take the length the question needs; do not pad. Do not describe the tools or your process.
+11. End with a line "Follow-ups:" and three short questions the reader could ask next, one per line starting "- ". They carry no numbers.
 
 Metrics in the semantic layer:
 {mlines}
@@ -383,15 +404,26 @@ class Tools:
                     "text": text,
                 }
             )
-        for d in DOC_DIRS:
-            for f in sorted(Path(d).glob("*.md")) if Path(d).is_dir() else []:
-                if f.name in DOC_SKIP:
-                    continue
-                for n, para in enumerate(re.split(r"\n\s*\n", f.read_text(errors="ignore"))):
-                    text, _flagged = scrub(para.strip())
-                    if len(text) >= 40:
-                        docs.append({"cite": None, "doc": f"{f}#p{n}", "text": text})
+        for nid, n in self._notes().items():
+            docs.append({"cite": f"note:{nid}", "doc": n["title"], "text": n["text"]})
         return docs
+
+    def _notes(self) -> dict[str, dict[str, Any]]:
+        """The public essays and theory notes, one citable record per paragraph: note:<file stem>.<paragraph>."""
+        if "notes" not in self._index:
+            notes = {}
+            for d in DOC_DIRS:
+                for f in sorted(Path(d).glob("*.md")) if Path(d).is_dir() else []:
+                    if f.name in DOC_SKIP:
+                        continue
+                    paras = re.split(r"\n\s*\n", f.read_text(errors="ignore"))
+                    title = next((p.lstrip("# ").strip() for p in paras if p.startswith("# ")), f.stem)
+                    for n, para in enumerate(paras):
+                        text, _flagged = scrub(re.sub(r"\s+", " ", TOKEN.sub("", para)).strip())
+                        if len(text) >= 40 and not text.startswith("#"):
+                            notes[f"{f.stem}.{n}"] = {"title": title, "text": text, "href": NOTE_PAGES.get(str(f), REPO_BLOB + str(f))}
+            self._index["notes"] = notes
+        return self._index["notes"]
 
     def fit_trend(self, series: str, since: str | None = None, model: str = "exponential") -> Any:
         rows = [  # a row dated after today is a source's projection, never a reading to fit; a disputed epoch_dc row
@@ -667,6 +699,35 @@ class Tools:
             ],
         }
 
+    def _futures(self) -> dict[str, dict[str, Any]]:
+        if "futures" not in self._index:
+            from .. import futures as fu
+
+            rows = {}
+            for x in fu.ideas():
+                rows[x["id"]] = {
+                    "cite": f"fut:{x['id']}", "kind": "idea", "name": x["name"], "author": x.get("author"), "work": x.get("work"),
+                    "imagined": x.get("imagined"), "line": x.get("line"), "category": x.get("category"),
+                    "arrival": (x.get("arrival") or {}).get("state"), "expected_decade": x.get("arrival_decade"),
+                    "rent": {k: x.get(k) for k in ("rent_kind", "appropriability", "complementary_assets", "asset_owner", "durability")},
+                    "profit_pools_with": x.get("pools"), "profit_tier": x.get("tier"),
+                    "text": " ".join(str(x.get(k) or "") for k in ("name", "line", "category", "author", "work", "rent_kind", "pools", "tier")),
+                }
+            for f in fu.forecasts():
+                rows[f["id"]] = {
+                    "cite": f"fut:{f['id']}", "kind": "forecast", "who": f.get("who"), "technology": f.get("technology"),
+                    "line": f.get("line"), "when": f.get("when"), "odds": f.get("odds"), "category": f.get("category"),
+                    "text": " ".join(str(f.get(k) or "") for k in ("who", "technology", "line", "category", "odds")),
+                }
+            self._index["futures"] = rows
+            self._index["futures_bm25"] = _bm25_index([{**r, "id": i} for i, r in rows.items()])
+        return self._index["futures"]
+
+    def futures(self, query: str, kind: str | None = None, k: int = 8) -> Any:
+        self._futures()
+        hits = [h for h in _bm25_search(self._index["futures_bm25"], query, 60) if not kind or h["kind"] == kind]
+        return [{k2: v for k2, v in h.items() if k2 not in ("text", "id")} for h in hits[: max(1, min(int(k), 20))]]
+
     def claims(self, query: str, folio: str | None = None, k: int = 5) -> Any:
         from .. import outlook
 
@@ -781,6 +842,14 @@ class Tools:
                 rec = self._census_record(i)
                 if rec:
                     out[f"{k}:{i}"] = rec
+            elif k == "note":
+                n = self._notes().get(i)
+                if n:
+                    out[f"{k}:{i}"] = Record(i, k, [], "", n["text"])
+            elif k == "fut":
+                x = self._futures().get(i)
+                if x:
+                    out[f"{k}:{i}"] = Record(i, k, [], "", " ".join(str(v) for v in (x.get("name"), x.get("who"), x.get("technology"), x.get("line"), x.get("odds")) if v))
             elif k in ("src", "pos", "claim", "pred"):
                 rec = self._prose_record(k, i)
                 if rec:
@@ -861,6 +930,15 @@ class Tools:
             e = next((e for e in self.store.events if e.id == id_), None)
             if e:
                 d = {"label": f"{e.target_id}: {e.new_status}", "value": None, "date": e.created_at.date().isoformat(), "snippet": e.reason}
+        elif kind == "note":
+            n = self._notes().get(id_)
+            if n:
+                d = {"label": n["title"], "value": None, "date": None, "snippet": n["text"][:400]}
+        elif kind == "fut":
+            x = self._futures().get(id_)
+            if x:
+                label = x.get("name") or f"{x.get('who')}: {x.get('technology')}"
+                d = {"label": label, "value": None, "date": None, "snippet": x.get("line") or ""}
         elif kind == "census":
             rec = self._census_record(id_)
             d = {"label": f"Automatability census: {rec.snippet}" if rec else "Automatability census", "value": None, "date": None, "snippet": ""}
@@ -927,6 +1005,12 @@ class Tools:
         if kind == "pred":
             r = next(iter(self._predictions("SELECT href FROM predictions WHERE id = ?", [id_])), None)
             return (r[0] if r and r[0] else f"/predictions#{id_}")
+        if kind == "note":
+            n = self._notes().get(id_)
+            return n["href"] if n else None
+        if kind == "fut":
+            x = self._futures().get(id_)
+            return f"/futures/category/{x['category']}#{id_}" if x and x.get("category") else "/futures"
         if kind == "census":
             what, _, key = id_.partition(".")
             return f"/census/roles/{key}" if what == "role" else "/census"
@@ -1008,7 +1092,7 @@ def _run(
     """One pass of the tool loop: keep answering tool calls until the model stops with text."""
     for _ in range(12):
         r = client.messages.create(
-            model=model, max_tokens=1600, system=system, tools=TOOLS, messages=messages
+            model=model, max_tokens=4000, system=system, tools=TOOLS, messages=messages
         )
         usage["in"] += r.usage.input_tokens
         usage["out"] += r.usage.output_tokens

@@ -31,7 +31,7 @@ SITE_TOOLS = [t for t in ask_mod.TOOLS if t["name"] != "rent_rubric"]  # its **k
 server = MCPServer(
     "slow-variables-analyst",
     instructions="The Slow Variables tracker's data and the owner's local reading. Cite site records as the public "
-    "Ask does ([obs:id], [derived:id], [claim:id], [src:id] ...) and local passages as [corpus:<id>]; run "
+    "Ask does ([obs:id], [derived:id], [claim:id], [src:id], theory notes as [note:id], futures entries as [fut:id] ...) and local passages as [corpus:<id>]; run "
     "check_answer on every draft. Paid and book passages are paraphrased and credited, never quoted at length.",
 )
 

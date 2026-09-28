@@ -164,7 +164,7 @@ def test_the_five_spec_tools_answer_and_their_ids_verify():
     hits = t.search_evidence("developer speed randomized trial", k=20)
     assert any(h["cite"] and h["cite"].startswith("obs:") for h in hits)
     assert all("BOTTLENECK_PROMPT" not in h.get("doc", "") for h in hits)
-    assert all(h["cite"] is None for h in hits if "doc" in h)  # notes are context, never citable
+    assert all(h["cite"].startswith("note:") for h in hits if "doc" in h)  # a note is citable for reasoning, never a number
     f = t.fit_trend("metr.*.horizon_50.pt", "2024-01-01")
     assert f["kind"] == "doubling_days" and f["n_points"] >= 3
     assert check(f"It doubles every {f['value']:.0f} days [derived:{f['id']}].", t.records([("derived", f["id"])])).ok
@@ -206,7 +206,7 @@ def test_golden_survives_a_hallucinated_id_and_flags_informational_questions():
 
     s = st.Store()
     res = golden(s, Tools(s), ScriptClient(["No record [obs:deadbeef00000000]."]))
-    assert {r["id"] for r in res if r["informational"]} == {"g14", "g15", "g17", "g18", "g19", "g20", "g21", "g22", "g23", "g24", "g25", "g26"}
+    assert {r["id"] for r in res if r["informational"]} == {"g14", "g15", "g17", "g18", "g19", "g20", "g21", "g22", "g23", "g24", "g25", "g26", "g27", "g28", "g29", "g30"}
     assert not any(r["ok"] for r in res if r["id"] not in ("g16",))
 
 
@@ -386,6 +386,33 @@ def test_the_bottleneck_tool_gives_words_and_citable_gauges_and_names_what_binds
     rows = [b for c in t.scenarios()["cells"] for b in c["binds_next"]]
     assert rows and all(b["name"] != b["id"] for b in rows)
     assert {b["kind"] for b in rows} <= {"chain", "friction"}
+
+
+def test_theory_notes_and_futures_are_citable_for_reasoning_but_never_for_a_number():
+    from ai_tracker.query.citecheck import check
+
+    t = Tools(st.Store())
+    hit = next(h for h in t.search_evidence("Coase firm market costs specific asset hold-up", k=20) if h["cite"].startswith("note:"))
+    kind, nid = hit["cite"].split(":", 1)
+    rec = t.records([(kind, nid)])
+    assert check(f"A firm owns what is specific to it [note:{nid}].", rec).ok
+    assert not check(f"It owns 40% of what it uses [note:{nid}].", rec).ok
+    assert not any("[fact:" in n["text"] for n in t._notes().values())  # essay tokens drop out
+    mig = next(k for k in t._notes() if k.startswith("migration."))
+    assert t.href("note", mig) == "/argument/migration" and t.href("note", nid).startswith("https://github.com/")
+    assert t.detail("note", nid)["label"]
+    fut = t.futures("superintelligence", kind="forecast", k=3)
+    assert fut and all(f["cite"].startswith("fut:") and f["kind"] == "forecast" for f in fut)
+    fk, fid = fut[0]["cite"].split(":", 1)
+    assert check(f"{fut[0]['who']} gave it a chance [fut:{fid}].", t.records([(fk, fid)])).ok and t.href(fk, fid).startswith("/futures")
+
+
+def test_the_prompt_asks_for_three_passes_and_the_strategy_chain():
+    from ai_tracker.query.ask import _system
+
+    p = _system(st.Store())
+    assert "**Now**" in p and "What people expect" in p and "What theory says" in p
+    assert "call bottlenecks" in p and "no personal recommendation" in p and "350 words" not in p
 
 
 def test_prose_records_match_numbers_only_as_whole_tokens():

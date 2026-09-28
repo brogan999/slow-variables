@@ -5,8 +5,8 @@ export type Cite = { kind: string; id: string; href: string | null; label?: stri
 
 // The subset of markdown Ask answers use (paragraphs, bullets, short headings, bold, italic) with citation tokens as
 // numbered chips. A chip opens a card (native popover) naming the record; unresolved tokens stay visible as text.
-const TOKEN = /(\[(?:obs|derived|ind|event|census|src|pos|claim|pred):[A-Za-z0-9_.-]+\]|⟦unverified: [^⟧]*⟧|\*\*[^*]+\*\*|\*[^*\s][^*]*\*)/g;
-const KIND = { obs: "observation", derived: "derived row", ind: "indicator", event: "status change", census: "census row", src: "source", pos: "position", claim: "claim", pred: "prediction" } as Record<string, string>;
+const TOKEN = /(\[(?:obs|derived|ind|event|census|src|pos|claim|pred|note|fut):[A-Za-z0-9_.-]+\]|⟦unverified: [^⟧]*⟧|\*\*[^*]+\*\*|\*[^*\s][^*]*\*)/g;
+const KIND = { obs: "observation", derived: "derived row", ind: "indicator", event: "status change", census: "census row", src: "source", pos: "position", claim: "claim", pred: "prediction", note: "theory note", fut: "futures entry" } as Record<string, string>;
 
 export function citeOrder(text: string, cites: Cite[]): Cite[] {
   const byTok = new Map(cites.map((c) => [`[${c.kind}:${c.id}]`, c]));
