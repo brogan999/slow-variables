@@ -1,5 +1,5 @@
 {
- "as_of": "2026-09-26",
+ "as_of": "2026-09-27",
  "folios": [
   {
    "id": "capability",
@@ -325,6 +325,45 @@
      "state": "holding",
      "test": null,
      "who": "This site",
+     "word": "happening"
+    },
+    {
+     "attribution": "author",
+     "folio": "capability",
+     "href": "/outlook#claim-no_chinese_lead",
+     "id": "no_chinese_lead",
+     "indicators": [
+      "open_weights_lag_months"
+     ],
+     "kind": "outlook",
+     "line": "Chinese labs do not take the lead at the frontier while the best chips, the tests that matter and the paying customers stay American.",
+     "reading": {
+      "as_of": "2026-09-03",
+      "derived_id": "e80c7547d7d17875",
+      "holds": null,
+      "href": "/query#china_eci_gap",
+      "obs_ids": [
+       "1d7f927dc44aa946",
+       "4a5ecf6f5e9ad21f",
+       "9ddd14a3a471f87b"
+      ],
+      "unit": "index",
+      "value": -8.919999999999987
+     },
+     "row": null,
+     "settles": "A Chinese lab's model becoming the best at the frontier.",
+     "sources": [
+      "https://seanzcai.substack.com/p/state-of-data-july-2026",
+      "https://www.thediff.co/archive/nomentum/"
+     ],
+     "stage": null,
+     "state": "holding",
+     "test": {
+      "against": 0,
+      "fact": "china_eci_gap",
+      "op": "lt"
+     },
+     "who": "Sean Cai and Byrne Hobart",
      "word": "happening"
     },
     {
@@ -1995,29 +2034,6 @@
     {
      "attribution": "author",
      "folio": "capability",
-     "href": "/outlook#claim-no_chinese_lead",
-     "id": "no_chinese_lead",
-     "indicators": [
-      "open_weights_lag_months"
-     ],
-     "kind": "outlook",
-     "line": "Chinese labs do not take the lead at the frontier while the best chips, the tests that matter and the paying customers stay American.",
-     "reading": null,
-     "row": null,
-     "settles": "A Chinese lab's model becoming the best at the frontier.",
-     "sources": [
-      "https://seanzcai.substack.com/p/state-of-data-july-2026",
-      "https://www.thediff.co/archive/nomentum/"
-     ],
-     "stage": null,
-     "state": "untestable",
-     "test": null,
-     "who": "Sean Cai and Byrne Hobart",
-     "word": "too_early"
-    },
-    {
-     "attribution": "author",
-     "folio": "capability",
      "href": "/outlook#claim-real_work_data",
      "id": "real_work_data",
      "indicators": [],
@@ -2090,7 +2106,7 @@
      "word": "too_early"
     }
    ],
-   "too_early": 71
+   "too_early": 70
   },
   {
    "id": "products",
@@ -3753,6 +3769,41 @@
      "word": "happening"
     },
     {
+     "attribution": "author",
+     "folio": "value",
+     "href": "/outlook#claim-compute_no_crash",
+     "id": "compute_no_crash",
+     "indicators": [],
+     "kind": "outlook",
+     "line": "The price of rented computing does not crash the way internet bandwidth did, because physical capacity cannot be multiplied overnight.",
+     "reading": {
+      "as_of": "2026-09-21",
+      "derived_id": "40b90cfb2512c7cf",
+      "holds": null,
+      "href": "/query#gpu_rent_yoy",
+      "obs_ids": [
+       "19f553d19637cdec",
+       "471ecfd1d9421357"
+      ],
+      "unit": "share",
+      "value": 0.09199878102461656
+     },
+     "row": null,
+     "settles": "A sudden glut sending the rent for AI chips down by most of its value within a year.",
+     "sources": [
+      "https://seanzcai.substack.com/p/new-age-commodities"
+     ],
+     "stage": null,
+     "state": "holding",
+     "test": {
+      "against": -0.5,
+      "fact": "h100_rent_yoy",
+      "op": "gt"
+     },
+     "who": "Sean Cai",
+     "word": "happening"
+    },
+    {
      "attribution": "site",
      "folio": "value",
      "href": "/outlook#claim-contracts_shift",
@@ -3789,6 +3840,43 @@
       "op": "gt"
      },
      "who": "This site",
+     "word": "happening"
+    },
+    {
+     "attribution": "author",
+     "folio": "value",
+     "href": "/outlook#claim-few_labs",
+     "id": "few_labs",
+     "indicators": [
+      "frontier_capital_concentration"
+     ],
+     "kind": "outlook",
+     "line": "Only a handful of labs stay at the frontier, because it costs too much capital for more.",
+     "reading": {
+      "as_of": "2026-09-01",
+      "derived_id": "a0894d5de87cd8cc",
+      "holds": null,
+      "href": "/query#frontier_lab_count",
+      "obs_ids": [
+       "53fbb4de1837be1c",
+       "f33a0b3190c622e4"
+      ],
+      "unit": "count",
+      "value": 2.0
+     },
+     "row": "pretraining",
+     "settles": "More than a handful of labs keeping pace with the best models.",
+     "sources": [
+      "https://www.youtube.com/watch?v=mBtmTmCC0ZM"
+     ],
+     "stage": null,
+     "state": "holding",
+     "test": {
+      "against": 5,
+      "fact": "frontier_lab_count",
+      "op": "lte"
+     },
+     "who": "Dan Sundheim",
      "word": "happening"
     },
     {
@@ -4039,45 +4127,45 @@
      "kind": "outlook",
      "line": "Open models carry most of the tokens routed to OpenRouter's busiest models.",
      "reading": {
-      "as_of": "2026-09-26",
-      "derived_id": "0f25e26bb23c6233",
+      "as_of": "2026-09-27",
+      "derived_id": "86b0914812fb29a4",
       "holds": null,
       "href": "/query#open_share_of_routed_tokens",
       "obs_ids": [
        "025baee5c67d8593",
-       "04e828c39457f7e1",
        "05ca16becd23d9eb",
-       "0b11d24e31a73a6b",
-       "0b7c7ec3a99b506d",
-       "15c109644039975a",
+       "08107b7979983537",
+       "09c617bbddca976b",
+       "0ede0f38259a20ba",
+       "115c9fe5d86e4849",
        "1b4377dc73c16fe5",
        "20c99a8c45b6e954",
        "260fda2e15e97284",
+       "27ceee6755d27093",
        "2bb5a68c3df3e356",
-       "2de082e29536812f",
        "2fa86ab54e9ecdee",
-       "2fb67eb5540c2804",
        "39b39ff738f8ab9c",
-       "41dd94710382abfc",
-       "41e1ac8c885cc807",
-       "49ca9fecb6a6dd83",
-       "4f1898524de298cb",
-       "72cedc02f44811b7",
+       "42990934ecf838c9",
+       "43e5c7e2bc9ebbc3",
+       "58b329722aea1bfb",
+       "7921131db8ee46e3",
        "81325042cbbd3243",
-       "88ac37933b414978",
-       "897a601cc5e5c32c",
+       "851e78a3cfac327b",
+       "89c765c054a44384",
        "92e5649c573304b8",
-       "9f94bb7954ce8db3",
-       "a01e5f91a44a8294",
-       "b5b33f3af40305c3",
-       "c1cd7751efc042b8",
-       "d21255339ef6b88c",
-       "dc028cd9575b782c",
-       "f83a28869a6b9c29",
+       "a3920e8e5545bf03",
+       "b459df5ceaaff8cd",
+       "b55875b536bf8f68",
+       "b9f309bf1eed6154",
+       "c986c09dcc97172b",
+       "d9a35d4b1e470786",
+       "e7e7b7a55793451d",
+       "eb5d315c9886d441",
+       "f056c984ba897403",
        "fd3b61b363d6e5e2"
       ],
       "unit": "share",
-      "value": 0.7123253069380512
+      "value": 0.6804542211468008
      },
      "row": null,
      "settles": "The closed models' share of those tokens climbing back as the gap to open models closes.",
@@ -4390,30 +4478,6 @@
     {
      "attribution": "author",
      "folio": "value",
-     "href": "/outlook#claim-compute_no_crash",
-     "id": "compute_no_crash",
-     "indicators": [],
-     "kind": "outlook",
-     "line": "The price of rented computing does not crash the way internet bandwidth did, because physical capacity cannot be multiplied overnight.",
-     "reading": null,
-     "row": null,
-     "settles": "A sudden glut sending the rent for AI chips down by most of its value within a year.",
-     "sources": [
-      "https://seanzcai.substack.com/p/new-age-commodities"
-     ],
-     "stage": null,
-     "state": "untestable",
-     "test": {
-      "against": -0.5,
-      "fact": "h100_rent_yoy",
-      "op": "gt"
-     },
-     "who": "Sean Cai",
-     "word": "too_early"
-    },
-    {
-     "attribution": "author",
-     "folio": "value",
      "href": "/outlook#claim-data_split",
      "id": "data_split",
      "indicators": [
@@ -4456,31 +4520,10 @@
     {
      "attribution": "author",
      "folio": "value",
-     "href": "/outlook#claim-few_labs",
-     "id": "few_labs",
-     "indicators": [
-      "frontier_capital_concentration"
-     ],
-     "kind": "outlook",
-     "line": "Only a handful of labs stay at the frontier, because it costs too much capital for more.",
-     "reading": null,
-     "row": "pretraining",
-     "settles": "More than a handful of labs keeping pace with the best models.",
-     "sources": [
-      "https://www.youtube.com/watch?v=mBtmTmCC0ZM"
-     ],
-     "stage": null,
-     "state": "untestable",
-     "test": null,
-     "who": "Dan Sundheim",
-     "word": "too_early"
-    },
-    {
-     "attribution": "author",
-     "folio": "value",
      "href": "/outlook#claim-lab_margins_below",
      "id": "lab_margins_below",
      "indicators": [
+      "lab_gross_margin",
       "lab_recoupment_ratio"
      ],
      "kind": "outlook",
@@ -4885,7 +4928,7 @@
      "word": "too_early"
     }
    ],
-   "too_early": 35
+   "too_early": 33
   }
  ],
  "mapping": [
@@ -5049,10 +5092,10 @@
  ],
  "tally": {
   "both": 11,
-  "happening": 26,
+  "happening": 29,
   "not_happening": 5,
   "slower": 11,
-  "too_early": 151
+  "too_early": 148
  },
  "words": [
   {

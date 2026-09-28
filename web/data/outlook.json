@@ -43,7 +43,7 @@
    "text": "People use AI well before firms reorganise around it."
   }
  ],
- "as_of": "2026-09-26",
+ "as_of": "2026-09-27",
  "claims": [
   {
    "attribution": "author",
@@ -774,8 +774,8 @@
   {
    "attribution": "author",
    "due": null,
-   "expected": null,
-   "fact": null,
+   "expected": "holding",
+   "fact": "frontier_lab_count",
    "falsifier": "More than a handful of labs keeping pace with the best models.",
    "folio": "value",
    "grace_days": null,
@@ -790,8 +790,11 @@
    "rival_until": null,
    "row": "pretraining",
    "stage": null,
-   "state": "untestable",
-   "test": null,
+   "state": "holding",
+   "test": {
+    "fact": "frontier_lab_count",
+    "lte": 5
+   },
    "text": "Only a handful of labs stay at the frontier, because it costs too much capital for more."
   },
   {
@@ -1398,8 +1401,8 @@
   {
    "attribution": "author",
    "due": null,
-   "expected": null,
-   "fact": null,
+   "expected": "holding",
+   "fact": "china_eci_gap",
    "falsifier": "A Chinese lab's model becoming the best at the frontier.",
    "folio": "capability",
    "grace_days": null,
@@ -1415,8 +1418,11 @@
    "rival_until": null,
    "row": null,
    "stage": null,
-   "state": "untestable",
-   "test": null,
+   "state": "holding",
+   "test": {
+    "fact": "china_eci_gap",
+    "lt": 0
+   },
    "text": "Chinese labs do not take the lead at the frontier while the best chips, the tests that matter and the paying customers stay American."
   },
   {
@@ -1486,7 +1492,7 @@
    "rival_until": null,
    "row": null,
    "stage": null,
-   "state": "untestable",
+   "state": "holding",
    "test": {
     "fact": "h100_rent_yoy",
     "gt": -0.5
@@ -2066,6 +2072,19 @@
    "unit": "ratio",
    "value": 5.122609938315153
   },
+  "china_eci_gap": {
+   "as_of": "2026-09-03",
+   "derived_id": "e80c7547d7d17875",
+   "holds": null,
+   "href": "/query#china_eci_gap",
+   "obs_ids": [
+    "1d7f927dc44aa946",
+    "4a5ecf6f5e9ad21f",
+    "9ddd14a3a471f87b"
+   ],
+   "unit": "index",
+   "value": -8.919999999999987
+  },
   "chips_gp_share": {
    "as_of": "2026-06-30",
    "holds": null,
@@ -2138,6 +2157,18 @@
    "unit": "share",
    "value": 0.23800000000000002
   },
+  "frontier_lab_count": {
+   "as_of": "2026-09-01",
+   "derived_id": "a0894d5de87cd8cc",
+   "holds": null,
+   "href": "/query#frontier_lab_count",
+   "obs_ids": [
+    "53fbb4de1837be1c",
+    "f33a0b3190c622e4"
+   ],
+   "unit": "count",
+   "value": 2.0
+  },
   "gdp_pc_over_peak": {
    "as_of": "2026-06-30",
    "derived_id": "0677e9207ab425d3",
@@ -2175,7 +2206,18 @@
    "unit": "share",
    "value": 0.01811672346115678
   },
-  "h100_rent_yoy": null,
+  "h100_rent_yoy": {
+   "as_of": "2026-09-21",
+   "derived_id": "40b90cfb2512c7cf",
+   "holds": null,
+   "href": "/query#gpu_rent_yoy",
+   "obs_ids": [
+    "19f553d19637cdec",
+    "471ecfd1d9421357"
+   ],
+   "unit": "share",
+   "value": 0.09199878102461656
+  },
   "hal_accuracy_trend": {
    "as_of": "2026-05-19",
    "derived_id": "43e5be75b962e542",
@@ -2548,45 +2590,45 @@
    "value": 0.45435779816513766
   },
   "open_share": {
-   "as_of": "2026-09-26",
-   "derived_id": "0f25e26bb23c6233",
+   "as_of": "2026-09-27",
+   "derived_id": "86b0914812fb29a4",
    "holds": null,
    "href": "/query#open_share_of_routed_tokens",
    "obs_ids": [
     "025baee5c67d8593",
-    "04e828c39457f7e1",
     "05ca16becd23d9eb",
-    "0b11d24e31a73a6b",
-    "0b7c7ec3a99b506d",
-    "15c109644039975a",
+    "08107b7979983537",
+    "09c617bbddca976b",
+    "0ede0f38259a20ba",
+    "115c9fe5d86e4849",
     "1b4377dc73c16fe5",
     "20c99a8c45b6e954",
     "260fda2e15e97284",
+    "27ceee6755d27093",
     "2bb5a68c3df3e356",
-    "2de082e29536812f",
     "2fa86ab54e9ecdee",
-    "2fb67eb5540c2804",
     "39b39ff738f8ab9c",
-    "41dd94710382abfc",
-    "41e1ac8c885cc807",
-    "49ca9fecb6a6dd83",
-    "4f1898524de298cb",
-    "72cedc02f44811b7",
+    "42990934ecf838c9",
+    "43e5c7e2bc9ebbc3",
+    "58b329722aea1bfb",
+    "7921131db8ee46e3",
     "81325042cbbd3243",
-    "88ac37933b414978",
-    "897a601cc5e5c32c",
+    "851e78a3cfac327b",
+    "89c765c054a44384",
     "92e5649c573304b8",
-    "9f94bb7954ce8db3",
-    "a01e5f91a44a8294",
-    "b5b33f3af40305c3",
-    "c1cd7751efc042b8",
-    "d21255339ef6b88c",
-    "dc028cd9575b782c",
-    "f83a28869a6b9c29",
+    "a3920e8e5545bf03",
+    "b459df5ceaaff8cd",
+    "b55875b536bf8f68",
+    "b9f309bf1eed6154",
+    "c986c09dcc97172b",
+    "d9a35d4b1e470786",
+    "e7e7b7a55793451d",
+    "eb5d315c9886d441",
+    "f056c984ba897403",
     "fd3b61b363d6e5e2"
    ],
    "unit": "share",
-   "value": 0.7123253069380512
+   "value": 0.6804542211468008
   },
   "openings_ledger": {
    "as_of": "2025-10-14",
@@ -5451,8 +5493,8 @@
  "tally": {
   "both": 11,
   "failing": 1,
-  "holding": 7,
-  "untestable": 62
+  "holding": 10,
+  "untestable": 59
  },
  "tests": {
   "bet_fast_side": {
@@ -5478,6 +5520,10 @@
   "data_next": {
    "line": 0,
    "unit": "share"
+  },
+  "few_labs": {
+   "line": 5,
+   "unit": "count"
   },
   "firms_normal": {
    "line": 0.35,
@@ -5506,6 +5552,10 @@
   "margins_below_software": {
    "line": 0.7,
    "unit": "share"
+  },
+  "no_chinese_lead": {
+   "line": 0,
+   "unit": "index"
   },
   "no_growth_jump": {
    "line": 0.15,

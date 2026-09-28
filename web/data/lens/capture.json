@@ -1,5 +1,5 @@
 {
- "as_of": "2026-09-27",
+ "as_of": "2026-09-28",
  "gross_profit_stack": {
   "axis": {
    "chars": 4,
@@ -1293,31 +1293,31 @@
      "grade": "B",
      "id": "gpu_rental_price_per_hour",
      "latest": {
-      "as_of": "2026-09-14",
+      "as_of": "2026-09-21",
       "disputed": false,
       "grade": "B",
       "high": null,
       "low": null,
       "obs_ids": [
-       "2f84ee2a1f33cc99"
+       "471ecfd1d9421357"
       ],
       "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
       "subject": "nvidia_h100",
       "unit": "USD",
-      "value": 3.15
+      "value": 3.225
      },
      "layer_id": "compute_physical",
      "leading_lagging": "leading",
-     "n_observations": 156,
+     "n_observations": 159,
      "name": "GPU rental price per hour",
      "pending": null,
      "published": true,
      "source_cluster": null,
      "spark": {
-      "d": "M1.0,26.0 L5.1,25.9 L9.2,23.0 L13.3,25.7 L17.3,23.0 L21.4,21.5 L25.5,15.0 L29.6,16.6 L33.7,12.6 L37.8,17.9 L41.9,16.6 L46.0,18.8 L50.0,14.5 L54.1,11.0 L58.2,14.0 L62.3,11.0 L66.4,7.4 L70.5,3.2 L74.6,2.0 L78.7,3.2 L82.7,4.7 L86.8,6.5 L90.9,4.7 L95.0,6.2",
+      "d": "M1.0,26.0 L5.1,23.1 L9.2,25.8 L13.3,23.1 L17.3,21.6 L21.4,15.0 L25.5,16.7 L29.6,12.6 L33.7,18.0 L37.8,16.7 L41.9,18.9 L46.0,14.6 L50.0,11.1 L54.1,14.1 L58.2,11.1 L62.3,7.4 L66.4,3.2 L70.5,2.0 L74.6,3.2 L78.7,4.7 L82.7,6.6 L86.8,4.7 L90.9,6.2 L95.0,4.0",
       "end": [
        95.0,
-       6.2
+       4.0
       ]
      },
      "stale_as_of": null,
@@ -1852,33 +1852,33 @@
      "grade": "B",
      "id": "lab_hhi",
      "latest": {
-      "as_of": "2026-09-26",
-      "derived_id": "353cf2768fd2ab9e",
+      "as_of": "2026-09-27",
+      "derived_id": "a4795a4d88f01885",
       "dims": {},
       "obs_ids": [
-       "04e828c39457f7e1",
-       "0b11d24e31a73a6b",
-       "0b7c7ec3a99b506d",
-       "15c109644039975a",
-       "2de082e29536812f",
-       "2fb67eb5540c2804",
-       "41dd94710382abfc",
-       "41e1ac8c885cc807",
-       "49ca9fecb6a6dd83",
-       "4f1898524de298cb",
-       "72cedc02f44811b7",
-       "88ac37933b414978",
-       "897a601cc5e5c32c",
-       "9f94bb7954ce8db3",
-       "a01e5f91a44a8294",
-       "b5b33f3af40305c3",
-       "c1cd7751efc042b8",
-       "d21255339ef6b88c",
-       "dc028cd9575b782c",
-       "f83a28869a6b9c29"
+       "08107b7979983537",
+       "09c617bbddca976b",
+       "0ede0f38259a20ba",
+       "115c9fe5d86e4849",
+       "27ceee6755d27093",
+       "42990934ecf838c9",
+       "43e5c7e2bc9ebbc3",
+       "58b329722aea1bfb",
+       "7921131db8ee46e3",
+       "851e78a3cfac327b",
+       "89c765c054a44384",
+       "a3920e8e5545bf03",
+       "b459df5ceaaff8cd",
+       "b55875b536bf8f68",
+       "b9f309bf1eed6154",
+       "c986c09dcc97172b",
+       "d9a35d4b1e470786",
+       "e7e7b7a55793451d",
+       "eb5d315c9886d441",
+       "f056c984ba897403"
       ],
       "unit": "index",
-      "value": 0.15814483182033853
+      "value": 0.15419727258184016
      },
      "layer_id": "model",
      "leading_lagging": "leading",
@@ -1888,7 +1888,7 @@
      "published": true,
      "source_cluster": null,
      "spark": {
-      "d": "M1.0,21.0 L48.0,2.0 L95.0,26.0",
+      "d": "M1.0,16.3 L48.0,2.0 L95.0,26.0",
       "end": [
        95.0,
        26.0
@@ -2271,37 +2271,80 @@
      ],
      "band_value": null,
      "bucket_id": null,
+     "confidence": 30,
+     "grade": "C",
+     "id": "lab_gross_margin",
+     "latest": {
+      "as_of": "2025-12-31",
+      "derived_id": "2039607e76c519b2",
+      "dims": {
+       "entity": "openai"
+      },
+      "obs_ids": [
+       "0b6d0c8c368c7937",
+       "1a2c7e77a3879f2b"
+      ],
+      "unit": "share",
+      "value": 0.38461538453846156
+     },
+     "layer_id": "model",
+     "leading_lagging": "leading",
+     "n_observations": 4,
+     "name": "Frontier lab gross margin (estimated)",
+     "pending": null,
+     "published": true,
+     "source_cluster": null,
+     "spark": {
+      "d": "M1.0,2.0 L95.0,26.0",
+      "end": [
+       95.0,
+       26.0
+      ]
+     },
+     "stale_as_of": null,
+     "stale_reason": null,
+     "status": "emerging",
+     "unit": "share",
+     "unpublished_reason": null,
+     "valve_measured": null
+    },
+    {
+     "answers": [
+      "Who keeps it: Model / Frontier labs"
+     ],
+     "band_value": null,
+     "bucket_id": null,
      "confidence": 40,
      "grade": "B",
      "id": "model_token_concentration",
      "latest": {
-      "as_of": "2026-09-26",
-      "derived_id": "7a356a5a0313f26d",
+      "as_of": "2026-09-27",
+      "derived_id": "045598937b8b1ed5",
       "dims": {},
       "obs_ids": [
-       "04e828c39457f7e1",
-       "0b11d24e31a73a6b",
-       "0b7c7ec3a99b506d",
-       "15c109644039975a",
-       "2de082e29536812f",
-       "2fb67eb5540c2804",
-       "41dd94710382abfc",
-       "41e1ac8c885cc807",
-       "49ca9fecb6a6dd83",
-       "4f1898524de298cb",
-       "72cedc02f44811b7",
-       "88ac37933b414978",
-       "897a601cc5e5c32c",
-       "9f94bb7954ce8db3",
-       "a01e5f91a44a8294",
-       "b5b33f3af40305c3",
-       "c1cd7751efc042b8",
-       "d21255339ef6b88c",
-       "dc028cd9575b782c",
-       "f83a28869a6b9c29"
+       "08107b7979983537",
+       "09c617bbddca976b",
+       "0ede0f38259a20ba",
+       "115c9fe5d86e4849",
+       "27ceee6755d27093",
+       "42990934ecf838c9",
+       "43e5c7e2bc9ebbc3",
+       "58b329722aea1bfb",
+       "7921131db8ee46e3",
+       "851e78a3cfac327b",
+       "89c765c054a44384",
+       "a3920e8e5545bf03",
+       "b459df5ceaaff8cd",
+       "b55875b536bf8f68",
+       "b9f309bf1eed6154",
+       "c986c09dcc97172b",
+       "d9a35d4b1e470786",
+       "e7e7b7a55793451d",
+       "eb5d315c9886d441",
+       "f056c984ba897403"
       ],
       "unit": "index",
-      "value": 0.09186737893017949
+      "value": 0.09213914707843061
      },
      "layer_id": "model",
      "leading_lagging": "coincident",
@@ -2311,10 +2354,10 @@
      "published": true,
      "source_cluster": null,
      "spark": {
-      "d": "M1.0,2.0 L48.0,26.0 L95.0,22.2",
+      "d": "M1.0,2.0 L48.0,26.0 L95.0,21.6",
       "end": [
        95.0,
-       22.2
+       21.6
       ]
      },
      "stale_as_of": null,
@@ -2385,7 +2428,7 @@
      },
      "layer_id": "model",
      "leading_lagging": "leading",
-     "n_observations": 42,
+     "n_observations": 43,
      "name": "METR 50% time horizon",
      "pending": null,
      "published": true,
@@ -2622,8 +2665,8 @@
      "grade": "D",
      "id": "safety_brake_events",
      "latest": {
-      "as_of": "2026-09-27",
-      "derived_id": "4daa952ee4fe04ff",
+      "as_of": "2026-09-28",
+      "derived_id": "e00b57275ff4f8c9",
       "dims": {},
       "obs_ids": [
        "2ab8fec44e7914a5",
@@ -3015,7 +3058,7 @@
      "valve_measured": "invention_to_product"
     }
    ],
-   "n_published": 24,
+   "n_published": 25,
    "name": "Model",
    "order": 2,
    "reading": "Toward concentration: Frontier-lab revenue run-rates.",
@@ -3023,7 +3066,7 @@
    "tally": {
     "margin": 0,
     "only": null,
-    "published": 11,
+    "published": 12,
     "scored": 2
    },
    "venture": {
@@ -3341,8 +3384,8 @@
      "grade": "D",
      "id": "cl_lab_release_claims",
      "latest": {
-      "as_of": "2026-09-27",
-      "derived_id": "861dbfb8c243a0c8",
+      "as_of": "2026-09-28",
+      "derived_id": "cd9c0c94c7ac98e3",
       "dims": {},
       "obs_ids": [
        "0bdf1920b1feb93e",
@@ -3955,7 +3998,7 @@
      "published": true,
      "source_cluster": null,
      "spark": null,
-     "stale_as_of": null,
+     "stale_as_of": "2026-03-27",
      "stale_reason": null,
      "status": "consistent_with_normal",
      "unit": "rides_per_week",
@@ -5916,6 +5959,23 @@
   },
   {
    "author": "claude",
+   "counterevidence_considered": "The estimate leaves out serving staff, data and hosting, so it overstates a true gross margin; a falling ratio can also mean a lab is pricing to win share while inference volumes grow, not that it is losing pricing power.",
+   "created_at": "2026-09-27T23:39:22.028284Z",
+   "evidence_ids": [
+    "0b6d0c8c368c7937",
+    "1a2c7e77a3879f2b"
+   ],
+   "id": "82770812307e4276",
+   "new_conf": 30,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "First scoring. OpenAI's revenue minus inference compute, over revenue, fell from 51% in 2024 to 38% in 2025 on Epoch's estimates, a move past the five-point dead band that would read dispersing; every input is one estimator's (Epoch, tier 5), so the single-source rule holds the status at emerging until a second, independent source for the same measure exists, not until more years accrue.",
+   "target_id": "lab_gross_margin",
+   "target_type": "indicator"
+  },
+  {
+   "author": "claude",
    "counterevidence_considered": "The index covers two filers only, so it says nothing about Broadcom, TSMC or the clouds' own chips; Epoch's shipment data shows designers other than NVIDIA gaining share over 2025, so this is concentration against AMD, not across all AI chips.",
    "created_at": "2026-09-27T22:36:40.836436Z",
    "evidence_ids": [
@@ -5930,26 +5990,9 @@
    "reason": "Re-read on quarters paired by their midpoint (formula v3), so NVIDIA's May-to-July quarter now sits with AMD's April-to-June one instead of the next quarter. The NVIDIA-vs-AMD data-centre revenue HHI rises from 0.843 (Q1 2025) to 0.870 (Q2 2026), a move of 0.027 against a 0.02 dead band; on the old pairing it was 0.019, just inside. Three of four steps rise; Q4 2025 is missing because AMD files no full-year segment figures.",
    "target_id": "semis_hhi",
    "target_type": "indicator"
-  },
-  {
-   "author": "claude",
-   "counterevidence_considered": "Run-rates are estimates annualised from one month; no serving firm publishes margins, so revenue growth says nothing yet about whether the layer keeps its rent.",
-   "created_at": "2026-09-27T06:29:39.567021Z",
-   "evidence_ids": [
-    "09f7a0828f93159f",
-    "87887dbf16ff47b3"
-   ],
-   "id": "9e7e778746b0fc37",
-   "new_conf": 35,
-   "new_status": "emerging",
-   "old_conf": null,
-   "old_status": null,
-   "reason": "First reading. Sacra estimates Fireworks, the largest serving firm the site tracks, at an annualised run-rate of $305M at the end of 2025 and $800M at the end of May 2026. Its direction rule compares three readings from the one estimator, so with two it reads emerging; the other firms (Together, Baseten, Modal, RunPod, OpenRouter) stay as evidence.",
-   "target_id": "inference_run_rates",
-   "target_type": "indicator"
   }
  ],
- "verdict": "As of 2026-09-27: compute & physical concentrating, model mixed, training input emerging, serving & orchestration emerging, deployment & application dispersing (one reading), adopters (no capture rule yet), labour & consumers dispersing (one reading).",
+ "verdict": "As of 2026-09-28: compute & physical concentrating, model mixed, training input emerging, serving & orchestration emerging, deployment & application dispersing (one reading), adopters (no capture rule yet), labour & consumers dispersing (one reading).",
  "what_would_change": [
   "Rent concentration in semiconductors: Four fiscal quarters; a move under one point of margin is noise. Rising margin = rent concentrating at the chip layer.",
   "Cloud backlog (remaining performance obligations): Four quarters; moves under $10B are noise at this scale. Growing backlog concentrates future cloud revenue in a few contracts.",
@@ -5977,6 +6020,7 @@
   "Neocloud borrowing cost (CoreWeave facility rates): Three quarter-ends; moves under a percentage point are facility mix. Rising rates concentrate the compute layer's returns with its lenders.",
   "Enterprise multi-model usage share (Menlo): Annual waves; a move under five points is survey noise. More multi-homing disperses the model layer's pricing power.",
   "Startups' share of enterprise AI application revenue: Two annual waves, so the trend is one step; under five points is survey error. Rising startup share = value dispersing away from incumbents.",
+  "Frontier lab gross margin (estimated): Year on year; a move under five points is noise. A rising margin means the lab layer keeps more of what it sells.",
   "GPU rental price per hour: Eight weekly readings, about two months. A move of a quarter an hour or less is noise in a median across some forty providers whose panel changes week to week (a third of four-week moves in the first year exceeded fifteen cents); rising rents mean the owners of GPUs keep more of the value.",
   "Model-layer token concentration on OpenRouter (HHI, top table): Weekly readings; moves under 0.02 in the index are table churn. A rising index means routed tokens concentrating on fewer models.",
   "Labs buying from the training-input layer (enter bell): Four quarters; a one-point move is one vendor's single disclosure. Rising = the labs buying more from the training-input layer.",

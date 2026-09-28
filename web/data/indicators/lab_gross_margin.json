@@ -2,60 +2,255 @@
  "answers": [
   "Who keeps it: Model / Frontier labs"
  ],
- "band_input": null,
+ "band_input": "metric:lab_gross_margin_estimate",
  "band_rationale": null,
- "band_value": null,
- "bucket_id": null,
- "cadence_expected": "quarterly",
- "chart": null,
- "chart_sources": {
-  "metric": null,
-  "sources": []
+ "band_value": {
+  "as_of": "2025-12-31",
+  "high": null,
+  "low": null,
+  "obs_ids": [
+   "0b6d0c8c368c7937",
+   "1a2c7e77a3879f2b"
+  ],
+  "unit": "share",
+  "value": 0.38461538453846156
  },
- "confidence": null,
+ "bucket_id": null,
+ "cadence_expected": "annual",
+ "chart": {
+  "bands": [],
+  "change": {
+   "dead_band": "\u00b15.0 pts",
+   "label": "\u221212.9 pts",
+   "steps": "1 of 1 steps fell"
+  },
+  "dead": {
+   "height": 40.0,
+   "width": 94.32,
+   "x": 2.84,
+   "y": 14.59
+  },
+  "drawn": {
+   "metric": "lab_gross_margin_estimate",
+   "others": 0,
+   "series": null,
+   "total": 0
+  },
+  "line": true,
+  "n_drawn": 2,
+  "needs": 2,
+  "partial": false,
+  "stamps": [
+   "estimate"
+  ],
+  "x": {
+   "ticks": [
+    {
+     "label": "2025",
+     "minor": false,
+     "x": 3.1
+    },
+    {
+     "label": "Apr",
+     "minor": false,
+     "x": 26.36
+    },
+    {
+     "label": "Jul",
+     "minor": false,
+     "x": 49.87
+    },
+    {
+     "label": "Oct",
+     "minor": false,
+     "x": 73.64
+    }
+   ]
+  },
+  "y": {
+   "chars": 3,
+   "log": false,
+   "ticks": [
+    {
+     "label": "35%",
+     "y": 100.0
+    },
+    {
+     "label": "40%",
+     "y": 80.0
+    },
+    {
+     "label": "45%",
+     "y": 60.0
+    },
+    {
+     "label": "50%",
+     "y": 40.0
+    },
+    {
+     "label": "55%",
+     "y": 20.0
+    },
+    {
+     "label": "60%",
+     "y": 0.0
+    }
+   ],
+   "unit": null
+  }
+ },
+ "chart_sources": {
+  "metric": "lab_gross_margin_estimate",
+  "sources": [
+   {
+    "attribution": "Epoch AI, 'Data on AI Companies' (CC BY 4.0), epoch.ai/data",
+    "id": "epoch",
+    "license": "CC BY 4.0",
+    "name": "Epoch AI data hub \u2014 AI companies",
+    "org": "Epoch AI"
+   }
+  ]
+ },
+ "confidence": 30,
  "confidence_basis": {
-  "best_tier": null,
-  "grade": null,
-  "n_observations": 0,
-  "sources": [],
+  "best_tier": 5,
+  "grade": "C",
+  "n_observations": 4,
+  "sources": [
+   "Epoch AI data hub \u2014 AI companies"
+  ],
   "stale_as_of": null
  },
- "counterevidence": "Reported by journalists, not auditors; inference cost accounting differs by lab.",
+ "counterevidence": "Every input is one estimator's (Epoch, tier 5), so the status cannot rise above emerging; revenue minus inference compute leaves out serving staff, data and hosting; reported margins from journalists differ and sit behind paywalls.",
  "crosswalk": [],
- "definition": "Reported gross margins of the frontier labs (the brief cites 40-60%).",
- "derived": [],
+ "definition": "OpenAI's full-year revenue minus its inference compute spend, over revenue, from Epoch's estimates (derived metric lab_gross_margin_estimate, grade C). Anthropic's figure is on the metric's saved analysis; OpenAI is the headline because it has more than one year.",
+ "derived": [
+  {
+   "as_of_date": "2024-12-31",
+   "computed_at": "2026-09-28T03:14:20.616544Z",
+   "dims": {
+    "entity": "openai"
+   },
+   "formula_version": "1",
+   "id": "08b5fe0698c8b7f4",
+   "input_observation_ids": [
+    "58ec42defb86acd2",
+    "9897c45693cd3bc9"
+   ],
+   "metric": "lab_gross_margin_estimate",
+   "obs_ids": [
+    "58ec42defb86acd2",
+    "9897c45693cd3bc9"
+   ],
+   "value": 0.5135135135135135,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2025-12-31",
+   "computed_at": "2026-09-28T03:14:20.616544Z",
+   "dims": {
+    "entity": "openai"
+   },
+   "formula_version": "1",
+   "id": "2039607e76c519b2",
+   "input_observation_ids": [
+    "0b6d0c8c368c7937",
+    "1a2c7e77a3879f2b"
+   ],
+   "metric": "lab_gross_margin_estimate",
+   "obs_ids": [
+    "0b6d0c8c368c7937",
+    "1a2c7e77a3879f2b"
+   ],
+   "value": 0.38461538453846156,
+   "value_high": null,
+   "value_low": null
+  }
+ ],
  "direction": null,
- "direction_readings": 5,
+ "direction_readings": 2,
  "direction_rule": {
   "dead_band": 0.05,
   "higher_is": "concentrating",
-  "periods": 4,
-  "rationale": "Placeholder until the series exists; bands are set with the first observation."
+  "periods": 1,
+  "rationale": "Year on year; a move under five points is noise. A rising margin means the lab layer keeps more of what it sells."
  },
  "evidence": [],
  "falsifying_band": null,
  "fast_band": null,
  "fits": [],
  "flow_status": null,
- "grade": null,
+ "grade": "C",
  "id": "lab_gross_margin",
- "latest": null,
+ "latest": {
+  "as_of": "2025-12-31",
+  "derived_id": "2039607e76c519b2",
+  "dims": {
+   "entity": "openai"
+  },
+  "obs_ids": [
+   "0b6d0c8c368c7937",
+   "1a2c7e77a3879f2b"
+  ],
+  "unit": "share",
+  "value": 0.38461538453846156
+ },
  "layer_id": "model",
  "leading_lagging": "leading",
- "metric": null,
- "metric_dims": {},
- "n_observations": 0,
- "name": "Frontier lab gross margin",
+ "metric": "lab_gross_margin_estimate",
+ "metric_dims": {
+  "entity": "openai"
+ },
+ "n_observations": 4,
+ "name": "Frontier lab gross margin (estimated)",
  "normal_band": null,
  "override_note": null,
  "pending": null,
- "points": [],
+ "points": [
+  {
+   "as_of": "2024-12-31",
+   "derived_id": "08b5fe0698c8b7f4",
+   "dims": {
+    "entity": "openai"
+   },
+   "faint": false,
+   "href": "#d-08b5fe0698c8b7f4",
+   "obs_ids": [
+    "58ec42defb86acd2",
+    "9897c45693cd3bc9"
+   ],
+   "stamp": "estimate",
+   "unit": "share",
+   "value": 0.5135135135135135,
+   "x": 2.84,
+   "y": 34.59
+  },
+  {
+   "as_of": "2025-12-31",
+   "derived_id": "2039607e76c519b2",
+   "dims": {
+    "entity": "openai"
+   },
+   "faint": false,
+   "href": "#d-2039607e76c519b2",
+   "obs_ids": [
+    "0b6d0c8c368c7937",
+    "1a2c7e77a3879f2b"
+   ],
+   "stamp": "estimate",
+   "unit": "share",
+   "value": 0.38461538453846156,
+   "x": 97.16,
+   "y": 86.15
+  }
+ ],
  "prediction_rows": [],
- "proposed_status": "not_yet_measurable",
+ "proposed_status": null,
  "proxy_types": [
   "price"
  ],
- "published": false,
+ "published": true,
  "related_bottlenecks": [],
  "related_indicators": [],
  "related_metrics": [],
@@ -63,19 +258,45 @@
  "series": [],
  "series_keys": [],
  "source_cluster": null,
- "source_ids": [],
- "spark": null,
+ "source_ids": [
+  "epoch"
+ ],
+ "spark": {
+  "d": "M1.0,2.0 L95.0,26.0",
+  "end": [
+   95.0,
+   26.0
+  ]
+ },
  "stale_as_of": null,
  "stale_ok": false,
  "stale_reason": null,
- "status": null,
- "status_events": [],
+ "status": "emerging",
+ "status_events": [
+  {
+   "author": "claude",
+   "counterevidence_considered": "The estimate leaves out serving staff, data and hosting, so it overstates a true gross margin; a falling ratio can also mean a lab is pricing to win share while inference volumes grow, not that it is losing pricing power.",
+   "created_at": "2026-09-27T23:39:22.028284Z",
+   "evidence_ids": [
+    "0b6d0c8c368c7937",
+    "1a2c7e77a3879f2b"
+   ],
+   "id": "82770812307e4276",
+   "new_conf": 30,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "First scoring. OpenAI's revenue minus inference compute, over revenue, fell from 51% in 2024 to 38% in 2025 on Epoch's estimates, a move past the five-point dead band that would read dispersing; every input is one estimator's (Epoch, tier 5), so the single-source rule holds the status at emerging until a second, independent source for the same measure exists, not until more years accrue.",
+   "target_id": "lab_gross_margin",
+   "target_type": "indicator"
+  }
+ ],
  "sublayer_id": "frontier_labs",
  "timing_rationale": "Leading: a lab's margin moves before its share of stack profit shows up in anyone's filings.",
- "tracker_interpretation": "Unpublished; see the reason.",
- "unit": "ratio",
- "unpublished_reason": "Not measurable from free sources: lab gross margins are reported only by The Information and Sacra behind paywalls; the paid stubs exist and are off.",
- "updated_at": "2026-09-11",
+ "tracker_interpretation": "An estimate, not a filed margin: revenue minus inference compute only, so it overstates a true gross margin. Read the direction, not the level.",
+ "unit": "share",
+ "unpublished_reason": null,
+ "updated_at": "2026-09-28",
  "valve_measured": null,
  "why_it_matters": "Whether the model layer keeps a software margin or a cloud margin decides whether it is a chokepoint or a commodity."
 }
