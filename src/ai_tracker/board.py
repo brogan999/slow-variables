@@ -165,7 +165,7 @@ def rows(
                 "reading": None,
                 "sources": [],
                 "indicators": list(x.get("indicators") or []),
-                "href": "/#exits",
+                "href": "/argument#exits",
             }
         )
     for r in out:
@@ -190,6 +190,7 @@ def build(
         "mapping": [
             {"kind": k, "state": s or "none", "word": w} for k, m in WORDS.items() for s, w in m.items()
         ],
+        "n": len(rs),
         "tally": {w: sum(1 for r in rs if r["word"] == w) for w in ORDER},
         "folios": [
             {
