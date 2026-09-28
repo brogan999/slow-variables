@@ -2466,34 +2466,44 @@ shifts:
       scarce: Only a handful of labs can build the best models, and buyers pay for the gap to the next best.
       squeezed_by: Open models closing the gap, and cheaper models good enough for most work.
       sublayers: [frontier_labs, neolabs, open_weight_labs]
-      readings: [labs_gp_share, open_lag, open_premium, open_share]
-      arriving: {fact: labs_gp_share, gt: labs_gp_share_year_ago}
-      leaving: {fact: open_lag, lt: 3}
+      readings:
+        - {fact: labs_gp_share, label: "the labs' share of the stack's gross profit, estimated"}
+        - {fact: open_lag, label: how far open models trail the best closed one}
+        - {fact: open_premium, label: what closed models charge over open ones at the same skill}
+        - {fact: open_share, label: open models' share of routed tokens}
+      arriving: {fact: labs_gp_share, gt: labs_gp_share_year_ago, says: the labs' share of gross profit is above a year before}
+      leaving: {fact: open_lag, lt: 3, says: open models trail the best closed one by under three months}
       claims: [gap_stays_short]
     - id: running
       name: Running it
       scarce: Serving models quickly, cheaply and reliably, at the scale buyers need.
       squeezed_by: Routers and open serving software that make one provider as good as another.
       sublayers: [inference_serving, routing_gateways, agent_infra]
-      readings: [inference_rr_growth, h100_rent_yoy]
-      arriving: {fact: inference_rr_growth, gt: lab_rr_growth}
+      readings:
+        - {fact: inference_rr_growth, label: "inference firms' run-rate growth, median"}
+        - {fact: lab_rr_growth, label: "the labs' run-rate growth, median"}
+        - {fact: h100_rent_yoy, label: "rent for NVIDIA's most-rented AI chip, against a year before"}
+      arriving: {fact: inference_rr_growth, gt: lab_rr_growth, says: inference firms' run-rates grow faster than the labs'}
       claims: [compute_no_crash]
     - id: knowledge
       name: The firm's own knowledge
       scarce: A firm's own records, permissions and ways of working, which no model can learn from the public web.
       squeezed_by: Labs buying or copying the firms that hold it, and general assistants that pick up a workflow from a few connectors.
       sublayers: [vertical_ai, coding_agents, deployment_services, evals]
-      readings: [app_rr_growth, lab_deals_now]
-      arriving: {fact: app_rr_growth, gt: lab_rr_growth}
-      leaving: {fact: lab_deals_now, gt: lab_deals_year_ago}
+      readings:
+        - {fact: app_rr_growth, label: "application firms' run-rate growth, median"}
+        - {fact: lab_deals_now, label: companies above the model layer bought by labs and compute firms in a year}
+      arriving: {fact: app_rr_growth, gt: lab_rr_growth, says: application firms' run-rates grow faster than the labs'}
+      leaving: {fact: lab_deals_now, gt: lab_deals_year_ago, says: labs and compute firms buy more of the layers above them than a year before}
     - id: front_door
       name: The front door
       scarce: The assistant a customer opens first, which chooses the suppliers behind it.
       squeezed_by: Customers switching assistants easily, and operating systems or browsers that open first.
       sublayers: [consumer_ai]
-      readings: [front_door_hhi]
-      arriving: {fact: front_door_hhi, gte: 0.25}
-      leaving: {fact: front_door_hhi, lt: front_door_hhi_year_ago}
+      readings:
+        - {fact: front_door_hhi, label: "concentration of the visits chatbots send to websites (StatCounter, CC BY-SA)"}
+      arriving: {fact: front_door_hhi, gte: 0.25, says: one or two assistants send most of the visits}
+      leaving: {fact: front_door_hhi, lt: front_door_hhi_year_ago, says: that concentration is below a year before}
   foot_claims: [chips_collect]
 
 scenarios:

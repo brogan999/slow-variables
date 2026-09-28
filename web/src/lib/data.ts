@@ -244,7 +244,16 @@ export type OutlookDoc = {
   folios: { id: string; kicker: string }[];
   scenarios: { progress: { id: string; label: string }[]; rules: { id: string; label: string }[]; cells: OutlookCell[]; anchors: { source: string; date: string; text: string }[] };
   agree: { id: string; text: string; holders: string[]; dissent: string[]; dissent_text?: string }[];
+  shifts?: Shifts;
 };
+export type PlaceState = "arriving" | "loosening" | "moving_on" | "not_yet" | "untestable" | "not_measured";
+export type PlaceTest = { says: string; holds: boolean | null } | null;
+export type Place = {
+  id: string; name: string; scarce: string; squeezed_by: string; state: PlaceState; word: string;
+  sublayers: { id: string; name: string; href: string }[]; readings: (Fact & { id: string; label: string })[];
+  arriving: PlaceTest; leaving: PlaceTest; claims: { id: string; state: OutlookState | null }[];
+};
+export type Shifts = { grounded_in: string[]; places: Place[]; foot_claims: { id: string; state: OutlookState | null }[] };
 export const outlook = () => read<OutlookDoc>("outlook.json");
 export type Word = "happening" | "not_happening" | "slower" | "both" | "too_early";
 export type BoardRow = {

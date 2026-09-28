@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { StackPlate } from "@/components/ArgumentParts";
+import { FourPlaces } from "@/components/FourPlaces";
 import { ChangelogList } from "@/components/Changelog";
 import { IndicatorCard } from "@/components/IndicatorCard";
 import { StackChart } from "@/components/StackChart";
 import { PageHeader } from "@/components/PageHeader";
 import { StatusChip } from "@/components/StatusChip";
-import { argument, capture, obsIndex } from "@/lib/data";
+import { argument, capture, obsIndex, outlook } from "@/lib/data";
 
 export const metadata = { title: "Who profits from AI" };
 
@@ -18,6 +19,7 @@ export default function CaptureLens() {
       <PageHeader eyebrow="Who profits · the capture lens" title={argument().headlines.capture.claim}
         lede="The AI industry is a stack of layers, from chips and data centres at the bottom to the apps people use at the top. This page follows where the profit settles, layer by layer. Gross profit is what is left of revenue after paying to deliver the product; where a layer publishes none, it is left out rather than guessed." />
 
+      <FourPlaces shifts={outlook().shifts} />
       <StackPlate />
 
       {c.layers.map((l) => {
