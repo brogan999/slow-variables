@@ -85,10 +85,15 @@ SPEC = {"phase": {"capex": "c", "financing": "f", "rule": "r"}}
 
 
 def test_phase_rule_table_and_the_two_quarter_rule():
-    assert ar._raw_phase(1.2, 5, None) == "installation"
+    assert ar._raw_phase(1.2, 5, None) == "installation"  # no searched year-ago reading: only the half is known
+    assert ar._raw_phase(1.2, 5, 1) == "frenzy"
+    assert ar._raw_phase(1.2, 5, 9) == "irruption"
+    assert ar._raw_phase(1.2, 5, 9, after_frenzy=True) == "turning_point"  # a cooling frenzy never steps back
     assert ar._raw_phase(0.4, 3, 5) == "deployment"
+    assert ar._raw_phase(0.4, 0, 0) == "deployment"  # no deals in either year still reads deployment
     assert ar._raw_phase(0.4, 3, None) == "turning_point"  # no year-ago reading: deployment cannot be shown
     assert ar._raw_phase(0.8, 5, 1) == "turning_point"
+    assert ar._raw_phase(2, None, 1) == "untestable"
     q = ["2025-03-31", "2025-06-30", "2025-09-30", "2025-12-31", "2026-03-31"]
     fin = [(d, 10.0) for d in q] + [
         ("2024-12-31", 10.0),
@@ -98,10 +103,16 @@ def test_phase_rule_table_and_the_two_quarter_rule():
     ]
     one_off = ar.phase(_fake(list(zip(q, [2, 2, 0.8, 2, 2])), fin), SPEC)
     assert [h["state"] for h in one_off["history"]] == [
-        "installation"
+        "irruption"
     ] * 5  # a single odd quarter changes nothing
     held = ar.phase(_fake(list(zip(q, [2, 2, 0.8, 0.8, 0.8])), fin), SPEC)
-    assert [h["state"] for h in held["history"]][-3:] == ["installation", "turning_point", "turning_point"]
+    assert [h["state"] for h in held["history"]][-3:] == ["irruption", "turning_point", "turning_point"]
+    assert held["half"] == "turning_point"
+    growing = [(d, 50.0) for d in q] + [(d, 10.0) for d in ("2024-12-31", "2024-09-30", "2024-06-30", "2024-03-31")]
+    frenzy = ar.phase(_fake(list(zip(q, [2] * 5)), growing), SPEC)
+    assert frenzy["state"] == "frenzy" and frenzy["half"] == "installation"
+    unsearched = ar.phase(_fake(list(zip(q, [2] * 5)), growing), {"phase": {**SPEC["phase"], "financing_searched_from": "2024-03-01"}})
+    assert [h["raw"] for h in unsearched["history"]] == ["installation"] * 4 + ["irruption"]  # year-ago counts once searched
     assert ar.phase(_fake([], fin), SPEC)["state"] == "untestable"
 
 

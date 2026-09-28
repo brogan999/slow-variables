@@ -171,7 +171,7 @@ export type ArgumentDoc = {
   facts: Record<string, Fact | null>;
   slow_variables: { id: string; label: string; sentence: string }[];
   clocks: { start: string; drawn: ClockSeries[]; listed: string[]; holds: boolean | null; chart: { x: { ticks: Tick[] }; y: Axis } | null; chart_sources: ChartSourcesT };
-  phase: { state: "installation" | "turning_point" | "deployment" | "untestable"; rule: string; as_of: string | null; history: { as_of: string; raw: string; state: string }[]; chart_sources: ChartSourcesT };
+  phase: { state: "irruption" | "frenzy" | "installation" | "turning_point" | "synergy" | "maturity" | "deployment" | "untestable"; half?: string; rule: string; as_of: string | null; history: { as_of: string; raw: string; state: string }[]; chart_sources: ChartSourcesT };
   exits: { monitor: string; label: string; text: string; state: string | null }[];
   headlines: Record<"diffusion" | "capture", { monitor: string; state: string; claim: string }>;
   sources: { who: string; work: string; where: string; url: string }[];

@@ -95,3 +95,48 @@ questions:
     informational: true
     question: "In insurance agencies and brokerages (industry 524200), which roles have the most payroll that passes the census's hand-over screen with all three scorers agreeing?"
     expect: {tool: sql, cites: ["census:*"], mentions: ["pass"]}
+  - id: g22
+    lens: capture
+    informational: true
+    question: "Where is value in the stack now?"
+    expect: {metrics: [gross_profit_share_by_layer]}
+  - id: g23
+    lens: capture
+    informational: true
+    question: "Where will value be in the future?"
+    expect: {tool: claims, cites: ["pos:*"]}
+  - id: g24
+    lens: capture
+    informational: true
+    question: "What are the biggest bottlenecks in this entire loop at the moment?"
+    expect: {tool: bottlenecks, cites: ["derived:*"]}
+  - id: g25
+    lens: capture
+    informational: true
+    question: "What will be commoditised in the future?"
+    expect: {cites: ["pos:commodity", "ind:open_weights_lag_months"]}
+  - id: g26
+    lens: capture
+    informational: true
+    question: "What would have to be true for a company to be worth $1 trillion in 2035?"
+    expect: {tool: entity, metrics: [multiple_to_1t]}
+  - id: g27
+    lens: capture
+    informational: true
+    question: "What does theory suggest will happen next?"
+    expect: {cites: ["note:*", "pos:*"]}
+  - id: g28
+    lens: capture
+    informational: true
+    question: "What creates durable competitive advantage in an AI company?"
+    expect: {tool: bottlenecks, cites: ["note:*"]}
+  - id: g29
+    lens: capture
+    informational: true
+    question: "What should a company own, and what should it buy from the market?"
+    expect: {cites: ["note:*"]}
+  - id: g30
+    lens: capture
+    informational: true
+    question: "What will the most important companies and organizations look like in 2035?"
+    expect: {tool: futures, cites: ["fut:*"]}
