@@ -2137,6 +2137,16 @@ class Store:
     def _ledger(self) -> list[dict[str, Any]]:
         """The circular / vendor-financing ledger: every `circular.*` and `markets.*` observation with parties and instrument."""
         names = {n.lower(): e for e in self.seed.entities for n in (e.id, e.name, *e.aliases)}
+        names |= {k.replace(" ", "_"): e for k, e in list(names.items())}
+
+        def split(slug: str) -> list[str]:
+            """Party slugs are joined by underscores and may contain them (core_scientific): take the longest known."""
+            toks, out, i = slug.split("_"), [], 0
+            while i < len(toks):
+                j = next((j for j in range(len(toks), i, -1) if "_".join(toks[i:j]) in names), i + 1)
+                out.append("_".join(toks[i:j]))
+                i = j
+            return out
 
         def party(
             slug: str,
@@ -2155,7 +2165,7 @@ class Store:
         rows = []
         for o in self.observations("circular.*", "markets.*"):
             parts = o["series_key"].split(".")
-            parties = parts[1].split("_") if parts[0] == "circular" else [parts[1]]
+            parties = split(parts[1]) if parts[0] == "circular" else [parts[1]]
             instrument = parts[2].rsplit("_", 1)[0] if parts[0] == "circular" else parts[2]
             rows.append(
                 {
