@@ -15,23 +15,23 @@ export function JourneyRail() {
   const stop = STOPS[here];
   return (
     <nav aria-label="The reading path" className="mb-8 md:mb-10 border-b border-grid pb-4">
-      <div className="md:hidden flex flex-col gap-2">
+      <div className="xl:hidden flex flex-col gap-2">
         <span className="eyebrow">Stop {stop.n} · Act {stop.act} · {stop.name}</span>
         <div className="flex gap-1" aria-hidden>
           {STOPS.map((s, i) => <span key={s.n} className={`h-1 flex-1 rounded-full ${i <= here ? "bg-ink" : "bg-grid"}`} />)}
         </div>
       </div>
-      <ol className="hidden md:flex gap-x-8 text-sm">
+      <ol className="hidden xl:flex gap-x-6 text-sm">
         {ACTS.map((a) => (
           <li key={a.act} className="flex flex-col gap-2">
             <span className="eyebrow">Act {a.act} · {a.title}</span>
-            <ol className="flex gap-x-4">
+            <ol className="flex gap-x-3">
               {a.stops.map((s) => {
                 const i = STOPS.findIndex((x) => x.n === s.n);
                 const state = i < here ? "done" : i === here ? "here" : "ahead";
                 return (
                   <li key={s.n}>
-                    <Link href={s.href} aria-current={state === "here" ? "step" : undefined} className="group inline-flex items-center gap-1.5">
+                    <Link href={s.href} aria-current={state === "here" ? "step" : undefined} className="group inline-flex items-center gap-1.5 whitespace-nowrap">
                       <span className={`num inline-flex h-6 min-w-6 items-center justify-center rounded-full border px-1 text-[11px] ${state === "ahead" ? "border-axis bg-surface text-muted" : "border-ink bg-ink text-background"}`}>{state === "done" ? "✓" : s.n}</span>
                       <span className={`${state === "here" ? "font-semibold text-ink" : "text-ink-2 group-hover:text-ink"}`}>{s.name}</span>
                     </Link>

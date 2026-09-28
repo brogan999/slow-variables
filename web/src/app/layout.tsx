@@ -44,7 +44,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="main" className="mx-auto w-full max-w-[82rem] px-4 md:px-8 py-8 md:py-12 flex-1"><JourneyRail />{children}<NextStop /></main>
         <footer className="border-t border-grid mt-16">
           <div className="mx-auto max-w-[82rem] px-4 md:px-8 py-10 flex flex-col gap-6 text-sm">
-            <nav aria-label="The reading path" className="flex flex-wrap gap-x-8 gap-y-2 text-ink-2">
+            <nav aria-label="All stops" className="flex flex-wrap gap-x-8 gap-y-2 text-ink-2">
               {ACTS.map((a) => (
                 <span key={a.act} className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                   <span className="eyebrow">Act {a.act} · {a.title}</span>

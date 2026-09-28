@@ -254,7 +254,7 @@ export type BoardRow = {
 };
 export type BoardDoc = {
   as_of: string; words: { id: Word; label: string; meaning: string }[]; mapping: { kind: string; state: string; word: Word }[];
-  tally: Record<Word, number>; folios: { id: string; label: string; question: string; rows: BoardRow[]; too_early: number }[];
+  n?: number; tally: Record<Word, number>; folios: { id: string; label: string; question: string; rows: BoardRow[]; too_early: number }[];
   questions: { question: string; indicator: string | null; note?: string; status: string | null; href: string | null }[];
 };
 export const board = () => read<BoardDoc>("board.json");
