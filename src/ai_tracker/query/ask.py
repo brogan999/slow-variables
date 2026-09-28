@@ -12,12 +12,12 @@ import difflib
 import hashlib
 import json
 import logging
-import time
 import math
 import os
 import re
 import tempfile
 import threading
+import time
 from collections import Counter
 from datetime import date, datetime, timezone
 from fnmatch import fnmatch
@@ -427,7 +427,7 @@ class Tools:
                 for f in sorted(Path(d).glob("*.md")) if Path(d).is_dir() else []:
                     paras = re.split(r"\n\s*\n", f.read_text(errors="ignore"))
                     title = next((p.lstrip("# ").strip() for p in paras if p.startswith("# ")), f.stem)
-                    for n, para in enumerate(paras):
+                    for para in paras:
                         text, _flagged = scrub(re.sub(r"\s+", " ", TOKEN.sub("(a figure on the page)", para)).strip())
                         if len(text) >= 40 and not text.startswith("#"):
                             # the id follows the text, so a logged citation never points at a paragraph that changed
