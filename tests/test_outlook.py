@@ -273,3 +273,24 @@ def test_every_fact_a_claim_reads_links_to_a_record():
     analyses = {a["metric"] for a in yaml.safe_load(open("seed/analyses.yaml"))["analyses"]}
     missing = sorted({f["metric"] for f in ol.load()["facts"].values() if "metric" in f} - analyses)
     assert missing == [], missing  # a metric fact links to /query#<metric>, which only an analyses row puts there
+
+
+def test_a_place_reads_its_word_from_its_two_tests():
+    from ai_tracker.outlook import place_state, shifts
+
+    assert place_state(True, None, True) == "arriving"
+    assert place_state(True, True, True) == "loosening"
+    assert place_state(False, True, True) == "moving_on"
+    assert place_state(False, False, True) == "not_yet"
+    assert place_state(None, None, True) == "untestable"
+    assert place_state(True, None, False) == "not_measured"
+    spec = {"shifts": {"places": [{"id": "front_door", "name": "The front door", "scarce": "s", "squeezed_by": "q",
+                                   "sublayers": ["consumer_ai"], "readings": ["hhi"],
+                                   "arriving": {"fact": "hhi", "gte": 0.25}, "leaving": {"fact": "hhi", "lt": "hhi_ago"}}],
+                       "foot_claims": ["c1"]}}
+    f = {"hhi": {"value": 0.61, "as_of": "2026-08-31"}, "hhi_ago": {"value": 0.72, "as_of": "2025-08-31"}}
+    out = shifts(spec, f, [{"id": "c1", "state": "holding"}], {"consumer_ai": "Consumer AI"})
+    (p,) = out["places"]
+    assert (p["state"], p["word"]) == ("loosening", "Paid here, loosening")
+    assert p["sublayers"] == [{"id": "consumer_ai", "name": "Consumer AI", "href": "/stack/consumer_ai"}]
+    assert out["foot_claims"] == [{"id": "c1", "state": "holding"}]

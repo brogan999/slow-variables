@@ -142,6 +142,7 @@ def strings(spec: dict[str, Any]) -> list[str]:
     out += [c[k] for c in sc.get("cells") or [] for k in ("says", "paid") if c.get(k)]
     out += [a[k] for a in sc.get("anchors") or [] for k in ("text",) if a.get(k)]
     out += [a[k] for a in spec.get("agree") or [] for k in ("text", "dissent_text") if a.get(k)]
+    out += [p[k] for p in (spec.get("shifts") or {}).get("places") or [] for k in ("name", "scarce", "squeezed_by") if p.get(k)]
     return out
 
 
@@ -196,6 +197,56 @@ def _thresholds(
     return out
 
 
+PLACE_WORDS = {
+    "arriving": "Money arriving",
+    "loosening": "Paid here, loosening",
+    "moving_on": "Moving on",
+    "not_yet": "Not yet",
+    "untestable": "Can't be tested yet",
+    "not_measured": "Not measured",
+}
+
+
+def place_state(arriving: bool | None, leaving: bool | None, measured: bool) -> str:
+    """One place's word tonight, from its two tests: is money arriving, and is it moving on."""
+    if not measured:
+        return "not_measured"
+    if leaving:
+        return "loosening" if arriving else "moving_on"
+    if arriving:
+        return "arriving"
+    return "not_yet" if arriving is False else "untestable"
+
+
+def shifts(
+    spec: dict[str, Any], f: dict[str, dict[str, Any] | None], cl: list[dict[str, Any]], names: dict[str, str]
+) -> dict[str, Any]:
+    sh = spec.get("shifts") or {}
+    states = {c["id"]: c["state"] for c in cl}
+    places = []
+    for p in sh.get("places") or []:
+        readings = [{"id": r, **f[r]} for r in p.get("readings") or [] if f.get(r)]
+        arriving, leaving = _run(p.get("arriving"), f), _run(p.get("leaving"), f)
+        st = place_state(arriving, leaving, bool(readings))
+        places.append(
+            {
+                **{k: p[k] for k in ("id", "name", "scarce", "squeezed_by")},
+                "sublayers": [{"id": x, "name": names.get(x, x), "href": f"/stack/{x}"} for x in p.get("sublayers") or []],
+                "readings": readings,
+                "arriving": p.get("arriving"),
+                "leaving": p.get("leaving"),
+                "state": st,
+                "word": PLACE_WORDS[st],
+                "claims": [{"id": c, "state": states.get(c)} for c in p.get("claims") or []],
+            }
+        )
+    return {
+        "grounded_in": sh.get("grounded_in") or [],
+        "places": places,
+        "foot_claims": [{"id": c, "state": states.get(c)} for c in sh.get("foot_claims") or []],
+    }
+
+
 def build(s: Any, today: date | None = None) -> dict[str, Any]:
     spec = load()
     if not spec:
@@ -221,6 +272,7 @@ def build(s: Any, today: date | None = None) -> dict[str, Any]:
         "claims": cl,
         "tally": {k: sum(1 for c in cl if c["state"] == k) for k in STATES},
         "scenarios": scenarios(spec, cl),
+        "shifts": shifts(spec, f, cl, {x.id: x.name for x in s.seed.sublayers}),
         "agree": spec.get("agree") or [],
     }
 
@@ -283,6 +335,18 @@ def problems(
             errors.append(f"{where} is marked as this site's own but names holders")
         if p.get("rival") not in positions:
             errors.append(f"{where} has no rival position")
+    claim_ids = {c["id"] for c in spec.get("claims") or []}
+    sh = spec.get("shifts") or {}
+    errors += [f"outlook: shifts ground on unknown position {g}" for g in sh.get("grounded_in") or [] if g not in positions]
+    errors += [f"outlook: shifts name unknown claim {c}" for c in sh.get("foot_claims") or [] if c not in claim_ids]
+    for p in sh.get("places") or []:
+        where = f"outlook: place {p.get('id')}"
+        errors += [f"{where} reads unknown fact {r}" for r in p.get("readings") or [] if r not in known_facts]
+        errors += [f"{where} names unknown claim {c}" for c in p.get("claims") or [] if c not in claim_ids]
+        for t in ("arriving", "leaving"):
+            x = p.get(t)
+            if x and (x.get("fact") not in known_facts or _bad_test({k: v for k, v in x.items() if k != "fact"}, known_facts)):
+                errors.append(f"{where} has a malformed {t} test")
     for c in spec.get("claims") or []:
         where = f"outlook: claim {c['id']}"
         if c.get("position") not in positions:
