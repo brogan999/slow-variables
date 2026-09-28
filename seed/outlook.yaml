@@ -47,6 +47,15 @@ facts:
   startup_app_share: {series: menlo.us_enterprise.startup_app_revenue_share.fy, max_age_days: 500}
   ramp_spend: {series: ramp.us_businesses.ai_spend_per_employee_median_usd.m, max_age_days: 90}
   ramp_spend_year_ago: {series: ramp.us_businesses.ai_spend_per_employee_median_usd.m, pick: year_ago}
+  # --- the four places the money can sit (Part 32) ---
+  labs_gp_share: {metric: gross_profit_share_by_layer, dims: {layer_id: model, basis: estimated}, max_age_days: 200}
+  labs_gp_share_year_ago: {metric: gross_profit_share_by_layer, dims: {layer_id: model, basis: estimated}, pick: year_ago}
+  lab_rr_growth: {metric: run_rate_growth_by_layer, dims: {layer_id: model}, max_age_days: 200}
+  inference_rr_growth: {metric: run_rate_growth_by_layer, dims: {layer_id: serving_orchestration}, max_age_days: 200}
+  app_rr_growth: {metric: run_rate_growth_by_layer, dims: {layer_id: deployment_application}, max_age_days: 200}
+  front_door_hhi: {metric: assistant_referral_hhi, max_age_days: 70}
+  front_door_hhi_year_ago: {metric: assistant_referral_hhi, pick: year_ago}
+
 sources:
   # I · capability
   - id: ai_2027
@@ -2445,6 +2454,58 @@ claims:
     position: conglomerate_returns
     text: Groups that run many unrelated businesses with AI come to be valued above the sum of their parts.
     falsifier: AI-run groups trading at a discount to the sum of their parts.
+# The four places the money can sit, moving up the stack: the migration essay's rule (rent goes to whatever cannot be
+# routed around, and moves when that is fixed) applied from the model to the customer. Each place names the sub-layers
+# that would be paid there, the readings that show it, and two tests of one fact and one operator: money arriving,
+# and money moving on. Under installation the chip makers are paid first whichever place the money settles in.
+shifts:
+  grounded_in: [up_the_stack, distribution_wins]
+  places:
+    - id: model
+      name: The model
+      scarce: Only a handful of labs can build the best models, and buyers pay for the gap to the next best.
+      squeezed_by: Open models closing the gap, and cheaper models good enough for most work.
+      sublayers: [frontier_labs, neolabs, open_weight_labs]
+      readings:
+        - {fact: labs_gp_share, label: "the labs' share of the stack's gross profit, estimated"}
+        - {fact: open_lag, label: how far open models trail the best closed one}
+        - {fact: open_premium, label: what closed models charge over open ones at the same skill}
+        - {fact: open_share, label: open models' share of routed tokens}
+      arriving: {fact: labs_gp_share, gt: labs_gp_share_year_ago, says: the labs' share of gross profit is above a year before}
+      leaving: {fact: open_lag, lt: 3, says: open models trail the best closed one by under three months}
+      claims: [gap_stays_short]
+    - id: running
+      name: Running it
+      scarce: Serving models quickly, cheaply and reliably, at the scale buyers need.
+      squeezed_by: Routers and open serving software that make one provider as good as another.
+      sublayers: [inference_serving, routing_gateways, agent_infra]
+      readings:
+        - {fact: inference_rr_growth, label: "inference firms' run-rate growth, median"}
+        - {fact: lab_rr_growth, label: "the labs' run-rate growth, median"}
+        - {fact: h100_rent_yoy, label: "rent for NVIDIA's most-rented AI chip, against a year before"}
+      arriving: {fact: inference_rr_growth, gt: lab_rr_growth, says: inference firms' run-rates grow faster than the labs'}
+      claims: [compute_no_crash]
+    - id: knowledge
+      name: The firm's own knowledge
+      scarce: A firm's own records, permissions and ways of working, which no model can learn from the public web.
+      squeezed_by: Labs buying or copying the firms that hold it, and general assistants that pick up a workflow from a few connectors.
+      sublayers: [vertical_ai, coding_agents, deployment_services, evals]
+      readings:
+        - {fact: app_rr_growth, label: "application firms' run-rate growth, median"}
+        - {fact: lab_deals_now, label: companies above the model layer bought by labs and compute firms in a year}
+      arriving: {fact: app_rr_growth, gt: lab_rr_growth, says: application firms' run-rates grow faster than the labs'}
+      leaving: {fact: lab_deals_now, gt: lab_deals_year_ago, says: labs and compute firms buy more of the layers above them than a year before}
+    - id: front_door
+      name: The front door
+      scarce: The assistant a customer opens first, which chooses the suppliers behind it.
+      squeezed_by: Customers switching assistants easily, and operating systems or browsers that open first.
+      sublayers: [consumer_ai]
+      readings:
+        - {fact: front_door_hhi, label: "concentration of the visits chatbots send to websites (StatCounter, CC BY-SA)"}
+      arriving: {fact: front_door_hhi, gte: 0.25, says: one or two assistants send most of the visits}
+      leaving: {fact: front_door_hhi, lt: front_door_hhi_year_ago, says: that concentration is below a year before}
+  foot_claims: [chips_collect]
+
 scenarios:
   progress:
     - {id: stall_capability, label: Capability stalls}

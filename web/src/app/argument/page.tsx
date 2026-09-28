@@ -4,7 +4,8 @@ import { Exits, ReadingMargin, StackPlate } from "@/components/ArgumentParts";
 import { Folios, Inline, parseEssay } from "@/components/Essay";
 import { FourClocks } from "@/components/FourClocks";
 import { PerezCurve } from "@/components/PerezCurve";
-import { argument, index } from "@/lib/data";
+import { FourPlacesCompact } from "@/components/FourPlaces";
+import { argument, index, outlook } from "@/lib/data";
 
 export const metadata = { title: "The argument", description: "Why a fast technology shows up slowly, who gets paid while it does, and the numbers that would prove the argument wrong." };
 
@@ -12,7 +13,7 @@ export default function ArgumentPage() {
   const doc = argument();
   const cards = Object.fromEntries(index().indicators.map((c) => [c.id, c]));
   const { title, lede, folios } = parseEssay(doc.essay.full);
-  const plates = { clocks: <FourClocks clocks={doc.clocks} cards={cards} />, perez: <PerezCurve phase={doc.phase} facts={doc.facts} />, stack: <StackPlate />, record: <CaseRecord rows={doc.record} /> };
+  const plates = { clocks: <FourClocks clocks={doc.clocks} cards={cards} />, perez: <><PerezCurve phase={doc.phase} facts={doc.facts} /><div className="not-prose mt-4"><FourPlacesCompact shifts={outlook().shifts} /></div></>, stack: <StackPlate />, record: <CaseRecord rows={doc.record} /> };
   return (
     <ArticleLayout
       head={
