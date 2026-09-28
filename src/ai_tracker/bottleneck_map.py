@@ -143,10 +143,11 @@ def build(
     grid = {g["name"]: g["cells"] for g in bottlenecks["grid"]}
     outside = []
     for k, f in enumerate(spec["families"]):
-        linked = sorted(
-            {r["id"]: r for b in bottlenecks["items"] if b["section"] == f["name"] for r in b["related"]}.values(),
-            key=lambda r: (not r["published"], r["name"]),
-        )
+        related = {r["id"]: r for b in bottlenecks["items"] if b["section"] == f["name"] for r in b["related"]}
+        for i in f.get("indicators") or []:  # a gauge that reads the whole family, not one of its items
+            if i in cards and i not in related:
+                related[i] = {"id": i, "name": cards[i]["name"], "published": cards[i]["published"], "status": cards[i]["status"]}
+        linked = sorted(related.values(), key=lambda r: (not r["published"], r["name"]))
         tally = _tally([r["status"] for r in linked if r["published"]])
         stage = STAGE_OF_BUCKET[sections[f["name"]]["bucket_id"]]
         bites = {stage: f["why"]} | {st: a["why"] for st, a in (f.get("also") or {}).items()}

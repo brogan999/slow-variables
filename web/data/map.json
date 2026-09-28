@@ -2102,7 +2102,7 @@
        "cells": {
         "adaptation": {
          "bites": true,
-         "measured": false,
+         "measured": true,
          "site": true,
          "why": "They say these limits act across every stage; this site draws them where firms reorganise.",
          "writers": [
@@ -2116,7 +2116,7 @@
         },
         "early_adoption": {
          "bites": true,
-         "measured": false,
+         "measured": true,
          "site": false,
          "why": "One of their own items: not knowing who is liable when AI errs deters firms from adopting it.",
          "writers": []
@@ -2159,14 +2159,33 @@
        "focus": "predicted",
        "href": "#s-3",
        "id": "family_3",
-       "instruments": [],
+       "instruments": [
+        {
+         "href": "/indicators/fda_ai_devices_cumulative",
+         "label": "FDA-authorised AI-enabled devices, growth",
+         "status": "consistent_with_normal",
+         "unpublished": false
+        },
+        {
+         "href": "/indicators/fda_first_llm_device",
+         "label": "FDA-authorised devices built on a large language model",
+         "status": "consistent_with_normal",
+         "unpublished": false
+        },
+        {
+         "href": "/indicators/state_ai_bills_introduced",
+         "label": "US state AI bills introduced (legislative year)",
+         "status": "emerging",
+         "unpublished": false
+        }
+       ],
        "name": "Law, regulation and institutions",
        "reading": {
         "fast": 0,
-        "instruments": 0,
+        "instruments": 3,
         "kind": "tally",
-        "normal": 0,
-        "other": 0,
+        "normal": 2,
+        "other": 1,
         "readings": 0
        }
       },
@@ -2563,14 +2582,21 @@
        "focus": "predicted",
        "href": null,
        "id": "verification",
-       "instruments": [],
+       "instruments": [
+        {
+         "href": "/indicators/pass_hat_k_tau_bench",
+         "label": "Agent reliability across repeated runs (tau-bench pass^k)",
+         "status": "emerging",
+         "unpublished": false
+        }
+       ],
        "name": "Verification and assurance",
        "reading": {
         "fast": 0,
-        "instruments": 0,
+        "instruments": 1,
         "kind": "tally",
         "normal": 0,
-        "other": 0,
+        "other": 1,
         "readings": 2
        },
        "readings": [
@@ -2603,14 +2629,14 @@
        "cells": {
         "adaptation": {
          "bites": true,
-         "measured": false,
+         "measured": true,
          "site": false,
          "why": "Reorganisation shows up in the numbers late, if at all.",
          "writers": []
         },
         "early_adoption": {
          "bites": true,
-         "measured": false,
+         "measured": true,
          "site": false,
          "why": "Firms invest where they can see a return, and much of it goes unmeasured.",
          "writers": []
@@ -2627,13 +2653,38 @@
        "focus": null,
        "href": null,
        "id": "measuring_returns",
-       "instruments": [],
+       "instruments": [
+        {
+         "href": "/indicators/exec_reported_impact",
+         "label": "Executives reporting no AI impact on their own firm",
+         "status": "consistent_with_normal",
+         "unpublished": false
+        },
+        {
+         "href": "/indicators/enterprise_pilot_to_production",
+         "label": "Enterprise pilots with measurable P&L impact",
+         "status": "consistent_with_normal",
+         "unpublished": false
+        },
+        {
+         "href": "/indicators/call_center_uplift",
+         "label": "Customer-support productivity uplift from a generative-AI assistant",
+         "status": "consistent_with_normal",
+         "unpublished": false
+        },
+        {
+         "href": "/indicators/humlum_precise_null",
+         "label": "Chatbot effect on earnings and hours in exposed occupations (Denmark)",
+         "status": "consistent_with_normal",
+         "unpublished": false
+        }
+       ],
        "name": "Measuring the returns",
        "reading": {
         "fast": 0,
-        "instruments": 0,
+        "instruments": 4,
         "kind": "tally",
-        "normal": 0,
+        "normal": 4,
         "other": 0,
         "readings": 0
        },

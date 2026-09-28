@@ -167,6 +167,7 @@ families:
     why: They say these limits act across every stage; this site draws them where firms reorganise.
     also:
       early_adoption: {by: author, why: "One of their own items: not knowing who is liable when AI errs deters firms from adopting it."}
+    indicators: [state_ai_bills_introduced, fda_ai_devices_cumulative, fda_first_llm_device]
   - name: "External-world and physical speed limits"
     label: The physical world's own speed
     placed: site
@@ -196,7 +197,7 @@ nber:
     bites:
       products: A product that cannot be checked cannot be sold for work that matters.
       early_adoption: Firms adopt where checking the work costs less than doing it.
-    indicators: []
+    indicators: [pass_hat_k_tau_bench]
     ledgers: [ai_evaluation_market, insurer_ai_exclusions]
   - id: measuring_returns
     label: Measuring the returns
@@ -204,7 +205,8 @@ nber:
     bites:
       early_adoption: Firms invest where they can see a return, and much of it goes unmeasured.
       adaptation: Reorganisation shows up in the numbers late, if at all.
-    indicators: []  # the output statistics are the blind spot this row names, so they cannot read it
+    # the output statistics are this row's blind spot; these gauges measure returns directly, by survey or trial
+    indicators: [exec_reported_impact, enterprise_pilot_to_production, call_center_uplift, humlum_precise_null]
   - id: work_and_pay
     label: Work and pay
     what: Who does the work, and how the income from it is split between workers and owners.
