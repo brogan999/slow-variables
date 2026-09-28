@@ -637,8 +637,8 @@ class Tools:
         stages = {x["id"]: x["label"] for x in m["stages"]}
         bites: dict[str, list[dict[str, Any]]] = {}
         for r in m["chain"]:
-            for st, why in (r.get("bites") or {}).items():
-                bites.setdefault(r["input"], []).append({"layer": r.get("layer"), "stage": stages.get(st, st), "why": why})
+            for stage, why in (r.get("bites") or {}).items():
+                bites.setdefault(r["input"], []).append({"layer": r.get("layer"), "stage": stages.get(stage, stage), "why": why})
         rows = [i for i in sc["inputs"] if not kind or i.get("kind") == kind]
         rows.sort(key=lambda i: (i["score"] is None, -(i["score"] or 0)))
         return {
