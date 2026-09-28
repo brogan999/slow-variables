@@ -46,18 +46,52 @@ export function JourneyRail() {
   );
 }
 
-/** The card at the foot of each stop: the next stop and its question, or, at the end, the reader's turn. */
+const card = "group block rounded-[4px] p-5 md:p-6";
+
+/** The foot of every page: a stop hands on to the next; a deep dive offers the way back or ahead; an evidence page
+ * returns to the path. The home page, Ask and the legal notice carry none. */
 export function NextStop() {
   const path = usePathname();
   const here = STOPS.findIndex((s) => s.href === path);
-  if (here < 0) return null;
-  const next = STOPS[here + 1];
+  if (here >= 0) {
+    const next = STOPS[here + 1];
+    return (
+      <nav aria-label="Next stop" className="mt-16">
+        <Link href={next ? next.href : "/ask"} className={`${card} max-w-3xl bg-ink text-background md:p-8`}>
+          <span className="eyebrow text-background/70">{next ? `Next stop · ${next.n} · Act ${next.act}` : "The end of the path"}</span>
+          <span className="mt-2 block display text-2xl md:text-3xl">{next ? next.name : "Your turn: ask the data"} <span aria-hidden className="inline-block transition-transform group-hover:translate-x-1">→</span></span>
+          <span className="mt-2 block font-serif text-lg text-background/80">{next ? next.question : "Every number on the path is in the data. Put your own question to it."}</span>
+        </Link>
+      </nav>
+    );
+  }
+  const parent = stopAt(path);
+  if (parent) {
+    const i = STOPS.findIndex((s) => s.n === parent);
+    const stop = STOPS[i];
+    const next = STOPS[i + 1];
+    return (
+      <nav aria-label="Back to the path" className="mt-16 grid max-w-4xl gap-3 md:grid-cols-2">
+        <Link href={stop.href} className={`${card} border border-grid bg-surface`}>
+          <span className="eyebrow">Back to stop {stop.n} · Act {stop.act}</span>
+          <span className="mt-2 block display text-xl"><span aria-hidden>← </span>{stop.name}</span>
+          <span className="mt-1 block font-serif text-[15px] text-ink-2">{stop.question}</span>
+        </Link>
+        <Link href={next ? next.href : "/ask"} className={`${card} bg-ink text-background`}>
+          <span className="eyebrow text-background/70">{next ? `Or skip ahead · stop ${next.n}` : "The end of the path"}</span>
+          <span className="mt-2 block display text-xl">{next ? next.name : "Your turn: ask the data"} <span aria-hidden>→</span></span>
+          <span className="mt-1 block font-serif text-[15px] text-background/80">{next ? next.question : "Put your own question to the data."}</span>
+        </Link>
+      </nav>
+    );
+  }
+  if (path === "/" || ["/ask", "/legal"].some((h) => under(path, h))) return null;
   return (
-    <nav aria-label="Next stop" className="mt-16">
-      <Link href={next ? next.href : "/ask"} className="group block rounded-[4px] bg-ink p-6 md:p-8 text-background max-w-3xl">
-        <span className="eyebrow text-background/70">{next ? `Next stop · ${next.n} · Act ${next.act}` : "The end of the path"}</span>
-        <span className="mt-2 block display text-2xl md:text-3xl">{next ? next.name : "Your turn: ask the data"} <span aria-hidden className="inline-block transition-transform group-hover:translate-x-1">→</span></span>
-        <span className="mt-2 block font-serif text-lg text-background/80">{next ? next.question : "Every number on the path is in the data. Put your own question to it."}</span>
+    <nav aria-label="Back to the path" className="mt-16">
+      <Link href="/" className={`${card} max-w-3xl border border-grid bg-surface`}>
+        <span className="eyebrow">You are in the evidence</span>
+        <span className="mt-2 block display text-xl">Return to the path <span aria-hidden>→</span></span>
+        <span className="mt-1 block font-serif text-[15px] text-ink-2">Three acts, eight stops, from the argument to the long run.</span>
       </Link>
     </nav>
   );
