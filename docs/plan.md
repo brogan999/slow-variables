@@ -745,3 +745,12 @@ Deliberately not done: an `expectations` SQL table, per-page share images, pips,
   - Fetch failures read as plain sentences, and a source failing three runs in a row reads "failing".
   - Record links read as numbered sources, and status authors in plain words.
   - `/diffusion` says capability is fast when its own cards show it.
+
+## Parts 27b–28 status (27 Sep 2026): the data the site holds, and settling cruxes
+
+- **SEC quarters (#99, #105):** fiscal Q4s filed only in the 10-K are filled as the year minus three quarters; fiscal quarters now pair with the calendar quarter holding most of their months, so NVIDIA's May-to-July quarter sits with everyone's April-to-June one. The semis HHI moves stable to concentrating with a written reason.
+- **Held data published (#100):** inference and app run-rates, sub-layer assignments, the tightness feeds for frontier compute and GPU rents.
+- **Rollup sectors (#102):** a Census SUSB connector and `small_firm_employment_share`; `/census#rollups` ranks industries by payroll passing the hand-over screen times employment in firms under five hundred staff.
+- **Claim tests (#103):** labour's share, relational work's share of jobs and NVIDIA's chip lead now read nightly. Claims whose series does not measure the claim itself stay untested, with the reason in the PR.
+- **Crux claims (#104):** labs owning a services firm (Lazarov, due 2028), AI insurance premiums (Deloitte, 2032), the firm-size barbell (Walker, 2029) and the conglomerate premium (Hoffman), each with a dated falsifier. No fetchable forecast gives a number or date for the router fee.
+- **Private work (not in this repo):** the bet register, crux map, bet order and answers to the open questions live in the owner's Notion.
