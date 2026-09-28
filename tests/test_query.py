@@ -422,6 +422,21 @@ def test_the_prompt_asks_for_three_passes_and_the_strategy_chain():
     assert "call bottlenecks" in p and "no personal recommendation" in p and "350 words" not in p
 
 
+def test_the_company_card_carries_the_trillion_dollar_test_with_citable_rows():
+    from ai_tracker.query.citecheck import check
+
+    t = _tools_with_board()
+    v = t.entity("Palantir")["valuation"]
+    m, g = v["multiple_to_1t"], v["cagr_to_1t_2035"]
+    assert m["cite"].startswith("derived:") and g["as_of"] == m["as_of"] and v["net_income_fy"]["cite"].startswith("obs:")
+    mid, gid = m["cite"].split(":")[1], g["cite"].split(":")[1]
+    recs = t.records([("derived", mid), ("derived", gid)])
+    assert check(f"To reach $1 trillion its value must grow {m['value']:.2f}x [derived:{mid}], or {g['value'] * 100:.0f}% a year [derived:{gid}].", recs).ok
+    nv = t.entity("nvda")["valuation"]
+    assert nv["multiple_to_1t"]["value"] < 1 and "cagr_to_1t_2035" not in nv  # already past it: no stale rate
+    assert t.entity("Anthropic")["valuation"]["private_multiple_to_1t"]["cite"].startswith("derived:")
+
+
 def test_prose_records_match_numbers_only_as_whole_tokens():
     from ai_tracker.query.citecheck import Record, check
 

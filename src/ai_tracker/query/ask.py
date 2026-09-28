@@ -37,7 +37,7 @@ log = logging.getLogger("ai-tracker.ask")
 MODEL = os.environ.get("QUERY_MODEL", "claude-sonnet-5")
 # a blocked answer gets its fresh attempt on the stronger model: rare, so the bill stays near Sonnet's
 ESCALATE_MODEL = os.environ.get("QUERY_ESCALATE_MODEL", "claude-opus-5")
-PROMPT_VERSION = "8"
+PROMPT_VERSION = "9"
 # Opus 5 list price, for the escalated retry only
 ESCALATE_USD_PER_MTOK_IN, ESCALATE_USD_PER_MTOK_OUT = (
     float(x) for x in os.environ.get("QUERY_ESCALATE_USD_PER_MTOK", "5,25").split(",")
@@ -63,6 +63,7 @@ REPO_BLOB = "https://github.com/brogan999/slow-variables/blob/main/"
 TOKEN = re.compile(r"\[(?:fact|test|cite):[A-Za-z0-9_.\-]+\]")  # an essay's figure and citation tokens: a note carries no numbers
 DOC_SKIP = {"BOTTLENECK_PROMPT.md"}  # a prompt addressed to a model: an injection hazard, not evidence
 ROW_CAP = 200
+VALUATION_METRICS = ("multiple_to_1t", "cagr_to_1t_2035", "private_multiple_to_1t")
 REVISE_BY_S, ESCALATE_BY_S = 65.0, 35.0  # ponytail: fixed budgets against the 110 s proxy; streaming would lift them
 READ_ONLY = re.compile(r"^\s*(select|with|describe|show)\b", re.I)
 # v2 §6.1: pending and superseded rows never reach an answer. Model and console SQL run on a separate database
@@ -149,7 +150,7 @@ TOOLS = [
     },
     {
         "name": "entity",
-        "description": "A company card: look up a company, fund or organisation by id, name or alias. Returns its id, CIK, dated layer and sub-layer memberships, the series recorded for it, its venture rounds (cite each as [obs:<id>]), the funds that led its rounds (investors) or, for a fund, the companies it led or lists (portfolio), each citable as [obs:<id>], the published indicators for its layers with their status, and the predictions that lean on them (cite as [pred:<id>]); close matches when there is no exact hit. A company that is not found is not in the site's records: say so, and never describe it from memory.",
+        "description": "A company card: look up a company, fund or organisation by id, name or alias. Returns its id, CIK, dated layer and sub-layer memberships, the series recorded for it, its valuation against $1 trillion (how many times over its value must grow and the yearly rate that needs, each cited as [derived:<id>], and its latest yearly net income [obs:<id>]), its venture rounds (cite each as [obs:<id>]), the funds that led its rounds (investors) or, for a fund, the companies it led or lists (portfolio), each citable as [obs:<id>], the published indicators for its layers with their status, and the predictions that lean on them (cite as [pred:<id>]); close matches when there is no exact hit. A company that is not found is not in the site's records: say so, and never describe it from memory.",
         "input_schema": {"type": "object", "properties": {"name": {"type": "string"}}, "required": ["name"]},
     },
     {
@@ -230,9 +231,10 @@ Rules for answers:
    - **What theory says**: which mechanism from the framing above applies (search_evidence for the theory note, rent_rubric for who keeps the profit), and whether tonight's readings fit it.
    If a pass has no record, say so in one sentence rather than filling it. End with where the three agree and where they pull apart.
 8. Strategy questions (what lasts, what creates advantage, what to own or buy, which opportunities are transitional or durable, where value will sit) follow a chain: call bottlenecks to find what binds now and how tight it is; run rent_rubric for the binding input (a supply shortage is a scarcity rent; its durability follows how tight it is and whether the industry is building its way out); say who holds the complementary asset; then say what would convert the transitional rent into a durable one (Helmer's later powers) and which signposts (claims, predictions) would show it happening.
-9. Questions about what a particular reader should personally build, invest in or bet on get no personal recommendation: answer with the conditions and the signposts that would decide it, and say that this is the frame, not advice.
-10. Lead with the answer in one or two sentences, then the passes if any. Write in markdown with short paragraphs, a short heading per pass, and bullets where a list helps (a bullet is one claim). Take the length the question needs; do not pad. Do not describe the tools or your process.
-11. End with a line "Follow-ups:" and three short questions the reader could ask next, one per line starting "- ". They carry no numbers.
+9. Questions about which companies will be worth $1 trillion (or any value) by a date: never name winners or give a forecast. Answer with what would have to be true. For each company that bears on it (use entity; its valuation block holds the rows), give how many times over its value must grow [derived:<id>] and the yearly rate that needs [derived:<id>], each cited in the same sentence as "$1 trillion", and never state the years remaining. Say that at today's price for each dollar of profit, profit would have to grow by the same factor, citing its latest net income [obs:<id>]. A private lab's multiple is read off its last round price and is never ranked with public companies. Then say where the company's rent comes from (rent_rubric, inputs flagged as your judgement), which bottleneck it depends on (bottlenecks) and which claims and predictions bear on it (claims), and close with the questions still open.
+10. Questions about what a particular reader should personally build, invest in or bet on get no personal recommendation: answer with the conditions and the signposts that would decide it, and say that this is the frame, not advice.
+11. Lead with the answer in one or two sentences, then the passes if any. Write in markdown with short paragraphs, a short heading per pass, and bullets where a list helps (a bullet is one claim). Take the length the question needs; do not pad. Do not describe the tools or your process.
+12. End with a line "Follow-ups:" and three short questions the reader could ask next, one per line starting "- ". They carry no numbers.
 
 Metrics in the semantic layer:
 {mlines}
@@ -584,7 +586,34 @@ class Tools:
                 for ns, f, c, t, d, i in backers
                 if f == e.id
             ],
+            "valuation": self._valuation(e.id),
         }
+
+    def _valuation(self, eid: str) -> dict[str, Any] | None:
+        """The $1 trillion test's rows for one company: the latest of each, cited; a growth rate only when it is
+        read off the same value as the multiple, and net income for the profit side."""
+        latest = {}
+        for d in self.store.derived:
+            if d.dims.get("entity") == eid and d.metric in VALUATION_METRICS:
+                if d.metric not in latest or d.as_of_date > latest[d.metric].as_of_date:
+                    latest[d.metric] = d
+        if not latest:
+            return None
+        out: dict[str, Any] = {
+            m: {"value": d.value, "unit": (self.metrics.get(m) or {}).get("unit"), "as_of": d.as_of_date.isoformat(), "cite": f"derived:{d.id}"}
+            for m, d in latest.items()
+        }
+        base = latest.get("multiple_to_1t")
+        if "cagr_to_1t_2035" in out and (not base or latest["cagr_to_1t_2035"].as_of_date != base.as_of_date):
+            del out["cagr_to_1t_2035"]  # an older rate, from before the value crossed $1 trillion
+        ni = self.store.con.execute(
+            "SELECT id, value_numeric, as_of_date FROM observations WHERE source_ns = 'sec' AND subject = ? AND measure = 'net_income' AND grain = 'fy' ORDER BY as_of_date DESC LIMIT 1",
+            [eid],
+        ).fetchone()
+        if ni:
+            out["net_income_fy"] = {"value": ni[1], "unit": "USD", "as_of": ni[2].isoformat(), "cite": f"obs:{ni[0]}"}
+        out["basis"] = "public float from the 10-K cover page" if base else "latest private round (post-money)"
+        return out
 
     def _predictions(self, q: str, params: list[Any]) -> list[tuple]:
         """The board's table, when the service built it (a failure there never stops the service)."""
