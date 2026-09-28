@@ -95,3 +95,28 @@ questions:
     informational: true
     question: "In insurance agencies and brokerages (industry 524200), which roles have the most payroll that passes the census's hand-over screen with all three scorers agreeing?"
     expect: {tool: sql, cites: ["census:*"], mentions: ["pass"]}
+  - id: g22
+    lens: capture
+    informational: true
+    question: "Where is value in the stack now?"
+    expect: {metrics: [gross_profit_share_by_layer]}
+  - id: g23
+    lens: capture
+    informational: true
+    question: "Where will value be in the future?"
+    expect: {tool: claims, cites: ["pos:*"]}
+  - id: g24
+    lens: capture
+    informational: true
+    question: "What are the biggest bottlenecks in this entire loop at the moment?"
+    expect: {tool: bottlenecks, cites: ["derived:*"]}
+  - id: g25
+    lens: capture
+    informational: true
+    question: "What will be commoditised in the future?"
+    expect: {cites: ["pos:commodity", "ind:open_weights_lag_months"]}
+  - id: g26
+    lens: capture
+    informational: true
+    question: "What would have to be true for a company to be worth $1 trillion in 2035?"
+    expect: {tool: claims}

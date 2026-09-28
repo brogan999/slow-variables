@@ -146,6 +146,7 @@
 | metr_feed | METR feed (watchlist) | METR | rss | 6 | irregular | Publisher terms; titles and links only | METR |
 | microsoft_blog | Official Microsoft Blog | Microsoft | html | 4 | irregular | Microsoft; short quotation | Official Microsoft Blog |
 | microsoft_ir | Microsoft investor relations (earnings calls) | Microsoft | html | 4 | quarterly | Microsoft; short quotation | Microsoft Investor Relations |
+| microsoft_news | Microsoft Source (news.microsoft.com) | Microsoft | html | 4 | irregular | Microsoft; short quotation | Microsoft Source |
 | midjourney_updates | Midjourney announcements | Midjourney | html | 7 | irregular | Midjourney; short quotation | Midjourney (company announcement) |
 | mitsloan | MIT Sloan Institute for Work and Employment Research | MIT Sloan | html | 6 | irregular | MIT Sloan; short quotation | MIT Sloan |
 | modal_blog | Modal blog | Modal Labs | html | 7 | irregular | Modal Labs; short quotation | Modal Labs |
@@ -193,6 +194,7 @@
 | sierra_blog | Sierra blog | Sierra | html | 5 | irregular | Sierra; short quotation | Sierra (company announcement) |
 | silicon_republic | Silicon Republic | Silicon Republic | html | 7 | irregular | Silicon Republic; short quotation | Silicon Republic |
 | siliconangle | SiliconANGLE | SiliconANGLE Media | html | 5 | irregular | SiliconANGLE; short quotation | SiliconANGLE (relaying the WSJ report) |
+| softbank_group_press | SoftBank Group press releases | SoftBank Group | html | 4 | irregular | SoftBank Group; short quotation | SoftBank Group |
 | sp_global_mi | S&P Global Market Intelligence research | S&P Global Market Intelligence | html | 6 | irregular | S&P Global; short quotation | S&P Global Market Intelligence, Voice of the Enterprise: AI & Machine Learning |
 | stanford_del | Stanford Digital Economy Lab | Stanford University | html | 6 | annual | Working paper | Brynjolfsson, Collis, Eggers, Kazinnik & Nguyen, 'What is Generative AI Worth?' (2026) |
 | stanford_hai_ai_index | Stanford HAI AI Index (report PDF) | Stanford HAI | pdf | 6 | annual | Stanford HAI; cited with attribution | Stanford HAI, AI Index Report 2025 |

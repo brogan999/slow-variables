@@ -161,3 +161,13 @@ body:has(.theme-manuscript) {
 .atlas-map input[type="radio"] { accent-color: var(--ink); }
 .atlas-table td a:hover .atlas-n, .atlas-table td a:focus-visible .atlas-n { outline: 2px solid var(--ink); outline-offset: -2px; }
 .world-chip { display: inline-flex; border: 1px solid var(--axis); padding: 0.05rem 0.4rem; font-family: var(--font-mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-2); }
+
+/* The Ask page (Part 31): a full-height chat column. The footer steps aside and the composer's note carries its links. */
+body:has(.ask-shell) {
+  & > footer { display: none; }
+  & > main { display: flex; flex-direction: column; padding-top: 0; padding-bottom: 0; }
+}
+.ask-shell {
+  & #ask-q:focus-visible { outline: none; } /* the composer's own ring shows focus */
+  & p { max-width: none; } /* the answer runs the column's width, like the bubble and the composer */
+}
