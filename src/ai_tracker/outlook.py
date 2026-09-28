@@ -337,8 +337,8 @@ def problems(
             errors.append(f"{where} is credited to an author but names none")
         if p.get("attribution") == "site" and p.get("holders"):
             errors.append(f"{where} is marked as this site's own but names holders")
-        if p.get("rival") not in positions:
-            errors.append(f"{where} has no rival position")
+        if p.get("rival") not in positions and not (p.get("layer") and p.get("rival") == "none_found"):
+            errors.append(f"{where} has no rival position")  # a layer unit may say no writer argues against it
     claim_ids = {c["id"] for c in spec.get("claims") or []}
     sh = spec.get("shifts") or {}
     errors += [f"outlook: shifts ground on unknown position {g}" for g in sh.get("grounded_in") or [] if g not in positions]

@@ -1054,6 +1054,251 @@ companies:
   reviewed_by: Alex Brogan
   reviewed: 2026-09-28
   disclosure: null
+- entity: scale_ai
+  role: candidate
+  units:
+  - vc_human_data
+  market: "Scale AI sells human data: training data made or checked by people, from simple labelling to expert work, which AI labs use to teach and test their models. It also sells applications: software it builds and runs for businesses and governments on top of AI models. It calls its data engine the foundation of model building at many of the major frontier labs (the firms building the most capable AI systems); that is its own description. In June 2025 Meta, which also builds frontier models, bought a non-voting minority stake; Meta's quarterly filing says Meta has no significant influence over Scale's operations. The deal also widened Scale's commercial work for Meta, paid money from the investment out to Scale's shareholders, and took Scale's founder, Alexandr Wang, to Meta to work on its AI, while he stayed on Scale's board; by July 2026 Scale described him as its chairman. After a year under an interim chief executive, it named Francis deSouza, a former Google Cloud and Illumina executive, as chief executive from August 2026. How big the market becomes depends on whether labs keep buying human data from outside firms, and on whether its applications business grows into a second market."
+  customers: "Frontier labs, large businesses and governments. At the time of the Meta deal, a press report in this site's records named Google, Microsoft and OpenAI, all rivals of Meta, among its customers. In July 2026 it named BP and Mayo Clinic as new business customers and said its work for the US and other governments had grown; it lists the US Department of War among the organisations it serves. The sources do not say whether rival labs cut their work with Scale after Meta's investment, and this site has no record of it either way. This site judges the data business is concentrated in a few labs, Meta among them, and that the government and business side is broader."
+  concentration: concentrated
+  powers:
+  - power: switching_costs
+    why: "Emerging, not proven: Hamilton Helmer, a strategist, listed seven sources of lasting profit and required each to have both a benefit and a barrier to copying. The benefit is repeat government and business work; this site judges the barrier is the security approval and integration a government buyer would have to redo to move its programmes elsewhere. This site has no measure of customers staying for that reason."
+  depends_on:
+  - training_data
+  - post_training
+  - evaluations
+  - applications
+  - capital
+  rent_kind: scarcity
+  appropriability: weak
+  complementary_assets: generic
+  asset_owner: platforms
+  durability: short
+  must_be_true:
+  - "Labs keep buying human data from outside firms rather than building their own expert teams. Ronald Coase, an economist, asked why firms make some things in-house and buy others, and found they buy when using the market costs less than organising the work themselves; a lab keeps buying only while an outside vendor finds and checks experts more cheaply than it could."
+  - "Rival labs keep trusting Scale with their training plans while a rival lab, Meta, holds a sizeable minority stake by a Scale spokesperson's account, and its founder works there. Oliver Williamson, an economist who studied contracts, found that firms bring in-house the work tied closely to their own plans; a lab's data requests reveal what it is trying to teach its models, which is the kind of work a firm is wary of handing to anyone tied to a rival. Meta's stake carries no vote, which is Scale's answer to that worry."
+  - "Its applications business for firms and governments grows into a second large market, so Scale does not rest on the few labs that buy most human data."
+  - "Human expert data stays needed as models learn more from graded outcomes and from data the models generate themselves."
+  would_disprove:
+  - "Frontier labs other than Meta dropping Scale as a named supplier, or naming rival vendors in its place."
+  - "Labs building their own expert teams or buying data vendors outright; a fall in this site's count of labs buying from the training-input layer would be one sign."
+  - "Its government and business customers staying a small side business beside the lab work."
+  - "Meta taking a larger or voting stake, which would turn Scale into a supplier tied to one lab."
+  sources:
+    market:
+    - scale_ai_meta_investment_2025
+    - scale_ai_meta_10q_q2_2025
+    - scale_ai_new_ceo_2026
+    customers:
+    - scale_ai_new_ceo_2026
+    - scale_ai_meta_investment_2025
+    - scale_ai_meta_10q_q2_2025
+    powers:
+    - scale_ai_new_ceo_2026
+    must_be_true:
+    - scale_ai_meta_investment_2025
+    - scale_ai_meta_10q_q2_2025
+    - scale_ai_new_ceo_2026
+  judged_by: claude-opus-5.5
+  reviewed_by: null
+  reviewed: null
+  disclosure: null
+- entity: mercor
+  role: candidate
+  units:
+  - vc_human_data
+  market: "Mercor runs a marketplace that connects experts, such as doctors, bankers and lawyers, with AI labs and businesses that pay them to train and test AI models. The experts write the questions, judge the answers and turn their own work into evaluations (tests a model can be scored and trained against). It says it sits where the labour market meets AI research, and it says its latest money goes to a larger talent network, better matching and faster delivery. Its Form D (the notice a private company files with the US regulator when it sells shares without a public offering) shows a Delaware company, formed in 2022, that sold all of the shares offered in its late-2025 round without paying any placement agent (a bank paid to find investors), and that declined to disclose its revenue. In this site's records its gross revenue run-rate (the latest month's billings scaled up to a year, before paying its experts, as this site reads 'gross') grew steeply in the first months of 2026; that figure comes from its chief executive and from a press report citing a person who knows its finances, so it is self-reported, not audited. In July 2026 it bought Deeptune, a maker of training environments (simulated workplaces where a model practises tasks and is graded). How big the market becomes depends on how long labs keep paying people to teach models, and whether businesses outside the labs start paying too."
+  customers: "AI labs and businesses; the sources name none. A press headline in this site's records ties its growth to AI labs buying expert data. This site judges its revenue is concentrated in a few frontier labs."
+  concentration: concentrated
+  powers:
+  - power: network_economies
+    why: "Emerging, not proven: Hamilton Helmer, a strategist who listed seven sources of lasting profit and required each to have both a benefit and a barrier to copying, counts a network as a power when each new user makes the product better for the rest. More experts could let Mercor fill more lab projects faster, which draws more projects and so more experts. The barrier is weak while experts can sign up with several vendors at once and this site tracks many rival vendors; there is no retention evidence."
+  depends_on:
+  - training_data
+  - post_training
+  - evaluations
+  - capital
+  rent_kind: scarcity
+  appropriability: weak
+  complementary_assets: generic
+  asset_owner: platforms
+  durability: short
+  must_be_true:
+  - "Labs keep buying expert work from outside firms rather than hiring the experts themselves. Ronald Coase, an economist, asked why firms make some things in-house and buy others, and found they buy when using the market costs less than organising the work themselves; this site reads Mercor's case as that recruiting and checking experts across many fields is cheaper done once for many labs."
+  - "Its network compounds. On the tests of Andrei Hagiu and Julian Wright, economists who set out tests for when data really keeps rivals out, among them whether what a firm learns from one customer improves the product for the others, what Mercor learns about which expert does which task well has to improve matching for every lab, not only the lab that paid for the project."
+  - "What it keeps from each dollar a lab pays holds up as rival vendors compete for the same experts and the same projects."
+  - "Businesses outside the labs start paying for expert-built evaluations and training environments, which is where its Deeptune purchase points."
+  - "Demand for people to teach models does not fall away as models learn from graded outcomes and from data they generate themselves."
+  would_disprove:
+  - "Its self-reported run-rate flattening or falling while labs' spending keeps rising."
+  - "Labs moving expert work in-house or buying vendors outright; a fall in this site's count of labs buying from the training-input layer would be one sign."
+  - "The data market splitting among specialist vendors by field, leaving no gain from one broad network."
+  - "No named business customer outside the labs as its environments business grows."
+  sources:
+    market:
+    - mercor_series_c_2025
+    - mercor_form_d_2026
+    customers:
+    - mercor_series_c_2025
+    - mercor_form_d_2026
+    powers:
+    - mercor_series_c_2025
+    must_be_true:
+    - mercor_series_c_2025
+    - mercor_form_d_2026
+  judged_by: claude-opus-5.5
+  reviewed_by: null
+  reviewed: null
+  disclosure: null
+- entity: handshake_ai
+  role: candidate
+  units:
+  - vc_human_data
+  market: "Handshake AI, launched in 2025, is the part of Handshake that supplies AI labs with expert people to test and judge their models: they write subject-specific questions, assess the answers and grade their quality, in fields from law and finance to virology. Handshake runs the whole job itself, finding and training the experts, checking quality and producing the data on its own software. Its supply comes from its parent: Handshake is a careers network that links students and graduates with universities and employers, and it calls itself the largest early-career network in the world; that is its own description. Handshake AI says it draws experts straight from its university partners, so their degrees are verified rather than self-reported, and that this lets it spend less on recruiting than rivals do. In this site's records Handshake told the press that the unit's gross revenue run-rate (the latest month's billings scaled up to a year) went from nothing to a large figure in little more than a year; that is self-reported, not audited. How big the market becomes depends on how long labs keep paying graduate-level experts to teach models."
+  customers: "Leading AI labs, which the sources do not name. This site judges its revenue is concentrated in a few frontier labs."
+  concentration: concentrated
+  powers:
+  - power: cornered_resource
+    why: "Emerging, not proven: Hamilton Helmer, a strategist who listed seven sources of lasting profit and required each to have both a benefit and a barrier to copying, counts preferential access to a valued input as a power. The benefit is cheaper, credential-checked recruiting through long-standing university partnerships. The barrier is unproven: universities are not bound to one partner, and the same graduates can work for rival vendors."
+  depends_on:
+  - training_data
+  - post_training
+  - evaluations
+  - capital
+  rent_kind: scarcity
+  appropriability: weak
+  complementary_assets: generic
+  asset_owner: platforms
+  durability: short
+  must_be_true:
+  - "Labs keep buying expert judgement from outside firms. Ronald Coase, an economist, asked why firms make some things in-house and buy others, and found they buy when using the market costs less than organising the work themselves; Handshake says it reaches graduate experts more cheaply than rivals that spend heavily on recruiting, and a lab keeps buying only while that stays cheaper than doing the work itself."
+  - "Its university network stays a cheaper and more trusted route to experts than rivals' recruiting, and universities keep endorsing the work for their students."
+  - "Its supply compounds. On the tests of Andrei Hagiu and Julian Wright, economists who set out tests for when data really keeps rivals out, among them whether what a firm learns from one customer improves the product for the others, knowing which graduates do which lab task well has to improve the service for every lab, not just one."
+  - "Demand for graduate-level human judgement outlasts models learning from graded outcomes and from data they generate themselves."
+  would_disprove:
+  - "University partners limiting the work or signing with rival vendors."
+  - "Labs moving expert work in-house or buying vendors outright; a fall in this site's count of labs buying from the training-input layer would be one sign."
+  - "Its self-reported run-rate flattening while rivals' keep rising."
+  sources:
+    market:
+    - handshake_ai_introducing_2025
+    - handshake_ai_refounding_2025
+    customers:
+    - handshake_ai_introducing_2025
+    - handshake_ai_refounding_2025
+    powers:
+    - handshake_ai_introducing_2025
+    - handshake_ai_refounding_2025
+    must_be_true:
+    - handshake_ai_introducing_2025
+    - handshake_ai_refounding_2025
+  judged_by: claude-opus-5.5
+  reviewed_by: null
+  reviewed: null
+  disclosure: null
+- entity: baseten
+  role: candidate
+  units:
+  - vc_inference_serving
+  market: "Baseten sells inference (running a trained model to answer requests) and post-training (further training a finished model on a customer's own data and tasks) to companies building AI products. It runs models for customers on dedicated capacity or through ready-made model connections, in its cloud, in the customer's own or across both, and its engineers embed with customers to post-train and tune specialised models. Its case is that open-weight models (models whose trained settings are published so anyone can run them) are now good enough to replace closed models for many firms, which then want to own a model shaped by their own data. It says its revenue and the volume it serves both grew steeply over the past year; that is self-reported. This site's other readings, from a press report and an analyst's estimate, also show a steep rise in early 2026. Its Form D (the notice a private company files with the US regulator when it sells shares without a public offering) shows an offering of shares first sold in June 2026, mostly sold at filing, with no placement agent and revenue not disclosed. How big the market becomes depends on whether serving open models stays a skilled service or becomes a commodity (a product bought on price alone)."
+  customers: "Fast-growing AI application companies. It names Cursor, Notion, Lovable, Harvey, HubSpot, OpenEvidence, Abridge, Decagon and Parallel. SpaceX, which owns xAI, a frontier lab (a firm building the most capable AI systems), agreed in June 2026 to buy Cursor; the deal was awaiting regulatory approval at SpaceX's quarterly filing for the middle of 2026. The sources give no revenue by customer; this site judges a few large application companies weigh heavily."
+  concentration: moderate
+  powers:
+  - power: switching_costs
+    why: "Emerging, not proven: Hamilton Helmer, a strategist, listed seven sources of lasting profit and required each to have both a benefit and a barrier to copying. The benefit is repeat business from customers whose post-trained models and tuned serving run on Baseten. The barrier is weak: Baseten's own pitch is that customers own their models, and open-weight models run on many rivals' platforms. This site has no retention evidence."
+  depends_on:
+  - accelerators
+  - data_centres
+  - inference
+  - post_training
+  - capital
+  rent_kind: scarcity
+  appropriability: weak
+  complementary_assets: generic
+  asset_owner: incumbents
+  durability: short
+  must_be_true:
+  - "Serving open models does not become a commodity. This site's records show open models carrying most of the tokens (the units of text models read and write) routed through OpenRouter (a service that passes each request to whichever model a buyer picks) to its busiest models, the price of a fixed level of capability falling fast, and many rival serving firms, so Baseten has to earn its price from post-training and reliability, not raw serving."
+  - "Post-training ties customers to it. Oliver Williamson, an economist who studied contracts, found that firms bring in-house the work tied closely to their own plans; a model tuned to one firm's work is worth little elsewhere, but the switching cost falls to whoever holds it, and Baseten itself says its customers want to own their models."
+  - "It keeps getting enough GPUs (graphics processing units, the chips most AI runs on) at a price below what it charges; this site judges it rents most of them, largely NVIDIA's, from clouds that also sell serving."
+  - "Its largest customers stay with it as they grow, rather than moving to a lab's own models or their own data centres; SpaceX's agreement in June 2026 to buy Cursor, still awaiting regulatory approval at SpaceX's quarterly filing for the middle of 2026, is the first test."
+  - "Chip makers and compute owners, which this site records buying several serving firms, do not bundle serving so cheaply that stand-alone firms lose the work."
+  would_disprove:
+  - "Price cuts on serving open models without a matching rise in volume."
+  - "Cursor or another named customer moving its models off Baseten after a change of owner."
+  - "Customers taking their post-trained models to rival platforms at little cost."
+  - "Clouds or chip makers offering the same post-training and serving as part of their compute."
+  sources:
+    market:
+    - baseten_series_f_2026
+    - baseten_form_d_2026
+    customers:
+    - baseten_series_f_2026
+    - xai_spacex_10q_q2_2026
+    powers:
+    - baseten_series_f_2026
+    - baseten_form_d_2026
+    must_be_true:
+    - baseten_series_f_2026
+    - baseten_form_d_2026
+    - xai_spacex_10q_q2_2026
+  judged_by: claude-opus-5.5
+  reviewed_by: null
+  reviewed: null
+  disclosure: null
+- entity: fireworks
+  role: candidate
+  units:
+  - vc_inference_serving
+  market: "Fireworks sells inference (running a trained model to answer requests) for companies' developer teams, plus tools to fine-tune models (further train them on a customer's own data), train them with reinforcement learning (rewarding good answers) and evaluate them. It serves hundreds of open-weight models (models whose trained settings are published so anyone can run them). Its founders, who had built AI infrastructure at Meta, left PyTorch, an AI software framework, in 2022 on the bet that open models would catch up with closed ones and firms would want to own their AI. It calls itself the market leader in AI inference; that is its own description. It says its annualised revenue run-rate (the latest month's revenue scaled up to a year) passed a large milestone in 2026, and that almost all the tokens (units of text a model reads and writes) it serves come from models specialised on customers' own data; both are self-reported. An analyst's estimate in this site's records also shows a steep rise through early 2026. NVIDIA and AMD, the chip makers, are among its investors. How big the market becomes depends on whether serving open models stays a skilled service or becomes a commodity (a product bought on price alone)."
+  customers: "It names Samsung, Uber, DoorDash, Notion, Shopify and Upwork, and says Cursor's coding models and Harvey's legal AI are built with it; Harvey, in a post in this site's records, says it post-trained a model with Fireworks, starting from an open model. It says it serves many thousands of companies. SpaceX, which owns xAI, a frontier lab (a firm building the most capable AI systems), agreed in June 2026 to buy Cursor; the deal was awaiting regulatory approval at SpaceX's quarterly filing for the middle of 2026. The sources give no revenue by customer; this site judges the base is broad but that a few large application companies weigh heavily."
+  concentration: moderate
+  powers:
+  - power: switching_costs
+    why: "Emerging, not proven: Hamilton Helmer, a strategist, listed seven sources of lasting profit and required each to have both a benefit and a barrier to copying. The benefit is repeat business from models tuned on a customer's data and improved by its users' feedback on Fireworks' stack. The barrier is weak: Fireworks' own pitch is that customers own their models, and open-weight models run on many rivals' platforms. This site has no retention evidence."
+  depends_on:
+  - accelerators
+  - data_centres
+  - inference
+  - post_training
+  - capital
+  rent_kind: scarcity
+  appropriability: weak
+  complementary_assets: generic
+  asset_owner: incumbents
+  durability: short
+  must_be_true:
+  - "Serving open models does not become a commodity. This site's records show open models carrying most of the tokens routed through OpenRouter (a service that passes each request to whichever model a buyer picks) to its busiest models, the price of a fixed level of capability falling fast, and many rival serving firms, so Fireworks has to earn its price from tuning and speed, not raw serving."
+  - "Its feedback loop, where users' corrections retrain each customer's model, ties customers to it. On the tests of Andrei Hagiu and Julian Wright, economists who set out tests for when data really keeps rivals out, among them whether what a firm learns from one customer improves the product for the others, that learning helps only the customer it came from, so it is a switching cost for whoever holds the model rather than a network that grows with every customer."
+  - "It keeps getting enough GPUs (graphics processing units, the chips most AI runs on) at a price below what it charges; its investors include the chip makers whose chips this site judges it runs on."
+  - "Its largest customers stay with it as they grow, rather than moving to a lab's own models or their own data centres; SpaceX's agreement in June 2026 to buy Cursor, still awaiting regulatory approval at SpaceX's quarterly filing for the middle of 2026, is the first test."
+  - "Chip makers and compute owners, which this site records buying several serving firms, do not bundle serving so cheaply that stand-alone firms lose the work."
+  would_disprove:
+  - "Price cuts on serving open models without a matching rise in volume."
+  - "Cursor or another named customer moving its models off Fireworks after a change of owner."
+  - "Customers taking their tuned models to rival platforms at little cost."
+  - "Closed models winning back most of the traffic from open ones, shrinking the market it serves."
+  sources:
+    market:
+    - fireworks_series_d_2026
+    - fireworks_series_c_2025
+    customers:
+    - fireworks_series_c_2025
+    - fireworks_series_d_2026
+    - xai_spacex_10q_q2_2026
+    powers:
+    - fireworks_series_c_2025
+    - fireworks_series_d_2026
+    - xai_spacex_10q_q2_2026
+    must_be_true:
+    - fireworks_series_c_2025
+    - fireworks_series_d_2026
+    - xai_spacex_10q_q2_2026
+  judged_by: claude-opus-5.5
+  reviewed_by: null
+  reviewed: null
+  disclosure: null
 sources:
 - id: amd_10k_fy25
   entity: amd
@@ -1272,3 +1517,92 @@ sources:
   retrieved_at: 2026-09-28
   http_status: 200
   content_hash: 06ec736642dfde0a8a9c7ae98cbc2eaf2683d55d269e052e26e78b3d667d5570
+- id: scale_ai_meta_investment_2025
+  entity: scale_ai
+  url: https://scale.com/blog/scale-ai-announces-next-phase-of-company-evolution
+  form: company-post
+  filed: 2025-06-12
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 97f2fa56c4a3db98aa3c50d3cc0a0a1ffd1f80482b7302c21bc868cdcbbe6de0
+- id: scale_ai_new_ceo_2026
+  entity: scale_ai
+  url: https://scale.com/blog/scale-appoints-new-ceo
+  form: company-post
+  filed: 2026-07-30
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 1c805d00d775fd7195fb99a2e79e3af489bba0359004c2eee2ddba90b8dddace
+- id: scale_ai_meta_10q_q2_2025
+  entity: scale_ai
+  filer: Meta Platforms
+  url: https://www.sec.gov/Archives/edgar/data/1326801/000162828025036791/meta-20250630.htm
+  form: 10-Q
+  filed: 2025-07-31
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: afa42dda2f8086d5ff7e9ba69e6500c2d50bc10c7edd205d961549b695a59ea2
+- id: mercor_series_c_2025
+  entity: mercor
+  url: https://www.mercor.com/blog/series-c/
+  form: company-post
+  filed: 2025-10-27
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: a6ac3502be091a05a36ea63d2c32fc1fe62370d9044ddb49bc140fc4bf09d12e
+- id: mercor_form_d_2026
+  entity: mercor
+  url: https://www.sec.gov/Archives/edgar/data/2103986/000210398626000005/xslFormDX01/primary_doc.xml
+  form: form-d
+  filed: 2026-02-18
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: b30954f7a781a78f323ae812ffa7521927282134917f94d305a98aeecbb20b40
+- id: handshake_ai_refounding_2025
+  entity: handshake_ai
+  url: https://joinhandshake.com/blog/our-team/our-refounding-in-the-ai-era/
+  form: company-post
+  filed: 2025-10-14
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 92f18441ec808d337da56c9ad3c8338dcdb3edde9f940dd52e7a2710504a5560
+- id: handshake_ai_introducing_2025
+  entity: handshake_ai
+  url: https://joinhandshake.com/blog/our-team/introducing-handshake-ai/
+  form: company-post
+  filed: 2025-06-13
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 3cf2bd48a0f01460cb2887977d8a33200c9fc4848fb06cc3572d278df4cc8111
+- id: baseten_series_f_2026
+  entity: baseten
+  url: https://www.baseten.co/blog/announcing-our-series-f/
+  form: company-post
+  filed: 2026-06-22
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: df3d87c4b2c6b5dd7efb3228f11764ba720a27c0edd823631b4896d4d40bcbf9
+- id: baseten_form_d_2026
+  entity: baseten
+  url: https://www.sec.gov/Archives/edgar/data/1865393/000186539326000004/xslFormDX08/primary_doc.xml
+  form: form-d
+  filed: 2026-06-30
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 1730eb786a7b8503dee5655ba8b09a931c03ef8ef0fb3e67b4942902571d07dc
+- id: fireworks_series_d_2026
+  entity: fireworks
+  url: https://fireworks.ai/blog/series-d-announcement
+  form: company-post
+  filed: 2026-07-15
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 8ef7f853cc4fd992b52753a5cb8a86994032bc1b06566ed822bd74ed47414f25
+- id: fireworks_series_c_2025
+  entity: fireworks
+  url: https://fireworks.ai/blog/series-c
+  form: company-post
+  filed: 2025-10-28
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 7af46bb75e1056429205bc69e6545573c533ed25a5ee4e8f09362809cd13447b
