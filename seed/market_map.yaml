@@ -1,0 +1,597 @@
+# The granular value-chain market map (Part 33). Categories and leaves are Alex's taxonomy; every sub-layer has one default
+# category, and an entity's own places in seed/entities.yaml override it. Excluded entities are off the map only.
+credit: Taxonomy by Alex Brogan (published 28 Sep 2026, Part 33). Placements are this tracker's, from the sources named on
+  each place; defaults follow each company's primary sub-layer.
+layers:
+- id: physical_compute
+  number: 1
+  name: Physical inputs and compute supply
+- id: models
+  number: 2
+  name: Models and capability production
+- id: data_training_verification
+  number: 3
+  name: Data, training and verification inputs
+- id: runtime_orchestration
+  number: 4
+  name: Runtime, serving and orchestration
+- id: trust_control_transactions
+  number: 5
+  name: Trust, control and transaction infrastructure
+- id: deployment_diffusion
+  number: 6
+  name: Deployment and organizational diffusion
+- id: applications_operating_models
+  number: 7
+  name: Applications and operating models
+- id: outcomes
+  number: 8
+  name: Adoption and economic outcomes
+  indicator_only: true
+categories:
+- id: power_and_sites
+  number: '1.1'
+  layer: physical_compute
+  name: Power and sites
+  leaves:
+  - Generation
+  - Storage and grid services
+  - Transmission and interconnection
+  - Data-centre real estate and site development
+  - Power procurement and demand management
+- id: data_centre_infrastructure
+  number: '1.2'
+  layer: physical_compute
+  name: Data-centre infrastructure
+  leaves:
+  - Construction and modular data centres
+  - Cooling
+  - Power distribution
+  - Racks and integrated systems
+  - Data-centre operations
+- id: semiconductor_supply_chain
+  number: '1.3'
+  layer: physical_compute
+  name: Semiconductor supply chain
+  leaves:
+  - Accelerator design
+  - Custom silicon and ASICs
+  - Semiconductor fabrication
+  - Advanced packaging
+  - Semiconductor manufacturing equipment
+  - Chiplets and interconnect
+- id: memory_storage_and_networking
+  number: '1.4'
+  layer: physical_compute
+  name: Memory, storage and networking
+  leaves:
+  - HBM and memory
+  - Storage
+  - Networking silicon
+  - Optical interconnect
+  - Scale-up networking
+  - Scale-out networking
+- id: compute_providers
+  number: '1.5'
+  layer: physical_compute
+  name: Compute providers
+  leaves:
+  - Hyperscale clouds
+  - Neoclouds
+  - GPU bare-metal providers
+  - Sovereign and regional AI clouds
+  - Edge and on-premise compute
+  - Compute marketplaces and brokers
+  - Compute financing and capacity contracts
+- id: compute_utilization_and_control
+  number: '1.6'
+  layer: physical_compute
+  name: Compute utilization and control
+  leaves:
+  - Cluster scheduling
+  - GPU utilization
+  - Workload placement
+  - Capacity management
+  - Energy-aware orchestration
+  - Hardware lifecycle and resale
+- id: general_purpose_models
+  number: '2.1'
+  layer: models
+  name: General-purpose models
+  leaves:
+  - Closed frontier labs
+  - Open-weight labs
+  - Sovereign and national labs
+  - Low-cost frontier followers
+- id: modality_native_models
+  number: '2.2'
+  layer: models
+  name: Modality-native models
+  leaves:
+  - Voice and audio
+  - Image
+  - Video and world models
+  - Robotics and spatial intelligence
+  - Scientific and biological models
+- id: specialized_models
+  number: '2.3'
+  layer: models
+  name: Specialized models
+  leaves:
+  - Vertical/domain models
+  - Small language models
+  - Decision and classification models
+  - Embedding and reranking models
+  - Computer-use models
+  - Security models
+- id: model_compression_and_adaptation
+  number: '2.4'
+  layer: models
+  name: Model compression and adaptation
+  leaves:
+  - Distillation
+  - Quantization
+  - Pruning
+  - Fine-tuning
+  - Model merging
+  - Architecture and inference optimization
+- id: data_origination
+  number: '3.1'
+  layer: data_training_verification
+  name: Data origination
+  leaves:
+  - Expert networks
+  - Enterprise workflow data
+  - Physical sensor data
+  - Robotics and motion data
+  - Scientific and experimental data
+  - Consumer interaction data
+  - Negative-CAC data products
+- id: data_rights_and_exchange
+  number: '3.2'
+  layer: data_training_verification
+  name: Data rights and exchange
+  leaves:
+  - Permissioned licensing
+  - Data marketplaces
+  - Data brokers
+  - Bankruptcy and legacy-data acquisition
+  - Privacy-preserving data exchange
+  - Consent and rights management
+- id: data_transformation
+  number: '3.3'
+  layer: data_training_verification
+  name: Data transformation
+  leaves:
+  - Collection tooling
+  - Cleaning and enrichment
+  - Annotation
+  - Provenance
+  - De-identification
+  - Trace extraction
+  - Dataset quality assurance
+- id: synthetic_data
+  number: '3.4'
+  layer: data_training_verification
+  name: Synthetic data
+  leaves:
+  - Synthetic generation
+  - Simulation
+  - Synthetic-data auditability
+  - Diversity and coverage measurement
+  - Sim-to-real pipelines
+- id: training_environments
+  number: '3.5'
+  layer: data_training_verification
+  name: Training environments
+  leaves:
+  - RL environments
+  - Agent simulators
+  - Domain-specific training gyms
+  - Computer-use environments
+  - Physical-world simulators
+  - Environment creation automation
+  - Environment maintenance and version control
+- id: reward_and_verification_systems
+  number: '3.6'
+  layer: data_training_verification
+  name: Reward and verification systems
+  leaves:
+  - Reward models
+  - Verifiers
+  - Proxy graders
+  - Formal verification
+  - Human preference and taste calibration
+  - Outcome telemetry
+  - Evaluation-standard creation
+- id: post_training_and_learning_infrastructure
+  number: '3.7'
+  layer: data_training_verification
+  name: Post-training and learning infrastructure
+  leaves:
+  - Fine-tuning infrastructure
+  - RL as a service
+  - Mid-training
+  - Continual learning
+  - Adapter management
+  - Refresh and rollback infrastructure
+  - Training-cost optimization
+- id: evals_and_assurance
+  number: '3.8'
+  layer: data_training_verification
+  name: Evals and assurance
+  leaves:
+  - Foundation-model benchmarks
+  - Application evals
+  - Enterprise-specific eval authoring
+  - Production observability
+  - Regression testing
+  - Red teaming
+  - Third-party assurance and certification
+- id: inference_supply
+  number: '4.1'
+  layer: runtime_orchestration
+  name: Inference supply
+  leaves:
+  - Serverless inference
+  - Dedicated endpoints
+  - Open-model serving
+  - Multimodal inference
+  - Edge inference
+  - Sovereign/on-premise inference
+- id: inference_optimization
+  number: '4.2'
+  layer: runtime_orchestration
+  name: Inference optimization
+  leaves:
+  - Kernels and compilers
+  - Caching
+  - Batching
+  - Speculative decoding
+  - Prompt and context compression
+  - Hardware-specific optimization
+  - Energy-per-outcome optimization
+- id: routing_and_gateways
+  number: '4.3'
+  layer: runtime_orchestration
+  name: Routing and gateways
+  leaves:
+  - Model gateways
+  - Cost/latency/performance routing
+  - Confidence-based cascades
+  - Frontier-on-exception routing
+  - Compute-provider routing
+  - Outcome-based routing
+- id: context_and_memory
+  number: '4.4'
+  layer: runtime_orchestration
+  name: Context and memory
+  leaves:
+  - RAG and retrieval
+  - Context graphs
+  - Long-term memory
+  - Context curation
+  - Context compression
+  - Permissions-aware retrieval
+  - Knowledge freshness
+- id: agent_runtimes
+  number: '4.5'
+  layer: runtime_orchestration
+  name: Agent runtimes
+  leaves:
+  - Agent frameworks
+  - Planning and decomposition
+  - State management
+  - Multi-agent coordination
+  - Sandboxes
+  - Agent testing and replay
+  - Durable execution
+- id: tools_and_actuation
+  number: '4.6'
+  layer: runtime_orchestration
+  name: Tools and actuation
+  leaves:
+  - Tool registries
+  - API integration
+  - Browser infrastructure
+  - Computer-use infrastructure
+  - Voice and messaging infrastructure
+  - Physical actuation
+  - Human escalation
+- id: security
+  number: '5.1'
+  layer: trust_control_transactions
+  name: Security
+  leaves:
+  - Agent security
+  - Prompt-injection defence
+  - Model and tool access controls
+  - Agent red teaming
+  - Runtime monitoring
+  - Cybersecurity agents
+- id: identity_and_authority
+  number: '5.2'
+  layer: trust_control_transactions
+  name: Identity and authority
+  leaves:
+  - Agent identity
+  - Delegated permissions
+  - Authentication
+  - Know-your-agent
+  - Authority and mandate registries
+- id: provenance_and_audit
+  number: '5.3'
+  layer: trust_control_transactions
+  name: Provenance and audit
+  leaves:
+  - Output provenance
+  - Traceability
+  - Decision logs
+  - Compliance records
+  - Tamper-resistant audit trails
+- id: outcome_verification
+  number: '5.4'
+  layer: trust_control_transactions
+  name: Outcome verification
+  leaves:
+  - Definition-of-done systems
+  - Outcome telemetry
+  - Attribution windows
+  - Dispute resolution
+  - Independent verification
+  - Continuous quality assurance
+- id: settlement_and_billing
+  number: '5.5'
+  layer: trust_control_transactions
+  name: Settlement and billing
+  leaves:
+  - Agent payments
+  - Outcome-based billing
+  - Metering
+  - Escrow
+  - Machine-to-machine procurement
+  - Task-completion markets
+- id: liability_and_risk_transfer
+  number: '5.6'
+  layer: trust_control_transactions
+  name: Liability and risk transfer
+  leaves:
+  - AI warranties
+  - Insurance
+  - Indemnification
+  - Risk scoring
+  - Loss-data networks
+  - Assurance-backed procurement
+- id: technical_implementation
+  number: '6.1'
+  layer: deployment_diffusion
+  name: Technical implementation
+  leaves:
+  - Forward-deployed engineering
+  - Systems integration
+  - Legacy modernization
+  - Data readiness
+  - Ontology creation
+  - Connectors
+- id: context_engineering
+  number: '6.2'
+  layer: deployment_diffusion
+  name: Context engineering
+  leaves:
+  - Domain-knowledge capture
+  - Workflow decomposition
+  - Context curation
+  - Evaluation-rubric creation
+  - Human escalation design
+  - Tacit-knowledge elicitation
+- id: managed_ai_operations
+  number: '6.3'
+  layer: deployment_diffusion
+  name: Managed AI operations
+  leaves:
+  - Model operations
+  - Agent operations
+  - Evaluation operations
+  - Continuous improvement
+  - Vendor and model management
+- id: adoption_and_change
+  number: '6.4'
+  layer: deployment_diffusion
+  name: Adoption and change
+  leaves:
+  - Workflow redesign
+  - Change management
+  - Political adoption
+  - Internal training
+  - ROI measurement
+  - Governance and procurement
+- id: talent_production
+  number: '6.5'
+  layer: deployment_diffusion
+  name: Talent production
+  leaves:
+  - FDE training
+  - Applied MLE training
+  - Agent product management
+  - Evaluation engineering
+  - Credentialing
+  - Placement and talent networks
+  - AI-native apprenticeship
+- id: horizontal_copilots
+  number: '7.1'
+  layer: applications_operating_models
+  name: Horizontal copilots
+  leaves:
+  - Coding
+  - Research
+  - Writing
+  - Design
+  - Productivity
+  - Search
+- id: functional_enterprise_applications
+  number: '7.2'
+  layer: applications_operating_models
+  name: Functional enterprise applications
+  leaves:
+  - Sales
+  - Customer support
+  - Finance
+  - HR
+  - Procurement
+  - Legal
+  - Security
+  - IT operations
+- id: vertical_workflow_software
+  number: '7.3'
+  layer: applications_operating_models
+  name: Vertical workflow software
+  leaves:
+  - Healthcare
+  - Legal
+  - Financial services
+  - Insurance
+  - Industrial
+  - Logistics
+  - Construction
+  - Education
+  - Agriculture
+  - Government and defence
+- id: autonomous_services
+  number: '7.4'
+  layer: applications_operating_models
+  name: Autonomous services
+  leaves:
+  - AI accounting service
+  - AI law firm
+  - AI customer-service operator
+  - Autonomous claims administration
+  - AI-managed procurement
+  - AI research service
+- id: sensor_model_actuator_networks
+  number: '7.5'
+  layer: applications_operating_models
+  name: Sensor–model–actuator networks
+  leaves:
+  - Autonomous vehicles
+  - Energy systems
+  - Robotics
+  - Industrial control
+  - Health monitoring
+  - Agriculture
+  - Distributed physical infrastructure
+  out_of_scope: Robotics and autonomy are out of scope for now (28 Sep 2026)
+- id: ai_native_rollups
+  number: '7.6'
+  layer: applications_operating_models
+  name: AI-native rollups
+  leaves:
+  - Professional-services rollups
+  - Vertical managed-service rollups
+  - Physical-asset rollups
+  - Software consolidators
+  - Data-acquisition rollups
+- id: consumer_ai
+  number: '7.7'
+  layer: applications_operating_models
+  name: Consumer AI
+  leaves:
+  - General assistants
+  - Companions
+  - Education
+  - Health
+  - Commerce and purchasing agents
+  - Creative tools
+  - Personal operating systems
+- id: outcomes
+  number: '8'
+  layer: outcomes
+  name: Outcomes (indicator-only)
+  leaves:
+  - Enterprise task coverage
+  - Verified production deployments
+  - AI spend and realized ROI
+  - Worker throughput
+  - Junior/senior hiring
+  - Wage and labour-share changes
+  - Consumer surplus
+  - Regulation
+  - Liability claims
+  - Energy consumption
+  - Industry concentration
+sublayers:
+  semis: semiconductor_supply_chain
+  hyperscalers_neoclouds: compute_providers
+  dc_power: power_and_sites
+  memory_networking: memory_storage_and_networking
+  frontier_labs: general_purpose_models
+  neolabs: general_purpose_models
+  open_weight_labs: general_purpose_models
+  human_data: data_origination
+  rl_environments: training_environments
+  post_training: post_training_and_learning_infrastructure
+  synthetic_data: synthetic_data
+  data_licensing: data_rights_and_exchange
+  evals: evals_and_assurance
+  inference_serving: inference_supply
+  routing_gateways: routing_and_gateways
+  agent_infra: agent_runtimes
+  deployment_services: technical_implementation
+  coding_agents: horizontal_copilots
+  vertical_ai: vertical_workflow_software
+  consumer_ai: consumer_ai
+  ai_rollups: ai_native_rollups
+  agent_security_identity: security
+  talent_production: talent_production
+  autonomous_services: autonomous_services
+excluded:
+  1x: robotics and autonomy are off the map for now (Alex, 28 Sep 2026); the entity stays in the tracker
+  apptronik: robotics and autonomy are off the map for now (Alex, 28 Sep 2026); the entity stays in the tracker
+  bedrock_robotics: robotics and autonomy are off the map for now (Alex, 28 Sep 2026); the entity stays in the tracker
+  boost_robotics: robotics and autonomy are off the map for now (Alex, 28 Sep 2026); the entity stays in the tracker
+  built_robotics: robotics and autonomy are off the map for now (Alex, 28 Sep 2026); the entity stays in the tracker
+  dronedeploy: robotics and autonomy are off the map for now (Alex, 28 Sep 2026); the entity stays in the tracker
+  dyna: robotics and autonomy are off the map for now (Alex, 28 Sep 2026); the entity stays in the tracker
+  figure: robotics and autonomy are off the map for now (Alex, 28 Sep 2026); the entity stays in the tracker
+  galbot: robotics and autonomy are off the map for now (Alex, 28 Sep 2026); the entity stays in the tracker
+  gecko_robotics: robotics and autonomy are off the map for now (Alex, 28 Sep 2026); the entity stays in the tracker
+  generalist_ai: robotics and autonomy are off the map for now (Alex, 28 Sep 2026); the entity stays in the tracker
+  genesis_ai: robotics and autonomy are off the map for now (Alex, 28 Sep 2026); the entity stays in the tracker
+  gradient_robotics: robotics and autonomy are off the map for now (Alex, 28 Sep 2026); the entity stays in the tracker
+  molg: robotics and autonomy are off the map for now (Alex, 28 Sep 2026); the entity stays in the tracker
+  physical_intelligence: robotics and autonomy are off the map for now (Alex, 28 Sep 2026); the entity stays in the tracker
+  prometheus: robotics and autonomy are off the map for now (Alex, 28 Sep 2026); the entity stays in the tracker
+  reka: robotics and autonomy are off the map for now (Alex, 28 Sep 2026); the entity stays in the tracker
+  rhoda_ai: robotics and autonomy are off the map for now (Alex, 28 Sep 2026); the entity stays in the tracker
+  skild_ai: robotics and autonomy are off the map for now (Alex, 28 Sep 2026); the entity stays in the tracker
+  terrafirma: robotics and autonomy are off the map for now (Alex, 28 Sep 2026); the entity stays in the tracker
+  watney_robotics: robotics and autonomy are off the map for now (Alex, 28 Sep 2026); the entity stays in the tracker
+indicators:
+  neocloud_debt_terms: compute_providers
+  gpu_rental_price_per_hour: compute_providers
+  depreciation_useful_life_changes: compute_providers
+  cloud_rpo_backlog: compute_providers
+  cloud_segment_margins: compute_providers
+  cloud_hhi: compute_providers
+  capex_to_revenue_stack: compute_providers
+  model_price_per_horizon_hour: general_purpose_models
+  enterprise_multi_homing_share: routing_and_gateways
+  routed_token_volume_growth: routing_and_gateways
+  epoch_inference_price_fixed_capability: inference_supply
+  expert_data_market_run_rate: data_origination
+  lab_procurement_signal: data_origination
+  enterprise_session_training_policy: data_rights_and_exchange
+  pass_hat_k_tau_bench: evals_and_assurance
+  agent_calibration: evals_and_assurance
+  agent_operational_safety: security
+  reliability_framework_adoption: outcome_verification
+  metr_horizon_50: general_purpose_models
+  metr_horizon_80: general_purpose_models
+  arc_agi_frontier: general_purpose_models
+  epoch_training_compute_growth: general_purpose_models
+  deployment_data_share_of_training: data_origination
+  fda_first_llm_device: vertical_workflow_software
+  harvey_lab_frontier_completion: vertical_workflow_software
+  waymo_weekly_paid_rides: sensor_model_actuator_networks
+  dev_rct_uplift: horizontal_copilots
+  enterprise_pilot_to_production: adoption_and_change
+  pilots_reaching_production: adoption_and_change

@@ -925,7 +925,9 @@ class Store:
         _write(out / "context.json", self._context())
         _write(out / "analyses.json", self._analyses())
         (out / "venture").mkdir(parents=True, exist_ok=True)
-        for sub_id, doc in self._venture().items():
+        venture = self._venture()
+        _write(out / "market_map.json", self._market_map(set(venture)))
+        for sub_id, doc in venture.items():
             _write(out / "venture" / f"{sub_id}.json", doc)
         bottlenecks = self._bottlenecks(cards)
         _write(out / "bottlenecks.json", bottlenecks)
@@ -1510,6 +1512,13 @@ class Store:
                 sl["n_verified"] = sum(1 for e in sl["entities"] if e["verified"])
                 sl["n_indicators"] = len(sl["indicators"])
         return doc
+
+    def _market_map(self, venture: set[str]) -> dict[str, Any]:
+        """The granular market map (Part 33): Alex's categories with the tracker's entities placed in them, and counts."""
+        from . import market_map
+
+        cards = [{"id": i.id, "name": i.name, "sublayer_id": i.sublayer_id} for i in self.seed.indicators if i.published]
+        return market_map.build(market_map.load(), self.seed.entities, cards, venture, date.today())
 
     def _analyses(self) -> list[dict[str, Any]]:
         """Saved analyses: each metric's latest derived rows with provenance and the formula text, for /query."""

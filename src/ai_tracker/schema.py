@@ -416,6 +416,17 @@ class Membership(BaseModel):
     to_date: date | None = None
 
 
+class Place(BaseModel):
+    """A market-map placement that overrides the entity's default (its primary sub-layer's category), with its provenance."""
+
+    model_config = ConfigDict(extra="forbid")
+    cat: str
+    leaf: str | None = None
+    source: str  # a source id, or "hand" for a judgement recorded in `label`
+    label: str  # the source's own section label, or the reason for a hand placement
+    read: date | None = None
+
+
 class Entity(BaseModel):
     id: str
     name: str
@@ -429,6 +440,7 @@ class Entity(BaseModel):
     notes: str | None = None
     verified: bool = False
     memberships: list[Membership] = []
+    places: list[Place] = []  # market-map overrides (seed/market_map.yaml); none means the sub-layer default
 
 
 class PredStatus(str, Enum):

@@ -55,6 +55,56 @@
       ],
       "title": "Membership",
       "type": "object"
+    },
+    "Place": {
+      "additionalProperties": false,
+      "description": "A market-map placement that overrides the entity's default (its primary sub-layer's category), with its provenance.",
+      "properties": {
+        "cat": {
+          "title": "Cat",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "leaf": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Leaf"
+        },
+        "read": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Read"
+        },
+        "source": {
+          "title": "Source",
+          "type": "string"
+        }
+      },
+      "required": [
+        "cat",
+        "source",
+        "label"
+      ],
+      "title": "Place",
+      "type": "object"
     }
   },
   "properties": {
@@ -163,6 +213,14 @@
       ],
       "default": null,
       "title": "Notes"
+    },
+    "places": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/Place"
+      },
+      "title": "Places",
+      "type": "array"
     },
     "verified": {
       "default": false,

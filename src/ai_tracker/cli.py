@@ -405,6 +405,11 @@ def _check(s: st.Store) -> tuple[list[str], list[str]]:
     from . import census
 
     errors += census.problems(census.load(), census.fetches())
+    from . import market_map
+
+    errors += market_map.problems(
+        market_map.load(), s.seed.entities, {x.id for x in s.seed.sublayers}, {i.id for i in s.seed.indicators}
+    )
     return errors + a_errors + m_errors + o_errors + b_errors + s_errors, notes + a_notes + o_notes
 
 
