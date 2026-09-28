@@ -2513,7 +2513,7 @@ def _write(p: Path, doc: Any) -> None:
 
 
 FORM_WORDS = {"10-K": "annual report (10-K)", "20-F": "annual report (20-F)", "10-Q": "quarterly report (10-Q)", "8-K": "filing (8-K)", "form-d": "Form D", "company-page": "company page", "business-report": "business report",
-              "company-post": "announcement"}
+              "company-post": "announcement", "press": "article"}
 
 
 def _source_label(name: str, src: dict[str, Any]) -> str:
