@@ -441,6 +441,10 @@ class Entity(BaseModel):
     verified: bool = False
     memberships: list[Membership] = []
     places: list[Place] = []  # market-map overrides (seed/market_map.yaml); none means the sub-layer default
+    # acquired / being_acquired / defunct, with who and when at the precision known ("Elastic, Oct 2025");
+    # a membership's to_date is set only when the closing day is known and was read on the page
+    ownership: Literal["acquired", "being_acquired", "defunct"] | None = None
+    ownership_note: str | None = None
 
 
 class PredStatus(str, Enum):

@@ -214,6 +214,35 @@
       "default": null,
       "title": "Notes"
     },
+    "ownership": {
+      "anyOf": [
+        {
+          "enum": [
+            "acquired",
+            "being_acquired",
+            "defunct"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Ownership"
+    },
+    "ownership_note": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Ownership Note"
+    },
     "places": {
       "default": [],
       "items": {

@@ -24,6 +24,7 @@ def load() -> dict[str, Any]:
 
 def _primary(e: Entity, today: date) -> str | None:
     live = [m for m in e.memberships if m.sublayer_id and (m.to_date is None or m.to_date > today)]
+    live = live or [m for m in e.memberships if m.sublayer_id]  # an acquired company stays on the map, marked as such
     first = next((m for m in live if m.is_primary), live[0] if live else None)
     return first.sublayer_id if first else None
 
@@ -108,6 +109,7 @@ def build(spec: dict[str, Any], entities: list[Entity], indicators: list[dict[st
         cats_out[r["cat"]]["entities"].append({
             "id": e.id, "name": e.name, "verified": e.verified, "leaf": r["leaf"], "source": r["source"],
             "label": r["label"], "read": r["read"], "default": r["default"], "ended": max(ended) if ended else None,
+            "ownership": e.ownership or ("acquired" if ended else None), "ownership_note": e.ownership_note,
         })
     for i in indicators:
         cat = ind_cat.get(i["id"]) or default.get(i.get("sublayer_id") or "") or "outcomes"

@@ -61,11 +61,15 @@ def test_the_export_places_by_default_or_own_places_and_counts_add_up():
         Entity(id="e2", name="E2", memberships=[{"layer_id": "l", "sublayer_id": "s1"}],
                places=[{"cat": "a", "leaf": "x", "source": "src", "label": "Section", "read": "2026-09-28"}]),
         Entity(id="e3", name="E3", memberships=[{"layer_id": "l", "sublayer_id": "s1"}]),
+        Entity(id="e4", name="E4", ownership="acquired", ownership_note="Acme, Oct 2025",
+               memberships=[{"layer_id": "l", "sublayer_id": "s1", "to_date": "2025-10-09"}]),
     ]
     doc = mm.build(spec, ents, [{"id": "i1", "name": "I1", "sublayer_id": "s1"}], {"s1"}, date(2026, 9, 28))
     a, b = doc["layers"][0]["categories"]
-    assert [x["id"] for x in a["entities"]] == ["e1", "e2"] and a["n_verified"] == 1
+    assert [x["id"] for x in a["entities"]] == ["e1", "e2", "e4"] and a["n_verified"] == 1
+    e4 = a["entities"][2]
+    assert (e4["ownership"], e4["ownership_note"], e4["ended"]) == ("acquired", "Acme, Oct 2025", "2025-10-09")
     assert a["entities"][0]["default"] and a["entities"][1]["label"] == "Section"
     assert a["leaves"] == [{"name": "x", "n": 1}] and a["default_of"] == ["s1"] and a["venture_sublayers"] == ["s1"]
     assert a["indicators"] == [{"id": "i1", "name": "I1"}]
-    assert doc["counts"]["entities"] == 2 and doc["counts"]["unmapped_categories"] == 1 and b["entities"] == []
+    assert doc["counts"]["entities"] == 3 and doc["counts"]["unmapped_categories"] == 1 and b["entities"] == []
