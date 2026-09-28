@@ -1618,3 +1618,44 @@ metrics:
       SELECT any_value(read_on) AS as_of_date, sites, count(*) AS value,
              list_sort(list_concat(list(built_id), list(planned_id))) AS obs_ids
       FROM s GROUP BY sites
+  assistant_referral_hhi:
+    description: Herfindahl index (sum of squared shares, 0-1) of the visits that AI chatbots refer to the websites StatCounter tracks, worldwide, per finished month; shares are those StatCounter names, renormalised to sum to one without "Other".
+    rationale: When one assistant sends nearly all the traffic, the customer's front door belongs to it, and it can choose which suppliers sit behind it. A falling index means the front door is being shared.
+    grain: [as_of_date]
+    unit: index
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["statcounter_ai.*.referral_share.m"]
+    caveats: Referral traffic to tracked websites, not use; assistants that answer without sending a visit are undercounted; StatCounter's list of named assistants can change, which moves the index on its own. CC BY-SA 3.0, credit StatCounter Global Stats with a link.
+    sql: |
+      SELECT as_of_date, sum(value_numeric * value_numeric) / (sum(value_numeric) * sum(value_numeric)) AS value,
+             list(id ORDER BY id) AS obs_ids
+      FROM observations WHERE source_ns = 'statcounter_ai' AND measure = 'referral_share'
+      GROUP BY as_of_date HAVING count(*) >= 4
+  run_rate_growth_by_layer:
+    description: Median annualised growth in stated revenue run-rate across the firms in a layer, per finished calendar quarter. For each firm with a primary membership in the layer, its first and last run-rate readings in the fifteen months to the quarter's end, at least 180 days apart, give one annualised growth rate; the median across at least three firms is the reading.
+    rationale: If the money in AI is moving from the model to running it or to the firms that use it, the run-rates of inference clouds or application firms should grow faster than the labs'. Comparing medians across firms keeps one large firm from setting the reading.
+    grain: [as_of_date, layer_id]
+    unit: share
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["*.*.revenue_run_rate_usd.pt"]
+    caveats: Firms state run-rates when they are growing and fall silent when they are not, so every layer's growth leans high; readings come from different outlets and definitions; a firm counts in its primary layer only.
+    sql: |
+      WITH rr AS (
+        SELECT subject, as_of_date, max(value_numeric) AS v, min(id) AS id FROM observations
+        WHERE measure = 'revenue_run_rate_usd' AND value_numeric > 0 GROUP BY 1, 2),
+      m AS (SELECT DISTINCT entity_id, layer_id FROM entity_membership WHERE is_primary AND to_date IS NULL),
+      qs AS (SELECT DISTINCT (date_trunc('quarter', as_of_date) + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE AS q FROM rr),
+      w AS (
+        SELECT qs.q, m.layer_id, rr.subject,
+               arg_min(rr.v, rr.as_of_date) AS v0, min(rr.as_of_date) AS d0, arg_min(rr.id, rr.as_of_date) AS id0,
+               arg_max(rr.v, rr.as_of_date) AS v1, max(rr.as_of_date) AS d1, arg_max(rr.id, rr.as_of_date) AS id1
+        FROM qs JOIN rr ON rr.as_of_date <= qs.q AND rr.as_of_date > qs.q - INTERVAL 15 MONTH
+        JOIN m ON m.entity_id = rr.subject
+        WHERE qs.q < current_date
+        GROUP BY 1, 2, 3),
+      g AS (SELECT q, layer_id, pow(v1 / v0, 365.0 / date_diff('day', d0, d1)) - 1 AS growth, [id0, id1] AS ids
+            FROM w WHERE date_diff('day', d0, d1) >= 180)
+      SELECT q AS as_of_date, layer_id, median(growth) AS value, list_sort(list_distinct(flatten(list(ids)))) AS obs_ids
+      FROM g GROUP BY 1, 2 HAVING count(*) >= 3

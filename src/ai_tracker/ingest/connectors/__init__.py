@@ -28,6 +28,7 @@ from .ramp import Ramp
 from .regulatory import FdaDevices, Ncsl, Owid, OwidContext, RlList
 from .sec_segments import SecSegments
 from .sec_xbrl import SecXbrl
+from .statcounter import StatCounterAI
 from .tau2_bench import Tau2Bench
 from .yale import YaleDissimilarity
 
@@ -38,6 +39,7 @@ CONNECTORS = {
         HalReliability,
         Tau2Bench,
         GpuRents,
+        StatCounterAI,
         Ramp,
         Canaries,
         CanariesAge,
