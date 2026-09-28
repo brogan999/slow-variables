@@ -25,7 +25,9 @@ function Chip({ c, n }: { c: Cite; n: number }) {
         <span className="block text-ink font-medium mt-1 break-words">{c.label ?? c.id}</span>
         {c.value || c.date ? <span className="block num mt-0.5">{[c.value, c.date].filter(Boolean).join(" · ")}</span> : null}
         {c.snippet ? <span className="block mt-1.5">{c.snippet}</span> : null}
-        {c.href ? <Link href={c.href} className="block mt-2 underline decoration-grid underline-offset-2 text-ink">Open the record</Link> : null}
+        {c.href ? (c.href.startsWith("http")
+          ? <a href={c.href} target="_blank" rel="noreferrer" className="block mt-2 underline decoration-grid underline-offset-2 text-ink">Open the record</a>
+          : <Link href={c.href} className="block mt-2 underline decoration-grid underline-offset-2 text-ink">Open the record</Link>) : null}
       </span>
     </>
   );

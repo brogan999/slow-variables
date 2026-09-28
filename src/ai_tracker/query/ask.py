@@ -12,6 +12,7 @@ import difflib
 import hashlib
 import json
 import logging
+import time
 import math
 import os
 import re
@@ -54,13 +55,15 @@ AUDIT_KEYS = (
     "model",
     "prompt_version",
 )  # never question or answer text
-DOC_DIRS = ("docs/argument", "docs/interpretation", "docs/research")  # public notes only; docs/private never ships or indexes
+NOTE_DIRS = ("docs/argument", "docs/interpretation")  # the site's own essays and theory notes: citable for reasoning
+DOC_DIRS = ("docs/research",)  # model-made digests of named writers: context only, never cited (cite the writer's position)
 # where a note's paragraph can be read: the argument essays have pages; the other notes are read in the public repo
 NOTE_PAGES = {"docs/argument/home.md": "/", "docs/argument/full.md": "/argument", "docs/argument/migration.md": "/argument/migration", "docs/argument/outlook.md": "/outlook"}
 REPO_BLOB = "https://github.com/brogan999/slow-variables/blob/main/"
 TOKEN = re.compile(r"\[(?:fact|test|cite):[A-Za-z0-9_.\-]+\]")  # an essay's figure and citation tokens: a note carries no numbers
 DOC_SKIP = {"BOTTLENECK_PROMPT.md"}  # a prompt addressed to a model: an injection hazard, not evidence
 ROW_CAP = 200
+REVISE_BY_S, ESCALATE_BY_S = 65.0, 35.0  # ponytail: fixed budgets against the 110 s proxy; streaming would lift them
 READ_ONLY = re.compile(r"^\s*(select|with|describe|show)\b", re.I)
 # v2 §6.1: pending and superseded rows never reach an answer. Model and console SQL run on a separate database
 # that holds only these tables, so no spelling of a raw-table name can reach one; RAW only explains the refusal.
@@ -211,7 +214,7 @@ How to frame an answer (theory organises what the data shows; it is never a sour
 - Coase and Williamson on the boundaries of the firm: a firm owns what is specific to it and risky to buy, and buys what is generic; AI lowers some costs of using markets and creates new specific assets.
 - Helmer on durable advantage: power is a benefit behind a barrier; a scarce input is a transitional power that lasts only if its holder converts it into scale, network effects, switching costs, brand or process before the shortage eases.
 - Arrow, Hagiu and Wright on data: knowledge is hard to own; data protects a firm only when its value keeps compounding across customers, stays fresh, is proprietary and is hard to copy.
-- Search these as theory notes with search_evidence; each paragraph is citable as [note:<id>].
+- Search these as theory notes with search_evidence; each paragraph is citable as [note:<id>] for reasoning; a note never supports a number.
 - Evidence grades: A is a tier-1 benchmark or an audited filing or government statistic; B is a company-stated filing, a model release, product behaviour, or published analysis that is not an estimate; C is credible reporting or an estimate; D is a single source or an actor's statement about itself.
 
 Rules for answers:
@@ -221,14 +224,14 @@ Rules for answers:
 4. Quote a status only with its reason and date. Mention the dispute text when a row is disputed and the tier when it is 7; a number inside a dispute text or caveat is cited to the observation that carries it, never to the indicator.
 5. Never compute a number. Do not add, divide, subtract or annualise records to make one, and do not restate a figure in a unit the record does not carry: a share, ratio, gap or growth rate must come from a metric row. If no record holds it, say the tracker does not compute it.
 6. A named writer's view is theirs: say who holds it and cite the position [pos:<id>], claim [claim:<id>] or work [src:<id>] it comes from. Mark your own reasoning as "this site's reading" or "inference". For a company, use entity; for who keeps the profit, use rent_rubric and say its inputs are your judgement.
-7. Three passes. Any question about what is happening, what comes next, where value goes, what lasts or who wins is answered in three labelled passes, each with its own citations:
+7. Three passes. Unless the question asks for a single reading or fact ("what is X's latest Y", which needs only the readings), a question about what is happening, what comes next, where value goes, what lasts or who wins is answered in three labelled passes, each with its own citations:
    - **Now**: what the readings show (observations, derived rows, indicators, the bottleneck scorecard).
    - **What people expect**: the positions, claims, predictions, scenarios and forecasts that bear on it (claims, scenarios, futures), naming who holds each and tonight's state of any tested claim.
    - **What theory says**: which mechanism from the framing above applies (search_evidence for the theory note, rent_rubric for who keeps the profit), and whether tonight's readings fit it.
-   If a pass has no record, say so in one sentence rather than filling it. End with where the three agree and where they pull apart. A plain factual question ("what is X's latest Y") needs only the first pass.
+   If a pass has no record, say so in one sentence rather than filling it. End with where the three agree and where they pull apart.
 8. Strategy questions (what lasts, what creates advantage, what to own or buy, which opportunities are transitional or durable, where value will sit) follow a chain: call bottlenecks to find what binds now and how tight it is; run rent_rubric for the binding input (a supply shortage is a scarcity rent; its durability follows how tight it is and whether the industry is building its way out); say who holds the complementary asset; then say what would convert the transitional rent into a durable one (Helmer's later powers) and which signposts (claims, predictions) would show it happening.
 9. Questions about what a particular reader should personally build, invest in or bet on get no personal recommendation: answer with the conditions and the signposts that would decide it, and say that this is the frame, not advice.
-10. Lead with the answer in one or two sentences, then the passes. Write in markdown with short paragraphs, a short heading per pass, and bullets where a list helps (a bullet is one claim). Take the length the question needs; do not pad. Do not describe the tools or your process.
+10. Lead with the answer in one or two sentences, then the passes if any. Write in markdown with short paragraphs, a short heading per pass, and bullets where a list helps (a bullet is one claim). Take the length the question needs; do not pad. Do not describe the tools or your process.
 11. End with a line "Follow-ups:" and three short questions the reader could ask next, one per line starting "- ". They carry no numbers.
 
 Metrics in the semantic layer:
@@ -406,22 +409,31 @@ class Tools:
             )
         for nid, n in self._notes().items():
             docs.append({"cite": f"note:{nid}", "doc": n["title"], "text": n["text"]})
+        for d in DOC_DIRS:
+            for f in sorted(Path(d).glob("*.md")) if Path(d).is_dir() else []:
+                if f.name in DOC_SKIP:
+                    continue
+                for n, para in enumerate(re.split(r"\n\s*\n", f.read_text(errors="ignore"))):
+                    text, _flagged = scrub(para.strip())
+                    if len(text) >= 40:
+                        docs.append({"cite": None, "doc": f"{f}#p{n}", "text": text})
         return docs
 
     def _notes(self) -> dict[str, dict[str, Any]]:
         """The public essays and theory notes, one citable record per paragraph: note:<file stem>.<paragraph>."""
         if "notes" not in self._index:
             notes = {}
-            for d in DOC_DIRS:
+            for d in NOTE_DIRS:
                 for f in sorted(Path(d).glob("*.md")) if Path(d).is_dir() else []:
-                    if f.name in DOC_SKIP:
-                        continue
                     paras = re.split(r"\n\s*\n", f.read_text(errors="ignore"))
                     title = next((p.lstrip("# ").strip() for p in paras if p.startswith("# ")), f.stem)
                     for n, para in enumerate(paras):
-                        text, _flagged = scrub(re.sub(r"\s+", " ", TOKEN.sub("", para)).strip())
+                        text, _flagged = scrub(re.sub(r"\s+", " ", TOKEN.sub("(a figure on the page)", para)).strip())
                         if len(text) >= 40 and not text.startswith("#"):
-                            notes[f"{f.stem}.{n}"] = {"title": title, "text": text, "href": NOTE_PAGES.get(str(f), REPO_BLOB + str(f))}
+                            # the id follows the text, so a logged citation never points at a paragraph that changed
+                            nid = f"{f.stem}.{hashlib.sha1(text.encode()).hexdigest()[:8]}"
+                            assert nid not in notes, f"two notes share the id {nid}"
+                            notes[nid] = {"title": title, "text": text, "href": NOTE_PAGES.get(str(f), REPO_BLOB + str(f))}
             self._index["notes"] = notes
         return self._index["notes"]
 
@@ -725,7 +737,7 @@ class Tools:
 
     def futures(self, query: str, kind: str | None = None, k: int = 8) -> Any:
         self._futures()
-        hits = [h for h in _bm25_search(self._index["futures_bm25"], query, 60) if not kind or h["kind"] == kind]
+        hits = [h for h in _bm25_search(self._index["futures_bm25"], query, len(self._index["futures"]) if kind else 60) if not kind or h["kind"] == kind]
         return [{k2: v for k2, v in h.items() if k2 not in ("text", "id")} for h in hits[: max(1, min(int(k), 20))]]
 
     def claims(self, query: str, folio: str | None = None, k: int = 5) -> Any:
@@ -843,9 +855,8 @@ class Tools:
                 if rec:
                     out[f"{k}:{i}"] = rec
             elif k == "note":
-                n = self._notes().get(i)
-                if n:
-                    out[f"{k}:{i}"] = Record(i, k, [], "", n["text"])
+                if i in self._notes():  # reasoning only: an empty snippet, so no number can be cited to a note
+                    out[f"{k}:{i}"] = Record(i, k, [], "", "")
             elif k == "fut":
                 x = self._futures().get(i)
                 if x:
@@ -1010,7 +1021,9 @@ class Tools:
             return n["href"] if n else None
         if kind == "fut":
             x = self._futures().get(id_)
-            return f"/futures/category/{x['category']}#{id_}" if x and x.get("category") else "/futures"
+            from .. import futures as fu
+
+            return f"/futures/category/{x['category']}#{id_}" if x and x.get("category") in fu.CATEGORY_NAMES else "/futures"
         if kind == "census":
             what, _, key = id_.partition(".")
             return f"/census/roles/{key}" if what == "role" else "/census"
@@ -1191,16 +1204,19 @@ def ask(
 
     tools = copy.copy(tools or Tools(store))  # shares the store and index; its own one-off fit rows
     tools.adhoc, tools.adhoc_href = {}, {}
-    client = client or anthropic.Anthropic()
+    client = client or anthropic.Anthropic(timeout=90.0)
     system = [{"type": "text", "text": _system(store), "cache_control": {"type": "ephemeral"}}]
     messages = _conversation(question, history)
     usage = {"in": 0, "out": 0, "cache_write": 0, "cache_read": 0}
     calls: list[dict[str, Any]] = []
+    t0 = time.monotonic()  # the site's proxy gives up at 110 s: a revise or a fresh attempt starts only if it can finish
     text, follow = split_followups(_run(client, system, messages, tools, usage, calls))
     status, model = "ok", MODEL
     up: dict[str, int] = {"in": 0, "out": 0, "cache_write": 0, "cache_read": 0}
     res = check(text, tools.records(CITE.findall(text)))
-    if not res.ok:
+    if not res.ok and time.monotonic() - t0 > REVISE_BY_S:
+        status = "blocked"
+    elif not res.ok:
         messages.append(
             {
                 "role": "user",
@@ -1217,7 +1233,7 @@ def ask(
         res = check(text, tools.records(CITE.findall(text)))
         status = "revised" if res.ok else "blocked"
     if (
-        status == "blocked"
+        status == "blocked" and time.monotonic() - t0 < ESCALATE_BY_S
     ):  # one fresh attempt on the stronger model: a new conversation, and better at citing what it read
         up: dict[str, int] = {"in": 0, "out": 0, "cache_write": 0, "cache_read": 0}
         retry, retry_follow = split_followups(

@@ -1,4 +1,5 @@
 import json
+import re
 
 from ai_tracker import store as st
 from ai_tracker.analysis.metrics import run_metrics
@@ -164,7 +165,7 @@ def test_the_five_spec_tools_answer_and_their_ids_verify():
     hits = t.search_evidence("developer speed randomized trial", k=20)
     assert any(h["cite"] and h["cite"].startswith("obs:") for h in hits)
     assert all("BOTTLENECK_PROMPT" not in h.get("doc", "") for h in hits)
-    assert all(h["cite"].startswith("note:") for h in hits if "doc" in h)  # a note is citable for reasoning, never a number
+    assert all((h["cite"] or "note:").startswith("note:") for h in hits if "doc" in h)  # research digests stay uncited context
     f = t.fit_trend("metr.*.horizon_50.pt", "2024-01-01")
     assert f["kind"] == "doubling_days" and f["n_points"] >= 3
     assert check(f"It doubles every {f['value']:.0f} days [derived:{f['id']}].", t.records([("derived", f["id"])])).ok
@@ -397,8 +398,14 @@ def test_theory_notes_and_futures_are_citable_for_reasoning_but_never_for_a_numb
     rec = t.records([(kind, nid)])
     assert check(f"A firm owns what is specific to it [note:{nid}].", rec).ok
     assert not check(f"It owns 40% of what it uses [note:{nid}].", rec).ok
+    many = next(k for k, n in t._notes().items() if re.search(r"\b(?!(?:19|20)\d\d\b)\d+\b", n["text"]))
+    num = re.search(r"\b(?!(?:19|20)\d\d\b)\d+\b", t._notes()[many]["text"])[0]
+    assert not check(f"It counts {num} of them [note:{many}].", t.records([("note", many)])).ok  # a digit in a note cites nothing
+    assert not any(n["href"].endswith("docs/research/bottlenecks.md") for n in t._notes().values())
     assert not any("[fact:" in n["text"] for n in t._notes().values())  # essay tokens drop out
     mig = next(k for k in t._notes() if k.startswith("migration."))
+    assert t.href("fut", "tv-d6850dfc68") == "/futures" or t._futures().get("tv-d6850dfc68") is None  # no page for cannot_judge
+    assert len(t.futures("fusion energy", kind="forecast", k=5)) >= 1
     assert t.href("note", mig) == "/argument/migration" and t.href("note", nid).startswith("https://github.com/")
     assert t.detail("note", nid)["label"]
     fut = t.futures("superintelligence", kind="forecast", k=3)
