@@ -839,3 +839,41 @@ def test_data_seller_panel_counts_only_sellers_with_a_year_earlier_figure():
     [(d, v, ids)] = run("data_seller_panel_growth", rows)
     assert str(d) == "2026-07-09" and abs(v - (3000 / 550 - 1)) < 1e-9 and ids == ["h1", "h2", "m1", "m2"]
     assert run("data_seller_panel_growth", rows[:2] + rows[4:]) == []  # one seller is not a panel
+def _eci(rows: list[tuple]) -> duckdb.DuckDBPyConnection:
+    con = duckdb.connect()
+    con.execute(
+        "CREATE TABLE observations (id VARCHAR, series_key VARCHAR, subject VARCHAR, as_of_date DATE, value_numeric DOUBLE,"
+        " value_low DOUBLE, value_high DOUBLE, value_text VARCHAR, raw_snippet VARCHAR)"
+    )
+    con.executemany("INSERT INTO observations VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", rows)
+    return con
+
+
+def _score(i, model, day, v, lo, hi, org):
+    return (i, f"epoch_bench.{model}.eci_closed.pt", model, day, v, lo, hi, None, f'{{"Organization": "{org}"}}')
+
+
+def test_china_gap_is_the_best_chinese_score_less_the_best_to_date_and_cites_the_country_row():
+    con = _eci([
+        _score("u1", "us1", "2026-01-01", 150, 147, 153, "OpenAI"),
+        _score("c1", "cn1", "2026-02-01", 145, 142, 148, "DeepSeek"),
+        _score("c2", "cn2", "2026-03-01", 152, 149, 155, "Moonshot"),
+        ("k1", "epoch_bench.cn1.country.pt", "cn1", "2026-02-01", None, None, None, "China", ""),
+        ("k2", "epoch_bench.cn2.country.pt", "cn2", "2026-03-01", None, None, None, "China", ""),
+        ("k3", "epoch_bench.us1.country.pt", "us1", "2026-01-01", None, None, None, "United States of America", ""),
+    ])
+    out = {str(d): (v, ids) for d, v, ids in con.execute(METRICS["china_eci_gap"]["sql"]).fetchall()}
+    assert out["2026-02-01"] == (-5.0, ["u1", "c1", "k1"])
+    assert out["2026-03-01"] == (0.0, ["c2", "c2", "k2"])  # a Chinese model leads: the claim fails
+
+
+def test_lab_count_is_labs_whose_interval_reaches_the_leaders_floor_in_the_trailing_year():
+    con = _eci([
+        _score("a", "a1", "2025-01-01", 140, 137, 143, "OldLab"),  # over a year old by the last date
+        _score("b", "b1", "2026-01-01", 150, 147, 153, "OpenAI"),
+        _score("c", "c1", "2026-02-01", 148, 145, 151, "Google DeepMind,Google"),  # reaches 147: counts once
+        _score("d", "d1", "2026-02-01", 140, 138, 142, "Meta"),  # below the floor
+        _score("e", "e1", "2026-02-01", 160, None, None, "NoInterval"),  # no interval: never the leader
+    ])
+    out = {str(d): v for d, v, _ in con.execute(METRICS["frontier_lab_count"]["sql"]).fetchall()}
+    assert out["2026-02-01"] == 3.0  # OpenAI, Google DeepMind, and the uncertain 160 model's own lab

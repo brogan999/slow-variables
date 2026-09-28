@@ -8,6 +8,8 @@
 
 facts:
   data_seller_growth: {metric: data_seller_panel_growth, max_age_days: 400}
+  china_eci_gap: {metric: china_eci_gap, max_age_days: 120}
+  frontier_lab_count: {metric: frontier_lab_count, max_age_days: 120}
   labour_share_yoy: {metric: bls_labor_share_yoy, max_age_days: 200}
   relational_share_now: {metric: relational_work_share, max_age_days: 90}
   relational_share_year_ago: {metric: relational_work_share, pick: year_ago}
@@ -2156,6 +2158,9 @@ claims:
     text: Only a handful of labs stay at the frontier, because it costs too much capital for more.
     row: pretraining
     falsifier: More than a handful of labs keeping pace with the best models.
+    # Test line from Sundheim's own words, "only a handful of labs"; five is this site's reading of a handful.
+    test: {fact: frontier_lab_count, lte: 5}
+    expect_state: holding
   - id: surplus_to_users
     position: consumers_keep
     text: The people who use AI keep far more of its value than the firms that make it.
@@ -2309,6 +2314,9 @@ claims:
     position: us_lead
     text: Chinese labs do not take the lead at the frontier while the best chips, the tests that matter and the paying customers stay American.
     falsifier: A Chinese lab's model becoming the best at the frontier.
+    # Test line from Cai's own words: Chinese labs will not take the frontier lead.
+    test: {fact: china_eci_gap, lt: 0}
+    expect_state: holding
   - id: lock_in_fails
     position: lock_fails
     text: Labs' efforts to tie customers down, through exclusive deals and bans on copying their models, eventually fail, and moving between labs stays cheap.

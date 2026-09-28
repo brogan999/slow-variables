@@ -239,6 +239,9 @@ EXTERNAL = (
 )
 
 
+COUNTRY = "Country (of organization)"
+
+
 class EpochBench(_EpochTable):
     """Epoch Capabilities Index (Epoch-run: tier 1) with open/closed split, FrontierMath Tier 4 (Epoch-run: tier 1),
     and Epoch's compilations of external results (tier 6): the tests in EXTERNAL."""
@@ -251,7 +254,7 @@ class EpochBench(_EpochTable):
         item, out = items[0], []
         self.member, self.columns = (
             "eci_scores.csv",
-            {"Model", "eci", "eci_ci_low", "eci_ci_high", "date", "Accessibility group"},
+            {"Model", "eci", "eci_ci_low", "eci_ci_high", "date", "Accessibility group", "Organization", COUNTRY},
         )
         for r in self.rows(item):
             d, v = _date(r.get("date", "")), _num(r.get("eci"))
@@ -284,6 +287,21 @@ class EpochBench(_EpochTable):
                     value_high=_num(r.get("eci_ci_high")),
                 )
             )
+            if country := (r.get(COUNTRY) or "").strip():  # the organisation's country, as Epoch codes it
+                out.append(
+                    self.obs(
+                        item,
+                        series_key=f"epoch_bench.{slug(r['Model'])}.country.pt",
+                        unit="country",
+                        as_of_date=d,
+                        published_date=d,
+                        value_text=country,
+                        tier=Tier.BENCHMARK,
+                        audited_vs_reported=Basis.reported,
+                        extraction_method=Extraction.api,
+                        raw_snippet=json.dumps({k: r.get(k) for k in ("Model", "Organization", COUNTRY)}, sort_keys=True),
+                    )
+                )
         seen: dict[tuple[str, date], float] = {}
         for member, measure, col, run, tier in EXTERNAL:
             # keyed on Epoch's own row id, or on the column that names a run where a file has none (FrontierSWE's
