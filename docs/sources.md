@@ -203,6 +203,7 @@
 | time_magazine | TIME | TIME USA | html | 5 | irregular | TIME; short quotation | TIME |
 | together_blog | Together AI blog | Together AI | html | 7 | irregular | Together AI; short quotation | Together AI |
 | transparency_coalition | Transparency Coalition reports | Transparency Coalition.AI | html | 6 | irregular | Transparency Coalition; short quotation | Transparency Coalition.AI |
+| upstarts_media | Upstarts Media | Upstarts Media | html | 5 | irregular | Upstarts Media; short quotation | Upstarts Media |
 | wallst_247 | 24/7 Wall St. | 24/7 Wall St. | html | 5 | irregular | 24/7 Wall St.; short quotation | 24/7 Wall St. (relaying The Information) |
 | weights_site | Weights website | Weights | html | 4 | irregular | Weights; short quotation | Weights website |
 | workshop_labs_blog | Workshop Labs blog | Workshop Labs | html | 4 | irregular | Workshop Labs; short quotation | Workshop Labs blog |

@@ -7,6 +7,7 @@
 # reaching a level by that date. Quotes: at most one per source, under fifteen words, checked against the source.
 
 facts:
+  data_seller_growth: {metric: data_seller_panel_growth, max_age_days: 400}
   labour_share_yoy: {metric: bls_labor_share_yoy, max_age_days: 200}
   relational_share_now: {metric: relational_work_share, max_age_days: 90}
   relational_share_year_ago: {metric: relational_work_share, pick: year_ago}
@@ -2023,7 +2024,10 @@ claims:
     text: Labs spend more each year with the firms that sell practice tasks, graders and expert data.
     row: post_training
     stage: methods
-    falsifier: That spending falling once each firm counted a year ago has reported again; the hand-kept tally of disclosed deals is too thin to test it yet.
+    falsifier: That spending falling once each firm counted a year ago has reported again.
+    # Test line from Cai's own falsifier: that spending falling once each firm counted a year ago has reported again.
+    test: {fact: data_seller_growth, gt: 0}
+    expect_state: holding
 
   # III · adoption
   - id: firms_normal

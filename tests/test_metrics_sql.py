@@ -823,3 +823,19 @@ def test_gpu_rent_change_is_read_against_the_same_week_a_year_before():
     ]
     out = [(str(d), g, round(v, 6), ids) for d, g, v, ids in run("gpu_rent_yoy", rows)]
     assert sorted(out) == [("2026-09-21", "h100", 0.1, ["a1", "a0"]), ("2026-09-21", "h200", 0.25, ["c1", "c0"])]
+
+
+def test_data_seller_panel_counts_only_sellers_with_a_year_earlier_figure():
+    k = "{}.{}.gross_revenue_run_rate_usd.pt"
+    rows = [
+        ("m1", k.format("techcrunch", "mercor"), "mercor", "2025-09-09", 450.0, ""),
+        ("m2", k.format("techcrunch", "mercor"), "mercor", "2026-07-09", 2000.0, ""),
+        ("h1", k.format("upstarts_media", "handshake"), "handshake", "2025-08-31", 100.0, ""),
+        ("h2", k.format("time_magazine", "handshake"), "handshake", "2026-05-31", 1000.0, ""),
+        ("s2", k.format("cnbc", "surge_ai"), "surge_ai", "2026-06-30", 5000.0, ""),  # no year-earlier figure: out
+        ("x1", k.format("cnbc", "openai"), "openai", "2025-07-01", 1.0, ""),  # not a data seller
+        ("x2", k.format("cnbc", "openai"), "openai", "2026-07-01", 9.0, ""),
+    ]
+    [(d, v, ids)] = run("data_seller_panel_growth", rows)
+    assert str(d) == "2026-07-09" and abs(v - (3000 / 550 - 1)) < 1e-9 and ids == ["h1", "h2", "m1", "m2"]
+    assert run("data_seller_panel_growth", rows[:2] + rows[4:]) == []  # one seller is not a panel

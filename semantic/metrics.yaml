@@ -1227,6 +1227,27 @@ metrics:
       WHERE a.series_key LIKE 'getdeploying.%.on_demand_median_usd_per_gpu_hour.w'
         AND b.series_key LIKE 'getdeploying.%.on_demand_median_usd_per_gpu_hour.w' AND b.value_numeric > 0
       QUALIFY row_number() OVER (PARTITION BY a.id ORDER BY abs(b.as_of_date - (a.as_of_date - 364)), b.as_of_date) = 1
+  data_seller_panel_growth:
+    description: Growth in the combined revenue run-rate of the training-data sellers that reported both a latest figure and one nine to fifteen months earlier (Mercor, Handshake, Surge, Scale, Turing, micro1, Invisible), latest over earlier, minus one.
+    rationale: Tests the claim that labs spend more each year with the firms that sell practice tasks, graders and expert data, on the panel its holder names in his own falsifier - the firms counted a year ago, reporting again.
+    grain: [as_of_date]
+    unit: share
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["*.*.gross_revenue_run_rate_usd.pt"]
+    caveats: Run-rates are annualised months from the press, often sourced to the company; gross, not net of what sellers pay experts. Needs at least two sellers with a pair; sellers without a year-earlier figure (Surge, Scale today) are left out, and one seller's jump can carry the panel.
+    sql: |
+      WITH r AS (
+        SELECT subject, as_of_date AS d, value_numeric AS v, id FROM observations
+        WHERE measure = 'gross_revenue_run_rate_usd' AND grain = 'pt'
+          AND subject IN ('mercor', 'handshake', 'surge_ai', 'scale_ai', 'turing', 'micro1', 'invisible')),
+      latest AS (SELECT subject, max(d) AS d, arg_max(v, d) AS v, arg_max(id, d) AS id FROM r GROUP BY subject),
+      pair AS (
+        SELECT l.subject, l.d, l.v, l.id, arg_max(e.v, e.d) AS ev, arg_max(e.id, e.d) AS eid
+        FROM latest l JOIN r e ON e.subject = l.subject AND e.d BETWEEN l.d - INTERVAL 450 DAY AND l.d - INTERVAL 270 DAY
+        GROUP BY l.subject, l.d, l.v, l.id)
+      SELECT max(d) AS as_of_date, sum(v) / sum(ev) - 1 AS value, list_sort(list_concat(list(id), list(eid))) AS obs_ids
+      FROM pair HAVING count(*) >= 2
   small_firm_employment_share:
     description: Share of an industry's employment in firms with fewer than 500 employees, per four-digit NAICS industry (Census Statistics of US Businesses).
     rationale: How fragmented an industry is. A rollup needs many owner-run firms to buy; an industry already held by a few large firms has little to consolidate.
