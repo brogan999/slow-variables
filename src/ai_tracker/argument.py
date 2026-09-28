@@ -304,7 +304,7 @@ def phase(s: Store, spec: dict[str, Any]) -> dict[str, Any]:
         ago = c.as_of_date.replace(year=c.as_of_date.year - 1)
         f = fin_at(c.as_of_date)
         # a year-ago flow counts only when the whole year behind it was searched
-        f0 = fin_at(ago) if searched is None or ago.replace(year=ago.year - 1) >= searched else None
+        f0 = fin_at(ago) if searched is None or ago.replace(year=ago.year - 1) + timedelta(days=1) >= searched else None
         raw = _raw_phase(c.value, f.value if f else None, f0.value if f0 else None,
                          after_frenzy=any(h["state"] == "frenzy" for h in history))
         if state is None or (raw != state and history and history[-1]["raw"] == raw):
