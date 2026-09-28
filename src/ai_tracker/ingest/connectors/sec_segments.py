@@ -17,13 +17,13 @@ import httpx
 from ...schema import Basis, Extraction, Observation, Tier
 from ..base import CACHE, Connector, RawItem, expect, ua
 
-# entity -> {segment_id: member local name}. Add a member only after seeing it in a filing.
+# entity -> {segment_id: member local name, or a tuple of spellings}. Add a member only after seeing it in a filing.
 SEGMENTS = {
     "nvda": {
         "data_center": "nvda:DataCenterMember",
         "compute_networking": "nvda:ComputeAndNetworkingSegmentMember",
     },
-    "amd": {"data_center": "amd:DataCenterMember"},
+    "amd": {"data_center": ("amd:DataCenterMember", "amd:DatacenterMember")},  # 10-Qs and 10-Ks spell it differently
     "amzn": {"aws": "amzn:AmazonWebServicesSegmentMember"},
     "googl": {"cloud": "goog:GoogleCloudMember"},
     "msft": {"intelligent_cloud": "msft:IntelligentCloudMember"},
@@ -115,10 +115,11 @@ class SecSegments(Connector):
                             rf'<{tag}\b[^>]*contextRef="([^"]+)"[^>]*>([^<]+)</{tag}>', xml
                         ):
                             members, s, e = periods.get(cid, (set(), None, None))
-                            if member not in members or not s or not e:
+                            hit = next((m for m in ((member,) if isinstance(member, str) else member) if m in members), None)
+                            if not hit or not s or not e:
                                 continue
                             # exactly this segment: no second dimension member beyond the consolidation marker
-                            extra = members - {member, "us-gaap:OperatingSegmentsMember"}
+                            extra = members - {hit, "us-gaap:OperatingSegmentsMember"}
                             if extra:
                                 continue
                             days = (e - s).days

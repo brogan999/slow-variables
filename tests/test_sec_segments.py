@@ -60,3 +60,15 @@ def test_real_nvidia_10k_reproduces_the_ledger_rows():
     assert (
         rows[("sec_seg.nvda.customer_revenue_share.customerone.fy", date(2026, 1, 25))].value_numeric == 0.22
     )
+
+
+def test_amds_10k_spelling_of_its_data_center_member_is_read(raw):
+    from dataclasses import replace
+
+    # AMD's 10-Qs tag amd:DataCenterMember and its 10-Ks amd:DatacenterMember; missing the second lost every fiscal Q4
+    item = raw("sec_seg_min.xml")
+    body = item.body.decode().replace("nvda:DataCenterMember", "amd:DatacenterMember")
+    c = SecSegments()
+    c.plan = [("amd", "10-K", item.url, date(2026, 2, 4))]
+    rows = {r.series_key: r for r in c.extract([replace(item, body=body.encode())])}
+    assert rows["sec_seg.amd.data_center.revenue.fy"].value_numeric == 150e9
