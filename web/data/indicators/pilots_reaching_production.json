@@ -22,9 +22,9 @@
   "dead": null,
   "drawn": {
    "metric": null,
-   "others": 10,
+   "others": 11,
    "series": "menlo.us_enterprise.pilots_reaching_production_share.pt",
-   "total": 11
+   "total": 12
   },
   "line": false,
   "n_drawn": 1,
@@ -100,7 +100,7 @@
  "confidence_basis": {
   "best_tier": 5,
   "grade": "B",
-  "n_observations": 11,
+  "n_observations": 12,
   "sources": [
    "CIO Dive",
    "CIO.com",
@@ -144,7 +144,7 @@
  "leading_lagging": "coincident",
  "metric": null,
  "metric_dims": {},
- "n_observations": 11,
+ "n_observations": 12,
  "name": "Enterprise AI pilots reaching production (surveys)",
  "normal_band": null,
  "override_note": null,
@@ -221,6 +221,25 @@
     }
    ],
    "series_key": "cio_dive.enterprise.initiatives_abandoned_share.pt"
+  },
+  {
+   "points": [
+    {
+     "as_of": "2023-12-31",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "40e9b77129c6bec3"
+     ],
+     "series_key": "gartner.enterprise.ai_projects_reaching_production_share.pt",
+     "subject": "enterprise",
+     "unit": "share",
+     "value": 0.48
+    }
+   ],
+   "series_key": "gartner.enterprise.ai_projects_reaching_production_share.pt"
   },
   {
    "points": [
@@ -450,6 +469,7 @@
   "cio_dive.enterprise.initiatives_abandoned_share.pt",
   "cio_com.enterprise.pocs_not_reaching_production_share.pt",
   "lenovo_news.enterprise.pilots_reaching_production_share.pt",
+  "gartner.enterprise.ai_projects_reaching_production_share.pt",
   "mckinsey.enterprise.ai_scaling_share.pt",
   "mckinsey.enterprise.ai_scaling_share.pt"
  ],
@@ -473,7 +493,7 @@
  "timing_rationale": "Coincident: the surveys describe the year they are taken in and are published within months.",
  "tracker_interpretation": "The surveys disagree by their definitions more than by their findings; production rates near half (Menlo, IDC in 2026) sit beside abandonment rates of a third to a half (Gartner's forecast, S&P Global), and McKinsey's share of firms scaling AI is a different measure again.",
  "unit": "share",
- "unpublished_reason": "The surveys measure different things (production, abandonment, scaling), so no band can be written over them yet; the rows are on /series and in Ask, and the indicator publishes once two surveys with the same definition exist for two years.",
+ "unpublished_reason": "The surveys measure different things (production, abandonment, scaling). Two survey families now measure the share of projects that reach production (IDC for Lenovo, two editions; Gartner, one, for late 2023), and the indicator publishes once both have two years.",
  "updated_at": "2026-09-25",
  "valve_measured": "product_to_adoption",
  "why_it_matters": "The step between a pilot and reorganised work is where diffusion stalls; the P&L measure beside it (MIT NANDA) asks a harder question, so the two are read together."
