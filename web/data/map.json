@@ -839,6 +839,10 @@
         {
          "href": "/query#accelerator_cost_per_flop_annual_change",
          "label": "Yearly change in the cost of computing power"
+        },
+        {
+         "href": "/query#gpu_rent_yoy",
+         "label": "Yearly change in the rent for NVIDIA's most-rented AI chip"
         }
        ],
        "layer": {
@@ -848,12 +852,13 @@
        "name": "AI chips",
        "note": null,
        "reading": {
-        "confidence": 59,
+        "confidence": 75,
         "hatched": false,
         "kind": "scored",
         "kind_of_tight": "supply",
         "obs_ids": [
          "022d95069a720995",
+         "19f553d19637cdec",
          "1c4820ae9106f46e",
          "1fdbef3268e75a56",
          "27fd3c4783a02b89",
@@ -868,6 +873,7 @@
          "4242fdcd0f30ce32",
          "441605f18f26a5a3",
          "4424f8477ba888b7",
+         "471ecfd1d9421357",
          "54b6367999be3a4e",
          "57af1c5c84145f14",
          "5898dc9a94fcb72e",
@@ -900,7 +906,7 @@
          "f5f878d6f616f2f9",
          "f6102c632d05f6d2"
         ],
-        "score": 46,
+        "score": 51,
         "word": "moderate"
        },
        "reads": "How much of the chip supply one designer holds, and whether the cost of a unit of computing power is still falling.",
@@ -1128,7 +1134,7 @@
        "claims": [
         {
          "href": "/outlook#claim-few_labs",
-         "state": "untestable",
+         "state": "holding",
          "text": "Only a handful of labs stay at the frontier, because it costs too much capital for more.",
          "who": "Dan Sundheim"
         }
@@ -1529,6 +1535,10 @@
         {
          "href": "/query#basket_min_output_price_per_mtok",
          "label": "Cheapest model in the basket"
+        },
+        {
+         "href": "/query#gpu_rent_yoy",
+         "label": "Yearly change in the rent for NVIDIA's most-rented AI chip"
         }
        ],
        "layer": {
@@ -1538,15 +1548,17 @@
        "name": "Running models",
        "note": null,
        "reading": {
-        "confidence": 72,
+        "confidence": 78,
         "hatched": false,
         "kind": "scored",
         "kind_of_tight": "supply",
         "obs_ids": [
-         "68b78be76d6c7dac"
+         "19f553d19637cdec",
+         "471ecfd1d9421357",
+         "e0f3dccf47a2d31c"
         ],
-        "score": 12,
-        "word": "slack"
+        "score": 24,
+        "word": "easing"
        },
        "reads": "The price, in dollars for a million tokens of output, of the cheapest model among a named basket of flagship models on one marketplace. A token is a word or a piece of one. One vendor sets it.",
        "sublayer": {

@@ -869,7 +869,7 @@
   }
  },
  "migration": {
-  "as_of": "2026-09-25",
+  "as_of": "2026-09-28",
   "facts": {
    "capex_growth": {
     "as_of": "2026-06-30",
@@ -1346,7 +1346,7 @@
     "value": 0.5281501340482573
    },
    "inputs_scored": {
-    "as_of": "2026-09-25",
+    "as_of": "2026-09-28",
     "holds": null,
     "href": "/methodology#tightness",
     "obs_ids": [
@@ -1379,6 +1379,7 @@
      "161ea4fdafd90a75",
      "1660aff23ee76eef",
      "196a6174924b2821",
+     "19f553d19637cdec",
      "1b37a50700e2161b",
      "1b3fb80ea1cb5f7d",
      "1c4820ae9106f46e",
@@ -1444,6 +1445,7 @@
      "43f4433ed594b14a",
      "441605f18f26a5a3",
      "4424f8477ba888b7",
+     "471ecfd1d9421357",
      "47f8f52e35497824",
      "4a1a4245ff4e0d73",
      "4a3a28818fe771be",
@@ -1477,7 +1479,6 @@
      "65b2615f3059b8e1",
      "664360b87495b06c",
      "66dd63953889edae",
-     "68b78be76d6c7dac",
      "69252633511d47ab",
      "6b3967693d44ccb4",
      "6ba82593402f9cc4",
@@ -1610,6 +1611,7 @@
      "d91a5af82945b8bc",
      "da2a2b98b39d1db4",
      "df139486611fb934",
+     "e0f3dccf47a2d31c",
      "e23bff1aacc7a2d7",
      "e34a7fb5fe644a7f",
      "e40344378f94cfb3",
@@ -1860,6 +1862,13 @@
       "license": "CC BY 4.0",
       "name": "Epoch AI data centres",
       "org": "Epoch AI"
+     },
+     {
+      "attribution": "GetDeploying, GPU rental price history (CC BY 4.0)",
+      "id": "getdeploying",
+      "license": "CC BY 4.0",
+      "name": "GetDeploying GPU rental price history (weekly median on-demand price per GPU-hour)",
+      "org": "GetDeploying"
      }
     ]
    },
@@ -1901,7 +1910,7 @@
      },
      "gauges": [
       {
-       "age_days": 270,
+       "age_days": 271,
        "grade": "C",
        "id": "fleet_power_growth",
        "knots": [
@@ -2022,7 +2031,7 @@
      },
      "gauges": [
       {
-       "age_days": 2,
+       "age_days": 3,
        "grade": "C",
        "id": "planned_vs_built",
        "knots": [
@@ -2356,7 +2365,7 @@
      },
      "gauges": [
       {
-       "age_days": 270,
+       "age_days": 271,
        "grade": "C",
        "id": "logic_supply_growth",
        "knots": [
@@ -2429,7 +2438,7 @@
      },
      "gauges": [
       {
-       "age_days": 270,
+       "age_days": 271,
        "grade": "C",
        "id": "cowos_supply_growth",
        "knots": [
@@ -2477,7 +2486,7 @@
        "weight": 0.45
       },
       {
-       "age_days": 270,
+       "age_days": 271,
        "grade": "C",
        "id": "cowos_buyer_concentration",
        "knots": [
@@ -2558,7 +2567,7 @@
      },
      "gauges": [
       {
-       "age_days": 270,
+       "age_days": 271,
        "grade": "C",
        "id": "hbm_supply_growth",
        "knots": [
@@ -2647,16 +2656,16 @@
      "at_ceiling": false,
      "ceiling": 88,
      "ceiling_rationale": "Kept from the prototype: two gauges from one careful source, one an estimate of each designer's chip sales and one a long trend in the prices chips were released at. The third gauge, rent for chips, reads GetDeploying's weekly price index.",
-     "confidence": 59,
+     "confidence": 75,
      "defined": 3,
      "factors": {
-      "coverage": 0.45,
-      "freshness": 0.55,
-      "source": 0.82
+      "coverage": 0.75,
+      "freshness": 0.62,
+      "source": 0.85
      },
      "gauges": [
       {
-       "age_days": 270,
+       "age_days": 271,
        "grade": "C",
        "id": "designer_concentration",
        "knots": [
@@ -2704,7 +2713,7 @@
        "weight": 0.25
       },
       {
-       "age_days": 325,
+       "age_days": 326,
        "grade": "B",
        "id": "cost_change",
        "knots": [
@@ -2790,8 +2799,8 @@
        "weight": 0.2
       },
       {
-       "age_days": null,
-       "grade": null,
+       "age_days": 7,
+       "grade": "B",
        "id": "rental_price_change",
        "knots": [
         [
@@ -2819,11 +2828,20 @@
        "log10": false,
        "max_age_days": 21,
        "pinned": null,
-       "points": null,
-       "reading": null,
+       "points": 59,
+       "reading": {
+        "as_of": "2026-09-21",
+        "href": "/query#gpu_rent_yoy",
+        "obs_ids": [
+         "19f553d19637cdec",
+         "471ecfd1d9421357"
+        ],
+        "unit": "share",
+        "value": 0.09199878102461656
+       },
        "required": false,
        "scale_rationale": "Rent for a chip rising on a year before means buyers are competing for machines that are hard to add; rent falling by half or more within a year is a glut, the way bandwidth went in the early two-thousands. The reading is the weekly median of on-demand list prices across the cloud providers GetDeploying tracks.",
-       "unavailable": "no reading",
+       "unavailable": null,
        "unfed": null,
        "unit": "share",
        "weight": 0.3
@@ -2836,6 +2854,7 @@
      "name": "AI chips",
      "obs_ids": [
       "022d95069a720995",
+      "19f553d19637cdec",
       "1c4820ae9106f46e",
       "1fdbef3268e75a56",
       "27fd3c4783a02b89",
@@ -2850,6 +2869,7 @@
       "4242fdcd0f30ce32",
       "441605f18f26a5a3",
       "4424f8477ba888b7",
+      "471ecfd1d9421357",
       "54b6367999be3a4e",
       "57af1c5c84145f14",
       "5898dc9a94fcb72e",
@@ -2883,8 +2903,8 @@
       "f6102c632d05f6d2"
      ],
      "reads": "How much of the chip supply one designer holds, and whether the cost of a unit of computing power is still falling.",
-     "score": 46,
-     "used": 2,
+     "score": 51,
+     "used": 3,
      "what": "The processors that train and run models, from NVIDIA, AMD, Google, Amazon and others.",
      "withheld": null,
      "word": "moderate"
@@ -3013,12 +3033,12 @@
      "defined": 1,
      "factors": {
       "coverage": 0.6,
-      "freshness": 0.9,
+      "freshness": 0.89,
       "source": 0.75
      },
      "gauges": [
       {
-       "age_days": 24,
+       "age_days": 25,
        "grade": "C",
        "id": "frontier_compute_growth",
        "knots": [
@@ -3264,11 +3284,11 @@
      "at_ceiling": false,
      "ceiling": 90,
      "ceiling_rationale": "Kept from the prototype: list prices are observed, not estimated.",
-     "confidence": 72,
+     "confidence": 78,
      "defined": 3,
      "factors": {
-      "coverage": 0.45,
-      "freshness": 1.0,
+      "coverage": 0.6,
+      "freshness": 0.93,
       "source": 0.9
      },
      "gauges": [
@@ -3304,13 +3324,13 @@
        "pinned": "low",
        "points": 12,
        "reading": {
-        "as_of": "2026-09-10",
+        "as_of": "2026-09-28",
         "href": "/query#basket_min_output_price_per_mtok",
         "obs_ids": [
-         "68b78be76d6c7dac"
+         "e0f3dccf47a2d31c"
         ],
         "unit": "USD",
-        "value": 0.39999999999999997
+        "value": 0.42
        },
        "required": true,
        "scale_rationale": "Read on a scale where each knot is four times the last, because this price has fallen by whole multiples, not by percentages. Below about a dollar for a million tokens of output (a token is a word or a piece of one), the cost of running a model stops deciding what gets built; at thirty times that, cost is the limit on what products are possible. The reading is the price list as last fetched, so its age runs from the last successful fetch.",
@@ -3341,8 +3361,8 @@
        "weight": 0.25
       },
       {
-       "age_days": null,
-       "grade": null,
+       "age_days": 7,
+       "grade": "B",
        "id": "rental_price_change",
        "knots": [
         [
@@ -3370,11 +3390,20 @@
        "log10": false,
        "max_age_days": 21,
        "pinned": null,
-       "points": null,
-       "reading": null,
+       "points": 59,
+       "reading": {
+        "as_of": "2026-09-21",
+        "href": "/query#gpu_rent_yoy",
+        "obs_ids": [
+         "19f553d19637cdec",
+         "471ecfd1d9421357"
+        ],
+        "unit": "share",
+        "value": 0.09199878102461656
+       },
        "required": false,
        "scale_rationale": "Rent for a chip rising on a year before means buyers are competing for machines that are hard to add; rent falling by half or more within a year is a glut, the way bandwidth went in the early two-thousands. The reading is the weekly median of on-demand list prices across the cloud providers GetDeploying tracks.",
-       "unavailable": "no reading",
+       "unavailable": null,
        "unfed": null,
        "unit": "share",
        "weight": 0.15
@@ -3386,14 +3415,16 @@
      "n": 16,
      "name": "Running models",
      "obs_ids": [
-      "68b78be76d6c7dac"
+      "19f553d19637cdec",
+      "471ecfd1d9421357",
+      "e0f3dccf47a2d31c"
      ],
      "reads": "The price, in dollars for a million tokens of output, of the cheapest model among a named basket of flagship models on one marketplace. A token is a word or a piece of one. One vendor sets it.",
-     "score": 12,
-     "used": 1,
+     "score": 24,
+     "used": 2,
      "what": "Serving a trained model to users, which the industry calls inference.",
      "withheld": null,
-     "word": "slack"
+     "word": "easing"
     },
     {
      "at_ceiling": false,
@@ -3596,7 +3627,7 @@
      },
      "gauges": [
       {
-       "age_days": 89,
+       "age_days": 90,
        "grade": "B",
        "id": "capex_growth",
        "knots": [
@@ -3821,7 +3852,7 @@
     ]
    },
    "scored": {
-    "as_of": "2026-09-25",
+    "as_of": "2026-09-28",
     "href": "/methodology#tightness",
     "obs_ids": [
      "00d887f89f3712c7",
@@ -3853,6 +3884,7 @@
      "161ea4fdafd90a75",
      "1660aff23ee76eef",
      "196a6174924b2821",
+     "19f553d19637cdec",
      "1b37a50700e2161b",
      "1b3fb80ea1cb5f7d",
      "1c4820ae9106f46e",
@@ -3918,6 +3950,7 @@
      "43f4433ed594b14a",
      "441605f18f26a5a3",
      "4424f8477ba888b7",
+     "471ecfd1d9421357",
      "47f8f52e35497824",
      "4a1a4245ff4e0d73",
      "4a3a28818fe771be",
@@ -3951,7 +3984,6 @@
      "65b2615f3059b8e1",
      "664360b87495b06c",
      "66dd63953889edae",
-     "68b78be76d6c7dac",
      "69252633511d47ab",
      "6b3967693d44ccb4",
      "6ba82593402f9cc4",
@@ -4084,6 +4116,7 @@
      "d91a5af82945b8bc",
      "da2a2b98b39d1db4",
      "df139486611fb934",
+     "e0f3dccf47a2d31c",
      "e23bff1aacc7a2d7",
      "e34a7fb5fe644a7f",
      "e40344378f94cfb3",
@@ -4350,8 +4383,8 @@
   ],
   "strip": {
    "from": 2012,
-   "now": 2026.737,
-   "now_x": 86.69,
+   "now": 2026.74,
+   "now_x": 86.71,
    "rows": [
     {
      "id": "people",
@@ -4395,8 +4428,8 @@
        "level": "binding",
        "running": true,
        "source": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2024",
-       "to": 2026.737,
-       "width": 21.98
+       "to": 2026.74,
+       "width": 22.0
       }
      ]
     },
@@ -4413,8 +4446,8 @@
        "level": "binding",
        "running": true,
        "source": "https://web.archive.org/web/20231209053622id_/https://investor.tsmc.com/english/encrypt/files/encrypt_file/reports/2023-07/7ec677062ca442e429b632ccd6d4f31ad53b1ce7/TSMC%202Q23%20Transcript.pdf",
-       "to": 2026.737,
-       "width": 21.98
+       "to": 2026.74,
+       "width": 22.0
       }
      ]
     },
@@ -4431,8 +4464,8 @@
        "level": "present",
        "running": true,
        "source": "https://arxiv.org/abs/2203.15556",
-       "to": 2026.737,
-       "width": 27.87
+       "to": 2026.74,
+       "width": 27.89
       }
      ]
     },
@@ -4449,8 +4482,8 @@
        "level": "present",
        "running": true,
        "source": "https://www.theverge.com/features/23764584/ai-artificial-intelligence-data-notation-labor-scale-surge-remotasks-openai-chatbots",
-       "to": 2026.737,
-       "width": 27.87
+       "to": 2026.74,
+       "width": 27.89
       }
      ]
     },
@@ -4485,8 +4518,8 @@
        "level": "present",
        "running": true,
        "source": "https://techcrunch.com/2025/09/21/silicon-valley-bets-big-on-environments-to-train-ai-agents/",
-       "to": 2026.737,
-       "width": 10.22
+       "to": 2026.74,
+       "width": 10.24
       }
      ]
     },
@@ -4503,8 +4536,8 @@
        "level": "present",
        "running": true,
        "source": "https://www.datacenterfrontier.com/energy/article/11436951/dominion-resumes-new-connections-but-loudoun-faces-lengthy-power-constraints",
-       "to": 2026.737,
-       "width": 27.87
+       "to": 2026.74,
+       "width": 27.89
       }
      ]
     }

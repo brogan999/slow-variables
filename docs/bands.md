@@ -290,6 +290,12 @@
 - Rule: normal -inf to 6.0; fast 12.0 to inf; falsifying none. Normal = a gap under six months, ordinary red-teaming and productisation; fast = a year or more, a lab running internally on a model the public does not have. Between is `emerging`.
 - Timing: Leading: capabilities exist inside labs before the public can use them, by the months this measures.
 
+## Frontier lab gross margin (estimated) (`lab_gross_margin`)
+
+- Band input: `metric:lab_gross_margin_estimate` (share)
+- Rule: direction over 1 periods, dead band 0.05, higher is concentrating. Year on year; a move under five points is noise. A rising margin means the lab layer keeps more of what it sells.
+- Timing: Leading: a lab's margin moves before its share of stack profit shows up in anyone's filings.
+
 ## Lab concentration of routed tokens (OpenRouter, HHI) (`lab_hhi`)
 
 - Band input: `metric:lab_token_hhi` (index)

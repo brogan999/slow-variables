@@ -1,5 +1,5 @@
 {
- "as_of": "2026-09-27",
+ "as_of": "2026-09-28",
  "buckets": [
   {
    "id": "methods",
@@ -158,7 +158,7 @@
      },
      "layer_id": "model",
      "leading_lagging": "leading",
-     "n_observations": 42,
+     "n_observations": 43,
      "name": "METR 50% time horizon",
      "pending": null,
      "published": true,
@@ -1820,8 +1820,8 @@
      "grade": "D",
      "id": "safety_brake_events",
      "latest": {
-      "as_of": "2026-09-27",
-      "derived_id": "4daa952ee4fe04ff",
+      "as_of": "2026-09-28",
+      "derived_id": "e00b57275ff4f8c9",
       "dims": {},
       "obs_ids": [
        "2ab8fec44e7914a5",
@@ -2580,7 +2580,7 @@
      "published": true,
      "source_cluster": null,
      "spark": null,
-     "stale_as_of": null,
+     "stale_as_of": "2026-03-27",
      "stale_reason": null,
      "status": "consistent_with_normal",
      "unit": "rides_per_week",
@@ -2882,8 +2882,8 @@
      "grade": "D",
      "id": "cl_lab_release_claims",
      "latest": {
-      "as_of": "2026-09-27",
-      "derived_id": "861dbfb8c243a0c8",
+      "as_of": "2026-09-28",
+      "derived_id": "cd9c0c94c7ac98e3",
       "dims": {},
       "obs_ids": [
        "0bdf1920b1feb93e",
@@ -2985,6 +2985,23 @@
   },
   {
    "author": "claude",
+   "counterevidence_considered": "The estimate leaves out serving staff, data and hosting, so it overstates a true gross margin; a falling ratio can also mean a lab is pricing to win share while inference volumes grow, not that it is losing pricing power.",
+   "created_at": "2026-09-27T23:39:22.028284Z",
+   "evidence_ids": [
+    "0b6d0c8c368c7937",
+    "1a2c7e77a3879f2b"
+   ],
+   "id": "82770812307e4276",
+   "new_conf": 30,
+   "new_status": "emerging",
+   "old_conf": null,
+   "old_status": null,
+   "reason": "First scoring. OpenAI's revenue minus inference compute, over revenue, fell from 51% in 2024 to 38% in 2025 on Epoch's estimates, a move past the five-point dead band that would read dispersing; every input is one estimator's (Epoch, tier 5), so the single-source rule holds the status at emerging until a second, independent source for the same measure exists, not until more years accrue.",
+   "target_id": "lab_gross_margin",
+   "target_type": "indicator"
+  },
+  {
+   "author": "claude",
    "counterevidence_considered": "The index covers two filers only, so it says nothing about Broadcom, TSMC or the clouds' own chips; Epoch's shipment data shows designers other than NVIDIA gaining share over 2025, so this is concentration against AMD, not across all AI chips.",
    "created_at": "2026-09-27T22:36:40.836436Z",
    "evidence_ids": [
@@ -2998,23 +3015,6 @@
    "old_status": "stable",
    "reason": "Re-read on quarters paired by their midpoint (formula v3), so NVIDIA's May-to-July quarter now sits with AMD's April-to-June one instead of the next quarter. The NVIDIA-vs-AMD data-centre revenue HHI rises from 0.843 (Q1 2025) to 0.870 (Q2 2026), a move of 0.027 against a 0.02 dead band; on the old pairing it was 0.019, just inside. Three of four steps rise; Q4 2025 is missing because AMD files no full-year segment figures.",
    "target_id": "semis_hhi",
-   "target_type": "indicator"
-  },
-  {
-   "author": "claude",
-   "counterevidence_considered": "Run-rates are estimates annualised from one month; no serving firm publishes margins, so revenue growth says nothing yet about whether the layer keeps its rent.",
-   "created_at": "2026-09-27T06:29:39.567021Z",
-   "evidence_ids": [
-    "09f7a0828f93159f",
-    "87887dbf16ff47b3"
-   ],
-   "id": "9e7e778746b0fc37",
-   "new_conf": 35,
-   "new_status": "emerging",
-   "old_conf": null,
-   "old_status": null,
-   "reason": "First reading. Sacra estimates Fireworks, the largest serving firm the site tracks, at an annualised run-rate of $305M at the end of 2025 and $800M at the end of May 2026. Its direction rule compares three readings from the one estimator, so with two it reads emerging; the other firms (Together, Baseten, Modal, RunPod, OpenRouter) stay as evidence.",
-   "target_id": "inference_run_rates",
    "target_type": "indicator"
   }
  ],
@@ -3147,7 +3147,7 @@
    "to": "capture"
   }
  ],
- "verdict": "As of 2026-09-27: methods mixed, products consistent with normal, early adoption consistent with normal, adaptation consistent with normal, return arrow emerging. Thesis: holding.",
+ "verdict": "As of 2026-09-28: methods mixed, products consistent with normal, early adoption consistent with normal, adaptation consistent with normal, return arrow emerging. Thesis: holding.",
  "what_would_change": [
   "METR 50% time horizon: Normal = doubling time \u2265 7 months (\u2248213 days, METR's 2019\u20132025 trend); fast = \u2264 4 months (\u2248122 days), the AI 2027 assumption. Between the two is `emerging`. The bands are about the current pace, so the input is a log-linear fit over the 2024-onward window, the most recent window METR reports (89 days in the TH1.1 post of 29 Jan 2026), recomputed from METR's corrected data. On the 2023-onward window METR's published figure is 128.7 days, in the gap between the bands: the reading is window-sensitive and both numbers are shown.",
   "METR 80% time horizon: Same bands and same 2024-onward window as the 50% horizon, applied to our own fit because METR publishes doubling times for the 50% series only. The 2023-onward fit (horizon_doubling_days_80) sits in the gap between the bands.",
