@@ -73,7 +73,7 @@ inputs:
     what: Transformers, switchgear, transmission lines and the queue to be connected. The wire between a power station and a rack of chips.
     ceiling: 40
     hand_judged_weight: 0.90
-    withheld: {kind: not_read_yet, because: "Grid operators publish their connection queues, but this site does not read them yet."}
+    withheld: {kind: no_public_series, because: "The wait to connect a large new load, such as a data centre, is what scarcity here would show up in. Only one utility has stated its wait, and only through local press, so there is no series to read."}
 
   - id: data_centres
     n: 4
@@ -106,7 +106,7 @@ inputs:
     what: The machines that print, deposit, etch and inspect chips, made by a handful of firms such as ASML.
     ceiling: 70
     hand_judged_weight: 0.60
-    withheld: {kind: not_read_yet, because: "The equipment makers file their orders and backlogs, but this site does not read them yet."}
+    withheld: {kind: gauge_unsound, because: "This site reads the equipment makers' filings, but their backlogs do not measure demand from AI: one of the largest files no backlog, and the others' backlogs fell while the AI build-out grew, following the wider chip cycle."}
 
   - id: foundry
     n: 6
@@ -242,7 +242,7 @@ inputs:
       - id: training_utilisation
         label: How fully training runs use their chips
         weight: 0.50
-        unfed: {kind: not_read_yet, because: "Epoch publishes how fully some training runs used their chips, but this site does not read that column yet."}
+        unfed: {kind: gauge_unsound, because: "Epoch lists how fully some training runs used their chips, but almost none are the largest runs this input is about, since the labs running them publish nothing, and the figures are measured against different chip speeds, so the same skill can read as twice as tight."}
 
   - id: pretraining
     n: 13
@@ -341,12 +341,20 @@ inputs:
     kind: know_how
     what: Models that carry out tasks by using software tools, for minutes or hours at a time.
     ceiling: 50
-    hand_judged_weight: 0.70
+    ceiling_rationale: "METR's tasks are software work, so the gauge sees agents in one domain only, and the growth it reads rides on the same computing power the frontier-model input reads, so the two move together."
+    hand_judged_weight: 0.40
     gauges:
+      - id: agent_horizon_growth
+        label: How fast the length of task an agent can finish doubles
+        metric: horizon_doubling_days_50_since_2024
+        weight: 0.40
+        max_age_days: 300
+        knots: [[90, 15], [140, 30], [213, 50], [400, 72], [1000, 90]]
+        scale_rationale: "METR times how long the tasks are that the best agents finish half the time, and fits how fast that length doubles. Doubling within a few months means the know-how to build agents is not what holds them back; a doubling time that stretches toward years is what a wall would look like, so a longer doubling reads tighter. The middle knot is the pace METR measured over its whole record, and the reading is a trend fitted from the start of its recent window, so one quiet release does not move it."
       - id: tool_capable_share
         label: Share of models that can use tools
-        weight: 0.30
-        unfed: {kind: not_read_yet, because: "The marketplace lists which models can use tools, but this site stores only their prices."}
+        weight: 0.20
+        unfed: {kind: gauge_unsound, because: "Most models the marketplace lists can already use tools, and the share moves with which models it chooses to list, not with whether the know-how to build agents is short."}
 
   - id: training_data
     n: 20
