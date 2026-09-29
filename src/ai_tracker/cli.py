@@ -419,6 +419,11 @@ def _check(s: st.Store) -> tuple[list[str], list[str]]:
         "SELECT subject, max(published_date) FROM observations WHERE source_ns = 'sec' AND grain = 'fy' GROUP BY 1"
     ).fetchall())
     vc_notes = vc.notes(vc_spec, load_outlook(), filed, _date.today())
+    from . import market_map
+
+    errors += market_map.problems(
+        market_map.load(), s.seed.entities, {x.id for x in s.seed.sublayers}, {i.id for i in s.seed.indicators}
+    )
     return errors + a_errors + m_errors + o_errors + b_errors + s_errors, notes + a_notes + o_notes + vc_notes
 
 

@@ -8,6 +8,7 @@
 | abridge_blog | Abridge blog | Abridge | html | 7 | irregular | Abridge; short quotation | Abridge |
 | adp_research | ADP Research, Canaries Dashboard releases | ADP Research | html | 6 | irregular | ADP Research; short quotation | Canaries Dashboard, a project of the Stanford Digital Economy Lab and ADP Research |
 | ai2027_tracker | AI 2027 Tracker (independent) | ai2027-tracker.com | html | 6 | irregular | Site terms; short quotation | AI 2027 Tracker |
+| ai_education_list | AI education and talent companies (verified list) | Slow Variables | html | 7 | irregular | Company names only; each homepage fetched | Slow Variables research sweep, 28 Sep 2026 |
 | ai_rollup_fyi | AI Roll-up Nexus company directory | ai-rollup.fyi | html | 6 | irregular | Directory; company names, sector, country and stage only, read once | AI Roll-up Nexus (ai-rollup.fyi) |
 | aifutures_blog | AI Futures Project blog | AI Futures Project | html | 7 | irregular | Substack; short quotation | AI Futures Project |
 | amazon_news | About Amazon company news | Amazon | html | 4 | irregular | Amazon; short quotation | About Amazon |
@@ -172,6 +173,7 @@
 | outsource_accelerator | Outsource Accelerator news | Outsource Accelerator | html | 5 | irregular | Short quotation | Outsource Accelerator |
 | owid | Our World in Data AI investment | Our World in Data | csv | 6 | monthly | CC BY 4.0 (OWID; underlying data AI Index / Quid) | Our World in Data, AI investment (CC BY 4.0), from the Stanford AI Index |
 | owid_context | Our World in Data context series (life expectancy, democracy, labour share) | Our World in Data | csv | 4 | annual | OWID charts CC BY 4.0; UN World Population Prospects CC BY 3.0 IGO; V-Dem CC BY-SA 4.0; ILO CC BY 4.0 | UN World Population Prospects (2024), V-Dem (2026) and the International Labour Organization, processed by Our World in Data |
+| owner_suggested_rollups | AI-native acquirers: owner-suggested (Dragonfly) plus research sweep | Slow Variables | html | 7 | irregular | Company names only; each checked on its own site for acquiring businesses and using AI | Suggested by Alex Brogan (Dragonfly); research sweep 28 Sep 2026 |
 | parallel_blog | Parallel blog | Parallel Web Systems | html | 7 | irregular | Parallel Web Systems; short quotation | Parallel Web Systems |
 | parloa_press | Parloa press releases | Parloa | html | 7 | irregular | Parloa; short quotation | Parloa |
 | pehub_feed | PE Hub feed (watchlist) | PE Hub | rss | 5 | daily | Publisher terms; titles and links only | PE Hub |
