@@ -1,0 +1,467 @@
+# The value-chain company profiles: this site's judgement, drafted by a model from each company's own filing and
+# the site's readings (scripts/value_chain_sources.py fetches the filings). Layer judgements are outlook positions
+# with a `layer`. No figures: scale comes from observations.
+companies:
+- entity: asml
+  role: candidate
+  units:
+  - vc_semis
+  market: "ASML sells lithography machines, the tools that print a chip's circuit pattern with light onto a wafer (a thin silicon disc later cut into chips), plus the service, upgrades and software that keep them running. Its most advanced line uses extreme ultraviolet light (EUV, light of a very short wavelength that can print the finest features). Its newest EUV design, High-NA (optics that gather more light, to print still finer features), has gone mostly to customers' research sites, and the filing says ASML has now released its first full-specification High-NA machine to its first customer. The filing says ASML is currently the world's only maker of EUV machines, and names Canon and Nikon as rivals only in the older deep-ultraviolet machines. Its buyers are chip factories making logic (processors) and memory. In 2025 its logic sales grew, driven by foundries (factories that make chips to other firms' designs) building for AI demand, while its memory sales fell; sales of older machines in China were stronger than it expected. ASML files a 20-F (the annual report foreign companies file with the US regulator) under IFRS, the international accounting rules, so this site's filing reader records no figures for it."
+  customers: "A small group of chip makers: the leading logic foundries and the memory makers. The filing does not name them, but says its largest customer's share of its sales rose in 2025 and that its sales lean heavily on its two largest customers. The rankings shift from year to year."
+  concentration: concentrated
+  powers:
+  - power: cornered_resource
+    why: "An exclusive arrangement with Carl Zeiss SMT, its sole supplier of optics, in which ASML holds a stake, and no EUV rival named in its own filing; this site judges the benefit is pricing and the barrier is the long joint optics work a rival would have to repeat."
+  - power: scale_economies
+    why: "This site judges that each EUV generation takes years of research spread over every machine sold, so a rival would need the same volume of sales to carry the same cost."
+  - power: switching_costs
+    why: "Customers design their factory processes around its machines and buy its service and upgrades for years after; its service and upgrade sales grew faster than machine sales in 2025, though the filing says part of that came from upgrades to installed EUV machines being counted there instead of as machine sales."
+  depends_on:
+  - chip_equipment
+  - foundry
+  - memory
+  - capital
+  - minerals
+  rent_kind: scale_network
+  appropriability: tight
+  complementary_assets: specialised
+  asset_owner: innovator
+  durability: long
+  must_be_true:
+  - "The world keeps building factories for the newest processes (the latest generations of chip-making, which print the smallest features) in logic and memory faster than old ones retire, so demand for EUV machines grows rather than just replacing worn tools."
+  - "Chip makers keep shrinking features with lithography rather than with other processes that would need fewer of its machines; the filing names competition from alternative technologies or manufacturing processes only in general terms."
+  - "High-NA EUV reaches mass production and customers adopt it on the finest layers, so the next generation is also ASML's alone."
+  - "Zeiss and ASML's other single-source suppliers can grow output fast enough that their capacity does not cap its sales for years at a time."
+  - "Export rules between the United States, the Netherlands and China do not shut it out of a large block of buyers while a state-backed rival learns to build competing machines."
+  would_disprove:
+  - "A rival, including a state-backed Chinese maker, shipping working EUV-class machines to a paying customer's factory."
+  - "Leading chip makers delaying or skipping High-NA for the finest layers and staying with older EUV plus extra patterning steps (printing the same layer more than once)."
+  - "Its largest customers cutting orders for new EUV machines while AI chip demand still rises, showing the factories were built ahead of need."
+  - "New export rules removing China from its buyers without other regions making up the older-machine sales."
+  sources:
+    market:
+    - asml_20f_2025
+    customers:
+    - asml_20f_2025
+    powers:
+    - asml_20f_2025
+    must_be_true:
+    - asml_20f_2025
+  judged_by: claude-opus-5.5
+  reviewed_by: Alex Brogan
+  reviewed: 2026-09-28
+  disclosure: null
+- entity: micron
+  role: candidate
+  units:
+  - vc_memory_networking
+  market: "Micron makes memory chips: DRAM (the working memory a processor reads and writes constantly), NAND (the storage that keeps data when power is off) and high-bandwidth memory, or HBM (DRAM dies, single chips cut from a silicon wafer, stacked and placed beside an AI chip so they can feed it data very fast). It sells to cloud firms, server makers, phone and PC makers and car makers, and reorganised in 2025 around business units, one of which serves the largest cloud buyers and holds all its HBM sales to data centres. Memory has long been a cyclical, commodity market: its 10-K (the annual report US companies file with their regulator) warns that an oversupplied market pushes prices down, and that heavy investment, including by Chinese state-backed makers, threatens oversupply. This site's filed figures show the swing: Micron made a gross loss (sales below the direct cost of making them) in 2023, and has since swung from losses to a gross margin, the share of sales kept after those costs, among the highest this site has recorded for it. How big the market becomes depends on whether AI keeps memory short, and for how long."
+  customers: "Its ten largest customers account for a large part of revenue, and the 10-K singles out one unnamed customer, mostly served by the cloud memory unit, as a large buyer. Customers are generally reluctant to sign long fixed-price contracts, so prices and volumes are renegotiated as the market moves. A 2023 Chinese government ruling bars operators of critical information infrastructure in China from buying its products."
+  concentration: concentrated
+  powers:
+  - power: scale_economies
+    why: "This site judges that a memory factory at the newest process costs so much that only a few firms can build one; the benefit holds against newcomers, but not against Samsung or SK hynix, which build at the same scale or larger."
+  depends_on:
+  - memory
+  - accelerators
+  - packaging
+  - chip_equipment
+  - capital
+  rent_kind: scarcity
+  appropriability: weak
+  complementary_assets: specialised
+  asset_owner: incumbents
+  durability: short
+  must_be_true:
+  - "AI keeps raising the amount of memory each unit of computing needs, so memory demand grows faster than the makers can add capacity, cycle after cycle."
+  - "HBM stays a different product from ordinary DRAM, bought on stacking skill and a long qualification (testing and approval) with each chip designer rather than on price per bit, the smallest unit of stored data."
+  - "Micron keeps pace with SK hynix on each new HBM generation, including HBM4, instead of arriving after the best prices are gone."
+  - "The memory makers do not all add so much capacity at once that the old glut returns."
+  - "Chinese state-backed makers such as CXMT do not reach the newest processes and flood ordinary DRAM with cheap supply."
+  would_disprove:
+  - "Memory prices and Micron's gross margin falling back toward their 2023 lows while AI spending is still rising."
+  - "Chip designers buying HBM on price alone and moving volume freely between suppliers from one generation to the next."
+  - "Micron's HBM4 reaching volume later than its rivals' or failing a major customer's qualification."
+  - "The memory makers' combined spending on new factories rising far faster than the growth in memory bits shipped."
+  sources:
+    market:
+    - micron_10k_fy25
+    customers:
+    - micron_10k_fy25
+    powers:
+    - micron_10k_fy25
+    must_be_true:
+    - micron_10k_fy25
+  judged_by: claude-opus-5.5
+  reviewed_by: Alex Brogan
+  reviewed: 2026-09-28
+  disclosure: null
+- entity: sk_hynix
+  role: candidate
+  units:
+  - vc_memory_networking
+  market: "SK hynix makes DRAM (the working memory a processor reads and writes constantly), NAND (storage that keeps data when power is off) and high-bandwidth memory, or HBM (DRAM dies, single chips cut from a silicon wafer, stacked and placed beside an AI chip so they can feed it fast). Its own results post for 2025 says record results came from AI memory, that its HBM revenue grew sharply, that demand for ordinary server memory also rose sharply, and that it was the first in the industry to complete the preparations to mass-produce HBM4, the next generation, while still supplying the previous one. It is building new factories in Korea and advanced packaging plants (where chips and memory are mounted together) in Korea and Indiana. It files no reports with the US regulator, so this site records no filed figures for it; its only source here is that short post, which is the company describing itself, not an audited filing. This site judges memory to be historically cyclical and commoditised, and a record year says nothing on its own about the next downturn."
+  customers: "The results post names no customers and gives no concentration figures. It describes demand from AI memory and from server memory and storage. That a few AI chip designers buy most HBM is this site's judgement from the market's shape, not from this source."
+  concentration: concentrated
+  powers:
+  - power: process_power
+    why: "Its post says it was the first in the industry to be ready to mass-produce HBM4 and supplies both current generations at once; this site judges the benefit is earlier orders at the best prices, and the barrier is how long it takes to learn to stack dies with good yield (the share of units that work)."
+  - power: scale_economies
+    why: "This site judges it one of three firms with DRAM factories at the newest processes; the cost of a new factory keeps newcomers out, though not its two peers."
+  depends_on:
+  - memory
+  - accelerators
+  - packaging
+  - chip_equipment
+  - capital
+  - energy
+  rent_kind: scarcity
+  appropriability: weak
+  complementary_assets: specialised
+  asset_owner: incumbents
+  durability: short
+  must_be_true:
+  - "Its lead in HBM survives each new generation, so it keeps being among the first suppliers qualified (tested and approved) by the biggest AI chip designers."
+  - "Custom HBM, memory built to one buyer's design, which its post calls a key differentiator, becomes common, turning a lead in yield into switching costs that outlast any single shortage."
+  - "AI keeps memory demand ahead of the makers' capacity, so memory prices do not fall back to their old cycle."
+  - "Its new factories and packaging plants come online without it and its rivals overbuilding at the same time."
+  - "Its largest AI chip customers keep growing and do not spread their orders evenly across the memory makers."
+  would_disprove:
+  - "Samsung or Micron qualifying HBM4 with the largest AI chip buyer at the same time and in similar volume."
+  - "HBM prices per unit falling from one generation to the next while demand still grows."
+  - "Its operating margin, the share of sales left after running costs, falling back to the levels of an ordinary memory downturn while AI spending is still rising."
+  - "Custom HBM staying rare, with buyers treating HBM as interchangeable between makers."
+  sources:
+    market:
+    - skhynix_fy25_results
+    customers:
+    - skhynix_fy25_results
+    powers:
+    - skhynix_fy25_results
+    must_be_true:
+    - skhynix_fy25_results
+  judged_by: claude-opus-5.5
+  reviewed_by: Alex Brogan
+  reviewed: 2026-09-28
+  disclosure: null
+- entity: samsung
+  role: candidate
+  units:
+  - vc_memory_networking
+  - vc_semis
+  market: "Samsung Electronics is a conglomerate. Its chip division makes DRAM (working memory), NAND (storage) and high-bandwidth memory, or HBM (DRAM dies, single chips, stacked beside an AI chip so they can feed it fast), designs phone processors and camera sensors, and runs a foundry (a factory that makes chips designed by others). It also makes phones, televisions, home appliances, displays and car electronics. Its business report for 2025 says that, with low inventory and supply constraints in memory, it expanded HBM sales, and that it aims to supply HBM4 for new AI chips, both graphics processors and custom ones. The same report, citing the research firm DRAMeXchange, shows its share of world DRAM revenue falling in both 2024 and 2025. It signed a foundry contract with Tesla running to 2033. Samsung files no reports with the US regulator, so this site records no filed figures for it; its source here is its English business report."
+  customers: "The report lists its major customers across the whole company, alphabetically: Alphabet, Apple, Deutsche Telekom, Hong Kong Techtronics and Supreme Electronics. It does not break out the buyers of its memory or HBM, which this site judges are far more concentrated than the company as a whole. The one long contract it lists is Tesla's, for foundry work."
+  concentration: diffuse
+  powers:
+  - power: scale_economies
+    why: "This site judges it one of three firms with DRAM factories at the newest processes, with cash from phones and appliances to keep building through a downturn; the barrier holds against newcomers, less so against SK hynix."
+  depends_on:
+  - memory
+  - foundry
+  - accelerators
+  - packaging
+  - chip_equipment
+  - capital
+  rent_kind: scarcity
+  appropriability: weak
+  complementary_assets: specialised
+  asset_owner: incumbents
+  durability: short
+  must_be_true:
+  - "It closes the HBM gap with SK hynix and is qualified (tested and approved) in volume by the largest AI chip designers for HBM4 and after."
+  - "AI keeps memory short for long enough that its large capacity earns scarcity prices rather than dragging prices down."
+  - "Its foundry wins more outside designs at the newest processes (the latest generations of chip-making), like the Tesla contract, so that it becomes a real second source, an alternative supplier buyers can switch orders to, to TSMC for AI chips."
+  - "Buyers value getting memory, foundry work and packaging (mounting chips and memory together) from one firm enough to pay for it."
+  - "Ordinary consumer electronics, a large part of its sales, do not absorb the gains from chips."
+  would_disprove:
+  - "Its share of world DRAM revenue falling further while memory is still short."
+  - "The largest AI chip designers qualifying HBM4 from SK hynix and Micron but taking little or none from Samsung."
+  - "Its foundry failing to win another large outside customer for its newest processes."
+  - "Memory prices falling back to their old cycle while AI spending is still rising, as its own large capacity comes online."
+  sources:
+    market:
+    - samsung_report_2025
+    customers:
+    - samsung_report_2025
+    powers:
+    - samsung_report_2025
+    must_be_true:
+    - samsung_report_2025
+    - skhynix_fy25_results
+  judged_by: claude-opus-5.5
+  reviewed_by: Alex Brogan
+  reviewed: 2026-09-28
+  disclosure: null
+- entity: nvda
+  role: club
+  units:
+  - vc_semis
+  market: "NVIDIA designs accelerators, chips built to do the huge number of simple sums that training and running AI models needs, mostly graphics processors (GPUs). It sells them as chips and as whole server racks, with the networking gear that ties many of them together and the software developers write their code against (CUDA, its programming platform). It does not make the chips itself: foundries, factories that make chips to other firms' designs, make its wafers (the silicon discs chips are cut from). Its filing says it brings out a new data-centre architecture every year. How big it can become depends, in this site's judgement, on how long the big buyers keep raising their spending on AI data centres."
+  customers: "The filing lists cloud providers, newer specialist clouds it calls neoclouds, model makers, companies and governments. Most chips reach them through server makers and assemblers, so the direct customers are middlemen. In the year to January 2026 its largest direct customer and its second largest each took a large part of revenue, and the filing says some indirect buyers, reached through those channels, were also each large enough to disclose. This site judges that those end buyers are largely the same few companies designing chips of their own."
+  concentration: concentrated
+  powers:
+  - power: switching_costs
+    why: "Years of AI code, tools and staff skills are written for CUDA, so moving to another chip means rewriting and retesting; this site's filed figures show the benefit in a gross margin (the share of sales left after the direct cost of making them) well above AMD's even as rivals shipped."
+  - power: scale_economies
+    why: "This site judges that as one of the largest buyers of wafers, advanced packaging and memory it spreads a very large research budget over the most units, and that a new architecture every year is a pace a smaller rival cannot fund from its own sales."
+  depends_on:
+  - foundry
+  - packaging
+  - memory
+  - accelerators
+  - networking
+  - energy
+  - data_centres
+  - capital
+  rent_kind: scarcity
+  appropriability: tight
+  complementary_assets: specialised
+  asset_owner: innovator
+  durability: medium
+  must_be_true:
+  - "Spending on AI data centres by the largest cloud and platform companies keeps rising into the 2030s instead of being cut back after a stretch where AI revenue fails to cover it."
+  - "Chips the big buyers design themselves (Google's, Amazon's, Meta's, and those Broadcom builds for them) stay a minority of AI computing shipped, so NVIDIA's buyers cannot replace it with their own designs."
+  - "NVIDIA's gross margin stays well above AMD's and Broadcom's after supply of chips, packaging and memory catches up with demand, which would show the rent (profit above what it takes to keep a business going, earned because something holds rivals off) rests on software lock-in and not only on shortage."
+  - "Software that lets the same model code run on any chip does not make the choice of chip a matter of price alone."
+  - "It keeps first call on the leading foundry's newest process and on advanced packaging (mounting the chip and its memory together on one base), and that foundry keeps operating in Taiwan without interruption."
+  - "Export controls stop short of shutting it out of markets beyond China, and a China-only product line is not the price of staying in the rest."
+  - "Its own lending, guarantees and equity stakes in customers stay small next to sales, so demand is paid for by buyers and not by NVIDIA's balance sheet."
+  would_disprove:
+  - "The site's non-NVIDIA share of AI computing shipped rising until chips from other designers make up most of the AI computing shipped, and still climbing."
+  - "NVIDIA's quarterly gross margin falling towards AMD's while the site's accelerator tightness word reads easing."
+  - "A top direct customer's share of revenue falling sharply in the same year that customer announces a larger own-chip deployment."
+  - "The largest cloud companies cutting capital spending quarter after quarter."
+  - "New export rules requiring licences for sales to allied countries or to the Gulf, or a new write-down of chips it cannot sell."
+  - "The site's reading of circular financing, chip makers funding the customers who buy their chips, growing faster than NVIDIA's revenue."
+  - "The site's chip makers' share of gross profit with the cloud and labs falling while chips stay short, which would undercut the view that whoever holds the scarcest input collects."
+  sources:
+    market:
+    - nvda_10k_fy26
+    customers:
+    - nvda_10k_fy26
+    powers:
+    - nvda_10k_fy26
+    must_be_true:
+    - nvda_10k_fy26
+    - broadcom_10k_fy25
+    - tsmc_20f_2025
+  judged_by: claude-opus-5.5
+  reviewed_by: Alex Brogan
+  reviewed: 2026-09-28
+  disclosure: null
+- entity: broadcom
+  role: club
+  units:
+  - vc_semis
+  market: "Broadcom sells two things. The first is chips, and in AI that means custom accelerators (chips it designs to each big buyer's own plan, which it calls XPUs) plus the Ethernet switches, network cards and optical parts that connect them. The second is infrastructure software, mostly VMware, which lets a company run many virtual computers on its own servers. Its semiconductor segment, the chip business it reports separately, brought in most of its revenue in the year to November 2025. This site judges its AI market grows if the largest buyers shift from buying NVIDIA's chips to designing their own, because Broadcom does design and production work for such buyers. This profile judges its rent for its AI chip role, custom accelerators and networking, not for VMware."
+  customers: "Hyperscalers (the handful of companies that run the largest clouds), AI data-centre builders, and OEMs (original equipment makers that build servers, switches and racks). The filing says distributors take a large part of its sales and a few end customers a large part of its revenue, and it expects that concentration to continue. It does not name the custom-chip buyers."
+  concentration: concentrated
+  powers:
+  - power: scale_economies
+    why: "It reuses the same high-speed connection circuits and packaging know-how across many customers' custom chips; this site judges the benefit is a lower cost per design than a buyer designing alone would bear, and the barrier is the volume across customers that a newcomer design partner lacks."
+  depends_on:
+  - foundry
+  - packaging
+  - memory
+  - networking
+  - data_centres
+  - capital
+  rent_kind: scale_network
+  appropriability: tight
+  complementary_assets: specialised
+  asset_owner: platforms
+  durability: medium
+  must_be_true:
+  - "Custom chips keep winning a growing share of AI computing from NVIDIA's chips, the opposite of what NVIDIA needs."
+  - "The big buyers keep paying an outside designer for that work instead of taking it in house or moving it to cheaper design partners, even as they learn to do more of it themselves."
+  - "Ethernet, an open standard, stays the way AI clusters are wired, rather than NVIDIA's own networking."
+  - "A few customers each keep ordering new generations, since losing a single programme would hit its AI revenue hard."
+  - "Wafers at the newest processes, advanced packaging (mounting a chip and its memory together) and high-bandwidth memory (memory stacked beside the chip so it can feed it fast) stay available to it, which today means the Taiwan foundry."
+  would_disprove:
+  - "A named hyperscaler announcing that its next accelerator generation will be designed in house or with another design partner."
+  - "The top five end customers' share rising while AI chip revenue falls, meaning dependence is deepening as the business shrinks."
+  - "The semiconductor segment's operating margin, the share of sales left after running costs, falling while AI chip revenue grows, a sign buyers are winning the price talks."
+  - "NVIDIA's networking taking the larger share of new AI clusters' switch spending."
+  sources:
+    market:
+    - broadcom_10k_fy25
+    customers:
+    - broadcom_10k_fy25
+    powers:
+    - broadcom_10k_fy25
+    must_be_true:
+    - broadcom_10k_fy25
+    - nvda_10k_fy26
+    - tsmc_20f_2025
+  judged_by: claude-opus-5.5
+  reviewed_by: Alex Brogan
+  reviewed: 2026-09-28
+  disclosure: null
+- entity: amd
+  role: candidate
+  units:
+  - vc_semis
+  market: "AMD sells processors for servers (EPYC), AI accelerators (Instinct, graphics processors, or GPUs, built for AI), chips for personal computers and games consoles, and programmable chips for industry. It offers rack-scale designs for AI and its own open software platform, ROCm, to compete with NVIDIA's CUDA, the software developers write AI code against. This site judges it the main other seller of general-purpose AI accelerators besides NVIDIA, and that its AI market is whatever share buyers give to a second source, an alternative supplier they can switch orders to: large if buyers want to stop depending on one supplier, small if NVIDIA and custom chips split the market between them."
+  customers: "Large cloud companies, server makers and assemblers. The filing says a small number of customers account for a substantial part of revenue. In October 2025 it signed an agreement with OpenAI to deploy a very large amount of its GPUs, measured by the electricity they will draw, and at the same time issued OpenAI a warrant, a right to buy AMD shares at a nominal price, that vests as OpenAI meets GPU purchase milestones and AMD's share price hits targets."
+  concentration: moderate
+  powers: []
+  depends_on:
+  - foundry
+  - packaging
+  - memory
+  - accelerators
+  - energy
+  - data_centres
+  - capital
+  rent_kind: scarcity
+  appropriability: tight
+  complementary_assets: specialised
+  asset_owner: incumbents
+  durability: short
+  must_be_true:
+  - "It earns a lasting advantage it does not hold today: its open software and lower-priced racks, sold to buyers who want a second supplier, become counter-positioning (a model NVIDIA could copy only by cutting its own margins) once they show in AMD's gross margin, the share of sales left after the direct cost of making them."
+  - "Buyers want a second general-purpose accelerator supplier badly enough to give it a large, lasting share, rather than filling that role with their own custom chips."
+  - "Its open software becomes good enough that moving code off CUDA costs little, which would erode NVIDIA's switching costs."
+  - "The OpenAI agreement is delivered on time and paid for. Because the warrant hands OpenAI AMD shares as it buys GPUs, this site reads it as close to vendor financing, a seller funding its buyer's purchases, so the deal must still pay once those shares are counted as part of the price, and must not leave AMD overly dependent on one buyer whose own finances are unproven."
+  - "It keeps winning server processor share from Intel and holds off processors built on Arm designs (a rival chip blueprint licensed to many firms) by the cloud companies themselves."
+  - "It keeps enough of the Taiwan foundry's capacity at the newest processes and of its advanced packaging (mounting a chip and its memory together), where it competes for the same slots as NVIDIA and Broadcom."
+  - "Export controls leave the markets outside China open; the filing records an inventory charge after a product for China needed an export licence."
+  would_disprove:
+  - "Its data centre segment growing more slowly than NVIDIA's data centre revenue for years running."
+  - "The OpenAI deployment being delayed, shrunk or renegotiated."
+  - "OpenAI's GPU purchases meeting the warrant's milestones without AMD's gross margin rising, showing the volume was bought with its own shares."
+  - "Its gross margin failing to rise towards NVIDIA's as accelerators become a larger part of sales."
+  - "The site's non-NVIDIA share of AI computing rising while AMD's share within it falls, meaning custom chips took the second-source role."
+  - "Major cloud companies' own Arm server processors taking share from both AMD and Intel."
+  sources:
+    market:
+    - amd_10k_fy25
+    customers:
+    - amd_10k_fy25
+    must_be_true:
+    - amd_10k_fy25
+    - tsmc_20f_2025
+  judged_by: claude-opus-5.5
+  reviewed_by: Alex Brogan
+  reviewed: 2026-09-28
+  disclosure: null
+- entity: tsmc
+  role: club
+  units:
+  - vc_semis
+  market: "TSMC is a foundry, a company that manufactures chips other firms design, printing them on wafers (thin silicon discs later cut into chips). It also does the advanced packaging (CoWoS and SoIC, ways of mounting a processor and its memory together on one base) that AI accelerators need. High-performance computing, which includes AI chips, made up most of its revenue in 2025, and chips at its most advanced nodes (its newest manufacturing processes, which print the smallest features) made up most of its wafer revenue. Its filing calls its scale and capacity, particularly for advanced technologies, a major competitive advantage. This site judges its market grows with every chip designer's AI demand, whoever among them wins. TSMC files a 20-F (the annual report foreign companies file with the US regulator) under IFRS, the international accounting rules, so this site's filing reader records no filed figures for it."
+  customers: "Many customers, but its ten largest took most of its revenue in 2025, a share that has risen each year since 2023, while its single largest customer's share fell over the same years. The filing does not name them. The NVIDIA, Broadcom and AMD filings each name TSMC among the foundries that make their wafers."
+  concentration: concentrated
+  powers:
+  - power: scale_economies
+    why: "Its filing calls its scale and capacity at advanced technologies a major competitive advantage; this site judges that a factory for the newest process costs so much that only the foundry with the most such orders can fill one."
+  - power: process_power
+    why: "This site judges it brings new processes to high yield (the share of working chips per wafer) faster than rivals, learning that takes years; its filing notes that others have invested heavily to compete."
+  - power: switching_costs
+    why: "This site judges that a chip is designed to one foundry's rules, so moving costs a redesign and many months, and that packaging ties the chip to the same supplier."
+  depends_on:
+  - chip_equipment
+  - energy
+  - minerals
+  - packaging
+  - capital
+  rent_kind: scale_network
+  appropriability: tight
+  complementary_assets: specialised
+  asset_owner: innovator
+  durability: long
+  must_be_true:
+  - "No blockade, conflict or political settlement across the Taiwan Strait stops or controls its Taiwan factories, where most of its capacity for the newest processes still sits."
+  - "Its factories in Arizona, Japan and Germany reach yields and costs close enough to Taiwan's that shifting output there does not cut deep into its margins."
+  - "Intel's and Samsung's foundries stay behind at the newest process, so no second source, an alternative supplier, is good enough for AI chip designers to split their orders."
+  - "Demand for wafers at the newest processes keeps growing into the 2030s; unlike its customers, it does not need any one chip designer to win, only that the total grows."
+  - "Taiwan keeps supplying enough electricity and water for new factories, which the filing lists among its risks."
+  - "Tariffs and US policy do not force it to build or price in ways that erase the cost edge of its Taiwan base."
+  would_disprove:
+  - "Any interruption to shipping or factory operation in Taiwan lasting weeks."
+  - "A leading AI chip designer moving its flagship accelerator to Intel or Samsung at the newest process."
+  - "Overseas factories diluting its gross margin, the share of sales left after the direct cost of making them, year after year instead of converging."
+  - "The ten largest customers' share of revenue falling while total revenue falls, meaning big designers are leaving and not being replaced."
+  - "Power rationing or water shortages in Taiwan delaying new factories."
+  - "Its yearly gross margin falling for years running while the site's foundry tightness word reads easing."
+  sources:
+    market:
+    - tsmc_20f_2025
+    customers:
+    - tsmc_20f_2025
+    - nvda_10k_fy26
+    - broadcom_10k_fy25
+    - amd_10k_fy25
+    powers:
+    - tsmc_20f_2025
+    must_be_true:
+    - tsmc_20f_2025
+  judged_by: claude-opus-5.5
+  reviewed_by: Alex Brogan
+  reviewed: 2026-09-28
+  disclosure: null
+sources:
+- id: amd_10k_fy25
+  entity: amd
+  url: https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm
+  form: 10-K
+  filed: 2026-02-04
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: c46b390ba12c3e3eb0736eb93cca81d47e030f2732bd872317cec1e88b832046
+- id: asml_20f_2025
+  entity: asml
+  url: https://www.sec.gov/Archives/edgar/data/937966/000162828026011378/asml-20251231.htm
+  form: 20-F
+  filed: 2026-02-25
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 154eead30793979eea48211e99730936940b4cadba3ac3c9953fb5dd75ac3b19
+- id: broadcom_10k_fy25
+  entity: broadcom
+  url: https://www.sec.gov/Archives/edgar/data/1730168/000173016825000121/avgo-20251102.htm
+  form: 10-K
+  filed: 2025-12-18
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 7b293dcf66c1b4a553d421b15ebeb1940deeb615235f7888197d1af568276da3
+- id: micron_10k_fy25
+  entity: micron
+  url: https://www.sec.gov/Archives/edgar/data/723125/000072312525000028/mu-20250828.htm
+  form: 10-K
+  filed: 2025-10-03
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 29ab42c87210200bef5f66c3d666a7f01da1ea09952ab485979e8d1155d0b961
+- id: nvda_10k_fy26
+  entity: nvda
+  url: https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm
+  form: 10-K
+  filed: 2026-02-25
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: e24bbefa3ac9e4b1f79bc2f9194e8535132318f1b3ed4efe428a99db637a6a7b
+- id: samsung_report_2025
+  entity: samsung
+  url: https://images.samsung.com/is/content/samsung/assets/global/ir/docs/2025_4Q_Interim_Report.pdf
+  form: business-report
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 626dd527bb25dc1ffd7ce72d84a0ded10f4d8f3daa0352d6c6b6be07c3eae73a
+  period_end: 2025-12-31
+- id: skhynix_fy25_results
+  entity: sk_hynix
+  url: https://news.skhynix.com/en/sk-hynix-announces-fy25-financial-results/
+  form: company-post
+  filed: 2026-01-28
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 581a8e28f3db3a5daaf58d71ec5a29718113bd890af8222b1f3b535a4912e864
+- id: tsmc_20f_2025
+  entity: tsmc
+  url: https://www.sec.gov/Archives/edgar/data/1046179/000162828026025362/tsm-20251231.htm
+  form: 20-F
+  filed: 2026-04-16
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 24db0a3c9ed2dbcb117a818e9e0a29af26fb5759a000742b774f3b4a1871e079

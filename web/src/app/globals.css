@@ -171,3 +171,10 @@ body:has(.ask-shell) {
   & #ask-q:focus-visible { outline: none; } /* the composer's own ring shows focus */
   & p { max-width: none; } /* the answer runs the column's width, like the bubble and the composer */
 }
+
+/* the predictions board's word filter: CSS only, one rule per word (every forecast stays in the page) */
+.board-filter:has(#bw-happening:checked) li[data-word]:not([data-word="happening"]),
+.board-filter:has(#bw-not_happening:checked) li[data-word]:not([data-word="not_happening"]),
+.board-filter:has(#bw-slower:checked) li[data-word]:not([data-word="slower"]),
+.board-filter:has(#bw-both:checked) li[data-word]:not([data-word="both"]) { display: none; }
+.board-filter:has(input[name="board-word"]:not(#bw-all):checked) details:has(> ul li[data-word="too_early"]) { display: none; }

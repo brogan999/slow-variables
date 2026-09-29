@@ -2030,6 +2030,7 @@
    "unit": "share",
    "value": 0.45
   },
+  "app_rr_growth": null,
   "capex_to_revenue": {
    "as_of": "2026-06-30",
    "derived_id": "7867e6c6b3b7fe32",
@@ -2157,6 +2158,8 @@
    "unit": "share",
    "value": 0.23800000000000002
   },
+  "front_door_hhi": null,
+  "front_door_hhi_year_ago": null,
   "frontier_lab_count": {
    "as_of": "2026-09-01",
    "derived_id": "a0894d5de87cd8cc",
@@ -2303,6 +2306,7 @@
    "unit": "days",
    "value": 107.9898433739735
   },
+  "inference_rr_growth": null,
   "insurer_ledger": {
    "as_of": "2026-07-20",
    "derived_id": "552b114ffb752722",
@@ -2396,6 +2400,24 @@
    "value": 46.0
   },
   "lab_deals_year_ago": null,
+  "lab_rr_growth": {
+   "as_of": "2026-06-30",
+   "derived_id": "274e1fab3662494f",
+   "holds": null,
+   "href": "/query#run_rate_growth_by_layer",
+   "obs_ids": [
+    "143dcf3ea59eb522",
+    "1f3af8f3789bcc56",
+    "3f90e5b58783d1e1",
+    "46820cf03ef990ef",
+    "4910df35443940aa",
+    "679716d10d9a82fa",
+    "69de1ab8b7416221",
+    "9fbab158355685d5"
+   ],
+   "unit": "share",
+   "value": 4.086695386343784
+  },
   "labour_share_yoy": {
    "as_of": "2026-06-30",
    "derived_id": "c73a9c96e3a26d27",
@@ -2407,6 +2429,58 @@
    ],
    "unit": "share",
    "value": -0.03388025598875144
+  },
+  "labs_gp_share": {
+   "as_of": "2026-06-30",
+   "derived_id": "e4885039980b94e3",
+   "holds": null,
+   "href": "/indicators/gross_profit_semis_share",
+   "obs_ids": [
+    "0b6d0c8c368c7937",
+    "1a2c7e77a3879f2b",
+    "2a23fc81cd16d222",
+    "2d9a42587abe262f",
+    "4910df35443940aa",
+    "5940a28208892eaf",
+    "5b9948898bd3d1b5",
+    "62adf9bfc68ef6e2",
+    "76757aa09406f17b",
+    "77e6d896399b59a9",
+    "924a29d474713fc2",
+    "9fbab158355685d5",
+    "aca02d0b916a89dd",
+    "c277318418142d0c",
+    "d575d683afd39e24",
+    "fc044aaf57883098"
+   ],
+   "unit": "share",
+   "value": 0.06585022371546541
+  },
+  "labs_gp_share_year_ago": {
+   "as_of": "2025-06-30",
+   "derived_id": "0f827fb789485017",
+   "holds": null,
+   "href": "/indicators/gross_profit_semis_share",
+   "obs_ids": [
+    "0b6d0c8c368c7937",
+    "1a2c7e77a3879f2b",
+    "2a23fc81cd16d222",
+    "2d9a42587abe262f",
+    "2f92f53cc755dbc0",
+    "3d20f8962324d4e8",
+    "460a7d82798ce213",
+    "46820cf03ef990ef",
+    "4914dc73308bc047",
+    "650a22847cd7c90c",
+    "78e3a8bb65070e37",
+    "93466332e820e7d6",
+    "acdfb47d238a8057",
+    "d71a32c414d72e0b",
+    "f44a045f53a7a770",
+    "f683716fdcff362b"
+   ],
+   "unit": "share",
+   "value": 0.022444692305926783
   },
   "msft_backlog": {
    "as_of": "2026-06-30",
@@ -3860,6 +3934,106 @@
    "rival": "barbell",
    "title": "The conglomerate comes back",
    "visible": false
+  },
+  {
+   "attribution": "site",
+   "bottlenecks": [
+    "accelerators",
+    "foundry",
+    "chip_equipment",
+    "packaging"
+   ],
+   "case": "NVIDIA and AMD take [fact:chips_gp_share] of the gross profit (sales minus the direct cost of making them) that this site can measure across chips, one cloud and the leading labs; that share is up on the year, though it slipped in the latest quarter. Yet chips from other designers already make up [fact:silicon_share_now] of the AI computing shipped so far, including custom chips that Broadcom and others build for large cloud and model companies. TSMC's filing calls its scale and capacity, particularly for advanced processes (the newest generations of chip-making, which print the smallest features), a major competitive advantage, and its biggest customers as a group have taken a larger part of its revenue each year since 2023, even as its single largest customer's share fell. ASML says it is currently the world's only maker of extreme-ultraviolet (EUV) lithography machines, which print the finest features with light of a very short wavelength, and that one supplier, Carl Zeiss, makes all their optics and limits how many it can build. Against this unit, this site reads foundry supply as easing: TSMC's capacity is catching up with demand. That undercuts the title's claim for the foundry only if the easing reaches TSMC's own prices and margins, which this site cannot yet see, since TSMC files under international accounting rules this site's filing reader does not read. The three designers' own conditions do not collide: NVIDIA's, Broadcom's and AMD's can all hold at once until chips from other designers make up most of the AI computing shipped.",
+   "commoditising": "Chips made on older processes are cheap and interchangeable; TSMC's own filing says rivals in those processes are numerous. This site judges that the cost of a unit of computing keeps falling with each chip generation, and that the general-purpose AI chip is being copied from below: every large buyer that designs its own chip, often with Broadcom's help, turns part of NVIDIA's market into a price to negotiate. William Nordhaus, an economist who measured how much of the value of new inventions their makers keep as profit, found that it is a small part; most goes to buyers as lower prices and better products.",
+   "converts_if": "For the designer: its software (for NVIDIA, CUDA, the platform developers write AI code against) and its whole-rack systems with their own links between chips keep buyers even when rival chips are plentiful and cheaper, turning a shortage rent into switching costs, what a customer would lose by moving to a rival. For the foundry and the toolmaker: they keep a lead at each new process, so their scale and process power outlive the AI shortage.",
+   "direction": "holding",
+   "folio": "value",
+   "holders": [],
+   "id": "vc_semis",
+   "kill_shot": "NVIDIA keeping both its share of AI chip supply and its gross margin while AMD's chips and the custom chips ship in volume and wafer supply at the newest processes keeps growing fast; or a second foundry making AI chips at the newest process in volume for a major designer.",
+   "layer": "compute_physical",
+   "mechanism": "Three kinds of firm make AI chips. Designers such as NVIDIA, AMD and Broadcom draw them; a foundry (a factory that makes chips to other firms' designs), above all TSMC, prints them onto wafers (thin discs of silicon, each later cut into many chips); and toolmakers such as ASML build the machines that do the printing. Eliyahu Goldratt, a physicist who studied factories, found that a system runs at the pace of its slowest part. David Ricardo, an English economist who asked in 1817 why landlords grew rich when bread grew dear, found that the owner of the scarcest input collects a rent: profit above what it takes to keep a business going, earned because something holds rivals off. So while buyers cannot get enough chips, the designer they most want takes the rent. This site judges that as more chips arrive and the biggest buyers design their own, that rent is exposed, while the foundry and the toolmaker keep theirs for as long as no rival can match what they do.",
+   "powers": [
+    "cornered_resource",
+    "scale_economies",
+    "process_power",
+    "switching_costs"
+   ],
+   "rival": "glut_somewhere",
+   "sources": [
+    "asml_20f_2025",
+    "broadcom_10k_fy25",
+    "tsmc_20f_2025"
+   ],
+   "stays_scarce": "This site judges that capacity at the newest processes, and the machines that print it, stay scarce. A new factory for the newest process takes years to build and the skill to run it takes longer. Hamilton Helmer, a strategy consultant who studied why some firms keep earning more than their investors could expect elsewhere, found that a lasting advantage is a benefit behind a barrier, and named the kinds that recur. Two apply here: process power (a way of working that takes rivals years to learn) and scale economies (unit costs that fall as volume grows, so a rival must match the volume to match the cost). The EUV machines have one maker, fed by one optics supplier: a cornered resource, Helmer's term for preferential access to something others need, which does not ease when chips do.",
+   "sublayer": "semis",
+   "title": "The chip designer's lead is a shortage profit; the foundry's and the toolmaker's are harder to copy",
+   "visible": false
+  },
+  {
+   "attribution": "site",
+   "bottlenecks": [
+    "memory",
+    "networking",
+    "packaging"
+   ],
+   "case": "SK hynix reported record results for 2025, with HBM revenue growing sharply and demand for ordinary server memory rising sharply too. Samsung describes low inventory and supply constraints in memory. This site's tightness word for memory reads moderate, though memory is counted in dollars, so a price rise looks like more memory. Micron's own filing warns that if HBM demand weakens and makers shift capacity back to ordinary DRAM, its supply could rise sharply, and that an oversupplied market pushes prices down; it also names Chinese state-backed makers, CXMT and YMTC, among the causes of that risk.",
+   "commoditising": "Ordinary memory, the kind in phones and laptops, is a textbook commodity: identical parts, several makers, and prices that swing with each wave of new factories. Networking built to open standards such as Ethernet, which Broadcom sells to the largest cloud and model companies, is interchangeable by design. Eliyahu Goldratt, a physicist who studied factories, found that a system runs at the pace of its slowest part, and David Ricardo, an English economist who studied why landlords grew rich when bread grew dear, found that the owner of the scarcest input collects a rent: profit above what it takes to keep a business going, earned because something holds rivals off. On their account the rent in memory lasts only until the makers build their way out, and SK hynix says it is building new factories in Korea.",
+   "converts_if": "Custom HBM, memory built to one buyer's design, which SK hynix calls a key differentiator, becomes the norm, so each chip generation is locked to one maker and switching costs replace the shortage. Hamilton Helmer, a strategy consultant who studied why some firms keep earning more than rivals, named switching costs, what a customer would lose by moving to a rival, as one of the lasting advantages he found. In networking, the rent lasts only if NVIDIA's own links stay faster than open standards by enough that buyers accept being tied to one vendor.",
+   "direction": "holding",
+   "folio": "value",
+   "holders": [],
+   "id": "vc_memory_networking",
+   "kill_shot": "Memory makers keeping record margins through a year in which all three add HBM capacity faster than AI chip shipments grow and ordinary memory prices fall.",
+   "layer": "compute_physical",
+   "mechanism": "An AI chip is only as fast as the memory that feeds it. High-bandwidth memory, or HBM, is DRAM (the working memory a processor reads and writes constantly) cut into dies (single chips), stacked and placed beside the processor so data reaches it quickly. This site counts three makers: SK hynix, Samsung and Micron. Micron's filing says HBM needs more wafers (the silicon discs chips are cut from) and more factory space than ordinary DRAM for the same amount of memory, so when AI demand runs ahead the makers profit, and if it weakens they can turn the same factories back to ordinary memory. Networking, the switches, cables and light-based links that join many chips into one machine, splits in two: NVIDIA's own links, which tie buyers to its systems, and gear built to open standards, which any maker can supply.",
+   "powers": [
+    "scale_economies",
+    "process_power",
+    "cornered_resource"
+   ],
+   "rival": "no_glut",
+   "sources": [
+    "broadcom_10k_fy25",
+    "micron_10k_fy25",
+    "nvda_10k_fy26",
+    "samsung_report_2025",
+    "skhynix_fy25_results"
+   ],
+   "stays_scarce": "This site judges that what stays scarce is the skill to stack dies with good yield (the share of units that work) and to be qualified (tested and approved) by a chip designer for its next product; a newcomer would need both, and this site judges they take longer to learn than one product generation. NVIDIA's own links between chips stay scarce because only NVIDIA makes them, though its filing says it now lets other firms' chips connect to them.",
+   "sublayer": "memory_networking",
+   "title": "High-bandwidth memory is a cyclical commodity earning a shortage's price",
+   "visible": false
+  },
+  {
+   "attribution": "site",
+   "bottlenecks": [
+    "energy",
+    "grid",
+    "data_centres"
+   ],
+   "case": "This site reads electricity as severe and data-centre buildings as tight, though the electricity reading measures only how fast demand grows, not supply. The biggest cloud and platform companies spend [fact:capex_to_revenue] as much a year on buildings and equipment as AI earns in revenue, so money is not what is short; this site reads capital as slack. TSMC's filing names constraints in power supply among the things that could slow demand for its chips. Against this unit, power generated on site beside the data centre, and chips that do more work for each unit of electricity, would both loosen the grid's hold. The wait to be connected is the gauge that would show the shortage directly, and this site knows of no public series for it.",
+   "commoditising": "This site judges that the building itself, the shell, the racks and much of the cooling, follows standard designs that many contractors can put up, and that money for the build-out is plentiful. David Teece, an economist who studied why the firm that invents something often fails to keep the returns, called the inputs an innovation needs to reach its customers complementary assets; generic ones, which anyone can buy, earn an ordinary return, not a rent.",
+   "converts_if": "Holders of connected sites and running power stations lock their buyers into long contracts at prices set during the shortage, or regulators let utilities earn a guaranteed return on new lines built for data centres, turning a shortage rent into a regulated one. It fails to convert if power built on site, beside the data centre and off the grid, proves quick and cheap.",
+   "direction": "tightening",
+   "folio": "value",
+   "holders": [],
+   "id": "vc_dc_power",
+   "kill_shot": "New large sites being connected to the grid about as fast as they are built, with the rent for powered data-centre space falling while use keeps rising.",
+   "layer": "compute_physical",
+   "mechanism": "A data centre needs three things: a building, money, and electricity delivered through a grid connection. This site judges that buildings and money can be had quickly, while a new connection means waiting for the utility to add lines and transformers, and new power stations take years. Eliyahu Goldratt, a physicist who studied factories, found that a system runs at the pace of its slowest part; David Ricardo, an English economist who studied why landlords grew rich when bread grew dear, found that the owner of the scarcest input collects a rent: profit above what it takes to keep a business going, earned because something holds rivals off. So, in this site's judgement, the rent goes to whoever already holds land with power and a connection. Much of that input sits with utilities whose prices a regulator sets, so they cannot charge what the shortage is worth; this site judges that the rent leaks instead to owners of connected sites and of power stations already running.",
+   "powers": [
+    "cornered_resource",
+    "scale_economies"
+   ],
+   "rival": "money_runs_out",
+   "sources": [
+    "tsmc_20f_2025"
+   ],
+   "stays_scarce": "This site judges that grid connections, heavy electrical gear such as large transformers and turbines, and the electricians and other trades who install them stay scarce. A connection is close to a licence: a utility grants it under a regulator's rules and it cannot be copied, which makes it what Hamilton Helmer, a strategy consultant who studied lasting advantages, calls a cornered resource: preferential access to something others need. Ronald Coase, an economist who studied why some work is done inside firms rather than bought, and Oliver Williamson, who studied contracts and found that a buyer who depends on an asset built for it can be squeezed by whoever owns it, would expect the largest buyers to own such assets or lock them up in long contracts.",
+   "sublayer": "dc_power",
+   "title": "A site already wired to the grid is scarcer than the building or the money",
+   "visible": false
   }
  ],
  "scenarios": {
@@ -4091,6 +4265,480 @@
    {
     "id": "licensed",
     "label": "Oversight comes first"
+   }
+  ]
+ },
+ "shifts": {
+  "foot_claims": [
+   {
+    "id": "chips_collect",
+    "state": "both"
+   }
+  ],
+  "grounded_in": [
+   "up_the_stack",
+   "distribution_wins"
+  ],
+  "places": [
+   {
+    "arriving": {
+     "holds": true,
+     "says": "the labs' share of gross profit is above a year before"
+    },
+    "claims": [
+     {
+      "id": "gap_stays_short",
+      "state": "both"
+     }
+    ],
+    "id": "model",
+    "leaving": {
+     "holds": false,
+     "says": "open models trail the best closed one by under three months"
+    },
+    "name": "The model",
+    "readings": [
+     {
+      "as_of": "2026-06-30",
+      "derived_id": "e4885039980b94e3",
+      "holds": null,
+      "href": "/indicators/gross_profit_semis_share",
+      "id": "labs_gp_share",
+      "label": "the labs' share of the stack's gross profit, estimated",
+      "obs_ids": [
+       "0b6d0c8c368c7937",
+       "1a2c7e77a3879f2b",
+       "2a23fc81cd16d222",
+       "2d9a42587abe262f",
+       "4910df35443940aa",
+       "5940a28208892eaf",
+       "5b9948898bd3d1b5",
+       "62adf9bfc68ef6e2",
+       "76757aa09406f17b",
+       "77e6d896399b59a9",
+       "924a29d474713fc2",
+       "9fbab158355685d5",
+       "aca02d0b916a89dd",
+       "c277318418142d0c",
+       "d575d683afd39e24",
+       "fc044aaf57883098"
+      ],
+      "unit": "share",
+      "value": 0.06585022371546541
+     },
+     {
+      "as_of": "2026-09-09",
+      "holds": null,
+      "href": "/indicators/open_weights_lag_months",
+      "id": "open_lag",
+      "label": "how far open models trail the best closed one",
+      "obs_ids": [
+       "0d7f85d31686010b",
+       "4a5ecf6f5e9ad21f",
+       "da57bc3c9519e42e"
+      ],
+      "unit": "months",
+      "value": 6.176084099868594
+     },
+     {
+      "as_of": "2026-09-11",
+      "derived_id": "47feb1dfe0978bab",
+      "holds": true,
+      "href": "/query#closed_over_open_price_premium",
+      "id": "open_premium",
+      "label": "what closed models charge over open ones at the same skill",
+      "obs_ids": [
+       "01c57c4e92f7b82c",
+       "0247986df6beb18b",
+       "0418837f7cf4a663",
+       "052ce63f1ee72b82",
+       "06299522b386b574",
+       "0990f01fe04991c7",
+       "0b9e0d85fc1ad184",
+       "0d7f85d31686010b",
+       "0ddbc3e75feeb684",
+       "0e0fc99451cad7f3",
+       "131cd97ff184ddce",
+       "180de92690c54711",
+       "18b9535bfbe6633e",
+       "18d2a2c4eda67b21",
+       "1c6e2047e5bb44c5",
+       "1ccd93c2ba0fbefe",
+       "1f32d68d0f6fae7c",
+       "1f90e11f1768f1a2",
+       "2181c5e34652c7ba",
+       "237e985e770d8c70",
+       "2746b550fb3d959e",
+       "27698d681f0f2526",
+       "2849797c95f0e4a3",
+       "2a8736d1c9d7534a",
+       "2b872a0b0edeacb3",
+       "2f4152a882414b80",
+       "32afa984136f400c",
+       "3819e10b2c2238c4",
+       "3883d40c0c495dda",
+       "3bacbcbc853dde00",
+       "3d32c6dc42b3e585",
+       "3dbcb8cc06545d8e",
+       "3f1c7d15e5705113",
+       "3f3bafe87c5ccfad",
+       "415152836bce0e7a",
+       "453d49ab58c58d0e",
+       "484a1d671632dbdc",
+       "48563380e852b865",
+       "48c98e6a12c26d92",
+       "48e5e3a8afc7834e",
+       "4a5ecf6f5e9ad21f",
+       "4af818650637ec04",
+       "4b5de4662c4695b0",
+       "4dc14966662a3bed",
+       "5045aaf55f4c31ed",
+       "508ff167c0303b94",
+       "523082f27502799e",
+       "5c2a78a6504b890e",
+       "5c3ed910e7395655",
+       "5d21605ca53f3a26",
+       "5ea1d7fcfebf1b75",
+       "5ea45e54527a0fdc",
+       "5ea8b86885c78cb2",
+       "60087267863c64ae",
+       "63f0c6b6a75c6518",
+       "69ed2f27021bf2c4",
+       "6aacb11e0694e292",
+       "6b2d2074454dcaa2",
+       "6baf88c14fbb049c",
+       "7c63598a1b33cf92",
+       "7cfb8155c306cf31",
+       "7db304d964d71d82",
+       "7eab00d7507a37b9",
+       "7fbf05f510ae917d",
+       "828b17a77e72ffdd",
+       "8445390d748dca03",
+       "850db603858bdd7a",
+       "873a64c19a32f221",
+       "8762090aae40ef0a",
+       "880cea19ba89e295",
+       "90c05fe6abc1f708",
+       "91f74a5b88f425e4",
+       "93b1a8e335dc6fed",
+       "99e221e04d70e7d4",
+       "9c1e00214da5e97a",
+       "9dd7f2be45b90a9b",
+       "a1cfe84cd4dae921",
+       "a2a2930dfccffd96",
+       "a2a707169fba28a5",
+       "a550ed2df2db3909",
+       "a84d6eba2b876012",
+       "a9427648f9217f2a",
+       "aa1d53157869dce4",
+       "aa97419ce82ef992",
+       "aba82f7b09481092",
+       "ac29a3d2303a08a6",
+       "ac3d765b2c5dce04",
+       "b263bcde4d48bd92",
+       "b8d45b879c539c80",
+       "b8e2e5f9174df47e",
+       "bc717d97d18b182f",
+       "bd22bb1112ffd942",
+       "bd473cbc31ad2c93",
+       "be1b87ba372c7cf8",
+       "be714fe5d8dd23cb",
+       "c322b21dbbfdf461",
+       "c3522ca1b398c681",
+       "c5d4c8482c5a32c7",
+       "c796f92ab1815a53",
+       "cabb102362dbe2ef",
+       "cc17b95bc8e5855b",
+       "ccebbc353eb81105",
+       "cd207a358c41c529",
+       "cdc0a47aa92bed45",
+       "cee9d7cb62822c6d",
+       "ceedfe6c3f03c6f8",
+       "d25dad6ac63ff921",
+       "dac3d9444956aa8f",
+       "dc15e66b91629f5d",
+       "dc6655938d37ddf3",
+       "deac11ed6f58b10d",
+       "e046c32c720cf75f",
+       "e126d052291b6bf0",
+       "e1553fe3ae809107",
+       "e4c75bccf1506d00",
+       "e4d86a18b762bf44",
+       "e6a4eef22a23afa0",
+       "e7dbedf940716ebb",
+       "eaeb03ee334f3a26",
+       "eda47ea6a0f4e33d",
+       "f50b07d5b63b6257",
+       "f87a13b13886498b",
+       "f9df6048ae5168fa",
+       "fe4cbe2e37d29300",
+       "fe63dc72ee476787",
+       "ffbdfdf5e9f63ccc"
+      ],
+      "unit": "ratio",
+      "value": 0.45435779816513766
+     },
+     {
+      "as_of": "2026-09-27",
+      "derived_id": "86b0914812fb29a4",
+      "holds": null,
+      "href": "/query#open_share_of_routed_tokens",
+      "id": "open_share",
+      "label": "open models' share of routed tokens",
+      "obs_ids": [
+       "025baee5c67d8593",
+       "05ca16becd23d9eb",
+       "08107b7979983537",
+       "09c617bbddca976b",
+       "0ede0f38259a20ba",
+       "115c9fe5d86e4849",
+       "1b4377dc73c16fe5",
+       "20c99a8c45b6e954",
+       "260fda2e15e97284",
+       "27ceee6755d27093",
+       "2bb5a68c3df3e356",
+       "2fa86ab54e9ecdee",
+       "39b39ff738f8ab9c",
+       "42990934ecf838c9",
+       "43e5c7e2bc9ebbc3",
+       "58b329722aea1bfb",
+       "7921131db8ee46e3",
+       "81325042cbbd3243",
+       "851e78a3cfac327b",
+       "89c765c054a44384",
+       "92e5649c573304b8",
+       "a3920e8e5545bf03",
+       "b459df5ceaaff8cd",
+       "b55875b536bf8f68",
+       "b9f309bf1eed6154",
+       "c986c09dcc97172b",
+       "d9a35d4b1e470786",
+       "e7e7b7a55793451d",
+       "eb5d315c9886d441",
+       "f056c984ba897403",
+       "fd3b61b363d6e5e2"
+      ],
+      "unit": "share",
+      "value": 0.6804542211468008
+     }
+    ],
+    "scarce": "Only a handful of labs can build the best models, and buyers pay for the gap to the next best.",
+    "squeezed_by": "Open models closing the gap, and cheaper models good enough for most work.",
+    "state": "arriving",
+    "sublayers": [
+     {
+      "href": "/stack/frontier_labs",
+      "id": "frontier_labs",
+      "name": "Frontier labs"
+     },
+     {
+      "href": "/stack/neolabs",
+      "id": "neolabs",
+      "name": "Neolabs (founded 2023+)"
+     },
+     {
+      "href": "/stack/open_weight_labs",
+      "id": "open_weight_labs",
+      "name": "Open-weight & Chinese labs"
+     }
+    ],
+    "word": "Money arriving"
+   },
+   {
+    "arriving": {
+     "holds": null,
+     "says": "inference firms' run-rates grow faster than the labs'"
+    },
+    "claims": [
+     {
+      "id": "compute_no_crash",
+      "state": "holding"
+     }
+    ],
+    "id": "running",
+    "leaving": null,
+    "name": "Running it",
+    "readings": [
+     {
+      "as_of": "2026-06-30",
+      "derived_id": "274e1fab3662494f",
+      "holds": null,
+      "href": "/query#run_rate_growth_by_layer",
+      "id": "lab_rr_growth",
+      "label": "the labs' run-rate growth, median",
+      "obs_ids": [
+       "143dcf3ea59eb522",
+       "1f3af8f3789bcc56",
+       "3f90e5b58783d1e1",
+       "46820cf03ef990ef",
+       "4910df35443940aa",
+       "679716d10d9a82fa",
+       "69de1ab8b7416221",
+       "9fbab158355685d5"
+      ],
+      "unit": "share",
+      "value": 4.086695386343784
+     },
+     {
+      "as_of": "2026-09-21",
+      "derived_id": "40b90cfb2512c7cf",
+      "holds": null,
+      "href": "/query#gpu_rent_yoy",
+      "id": "h100_rent_yoy",
+      "label": "rent for NVIDIA's most-rented AI chip, against a year before",
+      "obs_ids": [
+       "19f553d19637cdec",
+       "471ecfd1d9421357"
+      ],
+      "unit": "share",
+      "value": 0.09199878102461656
+     }
+    ],
+    "scarce": "Serving models quickly, cheaply and reliably, at the scale buyers need.",
+    "squeezed_by": "Routers and open serving software that make one provider as good as another.",
+    "state": "untestable",
+    "sublayers": [
+     {
+      "href": "/stack/inference_serving",
+      "id": "inference_serving",
+      "name": "Inference serving"
+     },
+     {
+      "href": "/stack/routing_gateways",
+      "id": "routing_gateways",
+      "name": "Routing"
+     },
+     {
+      "href": "/stack/agent_infra",
+      "id": "agent_infra",
+      "name": "Agent infrastructure"
+     }
+    ],
+    "word": "Can't be tested yet"
+   },
+   {
+    "arriving": {
+     "holds": null,
+     "says": "application firms' run-rates grow faster than the labs'"
+    },
+    "claims": [],
+    "id": "knowledge",
+    "leaving": {
+     "holds": null,
+     "says": "labs and compute firms buy more of the layers above them than a year before"
+    },
+    "name": "The firm's own knowledge",
+    "readings": [
+     {
+      "as_of": "2026-06-30",
+      "derived_id": "5e8c00219959cbbf",
+      "holds": null,
+      "href": "/indicators/lab_vertical_integration_exit_bell",
+      "id": "lab_deals_now",
+      "label": "companies above the model layer bought by labs and compute firms in a year",
+      "obs_ids": [
+       "028c23aca616e732",
+       "07e3555c39a96050",
+       "129c29f7c904cd92",
+       "12d2a1aa1c153b22",
+       "25b9ab767b3450bf",
+       "2720c21b0d51ebe9",
+       "2a03b1c9c3a566e8",
+       "306b8ff03d2e06f4",
+       "32054eeee55a0c5d",
+       "323f4b23d02dc306",
+       "4595c79bd6869dd2",
+       "4bd9d6eb05db6edb",
+       "4ff7c84cff87d728",
+       "535d74151a112400",
+       "540242749b497dce",
+       "580e8a15858d4d30",
+       "606cba8dde176747",
+       "63fe32e4118fa976",
+       "641e33480440ef0d",
+       "72eb437d57b89b7b",
+       "7dab84b11c1037c8",
+       "8043b52f343ef1c6",
+       "8646dd26d8b7dcec",
+       "8a639fbc3195d799",
+       "8de28dda113281ce",
+       "aa6507b66ee5dea7",
+       "aeedeced56048240",
+       "afe4c22289c40e31",
+       "b5408bc3babb6f73",
+       "b8cf55f8322de2f9",
+       "b9c0b5a40ed50a95",
+       "bbc32ae6588d1e09",
+       "d4df6bc02a9d46df",
+       "d6dd36d1a3dc9f36",
+       "d7e2c8855360a39c",
+       "d9e9dd3d0da435d6",
+       "dcf33cd6ea1111e0",
+       "e1cf09ef78338420",
+       "e391e4653409459a",
+       "e5adecf31c5704da",
+       "e8053611665b5224",
+       "e9f0ad11c458d6b5",
+       "edb9b13c5f513e98",
+       "ef40bd94a06afa5d",
+       "f4e16908c2d993c4",
+       "f99b94b8e45868bb"
+      ],
+      "unit": "count",
+      "value": 46.0
+     }
+    ],
+    "scarce": "A firm's own records, permissions and ways of working, which no model can learn from the public web.",
+    "squeezed_by": "Labs buying or copying the firms that hold it, and general assistants that pick up a workflow from a few connectors.",
+    "state": "untestable",
+    "sublayers": [
+     {
+      "href": "/stack/vertical_ai",
+      "id": "vertical_ai",
+      "name": "Vertical AI by domain"
+     },
+     {
+      "href": "/stack/coding_agents",
+      "id": "coding_agents",
+      "name": "Coding agents & dev tools"
+     },
+     {
+      "href": "/stack/deployment_services",
+      "id": "deployment_services",
+      "name": "Deployment / FDE / implementation services"
+     },
+     {
+      "href": "/stack/evals",
+      "id": "evals",
+      "name": "Evals"
+     }
+    ],
+    "word": "Can't be tested yet"
+   },
+   {
+    "arriving": {
+     "holds": null,
+     "says": "one or two assistants send most of the visits"
+    },
+    "claims": [],
+    "id": "front_door",
+    "leaving": {
+     "holds": null,
+     "says": "that concentration is below a year before"
+    },
+    "name": "The front door",
+    "readings": [],
+    "scarce": "The assistant a customer opens first, which chooses the suppliers behind it.",
+    "squeezed_by": "Customers switching assistants easily, and operating systems or browsers that open first.",
+    "state": "not_measured",
+    "sublayers": [
+     {
+      "href": "/stack/consumer_ai",
+      "id": "consumer_ai",
+      "name": "Consumer AI"
+     }
+    ],
+    "word": "Not measured"
    }
   ]
  },

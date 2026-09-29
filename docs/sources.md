@@ -178,6 +178,7 @@
 | parloa_press | Parloa press releases | Parloa | html | 7 | irregular | Parloa; short quotation | Parloa |
 | pehub_feed | PE Hub feed (watchlist) | PE Hub | rss | 5 | daily | Publisher terms; titles and links only | PE Hub |
 | peoplematters | People Matters | People Matters Media | html | 5 | irregular | People Matters; short quotation | People Matters |
+| pew_research | Pew Research Center, Americans and AI 2026 | Pew Research Center | html | 6 | annual | Pew Research Center; short quotation | Pew Research Center |
 | poolside_blog | Poolside blog | Poolside | html | 4 | irregular | Poolside; short quotation | Poolside blog |
 | prnewswire | PR Newswire releases | Cision PR Newswire | html | 5 | irregular | Cision PR Newswire; short quotation | Cision PR Newswire |
 | pwc | PwC Global AI Jobs Barometer (via Wayback; pwc.com 403s bots) | PwC | html | 7 | annual | PwC; short quotation | PwC 2026 Global AI Jobs Barometer |
@@ -202,6 +203,7 @@
 | sp_global_mi | S&P Global Market Intelligence research | S&P Global Market Intelligence | html | 6 | irregular | S&P Global; short quotation | S&P Global Market Intelligence, Voice of the Enterprise: AI & Machine Learning |
 | stanford_del | Stanford Digital Economy Lab | Stanford University | html | 6 | annual | Working paper | Brynjolfsson, Collis, Eggers, Kazinnik & Nguyen, 'What is Generative AI Worth?' (2026) |
 | stanford_hai_ai_index | Stanford HAI AI Index (report PDF) | Stanford HAI | pdf | 6 | annual | Stanford HAI; cited with attribution | Stanford HAI, AI Index Report 2025 |
+| statcounter_ai | StatCounter Global Stats, AI chatbot market share (monthly share of referral visits) | StatCounter | csv | 3 | monthly | CC BY-SA 3.0 | StatCounter Global Stats (https://gs.statcounter.com), CC BY-SA 3.0 |
 | statnews | STAT News | Boston Globe Media | html | 5 | irregular | STAT; short quotation | STAT News |
 | stilla_blog | Stilla blog | Stilla | html | 4 | irregular | Stilla; short quotation | Stilla blog |
 | stlouisfed_blog | FRED Blog | Federal Reserve Bank of St. Louis | html | 6 | irregular | FRED terms of use | FRED Blog, 'Does generative AI save time at work?' (27 Aug 2026) |

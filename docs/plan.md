@@ -762,6 +762,13 @@ Deliberately not done: an `expectations` SQL table, per-page share images, pips,
 - **Tightness (#113):** agents scored on METR's doubling time. Tool-capable share, training utilisation and the equipment makers' backlogs recorded as unsound gauges, with reasons; the grid has no public series of load-connection waits. The equipment makers are read as SEC filers.
 - **Science row:** family rows may carry metric readings; "How science itself moves" reads the FrontierMath Tier 4, SciCode and CritPt frontiers, labelled as AI capability on science tasks.
 
+## Parts 31–32 status (28 Sep 2026): the reading path, Perez in five phases, and four places the money can sit
+
+- **The reading path (#116, #129, #131, #132, #133):** three acts, eight stops: 1 the argument, 2 how fast, 3 how far (the census), 4 who profits, 5 what binds, 6a what people expect, 6b who is right so far, 7 the long run. A rail across the top of every stop and deep dive, a card to the next stop, a way back from deep dives and a return to the path from evidence pages, all from the layout. The header is wordmark, Evidence, Ask and one menu; the footer is the path plus the quiet links. Home is the front door: the claim, three readings, the latest changes and the path. A link into a folded section opens it.
+- **The seller-funded deal ledger (#123):** swept under a written rule from 1 Jan 2024; 41 deals added; Amazon's Nov 2024 stake counts only its new money. The trailing-year flow reads concentrating.
+- **Perez's phases (#124):** irruption and frenzy inside installation, a turning point, synergy and maturity inside deployment; a year-ago deal reading counts only when its whole year was searched, and a cooling frenzy never steps back to irruption.
+- **New instruments (#122):** StatCounter's chatbot referral shares (share-alike, carved out in the data licence), Pew's assistant use, the concentration of chatbot referrals, run-rate growth by layer.
+- **Four places the money can sit (#128):** the model, running it, a firm's own knowledge, the front door, each with its readings and nightly tests of money arriving or moving on; the figure leads stop 4.
 
 ## Part 33 (28 Sep 2026): the market map inside /value-chain
 

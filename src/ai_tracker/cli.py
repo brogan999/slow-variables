@@ -405,12 +405,26 @@ def _check(s: st.Store) -> tuple[list[str], list[str]]:
     from . import census
 
     errors += census.problems(census.load(), census.fetches())
+    import yaml
+
+    from . import value_chain as vc
+    from .argument import TIGHTNESS
+
+    vc_spec, tight = vc.load(), {i["id"] for i in yaml.safe_load(TIGHTNESS.read_text())["inputs"]}
+    errors += vc.problems(
+        vc_spec, load_outlook(), {x.id for x in s.seed.layers}, {x.id for x in s.seed.sublayers}, tight,
+        {e.id for e in s.seed.entities}, futures.rubric(),
+    )
+    filed = dict(s.con.execute(
+        "SELECT subject, max(published_date) FROM observations WHERE source_ns = 'sec' AND grain = 'fy' GROUP BY 1"
+    ).fetchall())
+    vc_notes = vc.notes(vc_spec, load_outlook(), filed, _date.today())
     from . import market_map
 
     errors += market_map.problems(
         market_map.load(), s.seed.entities, {x.id for x in s.seed.sublayers}, {i.id for i in s.seed.indicators}
     )
-    return errors + a_errors + m_errors + o_errors + b_errors + s_errors, notes + a_notes + o_notes
+    return errors + a_errors + m_errors + o_errors + b_errors + s_errors, notes + a_notes + o_notes + vc_notes
 
 
 def cmd_check(a: argparse.Namespace) -> int:

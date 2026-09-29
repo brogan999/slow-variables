@@ -119,4 +119,24 @@ questions:
     lens: capture
     informational: true
     question: "What would have to be true for a company to be worth $1 trillion in 2035?"
-    expect: {tool: claims}
+    expect: {tool: entity, metrics: [multiple_to_1t]}
+  - id: g27
+    lens: capture
+    informational: true
+    question: "What does theory suggest will happen next?"
+    expect: {cites: ["note:*", "pos:*"]}
+  - id: g28
+    lens: capture
+    informational: true
+    question: "What creates durable competitive advantage in an AI company?"
+    expect: {tool: bottlenecks, cites: ["note:*"]}
+  - id: g29
+    lens: capture
+    informational: true
+    question: "What should a company own, and what should it buy from the market?"
+    expect: {cites: ["note:*"]}
+  - id: g30
+    lens: capture
+    informational: true
+    question: "What will the most important companies and organizations look like in 2035?"
+    expect: {tool: futures, cites: ["fut:*"]}
