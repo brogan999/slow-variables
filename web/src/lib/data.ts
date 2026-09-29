@@ -418,7 +418,7 @@ export const futuresCategory = (id: string) => read<FuCategory>(`futures/categor
 
 // Part 33: the market map (web/data/market_map.json, written by market_map.build via Store._market_map)
 export type MarketMapEntity = {
-  id: string; name: string; verified: boolean; leaf: string | null; source: string; source_name?: string | null; label: string;
+  id: string; name: string; legal_name: string; verified: boolean; leaf: string | null; source: string; source_name?: string | null; label: string;
   read: string | null; default: boolean; ended: string | null; ownership: "acquired" | "being_acquired" | "defunct" | null; ownership_note: string | null;
 };
 export type MarketMapCategory = {

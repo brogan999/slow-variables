@@ -7,6 +7,7 @@ stay in the tracker. The map types no figure: counts are made here and exported,
 
 from __future__ import annotations
 
+import re
 from datetime import date
 from pathlib import Path
 from typing import Any, Iterable
@@ -28,6 +29,25 @@ def _primary(e: Entity, today: date) -> str | None:
     live = live or [m for m in e.memberships if m.sublayer_id]  # an acquired company stays on the map, marked as such
     first = next((m for m in live if m.is_primary), live[0] if live else None)
     return first.sublayer_id if first else None
+
+
+SUFFIX = re.compile(r"(,? Inc\.?| Corp(oration)?\.?| Group N\.V\.| N\.V\.| plc| Ltd\.?)$")
+
+
+def display(e: Entity) -> str:
+    """A filer's short name as readers know it (NVIDIA, not NVIDIA Corp); the legal name stays in `name`. Only SEC filers carry
+    legal names, and only an alias that starts the name or spells its initials qualifies, so an old name kept as an alias
+    after a rename, or a product name, is never shown."""
+    if not e.cik:
+        return e.name
+    initials = "".join(w[0] for w in re.findall(r"[A-Za-z]+", e.name)).upper()
+    ok = [a for a in e.aliases if len(a) < len(e.name) and (e.name.startswith(a) or a.upper() == initials)]
+    return ok[0] if ok else SUFFIX.sub("", e.name)
+
+
+def day(d: str | None) -> str | None:
+    """A read date as the site's prose writes dates: 28 Sep 2026."""
+    return date.fromisoformat(d).strftime("%-d %b %Y") if d else None
 
 
 def placements(spec: dict[str, Any], entities: Iterable[Entity], today: date) -> list[dict[str, Any]]:
@@ -108,8 +128,8 @@ def build(spec: dict[str, Any], entities: list[Entity], indicators: list[dict[st
         e = by_id[r["entity"]]
         ended = [m.to_date.isoformat() for m in e.memberships if m.to_date and m.to_date <= today]
         cats_out[r["cat"]]["entities"].append({
-            "id": e.id, "name": e.name, "verified": e.verified, "leaf": r["leaf"], "source": r["source"],
-            "label": r["label"], "read": r["read"], "default": r["default"], "ended": max(ended) if ended else None,
+            "id": e.id, "name": display(e), "legal_name": e.name, "verified": e.verified, "leaf": r["leaf"], "source": r["source"],
+            "label": r["label"], "read": day(r["read"]), "default": r["default"], "ended": max(ended) if ended else None,
             "ownership": e.ownership or ("acquired" if ended else None), "ownership_note": e.ownership_note,
         })
     for i in indicators:

@@ -6,9 +6,10 @@ const link = "underline decoration-grid underline-offset-2 hover:decoration-ink"
 const OWNERSHIP: Record<string, string> = { acquired: "acquired", being_acquired: "acquisition pending", defunct: "closed" };
 
 function provenance(e: MarketMapEntity): string {
-  if (e.default) return `placed by its sub-layer (${e.label.replaceAll("_", " ")})`;
-  const where = e.source === "hand" ? `a judgement: ${e.label}` : `${e.source_name ?? e.source}, section “${e.label}”`;
-  return e.read ? `${where}, read ${e.read}` : where;
+  if (e.default) return `Placed by its sub-layer (${e.label.replaceAll("_", " ")})`;
+  if (e.source === "hand" && e.label.startsWith("default of ")) return `Placed by its sub-layer (${e.label.slice(11).replaceAll("_", " ")})`;
+  if (e.source === "hand") return `Placed by hand (${e.label.replace(/;?\s*hand placement,?\s*\(?/i, ", ").replace(/^, |\)$/g, "").replace(/\s+/g, " ").replace("review 28", "review, 28").trim()})`;
+  return `${e.source_name ?? e.source}, section “${e.label}”${e.read ? `, read ${e.read}` : ""}`;
 }
 
 const owned = (e: MarketMapEntity) => (e.ownership ? `${OWNERSHIP[e.ownership]}${e.ownership_note ? `: ${e.ownership_note}` : ""}` : null);
@@ -19,7 +20,7 @@ function EntityChip({ e }: { e: MarketMapEntity }) {
   return (
     <span
       data-name={e.name.toLowerCase()}
-      title={[e.leaf, provenance(e), owned(e)].filter(Boolean).join(" · ")}
+      title={[e.legal_name !== e.name ? e.legal_name : null, e.leaf, provenance(e), owned(e)].filter(Boolean).join(" · ")}
       className={`mm-chip inline-flex items-center gap-1 rounded-[2px] bg-surface-2 px-1.5 py-0.5 text-[12px] ring-1 ring-axis ${e.verified ? "font-semibold text-ink" : "text-ink-2"}`}
     >
       {e.name}
@@ -79,11 +80,17 @@ function Card({ c }: { c: MarketMapCategory }) {
             {groups.map((g) => (
               <div key={g.leaf ?? "none"}>
                 <dt className="text-[11px] font-semibold uppercase tracking-[0.08em] text-muted">{g.leaf ?? "Part not assigned"}</dt>
-                {g.es.map((e) => (
-                  <dd key={e.id} data-name={e.name.toLowerCase()} className="mm-row leading-snug">
-                    <span className={e.verified ? "font-semibold" : ""}>{e.name}</span>
-                    {e.ownership ? <span className="text-muted"> ({owned(e)})</span> : null}
-                    <span className="text-muted"> · {provenance(e)}</span>
+                {[...new Set(g.es.map(provenance))].map((src) => (
+                  <dd key={src} className="leading-snug">
+                    <span className="text-muted">{src}: </span>
+                    {g.es.filter((e) => provenance(e) === src).map((e, k) => (
+                      <span key={e.id} data-name={e.name.toLowerCase()} className="mm-row">
+                        {k ? ", " : ""}
+                        <span className={e.verified ? "font-semibold" : ""}>{e.name}</span>
+                        {e.legal_name !== e.name ? <span className="text-muted"> ({e.legal_name})</span> : null}
+                        {e.ownership ? <span className="text-muted"> ({owned(e)})</span> : null}
+                      </span>
+                    ))}
                   </dd>
                 ))}
               </div>
@@ -115,16 +122,27 @@ export function MarketMap({ m }: { m: MarketMapDoc }) {
         </p>
       </div>
       <MarketMapFilter />
+      <div className="flex flex-col gap-2 text-[12px] text-ink-2">
+        <p className="flex flex-wrap gap-x-4 gap-y-1">
+          <span className="inline-flex items-center gap-1.5"><span className="inline-flex gap-[3px]" aria-hidden><span className="inline-block h-[9px] w-[9px] rounded-full bg-ink-2" /><span className="inline-block h-[9px] w-[9px] rounded-full ring-1 ring-inset ring-axis" /></span>each dot is one part of the category; filled means the tracker has a company there</span>
+          <span><span className="font-semibold text-ink">Bold</span>: verified through a filing or a dataset</span>
+          <span>(acquired), (acquisition pending), (closed): what happened to the company</span>
+          <span className="inline-flex items-center gap-1.5"><span className="hatch inline-block h-[10px] w-[16px] text-axis" aria-hidden />not yet mapped: a gap in our coverage, not in the market</span>
+        </p>
+        <nav aria-label="Layers of the map" className="flex flex-wrap gap-x-3 gap-y-1 font-mono text-[11px]">
+          {m.layers.map((L) => <a key={L.id} href={`#mm-layer-${L.id}`} className={link}>{L.number} {L.name}</a>)}
+        </nav>
+      </div>
       {m.layers.map((L) =>
         L.indicator_only ? (
-          <div key={L.id} data-unmapped="0" className="mm-layer grid gap-3 border-t border-grid pt-4 md:grid-cols-[11rem_minmax(0,1fr)]">
+          <div key={L.id} id={`mm-layer-${L.id}`} data-unmapped="0" className="mm-layer scroll-mt-4 grid gap-3 border-t border-grid pt-4 md:grid-cols-[11rem_minmax(0,1fr)]">
             <div><div className="font-mono text-[11px] text-muted">Layer {L.number}</div><h3 className="font-semibold leading-tight">{L.name}</h3><p className="mt-1 font-mono text-[11px] text-muted">readings only; no companies</p></div>
             <div className="flex flex-wrap gap-1">
               {L.categories.flatMap((c) => c.indicators).map((i) => <Link key={i.id} href={`/indicators/${i.id}`} className="rounded-[2px] bg-surface px-2 py-0.5 text-[12px] text-ink-2 ring-1 ring-grid hover:ring-ink">{i.name}</Link>)}
             </div>
           </div>
         ) : (
-          <div key={L.id} data-unmapped={L.n_unmapped} className="mm-layer grid gap-3 border-t border-grid pt-4 md:grid-cols-[11rem_minmax(0,1fr)]">
+          <div key={L.id} id={`mm-layer-${L.id}`} data-unmapped={L.n_unmapped} className="mm-layer scroll-mt-4 grid gap-3 border-t border-grid pt-4 md:grid-cols-[11rem_minmax(0,1fr)]">
             <div>
               <div className="font-mono text-[11px] text-muted">Layer {L.number}</div>
               <h3 className="font-semibold leading-tight">{L.name}</h3>
@@ -136,9 +154,7 @@ export function MarketMap({ m }: { m: MarketMapDoc }) {
           </div>
         ),
       )}
-      <p className="text-xs text-muted max-w-[68ch]">
-        Bold names are companies the tracker has verified through a filing or a dataset; a word in brackets says a company has been acquired, is being acquired or has closed. A hatched card is a gap in the tracker&apos;s coverage, not a finding about the market. Placements come from each source&apos;s own section labels and were checked by hand; companies whose work is robotics or autonomy are off the map for now.
-      </p>
+      <p className="text-xs text-muted max-w-[68ch]">Placements come from each source&apos;s own section labels and were checked by hand; companies whose work is robotics or autonomy are off the map for now.</p>
     </section>
   );
 }

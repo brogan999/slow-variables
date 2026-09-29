@@ -4,7 +4,7 @@ import { useState } from "react";
 
 type Found = "" | "shown" | "elsewhere" | "none";
 
-// Search a company to light every card it sits in and dim the rest; or show only the categories the tracker has not mapped.
+// Search a company to show only the cards it sits in; or show only the categories the tracker has not mapped.
 // The page stays complete without this: it only toggles attributes on the server-rendered cards.
 function apply(q: string, gaps: boolean): Found {
   const root = document.getElementById("market-map");
@@ -14,8 +14,7 @@ function apply(q: string, gaps: boolean): Found {
   let anywhere = false;
   root.querySelectorAll<HTMLElement>(".mm-card").forEach((card) => {
     const match = !needle || (card.dataset.names ?? "").split("|").some((x) => x.includes(needle));
-    card.hidden = gaps ? card.dataset.state !== "unmapped" : false;
-    card.dataset.dim = needle && !match ? "1" : "0";
+    card.hidden = (gaps && card.dataset.state !== "unmapped") || (!!needle && !match);
     if (needle && match) {
       anywhere = true;
       if (!card.hidden) shown = true;
@@ -30,13 +29,14 @@ function apply(q: string, gaps: boolean): Found {
     const details = card.querySelector("details");
     if (details && needle && match && !chipHit) details.open = true;
   });
-  root.querySelectorAll<HTMLElement>(".mm-layer[data-unmapped]").forEach((layer) => {
-    layer.hidden = gaps && layer.dataset.unmapped === "0";
+  root.querySelectorAll<HTMLElement>(".mm-layer").forEach((layer) => {
+    const cards = [...layer.querySelectorAll<HTMLElement>(".mm-card")];
+    layer.hidden = cards.length ? cards.every((c) => c.hidden) : gaps || !!needle;
   });
   return !needle ? "" : shown ? "shown" : anywhere ? "elsewhere" : "none";
 }
 
-const SAY: Record<Found, string> = { "": "", shown: "highlighted below", elsewhere: "not among the categories shown", none: "not on the map" };
+const SAY: Record<Found, string> = { "": "", shown: "showing the categories it sits in", elsewhere: "not among the categories shown", none: "not on the map" };
 
 export function MarketMapFilter() {
   const [q, setQ] = useState("");

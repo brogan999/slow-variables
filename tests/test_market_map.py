@@ -69,9 +69,19 @@ def test_the_export_places_by_default_or_own_places_and_counts_add_up():
     assert [x["id"] for x in a["entities"]] == ["e1", "e2", "e4"] and a["n_verified"] == 1
     e4 = a["entities"][2]
     assert (e4["ownership"], e4["ownership_note"], e4["ended"]) == ("acquired", "Acme, Oct 2025", "2025-10-09")
-    assert a["entities"][0]["default"] and a["entities"][1]["label"] == "Section"
+    assert a["entities"][0]["default"] and a["entities"][1]["label"] == "Section" and a["entities"][1]["read"] == "28 Sep 2026"
     assert a["leaves"] == [{"name": "x", "n": 1}] and a["default_of"] == ["s1"] and a["venture_sublayers"] == ["s1"]
     assert a["indicators"] == [{"id": "i1", "name": "I1"}]
     assert (a["chips"], a["n_more"], a["n_leaves"], a["n_indicators"]) == (["e1", "e2", "e4"], 0, 1, 1)
     assert doc["layers"][0]["n_categories"] == 2 and doc["layers"][0]["n_unmapped"] == 1
     assert doc["counts"]["entities"] == 3 and doc["counts"]["unmapped_categories"] == 1 and b["entities"] == []
+
+
+def test_display_names_are_the_short_names_readers_know():
+    filer = {"cik": "0000000001"}
+    assert mm.display(Entity(id="nvda", name="NVIDIA Corp", aliases=["NVIDIA", "Nvidia"], **filer)) == "NVIDIA"
+    assert mm.display(Entity(id="amd", name="Advanced Micro Devices", aliases=["AMD"], **filer)) == "AMD"
+    assert mm.display(Entity(id="klac", name="KLA Corp", aliases=["KLA Corporation"], **filer)) == "KLA"
+    assert mm.display(Entity(id="nbis", name="Nebius Group N.V.", **filer)) == "Nebius"
+    assert mm.display(Entity(id="stead", name="Stead", aliases=["Reya"])) == "Stead"  # an old name is never shown
+    assert mm.display(Entity(id="vercel", name="Vercel", aliases=["v0"])) == "Vercel"
