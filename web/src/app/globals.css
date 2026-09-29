@@ -178,3 +178,7 @@ body:has(.ask-shell) {
 .board-filter:has(#bw-slower:checked) li[data-word]:not([data-word="slower"]),
 .board-filter:has(#bw-both:checked) li[data-word]:not([data-word="both"]) { display: none; }
 .board-filter:has(input[name="board-word"]:not(#bw-all):checked) details:has(> ul li[data-word="too_early"]) { display: none; }
+/* Part 33: the market map on /value-chain. A search dims the cards a company is not in and inverts its chips; ink only. */
+.mm-chip[data-hit="1"] { background: var(--ink); color: var(--background); --tw-ring-color: var(--ink); }
+.mm-chip[data-hit="1"] span { color: var(--background); }
+.mm-row[data-hit="1"] { box-shadow: inset 2px 0 0 var(--ink); padding-left: 6px; }

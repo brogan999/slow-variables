@@ -415,3 +415,21 @@ export type FuCategory = { id: string; name: string; image: string | null; n: nu
 export const futures = () => read<FuIndex>("futures/index.json");
 export const futuresDecade = (kind: string, key: string) => read<FuDecade>(`futures/${kind}/${key}.json`);
 export const futuresCategory = (id: string) => read<FuCategory>(`futures/category/${id}.json`);
+
+// Part 33: the market map (web/data/market_map.json, written by market_map.build via Store._market_map)
+export type MarketMapEntity = {
+  id: string; name: string; legal_name: string; verified: boolean; leaf: string | null; source: string; source_name?: string | null; label: string;
+  read: string | null; default: boolean; ended: string | null; ownership: "acquired" | "being_acquired" | "defunct" | null; ownership_note: string | null;
+};
+export type MarketMapCategory = {
+  id: string; number: string; name: string; layer: string; out_of_scope: string | null; default_of: string[]; from_sublayers: string[];
+  entities: MarketMapEntity[]; indicators: { id: string; name: string }[]; leaves: { name: string; n: number }[];
+  n_entities: number; n_verified: number; leaves_covered: number; venture_sublayers: string[];
+  chips: string[]; n_more: number; n_leaves: number; n_indicators: number;
+};
+export type MarketMapLayer = { id: string; number: number; name: string; indicator_only?: boolean; categories: MarketMapCategory[]; n_categories: number; n_entities: number; n_unmapped: number };
+export type MarketMapDoc = {
+  credit: string; layers: MarketMapLayer[];
+  counts: { layers: number; categories: number; leaves: number; entities: number; placements: number; unmapped_categories: number; excluded: number; indicators: number };
+};
+export const marketMap = () => read<MarketMapDoc>("market_map.json");

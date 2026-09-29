@@ -1522,7 +1522,13 @@ class Store:
         from . import market_map
 
         cards = [{"id": i.id, "name": i.name, "sublayer_id": i.sublayer_id} for i in self.seed.indicators if i.published]
-        return market_map.build(market_map.load(), self.seed.entities, cards, venture, date.today())
+        doc = market_map.build(market_map.load(), self.seed.entities, cards, venture, date.today())
+        names = {x.id: x.name for x in self.seed.sources}  # the page shows a source's name, not its id
+        for layer in doc["layers"]:
+            for c in layer["categories"]:
+                for e in c["entities"]:
+                    e["source_name"] = names.get(e["source"])
+        return doc
 
     def _analyses(self) -> list[dict[str, Any]]:
         """Saved analyses: each metric's latest derived rows with provenance and the formula text, for /query."""

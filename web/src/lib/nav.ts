@@ -22,8 +22,8 @@ export const STOPS = ACTS.flatMap((a) => a.stops.map((s) => ({ ...s, act: a.act,
 // Deep dives light their parent stop; the most specific prefix comes first.
 export const STOP_OF = [
   ["/argument", "1"], ["/diffusion", "2"], ["/buckets", "2"], ["/census", "3"],
-  ["/capture", "4"], ["/layers", "4"], ["/stack", "4"], ["/ledger", "4"], ["/bottlenecks", "5"],
+  ["/capture", "4"], ["/value-chain", "4"], ["/layers", "4"], ["/stack", "4"], ["/ledger", "4"], ["/bottlenecks", "5"],
   ["/outlook", "6a"], ["/predictions", "6b"], ["/compare", "6b"], ["/singularity", "7"], ["/futures", "7"],
 ] as const;
 
-export const EVIDENCE = [["/indicators", "Indicators"], ["/stack", "Stack"], ["/ledger", "Ledger"], ["/compare", "Compare"], ["/argument/migration", "The migrating bottleneck"], ["/futures", "Futures"], ["/singularity/atlas", "Atlas"], ["/crosswalk", "Crosswalk"], ["/sources", "Sources"], ["/changelog", "Changelog"], ["/query", "Query"], ["/methodology", "How to read this"]] as const;
+export const EVIDENCE = [["/indicators", "Indicators"], ["/stack", "Stack"], ["/value-chain", "Value chain"], ["/ledger", "Ledger"], ["/compare", "Compare"], ["/argument/migration", "The migrating bottleneck"], ["/futures", "Futures"], ["/singularity/atlas", "Atlas"], ["/crosswalk", "Crosswalk"], ["/sources", "Sources"], ["/changelog", "Changelog"], ["/query", "Query"], ["/methodology", "How to read this"]] as const;
