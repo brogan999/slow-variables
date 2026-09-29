@@ -1,0 +1,1663 @@
+{
+ "counts": {
+  "by_tier": [
+   {
+    "n": 3,
+    "tier": "monopoly-like"
+   },
+   {
+    "n": 6,
+    "tier": "fat"
+   },
+   {
+    "n": 7,
+    "tier": "moderate"
+   },
+   {
+    "n": 1,
+    "tier": "thin"
+   },
+   {
+    "n": 3,
+    "tier": "no lasting profit"
+   }
+  ],
+  "kept_by_incumbents": 4,
+  "records": 20,
+  "unmapped": 3
+ },
+ "opportunities": [
+  {
+   "acquirers": "",
+   "adjacent": [
+    {
+     "id": "settlement_and_billing",
+     "n_entities": 2,
+     "name": "Settlement and billing",
+     "number": "5.5"
+    },
+    {
+     "id": "reward_and_verification_systems",
+     "n_entities": 6,
+     "name": "Reward and verification systems",
+     "number": "3.6"
+    },
+    {
+     "id": "managed_ai_operations",
+     "n_entities": 0,
+     "name": "Managed AI operations",
+     "number": "6.3"
+    }
+   ],
+   "blank": [
+    "prerequisites",
+    "acquirers",
+    "next action"
+   ],
+   "bottleneck": "Nobody can cheaply prove that an agent finished a task correctly, so buyers keep humans checking every result",
+   "builds_on": [
+    {
+     "href": "/outlook#position-vc_evals",
+     "ref": "pos:vc_evals",
+     "title": "vc_evals"
+    },
+    {
+     "href": "/outlook#claim-checking_sold",
+     "ref": "claim:checking_sold",
+     "title": "Checking AI's work is sold as a category of its own."
+    }
+   ],
+   "customer": "Operations leaders who pay for agent work and must show it was done right",
+   "durable_asset": "The definition of done for each workflow, and a record of how often agents pass and fail that grows more useful with every buyer",
+   "examples": [],
+   "falsifier": "Agents become cheap and reliable at checking their own work, so buyers stop paying for an outside check",
+   "id": "outcome_verification",
+   "n_more_examples": 0,
+   "name": "Outcome verification with pay-per-verified-result billing",
+   "next_action": "",
+   "none_independent": false,
+   "powers": [
+    "network economies"
+   ],
+   "prerequisites": "",
+   "primary": {
+    "id": "outcome_verification",
+    "n_entities": 0,
+    "name": "Outcome verification",
+    "number": "5.4"
+   },
+   "rent": {
+    "appropriability": "weak",
+    "asset_owner": "innovator",
+    "complementary_assets": "specialised",
+    "durability": "medium",
+    "pools": "innovator",
+    "profit": "fat",
+    "reads": "a fat profit, kept by the maker",
+    "rent_kind": "scale_network",
+    "tier": "fat",
+    "verdict": "A fat profit, kept by the maker"
+   },
+   "rent_reason": "The failure record grows more useful with each buyer, but the checking method itself is easy to copy",
+   "see_also": null,
+   "unit_sold": "A verified outcome",
+   "unmapped": true,
+   "wedge": "Check one high-volume workflow end to end and bill only for results that pass",
+   "why_not_bundled": "A buyer wants the checker to be independent of whoever sold the agent"
+  },
+  {
+   "acquirers": "",
+   "adjacent": [
+    {
+     "id": "liability_and_risk_transfer",
+     "n_entities": 1,
+     "name": "Liability and risk transfer",
+     "number": "5.6"
+    },
+    {
+     "id": "provenance_and_audit",
+     "n_entities": 0,
+     "name": "Provenance and audit",
+     "number": "5.3"
+    }
+   ],
+   "blank": [
+    "acquirers",
+    "next action"
+   ],
+   "bottleneck": "Regulated firms cannot use a model until someone other than the seller vouches for it",
+   "builds_on": [
+    {
+     "href": "/outlook#position-vc_evals",
+     "ref": "pos:vc_evals",
+     "title": "vc_evals"
+    },
+    {
+     "href": "/outlook#claim-checking_sold",
+     "ref": "claim:checking_sold",
+     "title": "Checking AI's work is sold as a category of its own."
+    }
+   ],
+   "customer": "Banks, insurers, hospitals and their regulators",
+   "durable_asset": "A name buyers and regulators insist on, and, if outside sign-off becomes required, a place rivals can reach only by earning the same standing",
+   "examples": [
+    "Arize",
+    "Goodfire",
+    "Patronus",
+    "Braintrust",
+    "Confident AI",
+    "Galileo"
+   ],
+   "falsifier": "Regulators accept the labs' own testing, or no regulator requires an outside sign-off",
+   "id": "regulated_assurance",
+   "n_more_examples": 9,
+   "name": "Independent sign-off for AI in regulated work",
+   "next_action": "",
+   "none_independent": false,
+   "powers": [
+    "branding"
+   ],
+   "prerequisites": "One regulator or insurer willing to recognise the tests",
+   "primary": {
+    "id": "evals_and_assurance",
+    "n_entities": 16,
+    "name": "Evals and assurance",
+    "number": "3.8"
+   },
+   "rent": {
+    "appropriability": "tight",
+    "asset_owner": "innovator",
+    "complementary_assets": "specialised",
+    "durability": "long",
+    "pools": "innovator",
+    "profit": "monopoly-like",
+    "reads": "a monopoly-like profit, kept by the maker",
+    "rent_kind": "regulatory",
+    "tier": "monopoly_like",
+    "verdict": "A monopoly-like profit, kept by the maker"
+   },
+   "rent_reason": "If a regulator names the tester, rivals need the same standing, which takes years",
+   "see_also": null,
+   "unit_sold": "A certification per model and task, renewed on each model change",
+   "unmapped": false,
+   "wedge": "Private test suites for one regulated task, such as claims handling or credit decisions, accepted by one regulator or insurer",
+   "why_not_bundled": "The whole value is that the tester does not sell the model"
+  },
+  {
+   "acquirers": "",
+   "adjacent": [
+    {
+     "id": "data_transformation",
+     "n_entities": 11,
+     "name": "Data transformation",
+     "number": "3.3"
+    },
+    {
+     "id": "evals_and_assurance",
+     "n_entities": 16,
+     "name": "Evals and assurance",
+     "number": "3.8"
+    },
+    {
+     "id": "context_engineering",
+     "n_entities": 0,
+     "name": "Context engineering",
+     "number": "6.2"
+    }
+   ],
+   "blank": [
+    "acquirers",
+    "next action"
+   ],
+   "bottleneck": "Everyday work leaves no reusable signal, so models stop improving once deployed",
+   "builds_on": [
+    {
+     "href": "/outlook#position-vc_post_training",
+     "ref": "pos:vc_post_training",
+     "title": "vc_post_training"
+    }
+   ],
+   "customer": "Firms with a high volume of repeated expert work, such as claims, support or underwriting",
+   "durable_asset": "A model that has learned the firm's work for months, which the firm would lose by moving to a rival",
+   "examples": [
+    "Baseten",
+    "Prime Intellect",
+    "Adaption Labs",
+    "Adaptive ML",
+    "Applied Compute",
+    "Arcee AI"
+   ],
+   "falsifier": "Each new general model wipes out what the customer's model learned, so firms stop paying to keep it learning",
+   "id": "continual_learning_in_customer",
+   "n_more_examples": 13,
+   "name": "A model that keeps learning inside one customer's work",
+   "next_action": "",
+   "none_independent": false,
+   "powers": [
+    "switching costs"
+   ],
+   "prerequisites": "Continual learning working in production",
+   "primary": {
+    "id": "post_training_and_learning_infrastructure",
+    "n_entities": 20,
+    "name": "Post-training and learning infrastructure",
+    "number": "3.7"
+   },
+   "rent": {
+    "appropriability": "weak",
+    "asset_owner": "innovator",
+    "complementary_assets": "specialised",
+    "durability": "medium",
+    "pools": "innovator",
+    "profit": "moderate",
+    "reads": "a moderate profit, kept by the maker",
+    "rent_kind": "switching_cost",
+    "tier": "moderate",
+    "verdict": "A moderate profit, kept by the maker"
+   },
+   "rent_reason": "The lock-in is real once learning works, but the site reads tuning as commoditising until it does",
+   "see_also": null,
+   "unit_sold": "A monthly fee per workflow that the model learns",
+   "unmapped": false,
+   "wedge": "Turn live work into privacy-safe traces and a test set that refreshes itself",
+   "why_not_bundled": "The customer's record helps only that customer, so a lab has little reason to build it for each one"
+  },
+  {
+   "acquirers": "",
+   "adjacent": [
+    {
+     "id": "provenance_and_audit",
+     "n_entities": 0,
+     "name": "Provenance and audit",
+     "number": "5.3"
+    },
+    {
+     "id": "settlement_and_billing",
+     "n_entities": 2,
+     "name": "Settlement and billing",
+     "number": "5.5"
+    },
+    {
+     "id": "tools_and_actuation",
+     "n_entities": 10,
+     "name": "Tools and actuation",
+     "number": "4.6"
+    }
+   ],
+   "blank": [
+    "prerequisites",
+    "acquirers",
+    "next action"
+   ],
+   "bottleneck": "A counterparty cannot tell which agent acts for whom, and under what limits",
+   "builds_on": [
+    {
+     "href": "/outlook#position-vc_agent_infra",
+     "ref": "pos:vc_agent_infra",
+     "title": "vc_agent_infra"
+    }
+   ],
+   "customer": "Platforms and firms that let outside agents act for people",
+   "durable_asset": "A register that becomes more useful to everyone checking it as more agents are listed",
+   "examples": [
+    "Arcade",
+    "Delinea",
+    "Keeper",
+    "Keyfactor",
+    "Linx",
+    "Ory"
+   ],
+   "falsifier": "Agents keep acting inside human sessions, so no separate agent identity is needed",
+   "id": "agent_authority_registry",
+   "n_more_examples": 2,
+   "name": "Know-your-agent and delegated-authority registry",
+   "next_action": "",
+   "none_independent": false,
+   "powers": [
+    "network economies"
+   ],
+   "prerequisites": "",
+   "primary": {
+    "id": "identity_and_authority",
+    "n_entities": 9,
+    "name": "Identity and authority",
+    "number": "5.2"
+   },
+   "rent": {
+    "appropriability": "weak",
+    "asset_owner": "incumbents",
+    "complementary_assets": "specialised",
+    "durability": "long",
+    "pools": "incumbents",
+    "profit": "monopoly-like",
+    "reads": "a monopoly-like profit, kept by incumbent firms",
+    "rent_kind": "scale_network",
+    "tier": "monopoly_like",
+    "verdict": "A monopoly-like profit, kept by incumbent firms"
+   },
+   "rent_reason": "Existing identity firms already own the customer relationships and are extending to agents",
+   "see_also": null,
+   "unit_sold": "An active agent identity per month",
+   "unmapped": false,
+   "wedge": "Issue and revoke agent credentials for one platform's partners",
+   "why_not_bundled": "Each lab issuing its own identities leaves no neutral register that counterparties across labs trust"
+  },
+  {
+   "acquirers": "",
+   "adjacent": [
+    {
+     "id": "identity_and_authority",
+     "n_entities": 9,
+     "name": "Identity and authority",
+     "number": "5.2"
+    },
+    {
+     "id": "security",
+     "n_entities": 8,
+     "name": "Security",
+     "number": "5.1"
+    },
+    {
+     "id": "evals_and_assurance",
+     "n_entities": 16,
+     "name": "Evals and assurance",
+     "number": "3.8"
+    }
+   ],
+   "blank": [
+    "prerequisites",
+    "acquirers",
+    "next action"
+   ],
+   "bottleneck": "After an agent acts, nobody can reconstruct what it saw, decided and changed",
+   "builds_on": [
+    {
+     "href": "/outlook#position-vc_agent_infra",
+     "ref": "pos:vc_agent_infra",
+     "title": "vc_agent_infra"
+    }
+   ],
+   "customer": "Compliance teams and auditors at firms that let agents act",
+   "durable_asset": "Years of audit history that cannot be moved without breaking the trail",
+   "examples": [],
+   "falsifier": "Regulators accept each vendor's own logs",
+   "id": "agent_audit_trail",
+   "n_more_examples": 0,
+   "name": "Tamper-proof audit trail for what agents did",
+   "next_action": "",
+   "none_independent": false,
+   "powers": [
+    "switching costs"
+   ],
+   "prerequisites": "",
+   "primary": {
+    "id": "provenance_and_audit",
+    "n_entities": 0,
+    "name": "Provenance and audit",
+    "number": "5.3"
+   },
+   "rent": {
+    "appropriability": "weak",
+    "asset_owner": "innovator",
+    "complementary_assets": "specialised",
+    "durability": "long",
+    "pools": "innovator",
+    "profit": "fat",
+    "reads": "a fat profit, kept by the maker",
+    "rent_kind": "switching_cost",
+    "tier": "fat",
+    "verdict": "A fat profit, kept by the maker"
+   },
+   "rent_reason": "Years of audit history are costly to leave, though the logging itself is easy to copy",
+   "see_also": null,
+   "unit_sold": "Logged agent actions, priced per seat of the audited team",
+   "unmapped": true,
+   "wedge": "A decision log for one regulated workflow that auditors accept",
+   "why_not_bundled": "The log is only credible if the agent's maker cannot edit it"
+  },
+  {
+   "acquirers": "",
+   "adjacent": [
+    {
+     "id": "outcome_verification",
+     "n_entities": 0,
+     "name": "Outcome verification",
+     "number": "5.4"
+    },
+    {
+     "id": "evals_and_assurance",
+     "n_entities": 16,
+     "name": "Evals and assurance",
+     "number": "3.8"
+    },
+    {
+     "id": "provenance_and_audit",
+     "n_entities": 0,
+     "name": "Provenance and audit",
+     "number": "5.3"
+    }
+   ],
+   "blank": [
+    "acquirers",
+    "next action"
+   ],
+   "bottleneck": "Agent failures cannot be priced, so procurement stalls or insurers exclude them",
+   "builds_on": [
+    {
+     "href": "/outlook#claim-insurers_exclude",
+     "ref": "claim:insurers_exclude",
+     "title": "Insurers write AI's mistakes out of their standard policies, so the cover has to be bought and priced on its own."
+    }
+   ],
+   "customer": "Firms buying agents for consequential work, and the insurers who cover them",
+   "durable_asset": "The record of losses that prices the next policy better than any newcomer can",
+   "examples": [
+    "Mitigata"
+   ],
+   "falsifier": "Courts put agent losses on the model makers, so buyers need no separate cover",
+   "id": "ai_warranty",
+   "n_more_examples": 0,
+   "name": "AI warranty backed by a pool of loss data",
+   "next_action": "",
+   "none_independent": false,
+   "powers": [
+    "a cornered resource"
+   ],
+   "prerequisites": "A capacity partner willing to carry the risk",
+   "primary": {
+    "id": "liability_and_risk_transfer",
+    "n_entities": 1,
+    "name": "Liability and risk transfer",
+    "number": "5.6"
+   },
+   "rent": {
+    "appropriability": "tight",
+    "asset_owner": "innovator",
+    "complementary_assets": "specialised",
+    "durability": "long",
+    "pools": "innovator",
+    "profit": "fat",
+    "reads": "a fat profit, kept by the maker",
+    "rent_kind": "scarcity",
+    "tier": "fat",
+    "verdict": "A fat profit, kept by the maker"
+   },
+   "rent_reason": "Loss data accumulates only with years of claims",
+   "see_also": null,
+   "unit_sold": "A premium per covered workflow",
+   "unmapped": false,
+   "wedge": "A warranty on one agent product, paid for by the vendor and backed by a reinsurer",
+   "why_not_bundled": "A lab standing behind its own mistakes is a conflict buyers discount"
+  },
+  {
+   "acquirers": "",
+   "adjacent": [
+    {
+     "id": "reward_and_verification_systems",
+     "n_entities": 6,
+     "name": "Reward and verification systems",
+     "number": "3.6"
+    },
+    {
+     "id": "evals_and_assurance",
+     "n_entities": 16,
+     "name": "Evals and assurance",
+     "number": "3.8"
+    }
+   ],
+   "blank": [
+    "prerequisites",
+    "acquirers",
+    "next action"
+   ],
+   "bottleneck": "Expert data is made to order and belongs to the buyer, so the seller keeps nothing when the job ends",
+   "builds_on": [
+    {
+     "href": "/outlook#position-vc_human_data",
+     "ref": "pos:vc_human_data",
+     "title": "vc_human_data"
+    }
+   ],
+   "customer": "Labs and large firms training models on expert judgement",
+   "durable_asset": "A record of checked expert outcomes that improves every buyer's model and that no one buyer holds",
+   "examples": [
+    "Mercor",
+    "Prolific",
+    "Datacurve",
+    "Handshake AI",
+    "Invisible Technologies",
+    "Lila Sciences"
+   ],
+   "falsifier": "Labs bring expert work in-house and stop buying outside records",
+   "id": "pooled_expert_records",
+   "n_more_examples": 6,
+   "name": "Graded expert-work records pooled across buyers",
+   "next_action": "",
+   "none_independent": false,
+   "powers": [
+    "a cornered resource"
+   ],
+   "prerequisites": "",
+   "primary": {
+    "id": "data_origination",
+    "n_entities": 12,
+    "name": "Data origination",
+    "number": "3.1"
+   },
+   "rent": {
+    "appropriability": "weak",
+    "asset_owner": "innovator",
+    "complementary_assets": "specialised",
+    "durability": "medium",
+    "pools": "innovator",
+    "profit": "moderate",
+    "reads": "a moderate profit, kept by the maker",
+    "rent_kind": "scarcity",
+    "tier": "moderate",
+    "verdict": "A moderate profit, kept by the maker"
+   },
+   "rent_reason": "The grading record is hard to rebuild, but the labs could bring the work inside",
+   "see_also": null,
+   "unit_sold": "A licence to a graded record per field",
+   "unmapped": false,
+   "wedge": "Sell graded work where the grading, not the answers, is licensed to many buyers",
+   "why_not_bundled": "Labs hire experts directly, but no single lab can grade across the whole market"
+  },
+  {
+   "acquirers": "",
+   "adjacent": [
+    {
+     "id": "compute_utilization_and_control",
+     "n_entities": 8,
+     "name": "Compute utilization and control",
+     "number": "1.6"
+    },
+    {
+     "id": "inference_optimization",
+     "n_entities": 5,
+     "name": "Inference optimization",
+     "number": "4.2"
+    },
+    {
+     "id": "outcome_verification",
+     "n_entities": 0,
+     "name": "Outcome verification",
+     "number": "5.4"
+    }
+   ],
+   "blank": [
+    "prerequisites",
+    "acquirers",
+    "next action"
+   ],
+   "bottleneck": "Each firm guesses which model and venue to use for each task, and pays for the guess",
+   "builds_on": [
+    {
+     "href": "/outlook#position-vc_routing_gateways",
+     "ref": "pos:vc_routing_gateways",
+     "title": "vc_routing_gateways"
+    },
+    {
+     "href": "/outlook#position-router_power",
+     "ref": "pos:router_power",
+     "title": "Routers gain power"
+    }
+   ],
+   "customer": "Platform teams spending on several model providers",
+   "durable_asset": "Choices learned from many firms' outcomes that beat any one firm's own",
+   "examples": [
+    "OpenRouter",
+    "Portkey",
+    "Vercel",
+    "AI21 Labs",
+    "Cloudflare",
+    "Helicone"
+   ],
+   "falsifier": "One provider becomes best on price and quality for most tasks",
+   "id": "outcome_router",
+   "n_more_examples": 7,
+   "name": "A router that chooses models from pooled outcomes",
+   "next_action": "",
+   "none_independent": false,
+   "powers": [
+    "network economies"
+   ],
+   "prerequisites": "",
+   "primary": {
+    "id": "routing_and_gateways",
+    "n_entities": 13,
+    "name": "Routing and gateways",
+    "number": "4.3"
+   },
+   "rent": {
+    "appropriability": "weak",
+    "asset_owner": "platforms",
+    "complementary_assets": "generic",
+    "durability": "medium",
+    "pools": "users",
+    "profit": "competed away to users",
+    "reads": "competed away to users",
+    "rent_kind": "scale_network",
+    "tier": "none",
+    "verdict": "Competed away to users"
+   },
+   "rent_reason": "The site reads choosing a model as being given away unless pooled outcomes create the network",
+   "see_also": {
+    "id": "policy_aware_routing",
+    "name": "Routing that keeps a firm inside approved models and fails over when one is cut off"
+   },
+   "unit_sold": "A share of the saving",
+   "unmapped": false,
+   "wedge": "Save money on day one by sending routine work to cheaper models, and record which choices worked",
+   "why_not_bundled": "Each lab routes to its own models; a neutral router routes to whichever wins"
+  },
+  {
+   "acquirers": "",
+   "adjacent": [
+    {
+     "id": "identity_and_authority",
+     "n_entities": 9,
+     "name": "Identity and authority",
+     "number": "5.2"
+    },
+    {
+     "id": "outcome_verification",
+     "n_entities": 0,
+     "name": "Outcome verification",
+     "number": "5.4"
+    },
+    {
+     "id": "routing_and_gateways",
+     "n_entities": 13,
+     "name": "Routing and gateways",
+     "number": "4.3"
+    }
+   ],
+   "blank": [
+    "prerequisites",
+    "acquirers",
+    "next action"
+   ],
+   "bottleneck": "Agents can find and order work from other agents, but nothing holds the money until the work is proven done",
+   "builds_on": [
+    {
+     "href": "/outlook#position-vc_routing_gateways",
+     "ref": "pos:vc_routing_gateways",
+     "title": "vc_routing_gateways"
+    }
+   ],
+   "customer": "Marketplaces and firms whose agents buy services from other agents",
+   "durable_asset": "The record of which agents deliver, and the billing and credit that buyers and sellers would lose by leaving",
+   "examples": [
+    "ProRata",
+    "TollBit"
+   ],
+   "falsifier": "Agent-initiated purchases stay a tiny share of payments",
+   "id": "agent_payments",
+   "n_more_examples": 0,
+   "name": "Escrow that pays an agent only when its work passes a check",
+   "next_action": "",
+   "none_independent": false,
+   "powers": [
+    "switching costs",
+    "network economies"
+   ],
+   "prerequisites": "",
+   "primary": {
+    "id": "settlement_and_billing",
+    "n_entities": 2,
+    "name": "Settlement and billing",
+    "number": "5.5"
+   },
+   "rent": {
+    "appropriability": "weak",
+    "asset_owner": "incumbents",
+    "complementary_assets": "specialised",
+    "durability": "long",
+    "pools": "incumbents",
+    "profit": "monopoly-like",
+    "reads": "a monopoly-like profit, kept by incumbent firms",
+    "rent_kind": "scale_network",
+    "tier": "monopoly_like",
+    "verdict": "A monopoly-like profit, kept by incumbent firms"
+   },
+   "rent_reason": "Payment incumbents hold the rails; the opening is the check that releases the money",
+   "see_also": null,
+   "unit_sold": "A fee per settled transaction",
+   "unmapped": false,
+   "wedge": "Escrow that releases payment when the result passes an agreed check",
+   "why_not_bundled": "Card networks move money but do not judge whether the work was done"
+  },
+  {
+   "acquirers": "",
+   "adjacent": [
+    {
+     "id": "identity_and_authority",
+     "n_entities": 9,
+     "name": "Identity and authority",
+     "number": "5.2"
+    },
+    {
+     "id": "agent_runtimes",
+     "n_entities": 9,
+     "name": "Agent runtimes",
+     "number": "4.5"
+    },
+    {
+     "id": "context_and_memory",
+     "n_entities": 18,
+     "name": "Context and memory",
+     "number": "4.4"
+    }
+   ],
+   "blank": [
+    "prerequisites",
+    "acquirers",
+    "next action"
+   ],
+   "bottleneck": "Every agent needs its own negotiated, audited link into each system a firm runs",
+   "builds_on": [
+    {
+     "href": "/outlook#position-vc_agent_infra",
+     "ref": "pos:vc_agent_infra",
+     "title": "vc_agent_infra"
+    },
+    {
+     "href": "/outlook#position-records_hold",
+     "ref": "pos:records_hold",
+     "title": "The software that keeps the records gains"
+    }
+   ],
+   "customer": "Firms connecting agents to their records, and the software vendors who hold them",
+   "durable_asset": "The standard link other agents must use if it spreads, and each customer's wiring if it does not",
+   "examples": [
+    "Arcade",
+    "Vapi",
+    "Bland",
+    "Browserbase",
+    "Composio",
+    "Daily"
+   ],
+   "falsifier": "Labs and clouds ship their own connectors and the record-keepers let them in free",
+   "id": "permission_connectors",
+   "n_more_examples": 4,
+   "name": "The standard way agents get permission into business software",
+   "next_action": "",
+   "none_independent": false,
+   "powers": [
+    "network economies",
+    "switching costs"
+   ],
+   "prerequisites": "",
+   "primary": {
+    "id": "tools_and_actuation",
+    "n_entities": 10,
+    "name": "Tools and actuation",
+    "number": "4.6"
+   },
+   "rent": {
+    "appropriability": "weak",
+    "asset_owner": "incumbents",
+    "complementary_assets": "specialised",
+    "durability": "medium",
+    "pools": "incumbents",
+    "profit": "moderate",
+    "reads": "a moderate profit, kept by incumbent firms",
+    "rent_kind": "switching_cost",
+    "tier": "moderate",
+    "verdict": "A moderate profit, kept by incumbent firms"
+   },
+   "rent_reason": "Record-keeping software owners can capture this themselves",
+   "see_also": null,
+   "unit_sold": "A connected system per month",
+   "unmapped": false,
+   "wedge": "Connectors for one crowded category of business software, with permissions and an audit trail built in",
+   "why_not_bundled": "The software that keeps the records can refuse or charge outside agents, so a neutral standard needs both sides"
+  },
+  {
+   "acquirers": "",
+   "adjacent": [
+    {
+     "id": "context_engineering",
+     "n_entities": 0,
+     "name": "Context engineering",
+     "number": "6.2"
+    },
+    {
+     "id": "managed_ai_operations",
+     "n_entities": 0,
+     "name": "Managed AI operations",
+     "number": "6.3"
+    },
+    {
+     "id": "adoption_and_change",
+     "n_entities": 4,
+     "name": "Adoption and change",
+     "number": "6.4"
+    }
+   ],
+   "blank": [
+    "prerequisites",
+    "acquirers",
+    "next action"
+   ],
+   "bottleneck": "Engineers who can turn messy data and unwritten habits into working systems are scarce",
+   "builds_on": [
+    {
+     "href": "/outlook#position-vc_deployment_services",
+     "ref": "pos:vc_deployment_services",
+     "title": "vc_deployment_services"
+    },
+    {
+     "href": "/outlook#position-labs_below_software",
+     "ref": "pos:labs_below_software",
+     "title": "Deployment staff pull the labs' margins down"
+    }
+   ],
+   "customer": "Mid-sized firms that cannot hire their own AI engineers",
+   "durable_asset": "A platform the customer's operations run on, which it would have to rebuild to leave",
+   "examples": [
+    "Anthropic enterprise services venture",
+    "Palantir",
+    "The OpenAI Deployment Company",
+    "Ampersand Labs",
+    "Artium",
+    "Atlas"
+   ],
+   "falsifier": "Models need so little fitting that self-serve deployment wins",
+   "id": "deploy_to_platform",
+   "n_more_examples": 19,
+   "name": "Deployment that leaves behind the platform the customer runs on",
+   "next_action": "",
+   "none_independent": false,
+   "powers": [
+    "switching costs"
+   ],
+   "prerequisites": "",
+   "primary": {
+    "id": "technical_implementation",
+    "n_entities": 25,
+    "name": "Technical implementation",
+    "number": "6.1"
+   },
+   "rent": {
+    "appropriability": "weak",
+    "asset_owner": "innovator",
+    "complementary_assets": "specialised",
+    "durability": "medium",
+    "pools": "innovator",
+    "profit": "moderate",
+    "reads": "a moderate profit, kept by the maker",
+    "rent_kind": "switching_cost",
+    "tier": "moderate",
+    "verdict": "A moderate profit, kept by the maker"
+   },
+   "rent_reason": "The services margin grows with headcount; only the platform left behind earns a rent",
+   "see_also": null,
+   "unit_sold": "A deployment project, then a platform fee",
+   "unmapped": false,
+   "wedge": "Forward-deployed engineers who build on the firm's own map of its data and operations",
+   "why_not_bundled": "Labs are buying consultancies to do this, which is the risk as well as the proof"
+  },
+  {
+   "acquirers": "",
+   "adjacent": [
+    {
+     "id": "technical_implementation",
+     "n_entities": 25,
+     "name": "Technical implementation",
+     "number": "6.1"
+    },
+    {
+     "id": "context_and_memory",
+     "n_entities": 18,
+     "name": "Context and memory",
+     "number": "4.4"
+    },
+    {
+     "id": "managed_ai_operations",
+     "n_entities": 0,
+     "name": "Managed AI operations",
+     "number": "6.3"
+    }
+   ],
+   "blank": [
+    "prerequisites",
+    "acquirers",
+    "next action"
+   ],
+   "bottleneck": "The knowledge an agent needs sits in people's heads, not in any system",
+   "builds_on": [
+    {
+     "href": "/outlook#position-vc_agent_infra",
+     "ref": "pos:vc_agent_infra",
+     "title": "vc_agent_infra"
+    },
+    {
+     "href": "/outlook#position-vc_deployment_services",
+     "ref": "pos:vc_deployment_services",
+     "title": "vc_deployment_services"
+    }
+   ],
+   "customer": "Firms whose agents fail on unwritten rules and exceptions",
+   "durable_asset": "The captured rules the firm's agents run on",
+   "examples": [],
+   "falsifier": "Agents learn a firm's unwritten rules on their own from its records",
+   "id": "context_engineering_service",
+   "n_more_examples": 0,
+   "name": "Capturing how a firm really works, for its agents",
+   "next_action": "",
+   "none_independent": false,
+   "powers": [
+    "switching costs"
+   ],
+   "prerequisites": "",
+   "primary": {
+    "id": "context_engineering",
+    "n_entities": 0,
+    "name": "Context engineering",
+    "number": "6.2"
+   },
+   "rent": {
+    "appropriability": "weak",
+    "asset_owner": "innovator",
+    "complementary_assets": "specialised",
+    "durability": "short",
+    "pools": "innovator",
+    "profit": "thin",
+    "reads": "a thin profit, kept by the maker",
+    "rent_kind": "switching_cost",
+    "tier": "thin",
+    "verdict": "A thin profit, kept by the maker"
+   },
+   "rent_reason": "Useful and needed now, but copyable and likely to be automated",
+   "see_also": {
+    "id": "deploy_to_platform",
+    "name": "Deployment that leaves behind the platform the customer runs on"
+   },
+   "unit_sold": "A captured workflow, then upkeep as it changes",
+   "unmapped": true,
+   "wedge": "Interview and observe one team, and turn its unwritten rules into tests and instructions agents follow",
+   "why_not_bundled": "The work is specific to each firm and changes over time"
+  },
+  {
+   "acquirers": "",
+   "adjacent": [
+    {
+     "id": "autonomous_services",
+     "n_entities": 89,
+     "name": "Autonomous services",
+     "number": "7.4"
+    },
+    {
+     "id": "provenance_and_audit",
+     "n_entities": 0,
+     "name": "Provenance and audit",
+     "number": "5.3"
+    },
+    {
+     "id": "liability_and_risk_transfer",
+     "n_entities": 1,
+     "name": "Liability and risk transfer",
+     "number": "5.6"
+    }
+   ],
+   "blank": [
+    "prerequisites",
+    "acquirers",
+    "next action"
+   ],
+   "bottleneck": "A general model can draft the work but cannot hold the trade's records or sign for it",
+   "builds_on": [
+    {
+     "href": "/outlook#position-vc_vertical_ai",
+     "ref": "pos:vc_vertical_ai",
+     "title": "vc_vertical_ai"
+    }
+   ],
+   "customer": "Firms in a licensed trade, such as law, medicine or insurance",
+   "durable_asset": "The trade's records and approvals, which customers would lose by leaving",
+   "examples": [
+    "Abridge",
+    "Harvey",
+    "Hebbia",
+    "Legora",
+    "5c Network",
+    "Accrual"
+   ],
+   "falsifier": "Vertical apps' prices fall with each better general model as customers move to the labs' own products",
+   "id": "vertical_system_of_record",
+   "n_more_examples": 47,
+   "name": "A trade's AI system of record, with the approvals only that trade can give",
+   "next_action": "",
+   "none_independent": false,
+   "powers": [
+    "switching costs"
+   ],
+   "prerequisites": "",
+   "primary": {
+    "id": "vertical_workflow_software",
+    "n_entities": 53,
+    "name": "Vertical workflow software",
+    "number": "7.3"
+   },
+   "rent": {
+    "appropriability": "weak",
+    "asset_owner": "innovator",
+    "complementary_assets": "specialised",
+    "durability": "long",
+    "pools": "innovator",
+    "profit": "fat",
+    "reads": "a fat profit, kept by the maker",
+    "rent_kind": "switching_cost",
+    "tier": "fat",
+    "verdict": "A fat profit, kept by the maker"
+   },
+   "rent_reason": "Holding the trade's records is sticky; packaging a general model is not",
+   "see_also": null,
+   "unit_sold": "A seat, then a share of the work it completes",
+   "unmapped": false,
+   "wedge": "The tool the professional already works in, which becomes where the matter, patient or case lives",
+   "why_not_bundled": "Labs lack the trade's records, licensed content and the approvals a regulator gives"
+  },
+  {
+   "acquirers": "",
+   "adjacent": [
+    {
+     "id": "autonomous_services",
+     "n_entities": 89,
+     "name": "Autonomous services",
+     "number": "7.4"
+    },
+    {
+     "id": "vertical_workflow_software",
+     "n_entities": 53,
+     "name": "Vertical workflow software",
+     "number": "7.3"
+    }
+   ],
+   "blank": [
+    "acquirers",
+    "next action"
+   ],
+   "bottleneck": "A firm billed by the hour hands AI's saving straight back to the client at the next re-bid",
+   "builds_on": [
+    {
+     "href": "/outlook#position-vc_ai_rollups",
+     "ref": "pos:vc_ai_rollups",
+     "title": "vc_ai_rollups"
+    }
+   ],
+   "customer": "Clients of hour-billed trades such as accounting, brokerage and property management",
+   "durable_asset": "A way of running many firms that rivals take years to learn, and lower costs per client than any single firm",
+   "examples": [
+    "2X",
+    "Adaptive Innovations",
+    "Agent AI",
+    "Agent Vista",
+    "AIAI Holdings (Ai\u00b2)",
+    "AIXIOM"
+   ],
+   "falsifier": "Margins fall back to the trade's ordinary level as unmerged rivals buy the same tools",
+   "id": "outcome_priced_rollup",
+   "n_more_examples": 100,
+   "name": "An AI roll-up that moves its clients to fixed fees",
+   "next_action": "",
+   "none_independent": false,
+   "powers": [
+    "process power",
+    "scale economies"
+   ],
+   "prerequisites": "Capital and a pipeline of owners ready to sell",
+   "primary": {
+    "id": "ai_native_rollups",
+    "n_entities": 106,
+    "name": "AI-native rollups",
+    "number": "7.6"
+   },
+   "rent": {
+    "appropriability": "weak",
+    "asset_owner": "innovator",
+    "complementary_assets": "specialised",
+    "durability": "medium",
+    "pools": "innovator",
+    "profit": "moderate",
+    "reads": "a moderate profit, kept by the maker",
+    "rent_kind": "scarcity",
+    "tier": "moderate",
+    "verdict": "A moderate profit, kept by the maker"
+   },
+   "rent_reason": "The roll-up owns the complementary assets; the AI itself is bought in",
+   "see_also": null,
+   "unit_sold": "A fixed fee per client or per job",
+   "unmapped": false,
+   "wedge": "Buy owner-run firms and switch their clients to fixed fees before automating the work",
+   "why_not_bundled": "The asset is the customer relationship and the licence, which software cannot buy"
+  },
+  {
+   "acquirers": "",
+   "adjacent": [
+    {
+     "id": "liability_and_risk_transfer",
+     "n_entities": 1,
+     "name": "Liability and risk transfer",
+     "number": "5.6"
+    },
+    {
+     "id": "vertical_workflow_software",
+     "n_entities": 53,
+     "name": "Vertical workflow software",
+     "number": "7.3"
+    },
+    {
+     "id": "outcome_verification",
+     "n_entities": 0,
+     "name": "Outcome verification",
+     "number": "5.4"
+    }
+   ],
+   "blank": [
+    "prerequisites",
+    "acquirers",
+    "next action"
+   ],
+   "bottleneck": "Buyers want one accountable party when consequential work goes wrong",
+   "builds_on": [
+    {
+     "href": "/outlook#position-vc_vertical_ai",
+     "ref": "pos:vc_vertical_ai",
+     "title": "vc_vertical_ai"
+    },
+    {
+     "href": "/outlook#position-vc_ai_rollups",
+     "ref": "pos:vc_ai_rollups",
+     "title": "vc_ai_rollups"
+    }
+   ],
+   "customer": "Small and mid-sized firms that want the work done, not another tool",
+   "durable_asset": "The customer relationship and the licence to do the work, which software firms cannot buy",
+   "examples": [
+    "Adaptive",
+    "AIOS",
+    "Akido",
+    "Alma",
+    "Arca",
+    "Arcos Law"
+   ],
+   "falsifier": "Labs launch services in the same trades with their own warranties",
+   "id": "licensed_autonomous_service",
+   "n_more_examples": 81,
+   "name": "A licensed firm that sells the finished job and stands behind it",
+   "next_action": "",
+   "none_independent": false,
+   "powers": [
+    "a cornered resource"
+   ],
+   "prerequisites": "",
+   "primary": {
+    "id": "autonomous_services",
+    "n_entities": 89,
+    "name": "Autonomous services",
+    "number": "7.4"
+   },
+   "rent": {
+    "appropriability": "weak",
+    "asset_owner": "innovator",
+    "complementary_assets": "specialised",
+    "durability": "medium",
+    "pools": "innovator",
+    "profit": "fat",
+    "reads": "a fat profit, kept by the maker",
+    "rent_kind": "regulatory",
+    "tier": "fat",
+    "verdict": "A fat profit, kept by the maker"
+   },
+   "rent_reason": "The licence and the liability keep software vendors out, but other licensed firms can copy the model",
+   "see_also": null,
+   "unit_sold": "A completed job",
+   "unmapped": false,
+   "wedge": "One narrow service in one licensed trade, priced per outcome",
+   "why_not_bundled": "A lab would have to hold the licence and carry the liability"
+  },
+  {
+   "acquirers": "",
+   "adjacent": [
+    {
+     "id": "power_and_sites",
+     "n_entities": 41,
+     "name": "Power and sites",
+     "number": "1.1"
+    },
+    {
+     "id": "compute_providers",
+     "n_entities": 28,
+     "name": "Compute providers",
+     "number": "1.5"
+    },
+    {
+     "id": "inference_optimization",
+     "n_entities": 5,
+     "name": "Inference optimization",
+     "number": "4.2"
+    }
+   ],
+   "blank": [
+    "prerequisites",
+    "acquirers",
+    "next action"
+   ],
+   "bottleneck": "A site already wired to the grid is scarcer than the building or the money",
+   "builds_on": [
+    {
+     "href": "/layers/compute_physical#assessment-vc_dc_power",
+     "ref": "pos:vc_dc_power",
+     "title": "A site already wired to the grid is scarcer than the building or the money"
+    }
+   ],
+   "customer": "Data-centre operators, utilities and large compute buyers",
+   "durable_asset": "Agreements with utilities that let a site connect sooner",
+   "examples": [
+    "Anyscale",
+    "Emerald AI",
+    "Hammerhead",
+    "Niv-AI",
+    "Pado AI",
+    "QUTWO"
+   ],
+   "falsifier": "Interconnection queues shorten sharply",
+   "id": "energy_aware_compute",
+   "n_more_examples": 1,
+   "name": "Moving computing to where power is available",
+   "next_action": "",
+   "none_independent": false,
+   "powers": [
+    "a cornered resource"
+   ],
+   "prerequisites": "",
+   "primary": {
+    "id": "compute_utilization_and_control",
+    "n_entities": 8,
+    "name": "Compute utilization and control",
+    "number": "1.6"
+   },
+   "rent": {
+    "appropriability": "weak",
+    "asset_owner": "incumbents",
+    "complementary_assets": "specialised",
+    "durability": "medium",
+    "pools": "incumbents",
+    "profit": "moderate",
+    "reads": "a moderate profit, kept by incumbent firms",
+    "rent_kind": "scarcity",
+    "tier": "moderate",
+    "verdict": "A moderate profit, kept by incumbent firms"
+   },
+   "rent_reason": "The scarcity is real while grid hookups lag; the rent goes to whoever holds the grid position",
+   "see_also": null,
+   "unit_sold": "A share of the power saved or the capacity freed",
+   "unmapped": false,
+   "wedge": "Shift flexible workloads to hours and places where power is spare, and sell that flexibility to the grid",
+   "why_not_bundled": "It needs both the grid's and the operator's data, which neither side holds alone"
+  },
+  {
+   "acquirers": "",
+   "adjacent": [
+    {
+     "id": "technical_implementation",
+     "n_entities": 25,
+     "name": "Technical implementation",
+     "number": "6.1"
+    },
+    {
+     "id": "context_engineering",
+     "n_entities": 0,
+     "name": "Context engineering",
+     "number": "6.2"
+    },
+    {
+     "id": "managed_ai_operations",
+     "n_entities": 0,
+     "name": "Managed AI operations",
+     "number": "6.3"
+    }
+   ],
+   "blank": [
+    "prerequisites",
+    "acquirers",
+    "next action"
+   ],
+   "bottleneck": "Deployment talent, not models, keeps pilots from reaching production",
+   "builds_on": [
+    {
+     "href": "/outlook#position-vc_deployment_services",
+     "ref": "pos:vc_deployment_services",
+     "title": "vc_deployment_services"
+    }
+   ],
+   "customer": "Deployment firms and enterprises short of deployment engineers",
+   "durable_asset": "A network of placed alumni and the firms that hire them",
+   "examples": [
+    "ADaSci",
+    "Aggregate Intellect",
+    "AI Builder Club",
+    "AI Camp",
+    "AI Engineer",
+    "AI Makerspace"
+   ],
+   "falsifier": "Deployment staff become easy to hire",
+   "id": "deployment_talent",
+   "n_more_examples": 33,
+   "name": "Training and placing the engineers who deploy AI",
+   "next_action": "",
+   "none_independent": false,
+   "powers": [],
+   "prerequisites": "",
+   "primary": {
+    "id": "talent_production",
+    "n_entities": 39,
+    "name": "Talent production",
+    "number": "6.5"
+   },
+   "rent": {
+    "appropriability": "weak",
+    "asset_owner": "innovator",
+    "complementary_assets": "generic",
+    "durability": "short",
+    "pools": "users",
+    "profit": "competed away to users",
+    "reads": "competed away to users",
+    "rent_kind": "scarcity",
+    "tier": "none",
+    "verdict": "Competed away to users"
+   },
+   "rent_reason": "The shortage is real now and will ease as training spreads",
+   "see_also": null,
+   "unit_sold": "A placement fee per engineer",
+   "unmapped": false,
+   "wedge": "A paid apprenticeship that places graduates in deployment roles",
+   "why_not_bundled": "Labs hire the best themselves but cannot train the whole market"
+  },
+  {
+   "acquirers": "",
+   "adjacent": [
+    {
+     "id": "identity_and_authority",
+     "n_entities": 9,
+     "name": "Identity and authority",
+     "number": "5.2"
+    },
+    {
+     "id": "provenance_and_audit",
+     "n_entities": 0,
+     "name": "Provenance and audit",
+     "number": "5.3"
+    },
+    {
+     "id": "inference_supply",
+     "n_entities": 29,
+     "name": "Inference supply",
+     "number": "4.1"
+    }
+   ],
+   "blank": [
+    "prerequisites",
+    "acquirers",
+    "next action"
+   ],
+   "bottleneck": "Access to models splits by country and supplier, and a banned supplier breaks the product",
+   "builds_on": [
+    {
+     "href": "/outlook#position-vc_routing_gateways",
+     "ref": "pos:vc_routing_gateways",
+     "title": "vc_routing_gateways"
+    }
+   ],
+   "customer": "Firms and governments bound by rules on which models they may use",
+   "durable_asset": "An approved-model register that becomes part of each firm's compliance",
+   "examples": [
+    "OpenRouter",
+    "Portkey",
+    "Vercel",
+    "AI21 Labs",
+    "Cloudflare",
+    "Helicone"
+   ],
+   "falsifier": "Cross-border access to models widens again",
+   "id": "policy_aware_routing",
+   "n_more_examples": 7,
+   "name": "Routing that keeps a firm inside approved models and fails over when one is cut off",
+   "next_action": "",
+   "none_independent": false,
+   "powers": [
+    "switching costs"
+   ],
+   "prerequisites": "",
+   "primary": {
+    "id": "routing_and_gateways",
+    "n_entities": 13,
+    "name": "Routing and gateways",
+    "number": "4.3"
+   },
+   "rent": {
+    "appropriability": "weak",
+    "asset_owner": "innovator",
+    "complementary_assets": "specialised",
+    "durability": "medium",
+    "pools": "innovator",
+    "profit": "fat",
+    "reads": "a fat profit, kept by the maker",
+    "rent_kind": "regulatory",
+    "tier": "fat",
+    "verdict": "A fat profit, kept by the maker"
+   },
+   "rent_reason": "Rules create the need; the routing itself can be copied",
+   "see_also": null,
+   "unit_sold": "A fee per governed workload",
+   "unmapped": false,
+   "wedge": "A register of approved substitutes for each model, with automatic failover",
+   "why_not_bundled": "No lab will route customers to a rival when it is cut off"
+  },
+  {
+   "acquirers": "",
+   "adjacent": [
+    {
+     "id": "general_purpose_models",
+     "n_entities": 37,
+     "name": "General-purpose models",
+     "number": "2.1"
+    },
+    {
+     "id": "inference_supply",
+     "n_entities": 29,
+     "name": "Inference supply",
+     "number": "4.1"
+    },
+    {
+     "id": "evals_and_assurance",
+     "n_entities": 16,
+     "name": "Evals and assurance",
+     "number": "3.8"
+    }
+   ],
+   "blank": [
+    "prerequisites",
+    "acquirers",
+    "next action"
+   ],
+   "bottleneck": "Open weights are free but turning them into a reliable product takes scarce skill",
+   "builds_on": [
+    {
+     "href": "/outlook#position-vc_open_weight_labs",
+     "ref": "pos:vc_open_weight_labs",
+     "title": "vc_open_weight_labs"
+    },
+    {
+     "href": "/outlook#position-vc_post_training",
+     "ref": "pos:vc_post_training",
+     "title": "vc_post_training"
+    }
+   ],
+   "customer": "Firms that want frontier quality without depending on a closed lab",
+   "durable_asset": "The skill of tuning a model without breaking what it already knew",
+   "examples": [
+    "Baseten",
+    "Prime Intellect",
+    "Adaption Labs",
+    "Adaptive ML",
+    "Applied Compute",
+    "Arcee AI"
+   ],
+   "falsifier": "Closed labs reopen a lasting lead over open models",
+   "id": "open_weight_post_training",
+   "n_more_examples": 13,
+   "name": "Tuning open models to frontier quality for one industry",
+   "next_action": "",
+   "none_independent": false,
+   "powers": [
+    "process power"
+   ],
+   "prerequisites": "",
+   "primary": {
+    "id": "post_training_and_learning_infrastructure",
+    "n_entities": 20,
+    "name": "Post-training and learning infrastructure",
+    "number": "3.7"
+   },
+   "rent": {
+    "appropriability": "weak",
+    "asset_owner": "innovator",
+    "complementary_assets": "generic",
+    "durability": "short",
+    "pools": "users",
+    "profit": "competed away to users",
+    "reads": "competed away to users",
+    "rent_kind": "scarcity",
+    "tier": "none",
+    "verdict": "Competed away to users"
+   },
+   "rent_reason": "The site reads tuning as commoditising; the rent lasts only until clouds bundle it",
+   "see_also": {
+    "id": "continual_learning_in_customer",
+    "name": "A model that keeps learning inside one customer's work"
+   },
+   "unit_sold": "A tuned model per industry, with upkeep",
+   "unmapped": false,
+   "wedge": "Tune an open model for one industry's hardest tasks and prove it on that industry's tests",
+   "why_not_bundled": "Closed labs gain nothing from making open models better"
+  },
+  {
+   "acquirers": "",
+   "adjacent": [
+    {
+     "id": "provenance_and_audit",
+     "n_entities": 0,
+     "name": "Provenance and audit",
+     "number": "5.3"
+    },
+    {
+     "id": "liability_and_risk_transfer",
+     "n_entities": 1,
+     "name": "Liability and risk transfer",
+     "number": "5.6"
+    }
+   ],
+   "blank": [
+    "prerequisites",
+    "acquirers",
+    "next action"
+   ],
+   "bottleneck": "After a public agent failure, nobody can say quickly what went wrong or who is liable",
+   "builds_on": [
+    {
+     "href": "/outlook#claim-insurers_exclude",
+     "ref": "claim:insurers_exclude",
+     "title": "Insurers write AI's mistakes out of their standard policies, so the cover has to be bought and priced on its own."
+    }
+   ],
+   "customer": "Firms whose agents have caused, or could cause, a costly failure",
+   "durable_asset": "A name insurers and courts trust after a failure",
+   "examples": [
+    "Geordie",
+    "Lasso",
+    "Reco",
+    "SpecterOps",
+    "Straiker",
+    "Zenity"
+   ],
+   "falsifier": "Two years pass with no material agent failure",
+   "id": "agent_incident_response",
+   "n_more_examples": 0,
+   "name": "Incident response and forensics for agent failures",
+   "next_action": "",
+   "none_independent": false,
+   "powers": [
+    "branding"
+   ],
+   "prerequisites": "",
+   "primary": {
+    "id": "security",
+    "n_entities": 8,
+    "name": "Security",
+    "number": "5.1"
+   },
+   "rent": {
+    "appropriability": "weak",
+    "asset_owner": "innovator",
+    "complementary_assets": "specialised",
+    "durability": "medium",
+    "pools": "innovator",
+    "profit": "moderate",
+    "reads": "a moderate profit, kept by the maker",
+    "rent_kind": "scarcity",
+    "tier": "moderate",
+    "verdict": "A moderate profit, kept by the maker"
+   },
+   "rent_reason": "Scarce expertise after a shock; rivals follow once demand is proven",
+   "see_also": null,
+   "unit_sold": "An annual retainer plus fees per incident",
+   "unmapped": false,
+   "wedge": "Retained responders who can reconstruct an agent's actions from its logs",
+   "why_not_bundled": "The maker of the failed agent cannot investigate itself"
+  }
+ ],
+ "powers": {
+  "a cornered resource": "preferential access to something others need: a patent, a licence, a scarce input, a rare team",
+  "branding": "buyers pay more for the same thing because of what they believe about who made it",
+  "network economies": "each user makes the product more valuable to the others, so the leader's lead feeds itself",
+  "process power": "a way of working that improves cost or quality and takes a rival years to learn",
+  "scale economies": "unit costs fall as volume grows, and a rival cannot match them without matching the volume",
+  "switching costs": "a customer would lose money, time or work by moving to a rival"
+ },
+ "reviewed": "2026-09-29",
+ "reviewed_by": "Alex Brogan",
+ "sequence": [
+  {
+   "gate": "One regulator or insurer recognises the tests",
+   "label": "Opens the next stage when",
+   "name": "Independent sign-off for AI in regulated work",
+   "opportunity": "regulated_assurance",
+   "stage": "now"
+  },
+  {
+   "gate": "Customers grant rights to their work traces",
+   "label": "Opens the next stage when",
+   "name": "A model that keeps learning inside one customer's work",
+   "opportunity": "continual_learning_in_customer",
+   "stage": "next"
+  },
+  {
+   "gate": "Enough verified outcomes to price a warranty",
+   "label": "Opens the next stage when",
+   "name": "Outcome verification with pay-per-verified-result billing",
+   "opportunity": "outcome_verification",
+   "stage": "later"
+  },
+  {
+   "gate": "Capital and an insurer to carry the risk",
+   "label": "Needs",
+   "name": "A licensed firm that sells the finished job and stands behind it",
+   "opportunity": "licensed_autonomous_service",
+   "stage": "endgame"
+  }
+ ]
+}

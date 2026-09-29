@@ -1,0 +1,615 @@
+# Part 33 Stage 2: businesses that could be built on the market map (seed/market_map.yaml).
+# Each record is the company that would turn one of the site's layer readings (outlook positions with a layer, cited in
+# builds_on as pos:<id>, or outlook claims as claim:<id>) into a lasting profit. List order is the owner's; nothing is scored.
+# Rent inputs are the owner's judgement; pool and tier follow the rent rubric's fixed rules (futures.pools/tier).
+# Powers are Helmer's, as value_chain.POWERS names them. A blank field is blank on purpose and shows as not yet written.
+# Drafted by a model from the site's readings; reviewed and released by Alex Brogan on 29 Sep 2026, who kept all twenty,
+# including those the rubric gives no lasting profit, because knowing what will not hold is instructive.
+# Text types no digit but a year (value_chain.stray_digits).
+reviewed_by: Alex Brogan
+reviewed: '2026-09-29'
+opportunities:
+- id: outcome_verification
+  name: Outcome verification with pay-per-verified-result billing
+  published: true
+  primary: outcome_verification
+  adjacent:
+  - settlement_and_billing
+  - reward_and_verification_systems
+  - managed_ai_operations
+  customer: Operations leaders who pay for agent work and must show it was done right
+  bottleneck: Nobody can cheaply prove that an agent finished a task correctly, so buyers keep humans checking every result
+  wedge: Check one high-volume workflow end to end and bill only for results that pass
+  unit_sold: A verified outcome
+  why_not_bundled: A buyer wants the checker to be independent of whoever sold the agent
+  durable_asset: The definition of done for each workflow, and a record of how often agents pass and fail that grows more useful with
+    every buyer
+  powers:
+  - network_economies
+  builds_on:
+  - pos:vc_evals
+  - claim:checking_sold
+  rent:
+    rent_kind: scale_network
+    appropriability: weak
+    complementary_assets: specialised
+    asset_owner: innovator
+    durability: medium
+  rent_reason: The failure record grows more useful with each buyer, but the checking method itself is easy to copy
+  falsifier: Agents become cheap and reliable at checking their own work, so buyers stop paying for an outside check
+  prerequisites: ''
+  acquirers: ''
+  next_action: ''
+- id: regulated_assurance
+  name: Independent sign-off for AI in regulated work
+  published: true
+  primary: evals_and_assurance
+  adjacent:
+  - liability_and_risk_transfer
+  - provenance_and_audit
+  customer: Banks, insurers, hospitals and their regulators
+  bottleneck: Regulated firms cannot use a model until someone other than the seller vouches for it
+  wedge: Private test suites for one regulated task, such as claims handling or credit decisions, accepted by one regulator or insurer
+  unit_sold: A certification per model and task, renewed on each model change
+  why_not_bundled: The whole value is that the tester does not sell the model
+  durable_asset: A name buyers and regulators insist on, and, if outside sign-off becomes required, a place rivals can reach only by
+    earning the same standing
+  powers:
+  - branding
+  builds_on:
+  - pos:vc_evals
+  - claim:checking_sold
+  rent:
+    rent_kind: regulatory
+    appropriability: tight
+    complementary_assets: specialised
+    asset_owner: innovator
+    durability: long
+  rent_reason: If a regulator names the tester, rivals need the same standing, which takes years
+  falsifier: Regulators accept the labs' own testing, or no regulator requires an outside sign-off
+  prerequisites: One regulator or insurer willing to recognise the tests
+  acquirers: ''
+  next_action: ''
+- id: continual_learning_in_customer
+  name: A model that keeps learning inside one customer's work
+  published: true
+  primary: post_training_and_learning_infrastructure
+  adjacent:
+  - data_transformation
+  - evals_and_assurance
+  - context_engineering
+  customer: Firms with a high volume of repeated expert work, such as claims, support or underwriting
+  bottleneck: Everyday work leaves no reusable signal, so models stop improving once deployed
+  wedge: Turn live work into privacy-safe traces and a test set that refreshes itself
+  unit_sold: A monthly fee per workflow that the model learns
+  why_not_bundled: The customer's record helps only that customer, so a lab has little reason to build it for each one
+  durable_asset: A model that has learned the firm's work for months, which the firm would lose by moving to a rival
+  powers:
+  - switching_costs
+  builds_on:
+  - pos:vc_post_training
+  rent:
+    rent_kind: switching_cost
+    appropriability: weak
+    complementary_assets: specialised
+    asset_owner: innovator
+    durability: medium
+  rent_reason: The lock-in is real once learning works, but the site reads tuning as commoditising until it does
+  falsifier: Each new general model wipes out what the customer's model learned, so firms stop paying to keep it learning
+  prerequisites: Continual learning working in production
+  acquirers: ''
+  next_action: ''
+- id: agent_authority_registry
+  name: Know-your-agent and delegated-authority registry
+  published: true
+  primary: identity_and_authority
+  adjacent:
+  - provenance_and_audit
+  - settlement_and_billing
+  - tools_and_actuation
+  customer: Platforms and firms that let outside agents act for people
+  bottleneck: A counterparty cannot tell which agent acts for whom, and under what limits
+  wedge: Issue and revoke agent credentials for one platform's partners
+  unit_sold: An active agent identity per month
+  why_not_bundled: Each lab issuing its own identities leaves no neutral register that counterparties across labs trust
+  durable_asset: A register that becomes more useful to everyone checking it as more agents are listed
+  powers:
+  - network_economies
+  builds_on:
+  - pos:vc_agent_infra
+  rent:
+    rent_kind: scale_network
+    appropriability: weak
+    complementary_assets: specialised
+    asset_owner: incumbents
+    durability: long
+  rent_reason: Existing identity firms already own the customer relationships and are extending to agents
+  falsifier: Agents keep acting inside human sessions, so no separate agent identity is needed
+  prerequisites: ''
+  acquirers: ''
+  next_action: ''
+- id: agent_audit_trail
+  name: Tamper-proof audit trail for what agents did
+  published: true
+  primary: provenance_and_audit
+  adjacent:
+  - identity_and_authority
+  - security
+  - evals_and_assurance
+  customer: Compliance teams and auditors at firms that let agents act
+  bottleneck: After an agent acts, nobody can reconstruct what it saw, decided and changed
+  wedge: A decision log for one regulated workflow that auditors accept
+  unit_sold: Logged agent actions, priced per seat of the audited team
+  why_not_bundled: The log is only credible if the agent's maker cannot edit it
+  durable_asset: Years of audit history that cannot be moved without breaking the trail
+  powers:
+  - switching_costs
+  builds_on:
+  - pos:vc_agent_infra
+  rent:
+    rent_kind: switching_cost
+    appropriability: weak
+    complementary_assets: specialised
+    asset_owner: innovator
+    durability: long
+  rent_reason: Years of audit history are costly to leave, though the logging itself is easy to copy
+  falsifier: Regulators accept each vendor's own logs
+  prerequisites: ''
+  acquirers: ''
+  next_action: ''
+- id: ai_warranty
+  name: AI warranty backed by a pool of loss data
+  published: true
+  primary: liability_and_risk_transfer
+  adjacent:
+  - outcome_verification
+  - evals_and_assurance
+  - provenance_and_audit
+  customer: Firms buying agents for consequential work, and the insurers who cover them
+  bottleneck: Agent failures cannot be priced, so procurement stalls or insurers exclude them
+  wedge: A warranty on one agent product, paid for by the vendor and backed by a reinsurer
+  unit_sold: A premium per covered workflow
+  why_not_bundled: A lab standing behind its own mistakes is a conflict buyers discount
+  durable_asset: The record of losses that prices the next policy better than any newcomer can
+  powers:
+  - cornered_resource
+  builds_on:
+  - claim:insurers_exclude
+  rent:
+    rent_kind: scarcity
+    appropriability: tight
+    complementary_assets: specialised
+    asset_owner: innovator
+    durability: long
+  rent_reason: Loss data accumulates only with years of claims
+  falsifier: Courts put agent losses on the model makers, so buyers need no separate cover
+  prerequisites: A capacity partner willing to carry the risk
+  acquirers: ''
+  next_action: ''
+- id: pooled_expert_records
+  name: Graded expert-work records pooled across buyers
+  published: true
+  primary: data_origination
+  adjacent:
+  - reward_and_verification_systems
+  - evals_and_assurance
+  customer: Labs and large firms training models on expert judgement
+  bottleneck: Expert data is made to order and belongs to the buyer, so the seller keeps nothing when the job ends
+  wedge: Sell graded work where the grading, not the answers, is licensed to many buyers
+  unit_sold: A licence to a graded record per field
+  why_not_bundled: Labs hire experts directly, but no single lab can grade across the whole market
+  durable_asset: A record of checked expert outcomes that improves every buyer's model and that no one buyer holds
+  powers:
+  - cornered_resource
+  builds_on:
+  - pos:vc_human_data
+  rent:
+    rent_kind: scarcity
+    appropriability: weak
+    complementary_assets: specialised
+    asset_owner: innovator
+    durability: medium
+  rent_reason: The grading record is hard to rebuild, but the labs could bring the work inside
+  falsifier: Labs bring expert work in-house and stop buying outside records
+  prerequisites: ''
+  acquirers: ''
+  next_action: ''
+- id: outcome_router
+  name: A router that chooses models from pooled outcomes
+  published: true
+  primary: routing_and_gateways
+  adjacent:
+  - compute_utilization_and_control
+  - inference_optimization
+  - outcome_verification
+  customer: Platform teams spending on several model providers
+  bottleneck: Each firm guesses which model and venue to use for each task, and pays for the guess
+  wedge: Save money on day one by sending routine work to cheaper models, and record which choices worked
+  unit_sold: A share of the saving
+  why_not_bundled: Each lab routes to its own models; a neutral router routes to whichever wins
+  durable_asset: Choices learned from many firms' outcomes that beat any one firm's own
+  powers:
+  - network_economies
+  builds_on:
+  - pos:vc_routing_gateways
+  - pos:router_power
+  rent:
+    rent_kind: scale_network
+    appropriability: weak
+    complementary_assets: generic
+    asset_owner: platforms
+    durability: medium
+  rent_reason: The site reads choosing a model as being given away unless pooled outcomes create the network
+  falsifier: One provider becomes best on price and quality for most tasks
+  prerequisites: ''
+  acquirers: ''
+  next_action: ''
+  see_also: policy_aware_routing
+- id: agent_payments
+  name: Escrow that pays an agent only when its work passes a check
+  published: true
+  primary: settlement_and_billing
+  adjacent:
+  - identity_and_authority
+  - outcome_verification
+  - routing_and_gateways
+  customer: Marketplaces and firms whose agents buy services from other agents
+  bottleneck: Agents can find and order work from other agents, but nothing holds the money until the work is proven done
+  wedge: Escrow that releases payment when the result passes an agreed check
+  unit_sold: A fee per settled transaction
+  why_not_bundled: Card networks move money but do not judge whether the work was done
+  durable_asset: The record of which agents deliver, and the billing and credit that buyers and sellers would lose by leaving
+  powers:
+  - switching_costs
+  - network_economies
+  builds_on:
+  - pos:vc_routing_gateways
+  rent:
+    rent_kind: scale_network
+    appropriability: weak
+    complementary_assets: specialised
+    asset_owner: incumbents
+    durability: long
+  rent_reason: Payment incumbents hold the rails; the opening is the check that releases the money
+  falsifier: Agent-initiated purchases stay a tiny share of payments
+  prerequisites: ''
+  acquirers: ''
+  next_action: ''
+- id: permission_connectors
+  name: The standard way agents get permission into business software
+  published: true
+  primary: tools_and_actuation
+  adjacent:
+  - identity_and_authority
+  - agent_runtimes
+  - context_and_memory
+  customer: Firms connecting agents to their records, and the software vendors who hold them
+  bottleneck: Every agent needs its own negotiated, audited link into each system a firm runs
+  wedge: Connectors for one crowded category of business software, with permissions and an audit trail built in
+  unit_sold: A connected system per month
+  why_not_bundled: The software that keeps the records can refuse or charge outside agents, so a neutral standard needs both sides
+  durable_asset: The standard link other agents must use if it spreads, and each customer's wiring if it does not
+  powers:
+  - network_economies
+  - switching_costs
+  builds_on:
+  - pos:vc_agent_infra
+  - pos:records_hold
+  rent:
+    rent_kind: switching_cost
+    appropriability: weak
+    complementary_assets: specialised
+    asset_owner: incumbents
+    durability: medium
+  rent_reason: Record-keeping software owners can capture this themselves
+  falsifier: Labs and clouds ship their own connectors and the record-keepers let them in free
+  prerequisites: ''
+  acquirers: ''
+  next_action: ''
+- id: deploy_to_platform
+  name: Deployment that leaves behind the platform the customer runs on
+  published: true
+  primary: technical_implementation
+  adjacent:
+  - context_engineering
+  - managed_ai_operations
+  - adoption_and_change
+  customer: Mid-sized firms that cannot hire their own AI engineers
+  bottleneck: Engineers who can turn messy data and unwritten habits into working systems are scarce
+  wedge: Forward-deployed engineers who build on the firm's own map of its data and operations
+  unit_sold: A deployment project, then a platform fee
+  why_not_bundled: Labs are buying consultancies to do this, which is the risk as well as the proof
+  durable_asset: A platform the customer's operations run on, which it would have to rebuild to leave
+  powers:
+  - switching_costs
+  builds_on:
+  - pos:vc_deployment_services
+  - pos:labs_below_software
+  rent:
+    rent_kind: switching_cost
+    appropriability: weak
+    complementary_assets: specialised
+    asset_owner: innovator
+    durability: medium
+  rent_reason: The services margin grows with headcount; only the platform left behind earns a rent
+  falsifier: Models need so little fitting that self-serve deployment wins
+  prerequisites: ''
+  acquirers: ''
+  next_action: ''
+- id: context_engineering_service
+  name: Capturing how a firm really works, for its agents
+  published: true
+  primary: context_engineering
+  adjacent:
+  - technical_implementation
+  - context_and_memory
+  - managed_ai_operations
+  customer: Firms whose agents fail on unwritten rules and exceptions
+  bottleneck: The knowledge an agent needs sits in people's heads, not in any system
+  wedge: Interview and observe one team, and turn its unwritten rules into tests and instructions agents follow
+  unit_sold: A captured workflow, then upkeep as it changes
+  why_not_bundled: The work is specific to each firm and changes over time
+  durable_asset: The captured rules the firm's agents run on
+  powers:
+  - switching_costs
+  builds_on:
+  - pos:vc_agent_infra
+  - pos:vc_deployment_services
+  rent:
+    rent_kind: switching_cost
+    appropriability: weak
+    complementary_assets: specialised
+    asset_owner: innovator
+    durability: short
+  rent_reason: Useful and needed now, but copyable and likely to be automated
+  falsifier: Agents learn a firm's unwritten rules on their own from its records
+  prerequisites: ''
+  acquirers: ''
+  next_action: ''
+  see_also: deploy_to_platform
+- id: vertical_system_of_record
+  name: A trade's AI system of record, with the approvals only that trade can give
+  published: true
+  primary: vertical_workflow_software
+  adjacent:
+  - autonomous_services
+  - provenance_and_audit
+  - liability_and_risk_transfer
+  customer: Firms in a licensed trade, such as law, medicine or insurance
+  bottleneck: A general model can draft the work but cannot hold the trade's records or sign for it
+  wedge: The tool the professional already works in, which becomes where the matter, patient or case lives
+  unit_sold: A seat, then a share of the work it completes
+  why_not_bundled: Labs lack the trade's records, licensed content and the approvals a regulator gives
+  durable_asset: The trade's records and approvals, which customers would lose by leaving
+  powers:
+  - switching_costs
+  builds_on:
+  - pos:vc_vertical_ai
+  rent:
+    rent_kind: switching_cost
+    appropriability: weak
+    complementary_assets: specialised
+    asset_owner: innovator
+    durability: long
+  rent_reason: Holding the trade's records is sticky; packaging a general model is not
+  falsifier: Vertical apps' prices fall with each better general model as customers move to the labs' own products
+  prerequisites: ''
+  acquirers: ''
+  next_action: ''
+- id: outcome_priced_rollup
+  name: An AI roll-up that moves its clients to fixed fees
+  published: true
+  primary: ai_native_rollups
+  adjacent:
+  - autonomous_services
+  - vertical_workflow_software
+  customer: Clients of hour-billed trades such as accounting, brokerage and property management
+  bottleneck: A firm billed by the hour hands AI's saving straight back to the client at the next re-bid
+  wedge: Buy owner-run firms and switch their clients to fixed fees before automating the work
+  unit_sold: A fixed fee per client or per job
+  why_not_bundled: The asset is the customer relationship and the licence, which software cannot buy
+  durable_asset: A way of running many firms that rivals take years to learn, and lower costs per client than any single firm
+  powers:
+  - process_power
+  - scale_economies
+  builds_on:
+  - pos:vc_ai_rollups
+  rent:
+    rent_kind: scarcity
+    appropriability: weak
+    complementary_assets: specialised
+    asset_owner: innovator
+    durability: medium
+  rent_reason: The roll-up owns the complementary assets; the AI itself is bought in
+  falsifier: Margins fall back to the trade's ordinary level as unmerged rivals buy the same tools
+  prerequisites: Capital and a pipeline of owners ready to sell
+  acquirers: ''
+  next_action: ''
+- id: licensed_autonomous_service
+  name: A licensed firm that sells the finished job and stands behind it
+  published: true
+  primary: autonomous_services
+  adjacent:
+  - liability_and_risk_transfer
+  - vertical_workflow_software
+  - outcome_verification
+  customer: Small and mid-sized firms that want the work done, not another tool
+  bottleneck: Buyers want one accountable party when consequential work goes wrong
+  wedge: One narrow service in one licensed trade, priced per outcome
+  unit_sold: A completed job
+  why_not_bundled: A lab would have to hold the licence and carry the liability
+  durable_asset: The customer relationship and the licence to do the work, which software firms cannot buy
+  powers:
+  - cornered_resource
+  builds_on:
+  - pos:vc_vertical_ai
+  - pos:vc_ai_rollups
+  rent:
+    rent_kind: regulatory
+    appropriability: weak
+    complementary_assets: specialised
+    asset_owner: innovator
+    durability: medium
+  rent_reason: The licence and the liability keep software vendors out, but other licensed firms can copy the model
+  falsifier: Labs launch services in the same trades with their own warranties
+  prerequisites: ''
+  acquirers: ''
+  next_action: ''
+- id: energy_aware_compute
+  name: Moving computing to where power is available
+  published: true
+  primary: compute_utilization_and_control
+  adjacent:
+  - power_and_sites
+  - compute_providers
+  - inference_optimization
+  customer: Data-centre operators, utilities and large compute buyers
+  bottleneck: A site already wired to the grid is scarcer than the building or the money
+  wedge: Shift flexible workloads to hours and places where power is spare, and sell that flexibility to the grid
+  unit_sold: A share of the power saved or the capacity freed
+  why_not_bundled: It needs both the grid's and the operator's data, which neither side holds alone
+  durable_asset: Agreements with utilities that let a site connect sooner
+  powers:
+  - cornered_resource
+  builds_on:
+  - pos:vc_dc_power
+  rent:
+    rent_kind: scarcity
+    appropriability: weak
+    complementary_assets: specialised
+    asset_owner: incumbents
+    durability: medium
+  rent_reason: The scarcity is real while grid hookups lag; the rent goes to whoever holds the grid position
+  falsifier: Interconnection queues shorten sharply
+  prerequisites: ''
+  acquirers: ''
+  next_action: ''
+- id: deployment_talent
+  name: Training and placing the engineers who deploy AI
+  published: true
+  primary: talent_production
+  adjacent:
+  - technical_implementation
+  - context_engineering
+  - managed_ai_operations
+  customer: Deployment firms and enterprises short of deployment engineers
+  bottleneck: Deployment talent, not models, keeps pilots from reaching production
+  wedge: A paid apprenticeship that places graduates in deployment roles
+  unit_sold: A placement fee per engineer
+  why_not_bundled: Labs hire the best themselves but cannot train the whole market
+  durable_asset: A network of placed alumni and the firms that hire them
+  powers: []
+  builds_on:
+  - pos:vc_deployment_services
+  rent:
+    rent_kind: scarcity
+    appropriability: weak
+    complementary_assets: generic
+    asset_owner: innovator
+    durability: short
+  rent_reason: The shortage is real now and will ease as training spreads
+  falsifier: Deployment staff become easy to hire
+  prerequisites: ''
+  acquirers: ''
+  next_action: ''
+- id: policy_aware_routing
+  name: Routing that keeps a firm inside approved models and fails over when one is cut off
+  published: true
+  primary: routing_and_gateways
+  adjacent:
+  - identity_and_authority
+  - provenance_and_audit
+  - inference_supply
+  customer: Firms and governments bound by rules on which models they may use
+  bottleneck: Access to models splits by country and supplier, and a banned supplier breaks the product
+  wedge: A register of approved substitutes for each model, with automatic failover
+  unit_sold: A fee per governed workload
+  why_not_bundled: No lab will route customers to a rival when it is cut off
+  durable_asset: An approved-model register that becomes part of each firm's compliance
+  powers:
+  - switching_costs
+  builds_on:
+  - pos:vc_routing_gateways
+  rent:
+    rent_kind: regulatory
+    appropriability: weak
+    complementary_assets: specialised
+    asset_owner: innovator
+    durability: medium
+  rent_reason: Rules create the need; the routing itself can be copied
+  falsifier: Cross-border access to models widens again
+  prerequisites: ''
+  acquirers: ''
+  next_action: ''
+- id: open_weight_post_training
+  name: Tuning open models to frontier quality for one industry
+  published: true
+  primary: post_training_and_learning_infrastructure
+  adjacent:
+  - general_purpose_models
+  - inference_supply
+  - evals_and_assurance
+  customer: Firms that want frontier quality without depending on a closed lab
+  bottleneck: Open weights are free but turning them into a reliable product takes scarce skill
+  wedge: Tune an open model for one industry's hardest tasks and prove it on that industry's tests
+  unit_sold: A tuned model per industry, with upkeep
+  why_not_bundled: Closed labs gain nothing from making open models better
+  durable_asset: The skill of tuning a model without breaking what it already knew
+  powers:
+  - process_power
+  builds_on:
+  - pos:vc_open_weight_labs
+  - pos:vc_post_training
+  rent:
+    rent_kind: scarcity
+    appropriability: weak
+    complementary_assets: generic
+    asset_owner: innovator
+    durability: short
+  rent_reason: The site reads tuning as commoditising; the rent lasts only until clouds bundle it
+  falsifier: Closed labs reopen a lasting lead over open models
+  prerequisites: ''
+  acquirers: ''
+  next_action: ''
+  see_also: continual_learning_in_customer
+- id: agent_incident_response
+  name: Incident response and forensics for agent failures
+  published: true
+  primary: security
+  adjacent:
+  - provenance_and_audit
+  - liability_and_risk_transfer
+  customer: Firms whose agents have caused, or could cause, a costly failure
+  bottleneck: After a public agent failure, nobody can say quickly what went wrong or who is liable
+  wedge: Retained responders who can reconstruct an agent's actions from its logs
+  unit_sold: An annual retainer plus fees per incident
+  why_not_bundled: The maker of the failed agent cannot investigate itself
+  durable_asset: A name insurers and courts trust after a failure
+  powers:
+  - branding
+  builds_on:
+  - claim:insurers_exclude
+  rent:
+    rent_kind: scarcity
+    appropriability: weak
+    complementary_assets: specialised
+    asset_owner: innovator
+    durability: medium
+  rent_reason: Scarce expertise after a shock; rivals follow once demand is proven
+  falsifier: Two years pass with no material agent failure
+  prerequisites: ''
+  acquirers: ''
+  next_action: ''
+sequence:
+- stage: now
+  opportunity: regulated_assurance
+  gate: One regulator or insurer recognises the tests
+- stage: next
+  opportunity: continual_learning_in_customer
+  gate: Customers grant rights to their work traces
+- stage: later
+  opportunity: outcome_verification
+  gate: Enough verified outcomes to price a warranty
+- stage: endgame
+  opportunity: licensed_autonomous_service
+  gate: Capital and an insurer to carry the risk

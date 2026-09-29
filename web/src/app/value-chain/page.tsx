@@ -19,6 +19,7 @@ export default function ValueChainPage() {
           Every part of building and using AI, from power and chips to the apps people use, earns money differently. This page is the site&apos;s judgement of where each part&apos;s economics are heading. A part is <em>commoditising</em> when it is becoming cheap and interchangeable, so the gain passes to buyers; <em>holding</em> when its profit is steady for now; and <em>tightening</em> when it is getting scarcer, so whoever owns it can charge more. Each judgement names the view that argues against it and what would prove it wrong. &ldquo;Binds on&rdquo; names the inputs each part depends on, with how tight the site&apos;s <Link href="/bottlenecks" className="underline decoration-grid underline-offset-4">bottleneck scorecard</Link> reads each tonight. The readings behind every judgement are on its layer&apos;s page.
         </p>
         <PowersGlossary powers={v.powers} />
+        <p className="text-ink-2 max-w-[68ch]">Where the map shows a shortage, some businesses could be built to meet it: <Link href="/value-chain/opportunities" className="underline decoration-grid underline-offset-4">businesses that could be built</Link>, with the profit the site&apos;s rent rule gives each and what would prove it wrong.</p>
       </div>
       <div>
         <div className="hidden md:grid grid-cols-[2fr_0.8fr_2fr_1.6fr] gap-4 py-2 text-sm text-muted border-y border-grid" aria-hidden>
