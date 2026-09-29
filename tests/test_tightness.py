@@ -137,6 +137,7 @@ def test_the_seed_is_whole():
                 assert g["unfed"]["kind"] in KINDS
                 continue
             assert g["metric"] in metrics and len(g["scale_rationale"]) >= 40, (i["id"], g["id"])
+            assert g["max_age_days"] <= 300, (i["id"], g["id"])  # older than about three quarters says nothing about now
 
 
 def test_an_input_whose_metric_gives_nothing_is_the_engines_to_explain_not_the_seeds():
