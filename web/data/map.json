@@ -2,7 +2,7 @@
  "bets": [
   {
    "as_of": "2026-06-30",
-   "firms": 9,
+   "firms": 66,
    "rows": [
     "energy",
     "grid",
@@ -16,7 +16,7 @@
   },
   {
    "as_of": "2026-06-30",
-   "firms": 17,
+   "firms": 28,
    "rows": [
     "chip_equipment",
     "foundry",
@@ -40,7 +40,7 @@
   },
   {
    "as_of": "2026-06-30",
-   "firms": 7,
+   "firms": 22,
    "rows": [
     "memory"
    ],
@@ -150,7 +150,7 @@
   },
   {
    "as_of": "2026-06-30",
-   "firms": 10,
+   "firms": 34,
    "rows": [
     "inference"
    ],
@@ -173,7 +173,7 @@
   },
   {
    "as_of": "2026-06-30",
-   "firms": 9,
+   "firms": 12,
    "rows": [
     "routing"
    ],
@@ -193,7 +193,7 @@
   },
   {
    "as_of": "2026-06-30",
-   "firms": 11,
+   "firms": 48,
    "rows": [
     "agents"
    ],
@@ -361,10 +361,10 @@
        "name": "The grid and its hookups",
        "note": null,
        "reading": {
-        "because": "Grid operators publish their connection queues, but this site does not read them yet.",
+        "because": "The wait to connect a large new load, such as a data centre, is what scarcity here would show up in. Only one utility has stated its wait, and only through local press, so there is no series to read.",
         "kind": "withheld",
         "kind_of_tight": "supply",
-        "tag": "not_read_yet"
+        "tag": "no_public_series"
        },
        "reads": null,
        "sublayer": {
@@ -591,10 +591,10 @@
        "name": "Chip-making equipment",
        "note": null,
        "reading": {
-        "because": "The equipment makers file their orders and backlogs, but this site does not read them yet.",
+        "because": "This site reads the equipment makers' filings, but their backlogs do not measure demand from AI: one of the largest files no backlog, and the others' backlogs fell while the AI build-out grew, following the wider chip cycle.",
         "kind": "withheld",
         "kind_of_tight": "supply",
-        "tag": "not_read_yet"
+        "tag": "gauge_unsound"
        },
        "reads": null,
        "sublayer": {
@@ -1112,10 +1112,10 @@
        "name": "Training infrastructure",
        "note": null,
        "reading": {
-        "because": "Epoch publishes how fully some training runs used their chips, but this site does not read that column yet.",
+        "because": "Epoch lists how fully some training runs used their chips, but almost none are the largest runs this input is about, since the labs running them publish nothing, and the figures are measured against different chip speeds, so the same skill can read as twice as tight.",
         "kind": "withheld",
         "kind_of_tight": "supply",
-        "tag": "not_read_yet"
+        "tag": "gauge_unsound"
        },
        "reads": null,
        "sublayer": null,
@@ -1612,7 +1612,7 @@
        "cells": {
         "early_adoption": {
          "bites": true,
-         "measured": false,
+         "measured": true,
          "site": false,
          "why": "Firms hand work to agents only as far as they can see and undo what the agents do.",
          "writers": [
@@ -1632,7 +1632,7 @@
         },
         "products": {
          "bites": true,
-         "measured": false,
+         "measured": true,
          "site": false,
          "why": "A system that acts for people needs tools, permissions and a record of what it did.",
          "writers": []
@@ -1655,7 +1655,12 @@
        "focus": "predicted",
        "href": "/argument/migration#input-agents",
        "id": "agents",
-       "instruments": [],
+       "instruments": [
+        {
+         "href": "/indicators/metr_horizon_50",
+         "label": "How fast the length of task an agent can finish doubles"
+        }
+       ],
        "layer": {
         "id": "serving_orchestration",
         "name": "Serving & orchestration"
@@ -1663,10 +1668,39 @@
        "name": "Agents and tool use",
        "note": null,
        "reading": {
-        "because": "The marketplace lists which models can use tools, but this site stores only their prices.",
-        "kind": "withheld",
+        "confidence": 50,
+        "hatched": false,
+        "kind": "scored",
         "kind_of_tight": "know_how",
-        "tag": "not_read_yet"
+        "obs_ids": [
+         "0d21fe651b2bd589",
+         "1963199165cd8c93",
+         "2325ad877ea0581f",
+         "261c1f51f1f6b138",
+         "2eb7c897f31e5b3e",
+         "3466aea4ed2495c4",
+         "37e97a6fcbe1c2ca",
+         "39c8213ab061a5f7",
+         "4a682b8c20f32dfe",
+         "64f0dec494a49904",
+         "68864ed59f5d9a57",
+         "6af93ac0d37ce9a2",
+         "6b19d566b4f5cd57",
+         "72bcb9d860605a44",
+         "734779b57a58f38f",
+         "7c977050ff6a8cfe",
+         "858c619bbf5d9edd",
+         "8a2d699724cf4d5e",
+         "96d016fade882963",
+         "a2aa2e4df87f5448",
+         "ae5278061f1da61c",
+         "cd50d5649e0a06f1",
+         "e466aae4890e8f57",
+         "efa58e1ccf788fa1",
+         "fb7435cdf6c0c3f4"
+        ],
+        "score": 20,
+        "word": "easing"
        },
        "reads": null,
        "sublayer": {
@@ -1899,7 +1933,8 @@
         "normal": 3,
         "other": 2,
         "readings": 0
-       }
+       },
+       "readings": []
       },
       {
        "cells": {
@@ -1988,7 +2023,8 @@
         "normal": 1,
         "other": 4,
         "readings": 0
-       }
+       },
+       "readings": []
       },
       {
        "cells": {
@@ -2096,7 +2132,8 @@
         "normal": 6,
         "other": 3,
         "readings": 0
-       }
+       },
+       "readings": []
       },
       {
        "cells": {
@@ -2187,7 +2224,8 @@
         "normal": 2,
         "other": 1,
         "readings": 0
-       }
+       },
+       "readings": []
       },
       {
        "cells": {
@@ -2224,7 +2262,7 @@
         {
          "href": "/indicators/circular_financing_scale",
          "label": "Circular financing scale",
-         "status": "unclear",
+         "status": "concentrating",
          "unpublished": false
         },
         {
@@ -2242,7 +2280,8 @@
         "normal": 0,
         "other": 2,
         "readings": 0
-       }
+       },
+       "readings": []
       },
       {
        "cells": {
@@ -2316,7 +2355,8 @@
         "normal": 1,
         "other": 1,
         "readings": 0
-       }
+       },
+       "readings": []
       },
       {
        "cells": {
@@ -2415,13 +2455,14 @@
         "normal": 2,
         "other": 6,
         "readings": 0
-       }
+       },
+       "readings": []
       },
       {
        "cells": {
         "adaptation": {
          "bites": true,
-         "measured": false,
+         "measured": true,
          "site": true,
          "why": "They say these limits act across every stage; this site draws them where firms reorganise.",
          "writers": []
@@ -2452,8 +2493,43 @@
         "kind": "tally",
         "normal": 0,
         "other": 0,
-        "readings": 0
-       }
+        "readings": 3
+       },
+       "readings": [
+        {
+         "as_of": "2026-09-03",
+         "derived_id": "927fbbe5ad94a87f",
+         "href": "/query#benchmark_frontier",
+         "label": "AI capability on science tasks, not the pace of science itself: best score on FrontierMath's hardest, research-level maths problems",
+         "obs_ids": [
+          "a2bc3d7160f6a987"
+         ],
+         "unit": "share",
+         "value": 0.976
+        },
+        {
+         "as_of": "2026-09-01",
+         "derived_id": "f500632c22acc1ef",
+         "href": "/query#benchmark_frontier",
+         "label": "best AI score on SciCode, code written to solve research problems across the sciences",
+         "obs_ids": [
+          "8e77253a26b706c0"
+         ],
+         "unit": "share",
+         "value": 0.630787037037037
+        },
+        {
+         "as_of": "2026-07-09",
+         "derived_id": "72cb759ca0efe4c9",
+         "href": "/query#benchmark_frontier",
+         "label": "best AI score on CritPt, unpublished research-level physics problems",
+         "obs_ids": [
+          "d9a8b99239a6e1ff"
+         ],
+         "unit": "share",
+         "value": 0.322857142857143
+        }
+       ]
       },
       {
        "cells": {
@@ -2514,7 +2590,8 @@
         "normal": 0,
         "other": 2,
         "readings": 0
-       }
+       },
+       "readings": []
       }
      ]
     },
