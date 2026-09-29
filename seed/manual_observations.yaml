@@ -2394,7 +2394,8 @@ observations:
   #    terminated counts at its confirmation; a deal only reported never counts; a joint purchase counts only if one
   #    buyer controls it. A deal notified to the European Commission under the Digital Markets Act is dated no later
   #    than its notification (a filing), in Brussels time.
-  # R4 its target is in one of the fourteen sublayers above the model layer (training input, serving and orchestration,
+  # R4 its target is in one of the seventeen sublayers above the model layer (fourteen until 28 Sep 2026, when agent security &
+  #    identity, talent production and autonomous services were added; the considered list was re-checked and no deal moved) (training input, serving and orchestration,
   #    deployment and application), named in the row's note; a target that is an entity is classed by its primary
   #    membership (so robot makers, filed as labs, are out). Software built for AI workloads counts; general cluster and
   #    HPC schedulers count as compute. Chips, clouds, data centres, power, other labs, databases and data tools, and
@@ -3737,6 +3738,7 @@ observations:
   #   samsung Element Biosciences (stake, largest shareholder) (2026-06-09): R3: a minority stake, no team joins; R4: gene-sequencing instruments
   #   samsung Netlist (equity investment in a patent settlement) (2026-08-05): R3: a minority stake; R4: memory
   #   samsung Euclyd (co-investment) (2026-09-17): R3: a minority stake; R4: chips (AI inference silicon)
+  # --- re-checked 28 Sep 2026 under seventeen sublayers (R4 widened in #120): no asml or samsung deal above moves ---
   # --- procurement enter bell (lab_procurement_signal_4q); scores coded against the rubric in semantic/metrics.yaml ---
   - series_key: procurement.turing.signal.pt
     source_id: techcrunch
@@ -6659,18 +6661,6 @@ observations:
     tier: 5
     basis: reported
     raw_snippet: Nous Research $1B 2023
-    note: neolabs.fyi directory valuation; an aggregator, so the round date is unknown and as_of is the day it was read.
-  - series_key: neolabs_fyi.merge_labs.post_money_usd.pt
-    source_id: neolabs_fyi
-    entity_id: merge_labs
-    value: 850000000
-    unit: USD
-    as_of_date: '2026-09-28'
-    published_date: '2026-09-28'
-    url: https://neolabs.fyi/
-    tier: 5
-    basis: reported
-    raw_snippet: Merge Labs $850M 2026
     note: neolabs.fyi directory valuation; an aggregator, so the round date is unknown and as_of is the day it was read.
   - series_key: neolabs_fyi.inferact.post_money_usd.pt
     source_id: neolabs_fyi

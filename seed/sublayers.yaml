@@ -1,4 +1,4 @@
-# 21 sub-layers (P1 §4.2). Sub-layer 2 also houses the hyperscalers so capex has a home. Entities attach later with dated membership.
+# 24 sub-layers: 21 from P1 §4.2, plus agent security & identity, talent production and autonomous services added 28 Sep 2026. Sub-layer 2 also houses the hyperscalers so capex has a home. Entities attach later with dated membership.
 sublayers:
   - {id: semis, layer_id: compute_physical, order: 1, name: Semiconductors & AI chip startups}
   - {id: hyperscalers_neoclouds, layer_id: compute_physical, order: 2, name: Hyperscalers, neoclouds & GPU clouds}
@@ -16,8 +16,11 @@ sublayers:
   - {id: inference_serving, layer_id: serving_orchestration, order: 14, name: Inference serving}
   - {id: routing_gateways, layer_id: serving_orchestration, order: 15, name: Routing, gateways, inference FinOps}
   - {id: agent_infra, layer_id: serving_orchestration, order: 16, name: Agent infrastructure}
-  - {id: deployment_services, layer_id: deployment_application, order: 17, name: Deployment / FDE / implementation services}
-  - {id: coding_agents, layer_id: deployment_application, order: 18, name: Coding agents & dev tools}
-  - {id: vertical_ai, layer_id: deployment_application, order: 19, name: Vertical AI by domain}
-  - {id: consumer_ai, layer_id: deployment_application, order: 20, name: Consumer AI}
-  - {id: ai_rollups, layer_id: deployment_application, order: 21, name: AI-native rollups / buyout vehicles}
+  - {id: agent_security_identity, layer_id: serving_orchestration, order: 17, name: Agent security & identity}
+  - {id: deployment_services, layer_id: deployment_application, order: 18, name: Deployment / FDE / implementation services}
+  - {id: talent_production, layer_id: deployment_application, order: 19, name: Talent production / AI education & FDE training}
+  - {id: coding_agents, layer_id: deployment_application, order: 20, name: Coding agents & dev tools}
+  - {id: vertical_ai, layer_id: deployment_application, order: 21, name: Vertical AI by domain}
+  - {id: autonomous_services, layer_id: deployment_application, order: 22, name: Autonomous services / AI-native service firms}
+  - {id: consumer_ai, layer_id: deployment_application, order: 23, name: Consumer AI}
+  - {id: ai_rollups, layer_id: deployment_application, order: 24, name: AI-native rollups / buyout vehicles}

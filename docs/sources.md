@@ -8,6 +8,7 @@
 | abridge_blog | Abridge blog | Abridge | html | 7 | irregular | Abridge; short quotation | Abridge |
 | adp_research | ADP Research, Canaries Dashboard releases | ADP Research | html | 6 | irregular | ADP Research; short quotation | Canaries Dashboard, a project of the Stanford Digital Economy Lab and ADP Research |
 | ai2027_tracker | AI 2027 Tracker (independent) | ai2027-tracker.com | html | 6 | irregular | Site terms; short quotation | AI 2027 Tracker |
+| ai_rollup_fyi | AI Roll-up Nexus company directory | ai-rollup.fyi | html | 6 | irregular | Directory; company names, sector, country and stage only, read once | AI Roll-up Nexus (ai-rollup.fyi) |
 | aifutures_blog | AI Futures Project blog | AI Futures Project | html | 7 | irregular | Substack; short quotation | AI Futures Project |
 | amazon_news | About Amazon company news | Amazon | html | 4 | irregular | Amazon; short quotation | About Amazon |
 | ambience_blog | Ambience Healthcare blog | Ambience Healthcare | html | 7 | irregular | Ambience Healthcare; short quotation | Ambience Healthcare |
@@ -37,6 +38,7 @@
 | calcalist_ctech | Calcalist Ctech | Calcalist | html | 7 | irregular | Calcalist; short quotation | Calcalist Ctech |
 | canaries | Canaries Dashboard data (by exposure) | Stanford Digital Economy Lab and ADP Research | csv | 6 | monthly | Stanford Digital Economy Lab; free public data, cited as the Lab asks | Stanford Digital Economy Lab and ADP Research, AI Economic Indicators: Canaries Dashboard |
 | canaries_age | Canaries Dashboard data (age by exposure) | Stanford Digital Economy Lab and ADP Research | csv | 6 | monthly | Stanford Digital Economy Lab; free public data, cited as the Lab asks | Stanford Digital Economy Lab and ADP Research, AI Economic Indicators: Canaries Dashboard |
+| caritas_rollup_map | AI Rollups & AI-Native PE: 2026 Market Map | Caritas Venture Co. | html | 6 | irregular | Market map; company names, lane and evidence grade only, read once | Caritas Venture Co. (itself a transformation partner on the map) |
 | census_btos | Census Business Trends and Outlook Survey | U.S. Census Bureau | csv | 4 | biweekly | Public domain (U.S. government) | U.S. Census Bureau, Business Trends and Outlook Survey |
 | census_susb | Census Statistics of US Businesses (firms and employment by industry and enterprise size) | US Census Bureau | csv | 4 | annual | US government work; public domain | US Census Bureau, Statistics of US Businesses |
 | cepr_voxeu | CEPR VoxEU columns (via Wayback; cepr.org 403s bots) | CEPR | html | 6 | irregular | CEPR; short quotation | CEPR VoxEU |
