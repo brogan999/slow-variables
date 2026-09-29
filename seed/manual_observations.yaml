@@ -3917,6 +3917,41 @@ observations:
     basis: reported
     raw_snippet: OpenAI also shared that it now has 50 million paying subscribers.
     note: OpenAI's own figure, reported by TechCrunch; OpenAI's post also counts paying business users separately.
+  - series_key: usage.salesforce_agentforce.arr_usd.pt
+    source_id: sec_edgar_filings
+    value: 1500000000
+    unit: USD
+    as_of_date: '2026-07-31'
+    published_date: '2026-08-26'
+    url: https://www.sec.gov/Archives/edgar/data/1108524/000110852426000187/crm-q2fy27xexhibit991.htm
+    tier: 4
+    basis: company_stated
+    raw_snippet: Agentforce ARR exceeded $1.5 billion, up over 240% Y/Y.
+    note: 'Salesforce 8-K Ex. 99.1, 26 Aug 2026 (fiscal Q2 FY27, quarter to 31 Jul 2026). A floor ("exceeded"). New definition: from Q2 FY27 Agentforce ARR also counts Slackbot and Headless 360, so it is not comparable with earlier quarters.'
+  - series_key: usage.microsoft_365_copilot.paid_seats.pt
+    source_id: sec_edgar_filings
+    entity_id: msft
+    value: 30000000
+    unit: seats
+    as_of_date: '2026-06-30'
+    published_date: '2026-07-29'
+    url: https://www.sec.gov/Archives/edgar/data/789019/000119312526323632/msft-ex99_1.htm
+    tier: 4
+    basis: company_stated
+    raw_snippet: Microsoft 365 Copilot reached over 30 million paid seats
+    note: 'Microsoft 8-K Ex. 99.1, 29 Jul 2026 (fiscal Q4 FY26, quarter to 30 Jun 2026), in Satya Nadella''s quote. A floor ("over"); the release does not define a paid seat.'
+  - series_key: usage.google_gemini_app.monthly_active_users.pt
+    source_id: sec_edgar_filings
+    entity_id: googl
+    value: 950000000
+    unit: users
+    as_of_date: '2026-06-30'
+    published_date: '2026-07-22'
+    url: https://www.sec.gov/Archives/edgar/data/1652044/000165204426000066/googexhibit991q22026.htm
+    tier: 4
+    basis: company_stated
+    raw_snippet: the Gemini App has 950 million monthly active users.
+    note: 'Alphabet 8-K Ex. 99.1, 22 Jul 2026 (Q2 2026, quarter to 30 Jun 2026), in Sundar Pichai''s quote. The release does not define a monthly active user.'
   - series_key: crawl.anthropic.crawl_to_refer.pt
     source_id: cloudflare_blog
     entity_id: anthropic

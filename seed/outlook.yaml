@@ -55,6 +55,9 @@ facts:
   app_rr_growth: {metric: run_rate_growth_by_layer, dims: {layer_id: deployment_application}, max_age_days: 200}
   front_door_hhi: {metric: assistant_referral_hhi, max_age_days: 70}
   front_door_hhi_year_ago: {metric: assistant_referral_hhi, pick: year_ago}
+  agentforce_arr: {series: usage.salesforce_agentforce.arr_usd.pt, max_age_days: 200}
+  copilot_seats: {series: usage.microsoft_365_copilot.paid_seats.pt, max_age_days: 200}
+  gemini_app_users: {series: usage.google_gemini_app.monthly_active_users.pt, max_age_days: 200}
 
 sources:
   # I · capability
@@ -2578,6 +2581,7 @@ shifts:
       readings:
         - {fact: app_rr_growth, label: "application firms' run-rate growth, median"}
         - {fact: lab_deals_now, label: companies above the model layer bought by labs and compute firms in a year}
+        - {fact: agentforce_arr, label: "Salesforce's yearly revenue from its AI agents, including Slackbot (company-stated, a floor)"}
       arriving: {fact: app_rr_growth, gt: lab_rr_growth, says: application firms' run-rates grow faster than the labs'}
       leaving: {fact: lab_deals_now, gt: lab_deals_year_ago, says: labs and compute firms buy more of the layers above them than a year before}
     - id: front_door
@@ -2587,6 +2591,8 @@ shifts:
       sublayers: [consumer_ai]
       readings:
         - {fact: front_door_hhi, label: "concentration of the visits chatbots send to websites (StatCounter, CC BY-SA)"}
+        - {fact: gemini_app_users, label: "people using Google's Gemini app in a month (company-stated)"}
+        - {fact: copilot_seats, label: "paid seats for Copilot inside Microsoft's office tools (company-stated, a floor)"}
       arriving: {fact: front_door_hhi, gte: 0.25, says: one or two assistants send most of the visits}
       leaving: {fact: front_door_hhi, lt: front_door_hhi_year_ago, says: that concentration is below a year before}
   foot_claims: [chips_collect]
