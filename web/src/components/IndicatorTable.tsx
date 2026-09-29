@@ -68,7 +68,7 @@ export function IndicatorTable({ indicators, why, obsIndex }: { indicators: Card
           <tbody>
             {rows.map((c) => (
               <tr key={c.id} id={c.id} className="scroll-mt-24">
-                <td className="min-w-72 max-w-xl">{c.published ? <Link href={`/indicators/${c.id}`} className="font-medium hover:underline underline-offset-4 decoration-grid">{c.name}</Link> : <span className="font-medium text-ink-2">{c.name}</span>}{c.published ? null : <span className="ml-2 eyebrow">unpublished</span>}{why[c.id] ? <div className="text-xs text-ink-2 mt-0.5 line-clamp-2">{why[c.id]}</div> : null}{!c.published && c.unpublished_reason ? <div className="text-xs text-ink-2 mt-0.5 max-w-md">{c.unpublished_reason}</div> : null}</td>
+                <td className="min-w-72 max-w-xl">{c.published ? <Link href={`/indicators/${c.id}`} className="font-medium hover:underline underline-offset-4 decoration-grid">{c.name}</Link> : <span className="font-medium text-ink-2">{c.name}</span>}{c.published ? null : <span className="ml-2 eyebrow">unpublished</span>}{why[c.id] ? <div className={`text-xs text-ink-2 mt-0.5 ${c.published ? "line-clamp-2" : ""}`}>{why[c.id]}</div> : null}{!c.published && c.unpublished_reason ? <div className="text-xs text-ink-2 mt-0.5 max-w-md">{c.unpublished_reason}</div> : null}</td>
                 <td>{c.published ? <StatusChip status={c.status} /> : <span className="text-xs text-muted">no status until published</span>}{c.stale_as_of ? <div className="text-xs text-error mt-1">stale as of {c.stale_as_of}</div> : null}{c.pending ? <div className="mt-1"><PendingNote p={c.pending} /></div> : null}</td>
                 <td className="num">{c.confidence ?? "—"}</td>
                 <td><Grade grade={c.grade} /></td>

@@ -22,8 +22,6 @@ export function generateStaticParams() { return index().indicators.filter((i) =>
 
 const band = (b: Band, unit: string) => (b ? [b.lo != null ? `≥ ${fmt(b.lo, unit)}` : null, b.hi != null ? `≤ ${fmt(b.hi, unit)}` : null].filter(Boolean).join(" and ") : "—");
 
-// Seed prose sometimes names a status as a `code_word`; readers see the word.
-
 function H2({ id, children }: { id: string; children: React.ReactNode }) {
   return <h2 id={id} className="display text-[1.5rem] md:text-[1.75rem] leading-tight mb-4 scroll-mt-8">{children}</h2>;
 }
