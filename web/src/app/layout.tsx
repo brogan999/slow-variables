@@ -39,7 +39,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div className="flex items-center gap-x-2 shrink-0 text-sm">
               <Link href="/indicators" className="hidden sm:inline text-ink-2 hover:text-ink px-2">Evidence</Link>
               <SiteSearch />
-              <Link href="/ask" className="inline-flex h-7 items-center rounded-[3px] border border-border bg-background px-2.5 text-[0.8rem] font-medium hover:bg-surface-2">Ask</Link>
+              {SITE.askOnline ? <Link href="/ask" className="inline-flex h-7 items-center rounded-[3px] border border-border bg-background px-2.5 text-[0.8rem] font-medium hover:bg-surface-2">Ask</Link> : null}
               <SiteMenu />
             </div>
           </div>

@@ -3,6 +3,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ACTS, STOPS, STOP_OF } from "@/lib/nav";
+import { SITE } from "@/lib/site";
+
+// the end of the path hands over to Ask when it is running, otherwise to the evidence
+const END = SITE.askOnline
+  ? { href: "/ask", name: "Your turn: ask the data", line: "Every number on the path is in the data. Put your own question to it.", short: "Put your own question to the data." }
+  : { href: "/indicators", name: "Your turn: all the evidence", line: "Every number on the path traces to a dated record. The evidence pages hold them all.", short: "Every gauge, with what it tells you." };
 
 const under = (path: string, href: string) => path === href || path.startsWith(`${href}/`);
 const stopAt = (path: string) => STOP_OF.find(([href]) => under(path, href))?.[1];
@@ -57,10 +63,10 @@ export function NextStop() {
     const next = STOPS[here + 1];
     return (
       <nav aria-label="Next stop" className="mt-16">
-        <Link href={next ? next.href : "/ask"} className={`${card} max-w-3xl bg-ink text-background md:p-8`}>
+        <Link href={next ? next.href : END.href} className={`${card} max-w-3xl bg-ink text-background md:p-8`}>
           <span className="eyebrow text-background/70">{next ? `Next stop · ${next.n} · Act ${next.act}` : "The end of the path"}</span>
-          <span className="mt-2 block display text-2xl md:text-3xl">{next ? next.name : "Your turn: ask the data"} <span aria-hidden className="inline-block transition-transform group-hover:translate-x-1">→</span></span>
-          <span className="mt-2 block font-serif text-lg text-background/80">{next ? next.question : "Every number on the path is in the data. Put your own question to it."}</span>
+          <span className="mt-2 block display text-2xl md:text-3xl">{next ? next.name : END.name} <span aria-hidden className="inline-block transition-transform group-hover:translate-x-1">→</span></span>
+          <span className="mt-2 block font-serif text-lg text-background/80">{next ? next.question : END.line}</span>
         </Link>
       </nav>
     );
@@ -77,10 +83,10 @@ export function NextStop() {
           <span className="mt-2 block display text-xl"><span aria-hidden>← </span>{stop.name}</span>
           <span className="mt-1 block font-serif text-[15px] text-ink-2">{stop.question}</span>
         </Link>
-        <Link href={next ? next.href : "/ask"} className={`${card} bg-ink text-background`}>
+        <Link href={next ? next.href : END.href} className={`${card} bg-ink text-background`}>
           <span className="eyebrow text-background/70">{next ? `Or skip ahead · stop ${next.n}` : "The end of the path"}</span>
-          <span className="mt-2 block display text-xl">{next ? next.name : "Your turn: ask the data"} <span aria-hidden>→</span></span>
-          <span className="mt-1 block font-serif text-[15px] text-background/80">{next ? next.question : "Put your own question to the data."}</span>
+          <span className="mt-2 block display text-xl">{next ? next.name : END.name} <span aria-hidden>→</span></span>
+          <span className="mt-1 block font-serif text-[15px] text-background/80">{next ? next.question : END.short}</span>
         </Link>
       </nav>
     );

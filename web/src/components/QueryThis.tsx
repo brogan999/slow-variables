@@ -1,8 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { SITE } from "@/lib/site";
 
 // L3's "query this" box: a plain form that opens Ask with the question and this series' page as its context.
 export function QueryThis({ seriesKey }: { seriesKey: string }) {
+  if (!SITE.askOnline) return null;
   return (
     <form action="/ask" className="flex flex-wrap items-center gap-2">
       <label htmlFor="query-this" className="sr-only">Ask about this series</label>
