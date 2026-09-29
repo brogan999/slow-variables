@@ -23,7 +23,7 @@ const GET: Record<Key, (c: Card) => string | number | null> = {
 const FIRST: Record<Key, 1 | -1> = { name: 1, status: 1, conf: -1, grade: 1, latest: -1 };
 const LENSES: [Lens, string][] = [["all", "All"], ["diffusion", "Diffusion"], ["capture", "Capture"], ["unpublished", "Unpublished"]];
 
-export function IndicatorTable({ indicators, names, obsIndex }: { indicators: Card[]; names: Record<string, string>; obsIndex: Record<string, string> }) {
+export function IndicatorTable({ indicators, why, obsIndex }: { indicators: Card[]; why: Record<string, string>; obsIndex: Record<string, string> }) {
   const [q, setQ] = useState("");
   const [lens, setLens] = useState<Lens>("all");
   const [sort, setSort] = useState<{ k: Key; dir: 1 | -1 } | null>(null);
@@ -33,14 +33,14 @@ export function IndicatorTable({ indicators, names, obsIndex }: { indicators: Ca
       if (lens === "diffusion" && !c.bucket_id) return false;
       if (lens === "capture" && !c.layer_id) return false;
       if (lens === "unpublished" && c.published) return false;
-      return !needle || c.name.toLowerCase().includes(needle) || c.id.includes(needle);
+      return !needle || c.name.toLowerCase().includes(needle) || c.id.includes(needle) || (why[c.id] ?? "").toLowerCase().includes(needle);
     });
     if (!sort) return out;
     return [...out].sort((a, b) => {  // missing values always sort last, in either direction
       const x = GET[sort.k](a), y = GET[sort.k](b);
       return x === y ? 0 : x === null ? 1 : y === null ? -1 : (x < y ? -1 : 1) * sort.dir;
     });
-  }, [indicators, q, lens, sort]);
+  }, [indicators, why, q, lens, sort]);
   // a function, not a component: an inner component would remount the button and drop keyboard focus on each press
   const head = (k: Key, label: string) => {
     const dir = sort?.k === k ? sort.dir : 0;
@@ -56,7 +56,7 @@ export function IndicatorTable({ indicators, names, obsIndex }: { indicators: Ca
   return (
     <div className="flex flex-col gap-3">
       <div className="flex flex-wrap items-center gap-3">
-        <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search indicators" aria-label="Search indicators" className="max-w-xs bg-surface" />
+        <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search indicators and what they tell you" aria-label="Search indicators" className="max-w-xs bg-surface" />
         <ToggleGroup value={[lens]} onValueChange={(v: string[]) => { if (v[0]) setLens(v[0] as Lens); }} aria-label="Filter by lens">
           {LENSES.map(([id, label]) => <ToggleGroupItem key={id} value={id} className="text-xs">{label}</ToggleGroupItem>)}
         </ToggleGroup>
@@ -64,13 +64,11 @@ export function IndicatorTable({ indicators, names, obsIndex }: { indicators: Ca
       </div>
       <div className="overflow-x-auto">
         <table className="data w-full text-sm">
-          <thead><tr>{head("name", "Indicator")}<th scope="col">Bucket</th><th scope="col">Layer</th>{head("status", "Status")}{head("conf", "Conf")}{head("grade", "Grade")}{head("latest", "Latest")}<th scope="col">Obs</th></tr></thead>
+          <thead><tr>{head("name", "Indicator · what it tells you")}{head("status", "Status")}{head("conf", "Conf")}{head("grade", "Grade")}{head("latest", "Latest")}<th scope="col">Obs</th></tr></thead>
           <tbody>
             {rows.map((c) => (
               <tr key={c.id} id={c.id} className="scroll-mt-24">
-                <td className="min-w-56">{c.published ? <Link href={`/indicators/${c.id}`} className="font-medium hover:underline underline-offset-4 decoration-grid">{c.name}</Link> : <span className="font-medium text-ink-2">{c.name}</span>}{c.published ? null : <span className="ml-2 eyebrow">unpublished</span>}{!c.published && c.unpublished_reason ? <div className="text-xs text-ink-2 mt-0.5 max-w-md">{c.unpublished_reason}</div> : null}</td>
-                <td className="text-ink-2">{names[c.bucket_id ?? ""] ?? "—"}</td>
-                <td className="text-ink-2">{names[c.layer_id ?? ""] ?? "—"}</td>
+                <td className="min-w-72 max-w-xl">{c.published ? <Link href={`/indicators/${c.id}`} className="font-medium hover:underline underline-offset-4 decoration-grid">{c.name}</Link> : <span className="font-medium text-ink-2">{c.name}</span>}{c.published ? null : <span className="ml-2 eyebrow">unpublished</span>}{why[c.id] ? <div className={`text-xs text-ink-2 mt-0.5 ${c.published ? "line-clamp-2" : ""}`}>{why[c.id]}</div> : null}{!c.published && c.unpublished_reason ? <div className="text-xs text-ink-2 mt-0.5 max-w-md">{c.unpublished_reason}</div> : null}</td>
                 <td>{c.published ? <StatusChip status={c.status} /> : <span className="text-xs text-muted">no status until published</span>}{c.stale_as_of ? <div className="text-xs text-error mt-1">stale as of {c.stale_as_of}</div> : null}{c.pending ? <div className="mt-1"><PendingNote p={c.pending} /></div> : null}</td>
                 <td className="num">{c.confidence ?? "—"}</td>
                 <td><Grade grade={c.grade} /></td>

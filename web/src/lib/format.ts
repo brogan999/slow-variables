@@ -26,6 +26,9 @@ export function fmt(v: number | null | undefined, unit?: string): string {
   }
 }
 
+// seed prose names ids in backticks; readers see the words
+export const plain = (t: string | null | undefined) => (t ?? "").replace(/`([a-z_]+)`/g, (_, w: string) => w.replace(/_/g, " "));
+
 export const words = (s: string | null | undefined) => (s ?? "unmeasured").replace(/_/g, " ");
 
 // A line a claim is tested against reads as a round number when it is one: "15%", not "15.0%".
