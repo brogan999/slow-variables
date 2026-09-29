@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { DIRECTION, PowersGlossary } from "@/components/ValueChain";
-import { valueChain } from "@/lib/data";
+import { MarketMap } from "@/components/MarketMap";
+import { marketMap, valueChain } from "@/lib/data";
 
 export const metadata = {
   title: "The value chain",
@@ -35,6 +36,7 @@ export default function ValueChainPage() {
         </ul>
       </div>
       <p className="text-xs text-muted max-w-[68ch]">The judgements and profiles were drafted by a model from the companies&apos; own filings and the site&apos;s readings, and each says whether a person has reviewed it. They are conditions, not forecasts: no company is ranked.</p>
+      <MarketMap m={marketMap()} />
     </div>
   );
 }

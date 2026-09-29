@@ -72,4 +72,6 @@ def test_the_export_places_by_default_or_own_places_and_counts_add_up():
     assert a["entities"][0]["default"] and a["entities"][1]["label"] == "Section"
     assert a["leaves"] == [{"name": "x", "n": 1}] and a["default_of"] == ["s1"] and a["venture_sublayers"] == ["s1"]
     assert a["indicators"] == [{"id": "i1", "name": "I1"}]
+    assert (a["chips"], a["n_more"], a["n_leaves"], a["n_indicators"]) == (["e1", "e2", "e4"], 0, 1, 1)
+    assert doc["layers"][0]["n_categories"] == 2 and doc["layers"][0]["n_unmapped"] == 1
     assert doc["counts"]["entities"] == 3 and doc["counts"]["unmapped_categories"] == 1 and b["entities"] == []

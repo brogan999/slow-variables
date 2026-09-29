@@ -16,6 +16,7 @@ import yaml
 from .schema import Entity
 
 SPEC = Path(__file__).resolve().parents[2] / "seed" / "market_map.yaml"
+CHIPS = 14  # company chips shown on a card before "+N"
 
 
 def load() -> dict[str, Any]:
@@ -125,12 +126,17 @@ def build(spec: dict[str, Any], entities: list[Entity], indicators: list[dict[st
         c["leaves_covered"] = sum(1 for lf in c["leaves"] if lf["n"])
         c["from_sublayers"] = sorted({s for x in c["entities"] for s in [_primary(by_id[x["id"]], today)] if s})
         c["venture_sublayers"] = [s for s in c["default_of"] if s in venture]
+        order = list(dict.fromkeys(x["id"] for x in c["entities"]))
+        c["chips"] = order[:CHIPS]  # the page shows these as chips; the rest are counted here, never in the browser
+        c["n_more"] = max(0, len(order) - CHIPS)
+        c["n_leaves"] = len(c["leaves"])
+        c["n_indicators"] = len(c["indicators"])
     layers = []
     for L in spec.get("layers") or []:
         cs = [c for c in cats_out.values() if c["layer"] == L["id"]]
-        layers.append({**L, "categories": cs,
+        layers.append({**L, "categories": cs, "n_categories": len(cs),
                        "n_entities": len({x["id"] for c in cs for x in c["entities"]}),
-                       "n_unmapped": sum(1 for c in cs if not c["entities"] and not c["out_of_scope"])})
+                       "n_unmapped": 0 if L.get("indicator_only") else sum(1 for c in cs if not c["entities"] and not c["out_of_scope"])})
     mapped = [c for c in cats_out.values() if c["layer"] != "outcomes"]
     return {
         "credit": spec.get("credit"),
