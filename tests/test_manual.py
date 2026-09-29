@@ -188,3 +188,25 @@ def test_every_seed_row_has_landed_and_no_two_share_an_observation_id():
     )
     assert [k for k, n in ids.items() if n > 1] == []
     assert Manual().rows == []  # every seed row was verified on its page and stored
+
+
+def test_every_seed_entity_id_is_an_entity_and_a_corrected_one_supersedes(tmp_path, monkeypatch):
+    from datetime import datetime, timezone
+
+    from ai_tracker import store as st
+    from ai_tracker.schema import Basis, Extraction, Observation, Tier
+
+    ids = {e.id for e in Seed.load().entities}
+    rows = yaml.safe_load(Path("seed/manual_observations.yaml").read_text())["observations"]
+    assert [(r["series_key"], r["entity_id"]) for r in rows if r.get("entity_id") and r["entity_id"] not in ids] == []
+
+    monkeypatch.setattr(st, "OBS", tmp_path / "obs")
+    kw = dict(series_key="c.a.b.pt", unit="USD", as_of_date="2026-01-01", published_date="2026-01-01", value_numeric=1.0,
+              url="https://ex.test", content_hash="h", http_status=200, retrieved_at=datetime(2026, 1, 2, tzinfo=timezone.utc),
+              source_id="c", tier=Tier(5), audited_vs_reported=Basis.reported, extraction_method=Extraction.api,
+              extractor_version="c-1", raw_snippet="1")
+    old = Observation(**kw, entity_id="typo")
+    st.append_observations("c", [old])
+    assert st.append_observations("c", [Observation(**kw, entity_id="a")]) == 1
+    new = next(r for r in st.read_jsonl(tmp_path / "obs" / "c.jsonl") if r["entity_id"] == "a")
+    assert new["supersedes_id"] == old.id
