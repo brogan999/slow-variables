@@ -22,19 +22,17 @@ const icon = "inline-flex items-center justify-center size-8 rounded-lg text-mut
 // The Ask page: a conversation held only in this page's memory. Each question goes out with the last few turns,
 // so a follow-up can say "that" and "they"; nothing is stored in the browser or on the server.
 // One tree for both states, so the composer (and its focus) survives the first question.
-export function Chat() {
-  const [turns, setTurns] = useState<Turn[]>([]);
+export function Chat({ initialQ, initialFrom }: { initialQ?: string; initialFrom?: string }) {
+  const [turns, setTurns] = useState<Turn[]>(initialQ ? [{ q: initialQ, from: initialFrom }] : []);
   const [q, setQ] = useState("");
-  const [busy, setBusy] = useState(false);
+  const [busy, setBusy] = useState(Boolean(initialQ));
   const [stage, setStage] = useState(0);
   const abort = useRef<AbortController | null>(null);
   const box = useRef<HTMLTextAreaElement>(null);
   const newest = useRef<HTMLElement>(null);
 
-  useEffect(() => {  // arriving from a "Reason through this" link or the series box: ask its question at once
-    const p = new URLSearchParams(window.location.search);
-    const pre = p.get("q")?.trim();
-    if (pre) void send(pre, p.get("from") ?? undefined);
+  useEffect(() => {  // arriving from a "Reason through this" link or the series box: the question is already on screen; ask it
+    if (initialQ) void send(initialQ, initialFrom, false, true);
     // eslint-disable-next-line react-hooks/exhaustive-deps -- once, on arrival
   }, []);
   useEffect(() => {
@@ -46,10 +44,10 @@ export function Chat() {
   useEffect(() => { if (busy) newest.current?.scrollIntoView({ behavior: "smooth", block: "start" }); }, [busy]);
 
   // retry replaces the last turn: it is asked again with the history that came before it
-  async function send(text: string, from?: string, retry = false) {
+  async function send(text: string, from?: string, retry = false, arrived = false) {
     const question = text.trim();
-    if (!question || busy) return;
-    const before = retry ? turns.slice(0, -1) : turns;
+    if (!question || (busy && !arrived)) return;
+    const before = retry || arrived ? turns.slice(0, -1) : turns;
     const history = before.filter((t) => t.a && t.a.status !== "blocked").slice(-4).map((t) => ({ q: t.q, a: t.a!.answer }));
     setTurns([...before, { q: question, from }]);
     if (!retry) setQ("");
