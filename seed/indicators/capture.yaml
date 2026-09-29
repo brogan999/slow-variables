@@ -579,12 +579,12 @@ indicators:
     updated_at: 2026-09-10
   - id: enterprise_multi_homing_share
     name: "Enterprise multi-model usage share (Menlo)"
-    definition: "Share of enterprises using more than one foundation model, from Menlo Ventures' enterprise surveys (60% in the 2023 wave, restated in 2024); the 2024 wave states 'three or more models' without a share and the 2025 mid-year update gives the share that switched vendors (11%), shown alongside."
+    definition: "Share of enterprises using more than one foundation model, from Menlo Ventures' enterprise surveys (60% in the 2023 wave, restated in 2024); the 2024 wave states 'three or more models' without a share and the 2025 mid-year update gives the share that switched vendors (11%), shown alongside. a16z's annual CIO survey of the Global 2000, a second survey house, gives the share using three or more model families, also shown alongside."
     why_it_matters: "Multi-homing is the model layer's pricing power in one number: buyers who route across providers keep the surplus; buyers locked to one hand it over."
     proxy_types: [behaviour, market_structure]
     unit: share
     cadence_expected: annual
-    series_keys: ["menlo.enterprise.multi_model_share.pt", "menlo.enterprise.models_deployed_typical.pt", "menlo.enterprise.vendor_switch_share.pt"]
+    series_keys: ["menlo.enterprise.multi_model_share.pt", "menlo.enterprise.models_deployed_typical.pt", "menlo.enterprise.vendor_switch_share.pt", "a16z.enterprise.three_plus_model_families_share.pt"]
     band_input: menlo.enterprise.multi_model_share.pt
     layer_id: model
     bucket_id: early_adoption
@@ -593,7 +593,7 @@ indicators:
     leading_lagging: coincident
     timing_rationale: "Coincident: the survey records how many models firms use now, published with each annual wave."
     tracker_interpretation: "Sixty percent multi-homed in 2023 and the pattern has only spread since, but Menlo stopped publishing the share; the 11% vendor-switch figure says buyers add models rather than replace them."
-    counterevidence: "One survey house; the numeric share is a 2023 figure; later waves changed the question."
+    counterevidence: "Menlo's numeric share is a 2023 figure and its later waves changed the question; a16z's CIO survey, shown alongside, asks a stricter question (three or more model families, testing included) of the Global 2000 only."
     stale_ok: true
     stale_reason: "Menlo's later waves state the pattern without a share; the row is refreshed when a wave publishes one."
     confidence: 45
