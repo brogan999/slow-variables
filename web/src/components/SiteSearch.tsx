@@ -1,6 +1,7 @@
 "use client";
 
 import { SearchIcon } from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -27,7 +28,9 @@ export function SiteSearch() {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+      // Cmd-K on a Mac (Ctrl-K there deletes to the end of a line), Ctrl-K elsewhere
+      const mod = /Mac|iP/.test(navigator.platform) ? e.metaKey : e.ctrlKey;
+      if (mod && !e.shiftKey && !e.altKey && e.key?.toLowerCase() === "k") {
         e.preventDefault();
         setOpen((o) => !o);
       }
@@ -39,6 +42,7 @@ export function SiteSearch() {
   useEffect(() => {
     if (!open || index || loading.current) return;
     loading.current = true;
+    setFailed(false);
     fetch("/search.json")
       .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
       .then((d: Hit[]) => setIndex(d))
@@ -46,18 +50,20 @@ export function SiteSearch() {
       .finally(() => { loading.current = false; });
   }, [open, index]);
 
-  const groups = useMemo(() => {
+  const { groups, total } = useMemo(() => {
     const words = q.toLowerCase().split(/\s+/).filter(Boolean);
-    if (!words.length) return [];
+    if (!words.length) return { groups: [] as [string, Hit[]][], total: 0 };
     const out = new Map<string, Hit[]>();
+    let total = 0;
     for (const hit of [...PAGES, ...(index ?? [])]) {
       const hay = `${hit.t} ${hit.s} ${(hit.a ?? []).join(" ")}`.toLowerCase();
       if (!words.every((w) => hay.includes(w))) continue;
+      total += 1;
       const list = out.get(hit.k) ?? [];
       if (list.length < PER_KIND) list.push(hit);
       out.set(hit.k, list);
     }
-    return [...out.entries()];
+    return { groups: [...out.entries()], total };
   }, [q, index]);
   const flat = useMemo(() => groups.flatMap(([, hits]) => hits), [groups]);
   useEffect(() => { document.getElementById(`search-hit-${active}`)?.scrollIntoView({ block: "nearest" }); }, [active]);
@@ -65,10 +71,13 @@ export function SiteSearch() {
   const go = (h: string) => {
     setOpen(false);
     setQ("");
-    router.push(h);
+    // pushState fires no hashchange, so a same-page anchor is set directly and the folded section it sits in opens
+    const [path, hash] = h.split("#");
+    if (hash && path === window.location.pathname) window.location.hash = hash;
+    else router.push(h);
   };
   const onKeyDown = (e: React.KeyboardEvent) => {
-    if (!flat.length) return;
+    if (!flat.length || e.nativeEvent.isComposing) return;
     if (e.key === "ArrowDown") { e.preventDefault(); setActive((a) => (a + 1) % flat.length); }
     else if (e.key === "ArrowUp") { e.preventDefault(); setActive((a) => (a - 1 + flat.length) % flat.length); }
     else if (e.key === "Enter") { e.preventDefault(); go(flat[active]?.h ?? flat[0].h); }
@@ -91,30 +100,31 @@ export function SiteSearch() {
             onKeyDown={onKeyDown}
             placeholder="Try: inference, Harvey, chip share"
             role="combobox"
+            aria-autocomplete="list"
             aria-expanded={flat.length > 0}
             aria-controls="search-results"
             aria-activedescendant={flat.length ? `search-hit-${active}` : undefined}
             aria-label="Search the site"
             className="bg-background text-base"
           />
-          <p className="sr-only" aria-live="polite">{q ? `${flat.length} results shown` : ""}</p>
+          <p className="sr-only" aria-live="polite">{q ? (total > flat.length ? `${total} matches; the first ${PER_KIND} of each kind are shown` : `${total} matches`) : ""}</p>
           {failed ? <p className="text-sm text-error">The search index did not load. Try again later, or use the menu.</p> : null}
           {q && !flat.length && (index || failed) ? <p className="text-sm text-ink-2">Nothing matches every word. Try fewer words.</p> : null}
           {q && !index && !failed ? <p className="text-sm text-muted">Loading the index…</p> : null}
           <div id="search-results" role="listbox" aria-label="Results" className="flex flex-col gap-4">
             {groups.map(([kind, hits]) => (
               <div key={kind} role="group" aria-label={kind} className="flex flex-col">
-                <div aria-hidden className="eyebrow mb-1">{kind}</div>
+                <div aria-hidden className="eyebrow mb-1">{kind}{hits.length === PER_KIND ? " · first eight" : ""}</div>
                   {hits.map((hit) => {
                     n += 1;
                     const i = n;
                     return (
-                      <div key={`${hit.k}-${hit.h}-${hit.t}`} id={`search-hit-${i}`} role="option" aria-selected={i === active}
-                        onMouseEnter={() => setActive(i)} onClick={() => go(hit.h)}
-                        className={`cursor-pointer rounded-[3px] px-2 py-1.5 ${i === active ? "bg-surface-2" : ""}`}>
+                      <Link key={`${hit.k}-${hit.h}-${hit.t}`} href={hit.h} prefetch={false} tabIndex={-1} id={`search-hit-${i}`} role="option" aria-selected={i === active}
+                        onMouseEnter={() => setActive(i)} onClick={(e) => { if (e.metaKey || e.ctrlKey || e.shiftKey || e.button) return; e.preventDefault(); go(hit.h); }}
+                        className={`block rounded-[3px] px-2 py-1.5 ${i === active ? "bg-surface-2" : ""}`}>
                         <span className="block font-medium text-ink">{hit.t}</span>
                         {hit.s ? <span className="text-xs text-ink-2 line-clamp-1">{hit.s}</span> : null}
-                      </div>
+                      </Link>
                     );
                   })}
               </div>

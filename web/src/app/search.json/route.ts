@@ -11,7 +11,7 @@ const untoken = (t: string) => t.replace(/\[(fact|test|cite):[^\]]+\]/g, "…");
 export function GET() {
   const hits: Hit[] = [];
   for (const c of index().indicators) {
-    const why = c.published ? plain(indicator(c.id).why_it_matters) : c.unpublished_reason ?? "";
+    const why = plain(indicator(c.id).why_it_matters) || c.unpublished_reason || "";
     hits.push({ k: "Indicator", t: c.name, s: why, h: c.published ? `/indicators/${c.id}` : `/indicators#${c.id}` });
   }
   for (const f of board().folios) for (const r of f.rows) hits.push({ k: r.kind === "outlook" ? "Claim" : "Forecast", t: untoken(r.line), s: r.who, h: r.href });
