@@ -776,3 +776,16 @@ Deliberately not done: an `expectations` SQL table, per-page share images, pips,
 - **Code:** `src/ai_tracker/market_map.py` (`problems` in `check`, `build` in `export` as `web/data/market_map.json`); the page counts nothing. Tests in `tests/test_market_map.py`.
 - **Sources:** five market maps, neolabs.fyi, ai-rollup.fyi, the Caritas roll-up map and a verified AI-education list (#119, #120); placements follow each source's own section label, and the shaky ones are listed in `docs/market_map_review.tsv` for review before this ships.
 - **Gate:** the placement review (the Atlas session) and Alex's OK precede merge; the PR stays a draft with auto-merge off.
+
+## Part 34 status (29 Sep 2026): fresher scores, the thin places filled, a readable indicators list, site search
+
+- **Age limits (#139):** every tightness gauge is read only while its newest reading is at most 300 days old (a test pins it). Ten of twenty-three inputs score on 29 Sep; the Epoch quarterly gauges pass the limit after 27 Oct unless Epoch publishes a newer complete quarter. Going below 300 days needs fresher series (a foundry's monthly revenue, memory makers' HBM statements); not started.
+- **Thin places (#140):** Salesforce Agentforce ARR (new definition, including Slackbot), Microsoft 365 Copilot paid seats and Gemini app monthly users, from each firm's own 8-K exhibit, as readings on the firm's own knowledge and the front door.
+- **Indicators list (#141):** each row says what the gauge tells you in place of the bucket and layer codes.
+- **Site search (#142):** a header box and Cmd/Ctrl-K over indicators, forecasts, claims, companies, sources, census jobs, futures and atlas pages, built at build time from the page loaders.
+
+## Part 35 (29 Sep 2026): stock-take and close-out
+
+- **Merges:** the Handshake entity fix (#137) and value chain B2 (#126) merged on 29 Sep; the a16z survey and ledger rows (#138), value chain C (#127), three more profiles (#143) and the business opportunities page (#144) merge in that order as each passes its checks.
+- **Ask hidden:** `SITE.askOnline` is false while the Anthropic workspace has no credit; the header link, "Reason through this", "Query this series" and the path's last card switch back on with it.
+- **Deliberately left:** fresher sources for the tightness gauges, per-stop share images and a combined "how sure" column. The outlook facts waiting on a year of history, and the stale custom-silicon and Waymo series, fill in or stay withheld on their own.
