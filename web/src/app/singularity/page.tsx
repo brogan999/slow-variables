@@ -1,8 +1,11 @@
 import Link from "next/link";
 import { ArticleLayout, MarginPanel } from "@/components/ArticleLayout";
+import { Plate as AtlasPlate } from "@/components/AtlasParts";
+import { Plate as FuturesPlate } from "@/components/FuturesParts";
 import { Scrubber } from "@/components/Scrubber";
 import { Due, Fiction, Latest, ORDER, Questions, Sources, TimelinePlate, Undated, Worlds } from "@/components/SingularityParts";
-import { singularity } from "@/lib/data";
+import { atlas, futures, singularity } from "@/lib/data";
+import { fmt } from "@/lib/format";
 import { SITE } from "@/lib/site";
 
 const title = "Timelines to the singularity";
@@ -28,6 +31,8 @@ function Folio({ n, id, label, title: h, children, lede }: { n: string; id: stri
 
 export default function SingularityPage() {
   const d = singularity();
+  const fu = futures();
+  const at = atlas();
   return (
     <ArticleLayout
       head={
@@ -54,6 +59,22 @@ export default function SingularityPage() {
           <div className="mt-3"><Undated doc={d} /></div>
         </details>
       </Folio>
+      <section aria-labelledby="beyond" className="mt-12 flex flex-col gap-4">
+        <h2 id="beyond" className="eyebrow">Beyond the dated calls</h2>
+        <div className="grid gap-4 md:grid-cols-2">
+          <Link href="/futures" className="group panel flex flex-col gap-3 p-4">
+            {fu.featured[0]?.image ? <FuturesPlate src={fu.featured[0].image} alt={fu.featured[0].line} sizes="(min-width: 768px) 420px, 100vw" /> : null}
+            <span className="font-sans text-lg font-semibold group-hover:underline">Futures: every technology fiction has imagined</span>
+            <span className="text-[15px] text-ink-2"><span className="num">{fmt(fu.n_ideas, "count")}</span> inventions from novels and stories, when each was imagined, whether it was built, and who would keep the profit.</span>
+          </Link>
+          <Link href="/singularity/atlas" className="group panel flex flex-col gap-3 p-4">
+            <AtlasPlate p={at.hero} sizes="(min-width: 768px) 420px, 100vw" decorative />
+            <span className="font-sans text-lg font-semibold group-hover:underline">The atlas: how each part of life changes</span>
+            <span className="text-[15px] text-ink-2">Work, money, health, politics and more, era by era, from what sourced writers expect.</span>
+          </Link>
+        </div>
+        <p className="font-mono text-[11px] text-muted">The pictures are illustrations made with image models, not evidence.</p>
+      </section>
       <Folio n="II" id="due" label="the calls whose time has come" title="The dates that have already come" lede="Forecasts whose window has closed. Happening means the milestone arrived as said; slower than said means its date passed without it.">
         <Due doc={d} />
       </Folio>

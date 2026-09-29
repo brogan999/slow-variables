@@ -54,6 +54,47 @@ metrics:
       SELECT as_of_date, subject AS entity, gp / rev AS value, ids AS obs_ids FROM q
       UNION ALL SELECT as_of_date, subject, gp / rev, ids FROM fill WHERE rev > 0
 
+  multiple_to_1t:
+    description: How many times over a public filer's value must grow to reach $1 trillion, read as $1 trillion divided by the market value of its shares held by non-affiliates on the cover page of its latest 10-K (the public float), per filer at each float date.
+    rationale: The $1 trillion mark and the 2035 horizon define the question the owner asked (what would have to be true for a company to be worth $1 trillion in 2035); they are the question's own terms, like a bet's line, not an assumption about markets. The public float is the only market value SEC filings state; a live share price would replace it once a source passes robots.txt and its terms.
+    grain: [as_of_date, entity]
+    unit: ratio
+    lead_lag: coincident
+    formula_version: 1
+    inputs: ["sec.*.public_float.pt"]
+    caveats: The public float is dated at the end of the filer's second fiscal quarter and filed with the 10-K, so it can be over a year old; it leaves out shares held by officers, directors and large holders, so it understates the whole company's value, most for founder-controlled filers; filers round it. Below 1.0x the filer's float already exceeds $1 trillion.
+    sql: |
+      SELECT as_of_date, subject AS entity, 1e12 / value_numeric AS value, [id] AS obs_ids
+      FROM observations WHERE source_ns = 'sec' AND measure = 'public_float' AND grain = 'pt' AND value_numeric > 0
+
+  cagr_to_1t_2035:
+    description: The yearly growth in value a public filer would need, compounded from its public float's date to 31 December 2035, to reach $1 trillion; shown only where the float is below $1 trillion.
+    rationale: Turns the multiple into the rate a reader can compare with revenue and profit growth. The horizon is measured from each row's own float date, never from today, so a row's value does not drift while the service runs.
+    grain: [as_of_date, entity]
+    unit: share
+    lead_lag: coincident
+    formula_version: 1
+    inputs: ["sec.*.public_float.pt"]
+    caveats: Assumes growth is steady and the float stands for the whole company; carries every caveat of multiple_to_1t. It says what growth is needed, not what growth is likely.
+    sql: |
+      SELECT as_of_date, subject AS entity,
+             power(1e12 / value_numeric, 365.25 / (DATE '2035-12-31' - as_of_date)) - 1 AS value, [id] AS obs_ids
+      FROM observations WHERE source_ns = 'sec' AND measure = 'public_float' AND grain = 'pt'
+        AND value_numeric > 0 AND value_numeric < 1e12
+
+  private_multiple_to_1t:
+    description: How many times over a private lab's latest post-money valuation must grow to reach $1 trillion, per lab at each valuation date (Epoch's compiled funding rounds).
+    rationale: The frontier labs are among the likeliest companies to reach $1 trillion and file no public float; their round prices are the only valuation on record. Kept apart from multiple_to_1t because a round price is a different kind of number and must never be ranked with public market values.
+    grain: [as_of_date, entity]
+    unit: ratio
+    lead_lag: coincident
+    formula_version: 1
+    inputs: ["epoch.*.post_money_usd.pt"]
+    caveats: Tier 5, compiled from press reports; a post-money price is the headline price of preferred shares with protections common shares lack, so it overstates what the whole company would fetch; rounds are months apart, so the latest can be stale.
+    sql: |
+      SELECT as_of_date, entity_id AS entity, 1e12 / value_numeric AS value, [id] AS obs_ids
+      FROM observations WHERE series_key LIKE 'epoch.%.post_money_usd.pt' AND entity_id IS NOT NULL AND value_numeric > 0
+
   gross_margin_fy:
     description: Gross profit divided by revenue per filer per fiscal year, from the 10-K's XBRL company facts.
     rationale: The annual margin smooths fiscal-calendar noise and is the figure filers headline.
@@ -1618,3 +1659,44 @@ metrics:
       SELECT any_value(read_on) AS as_of_date, sites, count(*) AS value,
              list_sort(list_concat(list(built_id), list(planned_id))) AS obs_ids
       FROM s GROUP BY sites
+  assistant_referral_hhi:
+    description: Herfindahl index (sum of squared shares, 0-1) of the visits that AI chatbots refer to the websites StatCounter tracks, worldwide, per finished month; shares are those StatCounter names, renormalised to sum to one without "Other".
+    rationale: When one assistant sends nearly all the traffic, the customer's front door belongs to it, and it can choose which suppliers sit behind it. A falling index means the front door is being shared.
+    grain: [as_of_date]
+    unit: index
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["statcounter_ai.*.referral_share.m"]
+    caveats: Referral traffic to tracked websites, not use; assistants that answer without sending a visit are undercounted; StatCounter's list of named assistants can change, which moves the index on its own. CC BY-SA 3.0, credit StatCounter Global Stats with a link.
+    sql: |
+      SELECT as_of_date, sum(value_numeric * value_numeric) / (sum(value_numeric) * sum(value_numeric)) AS value,
+             list(id ORDER BY id) AS obs_ids
+      FROM observations WHERE source_ns = 'statcounter_ai' AND measure = 'referral_share'
+      GROUP BY as_of_date HAVING count(*) >= 4
+  run_rate_growth_by_layer:
+    description: Median annualised growth in stated revenue run-rate across the firms in a layer, per finished calendar quarter. For each firm with a primary membership in the layer, its first and last run-rate readings in the fifteen months to the quarter's end, at least 180 days apart, give one annualised growth rate; the median across at least three firms is the reading.
+    rationale: If the money in AI is moving from the model to running it or to the firms that use it, the run-rates of inference clouds or application firms should grow faster than the labs'. Comparing medians across firms keeps one large firm from setting the reading.
+    grain: [as_of_date, layer_id]
+    unit: share
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["*.*.revenue_run_rate_usd.pt"]
+    caveats: Firms state run-rates when they are growing and fall silent when they are not, so every layer's growth leans high; readings come from different outlets and definitions; a firm counts in its primary layer only.
+    sql: |
+      WITH rr AS (
+        SELECT subject, as_of_date, max(value_numeric) AS v, min(id) AS id FROM observations
+        WHERE measure = 'revenue_run_rate_usd' AND value_numeric > 0 GROUP BY 1, 2),
+      m AS (SELECT DISTINCT entity_id, layer_id FROM entity_membership WHERE is_primary AND to_date IS NULL),
+      qs AS (SELECT DISTINCT (date_trunc('quarter', as_of_date) + INTERVAL 3 MONTH - INTERVAL 1 DAY)::DATE AS q FROM rr),
+      w AS (
+        SELECT qs.q, m.layer_id, rr.subject,
+               arg_min(rr.v, rr.as_of_date) AS v0, min(rr.as_of_date) AS d0, arg_min(rr.id, rr.as_of_date) AS id0,
+               arg_max(rr.v, rr.as_of_date) AS v1, max(rr.as_of_date) AS d1, arg_max(rr.id, rr.as_of_date) AS id1
+        FROM qs JOIN rr ON rr.as_of_date <= qs.q AND rr.as_of_date > qs.q - INTERVAL 15 MONTH
+        JOIN m ON m.entity_id = rr.subject
+        WHERE qs.q < current_date
+        GROUP BY 1, 2, 3),
+      g AS (SELECT q, layer_id, pow(v1 / v0, 365.0 / date_diff('day', d0, d1)) - 1 AS growth, [id0, id1] AS ids
+            FROM w WHERE date_diff('day', d0, d1) >= 180)
+      SELECT q AS as_of_date, layer_id, median(growth) AS value, list_sort(list_distinct(flatten(list(ids)))) AS obs_ids
+      FROM g GROUP BY 1, 2 HAVING count(*) >= 3

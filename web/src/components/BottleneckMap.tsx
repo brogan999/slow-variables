@@ -98,8 +98,8 @@ export function BottleneckMap({ doc }: { doc: MapDoc }) {
       </>}
     >
       <label className="mb-3 inline-flex items-center gap-2 text-sm text-ink cursor-pointer">
-        <input id="map-focus" type="checkbox" className="h-4 w-4 accent-[var(--ink)]" />
-        Show only what binds now (scored tight or severe) or a writer expects to bind
+        <input id="map-focus" type="checkbox" defaultChecked className="h-4 w-4 accent-[var(--ink)]" />
+        Show only what binds now (scored tight or severe) or a writer expects to bind; untick for every row
       </label>
       <p className="sm:hidden text-[12px] text-ink-2 mb-2">The stages, numbered: {doc.stages.map((s, i) => <span key={s.id}>{i ? ", " : ""}<span className="num">{s.n}</span> {s.label.toLowerCase()}</span>)}.</p>
       <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="The bottleneck map, as a table">

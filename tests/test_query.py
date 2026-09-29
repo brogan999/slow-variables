@@ -1,4 +1,5 @@
 import json
+import re
 
 from ai_tracker import store as st
 from ai_tracker.analysis.metrics import run_metrics
@@ -164,7 +165,7 @@ def test_the_five_spec_tools_answer_and_their_ids_verify():
     hits = t.search_evidence("developer speed randomized trial", k=20)
     assert any(h["cite"] and h["cite"].startswith("obs:") for h in hits)
     assert all("BOTTLENECK_PROMPT" not in h.get("doc", "") for h in hits)
-    assert all(h["cite"] is None for h in hits if "doc" in h)  # notes are context, never citable
+    assert all((h["cite"] or "note:").startswith("note:") for h in hits if "doc" in h)  # research digests stay uncited context
     f = t.fit_trend("metr.*.horizon_50.pt", "2024-01-01")
     assert f["kind"] == "doubling_days" and f["n_points"] >= 3
     assert check(f"It doubles every {f['value']:.0f} days [derived:{f['id']}].", t.records([("derived", f["id"])])).ok
@@ -206,7 +207,7 @@ def test_golden_survives_a_hallucinated_id_and_flags_informational_questions():
 
     s = st.Store()
     res = golden(s, Tools(s), ScriptClient(["No record [obs:deadbeef00000000]."]))
-    assert {r["id"] for r in res if r["informational"]} == {"g14", "g15", "g17", "g18", "g19", "g20", "g21", "g22", "g23", "g24", "g25", "g26"}
+    assert {r["id"] for r in res if r["informational"]} == {"g14", "g15", "g17", "g18", "g19", "g20", "g21", "g22", "g23", "g24", "g25", "g26", "g27", "g28", "g29", "g30"}
     assert not any(r["ok"] for r in res if r["id"] not in ("g16",))
 
 
@@ -386,6 +387,74 @@ def test_the_bottleneck_tool_gives_words_and_citable_gauges_and_names_what_binds
     rows = [b for c in t.scenarios()["cells"] for b in c["binds_next"]]
     assert rows and all(b["name"] != b["id"] for b in rows)
     assert {b["kind"] for b in rows} <= {"chain", "friction"}
+
+
+def test_theory_notes_and_futures_are_citable_for_reasoning_but_never_for_a_number():
+    from ai_tracker.query.citecheck import check
+
+    t = Tools(st.Store())
+    hit = next(h for h in t.search_evidence("Coase firm market costs specific asset hold-up", k=20) if h["cite"].startswith("note:"))
+    kind, nid = hit["cite"].split(":", 1)
+    rec = t.records([(kind, nid)])
+    assert check(f"A firm owns what is specific to it [note:{nid}].", rec).ok
+    assert not check(f"It owns 40% of what it uses [note:{nid}].", rec).ok
+    many = next(k for k, n in t._notes().items() if re.search(r"\b(?!(?:19|20)\d\d\b)\d+\b", n["text"]))
+    num = re.search(r"\b(?!(?:19|20)\d\d\b)\d+\b", t._notes()[many]["text"])[0]
+    assert not check(f"It counts {num} of them [note:{many}].", t.records([("note", many)])).ok  # a digit in a note cites nothing
+    assert not any(n["href"].endswith("docs/research/bottlenecks.md") for n in t._notes().values())
+    assert not any("[fact:" in n["text"] for n in t._notes().values())  # essay tokens drop out
+    mig = next(k for k in t._notes() if k.startswith("migration."))
+    assert t.href("fut", "tv-d6850dfc68") == "/futures" or t._futures().get("tv-d6850dfc68") is None  # no page for cannot_judge
+    assert len(t.futures("fusion energy", kind="forecast", k=5)) >= 1
+    assert t.href("note", mig) == "/argument/migration" and t.href("note", nid).startswith("https://github.com/")
+    assert t.detail("note", nid)["label"]
+    fut = t.futures("superintelligence", kind="forecast", k=3)
+    assert fut and all(f["cite"].startswith("fut:") and f["kind"] == "forecast" for f in fut)
+    fk, fid = fut[0]["cite"].split(":", 1)
+    assert check(f"{fut[0]['who']} gave it a chance [fut:{fid}].", t.records([(fk, fid)])).ok and t.href(fk, fid).startswith("/futures")
+
+
+def test_the_prompt_asks_for_three_passes_and_the_strategy_chain():
+    from ai_tracker.query.ask import _system
+
+    p = _system(st.Store())
+    assert "**Now**" in p and "What people expect" in p and "What theory says" in p
+    assert "call bottlenecks" in p and "no personal recommendation" in p and "350 words" not in p
+
+
+def test_the_company_card_carries_the_trillion_dollar_test_with_citable_rows():
+    from ai_tracker.query.citecheck import check
+
+    t = _tools_with_board()
+    v = t.entity("Palantir")["valuation"]
+    m, g = v["multiple_to_1t"], v["cagr_to_1t_2035"]
+    assert m["cite"].startswith("derived:") and g["as_of"] == m["as_of"] and v["net_income_fy"]["cite"].startswith("obs:")
+    mid, gid = m["cite"].split(":")[1], g["cite"].split(":")[1]
+    recs = t.records([("derived", mid), ("derived", gid)])
+    assert check(f"To reach $1 trillion its value must grow {m['value']:.2f}x [derived:{mid}], or {g['value'] * 100:.0f}% a year [derived:{gid}].", recs).ok
+    nv = t.entity("nvda")["valuation"]
+    assert nv["multiple_to_1t"]["value"] < 1 and "cagr_to_1t_2035" not in nv  # already past it: no stale rate
+    assert t.entity("Anthropic")["valuation"]["private_multiple_to_1t"]["cite"].startswith("derived:")
+
+
+def test_the_value_chain_tool_is_compact_citable_and_links_units_to_their_layer():
+    import json
+
+    from ai_tracker.query.citecheck import check
+
+    t = _tools_with_board()
+    brief = t.value_chain()
+    assert brief and all(u["cite"].startswith("pos:") and u["rival"] for u in brief)
+    for out in (brief, t.value_chain(layer="compute_physical"), t.value_chain(companies=True)):
+        assert len(json.dumps(out, default=str)) < 20000
+    uid = brief[0]["cite"].split(":")[1]
+    assert t.href("pos", uid).startswith("/layers/compute_physical#assessment-")
+    assert check(f"This layer is judged to be holding [pos:{uid}].", t.records([("pos", uid)])).ok
+    prof = t.entity("Micron")["profile"]
+    sid = prof["cite"]["market"][0].split(":")[1]
+    assert t.records([("src", sid)]) and t.href("src", sid).startswith("https://www.sec.gov/Archives/")
+    assert not check(f"It sold 40% to one buyer [src:{sid}].", t.records([("src", sid)])).ok  # a filing backs words only
+    assert "error" in t.value_chain(layer="nowhere")
 
 
 def test_prose_records_match_numbers_only_as_whole_tokens():

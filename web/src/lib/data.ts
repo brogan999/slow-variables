@@ -65,7 +65,20 @@ function read<T>(rel: string): T {
 export const index = () => read<{ indicators: Card[]; buckets: Bucket[]; layers: Layer[]; sublayers: Sublayer[]; crosswalk: Crosswalk[] }>("index.json");
 export const indicator = (id: string) => read<Doc>(`indicators/${id}.json`);
 export const bucket = (id: string) => read<Bucket & { indicators: Card[]; crosswalk: Crosswalk[] }>(`buckets/${id}.json`);
-export const layer = (id: string) => read<Layer & { tally?: Tally; indicators: Card[]; sublayers: Sublayer[]; crosswalk: Crosswalk[]; venture: LayerVenture | null; commoditisation: { proxies: { id: string; name: string; status: string | null }[]; line: string } | null; held?: { id: string; name: string; reason: string | null; n: number }[] }>(`layers/${id}.json`);
+export const layer = (id: string) => read<Layer & { tally?: Tally; indicators: Card[]; sublayers: Sublayer[]; crosswalk: Crosswalk[]; venture: LayerVenture | null; commoditisation: { proxies: { id: string; name: string; status: string | null }[]; line: string } | null; held?: { id: string; name: string; reason: string | null; n: number }[]; economics?: EconomicsUnit[]; profiles?: Profile[] }>(`layers/${id}.json`);
+export type Binding = { id: string; word: string | null; name: string };
+export type EconomicsUnit = {
+  id: string; layer: string; sublayer: string | null; direction: "commoditising" | "holding" | "tightening";
+  title: string; mechanism: string; case: string | null; kill_shot: string; commoditising: string; stays_scarce: string; converts_if: string;
+  powers: string[]; binding: Binding[]; rival: { id: string; title: string } | null;
+};
+export type Profile = {
+  entity: string; name: string; role: "club" | "candidate"; units: string[]; outside: string | null; market: string; customers: string;
+  concentration: string; powers: { power: string; why: string }[]; depends_on: Binding[]; rent: { reads: string };
+  must_be_true: string[]; would_disprove: string[]; judged_by: string; reviewed_by: string | null; reviewed: string | null; disclosure: string | null;
+  source_links: { id: string; url: string; label: string }[];
+};
+export const valueChain = () => read<{ units: EconomicsUnit[]; companies: Profile[]; powers: Record<string, string> }>("value_chain.json");
 export const series = (key: string) => read<{ series_key: string; unit: string; source: Source | null; observations: Observation[]; withdrawn: Observation[] }>(`series/${key}.json`);
 export const seriesKeys = () => fs.readdirSync(path.join(ROOT, "series")).map((f) => f.replace(/\.json$/, ""));
 export const diffusion = () => read<{
@@ -171,7 +184,7 @@ export type ArgumentDoc = {
   facts: Record<string, Fact | null>;
   slow_variables: { id: string; label: string; sentence: string }[];
   clocks: { start: string; drawn: ClockSeries[]; listed: string[]; holds: boolean | null; chart: { x: { ticks: Tick[] }; y: Axis } | null; chart_sources: ChartSourcesT };
-  phase: { state: "installation" | "turning_point" | "deployment" | "untestable"; rule: string; as_of: string | null; history: { as_of: string; raw: string; state: string }[]; chart_sources: ChartSourcesT };
+  phase: { state: "irruption" | "frenzy" | "installation" | "turning_point" | "synergy" | "maturity" | "deployment" | "untestable"; half?: string; rule: string; as_of: string | null; history: { as_of: string; raw: string; state: string }[]; chart_sources: ChartSourcesT };
   exits: { monitor: string; label: string; text: string; state: string | null }[];
   headlines: Record<"diffusion" | "capture", { monitor: string; state: string; claim: string }>;
   sources: { who: string; work: string; where: string; url: string }[];
@@ -230,7 +243,7 @@ export type OutlookTest = { fact: string } & Partial<Record<"gt" | "gte" | "lt" 
 export type OutlookSource = { id: string; n: number; who: string; short?: string; field: string; finding: string; work: string; venue?: string; year: number; url: string; quote?: string };
 export type OutlookPosition = {
   id: string; folio: string; title: string; holders: string[]; attribution: "author" | "extension" | "site";
-  mechanism: string; case: string; kill_shot: string; rival: string; visible: boolean;
+  mechanism: string; case: string; kill_shot: string; rival: string; visible: boolean; layer?: string;
 };
 export type OutlookClaim = {
   id: string; position: string; text: string; falsifier?: string; row: string | null; stage: string | null; due: string | null; rival_until: string | null;
@@ -244,7 +257,16 @@ export type OutlookDoc = {
   folios: { id: string; kicker: string }[];
   scenarios: { progress: { id: string; label: string }[]; rules: { id: string; label: string }[]; cells: OutlookCell[]; anchors: { source: string; date: string; text: string }[] };
   agree: { id: string; text: string; holders: string[]; dissent: string[]; dissent_text?: string }[];
+  shifts?: Shifts;
 };
+export type PlaceState = "arriving" | "loosening" | "moving_on" | "not_yet" | "untestable" | "not_measured";
+export type PlaceTest = { says: string; holds: boolean | null } | null;
+export type Place = {
+  id: string; name: string; scarce: string; squeezed_by: string; state: PlaceState; word: string;
+  sublayers: { id: string; name: string; href: string }[]; readings: (Fact & { id: string; label: string })[];
+  arriving: PlaceTest; leaving: PlaceTest; claims: { id: string; state: OutlookState | null }[];
+};
+export type Shifts = { grounded_in: string[]; places: Place[]; foot_claims: { id: string; state: OutlookState | null }[] };
 export const outlook = () => read<OutlookDoc>("outlook.json");
 export type Word = "happening" | "not_happening" | "slower" | "both" | "too_early";
 export type BoardRow = {
@@ -327,6 +349,7 @@ export type CensusCard = {
   roles: { title: string; wage_bill: number; share_passes: number; passes: number; agreed3: number | null }[];
 };
 export type CensusIndex = {
+  figure?: { ticks: { left: number; label: string }[]; bars: { label: string; usd: number; id: string; width: number }[]; ref?: string };
   version: string; generated_at: string; manifest_sha256: string; sources: string[]; scorers: string[]; scorer_names: Record<string, string>;
   prose: { title: string; lede: string; rule: string; agreed: string; caveats: string[]; sections: Record<string, { title: string; lede: string }>; method_notes: Record<string, string> };
   headline: {

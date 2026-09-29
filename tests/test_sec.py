@@ -8,7 +8,7 @@ from ai_tracker.schema import Basis, Entity, Membership
 
 def fact(start, end, val, filed, frame=None, form="10-Q"):
     return {
-        "start": start,
+        **({"start": start} if start else {}),
         "end": end,
         "val": val,
         "filed": filed,
@@ -185,3 +185,25 @@ def test_a_tag_fills_only_where_it_agrees_and_a_period_no_10k_or_10q_states_is_l
     assert by[("sec.a.capex.h1", "2026-06-30")].value_numeric == 19
     assert by[("sec.a.rpo.q", "2026-03-31")].audited_vs_reported == Basis.company_stated
     assert by[("sec.a.cost_of_revenue.q", "2025-12-31")].audited_vs_reported == Basis.company_stated
+
+
+def test_net_income_shares_and_the_cover_pages_public_float_are_read_in_their_own_units():
+    doc = {
+        "facts": {
+            "us-gaap": {
+                "NetIncomeLoss": {"units": {"USD": [fact("2025-01-01", "2025-12-31", 16, "2026-02-17", "CY2025", "10-K")]}},
+                "WeightedAverageNumberOfDilutedSharesOutstanding": {
+                    "units": {"shares": [fact("2026-04-01", "2026-06-30", 2568, "2026-08-04", "CY2026Q2")]}
+                },
+            },
+            "dei": {"EntityPublicFloat": {"units": {"USD": [fact(None, "2025-06-30", 2993, "2026-02-17", "CY2025Q2I", "10-K")]}}},
+        }
+    }
+    pltr = Entity(id="palantir", name="Palantir", cik="0001321655", memberships=[Membership(layer_id="deployment_application")])
+    c = SecXbrl([pltr])
+    item = RawItem(c.urls[0], json.dumps(doc).encode(), 200, datetime(2026, 9, 28, tzinfo=timezone.utc), "x", None)
+    by = {r.series_key: r for r in c.extract([item])}
+    assert by["sec.palantir.net_income.fy"].value_numeric == 16 and by["sec.palantir.net_income.fy"].audited_vs_reported == Basis.audited
+    assert by["sec.palantir.diluted_shares.q"].unit == "shares"
+    pf = by["sec.palantir.public_float.pt"]
+    assert pf.value_numeric == 2993 and pf.unit == "USD" and pf.audited_vs_reported == Basis.company_stated

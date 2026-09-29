@@ -33,8 +33,8 @@ function ContextFigure({ f }: { f: ContextDoc["figures"][number] }) {
       table={
         <table className="data w-full">
           <thead><tr><th scope="col">line</th><th scope="col">as of</th><th scope="col">value</th><th scope="col">from</th></tr></thead>
-          <tbody>{f.lines.flatMap((ln) => ln.points.slice().reverse().map((p) => (
-            <tr key={`${ln.label}${p.as_of}`} id={p.id ? `d-${p.id}` : undefined} className="scroll-mt-24 target:bg-surface-2">
+          <tbody>{f.lines.flatMap((ln) => ln.points.slice().reverse().map((p, k) => (
+            <tr key={`${ln.label}${p.as_of}-${k}`} id={p.id ? `d-${p.id}` : undefined} className="scroll-mt-24 target:bg-surface-2">
               <td>{ln.label}</td>
               <td className="num whitespace-nowrap">{p.as_of}</td>
               <td className="num">{p.inputs || !p.href ? fmt(p.value, f.unit) : <a href={p.href} className={link}>{fmt(p.value, f.unit)}</a>}</td>
@@ -52,7 +52,7 @@ function ContextFigure({ f }: { f: ContextDoc["figures"][number] }) {
             <g key={ln.label}>
               {ln.points.slice(1).map((p, j) => p.joined ? <line key={j} x1={`${ln.points[j].x}%`} y1={`${ln.points[j].y}%`} x2={`${p.x}%`} y2={`${p.y}%`} stroke={s.c} strokeWidth="1.75" strokeDasharray={s.dash} strokeLinecap="round" /> : null)}
               <line className="plot-leader" x1={`${last.x}%`} y1={`${last.y}%`} x2="100%" y2={`${ln.label_y}%`} stroke="var(--axis)" />
-              <Marks>{ln.points.map((p) => <Mark key={p.as_of} p={p} r={2} stroke={s.c} stop={p === last} tip={`${ln.label} · ${fmt(p.value, f.unit)} · ${p.as_of}`} />)}</Marks>
+              <Marks>{ln.points.map((p, k) => <Mark key={`${p.as_of}-${k}`} p={p} r={2} stroke={s.c} stop={p === last} tip={`${ln.label} · ${fmt(p.value, f.unit)} · ${p.as_of}`} />)}</Marks>
             </g>
           );
         })}

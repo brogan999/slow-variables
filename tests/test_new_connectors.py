@@ -195,3 +195,20 @@ def test_susb_reads_four_digit_national_rows_for_three_size_measures():
         "census_susb.naics_5242.employment_under_500.a": 617366.0,
         "census_susb.naics_5242.firms_20_99.a": 3364.0,
     }
+
+
+def test_statcounter_reads_finished_months_as_shares_and_skips_other_and_zero():
+    from ai_tracker.ingest.connectors.statcounter import StatCounterAI
+
+    body = (
+        b'"Date","ChatGPT","Perplexity","Google Gemini","Microsoft Copilot","Claude","Deepseek","Other"\n'
+        b"2026-08,82.1,8,4,3,2.9,0,0\n"
+        b"2026-09,80,9,5,3,3,0,0\n"  # the month of the fetch: still running, skipped
+    )
+    c = StatCounterAI.__new__(StatCounterAI)
+    c.scrubbed, c.errors = [], []
+    rows = StatCounterAI.extract(c, [item(body)])
+    got = {(r.series_key, str(r.as_of_date)): r.value_numeric for r in rows}
+    assert got[("statcounter_ai.chatgpt.referral_share.m", "2026-08-31")] == 0.821
+    assert ("statcounter_ai.google_gemini.referral_share.m", "2026-08-31") in got
+    assert not any("deepseek" in k or "other" in k or "2026-09" in d for k, d in got)

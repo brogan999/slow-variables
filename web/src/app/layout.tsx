@@ -6,6 +6,7 @@ import { Freshness } from "@/components/Freshness";
 import { HoverLayer } from "@/components/HoverLayer";
 import { HatchDefs } from "@/components/chart";
 import { JourneyRail, NextStop } from "@/components/Journey";
+import { OpenOnHash } from "@/components/OpenOnHash";
 import { SiteMenu } from "@/components/SiteNav";
 import { ACTS } from "@/lib/nav";
 import { meta } from "@/lib/data";
@@ -71,6 +72,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </footer>
         <HatchDefs />
         <HoverLayer />
+        <OpenOnHash />
       </body>
     </html>
   );
