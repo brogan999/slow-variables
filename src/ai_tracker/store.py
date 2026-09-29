@@ -930,7 +930,9 @@ class Store:
         _write(out / "analyses.json", self._analyses())
         (out / "venture").mkdir(parents=True, exist_ok=True)
         venture = self._venture()
-        _write(out / "market_map.json", self._market_map(set(venture)))
+        mm_doc = self._market_map(set(venture))
+        _write(out / "market_map.json", mm_doc)
+        _write(out / "opportunities.json", self._opportunities(mm_doc))
         for sub_id, doc in venture.items():
             _write(out / "venture" / f"{sub_id}.json", doc)
         bottlenecks = self._bottlenecks(cards)
@@ -1516,6 +1518,13 @@ class Store:
                 sl["n_verified"] = sum(1 for e in sl["entities"] if e["verified"])
                 sl["n_indicators"] = len(sl["indicators"])
         return doc
+
+    def _opportunities(self, map_doc: dict[str, Any]) -> dict[str, Any]:
+        """The businesses that could be built on the map, with rubric tiers and the map's own companies (Part 33)."""
+        from . import futures, opportunities
+        from .outlook import load as load_outlook
+
+        return opportunities.build(opportunities.load(), map_doc, load_outlook(), futures.rubric())
 
     def _market_map(self, venture: set[str]) -> dict[str, Any]:
         """The granular market map (Part 33): Alex's categories with the tracker's entities placed in them, and counts."""

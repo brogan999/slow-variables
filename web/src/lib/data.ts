@@ -433,3 +433,19 @@ export type MarketMapDoc = {
   counts: { layers: number; categories: number; leaves: number; entities: number; placements: number; unmapped_categories: number; excluded: number; indicators: number };
 };
 export const marketMap = () => read<MarketMapDoc>("market_map.json");
+
+// Part 33 Stage 2: businesses that could be built on the map (web/data/opportunities.json, written by opportunities.build)
+export type OpportunityCat = { id: string; number: string | null; name: string; n_entities: number };
+export type Opportunity = {
+  id: string; name: string; customer: string; bottleneck: string; wedge: string; unit_sold: string; why_not_bundled: string;
+  durable_asset: string; rent_reason: string; falsifier: string; prerequisites: string; acquirers: string; next_action: string;
+  primary: OpportunityCat; adjacent: OpportunityCat[]; powers: string[]; builds_on: { ref: string; title: string; href: string }[];
+  rent: { rent_kind: string; appropriability: string; complementary_assets: string; asset_owner: string; durability: string; pools: string; tier: string; profit: string; reads: string; verdict: string };
+  examples: string[]; n_more_examples: number; unmapped: boolean; none_independent: boolean; see_also: { id: string; name: string } | null; blank: string[];
+};
+export type OpportunitiesDoc = {
+  reviewed_by: string; reviewed: string; opportunities: Opportunity[]; sequence: { stage: string; opportunity: string; gate: string; name: string; label: string }[];
+  powers: Record<string, string>;
+  counts: { records: number; unmapped: number; by_tier: { tier: string; n: number }[]; kept_by_incumbents: number };
+};
+export const opportunities = () => read<OpportunitiesDoc>("opportunities.json");
