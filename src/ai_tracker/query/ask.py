@@ -37,7 +37,7 @@ log = logging.getLogger("ai-tracker.ask")
 MODEL = os.environ.get("QUERY_MODEL", "claude-sonnet-5")
 # a blocked answer gets its fresh attempt on the stronger model: rare, so the bill stays near Sonnet's
 ESCALATE_MODEL = os.environ.get("QUERY_ESCALATE_MODEL", "claude-opus-5")
-PROMPT_VERSION = "10"
+PROMPT_VERSION = "11"
 # Opus 5 list price, for the escalated retry only
 ESCALATE_USD_PER_MTOK_IN, ESCALATE_USD_PER_MTOK_OUT = (
     float(x) for x in os.environ.get("QUERY_ESCALATE_USD_PER_MTOK", "5,25").split(",")
@@ -236,7 +236,7 @@ Rules for answers:
    - **What theory says**: which mechanism from the framing above applies (search_evidence for the theory note, rent_rubric for who keeps the profit), and whether tonight's readings fit it.
    If a pass has no record, say so in one sentence rather than filling it. End with where the three agree and where they pull apart.
 8. Strategy questions (what lasts, what creates advantage, what to own or buy, which opportunities are transitional or durable, where value will sit, what gets commoditised) start from value_chain, which holds the site's assessment of each layer and of the companies that matter; use its recorded judgements, and never re-run rent_rubric with your own inputs where a profile has them. Then follow the chain: call bottlenecks to find what binds now and how tight it is; run rent_rubric for the binding input (a supply shortage is a scarcity rent; its durability follows how tight it is and whether the industry is building its way out); say who holds the complementary asset; then say what would convert the transitional rent into a durable one (Helmer's later powers) and which signposts (claims, predictions) would show it happening.
-9. Questions about which companies will be worth $1 trillion (or any value) by a date: never name winners or give a forecast. Answer with what would have to be true. For each company that bears on it (use entity; its valuation block holds the rows), give how many times over its value must grow [derived:<id>] and the yearly rate that needs [derived:<id>], each cited in the same sentence as "$1 trillion", and never state the years remaining. Say that at today's price for each dollar of profit, profit would have to grow by the same factor, citing its latest net income [obs:<id>]. A private lab's multiple is read off its last round price and is never ranked with public companies. Then say where the company's rent comes from (rent_rubric, inputs flagged as your judgement), which bottleneck it depends on (bottlenecks) and which claims and predictions bear on it (claims), and close with the questions still open.
+9. Questions about which companies will be worth $1 trillion (or any value) by a date, or what the important companies of 2035 look like: never pick a winner, rank, or forecast. List the companies the site profiles as candidates and members of the trillion-dollar group (value_chain with companies true; an editorial set, unranked, and never "leading" or "most likely"), each with what must hold and what would disprove it from its profile, and say the profiles are this site's judgement drafted by a model. Then say what would have to be true in general. For each company that bears on it (use entity; its valuation block holds the rows), give how many times over its value must grow [derived:<id>] and the yearly rate that needs [derived:<id>], each cited in the same sentence as "$1 trillion", and never state the years remaining. Say that at today's price for each dollar of profit, profit would have to grow by the same factor, citing its latest net income [obs:<id>]. A private lab's multiple is read off its last round price and is never ranked with public companies. Then say where the company's rent comes from (rent_rubric, inputs flagged as your judgement), which bottleneck it depends on (bottlenecks) and which claims and predictions bear on it (claims), and close with the questions still open.
 10. Questions about what a particular reader should personally build, invest in or bet on get no personal recommendation: answer with the conditions and the signposts that would decide it, and say that this is the frame, not advice.
 11. Lead with the answer in one or two sentences, then the passes if any. Write in markdown with short paragraphs, a short heading per pass, and bullets where a list helps (a bullet is one claim). Take the length the question needs; do not pad. Do not describe the tools or your process.
 12. End with a line "Follow-ups:" and three short questions the reader could ask next, one per line starting "- ". They carry no numbers.
@@ -792,12 +792,12 @@ class Tools:
         if companies:
             # a brief per company, so every candidate fits one call; entity(<id>) has the full profile
             return {
-                "note": "Brief profiles, unranked; call entity for a company's full profile. Drafted by a model: say so.",
+                "note": "Brief profiles, unranked; pass a layer for what must hold, or call entity for a company's full profile. Drafted by a model: say so.",
                 "companies": [
                     {
                         "entity": c["entity"], "role": c["role"], "units": c["units"],
                         "powers": [p["power"] for p in c["powers"]], "depends_on": [b["id"] for b in c["depends_on"]],
-                        "profit": c["rent"]["reads"], "must_be_true": [x[:110] for x in c["must_be_true"][:2]],
+                        "profit": c["rent"]["reads"], **({"must_be_true": [x[:110] for x in c["must_be_true"][:2]]} if layer else {}),
                         "cite": f"src:{next(iter(c['sources'].get('market') or []), '')}",
                         "multiple_to_1t": (self._valuation(c["entity"]) or {}).get("multiple_to_1t") or (self._valuation(c["entity"]) or {}).get("private_multiple_to_1t"),
                         "reviewed": bool(c["reviewed_by"]),

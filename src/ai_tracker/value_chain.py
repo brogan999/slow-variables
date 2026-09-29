@@ -97,8 +97,8 @@ def problems(
     for u in units(outlook):
         errors += [f"value chain: unit {u['id']} cites unknown source {i}" for i in u.get("sources") or [] if i not in sources]
     for s in sources.values():
-        if s.get("entity") not in entities:
-            errors.append(f"value chain: source {s['id']} names no known filer")
+        if s.get("entity") not in entities and not s.get("filer"):
+            errors.append(f"value chain: source {s['id']} names no known filer")  # a publisher that is not a company names itself
         if bad := unfetched(s):
             errors.append(f"value chain: source {s['id']} {bad}")
     words = rubric["inputs"]
