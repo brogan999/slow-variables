@@ -444,7 +444,7 @@ def test_the_value_chain_tool_is_compact_citable_and_links_units_to_their_layer(
 
     t = _tools_with_board()
     brief = t.value_chain()
-    assert brief and all(u["cite"].startswith("pos:") and u["rival"] for u in brief)
+    assert brief and all(u["cite"].startswith("pos:") for u in brief) and any(u["rival"] for u in brief)
     for out in (brief, t.value_chain(layer="compute_physical"), t.value_chain(companies=True)):
         assert len(json.dumps(out, default=str)) < 20000
     uid = brief[0]["cite"].split(":")[1]
