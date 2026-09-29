@@ -51,6 +51,8 @@ entities:
   - {aliases: [IREN], id: iren, memberships: [{layer_id: compute_physical, sublayer_id: dc_power}], name: IREN, cik: '0001878848', verified: true}
   - {aliases: [Core Scientific], id: core_scientific, memberships: [{layer_id: compute_physical, sublayer_id: dc_power}], name: Core Scientific, cik: '0001839341', verified: true}
   - {aliases: [SK Hynix], id: sk_hynix, memberships: [{layer_id: compute_physical, sublayer_id: memory_networking}], name: SK Hynix, verified: false}
+  - {aliases: [ASML, ASML Holding], id: asml, memberships: [{layer_id: compute_physical, sublayer_id: semis}], name: ASML, cik: '0000937966', verified: true, notes: "Files a 20-F under IFRS, so the SEC connector reads no figures for it."}
+  - {aliases: [Samsung, Samsung Electronics], id: samsung, memberships: [{layer_id: compute_physical, sublayer_id: memory_networking}, {is_primary: false, layer_id: compute_physical, sublayer_id: semis}], name: Samsung Electronics, verified: true, notes: "Files no SEC reports; its English business report is the profile's source."}
   - {aliases: [Micron], id: micron, memberships: [{layer_id: compute_physical, sublayer_id: memory_networking}], name: Micron, cik: '0000723125', verified: true}
   - {aliases: [Astera Labs], id: astera_labs, memberships: [{layer_id: compute_physical, sublayer_id: memory_networking}], name: Astera Labs, cik: '0001736297', verified: true}
   - {aliases: [Enfabrica], id: enfabrica, memberships: [{layer_id: compute_physical, sublayer_id: memory_networking}], name: Enfabrica, cik: "0001985332", verified: true}

@@ -126,10 +126,10 @@ def test_a_corrected_annotation_rewrites_only_flag_fields(tmp_path, monkeypatch)
     assert annotate(ledger, seed) == 0 and json.loads(ledger.read_text())["dispute_text"] == "Withdrawn."
 
 
-# The acquirers the acquisitions ledger was searched for under its written rule (the sweep of 23 Sep 2026).
+# The acquirers the acquisitions ledger was searched for under its written rule (the sweep of 23 Sep 2026; asml and samsung on 28 Sep 2026).
 SWEPT_BUYERS = {
     "01_ai", "1x", "aleph_alpha", "alibaba_qwen", "amd", "ami_labs", "amzn", "anthropic", "antim_labs",
-    "applied_digital", "apptronik", "astera_labs", "ayar_labs", "baichuan", "base_power", "black_forest_labs",
+    "applied_digital", "apptronik", "asml", "astera_labs", "ayar_labs", "baichuan", "base_power", "black_forest_labs",
     "broadcom", "cartesia", "celestial_ai", "cerebras", "commonwealth_fusion", "core_automation", "core_scientific",
     "crusoe", "crwv", "d_matrix", "deepseek", "discovery_loop", "dolphin_ai", "elevenlabs", "elorian", "enfabrica",
     "etched", "exowatt", "extropic", "figure", "firmus", "flapping_airplanes", "fluidstack", "fractile",
@@ -140,7 +140,7 @@ SWEPT_BUYERS = {
     "mistral", "moonlake_ai", "moonshot", "msft", "nbis", "ndea", "nous_research", "nscale", "nvda", "oak_lab",
     "oklo", "openai", "orcl", "periodic_labs", "physical_intelligence", "pika", "poetiq", "poolside", "positron",
     "prime_intellect", "prismml", "recursive", "reflection_ai", "ricursive_intelligence", "runway",
-    "safe_superintelligence", "sakana_ai", "sambanova", "sarvam", "sk_hynix", "skild_ai", "sooth_labs",
+    "safe_superintelligence", "sakana_ai", "sambanova", "samsung", "sarvam", "sk_hynix", "skild_ai", "sooth_labs",
     "standard_intelligence", "stepfun", "submer", "suno", "tensorwave", "tenstorrent", "terawulf",
     "thinking_machines_lab", "thomson_reuters_imperial_frontier_ai_research_lab", "tsmc", "voltage_park", "vultr",
     "world_labs", "x_energy", "xai", "zhipu"

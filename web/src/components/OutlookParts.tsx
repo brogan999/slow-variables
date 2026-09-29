@@ -114,7 +114,7 @@ function Position({ doc, p, tests }: { doc: OutlookDoc; p: OutlookPosition; test
 
 // After each folio of the essay: its three main positions, then the rest folded away, each with its claims.
 export function FolioPositions({ doc, folio }: { doc: OutlookDoc; folio: string }) {
-  const here = doc.positions.filter((p) => p.folio === folio);
+  const here = doc.positions.filter((p) => p.folio === folio && !p.layer); // a layer's assessment lives on its layer page
   const shown = here.filter((p) => p.visible);
   const more = here.filter((p) => !p.visible);
   return (
