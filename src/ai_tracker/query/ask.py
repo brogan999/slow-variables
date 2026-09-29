@@ -165,7 +165,7 @@ TOOLS = [
     },
     {
         "name": "value_chain",
-        "description": "The site's assessment of each layer of the AI value chain and of the companies that matter in it. With no inputs: one line per assessed layer unit (its position, cite as [pos:<id>]; direction: commoditising, holding or tightening; what binds it; its rival view). With a layer id: that layer's units in full (how its economics work, what is commoditising and why, what stays scarce, Helmer's powers present, what would make a passing advantage last). With companies true: every profiled company in brief (pass a layer too to keep it to that layer's companies) (market, customers, powers, what it depends on, where its profit pools by the site's rent rule, what must be true by 2035 and what would disprove it) with its valuation rows. Profiles are this site's judgement drafted by a model: say so, cite the filing they rest on as [src:<id>], and never rank them.",
+        "description": "The site's assessment of each layer of the AI value chain and of the companies that matter in it. With no inputs: one line per assessed layer unit (its position, cite as [pos:<id>]; direction: commoditising, holding or tightening; what binds it; its rival view). With a layer id: that layer's units (pass a sub-layer id for one unit with its evidence) (how its economics work, what is commoditising and why, what stays scarce, Helmer's powers present, what would make a passing advantage last). With companies true: every profiled company in brief (pass a layer too to keep it to that layer's companies) (market, customers, powers, what it depends on, where its profit pools by the site's rent rule, what must be true by 2035 and what would disprove it) with its valuation rows. Profiles are this site's judgement drafted by a model: say so, cite the filing they rest on as [src:<id>], and never rank them.",
         "input_schema": {"type": "object", "properties": {"layer": {"type": "string"}, "companies": {"type": "boolean"}}},
     },
     {
@@ -797,7 +797,7 @@ class Tools:
                     {
                         "entity": c["entity"], "role": c["role"], "units": c["units"],
                         "powers": [p["power"] for p in c["powers"]], "depends_on": [b["id"] for b in c["depends_on"]],
-                        "profit": c["rent"]["reads"], "must_be_true": [x[:160] for x in c["must_be_true"][:3]],
+                        "profit": c["rent"]["reads"], "must_be_true": [x[:110] for x in c["must_be_true"][:2]],
                         "cite": f"src:{next(iter(c['sources'].get('market') or []), '')}",
                         "multiple_to_1t": (self._valuation(c["entity"]) or {}).get("multiple_to_1t") or (self._valuation(c["entity"]) or {}).get("private_multiple_to_1t"),
                         "reviewed": bool(c["reviewed_by"]),
@@ -815,7 +815,9 @@ class Tools:
         rows = [u for u in v["units"] if layer in (u["layer"], u["sublayer"])]
         if not rows:
             return {"error": f"no assessed unit in {layer}", "assessed": sorted({u["layer"] for u in v["units"]})}
-        return [{"cite": f"pos:{u['id']}", **{k: x for k, x in u.items() if k != "id"},
+        whole = any(u["layer"] == layer for u in rows)  # a whole layer leaves out each unit's evidence; a sub-layer has it all
+        brief = ("title", "direction", "commoditising", "stays_scarce", "powers", "binding", "rival", "sublayer", "layer")
+        return [{"cite": f"pos:{u['id']}", **{k: x for k, x in u.items() if k != "id" and (not whole or k in brief)},
                  "companies": [c["entity"] for c in v["companies"] if u["id"] in (c["units"] or [])]} for u in rows]
 
     def _profile(self, eid: str) -> dict[str, Any] | None:

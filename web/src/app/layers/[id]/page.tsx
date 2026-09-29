@@ -30,7 +30,7 @@ export default async function LayerPage({ params }: { params: Promise<{ id: stri
         <p className="text-xs text-muted"><Link href="/capture" className="hover:text-ink">Capture</Link> / layer {l.order}{l.economics?.length ? <> · <Link href="/value-chain" className="hover:text-ink">The value chain</Link></> : null}</p>
         <h1 className="display text-[2.5rem] md:text-[3.5rem] leading-[1.02] max-w-[24ch]">{l.name}</h1>
         <p className="mt-1 text-sm text-ink-2">{l.description}{l.dependency_tier ? ` Dependency tier ${l.dependency_tier}.` : ""}</p>
-        {l.commoditisation ? (
+        {l.commoditisation && !l.economics?.length ? (
           <p className="mt-2 text-sm max-w-[70ch]">
             Commoditisation proxies:{" "}
             {l.commoditisation.proxies.map((p, i) => (
@@ -51,6 +51,14 @@ export default async function LayerPage({ params }: { params: Promise<{ id: stri
             <h2 className="display text-2xl leading-tight mb-2 mt-2">How the economics move</h2>
             <p className="text-sm text-ink-2 max-w-[66ch]">The site&apos;s judgement of each part of this layer, read against the readings below and the theory on the <Link href="/value-chain" className="underline decoration-grid underline-offset-4">value chain</Link> page: what is getting cheap and interchangeable, what stays scarce, and what would prove it wrong.</p>
           </div>
+          {l.commoditisation ? (
+            <p className="text-sm text-ink-2 max-w-[70ch]">
+              The readings that test commoditisation here:{" "}
+              {l.commoditisation.proxies.map((p, i) => (
+                <span key={p.id}>{i ? "; " : ""}<Link href={`/indicators/${p.id}`} className="underline decoration-grid underline-offset-4">{p.name}</Link> <span className="text-muted">({(p.status ?? "unmeasured").replace(/_/g, " ")})</span></span>
+              ))}. Each keeps its own status; none is combined into a score.
+            </p>
+          ) : null}
           <PowersGlossary powers={valueChain().powers} />
           {l.economics.map((u) => <EconomicsUnitView key={u.id} u={u} />)}
           {l.profiles?.length ? (

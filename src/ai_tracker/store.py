@@ -2068,7 +2068,7 @@ class Store:
             c["name"] = names.get(c["entity"], c["entity"])
             c["depends_on"] = [{**b, "name": inputs.get(b["id"], b["id"])} for b in c["depends_on"]]
             c["source_links"] = [
-                {"id": i, "url": srcs[i]["url"], "label": _source_label(names.get(srcs[i].get("entity"), c["name"]), srcs[i])}
+                {"id": i, "url": srcs[i]["url"], "label": _source_label(srcs[i].get("filer") or names.get(srcs[i].get("entity"), c["name"]), srcs[i])}
                 for i in sorted({i for ids in c["sources"].values() for i in ids}) if i in srcs
             ]
         doc["powers"] = value_chain.POWER_GLOSS
@@ -2512,8 +2512,8 @@ def _write(p: Path, doc: Any) -> None:
     p.write_text(json.dumps(doc, sort_keys=True, indent=1, default=str) + "\n")
 
 
-FORM_WORDS = {"10-K": "annual report (10-K)", "20-F": "annual report (20-F)", "business-report": "business report",
-              "company-post": "results post"}
+FORM_WORDS = {"10-K": "annual report (10-K)", "20-F": "annual report (20-F)", "10-Q": "quarterly report (10-Q)", "8-K": "filing (8-K)", "form-d": "Form D", "company-page": "company page", "business-report": "business report",
+              "company-post": "announcement"}
 
 
 def _source_label(name: str, src: dict[str, Any]) -> str:
