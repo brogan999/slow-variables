@@ -60,7 +60,7 @@ companies:
   concentration: concentrated
   powers:
   - power: scale_economies
-    why: "This site judges that a memory factory at the newest process costs so much that only a few firms can build one; the benefit holds against newcomers, but not against Samsung or SK hynix, which build at the same scale or larger."
+    why: "Emerging, not proven. This site judges that a memory factory at the newest process costs so much that only a few firms can build one; the benefit holds against newcomers, but not against Samsung or SK hynix, which build at the same scale or larger."
   depends_on:
   - memory
   - accelerators
@@ -105,9 +105,9 @@ companies:
   concentration: concentrated
   powers:
   - power: process_power
-    why: "Its post says it was the first in the industry to be ready to mass-produce HBM4 and supplies both current generations at once; this site judges the benefit is earlier orders at the best prices, and the barrier is how long it takes to learn to stack dies with good yield (the share of units that work)."
+    why: "Emerging, not proven. Its post says it was the first in the industry to be ready to mass-produce HBM4 and supplies both current generations at once; this site judges the benefit is earlier orders at the best prices, and the barrier is how long it takes to learn to stack dies with good yield (the share of units that work)."
   - power: scale_economies
-    why: "This site judges it one of three firms with DRAM factories at the newest processes; the cost of a new factory keeps newcomers out, though not its two peers."
+    why: "Emerging, not proven. This site judges it one of three firms with DRAM factories at the newest processes; the cost of a new factory keeps newcomers out, though not its two peers."
   depends_on:
   - memory
   - accelerators
@@ -154,7 +154,7 @@ companies:
   concentration: diffuse
   powers:
   - power: scale_economies
-    why: "This site judges it one of three firms with DRAM factories at the newest processes, with cash from phones and appliances to keep building through a downturn; the barrier holds against newcomers, less so against SK hynix."
+    why: "Emerging, not proven. This site judges it one of three firms with DRAM factories at the newest processes, with cash from phones and appliances to keep building through a downturn; the barrier holds against newcomers, less so against SK hynix."
   depends_on:
   - memory
   - foundry
@@ -400,6 +400,1324 @@ companies:
   reviewed_by: Alex Brogan
   reviewed: 2026-09-28
   disclosure: null
+- entity: msft
+  role: club
+  units:
+  - vc_hyperscalers_neoclouds
+  market: "Microsoft sells software and cloud services. Its Intelligent Cloud segment (a part of the business it reports separately) holds Azure, its public cloud: computing, storage and AI services rented from its own data centres around the world and billed mostly by how much customers use. The filing says Azure offers AI computing at very large scale, the latest models, and hardware that includes chips Microsoft designs itself alongside chips from partners. It also sells AI inside products businesses already pay for, such as its office software and GitHub. In the year to June 2026 Azure revenue grew strongly, and the filing says the gross margin percentage of its cloud business (the share of sales left after the direct cost of providing it) fell because of spending on AI infrastructure and rising AI use. It warns that its AI and cloud investments will keep raising costs and may lower operating margins. This site judges its market to be both renting computing for training AI models and for inference (running a trained model to answer requests), and selling AI features to the companies that already run on its software. How big that becomes depends on whether AI revenue grows into the spending."
+  customers: "Businesses of every size, developers and governments; the filing gives no single customer's share of total revenue. It does name OpenAI. Microsoft holds a large minority stake in OpenAI, accounted for by the equity method (it records a share of OpenAI's results rather than adding in OpenAI's whole accounts), which makes OpenAI a related party (a company close enough that dealings with it must be disclosed); it discloses revenue from commercial arrangements with OpenAI, including revenue-sharing payments, and holds rights to OpenAI's models and other intellectual property for use in its products. The filing says some partners that supply AI models are also significant Azure customers and may change how much they buy. Its commercial remaining performance obligations (revenue already contracted but not yet delivered or recognised) grew sharply; this site's records, from an earlier Microsoft quarterly filing, show a large part of that backlog came from OpenAI. This site's records also hold an Anthropic commitment to buy Azure computing. The CoreWeave and Nebius filings name Microsoft as a large buyer of their capacity, so Microsoft also rents from neoclouds (newer clouds that specialise in renting AI chips). David Teece, an economist who studied why inventors often fail to keep the returns from what they invent, found that the firm holding the complementary assets (the distribution, sales and systems a product needs to reach buyers) often keeps the profit; this site judges that Microsoft holds its own: its data centres and its customers."
+  concentration: moderate
+  powers:
+  - power: switching_costs
+    why: "Companies run their identity, office software, servers and data on Microsoft together, and the filing names hybrid cloud (linking a customer's own data centres with Azure) as Azure's advantage; this site judges the benefit shows in an Intelligent Cloud operating margin (the share of sales left after running costs) that this site's filed figures put at or near the top of the big clouds, and the barrier is the cost of moving years of systems. This holds for the work firms already run there; this site judges it is not yet proven for AI work in particular."
+  - power: scale_economies
+    why: "This site judges that a worldwide network of data centres spreads the cost of chips, power contracts and its own chip designs over the largest volumes, so a rival would need similar volume to match its cost; the filing's note that AI spending is lowering its cloud gross margin shows this benefit is under strain."
+  depends_on:
+  - accelerators
+  - data_centres
+  - energy
+  - grid
+  - capital
+  - deployment_platforms
+  rent_kind: switching_cost
+  appropriability: tight
+  complementary_assets: specialised
+  asset_owner: innovator
+  durability: long
+  must_be_true:
+  - "Revenue from AI, in Azure and inside its software, grows into its capital spending (money spent on buildings and equipment) before the servers it bought wear out; the filing depreciates servers and network gear over several years at most."
+  - "OpenAI keeps growing, pays what it has committed, and keeps much of its computing on Azure; the filing lists OpenAI as a related party and warns that partners who are big Azure customers may change their purchasing."
+  - "Its rights to OpenAI's models keep their value even as OpenAI also buys computing from other clouds, which the CoreWeave filing shows it does."
+  - "Businesses keep buying AI through Microsoft contracts they already have, rather than directly from the labs that make the models."
+  - "Its own chip designs carry a growing share of its AI work, so it depends less on buying NVIDIA's chips at NVIDIA's prices."
+  - "Power, components and the large data-centre leases it has signed but not yet started all arrive on time; the filing warns that power limits and component shortages could restrict its capacity."
+  - "Prices for AI services do not fall faster than its costs; the filing names competition and commoditisation, goods becoming interchangeable and sold on price, as a risk to AI pricing."
+  would_disprove:
+  - "The Intelligent Cloud operating margin in this site's filed figures falling quarter after quarter while capital spending keeps rising."
+  - "Commercial remaining performance obligations shrinking against revenue, the test this site's backlog claim sets."
+  - "OpenAI moving a large block of its committed spending to other clouds, renegotiating it down, or failing to pay."
+  - "A write-down of AI servers, a shortening of their useful lives, or unwinding of data-centre leases before they start."
+  - "This site's ratio of the big platforms' capital spending to AI revenue rising for years instead of falling."
+  sources:
+    market:
+    - msft_10k_fy26
+    customers:
+    - msft_10k_fy26
+    - crwv_10k_fy25
+    - nbis_20f_2025
+    powers:
+    - msft_10k_fy26
+    must_be_true:
+    - msft_10k_fy26
+    - crwv_10k_fy25
+  judged_by: claude-opus-5.5
+  reviewed_by: Alex Brogan
+  reviewed: 2026-09-28
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviews this profile before it is relied on."
+- entity: amzn
+  role: club
+  units:
+  - vc_hyperscalers_neoclouds
+  market: "Amazon's cloud arm, Amazon Web Services (AWS), is a segment it reports separately. It rents on-demand computing, storage, databases, analytics and AI and machine-learning services to developers and to organisations of every size, from start-ups to government agencies. The filing says its cash capital spending (money spent on buildings and equipment) rose sharply in 2025, mostly on technology infrastructure, the majority of it to support AWS growth, and that it expected that spending to increase again in 2026. Having lengthened the estimated useful life of its servers in 2024, it shortened it for some servers and network equipment in 2025, citing the faster pace of AI technology, which raised its depreciation (the yearly charge for wear on equipment). This site's filed figures show the AWS operating margin (the share of sales left after running costs) holding steady through that record spending. This site judges its market to be the rented computing on which companies and AI labs train and run models, and that its size depends on how much AI work moves into the cloud rather than staying on companies' own machines or moving to the labs' own data centres."
+  customers: "Developers and enterprises of all sizes; the filing discloses no customer large enough to report separately, and it says AWS holds most of its long-term customer commitments not yet recognised as revenue. It names Anthropic, a maker of AI models: Amazon has invested in Anthropic through convertible notes (loans that can turn into shares) and non-voting preferred shares (shares that rank ahead of ordinary shares for payouts but carry no vote), recorded large gains on those stakes in 2025, and has a commercial arrangement with Anthropic mainly for AWS cloud services, including the use of AWS's own chips. This site's records also hold an Anthropic commitment to Microsoft's cloud, so Anthropic is not AWS's alone. David Teece, an economist who studied why inventors often fail to keep the returns from what they invent, found that the firm holding the complementary assets (the distribution, sales and systems a product needs to reach buyers) often keeps the profit; this site judges that Amazon holds its own: its data centres and its customers."
+  concentration: diffuse
+  powers:
+  - power: switching_costs
+    why: "The filing lists customers' ability and willingness to change business practices among the competitive factors for its enterprise services; this site judges the benefit is an AWS operating margin that held steady in this site's filed figures while spending surged, and the barrier is the work of moving data and systems built on AWS services. This holds for the work firms already run there; this site judges it is not yet proven for AI work in particular."
+  - power: scale_economies
+    why: "This site judges that the largest pool of rented servers, networks and data centres spreads fixed costs, including its own chip designs, over more use than a smaller cloud can; the barrier is the volume a rival would need to match that cost."
+  depends_on:
+  - accelerators
+  - memory
+  - data_centres
+  - energy
+  - grid
+  - capital
+  rent_kind: switching_cost
+  appropriability: tight
+  complementary_assets: specialised
+  asset_owner: innovator
+  durability: long
+  must_be_true:
+  - "AI revenue on AWS grows into the capital spending before the servers wear out; the filing already shortened server lives because AI hardware ages faster."
+  - "Anthropic keeps growing, keeps much of its training and inference on AWS, and pays; the value of Amazon's stake and the commercial arrangement both rest on it."
+  - "AWS's own AI chips carry a large and growing share of the work, so Amazon is not left paying NVIDIA's prices for most of its AI capacity."
+  - "Most companies choose to run AI where their data already sits, on AWS, rather than on specialist neoclouds (newer clouds that rent out AI chips) or through the labs' own services."
+  - "Power, land and chips, including memory chips whose supply the filing calls volatile, arrive fast enough that data centres are neither short nor stranded; the filing warns that mis-predicting demand can leave excess or too little capacity and lead to impairment charges (write-downs of an asset's recorded value)."
+  would_disprove:
+  - "The AWS operating margin in this site's filed figures falling for several quarters running while capital spending keeps rising."
+  - "Anthropic moving the bulk of its new computing to other clouds or to data centres of its own."
+  - "A write-down of Amazon's Anthropic stake, or of AI servers bought in the build-out."
+  - "Another shortening of server useful lives within a few years of the last one."
+  - "AWS's growth in rented AI computing trailing the neoclouds' for several years."
+  sources:
+    market:
+    - amzn_10k_fy25
+    customers:
+    - amzn_10k_fy25
+    powers:
+    - amzn_10k_fy25
+    must_be_true:
+    - amzn_10k_fy25
+  judged_by: claude-opus-5.5
+  reviewed_by: Alex Brogan
+  reviewed: 2026-09-28
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviews this profile before it is relied on."
+- entity: googl
+  role: club
+  units:
+  - vc_hyperscalers_neoclouds
+  - vc_frontier_labs
+  market: "Alphabet sits in two parts of the chain. As a cloud, Google Cloud rents computing, storage and AI services, offering both graphics processors (GPUs) and its own tensor processing units (TPUs, chips Google designs for the maths AI models run on; the filing names Ironwood as its seventh generation), plus Vertex AI, a platform for building on its Gemini models and other companies' models, and Workspace office software. As a frontier lab (a company building the most capable AI models), it develops the Gemini models, which the filing says run across all of its largest consumer products, including Search through AI Overviews and AI Mode. The filing says the cost of developing its general AI models sits in Alphabet-wide costs rather than in the Google Cloud segment, and that cloud margins are generally lower than advertising margins. It spent heavily on capital (buildings and equipment) in 2025 and said it expected to raise that spending significantly in 2026. This site's filed figures show the Google Cloud operating margin (the share of sales left after running costs) rising sharply over the past year from the lowest among the big clouds. This site judges its market is both renting AI computing and selling AI inside its most widely used consumer products, and that owning chips, models and distribution together is rare."
+  customers: "Advertisers across the world pay for most of Alphabet's revenue, and the filing names no customer large enough to report separately. Google Cloud sells to businesses and developers; the filing says its remaining performance obligations (revenue contracted but not yet recognised) relate primarily to Google Cloud, and that it has a number of large, long-duration commercial agreements. It also says it has made debt and equity investments in companies with which it signed commercial arrangements at or near the same time, and that if such an investment were impaired it might have to reduce the related contracted revenue; the filing does not name those companies. This site's records hold equity investments by Google in Anthropic, which has also signed for Google's TPU capacity. Alphabet enters significant leases with outside data-centre operators, and has given credit backstops (promises to cover a borrower's debts if it defaults) to data-centre entities it does not control."
+  concentration: diffuse
+  powers:
+  - power: scale_economies
+    why: "One infrastructure serves Search, YouTube, Gemini and Google Cloud; this site judges the benefit is a lower cost for each unit of AI computing, and the barrier is the volume across its consumer products that a cloud-only rival does not have."
+  - power: process_power
+    why: "Process power is a way of working that takes rivals years to learn. It has designed TPUs through generation after generation alongside its own models, and the filing says it focuses on driving efficiency in its data centres; this site judges that designing chips and models together drives part of that efficiency, that the benefit is AI computing that depends less on buying NVIDIA's chips, and that the barrier is the years of joint chip, software and model work a rival would have to repeat."
+  depends_on:
+  - accelerators
+  - foundry
+  - data_centres
+  - energy
+  - pretraining
+  - inference
+  - capital
+  rent_kind: scale_network
+  appropriability: tight
+  complementary_assets: specialised
+  asset_owner: innovator
+  durability: long
+  must_be_true:
+  - "Gemini stays among the most capable models, so Alphabet does not have to pay another lab for the models that run its own products."
+  - "AI answers in Search keep earning at least what the old results page earned, so the advertising that pays for the build-out holds."
+  - "TPUs stay competitive with NVIDIA's chips generation after generation, and outside customers keep choosing them, turning a cost advantage into a cloud business."
+  - "The Google Cloud margin keeps rising as the contracted backlog turns into revenue, even as the filing warns that cloud margins are lower than advertising's."
+  - "Companies it invested in and also sells cloud services to stay solvent and pay, and the credit backstops it has given to data-centre entities are not called."
+  - "Its capital spending earns back before the equipment ages out; the filing warns that expected technology advances could change the period over which it benefits from these assets."
+  would_disprove:
+  - "The Google Cloud operating margin in this site's filed figures turning down while capital spending keeps rising."
+  - "A payment under one of its data-centre credit backstops, or a cut to contracted revenue after an impaired investment."
+  - "Large TPU customers moving their next generation of work back to GPUs."
+  - "Search revenue falling while more answers are given by AI, showing the answers earn less than the links they replace."
+  - "Gemini falling well behind rival models for several model generations in a row."
+  sources:
+    market:
+    - googl_10k_fy25
+    customers:
+    - googl_10k_fy25
+    powers:
+    - googl_10k_fy25
+    must_be_true:
+    - googl_10k_fy25
+  judged_by: claude-opus-5.5
+  reviewed_by: Alex Brogan
+  reviewed: 2026-09-28
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviews this profile before it is relied on."
+- entity: orcl
+  role: candidate
+  units:
+  - vc_hyperscalers_neoclouds
+  market: "Oracle sells database and business software and, increasingly, Oracle Cloud Infrastructure (OCI): rented computing from virtual machines and GPU (graphics processor) servers to bare-metal servers (whole machines rented without sharing), used for AI training and inference (running trained models), plus storage and networking. It also runs its database inside other companies' clouds, which it calls multicloud. The filing says cloud infrastructure became the larger part of its cloud revenue in the year to May 2026. To grow OCI it is spending heavily: its capital spending (money on buildings and equipment) rose steeply, its free cash flow (cash from operations after that spending, a measure the company itself reports), slightly negative the year before, turned deeply negative, and it issued new bonds, has mandatory convertible preferred shares (which must turn into ordinary shares later) outstanding, set up a programme to sell new shares into the market over time, from which it had sold none by the end of May 2026, and signed long leases with outside data-centre developers and large commitments to chip and equipment suppliers. Its remaining performance obligations (revenue contracted but not yet recognised) grew steeply, which the filing puts down mainly to certain significant cloud contracts signed in the year. This site judges its market is renting AI computing at very large scale to a few big buyers, a business whose size depends on those buyers' ability to pay."
+  customers: "The filing names no AI customer. It says that in certain OCI offerings it is more concentrated among a number of large customers, that some customers may be highly leveraged (heavily borrowed), and that it takes prepayments on some committed contracts to manage credit risk. This site's records hold a press-reported agreement for OpenAI to buy computing from Oracle, which the filing does not itemise; nor does the filing mention the Stargate project by name. Oracle's older database and application customers are many and spread out. This site judges that the racks it rents out for AI are a generic asset, which anyone with money, power and a supply of chips can assemble; the scarce inputs behind that business belong to others, NVIDIA's chips on one side and the demand of a few big buyers on the other."
+  concentration: concentrated
+  powers: []
+  depends_on:
+  - accelerators
+  - memory
+  - data_centres
+  - energy
+  - grid
+  - capital
+  rent_kind: scarcity
+  appropriability: weak
+  complementary_assets: generic
+  asset_owner: incumbents
+  durability: short
+  must_be_true:
+  - "It earns a lasting advantage it does not hold today in renting AI computing, for example if the switching costs (the cost to a customer of moving to a rival) of its database carry over, so that companies running Oracle's database choose OCI for their AI work."
+  - "Its few large AI customers keep growing and pay; the filing warns that if a key customer cannot pay, it could be locked into multi-year commitments for data-centre space and financing without the matching revenue."
+  - "Its data-centre leases, which the filing says do not line up in length or pricing with its customer contracts, can be re-let or reused if customers do not renew."
+  - "Lenders and shareholders keep funding the build-out on terms the contracts can carry while its free cash flow is negative."
+  - "Power, sites, GPUs and memory arrive on time; the filing warns of power shortages, limits on building data centres, and developers who fail to finance or finish construction."
+  - "The price of renting GPUs does not fall below what it costs Oracle to own, power and finance them before the contracts end."
+  would_disprove:
+  - "Oracle's remaining performance obligations falling, or a large contract being cut or delayed, in this site's filed figures."
+  - "A write-down (a cut in the value it records) of data-centre assets, or a charge for leases it cannot fill."
+  - "Its borrowing costs rising or a credit downgrade forcing it to slow the build-out."
+  - "Capital spending falling while contracted revenue stays unconverted, a sign that capacity is not being delivered or not wanted."
+  - "A large customer failing to pay or seeking to renegotiate its commitment."
+  sources:
+    market:
+    - orcl_10k_fy26
+    customers:
+    - orcl_10k_fy26
+    powers:
+    - orcl_10k_fy26
+    must_be_true:
+    - orcl_10k_fy26
+  judged_by: claude-opus-5.5
+  reviewed_by: Alex Brogan
+  reviewed: 2026-09-28
+  disclosure: null
+- entity: crwv
+  role: candidate
+  units:
+  - vc_hyperscalers_neoclouds
+  market: "CoreWeave is a neocloud, a newer cloud built only to rent out AI computing. It rents large clusters of NVIDIA graphics processors (GPUs) with the networking, storage and management software to run them, and has bought developer-tool companies including Weights & Biases. The filing says it has been among the first to bring each new NVIDIA system to market and expects to be among the first with NVIDIA's next platform, Rubin. Customers mostly sign multi-year take-or-pay contracts (they pay for reserved capacity whether or not they use it), and it pays for its build-out mainly with debt secured on specific assets and backed by those contracts, plus company-level shares and debt. Its revenue and remaining performance obligations (revenue contracted but not yet recognised) grew steeply, and it has reported a net loss every year shown in the filing. This site judges its market is the overflow of AI computing demand that the big clouds and labs cannot or will not build themselves, and that its size depends on how long that overflow lasts."
+  customers: "A few very large buyers. The filing says Microsoft, its top customer, accounted for most of its revenue in 2025 and that no other customer reached the reporting threshold. It has signed contracts under which OpenAI and Meta committed to large multi-year purchases and expects both to become significant customers; it also has a stock issuance agreement with OpenAI. It expects its dependence on a limited number of customers to continue. NVIDIA supplies all of its GPUs, since its customer contracts specify NVIDIA chips, and bought CoreWeave shares in January 2026; this site's records also hold an arrangement giving NVIDIA access to CoreWeave capacity left unsold. Its competitors include the big clouds, several of which are its customers. This site judges that the racks it rents out are a generic asset, which anyone with money, power and a supply of chips can assemble; the scarce inputs behind its business belong to others, NVIDIA's chips on one side and the demand of a few big buyers on the other."
+  concentration: concentrated
+  powers: []
+  depends_on:
+  - accelerators
+  - networking
+  - data_centres
+  - energy
+  - grid
+  - capital
+  rent_kind: scarcity
+  appropriability: weak
+  complementary_assets: generic
+  asset_owner: incumbents
+  durability: short
+  must_be_true:
+  - "It earns a lasting advantage it does not hold today: its skill at bringing new NVIDIA systems online first and running them at high utilisation becomes process power (a way of working that takes rivals years to learn) that shows in margins after GPUs stop being scarce."
+  - "Its customers widen well beyond Microsoft, OpenAI and Meta, so losing one buyer does not break the business."
+  - "Those buyers keep paying through the full terms; the filing warns that some customers are early-stage or private companies with a higher risk of not paying."
+  - "Its cost of borrowing falls as it matures; this site's reading of its facility rates is too new to show a direction."
+  - "GPUs keep earning after their first contracts end; the filing warns that failing to redeploy equipment past its contracted life could hurt results."
+  - "Its big customers do not build enough computing of their own, a risk the filing names, to stop renting from it."
+  - "The price of renting GPUs does not fall faster than the cost of owning and financing them."
+  would_disprove:
+  - "Microsoft not renewing or shrinking its contracts without other buyers filling the gap."
+  - "The average rate on its borrowing, in this site's readings, rising over several quarters."
+  - "A write-down of GPUs, or older GPUs re-let at prices far below their first contracts."
+  - "Delays in delivering capacity that lead customers to cancel parts of their contracts."
+  - "OpenAI or Meta moving work to data centres of their own and cutting what they buy from it."
+  sources:
+    market:
+    - crwv_10k_fy25
+    customers:
+    - crwv_10k_fy25
+    powers:
+    - crwv_10k_fy25
+    must_be_true:
+    - crwv_10k_fy25
+  judged_by: claude-opus-5.5
+  reviewed_by: Alex Brogan
+  reviewed: 2026-09-28
+  disclosure: null
+- entity: nbis
+  role: candidate
+  units:
+  - vc_hyperscalers_neoclouds
+  market: "Nebius is a neocloud, a newer cloud built to rent out AI computing. It rents clusters of NVIDIA graphics processors (GPUs), including the GB200 and GB300 systems, in a data centre it owns in Finland and in built-to-order or shared sites in the United States, Europe and Israel, and sells software on top, including Token Factory, which serves open AI models and charges by the token (a small chunk of text a model reads or writes) instead of by the GPU-hour. It also owns smaller businesses, among them Avride, a self-driving developer. The company was called Yandex N.V. until 2024, when it sold all its businesses in Russia, which were almost all of the group at the time, and kept the AI cloud and a few smaller units. It files a 20-F (the annual report foreign companies file with the US regulator), but prepares its accounts under US accounting rules. This site holds filed figures on its debt, including its total debt and borrowing rates, but no filed revenue or capital-spending figures for it. This site judges its market is AI computing for customers the big clouds do not serve first, plus overflow capacity for the big clouds themselves."
+  customers: "Until recently mostly short-term customers, the filing says. It has since signed multi-year contracts to provide dedicated GPU capacity to Microsoft, at a new site in New Jersey, and to Meta; both contracts give the buyer service credits (discounts owed when service falls short) or the right to end tranches (separate portions of the deal) if delivery is late. One Meta order obliges Meta to buy any capacity in certain clusters that Nebius fails to sell to other customers. Its largest customer took a large part of 2025 revenue, and one customer owed most of its receivables (money customers owe it) at the end of 2025. It relies on NVIDIA for its GPUs and named a strategic partnership with NVIDIA in March 2026. It funds itself with convertible notes (loans that can turn into shares), share sales, and advance payments from these large contracts. This site judges that the racks it rents out are a generic asset, which anyone with money, power and a supply of chips can assemble; the scarce inputs behind its business belong to others, NVIDIA's chips on one side and the demand of a few big buyers on the other."
+  concentration: concentrated
+  powers: []
+  depends_on:
+  - accelerators
+  - data_centres
+  - energy
+  - grid
+  - capital
+  - inference
+  rent_kind: scarcity
+  appropriability: weak
+  complementary_assets: generic
+  asset_owner: incumbents
+  durability: short
+  must_be_true:
+  - "It earns a lasting advantage it does not hold today, for example if Token Factory and its other software turn it from a renter of chips into a platform customers would lose work by leaving."
+  - "It delivers the Microsoft and Meta capacity on schedule; the filing says it has limited experience delivering contracts this large and that late delivery lets those buyers claim credits or end tranches (portions of the contract)."
+  - "It wins enough other customers that its dependence on a few big clouds shrinks as their contracts run down."
+  - "Capital stays available on terms its contracts can carry while it spends ahead of revenue."
+  - "The price of renting GPUs does not fall faster than the cost of owning, powering and financing them."
+  - "The big clouds and labs do not build enough of their own capacity to stop needing neoclouds."
+  would_disprove:
+  - "Microsoft or Meta ending tranches for late delivery or not renewing."
+  - "Meta having to buy large amounts of capacity Nebius could not sell, a sign that outside demand is thin."
+  - "The borrowing rates in this site's readings of its debt rising over several quarters."
+  - "Token Factory staying a small part of revenue while GPU rental prices fall."
+  sources:
+    market:
+    - nbis_20f_2025
+    customers:
+    - nbis_20f_2025
+    powers:
+    - nbis_20f_2025
+    must_be_true:
+    - nbis_20f_2025
+  judged_by: claude-opus-5.5
+  reviewed_by: Alex Brogan
+  reviewed: 2026-09-28
+  disclosure: null
+- entity: openai
+  role: candidate
+  units:
+  - vc_frontier_labs
+  market: "OpenAI builds frontier models (the most capable AI systems of their time, trained on huge amounts of text and computing power) and sells them as products people and firms use directly, above all ChatGPT, its chat app, for which this site's records hold a very large weekly user count reported by OpenAI, and through an API (a connection that lets other companies' software send requests to the model and pay per use). Running a model to answer a request is called inference. OpenAI is now a public benefit corporation, or PBC (a for-profit company whose charter also commits it to a stated public purpose), and Microsoft, its long-standing investor, holds a large minority stake after the 2025 recapitalisation (a reorganisation of who owns the company). Its newer deals push toward selling whole systems to businesses: with Amazon it is building a runtime (the software layer an AI agent works inside, keeping memory of prior work and access to a firm's tools and data) for Amazon's cloud customers, and Amazon's cloud is the only outside cloud allowed to resell Frontier, its platform for running teams of AI agents inside a company. Microsoft may now pursue the most advanced AI on its own or with others, and OpenAI may now release open-weight models (models whose trained settings are published so anyone can run them) that meet capability criteria the agreement sets. This site's recorded revenue run-rate (the latest month's revenue scaled up to a full year) for OpenAI has grown steeply but in mid-2026 sat below Anthropic's. Run-rate figures are self-reported: the labs publish them or are the source behind press reports of them, and this profile rests on company and partner announcements, not audited filings. How big the market becomes depends on whether businesses pay for systems built around a model or only for the cheapest model that is good enough."
+  customers: "Consumers, most directly through ChatGPT, businesses and developers, plus other large companies that build on its models: Amazon will tailor OpenAI models for its own customer-facing apps. Microsoft keeps rights to OpenAI's models and products into the 2030s, and a revenue-share agreement between the two stays in place until an expert panel confirms that OpenAI has reached artificial general intelligence (AI that matches people across most work). API products OpenAI builds with third parties must run on Microsoft's Azure cloud, while its other products may run on any cloud. The sources name no revenue share by customer; this site judges the base is broad, with a direct line to consumers through ChatGPT, but that Microsoft and Amazon stand between OpenAI and many business buyers."
+  concentration: moderate
+  powers:
+  - power: scale_economies
+    why: "Emerging, not proven. This site judges that the cost of training a frontier model is spread over every customer, and the site's venture data show only a few labs raising enough to keep training at the frontier; the barrier holds against newcomers but not against the other frontier labs, and it thins as open-weight models trail by months, not years."
+  - power: switching_costs
+    why: "Emerging, not proven. Its agent platform and the runtime with Amazon are built to hold a company's context, tools and permissions, which a customer would have to rebuild to move; this site has no measure yet of customers staying for that reason."
+  depends_on:
+  - accelerators
+  - data_centres
+  - energy
+  - pretraining
+  - post_training
+  - inference
+  - deployment_platforms
+  - capital
+  rent_kind: scarcity
+  appropriability: weak
+  complementary_assets: specialised
+  asset_owner: platforms
+  durability: short
+  must_be_true:
+  - "Revenue grows into its compute commitments (contracts to buy computing power for years ahead): it has contracted for a large further block of Azure services from Microsoft; agreed to deploy AMD's chips across several generations, receiving a warrant (a right to buy AMD shares) tied to those purchases; expanded its multi-year Amazon agreement to cover gigawatts of Amazon's own Trainium chips (Amazon's in-house AI chips; a gigawatt is a very large amount of electric power, about what a big power station produces); and signed multi-year contracts with CoreWeave (a neocloud, a newer firm that rents out AI chips). This site's records also hold a press-reported agreement to buy computing from Oracle, and guarantees from NVIDIA for part of a data-centre build leased to OpenAI. Revenue must rise at least as fast as these bills fall due."
+  - "Its prices and margins hold even though open-weight models trail the best closed models by months; this site's estimate of OpenAI's gross margin (revenue left after the direct cost of serving it) fell between 2024 and 2025."
+  - "Businesses that build agents on Frontier or the Amazon runtime find it costly to move them, so the deployment, not the model, keeps the customer."
+  - "OpenAI, rather than Microsoft or Amazon, owns the relationship with business customers, even though Microsoft keeps rights to its models and a revenue-share agreement, and Amazon resells its platform."
+  - "Its direct reach to consumers through ChatGPT, which OpenAI reports and this site cannot check, lasts and turns into paying use; a rival that matches ChatGPT reaches those users directly."
+  - "It can keep raising money without leaning further on the cloud and chip suppliers that are also its investors, Microsoft, Amazon and NVIDIA among them, because this site's record shows its revenue run-rate still below the equity (money investors paid for shares) it has raised."
+  would_disprove:
+  - "OpenAI cutting, delaying or renegotiating its compute commitments, or a supplier's filing showing it taking on OpenAI's obligations. This site's record holds a report, from anonymous sources, of OpenAI telling investors a lower compute-spending target than its chief executive had cited months before; this site notes the two figures are not strictly comparable."
+  - "Its best models' prices falling toward open-weight prices while its share of business use also falls."
+  - "Business customers of Frontier or the Amazon runtime moving their agents to rival models inside the same cloud at little cost."
+  - "This site's gross-margin estimate for OpenAI falling again, or its recoupment ratio (a year's run-rate over the equity raised) falling while commitments rise."
+  - "Microsoft's or Amazon's filings showing their return on OpenAI coming mainly from cloud spending OpenAI owes them rather than from OpenAI's own profit."
+  sources:
+    market:
+    - openai_msft_recap_2025
+    - openai_amazon_8k_2026
+    - msft_10k_fy26
+    customers:
+    - openai_msft_recap_2025
+    - openai_amazon_8k_2026
+    - msft_10k_fy26
+    powers:
+    - openai_amazon_8k_2026
+    must_be_true:
+    - openai_msft_recap_2025
+    - openai_amazon_8k_2026
+    - crwv_10k_fy25
+    - msft_10k_fy26
+    - amd_10k_fy25
+    - nvda_10k_fy26
+  judged_by: claude-opus-5.5
+  reviewed_by: Alex Brogan
+  reviewed: 2026-09-28
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviews this profile before it is relied on."
+- entity: anthropic
+  role: candidate
+  units:
+  - vc_frontier_labs
+  market: "Anthropic builds frontier models (the most capable AI systems of their time), the Claude family, and sells them to businesses and developers through an API (a connection other software uses to send requests and pay per use), through its own apps, and through work tools: Claude Code, which writes and edits software, and Cowork, which brings Claude Code's abilities to other office work. Running a model to answer a request is called inference. It is a public benefit corporation, or PBC (a for-profit company whose charter also commits it to a stated public purpose). It calls itself the market leader in enterprise AI and coding; that is its own description. It says Claude is sold on the largest clouds, Amazon's, Google's and Microsoft's, and runs on Amazon's Trainium chips (Amazon's in-house AI chips), Google's TPUs (Google's in-house AI chips) and NVIDIA's GPUs (graphics processing units, the chips most AI runs on). This site's recorded revenue run-rate (the latest month's revenue scaled up to a full year) for Anthropic has grown steeply and in mid-2026 sat above OpenAI's. Run-rate figures are self-reported: the labs publish them or are the source behind press reports of them, and this profile rests on company and partner announcements, not audited filings. How big the market becomes depends on whether businesses keep paying a premium for its models once cheaper ones are good enough for the same work."
+  customers: "Mostly businesses and developers. It says most of the very largest US companies by revenue are customers, that the count of customers spending heavily with it has grown sharply, that firms which start with one use tend to widen it, and that enterprise use makes up most of Claude Code's revenue. It says Claude is sold through the three largest clouds, which also sell rival models, including Amazon's own Nova models and the models Alphabet develops; this site judges that part of its business arrives that way. The sources name no revenue share by customer; this site judges the base is moderately concentrated in large firms and in coding."
+  concentration: moderate
+  powers:
+  - power: scale_economies
+    why: "Emerging, not proven. This site judges that the cost of training a frontier model is spread over every customer, and the site's venture data show only a few labs raising enough to keep training at the frontier; the barrier holds against newcomers but not against the other frontier labs, and it thins as open-weight models trail by months, not years."
+  - power: switching_costs
+    why: "Emerging, not proven. It says businesses widen their use across the firm once Claude is built into their work and coding tools, which a customer would have to rebuild to move; but the same clouds offer rival models one setting away, and this site has no measure yet of customers staying for that reason."
+  depends_on:
+  - accelerators
+  - data_centres
+  - energy
+  - memory
+  - pretraining
+  - post_training
+  - inference
+  - deployment_platforms
+  - capital
+  rent_kind: scarcity
+  appropriability: weak
+  complementary_assets: specialised
+  asset_owner: platforms
+  durability: short
+  must_be_true:
+  - "Revenue grows into its compute commitments (contracts to buy computing power for years ahead): in 2026 it signed for gigawatts of new capacity from Amazon and of TPU capacity from Google and Broadcom (a gigawatt is a very large amount of electric power, about what a big power station produces), and for GPU capacity from SpaceX; in November 2025 it chose Fluidstack (a neocloud, a newer firm that rents out AI computing) to build custom data centres for it. This site's records also hold its commitment to buy Azure computing from Microsoft and its commitment to spend on AWS over the next decade. Revenue must rise at least as fast as these bills fall due."
+  - "Its prices and margins hold even though open-weight models (models whose trained settings are published so anyone can run them) trail the best closed models by months; this site's gross-margin estimate for Anthropic (revenue left after the direct cost of serving it) sits at about the same level as OpenAI's, which this site judges is well below a typical software firm's."
+  - "Businesses that build Claude into their coding and daily work find it costly to move, even though the clouds that resell Claude sell rival models through the same menu."
+  - "Anthropic, rather than Amazon, Google or Microsoft, owns the relationship with business customers, even though Amazon is its main cloud and training partner and a large investor."
+  - "Its edge in coding and business use, which it claims for itself and which Ramp's data on business spending show only narrowly, lasts; its revenue leans on those uses, so a rival that matches it there reaches its core customers directly."
+  - "It can keep raising money without leaning further on the cloud and chip suppliers that are also its investors, Amazon, Google, Microsoft and NVIDIA among them, because this site's record shows its revenue run-rate still below the equity (money investors paid for shares) it has raised."
+  would_disprove:
+  - "Anthropic cutting, delaying or renegotiating its capacity agreements, or a supplier's filing showing it carrying Anthropic's obligations."
+  - "Its best models' prices falling toward open-weight prices while its share of business use also falls."
+  - "Large coding or enterprise customers moving their work to another lab's model within the same cloud at little cost."
+  - "This site's recoupment ratio for Anthropic (a year's run-rate over the equity raised) falling while its commitments rise; the latest reading is below the one before it."
+  - "Amazon's filings showing its return on Anthropic coming mainly from cloud spending Anthropic owes it rather than from Anthropic's own profit."
+  sources:
+    market:
+    - anthropic_series_g_2026
+    - anthropic_series_h_2026
+    customers:
+    - anthropic_series_g_2026
+    - anthropic_series_h_2026
+    - openai_amazon_8k_2026
+    - googl_10k_fy25
+    powers:
+    - anthropic_series_g_2026
+    must_be_true:
+    - anthropic_series_h_2026
+    - anthropic_series_g_2026
+    - fluidstack_anthropic_dc_2025
+    - amzn_10k_fy25
+  judged_by: claude-opus-5.5
+  reviewed_by: Alex Brogan
+  reviewed: 2026-09-28
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviews this profile before it is relied on."
+- entity: xai
+  role: candidate
+  units:
+  - vc_frontier_labs
+  market: "xAI builds Grok, a frontier model (one of the most capable AI systems of its time), and since February 2026 has been part of SpaceX, where it forms the AI segment (a separately reported business line). That segment sells advertising on X, the social network xAI absorbed in 2025; subscriptions to X and Grok; data licences; API access (a connection other software uses to send requests to Grok and pay per use); and, since 2026, cloud services, renting its own computing power to other firms. Its 10-Q (the quarterly report US companies file with their regulator) says the segment's revenue rose sharply in the latest quarter mainly because it began selling that computing capacity, while advertising fell during a move to a new ad system. The segment still runs at an operating loss (costs above revenue). It runs its own Colossus data centres, measuring their installed power draw in gigawatts (a gigawatt is a very large amount of electric power, about what a big power station produces), though the 10-Q also cites rising cloud computing costs, and it is buying Cursor, a coding-tool company. How big the market becomes depends on whether it earns its return from Grok or from renting out the machines built to train it."
+  customers: "Consumers on X and the Grok apps, advertisers, developers using the API, and a few large buyers of its computing capacity. The 10-Q says a significant part of that infrastructure revenue comes from a small number of customers, names one unnamed AI-segment customer among SpaceX's largest, and says these cloud contracts can be ended by either side on short notice after the ramp-up period. Anthropic's own announcement says it signed for GPU capacity (graphics processing units, the chips most AI runs on) in SpaceX's Colossus data centres; the filing does not name its customers."
+  concentration: concentrated
+  powers:
+  - power: scale_economies
+    why: "Emerging, not proven. This site judges that the cost of training a frontier model is spread over every customer, and the site's venture data show only a few labs raising enough to keep training at the frontier; the barrier holds against newcomers but not against the other frontier labs, and it thins as open-weight models trail by months, not years."
+  - power: cornered_resource
+    why: "Emerging, not proven. A cornered resource is preferential access to something others need. It owns X, a large real-time stream of posts and an audience that Grok can reach directly; the benefit is data and distribution, and the barrier is that no rival owns X. But the segment also sells X's data to others under data licences, advertising on X fell in the latest quarter, and the audience figure is xAI's own, so this site does not count the barrier as proven."
+  depends_on:
+  - accelerators
+  - data_centres
+  - energy
+  - grid
+  - pretraining
+  - post_training
+  - inference
+  - capital
+  rent_kind: scarcity
+  appropriability: weak
+  complementary_assets: specialised
+  asset_owner: innovator
+  durability: short
+  must_be_true:
+  - "Revenue from Grok itself, not only from renting out computing power, grows into the cost of its data centres; today research and development is the segment's largest cost, which the 10-Q says rose with infrastructure and cloud computing costs from its data-centre expansion, and the segment runs at a loss."
+  - "Its prices and margins hold even though open-weight models (models whose trained settings are published so anyone can run them) trail the best closed models by months; this site's last recoupment reading for xAI (a year's run-rate over the equity raised), which predates its merger into SpaceX, was lower than OpenAI's or Anthropic's."
+  - "The customers renting its computing capacity renew rather than leave, although the contracts let either side end them on short notice."
+  - "Owning X and the Grok apps keeps giving it a direct line to users, and it turns that reach into paying use."
+  - "Its legal cases do not curb its products or its power supply: the 10-Q lists suits over Grok's image tools and a suit claiming the gas turbines powering one Colossus site lack proper air permits."
+  would_disprove:
+  - "The AI segment's operating loss widening while its revenue growth comes mainly from renting out capacity rather than from Grok subscriptions and API use."
+  - "A large capacity customer ending its contract, or infrastructure revenue falling back after the ramp-up."
+  - "Grok's prices falling toward open-weight prices without a matching rise in paying users."
+  - "A court order limiting the turbines at its Colossus site, or limiting Grok's image features."
+  sources:
+    market:
+    - xai_spacex_10q_q2_2026
+    - xai_series_e_2026
+    customers:
+    - xai_spacex_10q_q2_2026
+    - xai_series_e_2026
+    - anthropic_series_h_2026
+    powers:
+    - xai_series_e_2026
+    - xai_spacex_10q_q2_2026
+    must_be_true:
+    - xai_spacex_10q_q2_2026
+  judged_by: claude-opus-5.5
+  reviewed_by: Alex Brogan
+  reviewed: 2026-09-28
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviews this profile before it is relied on."
+- entity: periodic_labs
+  role: candidate
+  units:
+  - vc_neolabs
+  market: "Periodic Labs builds AI models together with autonomous laboratories (labs where robots run experiments and software decides what to try next), starting with materials science: new superconductors (materials that carry electricity with no loss) and magnets. Its bet is that experiments produce data no one else has, which trains better scientific AI, which picks better experiments. In 2026 it released Neon, a large model it built by mid-training (further broad training on a chosen body of material) and then reinforcement learning (training by rewarding good answers) on its own lab data; it says Neon beats leading general models from OpenAI and Anthropic at one analysis task, reading X-ray diffraction results (patterns that show a material's crystal structure), with relatively little compute (computing power). It also sells to industry, for instance training agents for a chip maker working on heat problems. It is private and early; its backers include Andreessen Horowitz and NVIDIA's venture arm. How big the market becomes depends on whether it makes materials others will pay for, and on who keeps the profit when it does."
+  customers: "Industrial research teams; its launch post names one example, an unnamed semiconductor maker. The sources give no revenue. This site judges that its customers today are few."
+  concentration: concentrated
+  powers:
+  - power: cornered_resource
+    why: "Emerging, not proven. Its high-throughput labs produce experimental data, including failed results that are rarely published, that it says exists nowhere else; the barrier is that more experiments need more power, equipment and engineering and each can take days, so a rival cannot simply rent more computers to catch up."
+  depends_on:
+  - training_data
+  - post_training
+  - accelerators
+  - energy
+  - capital
+  rent_kind: scarcity
+  appropriability: weak
+  complementary_assets: specialised
+  asset_owner: incumbents
+  durability: short
+  must_be_true:
+  - "Its labs discover materials, such as better superconductors, that manufacturers will pay for, and not only faster analysis of experiments."
+  - "Data from its own experiments keeps beating what general frontier models learn from published text and simulation, so its models stay ahead on the tasks it cares about."
+  - "It keeps a share of the value of a discovery, through patents or licences, rather than being paid once for a service while the manufacturers that make the material keep the profit."
+  - "The large labs, which it says it also uses when their models are good enough, do not build autonomous labs of their own at greater scale; Alphabet, for one, runs Isomorphic Labs, which applies AI to drug discovery, and Anthropic has announced a life-sciences research group and laboratory."
+  - "It can fund labs whose output grows slowly, since each experiment takes real time, power and equipment."
+  would_disprove:
+  - "Years passing without a material from its labs being licensed or made at scale."
+  - "A general frontier model matching Neon on its own analysis tasks without lab data."
+  - "Its revenue coming mainly from consulting-style work for industry rather than from discoveries."
+  - "A frontier lab or a large chemical or chip company opening autonomous labs of similar throughput."
+  sources:
+    market:
+    - periodic_labs_introducing_2025
+    - periodic_labs_neon_2026
+    customers:
+    - periodic_labs_introducing_2025
+    powers:
+    - periodic_labs_introducing_2025
+    - periodic_labs_neon_2026
+    must_be_true:
+    - periodic_labs_introducing_2025
+    - periodic_labs_neon_2026
+    - anthropic_series_h_2026
+    - googl_10k_fy25
+  judged_by: claude-opus-5.5
+  reviewed_by: Alex Brogan
+  reviewed: 2026-09-28
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviews this profile before it is relied on."
+- entity: elevenlabs
+  role: candidate
+  units:
+  - vc_neolabs
+  market: "ElevenLabs builds AI voice models (software that turns text into natural speech, transcribes speech, dubs it into other languages, and makes sound effects and music) and sells them in products: ElevenAgents, for businesses to run voice and chat agents that answer customers; ElevenCreative, for creators and brands to make and translate audio; and ElevenAPI, a connection developers use to build its voices into their own products. Its annual recurring revenue, or ARR (the yearly value of its subscriptions and contracts at the current pace, a figure the company reports), rose steeply from the end of 2025 to April 2026 in this site's records, and more slowly from April to September 2026; its valuation rose sharply in its 2026 funding round. It says growth comes from enterprises putting voice agents into support, sales, hiring and marketing. Its site lists a May 2026 post saying it lowered its API and agent prices and introduced pay-as-you-go billing. How big the market becomes depends on whether voice stays a specialist's product or becomes a feature the frontier labs (the firms building the most capable general AI models) give away."
+  customers: "Enterprises, governments, developers and creators. It names Deutsche Telekom, Square, Revolut and the Ukrainian government as agent users; Meta, Epic Games, Salesforce, MasterClass and Harvey as API users; and Duolingo, NVIDIA and TIME as creative users. It says many of the largest companies building with it now invest in it too; NVIDIA, Santander and Deutsche Telekom are among those investors. This site judges the base is broad."
+  concentration: diffuse
+  powers:
+  - power: switching_costs
+    why: "Emerging, not proven. Its agent platform comes with integrations, testing and monitoring for large customer-service operations, and a brand's chosen voice lives on it; the benefit is repeat business, and the barrier is the work a firm would redo to rebuild its agents and voice elsewhere. This site judges the barrier is modest while voice quality converges, its lower prices and pay-as-you-go billing make leaving easier, and this site has no measure yet of customers staying for that reason."
+  depends_on:
+  - inference
+  - post_training
+  - deployment_platforms
+  - applications
+  - capital
+  rent_kind: scarcity
+  appropriability: weak
+  complementary_assets: specialised
+  asset_owner: platforms
+  durability: short
+  must_be_true:
+  - "Its voices stay clearly better than those the frontier labs bundle into their own products; xAI, for one, already offers a voice agent through its API."
+  - "Businesses buy a whole agent platform from it, not just voice by the minute, so that price cuts on voice do not cut its revenue."
+  - "The telecoms, software and cloud firms that resell or build on its voices, several of them investors, do not replace it with their own or a lab's models."
+  - "Revenue keeps growing faster than its prices fall."
+  would_disprove:
+  - "Large customers moving their agents to a frontier lab's voice model at little cost."
+  - "Further price cuts without a matching rise in use, showing voice being priced as a commodity."
+  - "Its growth in this site's ARR records, which slowed after April 2026, slowing further while enterprise voice agents keep spreading."
+  sources:
+    market:
+    - elevenlabs_series_d_2026
+    - elevenlabs_500m_arr_2026
+    customers:
+    - elevenlabs_series_d_2026
+    - elevenlabs_500m_arr_2026
+    powers:
+    - elevenlabs_series_d_2026
+    must_be_true:
+    - elevenlabs_series_d_2026
+    - elevenlabs_500m_arr_2026
+    - xai_series_e_2026
+  judged_by: claude-opus-5.5
+  reviewed_by: Alex Brogan
+  reviewed: 2026-09-28
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviews this profile before it is relied on."
+- entity: fluidstack
+  role: candidate
+  units:
+  - vc_hyperscalers_neoclouds
+  market: "Fluidstack is a neocloud (a newer company that rents out AI computing power, competing with the large clouds of Amazon, Microsoft and Google). In November 2025 Anthropic chose it to build data centres custom-made for Anthropic's work in New York and Texas, with more sites to come and the first coming online during 2026; it says Anthropic chose it for how fast it can deliver gigawatts of power (a gigawatt is a very large amount of electric power, about what a big power station produces). Its Form D (the notice a private company files with the US regulator when it sells shares without a public offering) shows a UK company that sold part of a new offering of shares to a small group of investors in June 2026, with Morgan Stanley as its paid placement agent (the bank that finds buyers for the shares); it declined to disclose its revenue. How big the market becomes depends on whether it can become a builder for many buyers or stays tied to one."
+  customers: "Its one named customer in these sources is Anthropic. It says it also works with other AI labs, governments and enterprises, but names none. This site judges its revenue is concentrated. This site judges that the racks it builds are a generic asset, which others with money, power and chips can also assemble; a site built for one customer gives that customer, not Fluidstack, the stronger hand once it is built."
+  concentration: concentrated
+  powers: []
+  depends_on:
+  - data_centres
+  - energy
+  - grid
+  - accelerators
+  - networking
+  - capital
+  rent_kind: scarcity
+  appropriability: weak
+  complementary_assets: generic
+  asset_owner: platforms
+  durability: short
+  must_be_true:
+  - "Power and ready sites stay scarce long enough that speed of delivery earns it a better price than a larger cloud would charge."
+  - "Anthropic keeps paying for the sites built for it; Oliver Williamson, who studied why firms own assets tied to a single partner, found that such assets invite a fight over price once they are built, and a data centre made for one customer is that kind of asset."
+  - "It wins large customers beyond Anthropic, so the loss of one does not sink it."
+  - "It can keep raising equity and debt to build ahead of payment, since its private offering was only partly sold at filing."
+  would_disprove:
+  - "Anthropic moving work to the large clouds' or its own sites instead of expanding with Fluidstack."
+  - "Sites coming online late, or with power it has not secured."
+  - "No second customer of Anthropic's size named within the build-out."
+  - "Its next sites being delayed for want of equity or debt to build them."
+  sources:
+    market:
+    - fluidstack_anthropic_dc_2025
+    - fluidstack_form_d_2026
+    customers:
+    - fluidstack_anthropic_dc_2025
+    powers:
+    - fluidstack_anthropic_dc_2025
+    must_be_true:
+    - fluidstack_anthropic_dc_2025
+    - fluidstack_form_d_2026
+    - anthropic_series_h_2026
+  judged_by: claude-opus-5.5
+  reviewed_by: Alex Brogan
+  reviewed: 2026-09-28
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviews this profile before it is relied on."
+- entity: etched
+  role: candidate
+  units:
+  - vc_semis
+  market: "Etched designs systems for inference (running a trained AI model to answer requests) on the largest models: its own chips, plus the racks (cabinets holding many chips wired together), cooling, power supply and software around them, designed together. Its chip is a kind of ASIC (an application-specific integrated circuit, a chip built for one kind of work rather than general use). It says its first chip came back from TSMC, the contract chip maker, earlier in 2026, that it is testing its first rack-scale product with customers, and that it has begun production against customer contracts. It claims design advances: running its maths circuits at low voltage so they can work harder without overheating, and a memory design that mixes HBM (high-bandwidth memory, stacked beside the chip to feed it fast) with SRAM (very fast memory built into the chip) and pools it across chips. It has opened a factory in Taiwan. How big the market becomes depends on whether buyers want a specialised inference machine once NVIDIA and the clouds' own chips also chase inference."
+  customers: "It names no customers; it says it designed with leading AI companies, cloud providers and hyperscalers (the largest cloud companies). This site judges its early contracts come from a few buyers."
+  concentration: concentrated
+  powers: []
+  depends_on:
+  - foundry
+  - packaging
+  - memory
+  - accelerators
+  - networking
+  - energy
+  - capital
+  rent_kind: scarcity
+  appropriability: weak
+  complementary_assets: specialised
+  asset_owner: incumbents
+  durability: short
+  must_be_true:
+  - "Its racks deliver, in customers' data centres, the throughput, speed of response and power savings it reports from early tests."
+  - "Inference becomes a large enough share of AI spending, and the leading models' designs stay stable enough, that a specialised machine beats general chips."
+  - "It gets enough capacity from TSMC and the memory makers; this site judges they serve NVIDIA and the large clouds first, though Etched says it is deepening its partnership with the leading chip manufacturer and has a strategic investment from VentureTech Alliance."
+  - "Its customers buy beyond first orders, and NVIDIA's and the clouds' own chips do not close the gap first."
+  would_disprove:
+  - "Delays in shipping its racks, or customer tests that do not match its claims."
+  - "A major model change, such as a new architecture (the basic design of a model), that its design runs poorly."
+  - "No named large customer after its first production run."
+  sources:
+    market:
+    - etched_frontier_clusters_2026
+    customers:
+    - etched_frontier_clusters_2026
+    powers:
+    - etched_frontier_clusters_2026
+    must_be_true:
+    - etched_frontier_clusters_2026
+  judged_by: claude-opus-5.5
+  reviewed_by: Alex Brogan
+  reviewed: 2026-09-28
+  disclosure: null
+- entity: scale_ai
+  role: candidate
+  units:
+  - vc_human_data
+  market: "Scale AI sells human data: training data made or checked by people, from simple labelling to expert work, which AI labs use to teach and test their models. It also sells applications: AI systems built on top of models, which its enterprise page says it builds, deploys and runs for businesses and delivers to governments. It calls its data engine the foundation of model building at many of the major frontier labs (the firms building the most capable AI systems); that is its own description. In June 2025 Meta, which also builds frontier models, bought a non-voting minority stake; Meta's quarterly filing says Meta has no significant influence over Scale's operations. The deal also widened Scale's commercial work for Meta, paid money from the investment out to Scale's shareholders, and took Scale's founder, Alexandr Wang, to Meta to work on its AI, while he stayed on Scale's board; by July 2026 Scale described him as its chairman. After a year under an interim chief executive, it named Francis deSouza, a former Google Cloud and Illumina executive, as chief executive from August 2026. Its enterprise page says it builds, deploys and runs AI systems for businesses, names fields such as energy, insurance, health, retail and life sciences, and says its systems work with any leading model or with open-source ones (models whose makers publish them for anyone to run and change). This site reads that as a move from selling data to the labs towards doing the work for ordinary companies. How big the market becomes depends on whether labs keep buying human data from outside firms, and on whether its applications business grows into a second market."
+  customers: "Frontier labs, large businesses and governments. At the time of the Meta deal, a press report in this site's records named Google, Microsoft and OpenAI, all rivals of Meta, among its customers. In July 2026 it named BP and Mayo Clinic as new business customers and said its work for the US and other governments had grown; it lists the US Department of War among the organisations it serves. Its enterprise page carries praise from executives at Howard Hughes and Global Atlantic, both business customers. The sources do not say whether rival labs cut their work with Scale after Meta's investment, and this site has no record of it either way. This site judges the data business is concentrated in a few labs, Meta among them, and that the government and business side is broader."
+  concentration: concentrated
+  powers:
+  - power: switching_costs
+    why: "Emerging, not proven. Hamilton Helmer, a strategist, listed seven sources of lasting profit and required each to have both a benefit and a barrier to copying. The benefit is repeat government and business work; this site judges the barrier is the security approval and integration a government buyer would have to redo to move its programmes elsewhere. This site has no measure of customers staying for that reason."
+  depends_on:
+  - training_data
+  - post_training
+  - evaluations
+  - applications
+  - capital
+  rent_kind: scarcity
+  appropriability: weak
+  complementary_assets: generic
+  asset_owner: platforms
+  durability: short
+  must_be_true:
+  - "Labs keep buying human data from outside firms rather than building their own expert teams. Ronald Coase, an economist, asked why firms make some things in-house and buy others, and found they buy when using the market costs less than organising the work themselves; a lab keeps buying only while an outside vendor finds and checks experts more cheaply than it could."
+  - "Rival labs keep trusting Scale with their training plans while a rival lab, Meta, holds a sizeable minority stake by a Scale spokesperson's account, and its founder works there. Oliver Williamson, an economist who studied contracts, found that firms bring in-house the work tied closely to their own plans; a lab's data requests reveal what it is trying to teach its models, which is the kind of work a firm is wary of handing to anyone tied to a rival. Meta's stake carries no vote, which is Scale's answer to that worry."
+  - "Its applications business, which its enterprise page presents as building, deploying and running AI systems for businesses and delivering them to governments, grows into a second large market, so Scale does not rest on the few labs that buy most human data. Oliver Williamson found that a supplier whose work is built for a few buyers can be squeezed by them; selling to many firms is the way out, and it works only if what Scale learns on one client's job makes the next one cheaper, rather than each job being priced by its people's time."
+  - "Human expert data stays needed as models learn more from graded outcomes and from data the models generate themselves."
+  would_disprove:
+  - "Frontier labs other than Meta dropping Scale as a named supplier, or naming rival vendors in its place."
+  - "Labs building their own expert teams or buying data vendors outright; a fall in this site's count of labs buying from the training-input layer would be one sign."
+  - "Its government and business customers staying a small side business beside the lab work."
+  - "Meta taking a larger or voting stake, which would turn Scale into a supplier tied to one lab."
+  - "Its enterprise work staying custom projects priced by staff time, with nothing that carries from one client to the next."
+  sources:
+    market:
+    - scale_ai_meta_investment_2025
+    - scale_ai_meta_10q_q2_2025
+    - scale_ai_new_ceo_2026
+    - scale_ai_enterprise_page
+    customers:
+    - scale_ai_new_ceo_2026
+    - scale_ai_meta_investment_2025
+    - scale_ai_meta_10q_q2_2025
+    - scale_ai_enterprise_page
+    powers:
+    - scale_ai_new_ceo_2026
+    must_be_true:
+    - scale_ai_meta_investment_2025
+    - scale_ai_meta_10q_q2_2025
+    - scale_ai_new_ceo_2026
+    - scale_ai_enterprise_page
+  judged_by: claude-opus-5.5
+  reviewed_by: Alex Brogan
+  reviewed: 2026-09-28
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviews this profile before it is relied on."
+- entity: mercor
+  role: candidate
+  units:
+  - vc_human_data
+  market: "Mercor runs a marketplace that connects experts, such as doctors, bankers and lawyers, with AI labs and businesses that pay them to train and test AI models. The experts write the questions, judge the answers and turn their own work into evaluations (tests a model can be scored and trained against). It says it sits where the labour market meets AI research, and it says its latest money goes to a larger talent network, better matching and faster delivery. Its Form D (the notice a private company files with the US regulator when it sells shares without a public offering) shows a Delaware company, formed in 2022, that sold all of the shares offered in its late-2025 round without paying any placement agent (a bank paid to find investors), and that declined to disclose its revenue. In this site's records its gross revenue run-rate (the latest month's billings scaled up to a year, before paying its experts, as this site reads 'gross') grew steeply in the first months of 2026; that figure comes from its chief executive and from a press report citing a person who knows its finances, so it is self-reported, not audited. In March 2026 it launched Mercor Enterprise AI for ordinary companies: its co-chief executive wrote that it maps how a firm's staff actually work, turns that into evaluations and rules for the firm's AI agents (programs that carry out several steps of a task on their own), checks every output as the agents run and feeds corrections back, using tools first built for the labs. In July 2026 it agreed to buy Deeptune, a maker of training environments (simulated workplaces where a model practises tasks and is graded), and said the pair would serve companies deploying agents in their own work as well as labs. How big the market becomes depends on how long labs keep paying people to teach models, and whether businesses outside the labs start paying too."
+  customers: "AI labs and, since its March 2026 launch, ordinary companies deploying AI agents; the sources name none. A press headline in this site's records ties its growth to AI labs buying expert data. This site judges its revenue is concentrated in a few frontier labs."
+  concentration: concentrated
+  powers:
+  - power: network_economies
+    why: "Emerging, not proven. Hamilton Helmer, a strategist who listed seven sources of lasting profit and required each to have both a benefit and a barrier to copying, counts a network as a power when each new user makes the product better for the rest. More experts could let Mercor fill more lab projects faster, which draws more projects and so more experts. The barrier is weak while experts can sign up with several vendors at once and this site tracks many rival vendors; there is no retention evidence."
+  depends_on:
+  - training_data
+  - post_training
+  - evaluations
+  - capital
+  rent_kind: scarcity
+  appropriability: weak
+  complementary_assets: generic
+  asset_owner: platforms
+  durability: short
+  must_be_true:
+  - "Labs keep buying expert work from outside firms rather than hiring the experts themselves. Ronald Coase, an economist, asked why firms make some things in-house and buy others, and found they buy when using the market costs less than organising the work themselves; this site reads Mercor's case as that recruiting and checking experts across many fields is cheaper done once for many labs."
+  - "Its network compounds. On the tests of Andrei Hagiu and Julian Wright, economists who set out tests for when data really keeps rivals out, among them whether what a firm learns from one customer improves the product for the others, what Mercor learns about which expert does which task well has to improve matching for every lab, not only the lab that paid for the project."
+  - "What it keeps from each dollar a lab pays holds up as rival vendors compete for the same experts and the same projects."
+  - "Businesses outside the labs start paying for expert-built evaluations and training environments, which is where its enterprise product and its Deeptune purchase point. Oliver Williamson, an economist who studied contracts, found that a supplier whose work is built for a few buyers can be squeezed by them; selling to many firms is the way out, and it pays only if what Mercor learns on one firm's agents carries to the next, rather than each job being paid for by its people's time."
+  - "Demand for people to teach models does not fall away as models learn from graded outcomes and from data they generate themselves."
+  would_disprove:
+  - "Its self-reported run-rate flattening or falling while labs' spending keeps rising."
+  - "Labs moving expert work in-house or buying vendors outright; a fall in this site's count of labs buying from the training-input layer would be one sign."
+  - "The data market splitting among specialist vendors by field, leaving no gain from one broad network."
+  - "No named business customer outside the labs as its enterprise and environments businesses grow."
+  sources:
+    market:
+    - mercor_series_c_2025
+    - mercor_form_d_2026
+    - mercor_enterprise_ai_2026
+    - mercor_deeptune_2026
+    customers:
+    - mercor_series_c_2025
+    - mercor_form_d_2026
+    - mercor_enterprise_ai_2026
+    - mercor_deeptune_2026
+    powers:
+    - mercor_series_c_2025
+    must_be_true:
+    - mercor_series_c_2025
+    - mercor_form_d_2026
+    - mercor_enterprise_ai_2026
+    - mercor_deeptune_2026
+  judged_by: claude-opus-5.5
+  reviewed_by: Alex Brogan
+  reviewed: 2026-09-28
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviews this profile before it is relied on."
+- entity: handshake_ai
+  role: candidate
+  units:
+  - vc_human_data
+  market: "Handshake AI, launched in 2025, is the part of Handshake that supplies AI labs with expert people to test and judge their models: they write subject-specific questions, assess the answers and grade their quality, in fields from law and finance to virology. Handshake runs the whole job itself, finding and training the experts, checking quality and producing the data on its own software. Its supply comes from its parent: Handshake is a careers network that links students and graduates with universities and employers, and it calls itself the largest early-career network in the world; that is its own description. Handshake AI says it draws experts straight from its university partners, so their degrees are verified rather than self-reported, and that this lets it spend less on recruiting than rivals do. In this site's records Handshake told the press that the unit's gross revenue run-rate (the latest month's billings scaled up to a year) went from nothing to a large figure in little more than a year; that is self-reported, not audited. It also sells to ordinary companies under the name Handshake Enterprise AI: its enterprise page, which carries no date, says it builds AI agents (programs that carry out several steps of a task on their own) inside a client's own systems, lowers what they cost to run, and trains models the client owns. In July 2026 it wrote that evaluations (tests of an AI system on the firm's own work) built with its experts let a firm find which work can move to cheaper models, open-source ones (models published for anyone to run) among them. How big the market becomes depends on how long labs keep paying graduate-level experts to teach models, and on whether ordinary companies pay for the same skill."
+  customers: "Leading AI labs, which the sources do not name; its undated enterprise page says each of the largest frontier labs (the firms building the most capable AI systems) trains on its data. It also sells to ordinary companies; the same page describes unnamed clients, such as a team buried in documents that it says it helped resolve cases faster. This site judges its revenue is concentrated in a few frontier labs."
+  concentration: concentrated
+  powers:
+  - power: cornered_resource
+    why: "Emerging, not proven. Hamilton Helmer, a strategist who listed seven sources of lasting profit and required each to have both a benefit and a barrier to copying, counts preferential access to a valued input as a power. The benefit is cheaper, credential-checked recruiting through long-standing university partnerships. The barrier is unproven: universities are not bound to one partner, and the same graduates can work for rival vendors."
+  depends_on:
+  - training_data
+  - post_training
+  - evaluations
+  - capital
+  rent_kind: scarcity
+  appropriability: weak
+  complementary_assets: generic
+  asset_owner: platforms
+  durability: short
+  must_be_true:
+  - "Labs keep buying expert judgement from outside firms. Ronald Coase, an economist, asked why firms make some things in-house and buy others, and found they buy when using the market costs less than organising the work themselves; Handshake says it reaches graduate experts more cheaply than rivals that spend heavily on recruiting, and a lab keeps buying only while that stays cheaper than doing the work itself."
+  - "Its university network stays a cheaper and more trusted route to experts than rivals' recruiting, and universities keep endorsing the work for their students."
+  - "Its supply compounds. On the tests of Andrei Hagiu and Julian Wright, economists who set out tests for when data really keeps rivals out, among them whether what a firm learns from one customer improves the product for the others, knowing which graduates do which lab task well has to improve the service for every lab, not just one."
+  - "Demand for graduate-level human judgement outlasts models learning from graded outcomes and from data they generate themselves."
+  - "Ordinary companies pay for tests and agents built with its experts, so it does not rest on a few labs. Oliver Williamson, an economist who studied contracts, found that a supplier whose work is built for a few buyers can be squeezed by them; selling to many firms is the way out, and it pays only if what Handshake learns on one client's work carries to the next."
+  would_disprove:
+  - "University partners limiting the work or signing with rival vendors."
+  - "Labs moving expert work in-house or buying vendors outright; a fall in this site's count of labs buying from the training-input layer would be one sign."
+  - "Its self-reported run-rate flattening while rivals' keep rising."
+  - "Its enterprise work staying a handful of custom projects with no named client."
+  sources:
+    market:
+    - handshake_ai_introducing_2025
+    - handshake_ai_refounding_2025
+    - handshake_ai_enterprise_page
+    - handshake_ai_right_model_2026
+    customers:
+    - handshake_ai_introducing_2025
+    - handshake_ai_refounding_2025
+    - handshake_ai_enterprise_page
+    powers:
+    - handshake_ai_introducing_2025
+    - handshake_ai_refounding_2025
+    must_be_true:
+    - handshake_ai_introducing_2025
+    - handshake_ai_refounding_2025
+    - handshake_ai_enterprise_page
+    - handshake_ai_right_model_2026
+  judged_by: claude-opus-5.5
+  reviewed_by: Alex Brogan
+  reviewed: 2026-09-28
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviews this profile before it is relied on."
+- entity: surge_ai
+  role: candidate
+  units:
+  - vc_human_data
+  market: "Surge AI sells human data: material written and graded by experts, such as example answers, practice tasks and judgements of a model's answers, which AI labs use to train and test their models. It also lists ready-made data and practice environments (simulated workplaces where a model practises tasks and is graded). Its enterprise page says years of work with leading labs taught it what improves a model, and that it now brings those methods to ordinary companies. It offers to build evaluations (tests of an AI system on the firm's own work and standards), compare models on quality, cost and speed, test systems before launch and watch them once live, find what is holding a system back beyond the model itself, and, where that is not enough, design a training programme and build its data, including post-training (further training of a finished model on narrower material). In this site's records a press report said its yearly revenue for 2024 passed a large figure without it raising outside money; that is reported, not audited, and this site records no funding round for it, though its records also hold a July 2025 press report that Surge was preparing to raise outside money. How big the market becomes depends on how long labs keep paying experts to teach models, and on whether ordinary companies pay for the same work."
+  customers: "AI labs, and now ordinary companies. Press reports in this site's records name Google, OpenAI and Anthropic among the labs it serves, and a research firm estimated that a group of frontier labs (the firms building the most capable AI systems) drove most of its growth; that is an outside estimate, not a company figure. Its enterprise page names no business customer. This site judges its revenue is concentrated in a few frontier labs."
+  concentration: concentrated
+  powers:
+  - power: process_power
+    why: "Emerging, not proven. Hamilton Helmer, a strategist who listed seven sources of lasting profit and required each to have both a benefit and a barrier to copying, counts as process power a way of working that yields better quality or lower cost and that rivals cannot copy quickly. Surge says it tests whether its own data improves models and publishes the gains, and that it can return pilot results within a week; this site reads its growth without outside money as a sign of an efficient operation. The barrier is unshown: rivals serve the same labs with the same kinds of experts."
+  depends_on:
+  - training_data
+  - post_training
+  - evaluations
+  rent_kind: scarcity
+  appropriability: weak
+  complementary_assets: generic
+  asset_owner: platforms
+  durability: short
+  must_be_true:
+  - "Labs keep buying expert work from outside firms rather than hiring the experts themselves. Ronald Coase, an economist, asked why firms make some things in-house and buy others, and found they buy when using the market costs less than organising the work themselves; a lab keeps buying from Surge only while it finds and checks experts more cheaply than the lab could."
+  - "Ordinary companies pay for tests and training built on their own work, as its enterprise page is built to win, so it does not rest on the few labs that buy most expert data. Oliver Williamson, an economist who studied contracts, found that a supplier whose work is built for a few buyers can be squeezed by them; selling to many firms is the way out."
+  - "What it learns compounds. On the tests of Andrei Hagiu and Julian Wright, economists who set out tests for when data really keeps rivals out, among them whether what a firm learns from one customer improves the product for the others, what Surge learns testing one firm's systems has to make the next job better or cheaper; otherwise its enterprise work is consulting paid for its people's time."
+  - "Its gains stay its own. David Teece, an economist who studied who profits from a new idea, found that the gains go to whoever holds the assets needed to bring it to market; here the labs, which own the models and the finished data, hold them, so Surge keeps a share only while its experts and checking are hard to replace."
+  - "Demand for expert judgement outlasts models learning from graded outcomes and from data they generate themselves."
+  would_disprove:
+  - "The labs this site's records name as its buyers naming other vendors in its place, or moving expert work in-house; a fall in this site's count of labs buying from the training-input layer (the firms that sell labs the data, practice tasks and tests models learn from) would be one sign."
+  - "No named business customer outside the labs as its enterprise work grows."
+  - "Its enterprise work staying custom projects priced by staff time, with nothing that carries from one client to the next."
+  - "It raising outside money on terms that suggest its own earnings no longer fund its growth; the July 2025 press report in this site's records that it was preparing to raise is the first sign to watch."
+  sources:
+    market:
+    - surge_enterprise_page
+    customers:
+    - surge_enterprise_page
+    powers:
+    - surge_enterprise_page
+    must_be_true:
+    - surge_enterprise_page
+  judged_by: claude-opus-5.5
+  reviewed_by: Alex Brogan
+  reviewed: 2026-09-29
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviews this profile before it is relied on."
+- entity: baseten
+  role: candidate
+  units:
+  - vc_inference_serving
+  market: "Baseten sells inference (running a trained model to answer requests) and post-training (further training a finished model on a customer's own data and tasks) to companies building AI products. It runs models for customers on dedicated capacity or through ready-made model connections, in its cloud, in the customer's own or across both, and its engineers embed with customers to post-train and tune specialised models. Its case is that open-weight models (models whose trained settings are published so anyone can run them) are now good enough to replace closed models for many firms, which then want to own a model shaped by their own data. It says its revenue and the volume it serves both grew steeply over the past year; that is self-reported. This site's other readings, from a press report and an analyst's estimate, also show a steep rise in early 2026. Its Form D (the notice a private company files with the US regulator when it sells shares without a public offering) shows an offering of shares first sold in June 2026, mostly sold at filing, with no placement agent and revenue not disclosed. How big the market becomes depends on whether serving open models stays a skilled service or becomes a commodity (a product bought on price alone)."
+  customers: "Fast-growing AI application companies. It names Cursor, Notion, Lovable, Harvey, HubSpot, OpenEvidence, Abridge, Decagon and Parallel. SpaceX, which owns xAI, a frontier lab (a firm building the most capable AI systems), agreed in June 2026 to buy Cursor; the deal was awaiting regulatory approval at SpaceX's quarterly filing for the middle of 2026. The sources give no revenue by customer; this site judges a few large application companies weigh heavily."
+  concentration: moderate
+  powers:
+  - power: switching_costs
+    why: "Emerging, not proven. Hamilton Helmer, a strategist, listed seven sources of lasting profit and required each to have both a benefit and a barrier to copying. The benefit is repeat business from customers whose post-trained models and tuned serving run on Baseten. The barrier is weak: Baseten's own pitch is that customers own their models, and open-weight models run on many rivals' platforms. This site has no retention evidence."
+  depends_on:
+  - accelerators
+  - data_centres
+  - inference
+  - post_training
+  - capital
+  rent_kind: scarcity
+  appropriability: weak
+  complementary_assets: generic
+  asset_owner: incumbents
+  durability: short
+  must_be_true:
+  - "Serving open models does not become a commodity. This site's records show open models carrying most of the tokens (the units of text models read and write) routed through OpenRouter (a service that passes each request to whichever model a buyer picks) to its busiest models, the price of a fixed level of capability falling fast, and many rival serving firms, so Baseten has to earn its price from post-training and reliability, not raw serving."
+  - "Post-training ties customers to it. Oliver Williamson, an economist who studied contracts, found that firms bring in-house the work tied closely to their own plans; a model tuned to one firm's work is worth little elsewhere, but the switching cost falls to whoever holds it, and Baseten itself says its customers want to own their models."
+  - "It keeps getting enough GPUs (graphics processing units, the chips most AI runs on) at a price below what it charges; this site judges it rents most of them, largely NVIDIA's, from clouds that also sell serving."
+  - "Its largest customers stay with it as they grow, rather than moving to a lab's own models or their own data centres; SpaceX's agreement in June 2026 to buy Cursor, still awaiting regulatory approval at SpaceX's quarterly filing for the middle of 2026, is the first test."
+  - "Chip makers and compute owners, which this site records buying several serving firms, do not bundle serving so cheaply that stand-alone firms lose the work."
+  would_disprove:
+  - "Price cuts on serving open models without a matching rise in volume."
+  - "Cursor or another named customer moving its models off Baseten after a change of owner."
+  - "Customers taking their post-trained models to rival platforms at little cost."
+  - "Clouds or chip makers offering the same post-training and serving as part of their compute."
+  sources:
+    market:
+    - baseten_series_f_2026
+    - baseten_form_d_2026
+    customers:
+    - baseten_series_f_2026
+    - xai_spacex_10q_q2_2026
+    powers:
+    - baseten_series_f_2026
+    - baseten_form_d_2026
+    must_be_true:
+    - baseten_series_f_2026
+    - baseten_form_d_2026
+    - xai_spacex_10q_q2_2026
+  judged_by: claude-opus-5.5
+  reviewed_by: Alex Brogan
+  reviewed: 2026-09-28
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviews this profile before it is relied on."
+- entity: fireworks
+  role: candidate
+  units:
+  - vc_inference_serving
+  market: "Fireworks sells inference (running a trained model to answer requests) for companies' developer teams, plus tools to fine-tune models (further train them on a customer's own data), train them with reinforcement learning (rewarding good answers) and evaluate them. It serves hundreds of open-weight models (models whose trained settings are published so anyone can run them). Its founders, who had built AI infrastructure at Meta, left PyTorch, an AI software framework, in 2022 on the bet that open models would catch up with closed ones and firms would want to own their AI. It calls itself the market leader in AI inference; that is its own description. It says its annualised revenue run-rate (the latest month's revenue scaled up to a year) passed a large milestone in 2026, and that almost all the tokens (units of text a model reads and writes) it serves come from models specialised on customers' own data; both are self-reported. An analyst's estimate in this site's records also shows a steep rise through early 2026. NVIDIA and AMD, the chip makers, are among its investors. How big the market becomes depends on whether serving open models stays a skilled service or becomes a commodity (a product bought on price alone)."
+  customers: "It names Samsung, Uber, DoorDash, Notion, Shopify and Upwork, and says Cursor's coding models and Harvey's legal AI are built with it; Harvey, in a post in this site's records, says it post-trained a model with Fireworks, starting from an open model. It says it serves many thousands of companies. SpaceX, which owns xAI, a frontier lab (a firm building the most capable AI systems), agreed in June 2026 to buy Cursor; the deal was awaiting regulatory approval at SpaceX's quarterly filing for the middle of 2026. The sources give no revenue by customer; this site judges the base is broad but that a few large application companies weigh heavily."
+  concentration: moderate
+  powers:
+  - power: switching_costs
+    why: "Emerging, not proven. Hamilton Helmer, a strategist, listed seven sources of lasting profit and required each to have both a benefit and a barrier to copying. The benefit is repeat business from models tuned on a customer's data and improved by its users' feedback on Fireworks' stack. The barrier is weak: Fireworks' own pitch is that customers own their models, and open-weight models run on many rivals' platforms. This site has no retention evidence."
+  depends_on:
+  - accelerators
+  - data_centres
+  - inference
+  - post_training
+  - capital
+  rent_kind: scarcity
+  appropriability: weak
+  complementary_assets: generic
+  asset_owner: incumbents
+  durability: short
+  must_be_true:
+  - "Serving open models does not become a commodity. This site's records show open models carrying most of the tokens routed through OpenRouter (a service that passes each request to whichever model a buyer picks) to its busiest models, the price of a fixed level of capability falling fast, and many rival serving firms, so Fireworks has to earn its price from tuning and speed, not raw serving."
+  - "Its feedback loop, where users' corrections retrain each customer's model, ties customers to it. On the tests of Andrei Hagiu and Julian Wright, economists who set out tests for when data really keeps rivals out, among them whether what a firm learns from one customer improves the product for the others, that learning helps only the customer it came from, so it is a switching cost for whoever holds the model rather than a network that grows with every customer."
+  - "It keeps getting enough GPUs (graphics processing units, the chips most AI runs on) at a price below what it charges; its investors include the chip makers whose chips this site judges it runs on."
+  - "Its largest customers stay with it as they grow, rather than moving to a lab's own models or their own data centres; SpaceX's agreement in June 2026 to buy Cursor, still awaiting regulatory approval at SpaceX's quarterly filing for the middle of 2026, is the first test."
+  - "Chip makers and compute owners, which this site records buying several serving firms, do not bundle serving so cheaply that stand-alone firms lose the work."
+  would_disprove:
+  - "Price cuts on serving open models without a matching rise in volume."
+  - "Cursor or another named customer moving its models off Fireworks after a change of owner."
+  - "Customers taking their tuned models to rival platforms at little cost."
+  - "Closed models winning back most of the traffic from open ones, shrinking the market it serves."
+  sources:
+    market:
+    - fireworks_series_d_2026
+    - fireworks_series_c_2025
+    customers:
+    - fireworks_series_c_2025
+    - fireworks_series_d_2026
+    - xai_spacex_10q_q2_2026
+    powers:
+    - fireworks_series_c_2025
+    - fireworks_series_d_2026
+    - xai_spacex_10q_q2_2026
+    must_be_true:
+    - fireworks_series_c_2025
+    - fireworks_series_d_2026
+    - xai_spacex_10q_q2_2026
+  judged_by: claude-opus-5.5
+  reviewed_by: Alex Brogan
+  reviewed: 2026-09-28
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviews this profile before it is relied on."
+- entity: meta
+  role: club
+  units:
+  - vc_consumer_ai
+  - vc_frontier_labs
+  market: "Meta runs Facebook, Instagram, Messenger, WhatsApp and Threads, and its 10-K (the annual report US companies file with their regulator) says it earns substantially all its revenue from advertising on those apps. Its AI work sits on both sides of that business. It builds its own models, including the Llama family, which it has released openly in the past; the 10-K says it expects to train a mix of open and closed models from here (an open model is one whose trained settings are published so anyone can run it). It offers Meta AI, an assistant available inside its apps, as a stand-alone app, on its AI glasses and on the web. And it uses AI to choose which posts and ads each person sees, which the 10-K credits with better ad targeting and measurement. It states a goal of building superintelligence, which it defines as AI that surpasses human intelligence. To pay for this it spends heavily on data centres: this site's records from its filings show its capital spending (money spent on buildings and machines) growing much faster than its revenue in 2025 and again so far in 2026, and its 10-K lists large commitments, mostly for data centres and for computing capacity rented from other firms. In October 2025 it entered an arrangement to co-develop a data-centre campus in Louisiana, in which it holds a minority interest. In June 2025 it bought a non-voting minority stake in Scale AI, a seller of training data made by people; its filings say it has no significant influence over Scale's operations, and Scale's founder joined Meta to work on its AI. This site's records also hold Meta buying Manus and Limitless in December 2025 and Stilla in September 2026, and buying or hiring teams from other small AI firms in March 2026. Manus, maker of a general-purpose AI agent (software that carries out tasks such as research and building things for its user, rather than only answering), announced in December 2025 that it was joining Meta, and said it would keep selling its own subscriptions and operating from Singapore. In September 2026 Meta launched Muse, a personal agent that Meta says runs in its own walled-off computer in Meta's cloud with its own web browser, books travel, fills in forms and buys things after checking with the user, pays through Link, a checkout service built by Stripe, is free for most uses with paid plans for more, and does not share users' conversations with Muse, or the data in their Muse workspace, with Meta's ad systems. The question is whether AI adds to or eats into the advertising business that pays for it."
+  customers: "Advertisers pay for substantially all of it, the 10-K says. It also says most of its revenue comes from marketers advertising on Facebook and Instagram, that they make no long-term commitments, and that the loss of marketers or cuts in their spending could seriously harm the business. It names no large customer. The users it reaches are counted in billions of daily visitors, a figure Meta measures itself and warns may be inaccurate. Meta AI earns no direct revenue that the 10-K reports. This site judges the paying base is diffuse, spread across many advertisers."
+  concentration: diffuse
+  powers:
+  - power: network_economies
+    why: "Hamilton Helmer, a strategy consultant who studied why some firms keep earning more than their rivals, found that a lasting advantage needs both a benefit and a barrier to copying. In Meta's social apps the benefit is that each user makes the apps more useful to friends and more valuable to advertisers; the barrier is that a rival must assemble a comparable audience first. The 10-K shows the audience still growing in 2025, with more ads shown and a higher average price per ad, so this site counts the power proven in its social apps. It finds no evidence yet that the power extends to Meta AI itself, where one person's chat does not improve another's."
+  - power: scale_economies
+    why: "Emerging, not proven. This site judges that the cost of training models and building ad-ranking systems is spread over Meta's very large audience and ad sales, so each user costs it less than a smaller rival; but the barrier holds only against newcomers, not against Google or the frontier labs (the firms building the most capable AI systems), which spend at similar scale and are its main AI rivals."
+  - power: counter_positioning
+    why: "Emerging, not proven. Counter-positioning is a newcomer's model the incumbent could copy only by damaging its own business. The benefit is that Meta can give AI away inside its apps and let advertising pay; the barrier is that a lab living on subscriptions and paid access to its models would give up that revenue by doing the same. But the labs can add advertising too, and Meta AI has no revenue the 10-K reports, so this site does not count the barrier as proven."
+  depends_on:
+  - accelerators
+  - data_centres
+  - energy
+  - pretraining
+  - post_training
+  - inference
+  - applications
+  rent_kind: scale_network
+  appropriability: weak
+  complementary_assets: specialised
+  asset_owner: innovator
+  durability: medium
+  must_be_true:
+  - "Advertising keeps paying for the AI build-out. The 10-K says its AI work will need more spending on infrastructure and staff, and this site's records show capital spending rising far faster than revenue; ad revenue must keep growing fast enough to carry those costs and the losses of Reality Labs, its glasses and headsets division, which the 10-K says depends on profits earned elsewhere."
+  - "AI keeps making its ads work better, so advertisers keep paying more per ad; the 10-K reports more ads shown and a higher average price per ad in 2025, and credits its AI with better targeting and measurement."
+  - "People keep turning to Meta AI inside apps they already use rather than moving their questions, shopping and time to assistants from OpenAI or Google. William Nordhaus, an economist who measured how much of the value of new inventions their makers keep, found that most goes to users; this site judges a free assistant only pays Meta if the attention it holds can be sold to advertisers."
+  - "Its own models stay close enough to the best to power its products, so it need not pay rival labs for the capability; the 10-K lists competitors whose AI may be better or cheaper among its risks."
+  - "Regulators let it keep showing personalised ads. The 10-K says the European Commission ruled in April 2025 that its offer of a paid subscription with no ads did not comply with EU rules, a decision it has appealed."
+  - "Its minority stake in Scale AI, which carries no vote, and its purchases of small AI firms add skills and products without drawing new limits from competition authorities, whose past scrutiny of its acquisitions the 10-K describes."
+  - "People let Muse act for them, booking and buying rather than only chatting, and Meta earns from that work through subscriptions or a share of what Muse buys, since Meta says Muse keeps users' conversations with it, and the data in their Muse workspace, out of its ad systems; for now, the source suggests, that leaves subscriptions and purchases rather than advertising. This site judges that an agent shopping for its user could draw spending away from the ads that pay Meta today, so the agent must earn at least what it displaces."
+  - "Manus, the agent maker that joined Meta in December 2025, adds skills and users to Meta's own agents; Manus said at the deal that it hoped to bring its subscription to the businesses and people on Meta's platforms."
+  would_disprove:
+  - "Capital spending rising while advertising revenue growth slows for several quarters in a row."
+  - "Meta AI's use growing without any rise in ad prices, ads shown or time spent in its apps."
+  - "Meta licensing another lab's model to run its main products, a sign its own models fell behind."
+  - "A regulator's order forcing it to show much less personalised ads across Europe or the United States."
+  - "Its data-centre venture partners or cloud suppliers renegotiating terms because Meta cut its capacity plans."
+  - "People using Muse to shop and book while time spent and ads shown in Meta's apps fall, with no subscription or purchase revenue from Muse making up the gap."
+  - "Manus's agent never reaching Meta's apps, or being shut down, a sign that its joining Meta added nothing to Meta's own agents."
+  sources:
+    market:
+    - meta_10k_fy25
+    - scale_ai_meta_10q_q2_2025
+    - scale_ai_meta_investment_2025
+    - meta_muse_2026
+    - manus_joins_meta_2025
+    customers:
+    - meta_10k_fy25
+    powers:
+    - meta_10k_fy25
+    must_be_true:
+    - meta_10k_fy25
+    - scale_ai_meta_10q_q2_2025
+    - meta_muse_2026
+    - manus_joins_meta_2025
+    would_disprove:
+    - meta_muse_2026
+    - manus_joins_meta_2025
+  judged_by: claude-opus-5.5
+  reviewed_by: Alex Brogan
+  reviewed: 2026-09-28
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviews this profile before it is relied on."
+- entity: palantir
+  role: candidate
+  units:
+  - vc_deployment_services
+  market: "Palantir sells software platforms that connect a large organisation's data to its daily operations, and its 10-K (the annual report US companies file with their regulator) names four: Gotham, Foundry, Apollo and AIP. AIP, its AI platform, connects customers securely to large language models (AI systems trained on huge amounts of text) made by other firms, and gives them tools to build agents (AI programs that carry out tasks on their own) on top. At the heart of its software is what it calls the Ontology, a map of how a customer's data relates to its real operations. It runs short workshops, which it calls bootcamps, that build working tools on a customer's own data within days, and it says it embeds its staff directly with customers. It warns that pilots given at little or no cost may never turn into paying contracts. Government customers brought in most of its revenue in 2025 and commercial customers the rest, and its revenue from US commercial customers rose steeply that year. How big the market becomes depends on whether fitting AI to a firm's operations stays a job for a software platform like Palantir's, or passes to the labs (the firms building the most capable AI systems), which have set up deployment arms of their own."
+  customers: "Governments and large companies. The 10-K says no single customer reached the threshold at which the filing reports a customer's share of revenue in any year from 2023 to 2025, and that the average revenue from its twenty largest customers rose in 2025 over 2024. But its risk factors warn that a limited number of customers account for a substantial portion of its revenue, because existing customers have widened their use, and its notes show one customer owing it a large share of its receivables (money customers owe for work already billed) at the end of both 2024 and 2025. Many of its contracts can be ended by the customer at will, and the US federal government cannot take up contract options more than a year ahead. This site judges the base is moderately concentrated: no single buyer reaches the reporting threshold, but a limited number of customers, led by governments, carry much of it."
+  concentration: moderate
+  powers:
+  - power: switching_costs
+    why: "Emerging, not proven. Hamilton Helmer, a strategy consultant who studied why some firms keep earning more than their rivals, found that a lasting advantage needs both a benefit and a barrier to copying. The benefit is repeat, widening business from customers whose operations come to run on its Ontology; the barrier is the work a customer would have to redo to rebuild that map elsewhere. The 10-K reports customers expanding but gives no figure for how many leave, so this site does not count the barrier as proven; under its written rules that makes the rent a scarcity rent and its durability short until a filing shows customers staying."
+  depends_on:
+  - inference
+  - agents
+  - deployment_platforms
+  - applications
+  rent_kind: scarcity
+  appropriability: weak
+  complementary_assets: specialised
+  asset_owner: innovator
+  durability: short
+  must_be_true:
+  - "Its platform, not the model, stays where customers' work runs. AIP uses models made by others; this site judges that helps Palantir while the models are interchangeable, and hurts it if one lab's model becomes the product customers ask for by name."
+  - "The labs' own deployment arms do not take its commercial customers. This site's records hold the OpenAI Deployment Company agreeing to buy Tomoro in May 2026 and Northslope in July 2026, both firms that put AI to work inside large companies, and Poolside, a lab, buying Fern Labs, a deployment firm, in November 2025. David Teece, an economist who studied why inventors often fail to keep the returns, found that profit tends to go to whoever holds the assets a product needs to reach buyers; here that is the customer relationship and the map of its data, which this site judges Palantir holds today for its own customers, and which the labs' deployment arms are trying to win."
+  - "Its margins hold as it sends more staff into customers. Its contribution margin, its own measure of revenue left after the cost of serving and winning customers, rose in both its government and commercial segments in 2025. This site judges that a business that must grow its engineers with each customer earns a services margin (the thinner margin of a firm that sells its staff's time) rather than a software margin (the wider one of a firm that sells the same code again at little extra cost)."
+  - "Its short pilots and bootcamps keep turning into long, paid contracts, which the 10-K warns may not happen."
+  - "Governments and its other largest customers keep renewing their contracts, although many can be ended at will, budgets can stall, and the 10-K warns that a limited number of customers carry a substantial portion of its revenue."
+  would_disprove:
+  - "Large commercial customers moving their AI work to a lab's deployment arm or a lab's own platform."
+  - "Its contribution margin falling as the staff it embeds with customers grows."
+  - "Revenue from existing customers flattening while pilots fail to convert, which the 10-K names as a risk."
+  - "A large government customer ending contracts for convenience or letting options lapse."
+  sources:
+    market:
+    - palantir_10k_fy25
+    customers:
+    - palantir_10k_fy25
+    powers:
+    - palantir_10k_fy25
+    must_be_true:
+    - palantir_10k_fy25
+  judged_by: claude-opus-5.5
+  reviewed_by: Alex Brogan
+  reviewed: 2026-09-28
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviews this profile before it is relied on."
+- entity: cognition
+  role: candidate
+  units:
+  - vc_coding_agents
+  market: "Cognition makes Devin, a coding agent: an AI tool that writes, tests and fixes software on its own, working from a task an engineer sets. It also owns Windsurf, a code editor (the program in which developers write and read code), which this site's records show it agreed to buy in July 2025. It calls itself an independent agent lab: it says it works with all the major labs (the firms that build the most capable AI systems) and uses the model best suited to each task, and it has begun training models of its own, which it says customers choose for cost and speed. It says its revenue run-rate (a recent month's revenue scaled up to a year) grew sharply between May and September 2026; that figure is self-reported, from its own posts, not audited. It has opened offices in several countries to work beside customers. How big the market becomes depends on whether firms keep paying an independent agent maker once the labs sell their own coding agents directly."
+  customers: "Large companies and government. It names Citi, Mercedes-Benz, Goldman Sachs, Santander, Dell, NVIDIA, GE Aerospace, the US Army and the US Navy, and says systems integrators (firms that assemble technology for clients), among them Infosys and Cognizant, build Devin into the work they deliver. It gives no revenue by customer. This site judges the base is moderately concentrated in large firms."
+  concentration: moderate
+  powers:
+  - power: switching_costs
+    why: "Emerging, not proven. Hamilton Helmer, a strategy consultant who studied why some firms keep earning more than their rivals, found that a lasting advantage needs both a benefit and a barrier to copying. The benefit is repeat business as Devin is wired into a firm's code, tools and approval steps; the barrier is the setup a customer would redo to move. But a rival agent can be tried alongside it, Cognition itself offers every lab's model, and it publishes no figures on customers leaving, so this site does not count the barrier as proven."
+  depends_on:
+  - inference
+  - post_training
+  - agents
+  - applications
+  - capital
+  rent_kind: scarcity
+  appropriability: weak
+  complementary_assets: specialised
+  asset_owner: platforms
+  durability: short
+  must_be_true:
+  - "Being independent of any one lab stays worth paying for. Its pitch is that customers get the best model for each task; this site judges that holds while the labs' models differ task by task, and weakens if one lab's agent is best at most coding work."
+  - "Its own models carry a growing share of its work, so that less of each sale goes to buying tokens (the units of text a model reads and writes, which the labs charge for) from the labs whose agents compete with it, among them OpenAI's Codex and Anthropic's Claude Code."
+  - "Its work inside large firms, where it sits beside engineering teams and systems integrators, holds customers better than a lab selling the same agent directly. David Teece, an economist who studied why inventors often fail to keep the returns, found that profit tends to go to whoever holds the assets a product needs to reach buyers. Here the labs hold the model and Cognition holds the enterprise relationship; this site judges the model the harder of the two to replace, so the labs, not Cognition, hold the asset that decides who keeps the gain."
+  - "Its reported growth is real revenue that renews; its run-rate is self-reported, and a run-rate built on a few fast months can fall as fast."
+  would_disprove:
+  - "Large customers replacing Devin with a lab's own coding agent after a new model release."
+  - "Price cuts on the labs' own agents followed by Cognition cutting its prices or its margin."
+  - "Its own models losing use inside Devin to models bought from the labs."
+  - "A lab buying a rival agent maker and bundling it with its models for large firms."
+  sources:
+    market:
+    - cognition_series_e_2026
+    - cognition_series_d_2026
+    customers:
+    - cognition_series_d_2026
+    - cognition_series_e_2026
+    powers:
+    - cognition_series_d_2026
+    - cognition_series_e_2026
+    must_be_true:
+    - cognition_series_d_2026
+    - cognition_series_e_2026
+    - anthropic_series_g_2026
+  judged_by: claude-opus-5.5
+  reviewed_by: Alex Brogan
+  reviewed: 2026-09-28
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviews this profile before it is relied on."
+- entity: anysphere
+  role: candidate
+  units:
+  - vc_coding_agents
+  market: "Anysphere makes Cursor, a code editor (the program in which developers write and read code) built around AI that suggests code, answers questions about a codebase and runs agents (AI programs that carry out whole tasks on their own). It is now part of SpaceX, the rocket and satellite company that also owns xAI, a lab building frontier models (the most capable AI systems of their time). SpaceX's 10-Q (the quarterly report US companies file with their regulator) says it took an option to buy Cursor in April 2026, exercised it in June 2026 and signed a merger agreement paying in its own shares, subject to regulators' approval; it also says that alongside the option it agreed to give Cursor computing capacity and to work with it on improving xAI's Grok models and developing new ones jointly. Cursor's own post says the purchase was completed in August 2026. Cursor says the deal gives it access to what it calls the largest fleet of AI chips in the world, to train stronger models that cost less to run, and that same month it released a Grok model, the family xAI builds, made with SpaceX. Before the deal it said in November 2025 that its in-house models generated more code than almost any other model in the world, and that its revenue had passed a large milestone; press reports in this site's records, citing people familiar with the company, show its run-rate (a recent month's revenue scaled up to a year) rising sharply between February and June 2026. These figures are self-reported or sourced to people close to it, not audited. Because Cursor is now a business line inside SpaceX, the question of a trillion-dollar company applies to SpaceX and xAI as a whole; this profile judges Cursor as a business line whose fate depends on the conditions in this site's xAI profile."
+  customers: "Individual developers and engineering teams; it says millions of developers and many large engineering organisations use it. It gives no revenue by customer. This site judges the base is diffuse, though it cannot tell how much of the revenue large companies bring."
+  concentration: diffuse
+  powers:
+  - power: switching_costs
+    why: "Emerging, not proven. Hamilton Helmer, a strategy consultant who studied why some firms keep earning more than their rivals, found that a lasting advantage needs both a benefit and a barrier to copying. The benefit is the daily habit of developers who live in its editor and the settings and history a team builds up there; this site judges the barrier weak, because rivals offer much the same and a developer can try another editor alongside it, and it has no figures on users leaving."
+  depends_on:
+  - accelerators
+  - data_centres
+  - post_training
+  - inference
+  - agents
+  - applications
+  rent_kind: scarcity
+  appropriability: weak
+  complementary_assets: specialised
+  asset_owner: innovator
+  durability: short
+  must_be_true:
+  - "The conditions in this site's xAI profile hold, since Cursor's owner now carries xAI's data-centre costs, legal cases and losses, and the value of Cursor to its owner rests on them."
+  - "Owning its models and chips lowers what it pays per task below what rivals pay the labs, so it can cut prices or keep a margin that an agent renting models from a lab cannot. That is the point of the merger in Cursor's own words; this site has no figures yet that show it. David Teece, an economist who studied why inventors often fail to keep the returns, found that profit tends to go to whoever holds the assets a product needs to reach buyers; because Cursor's owner now holds the chips and co-develops the models, this site judges that Cursor sits with the holder of those assets, unlike Cognition and Lovable, which rent their models from the labs."
+  - "Its record of how developers accept or reject its suggestions keeps improving its models. This site's records hold Cursor describing, in September 2025, how it rolls out new models to users through the day and trains on what happens. Andrei Hagiu and Julian Wright, economists who set out tests for when learning from customers' data keeps rivals out, found that it does so only when the data is proprietary, keeps its value and improves the product for every customer; this record may pass the first and last, but goes stale as models improve."
+  - "Customers who want other labs' models stay after Cursor's owner became a rival lab, and this site judges those labs must keep selling Cursor their models on fair terms for that to hold."
+  would_disprove:
+  - "Large customers moving to the labs' own coding agents after the SpaceX purchase."
+  - "Rival labs withdrawing their best models from Cursor, or Cursor offering only xAI's."
+  - "Cursor's models falling behind the labs' coding models on the tasks its users care about."
+  - "SpaceX's filings showing the AI segment's losses widening without Cursor's revenue growing."
+  sources:
+    market:
+    - anysphere_joining_spacex_2026
+    - anysphere_series_d_2025
+    - xai_spacex_10q_q2_2026
+    customers:
+    - anysphere_series_d_2025
+    powers:
+    - anysphere_series_d_2025
+    must_be_true:
+    - anysphere_joining_spacex_2026
+    - xai_spacex_10q_q2_2026
+  judged_by: claude-opus-5.5
+  reviewed_by: Alex Brogan
+  reviewed: 2026-09-28
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviews this profile before it is relied on."
+- entity: lovable
+  role: candidate
+  units:
+  - vc_coding_agents
+  market: "Lovable lets people who cannot code build websites and apps by describing what they want to an AI in plain words, and then host them (run them on its own servers so others can use them); it has added hosting, databases, logins and payments so the result can be a working business, not only a mock-up. It says people have created a very large number of projects since it launched in November 2024 and that its users' apps draw a very large number of visits each month. It says it draws on several models, matching each part of a job to the one best suited, and post-trains open-source models (further trains freely published models on its own data). Its Form D (the notice a private company files with the US regulator when it sells shares without a public offering) shows a Delaware company formed in 2023 that had sold most of the shares offered in its mid-2026 round without paying any placement agent (a bank paid to find investors), and that declined to disclose its revenue. Its revenue figures in this site's records come from the company itself and rose sharply between mid-2025 and mid-2026; they are not audited. How big the market becomes depends on how many people and firms start making their own software, and whether the labs (the firms building the most capable AI systems) let a middleman keep that work."
+  customers: "Founders, small businesses and teams inside large companies; it names Adidas, NVIDIA, Deutsche Telekom, Zendesk, Klarna and Checkr among the firms using it, and says its reach inside large US companies has grown. It gives no revenue by customer. This site judges the base is diffuse, spread across many small subscribers and a growing number of company accounts."
+  concentration: diffuse
+  powers:
+  - power: switching_costs
+    why: "Emerging, not proven. Hamilton Helmer, a strategy consultant who studied why some firms keep earning more than their rivals, found that a lasting advantage needs both a benefit and a barrier to copying. The benefit is that a business built and hosted on Lovable, with its data, logins and payments there, keeps paying; the barrier is the work of moving a running business elsewhere. Lovable publishes no figures on users leaving, so this site does not count the barrier as proven."
+  depends_on:
+  - inference
+  - post_training
+  - agents
+  - applications
+  - capital
+  rent_kind: scarcity
+  appropriability: weak
+  complementary_assets: specialised
+  asset_owner: platforms
+  durability: short
+  must_be_true:
+  - "Apps built on it stay on it. Once a business runs there, Lovable earns from hosting it, not only from building it; this site judges that is what could turn a tool bought for a project into a service kept for years."
+  - "Its own models, post-trained from open ones, carry more of the work, so that less of each sale goes to buying tokens (the units of text a model reads and writes, which the labs charge for) from the labs."
+  - "Its data on which apps succeed improves the product for all users, as it says. Andrei Hagiu and Julian Wright, economists who set out tests for when learning from customers' data keeps rivals out, found that it does so only when the data is proprietary, keeps its value and improves the product for every customer; Lovable's claim passes the last test on its own account, and this site has no way yet to check it."
+  - "The labs do not sell the same thing to the same people. This site judges that a lab could add app building and hosting to its own chat product, and Lovable must stay easier or more complete than that to keep its users."
+  - "Its growth is real revenue that renews; its figures are self-reported, and many of its users are people trying an idea, who may not stay."
+  would_disprove:
+  - "Paying users leaving in large numbers after a lab adds app building and hosting to its chat product."
+  - "Its prices falling toward the cost of the tokens it buys."
+  - "Firms moving apps built on Lovable to their own systems or a cloud once they grow."
+  - "Its own models failing to take work from the labs' models inside its product."
+  sources:
+    market:
+    - lovable_series_c_2026
+    - lovable_series_b_2025
+    - lovable_form_d_2026
+    customers:
+    - lovable_series_c_2026
+    - lovable_series_b_2025
+    powers:
+    - lovable_series_c_2026
+    must_be_true:
+    - lovable_series_c_2026
+    - lovable_series_b_2025
+  judged_by: claude-opus-5.5
+  reviewed_by: Alex Brogan
+  reviewed: 2026-09-28
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviews this profile before it is relied on."
+- entity: harvey
+  role: candidate
+  units:
+  - vc_vertical_ai
+  market: "Harvey sells AI software for lawyers: tools to research, draft, review contracts and documents, and store a firm's files, plus agents (AI programs that carry out multi-step work on their own) that customers build and run on it. It says customers had built a very large number of custom agents on it by March 2026, and that its legal engineers (staff who combine legal training with technical skill) work beside customers to build and improve them. In August 2026 this site's records hold Harvey saying it had worked with Fireworks, a firm that runs and tunes models, to post-train (further train for legal work) a model starting from an open one, as a research preview; by September 2026 it described this as its first post-trained open-weight model (one whose trained settings are published). It also published its own test of legal work, in which, by its account in May 2026, the best general models finished few tasks end to end. Its Form D (the notice a private company files with the US regulator when it sells shares without a public offering) shows a Delaware company formed in 2022 that sold shares from late August 2026 without paying any placement agent (a bank paid to find investors) and declined to disclose its revenue. Its annual recurring revenue (what customers have signed up to pay in a year) grew sharply through 2026 according to its co-founder and press reports; those figures are self-reported, not audited. How big the market becomes depends on whether law firms pay for a legal specialist once general models learn the law."
+  customers: "Law firms and companies' in-house legal teams. It says most of the largest US law firms by revenue and many of the world's biggest companies use it, and names NBCUniversal, HSBC, DLA Piper International, Corrs Chambers Westgarth and McCann FitzGerald among recent customers. OpenAI's venture fund is among its investors. It gives no revenue by customer. This site judges the base is moderately concentrated in large firms."
+  concentration: moderate
+  powers:
+  - power: switching_costs
+    why: "Emerging, not proven. Hamilton Helmer, a strategy consultant who studied why some firms keep earning more than their rivals, found that a lasting advantage needs both a benefit and a barrier to copying. The benefit is repeat business as firms store their files on Harvey and run their own agents there; the barrier is the work of rebuilding those agents and moving those files. Harvey's own pitch is that firms own their intelligence, which lowers the barrier, and it publishes no figures on customers leaving, so this site does not count it proven."
+  depends_on:
+  - inference
+  - post_training
+  - evaluations
+  - training_data
+  - applications
+  rent_kind: scarcity
+  appropriability: weak
+  complementary_assets: specialised
+  asset_owner: incumbents
+  durability: short
+  must_be_true:
+  - "Law firms keep paying a legal specialist rather than using a general model directly. Anthropic said early in 2026 that its Cowork product has plugins (add-ons that give its model the tools and instructions for one job) for roles such as legal work, and Microsoft's 10-K (the annual report US companies file with their regulator) describes selling its Copilot assistant and agents to businesses for gains in productivity; Harvey must stay better at a firm's real work than general tools like these."
+  - "Its legal test shows what it claims and others confirm it: that general models still fail most full legal tasks. It is a vendor's test, and this site has seen no one else repeat it."
+  - "The firms' own records, which Harvey stores but does not own, keep it inside their work. David Teece, an economist who studied why inventors often fail to keep the returns, found that profit tends to go to whoever holds the assets a product needs to reach its buyers; here the law firms hold their clients, their files and their reputations, so this site judges they, more than Harvey, are placed to keep the gain."
+  - "Its own models, post-trained from open ones, cut what it pays the labs for tokens (the units of text a model reads and writes), so its margin does not shrink each time a lab raises its price or sells a legal tool of its own."
+  - "Law firms keep buying tools that cut hours. This site judges that where a firm bills its clients by the hour, faster work lowers its bills, so it may pay Harvey less for the saving."
+  would_disprove:
+  - "Large law firms moving work from Harvey to a lab's own legal product after a new model release."
+  - "An independent test showing general models doing full legal tasks as well as Harvey's agents."
+  - "Harvey cutting prices as general models improve, or firms buying fewer seats (the per-user licences they pay for)."
+  - "Firms taking their stored files and agents to a rival at little cost."
+  sources:
+    market:
+    - harvey_11b_2026
+    - harvey_550m_2026
+    - harvey_form_d_2026
+    customers:
+    - harvey_11b_2026
+    - harvey_550m_2026
+    powers:
+    - harvey_11b_2026
+    - harvey_550m_2026
+    must_be_true:
+    - anthropic_series_g_2026
+    - msft_10k_fy26
+    - harvey_550m_2026
+    - harvey_11b_2026
+  judged_by: claude-opus-5.5
+  reviewed_by: Alex Brogan
+  reviewed: 2026-09-28
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviews this profile before it is relied on."
+- entity: openevidence
+  role: candidate
+  units:
+  - vc_vertical_ai
+  market: "OpenEvidence answers doctors' clinical questions with AI, citing medical research, and offers a research agent that reads many studies and writes a report. Its answers draw on content from partners it names, among them the New England Journal of Medicine, the American Medical Association's JAMA journals, the National Comprehensive Cancer Network and the Cochrane Library. It offers its research agent free to verified US clinicians, and neither of its press releases says who pays for the service. It calls itself the fastest-growing application for physicians in history and says, in March 2026, that most practising US physicians use it daily; these are its own descriptions, made in press releases it issued itself. This site's records hold the company saying its run-rate (a recent month's revenue scaled up to a year) passed a large milestone in 2025, and a research firm's estimate that it rose sharply by July 2026; neither is audited. How big the market becomes depends on whether a free tool with doctors' daily attention can charge someone for it without losing that trust."
+  customers: "Its users are doctors and other clinicians; the sources do not say that they pay, or who does, so this site cannot name its paying customers or say how concentrated they are. Alex Brogan judged the base diffuse, since it is spread across many clinicians and institutions."
+  concentration: diffuse
+  powers:
+  - power: cornered_resource
+    why: "Emerging, not proven. Hamilton Helmer, a strategy consultant who studied why some firms keep earning more than their rivals, found that a lasting advantage needs both a benefit and a barrier to copying; a cornered resource is preferential access to something others need. The benefit is answers grounded in leading journals' full text; the barrier would be that rivals cannot get the same licences. The releases do not say the licences are exclusive, and the journals could license others, so this site does not count the barrier as proven."
+  depends_on:
+  - inference
+  - training_data
+  - evaluations
+  - applications
+  rent_kind: scarcity
+  appropriability: weak
+  complementary_assets: specialised
+  asset_owner: incumbents
+  durability: short
+  must_be_true:
+  - "It finds a way to earn from doctors' attention that does not cost their trust; the releases do not say how it earns today."
+  - "Its journal partnerships stay open to it on terms it can afford, and are not matched by a lab. David Teece, an economist who studied why inventors often fail to keep the returns, found that profit tends to go to whoever holds the assets a product needs to reach buyers; here the journals own the content, so this site judges they can raise their price or sell to rivals as the content grows more valuable."
+  - "Doctors keep choosing a specialist over general assistants. Microsoft's 10-K (the annual report US companies file with their regulator) describes a cloud business, once called Nuance Healthcare, that sells AI to the health care industry; this site's records hold OpenAI buying Torch, a health-care technology start-up, in January 2026; and Anthropic said early in 2026 that it had widened its reach into health care. A general model grounded in the same research would compete directly."
+  - "Regulators keep treating it as a reference tool for doctors rather than a medical device needing approval, or it wins approval if they do not."
+  - "Its reported use and revenue are real and lasting; both rest on its own releases and on estimates."
+  would_disprove:
+  - "A leading journal licensing its full text to a lab or a rival clinical tool."
+  - "Doctors' use of OpenEvidence flattening after a lab launches a clinical product."
+  - "Its revenue model drawing complaints from doctors or regulators that it biases answers."
+  - "A regulator ruling that clinical-answer tools need approval as medical devices, without OpenEvidence holding one."
+  sources:
+    market:
+    - openevidence_series_b_2025
+    - openevidence_1m_consults_2026
+    customers:
+    - openevidence_series_b_2025
+    - openevidence_1m_consults_2026
+    powers:
+    - openevidence_series_b_2025
+    - openevidence_1m_consults_2026
+    must_be_true:
+    - openevidence_series_b_2025
+    - anthropic_series_g_2026
+    - msft_10k_fy26
+  judged_by: claude-opus-5.5
+  reviewed_by: Alex Brogan
+  reviewed: 2026-09-28
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviews this profile before it is relied on."
 sources:
 - id: amd_10k_fy25
   entity: amd
@@ -465,3 +1783,438 @@ sources:
   retrieved_at: 2026-09-28
   http_status: 200
   content_hash: 24db0a3c9ed2dbcb117a818e9e0a29af26fb5759a000742b774f3b4a1871e079
+- id: amzn_10k_fy25
+  entity: amzn
+  url: https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/amzn-20251231.htm
+  form: 10-K
+  filed: 2026-02-06
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 77e71087a95efe003f15f3655abb3fd1e14ab6034ca1878adfb4dd0dce560355
+- id: crwv_10k_fy25
+  entity: crwv
+  url: https://www.sec.gov/Archives/edgar/data/1769628/000176962826000104/crwv-20251231.htm
+  form: 10-K
+  filed: 2026-03-02
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 78fbda22d1b112b2dc0873ba3ff68dcbb2cea267dcc2dac47ed816b656d524b4
+- id: googl_10k_fy25
+  entity: googl
+  url: https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm
+  form: 10-K
+  filed: 2026-02-05
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: b1463b045f8b533890ee33c8626b354528e37ef538870b1a20cc31b9767eea61
+- id: msft_10k_fy26
+  entity: msft
+  url: https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm
+  form: 10-K
+  filed: 2026-07-29
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: a1c5597f7dc121accfe926478f8eba916b9f3b40b040db36861f47045470f593
+- id: nbis_20f_2025
+  entity: nbis
+  url: https://www.sec.gov/Archives/edgar/data/1513845/000110465926052948/nbis-20251231x20f.htm
+  form: 20-F
+  filed: 2026-04-30
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 118f67587b8ac819b6b17817d4ea9f5a3d0d56eb3460d9e2121acfb907e88c63
+- id: orcl_10k_fy26
+  entity: orcl
+  url: https://www.sec.gov/Archives/edgar/data/1341439/000119312526277521/orcl-20260531.htm
+  form: 10-K
+  filed: 2026-06-22
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 57895207fdf33b90389026ad0d452bc5ad42f102f5ddb4c4a60b9cb0ea8daf83
+- id: openai_msft_recap_2025
+  entity: openai
+  url: https://blogs.microsoft.com/blog/2025/10/28/the-next-chapter-of-the-microsoft-openai-partnership/
+  form: company-post
+  filed: 2025-10-28
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 1200634b112e8da409ecd251fd2b63ae814721a689aad593b940a6d560ee435d
+- id: openai_amazon_8k_2026
+  entity: openai
+  url: https://www.sec.gov/Archives/edgar/data/1018724/000110465926021050/tm267374d1_ex99-1.htm
+  form: 8-K
+  filed: 2026-02-27
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: dfda20038b55e01aa6249ef6deb1dc0d97d9d1fe1332ee6b4091209f0277748c
+- id: anthropic_series_h_2026
+  entity: anthropic
+  url: https://www.anthropic.com/news/series-h
+  form: company-post
+  filed: 2026-05-28
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 8bdd3bb4cd44a550b0700f301b6e91fb8ae216d81e11f6768270e48a28503cc5
+- id: anthropic_series_g_2026
+  entity: anthropic
+  url: https://www.anthropic.com/news/anthropic-raises-30-billion-series-g-funding-380-billion-post-money-valuation
+  form: company-post
+  filed: 2026-02-12
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 4b21a50b69f002fd976801da4d29e16de9ac65a18d90ad21483d6d641566f31e
+- id: xai_series_e_2026
+  entity: xai
+  url: https://x.ai/news/series-e
+  form: company-post
+  filed: 2026-01-06
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 4b82a5aae76af2dddd475c548abd250a4f1ff81e46696afc8cf0f933718dc27f
+- id: xai_spacex_10q_q2_2026
+  entity: xai
+  filer: SpaceX
+  url: https://www.sec.gov/Archives/edgar/data/1181412/000162828026052535/spcx-20260630.htm
+  form: 10-Q
+  filed: 2026-08-04
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: aa4e26fefd3e06ab47dc965af49dddf40008e10ad05c4beab281ae1d90656c17
+- id: periodic_labs_introducing_2025
+  entity: periodic_labs
+  url: https://periodic.com/news/introducing-periodic-labs
+  form: company-post
+  filed: 2025-09-30
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: acbf5331c1de89835a622a3b51a7e959b2b7e4d6b079b56b5164bdf59f8d3b15
+- id: periodic_labs_neon_2026
+  entity: periodic_labs
+  url: https://periodic.com/news/building-labs-that-learn
+  form: company-post
+  filed: 2026-09-15
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: bb853ade4fe0ce519e359b5ca37ef5566c56f3ce46c23217df4124403ddce676
+- id: elevenlabs_series_d_2026
+  entity: elevenlabs
+  url: https://elevenlabs.io/blog/series-d
+  form: company-post
+  filed: 2026-02-04
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: d4c49fb748c9a8e9bb385808aaa0932c9c8f611d12f2530736ee796c79f8ff08
+- id: elevenlabs_500m_arr_2026
+  entity: elevenlabs
+  url: https://elevenlabs.io/blog/500m-arr-and-new-investors
+  form: company-post
+  filed: 2026-05-05
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 49da20e275f39a85f3cae9e88d7ecfa2609923a4b4b804db30f237395a5dbc93
+- id: fluidstack_anthropic_dc_2025
+  entity: fluidstack
+  url: https://fluidstack.io/news/fluidstack-selected-by-anthropic-to-deliver-custom-data-centers-in-the-us
+  form: company-post
+  filed: 2025-11-12
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 15735ceb53c7c41d60b97a564d720e7330f307d5351062be3a8f50b114d27c28
+- id: fluidstack_form_d_2026
+  entity: fluidstack
+  url: https://www.sec.gov/Archives/edgar/data/2104151/000090679126000132/xslFormDX08/primary_doc.xml
+  form: form-d
+  filed: 2026-06-30
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: a412da4f484409e3bbcd3256c2e186bf698d24f4648c1d22a8e6c692e8d41e59
+- id: etched_frontier_clusters_2026
+  entity: etched
+  url: https://www.etched.com/progress/frontier-inference-clusters
+  form: company-post
+  filed: 2026-06-30
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 06ec736642dfde0a8a9c7ae98cbc2eaf2683d55d269e052e26e78b3d667d5570
+- id: scale_ai_meta_investment_2025
+  entity: scale_ai
+  url: https://scale.com/blog/scale-ai-announces-next-phase-of-company-evolution
+  form: company-post
+  filed: 2025-06-12
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 97f2fa56c4a3db98aa3c50d3cc0a0a1ffd1f80482b7302c21bc868cdcbbe6de0
+- id: scale_ai_new_ceo_2026
+  entity: scale_ai
+  url: https://scale.com/blog/scale-appoints-new-ceo
+  form: company-post
+  filed: 2026-07-30
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 1c805d00d775fd7195fb99a2e79e3af489bba0359004c2eee2ddba90b8dddace
+- id: scale_ai_meta_10q_q2_2025
+  entity: scale_ai
+  filer: Meta Platforms
+  url: https://www.sec.gov/Archives/edgar/data/1326801/000162828025036791/meta-20250630.htm
+  form: 10-Q
+  filed: 2025-07-31
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: afa42dda2f8086d5ff7e9ba69e6500c2d50bc10c7edd205d961549b695a59ea2
+- id: mercor_series_c_2025
+  entity: mercor
+  url: https://www.mercor.com/blog/series-c/
+  form: company-post
+  filed: 2025-10-27
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: a6ac3502be091a05a36ea63d2c32fc1fe62370d9044ddb49bc140fc4bf09d12e
+- id: mercor_form_d_2026
+  entity: mercor
+  url: https://www.sec.gov/Archives/edgar/data/2103986/000210398626000005/xslFormDX01/primary_doc.xml
+  form: form-d
+  filed: 2026-02-18
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: b30954f7a781a78f323ae812ffa7521927282134917f94d305a98aeecbb20b40
+- id: handshake_ai_refounding_2025
+  entity: handshake_ai
+  url: https://joinhandshake.com/blog/our-team/our-refounding-in-the-ai-era/
+  form: company-post
+  filed: 2025-10-14
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 92f18441ec808d337da56c9ad3c8338dcdb3edde9f940dd52e7a2710504a5560
+- id: handshake_ai_introducing_2025
+  entity: handshake_ai
+  url: https://joinhandshake.com/blog/our-team/introducing-handshake-ai/
+  form: company-post
+  filed: 2025-06-13
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 3cf2bd48a0f01460cb2887977d8a33200c9fc4848fb06cc3572d278df4cc8111
+- id: baseten_series_f_2026
+  entity: baseten
+  url: https://www.baseten.co/blog/announcing-our-series-f/
+  form: company-post
+  filed: 2026-06-22
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: df3d87c4b2c6b5dd7efb3228f11764ba720a27c0edd823631b4896d4d40bcbf9
+- id: baseten_form_d_2026
+  entity: baseten
+  url: https://www.sec.gov/Archives/edgar/data/1865393/000186539326000004/xslFormDX08/primary_doc.xml
+  form: form-d
+  filed: 2026-06-30
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 1730eb786a7b8503dee5655ba8b09a931c03ef8ef0fb3e67b4942902571d07dc
+- id: fireworks_series_d_2026
+  entity: fireworks
+  url: https://fireworks.ai/blog/series-d-announcement
+  form: company-post
+  filed: 2026-07-15
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 8ef7f853cc4fd992b52753a5cb8a86994032bc1b06566ed822bd74ed47414f25
+- id: fireworks_series_c_2025
+  entity: fireworks
+  url: https://fireworks.ai/blog/series-c
+  form: company-post
+  filed: 2025-10-28
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 7af46bb75e1056429205bc69e6545573c533ed25a5ee4e8f09362809cd13447b
+- id: mercor_enterprise_ai_2026
+  entity: mercor
+  url: https://www.mercor.com/blog/introducing-mercor-enterprise-ai/
+  form: company-post
+  filed: 2026-03-26
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: be2ee522aa3e97cfe12f9b6f3a14a004d3b2abd44be64921ab0a134cc2b183b7
+- id: mercor_deeptune_2026
+  entity: mercor
+  url: https://www.mercor.com/blog/mercor-to-acquire-deeptune/
+  form: company-post
+  filed: 2026-07-09
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: a4341cc7c1d166890ab92b4ef593ccddbc23333d7625f13190aaf2a51cdb0d7a
+- id: surge_enterprise_page
+  entity: surge_ai
+  url: https://surgehq.ai/enterprise
+  form: company-page
+  filed: 2026-09-28
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 1946f4d756a45a7f91f6b66bea0828cdd12acc1643f6f14d7515c0b7678bb73d
+- id: scale_ai_enterprise_page
+  entity: scale_ai
+  url: https://scale.com/enterprise
+  form: company-page
+  filed: 2026-09-28
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 0ca6250ed8bb81be67367812d1cb9829c20dcdbb430567244682a975790913a7
+- id: handshake_ai_enterprise_page
+  entity: handshake_ai
+  url: https://joinhandshake.com/ai/enterprise/
+  form: company-page
+  filed: 2026-09-28
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 0e3f8d8044ee8dd5433dcea128d7eccbdc1c39c50edb2e81c0db90635f6e0a83
+- id: handshake_ai_right_model_2026
+  entity: handshake_ai
+  url: https://joinhandshake.com/blog/enterprise/the-right-model-for-the-right-work/
+  form: company-post
+  filed: 2026-07-15
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 0aea38d5082b20477bc171a89d3301837f62fbf0f329ff7ff7a8feff86543cb2
+- id: meta_10k_fy25
+  entity: meta
+  url: https://www.sec.gov/Archives/edgar/data/1326801/000162828026003942/meta-20251231.htm
+  form: 10-K
+  filed: 2026-01-29
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 7d1c92c2f4bde31004c982e2982c9641e53b275288c607cf78d3b8985d452902
+- id: palantir_10k_fy25
+  entity: palantir
+  url: https://www.sec.gov/Archives/edgar/data/1321655/000132165526000011/pltr-20251231.htm
+  form: 10-K
+  filed: 2026-02-17
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 0c2cdaa198d83e752fa626d7359a5c9bb36ab197761f64c328241f37f85776a0
+- id: cognition_series_e_2026
+  entity: cognition
+  url: https://cognition.com/blog/series-e
+  form: company-post
+  filed: 2026-09-08
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 60cd46c14884ed527dcd6493491d31d578830b87d42bd7bb66214c86e11b1e0d
+- id: cognition_series_d_2026
+  entity: cognition
+  url: https://cognition.com/blog/series-d
+  form: company-post
+  filed: 2026-05-27
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 1a952abc2a5eee53f37de3b55d3972a36cae174ef80f1704f28c43f275ef6566
+- id: anysphere_joining_spacex_2026
+  entity: anysphere
+  url: https://cursor.com/blog/joining-spacex
+  form: company-post
+  filed: 2026-08-14
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 0a7845c0599de4c69a5ebe7028b65d2e485b29ebd86809e2c79f262c831b16dc
+- id: anysphere_series_d_2025
+  entity: anysphere
+  url: https://cursor.com/blog/series-d
+  form: company-post
+  filed: 2025-11-13
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 2be64ea994bdf8f3a0cc5c84141a3164717fec09cdc42479a10af410590f18d0
+- id: lovable_series_c_2026
+  entity: lovable
+  url: https://lovable.dev/blog/series-c
+  form: company-post
+  filed: 2026-08-12
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 38820099c9d3de7ebbfc54ade26f1bfd822665313d6211f4466f5e2a7b99bec7
+- id: lovable_series_b_2025
+  entity: lovable
+  url: https://lovable.dev/blog/series-b
+  form: company-post
+  filed: 2025-12-18
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: de741e88c2e2db535905eef79262352d47670b998ac7f5c49136f8712bff8248
+- id: lovable_form_d_2026
+  entity: lovable
+  url: https://www.sec.gov/Archives/edgar/data/2055162/000205516226000001/xslFormDX08/primary_doc.xml
+  form: form-d
+  filed: 2026-08-17
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 0ab8e41afa7e85c420c431464ad676c38af44ba24604529d473a1805cdbedd5a
+- id: harvey_550m_2026
+  entity: harvey
+  url: https://www.harvey.ai/blog/harvey-raises-dollar550m-at-a-dollar155b-valuation-to-help-legal-teams-own-their-intelligence
+  form: company-post
+  filed: 2026-09-09
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 23a51c3f92adfa1707afd0c50c8961a801568673b7fad807c70d4c2da849365a
+- id: harvey_11b_2026
+  entity: harvey
+  url: https://www.harvey.ai/blog/harvey-raises-at-dollar11-billion-valuation-to-scale-agents-across-law-firms-and-enterprises
+  form: company-post
+  filed: 2026-03-25
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 7866c18f7d986b26e0e09807a0985d9aef01825e4402a69ac48d2e82bba9366a
+- id: harvey_form_d_2026
+  entity: harvey
+  url: https://www.sec.gov/Archives/edgar/data/1974654/000197465426000003/xslFormDX08/primary_doc.xml
+  form: form-d
+  filed: 2026-09-11
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 36574e081d145620273b3b65d8f2cbc06f331b1cb191c70bd44bdc940fdd1a94
+- id: openevidence_series_b_2025
+  entity: openevidence
+  url: https://www.prnewswire.com/news-releases/openevidence-the-fastest-growing-application-for-physicians-in-history-announces-210-million-round-at-3-5-billion-valuation-302505806.html
+  form: company-post
+  filed: 2025-07-15
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 911de1c3c653ace6a97145842710d1a6e63ae238fc518b70863a879e159c14d2
+- id: openevidence_1m_consults_2026
+  entity: openevidence
+  url: https://www.prnewswire.com/news-releases/openevidence-achieves-historic-milestone-1-million-clinical-consultations-between-verified-doctors-and-an-artificial-intelligence-system-in-a-single-day-302712459.html
+  form: company-post
+  filed: 2026-03-12
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: d9dcd4d28fee9e3725755e2224d6582579a56668b02d18767b608392d9a7885b
+- id: meta_muse_2026
+  entity: meta
+  url: https://about.fb.com/news/2026/09/introducing-muse-personal-ai-agent/
+  form: company-post
+  filed: 2026-09-08
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 85c3ab62012e2a8c2c12f17a1e00d09e0300b56109c01e91e7dc234e81eb2641
+- id: manus_joins_meta_2025
+  entity: meta
+  url: https://manus.im/blog/manus-joins-meta-for-next-era-of-innovation
+  form: company-post
+  filed: 2025-12-29
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 6af92319b89022d8a09bf3978643e85d227336ccd57235a732d3beb13d804d5b
+- id: instinct_series_c_2026
+  entity: instinct
+  filer: TechCrunch
+  url: https://techcrunch.com/2026/09/28/viral-ai-agent-instinct-raises-1b-series-c-at-a-10b-valuation/
+  form: press
+  filed: 2026-09-28
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 82a3ead321581d69a1f2ef8799dcef01a8a1d61cef8d5fac53d3af831642991e
+- id: assistant_benchmark_page
+  filer: Assistant Benchmark (David Pawlan)
+  url: https://assistantbenchmark.com/
+  form: company-page
+  filed: 2026-09-28
+  retrieved_at: 2026-09-28
+  http_status: 200
+  content_hash: 475b63b9102911f33354f4787779ccd8b42798c49f7599aebc86b46d3ec37084

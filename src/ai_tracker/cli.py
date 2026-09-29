@@ -304,6 +304,9 @@ def _check(s: st.Store) -> tuple[list[str], list[str]]:
                     f"ledger {r['series_key']}: party '{p['slug']}' is not an entity id, name or alias"
                 )
     ids = {e.id for e in s.seed.entities}
+    for key, eid in s.con.execute("SELECT series_key, entity_id FROM observations WHERE entity_id IS NOT NULL").fetchall():
+        if eid not in ids:
+            errors.append(f"{key}: entity_id '{eid}' is not an entity in seed/entities.yaml")
     for key, fund, company, eid in s.con.execute(  # investments: lead.<fund>.<company> and portfolio.<fund>.<company>
         "SELECT series_key, subject, measure, entity_id FROM observations WHERE source_ns IN ('lead', 'portfolio')"
     ).fetchall():

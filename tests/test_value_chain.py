@@ -51,7 +51,8 @@ def test_where_a_profiles_rent_pools_follows_the_rubric():
         answers = {k: c["rent"][k] for k in vc.RUBRIC}
         assert (c["rent"]["pools"], c["rent"]["tier"]) == (futures.pools(answers, r), futures.tier(answers, r))
         assert c["rent"]["reads"] and "innovator" not in c["rent"]["reads"]
-    assert all(u["rival"] for u in doc["units"])
+    raw = {u["id"]: u for u in vc.units(load_outlook())}
+    assert all(u["rival"] or raw[u["id"]]["rival"] == "none_found" for u in doc["units"])
 
 
 def test_a_profile_asks_for_review_when_unread_stale_or_older_than_its_filing():

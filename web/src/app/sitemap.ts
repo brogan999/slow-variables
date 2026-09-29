@@ -3,7 +3,7 @@ import { atlas, census, futures, index, meta, seriesKeys } from "@/lib/data";
 import { EVIDENCE, STOPS } from "@/lib/nav";
 import { SITE } from "@/lib/site";
 
-const STATIC = ["", ...STOPS.map((s) => s.href), ...EVIDENCE.map(([href]) => href), "/legal", "/ask"];
+const STATIC = ["", ...STOPS.map((s) => s.href), ...EVIDENCE.map(([href]) => href), "/legal", ...(SITE.askOnline ? ["/ask"] : [])];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date(meta().generated_at);

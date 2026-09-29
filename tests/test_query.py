@@ -420,6 +420,7 @@ def test_the_prompt_asks_for_three_passes_and_the_strategy_chain():
     p = _system(st.Store())
     assert "**Now**" in p and "What people expect" in p and "What theory says" in p
     assert "call bottlenecks" in p and "no personal recommendation" in p and "350 words" not in p
+    assert "never pick a winner" in p and "an editorial set, unranked" in p
 
 
 def test_the_company_card_carries_the_trillion_dollar_test_with_citable_rows():
@@ -444,7 +445,7 @@ def test_the_value_chain_tool_is_compact_citable_and_links_units_to_their_layer(
 
     t = _tools_with_board()
     brief = t.value_chain()
-    assert brief and all(u["cite"].startswith("pos:") and u["rival"] for u in brief)
+    assert brief and all(u["cite"].startswith("pos:") for u in brief) and any(u["rival"] for u in brief)
     for out in (brief, t.value_chain(layer="compute_physical"), t.value_chain(companies=True)):
         assert len(json.dumps(out, default=str)) < 20000
     uid = brief[0]["cite"].split(":")[1]

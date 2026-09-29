@@ -1,6 +1,6 @@
 import { ReasonLink } from "@/components/ReasonLink";
 import Link from "next/link";
-import { indicatorHref } from "@/lib/format";
+import { indicatorHref, plain } from "@/lib/format";
 import { ConfidenceBar, rubricWords } from "@/components/ConfidenceBar";
 import { EvidenceLog } from "@/components/EvidenceLog";
 import { Inline } from "@/components/Essay";
@@ -21,9 +21,6 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export function generateStaticParams() { return index().indicators.filter((i) => i.published).map((i) => ({ slug: i.id })); }
 
 const band = (b: Band, unit: string) => (b ? [b.lo != null ? `≥ ${fmt(b.lo, unit)}` : null, b.hi != null ? `≤ ${fmt(b.hi, unit)}` : null].filter(Boolean).join(" and ") : "—");
-
-// Seed prose sometimes names a status as a `code_word`; readers see the word.
-const plain = (t: string | null | undefined) => (t ?? "").replace(/`([a-z_]+)`/g, (_, w: string) => w.replace(/_/g, " "));
 
 function H2({ id, children }: { id: string; children: React.ReactNode }) {
   return <h2 id={id} className="display text-[1.5rem] md:text-[1.75rem] leading-tight mb-4 scroll-mt-8">{children}</h2>;

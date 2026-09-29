@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { EconomicsUnit, Profile } from "@/lib/data";
+import { PhoneCollapse } from "@/components/PhoneCollapse";
 
 export const DIRECTION: Record<EconomicsUnit["direction"], string> = {
   commoditising: "Commoditising",
@@ -46,10 +47,13 @@ export function EconomicsUnitView({ u }: { u: EconomicsUnit }) {
 export function ProfileCard({ c }: { c: Profile }) {
   return (
     <article id={`profile-${c.entity}`} className="panel p-5 flex flex-col gap-3 scroll-mt-24">
-      <div className="flex flex-col gap-1.5">
-        <span className="eyebrow">{c.role === "club" ? "Already worth over a trillion dollars" : "Candidate to be worth a trillion dollars"}</span>
-        <h4 className="display text-xl">{c.name}</h4>
-      </div>
+      <PhoneCollapse summary={
+        <div className="flex flex-col gap-1.5">
+          <span className="eyebrow">{c.role === "club" ? "Already worth over a trillion dollars" : "Candidate to be worth a trillion dollars"}</span>
+          <h4 className="display text-xl">{c.name}</h4>
+        </div>
+      }>
+      <div className="flex flex-col gap-3 mt-3">
       <dl className="flex flex-col gap-3 text-sm leading-relaxed">
         <div><dt className="eyebrow mb-1">Market</dt><dd className="text-ink-2">{c.market}</dd></div>
         <div><dt className="eyebrow mb-1">Customers ({c.concentration})</dt><dd className="text-ink-2">{c.customers}</dd></div>
@@ -78,6 +82,8 @@ export function ProfileCard({ c }: { c: Profile }) {
         ))}
         ; {c.reviewed_by ? `reviewed by ${c.reviewed_by} on ${c.reviewed}` : "not yet reviewed by a person"}.{c.disclosure ? ` ${c.disclosure}` : ""}
       </p>
+      </div>
+      </PhoneCollapse>
     </article>
   );
 }

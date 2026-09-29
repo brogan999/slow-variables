@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { DIRECTION, PowersGlossary } from "@/components/ValueChain";
 import { MarketMap } from "@/components/MarketMap";
-import { marketMap, valueChain } from "@/lib/data";
+import { index, marketMap, valueChain } from "@/lib/data";
 
 export const metadata = {
   title: "The value chain",
@@ -25,8 +25,11 @@ export default function ValueChainPage() {
         <div className="hidden md:grid grid-cols-[2fr_0.8fr_2fr_1.6fr] gap-4 py-2 text-sm text-muted border-y border-grid" aria-hidden>
           <span>Part of the chain</span><span>Direction</span><span>Binds on</span><span>Companies profiled</span>
         </div>
+        {index().layers.filter((l) => v.units.some((u) => u.layer === l.id)).map((l) => (
+        <section key={l.id} aria-labelledby={`vc-${l.id}`} className="mt-6 first:mt-2">
+        <h2 id={`vc-${l.id}`} className="display text-xl mb-1"><Link href={`/layers/${l.id}#economics`} className="hover:underline underline-offset-4">{l.name}</Link></h2>
         <ul className="flex flex-col border-t border-grid md:border-t-0">
-          {v.units.map((u) => (
+          {v.units.filter((u) => u.layer === l.id).map((u) => (
             <li key={u.id} className="grid gap-1 md:gap-4 md:grid-cols-[2fr_0.8fr_2fr_1.6fr] py-3 border-b border-grid text-sm">
               <Link href={`/layers/${u.layer}#assessment-${u.id}`} className="text-ink underline decoration-grid underline-offset-4 hover:decoration-ink">{u.title}</Link>
               <span className="text-ink-2"><span className="md:sr-only text-muted">Direction: </span>{DIRECTION[u.direction]}</span>
@@ -35,6 +38,8 @@ export default function ValueChainPage() {
             </li>
           ))}
         </ul>
+        </section>
+        ))}
       </div>
       <p className="text-xs text-muted max-w-[68ch]">The judgements and profiles were drafted by a model from the companies&apos; own filings and the site&apos;s readings, and each says whether a person has reviewed it. They are conditions, not forecasts: no company is ranked.</p>
       <MarketMap m={marketMap()} />

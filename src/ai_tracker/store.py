@@ -259,7 +259,11 @@ def append_observations(source_id: str, rows: list[Observation]) -> int:
         if not r["series_key"].startswith("watch.") and (k not in across or r["retrieved_at"] > across[k][1]):
             across[k] = (r["id"], r["retrieved_at"])
     latest: dict[tuple[Any, ...], tuple[str, str]] = {}
+    page: dict[tuple[Any, ...], tuple[str, str]] = {}  # the same reading from the same page, entity_id corrected
     for r in existing:
+        pk = (r["series_key"], r["as_of_date"], r.get("period_start"), r["url"])
+        if pk not in page or r["retrieved_at"] > page[pk][1]:
+            page[pk] = (r["id"], r["retrieved_at"])
         k = (
             r["series_key"],
             r.get("entity_id"),
@@ -292,6 +296,8 @@ def append_observations(source_id: str, rows: list[Observation]) -> int:
         )
         if k in latest:
             o.supersedes_id = latest[k][0]
+        elif (k[0], k[2], k[3], o.url) in page:
+            o.supersedes_id = page[(k[0], k[2], k[3], o.url)][0]
         elif (k[0], k[2], k[3]) in across:
             o.supersedes_id = across[(k[0], k[2], k[3])][0]
         latest[k] = (o.id, o.retrieved_at.isoformat())
@@ -2077,7 +2083,7 @@ class Store:
             c["name"] = names.get(c["entity"], c["entity"])
             c["depends_on"] = [{**b, "name": inputs.get(b["id"], b["id"])} for b in c["depends_on"]]
             c["source_links"] = [
-                {"id": i, "url": srcs[i]["url"], "label": _source_label(names.get(srcs[i].get("entity"), c["name"]), srcs[i])}
+                {"id": i, "url": srcs[i]["url"], "label": _source_label(srcs[i].get("filer") or names.get(srcs[i].get("entity"), c["name"]), srcs[i])}
                 for i in sorted({i for ids in c["sources"].values() for i in ids}) if i in srcs
             ]
         doc["powers"] = value_chain.POWER_GLOSS
@@ -2521,8 +2527,8 @@ def _write(p: Path, doc: Any) -> None:
     p.write_text(json.dumps(doc, sort_keys=True, indent=1, default=str) + "\n")
 
 
-FORM_WORDS = {"10-K": "annual report (10-K)", "20-F": "annual report (20-F)", "business-report": "business report",
-              "company-post": "results post"}
+FORM_WORDS = {"10-K": "annual report (10-K)", "20-F": "annual report (20-F)", "10-Q": "quarterly report (10-Q)", "8-K": "filing (8-K)", "form-d": "Form D", "company-page": "company page", "business-report": "business report",
+              "company-post": "announcement", "press": "article"}
 
 
 def _source_label(name: str, src: dict[str, Any]) -> str:
