@@ -151,3 +151,14 @@ def test_rollup_ranks_fragmented_industries_with_work_to_hand_over_and_skips_wha
     out = rollup(idx, small, firms)
     assert [r["naics"] for r in out] == ["524200", "541200"]  # 0.05 then 0.036; nonprofits, composites, too few firms out
     assert out[0]["rank"] == 1 and out[0]["small_share"]["derived_id"] == "d5242"
+
+
+def test_the_census_figure_lays_bars_on_one_dollar_axis():
+    from ai_tracker.census import _figure
+
+    h = {"agreed_all_three_usd": 150e9, "passes_usd": 400e9}
+    val = {"scorers": {"a": {"name": "A"}}, "by_scorer": {"a": {"passes_usd": 700e9}}}
+    f = _figure(h, val, ["a"])
+    assert [b["id"] for b in f["bars"]] == ["agreed3", "rule", "a"]
+    assert all(0 <= b["width"] <= 100 for b in f["bars"]) and f["ticks"][0]["left"] == 0 and f["ticks"][-1]["left"] == 100
+    assert f["bars"][1]["width"] < f["bars"][2]["width"]

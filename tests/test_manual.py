@@ -126,11 +126,11 @@ def test_a_corrected_annotation_rewrites_only_flag_fields(tmp_path, monkeypatch)
     assert annotate(ledger, seed) == 0 and json.loads(ledger.read_text())["dispute_text"] == "Withdrawn."
 
 
-# The acquirers the acquisitions ledger was searched for under its written rule (the sweep of 23 Sep 2026).
+# The acquirers the acquisitions ledger was searched for under its written rule (the sweeps of 23 Sep 2026 and 28 Sep 2026: asml and samsung, and the 146 market-map buyers).
 SWEPT_BUYERS = {
     "01_ai", "1x", "aaru", "adaption_labs", "agent", "ai21_labs", "alcor", "aleph_alpha", "alibaba_qwen", "amd",
     "american_terawatt", "ami_labs", "ampersand", "amzn", "anthropic", "antim_labs", "applied_digital", "apptronik",
-    "aravolta", "arbor", "arte", "assemblyai", "astera_labs", "autoscience", "axelera_ai", "axiom_math",
+    "aravolta", "arbor", "arte", "asml", "assemblyai", "astera_labs", "autoscience", "axelera_ai", "axiom_math",
     "ayar_labs", "ayr_energy", "baichuan", "base_power", "bastille_networks", "bedrock_robotics",
     "black_forest_labs", "boom_supersonic", "boost_robotics", "broadcom", "built_robotics", "calibrant_energy",
     "cartesia", "celestial_ai", "cerebras", "chai_discovery", "claros", "claroty", "cohere", "commonwealth_fusion",
@@ -155,13 +155,13 @@ SWEPT_BUYERS = {
     "playht", "poetiq", "poolside", "positron", "prime_intellect", "prior_labs", "prismml", "prometheus", "q_ant",
     "qutwo", "radiant", "rain_ai", "rebellions", "recraft", "recursive", "redwood_energy", "reflection_ai", "reka",
     "reliability_engine", "rhoda_ai", "ricursive_intelligence", "river_ai", "runway", "safe_superintelligence",
-    "sakana_ai", "salad_cloud", "sambanova", "sarvam", "scout", "senpilot", "sesame_ai", "sima_ai", "simile",
-    "sk_hynix", "skild_ai", "soma_energy", "sooth_labs", "spark", "squid", "standard_intelligence", "stepfun",
-    "submer", "suno", "tavus", "tensorwave", "tenstorrent", "terawulf", "terrafirma", "thinking_machines_lab",
-    "thinklabs", "thomson_reuters_imperial_frontier_ai_research_lab", "transluce", "ts_conductor", "tsmc",
-    "ultravox", "unconventional_ai", "universalagi", "unreasonable_labs", "upscale_ai", "vast_ai", "verse",
-    "voltage_park", "voyage_ai", "vultr", "watney_robotics", "world_labs", "x_energy", "xai", "xaira_therapeutics",
-    "xscape_photonics", "zhipu", "zyphra",
+    "sakana_ai", "salad_cloud", "sambanova", "samsung", "sarvam", "scout", "senpilot", "sesame_ai", "sima_ai",
+    "simile", "sk_hynix", "skild_ai", "soma_energy", "sooth_labs", "spark", "squid", "standard_intelligence",
+    "stepfun", "submer", "suno", "tavus", "tensorwave", "tenstorrent", "terawulf", "terrafirma",
+    "thinking_machines_lab", "thinklabs", "thomson_reuters_imperial_frontier_ai_research_lab", "transluce",
+    "ts_conductor", "tsmc", "ultravox", "unconventional_ai", "universalagi", "unreasonable_labs", "upscale_ai",
+    "vast_ai", "verse", "voltage_park", "voyage_ai", "vultr", "watney_robotics", "world_labs", "x_energy", "xai",
+    "xaira_therapeutics", "xscape_photonics", "zhipu", "zyphra",
 }
 
 

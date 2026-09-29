@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BottleneckMap, Bets, MapReasons } from "@/components/BottleneckMap";
+import { PageHeader } from "@/components/PageHeader";
 import { StatusChip } from "@/components/StatusChip";
 import { bottleneckMap, bottlenecks, index, words } from "@/lib/data";
 import { indicatorHref } from "@/lib/format";
@@ -21,10 +22,13 @@ export default function BottlenecksPage() {
   const bucketName = (id: string) => buckets.find((b) => b.id === id)?.name ?? words(id);
   return (
     <div className="flex flex-col gap-6">
-      <div>
-        <h1 className="display text-[2.5rem] md:text-[3.5rem] leading-[1.02] max-w-[24ch]">Bottlenecks</h1>
-        <p className="text-lg leading-snug text-ink-2 max-w-[62ch]">Where AI is being held up today, and at which stage: in the chain of inputs it is made from, and in the frictions that slow it on the way from a working model to firms reorganising around it. A bottleneck here is whatever sets the pace, a scarce input upstream or a slow institution downstream; to bind is to be that scarce thing. Each row carries today&apos;s reading once; each cell says whether the row acts on that stage, and whether a named writer expects it to bind there.</p>
-      </div>
+      <PageHeader eyebrow="What binds · the bottleneck map" title="What is holding AI up, and where"
+        lede="Each row is an input AI is made from or a friction that slows it; each column is a stage of its spread; the map opens on what binds now or is expected to.">
+        <details className="max-w-[62ch] text-[15px] text-ink-2">
+          <summary className="cursor-pointer text-sm font-medium text-ink">How to read the map</summary>
+          <p className="mt-2">A bottleneck here is whatever sets the pace, a scarce input upstream or a slow institution downstream; to bind is to be that scarce thing. Each row carries today&apos;s reading once; each cell says whether the row acts on that stage, and whether a named writer expects it to bind there.</p>
+        </details>
+      </PageHeader>
       <BottleneckMap doc={doc} />
       <section className="flex flex-col gap-3">
         <h2 className="display text-2xl leading-tight mt-2">Why each row sits where it does</h2>

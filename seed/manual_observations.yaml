@@ -3722,6 +3722,21 @@ observations:
   #   xai Mesh Optical Technologies (2026-06-26): R1: buyer is Musk/SpaceX, not xAI; R4: networking hardware (optical transceivers)
   #   zhipu Beijing Hongzuan Technology Development Co., Ltd. (北京紅鑽科技發展) (2026-04-14): R4: non-technology business (property-holding company)
   #   zhipu Beijing Lingxin Intelligent Technology (undated): R2: acquired in 2023
+  # --- sweep of 28 Sep 2026 under the rule above: ASML and Samsung ---
+  #   ASML and Samsung swept 28 Sep 2026; no deal counts. Samsung is Samsung Electronics and the units it controls (Harman,
+  #   Samsung Medison, Samsung Research); Samsung SDS, Samsung C&T and the insurance units are separate companies and not samsung.
+  #   Neither is a DMA gatekeeper, so no EU notices exist for them.
+  #   asml Mistral AI (11% stake) (2025-09-09): R3: a minority stake, no team joins; R4: other AI model lab
+  #   samsung Rainbow Robotics (35%, control) (2024-12-31): R2: first confirmed Dec 2024 (closed Mar 2025); R4: a robot maker
+  #   samsung Sonio (via Samsung Medison) (2024-07): R2: first confirmed in 2024
+  #   samsung Samsung Lennox HVAC North America (50.1% JV) (2024-05): R2: first confirmed in 2024; R4: HVAC
+  #   samsung Sound United (Masimo's audio business, via Harman) (2025-05-06): R4: consumer audio hardware
+  #   samsung FläktGroup (2025-05-14): R4: HVAC and data-centre cooling (non-AI)
+  #   samsung Xealth (2025-07-08): R4: digital-health integration platform for health systems (non-AI enterprise software)
+  #   samsung ZF ADAS business (via Harman) (2025-12-23): R4: automotive driver-assistance compute units, cameras and radars (hardware)
+  #   samsung Element Biosciences (stake, largest shareholder) (2026-06-09): R3: a minority stake, no team joins; R4: gene-sequencing instruments
+  #   samsung Netlist (equity investment in a patent settlement) (2026-08-05): R3: a minority stake; R4: memory
+  #   samsung Euclyd (co-investment) (2026-09-17): R3: a minority stake; R4: chips (AI inference silicon)
   # --- procurement enter bell (lab_procurement_signal_4q); scores coded against the rubric in semantic/metrics.yaml ---
   - series_key: procurement.turing.signal.pt
     source_id: techcrunch
@@ -5875,6 +5890,79 @@ observations:
     tier: 5
     basis: reported
     raw_snippet: The Series A funding, led by Summit Partners, brings the company’s total funding to $122 million
+  # --- Pew: which assistants US adults use (fieldwork 17-23 Feb 2026), sourced 2026-09-28 ---
+  - series_key: pew.chatgpt.us_adults_ever_use_share.a
+    source_id: pew_research
+    value: 0.44
+    unit: share
+    as_of_date: 2026-02-23
+    published_date: 2026-06-17
+    url: https://www.pewresearch.org/internet/2026/06/17/americans-and-ai-2026-chatbots-smart-devices-and-views-on-impact/
+    tier: 6
+    basis: reported
+    raw_snippet: "% of U.S. adults who say they ever use the following AI chatbots Chatbot Percent ChatGPT 44 Gemini 24 Copilot 17 Meta AI 14 Grok 8 Claude 6 Character.ai 3"
+    coding: "Percent of US adults in Pew's chart table, written as a share."
+    note: "Share of US adults who say they ever use this chatbot; a survey of use, not of spend or traffic."
+  - series_key: pew.gemini.us_adults_ever_use_share.a
+    source_id: pew_research
+    value: 0.24
+    unit: share
+    as_of_date: 2026-02-23
+    published_date: 2026-06-17
+    url: https://www.pewresearch.org/internet/2026/06/17/americans-and-ai-2026-chatbots-smart-devices-and-views-on-impact/
+    tier: 6
+    basis: reported
+    raw_snippet: "% of U.S. adults who say they ever use the following AI chatbots Chatbot Percent ChatGPT 44 Gemini 24 Copilot 17 Meta AI 14 Grok 8 Claude 6 Character.ai 3"
+    coding: "Percent of US adults in Pew's chart table, written as a share."
+    note: "Share of US adults who say they ever use this chatbot; a survey of use, not of spend or traffic."
+  - series_key: pew.copilot.us_adults_ever_use_share.a
+    source_id: pew_research
+    value: 0.17
+    unit: share
+    as_of_date: 2026-02-23
+    published_date: 2026-06-17
+    url: https://www.pewresearch.org/internet/2026/06/17/americans-and-ai-2026-chatbots-smart-devices-and-views-on-impact/
+    tier: 6
+    basis: reported
+    raw_snippet: "% of U.S. adults who say they ever use the following AI chatbots Chatbot Percent ChatGPT 44 Gemini 24 Copilot 17 Meta AI 14 Grok 8 Claude 6 Character.ai 3"
+    coding: "Percent of US adults in Pew's chart table, written as a share."
+    note: "Share of US adults who say they ever use this chatbot; a survey of use, not of spend or traffic."
+  - series_key: pew.meta_ai.us_adults_ever_use_share.a
+    source_id: pew_research
+    value: 0.14
+    unit: share
+    as_of_date: 2026-02-23
+    published_date: 2026-06-17
+    url: https://www.pewresearch.org/internet/2026/06/17/americans-and-ai-2026-chatbots-smart-devices-and-views-on-impact/
+    tier: 6
+    basis: reported
+    raw_snippet: "% of U.S. adults who say they ever use the following AI chatbots Chatbot Percent ChatGPT 44 Gemini 24 Copilot 17 Meta AI 14 Grok 8 Claude 6 Character.ai 3"
+    coding: "Percent of US adults in Pew's chart table, written as a share."
+    note: "Share of US adults who say they ever use this chatbot; a survey of use, not of spend or traffic."
+  - series_key: pew.grok.us_adults_ever_use_share.a
+    source_id: pew_research
+    value: 0.08
+    unit: share
+    as_of_date: 2026-02-23
+    published_date: 2026-06-17
+    url: https://www.pewresearch.org/internet/2026/06/17/americans-and-ai-2026-chatbots-smart-devices-and-views-on-impact/
+    tier: 6
+    basis: reported
+    raw_snippet: "% of U.S. adults who say they ever use the following AI chatbots Chatbot Percent ChatGPT 44 Gemini 24 Copilot 17 Meta AI 14 Grok 8 Claude 6 Character.ai 3"
+    coding: "Percent of US adults in Pew's chart table, written as a share."
+    note: "Share of US adults who say they ever use this chatbot; a survey of use, not of spend or traffic."
+  - series_key: pew.claude.us_adults_ever_use_share.a
+    source_id: pew_research
+    value: 0.06
+    unit: share
+    as_of_date: 2026-02-23
+    published_date: 2026-06-17
+    url: https://www.pewresearch.org/internet/2026/06/17/americans-and-ai-2026-chatbots-smart-devices-and-views-on-impact/
+    tier: 6
+    basis: reported
+    raw_snippet: "% of U.S. adults who say they ever use the following AI chatbots Chatbot Percent ChatGPT 44 Gemini 24 Copilot 17 Meta AI 14 Grok 8 Claude 6 Character.ai 3"
+    coding: "Percent of US adults in Pew's chart table, written as a share."
+    note: "Share of US adults who say they ever use this chatbot; a survey of use, not of spend or traffic."
   # --- neolabs.fyi valuations, read 28 Sep 2026 ---
   - series_key: neolabs_fyi.deepseek.post_money_usd.pt
     source_id: neolabs_fyi

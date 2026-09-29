@@ -1,8 +1,8 @@
 import { ArticleLayout } from "@/components/ArticleLayout";
 import { StackPlate } from "@/components/ArgumentParts";
 import { ContextFigures } from "@/components/ContextFigure";
-import { Folios, Inline, parseEssay } from "@/components/Essay";
-import { Agreements, cites, FalsifierBoard, FolioPositions, OutlookMargin, OutlookSources, ScenarioGrid } from "@/components/OutlookParts";
+import { Folios, folioId, Inline, parseEssay } from "@/components/Essay";
+import { Agreements, ClaimState, cites, FalsifierBoard, FolioPositions, OutlookMargin, OutlookSources, ScenarioGrid } from "@/components/OutlookParts";
 import { JaggedFrontier, ReliabilityGap } from "@/components/Signposts";
 import { bottleneckMap, context, outlook, signposts } from "@/lib/data";
 import { SITE } from "@/lib/site";
@@ -41,6 +41,16 @@ export default function OutlookPage() {
           <div className="eyebrow">What next · the outlook, tested nightly</div>
           <h1 className="display text-[2.75rem] md:text-[4.5rem] leading-[0.98] max-w-[16ch]">{h1}</h1>
           <p className="font-serif text-xl md:text-[1.4rem] leading-[1.55] text-ink-2 max-w-[60ch]"><Inline text={lede} facts={doc.facts} cites={cites(doc)} tests={doc.tests} /></p>
+          <div role="group" aria-label="Tonight's claims" className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
+            {(["holding", "failing", "both", "untestable"] as const).map((k) => <span key={k} className="inline-flex items-center gap-1.5"><ClaimState state={k} /><span className="num text-ink-2">{doc.tally[k]}</span></span>)}
+          </div>
+          <nav aria-label="The five questions" className="max-w-[62ch]">
+            <ol className="flex flex-col gap-1.5 border-l border-grid pl-4 text-[15px]">
+              {folios.filter((f) => f.label.startsWith("Folio ")).map((f, i) => (
+                <li key={f.label}><a href={`#${folioId(f.label)}`} className="hover:underline"><span className="eyebrow mr-2">{f.label.split("·")[0].trim()}</span>{doc.folios[i]?.kicker ?? f.claim}</a></li>
+              ))}
+            </ol>
+          </nav>
         </header>
       }
       margin={<OutlookMargin doc={doc} />}

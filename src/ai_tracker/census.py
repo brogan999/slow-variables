@@ -141,6 +141,23 @@ def ref(spec: dict[str, Any], file: str, key: str) -> str:
     return f"census:{spec['version']}/{file}#{key}"
 
 
+def _figure(h: dict[str, Any], val: dict[str, Any], scorers: list[str]) -> dict[str, Any]:
+    """The payroll that passes, drawn as bars on one dollar axis: all three models, the two-of-three rule, and each
+    model alone. Positions are drawing geometry, laid out here so the page computes nothing."""
+    from .chart import axis, y
+
+    bars = [
+        ("All three models pass", h["agreed_all_three_usd"], "agreed3"),
+        ("Passes the screen: two of the three models", h["passes_usd"], "rule"),
+        *((f"{val['scorers'][k]['name']} alone", val["by_scorer"][k]["passes_usd"], k) for k in scorers),
+    ]
+    ax = axis([v for _, v, _ in bars], "USD", zero=True)
+    return {
+        "ticks": [{"left": round(100 - t["y"], 2), "label": t["label"]} for t in ax["ticks"]],
+        "bars": [{"label": lab, "usd": v, "id": i, "width": round(100 - y(v, ax), 2)} for lab, v, i in bars],
+    }
+
+
 def build(spec: dict[str, Any], fetched: dict[str, Any]) -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     """index.json and one document per role. Selects, sorts and joins; computes no share or verdict."""
     if not spec:
@@ -250,6 +267,7 @@ def build(spec: dict[str, Any], fetched: dict[str, Any]) -> tuple[dict[str, Any]
             "modelled_saving": h["modelled_saving_usd"],  # modelled: the page labels it so, and Ask cannot cite it
             "ref": ref(spec, "manifest.json", "headline"),
         },
+        "figure": {**_figure(h, val, scorers), "ref": ref(spec, "manifest.json", "headline")},
         "dial": [
             {"rule": x["rule"], "passes": x["freed"], "agreed3": x["agreed3"], "alone": x["alone"], "alone_rest": x["alone_rest"], "headline": x["headline"]}
             for x in val["dial"]

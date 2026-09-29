@@ -37,11 +37,15 @@ export function Inline({ text, facts, cites, tests }: { text: string; facts: Arg
   })}</>;
 }
 
+// A folio's anchor, from its label ("Folio III · the money" → folio-money); pages link to it by the same rule.
+export const folioId = (label: string) =>
+  `folio-${(label.split("·").pop() ?? "").trim().replace(/^the /, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`;
+
 export function Folios({ folios, facts, plates, cites, tests, after }: { folios: ReturnType<typeof parseEssay>["folios"]; facts: ArgumentDoc["facts"]; plates: Record<string, ReactNode>; cites?: Cites; tests?: Tests; after?: (label: string, i: number) => ReactNode }) {
   return (
     <>
       {folios.map((f, fi) => (
-        <section key={f.label} id={`folio-${(f.label.split("·").pop() ?? "").trim().replace(/^the /, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`} className="border-t border-grid pt-10 mt-12 first:mt-0 first:border-0 first:pt-0 scroll-mt-8">
+        <section key={f.label} id={folioId(f.label)} className="border-t border-grid pt-10 mt-12 first:mt-0 first:border-0 first:pt-0 scroll-mt-8">
           <div className="eyebrow">{f.label}</div>
           <h2 className="display text-[1.875rem] md:text-[2.375rem] leading-[1.08] mt-3 mb-6 max-w-[24ch]">{f.claim}</h2>
           <div className="prose-folio">
