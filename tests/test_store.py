@@ -174,3 +174,16 @@ def test_the_bands_table_carries_every_indicator_band_from_seed():
     # the concordance count reads those bands rather than restating them
     sql = __import__("yaml").safe_load(open("semantic/metrics.yaml"))["metrics"]["cross_tracker_concordance"]["sql"]
     assert "JOIN bands" in sql and "-0.03" not in sql
+
+
+def test_observations_by_glob_match_fnmatch_exactly_and_keep_their_order():
+    # check calls this hundreds of times; it must filter in the database, not by loading every row into Python
+    from fnmatch import fnmatch
+
+    s = st.Store()
+    rows = s.con.execute("SELECT * FROM observations ORDER BY as_of_date, series_key, id").fetchall()
+    cols = [d[0] for d in s.con.description]
+    everything = [dict(zip(cols, r)) for r in rows]
+    for globs in (("sec.*.revenue.*",), ("acq.*",), ("epoch.*.round_equity_usd.pt", "formd.*"), ("fred.?*",), ("nope.*",)):
+        want = [r["id"] for r in everything if any(fnmatch(r["series_key"], g) for g in globs)]
+        assert [r["id"] for r in s.observations(*globs)] == want, globs

@@ -10,7 +10,6 @@ import threading
 from collections import Counter
 from dataclasses import dataclass, field
 from datetime import date, datetime, timedelta, timezone
-from fnmatch import fnmatch
 from functools import cached_property
 from pathlib import Path
 from typing import Any
@@ -504,10 +503,13 @@ class Store:
 
     # ---- queries -------------------------------------------------------------------------------------------
     def observations(self, *globs: str) -> list[dict[str, Any]]:
-        cur = self.con.execute("SELECT * FROM observations ORDER BY as_of_date, series_key, id")
+        """Rows whose series key matches any glob (fnmatch syntax), filtered in the database: check calls this hundreds of times."""
+        if not globs:
+            return []
+        where = " OR ".join("series_key GLOB ?" for _ in globs)
+        cur = self.con.execute(f"SELECT * FROM observations WHERE {where} ORDER BY as_of_date, series_key, id", list(globs))
         cols = [d[0] for d in cur.description]
-        rows = [dict(zip(cols, r)) for r in cur.fetchall()]
-        return [r for r in rows if any(fnmatch(r["series_key"], g) for g in globs)]
+        return [dict(zip(cols, r)) for r in cur.fetchall()]
 
     def derived_for(self, metric: str, dims: dict[str, str] | None = None) -> list[Derived]:
         return sorted(

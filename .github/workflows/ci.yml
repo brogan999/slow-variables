@@ -1,8 +1,9 @@
 name: ci
 on:
   push:
-  pull_request:  # the nightly's bot PR only touches these paths; their gate runs inside the job that opens them
-    paths-ignore: ["data/**", "web/data/**", "web/public/data/**", "docs/**"]
+  # every PR reports, since python and web are required checks on main; the nightly's PR is opened with GITHUB_TOKEN,
+  # which triggers no workflow, so its gate runs inside the nightly and posts these two statuses itself
+  pull_request:
 permissions: { contents: read }
 concurrency: { group: "ci-${{ github.ref }}", cancel-in-progress: true }
 jobs:
@@ -29,4 +30,5 @@ jobs:
         with: { node-version: 22, cache: pnpm, cache-dependency-path: web/pnpm-lock.yaml }
       - run: pnpm install --frozen-lockfile
       - run: pnpm exec tsc --noEmit -p .
+      - run: pnpm lint
       - run: pnpm build

@@ -61,7 +61,7 @@ export default async function CensusRolePage({ params }: { params: Promise<{ occ
             ["Workers", fmt(r.emp, "count")],
           ]} />
           <MarginPanel title="Instrument">
-            <p>Each task was scored by three AI models and the verdict is their vote, under a rule frozen before this version's scores; no person judged individual tasks.{r.split === "equal" ? " The Labor Department publishes this role only with related ones, so its payroll is split evenly among them." : ""}</p>
+            <p>Each task was scored by three AI models and the verdict is their vote, under a rule frozen before this version&apos;s scores; no person judged individual tasks.{r.split === "equal" ? " The Labor Department publishes this role only with related ones, so its payroll is split evenly among them." : ""}</p>
             <p><a href={d.csv} className={link}>All tasks as CSV</a> · <Link href="/census#method" className={link}>Method and what failed</Link></p>
           </MarginPanel>
         </>
