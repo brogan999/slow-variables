@@ -129,6 +129,12 @@ def problems(
         errors += [f"{where} types {d}" for t in text for d in stray_digits(t)]
         if not c.get("judged_by"):
             errors.append(f"{where} does not say who judged it")
+        if c.get("reviewed_by") and not c.get("reviewed"):
+            errors.append(f"{where} names who reviewed it but not when")
+        if c.get("reviewed") and not c.get("reviewed_by"):
+            errors.append(f"{where} dates a review but not who made it")
+        if c.get("reviewed_by") and re.search(r"\breviews this profile before\b", c.get("disclosure") or ""):
+            errors.append(f"{where}: its disclosure still promises a review it has had")
     return errors
 
 
