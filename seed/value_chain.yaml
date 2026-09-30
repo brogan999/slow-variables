@@ -6,7 +6,7 @@ companies:
   role: candidate
   units:
   - vc_semis
-  market: "ASML sells lithography machines, the tools that print a chip's circuit pattern with light onto a wafer (a thin silicon disc later cut into chips), plus the service, upgrades and software that keep them running. Its most advanced line uses extreme ultraviolet light (EUV, light of a very short wavelength that can print the finest features). Its newest EUV design, High-NA (optics that gather more light, to print still finer features), has gone mostly to customers' research sites, and the filing says ASML has now released its first full-specification High-NA machine to its first customer. The filing says ASML is currently the world's only maker of EUV machines, and names Canon and Nikon as rivals only in the older deep-ultraviolet machines. Its buyers are chip factories making logic (processors) and memory. In 2025 its logic sales grew, driven by foundries (factories that make chips to other firms' designs) building for AI demand, while its memory sales fell; sales of older machines in China were stronger than it expected. ASML files a 20-F (the annual report foreign companies file with the US regulator) under IFRS, the international accounting rules, so this site's filing reader records no figures for it."
+  market: "ASML sells lithography machines, the tools that print a chip's circuit pattern with light onto a wafer (a thin silicon disc later cut into chips), plus the service, upgrades and software that keep them running. Its most advanced line uses extreme ultraviolet light (EUV, light of a very short wavelength that can print the finest features). Its newest EUV design, High-NA (optics that gather more light, to print still finer features), has gone mostly to customers' research sites, and the filing says ASML has now released its first full-specification High-NA machine to its first customer. The filing says ASML is currently the world's only maker of EUV machines, and names Canon and Nikon as rivals only in the older deep-ultraviolet machines. Its buyers are chip factories making logic (processors) and memory. In 2025 its logic sales grew, driven by foundries (factories that make chips to other firms' designs) building for AI demand, while its memory sales fell; sales of older machines in China were stronger than it expected. ASML files a 20-F (the annual report foreign companies file with the US regulator) with US GAAP accounts; this site's filing reader does not yet read it, so it records no figures for it."
   customers: "A small group of chip makers: the leading logic foundries and the memory makers. The filing does not name them, but says its largest customer's share of its sales rose in 2025 and that its sales lean heavily on its two largest customers. The rankings shift from year to year."
   concentration: concentrated
   powers:
@@ -197,11 +197,11 @@ companies:
   units:
   - vc_semis
   market: "NVIDIA designs accelerators, chips built to do the huge number of simple sums that training and running AI models needs, mostly graphics processors (GPUs). It sells them as chips and as whole server racks, with the networking gear that ties many of them together and the software developers write their code against (CUDA, its programming platform). It does not make the chips itself: foundries, factories that make chips to other firms' designs, make its wafers (the silicon discs chips are cut from). Its filing says it brings out a new data-centre architecture every year. How big it can become depends, in this site's judgement, on how long the big buyers keep raising their spending on AI data centres."
-  customers: "The filing lists cloud providers, newer specialist clouds it calls neoclouds, model makers, companies and governments. Most chips reach them through server makers and assemblers, so the direct customers are middlemen. In the year to January 2026 its largest direct customer and its second largest each took a large part of revenue, and the filing says some indirect buyers, reached through those channels, were also each large enough to disclose. This site judges that those end buyers are largely the same few companies designing chips of their own."
+  customers: "The filing lists cloud providers, newer specialist clouds it calls neoclouds, model makers, companies and governments. Most chips reach them through server makers, assemblers and distributors, though some cloud providers and model makers also buy directly. The filing also estimates that one AI research and deployment company contributed a meaningful amount of revenue by buying cloud services from its customers. In the year to January 2026 its two largest direct customers each took a large part of revenue, and in the first half of the following year three did; and the filing says some indirect buyers, reached through those channels, were also each large enough to disclose. This site judges that those end buyers are largely the same few companies designing chips of their own."
   concentration: concentrated
   powers:
   - power: switching_costs
-    why: "Years of AI code, tools and staff skills are written for CUDA, so moving to another chip means rewriting and retesting; this site's filed figures show the benefit in a gross margin (the share of sales left after the direct cost of making them) well above AMD's even as rivals shipped."
+    why: "Years of AI code, tools and staff skills are written for CUDA, so moving to another chip means rewriting and retesting; this site's filed figures show the benefit in a gross margin (the share of sales left after the direct cost of making them) well above AMD's even as rivals shipped. In 2026 it agreed to buy Hugging Face, a platform where developers share and run open models, and committed to keep it open to other chip makers."
   - power: scale_economies
     why: "This site judges that as one of the largest buyers of wafers, advanced packaging and memory it spreads a very large research budget over the most units, and that a new architecture every year is a pace a smaller rival cannot fund from its own sales."
   depends_on:
@@ -225,13 +225,13 @@ companies:
   - "Software that lets the same model code run on any chip does not make the choice of chip a matter of price alone."
   - "It keeps first call on the leading foundry's newest process and on advanced packaging (mounting the chip and its memory together on one base), and that foundry keeps operating in Taiwan without interruption."
   - "Export controls stop short of shutting it out of markets beyond China, and a China-only product line is not the price of staying in the rest."
-  - "Its own lending, guarantees and equity stakes in customers stay small next to sales, so demand is paid for by buyers and not by NVIDIA's balance sheet."
+  - "Its own guarantees, cloud-capacity commitments and equity stakes in customers stay small next to sales, so demand is paid for by buyers and not by NVIDIA's balance sheet; its latest quarterly filing adds a guarantee on OpenAI's data-centre leases and commitments to rent back computing from AI clouds that buy its systems, which puts this condition under strain."
   would_disprove:
   - "The site's non-NVIDIA share of AI computing shipped rising until chips from other designers make up most of the AI computing shipped, and still climbing."
   - "NVIDIA's quarterly gross margin falling towards AMD's while the site's accelerator tightness word reads easing."
   - "A top direct customer's share of revenue falling sharply in the same year that customer announces a larger own-chip deployment."
   - "The largest cloud companies cutting capital spending quarter after quarter."
-  - "New export rules requiring licences for sales to allied countries or to the Gulf, or a new write-down of chips it cannot sell."
+  - "New export rules that go beyond the existing Gulf licensing to require licences for sales to allied countries, or a write-down of chips it cannot sell that is larger than the H20 and H200 charges already taken."
   - "The site's reading of circular financing, chip makers funding the customers who buy their chips, growing faster than NVIDIA's revenue."
   - "The site's chip makers' share of gross profit with the cloud and labs falling while chips stay short, which would undercut the view that whoever holds the scarcest input collects."
   sources:
@@ -239,12 +239,15 @@ companies:
     - nvda_10k_fy26
     customers:
     - nvda_10k_fy26
+    - nvda_10q_q2_fy27
     powers:
     - nvda_10k_fy26
+    - nvda_hugging_face_8k_2026
     must_be_true:
     - nvda_10k_fy26
     - broadcom_10k_fy25
     - tsmc_20f_2025
+    - nvda_10q_q2_fy27
   judged_by: claude-opus-5.5
   reviewed_by: Alex Brogan
   reviewed: 2026-09-28
@@ -253,8 +256,8 @@ companies:
   role: club
   units:
   - vc_semis
-  market: "Broadcom sells two things. The first is chips, and in AI that means custom accelerators (chips it designs to each big buyer's own plan, which it calls XPUs) plus the Ethernet switches, network cards and optical parts that connect them. The second is infrastructure software, mostly VMware, which lets a company run many virtual computers on its own servers. Its semiconductor segment, the chip business it reports separately, brought in most of its revenue in the year to November 2025. This site judges its AI market grows if the largest buyers shift from buying NVIDIA's chips to designing their own, because Broadcom does design and production work for such buyers. This profile judges its rent for its AI chip role, custom accelerators and networking, not for VMware."
-  customers: "Hyperscalers (the handful of companies that run the largest clouds), AI data-centre builders, and OEMs (original equipment makers that build servers, switches and racks). The filing says distributors take a large part of its sales and a few end customers a large part of its revenue, and it expects that concentration to continue. It does not name the custom-chip buyers."
+  market: "Broadcom sells two things. The first is chips, and in AI that means custom accelerators (chips it designs to each big buyer's own plan, which it calls XPUs), whole racks and systems built on them, plus the Ethernet switches, network cards and optical parts that connect them. The second is infrastructure software, mostly VMware, which lets a company run many virtual computers on its own servers. Its semiconductor segment, the chip business it reports separately, brought in most of its revenue in the year to November 2025. This site judges its AI market grows if the largest buyers shift from buying NVIDIA's chips to designing their own, because Broadcom does design and production work for such buyers. This profile judges its rent for its AI chip role, custom accelerators and networking, not for VMware."
+  customers: "Hyperscalers (the handful of companies that run the largest clouds), companies building frontier AI models, system integrators, and OEMs (original equipment makers that build servers, switches and racks). The filing says distributors take a large part of its sales and a few end customers a large part of its revenue, a share that rose sharply in 2026, and it expects that concentration to continue. The annual filing does not name the custom-chip buyers, but a 2026 filing names Google, for future generations of its TPUs with supply through 2031, and Anthropic, which will take TPU computing capacity through Broadcom from 2027."
   concentration: concentrated
   powers:
   - power: scale_economies
@@ -274,9 +277,10 @@ companies:
   must_be_true:
   - "Custom chips keep winning a growing share of AI computing from NVIDIA's chips, the opposite of what NVIDIA needs."
   - "The big buyers keep paying an outside designer for that work instead of taking it in house or moving it to cheaper design partners, even as they learn to do more of it themselves."
-  - "Ethernet, an open standard, stays the way AI clusters are wired, rather than NVIDIA's own networking."
+  - "Open-standard Ethernet built on its switch chips stays the way AI clusters are wired, rather than NVIDIA's own networking, which now includes Ethernet as well as NVLink and InfiniBand."
   - "A few customers each keep ordering new generations, since losing a single programme would hit its AI revenue hard."
   - "Wafers at the newest processes, advanced packaging (mounting a chip and its memory together) and high-bandwidth memory (memory stacked beside the chip so it can feed it fast) stay available to it, which today means the Taiwan foundry."
+  - "Its backstops of customers' rack leases and any notes it takes from customers stay small next to sales, so its AI revenue is paid for by buyers and not by Broadcom's balance sheet; its latest quarterly filing adds a backstop on one customer's rack leases and the possibility of taking that customer's convertible notes."
   would_disprove:
   - "A named hyperscaler announcing that its next accelerator generation will be designed in house or with another design partner."
   - "The top five end customers' share rising while AI chip revenue falls, meaning dependence is deepening as the business shrinks."
@@ -287,16 +291,19 @@ companies:
     - broadcom_10k_fy25
     customers:
     - broadcom_10k_fy25
+    - broadcom_google_anthropic_8k_2026
+    - broadcom_10q_q3_fy26
     powers:
     - broadcom_10k_fy25
     must_be_true:
     - broadcom_10k_fy25
     - nvda_10k_fy26
     - tsmc_20f_2025
+    - broadcom_10q_q3_fy26
   judged_by: claude-opus-5.5
   reviewed_by: Alex Brogan
   reviewed: 2026-09-28
-  disclosure: null
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviewed this profile before it was published."
 - entity: amd
   role: candidate
   units:
@@ -349,8 +356,8 @@ companies:
   role: club
   units:
   - vc_semis
-  market: "TSMC is a foundry, a company that manufactures chips other firms design, printing them on wafers (thin silicon discs later cut into chips). It also does the advanced packaging (CoWoS and SoIC, ways of mounting a processor and its memory together on one base) that AI accelerators need. High-performance computing, which includes AI chips, made up most of its revenue in 2025, and chips at its most advanced nodes (its newest manufacturing processes, which print the smallest features) made up most of its wafer revenue. Its filing calls its scale and capacity, particularly for advanced technologies, a major competitive advantage. This site judges its market grows with every chip designer's AI demand, whoever among them wins. TSMC files a 20-F (the annual report foreign companies file with the US regulator) under IFRS, the international accounting rules, so this site's filing reader records no filed figures for it."
-  customers: "Many customers, but its ten largest took most of its revenue in 2025, a share that has risen each year since 2023, while its single largest customer's share fell over the same years. The filing does not name them. The NVIDIA, Broadcom and AMD filings each name TSMC among the foundries that make their wafers."
+  market: "TSMC is a foundry, a company that manufactures chips other firms design, printing them on wafers (thin silicon discs later cut into chips). It also does the advanced packaging (which its filing sells as silicon stacking and packaging services, CoWoS among them: ways of mounting or stacking a processor and its memory together) that AI accelerators need. High-performance computing, which includes AI chips, made up most of its revenue in 2025, and chips at its most advanced nodes (its newest manufacturing processes, which print the smallest features) made up most of its wafer revenue. Its filing calls its scale and capacity, particularly for advanced technologies, a major competitive advantage. This site judges its market grows with every chip designer's AI demand, whoever among them wins. TSMC files a 20-F (the annual report foreign companies file with the US regulator) under IFRS, the international accounting rules, so this site's filing reader records no filed figures for it."
+  customers: "Many customers, but its ten largest took most of its revenue in 2025, a share that has risen each year since 2023, while its single largest customer's share fell over the same years and its second largest customer's share rose sharply. The filing does not name them. The NVIDIA, Broadcom and AMD filings each name TSMC among the foundries that make their wafers."
   concentration: concentrated
   powers:
   - power: scale_economies
@@ -404,12 +411,12 @@ companies:
   role: club
   units:
   - vc_hyperscalers_neoclouds
-  market: "Microsoft sells software and cloud services. Its Intelligent Cloud segment (a part of the business it reports separately) holds Azure, its public cloud: computing, storage and AI services rented from its own data centres around the world and billed mostly by how much customers use. The filing says Azure offers AI computing at very large scale, the latest models, and hardware that includes chips Microsoft designs itself alongside chips from partners. It also sells AI inside products businesses already pay for, such as its office software and GitHub. In the year to June 2026 Azure revenue grew strongly, and the filing says the gross margin percentage of its cloud business (the share of sales left after the direct cost of providing it) fell because of spending on AI infrastructure and rising AI use. It warns that its AI and cloud investments will keep raising costs and may lower operating margins. This site judges its market to be both renting computing for training AI models and for inference (running a trained model to answer requests), and selling AI features to the companies that already run on its software. How big that becomes depends on whether AI revenue grows into the spending."
+  market: "Microsoft sells software and cloud services. Its Intelligent Cloud segment (a part of the business it reports separately) holds Azure, its public cloud: computing, storage and AI services rented from its own data centres around the world and billed mostly by how much customers use. The filing says Azure offers AI computing at very large scale, the latest models, and hardware that includes chips Microsoft designs itself alongside chips from partners. It also sells AI inside products businesses already pay for, such as its office software and GitHub. Until mid-2026 Azure sat in its Intelligent Cloud segment; from the year to June 2027 Microsoft reports it inside a new Agents and Infra segment with its office software, GitHub and licensing, and its reported Azure figure excludes GitHub and Security Copilot, which move to its office-software cloud. In the year to June 2026 Azure revenue grew strongly, and the filing says the gross margin percentage of its cloud business (the share of sales left after the direct cost of providing it) fell because of spending on AI infrastructure and rising AI use. It warns that its AI and cloud investments will keep raising costs and may lower operating margins. This site judges its market to be both renting computing for training AI models and for inference (running a trained model to answer requests), and selling AI features to the companies that already run on its software. How big that becomes depends on whether AI revenue grows into the spending."
   customers: "Businesses of every size, developers and governments; the filing gives no single customer's share of total revenue. It does name OpenAI. Microsoft holds a large minority stake in OpenAI, accounted for by the equity method (it records a share of OpenAI's results rather than adding in OpenAI's whole accounts), which makes OpenAI a related party (a company close enough that dealings with it must be disclosed); it discloses revenue from commercial arrangements with OpenAI, including revenue-sharing payments, and holds rights to OpenAI's models and other intellectual property for use in its products. The filing says some partners that supply AI models are also significant Azure customers and may change how much they buy. Its commercial remaining performance obligations (revenue already contracted but not yet delivered or recognised) grew sharply; this site's records, from an earlier Microsoft quarterly filing, show a large part of that backlog came from OpenAI. This site's records also hold an Anthropic commitment to buy Azure computing. The CoreWeave and Nebius filings name Microsoft as a large buyer of their capacity, so Microsoft also rents from neoclouds (newer clouds that specialise in renting AI chips). David Teece, an economist who studied why inventors often fail to keep the returns from what they invent, found that the firm holding the complementary assets (the distribution, sales and systems a product needs to reach buyers) often keeps the profit; this site judges that Microsoft holds its own: its data centres and its customers."
   concentration: moderate
   powers:
   - power: switching_costs
-    why: "Companies run their identity, office software, servers and data on Microsoft together, and the filing names hybrid cloud (linking a customer's own data centres with Azure) as Azure's advantage; this site judges the benefit shows in an Intelligent Cloud operating margin (the share of sales left after running costs) that this site's filed figures put at or near the top of the big clouds, and the barrier is the cost of moving years of systems. This holds for the work firms already run there; this site judges it is not yet proven for AI work in particular."
+    why: "Companies run their identity, office software, servers and data on Microsoft together, and the filing names hybrid cloud (linking a customer's own data centres with Azure) as Azure's advantage; this site judges the benefit shows in an Intelligent Cloud operating margin (the share of sales left after running costs) that this site's filed figures put at or near the top of the big clouds, a segment Microsoft stops reporting from the year to June 2027, and the barrier is the cost of moving years of systems. This holds for the work firms already run there; this site judges it is not yet proven for AI work in particular."
   - power: scale_economies
     why: "This site judges that a worldwide network of data centres spreads the cost of chips, power contracts and its own chip designs over the largest volumes, so a rival would need similar volume to match its cost; the filing's note that AI spending is lowering its cloud gross margin shows this benefit is under strain."
   depends_on:
@@ -433,7 +440,7 @@ companies:
   - "Power, components and the large data-centre leases it has signed but not yet started all arrive on time; the filing warns that power limits and component shortages could restrict its capacity."
   - "Prices for AI services do not fall faster than its costs; the filing names competition and commoditisation, goods becoming interchangeable and sold on price, as a risk to AI pricing."
   would_disprove:
-  - "The Intelligent Cloud operating margin in this site's filed figures falling quarter after quarter while capital spending keeps rising."
+  - "The Agents and Infra operating margin, or the Microsoft Cloud gross margin, in this site's filed figures falling quarter after quarter while capital spending keeps rising."
   - "Commercial remaining performance obligations shrinking against revenue, the test this site's backlog claim sets."
   - "OpenAI moving a large block of its committed spending to other clouds, renegotiating it down, or failing to pay."
   - "A write-down of AI servers, a shortening of their useful lives, or unwinding of data-centre leases before they start."
@@ -441,12 +448,14 @@ companies:
   sources:
     market:
     - msft_10k_fy26
+    - msft_segments_8k_2026
     customers:
     - msft_10k_fy26
     - crwv_10k_fy25
     - nbis_20f_2025
     powers:
     - msft_10k_fy26
+    - msft_segments_8k_2026
     must_be_true:
     - msft_10k_fy26
     - crwv_10k_fy25
@@ -458,8 +467,8 @@ companies:
   role: club
   units:
   - vc_hyperscalers_neoclouds
-  market: "Amazon's cloud arm, Amazon Web Services (AWS), is a segment it reports separately. It rents on-demand computing, storage, databases, analytics and AI and machine-learning services to developers and to organisations of every size, from start-ups to government agencies. The filing says its cash capital spending (money spent on buildings and equipment) rose sharply in 2025, mostly on technology infrastructure, the majority of it to support AWS growth, and that it expected that spending to increase again in 2026. Having lengthened the estimated useful life of its servers in 2024, it shortened it for some servers and network equipment in 2025, citing the faster pace of AI technology, which raised its depreciation (the yearly charge for wear on equipment). This site's filed figures show the AWS operating margin (the share of sales left after running costs) holding steady through that record spending. This site judges its market to be the rented computing on which companies and AI labs train and run models, and that its size depends on how much AI work moves into the cloud rather than staying on companies' own machines or moving to the labs' own data centres."
-  customers: "Developers and enterprises of all sizes; the filing discloses no customer large enough to report separately, and it says AWS holds most of its long-term customer commitments not yet recognised as revenue. It names Anthropic, a maker of AI models: Amazon has invested in Anthropic through convertible notes (loans that can turn into shares) and non-voting preferred shares (shares that rank ahead of ordinary shares for payouts but carry no vote), recorded large gains on those stakes in 2025, and has a commercial arrangement with Anthropic mainly for AWS cloud services, including the use of AWS's own chips. This site's records also hold an Anthropic commitment to Microsoft's cloud, so Anthropic is not AWS's alone. David Teece, an economist who studied why inventors often fail to keep the returns from what they invent, found that the firm holding the complementary assets (the distribution, sales and systems a product needs to reach buyers) often keeps the profit; this site judges that Amazon holds its own: its data centres and its customers."
+  market: "Amazon's cloud arm, Amazon Web Services (AWS), is a segment it reports separately. It rents on-demand computing, storage, databases, analytics and AI and machine-learning services to developers and to organisations of every size, from start-ups to government agencies. The filing says its cash capital spending (money spent on buildings and equipment) rose sharply in 2025, mostly on technology infrastructure, the majority of it to support AWS growth, and that it expected that spending to increase again in 2026. In 2026 it also began borrowing heavily in several currencies and said it expects further financing that year. Having lengthened the estimated useful life of its servers in 2024, it shortened it for some servers and network equipment in 2025, citing the faster pace of AI technology, which raised its depreciation (the yearly charge for wear on equipment). This site's filed figures show the AWS operating margin (the share of sales left after running costs) holding steady through that record spending. This site judges its market to be the rented computing on which companies and AI labs train and run models, and that its size depends on how much AI work moves into the cloud rather than staying on companies' own machines or moving to the labs' own data centres."
+  customers: "Developers and enterprises of all sizes; the filing discloses no customer large enough to report separately, and it says AWS holds most of its long-term customer commitments not yet recognised as revenue. It names Anthropic, a maker of AI models: Amazon has invested in Anthropic through convertible notes (loans that can turn into shares) and non-voting preferred shares (shares that rank ahead of ordinary shares for payouts but carry no vote), recorded large gains on those stakes in 2025, bought more preferred shares in 2026, and set up a loan facility that opens up as AWS delivers computing to Anthropic, taking Anthropic notes, or shares after a listing, for what is drawn; its large gains on the stake come from Anthropic's new funding rounds. It has a commercial arrangement with Anthropic mainly for AWS cloud services, including the use of AWS's own chips. In 2026 it also bought preferred shares in OpenAI, paid the rest of its commitment soon after, and widened its AWS arrangement with OpenAI; its quarterly filing names Anthropic and OpenAI as its main private stakes. This site's records also hold an Anthropic commitment to Microsoft's cloud, so Anthropic is not AWS's alone. David Teece, an economist who studied why inventors often fail to keep the returns from what they invent, found that the firm holding the complementary assets (the distribution, sales and systems a product needs to reach buyers) often keeps the profit; this site judges that Amazon holds its own: its data centres and its customers."
   concentration: diffuse
   powers:
   - power: switching_costs
@@ -480,25 +489,29 @@ companies:
   durability: long
   must_be_true:
   - "AI revenue on AWS grows into the capital spending before the servers wear out; the filing already shortened server lives because AI hardware ages faster."
-  - "Anthropic keeps growing, keeps much of its training and inference on AWS, and pays; the value of Amazon's stake and the commercial arrangement both rest on it."
+  - "Anthropic and OpenAI both keep growing, keep much of their work on AWS, and pay; Amazon now holds large stakes in both and has long cloud contracts with both, so the value of those stakes and contracts rests on the two labs."
   - "AWS's own AI chips carry a large and growing share of the work, so Amazon is not left paying NVIDIA's prices for most of its AI capacity."
   - "Most companies choose to run AI where their data already sits, on AWS, rather than on specialist neoclouds (newer clouds that rent out AI chips) or through the labs' own services."
   - "Power, land and chips, including memory chips whose supply the filing calls volatile, arrive fast enough that data centres are neither short nor stranded; the filing warns that mis-predicting demand can leave excess or too little capacity and lead to impairment charges (write-downs of an asset's recorded value)."
   would_disprove:
   - "The AWS operating margin in this site's filed figures falling for several quarters running while capital spending keeps rising."
   - "Anthropic moving the bulk of its new computing to other clouds or to data centres of its own."
-  - "A write-down of Amazon's Anthropic stake, or of AI servers bought in the build-out."
+  - "A write-down of Amazon's stakes in Anthropic or OpenAI, or of AI servers bought in the build-out; or Anthropic paying for much of its AWS computing with money drawn from Amazon's own facility."
   - "Another shortening of server useful lives within a few years of the last one."
   - "AWS's growth in rented AI computing trailing the neoclouds' for several years."
   sources:
     market:
     - amzn_10k_fy25
+    - amzn_10q_q2_2026
     customers:
     - amzn_10k_fy25
+    - amzn_10q_q2_2026
+    - openai_amazon_8k_2026
     powers:
     - amzn_10k_fy25
     must_be_true:
     - amzn_10k_fy25
+    - amzn_10q_q2_2026
   judged_by: claude-opus-5.5
   reviewed_by: Alex Brogan
   reviewed: 2026-09-28
@@ -508,8 +521,8 @@ companies:
   units:
   - vc_hyperscalers_neoclouds
   - vc_frontier_labs
-  market: "Alphabet sits in two parts of the chain. As a cloud, Google Cloud rents computing, storage and AI services, offering both graphics processors (GPUs) and its own tensor processing units (TPUs, chips Google designs for the maths AI models run on; the filing names Ironwood as its seventh generation), plus Vertex AI, a platform for building on its Gemini models and other companies' models, and Workspace office software. As a frontier lab (a company building the most capable AI models), it develops the Gemini models, which the filing says run across all of its largest consumer products, including Search through AI Overviews and AI Mode. The filing says the cost of developing its general AI models sits in Alphabet-wide costs rather than in the Google Cloud segment, and that cloud margins are generally lower than advertising margins. It spent heavily on capital (buildings and equipment) in 2025 and said it expected to raise that spending significantly in 2026. This site's filed figures show the Google Cloud operating margin (the share of sales left after running costs) rising sharply over the past year from the lowest among the big clouds. This site judges its market is both renting AI computing and selling AI inside its most widely used consumer products, and that owning chips, models and distribution together is rare."
-  customers: "Advertisers across the world pay for most of Alphabet's revenue, and the filing names no customer large enough to report separately. Google Cloud sells to businesses and developers; the filing says its remaining performance obligations (revenue contracted but not yet recognised) relate primarily to Google Cloud, and that it has a number of large, long-duration commercial agreements. It also says it has made debt and equity investments in companies with which it signed commercial arrangements at or near the same time, and that if such an investment were impaired it might have to reduce the related contracted revenue; the filing does not name those companies. This site's records hold equity investments by Google in Anthropic, which has also signed for Google's TPU capacity. Alphabet enters significant leases with outside data-centre operators, and has given credit backstops (promises to cover a borrower's debts if it defaults) to data-centre entities it does not control."
+  market: "Alphabet sits in two parts of the chain. As a cloud, Google Cloud rents computing, storage and AI services, offering both graphics processors (GPUs) and its own tensor processing units (TPUs, chips Google designs for the maths AI models run on; the filing names Ironwood as its seventh generation), plus Vertex AI, a platform for building on its Gemini models and other companies' models, and Workspace office software. As a frontier lab (a company building the most capable AI models), it develops the Gemini models, which the filing says run across all of its largest consumer products, including Search through AI Overviews and AI Mode. The filing says the cost of developing its general AI models sits in Alphabet-wide costs rather than in the Google Cloud segment, and that margins on its revenue outside advertising, Google Cloud among it, are generally lower than advertising margins. It spent heavily on capital (buildings and equipment) in 2025 and said it expected to raise that spending significantly in 2026; in 2026 it also began selling new shares and mandatory convertible preferred stock, set up a programme to sell more shares over time, and borrowed heavily in several currencies. This site's filed figures show the Google Cloud operating margin (the share of sales left after running costs) rising sharply over the past year from the lowest among the big clouds. This site judges its market is both renting AI computing and selling AI inside its most widely used consumer products, and that owning chips, models and distribution together is rare."
+  customers: "Advertisers across the world pay for most of Alphabet's revenue, and the filing names no customer large enough to report separately. Google Cloud sells to businesses and developers; the filing says its remaining performance obligations (revenue contracted but not yet recognised) relate primarily to Google Cloud, and that it has a number of large, long-duration commercial agreements. It also says it has made debt and equity investments in companies with which it signed commercial arrangements at or near the same time, and that if such an investment were impaired it might have to reduce the related contracted revenue; the filing does not name those companies. Google invested again in Anthropic in April 2026 and promised more if Anthropic meets performance targets; Alphabet's quarterly filing records forward funding commitments of that kind, tied to milestones, on a strategic investment it does not name. Anthropic has also signed for Google's TPU capacity. Alphabet enters significant leases with outside data-centre operators, and has agreed to backstop payments on certain third-party data-centre leases (to cover them if the tenant defaults), with the right to take over the leases."
   concentration: diffuse
   powers:
   - power: scale_economies
@@ -531,26 +544,32 @@ companies:
   durability: long
   must_be_true:
   - "Gemini stays among the most capable models, so Alphabet does not have to pay another lab for the models that run its own products."
-  - "AI answers in Search keep earning at least what the old results page earned, so the advertising that pays for the build-out holds."
+  - "AI answers in Search keep earning at least what the old results page earned, so advertising keeps carrying most of the build-out; in 2026 Alphabet also began selling new shares and convertible preferred stock and borrowing heavily, so the build-out now leans on outside capital too."
   - "TPUs stay competitive with NVIDIA's chips generation after generation, and outside customers keep choosing them, turning a cost advantage into a cloud business."
-  - "The Google Cloud margin keeps rising as the contracted backlog turns into revenue, even as the filing warns that cloud margins are lower than advertising's."
-  - "Companies it invested in and also sells cloud services to stay solvent and pay, and the credit backstops it has given to data-centre entities are not called."
+  - "The Google Cloud margin keeps rising as the contracted backlog turns into revenue, even as the filing warns that margins outside advertising, cloud among them, are generally lower than advertising's."
+  - "Companies it invested in and also sells cloud services to stay solvent and pay, and the backstops it has given on data-centre leases are not called."
   - "Its capital spending earns back before the equipment ages out; the filing warns that expected technology advances could change the period over which it benefits from these assets."
   would_disprove:
   - "The Google Cloud operating margin in this site's filed figures turning down while capital spending keeps rising."
-  - "A payment under one of its data-centre credit backstops, or a cut to contracted revenue after an impaired investment."
+  - "A payment under one of its data-centre lease backstops, or a cut to contracted revenue after an impaired investment."
   - "Large TPU customers moving their next generation of work back to GPUs."
   - "Search revenue falling while more answers are given by AI, showing the answers earn less than the links they replace."
   - "Gemini falling well behind rival models for several model generations in a row."
   sources:
     market:
     - googl_10k_fy25
+    - googl_atm_8k_2026
+    - googl_10q_q2_2026
     customers:
     - googl_10k_fy25
+    - googl_10q_q2_2026
+    - anthropic_google_investment_2026
     powers:
     - googl_10k_fy25
     must_be_true:
     - googl_10k_fy25
+    - googl_atm_8k_2026
+    - googl_10q_q2_2026
   judged_by: claude-opus-5.5
   reviewed_by: Alex Brogan
   reviewed: 2026-09-28
@@ -698,7 +717,7 @@ companies:
   units:
   - vc_frontier_labs
   market: "OpenAI builds frontier models (the most capable AI systems of their time, trained on huge amounts of text and computing power) and sells them as products people and firms use directly, above all ChatGPT, its chat app, for which this site's records hold a very large weekly user count reported by OpenAI, and through an API (a connection that lets other companies' software send requests to the model and pay per use). Running a model to answer a request is called inference. OpenAI is now a public benefit corporation, or PBC (a for-profit company whose charter also commits it to a stated public purpose), and Microsoft, its long-standing investor, holds a large minority stake after the 2025 recapitalisation (a reorganisation of who owns the company). Its newer deals push toward selling whole systems to businesses: with Amazon it is building a runtime (the software layer an AI agent works inside, keeping memory of prior work and access to a firm's tools and data) for Amazon's cloud customers, and Amazon's cloud is the only outside cloud allowed to resell Frontier, its platform for running teams of AI agents inside a company. Microsoft may now pursue the most advanced AI on its own or with others, and OpenAI may now release open-weight models (models whose trained settings are published so anyone can run them) that meet capability criteria the agreement sets. This site's recorded revenue run-rate (the latest month's revenue scaled up to a full year) for OpenAI has grown steeply but in mid-2026 sat below Anthropic's. Run-rate figures are self-reported: the labs publish them or are the source behind press reports of them, and this profile rests on company and partner announcements, not audited filings. How big the market becomes depends on whether businesses pay for systems built around a model or only for the cheapest model that is good enough."
-  customers: "Consumers, most directly through ChatGPT, businesses and developers, plus other large companies that build on its models: Amazon will tailor OpenAI models for its own customer-facing apps. Microsoft keeps rights to OpenAI's models and products into the 2030s, and a revenue-share agreement between the two stays in place until an expert panel confirms that OpenAI has reached artificial general intelligence (AI that matches people across most work). API products OpenAI builds with third parties must run on Microsoft's Azure cloud, while its other products may run on any cloud. The sources name no revenue share by customer; this site judges the base is broad, with a direct line to consumers through ChatGPT, but that Microsoft and Amazon stand between OpenAI and many business buyers."
+  customers: "Consumers, most directly through ChatGPT, businesses and developers, plus other large companies that build on its models: Amazon will tailor OpenAI models for its own customer-facing apps. Microsoft keeps a licence to OpenAI's models and products into the 2030s, now non-exclusive. Under the April 2026 amendment OpenAI pays Microsoft a share of its revenue through 2030, whatever its technical progress, up to a total cap, and Microsoft no longer pays a share to OpenAI. Azure stays OpenAI's primary cloud and gets its products first, but OpenAI may now serve all its products on any cloud. The sources name no revenue share by customer; this site judges the base is broad, with a direct line to consumers through ChatGPT, but that Microsoft and Amazon stand between OpenAI and many business buyers."
   concentration: moderate
   powers:
   - power: scale_economies
@@ -720,14 +739,14 @@ companies:
   asset_owner: platforms
   durability: short
   must_be_true:
-  - "Revenue grows into its compute commitments (contracts to buy computing power for years ahead): it has contracted for a large further block of Azure services from Microsoft; agreed to deploy AMD's chips across several generations, receiving a warrant (a right to buy AMD shares) tied to those purchases; expanded its multi-year Amazon agreement to cover gigawatts of Amazon's own Trainium chips (Amazon's in-house AI chips; a gigawatt is a very large amount of electric power, about what a big power station produces); and signed multi-year contracts with CoreWeave (a neocloud, a newer firm that rents out AI chips). This site's records also hold a press-reported agreement to buy computing from Oracle, and guarantees from NVIDIA for part of a data-centre build leased to OpenAI. Revenue must rise at least as fast as these bills fall due."
+  - "Revenue grows into its compute commitments (contracts to buy computing power for years ahead): it has contracted for a large further block of Azure services from Microsoft; agreed to deploy AMD's chips across several generations, receiving a warrant (a right to buy AMD shares) tied to those purchases; expanded its multi-year Amazon agreement to cover gigawatts of Amazon's own Trainium chips (Amazon's in-house AI chips; a gigawatt is a very large amount of electric power, about what a big power station produces); and signed multi-year contracts with CoreWeave (a neocloud, a newer firm that rents out AI chips). This site's records also hold a press-reported agreement to buy computing from Oracle, and NVIDIA's quarterly filing shows it guaranteeing parts of the lease payments on a data-centre campus in Ohio that SB Energy is building and leasing to OpenAI, with an option to extend that support as the site grows. Revenue must rise at least as fast as these bills fall due."
   - "Its prices and margins hold even though open-weight models trail the best closed models by months; this site's estimate of OpenAI's gross margin (revenue left after the direct cost of serving it) fell between 2024 and 2025."
   - "Businesses that build agents on Frontier or the Amazon runtime find it costly to move them, so the deployment, not the model, keeps the customer."
-  - "OpenAI, rather than Microsoft or Amazon, owns the relationship with business customers, even though Microsoft keeps rights to its models and a revenue-share agreement, and Amazon resells its platform."
+  - "OpenAI, rather than Microsoft or Amazon, owns the relationship with business customers, even though Microsoft keeps a non-exclusive licence to its models and a capped revenue share through 2030, and Amazon resells its platform."
   - "Its direct reach to consumers through ChatGPT, which OpenAI reports and this site cannot check, lasts and turns into paying use; a rival that matches ChatGPT reaches those users directly."
-  - "It can keep raising money without leaning further on the cloud and chip suppliers that are also its investors, Microsoft, Amazon and NVIDIA among them, because this site's record shows its revenue run-rate still below the equity (money investors paid for shares) it has raised."
+  - "It can keep raising money without leaning further on the cloud and chip suppliers that are also its investors, Microsoft, Amazon and NVIDIA among them, because this site's record shows its revenue run-rate still below the equity (money investors paid for shares) it has raised. Amazon's filing shows it paid the full equity commitment it made to OpenAI in early 2026 within months."
   would_disprove:
-  - "OpenAI cutting, delaying or renegotiating its compute commitments, or a supplier's filing showing it taking on OpenAI's obligations. This site's record holds a report, from anonymous sources, of OpenAI telling investors a lower compute-spending target than its chief executive had cited months before; this site notes the two figures are not strictly comparable."
+  - "OpenAI cutting, delaying or renegotiating its compute commitments, or a supplier paying out under a guarantee it gave for OpenAI's leases; NVIDIA has already guaranteed parts of the lease payments on one data-centre campus leased to OpenAI. This site's record holds a report, from anonymous sources, of OpenAI telling investors a lower compute-spending target than its chief executive had cited months before; this site notes the two figures are not strictly comparable."
   - "Its best models' prices falling toward open-weight prices while its share of business use also falls."
   - "Business customers of Frontier or the Amazon runtime moving their agents to rival models inside the same cloud at little cost."
   - "This site's gross-margin estimate for OpenAI falling again, or its recoupment ratio (a year's run-rate over the equity raised) falling while commitments rise."
@@ -741,6 +760,7 @@ companies:
     - openai_msft_recap_2025
     - openai_amazon_8k_2026
     - msft_10k_fy26
+    - openai_msft_amendment_2026
     powers:
     - openai_amazon_8k_2026
     must_be_true:
@@ -749,7 +769,11 @@ companies:
     - crwv_10k_fy25
     - msft_10k_fy26
     - amd_10k_fy25
-    - nvda_10k_fy26
+    - nvda_10q_q2_fy27
+    - openai_msft_amendment_2026
+    - amzn_10q_q2_2026
+    would_disprove:
+    - nvda_10q_q2_fy27
   judged_by: claude-opus-5.5
   reviewed_by: Alex Brogan
   reviewed: 2026-09-28
@@ -758,8 +782,8 @@ companies:
   role: candidate
   units:
   - vc_frontier_labs
-  market: "Anthropic builds frontier models (the most capable AI systems of their time), the Claude family, and sells them to businesses and developers through an API (a connection other software uses to send requests and pay per use), through its own apps, and through work tools: Claude Code, which writes and edits software, and Cowork, which brings Claude Code's abilities to other office work. Running a model to answer a request is called inference. It is a public benefit corporation, or PBC (a for-profit company whose charter also commits it to a stated public purpose). It calls itself the market leader in enterprise AI and coding; that is its own description. It says Claude is sold on the largest clouds, Amazon's, Google's and Microsoft's, and runs on Amazon's Trainium chips (Amazon's in-house AI chips), Google's TPUs (Google's in-house AI chips) and NVIDIA's GPUs (graphics processing units, the chips most AI runs on). This site's recorded revenue run-rate (the latest month's revenue scaled up to a full year) for Anthropic has grown steeply and in mid-2026 sat above OpenAI's. Run-rate figures are self-reported: the labs publish them or are the source behind press reports of them, and this profile rests on company and partner announcements, not audited filings. How big the market becomes depends on whether businesses keep paying a premium for its models once cheaper ones are good enough for the same work."
-  customers: "Mostly businesses and developers. It says most of the very largest US companies by revenue are customers, that the count of customers spending heavily with it has grown sharply, that firms which start with one use tend to widen it, and that enterprise use makes up most of Claude Code's revenue. It says Claude is sold through the three largest clouds, which also sell rival models, including Amazon's own Nova models and the models Alphabet develops; this site judges that part of its business arrives that way. The sources name no revenue share by customer; this site judges the base is moderately concentrated in large firms and in coding."
+  market: "Anthropic builds frontier models (the most capable AI systems of their time), the Claude family, and sells them to businesses and developers through an API (a connection other software uses to send requests and pay per use), through its own apps, and through work tools: Claude Code, which writes and edits software, and Cowork, which brings Claude Code's abilities to other office work. Running a model to answer a request is called inference. It is a public benefit corporation, or PBC (a for-profit company whose charter also commits it to a stated public purpose). It calls itself the market leader in enterprise AI and coding; that is its own description. It says Claude is sold on the largest clouds, Amazon's, Google's and Microsoft's, and runs on Amazon's Trainium chips (Amazon's in-house AI chips), Google's TPUs (Google's in-house AI chips) and NVIDIA's GPUs (graphics processing units, the chips most AI runs on). This site's recorded revenue run-rate (the latest month's revenue scaled up to a full year) for Anthropic has grown steeply and in mid-2026 sat above OpenAI's. Run-rate figures are self-reported: the labs publish them or are the source behind press reports of them, and Anthropic confidentially submitted a draft registration statement for a stock-market listing in June 2026; until that filing is public, this profile rests on company and partner announcements, not audited filings. How big the market becomes depends on whether businesses keep paying a premium for its models once cheaper ones are good enough for the same work."
+  customers: "Mostly businesses and developers. It says most of the very largest US companies by revenue are customers, that the count of customers spending heavily with it has grown sharply, that firms which start with one use tend to widen it, and that enterprise use makes up most of Claude Code's revenue. It says Claude is sold through the three largest clouds. Those clouds also offer rival models, including Amazon's own Nova models and Alphabet's Gemini; this site judges that part of its business arrives that way. The sources name no revenue share by customer; this site judges the base is moderately concentrated in large firms and in coding."
   concentration: moderate
   powers:
   - power: scale_economies
@@ -786,18 +810,19 @@ companies:
   - "Its prices and margins hold even though open-weight models (models whose trained settings are published so anyone can run them) trail the best closed models by months; this site's gross-margin estimate for Anthropic (revenue left after the direct cost of serving it) sits at about the same level as OpenAI's, which this site judges is well below a typical software firm's."
   - "Businesses that build Claude into their coding and daily work find it costly to move, even though the clouds that resell Claude sell rival models through the same menu."
   - "Anthropic, rather than Amazon, Google or Microsoft, owns the relationship with business customers, even though Amazon is its main cloud and training partner and a large investor."
-  - "Its edge in coding and business use, which it claims for itself and which Ramp's data on business spending show only narrowly, lasts; its revenue leans on those uses, so a rival that matches it there reaches its core customers directly."
-  - "It can keep raising money without leaning further on the cloud and chip suppliers that are also its investors, Amazon, Google, Microsoft and NVIDIA among them, because this site's record shows its revenue run-rate still below the equity (money investors paid for shares) it has raised."
+  - "Its lead in business use, which it claims for itself and which Ramp's data on how many businesses pay for each lab show as a narrow lead (Ramp does not measure coding separately), lasts; its revenue leans on those uses, so a rival that matches it there reaches its core customers directly."
+  - "It can keep raising money without leaning further on the cloud and chip suppliers that are also its investors, Amazon, Google, Microsoft and NVIDIA among them, because this site's record shows its revenue run-rate still below the equity (money investors paid for shares) it has raised. It already leans on them: in 2026 Amazon invested again and set up a loan facility that opens up as Amazon delivers computing to Anthropic, taking Anthropic notes, or shares after a listing, for what is drawn; Google invested again and promised more if Anthropic meets performance targets; and the memory makers Micron, Samsung and SK hynix joined its latest round."
   would_disprove:
   - "Anthropic cutting, delaying or renegotiating its capacity agreements, or a supplier's filing showing it carrying Anthropic's obligations."
   - "Its best models' prices falling toward open-weight prices while its share of business use also falls."
   - "Large coding or enterprise customers moving their work to another lab's model within the same cloud at little cost."
   - "This site's recoupment ratio for Anthropic (a year's run-rate over the equity raised) falling while its commitments rise; the latest reading is below the one before it."
-  - "Amazon's filings showing its return on Anthropic coming mainly from cloud spending Anthropic owes it rather than from Anthropic's own profit."
+  - "Amazon's filings showing its return on Anthropic coming mainly from cloud spending Anthropic owes it, including spending paid for by drawing on Amazon's own loan facility, or from marking up its stake at new funding rounds, rather than from Anthropic's own profit."
   sources:
     market:
     - anthropic_series_g_2026
     - anthropic_series_h_2026
+    - anthropic_s1_notice_2026
     customers:
     - anthropic_series_g_2026
     - anthropic_series_h_2026
@@ -810,6 +835,11 @@ companies:
     - anthropic_series_g_2026
     - fluidstack_anthropic_dc_2025
     - amzn_10k_fy25
+    - amzn_10q_q2_2026
+    - anthropic_google_investment_2026
+    - anthropic_ramp_index_2026
+    would_disprove:
+    - amzn_10q_q2_2026
   judged_by: claude-opus-5.5
   reviewed_by: Alex Brogan
   reviewed: 2026-09-28
@@ -1364,8 +1394,8 @@ companies:
   units:
   - vc_consumer_ai
   - vc_frontier_labs
-  market: "Meta runs Facebook, Instagram, Messenger, WhatsApp and Threads, and its 10-K (the annual report US companies file with their regulator) says it earns substantially all its revenue from advertising on those apps. Its AI work sits on both sides of that business. It builds its own models, including the Llama family, which it has released openly in the past; the 10-K says it expects to train a mix of open and closed models from here (an open model is one whose trained settings are published so anyone can run it). It offers Meta AI, an assistant available inside its apps, as a stand-alone app, on its AI glasses and on the web. And it uses AI to choose which posts and ads each person sees, which the 10-K credits with better ad targeting and measurement. It states a goal of building superintelligence, which it defines as AI that surpasses human intelligence. To pay for this it spends heavily on data centres: this site's records from its filings show its capital spending (money spent on buildings and machines) growing much faster than its revenue in 2025 and again so far in 2026, and its 10-K lists large commitments, mostly for data centres and for computing capacity rented from other firms. In October 2025 it entered an arrangement to co-develop a data-centre campus in Louisiana, in which it holds a minority interest. In June 2025 it bought a non-voting minority stake in Scale AI, a seller of training data made by people; its filings say it has no significant influence over Scale's operations, and Scale's founder joined Meta to work on its AI. This site's records also hold Meta buying Manus and Limitless in December 2025 and Stilla in September 2026, and buying or hiring teams from other small AI firms in March 2026. Manus, maker of a general-purpose AI agent (software that carries out tasks such as research and building things for its user, rather than only answering), announced in December 2025 that it was joining Meta, and said it would keep selling its own subscriptions and operating from Singapore. In September 2026 Meta launched Muse, a personal agent that Meta says runs in its own walled-off computer in Meta's cloud with its own web browser, books travel, fills in forms and buys things after checking with the user, pays through Link, a checkout service built by Stripe, is free for most uses with paid plans for more, and does not share users' conversations with Muse, or the data in their Muse workspace, with Meta's ad systems. The question is whether AI adds to or eats into the advertising business that pays for it."
-  customers: "Advertisers pay for substantially all of it, the 10-K says. It also says most of its revenue comes from marketers advertising on Facebook and Instagram, that they make no long-term commitments, and that the loss of marketers or cuts in their spending could seriously harm the business. It names no large customer. The users it reaches are counted in billions of daily visitors, a figure Meta measures itself and warns may be inaccurate. Meta AI earns no direct revenue that the 10-K reports. This site judges the paying base is diffuse, spread across many advertisers."
+  market: "Meta runs Facebook, Instagram, Messenger, WhatsApp and Threads, and its 10-K (the annual report US companies file with their regulator) says it earns substantially all its revenue from advertising on Facebook and Instagram. Its AI work sits on both sides of that business. It builds its own models. It released the Llama family openly, but its newest flagship, Muse Spark, released in April 2026, is its first frontier model without open weights; the 10-K says it expects to train a mix of open and closed models from here (an open model is one whose trained settings are published so anyone can run it). It offers Meta AI, an assistant available inside its apps, as a stand-alone app, on its AI glasses and on the web. And it uses AI to choose which posts and ads each person sees, which the 10-K credits with better ad targeting and measurement. It states a goal of building superintelligence, which it defines as AI that surpasses human intelligence. To pay for this it spends heavily on data centres: this site's records from its filings show its capital spending (money spent on buildings and machines) growing much faster than its revenue in 2025 and again so far in 2026, and its 10-K lists large commitments, mostly for data centres and for computing capacity rented from other firms. In October 2025 it entered an arrangement to co-develop a data-centre campus in Louisiana, in which it holds a minority interest. In June 2025 it bought a non-voting minority stake in Scale AI, a seller of training data made by people; its filings say it has no significant influence over Scale's operations, and Scale's founder joined Meta to work on its AI. This site's records also hold Meta agreeing to buy Manus and buying Limitless in December 2025 and Stilla in September 2026, and buying or hiring teams from other small AI firms in March 2026. Manus, maker of a general-purpose AI agent (software that carries out tasks such as research and building things for its user, rather than only answering), announced in December 2025 that it was joining Meta, but in April 2026 China's top economic planner, which reviews foreign investment, blocked the deal and ordered it withdrawn. In September 2026 Meta launched Muse, a personal agent that Meta says runs in its own walled-off computer in Meta's cloud with its own web browser, books travel, fills in forms and buys things after checking with the user, pays through Link, a checkout service built by Stripe, is free for most uses with paid plans for more, and does not share users' conversations with Muse, or the data in their Muse workspace, with Meta's ad systems. The question is whether AI adds to or eats into the advertising business that pays for it."
+  customers: "Advertisers pay for substantially all of it, the 10-K says. It also says most of its revenue comes from marketers advertising on Facebook and Instagram, that they make no long-term commitments, and that the loss of marketers or cuts in their spending could seriously harm the business. It names no large customer. The users it reaches are counted in billions of daily visitors, a figure Meta measures itself and warns may be inaccurate. Meta AI earns no direct revenue that the 10-K reports; in September 2026 Meta began selling its models and agents to businesses and developers through a new line, Meta Enterprise Platform. This site judges the paying base is diffuse, spread across many advertisers."
   concentration: diffuse
   powers:
   - power: network_economies
@@ -1373,7 +1403,7 @@ companies:
   - power: scale_economies
     why: "Emerging, not proven. This site judges that the cost of training models and building ad-ranking systems is spread over Meta's very large audience and ad sales, so each user costs it less than a smaller rival; but the barrier holds only against newcomers, not against Google or the frontier labs (the firms building the most capable AI systems), which spend at similar scale and are its main AI rivals."
   - power: counter_positioning
-    why: "Emerging, not proven. Counter-positioning is a newcomer's model the incumbent could copy only by damaging its own business. The benefit is that Meta can give AI away inside its apps and let advertising pay; the barrier is that a lab living on subscriptions and paid access to its models would give up that revenue by doing the same. But the labs can add advertising too, and Meta AI has no revenue the 10-K reports, so this site does not count the barrier as proven."
+    why: "Emerging, not proven, and weakening. Counter-positioning is a newcomer's model the incumbent could copy only by damaging its own business. The benefit is that Meta can give AI away inside its apps and let advertising pay; the barrier is that a lab living on subscriptions and paid access to its models would give up that revenue by doing the same. But the labs can add advertising too, and in September 2026 Meta itself began selling its models and agents to businesses and developers through Meta Enterprise Platform, on top of paid Muse plans, the same paid access a lab lives on; so this site does not count the barrier as proven."
   depends_on:
   - accelerators
   - data_centres
@@ -1388,14 +1418,14 @@ companies:
   asset_owner: innovator
   durability: medium
   must_be_true:
-  - "Advertising keeps paying for the AI build-out. The 10-K says its AI work will need more spending on infrastructure and staff, and this site's records show capital spending rising far faster than revenue; ad revenue must keep growing fast enough to carry those costs and the losses of Reality Labs, its glasses and headsets division, which the 10-K says depends on profits earned elsewhere."
+  - "Advertising keeps paying for the AI build-out. The 10-K says its AI work will need more spending on infrastructure and staff, and this site's records show capital spending rising far faster than revenue; ad revenue must keep growing fast enough to carry those costs and the losses of Reality Labs, its glasses and headsets division, which the 10-K says depends on profits earned elsewhere. In the second quarter of 2026 its operating income fell from a year earlier even as ad revenue grew."
   - "AI keeps making its ads work better, so advertisers keep paying more per ad; the 10-K reports more ads shown and a higher average price per ad in 2025, and credits its AI with better targeting and measurement."
   - "People keep turning to Meta AI inside apps they already use rather than moving their questions, shopping and time to assistants from OpenAI or Google. William Nordhaus, an economist who measured how much of the value of new inventions their makers keep, found that most goes to users; this site judges a free assistant only pays Meta if the attention it holds can be sold to advertisers."
-  - "Its own models stay close enough to the best to power its products, so it need not pay rival labs for the capability; the 10-K lists competitors whose AI may be better or cheaper among its risks."
+  - "Its own models stay close enough to the best to power its products, so it need not pay rival labs for the capability; the 10-K lists competitors whose AI may be better or cheaper among its risks, and its latest 10-Q already lists rising third-party AI token costs, spending on other providers' models, among the reasons its costs grew."
   - "Regulators let it keep showing personalised ads. The 10-K says the European Commission ruled in April 2025 that its offer of a paid subscription with no ads did not comply with EU rules, a decision it has appealed."
   - "Its minority stake in Scale AI, which carries no vote, and its purchases of small AI firms add skills and products without drawing new limits from competition authorities, whose past scrutiny of its acquisitions the 10-K describes."
   - "People let Muse act for them, booking and buying rather than only chatting, and Meta earns from that work through subscriptions or a share of what Muse buys, since Meta says Muse keeps users' conversations with it, and the data in their Muse workspace, out of its ad systems; for now, the source suggests, that leaves subscriptions and purchases rather than advertising. This site judges that an agent shopping for its user could draw spending away from the ads that pay Meta today, so the agent must earn at least what it displaces."
-  - "Manus, the agent maker that joined Meta in December 2025, adds skills and users to Meta's own agents; Manus said at the deal that it hoped to bring its subscription to the businesses and people on Meta's platforms."
+  - "Meta's own agents do not depend on buying agent makers that regulators can block; China blocked its purchase of Manus, the agent maker it agreed to buy in December 2025, and ordered the deal withdrawn."
   would_disprove:
   - "Capital spending rising while advertising revenue growth slows for several quarters in a row."
   - "Meta AI's use growing without any rise in ad prices, ads shown or time spent in its apps."
@@ -1403,7 +1433,7 @@ companies:
   - "A regulator's order forcing it to show much less personalised ads across Europe or the United States."
   - "Its data-centre venture partners or cloud suppliers renegotiating terms because Meta cut its capacity plans."
   - "People using Muse to shop and book while time spent and ads shown in Meta's apps fall, with no subscription or purchase revenue from Muse making up the gap."
-  - "Manus's agent never reaching Meta's apps, or being shut down, a sign that its joining Meta added nothing to Meta's own agents."
+  - "A regulator blocking another of its AI purchases, a sign that buying agent makers cannot fill gaps in Meta's own agents."
   sources:
     market:
     - meta_10k_fy25
@@ -1411,18 +1441,26 @@ companies:
     - scale_ai_meta_investment_2025
     - meta_muse_2026
     - manus_joins_meta_2025
+    - meta_muse_spark_2026
+    - meta_manus_blocked_2026
     customers:
     - meta_10k_fy25
+    - meta_enterprise_platform_2026
     powers:
     - meta_10k_fy25
+    - meta_enterprise_platform_2026
+    - meta_muse_2026
     must_be_true:
     - meta_10k_fy25
     - scale_ai_meta_10q_q2_2025
     - meta_muse_2026
     - manus_joins_meta_2025
+    - meta_10q_q2_2026
+    - meta_manus_blocked_2026
     would_disprove:
     - meta_muse_2026
     - manus_joins_meta_2025
+    - meta_manus_blocked_2026
   judged_by: claude-opus-5.5
   reviewed_by: Alex Brogan
   reviewed: 2026-09-28
@@ -2416,3 +2454,136 @@ sources:
   retrieved_at: 2026-09-29
   http_status: 200
   content_hash: 7b017fad88db66f56577e48cb0cb030294ea5579f80ae91c06f9fb9c407deb45
+- id: nvda_10q_q2_fy27
+  entity: nvda
+  url: https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm
+  form: 10-Q
+  filed: 2026-08-26
+  retrieved_at: 2026-09-30
+  http_status: 200
+  content_hash: 64b46524d97d912488a08d8eac0c385d33b97c90f866aebd3b17e2486385874d
+- id: nvda_hugging_face_8k_2026
+  entity: nvda
+  url: https://www.sec.gov/Archives/edgar/data/1045810/000104581026000078/nvda-20260902.htm
+  form: 8-K
+  filed: 2026-09-03
+  retrieved_at: 2026-09-30
+  http_status: 200
+  content_hash: ee64047f5b8d8ce5b90321cb31ef14b7768bc8e635acc38f3220036c7b251bb2
+- id: broadcom_google_anthropic_8k_2026
+  entity: broadcom
+  url: https://www.sec.gov/Archives/edgar/data/1730168/000119312526144028/d87999d8k.htm
+  form: 8-K
+  filed: 2026-04-06
+  retrieved_at: 2026-09-30
+  http_status: 200
+  content_hash: fbf3ad458f6911ea82569e047710deb7e3defc4a44c5600d961c83f926494c7a
+- id: broadcom_10q_q3_fy26
+  entity: broadcom
+  url: https://www.sec.gov/Archives/edgar/data/1730168/000173016826000080/avgo-20260802.htm
+  form: 10-Q
+  filed: 2026-09-10
+  retrieved_at: 2026-09-30
+  http_status: 200
+  content_hash: 4b06252800c1c447765e604243ed5b50c498ae2528771c336928d843067f971a
+- id: msft_segments_8k_2026
+  entity: msft
+  url: https://www.sec.gov/Archives/edgar/data/789019/000119312526380280/d291965dex991.htm
+  form: 8-K
+  filed: 2026-09-02
+  retrieved_at: 2026-09-30
+  http_status: 200
+  content_hash: 20498b0c966988ec44b997dda94dc3b94aa9dd9b6434cdd97f7b44978fad01f2
+- id: amzn_10q_q2_2026
+  entity: amzn
+  url: https://www.sec.gov/Archives/edgar/data/1018724/000101872426000026/amzn-20260630.htm
+  form: 10-Q
+  filed: 2026-07-31
+  retrieved_at: 2026-09-30
+  http_status: 200
+  content_hash: e69eef1dd705a983657e8b91d96cba47c12c8ebe090fae54f68033d9b2d8b22f
+- id: googl_atm_8k_2026
+  entity: googl
+  url: https://www.sec.gov/Archives/edgar/data/1652044/000119312526257724/d83560d8k.htm
+  form: 8-K
+  filed: 2026-06-04
+  retrieved_at: 2026-09-30
+  http_status: 200
+  content_hash: da2eedd74da4dc7808e13789325b369296f348428cd4de2ac4e65658ee9b3938
+- id: googl_10q_q2_2026
+  entity: googl
+  url: https://www.sec.gov/Archives/edgar/data/1652044/000165204426000071/goog-20260630.htm
+  form: 10-Q
+  filed: 2026-07-23
+  retrieved_at: 2026-09-30
+  http_status: 200
+  content_hash: 4c8a38ad38ed8d474cd957367a6514b866d7a007d6c7a21f2f7b523918ada58e
+- id: meta_10q_q2_2026
+  entity: meta
+  url: https://www.sec.gov/Archives/edgar/data/1326801/000162828026050705/meta-20260630.htm
+  form: 10-Q
+  filed: 2026-07-30
+  retrieved_at: 2026-09-30
+  http_status: 200
+  content_hash: 1229eaaa8a52bc407614b4d9c7252817e92b8242719b776f6a3f5f85773565c1
+- id: anthropic_s1_notice_2026
+  entity: anthropic
+  url: https://www.anthropic.com/news/confidential-draft-s1-sec
+  form: company-post
+  filed: 2026-06-01
+  retrieved_at: 2026-09-30
+  http_status: 200
+  content_hash: f7efe55af9cb4042eff8b9dde6de3cd32257330b8d3042b7fce00b95072938b9
+- id: anthropic_ramp_index_2026
+  entity: anthropic
+  filer: Ramp
+  url: https://ramp.com/data/ai-index-august-2026
+  form: company-page
+  filed: 2026-08-01
+  retrieved_at: 2026-09-30
+  http_status: 200
+  content_hash: aa3297c9899d31bc188c60b47347fcb32def33235d37fffa3b90d73e520f9cc5
+- id: meta_enterprise_platform_2026
+  entity: meta
+  url: https://about.fb.com/news/2026/09/launching-meta-enterprise-platform/
+  form: company-post
+  filed: 2026-09-28
+  retrieved_at: 2026-09-30
+  http_status: 200
+  content_hash: 122c2ebeb12c4d7dbb19ce2b0f1a7b63b53f56436d2345414f9d339d2ef8b1ca
+- id: meta_muse_spark_2026
+  entity: meta
+  filer: The Decoder
+  url: https://the-decoder.com/metas-muse-spark-is-its-first-frontier-model-and-its-first-without-open-weights/
+  form: press
+  filed: 2026-04-08
+  retrieved_at: 2026-09-30
+  http_status: 200
+  content_hash: 465f0207625a61278855ee1f0e9e86e07f9ae0da45b74aa986e8be5155af7a03
+- id: openai_msft_amendment_2026
+  entity: openai
+  filer: PPC Land
+  url: https://ppc.land/microsoft-and-openai-rewrite-the-deal-what-actually-changed/
+  form: press
+  filed: 2026-04-27
+  retrieved_at: 2026-09-30
+  http_status: 200
+  content_hash: 05e7957a616b5ef5f99fc8bdb4b560b90136dca4ea994f66b7e859c9c4d52b8a
+- id: meta_manus_blocked_2026
+  entity: meta
+  filer: TechCrunch
+  url: https://techcrunch.com/2026/04/27/china-vetoes-metas-2b-manus-deal-after-months-long-probe/
+  form: press
+  filed: 2026-04-27
+  retrieved_at: 2026-09-30
+  http_status: 200
+  content_hash: 8ae51752a6170175cdd2a1550f2dc39549abfd731e0e41d4329771bef401f98d
+- id: anthropic_google_investment_2026
+  entity: anthropic
+  filer: TechCrunch
+  url: https://techcrunch.com/2026/04/24/google-to-invest-up-to-40b-in-anthropic-in-cash-and-compute/
+  form: press
+  filed: 2026-04-24
+  retrieved_at: 2026-09-30
+  http_status: 200
+  content_hash: b75e79ef7910cc35a465b171859234763927f3f1dfc800f1f63b24bf0622a2a9
