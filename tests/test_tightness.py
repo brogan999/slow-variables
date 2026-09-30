@@ -162,3 +162,18 @@ def test_an_input_whose_metric_gives_nothing_is_the_engines_to_explain_not_the_s
     assert card["minerals"]["withheld"]["kind"] == "not_read_yet"
     errors, notes = ar.tightness_problems(empty, date(2026, 9, 21))
     assert errors == [] and len(notes) == 1 and "data_centres (planned_vs_built no reading)" in notes[0]
+
+
+def test_a_stated_capacity_gauge_keeps_the_chip_inputs_scored_after_the_quarterly_estimates_age_out():
+    # Epoch's quarterly supply estimates pass their age limit together (28 Oct 2026); each of these inputs also reads
+    # a company's stated capacity growth, refreshed every quarter's results, which alone clears the coverage floor
+    inputs = {i["id"]: i for i in yaml.safe_load(open("seed/tightness.yaml"))["inputs"]}
+    for iid, stated in (("foundry", "stated_node_capacity_growth"), ("packaging", "stated_packaging_capacity_growth"),
+                        ("memory", "stated_memory_bit_supply_growth")):
+        inp = inputs[iid]
+        ids = {g["id"] for g in inp["gauges"]}
+        assert stated in ids, f"{iid} has no stated-capacity gauge"
+        readings = {g["id"]: {"x": 0.2, "age": 400, "grade": "C"} for g in inp["gauges"] if "unfed" not in g and g["id"] != stated}
+        readings[stated] = {"x": 0.5, "age": 30, "grade": "C"}
+        r = score_input(inp, readings, RULES)
+        assert r["score"] is not None, (iid, r["withheld"])
