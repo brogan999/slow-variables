@@ -142,7 +142,7 @@ export default function CensusPage() {
             ["Modelled saving (modelled, not measured: passing is not saving)", usd(h.modelled_saving)],
           ]} />
           <MarginPanel title="Instrument">
-            <p>Judged by {c.scorers.map((k) => c.scorer_names[k]).join(", ")}; the verdict on each task is their vote, under a rule frozen before this version's scores and shaped after seeing earlier usage data. Imported as published from the census&apos;s own files and checked against their published hashes.</p>
+            <p>Judged by {c.scorers.map((k) => c.scorer_names[k]).join(", ")}; the verdict on each task is their vote, under a rule frozen before this version&apos;s scores and shaped after seeing earlier usage data. Imported as published from the census&apos;s own files and checked against their published hashes.</p>
             <p>Download: {Object.entries(c.csv).map(([f, href], i) => <span key={f}>{i ? ", " : ""}<a href={href} className={link}>{f}</a></span>)}.</p>
             <p>Query every table in the <Link href="/query" className={link}>SQL console</Link>, e.g. <code className="text-[12px]">SELECT title, share_passes, rule_strict, rule_loose, passes_usd, agreed3_usd FROM census_roles WHERE function = &apos;Finance&apos;</code>.</p>
             <p><Link href="/methodology#census" className={link}>How the census is imported</Link></p>

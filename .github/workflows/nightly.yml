@@ -4,7 +4,7 @@ on:
   # makes it a no-op on a day that already succeeded.
   schedule: [{ cron: "17 6 * * *" }, { cron: "47 11 * * *" }]
   workflow_dispatch:
-permissions: { contents: write, pull-requests: write, actions: write, issues: write }
+permissions: { contents: write, pull-requests: write, actions: write, issues: write, statuses: write }
 concurrency: nightly
 defaults: { run: { shell: bash } }  # bash -eo pipefail: a failing command inside a pipe fails its step
 jobs:
@@ -71,7 +71,7 @@ jobs:
         run: uv run ai-tracker check || echo "failed=true" >> "$GITHUB_OUTPUT"
       # CI never runs on a PR opened with GITHUB_TOKEN, so the gate runs here
       - id: tests
-        run: (uv run pytest -q && pnpm -C web install --frozen-lockfile && pnpm -C web build) || echo "failed=true" >> "$GITHUB_OUTPUT"
+        run: (uv run pytest -q && pnpm -C web install --frozen-lockfile && pnpm -C web exec tsc --noEmit -p . && pnpm -C web lint && pnpm -C web build) || echo "failed=true" >> "$GITHUB_OUTPUT"
       - uses: actions/upload-artifact@v4
         if: always()
         with: { name: raw-cache, path: ingest/cache, retention-days: 90, if-no-files-found: ignore }
@@ -100,6 +100,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           N: ${{ steps.cpr.outputs.pull-request-number }}
+          HEAD_SHA: ${{ steps.cpr.outputs.pull-request-head-sha }}
           SHA: ${{ github.sha }}
           EVENT: ${{ github.event_name }}
         run: |
@@ -109,6 +110,12 @@ jobs:
             if [ "$EVENT" = schedule ]; then gh workflow run nightly.yml --ref main; exit 0; fi
             exit 1
           fi
+          # python and web are required checks on main; this job ran their gate (check, pytest, tsc, lint, build) on the
+          # tree it built, so it reports them on the PR's head itself
+          for ctx in python web; do
+            gh api "repos/$GITHUB_REPOSITORY/statuses/$HEAD_SHA" -f state=success -f context="$ctx" \
+              -f description="gated inside the nightly run" -f target_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" >/dev/null
+          done
           gh pr merge "$N" --squash || { sleep 20; gh pr merge "$N" --squash; }
           echo "outcome=merged" >> "$GITHUB_OUTPUT"
       # a layout change must fail loudly (brief §5): one open issue per source, assigned to the maintainer

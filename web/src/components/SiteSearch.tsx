@@ -66,6 +66,8 @@ export function SiteSearch() {
     return { groups: [...out.entries()], total };
   }, [q, index]);
   const flat = useMemo(() => groups.flatMap(([, hits]) => hits), [groups]);
+  // each group's first result index in `flat`, so a result's position is derived, never counted while rendering
+  const starts = useMemo(() => groups.reduce<number[]>((acc, _group, g) => [...acc, g ? acc[g - 1] + groups[g - 1][1].length : 0], []), [groups]);
   useEffect(() => { document.getElementById(`search-hit-${active}`)?.scrollIntoView({ block: "nearest" }); }, [active]);
 
   const go = (h: string) => {
@@ -83,7 +85,6 @@ export function SiteSearch() {
     else if (e.key === "Enter") { e.preventDefault(); go(flat[active]?.h ?? flat[0].h); }
   };
 
-  let n = -1;
   return (
     <Sheet open={open} onOpenChange={(o) => { setOpen(o); if (!o) setQ(""); }}>
       <SheetTrigger render={<Button variant="ghost" size="sm" aria-label="Search the site" aria-keyshortcuts="Meta+K Control+K" className="gap-1.5" />}>
@@ -112,12 +113,11 @@ export function SiteSearch() {
           {q && !flat.length && (index || failed) ? <p className="text-sm text-ink-2">Nothing matches every word. Try fewer words.</p> : null}
           {q && !index && !failed ? <p className="text-sm text-muted">Loading the index…</p> : null}
           <div id="search-results" role="listbox" aria-label="Results" className="flex flex-col gap-4">
-            {groups.map(([kind, hits]) => (
+            {groups.map(([kind, hits], g) => (
               <div key={kind} role="group" aria-label={kind} className="flex flex-col">
                 <div aria-hidden className="eyebrow mb-1">{kind}{hits.length === PER_KIND ? " · first eight" : ""}</div>
-                  {hits.map((hit) => {
-                    n += 1;
-                    const i = n;
+                  {hits.map((hit, j) => {
+                    const i = starts[g] + j;
                     return (
                       <Link key={`${hit.k}-${hit.h}-${hit.t}`} href={hit.h} prefetch={false} tabIndex={-1} id={`search-hit-${i}`} role="option" aria-selected={i === active}
                         onMouseEnter={() => setActive(i)} onClick={(e) => { if (e.metaKey || e.ctrlKey || e.shiftKey || e.button) return; e.preventDefault(); go(hit.h); }}

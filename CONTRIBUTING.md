@@ -11,8 +11,12 @@ site's methodology page; the short version:
 - **Bands, direction rules and formulas change only by pull request** with the `rationale` updated.
 - **Observations are superseded, never deleted.** To correct a value, add the corrected row; the ledger links it
   to the row it replaces.
-- **Run the loop before opening a PR:** `uv run pytest`, `uv run ruff check src tests`, `uv run ai-tracker check`,
-  `cd web && pnpm build`.
+- **Test first.** Every change to behaviour starts with a failing test that names it; run it red, then make it
+  green. A bug fix starts with a test that reproduces the bug. List the new tests under "Tests first" in the PR.
+- **Run the loop before opening a PR:** `uv run pytest`, `uv run ruff check src tests`,
+  `uv run ai-tracker evaluate && uv run ai-tracker check` (`check` alone reads stale derived rows),
+  `cd web && pnpm exec tsc --noEmit -p . && pnpm lint && pnpm build`. `python` and `web` are required checks on
+  `main`.
 
 Source suggestions, disputed figures and counterevidence are welcome as issues; say what the record is and where
 it can be fetched.
