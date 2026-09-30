@@ -1,6 +1,19 @@
 # Figures quoted from documents. `ingest manual` fetches each URL and rejects any row whose raw_snippet is not
 # a verbatim substring of the page. Rows land `pending`; merge to main approves them. Never type a number elsewhere.
 observations:
+  # --- stated capacity growth for the tightness scorecard (Part 36, sourced 2026-09-30) ---
+  - series_key: fool_transcripts.leading_node.stated_capacity_growth.pt
+    source_id: fool_transcripts
+    value: 0.70
+    unit: share
+    as_of_date: 2026-07-16
+    published_date: 2026-07-16
+    url: https://www.fool.com/earnings/call-transcripts/2026/07/16/tsm-tsm-q2-2026-earnings-call-transcript/
+    tier: 7
+    basis: company_stated
+    raw_snippet: "2 nm family capacity growth will be growing at around 70% CAGR from 2026 to 2028"
+    coding: "A floor: an analyst read back the 70% a year TSMC showed at its May symposium, and C.C. Wei answered that the plan is now bigger, so the stated figure is stored and the upgrade is not guessed."
+    note: "TSMC's second-quarter 2026 call. Its planned yearly growth in 2nm-family wafer capacity from 2026 to 2028: its newest node, not all leading-edge logic, which the same slide put at a quarter a year for 3nm and 5nm."
   - series_key: iconiq.ai_products.gross_margin.fy
     source_id: iconiq
     value: 0.45

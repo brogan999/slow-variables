@@ -54,14 +54,14 @@ def fresh(x: float, age: int = 0, grade: str = "A") -> dict:
     return {"x": x, "age": age, "grade": grade}
 
 
-def test_packaging_scores_the_weighted_mean_of_its_two_gauges():
+def test_packaging_scores_the_weighted_mean_of_the_gauges_it_has():
     r = score_input(
         INPUTS["packaging"],
         {"cowos_supply_growth": fresh(0.6907), "cowos_buyer_concentration": fresh(0.3929)},
         RULES,
     )
-    assert (r["score"], r["word"], r["used"], r["defined"]) == (40, "moderate", 2, 2)  # 40.17 before rounding
-    assert r["factors"]["coverage"] == 0.75  # the hand-judged quarter of the evidence counts as missing
+    assert (r["score"], r["word"], r["used"], r["defined"]) == (40, "moderate", 2, 3)  # 40.17 before rounding
+    assert r["factors"]["coverage"] == 0.5  # the unread stated-capacity gauge and the hand-judged share count as missing
 
 
 def test_no_usable_data_means_no_score_never_fifty():
@@ -175,5 +175,15 @@ def test_a_stated_capacity_gauge_keeps_the_chip_inputs_scored_after_the_quarterl
         assert stated in ids, f"{iid} has no stated-capacity gauge"
         readings = {g["id"]: {"x": 0.2, "age": 400, "grade": "C"} for g in inp["gauges"] if "unfed" not in g and g["id"] != stated}
         readings[stated] = {"x": 0.5, "age": 30, "grade": "C"}
+        r = score_input(inp, readings, RULES)
+        assert r["score"] is not None, (iid, r["withheld"])
+
+
+def test_adding_a_stated_capacity_gauge_does_not_unscore_a_chip_input_its_quarterly_estimates_still_feed():
+    inputs = {i["id"]: i for i in yaml.safe_load(open("seed/tightness.yaml"))["inputs"]}
+    for iid in ("foundry", "packaging", "memory"):
+        inp = inputs[iid]
+        readings = {g["id"]: {"x": 0.2, "age": 30, "grade": "C"} for g in inp["gauges"]
+                    if "unfed" not in g and not g["id"].startswith("stated_")}
         r = score_input(inp, readings, RULES)
         assert r["score"] is not None, (iid, r["withheld"])
