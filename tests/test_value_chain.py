@@ -62,3 +62,16 @@ def test_a_profile_asks_for_review_when_unread_stale_or_older_than_its_filing():
     assert any("b predates its annual filing" in n for n in out)
     assert any("c was last reviewed" in n for n in out)
     assert any("unit u has no named rival" in n for n in out)
+
+
+def test_a_review_names_both_who_and_when_and_a_reviewed_disclosure_does_not_promise_a_review():
+    # the page keys "reviewed" on reviewed_by and notes() on the date, so the two must travel together
+    layers, subs, inputs, ents = _ids()
+    base = {k: v for k, v in vc.load()["companies"][0].items()}
+    who_only = {**base, "entity": base["entity"], "reviewed": None}
+    when_only = {**base, "reviewed_by": None}
+    promise = {**base, "disclosure": "This site's builder works with Anthropic; Alex Brogan reviews this profile before it is relied on."}
+    for c, needle in ((who_only, "names who reviewed it but not when"), (when_only, "dates a review but not who made it"),
+                      (promise, "disclosure still promises a review")):
+        errs = vc.problems({**vc.load(), "companies": [c]}, load_outlook(), layers, subs, inputs, ents, futures.rubric())
+        assert any(needle in e for e in errs), needle
