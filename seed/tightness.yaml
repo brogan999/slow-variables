@@ -116,7 +116,7 @@ inputs:
     reads: "How fast the supply of leading-edge logic wafers is growing, year on year."
     ceiling: 85
     ceiling_rationale: "Kept from the prototype: a direct supply estimate from a careful source, though only an estimate."
-    hand_judged_weight: 0.58  # the prototype's 0.27 for reported events plus the 0.31 it gave a buyer-concentration gauge, deleted here
+    hand_judged_weight: 0.18  # was 0.58 (the prototype's 0.27 for reported events plus 0.31 from a deleted buyer-concentration gauge); 0.40 moved to the stated-capacity gauge in Part 36
     gauges:
       - id: logic_supply_growth
         label: Growth in leading-edge logic supply
@@ -126,6 +126,14 @@ inputs:
         max_age_days: 300
         knots: [[-0.05, 92], [0.05, 72], [0.15, 50], [0.3, 28]]
         scale_rationale: "Runs backwards: faster supply growth means a looser input. New foundry capacity takes years to build, so growth of a fifth a year is already fast for this business, and flat supply while demand races is the tight end."
+      - id: stated_node_capacity_growth
+        label: Growth TSMC states for its newest node
+        metric: stated_capacity_growth
+        dims: {input: leading_node}
+        weight: 0.4
+        max_age_days: 120
+        knots: [[0.2, 85], [0.5, 65], [1.0, 40], [1.5, 25]]
+        scale_rationale: "Runs backwards. A newest node grows fast from a small base, so this scale asks far more than the all-logic scale: half again a year is an ordinary ramp, and doubling a year is real relief. Fed by the maker's own stated plan, kept four months, so each quarter's call must be read."
 
   - id: packaging
     n: 7
@@ -135,23 +143,31 @@ inputs:
     reads: "How fast packaging supply is growing, and how much of it a few buyers take."
     ceiling: 90
     ceiling_rationale: "Kept from the prototype: two gauges from one careful source, both estimates."
-    hand_judged_weight: 0.25
+    hand_judged_weight: 0.15  # was 0.25; 0.10 moved to the stated-capacity gauge in Part 36
     gauges:
       - id: cowos_supply_growth
         label: Growth in packaging supply
         metric: chip_input_supply_yoy
         dims: {input: cowos_supply_wafers}
-        weight: 0.45
+        weight: 0.30
         max_age_days: 300
         knots: [[-0.1, 95], [0.0, 80], [0.25, 60], [0.5, 40], [1.0, 20]]
         scale_rationale: "Runs backwards: faster supply growth means a looser input. Packaging lines can be added faster than foundries, so this scale asks for more: supply that doubles in a year is real relief, and supply that stands still while demand rises is the worst case."
       - id: cowos_buyer_concentration
         label: How concentrated the buyers are
         metric: cowos_buyer_hhi
-        weight: 0.30
+        weight: 0.20
         max_age_days: 300
         knots: [[0.25, 20], [0.35, 42], [0.45, 65], [0.6, 85]]
         scale_rationale: "When one buyer takes most of the supply, everyone else is rationed even if the total looks adequate. The index is the sum of the squared shares: a quarter means several buyers of similar size, and above a half one buyer sets the terms."
+      - id: stated_packaging_capacity_growth
+        label: Growth TSMC states for its packaging
+        metric: stated_capacity_growth
+        dims: {input: advanced_packaging}
+        weight: 0.35
+        max_age_days: 120
+        knots: [[0.0, 85], [0.3, 65], [0.6, 45], [1.0, 25]]
+        scale_rationale: "Runs backwards, on the same ground as the packaging-supply scale: lines can be added fast, so doubling a year is relief. Fed only by a figure the maker states for the coming year or two; a growth rate averaged over years already past says nothing about now and is not used."
 
   - id: memory
     n: 8
@@ -161,20 +177,28 @@ inputs:
     reads: "How fast the supply of high-bandwidth memory is growing. Epoch counts it in dollars, so a price rise looks the same as more memory."
     ceiling: 75
     ceiling_rationale: "Kept from the prototype, which set it below the other chip inputs because the supply is counted in dollars, not units."
-    hand_judged_weight: 0.30
+    hand_judged_weight: 0.10  # was 0.30; 0.20 moved to the stated-capacity gauge in Part 36
     gauges:
       - id: hbm_supply_growth
         label: Growth in memory supply, in dollars
         metric: chip_input_supply_yoy
         dims: {input: hbm_supply_usd}
-        weight: 0.45
+        weight: 0.40
         max_age_days: 300
         knots: [[-0.1, 92], [0.1, 75], [0.4, 52], [0.8, 32], [1.5, 18]]
         scale_rationale: "Runs backwards: faster supply growth means a looser input. Because the supply is counted in dollars, which mixes volume with price, the scale is gentler than a true volume scale would be: even growth of four fifths a year reads only as easing."
       - id: memory_per_compute
         label: Memory per unit of computing power
-        weight: 0.25
+        weight: 0.15
         unfed: {kind: not_read_yet, because: "Epoch publishes each chip's memory, but this site does not read that column yet, and the prototype's scale for it was wrong by many orders of magnitude and would have to be rebuilt."}
+      - id: stated_memory_bit_supply_growth
+        label: Growth memory makers state for the industry's bits
+        metric: stated_capacity_growth
+        dims: {input: dram_bits}
+        weight: 0.35
+        max_age_days: 120
+        knots: [[0.05, 85], [0.15, 65], [0.25, 45], [0.4, 25]]
+        scale_rationale: "Runs backwards. Counted in bits, so a price rise cannot pass for supply, but it is all memory of this kind, of which the fast stacked memory is a part that draws on the same factories. Bit supply has grown by about a fifth in an ordinary year, so the middle of the scale sits there."
 
   - id: accelerators
     n: 9

@@ -1616,6 +1616,18 @@ metrics:
       panel AS (SELECT have.* FROM have JOIN need USING (as_of_date) WHERE have.n = need.n AND have.n >= 3)
       SELECT p.as_of_date, sum((x.v / p.tot) * (x.v / p.tot)) AS value, p.ids AS obs_ids
       FROM panel p JOIN x USING (as_of_date) GROUP BY p.as_of_date, p.ids
+  stated_capacity_growth:
+    description: "Growth a year in the supply of a chip input as its maker states it on an earnings call: the newest logic node's wafer capacity, advanced packaging capacity, or the industry's memory bits. A fraction: 0.5 is up by half."
+    rationale: "Makers plan capacity years ahead and say so each quarter; when the quarterly estimates run months behind, a maker's own stated plan is the freshest reading of how fast supply is growing."
+    grain: [as_of_date, input]
+    unit: share
+    lead_lag: leading
+    formula_version: 1
+    inputs: ["*.*.stated_capacity_growth.pt"]
+    caveats: "A plan, not a measurement: makers state it when it flatters them, and it may cover several years or one node. Each row's note says what it measures. Graded as a company's own statement."
+    sql: |
+      SELECT as_of_date, subject AS input, value_numeric AS value, [id] AS obs_ids FROM observations
+      WHERE measure = 'stated_capacity_growth' AND NOT coalesce(disputed, false)
   chip_input_supply_yoy:
     description: "Growth over twelve months in the quarterly supply of each input AI chips consume: advanced packaging and leading-edge logic in wafers, high-bandwidth memory in dollars. A fraction: 0.5 is up by half."
     rationale: "Supply growing fast eases a shortage; supply growing slowly while chip demand races tightens it."
