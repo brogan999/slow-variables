@@ -11,6 +11,7 @@
 | ai_education_list | AI education and talent companies (verified list) | Slow Variables | html | 7 | irregular | Company names only; each homepage fetched | Slow Variables research sweep, 28 Sep 2026 |
 | ai_rollup_fyi | AI Roll-up Nexus company directory | ai-rollup.fyi | html | 6 | irregular | Directory; company names, sector, country and stage only, read once | AI Roll-up Nexus (ai-rollup.fyi) |
 | aifutures_blog | AI Futures Project blog | AI Futures Project | html | 7 | irregular | Substack; short quotation | AI Futures Project |
+| aiuc | AIUC updates | Artificial Intelligence Underwriting Company | html | 7 | irregular | AIUC; short quotation | AIUC |
 | amazon_news | About Amazon company news | Amazon | html | 4 | irregular | Amazon; short quotation | About Amazon |
 | ambience_blog | Ambience Healthcare blog | Ambience Healthcare | html | 7 | irregular | Ambience Healthcare; short quotation | Ambience Healthcare |
 | amd_blog | AMD blog | AMD | html | 4 | irregular | AMD; short quotation | AMD blog |
@@ -43,6 +44,7 @@
 | census_btos | Census Business Trends and Outlook Survey | U.S. Census Bureau | csv | 4 | biweekly | Public domain (U.S. government) | U.S. Census Bureau, Business Trends and Outlook Survey |
 | census_susb | Census Statistics of US Businesses (firms and employment by industry and enterprise size) | US Census Bureau | csv | 4 | annual | US government work; public domain | US Census Bureau, Statistics of US Businesses |
 | cepr_voxeu | CEPR VoxEU columns (via Wayback; cepr.org 403s bots) | CEPR | html | 6 | irregular | CEPR; short quotation | CEPR VoxEU |
+| chaucer_group | Chaucer Group news | Chaucer Group | html | 7 | irregular | Chaucer; short quotation | Chaucer Group |
 | chicago_booth | Chicago Booth Center for Applied AI | University of Chicago Booth School of Business | html | 6 | irregular | Chicago Booth; short quotation | Chicago Booth |
 | cio_com | CIO.com | Foundry | html | 5 | irregular | Foundry; short quotation | CIO.com |
 | cio_dive | CIO Dive | Industry Dive | html | 5 | irregular | Industry Dive; short quotation | CIO Dive |
@@ -123,6 +125,7 @@
 | hsbc | HSBC Insights (Global Investment Research) | HSBC | html | 5 | irregular | HSBC; short quotation | HSBC Insights, 'The billions of AI consumer surplus' (10 Aug 2026) |
 | humanloop_site | Humanloop website | Humanloop | html | 4 | irregular | Humanloop; short quotation | Humanloop website |
 | humlum_pdf | Humlum working-paper PDFs (author site) | Anders Humlum | pdf | 6 | irregular | Author preprint; short quotation | Humlum & Vestergaard |
+| hunton_blog | Hunton Insurance Recovery Blog | Hunton Andrews Kurth LLP | html | 5 | irregular | Hunton; short quotation | Hunton Andrews Kurth, Insurance Recovery Blog |
 | iconiq | ICONIQ, State of AI 2026 | ICONIQ Venture & Growth | html | 6 | annual | Report | ICONIQ, 'State of AI: The Builder's Economy' (2026), a survey of over 300 software executives building AI products |
 | innolitics | Innolitics regulatory articles | Innolitics | html | 6 | irregular | Innolitics; short quotation | Innolitics |
 | insight_agent_iam | Identity and Access Management (IAM) in the age of AI Agents | Insight Partners | html | 6 | irregular | Market map; company names only, read once | Thomas Krane & William Blackwell, Insight Partners |
@@ -131,6 +134,7 @@
 | jams_site | Jams website | Potrero Labs | html | 4 | irregular | Potrero Labs; short quotation | Jams website |
 | kadan_ai_native_services | AI Native Services Market Map v2.0 | Kadan Capital | html | 6 | irregular | Market map; company names only, read once | Kadan Capital |
 | koyeb_blog | Koyeb blog | Koyeb | html | 4 | irregular | Koyeb; short quotation | Koyeb blog |
+| kpmg_news | KPMG US news | KPMG LLP | html | 7 | irregular | KPMG; short quotation | KPMG LLP |
 | langchain_blog | LangChain blog | LangChain | html | 7 | irregular | LangChain; short quotation | LangChain |
 | lawnext | LawSites (LawNext) | LawNext | html | 5 | irregular | LawSites; short quotation | LawSites (Bob Ambrogi) |
 | legora_newsroom | Legora newsroom | Legora | html | 5 | irregular | Legora; short quotation | Legora (company announcement) |
@@ -221,6 +225,7 @@
 | time_magazine | TIME | TIME USA | html | 5 | irregular | TIME; short quotation | TIME |
 | together_blog | Together AI blog | Together AI | html | 7 | irregular | Together AI; short quotation | Together AI |
 | transparency_coalition | Transparency Coalition reports | Transparency Coalition.AI | html | 6 | irregular | Transparency Coalition; short quotation | Transparency Coalition.AI |
+| uipath_newsroom | UiPath newsroom | UiPath | html | 7 | irregular | UiPath; short quotation | UiPath |
 | upstarts_media | Upstarts Media | Upstarts Media | html | 5 | irregular | Upstarts Media; short quotation | Upstarts Media |
 | wallst_247 | 24/7 Wall St. | 24/7 Wall St. | html | 5 | irregular | 24/7 Wall St.; short quotation | 24/7 Wall St. (relaying The Information) |
 | weights_site | Weights website | Weights | html | 4 | irregular | Weights; short quotation | Weights website |

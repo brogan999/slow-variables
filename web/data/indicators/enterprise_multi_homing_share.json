@@ -23,9 +23,9 @@
   "dead": null,
   "drawn": {
    "metric": null,
-   "others": 2,
+   "others": 3,
    "series": "menlo.enterprise.multi_model_share.pt",
-   "total": 3
+   "total": 4
   },
   "line": true,
   "n_drawn": 1,
@@ -105,13 +105,14 @@
  "confidence_basis": {
   "best_tier": 6,
   "grade": "B",
-  "n_observations": 3,
+  "n_observations": 5,
   "sources": [
+   "Andreessen Horowitz (a16z) essays",
    "Menlo Ventures, State of Generative AI in the Enterprise"
   ],
   "stale_as_of": null
  },
- "counterevidence": "One survey house; the numeric share is a 2023 figure; later waves changed the question.",
+ "counterevidence": "Menlo's numeric share is a 2023 figure and its later waves changed the question; a16z's CIO survey, shown alongside, asks a stricter question (three or more model families, testing included) of the Global 2000 only.",
  "crosswalk": [
   {
    "bucket_id": "early_adoption",
@@ -124,7 +125,7 @@
    "sublayer_id": null
   }
  ],
- "definition": "Share of enterprises using more than one foundation model, from Menlo Ventures' enterprise surveys (60% in the 2023 wave, restated in 2024); the 2024 wave states 'three or more models' without a share and the 2025 mid-year update gives the share that switched vendors (11%), shown alongside.",
+ "definition": "Share of enterprises using more than one foundation model, from Menlo Ventures' enterprise surveys (60% in the 2023 wave, restated in 2024); the 2024 wave states 'three or more models' without a share and the 2025 mid-year update gives the share that switched vendors (11%), shown alongside. a16z's annual CIO survey of the Global 2000, a second survey house, gives the share using three or more model families, also shown alongside.",
  "derived": [],
  "direction": null,
  "direction_readings": 3,
@@ -159,7 +160,7 @@
  "leading_lagging": "coincident",
  "metric": null,
  "metric_dims": {},
- "n_observations": 3,
+ "n_observations": 5,
  "name": "Enterprise multi-model usage share (Menlo)",
  "normal_band": null,
  "override_note": null,
@@ -200,6 +201,39 @@
  "related_metrics": [],
  "related_predictions": [],
  "series": [
+  {
+   "points": [
+    {
+     "as_of": "2025-05-08",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "16168c1c880fae97"
+     ],
+     "series_key": "a16z.enterprise.three_plus_model_families_share.pt",
+     "subject": "enterprise",
+     "unit": "share",
+     "value": 0.68
+    },
+    {
+     "as_of": "2026-01-30",
+     "disputed": false,
+     "grade": "B",
+     "high": null,
+     "low": null,
+     "obs_ids": [
+      "dc22d71e61422ded"
+     ],
+     "series_key": "a16z.enterprise.three_plus_model_families_share.pt",
+     "subject": "enterprise",
+     "unit": "share",
+     "value": 0.81
+    }
+   ],
+   "series_key": "a16z.enterprise.three_plus_model_families_share.pt"
+  },
   {
    "points": [
     {
@@ -261,10 +295,12 @@
  "series_keys": [
   "menlo.enterprise.multi_model_share.pt",
   "menlo.enterprise.models_deployed_typical.pt",
-  "menlo.enterprise.vendor_switch_share.pt"
+  "menlo.enterprise.vendor_switch_share.pt",
+  "a16z.enterprise.three_plus_model_families_share.pt"
  ],
  "source_cluster": null,
  "source_ids": [
+  "a16z",
   "menlo"
  ],
  "spark": null,
