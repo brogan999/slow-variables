@@ -1,5 +1,5 @@
 {
- "as_of": "2026-09-29",
+ "as_of": "2026-09-30",
  "buckets": [
   {
    "id": "methods",
@@ -15,7 +15,7 @@
      "grade": "C",
      "id": "lab_run_rates",
      "latest": {
-      "as_of": "2026-08-13",
+      "as_of": "2026-09-29",
       "dispute_text": "An annualised month reported by the press or the company, not booked or audited revenue, and often sourced to the company itself.",
       "disputed": true,
       "flags": [
@@ -26,22 +26,22 @@
       "high": null,
       "low": null,
       "obs_ids": [
-       "2932a2f9febe1aeb"
+       "058a8c1de380de38"
       ],
       "series_key": "epoch.openai.revenue_run_rate_usd.pt",
       "subject": "openai",
       "unit": "USD",
-      "value": 40000000000.0
+      "value": 70000000000.0
      },
      "layer_id": "model",
      "leading_lagging": "coincident",
-     "n_observations": 34,
+     "n_observations": 35,
      "name": "Frontier-lab revenue run-rates",
      "pending": null,
      "published": true,
      "source_cluster": null,
      "spark": {
-      "d": "M1.0,26.0 L7.3,25.5 L13.5,25.3 L19.8,25.2 L26.1,24.9 L32.3,24.1 L38.6,23.9 L44.9,23.7 L51.1,22.8 L57.4,20.1 L63.7,18.9 L69.9,18.3 L76.2,14.7 L82.5,13.2 L88.7,11.0 L95.0,2.0",
+      "d": "M1.0,26.0 L6.9,25.7 L12.8,25.6 L18.6,25.5 L24.5,25.4 L30.4,24.9 L36.2,24.8 L42.1,24.7 L48.0,24.2 L53.9,22.6 L59.8,21.9 L65.6,21.6 L71.5,19.5 L77.4,18.7 L83.2,17.5 L89.1,12.3 L95.0,2.0",
       "end": [
        95.0,
        2.0
@@ -158,7 +158,7 @@
      },
      "layer_id": "model",
      "leading_lagging": "leading",
-     "n_observations": 44,
+     "n_observations": 45,
      "name": "METR 50% time horizon",
      "pending": null,
      "published": true,
@@ -1262,7 +1262,7 @@
      },
      "layer_id": "model",
      "leading_lagging": "coincident",
-     "n_observations": 3,
+     "n_observations": 5,
      "name": "Enterprise multi-model usage share (Menlo)",
      "pending": null,
      "published": true,
@@ -1820,8 +1820,8 @@
      "grade": "D",
      "id": "safety_brake_events",
      "latest": {
-      "as_of": "2026-09-29",
-      "derived_id": "c1fd4d109b63adb5",
+      "as_of": "2026-09-30",
+      "derived_id": "501bc414f5459caa",
       "dims": {},
       "obs_ids": [
        "2ab8fec44e7914a5",
@@ -2616,15 +2616,15 @@
      "grade": "C",
      "id": "lab_recoupment_ratio",
      "latest": {
-      "as_of": "2026-08-13",
-      "derived_id": "2a34f297c567a195",
+      "as_of": "2026-09-29",
+      "derived_id": "47e4f5cfbd60ec1f",
       "dims": {
        "entity": "openai"
       },
       "obs_ids": [
+       "058a8c1de380de38",
        "15d383db12c87c1e",
        "167d57240d3a4367",
-       "2932a2f9febe1aeb",
        "3225749165d9c18c",
        "3cedc058b3e5c5d9",
        "4c7d05bb7edc95d9",
@@ -2636,20 +2636,20 @@
        "f7701f1b6ac42494"
       ],
       "unit": "ratio",
-      "value": 0.2188782489740082
+      "value": 0.38303693570451436
      },
      "layer_id": "model",
      "leading_lagging": "lagging",
-     "n_observations": 27,
+     "n_observations": 28,
      "name": "Lab recoupment ratio",
      "pending": null,
      "published": true,
      "source_cluster": null,
      "spark": {
-      "d": "M1.0,26.0 L7.3,23.0 L13.5,21.9 L19.8,20.8 L26.1,19.3 L32.3,14.1 L38.6,13.3 L44.9,11.8 L51.1,13.0 L57.4,10.1 L63.7,6.8 L69.9,9.8 L76.2,2.0 L82.5,9.2 L88.7,19.5 L95.0,15.9",
+      "d": "M1.0,26.0 L6.9,23.0 L12.8,21.9 L18.6,20.8 L24.5,19.3 L30.4,14.1 L36.2,13.3 L42.1,11.8 L48.0,13.0 L53.9,10.1 L59.8,6.8 L65.6,9.8 L71.5,2.0 L77.4,9.2 L83.2,19.5 L89.1,15.9 L95.0,7.7",
       "end": [
        95.0,
-       15.9
+       7.7
       ]
      },
      "stale_as_of": null,
@@ -2882,8 +2882,8 @@
      "grade": "D",
      "id": "cl_lab_release_claims",
      "latest": {
-      "as_of": "2026-09-29",
-      "derived_id": "7d1fd9ba4621fa5a",
+      "as_of": "2026-09-30",
+      "derived_id": "d8f50001f7699316",
       "dims": {},
       "obs_ids": [
        "0bdf1920b1feb93e",
@@ -2968,6 +2968,28 @@
  "recent_status_events": [
   {
    "author": "claude",
+   "counterevidence_considered": "Measured end to end, the trailing ratio is still well below its mid-2025 level, which alone would read as dispersing; one large round in either group can move it by more than the dead band.",
+   "created_at": "2026-09-29T13:05:14.258179Z",
+   "evidence_ids": [
+    "021fc48d9f5c57ea",
+    "024bd2e50b64b129",
+    "4ee36a381bf7a709",
+    "9ab4c2103637ae6e",
+    "ad9d9ef14b8eae98",
+    "d63ceef65148616b",
+    "e70e4f4487065633"
+   ],
+   "id": "b520df20bc025c20",
+   "new_conf": 45,
+   "new_status": "unclear",
+   "old_conf": 45,
+   "old_status": "dispersing",
+   "reason": "Vertical AI's share of application funding fell sharply at the end of 2025 and has risen in each of the two quarters since, so the last four quarterly moves split evenly between down and up. The direction rule needs most moves to agree, so the reading is unclear until the recovery holds or reverses.",
+   "target_id": "vertical_vs_horizontal_apps",
+   "target_type": "indicator"
+  },
+  {
+   "author": "claude",
    "counterevidence_considered": "Face values count 'up to' amounts and ten-year floors; a handful of very large deals (Oracle-OpenAI $300B, Microsoft-OpenAI $250B, Amazon-OpenAI $150B across three rows) set most of the level, so one cancelled deal would move it sharply. Commitments are not cash, and the sweep may still miss deals whose dollar values were never confirmed by a party.",
    "created_at": "2026-09-28T17:22:00.652997Z",
    "evidence_ids": [
@@ -3030,23 +3052,6 @@
    "old_status": "concentrating",
    "reason": "AMD's fiscal fourth quarters are now filled from its 10-Ks (they file full-year segment figures under a differently spelled member), so Q4 2025 exists. The four-quarter window now runs from 0.865 (Q2 2025) to 0.870 (Q2 2026), a move of 0.005 inside the 0.02 dead band. The concentrating reading set on 27 Sep compared across the missing quarter and no longer holds.",
    "target_id": "semis_hhi",
-   "target_type": "indicator"
-  },
-  {
-   "author": "claude",
-   "counterevidence_considered": "The estimate leaves out serving staff, data and hosting, so it overstates a true gross margin; a falling ratio can also mean a lab is pricing to win share while inference volumes grow, not that it is losing pricing power.",
-   "created_at": "2026-09-27T23:39:22.028284Z",
-   "evidence_ids": [
-    "0b6d0c8c368c7937",
-    "1a2c7e77a3879f2b"
-   ],
-   "id": "82770812307e4276",
-   "new_conf": 30,
-   "new_status": "emerging",
-   "old_conf": null,
-   "old_status": null,
-   "reason": "First scoring. OpenAI's revenue minus inference compute, over revenue, fell from 51% in 2024 to 38% in 2025 on Epoch's estimates, a move past the five-point dead band that would read dispersing; every input is one estimator's (Epoch, tier 5), so the single-source rule holds the status at emerging until a second, independent source for the same measure exists, not until more years accrue.",
-   "target_id": "lab_gross_margin",
    "target_type": "indicator"
   }
  ],
@@ -3179,7 +3184,7 @@
    "to": "capture"
   }
  ],
- "verdict": "As of 2026-09-29: methods mixed, products consistent with normal, early adoption consistent with normal, adaptation consistent with normal, return arrow emerging. Thesis: holding.",
+ "verdict": "As of 2026-09-30: methods mixed, products consistent with normal, early adoption consistent with normal, adaptation consistent with normal, return arrow emerging. Thesis: holding.",
  "what_would_change": [
   "METR 50% time horizon: Normal = doubling time \u2265 7 months (\u2248213 days, METR's 2019\u20132025 trend); fast = \u2264 4 months (\u2248122 days), the AI 2027 assumption. Between the two is `emerging`. The bands are about the current pace, so the input is a log-linear fit over the 2024-onward window, the most recent window METR reports (89 days in the TH1.1 post of 29 Jan 2026), recomputed from METR's corrected data. On the 2023-onward window METR's published figure is 128.7 days, in the gap between the bands: the reading is window-sensitive and both numbers are shown.",
   "METR 80% time horizon: Same bands and same 2024-onward window as the 50% horizon, applied to our own fit because METR publishes doubling times for the 50% series only. The 2023-onward fit (horizon_doubling_days_80) sits in the gap between the bands.",
