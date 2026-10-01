@@ -64,3 +64,13 @@ def test_index_points_keep_one_decimal_and_large_ratios_get_separators():
 
     assert fmt(2.4, "index_points") == "2.4 index points" and fmt(-16.3, "index_points") == "-16.3 index points"
     assert fmt(50000.0, "ratio") == "50,000×" and fmt(887.0, "ratio") == "887×" and fmt(4.4, "ratio") == "4.40×"
+
+
+def test_the_long_run_wears_the_site_palette_and_keeps_only_its_gold_ornament():
+    import re
+    from pathlib import Path
+
+    css = Path("web/src/app/globals.css").read_text()
+    block = re.search(r"body:has\(\.theme-manuscript\)\s*\{([^}]*)\}", css)
+    names = set(re.findall(r"(--[a-z0-9-]+)\s*:", block.group(1))) if block else set()
+    assert names <= {"--gild", "--gild-ink"}, sorted(names)
