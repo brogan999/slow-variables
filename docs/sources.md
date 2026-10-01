@@ -103,6 +103,7 @@
 | fintool_founder_blog | Nicolas Bustamante's blog (Fintool founder) | Fintool | html | 4 | irregular | Fintool; short quotation | Nicolas Bustamante's blog (Fintool founder) |
 | fireworks_blog | Fireworks AI blog | Fireworks AI | html | 5 | irregular | Fireworks AI; short quotation | Fireworks AI |
 | fireworks_watch | Fireworks AI blog (page watch) | Fireworks AI | html | 7 | weekly | Publisher terms; change notices only | Fireworks AI |
+| fool_transcripts | Earnings-call transcripts (The Motley Fool) | The Motley Fool | html | 7 | quarterly | Transcript; short quotation | The Motley Fool's transcripts of company earnings calls |
 | forbes | Forbes | Forbes Media | html | 5 | irregular | Forbes; short quotation | Forbes |
 | formd | SEC EDGAR Form D (private offerings) | U.S. Securities and Exchange Commission | formd | 4 | daily | Public domain (U.S. government work) | SEC EDGAR Form D data sets |
 | fortune | Fortune | Fortune Media | html | 5 | irregular | Fortune Media; short quotation | Fortune, 'MIT report: 95% of generative AI pilots at companies are failing' (18 Aug 2025) |

@@ -1,4 +1,4 @@
-# Thesis monitor (2026-09-30)
+# Thesis monitor (2026-10-01)
 
 Generated nightly from `thesis.py`; do not edit.
 
@@ -49,4 +49,4 @@ Rule: surplus above twice the approximate revenue ceiling holds, below the enter
 Rule: real pay below its end-2022 level in four consecutive quarters AND real output up on a year before
 
 - ✗ median real weekly pay below its end-2022 level in each of the last four quarters — 2026-06-30 378, 2026-03-31 376, 2025-12-31 missing, 2025-09-30 376 against 362 at 2022-12-31 (obs: 4cfd6206, e57bc2f1, 5c0d90ce…)
-- ✓ real output above a year before — +2.1% as of 2026-06-30 (obs: 0904731c, c9a4abaa)
+- ✓ real output above a year before — +2.2% as of 2026-06-30 (obs: 6bce551e, cd96d0aa)
