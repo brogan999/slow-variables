@@ -1,4 +1,5 @@
 from ai_tracker import futures as fu
+import yaml
 
 
 def test_dates_normalise_by_fixed_rules_and_never_to_a_midpoint():
@@ -179,6 +180,43 @@ def test_the_futures_export_counts_every_idea_once_and_withholds_failed_images()
     assert withheld and not withheld & shown
     assert all(0 <= d["width"] <= 100 for d in i["imagined"]) and max(d["width"] for d in i["imagined"]) == 100
     assert len(i["credits"]) == 2 and all(c["url"].startswith("https://") for c in i["credits"])
+
+
+def test_every_generated_image_names_one_idea_and_its_file_is_on_disk():
+    import json
+
+    rows = [json.loads(line) for line in fu.IMAGES_GENERATED.read_text().splitlines()]
+    ids = {x["id"] for x in fu.ideas()}
+    assert rows and all(r["idea"] in ids and r["stem"].startswith(r["idea"] + "-") and len(r["sha256"]) == 64 for r in rows)
+    assert len({r["idea"] for r in rows}) == len(rows)
+    owner_made = {x["idea"] for x in yaml.safe_load(fu.IMAGES.read_text())["images"] if x.get("idea")}
+    assert not owner_made & {r["idea"] for r in rows}
+    missing = [r["stem"] for r in rows if not (fu.ROOT / "web/public/futures" / f"{r['stem']}-720.webp").exists()]
+    assert not missing, missing[:5]
+
+
+def test_every_idea_has_an_image_or_a_stated_reason_for_none():
+    import json
+
+    have = {json.loads(line)["idea"] for line in fu.IMAGES_GENERATED.read_text().splitlines()}
+    have |= {x["idea"] for x in yaml.safe_load(fu.IMAGES.read_text())["images"] if x.get("idea")}
+    none = yaml.safe_load(fu.NO_IMAGE.read_text())["no_image"]
+    assert all(x["reason"].strip() for x in none)
+    assert have | {x["idea"] for x in none} == {x["id"] for x in fu.ideas()} and not have & {x["idea"] for x in none}
+
+
+def test_the_export_hands_the_page_one_ready_file_for_a_generated_image_and_shows_no_withheld_one():
+    import json
+
+    rows = [json.loads(line) for line in fu.IMAGES_GENERATED.read_text().splitlines()]
+    cards = {x["id"]: x for d in fu.build()["categories"].values() for x in d["ideas"]}
+    for r in rows:
+        c = cards[r["idea"]]
+        assert c["image"] is None
+        assert c["image_file"] == (None if r.get("withheld") else f"/futures/{r['stem']}-720.webp")
+    owner_made = [c for c in cards.values() if c["image"]]
+    assert owner_made and all(c["image_file"] is None for c in owner_made)
+    assert fu.build()["index"]["n_idea_images"] == sum(1 for c in cards.values() if c["image"] or c["image_file"])
 
 
 def test_futures_is_in_the_nav_and_the_sitemap():
