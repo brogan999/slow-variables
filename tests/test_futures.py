@@ -1,5 +1,6 @@
-from ai_tracker import futures as fu
 import yaml
+
+from ai_tracker import futures as fu
 
 
 def test_dates_normalise_by_fixed_rules_and_never_to_a_midpoint():
@@ -191,8 +192,9 @@ def test_every_generated_image_names_one_idea_and_its_file_is_on_disk():
     assert len({r["idea"] for r in rows}) == len(rows)
     owner_made = {x["idea"] for x in yaml.safe_load(fu.IMAGES.read_text())["images"] if x.get("idea")}
     assert not owner_made & {r["idea"] for r in rows}
-    missing = [r["stem"] for r in rows if not (fu.ROOT / "web/public/futures" / f"{r['stem']}-720.webp").exists()]
-    assert not missing, missing[:5]
+    on_disk = {r["stem"] for r in rows if (fu.ROOT / "web/public/futures" / f"{r['stem']}-720.webp").exists()}
+    shown = {r["stem"] for r in rows if not r.get("withheld")}
+    assert on_disk == shown, sorted(on_disk ^ shown)[:5]  # a withheld image is not served at all
 
 
 def test_every_idea_has_an_image_or_a_stated_reason_for_none():
@@ -209,14 +211,15 @@ def test_the_export_hands_the_page_one_ready_file_for_a_generated_image_and_show
     import json
 
     rows = [json.loads(line) for line in fu.IMAGES_GENERATED.read_text().splitlines()]
-    cards = {x["id"]: x for d in fu.build()["categories"].values() for x in d["ideas"]}
+    b = fu.build()
+    cards = {x["id"]: x for k, d in b["decades"].items() if k.startswith("imagined/") for g in d["groups"] for x in g["ideas"]}
     for r in rows:
         c = cards[r["idea"]]
         assert c["image"] is None
         assert c["image_file"] == (None if r.get("withheld") else f"/futures/{r['stem']}-720.webp")
     owner_made = [c for c in cards.values() if c["image"]]
     assert owner_made and all(c["image_file"] is None for c in owner_made)
-    assert fu.build()["index"]["n_idea_images"] == sum(1 for c in cards.values() if c["image"] or c["image_file"])
+    assert b["index"]["n_idea_images"] == sum(1 for c in cards.values() if c["image"] or c["image_file"])
 
 
 def test_futures_is_in_the_nav_and_the_sitemap():

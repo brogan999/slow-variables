@@ -396,7 +396,7 @@ export const censusRole = (occ: string) => read<CensusRoleDoc>(`census/roles/${o
 // Futures (plan Part 20): imagined and expected technologies by decade, model-judged, rendered as exported.
 export type FuIdea = {
   id: string; name: string; work: string; author: string; imagined: number; line: string;
-  arrival: string; built: boolean; judged: string | null; profit: string; image: string | null;
+  arrival: string; built: boolean; judged: string | null; profit: string; image: string | null; image_file?: string | null;
 };
 export type FuForecast = {
   id: string; who: string; line: string; when: string; odds: string | null; quote: string | null;
