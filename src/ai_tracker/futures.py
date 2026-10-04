@@ -267,6 +267,8 @@ def built(state: str) -> bool:
     return state in ("marked_built", "marked_built_date_unclear")
 EARLY = 1850  # everything imagined before this decade shares one bucket
 IMAGES = ROOT / "seed" / "futures" / "images.yaml"
+IMAGES_GENERATED = ROOT / "seed" / "futures" / "images_generated.jsonl"  # the Qwen Image set: one 720 px file each
+NO_IMAGE = ROOT / "seed" / "futures" / "no_image.yaml"
 CREDITS = ROOT / "seed" / "futures" / "credits.yaml"
 
 
@@ -326,6 +328,8 @@ def build() -> dict[str, Any]:
     imgs = {x["stem"]: x for x in (yaml.safe_load(IMAGES.read_text()) or {}).get("images", [])} if IMAGES.exists() else {}
     imgs = {k: x for k, x in imgs.items() if not x.get("withheld")}  # failed review: the category image stands in
     by_idea = {x["idea"]: f"/futures/{x['stem']}" for x in imgs.values() if x.get("idea")}
+    gen = [json.loads(line) for line in IMAGES_GENERATED.read_text().splitlines()] if IMAGES_GENERATED.exists() else []
+    one_file = {x["idea"]: f"/futures/{x['stem']}-720.webp" for x in gen if not x.get("withheld")}
     works = {s["id"]: s for s in canon_sources()}
 
     def card(x: dict[str, Any]) -> dict[str, Any]:
@@ -335,7 +339,8 @@ def build() -> dict[str, Any]:
             "built": x["arrival"]["state"] != "not_marked_built",
             "judged": _judged(expected_key(x)) if x["arrival"]["state"] == "not_marked_built" else None,
             "profit": profit_text(x),
-            "image": by_idea.get(x["id"]),
+            "image": by_idea.get(x["id"]),  # the owner-made set: a stem the page completes with -480 and -960
+            "image_file": one_file.get(x["id"]),
         }
 
     def forecast(f: dict[str, Any]) -> dict[str, Any]:
@@ -400,7 +405,7 @@ def build() -> dict[str, Any]:
                               "forecasts": sorted((forecast(f) for f in fcs if f["category"] == cid), key=lambda f: (f["when"], f["who"]))}
     featured = [card(x) for x in sorted(every, key=lambda x: x["imagined"]) if x["shortlist"] and by_idea.get(x["id"])][:12]
     return {
-        "index": {"n_ideas": len(every), "n_forecasts": len(fcs), "n_idea_images": len(by_idea),
+        "index": {"n_ideas": len(every), "n_forecasts": len(fcs), "n_idea_images": len(by_idea) + len(one_file),
                   "n_category_images": sum(1 for k in imgs if k.startswith("cat-")),
                   "imagined": imagined, "expected": expected, "categories": categories, "featured": featured,
                   "tier_words": PROFIT_WORDS,

@@ -3,15 +3,17 @@ import { futures, type FuForecast, type FuIdea } from "@/lib/data";
 
 export const link = "underline decoration-grid underline-offset-4 hover:decoration-ink";
 
-// An illustration: two WebP widths written by scripts/futures_images.py; made in ChatGPT, never evidence.
-export function Plate({ src, alt, sizes = "(min-width: 768px) 480px, 100vw", eager = false, className = "" }: { src: string; alt: string; sizes?: string; eager?: boolean; className?: string }) {
+// An illustration, made with AI image generation and never evidence. The owner-made set is a stem with two WebP widths
+// (scripts/futures_images.py); the generated set is one ready file, which the export names in full.
+export function Plate({ src, file, alt, sizes = "(min-width: 768px) 480px, 100vw", eager = false, className = "" }: { src?: string | null; file?: string | null; alt: string; sizes?: string; eager?: boolean; className?: string }) {
+  const one = !src && file;
   return (
-    // eslint-disable-next-line @next/next/no-img-element -- static WebP pairs in public/, served as written
-    <img src={`${src}-960.webp`} srcSet={`${src}-480.webp 480w, ${src}-960.webp 960w`} sizes={sizes} width={960} height={640} alt={alt} loading={eager ? "eager" : "lazy"} decoding="async" className={`w-full h-auto rounded-sm ${className}`} />
+    // eslint-disable-next-line @next/next/no-img-element -- static WebP in public/, served as written
+    <img src={one ? file : `${src}-960.webp`} srcSet={one ? undefined : `${src}-480.webp 480w, ${src}-960.webp 960w`} sizes={one ? undefined : sizes} width={960} height={640} alt={alt} loading={eager ? "eager" : "lazy"} decoding="async" className={`w-full h-auto rounded-sm ${className}`} />
   );
 }
 
-export const Credit = () => <span className="text-[11px] text-muted">Illustrations made by the site&apos;s owner with ChatGPT image generation; not evidence.</span>;
+export const Credit = () => <span className="text-[11px] text-muted">Illustration made with AI image generation; not evidence.</span>;
 
 // Every Futures page names where the ideas come from: names, works, authors and years are the glossary's.
 export function Sources() {
@@ -27,7 +29,7 @@ export function Sources() {
 export function IdeaCard({ x }: { x: FuIdea }) {
   return (
     <article id={x.id} className="flex flex-col gap-1.5 py-3 border-t border-grid first:border-0 scroll-mt-8">
-      {x.image ? <figure className="flex flex-col gap-0.5 max-w-[360px]"><Plate src={x.image} alt={`Illustration of ${x.name}: ${x.line}`} sizes="(min-width: 768px) 360px, 100vw" /><Credit /></figure> : null}
+      {x.image || x.image_file ? <figure className="flex flex-col gap-0.5 max-w-[360px]"><Plate src={x.image} file={x.image_file} alt={`Illustration of ${x.name}: ${x.line}`} sizes="(min-width: 768px) 360px, 100vw" /><Credit /></figure> : null}
       <h3 className="font-medium text-[15px]">{x.name}</h3>
       <p className="text-[12px] text-muted">{x.work}{x.work ? ", " : ""}{x.author} · {x.imagined}</p>
       <p className="text-[14px] text-ink-2">{x.line}</p>
