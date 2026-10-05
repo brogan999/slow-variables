@@ -1043,6 +1043,7 @@ class Store:
             read_jsonl(DATA / "thesis.jsonl"),
             load_argument()["exits"],
             cards if cards is not None else {},
+            board.judgements() or None,
         )
 
     def prediction_table(self) -> None:

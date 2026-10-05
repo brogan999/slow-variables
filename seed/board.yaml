@@ -191,3 +191,12 @@ questions:
   - {question: "Are they reliable enough for work where mistakes are costly?", indicator: pass_hat_k_tau_bench, note: "HAL also scores consistency, robustness and safety; only accuracy and overall reliability are drawn."}
   - {question: "Can we verify what they are aiming at?", indicator: null, note: "No public test verifies a model's goals."}
   - {question: "Do bigger models still surprise us?", indicator: surprise_index}
+
+# A model's lean on a forecast no reading can yet test (seed/board_judgements.yaml). A judgement, not a status: it sits
+# beside the word "too early to tell" and never replaces it, and no tally of statuses counts it.
+leans:
+  likely_true: {label: "likely true", meaning: "The model expects this to happen as stated."}
+  leans_true: {label: "leans true", meaning: "More likely than not, on the trend or the evidence so far."}
+  toss_up: {label: "toss-up", meaning: "No basis to lean either way."}
+  leans_false: {label: "leans false", meaning: "More likely not, on the trend or the evidence so far."}
+  likely_false: {label: "likely false", meaning: "The model expects this not to happen as stated."}

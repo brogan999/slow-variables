@@ -4,6 +4,7 @@ so the export and the query service share it and tests need no store."""
 
 from __future__ import annotations
 
+import re
 from pathlib import Path
 from typing import Any
 
@@ -38,6 +39,47 @@ WORDS = {
 }
 ORDER = ["happening", "not_happening", "slower", "both", "too_early"]
 OPS = ("gt", "gte", "lt", "lte")
+JUDGEMENTS = Path("seed/board_judgements.yaml")
+# A reason names the reading it rests on and the page links to it, so it types no figure, no size word and no address.
+FIGURE = re.compile(
+    r"\d|https?://|www\.|\b(half|halves|twice|thrice|doubl\w*|tripl\w*|quadrupl\w*|halv\w*|percent|per cent|fifths?|tenths?"
+    r"|hundreds?|thousands?|millions?|billions?|trillions?|dozens?|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen"
+    r"|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety)\b|-fold\b",
+    re.I,
+)
+YEAR = re.compile(r"\b(19|20|21)\d\d\b")
+
+
+def judgements() -> dict[str, Any]:
+    """A model's lean on forecasts no reading can yet test: its own file, read by no status logic (plan Part 39)."""
+    return (yaml.safe_load(JUDGEMENTS.read_text()) or {}) if JUDGEMENTS.exists() else {}
+
+
+def judgement_problems(doc: dict[str, Any], known: set[tuple[str, str]], indicator_ids: set[str], leans: set[str]) -> list[str]:
+    errors, seen = [], set()
+    made = doc.get("made_by") or {}
+    for k in ("model", "date", "method", "reviewed_by"):
+        if not made.get(k):
+            errors.append(f"board judgements: made_by has no {k}")
+    for j in doc.get("judgements") or []:
+        key = (j.get("kind"), j.get("id"))
+        where = f"board judgement {key[0]}/{key[1]}"
+        if key not in known:
+            errors.append(f"{where} names no forecast on the board")
+        if key in seen:
+            errors.append(f"{where} is given twice")
+        seen.add(key)
+        if j.get("lean") not in leans:
+            errors.append(f"{where} has an unknown lean {j.get('lean')}")
+        reason = (j.get("reason") or "").strip()
+        if not reason:
+            errors.append(f"{where} gives no reason")
+        elif FIGURE.search(YEAR.sub("", reason)):
+            errors.append(f"{where}: its reason types a figure, a size word or an address")
+        for i in j.get("rests_on") or []:
+            if i not in indicator_ids:
+                errors.append(f"{where} rests on unknown indicator {i}")
+    return errors
 
 
 def load() -> dict[str, Any]:
@@ -181,10 +223,29 @@ def build(
     verdicts: list[dict[str, Any]],
     exits: list[dict[str, Any]],
     cards: dict[str, dict[str, Any]],
+    judged: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     rs = rows(spec, ledger, outlook, argument, verdicts, exits)
     rank = {w: i for i, w in enumerate(ORDER)}
+    # A lean attaches only while the row is still too early: once a reading settles it, the lean is dropped, not kept.
+    leans = {(j["kind"], j["id"]): j for j in (judged or {}).get("judgements") or []}
+    for r in rs:
+        j = leans.get((r["kind"], r["id"]))
+        if j and r["word"] == "too_early":
+            r["judgement"] = {
+                "lean": j["lean"], "reason": j["reason"],
+                "rests_on": [{"id": i, "name": (cards.get(i) or {}).get("name") or i, "href": f"/indicators/{i}"} for i in j.get("rests_on") or []],
+            }  # fmt: skip
+    order = list(spec.get("leans") or {})
+    count = lambda rows_: {w: n for w in order if (n := sum(1 for r in rows_ if (r.get("judgement") or {}).get("lean") == w))}  # noqa: E731
+    extra = {}
+    if judged:
+        extra = {
+            "leans": [{"id": w, **spec["leans"][w]} for w in order],
+            "judged": {**judged["made_by"], "date": str(judged["made_by"]["date"]), "tally": {w: count(rs).get(w, 0) for w in order}},
+        }
     return {
+        **extra,
         "as_of": outlook.get("as_of"),
         "words": [{"id": w, **spec["words"][w]} for w in ORDER],
         "mapping": [
@@ -200,6 +261,7 @@ def build(
                     key=lambda r: (rank[r["word"]], r["kind"], r["id"]),
                 ),
                 "too_early": sum(1 for r in rs if r["folio"] == f["id"] and r["word"] == "too_early"),
+                **({"leans": count([r for r in rs if r["folio"] == f["id"]])} if judged else {}),
             }
             for f in spec["folios"]
         ],
