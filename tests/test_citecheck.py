@@ -77,3 +77,19 @@ def test_form_names_are_not_numbers_and_annotation_never_nests():
 def test_ratio_labels_and_hyphenated_ids_are_not_numbers():
     assert check("The 50%/80% horizon ratio is 6.34× [derived:r].", R).ok
     assert check("Accession 0001045810-26-000075 [obs:x].", R).numbers == []
+
+
+def test_a_models_version_is_part_of_its_name_and_an_id_may_carry_an_ampersand():
+    rec = Record("headline", "census", [158386271953.59, 7000349226400.0], "", "")
+    named = "It is $158.4B out of $7.00T scored by all three (Claude Sonnet 5, Gemini 3.1 Pro, GPT-6 Sol) [census:headline]."
+    assert check(named, {"census:headline": rec}).ok
+    fn = Record(
+        "function.claims_&_underwriting", "census", [0.148, 14.8], "", ""
+    )  # shares also as percentages, as Ask builds them
+    r = check(
+        "Claims & underwriting: 14.8% [census:function.claims_&_underwriting]",
+        {"census:function.claims_&_underwriting": fn},
+    )
+    assert r.ok, r.failures
+    # a figure that merely follows a model's name is still a claim
+    assert not check("Gemini 3.1 Pro passes 41% of tasks [census:headline].", {"census:headline": rec}).ok

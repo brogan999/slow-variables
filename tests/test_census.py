@@ -105,6 +105,9 @@ def test_a_census_figure_is_citable_and_a_modelled_one_is_not():
     ok = check(f"Accountants have ${freed / 1e9:.1f}bn that all three pass [census:role.{occ}].", {rec.id: rec})
     assert ok.ok, ok.failures
     assert t._census_record("function.it_software") is not None
+    # a function's id resolves with or without the ampersand the site's own reference carries
+    with_amp, without = t._census_record("function.claims_&_underwriting"), t._census_record("function.claims_underwriting")
+    assert with_amp is not None and with_amp.values == without.values
 
 
 def test_the_site_types_no_figure_on_the_census_pages():
