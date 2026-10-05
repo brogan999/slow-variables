@@ -1,0 +1,435 @@
+# The trades on the census page's combined list (plan Part 38): where AI roll-ups are, what they have bought, and the
+# census figure for the trade. A roll-up is filed once, under the trade the roll-up directory gives it and the country
+# it gives (us, elsewhere), or unstated where the directory has no row for it. A deal is filed under its target's
+# trade, which may not be its buyer's. One census figure per trade: `naics` selects one industry row of the bundle,
+# `card` one of its deal cards (used for the figure only when there is no `naics`), and `no_figure` says why neither fits.
+# `swept` lists the buyers searched for published acquisitions (tests/test_manual.py pins the same set).
+swept:
+- 2x
+- archipel
+- attentive
+- avi_medical
+- beacon_software
+- bending_spoons
+- bhub
+- buena
+- candid_health
+- circeus
+- crescendo
+- crete
+- dwelly
+- general_catalyst
+- integral
+- iterative_health
+- lawhive
+- lightswitch
+- long_lake
+- loop
+- metropolis
+- mitigata
+- nuvocargo
+- onepilot
+- pando
+- particle_health
+- savvy
+- sennder
+- sequence_holdings
+- shield_technology_partners
+- thrive_holdings
+- titan
+- unifycx
+trades:
+- key: accounting
+  name: Accounting, tax and audit
+  naics: '541200'
+  card: cpa
+  rollups:
+    us:
+    - accrual
+    - alloy_river
+    - crete
+    - cynch
+    - general_intelligence
+    - mandrel
+    - minerva_intelligence
+    - modus
+    - multiplier_holdings
+    - numica
+    - olarry
+    elsewhere:
+    - alven
+    - ancora
+    - archipel
+    - asevia
+    - atlas
+    - aurion
+    - bhub
+    - camada
+    - ceedar
+    - contra
+    - integral
+    - limetax
+    - numbi
+    - ready_plan_go
+    - sequence
+    - simpleai
+    - skalar
+    - skrooge
+    - taxforce
+  deals:
+  - rollup_acq.archipel.avei_a.pt
+  - rollup_acq.archipel.avexxens.pt
+  - rollup_acq.archipel.finantis.pt
+  - rollup_acq.archipel.groupe_conseils.pt
+  - rollup_acq.archipel.groupe_rey.pt
+  - rollup_acq.archipel.l_a_conseil_audit.pt
+  - rollup_acq.archipel.lamy_experts.pt
+  - rollup_acq.archipel.p2r.pt
+  - rollup_acq.archipel.prospective_finance.pt
+  - rollup_acq.bhub.agrocontar.pt
+  - rollup_acq.crete.accuity.pt
+  - rollup_acq.crete.adeptus_adeptus_advisors_group.pt
+  - rollup_acq.crete.bfj.pt
+  - rollup_acq.crete.bowers_advisors.pt
+  - rollup_acq.crete.cross_financial.pt
+  - rollup_acq.crete.cwdl_rebranded_advisent.pt
+  - rollup_acq.crete.legacy_valuations_forensics_formerly_par.pt
+  - rollup_acq.crete.mauldin_vaught.pt
+  - rollup_acq.crete.maxwell_advisors_formerly_maxwell_compan.pt
+  - rollup_acq.crete.mellott_mellott.pt
+  - rollup_acq.crete.murphy_miller_baglieri_mmb.pt
+  - rollup_acq.crete.preferred_cfo.pt
+  - rollup_acq.crete.reid_reid_cpas_reid_tax_advisory.pt
+  - rollup_acq.crete.think_advisors_r_d_tax_credit_services_p.pt
+  - rollup_acq.crete.tkr_accountants_and_advisors.pt
+  - rollup_acq.integral.cleverlohn.pt
+- key: freight
+  name: Freight brokers and forwarders
+  naics: '488500'
+  rollups:
+    us:
+    - agent_astra
+    - border_logic
+    - docunlock
+    - freight_hero
+    - fura
+    - loop
+    - nuvocargo
+    - pando
+    - paypath
+    - sedona
+    - terrafreight
+    - xhipment
+    elsewhere:
+    - nexdash
+    - sennder
+    - stracker
+    - voyfai
+  deals:
+  - rollup_acq.loop.data2logistics.pt
+  - rollup_acq.loop.strategiq_commerce.pt
+  - rollup_acq.nuvocargo.merge_transportation.pt
+  - rollup_acq.sennder.c_h_robinson_european_surface_transporta.pt
+- key: property_management
+  name: Property and lettings management
+  no_figure: The census has one row for all of real estate, far broader than managing property for owners.
+  rollups:
+    us:
+    - lightswitch
+    elsewhere:
+    - arbio_group
+    - arjile
+    - buena
+    - dwelly
+    - kalea
+    - levels
+    - moin
+    - onekey
+    - ralph
+    - reya
+    - sebas
+    - theo
+  deals:
+  - rollup_acq.beacon_software.realestateapi.pt
+  - rollup_acq.dwelly.albery_tyson.pt
+  - rollup_acq.dwelly.ap_morgan_lettings_business.pt
+  - rollup_acq.dwelly.brookdale_property_management.pt
+  - rollup_acq.dwelly.eden_harper.pt
+  - rollup_acq.dwelly.elliot_oliver.pt
+  - rollup_acq.dwelly.gallant_richardson.pt
+  - rollup_acq.dwelly.goodwin_property_services.pt
+  - rollup_acq.dwelly.hc_lettings_formerly_holdencopley_s_lett.pt
+  - rollup_acq.dwelly.lime_property.pt
+  - rollup_acq.dwelly.move.pt
+  - rollup_acq.dwelly.number_1_letting.pt
+  - rollup_acq.dwelly.paramount_properties.pt
+  - rollup_acq.dwelly.parks_residential.pt
+  - rollup_acq.dwelly.pennington.pt
+  - rollup_acq.dwelly.settio.pt
+  - rollup_acq.dwelly.shaws.pt
+  - rollup_acq.dwelly.sheldon_bosley_knight_lettings_business_.pt
+- key: it_services
+  name: IT managed services
+  no_figure: The census row for computer systems design holds all of software services, far broader than firms that
+    run other firms' IT.
+  rollups:
+    us:
+    - e4n
+    - rollout
+    - shield_technology_partners
+    - titan
+    - treeline
+    - turgon
+    elsewhere:
+    - aretea_group
+    - mitigata
+    - monkinet
+    - unitas
+  deals:
+  - rollup_acq.shield_technology_partners.clearfuze_networks.pt
+  - rollup_acq.shield_technology_partners.delval_technology_solutions_dts.pt
+  - rollup_acq.shield_technology_partners.exigent_technologies.pt
+  - rollup_acq.shield_technology_partners.ironorbit.pt
+  - rollup_acq.shield_technology_partners.nerds_support.pt
+  - rollup_acq.shield_technology_partners.onenet_global.pt
+  - rollup_acq.shield_technology_partners.option_one_technologies.pt
+  - rollup_acq.titan.rfa_richard_fleischman_associates.pt
+- key: medical_practices
+  name: Medical practices and care
+  naics: '621100'
+  census_note: The row is doctors' offices only.
+  rollups:
+    us:
+    - adaptive_innovations
+    - meroka
+    - natoe
+    elsewhere:
+    - 5c_network
+    - archvale
+    - avi_medical
+    - jutro_medical
+    - nila_care
+    - praxis_eins
+    - tern
+  deals:
+  - rollup_acq.avi_medical.iatros.pt
+  - rollup_acq.general_catalyst.summa_health.pt
+  - rollup_acq.iterative_health.three_cardiology_research_sites_of_nexts.pt
+- key: insurance_agencies
+  name: Insurance agencies and brokers
+  naics: '524200'
+  census_note: The row also holds claims administration, which has its own entry below.
+  rollups:
+    us:
+    - american_growth_insurance
+    - clarence
+    - corgi
+    - covu
+    - equal_parts
+    - gyde
+    elsewhere:
+    - afori
+    - quartz
+    - synapze
+  deals:
+  - rollup_acq.sequence_holdings.the_baldwin_group.pt
+- key: contact_centres
+  name: Contact centres
+  no_figure: The census row for business support services is far broader than contact centres.
+  rollups:
+    us:
+    - crescendo
+    - kim
+    - opencall
+    - unifycx
+    elsewhere:
+    - cx_assist
+    - onepilot
+  deals:
+  - rollup_acq.crescendo.partnerhero.pt
+  - rollup_acq.onepilot.eodom.pt
+  - rollup_acq.unifycx.collective_solution.pt
+- key: wealth
+  name: Wealth management and fund administration
+  no_figure: The census row for securities and investments mixes too many kinds of firm to stand for this trade.
+  rollups:
+    us:
+    - aqua
+    - savvy
+    elsewhere:
+    - mav9
+    - palindrome
+    - thrivo_wealth
+    - ylookup
+- key: legal
+  name: Legal services
+  naics: '541100'
+  rollups:
+    us:
+    - alix
+    - ellis
+    - eudia
+    - immcore
+    elsewhere:
+    - lawhive
+  deals:
+  - rollup_acq.lawhive.woodstock_legal_services.pt
+- key: claims
+  name: Claims administration
+  card: tpa
+  rollups:
+    us:
+    - ravin
+    - strala
+    elsewhere:
+    - inca
+- key: medical_billing
+  name: Medical coding and billing
+  card: rcm
+  rollups:
+    us:
+    - agent_ai
+    - candid_health
+    - overdrive_health
+- key: engineering
+  name: Engineering and architectural services
+  card: eng
+  rollups:
+    us:
+    - ashler
+    - grwnd
+    elsewhere:
+    - attentive
+- key: staffing
+  name: Staffing and executive search
+  card: search
+  rollups:
+    us:
+    - forge_ai
+    - starshunt
+    elsewhere:
+    - mojo_talent
+- key: travel
+  name: Managed travel and booking
+  card: travel
+  rollups:
+    us:
+    - gazelle_travel
+    - the_travel_company
+  deals:
+  - rollup_acq.long_lake.american_express_global_business_travel_.pt
+- key: marketing
+  name: Advertising and marketing services
+  card: agency
+  rollups:
+    us:
+    - 2x
+  deals:
+  - rollup_acq.2x.intelligent_demand.pt
+  - rollup_acq.2x.outbound_funnel.pt
+  - rollup_acq.2x.the_kiln.pt
+- key: title
+  name: Title insurance, escrow and settlement
+  card: title
+- key: labs
+  name: Diagnostic and medical laboratories
+  card: labs
+- key: software
+  name: Software companies
+  no_figure: 'Not a service trade the census sizes: these buyers purchase software products, not firms that sell
+    hours.'
+  rollups:
+    unstated:
+    - beacon_software
+    - bending_spoons
+    - circeus
+  deals:
+  - rollup_acq.2x.knownwell.pt
+  - rollup_acq.beacon_software.e2e_soccer_limited.pt
+  - rollup_acq.beacon_software.haize_labs.pt
+  - rollup_acq.beacon_software.let_s_camp.pt
+  - rollup_acq.beacon_software.powerup_sports.pt
+  - rollup_acq.beacon_software.viefund.pt
+  - rollup_acq.bending_spoons.airtable.pt
+  - rollup_acq.bending_spoons.aol.pt
+  - rollup_acq.bending_spoons.brightcove.pt
+  - rollup_acq.bending_spoons.eventbrite.pt
+  - rollup_acq.bending_spoons.komoot.pt
+  - rollup_acq.bending_spoons.meetup.pt
+  - rollup_acq.bending_spoons.miro.pt
+  - rollup_acq.bending_spoons.mosaic_group_digital_assets_from_iac.pt
+  - rollup_acq.bending_spoons.tractive.pt
+  - rollup_acq.bending_spoons.vimeo.pt
+  - rollup_acq.bending_spoons.wetransfer.pt
+  - rollup_acq.circeus.aiden.pt
+  - rollup_acq.circeus.dondy.pt
+  - rollup_acq.circeus.encodian.pt
+  - rollup_acq.circeus.fiftypoint6_group.pt
+  - rollup_acq.circeus.krakend.pt
+  - rollup_acq.metropolis.oosto_formerly_anyvision.pt
+  - rollup_acq.nuvocargo.mentum.pt
+- key: several
+  name: Buyers across several trades
+  no_figure: These buyers work across trades; what each bought is filed under its own trade.
+  rollups:
+    us:
+    - antidote
+    - long_lake
+    - sequence_holdings
+    - skrol
+    elsewhere:
+    - timah_partners
+    unstated:
+    - general_catalyst
+    - thrive_holdings
+- key: other
+  name: Other trades
+  no_figure: A mix of trades with too few buyers each to compare.
+  rollups:
+    us:
+    - bridge_defense
+    - cavalla
+    - enam
+    - iterative_health
+    - longview
+    - metropolis
+    - particle_health
+    - production_capital
+    - rocketable
+    - roofer
+    - zero_rfi
+    elsewhere:
+    - antares_labs
+    - appliedai
+    - areg
+    - felz
+    - kaikaku
+    - moneylab_technologies
+    - recycleye
+    - venmark
+    unstated:
+    - agent_vista
+    - aiai_holdings_ai
+    - aixiom
+    - banyan_software
+    - calexo_thermal_home_services
+    - cast_finance
+    - csc_generation
+    - dragonfly
+    - ekohe_fund
+    - generation_tech_partners
+    - legion_holdings
+    - mitrim
+    - operon_capital
+    - orbit_holdings
+    - rising_tide
+    - squeeze
+    - stelao
+    - topwater_group
+    - united_accountants
+    - xgx_ventures
+    - zax
+  deals:
+  - rollup_acq.crete.cabrillo_advisors.pt
+  - rollup_acq.crete.force_10_partners.pt
+  - rollup_acq.metropolis.sp_plus_corporation_sp.pt

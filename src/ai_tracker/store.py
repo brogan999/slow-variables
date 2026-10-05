@@ -988,6 +988,11 @@ class Store:
                 for o in self.observations("census_susb.*.firms_20_99.a")
             }
             _write(out / "census" / "rollup.json", census.rollup(index, small, firms))
+            names = {e.id: e.name for e in self.seed.entities}
+            deals = {o["series_key"]: o for o in self.observations("rollup_acq.*.*.pt")}
+            spec = census.load()
+            _write(out / "census" / "trades.json", {"stances": spec.get("stances") or {}, "flags": spec.get("trade_flags") or {},
+                                                    "trades": census.trades(census.trades_spec(), index, names, deals)})
         from .bottleneck_map import from_store
 
         _write(out / "map.json", from_store(self, cards, bottlenecks, argument, outlook))
