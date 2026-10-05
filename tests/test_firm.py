@@ -4,7 +4,7 @@ which the essay says the board's leans disagree with it."""
 
 import re
 
-from ai_tracker import firm
+from ai_tracker import census, firm
 from ai_tracker import outlook as ol
 from ai_tracker import store as st
 from ai_tracker.analysis.metrics import run_metrics
@@ -89,7 +89,7 @@ def test_the_real_page_resolves_and_types_no_figure():
         for sentence in re.split(r"(?<=[.!?])\s+", t):
             if NUMBER_WORD.search(ol.TOKEN.sub("", sentence)):
                 assert ol.TOKEN.search(sentence), sentence  # a figure in words still needs its token
-    assert 1800 <= len(ol.TOKEN.sub("", essay).split()) <= 3100  # raised from 2700 when the staff review added caveats
+    assert 1800 <= len(ol.TOKEN.sub("", essay).split()) <= 3800  # raised from 2700 for the staff review's caveats, then for the folio on the firm's shape
 
 
 def test_the_essay_says_who_drafted_it_and_whose_model_scored_the_census():
@@ -134,8 +134,16 @@ def test_the_shapes_plate_credits_every_row_and_fiction_is_labelled_and_tests_no
 
 def test_the_shape_folio_says_what_the_census_can_and_cannot_read():
     essay = firm.ESSAY.read_text()
-    assert "### Folio VII · the shape" in essay and "[plate:shapes]" in essay and "[plate:census_cut]" in essay
+    assert "### Folio VII · the shape" in essay and "[plate:shapes]" in essay and "[plate:jobs]" in essay
     folio = essay.split("### Folio VII · the shape")[1].split("### Folio VIII")[0]
     assert "occupational groups" in folio and "not junior against senior" in folio  # the census has no seniority field
     assert "this site's judgement" in folio  # where the site lands is labelled
     assert "fiction" in folio.lower()
+    groups = census.shape(census.load())["groups"]
+    by = {g["name"]: g for g in groups}
+    # the folio's sentences about the census, re-tested against the bundle
+    assert all(g["share_waits_on_check"] > g["share_passes"] and g["share_passes"] < 0.5 for g in groups)
+    low = sorted(groups, key=lambda g: g["share_passes"])
+    assert {low[0]["name"], low[1]["name"]} == {"Management", "Legal"}
+    assert {low[-1]["name"], low[-2]["name"]} == {"Office and administrative support", "Sales"}
+    assert by["Management"]["mean_pay"] > by["Sales"]["mean_pay"]

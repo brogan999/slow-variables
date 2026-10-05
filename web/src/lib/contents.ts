@@ -70,6 +70,7 @@ export const PAGES: Record<string, Page> = {
     ["folio-edge", "Centre or edge", "Which decisions move to head office, and which have to stay on the spot?"],
     ["folio-rent", "Rent or own", "When should a firm rent intelligence, and when should it own it?"],
     ["folio-residue", "What stays scarce", "What does not get cheaper when intelligence does?"],
+    ["folio-shape", "The shape of the firm", "Which layers of a firm go first, who argues what, and what does the census say of each kind of job?"],
     ["folio-limit", "The firm in the limit", "What is left of a firm when the argument is carried to its end, and who profits?"],
     ["folio-record", "What the records show", "What do this site's ledgers show so far, and where do its own leans disagree?"],
   ] },

@@ -270,7 +270,14 @@ export type Shifts = { grounded_in: string[]; places: Place[]; foot_claims: { id
 export const outlook = () => read<OutlookDoc>("outlook.json");
 // The part of the outlook's ledger a page argues from: /firm carries its own cut of it (firm.json).
 export type ClaimsDoc = Pick<OutlookDoc, "as_of" | "essay" | "facts" | "sources" | "positions" | "claims" | "tally" | "tests">;
-export type FirmDoc = ClaimsDoc & { folios: Record<string, string[]>; regimes: { title: string; note: string; columns: string[]; rows: string[][] } };
+export type FirmShape = { shape: string; who: string; goes_first: string; stays: string; would_show: string; sources: string[] };
+export type FirmCutGroup = { code: string; name: string; ref: string; roles: number; payroll: number; share_passes: number; share_waits_on_check: number; share_physical: number; share_rest: number };
+export type FirmDoc = ClaimsDoc & {
+  folios: Record<string, string[]>; regimes: { title: string; note: string; columns: string[]; rows: string[][] };
+  shapes: { title: string; note: string; rows: FirmShape[] };
+  fiction: { label: string; note: string; works: { author: string; title: string; year: number; picture: string; shape: string }[] };
+  census_cut: { version: string; groups: FirmCutGroup[] };
+};
 export const firm = () => read<FirmDoc>("firm.json");
 export type Word = "happening" | "not_happening" | "slower" | "both" | "too_early";
 export type BoardRow = {

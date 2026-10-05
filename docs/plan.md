@@ -843,3 +843,12 @@ Deliberately not done: an `expectations` SQL table, per-page share images, pips,
 - **Census figures stay off the page as numbers:** a census figure is a model-scored screen with no observation behind it, so the essay says the comparison in words and links the census.
 - **Sources:** seventeen new source rows. Where a publisher refused the fetch, the link opens the journal's record (or, for Coase, his Nobel lecture restating the argument) and the venue says which version was read; no scan is linked.
 - **Not done:** the labs' ledger still carries each target's sub-layer only in its note, so no count splits the labs' purchases by sub-layer; nothing measures where decisions are taken inside firms, a roll-up's margins after purchase, or premiums for AI cover.
+
+## Part 43 (5 Oct 2026): the shape of the firm
+
+A seventh folio on `/firm`, "the shape", on what a firm looks like inside (the limit and the record become folios eight and nine). Asked for by Alex, starting from Drago and Laine's "Pyramid Replacement".
+
+- **The hypotheses** are a plate in `seed/firm.yaml` (`shapes`): seven shapes, each row crediting sources that are outlook records, printed by number. Thirteen sources were added, each fetched on the day; four positions and three claims, none of which a series here can test yet.
+- **The census cut** is `census.shape()`: payroll by the occupation code's major group (named in `seed/census.yaml`), best paid first, split into passes, waits only on a check, needs a body, and the rest, from the bundle's own task flags. It rides in `web/data/firm.json`. The census has no field for seniority, so it reads kinds of job; the folio says so and a test keeps the sentence.
+- **Fiction is a labelled lane** (`fiction` in `seed/firm.yaml`): listed beside the plate, never cited; a test fails if any claim or position rests on a novel. Only works checked against a text are listed.
+- **Where the site lands** is labelled as its judgement: the work that goes is the work an existing check settles, wherever it sits; the top stays while the law wants a person to answer.

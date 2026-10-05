@@ -68,7 +68,29 @@ Attention: a customer has the same hours in the day whatever a model costs. Ben 
 
 The last is the one most likely to give way. If models come to learn on the job, what is unwritten today is recorded tomorrow, and Walker says he is wrong if general agents manage complex work inside firms without continuing human help by 2028.
 
-### Folio VII · the limit
+### Folio VII · the shape
+
+## The pyramid thins where work can be checked, and keeps whoever must answer
+
+A firm is drawn as a pyramid for a reason. Garicano showed in 2000 that the shape economises on knowledge. The many at the base handle the common problems and pass the exceptions up to the few who know more: "a knowledge-based hierarchy is a natural way to organize the acquisition of knowledge" [cite:garicano_hierarchies]. With Nicholas Bloom and colleagues, who measure how firms are managed, he later found that cheaper technology pulls two ways. Cheaper information gives people lower down more to decide; cheaper communication sends decisions back to the centre [cite:bloom_it_ct]. They studied plants before AI, and nobody has shown which of the two AI is.
+
+Luke Drago and Rudolf Laine, who write on AI and the economy and now work at Thinking Machines, an AI company, argue that AI empties the pyramid from the bottom. Firms first stop hiring at entry level, then lose their juniors, then their managers, until at a few there is nobody left [cite:drago_laine_pyramid]. They give no dates and call the last step their most speculative. The evidence for the first step is a study of payroll records by Brynjolfsson, Bharat Chandar and Ruyu Chen: workers in their early twenties have fallen behind in the jobs most exposed to AI, through less hiring and not more firing [cite:canaries]. Zanna Iscenko and Fabien Curto Millet, economists at Google, reply that hiring in those jobs turned down before chatbots existed, as interest rates rose [cite:iscenko_curto_millet].
+
+Others expect the middle to go first. Michael Ewens and Xavier Giroud, finance economists who counted the layers of listed American firms, report that "they flatten their hierarchies following the adoption of artificial intelligence" [cite:ewens_giroud]; their summary does not say which layers go, or that AI is the cause. Jack Dorsey, who runs the payments company Block, and Roelof Botha, a venture investor, write that a model of the whole company can carry what managers used to pass along: "There is no need for a permanent middle management layer" [cite:dorsey_botha]. They report no results.
+
+Garicano himself expects more managers. A job is a bundle of tasks, and where tasks conflict "some human will have to hold the residual decision rights" [cite:garicano_task]. Julia Shin and Sandra Sucher, management researchers, found at two consulting firms that checking AI's work fell on the managers in the middle [cite:shin_sucher_middle]. At the far end, Shawn Bayern, a law professor, showed that American company law already allows an entity that follows a program and has no human members [cite:bayern_entities]. Lynn LoPucki, another, accepts that and expects crime to use it first [cite:lopucki_entities].
+
+[plate:shapes]
+
+Novelists drew most of these shapes first, and the lane below the table lists a few. They are fiction, and nothing here rests on them.
+
+This site's census cannot see rank. It has no field for seniority, so it reads occupational groups, kinds of job, not junior against senior within one. Read that way it agrees with Drago and Laine's order and disputes their scale. The share of payroll that passes its screen is smallest for managers and lawyers and largest for office support and sales. But in no group does most of the payroll pass, and in every group more of it waits only on a check that does not yet exist than passes today.
+
+[plate:jobs]
+
+What follows is this site's judgement. Rank is the wrong axis. The work that goes is the work an existing check can settle, wherever it sits, and more of that is at the base than at the top. What stays is setting the task, checking where no check exists, selling, and answering for the result. So the pyramid thins from the bottom and narrows in the middle, and it keeps a top for as long as the law wants a person to answer. The cost is one Garicano names: the base was also where people learned the trade, and a firm that stops hiring juniors stops making seniors [cite:garicano_becker].
+
+### Folio VIII · the limit
 
 ## In the limit, a firm is a name that can be sued, holding what cannot be bought
 
@@ -80,7 +102,7 @@ On the shape of such firms the theories part, and this site keeps all three. Bry
 
 Who profits, on this reasoning, is not mainly the seller of tokens. In Larson's own model a lab captures about a quarter of what its tokens are worth to the buyers, and less as open models catch up [cite:larson_complexity]. The rest goes to the owners of what is scarce beside the intelligence, and, where firms compete, to their customers.
 
-### Folio VIII · the record
+### Folio IX · the record
 
 ## Buyers are acting on this before anyone can show it pays
 
