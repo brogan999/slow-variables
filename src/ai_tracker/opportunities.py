@@ -4,7 +4,7 @@ Each record is the company that would turn one of the site's layer readings into
 categories it sits in (seed/market_map.yaml), the readings it builds on (outlook positions and claims), the rent
 rubric's inputs as the owner judges them and the Helmer powers it would build. Pool and tier come from the rubric's
 fixed rules, and example companies come from the map's placements, so the page computes nothing. A record is shown
-only when `published` is true; a blank field is blank on purpose.
+only when `published` is true; a blank field shows as not yet written.
 """
 
 from __future__ import annotations

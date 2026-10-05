@@ -2,9 +2,11 @@
 # Each record is the company that would turn one of the site's layer readings (outlook positions with a layer, cited in
 # builds_on as pos:<id>, or outlook claims as claim:<id>) into a lasting profit. List order is the owner's; nothing is scored.
 # Rent inputs are the owner's judgement; pool and tier follow the rent rubric's fixed rules (futures.pools/tier).
-# Powers are Helmer's, as value_chain.POWERS names them. A blank field is blank on purpose and shows as not yet written.
+# Powers are Helmer's, as value_chain.POWERS names them. A blank field shows as not yet written; a published record leaves none of prerequisites, acquirers and next action blank.
 # Drafted by a model from the site's readings; reviewed and released by Alex Brogan on 29 Sep 2026, who kept all twenty,
 # including those the rubric gives no lasting profit, because knowing what will not hold is instructive.
+# Prerequisites, acquirers and next action were drafted by claude-opus-5-5 on 5 Oct 2026: acquirers name kinds of buyer, and a
+# company only where one of the site's deal ledgers records the purchase.
 # Text types no digit but a year (value_chain.stray_digits).
 reviewed_by: Alex Brogan
 reviewed: '2026-09-29'
@@ -37,9 +39,9 @@ opportunities:
     durability: medium
   rent_reason: The failure record grows more useful with each buyer, but the checking method itself is easy to copy
   falsifier: Agents become cheap and reliable at checking their own work, so buyers stop paying for an outside check
-  prerequisites: ''
-  acquirers: ''
-  next_action: ''
+  prerequisites: 'A buyer who already pays for agent work by the task, and a workflow whose finished result can be checked against records the buyer holds'
+  acquirers: 'Payment and billing platforms that want to settle agent work, and evaluation firms moving from testing models to checking live results. The labs buy evaluation and testing teams (OpenAI took on Context.ai''s team and bought Promptfoo; Anthropic took on Humanloop''s), though a checker owned by a model seller loses the independence buyers pay for'
+  next_action: 'Pick one workflow with a customer who will share its records, write its definition of done, and run the check beside the people who do it now to see how often the two disagree'
 - id: regulated_assurance
   name: Independent sign-off for AI in regulated work
   published: true
@@ -68,8 +70,8 @@ opportunities:
   rent_reason: If a regulator names the tester, rivals need the same standing, which takes years
   falsifier: Regulators accept the labs' own testing, or no regulator requires an outside sign-off
   prerequisites: One regulator or insurer willing to recognise the tests
-  acquirers: ''
-  next_action: ''
+  acquirers: 'Audit and testing firms that already sign off regulated work, and insurers that need the tests to price cover. A lab is the wrong owner, since the value is that the tester does not sell the model'
+  next_action: 'Choose one regulated task, build the private test suite with one insurer or regulator at the table, and get its acceptance in writing'
 - id: continual_learning_in_customer
   name: A model that keeps learning inside one customer's work
   published: true
@@ -97,8 +99,8 @@ opportunities:
   rent_reason: The lock-in is real once learning works, but the site reads tuning as commoditising until it does
   falsifier: Each new general model wipes out what the customer's model learned, so firms stop paying to keep it learning
   prerequisites: Continual learning working in production
-  acquirers: ''
-  next_action: ''
+  acquirers: 'Labs and the clouds that host training, which have been buying post-training teams (CoreWeave agreed to buy OpenPipe, Anthropic bought Runhouse, and Thinking Machines Lab took on Workshop Labs'' team)'
+  next_action: 'Run one customer''s workflow for a quarter and show the tuned model beating the newest general model on that customer''s own test set'
 - id: agent_authority_registry
   name: Know-your-agent and delegated-authority registry
   published: true
@@ -125,9 +127,9 @@ opportunities:
     durability: long
   rent_reason: Existing identity firms already own the customer relationships and are extending to agents
   falsifier: Agents keep acting inside human sessions, so no separate agent identity is needed
-  prerequisites: ''
-  acquirers: ''
-  next_action: ''
+  prerequisites: 'One large platform that will require the credential from the agents it admits, and a way to tie each agent to the person or firm answerable for it'
+  acquirers: 'Identity providers, payment networks and the large platforms whose marketplaces agents enter. Stripe''s agreement to buy OpenRouter shows a payments firm buying its way into the traffic between software and models'
+  next_action: 'Sign one platform, issue credentials to its partners'' agents, and publish the record of credentials revoked'
 - id: agent_audit_trail
   name: Tamper-proof audit trail for what agents did
   published: true
@@ -154,9 +156,9 @@ opportunities:
     durability: long
   rent_reason: Years of audit history are costly to leave, though the logging itself is easy to copy
   falsifier: Regulators accept each vendor's own logs
-  prerequisites: ''
-  acquirers: ''
-  next_action: ''
+  prerequisites: 'Agents that act through connections which can be logged, and an auditor or regulator willing to say what record it will accept'
+  acquirers: 'Security and compliance software vendors, firms that monitor running models, and the audit firms themselves'
+  next_action: 'Log one regulated workflow end to end and have an outside auditor reconstruct a decision from the log alone'
 - id: ai_warranty
   name: AI warranty backed by a pool of loss data
   published: true
@@ -184,8 +186,8 @@ opportunities:
   rent_reason: Loss data accumulates only with years of claims
   falsifier: Courts put agent losses on the model makers, so buyers need no separate cover
   prerequisites: A capacity partner willing to carry the risk
-  acquirers: ''
-  next_action: ''
+  acquirers: 'Insurers, reinsurers and brokers that want the loss record, and agent vendors that want to sell with cover attached'
+  next_action: 'Write one warranty on one agent product with a reinsurer behind it, and start the loss record with every claim and near miss'
 - id: pooled_expert_records
   name: Graded expert-work records pooled across buyers
   published: true
@@ -211,9 +213,9 @@ opportunities:
     durability: medium
   rent_reason: The grading record is hard to rebuild, but the labs could bring the work inside
   falsifier: Labs bring expert work in-house and stop buying outside records
-  prerequisites: ''
-  acquirers: ''
-  next_action: ''
+  prerequisites: 'Experts and their employers agreeing that the grading may be licensed to many buyers, and at least two buyers who accept a shared record'
+  acquirers: 'Human-data vendors, labs and the networks that sit between publishers and models. Meta took a large stake in Scale AI, Mercor bought Deeptune, and Cloudflare bought the data marketplace Human Native'
+  next_action: 'Build the graded record for one field, license it to two buyers, and show it lifts both their models on a test neither wrote'
 - id: outcome_router
   name: A router that chooses models from pooled outcomes
   published: true
@@ -241,9 +243,9 @@ opportunities:
     durability: medium
   rent_reason: The site reads choosing a model as being given away unless pooled outcomes create the network
   falsifier: One provider becomes best on price and quality for most tasks
-  prerequisites: ''
-  acquirers: ''
-  next_action: ''
+  prerequisites: 'Customers who will report which answers worked, and enough spending across several providers for the saving to matter'
+  acquirers: 'Payment platforms, clouds and inference hosts. Stripe''s agreement to buy OpenRouter is the precedent'
+  next_action: 'Route one customer''s routine work, show the saving on its bill, and start recording which choices held up'
   see_also: policy_aware_routing
 - id: agent_payments
   name: Escrow that pays an agent only when its work passes a check
@@ -272,9 +274,9 @@ opportunities:
     durability: long
   rent_reason: Payment incumbents hold the rails; the opening is the check that releases the money
   falsifier: Agent-initiated purchases stay a tiny share of payments
-  prerequisites: ''
-  acquirers: ''
-  next_action: ''
+  prerequisites: 'Agent identity that a payment network accepts, and a check both sides agree on before money moves'
+  acquirers: 'Payment networks and processors, and the marketplaces where agents trade'
+  next_action: 'Run escrow for one marketplace''s agent-to-agent orders and report how many paid out, were disputed or were refunded'
 - id: permission_connectors
   name: The standard way agents get permission into business software
   published: true
@@ -303,9 +305,9 @@ opportunities:
     durability: medium
   rent_reason: Record-keeping software owners can capture this themselves
   falsifier: Labs and clouds ship their own connectors and the record-keepers let them in free
-  prerequisites: ''
-  acquirers: ''
-  next_action: ''
+  prerequisites: 'The vendors that hold the records letting outside agents in, and a permission scheme their security teams accept'
+  acquirers: 'The labs and clouds, which buy agent tooling (Anthropic bought Stainless, and Nebius agreed to buy Tavily), and the business-software vendors whose systems are being connected'
+  next_action: 'Ship connectors for one crowded category of business software with permissions and logging built in, and get one vendor to recommend them'
 - id: deploy_to_platform
   name: Deployment that leaves behind the platform the customer runs on
   published: true
@@ -333,9 +335,9 @@ opportunities:
     durability: medium
   rent_reason: The services margin grows with headcount; only the platform left behind earns a rent
   falsifier: Models need so little fitting that self-serve deployment wins
-  prerequisites: ''
-  acquirers: ''
-  next_action: ''
+  prerequisites: 'Engineers who can work inside a customer, and first customers alike enough that the second deployment reuses the first'
+  acquirers: 'The labs, which are buying deployment firms (OpenAI agreed to buy Tomoro and Northslope, and Poolside bought Fern Labs), and consultancies and private-equity owners that want the skill in house'
+  next_action: 'Do three deployments in one industry and count how much of the third was reused from the first two'
 - id: context_engineering_service
   name: Capturing how a firm really works, for its agents
   published: true
@@ -363,9 +365,9 @@ opportunities:
     durability: short
   rent_reason: Useful and needed now, but copyable and likely to be automated
   falsifier: Agents learn a firm's unwritten rules on their own from its records
-  prerequisites: ''
-  acquirers: ''
-  next_action: ''
+  prerequisites: 'A customer that will let its people be watched and interviewed at work, and agents already failing on unwritten rules, so the gain can be measured'
+  acquirers: 'Deployment firms, the labs'' applied teams and vendors of evaluation tools'
+  next_action: 'Capture one team''s unwritten rules, turn them into tests, and measure the agent''s failures before and after'
   see_also: deploy_to_platform
 - id: vertical_system_of_record
   name: A trade's AI system of record, with the approvals only that trade can give
@@ -393,9 +395,9 @@ opportunities:
     durability: long
   rent_reason: Holding the trade's records is sticky; packaging a general model is not
   falsifier: Vertical apps' prices fall with each better general model as customers move to the labs' own products
-  prerequisites: ''
-  acquirers: ''
-  next_action: ''
+  prerequisites: 'Standing in the trade, through a licence or partners who hold one, and customers willing to move their records'
+  acquirers: 'The incumbent record-keepers of each trade, and labs and large technology firms moving into applications (OpenAI, Microsoft, Cohere and Mistral have each bought or agreed to buy a product built for one field)'
+  next_action: 'Win one firm''s daily work in one trade, then become the place its matters or cases are kept'
 - id: outcome_priced_rollup
   name: An AI roll-up that moves its clients to fixed fees
   published: true
@@ -423,8 +425,8 @@ opportunities:
   rent_reason: The roll-up owns the complementary assets; the AI itself is bought in
   falsifier: Margins fall back to the trade's ordinary level as unmerged rivals buy the same tools
   prerequisites: Capital and a pipeline of owners ready to sell
-  acquirers: ''
-  next_action: ''
+  acquirers: 'Private-equity firms and larger roll-ups once the method is proven. This site''s roll-up ledger shows Crete, Archipel and Dwelly each adding firms many times over'
+  next_action: 'Buy one firm, move a share of its clients to fixed fees before automating the work, and report margin and clients lost a year on'
 - id: licensed_autonomous_service
   name: A licensed firm that sells the finished job and stands behind it
   published: true
@@ -452,9 +454,9 @@ opportunities:
     durability: medium
   rent_reason: The licence and the liability keep software vendors out, but other licensed firms can copy the model
   falsifier: Labs launch services in the same trades with their own warranties
-  prerequisites: ''
-  acquirers: ''
-  next_action: ''
+  prerequisites: 'A licence or a licensed partner, insurance that covers work done by software, and one narrow service whose result can be checked'
+  acquirers: 'Incumbent firms in the trade, roll-ups that want the operating method, and labs that would sooner own an operator than sell to one'
+  next_action: 'Sell one narrow service per outcome in one licensed trade and publish how often the firm had to make a customer whole'
 - id: energy_aware_compute
   name: Moving computing to where power is available
   published: true
@@ -481,9 +483,9 @@ opportunities:
     durability: medium
   rent_reason: The scarcity is real while grid hookups lag; the rent goes to whoever holds the grid position
   falsifier: Interconnection queues shorten sharply
-  prerequisites: ''
-  acquirers: ''
-  next_action: ''
+  prerequisites: 'Workloads that can wait or move, and a utility or grid operator that will pay for flexibility or connect a flexible site sooner'
+  acquirers: 'Data-centre operators, the newer compute clouds and utilities. Chip and cloud firms have been buying software that gets more from the same hardware (AMD bought Brium, and Crusoe bought Atero), though neither deal was for moving work to follow power'
+  next_action: 'Run one site''s flexible workloads against its grid''s spare hours and agree with the utility what the freed capacity is worth'
 - id: deployment_talent
   name: Training and placing the engineers who deploy AI
   published: true
@@ -509,9 +511,9 @@ opportunities:
     durability: short
   rent_reason: The shortage is real now and will ease as training spreads
   falsifier: Deployment staff become easy to hire
-  prerequisites: ''
-  acquirers: ''
-  next_action: ''
+  prerequisites: 'Employers that commit to hire graduates before the course starts, and working deployment engineers to teach it'
+  acquirers: 'Deployment firms, the labs that are buying such firms (OpenAI agreed to buy Tomoro and Northslope), and staffing firms'
+  next_action: 'Run one paid cohort with two employers committed in advance and report how many graduates are still in deployment roles a year later'
 - id: policy_aware_routing
   name: Routing that keeps a firm inside approved models and fails over when one is cut off
   published: true
@@ -538,9 +540,9 @@ opportunities:
     durability: medium
   rent_reason: Rules create the need; the routing itself can be copied
   falsifier: Cross-border access to models widens again
-  prerequisites: ''
-  acquirers: ''
-  next_action: ''
+  prerequisites: 'Rules specific enough to encode, and substitute models tested as good enough for each governed task'
+  acquirers: 'Clouds, security and compliance vendors, and routers that want regulated customers'
+  next_action: 'Build the register of approved substitutes for one regulated buyer and prove a failover in a drill'
 - id: open_weight_post_training
   name: Tuning open models to frontier quality for one industry
   published: true
@@ -568,9 +570,9 @@ opportunities:
     durability: short
   rent_reason: The site reads tuning as commoditising; the rent lasts only until clouds bundle it
   falsifier: Closed labs reopen a lasting lead over open models
-  prerequisites: ''
-  acquirers: ''
-  next_action: ''
+  prerequisites: 'Open models close enough to the frontier, and an industry test set the customer trusts'
+  acquirers: 'Clouds, inference hosts and labs that want tuned models to serve (Nebius, Nscale and Mistral have each agreed to buy an inference business), and large firms in the industry served'
+  next_action: 'Tune one open model for one industry''s hardest tasks and publish its results on that industry''s tests beside those of the closed models'
   see_also: continual_learning_in_customer
 - id: agent_incident_response
   name: Incident response and forensics for agent failures
@@ -597,9 +599,9 @@ opportunities:
     durability: medium
   rent_reason: Scarce expertise after a shock; rivals follow once demand is proven
   falsifier: Two years pass with no material agent failure
-  prerequisites: ''
-  acquirers: ''
-  next_action: ''
+  prerequisites: 'Agents that leave logs worth reading, and insurers or law firms that will name a responder in advance'
+  acquirers: 'Security firms, insurers and the large audit and advisory firms'
+  next_action: 'Sign retainers with a few firms running agents at scale and publish an account, with names removed, of the first incident handled'
 sequence:
 - stage: now
   opportunity: regulated_assurance
