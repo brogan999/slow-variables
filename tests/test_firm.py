@@ -7,6 +7,7 @@ import re
 from ai_tracker import firm
 from ai_tracker import outlook as ol
 from ai_tracker import store as st
+from ai_tracker.analysis.metrics import run_metrics
 from ai_tracker.board import judgements
 
 from .test_outlook import NUMBER_WORD, YEAR
@@ -99,6 +100,7 @@ def test_the_essay_says_who_drafted_it_and_whose_model_scored_the_census():
 
 def test_tonights_readings_settle_the_claims_the_records_can_settle():
     s = st.Store()
+    s.derived = run_metrics(s.con)  # derived rows are not committed; a fresh checkout computes them
     doc = ol.build(s)
     claims = {c["id"]: c for c in doc["claims"]}
     # its author wrote, after OpenAI launched its deployment company, that no lab had yet done this: the row is no test
