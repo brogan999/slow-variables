@@ -269,7 +269,8 @@ def build(spec: dict[str, Any], fetched: dict[str, Any]) -> tuple[dict[str, Any]
         },
         "figure": {**_figure(h, val, scorers), "ref": ref(spec, "manifest.json", "headline")},
         "dial": [
-            {"rule": x["rule"], "passes": x["freed"], "agreed3": x["agreed3"], "alone": x["alone"], "alone_rest": x["alone_rest"], "headline": x["headline"]}
+            {"rule": x["rule"], "passes": x["freed"], "agreed3": x["agreed3"], "alone": x["alone"], "alone_rest": x["alone_rest"], "headline": x["headline"],
+             "vh": x["vh"], "g": x["g"], "l": x["l"], "label": (spec.get("dial_labels") or {}).get(f"{x['vh']}-{x['g']}-{x['l']}")}
             for x in val["dial"]
         ],
         "functions": sorted(
@@ -340,7 +341,56 @@ def strings(spec: dict[str, Any]) -> list[str]:
     if not spec:
         return []
     s = spec["sections"]
-    return [spec["title"], spec["lede"], spec["rule"], spec["agreed"], *spec["caveats"], *spec["method_notes"].values(), *(x[k] for x in s.values() for k in ("title", "lede"))]
+    return [spec["title"], spec["lede"], spec["rule"], spec["agreed"], *spec["caveats"], *spec["method_notes"].values(), *(x[k] for x in s.values() for k in ("title", "lede")), *(spec.get("dial_labels") or {}).values(),
+            *(spec.get("stances") or {}).values(), *(spec.get("trade_flags") or {}).values(),
+            *(x for t in trades_spec().get("trades") or [] for x in (t["name"], t.get("no_figure"), t.get("census_note")) if x)]
+
+
+TRADES = ROOT / "seed" / "census_trades.yaml"
+LAST = ("several", "other")  # catch-all entries close the list whatever their count
+
+
+def trades_spec() -> dict[str, Any]:
+    return (yaml.safe_load(TRADES.read_text()) or {}) if TRADES.exists() else {}
+
+
+def trades(spec: dict[str, Any], index: dict[str, Any], names: dict[str, str], deals: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:
+    """The combined list: for each trade, the roll-ups in it (counted by where the directory places them), how many of
+    them the acquisitions sweep covered, what they are on record as having bought, and one census figure: an industry
+    row of the bundle, else a deal card's own figure, selected and never summed. `names` maps an entity id to its name;
+    `deals` a rollup_acq series key to its stored row. Ordered by roll-ups in the trade, since deals found would rank
+    how far the sweep reached. A flag marks where the census's reasoning and the buyers part ways; it settles nothing."""
+    rows_by_code = {x["naics"]: x for x in index.get("industries") or []}
+    cards = {c["key"]: c for c in (index.get("deals") or {}).get("cards") or []}
+    swept = set(spec.get("swept") or [])
+    out = []
+    for t in spec.get("trades") or []:
+        place = {w: t.get("rollups", {}).get(w, []) for w in ("us", "elsewhere", "unstated")}
+        ids = [i for w in place.values() for i in w]
+        card = cards.get(t.get("card") or "")
+        row = rows_by_code.get(t.get("naics") or "")
+        if row:
+            fig = {"passes": row["passes"], "share": row["share_total"], "ref": row["ref"], "from": "industry", "title": row["title"]}
+        elif card:
+            fig = {"passes": card["passes"], "share": None, "ref": None, "from": "card", "title": None}
+        else:
+            fig = None
+        flag = None
+        if card and card["stance"] == "passes" and ids:
+            flag = "buyers_despite_passes"
+        elif card and card["stance"] == "keeps" and not ids:
+            flag = "keeps_without_buyers"
+        out.append({
+            "key": t["key"], "name": t["name"], "census": fig, "no_figure": t.get("no_figure"), "census_note": t.get("census_note"),
+            "card": t.get("card"), "flag": flag,
+            "rollups": {"n": len(ids), **{w: len(v) for w, v in place.items()},
+                        "names": [{"id": i, "name": names.get(i, i), "where": w, "swept": i in swept} for w, v in place.items() for i in v]},
+            "swept": sum(1 for i in ids if i in swept),
+            "deals": sorted(({"key": k, "obs_id": deals[k]["id"], "buyer": names.get(deals[k]["entity_id"], deals[k]["entity_id"]),
+                              "text": deals[k]["value_text"], "date": str(deals[k]["as_of_date"])} for k in t.get("deals", []) if k in deals),
+                            key=lambda d: (d["date"], d["key"])),
+        })  # fmt: skip
+    return sorted(out, key=lambda t: (t["key"] in LAST, -t["rollups"]["n"], t["name"]))
 
 
 MIN_TARGETS = 200  # firms with 20 to 99 staff: fewer and there is not a rollup's worth to buy

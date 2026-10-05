@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArticleLayout, MarginPanel } from "@/components/ArticleLayout";
 import { Figure } from "@/components/Figure";
 import { PageHeader } from "@/components/PageHeader";
-import { census, censusRollup, type CensusIndex, type CensusRollup } from "@/lib/data";
+import { census, censusRollup, censusTrades, type CensusIndex, type CensusRollup } from "@/lib/data";
 import { fmt } from "@/lib/format";
 
 export const metadata = { title: "The automatability census", description: "Which knowledge work passes a structural hand-over screen, task by task, role by role and industry by industry, with the part all three scoring models pass beside every total." };
@@ -116,11 +116,12 @@ function Method({ c }: { c: CensusIndex }) {
   );
 }
 
-const STANCE: Record<string, string> = { keeps: "the owner likely keeps the saving", check: "check before buying", passes: "the saving likely goes to clients" };
 
 export default function CensusPage() {
   const c = census();
   const rollups = censusRollup();
+  const trades = censusTrades();
+  const cardBy = new Map(c.deals.cards.map((d) => [d.key, d]));
   const s = c.prose.sections;
   const h = c.headline;
   const fns = c.functions.map((f) => f.function);
@@ -180,7 +181,7 @@ export default function CensusPage() {
 
         <Section id="dial" n="The rule" title={s.dial.title} lede={s.dial.lede}>
           <Rows head={["Rule", "Passes the screen", "All three pass"]} rows={c.dial} row={(d) => (
-            <tr key={d.rule} className={d.headline ? "bg-surface-2" : undefined}><th scope="row">{d.rule}{d.headline ? <strong className="font-medium text-ink"> (the rule used)</strong> : null}</th><td className="tabular-nums">{usd(d.passes)}</td><td className="tabular-nums">{usd(d.agreed3)}</td></tr>
+            <tr key={d.rule} className={d.headline ? "bg-surface-2" : undefined}><th scope="row">{d.rule}{d.label ? <span className={d.headline ? "block font-medium text-ink" : "block text-muted"}>{d.label}</span> : null}</th><td className="tabular-nums">{usd(d.passes)}</td><td className="tabular-nums">{usd(d.agreed3)}</td></tr>
           )} />
         </Section>
 
@@ -230,27 +231,49 @@ export default function CensusPage() {
 
         <Section id="deals" n="Part IV · businesses" title={s.deals.title} lede={s.deals.lede}>
           <div className="grid gap-4 md:grid-cols-2">
-            {c.deals.cards.map((d) => (
-              <article key={d.key} id={`deal-${d.key}`} className="panel px-4 py-4 flex flex-col gap-2 text-sm">
-                <div className="flex flex-wrap gap-2 items-baseline">
-                  <span className="eyebrow">{STANCE[d.stance] ?? d.stance}</span>
-                  {d.anchored ? <span className="eyebrow text-muted">· sized by occupation, not industry</span> : null}
-                </div>
-                <h3 className="font-medium text-base">{d.name}</h3>
-                <p className="text-ink-2"><strong className="font-medium text-ink">Priced as</strong> {d.invoice}.</p>
-                <p className="tabular-nums">Payroll {usd(d.payroll)} · passes the screen {usd(d.passes)} <span className="text-muted">({usd(d.passes_strict)} under the stricter rule, {usd(d.passes_loose)} under the looser)</span> · all three pass <A3 v={d.agreed3} /></p>
-                <p className="text-ink-2">{d.stance_why} <span className="text-muted">Reasoned from how the business prices its work, not measured.</span></p>
-                <details><summary className="cursor-pointer">Why, the questions that kill it, comparables and sources</summary>
-                  <div className="flex flex-col gap-2 mt-2 text-ink-2">
-                    <p>{d.why}</p>
-                    {d.excl ? <p>{d.excl}</p> : null}
-                    <ul className="list-disc pl-5">{d.kill.map((k) => <li key={k}>{k}</li>)}</ul>
-                    <p>Comparables, illustrating the pricing model, not researched targets: {d.comps.join("; ")}.</p>
-                    {d.sources.length ? <p>Sources: {d.sources.map((x, i) => <span key={x.cited_as}>{i ? ", " : ""}<a href={x.href} className={link}>{new URL(x.cited_as).hostname}</a></span>)}</p> : null}
-                  </div>
-                </details>
-              </article>
-            ))}
+            {trades.trades.map((t) => {
+              const d = t.card ? cardBy.get(t.card) : undefined;
+              return (
+                <article key={t.key} id={`trade-${t.key}`} className="panel px-4 py-4 flex flex-col gap-2 text-sm">
+                  {d ? <div className="flex flex-wrap gap-2 items-baseline"><span className="eyebrow">{trades.stances[d.stance] ?? d.stance}</span>{d.anchored ? <span className="eyebrow text-muted">· sized by occupation, not industry</span> : null}</div> : null}
+                  <h3 className="font-medium text-base">{t.name}</h3>
+                  <p className="tabular-nums">
+                    <strong className="font-medium text-ink">Roll-ups followed:</strong> {fmt(t.rollups.n, "count")}
+                    {t.rollups.n ? <span className="text-muted"> ({fmt(t.rollups.us, "count")} in the United States, {fmt(t.rollups.elsewhere, "count")} elsewhere{t.rollups.unstated ? <>, {fmt(t.rollups.unstated, "count")} place not stated</> : null}; {fmt(t.swept, "count")} searched for purchases)</span> : null}
+                    {" · "}<strong className="font-medium text-ink">purchases found:</strong> {fmt(t.deals.length, "count")}
+                  </p>
+                  {t.census ? (
+                    <p className="tabular-nums text-ink-2">
+                      <strong className="font-medium text-ink">Census:</strong> {usd(t.census.passes)} of American payroll passes the screen
+                      {t.census.share != null ? <> ({fmt(t.census.share, "share")} of the industry&apos;s payroll)</> : null}
+                      {t.census.title ? <span className="text-muted">, from the row &ldquo;{t.census.title}&rdquo;</span> : <span className="text-muted">, from the census&apos;s own sizing of this business</span>}.
+                      {t.census_note ? <span className="text-muted"> {t.census_note}</span> : null}
+                    </p>
+                  ) : <p className="text-muted"><strong className="font-medium text-ink-2">Census:</strong> no figure. {t.no_figure}</p>}
+                  {d ? <p className="text-ink-2"><strong className="font-medium text-ink">Priced as</strong> {d.invoice}. {d.stance_why} <span className="text-muted">Reasoned from how the business prices its work, not measured.</span></p> : null}
+                  {t.flag ? <p className="border-l-2 border-ink pl-3 text-ink">{trades.flags[t.flag]}</p> : null}
+                  {t.rollups.n || t.deals.length || d ? (
+                    <details><summary className="cursor-pointer">Who the buyers are, what they bought{d ? ", and the census's reasoning" : ""}</summary>
+                      <div className="flex flex-col gap-2 mt-2 text-ink-2">
+                        {t.rollups.n ? <p><span className="text-muted">Roll-ups (bold: searched for purchases): </span>{t.rollups.names.map((r, k) => <span key={r.id}>{k ? ", " : ""}<span className={r.swept ? "font-semibold text-ink" : ""}>{r.name}</span></span>)}</p> : null}
+                        {t.deals.length ? (
+                          <ul className="list-disc pl-5">{t.deals.map((x) => <li key={x.key}><span className="tabular-nums text-muted">{x.date}</span> · {x.buyer} <Link href={`/series/${x.key}#${x.obs_id}`} className={link}>{x.text}</Link></li>)}</ul>
+                        ) : t.rollups.n ? <p className="text-muted">No purchase on the record was found for the buyers searched.</p> : null}
+                        {d ? (
+                          <>
+                            <p>{d.why}</p>
+                            {d.excl ? <p>{d.excl}</p> : null}
+                            <ul className="list-disc pl-5">{d.kill.map((k) => <li key={k}>{k}</li>)}</ul>
+                            {d.comps.length ? <p>Comparables the census named to illustrate the pricing model: {d.comps.join("; ")}.</p> : null}
+                            {d.sources.length ? <p>Sources: {d.sources.map((x, i) => <span key={x.cited_as}>{i ? ", " : ""}<a href={x.href} className={link}>{new URL(x.cited_as).hostname}</a></span>)}</p> : null}
+                          </>
+                        ) : null}
+                      </div>
+                    </details>
+                  ) : null}
+                </article>
+              );
+            })}
           </div>
           <details className="panel px-4 py-3">
             <summary className="cursor-pointer font-medium">Businesses with no card, and why</summary>

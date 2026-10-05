@@ -210,3 +210,26 @@ def test_every_seed_entity_id_is_an_entity_and_a_corrected_one_supersedes(tmp_pa
     assert st.append_observations("c", [Observation(**kw, entity_id="a")]) == 1
     new = next(r for r in st.read_jsonl(tmp_path / "obs" / "c.jsonl") if r["entity_id"] == "a")
     assert new["supersedes_id"] == old.id
+
+
+# The roll-ups searched for published acquisitions under the second ledger's rule (Q1 to Q4 in seed/manual_observations.yaml; the sweep of 5 Oct 2026).
+SWEPT_ROLLUP_BUYERS = {
+    "2x", "archipel", "attentive", "avi_medical", "beacon_software", "bending_spoons", "bhub", "buena", "candid_health",
+    "circeus", "crescendo", "crete", "dwelly", "general_catalyst", "integral", "iterative_health", "lawhive",
+    "lightswitch", "long_lake", "loop", "metropolis", "mitigata", "nuvocargo", "onepilot", "pando", "particle_health",
+    "savvy", "sennder", "sequence_holdings", "shield_technology_partners", "thrive_holdings", "titan", "unifycx",
+}
+
+
+def test_every_rollup_deal_names_a_swept_rollup_as_its_buyer_and_stays_out_of_the_lab_ledger():
+    seed = Seed.load()
+    rollups = {e.id for e in seed.entities for m in e.memberships if m.sublayer_id == "ai_rollups"}
+    assert SWEPT_ROLLUP_BUYERS <= rollups
+    every = yaml.safe_load((Path(__file__).resolve().parents[1] / "seed" / "manual_observations.yaml").read_text())["observations"]
+    rows = [r for r in every if r["series_key"].startswith("rollup_acq.")]
+    assert rows
+    for r in rows:
+        ns, buyer, target, freq = r["series_key"].split(".")  # a target slug carries no dot
+        assert (buyer, freq) == (r["entity_id"], "pt") and buyer in SWEPT_ROLLUP_BUYERS, r["series_key"]
+        assert r["unit"] == "text" and r["value_text"].startswith(("acquired ", "announced as joining its group: "))
+    assert not [r for r in every if r["series_key"].startswith("acq.") and r.get("entity_id") in rollups - {"general_catalyst"}]

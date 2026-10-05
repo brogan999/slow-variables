@@ -357,7 +357,7 @@ export type CensusIndex = {
     accountable_removed: number; not_called: number; by_scorer: Record<string, number>; rescore_changed: number; fleiss_kappa: number;
     modelled_saving: number; ref: string;
   };
-  dial: { rule: string; passes: number; agreed3: number; alone: number; alone_rest: number; headline: boolean }[];
+  dial: { rule: string; passes: number; agreed3: number; alone: number; alone_rest: number; headline: boolean; label?: string | null }[];
   functions: CensusFunction[]; industries: CensusIndustry[]; roles: CensusRole[];
   deals: { cards: CensusCard[]; not_carded: { name: string; why: string }[] };
   method: CensusMethod;
@@ -391,6 +391,13 @@ export type CensusRollup = {
   small_share: { value: number; derived_id: string; obs_ids: string[] }; firms_20_99: { value: number; obs_ids: string[] };
 };
 export const censusRollup = () => read<CensusRollup[]>("census/rollup.json");
+export type CensusTrade = {
+  key: string; name: string; card: string | null; flag: string | null; no_figure: string | null; census_note: string | null;
+  census: { passes: number; share: number | null; ref: string | null; from: "industry" | "card"; title: string | null } | null;
+  rollups: { n: number; us: number; elsewhere: number; unstated: number; names: { id: string; name: string; where: string; swept: boolean }[] };
+  swept: number; deals: { key: string; obs_id: string; buyer: string; text: string; date: string }[];
+};
+export const censusTrades = () => read<{ stances: Record<string, string>; flags: Record<string, string>; trades: CensusTrade[] }>("census/trades.json");
 export const censusRole = (occ: string) => read<CensusRoleDoc>(`census/roles/${occ}.json`);
 
 // Futures (plan Part 20): imagined and expected technologies by decade, model-judged, rendered as exported.

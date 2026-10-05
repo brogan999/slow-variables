@@ -7077,3 +7077,1157 @@ observations:
   #   reka Moonvalley (2026-05-10): R2: reported by The Information from people familiar, no party confirmation found; R4: a video-generation model lab (other AI model lab)
   #   sesame_ai Synthetic Media Processing Laboratory (2026-06-17): R2: appears only in a PitchBook deal listing; no party or filing confirms it, and the direction of the deal is unclear
   #   radiant Standard Nuclear (2026-08-20): R3: a TRISO fuel supply agreement, not a purchase; R4: power/fuel
+  # ---------- roll-up acquisitions (Part 38, swept 5 Oct 2026 for the 33 buyers pinned in tests/test_manual.py) ----------
+  # A second ledger, apart from the labs' (acq.*) and read by no deal count: what the AI roll-ups this site files have bought.
+  # Q1 the buyer is an entity with an ai_rollups membership, primary or not, keyed as the subject; a platform's deal is
+  #    filed under the platform the announcement names (Shield's under Shield, not its backer).
+  # Q2 it is a purchase in which the buyer, alone or with named partners, takes the whole or control, confirmed on the
+  #    record by a party; or a firm the buyer itself announces as joining its group, where the buyer's stated model is to
+  #    own the firms it adds (Crete, Shield): those rows say "announced as joining", since no stake is stated.
+  # Q3 dated at the announcement or confirmation from 1 Jan 2024; a deal that closed in the period counts at its closing.
+  # Q4 one row per deal, from the buyer's or target's page, else trade press or a copy of the release that answers a
+  #    scripted request. A deal named only in a count ("its fortieth acquisition") or a logo wall is not a row.
+  # Considered, not counted: general_catalyst Janus Henderson (joint, led by another buyer); bending_spoons Harvest (no
+  #    dated source), and its StreamYard, Issuu and MileIQ purchases and buena's Krasemann, whose pages did not show the
+  #    quoted words to this site's fetcher; shield NetAscendant, SK Tech Group, BCS365 (named in one trade-press line, no announcement);
+  #    sequence_holdings BankSouth (a minority stake); long_lake's other purchases (counted by the buyer, not named).
+  - series_key: rollup_acq.2x.intelligent_demand.pt
+    source_id: 2x_news
+    entity_id: 2x
+    value_text: "acquired Intelligent Demand (B2B marketing / growth-strategy agency, USA)"
+    unit: text
+    as_of_date: 2024-12-19
+    published_date: 2024-12-19
+    url: https://2x.marketing/press-release/2x-acquires-intelligent-demand-strengthening-marketing-as-a-service-leadership-to-create-the-ultimate-growth-partner-for-b2b-leaders/
+    tier: 7
+    basis: company_stated
+    raw_snippet: "2X acquires Intelligent Demand, strengthening Marketing-as-a-Service leadership to create the ultimate growth partner for B2B leaders"
+    note: "Whole-company acquisition; price undisclosed."
+  - series_key: rollup_acq.2x.outbound_funnel.pt
+    source_id: 2x_news
+    entity_id: 2x
+    value_text: "acquired Outbound Funnel (revenue-operations consultancy, USA)"
+    unit: text
+    as_of_date: 2025-07-30
+    published_date: 2025-07-30
+    url: https://2x.marketing/press-release/2x-acquires-outbound-funnel-expanding-revops-leadership/
+    tier: 7
+    basis: company_stated
+    raw_snippet: "today announced the acquisition of"
+    note: "Release dated 30 Jul 2025 (posted 31 Jul); price undisclosed."
+  - series_key: rollup_acq.2x.the_kiln.pt
+    source_id: 2x_news
+    entity_id: 2x
+    value_text: "acquired The Kiln (go-to-market agency (Clay partner), USA)"
+    unit: text
+    as_of_date: 2026-01-06
+    published_date: 2026-01-06
+    url: https://2x.com/press-release/2x-acquisition-clay-partner-the-kiln/
+    tier: 7
+    basis: company_stated
+    raw_snippet: "Acquisition positions 2X as one of the first Marketing-as-a-Service (MaaS) firms with scale to deliver integrated revenue engineering"
+    note: "Whole-company acquisition; price undisclosed."
+  - series_key: rollup_acq.2x.knownwell.pt
+    source_id: 2x_news
+    entity_id: 2x
+    value_text: "acquired Knownwell (AI-as-a-service / agentic AI engineering firm, USA)"
+    unit: text
+    as_of_date: 2026-06-10
+    published_date: 2026-06-10
+    url: https://2x.marketing/press-release/2x-acquires-knownwell/
+    tier: 7
+    basis: company_stated
+    raw_snippet: "2X Acquires Knownwell to Build the First GTM Human-Agentic Services Company Unifying B2B Marketing, Sales, and Customer Success"
+    note: "Target is an AI platform company rather than a services firm; its CEO became 2X's CEO. Price undisclosed."
+  - series_key: rollup_acq.archipel.groupe_rey.pt
+    source_id: alperapartners_news
+    entity_id: archipel
+    value_text: "acquired Groupe Rey (accounting firm, France)"
+    unit: text
+    as_of_date: 2025-04-03
+    published_date: 2025-04-03
+    url: https://www.alperapartners.com/news/launching-archipel-building-frances-next-generation-accounting-professional-services-firm
+    tier: 7
+    basis: company_stated
+    raw_snippet: "This first acquisition illustrates Archipel’s strategy: uniting high-performing firms, providing them with enhanced resources, and building an attractive model for accountants and their teams."
+    note: "First acquisition: Groupe Rey, Paris and Rennes, 54 staff; announced with the EUR 50m equity raise. Date: Date of the launch announcement that disclosed the deal"
+  - series_key: rollup_acq.archipel.p2r.pt
+    source_id: alperapartners_news
+    entity_id: archipel
+    value_text: "acquired P2R (accounting and audit firm, France)"
+    unit: text
+    as_of_date: 2025-09-16
+    published_date: 2025-09-16
+    url: https://www.alperapartners.com/news/archipel-accelerates-with-acquisition-of-p2r-and-finantis
+    tier: 7
+    basis: company_stated
+    raw_snippet: "Archipel Accelerates With Acquisition of P2R and Finantis"
+    note: "P2R, Paris and Lyon, 4 partners / ~50 staff; press release uses 'integration' in body, 'acquisition' in headline."
+  - series_key: rollup_acq.archipel.finantis.pt
+    source_id: alperapartners_news
+    entity_id: archipel
+    value_text: "acquired Finantis (audit and accounting firm, France)"
+    unit: text
+    as_of_date: 2025-09-16
+    published_date: 2025-09-16
+    url: https://www.alperapartners.com/news/archipel-accelerates-with-acquisition-of-p2r-and-finantis
+    tier: 7
+    basis: company_stated
+    raw_snippet: "Archipel Accelerates With Acquisition of P2R and Finantis"
+    note: "Finantis, Paris, 4 partners / ~30 staff; same release as P2R."
+  - series_key: rollup_acq.archipel.lamy_experts.pt
+    source_id: lexia_conseil
+    entity_id: archipel
+    value_text: "acquired Lamy Experts (accounting firm, France)"
+    unit: text
+    as_of_date: 2025-10-02
+    published_date: 2025-10-02
+    url: https://www.lexia-conseil.fr/un-nouveau-cabinet-integre-archipel/
+    tier: 5
+    basis: reported
+    raw_snippet: "Le cabinet Lamy Experts a rejoint Archipel, un groupe consacré au regroupement et au développement des cabinets d’expertise comptable."
+    note: "Fourth firm to join; Lamy Experts' own site also says it is 'membre du Groupe Archipel'. Source says 'a rejoint', not 'acquis'. Date: Date of the trade brief (actuEL EC, republished by Lexia Conseil); exact signing date not published"
+  - series_key: rollup_acq.archipel.avei_a.pt
+    source_id: alperapartners_news
+    entity_id: archipel
+    value_text: "acquired AVEI'A (accounting firm, France)"
+    unit: text
+    as_of_date: 2026-01-15
+    published_date: 2026-01-15
+    url: https://www.alperapartners.com/news/archipel-accelerates-its-consolidation-strategy-integration-of-two-new-firms-and-a-significant-strengthening-of-its-financing-capacity-with-eurazeo
+    tier: 7
+    basis: company_stated
+    raw_snippet: "Archipel acquires Avei'a, Groupe Conseils and secures 65m Eurazeo financing"
+    note: "AVEI'A: six offices in Grand Est and Luxembourg, 110 staff. Body text says 'integration'; page title says 'acquires'."
+  - series_key: rollup_acq.archipel.groupe_conseils.pt
+    source_id: alperapartners_news
+    entity_id: archipel
+    value_text: "acquired Groupe Conseils (accounting firm, France)"
+    unit: text
+    as_of_date: 2026-01-15
+    published_date: 2026-01-15
+    url: https://www.alperapartners.com/news/archipel-accelerates-its-consolidation-strategy-integration-of-two-new-firms-and-a-significant-strengthening-of-its-financing-capacity-with-eurazeo
+    tier: 7
+    basis: company_stated
+    raw_snippet: "Archipel acquires Avei'a, Groupe Conseils and secures 65m Eurazeo financing"
+    note: "Groupe Conseils: Paris region, 37 staff, five partners. Same release as AVEI'A."
+  - series_key: rollup_acq.archipel.prospective_finance.pt
+    source_id: alperapartners_news
+    entity_id: archipel
+    value_text: "acquired Prospective & Finance (accounting firm, France)"
+    unit: text
+    as_of_date: 2026-04-08
+    published_date: 2026-04-08
+    url: https://www.alperapartners.com/news/one-year-after-its-launch-archipel-announces-the-integration-of-three-new-accounting-firms-and-surpasses-eu50-million-in-revenue-confirming-its-unique-model-in-a-rapidly-evolving-market
+    tier: 7
+    basis: company_stated
+    raw_snippet: "following the integration of three new firms: Prospective & Finance, Avexxens, and L&A Conseil & Audit"
+    note: "Soissons-based firm, 51 staff, six partners. Le Journal des Entreprises calls it a 'reprise'. Date: Release dated 8 April 2026; trade press 10 April"
+  - series_key: rollup_acq.archipel.avexxens.pt
+    source_id: alperapartners_news
+    entity_id: archipel
+    value_text: "acquired Avexxens (accounting firm, France)"
+    unit: text
+    as_of_date: 2026-04-08
+    published_date: 2026-04-08
+    url: https://www.alperapartners.com/news/one-year-after-its-launch-archipel-announces-the-integration-of-three-new-accounting-firms-and-surpasses-eu50-million-in-revenue-confirming-its-unique-model-in-a-rapidly-evolving-market
+    tier: 7
+    basis: company_stated
+    raw_snippet: "following the integration of three new firms: Prospective & Finance, Avexxens, and L&A Conseil & Audit"
+    note: "Antony-based firm, 33 staff, three partners. Release says 'integration'."
+  - series_key: rollup_acq.archipel.l_a_conseil_audit.pt
+    source_id: alperapartners_news
+    entity_id: archipel
+    value_text: "acquired L&A Conseil & Audit (accounting and audit firm, France)"
+    unit: text
+    as_of_date: 2026-04-08
+    published_date: 2026-04-08
+    url: https://www.alperapartners.com/news/one-year-after-its-launch-archipel-announces-the-integration-of-three-new-accounting-firms-and-surpasses-eu50-million-in-revenue-confirming-its-unique-model-in-a-rapidly-evolving-market
+    tier: 7
+    basis: company_stated
+    raw_snippet: "following the integration of three new firms: Prospective & Finance, Avexxens, and L&A Conseil & Audit"
+    note: "Paris firm, three partners, IFRS/consolidation work. Release says 'integration'."
+  - series_key: rollup_acq.avi_medical.iatros.pt
+    source_id: munich_startup
+    entity_id: avi_medical
+    value_text: "acquired iATROS (telemedicine company (digital cardiology care), Germany)"
+    unit: text
+    as_of_date: 2024-05-27
+    published_date: 2024-05-27
+    url: https://www.munich-startup.de/en/101575/avi-medical-takes-over-digital-heart-center/
+    tier: 5
+    basis: reported
+    raw_snippet: "To do this, the healthtech has now fully acquired the telemedicine company iAtros."
+    note: "Full acquisition of a telemedicine company, not a GP practice; both CEOs quoted. No practice acquisitions in the period found on the record."
+  - series_key: rollup_acq.beacon_software.let_s_camp.pt
+    source_id: beaconsoftware_news
+    entity_id: beacon_software
+    value_text: "acquired Let's Camp (campground booking software, Canada)"
+    unit: text
+    as_of_date: 2024-07-01
+    published_date: 2024-07-01
+    url: https://www.beaconsoftware.com/
+    tier: 7
+    basis: company_stated
+    raw_snippet: "When the business joined Beacon in July 2024, Mike was handling sales, customer success and product himself."
+    note: "Vertical software company; described as 'a Beacon company'. No press release; date from Beacon's own site. Price not disclosed. Date: Only the month (July 2024) is known."
+  - series_key: rollup_acq.beacon_software.powerup_sports.pt
+    source_id: betakit
+    entity_id: beacon_software
+    value_text: "acquired PowerUp Sports (sports club registration / management software, Canada)"
+    unit: text
+    as_of_date: 2025-11-04
+    published_date: 2025-11-04
+    url: https://betakit.com/beacon-raises-250-million-series-b-to-buy-and-equip-main-street-businesses-with-ai/
+    tier: 5
+    basis: reported
+    raw_snippet: "This group includes Saskatchewan’s Let’s Camp, an online platform to connect campers to campgrounds, Toronto digital sports registration and club management company PowerUp"
+    note: "Named by BetaKit (with CEO interview) among companies Beacon has acquired; acquisition date not published. Price not disclosed. Date: Acquisition date unknown (2024-2025); date given is the confirming article."
+  - series_key: rollup_acq.beacon_software.viefund.pt
+    source_id: betakit
+    entity_id: beacon_software
+    value_text: "acquired Viefund (back-office software for mutual fund dealers, Canada)"
+    unit: text
+    as_of_date: 2025-11-04
+    published_date: 2025-11-04
+    url: https://betakit.com/beacon-raises-250-million-series-b-to-buy-and-equip-main-street-businesses-with-ai/
+    tier: 5
+    basis: reported
+    raw_snippet: "Ottawa-based Viefund, which sells back-office software to mutual fund dealers."
+    note: "Named by BetaKit (with CEO interview) among companies Beacon has acquired; acquisition date not published. Price not disclosed. Date: Acquisition date unknown (2024-2025); date given is the confirming article."
+  - series_key: rollup_acq.beacon_software.realestateapi.pt
+    source_id: corumgroup
+    entity_id: beacon_software
+    value_text: "acquired RealEstateAPI (property data API software, USA)"
+    unit: text
+    as_of_date: 2026-03-01
+    published_date: 2026-03-01
+    url: https://www.corumgroup.com/insights/beacon-software-acquires-realestateapi
+    tier: 5
+    basis: reported
+    raw_snippet: "Harris, with Corum as his M&A advisor, successfully sold his business to AI infrastructure company Beacon Software in March 2026."
+    note: "Whole company. Beacon called it an eight-figure deal; an $80m figure appears only in a deal database, so price left null. Founder quoted on beaconsoftware.com/founders. Date: Only the month (March 2026) is known."
+  - series_key: rollup_acq.beacon_software.e2e_soccer_limited.pt
+    source_id: yahoo_finance
+    entity_id: beacon_software
+    value_text: "acquired E2E Soccer Limited (youth soccer league management software, Canada)"
+    unit: text
+    as_of_date: 2026-04-16
+    published_date: 2026-04-16
+    url: https://finance.yahoo.com/sectors/technology/articles/beacon-software-acquires-e2e-soccer-123000169.html
+    tier: 5
+    basis: reported
+    raw_snippet: "Beacon Software Acquires E2E Soccer, Expanding Its Soccer Platform to Be the Leading Integrated Solution for Canadian Leagues and Clubs"
+    note: "Whole company; combined with Beacon's PowerUp Sports. Price not disclosed."
+  - series_key: rollup_acq.beacon_software.haize_labs.pt
+    source_id: beaconsoftware_news
+    entity_id: beacon_software
+    value_text: "acquired Haize Labs (AI reliability / testing software, USA)"
+    unit: text
+    as_of_date: 2026-09-17
+    published_date: 2026-09-17
+    url: https://www.beaconsoftware.com/news/beacon-acquires-haize-labs
+    tier: 7
+    basis: company_stated
+    raw_snippet: "Beacon has acquired Haize Labs, bringing its reliable AI expertise to Beacon's portfolio of essential software businesses."
+    note: "AI lab/talent acquisition forming Beacon's Applied AI Research Group; not a service business. Price not disclosed."
+  - series_key: rollup_acq.bending_spoons.mosaic_group_digital_assets_from_iac.pt
+    source_id: lw
+    entity_id: bending_spoons
+    value_text: "acquired Mosaic Group (digital assets, from IAC) (mobile apps (consumer software), USA)"
+    unit: text
+    as_of_date: 2024-01-10
+    published_date: 2024-01-10
+    url: https://www.lw.com/en/news/2024/01/latham-watkins-advises-bending-spoons-in-acquisition-of-mosaic-group-digital-assets-from-iac
+    tier: 5
+    basis: reported
+    raw_snippet: "Bending Spoons has announced that it has agreed to acquire the assets of IAC mobile software subsidiary Mosaic Group for an undisclosed sum, subject to closing conditions."
+    note: "Asset purchase (apps and IP; staff not included). Price undisclosed."
+  - series_key: rollup_acq.bending_spoons.meetup.pt
+    source_id: yahoo_finance
+    entity_id: bending_spoons
+    value_text: "acquired Meetup (events / community platform, USA)"
+    unit: text
+    as_of_date: 2024-01-24
+    published_date: 2024-01-24
+    url: https://finance.yahoo.com/news/italys-bending-spoons-scoops-social-153103546.html
+    tier: 5
+    basis: reported
+    raw_snippet: "Italian app developer Bending Spoons said on Wednesday it had finalised the acquisition of Meetup, a social network with 60 million members worldwide"
+    note: "Whole company; terms not disclosed; Reuters reports Bending Spoons said on 24 Jan 2024 it had finalised the acquisition, quoting CEO Luca Ferrari. Date: Completion date; first signalled earlier in January 2024."
+  - series_key: rollup_acq.bending_spoons.wetransfer.pt
+    source_id: techcrunch
+    entity_id: bending_spoons
+    value_text: "acquired WeTransfer (file-transfer service, Netherlands)"
+    unit: text
+    as_of_date: 2024-07-31
+    published_date: 2024-07-31
+    url: https://techcrunch.com/2024/07/31/bending-spoons-acquires-file-transfer-service-wetransfer/
+    tier: 7
+    basis: company_stated
+    raw_snippet: "WeTransfer CEO Alexandar Vassilev said that in the last decade the platform development resulted in 600,000 subscribers and 80 million monthly active users."
+    note: "Whole company; TechCrunch headline 'Bending Spoons acquires file transfer service WeTransfer', companies announced jointly; terms not disclosed."
+  - series_key: rollup_acq.bending_spoons.brightcove.pt
+    source_id: tvtechnology
+    entity_id: bending_spoons
+    value_text: "acquired Brightcove (video streaming software, USA)"
+    unit: text
+    as_of_date: 2024-11-25
+    published_date: 2024-11-25
+    url: https://www.tvtechnology.com/news/bending-spoons-to-acquire-brightcove-for-usd233-million
+    tier: 5
+    basis: reported
+    raw_snippet: "BOSTON—Brightcove said it has entered into a definitive agreement to be acquired by Bending Spoons in an all-cash transaction valued at about $233 million."
+    note: "Take-private of a Nasdaq-listed company; closed early 2025. Date: Agreement announced 25 Nov 2024; article dated 26 Nov 2024. Stated price about $233m."
+  - series_key: rollup_acq.bending_spoons.komoot.pt
+    source_id: cyclingnews
+    entity_id: bending_spoons
+    value_text: "acquired komoot (route-planning app, Germany)"
+    unit: text
+    as_of_date: 2025-03-20
+    published_date: 2025-03-20
+    url: https://www.cyclingnews.com/news/komoot-sold-to-italian-tech-company-putting-jobs-at-risk/
+    tier: 5
+    basis: reported
+    raw_snippet: "Bending Spoons announced acquisition of route-planning app on Wednesday with job losses and subscription changes now possible"
+    note: "Whole company; price undisclosed (press reports near EUR 300m, not confirmed). Buyer's Business Wire release (20 Mar 2025) would not load. Date: Bending Spoons' release is dated 20 Mar 2025; article dated 21 Mar 2025."
+  - series_key: rollup_acq.bending_spoons.vimeo.pt
+    source_id: vimeo_news
+    entity_id: bending_spoons
+    value_text: "acquired Vimeo (video hosting platform, USA)"
+    unit: text
+    as_of_date: 2025-09-10
+    published_date: 2025-09-10
+    url: https://vimeo.com/press
+    tier: 7
+    basis: company_stated
+    raw_snippet: "Vimeo Enters into Definitive Agreement to Be Acquired by Bending Spoons for $1.38 Billion"
+    note: "Take-private of a Nasdaq-listed company; completed 24 Nov 2025. Snippet is the press-release headline on Vimeo's press page. Date: Agreement date; the press page lists the headline without a date. Stated price about $1.38bn."
+  - series_key: rollup_acq.bending_spoons.aol.pt
+    source_id: variety
+    entity_id: bending_spoons
+    value_text: "acquired AOL (web portal and email, USA)"
+    unit: text
+    as_of_date: 2025-10-29
+    published_date: 2025-10-29
+    url: https://variety.com/2025/digital/news/aol-acquired-bending-spoons-apollo-1236564783/
+    tier: 5
+    basis: reported
+    raw_snippet: ", the trailblazing internet company, is being acquired by Italian tech roll-up company Bending Spoons"
+    note: "Bought from Apollo/Yahoo; terms not disclosed (about $1.5bn per Axios, unconfirmed). Bending Spoons later stated it 'acquired AOL in January 2026'. Date: Agreement announced; closed January 2026."
+  - series_key: rollup_acq.bending_spoons.eventbrite.pt
+    source_id: meetings_skift_com
+    entity_id: bending_spoons
+    value_text: "acquired Eventbrite (event ticketing platform, USA)"
+    unit: text
+    as_of_date: 2025-12-02
+    published_date: 2025-12-02
+    url: https://meetings.skift.com/2025/12/02/bending-spoons-to-acquire-eventbrite-in-500-million-cash-deal/
+    tier: 5
+    basis: reported
+    raw_snippet: "Under the agreement, Eventbrite shareholders will receive $4.50 per share in cash, a significant improvement over current share prices that have hovered around $2.50 since March."
+    note: "Take-private of an NYSE-listed company, about $500m all cash; closed 10 Mar 2026. Date: Agreement date; closed March 2026. Stated price about $500m."
+  - series_key: rollup_acq.bending_spoons.tractive.pt
+    source_id: tractive_news
+    entity_id: bending_spoons
+    value_text: "acquired Tractive (pet GPS tracking and health monitoring, Austria)"
+    unit: text
+    as_of_date: 2026-05-18
+    published_date: 2026-05-18
+    url: https://tractive.com/blog/en/press/bending-spoons-closes-acquisition-of-tractive
+    tier: 7
+    basis: company_stated
+    raw_snippet: "Technology company Bending Spoons today announced that it has closed the acquisition of Tractive, an Austria-based global leader in location tracking and health monitoring for pets."
+    note: "Whole company; price not disclosed. Agreement was signed in March 2026. Date: Closing date; definitive agreement entered March 2026."
+  - series_key: rollup_acq.bending_spoons.airtable.pt
+    source_id: investors_bendingspoons_com_news
+    entity_id: bending_spoons
+    value_text: "acquired Airtable (no-code database / workflow software, USA)"
+    unit: text
+    as_of_date: 2026-08-04
+    published_date: 2026-08-04
+    url: https://investors.bendingspoons.com/newsroom/bending-spoons-agrees-to-acquire-airtable
+    tier: 7
+    basis: company_stated
+    raw_snippet: "Bending Spoons has entered into a definitive agreement to acquire Airtable for $1.285 billion"
+    note: "100% of shares, all cash. Price is enterprise value (equity value about $2.25bn). Completed 4 Sep 2026. Date: Agreement date; completed 4 Sep 2026. Stated price about $1.28bn."
+  - series_key: rollup_acq.bending_spoons.miro.pt
+    source_id: investors_bendingspoons_com_news
+    entity_id: bending_spoons
+    value_text: "acquired Miro (online collaboration whiteboard software, USA/Netherlands)"
+    unit: text
+    as_of_date: 2026-09-10
+    published_date: 2026-09-10
+    url: https://investors.bendingspoons.com/newsroom/bending-spoons-agrees-to-acquire-miro
+    tier: 7
+    basis: company_stated
+    raw_snippet: "Bending Spoons enters into a definitive agreement to acquire Miro for $1.355 billion"
+    note: "Signed, NOT yet closed (expected Q4 2026, subject to approvals). Price is enterprise value (equity about $1.79bn). Date: Agreement date; not yet closed. Stated price about $1.35bn."
+  - series_key: rollup_acq.bhub.agrocontar.pt
+    source_id: braziljournal
+    entity_id: bhub
+    value_text: "acquired Agrocontar (accounting firm (agribusiness), Brazil)"
+    unit: text
+    as_of_date: 2025-11-26
+    published_date: 2025-11-26
+    url: https://braziljournal.com/bhub-compra-o-maior-escritorio-de-contabilidade-do-agro/
+    tier: 5
+    basis: reported
+    raw_snippet: "a Agrocontar, o maior escritório de contabilidade para o agronegócio do Brasil, que fatura cerca de R$ 40 milhões e atende gigantes como a Syngenta"
+    note: "Founder Jorge Vargas Neto quoted; price undisclosed. Article says this is BHub's 10th acquisition since Nov 2024 but names no others."
+  - series_key: rollup_acq.circeus.aiden.pt
+    source_id: circeus_news
+    entity_id: circeus
+    value_text: "acquired Aiden (AI guided-selling software, Netherlands)"
+    unit: text
+    as_of_date: 2025-02-25
+    published_date: 2025-02-25
+    url: https://www.circeus.com/blogs/acquire/series-b-2025
+    tier: 7
+    basis: company_stated
+    raw_snippet: "With this funding, Circeus has completed its first platform-agnostic acquisition:"
+    note: "Sentence continues 'Aiden, an AI-powered guided selling software' (target name is a link on the page). Announced with the Series B; price not disclosed. Country from general knowledge, not the page."
+  - series_key: rollup_acq.circeus.fiftypoint6_group.pt
+    source_id: businesscloud_co_uk
+    entity_id: circeus
+    value_text: "acquired FiftyPoint6 Group (back-end SaaS for luxury retailers, UK)"
+    unit: text
+    as_of_date: 2025-03-28
+    published_date: 2025-03-28
+    url: https://businesscloud.co.uk/news/shop-circle-makes-multi-million-pound-swoop/
+    tier: 5
+    basis: reported
+    raw_snippet: "Shop Circle has made a multi-million-pound swoop for Hampshire firm FiftyPoint6 Group."
+    note: "Share sale to Shop Circle Ltd (now Circeus), confirmed by seller's law firm Broadfield. Price not disclosed. Date: Article date; law-firm note dated 27 Mar 2025."
+  - series_key: rollup_acq.circeus.krakend.pt
+    source_id: circeus_news
+    entity_id: circeus
+    value_text: "acquired KrakenD (API gateway software, Spain)"
+    unit: text
+    as_of_date: 2025-09-02
+    published_date: 2025-09-02
+    url: https://www.circeus.com/blogs/acquire/krakend
+    tier: 7
+    basis: company_stated
+    raw_snippet: "Circeus has acquired KrakenD, a high-performance API gateway trusted by global enterprises."
+    note: "Whole company; price not disclosed by the buyer ($12m appears only in a deal database)."
+  - series_key: rollup_acq.circeus.encodian.pt
+    source_id: circeus_news
+    entity_id: circeus
+    value_text: "acquired Encodian (document automation software (Microsoft Power Platform), UK)"
+    unit: text
+    as_of_date: 2026-07-07
+    published_date: 2026-07-07
+    url: https://www.circeus.com/blogs/acquire/encodian-joins-circeus
+    tier: 7
+    basis: company_stated
+    raw_snippet: "Circeus has acquired Encodian, the leading independent document automation provider on the Microsoft Power Platform."
+    note: "Whole company; price not disclosed."
+  - series_key: rollup_acq.circeus.dondy.pt
+    source_id: circeus_news
+    entity_id: circeus
+    value_text: "acquired Dondy (WhatsApp / conversational commerce software, unknown)"
+    unit: text
+    as_of_date: 2026-07-21
+    published_date: 2026-07-21
+    url: https://www.circeus.com/blogs/acquire/dondy-joins-circeus
+    tier: 7
+    basis: company_stated
+    raw_snippet: "The acquisition expands Circeus’s commerce software division and scales AI agents that turn customer conversations into revenue."
+    note: "Page title 'Dondy joins Circeus'; Dondy becomes part of the Shop Circle division. Price and target country not stated on the page."
+  - series_key: rollup_acq.crescendo.partnerhero.pt
+    source_id: crescendo_news
+    entity_id: crescendo
+    value_text: "acquired PartnerHero (customer-support outsourcing (BPO) firm, USA)"
+    unit: text
+    as_of_date: 2024-10-02
+    published_date: 2024-10-02
+    url: https://www.crescendo.ai/news/crescendo-the-next-episode
+    tier: 7
+    basis: company_stated
+    raw_snippet: "Today – we are delighted to take this to the next level by acquiring PartnerHero, a leading customer operations outsourcing provider."
+    note: "Whole-company acquisition announced with the Series C; price undisclosed."
+  - series_key: rollup_acq.crete.reid_reid_cpas_reid_tax_advisory.pt
+    source_id: cpapracticeadvisor
+    entity_id: crete
+    value_text: "announced as joining its group: Reid (Reid CPAs / Reid Tax & Advisory) (accounting firm, USA)"
+    unit: text
+    as_of_date: 2024-04-09
+    published_date: 2024-04-09
+    url: https://www.cpapracticeadvisor.com/2024/04/09/cpa-firm-reid/103699/
+    tier: 5
+    basis: reported
+    raw_snippet: "Crete Professionals Alliance has provided financial and back-office support to five accounting firms, with Reid its sixth firm partner."
+    note: "Described as a partnership; Crete's later release says Reid joined in February 2024. Date: Article date; deal effective February 2024."
+  - series_key: rollup_acq.crete.cabrillo_advisors.pt
+    source_id: current_news
+    entity_id: crete
+    value_text: "announced as joining its group: Cabrillo Advisors (valuation and financial advisory firm, USA)"
+    unit: text
+    as_of_date: 2025-08-26
+    published_date: 2025-08-26
+    url: https://www.current.co/news/cabrillo-advisors-joins-current-professionals-alliance-expanding-national-network-and-enhancing-client-capabilities
+    tier: 7
+    basis: company_stated
+    raw_snippet: "today announced it has joined"
+    note: "Announced as the firm 'joining' the alliance; Crete/Current's model is buying a majority of the firm's non-attest practice, but the page does not state the stake. Page text now shows the rebranded name Current."
+  - series_key: rollup_acq.crete.mauldin_vaught.pt
+    source_id: current_news
+    entity_id: crete
+    value_text: "announced as joining its group: Mauldin Vaught (accounting firm, USA)"
+    unit: text
+    as_of_date: 2025-09-08
+    published_date: 2025-09-08
+    url: https://www.current.co/news/current-expands-southeast-footprint-with-new-alliance-addition-mauldin-vaught
+    tier: 7
+    basis: company_stated
+    raw_snippet: "Mauldin Vaught, a respected accounting and advisory firm serving clients across Fayetteville and the broader Northwest Arkansas region, has officially joined"
+    note: "Announced as the firm 'joining' the alliance; Crete/Current's model is buying a majority of the firm's non-attest practice, but the page does not state the stake. Page text now shows the rebranded name Current."
+  - series_key: rollup_acq.crete.adeptus_adeptus_advisors_group.pt
+    source_id: current_news
+    entity_id: crete
+    value_text: "announced as joining its group: Adeptus (Adeptus Advisors Group) (accounting firm, USA)"
+    unit: text
+    as_of_date: 2025-09-10
+    published_date: 2025-09-10
+    url: https://www.current.co/news/welcoming-adeptus-advisors-to-the-current-family
+    tier: 7
+    basis: company_stated
+    raw_snippet: "Adeptus, a premier accounting and advisory firm with offices across the New York Metro area, Mid-Atlantic, and Southern California, has joined"
+    note: "Announced as the firm 'joining' the alliance; Crete/Current's model is buying a majority of the firm's non-attest practice, but the page does not state the stake. Page text now shows the rebranded name Current."
+  - series_key: rollup_acq.crete.cwdl_rebranded_advisent.pt
+    source_id: current_news
+    entity_id: crete
+    value_text: "announced as joining its group: CWDL (rebranded Advisent) (accounting firm, USA)"
+    unit: text
+    as_of_date: 2025-09-18
+    published_date: 2025-09-18
+    url: https://www.current.co/news/cwdl-rebrands-as-advisent-joins-current
+    tier: 7
+    basis: company_stated
+    raw_snippet: "CWDL Rebrands as Advisent, Joins Current"
+    note: "Announced as the firm 'joining' the alliance; Crete/Current's model is buying a majority of the firm's non-attest practice, but the page does not state the stake. Page text now shows the rebranded name Current. Attest work stays in a separate LLP (alternative practice structure)."
+  - series_key: rollup_acq.crete.tkr_accountants_and_advisors.pt
+    source_id: current_news
+    entity_id: crete
+    value_text: "announced as joining its group: TKR Accountants and Advisors (accounting firm, USA)"
+    unit: text
+    as_of_date: 2025-10-22
+    published_date: 2025-10-22
+    url: https://www.current.co/news/dc-based-tkr-joins-current
+    tier: 7
+    basis: company_stated
+    raw_snippet: "a respected leader in accounting and advisory services for the Washington, D.C. region and beyond, has joined"
+    note: "Announced as the firm 'joining' the alliance; Crete/Current's model is buying a majority of the firm's non-attest practice, but the page does not state the stake. Page text now shows the rebranded name Current."
+  - series_key: rollup_acq.crete.accuity.pt
+    source_id: current_news
+    entity_id: crete
+    value_text: "announced as joining its group: Accuity (accounting firm, USA)"
+    unit: text
+    as_of_date: 2025-11-11
+    published_date: 2025-11-11
+    url: https://www.current.co/news/current-hits-30-with-hawaiis-accuity
+    tier: 7
+    basis: company_stated
+    raw_snippet: "Current Hits 30 with Hawaii’s Accuity"
+    note: "Announced as the firm 'joining' the alliance; Crete/Current's model is buying a majority of the firm's non-attest practice, but the page does not state the stake. Page text now shows the rebranded name Current. Billed as the 30th partner firm."
+  - series_key: rollup_acq.crete.cross_financial.pt
+    source_id: current_news
+    entity_id: crete
+    value_text: "announced as joining its group: Cross Financial (accounting, advisory and wealth-management firm, USA)"
+    unit: text
+    as_of_date: 2025-11-18
+    published_date: 2025-11-18
+    url: https://www.current.co/news/welcoming-cross-financial-currents-first-wealth-management-partner
+    tier: 7
+    basis: company_stated
+    raw_snippet: "Cross Financial, a leading accounting and advisory firm serving the Northwest, today announced it has joined"
+    note: "Announced as the firm 'joining' the alliance; Crete/Current's model is buying a majority of the firm's non-attest practice, but the page does not state the stake. Page text now shows the rebranded name Current."
+  - series_key: rollup_acq.crete.legacy_valuations_forensics_formerly_par.pt
+    source_id: current_news
+    entity_id: crete
+    value_text: "announced as joining its group: Legacy Valuations & Forensics (formerly part of Empire Valuation Consultants) (valuation and forensic accounting firm, USA)"
+    unit: text
+    as_of_date: 2025-12-12
+    published_date: 2025-12-12
+    url: https://www.current.co/news/legacy-valuations-forensics-expands-specialized-offerings-at-current
+    tier: 7
+    basis: company_stated
+    raw_snippet: "formerly part of Empire Valuation Consultants, a leading firm serving the national market, today announced it has joined"
+    note: "Announced as the firm 'joining' the alliance; Crete/Current's model is buying a majority of the firm's non-attest practice, but the page does not state the stake. Page text now shows the rebranded name Current. Business Wire copy is dated 15 Dec 2025."
+  - series_key: rollup_acq.crete.mellott_mellott.pt
+    source_id: current_news
+    entity_id: crete
+    value_text: "announced as joining its group: Mellott & Mellott (accounting firm, USA)"
+    unit: text
+    as_of_date: 2026-01-12
+    published_date: 2026-01-12
+    url: https://www.current.co/news/current-expands-midwest-footprint-with-mellott-mellott
+    tier: 7
+    basis: company_stated
+    raw_snippet: "Mellott & Mellott, a respected accounting and advisory firm serving the Cincinnati Tri-State region, today announced it has joined"
+    note: "Announced as the firm 'joining' the alliance; Crete/Current's model is buying a majority of the firm's non-attest practice, but the page does not state the stake. Page text now shows the rebranded name Current."
+  - series_key: rollup_acq.crete.force_10_partners.pt
+    source_id: current_news
+    entity_id: crete
+    value_text: "announced as joining its group: Force 10 Partners (restructuring and litigation-support advisory firm, USA)"
+    unit: text
+    as_of_date: 2026-01-28
+    published_date: 2026-01-28
+    url: https://www.current.co/news/force-10-partners-joins-current
+    tier: 7
+    basis: company_stated
+    raw_snippet: "Force 10 Partners, a nationally recognized financial advisory firm specializing in corporate restructuring and litigation support, today announced it has joined"
+    note: "Announced as the firm 'joining' the alliance; Crete/Current's model is buying a majority of the firm's non-attest practice, but the page does not state the stake. Page text now shows the rebranded name Current."
+  - series_key: rollup_acq.crete.bowers_advisors.pt
+    source_id: current_news
+    entity_id: crete
+    value_text: "announced as joining its group: Bowers Advisors (accounting firm, USA)"
+    unit: text
+    as_of_date: 2026-02-05
+    published_date: 2026-02-05
+    url: https://www.current.co/news/bowers-advisors-joins-current-professionals-alliance
+    tier: 7
+    basis: company_stated
+    raw_snippet: "a long-established accounting and advisory firm based in Syracuse, New York, today announced it has joined"
+    note: "Announced as the firm 'joining' the alliance; Crete/Current's model is buying a majority of the firm's non-attest practice, but the page does not state the stake. Page text now shows the rebranded name Current."
+  - series_key: rollup_acq.crete.bfj.pt
+    source_id: current_news
+    entity_id: crete
+    value_text: "announced as joining its group: BFJ (accounting firm, USA)"
+    unit: text
+    as_of_date: 2026-03-09
+    published_date: 2026-03-09
+    url: https://www.current.co/news/bfj-joins-current-reuniting-with-former-partner
+    tier: 7
+    basis: company_stated
+    raw_snippet: "BFJ, a St. Paul–based accounting and advisory firm, is the latest to join"
+    note: "Announced as the firm 'joining' the alliance; Crete/Current's model is buying a majority of the firm's non-attest practice, but the page does not state the stake. Page text now shows the rebranded name Current."
+  - series_key: rollup_acq.crete.think_advisors_r_d_tax_credit_services_p.pt
+    source_id: current_news
+    entity_id: crete
+    value_text: "announced as joining its group: Think Advisors R&D Tax Credit Services practice (incl. Black Line Group's) (R&D tax-credit consulting practice, USA)"
+    unit: text
+    as_of_date: 2026-04-13
+    published_date: 2026-04-13
+    url: https://www.current.co/news/think-advisors-rd-tax-credit-practice-joins-current
+    tier: 7
+    basis: company_stated
+    raw_snippet: "today announced that its R&D Tax Credit Services practice has joined"
+    note: "Announced as the firm 'joining' the alliance; Crete/Current's model is buying a majority of the firm's non-attest practice, but the page does not state the stake. Page text now shows the rebranded name Current. A practice carve-out, not the whole firm."
+  - series_key: rollup_acq.crete.maxwell_advisors_formerly_maxwell_compan.pt
+    source_id: current_news
+    entity_id: crete
+    value_text: "announced as joining its group: Maxwell Advisors (formerly Maxwell & Company CPAs) (tax advisory / accounting firm, USA)"
+    unit: text
+    as_of_date: 2026-04-16
+    published_date: 2026-04-16
+    url: https://www.current.co/news/maxwell-advisors-joins-current-expanding-california-footprint
+    tier: 7
+    basis: company_stated
+    raw_snippet: "a nationally recognized tax advisory firm known for its deep technical expertise and decades-long client relationships, today announced it has joined"
+    note: "Announced as the firm 'joining' the alliance; Crete/Current's model is buying a majority of the firm's non-attest practice, but the page does not state the stake. Page text now shows the rebranded name Current."
+  - series_key: rollup_acq.crete.murphy_miller_baglieri_mmb.pt
+    source_id: current_news
+    entity_id: crete
+    value_text: "announced as joining its group: Murphy, Miller & Baglieri (MMB) (accounting firm, USA)"
+    unit: text
+    as_of_date: 2026-06-17
+    published_date: 2026-06-17
+    url: https://www.current.co/news/murphy-miller-abaglieri-joins-current
+    tier: 7
+    basis: company_stated
+    raw_snippet: "a leading accounting and advisory firm serving the regional market, today announced it has joined Current, formerly Crete Professionals Alliance"
+    note: "Announced as the firm 'joining' the alliance; Crete/Current's model is buying a majority of the firm's non-attest practice, but the page does not state the stake. Page text now shows the rebranded name Current. Announced after the 2 Jun 2026 rebrand to Current."
+  - series_key: rollup_acq.crete.preferred_cfo.pt
+    source_id: current_news
+    entity_id: crete
+    value_text: "announced as joining its group: Preferred CFO (fractional CFO / outsourced finance firm, USA)"
+    unit: text
+    as_of_date: 2026-09-01
+    published_date: 2026-09-01
+    url: https://www.current.co/news/preferred-cfo-powers-up-currents-advisory-growth
+    tier: 7
+    basis: company_stated
+    raw_snippet: "today announced that Preferred CFO has joined the platform."
+    note: "Announced as the firm 'joining' the alliance; Crete/Current's model is buying a majority of the firm's non-attest practice, but the page does not state the stake. Page text now shows the rebranded name Current. Announced under the Current name."
+  - series_key: rollup_acq.dwelly.lime_property.pt
+    source_id: propertyindustryeye
+    entity_id: dwelly
+    value_text: "acquired Lime Property (estate and lettings agency (Hull), UK)"
+    unit: text
+    as_of_date: 2024-09-25
+    published_date: 2024-09-25
+    url: https://propertyindustryeye.com/tech-based-management-firm-buys-estate-agency-to-enter-uk-market/
+    tier: 5
+    basis: reported
+    raw_snippet: "has expanded its portfolio by 1,000 properties after completing the acquisition of Lime Property, an estate and letting agency in Hull."
+    note: "First acquisition. Price undisclosed."
+  - series_key: rollup_acq.dwelly.gallant_richardson.pt
+    source_id: propertyindustryeye
+    entity_id: dwelly
+    value_text: "acquired Gallant Richardson (lettings agency (Colchester, Essex), UK)"
+    unit: text
+    as_of_date: 2024-12-06
+    published_date: 2024-12-06
+    url: https://propertyindustryeye.com/tech-based-management-firm-acquires-second-letting-agency-in-three-months/
+    tier: 5
+    basis: reported
+    raw_snippet: "has expanded its portfolio by 450 properties after completing the acquisition of Gallant Richardson in Essex."
+    note: "Second acquisition. Price undisclosed."
+  - series_key: rollup_acq.dwelly.pennington.pt
+    source_id: propertyindustryeye
+    entity_id: dwelly
+    value_text: "acquired Pennington (lettings agency (Suffolk), UK)"
+    unit: text
+    as_of_date: 2025-05-28
+    published_date: 2025-05-28
+    url: https://propertyindustryeye.com/ambitious-proptech-firm-acquires-third-letting-agency/
+    tier: 5
+    basis: reported
+    raw_snippet: "The latest purchase sees Dwelly acquire Pennington, a well-established agency in Suffolk, founded by Julian Pennington and Robert Ulph."
+    note: "Third acquisition; 550 units. Price undisclosed."
+  - series_key: rollup_acq.dwelly.parks_residential.pt
+    source_id: propertyindustryeye
+    entity_id: dwelly
+    value_text: "acquired Parks Residential (lettings agency (Brighton), UK)"
+    unit: text
+    as_of_date: 2025-07-03
+    published_date: 2025-07-03
+    url: https://propertyindustryeye.com/tech-based-management-firm-acquires-fourth-letting-agency-in-ten-months/
+    tier: 5
+    basis: reported
+    raw_snippet: "Dwelly has completed its fourth agency acquisition in less than a year with the purchase of Parks Residential in Brighton."
+    note: "Fourth acquisition; 450 units. Price undisclosed."
+  - series_key: rollup_acq.dwelly.number_1_letting.pt
+    source_id: propertyindustryeye
+    entity_id: dwelly
+    value_text: "acquired Number 1 Letting (lettings agency (Pontefract, West Yorkshire), UK)"
+    unit: text
+    as_of_date: 2025-07-29
+    published_date: 2025-07-29
+    url: https://propertyindustryeye.com/fast-growing-proptech-platform-acquires-fifth-letting-agency/
+    tier: 5
+    basis: reported
+    raw_snippet: "Dwelly has completed its fifth agency purchase in less than a year with the acquisition of Number 1 Letting in Pontefract, West Yorkshire."
+    note: "Fifth acquisition; 850 units. Price undisclosed."
+  - series_key: rollup_acq.dwelly.hc_lettings_formerly_holdencopley_s_lett.pt
+    source_id: propertyindustryeye
+    entity_id: dwelly
+    value_text: "acquired HC Lettings (formerly HoldenCopley's lettings arm) (lettings agency (Nottingham), UK)"
+    unit: text
+    as_of_date: 2025-09-02
+    published_date: 2025-09-02
+    url: https://propertyindustryeye.com/proptech-platform-acquires-sixth-letting-agency-in-just-over-a-year/
+    tier: 5
+    basis: reported
+    raw_snippet: "Dwelly has completed its sixth agency purchase in just over a year with the acquisition of HC Lettings, the Nottingham-based agency formerly known as HoldenCopley."
+    note: "Lettings arm only; HoldenCopley's sales business stays independent. Price undisclosed."
+  - series_key: rollup_acq.dwelly.sheldon_bosley_knight_lettings_business_.pt
+    source_id: propertyindustryeye
+    entity_id: dwelly
+    value_text: "acquired Sheldon Bosley Knight lettings business (SBK Lettings) (lettings business of an estate agency (Midlands), UK)"
+    unit: text
+    as_of_date: 2025-12-03
+    published_date: 2025-12-03
+    url: https://propertyindustryeye.com/fast-growing-agency-acquires-sheldon-bosley-knight-letting-arm/
+    tier: 5
+    basis: reported
+    raw_snippet: "Dwelly has acquired Sheldon Bosley Knight’s lettings business, which manages a £25m rent book across 13 Midlands branches"
+    note: "Lettings arm only, not the whole estate agency. Price undisclosed."
+  - series_key: rollup_acq.dwelly.brookdale_property_management.pt
+    source_id: propertyindustryeye
+    entity_id: dwelly
+    value_text: "acquired Brookdale Property Management (lettings / property management agency (Peterborough), UK)"
+    unit: text
+    as_of_date: 2026-01-20
+    published_date: 2026-01-20
+    url: https://propertyindustryeye.com/fast-growing-agency-completes-first-strategic-acquisition-of-2026/
+    tier: 5
+    basis: reported
+    raw_snippet: "Dwelly has announced the acquisition of Brookdale Property Management, marking its first deal of 2026."
+    note: "About 1,100 managed properties. Price undisclosed."
+  - series_key: rollup_acq.dwelly.goodwin_property_services.pt
+    source_id: propertyindustryeye
+    entity_id: dwelly
+    value_text: "acquired Goodwin Property Services (lettings and sales agency (Stamford), UK)"
+    unit: text
+    as_of_date: 2026-03-04
+    published_date: 2026-03-04
+    url: https://propertyindustryeye.com/ambitious-agency-completes-second-strategic-acquisition-of-the-year/
+    tier: 5
+    basis: reported
+    raw_snippet: "has announced its second acquisition of 2026 with the purchase of Goodwin Property Services"
+    note: "About 330 rental properties. Price undisclosed."
+  - series_key: rollup_acq.dwelly.eden_harper.pt
+    source_id: propertyindustryeye
+    entity_id: dwelly
+    value_text: "acquired Eden Harper (lettings agency (south west London), UK)"
+    unit: text
+    as_of_date: 2026-04-14
+    published_date: 2026-04-14
+    url: https://propertyindustryeye.com/fast-growing-agency-enters-london-market-with-third-acquisition-of-year/
+    tier: 5
+    basis: reported
+    raw_snippet: "Dwelly has made its first move into the London lettings market with the acquisition of Eden Harper, marking its third deal of the year."
+    note: "About 250 managed properties. Price undisclosed."
+  - series_key: rollup_acq.dwelly.albery_tyson.pt
+    source_id: propertyindustryeye
+    entity_id: dwelly
+    value_text: "acquired Albery Tyson (lettings agency (Midlands), UK)"
+    unit: text
+    as_of_date: 2026-05-28
+    published_date: 2026-05-28
+    url: https://propertyindustryeye.com/fast-growing-agency-completes-fourth-acquisition-of-the-year/
+    tier: 5
+    basis: reported
+    raw_snippet: "Dwelly has completed its fourth acquisition of 2026 after buying Midlands-based lettings firm Albery Tyson"
+    note: "Portfolio (about 250 properties) folded into SBK Lettings. Price undisclosed."
+  - series_key: rollup_acq.dwelly.elliot_oliver.pt
+    source_id: propertyindustryeye
+    entity_id: dwelly
+    value_text: "acquired Elliot Oliver (lettings agency (Cheltenham), UK)"
+    unit: text
+    as_of_date: 2026-06-04
+    published_date: 2026-06-04
+    url: https://propertyindustryeye.com/agency-growth-gathers-pace-with-second-acquisition-in-days/
+    tier: 5
+    basis: reported
+    raw_snippet: "Dwelly has completed its fifth acquisition of the year and its second in less than a week after acquiring Cheltenham-based lettings agency Elliot Oliver."
+    note: "About 900 managed properties. Price undisclosed."
+  - series_key: rollup_acq.dwelly.move.pt
+    source_id: propertyindustryeye
+    entity_id: dwelly
+    value_text: "acquired Move (estate and lettings agency (Cheltenham), UK)"
+    unit: text
+    as_of_date: 2026-06-11
+    published_date: 2026-06-11
+    url: https://propertyindustryeye.com/acquisition-spree-continues-as-agency-completes-sixth-deal-of-2026/
+    tier: 5
+    basis: reported
+    raw_snippet: "Dwelly has completed its sixth acquisition of 2026 after acquiring Cheltenham-based estate agency Move"
+    note: "About 1,100 managed properties, three branches. Price undisclosed."
+  - series_key: rollup_acq.dwelly.settio.pt
+    source_id: thenegotiator_co_uk
+    entity_id: dwelly
+    value_text: "acquired Settio (real-estate investment and portfolio advisory / lettings platform, UK)"
+    unit: text
+    as_of_date: 2026-06-26
+    published_date: 2026-06-26
+    url: https://thenegotiator.co.uk/news/agencies-people-news/dwelly-completes-first-international-acquisition/
+    tier: 5
+    basis: reported
+    raw_snippet: "This time it has bought Settio, a real estate investment and portfolio advisory platform, with clients in 17 countries."
+    note: "Seventh deal of 2026; adds 2,000+ managed properties. Publisher: The Negotiator. Price undisclosed."
+  - series_key: rollup_acq.dwelly.ap_morgan_lettings_business.pt
+    source_id: propertyindustryeye
+    entity_id: dwelly
+    value_text: "acquired AP Morgan lettings business (lettings business of an estate agency (West Midlands), UK)"
+    unit: text
+    as_of_date: 2026-07-16
+    published_date: 2026-07-16
+    url: https://propertyindustryeye.com/fast-growing-agency-completes-eighth-acquisition-of-the-year/
+    tier: 5
+    basis: reported
+    raw_snippet: "Dwelly has completed its eighth acquisition of 2026 with the purchase of the lettings business of West Midlands estate agency AP Morgan."
+    note: "Lettings business only; founders keep the sales business. Price undisclosed."
+  - series_key: rollup_acq.dwelly.shaws.pt
+    source_id: propertyindustryeye
+    entity_id: dwelly
+    value_text: "acquired Shaws (lettings agency (Kensington, London), UK)"
+    unit: text
+    as_of_date: 2026-08-06
+    published_date: 2026-08-06
+    url: https://propertyindustryeye.com/fast-growing-group-completes-ninth-acquisition-of-the-year/
+    tier: 5
+    basis: reported
+    raw_snippet: "Dwelly has completed its ninth acquisition of 2026 with the purchase of Kensington-based lettings agency Shaws."
+    note: "About 250 managed properties. Price undisclosed."
+  - series_key: rollup_acq.dwelly.paramount_properties.pt
+    source_id: propertyindustryeye
+    entity_id: dwelly
+    value_text: "acquired Paramount Properties (estate and lettings agency (West Hampstead, London), UK)"
+    unit: text
+    as_of_date: 2026-09-01
+    published_date: 2026-09-01
+    url: https://propertyindustryeye.com/fast-growing-estate-agency-completes-tenth-acquisition-of-2026/
+    tier: 5
+    basis: reported
+    raw_snippet: "Dwelly has completed its tenth acquisition of 2026 after buying long-established London-based estate and lettings agency Paramount Properties"
+    note: "About 1,100 managed properties. Price undisclosed."
+  - series_key: rollup_acq.general_catalyst.summa_health.pt
+    source_id: kaufmanhall
+    entity_id: general_catalyst
+    value_text: "acquired Summa Health (non-profit hospital system (converted to for-profit), USA)"
+    unit: text
+    as_of_date: 2025-10-01
+    published_date: 2025-10-01
+    url: https://www.kaufmanhall.com/news/summa-health-and-hatco-finalize-transaction-launch-vision-transform-healthcare-akron-and
+    tier: 5
+    basis: reported
+    raw_snippet: "Ohio-based Summa Health and General Catalyst’s Health Assurance Transformation Company (HATCo) today announced the completion of their transaction"
+    note: "Completion of HATCo's purchase of Summa Health; price $515m per Healthcare Dive and Ideastream (agreed at $485m, raised at the Ohio AG's request). Stated price about $515m."
+  - series_key: rollup_acq.integral.cleverlohn.pt
+    source_id: tech_eu
+    entity_id: integral
+    value_text: "acquired cleverlohn (digital payroll and HR services provider, Germany)"
+    unit: text
+    as_of_date: 2025-11-19
+    published_date: 2025-11-19
+    url: https://tech.eu/2025/11/19/integral-acquires-cleverlohn-and-secures-funding-to-advance-its-ai-accounting-and-payroll-platform/
+    tier: 5
+    basis: reported
+    raw_snippet: "has acquired cleverlohn"
+    note: "Acquisition of the payroll provider, announced with a funding round; cleverlohn keeps its brand. Price undisclosed."
+  - series_key: rollup_acq.iterative_health.three_cardiology_research_sites_of_nexts.pt
+    source_id: iterative_news
+    entity_id: iterative_health
+    value_text: "acquired Three cardiology research sites of NextStage Clinical Research (Beaumont, Port Arthur, Waco, Texas) (clinical-research sites, USA)"
+    unit: text
+    as_of_date: 2026-05-14
+    published_date: 2026-05-14
+    url: https://iterative.health/latest-news/blog/iterative-health-acquires-cardiology-sites-from-nextstage-clinical-research/
+    tier: 7
+    basis: company_stated
+    raw_snippet: "today announced the acquisition of three cardiology sites from NextStage Clinical Research"
+    note: "Purchase of three sites (an asset carve-out, not the whole of NextStage); terms undisclosed."
+  - series_key: rollup_acq.lawhive.woodstock_legal_services.pt
+    source_id: lawgazette_co_uk
+    entity_id: lawhive
+    value_text: "acquired Woodstock Legal Services (law firm (consultancy / fee-share model, conveyancing focus), UK)"
+    unit: text
+    as_of_date: 2025-09-15
+    published_date: 2025-09-15
+    url: https://www.lawgazette.co.uk/news/ai-platform-buys-existing-firm-as-law-embraces-new-tech/5124460.article
+    tier: 5
+    basis: reported
+    raw_snippet: "The AI legaltech platform Lawhive announced it has acquired consultancy-model law firm Woodstock Legal Services, having raised £43m last year in external investment."
+    note: "Whole-firm acquisition; announced by Lawhive around 10-11 Sep 2025 (Legal Futures ran it 11 Sep); date given is this article's. Date: Article dated 15 Sep 2025; announcement was about 10-11 Sep 2025."
+  - series_key: rollup_acq.long_lake.american_express_global_business_travel_.pt
+    source_id: rutlandherald
+    entity_id: long_lake
+    value_text: "acquired American Express Global Business Travel (Global Business Travel Group, Inc.) (corporate travel management company, USA)"
+    unit: text
+    as_of_date: 2026-09-29
+    published_date: 2026-09-29
+    url: https://www.rutlandherald.com/news/business/long-lake-the-world-s-first-ai-holding-company-completes-6-3-billion-acquisition-of/article_6e0f5be3-94ed-5dfd-836f-11015d4c19f2.html
+    tier: 5
+    basis: reported
+    raw_snippet: "today announced the completion of its acquisition by Long Lake Management (“Long Lake”) in an all-cash transaction valuing the company at approximately $6.3 billion."
+    note: "Take-private; agreed 4 May 2026, closed 29 Sep 2026. $6.3bn is the stated transaction value. Stated price about $6.30bn."
+  - series_key: rollup_acq.loop.data2logistics.pt
+    source_id: loop_news
+    entity_id: loop
+    value_text: "acquired Data2Logistics (freight audit and payment provider, USA)"
+    unit: text
+    as_of_date: 2025-08-18
+    published_date: 2025-08-18
+    url: https://www.loop.com/article/loop-data2logistics-unlocking-the-next-era-of-supply-chain-intelligence
+    tier: 7
+    basis: company_stated
+    raw_snippet: "Today, Data2Logistics is merging with Loop to accelerate our mission of unlocking profit trapped in the supply chain."
+    note: "Described by both sides as a merger, not an acquisition; Data2Logistics now brands itself 'A Loop Company'. Terms undisclosed. Date: Loop's post is dated 18 Aug 2025; FreightWaves coverage 20 Aug 2025"
+  - series_key: rollup_acq.loop.strategiq_commerce.pt
+    source_id: loop_news
+    entity_id: loop
+    value_text: "acquired StrategIQ Commerce (shipment visibility and freight/parcel audit provider, USA)"
+    unit: text
+    as_of_date: 2025-10-01
+    published_date: 2025-10-01
+    url: https://www.loop.com/strategiq-commerce-is-now-loop
+    tier: 7
+    basis: company_stated
+    raw_snippet: "In 2025, Loop acquired StrategIQ Commerce, bringing together shipment visibility and freight audit and pay under one AI-native platform."
+    note: "Whole-company sale to Loop Payments, Inc.; terms undisclosed. Date: Only the month is known: completed October 2025 per StrategIQ's adviser Mesirow (release of 25 June 2026); Loop's page says only '2025'"
+  - series_key: rollup_acq.metropolis.sp_plus_corporation_sp.pt
+    source_id: metropolis_news
+    entity_id: metropolis
+    value_text: "acquired SP Plus Corporation (SP+) (parking operator, USA)"
+    unit: text
+    as_of_date: 2024-05-16
+    published_date: 2024-05-16
+    url: https://www.metropolis.io/newsroom/metropolis-closes-acquisition-of-sp-plus
+    tier: 7
+    basis: company_stated
+    raw_snippet: "announced today that it has closed its acquisition of SP Plus Corporation"
+    note: "Take-private; price is the ~$1.5bn implied enterprise value stated in the release. Date: Closing date; the deal was first announced 5 Oct 2023, before the period Stated price about $1.50bn."
+  - series_key: rollup_acq.metropolis.oosto_formerly_anyvision.pt
+    source_id: oosto_news
+    entity_id: metropolis
+    value_text: "acquired Oosto (formerly AnyVision) (AI video analytics / facial-recognition software company, Israel)"
+    unit: text
+    as_of_date: 2025-01-22
+    published_date: 2025-01-22
+    url: https://oosto.com/press/oosto-acquisition-metropolis/
+    tier: 7
+    basis: company_stated
+    raw_snippet: "Oosto, a leading provider of AI-powered security and video analytics solutions, has been acquired by Metropolis."
+    note: "A technology purchase, not a service business. TechCrunch reported $125m all-stock (headline reposted in Metropolis's newsroom); price is not in the cited release, so left null."
+  - series_key: rollup_acq.nuvocargo.merge_transportation.pt
+    source_id: freightwaves
+    entity_id: nuvocargo
+    value_text: "acquired Merge Transportation (freight broker / third-party logistics provider, USA)"
+    unit: text
+    as_of_date: 2025-04-23
+    published_date: 2025-04-23
+    url: https://www.freightwaves.com/news/nuvocargo-acquires-south-carolina-based-3pl
+    tier: 5
+    basis: reported
+    raw_snippet: "Terms of the acquisition were not disclosed. The entire Merge team is expected to join Nuvocargo."
+    note: "Whole company; terms not disclosed. Nuvocargo's own blog calls it the first chapter of its AI-enabled roll-up strategy."
+  - series_key: rollup_acq.nuvocargo.mentum.pt
+    source_id: freightwaves
+    entity_id: nuvocargo
+    value_text: "acquired Mentum (AI-agent software startup (procurement / supply-chain workflows), USA)"
+    unit: text
+    as_of_date: 2025-10-29
+    published_date: 2025-10-29
+    url: https://www.freightwaves.com/news/nuvocargo-acquires-mentum-to-supercharge-its-ai-agent-roadmap
+    tier: 5
+    basis: reported
+    raw_snippet: "Acquisition of Mentum aims to accelerate Nuvocargo’s AI automation across procurement and freight workflows"
+    note: "Software/talent acquisition, not a service business; terms not disclosed. Also announced on nuvocargo.com/acquisition/mentum-ai/. Date: Date is the FreightWaves article date; article calls the acquisition 'recent'."
+  - series_key: rollup_acq.onepilot.eodom.pt
+    source_id: en_contact
+    entity_id: onepilot
+    value_text: "acquired Eodom (contact centre (home-based agents), France)"
+    unit: text
+    as_of_date: 2024-03-05
+    published_date: 2024-03-05
+    url: https://en-contact.com/onepilot-acquiert-eodom-specialiste-francais-du-homeshoring
+    tier: 5
+    basis: reported
+    raw_snippet: "Onepilot acquiert Eodom, rejoint le top 15 des outsourceurs et embarque Didier Ferrier. Un coup gagnant."
+    note: "Whole company; founder Didier Ferrier became a Onepilot shareholder. Page quotes Onepilot co-founder Pierre Latscha. Price not disclosed."
+  - series_key: rollup_acq.sennder.c_h_robinson_european_surface_transporta.pt
+    source_id: sennder_news
+    entity_id: sennder
+    value_text: "acquired C.H. Robinson European Surface Transportation (EST) operations (road freight broker / forwarder, Europe (seller USA))"
+    unit: text
+    as_of_date: 2024-07-30
+    published_date: 2024-07-30
+    url: https://www.sennder.com/press/sennder-signs-agreement-to-acquire-c-h-robinson-s-european-surface-transportation-operations-combining-revenue-to-eur-1-4bn
+    tier: 7
+    basis: company_stated
+    raw_snippet: "sennder signs agreement to acquire C.H. Robinson’s European Surface Transportation operations, combining revenue to EUR 1.4bn"
+    note: "Business-unit carve-out; terms not disclosed. Closing announced by sennder on 2025-02-03. Date: Signing date; closing announced 3 Feb 2025."
+  - series_key: rollup_acq.sequence_holdings.the_baldwin_group.pt
+    source_id: yahoo_finance
+    entity_id: sequence_holdings
+    value_text: "acquired The Baldwin Group (insurance broker, USA)"
+    unit: text
+    as_of_date: 2026-09-14
+    published_date: 2026-09-14
+    url: https://finance.yahoo.com/markets/stocks/articles/baldwin-group-private-majority-investment-123000674.html
+    tier: 5
+    basis: reported
+    raw_snippet: "The Baldwin Group to Go Private Through Majority Investment by Sequence Holdings and Dell Family Office"
+    note: "Take-private with co-investor DFO Management (Dell Family Office); majority interest via an entity formed by Sequence and DFO. Signed, not closed: expected Q1 2027. Price is enterprise value. Date: Definitive agreement announced; closing expected Q1 2027. Stated price about $7.70bn."
+  - series_key: rollup_acq.shield_technology_partners.clearfuze_networks.pt
+    source_id: shieldtp_news
+    entity_id: shield_technology_partners
+    value_text: "announced as joining its group: ClearFuze Networks (IT managed-service provider, USA)"
+    unit: text
+    as_of_date: 2025-06-05
+    published_date: 2025-06-05
+    url: https://shieldtp.com/company-news/thrive-holdings-and-zbs-partners-launch-shield-technology-partners
+    tier: 7
+    basis: company_stated
+    raw_snippet: "STP is launching with a foundational set of partnerships comprising four high-performing IT services firms; ClearFuze Networks, IronOrbit, Delval Technology Solutions (DTS), and OneNet Global."
+    note: "One of four launch MSPs. Shield calls its deals 'partnerships'; SiliconANGLE and Channel Dive report they are majority/controlling stakes (60-90%). Price not disclosed. Date: Date Shield launched and named the four firms; individual closing dates not published."
+  - series_key: rollup_acq.shield_technology_partners.ironorbit.pt
+    source_id: shieldtp_news
+    entity_id: shield_technology_partners
+    value_text: "announced as joining its group: IronOrbit (IT managed-service provider, USA)"
+    unit: text
+    as_of_date: 2025-06-05
+    published_date: 2025-06-05
+    url: https://shieldtp.com/company-news/thrive-holdings-and-zbs-partners-launch-shield-technology-partners
+    tier: 7
+    basis: company_stated
+    raw_snippet: "STP is launching with a foundational set of partnerships comprising four high-performing IT services firms; ClearFuze Networks, IronOrbit, Delval Technology Solutions (DTS), and OneNet Global."
+    note: "One of four launch MSPs. Shield calls its deals 'partnerships'; SiliconANGLE and Channel Dive report they are majority/controlling stakes (60-90%). Price not disclosed. Date: Date Shield launched and named the four firms; individual closing dates not published."
+  - series_key: rollup_acq.shield_technology_partners.delval_technology_solutions_dts.pt
+    source_id: shieldtp_news
+    entity_id: shield_technology_partners
+    value_text: "announced as joining its group: Delval Technology Solutions (DTS) (IT managed-service provider, USA)"
+    unit: text
+    as_of_date: 2025-06-05
+    published_date: 2025-06-05
+    url: https://shieldtp.com/company-news/thrive-holdings-and-zbs-partners-launch-shield-technology-partners
+    tier: 7
+    basis: company_stated
+    raw_snippet: "STP is launching with a foundational set of partnerships comprising four high-performing IT services firms; ClearFuze Networks, IronOrbit, Delval Technology Solutions (DTS), and OneNet Global."
+    note: "One of four launch MSPs. Shield calls its deals 'partnerships'; SiliconANGLE and Channel Dive report they are majority/controlling stakes (60-90%). Price not disclosed. Date: Date Shield launched and named the four firms; individual closing dates not published."
+  - series_key: rollup_acq.shield_technology_partners.onenet_global.pt
+    source_id: shieldtp_news
+    entity_id: shield_technology_partners
+    value_text: "announced as joining its group: OneNet Global (IT managed-service provider, USA)"
+    unit: text
+    as_of_date: 2025-06-05
+    published_date: 2025-06-05
+    url: https://shieldtp.com/company-news/thrive-holdings-and-zbs-partners-launch-shield-technology-partners
+    tier: 7
+    basis: company_stated
+    raw_snippet: "STP is launching with a foundational set of partnerships comprising four high-performing IT services firms; ClearFuze Networks, IronOrbit, Delval Technology Solutions (DTS), and OneNet Global."
+    note: "One of four launch MSPs. Shield calls its deals 'partnerships'; SiliconANGLE and Channel Dive report they are majority/controlling stakes (60-90%). Price not disclosed. Date: Date Shield launched and named the four firms; individual closing dates not published."
+  - series_key: rollup_acq.shield_technology_partners.option_one_technologies.pt
+    source_id: themspsummit
+    entity_id: shield_technology_partners
+    value_text: "announced as joining its group: Option One Technologies (IT managed-service provider, USA)"
+    unit: text
+    as_of_date: 2025-12-15
+    published_date: 2025-12-15
+    url: https://themspsummit.com/article/shield-hires-ceo-picks-up-msp-option-one/
+    tier: 5
+    basis: reported
+    raw_snippet: "became Shield’s eighth MSP last week, joining ClearFuze, IronOrbit, OneNet Global, DelVal Technology Solutions, NetAscendent Solutions, SK Tech Group and BCS365 under the Shield umbrella."
+    note: "Eighth MSP; article headed 'Shield Acquires Option One Technologies'. Price not disclosed. Date: Month known (December 2025); article says 'last week'. 15 Dec 2025 is the date of Shield's CEO announcement the article covers."
+  - series_key: rollup_acq.shield_technology_partners.exigent_technologies.pt
+    source_id: exigent_news
+    entity_id: shield_technology_partners
+    value_text: "announced as joining its group: Exigent Technologies (IT managed-service provider, USA)"
+    unit: text
+    as_of_date: 2026-03-13
+    published_date: 2026-03-13
+    url: https://www.exigent.net/news/exigent-technologies-aligns-with-shield-technology-partners
+    tier: 7
+    basis: company_stated
+    raw_snippet: "Exigent Technologies Aligns with Shield Technology Partners to Strengthen Long-Term Client Support and Innovation"
+    note: "DOUBTFUL ON STAKE: Exigent calls it a 'strategic partnership' and does not state the stake; it is listed on Shield's own-companies page and trade press says Shield holds controlling stakes in its MSPs."
+  - series_key: rollup_acq.shield_technology_partners.nerds_support.pt
+    source_id: shieldtp_news
+    entity_id: shield_technology_partners
+    value_text: "announced as joining its group: Nerds Support (IT managed-service provider, USA)"
+    unit: text
+    as_of_date: 2026-09-24
+    published_date: 2026-09-24
+    url: https://shieldtp.com/company-news/shield-launches-forge-an-ai-operating-system-for-it-services
+    tier: 7
+    basis: company_stated
+    raw_snippet: ", its frontier AI operating system for IT services. The company also announced its 20th partnership with Miami-based Nerds Support"
+    note: "Shield's 20th MSP; Channel Dive (24 Sep 2026) calls it Shield's 20th MSP acquisition and an ownership stake. Price not disclosed."
+  - series_key: rollup_acq.titan.rfa_richard_fleischman_associates.pt
+    source_id: prnewswire
+    entity_id: titan
+    value_text: "acquired RFA (Richard Fleischman & Associates) (IT managed-service provider for financial firms, USA)"
+    unit: text
+    as_of_date: 2025-08-12
+    published_date: 2025-08-12
+    url: https://www.prnewswire.com/news-releases/titan-raises-74m-led-by-general-catalyst-to-transform-the-it-services-industry-with-its-augmented-ai-platform-302527468.html
+    tier: 5
+    basis: reported
+    raw_snippet: "In tandem, Titan also announced its acquisition of RFA, a leading managed service provider (MSP) serving the financial services industry."
+    note: "First and only confirmed Titan acquisition; price undisclosed."
+  - series_key: rollup_acq.unifycx.collective_solution.pt
+    source_id: unifycx_news
+    entity_id: unifycx
+    value_text: "acquired Collective Solution (contact centre, USA)"
+    unit: text
+    as_of_date: 2024-11-04
+    published_date: 2024-11-04
+    url: https://www.unifycx.com/news/unifycx-launches-a-new-era-in-customer-experience-with-ai-powered-innovation-and-tech-enabled-solutions/
+    tier: 7
+    basis: company_stated
+    raw_snippet: "Built on the expertise of GlowTouch and its strategic acquisition of Collective Solution, UnifyCX combines advanced AI technology with tech-enabled capabilities to revolutionize the customer experience."
+    note: "GlowTouch bought Collective Solution and the combined business was rebranded UnifyCX. Seller's banker Intrepid confirms the completed sale (Dec 2024). Price not disclosed. Date: Date UnifyCX launched and disclosed the acquisition."

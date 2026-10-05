@@ -19,12 +19,29 @@ rule: >-
 agreed: >-
   The firmest figure is the part all three models pass. It sits beside every total on these pages. Each model's own
   total is shown too, because they disagree a great deal.
+# What settles the check at a step of the dial, keyed by the rule's thresholds (horizon-check-stakes). The bundle
+# gives each step only its rule in full; these say the difference that matters, in the page's words.
+dial_labels:
+  "1-2-2": "the rule used: an existing check settles it, with no person's judgement"
+  "1-1-2": "also counts work that only a qualified person's judgement settles"
+# The reasoned stance on a deal card, and the flags where that reasoning and the buyers part ways.
+stances:
+  keeps: the owner likely keeps the saving
+  check: check before buying
+  passes: the saving likely goes to clients
+trade_flags:
+  buyers_despite_passes: >-
+    The census reasons that this saving goes to clients, yet buyers are active here. Both can hold: a buyer may change
+    how the work is priced, or may be wrong.
+  keeps_without_buyers: >-
+    The census reasons that an owner keeps the saving here, yet no roll-up this site follows works in the trade.
 sections:
   dial:
     title: How strict should the screen be?
     lede: >-
       Every threshold in the rule is a judgement. Each step below loosens one condition, and the payroll that passes
-      grows as it does. The census uses the step marked in the table.
+      grows as it does. The census uses the step marked in the table. The condition that moves the figure most is who
+      may check: the steps that also count a qualified person's judgement take in work a person still reviews.
   roles:
     title: What happens to a job
     lede: >-
@@ -42,11 +59,14 @@ sections:
       A task gets the same verdict wherever it is done; industries differ in whom they employ. Each industry's figure
       is its own staffing times the share of each role's work that passes.
   deals:
-    title: What to buy
+    title: Where buyers are, and what the census says
     lede: >-
       Two tests, and both must pass: does the work pass the screen, and would the owner keep the saving? The census
-      answers the first. The second it could not measure, so each card's stance is reasoned from how the business
-      prices its work, not measured. Named companies illustrate the pricing model and are not researched targets.
+      answers the first and reasons about the second from how a business prices its work. This list sets both beside
+      what buyers are doing: the AI roll-ups this site follows, by the trade each works in, and the purchases they have
+      announced. Trades are ordered by how many roll-ups are in them. The roll-ups are counted worldwide and the payroll
+      is American, so each count is split by place. Purchases come from a search of the larger buyers only, so a trade
+      with none listed may still have some.
   method:
     title: Method, and what failed
     lede: >-
