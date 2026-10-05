@@ -273,10 +273,13 @@ export type BoardRow = {
   id: string; kind: "ledger" | "outlook" | "migration" | "exit"; folio: string; who: string; attribution: string; line: string;
   state: string | null; word: Word; settles: string | null; test: { fact: string; op: string; against: number | string } | null;
   reading: Fact | null; sources: string[]; indicators: string[]; href: string;
+  judgement?: { lean: string; reason: string; rests_on: { id: string; name: string; href: string }[] };
 };
 export type BoardDoc = {
   as_of: string; words: { id: Word; label: string; meaning: string }[]; mapping: { kind: string; state: string; word: Word }[];
-  n?: number; tally: Record<Word, number>; folios: { id: string; label: string; question: string; rows: BoardRow[]; too_early: number }[];
+  n?: number; tally: Record<Word, number>; folios: { id: string; label: string; question: string; rows: BoardRow[]; too_early: number; leans?: Record<string, number> }[];
+  leans?: { id: string; label: string; meaning: string }[];
+  judged?: { model: string; date: string; method: string; reviewed_by: string; tally: Record<string, number> };
   questions: { question: string; indicator: string | null; note?: string; status: string | null; href: string | null }[];
 };
 export const board = () => read<BoardDoc>("board.json");

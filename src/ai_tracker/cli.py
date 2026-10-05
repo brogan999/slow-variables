@@ -376,6 +376,14 @@ def _check(s: st.Store) -> tuple[list[str], list[str]]:
         {c["id"] for c in load_outlook().get("claims") or []},
         {i.id for i in s.seed.indicators if i.published},
     )
+    _bspec = board.load()
+    b_errors += board.judgement_problems(
+        board.judgements(),
+        {("ledger", k) for k in _bspec["ledger"]} | {("migration", k) for k in _bspec["migration"]} | {("exit", k) for k in _bspec["exits"]}
+        | {("outlook", c["id"]) for c in load_outlook().get("claims") or []},
+        {i.id for i in s.seed.indicators},
+        set(_bspec.get("leans") or {}),
+    )
     from datetime import date as _date
 
     from . import singularity
