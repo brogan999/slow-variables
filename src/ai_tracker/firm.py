@@ -18,7 +18,7 @@ from .outlook import STATES, TOKEN, _numbered, essay_problems
 ROOT = Path(__file__).resolve().parents[2]
 SPEC = ROOT / "seed" / "firm.yaml"
 ESSAY = ROOT / "docs" / "argument" / "firm.md"
-PLATES = ("regimes",)
+PLATES = ("regimes", "shapes", "jobs")
 AGAINST = ("leans_false", "likely_false")
 FIGURE = re.compile(r"\d")
 
@@ -29,8 +29,11 @@ def load() -> dict[str, Any]:
 
 def strings(spec: dict[str, Any]) -> list[str]:
     """The page's own words outside the essay, for the tests that keep figures out."""
-    r = spec.get("regimes") or {}
-    return [r.get("title", ""), r.get("note", ""), *(r.get("columns") or []), *(c for row in r.get("rows") or [] for c in row)]
+    r, sh, fi = spec.get("regimes") or {}, spec.get("shapes") or {}, spec.get("fiction") or {}
+    shapes = [row.get(k, "") for row in sh.get("rows") or [] for k in ("shape", "who", "goes_first", "stays", "would_show")]
+    fiction = [w.get(k, "") for w in fi.get("works") or [] for k in ("author", "title", "shape", "picture")]
+    plates = [sh.get("title", ""), sh.get("note", ""), *shapes, fi.get("label", ""), fi.get("note", ""), *fiction]
+    return [r.get("title", ""), r.get("note", ""), *(r.get("columns") or []), *(c for row in r.get("rows") or [] for c in row), *plates]
 
 
 def _folio_words(essay: str) -> set[str]:
@@ -63,11 +66,18 @@ def problems(spec: dict[str, Any], outlook: dict[str, Any], leans: dict[str, Any
     for i, row in enumerate(r.get("rows") or []):
         if len(row) != len(r.get("columns") or []):
             errors.append(f"firm: regimes row {i} does not fill every column")
+    sources = {x["id"] for x in outlook.get("sources") or []}
+    for row in (spec.get("shapes") or {}).get("rows") or []:
+        if not row.get("sources"):
+            errors.append(f"firm: shape '{row.get('shape')}' credits no source")
+        errors += [f"firm: shape '{row.get('shape')}' names unknown source {x}" for x in row.get("sources") or [] if x not in sources]
+    if spec.get("fiction") and "not evidence" not in spec["fiction"].get("label", ""):
+        errors.append("firm: the fiction lane must be labelled as not evidence")
     errors += [f"firm: the page types a figure: {t[:40]}" for t in strings(spec) if FIGURE.search(t)]
     return errors
 
 
-def build(spec: dict[str, Any], outlook: dict[str, Any], essay: str) -> dict[str, Any]:
+def build(spec: dict[str, Any], outlook: dict[str, Any], essay: str, census_cut: dict[str, Any] | None = None) -> dict[str, Any]:
     """The outlook's records this page argues from, cut down to its own positions, with sources numbered in the order
     this essay cites them."""
     if not spec or not outlook:
@@ -82,6 +92,7 @@ def build(spec: dict[str, Any], outlook: dict[str, Any], essay: str) -> dict[str
         for t in (c.get("test"), c.get("rival_test")):
             facts |= {v for v in (t or {}).values() if isinstance(v, str)}
     cited = {v for k, v in TOKEN.findall(text) if k == "cite"} | {h for x in [*positions, *claims] for h in x.get("holders") or []}
+    cited |= {x for row in (spec.get("shapes") or {}).get("rows") or [] for x in row.get("sources") or []}
     return {
         "as_of": outlook["as_of"],
         "essay": essay,
@@ -93,4 +104,7 @@ def build(spec: dict[str, Any], outlook: dict[str, Any], essay: str) -> dict[str
         "tally": {k: sum(1 for c in claims if c["state"] == k) for k in STATES},
         "folios": spec.get("folios") or {},
         "regimes": spec.get("regimes") or {},
+        "shapes": spec.get("shapes") or {},
+        "fiction": spec.get("fiction") or {},
+        "census_cut": census_cut or {},
     }

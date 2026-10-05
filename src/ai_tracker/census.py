@@ -428,3 +428,30 @@ def rollup(index: dict[str, Any], small: dict[str, Any], firms: dict[str, Any], 
         )
     rows.sort(key=lambda r: (-r["score"], r["naics"]))
     return [{**r, "rank": i + 1} for i, r in enumerate(rows[:limit])]
+
+
+def shape(spec: dict[str, Any]) -> dict[str, Any]:
+    """Payroll by occupational group (the occupation code's major group, named in seed/census.yaml), best paid first,
+    split four ways by the bundle's own task verdicts: passes the screen (with the part all three scorers pass beside
+    it), waits only on a check, needs a body, and the rest. The bundle has no field for seniority, so this reads kinds of job, not rungs within one."""
+    if not spec or not (bundle(spec) / "tasks.csv").exists():
+        return {}
+    names = spec.get("occupation_groups") or {}
+    d = bundle(spec)
+    groups: dict[str, dict[str, Any]] = {}
+    for r in rows(d / "roles.csv"):
+        g = groups.setdefault(r["occ"][:2], {"roles": 0, "emp": 0.0, "payroll": 0.0, "passes": 0.0, "agreed3": 0.0, "waits_on_check": 0.0, "physical": 0.0, "rest": 0.0})
+        g["roles"] += 1
+        g["emp"] += num(r["emp"]) or 0.0
+        g["payroll"] += num(r["wage_bill"]) or 0.0
+    for t in rows(d / "tasks.csv"):
+        part = "passes" if truth(t["passes"]) else "waits_on_check" if truth(t["blocked_by_missing_check"]) else "physical" if truth(t["physical"]) else "rest"
+        groups[t["occ"][:2]][part] += num(t["task_payroll_usd"]) or 0.0
+        if truth(t["agreed_all_three"]):  # the firmest part of "passes", shown beside it wherever it is printed
+            groups[t["occ"][:2]]["agreed3"] += num(t["task_payroll_usd"]) or 0.0
+    out = []
+    for code, g in groups.items():
+        row = {"code": code, "name": names.get(code, ""), "ref": ref(spec, "tasks.csv", f"occ={code}-*"), "mean_pay": g["payroll"] / g["emp"], **g}
+        row |= {f"share_{k}": g[k] / g["payroll"] for k in ("passes", "agreed3", "waits_on_check", "physical", "rest")}
+        out.append(row)
+    return {"version": spec["version"], "groups": sorted(out, key=lambda g: -g["mean_pay"])}

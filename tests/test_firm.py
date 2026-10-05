@@ -4,7 +4,7 @@ which the essay says the board's leans disagree with it."""
 
 import re
 
-from ai_tracker import firm
+from ai_tracker import census, firm
 from ai_tracker import outlook as ol
 from ai_tracker import store as st
 from ai_tracker.analysis.metrics import run_metrics
@@ -48,6 +48,9 @@ def test_the_page_carries_only_its_own_positions_claims_facts_and_sources():
     assert set(doc["facts"]) == {"deals"} and set(doc["tests"]) == {"c1"}
     assert [(x["id"], x["n"]) for x in doc["sources"]] == [("b", 1), ("a", 2)]  # numbered as this essay cites them
     assert doc["regimes"]["rows"] == [["Nothing", "The customer"]] and doc["as_of"] == "2026-10-01"
+    assert doc["census_cut"] == {} and doc["shapes"] == {}  # a page without them still builds
+    cut = {"version": "v", "groups": [{"name": "Management"}]}
+    assert firm.build(SPEC, OUTLOOK, ESSAY, cut)["census_cut"] == cut  # the census cut rides in the page's own file
 
 
 def test_a_page_that_cannot_resolve_names_each_problem():
@@ -86,7 +89,7 @@ def test_the_real_page_resolves_and_types_no_figure():
         for sentence in re.split(r"(?<=[.!?])\s+", t):
             if NUMBER_WORD.search(ol.TOKEN.sub("", sentence)):
                 assert ol.TOKEN.search(sentence), sentence  # a figure in words still needs its token
-    assert 1800 <= len(ol.TOKEN.sub("", essay).split()) <= 3100  # raised from 2700 when the staff review added caveats
+    assert 1800 <= len(ol.TOKEN.sub("", essay).split()) <= 4100  # raised from 2700 for the first staff review, then for the folio on the shape and its review
 
 
 def test_the_essay_says_who_drafted_it_and_whose_model_scored_the_census():
@@ -112,3 +115,42 @@ def test_tonights_readings_settle_the_claims_the_records_can_settle():
     page = firm.build(firm.load(), doc, firm.ESSAY.read_text())
     assert NEW_CLAIMS <= {c["id"] for c in page["claims"]}
     assert all(c.get("falsifier") for c in page["claims"])  # every claim names what would prove it wrong
+
+
+def test_the_shapes_plate_credits_every_row_and_fiction_is_labelled_and_tests_nothing():
+    spec, outlook = firm.load(), ol.load()
+    shapes = spec["shapes"]
+    sources = {x["id"] for x in outlook["sources"]}
+    assert len(shapes["rows"]) >= 5
+    for row in shapes["rows"]:
+        assert row["shape"] and row["goes_first"] and row["stays"] and row["would_show"]
+        assert row["sources"] and set(row["sources"]) <= sources, row["shape"]  # someone argued it, and is on the page
+    fiction = spec["fiction"]
+    assert "fiction" in fiction["label"].lower() and "not evidence" in fiction["label"].lower()
+    assert len(fiction["works"]) >= 4 and all(w["author"] and w["title"] and w["picture"] for w in fiction["works"])
+    assert not any("source" in w for w in fiction["works"])  # a novel is listed, never cited
+    credited = " ".join(x["who"] for x in outlook["sources"])
+    assert not [w["author"] for w in fiction["works"] if w["author"] in credited]  # so no claim or position rests on one
+
+
+def test_the_shape_folio_says_what_the_census_can_and_cannot_read():
+    essay = firm.ESSAY.read_text()
+    assert "### Folio VII · the shape" in essay and "[plate:shapes]" in essay and "[plate:jobs]" in essay
+    folio = essay.split("### Folio VII · the shape")[1].split("### Folio VIII")[0]
+    assert "occupational groups" in folio and "not junior against senior" in folio  # the census has no seniority field
+    assert "this site's judgement" in folio  # where the site lands is labelled
+    assert "fiction" in folio.lower()
+    groups = census.shape(census.load())["groups"]
+    by = {g["name"]: g for g in groups}
+    # the folio's sentences about the census, re-tested against the bundle
+    assert all(g["share_waits_on_check"] > g["share_passes"] and g["share_passes"] < 0.5 for g in groups)
+    for key in ("share_passes", "share_agreed3"):  # true on the headline vote and when all three scorers agree
+        low = sorted(groups, key=lambda g: g[key])
+        assert low[0]["name"] == "Legal"
+        assert {low[-1]["name"], low[-2]["name"]} == {"Office and administrative support", "Sales"}
+    rank = [g["name"] for g in sorted(groups, key=lambda g: g["share_passes"])].index("Management")
+    rank3 = [g["name"] for g in sorted(groups, key=lambda g: g["share_agreed3"])].index("Management")
+    assert rank <= 2 < rank3  # "near the bottom on the headline vote, though not when all three must agree"
+    assert by["Management"]["share_passes"] < by["Sales"]["share_passes"]  # more of it in lower-paid kinds of job than among managers
+    assert "cannot test Drago and Laine's order" in folio and "agrees with" not in folio
+    assert "the company whose model drafted this page" in folio  # Anthropic's chief executive is named, not left out

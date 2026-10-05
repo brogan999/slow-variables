@@ -968,9 +968,9 @@ class Store:
 
         outlook = build_outlook(self)
         _write(out / "outlook.json", outlook)
-        from . import firm
+        from . import census, firm
 
-        _write(out / "firm.json", firm.build(firm.load(), outlook, firm.ESSAY.read_text() if firm.ESSAY.exists() else ""))
+        _write(out / "firm.json", firm.build(firm.load(), outlook, firm.ESSAY.read_text() if firm.ESSAY.exists() else "", census.shape(census.load())))
         board_doc = self.board(cards, argument, outlook)
         _write(out / "board.json", board_doc)
         from .singularity import build as build_singularity

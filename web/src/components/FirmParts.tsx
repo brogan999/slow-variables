@@ -3,6 +3,7 @@ import { MarginPanel } from "@/components/ArticleLayout";
 import { Fact } from "@/components/Fact";
 import { Position } from "@/components/OutlookParts";
 import type { FirmDoc } from "@/lib/data";
+import { fmt } from "@/lib/format";
 
 // Who owns what: the essay's own parts. Positions, claims and their states are the outlook's records, drawn by the
 // outlook's components; nothing here works out a state or a number.
@@ -38,6 +39,74 @@ export function RegimesPlate({ regimes }: { regimes: FirmDoc["regimes"] }) {
         </table>
       </div>
       <p className="mt-3 text-[13px] leading-relaxed text-ink-2">{regimes.note}</p>
+    </figure>
+  );
+}
+
+const th = "border-b border-ink py-2 pr-4 align-bottom font-medium text-ink-2";
+const td = "py-2.5 pr-4 text-ink-2";
+
+// The shapes writers have argued for, each credited by its number in the page's sources, then what novelists pictured.
+export function ShapesPlate({ doc }: { doc: FirmDoc }) {
+  const n = Object.fromEntries(doc.sources.map((x) => [x.id, x.n]));
+  const { shapes, fiction } = doc;
+  return (
+    <figure className="not-prose">
+      <figcaption className="eyebrow mb-3">{shapes.title}</figcaption>
+      <div className="overflow-x-auto">
+        <table className="w-full min-w-[44rem] border-collapse text-left text-[14px] leading-snug">
+          <thead>
+            <tr>{["The shape", "Who argues it", "What goes first", "What stays", "What would show it"].map((c) => <th key={c} scope="col" className={th}>{c}</th>)}</tr>
+          </thead>
+          <tbody>
+            {shapes.rows.map((r) => (
+              <tr key={r.shape} className="border-b border-grid align-top">
+                <th scope="row" className="py-2.5 pr-4 font-medium text-ink">{r.shape}</th>
+                <td className={td}>{r.who}{r.sources.map((id) => <sup key={id} className="ml-0.5"><a href={`#source-${id}`} className="text-ink-2 no-underline">{n[id]}</a></sup>)}</td>
+                <td className={td}>{r.goes_first}</td>
+                <td className={td}>{r.stays}</td>
+                <td className={td}>{r.would_show}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p className="mt-3 text-[13px] leading-relaxed text-ink-2">{shapes.note}</p>
+      <div className="mt-6 border-l-2 border-grid pl-4">
+        <div className="eyebrow mb-2">{fiction.label}</div>
+        <ul className="flex flex-col gap-2 text-[14px] leading-snug text-ink-2">
+          {fiction.works.map((w) => <li key={w.title}><span className="text-ink">{w.author}, <i>{w.title}</i> ({w.year}).</span> {w.picture}</li>)}
+        </ul>
+        <p className="mt-3 text-[13px] leading-relaxed text-ink-2">{fiction.note}</p>
+      </div>
+    </figure>
+  );
+}
+
+// The census by kind of job, best paid first. Every share is the bundle's, summed by the export.
+export function CensusCutPlate({ cut }: { cut: FirmDoc["census_cut"] }) {
+  if (!cut.groups?.length) return null;
+  return (
+    <figure className="not-prose">
+      <figcaption className="eyebrow mb-3">What the census screen says of each kind of job, best paid first</figcaption>
+      <div className="overflow-x-auto">
+        <table className="w-full min-w-[46rem] border-collapse text-left text-[14px] leading-snug">
+          <thead>
+            <tr>{["Kind of job", "Passes the screen", "All three models pass", "Waits only on a check", "Needs a body", "Held for more than a missing check"].map((c) => <th key={c} scope="col" className={th}>{c}</th>)}</tr>
+          </thead>
+          <tbody>
+            {cut.groups.map((g) => (
+              <tr key={g.code} className="border-b border-grid align-top" title={g.ref}>
+                <th scope="row" className="py-2.5 pr-4 font-medium text-ink">{g.name}</th>
+                {[g.share_passes, g.share_agreed3, g.share_waits_on_check, g.share_physical, g.share_rest].map((v, i) => <td key={i} className={`${td} tabular-nums`}>{fmt(v, "share")}</td>)}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p className="mt-3 text-[13px] leading-relaxed text-ink-2">
+        Shares of each group&apos;s payroll, from <Link href="/census" className="text-ink underline decoration-axis underline-offset-2">the census</Link> ({cut.version}), a screen scored by three AI models and not a record of what has been automated. Groups are the occupation code&apos;s major groups, ordered by average pay; the census has no field for seniority, so this reads kinds of job, not rungs within one. A task passes when at least two of the three models pass it; the next column is the part all three pass, which lies inside the first. The last column is everything else: mostly work that has no existing check and is also slow to judge or costly when wrong, work on which the scorers split over what holds it, and a small part that is a sign-off a person answers for. Needs a body is work that takes a person on the spot.
+      </p>
     </figure>
   );
 }
