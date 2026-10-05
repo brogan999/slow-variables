@@ -55,3 +55,7 @@ def test_every_section_the_contents_page_links_to_exists():
 def test_the_contents_page_is_one_click_from_every_page():
     assert '["/contents", "Contents"]' in NAV  # the menu, the search box and sitemap.xml all read this list
     assert 'href="/contents"' in (WEB / "app" / "layout.tsx").read_text()  # the footer
+
+
+def test_ask_is_switched_on_now_the_workspace_has_credit():
+    assert "askOnline: true" in (WEB / "lib" / "site.ts").read_text()

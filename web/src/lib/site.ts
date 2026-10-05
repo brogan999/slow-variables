@@ -7,6 +7,6 @@ export const SITE = {
   repo: "https://github.com/brogan999/slow-variables",
   // The address for privacy requests and rights notices only.
   legalEmail: "info@baldlabs.co",
-  // Ask needs the Anthropic workspace to have credit; while it has none, every way into Ask is hidden
-  askOnline: false,
+  // Ask needs the Anthropic workspace to have credit; set this false and every way into Ask is hidden
+  askOnline: true,
 };
