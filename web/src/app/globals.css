@@ -166,6 +166,14 @@ body:has(.ask-shell) {
   & p { max-width: none; } /* the answer runs the column's width, like the bubble and the composer */
 }
 
+/* The Ask side panel (Part 40): on a wide screen the page makes room for it; on a phone the footer clears its launcher. */
+@media (min-width: 1280px) { body:has(> .ask-panel) { padding-right: 400px; } }
+@media (max-width: 639px) { body:has(> .ask-launcher) > footer { padding-bottom: 3.5rem; } }
+.ask-panel textarea:focus-visible { outline: none; } /* the composer's own border shows focus */
+@keyframes ask-shimmer { to { background-position: -200% 0; } }
+.ask-shimmer { color: transparent; background: linear-gradient(90deg, var(--muted) 35%, var(--axis) 50%, var(--muted) 65%) 0 0 / 200% 100%; -webkit-background-clip: text; background-clip: text; animation: ask-shimmer 1.8s linear infinite; }
+@media (prefers-reduced-motion: reduce) { .ask-shimmer { animation: none; background: none; color: var(--muted); } }
+
 /* the predictions board's word filter: CSS only, one rule per word (every forecast stays in the page) */
 .board-filter:has(#bw-happening:checked) li[data-word]:not([data-word="happening"]),
 .board-filter:has(#bw-not_happening:checked) li[data-word]:not([data-word="not_happening"]),

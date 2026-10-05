@@ -59,3 +59,30 @@ def test_the_contents_page_is_one_click_from_every_page():
 
 def test_ask_is_switched_on_now_the_workspace_has_credit():
     assert "askOnline: true" in (WEB / "lib" / "site.ts").read_text()
+
+
+def test_the_ask_side_panel_is_on_every_page_only_while_ask_is_on():
+    layout = (WEB / "app" / "layout.tsx").read_text()
+    assert "{SITE.askOnline ? <AskPanel /> : null}" in layout  # the root layout, so the conversation survives a route change
+    assert 'pathname === "/ask"' in (WEB / "components" / "AskPanel.tsx").read_text()  # the full page needs no second chat
+
+
+def test_the_side_panel_and_the_ask_page_share_one_way_of_asking_and_it_posts_only_to_the_ask_route():
+    panel, chat, shared = ((WEB / "components" / f).read_text() for f in ("AskPanel.tsx", "Chat.tsx", "AskShared.tsx"))
+    assert re.findall(r'fetch\(\s*"([^"]+)"', shared) == ["/api/query/ask"]
+    for name, text in (("AskPanel.tsx", panel), ("Chat.tsx", chat)):
+        assert "useAsk(" in text and "fetch(" not in text and "/api/" not in text, name
+
+
+def test_the_side_panel_sends_nothing_until_the_reader_submits():
+    panel = (WEB / "components" / "AskPanel.tsx").read_text()
+    # every effect in the panel is free of a send: a question costs money, so only a submit or a click asks one
+    for effect in re.findall(r"useEffect\(\(\) => \{.*?\n  \}, \[[^\]]*\]\);", panel, re.S):
+        assert "send(" not in effect and "ask(" not in effect, effect
+
+
+def test_the_privacy_notice_says_what_the_side_panel_keeps_in_the_tab():
+    assert "sessionStorage" in (WEB / "components" / "AskPanel.tsx").read_text()
+    legal = (WEB / "app" / "legal" / "page.tsx").read_text()
+    assert "session storage" in legal and "stores nothing on your device" not in legal
+    assert "stores nothing in your browser" not in (WEB / "app" / "methodology" / "page.tsx").read_text()
