@@ -48,6 +48,9 @@ def test_the_page_carries_only_its_own_positions_claims_facts_and_sources():
     assert set(doc["facts"]) == {"deals"} and set(doc["tests"]) == {"c1"}
     assert [(x["id"], x["n"]) for x in doc["sources"]] == [("b", 1), ("a", 2)]  # numbered as this essay cites them
     assert doc["regimes"]["rows"] == [["Nothing", "The customer"]] and doc["as_of"] == "2026-10-01"
+    assert doc["census_cut"] == {} and doc["shapes"] == {}  # a page without them still builds
+    cut = {"version": "v", "groups": [{"name": "Management"}]}
+    assert firm.build(SPEC, OUTLOOK, ESSAY, cut)["census_cut"] == cut  # the census cut rides in the page's own file
 
 
 def test_a_page_that_cannot_resolve_names_each_problem():
@@ -112,3 +115,27 @@ def test_tonights_readings_settle_the_claims_the_records_can_settle():
     page = firm.build(firm.load(), doc, firm.ESSAY.read_text())
     assert NEW_CLAIMS <= {c["id"] for c in page["claims"]}
     assert all(c.get("falsifier") for c in page["claims"])  # every claim names what would prove it wrong
+
+
+def test_the_shapes_plate_credits_every_row_and_fiction_is_labelled_and_tests_nothing():
+    spec, outlook = firm.load(), ol.load()
+    shapes = spec["shapes"]
+    sources = {x["id"] for x in outlook["sources"]}
+    assert len(shapes["rows"]) >= 5
+    for row in shapes["rows"]:
+        assert row["shape"] and row["goes_first"] and row["stays"] and row["would_show"]
+        assert row["sources"] and set(row["sources"]) <= sources, row["shape"]  # someone argued it, and is on the page
+    fiction = spec["fiction"]
+    assert "fiction" in fiction["label"].lower() and "not evidence" in fiction["label"].lower()
+    assert len(fiction["works"]) >= 4 and all(w["author"] and w["title"] and w["picture"] for w in fiction["works"])
+    held = {h for c in outlook["claims"] for h in c.get("holders") or []} | {h for p in outlook["positions"] for h in p.get("holders") or []}
+    assert not held & {w.get("source") for w in fiction["works"]}  # no claim or position rests on a novel
+
+
+def test_the_shape_folio_says_what_the_census_can_and_cannot_read():
+    essay = firm.ESSAY.read_text()
+    assert "### Folio VII · the shape" in essay and "[plate:shapes]" in essay and "[plate:census_cut]" in essay
+    folio = essay.split("### Folio VII · the shape")[1].split("### Folio VIII")[0]
+    assert "occupational groups" in folio and "not junior against senior" in folio  # the census has no seniority field
+    assert "this site's judgement" in folio  # where the site lands is labelled
+    assert "fiction" in folio.lower()

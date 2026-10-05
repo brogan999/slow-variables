@@ -229,3 +229,20 @@ def test_trades_selects_one_census_figure_counts_buyers_by_place_and_flags_a_dis
     assert a["flag"] == "buyers_despite_passes" and t["flag"] == "keeps_without_buyers" and p["flag"] is None
     assert p["census"] is None and p["no_figure"] == "no row"
     assert t["census"]["from"] == "card" and t["census"]["passes"] == 1e8
+
+
+def test_the_cut_by_occupational_group_sums_to_the_headline_and_runs_from_the_best_paid_down():
+    spec = census.load()
+    cut = census.shape(spec)
+    head = json.loads((census.bundle(spec) / "manifest.json").read_text())["headline"]
+    groups = cut["groups"]
+    assert len(groups) >= 10 and all(g["name"] and not re.search(r"\d", g["name"]) for g in groups)  # named in words
+    for key, col in (("payroll", "knowledge_payroll_usd"), ("passes", "passes_usd"), ("waits_on_check", "blocked_by_missing_check_usd")):
+        assert abs(sum(g[key] for g in groups) - head[col]) < 1, key
+    for g in groups:  # the four parts are all of a group's payroll, and each figure says where it came from
+        assert abs(g["passes"] + g["waits_on_check"] + g["physical"] + g["rest"] - g["payroll"]) < 1
+        assert abs(g["share_passes"] + g["share_waits_on_check"] + g["share_physical"] + g["share_rest"] - 1) < 1e-9
+        assert g["ref"].startswith(f"census:{spec['version']}/tasks.csv#") and g["roles"] > 0
+    pay = [g["mean_pay"] for g in groups]
+    assert pay == sorted(pay, reverse=True)  # the order is the bundle's pay, not a rank this site assigned
+    assert cut["version"] == spec["version"]
