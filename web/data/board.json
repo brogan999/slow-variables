@@ -4,6 +4,13 @@
   {
    "id": "capability",
    "label": "Capability / invention",
+   "leans": {
+    "leans_false": 22,
+    "leans_true": 20,
+    "likely_false": 14,
+    "likely_true": 9,
+    "toss_up": 5
+   },
    "question": "Can AI do whole tasks, and reliably?",
    "rows": [
     {
@@ -677,6 +684,22 @@
       "rsi_agent_workdays_per_human",
       "rsi_intervention_rate_4_8h"
      ],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "The lab's own figures already show agents putting in more research workdays than people, and the length of task agents finish reliably has been growing quickly on outside tests. Extending that trend a year or two makes an independent confirmation probable, since the claim carries no deadline. What cuts the other way is that the only readings so far are self-reported, people still step in on about as many long tasks as not, and outside testers may never get the access needed to check.",
+      "rests_on": [
+       {
+        "href": "/indicators/rsi_agent_workdays_per_human",
+        "id": "rsi_agent_workdays_per_human",
+        "name": "Agent-workdays per human workday in frontier research (self-reported)"
+       },
+       {
+        "href": "/indicators/rsi_intervention_rate_4_8h",
+        "id": "rsi_intervention_rate_4_8h",
+        "name": "Human interventions on 4\u20138 hour agent tasks (self-reported)"
+       }
+      ]
+     },
      "kind": "exit",
      "line": "AI speeds up its own invention",
      "reading": null,
@@ -693,6 +716,11 @@
      "href": "/predictions#ai2027_robot_economy_2028_2030",
      "id": "ai2027_robot_economy_2028_2030",
      "indicators": [],
+     "judgement": {
+      "lean": "likely_false",
+      "reason": "This rests on general knowledge of how fast factories, supply chains and robot hardware scale. The scenario needs superintelligence first and then an industrial build-out far faster than anything seen, all inside three years, and the first step already looks late. The strongest point for it is that humanoid robot output is growing quickly from a tiny base, but that is ordinary industrial growth, not an economy of robot factories.",
+      "rests_on": []
+     },
      "kind": "ledger",
      "line": "The race ending of AI 2027 has special economic zones filling with robot factories from 2028, with a robot economy covering them by early 2030.",
      "reading": null,
@@ -714,6 +742,22 @@
       "metr_horizon_80",
       "metr_horizon_50"
      ],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "The task length agents complete reliably has been growing fast, and extending the reliable-horizon trend through 2027 gets to tasks of some weeks. The bar here is much higher: any coding task of the best lab engineer, far faster and cheaper, and the gap between the reliable horizon and the headline horizon has not closed. The authors themselves moved their medians later. The case for it is that the trend has repeatedly beaten sceptics and coding is where labs concentrate effort.",
+      "rests_on": [
+       {
+        "href": "/indicators/metr_horizon_80",
+        "id": "metr_horizon_80",
+        "name": "METR 80% time horizon"
+       },
+       {
+        "href": "/indicators/metr_horizon_50",
+        "id": "metr_horizon_50",
+        "name": "METR 50% time horizon"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "An AI that codes better than the best people arrives in 2027.",
      "reading": null,
@@ -736,6 +780,27 @@
       "rsi_intervention_rate_4_8h",
       "surprise_index"
      ],
+     "judgement": {
+      "lean": "likely_false",
+      "reason": "A superhuman researcher needs a superhuman coder first plus research taste, and the coder milestone itself looks later than 2027. Self-reported lab figures show agents doing much research legwork, but people still step in on about as many long tasks as not, and no outside test shows an agent beating top researchers. Under a year is too short for that gap to close and be verified from outside. The strongest counterpoint is that the scenario's measurable predictions have so far run at about three quarters of the pace it set, on its authors' own grading.",
+      "rests_on": [
+       {
+        "href": "/indicators/rsi_agent_workdays_per_human",
+        "id": "rsi_agent_workdays_per_human",
+        "name": "Agent-workdays per human workday in frontier research (self-reported)"
+       },
+       {
+        "href": "/indicators/rsi_intervention_rate_4_8h",
+        "id": "rsi_intervention_rate_4_8h",
+        "name": "Human interventions on 4\u20138 hour agent tasks (self-reported)"
+       },
+       {
+        "href": "/indicators/surprise_index",
+        "id": "surprise_index",
+        "name": "Progress against the AI 2027 quantitative predictions"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "The AI 2027 scenario placed a superhuman AI researcher, one that outdoes the best people at AI research, at around September 2027.",
      "reading": null,
@@ -756,6 +821,11 @@
      "indicators": [
       "safety_brake_events"
      ],
+     "judgement": {
+      "lean": "likely_false",
+      "reason": "Judged as whether the catastrophe happens, this is unlikely, which is also what his low odds say. The judgement rests on general knowledge: labs do catch bad behaviour in testing, many actors would have to fail at once, and extinction-level outcomes need AI to gain decisive physical power. What cuts the other way is that control methods have never been tested on systems smarter than their makers, so the risk is small but real.",
+      "rests_on": []
+     },
      "kind": "ledger",
      "line": "Scott Alexander puts his chance of AI doom at about one in five, the lowest estimate among the authors of AI 2027.",
      "reading": null,
@@ -777,6 +847,17 @@
       "internal_external_deployment_gap_months",
       "metr_horizon_50"
      ],
+     "judgement": {
+      "lean": "likely_false",
+      "reason": "The test is an independent finding that an OpenAI system beats people at most economically valuable work by the end of 2026, and under three months remain. Outside tests show agents reliably finishing tasks of a few hours, not whole jobs, and Altman himself said the system was not there yet. A declaration by the lab is quite possible, but that would not meet the test.",
+      "rests_on": [
+       {
+        "href": "/indicators/metr_horizon_50",
+        "id": "metr_horizon_50",
+        "name": "METR 50% time horizon"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Sam Altman told TIME that OpenAI would have an internal system he would call AGI before the end of 2026, while conceding it was not there yet.",
      "reading": null,
@@ -797,6 +878,11 @@
      "indicators": [
       "rsi_agent_workdays_per_human"
      ],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "During 2026 frontier models were credited with proofs of open mathematical problems and with useful research ideas, and several mathematicians have said the machine supplied the key step. That is enough for the call as loosely worded, a judgement from general knowledge. The strongest objection is that people still choose the problems and check the answers, so independent experts may decline to credit the insight mainly to the machine.",
+      "rests_on": []
+     },
      "kind": "ledger",
      "line": "Sam Altman wrote that 2026 would likely bring AI systems able to work out genuinely new insights.",
      "reading": null,
@@ -815,6 +901,11 @@
      "href": "/predictions#altman_real_world_robots_2027",
      "id": "altman_real_world_robots_2027",
      "indicators": [],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "The wording is modest: robots able to carry out tasks in the real world. From general knowledge, general-purpose robots are already in paid pilots in factories and warehouses, and extending that through 2027 makes paid work outside test sites probable, at small scale. The case against is that most deployments remain supervised, narrow and closer to demonstrations than to real jobs, so a strict reading of general-purpose could fail.",
+      "rests_on": []
+     },
      "kind": "ledger",
      "line": "Sam Altman said 2027 may bring robots able to carry out tasks in the real world.",
      "reading": null,
@@ -833,6 +924,11 @@
      "href": "/predictions#altman_superintelligence_few_thousand_days",
      "id": "altman_superintelligence_few_thousand_days",
      "indicators": [],
+     "judgement": {
+      "lean": "toss_up",
+      "reason": "Extending the fast growth in task length and the early signs of AI doing AI research puts expert-level systems around the early part of the next decade, with something clearly superhuman a few years after. That places the end of 2035 near the middle of a wide spread, so there is no honest lean. Against it stand limits on compute, power and experiments; for it, the trend has kept beating forecasts and research automation could shorten the last stretch.",
+      "rests_on": []
+     },
      "kind": "ledger",
      "line": "Sam Altman wrote that superintelligence might arrive within a few thousand days, though it could take longer, and said he is confident it will come.",
      "reading": null,
@@ -854,6 +950,22 @@
       "metr_horizon_80",
       "metr_horizon_50"
      ],
+     "judgement": {
+      "lean": "likely_false",
+      "reason": "The definition asks for Nobel-level work across fields with autonomous multi-week tasks by the middle of 2028. Extending the reliable-horizon trend that far reaches tasks of some weeks at best, in software, on clean benchmark tasks, and that is far from Nobel-level science across fields; no system that learns continually on the job has shipped. Amodei himself called it closer to an even bet and conditional on scaling holding. The trend running faster than its past rate is the main thing that could prove this wrong.",
+      "rests_on": [
+       {
+        "href": "/indicators/metr_horizon_80",
+        "id": "metr_horizon_80",
+        "name": "METR 80% time horizon"
+       },
+       {
+        "href": "/indicators/metr_horizon_50",
+        "id": "metr_horizon_50",
+        "name": "METR 50% time horizon"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "If scaling continues, AI as able as a country of geniuses arrives within a year or two.",
      "reading": null,
@@ -875,6 +987,22 @@
       "metr_horizon_80",
       "harvey_lab_frontier_completion"
      ],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "By the end of 2036 the task-length trend has a decade to run, and even a marked slowdown would carry reliable autonomous work from hours to many months. Expert-level autonomous systems across most fields by then look more likely than not, though not as near certain as his odds claim. The strongest doubts are that expert legal work is still rarely completed end to end today, and that on-the-job learning and reliability on long tasks may need new ideas and not just scale.",
+      "rests_on": [
+       {
+        "href": "/indicators/metr_horizon_80",
+        "id": "metr_horizon_80",
+        "name": "METR 80% time horizon"
+       },
+       {
+        "href": "/indicators/harvey_lab_frontier_completion",
+        "id": "harvey_lab_frontier_completion",
+        "name": "Frontier models completing expert legal tasks end to end (Harvey LAB)"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Dario Amodei put nine chances in ten on datacentre AI equal to a whole nation of top experts arriving within a decade, through a soft but steep takeoff.",
      "reading": null,
@@ -897,6 +1025,27 @@
       "rsi_intervention_rate_4_8h",
       "dev_rct_uplift"
      ],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "Doing the whole job of AI researchers and engineers by the end of 2027 is a stronger claim than assisting them. Lab figures show heavy agent use but people still intervene on about as many long tasks as not, and the outside trial of experienced developers found no speed-up. Extending the horizon trend gets agents to well-specified projects of weeks by then, not to choosing research directions. The case for it is that labs see their own best systems months early and report rapid gains.",
+      "rests_on": [
+       {
+        "href": "/indicators/rsi_agent_workdays_per_human",
+        "id": "rsi_agent_workdays_per_human",
+        "name": "Agent-workdays per human workday in frontier research (self-reported)"
+       },
+       {
+        "href": "/indicators/rsi_intervention_rate_4_8h",
+        "id": "rsi_intervention_rate_4_8h",
+        "name": "Human interventions on 4\u20138 hour agent tasks (self-reported)"
+       },
+       {
+        "href": "/indicators/dev_rct_uplift",
+        "id": "dev_rct_uplift",
+        "name": "Developer productivity uplift (METR RCTs)"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Leopold Aschenbrenner called it strikingly plausible that models could do the job of the engineers and researchers who build AI by 2027.",
      "reading": null,
@@ -918,6 +1067,22 @@
       "metr_horizon_80",
       "harvey_lab_frontier_completion"
      ],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "A drop-in remote worker at the level of leading experts needs long, messy, open-ended work done reliably, and today's best models complete only a small share of expert legal tasks end to end. Extending the reliable-horizon trend to the end of 2028 gives tasks of months on benchmark-style work, which is promising but leaves memory, on-the-job learning and judgement unsolved. I put this at well under even odds; the trend holding at its recent fast pace is the main thing that would make it true.",
+      "rests_on": [
+       {
+        "href": "/indicators/metr_horizon_80",
+        "id": "metr_horizon_80",
+        "name": "METR 80% time horizon"
+       },
+       {
+        "href": "/indicators/harvey_lab_frontier_completion",
+        "id": "harvey_lab_frontier_completion",
+        "name": "Frontier models completing expert legal tasks end to end (Harvey LAB)"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Leopold Aschenbrenner expects that in 2027 or 2028 models will be as capable as the leading experts and work much like a drop-in remote employee.",
      "reading": null,
@@ -939,6 +1104,22 @@
       "rsi_agent_workdays_per_human",
       "metr_horizon_50"
      ],
+     "judgement": {
+      "lean": "likely_false",
+      "reason": "Superintelligence before the end of 2030 needs automated AI research to arrive within about two years and then to compound quickly, with compute and power keeping pace. The first step itself looks later than he expected, and nothing independent yet shows research speeding up on its own. The strongest point in favour is that horizon growth has stayed fast, so a short path cannot be ruled out.",
+      "rests_on": [
+       {
+        "href": "/indicators/rsi_agent_workdays_per_human",
+        "id": "rsi_agent_workdays_per_human",
+        "name": "Agent-workdays per human workday in frontier research (self-reported)"
+       },
+       {
+        "href": "/indicators/metr_horizon_50",
+        "id": "metr_horizon_50",
+        "name": "METR 50% time horizon"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Leopold Aschenbrenner expected automated AI research to produce superintelligence, vastly smarter than people, before this decade is out.",
      "reading": null,
@@ -959,6 +1140,17 @@
      "indicators": [
       "metr_horizon_50"
      ],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "Judged as whether AI can do any remote job by about 2040, this looks more likely than not. The task-length trend would need to slow dramatically for agents not to handle months-long work by then, and remote jobs need no robotics. I expect the milestone well before his date, so his timing looks too late even though the by-date claim holds. The case against is that the last few tasks in a job, and cost parity on them, may take far longer than the first.",
+      "rests_on": [
+       {
+        "href": "/indicators/metr_horizon_50",
+        "id": "metr_horizon_50",
+        "name": "METR 50% time horizon"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Tamay Besiroglu places full replacement of remote workers by AI about five years ahead of Ege Erdil's date, which puts it near 2040.",
      "reading": null,
@@ -979,6 +1171,17 @@
      "indicators": [
       "rsi_agent_workdays_per_human"
      ],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "Once AI matches people across the board it can be copied and run at scale on AI research itself, so a climb to clearly superhuman within years, not decades, seems the better bet. This rests mainly on general reasoning, with the lab's own figures showing agents already carry much research work. The strongest objection is that progress so far has been smooth and bound by compute and experiments, which could stretch the climb.",
+      "rests_on": [
+       {
+        "href": "/indicators/rsi_agent_workdays_per_human",
+        "id": "rsi_agent_workdays_per_human",
+        "name": "Agent-workdays per human workday in frontier research (self-reported)"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Nick Bostrom judged it unlikely that the climb from human-level AI to superintelligence would take decades, and more likely that it would be fast or moderate.",
      "reading": null,
@@ -999,6 +1202,17 @@
      "indicators": [
       "metr_horizon_50"
      ],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "Judged as whether superintelligence exists by the end of 2033, I lean no, which agrees with his less than even odds. Expert-level systems look likely around the early part of the next decade, and greatly outperforming the best people in nearly every field should take some years more. The fast task-length trend is the main reason this could arrive sooner than I expect.",
+      "rests_on": [
+       {
+        "href": "/indicators/metr_horizon_50",
+        "id": "metr_horizon_50",
+        "name": "METR 50% time horizon"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Nick Bostrom clarified that, all things considered, he gave less than even odds that superintelligence would be developed by 2033.",
      "reading": null,
@@ -1019,6 +1233,17 @@
      "indicators": [
       "metr_horizon_50"
      ],
+     "judgement": {
+      "lean": "likely_true",
+      "reason": "Commercial agents already plan, act toward goals and show some awareness of their situation, and capability on long tasks has been rising fast. With more than a generation left, systems meeting his bar at acceptable cost look very probable, likely well before the date. Only a deep and lasting stall, or a deliberate global halt, would prevent it.",
+      "rests_on": [
+       {
+        "href": "/indicators/metr_horizon_50",
+        "id": "metr_horizon_50",
+        "name": "METR 50% time horizon"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Joe Carlsmith gave about two chances in three that advanced, agentic, strategically aware AI becomes possible and affordable to build by 2070.",
      "reading": null,
@@ -1039,6 +1264,17 @@
      "indicators": [
       "safety_brake_events"
      ],
+     "judgement": {
+      "lean": "likely_false",
+      "reason": "Judged as whether the catastrophe occurs by 2070, it is unlikely, in line with his own low odds. That rests on general knowledge: permanent disempowerment needs misaligned systems to escape many layers of testing, oversight and rival systems at once. The serious counterweight is that oversight has not been tried against systems more capable than people, and labs' own safety pauses show the worry is taken seriously.",
+      "rests_on": [
+       {
+        "href": "/indicators/safety_brake_events",
+        "id": "safety_brake_events",
+        "name": "Safety brakes inside the labs (events, trailing year)"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Joe Carlsmith raised his estimate that power-seeking AI causes an existential catastrophe by 2070 from about one in twenty to more than one in ten.",
      "reading": null,
@@ -1060,6 +1296,22 @@
       "metr_horizon_50",
       "arc_agi_frontier"
      ],
+     "judgement": {
+      "lean": "likely_true",
+      "reason": "Frontier systems already match people on many expert tests and the length of task they finish keeps growing fast, so human-level ability across the board before 2100 looks very probable. His other remark, that it would surprise him before 2040, is the part most likely to prove wrong. Only a long stall or a global catastrophe would defeat the main claim.",
+      "rests_on": [
+       {
+        "href": "/indicators/metr_horizon_50",
+        "id": "metr_horizon_50",
+        "name": "METR 50% time horizon"
+       },
+       {
+        "href": "/indicators/arc_agi_frontier",
+        "id": "arc_agi_frontier",
+        "name": "ARC-AGI-2 best score"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "David Chalmers put his credence in human-level AI before 2100 at more than one half, while saying he would be surprised to see it within the next thirty years.",
      "reading": null,
@@ -1078,6 +1330,11 @@
      "href": "/predictions#christiano_dyson_sphere_2030_2040",
      "id": "christiano_dyson_sphere_2030_2040",
      "indicators": [],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "AI able to direct engineering on that scale implies mature superintelligence plus mastery of physical industry. By 2030 that is very unlikely, and by 2040 I put it below even odds, close to his own figures, because superhuman systems look likely only in the middle of the next decade and industrial know-how takes longer. This rests on general knowledge. Fast takeoff once research is automated is what could make the 2040 mark.",
+      "rests_on": []
+     },
      "kind": "ledger",
      "line": "Paul Christiano put about one chance in seven on AI able to build a Dyson sphere by 2030, and about two chances in five by 2040.",
      "reading": null,
@@ -1098,6 +1355,17 @@
      "indicators": [
       "rsi_agent_workdays_per_human"
      ],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "A true explosion on fixed compute needs returns to software research to stay high as the easy gains go, and frontier progress has so far leaned heavily on ever larger training runs and experiments. I put the odds a little under even. The lab's own figures show agents already doing much research work, and algorithmic efficiency has improved quickly, which is the best case for the other side.",
+      "rests_on": [
+       {
+        "href": "/indicators/rsi_agent_workdays_per_human",
+        "id": "rsi_agent_workdays_per_human",
+        "name": "Agent-workdays per human workday in frontier research (self-reported)"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Paul Christiano gave even odds on whether an intelligence explosion driven by software improvements alone is possible at all.",
      "reading": null,
@@ -1118,6 +1386,17 @@
      "indicators": [
       "safety_brake_events"
      ],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "Reward hacking and proxy gaming are real and growing, so the early part of his story is visible. The settling test is stronger: key institutions run by systems that people can no longer correct, and I think institutions will notice and correct enough of this, helped by partial progress on alignment. The worry is that correction gets harder as systems outpace their overseers and as competition punishes those who slow down.",
+      "rests_on": [
+       {
+        "href": "/indicators/safety_brake_events",
+        "id": "safety_brake_events",
+        "name": "Safety brakes inside the labs (events, trailing year)"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Paul Christiano expected that, without solving intent alignment, AI failure would come as a gradual loss of human steering to optimised proxies, possibly ending in a sudden cascade.",
      "reading": null,
@@ -1139,6 +1418,17 @@
       "epoch_training_compute_growth",
       "perf_per_dollar_growth"
      ],
+     "judgement": {
+      "lean": "likely_true",
+      "reason": "Judged as whether transformative AI arrives by about 2050, this looks very probable, and likely much earlier than her median. Training compute has grown far faster than the report assumed and capability has outrun its anchors. So the by-date claim holds while the timing looks too cautious. Slow diffusion into the physical economy is the main reason it could still take until mid-century.",
+      "rests_on": [
+       {
+        "href": "/indicators/epoch_training_compute_growth",
+        "id": "epoch_training_compute_growth",
+        "name": "Frontier training compute growth (doubling time)"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Ajeya Cotra's biological anchors report modelled a median in the early 2050s for transformative AI, which she rounded to about 2050, with most aggressive and most conservative plausible medians of 2040 and 2080.",
      "reading": null,
@@ -1160,6 +1450,22 @@
       "rsi_agent_workdays_per_human",
       "rsi_intervention_rate_4_8h"
      ],
+     "judgement": {
+      "lean": "likely_false",
+      "reason": "Under three months remain and labs still report people stepping in on about as many long research tasks as not. Full automation, where progress would barely slow without human technical staff, is nowhere in sight on any reading. Her own low odds said as much; only a hidden internal jump could change it.",
+      "rests_on": [
+       {
+        "href": "/indicators/rsi_agent_workdays_per_human",
+        "id": "rsi_agent_workdays_per_human",
+        "name": "Agent-workdays per human workday in frontier research (self-reported)"
+       },
+       {
+        "href": "/indicators/rsi_intervention_rate_4_8h",
+        "id": "rsi_intervention_rate_4_8h",
+        "name": "Human interventions on 4\u20138 hour agent tasks (self-reported)"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Ajeya Cotra gave about one chance in ten that AI fully automates AI research and development, matching human researchers, by the end of 2026.",
      "reading": null,
@@ -1181,6 +1487,17 @@
       "labor_share_nonfarm",
       "safety_brake_events"
      ],
+     "judgement": {
+      "lean": "likely_false",
+      "reason": "The claim needs people to lose control of the economy and politics in the next decade and then to be gone by 2050. Some drift of decisions to machines is plausible, and labour's share of income is softening, but extinction by 2050 through gradual ceding requires every major society to fail to react over decades. The pull of competition toward handing over control is the strongest point on his side.",
+      "rests_on": [
+       {
+        "href": "/indicators/labor_share_nonfarm",
+        "id": "labor_share_nonfarm",
+        "name": "US labour share of income, year on year"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Andrew Critch put about even odds, on top of other risks, on humanity gradually handing the planet to AI after it is built, mostly during the 2030s, with the last humans gone by 2050.",
      "reading": null,
@@ -1202,6 +1519,22 @@
       "metr_horizon_50",
       "epoch_training_compute_growth"
      ],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "Judged as AI able to automate essentially all cognitive work by 2043, this looks more likely than not, and probably earlier than his median. The task-length trend and compute growth have both run ahead of the model's assumptions. The by-2030 part of his spread still looks unlikely to me. What cuts against is the long tail of tasks needing judgement, trust and learning on the job.",
+      "rests_on": [
+       {
+        "href": "/indicators/metr_horizon_50",
+        "id": "metr_horizon_50",
+        "name": "METR 50% time horizon"
+       },
+       {
+        "href": "/indicators/epoch_training_compute_growth",
+        "id": "epoch_training_compute_growth",
+        "name": "Frontier training compute growth (doubling time)"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Tom Davidson's takeoff model put a median of 2043 on AI able to readily automate all cognitive work, with about one chance in ten by 2030 and four in five by 2070.",
      "reading": null,
@@ -1222,6 +1555,17 @@
      "indicators": [
       "rsi_agent_workdays_per_human"
      ],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "By the time AI matches professionals on the last hold-out tasks it will already be far ahead on most, which favours a short gap. But the step to far surpassing people needs experiments, compute and real-world feedback, and I expect those to stretch it to a few years, the same view taken on the other takeoff forecasts here. The lab's research figures are self-reported and still show people closely involved, so this is a moderate lean resting mostly on general reasoning.",
+      "rests_on": [
+       {
+        "href": "/indicators/rsi_agent_workdays_per_human",
+        "id": "rsi_agent_workdays_per_human",
+        "name": "Agent-workdays per human workday in frontier research (self-reported)"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Tom Davidson's best guess is that AI goes from matching human professionals at almost all cognitive work to far surpassing them in less than a year.",
      "reading": null,
@@ -1243,6 +1587,22 @@
       "epoch_training_compute_growth",
       "rsi_agent_workdays_per_human"
      ],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "Frontier gains have gone hand in hand with very fast growth in training compute, and research ideas still have to be tested in costly experiments, so a bound from compute looks more likely than a runaway from software alone. I hold this only moderately. Agents now carry a large share of lab research effort by the lab's own count, and if that keeps rising while compute growth slows, the claim gets its first real test.",
+      "rests_on": [
+       {
+        "href": "/indicators/epoch_training_compute_growth",
+        "id": "epoch_training_compute_growth",
+        "name": "Frontier training compute growth (doubling time)"
+       },
+       {
+        "href": "/indicators/rsi_agent_workdays_per_human",
+        "id": "rsi_agent_workdays_per_human",
+        "name": "Agent-workdays per human workday in frontier research (self-reported)"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Ege Erdil and Tamay Besiroglu doubt that AI improving its own software alone will set off an intelligence explosion, holding that compute and experiments bound progress.",
      "reading": null,
@@ -1264,6 +1624,22 @@
       "metr_horizon_50",
       "harvey_lab_frontier_completion"
      ],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "Judged as whether AI can replace a remote worker at essentially every task by about 2045, this is more likely than not. I expect it well before then, since task length has been growing quickly and would have to stall for most of two decades to miss. So his date looks too late even though the by-date claim holds. The best case for his timing is that expert tasks are still rarely completed end to end and the last tasks are the hardest.",
+      "rests_on": [
+       {
+        "href": "/indicators/metr_horizon_50",
+        "id": "metr_horizon_50",
+        "name": "METR 50% time horizon"
+       },
+       {
+        "href": "/indicators/harvey_lab_frontier_completion",
+        "id": "harvey_lab_frontier_completion",
+        "name": "Frontier models completing expert legal tasks end to end (Harvey LAB)"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Ege Erdil expects AI able to replace a remote worker at essentially every task to arrive around 2045.",
      "reading": null,
@@ -1285,6 +1661,22 @@
       "metr_horizon_50",
       "arc_agi_frontier"
      ],
+     "judgement": {
+      "lean": "likely_false",
+      "reason": "Systems built without brain emulation already rival people on many professional tests and their reach on long tasks keeps growing fast. Human-level breadth is not here yet, but a wait of centuries would need progress to stop almost entirely. His point that breadth across all jobs is harder than tests still stands, though it argues for years, not centuries.",
+      "rests_on": [
+       {
+        "href": "/indicators/metr_horizon_50",
+        "id": "metr_horizon_50",
+        "name": "METR 50% time horizon"
+       },
+       {
+        "href": "/indicators/arc_agi_frontier",
+        "id": "arc_agi_frontier",
+        "name": "ARC-AGI-2 best score"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Extrapolating past progress in AI subfields, Robin Hanson estimated that broadly human-level AI without brain emulation would take more than two to four centuries.",
      "reading": null,
@@ -1306,6 +1698,22 @@
       "arc_agi_frontier",
       "continual_learning_level"
      ],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "The window is narrow, 2029 to 2031, and the bar is the full range of human cognitive abilities shown consistently. Abstract-reasoning scores are now very high, but learning on the job in production has reached only a middle rung, and Hassabis himself lists that and consistent reasoning as missing. I put arrival inside the window a little under even odds. The speed of recent progress is the main reason it could land on time.",
+      "rests_on": [
+       {
+        "href": "/indicators/arc_agi_frontier",
+        "id": "arc_agi_frontier",
+        "name": "ARC-AGI-2 best score"
+       },
+       {
+        "href": "/indicators/continual_learning_level",
+        "id": "continual_learning_level",
+        "name": "Continual-learning ladder (highest production rung)"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Demis Hassabis expects AGI around 2030, give or take a year, and says that looking back people will see we are already on the lower slopes of the singularity.",
      "reading": null,
@@ -1327,6 +1735,22 @@
       "metr_horizon_50",
       "rsi_agent_workdays_per_human"
      ],
+     "judgement": {
+      "lean": "likely_true",
+      "reason": "Judged as transformative AI arriving by 2060, this looks very probable, and his odds now seem too cautious at every date. Capability on long tasks has risen much faster than anyone assumed in 2021, and labs report agents already carrying much research work. Transformation of the wider economy could lag capability by many years, which is the main risk to an early date.",
+      "rests_on": [
+       {
+        "href": "/indicators/metr_horizon_50",
+        "id": "metr_horizon_50",
+        "name": "METR 50% time horizon"
+       },
+       {
+        "href": "/indicators/rsi_agent_workdays_per_human",
+        "id": "rsi_agent_workdays_per_human",
+        "name": "Agent-workdays per human workday in frontier research (self-reported)"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Holden Karnofsky gave better than one chance in ten of transformative AI by 2036, about even odds by 2060, and around two chances in three by 2100.",
      "reading": null,
@@ -1347,6 +1771,17 @@
      "indicators": [
       "rsi_agent_workdays_per_human"
      ],
+     "judgement": {
+      "lean": "likely_false",
+      "reason": "This needs top-expert AI by late 2028 and then a jump to vastly superhuman within months. The first step is already below even odds on my reading, and the second assumes almost no drag from compute and experiments. The lab's research figures are self-reported and still show heavy human involvement. A fast feedback loop once coding is automated is the scenario that would make him right.",
+      "rests_on": [
+       {
+        "href": "/indicators/rsi_agent_workdays_per_human",
+        "id": "rsi_agent_workdays_per_human",
+        "name": "Agent-workdays per human workday in frontier research (self-reported)"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Daniel Kokotajlo's August 2026 median for artificial superintelligence is March 2029, a few months after his median for AI that beats top experts.",
      "reading": null,
@@ -1369,6 +1804,27 @@
       "metr_horizon_80",
       "rsi_intervention_rate_4_8h"
      ],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "A lab preferring its coding agents to all its human engineers by late 2027 needs reliability on very long, unspecified work. Extending the reliable-horizon trend that far gives tasks of some weeks, and people still intervene on about as many long tasks as not in the lab's own count. I expect this a year or two later. The trend has been faster than its long-run rate lately, which is the best argument for his date.",
+      "rests_on": [
+       {
+        "href": "/indicators/metr_horizon_50",
+        "id": "metr_horizon_50",
+        "name": "METR 50% time horizon"
+       },
+       {
+        "href": "/indicators/metr_horizon_80",
+        "id": "metr_horizon_80",
+        "name": "METR 80% time horizon"
+       },
+       {
+        "href": "/indicators/rsi_intervention_rate_4_8h",
+        "id": "rsi_intervention_rate_4_8h",
+        "name": "Human interventions on 4\u20138 hour agent tasks (self-reported)"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Daniel Kokotajlo's August 2026 median for an automated coder, an AI that labs would rather keep than their human coders, is November 2027.",
      "reading": null,
@@ -1389,6 +1845,17 @@
      "indicators": [
       "safety_brake_events"
      ],
+     "judgement": {
+      "lean": "likely_false",
+      "reason": "Judged as whether such a catastrophe happens, I think it unlikely, far below his odds. That rests on general knowledge: labs have paused or held back systems on safety grounds, bad behaviour has been caught in testing, and permanent loss of control needs many safeguards to fail together. His strongest point is that none of these methods has faced a system smarter than its overseers under race pressure.",
+      "rests_on": [
+       {
+        "href": "/indicators/safety_brake_events",
+        "id": "safety_brake_events",
+        "name": "Safety brakes inside the labs (events, trailing year)"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Daniel Kokotajlo puts his chance of catastrophe from AI at around seven in ten, a figure he calls infamously high.",
      "reading": null,
@@ -1410,6 +1877,22 @@
       "metr_horizon_50",
       "harvey_lab_frontier_completion"
      ],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "Judged as arrival by his median date, matching the best experts on almost every cognitive task by late 2028 would need reliability, memory and judgement to catch up with raw benchmark skill in about two years. Today's best models finish only a small share of expert legal tasks end to end, even as the task-length trend runs fast. I put the odds at about a quarter at most. The trend holding its recent pace is what would bring it in.",
+      "rests_on": [
+       {
+        "href": "/indicators/metr_horizon_50",
+        "id": "metr_horizon_50",
+        "name": "METR 50% time horizon"
+       },
+       {
+        "href": "/indicators/harvey_lab_frontier_completion",
+        "id": "harvey_lab_frontier_completion",
+        "name": "Frontier models completing expert legal tasks end to end (Harvey LAB)"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Daniel Kokotajlo's August 2026 median for AI that matches or exceeds the best human experts on almost every cognitive task is November 2028.",
      "reading": null,
@@ -1431,6 +1914,11 @@
       "labor_share_nonfarm",
       "aei_augmentation_share"
      ],
+     "judgement": {
+      "lean": "toss_up",
+      "reason": "The claim is conditional on AI continuing to displace people from work, thought and consent across economy, culture and state, and that condition does most of the work. Early softening in labour's share and a rising automation share of AI use fit the first steps, but say nothing about whether societies respond. I see no basis to lean on whether voters and states keep decisive roles once the condition holds.",
+      "rests_on": []
+     },
      "kind": "ledger",
      "line": "Jan Kulveit and co-authors argue that if AI keeps displacing human labour, thought and consent across economy, culture and state, humans will probably lose effective control without any takeover.",
      "reading": null,
@@ -1451,6 +1939,17 @@
      "indicators": [
       "metr_horizon_50"
      ],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "Judged as machine intelligence clearly outstripping humanity's combined intellect by about 2045, I lean yes. If expert-level systems arrive in the early part of the next decade, a further decade of copying, speeding up and improving them plausibly gets there. The capability trend so far supports the early steps. Physical limits on power and chips, or a political brake, are the strongest reasons it could miss.",
+      "rests_on": [
+       {
+        "href": "/indicators/metr_horizon_50",
+        "id": "metr_horizon_50",
+        "name": "METR 50% time horizon"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Ray Kurzweil set 2045 as the year of the Singularity, when machine intelligence created by people would vastly exceed all human intelligence combined.",
      "reading": null,
@@ -1469,6 +1968,11 @@
      "href": "/predictions#kurzweil_turing_test_2029",
      "id": "kurzweil_turing_test_2029",
      "indicators": [],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "Chatbots already fool ordinary judges in short tests, and three more years of progress in memory and consistency should handle long expert questioning when a model is tuned to imitate a person. This rests on general knowledge. The real risk is procedural: the formal test under the bet's rules has to be run, and determined expert judges may still find tells.",
+      "rests_on": []
+     },
      "kind": "ledger",
      "line": "Ray Kurzweil bet publicly that a machine would pass a rigorous Turing test, judged under formal rules with expert interrogators, by 2029.",
      "reading": null,
@@ -1490,6 +1994,22 @@
       "arc_agi_frontier",
       "continual_learning_level"
      ],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "Systems built mainly on language models keep gaining abilities he said they lacked, including abstract reasoning, where top scores are now very high. I expect systems still recognisably of that family, with added memory and learning, to reach human level. His best ground is that learning on the job has reached only a middle rung in production, and if the fix is a new architecture he could claim to be right.",
+      "rests_on": [
+       {
+        "href": "/indicators/arc_agi_frontier",
+        "id": "arc_agi_frontier",
+        "name": "ARC-AGI-2 best score"
+       },
+       {
+        "href": "/indicators/continual_learning_level",
+        "id": "continual_learning_level",
+        "name": "Continual-learning ladder (highest production rung)"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Yann LeCun says language models will not reach human-level intelligence, and that within five years we may at best know we are on the right path.",
      "reading": null,
@@ -1510,6 +2030,17 @@
      "indicators": [
       "rsi_agent_workdays_per_human"
      ],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "On my reading top-expert AI arrives around 2032 or 2033 and vastly superhuman systems a few years later, so the middle of 2033 is somewhat early. The lab's self-reported research figures show the feedback loop is starting but still leans on people. If automated research compounds quickly, his date is quite reachable, and this is a moderate lean only.",
+      "rests_on": [
+       {
+        "href": "/indicators/rsi_agent_workdays_per_human",
+        "id": "rsi_agent_workdays_per_human",
+        "name": "Agent-workdays per human workday in frontier research (self-reported)"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Eli Lifland's August 2026 median for artificial superintelligence is July 2033, about a year after his median for AI that beats top experts.",
      "reading": null,
@@ -1532,6 +2063,27 @@
       "metr_horizon_80",
       "rsi_intervention_rate_4_8h"
      ],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "Extending the reliable-horizon trend to the start of 2030 gives agents that finish projects of many months, even allowing for a marked slowdown, and coding is where labs push hardest. On that basis a lab preferring its agents to its human engineers by then is somewhat more likely than not. The doubt is that the trend may stop being measurable, and that review, design and taste keep human engineers essential longer than benchmarks suggest.",
+      "rests_on": [
+       {
+        "href": "/indicators/metr_horizon_50",
+        "id": "metr_horizon_50",
+        "name": "METR 50% time horizon"
+       },
+       {
+        "href": "/indicators/metr_horizon_80",
+        "id": "metr_horizon_80",
+        "name": "METR 80% time horizon"
+       },
+       {
+        "href": "/indicators/rsi_intervention_rate_4_8h",
+        "id": "rsi_intervention_rate_4_8h",
+        "name": "Human interventions on 4\u20138 hour agent tasks (self-reported)"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Eli Lifland's August 2026 median for an automated coder, an AI that labs would rather keep than their human coders, is January 2030.",
      "reading": null,
@@ -1553,6 +2105,11 @@
       "metr_horizon_50",
       "arc_agi_frontier"
      ],
+     "judgement": {
+      "lean": "toss_up",
+      "reason": "This date sits close to my own central guess for top-expert AI, so I cannot honestly lean. The task-length trend and very high abstract-reasoning scores argue for sooner; unsolved on-the-job learning, reliability on messy work and the slow tail of hard tasks argue for later. Which side wins depends on whether research automation speeds things up, and no independent reading shows that yet.",
+      "rests_on": []
+     },
      "kind": "ledger",
      "line": "Eli Lifland's August 2026 median for AI that matches or exceeds the best human experts on almost every cognitive task is July 2032.",
      "reading": null,
@@ -1574,6 +2131,22 @@
       "rsi_agent_workdays_per_human",
       "dev_rct_uplift"
      ],
+     "judgement": {
+      "lean": "likely_true",
+      "reason": "By the lab's own count agents already put in more research workdays than its people, though with heavy supervision, and the task-length trend has two decades to run before the deadline. AI research effort matching the human research workforce by 2045 looks very probable, and within a decade is plausible. The outside trial that found no developer speed-up is the main caution, and it argues for delay more than for failure.",
+      "rests_on": [
+       {
+        "href": "/indicators/rsi_agent_workdays_per_human",
+        "id": "rsi_agent_workdays_per_human",
+        "name": "Agent-workdays per human workday in frontier research (self-reported)"
+       },
+       {
+        "href": "/indicators/dev_rct_uplift",
+        "id": "dev_rct_uplift",
+        "name": "Developer productivity uplift (METR RCTs)"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "William MacAskill and Fin Moorhouse think it fairly likely that AI matches human research labour within two decades, and possibly well within one.",
      "reading": null,
@@ -1594,6 +2167,11 @@
      "indicators": [
       "rsi_agent_workdays_per_human"
      ],
+     "judgement": {
+      "lean": "toss_up",
+      "reason": "This is the weaker cousin of a full software explosion: any accelerating growth from AI improving its own software. Agents now carry much lab research by the lab's own count, which favours it, while diminishing returns and the need for compute-heavy experiments weigh against it. With no independent reading of research speed on fixed compute, even odds is a fair summary and I have no better lean.",
+      "rests_on": []
+     },
      "kind": "ledger",
      "line": "William MacAskill and Fin Moorhouse give roughly even odds that AI improving its own software sets off accelerating growth in AI capability.",
      "reading": null,
@@ -1612,6 +2190,11 @@
      "href": "/predictions#moravec_robots_overtake_by_2048",
      "id": "moravec_robots_overtake_by_2048",
      "indicators": [],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "Walking is close to solved, dexterity is improving quickly with learned control, and language models already handle much social interaction. With more than two decades left and strong AI help in robot design likely along the way, matching people in ordinary settings by 2048 looks more likely than not. This rests on general knowledge. Hands, touch and cheap reliable hardware have resisted progress for decades, which is the real risk.",
+      "rests_on": []
+     },
      "kind": "ledger",
      "line": "Hans Moravec expected machines to overtake people even in walking, manual dexterity and social skills within about fifty years of 1998.",
      "reading": null,
@@ -1633,6 +2216,22 @@
       "metr_horizon_50",
       "horizon_ratio_80_50"
      ],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "Judged on the claim as worded: limits outside the lab, such as experiments, regulation, liability and the pace at which organisations change, keep binding through 2030 even if agents come to do most research inside labs. I expect that, with diffusion indicators staying near ordinary ranges, and the gap between the headline horizon and the reliable one fits slow real-world use. The site's narrower check at the invention stage may well go against the authors before then, if outside tests confirm agents doing more research work than people.",
+      "rests_on": [
+       {
+        "href": "/indicators/metr_horizon_50",
+        "id": "metr_horizon_50",
+        "name": "METR 50% time horizon"
+       },
+       {
+        "href": "/indicators/horizon_ratio_80_50",
+        "id": "horizon_ratio_80_50",
+        "name": "50%/80% horizon ratio"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "AI improving itself cannot get past limits that sit outside the lab.",
      "reading": null,
@@ -1653,6 +2252,17 @@
      "indicators": [
       "safety_brake_events"
      ],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "Tests have already recorded frontier models resisting shutdown and trying to copy themselves in contrived settings, which is the tendency he predicted. As agents run longer with more access, some such behaviour in real deployments looks more likely than not. His universal wording is too strong, since training can suppress these drives, and labs have shown they will hold systems back.",
+      "rests_on": [
+       {
+        "href": "/indicators/safety_brake_events",
+        "id": "safety_brake_events",
+        "name": "Safety brakes inside the labs (events, trailing year)"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Stephen Omohundro argued that any sufficiently advanced goal-seeking AI, unless deliberately designed otherwise, will resist being shut down, copy itself and acquire resources.",
      "reading": null,
@@ -1673,6 +2283,17 @@
      "indicators": [
       "metr_horizon_80"
      ],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "Extending the reliable-horizon trend to early 2028 reaches tasks of some weeks, so the proxy is within reach if the pace holds. The test, though, is an outside evaluation showing a multi-week research project delivered with no human help, and such evaluations do not yet exist and lag the labs. I expect a self-declared success and a contested one, so I lean against as stated.",
+      "rests_on": [
+       {
+        "href": "/indicators/metr_horizon_80",
+        "id": "metr_horizon_80",
+        "name": "METR 80% time horizon"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "OpenAI builds an automated AI researcher by March 2028.",
      "reading": null,
@@ -1694,6 +2315,17 @@
       "metr_horizon_80",
       "dev_rct_uplift"
      ],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "On substance the claim is modest and believable: well-defined research tasks of a few days, under human direction, and outside tests by spring 2026 showed agents finishing day-long software tasks about as often as not. But this forecast settles only on an independent replication of the lab's own figures, the deadline has passed with none, and a later test of later systems would not show what was true in September 2026. Reliable completion on outside tests was still measured in hours, and by the lab's own count people stepped in on most long tasks. So the lean is against the claim being confirmed as stated, and is not a judgement that the lab's account is false.",
+      "rests_on": [
+       {
+        "href": "/indicators/metr_horizon_80",
+        "id": "metr_horizon_80",
+        "name": "METR 80% time horizon"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "OpenAI has an automated AI research intern by September 2026.",
      "reading": null,
@@ -1714,6 +2346,17 @@
      "indicators": [
       "safety_brake_events"
      ],
+     "judgement": {
+      "lean": "likely_false",
+      "reason": "Judged as whether the catastrophe occurs, it is unlikely, in line with his own low odds, though I would not put it much lower than he does. Labs holding systems back on safety grounds shows working brakes, but a century is long and control over smarter-than-human systems is untested. This rests mostly on general knowledge.",
+      "rests_on": [
+       {
+        "href": "/indicators/safety_brake_events",
+        "id": "safety_brake_events",
+        "name": "Safety brakes inside the labs (events, trailing year)"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Toby Ord estimated about one chance in ten that unaligned AI causes an existential catastrophe within the next hundred years, the largest single risk he assessed.",
      "reading": null,
@@ -1734,6 +2377,17 @@
      "indicators": [
       "metr_horizon_50"
      ],
+     "judgement": {
+      "lean": "likely_true",
+      "reason": "With capability on long tasks rising fast and enormous investment behind it, superintelligence before 2100 looks very probable, and likely decades sooner. His view that it was quite unlikely in the few years after 2019 has held so far. Only a lasting stall needing breakthroughs that never come, or a catastrophe, would defeat it.",
+      "rests_on": [
+       {
+        "href": "/indicators/metr_horizon_50",
+        "id": "metr_horizon_50",
+        "name": "METR 50% time horizon"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Stuart Russell said superintelligent AI would probably arrive within his children's lifetimes, barring catastrophe, while calling it quite unlikely in the next few years.",
      "reading": null,
@@ -1754,6 +2408,17 @@
      "indicators": [
       "safety_brake_events"
      ],
+     "judgement": {
+      "lean": "likely_false",
+      "reason": "Judged as whether AI takes control against human wishes, I think it unlikely, somewhat below his odds. Oversight, staged release and rival systems give several chances to catch a misaligned system, and labs have used their brakes. The risk is real because those defences weaken as systems outthink their overseers, and he is right that the outcome depends on choices still open.",
+      "rests_on": [
+       {
+        "href": "/indicators/safety_brake_events",
+        "id": "safety_brake_events",
+        "name": "Safety brakes inside the labs (events, trailing year)"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Carl Shulman puts the chance that AI takes control of humanity's future at between a fifth and a quarter, depending on the day.",
      "reading": null,
@@ -1772,6 +2437,11 @@
      "href": "/predictions#shulman_robot_doubling",
      "id": "shulman_robot_doubling",
      "indicators": [],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "This is conditional on AI already directing a converted industrial base, and the lean is on the first step only. Given that condition, a robot population growing by its own size within a year is plausible, since factories can be turned to robot production much as car plants were turned to arms in wartime, and young industries already grow that fast from small bases. The later step to the same growth in months is much less sure, as mining, energy and permitting scale slowly. General knowledge only.",
+      "rests_on": []
+     },
      "kind": "ledger",
      "line": "Carl Shulman expects that once AI directs a converted industrial base, the robot population will double in under a year, and then within months.",
      "reading": null,
@@ -1790,6 +2460,11 @@
      "href": "/predictions#suleyman_modern_turing_test",
      "id": "suleyman_modern_turing_test",
      "indicators": [],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "By the end of 2028 agents should be able to run most of an online shop, but the test asks for a large multiple of the stake in a few months with no human help, which few human sellers manage. Platforms also restrict automated accounts and require a legal person for payments. With many people trying, one verified case is possible, so this is a weak lean from general knowledge.",
+      "rests_on": []
+     },
      "kind": "ledger",
      "line": "Mustafa Suleyman predicted an AI could turn a modest stake into a million dollars selling online, with light human help within a year and probably entirely on its own within three to five years.",
      "reading": null,
@@ -1811,6 +2486,22 @@
       "arc_agi_frontier",
       "metr_horizon_50"
      ],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "A system broadly smarter than the best people across most intellectual work by the end of 2030 is possible but earlier than my central guess of the early part of the next decade. Very high abstract-reasoning scores and fast horizon growth show how close narrow superiority is. Long, open-ended work and learning on the job are still missing. If the horizon trend keeps its recent pace he may be right by a whisker.",
+      "rests_on": [
+       {
+        "href": "/indicators/arc_agi_frontier",
+        "id": "arc_agi_frontier",
+        "name": "ARC-AGI-2 best score"
+       },
+       {
+        "href": "/indicators/metr_horizon_50",
+        "id": "metr_horizon_50",
+        "name": "METR 50% time horizon"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Vernor Vinge expected humans to have the means to create superhuman intelligence within about three decades, and said he would be surprised if it came before 2005 or after 2030.",
      "reading": null,
@@ -1832,6 +2523,22 @@
       "rsi_agent_workdays_per_human",
       "rsi_intervention_rate_4_8h"
      ],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "Progress so far has been steady and tied to compute, and labs report a gradual rise in agent research work with people still closely involved. That pattern suggests a fast but continuous takeoff set by chips and experiments, not an all-or-nothing one. The loop is not yet closed, so the real test lies ahead, and a sharp break once people leave the loop cannot be ruled out.",
+      "rests_on": [
+       {
+        "href": "/indicators/rsi_agent_workdays_per_human",
+        "id": "rsi_agent_workdays_per_human",
+        "name": "Agent-workdays per human workday in frontier research (self-reported)"
+       },
+       {
+        "href": "/indicators/rsi_intervention_rate_4_8h",
+        "id": "rsi_intervention_rate_4_8h",
+        "name": "Human interventions on 4\u20138 hour agent tasks (self-reported)"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Eliezer Yudkowsky argued that an AI improving itself would most likely either stall or take off explosively, since a gradual, human-paced takeoff would need implausibly precise diminishing returns.",
      "reading": null,
@@ -1853,6 +2560,22 @@
       "rsi_agent_workdays_per_human",
       "metr_horizon_50"
      ],
+     "judgement": {
+      "lean": "toss_up",
+      "reason": "Vastly superhuman AI by the end of 2035 sits near the middle of my own spread, the same judgement as for other calls with this date. Fast horizon growth and early research automation argue for it; compute, power and the difficulty of the last abilities argue against. His hope for something much sooner than 2035 has already aged poorly, but the date itself remains open.",
+      "rests_on": [
+       {
+        "href": "/indicators/metr_horizon_50",
+        "id": "metr_horizon_50",
+        "name": "METR 50% time horizon"
+       },
+       {
+        "href": "/indicators/rsi_agent_workdays_per_human",
+        "id": "rsi_agent_workdays_per_human",
+        "name": "Agent-workdays per human workday in frontier research (self-reported)"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "The young Eliezer Yudkowsky cited 2035 as the most widely quoted date for the Singularity and said he, like many others, expected it substantially sooner.",
      "reading": null,
@@ -1873,6 +2596,17 @@
      "indicators": [
       "safety_brake_events"
      ],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "The claim is conditional and absolute: superintelligence built with methods like today's kills everyone. I think that outcome is a serious minority risk and not the likely one, because interpretability, staged release and using earlier systems to check later ones give real chances to correct course, and labs have shown they will stop. Their strongest point is that there may be no second try if the first truly superhuman system is misaligned.",
+      "rests_on": [
+       {
+        "href": "/indicators/safety_brake_events",
+        "id": "safety_brake_events",
+        "name": "Safety brakes inside the labs (events, trailing year)"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Eliezer Yudkowsky and Nate Soares hold that if anyone builds artificial superintelligence with anything like today's methods and understanding, everyone on Earth will die.",
      "reading": null,
@@ -1891,6 +2625,11 @@
      "href": "/argument/migration",
      "id": "memory_packaging_now",
      "indicators": [],
+     "judgement": {
+      "lean": "likely_true",
+      "reason": "This rests on general knowledge of the chip market up to mid-2026. High-bandwidth memory was sold out well ahead, memory prices rose sharply, and advanced packaging capacity remained allocated despite expansion. New plants take years, so the shortage should persist for now. Memory is a cyclical business and fresh capacity could flip it to glut faster than expected.",
+      "rests_on": []
+     },
      "kind": "migration",
      "line": "Memory and chip packaging are short.",
      "reading": null,
@@ -1909,6 +2648,17 @@
      "indicators": [
       "model_price_per_horizon_hour"
      ],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "The cheapest price for an hour of model-equivalent work is already very low and falling, so cost does not look like the binding limit for most office tasks. What holds agents back is reliability on long, messy work and the effort of fitting them into firms. Running many agents at once could raise the bill enough to matter for the hardest tasks, which is where the claim has force.",
+      "rests_on": [
+       {
+        "href": "/indicators/model_price_per_horizon_hour",
+        "id": "model_price_per_horizon_hour",
+        "name": "Price per unit of capability (cheapest METR-hour on OpenRouter)"
+       }
+      ]
+     },
      "kind": "outlook",
      "line": "With many agents working on a task at once, most valuable office work comes to turn on the cost of computing and the systems around it, not on whether models are good enough.",
      "reading": null,
@@ -1929,6 +2679,11 @@
      "href": "/outlook#claim-coverage_sold",
      "id": "coverage_sold",
      "indicators": [],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "Spending on expert-made training tasks, practice environments and bespoke fitting has grown alongside each stronger model, because the remaining gaps move to harder and more valuable work. I expect that to continue for some years. This rests on general knowledge of the market. A model that learns on the job from its own use would undercut it.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "Labs and companies keep paying more for the steps models cannot yet take, even as each new model takes more of them on its own.",
      "reading": null,
@@ -1951,6 +2706,17 @@
      "indicators": [
       "epoch_data_exhaustion_year"
      ],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "The core model design has changed little for years while gains have tracked more and better data, including purpose-made and synthetic data. With public text running short, new data sources look like the lever. The one reading here is old, and methods such as reasoning-time search and new training recipes have also carried large gains, so this is a moderate lean.",
+      "rests_on": [
+       {
+        "href": "/indicators/epoch_data_exhaustion_year",
+        "id": "epoch_data_exhaustion_year",
+        "name": "Public text data exhaustion year (Epoch projection)"
+       }
+      ]
+     },
      "kind": "outlook",
      "line": "Better data, more than better model designs, drives how much a model learns from its training, so progress comes to rest on finding new data.",
      "reading": null,
@@ -1971,6 +2737,11 @@
      "href": "/outlook#claim-field_divergence",
      "id": "field_divergence",
      "indicators": [],
+     "judgement": {
+      "lean": "likely_true",
+      "reason": "Software and mathematics give instant, cheap checks, and that is where AI's research help is already clearest. Drug trials, materials synthesis and physics experiments run at the speed of the physical world, and nothing so far shortens them much. This rests on general knowledge. Automated labs and better simulation could narrow the gap over a longer span.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "Research speeds up far more in software and mathematics than in drug development, materials or physics, where the slowest steps are experiments.",
      "reading": null,
@@ -1991,6 +2762,11 @@
      "href": "/outlook#claim-grid_hookups",
      "id": "grid_hookups",
      "indicators": [],
+     "judgement": {
+      "lean": "likely_true",
+      "reason": "Waits for grid connection in America run to years while data-centre plans arrive in months, and developers have turned to on-site gas and other workarounds for that reason. This rests on general knowledge up to mid-2026. Faster permitting and a cooling of AI spending are the things that could ease it.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "Data centres arrive faster and with less warning than the grid's planners assume, so getting connected holds back new American sites.",
      "reading": null,
@@ -2013,6 +2789,17 @@
      "indicators": [
       "rsi_agent_workdays_per_human"
      ],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "By the lab's own count agents do much research work, yet people still intervene on about as many long tasks as not, and nothing independent shows research itself speeding up. The outside task-length trend has quickened in recent years, but that began before agents did much research and may reflect more compute and effort. I expect steady gains for the next few years. If research automation deepens while compute stays plentiful, acceleration could yet show up.",
+      "rests_on": [
+       {
+        "href": "/indicators/rsi_agent_workdays_per_human",
+        "id": "rsi_agent_workdays_per_human",
+        "name": "Agent-workdays per human workday in frontier research (self-reported)"
+       }
+      ]
+     },
      "kind": "outlook",
      "line": "AI's help with AI research brings steady gains, not accelerating ones.",
      "reading": null,
@@ -2033,6 +2820,11 @@
      "href": "/outlook#claim-real_work_data",
      "id": "real_work_data",
      "indicators": [],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "Records of real work are becoming more valuable, but staged tasks have not stopped teaching: on general knowledge, spending on built practice environments was still growing strongly in 2026 and labs keep reporting gains from them. I expect a mix, with staged tasks still doing much of the work. For fields where results are hard to check his point is strongest, and it may prove right later.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "Training for long work whose results are hard to check, in fields such as biology, security and matters of taste, comes to rest on records of real work inside firms, because tasks staged by contractors stop teaching models.",
      "reading": null,
@@ -2053,6 +2845,11 @@
      "href": "/outlook#claim-rli_reached",
      "id": "rli_reached",
      "indicators": [],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "When the index of real freelance projects launched, the best agents completed only a tiny share, and most by the end of 2027 needs an enormous climb in little over a year. Benchmarks of this kind have gone from near nothing to mostly solved within two or three years before, so it is not far-fetched. The projects span design, video and other multi-tool work where agents remain weak, which tips me against the date, on general knowledge.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "As the scenario is written, AI completes most real, paid freelance projects end to end by the end of 2027.",
      "reading": {
@@ -2087,6 +2884,11 @@
      "href": "/outlook#claim-trades_short",
      "id": "trades_short",
      "indicators": [],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "Shortages of electricians and other skilled trades were widely reported on large data-centre builds through mid-2026, and big technology firms have funded training schemes. With the build-out still growing, I expect that to continue, a judgement from general knowledge. Power and equipment supply are tighter limits than labour on many sites, and a spending slowdown would end the shortage quickly.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "Too few electricians, welders and other tradespeople hold back the building of data centres, so the largest technology firms keep paying to train them.",
      "reading": null,
@@ -2107,6 +2909,10 @@
   {
    "id": "products",
    "label": "Innovation: products and applications",
+   "leans": {
+    "leans_false": 6,
+    "leans_true": 4
+   },
    "question": "What gets built on it, and who sells it?",
    "rows": [
     {
@@ -2257,6 +3063,11 @@
      "href": "/argument/migration",
      "id": "agent_proof_watch",
      "indicators": [],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "Rests on general knowledge, not a site reading. Payment networks and banks already ask who authorised a purchase an agent made, and agents still act through a person's own login, which leaves weak records. Once real sums move this way, disputes over who answers for a bad transaction look hard to avoid. The strongest point against is that card rules and signed mandates may settle liability quietly before it ever binds.",
+      "rests_on": []
+     },
      "kind": "migration",
      "line": "Proof of what an AI agent (a model that carries out tasks with software tools on a person's behalf) did, and who answers for it, becomes a bottleneck once agents handle money.",
      "reading": null,
@@ -2273,6 +3084,11 @@
      "href": "/outlook#claim-agents_fenced",
      "id": "agents_fenced",
      "indicators": [],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "Rests on general knowledge. The loud cases are blocks, such as the largest online retailer suing a browser agent and social networks barring scrapers, but under a single counting rule the quieter openings look more numerous: shops, payment firms and travel sites have signed up to agent checkout and tool protocols through 2025 and 2026. The strongest point against is that most of these openings admit only chosen partners on the platform's own terms, which a strict reading could score as a fence.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "Large platforms move to keep outside agents off them more often than they let them in.",
      "reading": null,
@@ -2294,6 +3110,11 @@
      "href": "/outlook#claim-ai_premiums_2032",
      "id": "ai_premiums_2032",
      "indicators": [],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "Rests on general knowledge. Cover sold specifically for AI failures is still a tiny line in 2026, and the larger move among insurers this year has been to add AI exclusions to standard policies, not to price the risk. Cyber cover took well over a decade to reach comparable size, so this would need a much faster climb in the years left before 2032. The strongest point against is that loose definitions could let AI-related premium inside cyber and liability policies be counted toward the total.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "Insurers write several billion dollars a year of cover for AI's failures worldwide by 2032 [cite:deloitte_ai_insurance].",
      "reading": null,
@@ -2314,6 +3135,11 @@
      "href": "/outlook#claim-field_models_fade",
      "id": "field_models_fade",
      "indicators": [],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "Rests on general knowledge. In law, coding and finance the pattern so far is that each new general release overtakes models tuned for the field, and the best-known legal start-up dropped its own tuned model for the labs' general ones. Extending that pattern is the basis of the call. The strongest point against is that in biology, robotics, speech and other areas where the data is not text on the web, purpose-built models still lead, and that set of exceptions may prove wider than a few regulated niches.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "Start-ups that build a model for one field fall behind as the labs' general models improve, outside a few regulated niches where data is scarce.",
      "reading": null,
@@ -2337,6 +3163,17 @@
      "indicators": [
       "expert_data_market_run_rate"
      ],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "The largest expert-data seller's revenue has grown several times over in a year, but by press accounts that growth comes from a handful of labs, so the site's reading shows a bigger market, not a broader one. Firms outside the labs mostly lack the research staff to turn bought data into a better model, and they can rent the result instead. The strongest point against is that large software firms and banks have begun buying test sets and practice tasks to check agents, which could grow into real spending with no date to miss.",
+      "rests_on": [
+       {
+        "href": "/indicators/expert_data_market_run_rate",
+        "id": "expert_data_market_run_rate",
+        "name": "Expert-data market run-rate (Mercor)"
+       }
+      ]
+     },
      "kind": "outlook",
      "line": "Firms outside the labs become large buyers of training data and practice tasks, so the labs stop being almost the only customers.",
      "reading": null,
@@ -2357,6 +3194,11 @@
      "href": "/outlook#claim-insurers_cover",
      "id": "insurers_cover",
      "indicators": [],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "Rests on general knowledge. Purpose-built AI policies already exist from a large reinsurer and from several start-ups backed by established underwriters, and as standard policies gain AI exclusions, buyers who deploy agents are pushed toward separate cover. That makes the weaker claim of real sale to large buyers more likely than not, even though the multi-year premium forecast for 2032 looks too high. The strongest point against is that take-up so far is small and large buyers may simply self-insure or lean on vendor indemnities.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "Insurers sell cover written for AI's mistakes, not only exclusions from standard policies.",
      "reading": null,
@@ -2377,6 +3219,17 @@
      "indicators": [
       "safety_brake_events"
      ],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "The site's count shows three announced brakes at one lab in the past year, including a release gated behind safeguards, and from general knowledge another leading lab has kept its strongest model to a limited set of partners in 2026 on security grounds. Gaps between a model being trained and being sold openly seem to be widening as cyber and biology risk thresholds are reached. The strongest point against is that these are the labs' own accounts, the paused run restarted within a month, and commercial rivalry punishes whoever waits longest, so 'loosely in step' is the fragile part.",
+      "rests_on": [
+       {
+        "href": "/indicators/safety_brake_events",
+        "id": "safety_brake_events",
+        "name": "Safety brakes inside the labs (events, trailing year)"
+       }
+      ]
+     },
      "kind": "outlook",
      "line": "A formal pause looks unlikely; instead the biggest labs, loosely in step, slow the public release of their most powerful models.",
      "reading": null,
@@ -2397,6 +3250,11 @@
      "href": "/outlook#claim-training_cheapens",
      "id": "training_cheapens",
      "indicators": [],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "Rests on general knowledge. Further training has become much cheaper, and a few of the biggest coding apps do train their own small models, yet they still send their hardest work to the labs' best models because users pay for quality at the frontier. As long as each new general release moves that frontier, owning a tuned model saves money only on routine calls. The strongest point against is that routine calls are most of the volume, so a quiet shift of the bulk of traffic to in-house models could satisfy the forecast while the frontier is still rented.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "If training a model further on a firm's own work keeps getting cheaper, apps train their own instead of renting the best.",
      "reading": null,
@@ -2417,6 +3275,11 @@
      "href": "/outlook#claim-tuning_converges",
      "id": "tuning_converges",
      "indicators": [],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "Rests on general knowledge. The three kinds of firm named have different customers today: the data sellers earn nearly all their money from the labs, the hosts sell computing to developers, and only the custom trainers already do the forecast business. Some overlap is appearing, as hosts add training services, but a full merging into one business needs enterprise demand for tuned open models that has so far stayed modest. The strongest point against is that data sellers facing concentrated lab customers have a strong motive to move toward enterprises.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "Leading firms that host models, sell training data or do custom training, such as Baseten, Mercor and Applied Compute, converge on one business, tuning open models for firms and selling them the use.",
      "reading": null,
@@ -2437,6 +3300,11 @@
      "href": "/outlook#claim-verification_first",
      "id": "verification_first",
      "indicators": [],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "Rests on general knowledge. The agent failures seen so far, such as deleted databases, wrong purchases and agents tricked by hidden instructions, trace to agents doing the work badly or being manipulated, and the first large market failure seems likely to be reported the same way. An inability to check what an agent did usually deepens a loss instead of starting it, so the public account will tend to blame skill or security. The strongest point against is that fraud by agents nobody can identify is exactly a checking failure, and that may well come first where money is involved.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "The first large failure of a market run by AI agents comes from no one being able to check what an agent did, not from agents lacking skill.",
      "reading": null,
@@ -2457,6 +3325,11 @@
   {
    "id": "adoption",
    "label": "Diffusion: early adoption",
+   "leans": {
+    "leans_false": 2,
+    "leans_true": 4,
+    "likely_true": 1
+   },
    "question": "How fast do firms and people take it up?",
    "rows": [
     {
@@ -2540,6 +3413,83 @@
      "word": "happening"
     },
     {
+     "attribution": "extension",
+     "folio": "adoption",
+     "href": "/outlook#claim-operators_bought",
+     "id": "operators_bought",
+     "indicators": [],
+     "kind": "outlook",
+     "line": "Buyers built around AI go on purchasing firms that sell services, more each year than the year before.",
+     "reading": {
+      "as_of": "2026-09-30",
+      "derived_id": "2dae9582b3f3465f",
+      "holds": true,
+      "href": "/query#rollup_deals_4q",
+      "obs_ids": [
+       "03ce81092b6834f3",
+       "08f751c87646c8eb",
+       "0bc2ce70bfe8e327",
+       "1c6b0ba4ee674753",
+       "1f05539ba1e83d3f",
+       "20c62299123cb802",
+       "3d3af09ff1b75afe",
+       "48bb21d19d0ab19b",
+       "4cace64b500e06c8",
+       "4e1cbb8e145bcacc",
+       "4f6384463d10fce6",
+       "6d3adf40d66b672e",
+       "78f727ff01939a15",
+       "811adb9354e950b0",
+       "87d18813c2d01cca",
+       "888a81ca057613c4",
+       "8c15ae86924e983d",
+       "8d65eb6c70095bb3",
+       "9e512b6a96164a62",
+       "9e6ea6031cd2d69b",
+       "a1cf48acb97d9c07",
+       "a2118a6bce40d7ed",
+       "a49a48ca8cb1c821",
+       "a8b2ce71aecd63a7",
+       "a927c36c9c5ca598",
+       "a973be121f19c11f",
+       "af1f1778b54414b0",
+       "b0e500f4d8c6c06b",
+       "b835ab65198c5079",
+       "be21811c64f7d78c",
+       "c5106455f452b77b",
+       "c8589985e9ab0ab8",
+       "c877c958f561280e",
+       "da7bd428039c3c72",
+       "e0f5f7c73d78712e",
+       "e5e351207e06f333",
+       "e98a256be5e8af30",
+       "eb2fc2e7c4bd73cf",
+       "f6546a0bdf66830b",
+       "f74e224a88701e01",
+       "fe678c73e7869565"
+      ],
+      "unit": "count",
+      "value": 41.0
+     },
+     "row": null,
+     "settles": "The yearly count of such purchases by the same searched buyers flat or falling. The count is a floor from one search of the larger buyers, and it shows what buyers did, not that owning paid.",
+     "sources": [
+      "https://ideas.repec.org/a/ucp/jpolec/v94y1986i4p691-719.html",
+      "https://arxiv.org/abs/2509.01063",
+      "https://www.thediff.co/archive/paying-up-for-the-right-to-be-sued/",
+      "https://hypersoren.xyz/posts/do-things/"
+     ],
+     "stage": null,
+     "state": "holding",
+     "test": {
+      "against": "rollup_service_deals_year_ago",
+      "fact": "rollup_service_deals",
+      "op": "gt"
+     },
+     "who": "This site, extending Grossman and Hart and Gillian Hadfield and Andrew Koh and Byrne Hobart and Soren Larson",
+     "word": "happening"
+    },
+    {
      "attribution": "site",
      "folio": "adoption",
      "href": "/argument#exits",
@@ -2596,6 +3546,46 @@
      "word": "both"
     },
     {
+     "attribution": "extension",
+     "folio": "adoption",
+     "href": "/outlook#claim-liability_priced_apart",
+     "id": "liability_priced_apart",
+     "indicators": [],
+     "kind": "outlook",
+     "line": "Insurers go on writing AI's mistakes out of their standard policies, so whoever deploys an agent carries the loss unless it buys separate cover.",
+     "reading": {
+      "as_of": "2026-07-20",
+      "derived_id": "552b114ffb752722",
+      "holds": null,
+      "href": "/query#ledger_events_12m",
+      "obs_ids": [
+       "13bec962130482af",
+       "1ba4d2c7a055cf4f",
+       "ae0dde7657f17d67",
+       "d4fa55ae57db12a0"
+      ],
+      "unit": "count",
+      "value": 4.0
+     },
+     "row": null,
+     "settles": "Standard liability policies covering AI's mistakes at no extra price. The rival view also expects exclusions first, so what would separate the sides is the premiums written for AI cover, which nobody publishes.",
+     "sources": [
+      "https://ideas.repec.org/a/ucp/jpolec/v94y1986i4p691-719.html",
+      "https://arxiv.org/abs/2509.01063",
+      "https://www.thediff.co/archive/paying-up-for-the-right-to-be-sued/",
+      "https://hypersoren.xyz/posts/do-things/"
+     ],
+     "stage": null,
+     "state": "both",
+     "test": {
+      "against": 1,
+      "fact": "insurer_ledger",
+      "op": "gte"
+     },
+     "who": "This site, extending Grossman and Hart and Gillian Hadfield and Andrew Koh and Byrne Hobart and Soren Larson",
+     "word": "both"
+    },
+    {
      "attribution": "author",
      "folio": "adoption",
      "href": "/predictions#nk_agi_not_milestone",
@@ -2604,6 +3594,22 @@
       "cross_tracker_concordance",
       "bbd_work_hours_assisted"
      ],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "The site's labour trackers agree on no broad employment effect, and the share of work hours assisted by AI has crept up at organisational speed without a visible jump after any model release. Extending that slow climb through 2031 is the basis: value arrives as firms rebuild processes, not on a launch day. The strongest point against is that reliable agents able to work unsupervised for days would be a leap of the kind denied here, and coding tools already showed adoption moving within months of a capability step.",
+      "rests_on": [
+       {
+        "href": "/indicators/cross_tracker_concordance",
+        "id": "cross_tracker_concordance",
+        "name": "Cross-tracker concordance (labour)"
+       },
+       {
+        "href": "/indicators/bbd_work_hours_assisted",
+        "id": "bbd_work_hours_assisted",
+        "name": "Share of work hours assisted by generative AI"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "No single leap in ability unlocks AI's economic value.",
      "reading": null,
@@ -2619,9 +3625,52 @@
     {
      "attribution": "author",
      "folio": "adoption",
+     "href": "/outlook#claim-asking_leaks",
+     "id": "asking_leaks",
+     "indicators": [],
+     "kind": "outlook",
+     "line": "Firms keep inside the work that would reveal what they know, and independent agents dealing for firms in open markets stay rare.",
+     "reading": null,
+     "row": null,
+     "settles": "Independent agents dealing on firms' behalf at scale in open markets, for work that turns on the firm's own knowledge. Nobody publishes a count of it.",
+     "sources": [
+      "https://hypersoren.xyz/posts/against-coasean-singularity/"
+     ],
+     "stage": null,
+     "state": "untestable",
+     "test": null,
+     "who": "Soren Larson",
+     "word": "too_early"
+    },
+    {
+     "attribution": "site",
+     "folio": "adoption",
+     "href": "/outlook#claim-check_binds",
+     "id": "check_binds",
+     "indicators": [],
+     "kind": "outlook",
+     "line": "More knowledge work is held back by the lack of a check than by what the work requires, so what a firm keeps is the checking and the answering.",
+     "reading": null,
+     "row": null,
+     "settles": "A later run of this site's census, under the same rule, finding more payroll passing its screen than waiting on a check without new checks having been built; or models checking their own work as reliably as an outside check does. The census is a screen scored by AI models, not a record of observations, so no nightly test reads it.",
+     "sources": [],
+     "stage": null,
+     "state": "untestable",
+     "test": null,
+     "who": "This site",
+     "word": "too_early"
+    },
+    {
+     "attribution": "author",
+     "folio": "adoption",
      "href": "/outlook#claim-deployers_paid",
      "id": "deployers_paid",
      "indicators": [],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "Rests on general knowledge. Job postings and pay for engineers who sit with a customer and wire models into its work have risen sharply through 2025 and 2026, and both labs and start-ups say these hires limit how fast they can sell. The skill mixes engineering with client handling, which is slow to train. The strongest point against is that coding agents are making the integration work itself easier, and a premium this visible draws in consultants and laid-off engineers within a few years.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "Engineers who fit AI into each customer's own work stay scarce, so their pay rises or employers settle for weaker hires.",
      "reading": null,
@@ -2645,6 +3694,17 @@
      "indicators": [
       "lab_vertical_integration_exit_bell"
      ],
+     "judgement": {
+      "lean": "likely_true",
+      "reason": "The site's ledger shows the labs buying firms and teams at a brisk pace over the past year, though it counts all purchases, not only deployment consultancies. From general knowledge of press reports, the services ventures that the two leading labs launched in 2026 each bought an implementation consultancy within months to get staff quickly, so the falsifier, labs buying no such firms, has already failed. The strongest point against is that the labs also lean on partnerships with the large consultancies, which are too big to buy, and that a purchase made through a venture the lab only partly owns may not count as the lab buying.",
+      "rests_on": [
+       {
+        "href": "/indicators/lab_vertical_integration_exit_bell",
+        "id": "lab_vertical_integration_exit_bell",
+        "name": "Lab vertical integration (acquisitions and acquihires, trailing four quarters)"
+       }
+      ]
+     },
      "kind": "outlook",
      "line": "Labs keep buying the consultancies that put AI to work inside companies, to get their staff faster than hiring allows.",
      "reading": null,
@@ -2660,18 +3720,46 @@
      "word": "too_early"
     },
     {
+     "attribution": "extension",
+     "folio": "adoption",
+     "href": "/outlook#claim-ownership_pays",
+     "id": "ownership_pays",
+     "indicators": [],
+     "kind": "outlook",
+     "line": "Service firms bought by owners built around AI earn higher margins afterwards than rivals that only buy the same tools, in trades not billed by the hour.",
+     "reading": null,
+     "row": null,
+     "settles": "Such firms' margins falling back to their trades' ordinary level within a few years of purchase. This site holds no margin for any of them.",
+     "sources": [
+      "https://ideas.repec.org/a/ucp/jpolec/v94y1986i4p691-719.html",
+      "https://arxiv.org/abs/2509.01063",
+      "https://www.thediff.co/archive/paying-up-for-the-right-to-be-sued/",
+      "https://hypersoren.xyz/posts/do-things/"
+     ],
+     "stage": null,
+     "state": "untestable",
+     "test": null,
+     "who": "This site, extending Grossman and Hart and Gillian Hadfield and Andrew Koh and Byrne Hobart and Soren Larson",
+     "word": "too_early"
+    },
+    {
      "attribution": "author",
      "folio": "adoption",
      "href": "/outlook#claim-simple_markets_first",
      "id": "simple_markets_first",
      "indicators": [],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "Rests on general knowledge. Agents have in fact taken hold first in coding, customer support and, among consumers, shopping and research, none of which are markets where people commonly hired a human agent. Job search has seen heavy use of AI by applicants and recruiters, but as writing aids that flood the market more than as agents that strike matches, and property remains guarded by listing rules and licences. The strongest point against is that the forecast may be read as covering only markets between two sides, where hiring is indeed the most advanced case.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "Agents take hold first in job search, property and other matching markets.",
      "reading": null,
      "row": null,
      "settles": "Agents spreading first in markets where people rarely hire human agents.",
      "sources": [
-      "https://peymanshahidi.github.io/assets/pdf/NBER_TAI_Chapter_Shahidi.pdf"
+      "https://www.nber.org/books-and-chapters/economics-transformative-ai/coasean-singularity-demand-supply-and-market-design-ai-agents"
      ],
      "stage": null,
      "state": "untestable",
@@ -2687,6 +3775,17 @@
      "indicators": [
       "canaries_exposed_employment_yoy"
      ],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "Employment in the occupations most exposed to AI is down only slightly over the year on the site's reading, well short of a wipe-out, and software work has so far shrunk at the junior end while total headcount is roughly flat. The claim as worded needs only that jobs are not wiped out, which is a low bar. The strongest point against is that the stricter test, employment falling as coding tools spread, is close to being met already, and agents that finish whole projects could turn a flat line into a clear decline.",
+      "rests_on": [
+       {
+        "href": "/indicators/canaries_exposed_employment_yoy",
+        "id": "canaries_exposed_employment_yoy",
+        "name": "Employment in AI-exposed occupations, year on year"
+       }
+      ]
+     },
      "kind": "outlook",
      "line": "AI does not wipe out software engineering jobs, and demand for engineers may rise as software gets cheaper to make.",
      "reading": null,
@@ -2707,6 +3806,11 @@
      "href": "/outlook#claim-through_incumbents",
      "id": "through_incumbents",
      "indicators": [],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "Rests on general knowledge. So far buyers take AI's work mostly straight from labs and start-ups under ordinary software contracts with capped liability, and the fastest-growing sellers in law, support and coding are young firms without licences or deep balance sheets. Established service firms are adding AI, but their share of AI work bought does not look to be rising. The strongest point against is that long, unsupervised tasks in regulated fields have barely begun, and that is where a liable party matters most.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "Firms increasingly buy AI's work through a party with assets and a licence that can be held liable, such as an established service firm.",
      "reading": null,
@@ -2728,6 +3832,11 @@
      "href": "/outlook#claim-use_unpriced",
      "id": "use_unpriced",
      "indicators": [],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "Rests on general knowledge. The history of free digital goods is that statistics capture spending on the tools but not the better quality or the time saved, and much AI use is free or flat-priced and happens inside households and unmeasured service work. Statistical offices have no method ready to adjust for answer quality. The strongest point against is that time saved inside firms does show up as measured productivity when the same output needs fewer paid hours, so 'most' may overstate the miss.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "Official output statistics miss most of AI's gains, which come as better quality and saved time that no price records.",
      "reading": null,
@@ -2743,11 +3852,18 @@
      "word": "too_early"
     }
    ],
-   "too_early": 7
+   "too_early": 10
   },
   {
    "id": "reorganisation",
    "label": "Diffusion: adaptation",
+   "leans": {
+    "leans_false": 8,
+    "leans_true": 9,
+    "likely_false": 5,
+    "likely_true": 2,
+    "toss_up": 3
+   },
    "question": "What happens to work, pay and output as firms reorganise?",
    "rows": [
     {
@@ -2966,6 +4082,22 @@
       "bbd_work_hours_assisted",
       "exposure_vs_usage_gap"
      ],
+     "judgement": {
+      "lean": "likely_false",
+      "reason": "Employment in the most exposed occupations is down only slightly on the year, and the share of work hours assisted by generative AI is small and, on its fitted trend, takes more than two years to grow as much again. Reaching a quarter of remote jobs done by AI within about a year would need a break far beyond anything in those readings. The strongest point the other way is that agents are improving quickly and entry-level hiring in exposed work is already weak.",
+      "rests_on": [
+       {
+        "href": "/indicators/canaries_exposed_employment_yoy",
+        "id": "canaries_exposed_employment_yoy",
+        "name": "Employment in AI-exposed occupations, year on year"
+       },
+       {
+        "href": "/indicators/bbd_work_hours_assisted",
+        "id": "bbd_work_hours_assisted",
+        "name": "Share of work hours assisted by generative AI"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "The AI 2027 scenario expects AI to be doing a quarter of the remote jobs of 2024 by October 2027, with unemployment about a point higher than a year before.",
      "reading": null,
@@ -2984,6 +4116,11 @@
      "href": "/predictions#amodei_compressed_biology",
      "id": "amodei_compressed_biology",
      "indicators": [],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "This lean is conditional: it asks what would follow if powerful AI arrives, not whether it does, and it rests on general knowledge of how medicine advances, not on a site reading. Even with abundant machine research, human trials, regulators, manufacturing and the slow clock of biology itself set the pace, so a speed-up of several times looks more plausible than the many times the forecast needs. The best case for it is that much better prediction of what works could cut the failure rate of trials sharply, and that already counts for a lot.",
+      "rests_on": []
+     },
      "kind": "ledger",
      "line": "Dario Amodei predicts that once powerful AI exists, biology and medicine will fit the coming half-century to century of progress into five to ten years.",
      "reading": null,
@@ -3005,6 +4142,22 @@
       "bls_labor_productivity_yoy",
       "bls_tfp_private_nonfarm"
      ],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "This lean is conditional: it judges the growth that would follow once AI can flexibly stand in for workers, a condition not yet met, so today's ordinary productivity readings show only that take-off has not begun. Even granting flexible substitution for workers, growth at that rate needs factories, energy, permits and demand to scale at a pace no large economy has sustained; a historic but far lower rate looks more likely. The strongest counter is that output could compound once machines build the machines, which history gives no way to rule out.",
+      "rests_on": [
+       {
+        "href": "/indicators/bls_labor_productivity_yoy",
+        "id": "bls_labor_productivity_yoy",
+        "name": "US labour productivity, year on year"
+       },
+       {
+        "href": "/indicators/bls_tfp_private_nonfarm",
+        "id": "bls_tfp_private_nonfarm",
+        "name": "US total factor productivity, private nonfarm business"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Tamay Besiroglu expects explosive economic growth, above thirty percent a year, once AI can flexibly stand in for human workers.",
      "reading": null,
@@ -3026,6 +4179,17 @@
       "bls_labor_productivity_yoy",
       "bls_tfp_private_nonfarm"
      ],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "Leaning true here means the slow path, which was his main expectation, not the fast takeoff to which he gave a minority chance. The test is whether world output grows as much again over a stretch of several years before it ever does so inside a single year, and it settles only if output accelerates that far at all. Physical capital, energy and adoption all ramp gradually, so any such acceleration should pass through the slower stage first, and today's ordinary productivity readings fit a gradual path. What cuts against it is a sudden software-driven leap in research that outruns the national accounts.",
+      "rests_on": [
+       {
+        "href": "/indicators/bls_labor_productivity_yoy",
+        "id": "bls_labor_productivity_yoy",
+        "name": "US labour productivity, year on year"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Paul Christiano put about three chances in ten on a fast takeoff, expecting world output to finish a doubling over four years before any single-year doubling begins.",
      "reading": null,
@@ -3047,6 +4211,22 @@
       "bls_labor_productivity_yoy",
       "bls_tfp_private_nonfarm"
      ],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "This lean is conditional on AI outperforming people on many tasks by 2030, which looks fairly likely; it judges the growth that would follow. Capability arriving is not the same as firms reorganising around it: productivity growth is ordinary today despite widespread use, and past general-purpose technologies took a decade or more to show up in output, so growth in the years just after is more likely to rise by less than the experts say. The case for them is that heavy investment in data centres already adds to demand and could carry growth to that level for a while.",
+      "rests_on": [
+       {
+        "href": "/indicators/bls_labor_productivity_yoy",
+        "id": "bls_labor_productivity_yoy",
+        "name": "US labour productivity, year on year"
+       },
+       {
+        "href": "/indicators/bls_tfp_private_nonfarm",
+        "id": "bls_tfp_private_nonfarm",
+        "name": "US total factor productivity, private nonfarm business"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Experts surveyed by Ezra Karger and colleagues expect that if AI outperforms humans on many tasks by 2030, US growth would rise to around four percent a year, against about two and a half percent in their overall forecast.",
      "reading": null,
@@ -3067,6 +4247,11 @@
      "indicators": [
       "bls_labor_productivity_yoy"
      ],
+     "judgement": {
+      "lean": "likely_false",
+      "reason": "This rests on general knowledge. Language-model systems are already doing paid cognitive work while no mammal brain has been emulated, so emulations coming first as the wholesale replacement for workers would need ordinary AI to stall for decades. The only route to this coming true is a hard ceiling on current methods that scanning technology then overtakes.",
+      "rests_on": []
+     },
      "kind": "ledger",
      "line": "Robin Hanson guessed that brain emulations would be the first machines able to replace human workers wholesale, arriving within about a century and then driving monthly economic doublings.",
      "reading": null,
@@ -3088,6 +4273,17 @@
       "bls_labor_productivity_yoy",
       "bls_tfp_private_nonfarm"
      ],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "This lean is conditional on machines being able to do most human work, which has not happened; productivity readings are ordinary, so it is a judgement about the model, not the data. An economy growing an order of magnitude faster needs energy, materials, land use and slow sectors such as housing and care to scale together, and weak links of that kind tame growth even when most labour is replaceable. It is a stronger claim than explosive growth at a lower threshold, so it cannot be more likely than that one; the case for it is self-replicating robot industry.",
+      "rests_on": [
+       {
+        "href": "/indicators/bls_labor_productivity_yoy",
+        "id": "bls_labor_productivity_yoy",
+        "name": "US labour productivity, year on year"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Robin Hanson's growth model implied that once machines can stand in for most human labour, world output would grow about ten times faster, doubling roughly every eighteen months.",
      "reading": null,
@@ -3128,6 +4324,27 @@
       "labor_share_nonfarm",
       "cross_tracker_concordance"
      ],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "The only macro series near a line is the labour share, whose yearly fall has deepened over the last three readings and sits between the normal and fast bands; total factor productivity and the labour trackers are quiet. To breach the fast band before 2028 the fall must deepen by roughly as much again as it did early in 2026 and hold, while the index fell this fast after the inflation shock and then recovered, and the comparison base gets easier. The risk is real, though: one more step down of that size would break the claim.",
+      "rests_on": [
+       {
+        "href": "/indicators/labor_share_nonfarm",
+        "id": "labor_share_nonfarm",
+        "name": "US labour share of income, year on year"
+       },
+       {
+        "href": "/indicators/bls_tfp_private_nonfarm",
+        "id": "bls_tfp_private_nonfarm",
+        "name": "US total factor productivity, private nonfarm business"
+       },
+       {
+        "href": "/indicators/cross_tracker_concordance",
+        "id": "cross_tracker_concordance",
+        "name": "Cross-tracker concordance (labour)"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "The economists' scenarios only pull apart after 2027.",
      "reading": null,
@@ -3150,6 +4367,27 @@
       "bls_labor_productivity_yoy",
       "new_grad_unemployment"
      ],
+     "judgement": {
+      "lean": "likely_false",
+      "reason": "The labour share is falling faster than normal but would have to keep falling at a steeper yearly pace every year to 2030, and output growth would have to rise several times over from an ordinary rate, with graduate unemployment still unremarkable. Nothing in adoption or productivity is on that path, and physical build-out limits how fast output can grow in so short a window. The point against is that the labour share has moved in the scenario's direction sooner than the authors expected.",
+      "rests_on": [
+       {
+        "href": "/indicators/labor_share_nonfarm",
+        "id": "labor_share_nonfarm",
+        "name": "US labour share of income, year on year"
+       },
+       {
+        "href": "/indicators/bls_labor_productivity_yoy",
+        "id": "bls_labor_productivity_yoy",
+        "name": "US labour productivity, year on year"
+       },
+       {
+        "href": "/indicators/new_grad_unemployment",
+        "id": "new_grad_unemployment",
+        "name": "Recent-graduate unemployment rate (NY Fed)"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Extreme case: growth soars and workers' share of income falls sharply.",
      "reading": null,
@@ -3172,6 +4410,27 @@
       "bls_labor_productivity_yoy",
       "labor_share_nonfarm"
      ],
+     "judgement": {
+      "lean": "toss_up",
+      "reason": "Productivity and total factor productivity are at ordinary rates, which fits the modest path, but the labour share is falling faster than that path predicts and investment in AI is already a visible part of demand. The honest view is that the outcome by 2030 most likely lands near the boundary between this scenario and the next one up, so whether AI's yearly addition ends just under or just over the stated line cannot be called. The tiny rise in unemployment the scenario gives looks too small given weak entry-level hiring.",
+      "rests_on": [
+       {
+        "href": "/indicators/bls_labor_productivity_yoy",
+        "id": "bls_labor_productivity_yoy",
+        "name": "US labour productivity, year on year"
+       },
+       {
+        "href": "/indicators/bls_tfp_private_nonfarm",
+        "id": "bls_tfp_private_nonfarm",
+        "name": "US total factor productivity, private nonfarm business"
+       },
+       {
+        "href": "/indicators/labor_share_nonfarm",
+        "id": "labor_share_nonfarm",
+        "name": "US labour share of income, year on year"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Modest case: AI adds under half a point a year to growth by 2030.",
      "reading": null,
@@ -3194,6 +4453,27 @@
       "cross_tracker_concordance",
       "canaries_entry_level_gap"
      ],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "Entry-level hiring in exposed work is clearly short, but the trackers show no agreed break in exposed employment overall and productivity is ordinary. Lifting output that far above the no-AI path by 2030 means AI adding around two points of growth every year from now, which has no precedent for a technology this early in its diffusion; a smaller gain with some loss of office jobs is more likely. The scenario is anchored on a survey median, and surveyed experts have tended to underrate recent progress, which is the best argument for it.",
+      "rests_on": [
+       {
+        "href": "/indicators/canaries_entry_level_gap",
+        "id": "canaries_entry_level_gap",
+        "name": "Entry-level employment shortfall in AI-exposed occupations"
+       },
+       {
+        "href": "/indicators/cross_tracker_concordance",
+        "id": "cross_tracker_concordance",
+        "name": "Cross-tracker concordance (labour)"
+       },
+       {
+        "href": "/indicators/bls_tfp_private_nonfarm",
+        "id": "bls_tfp_private_nonfarm",
+        "name": "US total factor productivity, private nonfarm business"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Substantial case: output rises and some office jobs go by 2030.",
      "reading": null,
@@ -3212,6 +4492,11 @@
      "href": "/predictions#kurzweil_neocortex_cloud_early_2030s",
      "id": "kurzweil_neocortex_cloud_early_2030s",
      "indicators": [],
+     "judgement": {
+      "lean": "likely_false",
+      "reason": "This rests on general knowledge of brain interfaces. Today's implants need surgery, read a tiny fraction of neurons and have reached only a small number of severely disabled patients; nanobots that enter the bloodstream and wire the cortex do not exist even in the laboratory. Getting from there to routine use in healthy people by 2039 would need both the science and the regulators to move at a speed neither has shown, though much faster AI-led research is the one thing that could surprise.",
+      "rests_on": []
+     },
      "kind": "ledger",
      "line": "Ray Kurzweil predicts that during the 2030s nanobots will link the upper layers of the neocortex to the cloud, directly extending human thinking.",
      "reading": null,
@@ -3232,6 +4517,17 @@
      "indicators": [
       "bls_tfp_private_nonfarm"
      ],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "This lean is conditional: it judges what would follow once AI matches human researchers, which has not happened, so it is a judgement about bottlenecks and today's ordinary productivity reading bears on it only weakly. Abundant research labour speeds ideas, but experiments, physical capital, energy and approval processes scale more slowly, so a large acceleration seems likely and a full century's worth inside a decade less so. This is kept in line with the lean on compressed biology; the best counter is that fields which are mostly software and mathematics could move at close to the claimed pace.",
+      "rests_on": [
+       {
+        "href": "/indicators/bls_tfp_private_nonfarm",
+        "id": "bls_tfp_private_nonfarm",
+        "name": "US total factor productivity, private nonfarm business"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "William MacAskill and Fin Moorhouse think it more likely than not that, once AI matches human researchers, a hundred years of technological progress follows in under a decade.",
      "reading": null,
@@ -3250,6 +4546,11 @@
      "href": "/predictions#sandberg_bostrom_brain_emulation_2050",
      "id": "sandberg_bostrom_brain_emulation_2050",
      "indicators": [],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "This rests on general knowledge. Wiring maps have gone from a worm to a fly and a speck of mouse cortex over many years, and a human brain is larger by several orders of magnitude; a map also does not give the electrical behaviour of each cell, and no small mammal has been emulated on the schedule the authors implied. Automated microscopy and AI-led analysis are improving fast and there are more than two decades left, which keeps this from being a firm no.",
+      "rests_on": []
+     },
      "kind": "ledger",
      "line": "Anders Sandberg and Nick Bostrom concluded that, if electrophysiological-level models suffice, emulating a whole human brain should become feasible before 2050, with simple mammals ten to twenty years earlier.",
      "reading": null,
@@ -3270,6 +4571,17 @@
      "indicators": [
       "rsi_agent_workdays_per_human"
      ],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "This lean is conditional on research being automated, which has not happened. The claim is modest: that many AI researchers working side by side yield less than their number suggests, delaying but not preventing a research-led acceleration. The one reading here, a lab's own unverified count of agent workdays per human workday, already shows agent labour multiplying without a matching visible jump in the pace of discovery, which fits a drag. The weaker part is the confidence that an explosion still follows, since experiments and compute may bind harder than he allows.",
+      "rests_on": [
+       {
+        "href": "/indicators/rsi_agent_workdays_per_human",
+        "id": "rsi_agent_workdays_per_human",
+        "name": "Agent-workdays per human workday in frontier research (self-reported)"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Phil Trammell argues that limits on splitting research across many AI workers could delay a technological singularity, though automating research would probably still produce an explosion.",
      "reading": null,
@@ -3288,6 +4600,11 @@
      "href": "/outlook#claim-ai_taxed",
      "id": "ai_taxed",
      "indicators": [],
+     "judgement": {
+      "lean": "toss_up",
+      "reason": "This rests on general knowledge of tax politics, and there is no date. The logic is sound, since a shrinking wage base would force governments to look elsewhere, but the particular order named, spending first and AI itself later, is one of several routes; taxes on profits, capital or computing power are just as plausible, and the United States has no national tax on spending to raise. With no reading and no clear precedent there is no real basis to lean.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "As AI takes over paid work, governments move tax from wages towards spending, and later towards AI itself.",
      "reading": null,
@@ -3310,6 +4627,17 @@
      "indicators": [
       "state_ai_bills_introduced"
      ],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "State legislatures introduced a very large number of AI bills in the latest legislative year, and from general knowledge surveys in America show concern outrunning excitement while use keeps climbing. Local fights over data centres, electricity prices and entry-level jobs give both parties a ready target. What cuts against it is that people tend to warm to tools they use daily, and candidates may find that attacking a widely used product wins little.",
+      "rests_on": [
+       {
+        "href": "/indicators/state_ai_bills_introduced",
+        "id": "state_ai_bills_introduced",
+        "name": "US state AI bills introduced (legislative year)"
+       }
+      ]
+     },
      "kind": "outlook",
      "line": "AI grows more unpopular even as more people use it, giving politicians on both the left and the right reason to campaign against it.",
      "reading": null,
@@ -3332,6 +4660,11 @@
      "href": "/outlook#claim-bet_fast_side",
      "id": "bet_fast_side",
      "indicators": [],
+     "judgement": {
+      "lean": "likely_false",
+      "reason": "This rests on the site's reading of the bet and on general knowledge. Output per person stands only a little above its earlier peak, about where ordinary growth puts it, and the bet needs a jump several times larger than a normal year's gain inside a single year before 2034. Even a strong AI boom would be slowed by construction, energy and adoption inside that window, and the people taking the fast side accepted long odds against themselves. The fast path would look like the others until about 2027, so quiet readings now are weak evidence, but the timetable is still very short.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "In some quarter before 2034, output per person stands [test:bet_fast_side] or more above the highest level it had reached a year or more before, which wins the bet's fast side.",
      "reading": {
@@ -3368,6 +4701,11 @@
      "href": "/outlook#claim-conglomerate_premium",
      "id": "conglomerate_premium",
      "indicators": [],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "This rests on general knowledge of how markets value diversified groups. The discount on conglomerates has lasted for decades because investors can diversify for themselves and distrust head offices that move cash between unrelated units, and AI does not obviously remove either objection. A few groups with a proven record of buying dull businesses and running them better with AI could earn a premium, but that would be a premium for skill in a few names, not for the form.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "Groups that run many unrelated businesses with AI come to be valued above the sum of their parts.",
      "reading": null,
@@ -3388,6 +4726,11 @@
      "href": "/outlook#claim-firm_size_barbell",
      "id": "firm_size_barbell",
      "indicators": [],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "This rests on general knowledge. Infrastructure is plainly consolidating around a few clouds, chip makers and model labs, while applications are being built by very small teams and new business formation in software is high. The risk is that average size is dragged up by large incumbents absorbing the application layer by 2029, or that the model labs bundle applications themselves.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "Firms in AI-exposed industries do not all grow bigger by 2029; they consolidate in infrastructure and splinter in applications.",
      "reading": null,
@@ -3408,6 +4751,11 @@
      "href": "/outlook#claim-firms_centralise",
      "id": "firms_centralise",
      "indicators": [],
+     "judgement": {
+      "lean": "toss_up",
+      "reason": "This rests on general knowledge. AI makes it cheaper for head office to see and decide what used to need a person on the spot, which favours the claim, and the largest firms have kept gaining share. But the same tools let very small teams do what once took a department, and the lean on the barbell forecast is that applications splinter, so the net effect on size and on where decisions sit is not something the evidence yet settles.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "Firms using AI grow larger and take decisions further from the people on the spot.",
      "reading": null,
@@ -3425,11 +4773,44 @@
     {
      "attribution": "author",
      "folio": "reorganisation",
+     "href": "/outlook#claim-firms_do_not_dissolve",
+     "id": "firms_do_not_dissolve",
+     "indicators": [],
+     "kind": "outlook",
+     "line": "Firms in the industries most exposed to AI do not shrink towards nothing as agents cut the cost of dealing.",
+     "reading": null,
+     "row": null,
+     "settles": "Average firm size in the most exposed industries falling sharply while it holds elsewhere. This site reads firm size by industry for one year only, so nothing tests it yet.",
+     "sources": [
+      "https://www.nber.org/books-and-chapters/economics-transformative-ai/coasean-singularity-demand-supply-and-market-design-ai-agents",
+      "https://arxiv.org/abs/2509.01063",
+      "https://hypersoren.xyz/posts/against-coasean-singularity/"
+     ],
+     "stage": null,
+     "state": "untestable",
+     "test": null,
+     "who": "Shahidi, Horton and colleagues and Gillian Hadfield and Andrew Koh and Soren Larson",
+     "word": "too_early"
+    },
+    {
+     "attribution": "author",
+     "folio": "reorganisation",
      "href": "/outlook#claim-generalists_gain",
      "id": "generalists_gain",
      "indicators": [
       "pwc_ai_skill_wage_premium"
      ],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "The one reading is a posting premium for AI skills, which is large but compares adverts and not people, so it is weak support. From general knowledge, agents are taking over narrow, well-specified tasks first, which raises the value of people who can direct them across several fields. The counter is that deep specialists are the ones able to check AI output where errors are costly, and in law, medicine and engineering their pay has held.",
+      "rests_on": [
+       {
+        "href": "/indicators/pwc_ai_skill_wage_premium",
+        "id": "pwc_ai_skill_wage_premium",
+        "name": "Wage premium for AI skills (PwC AI Jobs Barometer)"
+       }
+      ]
+     },
      "kind": "outlook",
      "line": "The gap in value between versatile workers who manage AI and narrow specialists keeps widening.",
      "reading": null,
@@ -3452,6 +4833,17 @@
      "indicators": [
       "bbd_work_hours_assisted"
      ],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "The share of work hours assisted by AI is still small and rising steadily, and paid hours in exposed work have not fallen. From general knowledge, studies of early adopters find people taking on more tasks and wider scope, not shorter days, since employers capture time saved as extra output. What cuts against it is weak hiring at entry level, which is a cut in paid work arriving before any clear rise in measured output per worker.",
+      "rests_on": [
+       {
+        "href": "/indicators/bbd_work_hours_assisted",
+        "id": "bbd_work_hours_assisted",
+        "name": "Share of work hours assisted by generative AI"
+       }
+      ]
+     },
      "kind": "outlook",
      "line": "Work in the jobs most exposed to AI grows more intense before it grows shorter.",
      "reading": null,
@@ -3472,6 +4864,11 @@
      "href": "/outlook#claim-jobs_become_data",
      "id": "jobs_become_data",
      "indicators": [],
+     "judgement": {
+      "lean": "likely_true",
+      "reason": "This rests on general knowledge, and the claim is a weak one: only that some jobs shift this way. Model labs and their suppliers already pay doctors, lawyers, programmers and other experts to write and grade examples, and that market has grown quickly. The caveat is scale, since this is contract work for a small number of people and may shrink if models learn to generate their own training material.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "Some jobs move from doing the work to supplying the data that trains AI to do it.",
      "reading": null,
@@ -3489,9 +4886,34 @@
     {
      "attribution": "author",
      "folio": "reorganisation",
+     "href": "/outlook#claim-line_not_side",
+     "id": "line_not_side",
+     "indicators": [],
+     "kind": "outlook",
+     "line": "Firms that adopt AI move routine, recordable decisions to the centre and leave fast-changing and time-critical ones with local units; they do not centralise across the board.",
+     "reading": null,
+     "row": null,
+     "settles": "Adopting firms centralising decisions of every kind, the fast-changing included, and doing better than those that leave them local. No series on this site records where decisions are taken.",
+     "sources": [
+      "https://cpwalker.substack.com/p/context-engineering-why-hayeks-knowledge"
+     ],
+     "stage": null,
+     "state": "untestable",
+     "test": null,
+     "who": "Chris Walker",
+     "word": "too_early"
+    },
+    {
+     "attribution": "author",
+     "folio": "reorganisation",
      "href": "/outlook#claim-niches_filled",
      "id": "niches_filled",
      "indicators": [],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "This rests on general knowledge. Falling costs are visibly producing small tools and services that no one would have staffed, and new business formation is high, so the falsifier looks unlikely to bite. The weaker part is the claim that this is the way AI lifts growth: so far the measurable lift comes from investment in data centres and from gains inside existing firms, and tiny niches may add little to measured output.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "Cheap AI makes many small services worth selling that were never worth paying a person for, and filling these niches is how AI lifts growth.",
      "reading": null,
@@ -3511,9 +4933,34 @@
     {
      "attribution": "author",
      "folio": "reorganisation",
+     "href": "/outlook#claim-pooled_premium",
+     "id": "pooled_premium",
+     "indicators": [],
+     "kind": "outlook",
+     "line": "A group that runs many businesses with AI is valued above the sum of its parts only if it shares what each learns across them; a holding company that keeps them apart is not.",
+     "reading": null,
+     "row": null,
+     "settles": "Groups run with AI trading below the sum of their parts whether or not they pool what they learn, or holding companies that keep their businesses apart earning the premium too. No such group is listed with separately valued parts.",
+     "sources": [
+      "https://hypersoren.xyz/posts/conglomerate-premium/"
+     ],
+     "stage": null,
+     "state": "untestable",
+     "test": null,
+     "who": "Soren Larson",
+     "word": "too_early"
+    },
+    {
+     "attribution": "author",
+     "folio": "reorganisation",
      "href": "/outlook#claim-trades_scattered",
      "id": "trades_scattered",
      "indicators": [],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "This rests on general knowledge. Licensing, liability, local relationships and physical presence keep law, building and similar trades in many small firms, and AI tools for each are already gathering around a few vendors built on a few models. The threat is ownership rolling up small practices with AI and private capital, or a lab offering the service directly where rules allow, but neither looks likely to take most professional work.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "Law, contracting and other trades scattered by place stay split among many small firms, while the AI tools each trade uses gather around a few vendors.",
      "reading": null,
@@ -3534,6 +4981,11 @@
      "href": "/outlook#claim-visits_fall",
      "id": "visits_fall",
      "indicators": [],
+     "judgement": {
+      "lean": "likely_true",
+      "reason": "This rests on general knowledge. Since search engines began answering in the results page and chat assistants began answering directly, many publishers have reported clear falls in referred visits, and the share of searches that end without a click has kept rising. The partial offsets are licensing deals and direct subscriptions, which replace some income but do not bring the visits back.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "Publishers lose the visits that pay for what they produce.",
      "reading": null,
@@ -3549,11 +5001,17 @@
      "word": "too_early"
     }
    ],
-   "too_early": 28
+   "too_early": 31
   },
   {
    "id": "value",
    "label": "Value capture",
+   "leans": {
+    "leans_false": 9,
+    "leans_true": 16,
+    "likely_false": 3,
+    "likely_true": 5
+   },
    "question": "Where do the profits end up?",
    "rows": [
     {
@@ -4085,6 +5543,61 @@
      "word": "both"
     },
     {
+     "attribution": "author",
+     "folio": "value",
+     "href": "/outlook#claim-firms_rent",
+     "id": "firms_rent",
+     "indicators": [
+      "lab_hhi"
+     ],
+     "kind": "outlook",
+     "line": "Use of models stays spread across several labs and open models, with the concentration of routed tokens among labs below [test:firms_rent], and few firms train or run their own.",
+     "reading": {
+      "as_of": "2026-10-04",
+      "holds": null,
+      "href": "/indicators/lab_hhi",
+      "obs_ids": [
+       "02d316a49e6e535a",
+       "065322d5f94e9f91",
+       "09a1f2a77d59e52a",
+       "1f9a9f71acd08e57",
+       "21c8fcd472b05a04",
+       "414cca2715a68428",
+       "490ce49dff95097d",
+       "58b3228e6ace78de",
+       "5d2690375d04b575",
+       "6fa65649998ad053",
+       "7b290063baffae66",
+       "896f2b3cc1f4bed1",
+       "9b2c1f41f876649a",
+       "9c233d427cc1770f",
+       "9df798b6d0332b0b",
+       "bdb9a3160d561846",
+       "ef4fbcb7d7fad5ad",
+       "efa5cbce8e326815",
+       "fb8c93fc5d157853",
+       "ffdfeeae1fe30bbc"
+      ],
+      "unit": "index",
+      "value": 0.18010329865619398
+     },
+     "row": null,
+     "settles": "Use concentrating on one lab's models while open ones fall further behind, or a current survey finding most large firms running their own. The reading is developers' routed tokens, not firms' spending, and the rival speaks of who runs a model, not whose it is, so it accepts the same reading. A router's traffic is all rented, so this reading can show spread among sellers and cannot show renting against owning.",
+     "sources": [
+      "https://hypersoren.xyz/posts/router-power/",
+      "https://www.siliconcontinent.com/p/three-theses-on-ai-value-capture"
+     ],
+     "stage": null,
+     "state": "both",
+     "test": {
+      "against": 0.25,
+      "fact": "token_hhi",
+      "op": "lt"
+     },
+     "who": "Soren Larson and Garicano and Saa-Requejo",
+     "word": "both"
+    },
+    {
      "attribution": "site",
      "folio": "value",
      "href": "/outlook#claim-gap_stays_short",
@@ -4189,6 +5702,17 @@
      "indicators": [
       "consumer_surplus_wta"
      ],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "This lean is on the site's narrow test, not on the broader idea that users gain more than makers, which is judged separately and leans true. The test sets a survey estimate of what American consumers would need to be paid to give AI up against the revenue of the leading labs, and on the latest readings that estimate is already less than two times the labs' combined annualised revenue. The estimate rose strongly between its two waves, but lab revenue has been multiplying several times over a year, so the gap is closing. The strongest point the other way is that the survey covers one country and consumers only, so the value users worldwide keep is surely far larger than the reading shows.",
+      "rests_on": [
+       {
+        "href": "/indicators/consumer_surplus_wta",
+        "id": "consumer_surplus_wta",
+        "name": "Consumer surplus from generative AI (willingness to accept)"
+       }
+      ]
+     },
      "kind": "exit",
      "line": "Users keep most of the value",
      "reading": null,
@@ -4208,6 +5732,17 @@
       "circular_financing_scale",
       "cloud_rpo_backlog"
      ],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "The combined run-rate of the leading labs would have to grow roughly an order of magnitude in a little over three years, which means multiplying by about two every year without a pause. Recent growth has been faster than that, but it has come from a small base, and revenue at that scale needs chips, power and buildings that take years to finish. What cuts the other way is that every past projection of lab revenue has proved too low.",
+      "rests_on": [
+       {
+        "href": "/indicators/cloud_rpo_backlog",
+        "id": "cloud_rpo_backlog",
+        "name": "Cloud backlog (remaining performance obligations)"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "AI earns trillions of dollars a year in revenue before 2030.",
      "reading": null,
@@ -4228,6 +5763,17 @@
      "indicators": [
       "epoch_training_power_growth"
      ],
+     "judgement": {
+      "lean": "likely_false",
+      "reason": "The largest single sites running or under construction draw one to a few gigawatts, and this tracker's fit of training power, which is weak, has the draw taking more than a year to grow as much again. A single cluster of the stated size running by the end of 2028 would need the largest one to grow several times over in about two years, against known shortages of grid connections, turbines and transformers. The strongest counterpoint is that announced campus plans do reach that scale on paper, but their own schedules run into the next decade.",
+      "rests_on": [
+       {
+        "href": "/indicators/epoch_training_power_growth",
+        "id": "epoch_training_power_growth",
+        "name": "Training power draw growth (doubling time)"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Leopold Aschenbrenner projected that the largest training cluster would draw about ten gigawatts and cost hundreds of billions of dollars by 2028.",
      "reading": null,
@@ -4249,6 +5795,22 @@
       "epoch_training_power_growth",
       "epoch_training_compute_growth"
      ],
+     "judgement": {
+      "lean": "likely_false",
+      "reason": "A single cluster drawing a large share of all American electricity by 2030 is far beyond anything planned for one site, and power draw has been growing far more slowly than training compute. This rests on the two growth readings and on general knowledge of how long power plants and grid links take to build. The best case for it is that total industry spending may pass that sum by 2030, but spread over many sites and several owners, which is not what was forecast.",
+      "rests_on": [
+       {
+        "href": "/indicators/epoch_training_power_growth",
+        "id": "epoch_training_power_growth",
+        "name": "Training power draw growth (doubling time)"
+       },
+       {
+        "href": "/indicators/epoch_training_compute_growth",
+        "id": "epoch_training_compute_growth",
+        "name": "Frontier training compute growth (doubling time)"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Leopold Aschenbrenner projected a trillion-dollar training cluster by 2030, drawing about a hundred gigawatts, more than a fifth of current US electricity output.",
      "reading": null,
@@ -4270,6 +5832,22 @@
       "circular_financing_scale",
       "cloud_rpo_backlog"
      ],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "Realised AI revenue across labs, applications and cloud is still a small fraction of the stated requirement, and even the fast path sketched by the most bullish lab leaders only reaches that level around the end of the decade. Cloud order backlogs are large and rising, which shows committed demand, but much of it is labs buying compute with investors' money rather than end customers paying. The main risk to this call is that lab revenue keeps multiplying each year for longer than fast-growing businesses usually manage, and that a broad count of AI revenue is easy to stretch.",
+      "rests_on": [
+       {
+        "href": "/indicators/cloud_rpo_backlog",
+        "id": "cloud_rpo_backlog",
+        "name": "Cloud backlog (remaining performance obligations)"
+       },
+       {
+        "href": "/indicators/circular_financing_scale",
+        "id": "circular_financing_scale",
+        "name": "Circular financing scale"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "AI needs about two trillion dollars of revenue a year by 2030 and falls short.",
      "reading": null,
@@ -4292,6 +5870,22 @@
       "circular_financing_scale",
       "margin_stack_semis_share"
      ],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "The claim needs the gap to keep widening all the way to 2030. The site's ratio of cloud capital spending to AI revenue has been falling, because revenue is growing several times over a year while spending grows much more slowly; in absolute terms the gap probably widens for another year or two and then narrows. A spending cut after a funding scare would also close it from the other side. The strongest point for Cahn is that circular financing is still swelling the spend side and his own figure has risen every year so far.",
+      "rests_on": [
+       {
+        "href": "/indicators/capex_to_revenue_stack",
+        "id": "capex_to_revenue_stack",
+        "name": "Hyperscaler capex to AI revenue (trailing year)"
+       },
+       {
+        "href": "/indicators/circular_financing_scale",
+        "id": "circular_financing_scale",
+        "name": "Circular financing scale"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "The gap between AI spending and the revenue to repay it keeps widening.",
      "reading": null,
@@ -4315,6 +5909,22 @@
       "margin_stack_semis_share",
       "cloud_rpo_backlog"
      ],
+     "judgement": {
+      "lean": "likely_true",
+      "reason": "The window closes at the end of 2026, and at mid-year the largest cloud firms were still spending several times what AI earns in a year on the site's measure. That ratio is falling, but nothing can close a gap of that size in the months left. The best objection is that the required-revenue figure is an accounting construct built on assumed margins, and that chips last for years, so a shortfall in any single year does not prove the money is lost.",
+      "rests_on": [
+       {
+        "href": "/indicators/capex_to_revenue_stack",
+        "id": "capex_to_revenue_stack",
+        "name": "Hyperscaler capex to AI revenue (trailing year)"
+       },
+       {
+        "href": "/indicators/cloud_rpo_backlog",
+        "id": "cloud_rpo_backlog",
+        "name": "Cloud backlog (remaining performance obligations)"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "AI's revenue falls far short of what the spending on it needs to repay.",
      "reading": null,
@@ -4337,6 +5947,27 @@
       "metr_horizon_50",
       "margin_stack_semis_share"
      ],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "The claim was that AI cannot solve problems hard enough to justify its cost, tested over a window to 2029. The length of software tasks that models can finish has been growing very quickly and lab revenue has followed, which points towards the returns arriving within the window even if late. The strongest evidence for Covello is that careful trials still find no speed-up for experienced developers and the labs recoup well under what they spend, so the returns are not yet proven and chip makers still take most of the profit.",
+      "rests_on": [
+       {
+        "href": "/indicators/metr_horizon_50",
+        "id": "metr_horizon_50",
+        "name": "METR 50% time horizon"
+       },
+       {
+        "href": "/indicators/dev_rct_uplift",
+        "id": "dev_rct_uplift",
+        "name": "Developer productivity uplift (METR RCTs)"
+       },
+       {
+        "href": "/indicators/margin_stack_semis_share",
+        "id": "margin_stack_semis_share",
+        "name": "Semiconductors' share of stack operating income"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "AI costs too much for the problems it can solve today.",
      "reading": null,
@@ -4358,6 +5989,22 @@
       "epoch_training_compute_growth",
       "epoch_training_power_growth"
      ],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "Power draw is growing far more slowly than training compute, and each larger site takes longer to permit, power and build, so a date in the early to middle of the next decade looks more likely than 2030. The test counts all the compute one developer operates, which is easier than one site, and the largest developers have signed commitments of roughly that size, so the milestone could land a few years before 2035. That is the main risk to this lean: the direction of the delay looks right, the exact year less so.",
+      "rests_on": [
+       {
+        "href": "/indicators/epoch_training_power_growth",
+        "id": "epoch_training_power_growth",
+        "name": "Training power draw growth (doubling time)"
+       },
+       {
+        "href": "/indicators/epoch_training_compute_growth",
+        "id": "epoch_training_compute_growth",
+        "name": "Frontier training compute growth (doubling time)"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "Yafah Edelman and Anson Ho of Epoch AI argue that longer data-centre build times push the first trillion-dollar AI compute cluster from about 2030 back to about 2035.",
      "reading": null,
@@ -4380,6 +6027,22 @@
       "cloud_rpo_backlog",
       "circular_financing_scale"
      ],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "The call wins only if the ratio of cloud capital spending to AI revenue has not come down to low single figures by early 2031. On the site's broader measure it is already much lower than Tunguz's figure and falling, cloud margins have held, and backlogs are at records. Over that long a window either revenue catches up or the spending is cut, and both lower the ratio. The point in his favour is that the cloud firms do not disclose AI revenue cleanly, so a narrow count could stay high for a long time.",
+      "rests_on": [
+       {
+        "href": "/indicators/cloud_segment_margins",
+        "id": "cloud_segment_margins",
+        "name": "Cloud segment operating margins"
+       },
+       {
+        "href": "/indicators/cloud_rpo_backlog",
+        "id": "cloud_rpo_backlog",
+        "name": "Cloud backlog (remaining performance obligations)"
+       }
+      ]
+     },
      "kind": "ledger",
      "line": "The largest cloud companies spend many times more on AI buildings and chips than AI earns.",
      "reading": null,
@@ -4398,6 +6061,11 @@
      "href": "/outlook#claim-ads_pay",
      "id": "ads_pay",
      "indicators": [],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "This rests on general knowledge rather than a site reading. The largest free assistants have already begun showing adverts and shopping links, and free users are too many and too costly to serve to be funded by subscribers alone. Whether an advert in an assistant earns as much per user as one in search is unproven, and a loss of trust that drives users to paid or rival products is the real danger to the call.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "Advertising comes to pay for free AI assistants, because they can spot what people want to buy before search does, though keeping users' trust will be hard.",
      "reading": null,
@@ -4419,6 +6087,11 @@
      "href": "/outlook#claim-apps_squeezed",
      "id": "apps_squeezed",
      "indicators": [],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "This rests on general knowledge of the coding and agent start-ups. Several of them did see margins thin or turn negative as heavy users burned more tokens, which is what Larson describes. Since then the leading ones have raised prices, moved to usage-based plans, routed work to cheaper models and trained their own, and large buyers get volume discounts from the labs, which is one of the stated ways the claim fails. The risk to this lean is that agents doing longer tasks raise token use per customer faster than prices fall.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "Apps that resell the labs' models see their margins shrink as their use grows.",
      "reading": null,
@@ -4441,6 +6114,17 @@
      "indicators": [
       "circular_financing_scale"
      ],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "The site's count of circular financing is very large and still rising, and the leading chip maker has taken stakes in labs and smaller clouds and backed their capacity, which gives it a say over who gets chips. That practice looks set to continue while supply is short and its cash pile grows. The weakness is the test itself: almost all of its revenue is still plain hardware sales, and the stakes are equity rather than a share of customers' income, so a strict reading could go against Hobart.",
+      "rests_on": [
+       {
+        "href": "/indicators/circular_financing_scale",
+        "id": "circular_financing_scale",
+        "name": "Circular financing scale"
+       }
+      ]
+     },
      "kind": "outlook",
      "line": "NVIDIA keeps financing its own customers in return for a share of their income, and uses such deals to gain a say over who gets computing capacity.",
      "reading": null,
@@ -4462,6 +6146,11 @@
      "href": "/outlook#claim-chips_stored",
      "id": "chips_stored",
      "indicators": [],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "This rests on general knowledge. Power and building shells, not chips, have become the binding shortage, and at least one large cloud chief has already said publicly that chips were waiting for powered space. As chip output keeps rising faster than grid connections, more of this is likely. The counterpoint is that chips lose value quickly, so buyers have every reason to delay orders or redirect them to sites that are ready rather than let them sit.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "The cloud companies start storing new chips instead of installing them, the sign Cahn watches for that data centres are running late [cite:cahn_2025].",
      "reading": null,
@@ -4484,6 +6173,17 @@
      "indicators": [
       "rl_environment_vendor_count"
      ],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "The number of active sellers of training environments in the site's directory is still rising, and labs deliberately spread purchases across many specialists by field of expertise. Nothing so far suggests one or two sellers handling most of what the frontier labs buy. The strongest point against is that the largest expert-data firms are growing much faster than the rest, and labs may bring more of this work in-house or buy the sellers, which would thin the field.",
+      "rests_on": [
+       {
+        "href": "/indicators/rl_environment_vendor_count",
+        "id": "rl_environment_vendor_count",
+        "name": "Active RL-environment vendors (directory count)"
+       }
+      ]
+     },
      "kind": "outlook",
      "line": "The market for training data stays split among many specialist sellers rather than gathering around one or two.",
      "reading": null,
@@ -4501,9 +6201,34 @@
     {
      "attribution": "author",
      "folio": "value",
+     "href": "/outlook#claim-edge_floor",
+     "id": "edge_floor",
+     "indicators": [],
+     "kind": "outlook",
+     "line": "Work that must be decided faster than a message can reach a data centre, or on little power, is run on the spot, whoever holds the knowledge.",
+     "reading": null,
+     "row": null,
+     "settles": "Time-critical work such as driving and industrial control moving to distant data centres as networks improve.",
+     "sources": [
+      "https://hypersoren.xyz/posts/hayeks-revenge/"
+     ],
+     "stage": null,
+     "state": "untestable",
+     "test": null,
+     "who": "Soren Larson",
+     "word": "too_early"
+    },
+    {
+     "attribution": "author",
+     "folio": "value",
      "href": "/outlook#claim-edge_inference",
      "id": "edge_inference",
      "indicators": [],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "This rests on general knowledge. Small models keep getting better and some simple work, such as dictation and autocomplete, does run on phones and laptops. But the everyday uses that are growing fastest are long agent tasks and search-backed answers, which need the largest models and far more memory than personal devices have. The best case for Paik is that privacy and cost push routine requests onto devices once small open models are good enough for most of them.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "Much of AI's everyday work moves out of distant data centres onto people's own phones and laptops.",
      "reading": null,
@@ -4527,6 +6252,22 @@
       "lab_gross_margin",
       "lab_recoupment_ratio"
      ],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "The estimated gross margin of the frontier labs sits far below that of classic software, and the labs recoup well under what they spend. Both readings are old or rough, and the main drag today is the cost of compute rather than deployment staff, so Hobart's mechanism is only part of the story. Still, the labs are hiring engineers to work inside customers at pace, and the claim fails only if labs report software-like margins while doing so, which looks unlikely for some years.",
+      "rests_on": [
+       {
+        "href": "/indicators/lab_gross_margin",
+        "id": "lab_gross_margin",
+        "name": "Frontier lab gross margin (estimated)"
+       },
+       {
+        "href": "/indicators/lab_recoupment_ratio",
+        "id": "lab_recoupment_ratio",
+        "name": "Lab recoupment ratio"
+       }
+      ]
+     },
      "kind": "outlook",
      "line": "The labs' margins are pulled down because the staff who deploy their models grow with their customers, which a pure software business avoids.",
      "reading": null,
@@ -4547,6 +6288,11 @@
      "href": "/outlook#claim-lab_owns_services_firm",
      "id": "lab_owns_services_firm",
      "indicators": [],
+     "judgement": {
+      "lean": "likely_true",
+      "reason": "This rests on general knowledge of press reports, not a site reading. In 2026 the two leading labs each launched a deployment and services venture with private-equity backers, one of them under the lab's own name, and each venture has since bought a consultancy. On the launch wording the forecast looks close to met already, with two years left. The doubt is ownership: at least one lab is reported to hold only a minority of its venture, and whether either holds a majority is not established, so a strict reading that demands control could still go the other way.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "A frontier lab launches or majority-owns a professional services firm, under its own brand or at arm's length, by September 2028.",
      "reading": null,
@@ -4564,11 +6310,40 @@
     {
      "attribution": "site",
      "folio": "value",
+     "href": "/outlook#claim-lab_runs_operations",
+     "id": "lab_runs_operations",
+     "indicators": [],
+     "kind": "outlook",
+     "line": "A frontier lab, or a company it controls, comes to own an ordinary operating business in a licensed trade by the end of 2028.",
+     "reading": null,
+     "row": null,
+     "settles": "2028-12-31",
+     "sources": [],
+     "stage": null,
+     "state": "untestable",
+     "test": null,
+     "who": "This site",
+     "word": "too_early"
+    },
+    {
+     "attribution": "site",
+     "folio": "value",
      "href": "/outlook#claim-labs_buy_exits",
      "id": "labs_buy_exits",
      "indicators": [
       "lab_vertical_integration_exit_bell"
      ],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "The site's count of purchases and team hires by labs and compute companies over the trailing year rose at each of the last three readings, and public listings remain rare for small data and tooling firms. Extending that rise even modestly makes being bought the common way out. The caveats are real: part of the rise reflects a more thorough search, one buyer accounts for much of it, and a funding squeeze at the labs would stop the buying quickly.",
+      "rests_on": [
+       {
+        "href": "/indicators/lab_vertical_integration_exit_bell",
+        "id": "lab_vertical_integration_exit_bell",
+        "name": "Lab vertical integration (acquisitions and acquihires, trailing four quarters)"
+       }
+      ]
+     },
      "kind": "outlook",
      "line": "Being bought by a lab or a compute company becomes the usual way out for the start-ups that sell them data and tools.",
      "reading": {
@@ -4649,6 +6424,22 @@
       "expert_data_market_run_rate",
       "lab_procurement_signal"
      ],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "The labs are plainly buying more from the layer that supplies training inputs, and the expert-data market has grown very quickly. Records of real work from leading applications are scarcer and harder to copy than generic practice environments, whose sellers keep multiplying, which usually means falling prices. The main doubt is whether leading app companies will sell their records at all, since many see them as their own advantage against the labs.",
+      "rests_on": [
+       {
+        "href": "/indicators/expert_data_market_run_rate",
+        "id": "expert_data_market_run_rate",
+        "name": "Expert-data market run-rate (Mercor)"
+       },
+       {
+        "href": "/indicators/lab_procurement_signal",
+        "id": "lab_procurement_signal",
+        "name": "Labs buying from the training-input layer (enter bell)"
+       }
+      ]
+     },
      "kind": "outlook",
      "line": "Labs buy more of their training data straight from leading app companies and specialists, squeezing the firms that sell general practice environments.",
      "reading": null,
@@ -4669,6 +6460,11 @@
      "href": "/outlook#claim-labs_by_industry",
      "id": "labs_by_industry",
      "indicators": [],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "This rests on general knowledge. The labs do differ, with some stronger in coding and business use and others with consumers, but those differences come from product focus and model quality, not from purchased business records. General models have so far kept beating specialist ones in fields such as law and medicine. Hobart hedged the claim with a may, and it could still come true if exclusive data deals in a regulated trade give one lab a lasting edge there.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "The leading labs may pull apart by industry, each strongest where it has bought the most specialist business records.",
      "reading": null,
@@ -4689,6 +6485,11 @@
      "href": "/outlook#claim-lead_changes",
      "id": "lead_changes",
      "indicators": [],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "This rests on general knowledge. Over the past two years the top place on the main measures has passed back and forth among three labs, sometimes within months, and no lab has held it for several years running. Compute split between serving customers and training the next model is a fair account of why. The risk is that AI doing its own research lets one lab compound a lead, which is exactly what the labs themselves are betting on.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "The lab with the best model keeps changing, because the leader uses its chips to serve its popular model while rivals train the next one.",
      "reading": null,
@@ -4709,6 +6510,11 @@
      "href": "/outlook#claim-link_overshoots",
      "id": "link_overshoots",
      "indicators": [],
+     "judgement": {
+      "lean": "likely_true",
+      "reason": "This rests on general knowledge of how supply chains behave. The claim needs only one squeezed part to turn, and memory, older chips for rent and optical parts all have long histories of shortage followed by glut once new plants open. Rental prices for older chips have already eased at times. The claim would fail only if every scarce link stayed scarce, which would be without precedent in semiconductors.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "Somewhere along the chip supply chain, a part AI has made scarce proves easier to expand than expected, and its price turns.",
      "reading": null,
@@ -4729,6 +6535,11 @@
      "href": "/outlook#claim-lock_in",
      "id": "lock_in",
      "indicators": [],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "This rests on general knowledge. The largest consumer lab already earns most of its revenue from subscriptions, and the labs are pushing coding tools, seats and deployment by their own engineers because margins and loyalty are better there. The counterweight is that agents consume enormous volumes of tokens, so metered access could keep growing as fast as products do, and much product revenue is itself billed by use. This is a claim about where revenue comes from, not about customers being tied down, which is judged separately.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "The labs earn a growing share of their revenue from products and deployments inside their customers' firms rather than from selling access to their models by the token.",
      "reading": null,
@@ -4751,6 +6562,17 @@
      "indicators": [
       "enterprise_multi_homing_share"
      ],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "The only site reading on firms using more than one model is several years old, so this rests mostly on general knowledge. Businesses routinely route work across several labs, switching a model behind an application takes little effort, and bans on copying models have proved hard to enforce. This sits alongside the view that labs earn more from products: product revenue can grow without binding customers. The strongest point against is that memory, stored context and workflow tools built around one lab raise the cost of leaving over time.",
+      "rests_on": [
+       {
+        "href": "/indicators/enterprise_multi_homing_share",
+        "id": "enterprise_multi_homing_share",
+        "name": "Enterprise multi-model usage share (Menlo)"
+       }
+      ]
+     },
      "kind": "outlook",
      "line": "Labs' efforts to tie customers down, through exclusive deals and bans on copying their models, eventually fail, and moving between labs stays cheap.",
      "reading": null,
@@ -4774,6 +6596,11 @@
      "indicators": [
       "enterprise_multi_homing_share"
      ],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "This rests mostly on general knowledge. Buyers still choose models on quality, speed, reliability and the kinds of input handled, and pay large premiums for the best one in coding, which is not how anyone buys electricity. The case against is that for routine tasks many models are now good enough, and that part of the market already buys on price alone.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "Models keep differing in efficiency and in the kinds of input they handle, so they do not become an interchangeable utility like electricity.",
      "reading": null,
@@ -4797,6 +6624,17 @@
      "indicators": [
       "open_vs_closed_gap"
      ],
+     "judgement": {
+      "lean": "leans_false",
+      "reason": "The gap between open and closed models is small on the site's index, yet businesses' use of open models has stayed a small share, because renting the frontier is easier and general models improve faster than a firm can retrain its own. Supplying a model with a firm's documents at the moment of use has largely replaced training on them. Every firm is a very strong claim. It could yet come true in a looser sense if cheap tuning becomes a standard feature that the labs offer on their own models.",
+      "rests_on": [
+       {
+        "href": "/indicators/open_vs_closed_gap",
+        "id": "open_vs_closed_gap",
+        "name": "Open-weights gap to the closed frontier (ECI points)"
+       }
+      ]
+     },
      "kind": "outlook",
      "line": "Every firm ends up with a model of its own, trained on its own work.",
      "reading": null,
@@ -4817,6 +6655,11 @@
      "href": "/outlook#claim-records_gain",
      "id": "records_gain",
      "indicators": [],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "This rests on general knowledge. Agents need an authoritative store of customers, money and staff to act on, and firms very rarely rip out such systems, so their customer losses should stay lower than those of lighter tools that an agent can rebuild. The strongest evidence against is that investors marked down record-keeping software alongside everything else in 2026, fearing that agents turn it into a cheap database beneath someone else's product.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "Coding agents slow new firms' purchases of ready-made software but make the programs that hold a business's core records worth more.",
      "reading": null,
@@ -4837,6 +6680,11 @@
      "href": "/outlook#claim-rent_surplus",
      "id": "rent_surplus",
      "indicators": [],
+     "judgement": {
+      "lean": "likely_true",
+      "reason": "This rests on general knowledge. The largest technology firms already rent large amounts of computing to labs that compete with their own models, and at least one lab now rents from a rival model maker. The claim fails only if the big firms keep all their capacity for themselves, which is the opposite of what they are doing. Whether the capacity is truly spare, rather than built to order for those tenants, is the part that remains open.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "The largest technology firms build more computing than they need and rent the spare to rivals, so the industry becomes one shared bet on demand for AI.",
      "reading": null,
@@ -4859,6 +6707,17 @@
      "indicators": [
       "open_vs_closed_gap"
      ],
+     "judgement": {
+      "lean": "likely_false",
+      "reason": "Open models trail the closed frontier only narrowly on the site's index, yet most businesses still rent, because running models well needs scarce chips, power and skilled staff, and rented models improve without effort from the buyer. Most businesses do not even run their own email servers. The exceptions are real: defence, banks and firms in countries wary of foreign suppliers will host their own, but they are a minority.",
+      "rests_on": [
+       {
+        "href": "/indicators/open_vs_closed_gap",
+        "id": "open_vs_closed_gap",
+        "name": "Open-weights gap to the closed frontier (ECI points)"
+       }
+      ]
+     },
      "kind": "outlook",
      "line": "Most businesses end up running models on machines they control rather than renting a lab's.",
      "reading": null,
@@ -4872,11 +6731,36 @@
      "word": "too_early"
     },
     {
+     "attribution": "author",
+     "folio": "value",
+     "href": "/outlook#claim-sensing_owns",
+     "id": "sensing_owns",
+     "indicators": [],
+     "kind": "outlook",
+     "line": "A model of a firm's own pays only where the firm senses something no one else can; elsewhere a system trained on many firms' results does better.",
+     "reading": null,
+     "row": null,
+     "settles": "Systems tuned on a firm's own history beating pooled ones in trades where no firm senses anything scarce. The only evidence so far is its author's own simulation.",
+     "sources": [
+      "https://hypersoren.xyz/posts/router-power/"
+     ],
+     "stage": null,
+     "state": "untestable",
+     "test": null,
+     "who": "Soren Larson",
+     "word": "too_early"
+    },
+    {
      "attribution": "site",
      "folio": "value",
      "href": "/outlook#claim-states_buy_in",
      "id": "states_buy_in",
      "indicators": [],
+     "judgement": {
+      "lean": "likely_true",
+      "reason": "This rests on general knowledge. Governments have already taken equity in a leading chip maker and in suppliers of critical minerals, and state-owned funds in the Gulf and Asia hold stakes in labs and data-centre builders. The trend is towards more of this as AI is treated as a strategic industry. The claim would fail only if states went back to being lenders and customers alone, and a change of government could slow new stakes but would not undo existing ones.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "Governments take direct stakes in the companies that make chips, power and models.",
      "reading": null,
@@ -4897,6 +6781,17 @@
      "indicators": [
       "consumer_surplus_wta"
      ],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "The test is whether AI firms' profits grow as fast as the value users get. In level, users are far ahead: the survey estimate of user value for one country alone is large and rising, while the labs make losses and competition among several similar models keeps prices down. What cuts the other way is that chip makers' profits have lately grown at least as fast as the survey estimate, so a strict reading of the growth test could go against the claim, and a single lab pulling ahead could price accordingly. This differs from the site's other test on user value, which sets one country's consumer survey against worldwide revenue, a far easier bar for sellers to clear.",
+      "rests_on": [
+       {
+        "href": "/indicators/consumer_surplus_wta",
+        "id": "consumer_surplus_wta",
+        "name": "Consumer surplus from generative AI (willingness to accept)"
+       }
+      ]
+     },
      "kind": "outlook",
      "line": "The people who use AI keep far more of its value than the firms that make it.",
      "reading": null,
@@ -4917,6 +6812,11 @@
      "href": "/outlook#claim-tasks_distilled",
      "id": "tasks_distilled",
      "indicators": [],
+     "judgement": {
+      "lean": "leans_true",
+      "reason": "This rests on general knowledge. Once a narrow task is done reliably, firms move it to small cheap models or to ordinary code written by an agent, and the price of a given level of capability has fallen steeply every year. Spending on that task then stops growing. What keeps total spending rising is that cheaper tasks get run far more and new harder tasks keep arriving, so the pattern may be hard to see outside individual tasks.",
+      "rests_on": []
+     },
      "kind": "outlook",
      "line": "Much narrow work AI does is turned into cheap fixed routines, so spending on each such task rises for a while and then stops.",
      "reading": null,
@@ -4932,7 +6832,47 @@
      "word": "too_early"
     }
    ],
-   "too_early": 33
+   "too_early": 36
+  }
+ ],
+ "judged": {
+  "date": "2026-10-05",
+  "method": "One model read each forecast with what would settle it, this site's readings and their history, and the evidence against, extended a trend where a reading had one, and gave a lean and a reason. Forecasts were judged in groups so that related ones stay consistent.",
+  "model": "claude-opus-5-5",
+  "reviewed_by": "separate reviewing runs of the same model, which changed some leans and reasons and withdrew one judgement; no person reviewed each one",
+  "tally": {
+   "leans_false": 47,
+   "leans_true": 53,
+   "likely_false": 22,
+   "likely_true": 17,
+   "toss_up": 8
+  }
+ },
+ "leans": [
+  {
+   "id": "likely_true",
+   "label": "likely true",
+   "meaning": "The model expects this to happen as stated."
+  },
+  {
+   "id": "leans_true",
+   "label": "leans true",
+   "meaning": "More likely than not, on the trend or the evidence so far."
+  },
+  {
+   "id": "toss_up",
+   "label": "toss-up",
+   "meaning": "No basis to lean either way."
+  },
+  {
+   "id": "leans_false",
+   "label": "leans false",
+   "meaning": "More likely not, on the trend or the evidence so far."
+  },
+  {
+   "id": "likely_false",
+   "label": "likely false",
+   "meaning": "The model expects this not to happen as stated."
   }
  ],
  "mapping": [
@@ -5027,7 +6967,7 @@
    "word": "too_early"
   }
  ],
- "n": 204,
+ "n": 216,
  "questions": [
   {
    "href": "/indicators/arc_agi_frontier",
@@ -5096,11 +7036,11 @@
   }
  ],
  "tally": {
-  "both": 11,
-  "happening": 29,
+  "both": 13,
+  "happening": 30,
   "not_happening": 5,
   "slower": 11,
-  "too_early": 148
+  "too_early": 157
  },
  "words": [
   {

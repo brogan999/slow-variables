@@ -24,36 +24,32 @@
   ],
   "kept_by_incumbents": 4,
   "records": 20,
-  "unmapped": 3
+  "unmapped": 0
  },
  "opportunities": [
   {
-   "acquirers": "",
+   "acquirers": "Payment and billing platforms that want to settle agent work, and evaluation firms moving from testing models to checking live results. The labs buy evaluation and testing teams (OpenAI took on Context.ai's team and bought Promptfoo; Anthropic took on Humanloop's), though a checker owned by a model seller loses the independence buyers pay for",
    "adjacent": [
     {
      "id": "settlement_and_billing",
-     "n_entities": 2,
+     "n_entities": 5,
      "name": "Settlement and billing",
      "number": "5.5"
     },
     {
      "id": "reward_and_verification_systems",
-     "n_entities": 6,
+     "n_entities": 7,
      "name": "Reward and verification systems",
      "number": "3.6"
     },
     {
      "id": "managed_ai_operations",
-     "n_entities": 0,
+     "n_entities": 1,
      "name": "Managed AI operations",
      "number": "6.3"
     }
    ],
-   "blank": [
-    "prerequisites",
-    "acquirers",
-    "next action"
-   ],
+   "blank": [],
    "bottleneck": "Nobody can cheaply prove that an agent finished a task correctly, so buyers keep humans checking every result",
    "builds_on": [
     {
@@ -69,20 +65,27 @@
    ],
    "customer": "Operations leaders who pay for agent work and must show it was done right",
    "durable_asset": "The definition of done for each workflow, and a record of how often agents pass and fail that grows more useful with every buyer",
-   "examples": [],
+   "examples": [
+    "Bluejay",
+    "Cekura",
+    "Coval",
+    "Hamming AI",
+    "Judgment Labs",
+    "Raindrop"
+   ],
    "falsifier": "Agents become cheap and reliable at checking their own work, so buyers stop paying for an outside check",
    "id": "outcome_verification",
-   "n_more_examples": 0,
+   "n_more_examples": 2,
    "name": "Outcome verification with pay-per-verified-result billing",
-   "next_action": "",
+   "next_action": "Pick one workflow with a customer who will share its records, write its definition of done, and run the check beside the people who do it now to see how often the two disagree",
    "none_independent": false,
    "powers": [
     "network economies"
    ],
-   "prerequisites": "",
+   "prerequisites": "A buyer who already pays for agent work by the task, and a workflow whose finished result can be checked against records the buyer holds",
    "primary": {
     "id": "outcome_verification",
-    "n_entities": 0,
+    "n_entities": 8,
     "name": "Outcome verification",
     "number": "5.4"
    },
@@ -101,30 +104,27 @@
    "rent_reason": "The failure record grows more useful with each buyer, but the checking method itself is easy to copy",
    "see_also": null,
    "unit_sold": "A verified outcome",
-   "unmapped": true,
+   "unmapped": false,
    "wedge": "Check one high-volume workflow end to end and bill only for results that pass",
    "why_not_bundled": "A buyer wants the checker to be independent of whoever sold the agent"
   },
   {
-   "acquirers": "",
+   "acquirers": "Audit and testing firms that already sign off regulated work, and insurers that need the tests to price cover. A lab is the wrong owner, since the value is that the tester does not sell the model",
    "adjacent": [
     {
      "id": "liability_and_risk_transfer",
-     "n_entities": 1,
+     "n_entities": 4,
      "name": "Liability and risk transfer",
      "number": "5.6"
     },
     {
      "id": "provenance_and_audit",
-     "n_entities": 0,
+     "n_entities": 9,
      "name": "Provenance and audit",
      "number": "5.3"
     }
    ],
-   "blank": [
-    "acquirers",
-    "next action"
-   ],
+   "blank": [],
    "bottleneck": "Regulated firms cannot use a model until someone other than the seller vouches for it",
    "builds_on": [
     {
@@ -150,9 +150,9 @@
    ],
    "falsifier": "Regulators accept the labs' own testing, or no regulator requires an outside sign-off",
    "id": "regulated_assurance",
-   "n_more_examples": 9,
+   "n_more_examples": 10,
    "name": "Independent sign-off for AI in regulated work",
-   "next_action": "",
+   "next_action": "Choose one regulated task, build the private test suite with one insurer or regulator at the table, and get its acceptance in writing",
    "none_independent": false,
    "powers": [
     "branding"
@@ -160,7 +160,7 @@
    "prerequisites": "One regulator or insurer willing to recognise the tests",
    "primary": {
     "id": "evals_and_assurance",
-    "n_entities": 16,
+    "n_entities": 17,
     "name": "Evals and assurance",
     "number": "3.8"
    },
@@ -184,31 +184,28 @@
    "why_not_bundled": "The whole value is that the tester does not sell the model"
   },
   {
-   "acquirers": "",
+   "acquirers": "Labs and the clouds that host training, which have been buying post-training teams (CoreWeave agreed to buy OpenPipe, Anthropic bought Runhouse, and Thinking Machines Lab took on Workshop Labs' team)",
    "adjacent": [
     {
      "id": "data_transformation",
-     "n_entities": 11,
+     "n_entities": 12,
      "name": "Data transformation",
      "number": "3.3"
     },
     {
      "id": "evals_and_assurance",
-     "n_entities": 16,
+     "n_entities": 17,
      "name": "Evals and assurance",
      "number": "3.8"
     },
     {
      "id": "context_engineering",
-     "n_entities": 0,
+     "n_entities": 6,
      "name": "Context engineering",
      "number": "6.2"
     }
    ],
-   "blank": [
-    "acquirers",
-    "next action"
-   ],
+   "blank": [],
    "bottleneck": "Everyday work leaves no reusable signal, so models stop improving once deployed",
    "builds_on": [
     {
@@ -231,7 +228,7 @@
    "id": "continual_learning_in_customer",
    "n_more_examples": 13,
    "name": "A model that keeps learning inside one customer's work",
-   "next_action": "",
+   "next_action": "Run one customer's workflow for a quarter and show the tuned model beating the newest general model on that customer's own test set",
    "none_independent": false,
    "powers": [
     "switching costs"
@@ -263,32 +260,28 @@
    "why_not_bundled": "The customer's record helps only that customer, so a lab has little reason to build it for each one"
   },
   {
-   "acquirers": "",
+   "acquirers": "Identity providers, payment networks and the large platforms whose marketplaces agents enter. Stripe's agreement to buy OpenRouter shows a payments firm buying its way into the traffic between software and models",
    "adjacent": [
     {
      "id": "provenance_and_audit",
-     "n_entities": 0,
+     "n_entities": 9,
      "name": "Provenance and audit",
      "number": "5.3"
     },
     {
      "id": "settlement_and_billing",
-     "n_entities": 2,
+     "n_entities": 5,
      "name": "Settlement and billing",
      "number": "5.5"
     },
     {
      "id": "tools_and_actuation",
-     "n_entities": 10,
+     "n_entities": 13,
      "name": "Tools and actuation",
      "number": "4.6"
     }
    ],
-   "blank": [
-    "prerequisites",
-    "acquirers",
-    "next action"
-   ],
+   "blank": [],
    "bottleneck": "A counterparty cannot tell which agent acts for whom, and under what limits",
    "builds_on": [
     {
@@ -309,17 +302,17 @@
    ],
    "falsifier": "Agents keep acting inside human sessions, so no separate agent identity is needed",
    "id": "agent_authority_registry",
-   "n_more_examples": 2,
+   "n_more_examples": 4,
    "name": "Know-your-agent and delegated-authority registry",
-   "next_action": "",
+   "next_action": "Sign one platform, issue credentials to its partners' agents, and publish the record of credentials revoked",
    "none_independent": false,
    "powers": [
     "network economies"
    ],
-   "prerequisites": "",
+   "prerequisites": "One large platform that will require the credential from the agents it admits, and a way to tie each agent to the person or firm answerable for it",
    "primary": {
     "id": "identity_and_authority",
-    "n_entities": 9,
+    "n_entities": 11,
     "name": "Identity and authority",
     "number": "5.2"
    },
@@ -343,32 +336,28 @@
    "why_not_bundled": "Each lab issuing its own identities leaves no neutral register that counterparties across labs trust"
   },
   {
-   "acquirers": "",
+   "acquirers": "Security and compliance software vendors, firms that monitor running models, and the audit firms themselves",
    "adjacent": [
     {
      "id": "identity_and_authority",
-     "n_entities": 9,
+     "n_entities": 11,
      "name": "Identity and authority",
      "number": "5.2"
     },
     {
      "id": "security",
-     "n_entities": 8,
+     "n_entities": 16,
      "name": "Security",
      "number": "5.1"
     },
     {
      "id": "evals_and_assurance",
-     "n_entities": 16,
+     "n_entities": 17,
      "name": "Evals and assurance",
      "number": "3.8"
     }
    ],
-   "blank": [
-    "prerequisites",
-    "acquirers",
-    "next action"
-   ],
+   "blank": [],
    "bottleneck": "After an agent acts, nobody can reconstruct what it saw, decided and changed",
    "builds_on": [
     {
@@ -379,20 +368,27 @@
    ],
    "customer": "Compliance teams and auditors at firms that let agents act",
    "durable_asset": "Years of audit history that cannot be moved without breaking the trail",
-   "examples": [],
+   "examples": [
+    "Credo AI",
+    "EQTY Lab",
+    "Monitaur",
+    "OpenBox AI",
+    "OpenOrigins",
+    "Saidot"
+   ],
    "falsifier": "Regulators accept each vendor's own logs",
    "id": "agent_audit_trail",
-   "n_more_examples": 0,
+   "n_more_examples": 3,
    "name": "Tamper-proof audit trail for what agents did",
-   "next_action": "",
+   "next_action": "Log one regulated workflow end to end and have an outside auditor reconstruct a decision from the log alone",
    "none_independent": false,
    "powers": [
     "switching costs"
    ],
-   "prerequisites": "",
+   "prerequisites": "Agents that act through connections which can be logged, and an auditor or regulator willing to say what record it will accept",
    "primary": {
     "id": "provenance_and_audit",
-    "n_entities": 0,
+    "n_entities": 9,
     "name": "Provenance and audit",
     "number": "5.3"
    },
@@ -411,36 +407,33 @@
    "rent_reason": "Years of audit history are costly to leave, though the logging itself is easy to copy",
    "see_also": null,
    "unit_sold": "Logged agent actions, priced per seat of the audited team",
-   "unmapped": true,
+   "unmapped": false,
    "wedge": "A decision log for one regulated workflow that auditors accept",
    "why_not_bundled": "The log is only credible if the agent's maker cannot edit it"
   },
   {
-   "acquirers": "",
+   "acquirers": "Insurers, reinsurers and brokers that want the loss record, and agent vendors that want to sell with cover attached",
    "adjacent": [
     {
      "id": "outcome_verification",
-     "n_entities": 0,
+     "n_entities": 8,
      "name": "Outcome verification",
      "number": "5.4"
     },
     {
      "id": "evals_and_assurance",
-     "n_entities": 16,
+     "n_entities": 17,
      "name": "Evals and assurance",
      "number": "3.8"
     },
     {
      "id": "provenance_and_audit",
-     "n_entities": 0,
+     "n_entities": 9,
      "name": "Provenance and audit",
      "number": "5.3"
     }
    ],
-   "blank": [
-    "acquirers",
-    "next action"
-   ],
+   "blank": [],
    "bottleneck": "Agent failures cannot be priced, so procurement stalls or insurers exclude them",
    "builds_on": [
     {
@@ -452,13 +445,16 @@
    "customer": "Firms buying agents for consequential work, and the insurers who cover them",
    "durable_asset": "The record of losses that prices the next policy better than any newcomer can",
    "examples": [
-    "Mitigata"
+    "AIUC",
+    "Armilla AI",
+    "Mitigata",
+    "Munich Re (aiSure)"
    ],
    "falsifier": "Courts put agent losses on the model makers, so buyers need no separate cover",
    "id": "ai_warranty",
    "n_more_examples": 0,
    "name": "AI warranty backed by a pool of loss data",
-   "next_action": "",
+   "next_action": "Write one warranty on one agent product with a reinsurer behind it, and start the loss record with every claim and near miss",
    "none_independent": false,
    "powers": [
     "a cornered resource"
@@ -466,7 +462,7 @@
    "prerequisites": "A capacity partner willing to carry the risk",
    "primary": {
     "id": "liability_and_risk_transfer",
-    "n_entities": 1,
+    "n_entities": 4,
     "name": "Liability and risk transfer",
     "number": "5.6"
    },
@@ -490,26 +486,22 @@
    "why_not_bundled": "A lab standing behind its own mistakes is a conflict buyers discount"
   },
   {
-   "acquirers": "",
+   "acquirers": "Human-data vendors, labs and the networks that sit between publishers and models. Meta took a large stake in Scale AI, Mercor bought Deeptune, and Cloudflare bought the data marketplace Human Native",
    "adjacent": [
     {
      "id": "reward_and_verification_systems",
-     "n_entities": 6,
+     "n_entities": 7,
      "name": "Reward and verification systems",
      "number": "3.6"
     },
     {
      "id": "evals_and_assurance",
-     "n_entities": 16,
+     "n_entities": 17,
      "name": "Evals and assurance",
      "number": "3.8"
     }
    ],
-   "blank": [
-    "prerequisites",
-    "acquirers",
-    "next action"
-   ],
+   "blank": [],
    "bottleneck": "Expert data is made to order and belongs to the buyer, so the seller keeps nothing when the job ends",
    "builds_on": [
     {
@@ -523,24 +515,24 @@
    "examples": [
     "Mercor",
     "Prolific",
+    "Bee Maps",
     "Datacurve",
     "Handshake AI",
-    "Invisible Technologies",
-    "Lila Sciences"
+    "Human Archive"
    ],
    "falsifier": "Labs bring expert work in-house and stop buying outside records",
    "id": "pooled_expert_records",
-   "n_more_examples": 6,
+   "n_more_examples": 10,
    "name": "Graded expert-work records pooled across buyers",
-   "next_action": "",
+   "next_action": "Build the graded record for one field, license it to two buyers, and show it lifts both their models on a test neither wrote",
    "none_independent": false,
    "powers": [
     "a cornered resource"
    ],
-   "prerequisites": "",
+   "prerequisites": "Experts and their employers agreeing that the grading may be licensed to many buyers, and at least two buyers who accept a shared record",
    "primary": {
     "id": "data_origination",
-    "n_entities": 12,
+    "n_entities": 16,
     "name": "Data origination",
     "number": "3.1"
    },
@@ -564,32 +556,28 @@
    "why_not_bundled": "Labs hire experts directly, but no single lab can grade across the whole market"
   },
   {
-   "acquirers": "",
+   "acquirers": "Payment platforms, clouds and inference hosts. Stripe's agreement to buy OpenRouter is the precedent",
    "adjacent": [
     {
      "id": "compute_utilization_and_control",
-     "n_entities": 8,
+     "n_entities": 10,
      "name": "Compute utilization and control",
      "number": "1.6"
     },
     {
      "id": "inference_optimization",
-     "n_entities": 5,
+     "n_entities": 10,
      "name": "Inference optimization",
      "number": "4.2"
     },
     {
      "id": "outcome_verification",
-     "n_entities": 0,
+     "n_entities": 8,
      "name": "Outcome verification",
      "number": "5.4"
     }
    ],
-   "blank": [
-    "prerequisites",
-    "acquirers",
-    "next action"
-   ],
+   "blank": [],
    "bottleneck": "Each firm guesses which model and venue to use for each task, and pays for the guess",
    "builds_on": [
     {
@@ -617,12 +605,12 @@
    "id": "outcome_router",
    "n_more_examples": 7,
    "name": "A router that chooses models from pooled outcomes",
-   "next_action": "",
+   "next_action": "Route one customer's routine work, show the saving on its bill, and start recording which choices held up",
    "none_independent": false,
    "powers": [
     "network economies"
    ],
-   "prerequisites": "",
+   "prerequisites": "Customers who will report which answers worked, and enough spending across several providers for the saving to matter",
    "primary": {
     "id": "routing_and_gateways",
     "n_entities": 13,
@@ -652,17 +640,17 @@
    "why_not_bundled": "Each lab routes to its own models; a neutral router routes to whichever wins"
   },
   {
-   "acquirers": "",
+   "acquirers": "Payment networks and processors, and the marketplaces where agents trade",
    "adjacent": [
     {
      "id": "identity_and_authority",
-     "n_entities": 9,
+     "n_entities": 11,
      "name": "Identity and authority",
      "number": "5.2"
     },
     {
      "id": "outcome_verification",
-     "n_entities": 0,
+     "n_entities": 8,
      "name": "Outcome verification",
      "number": "5.4"
     },
@@ -673,11 +661,7 @@
      "number": "4.3"
     }
    ],
-   "blank": [
-    "prerequisites",
-    "acquirers",
-    "next action"
-   ],
+   "blank": [],
    "bottleneck": "Agents can find and order work from other agents, but nothing holds the money until the work is proven done",
    "builds_on": [
     {
@@ -689,23 +673,26 @@
    "customer": "Marketplaces and firms whose agents buy services from other agents",
    "durable_asset": "The record of which agents deliver, and the billing and credit that buyers and sellers would lose by leaving",
    "examples": [
+    "Catena Labs",
+    "Paid",
     "ProRata",
+    "Skyfire",
     "TollBit"
    ],
    "falsifier": "Agent-initiated purchases stay a tiny share of payments",
    "id": "agent_payments",
    "n_more_examples": 0,
    "name": "Escrow that pays an agent only when its work passes a check",
-   "next_action": "",
+   "next_action": "Run escrow for one marketplace's agent-to-agent orders and report how many paid out, were disputed or were refunded",
    "none_independent": false,
    "powers": [
     "switching costs",
     "network economies"
    ],
-   "prerequisites": "",
+   "prerequisites": "Agent identity that a payment network accepts, and a check both sides agree on before money moves",
    "primary": {
     "id": "settlement_and_billing",
-    "n_entities": 2,
+    "n_entities": 5,
     "name": "Settlement and billing",
     "number": "5.5"
    },
@@ -729,32 +716,28 @@
    "why_not_bundled": "Card networks move money but do not judge whether the work was done"
   },
   {
-   "acquirers": "",
+   "acquirers": "The labs and clouds, which buy agent tooling (Anthropic bought Stainless, and Nebius agreed to buy Tavily), and the business-software vendors whose systems are being connected",
    "adjacent": [
     {
      "id": "identity_and_authority",
-     "n_entities": 9,
+     "n_entities": 11,
      "name": "Identity and authority",
      "number": "5.2"
     },
     {
      "id": "agent_runtimes",
-     "n_entities": 9,
+     "n_entities": 14,
      "name": "Agent runtimes",
      "number": "4.5"
     },
     {
      "id": "context_and_memory",
-     "n_entities": 18,
+     "n_entities": 20,
      "name": "Context and memory",
      "number": "4.4"
     }
    ],
-   "blank": [
-    "prerequisites",
-    "acquirers",
-    "next action"
-   ],
+   "blank": [],
    "bottleneck": "Every agent needs its own negotiated, audited link into each system a firm runs",
    "builds_on": [
     {
@@ -776,22 +759,22 @@
     "Bland",
     "Browserbase",
     "Composio",
-    "Daily"
+    "Cua"
    ],
    "falsifier": "Labs and clouds ship their own connectors and the record-keepers let them in free",
    "id": "permission_connectors",
-   "n_more_examples": 4,
+   "n_more_examples": 7,
    "name": "The standard way agents get permission into business software",
-   "next_action": "",
+   "next_action": "Ship connectors for one crowded category of business software with permissions and logging built in, and get one vendor to recommend them",
    "none_independent": false,
    "powers": [
     "network economies",
     "switching costs"
    ],
-   "prerequisites": "",
+   "prerequisites": "The vendors that hold the records letting outside agents in, and a permission scheme their security teams accept",
    "primary": {
     "id": "tools_and_actuation",
-    "n_entities": 10,
+    "n_entities": 13,
     "name": "Tools and actuation",
     "number": "4.6"
    },
@@ -815,32 +798,28 @@
    "why_not_bundled": "The software that keeps the records can refuse or charge outside agents, so a neutral standard needs both sides"
   },
   {
-   "acquirers": "",
+   "acquirers": "The labs, which are buying deployment firms (OpenAI agreed to buy Tomoro and Northslope, and Poolside bought Fern Labs), and consultancies and private-equity owners that want the skill in house",
    "adjacent": [
     {
      "id": "context_engineering",
-     "n_entities": 0,
+     "n_entities": 6,
      "name": "Context engineering",
      "number": "6.2"
     },
     {
      "id": "managed_ai_operations",
-     "n_entities": 0,
+     "n_entities": 1,
      "name": "Managed AI operations",
      "number": "6.3"
     },
     {
      "id": "adoption_and_change",
-     "n_entities": 4,
+     "n_entities": 8,
      "name": "Adoption and change",
      "number": "6.4"
     }
    ],
-   "blank": [
-    "prerequisites",
-    "acquirers",
-    "next action"
-   ],
+   "blank": [],
    "bottleneck": "Engineers who can turn messy data and unwritten habits into working systems are scarce",
    "builds_on": [
     {
@@ -860,23 +839,23 @@
     "Anthropic enterprise services venture",
     "Palantir",
     "The OpenAI Deployment Company",
+    "Airbyte",
     "Ampersand Labs",
-    "Artium",
-    "Atlas"
+    "Artium"
    ],
    "falsifier": "Models need so little fitting that self-serve deployment wins",
    "id": "deploy_to_platform",
-   "n_more_examples": 19,
+   "n_more_examples": 23,
    "name": "Deployment that leaves behind the platform the customer runs on",
-   "next_action": "",
+   "next_action": "Do three deployments in one industry and count how much of the third was reused from the first two",
    "none_independent": false,
    "powers": [
     "switching costs"
    ],
-   "prerequisites": "",
+   "prerequisites": "Engineers who can work inside a customer, and first customers alike enough that the second deployment reuses the first",
    "primary": {
     "id": "technical_implementation",
-    "n_entities": 25,
+    "n_entities": 29,
     "name": "Technical implementation",
     "number": "6.1"
    },
@@ -900,32 +879,28 @@
    "why_not_bundled": "Labs are buying consultancies to do this, which is the risk as well as the proof"
   },
   {
-   "acquirers": "",
+   "acquirers": "Deployment firms, the labs' applied teams and vendors of evaluation tools",
    "adjacent": [
     {
      "id": "technical_implementation",
-     "n_entities": 25,
+     "n_entities": 29,
      "name": "Technical implementation",
      "number": "6.1"
     },
     {
      "id": "context_and_memory",
-     "n_entities": 18,
+     "n_entities": 20,
      "name": "Context and memory",
      "number": "4.4"
     },
     {
      "id": "managed_ai_operations",
-     "n_entities": 0,
+     "n_entities": 1,
      "name": "Managed AI operations",
      "number": "6.3"
     }
    ],
-   "blank": [
-    "prerequisites",
-    "acquirers",
-    "next action"
-   ],
+   "blank": [],
    "bottleneck": "The knowledge an agent needs sits in people's heads, not in any system",
    "builds_on": [
     {
@@ -941,20 +916,27 @@
    ],
    "customer": "Firms whose agents fail on unwritten rules and exceptions",
    "durable_asset": "The captured rules the firm's agents run on",
-   "examples": [],
+   "examples": [
+    "Edra",
+    "Mimica",
+    "Skan AI",
+    "Sugarwork",
+    "Tessl",
+    "Unblocked"
+   ],
    "falsifier": "Agents learn a firm's unwritten rules on their own from its records",
    "id": "context_engineering_service",
    "n_more_examples": 0,
    "name": "Capturing how a firm really works, for its agents",
-   "next_action": "",
+   "next_action": "Capture one team's unwritten rules, turn them into tests, and measure the agent's failures before and after",
    "none_independent": false,
    "powers": [
     "switching costs"
    ],
-   "prerequisites": "",
+   "prerequisites": "A customer that will let its people be watched and interviewed at work, and agents already failing on unwritten rules, so the gain can be measured",
    "primary": {
     "id": "context_engineering",
-    "n_entities": 0,
+    "n_entities": 6,
     "name": "Context engineering",
     "number": "6.2"
    },
@@ -976,12 +958,12 @@
     "name": "Deployment that leaves behind the platform the customer runs on"
    },
    "unit_sold": "A captured workflow, then upkeep as it changes",
-   "unmapped": true,
+   "unmapped": false,
    "wedge": "Interview and observe one team, and turn its unwritten rules into tests and instructions agents follow",
    "why_not_bundled": "The work is specific to each firm and changes over time"
   },
   {
-   "acquirers": "",
+   "acquirers": "The incumbent record-keepers of each trade, and labs and large technology firms moving into applications (OpenAI, Microsoft, Cohere and Mistral have each bought or agreed to buy a product built for one field)",
    "adjacent": [
     {
      "id": "autonomous_services",
@@ -991,22 +973,18 @@
     },
     {
      "id": "provenance_and_audit",
-     "n_entities": 0,
+     "n_entities": 9,
      "name": "Provenance and audit",
      "number": "5.3"
     },
     {
      "id": "liability_and_risk_transfer",
-     "n_entities": 1,
+     "n_entities": 4,
      "name": "Liability and risk transfer",
      "number": "5.6"
     }
    ],
-   "blank": [
-    "prerequisites",
-    "acquirers",
-    "next action"
-   ],
+   "blank": [],
    "bottleneck": "A general model can draft the work but cannot hold the trade's records or sign for it",
    "builds_on": [
     {
@@ -1027,17 +1005,17 @@
    ],
    "falsifier": "Vertical apps' prices fall with each better general model as customers move to the labs' own products",
    "id": "vertical_system_of_record",
-   "n_more_examples": 47,
+   "n_more_examples": 52,
    "name": "A trade's AI system of record, with the approvals only that trade can give",
-   "next_action": "",
+   "next_action": "Win one firm's daily work in one trade, then become the place its matters or cases are kept",
    "none_independent": false,
    "powers": [
     "switching costs"
    ],
-   "prerequisites": "",
+   "prerequisites": "Standing in the trade, through a licence or partners who hold one, and customers willing to move their records",
    "primary": {
     "id": "vertical_workflow_software",
-    "n_entities": 53,
+    "n_entities": 58,
     "name": "Vertical workflow software",
     "number": "7.3"
    },
@@ -1061,7 +1039,7 @@
    "why_not_bundled": "Labs lack the trade's records, licensed content and the approvals a regulator gives"
   },
   {
-   "acquirers": "",
+   "acquirers": "Private-equity firms and larger roll-ups once the method is proven. This site's roll-up ledger shows Crete, Archipel and Dwelly each adding firms many times over",
    "adjacent": [
     {
      "id": "autonomous_services",
@@ -1071,15 +1049,12 @@
     },
     {
      "id": "vertical_workflow_software",
-     "n_entities": 53,
+     "n_entities": 58,
      "name": "Vertical workflow software",
      "number": "7.3"
     }
    ],
-   "blank": [
-    "acquirers",
-    "next action"
-   ],
+   "blank": [],
    "bottleneck": "A firm billed by the hour hands AI's saving straight back to the client at the next re-bid",
    "builds_on": [
     {
@@ -1102,7 +1077,7 @@
    "id": "outcome_priced_rollup",
    "n_more_examples": 100,
    "name": "An AI roll-up that moves its clients to fixed fees",
-   "next_action": "",
+   "next_action": "Buy one firm, move a share of its clients to fixed fees before automating the work, and report margin and clients lost a year on",
    "none_independent": false,
    "powers": [
     "process power",
@@ -1135,32 +1110,28 @@
    "why_not_bundled": "The asset is the customer relationship and the licence, which software cannot buy"
   },
   {
-   "acquirers": "",
+   "acquirers": "Incumbent firms in the trade, roll-ups that want the operating method, and labs that would sooner own an operator than sell to one",
    "adjacent": [
     {
      "id": "liability_and_risk_transfer",
-     "n_entities": 1,
+     "n_entities": 4,
      "name": "Liability and risk transfer",
      "number": "5.6"
     },
     {
      "id": "vertical_workflow_software",
-     "n_entities": 53,
+     "n_entities": 58,
      "name": "Vertical workflow software",
      "number": "7.3"
     },
     {
      "id": "outcome_verification",
-     "n_entities": 0,
+     "n_entities": 8,
      "name": "Outcome verification",
      "number": "5.4"
     }
    ],
-   "blank": [
-    "prerequisites",
-    "acquirers",
-    "next action"
-   ],
+   "blank": [],
    "bottleneck": "Buyers want one accountable party when consequential work goes wrong",
    "builds_on": [
     {
@@ -1188,12 +1159,12 @@
    "id": "licensed_autonomous_service",
    "n_more_examples": 81,
    "name": "A licensed firm that sells the finished job and stands behind it",
-   "next_action": "",
+   "next_action": "Sell one narrow service per outcome in one licensed trade and publish how often the firm had to make a customer whole",
    "none_independent": false,
    "powers": [
     "a cornered resource"
    ],
-   "prerequisites": "",
+   "prerequisites": "A licence or a licensed partner, insurance that covers work done by software, and one narrow service whose result can be checked",
    "primary": {
     "id": "autonomous_services",
     "n_entities": 89,
@@ -1220,7 +1191,7 @@
    "why_not_bundled": "A lab would have to hold the licence and carry the liability"
   },
   {
-   "acquirers": "",
+   "acquirers": "Data-centre operators, the newer compute clouds and utilities. Chip and cloud firms have been buying software that gets more from the same hardware (AMD bought Brium, and Crusoe bought Atero), though neither deal was for moving work to follow power",
    "adjacent": [
     {
      "id": "power_and_sites",
@@ -1230,22 +1201,18 @@
     },
     {
      "id": "compute_providers",
-     "n_entities": 28,
+     "n_entities": 32,
      "name": "Compute providers",
      "number": "1.5"
     },
     {
      "id": "inference_optimization",
-     "n_entities": 5,
+     "n_entities": 10,
      "name": "Inference optimization",
      "number": "4.2"
     }
    ],
-   "blank": [
-    "prerequisites",
-    "acquirers",
-    "next action"
-   ],
+   "blank": [],
    "bottleneck": "A site already wired to the grid is scarcer than the building or the money",
    "builds_on": [
     {
@@ -1266,17 +1233,17 @@
    ],
    "falsifier": "Interconnection queues shorten sharply",
    "id": "energy_aware_compute",
-   "n_more_examples": 1,
+   "n_more_examples": 3,
    "name": "Moving computing to where power is available",
-   "next_action": "",
+   "next_action": "Run one site's flexible workloads against its grid's spare hours and agree with the utility what the freed capacity is worth",
    "none_independent": false,
    "powers": [
     "a cornered resource"
    ],
-   "prerequisites": "",
+   "prerequisites": "Workloads that can wait or move, and a utility or grid operator that will pay for flexibility or connect a flexible site sooner",
    "primary": {
     "id": "compute_utilization_and_control",
-    "n_entities": 8,
+    "n_entities": 10,
     "name": "Compute utilization and control",
     "number": "1.6"
    },
@@ -1300,32 +1267,28 @@
    "why_not_bundled": "It needs both the grid's and the operator's data, which neither side holds alone"
   },
   {
-   "acquirers": "",
+   "acquirers": "Deployment firms, the labs that are buying such firms (OpenAI agreed to buy Tomoro and Northslope), and staffing firms",
    "adjacent": [
     {
      "id": "technical_implementation",
-     "n_entities": 25,
+     "n_entities": 29,
      "name": "Technical implementation",
      "number": "6.1"
     },
     {
      "id": "context_engineering",
-     "n_entities": 0,
+     "n_entities": 6,
      "name": "Context engineering",
      "number": "6.2"
     },
     {
      "id": "managed_ai_operations",
-     "n_entities": 0,
+     "n_entities": 1,
      "name": "Managed AI operations",
      "number": "6.3"
     }
    ],
-   "blank": [
-    "prerequisites",
-    "acquirers",
-    "next action"
-   ],
+   "blank": [],
    "bottleneck": "Deployment talent, not models, keeps pilots from reaching production",
    "builds_on": [
     {
@@ -1346,15 +1309,15 @@
    ],
    "falsifier": "Deployment staff become easy to hire",
    "id": "deployment_talent",
-   "n_more_examples": 33,
+   "n_more_examples": 34,
    "name": "Training and placing the engineers who deploy AI",
-   "next_action": "",
+   "next_action": "Run one paid cohort with two employers committed in advance and report how many graduates are still in deployment roles a year later",
    "none_independent": false,
    "powers": [],
-   "prerequisites": "",
+   "prerequisites": "Employers that commit to hire graduates before the course starts, and working deployment engineers to teach it",
    "primary": {
     "id": "talent_production",
-    "n_entities": 39,
+    "n_entities": 40,
     "name": "Talent production",
     "number": "6.5"
    },
@@ -1378,17 +1341,17 @@
    "why_not_bundled": "Labs hire the best themselves but cannot train the whole market"
   },
   {
-   "acquirers": "",
+   "acquirers": "Clouds, security and compliance vendors, and routers that want regulated customers",
    "adjacent": [
     {
      "id": "identity_and_authority",
-     "n_entities": 9,
+     "n_entities": 11,
      "name": "Identity and authority",
      "number": "5.2"
     },
     {
      "id": "provenance_and_audit",
-     "n_entities": 0,
+     "n_entities": 9,
      "name": "Provenance and audit",
      "number": "5.3"
     },
@@ -1399,11 +1362,7 @@
      "number": "4.1"
     }
    ],
-   "blank": [
-    "prerequisites",
-    "acquirers",
-    "next action"
-   ],
+   "blank": [],
    "bottleneck": "Access to models splits by country and supplier, and a banned supplier breaks the product",
    "builds_on": [
     {
@@ -1426,12 +1385,12 @@
    "id": "policy_aware_routing",
    "n_more_examples": 7,
    "name": "Routing that keeps a firm inside approved models and fails over when one is cut off",
-   "next_action": "",
+   "next_action": "Build the register of approved substitutes for one regulated buyer and prove a failover in a drill",
    "none_independent": false,
    "powers": [
     "switching costs"
    ],
-   "prerequisites": "",
+   "prerequisites": "Rules specific enough to encode, and substitute models tested as good enough for each governed task",
    "primary": {
     "id": "routing_and_gateways",
     "n_entities": 13,
@@ -1458,7 +1417,7 @@
    "why_not_bundled": "No lab will route customers to a rival when it is cut off"
   },
   {
-   "acquirers": "",
+   "acquirers": "Clouds, inference hosts and labs that want tuned models to serve (Nebius, Nscale and Mistral have each agreed to buy an inference business), and large firms in the industry served",
    "adjacent": [
     {
      "id": "general_purpose_models",
@@ -1474,16 +1433,12 @@
     },
     {
      "id": "evals_and_assurance",
-     "n_entities": 16,
+     "n_entities": 17,
      "name": "Evals and assurance",
      "number": "3.8"
     }
    ],
-   "blank": [
-    "prerequisites",
-    "acquirers",
-    "next action"
-   ],
+   "blank": [],
    "bottleneck": "Open weights are free but turning them into a reliable product takes scarce skill",
    "builds_on": [
     {
@@ -1511,12 +1466,12 @@
    "id": "open_weight_post_training",
    "n_more_examples": 13,
    "name": "Tuning open models to frontier quality for one industry",
-   "next_action": "",
+   "next_action": "Tune one open model for one industry's hardest tasks and publish its results on that industry's tests beside those of the closed models",
    "none_independent": false,
    "powers": [
     "process power"
    ],
-   "prerequisites": "",
+   "prerequisites": "Open models close enough to the frontier, and an industry test set the customer trusts",
    "primary": {
     "id": "post_training_and_learning_infrastructure",
     "n_entities": 20,
@@ -1546,26 +1501,22 @@
    "why_not_bundled": "Closed labs gain nothing from making open models better"
   },
   {
-   "acquirers": "",
+   "acquirers": "Security firms, insurers and the large audit and advisory firms",
    "adjacent": [
     {
      "id": "provenance_and_audit",
-     "n_entities": 0,
+     "n_entities": 9,
      "name": "Provenance and audit",
      "number": "5.3"
     },
     {
      "id": "liability_and_risk_transfer",
-     "n_entities": 1,
+     "n_entities": 4,
      "name": "Liability and risk transfer",
      "number": "5.6"
     }
    ],
-   "blank": [
-    "prerequisites",
-    "acquirers",
-    "next action"
-   ],
+   "blank": [],
    "bottleneck": "After a public agent failure, nobody can say quickly what went wrong or who is liable",
    "builds_on": [
     {
@@ -1577,26 +1528,26 @@
    "customer": "Firms whose agents have caused, or could cause, a costly failure",
    "durable_asset": "A name insurers and courts trust after a failure",
    "examples": [
+    "7AI",
+    "Barndoor AI",
+    "Dropzone AI",
     "Geordie",
-    "Lasso",
-    "Reco",
-    "SpecterOps",
-    "Straiker",
-    "Zenity"
+    "Gray Swan",
+    "Lakera"
    ],
    "falsifier": "Two years pass with no material agent failure",
    "id": "agent_incident_response",
-   "n_more_examples": 0,
+   "n_more_examples": 8,
    "name": "Incident response and forensics for agent failures",
-   "next_action": "",
+   "next_action": "Sign retainers with a few firms running agents at scale and publish an account, with names removed, of the first incident handled",
    "none_independent": false,
    "powers": [
     "branding"
    ],
-   "prerequisites": "",
+   "prerequisites": "Agents that leave logs worth reading, and insurers or law firms that will name a responder in advance",
    "primary": {
     "id": "security",
-    "n_entities": 8,
+    "n_entities": 16,
     "name": "Security",
     "number": "5.1"
    },

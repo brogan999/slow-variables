@@ -1,13 +1,13 @@
 {
  "counts": {
   "categories": 42,
-  "entities": 754,
+  "entities": 848,
   "excluded": 33,
   "indicators": 85,
   "layers": 8,
   "leaves": 270,
-  "placements": 811,
-  "unmapped_categories": 4
+  "placements": 915,
+  "unmapped_categories": 0
  },
  "credit": "The categories are Alex Brogan's taxonomy of the chain. Each placement is this site's, taken from the source named on it; a company with no named source sits in the usual category for its part of the stack.",
  "layers": [
@@ -705,14 +705,14 @@
       "aravolta",
       "corintis",
       "dg_matrix",
+      "flexnode",
       "frore_systems",
       "geolocked",
       "hyperscale_power",
       "liquidstack",
       "lucend",
       "maintainx",
-      "novolinc",
-      "phaidra"
+      "novolinc"
      ],
      "default_of": [],
      "entities": [
@@ -804,6 +804,21 @@
        "read": "28 Sep 2026",
        "source": "bvp_ai_datacenter_stack",
        "source_name": "Roadmap: The AI data center stack",
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "flexnode",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Construction and modular data centres",
+       "legal_name": "Flexnode",
+       "name": "Flexnode",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
        "verified": false
       },
       {
@@ -955,6 +970,36 @@
        "source": "hand",
        "source_name": null,
        "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "supermicro",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Racks and integrated systems",
+       "legal_name": "Supermicro",
+       "name": "Supermicro",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "wiwynn",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Racks and integrated systems",
+       "legal_name": "Wiwynn",
+       "name": "Wiwynn",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
       }
      ],
      "from_sublayers": [
@@ -966,7 +1011,7 @@
      "layer": "physical_compute",
      "leaves": [
       {
-       "n": 0,
+       "n": 1,
        "name": "Construction and modular data centres"
       },
       {
@@ -978,7 +1023,7 @@
        "name": "Power distribution"
       },
       {
-       "n": 0,
+       "n": 2,
        "name": "Racks and integrated systems"
       },
       {
@@ -986,11 +1031,11 @@
        "name": "Data-centre operations"
       }
      ],
-     "leaves_covered": 3,
-     "n_entities": 16,
+     "leaves_covered": 5,
+     "n_entities": 19,
      "n_indicators": 0,
      "n_leaves": 5,
-     "n_more": 2,
+     "n_more": 5,
      "n_verified": 1,
      "name": "Data-centre infrastructure",
      "number": "1.2",
@@ -1581,11 +1626,11 @@
       "nvda",
       "samsung",
       "ayar_labs",
+      "ddn",
       "drivenets",
       "eridu",
       "nexthop_ai",
-      "sk_hynix",
-      "upscale_ai"
+      "sk_hynix"
      ],
      "default_of": [
       "memory_networking"
@@ -1729,6 +1774,21 @@
       {
        "default": false,
        "ended": null,
+       "id": "ddn",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Storage",
+       "legal_name": "DDN",
+       "name": "DDN",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
        "id": "drivenets",
        "label": "IT & Networking",
        "leaf": "Scale-out networking",
@@ -1804,6 +1864,36 @@
       {
        "default": false,
        "ended": null,
+       "id": "vast_data",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Storage",
+       "legal_name": "VAST Data",
+       "name": "VAST Data",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "weka",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Storage",
+       "legal_name": "WEKA",
+       "name": "WEKA",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
        "id": "xscape_photonics",
        "label": "IT & Networking",
        "leaf": "Optical interconnect",
@@ -1830,7 +1920,7 @@
        "name": "HBM and memory"
       },
       {
-       "n": 0,
+       "n": 3,
        "name": "Storage"
       },
       {
@@ -1850,11 +1940,11 @@
        "name": "Scale-out networking"
       }
      ],
-     "leaves_covered": 5,
-     "n_entities": 15,
+     "leaves_covered": 6,
+     "n_entities": 18,
      "n_indicators": 0,
      "n_leaves": 6,
-     "n_more": 1,
+     "n_more": 4,
      "n_verified": 8,
      "name": "Memory, storage and networking",
      "number": "1.4",
@@ -2097,6 +2187,36 @@
       {
        "default": false,
        "ended": null,
+       "id": "armada",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Edge and on-premise compute",
+       "legal_name": "Armada",
+       "name": "Armada",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "compute_exchange",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Compute financing and capacity contracts",
+       "legal_name": "Compute Exchange",
+       "name": "Compute Exchange",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
        "id": "firmus",
        "label": "hand placement, review 28 Sep 2026",
        "leaf": "Sovereign and regional AI clouds",
@@ -2212,6 +2332,36 @@
        "read": "28 Sep 2026",
        "source": "dallasvc_inference_map",
        "source_name": "The Inference Market Map",
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "ornn",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Compute financing and capacity contracts",
+       "legal_name": "Ornn",
+       "name": "Ornn",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "oxide_computer",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Edge and on-premise compute",
+       "legal_name": "Oxide Computer",
+       "name": "Oxide Computer",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
        "verified": false
       },
       {
@@ -2361,7 +2511,7 @@
        "name": "Sovereign and regional AI clouds"
       },
       {
-       "n": 0,
+       "n": 2,
        "name": "Edge and on-premise compute"
       },
       {
@@ -2369,15 +2519,15 @@
        "name": "Compute marketplaces and brokers"
       },
       {
-       "n": 0,
+       "n": 2,
        "name": "Compute financing and capacity contracts"
       }
      ],
-     "leaves_covered": 5,
-     "n_entities": 28,
+     "leaves_covered": 7,
+     "n_entities": 32,
      "n_indicators": 7,
      "n_leaves": 7,
-     "n_more": 14,
+     "n_more": 18,
      "n_verified": 12,
      "name": "Compute providers",
      "number": "1.5",
@@ -2395,7 +2545,9 @@
       "nivai",
       "pado_ai",
       "qutwo",
-      "soma_energy"
+      "sims_lifecycle_services",
+      "soma_energy",
+      "zymtrace"
      ],
      "default_of": [],
      "entities": [
@@ -2507,6 +2659,21 @@
       {
        "default": false,
        "ended": null,
+       "id": "sims_lifecycle_services",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Hardware lifecycle and resale",
+       "legal_name": "Sims Lifecycle Services",
+       "name": "Sims Lifecycle Services",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
        "id": "soma_energy",
        "label": "Software & Orchestration",
        "leaf": "Energy-aware orchestration",
@@ -2518,10 +2685,26 @@
        "source": "bvp_ai_datacenter_stack",
        "source_name": "Roadmap: The AI data center stack",
        "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "zymtrace",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "GPU utilization",
+       "legal_name": "Zymtrace",
+       "name": "Zymtrace",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
       }
      ],
      "from_sublayers": [
       "dc_power",
+      "hyperscalers_neoclouds",
       "inference_serving",
       "memory_networking",
       "neolabs"
@@ -2535,7 +2718,7 @@
        "name": "Cluster scheduling"
       },
       {
-       "n": 0,
+       "n": 1,
        "name": "GPU utilization"
       },
       {
@@ -2551,12 +2734,12 @@
        "name": "Energy-aware orchestration"
       },
       {
-       "n": 0,
+       "n": 1,
        "name": "Hardware lifecycle and resale"
       }
      ],
-     "leaves_covered": 3,
-     "n_entities": 8,
+     "leaves_covered": 5,
+     "n_entities": 10,
      "n_indicators": 0,
      "n_leaves": 6,
      "n_more": 0,
@@ -2569,7 +2752,7 @@
    ],
    "id": "physical_compute",
    "n_categories": 6,
-   "n_entities": 133,
+   "n_entities": 145,
    "n_unmapped": 0,
    "name": "Physical inputs and compute supply",
    "number": 1
@@ -3998,9 +4181,9 @@
       "harmonic",
       "inflection_ai",
       "jina_ai",
+      "kindo",
       "marqo",
-      "math_inc",
-      "mongodb"
+      "math_inc"
      ],
      "default_of": [],
      "entities": [
@@ -4167,6 +4350,21 @@
        "read": "28 Sep 2026",
        "source": "dallasvc_inference_map",
        "source_name": "The Inference Market Map",
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "kindo",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Security models",
+       "legal_name": "Kindo",
+       "name": "Kindo",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
        "verified": false
       },
       {
@@ -4410,15 +4608,15 @@
        "name": "Computer-use models"
       },
       {
-       "n": 0,
+       "n": 1,
        "name": "Security models"
       }
      ],
-     "leaves_covered": 5,
-     "n_entities": 25,
+     "leaves_covered": 6,
+     "n_entities": 26,
      "n_indicators": 0,
      "n_leaves": 6,
-     "n_more": 11,
+     "n_more": 12,
      "n_verified": 2,
      "name": "Specialized models",
      "number": "2.3",
@@ -4427,11 +4625,27 @@
     },
     {
      "chips": [
+      "distil_labs",
       "inception_labs",
       "unsloth"
      ],
      "default_of": [],
      "entities": [
+      {
+       "default": false,
+       "ended": null,
+       "id": "distil_labs",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Distillation",
+       "legal_name": "Distil Labs",
+       "name": "Distil Labs",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
       {
        "default": false,
        "ended": null,
@@ -4472,7 +4686,7 @@
      "layer": "models",
      "leaves": [
       {
-       "n": 0,
+       "n": 1,
        "name": "Distillation"
       },
       {
@@ -4496,8 +4710,8 @@
        "name": "Architecture and inference optimization"
       }
      ],
-     "leaves_covered": 2,
-     "n_entities": 2,
+     "leaves_covered": 3,
+     "n_entities": 3,
      "n_indicators": 0,
      "n_leaves": 6,
      "n_more": 0,
@@ -4510,7 +4724,7 @@
    ],
    "id": "models",
    "n_categories": 4,
-   "n_entities": 106,
+   "n_entities": 108,
    "n_unmapped": 0,
    "name": "Models and capability production",
    "number": 2
@@ -4521,16 +4735,18 @@
      "chips": [
       "mercor",
       "prolific",
+      "bee_maps",
       "datacurve",
       "handshake_ai",
+      "human_archive",
       "invisible_technologies",
+      "kled",
       "lila_sciences",
       "micro1",
+      "natix_network",
       "pareto",
       "periodic_labs",
-      "scale_ai",
-      "surge_ai",
-      "turing"
+      "scale_ai"
      ],
      "default_of": [
       "human_data"
@@ -4569,6 +4785,21 @@
       {
        "default": false,
        "ended": null,
+       "id": "bee_maps",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Physical sensor data",
+       "legal_name": "Bee Maps",
+       "name": "Bee Maps",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
        "id": "datacurve",
        "label": "hand placement, review 28 Sep 2026",
        "leaf": "Expert networks",
@@ -4599,11 +4830,41 @@
       {
        "default": false,
        "ended": null,
+       "id": "human_archive",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Robotics and motion data",
+       "legal_name": "Human Archive",
+       "name": "Human Archive",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
        "id": "invisible_technologies",
        "label": "hand placement, review 28 Sep 2026",
        "leaf": "Expert networks",
        "legal_name": "Invisible Technologies",
        "name": "Invisible Technologies",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "kled",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Consumer interaction data",
+       "legal_name": "Kled",
+       "name": "Kled",
        "ownership": null,
        "ownership_note": null,
        "read": null,
@@ -4634,6 +4895,21 @@
        "leaf": "Expert networks",
        "legal_name": "Micro1",
        "name": "Micro1",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "natix_network",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Physical sensor data",
+       "legal_name": "NATIX Network",
+       "name": "NATIX Network",
        "ownership": null,
        "ownership_note": null,
        "read": null,
@@ -4743,11 +5019,11 @@
        "name": "Enterprise workflow data"
       },
       {
-       "n": 0,
+       "n": 2,
        "name": "Physical sensor data"
       },
       {
-       "n": 0,
+       "n": 1,
        "name": "Robotics and motion data"
       },
       {
@@ -4755,7 +5031,7 @@
        "name": "Scientific and experimental data"
       },
       {
-       "n": 0,
+       "n": 1,
        "name": "Consumer interaction data"
       },
       {
@@ -4763,11 +5039,11 @@
        "name": "Negative-CAC data products"
       }
      ],
-     "leaves_covered": 2,
-     "n_entities": 12,
+     "leaves_covered": 5,
+     "n_entities": 16,
      "n_indicators": 2,
      "n_leaves": 7,
-     "n_more": 0,
+     "n_more": 2,
      "n_verified": 2,
      "name": "Data origination",
      "number": "3.1",
@@ -4781,11 +5057,14 @@
       "rsl_collective",
       "created_by_humans",
       "datarade",
+      "decentriq",
       "defined_ai",
+      "duality_technologies",
       "human_native",
       "prorata",
       "protege",
       "tollbit",
+      "troveo",
       "vermillio"
      ],
      "default_of": [
@@ -4840,11 +5119,41 @@
       {
        "default": false,
        "ended": null,
+       "id": "decentriq",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Privacy-preserving data exchange",
+       "legal_name": "Decentriq",
+       "name": "Decentriq",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
        "id": "defined_ai",
        "label": "hand placement, review 28 Sep 2026",
        "leaf": "Data marketplaces",
        "legal_name": "Defined.ai",
        "name": "Defined.ai",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "duality_technologies",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Privacy-preserving data exchange",
+       "legal_name": "Duality Technologies",
+       "name": "Duality Technologies",
        "ownership": null,
        "ownership_note": null,
        "read": null,
@@ -4915,6 +5224,21 @@
       {
        "default": false,
        "ended": null,
+       "id": "troveo",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Data brokers",
+       "legal_name": "Troveo",
+       "name": "Troveo",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
        "id": "vermillio",
        "label": "hand placement, review 28 Sep 2026",
        "leaf": "Consent and rights management",
@@ -4944,7 +5268,7 @@
        "name": "Data marketplaces"
       },
       {
-       "n": 0,
+       "n": 1,
        "name": "Data brokers"
       },
       {
@@ -4952,7 +5276,7 @@
        "name": "Bankruptcy and legacy-data acquisition"
       },
       {
-       "n": 0,
+       "n": 2,
        "name": "Privacy-preserving data exchange"
       },
       {
@@ -4960,8 +5284,8 @@
        "name": "Consent and rights management"
       }
      ],
-     "leaves_covered": 3,
-     "n_entities": 9,
+     "leaves_covered": 5,
+     "n_entities": 12,
      "n_indicators": 0,
      "n_leaves": 6,
      "n_more": 0,
@@ -4978,6 +5302,7 @@
       "datology",
       "imerit",
       "labelbox",
+      "overmind",
       "sapien",
       "scale_ai",
       "snorkel",
@@ -5055,6 +5380,21 @@
        "leaf": "Collection tooling",
        "legal_name": "Labelbox",
        "name": "Labelbox",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "overmind",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Trace extraction",
+       "legal_name": "Overmind",
+       "name": "Overmind",
        "ownership": null,
        "ownership_note": null,
        "read": null,
@@ -5182,7 +5522,7 @@
        "name": "De-identification"
       },
       {
-       "n": 0,
+       "n": 1,
        "name": "Trace extraction"
       },
       {
@@ -5190,8 +5530,8 @@
        "name": "Dataset quality assurance"
       }
      ],
-     "leaves_covered": 4,
-     "n_entities": 11,
+     "leaves_covered": 5,
+     "n_entities": 12,
      "n_indicators": 0,
      "n_leaves": 7,
      "n_more": 0,
@@ -5203,8 +5543,11 @@
     },
     {
      "chips": [
+      "duality_ai",
+      "foretellix",
       "gretel",
       "mostly_ai",
+      "parallel_domain",
       "rendered_ai",
       "synthesis_ai",
       "tonic"
@@ -5213,6 +5556,36 @@
       "synthetic_data"
      ],
      "entities": [
+      {
+       "default": false,
+       "ended": null,
+       "id": "duality_ai",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Sim-to-real pipelines",
+       "legal_name": "Duality AI",
+       "name": "Duality AI",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "foretellix",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Diversity and coverage measurement",
+       "legal_name": "Foretellix",
+       "name": "Foretellix",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
       {
        "default": false,
        "ended": null,
@@ -5236,6 +5609,21 @@
        "leaf": "Synthetic generation",
        "legal_name": "Mostly AI",
        "name": "Mostly AI",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "parallel_domain",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Sim-to-real pipelines",
+       "legal_name": "Parallel Domain",
+       "name": "Parallel Domain",
        "ownership": null,
        "ownership_note": null,
        "read": null,
@@ -5309,16 +5697,16 @@
        "name": "Synthetic-data auditability"
       },
       {
-       "n": 0,
+       "n": 1,
        "name": "Diversity and coverage measurement"
       },
       {
-       "n": 0,
+       "n": 2,
        "name": "Sim-to-real pipelines"
       }
      ],
-     "leaves_covered": 2,
-     "n_entities": 5,
+     "leaves_covered": 4,
+     "n_entities": 8,
      "n_indicators": 0,
      "n_leaves": 5,
      "n_more": 0,
@@ -5331,6 +5719,8 @@
     {
      "chips": [
       "patronus",
+      "antioch",
+      "applied_intuition",
       "bespoke_labs",
       "fleet",
       "halluminate",
@@ -5357,6 +5747,36 @@
        "source": "hand",
        "source_name": null,
        "verified": true
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "antioch",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Physical-world simulators",
+       "legal_name": "Antioch",
+       "name": "Antioch",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "applied_intuition",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Physical-world simulators",
+       "legal_name": "Applied Intuition",
+       "name": "Applied Intuition",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
       },
       {
        "default": false,
@@ -5494,7 +5914,7 @@
        "name": "Computer-use environments"
       },
       {
-       "n": 0,
+       "n": 2,
        "name": "Physical-world simulators"
       },
       {
@@ -5506,8 +5926,8 @@
        "name": "Environment maintenance and version control"
       }
      ],
-     "leaves_covered": 3,
-     "n_entities": 8,
+     "leaves_covered": 4,
+     "n_entities": 10,
      "n_indicators": 1,
      "n_leaves": 7,
      "n_more": 0,
@@ -5524,7 +5944,8 @@
       "judgment_labs",
       "lmarena",
       "logical_intelligence",
-      "math_inc"
+      "math_inc",
+      "mlcommons"
      ],
      "default_of": [],
      "entities": [
@@ -5617,6 +6038,21 @@
        "source": "hand",
        "source_name": null,
        "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "mlcommons",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Evaluation-standard creation",
+       "legal_name": "MLCommons",
+       "name": "MLCommons",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
       }
      ],
      "from_sublayers": [
@@ -5653,12 +6089,12 @@
        "name": "Outcome telemetry"
       },
       {
-       "n": 0,
+       "n": 1,
        "name": "Evaluation-standard creation"
       }
      ],
-     "leaves_covered": 3,
-     "n_entities": 6,
+     "leaves_covered": 4,
+     "n_entities": 7,
      "n_indicators": 0,
      "n_leaves": 7,
      "n_more": 0,
@@ -6303,6 +6739,21 @@
       {
        "default": false,
        "ended": null,
+       "id": "snorkel",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Enterprise-specific eval authoring",
+       "legal_name": "Snorkel",
+       "name": "Snorkel",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
        "id": "transluce",
        "label": "AI safety & interpretability \u2014 Open source, Open weights",
        "leaf": "Third-party assurance and certification",
@@ -6333,6 +6784,7 @@
      ],
      "from_sublayers": [
       "evals",
+      "human_data",
       "neolabs",
       "rl_environments",
       "routing_gateways"
@@ -6355,7 +6807,7 @@
        "name": "Application evals"
       },
       {
-       "n": 0,
+       "n": 1,
        "name": "Enterprise-specific eval authoring"
       },
       {
@@ -6379,11 +6831,11 @@
        "name": "Interpretability"
       }
      ],
-     "leaves_covered": 7,
-     "n_entities": 16,
+     "leaves_covered": 8,
+     "n_entities": 17,
      "n_indicators": 1,
      "n_leaves": 8,
-     "n_more": 2,
+     "n_more": 3,
      "n_verified": 4,
      "name": "Evals and assurance",
      "number": "3.8",
@@ -6395,7 +6847,7 @@
    ],
    "id": "data_training_verification",
    "n_categories": 8,
-   "n_entities": 80,
+   "n_entities": 94,
    "n_unmapped": 0,
    "name": "Data, training and verification inputs",
    "number": 3
@@ -6917,14 +7369,49 @@
     },
     {
      "chips": [
+      "doubleword",
+      "embedl",
       "fastly",
       "fireworks",
       "inferact",
+      "latent_ai",
       "modular",
-      "radixark"
+      "neuralwatt",
+      "radixark",
+      "the_token_company"
      ],
      "default_of": [],
      "entities": [
+      {
+       "default": false,
+       "ended": null,
+       "id": "doubleword",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Batching",
+       "legal_name": "Doubleword",
+       "name": "Doubleword",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "embedl",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Hardware-specific optimization",
+       "legal_name": "Embedl",
+       "name": "Embedl",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
       {
        "default": false,
        "ended": null,
@@ -6973,6 +7460,21 @@
       {
        "default": false,
        "ended": null,
+       "id": "latent_ai",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Hardware-specific optimization",
+       "legal_name": "Latent AI",
+       "name": "Latent AI",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
        "id": "modular",
        "label": "engines / commercial",
        "leaf": "Kernels and compilers",
@@ -6988,6 +7490,21 @@
       {
        "default": false,
        "ended": null,
+       "id": "neuralwatt",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Energy-per-outcome optimization",
+       "legal_name": "Neuralwatt",
+       "name": "Neuralwatt",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
        "id": "radixark",
        "label": "Inference \u2014 Open source, Training infra / tooling",
        "leaf": "Kernels and compilers",
@@ -6998,6 +7515,21 @@
        "read": "28 Sep 2026",
        "source": "neolabs_fyi",
        "source_name": "neolabs.fyi",
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "the_token_company",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Prompt and context compression",
+       "legal_name": "The Token Company",
+       "name": "The Token Company",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
        "verified": false
       }
      ],
@@ -7017,7 +7549,7 @@
        "name": "Caching"
       },
       {
-       "n": 0,
+       "n": 1,
        "name": "Batching"
       },
       {
@@ -7025,20 +7557,20 @@
        "name": "Speculative decoding"
       },
       {
-       "n": 0,
+       "n": 1,
        "name": "Prompt and context compression"
       },
       {
-       "n": 0,
+       "n": 2,
        "name": "Hardware-specific optimization"
       },
       {
-       "n": 0,
+       "n": 1,
        "name": "Energy-per-outcome optimization"
       }
      ],
-     "leaves_covered": 2,
-     "n_entities": 5,
+     "leaves_covered": 6,
+     "n_entities": 10,
      "n_indicators": 0,
      "n_leaves": 7,
      "n_more": 0,
@@ -7322,6 +7854,7 @@
       "byterover",
       "chroma",
       "cognee",
+      "compresr",
       "contextual_ai",
       "glean",
       "interloom",
@@ -7330,8 +7863,7 @@
       "mem0",
       "parallel",
       "pinecone",
-      "qdrant",
-      "supermemory"
+      "qdrant"
      ],
      "default_of": [],
      "entities": [
@@ -7393,6 +7925,21 @@
        "read": "28 Sep 2026",
        "source": "dallasvc_memory_map",
        "source_name": "Who Owns Memory? The Market Map for AI Agents' Missing State Layer",
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "compresr",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Context compression",
+       "legal_name": "Compresr",
+       "name": "Compresr",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
        "verified": false
       },
       {
@@ -7548,6 +8095,21 @@
       {
        "default": false,
        "ended": null,
+       "id": "tessl",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Context curation",
+       "legal_name": "Tessl",
+       "name": "Tessl",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
        "id": "unstructured",
        "label": "Retrieval and data substrate",
        "leaf": "RAG and retrieval",
@@ -7608,6 +8170,7 @@
      ],
      "from_sublayers": [
       "agent_infra",
+      "deployment_services",
       "vertical_ai"
      ],
      "id": "context_and_memory",
@@ -7627,11 +8190,11 @@
        "name": "Long-term memory"
       },
       {
-       "n": 0,
+       "n": 1,
        "name": "Context curation"
       },
       {
-       "n": 0,
+       "n": 1,
        "name": "Context compression"
       },
       {
@@ -7643,11 +8206,11 @@
        "name": "Knowledge freshness"
       }
      ],
-     "leaves_covered": 4,
-     "n_entities": 18,
+     "leaves_covered": 6,
+     "n_entities": 20,
      "n_indicators": 0,
      "n_leaves": 7,
-     "n_more": 4,
+     "n_more": 6,
      "n_verified": 1,
      "name": "Context and memory",
      "number": "4.4",
@@ -7657,14 +8220,19 @@
     {
      "chips": [
       "modal",
+      "agentops",
       "crewai",
       "daytona",
       "e2b",
+      "inngest",
       "isara_labs",
       "langchain",
       "llamaindex",
       "mastra",
-      "poetiq"
+      "poetiq",
+      "restate",
+      "rivet_dev",
+      "temporal"
      ],
      "default_of": [
       "agent_infra"
@@ -7684,6 +8252,21 @@
        "source": "hand",
        "source_name": null,
        "verified": true
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "agentops",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Agent testing and replay",
+       "legal_name": "AgentOps",
+       "name": "AgentOps",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
       },
       {
        "default": false,
@@ -7723,6 +8306,21 @@
        "leaf": "Sandboxes",
        "legal_name": "E2B",
        "name": "E2B",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "inngest",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Durable execution",
+       "legal_name": "Inngest",
+       "name": "Inngest",
        "ownership": null,
        "ownership_note": null,
        "read": null,
@@ -7804,6 +8402,51 @@
        "source": "hand",
        "source_name": null,
        "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "restate",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Durable execution",
+       "legal_name": "Restate",
+       "name": "Restate",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "rivet_dev",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "State management",
+       "legal_name": "Rivet (rivet.dev)",
+       "name": "Rivet (rivet.dev)",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "temporal",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Durable execution",
+       "legal_name": "Temporal",
+       "name": "Temporal",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
       }
      ],
      "from_sublayers": [
@@ -7824,7 +8467,7 @@
        "name": "Planning and decomposition"
       },
       {
-       "n": 0,
+       "n": 1,
        "name": "State management"
       },
       {
@@ -7836,16 +8479,16 @@
        "name": "Sandboxes"
       },
       {
-       "n": 0,
+       "n": 1,
        "name": "Agent testing and replay"
       },
       {
-       "n": 0,
+       "n": 3,
        "name": "Durable execution"
       }
      ],
-     "leaves_covered": 4,
-     "n_entities": 9,
+     "leaves_covered": 7,
+     "n_entities": 14,
      "n_indicators": 0,
      "n_leaves": 7,
      "n_more": 0,
@@ -7864,9 +8507,12 @@
       "bland",
       "browserbase",
       "composio",
+      "cua",
       "daily",
+      "gotohuman",
       "merge",
       "nango",
+      "orgo",
       "retell",
       "vocode"
      ],
@@ -7950,6 +8596,21 @@
       {
        "default": false,
        "ended": null,
+       "id": "cua",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Computer-use infrastructure",
+       "legal_name": "Cua",
+       "name": "Cua",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
        "id": "daily",
        "label": "modality / voice",
        "leaf": "Voice and messaging infrastructure",
@@ -7960,6 +8621,21 @@
        "read": "28 Sep 2026",
        "source": "dallasvc_inference_map",
        "source_name": "The Inference Market Map",
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "gotohuman",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Human escalation",
+       "legal_name": "gotoHuman",
+       "name": "gotoHuman",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
        "verified": false
       },
       {
@@ -7985,6 +8661,21 @@
        "leaf": "API integration",
        "legal_name": "Nango",
        "name": "Nango",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "orgo",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Computer-use infrastructure",
+       "legal_name": "Orgo",
+       "name": "Orgo",
        "ownership": null,
        "ownership_note": null,
        "read": null,
@@ -8044,7 +8735,7 @@
        "name": "Browser infrastructure"
       },
       {
-       "n": 0,
+       "n": 2,
        "name": "Computer-use infrastructure"
       },
       {
@@ -8056,12 +8747,12 @@
        "name": "Physical actuation"
       },
       {
-       "n": 0,
+       "n": 1,
        "name": "Human escalation"
       }
      ],
-     "leaves_covered": 4,
-     "n_entities": 10,
+     "leaves_covered": 6,
+     "n_entities": 13,
      "n_indicators": 0,
      "n_leaves": 7,
      "n_more": 0,
@@ -8074,7 +8765,7 @@
    ],
    "id": "runtime_orchestration",
    "n_categories": 6,
-   "n_entities": 82,
+   "n_entities": 97,
    "n_unmapped": 0,
    "name": "Runtime, serving and orchestration",
    "number": 4
@@ -8083,19 +8774,40 @@
    "categories": [
     {
      "chips": [
+      "7ai",
       "astrix",
+      "barndoor_ai",
+      "dropzone_ai",
       "geordie",
+      "gray_swan",
+      "lakera",
       "lasso",
+      "mindgard",
       "reco",
+      "runlayer",
       "specterops",
       "straiker",
-      "veza",
-      "zenity"
+      "veza"
      ],
      "default_of": [
       "agent_security_identity"
      ],
      "entities": [
+      {
+       "default": false,
+       "ended": null,
+       "id": "7ai",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Cybersecurity agents",
+       "legal_name": "7AI",
+       "name": "7AI",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
       {
        "default": false,
        "ended": null,
@@ -8109,6 +8821,36 @@
        "read": "28 Sep 2026",
        "source": "insight_agent_iam",
        "source_name": "Identity and Access Management (IAM) in the age of AI Agents",
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "barndoor_ai",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Model and tool access controls",
+       "legal_name": "Barndoor AI",
+       "name": "Barndoor AI",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "dropzone_ai",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Cybersecurity agents",
+       "legal_name": "Dropzone AI",
+       "name": "Dropzone AI",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
        "verified": false
       },
       {
@@ -8129,6 +8871,36 @@
       {
        "default": false,
        "ended": null,
+       "id": "gray_swan",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Agent red teaming",
+       "legal_name": "Gray Swan",
+       "name": "Gray Swan",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "lakera",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Prompt-injection defence",
+       "legal_name": "Lakera",
+       "name": "Lakera",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
        "id": "lasso",
        "label": "3. Agent Monitoring, Detection & Response",
        "leaf": "Runtime monitoring",
@@ -8144,6 +8916,21 @@
       {
        "default": false,
        "ended": null,
+       "id": "mindgard",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Agent red teaming",
+       "legal_name": "Mindgard",
+       "name": "Mindgard",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
        "id": "reco",
        "label": "1. Discovery & Visibility of Agents",
        "leaf": "Agent security",
@@ -8154,6 +8941,21 @@
        "read": "28 Sep 2026",
        "source": "insight_agent_iam",
        "source_name": "Identity and Access Management (IAM) in the age of AI Agents",
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "runlayer",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Model and tool access controls",
+       "legal_name": "Runlayer",
+       "name": "Runlayer",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
        "verified": false
       },
       {
@@ -8204,6 +9006,21 @@
       {
        "default": false,
        "ended": null,
+       "id": "xbow",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Cybersecurity agents",
+       "legal_name": "XBOW",
+       "name": "XBOW",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
        "id": "zenity",
        "label": "3. Agent Monitoring, Detection & Response",
        "leaf": "Runtime monitoring",
@@ -8229,15 +9046,15 @@
        "name": "Agent security"
       },
       {
-       "n": 0,
+       "n": 1,
        "name": "Prompt-injection defence"
       },
       {
-       "n": 0,
+       "n": 2,
        "name": "Model and tool access controls"
       },
       {
-       "n": 0,
+       "n": 2,
        "name": "Agent red teaming"
       },
       {
@@ -8245,15 +9062,15 @@
        "name": "Runtime monitoring"
       },
       {
-       "n": 0,
+       "n": 3,
        "name": "Cybersecurity agents"
       }
      ],
-     "leaves_covered": 2,
-     "n_entities": 8,
+     "leaves_covered": 6,
+     "n_entities": 16,
      "n_indicators": 0,
      "n_leaves": 6,
-     "n_more": 0,
+     "n_more": 2,
      "n_verified": 0,
      "name": "Security",
      "number": "5.1",
@@ -8270,7 +9087,9 @@
       "ory",
       "plainid",
       "sgnl",
-      "teleport"
+      "skyfire",
+      "teleport",
+      "vouched"
      ],
      "default_of": [],
      "entities": [
@@ -8397,6 +9216,21 @@
       {
        "default": false,
        "ended": null,
+       "id": "skyfire",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Know-your-agent",
+       "legal_name": "Skyfire",
+       "name": "Skyfire",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
        "id": "teleport",
        "label": "2. Agent Identity & Credential Governance",
        "leaf": "Agent identity",
@@ -8407,6 +9241,21 @@
        "read": "28 Sep 2026",
        "source": "insight_agent_iam",
        "source_name": "Identity and Access Management (IAM) in the age of AI Agents",
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "vouched",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Know-your-agent",
+       "legal_name": "Vouched",
+       "name": "Vouched",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
        "verified": false
       }
      ],
@@ -8431,7 +9280,7 @@
        "name": "Authentication"
       },
       {
-       "n": 0,
+       "n": 2,
        "name": "Know-your-agent"
       },
       {
@@ -8439,8 +9288,8 @@
        "name": "Authority and mandate registries"
       }
      ],
-     "leaves_covered": 3,
-     "n_entities": 9,
+     "leaves_covered": 4,
+     "n_entities": 11,
      "n_indicators": 0,
      "n_leaves": 5,
      "n_more": 0,
@@ -8451,16 +9300,164 @@
      "venture_sublayers": []
     },
     {
-     "chips": [],
+     "chips": [
+      "credo_ai",
+      "eqty_lab",
+      "monitaur",
+      "openbox_ai",
+      "openorigins",
+      "saidot",
+      "steg_ai",
+      "trail",
+      "trustible"
+     ],
      "default_of": [],
-     "entities": [],
-     "from_sublayers": [],
+     "entities": [
+      {
+       "default": false,
+       "ended": null,
+       "id": "credo_ai",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Compliance records",
+       "legal_name": "Credo AI",
+       "name": "Credo AI",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "eqty_lab",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Tamper-resistant audit trails",
+       "legal_name": "EQTY Lab",
+       "name": "EQTY Lab",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "monitaur",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Compliance records",
+       "legal_name": "Monitaur",
+       "name": "Monitaur",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "openbox_ai",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Tamper-resistant audit trails",
+       "legal_name": "OpenBox AI",
+       "name": "OpenBox AI",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "openorigins",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Output provenance",
+       "legal_name": "OpenOrigins",
+       "name": "OpenOrigins",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "saidot",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Compliance records",
+       "legal_name": "Saidot",
+       "name": "Saidot",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "steg_ai",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Output provenance",
+       "legal_name": "Steg.AI",
+       "name": "Steg.AI",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "trail",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Compliance records",
+       "legal_name": "trail",
+       "name": "trail",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "trustible",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Compliance records",
+       "legal_name": "Trustible",
+       "name": "Trustible",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      }
+     ],
+     "from_sublayers": [
+      "agent_security_identity"
+     ],
      "id": "provenance_and_audit",
      "indicators": [],
      "layer": "trust_control_transactions",
      "leaves": [
       {
-       "n": 0,
+       "n": 2,
        "name": "Output provenance"
       },
       {
@@ -8472,16 +9469,16 @@
        "name": "Decision logs"
       },
       {
-       "n": 0,
+       "n": 5,
        "name": "Compliance records"
       },
       {
-       "n": 0,
+       "n": 2,
        "name": "Tamper-resistant audit trails"
       }
      ],
-     "leaves_covered": 0,
-     "n_entities": 0,
+     "leaves_covered": 3,
+     "n_entities": 9,
      "n_indicators": 0,
      "n_leaves": 5,
      "n_more": 0,
@@ -8492,10 +9489,143 @@
      "venture_sublayers": []
     },
     {
-     "chips": [],
+     "chips": [
+      "bluejay",
+      "cekura",
+      "coval",
+      "hamming_ai",
+      "judgment_labs",
+      "raindrop",
+      "resaro",
+      "wayfound"
+     ],
      "default_of": [],
-     "entities": [],
-     "from_sublayers": [],
+     "entities": [
+      {
+       "default": false,
+       "ended": null,
+       "id": "bluejay",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Continuous quality assurance",
+       "legal_name": "Bluejay",
+       "name": "Bluejay",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "cekura",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Continuous quality assurance",
+       "legal_name": "Cekura",
+       "name": "Cekura",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "coval",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Continuous quality assurance",
+       "legal_name": "Coval",
+       "name": "Coval",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "hamming_ai",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Continuous quality assurance",
+       "legal_name": "Hamming AI",
+       "name": "Hamming AI",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "judgment_labs",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Continuous quality assurance",
+       "legal_name": "Judgment Labs",
+       "name": "Judgment Labs",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "raindrop",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Continuous quality assurance",
+       "legal_name": "Raindrop",
+       "name": "Raindrop",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "resaro",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Independent verification",
+       "legal_name": "Resaro",
+       "name": "Resaro",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "wayfound",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Continuous quality assurance",
+       "legal_name": "Wayfound",
+       "name": "Wayfound",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      }
+     ],
+     "from_sublayers": [
+      "evals",
+      "rl_environments"
+     ],
      "id": "outcome_verification",
      "indicators": [],
      "layer": "trust_control_transactions",
@@ -8517,16 +9647,16 @@
        "name": "Dispute resolution"
       },
       {
-       "n": 0,
+       "n": 1,
        "name": "Independent verification"
       },
       {
-       "n": 0,
+       "n": 7,
        "name": "Continuous quality assurance"
       }
      ],
-     "leaves_covered": 0,
-     "n_entities": 0,
+     "leaves_covered": 2,
+     "n_entities": 8,
      "n_indicators": 0,
      "n_leaves": 6,
      "n_more": 0,
@@ -8538,11 +9668,44 @@
     },
     {
      "chips": [
+      "catena_labs",
+      "paid",
       "prorata",
+      "skyfire",
       "tollbit"
      ],
      "default_of": [],
      "entities": [
+      {
+       "default": false,
+       "ended": null,
+       "id": "catena_labs",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Agent payments",
+       "legal_name": "Catena Labs",
+       "name": "Catena Labs",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "paid",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Outcome-based billing",
+       "legal_name": "Paid",
+       "name": "Paid",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
       {
        "default": false,
        "ended": null,
@@ -8551,6 +9714,21 @@
        "leaf": "Metering",
        "legal_name": "ProRata",
        "name": "ProRata",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "skyfire",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Agent payments",
+       "legal_name": "Skyfire",
+       "name": "Skyfire",
        "ownership": null,
        "ownership_note": null,
        "read": null,
@@ -8575,6 +9753,8 @@
       }
      ],
      "from_sublayers": [
+      "agent_infra",
+      "agent_security_identity",
       "data_licensing"
      ],
      "id": "settlement_and_billing",
@@ -8582,11 +9762,11 @@
      "layer": "trust_control_transactions",
      "leaves": [
       {
-       "n": 0,
+       "n": 2,
        "name": "Agent payments"
       },
       {
-       "n": 0,
+       "n": 1,
        "name": "Outcome-based billing"
       },
       {
@@ -8606,8 +9786,8 @@
        "name": "Task-completion markets"
       }
      ],
-     "leaves_covered": 1,
-     "n_entities": 2,
+     "leaves_covered": 3,
+     "n_entities": 5,
      "n_indicators": 0,
      "n_leaves": 6,
      "n_more": 0,
@@ -8619,10 +9799,43 @@
     },
     {
      "chips": [
-      "mitigata"
+      "aiuc",
+      "armilla_ai",
+      "mitigata",
+      "munich_re"
      ],
      "default_of": [],
      "entities": [
+      {
+       "default": false,
+       "ended": null,
+       "id": "aiuc",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Assurance-backed procurement",
+       "legal_name": "AIUC",
+       "name": "AIUC",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "armilla_ai",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "AI warranties",
+       "legal_name": "Armilla AI",
+       "name": "Armilla AI",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
       {
        "default": false,
        "ended": null,
@@ -8637,9 +9850,25 @@
        "source": "ai_rollup_fyi",
        "source_name": "AI Roll-up Nexus company directory",
        "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "munich_re",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Indemnification",
+       "legal_name": "Munich Re (aiSure)",
+       "name": "Munich Re (aiSure)",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
       }
      ],
      "from_sublayers": [
+      "agent_security_identity",
       "ai_rollups"
      ],
      "id": "liability_and_risk_transfer",
@@ -8647,7 +9876,7 @@
      "layer": "trust_control_transactions",
      "leaves": [
       {
-       "n": 0,
+       "n": 1,
        "name": "AI warranties"
       },
       {
@@ -8655,7 +9884,7 @@
        "name": "Insurance"
       },
       {
-       "n": 0,
+       "n": 1,
        "name": "Indemnification"
       },
       {
@@ -8667,12 +9896,12 @@
        "name": "Loss-data networks"
       },
       {
-       "n": 0,
+       "n": 1,
        "name": "Assurance-backed procurement"
       }
      ],
-     "leaves_covered": 1,
-     "n_entities": 1,
+     "leaves_covered": 4,
+     "n_entities": 4,
      "n_indicators": 0,
      "n_leaves": 6,
      "n_more": 0,
@@ -8685,8 +9914,8 @@
    ],
    "id": "trust_control_transactions",
    "n_categories": 6,
-   "n_entities": 20,
-   "n_unmapped": 2,
+   "n_entities": 52,
+   "n_unmapped": 0,
    "name": "Trust, control and transaction infrastructure",
    "number": 5
   },
@@ -8697,6 +9926,7 @@
       "anthropic_services_venture",
       "palantir",
       "openai_deployment_co",
+      "airbyte",
       "ampersand_labs",
       "artium",
       "atlas",
@@ -8706,8 +9936,7 @@
       "ciridae",
       "codos",
       "distyl",
-      "fractal",
-      "headstart"
+      "fractal"
      ],
      "default_of": [
       "deployment_services"
@@ -8772,6 +10001,21 @@
        "source": "hand",
        "source_name": null,
        "verified": true
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "airbyte",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Connectors",
+       "legal_name": "Airbyte",
+       "name": "Airbyte",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
       },
       {
        "default": false,
@@ -8986,6 +10230,21 @@
       {
        "default": false,
        "ended": null,
+       "id": "paragon",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Connectors",
+       "legal_name": "Paragon",
+       "name": "Paragon",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
        "id": "percepta",
        "label": "Transformation partner",
        "leaf": "Forward-deployed engineering",
@@ -9026,6 +10285,21 @@
        "read": "28 Sep 2026",
        "source": "caritas_rollup_map",
        "source_name": "AI Rollups & AI-Native PE: 2026 Market Map",
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "shelf",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Data readiness",
+       "legal_name": "Shelf",
+       "name": "Shelf",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
        "verified": false
       },
       {
@@ -9091,6 +10365,21 @@
       {
        "default": false,
        "ended": null,
+       "id": "unstructured",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Data readiness",
+       "legal_name": "Unstructured",
+       "name": "Unstructured",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
        "id": "wonderful",
        "label": "Transformation partner",
        "leaf": "Forward-deployed engineering",
@@ -9105,6 +10394,7 @@
       }
      ],
      "from_sublayers": [
+      "agent_infra",
       "ai_rollups",
       "deployment_services",
       "human_data"
@@ -9126,7 +10416,7 @@
        "name": "Legacy modernization"
       },
       {
-       "n": 0,
+       "n": 2,
        "name": "Data readiness"
       },
       {
@@ -9134,15 +10424,15 @@
        "name": "Ontology creation"
       },
       {
-       "n": 0,
+       "n": 2,
        "name": "Connectors"
       }
      ],
-     "leaves_covered": 4,
-     "n_entities": 25,
+     "leaves_covered": 6,
+     "n_entities": 29,
      "n_indicators": 0,
      "n_leaves": 6,
-     "n_more": 11,
+     "n_more": 15,
      "n_verified": 3,
      "name": "Technical implementation",
      "number": "6.1",
@@ -9150,24 +10440,124 @@
      "venture_sublayers": []
     },
     {
-     "chips": [],
+     "chips": [
+      "edra",
+      "mimica",
+      "skan_ai",
+      "sugarwork",
+      "tessl",
+      "unblocked"
+     ],
      "default_of": [],
-     "entities": [],
-     "from_sublayers": [],
+     "entities": [
+      {
+       "default": false,
+       "ended": null,
+       "id": "edra",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Domain-knowledge capture",
+       "legal_name": "Edra",
+       "name": "Edra",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "mimica",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Workflow decomposition",
+       "legal_name": "Mimica",
+       "name": "Mimica",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "skan_ai",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Domain-knowledge capture",
+       "legal_name": "Skan AI",
+       "name": "Skan AI",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "sugarwork",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Tacit-knowledge elicitation",
+       "legal_name": "Sugarwork",
+       "name": "Sugarwork",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "tessl",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Context curation",
+       "legal_name": "Tessl",
+       "name": "Tessl",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "unblocked",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Context curation",
+       "legal_name": "Unblocked",
+       "name": "Unblocked",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      }
+     ],
+     "from_sublayers": [
+      "deployment_services"
+     ],
      "id": "context_engineering",
      "indicators": [],
      "layer": "deployment_diffusion",
      "leaves": [
       {
-       "n": 0,
+       "n": 2,
        "name": "Domain-knowledge capture"
       },
       {
-       "n": 0,
+       "n": 1,
        "name": "Workflow decomposition"
       },
       {
-       "n": 0,
+       "n": 2,
        "name": "Context curation"
       },
       {
@@ -9179,12 +10569,12 @@
        "name": "Human escalation design"
       },
       {
-       "n": 0,
+       "n": 1,
        "name": "Tacit-knowledge elicitation"
       }
      ],
-     "leaves_covered": 0,
-     "n_entities": 0,
+     "leaves_covered": 4,
+     "n_entities": 6,
      "n_indicators": 0,
      "n_leaves": 6,
      "n_more": 0,
@@ -9195,16 +10585,36 @@
      "venture_sublayers": []
     },
     {
-     "chips": [],
+     "chips": [
+      "provectus"
+     ],
      "default_of": [],
-     "entities": [],
-     "from_sublayers": [],
+     "entities": [
+      {
+       "default": false,
+       "ended": null,
+       "id": "provectus",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Model operations",
+       "legal_name": "Provectus",
+       "name": "Provectus",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      }
+     ],
+     "from_sublayers": [
+      "deployment_services"
+     ],
      "id": "managed_ai_operations",
      "indicators": [],
      "layer": "deployment_diffusion",
      "leaves": [
       {
-       "n": 0,
+       "n": 1,
        "name": "Model operations"
       },
       {
@@ -9224,8 +10634,8 @@
        "name": "Vendor and model management"
       }
      ],
-     "leaves_covered": 0,
-     "n_entities": 0,
+     "leaves_covered": 1,
+     "n_entities": 1,
      "n_indicators": 0,
      "n_leaves": 5,
      "n_more": 0,
@@ -9239,8 +10649,12 @@
      "chips": [
       "codesmith",
       "correlation_one",
+      "credo_ai",
+      "larridin",
       "mindstone",
-      "section"
+      "prosci",
+      "section",
+      "trustible"
      ],
      "default_of": [],
      "entities": [
@@ -9277,6 +10691,36 @@
       {
        "default": false,
        "ended": null,
+       "id": "credo_ai",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Governance and procurement",
+       "legal_name": "Credo AI",
+       "name": "Credo AI",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "larridin",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "ROI measurement",
+       "legal_name": "Larridin",
+       "name": "Larridin",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
        "id": "mindstone",
        "label": "enterprise_upskilling",
        "leaf": "Internal training",
@@ -9287,6 +10731,21 @@
        "read": "28 Sep 2026",
        "source": "ai_education_list",
        "source_name": "AI education and talent companies (verified list)",
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "prosci",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Change management",
+       "legal_name": "Prosci",
+       "name": "Prosci",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
        "verified": false
       },
       {
@@ -9303,9 +10762,26 @@
        "source": "ai_education_list",
        "source_name": "AI education and talent companies (verified list)",
        "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "trustible",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Governance and procurement",
+       "legal_name": "Trustible",
+       "name": "Trustible",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
       }
      ],
      "from_sublayers": [
+      "agent_security_identity",
+      "deployment_services",
       "talent_production"
      ],
      "id": "adoption_and_change",
@@ -9322,7 +10798,7 @@
        "name": "Workflow redesign"
       },
       {
-       "n": 0,
+       "n": 1,
        "name": "Change management"
       },
       {
@@ -9334,16 +10810,16 @@
        "name": "Internal training"
       },
       {
-       "n": 0,
+       "n": 1,
        "name": "ROI measurement"
       },
       {
-       "n": 0,
+       "n": 2,
        "name": "Governance and procurement"
       }
      ],
-     "leaves_covered": 1,
-     "n_entities": 4,
+     "leaves_covered": 4,
+     "n_entities": 8,
      "n_indicators": 1,
      "n_leaves": 6,
      "n_more": 0,
@@ -9812,6 +11288,36 @@
       {
        "default": false,
        "ended": null,
+       "id": "parlance_labs",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Evaluation engineering",
+       "legal_name": "Parlance Labs",
+       "name": "Parlance Labs",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "product_faculty",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Agent product management",
+       "legal_name": "Product Faculty",
+       "name": "Product Faculty",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
        "id": "product_school",
        "label": "cohort_courses",
        "leaf": "Applied MLE training",
@@ -9976,11 +11482,11 @@
        "name": "Applied MLE training"
       },
       {
-       "n": 0,
+       "n": 1,
        "name": "Agent product management"
       },
       {
-       "n": 0,
+       "n": 1,
        "name": "Evaluation engineering"
       },
       {
@@ -9996,11 +11502,11 @@
        "name": "AI-native apprenticeship"
       }
      ],
-     "leaves_covered": 5,
-     "n_entities": 39,
+     "leaves_covered": 7,
+     "n_entities": 40,
      "n_indicators": 0,
      "n_leaves": 7,
-     "n_more": 25,
+     "n_more": 26,
      "n_verified": 0,
      "name": "Talent production",
      "number": "6.5",
@@ -10010,8 +11516,8 @@
    ],
    "id": "deployment_diffusion",
    "n_categories": 5,
-   "n_entities": 64,
-   "n_unmapped": 2,
+   "n_entities": 80,
+   "n_unmapped": 0,
    "name": "Deployment and organizational diffusion",
    "number": 6
   },
@@ -10281,6 +11787,21 @@
       {
        "default": false,
        "ended": null,
+       "id": "magic_patterns",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Design",
+       "legal_name": "Magic Patterns",
+       "name": "Magic Patterns",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
        "id": "otter_ai",
        "label": "App context capture",
        "leaf": "Productivity",
@@ -10371,6 +11892,21 @@
       {
        "default": false,
        "ended": null,
+       "id": "uizard",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Design",
+       "legal_name": "Uizard",
+       "name": "Uizard",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
        "id": "warp",
        "label": "hand placement, review 28 Sep 2026",
        "leaf": "Coding",
@@ -10426,7 +11962,7 @@
        "name": "Writing"
       },
       {
-       "n": 0,
+       "n": 2,
        "name": "Design"
       },
       {
@@ -10438,11 +11974,11 @@
        "name": "Search"
       }
      ],
-     "leaves_covered": 5,
-     "n_entities": 24,
+     "leaves_covered": 6,
+     "n_entities": 26,
      "n_indicators": 1,
      "n_leaves": 6,
-     "n_more": 10,
+     "n_more": 12,
      "n_verified": 3,
      "name": "Horizontal copilots",
      "number": "7.1",
@@ -11120,6 +12656,21 @@
       {
        "default": false,
        "ended": null,
+       "id": "brisk_teaching",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Education",
+       "legal_name": "Brisk Teaching",
+       "name": "Brisk Teaching",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
        "id": "candid_health",
        "label": "Medical Rcm",
        "leaf": "Healthcare",
@@ -11175,6 +12726,21 @@
        "read": "28 Sep 2026",
        "source": "ai_rollup_fyi",
        "source_name": "AI Roll-up Nexus company directory",
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "cropin",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Agriculture",
+       "legal_name": "Cropin",
+       "name": "Cropin",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
        "verified": false
       },
       {
@@ -11240,6 +12806,21 @@
       {
        "default": false,
        "ended": null,
+       "id": "govdash",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Government and defence",
+       "legal_name": "GovDash",
+       "name": "GovDash",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
        "id": "hippocratic",
        "label": "hand placement, review 28 Sep 2026",
        "leaf": "Healthcare",
@@ -11295,6 +12876,21 @@
        "read": "28 Sep 2026",
        "source": "ai_rollup_fyi",
        "source_name": "AI Roll-up Nexus company directory",
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "magicschool",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Education",
+       "legal_name": "MagicSchool",
+       "name": "MagicSchool",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
        "verified": false
       },
       {
@@ -11470,6 +13066,21 @@
        "leaf": "Financial services",
        "legal_name": "Rogo",
        "name": "Rogo",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "rune_technologies",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Government and defence",
+       "legal_name": "Rune Technologies",
+       "name": "Rune Technologies",
        "ownership": null,
        "ownership_note": null,
        "read": null,
@@ -11695,23 +13306,23 @@
        "name": "Construction"
       },
       {
-       "n": 0,
+       "n": 2,
        "name": "Education"
       },
       {
-       "n": 0,
+       "n": 1,
        "name": "Agriculture"
       },
       {
-       "n": 0,
+       "n": 2,
        "name": "Government and defence"
       }
      ],
-     "leaves_covered": 7,
-     "n_entities": 53,
+     "leaves_covered": 10,
+     "n_entities": 58,
      "n_indicators": 3,
      "n_leaves": 10,
-     "n_more": 39,
+     "n_more": 44,
      "n_verified": 4,
      "name": "Vertical workflow software",
      "number": "7.3",
@@ -14879,10 +16490,13 @@
       "instinct",
       "perplexity",
       "character_ai",
+      "counsel_health",
+      "doctronic",
       "duckbill",
       "higgsfield",
       "openclaw",
       "replika",
+      "speak",
       "the_travel_company"
      ],
      "default_of": [
@@ -14942,6 +16556,36 @@
        "leaf": "Companions",
        "legal_name": "Character.AI",
        "name": "Character.AI",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "counsel_health",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Health",
+       "legal_name": "Counsel Health",
+       "name": "Counsel Health",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
+       "id": "doctronic",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Health",
+       "legal_name": "Doctronic",
+       "name": "Doctronic",
        "ownership": null,
        "ownership_note": null,
        "read": null,
@@ -15012,6 +16656,21 @@
       {
        "default": false,
        "ended": null,
+       "id": "speak",
+       "label": "hand placement from its own site, read 5 Oct 2026",
+       "leaf": "Education",
+       "legal_name": "Speak",
+       "name": "Speak",
+       "ownership": null,
+       "ownership_note": null,
+       "read": null,
+       "source": "hand",
+       "source_name": null,
+       "verified": false
+      },
+      {
+       "default": false,
+       "ended": null,
        "id": "the_travel_company",
        "label": "Travel Agency",
        "leaf": "Commerce and purchasing agents",
@@ -15046,11 +16705,11 @@
        "name": "Companions"
       },
       {
-       "n": 0,
+       "n": 1,
        "name": "Education"
       },
       {
-       "n": 0,
+       "n": 2,
        "name": "Health"
       },
       {
@@ -15066,8 +16725,8 @@
        "name": "Personal operating systems"
       }
      ],
-     "leaves_covered": 5,
-     "n_entities": 9,
+     "leaves_covered": 7,
+     "n_entities": 12,
      "n_indicators": 0,
      "n_leaves": 7,
      "n_more": 0,
@@ -15080,7 +16739,7 @@
    ],
    "id": "applications_operating_models",
    "n_categories": 7,
-   "n_entities": 294,
+   "n_entities": 302,
    "n_unmapped": 0,
    "name": "Applications and operating models",
    "number": 7
