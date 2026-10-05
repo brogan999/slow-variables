@@ -47,7 +47,7 @@ FIGURE = re.compile(
     r"|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety)\b|-fold\b",
     re.I,
 )
-YEAR = re.compile(r"\b(19|20)\d\d\b")
+YEAR = re.compile(r"\b(19|20|21)\d\d\b")
 
 
 def judgements() -> dict[str, Any]:
