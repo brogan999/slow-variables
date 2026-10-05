@@ -59,6 +59,14 @@ facts:
   copilot_seats: {series: usage.microsoft_365_copilot.paid_seats.pt, max_age_days: 200}
   gemini_app_users: {series: usage.google_gemini_app.monthly_active_users.pt, max_age_days: 200}
 
+  # --- the firm page (/firm, Part 42) ---
+  rollup_service_deals: {metric: rollup_deals_4q, dims: {kind: services}, max_age_days: 200, expect: {gt: rollup_service_deals_year_ago}}
+  rollup_service_deals_year_ago: {metric: rollup_deals_4q, dims: {kind: services}, pick: year_ago}
+  rollup_software_deals: {metric: rollup_deals_4q, dims: {kind: software}, max_age_days: 200}
+  seller_funded: {indicator: circular_financing_scale, max_age_days: 200}
+  token_hhi: {indicator: lab_hhi, max_age_days: 30}
+  lab_services_firm: {series: ownership.openai_deployment_co.lab_majority_owned.pt}
+
 sources:
   # I · capability
   - id: ai_2027
@@ -166,6 +174,7 @@ sources:
     retrieved_at: 2026-09-22
     http_status: 200
     content_hash: f02048cd546c1c6b011de245099c4494df4e82044e5892a2988f7b2158a6c119
+    quote: "seem intrinsic to humans but not to AI"
   - id: cai_data
     who: Sean Cai
     field: an investor and writer who works in the market for training data
@@ -248,6 +257,7 @@ sources:
     retrieved_at: 2026-09-22
     http_status: 200
     content_hash: 33126d46c3b2fcaffc675498c128ef047ed2dbd3e26ee2223c5250908e96f064
+    quote: "to prevent the extraction of its scarce context"
 
   # IV · reorganisation
   - id: moll_imas
@@ -374,6 +384,7 @@ sources:
     retrieved_at: 2026-09-22
     http_status: 200
     content_hash: de868e5a6179ffd52965ac16b6aa3457b8ba52775fc6322c18b9916fcc99c6de
+    quote: "larger average firm size, greater industry concentration, and reduced local managerial autonomy"
   - id: hayek
     who: Friedrich Hayek
     field: an economist who studied how prices carry what people know
@@ -385,6 +396,7 @@ sources:
     retrieved_at: 2026-09-22
     http_status: 200
     content_hash: 3c4edd88fc40284ea123d1de1474052a41dd1d85571fd4152c701c0ce7975555
+    quote: "the knowledge of the particular circumstances of time and place"
   - id: stiglitz_ventura_bolet
     who: Joseph Stiglitz and Màxim Ventura-Bolet
     field: Stiglitz won the Nobel prize for work on markets where one side knows more than the other; Ventura-Bolet is a doctoral student in economics at Columbia
@@ -1163,6 +1175,7 @@ sources:
     retrieved_at: 2026-09-27
     http_status: 200
     content_hash: ad153729fd86a622227f2ba9dbf05684047062c206d98420110f6cfc70b0b5b9
+    quote: "The knowledge problem has not been solved"
   - id: hoffman_conglomerate
     who: Liz Hoffman
     field: business and finance editor at Semafor
@@ -1173,6 +1186,206 @@ sources:
     retrieved_at: 2026-09-27
     http_status: 200
     content_hash: c4680ddd28061bb07d105eecfd04d1d8295f5bac93354f6186060d1bee6e2cbd
+  # The firm (/firm, docs/argument/firm.md): fetched 5 Oct 2026. A venue says which version was read where the link opens a record or a restatement.
+  - id: coase
+    who: "Ronald Coase"
+    field: "a British economist who asked why firms exist when prices can co-ordinate work"
+    finding: "A firm exists because using a market has costs: finding out prices, bargaining and writing a contract for each exchange. A firm grows until organising one more job inside costs as much as buying it outside or having another firm do it."
+    work: "The Nature of the Firm"
+    venue: "Economica, 1937. The link opens his Nobel lecture of 1991, The Institutional Structure of Production, which restates the argument and is where the quoted words come from; the 1937 article was read in a scan of the journal's pages"
+    year: 1937
+    url: https://www.nobelprize.org/prizes/economic-sciences/1991/coase/lecture/
+    retrieved_at: 2026-10-05
+    http_status: 200
+    content_hash: 9ee9bcd16ba2d0da7a51299f0e52895ea761c47c9c052d69c921e9957c90fd41
+    quote: "that little planned society"
+  - id: grossman_hart
+    who: "Sanford Grossman and Oliver Hart"
+    short: "Grossman and Hart"
+    field: "economists who studied contracts and what ownership is for"
+    finding: "No contract can list every decision about an asset, so ownership is the right to decide whatever the contract leaves out. Giving that right to one party takes it from another and blunts the second party's reason to invest, so one firm should own another only when the gain outweighs that loss."
+    work: "The Costs and Benefits of Ownership: A Theory of Vertical and Lateral Integration"
+    venue: "Journal of Political Economy, 1986. The link opens the journal's record with the abstract; the article was read in full in a scan of the journal's pages"
+    year: 1986
+    url: https://ideas.repec.org/a/ucp/jpolec/v94y1986i4p691-719.html
+    retrieved_at: 2026-10-05
+    http_status: 200
+    content_hash: 7340eebcfe45e8de9f25f872cf165345a0120041d85477a2fb52a70db82b7270
+    quote: "Ownership is the purchase of these residual rights"
+  - id: arrow
+    who: "Kenneth Arrow"
+    field: "an economist who studied how markets handle knowledge and risk"
+    finding: "Information is a good that markets handle badly: a buyer cannot tell what it is worth until he has it, and once he has it he need not pay; and using it tends to reveal it. One private remedy is a large company that runs many projects and insures itself."
+    work: "Economic Welfare and the Allocation of Resources for Invention"
+    venue: "The Rate and Direction of Inventive Activity (National Bureau of Economic Research and Princeton University Press), 1962. The link opens the chapter's record; it was read in the Bureau's own copy"
+    year: 1962
+    url: https://ideas.repec.org/h/nbr/nberch/2144.html
+    retrieved_at: 2026-10-05
+    http_status: 200
+    content_hash: 7736e23285655e551dcdd6850597e99820b5252eaf4421253068601532e0b873
+  - id: akerlof
+    who: "George Akerlof"
+    field: "an economist who studied markets in which sellers know more than buyers"
+    finding: "Where sellers know the quality of what they sell and buyers do not, everything sells at a price for the average, owners of good goods withdraw, and the market can shrink to nothing. Guarantees, brand names and licences grew up as answers."
+    work: "The Market for \"Lemons\": Quality Uncertainty and the Market Mechanism"
+    venue: "Quarterly Journal of Economics, 1970. The link opens the journal's record; the article was read in a scan of the journal's pages"
+    year: 1970
+    url: https://ideas.repec.org/a/oup/qjecon/v84y1970i3p488-500..html
+    retrieved_at: 2026-10-05
+    http_status: 200
+    content_hash: a174508d32908e854876e6f0faae9b03ebb64728dc46abcc4e51c9839c471370
+  - id: christensen
+    who: "Clayton Christensen, Michael Raynor and Matthew Verlinden"
+    short: "Christensen and colleagues"
+    field: "Christensen studied why leading firms lose their lead; Raynor and Verlinden are his co-authors on this article"
+    finding: "While a product is not yet good enough, the money goes to whoever builds the integrated system that fixes what is lacking. Once it is more than good enough the design becomes modular, the assembler becomes interchangeable, and the profit moves to the parts that now limit performance."
+    work: "Skate to Where the Money Will Be"
+    venue: "Harvard Business Review, 2001. The article is paywalled after its opening; the argument was read in a transcript of a talk Christensen gave in 2004"
+    year: 2001
+    url: https://hbr.org/2001/11/skate-to-where-the-money-will-be
+    retrieved_at: 2026-10-05
+    http_status: 200
+    content_hash: e9cbb04cf3984fa419ed26ec008209fce027e62ac2a3026a2aeeecab021bf174
+  - id: sutton
+    who: "Rich Sutton"
+    field: "a computer scientist who studies how machines learn"
+    finding: "Across decades of AI research, methods that build in what people know helped for a while and then stalled, and were overtaken by general methods, search and learning, that improve as computing gets cheaper."
+    work: "The Bitter Lesson"
+    venue: "his own website"
+    year: 2019
+    url: http://www.incompleteideas.net/IncIdeas/BitterLesson.html
+    retrieved_at: 2026-10-05
+    http_status: 200
+    content_hash: f1baabbabfde3e2a368104fe91cb7efcf3566e8a9dd2c5fe50ccd1d96ec1acb6
+  - id: thompson
+    who: "Ben Thompson"
+    field: "a writer on technology strategy at Stratechery"
+    finding: "A firm that owns the relationship with users at scale makes its suppliers interchangeable: they join on its terms. Such a firm serves each new user at no extra cost and does not operate the supply it gathers."
+    work: "Defining Aggregators"
+    venue: "Stratechery"
+    year: 2017
+    url: https://stratechery.com/2017/defining-aggregators/
+    retrieved_at: 2026-10-05
+    http_status: 200
+    content_hash: ec491bd75c9986590f0a8d3765f68187b97cd21f02b2113507aeffa3b28a9199
+  - id: aghion_jones_jones
+    who: "Philippe Aghion, Benjamin Jones and Charles Jones"
+    short: "Aghion, Jones and Jones"
+    field: "economists who study where growth comes from"
+    finding: "Tasks depend on one another, so output is limited by the tasks that are hardest to improve. As automated tasks get cheap their share of spending falls, and the slow, essential tasks that are left take a rising share."
+    work: "Artificial Intelligence and Economic Growth"
+    venue: "National Bureau of Economic Research working paper, 2017. The link opens the paper's record with the abstract; the working paper was read in full"
+    year: 2017
+    url: https://ideas.repec.org/p/nbr/nberwo/23928.html
+    retrieved_at: 2026-10-05
+    http_status: 200
+    content_hash: 07020999c80b57b3ae091724bc5d70f899fb264933f4e922c36084d560dcfbdc
+    quote: "what is essential and yet hard to improve"
+  - id: catalini
+    who: "Christian Catalini, Xiang Hui and Jane Wu"
+    short: "Catalini and colleagues"
+    field: "economists who study what it costs to verify work"
+    finding: "The cost of having a machine do a task falls with computing power, while the cost of checking the result is held up by people's time. So people's capacity to verify becomes the limit on growth, and the profit moves to whoever holds trustworthy ground truth and underwrites the liability."
+    work: "Some Simple Economics of AGI"
+    venue: "arXiv preprint; not yet published in a journal"
+    year: 2026
+    url: https://arxiv.org/abs/2602.20946
+    retrieved_at: 2026-10-05
+    http_status: 200
+    content_hash: 8a06341df44aec1097bdc60af678d08dee64f7c347249661439d136ac46ac8c1
+  - id: garicano_theses
+    who: "Luis Garicano and Jesús Saa-Requejo"
+    short: "Garicano and Saa-Requejo"
+    field: "Garicano is an economist who studies how firms organise what they know; Saa-Requejo is his co-author at the Silicon Continent newsletter"
+    finding: "The sellers of models are squeezed between customers who can switch with a change of setting and suppliers above them who cannot be replaced. The surplus goes to hardware and to whoever does the work of fitting AI into an organisation, where the limits are workflow, authority and data."
+    work: "Three theses on AI value capture"
+    venue: "Silicon Continent"
+    year: 2026
+    url: https://www.siliconcontinent.com/p/three-theses-on-ai-value-capture
+    retrieved_at: 2026-10-05
+    http_status: 200
+    content_hash: 723d9fcd4cff9f4e1a09fa8f24ac8d8c3dbacda692dd59f174cc1b0b369faf32
+    quote: "Intelligence is not what stops most organisations from doing what they want to do"
+  - id: garicano_holdup
+    who: "Luis Garicano and Jesús Saa-Requejo"
+    short: "Garicano and Saa-Requejo"
+    field: "Garicano is an economist who studies how firms organise what they know; Saa-Requejo is his co-author at the Silicon Continent newsletter"
+    finding: "A firm that rents its models can be squeezed by its supplier: on access, on price, by work that will not move to another model, and by the supplier learning the firm's own know-how from the way it is used."
+    work: "How to avoid being held up by the labs"
+    venue: "Silicon Continent. About the first half of the essay was read"
+    year: 2026
+    url: https://www.siliconcontinent.com/p/how-to-avoid-being-held-up-by-the
+    retrieved_at: 2026-10-05
+    http_status: 200
+    content_hash: 35bf87ce3af5a5ab815450e4b6a9f65fb14c09c346285a01a55ec679fbaa4dbd
+  - id: patel
+    who: "Dwarkesh Patel, with Ege Erdil and Tamay Besiroglu"
+    short: "Patel and his co-authors"
+    field: "Patel hosts a podcast of interviews with AI researchers; Erdil and Besiroglu are his co-authors on this essay"
+    finding: "A firm of AI workers can copy its best worker and merge what the copies learn, so dealing inside the firm gets cheaper and firms grow much larger. One giant firm is not inevitable, because planning inside still needs profit and loss outside to say whether it is working. The authors put their own confidence low."
+    work: "What fully automated firms will look like"
+    venue: "Dwarkesh Podcast"
+    year: 2025
+    url: https://www.dwarkesh.com/p/ai-firm
+    retrieved_at: 2026-10-05
+    http_status: 200
+    content_hash: 7a6bc56a77638a2ad6a65c7233d73215c4152ec03e646ede8430d4be69c4182d
+    quote: "The market continues to serve as the grounding outer loop"
+  - id: larson_hayek
+    who: "Soren Larson"
+    field: "a writer on how money moves between AI labs and the apps built on them, who co-founded Crosshatch, a personalised-AI start-up that shut down in July 2025"
+    finding: "Context can now be gathered and put in front of a model, which weakens Hayek's original point; what cannot be centralised cheaply is the running of a model, which costs energy and time, so intelligence is placed where the work is."
+    work: "The Bitter Lesson and Hayek's Revenge"
+    venue: "hypersoren.xyz"
+    year: 2025
+    url: https://hypersoren.xyz/posts/hayeks-revenge/
+    retrieved_at: 2026-10-05
+    http_status: 200
+    content_hash: d873f97824a52b936a8ab4d7b59d9fcc6ee100e58042cfbb7bc1d60dfe3c2f36
+  - id: larson_vertical
+    who: "Soren Larson"
+    field: "a writer on how money moves between AI labs and the apps built on them, who co-founded Crosshatch, a personalised-AI start-up that shut down in July 2025"
+    finding: "Owning every step of the work is the best strategy but is not safe by itself, because AI makes it cheap to stitch separate pieces into something good enough. He lists the conditions under which an owner of the whole chain holds, and concedes that they move."
+    work: "An Equilibrium Theory of Vertical Integration"
+    venue: "hypersoren.xyz"
+    year: 2026
+    url: https://hypersoren.xyz/posts/vertical-integration-theory/
+    retrieved_at: 2026-10-05
+    http_status: 200
+    content_hash: 574b1bcab1b9155138312b8de558952ba4242f5de0db94adec5c4a7604207f0f
+  - id: larson_conglomerate
+    who: "Soren Larson"
+    field: "a writer on how money moves between AI labs and the apps built on them, who co-founded Crosshatch, a personalised-AI start-up that shut down in July 2025"
+    finding: "Groups that own many businesses have been valued below their parts because managers spread thin lose to focused ones. He argues the discount turns into a premium for groups that share what each business learns and keep it from leaking, and not for a holding company that keeps its businesses apart."
+    work: "The Conglomerate Premium"
+    venue: "hypersoren.xyz"
+    year: 2026
+    url: https://hypersoren.xyz/posts/conglomerate-premium/
+    retrieved_at: 2026-10-05
+    http_status: 200
+    content_hash: 3d4eeead3c8eb14ea2cab2cef2de5add971a42cf04e6f7c1707e1509f1ad1b82
+  - id: larson_complexity
+    who: "Soren Larson"
+    field: "a writer on how money moves between AI labs and the apps built on them, who co-founded Crosshatch, a personalised-AI start-up that shut down in July 2025"
+    finding: "In a model of his own, a lab's price touches only the task at the margin and everything above it goes to the user, so the lab captures a minority of what its tokens are worth to buyers, and less as open models catch up."
+    work: "A Complexity Theory of AI Value Accrual"
+    venue: "hypersoren.xyz"
+    year: 2026
+    url: https://hypersoren.xyz/posts/price-elasticity/
+    retrieved_at: 2026-10-05
+    http_status: 200
+    content_hash: 24c1ef6cc53ce6b9b6e0a44c448a4a88a0c3c0d64ce64216f671c19de0ee9776
+  - id: larson_do_things
+    who: "Soren Larson"
+    field: "a writer on how money moves between AI labs and the apps built on them, who co-founded Crosshatch, a personalised-AI start-up that shut down in July 2025"
+    finding: "Earlier platforms organised things and left the acting, and the blame, to human contractors. AI does the acting, so liability lands on whoever runs it and cannot be passed down; a software seller that answers for nothing cannot get the context either."
+    work: "You must just do things"
+    venue: "hypersoren.xyz"
+    year: 2025
+    url: https://hypersoren.xyz/posts/do-things/
+    retrieved_at: 2026-10-05
+    http_status: 200
+    content_hash: 98ee3330ae583805d05c3937eac3de5a50e82a3f156f3430ed7f33785f3aa599
 positions:
   # I · capability
   - id: compounding
@@ -2528,6 +2741,67 @@ positions:
     - applications
     - agents
     visible: false
+  # The firm (/firm): positions argued on that page, seated there by seed/firm.yaml; none is shown under an outlook folio.
+  - id: boundary_holds
+    folio: reorganisation
+    title: Cheap agents move the firm's boundary; they do not remove it
+    holders: [shahidi_etal, hadfield_koh, larson_coasean]
+    attribution: author
+    mechanism: "Agents cut the cost of finding, bargaining and contracting, and they cut the cost of managing as well, so both sides of Coase's comparison fall [cite:coase]. The authors who named the Coasean singularity put a question mark on it themselves and list the new frictions agents bring [cite:shahidi_etal]."
+    case: "None of the writers this page read argues that firms vanish, and [fact:firms_using_ai] of American firms say they use AI at all, so any change in the size of firms lies ahead of the readings."
+    kill_shot: Firms in the industries most exposed to AI shrinking sharply as work moves to independent contractors and their agents.
+    rival: firms_dissolve
+    visible: false
+  - id: firms_dissolve
+    folio: reorganisation
+    title: With dealing nearly free, most work is bought in and firms shrink towards nothing
+    holders: []
+    attribution: site
+    mechanism: If a firm exists only because dealing with outsiders is costly, then agents that deal for almost nothing leave little reason to employ anyone. This is the popular reading of the Coasean singularity; no writer this page read holds it as stated.
+    case: This site holds no reading that favours it.
+    kill_shot: Firms in exposed industries keeping or growing their size as agents spread.
+    rival: boundary_holds
+    visible: false
+  - id: liability_owns
+    folio: adoption
+    title: Whoever must answer for the work ends up owning the operation
+    holders: [grossman_hart, hadfield_koh, hobart_sued, larson_do_things]
+    attribution: extension
+    mechanism: "An instruction to an agent cannot cover every case [cite:hadfield_koh], so someone must decide in the cases it missed and pay when the work is wrong. Where a contract cannot be completed, ownership settles who decides [cite:grossman_hart]; so the party that bears the loss wants to own the operation, and a seller with nothing to lose is a poor party to buy from [cite:hobart_sued]. None of these writers makes the whole argument; this site joins them."
+    case: "Buyers built around AI bought [fact:rollup_service_deals] firms that sell services in the past year, against [fact:rollup_service_deals_year_ago] the year before, and insurers have moved [fact:insurer_ledger] times in a year to write AI's mistakes out of their standard policies. Neither reading shows that owning pays."
+    kill_shot: Sellers that own no operation and hold no licence carrying the liability for consequential AI work by contract and insurance, at scale.
+    rival: liability_contracted
+    visible: false
+  - id: liability_contracted
+    folio: adoption
+    title: Insurance and contract carry the liability, so nobody needs to own the operation
+    holders: []
+    attribution: site
+    mechanism: If insurers learn to price an agent's mistakes, a software seller can buy cover and warrant its work, as contractors do, and the buyer need not care who owns what.
+    case: The forecasts board on this site, a model's judgement, leans this way; it expects insurers to sell cover written for AI and doubts that AI's work will mostly be bought through firms that can be sued.
+    kill_shot: Insurers going on writing AI out of standard cover while cover written for it stays small.
+    rival: liability_owns
+    visible: false
+  - id: rent_by_default
+    folio: value
+    title: Most firms should rent intelligence and own something else
+    holders: [larson_router, garicano_theses]
+    attribution: author
+    mechanism: "The best model's lead over open ones is short, so a firm that owns its intelligence owns a wasting asset; and most firms see nothing in their own work that others do not see, so a system that learns from many firms beats one that learns from one [cite:larson_router]. What holds most organisations back is workflow, authority and data, not intelligence [cite:garicano_theses]."
+    case: "Open models trail the best closed ones by [fact:open_lag], and developers' routed tokens are spread across many labs."
+    kill_shot: Firms that train and run their own models pulling ahead of rivals that rent, in trades where no firm senses anything the others cannot.
+    rival: own_your_intelligence
+    visible: false
+  - id: own_your_intelligence
+    folio: value
+    title: A firm that rents its thinking teaches its supplier its business
+    holders: [garicano_holdup]
+    attribution: author
+    mechanism: "A supplier of rented intelligence sees how its customer works, can raise its price once the customer's work depends on it, and can learn enough to compete; so a firm should own, or at least control, the models its work runs on [cite:garicano_holdup]."
+    case: The labs have been buying firms in the layers above them, their own customers' trades among them.
+    kill_shot: Firms moving freely between suppliers of models at no loss, and no supplier entering its customers' trades.
+    rival: rent_by_default
+    visible: false
 claims:
   # A claim with a `stage` says its map row binds there; a claim about what happens on a row, such as who gains or
   # loses, names the row without a stage, so the map lists it under the row and marks no cell.
@@ -3013,7 +3287,12 @@ claims:
     holders: [eilla_lazarov]
     text: A frontier lab launches or majority-owns a professional services firm, under its own brand or at arm's length, by September 2028.
     due: 2028-09-11
-    falsifier: No frontier lab owning a professional services firm by September 2028.
+    # Read from the lab's own announcement since 5 Oct 2026: OpenAI says it majority-owns and controls The OpenAI Deployment
+    # Company (row ownership.openai_deployment_co.lab_majority_owned.pt). Anthropic's services venture is not counted:
+    # neither page this site holds on it says who owns how much.
+    test: {fact: lab_services_firm, gte: 1}
+    falsifier: No frontier lab owning a professional services firm by September 2028. One lab's own announcement says it majority-owns and controls such a firm, so the claim reads as met unless that statement is withdrawn.
+    expect_state: holding
   - id: ai_premiums_2032
     position: assurance_layer
     holders: [deloitte_ai_insurance]
@@ -3030,6 +3309,69 @@ claims:
     position: conglomerate_returns
     text: Groups that run many unrelated businesses with AI come to be valued above the sum of their parts.
     falsifier: AI-run groups trading at a discount to the sum of their parts.
+  # The firm (/firm): twelve claims added on 5 Oct 2026, each on a position that page seats.
+  - id: firms_do_not_dissolve
+    position: boundary_holds
+    text: Firms in the industries most exposed to AI do not shrink towards nothing as agents cut the cost of dealing.
+    falsifier: Average firm size in the most exposed industries falling sharply while it holds elsewhere. This site reads firm size by industry for one year only, so nothing tests it yet.
+  - id: asking_leaks
+    position: context_costly
+    text: Firms keep inside the work that would reveal what they know, and independent agents dealing for firms in open markets stay rare.
+    falsifier: Independent agents dealing on firms' behalf at scale in open markets, for work that turns on the firm's own knowledge. Nobody publishes a count of it.
+  - id: liability_priced_apart
+    position: liability_owns
+    text: Insurers go on writing AI's mistakes out of their standard policies, so whoever deploys an agent carries the loss unless it buys separate cover.
+    test: {fact: insurer_ledger, gte: 1}
+    rival_test: {fact: insurer_ledger, gte: 1}
+    falsifier: Standard liability policies covering AI's mistakes at no extra price. The rival view also expects exclusions first, so what would separate the sides is the premiums written for AI cover, which nobody publishes.
+    expect_state: both
+  - id: operators_bought
+    position: liability_owns
+    text: Buyers built around AI go on purchasing firms that sell services, more each year than the year before.
+    test: {fact: rollup_service_deals, gt: rollup_service_deals_year_ago}
+    falsifier: The yearly count of such purchases by the same searched buyers flat or falling. The count is a floor from one search of the larger buyers, and it shows what buyers did, not that owning paid.
+    expect_state: holding
+  - id: ownership_pays
+    position: liability_owns
+    text: Service firms bought by owners built around AI earn higher margins afterwards than rivals that only buy the same tools, in trades not billed by the hour.
+    falsifier: Such firms' margins falling back to their trades' ordinary level within a few years of purchase. This site holds no margin for any of them.
+  - id: lab_runs_operations
+    position: up_the_stack
+    holders: [hobart_sued]
+    text: A frontier lab, or a company it controls, comes to own an ordinary operating business in a licensed trade by the end of 2028.
+    due: 2028-12-31
+    falsifier: No frontier lab owning an operating business in a licensed trade by the end of 2028. The labs' deal ledger leaves out purchases of businesses that are not AI or technology firms, so no count on this site would see it.
+  - id: firms_rent
+    position: rent_by_default
+    text: Use of models stays spread across several labs and open models, with the concentration of routed tokens among labs below [test:firms_rent], and few firms train or run their own.
+    test: {fact: token_hhi, lt: 0.25}
+    rival_test: {fact: token_hhi, lt: 0.25}
+    falsifier: Use concentrating on one lab's models while open ones fall further behind, or a current survey finding most large firms running their own. The reading is developers' routed tokens, not firms' spending, and the rival speaks of who runs a model, not whose it is, so it accepts the same reading.
+    expect_state: both
+  - id: sensing_owns
+    position: rent_by_default
+    holders: [larson_router]
+    text: A model of a firm's own pays only where the firm senses something no one else can; elsewhere a system trained on many firms' results does better.
+    falsifier: Systems tuned on a firm's own history beating pooled ones in trades where no firm senses anything scarce. The only evidence so far is its author's own simulation.
+  - id: line_not_side
+    position: barbell
+    text: Firms that adopt AI move routine, recordable decisions to the centre and leave fast-changing and time-critical ones with local units; they do not centralise across the board.
+    falsifier: Adopting firms centralising decisions of every kind, the fast-changing included, and doing better than those that leave them local. No series on this site records where decisions are taken.
+  - id: edge_floor
+    position: edge
+    holders: [larson_hayek]
+    text: Work that must be decided faster than a message can reach a data centre, or on little power, is run on the spot, whoever holds the knowledge.
+    falsifier: Time-critical work such as driving and industrial control moving to distant data centres as networks improve.
+  - id: check_binds
+    position: checking_order
+    holders: [catalini]
+    text: More knowledge work is held back by the lack of a check than by what the work requires, so what a firm keeps is the checking and the answering.
+    falsifier: A later run of this site's census, under the same rule, finding more payroll passing its screen than waiting on a check without new checks having been built; or models checking their own work as reliably as an outside check does. The census is a screen scored by AI models, not a record of observations, so no nightly test reads it.
+  - id: pooled_premium
+    position: conglomerate_returns
+    holders: [larson_conglomerate]
+    text: A group that runs many businesses with AI is valued above the sum of its parts only if it shares what each learns across them; a holding company that keeps them apart is not.
+    falsifier: Groups run with AI trading below the sum of their parts whether or not they pool what they learn, or holding companies that keep their businesses apart earning the premium too. No such group is listed with separately valued parts.
 # The four places the money can sit, moving up the stack: the migration essay's rule (rent goes to whatever cannot be
 # routed around, and moves when that is fixed) applied from the model to the customer. Each place names the sub-layers
 # that would be paid there, the readings that show it, and two tests of one fact and one operator: money arriving,

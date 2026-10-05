@@ -7082,7 +7082,9 @@ observations:
   #   sesame_ai Synthetic Media Processing Laboratory (2026-06-17): R2: appears only in a PitchBook deal listing; no party or filing confirms it, and the direction of the deal is unclear
   #   radiant Standard Nuclear (2026-08-20): R3: a TRISO fuel supply agreement, not a purchase; R4: power/fuel
   # ---------- roll-up acquisitions (Part 38, swept 5 Oct 2026 for the 33 buyers pinned in tests/test_manual.py) ----------
-  # A second ledger, apart from the labs' (acq.*) and read by no deal count: what the AI roll-ups this site files have bought.
+  # A second ledger, apart from the labs' (acq.*): what the AI roll-ups this site files have bought. From 5 Oct 2026 one count
+  # reads it, the metric rollup_deals_4q, which holds purchases of service firms apart from purchases of software products
+  # by the trade each target is filed under in seed/census_trades.yaml. No indicator and no status reads it.
   # Q1 the buyer is an entity with an ai_rollups membership, primary or not, keyed as the subject; a platform's deal is
   #    filed under the platform the announcement names (Shield's under Shield, not its backer).
   # Q2 it is a purchase in which the buyer, alone or with named partners, takes the whole or control, confirmed on the
@@ -8235,3 +8237,20 @@ observations:
     basis: company_stated
     raw_snippet: "Built on the expertise of GlowTouch and its strategic acquisition of Collective Solution, UnifyCX combines advanced AI technology with tech-enabled capabilities to revolutionize the customer experience."
     note: "GlowTouch bought Collective Solution and the combined business was rebranded UnifyCX. Seller's banker Intrepid confirms the completed sale (Dec 2024). Price not disclosed. Date: Date UnifyCX launched and disclosed the acquisition."
+  # ---------- who owns the labs' services firms (firm page, 5 Oct 2026) ----------
+  # One row per firm a frontier lab says it majority-owns: a yes coded as 1 from the lab's own words, so the outlook claim
+  # lab_owns_services_firm reads a record. Anthropic's services venture has no row: neither page this site holds on it
+  # states who owns how much.
+  - series_key: ownership.openai_deployment_co.lab_majority_owned.pt
+    source_id: openai_blog
+    entity_id: openai_deployment_co
+    value: 1
+    unit: count
+    as_of_date: 2026-05-11
+    published_date: 2026-05-11
+    url: https://web.archive.org/web/20260904214234id_/https://openai.com/index/openai-launches-the-deployment-company/
+    tier: 7
+    basis: company_stated
+    raw_snippet: The OpenAI Deployment Company is majority-owned and controlled by OpenAI
+    coding: "A yes coded as 1: OpenAI's own announcement says it majority-owns and controls The OpenAI Deployment Company, a firm that puts engineers inside customers to deploy AI."
+    note: The OpenAI Deployment Company (DeployCo), launched 11 May 2026 with outside investors; the same announcement as acq.openai.tomoro.pt. Cited from a raw archive capture because the live page refuses scripted requests.

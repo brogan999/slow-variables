@@ -877,3 +877,53 @@ def test_lab_count_is_labs_whose_interval_reaches_the_leaders_floor_in_the_trail
     ])
     out = {str(d): v for d, v, _ in con.execute(METRICS["frontier_lab_count"]["sql"]).fetchall()}
     assert out["2026-02-01"] == 3.0  # OpenAI, Google DeepMind, and the uncertain 160 model's own lab
+
+
+def test_rollup_purchases_count_service_firms_apart_from_software_in_swept_quarters():
+    con = duckdb.connect()
+    con.execute(
+        "CREATE TABLE obs_raw (id VARCHAR, series_key VARCHAR, subject VARCHAR, as_of_date DATE, value_numeric DOUBLE, raw_snippet VARCHAR, disputed BOOLEAN)"
+    )
+    con.executemany(
+        "INSERT INTO obs_raw VALUES (?, ?, ?, ?, NULL, '', false)",
+        [
+            ("a1", "rollup_acq.crete.reid.pt", "crete", "2024-04-01"),
+            ("a2", "rollup_acq.crete.bfj.pt", "crete", "2025-02-10"),
+            ("d1", "rollup_acq.dwelly.move.pt", "dwelly", "2025-06-30"),
+            ("s1", "rollup_acq.bending_spoons.vimeo.pt", "bending_spoons", "2025-03-01"),  # a software product
+            ("u1", "rollup_acq.titan.unfiled.pt", "titan", "2025-03-02"),  # filed under no trade: not counted
+            ("x1", "acq.openai.sky.pt", "openai", "2025-03-03"),  # the labs' ledger is another count
+        ],
+    )
+    con.execute(KEY_SPLIT)
+    con.execute("CREATE TABLE rollup_trade (series_key VARCHAR, trade VARCHAR)")
+    con.executemany(
+        "INSERT INTO rollup_trade VALUES (?, ?)",
+        [
+            ("rollup_acq.crete.reid.pt", "accounting"),
+            ("rollup_acq.crete.bfj.pt", "accounting"),
+            ("rollup_acq.dwelly.move.pt", "property_management"),
+            ("rollup_acq.bending_spoons.vimeo.pt", "software"),
+        ],
+    )
+    sql = METRICS["rollup_deals_4q"]["sql"]
+    out = {(str(d), k): (v, sorted(ids)) for d, k, v, ids in con.execute(sql).fetchall()}
+    assert not [k for k in out if k[0] < "2024-12-31"]  # a year that began before the ledger did is never read
+    assert out[("2024-12-31", "services")] == (1, ["a1"])
+    assert out[("2025-03-31", "services")] == (2, ["a1", "a2"]) and out[("2025-03-31", "software")] == (1, ["s1"])
+    assert out[("2025-06-30", "services")] == (2, ["a2", "d1"])  # the last day of a quarter is inside it; a1 has aged out
+    swept = re.search(r"DATE '(\d{4}-\d{2}-\d{2})' AS through", sql)
+    assert swept  # the last swept quarter end is written into the SQL, and each sweep's PR raises it
+    earlier = sql.replace(swept.group(0), "DATE '2025-03-31' AS through")
+    assert sorted({str(d) for d, *_ in con.execute(earlier).fetchall()}) == ["2024-12-31", "2025-03-31"]
+    caveats = METRICS["rollup_deals_4q"]["caveats"]
+    assert "thirty-three" in caveats and "joining" in caveats  # how far the sweep reached, and what an announcement proves
+
+
+def test_the_store_files_every_rollup_purchase_under_one_trade():
+    from ai_tracker.store import Store
+
+    s = Store()
+    filed = dict(s.con.execute("SELECT series_key, count(*) FROM rollup_trade GROUP BY 1").fetchall())
+    keys = {k for (k,) in s.con.execute("SELECT DISTINCT series_key FROM observations WHERE source_ns = 'rollup_acq'").fetchall()}
+    assert keys and keys == set(filed) and set(filed.values()) == {1}

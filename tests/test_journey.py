@@ -10,7 +10,8 @@ NAV = (WEB / "lib" / "nav.ts").read_text()
 
 def test_every_stop_is_a_page_in_reading_order():
     stops = re.findall(r'\{ n: "([0-9ab]+)", name: "[^"]+", href: "([^"]+)"', NAV)
-    assert [n for n, _ in stops] == ["1", "2", "3", "4", "5", "6a", "6b", "7"]
+    assert [n for n, _ in stops] == ["1", "2", "3", "4", "5", "6", "7a", "7b", "8"]
+    assert dict((h, n) for n, h in stops)["/firm"] == "6"  # who owns what closes the act on the money
     for _, href in stops:
         assert (WEB / "app" / href.strip("/") / "page.tsx").exists(), href
 
@@ -106,3 +107,8 @@ def test_the_privacy_notice_says_what_the_side_panel_keeps_in_the_tab():
     method = (WEB / "app" / "methodology" / "page.tsx").read_text()
     assert "keeps nothing in your browser beyond the tab&apos;s session" in method
     assert "never stored on a server" in (WEB / "components" / "Chat.tsx").read_text()
+
+
+def test_the_path_is_called_nine_stops_wherever_it_is_counted():
+    said = [f for f in (WEB / "lib" / "nav.ts", WEB / "app" / "page.tsx", WEB / "components" / "Journey.tsx") if "nine stops" in f.read_text()]
+    assert len(said) == 3 and not [f for f in WEB.rglob("*.ts*") if "eight stops" in f.read_text()]

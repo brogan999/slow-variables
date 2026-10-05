@@ -268,6 +268,10 @@ export type Place = {
 };
 export type Shifts = { grounded_in: string[]; places: Place[]; foot_claims: { id: string; state: OutlookState | null }[] };
 export const outlook = () => read<OutlookDoc>("outlook.json");
+// The part of the outlook's ledger a page argues from: /firm carries its own cut of it (firm.json).
+export type ClaimsDoc = Pick<OutlookDoc, "as_of" | "essay" | "facts" | "sources" | "positions" | "claims" | "tally" | "tests">;
+export type FirmDoc = ClaimsDoc & { folios: Record<string, string[]>; regimes: { title: string; note: string; columns: string[]; rows: string[][] } };
+export const firm = () => read<FirmDoc>("firm.json");
 export type Word = "happening" | "not_happening" | "slower" | "both" | "too_early";
 export type BoardRow = {
   id: string; kind: "ledger" | "outlook" | "migration" | "exit"; folio: string; who: string; attribution: string; line: string;

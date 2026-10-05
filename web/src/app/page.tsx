@@ -69,7 +69,7 @@ export default function Home() {
       ) : null}
 
       <section aria-labelledby="path" className="flex flex-col gap-5 rounded-[4px] bg-surface-2 p-5 md:p-6">
-        <h2 id="path" className="eyebrow">The path · three acts, eight stops</h2>
+        <h2 id="path" className="eyebrow">The path · three acts, nine stops</h2>
         <div className="grid gap-6 md:grid-cols-3">
           {ACTS.map((a) => (
             <div key={a.act} className="flex flex-col gap-3">

@@ -149,8 +149,9 @@ def strings(spec: dict[str, Any]) -> list[str]:
     return out
 
 
-def essay_problems(text: str, spec: dict[str, Any]) -> list[str]:
-    """Tokens that do not resolve, and quoted words that are not a source's one checked quote."""
+def essay_problems(text: str, spec: dict[str, Any], plates: tuple[str, ...] = PLATES) -> list[str]:
+    """Tokens that do not resolve, and quoted words that are not a source's one checked quote. `plates` names the
+    figures the page drawing this essay has; another essay argued from the same ledger passes its own."""
     sources = {x["id"] for x in spec.get("sources") or []}
     numeric = {
         c["id"]
@@ -158,7 +159,7 @@ def essay_problems(text: str, spec: dict[str, Any]) -> list[str]:
         for k, v in (c.get("test") or {}).items()
         if k in OPS and not isinstance(v, str)
     }
-    known = {"fact": set(spec.get("facts") or {}), "cite": sources, "test": numeric, "plate": set(PLATES)}
+    known = {"fact": set(spec.get("facts") or {}), "cite": sources, "test": numeric, "plate": set(plates)}
     errors = [f"outlook: [{k}:{v}] does not resolve" for k, v in TOKEN.findall(text) if v not in known[k]]
     quotes = {x["quote"].rstrip(".").strip(): x["id"] for x in spec.get("sources") or [] if x.get("quote")}
     seen: dict[str, int] = {}
