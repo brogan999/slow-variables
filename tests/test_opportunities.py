@@ -85,3 +85,17 @@ def test_build_takes_tiers_from_the_rubric_and_companies_from_the_map():
     assert doc["counts"]["records"] == 3 and doc["counts"]["unmapped"] == 1
     assert doc["sequence"][0]["label"] == "Needs"  # the last stage opens nothing
     assert doc["powers"] == {"switching costs": op.POWER_GLOSS["switching costs"]}
+
+
+def test_every_published_opportunity_says_what_it_needs_first_who_would_buy_it_and_the_next_step():
+    import yaml
+
+    from ai_tracker import opportunities as op
+
+    spec = yaml.safe_load(op.SPEC.read_text())
+    for o in spec["opportunities"]:
+        if o.get("published"):
+            for k in ("prerequisites", "acquirers", "next_action"):
+                assert (o.get(k) or "").strip(), f"{o['id']}: {k} is not written"
+    page = (op.SPEC.parents[1] / "web/src/app/value-chain/opportunities/page.tsx").read_text()
+    assert "blank on purpose" not in page
