@@ -828,3 +828,4 @@ Deliberately not done: an `expectations` SQL table, per-page share images, pips,
 - **Conventions a reader should know:** a forecast given as a central date is judged as "arrives by that date"; odds of a catastrophe are judged on whether the event happens; a conditional forecast is judged given its condition, and its reason says so; a claim that needs outside confirmation leans against until there is some.
 - **To re-run:** rebuild the packs from the export, judge by section, review, and replace the file; change `made_by` with it.
 - **Next uses of the same layer:** Atlas expectations, indicators held at emerging, tightness inputs with no score (a word, never a score), unpublished indicators and barriers with no reading.
+- **Ask back on (5 Oct 2026):** the workspace has credit again and a test question answered on the live service, so `SITE.askOnline` is true and the header link, "Reason through this", "Query this series" and the path's last card return.
