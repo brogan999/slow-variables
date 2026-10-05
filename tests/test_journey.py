@@ -43,12 +43,13 @@ def test_every_page_has_a_contents_entry_that_says_what_question_it_answers():
 
 
 def test_every_section_the_contents_page_links_to_exists():
-    sources = "".join(f.read_text() for f in (WEB).rglob("*.tsx")) + "".join(f.read_text() for f in (ROOT / "seed").glob("*.yaml"))
+    sources = "".join(f.read_text() for f in (WEB).rglob("*.tsx")) + "".join(f.read_text() for f in [*(ROOT / "seed").glob("*.yaml"), *(ROOT / "docs" / "argument").glob("*.md")])
     anchors = re.findall(r'\["([a-z0-9_-]+)", "[^"]+", "[^"]+\?"\]', _contents())
     assert len(anchors) > 40
+    words = " ".join(re.sub(r"[^a-z0-9]+", " ", sources.lower()).split())  # an essay's anchor is its folio label, slugged
     for a in anchors:
         stem = re.sub(r"^(folio|vc)-", "", a)
-        assert f'"{a}"' in sources or f"id: {stem}" in sources or re.search(rf"\b{re.escape(stem)}\b", sources), a
+        assert f'"{a}"' in sources or re.search(rf"\b{re.escape(stem)}\b", sources) or f" {stem.replace('-', ' ')} " in f" {words} ", a
 
 
 def test_the_contents_page_is_one_click_from_every_page():
