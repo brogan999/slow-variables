@@ -121,6 +121,7 @@ export const PAGES: Record<string, Page> = {
     ["census", "The automatability census", "How was the census measured, and what are its limits?"],
     ["futures", "Futures", "How were the imagined technologies dated, judged and illustrated?"],
     ["reuse", "Reuse, citation and corrections", "How may the data be reused, and how are errors corrected?"],
+    ["judgements", "A model's judgement where there is no reading", "Where does a model's opinion fill a gap, and how is it kept apart from the readings?"],
     ["not-measured", "Not measured, and why", "What does the site leave out, and why?"],
   ] },
   "/legal": { name: "Legal notice", question: "Who runs the site, and on what terms may it be used?", sections: [

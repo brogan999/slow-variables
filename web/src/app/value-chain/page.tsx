@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { DIRECTION, PowersGlossary } from "@/components/ValueChain";
 import { MarketMap } from "@/components/MarketMap";
-import { index, marketMap, valueChain } from "@/lib/data";
+import { index, judgements, marketMap, valueChain } from "@/lib/data";
 
 export const metadata = {
   title: "The value chain",
@@ -10,6 +10,7 @@ export const metadata = {
 
 export default function ValueChainPage() {
   const v = valueChain();
+  const judged = judgements().surfaces.tightness ?? {};
   const named = new Map(v.companies.map((c) => [c.entity, c.name]));
   return (
     <div className="flex flex-col gap-8 max-w-[72rem]">
@@ -33,7 +34,7 @@ export default function ValueChainPage() {
             <li key={u.id} className="grid gap-1 md:gap-4 md:grid-cols-[2fr_0.8fr_2fr_1.6fr] py-3 border-b border-grid text-sm">
               <Link href={`/layers/${u.layer}#assessment-${u.id}`} className="text-ink underline decoration-grid underline-offset-4 hover:decoration-ink">{u.title}</Link>
               <span className="text-ink-2"><span className="md:sr-only text-muted">Direction: </span>{DIRECTION[u.direction]}</span>
-              <span className="text-ink-2"><span className="md:sr-only text-muted">Binds on: </span>{u.binding.map((b) => `${b.name} (${b.word ?? "no reading"})`).join(", ") || "none named"}</span>
+              <span className="text-ink-2"><span className="md:sr-only text-muted">Binds on: </span>{u.binding.map((b) => `${b.name} (${b.word ?? (judged[b.id] ? `no reading; a model judges it ${judged[b.id].label}` : "no reading")})`).join(", ") || "none named"}</span>
               <span className="text-ink-2"><span className="md:sr-only text-muted">Companies profiled: </span>{v.companies.filter((c) => c.units.includes(u.id)).map((c) => named.get(c.entity)).join(", ") || "none profiled"}</span>
             </li>
           ))}

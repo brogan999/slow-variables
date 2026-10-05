@@ -1,5 +1,6 @@
 import Link from "next/link";
-import type { AtDomain, AtMapRow, AtPlate, AtReading, AtlasDoc } from "@/lib/data";
+import { judgements, type AtDomain, type AtMapRow, type AtPlate, type AtReading, type AtlasDoc } from "@/lib/data";
+import { Judged } from "./Judged";
 import { Figure } from "./Figure";
 import { Fact } from "./Fact";
 
@@ -112,6 +113,7 @@ export function PlateCards({ doc }: { doc: AtlasDoc }) {
 export const roman = (n: number) => ["I", "II", "III", "IV", "V", "VI", "VII", "VIII"][n - 1];
 
 export function EraSection({ era }: { era: AtDomain["eras"][number] }) {
+  const judged = judgements();
   return (
     <section id={era.id} aria-labelledby={`${era.id}-h`} className="mt-12 scroll-mt-8">
       <div className="gild-rule mb-5" aria-hidden />
@@ -127,6 +129,7 @@ export function EraSection({ era }: { era: AtDomain["eras"][number] }) {
                 {e.any ? <span className="world-chip">in any world</span> : e.world_labels.map((w) => <span key={w} className="world-chip">{w}</span>)}
               </p>
               {e.reads.map((r) => <p key={r.id} className="mt-1.5 text-xs text-ink-2">Bears on: {r.label}, <Fact f={r.reading} /></p>)}
+              <Judged j={judged.surfaces.atlas?.[e.id]} />
             </li>
           ))}
         </ul>

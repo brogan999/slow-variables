@@ -438,6 +438,9 @@ def _check(s: st.Store) -> tuple[list[str], list[str]]:
     from . import opportunities
 
     errors += opportunities.problems(opportunities.load(), market_map.load(), load_outlook(), futures.rubric())
+    from . import judgements
+
+    b_errors += judgements.problems(judgements.load(), judgements.known())
     return errors + a_errors + m_errors + o_errors + b_errors + s_errors, notes + a_notes + o_notes + vc_notes
 
 

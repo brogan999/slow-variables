@@ -5,7 +5,8 @@ import { Inline } from "@/components/Essay";
 import { Fact } from "@/components/Fact";
 import { Figure, Key } from "@/components/Figure";
 import { Grade } from "@/components/StatusChip";
-import type { MigrationDoc, TightInput } from "@/lib/data";
+import { Judged } from "@/components/Judged";
+import { judgements, type MigrationDoc, type TightInput } from "@/lib/data";
 import { PREDICTION_WORDS, WITHHELD_WORDS } from "@/lib/format";
 
 const lower = (name: string) => (/^[A-Z]{2}/.test(name) ? name : name[0].toLowerCase() + name.slice(1)); // "AI chips" keeps its capitals
@@ -97,6 +98,7 @@ function Bar({ i, floors }: { i: TightInput; floors: number[] }) {
 // on a bar ticked at the word lines, its confidence and how many gauges stand behind it; an input with no usable data
 // stays in the table with the reason, never scored.
 export function ScorecardPlate({ card }: { card: MigrationDoc["scorecard"] }) {
+  const judged = judgements();
   const floors = card.method.words.map(([floor]) => floor).filter((f) => f > 0);
   const scored = card.inputs.filter((i) => i.score !== null);
   return (
@@ -155,6 +157,7 @@ export function ScorecardPlate({ card }: { card: MigrationDoc["scorecard"] }) {
                   <td colSpan={4} className="text-ink-2">
                     <span className="num text-muted mr-1.5 text-[11px]">{String(i.n).padStart(2, "0")}</span>{i.name}
                     <span className="block text-[12px] leading-snug"><span className="text-muted">Not scored: {i.withheld ? WHY[i.withheld.kind] : "no reading"}.</span> {i.withheld?.because}</span>
+                    <Judged j={judged.surfaces.tightness?.[i.id]} />
                   </td>
                 </tr>
               ))}

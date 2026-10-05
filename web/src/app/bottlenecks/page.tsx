@@ -2,7 +2,8 @@ import Link from "next/link";
 import { BottleneckMap, Bets, MapReasons } from "@/components/BottleneckMap";
 import { PageHeader } from "@/components/PageHeader";
 import { StatusChip } from "@/components/StatusChip";
-import { bottleneckMap, bottlenecks, index, words } from "@/lib/data";
+import { bottleneckMap, bottlenecks, index, words, judgements } from "@/lib/data";
+import { Judged } from "@/components/Judged";
 import { indicatorHref } from "@/lib/format";
 import { SITE } from "@/lib/site";
 
@@ -18,6 +19,7 @@ export const metadata = {
 export default function BottlenecksPage() {
   const doc = bottleneckMap();
   const { sections, essays, items } = bottlenecks();
+  const judged = judgements();
   const { buckets } = index();
   const bucketName = (id: string) => buckets.find((b) => b.id === id)?.name ?? words(id);
   return (
@@ -51,7 +53,7 @@ export default function BottlenecksPage() {
                 {items.filter((i) => i.section === s.name).map((b) => (
                   <li key={b.id} id={`b${b.id}`} className="panel p-3 text-sm scroll-mt-24 target:bg-surface-2">
                     <div><span className="text-muted tabular-nums mr-2">#{b.id}</span><span className="font-medium">{b.title}.</span> {b.text} {b.domain ? <span className="text-xs text-muted" title={b.domain_basis ?? undefined}>[{b.domain}] </span> : null}<span className="text-xs text-muted">{b.source_codes.map((c, i) => { const e = essays.find((x) => x.code === c); return <span key={c}>{i ? ", " : ""}{e ? <a href={e.url} className="underline decoration-grid underline-offset-4" title={`${e.title} (${e.date})`}>{c}</a> : c}</span>; })}</span></div>
-                    {b.related.length ? <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-1 text-xs">{b.related.map((r) => <span key={r.id}><Link href={indicatorHref(r.id, r.published)} className="hover:underline">{r.name}</Link> <StatusChip status={r.published ? r.status : null} /></span>)}</div> : null}
+                    {b.related.length ? <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-1 text-xs">{b.related.map((r) => <span key={r.id}><Link href={indicatorHref(r.id, r.published)} className="hover:underline">{r.name}</Link> <StatusChip status={r.published ? r.status : null} /></span>)}</div> : <Judged j={judged.surfaces.barriers?.[String(b.id)]} />}
                   </li>
                 ))}
               </ol>

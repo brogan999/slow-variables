@@ -10,7 +10,8 @@ import { ChangelogList } from "@/components/Changelog";
 import { Num, ObsLinks } from "@/components/Provenance";
 import { ArticleLayout, MarginPanel } from "@/components/ArticleLayout";
 import { Grade, PendingNote, StatusChip, WordChip } from "@/components/StatusChip";
-import { board, fmt, index, outlook, indicator, meta, obsIndex, sources, words, type Band } from "@/lib/data";
+import { board, fmt, index, outlook, indicator, meta, obsIndex, sources, words, type Band, judgements } from "@/lib/data";
+import { Judged } from "@/components/Judged";
 
 export const dynamicParams = false;
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -54,7 +55,7 @@ export default async function IndicatorPage({ params }: { params: Promise<{ slug
         <>
           <MarginPanel title="Reading">
             <div className="flex flex-col gap-3">
-              <div className="self-start"><StatusChip status={d.published ? d.status : "unpublished"} size="lg" /></div>
+              <div className="self-start"><StatusChip status={d.published ? d.status : "unpublished"} size="lg" />{d.status === "emerging" ? <Judged j={judgements().surfaces.indicators?.[d.id]} className="max-w-[28rem]" /> : null}</div>
               {d.pending ? <PendingNote p={d.pending} /> : null}
               {d.stale_as_of ? <p className="text-error">stale since {d.stale_as_of}</p> : null}
               {d.stale_reason ? <p className="text-muted">refreshed irregularly: {d.stale_reason}</p> : null}

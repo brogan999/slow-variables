@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { EconomicsUnit, Profile } from "@/lib/data";
+import { judgements } from "@/lib/data";
 import { PhoneCollapse } from "@/components/PhoneCollapse";
 
 export const DIRECTION: Record<EconomicsUnit["direction"], string> = {
@@ -12,10 +13,11 @@ const link = "underline decoration-grid underline-offset-4 hover:text-ink";
 // Each input with its tightness word from the bottleneck scorecard.
 export function Binding({ b }: { b: EconomicsUnit["binding"] }) {
   if (!b.length) return null;
+  const judged = judgements().surfaces.tightness ?? {};
   return (
     <span>
       {b.map((x, i) => (
-        <span key={x.id}>{i ? ", " : ""}{x.name} <span className="text-muted">({x.word ?? "no reading"})</span></span>
+        <span key={x.id}>{i ? ", " : ""}{x.name} <span className="text-muted">({x.word ?? (judged[x.id] ? `no reading; a model judges it ${judged[x.id].label}` : "no reading")})</span></span>
       ))}
     </span>
   );
