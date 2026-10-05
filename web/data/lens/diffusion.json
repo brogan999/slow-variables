@@ -1,5 +1,5 @@
 {
- "as_of": "2026-10-04",
+ "as_of": "2026-10-05",
  "buckets": [
   {
    "id": "methods",
@@ -158,7 +158,7 @@
      },
      "layer_id": "model",
      "leading_lagging": "leading",
-     "n_observations": 49,
+     "n_observations": 50,
      "name": "METR 50% time horizon",
      "pending": null,
      "published": true,
@@ -1820,8 +1820,8 @@
      "grade": "D",
      "id": "safety_brake_events",
      "latest": {
-      "as_of": "2026-10-04",
-      "derived_id": "b54d3fe810a5c94a",
+      "as_of": "2026-10-05",
+      "derived_id": "7a0412b015668f77",
       "dims": {},
       "obs_ids": [
        "2ab8fec44e7914a5",
@@ -2798,27 +2798,33 @@
      "grade": "B",
      "id": "rl_environment_vendor_count",
      "latest": {
-      "as_of": "2026-07-15",
+      "as_of": "2026-10-05",
       "disputed": false,
       "grade": "B",
       "high": null,
       "low": null,
       "obs_ids": [
-       "9d5a213e73989490"
+       "ac151a84d381a1a4"
       ],
       "series_key": "rl_list.commercial.active_vendor_count.pt",
       "subject": "commercial",
       "unit": "count",
-      "value": 24.0
+      "value": 23.0
      },
      "layer_id": "training_input",
      "leading_lagging": "leading",
-     "n_observations": 1,
+     "n_observations": 2,
      "name": "Active RL-environment vendors (directory count)",
      "pending": null,
      "published": true,
      "source_cluster": null,
-     "spark": null,
+     "spark": {
+      "d": "M1.0,2.0 L95.0,26.0",
+      "end": [
+       95.0,
+       26.0
+      ]
+     },
      "stale_as_of": null,
      "stale_reason": null,
      "status": "emerging",
@@ -2882,8 +2888,8 @@
      "grade": "D",
      "id": "cl_lab_release_claims",
      "latest": {
-      "as_of": "2026-10-04",
-      "derived_id": "a8b559ad1a0b19d4",
+      "as_of": "2026-10-05",
+      "derived_id": "1b9737900a1dd0fa",
       "dims": {},
       "obs_ids": [
        "0bdf1920b1feb93e",
@@ -3184,7 +3190,7 @@
    "to": "capture"
   }
  ],
- "verdict": "As of 2026-10-04: methods mixed, products consistent with normal, early adoption consistent with normal, adaptation consistent with normal, return arrow emerging. Thesis: holding.",
+ "verdict": "As of 2026-10-05: methods mixed, products consistent with normal, early adoption consistent with normal, adaptation consistent with normal, return arrow emerging. Thesis: holding.",
  "what_would_change": [
   "METR 50% time horizon: Normal = doubling time \u2265 7 months (\u2248213 days, METR's 2019\u20132025 trend); fast = \u2264 4 months (\u2248122 days), the AI 2027 assumption. Between the two is `emerging`. The bands are about the current pace, so the input is a log-linear fit over the 2024-onward window, the most recent window METR reports (89 days in the TH1.1 post of 29 Jan 2026), recomputed from METR's corrected data. On the 2023-onward window METR's published figure is 128.7 days, in the gap between the bands: the reading is window-sensitive and both numbers are shown.",
   "METR 80% time horizon: Same bands and same 2024-onward window as the 50% horizon, applied to our own fit because METR publishes doubling times for the 50% series only. The 2023-onward fit (horizon_doubling_days_80) sits in the gap between the bands.",
