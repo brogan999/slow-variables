@@ -8,8 +8,8 @@ import { AnswerView, STAGES, useAsk, type Turn } from "@/components/AskShared";
 import { PAGES } from "@/lib/contents";
 import { SITE } from "@/lib/site";
 
-const KEY = "ask-panel";
-const SECTIONS = "main h2[id], main section[id] > h2, main [id] > h2";
+const KEY = "ask-panel:1";  // bump when a turn's shape changes, so an older store is ignored
+const SECTIONS = "main h2[id], main [id] > h2";
 const ALWAYS = [
   [AlignLeft, "Summarise this page"],
   [Scale, "What is the evidence against this?"],
@@ -20,8 +20,16 @@ const iconBtn = "inline-flex items-center justify-center size-7 rounded-[6px] te
 function stored(): Turn[] {
   try {
     const v: unknown = JSON.parse(sessionStorage.getItem(KEY) ?? "[]");
-    return Array.isArray(v) ? v : [];
+    return Array.isArray(v) ? v.filter((t) => typeof t?.q === "string") : [];
   } catch { return []; }  // the server, a private window, or a blocked store: start empty
+}
+
+// A modal sheet (the site search) is open above the page.
+const modal = () => Boolean(document.querySelector('[role="dialog"][data-open]'));
+// Something Escape should close before the panel: that sheet, a chart's hover tip, or a source card (a native popover).
+function above() {
+  if (modal() || document.querySelector(".hover-tip:not([hidden])")) return true;
+  try { return Boolean(document.querySelector(":popover-open")); } catch { return false; }  // an older Safari throws on the selector
 }
 
 const watchTitle = (cb: () => void) => {
@@ -51,19 +59,25 @@ export function AskPanel() {
 
   useEffect(() => {
     if (busy) return;  // a reload keeps the conversation; only finished turns are kept
-    try { sessionStorage.setItem(KEY, JSON.stringify(turns)); } catch { /* no store: the conversation lives in memory only */ }
+    try {
+      if (turns.length) sessionStorage.setItem(KEY, JSON.stringify(turns.slice(-20)));
+      else sessionStorage.removeItem(KEY);  // New chat leaves nothing behind
+    } catch { /* no store: the conversation lives in memory only */ }
   }, [turns, busy]);
 
   useEffect(() => {
     if (pathname === "/ask") return;
     const onKey = (e: KeyboardEvent) => {
       const mod = /Mac|iP/.test(navigator.platform) ? e.metaKey : e.ctrlKey;
-      if (mod && !e.shiftKey && !e.altKey && e.key?.toLowerCase() === "j") { e.preventDefault(); setOpen((o) => !o); }
-      // Escape closes the panel unless something above it (a source card, the search sheet) took the key first
-      else if (e.key === "Escape" && !e.defaultPrevented && !document.querySelector(":popover-open")) setOpen(false);
+      if (mod && !e.shiftKey && !e.altKey && e.key?.toLowerCase() === "j") {
+        if (modal()) return;
+        e.preventDefault();
+        setOpen((o) => !o);
+      } else if (e.key === "Escape" && !e.defaultPrevented && !e.isComposing && !above()) setOpen(false);
     };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    // capture: the hover layer hides its tip on the same key further down, and the panel must see the tip first
+    window.addEventListener("keydown", onKey, true);
+    return () => window.removeEventListener("keydown", onKey, true);
   }, [pathname]);
 
   useEffect(() => {  // focus goes to the composer on open and back to the launcher on close
@@ -80,9 +94,11 @@ export function AskPanel() {
       }
       setSection(name);
     };
-    const first = requestAnimationFrame(read);
-    window.addEventListener("scroll", read, { passive: true });
-    return () => { cancelAnimationFrame(first); window.removeEventListener("scroll", read); };
+    let frame = 0;
+    const onScroll = () => { if (!frame) frame = requestAnimationFrame(() => { frame = 0; read(); }); };  // at most one read a frame
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => { cancelAnimationFrame(frame); window.removeEventListener("scroll", onScroll); };
   }, [open, pathname]);
 
   useEffect(() => {  // the composer grows with its text
@@ -95,7 +111,7 @@ export function AskPanel() {
   // a new question is pinned to the top of the panel, so its answer reads from its first line
   useEffect(() => { if (busy) newest.current?.scrollIntoView({ block: "start" }); }, [busy]);
 
-  if (pathname === "/ask") return null;  // the full page is the same conversation tool; no second one beside it
+  if (pathname === "/ask") return null;  // the Ask page holds its own, separate conversation; no second one beside it
 
   const from = `${pathname} — ${title}${section ? `, section "${section}"` : ""}`;
   async function ask(text: string, page = withPage) {
@@ -123,7 +139,7 @@ export function AskPanel() {
         <span className="flex items-center gap-1.5 font-medium"><Glyph />Ask</span>
         <span className="flex-1" />
         <button type="button" onClick={() => { reset(); setQ(""); box.current?.focus(); }} aria-label="New chat" title="New chat" className={iconBtn}><SquarePen className="size-4" /></button>
-        <Link href="/ask" onClick={() => setOpen(false)} aria-label="Open in full page" title="Open in full page" className={iconBtn}><Maximize2 className="size-4" /></Link>
+        <Link href="/ask" onClick={() => setOpen(false)} aria-label="Go to the Ask page" title="Go to the Ask page" className={iconBtn}><Maximize2 className="size-4" /></Link>
         <button type="button" onClick={() => setOpen(false)} aria-label="Close" title="Close" className={iconBtn}><X className="size-4" /></button>
       </header>
 
