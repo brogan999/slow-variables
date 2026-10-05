@@ -191,9 +191,9 @@
   {
    "attribution": "author",
    "due": "2028-09-11",
-   "expected": "holding",
-   "fact": "lab_services_firm",
-   "falsifier": "No frontier lab owning a professional services firm by September 2028. One lab's own announcement says it majority-owns and controls such a firm, so the claim reads as met unless that statement is withdrawn.",
+   "expected": null,
+   "fact": null,
+   "falsifier": "No frontier lab owning a professional services firm, such as a law, accounting or consulting practice, by September 2028. Its author wrote in September 2026 that no lab had yet done so, after OpenAI had launched its deployment company, so that company does not settle it.",
    "folio": "value",
    "grace_days": null,
    "holders": [
@@ -207,11 +207,8 @@
    "rival_until": null,
    "row": null,
    "stage": null,
-   "state": "holding",
-   "test": {
-    "fact": "lab_services_firm",
-    "gte": 1
-   },
+   "state": "untestable",
+   "test": null,
    "text": "A frontier lab launches or majority-owns a professional services firm, under its own brand or at arm's length, by September 2028."
   },
   {
@@ -396,16 +393,14 @@
    "text": "Service firms bought by owners built around AI earn higher margins afterwards than rivals that only buy the same tools, in trades not billed by the hour."
   },
   {
-   "attribution": "author",
+   "attribution": "site",
    "due": "2028-12-31",
    "expected": null,
    "fact": null,
    "falsifier": "No frontier lab owning an operating business in a licensed trade by the end of 2028. The labs' deal ledger leaves out purchases of businesses that are not AI or technology firms, so no count on this site would see it.",
    "folio": "value",
    "grace_days": null,
-   "holders": [
-    "hobart_sued"
-   ],
+   "holders": [],
    "horizon_years": null,
    "id": "lab_runs_operations",
    "position": "up_the_stack",
@@ -423,7 +418,7 @@
    "due": null,
    "expected": "both",
    "fact": "token_hhi",
-   "falsifier": "Use concentrating on one lab's models while open ones fall further behind, or a current survey finding most large firms running their own. The reading is developers' routed tokens, not firms' spending, and the rival speaks of who runs a model, not whose it is, so it accepts the same reading.",
+   "falsifier": "Use concentrating on one lab's models while open ones fall further behind, or a current survey finding most large firms running their own. The reading is developers' routed tokens, not firms' spending, and the rival speaks of who runs a model, not whose it is, so it accepts the same reading. A router's traffic is all rented, so this reading can show spread among sellers and cannot show renting against owning.",
    "folio": "value",
    "grace_days": null,
    "holders": [
@@ -518,16 +513,14 @@
    "text": "Work that must be decided faster than a message can reach a data centre, or on little power, is run on the spot, whoever holds the knowledge."
   },
   {
-   "attribution": "extension",
+   "attribution": "site",
    "due": null,
    "expected": null,
    "fact": null,
    "falsifier": "A later run of this site's census, under the same rule, finding more payroll passing its screen than waiting on a check without new checks having been built; or models checking their own work as reliably as an outside check does. The census is a screen scored by AI models, not a record of observations, so no nightly test reads it.",
    "folio": "adoption",
    "grace_days": null,
-   "holders": [
-    "catalini"
-   ],
+   "holders": [],
    "horizon_years": null,
    "id": "check_binds",
    "position": "checking_order",
@@ -564,7 +557,7 @@
    "text": "A group that runs many businesses with AI is valued above the sum of its parts only if it shares what each learns across them; a holding company that keeps them apart is not."
   }
  ],
- "essay": "# A firm rents what it can check and owns what it must answer for.\n\nA firm is a line drawn round some work. Inside it, people are told what to do; outside it, things are bought. Economists have long explained where the line falls by what it costs to deal with strangers. AI models are now sold by the token, a fragment of a word, so a firm can buy thinking by the unit as it buys electricity. This essay asks where the line moves when that is so, and sets out what this site's records show.\n\n### Folio I \u00b7 the boundary\n\n## A firm ends where buying gets cheaper than managing\n\nRonald Coase, a British economist, asked in 1937 why firms exist if prices can settle who makes what. His answer was that using a market is not free. Someone has to find out prices, bargain, and write a contract for every exchange: the transaction costs. Inside a firm a manager's instruction replaces all of that. A firm, \"that little planned society\" as he later called it, grows until organising one more job inside costs as much as buying it outside [cite:coase].\n\nAn AI agent, a model set to carry out tasks on someone's behalf, can search, compare and bargain for almost nothing. Peyman Shahidi, John Horton and their colleagues, who study online markets, called the prospect a Coasean singularity, with a question mark, and expect the line between making and buying to move [cite:shahidi_etal]. One of them works for Amazon and another is a paid adviser to Anthropic. They do not say firms vanish, and they list new frictions agents bring.\n\nCoase's rule has two sides, and cheap intelligence lowers both. Gillian Hadfield, who designs legal and regulatory systems for AI, and Andrew Koh, who studies how to design markets, observe that what stops a firm growing without limit is a set of obstacles that \"seem intrinsic to humans but not to AI\" [cite:hadfield_koh]. So the rule cannot say by itself whether firms shrink or grow. Something else decides, and the next three folios take the candidates in turn: what a firm knows, what it must answer for, and where its decisions have to be taken.\n\n### Folio II \u00b7 the leak\n\n## Asking the market for help tells it what you know\n\nSoren Larson, who writes about how money moves between AI labs and the apps built on them, turns Coase round. If every firm rents the same models, what separates one firm from another is context: what it knows about its customers, its costs and its plans. To buy from a market a firm has to say what it wants, and saying so reveals context. Even a request for bids tells rivals what the firm thinks matters. On his account the firm exists \"to prevent the extraction of its scarce context\" [cite:larson_coasean]. The cost of dealing has not fallen. It has changed from the cost of finding a seller into the cost of being seen.\n\nTwo older results explain why no market repairs this. Kenneth Arrow, an economist who studied how markets handle knowledge, showed that a buyer cannot tell what information is worth until he has it, and then need not pay [cite:arrow]. George Akerlof, who studied markets in which sellers know more than buyers, showed that when quality cannot be seen, good goods are withdrawn and the market shrinks [cite:akerlof]. A firm cannot sell its context without giving it away, or buy another's without guessing at its quality. So it keeps what it knows and acts on it itself.\n\nThe two sides predict different things. Shahidi and his colleagues expect agents to deal for firms in open markets; Larson expects them to stay inside the firm or be fenced out. This site holds no record that tests it. A count of firms buying knowledge-heavy work through independent agents would settle it, and nobody publishes one.\n\n### Folio III \u00b7 the liability\n\n## Whoever must answer for the work ends up owning it\n\nSanford Grossman and Oliver Hart, economists who studied contracts, asked in 1986 what ownership is for. No contract can list everything that might happen. Where it is silent someone has to decide, and they defined owning an asset as holding that right: \"Ownership is the purchase of these residual rights\" [cite:grossman_hart]. Ownership has a price, since control given to one party is taken from another, so it should rest with the party whose decisions matter most.\n\nHadfield and Koh point out that instructing an AI is a contract of this kind: what a designer tells a model to aim at can never cover every case [cite:hadfield_koh]. They ask who answers when it goes wrong, and find the law unready, since few legal systems hold anyone liable for acts they could neither foresee nor control.\n\nThis site joins the two, and the join is its own reading, not theirs. If an agent's instructions are incomplete, someone must decide in the gaps and bear the loss, and Grossman and Hart's result says that someone should own the operation. Byrne Hobart, who writes The Diff, a newsletter on finance and technology, arrives there from the buyer's side. Once software acts for hours with some randomness, the buyer asks whom to sue. A small seller of agents has the least to lose, so the work is bought from a firm with assets, a licence and a name, and a seller sure of its software may do best to own the business that uses it [cite:hobart_sued]. Christian Catalini, Xiang Hui and Jane Wu, economists who study the cost of verifying work, add that doing gets cheaper with computing power while checking is held up by people's time, so the profit moves to whoever can verify and underwrite [cite:catalini].\n\nThe rival view is that insurance and contract will carry the liability, so nobody need own anything. Over the past year this site has recorded [fact:insurer_ledger] moves by insurers to write AI's mistakes out of their standard policies. Both sides expect exclusions first. They part on what comes next: cover for AI sold widely, which would favour the rival, or operators absorbing the risk. Nobody publishes the premiums written for such cover, so tonight's reading cannot tell them apart.\n\n### Folio IV \u00b7 the edge\n\n## Knowledge can be sent to the centre; acting on it sometimes cannot\n\nFriedrich Hayek, an economist who studied how prices carry what people know, argued in 1945 that much of the knowledge an economy runs on is \"the knowledge of the particular circumstances of time and place\" [cite:hayek], which no central office can collect, so decisions belong with the person on the spot.\n\nErik Brynjolfsson, who directs Stanford's Digital Economy Lab, and Zo\u00eb Hitzig, who studies AI's effects on society and worked at OpenAI when they wrote, argue that AI undoes much of this. It records what used to go unwritten and lets a head office process far more, so they predict \"larger average firm size, greater industry concentration, and reduced local managerial autonomy\" [cite:brynjolfsson_hitzig]. Their strongest support comes from Rich Sutton, a computer scientist who studies how machines learn. Over decades of AI research, he found, methods built on what experts know were beaten by general methods that improve as computing gets cheaper [cite:sutton].\n\nChris Walker, who writes on the economics of unwritten knowledge, replies that writing knowledge down for a model is neither free nor complete. Choosing what a model needs to know for each task takes local judgement and has to be done again as the work changes. \"The knowledge problem has not been solved\", he writes; it has moved upstream [cite:walker_context]. Larson grants that context can be gathered and still ends at the edge: running a model costs energy and time, and a car at speed cannot wait for an answer from a distant data centre [cite:larson_hayek].\n\nThe camps agree on more than their conclusions suggest. Both draw a line between what can be recorded and what cannot, and both leave time-critical decisions at the edge: Brynjolfsson and Hitzig themselves list decisions that must be taken faster than a message can travel, beside rare cases, bodily skill and whatever the law reserves for people. They differ on whether the line moves. Brynjolfsson and Hitzig expect the exceptions to shrink as models improve; Walker expects each new ability to open new work that needs local judgement. Delay is the floor neither side disputes, and energy is Larson's addition. Both camps name the same test, whether firms that adopt AI move decisions to the centre, and no one holds a series that reads it.\n\n### Folio V \u00b7 the rent\n\n## Most firms should rent intelligence; a few should own it\n\nThere are two reasons to rent. The lead is short: open models, whose trained settings are published for anyone to run, trail the best closed ones by [fact:open_lag], so a firm that trains its own is buying something that loses value fast. And most firms see nothing in their own work that others do not see: in a simulation of his own, Larson found that a system trained on other firms' results did better than one trained on a firm's own history [cite:larson_router]. Luis Garicano, an economist who studies how firms organise what they know, and Jes\u00fas Saa-Requejo put it plainly: \"Intelligence is not what stops most organisations from doing what they want to do\" [cite:garicano_theses].\n\nThe case against renting is Garicano's too. A supplier of rented intelligence can raise its price once a firm's work depends on it, and can learn the firm's business by watching how it is used [cite:garicano_holdup]. That is Larson's leak again, with the lab as the party watching. So the answer turns on what is scarce in the firm's own work.\n\n[plate:regimes]\n\nClayton Christensen, who studied why leading firms lose their lead, gave the general rule: when one part of a product becomes good enough and interchangeable, the profit moves to the neighbouring part that still limits performance [cite:christensen]. Intelligence by the token is becoming that part. Larson cautions against his own case: owning every step does not make a firm safe, because AI also makes it cheap to stitch separate pieces into something good enough [cite:larson_vertical].\n\n### Folio VI \u00b7 the residue\n\n## Some things do not get cheaper when intelligence does\n\nPhilippe Aghion, Benjamin Jones and Charles Jones, economists who study growth, found that when tasks depend on one another, growth is held back by \"what is essential and yet hard to improve\" [cite:aghion_jones_jones]. Value collects at whatever stays slow, and inside a firm several things do.\n\nAttention: a customer has the same hours in the day whatever a model costs. Ben Thompson, who writes on technology strategy at Stratechery, showed how firms that own the relationship with users make their suppliers interchangeable [cite:thompson]. Accountability: a model cannot be sued, fined or struck off, and a firm can. Trust: Akerlof's remedy for quality nobody can see was a name with something to lose. Permission: licences, regulators and courts decide who may act, and Brynjolfsson and Hitzig count them among the limits on their own prediction. And unwritten judgement: knowing what good work looks like in a trade.\n\nThe last is the one most likely to give way. If models come to learn on the job, what is unwritten today is recorded tomorrow, and Walker says he is wrong if general agents manage complex work inside firms without continuing human help by 2028.\n\n### Folio VII \u00b7 the limit\n\n## In the limit, a firm is a name that can be sued, holding what cannot be bought\n\nWhat follows is this site's judgement. It joins arguments that each have a test into a picture that has none.\n\nCarry each argument to its end and the firm stops being a body of people who do the work. It specifies: it decides what is worth doing and what counts as done. It holds scarce things: customers' attention and trust, licences, sensors, sites with power. It bears risk: it is the legal person that pays when the work is wrong. And it rents its thinking by the token from whoever sells it cheapest, apart from small models it runs on the spot where delay or secrecy demands.\n\nOn the shape of such firms the theories part, and this site keeps all three. Brynjolfsson and Hitzig, and Hadfield and Koh, expect fewer and larger firms. Dwarkesh Patel, a podcaster who interviews AI researchers, expects much larger firms but not a single one, because \"The market continues to serve as the grounding outer loop\" [cite:patel]. Walker and Larson expect a barbell: very large firms where the work is generic, many small ones close to each trade. Larson also expects groups that own many businesses and share what each learns to be worth more than their parts [cite:larson_conglomerate]. Firm size by industry, and the value of such groups against their parts, would separate these, and this site cannot yet read either.\n\nWho profits, on this reasoning, is not mainly the seller of tokens. In Larson's own model a lab captures about a quarter of what its tokens are worth to the buyers, and less as open models catch up [cite:larson_complexity]. The rest goes to the owners of what is scarce beside the intelligence, and, where firms compete, to their customers.\n\n### Folio VIII \u00b7 the record\n\n## Buyers are acting on this before anyone can show it pays\n\nSeveral of this site's records bear on the argument. Roll-ups, buyers that gather many small firms into one and plan to run them with AI, bought [fact:rollup_service_deals] firms that sell services, such as accounting practices and letting agents, in the past year that this site could find, against [fact:rollup_service_deals_year_ago] the year before. What they buy is customers and licences. Their purchases of software products, [fact:rollup_software_deals] in the same year, are counted apart.\n\nThe labs, the companies that train the largest models, are moving the same way. They and the companies that sell computing made [fact:lab_deals_now] purchases in the layers above them in the latest year this site has searched. Among them are firms that fit AI into other companies' work, bought for a company that OpenAI says it majority-owns and controls. That count's rule leaves out ordinary businesses, so it would miss a lab buying an accounting practice.\n\nSuppliers are binding customers without buying them. Deals in which a seller also funds its buyer, by a stake, a loan or a guarantee, came to [fact:seller_funded] over the past four quarters: in Grossman and Hart's terms, buying part of the right to decide.\n\nThe check matters more than the task. This site's census screens American knowledge work for whether it could be handed to software. On its count, far more payroll is held back only because no existing check settles whether the work was done right than passes the screen. The figures are on the census page, since a screen scored by models is not a reading this essay can test.\n\nNone of this shows that owning pays. [fact:firms_using_ai] of American firms say they used AI in the past fortnight, a pace this site calls normal. The site holds no margin for any roll-up after a purchase. The census could not measure whether an owner keeps a saving, and it was scored by three AI models, one of them made by Anthropic, whose model also drafted this page. The site's figures on firm size run years late, and nothing here records where decisions are taken. The site's own leans, a model's judgement on claims too early to test, run against two threads of this essay: they doubt that AI's work will mostly be bought through firms that can be sued, and that groups of pooled businesses will be valued above their parts. A count of purchases records what buyers believe. Each claim below says what would prove it wrong.\n",
+ "essay": "# A firm rents what it can check and owns what it must answer for.\n\nA firm is a line drawn round some work. Inside it, people are told what to do; outside it, things are bought. Economists have long explained where the line falls by what it costs to deal with strangers. AI models are now sold by the token, a fragment of a word, so a firm can buy thinking by the unit as it buys electricity. This essay asks where the line moves when that is so, and sets out what this site's records show. The title is this site's own reading, argued in the third folio; no one writer cited here makes it whole.\n\n### Folio I \u00b7 the boundary\n\n## A firm ends where buying gets cheaper than managing\n\nRonald Coase, a British economist, asked in 1937 why firms exist if prices can settle who makes what. His answer was that using a market is not free. Someone has to find out prices, bargain, and write a contract for every exchange: the transaction costs. Inside a firm a manager's instruction replaces all of that. A firm, \"that little planned society\" as he later called it, grows until organising one more job inside costs as much as buying it outside [cite:coase].\n\nAn AI agent, a model set to carry out tasks on someone's behalf, can search, compare and bargain for almost nothing. Peyman Shahidi, John Horton and their colleagues, who study online markets, called the prospect a Coasean singularity, the point at which dealing costs almost nothing, with a question mark, and expect the line between making and buying to move [cite:shahidi_etal]. One of them works for Amazon and another is a paid adviser to Anthropic. They do not say firms vanish, and they list new frictions agents bring.\n\nCoase's rule has two sides, and cheap intelligence lowers both. Gillian Hadfield, who designs legal and regulatory systems for AI, and Andrew Koh, who studies how to design markets, observe that what stops a firm growing without limit is a set of obstacles that \"seem intrinsic to humans but not to AI\" [cite:hadfield_koh]. So the rule cannot say by itself whether firms shrink or grow. Something else decides, and the next three folios take the candidates in turn: what a firm knows, what it must answer for, and where its decisions have to be taken.\n\n### Folio II \u00b7 the leak\n\n## Asking the market for help tells it what you know\n\nSoren Larson, who writes about how money moves between AI labs, the companies that train the largest models, and the apps built on them, turns Coase round. If every firm rents the same models, what separates one firm from another, once trust and customers' attention are set aside, is context: what it knows about its customers, its costs and its plans. To buy from a market a firm has to say what it wants, and saying so reveals context. Even a request for bids tells rivals what the firm thinks matters. On his account the firm exists \"to prevent the extraction of its scarce context\" [cite:larson_coasean]. The cost of dealing has not fallen. It has changed from the cost of finding a seller into the cost of being seen.\n\nTwo older results explain why no market repairs this. Kenneth Arrow, an economist who studied how markets handle knowledge, showed that a buyer cannot tell what information is worth until he has it, and then need not pay [cite:arrow]. George Akerlof, who studied markets in which sellers know more than buyers, showed that when quality cannot be seen, good goods are withdrawn and the market shrinks [cite:akerlof]. A firm cannot sell its context without giving it away, or buy another's without guessing at its quality. So it keeps what it knows and acts on it itself.\n\nThe two sides predict different things. Shahidi and his colleagues expect agents to search and bargain across markets for whoever deploys them; Larson expects them to stay inside the firm or be kept off other firms' platforms. This site holds no record that tests it. A count of firms buying knowledge-heavy work through independent agents would settle it, and nobody publishes one.\n\n### Folio III \u00b7 the liability\n\n## Whoever must answer for the work ends up owning it\n\nSanford Grossman and Oliver Hart, economists who studied contracts, asked in 1986 what ownership is for. No contract can list everything that might happen. Where it is silent someone has to decide, and they defined owning an asset as holding that right: \"Ownership is the purchase of these residual rights\" [cite:grossman_hart]. Ownership has a price, since control given to one party is taken from another, so it should rest with the party whose decisions matter most.\n\nHadfield and Koh point out that instructing an AI is a contract of this kind: what a designer tells a model to aim at can never cover every case [cite:hadfield_koh]. They ask who answers when it goes wrong, and find the law unready, since few legal systems hold anyone liable for acts they could neither foresee nor control.\n\nThis site joins the two, and the join is its own reading, not theirs. If an agent's instructions are incomplete, someone must decide in the gaps and bear the loss, and Grossman and Hart's result says that someone should own the operation. Byrne Hobart, who writes The Diff, a newsletter on finance and technology, arrives there from the buyer's side. Once software acts for long stretches with some randomness, the buyer asks whom to sue. A small seller of agents has the least to lose, so the work is bought from a firm with assets, customers and a name to lose, and a seller sure of its software may do best to own the business that uses it [cite:hobart_sued]. He notes in passing that insurance written for agents is beginning to be sold. Christian Catalini, Xiang Hui and Jane Wu, economists who study the cost of verifying work, add that doing gets cheaper with computing power while checking is held up by people's time, so the profit moves to whoever can verify the work and stand behind it [cite:catalini].\n\nThe rival view is that insurance and contract will carry the liability, so nobody need own anything. Over the past year this site has recorded [fact:insurer_ledger] moves by insurers to write AI's mistakes out of their standard policies. One of those moves was an insurer selling separate cover for AI as it took it out of the standard policy. Both sides expect exclusions first. They part on what comes next: cover for AI sold widely, which would favour the rival, or operators absorbing the risk. Nobody publishes the premiums written for such cover, so tonight's reading cannot tell them apart.\n\n### Folio IV \u00b7 the edge\n\n## Knowledge can be sent to the centre; acting on it sometimes cannot\n\nFriedrich Hayek, an economist who studied how prices carry what people know, argued in 1945 that much of the knowledge an economy runs on is \"the knowledge of the particular circumstances of time and place\" [cite:hayek], which no central office can collect, so decisions belong with the person on the spot.\n\nErik Brynjolfsson, who directs Stanford's Digital Economy Lab, and Zo\u00eb Hitzig, who studies AI's effects on society, argue that AI undoes much of this. Hitzig worked at OpenAI when they wrote and has since joined a research institute run by Anthropic. It records what used to go unwritten and lets a head office process far more, so they predict \"larger average firm size, greater industry concentration, and reduced local managerial autonomy\" [cite:brynjolfsson_hitzig]. This site sets beside them a finding they do not cite. Rich Sutton, a computer scientist who studies how machines learn, found that over decades of AI research, methods built on what experts know were beaten by general methods that improve as computing gets cheaper [cite:sutton]. He was writing about research, not firms; the reading across is this site's.\n\nChris Walker, who writes on the economics of unwritten knowledge, replies that writing knowledge down for a model is neither free nor complete. Choosing what a model needs to know for each task takes local judgement and has to be done again as the work changes. \"The knowledge problem has not been solved\", he writes; it has moved upstream [cite:walker_context]. Larson grants that context can be gathered and still ends at the edge, the place where the work is done: running a model costs energy and time, and a car at speed cannot wait for an answer from a distant data centre [cite:larson_hayek].\n\nThe camps agree on more than their conclusions suggest. Both draw a line between what can be recorded and what cannot, and both leave time-critical decisions at the edge: Brynjolfsson and Hitzig themselves list decisions that must be taken faster than a message can travel, beside rare cases, bodily skill and whatever the law reserves for people. They differ on whether the line moves. Brynjolfsson and Hitzig think the exceptions may shrink as models improve; Walker expects each new ability to open new work that needs local judgement. Delay is the floor neither side disputes, and energy is Larson's addition. Brynjolfsson and Hitzig name the test, whether firms that adopt AI move decisions to the centre; Walker's own dated predictions turn on firm size, and no one holds a series that reads either.\n\n### Folio V \u00b7 the rent\n\n## Most firms should rent intelligence; a few should own it\n\nThere are two reasons to rent. The lead is short: open models, whose trained settings are published for anyone to run, trail the best closed ones by [fact:open_lag], so a firm that trains its own is buying something that loses value fast. And most firms see nothing in their own work that others do not see: in a simulation of his own, Larson found that a system trained on other firms' results did better than one trained on a firm's own history [cite:larson_router]. Luis Garicano, an economist who studies how firms organise what they know, and Jes\u00fas Saa-Requejo put it plainly: \"Intelligence is not what stops most organisations from doing what they want to do\" [cite:garicano_theses].\n\nThe risk in renting is set out by Garicano and Saa-Requejo too. A supplier of rented intelligence can raise its price once a firm's work depends on it, and can learn the firm's business by watching how it is used [cite:garicano_holdup]. That is Larson's leak again, with the lab as the party watching. Their remedy is not to own the model. It is to rent it, to own the rules and records that sit above it, and to keep a second supplier within reach. So the answer turns on what is scarce in the firm's own work.\n\n[plate:regimes]\n\nClayton Christensen, who studied why leading firms lose their lead, gave the general rule: when one part of a product becomes good enough and interchangeable, the profit moves to the neighbouring part that still limits performance [cite:christensen]. Intelligence by the token is becoming that part. Larson cautions against his own case: owning every step does not make a firm safe, because AI also makes it cheap to stitch separate pieces into something good enough [cite:larson_vertical].\n\n### Folio VI \u00b7 the residue\n\n## Some things do not get cheaper when intelligence does\n\nPhilippe Aghion, Benjamin Jones and Charles Jones, economists who study growth, argued that when tasks depend on one another, growth may be held back by \"what is essential and yet hard to improve\" [cite:aghion_jones_jones]. Value collects at whatever stays slow, and inside a firm several things do.\n\nAttention: a customer has the same hours in the day whatever a model costs. Ben Thompson, who writes on technology strategy at Stratechery, showed how firms that own the relationship with users make their suppliers interchangeable [cite:thompson]. Accountability: a model cannot be sued, fined or struck off, and a firm can. Trust: one of the answers Akerlof named for quality nobody can see was a name with something to lose. Permission: licences, regulators and courts decide who may act, and Brynjolfsson and Hitzig count them among the limits on their own prediction. And unwritten judgement: knowing what good work looks like in a trade.\n\nThe last is the one most likely to give way. If models come to learn on the job, what is unwritten today is recorded tomorrow, and Walker says he is wrong if general agents manage complex work inside firms without continuing human help by 2028.\n\n### Folio VII \u00b7 the limit\n\n## In the limit, a firm is a name that can be sued, holding what cannot be bought\n\nWhat follows is this site's judgement. It joins arguments that each have a test into a picture that has none.\n\nCarry each argument to its end and the firm stops being a body of people who do the work. It specifies: it decides what is worth doing and what counts as done. It holds scarce things: customers' attention and trust, licences, sensors, sites with power. It bears risk: it is the legal person that pays when the work is wrong. And it rents its thinking by the token from whoever sells it cheapest, apart from small models it runs on the spot where delay or secrecy demands.\n\nOn the shape of such firms the theories part, and this site keeps all three. Brynjolfsson and Hitzig expect larger firms and more concentrated industries, and Hadfield and Koh see a pull the same way. Dwarkesh Patel, a podcaster who interviews AI researchers, writing with two co-authors and putting his own confidence low, expects much larger firms and thinks a single one is not inevitable, because \"The market continues to serve as the grounding outer loop\" [cite:patel]. Walker and Larson each expect a barbell. Walker's has very large firms where the work is generic and many small ones close to each trade; Larson's has very large firms that keep what they know to themselves and many small ones. Larson also expects groups that own many businesses and share what each learns to be worth more than their parts [cite:larson_conglomerate]. Firm size by industry, and the value of such groups against their parts, would separate these, and this site cannot yet read either.\n\nWho profits, on this reasoning, is not mainly the seller of tokens. In Larson's own model a lab captures about a quarter of what its tokens are worth to the buyers, and less as open models catch up [cite:larson_complexity]. The rest goes to the owners of what is scarce beside the intelligence, and, where firms compete, to their customers.\n\n### Folio VIII \u00b7 the record\n\n## Buyers are acting on this before anyone can show it pays\n\nSeveral of this site's records bear on the argument. Roll-ups, buyers that gather many small firms into one and plan to run them with AI, bought [fact:rollup_service_deals] firms that sell services, such as accounting practices and letting agents, in the past year that this site could find, against [fact:rollup_service_deals_year_ago] the year before. The count comes from one search of the larger roll-ups this site follows, so it is a floor; older announcements are the likeliest to have been missed, which flatters the rise; and some buyers announce firms as joining them without stating a stake. What they buy, on this site's reading, is customers and licences. Their purchases of software products, [fact:rollup_software_deals] in the same year, are counted apart.\n\nThe labs are moving the same way. They and the companies that sell computing made [fact:lab_deals_now] purchases in the layers above them, hirings of whole teams included, in the latest year this site has searched. Among them is a firm that fits AI into other companies' work, which OpenAI agreed to buy as it launched a company that it says it majority-owns and controls. Anthropic formed a services venture with outside investors in the same month; the reports this site holds do not say who owns how much, so it is not in this reading. That count's rule leaves out ordinary businesses, so it would miss a lab buying an accounting practice.\n\nSuppliers are binding customers without buying them. Commitments signed in which a seller of chips or computing also funds the lab that buys from it, by a stake, a guarantee, a backstop or a contract to pay whether or not the capacity is used, came to [fact:seller_funded] over the past four quarters. That is the face value promised, not money paid, and a few very large deals make up most of it. On this site's reading it is a way to bind a customer short of owning it; only the stakes carry any right to decide.\n\nThe check matters more than the task. This site's census screens American knowledge work for whether it could be handed to software. On its count, the payroll that passes the screen is far smaller than the payroll held back for one reason only: no existing check settles whether the work was done right. The figures are on the census page, since a screen scored by models is not a reading this essay can test.\n\nNone of this shows that owning pays. [fact:firms_using_ai] of American firms say they used AI in the past fortnight, a pace this site calls normal. The site holds no margin for any roll-up after a purchase. The census could not measure whether an owner keeps a saving, and it was scored by three AI models, one of them made by Anthropic, whose model also drafted this page. The site's figures on firm size run years late, and nothing here records where decisions are taken. The site's own leans, a model's judgement on claims too early to test, run against two threads of this essay: they doubt that AI's work will increasingly be bought through firms that can be sued, and that groups of pooled businesses will be valued above their parts. A count of purchases records what buyers believe. Each claim below says what would prove it wrong.\n",
  "facts": {
   "firms_using_ai": {
    "as_of": "2026-09-06",
@@ -647,16 +640,6 @@
    "value": 46.0
   },
   "lab_deals_year_ago": null,
-  "lab_services_firm": {
-   "as_of": "2026-05-11",
-   "holds": null,
-   "href": "/series/ownership.openai_deployment_co.lab_majority_owned.pt#97cf7752c37875fa",
-   "obs_ids": [
-    "97cf7752c37875fa"
-   ],
-   "unit": "count",
-   "value": 1.0
-  },
   "msft_backlog": {
    "as_of": "2026-06-30",
    "derived_id": "170b33634e98c87e",
@@ -883,7 +866,7 @@
     "ffdfeeae1fe30bbc"
    ],
    "unit": "index",
-   "value": 0.180103298656194
+   "value": 0.18010329865619398
   }
  },
  "folios": {
@@ -1093,7 +1076,7 @@
    "visible": false
   },
   {
-   "attribution": "author",
+   "attribution": "extension",
    "case": "The labs have been buying firms in the layers above them, their own customers' trades among them.",
    "folio": "value",
    "holders": [
@@ -1101,7 +1084,7 @@
    ],
    "id": "own_your_intelligence",
    "kill_shot": "Firms moving freely between suppliers of models at no loss, and no supplier entering its customers' trades.",
-   "mechanism": "A supplier of rented intelligence sees how its customer works, can raise its price once the customer's work depends on it, and can learn enough to compete; so a firm should own, or at least control, the models its work runs on [cite:garicano_holdup].",
+   "mechanism": "A supplier of rented intelligence sees how its customer works, can raise its price once the customer's work depends on it, and can learn enough to compete [cite:garicano_holdup]. Garicano and Saa-Requejo answer by renting the model while owning the rules and records above it and keeping a second supplier. This site carries their warning further, to the case for owning the model itself.",
    "rival": "rent_by_default",
    "title": "A firm that rents its thinking teaches its supplier its business",
    "visible": false
@@ -1156,7 +1139,7 @@
    "Rent or own",
    "Who wins"
   ],
-  "note": "This site's reading of the writers cited in this folio. It is a judgement, and no row has a test of its own; the last row rests on no source and is the weakest.",
+  "note": "This site's reading of the writers cited on this page. It is a judgement, and no row has a test of its own; the last row rests on no source and is the weakest.",
   "rows": [
    [
     "Nothing the firm alone can see, and a cheap check exists",
@@ -1166,7 +1149,7 @@
    ],
    [
     "A signal only this firm senses",
-    "A fleet of driverless cars; sensors on a herd of cattle (both Soren Larson's examples)",
+    "A fleet of driverless cars; a ring that reads its wearer's body (both among Soren Larson's examples)",
     "Own the sensors and the model trained on what they read",
     "The owner-operator, for as long as the signal stays its own"
    ],
@@ -1220,15 +1203,15 @@
    "year": 1937
   },
   {
-   "content_hash": "a9cba7bbfac6c3c47fd2ce0c409f9974c39437b144bd330782accb852fd04844",
-   "field": "economists and a computer scientist who study online markets; Fradkin works for Amazon and Horton advises Anthropic",
+   "content_hash": "2d6c5e5256af4bc30a8f6ba576dea8f2b7e8c3e052c0e497663916f6bb988148",
+   "field": "economists and a computer scientist who study online markets; Fradkin works for Amazon and Horton is a paid adviser to Anthropic",
    "finding": "Agents could slash the cost of searching, bargaining and contracting; they will be taken up first where people already hire human agents and can state simply what they want, and platforms will set rules for how outside agents may use them, much as websites tell search engines' crawlers what they may read, though some already block them.",
    "http_status": 200,
    "id": "shahidi_etal",
    "n": 2,
-   "retrieved_at": "2026-09-22",
+   "retrieved_at": "2026-10-05",
    "short": "Shahidi, Horton and colleagues",
-   "url": "https://peymanshahidi.github.io/assets/pdf/NBER_TAI_Chapter_Shahidi.pdf",
+   "url": "https://www.nber.org/books-and-chapters/economics-transformative-ai/coasean-singularity-demand-supply-and-market-design-ai-agents",
    "venue": "The Economics of Transformative AI (National Bureau of Economic Research)",
    "who": "Peyman Shahidi, Gili Rusak, Benjamin Manning, Andrey Fradkin and John Horton",
    "work": "The Coasean Singularity? Demand, Supply, and Market Design with AI Agents",
@@ -1251,7 +1234,7 @@
   },
   {
    "content_hash": "33126d46c3b2fcaffc675498c128ef047ed2dbd3e26ee2223c5250908e96f064",
-   "field": "a writer on how money moves between AI labs and the apps built on them, who co-founded Crosshatch, a personalised-AI start-up that shut down in July 2025",
+   "field": "a writer on how money moves between AI labs and the apps built on them, who co-founded Crosshatch, a personalised-AI start-up whose closure he announced in November 2025",
    "finding": "Cheap agents make dealing with outsiders costlier, not cheaper, because asking a market for anything reveals what you want to your competitors; so firms keep work inside, platforms shut out outside agents, and firms split into the very large and the very small.",
    "http_status": 200,
    "id": "larson_coasean",
@@ -1397,7 +1380,7 @@
   },
   {
    "content_hash": "d873f97824a52b936a8ab4d7b59d9fcc6ee100e58042cfbb7bc1d60dfe3c2f36",
-   "field": "a writer on how money moves between AI labs and the apps built on them, who co-founded Crosshatch, a personalised-AI start-up that shut down in July 2025",
+   "field": "a writer on how money moves between AI labs and the apps built on them, who co-founded Crosshatch, a personalised-AI start-up whose closure he announced in November 2025",
    "finding": "Context can now be gathered and put in front of a model, which weakens Hayek's original point; what cannot be centralised cheaply is the running of a model, which costs energy and time, so intelligence is placed where the work is.",
    "http_status": 200,
    "id": "larson_hayek",
@@ -1411,7 +1394,7 @@
   },
   {
    "content_hash": "6f39ccf64873a76c42ca15f2da509dd3d23f4cea5965564237e89f8355a80cee",
-   "field": "a writer on how money moves between AI labs and the apps built on them, who co-founded Crosshatch, a personalised-AI start-up that shut down in July 2025",
+   "field": "a writer on how money moves between AI labs and the apps built on them, who co-founded Crosshatch, a personalised-AI start-up whose closure he announced in November 2025",
    "finding": "A neutral router that pools many firms' checked outcomes learns to solve their problems, new kinds above all, faster than any one firm alone, so paying for AI by the outcome belongs with it; in his simulation the model was held fixed, and what won was a harness trained on other firms' outcomes.",
    "http_status": 200,
    "id": "larson_router",
@@ -1442,14 +1425,14 @@
   {
    "content_hash": "35bf87ce3af5a5ab815450e4b6a9f65fb14c09c346285a01a55ec679fbaa4dbd",
    "field": "Garicano is an economist who studies how firms organise what they know; Saa-Requejo is his co-author at the Silicon Continent newsletter",
-   "finding": "A firm that rents its models can be squeezed by its supplier: on access, on price, by work that will not move to another model, and by the supplier learning the firm's own know-how from the way it is used.",
+   "finding": "A firm that rents its models can be squeezed by its supplier: on access, on price, by work that will not move to another model, and by the supplier learning the firm's own know-how from the way it is used. Their remedy is to rent the model, own the layer above it and keep a second supplier.",
    "http_status": 200,
    "id": "garicano_holdup",
    "n": 17,
    "retrieved_at": "2026-10-05",
    "short": "Garicano and Saa-Requejo",
    "url": "https://www.siliconcontinent.com/p/how-to-avoid-being-held-up-by-the",
-   "venue": "Silicon Continent. About the first half of the essay was read",
+   "venue": "Silicon Continent",
    "who": "Luis Garicano and Jes\u00fas Saa-Requejo",
    "work": "How to avoid being held up by the labs",
    "year": 2026
@@ -1471,7 +1454,7 @@
   },
   {
    "content_hash": "574b1bcab1b9155138312b8de558952ba4242f5de0db94adec5c4a7604207f0f",
-   "field": "a writer on how money moves between AI labs and the apps built on them, who co-founded Crosshatch, a personalised-AI start-up that shut down in July 2025",
+   "field": "a writer on how money moves between AI labs and the apps built on them, who co-founded Crosshatch, a personalised-AI start-up whose closure he announced in November 2025",
    "finding": "Owning every step of the work is the best strategy but is not safe by itself, because AI makes it cheap to stitch separate pieces into something good enough. He lists the conditions under which an owner of the whole chain holds, and concedes that they move.",
    "http_status": 200,
    "id": "larson_vertical",
@@ -1531,7 +1514,7 @@
   },
   {
    "content_hash": "3d4eeead3c8eb14ea2cab2cef2de5add971a42cf04e6f7c1707e1509f1ad1b82",
-   "field": "a writer on how money moves between AI labs and the apps built on them, who co-founded Crosshatch, a personalised-AI start-up that shut down in July 2025",
+   "field": "a writer on how money moves between AI labs and the apps built on them, who co-founded Crosshatch, a personalised-AI start-up whose closure he announced in November 2025",
    "finding": "Groups that own many businesses have been valued below their parts because managers spread thin lose to focused ones. He argues the discount turns into a premium for groups that share what each business learns and keep it from leaking, and not for a holding company that keeps its businesses apart.",
    "http_status": 200,
    "id": "larson_conglomerate",
@@ -1545,7 +1528,7 @@
   },
   {
    "content_hash": "24c1ef6cc53ce6b9b6e0a44c448a4a88a0c3c0d64ce64216f671c19de0ee9776",
-   "field": "a writer on how money moves between AI labs and the apps built on them, who co-founded Crosshatch, a personalised-AI start-up that shut down in July 2025",
+   "field": "a writer on how money moves between AI labs and the apps built on them, who co-founded Crosshatch, a personalised-AI start-up whose closure he announced in November 2025",
    "finding": "In a model of his own, a lab's price touches only the task at the margin and everything above it goes to the user, so the lab captures a minority of what its tokens are worth to buyers, and less as open models catch up.",
    "http_status": 200,
    "id": "larson_complexity",
@@ -1641,7 +1624,7 @@
   },
   {
    "content_hash": "98ee3330ae583805d05c3937eac3de5a50e82a3f156f3430ed7f33785f3aa599",
-   "field": "a writer on how money moves between AI labs and the apps built on them, who co-founded Crosshatch, a personalised-AI start-up that shut down in July 2025",
+   "field": "a writer on how money moves between AI labs and the apps built on them, who co-founded Crosshatch, a personalised-AI start-up whose closure he announced in November 2025",
    "finding": "Earlier platforms organised things and left the acting, and the blame, to human contractors. AI does the acting, so liability lands on whoever runs it and cannot be passed down; a software seller that answers for nothing cannot get the context either.",
    "http_status": 200,
    "id": "larson_do_things",
@@ -1657,17 +1640,13 @@
  "tally": {
   "both": 2,
   "failing": 0,
-  "holding": 3,
-  "untestable": 18
+  "holding": 2,
+  "untestable": 19
  },
  "tests": {
   "firms_rent": {
    "line": 0.25,
    "unit": "index"
-  },
-  "lab_owns_services_firm": {
-   "line": 1,
-   "unit": "count"
   },
   "liability_priced_apart": {
    "line": 1,

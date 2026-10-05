@@ -85,7 +85,7 @@ def test_the_real_page_resolves_and_types_no_figure():
         for sentence in re.split(r"(?<=[.!?])\s+", t):
             if NUMBER_WORD.search(ol.TOKEN.sub("", sentence)):
                 assert ol.TOKEN.search(sentence), sentence  # a figure in words still needs its token
-    assert 1800 <= len(ol.TOKEN.sub("", essay).split()) <= 2700
+    assert 1800 <= len(ol.TOKEN.sub("", essay).split()) <= 3100  # raised from 2700 when the staff review added caveats
 
 
 def test_the_essay_says_who_drafted_it_and_whose_model_scored_the_census():
