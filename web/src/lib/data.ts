@@ -284,6 +284,13 @@ export type BoardDoc = {
 };
 export const board = () => read<BoardDoc>("board.json");
 
+// A model's judgement in words beside a slot the site leaves empty (src/ai_tracker/judgements.py). Absent until the
+// export first writes it, so a missing file reads as no judgements.
+export type Judgement = { word: string; label: string; reason: string };
+export type JudgedDoc = { made_by: { model: string; date: string; method: string; reviewed_by: string } | null; surfaces: Record<string, Record<string, Judgement>> };
+export const judgements = (): JudgedDoc =>
+  fs.existsSync(path.join(ROOT, "judgements.json")) ? read<JudgedDoc>("judgements.json") : { made_by: null, surfaces: {} };
+
 // The singularity timeline (src/ai_tracker/singularity.py): every position is laid out in Python.
 export type SgMark = {
   id: string; who: string; line: string; ledger: string; made: string; made_year: number;

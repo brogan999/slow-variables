@@ -945,6 +945,9 @@ class Store:
             _write(out / "venture" / f"{sub_id}.json", doc)
         bottlenecks = self._bottlenecks(cards)
         _write(out / "bottlenecks.json", bottlenecks)
+        from . import judgements
+
+        _write(out / "judgements.json", judgements.build(judgements.load()))
         _write(out / "compare.json", self._compare(cards))
         _write(out / "thesis.json", read_jsonl(DATA / "thesis.jsonl"))
         from .argument import build

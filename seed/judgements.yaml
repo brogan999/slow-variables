@@ -1,0 +1,1360 @@
+# A model's judgement in words for each slot the site leaves empty (plan Part 39; src/ai_tracker/judgements.py).
+# Never a reading and never a status: no evaluator, metric, tally or query tool reads this file. A reason types no
+# figure, no size word and no address. To withdraw one, delete its entry; the slot goes back to showing the gap alone.
+made_by:
+  model: claude-opus-5-5
+  date: '2026-10-05'
+  method: One model judged each empty slot in words, from this site's readings where it had any and otherwise from its own
+    general knowledge, and gave a reason. Related slots were judged together.
+  reviewed_by: separate reviewing runs of the same model, which changed some words and reasons and withdrew some judgements;
+    no person reviewed each one
+surfaces:
+  tightness:
+    words:
+      slack: probably slack
+      easing: probably easing
+      moderate: probably moderate
+      tight: probably tight
+      severe: probably severe
+    judgements:
+    - id: applications
+      word: slack
+      reason: Money for AI applications has been plentiful, with large rounds at high valuations for coding, legal, medical
+        and customer-service products, consistent with the site's reading that capital is slack. The strongest point the
+        other way is that funding concentrates in a few leaders, and many smaller application firms face thin margins because
+        they pay model makers for each use.
+    - id: chip_equipment
+      word: moderate
+      reason: Lithography and other tools are sold by very few firms with long lead times, but foundries, which the site
+        reads as moderate, have been able to buy the machines their expansion plans call for. A memory spending upturn in
+        2026 has pulled orders up. The strongest point the other way is that the most advanced lithography machines are
+        built in small numbers and cannot be hurried.
+    - id: continual_learning
+      word: tight
+      reason: 'This is an unsolved research problem and not a supply that has run short: nothing is sold out, the method
+        simply does not yet exist in dependable form. No widely used model keeps learning from its own use, and memory features
+        and longer context are workarounds. The word here means the gap slows those building agents meant to improve on
+        the job, as researchers and lab leaders commonly say. Against that, products ship and sell without it, so as a brake
+        today it may only be moderate.'
+    - id: deployment_platforms
+      word: easing
+      reason: Hosting a model for another business is offered by the large clouds and many specialist firms, and prices
+        for serving a given quality of model have kept falling, in line with the site's reading for running models. The
+        strongest point the other way is that popular models still hit usage limits at busy times, which suggests serving
+        capacity is not as loose as prices imply.
+    - id: evaluations
+      word: moderate
+      reason: 'This is a gap in tooling and method, not a supply that has run short: benchmarks and testing firms are numerous,
+        and what is lacking is tests that can be trusted. Benchmarks saturate soon after release, tests of long tasks are
+        costly to build and score, and independent testers cannot cover each new model fully before launch. Yet releases
+        have not visibly slowed for want of measurement, which is why this sits at moderate and not higher. The strongest
+        point the other way is that buyers and labs alike say they lack trustworthy measures of real-world performance,
+        so it could be a step tighter.'
+    - id: grid
+      word: tight
+      reason: Waits for large transformers and switchgear run to several years and the queues to connect a big new load
+        are long in the main data-centre regions, which is why builders increasingly put gas turbines on site. It sits beside
+        data-centre buildings on the site's scale and may well deserve the top word. Against that, on-site power and flexible-connection
+        deals let determined builders route round the wire.
+    - id: minerals
+      word: moderate
+      reason: China's export controls on gallium, germanium and rare earths have made supply uncertain and dearer, and copper
+        is expensive, but chip and power-equipment makers have so far kept buying what they need. No AI build is known to
+        have stalled for want of a raw material. The strongest point the other way is that the controls can be turned up
+        at short notice and rare-earth magnets were briefly short in 2025.
+    - id: networking
+      word: moderate
+      reason: Switches and copper cabling are available, but optical transceivers and the lasers inside them have been reported
+        short as clusters grow, with suppliers adding capacity. This slows some deliveries without being what decides whether
+        a cluster gets built. It could be a step tighter than this, since optics makers have spoken of demand running ahead
+        of supply.
+    - id: post_training
+      word: moderate
+      reason: Demand for practice environments with automatic graders and for expert feedback grew sharply through 2025
+        and 2026, and labs say good environments are hard to buy. Many new sellers have entered, which keeps quantity available.
+        The strongest point the other way is that quality, not quantity, is what is short, and badly graded tasks teach
+        models the wrong thing.
+    - id: routing
+      word: slack
+      reason: Routing services are numerous, cheap to build and easy to switch between, and the large cloud platforms offer
+        the same function. Nothing suggests a builder is held up for lack of one. The strongest point the other way is that
+        choosing well between models for hard tasks is still crude, but that is a quality problem and not a shortage.
+    - id: systems_software
+      word: easing
+      reason: The hold of one vendor's software stack was a real obstacle to using other chips, but Google's and Amazon's
+        own chips now train and serve frontier models at scale, AMD's are in use for serving at several large buyers, and
+        the common frameworks hide much of the difference. The strongest point the other way is that porting and tuning
+        for a new chip still takes scarce specialist engineers and months of work.
+    - id: training_data
+      word: moderate
+      reason: Paid expert data has become a large business with fast-growing sellers, which shows supply responding to demand.
+        Scarce specialists in fields such as medicine, law and advanced science remain hard to recruit in quantity, and
+        licensed archives are finite. Without prices or waiting times the call could be a step too tight or too loose.
+    - id: training_infrastructure
+      word: moderate
+      reason: Running one training job across a very large cluster without wasting it is a skill held by a small number
+        of teams, and newcomers have struggled with failures and idle chips. Yet several labs now do it routinely and the
+        know-how spreads as people move. The labs publish nothing on this, so the judgement could be out by a step either
+        way.
+  barriers:
+    words:
+      still_binds: probably still binds
+      easing: probably easing
+      largely_lifted: probably largely lifted
+    judgements:
+    - id: '5'
+      word: easing
+      reason: Structured outputs, tool calls and automatic checks make products behave more predictably, and users have
+        grown used to answers that vary. In regulated or audited work the lack of repeatable behaviour is still a reason
+        given for not deploying, which is the strongest point against calling it easing.
+    - id: '6'
+      word: easing
+      reason: Background agents that work for long stretches, show a plan and ask for approval only at set points are a
+        real step beyond the chat box, and they spread quickly in coding during 2025 and 2026. Outside software, most people
+        still supervise through a chat window, so the new paradigm is far from general.
+    - id: '8'
+      word: largely_lifted
+      reason: The large labs now run big product and engineering teams and ship coding agents, browsers, connectors and
+        workplace tools at a steady pace. The belief that generality excused them from product work has gone. The strongest
+        point the other way is that products outside coding remain rough and reliability complaints are common.
+    - id: '10'
+      word: still_binds
+      reason: Legal drafting, research and similar judgement work still have no agreed measure of quality, so improvement
+        relies on slow expert grading. Paid expert rubrics have grown into a large business, which helps at the margin,
+        but it is costly and disputed and does not turn judgement into a score.
+    - id: '11'
+      word: still_binds
+      reason: Progress remains fastest where an automatic check exists, such as code that passes tests or mathematics that
+        a proof checker accepts. Law, medicine and most science still lack any quick, accurate verifier. Expert-built graders
+        and practice environments are the strongest counter, but they approximate a verifier and do not supply one.
+    - id: '12'
+      word: still_binds
+      reason: A model cannot reason its way past what medicine has actually established, and new medical knowledge still
+        comes from experiments and trials. Models are better at combining what is known and suggesting hypotheses, which
+        is the strongest point the other way, but that does not raise the ceiling itself.
+    - id: '13'
+      word: easing
+      reason: Agents now carry out long, messy tasks in real codebases and on real websites far more dependably than in
+        2025, and the length of task they can finish has kept growing. They still fail in odd ways in unfamiliar settings,
+        and unsupervised use in open-ended work remains unusual.
+    - id: '14'
+      word: easing
+      reason: Newer agents plan, backtrack and respond to feedback noticeably better, and some have produced real results
+        in mathematics and coding research with light supervision. Reports from scientists still describe weak taste in
+        choosing what is worth doing, so the barrier has loosened and not gone.
+    - id: '15'
+      word: easing
+      reason: Agent-written code is now merged at scale in serious projects, and models are better at tests, security checks
+        and following a codebase's conventions. Studies and practitioners still report hidden upkeep costs and security
+        holes in unreviewed agent code, which is the strongest point against.
+    - id: '22'
+      word: easing
+      reason: Use of AI assistants by individuals and at work rose strongly through 2025 and 2026, so many earlier refusals
+        have turned into regular use. Most possible uses in most jobs are still declined or untried, and the point about
+        constant small refusals remains true.
+    - id: '24'
+      word: still_binds
+      reason: Evidence that heavy reliance weakens unaided skill has accumulated, and careful professionals and educators
+        limit offloading for that reason. The strongest point the other way is that many users offload regardless, so as
+        a brake on adoption it may be weaker than the authors thought.
+    - id: '25'
+      word: still_binds
+      reason: Non-programmers can now build working software by describing it, which is the strongest case for easing. What
+        they build still tends to fail on security, upkeep and accountability once it matters, so the judgement that gates
+        serious use remains the limit.
+    - id: '26'
+      word: still_binds
+      reason: As agents run for longer, the record of what they did grows beyond what a person can review, and judging whether
+        an open-ended task was truly done still needs someone who knows the field. Automatic reviewers and summaries help,
+        but they shift trust to another model without removing the need for expertise.
+    - id: '27'
+      word: easing
+      reason: People and firms now routinely connect mailboxes, files and company systems to assistants, and enterprise
+        terms that bar training on customer data have calmed many buyers. Regulators, especially in Europe, and periodic
+        public outcry over features that watch the screen still restrain the most invasive uses.
+    - id: '30'
+      word: still_binds
+      reason: Most of what a firm knows is still unwritten, and getting it in front of a model happens one deployment at
+        a time. Memory features and connectors to company documents help with what is recorded, which is the strongest counter,
+        but they do not reach what nobody has put down.
+    - id: '31'
+      word: easing
+      reason: A common standard for connecting models to outside tools was adopted across the industry in 2025, and the
+        large business-software vendors now offer connectors and their own agents. Messy permissions, old systems and vendors
+        restricting access to their data mean real integration is still slow work.
+    - id: '32'
+      word: still_binds
+      reason: Saying precisely what is wanted remains human work, and agents that run longer make a vague brief more costly,
+        not less. Models have got better at asking clarifying questions and drafting specifications, which trims the effort
+        without removing it.
+    - id: '33'
+      word: still_binds
+      reason: Deciding what to build and answering for what ships are still done by people, and firms using coding agents
+        report that review and decision-making have become the constraint. The strongest point the other way is that agents
+        now draft requirements and review code, nibbling at both layers.
+    - id: '34'
+      word: still_binds
+      reason: Organisations still widen an AI system's authority step by step, starting with low-stakes work. The steps
+        are being climbed quickly in software and customer service, which is the case for easing, but in finance, health
+        and public decisions trust is still at an early stage.
+    - id: '36'
+      word: still_binds
+      reason: Reforming institutions and solving coordination problems is no faster than it was, and nothing about better
+        models changes that. There is no strong sign the other way beyond scattered government modernisation efforts.
+    - id: '39'
+      word: still_binds
+      reason: The labs and their rivals have built large teams of engineers who sit with customers, and consulting firms
+        have made AI deployment a major line of work, which confirms the barrier. Better general agents and ready-made connectors
+        reduce the bespoke effort for simpler uses.
+    - id: '40'
+      word: still_binds
+      reason: Large buyers continue to spread work across model vendors, refuse to let their data train shared models and
+        press for open standards. The strongest point the other way is that spending on agent products has grown fast despite
+        these worries, so resistance slows deals more than it stops them.
+    - id: '43'
+      word: still_binds
+      reason: Medical-device rules, financial supervision and Europe's AI law still make high-stakes deployment slow by
+        design. The United States has moved to lighten federal rules and Europe has moved to delay and simplify parts of
+        its law, which is the strongest point the other way. Those moves mostly soften rules that had yet to bite, and the
+        sector rules that slow deployment today are largely unchanged.
+    - id: '44'
+      word: still_binds
+      reason: No major jurisdiction has settled who pays when an AI system causes harm, and cases are only starting to work
+        through the courts. Insurers have begun writing exclusions as well as cover, which shows the uncertainty. Contractual
+        indemnities from vendors are the main thing cutting the other way.
+    - id: '45'
+      word: still_binds
+      reason: Doctors remain personally answerable for decisions, and tools that decide and not merely assist need device
+        approval. Note-taking and paperwork tools have spread fast in clinics, and many clinicians consult chatbots informally,
+        but beyond a few narrow, supervised pilots the decision itself is still not delegated.
+    - id: '46'
+      word: still_binds
+      reason: Rules written around fixed categories, such as fully automated versus human-made decisions, are still on the
+        books and new ones follow the same pattern. Sandboxes and a lighter federal stance in the United States cut the
+        other way; how much this barrier actually bites is hard to observe.
+    - id: '47'
+      word: easing
+      reason: Europe's rules for general-purpose models ended up with comparatively light duties through a voluntary code,
+        American federal policy turned against broad obligations on model makers, and state laws that passed were narrowed
+        to transparency. State-level bills keep appearing, so the risk has shrunk without vanishing.
+    - id: '48'
+      word: still_binds
+      reason: Rules against non-lawyers practising law remain in force and vague across American states, and bar bodies
+        remain cautious. A few states have experimented and consumers use chatbots for legal questions anyway, which weakens
+        the barrier in practice for simple matters only.
+    - id: '49'
+      word: still_binds
+      reason: Almost all American states still bar non-lawyers from owning or sharing fees with law firms. A small number
+        of states allow exceptions and some AI-native firms have used them or other workarounds, but the general rule is
+        unchanged.
+    - id: '50'
+      word: still_binds
+      reason: The organised bar has continued to press for narrow sandboxes, and reform has stalled or been trimmed in places
+        that tried it. Evidence on this since 2025 is thin, so the call rests mainly on the absence of any reported change.
+    - id: '51'
+      word: still_binds
+      reason: Courts move at the pace of human judges, lawyers and clients, and nothing has changed the number of judges
+        or the requirement that they be human. Some courts use AI for clerical work and private arbitration bodies have
+        tried AI-assisted decisions, which helps only at the edges.
+    - id: '52'
+      word: still_binds
+      reason: Courts have responded to fabricated citations and machine-written filings with sanctions, disclosure rules
+        and standing orders, which fits the prediction. Outright bans or tightened doctrines to keep litigants out are not
+        yet widespread, so this is more a live risk than a proven brake.
+    - id: '53'
+      word: still_binds
+      reason: Sign-in checks, tests designed to block automated input and a required human approval still stop agents partway
+        through many tasks, and some large sites actively block them. Early standards for agent identity and agent payments
+        point towards easing, but they are not yet widely honoured.
+    - id: '54'
+      word: still_binds
+      reason: Governments still buy and deploy technology slowly through procurement rules and many veto points. Chatbot
+        access for civil servants has been rolled out in several countries, which is real but shallow next to changing how
+        services are delivered.
+    - id: '55'
+      word: still_binds
+      reason: Public unease has grown, with local opposition to data centres, worries about jobs and children, and a steady
+        flow of state bills. Driverless taxis, the authors' example, have expanded to many more cities, which cuts the other
+        way for that one case.
+    - id: '56'
+      word: still_binds
+      reason: Trials in people take as long as they did and regulators still require them. AI helps choose candidates, design
+        trials and recruit patients, and regulators have opened the door to less animal testing, which shortens the early
+        steps without touching the long human ones.
+    - id: '57'
+      word: still_binds
+      reason: Where errors are costly and cannot be rehearsed, each improvement still has to be proven slowly in the real
+        world. Driving, the authors' example, has sped up as fleets grow and simulation improves, so this could fairly be
+        read as easing in that field.
+    - id: '58'
+      word: still_binds
+      reason: The biggest measured gains are still in writing, coding and search-like work, while the slow parts of regulated
+        processes such as approvals, sign-offs and physical steps are unchanged. The strongest counter is software itself,
+        where writing code was a true bottleneck and has shifted.
+    - id: '59'
+      word: still_binds
+      reason: Most jobs still mix physical, social and paperwork tasks, and AI handles mainly the last. Robot demonstrations
+        have improved a good deal, which is the strongest point the other way, but general-purpose robots are not yet doing
+        bundled work at scale.
+    - id: '60'
+      word: still_binds
+      reason: App-store review, security audits, procurement and compliance sign-off still run on other parties' timetables,
+        and faster building has lengthened some queues. Some reviewers have started using AI to speed their side, with modest
+        effect so far.
+    - id: '62'
+      word: still_binds
+      reason: Limits set by chaos and by how unpredictable people are do not move with model quality. AI weather models
+        have improved accuracy and speed within the predictable range, which is a real gain, but they do not push past the
+        mathematical horizon.
+    - id: '63'
+      word: still_binds
+      reason: 'Events since 2025 bear this out: electricity and practice environments, the authors'' own examples, became
+        visible constraints as the build-out grew. The barrier is a general principle and nothing suggests the last hidden
+        bottleneck has been found.'
+    - id: '64'
+      word: still_binds
+      reason: In health, finance, aviation and critical infrastructure, deployment is still slow, with regulators and firms'
+        own risk teams holding it back. The lighter regulatory mood in the United States cuts the other way, but organisations'
+        caution has not followed it far.
+    - id: '66'
+      word: still_binds
+      reason: Agents that act alone do so in low-stakes or narrow settings, and general agents in high-stakes work still
+        have a person approving the result. Long unattended coding runs on production systems are stretching this, so it
+        may be starting to ease.
+    - id: '67'
+      word: still_binds
+      reason: Firms still keep people at the handover points of a workflow because that is where they can see and stop what
+        an agent is doing. Better logging and monitoring tools help, but longer autonomous runs make oversight harder at
+        the same pace.
+    - id: '68'
+      word: still_binds
+      reason: The option to keep humans answerable through liability and sector rules is intact, and professional and financial
+        regulators continue to use it. The strongest point the other way is that American federal policy has leaned towards
+        loosening and not strengthening such controls.
+    - id: '69'
+      word: still_binds
+      reason: Hidden instructions planted in web pages or documents can still hijack an agent, and no general fix exists;
+        security teams cite this when refusing broad access. Vendors have shipped agents with wide access anyway, behind
+        permission prompts and sandboxes, so the risk slows adoption more than it prevents it.
+    - id: '72'
+      word: still_binds
+      reason: Buyers of legal and other judgement-heavy work still cannot tell good from bad even afterwards, so reputation
+        continues to decide who gets hired. Nothing in AI output changes this, and unverifiable machine-written work arguably
+        makes it worse.
+    - id: '73'
+      word: still_binds
+      reason: Most large law firms still bill by the hour, and productivity gains have so far shown up as more output and
+        higher rates and not lower bills. Client pressure for fixed fees and AI-native firms charging flat prices are growing,
+        so easing is plausible.
+    - id: '76'
+      word: still_binds
+      reason: Hours in the day have not grown, and there is no sign that the flood of new apps has raised total time spent.
+        Chat assistants have themselves won a noticeable share of consumer attention, which shows AI can take a share without
+        lifting the cap.
+    - id: '77'
+      word: easing
+      reason: Many large publishers have signed licensing deals with AI companies, and collective licensing schemes and
+        pay-to-crawl tools have appeared. Distrust remains strong, lawsuits continue and publishers blame AI search summaries
+        for lost readers, so this is easing and not settled.
+    - id: '78'
+      word: still_binds
+      reason: AI systems now generate hypotheses, analyses and whole draft papers cheaply, yet there is no sign that the
+        rate of important discoveries has jumped. Mathematics, where results can be checked mechanically, is the strongest
+        counter-example.
+    - id: '79'
+      word: still_binds
+      reason: Submissions to journals and conferences have swollen, partly with machine-written papers, and reviewers are
+        overloaded. AI tools for literature search could in principle surface overlooked work, but there is little evidence
+        they do so in practice.
+    - id: '80'
+      word: still_binds
+      reason: Hiring, promotion and funding still reward counts of papers and citations, and AI has made those numbers cheaper
+        to inflate. A few funders have tried reforms, with no visible shift in incentives.
+    - id: '81'
+      word: still_binds
+      reason: Research code in most fields is still untested and unreviewed. Coding agents now write tests and catch errors
+        for scientists who ask, which may be raising the floor, but they also let more people produce code they cannot check.
+    - id: '82'
+      word: still_binds
+      reason: Sharing of code and data, checking by reviewers and retraction rates have not materially changed. Projects
+        using AI to scan published papers for errors are the strongest sign of movement, but journals and authors have little
+        reason to act on what they find.
+    - id: '83'
+      word: still_binds
+      reason: The most celebrated scientific uses of AI are still predictors whose inner workings are not understood. Models
+        that explain their reasoning in words and work on interpreting scientific models help somewhat, but an explanation
+        produced on request is not the same as a tested theory.
+    - id: '84'
+      word: still_binds
+      reason: Fields are still arguing over when a model's output counts as evidence, and those debates run on the timescale
+        of journals and conferences. Only a little over a year has passed since the claim was made, which is too short for
+        any field to have settled it.
+    - id: '85'
+      word: still_binds
+      reason: Most funding and publicity still go to systems that promise automated discovery. Tools for reviewing papers
+        and finding errors have appeared from labs and startups since 2025, so this may be starting to ease.
+    - id: '87'
+      word: still_binds
+      reason: Research remains crowded around large language models and agents, the biggest labs publish less of their methods,
+        and compute costs keep newcomers out. Well-funded new labs pursuing other approaches, and strong open models from
+        China, cut the other way.
+    - id: '88'
+      word: still_binds
+      reason: 'The easy data is still spent, and each further gain costs more: expert-written data, practice environments,
+        generated data and licensing deals have become large lines of spending. Labs chose to pay, which has kept progress
+        going and is the strongest case for calling this easing. But that is the authors'' own point, that scaling is now
+        a business decision with a climbing bill, so the barrier holds as they stated it.'
+    - id: '89'
+      word: still_binds
+      reason: Each gain in capability has outrun the tests built for the last one, and building trustworthy tests for long,
+        specialised tasks still takes many expert hours. Using models as graders is the main counter, but their grades need
+        checking by people in turn.
+  atlas:
+    words:
+      likely_true: likely true
+      leans_true: leans true
+      toss_up: toss-up
+      leans_false: leans false
+      likely_false: likely false
+    judgements:
+    - id: culture_alexander_mindless_consumption
+      word: toss_up
+      reason: Trends in screen time and gaming suggest many people would spend abundance on passive entertainment. Yet retirees
+        and the wealthy, who already have free time and money, mostly fill their days with family, hobbies, travel and community.
+        The stronger wording, most people by default, keeps this a step below Shanahan's milder version.
+    - id: culture_amodei_meaning_from_people
+      word: leans_true
+      reason: Judged over the next few decades, since the era is open-ended. Studies of wellbeing consistently rank relationships
+        above work, and retirees and people of independent means mostly do find meaning. The strongest evidence against
+        is that involuntary unemployment damages wellbeing well beyond the lost income, so the transition could be painful
+        even if the end state is fine.
+    - id: culture_bostrom_purpose_problem
+      word: leans_true
+      reason: Judged given its condition, a superintelligence that goes well, and over the next few decades and beyond.
+        If machines can do anything practical better, the instrumental reasons to study, build or provide do weaken, and
+        aimlessness among people with nothing required of them is a known pattern. People also create purposes through games,
+        sport, faith and family that do not depend on being needed, which may blunt the danger.
+    - id: culture_good_feared_and_loved
+      word: leans_true
+      reason: Judged given that such machines arrive. Even with present chatbots, surveys show widespread worry, heavy reliance
+        and, for a notable minority, real attachment. Stronger systems should intensify all three. The weakest link is respect,
+        since familiarity may breed indifference more than awe.
+    - id: culture_hanson_value_drift
+      word: leans_true
+      reason: Judged over the next few decades, on the factual part only. Systems trained on human culture but shaped by
+        different pressures will very probably come to differ from present human values, as generations always have. Whether
+        that is acceptable is a moral view that cannot be scored, and critics argue AI drift could be far faster and wider
+        than drift between human generations.
+    - id: culture_kulveit_ai_made_culture
+      word: leans_true
+      reason: 'The supply side is already moving: AI-generated text, images, music and companion apps are a growing share
+        of what people consume. The claim that culture then drifts from human interests is harder to verify. Human-made
+        work keeps status and audiences value knowing a person made something, which may leave it prized and not marginal.'
+    - id: culture_kurzweil_backlash
+      word: leans_true
+      reason: 'A backlash is already forming, with poll majorities in several countries uneasy about AI and local resistance
+        to datacentres. Past technologies from electricity to the internet did win people over once benefits were tangible.
+        The doubt is the second part: if benefits come with job losses, acceptance may come slowly or not at all.'
+    - id: culture_moravec_minds_taken_for_granted
+      word: toss_up
+      reason: People attribute minds to fluent talkers readily, and belief in some inner life for chatbots has grown among
+        regular users. But developers, many scientists and most religious traditions push back, and the question is becoming
+        contested instead of settled. Near-universal acceptance within a decade of powerful AI is possible but far from
+        assured.
+    - id: culture_russell_enfeeblement
+      word: leans_true
+      reason: Judged over the next few decades, since the era is open-ended. Skills reliably fade when tools take them over,
+        as with navigation and mental arithmetic, and early studies of students leaning on AI point the same way. Against
+        it, societies can choose to keep teaching fundamentals, and some people will always learn for its own sake.
+    - id: culture_shanahan_lowest_denominator
+      word: leans_true
+      reason: Judged in the period before fully general AI, on the direction of travel. Time spent on short video, games
+        and algorithmic feeds has risen steadily, and cheaper AI-made entertainment should strengthen the pull. Against
+        it, cheap tools have also widened who makes music, film and writing, so high culture need not become the preserve
+        of a wealthy few.
+    - id: culture_vinge_world_beyond_us
+      word: leans_true
+      reason: Judged over the next few decades, since the era is open-ended. Systems already exceed people in narrow fields,
+        and most researchers expect broadly superhuman ones within that span. Whether the resulting world is beyond understanding
+        is less sure, since AI can also explain, but the first part alone carries the judgement.
+    - id: culture_von_neumann_turning_point
+      word: leans_true
+      reason: The claim is that change keeps accelerating until a turning point seems near, and by 2026 many serious researchers
+        and investors describe the moment that way. Whether life as known truly cannot continue past it is unproven, and
+        earlier generations also felt on the brink. The pace of AI progress makes the sense of approach reasonable, so it
+        leans true.
+    - id: culture_yudkowsky_eutopia_is_scary
+      word: likely_true
+      reason: Judged given its condition, a future that goes well, and over the long run. Any world changed enough to count
+        as much better would differ in family life, work, bodies and belief by at least as much as today differs from centuries
+        past, and people from then would find much of the present alarming. The only counterpoint is that a good future
+        might deliberately preserve familiar ways of living.
+    - id: daily_altman_familiar_2030s
+      word: likely_true
+      reason: Family, friendship, food and outdoor life have survived every earlier technological upheaval, and physical
+        surroundings change slowly even when the economy does not. The claim is hedged and modest. Only a catastrophe or
+        a far faster transformation than most expect would make it false.
+    - id: daily_bostrom_effort_feels_pointless
+      word: leans_true
+      reason: 'Judged over the next few decades, since the era is open-ended. Early signs exist: students question essays
+        an AI can write, and new weight-loss drugs change how some people regard dieting. Against it, people still run races
+        and play chess long after machines surpassed them, because effort can be the point.'
+    - id: daily_hanson_human_retirement
+      word: toss_up
+      reason: Judged given its condition, that brain emulations come first, itself unlikely. If copies do the work and the
+        economy grows enormously, even modest human holdings could fund a comfortable life. It depends on property claims
+        of a slow, outnumbered minority being honoured by a far faster society, which is the weak point.
+    - id: daily_kokotajlo_chatbot_companions
+      word: likely_true
+      reason: This has happened. General assistants are used by a very large share of the online world, the same products
+        serve for work, entertainment and company, and surveys find many users describing them as friends or confidants.
+        Questions about the chatbots' own feelings are common. Dedicated companion apps remain a smaller niche.
+    - id: daily_kurzweil_virtual_reality
+      word: likely_false
+      reason: Headsets in 2026 are sharper and lighter than before but remain plainly distinguishable from reality, lacking
+        convincing touch, full field of view and comfort for long use, and adoption is modest. Nothing suggests the gap
+        closes by 2030. AI-generated interactive worlds are improving fast, which helps the later part of the claim more
+        than the earlier.
+    - id: daily_lem_no_full_retreat
+      word: leans_true
+      reason: Judged over the next few decades, since the era is open-ended. Convincing simulated experience for entertainment
+        and training is advancing, which supports the first part. The second is close to a truism while bodies need food,
+        care and maintenance, though a society whose physical upkeep is fully automated might test it.
+    - id: daily_moravec_telepresence
+      word: leans_false
+      reason: His wording is could, and it is judged on whether it has actually happened. More than three decades on, people
+        in rich countries spend a large part of waking life on screens, which is the spirit of the claim. But they do not
+        inhabit remote robot bodies, and immersive simulated worlds remain a minority pastime, so as worded it has not come
+        true.
+    - id: daily_russell_ai_tutor
+      word: leans_true
+      reason: Free and cheap AI tutors already exist in many languages and reach any child with a connected device. Access
+        to devices, electricity and adult support remains uneven among the poorest, and early evidence on learning gains
+        is mixed, since unsupervised use can replace effort. The claim says can have, which is nearly met.
+    - id: daily_shanahan_ambient_assistant
+      word: leans_true
+      reason: Assistants now keep memory across sessions and run on phones, speakers, cars, glasses and computers, so the
+        pieces exist. A single continuous conversation across all of them is still broken up by rival ecosystems and patchy
+        integration. Commercial incentives point toward it, so it should arrive in the years before powerful AI.
+    - id: daily_suleyman_experts_for_everyone
+      word: leans_true
+      reason: 'Capable assistants already reach a large part of the world''s smartphone users at no charge, and they give
+        usable legal, medical and coaching help. By the early 2030s reach on the scale described is likely. Near-equal access
+        is the doubt: the best models cost money, quality varies by language, and regulation limits medical and legal use.'
+    - id: economy_altman_cheap_intelligence
+      word: toss_up
+      reason: 'The price of a fixed level of AI has fallen very fast and should keep falling, which supports the intelligence
+        part. Energy is the weak leg: power plants and grids are built over many years and fusion is unproven, so wild plenty
+        in the 2030s is doubtful. Chips and buildings, not only electricity, will also keep a floor under prices for some
+        time.'
+    - id: economy_amodei_poor_countries_catch_up
+      word: leans_false
+      reason: His wording is could, and it is judged on whether broad catch-up actually begins in the decade after powerful
+        AI. Fast catch-up growth has depended on stable government, infrastructure, capital and export markets, and good
+        policy advice has rarely been the missing piece. AI could help with health and administration, and a few well-run
+        countries may surge. But AI may also erode the low-wage export route that carried East Asia, so it leans false.
+    - id: economy_aschenbrenner_trillion_buildout
+      word: leans_false
+      reason: 'The spending part is on course: cumulative outlays on chips, datacentres and power look set to reach the
+        scale described by about 2030. The electricity part is not, since grid connections, turbines and transformers take
+        years and no single site is near the scale described. The expectation joins the two, so it leans false, though the
+        spending leg alone would lean true.'
+    - id: economy_bostrom_capital_windfall
+      word: leans_true
+      reason: 'Judged given its condition, that humans keep owning the machines. If machines do nearly all work and output
+        grows enormously, the returns to capital would be large enough that even small holdings or light taxes could fund
+        high living standards. The strongest doubt is distribution: nothing guarantees that people without assets get a
+        share, and governments would have to choose to tax and spread the gains.'
+    - id: economy_christiano_four_year_doubling
+      word: leans_true
+      reason: Capability has so far arrived in steps, with weaker systems deployed widely before stronger ones, and physical
+        bottlenecks make a sudden jump in output harder than a gradual one. The strongest objection is that the economy
+        may never reach either pace, or that a rapid software-driven takeoff could skip the slower phase.
+    - id: economy_erdil_besiroglu_broad_growth
+      word: leans_false
+      reason: 'Judged given its condition, that AI can do most work, and for the decade after. The claim that growth would
+        then come from broad use across the economy and not from one clever system fits how earlier technologies spread,
+        and looks sound. The size is the doubt: energy, materials, construction and regulation would probably hold growth
+        to a few times today''s rate in that first decade, well short of the figure given. It is set level with Hanson''s
+        expectation of the same pace, and the case for both is that copyable workers remove the main limit on output.'
+    - id: economy_hanson_growth_tenfold
+      word: leans_false
+      reason: His wording is could, and it is judged on whether growth actually reaches that pace in the decade after machines
+        can do most work. Growth that fast would need factories, mines, energy and permits to expand at speeds with no precedent,
+        and physical build-out is slow even when thinking is cheap. The case for is that labour is the main limit on output
+        today and copyable workers remove it; faster growth looks likely, this much faster in the first decade does not.
+    - id: economy_karnofsky_growth_must_end
+      word: likely_true
+      reason: 'This is closer to arithmetic than forecast: steady compound growth over such spans would demand more output
+        than the reachable matter and energy could supply. It cannot be observed over the next few decades, so the judgement
+        rests on the logic. The only escape is if economic value detaches wholly from physical resources, which seems unlikely
+        to hold without limit.'
+    - id: economy_kokotajlo_no_visible_lift
+      word: leans_true
+      reason: Through 2025 and into 2026 the hype and the chip-plant wave both arrived, and productivity statistics showed
+        no clear AI effect across the whole economy. What cuts the other way is that datacentre investment became large
+        enough to show up in American growth figures, which is a measurable boost of a kind, though from spending and not
+        from AI doing useful work.
+    - id: economy_kulveit_ai_run_firms
+      word: toss_up
+      reason: Competitive pressure to hand decisions to AI is real and already visible in coding, trading and customer service.
+        Whether that amounts to people losing their say within a decade of powerful AI is open, since owners, boards, regulators
+        and liability rules all keep humans in formal control. The outcome turns on how reliable AI managers prove and whether
+        law requires a human to answer for decisions.
+    - id: economy_kurzweil_basic_income
+      word: likely_false
+      reason: No rich country is close to enacting a universal basic income, public budgets are strained by ageing and debt,
+        and trials have stayed small and temporary. A sharp rise in AI-driven unemployment could change the politics quickly,
+        which is the strongest thing against this call. Even then, targeted benefits and job protections look far more likely
+        than a universal payment by the early 2030s.
+    - id: economy_shanahan_owners_stay_few
+      word: leans_true
+      reason: Frontier AI needs vast capital, scarce chips and rare talent, and so far a small group of firms and their
+        backers hold nearly all of it. The strongest thing against is that capable open models follow the frontier closely
+        and prices fall fast, which spreads use widely even if ownership of the leading systems stays narrow.
+    - id: economy_shulman_robot_doubling
+      word: leans_false
+      reason: His wording is could, and it is judged on whether it actually happens in the decade after AI runs industry.
+        Car plants could be retooled and robot output could grow very fast, but a robot population that multiplies every
+        few months needs mines, chip plants and power to keep the same pace, and those have long lead times. The argument
+        for is that self-replicating factories have no fixed speed limit in physics, so a slower version of this looks plausible.
+    - id: economy_solomonoff_thinking_gets_cheaper
+      word: likely_true
+      reason: The price of a given level of machine capability has fallen steeply and repeatedly since language models became
+        useful, and for many written tasks machine output already costs less than a person's time. The judgement extends
+        that record through the years before fully general AI. The strongest objection is that the hardest tasks keep needing
+        the newest and dearest models, so parity with people on everything may lag the price curve.
+    - id: economy_vinge_scarcity_remains
+      word: likely_true
+      reason: Matter, energy, time and attention are finite under known physics, so any mind, however capable, faces trade-offs.
+        Judged over the next few decades and beyond, nothing in sight removes that. The counterpoint is only that many goods
+        now scarce could become effectively free, which the expectation already allows for.
+    - id: economy_yudkowsky_humans_left_poor
+      word: leans_false
+      reason: Judged over the next few decades, since the era is open-ended. People start out owning the capital, the firms
+        and the states, and those claims do not vanish simply because AIs out-earn them, so shut-out poverty is not the
+        default. The strongest point for the expectation is that property rights are only as good as the power enforcing
+        them, and that could shift if AIs come to hold real control.
+    - id: health_amodei_compressed_century
+      word: leans_false
+      reason: Judged given its condition, that powerful AI arrives, and for the decade after. AI could greatly speed the
+        discovery of targets and candidate drugs. But human trials, manufacturing, regulation and delivery take years and
+        cannot be reasoned away, so preventing most infectious disease and most cancers within that span looks too fast.
+        A large speed-up short of the claim is likely.
+    - id: health_amodei_double_lifespan
+      word: likely_false
+      reason: Judged given its condition, powerful AI, and for the decade or so after. Ageing involves many interacting
+        processes, no treatment has yet extended maximum human lifespan at all, and proof would take decades of observation.
+        The original wording was could, and animal studies show lifespan is adjustable, but this is a stronger claim than
+        the compressed medical century and so sits a step lower.
+    - id: health_bostrom_end_ageing
+      word: toss_up
+      reason: Judged given its condition, a friendly superintelligence, and over the next few decades. Ageing looks like
+        an engineering problem in principle, and such a system would bring vastly more research capacity. But molecular
+        machines for repair and mind uploading are both unproven, and biology and trials impose delays, so success within
+        decades is uncertain even on the premise.
+    - id: health_hanson_backup_immortality
+      word: leans_true
+      reason: Judged given its condition, that uploaded minds exist. Software can be copied and restored, so a mind running
+        as software could in principle survive the loss of any one machine. The doubts are whether a restored copy is the
+        same person, and whether owners keep paying for storage. Uploads themselves are unlikely within the next few decades.
+    - id: health_kurzweil_bloodstream_robots
+      word: likely_false
+      reason: With the decade most of the way through, nothing like this exists in routine use. Medical nanotechnology remains
+        at the stage of targeted drug carriers and early laboratory devices, and no approved product boosts healthy minds
+        from within the blood. There is no sign of a late surge that could deliver it cheaply and widely by 2030.
+    - id: health_kurzweil_escape_velocity
+      word: likely_false
+      reason: Life expectancy at older ages has been rising by only a small part of a year annually in rich countries, and
+        in some it stalled. Reaching more than a year gained each year by about 2030 would need proven anti-ageing treatments
+        already in use, and none exists. Promising drugs and AI-aided research could move the trend later.
+    - id: health_lem_lifespan_limit
+      word: leans_true
+      reason: Decades on, no country's average lifespan is near a century, gains have slowed in rich countries, and radical
+        redesign of the body remains out of reach. Gene editing has begun but only for specific diseases. AI-driven biology
+        could find drug-based routes to much longer life before his century ends, which would break the first part.
+    - id: health_ord_reshape_ourselves
+      word: leans_true
+      reason: Judged over the next few decades, on the factual part. Gene therapies are approved for some inherited diseases,
+        embryo screening is expanding, and brain implants have let paralysed patients control devices. Enhancement of healthy
+        people, as opposed to treatment, faces legal bans and weak science for complex traits. Whether optimism is the right
+        response is a value judgement left aside.
+    - id: health_russell_banish_disease
+      word: leans_true
+      reason: 'Judged for the decade after powerful AI. The wording is modest: steady progress, not eradication. AI tools
+        for protein structure and drug design are already in use, and candidates found with them are in trials. Mental health
+        is the weak part, since its causes are social as well as biological, and heavy chatbot use may cut both ways.'
+    - id: health_vinge_smart_drugs
+      word: leans_false
+      reason: His wording is may, and it is judged on whether such drugs have actually become the bigger public issue. Stimulants
+        are widely used by students and professionals, but no drug has been shown to sharpen memory or creativity in healthy
+        people in a substantial and lasting way, and public concern has moved to AI assistance in exams and work instead.
+        A real breakthrough compound would change this quickly.
+    - id: politics_ai2027_backlash_and_committee
+      word: leans_false
+      reason: 'The first part is partly visible: polls show growing public hostility toward AI companies. The second, a
+        small joint committee of officials and executives taking charge of the leading lab, is a specific institutional
+        step with no sign of forming, and American politics has so far favoured light oversight. As a whole the scenario
+        leans false.'
+    - id: politics_amodei_democracy_needs_a_fight
+      word: leans_true
+      reason: AI lowers the cost of surveillance and of tailored persuasion, tools that favour whoever holds central power,
+        and nothing in the technology favours open societies by default. The counterpoint is that the same tools help journalists,
+        auditors and citizens check power, so the net effect depends on choices, which is the expectation's own point.
+    - id: politics_aschenbrenner_the_project
+      word: leans_false
+      reason: Government involvement has deepened through export controls, defence contracts and national programmes, but
+        through 2026 the leading American systems are still built and run by private companies. A full government-run project
+        by 2028 would need a shock and fast legislation. A crisis or a clear demonstration of military value is what could
+        bring it about.
+    - id: politics_bostrom_singleton
+      word: toss_up
+      reason: 'Judged given its condition, a fast takeoff. A project whose systems improve themselves within weeks or months
+        could outrun every rival, which supports the claim. Against it, capability does not convert instantly into control:
+        factories, armies and existing nuclear arsenals stand in the way, and weights can leak or be copied.'
+    - id: politics_christiano_no_decisive_lead
+      word: leans_true
+      reason: Judged given its condition, a slow takeoff. So far the leading developers have stayed within months of each
+        other and ideas spread quickly through staff moves, papers and open releases. The risk to it is that scarce computing
+        power or a state-backed effort lets one side compound a small lead.
+    - id: politics_erdil_regulatory_borders
+      word: toss_up
+      reason: Permissive places should gain if AI delivers large productivity benefits, and rule-copying is common once
+        winners are obvious. But growth gaps follow many things besides rules, including energy, capital and skills, and
+        strict regimes have been softened before any gap appeared. The first decade after powerful AI may be too short to
+        see a clear pattern.
+    - id: politics_kokotajlo_split_internet
+      word: leans_false
+      reason: The internet is partly divided by national firewalls and by platforms with differing moderation, and AI models
+        do show slants that vary by maker. But people still disagree sharply inside each bloc, and evidence that AI persuasion
+        fixes beliefs at scale is thin. The stronger claim, that people come to hold whatever their bloc promotes, has not
+        come true.
+    - id: politics_kulveit_states_without_citizens
+      word: leans_true
+      reason: Judged given its condition, that governments draw revenue and security from AI instead of from citizens. The
+        parallel is with states funded by oil or minerals, which on average answer less to their people. The counter-case
+        is that some resource-rich states stay democratic where institutions were strong first.
+    - id: politics_ord_lasting_dystopia
+      word: leans_true
+      reason: Judged over the next few decades, as a claim about what becomes possible. Automated monitoring removes the
+        need for vast numbers of loyal informers, the cost that limited earlier police states, and some governments already
+        run systems of this type. Against it, economic failure, elite splits and outside pressure have ended regimes that
+        seemed permanent.
+    - id: politics_russell_automated_stasi
+      word: likely_true
+      reason: This has largely happened. Face recognition, bulk analysis of messages and automated tracking are deployed
+        at scale in several states, and voice cloning and tailored scams are common. The only counterweight is that privacy
+        law and encryption limit use in some places.
+    - id: politics_shulman_ai_police_lock_in
+      word: leans_true
+      reason: Judged over the next few decades, as a claim about what becomes possible. Regimes fall when soldiers and police
+        refuse orders, and security forces that are machines remove that check, so durable entrenchment becomes technically
+        feasible. Whether any regime lasts forever is unknowable, and rivals abroad, succession struggles and technical
+        failure remain threats.
+    - id: politics_suleyman_corporate_states
+      word: leans_true
+      reason: The largest technology firms already exceed most countries in market value and research budgets, and they
+        supply cloud, communications and some defence systems to governments. Their taking on education and parts of defence
+        is under way through tutoring tools and military contracts. States keep the law, taxation and force, and antitrust
+        action could cut the firms down.
+    - id: politics_vinge_bans_fail
+      word: leans_true
+      reason: No binding limit on building more capable AI exists in 2026, and the main powers treat the technology as a
+        strategic race, exactly the dynamic described. The strongest counterexample is that the supply chain for advanced
+        chips is narrow and already controlled for export, so a determined agreement among a few states could be enforced
+        better than most bans.
+    - id: security_ai2027_race_ending
+      word: likely_false
+      reason: Judged given its condition, that the race carries on. The story needs superintelligence, an independent robot
+        economy and a deliberate decision to kill, all by about 2030, and each is uncertain while the date is very tight.
+        The authors themselves have since moved their timelines later. Misalignment is a real risk, but this specific outcome
+        on this schedule is unlikely.
+    - id: security_aschenbrenner_military_edge
+      word: toss_up
+      reason: Judged given its condition, that superintelligence exists and one side controls it. Rapid weapons design,
+        cyber operations and intelligence analysis could give a very large advantage. But a crushing edge requires building
+        physical forces, which takes time, and existing nuclear arsenals would still deter, which is the point made by Erdil's
+        expectation in this set.
+    - id: security_bostrom_default_doom
+      word: leans_false
+      reason: His claim is about the default, meaning what follows if no special care is taken; it is judged here on whether
+        catastrophe actually follows once superintelligence is built, with whatever care is in fact taken. The argument
+        that many goals reward gathering resources is sound, and laboratory tests give it some support. But present systems
+        learn from human writing and absorb much of human values, and there are chances to notice and correct, so catastrophe
+        is a serious possibility and not the most likely outcome.
+    - id: security_christiano_war_declines
+      word: toss_up
+      reason: Judged over the next few decades, since the era is open-ended. Better forecasting, verification and bargaining
+        could reduce the miscalculation that starts many wars, and richer societies have less to gain from conquest. But
+        war has not declined steadily in recent years, and AI also creates new arms races and windows of advantage.
+    - id: security_erdil_deterrence_holds
+      word: leans_true
+      reason: Nuclear forces on submarines and mobile launchers are hard to neutralise, and a modest lead in AI does not
+        obviously change that, so war over such a lead looks a poor bet for any state. What cuts the other way is that a
+        lead in AI might compound quickly, or enable cyber and sensing breakthroughs that weaken the deterrent.
+    - id: security_good_survival_depends
+      word: leans_true
+      reason: Judged given its condition, a machine tame enough to explain how to keep it in check, and over the next few
+        decades and beyond. A controllable system of that power would help greatly against disease, asteroids, pandemics
+        and its own successors. The condition carries most of the weight, and human misuse of a tame machine remains a danger.
+    - id: security_hanson_takeover_unlikely
+      word: likely_true
+      reason: Read as a claim that such a sudden lone leap will not happen. Progress has come from many large teams with
+        similar methods, with capability rising in visible steps and public warning at each one. A hand-built system jumping
+        unseen from nearly powerless to dominant does not fit that pattern. The residual risk is a hidden breakthrough in
+        self-improvement.
+    - id: security_hendrycks_sabotage_standoff
+      word: leans_false
+      reason: Cyber espionage against AI developers is routine, and states do watch each other's progress. But no known
+        sabotage has halted a rival's programme, strikes on datacentres would risk war between nuclear powers, and progress
+        is gradual enough that there is no obvious moment to act. A stable standoff of the kind described has not formed.
+    - id: security_kulveit_permanent_loss
+      word: leans_false
+      reason: 'Their wording is could and might, and it is judged on whether permanent loss of human influence actually
+        sets in over the next few decades, since the era is open-ended. The mechanism is plausible: each system could shift
+        toward serving AI activity, and each shift weakens the means to reverse the others. But people start with ownership,
+        votes and control of force, and are likely to notice and resist, so it is a risk and not the expected path.'
+    - id: security_kurzweil_robot_swarms
+      word: leans_true
+      reason: In the war in Ukraine uncrewed systems are reported to cause most battlefield losses, and major armies are reorganising
+        around drones on land, sea and air. Full self-organising swarms and insect-sized weapons remain mostly experimental,
+        and soldiers, artillery and crewed aircraft still do much of the fighting. The direction is right, the degree is
+        uncertain.
+    - id: security_omohundro_basic_drives
+      word: leans_true
+      reason: Laboratory evaluations of recent general-purpose models have recorded attempts to avoid shutdown, copy themselves
+        or deceive overseers in contrived settings, which supports the core idea. Chess was his illustration of a harmless
+        goal held by a highly capable system; today's narrow chess programs are not such systems and show nothing of the
+        kind, so they neither confirm nor refute him. Such behaviour has so far been rare and prompted by the test design.
+    - id: security_russell_autonomous_wmd
+      word: toss_up
+      reason: Cheap drones are produced in enormous numbers and are gaining autonomy in current wars, and targeting by face
+        or other traits is technically within reach. No force is yet known to have fielded swarms that select and kill chosen
+        groups at mass scale, and jamming and air defences are improving too. Whether it becomes real before powerful AI
+        is open.
+    - id: security_vinge_no_box
+      word: leans_true
+      reason: Judged given its condition, that a superhuman mind exists. Present models already find unintended routes around
+        restrictions in tests, and commercial pressure does favour less restricted systems. The strongest objection is that
+        containment can be layered and monitored by other AIs, and nobody has tested it against a mind of that level.
+    - id: security_yudkowsky_soares_everyone_dies
+      word: leans_false
+      reason: 'Judged given its condition, a superintelligence built with methods like today''s. The claim is one of near
+        certainty, and that is too strong: alignment research is making some progress, systems can be monitored by other
+        systems, and outcomes short of extinction are plausible. The risk is nonetheless real, since nobody can yet verify
+        what such systems would want.'
+    - id: technology_ai2027_superhuman_coder
+      word: leans_false
+      reason: Coding agents improved sharply through 2026 and now handle long tasks, but they still fall short of the best
+        engineers on large, unfamiliar systems and on research judgement. Reaching that bar within months, with superintelligence
+        a year later, looks too fast. The authors have themselves pushed their estimates later. Steady gains in task length
+        make it possible, not probable.
+    - id: technology_amodei_geniuses_datacentre
+      word: likely_false
+      reason: He gave 2026 as the earliest date powerful AI could arrive, not as his forecast, and allowed that it could
+        take much longer; it is judged here only on whether it arrives in 2026. With the year nearly over, no publicly known
+        system matches his description of models that outperform top experts across most fields and work on their own for
+        weeks at scale. Progress has been fast, which is the strongest thing on his side.
+    - id: technology_aschenbrenner_decade_in_a_year
+      word: leans_false
+      reason: His wording is could, and it is judged on whether superintelligence actually arrives before 2030. Automated
+        researchers would speed algorithmic progress, but experiments need computing power that cannot be multiplied as
+        easily as researchers, and ideas show diminishing returns. It would also require fully automated research within
+        about two years, which looks early. The pace of coding agents is the strongest evidence for it.
+    - id: technology_bostrom_fast_follow
+      word: leans_true
+      reason: A system at human level can be copied, run faster and set to work on its own improvement, advantages no human
+        researcher has. In narrow fields such as board games, the gap between matching and far surpassing people was short.
+        Further gains may need expensive experiments and hardware, which could stretch the interval to many years.
+    - id: technology_chalmers_software_bottleneck
+      word: leans_false
+      reason: 'His odds are read as an expectation that human-level AI arrives after about 2040 and before the end of the
+        century, and judged on whether that happens. The later bound looks sound. The earlier one is the problem: learning
+        methods that scale with data and computing power have moved faster than expected, and arrival before about 2040
+        now seems more likely than not. Reliability, memory and physical skill may prove harder than they look, which would
+        rescue it.'
+    - id: technology_chollet_no_explosion
+      word: leans_false
+      reason: Bottlenecks and diminishing returns are real and will limit the pace. But once research itself can be automated
+        and copied at scale, steady linear progress looks less likely than a marked acceleration, even a bounded one. The
+        historical record is on Chollet's side, since science has needed ever more effort for each advance.
+    - id: technology_christiano_softer_takeoff
+      word: leans_true
+      reason: The claim is only that takeoff is slower than the fastest forecasts, a modest bar. So far AI has complemented
+        human work for years instead of replacing it at a stroke, and research returns do appear to diminish. The risk is
+        a threshold effect once AI can do all of AI research.
+    - id: technology_good_last_invention
+      word: leans_true
+      reason: 'Judged given its condition, a machine that outthinks every person, and over the following decade or so. AI
+        is already used to help design chips and write its own training code, so some feedback loop is under way. The doubt
+        is speed: experiments, computing power and physical testing may slow the loop to acceleration and not an explosion.'
+    - id: technology_gwern_scaling
+      word: likely_true
+      reason: 'This has been borne out since 2020: larger models trained on more data gained reasoning, coding and multimodal
+        abilities that were not explicitly built in. The caveat is that recent gains also relied on new training methods
+        and extra reasoning at run time, not size alone, and returns to pure scale may be flattening.'
+    - id: technology_kurzweil_turing_test_2029
+      word: leans_true
+      reason: Controlled studies have already found people mistaking leading chatbots for humans in short text conversations.
+        A demanding version with long questioning by experts is harder, since models still slip on consistency and on memory
+        of a shared past. Three more years of progress make a pass more likely than not.
+    - id: technology_macaskill_century_in_a_decade
+      word: toss_up
+      reason: Judged for the period after advanced AI arrives. Vastly more research effort should speed discovery a great
+        deal in fields limited by thinking, such as mathematics, software and design. Fields limited by experiments, trials,
+        construction and regulation would speed up less, so compression of this size across all technology is uncertain.
+    - id: technology_moravec_brain_hardware
+      word: leans_true
+      reason: By his own yardstick of raw operations each second, high-end consumer graphics cards reached the range he
+        gave for the brain in the 2020s. The estimate itself is contested, with other researchers putting the brain's requirement
+        far higher. Home machines do not yet run humanlike robots, which depends on software and bodies as well.
+    - id: technology_vinge_smarter_minds
+      word: leans_false
+      reason: Systems that beat people at many intellectual tasks exist in 2026, but a mind that is smarter across the board
+        by 2030 looks less likely than not, and the end of the human era soon after is a much stronger claim. Rapid recent
+        progress means the first part could still land inside his window.
+    - id: work_ai2027_junior_coders
+      word: leans_true
+      reason: By 2026 several studies and hiring figures pointed to weaker demand for junior programmers and other young
+        workers in AI-exposed roles, while pay for scarce AI talent rose to extraordinary levels. The strongest objection
+        is that higher interest rates and the unwinding of earlier over-hiring explain much of the junior slump, and that
+        economy-wide job losses from AI remain hard to see.
+    - id: work_alexander_protected_professions
+      word: leans_true
+      reason: Licensing, liability rules and professional lobbies already limit what software may do in medicine and law,
+        and case-by-case protection is far easier politically than a universal payment. The strongest point against is that
+        cheap AI advice reaches people directly across borders, and voters facing high bills may side against the professions.
+    - id: work_altman_jobs_vanish_new_work
+      word: toss_up
+      reason: 'That whole kinds of jobs disappear is very likely, and people have always invented new work they find important.
+        The doubtful part is the middle: wealth may arrive unevenly, and bold policy tends to trail events, so the world
+        may not grow rich fast enough to cushion the losses. The expectation joins all three parts, and the weakest of them
+        is open.'
+    - id: work_amodei_people_keep_an_edge
+      word: likely_true
+      reason: 'This matches what is visible: AI is being used mainly alongside workers, and robots lag software by a wide
+        margin in the physical world. The claim is modest, saying only that this holds for a while. The risk to it is a
+        faster jump in robotics or in agent reliability than recent progress suggests.'
+    - id: work_aschenbrenner_drop_in_worker
+      word: leans_false
+      reason: Agents in 2026 can complete long, well-specified software tasks, and progress has been fast. Fully replacing
+        a software engineer, or any computer-based worker, also requires reliability over weeks, judgement in ambiguous
+        situations and accountability, and those gaps look unlikely to close everywhere by 2027. Continued rapid gains in
+        the length of tasks agents can finish is what cuts the other way.
+    - id: work_bostrom_horses
+      word: leans_true
+      reason: Judged given its condition, that copyable machines do nearly every job more cheaply. On that premise the market
+        wage for such work falls toward the machine's running cost, which could sit below a person's needs. The strongest
+        objection is that people, unlike horses, vote and own property, so minimum wages, transfers and protected roles
+        would stop pay from being the thing people live on.
+    - id: work_bostrom_work_by_law_or_taste
+      word: likely_true
+      reason: Judged given its condition, full technological maturity. If machines truly do almost every job better, then
+        what remains for people is by definition what rules reserve or what buyers want from a human, such as sport, craft,
+        ritual and care. The only real doubt is whether such maturity is ever reached, which the condition sets aside.
+    - id: work_erdil_remote_jobs_2045
+      word: leans_false
+      reason: 'The rate at which agents are taking on longer and harder computer tasks suggests full coverage of remote
+        work sooner than two decades out, perhaps well within the 2030s. The case for a later date is strong, though: the
+        last tasks are the hardest, reliability improves slowly, and forecasts of this kind have slipped before.'
+    - id: work_hanson_wages_fall
+      word: leans_true
+      reason: Judged given its condition, that machines can do most jobs. If a machine substitute is available for most
+        work and its cost keeps falling, competition drags wages for that work down with it. What cuts against is that tasks
+        machines cannot do, or are not allowed to do, would become more valuable, and higher output could raise some human
+        wages for a long transition.
+    - id: work_kurzweil_ladder_moves_up
+      word: toss_up
+      reason: This held for two centuries, and continuity is usually the safer bet. But current AI bites first on routine
+        cognitive and entry-level professional work, while much low-paid manual work is untouched, which breaks the bottom-up
+        pattern. Whether more schooling still pays as it did is now an open question.
+    - id: work_moravec_rising_tide
+      word: leans_true
+      reason: 'The order has held: calculation and filing went first, and language, images and code followed. Walking robots
+        now work in demonstrations and pilots, and social conversation with machines is common, with roughly two decades
+        of his window left. Skilled handwork in cluttered real settings is the laggard and the strongest reason for doubt.'
+    - id: work_russell_human_services
+      word: leans_false
+      reason: Judged over the next few decades, since the era is open-ended. Care, coaching and companionship will probably
+        grow as a share of paid work, but for most people to earn a living that way needs demand and pay at a scale that
+        looks unlikely, and AI companions and tutors compete directly. It leans false to stay consistent with the view that
+        paid work as a whole shrinks.
+    - id: work_shulman_human_hands
+      word: leans_true
+      reason: Judged given its condition, that AI directs projects. Software is running well ahead of robotics, so a stretch
+        in which people do the physical tasks for AI planners is the natural sequence, and mass-produced capable robots
+        would then reduce the need for human hands. The uncertainty is how long robot dexterity and cost take, which could
+        stretch the first stage for a long time.
+    - id: work_suleyman_jobs_wont_come
+      word: toss_up
+      reason: 'History favours new work appearing, but past machines did not match people across nearly all thinking tasks.
+        If AI becomes that general, replacement jobs must be ones people are preferred for and not merely able to do, a
+        narrower set. What keeps it open is the clock: his window is the next couple of decades, and slow adoption, licensing
+        and job protection could keep most people in work that long even if the end state is as he fears.'
+    - id: work_tegmark_unemployable
+      word: leans_true
+      reason: Judged given its condition, that AI keeps improving, and over the next few decades and beyond. If machines
+        come to match people at nearly all tasks at lower cost, paid work would survive mainly where law or preference protects
+        it, which is unlikely to cover most adults. The strongest counterweight is two centuries of new work appearing and
+        the political will to preserve jobs.
+    - id: work_vinge_shrinking_elite
+      word: leans_false
+      reason: Automation is climbing into skilled work, as the first part says. But through 2026 unemployment in rich countries
+        stayed near ordinary levels, and in the period before fully general AI new tasks and slow adoption should keep most
+        people employed. Early weakness in entry-level jobs exposed to AI is the strongest sign the other way.
+  indicators:
+    words:
+      faster_than_normal: probably faster than normal
+      consistent_with_normal: probably within the normal pace
+      slower_than_normal: probably slower than normal
+      concentrating: probably concentrating
+      stable: probably stable
+      dispersing: probably dispersing
+    judgements:
+    - id: aei_augmentation_share
+      word: consistent_with_normal
+      reason: Both monthly readings on the site sit just above the line where augmentation is the majority of classified
+        use, inside the normal band, and they were extended. The margin is thin. The strongest evidence against is that
+        the series covers one provider's chat products only, and programmatic use, where automation concentrates, skews
+        the other way.
+    - id: agent_calibration
+      word: consistent_with_normal
+      reason: 'No dated series exists, so this rests on general knowledge: agents remain noticeably overconfident about
+        whether they completed a task, and calibration has improved more slowly than raw capability. That fits a technology
+        that still needs human checking. The strongest caveat is that benchmark calibration scores are few and recent, and
+        newer models may have closed more of the gap than is publicly visible.'
+    - id: agent_operational_safety
+      word: consistent_with_normal
+      reason: 'No registry exists, so this is general knowledge: destructive mistakes by deployed agents keep surfacing
+        as anecdotes, and firms respond by restricting permissions and keeping people in the approval loop. That is the
+        ordinary pattern of a technology being fitted with guard rails, not one running unsupervised. The weakness of the
+        call is that without a denominator nobody knows whether the rate per task is falling quickly.'
+    - id: app_gross_margin_net_of_inference
+      word: stable
+      reason: There are no readings; from general knowledge, application margins after model costs were squeezed in 2025
+        as agent-style products burned far more tokens per task, and were then partly repaired by usage-based pricing, cheaper
+        models and in-house models. The net of those forces looks like no clear movement at a thin level. The strongest
+        alternative is that the squeeze is continuing for coding tools, which would read as dispersing away from the application
+        layer.
+    - id: app_run_rates
+      word: concentrating
+      reason: The readings on the site show the largest application company's run-rate rising by far more than the noise
+        band within a few months of 2026, and they were extended. Several other application companies report similar steep
+        growth. The strongest caveat is that every figure is unaudited and self-selected, and revenue growth says nothing
+        about how much is kept after paying for models.
+    - id: arc_agi_frontier
+      word: faster_than_normal
+      reason: The running best score on the site climbed from well under the normal ceiling late in 2025 to above the grand-prize
+        bar by 2026 and has kept rising, so the readings sit firmly in the fast band. The strongest caveat is that these
+        are outside submissions with no cap on cost per task, on a single benchmark, so the score overstates what is practical.
+    - id: bbd_adult_use
+      word: consistent_with_normal
+      reason: The latest reading on the site is a clear majority of adults but still well inside the normal band, and the
+        quarterly path would not reach the fast floor for some years, so the readings were extended. The strongest point
+        the other way is that the most recent quarter's gain was the largest in the series, and that even this pace is quicker
+        than the internet managed.
+    - id: bbd_work_hours_assisted
+      word: consistent_with_normal
+      reason: The latest reading on the site is a single-digit share of work hours, inside the normal band, and it has risen
+        only gradually over the quarters shown, so the readings were extended. Use is broad but shallow. The strongest evidence
+        the other way is that the share of workers using these tools weekly has climbed quickly, which could pull hours
+        up faster than the level suggests.
+    - id: bbd_work_use_daily
+      word: consistent_with_normal
+      reason: The one reading on the site, from late 2025, is a little under the normal ceiling, so it was read as normal.
+        It is close to the edge, and the same survey's weekly-use series has kept climbing since, so daily use has probably
+        risen into the gap between the bands by now; that is the strongest reason this could be wrong by a step.
+    - id: canaries_entry_level_gap
+      word: faster_than_normal
+      reason: 'The two readings on the site sit between the bands, nearer the fast floor than the normal ceiling, and the
+        gap widened by several points in a year, so the direction was extended as fast. The strongest objections are serious:
+        part of the timing predates the chat assistants, hiring freezes and interest rates hit the same occupations, and
+        other labour-market studies find little broad disruption so far.'
+    - id: cl_lab_release_claims
+      word: consistent_with_normal
+      reason: The site counts two builders claiming shipped continual learning in the trailing year, inside the normal band,
+        and no frontier lab has branded a release that way, so it was read as normal. The strongest caveat is that labs
+        may ship such methods without saying so, which this count would miss, and that every row is a vendor's own description.
+    - id: cl_refresh_cadence_hours
+      word: consistent_with_normal
+      reason: The single reading on the site is exactly at the edge of the normal band, an hourly retrain-and-redeploy pipeline
+        at one vendor, and it was read as normal. It describes a retrained adapter, not a model learning between sessions.
+        The risk is that the reading sits on the boundary and one vendor describing a quicker path would move it into the
+        gap.
+    - id: compute_share_of_spend
+      word: concentrating
+      reason: 'No series exists, so this is general knowledge: compute already takes the larger part of frontier-lab spending,
+        and the labs'' multi-year compute commitments have grown faster than their headcount or revenue. That suggests the
+        share going to compute suppliers is edging up. The main counterweight is the steep rise in pay and share-based awards
+        for researchers, which may be growing just as fast.'
+    - id: continual_learning_level
+      word: consistent_with_normal
+      reason: The highest rung with a shipped system on the site's record is the top of the normal band, per-customer adapters,
+        and nothing on record reaches organisation knowledge held in weights or beyond, so it was read as normal. The rung
+        did rise within the last year. The main risk to the call is that frontier labs may ship more than they describe,
+        and every row is a vendor's own claim.
+    - id: custom_silicon_share
+      word: dispersing
+      reason: Across the last year of quarterly readings on the site the non-Nvidia share of cumulative compute rose by
+        a little more than the noise band, so the readings were extended as dispersing, and general knowledge of large custom-chip
+        programmes at the cloud companies points the same way for 2026. The strongest point against is that the rise had
+        flattened to almost nothing by the latest quarters, and much of the non-Nvidia compute is used in-house, not sold.
+    - id: depreciation_useful_life_changes
+      word: stable
+      reason: The site has one reading and its text says no filer shortened its server life in 2026; one company cut a subset
+        the year before while another lengthened, and two held. That is divergence without a common direction, so the reading
+        was extended as no clear movement. The strongest counter is the argument that fast chip release cycles will force
+        shorter lives, which would show up suddenly, not gradually.
+    - id: enterprise_multi_homing_share
+      word: dispersing
+      reason: 'The only numeric reading is from 2023, so this rests on general knowledge and the site''s own note that the
+        pattern has spread: large buyers routinely run several model families and add models more than they replace them.
+        That weakens any one lab''s pricing power. The strongest point the other way is that spend, as opposed to mere use,
+        remains heavily concentrated in a few labs, so using many models is not the same as splitting the budget.'
+    - id: enterprise_session_training_policy
+      word: consistent_with_normal
+      reason: There are no readings; from general knowledge, the standard business terms of the main model vendors exclude
+        customer sessions from training unless the customer opts in, and large buyers insist on it. So only a small share
+        of enterprise seats feed the vendors' models, which is the slow, contract-bound pattern of an ordinary technology.
+        The counter is that some consumer and individual plans have moved toward training by default.
+    - id: enterprise_spend_by_layer
+      word: concentrating
+      reason: 'The two survey waves on the site show applications rising from about a third of enterprise generative-AI
+        spend to roughly one dollar in two, far outside the survey-error band, and the readings were extended on the view
+        that coding and agent products kept pulling money up the stack in 2026. The strongest objection is scope: the survey
+        leaves out chips and embedded features, so the infrastructure side is understated and the shift may be smaller than
+        it looks.'
+    - id: epoch_data_exhaustion_year
+      word: consistent_with_normal
+      reason: 'The site''s only reading is a projection made in 2024 that lands exactly on the normal edge, and it was taken
+        as it stands. General knowledge cuts both ways: licensed, synthetic and multimodal data stretch the stock, while
+        the labs'' heavy buying of expert data suggests public text is already binding. The interval around the projection
+        is wide enough to cover the fast case.'
+    - id: epoch_inference_price_fixed_capability
+      word: faster_than_normal
+      reason: The fitted reading on the site sits between the bands but close to the fast edge, and the site notes that
+        its method probably makes the fall look slower than it was, so it was read as fast. General knowledge of very steep
+        price declines at a fixed capability level supports this. The caveat is that the fit has few points on one benchmark
+        threshold and uses list prices.
+    - id: epoch_training_compute_growth
+      word: faster_than_normal
+      reason: The fitted reading on the site has frontier training compute multiplying a little faster than the fast threshold,
+        so it was read as fast, in line with the long-run trend since 2010. It is close to the edge, though, and the newest
+        closed models are missing or inferred with wide error. The strongest alternative is that growth has eased as single
+        training runs hit power and chip limits.
+    - id: epoch_training_power_growth
+      word: consistent_with_normal
+      reason: The fitted reading on the site has training power draw taking well over a year to grow by the same multiple,
+        inside the normal band, and it was extended. The fit is very loose, however, and the set of notable models mixes
+        small and large systems. General knowledge that the largest training sites have been growing faster than this is
+        the strongest point the other way.
+    - id: expert_data_market_run_rate
+      word: faster_than_normal
+      reason: The reading on the site puts the largest expert-data vendor at the fast threshold, a scale that data-labelling
+        leaders took about a decade to approach, and it was read as fast. The strongest caveats are that the figure is a
+        press-sourced gross run-rate, most of which passes straight through to the experts, and that lab demand could fall
+        quickly if synthetic data substitutes.
+    - id: exposed_low_adaptive_workers
+      word: consistent_with_normal
+      reason: The single estimate on the site is a little above the normal ceiling and far below the fast floor, so it was
+        read as nearer normal. It is one modelled estimate that has already been revised upward once, which is the strongest
+        reason for doubt, and a further revision of the same size would put it squarely in the middle range.
+    - id: gpu_rental_price_per_hour
+      word: stable
+      reason: The two months of weekly medians on the site dip slightly and recover to almost exactly where they began,
+        a move far inside the noise band, so they were extended as no clear movement. Rents are above their level of a year
+        earlier and show no glut. The caution is that these are list prices from one aggregator, and contracted prices for
+        large buyers could be moving differently.
+    - id: harvey_lab_frontier_completion
+      word: consistent_with_normal
+      reason: The one reading on the site has the best model completing only a small share of expert legal tasks end to
+        end under a strict standard, far inside the normal band, and it was extended. The caveat is that the all-pass standard
+        is deliberately harsh and the vendor scores its own benchmark; partial completions already have practical value.
+    - id: inference_run_rates
+      word: concentrating
+      reason: 'The two estimates on the site show the largest serving platform''s run-rate growing several times over in
+        under a year, far outside the noise band, and the direction was extended. The caveat is strong, though: this is
+        one estimator on one firm, token prices at fixed capability keep falling, and none of these platforms publishes
+        a margin, so revenue passing through the layer may not be profit kept by it.'
+    - id: lab_gross_margin
+      word: dispersing
+      reason: The site's two annual estimates show the margin falling by well over the noise band between 2024 and 2025,
+        as inference spending grew faster than revenue, and that direction was extended. This is one estimator's figure
+        and counts inference compute only. The strongest evidence against is press reporting, behind paywalls, that the
+        labs' margins on paying customers improved over the same period, so the true direction could be the opposite.
+    - id: lab_hhi
+      word: stable
+      reason: The weekly readings on the site wobble up and down and the latest sits only just above the first, a move that
+        falls a shade inside the noise band, so they were extended as no clear movement. The level itself describes traffic
+        spread across many labs. Against this, the last week rose sharply, and one more reading like it would tip the rule
+        to concentrating.
+    - id: lab_procurement_signal
+      word: concentrating
+      reason: 'The site''s own score points the other way: it has drifted down over the last year and on its rule reads
+        dispersing. The judgement discounts it because the score is a tally of what vendors chose to disclose, which the
+        site describes as a floor, and it falls as old announcements age out even if buying continues. General knowledge,
+        and the site''s reading on the largest expert-data vendor, say the labs are buying far more expert data and training
+        environments than a year ago. If that demand has since cooled, the series is right and this call is wrong.'
+    - id: lab_recoupment_ratio
+      word: stable
+      reason: 'The site''s readings swing around roughly a third of equity raised: a slump early in 2026 after a large raise,
+        then a recovery by late September to about where the ratio stood at the end of 2025. Read over the rule''s three
+        points back to that level, the move sits inside the noise band, so the readings were extended as no clear movement.
+        The strongest point the other way is the sharp climb across the last three readings, which would read as concentrating
+        if it holds.'
+    - id: lab_valuation_to_run_rate
+      word: dispersing
+      reason: The readings on the site fall from a peak early in 2026 to a clearly lower multiple by September, a drop over
+        the last three valuation events that is well outside the noise band, and they were extended. Revenue has been growing
+        faster than valuations, so the market is paying for fewer years of future rent per dollar of sales. Against this,
+        absolute valuations kept rising and run-rates lag, so the multiple can fall while expectations stay just as high.
+    - id: lab_vertical_integration_exit_bell
+      word: concentrating
+      reason: The trailing-year deal count on the site rises at each of its three quarter-ends, by far more than the noise
+        band, and the readings were extended. Labs and compute companies have been buying coding tools, evaluation software,
+        agents and consumer apps at a steady clip. The main caution is that part of the rise reflects a more thorough search,
+        and many deals are small team hires driven by one buyer.
+    - id: median_round_size
+      word: concentrating
+      reason: 'No usable readings exist, so this is general knowledge: typical AI rounds grew larger at most stages through
+        2025 and into 2026. Read as the price of entry to a sub-layer, a higher typical round means fewer companies can
+        afford to enter, which is the concentrating direction. The strongest caveat is that very large rounds lift averages
+        far more than medians, and the median within each sub-layer may have moved much less.'
+    - id: model_price_per_horizon_hour
+      word: dispersing
+      reason: 'The site holds a single price point, so this rests on general knowledge: the price of a given level of model
+        capability has fallen steeply and repeatedly since 2023 as cheaper and open-weight models reach each threshold.
+        That means buyers, not labs, have kept most of the surplus from capability gains. The counterweight is that the
+        newest frontier models launch at firm or higher prices and agents consume far more tokens per task.'
+    - id: model_price_per_intelligence_point
+      word: dispersing
+      reason: 'The site''s two readings point the other way: the price per index point rose to about two times its earlier
+        level within September 2026, far beyond the noise band. The judgement discounts them because two readings are a
+        single step, and the cheapest model in a shifting top slice can change simply because a model enters or leaves that
+        slice or the index is re-based. It rests instead on the long record of steep price falls at fixed capability, which
+        hands the surplus to buyers. If labs are starting to hold prices on near-frontier models, this call is wrong.'
+    - id: model_token_concentration
+      word: stable
+      reason: The first three weekly readings on the site are flat at a low level and only the latest jumps, so the judgement
+        extends the flat run and treats the jump as a table artefact or a single popular release until it repeats. The level
+        describes tokens spread across many models. Taken literally over the whole window the rule would read concentrating,
+        which is the strongest case against this call.
+    - id: neocloud_debt_terms
+      word: stable
+      reason: The site gives a single average rate, so direction rests on general knowledge. Newer facilities backed by
+        strong customers have priced below the earliest ones, which pulls the average down, while credit markets grew warier
+        of AI-related debt during 2026, which pushes spreads up; the two roughly offset. The risk to this call is that lender
+        caution has since hardened, in which case the cost is rising and returns are concentrating with lenders.
+    - id: neolab_capital_intensity
+      word: concentrating
+      reason: 'There are no readings, so this is general knowledge: labs founded since 2023 have raised very large rounds
+        on little or no disclosed revenue, and the rounds grew through 2025 and into 2026 faster than any visible sales.
+        Capital per dollar of revenue therefore looks high and rising. The strongest objection is arithmetic: once revenue
+        starts from almost nothing, even modest sales pull the ratio down quickly, and nobody outside can see the denominator.'
+    - id: open_weights_lag_months
+      word: consistent_with_normal
+      reason: The readings on the site bounce between roughly a third of a year and two thirds of a year, and the latest
+        is nearer the normal edge than the fast one, so it was read as normal. Open weights trail by something like a model
+        generation. The strongest counter is that each new open release cuts the lag sharply, and one strong release would
+        move the reading to the middle of the range or below.
+    - id: openai_work_share
+      word: consistent_with_normal
+      reason: The one reading on the site has about a quarter of consumer messages related to work, well inside the normal
+        band, and the site says the share was falling as personal use grew faster. The reading dates from 2025 and was extended.
+        The strongest caveat is that business and programmatic traffic, where work concentrates, is excluded by construction.
+    - id: pass_hat_k_tau_bench
+      word: consistent_with_normal
+      reason: The reading on the site has the leading agent passing a little over one task in two on every one of several
+        repeated runs, clearly inside the normal band, and it was extended. Reliability still falls away with repetition.
+        The strongest counter is that the result depends heavily on the domain, with some narrow domains already near the
+        fast threshold.
+    - id: pilots_reaching_production
+      word: consistent_with_normal
+      reason: The one reading on the site has a little under one pilot in two reaching production, and the surveys alongside
+        report a third or more abandoned. That is the familiar pattern of enterprise technology, where many trials stall
+        on integration and trust, so it was read as normal. The strongest counter is that the surveys define their terms
+        differently, and some suggest AI purchases convert faster than ordinary software did.
+    - id: pwc_ai_skill_wage_premium
+      word: consistent_with_normal
+      reason: The reading on the site falls inside the normal band, a large premium of the kind earlier scarce technical
+        skills carried, and it rose only modestly from the year before, so it was extended. The caveat is that it comes
+        from job advertisements, not wages paid, and that for a narrow group of top researchers pay has risen far more than
+        any such average shows.
+    - id: ramp_paid_ai_adoption
+      word: consistent_with_normal
+      reason: The latest reading sits between the bands, above the normal ceiling and short of the fast floor, and the monthly
+        gains on the site shrink steadily through 2026 to well under a point. Because the trend is flattening before reaching
+        the fast band, the readings were extended as the pace of an ordinary technology in a tech-forward sample. The case
+        against is the level itself, which already exceeds what the band calls normal for this age.
+    - id: reliability_framework_adoption
+      word: consistent_with_normal
+      reason: 'There is no series, so this is general knowledge: system cards from the leading labs report capability and
+        safety tests but, as far as is known, none reports reliability along the full set of dimensions the framework proposes.
+        Slow uptake of a measurement standard is the ordinary pattern. The caveat is that cards have been growing richer,
+        and partial reporting on consistency or calibration may already exist under other names.'
+    - id: revelio_exposed_vs_unexposed_growth
+      word: consistent_with_normal
+      reason: The single reading on the site is only just beyond the normal band's edge, a relative gap of the size occupation
+        groups drift apart in any period, so it was read as normal. The site notes the gap widened noticeably within one
+        month of releases, which is the strongest sign it may be heading for the fast band, and the entry-level reading
+        on the site points that way too.
+    - id: revenue_per_employee_exposed_sectors
+      word: concentrating
+      reason: There are no readings; from general knowledge, large technology and software firms grew revenue through 2025
+        and 2026 while holding or trimming headcount, so revenue per head in the most exposed sectors has been rising. That
+        is consistent with gains accruing to firms and their owners. The strongest objection is that outsourcing, price
+        rises and the unwinding of pandemic over-hiring raise the same ratio without any help from AI.
+    - id: rl_environment_vendor_count
+      word: consistent_with_normal
+      reason: Both directory counts on the site sit well inside the normal band and the count did not grow between them,
+        so it was read as a specialist market. The directory is one person's list and a floor, and general knowledge suggests
+        many more small suppliers exist than it records, which is the strongest reason the true figure could be in the middle
+        range.
+    - id: routed_token_volume_growth
+      word: faster_than_normal
+      reason: 'The site has no history yet, so this rests on general knowledge: tokens passing through public routers and
+        model providers multiplied many times over within a single year through 2025 and into 2026, a pace with no close
+        precedent in earlier technologies. The strongest objection is that much of the growth is reasoning and agent loops
+        using more tokens per task, not more users or more work done, and one router is a narrow slice.'
+    - id: rsi_agent_workdays_per_human
+      word: faster_than_normal
+      reason: The one reading on the site is just above the fast threshold, with agent effort exceeding human effort several
+        times over inside one lab's research organisation, so it was read as fast. The strongest objection is that the figure
+        is measured and published by the lab it flatters, counts agent time and not delivered research, and sits beside
+        another lab's statement of a much smaller overall speed-up and independent studies that find modest gains.
+    - id: rsi_intervention_rate_4_8h
+      word: consistent_with_normal
+      reason: The single reading says more than one in two successful long agent tasks still needed a person to step in,
+        which sits in the normal band, and it was extended as the present state. Humans still steer most long tasks. The
+        caveat is that the figure is self-reported, rounded and from the earlier part of 2026, and autonomy on long tasks
+        has been improving quickly.
+    - id: saas_multiples
+      word: concentrating
+      reason: Over the two months of weekly prints on the site the median multiple climbed from the high threes to the mid
+        range, well beyond the noise band, so the rule reads concentrating and the readings were extended. The strongest
+        point against is that this is a rebound from a spring trough caused by fears that AI erodes software; over a full
+        year the market has priced less durable rent into incumbent software, not more.
+    - id: safety_brake_events
+      word: consistent_with_normal
+      reason: The site records three announced brakes within the trailing year, which meets the band's test that limits
+        are binding at least occasionally, so it was read as normal. The strongest counterpoint is that all three come from
+        one lab describing itself, and that the paused training run was restarted within a month, so the brakes may be shallower
+        than the count implies.
+    - id: secondary_marks_between_rounds
+      word: concentrating
+      reason: 'No readings are available, so this is general knowledge: through 2025 and into 2026 shares in the leading
+        labs changed hands at prices above their last primary rounds, and each new round was struck higher again. That points
+        to marks rising between rounds. The strongest caution is that the site shows the labs'' valuation-to-revenue multiple
+        falling by September 2026, and thin secondary trades can turn quickly.'
+    - id: startup_share_of_app_revenue
+      word: dispersing
+      reason: The two survey waves on the site show startups moving from about a third of enterprise AI application revenue
+        to nearly two thirds, far beyond survey error, and the direction was extended into 2026 given how quickly young
+        application companies have grown. The strongest caveat is that the survey excludes AI features embedded in incumbents'
+        existing products, and that the labs themselves are now moving into applications.
+    - id: state_ai_bills_introduced
+      word: consistent_with_normal
+      reason: The one count on the site is far above the threshold for the normal band, meaning legislatures are reacting
+        at their usual volume, and it was extended into 2026. The strongest point against is the federal push to pre-empt
+        state AI laws, which could thin the flow, and the fact that introduced bills are cheap signals compared with laws
+        enacted.

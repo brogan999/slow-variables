@@ -1,5 +1,7 @@
 "use client";
 
+import { JudgedWord } from "@/components/Judged";
+import type { Judgement } from "@/lib/data";
 import { ArrowDownIcon, ArrowUpDownIcon, ArrowUpIcon } from "lucide-react";
 import Link from "next/link";
 import { useMemo, useState } from "react";
@@ -23,7 +25,7 @@ const GET: Record<Key, (c: Card) => string | number | null> = {
 const FIRST: Record<Key, 1 | -1> = { name: 1, status: 1, conf: -1, grade: 1, latest: -1 };
 const LENSES: [Lens, string][] = [["all", "All"], ["diffusion", "Diffusion"], ["capture", "Capture"], ["unpublished", "Unpublished"]];
 
-export function IndicatorTable({ indicators, why, obsIndex }: { indicators: Card[]; why: Record<string, string>; obsIndex: Record<string, string> }) {
+export function IndicatorTable({ indicators, why, obsIndex, judged = {} }: { indicators: Card[]; why: Record<string, string>; obsIndex: Record<string, string>; judged?: Record<string, Judgement> }) {
   const [q, setQ] = useState("");
   const [lens, setLens] = useState<Lens>("all");
   const [sort, setSort] = useState<{ k: Key; dir: 1 | -1 } | null>(null);
@@ -69,7 +71,7 @@ export function IndicatorTable({ indicators, why, obsIndex }: { indicators: Card
             {rows.map((c) => (
               <tr key={c.id} id={c.id} className="scroll-mt-24">
                 <td className="min-w-72 max-w-xl">{c.published ? <Link href={`/indicators/${c.id}`} className="font-medium hover:underline underline-offset-4 decoration-grid">{c.name}</Link> : <span className="font-medium text-ink-2">{c.name}</span>}{c.published ? null : <span className="ml-2 eyebrow">unpublished</span>}{why[c.id] ? <div className={`text-xs text-ink-2 mt-0.5 ${c.published ? "line-clamp-2" : ""}`}>{why[c.id]}</div> : null}{!c.published && c.unpublished_reason ? <div className="text-xs text-ink-2 mt-0.5 max-w-md">{c.unpublished_reason}</div> : null}</td>
-                <td>{c.published ? <StatusChip status={c.status} /> : <span className="text-xs text-muted">no status until published</span>}{c.stale_as_of ? <div className="text-xs text-error mt-1">stale as of {c.stale_as_of}</div> : null}{c.pending ? <div className="mt-1"><PendingNote p={c.pending} /></div> : null}</td>
+                <td>{c.published ? <StatusChip status={c.status} /> : <span className="text-xs text-muted">no status until published</span>}{c.stale_as_of ? <div className="text-xs text-error mt-1">stale as of {c.stale_as_of}</div> : null}{c.pending ? <div className="mt-1"><PendingNote p={c.pending} /></div> : null}{!c.published || c.status === "emerging" ? <JudgedWord j={judged[c.id]} /> : null}</td>
                 <td className="num">{c.confidence ?? "—"}</td>
                 <td><Grade grade={c.grade} /></td>
                 <td className="min-w-44"><Num p={c.latest} unit={c.unit} obsIndex={obsIndex} /></td>
