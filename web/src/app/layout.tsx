@@ -54,6 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   {a.stops.map((s) => <Link key={s.href} href={s.href} className="hover:text-ink">{s.name}</Link>)}
                 </span>
               ))}
+              <Link href="/contents" className="underline decoration-grid underline-offset-4 hover:decoration-ink">Contents: what each page answers</Link>
             </nav>
             <div className="grid gap-6 md:grid-cols-[1fr_auto]">
             <div className="flex flex-col gap-1.5 text-muted max-w-xl">
