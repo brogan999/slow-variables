@@ -92,14 +92,18 @@ def test_the_essay_says_who_drafted_it_and_whose_model_scored_the_census():
     essay = firm.ESSAY.read_text()
     assert "Anthropic, whose model also drafted this page" in essay and "paid adviser to Anthropic" in essay
     assert "this site's judgement" in essay  # the picture of the firm in the limit is labelled
+    assert "has since joined a research institute run by Anthropic" in essay  # Hitzig's present tie
+    assert "The case against renting is Garicano's" not in essay  # they argue for renting, with a remedy
+    assert "Their remedy is not to own the model" in essay
 
 
 def test_tonights_readings_settle_the_claims_the_records_can_settle():
     s = st.Store()
     doc = ol.build(s)
     claims = {c["id"]: c for c in doc["claims"]}
-    owned = doc["facts"]["lab_services_firm"]
-    assert owned and owned["obs_ids"] and claims["lab_owns_services_firm"]["state"] == "holding"  # the lab's own words are on record
+    # its author wrote, after OpenAI launched its deployment company, that no lab had yet done this: the row is no test
+    assert claims["lab_owns_services_firm"]["state"] == "untestable"
+    assert claims["lab_runs_operations"]["attribution"] == claims["check_binds"]["attribution"] == "site"
     now, before = doc["facts"]["rollup_service_deals"], doc["facts"]["rollup_service_deals_year_ago"]
     assert now and before and now["obs_ids"] and now["value"] != doc["facts"]["rollup_software_deals"]["value"]
     assert claims["operators_bought"]["state"] == ("holding" if now["value"] > before["value"] else "failing")
