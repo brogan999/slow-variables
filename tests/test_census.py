@@ -175,3 +175,54 @@ def test_the_dial_says_in_words_what_settles_the_check_at_the_rule_used_and_the_
     assert set(labelled.values()) <= set(census.strings(spec)), "a label must pass through the text rules"
     page = (Path(__file__).resolve().parents[1] / "web/src/app/census/page.tsx").read_text()
     assert "(the rule used)" not in page and "d.label" in page
+
+
+def test_the_trades_seed_files_every_rollup_and_every_rollup_deal_exactly_once():
+    import yaml
+
+    from ai_tracker.store import Seed
+
+    root = Path(__file__).resolve().parents[1]
+    spec = yaml.safe_load((root / "seed" / "census_trades.yaml").read_text())
+    rollups = {e.id for e in Seed.load().entities for m in e.memberships if m.sublayer_id == "ai_rollups"}
+    filed = [i for t in spec["trades"] for where in ("us", "elsewhere", "unstated") for i in (t.get("rollups") or {}).get(where, [])]
+    assert sorted(filed) == sorted(rollups)
+    deals = [k for t in spec["trades"] for k in t.get("deals", [])]
+    rows = yaml.safe_load((root / "seed" / "manual_observations.yaml").read_text())["observations"]
+    assert sorted(deals) == sorted(r["series_key"] for r in rows if r["series_key"].startswith("rollup_acq."))
+    bundle = census.bundle(census.load())
+    cards = {c["key"] for c in json.loads((bundle / "deal_sheets.json").read_text())["cards"]}
+    codes = {r["naics"] for r in census.rows(bundle / "industries.csv")}
+    for t in spec["trades"]:
+        assert t.get("card") is None or t["card"] in cards, t["key"]
+        assert ("naics" in t) != ("no_figure" in t) or t.get("card"), f"{t['key']}: one census row, a card, or a reason for no figure"
+        assert t.get("naics") is None or t["naics"] in codes, t["key"]
+    from tests.test_manual import SWEPT_ROLLUP_BUYERS
+
+    assert set(spec["swept"]) == SWEPT_ROLLUP_BUYERS
+    assert all(isinstance(s, str) for s in census.strings(census.load()))
+
+
+def test_trades_selects_one_census_figure_counts_buyers_by_place_and_flags_a_disagreement():
+    index = {
+        "industries": [{"naics": "541200", "title": "Accounting", "ref": "r2", "share_total": 0.09, "passes": 9e9, "payroll": 1e11}],
+        "deals": {"cards": [{"key": "cpa", "stance": "passes", "passes": 9.3e9, "payroll": 9.8e10, "anchored": False},
+                            {"key": "title", "stance": "keeps", "passes": 1e8, "payroll": 2e10, "anchored": True}]},
+    }  # fmt: skip
+    spec = {"swept": ["crete"], "trades": [
+        {"key": "title", "name": "Title insurance", "card": "title"},
+        {"key": "accounting", "name": "Accounting", "naics": "541200", "card": "cpa", "rollups": {"us": ["crete", "accrual"], "elsewhere": ["archipel"]},
+         "deals": ["rollup_acq.crete.reid.pt"]},
+        {"key": "property", "name": "Property management", "no_figure": "no row", "rollups": {"elsewhere": ["dwelly"]}},
+    ]}  # fmt: skip
+    names = {"crete": "Crete", "accrual": "Accrual", "archipel": "Archipel", "dwelly": "Dwelly"}
+    obs = {"rollup_acq.crete.reid.pt": {"id": "o1", "entity_id": "crete", "value_text": "announced as joining its group: Reid (accounting firm, USA)", "as_of_date": "2024-04-01"}}
+    out = census.trades(spec, index, names, obs)
+    assert [t["key"] for t in out] == ["accounting", "property", "title"]  # by roll-ups in the trade, not by deals found
+    a, p, t = out
+    assert (a["rollups"]["n"], a["rollups"]["us"], a["rollups"]["elsewhere"], a["swept"]) == (3, 2, 1, 1)
+    assert a["census"] == {"passes": 9e9, "share": 0.09, "ref": "r2", "from": "industry", "title": "Accounting"}  # the row, not the card, and never a sum
+    assert a["deals"] == [{"key": "rollup_acq.crete.reid.pt", "obs_id": "o1", "buyer": "Crete", "text": "announced as joining its group: Reid (accounting firm, USA)", "date": "2024-04-01"}]
+    assert a["flag"] == "buyers_despite_passes" and t["flag"] == "keeps_without_buyers" and p["flag"] is None
+    assert p["census"] is None and p["no_figure"] == "no row"
+    assert t["census"]["from"] == "card" and t["census"]["passes"] == 1e8
