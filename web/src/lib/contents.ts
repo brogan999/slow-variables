@@ -63,6 +63,16 @@ export const PAGES: Record<string, Page> = {
     each: [["/stack/", "One page per sub-layer: its companies, its readings and the venture money going in."]] },
   "/ledger": { name: "Circular financing ledger", question: "How much of AI's demand is paid for by its own suppliers?" },
   "/bottlenecks": { name: "What binds", question: "Which scarce input sets the pace?" },
+  "/firm": { name: "Who owns what", question: "What does a firm own, and what does it rent, when intelligence is sold by the token?", sections: [
+    ["folio-boundary", "Where a firm ends", "What sets the line between what a firm does and what it buys?"],
+    ["folio-leak", "Asking reveals what you know", "Why does dealing with outsiders get dearer when everyone rents the same models?"],
+    ["folio-liability", "Who answers for the work", "Why does answering for an agent's work pull the operation inside the firm?"],
+    ["folio-edge", "Centre or edge", "Which decisions move to head office, and which have to stay on the spot?"],
+    ["folio-rent", "Rent or own", "When should a firm rent intelligence, and when should it own it?"],
+    ["folio-residue", "What stays scarce", "What does not get cheaper when intelligence does?"],
+    ["folio-limit", "The firm in the limit", "What is left of a firm when the argument is carried to its end, and who profits?"],
+    ["folio-record", "What the records show", "What do this site's ledgers show so far, and where do its own leans disagree?"],
+  ] },
   "/outlook": { name: "What people expect", question: "What do informed writers expect, and what would settle it?", sections: [
     ["folio-can-ai-do-whole-jobs-reliably", "Whole jobs", "Can AI do whole jobs reliably, or only single skills?"],
     ["folio-who-checks-the-work", "Who checks the work", "Does checking AI's work become a business, and for whom?"],

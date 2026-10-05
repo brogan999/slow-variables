@@ -97,7 +97,7 @@ export function NextStop() {
       <Link href="/" className={`${card} max-w-3xl border border-grid bg-surface`}>
         <span className="eyebrow">You are in the evidence</span>
         <span className="mt-2 block display text-xl">Return to the path <span aria-hidden>→</span></span>
-        <span className="mt-1 block font-serif text-[15px] text-ink-2">Three acts, eight stops, from the argument to the long run.</span>
+        <span className="mt-1 block font-serif text-[15px] text-ink-2">Three acts, nine stops, from the argument to the long run.</span>
       </Link>
     </nav>
   );

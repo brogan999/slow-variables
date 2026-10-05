@@ -5,7 +5,7 @@ import { MarginPanel } from "@/components/ArticleLayout";
 import { type Cites, Inline, type Tests } from "@/components/Essay";
 import { Fact } from "@/components/Fact";
 import { Figure } from "@/components/Figure";
-import type { OutlookClaim, OutlookDoc, OutlookPosition, OutlookState, OutlookTest } from "@/lib/data";
+import type { ClaimsDoc, OutlookClaim, OutlookDoc, OutlookPosition, OutlookState, OutlookTest } from "@/lib/data";
 import { CLAIM_WORDS, fmtLine } from "@/lib/format";
 
 // What happens from here: named writers' positions on each question, the claims they imply, and tonight's reading of
@@ -22,10 +22,10 @@ export function ClaimState({ state }: { state: OutlookState }) {
   );
 }
 
-export const cites = (doc: OutlookDoc): Cites => Object.fromEntries(doc.sources.map((s) => [s.id, { n: s.n, who: s.who, work: s.work }]));
+export const cites = (doc: ClaimsDoc): Cites => Object.fromEntries(doc.sources.map((s) => [s.id, { n: s.n, who: s.who, work: s.work }]));
 
 // Who holds a view, in the short form a long author list is given; each name once.
-function names(doc: OutlookDoc, ids: string[]) {
+function names(doc: ClaimsDoc, ids: string[]) {
   const by = Object.fromEntries(doc.sources.map((s) => [s.id, s]));
   return [...new Set(ids.map((id) => by[id]?.short ?? by[id]?.who).filter(Boolean))].join("; ");
 }
@@ -33,12 +33,12 @@ const capital = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
 // A claim is credited as its position is, unless it names its own makers (a bet's parties), who then take the credit,
 // or is this site's own reading of an author's position.
-function claimCredit(doc: OutlookDoc, p: OutlookPosition, c: OutlookClaim): string | null {
+function claimCredit(doc: ClaimsDoc, p: OutlookPosition, c: OutlookClaim): string | null {
   if (c.attribution === "site" && p.attribution !== "site") return "This site's reading";
   return c.holders.join() !== p.holders.join() ? capital(names(doc, c.holders)) : null;
 }
 
-function Whose({ doc, p, c }: { doc: OutlookDoc; p: OutlookPosition; c?: OutlookClaim }) {
+function Whose({ doc, p, c }: { doc: ClaimsDoc; p: OutlookPosition; c?: OutlookClaim }) {
   const own = c ? claimCredit(doc, p, c) : null;
   if (own) return <>{own}</>;
   if (p.attribution === "site") return <>This site&apos;s own position</>;
@@ -46,14 +46,14 @@ function Whose({ doc, p, c }: { doc: OutlookDoc; p: OutlookPosition; c?: Outlook
   return p.attribution === "extension" ? <>An argument of {names(doc, p.holders)}, carried further by this site</> : <>{who}</>;
 }
 
-function Threshold({ doc, t }: { doc: OutlookDoc; t: OutlookTest }) {
+function Threshold({ doc, t }: { doc: ClaimsDoc; t: OutlookTest }) {
   const [op, rhs] = Object.entries(t).find(([k]) => k in OP) ?? [];
   if (!op) return null;
   const unit = doc.facts[t.fact]?.unit;
   return <>{OP[op]} {typeof rhs === "string" ? <Fact f={doc.facts[rhs]} /> : <span className="num">{fmtLine(rhs as number, unit)}</span>}</>;
 }
 
-function ClaimLine({ doc, p, c, tests }: { doc: OutlookDoc; p: OutlookPosition; c: OutlookClaim; tests: Tests }) {
+function ClaimLine({ doc, p, c, tests }: { doc: ClaimsDoc; p: OutlookPosition; c: OutlookClaim; tests: Tests }) {
   return (
     <li id={`claim-${c.id}`} className="scroll-mt-24 target:bg-surface-2 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-3">
       <span className="shrink-0"><ClaimState state={c.state} /></span>
@@ -65,7 +65,7 @@ function ClaimLine({ doc, p, c, tests }: { doc: OutlookDoc; p: OutlookPosition; 
   );
 }
 
-function ClaimTest({ doc, c }: { doc: OutlookDoc; c: OutlookClaim }) {
+function ClaimTest({ doc, c }: { doc: ClaimsDoc; c: OutlookClaim }) {
   const f = c.test ? doc.facts[c.test.fact] : null;
   return (
     <p className="text-[13.5px] leading-relaxed text-ink-2">
@@ -76,7 +76,8 @@ function ClaimTest({ doc, c }: { doc: OutlookDoc; c: OutlookClaim }) {
   );
 }
 
-function Position({ doc, p, tests }: { doc: OutlookDoc; p: OutlookPosition; tests: Tests }) {
+// `page` is where the position is shown, so "Reason through this" can send the reader back to it.
+export function Position({ doc, p, tests, page = "/outlook" }: { doc: ClaimsDoc; p: OutlookPosition; tests: Tests; page?: string }) {
   const rival = doc.positions.find((x) => x.id === p.rival);
   const own = doc.claims.filter((c) => c.position === p.id);
   return (
@@ -87,7 +88,7 @@ function Position({ doc, p, tests }: { doc: OutlookDoc; p: OutlookPosition; test
       </div>
       <p className="font-serif text-[1.0625rem] leading-relaxed text-ink"><Inline text={p.mechanism} facts={doc.facts} cites={cites(doc)} tests={tests} /></p>
       {own.length ? <ul className="flex flex-col gap-2">{own.map((c) => <ClaimLine key={c.id} doc={doc} p={p} c={c} tests={tests} />)}</ul> : null}
-      <ReasonLink q={`Reason through "${p.title}": who holds it, what tonight's readings say, and what would settle it against its rival.`} from={`/outlook#position-${p.id}`} className="self-start" />
+      <ReasonLink q={`Reason through "${p.title}": who holds it, what tonight's readings say, and what would settle it against its rival.`} from={`${page}#position-${p.id}`} className="self-start" />
       <details className="group">
         <summary className="cursor-pointer text-[13px] text-ink-2 hover:text-ink underline decoration-grid underline-offset-4">The case, the tests and what would refute it</summary>
         <dl className="mt-3 grid gap-x-4 gap-y-1.5 text-[14px] leading-relaxed sm:grid-cols-[9.5rem_minmax(0,1fr)]">
@@ -248,7 +249,7 @@ export function FalsifierBoard({ doc }: { doc: OutlookDoc }) {
   );
 }
 
-export function OutlookSources({ doc }: { doc: OutlookDoc }) {
+export function OutlookSources({ doc }: { doc: ClaimsDoc }) {
   return (
     <ol className="flex flex-col font-serif text-[1.0625rem] leading-relaxed">
       {doc.sources.map((s) => (

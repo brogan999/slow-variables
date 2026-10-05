@@ -386,6 +386,16 @@ class Store:
         )
         if not any(e.memberships for e in self.seed.entities):
             self.con.execute("DELETE FROM entity_membership")
+        # the trade each roll-up purchase is filed under (seed/census_trades.yaml), so a count joins the seed
+        self.con.execute("CREATE TABLE rollup_trade (series_key VARCHAR, trade VARCHAR)")
+        trades = Path("seed/census_trades.yaml")
+        filed = [
+            (k, t["key"])
+            for t in ((yaml.safe_load(trades.read_text()) or {}).get("trades") or [] if trades.exists() else [])
+            for k in t.get("deals") or []
+        ]
+        if filed:
+            self.con.executemany("INSERT INTO rollup_trade VALUES (?, ?)", filed)
         self.con.execute(VENTURE_ROUNDS)
         self.con.execute(CAPEX_TTM)
         self.con.execute(SEC_SEGMENT_QUARTERS)
@@ -958,6 +968,9 @@ class Store:
 
         outlook = build_outlook(self)
         _write(out / "outlook.json", outlook)
+        from . import firm
+
+        _write(out / "firm.json", firm.build(firm.load(), outlook, firm.ESSAY.read_text() if firm.ESSAY.exists() else ""))
         board_doc = self.board(cards, argument, outlook)
         _write(out / "board.json", board_doc)
         from .singularity import build as build_singularity
