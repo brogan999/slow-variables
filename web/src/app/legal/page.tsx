@@ -7,7 +7,7 @@ export const metadata = {
   description: "Who runs Slow Variables, what it is and is not, how its data and words may be used, and how it handles the little it records.",
 };
 
-const CHANGED = "27 September 2026"; // bump with every change to this page; the history is in the repository
+const CHANGED = "5 October 2026"; // bump with every change to this page; the history is in the repository
 const link = "underline decoration-axis underline-offset-2 hover:decoration-ink";
 
 function H({ id, children }: { id: string; children: React.ReactNode }) {
