@@ -136,7 +136,7 @@ export default function Methodology() {
         <li><strong className="font-medium">Anything that needs paid data.</strong> Lab and app gross margins, GPU rental prices, private valuations between rounds and market-wide round data are paywalled; each affected indicator says so on /indicators, and the paid sources are listed on /sources.</li>
       </ul>
       <H id="privacy">Privacy</H>
-      <p>The site sets no cookies and stores nothing in your browser; what it and its hosts record is set out in <Link href="/legal#privacy" className="underline decoration-grid underline-offset-4">the privacy section of the legal notice</Link>.</p>
+      <p>The site sets no cookies and keeps nothing in your browser beyond the tab&apos;s session; what it and its hosts record is set out in <Link href="/legal#privacy" className="underline decoration-grid underline-offset-4">the privacy section of the legal notice</Link>.</p>
       <H id="disclaimers">Disclaimers</H>
       <p>Nothing here is advice, figures come without warranty, and parts of the site are written or judged by AI models: the terms are in <Link href="/legal" className="underline decoration-grid underline-offset-4">the legal notice</Link>. A status is an editorial judgement made under published rules: the maintainer chooses the bands and direction rules, writes down the rationale, and changes them only through a reviewed pull request.</p>
     </article>
