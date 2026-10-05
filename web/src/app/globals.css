@@ -169,6 +169,14 @@ body:has(.ask-shell) {
 /* The Ask side panel (Part 40): on a wide screen the page makes room for it; on a phone the footer clears its launcher. */
 @media (min-width: 1280px) { body:has(> .ask-panel) { padding-right: 400px; } }
 @media (max-width: 639px) { body:has(> .ask-launcher) > footer { padding-bottom: 3.5rem; } }
+/* The side panel wears Notion's neutrals and system type, scoped to itself: warm grey ink on white, hairline borders. */
+.ask-panel, .ask-launcher {
+  --surface: #ffffff; --surface-2: #f1f1ef; --background: #ffffff;
+  --ink: #37352f; --ink-2: #5f5e5b; --muted: #73726e;
+  --grid: rgba(55, 53, 47, 0.09); --axis: rgba(55, 53, 47, 0.16); --hairline: rgba(55, 53, 47, 0.09);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif;
+}
+.ask-panel * { font-family: inherit; }
 .ask-panel textarea:focus-visible { outline: none; } /* the composer's own border shows focus */
 @keyframes ask-shimmer { to { background-position: -200% 0; } }
 .ask-shimmer { color: transparent; background: linear-gradient(90deg, var(--muted) 35%, var(--axis) 50%, var(--muted) 65%) 0 0 / 200% 100%; -webkit-background-clip: text; background-clip: text; animation: ask-shimmer 1.8s linear infinite; }
