@@ -128,8 +128,9 @@ def test_the_shapes_plate_credits_every_row_and_fiction_is_labelled_and_tests_no
     fiction = spec["fiction"]
     assert "fiction" in fiction["label"].lower() and "not evidence" in fiction["label"].lower()
     assert len(fiction["works"]) >= 4 and all(w["author"] and w["title"] and w["picture"] for w in fiction["works"])
-    held = {h for c in outlook["claims"] for h in c.get("holders") or []} | {h for p in outlook["positions"] for h in p.get("holders") or []}
-    assert not held & {w.get("source") for w in fiction["works"]}  # no claim or position rests on a novel
+    assert not any("source" in w for w in fiction["works"])  # a novel is listed, never cited
+    credited = " ".join(x["who"] for x in outlook["sources"])
+    assert not [w["author"] for w in fiction["works"] if w["author"] in credited]  # so no claim or position rests on one
 
 
 def test_the_shape_folio_says_what_the_census_can_and_cannot_read():
@@ -143,7 +144,13 @@ def test_the_shape_folio_says_what_the_census_can_and_cannot_read():
     by = {g["name"]: g for g in groups}
     # the folio's sentences about the census, re-tested against the bundle
     assert all(g["share_waits_on_check"] > g["share_passes"] and g["share_passes"] < 0.5 for g in groups)
-    low = sorted(groups, key=lambda g: g["share_passes"])
-    assert {low[0]["name"], low[1]["name"]} == {"Management", "Legal"}
-    assert {low[-1]["name"], low[-2]["name"]} == {"Office and administrative support", "Sales"}
-    assert by["Management"]["mean_pay"] > by["Sales"]["mean_pay"]
+    for key in ("share_passes", "share_agreed3"):  # true on the headline vote and when all three scorers agree
+        low = sorted(groups, key=lambda g: g[key])
+        assert low[0]["name"] == "Legal"
+        assert {low[-1]["name"], low[-2]["name"]} == {"Office and administrative support", "Sales"}
+    rank = [g["name"] for g in sorted(groups, key=lambda g: g["share_passes"])].index("Management")
+    rank3 = [g["name"] for g in sorted(groups, key=lambda g: g["share_agreed3"])].index("Management")
+    assert rank <= 2 < rank3  # "near the bottom on the headline vote, though not when all three must agree"
+    assert by["Management"]["share_passes"] < by["Sales"]["share_passes"]  # more of it in lower-paid kinds of job than among managers
+    assert "cannot test Drago and Laine's order" in folio and "agrees with" not in folio
+    assert "the company whose model drafted this page" in folio  # Anthropic's chief executive is named, not left out
