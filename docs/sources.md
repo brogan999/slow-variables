@@ -4,6 +4,7 @@
 
 | id | name | org | kind | tier | cadence | licence | attribution |
 |---|---|---|---|---|---|---|---|
+| 2x_news | 2X announcements | 2X | html | 7 | irregular | Short quotation | 2X (company announcement) |
 | a16z | Andreessen Horowitz (a16z) essays | Andreessen Horowitz | html | 6 | irregular | a16z; short quotation | Andreessen Horowitz |
 | abridge_blog | Abridge blog | Abridge | html | 7 | irregular | Abridge; short quotation | Abridge |
 | adp_research | ADP Research, Canaries Dashboard releases | ADP Research | html | 6 | irregular | ADP Research; short quotation | Canaries Dashboard, a project of the Stanford Digital Economy Lab and ADP Research |
@@ -12,6 +13,7 @@
 | ai_rollup_fyi | AI Roll-up Nexus company directory | ai-rollup.fyi | html | 6 | irregular | Directory; company names, sector, country and stage only, read once | AI Roll-up Nexus (ai-rollup.fyi) |
 | aifutures_blog | AI Futures Project blog | AI Futures Project | html | 7 | irregular | Substack; short quotation | AI Futures Project |
 | aiuc | AIUC updates | Artificial Intelligence Underwriting Company | html | 7 | irregular | AIUC; short quotation | AIUC |
+| alperapartners_news | Alpera Partners announcements | Alpera Partners | html | 7 | irregular | Short quotation | Alpera Partners (company announcement) |
 | amazon_news | About Amazon company news | Amazon | html | 4 | irregular | Amazon; short quotation | About Amazon |
 | ambience_blog | Ambience Healthcare blog | Ambience Healthcare | html | 7 | irregular | Ambience Healthcare; short quotation | Ambience Healthcare |
 | amd_blog | AMD blog | AMD | html | 4 | irregular | AMD; short quotation | AMD blog |
@@ -30,11 +32,14 @@
 | baseten_blog | Baseten blog and research posts | Baseten | html | 7 | irregular | Baseten; short quotation | Baseten |
 | baseten_research_watch | Baseten research (page watch) | Baseten | html | 7 | weekly | Publisher terms; change notices only | Baseten |
 | bbd | Bick–Blandin–Deming Real-Time Population Survey (via FRED) | Federal Reserve Bank of St. Louis | csv | 6 | quarterly | FRED terms of use; RPS by Bick, Blandin & Deming | Bick, Blandin & Deming, Real-Time Population Survey, via FRED |
+| beaconsoftware_news | Beacon Software announcements | Beacon Software | html | 7 | irregular | Short quotation | Beacon Software (company announcement) |
 | betakit | BetaKit | BetaKit Inc. | html | 5 | irregular | BetaKit; short quotation | BetaKit |
 | big_i | IndependentAgent.com | Independent Insurance Agents & Brokers of America | html | 5 | irregular | Short quotation | Independent Insurance Agents & Brokers of America, IndependentAgent.com |
 | bls | BLS productivity and costs; total factor productivity | U.S. Bureau of Labor Statistics | api | 4 | quarterly | Public domain (U.S. government) | U.S. Bureau of Labor Statistics, Productivity and Costs (PRS85006092/93, PRS85006173), Total Factor Productivity (MPU4910012) |
+| braziljournal | Brazil Journal | Brazil Journal | html | 5 | irregular | Short quotation | Brazil Journal |
 | browserbase_blog | Browserbase blog | Browserbase | html | 7 | irregular | Browserbase; short quotation | Browserbase |
 | business_insider | Business Insider | Business Insider | html | 7 | irregular | Business Insider; short quotation | Business Insider |
+| businesscloud_co_uk | BusinessCloud | BusinessCloud | html | 5 | irregular | Short quotation | BusinessCloud |
 | bvp_ai_datacenter_stack | Roadmap: The AI data center stack | Bessemer Venture Partners | html | 6 | irregular | Market map; company names only, read once | Lindsey Li, Josh Hechtman, David Cowan & Brielee Lu, Bessemer Venture Partners |
 | cait | California AI-Unemployment Tracker (CAIT) | California Policy Lab with California EDD | csv | 6 | monthly | California Policy Lab; monthly claims workbook, cited as the Lab suggests | Hyman, von Wachter et al. (2026), Tracking AI-Related Job Loss Using Unemployment Insurance Claims Data in California, California Policy Lab |
 | calcalist_ctech | Calcalist Ctech | Calcalist | html | 7 | irregular | Calcalist; short quotation | Calcalist Ctech |
@@ -48,6 +53,7 @@
 | chicago_booth | Chicago Booth Center for Applied AI | University of Chicago Booth School of Business | html | 6 | irregular | Chicago Booth; short quotation | Chicago Booth |
 | cio_com | CIO.com | Foundry | html | 5 | irregular | Foundry; short quotation | CIO.com |
 | cio_dive | CIO Dive | Industry Dive | html | 5 | irregular | Industry Dive; short quotation | CIO Dive |
+| circeus_news | Circeus announcements | Circeus | html | 7 | irregular | Short quotation | Circeus (company announcement) |
 | cirrus_labs_site | Cirrus Labs website | Cirrus Labs | html | 4 | irregular | Cirrus Labs; short quotation | Cirrus Labs website |
 | claims_journal | Claims Journal | Wells Media Group | html | 5 | irregular | Claims Journal; short quotation | Claims Journal |
 | clay_blog | Clay blog (GTM with Clay) | Clay | html | 5 | irregular | Clay; short quotation | Clay (company announcement) |
@@ -58,11 +64,15 @@
 | cognition_blog | Cognition blog | Cognition | html | 7 | irregular | Cognition; short quotation | Cognition |
 | comet_blog | Comet blog | Comet ML | html | 7 | irregular | Comet; short quotation | Comet |
 | coreweave_news | CoreWeave newsroom | CoreWeave | html | 7 | irregular | CoreWeave press release; short quotation | CoreWeave (company announcement) |
+| corumgroup | Corum Group | Corum Group | html | 5 | irregular | Short quotation | Corum Group |
+| cpapracticeadvisor | CPA Practice Advisor | CPA Practice Advisor | html | 5 | irregular | Short quotation | CPA Practice Advisor |
 | crescendo_news | Crescendo news | Crescendo | html | 7 | irregular | Crescendo; short quotation | Crescendo |
 | crunchbase_news | Crunchbase News | Crunchbase | html | 5 | irregular | Crunchbase; short quotation | Crunchbase News |
 | crunchbase_news_feed | Crunchbase News feed (watchlist) | Crunchbase | rss | 5 | daily | Publisher terms; titles and links only | Crunchbase News |
 | crusoe_newsroom | Crusoe newsroom | Crusoe | html | 4 | irregular | Crusoe; short quotation | Crusoe newsroom |
+| current_news | Current (formerly Crete Professionals Alliance) announcements | Current (formerly Crete Professionals Alliance) | html | 7 | irregular | Short quotation | Current (formerly Crete Professionals Alliance) (company announcement) |
 | cursor_blog | Cursor research blog | Anysphere | html | 7 | irregular | Cursor; short quotation | Cursor (Anysphere) |
+| cyclingnews | Cyclingnews | Cyclingnews | html | 5 | irregular | Short quotation | Cyclingnews |
 | d_matrix_newsroom | d-Matrix announcements | d-Matrix | html | 4 | irregular | d-Matrix; short quotation | d-Matrix announcements |
 | dallasvc_inference_map | The Inference Market Map | Dallas VC | html | 6 | irregular | Market map; company names only, read once | Rishi Maheshwari, Dallas VC |
 | dallasvc_memory_map | Who Owns Memory? The Market Map for AI Agents' Missing State Layer | Dallas VC | html | 6 | irregular | Market map; company names only, read once | Rishi Maheshwari, Dallas VC |
@@ -84,6 +94,7 @@
 | electrek | Electrek | 9to5 Media | html | 5 | irregular | Electrek; short quotation | Electrek |
 | elevenlabs_blog | ElevenLabs blog | ElevenLabs | html | 5 | irregular | ElevenLabs; short quotation | ElevenLabs (company announcement) |
 | emmi_ai_news | Emmi AI news | Emmi AI | html | 4 | irregular | Emmi AI; short quotation | Emmi AI news |
+| en_contact | En-Contact | En-Contact | html | 5 | irregular | Short quotation | En-Contact |
 | engram_blog | Engram blog | Engram | html | 7 | irregular | Engram; short quotation | Engram |
 | epoch | Epoch AI data hub — AI companies | Epoch AI | csv | 5 | daily | CC BY 4.0 | Epoch AI, 'Data on AI Companies' (CC BY 4.0), epoch.ai/data |
 | epoch_bench | Epoch AI benchmarks and Capabilities Index | Epoch AI | csv | 1 | weekly | CC BY 4.0 | Epoch AI, Benchmarking Hub and Epoch Capabilities Index (CC BY 4.0) |
@@ -96,6 +107,7 @@
 | epoch_prices | Epoch AI LLM inference price trends | Epoch AI | csv | 6 | monthly | CC BY 4.0 | Epoch AI, LLM inference price trends (CC BY 4.0) |
 | evenup_blog | EvenUp blog | EvenUp | html | 7 | irregular | EvenUp; short quotation | EvenUp |
 | exa_blog | Exa blog | Exa | html | 7 | irregular | Exa; short quotation | Exa |
+| exigent_news | Exigent Technologies | Exigent Technologies | html | 7 | irregular | Short quotation | Exigent Technologies |
 | factory_news | Factory news | Factory | html | 7 | irregular | Factory; short quotation | Factory |
 | fda_510k | FDA 510(k) premarket notification database | U.S. Food and Drug Administration | html | 4 | irregular | Public domain (U.S. government work) | FDA 510(k) database |
 | fda_devices | FDA AI-enabled medical device list | U.S. Food and Drug Administration | csv | 4 | monthly | Public domain (U.S. government work) | FDA, Artificial Intelligence-Enabled Medical Devices list |
@@ -109,6 +121,7 @@
 | fortune | Fortune | Fortune Media | html | 5 | irregular | Fortune Media; short quotation | Fortune, 'MIT report: 95% of generative AI pilots at companies are failing' (18 Aug 2025) |
 | fred | FRED (Federal Reserve Economic Data) | Federal Reserve Bank of St. Louis | csv | 6 | quarterly | FRED terms of use; RPS series by Bick, Blandin & Deming | Bick, Blandin & Deming, Real-Time Population Survey, retrieved from FRED |
 | fred_official | FRED (official statistics) | Federal Reserve Bank of St. Louis | csv | 4 | monthly | FRED terms of use; the series are their agencies' public data | Federal Reserve Board, Bureau of Economic Analysis and Bureau of Labor Statistics series, retrieved from FRED |
+| freightwaves | FreightWaves | FreightWaves | html | 5 | irregular | Short quotation | FreightWaves |
 | gartner | Gartner newsroom | Gartner | html | 6 | irregular | Gartner; short quotation | Gartner |
 | geekwire | GeekWire | GeekWire | html | 5 | irregular | GeekWire; short quotation | GeekWire |
 | getdeploying | GetDeploying GPU rental price history (weekly median on-demand price per GPU-hour) | GetDeploying | csv | 3 | weekly | CC BY 4.0 | GetDeploying, GPU rental price history (CC BY 4.0) |
@@ -132,26 +145,35 @@
 | insight_agent_iam | Identity and Access Management (IAM) in the age of AI Agents | Insight Partners | html | 6 | irregular | Market map; company names only, read once | Thomas Krane & William Blackwell, Insight Partners |
 | institutional_investor | Institutional Investor | Institutional Investor LLC | html | 5 | irregular | Institutional Investor LLC; short quotation | Institutional Investor LLC |
 | insurance_journal | Insurance Journal | Wells Media Group | html | 5 | irregular | Insurance Journal; short quotation | Insurance Journal |
+| investors_bendingspoons_com_news | Bending Spoons announcements | Bending Spoons | html | 7 | irregular | Short quotation | Bending Spoons (company announcement) |
+| iterative_news | Iterative Health announcements | Iterative Health | html | 7 | irregular | Short quotation | Iterative Health (company announcement) |
 | jams_site | Jams website | Potrero Labs | html | 4 | irregular | Potrero Labs; short quotation | Jams website |
 | kadan_ai_native_services | AI Native Services Market Map v2.0 | Kadan Capital | html | 6 | irregular | Market map; company names only, read once | Kadan Capital |
+| kaufmanhall | Kaufman Hall | Kaufman Hall | html | 5 | irregular | Short quotation | Kaufman Hall |
 | koyeb_blog | Koyeb blog | Koyeb | html | 4 | irregular | Koyeb; short quotation | Koyeb blog |
 | kpmg_news | KPMG US news | KPMG LLP | html | 7 | irregular | KPMG; short quotation | KPMG LLP |
 | langchain_blog | LangChain blog | LangChain | html | 7 | irregular | LangChain; short quotation | LangChain |
+| lawgazette_co_uk | Law Society Gazette | Law Society Gazette | html | 5 | irregular | Short quotation | Law Society Gazette |
 | lawnext | LawSites (LawNext) | LawNext | html | 5 | irregular | LawSites; short quotation | LawSites (Bob Ambrogi) |
 | legora_newsroom | Legora newsroom | Legora | html | 5 | irregular | Legora; short quotation | Legora (company announcement) |
 | lenovo_news | Lenovo StoryHub press releases | Lenovo | html | 6 | irregular | Lenovo; short quotation | Lenovo CIO Playbook, with research by IDC |
 | leonis | The Thesis by Leonis | Leonis Capital | html | 6 | irregular | Substack; figures quoted with attribution | Leonis Capital, The Thesis |
+| lexia_conseil | actuEL EC brief republished on lexia-conseil.fr | actuEL EC brief republished on lexia-conseil.fr | html | 5 | irregular | Short quotation | actuEL EC brief republished on lexia-conseil.fr |
 | limitless_site | Limitless website | Limitless | html | 4 | irregular | Limitless; short quotation | Limitless website |
+| loop_news | Loop announcements | Loop | html | 7 | irregular | Short quotation | Loop (company announcement) |
 | lovable_blog | Lovable blog | Lovable | html | 5 | irregular | Lovable; short quotation | Lovable (company announcement) |
+| lw | Latham & Watkins | Latham & Watkins | html | 5 | irregular | Short quotation | Latham & Watkins |
 | manus_blog | Manus blog | Manus | html | 4 | irregular | Manus; short quotation | Manus blog |
 | mastra_blog | Mastra blog | Mastra | html | 7 | irregular | Mastra; short quotation | Mastra |
 | mckinsey | McKinsey, The state of AI | McKinsey & Company | html | 6 | annual | McKinsey; short quotation | McKinsey Global Survey, 'The state of AI' |
+| meetings_skift_com | Skift Meetings | Skift Meetings | html | 5 | irregular | Short quotation | Skift Meetings |
 | mendral_blog | Mendral blog | Mendral | html | 4 | irregular | Mendral; short quotation | Mendral blog |
 | menlo | Menlo Ventures, State of Generative AI in the Enterprise | Menlo Ventures | html | 6 | annual | Report | Menlo Ventures, '2025: The State of Generative AI in the Enterprise' |
 | mercor_blog | Mercor blog | Mercor | html | 7 | irregular | Mercor; short quotation | Mercor (company announcement) |
 | metr | METR time horizons (v1.1) | METR | api | 1 | per_release | METR; analysis code MIT at https://github.com/METR/eval-analysis-public | METR, Measuring AI Ability to Complete Long Tasks (Horizon v1.1) |
 | metr_blog | METR research posts | METR | html | 6 | per_release | METR | METR, Time Horizon 1.1 (29 Jan 2026) |
 | metr_feed | METR feed (watchlist) | METR | rss | 6 | irregular | Publisher terms; titles and links only | METR |
+| metropolis_news | Metropolis announcements | Metropolis | html | 7 | irregular | Short quotation | Metropolis (company announcement) |
 | microsoft_blog | Official Microsoft Blog | Microsoft | html | 4 | irregular | Microsoft; short quotation | Official Microsoft Blog |
 | microsoft_ir | Microsoft investor relations (earnings calls) | Microsoft | html | 4 | quarterly | Microsoft; short quotation | Microsoft Investor Relations |
 | microsoft_news | Microsoft Source (news.microsoft.com) | Microsoft | html | 4 | irregular | Microsoft; short quotation | Microsoft Source |
@@ -159,6 +181,7 @@
 | mitsloan | MIT Sloan Institute for Work and Employment Research | MIT Sloan | html | 6 | irregular | MIT Sloan; short quotation | MIT Sloan |
 | modal_blog | Modal blog | Modal Labs | html | 7 | irregular | Modal Labs; short quotation | Modal Labs |
 | multistate | MultiState AI legislation tracker | MultiState | html | 6 | irregular | MultiState; short quotation | MultiState |
+| munich_startup | Munich Startup | Munich Startup | html | 5 | irregular | Short quotation | Munich Startup |
 | nanda | MIT NANDA, The GenAI Divide | MIT Media Lab | pdf | 6 | annual | Report | MIT NANDA, 'The GenAI Divide: State of AI in Business 2025' |
 | nber | NBER working papers and chapters | National Bureau of Economic Research | html | 6 | irregular | NBER; abstract quotation | NBER |
 | ncsl | NCSL artificial intelligence legislation tracker | National Conference of State Legislatures | html | 6 | monthly | NCSL; counts only | NCSL, Artificial Intelligence 2025 Legislation |
@@ -170,6 +193,7 @@
 | nvidia_blog | NVIDIA Blog (blogs.nvidia.com) | NVIDIA | html | 4 | irregular | NVIDIA; short quotation | NVIDIA Blog |
 | nvidia_ir | NVIDIA Newsroom | NVIDIA | html | 4 | irregular | NVIDIA; short quotation | NVIDIA Newsroom |
 | nyfed | The Labor Market for Recent College Graduates | Federal Reserve Bank of New York | html | 4 | quarterly | Public domain (U.S. Federal Reserve) | Federal Reserve Bank of New York, The Labor Market for Recent College Graduates |
+| oosto_news | Oosto | Oosto | html | 7 | irregular | Short quotation | Oosto |
 | openai_blog | OpenAI research posts | OpenAI | html | 7 | irregular | OpenAI; short quotation | OpenAI |
 | openai_deployment_co_news | The OpenAI Deployment Company newsroom | The OpenAI Deployment Company | html | 4 | irregular | The OpenAI Deployment Company; short quotation | The OpenAI Deployment Company newsroom |
 | openai_news_feed | OpenAI news feed (watchlist) | OpenAI | rss | 7 | irregular | Publisher terms; titles and links only | OpenAI |
@@ -186,6 +210,7 @@
 | pew_research | Pew Research Center, Americans and AI 2026 | Pew Research Center | html | 6 | annual | Pew Research Center; short quotation | Pew Research Center |
 | poolside_blog | Poolside blog | Poolside | html | 4 | irregular | Poolside; short quotation | Poolside blog |
 | prnewswire | PR Newswire releases | Cision PR Newswire | html | 5 | irregular | Cision PR Newswire; short quotation | Cision PR Newswire |
+| propertyindustryeye | Property Industry Eye | Property Industry Eye | html | 5 | irregular | Short quotation | Property Industry Eye |
 | pwc | PwC Global AI Jobs Barometer (via Wayback; pwc.com 403s bots) | PwC | html | 7 | annual | PwC; short quotation | PwC 2026 Global AI Jobs Barometer |
 | pymnts | PYMNTS | PYMNTS.com | html | 5 | irregular | PYMNTS; short quotation | PYMNTS (relaying Bloomberg) |
 | ramp | Ramp AI Index (Ramp Economics Lab) | Ramp | html | 3 | monthly | Ramp Economics Lab; cited with attribution | Ramp AI Index, Ramp Economics Lab |
@@ -195,11 +220,14 @@
 | rogo_news | Rogo news | Rogo | html | 7 | irregular | Rogo; short quotation | Rogo |
 | runpod_press | Runpod press releases | Runpod | html | 5 | irregular | Runpod; short quotation | Runpod |
 | runtimewire | RuntimeWire | RuntimeWire | html | 5 | irregular | RuntimeWire; short quotation | RuntimeWire |
+| rutlandherald | Rutland Herald | Rutland Herald | html | 5 | irregular | Short quotation | Rutland Herald |
 | sacra_free | Sacra company pages (free summaries) | Sacra | html | 6 | irregular | Sacra; short quotation of the free summary | Sacra estimates (free company page) |
 | scmp | South China Morning Post | SCMP | html | 5 | irregular | SCMP; short quotation | South China Morning Post |
 | sec_edgar_filings | SEC EDGAR filings (8-K, 6-K, 10-Q exhibits) | U.S. Securities and Exchange Commission | html | 4 | irregular | Public domain (U.S. government) | SEC EDGAR archives |
 | sec_seg | SEC EDGAR 10-Q/10-K XBRL instances (segment data) | U.S. Securities and Exchange Commission | xbrl | 4 | quarterly | Public domain (U.S. government); fair-access policy requires a descriptive User-Agent | SEC EDGAR, inline XBRL filings (segment disclosures) |
 | sec_xbrl | SEC EDGAR XBRL company facts | U.S. Securities and Exchange Commission | xbrl | 4 | quarterly | Public domain (U.S. government); fair-access policy requires a descriptive User-Agent | SEC EDGAR, XBRL company facts API |
+| sennder_news | sennder announcements | sennder | html | 7 | irregular | Short quotation | sennder (company announcement) |
+| shieldtp_news | Shield Technology Partners announcements | Shield Technology Partners | html | 7 | irregular | Short quotation | Shield Technology Partners (company announcement) |
 | siepr | Stanford Institute for Economic Policy Research (policy briefs) | Stanford University | html | 6 | irregular | SIEPR; short quotation | Stanford Institute for Economic Policy Research |
 | sierra_blog | Sierra blog | Sierra | html | 5 | irregular | Sierra; short quotation | Sierra (company announcement) |
 | silicon_republic | Silicon Republic | Silicon Republic | html | 7 | irregular | Silicon Republic; short quotation | Silicon Republic |
@@ -215,19 +243,27 @@
 | stripe_newsroom | Stripe newsroom | Stripe | html | 4 | irregular | Stripe; short quotation | Stripe newsroom |
 | suno_blog | Suno blog | Suno | html | 4 | irregular | Suno; short quotation | Suno blog |
 | tau2_bench | Sierra tau2-bench leaderboard (pass^k per model and domain) | Sierra | api | 1 | irregular | Sierra; public leaderboard data, cited with attribution | Sierra, tau2-bench leaderboard |
+| tech_eu | Tech.eu | Tech.eu | html | 5 | irregular | Short quotation | Tech.eu |
 | techcrunch | TechCrunch | Yahoo Inc. | html | 7 | irregular | TechCrunch; short quotation | TechCrunch |
 | techcrunch_ai_feed | TechCrunch AI feed (watchlist) | Yahoo Inc. | rss | 5 | daily | Publisher terms; titles and links only | TechCrunch |
 | techstartups | Tech Startups | TechStartups.com | html | 5 | irregular | TechStartups; short quotation | Tech Startups |
 | the_media_leader_fr | The Media Leader FR | Adwanted Media Solutions | html | 7 | irregular | The Media Leader; short quotation | The Media Leader FR (with AFP) |
 | theaiinsider | The AI Insider | Resonance | html | 5 | irregular | The AI Insider; short quotation | The AI Insider |
+| themspsummit | MSP Summit | MSP Summit | html | 5 | irregular | Short quotation | MSP Summit |
+| thenegotiator_co_uk | The Negotiator | The Negotiator | html | 5 | irregular | Short quotation | The Negotiator |
 | thenextweb | The Next Web | The Next Web | html | 5 | irregular | The Next Web; short quotation | The Next Web |
 | thinking_machines_blog | Thinking Machines Connectionism posts | Thinking Machines Lab | html | 7 | irregular | Thinking Machines; short quotation | Thinking Machines Lab |
 | thinking_machines_watch | Thinking Machines blog (page watch) | Thinking Machines Lab | html | 7 | weekly | Publisher terms; change notices only | Thinking Machines Lab |
 | time_magazine | TIME | TIME USA | html | 5 | irregular | TIME; short quotation | TIME |
 | together_blog | Together AI blog | Together AI | html | 7 | irregular | Together AI; short quotation | Together AI |
+| tractive_news | Tractive | Tractive | html | 7 | irregular | Short quotation | Tractive |
 | transparency_coalition | Transparency Coalition reports | Transparency Coalition.AI | html | 6 | irregular | Transparency Coalition; short quotation | Transparency Coalition.AI |
+| tvtechnology | TV Tech | TV Tech | html | 5 | irregular | Short quotation | TV Tech |
 | uipath_newsroom | UiPath newsroom | UiPath | html | 7 | irregular | UiPath; short quotation | UiPath |
+| unifycx_news | UnifyCX announcements | UnifyCX | html | 7 | irregular | Short quotation | UnifyCX (company announcement) |
 | upstarts_media | Upstarts Media | Upstarts Media | html | 5 | irregular | Upstarts Media; short quotation | Upstarts Media |
+| variety | Variety | Variety | html | 5 | irregular | Short quotation | Variety |
+| vimeo_news | Vimeo | Vimeo | html | 7 | irregular | Short quotation | Vimeo |
 | wallst_247 | 24/7 Wall St. | 24/7 Wall St. | html | 5 | irregular | 24/7 Wall St.; short quotation | 24/7 Wall St. (relaying The Information) |
 | weights_site | Weights website | Weights | html | 4 | irregular | Weights; short quotation | Weights website |
 | workshop_labs_blog | Workshop Labs blog | Workshop Labs | html | 4 | irregular | Workshop Labs; short quotation | Workshop Labs blog |
