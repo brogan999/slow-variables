@@ -17,10 +17,25 @@ _MON = r"(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?"
 DATE = re.compile(  # "Aug 17, 2026" and "17 August 2026": the day is part of a date, not a claim
     rf"\b(?:\d{{1,2}}(?:st|nd|rd|th)?\s+{_MON}|{_MON}\s+\d{{1,2}}(?:st|nd|rd|th)?)(?:,?\s+(?:19|20)\d\d)?\b"
 )
-CITE = re.compile(r"\[(obs|derived|ind|event|census|src|pos|claim|pred|corpus|note|fut):([A-Za-z0-9_.\-]+)\]")
+# a model's version is part of its name ("Gemini 3.1 Pro", "Sonnet 5"), not a claim
+MODEL = re.compile(
+    r"\b(?:Claude|Sonnet|Opus|Haiku|Fable|Gemini|GPT|Llama|Qwen|DeepSeek|Grok|Mistral|Kimi|Gemma)[ -]?\d+(?:\.\d+)*\b"
+)
+# a census function id keeps its ampersand ("function.claims_&_underwriting")
+CITE = re.compile(
+    r"\[(obs|derived|ind|event|census|src|pos|claim|pred|corpus|note|fut):([A-Za-z0-9_.&\-]+)\]"
+)
 # prose records (a writer's work, a position, a claim, a prediction): a number must appear in the text as a whole
 # token with its unit, so "15%" never matches inside "2015" or "150"
-PROSE_KINDS = {"src", "pos", "claim", "pred", "corpus", "note", "fut"}  # corpus: the private analyst's local reading only
+PROSE_KINDS = {
+    "src",
+    "pos",
+    "claim",
+    "pred",
+    "corpus",
+    "note",
+    "fut",
+}  # corpus: the private analyst's local reading only
 NUM = re.compile(
     r"(?<![\w.\-#])(?P<sign>[-−–])?(?P<cur>\$|€|£)?(?P<num>\d{1,3}(?:,\d{3})+|\d+(?:\.\d+)?)(?P<suffix>\s?(?:%|×|x\b|[kKmMbBtT](?!\w)|h\b|hours?\b|min\b|minutes?\b|days?\b|pp\b|points?\b|bn\b|trillion|billion|million))?(?![A-Za-z0-9]|-[A-Za-z0-9])",
 )
@@ -121,7 +136,7 @@ def check(text: str, records: dict[str, Record]) -> Result:
         cited = [records.get(f"{k}:{i}") or records.get(i) for k, i in CITE.findall(sentence)]
         cited = [r for r in cited if r]
         for m in NUM.finditer(
-            DATE.sub(" ", CIK.sub(" ", URL.sub(" ", CITE.sub(" ", sentence))))
+            DATE.sub(" ", MODEL.sub(" ", CIK.sub(" ", URL.sub(" ", CITE.sub(" ", sentence)))))
         ):  # ids inside citation tokens and URLs are not numbers
             token_text = m.group(0).strip()
             suf = (m.group("suffix") or "").strip().lower()

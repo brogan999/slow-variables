@@ -1094,7 +1094,8 @@ class Tools:
         names = [c[0] for c in cur.description]
         for row in cur.fetchall():
             r = dict(zip(names, row))
-            if str(r[col]).lower().replace(" & ", "_").replace(" ", "_") != key.lower():
+            # the site's own reference keeps the ampersand ("claims_&_underwriting"); accept it with or without
+            if str(r[col]).lower().replace(" & ", "_").replace(" ", "_") != key.lower().replace("_&_", "_"):
                 continue
             vals = []
             for c, v in r.items():
