@@ -27,7 +27,7 @@ export default function OpportunitiesPage() {
         <PowersGlossary powers={d.powers} />
       </div>
       <Opportunities d={d} />
-      <p className="text-xs text-muted max-w-[68ch]">Drafted by a model from the site&apos;s readings and reviewed by {d.reviewed_by}, who set the order and released every record. A blank field is blank on purpose. These are conditions, not forecasts: nothing here is scored.</p>
+      <p className="text-xs text-muted max-w-[68ch]">Drafted by a model from the site&apos;s readings and reviewed by {d.reviewed_by}, who set the order and released every record. What each needs first, who would buy it and the next step were drafted by a model; a company is named as a buyer only where this site&apos;s deal ledgers record the purchase. These are conditions, not forecasts: nothing here is scored.</p>
     </div>
   );
 }
