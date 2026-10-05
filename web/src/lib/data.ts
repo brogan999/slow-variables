@@ -271,7 +271,7 @@ export const outlook = () => read<OutlookDoc>("outlook.json");
 // The part of the outlook's ledger a page argues from: /firm carries its own cut of it (firm.json).
 export type ClaimsDoc = Pick<OutlookDoc, "as_of" | "essay" | "facts" | "sources" | "positions" | "claims" | "tally" | "tests">;
 export type FirmShape = { shape: string; who: string; goes_first: string; stays: string; would_show: string; sources: string[] };
-export type FirmCutGroup = { code: string; name: string; ref: string; roles: number; payroll: number; share_passes: number; share_waits_on_check: number; share_physical: number; share_rest: number };
+export type FirmCutGroup = { code: string; name: string; ref: string; roles: number; payroll: number; share_passes: number; share_agreed3: number; share_waits_on_check: number; share_physical: number; share_rest: number };
 export type FirmDoc = ClaimsDoc & {
   folios: Record<string, string[]>; regimes: { title: string; note: string; columns: string[]; rows: string[][] };
   shapes: { title: string; note: string; rows: FirmShape[] };

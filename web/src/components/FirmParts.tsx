@@ -90,22 +90,22 @@ export function CensusCutPlate({ cut }: { cut: FirmDoc["census_cut"] }) {
     <figure className="not-prose">
       <figcaption className="eyebrow mb-3">What the census screen says of each kind of job, best paid first</figcaption>
       <div className="overflow-x-auto">
-        <table className="w-full min-w-[40rem] border-collapse text-left text-[14px] leading-snug">
+        <table className="w-full min-w-[46rem] border-collapse text-left text-[14px] leading-snug">
           <thead>
-            <tr>{["Kind of job", "Passes the screen", "Waits only on a check", "Needs a body", "Held for other reasons"].map((c) => <th key={c} scope="col" className={th}>{c}</th>)}</tr>
+            <tr>{["Kind of job", "Passes the screen", "All three models pass", "Waits only on a check", "Needs a body", "Held for more than a missing check"].map((c) => <th key={c} scope="col" className={th}>{c}</th>)}</tr>
           </thead>
           <tbody>
             {cut.groups.map((g) => (
               <tr key={g.code} className="border-b border-grid align-top" title={g.ref}>
                 <th scope="row" className="py-2.5 pr-4 font-medium text-ink">{g.name}</th>
-                {[g.share_passes, g.share_waits_on_check, g.share_physical, g.share_rest].map((v, i) => <td key={i} className={`${td} tabular-nums`}>{fmt(v, "share")}</td>)}
+                {[g.share_passes, g.share_agreed3, g.share_waits_on_check, g.share_physical, g.share_rest].map((v, i) => <td key={i} className={`${td} tabular-nums`}>{fmt(v, "share")}</td>)}
               </tr>
             ))}
           </tbody>
         </table>
       </div>
       <p className="mt-3 text-[13px] leading-relaxed text-ink-2">
-        Shares of each group&apos;s payroll, from <Link href="/census" className="text-ink underline decoration-axis underline-offset-2">the census</Link> ({cut.version}), a screen scored by three AI models and not a record of what has been automated. Groups are the occupation code&apos;s major groups, ordered by average pay; the census has no field for seniority, so this reads kinds of job, not rungs within one. &ldquo;Held for other reasons&rdquo; is work that is slow to judge, costly when wrong, or a sign-off a person answers for.
+        Shares of each group&apos;s payroll, from <Link href="/census" className="text-ink underline decoration-axis underline-offset-2">the census</Link> ({cut.version}), a screen scored by three AI models and not a record of what has been automated. Groups are the occupation code&apos;s major groups, ordered by average pay; the census has no field for seniority, so this reads kinds of job, not rungs within one. A task passes when at least two of the three models pass it; the next column is the part all three pass, which lies inside the first. The last column is everything else: mostly work that has no existing check and is also slow to judge or costly when wrong, work on which the scorers split over what holds it, and a small part that is a sign-off a person answers for. Needs a body is work that takes a person on the spot.
       </p>
     </figure>
   );
