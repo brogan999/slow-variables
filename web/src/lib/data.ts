@@ -357,7 +357,7 @@ export type CensusIndex = {
     accountable_removed: number; not_called: number; by_scorer: Record<string, number>; rescore_changed: number; fleiss_kappa: number;
     modelled_saving: number; ref: string;
   };
-  dial: { rule: string; passes: number; agreed3: number; alone: number; alone_rest: number; headline: boolean }[];
+  dial: { rule: string; passes: number; agreed3: number; alone: number; alone_rest: number; headline: boolean; label?: string | null }[];
   functions: CensusFunction[]; industries: CensusIndustry[]; roles: CensusRole[];
   deals: { cards: CensusCard[]; not_carded: { name: string; why: string }[] };
   method: CensusMethod;

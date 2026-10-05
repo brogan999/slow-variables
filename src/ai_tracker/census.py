@@ -269,7 +269,8 @@ def build(spec: dict[str, Any], fetched: dict[str, Any]) -> tuple[dict[str, Any]
         },
         "figure": {**_figure(h, val, scorers), "ref": ref(spec, "manifest.json", "headline")},
         "dial": [
-            {"rule": x["rule"], "passes": x["freed"], "agreed3": x["agreed3"], "alone": x["alone"], "alone_rest": x["alone_rest"], "headline": x["headline"]}
+            {"rule": x["rule"], "passes": x["freed"], "agreed3": x["agreed3"], "alone": x["alone"], "alone_rest": x["alone_rest"], "headline": x["headline"],
+             "vh": x["vh"], "g": x["g"], "l": x["l"], "label": (spec.get("dial_labels") or {}).get(f"{x['vh']}-{x['g']}-{x['l']}")}
             for x in val["dial"]
         ],
         "functions": sorted(
@@ -340,7 +341,7 @@ def strings(spec: dict[str, Any]) -> list[str]:
     if not spec:
         return []
     s = spec["sections"]
-    return [spec["title"], spec["lede"], spec["rule"], spec["agreed"], *spec["caveats"], *spec["method_notes"].values(), *(x[k] for x in s.values() for k in ("title", "lede"))]
+    return [spec["title"], spec["lede"], spec["rule"], spec["agreed"], *spec["caveats"], *spec["method_notes"].values(), *(x[k] for x in s.values() for k in ("title", "lede")), *(spec.get("dial_labels") or {}).values()]
 
 
 MIN_TARGETS = 200  # firms with 20 to 99 staff: fewer and there is not a rollup's worth to buy

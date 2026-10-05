@@ -2,6 +2,7 @@ import hashlib
 import json
 import re
 import shutil
+from pathlib import Path
 
 import duckdb
 
@@ -162,3 +163,15 @@ def test_the_census_figure_lays_bars_on_one_dollar_axis():
     assert [b["id"] for b in f["bars"]] == ["agreed3", "rule", "a"]
     assert all(0 <= b["width"] <= 100 for b in f["bars"]) and f["ticks"][0]["left"] == 0 and f["ticks"][-1]["left"] == 100
     assert f["bars"][1]["width"] < f["bars"][2]["width"]
+
+
+def test_the_dial_says_in_words_what_settles_the_check_at_the_rule_used_and_the_step_after():
+    spec = census.load()
+    index, _ = census.build(spec, census.fetches())
+    labelled = {(d["vh"], d["g"], d["l"]): d["label"] for d in index["dial"] if d["label"]}
+    used = next(d for d in index["dial"] if d["headline"])
+    assert used["label"] and "existing check" in used["label"]
+    assert "person" in labelled[(used["vh"], used["g"] - 1, used["l"])]  # one step looser on who may check
+    assert set(labelled.values()) <= set(census.strings(spec)), "a label must pass through the text rules"
+    page = (Path(__file__).resolve().parents[1] / "web/src/app/census/page.tsx").read_text()
+    assert "(the rule used)" not in page and "d.label" in page

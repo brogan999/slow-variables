@@ -180,7 +180,7 @@ export default function CensusPage() {
 
         <Section id="dial" n="The rule" title={s.dial.title} lede={s.dial.lede}>
           <Rows head={["Rule", "Passes the screen", "All three pass"]} rows={c.dial} row={(d) => (
-            <tr key={d.rule} className={d.headline ? "bg-surface-2" : undefined}><th scope="row">{d.rule}{d.headline ? <strong className="font-medium text-ink"> (the rule used)</strong> : null}</th><td className="tabular-nums">{usd(d.passes)}</td><td className="tabular-nums">{usd(d.agreed3)}</td></tr>
+            <tr key={d.rule} className={d.headline ? "bg-surface-2" : undefined}><th scope="row">{d.rule}{d.label ? <span className={d.headline ? "block font-medium text-ink" : "block text-muted"}>{d.label}</span> : null}</th><td className="tabular-nums">{usd(d.passes)}</td><td className="tabular-nums">{usd(d.agreed3)}</td></tr>
           )} />
         </Section>
 
