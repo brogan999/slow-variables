@@ -161,6 +161,7 @@ def build(spec: dict[str, Any], entities: list[Entity], indicators: list[dict[st
     return {
         "credit": spec.get("credit"),
         "layers": layers,
+        "figures": figures(layers),
         "counts": {
             "layers": len(layers),
             "categories": len(mapped),
@@ -172,3 +173,67 @@ def build(spec: dict[str, Any], entities: list[Entity], indicators: list[dict[st
             "indicators": sum(len(c["indicators"]) for c in cats_out.values()),
         },
     }
+
+
+def primaries(spec: dict[str, Any], entities: Iterable[Entity], today: date) -> dict[str, str | None]:
+    """Every entity on the map with the sub-layer the tracker files it under (none where it has no membership)."""
+    by_id = {e.id: e for e in entities}
+    return {i: _primary(by_id[i], today) for i in sorted({r["entity"] for r in placements(spec, by_id.values(), today)})}
+
+
+STATES = {None: "independent", "acquired": "bought", "being_acquired": "bought", "defunct": "closed"}
+THIN = 5  # a category holding this many companies or fewer is listed as thin: the tracker's reach, not the market's size
+
+
+def _pct(n: float, of: float) -> float:
+    return round(100 * n / of, 1) if of else 0.0
+
+
+def figures(layers: list[dict[str, Any]]) -> dict[str, Any]:
+    """The map's figures (Part 45g), laid out here so the page places and never counts: companies in each category split
+    by ownership state on one scale, the share of each layer's companies the tracker has verified, and the parts of
+    each layer that hold a company or none. Each company counts once in a category and once in a layer."""
+    mapped = [L for L in layers if not L.get("indicator_only")]
+    top = max((c["n_entities"] for L in mapped for c in L["categories"]), default=0)
+    cat_layers, verified, coverage, thin = [], [], [], []
+    totals = {"independent": 0, "bought": 0, "closed": 0}
+    everyone: dict[str, bool] = {}
+    for L in mapped:
+        rows = []
+        for c in L["categories"]:
+            state = {e["id"]: STATES[e["ownership"]] for e in c["entities"]}
+            segs, x, upto = [], 0.0, 0
+            for k in totals:
+                n = sum(1 for v in state.values() if v == k)
+                totals[k] += n
+                upto += n
+                end = _pct(upto, top)  # each segment ends where the running count does, so rounding never drifts
+                segs.append({"state": k, "n": n, "x": x, "w": round(end - x, 1)})
+                x = end
+            rows.append({"id": c["id"], "number": c["number"], "name": c["name"], "n": c["n_entities"], "w": x,
+                         "out_of_scope": bool(c["out_of_scope"]), "segs": segs})
+        cat_layers.append({"id": L["id"], "number": L["number"], "name": L["name"], "rows": rows})
+        seen = {e["id"]: e["verified"] for c in L["categories"] for e in c["entities"]}
+        everyone.update(seen)
+        verified.append(_verified(L["id"], L["name"], seen))
+        scope = [c for c in L["categories"] if not c["out_of_scope"]]
+        n_parts, n_covered = sum(c["n_leaves"] for c in scope), sum(c["leaves_covered"] for c in scope)
+        coverage.append({"id": L["id"], "number": L["number"], "name": L["name"], "n_parts": n_parts, "n_covered": n_covered,
+                         "n_empty": n_parts - n_covered,
+                         "n_unassigned": len({e["id"] for c in scope for e in c["entities"] if e["leaf"] is None})})
+        thin += [{"id": c["id"], "number": c["number"], "name": c["name"], "layer": L["name"], "n": c["n_entities"],
+                  "n_parts": c["n_leaves"], "n_covered": c["leaves_covered"]} for c in scope if c["n_entities"] <= THIN]
+    verified.append(_verified("all", "The whole map", everyone))
+    return {
+        "categories": {"top": top, "totals": totals, "layers": cat_layers},
+        "verified": {"rows": verified},
+        "coverage": {"rows": coverage, "n_parts": sum(r["n_parts"] for r in coverage),
+                     "n_empty": sum(r["n_empty"] for r in coverage), "thin_at": THIN, "thin": thin},
+    }
+
+
+def _verified(id_: str, name: str, seen: dict[str, bool]) -> dict[str, Any]:
+    n, v = len(seen), sum(seen.values())
+    w = _pct(v, n)
+    return {"id": id_, "name": name, "n": n, "n_verified": v, "n_unverified": n - v, "share_verified": v / n if n else 0.0,
+            "segs": [{"state": "verified", "x": 0, "w": w}, {"state": "unverified", "x": w, "w": round(100 - w, 1)}]}

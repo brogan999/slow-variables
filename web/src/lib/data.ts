@@ -78,7 +78,22 @@ export type Profile = {
   must_be_true: string[]; would_disprove: string[]; judged_by: string; reviewed_by: string | null; reviewed: string | null; disclosure: string | null;
   source_links: { id: string; url: string; label: string }[];
 };
-export const valueChain = () => read<{ units: EconomicsUnit[]; companies: Profile[]; powers: Record<string, string> }>("value_chain.json");
+// Part 45g: the page's figures, laid out by value_chain.figures and market_map.figures
+export type Direction = "commoditising" | "holding" | "tightening";
+export type ChainMark = { unit: string; name: string; title: string; href: string };
+export type ChainLayer = {
+  id: string; name: string; n: number; h: number; parts: { id: string; name: string; n: number; unit: string | null; direction: Direction | null }[];
+  marks: Record<Direction, ChainMark[]>; tally: Record<Direction, number>; unjudged: { id: string; name: string; n: number }[];
+};
+export type ValueChainFigures = {
+  chain: { layers: ChainLayer[]; n_companies: number; n_unfiled: number; n_unjudged_companies: number; n_unjudged_parts: number; tally: Record<Direction, number>; means: Record<Direction, string> };
+  powers: {
+    cols: string[]; n_units: number; n_units_naming: number; n_profiles: number;
+    rows: { unit: string; layer: string; layer_name: string; name: string; direction: Direction; href: string; n_profiles: number; cells: { power: string; named: boolean; companies: string[]; n: number }[] }[];
+  };
+  rent: { n: number; steps: { question: string; why: string; keeps: string; n: number; companies: { entity: string; name: string; reads: string; tier: string; kept_by: string | null }[] }[] };
+};
+export const valueChain = () => read<{ units: EconomicsUnit[]; companies: Profile[]; powers: Record<string, string>; figures: ValueChainFigures }>("value_chain.json");
 export const series = (key: string) => read<{ series_key: string; unit: string; source: Source | null; observations: Observation[]; withdrawn: Observation[] }>(`series/${key}.json`);
 export const seriesKeys = () => fs.readdirSync(path.join(ROOT, "series")).map((f) => f.replace(/\.json$/, ""));
 export const diffusion = () => read<{
@@ -565,8 +580,21 @@ export type MarketMapCategory = {
   chips: string[]; n_more: number; n_leaves: number; n_indicators: number;
 };
 export type MarketMapLayer = { id: string; number: number; name: string; indicator_only?: boolean; categories: MarketMapCategory[]; n_categories: number; n_entities: number; n_unmapped: number };
+export type OwnState = "independent" | "bought" | "closed";
+export type MarketMapFigures = {
+  categories: {
+    top: number; totals: Record<OwnState, number>;
+    layers: { id: string; number: number; name: string; rows: { id: string; number: string; name: string; n: number; w: number; out_of_scope: boolean; segs: { state: OwnState; n: number; x: number; w: number }[] }[] }[];
+  };
+  verified: { rows: { id: string; name: string; n: number; n_verified: number; n_unverified: number; share_verified: number; segs: { state: "verified" | "unverified"; x: number; w: number }[] }[] };
+  coverage: {
+    n_parts: number; n_empty: number; thin_at: number;
+    rows: { id: string; number: number; name: string; n_parts: number; n_covered: number; n_empty: number; n_unassigned: number }[];
+    thin: { id: string; number: string; name: string; layer: string; n: number; n_parts: number; n_covered: number }[];
+  };
+};
 export type MarketMapDoc = {
-  credit: string; layers: MarketMapLayer[];
+  credit: string; layers: MarketMapLayer[]; figures: MarketMapFigures;
   counts: { layers: number; categories: number; leaves: number; entities: number; placements: number; unmapped_categories: number; excluded: number; indicators: number };
 };
 export const marketMap = () => read<MarketMapDoc>("market_map.json");

@@ -192,3 +192,92 @@ def _reads(p: str, t: str, tiers: dict[str, str], pools_words: dict[str, str]) -
     if t == "none":
         return "no lasting profit"
     return f"a {tiers[t]} profit, kept by {'the company itself' if p == 'innovator' else pools_words[p]}"
+
+
+# What each direction means, in the page's own words: the label every drawn direction carries.
+DIRECTION_MEANS = {
+    "tightening": "getting scarcer, so whoever owns it can charge more",
+    "holding": "its profit is steady for now",
+    "commoditising": "becoming cheap and interchangeable, so the gain passes to buyers",
+}
+# The rent rule's steps as questions, one for each rule in seed/futures/rubric.yaml's `pools`, in its order (first match
+# wins). The words restate the rubric's own rationale (after Teece); a test keeps the count level with the rules.
+RENT_STEPS = [
+    {"question": "Can the company stop others copying what it sells?",
+     "why": "A patent, a secret or know-how that takes years to learn holds imitators off.",
+     "keeps": "The company itself keeps the profit"},
+    {"question": "If it can be copied: does the company itself own something scarce that customers need in order to use it?",
+     "why": "Factories, a sales network, a licence or a base of users that a copier would also have to build.",
+     "keeps": "The company itself keeps the profit"},
+    {"question": "If it does not: does somebody else own that scarce thing?",
+     "why": "When copying is easy, whoever owns what customers need to use the product collects instead of its maker.",
+     "keeps": "The owner of the scarce thing keeps the profit"},
+    {"question": "Otherwise: it is easy to copy and needs nothing scarce to reach customers.",
+     "why": "Rivals enter and cut prices until nothing above the cost of staying in business is left.",
+     "keeps": "Competition passes the gain to buyers"},
+]
+
+
+def figures(doc: dict[str, Any], layers: list[Any], sublayers: list[Any], primary: dict[str, str | None],
+            rubric: dict[str, Any], short: dict[str, str] | None = None) -> dict[str, Any]:
+    """The page's figures (Part 45g), laid out here so the web places and never counts. `primary` is every company on
+    the market map with the sub-layer the tracker files it under. The chain: companies by layer beside each unit's
+    judged direction. The grid: units against the powers they and their profiled companies name. The rent rule: which
+    of its steps each profiled company stops at. Nothing in `doc` is changed."""
+    from .futures import POOLS_WORDS, TIER_WORDS
+
+    # the name readers know (NVIDIA, not NVIDIA Corp) where the caller has one
+    known = {c["entity"]: (short or {}).get(c["entity"], c["name"]) for c in doc["companies"]}
+    per_sub: dict[str | None, int] = {}
+    for sub in primary.values():
+        per_sub[sub] = per_sub.get(sub, 0) + 1
+    subs = sorted(sublayers, key=lambda s: s.order)
+    ordered = sorted(layers, key=lambda x: x.order)
+    name = {s.id: s.name for s in subs} | {x.id: x.name for x in ordered}
+    count = {x.id: sum(per_sub.get(s.id, 0) for s in subs if s.layer_id == x.id) for x in ordered}
+    top = max(count.values(), default=0) or 1
+    chain_layers = []
+    for x in ordered:
+        mine = [u for u in doc["units"] if u["layer"] == x.id]
+        judged = {u["sublayer"]: u for u in mine}
+        parts = [{"id": s.id, "name": s.name, "n": per_sub.get(s.id, 0),
+                  "unit": (judged.get(s.id) or {}).get("id"), "direction": (judged.get(s.id) or {}).get("direction")}
+                 for s in subs if s.layer_id == x.id]
+        marks = {d: [{"unit": u["id"], "name": name[u["sublayer"] or x.id], "title": u["title"],
+                      "href": f"/layers/{x.id}#assessment-{u['id']}"} for u in mine if u["direction"] == d] for d in DIRECTIONS}
+        chain_layers.append({
+            "id": x.id, "name": x.name, "n": count[x.id], "h": round(100 * count[x.id] / top, 1), "parts": parts,
+            "marks": marks, "tally": {d: len(marks[d]) for d in DIRECTIONS},
+            "unjudged": [{"id": p["id"], "name": p["name"], "n": p["n"]} for p in parts if not p["unit"]],
+        })
+    chain = {
+        "layers": chain_layers, "n_companies": len(primary), "n_unfiled": per_sub.get(None, 0),
+        "n_unjudged_companies": sum(p["n"] for x in chain_layers for p in x["unjudged"]),
+        "n_unjudged_parts": sum(len(x["unjudged"]) for x in chain_layers),
+        "tally": {d: sum(x["tally"][d] for x in chain_layers) for d in DIRECTIONS},
+        "means": DIRECTION_MEANS,
+    }
+    cols = list(POWERS.values())
+    rows = []
+    for u in doc["units"]:
+        cells = []
+        for p in cols:
+            held = [known[c["entity"]] for c in doc["companies"] if u["id"] in c["units"] and p in [x["power"] for x in c["powers"]]]
+            cells.append({"power": p, "named": p in u["powers"], "companies": held, "n": len(held)})
+        rows.append({"unit": u["id"], "layer": u["layer"], "layer_name": name[u["layer"]], "name": name[u["sublayer"] or u["layer"]],
+                     "direction": u["direction"], "href": f"/layers/{u['layer']}#assessment-{u['id']}", "cells": cells,
+                     "n_profiles": sum(1 for c in doc["companies"] if u["id"] in c["units"])})
+    powers = {"cols": cols, "rows": rows, "n_units": len(rows), "n_units_naming": sum(1 for u in doc["units"] if u["powers"]),
+              "n_profiles": len(doc["companies"])}
+    rules = rubric["pools"]["rules"]
+    steps = [{**RENT_STEPS[i], "companies": []} for i in range(len(rules))]
+    for c in doc["companies"]:
+        a = c["rent"]
+        i = next(i for i, r in enumerate(rules) if all(a.get(k) == v for k, v in r["when"].items()))
+        steps[i]["companies"].append({
+            "entity": c["entity"], "name": known[c["entity"]], "reads": a["reads"], "tier": TIER_WORDS[a["tier"]],
+            "kept_by": None if a["pools"] in ("users", "innovator") else POOLS_WORDS[a["pools"]],
+        })
+    for s in steps:
+        s["n"] = len(s["companies"])
+    return {"chain": chain, "powers": powers, "rent": {"steps": steps, "n": len(doc["companies"])}}

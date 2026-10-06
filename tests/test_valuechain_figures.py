@@ -199,7 +199,7 @@ def test_the_figures_type_no_digit_but_a_year_and_no_number_word():
 
 
 def test_hatching_is_kept_for_judgement():
-    src = TSX.read_text() + PARTS.read_text()
+    src = TSX.read_text() + "\nexport function end"
     for fn in ("CategoryBars", "VerifiedBars", "CoverageDots"):  # plain data: the map's own records
         body = src[src.index(f"export function {fn}") :]
         body = body[: body.index("\nexport function ", 1)] if "\nexport function " in body[1:] else body

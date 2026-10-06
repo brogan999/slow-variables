@@ -108,7 +108,7 @@ function Card({ c }: { c: MarketMapCategory }) {
   );
 }
 
-export function MarketMap({ m }: { m: MarketMapDoc }) {
+export function MarketMap({ m, figures }: { m: MarketMapDoc; figures?: React.ReactNode }) {
   const n = m.counts;
   return (
     <section id="market-map" className="mm flex flex-col gap-4">
@@ -121,6 +121,7 @@ export function MarketMap({ m }: { m: MarketMapDoc }) {
           {n.layers} layers · {n.categories} categories · {n.leaves} parts · {n.entities} companies · {n.placements} placements · {n.unmapped_categories} categories not yet mapped · {n.excluded} kept off the map · {n.indicators} readings
         </p>
       </div>
+      {figures}
       <MarketMapFilter />
       <div className="flex flex-col gap-2 text-[12px] text-ink-2">
         <p className="flex flex-wrap gap-x-4 gap-y-1">

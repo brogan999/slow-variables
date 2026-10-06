@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { DIRECTION, PowersGlossary } from "@/components/ValueChain";
 import { MarketMap } from "@/components/MarketMap";
+import { CategoryBars, ChainFigure, CoverageDots, PowerGrid, RentRule, VerifiedBars } from "@/components/ValueChainFigures";
 import { index, judgements, marketMap, valueChain } from "@/lib/data";
 
 export const metadata = {
@@ -12,6 +13,7 @@ export default function ValueChainPage() {
   const v = valueChain();
   const judged = judgements().surfaces.tightness ?? {};
   const named = new Map(v.companies.map((c) => [c.entity, c.name]));
+  const m = marketMap();
   return (
     <div className="flex flex-col gap-8 max-w-[72rem]">
       <div className="flex flex-col gap-3">
@@ -22,6 +24,7 @@ export default function ValueChainPage() {
         <PowersGlossary powers={v.powers} />
         <p className="text-ink-2 max-w-[68ch]">Where the map shows a shortage, some businesses could be built to meet it: <Link href="/value-chain/opportunities" className="underline decoration-grid underline-offset-4">businesses that could be built</Link>, with the profit the site&apos;s rent rule gives each and what would prove it wrong.</p>
       </div>
+      <ChainFigure f={v.figures.chain} />
       <div>
         <div className="hidden md:grid grid-cols-[2fr_0.8fr_2fr_1.6fr] gap-4 py-2 text-sm text-muted border-y border-grid" aria-hidden>
           <span>Part of the chain</span><span>Direction</span><span>Binds on</span><span>Companies profiled</span>
@@ -43,7 +46,15 @@ export default function ValueChainPage() {
         ))}
       </div>
       <p className="text-xs text-muted max-w-[68ch]">The judgements and profiles were drafted by a model from the companies&apos; own filings and the site&apos;s readings, and each says whether a person has reviewed it. They are conditions, not forecasts: no company is ranked.</p>
-      <MarketMap m={marketMap()} />
+      <section aria-labelledby="vc-power" className="flex flex-col gap-4">
+        <div className="flex flex-col gap-2">
+          <h2 id="vc-power" className="display text-[1.8rem] leading-tight">What makes a profit last</h2>
+          <p className="text-ink-2 leading-relaxed max-w-[68ch]">A shortage earns a profit for a while; it lasts only where something holds rivals off. The first figure shows where the judgements above say such a hold exists today, and of which kind. The second shows the test the site applies to each company it profiles: whether what it sells can be copied, and who owns what customers need in order to use it.</p>
+        </div>
+        <PowerGrid f={v.figures.powers} />
+        <RentRule f={v.figures.rent} />
+      </section>
+      <MarketMap m={m} figures={<><CategoryBars m={m} /><CoverageDots m={m} /><VerifiedBars m={m} /></>} />
     </div>
   );
 }
