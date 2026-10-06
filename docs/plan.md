@@ -927,3 +927,16 @@ Six figures added to `/argument/migration` beside the two it had, each a `[plate
 **For the owner: six readings stop counting after 27 Oct 2026.** They are Epoch's quarter dated 31 Dec 2025, now 279 days into a 300-day limit: electricity (growth in power drawn by AI chips sold), chip foundries (leading-edge logic supply), advanced packaging (supply growth, and buyer concentration), memory (supply in dollars) and AI chips (designer concentration). From 28 Oct, unless Epoch publishes a newer quarter, four inputs lose their score: electricity generation, advanced chip packaging, memory and **AI chips** (on the coverage rule). Chip foundries would read 55 instead of 41, still "moderate", only because its looser gauge drops out. Scored inputs fall from ten to six. This is the age cliff earlier parts of this plan record, seen from this page; the strip and the essay still call AI chips binding.
 
 Judgement calls: the deals are not drawn by what the bought company does, because that sits only in free-text notes on the sweep's rows; the strip plate was left as it is; the "what would be left" note on `ages` is arithmetic on today's records with the page's own rule, worded as not a forecast; `calls` reuses the outlook page's three glyphs.
+
+## Part 45c (6 Oct 2026): figures on the diffusion page
+
+Six figures added to `/diffusion` beside the stock-and-flow diagram and the cards, which stay as they were. Everything drawn is laid out by `src/ai_tracker/diffusion_figures.py` from the stage's own indicator cards, the seed's bands and tonight's band inputs, and rides in `web/data/lens/diffusion.json` under `figures`; no existing field changes.
+
+- **Every gauge, stage by stage** (chart, at the top): one mark per published gauge, shaped by what it reads, outlined where it is scored but shares a source cluster with a gauge that already votes. The filled marks in a row equal the card's "N readings count".
+- **Why the stages arrive one after another** (model): the four stages as curves that each start later and climb more slowly, the lag marked between them; names, stocks and limits are `seed/buckets.yaml`'s. The spacing and slopes are a stated drawing rule and measure nothing.
+- **Where tonight's number sits between its normal range and its fast range** (chart): each banded gauge placed by the band rule's own reading of its band input; to scale between the ranges, squeezed inside one.
+- **One reading from each stage, over time** (chart): the most confident drawable gauge per stage, a voting one where there is one, drawn with the indicator page's own plot (`TimePlot`, split out of `TimeChart`).
+- **How old each stage's newest readings are** (chart): age of each gauge's newest reading on a log scale, the stage's median marked, stale flags framed and stale-by-design gauges dotted.
+- **How sure this site says it is of each reading** (chart): each gauge's confidence on the rubric.
+
+Judgement calls: titles describe and do not claim, since the data regenerates nightly; "evidence against" was not drawn (the stages' gauges hold one `against` evidence row between them, too thin for a figure); the headline rule (most confident, more than one reading, voting first) is this part's, stated in the figure's foot; a "slower" zone appears on the band figure only on a night a gauge reads there.

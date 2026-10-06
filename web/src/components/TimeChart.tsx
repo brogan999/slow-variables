@@ -60,13 +60,23 @@ export function TimeChart({ d }: { d: Doc }) {
         </table>
       }
     >
-      <Plot x={c.x.ticks} y={c.y} label={`${d.name}: ${c.n_drawn} readings; each dot links to its record`}>
+      <TimePlot d={d} />
+    </Figure>
+  );
+}
+
+// The plot alone, for a page that draws several indicators side by side under one figure card.
+export function TimePlot({ d }: { d: Doc }) {
+  const c = d.chart;
+  if (!c) return null;
+  const pts = d.points.filter((p) => p.x != null && p.y != null);
+  return (
+    <Plot x={c.x.ticks} y={c.y} label={`${d.name}: ${c.n_drawn} readings; each dot links to its record`}>
         {c.bands.map((b) => <rect key={b.name} x="0" y={`${b.y}%`} width="100%" height={`${b.height}%`} fill={b.name === "fast" ? "var(--fast)" : "var(--surface-2)"} fillOpacity={b.name === "fast" ? 0.1 : 0.9} />)}
         {c.dead ? <rect x={`${c.dead.x}%`} y={`${c.dead.y}%`} width={`${c.dead.width}%`} height={`${c.dead.height}%`} fill="var(--ink)" fillOpacity={0.05} stroke="var(--axis)" strokeDasharray="3 3" /> : null}
         {c.line ? pts.slice(1).map((p, i) => <line key={i} x1={`${pts[i].x}%`} y1={`${pts[i].y}%`} x2={`${p.x}%`} y2={`${p.y}%`} stroke="var(--s1)" strokeWidth="1.5" opacity={pts[i].faint ? 0.35 : 1} />) : null}
         {pts.map((p, i) => p.y_low != null && p.y_high != null ? <line key={i} x1={`${p.x}%`} x2={`${p.x}%`} y1={`${p.y_low}%`} y2={`${p.y_high}%`} stroke="var(--s1)" strokeOpacity={0.35} strokeWidth="1.5" /> : null)}
         <Marks>{pts.map((p, i) => <Mark key={i} p={p} tip={tip(p, d.unit)} stop={i === pts.length - 1} hollow={!!p.disputed} dashed={!!p.partial} faint={!!p.faint} />)}</Marks>
-      </Plot>
-    </Figure>
+    </Plot>
   );
 }

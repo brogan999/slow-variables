@@ -84,8 +84,22 @@ export const seriesKeys = () => fs.readdirSync(path.join(ROOT, "series")).map((f
 export const diffusion = () => read<{
   as_of: string; verdict: string; buckets: (Bucket & { indicators: Card[]; n_indicators: number; status: string; tally: Tally })[]; n_sources: number;
   valves: { id: string; from: string; to: string; name: string; status: string; tally: Tally; indicator_ids: string[] }[];
-  recent_status_events: StatusEvent[]; what_would_change: string[];
+  recent_status_events: StatusEvent[]; what_would_change: string[]; figures: DiffusionFigs;
 }>("lens/diffusion.json");
+// The /diffusion figures, laid out by the export (src/ai_tracker/diffusion_figures.py): the page only places them.
+export type GaugeGroup = "fast" | "normal" | "slow" | "unscored" | "other";
+export type GaugeDot = { id: string; name: string; status: string | null; group: GaugeGroup; votes: boolean; href: string };
+export type StripDot = GaugeDot & { x: number; y: number };
+type StageRow = { stage: string; name: string; order: number };
+export type StageStrip<D extends StripDot = StripDot> = StageRow & { h: number; dots: D[] };
+export type DiffusionFigs = {
+  gauges: { groups: GaugeGroup[]; rows: (StageRow & { status: string; dots: GaugeDot[]; counts: Record<GaugeGroup, number>; ids: Record<GaugeGroup, string[]>; votes: number })[] };
+  bands: { zones: { id: "slow" | "normal" | "between" | "fast"; x: number; w: number }[]; rows: (StageStrip<StripDot & { zone: string; value: number; unit: string; as_of: string | null; obs_ids: string[] }> & { left_out: { id: string; name: string; why: string }[] })[] };
+  fresh: { today: string; ticks: Tick[]; rows: (StageStrip<StripDot & { as_of: string; age_days: number; stale: boolean; excused: boolean; why: string | null }> & { median_days: number | null; median_x: number | null; newest_days: number | null; oldest_days: number | null; n_stale: number; n_excused: number })[] };
+  sure: { zones: { lo: number; hi: number; label: string; x: number; w: number; tick: string }[]; rows: StageStrip<StripDot & { confidence: number }>[] };
+  headline: (StageRow & { id: string; counts: boolean })[];
+  model: { curves: (StageRow & { limit: string; stock: string; d: string; mid: { x: number; y: number } })[]; lags: { x: number; y: number }[]; loop: (StageRow & { limit: string; stock: string }) | null };
+};
 export type ChartSourcesT = { metric: string | null; sources: { id: string; name: string; org: string; license: string | null; attribution: string | null }[] };
 export type StackPart = { id: string; name: string; value: number; unit: string; as_of: string; obs_ids: string[]; estimated: boolean; stamp: Stamp | null; href: string; y: number; height: number };
 export type Stack = {

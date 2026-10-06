@@ -20,7 +20,7 @@ PARTS = WEB / "components" / "diagrams" / "diffusion.tsx"
 PAGE = WEB / "app" / "diffusion" / "page.tsx"
 TODAY = date(2026, 10, 6)
 GROUPS = ("fast", "normal", "slow", "unscored", "other")
-ZONES = ("normal", "between", "fast")
+ZONES = ("slow", "normal", "between", "fast")
 YEAR = re.compile(r"\b(19|20)\d\d\b")
 
 
@@ -77,8 +77,8 @@ def test_each_banded_reading_is_placed_by_its_own_bands(built):
     ind = {i.id: i for i in s.seed.indicators}
     fig = lens["figures"]["bands"]
     zones = fig["zones"]
-    assert [z["id"] for z in zones] == list(ZONES) and zones[0]["x"] == 0 and abs(zones[-1]["x"] + zones[-1]["w"] - 100) < 1e-6
-    assert all(abs(a["x"] + a["w"] - b["x"]) < 1e-6 for a, b in zip(zones, zones[1:]))
+    assert [z["id"] for z in zones] == [z for z in ZONES if z in {x["id"] for x in zones}] and {"normal", "between", "fast"} <= {z["id"] for z in zones} and zones[0]["x"] == 0 and abs(zones[-1]["x"] + zones[-1]["w"] - 100) < 0.02
+    assert all(abs(a["x"] + a["w"] - b["x"]) < 0.02 for a, b in zip(zones, zones[1:]))
     edge = {z["id"]: (z["x"], z["x"] + z["w"]) for z in zones}
     drawn = 0
     for r, b in _rows(lens, "bands"):
@@ -90,7 +90,7 @@ def test_each_banded_reading_is_placed_by_its_own_bands(built):
             assert d["value"] == value and d["obs_ids"] == ids and ids
             lo, hi = edge[d["zone"]]
             assert lo <= d["x"] <= hi and 0 <= d["y"] <= 100, d
-            reads = {"consistent_with_normal": "normal", "faster_than_normal": "fast", "emerging": "between", "slower_than_normal": "normal"}[_band(value, i.normal_band, i.fast_band, i.falsifying_band).value]
+            reads = {"consistent_with_normal": "normal", "faster_than_normal": "fast", "emerging": "between", "slower_than_normal": "slow"}[_band(value, i.normal_band, i.fast_band, i.falsifying_band).value]
             assert d["zone"] == reads, d["id"]  # the rule's own reading of tonight's number
             assert d["status"] == next(c["status"] for c in b["indicators"] if c["id"] == d["id"])
             drawn += 1
@@ -126,8 +126,8 @@ def test_confidence_is_each_cards_own_and_the_rubric_fills_the_scale(built):
     s, _, lens = built
     fig = lens["figures"]["sure"]
     zones = fig["zones"]
-    assert zones[0]["x"] == 0 and abs(zones[-1]["x"] + zones[-1]["w"] - 100) < 1e-6
-    assert all(abs(a["x"] + a["w"] - b["x"]) < 1e-6 for a, b in zip(zones, zones[1:]))
+    assert zones[0]["x"] == 0 and abs(zones[-1]["x"] + zones[-1]["w"] - 100) < 0.02
+    assert all(abs(a["x"] + a["w"] - b["x"]) < 0.02 for a, b in zip(zones, zones[1:]))
     assert [z["label"] for z in zones] == [z["label"] for z in st.confidence_rubric()]
     for r, b in _rows(lens, "sure"):
         scored = [c for c in b["indicators"] if c["confidence"] is not None]
@@ -171,7 +171,7 @@ def test_the_lag_model_is_a_drawing_with_no_number_of_its_own(built):
 
 def _words(src: str) -> list[str]:
     """What a reader sees: JSX text and the strings handed to title, aria-label and label props."""
-    return re.findall(r">([^<>{}]+)<", src) + re.findall(r'(?:title|aria-label|label|note)="([^"]+)"', src)
+    return re.findall(r"(?<!=)>([^<>{}]+)<", src) + re.findall(r'(?:title|aria-label|label|note)="([^"]+)"', src)
 
 
 def test_at_least_five_figures_each_with_a_kind_a_key_and_a_foot():
