@@ -58,7 +58,7 @@ def test_every_row_is_counted_once_by_kind_and_once_at_each_stage_it_acts_on():
         assert drawn["label"] == st["label"] and sorted(u["id"] for u in drawn["units"]) == sorted(acts) and drawn["total"] == len(acts)
         assert [CLASSES.index(u["cls"]) for u in drawn["units"]] == sorted(CLASSES.index(u["cls"]) for u in drawn["units"])
         assert all(u["cls"] == cls[u["id"]] and u["href"] == f"#why-{u['id']}" for u in drawn["units"])
-        assert [x["id"] for x in drawn["now"]] == [u["id"] for u in drawn["units"] if u["cls"] == "tight"]
+        assert [(x["id"], x["low"]) for x in drawn["now"]] == [(u["id"], u["low"]) for u in drawn["units"] if u["cls"] == "tight"]
         assert {x["id"] for x in drawn["expected"]} == {r["id"] for r in rows if r["cells"].get(st["id"], {}).get("writers")}
     for part in (*f["stages"], *f["sections"], *f["kinds"]):  # the folded table's counts are the squares drawn
         assert part["counts"] == dict(Counter(u["cls"] for u in part["units"])) and sum(part["counts"].values()) == part["total"]
@@ -67,13 +67,57 @@ def test_every_row_is_counted_once_by_kind_and_once_at_each_stage_it_acts_on():
     assert all({r["reading"]["kind_of_tight"] for r in chain if r["id"] in {u["id"] for u in k["units"]}} == {k["id"]} for k in f["kinds"])
 
 
+def test_a_stage_says_how_many_of_its_rows_carry_a_tightness_score_so_unscored_never_reads_as_free():
+    f, _, _, _ = _figs()
+    for s in f["stages"]:
+        c = s["counts"]
+        assert s["scored"] == c.get("tight", 0) + c.get("moderate", 0) + c.get("easing", 0) <= s["total"]
+    src = TSX.read_text()
+    path = src[src.index("export function BindingPath") : src.index("\nfunction Panel")]
+    assert "s.scored" in path and "carry a tightness score" in path
+    assert "not scored: no row here carries a tightness score, so nothing can show as tight" in path
+    assert "none of the scored rows is tight; the rest are not scored" in path
+    assert "which is not the same as free" in path and "nothing scored tight here" not in path
+    assert "binds tonight" not in re.search(r'title="([^"]*)"', path).group(1)  # the title describes; it asserts no finding
+
+
+def test_each_expectation_on_the_path_names_its_writers_their_failing_claims_and_whether_the_map_agrees():
+    f, doc, _, _ = _figs()
+    rows = {r["id"]: r for r in _rows(doc)}
+    for s in f["stages"]:
+        for x in s["expected"]:
+            cell = rows[x["id"]]["cells"][s["id"]]
+            assert x["acts"] == bool(cell["bites"])  # a row a writer places where the map says it does not act says so
+            assert x["writers"] and {(w["who"], w["state"]) for w in x["writers"]} == {(w["who"], w["state"]) for w in cell["writers"]}
+            assert len(x["writers"]) == len({(w["who"], w["state"]) for w in x["writers"]})
+    src = TSX.read_text()
+    path = src[src.index("export function BindingPath") : src.index("\nfunction Panel")]
+    assert "failing its test" in path and "the map itself does not" in path and "x.acts" in path
+
+
+def test_a_low_confidence_score_is_flagged_by_the_export_and_hatched_wherever_it_is_drawn():
+    f, doc, _, _ = _figs()
+    low = {r["id"] for r in _rows(doc) if r["reading"]["kind"] == "scored" and r["reading"]["hatched"]}
+    assert {r["id"] for r in _rows(doc) if r["reading"].get("hatched")} == low  # only a score is ever marked so
+    for part in (*f["stages"], *f["sections"], *f["kinds"]):
+        assert all(u["low"] == (u["id"] in low) for u in part["units"])
+    src, parts = TSX.read_text(), PARTS.read_text()
+    assert "hatched={u.low}" in parts and "low confidence" in parts  # the squares of the count
+    path = src[src.index("export function BindingPath") : src.index("\nfunction Panel")]
+    assert "hatched={r.low}" in path and "low confidence" in path
+    counted = src[src.index("export function MapCounted") : src.index("export function MapFirmness")]
+    assert "low in confidence" in counted
+    firm = src[src.index("export function MapFirmness") : src.index("export function ClaimStates")]
+    assert "low in confidence" in firm and "on a firm reading" in firm
+
+
 def test_how_firm_the_map_is_adds_up_and_every_bar_ends_at_a_hundred():
     f, doc, barriers, judged = _figs()
     rows = _rows(doc)
     bars = {b["id"]: b for b in f["firm"]}
     assert list(bars) == ["chain", "outside", "barriers"]
     for b in bars.values():
-        assert [s["key"] for s in b["segs"]] == ["reading", "judged", "blank"]
+        assert [s["key"] for s in b["segs"]] == ["reading", "low", "plain", "judged", "blank"]
         assert sum(s["n"] for s in b["segs"]) == b["total"] > 0
         x = 0.0
         for s in b["segs"]:
@@ -83,12 +127,16 @@ def test_how_firm_the_map_is_adds_up_and_every_bar_ends_at_a_hundred():
     n = lambda bar, key: next(s["n"] for s in bars[bar]["segs"] if s["key"] == key)  # noqa: E731
     scored = [r for r in rows if r["reading"]["kind"] == "scored"]
     withheld = [r for r in rows if r["reading"]["kind"] == "withheld"]
-    assert n("chain", "reading") == len(scored) and bars["chain"]["low"] == sum(r["reading"]["hatched"] for r in scored)
+    assert n("chain", "low") == sum(r["reading"]["hatched"] for r in scored)  # a low-confidence score is not a firm reading
+    assert n("chain", "reading") == len(scored) - n("chain", "low") and n("chain", "plain") == 0
     assert n("chain", "judged") == sum(r["id"] in judged["surfaces"]["tightness"] for r in withheld)
     assert n("chain", "judged") + n("chain", "blank") == len(withheld)
     outside = [r for r in rows if r["reading"]["kind"] == "tally"]
-    assert n("outside", "reading") == sum(bool(r["reading"]["instruments"] or r["reading"]["readings"]) for r in outside)
-    assert n("outside", "judged") == 0  # no model judges a whole row outside the chain
+    # a friction with an indicator that carries a status is read; one with only plain figures is set apart, not solid
+    assert n("outside", "reading") == sum(r["reading"]["instruments"] > 0 for r in outside)
+    assert n("outside", "plain") == sum(not r["reading"]["instruments"] and r["reading"]["readings"] > 0 for r in outside)
+    assert n("outside", "judged") == 0 == n("outside", "low")  # no model judges a whole row outside the chain
+    assert n("barriers", "low") == 0 == n("barriers", "plain")
     assert n("barriers", "reading") == sum(s["watched"] for s in barriers["summary"])
     assert n("barriers", "judged") == sum(not b["related"] and str(b["id"]) in judged["surfaces"]["barriers"] for b in barriers["items"])
     assert bars["barriers"]["total"] == len(barriers["items"])
@@ -113,9 +161,30 @@ def test_each_family_draws_its_own_barriers_and_a_judgement_is_never_drawn_as_a_
     assert [w["id"] for w in f["judged_words"]] and {w["id"]: w["label"] for w in f["judged_words"]} == {j["word"]: j["label"] for j in words.values()}
     assert sum(w["n"] for w in f["judged_words"]) == next(s["n"] for b in f["firm"] if b["id"] == "barriers" for s in b["segs"] if s["key"] == "judged")
     assert f["made_by"] == judged["made_by"]
+    drawn = [u for x in f["families"] for u in x["units"]]
+    n_judged, top = sum(bool(u["label"]) for u in drawn), f["judged_words"][0]
+    assert top["n"] == max(w["n"] for w in f["judged_words"])
+    # the foot says "most" only while the export says it is so
+    assert f["judged_mostly"] == (2 * n_judged > len(drawn)) and f["judged_top_mostly"] == (2 * top["n"] > n_judged)
+    src = TSX.read_text()
+    assert "f.judged_mostly" in src and "f.judged_top_mostly" in src
 
 
-def test_the_expectations_strip_counts_every_claim_listed_under_a_row_in_its_exported_state():
+def test_a_models_judgement_never_wears_the_colour_of_a_measured_tight_score():
+    parts = PARTS.read_text()
+    fills = parts[parts.index("export const BARRIER_FILL") : parts.index("export function Square")]
+    assert "--tight-" not in fills
+    for word in ("still_binds", "easing", "largely_lifted"):
+        assert re.search(rf"{word}: \{{ fill: \"var\(--s[123]\)\", hatched: true \}}", fills), word
+    rows = parts[parts.index("export const ROW_FILL") : parts.index("export const BARRIER_FILL")]
+    assert 'unscored: { fill: "var(--s1)", open: true' in rows  # an input with no score never looks half tight
+    src = TSX.read_text()
+    fam = src[src.index("export function BarrierFamilies") :]
+    assert "Every hatched square is one AI model&apos;s opinion, not evidence" in fam
+    assert "or by a plain figure with no status" in fam
+
+
+def test_the_expectations_strip_draws_every_mark_and_counts_each_distinct_claim_once():
     f, doc, _, _ = _figs()
     rows = [r for r in _rows(doc) if r["claims"]]
     c = f["claims"]
@@ -126,9 +195,13 @@ def test_the_expectations_strip_counts_every_claim_listed_under_a_row_in_its_exp
         assert {s: [(m["who"], m["href"]) for m in drawn["cells"][s]] for s in c["states"]} == {
             s: [(w["who"], w["href"]) for w in r["claims"] if w["state"] == s] for s in c["states"]
         }
-    assert c["tally"] == {s: sum(w["state"] == s for r in rows for w in r["claims"]) for s in c["states"]}
-    assert c["total"] == sum(len(r["claims"]) for r in rows) == sum(c["tally"].values())
-    assert c["site"] == sum(w["who"].startswith(bottleneck_map.SITE) for r in rows for w in r["claims"])
+    distinct = {(w["who"], w["text"], w["href"]): w for r in rows for w in r["claims"]}  # a claim under two rows is one claim
+    assert c["tally"] == {s: sum(w["state"] == s for w in distinct.values()) for s in c["states"]}
+    assert c["total"] == len(distinct) == sum(c["tally"].values())
+    assert c["marks"] == sum(len(r["claims"]) for r in rows) >= c["total"]
+    assert c["site"] == sum(w["who"].startswith(bottleneck_map.SITE) for w in distinct.values())
+    src = TSX.read_text()
+    assert "so there are more marks than claims; the counts above count each claim once" in src
 
 
 def test_the_money_strip_places_each_sub_layer_on_one_axis_and_types_no_amount():
@@ -146,6 +219,32 @@ def test_the_money_strip_places_each_sub_layer_on_one_axis_and_types_no_amount()
             placed.append((b["venture"]["value"], drawn["x"]))
         assert drawn["inputs"] == [next(r["name"] for r in _rows(doc) if r["id"] == i) for i in b["rows"]]
     assert [x for _, x in sorted(placed)] == sorted(x for _, x in placed)  # more money sits further right
+    # what the foot may say about the labelled lines is the export's word, read off the ticks themselves
+    gaps = [b["x"] - a["x"] for a, b in zip(m["ticks"], m["ticks"][1:], strict=False)]
+    even = lambda g: all(abs(x - g[0]) < 0.05 for x in g)  # noqa: E731
+    assert m["steps"] == ("even" if even(gaps) else "even_but_last" if len(gaps) > 2 and even(gaps[:-1]) else "uneven")
+    src = TSX.read_text()
+    money = src[src.index("export function StartupMoney") : src.index("export function BarrierFamilies")]
+    assert "m.steps" in money and "each gridline is a fixed multiple" not in money
+    assert "no round on file: not placed on the scale" in money and "border-dashed" in money
+    assert "money raised in the year, in US dollars" in money
+    page = PAGE.read_text()
+    assert "which this table misses" not in page and "which the figure below misses" in page
+
+
+def test_the_export_writes_the_figures_into_the_map_file():
+    store = (ROOT / "src" / "ai_tracker" / "store.py").read_text()
+    assert '"figures": map_figures(map_doc, bottlenecks' in store
+
+
+def test_the_judgement_feet_name_the_maker_and_say_what_review_there_has_been():
+    _, _, _, judged = _figs()
+    assert judged["made_by"]["model"].startswith("claude")  # the feet say Anthropic's; a model from elsewhere needs new words
+    src = TSX.read_text()
+    for name, end in (("MapFirmness", "export function ClaimStates"), ("BarrierFamilies", None)):
+        body = src[src.index(f"export function {name}") : src.index(end) if end else None]
+        assert "Anthropic&apos;s {f.made_by.model}" in body and "f.made_by.reviewed_by" in body, name
+        assert "no person has checked every judgement" in body, name
 
 
 def _words(src: str) -> list[str]:
@@ -169,7 +268,7 @@ def test_every_figure_states_its_kind_has_a_key_and_a_foot_and_types_no_number()
     page = PAGE.read_text()
     exported = re.findall(r"export function (\w+)", src)
     assert len(exported) >= 5 and all(f"<{name} " in page for name in exported)  # every figure is on the page
-    for keep in ("<BottleneckMap ", "<MapReasons ", "<Bets ", "<Judged "):  # nothing already on the page is dropped
+    for keep in ("<BottleneckMap ", "<MapReasons ", "<StartupMoneyTable ", "<Judged "):  # nothing already on the page is dropped
         assert keep in page or keep in src, keep
     for text in _words(src) + _words(PARTS.read_text()):
         assert not re.search(r"\d", re.sub(r"\b(19|20)\d\d\b", "", text)), text
@@ -178,8 +277,6 @@ def test_every_figure_states_its_kind_has_a_key_and_a_foot_and_types_no_number()
 
 def test_hatching_is_kept_for_a_models_judgement_and_the_judgement_is_named_where_it_is_drawn():
     src = TSX.read_text()
-    counted = src[src.index("export function MapCounted") : src.index("export function MapFirmness")]
-    assert "hatch" not in counted  # rows and their scores are records
     for name in ("MapFirmness", "BarrierFamilies"):
         body = src[src.index(f"export function {name}") :]
         body = body[: body.index("\nexport function ", 1)] if "\nexport function " in body[1:] else body
