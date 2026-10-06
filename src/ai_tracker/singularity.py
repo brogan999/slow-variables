@@ -13,7 +13,7 @@ from typing import Any
 
 import yaml
 
-from . import argument, board
+from . import argument, board, futures
 from .outlook import source_problems
 
 SPEC = Path(__file__).resolve().parents[2] / "seed" / "singularity.yaml"
@@ -215,7 +215,7 @@ def build(s: Any, today: date | None = None, outlook: dict[str, Any] | None = No
     )
     fic_placed = [f for f in fiction if f["x"] is not None]
     fic_slots = _stack(fic_placed)
-    return {
+    out = {
         "as_of": today.isoformat(),
         "intro": spec.get("intro"),
         "axis": axis() | {"today": x(_year(today))},
@@ -241,6 +241,225 @@ def build(s: Any, today: date | None = None, outlook: dict[str, Any] | None = No
         ],
         "words": {w: board.load()["words"][w]["label"] for w in WORDS},
     }
+    return out | {"figures": figures(out, (outlook or {}).get("scenarios") or {}, futures.ideas())}
+
+
+MIDDLE_FLOOR = 5  # a milestone with fewer dated forecasts gets no middle drawn: too few to have one
+BOX = (3.0, 1.9)  # percent of the plot two marks must keep apart, across and down, before one is set beside the other
+SAID = (3.0, 25.0, 90.0)  # the year-said scale: 1960 to 2020 squeezed into the first quarter, 2020 to next year in the rest
+# the year-given scale of the same plot, from its foot: the two decades most forecasts name get most of the height
+GIVEN = [(1990, 2020, 0.0, 10.0), (2020, 2040, 10.0, 65.0), (2040, 2100, 65.0, 96.0)]
+STATES = ["holding", "failing", "both", "untestable"]  # what a claim on the outlook can read
+LAG_TOP = 10  # decades between imagining and building; anything longer shares the last bin
+
+
+def _lin(v: float, lo: float, hi: float, a: float, b: float) -> float:
+    return round(a + (b - a) * (v - lo) / (hi - lo), 2)
+
+
+def _at(m: dict[str, Any]) -> int:
+    """The year the timeline places a forecast at: its most likely year, else the last year of its range."""
+    return m["mid"] or m["high"]
+
+
+def figures(doc: dict[str, Any], scenarios: dict[str, Any], ideas: list[dict[str, Any]]) -> dict[str, Any]:
+    """What the page's figures draw, from the built page: it reads the lanes, the due list and the worlds and changes
+    none of them. Every count and position is worked out here, so the web only places it."""
+    year, today = int(doc["as_of"][:4]), _year(doc["as_of"])
+    label = {la["id"]: la["label"] for la in doc["lanes"]}
+
+    spread = []
+    for la in doc["lanes"]:
+        dated = sorted((m for m in la["forecasts"] if not m["step"]), key=lambda m: (_at(m), m["made"]))
+        years = [_at(m) for m in dated]
+        mid = None  # only the four milestones of the forecaster table: the other rows gather different claims on a theme
+        if la["id"] in TABLE_LANES and len(years) >= MIDDLE_FLOOR:
+            lo, hi = years[(len(years) - 1) // 2], years[len(years) // 2]
+            mid = {"low": lo, "high": hi, "label": str(lo) if lo == hi else f"{lo}–{hi}", "x": x(lo), "w": round(x(hi) - x(lo), 2)}
+        spread.append(
+            {
+                "id": la["id"],
+                "label": la["label"],
+                "n": len(la["forecasts"]) + len(la["undated"]),
+                "n_dated": len(dated),
+                "n_steps": len(la["forecasts"]) - len(dated),
+                "n_undated": len(la["undated"]),
+                "marks": [
+                    {"id": m["id"], "who": m["who"], "made": m["made"][:4], "at": _at(m), "years": m["years"], "x": x(_at(m)),
+                     "href": m["href"]}
+                    for m in dated
+                ],
+                "first": years[0] if years else None,
+                "last": years[-1] if years else None,
+                "x": x(years[0]) if years else None,
+                "w": round(x(years[-1]) - x(years[0]), 2) if years else 0,
+                "middle": mid,
+                # why a row has no middle: a theme of different claims, or too few dated forecasts
+                "no_middle": None if mid else "theme" if la["id"] not in TABLE_LANES else "few",
+            }
+        )
+
+    a, b, c = SAID
+
+    def said_x(v: float) -> float:
+        return _lin(max(v, 1960), 1960, 2020, a, b) if v <= 2020 else _lin(v, 2020, year + 1, b, c)
+
+    def given_y(v: float) -> float:
+        """Percent from the top of the plot; a year after the last piece sits on the top edge."""
+        return next((round(100 - _lin(v, lo, hi, p, q), 2) for lo, hi, p, q in GIVEN if v <= hi), 0.0)
+
+    marks: list[dict[str, Any]] = []
+    for la in doc["lanes"]:
+        if la["id"] not in TABLE_LANES:
+            continue
+        for m in la["forecasts"]:
+            if m["step"]:
+                continue
+            ranged = bool(m["low"] and m["high"])
+            marks.append(
+                {
+                    "id": m["id"], "who": m["who"], "lane": la["id"], "made": m["made"], "at": _at(m), "years": m["years"],
+                    "word": m["word"], "href": m["href"], "x": said_x(_year(m["made"])), "y": given_y(_at(m)),
+                    "y_low": given_y(m["low"]) if ranged else None, "y_high": given_y(m["high"]) if ranged else None,
+                    "moved": False,
+                }
+            )  # fmt: skip
+    marks.sort(key=lambda m: (m["made"], m["at"], m["id"]))
+    for i, m in enumerate(marks):  # a mark that would cover an earlier one is set to its right, and says so
+        while any(abs(m["x"] - p["x"]) < BOX[0] and abs(m["y"] - p["y"]) < BOX[1] for p in marks[:i]):
+            m["x"], m["moved"] = round(m["x"] + BOX[0], 2), True
+    four = [la for la in doc["lanes"] if la["id"] in TABLE_LANES]
+    said = {
+        "marks": marks,
+        "n": len(marks),
+        "lanes": [{"id": la["id"], "label": la["label"]} for la in four],
+        "left_out": {
+            "steps": sum(1 for la in four for m in la["forecasts"] if m["step"]),
+            "undated": sum(len(la["undated"]) for la in four),
+        },
+        # a phone has no room for the squeezed decades' middle ticks
+        "x_ticks": [
+            {"x": said_x(v), "label": str(v), "minor": v in (1980, 2000)}
+            for v in [1960, 1980, 2000, 2020, *range(2022, year + 1, 2)]
+        ],
+        "y_ticks": [{"y": given_y(v), "label": str(v)} for v in (2000, 2020, 2025, 2030, 2035, 2040, 2060, 2080, 2100)],
+        "break": b,
+        "this_year": given_y(year),  # a mark below it names a year that has passed; a mark on it names this year
+        # the year each forecast was made, as a year, drawn on the year-given scale: a step for each year, so nothing
+        # can sit below it but the start of a stated range
+        "said_line": " ".join(
+            f"{said_x(v)},{given_y(v)} {said_x(min(v + 1, today))},{given_y(v)}" for v in range(GIVEN[0][0], year + 1)
+        ),
+    }
+
+    rows = doc["due"]
+    lo = min([m["made_year"] for m in rows] or [year]) // 10 * 10
+
+    def due_x(v: float) -> float:
+        return _lin(v, lo, year + 1, 2.0, 98.0)
+
+    def named(m: dict[str, Any]) -> dict[str, Any]:
+        return {"id": m["id"], "who": m["who"], "lane": label[m["lane"]], "line": m["line"], "quoted": bool(m.get("quoted")),
+                "made": m["made"][:4], "years": m["years"], "word": m["word"], "step": m["step"], "href": m["href"]}  # fmt: skip
+
+    due = {
+        "rows": [
+            named(m)
+            | {
+                "settles": m["settles"],
+                "due": m["settles"][:4],
+                "x_made": due_x(_year(m["made"])),
+                "x_due": due_x(_year(m["settles"])),
+                "w": round(due_x(_year(m["settles"])) - due_x(_year(m["made"])), 2),
+                "x_low": due_x(m["low"]) if m["low"] else None,  # where a stated range of years begins
+                "w_low": round(due_x(_year(m["settles"])) - due_x(m["low"]), 2) if m["low"] else None,
+            }
+            for m in rows
+        ],
+        "n": len(rows),
+        "counts": {w: sum(1 for m in rows if m["word"] == w) for w in doc["words"]},
+        "ticks": [{"year": v, "x": due_x(v)} for v in range(lo, year + 1, 20)],
+        "today": due_x(today),
+        # a year that has passed on a forecast with no closing date on record: not on this calendar, and named
+        "unclosed": [
+            named(m | {"lane": la["id"]}) for la in doc["lanes"] for m in la["forecasts"] if not m["settles"] and _at(m) < year
+        ],
+    }
+
+    cell = {(k["progress"], k["rules"]): k for k in scenarios.get("cells") or []}
+    names: dict[tuple[str, str], list[str]] = {}
+    for w in doc["worlds"]:
+        for k in w["grid"]:
+            names.setdefault((k["progress"], k["rules"]), []).append(w["id"])
+
+    def count(cells: list[dict[str, Any]]) -> dict[str, int]:
+        return {s: sum(1 for k in cells for g in k["signposts"] if g["state"] == s) for s in STATES}
+
+    world_rows = []
+    for w in doc["worlds"]:
+        mine = [cell[(k["progress"], k["rules"])] for k in w["grid"] if (k["progress"], k["rules"]) in cell]
+        world_rows.append(
+            {
+                "id": w["id"],
+                "label": w["label"],
+                "short": w.get("short") or w["label"],
+                "consistent": w["consistent"],  # the page's own word, unchanged
+                "n_cells": len(mine),
+                "open": sum(1 for k in mine if k["consistent"]),
+                "bare": sum(1 for k in mine if not k["signposts"]),
+                "states": count(mine),
+            }
+        )
+    worlds = {
+        "progress": scenarios.get("progress") or [],
+        "rules": scenarios.get("rules") or [],
+        "cells": [
+            {
+                "progress": p["id"],
+                "rules": r["id"],
+                "argued": (p["id"], r["id"]) in cell,
+                "worlds": names.get((p["id"], r["id"]), []),
+                "consistent": cell.get((p["id"], r["id"]), {}).get("consistent"),
+                "tested": cell.get((p["id"], r["id"]), {}).get("tested"),
+                "signs": cell.get((p["id"], r["id"]), {}).get("signposts", []),
+            }
+            for p in scenarios.get("progress") or []
+            for r in scenarios.get("rules") or []
+        ],
+        "worlds": world_rows,
+        "states": count(list(cell.values())),
+        "bare": sum(1 for k in cell.values() if not k["signposts"]),
+        "unplaced": sum(1 for k in cell if k not in names),
+    }
+
+    states = [i["arrival"]["state"] for i in ideas]
+    # counted in decades, the grain most of the idea bank's dates have: the decade built less the decade imagined
+    gaps = sorted(
+        min((i["arrival"]["decade"] - i["imagined"] // 10 * 10) // 10, LAG_TOP)
+        for i in ideas
+        if i["arrival"]["state"] == "marked_built"
+    )
+    top = max((gaps.count(k) for k in range(LAG_TOP + 1)), default=0) or 1
+    lag = {
+        "bins": [
+            {
+                "key": str(k),
+                "label": "the same decade" if k == 0 else f"{k} or more decades later" if k == LAG_TOP
+                else f"{k} decade{'s' if k > 1 else ''} later",
+                "n": gaps.count(k),
+                "w": round(100 * gaps.count(k) / top, 1),
+            }
+            for k in range(LAG_TOP + 1)
+        ],
+        "n": len(gaps),
+        "middle_key": str(gaps[(len(gaps) - 1) // 2]) if gaps else None,
+        "exact": sum(1 for i in ideas if "lag_years" in i["arrival"]),
+        "undated": states.count("marked_built_date_unclear"),
+        "existed": states.count("already_existed"),
+        "not_built": states.count("not_marked_built"),
+        "ideas": len(ideas),
+    }
+    return {"spread": spread and {"floor": MIDDLE_FLOOR, "lanes": spread}, "said": said, "due": due, "worlds": worlds, "lag": lag}
 
 
 def problems(

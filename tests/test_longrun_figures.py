@@ -113,6 +113,7 @@ def test_a_middle_is_drawn_only_for_a_milestone_with_enough_dated_forecasts():
             assert s["middle"]["x"] == sg.x(s["middle"]["low"]) and s["middle"]["w"] >= 0
         else:
             assert s["middle"] is None  # too few, or a row of different claims that share a theme
+            assert s["no_middle"] == ("few" if s["id"] in sg.TABLE_LANES else "theme")
     small = {s["id"]: s for s in sg.figures(_small(), GRID, IDEAS)["spread"]["lanes"]}
     assert small["agi"]["n_dated"] == 7 and small["agi"]["n_steps"] == 1 and small["agi"]["n_undated"] == 1
     assert small["agi"]["middle"]["label"] == "2030" and small["superhuman_coder"]["middle"] is None
@@ -138,7 +139,12 @@ def test_said_against_given_draws_each_dated_forecast_of_the_four_milestones_onc
     still = sorted((m for m in said["marks"] if not m["moved"]), key=lambda m: m["made"])
     assert [m["x"] for m in still] == sorted(m["x"] for m in still)  # a later forecast sits further right
     year = int(DOC["as_of"][:4])
-    assert all((m["y"] > said["today"]) == (m["at"] < year) for m in said["marks"] if m["at"] != year)
+    assert all((m["y"] > said["this_year"]) == (m["at"] < year) and (m["y"] == said["this_year"]) == (m["at"] == year) for m in said["marks"])
+    steps = [tuple(map(float, p.split(","))) for p in said["said_line"].split()]  # the year made, as a year: a step for each
+    assert all(a[0] <= b[0] and a[1] >= b[1] for a, b in zip(steps, steps[1:])) and steps[-1][1] == said["this_year"]
+    for m in said["marks"]:  # no forecast names a year before the one it was made in
+        if not m["moved"] and m["x"] >= steps[0][0]:  # the steps begin where the year-given scale does
+            assert m["y"] <= max(y for sx, y in steps if sx <= m["x"] + 0.011), m["id"]
     assert said["left_out"] == {"steps": sum(m["step"] for la in DOC["lanes"] if la["id"] in sg.TABLE_LANES for m in la["forecasts"]),
                                 "undated": sum(len(la["undated"]) for la in DOC["lanes"] if la["id"] in sg.TABLE_LANES)}
 
@@ -159,6 +165,7 @@ def test_the_due_figure_is_the_pages_own_list_with_no_rate():
     for r, m in zip(due["rows"], DOC["due"]):
         assert (r["word"], r["who"], r["settles"], r["step"], r["href"]) == (m["word"], m["who"], m["settles"], m["step"], m["href"])
         assert 0 <= r["x_made"] <= r["x_due"] <= 100 and abs(r["x_made"] + r["w"] - r["x_due"]) < 0.011
+        assert (r["x_low"] is None) == (m["low"] is None) and (r["x_low"] is None or abs(r["x_low"] + r["w_low"] - r["x_due"]) < 0.011)
         assert r["settles"] < DOC["as_of"]
     assert due["counts"] == {w: sum(1 for m in DOC["due"] if m["word"] == w) for w in DOC["words"]}
     assert sum(due["counts"].values()) == len(DOC["due"]) == due["n"]
@@ -239,7 +246,9 @@ def test_the_figures_say_what_reviewers_have_required_of_sister_pages():
     src = _prose(FIGS.read_text())
     assert "not on this calendar" in src and not re.search(r"names? no date", src)  # a row with no closing date
     assert "has no word for wrong" in src and not re.search(r"\b(was|were|proved|turned out) wrong\b", src)  # behind is not wrong
-    assert src.count("made by Anthropic") >= 3  # wherever the heads of Anthropic and its rivals are drawn
+    for fig in ("LaneSpread", "SaidAgainstGiven"):  # wherever the heads of Anthropic and its rivals are drawn or counted
+        assert "{DISCLOSE}" in FIGS.read_text().split(f"export function {fig}")[1].split("\nexport function")[0], fig
+    assert re.search(r'DISCLOSE = "[^"]*a Claude model, made by Anthropic[^"]*rival labs', FIGS.read_text())
     lag = _prose(FIGS.read_text().split("export function FictionLag")[1])
     assert "not evidence" in lag and "fiction" in lag.lower()  # the fiction lane is never evidence for a forecast
     assert not re.search(r"\b(accuracy|track record|hit rate|best forecaster|most accurate|ranked by)\b", src, re.I)  # no rate, no ranking

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArticleLayout, MarginPanel } from "@/components/ArticleLayout";
 import { Plate as AtlasPlate } from "@/components/AtlasParts";
 import { Plate as FuturesPlate } from "@/components/FuturesParts";
+import { DueLines, FictionLag, LaneSpread, SaidAgainstGiven, WorldsGrid } from "@/components/LongRunFigures";
 import { Scrubber } from "@/components/Scrubber";
 import { Due, Fiction, Latest, ORDER, Questions, Sources, TimelinePlate, Undated, Worlds } from "@/components/SingularityParts";
 import { atlas, futures, singularity } from "@/lib/data";
@@ -58,6 +59,8 @@ export default function SingularityPage() {
           <summary className="cursor-pointer text-sm text-ink-2">Calls that give odds, or doubt a date, but name no year</summary>
           <div className="mt-3"><Undated doc={d} /></div>
         </details>
+        <LaneSpread doc={d} />
+        <SaidAgainstGiven doc={d} />
       </Folio>
       <section aria-labelledby="beyond" className="mt-12 flex flex-col gap-4">
         <h2 id="beyond" className="eyebrow">Beyond the dated calls</h2>
@@ -76,6 +79,7 @@ export default function SingularityPage() {
         <p className="font-mono text-[11px] text-muted">The pictures are illustrations made with image models, not evidence.</p>
       </section>
       <Folio n="II" id="due" label="the calls whose time has come" title="The dates that have already come" lede="Forecasts whose window has closed. Happening means the milestone arrived as said; slower than said means its date passed without it.">
+        <DueLines doc={d} />
         <Due doc={d} />
       </Folio>
       <Folio n="III" id="now" label="where the forecasters sit now" title="The latest word from each forecaster" lede="The most recent year each forecaster has given for each milestone, among forecasts made since 2023. The glyph is how the forecast reads tonight; each links to it.">
@@ -85,10 +89,12 @@ export default function SingularityPage() {
         <Questions doc={d} />
       </Folio>
       <Folio n="V" id="worlds" label="four worlds for 2036" title="Four ways the next decade could go" lede={<>Each world maps onto the cells of the <Link href="/outlook#scenarios" className="underline decoration-axis underline-offset-2 hover:decoration-ink">scenario grid</Link>. None is crowned: a world reads consistent until one of its signposts fails. <Link href="/singularity/atlas" className="underline decoration-axis underline-offset-2 hover:decoration-ink">What each world would change, part of life by part of life →</Link></>}>
+        <WorldsGrid doc={d} />
         <Worlds doc={d} />
       </Folio>
       <Folio n="VI" id="fiction" label="imagined futures" title="What the novelists imagined" lede="Stories, not forecasts: none is scored. Those set in a named year sit on the timeline's last row.">
         <Fiction doc={d} />
+        <FictionLag doc={d} credits={fu.credits} />
       </Folio>
       <section id="sources" className="mt-20 border-t border-grid pt-8 scroll-mt-8">
         <h2 className="display text-[1.5rem] mb-4">Sources</h2>

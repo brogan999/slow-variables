@@ -465,6 +465,32 @@ export type SingularityDoc = {
   questions: { id: string; question: string; reads?: string; label?: string; fast: string; slow: string; reading: Fact | null }[];
   worlds: { id: string; label: string; text: string; argued_by: string[]; consistent: boolean; grid: { progress: string; rules: string }[] }[];
   fiction: SgFiction[]; fiction_slots: number; sources: SgSource[]; words: Record<string, string>;
+  figures: SgFigures;
+};
+// What the page's figures draw (singularity.figures): counts and positions, all worked out by the export.
+export type SgNamed = { id: string; who: string; lane: string; line: string; quoted: boolean; made: string; years: string | null; word: string; step: boolean; href: string };
+export type SgFigures = {
+  spread: { floor: number; lanes: {
+    id: string; label: string; n: number; n_dated: number; n_steps: number; n_undated: number; first: number | null; last: number | null; x: number | null; w: number;
+    marks: { id: string; who: string; made: string; at: number; years: string; x: number; href: string }[];
+    middle: { low: number; high: number; label: string; x: number; w: number } | null; no_middle: "theme" | "few" | null;
+  }[] };
+  said: {
+    marks: { id: string; who: string; lane: string; made: string; at: number; years: string; word: string; href: string; x: number; y: number; y_low: number | null; y_high: number | null; moved: boolean }[];
+    n: number; lanes: { id: string; label: string }[]; left_out: { steps: number; undated: number };
+    x_ticks: Tick[]; y_ticks: Tick[]; break: number; this_year: number; said_line: string;
+  };
+  due: {
+    rows: (SgNamed & { settles: string; due: string; x_made: number; x_due: number; w: number; x_low: number | null; w_low: number | null })[];
+    n: number; counts: Record<string, number>; ticks: { year: number; x: number }[]; today: number; unclosed: SgNamed[];
+  };
+  worlds: {
+    progress: { id: string; label: string }[]; rules: { id: string; label: string }[];
+    cells: { progress: string; rules: string; argued: boolean; worlds: string[]; consistent: boolean | null; tested: boolean | null; signs: { claim: string; state: OutlookState }[] }[];
+    worlds: { id: string; label: string; short: string; consistent: boolean; n_cells: number; open: number; bare: number; states: Record<OutlookState, number> }[];
+    states: Record<OutlookState, number>; bare: number; unplaced: number;
+  };
+  lag: { bins: { key: string; label: string; n: number; w: number }[]; n: number; middle_key: string | null; exact: number; undated: number; existed: number; not_built: number; ideas: number };
 };
 export const singularity = () => read<SingularityDoc>("singularity.json");
 
