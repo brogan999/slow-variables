@@ -86,12 +86,13 @@ export type ChainLayer = {
   marks: Record<Direction, ChainMark[]>; tally: Record<Direction, number>; unjudged: { id: string; name: string; n: number }[];
 };
 export type ValueChainFigures = {
-  chain: { layers: ChainLayer[]; n_companies: number; n_unfiled: number; n_unjudged_companies: number; n_unjudged_parts: number; tally: Record<Direction, number>; means: Record<Direction, string> };
+  chain: { layers: ChainLayer[]; n_companies: number; n_unfiled: number; unfiled: string[]; n_unjudged_companies: number; n_unjudged_parts: number; tally: Record<Direction, number>; means: Record<Direction, string> };
   powers: {
-    cols: string[]; n_units: number; n_units_naming: number; n_profiles: number;
-    rows: { unit: string; layer: string; layer_name: string; name: string; direction: Direction; href: string; n_profiles: number; cells: { power: string; named: boolean; companies: string[]; n: number }[] }[];
+    cols: string[]; gloss: string[]; n_units: number; n_units_naming: number; n_profiles: number;
+    multi: { entity: string; name: string; parts: string[]; powers: string[] }[];
+    rows: { unit: string; layer: string; layer_name: string; name: string; label: string; direction: Direction; href: string; n_profiles: number; n_single: number; cells: { power: string; named: boolean; companies: string[]; n: number }[] }[];
   };
-  rent: { n: number; steps: { question: string; why: string; keeps: string; n: number; companies: { entity: string; name: string; reads: string; tier: string; kept_by: string | null }[] }[] };
+  rent: { n: number; steps: { question: string; why: string; keeps: string; n: number; companies: { entity: string; name: string; reads: string; tier: string; goes_to: string | null }[] }[] };
 };
 export const valueChain = () => read<{ units: EconomicsUnit[]; companies: Profile[]; powers: Record<string, string>; figures: ValueChainFigures }>("value_chain.json");
 export const series = (key: string) => read<{ series_key: string; unit: string; source: Source | null; observations: Observation[]; withdrawn: Observation[] }>(`series/${key}.json`);
@@ -584,7 +585,7 @@ export type OwnState = "independent" | "bought" | "closed";
 export type MarketMapFigures = {
   categories: {
     top: number; totals: Record<OwnState, number>;
-    layers: { id: string; number: number; name: string; rows: { id: string; number: string; name: string; n: number; w: number; out_of_scope: boolean; segs: { state: OwnState; n: number; x: number; w: number }[] }[] }[];
+    layers: { id: string; number: number; name: string; rows: { id: string; number: string; name: string; n: number; w: number; out_of_scope: boolean; segs: { state: OwnState; n: number; x: number; w: number }[]; leaves: { name: string; n: number }[] }[] }[];
   };
   verified: { rows: { id: string; name: string; n: number; n_verified: number; n_unverified: number; share_verified: number; segs: { state: "verified" | "unverified"; x: number; w: number }[] }[] };
   coverage: {

@@ -58,10 +58,7 @@ function Card({ c }: { c: MarketMapCategory }) {
       <Leaves c={c} />
       {state === "scope" ? <p className="text-[12px] italic text-muted">{c.out_of_scope}</p> : null}
       {state === "unmapped" ? (
-        <p className="relative overflow-hidden rounded-[2px] px-2 py-3 text-[12px] italic text-muted">
-          <span className="hatch absolute inset-0 text-grid" aria-hidden />
-          <span className="relative inline-block rounded-[2px] bg-surface px-1.5 py-0.5">Not yet mapped by the tracker. This says where our coverage stops, not that the market is empty.</span>
-        </p>
+        <p className="rounded-[2px] border border-dashed border-muted px-2 py-3 text-[12px] italic text-muted">Not yet mapped by the tracker. This says where our coverage stops, not that the market is empty.</p>
       ) : null}
       {c.chips.length ? (
         <div className="flex flex-wrap gap-[3px]">
@@ -128,7 +125,7 @@ export function MarketMap({ m, figures }: { m: MarketMapDoc; figures?: React.Rea
           <span className="inline-flex items-center gap-1.5"><span className="inline-flex gap-[3px]" aria-hidden><span className="inline-block h-[9px] w-[9px] rounded-full bg-ink-2" /><span className="inline-block h-[9px] w-[9px] rounded-full ring-1 ring-inset ring-axis" /></span>each dot is one part of the category; filled means the tracker has a company there</span>
           <span><span className="font-semibold text-ink">Bold</span>: verified through a filing or a dataset</span>
           <span>(acquired), (acquisition pending), (closed): what happened to the company</span>
-          <span className="inline-flex items-center gap-1.5"><span className="hatch inline-block h-[10px] w-[16px] text-axis" aria-hidden />not yet mapped: a gap in our coverage, not in the market</span>
+          <span className="inline-flex items-center gap-1.5"><span className="inline-block h-[10px] w-[16px] border border-dashed border-muted" aria-hidden />not yet mapped: a gap in our coverage, not in the market</span>
         </p>
         <nav aria-label="Layers of the map" className="flex flex-wrap gap-x-3 gap-y-1 font-mono text-[11px]">
           {m.layers.map((L) => <a key={L.id} href={`#mm-layer-${L.id}`} className={link}>{L.number} {L.name}</a>)}

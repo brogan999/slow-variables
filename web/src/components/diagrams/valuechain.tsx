@@ -2,14 +2,15 @@ import Link from "next/link";
 import type { Direction, OwnState } from "@/lib/data";
 
 // The value-chain page's drawing parts. Everything arrives laid out by the export; nothing here works out a number.
-// A judged direction is hatched in its own colour; the map's records are plain fills.
+// A judged direction is a placing, so its mark is solid in the direction's colour and its key says "judged"; the site
+// keeps its striped fill for a judged length or area, and this page draws none.
 export const DIRECTION_FILL: Record<Direction, string> = { tightening: "var(--tight-3)", holding: "var(--s2)", commoditising: "var(--s3)" };
 export const DIRECTION_WORD: Record<Direction, string> = { tightening: "Tightening", holding: "Holding", commoditising: "Commoditising" };
 export const DIRECTION_ORDER: Direction[] = ["tightening", "holding", "commoditising"];
 
-// One judged direction: a hatched square in the direction's colour.
+// One judged direction: a solid square in the direction's colour.
 export function JudgedMark({ d }: { d: Direction }) {
-  return <span aria-hidden className="hatch inline-block h-3 w-3 shrink-0 ring-1 ring-inset ring-current" style={{ color: DIRECTION_FILL[d] }} />;
+  return <span aria-hidden className="inline-block h-3 w-3 shrink-0" style={{ background: DIRECTION_FILL[d] }} />;
 }
 
 // A part of the chain the page has not judged: an empty dashed square.
@@ -26,8 +27,10 @@ export function JudgedPart({ d, name, title, href }: { d: Direction; name: strin
   );
 }
 
-export const OWN_FILL: Record<OwnState, string> = { independent: "var(--s3)", bought: "var(--s1)", closed: "var(--surface)" };
-export const OWN_WORD: Record<OwnState, string> = { independent: "independent", bought: "bought, or being bought", closed: "closed" };
+// Pale is "nothing recorded", here and in the verified bars; dark is a recorded sale; an outline is a recorded closure.
+export const NO_RECORD = "var(--grid)";
+export const OWN_FILL: Record<OwnState, string> = { independent: NO_RECORD, bought: "var(--s1)", closed: "var(--surface)" };
+export const OWN_WORD: Record<OwnState, string> = { independent: "no sale or closure recorded", bought: "bought, or being bought", closed: "closed" };
 
 // A swatch for an ownership state, drawn as the bars draw it (closed is an empty outline).
 export function OwnSwatch({ s }: { s: OwnState }) {
@@ -54,10 +57,6 @@ export function PartDot({ filled, tip }: { filled: boolean; tip: string }) {
 }
 
 // A profiled company placed by the site's own answers: a dashed outline, since the placing is a judgement.
-export function JudgedChip({ name, word, tip }: { name: string; word?: string | null; tip: string }) {
-  return (
-    <span title={tip} className="inline-flex items-baseline gap-1 rounded-[2px] border border-dashed border-ink-2 px-1.5 py-0.5 text-[12px] leading-tight text-ink">
-      {name}{word ? <span className="font-mono text-[10.5px] text-muted">{word}</span> : null}
-    </span>
-  );
+export function JudgedChip({ name, tip }: { name: string; tip: string }) {
+  return <span title={tip} className="inline-flex rounded-[2px] border border-dashed border-ink-2 px-1.5 py-0.5 text-[12px] leading-tight text-ink">{name}</span>;
 }

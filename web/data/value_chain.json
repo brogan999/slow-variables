@@ -4646,7 +4646,7 @@
       "commoditising": [
        {
         "href": "/layers/adopters#assessment-vc_adopters",
-        "name": "Adopters",
+        "name": "the whole layer",
         "title": "Firms that adopt AI keep its saving only where competition and their pricing let them; so far use is spreading at the pace of past technologies and few report a payoff",
         "unit": "vc_adopters"
        }
@@ -4672,7 +4672,7 @@
       "holding": [
        {
         "href": "/layers/labour_consumers#assessment-vc_labour_consumers",
-        "name": "Labour & consumers",
+        "name": "the whole layer",
         "title": "So far users keep most of AI's value; workers' pay and jobs show no broad break, except for the young in the most exposed jobs, though some labour readings are moving",
         "unit": "vc_labour_consumers"
        }
@@ -4692,7 +4692,7 @@
    ],
    "means": {
     "commoditising": "becoming cheap and interchangeable, so the gain passes to buyers",
-    "holding": "its profit is steady for now",
+    "holding": "profit steady for now",
     "tightening": "getting scarcer, so whoever owns it can charge more"
    },
    "n_companies": 848,
@@ -4703,7 +4703,12 @@
     "commoditising": 10,
     "holding": 12,
     "tightening": 1
-   }
+   },
+   "unfiled": [
+    "Applied Materials",
+    "KLA",
+    "Lam Research"
+   ]
   },
   "powers": {
    "cols": [
@@ -4715,6 +4720,76 @@
     "a cornered resource",
     "process power"
    ],
+   "gloss": [
+    "unit costs fall as volume grows, and a rival cannot match them without matching the volume",
+    "each user makes the product more valuable to the others, so the leader's lead feeds itself",
+    "a newcomer's model the incumbent could copy only by damaging its own business",
+    "a customer would lose money, time or work by moving to a rival",
+    "buyers pay more for the same thing because of what they believe about who made it",
+    "preferential access to something others need: a patent, a licence, a scarce input, a rare team",
+    "a way of working that improves cost or quality and takes a rival years to learn"
+   ],
+   "multi": [
+    {
+     "entity": "samsung",
+     "name": "Samsung Electronics",
+     "parts": [
+      "Memory/HBM",
+      "Semiconductors & AI chip startups"
+     ],
+     "powers": [
+      "scale economies"
+     ]
+    },
+    {
+     "entity": "googl",
+     "name": "Alphabet",
+     "parts": [
+      "Hyperscalers",
+      "Frontier labs"
+     ],
+     "powers": [
+      "scale economies",
+      "process power"
+     ]
+    },
+    {
+     "entity": "meta",
+     "name": "Meta",
+     "parts": [
+      "Consumer AI",
+      "Frontier labs"
+     ],
+     "powers": [
+      "network economies",
+      "scale economies",
+      "counter-positioning"
+     ]
+    },
+    {
+     "entity": "apple",
+     "name": "Apple",
+     "parts": [
+      "Inference serving",
+      "Consumer AI"
+     ],
+     "powers": [
+      "network economies",
+      "switching costs"
+     ]
+    },
+    {
+     "entity": "databricks",
+     "name": "Databricks",
+     "parts": [
+      "Inference serving",
+      "Agent infrastructure"
+     ],
+     "powers": [
+      "switching costs"
+     ]
+    }
+   ],
    "n_profiles": 37,
    "n_units": 23,
    "n_units_naming": 5,
@@ -4724,12 +4799,11 @@
       {
        "companies": [
         "ASML",
-        "Samsung Electronics",
         "NVIDIA",
         "Broadcom",
         "TSMC"
        ],
-       "n": 5,
+       "n": 4,
        "named": true,
        "power": "scale economies"
       },
@@ -4780,9 +4854,11 @@
      ],
      "direction": "holding",
      "href": "/layers/compute_physical#assessment-vc_semis",
+     "label": "Semiconductors & AI chip startups",
      "layer": "compute_physical",
      "layer_name": "Compute & physical",
      "n_profiles": 7,
+     "n_single": 6,
      "name": "Semiconductors & AI chip startups",
      "unit": "vc_semis"
     },
@@ -4791,10 +4867,9 @@
       {
        "companies": [
         "Micron",
-        "SK Hynix",
-        "Samsung Electronics"
+        "SK Hynix"
        ],
-       "n": 3,
+       "n": 2,
        "named": true,
        "power": "scale economies"
       },
@@ -4839,9 +4914,11 @@
      ],
      "direction": "holding",
      "href": "/layers/compute_physical#assessment-vc_memory_networking",
+     "label": "Memory/HBM",
      "layer": "compute_physical",
      "layer_name": "Compute & physical",
      "n_profiles": 3,
+     "n_single": 2,
      "name": "Memory/HBM",
      "unit": "vc_memory_networking"
     },
@@ -4892,9 +4969,11 @@
      ],
      "direction": "tightening",
      "href": "/layers/compute_physical#assessment-vc_dc_power",
+     "label": "Data-centre developers & power",
      "layer": "compute_physical",
      "layer_name": "Compute & physical",
      "n_profiles": 0,
+     "n_single": 0,
      "name": "Data-centre developers & power",
      "unit": "vc_dc_power"
     },
@@ -4903,10 +4982,9 @@
       {
        "companies": [
         "Microsoft",
-        "Amazon",
-        "Alphabet"
+        "Amazon"
        ],
-       "n": 3,
+       "n": 2,
        "named": true,
        "power": "scale economies"
       },
@@ -4944,19 +5022,19 @@
        "power": "a cornered resource"
       },
       {
-       "companies": [
-        "Alphabet"
-       ],
-       "n": 1,
+       "companies": [],
+       "n": 0,
        "named": false,
        "power": "process power"
       }
      ],
      "direction": "holding",
      "href": "/layers/compute_physical#assessment-vc_hyperscalers_neoclouds",
+     "label": "Hyperscalers",
      "layer": "compute_physical",
      "layer_name": "Compute & physical",
      "n_profiles": 7,
+     "n_single": 6,
      "name": "Hyperscalers",
      "unit": "vc_hyperscalers_neoclouds"
     },
@@ -4964,29 +5042,23 @@
      "cells": [
       {
        "companies": [
-        "Alphabet",
         "OpenAI",
         "Anthropic",
-        "xAI",
-        "Meta"
+        "xAI"
        ],
-       "n": 5,
+       "n": 3,
        "named": true,
        "power": "scale economies"
       },
       {
-       "companies": [
-        "Meta"
-       ],
-       "n": 1,
+       "companies": [],
+       "n": 0,
        "named": false,
        "power": "network economies"
       },
       {
-       "companies": [
-        "Meta"
-       ],
-       "n": 1,
+       "companies": [],
+       "n": 0,
        "named": false,
        "power": "counter-positioning"
       },
@@ -5014,19 +5086,19 @@
        "power": "a cornered resource"
       },
       {
-       "companies": [
-        "Alphabet"
-       ],
-       "n": 1,
+       "companies": [],
+       "n": 0,
        "named": false,
        "power": "process power"
       }
      ],
      "direction": "holding",
      "href": "/layers/model#assessment-vc_frontier_labs",
+     "label": "Frontier labs",
      "layer": "model",
      "layer_name": "Model",
      "n_profiles": 5,
+     "n_single": 3,
      "name": "Frontier labs",
      "unit": "vc_frontier_labs"
     },
@@ -5081,9 +5153,11 @@
      ],
      "direction": "commoditising",
      "href": "/layers/model#assessment-vc_neolabs",
+     "label": "Neolabs (founded 2023+)",
      "layer": "model",
      "layer_name": "Model",
      "n_profiles": 3,
+     "n_single": 3,
      "name": "Neolabs (founded 2023+)",
      "unit": "vc_neolabs"
     },
@@ -5134,9 +5208,11 @@
      ],
      "direction": "commoditising",
      "href": "/layers/model#assessment-vc_open_weight_labs",
+     "label": "Open-weight & Chinese labs",
      "layer": "model",
      "layer_name": "Model",
      "n_profiles": 0,
+     "n_single": 0,
      "name": "Open-weight & Chinese labs",
      "unit": "vc_open_weight_labs"
     },
@@ -5195,9 +5271,11 @@
      ],
      "direction": "holding",
      "href": "/layers/training_input#assessment-vc_human_data",
+     "label": "Human/expert data & labelling",
      "layer": "training_input",
      "layer_name": "Training input",
      "n_profiles": 4,
+     "n_single": 4,
      "name": "Human/expert data & labelling",
      "unit": "vc_human_data"
     },
@@ -5248,9 +5326,11 @@
      ],
      "direction": "holding",
      "href": "/layers/training_input#assessment-vc_rl_environments",
+     "label": "RL environments",
      "layer": "training_input",
      "layer_name": "Training input",
      "n_profiles": 0,
+     "n_single": 0,
      "name": "RL environments",
      "unit": "vc_rl_environments"
     },
@@ -5301,9 +5381,11 @@
      ],
      "direction": "commoditising",
      "href": "/layers/training_input#assessment-vc_post_training",
+     "label": "RLaaS / post-training / continual-learning infra",
      "layer": "training_input",
      "layer_name": "Training input",
      "n_profiles": 0,
+     "n_single": 0,
      "name": "RLaaS / post-training / continual-learning infra",
      "unit": "vc_post_training"
     },
@@ -5354,9 +5436,11 @@
      ],
      "direction": "commoditising",
      "href": "/layers/training_input#assessment-vc_synthetic_data",
+     "label": "Synthetic data & pipelines",
      "layer": "training_input",
      "layer_name": "Training input",
      "n_profiles": 0,
+     "n_single": 0,
      "name": "Synthetic data & pipelines",
      "unit": "vc_synthetic_data"
     },
@@ -5407,9 +5491,11 @@
      ],
      "direction": "holding",
      "href": "/layers/training_input#assessment-vc_data_licensing",
+     "label": "Permissioned data markets & licensing",
      "layer": "training_input",
      "layer_name": "Training input",
      "n_profiles": 0,
+     "n_single": 0,
      "name": "Permissioned data markets & licensing",
      "unit": "vc_data_licensing"
     },
@@ -5460,9 +5546,11 @@
      ],
      "direction": "commoditising",
      "href": "/layers/training_input#assessment-vc_evals",
+     "label": "Evals",
      "layer": "training_input",
      "layer_name": "Training input",
      "n_profiles": 0,
+     "n_single": 0,
      "name": "Evals",
      "unit": "vc_evals"
     },
@@ -5475,10 +5563,8 @@
        "power": "scale economies"
       },
       {
-       "companies": [
-        "Apple"
-       ],
-       "n": 1,
+       "companies": [],
+       "n": 0,
        "named": false,
        "power": "network economies"
       },
@@ -5491,11 +5577,9 @@
       {
        "companies": [
         "Baseten",
-        "Fireworks",
-        "Apple",
-        "Databricks"
+        "Fireworks"
        ],
-       "n": 4,
+       "n": 2,
        "named": false,
        "power": "switching costs"
       },
@@ -5520,9 +5604,11 @@
      ],
      "direction": "commoditising",
      "href": "/layers/serving_orchestration#assessment-vc_inference_serving",
+     "label": "Inference serving",
      "layer": "serving_orchestration",
      "layer_name": "Serving & orchestration",
      "n_profiles": 4,
+     "n_single": 2,
      "name": "Inference serving",
      "unit": "vc_inference_serving"
     },
@@ -5573,9 +5659,11 @@
      ],
      "direction": "commoditising",
      "href": "/layers/serving_orchestration#assessment-vc_routing_gateways",
+     "label": "Routing",
      "layer": "serving_orchestration",
      "layer_name": "Serving & orchestration",
      "n_profiles": 0,
+     "n_single": 0,
      "name": "Routing",
      "unit": "vc_routing_gateways"
     },
@@ -5600,10 +5688,8 @@
        "power": "counter-positioning"
       },
       {
-       "companies": [
-        "Databricks"
-       ],
-       "n": 1,
+       "companies": [],
+       "n": 0,
        "named": false,
        "power": "switching costs"
       },
@@ -5628,9 +5714,11 @@
      ],
      "direction": "commoditising",
      "href": "/layers/serving_orchestration#assessment-vc_agent_infra",
+     "label": "Agent infrastructure",
      "layer": "serving_orchestration",
      "layer_name": "Serving & orchestration",
      "n_profiles": 1,
+     "n_single": 0,
      "name": "Agent infrastructure",
      "unit": "vc_agent_infra"
     },
@@ -5683,9 +5771,11 @@
      ],
      "direction": "holding",
      "href": "/layers/deployment_application#assessment-vc_deployment_services",
+     "label": "Deployment / FDE / implementation services",
      "layer": "deployment_application",
      "layer_name": "Deployment & application",
      "n_profiles": 1,
+     "n_single": 1,
      "name": "Deployment / FDE / implementation services",
      "unit": "vc_deployment_services"
     },
@@ -5740,9 +5830,11 @@
      ],
      "direction": "commoditising",
      "href": "/layers/deployment_application#assessment-vc_coding_agents",
+     "label": "Coding agents & dev tools",
      "layer": "deployment_application",
      "layer_name": "Deployment & application",
      "n_profiles": 3,
+     "n_single": 3,
      "name": "Coding agents & dev tools",
      "unit": "vc_coding_agents"
     },
@@ -5797,44 +5889,37 @@
      ],
      "direction": "holding",
      "href": "/layers/deployment_application#assessment-vc_vertical_ai",
+     "label": "Vertical AI by domain",
      "layer": "deployment_application",
      "layer_name": "Deployment & application",
      "n_profiles": 2,
+     "n_single": 2,
      "name": "Vertical AI by domain",
      "unit": "vc_vertical_ai"
     },
     {
      "cells": [
       {
-       "companies": [
-        "Meta"
-       ],
-       "n": 1,
+       "companies": [],
+       "n": 0,
        "named": false,
        "power": "scale economies"
       },
       {
-       "companies": [
-        "Meta",
-        "Apple"
-       ],
-       "n": 2,
+       "companies": [],
+       "n": 0,
        "named": false,
        "power": "network economies"
       },
       {
-       "companies": [
-        "Meta"
-       ],
-       "n": 1,
+       "companies": [],
+       "n": 0,
        "named": false,
        "power": "counter-positioning"
       },
       {
-       "companies": [
-        "Apple"
-       ],
-       "n": 1,
+       "companies": [],
+       "n": 0,
        "named": false,
        "power": "switching costs"
       },
@@ -5859,9 +5944,11 @@
      ],
      "direction": "holding",
      "href": "/layers/deployment_application#assessment-vc_consumer_ai",
+     "label": "Consumer AI",
      "layer": "deployment_application",
      "layer_name": "Deployment & application",
      "n_profiles": 2,
+     "n_single": 0,
      "name": "Consumer AI",
      "unit": "vc_consumer_ai"
     },
@@ -5912,9 +5999,11 @@
      ],
      "direction": "holding",
      "href": "/layers/deployment_application#assessment-vc_ai_rollups",
+     "label": "AI-native rollups / buyout vehicles",
      "layer": "deployment_application",
      "layer_name": "Deployment & application",
      "n_profiles": 0,
+     "n_single": 0,
      "name": "AI-native rollups / buyout vehicles",
      "unit": "vc_ai_rollups"
     },
@@ -5965,9 +6054,11 @@
      ],
      "direction": "commoditising",
      "href": "/layers/adopters#assessment-vc_adopters",
+     "label": "the whole layer",
      "layer": "adopters",
      "layer_name": "Adopters",
      "n_profiles": 0,
+     "n_single": 0,
      "name": "Adopters",
      "unit": "vc_adopters"
     },
@@ -6018,9 +6109,11 @@
      ],
      "direction": "holding",
      "href": "/layers/labour_consumers#assessment-vc_labour_consumers",
+     "label": "the whole layer",
      "layer": "labour_consumers",
      "layer_name": "Labour & consumers",
      "n_profiles": 0,
+     "n_single": 0,
      "name": "Labour & consumers",
      "unit": "vc_labour_consumers"
     }
@@ -6033,56 +6126,56 @@
      "companies": [
       {
        "entity": "asml",
-       "kept_by": null,
+       "goes_to": null,
        "name": "ASML",
        "reads": "a monopoly-like profit, kept by the company itself",
        "tier": "monopoly-like"
       },
       {
        "entity": "nvda",
-       "kept_by": null,
+       "goes_to": null,
        "name": "NVIDIA",
        "reads": "a moderate profit, kept by the company itself",
        "tier": "moderate"
       },
       {
        "entity": "broadcom",
-       "kept_by": null,
+       "goes_to": null,
        "name": "Broadcom",
        "reads": "a fat profit, kept by the company itself",
        "tier": "fat"
       },
       {
        "entity": "amd",
-       "kept_by": null,
+       "goes_to": null,
        "name": "AMD",
        "reads": "a thin profit, kept by the company itself",
        "tier": "thin"
       },
       {
        "entity": "tsmc",
-       "kept_by": null,
+       "goes_to": null,
        "name": "TSMC",
        "reads": "a monopoly-like profit, kept by the company itself",
        "tier": "monopoly-like"
       },
       {
        "entity": "msft",
-       "kept_by": null,
+       "goes_to": null,
        "name": "Microsoft",
        "reads": "a fat profit, kept by the company itself",
        "tier": "fat"
       },
       {
        "entity": "amzn",
-       "kept_by": null,
+       "goes_to": null,
        "name": "Amazon",
        "reads": "a fat profit, kept by the company itself",
        "tier": "fat"
       },
       {
        "entity": "googl",
-       "kept_by": null,
+       "goes_to": null,
        "name": "Alphabet",
        "reads": "a monopoly-like profit, kept by the company itself",
        "tier": "monopoly-like"
@@ -6097,42 +6190,42 @@
      "companies": [
       {
        "entity": "xai",
-       "kept_by": null,
+       "goes_to": null,
        "name": "xAI",
        "reads": "a thin profit, kept by the company itself",
        "tier": "thin"
       },
       {
        "entity": "meta",
-       "kept_by": null,
+       "goes_to": null,
        "name": "Meta",
        "reads": "a fat profit, kept by the company itself",
        "tier": "fat"
       },
       {
        "entity": "palantir",
-       "kept_by": null,
+       "goes_to": null,
        "name": "Palantir",
        "reads": "a thin profit, kept by the company itself",
        "tier": "thin"
       },
       {
        "entity": "anysphere",
-       "kept_by": null,
+       "goes_to": null,
        "name": "Anysphere",
        "reads": "a thin profit, kept by the company itself",
        "tier": "thin"
       },
       {
        "entity": "apple",
-       "kept_by": null,
+       "goes_to": null,
        "name": "Apple",
        "reads": "a thin profit, kept by the company itself",
        "tier": "thin"
       },
       {
        "entity": "databricks",
-       "kept_by": null,
+       "goes_to": null,
        "name": "Databricks",
        "reads": "a thin profit, kept by the company itself",
        "tier": "thin"
@@ -6147,97 +6240,97 @@
      "companies": [
       {
        "entity": "micron",
-       "kept_by": "incumbent firms",
+       "goes_to": "established firms that already own it; the company named can be one of them",
        "name": "Micron",
-       "reads": "a thin profit, kept by incumbent firms",
+       "reads": "a thin profit, judged to go to established firms that already own it; the company named can be one of them",
        "tier": "thin"
       },
       {
        "entity": "sk_hynix",
-       "kept_by": "incumbent firms",
+       "goes_to": "established firms that already own it; the company named can be one of them",
        "name": "SK Hynix",
-       "reads": "a thin profit, kept by incumbent firms",
+       "reads": "a thin profit, judged to go to established firms that already own it; the company named can be one of them",
        "tier": "thin"
       },
       {
        "entity": "samsung",
-       "kept_by": "incumbent firms",
+       "goes_to": "established firms that already own it; the company named can be one of them",
        "name": "Samsung Electronics",
-       "reads": "a thin profit, kept by incumbent firms",
+       "reads": "a thin profit, judged to go to established firms that already own it; the company named can be one of them",
        "tier": "thin"
       },
       {
        "entity": "openai",
-       "kept_by": "platforms",
+       "goes_to": "the platforms that own what its customers need",
        "name": "OpenAI",
-       "reads": "a thin profit, kept by platforms",
+       "reads": "a thin profit, judged to go to the platforms that own what its customers need",
        "tier": "thin"
       },
       {
        "entity": "anthropic",
-       "kept_by": "platforms",
+       "goes_to": "the platforms that own what its customers need",
        "name": "Anthropic",
-       "reads": "a thin profit, kept by platforms",
+       "reads": "a thin profit, judged to go to the platforms that own what its customers need",
        "tier": "thin"
       },
       {
        "entity": "periodic_labs",
-       "kept_by": "incumbent firms",
+       "goes_to": "established firms that already own it; the company named can be one of them",
        "name": "Periodic Labs",
-       "reads": "a thin profit, kept by incumbent firms",
+       "reads": "a thin profit, judged to go to established firms that already own it; the company named can be one of them",
        "tier": "thin"
       },
       {
        "entity": "elevenlabs",
-       "kept_by": "platforms",
+       "goes_to": "the platforms that own what its customers need",
        "name": "ElevenLabs",
-       "reads": "a thin profit, kept by platforms",
+       "reads": "a thin profit, judged to go to the platforms that own what its customers need",
        "tier": "thin"
       },
       {
        "entity": "etched",
-       "kept_by": "incumbent firms",
+       "goes_to": "established firms that already own it; the company named can be one of them",
        "name": "Etched",
-       "reads": "a thin profit, kept by incumbent firms",
+       "reads": "a thin profit, judged to go to established firms that already own it; the company named can be one of them",
        "tier": "thin"
       },
       {
        "entity": "cognition",
-       "kept_by": "platforms",
+       "goes_to": "the platforms that own what its customers need",
        "name": "Cognition",
-       "reads": "a thin profit, kept by platforms",
+       "reads": "a thin profit, judged to go to the platforms that own what its customers need",
        "tier": "thin"
       },
       {
        "entity": "lovable",
-       "kept_by": "platforms",
+       "goes_to": "the platforms that own what its customers need",
        "name": "Lovable",
-       "reads": "a thin profit, kept by platforms",
+       "reads": "a thin profit, judged to go to the platforms that own what its customers need",
        "tier": "thin"
       },
       {
        "entity": "harvey",
-       "kept_by": "incumbent firms",
+       "goes_to": "established firms that already own it; the company named can be one of them",
        "name": "Harvey",
-       "reads": "a thin profit, kept by incumbent firms",
+       "reads": "a thin profit, judged to go to established firms that already own it; the company named can be one of them",
        "tier": "thin"
       },
       {
        "entity": "openevidence",
-       "kept_by": "incumbent firms",
+       "goes_to": "established firms that already own it; the company named can be one of them",
        "name": "OpenEvidence",
-       "reads": "a thin profit, kept by incumbent firms",
+       "reads": "a thin profit, judged to go to established firms that already own it; the company named can be one of them",
        "tier": "thin"
       },
       {
        "entity": "chai_discovery",
-       "kept_by": "incumbent firms",
+       "goes_to": "established firms that already own it; the company named can be one of them",
        "name": "Chai Discovery",
-       "reads": "a thin profit, kept by incumbent firms",
+       "reads": "a thin profit, judged to go to established firms that already own it; the company named can be one of them",
        "tier": "thin"
       }
      ],
-     "keeps": "The owner of the scarce thing keeps the profit",
+     "keeps": "Whoever owns the scarce thing keeps the profit, which can be the company itself among others",
      "n": 13,
      "question": "If it does not: does somebody else own that scarce thing?",
      "why": "When copying is easy, whoever owns what customers need to use the product collects instead of its maker."
@@ -6246,70 +6339,70 @@
      "companies": [
       {
        "entity": "orcl",
-       "kept_by": null,
+       "goes_to": null,
        "name": "Oracle",
        "reads": "competed away to users",
        "tier": "none"
       },
       {
        "entity": "crwv",
-       "kept_by": null,
+       "goes_to": null,
        "name": "CoreWeave",
        "reads": "competed away to users",
        "tier": "none"
       },
       {
        "entity": "nbis",
-       "kept_by": null,
+       "goes_to": null,
        "name": "Nebius",
        "reads": "competed away to users",
        "tier": "none"
       },
       {
        "entity": "fluidstack",
-       "kept_by": null,
+       "goes_to": null,
        "name": "Fluidstack",
        "reads": "competed away to users",
        "tier": "none"
       },
       {
        "entity": "scale_ai",
-       "kept_by": null,
+       "goes_to": null,
        "name": "Scale AI",
        "reads": "competed away to users",
        "tier": "none"
       },
       {
        "entity": "mercor",
-       "kept_by": null,
+       "goes_to": null,
        "name": "Mercor",
        "reads": "competed away to users",
        "tier": "none"
       },
       {
        "entity": "handshake_ai",
-       "kept_by": null,
+       "goes_to": null,
        "name": "Handshake AI",
        "reads": "competed away to users",
        "tier": "none"
       },
       {
        "entity": "surge_ai",
-       "kept_by": null,
+       "goes_to": null,
        "name": "Surge AI",
        "reads": "competed away to users",
        "tier": "none"
       },
       {
        "entity": "baseten",
-       "kept_by": null,
+       "goes_to": null,
        "name": "Baseten",
        "reads": "competed away to users",
        "tier": "none"
       },
       {
        "entity": "fireworks",
-       "kept_by": null,
+       "goes_to": null,
        "name": "Fireworks",
        "reads": "competed away to users",
        "tier": "none"

@@ -279,6 +279,10 @@ def test_the_judgement_figures_say_the_model_that_drafted_them_is_anthropic_s():
         body = _body(src, fn)
         foot = body[body.index("foot=") : body.index("tableLabel=")]
         assert "Claude, a model made by Anthropic" in foot, fn
+    # the profit rule's foot says one named person reviewed every profile; hold it to the records
+    assert "Alex Brogan reviewed every profile" in _body(src, "RentRule")
+    assert {c.get("reviewed_by") for c in vc.load()["companies"]} == {"Alex Brogan"}
+    assert all(c.get("judged_by", "").startswith("claude") for c in vc.load()["companies"])
 
 
 def test_the_profit_rule_prints_no_size_word_beside_a_company_and_says_its_placings_are_judgement():
@@ -299,7 +303,8 @@ def test_the_feet_say_what_the_counts_and_marks_do_not_show():
     assert "slightly fewer than the placements" in bars and "which holds the remaining parts" in bars
     assert 'independent: "no sale or closure recorded"' in PARTS.read_text()
     assert "nothing here says its entry is wrong" in _body(src, "VerifiedBars")
-    assert "RL is reinforcement learning" in _body(src, "ChainFigure") and "RL is reinforcement learning" in _body(src, "PowerGrid")
+    assert "RL is reinforcement learning" in re.search(r'const SHORT_NAMES = "([^"]+)"', src).group(1)  # the jargon, glossed
+    assert "{SHORT_NAMES}" in _body(src, "ChainFigure") and "{SHORT_NAMES}" in _body(src, "PowerGrid")
 
 
 def test_the_export_s_figures_are_the_builder_s_and_the_committed_file_has_their_shape():

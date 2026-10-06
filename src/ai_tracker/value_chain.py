@@ -197,7 +197,7 @@ def _reads(p: str, t: str, tiers: dict[str, str], pools_words: dict[str, str]) -
 # What each direction means, in the page's own words: the label every drawn direction carries.
 DIRECTION_MEANS = {
     "tightening": "getting scarcer, so whoever owns it can charge more",
-    "holding": "its profit is steady for now",
+    "holding": "profit steady for now",
     "commoditising": "becoming cheap and interchangeable, so the gain passes to buyers",
 }
 # The rent rule's steps as questions, one for each rule in seed/futures/rubric.yaml's `pools`, in its order (first match
@@ -211,23 +211,32 @@ RENT_STEPS = [
      "keeps": "The company itself keeps the profit"},
     {"question": "If it does not: does somebody else own that scarce thing?",
      "why": "When copying is easy, whoever owns what customers need to use the product collects instead of its maker.",
-     "keeps": "The owner of the scarce thing keeps the profit"},
+     "keeps": "Whoever owns the scarce thing keeps the profit, which can be the company itself among others"},
     {"question": "Otherwise: it is easy to copy and needs nothing scarce to reach customers.",
      "why": "Rivals enter and cut prices until nothing above the cost of staying in business is left.",
      "keeps": "Competition passes the gain to buyers"},
 ]
+# Who the rule sends the profit to, worded for the figure alone: the shared POOLS_WORDS read "kept by incumbent firms"
+# beside a company that is itself one of those firms.
+RENT_GOES_TO = {
+    "incumbents": "established firms that already own it; the company named can be one of them",
+    "platforms": "the platforms that own what its customers need",
+    "regulators_licensees": "licence holders",
+}
 
 
 def figures(doc: dict[str, Any], layers: list[Any], sublayers: list[Any], primary: dict[str, str | None],
             rubric: dict[str, Any], short: dict[str, str] | None = None) -> dict[str, Any]:
     """The page's figures (Part 45g), laid out here so the web places and never counts. `primary` is every company on
     the market map with the sub-layer the tracker files it under. The chain: companies by layer beside each unit's
-    judged direction. The grid: units against the powers they and their profiled companies name. The rent rule: which
-    of its steps each profiled company stops at. Nothing in `doc` is changed."""
+    judged direction. The grid: units against the powers they name and the powers held by companies profiled in that
+    unit alone (a company profiled in several is listed apart, so its power never lands in a part it was not judged
+    for). The rent rule: which of its steps each profiled company stops at. Nothing in `doc` is changed."""
     from .futures import POOLS_WORDS, TIER_WORDS
 
     # the name readers know (NVIDIA, not NVIDIA Corp) where the caller has one
-    known = {c["entity"]: (short or {}).get(c["entity"], c["name"]) for c in doc["companies"]}
+    short = short or {}
+    known = {c["entity"]: short.get(c["entity"], c["name"]) for c in doc["companies"]}
     per_sub: dict[str | None, int] = {}
     for sub in primary.values():
         per_sub[sub] = per_sub.get(sub, 0) + 1
@@ -243,7 +252,7 @@ def figures(doc: dict[str, Any], layers: list[Any], sublayers: list[Any], primar
         parts = [{"id": s.id, "name": s.name, "n": per_sub.get(s.id, 0),
                   "unit": (judged.get(s.id) or {}).get("id"), "direction": (judged.get(s.id) or {}).get("direction")}
                  for s in subs if s.layer_id == x.id]
-        marks = {d: [{"unit": u["id"], "name": name[u["sublayer"] or x.id], "title": u["title"],
+        marks = {d: [{"unit": u["id"], "name": name[u["sublayer"]] if u["sublayer"] else "the whole layer", "title": u["title"],
                       "href": f"/layers/{x.id}#assessment-{u['id']}"} for u in mine if u["direction"] == d] for d in DIRECTIONS}
         chain_layers.append({
             "id": x.id, "name": x.name, "n": count[x.id], "h": round(100 * count[x.id] / top, 1), "parts": parts,
@@ -252,6 +261,7 @@ def figures(doc: dict[str, Any], layers: list[Any], sublayers: list[Any], primar
         })
     chain = {
         "layers": chain_layers, "n_companies": len(primary), "n_unfiled": per_sub.get(None, 0),
+        "unfiled": [short.get(i, i) for i, sub in primary.items() if sub is None],
         "n_unjudged_companies": sum(p["n"] for x in chain_layers for p in x["unjudged"]),
         "n_unjudged_parts": sum(len(x["unjudged"]) for x in chain_layers),
         "tally": {d: sum(x["tally"][d] for x in chain_layers) for d in DIRECTIONS},
@@ -262,21 +272,27 @@ def figures(doc: dict[str, Any], layers: list[Any], sublayers: list[Any], primar
     for u in doc["units"]:
         cells = []
         for p in cols:
-            held = [known[c["entity"]] for c in doc["companies"] if u["id"] in c["units"] and p in [x["power"] for x in c["powers"]]]
+            held = [known[c["entity"]] for c in doc["companies"] if c["units"] == [u["id"]] and p in [x["power"] for x in c["powers"]]]
             cells.append({"power": p, "named": p in u["powers"], "companies": held, "n": len(held)})
         rows.append({"unit": u["id"], "layer": u["layer"], "layer_name": name[u["layer"]], "name": name[u["sublayer"] or u["layer"]],
                      "direction": u["direction"], "href": f"/layers/{u['layer']}#assessment-{u['id']}", "cells": cells,
-                     "n_profiles": sum(1 for c in doc["companies"] if u["id"] in c["units"])})
-    powers = {"cols": cols, "rows": rows, "n_units": len(rows), "n_units_naming": sum(1 for u in doc["units"] if u["powers"]),
+                     "label": name[u["sublayer"]] if u["sublayer"] else "the whole layer",
+                     "n_profiles": sum(1 for c in doc["companies"] if u["id"] in c["units"]),
+                     "n_single": sum(1 for c in doc["companies"] if c["units"] == [u["id"]])})
+    part = {r["unit"]: r["name"] for r in rows}
+    multi = [{"entity": c["entity"], "name": known[c["entity"]], "parts": [part[u] for u in c["units"]],
+              "powers": [x["power"] for x in c["powers"]]} for c in doc["companies"] if len(c["units"]) > 1]
+    powers = {"cols": cols, "gloss": [POWER_GLOSS[p] for p in cols], "multi": multi, "rows": rows, "n_units": len(rows), "n_units_naming": sum(1 for u in doc["units"] if u["powers"]),
               "n_profiles": len(doc["companies"])}
     rules = rubric["pools"]["rules"]
     steps = [{**RENT_STEPS[i], "companies": []} for i in range(len(rules))]
     for c in doc["companies"]:
         a = c["rent"]
         i = next(i for i, r in enumerate(rules) if all(a.get(k) == v for k, v in r["when"].items()))
+        to = RENT_GOES_TO.get(a["pools"])
         steps[i]["companies"].append({
-            "entity": c["entity"], "name": known[c["entity"]], "reads": a["reads"], "tier": TIER_WORDS[a["tier"]],
-            "kept_by": None if a["pools"] in ("users", "innovator") else POOLS_WORDS[a["pools"]],
+            "entity": c["entity"], "name": known[c["entity"]], "tier": TIER_WORDS[a["tier"]], "goes_to": to,
+            "reads": a["reads"].replace(f"kept by {POOLS_WORDS[a['pools']]}", f"judged to go to {to}") if to else a["reads"],
         })
     for s in steps:
         s["n"] = len(s["companies"])

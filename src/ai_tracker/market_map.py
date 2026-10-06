@@ -211,7 +211,8 @@ def figures(layers: list[dict[str, Any]]) -> dict[str, Any]:
                 segs.append({"state": k, "n": n, "x": x, "w": round(end - x, 1)})
                 x = end
             rows.append({"id": c["id"], "number": c["number"], "name": c["name"], "n": c["n_entities"], "w": x,
-                         "out_of_scope": bool(c["out_of_scope"]), "segs": segs})
+                         "out_of_scope": bool(c["out_of_scope"]), "segs": segs,
+                         "leaves": [{"name": p["name"], "n": p["n"]} for p in c["leaves"]]})
         cat_layers.append({"id": L["id"], "number": L["number"], "name": L["name"], "rows": rows})
         seen = {e["id"]: e["verified"] for c in L["categories"] for e in c["entities"]}
         everyone.update(seen)
