@@ -55,10 +55,22 @@ def test_the_screen_counts_payroll_by_the_reason_the_bundle_gives_each_task():
     failing = voted - s["passes"]
     assert all(0 < q["usd"] <= failing + 1 for q in qs.values())
     assert sum(q["usd"] for q in qs.values()) >= failing - 1  # every task that fails names at least one question
-    assert qs["check"]["usd"] == max(q["usd"] for q in qs.values())  # the figure's title says so
+    # the figure's title: for most work that fails, the reason given most often is the missing check
+    assert 'title="For most work that fails the screen, the reason given most often is that no existing check settles it"' in FIGURES
+    assert qs["check"]["usd"] == max(q["usd"] for q in qs.values())
+    assert qs["check"]["usd"] > 0.5 * s["payroll"] and qs["check"]["usd"] > 0.5 * failing
     for m in [*gates.values(), *qs.values(), s["voted"]]:
         assert 0 < m["w"] <= 100 and abs(m["w"] - 100 * m["share"]) < 1e-9
     assert 0 < s["agreed3_x"] < s["passes_w"] <= 100
+
+
+def test_the_screen_s_middle_bars_are_named_as_the_reason_given_most_often_on_a_stated_base():
+    # the bundle writes only the question(s) most often failed among the models voting no, so a bar is not "fails that question"
+    assert "fails that question" not in FIGURES and "Fails:" not in FIGURES and "fails each" not in FIGURES
+    for words in ("the reason the models that voted no gave most often", "Payroll that fails, by the reason given most often", "Most often given: {QUESTION[q.id]}",
+                  "the reason given most often for the payroll that fails, as a share of all knowledge payroll", "so each bar is a floor for that question"):
+        assert words in FIGURES, words
+    assert "most often failed among the scorers voting no" in (census.reason.__doc__ or "")
 
 
 def test_a_reason_the_site_has_not_read_is_an_error_not_a_silent_rest():
@@ -80,6 +92,18 @@ def test_the_dial_is_drawn_on_one_dollar_axis_with_the_rule_used_marked():
     assert ws == sorted(ws)  # each step looser passes more
 
 
+def test_the_dial_s_title_holds_the_biggest_jump_is_letting_a_person_s_judgement_count():
+    assert 'title="Each looser step passes more payroll, and the biggest jump comes from letting a person&apos;s judgement count as the check"' in FIGURES
+    val = json.loads((BUNDLE / "validation.json").read_text())["dial"]
+    used = next(x for x in val if x["headline"])
+    person = next(i for i, x in enumerate(val) if x["g"] < used["g"])  # the first step that loosens who may check
+    passes = [x["freed"] for x in val]
+    assert passes == sorted(passes) and len(set(passes)) == len(passes)
+    steps = range(1, len(val))
+    assert max(steps, key=lambda i: passes[i] - passes[i - 1]) == person
+    assert max(steps, key=lambda i: passes[i] / passes[i - 1]) == person
+
+
 def test_the_function_bars_sum_to_the_headline_and_match_the_function_table():
     rows = FIG["functions"]
     table = {f["function"]: f for f in INDEX["functions"]}
@@ -95,6 +119,12 @@ def test_the_function_bars_sum_to_the_headline_and_match_the_function_table():
         assert 0 <= r["agreed3_x"] <= r["bar"][0]["w"] and r["ref"] == f["ref"]
     shares = [r["share_passes"] for r in rows]
     assert shares == sorted(shares, reverse=True)
+
+
+def test_the_functions_title_holds_in_most_functions_more_waits_on_a_check_than_passes():
+    assert 'title="In most functions, more work waits on a check than passes"' in FIGURES
+    rows = FIG["functions"]
+    assert sum(r["waits_on_check"] > r["passes"] for r in rows) > len(rows) / 2
 
 
 def test_each_model_alone_is_drawn_by_function_and_sums_to_its_own_headline():
@@ -114,14 +144,30 @@ def test_each_model_alone_is_drawn_by_function_and_sums_to_its_own_headline():
         assert (r["lo_x"], r["hi_x"]) == (min(xs), max(xs))
 
 
-def test_the_industry_bars_are_the_table_s_first_rows_on_one_dollar_axis():
-    f = FIG["industries"]
-    _ticks(f["ticks"])
-    top = INDEX["industries"][: len(f["rows"])]
-    assert len(f["rows"]) == 15 and [r["naics"] for r in f["rows"]] == [i["naics"] for i in top]
-    for r, i in zip(f["rows"], top):
-        assert (r["passes"], r["agreed3"], r["share_total"], r["ref"]) == (i["passes"], i["agreed3"], i["share_total"], i["ref"])
-        assert 0 <= r["agreed3_x"] <= r["w"] <= 100
+def test_the_scorers_title_holds_most_functions_are_far_apart_and_one_model_is_usually_highest():
+    assert 'title="In most functions the three models are far apart, and the same model is usually the highest"' in FIGURES
+    rows = FIG["scorers"]["rows"][1:]
+    shares = [{k: r["by_scorer"][k]["share"] for k in INDEX["scorers"]} for r in rows]
+    assert sum(max(s.values()) > 2 * min(s.values()) for s in shares) > len(rows) / 2  # far apart: the highest more than double the lowest
+    tops = [max(s, key=s.get) for s in shares if max(s.values()) > 0]
+    assert max(tops.count(k) for k in INDEX["scorers"]) > len(rows) / 2
+    assert "Where nothing passes, the marks sit together at zero." in FIGURES
+
+
+def test_rows_whose_marks_would_stack_print_the_rule_and_all_three_in_type():
+    rows = FIG["scorers"]["rows"]
+    assert not rows[0]["tight"]  # the whole payroll keeps every mark
+    for r in rows:
+        assert r["tight"] == (r["hi_x"] - r["agreed3_x"] < census.TIGHT)
+        assert (r["hi_x"] < r["note_x"] <= 60) if r["tight"] else r["note_x"] is None  # room left for the type on a phone
+        if r["passes"] == 0:
+            assert r["tight"]
+    assert any(r["tight"] for r in rows) and "r.tight" in FIGURES
+
+
+def test_the_industries_are_a_table_not_a_second_figure_ranked_by_size():
+    assert "industries" not in FIG and "IndustriesFigure" not in FIGURES + PAGE
+    assert "<Rows head={industryHead} rows={c.industries.slice(" in PAGE and "Every other industry" in PAGE
 
 
 def test_the_cut_by_kind_of_job_is_the_one_the_firm_page_draws():
@@ -139,19 +185,75 @@ def test_the_rollup_plot_places_every_industry_inside_the_plot_and_draws_the_cut
     assert all(0 <= pt["x"] <= 100 and 0 <= pt["y"] <= 100 for pt in [*p["points"], *p["cut"]])
     assert p["points"][0]["y"] < p["points"][3]["y"] and p["points"][2]["x"] > p["points"][4]["x"]  # up is more passing, right is more small firms
     assert len(p["cut"]) > 10 and p["cut_points"] == " ".join(f"{c['x']},{c['y']}" for c in p["cut"])
-    assert [pt.get("label") in ("r", "l", "t", "b") for pt in p["points"]] == [True, True, True, False, False]  # a side for each rank
+    assert [pt.get("label") in census.LABEL_SIDES for pt in p["points"]] == [True, True, True, False, False]  # a side for each rank
     xs = [c["x"] for c in p["cut"]]
     assert xs == sorted(xs)
     assert p["x"]["ticks"] and p["y"]["ticks"] and p["y"]["chars"] >= 2
     assert census.rollup_plot([]) == {}
 
 
+def test_rank_labels_in_a_crowd_take_a_further_place_before_they_cover_a_dot_or_each_other():
+    # five listed industries in a knot (as ranks fifteen to nineteen sit on the real plot) and a pair side by side
+    spots = [(0.60, 0.050), (0.61, 0.048), (0.62, 0.052), (0.63, 0.047), (0.615, 0.054), (0.30, 0.10), (0.33, 0.10), (0.95, 0.15), (0.05, 0.01)]
+    ranked = [
+        {"naics": f"5{i:03d}00", "title": f"Industry {i}", "ref": f"r{i}", "rank": i + 1, "share_total": s, "passes": 1e9, "score": s * f,
+         "small_share": {"value": f, "derived_id": "d", "obs_ids": ["o"]}, "firms_20_99": {"value": 500.0, "obs_ids": ["f"]}}
+        for i, (f, s) in enumerate(spots)
+    ]  # fmt: skip
+    pts = census.rollup_plot(ranked, shown=len(spots))["points"]
+    boxes = [census.label_box(p) for p in pts]
+    dots = [census.dot_box(p) for p in pts]
+    hit = lambda a, b: a[0] < b[0] + b[2] and b[0] < a[0] + a[2] and a[1] < b[1] + b[3] and b[1] < a[1] + a[3]  # noqa: E731
+    for i, a in enumerate(boxes):
+        assert 0 <= a[0] and a[0] + a[2] <= 100 and 0 <= a[1], pts[i]  # inside the plot
+        assert not any(hit(a, b) for b in boxes[i + 1 :]), pts[i]
+        assert not any(hit(a, d) for j, d in enumerate(dots) if j != i), pts[i]
+    assert {p["label"] for p in pts} - {"r", "l", "t", "b"}  # the knot needed more than the four nearest places
+    assert all(f"{k}:" in FIGURES or f'"{k}":' in FIGURES for k in census.LABEL_SIDES)  # the page knows how to draw each place
+
+
 SRC = ROOT / "web" / "src"
-FOOT = "a screen scored by three AI models, not a record of what has been automated and not a forecast"
+FIGURES = (SRC / "components" / "CensusFigures.tsx").read_text()
+PAGE = (SRC / "app" / "census" / "page.tsx").read_text()
+FOOT = "a screen scored by three AI models, not a claim about what AI can do and not a forecast"
+
+
+def test_the_strip_leads_and_its_last_part_says_what_it_holds():
+    assert PAGE.index("<WholeFigure") < PAGE.index("<ScreenFigure")  # the two-second figure before the fifteen-second one
+    assert "work whose most-given reason is a missing check but on which the models split over whether anything else holds it" in FIGURES
+
+
+def test_the_page_prints_the_payroll_left_out_beside_the_part_the_vote_would_have_passed():
+    # the manifest's "removed" figures count only verdicts the filter changed; the payroll flagged is several times larger
+    assert "Removed as" not in PAGE and "was removed before the vote" not in PAGE and "Waiting on a check" not in PAGE
+    for words in ("c.figures.screen.gates.map(", '"Left out as physical work", usd(gate.physical)', '"Left out as an accountable sign-off, and not physical", usd(gate.accountable)',
+                  '"Of that, payroll the vote would otherwise have passed", usd(h.physical_removed)', '"Of that, payroll the vote would otherwise have passed", usd(h.accountable_removed)',
+                  "is left out whatever the vote says: {usd(gate.physical)} of payroll", "the filter changed the verdict on {usd(m.physical_gate.removed_usd)}",
+                  "tasks drawn from that part found", "Waits only on a check: at least two of the three models find it quick to judge and cheap to get wrong, with no existing check"):
+        assert words in PAGE, words
+    gates = {g["id"]: g["usd"] for g in FIG["screen"]["gates"]}
+    assert gates["physical"] > INDEX["headline"]["physical_removed"] > 0 and gates["accountable"] > INDEX["headline"]["accountable_removed"] > 0
+    assert "margin&apos;s smaller figures" not in FIGURES  # the foot no longer has to explain the margin
+
+
+def test_waiting_only_on_a_check_is_said_as_the_census_counts_it():
+    lede = " ".join(SPEC["sections"]["functions"]["lede"].split())
+    assert "at least two of the three models each find quick to judge and cheap to get wrong, with no existing check to settle it" in lede
+    assert "More work than this has a missing check as the reason given most often" in lede
+    assert "Work waiting only on a check is work at least two of the three models find quick to judge and cheap to get wrong, with no existing check to settle it." in FIGURES
+    assert abs(FIG["whole"]["parts"][1]["usd"] - HEAD["blocked_by_missing_check_usd"]) < 1 < FIG["screen"]["questions"][1]["usd"] - HEAD["blocked_by_missing_check_usd"]
+
+
+def test_the_remaining_feet_say_what_the_review_asked():
+    for words in ("rule counts a task when at least two of the three models pass it", 'title="The list is the industries where work that passes and small firms to buy multiply highest"',
+                  "Industries just either side of the line are not meaningfully apart.", "is in the table beneath"):
+        assert words in FIGURES, words
+    role = (SRC / "app" / "census" / "roles" / "[occ]" / "page.tsx").read_text()
+    assert "reason given most often" in role
 
 
 def test_the_page_draws_its_figures_and_each_says_its_kind_and_carries_its_table():
-    src = (SRC / "components" / "CensusFigures.tsx").read_text()
+    src = FIGURES
     figures = re.findall(r'<Figure\s+id="fig-([a-z]+)"[^>]*?note=\{?(`[^`]+`|"[^"]+"|KIND_LABEL\.[a-z]+)', src, re.S)
     n = len(re.findall(r"<Figure\b", src))
     assert len(figures) >= 5 and len(figures) == n, figures  # none without a stated kind
@@ -160,7 +262,7 @@ def test_the_page_draws_its_figures_and_each_says_its_kind_and_carries_its_table
     assert FOOT in src and src.count("{SCREEN}") >= n  # the caveat rides in every foot
     assert src.count("all three") >= n  # beside every "passes"
     assert "title={r.ref}" in src or "title={row.ref}" in src  # the numbers carry the census reference
-    page = (SRC / "app" / "census" / "page.tsx").read_text()
+    page = PAGE
     for name in re.findall(r"export function (\w+Figure)\b", src):
         assert f"<{name}" in page, name
     assert (SRC / "components" / "diagrams" / "census.tsx").exists()
