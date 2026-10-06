@@ -181,7 +181,7 @@ def test_evaluate_asks_sec_for_nothing_unless_the_operator_named_a_user_agent(mo
 
     monkeypatch.delenv("AI_TRACKER_USER_AGENT", raising=False)
     monkeypatch.setattr(FormD, "fetch", fail)
-    assert "Form D" not in cli._suggested_enrichment(st.Store())
+    assert "skipped" in cli._suggested_enrichment(st.Store())  # and `fail` shows nothing was fetched
     monkeypatch.setenv("AI_TRACKER_USER_AGENT", "Example Operator ops@example.org")
     monkeypatch.setattr(FormD, "fetch", lambda self, day, refetch=False: [])
     monkeypatch.setattr(FormD, "candidates", lambda self, items: [])
