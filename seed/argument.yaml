@@ -186,6 +186,29 @@ migration:
       text: "This cannot be tested yet, because no public series exists. In April 2025 Mastercard and Visa each announced a system for verifying an AI agent before it pays on a person's behalf. The prediction would be proved wrong if the card networks' own systems come to cover this before any specialist firm sells it to a lab or a large company."
       expect_state: untestable
 
+  # The rule as a picture (Folio I). A model: each input stands as tall as the word given it here (short < little < some
+  # < plenty; migration_figures.DRAWN maps the word to a height), and which input is drawn short is an illustration
+  # taken from the essay's own record, never a reading. Exactly one link is shortest in each state.
+  chain:
+    links:
+      - {id: power, label: Power}
+      - {id: buildings, label: Buildings}
+      - {id: chips, label: Chips}
+      - {id: memory, label: Memory}
+      - {id: data, label: Data}
+      - {id: people, label: People}
+      - {id: money, label: Money}
+    between: "Buyers find a way around it, rivals build a substitute, suppliers expand."
+    states:
+      - id: before
+        title: The scarcest input sets the pace
+        text: "Every input is needed at once, so the industry can go only as fast as the one it has least of. Whoever owns that input collects the rent. More of anything else adds nothing."
+        levels: {power: some, buildings: some, chips: short, memory: little, data: plenty, people: plenty, money: plenty}
+      - id: after
+        title: Relieve it, and the shortage turns up somewhere else
+        text: "The industry builds its way out and the pace rises, but only as far as the next scarcest input. The rent moves there with it."
+        levels: {power: some, buildings: some, chips: some, memory: little, data: plenty, people: plenty, money: plenty}
+
   # Where the bottleneck has sat. Whole years; two levels (binding: what held things back; present: short, but not what
   # held things back). Every span is a judgement anchored on a dated, sourced event, and says so. `to: null` runs to today.
   strip:

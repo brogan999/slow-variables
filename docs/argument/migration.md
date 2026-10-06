@@ -14,6 +14,8 @@ Put the two together and you have a rule for an industry in which every part is 
 
 A margin like that is also an invitation. Every buyer who pays it has a reason to find a way around it, every rival has a reason to build a substitute, and every supplier has a reason to expand. So the rent is temporary by construction. The interesting question is never only who holds the bottleneck today. It is where the shortage goes once this one is relieved.
 
+[plate:chain]
+
 ### Folio II · the record
 
 ## It has already moved more than once, and never in single file
@@ -42,6 +44,8 @@ That last condition can be watched. This site keeps two tallies by hand from pub
 
 The buying that is visible points at practice. In September 2025 TechCrunch reported that the leading labs were "demanding more" of what the industry calls reinforcement-learning environments: simulated software tasks in which a model's attempts are graded and the grades are used to train it. It said, citing The Information, that the leaders of Anthropic, another of the labs, had discussed spending more than a billion dollars on them within a year. A public directory that this site reads lists [fact:rl_vendor_count] firms selling them. A list of sellers is supply responding, though. It shows that the business exists, not that the product is short.
 
+[plate:deals]
+
 ### Folio IV · the reading
 
 ## Most of the chain cannot be scored from what this site reads today
@@ -52,7 +56,11 @@ Most of the gauges behind the card read Epoch AI's estimates. One of its dataset
 
 Where the record above and the card disagree, the card is usually measuring something slower. Its gauges for memory and AI chips, when they have a reading young enough to use, read how fast the supply of memory is growing, how much of the chip supply one designer holds, and a long trend in the list prices of chips at launch. Epoch counts memory supply in dollars, so dearer memory looks the same as more memory. A shortage shows up first in what buyers pay today and how long they wait, and this site reads no series of either for these inputs. So the card can read an input as moderate, or withhold it for want of a fresh reading, while the record says it is short. The score for electricity measures demand only: how fast the power drawn by all the AI chips sold so far is growing, which says nothing about how much power can be supplied. Whenever it has a score, that score is drawn hatched, which on the scorecard marks low confidence. Money reads slack: the five largest builders of data centres have raised their spending on buildings and equipment by [fact:capex_growth] in a year.
 
+[plate:scale]
+
 [plate:scorecard]
+
+[plate:ages]
 
 ### Folio V · the blind spots
 
@@ -62,6 +70,8 @@ Go back to the second condition. An input that has not yet become an industry ha
 
 The same caution applies to the readings behind the scores. In Epoch's newest complete quarter, memory supply grew by [fact:hbm_supply_growth] in a year, in dollars, which could mean far more memory or the same memory at a higher price. The grid is invisible from its supply side: this site reads what AI chips would draw, and nothing about what power stations and transmission lines can deliver. In both cases the fix is a better series, not a stronger opinion.
 
+[plate:blind]
+
 ### Folio VI · the predictions
 
 ## What binds now, what binds next, and what would prove each wrong
@@ -69,3 +79,5 @@ The same caution applies to the readings behind the scores. In Epoch's newest co
 Three cautions belong with any list like the one below. Rent from a bottleneck is temporary by construction, so every entry on it expires. The revenue figures quoted for the firms that sell training data are gross, not net: they count the pay that goes on to the people doing the work. And one risk sits under all of it. The largest builders are spending [fact:capex_to_revenue] as much on buildings and equipment as the AI revenue this site can measure. If that spending stopped, every input on this page would loosen at once, and the question of which was tightest would stop mattering for a while.
 
 With that said, here is what this site expects, and what would show it to be wrong. Each entry is tested every night where a test exists. Where none does, the entry says what outcome would settle it.
+
+[plate:calls]

@@ -911,3 +911,15 @@ Alex asked for the firm page to be specific by kind of firm, opinionated about w
   - *The needs grid and a record disagree about the buyer.* `outcome_priced_rollup`'s demand bar comes from the grid's "Selling the result" need (law, customer support); the record's own customers are accounting, brokerage and property management.
   - *The needs grid is unreviewed.* `seed/firm_kinds.yaml` was drafted by a model on 6 Oct 2026, after the records' review of 29 Sep 2026; the demand figure's foot says the owner has not yet reviewed it. Change that sentence once he has.
   - *The demand figure's off-grid sentence* ("some sell to labs, clouds and data-centre operators") is the review's wording and fits the expert-data and compute-moving records; the two routing records and the open-model tuning record sell to firms that page does describe and simply have no need on the grid pointing at them.
+
+## Part 45d (6 Oct 2026): the migrating bottleneck, drawn
+
+Six figures added to `/argument/migration` beside the two it had, each a `[plate:name]` line in the essay. No prose was added. `src/ai_tracker/migration_figures.py` lays out every block into `argument.json` under `migration.figures`; the web places it.
+
+- **`chain`** (Folio I, a model): the inputs as posts of different heights with a line at the shortest, before and after it is relieved. Labels and the height word for each post are in `seed/argument.yaml` (`migration.chain`); a fixed drawing rule maps the word to a height. Which post is drawn short is an illustration from the essay's own record, and the foot says so.
+- **`deals`** (Folio III, a chart): one mark for each deal in the newest reading of `lab_vertical_integration_events_4q`, by buyer and by the quarter it was announced in, from that derived row's own input rows. The marks sum to the printed fact.
+- **`scale`** (Folio IV, a chart): every scored input ranked on the one tightness scale, the unscored as hollow marks beside it. **`ages`** (after the scorecard, a chart): each gauge's age as a share of its own limit, with what the scoring rule gives if the readings past nine tenths of their limit lapse.
+- **`blind`** (Folio V, a chart with one judgement marked): the unscored inputs by the scorecard's reason; the group nobody publishes a series for is hatched as this site's conjecture.
+- **`calls`** (Folio VI, a chart): the five predictions in the lane of tonight's state, with the tally.
+
+Judgement calls: the deals are not drawn by what the bought company does, because that sits only in free-text notes on the sweep's rows; the strip plate was left as it is; the "what would be left" note on `ages` is arithmetic on today's records with the page's own rule, worded as not a forecast; `calls` reuses the outlook page's three glyphs.

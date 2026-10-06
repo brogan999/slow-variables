@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArticleLayout } from "@/components/ArticleLayout";
 import { Folios, Inline, parseEssay } from "@/components/Essay";
+import { AgesPlate, BlindPlate, CallsPlate, ChainPlate, DealsPlate, ScalePlate } from "@/components/MigrationFigures";
 import { MigrationMargin, Predictions, ScorecardPlate, StripPlate } from "@/components/MigrationParts";
 import { argument } from "@/lib/data";
 import { SITE } from "@/lib/site";
@@ -18,7 +19,12 @@ export default function MigrationPage() {
   const doc = argument();
   const m = doc.migration;
   const { title: h1, lede, folios } = parseEssay(doc.essay.migration);
-  const plates = { strip: <StripPlate strip={m.strip} />, scorecard: <ScorecardPlate card={m.scorecard} /> };
+  const g = m.figures;
+  const plates = {
+    strip: <StripPlate strip={m.strip} />, scorecard: <ScorecardPlate card={m.scorecard} />,
+    chain: <ChainPlate chain={g.chain} />, scale: <ScalePlate scale={g.scale} />, deals: <DealsPlate deals={g.deals} />,
+    ages: <AgesPlate ages={g.ages} />, blind: <BlindPlate blind={g.blind} card={m.scorecard} />, calls: <CallsPlate doc={m} />,
+  };
   return (
     <ArticleLayout
       head={
