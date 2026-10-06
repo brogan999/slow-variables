@@ -154,3 +154,23 @@ def test_the_shape_folio_says_what_the_census_can_and_cannot_read():
     assert by["Management"]["share_passes"] < by["Sales"]["share_passes"]  # more of it in lower-paid kinds of job than among managers
     assert "cannot test Drago and Laine's order" in folio and "agrees with" not in folio
     assert "the company whose model drafted this page" in folio  # Anthropic's chief executive is named, not left out
+
+
+def test_the_firm_pages_plates_are_drawn_not_only_tabled():
+    spec, doc = firm.load(), None
+    words = {"gone", "much_thinner", "thinner", "same", "wider"}
+    # rent or own: every row of the table is placed on the line from renting to owning
+    r = spec["regimes"]
+    assert len(r["places"]) == len(r["rows"]) and set(r["places"]) <= {"rent", "both", "own"}
+    # each shape is drawn as three layers (top, middle, base), each by a word, never a number
+    for row in spec["shapes"]["rows"]:
+        assert len(row["drawn"]) == 3 and set(row["drawn"]) <= words, row["shape"]
+    doc = firm.build(spec, ol.build(st.Store()), firm.ESSAY.read_text(), census.shape(census.load()))
+    for row in doc["shapes"]["rows"]:
+        assert [t["id"] for t in row["glyph"]] == ["top", "middle", "base"] and all(0 <= t["w"] <= 100 for t in row["glyph"])
+    for g in doc["census_cut"]["groups"]:  # the census cut arrives as a laid-out bar
+        segs = g["bar"]
+        assert [s["part"] for s in segs] == ["passes", "waits_on_check", "physical", "rest"]
+        assert segs[0]["x"] == 0 and abs(segs[-1]["x"] + segs[-1]["w"] - 100) < 1e-6 and 0 <= g["agreed3_x"] <= segs[0]["w"] + 1e-9
+    essay = firm.ESSAY.read_text()
+    assert "[plate:anatomy]" in essay.split("### Folio VIII · the limit")[1].split("### Folio IX")[0]
