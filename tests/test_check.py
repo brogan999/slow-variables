@@ -186,3 +186,10 @@ def test_evaluate_asks_sec_for_nothing_unless_the_operator_named_a_user_agent(mo
     monkeypatch.setattr(FormD, "fetch", lambda self, day, refetch=False: [])
     monkeypatch.setattr(FormD, "candidates", lambda self, items: [])
     cli._suggested_enrichment(st.Store())  # with a name, the lookup runs
+
+
+def test_no_tracked_text_carries_a_merge_conflict_marker():
+    import subprocess
+
+    hits = subprocess.run(["git", "grep", "-nE", r"^(<<<<<<< |>>>>>>> )", "--", "docs", "seed", "src", "web/src", "tests", "semantic"], capture_output=True, text=True).stdout
+    assert not [h for h in hits.splitlines() if "test_check.py" not in h], hits[:400]
