@@ -172,9 +172,29 @@ export type Scorecard = {
 };
 export type StripRow = { id: string; label: string; predicted: boolean; spans: { from: number; to: number; running: boolean; level: "binding" | "present"; because: string; source: string; left: number; width: number; anchor: string }[] };
 export type OwnPrediction = { id: string; when: "now" | "next" | "watch"; claim: string; text: string; fact: string | null; state: "holding" | "failing" | "untestable" };
+export type ChainLink = { id: string; label: string; word: string; h: number; shortest: boolean; was: number | null };
+export type DealMark = { target: string; date: string; day: string; obs_ids: string[]; href: string; called_off: boolean };
+export type AgeGauge = { id: string; label: string; age_days: number; max_age_days: number; x: number; near: boolean; last: string; last_label: string; as_of: string; as_of_label: string; obs_ids: string[]; href: string };
+export type MigrationFigures = {
+  chain: { between: string; states: { id: string; title: string; text: string; level: number; links: ChainLink[] }[] };
+  scale: {
+    bands: { word: string; x: number; w: number }[]; total: number; unscored: { id: string; n: number; name: string }[];
+    rows: { id: string; n: number; name: string; kind: string; score: number; word: string; hatched: boolean; confidence: number; obs_ids: string[]; x: number }[];
+  };
+  blind: { total: number; groups: { kind: string; conjecture: boolean; n: number; inputs: { id: string; n: number; name: string }[] }[] };
+  deals: {
+    total: Fact; quarters: { id: string; label: string; months: string; year: string; n: number }[];
+    buyers: { id: string; name: string; n: number; cells: { quarter: string; deals: DealMark[] }[] }[]; chart_sources: ChartSourcesT;
+  } | null;
+  ages: {
+    near_x: number; near: number; scored_now: number; scored_after: number;
+    rows: { id: string; n: number; name: string; score: number; word: string; after: { score: number; word: string } | null; gauges: AgeGauge[] }[];
+  };
+};
 export type MigrationDoc = {
   as_of: string; facts: Record<string, Fact | null>; scorecard: Scorecard; strip: { from: number; to: number; now: number; now_x: number; ticks: Tick[]; rows: StripRow[] };
   predictions: OwnPrediction[]; tally: Record<"holding" | "failing" | "untestable", number>; sources: { who: string; work: string; where: string; url: string }[];
+  figures: MigrationFigures;
 };
 export type ArgumentDoc = {
   as_of: string | null;

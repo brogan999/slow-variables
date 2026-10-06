@@ -27,7 +27,7 @@ RECORD = Path("docs/interpretation/past-technology-waves.md")
 PLATES = {
     "home": {"clocks", "perez", "stack"},
     "full": {"clocks", "perez", "stack", "record"},
-    "migration": {"strip", "scorecard"},
+    "migration": {"strip", "scorecard", "chain", "scale", "deals", "ages", "blind"},
 }
 STATES = ("holding", "failing", "untestable")
 OPS = ("gt", "gte", "lt", "lte")
@@ -582,6 +582,8 @@ def strip(block: dict[str, Any], today: date) -> dict[str, Any]:
 
 
 def migration(s: Store, spec: dict[str, Any], today: date) -> dict[str, Any]:
+    from . import migration_figures
+
     block = spec["migration"]
     card = scorecard(s, today)
     f = facts(s, block, today, computed={"scored": card["scored"]})
@@ -597,6 +599,7 @@ def migration(s: Store, spec: dict[str, Any], today: date) -> dict[str, Any]:
         "predictions": preds,
         "tally": {k: sum(1 for p in preds if p["state"] == k) for k in STATES},
         "sources": block["sources"],
+        "figures": migration_figures.build(s, block, card, yaml.safe_load(TIGHTNESS.read_text()), today, f.get("lab_deals_4q")),
     }
 
 
