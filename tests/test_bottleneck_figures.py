@@ -60,6 +60,8 @@ def test_every_row_is_counted_once_by_kind_and_once_at_each_stage_it_acts_on():
         assert all(u["cls"] == cls[u["id"]] and u["href"] == f"#why-{u['id']}" for u in drawn["units"])
         assert [x["id"] for x in drawn["now"]] == [u["id"] for u in drawn["units"] if u["cls"] == "tight"]
         assert {x["id"] for x in drawn["expected"]} == {r["id"] for r in rows if r["cells"].get(st["id"], {}).get("writers")}
+    for part in (*f["stages"], *f["sections"], *f["kinds"]):  # the folded table's counts are the squares drawn
+        assert part["counts"] == dict(Counter(u["cls"] for u in part["units"])) and sum(part["counts"].values()) == part["total"]
     chain = [r for r in rows if r["reading"]["kind"] != "tally"]
     assert sum(k["total"] for k in f["kinds"]) == len(chain)
     assert all({r["reading"]["kind_of_tight"] for r in chain if r["id"] in {u["id"] for u in k["units"]}} == {k["id"]} for k in f["kinds"])
@@ -138,6 +140,7 @@ def test_the_money_strip_places_each_sub_layer_on_one_axis_and_types_no_amount()
     for drawn, b in zip(m["rows"], doc["bets"], strict=True):
         assert drawn["firms"] == b["firms"] and drawn["venture"] == b["venture"]
         assert (drawn["x"] is None) == (b["venture"] is None)
+        assert drawn["flip"] == (b["venture"] is not None and drawn["x"] > 60)  # a label never runs off the right edge
         if b["venture"]:
             assert 0 <= drawn["x"] <= 100
             placed.append((b["venture"]["value"], drawn["x"]))
@@ -147,7 +150,7 @@ def test_the_money_strip_places_each_sub_layer_on_one_axis_and_types_no_amount()
 
 def _words(src: str) -> list[str]:
     """What a reader reads in a component: text between tags and the quoted strings left once layout attributes go."""
-    src = re.sub(r"^import .*$", "", src, flags=re.M)
+    src = re.sub(r'^import .*$|^const link = "[^"]*";$', "", src, flags=re.M)
     src = re.sub(r"//.*$", "", src, flags=re.M)
     src = re.sub(r"var\(--[a-z0-9-]+\)|url\(#[a-z0-9-]+\)", "", src)
     src = re.sub(r'\b(className|viewBox|width|height|x|y|x1|x2|y1|y2|d|r|rx|strokeWidth|strokeDasharray|points|id|href|markerEnd|refX|refY|markerWidth|markerHeight|orient)="[^"]*"', "", src)

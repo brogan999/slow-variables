@@ -1014,9 +1014,11 @@ class Store:
             from . import firm_kinds
 
             _write(out / "firm_kinds.json", firm_kinds.build(firm_kinds.load(), spec, {"trades": trade_rows}))
+        from .bottleneck_map import figures as map_figures
         from .bottleneck_map import from_store
 
-        _write(out / "map.json", from_store(self, cards, bottlenecks, argument, outlook))
+        map_doc = from_store(self, cards, bottlenecks, argument, outlook)
+        _write(out / "map.json", {**map_doc, "figures": map_figures(map_doc, bottlenecks, judgements.build(judgements.load()))})
         _write(out / "sources.json", [self._source_health(s) for s in self.seed.sources])
         _write(out / "skipped_sources.json", [dump(s) for s in self.seed.skipped])
         _write(

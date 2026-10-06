@@ -951,3 +951,16 @@ The reviewer's notes for the owner (nothing changed on their account):
 - Across the stages' gauges there is a single evidence row with stance `against` (`new_grad_unemployment`); every gauge has a written counterevidence note, but the structured rows are nearly empty.
 - The stock-and-flow figure's "N of M count" and its description "Five stocks" (four boxes and an arrow) have the same wording problem the cards had; left as they were.
 - A yearly gauge can vote for up to two years without a stale flag. That is the rule as written; whether it is the right limit for a voting gauge is the owner's call.
+
+## Part 45h (6 Oct 2026): figures on /bottlenecks
+
+Six figures added around the map, all laid out by `bottleneck_map.figures` (pure; rides in `web/data/map.json` as `figures`) and placed by `web/src/components/BottleneckFigures.tsx` on parts in `diagrams/bottlenecks.tsx`. Tests in `tests/test_bottleneck_figures.py`, written first.
+
+- **The path** (a model with tonight's readings placed on it, the page's summary): the map's stages as equal boxes; under each, the inputs scored tight or severe and the rows a claim on file expects to bind there. Equal widths on purpose: nothing measures how much passes through a stage.
+- **The map counted** (chart): one square per row, by stage, by part of the map and by kind of scarcity. A friction outside the chain is grey and never put on the tightness ramp, since the map's foot says the two scales are never mixed.
+- **How firm the page is** (chart, judgement hatched): each list split into what rests on a reading and what rests on a model's judgement only.
+- **The expectations** (chart): every claim listed under a row as one mark in its exported state, this site's own boxed.
+- **Startup money** (chart): the `Bets` table as dots on one ratio scale; the table is folded beneath it.
+- **The barriers by family** (chart, judgement hatched): one square per barrier, an indicator's or a model's.
+
+Judgement calls: "tight" is the map's own filter (scored tight or severe), not a new rule; a row "acts" on a stage only where its cell bites, so a cell that carries a writer's mark alone (safety brakes at products) is listed as expected and not counted; a low-confidence score still counts as a reading, with the count printed in the foot; the money dots sit on a ratio scale because the amounts differ about a thousandfold, said in the foot; no history figure, because the map keeps no record of past ratings; no physical-against-institutional figure, because the only structured field is the scorecard's kind of scarcity (supply, know-how, money), which is drawn instead; claims on map rows carry no due date, so no date strip.
