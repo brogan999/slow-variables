@@ -143,7 +143,7 @@ def test_the_figures_words_type_no_digit_but_years_and_no_number_word():
     for f in ("web/src/components/BoardFigures.tsx", "web/src/components/diagrams/board.tsx"):
         src = (ROOT / f).read_text()
         words = re.findall(r'(?:title|label|note|tableLabel)="([^"]+)"', src) + re.findall(r">([^<>{}]*[a-z]{3}[^<>{}]*)<", src)
-        assert words, f
+        assert words or "diagrams" in f, f  # the parts carry no words of their own
         for w in words:
             assert not re.search(r"\d", re.sub(r"\b(19|20)\d\d\b|&[a-z]+;", "", w)), w
             assert not NUMBER_WORD.search(w), w

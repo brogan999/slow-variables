@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { indicatorHref } from "@/lib/format";
+import { BoardFlow, DueCalendar, ForecasterMarks, LeanBars, SourceMarks, TallyBars } from "@/components/BoardFigures";
 import { ChangelogList } from "@/components/Changelog";
 import { EvidenceLog } from "@/components/EvidenceLog";
 import { Inline } from "@/components/Essay";
@@ -50,9 +51,7 @@ function Board() {
   const leans = Object.fromEntries((b.leans ?? []).map((w) => [w.id, w.label]));
   return (
     <div className="board-filter flex flex-col gap-8">
-      <div className="flex h-3 w-full max-w-3xl gap-0.5" aria-hidden>
-        {b.words.map((w) => <span key={w.id} className={`h-full ${w.id === "happening" ? "bg-ink" : w.id === "not_happening" ? "bg-slow" : w.id === "too_early" ? "bg-surface-2 ring-1 ring-inset ring-axis" : "bg-s3"}`} style={{ flexGrow: b.tally[w.id] }} />)}
-      </div>
+      <TallyBars b={b} />
       <div role="group" className="-mt-5 flex flex-wrap items-center gap-2" aria-label="Tonight's tally">
         {b.words.map((w) => <span key={w.id} className="inline-flex items-center gap-1.5"><WordChip word={w.id} label={w.label} /><span className="num text-sm text-ink-2">{b.tally[w.id]}</span></span>)}
       </div>
@@ -63,6 +62,9 @@ function Board() {
         </dl>
         <p className="mt-2 text-ink-2">Each family keeps its own vocabulary on its own page; the board maps it: {b.mapping.map((m) => `${m.kind} ${m.state.replaceAll("_", " ")} → ${b.words.find((w) => w.id === m.word)?.label.toLowerCase()}`).join("; ")}.</p>
       </details>
+      <BoardFlow b={b} />
+      <SourceMarks b={b} />
+      <LeanBars b={b} />
       {b.judged && b.leans ? (
         <details className="text-sm -mt-5">
           <summary className="cursor-pointer text-ink-2">On the forecasts that are too early to tell, how a model leans</summary>
@@ -129,6 +131,11 @@ export default function PredictionsPage() {
       <PageHeader eyebrow="Who is right so far · every forecast on the site" title="Which forecasts are coming true, and which are not"
         lede={<>{b.n ? <><span className="num">{b.n}</span> forecasts from the labs, named writers and this site, each read against the latest data and given one word. </> : "Every forecast from the labs, named writers and this site, each read against the latest data and given one word. "}Tap &ldquo;details&rdquo; for the test, the reading and the source.</>} />
       <Board />
+      <section className="flex flex-col gap-6" aria-labelledby="who-and-when">
+        <h2 id="who-and-when" className="display text-[1.75rem] leading-tight mt-4">Who said it, and when it falls due</h2>
+        <DueCalendar b={b} />
+        <ForecasterMarks b={b} />
+      </section>
       <div>
         <h2 className="display text-[1.75rem] leading-tight mt-4">The dated claims in their own words</h2>
         <p className="text-sm text-ink-2 max-w-[60ch]">Other people&apos;s claims with a date attached, quoted from the linked source (the singularity forecasts are in this site&apos;s words, credited and linked) and scored with the AI 2027 tracker&apos;s vocabulary (confirmed, ahead, on track, behind, emerging, not yet testable). A claimant&apos;s self-assessment never resolves a claim.</p>
