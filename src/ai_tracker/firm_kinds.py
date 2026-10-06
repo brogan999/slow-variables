@@ -133,6 +133,10 @@ def build(spec: dict[str, Any], cspec: dict[str, Any], trades_doc: dict[str, Any
         k["staged"] = staged
         # across: the share of office work that passes or waits only on a check; up: the judged band
         k["place"] = {"x": 100 - chart.y(k["share_checkable"], ax), "y": RUNG_Y.get(k.get("rung") or "", 50.0)}
+    most = max([max(k["rollups"]["buyers"], k["rollups"]["deals"]) for k in kinds if k["rollups"]] or [1])
+    for k in kinds:  # the roll-up bars share one scale: the largest count on the page is the full width
+        if k["rollups"]:
+            k["rollups"] |= {"buyers_w": 100 * k["rollups"]["buyers"] / most, "deals_w": 100 * k["rollups"]["deals"] / most}
     for band in RUNG_Y:  # kinds in one band step up and down in turn, left to right, so their names do not collide
         row = sorted((k for k in kinds if k.get("rung") == band), key=lambda k: k["place"]["x"])
         for i, k in enumerate(row):

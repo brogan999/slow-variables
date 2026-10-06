@@ -280,14 +280,28 @@ export type FirmDoc = ClaimsDoc & {
 };
 export const firm = () => read<FirmDoc>("firm.json");
 export type KindPart = "passes" | "waits_on_check" | "held" | "outside";
+export type KindTier = "managers" | "professionals" | "sales" | "support";
+export type KindStage = "now" | "next" | "later";
 export type FirmKind = {
   id: string; name: string; naics: string[]; titles: string[]; refs: string[]; payroll: number; office_payroll: number;
   share_passes: number; share_agreed3: number; share_waits_on_check: number; share_held: number; share_outside: number; share_checkable: number;
   bar: { part: KindPart; x: number; w: number }[];
-  tiers: { id: "managers" | "professionals" | "sales" | "support"; share: number; share_passes: number; w: number; pass_w: number }[];
-  rollups: { buyers: number; deals: number; obs_ids: string[]; trade: string } | null;
+  tiers: { id: KindTier; share: number; share_passes: number; w: number; pass_w: number }[];
+  staged: { stage: KindStage; judged: boolean; tiers: { id: KindTier; w: number; inner?: number; word?: string }[] }[];
+  place: { x: number; y: number };
+  rollups: { buyers: number; deals: number; obs_ids: string[]; trade: string; buyers_w: number; deals_w: number } | null;
+  rung: string; signs: string; now: string; next: string; later: string; wrong: string; needs: string[]; sources: string[];
 };
-export type FirmKindsDoc = { version: string; kinds: FirmKind[] };
+export type FirmKindsDoc = {
+  version: string; kinds: FirmKind[];
+  stages: { id: KindStage; name: string; what: string; rests_on: string; sources?: string[] }[];
+  rungs: Record<string, string>; shape_words: Record<string, string>;
+  anatomy: { title: string; note: string; parts: { id: string; name: string; does: string }[] };
+  needs: { id: string; name: string; what: string; opportunities: { id: string; name: string; href: string }[] }[];
+  needs_grid: { id: string; cells: boolean[] }[];
+  map: { x: { ticks: { x: number; label: string }[] }; rungs: { id: string; y: number; label: string }[] };
+  sources: { id: string; n: number; who: string; work: string; venue: string; year: number | null; url: string; retrieved_at: string; ties?: string }[];
+};
 export const firmKinds = () => read<FirmKindsDoc>("firm_kinds.json");
 export type Word = "happening" | "not_happening" | "slower" | "both" | "too_early";
 export type BoardRow = {

@@ -114,3 +114,12 @@ def test_the_staged_shapes_the_map_and_the_needs_grid_arrive_laid_out():
         assert len(r["cells"]) == len(doc["kinds"]) and any(r["cells"])
     for n in doc["needs"]:  # a need links to the business that would meet it, where one is listed
         assert all(o["href"].startswith("/value-chain/opportunities#") and o["name"] for o in n["opportunities"])
+
+
+def test_the_page_is_visual_first_and_every_figure_says_what_kind_it_is():
+    src = (firm_kinds.ROOT / "web" / "src" / "components" / "FirmKinds.tsx").read_text()
+    figures = re.findall(r'<Figure\s+id="fig-([a-z]+)"[^>]*?note=\{?("[^"]+"|KIND_LABEL\.[a-z]+)', src, re.S)
+    assert len(figures) >= 6, figures  # five to ten figures on a main page
+    assert len(re.findall(r"<Figure\b", src)) == len(figures)  # none without a stated kind
+    page = (firm_kinds.ROOT / "web" / "src" / "app" / "firm" / "kinds" / "page.tsx").read_text()
+    assert "this site&apos;s judgement" in page and "Reviewed by Alex" not in page  # no review claimed for the owner

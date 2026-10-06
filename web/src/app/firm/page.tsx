@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ArticleLayout } from "@/components/ArticleLayout";
 import { Folios, folioId, Inline, parseEssay } from "@/components/Essay";
 import { CensusCutPlate, FirmMargin, RegimesPlate, SeatedPositions, ShapesPlate } from "@/components/FirmParts";
@@ -25,6 +26,7 @@ export default function FirmPage() {
           <div className="eyebrow">The money · the firm, argued from the outlook&apos;s claims</div>
           <h1 className="display text-[2.5rem] md:text-[4rem] leading-[1] max-w-[18ch]">{h1}</h1>
           <p className="font-serif text-xl md:text-[1.4rem] leading-[1.55] text-ink-2 max-w-[60ch]"><Inline text={lede} facts={doc.facts} cites={c} tests={doc.tests} /></p>
+          <p className="text-[15px] text-ink-2 max-w-[60ch]">The specifics, in figures: <Link href="/firm/kinds" className="text-ink underline decoration-axis underline-offset-4">what happens to each kind of firm</Link>, what an AI-run firm looks like, and what such firms will need to buy.</p>
           <div role="group" aria-label="Tonight's claims on this page" className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
             {(["holding", "failing", "both", "untestable"] as const).map((k) => <span key={k} className="inline-flex items-center gap-1.5"><ClaimState state={k} /><span className="num text-ink-2">{doc.tally[k]}</span></span>)}
           </div>
