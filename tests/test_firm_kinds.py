@@ -66,3 +66,51 @@ def test_the_export_is_json_and_types_no_figure_in_its_words():
     json.dumps(doc)
     for t in firm_kinds.strings(firm_kinds.load()):
         assert not re.search(r"\d", t), t
+
+
+def test_every_kind_says_what_it_sees_now_what_it_judges_next_and_what_would_prove_it_wrong():
+    import yaml
+
+    from ai_tracker.argument import unfetched
+
+    spec = firm_kinds.load()
+    sources = {s["id"]: s for s in spec["sources"]}
+    needs = {n["id"] for n in spec["needs"]}
+    opps = {o["id"] for o in yaml.safe_load((firm_kinds.ROOT / "seed" / "opportunities.yaml").read_text())["opportunities"]}
+    assert [s["id"] for s in spec["stages"]] == ["now", "next", "later"]
+    assert all(unfetched(s) is None for s in sources.values())  # every link was fetched, and says when
+    for k in spec["kinds"]:
+        assert k["rung"] in spec["rungs"] and all(k.get(f) for f in ("signs", "now", "next", "later", "wrong")), k["id"]
+        assert k["sources"] and set(k["sources"]) <= set(sources), k["id"]  # what it sees now rests on something read
+        for stage in ("next", "later"):
+            assert len(k["shape"][stage]) == len(TIERS) and set(k["shape"][stage]) <= set(spec["shape_words"]), k["id"]
+        assert k["needs"] and set(k["needs"]) <= needs, k["id"]
+    used = {n for k in spec["kinds"] for n in k["needs"]}
+    for n in spec["needs"]:
+        assert n["id"] in used and set(n["opportunities"]) <= opps, n["id"]
+    assert {p["id"] for p in spec["anatomy"]["parts"]} == {"top", "check", "base", "rented", "owned"}
+    assert "judgement" in spec["anatomy"]["note"] or "model" in spec["anatomy"]["note"]
+
+
+def test_the_staged_shapes_the_map_and_the_needs_grid_arrive_laid_out():
+    doc = _built()
+    assert [s["id"] for s in doc["stages"]] == ["now", "next", "later"]
+    for k in doc["kinds"]:
+        st = k["staged"]
+        assert [s["stage"] for s in st] == ["now", "next", "later"] and not st[0]["judged"] and st[1]["judged"] and st[2]["judged"]
+        assert [t["w"] for t in st[0]["tiers"]] == [t["w"] for t in k["tiers"]]  # today's shape is the data's
+        for s in st:
+            assert [t["id"] for t in s["tiers"]] == list(TIERS) and all(0 <= t["w"] <= 100 for t in s["tiers"])
+            assert all(t["word"] in doc["shape_words"] for t in s["tiers"]) if s["judged"] else True
+        gone = [t for s in st[1:] for t, w in zip(s["tiers"], firm_kinds.load()["kinds"][doc["kinds"].index(k)]["shape"][s["stage"]]) if w == "gone"]
+        assert all(t["w"] == 0 for t in gone)
+        assert 0 < k["place"]["x"] < 100 and 0 < k["place"]["y"] < 100
+    xs = sorted(doc["kinds"], key=lambda k: k["share_checkable"])
+    assert xs[0]["place"]["x"] < xs[-1]["place"]["x"]  # further right, more of the office work a check can settle
+    assert doc["map"]["x"]["ticks"] and {r["id"] for r in doc["map"]["rungs"]} == set(doc["rungs"])
+    grid = doc["needs_grid"]
+    assert [r["id"] for r in grid] == [n["id"] for n in doc["needs"]]
+    for r in grid:
+        assert len(r["cells"]) == len(doc["kinds"]) and any(r["cells"])
+    for n in doc["needs"]:  # a need links to the business that would meet it, where one is listed
+        assert all(o["href"].startswith("/value-chain/opportunities#") and o["name"] for o in n["opportunities"])
