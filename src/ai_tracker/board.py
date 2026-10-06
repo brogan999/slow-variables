@@ -274,7 +274,7 @@ def build(
             for q in spec["questions"]
         ],
     }
-    return {**doc, "figures": figures(doc)}
+    return {**doc, "figures": figures(doc, spec.get("forecaster_aliases"))}
 
 
 # The page's figures. Every count and position is worked out here, so the web only places it.
@@ -282,11 +282,12 @@ SOURCES = [  # who made the forecast, by the family it came from; a row belongs 
     ("ledger", "Other people's dated claims", lambda r: r["kind"] == "ledger"),
     ("writers", "Named writers' claims, tested nightly", lambda r: r["attribution"] == "author"),
     ("extension", "This site, extending a writer", lambda r: r["attribution"] == "extension"),
+    # a warning sign is the reverse of a forecast: "not happening" there means the site's argument stands
+    ("exits", "This site's warning signs: what would prove its argument wrong", lambda r: r["kind"] == "exit"),
     ("site", "This site's own forecasts", lambda r: True),
 ]
 ISO = re.compile(r"\d{4}-\d{2}-\d{2}")
-# ponytail: the far bins are fixed years, fine while the board's date is in the 2020s; move the edges after 2029.
-SPANS = [(2035, "to 2035"), (2040, "2036 to 2040"), (2050, "2041 to 2050")]
+SPANS = [2035, 2040, 2050]  # where the far bins end; a bin starts after the last single year, so no two rows share a year
 
 
 def _mark(r: dict[str, Any]) -> dict[str, Any]:
@@ -314,14 +315,17 @@ def _bin(year: int, now: int) -> tuple[int, str]:
         return 0, f"Before {now}"
     if year <= now + 5:
         return year, str(year)
-    for end, label in SPANS:
+    start = now + 6
+    for end in SPANS:
         if year <= end:
-            return end, f"{now + 6} {label}" if label.startswith("to") else label
-    return 9999, f"After {SPANS[-1][0]}"
+            return end, f"{start} to {end}" if start < end else str(end)
+        start = max(start, end + 1)
+    return 9999, f"After {SPANS[-1]}"
 
 
-def figures(doc: dict[str, Any]) -> dict[str, Any]:
-    """What the page draws, from the built board: it reads the rows and changes none of them."""
+def figures(doc: dict[str, Any], aliases: dict[str, str] | None = None) -> dict[str, Any]:
+    """What the page draws, from the built board: it reads the rows and changes none of them. `aliases` joins one
+    forecaster credited under two names (seed/board.yaml); the rows keep the credit their source gave."""
     rs = [r for f in doc["folios"] for r in f["rows"]]
     rank = {w: i for i, w in enumerate(ORDER)}
     by_word = lambda rows_: sorted(rows_, key=lambda r: rank[r["word"]])  # noqa: E731
@@ -336,14 +340,16 @@ def figures(doc: dict[str, Any]) -> dict[str, Any]:
             sources.append({"id": i, "label": name, "n": len(g), "counts": _counts(tested), "too_early": len(g) - len(tested),
                             "marks": [_mark(r) for r in tested]})  # fmt: skip
     named: dict[str, list[dict[str, Any]]] = {}
-    for r in rs:  # one name however a source credits it: "Lab (A, B et al.)" is "Lab"
+    for r in rs:  # one name however a source credits it: "Lab (A, B et al.)" is "Lab", then the seed's aliases
         if not r["who"].startswith("This site"):
-            named.setdefault(re.sub(r"\s*\([^)]*\)$", "", r["who"]), []).append(r)
+            who = re.sub(r"\s*\([^)]*\)$", "", r["who"])
+            named.setdefault((aliases or {}).get(who, who), []).append(r)
+    scored = lambda g: any(r["word"] != "too_early" for r in g)  # noqa: E731
+    people = sorted(named.items(), key=lambda kv: kv[0].casefold())
     forecasters = [
-        {"who": who, "n": len(g), "counts": _counts(g), "marks": [_mark(r) for r in by_word(g)]}
-        for who, g in sorted(named.items(), key=lambda kv: kv[0].casefold())
-        if any(r["word"] != "too_early" for r in g)
+        {"who": who, "n": len(g), "counts": _counts(g), "marks": [_mark(r) for r in by_word(g)]} for who, g in people if scored(g)
     ]
+    left_out = [{"who": who, "n": len(g)} for who, g in people if not scored(g)]
 
     as_of = doc.get("as_of") or ""
     dated = [r for r in rs if isinstance(r.get("settles"), str) and ISO.fullmatch(r["settles"])]
@@ -357,7 +363,8 @@ def figures(doc: dict[str, Any]) -> dict[str, Any]:
                  for (k, label), g in sorted(bins.items())],
     }  # fmt: skip
 
-    out = {"sections": sections, "sources": sources, "forecasters": forecasters, "calendar": calendar}
+    out = {"sections": sections, "sources": sources, "forecasters": forecasters,
+           "forecasters_left_out": {"n": len(left_out), "names": left_out}, "calendar": calendar}  # fmt: skip
     early = [r for r in rs if r["word"] == "too_early"]
     leaned = [r for r in early if r.get("judgement")]
     if doc.get("leans"):

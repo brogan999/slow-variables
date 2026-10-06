@@ -63,21 +63,6 @@ function Board() {
         <p className="mt-2 text-ink-2">Each family keeps its own vocabulary on its own page; the board maps it: {b.mapping.map((m) => `${m.kind} ${m.state.replaceAll("_", " ")} → ${b.words.find((w) => w.id === m.word)?.label.toLowerCase()}`).join("; ")}.</p>
       </details>
       <BoardFlow b={b} />
-      <SourceMarks b={b} />
-      <LeanBars b={b} />
-      {b.judged && b.leans ? (
-        <details className="text-sm -mt-5">
-          <summary className="cursor-pointer text-ink-2">On the forecasts that are too early to tell, how a model leans</summary>
-          <div role="group" className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1" aria-label="How the model leans">
-            {b.leans.map((w) => <span key={w.id} className="inline-flex items-baseline gap-1.5"><span className="border-l-2 border-dotted border-axis pl-2 text-ink">{w.label}</span><span className="num text-ink-2">{b.judged!.tally[w.id]}</span></span>)}
-          </div>
-          <dl className="mt-2 grid gap-x-4 gap-y-1 sm:grid-cols-[12rem_minmax(0,1fr)]">
-            {b.leans.map((w) => <div key={w.id} className="contents"><dt className="text-ink">{w.label}</dt><dd className="text-ink-2">{w.meaning}</dd></div>)}
-          </dl>
-          <p className="mt-2 text-ink-2 max-w-[72ch]">Each lean is a model&apos;s judgement, not a reading, and it changes no status word and no tally above. It was made by {b.judged.model} on {b.judged.date}; reviewed by {b.judged.reviewed_by}. {b.judged.method}</p>
-          <p className="mt-2 text-ink-2 max-w-[72ch]">A lean is not the confidence number on a forecast&apos;s card below. Confidence says how firm the evidence behind the status is; the lean says whether the model expects the forecast to come true. The model is made by Anthropic, and some of these forecasts are about Anthropic and its rivals.</p>
-        </details>
-      ) : null}
       <fieldset className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
         <legend className="eyebrow mb-2">Show</legend>
         <label className="inline-flex items-center gap-1.5"><input type="radio" name="board-word" id="bw-all" defaultChecked className="accent-[var(--ink)]" />every forecast</label>
@@ -132,9 +117,24 @@ export default function PredictionsPage() {
         lede={<>{b.n ? <><span className="num">{b.n}</span> forecasts from the labs, named writers and this site, each read against the latest data and given one word. </> : "Every forecast from the labs, named writers and this site, each read against the latest data and given one word. "}Tap &ldquo;details&rdquo; for the test, the reading and the source.</>} />
       <Board />
       <section className="flex flex-col gap-6" aria-labelledby="who-and-when">
-        <h2 id="who-and-when" className="display text-[1.75rem] leading-tight mt-4">Who said it, and when it falls due</h2>
-        <DueCalendar b={b} />
+        <h2 id="who-and-when" className="display text-[1.75rem] leading-tight mt-4">Who said it, when it falls due, and how a model leans</h2>
+        <SourceMarks b={b} />
         <ForecasterMarks b={b} />
+        <DueCalendar b={b} />
+        <LeanBars b={b} />
+        {b.judged && b.leans ? (
+          <details className="text-sm -mt-3">
+            <summary className="cursor-pointer text-ink-2">On the forecasts that are too early to tell, how a model leans</summary>
+            <div role="group" className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1" aria-label="How the model leans">
+              {b.leans.map((w) => <span key={w.id} className="inline-flex items-baseline gap-1.5"><span className="border-l-2 border-dotted border-axis pl-2 text-ink">{w.label}</span><span className="num text-ink-2">{b.judged!.tally[w.id]}</span></span>)}
+            </div>
+            <dl className="mt-2 grid gap-x-4 gap-y-1 sm:grid-cols-[12rem_minmax(0,1fr)]">
+              {b.leans.map((w) => <div key={w.id} className="contents"><dt className="text-ink">{w.label}</dt><dd className="text-ink-2">{w.meaning}</dd></div>)}
+            </dl>
+            <p className="mt-2 text-ink-2 max-w-[72ch]">Each lean is a model&apos;s judgement, not a reading, and it changes no status word and no tally above. It was made by {b.judged.model} on {b.judged.date}; reviewed by {b.judged.reviewed_by}. {b.judged.method}</p>
+            <p className="mt-2 text-ink-2 max-w-[72ch]">A lean is not the confidence number on a forecast&apos;s card below. Confidence says how firm the evidence behind the status is; the lean says whether the model expects the forecast to come true. The model is made by Anthropic, and some of these forecasts are about Anthropic and its rivals.</p>
+          </details>
+        ) : null}
       </section>
       <div>
         <h2 className="display text-[1.75rem] leading-tight mt-4">The dated claims in their own words</h2>

@@ -20,18 +20,20 @@ export function WordSwatch({ word }: { word: Word }) {
 
 export type RowMark = { key: string; word: Word; tip: string; href: string; framed?: boolean };
 
-// Rows of marks, one mark for one forecast, each linked to its record. `tail` is what the row counts but does not draw.
+// Rows of marks, one mark for one forecast, each linked to its record. The link is padded so a finger can hit it. `tail` is what the row counts but does not draw.
 export function MarkRows({ rows, label, wide = false, columns = false }: { rows: { key: string; name: string; note?: React.ReactNode; marks: RowMark[]; tail?: React.ReactNode }[]; label: string; wide?: boolean; columns?: boolean }) {
   return (
     <div role="group" aria-label={label} className={columns ? "lg:columns-2 lg:gap-x-10" : "flex flex-col"}>
       {rows.map((r) => (
         <div key={r.key} className={`grid grid-cols-1 gap-x-3 gap-y-1 break-inside-avoid border-b border-grid py-2 sm:items-center ${columns ? "sm:grid-cols-[15rem_1fr]" : "last:border-0 last:pb-0 first:pt-0"} ${columns ? "" : wide ? "sm:grid-cols-[17rem_1fr]" : "sm:grid-cols-[8.5rem_1fr]"}`}>
           <div className="text-[13px] leading-tight text-ink">{r.name}{r.note ? <span className="ml-1.5 font-mono text-[11px] text-muted">{r.note}</span> : null}</div>
-          <div className="flex flex-wrap items-center gap-1.5">
+          <div className="-m-1 flex flex-wrap items-center">
             {r.marks.map((m) => (
-              <Link key={m.key} href={m.href} prefetch={false} title={m.tip} aria-label={m.tip} className={`block h-3.5 w-3.5 hover:opacity-70 ${m.framed ? "outline outline-1 outline-offset-2 outline-ink" : ""}`} style={square(m.word)} />
+              <Link key={m.key} href={m.href} prefetch={false} title={m.tip} aria-label={m.tip} className="block p-1 hover:opacity-70">
+                <span className={`block h-4 w-4 ${m.framed ? "outline outline-1 outline-offset-2 outline-ink" : ""}`} style={square(m.word)} />
+              </Link>
             ))}
-            {r.tail ? <span className="ml-1 font-mono text-[11px] text-muted">{r.tail}</span> : null}
+            {r.tail ? <span className="ml-2 p-1 font-mono text-[11px] text-muted">{r.tail}</span> : null}
           </div>
         </div>
       ))}
