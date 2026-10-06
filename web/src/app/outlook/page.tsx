@@ -3,6 +3,7 @@ import { StackPlate } from "@/components/ArgumentParts";
 import { ContextFigures } from "@/components/ContextFigure";
 import { Folios, folioId, Inline, parseEssay } from "@/components/Essay";
 import { Agreements, ClaimState, cites, FalsifierBoard, FolioPositions, OutlookMargin, OutlookSources, ScenarioGrid } from "@/components/OutlookParts";
+import { DisputeReach, DueCalendar, MethodFlow, SidesMap, WhoseBars } from "@/components/OutlookFigures";
 import { JaggedFrontier, ReliabilityGap } from "@/components/Signposts";
 import { bottleneckMap, context, outlook, signposts } from "@/lib/data";
 import { SITE } from "@/lib/site";
@@ -28,6 +29,11 @@ export default function OutlookPage() {
     stack: <StackPlate />,
     scenarios: <ScenarioGrid doc={doc} rows={rows} />,
     board: <FalsifierBoard doc={doc} />,
+    sides: <SidesMap doc={doc} />,
+    method: <MethodFlow doc={doc} />,
+    settle: <DisputeReach doc={doc} />,
+    whose: <WhoseBars doc={doc} />,
+    due: <DueCalendar doc={doc} />,
   };
   const after = (label: string, i: number) => {
     const fo = label.startsWith("Folio ") ? doc.folios[i] : undefined;

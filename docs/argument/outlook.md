@@ -6,6 +6,8 @@ Two forecasters can watch the same number climb and both be right, because each 
 
 ## Fast progress on single skills is what both sides expect; whole jobs are the test
 
+[plate:sides]
+
 The fastest story starts with a loop. Daniel Kokotajlo, who worked on governance at OpenAI, and his fellow forecasters at the AI Futures Project wrote AI 2027, a dated story in which each AI model, a program trained on text and data to write and reason, helps build the next, so progress feeds on itself until AI outdoes people at almost everything by the end of 2027 [cite:ai_2027]. They called 2027 their single most likely year rather than their middle estimate. They pushed their dates later at the end of 2025 and moved them earlier again in 2026, because coding agents, models set to carry out tasks on their own, had improved faster than they expected in late 2025 and early 2026 [cite:ai_futures_update]; their own check finds events running a little slower than the story [cite:ai_futures_q25].
 
 Benjamin Jones, an economist at Northwestern who studies where growth and discoveries come from, answers with arithmetic. Research is a chain of steps and needs every one of them, so making some steps superhumanly fast leaves the rest, still slow, to set the pace, as a line of walkers moves at the speed of its slowest member. In his words, "bottlenecks severely mute the effect of extremely productive AI" [cite:jones_b]. What counts is the share of steps AI can take over.
@@ -72,6 +74,8 @@ What the labs do with the best model's price while it still leads will settle it
 
 Selling access to a model that others can match, token by token, is a thin business; someone has to answer for what an AI agent does before it can be trusted with work that matters; checking AI's work becomes a costly task of its own; and people use AI well before firms reorganise around it. Where someone here dissents, the dissent is listed with the point.
 
+[plate:whose]
+
 ### The futures still open
 
 ## Crossing progress with rules shows which futures tonight's readings still allow
@@ -82,10 +86,18 @@ The grid crosses the two and fills a cell only where a named writer argues it; a
 
 [plate:scenarios]
 
+Some claims carry a deadline of their own, and the calendar shows the year each falls.
+
+[plate:due]
+
 ### Every claim, tested nightly
 
 ## A claim earns its place by naming what would prove it wrong
 
 Every claim on this page, each writer's and this site's own, is listed with its test, tonight's reading and the outcome that would prove it wrong. The tests run every night, so a claim that stops holding says so here before anyone rewrites a sentence.
+
+[plate:method]
+
+[plate:settle]
 
 [plate:board]

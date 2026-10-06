@@ -38,7 +38,7 @@ function claimCredit(doc: ClaimsDoc, p: OutlookPosition, c: OutlookClaim): strin
   return c.holders.join() !== p.holders.join() ? capital(names(doc, c.holders)) : null;
 }
 
-function Whose({ doc, p, c }: { doc: ClaimsDoc; p: OutlookPosition; c?: OutlookClaim }) {
+export function Whose({ doc, p, c }: { doc: ClaimsDoc; p: OutlookPosition; c?: OutlookClaim }) {
   const own = c ? claimCredit(doc, p, c) : null;
   if (own) return <>{own}</>;
   if (p.attribution === "site") return <>This site&apos;s own position</>;

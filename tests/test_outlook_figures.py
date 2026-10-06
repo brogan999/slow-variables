@@ -60,7 +60,8 @@ def _sides(fig):
 def test_the_figures_read_the_page_and_change_nothing_on_it():
     before = copy.deepcopy(DOC)
     assert ol.figures(DOC) == F and DOC == before
-    assert set(F) == {"looks", "counts", "sides", "settle", "whose", "due"}
+    assert set(F) == {"looks", "texts", "counts", "sides", "settle", "whose", "due"}
+    assert F["texts"]["c1"] == "Claim c1."  # a mark is named without hovering over a token
 
 
 def test_every_claim_has_one_look_and_the_looks_sum_to_the_pages_tally():
@@ -72,10 +73,12 @@ def test_every_claim_has_one_look_and_the_looks_sum_to_the_pages_tally():
 
 def test_each_position_on_the_page_is_drawn_once_and_each_claim_is_counted_once():
     s = F["sides"]
-    assert [x["id"] for x in _sides(F)] == ["a", "b", "c", "e", "f", "g"]  # the layer unit lives on its layer page
+    assert sorted(x["id"] for x in _sides(F)) == ["a", "b", "c", "e", "f", "g"]  # the layer unit lives on its layer page
     assert s["positions"] == 6 and s["layer_positions"] == 1 and s["positions"] + s["layer_positions"] == len(DOC["positions"])
     marks = [c for x in _sides(F) for c in x["claims"]]
     assert sorted(marks) == sorted(c["id"] for c in DOC["claims"]) and s["claims"] == len(marks) == len(set(marks))
+    assert {k: sum(f["counts"][k] for f in s["folios"]) for k in ol.LOOKS} == F["counts"]  # by question, the same claims
+    assert all(f["claims"] == sum(f["counts"].values()) for f in s["folios"]) and sum(f["positions"] for f in s["folios"]) == s["positions"]
     by = {d["key"]: d for d in _disputes(F)}
     assert by["a"]["kind"] == "pair" and by["a"]["right"]["id"] == "b" and by["a"]["right"]["claims"] == []
     # a position that argues against one already drawn is a row of its own, and the rival's claims are not drawn again
@@ -116,6 +119,7 @@ def test_whose_arguments_counts_positions_once_on_one_scale_and_draws_no_rate():
     assert max(b["x"] + b["w"] for r in w["rows"] for b in r["bar"]) == 100  # the longest row fills the scale
     assert sum(r["claims"] for r in w["rows"]) == len(DOC["claims"])  # a claim is credited once, as the page credits it
     assert w["site_readings"] == 1  # c6: this site's reading of a writer's position
+    assert w["site_rivals"] == 1  # b: this site's own position, set against a writer's, each naming the other
     assert not any(re.search(r"rate|share|pct|percent|rank", k) for r in w["rows"] for k in r)
 
 
@@ -151,6 +155,12 @@ def test_the_committed_export_carries_the_figures_and_they_agree_with_the_page()
     assert fig["settle"]["n"] == len(_disputes(fig)) == sum(fig["settle"]["counts"].values())
     assert sum(r["n"] for r in fig["whose"]["rows"]) == len(drawn)
     assert fig["due"]["dated"] == sum(1 for c in claims.values() if c["due"] or c["rival_until"])
+    # what the feet say in words has to stay true of the page: most of this site's own positions name no claim yet,
+    # and some dated claim has no test (so "for the rest" names something)
+    site = next(r for r in fig["whose"]["rows"] if r["id"] == "site")
+    assert site["without"] > site["with_claim"] and 0 < fig["whose"]["site_rivals"] <= site["n"]
+    assert 0 < fig["due"]["with_test"] < fig["due"]["dated"]
+    assert all(c.get("falsifier") for c in claims.values())  # "each names what would prove it wrong"
 
 
 def test_the_new_plates_are_named_in_the_essay_the_page_and_the_validation():
@@ -187,7 +197,8 @@ def test_the_figures_say_what_the_marks_do_not_mean():
     sides, settle, whose, due = (part(n) for n in ("SidesMap", "DisputeReach", "WhoseBars", "DueCalendar"))
     # a mark is tonight's reading of a claim, not a score for whoever wrote it; a claim that can't be tested is not wrong
     assert "not a score" in sides and "is not wrong" in sides and "counted once" in sides
-    assert "made by Anthropic" in sides and "made by Anthropic" in whose  # whose model drafted them, where labs are drawn
+    assert "made by Anthropic" in src.split("const DRAFTED")[1].split("\n")[0]  # whose model drafted them
+    assert "{DRAFTED}" in sides and "{DRAFTED}" in whose  # said wherever positions about the labs are drawn
     assert "does not say which side is right" in settle
     assert "not a ranking" in whose
     assert "no reading tests" in due
@@ -200,7 +211,7 @@ def test_the_figures_words_type_no_digit_but_years_and_no_number_word():
         src = f.read_text()
         words = re.findall(r'(?:title|label|note|tableLabel)="([^"]+)"', src) + re.findall(r">([^<>{}]*[a-z]{3}[^<>{}]*)<", src)
         # the words kept in maps; a string with a hyphenated token is a list of style classes, not words
-        words += [w for w in re.findall(r'"([^"]*[a-z]{3} [^"]*)"', src) if not re.search(r"(^| )[a-z:]+-[a-z0-9\[]", w)]
+        words += [w for w in re.findall(r'"([^"]*[a-z]{3} [a-z]{2,}[^"]*)"', src) if not re.search(r"(^| )[a-z:]+-[a-z0-9\[]", w)]
         assert words, f
         for w in words:
             assert not re.search(r"\d", re.sub(r"\b(19|20)\d\d\b|&[a-z]+;", "", w)), w

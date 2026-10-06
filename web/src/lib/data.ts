@@ -350,6 +350,19 @@ export type OutlookDoc = {
   scenarios: { progress: { id: string; label: string }[]; rules: { id: string; label: string }[]; cells: OutlookCell[]; anchors: { source: string; date: string; text: string }[] };
   agree: { id: string; text: string; holders: string[]; dissent: string[]; dissent_text?: string }[];
   shifts?: Shifts;
+  figures: OutlookFigures;
+};
+// The debate drawn (outlook.figures): every count and position is the export's.
+export type OutlookLook = "holding" | "failing" | "both" | "waiting" | "no_test";
+export type OutlookReach = "read" | "shared" | "waiting" | "no_test";
+export type OutlookSide = { id: string; claims: string[] };
+export type OutlookDispute = { key: string; kind: "pair" | "challenge"; left: OutlookSide; right: OutlookSide | null; against: string | null };
+export type OutlookFigures = {
+  looks: Record<string, OutlookLook>; texts: Record<string, string>; counts: Record<OutlookLook, number>;
+  sides: { folios: { id: string; kicker: string; main: OutlookDispute[]; more: OutlookDispute[]; positions: number; claims: number; counts: Record<OutlookLook, number> }[]; positions: number; layer_positions: number; claims: number; pairs: number; challenges: number };
+  settle: { rows: { id: string; label: string; n: number; counts: Record<OutlookReach, number>; cells: { key: string; reach: OutlookReach; claims: number; tested: number }[] }[]; n: number; counts: Record<OutlookReach, number> };
+  whose: { rows: { id: "author" | "extension" | "site"; n: number; with_claim: number; without: number; claims: number; bar: { part: "with_claim" | "without"; n: number; x: number; w: number }[] }[]; site_readings: number; site_rivals: number };
+  due: { years: { year: number; marks: { claim: string; kind: "due" | "rival_until"; date: string; passed: boolean }[] }[]; dated: number; undated: number; with_test: number };
 };
 export type PlaceState = "arriving" | "loosening" | "moving_on" | "not_yet" | "untestable" | "not_measured";
 export type PlaceTest = { says: string; holds: boolean | null } | null;
