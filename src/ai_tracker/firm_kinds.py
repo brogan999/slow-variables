@@ -12,7 +12,7 @@ from typing import Any
 
 import yaml
 
-from . import census
+from . import census, chart
 
 ROOT = Path(__file__).resolve().parents[2]
 SPEC = ROOT / "seed" / "firm_kinds.yaml"
@@ -21,6 +21,10 @@ PARTS = ("passes", "waits_on_check", "held", "outside")
 # the occupation code's major groups, gathered into the four layers the page draws
 TIERS = {"managers": ("11",), "sales": ("41",), "support": ("43",)}
 TIER_ORDER = ("managers", "professionals", "sales", "support")
+OPPORTUNITIES = ROOT / "seed" / "opportunities.yaml"
+# how a word for a layer's change is drawn against today's width: a drawing rule, stated under the figure
+DRAWN = {"gone": 0.0, "much_thinner": 0.35, "thinner": 0.7, "same": 1.0, "wider": 1.25}
+RUNG_Y = {"heavy": 18.0, "moderate": 50.0, "light": 82.0}  # the three bands of the map, top to bottom
 
 
 def load() -> dict[str, Any]:
@@ -117,4 +121,31 @@ def build(spec: dict[str, Any], cspec: dict[str, Any], trades_doc: dict[str, Any
             "rollups": {"buyers": trade["rollups"]["n"], "deals": len(trade["deals"]), "obs_ids": [x["obs_id"] for x in trade["deals"]],
                         "trade": trade["name"]} if trade else None,
         })
-    return {"version": cspec["version"], **{f: v for f, v in spec.items() if f != "kinds"}, "kinds": kinds}
+    opps = {o["id"]: o["name"] for o in (yaml.safe_load(OPPORTUNITIES.read_text()) or {}).get("opportunities") or []} if OPPORTUNITIES.exists() else {}
+    ax = chart.axis([k["share_checkable"] for k in kinds], "share", zero=True)
+    for k in kinds:
+        now = k["tiers"]
+        staged = [{"stage": "now", "judged": False, "tiers": [{"id": t["id"], "w": t["w"], "inner": t["pass_w"]} for t in now]}]
+        for stage in ("next", "later"):
+            words = (k.get("shape") or {}).get(stage) or ["same"] * len(now)
+            staged.append({"stage": stage, "judged": True,
+                           "tiers": [{"id": t["id"], "w": min(100.0, t["w"] * DRAWN[w]), "word": w} for t, w in zip(now, words)]})
+        k["staged"] = staged
+        # across: the share of office work that passes or waits only on a check; up: the judged band
+        k["place"] = {"x": 100 - chart.y(k["share_checkable"], ax), "y": RUNG_Y.get(k.get("rung") or "", 50.0)}
+    for band in RUNG_Y:  # kinds in one band step up and down in turn, left to right, so their names do not collide
+        row = sorted((k for k in kinds if k.get("rung") == band), key=lambda k: k["place"]["x"])
+        for i, k in enumerate(row):
+            k["place"]["y"] += (-9.0, 0.0, 9.0)[i % 3]
+    needs = [{**n, "opportunities": [{"id": o, "name": opps.get(o, o), "href": f"/value-chain/opportunities#op-{o}"} for o in n.get("opportunities") or []]}
+             for n in spec.get("needs") or []]
+    return {
+        "version": cspec["version"],
+        **{f: v for f, v in spec.items() if f not in ("kinds", "needs", "sources")},
+        "sources": [{**x, "retrieved_at": str(x["retrieved_at"]), "n": i + 1} for i, x in enumerate(spec.get("sources") or [])],
+        "needs": needs,
+        "needs_grid": [{"id": n["id"], "cells": [n["id"] in (k.get("needs") or []) for k in kinds]} for n in needs],
+        "map": {"x": {"ticks": [{"x": 100 - t["y"], "label": t["label"]} for t in ax["ticks"]]},
+                "rungs": [{"id": r, "y": y, "label": (spec.get("rungs") or {}).get(r, "")} for r, y in RUNG_Y.items()]},
+        "kinds": kinds,
+    }
