@@ -14,6 +14,7 @@ import yaml
 from ai_tracker import argument as ar
 from ai_tracker import migration_figures as mf
 from ai_tracker import store as st
+from ai_tracker.analysis.metrics import run_metrics
 from ai_tracker.analysis.tightness import score_input
 
 from .test_outlook import NUMBER_WORD
@@ -48,6 +49,7 @@ def plate(name: str) -> str:
 @pytest.fixture(scope="module")
 def built():
     s = st.Store()
+    s.derived = run_metrics(s.con)  # derived rows are not committed; a fresh checkout computes them
     spec = ar.load()
     return s, spec, ar.migration(s, spec, TODAY)
 
