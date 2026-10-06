@@ -94,9 +94,74 @@ def problems(spec: dict[str, Any], map_spec: dict[str, Any], outlook: dict[str, 
     return out
 
 
-def build(spec: dict[str, Any], map_doc: dict[str, Any], outlook: dict[str, Any], rubric: dict[str, Any]) -> dict[str, Any]:
+def figures(out: list[dict[str, Any]], map_doc: dict[str, Any], rubric: dict[str, Any], kinds: dict[str, Any]) -> dict[str, Any]:
+    """The page's figures, laid out from the records the cards show, the rubric's rules, the map's categories and the
+    needs grid on /firm/kinds (`kinds` is firm_kinds.load()). Counts and widths only; no judgement is added here."""
+    from .futures import POOLS_WORDS, TIER_WORDS
+
+    keeper = {**POOLS_WORDS, "users": "users"}
+    keeps = []
+    for r in rubric["pools"]["rules"]:  # first match wins, as futures.pools reads them
+        key = "+".join(f"{k}={v}" for k, v in r["when"].items()) or "otherwise"
+        fixed = [] if r["pools"] == "asset_owner" else [r["pools"]]
+        keeps.append({"key": key, "when": r["when"], "groups": [{"pools": p, "keeper": keeper[p], "ops": []} for p in fixed]})
+    for o in out:
+        row = next(k for k in keeps if all(o["rent"][f] == v for f, v in k["when"].items()))
+        group = next((g for g in row["groups"] if g["pools"] == o["rent"]["pools"]), None)
+        if not group:
+            row["groups"].append(group := {"pools": o["rent"]["pools"], "keeper": keeper[o["rent"]["pools"]], "ops": []})
+        group["ops"].append(o["id"])
+    cols = rubric["inputs"]["durability"]
+
+    def cell(kind: str, d: str, away: bool) -> list[str]:  # competed away to users keeps none of its cell: drawn apart
+        return [o["id"] for o in out if (o["rent"]["rent_kind"], o["rent"]["durability"]) == (kind, d) and (o["rent"]["pools"] == "users") == away]
+
+    size = [{"kind": kind, "cells": [{"tier": row[d], "word": TIER_WORDS[row[d]] if row[d] != "none" else "no lasting profit",
+                                      "ops": cell(kind, d, False), "away": cell(kind, d, True)}
+                                     for d in cols]} for kind, row in rubric["tiers"]["rules"].items()]
+    chain = []
+    for layer in map_doc.get("layers") or []:
+        cs = [{"id": c["id"], "number": c.get("number"), "name": c.get("name", c["id"]), "n_entities": c.get("n_entities", 0),
+               "live": len({e["name"] for e in c.get("entities", []) if not e.get("ownership")}),
+               "other": len({e["name"] for e in c.get("entities", []) if e.get("ownership")}),
+               "primary": [o["id"] for o in out if o["primary"]["id"] == c["id"]],
+               "adjacent": [o["id"] for o in out if c["id"] in [a["id"] for a in o["adjacent"]]]} for c in layer["categories"]]
+        chain.append({"id": layer.get("id"), "number": layer.get("number"), "name": layer.get("name"),
+                      "n_primary": sum(len(c["primary"]) for c in cs), "categories": cs})
+    firm, needs = kinds.get("kinds") or [], kinds.get("needs") or []
+    whole = len(firm) or 1
+
+    def need(n: dict[str, Any]) -> dict[str, Any]:
+        return {"id": n["id"], "name": n["name"], "href": f"/firm/kinds#need-{n['id']}"}
+
+    demand = []
+    for o in out:
+        mine = [n for n in needs if o["id"] in (n.get("opportunities") or [])]
+        who = [k["name"] for k in firm if {n["id"] for n in mine} & set(k.get("needs") or [])]  # a kind counts once
+        demand.append({"id": o["id"], "count": len(who), "w": 100 * len(who) / whole, "needs": [need(n) for n in mine], "kinds": who})
+    unmet = [{**need(n), "count": (c := sum(1 for k in firm if n["id"] in (k.get("needs") or []))), "w": 100 * c / whole}
+             for n in needs if not n.get("opportunities")]
+    used = sorted({x for o in out for x in o["powers"]}, key=list(POWERS.values()).index)
+    grid = [{"id": o["id"], "cells": [p in o["powers"] for p in used]} for o in out]
+    return {
+        "marks": [{"id": o["id"], "n": i + 1, "name": o["name"], "verdict": o["rent"]["verdict"], "pools": o["rent"]["pools"],
+                   "owner": POOLS_WORDS[o["rent"]["asset_owner"]]} for i, o in enumerate(out)],
+        "example": out[0]["id"] if out else None,
+        "keeps": [{k: v for k, v in r.items() if k != "when"} for r in keeps],
+        "size": {"cols": cols, "rows": size},
+        "chain": chain,
+        "demand": {"kinds": len(firm), "rows": sorted((r for r in demand if r["needs"]), key=lambda r: -r["count"]),
+                   "off": [r["id"] for r in demand if not r["needs"]], "unmet": unmet},
+        "powers": {"cols": used, "rows": grid, "totals": [sum(1 for r in grid if r["cells"][i]) for i in range(len(used))],
+                   "unused": [p for p in POWERS.values() if p not in used]},
+    }
+
+
+def build(spec: dict[str, Any], map_doc: dict[str, Any], outlook: dict[str, Any], rubric: dict[str, Any],
+          kinds: dict[str, Any] | None = None) -> dict[str, Any]:
     """The records as the page shows them. `map_doc` is market_map.build's export, so categories carry their names,
     numbers and placed companies exactly as the map shows them."""
+    from . import firm_kinds
     from .futures import TIER_WORDS, pools, profit, profit_text, tier
 
     cats = {c["id"]: c for L in map_doc.get("layers") or [] for c in L["categories"]}
@@ -160,4 +225,5 @@ def build(spec: dict[str, Any], map_doc: dict[str, Any], outlook: dict[str, Any]
         "counts": {"records": len(out), "unmapped": sum(1 for o in out if o["unmapped"]),
                    "by_tier": by_tier,
                    "kept_by_incumbents": sum(1 for o in out if o["rent"]["pools"] == "incumbents" and o["rent"]["tier"] != "none")},
+        "figures": figures(out, map_doc, rubric, firm_kinds.load() if kinds is None else kinds),
     }
