@@ -4,7 +4,7 @@
 # words: `now` reports what the listed sources say; `next`, `later`, `shape`, `rung` and the anatomy are this site's
 # judgement, drafted by claude-opus-5-5 on 6 Oct 2026 and labelled as judgement on the page. `shape` gives, for each
 # layer (managers, professionals, sales, office support), a word from `shape_words` for how it compares with today.
-# Sources carry a fetch record; each was fetched on the day. Text types no digit.
+# Sources carry a fetch record; each was fetched on the day. Text types no digit but a year.
 kinds:
 - id: accounting
   name: Accounting practice
@@ -12,10 +12,12 @@ kinds:
   - '541200'
   trade: accounting
   rung: heavy
-  signs: A licensed accountant for audits and reviews; the firm's own reviewer for tax returns and books
-  now: Buyers built around AI own these firms more than sell to them, and this is the trade with the most of them. One group
-    reports a tax pilot that cut preparation time and says it does not expect to need fewer accountants. One bookkeeping firm
-    says its software closes the books with no person involved and logs every step. Every figure is the operators' own.
+  signs: A licensed accountant for audits and reviews only; tax returns and bookkeeping need no licensed signature
+  now: Buyers built around AI own these firms more than sell to them, and this site lists more such buyers here than in any
+    other trade. An owner of many such firms reports a tax trial that cut preparation time; its chief said the year before
+    that the aim was not to replace accountants and that he did not expect AI to end the need for them. A bookkeeping firm
+    says its software runs the books from sign-up to the monthly close with no person involved and logs every decision. Every
+    figure is the operators' own.
   next: A client's books are years of context, so an agent that keeps it does the preparation and the first review. The practice
     becomes reviewers and client partners, with few preparers and few trainees.
   later: 'Little changes with robots: the work is on screens, apart from stock counts and site visits.'
@@ -27,9 +29,9 @@ kinds:
     - much_thinner
     later:
     - same
-    - much_thinner
+    - thinner
     - same
-    - gone
+    - much_thinner
   needs:
   - check
   - trail
@@ -38,8 +40,8 @@ kinds:
   - deploy
   - context
   - record
-  wrong: A roll-up reporting, after a full tax season, revenue per person no higher than ordinary firms; or a state board
-    disciplining a firm over audit work an agent prepared.
+  wrong: A buyer of such firms reporting, after a full tax season, revenue per person no higher than ordinary firms; or a
+    state board disciplining a firm over audit work an agent prepared.
   sources:
   - crete_rebrand
   - crete_reuters
@@ -52,12 +54,14 @@ kinds:
   trade: legal
   rung: heavy
   signs: A named lawyer on every piece of work; outside a few places, only lawyers may own the firm
-  now: 'The census passes almost none of a lawyer''s own work, and courts keep finding filings with invented citations. New
-    firms are built with agents drafting and lawyers reviewing everything. England''s regulator has licensed one firm run
-    on AI for small debt claims, on conditions: it may not propose case law, the client approves each step, and named solicitors
-    answer for the output.'
-  next: 'A firm''s precedents and each client''s history are held by the agent. Leverage turns over: fewer associates under
-    each partner, and more matters for each lawyer who signs.'
+  now: 'The census passes none of the work in a lawyer''s own role, mostly because no check that exists today settles it.
+    A researcher''s running list holds a great many court decisions in which a filing relied on material AI had made up; more
+    of those filings came from people acting without a lawyer than from lawyers. A new firm says its agents research and draft
+    while its lawyers review all of the work; that is the firm''s own account. The regulator for England and Wales has authorised
+    a firm run on AI for small debt claims, on conditions: it may not propose case law, it acts only on a step the client
+    has approved, and named solicitors answer for the output.'
+  next: 'A firm''s precedents and each client''s history are held by the agent. The ratio of junior lawyers to partners turns
+    over: fewer associates under each partner, and more matters for each lawyer who signs.'
   later: Robots do not bear on it.
   shape:
     next:
@@ -67,9 +71,9 @@ kinds:
     - thinner
     later:
     - same
-    - much_thinner
+    - thinner
     - same
-    - much_thinner
+    - thinner
   needs:
   - check
   - trail
@@ -77,6 +81,8 @@ kinds:
   - cover
   - juniors
   - context
+  - outcome
+  - staged
   wrong: A large firm publishing steady hiring of junior lawyers after years of agent use; or firms owned by non-lawyers failing
     to grow where they are allowed.
   sources:
@@ -92,11 +98,15 @@ kinds:
   trade: it_services
   rung: light
   signs: The engineer who reviews and accepts the change; no licence
-  now: The trade furthest along, because tests are a check everyone accepts. One large company says AI writes a sizeable share
-    of its new code, which engineers then review. A randomised trial found experienced developers slower with AI while believing
-    themselves faster. The largest outsourcers employ fewer people than a year ago, in a weak market as well.
-  next: Agents hold the codebase and its history. Engineers specify, review and answer; managers who relayed information thin
-    out; the junior rung is the open question.
+  now: 'By adoption this is the trade furthest along. This site''s reading is that tests give it a check most engineers accept,
+    though the census passes less of its payroll than it does in accounting. A large company said in 2024 that AI wrote a
+    sizeable share of its new code, which engineers then reviewed. A randomised trial with the tools of early 2025 found experienced
+    developers slower with AI while believing themselves faster. The same group''s repeat with later tools pointed the other
+    way, towards a speed-up, and its authors call that result unreliable because many developers would no longer work without
+    AI. Among the large Indian outsourcers the counts are mixed: the biggest employs fewer people than a year before, another
+    employs more, and the reporting cites weak demand as well as AI.'
+  next: Agents hold the whole body of a company's code and its history. Engineers specify, review and answer; managers who
+    relayed information thin out; the junior rung is the open question.
   later: Robots matter only for work in the field, such as fitting equipment.
   shape:
     next:
@@ -106,19 +116,20 @@ kinds:
     - much_thinner
     later:
     - thinner
-    - much_thinner
+    - thinner
     - same
-    - gone
+    - much_thinner
   needs:
   - check
   - identity
   - juniors
   - deploy
-  wrong: A repeat of the trial with current tools still finding a slowdown; or the outsourcers' headcount recovering as demand
-    does.
+  wrong: A sound repeat of the trial, with developers who cannot opt out, still finding a slowdown; or the outsourcers' headcount
+    recovering as demand does.
   sources:
   - google_q3
   - metr_dev
+  - metr_uplift_update
   - it_rpe
   - anthropic_work
 - id: bank
@@ -127,14 +138,17 @@ kinds:
   - 5220A1
   - '522200'
   rung: heavy
-  signs: The bank's own risk function, and a registered supervisor for anything sold as advice
-  now: Agents are in service and operations, not in deciding who gets credit. One bank projected fewer people in operations;
-    two lenders that cut service staff for a chatbot took people back. In April the American bank regulators rewrote their
-    rules for models and left agents out of them, so a bank has no approved way to show an examiner that an agent is under
-    control.
+  signs: The bank's own risk function
+  now: What is on record here is in service and operations; this site found nothing on agents deciding who gets credit. A
+    bank's consumer chief projected fewer people in operations and account services, with no date. A payments lender that
+    froze hiring and leaned on a chatbot said quality fell and began hiring service staff again. A bank that declared service
+    jobs redundant in favour of a voice bot called it an error and reversed it. In April 2026 the American bank regulators
+    reissued their guidance on managing models, put generative and agentic AI outside its scope, and said they would ask for
+    views on AI later. This site reads that as leaving a bank with no agreed template for showing a regulator's examiner that
+    an agent is under control.
   next: An agent that remembers the customer handles most service and processing. People sit in risk, exceptions and the decisions
     an examiner will ask about.
-  later: Branches and cash are the only physical part, and they are already shrinking for other reasons.
+  later: Branches and cash are the only physical part.
   shape:
     next:
     - same
@@ -145,7 +159,7 @@ kinds:
     - same
     - thinner
     - thinner
-    - gone
+    - much_thinner
   needs:
   - signoff
   - trail
@@ -153,8 +167,8 @@ kinds:
   - fallback
   - check
   - context
-  wrong: The regulators extending the old model rules to agents unchanged; or the banks that took people back finding they
-    need few.
+  wrong: The regulators bringing agents under the model guidance unchanged; or the bank that projected fewer operations staff
+    reporting no fall.
   sources:
   - occ_2026_13
   - jpm_entrepreneur
@@ -168,10 +182,13 @@ kinds:
   - '524200'
   trade: insurance_agencies
   rung: heavy
-  signs: A licensed adjuster or agent; under bills now proposed, a person for any refusal to pay
-  now: One insurer built on AI grew its premiums far faster than its staff and says it spends much less than rivals on handling
-    claims, while still losing money. Two American states have bills that leave sorting, fraud scoring and approvals to software
-    and require a person only to refuse a claim. On brokers this site found almost nothing.
+  signs: A licensed adjuster or seller, under licensing rules this page did not read; under a bill now proposed, a person
+    for the final refusal of some claims
+  now: An insurer built on AI reports premiums, the payments its customers make for cover, growing far faster than its staff
+    and says rivals spend far more than it does on handling claims, by its own estimate of the industry; it still loses money.
+    A bill introduced in New Jersey would leave sorting, fraud scoring and approvals to software and bar software from making
+    the final refusal, for home, motor and flood cover only; it has not reached a committee. A wider bill in Florida, which
+    would have required a qualified person to make every refusal, died in March 2026. On brokers this site found almost nothing.
   next: Software takes in a claim, checks it and pays it. People remain for refusals, disputes and large or strange risks,
     and for selling to businesses.
   later: Robots or drones inspect damage; repair stays with other trades.
@@ -185,17 +202,19 @@ kinds:
     - same
     - thinner
     - much_thinner
-    - gone
+    - much_thinner
   needs:
   - trail
   - signoff
   - cover
   - check
-  - fallback
-  wrong: That insurer's staff growing in step with its premiums; or the bills on refusals failing.
+  wrong: That insurer's staff growing in step with its premiums; or the New Jersey bill dying as Florida's did, leaving no
+    state that requires a person for a refusal.
   sources:
   - lemonade_q2
   - nj_a5494
+  - fl_hb527
+  - fl_hb527_status
 - id: hospital
   name: Hospital or medical practice
   naics:
@@ -204,14 +223,17 @@ kinds:
   trade: medical_practices
   rung: heavy
   signs: A licensed clinician, everywhere but one state's trial
-  now: 'What has spread is note-taking: software that writes up the visit. Clinicians report less burnout; an independent
-    review finds no clear saving. One American state lets a company renew routine prescriptions without a doctor signing,
-    after doctors reviewed its first decisions, with insurance that covers the software. The state''s own medical board asked
-    for a halt and was refused.'
+  now: 'The use on record is note-taking: software that writes up the visit. In a study with no comparison group, whose authors
+    include staff of the software''s maker, fewer clinicians reported burnout after a month of use. An independent institute''s
+    report, drawn from interviews with early users, calls the financial effect unclear. Utah has waived its licensing law
+    to let a company''s software renew routine prescriptions without a doctor signing, once doctors have reviewed its early
+    decisions for each class of drug; the company says its malpractice insurance covers the software. Members of the state''s
+    medical licensing board asked for a halt in April 2026. The state declined, saying doctors were still reviewing every
+    renewal in the opening phase.'
   next: An agent holding the patient's whole record drafts, orders and follows up routine care. Clinicians examine, decide
     and sign, each for more patients; the office behind them thins.
-  later: 'This is where robots would matter most and are furthest off: bodies are fragile, and the work the census cannot
-    see is most of a hospital.'
+  later: 'This is where robots would matter most and are furthest off: bodies are fragile, and much of a clinician''s work
+    needs hands, which the census sets aside as physical.'
   shape:
     next:
     - same
@@ -222,36 +244,37 @@ kinds:
     - same
     - thinner
     - same
-    - gone
+    - much_thinner
   needs:
   - check
   - signoff
   - cover
   - trail
   - staged
-  - fleet
   wrong: Harm in that state's trial, or other states copying it quickly; or a controlled trial finding note-taking software
     does nothing for burnout.
   sources:
   - abridge_jama
   - phti_scribes
   - doctronic_me
+  - doctronic_tnw
   - fsmb_ai
-- id: staffing
-  name: Staffing and business-support firm
+- id: customer_support
+  name: Customer-support and business-support firm
   naics:
-  - '561300'
   - '561400'
   trade: contact_centres
   rung: light
   signs: Nobody by law; the customer who expects a person
-  now: The trade with the most figures and the most reversals. One software company says it runs support with far fewer people.
-    The large contact-centre operators report flat or falling revenue. The one careful study found an assistant made agents
-    faster, novices most. Firms that removed people too quickly brought some back. For staffing agencies themselves there
-    are targets and little else.
+  now: The trade with the most figures and the most reversals, nearly all of them about customer support. A software company
+    that sells AI agents says it now runs its own support with far fewer people. A large contact-centre operator reports revenue
+    slightly down on a year before; the largest by headcount expects little or no growth. The best-measured study this site
+    found, of an AI assistant working beside support staff inside a company, found the staff faster, novices most. A payments
+    firm that leaned on a chatbot says quality fell and is hiring support staff again. Staffing agencies, a neighbouring trade
+    this page does not draw, have a target from a large agency and little else.
   next: An agent that remembers each customer and learns from corrections takes first contact. The firm sells results, not
     seats, and keeps a small team for the cases that escalate.
-  later: Agency work that is physical, such as warehouse shifts, goes the way of the warehouses.
+  later: 'Robots do not bear on it: the work is done on screens and telephones.'
   shape:
     next:
     - thinner
@@ -262,27 +285,33 @@ kinds:
     - thinner
     - thinner
     - same
-    - gone
+    - much_thinner
   needs:
   - check
   - fallback
   - outcome
   - context
-  wrong: The large operators' revenue recovering; or the companies that cut support staff quietly hiring them back.
+  - deploy
+  wrong: The large operators' revenue recovering; or the software company that cut its support staff reporting that it has
+    hired them back.
   sources:
   - salesforce_ktvu
   - cnxc_pulse
-  - crescendo_next
+  - tp_oa
+  - bry_li_raymond
   - klarna_entrepreneur
+  - adecco_hub
+  - crescendo_next
 - id: consultancy
   name: Management consultancy
   naics:
   - '541600'
   rung: light
   signs: A partner, on the firm's name alone
-  now: 'The evidence is thin and mostly second-hand. What is on record is a failure: a large firm repaid part of a government
-    fee after its report was found to cite things that did not exist. There is no licence and no accepted check for advice,
-    so the client cannot verify it and reputation carries the sale.'
+  now: 'The evidence is thin and mostly second-hand. What is on record is a failure: a large firm agreed to repay part of
+    a government fee after its report was found to quote a court judgment and cite research papers that did not exist; the
+    department said the report''s recommendations stood. This site''s reading is that there is no licence and no accepted
+    check for advice, so the client cannot verify it and reputation carries the sale.'
   next: Research, analysis and drafts come from agents that hold the firm's past work. Fewer, more senior people sell, frame
     the question and stand behind the answer.
   later: Robots do not bear on it.
@@ -296,7 +325,7 @@ kinds:
     - same
     - much_thinner
     - same
-    - gone
+    - much_thinner
   needs:
   - check
   - juniors
@@ -306,18 +335,21 @@ kinds:
   sources:
   - deloitte_ap
 - id: property
-  name: Property manager or estate agent
+  name: Property manager or letting agency
   naics:
   - '531000'
   trade: property_management
   rung: moderate
-  signs: The agent who holds clients' money; licensing varies by place
-  now: The clearest roll-up case. One British buyer of letting agencies says each of its staff handles several times the usual
-    number of homes, with software doing messages, rent and the arranging of repairs; its investor says margins rose where
-    the software is fully in use. Both are the company's own account. The physical part, repairs and viewings, is still people.
+  signs: In England, the agent who holds clients' money; licensing elsewhere varies and was not read for this page
+  now: The clearest case of a buyer of firms. A British buyer of letting agencies says each of its property managers handles
+    a multiple of the usual number of homes, with software handling messages, rent, compliance and the arranging of repairs.
+    Its investor says profit margins rose sharply at agencies where the software is fully in use. The count is the company's
+    own and the margin claim its investor's; neither has been independently checked. This site found no account of software
+    or robots doing the repairs or viewings themselves.
   next: Software that knows each building and tenant runs the tenancy. People win landlords, handle disputes and hold the
     client money.
-  later: Of the service trades this is the one robots change most, through maintenance, and there is no evidence of it yet.
+  later: Of the service trades this is the one robots would change most, through maintenance; this site found no evidence
+    of it yet.
   shape:
     next:
     - thinner
@@ -328,12 +360,11 @@ kinds:
     - thinner
     - thinner
     - same
-    - gone
+    - much_thinner
   needs:
   - record
   - check
   - identity
-  - fleet
   - deploy
   wrong: An independent count putting that buyer's homes per person near the ordinary level; or complaints rising at the agencies
     it bought.
@@ -349,14 +380,15 @@ kinds:
   - '493100'
   trade: freight
   rung: moderate
-  signs: A registered broker or carrier
-  now: Most of the payroll here is not office work, so the census sees little of it. In the office part, the largest American
-    freight broker reports each person handling many more shipments than a few years ago, a company measure that mixes AI
-    with other changes. Driverless trucks are hauling freight on fixed routes, and one retailer counts its warehouse robots
-    in very large numbers.
+  signs: A registered broker or carrier, under rules this page did not read
+  now: Most of the payroll here is in driving and warehouse jobs, which the census does not score. In the office part, a large
+    American freight broker reports each person handling markedly more shipments a day than at the end of 2022; it is a company
+    measure, and the report does not separate what AI did from anything else. A company running driverless trucks says they
+    are hauling freight on fixed routes and that it plans many more by the end of 2026. A retailer says it has put a very
+    large number of mobile robots into its warehouses; they are not humanoids, meaning robots shaped like a person.
   next: Quoting, booking and tracking run without people. The broker's office becomes a small desk for exceptions and customers.
-  later: 'The trade robots reach first: fixed routes and warehouses now, general handling later. The yard and the road are
-    where the firm changes most.'
+  later: 'In this site''s view the trade robots reach first: fixed routes and warehouses now, general handling later. The
+    yard and the road are where the firm changes most.'
   shape:
     next:
     - same
@@ -367,9 +399,8 @@ kinds:
     - thinner
     - thinner
     - thinner
-    - gone
+    - much_thinner
   needs:
-  - identity
   - check
   - fleet
   - record
@@ -388,12 +419,14 @@ kinds:
   rung: moderate
   signs: Whoever answers for product safety and for the workers beside the machines
   now: This site found almost nothing on agents in a manufacturer's offices, and says so. On the floor the base is ordinary
-    industrial robots, installed in large numbers every year. The best-documented humanoid trial is a single task at a single
-    car plant, since retired.
+    industrial robots, installed in large numbers every year by the count of the robot makers' own federation. The humanoid
+    trial with the most published detail is its maker's own account of a loading task at a car plant, and no other task; it
+    ran for most of a year and ended when the maker retired that generation of robot for its successor.
   next: Planning, purchasing and scheduling are run by agents that know the plant. Engineers and managers remain; clerical
     work thins.
   later: The kind of firm most exposed to robots and least sure of the date. One carmaker plans humanoids on a line within
-    a few years; a veteran roboticist expects hands to stay far short of human ones for a decade.
+    a few years; a veteran roboticist, who sells robots of another kind, expects robot hands to stay far short of human ones
+    beyond 2036.
   shape:
     next:
     - same
@@ -404,7 +437,7 @@ kinds:
     - thinner
     - thinner
     - same
-    - gone
+    - much_thinner
   needs:
   - check
   - fleet
@@ -423,9 +456,12 @@ kinds:
   - '458100'
   rung: light
   signs: The store operator; pharmacy and alcohol aside, no licence
-  now: 'The largest retailer says its headcount will stay flat while the work changes. An AI model set to run a small shop
-    lost money and invented a payment account. Two physical experiments were withdrawn: checkout without cashiers, and robots
-    that scanned shelves.'
+  now: The world's largest private employer, a retailer, says it expects its headcount to stay flat for some years while the
+    jobs change. In its maker's own test, an AI model set to run a small office shop lost money and told customers to pay
+    into an account it had made up. In a later round with more tools and another AI overseeing it, the maker reports the shop
+    began to make money, though staff could still talk it into bad deals. Checkout without cashiers was taken out of a grocery
+    chain's larger stores and kept in its smaller ones and for other retailers. Shelf-scanning robots were dropped by a large
+    retailer in 2020, before the current models.
   next: Agents buy, price and plan stock within limits a person sets. Head office thins; the shop floor does not.
   later: Warehouses first, as in freight. The shop floor changes last, because shoppers are there.
   shape:
@@ -438,18 +474,20 @@ kinds:
     - thinner
     - thinner
     - thinner
-    - gone
+    - much_thinner
   needs:
   - identity
   - incident
   - fleet
   - check
-  wrong: The largest retailer's headcount falling well before the decade ends; or a repeat of the shop experiment turning
-    a profit unaided.
+  wrong: That retailer's headcount falling well before the decade ends; or an AI running a shop at a profit with no person
+    or other AI correcting it, as reported by someone other than its maker.
   sources:
   - walmart_fortune
   - vend1
+  - vend2
   - jwo_mpr
+  - bossa_cnbc
 sources:
 - id: abridge_jama
   who: Olson and colleagues
@@ -460,7 +498,17 @@ sources:
   retrieved_at: 2026-10-06
   http_status: 200
   content_hash: b768eaf56146f47374ab4fba0a70ea4fa4c97e14831b198241baf8ac591f838a
-  ties: authors include executives of the software's maker
+  ties: authors include staff of the software's maker
+- id: adecco_hub
+  who: Staffing Hub, on Adecco
+  work: Adecco Says Half Its Revenue Will Run on Agentic AI by December. What’s Your Number?
+  venue: Staffing Hub
+  year: 2026
+  url: https://staffinghub.com/technology/adecco-says-half-its-revenue-will-run-on-agentic-ai-by-december-whats-your-number/
+  retrieved_at: 2026-10-06
+  http_status: 200
+  content_hash: a4a9a94d917fdec0dae5e9443008494b645c902943e7428f7050d3422c8af789
+  ties: trade press, on the agency's own target
 - id: amazon_million
   who: Amazon
   work: Amazon deploys over 1 million robots and launches new AI foundation model
@@ -490,7 +538,7 @@ sources:
   retrieved_at: 2026-10-06
   http_status: 200
   content_hash: 87fda6f8f9b0be3e4333abbc9986af72284c3d4733bd3e6f5226d802a5a1282c
-  ties: the company's own account
+  ties: the company's own account, from an automated summary
 - id: az_abs
   who: The Arizona Supreme Court
   work: Alternative Business Structures
@@ -500,6 +548,16 @@ sources:
   retrieved_at: 2026-10-06
   http_status: 200
   content_hash: 7b9c413c34a51d9346bfc4970e85cd5ce36fd3ee713d052f1c46067d515db6a7
+- id: bossa_cnbc
+  who: CNBC, citing The Wall Street Journal
+  work: Walmart ends contract with robotics company, opts for human workers instead, report says
+  venue: CNBC
+  year: 2020
+  url: https://www.cnbc.com/2020/11/02/walmart-ends-contract-with-robotics-company-bossa-nova-report-says.html
+  retrieved_at: 2026-10-06
+  http_status: 200
+  content_hash: 2ec6fdc58c85e866b5be682d3b32039dd2f80d96218e85cfc4e9b8180c1c0aef
+  ties: press, citing another newspaper's report
 - id: brooks_2026
   who: Rodney Brooks
   work: Predictions Scorecard, 2026 January 01
@@ -510,6 +568,16 @@ sources:
   http_status: 200
   content_hash: 6a578fca5aa6a7ac4a8ab1eb14e660015ac7713f20c43c11076c852598517509
   ties: he sells robots that are not humanoid
+- id: bry_li_raymond
+  who: Brynjolfsson, Li and Raymond
+  work: Generative AI at Work
+  venue: NBER Working Paper 31161
+  year: 2023
+  url: https://www.nber.org/papers/w31161
+  retrieved_at: 2026-10-06
+  http_status: 200
+  content_hash: c235cde6a74e575b40f057ed7a7007ac1b44be80b95e69c5dbabe528249ea8f6
+  ties: an academic working paper
 - id: cba_acs
   who: Information Age
   work: CBA reverses AI-driven job cuts, admits ‘error’
@@ -528,6 +596,7 @@ sources:
   retrieved_at: 2026-10-06
   http_status: 200
   content_hash: 51b9fdba1693c4db5a0403166bbeb8fb73387775835cc4f91e9004e1d323826d
+  ties: independent
 - id: chr_fw
   who: FreightWaves, on C.H. Robinson
   work: C.H. Robinson’s AI strategy boosts 2026 financial forecast
@@ -547,11 +616,12 @@ sources:
   retrieved_at: 2026-10-06
   http_status: 200
   content_hash: abfb87de89ad684d3cf34c010a70e9ab40c44c9d42fe6491f7971205db3e62a0
+  ties: the company's results, as rewritten by a news site
 - id: crescendo_next
   who: Crescendo
   work: Crescendo – the next episode!
   venue: crescendo.ai
-  year: null
+  year: 2024
   url: https://www.crescendo.ai/news/crescendo-the-next-episode
   retrieved_at: 2026-10-06
   http_status: 200
@@ -566,7 +636,7 @@ sources:
   retrieved_at: 2026-10-06
   http_status: 200
   content_hash: 6d3a03c3abbfe3bad02e8e17326f35de1a6ea5d72c3c6091b7dde9dffec4bcc1
-  ties: the operator's own account
+  ties: the operator's own account; its backer also invests in OpenAI, whose engineers build its tools
 - id: crete_reuters
   who: Crete's executives (Reuters)
   work: Thrive-backed accounting firm Crete to spend $500 million in AI roll-up
@@ -576,7 +646,7 @@ sources:
   retrieved_at: 2026-10-06
   http_status: 200
   content_hash: e02fb6595e9a79203f74ef3b417ed8ec978fc1c4e29abe9044238a4ea5571ead
-  ties: the operator's own account
+  ties: the operator's own account; its backer also invests in OpenAI, whose engineers build its tools
 - id: crosby
   who: Crosby
   work: Crosby home page
@@ -586,7 +656,7 @@ sources:
   retrieved_at: 2026-10-06
   http_status: 200
   content_hash: 6d9f3920c9cec5d67a12562f6605aa21492e5545a7cc7e214ab900c28dcc27e6
-  ties: the operator's own account
+  ties: the operator's own account; a marketing page
 - id: deloitte_ap
   who: The Associated Press
   work: Deloitte to partially refund Australian government for report with apparent AI-generated errors
@@ -605,6 +675,17 @@ sources:
   retrieved_at: 2026-10-06
   http_status: 200
   content_hash: c1cb1bd27d5d58dcab00e1ac59c4a2de1bf7dd85bdd6708c0c5c42c42a38a6ae
+  ties: trade press relaying the company and state officials
+- id: doctronic_tnw
+  who: The Next Web
+  work: Utah let an AI renew prescriptions without a doctor, and its medical board wants it stopped
+  venue: The Next Web
+  year: 2026
+  url: https://thenextweb.com/news/utah-ai-prescription-refills-doctronic
+  retrieved_at: 2026-10-06
+  http_status: 200
+  content_hash: f1952f18e6695a1d13dfa3dd46ffd004dd377953fd44125803fd4eeacfc7e539
+  ties: press, relaying the Associated Press
 - id: dwarkesh_timelines
   who: Dwarkesh Patel
   work: Why I don’t think AGI is right around the corner
@@ -614,6 +695,7 @@ sources:
   retrieved_at: 2026-10-06
   http_status: 200
   content_hash: 7f8c21173818cb39527f9f38a7a7310e81263dca3ad9a76ff43eb9f9e787c9c1
+  ties: independent
 - id: dwelly_tnw
   who: The Next Web, on Dwelly
   work: Dwelly raises $170M to turn UK lettings agencies into software
@@ -628,12 +710,32 @@ sources:
   who: Figure
   work: F.02 Contributed to the Production of 30,000 Cars at BMW
   venue: figure.ai
-  year: null
+  year: 2025
   url: https://www.figure.ai/news/production-at-bmw
   retrieved_at: 2026-10-06
   http_status: 200
   content_hash: 58a74835668df8affab740ab77ddfb6c55a32a328a0b23c6aa2b6adc6ad7206c
   ties: the maker's own account
+- id: fl_hb527
+  who: Florida House staff
+  work: HB 527 bill analysis, Insurance and Banking Subcommittee
+  venue: flsenate.gov
+  year: 2026
+  url: https://www.flsenate.gov/Session/Bill/2026/527/Analyses/h0527a.IBS.PDF
+  retrieved_at: 2026-10-06
+  http_status: 200
+  content_hash: acf4c8ef9113fd3eedb57f70d2260b54e5d147854889a3c62276dd292208d319
+  ties: legislative staff
+- id: fl_hb527_status
+  who: The Florida Senate
+  work: 'CS/CS/HB 527: Mandatory Human Reviews of Insurance Claim Denials'
+  venue: flsenate.gov
+  year: 2026
+  url: https://www.flsenate.gov/Session/Bill/2026/527
+  retrieved_at: 2026-10-06
+  http_status: 200
+  content_hash: d95772b258bbcc7c16c4c9efcb9251b293d9c2723b176209619ee9d7ea390c28
+  ties: the legislature's own record
 - id: fsmb_ai
   who: The Federation of State Medical Boards
   work: Navigating the Responsible and Ethical Incorporation of Artificial Intelligence into Clinical Practice
@@ -647,7 +749,7 @@ sources:
   who: General Catalyst
   work: The Future of Services
   venue: General Catalyst stories
-  year: null
+  year: 2025
   url: https://www.generalcatalyst.com/stories/the-future-of-services
   retrieved_at: 2026-10-06
   http_status: 200
@@ -692,6 +794,7 @@ sources:
   retrieved_at: 2026-10-06
   http_status: 200
   content_hash: a192dc935f41b07dc8130d59c4348228e66dd22015124c0dc4e143190609c895
+  ties: the robot makers' trade federation
 - id: it_rpe
   who: Entrepreneur India
   work: From TCS to TechM, Headcount Declines Echo Vembu’s IT Hiring Concerns
@@ -701,6 +804,7 @@ sources:
   retrieved_at: 2026-10-06
   http_status: 200
   content_hash: a75faefbfdb6ad290f00896c7a86c6550f81cd267d39638919d265adc5eb2535
+  ties: the companies' own counts, as reported
 - id: jpm_entrepreneur
   who: JPMorgan's consumer chief (Entrepreneur)
   work: JPMorgan Chase Says AI Could Cut Headcount By 10% in Some Divisions
@@ -710,7 +814,7 @@ sources:
   retrieved_at: 2026-10-06
   http_status: 200
   content_hash: 2c028221b03f84666cbbfc5481e223a9475c7f1071ad7e34e16ea00bd91958a8
-  ties: the bank's own projection
+  ties: the bank's own projection, reported at second hand, from another outlet's interview
 - id: jwo_mpr
   who: The Associated Press
   work: Amazon says it is removing Just Walk Out technology from its Fresh grocery stores
@@ -729,7 +833,7 @@ sources:
   retrieved_at: 2026-10-06
   http_status: 200
   content_hash: c228983782c5b13cb3a26ad95236ea37bf1b084e12bedec99ed68682351166d0
-  ties: the company's own account
+  ties: the company's own account, reported at second hand, from another outlet's interview
 - id: lemonade_q2
   who: Lemonade's management
   work: Lemonade Q2 2026 Earnings Call Transcript
@@ -741,7 +845,7 @@ sources:
   content_hash: 04550af01b30ea8bc2bcaf801ec3af035b6480c8d44f7c60317474f3ba405e74
   ties: the company's own account
 - id: lotj_arxiv
-  who: Tablan, Taylor and colleagues
+  who: Tablan, Taylor and Bernhem
   work: 'Learning on the Job: Continual Learning from Deployment Feedback for Frozen-Weights Agents'
   venue: arXiv 2607.22157
   year: 2026
@@ -749,6 +853,7 @@ sources:
   retrieved_at: 2026-10-06
   http_status: 200
   content_hash: 49a49dabf691f68a909dfab0f4bbc7116523f9f0b0efc8be8f4a5f8b36925dab
+  ties: a preprint, not peer reviewed
 - id: metr_dev
   who: METR
   work: Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity
@@ -758,6 +863,7 @@ sources:
   retrieved_at: 2026-10-06
   http_status: 200
   content_hash: 70a2ea69beb064ea74c76e9fdef3dcde2ec95da22a11b194e51515a94bd10012
+  ties: independent
 - id: metr_horizon
   who: METR
   work: Measuring AI Ability to Complete Long Tasks
@@ -767,6 +873,17 @@ sources:
   retrieved_at: 2026-10-06
   http_status: 200
   content_hash: 324ceae578c828673aec1511837883b1d93a614738fa4001b4afbd2db22f7444
+  ties: independent
+- id: metr_uplift_update
+  who: METR
+  work: We are Changing our Developer Productivity Experiment Design
+  venue: METR blog
+  year: 2026
+  url: https://metr.org/blog/2026-02-24-uplift-update/
+  retrieved_at: 2026-10-06
+  http_status: 200
+  content_hash: e6a7349ae59adb7c28ab9b03575d8327e94dbbe778bf341b097cc1edad76be5d
+  ties: independent
 - id: ms_humanoid
   who: Morgan Stanley Research
   work: Humanoid Robot Market Expected to Reach $5 Trillion by 2050
@@ -778,7 +895,7 @@ sources:
   content_hash: ed5202e7ca0b403e139a00149842df044aefc701a35adfd07c4ba059529a40f1
   ties: a bank with clients in the sector
 - id: nasba_aps
-  who: The state boards of accountancy
+  who: The National Association of State Boards of Accountancy
   work: Response to PEEC Proposed Revisions Related to Alternative Practice Structures (4-21-2026)
   venue: NASBA
   year: 2026
@@ -813,6 +930,7 @@ sources:
   retrieved_at: 2026-10-06
   http_status: 200
   content_hash: a6dfd69b1fc95077ba9ff4f14e2bb1572eebb238d792eeb48bff6458991820b0
+  ties: independent
 - id: pilot_cpa
   who: Pilot (CPA Practice Advisor)
   work: Pilot Rolls Out Fully Autonomous AI Accountant
@@ -832,19 +950,29 @@ sources:
   retrieved_at: 2026-10-06
   http_status: 200
   content_hash: abe93d379cebea3b38d284dab794f7c79a31bed8c9d4b8ceedfdff892aa4d3af
-  ties: the company's own account
+  ties: the company's own account; it sells the agent product in question
 - id: sra_garfield
   who: The Solicitors Regulation Authority
   work: SRA approves first AI-driven law firm
   venue: sra.org.uk
   year: 2025
-  url: https://www.sra.org.uk/sra/news/press/garfield-ai-authorised/
+  url: https://www.sra.org.uk/news/news/releases/2025/garfield-ai-authorised/
   retrieved_at: 2026-10-06
   http_status: 200
   content_hash: 5004559d706eb30ccfaf0a899865c89afe8249e7d8cffe8241f5b972229dbdbf
+- id: tp_oa
+  who: Outsource Accelerator, on TP
+  work: TP wants all 500,000 staff AI-enabled by 2027
+  venue: Outsource Accelerator
+  year: 2026
+  url: https://news.outsourceaccelerator.com/tp-ai-enabled-workforce/
+  retrieved_at: 2026-10-06
+  http_status: 200
+  content_hash: 9251cad7dacf5ba2a42106821669a7b5745f36ca2bc509a6b6dd36c88c4b11b4
+  ties: trade press with an interest in outsourcing
 - id: uk_cmp
   who: The UK Government
-  work: Client money protection scheme for property agents
+  work: Protecting clients’ money if you’re a property agent
   venue: gov.uk
   year: 2026
   url: https://www.gov.uk/client-money-protection-scheme-property-agents
@@ -861,9 +989,20 @@ sources:
   http_status: 200
   content_hash: e4f8ae7909a7fdefd370e40765c71ba86d8044ea5ab94c6258f590600f8822d6
   ties: a lab's own experiment; Anthropic's model drafted this page
+- id: vend2
+  who: Anthropic with Andon Labs
+  work: 'Project Vend: Phase two'
+  venue: anthropic.com research
+  year: 2025
+  url: https://www.anthropic.com/research/project-vend-2
+  retrieved_at: 2026-10-06
+  http_status: 200
+  content_hash: 85f07b200090b905f8f2382e10e0508feb43b6729796262df9cdc1de07dc7677
+  ties: a lab's own experiment; Anthropic's model drafted this page
 - id: walmart_fortune
   who: Fortune, on Walmart
-  work: Walmart CEO Doug McMillon can’t think of a single job that won’t be changed by AI
+  work: Walmart CEO Doug McMillon says he can’t think of a single job that won’t be changed by AI—here’s how today’s workforce
+    can prepare
   venue: Fortune
   year: 2025
   url: https://fortune.com/2025/09/30/billion-dollar-retail-giant-walmart-ceo-doug-mcmillon-cant-think-of-a-single-job-that-wont-be-changed-by-ai-artifical-intelligence-how-employees-can-prepare
@@ -879,8 +1018,9 @@ stages:
 - id: next
   name: Next
   what: Agents that keep context and learn on the job
-  rests_on: Judgement. Models cannot yet be taught on the job; the writers this site reads date it from late in this decade
-    to well into the next.
+  rests_on: Judgement. Today's models do not change from what they do on the job. A widely read interviewer of AI researchers
+    put even odds on models learning on the job as a person does by 2032. A recent preprint, not yet peer reviewed, shows
+    a memory kept outside the model helping on a banking test.
   sources:
   - dwarkesh_timelines
   - lotj_arxiv
@@ -888,8 +1028,9 @@ stages:
 - id: later
   name: Later
   what: Robots that do physical work with that context
-  rests_on: Extrapolation. The evidence is a few trials and plans; bank forecasts put the real rise late in the next decade,
-    and a veteran roboticist later still.
+  rests_on: Extrapolation. The evidence is a few trials and plans. A bank's forecast puts the real rise late in the next decade,
+    and another bank's runs only to its middle. A veteran roboticist expects robot hands to stay far short of human ones beyond
+    2036.
   sources:
   - gs_humanoid
   - ms_humanoid
@@ -921,7 +1062,7 @@ anatomy:
     does: Agents now; agents that keep context next; robots later. Wide, cheap, and not employed.
   - id: rented
     name: Rented
-    does: The models themselves, bought by the token from whoever sells them cheapest.
+    does: The models themselves, bought by the unit of text processed and, in this site's view, from whoever sells them cheapest.
   - id: owned
     name: Owned
     does: 'What cannot be bought: customers, the firm''s records and context, its licences, its sensors and sites.'
@@ -939,7 +1080,8 @@ needs:
   - agent_audit_trail
 - id: signoff
   name: Sign-off for regulated work
-  what: A way to show an examiner or a board that an agent is under control, where the old rules leave agents out.
+  what: A way to show a regulator's examiner or a board that an agent is under control, where the old guidance leaves agents
+    out.
   opportunities:
   - regulated_assurance
   - licensed_autonomous_service

@@ -18,7 +18,7 @@
     "name": "The working base"
    },
    {
-    "does": "The models themselves, bought by the token from whoever sells them cheapest.",
+    "does": "The models themselves, bought by the unit of text processed and, in this site's view, from whoever sells them cheapest.",
     "id": "rented",
     "name": "Rented"
    },
@@ -30,9 +30,27 @@
   ],
   "title": "The anatomy of an AI-run firm"
  },
+ "drawn": [
+  {
+   "label": "about the same",
+   "w": 100.0,
+   "word": "same"
+  },
+  {
+   "label": "thinner",
+   "w": 70.0,
+   "word": "thinner"
+  },
+  {
+   "label": "much thinner",
+   "w": 35.0,
+   "word": "much_thinner"
+  }
+ ],
  "kinds": [
   {
    "agreed3": 2447466288.8177996,
+   "agreed_w": 2.5116152066731483,
    "bar": [
     {
      "part": "passes",
@@ -45,9 +63,14 @@
      "x": 9.498301369107086
     },
     {
-     "part": "held",
-     "w": 82.06613458453377,
+     "part": "needs_body",
+     "w": 9.389691816743031,
      "x": 16.710829269109674
+    },
+    {
+     "part": "held",
+     "w": 72.67644276779075,
+     "x": 26.100521085852705
     },
     {
      "part": "outside",
@@ -55,8 +78,9 @@
      "x": 98.77696385364345
     }
    ],
-   "held": 79970091483.59138,
+   "held": 70820220865.34999,
    "id": "accounting",
+   "knowledge_payroll": 96254111100.0,
    "later": "Little changes with robots: the work is on screens, apart from stock counts and site visits.",
    "naics": [
     "541200"
@@ -71,15 +95,14 @@
     "context",
     "record"
    ],
+   "needs_body": 9149870618.241396,
    "next": "A client's books are years of context, so an agent that keeps it does the preparation and the first review. The practice becomes reviewers and client partners, with few preparers and few trainees.",
-   "now": "Buyers built around AI own these firms more than sell to them, and this is the trade with the most of them. One group reports a tax pilot that cut preparation time and says it does not expect to need fewer accountants. One bookkeeping firm says its software closes the books with no person involved and logs every step. Every figure is the operators' own.",
-   "office_payroll": 96254111100.0,
+   "now": "Buyers built around AI own these firms more than sell to them, and this site lists more such buyers here than in any other trade. An owner of many such firms reports a tax trial that cut preparation time; its chief said the year before that the aim was not to replace accountants and that he did not expect AI to end the need for them. A bookkeeping firm says its software runs the books from sign-up to the monthly close with no person involved and logs every decision. Every figure is the operators' own.",
    "outside": 1191798700.0,
    "passes": 9255706184.672256,
    "payroll": 97445909800.0,
    "place": {
-    "x": 56.39,
-    "y": 27.0
+    "x": 33.84
    },
    "refs": [
     "census:v3.2-2026-09-24/industries.csv#541200"
@@ -123,9 +146,9 @@
    "shape": {
     "later": [
      "same",
-     "much_thinner",
+     "thinner",
      "same",
-     "gone"
+     "much_thinner"
     ],
     "next": [
      "same",
@@ -136,11 +159,12 @@
    },
    "share_agreed3": 0.02511615206673148,
    "share_checkable": 0.16917739336339485,
-   "share_held": 0.8206613458453377,
+   "share_held": 0.7267644276779074,
+   "share_needs_body": 0.09389691816743032,
    "share_outside": 0.012230361463565502,
    "share_passes": 0.09498301369107086,
    "share_waits_on_check": 0.07212527900002587,
-   "signs": "A licensed accountant for audits and reviews; the firm's own reviewer for tax returns and books",
+   "signs": "A licensed accountant for audits and reviews only; tax returns and bookkeeping need no licensed signature",
    "sources": [
     "crete_rebrand",
     "crete_reuters",
@@ -181,21 +205,25 @@
       {
        "id": "managers",
        "w": 40.23228246502641,
+       "was": 40.23228246502641,
        "word": "same"
       },
       {
        "id": "professionals",
        "w": 70.0,
+       "was": 100.0,
        "word": "thinner"
       },
       {
        "id": "sales",
        "w": 3.638316346623503,
+       "was": 3.638316346623503,
        "word": "same"
       },
       {
        "id": "support",
        "w": 9.900163437682368,
+       "was": 28.286181250521054,
        "word": "much_thinner"
       }
      ]
@@ -207,52 +235,64 @@
       {
        "id": "managers",
        "w": 40.23228246502641,
+       "was": 40.23228246502641,
        "word": "same"
       },
       {
        "id": "professionals",
-       "w": 35.0,
-       "word": "much_thinner"
+       "w": 70.0,
+       "was": 100.0,
+       "word": "thinner"
       },
       {
        "id": "sales",
        "w": 3.638316346623503,
+       "was": 3.638316346623503,
        "word": "same"
       },
       {
        "id": "support",
-       "w": 0.0,
-       "word": "gone"
+       "w": 9.900163437682368,
+       "was": 28.286181250521054,
+       "word": "much_thinner"
       }
      ]
     }
    ],
    "tiers": [
     {
+     "agreed_w": 0.9054867617093367,
      "id": "managers",
      "pass_w": 1.1945259147013279,
      "share": 0.23369560263904407,
+     "share_agreed3": 0.009054867617093367,
      "share_passes": 0.01194525914701328,
      "w": 40.23228246502641
     },
     {
+     "agreed_w": 0.44781872073073,
      "id": "professionals",
      "pass_w": 7.715154196605585,
      "share": 0.5808658826209866,
+     "share_agreed3": 0.0044781872073073,
      "share_passes": 0.07715154196605585,
      "w": 100.0
     },
     {
+     "agreed_w": 11.312270820088246,
      "id": "sales",
      "pass_w": 17.505185599008435,
      "share": 0.021133738359358244,
+     "share_agreed3": 0.11312270820088247,
      "share_passes": 0.17505185599008435,
      "w": 3.638316346623503
     },
     {
+     "agreed_w": 11.149475320712096,
      "id": "support",
      "pass_w": 27.298853832898832,
      "share": 0.16430477638061114,
+     "share_agreed3": 0.11149475320712096,
      "share_passes": 0.27298853832898834,
      "w": 28.286181250521054
     }
@@ -261,10 +301,11 @@
     "Accounting, Tax Preparation, Bookkeeping, and Payroll Services"
    ],
    "waits_on_check": 7028313431.736355,
-   "wrong": "A roll-up reporting, after a full tax season, revenue per person no higher than ordinary firms; or a state board disciplining a firm over audit work an agent prepared."
+   "wrong": "A buyer of such firms reporting, after a full tax season, revenue per person no higher than ordinary firms; or a state board disciplining a firm over audit work an agent prepared."
   },
   {
    "agreed3": 1049943135.5651745,
+   "agreed_w": 0.7631767302217642,
    "bar": [
     {
      "part": "passes",
@@ -277,9 +318,14 @@
      "x": 1.6766083364621616
     },
     {
-     "part": "held",
-     "w": 87.97185568858339,
+     "part": "needs_body",
+     "w": 16.370120098771327,
      "x": 11.078110454990618
+    },
+    {
+     "part": "held",
+     "w": 71.60173558981207,
+     "x": 27.448230553761945
     },
     {
      "part": "outside",
@@ -287,8 +333,9 @@
      "x": 99.04996614357401
     }
    ],
-   "held": 121027597338.1928,
+   "held": 98506345647.13554,
    "id": "law",
+   "knowledge_payroll": 136268347700.0,
    "later": "Robots do not bear on it.",
    "naics": [
     "541100"
@@ -300,17 +347,18 @@
     "signoff",
     "cover",
     "juniors",
-    "context"
+    "context",
+    "outcome",
+    "staged"
    ],
-   "next": "A firm's precedents and each client's history are held by the agent. Leverage turns over: fewer associates under each partner, and more matters for each lawyer who signs.",
-   "now": "The census passes almost none of a lawyer's own work, and courts keep finding filings with invented citations. New firms are built with agents drafting and lawyers reviewing everything. England's regulator has licensed one firm run on AI for small debt claims, on conditions: it may not propose case law, the client approves each step, and named solicitors answer for the output.",
-   "office_payroll": 136268347700.0,
+   "needs_body": 22521251691.05725,
+   "next": "A firm's precedents and each client's history are held by the agent. The ratio of junior lawyers to partners turns over: fewer associates under each partner, and more matters for each lawyer who signs.",
+   "now": "The census passes none of the work in a lawyer's own role, mostly because no check that exists today settles it. A researcher's running list holds a great many court decisions in which a filing relied on material AI had made up; more of those filings came from people acting without a lawyer than from lawyers. A new firm says its agents research and draft while its lawyers review all of the work; that is the firm's own account. The regulator for England and Wales has authorised a firm run on AI for small debt claims, on conditions: it may not propose case law, it acts only on a step the client has approved, and named solicitors answer for the output.",
    "outside": 1307012500.0,
    "passes": 2306599958.031047,
    "payroll": 137575360200.0,
    "place": {
-    "x": 37.28,
-    "y": 18.0
+    "x": 22.370000000000005
    },
    "refs": [
     "census:v3.2-2026-09-24/industries.csv#541100"
@@ -329,9 +377,9 @@
    "shape": {
     "later": [
      "same",
-     "much_thinner",
+     "thinner",
      "same",
-     "much_thinner"
+     "thinner"
     ],
     "next": [
      "same",
@@ -342,7 +390,8 @@
    },
    "share_agreed3": 0.007631767302217643,
    "share_checkable": 0.11184365715918343,
-   "share_held": 0.8797185568858339,
+   "share_held": 0.7160173558981207,
+   "share_needs_body": 0.1637012009877133,
    "share_outside": 0.009500338564259853,
    "share_passes": 0.016766083364621615,
    "share_waits_on_check": 0.09401502118528457,
@@ -387,21 +436,25 @@
       {
        "id": "managers",
        "w": 6.490018862893018,
+       "was": 6.490018862893018,
        "word": "same"
       },
       {
        "id": "professionals",
        "w": 70.0,
+       "was": 100.0,
        "word": "thinner"
       },
       {
        "id": "sales",
        "w": 0.23203226789881212,
+       "was": 0.23203226789881212,
        "word": "same"
       },
       {
        "id": "support",
        "w": 10.895179116359126,
+       "was": 15.564541594798753,
        "word": "thinner"
       }
      ]
@@ -413,52 +466,64 @@
       {
        "id": "managers",
        "w": 6.490018862893018,
+       "was": 6.490018862893018,
        "word": "same"
       },
       {
        "id": "professionals",
-       "w": 35.0,
-       "word": "much_thinner"
+       "w": 70.0,
+       "was": 100.0,
+       "word": "thinner"
       },
       {
        "id": "sales",
        "w": 0.23203226789881212,
+       "was": 0.23203226789881212,
        "word": "same"
       },
       {
        "id": "support",
-       "w": 5.447589558179563,
-       "word": "much_thinner"
+       "w": 10.895179116359126,
+       "was": 15.564541594798753,
+       "word": "thinner"
       }
      ]
     }
    ],
    "tiers": [
     {
+     "agreed_w": 0.6953636509088958,
      "id": "managers",
      "pass_w": 1.0274351426541002,
      "share": 0.05307220291480793,
+     "share_agreed3": 0.0069536365090889585,
      "share_passes": 0.010274351426541001,
      "w": 6.490018862893018
     },
     {
+     "agreed_w": 0.1276085337105988,
      "id": "professionals",
      "pass_w": 0.43817664179806426,
      "share": 0.8177511350275218,
+     "share_agreed3": 0.001276085337105988,
      "share_passes": 0.004381766417980643,
      "w": 100.0
     },
     {
+     "agreed_w": 7.7022216012456,
      "id": "sales",
      "pass_w": 15.01585948537321,
      "share": 0.0018974465043726364,
+     "share_agreed3": 0.077022216012456,
      "share_passes": 0.15015859485373212,
      "w": 0.23203226789881212
     },
     {
+     "agreed_w": 4.828955376893877,
      "id": "support",
      "pass_w": 9.831534326595458,
      "share": 0.12727921555329755,
+     "share_agreed3": 0.048289553768938766,
      "share_passes": 0.09831534326595458,
      "w": 15.564541594798753
     }
@@ -471,6 +536,7 @@
   },
   {
    "agreed3": 7269951115.594643,
+   "agreed_w": 1.8852038120303027,
    "bar": [
     {
      "part": "passes",
@@ -483,18 +549,24 @@
      "x": 6.424500333545543
     },
     {
-     "part": "held",
-     "w": 79.87708771265163,
+     "part": "needs_body",
+     "w": 9.117620442961044,
      "x": 19.3568884596667
     },
     {
+     "part": "held",
+     "w": 70.75946726969057,
+     "x": 28.474508902627743
+    },
+    {
      "part": "outside",
-     "w": 0.7660238276816642,
-     "x": 99.23397617231834
+     "w": 0.7660238276816784,
+     "x": 99.23397617231832
     }
    ],
-   "held": 308031693560.8385,
+   "held": 272871222057.5018,
    "id": "software",
+   "knowledge_payroll": 382678069700.0,
    "later": "Robots matter only for work in the field, such as fitting equipment.",
    "naics": [
     "513200",
@@ -507,15 +579,14 @@
     "juniors",
     "deploy"
    ],
-   "next": "Agents hold the codebase and its history. Engineers specify, review and answer; managers who relayed information thin out; the junior rung is the open question.",
-   "now": "The trade furthest along, because tests are a check everyone accepts. One large company says AI writes a sizeable share of its new code, which engineers then review. A randomised trial found experienced developers slower with AI while believing themselves faster. The largest outsourcers employ fewer people than a year ago, in a weak market as well.",
-   "office_payroll": 382678069700.0,
+   "needs_body": 35160471503.33669,
+   "next": "Agents hold the whole body of a company's code and its history. Engineers specify, review and answer; managers who relayed information thin out; the junior rung is the open question.",
+   "now": "By adoption this is the trade furthest along. This site's reading is that tests give it a check most engineers accept, though the census passes less of its payroll than it does in accounting. A large company said in 2024 that AI wrote a sizeable share of its new code, which engineers then reviewed. A randomised trial with the tools of early 2025 found experienced developers slower with AI while believing themselves faster. The same group's repeat with later tools pointed the other way, towards a speed-up, and its authors call that result unreliable because many developers would no longer work without AI. Among the large Indian outsourcers the counts are mixed: the biggest employs fewer people than a year before, another employs more, and the reporting cites weak demand as well as AI.",
    "outside": 2954033800.0,
    "passes": 24774935775.616196,
    "payroll": 385632103500.0,
    "place": {
-    "x": 65.02000000000001,
-    "y": 82.0
+    "x": 39.01
    },
    "refs": [
     "census:v3.2-2026-09-24/industries.csv#513200",
@@ -542,9 +613,9 @@
    "shape": {
     "later": [
      "thinner",
-     "much_thinner",
+     "thinner",
      "same",
-     "gone"
+     "much_thinner"
     ],
     "next": [
      "thinner",
@@ -555,7 +626,8 @@
    },
    "share_agreed3": 0.018852038120303026,
    "share_checkable": 0.19506311453300784,
-   "share_held": 0.7987708771265163,
+   "share_held": 0.7075946726969058,
+   "share_needs_body": 0.09117620442961044,
    "share_outside": 0.007660238276816598,
    "share_passes": 0.06424500333545544,
    "share_waits_on_check": 0.12932388126121158,
@@ -563,6 +635,7 @@
    "sources": [
     "google_q3",
     "metr_dev",
+    "metr_uplift_update",
     "it_rpe",
     "anthropic_work"
    ],
@@ -600,21 +673,25 @@
       {
        "id": "managers",
        "w": 24.827244423015944,
+       "was": 35.467492032879925,
        "word": "thinner"
       },
       {
        "id": "professionals",
        "w": 70.0,
+       "was": 100.0,
        "word": "thinner"
       },
       {
        "id": "sales",
        "w": 10.706220665097222,
+       "was": 10.706220665097222,
        "word": "same"
       },
       {
        "id": "support",
        "w": 1.7329424479333324,
+       "was": 4.951264136952378,
        "word": "much_thinner"
       }
      ]
@@ -626,52 +703,64 @@
       {
        "id": "managers",
        "w": 24.827244423015944,
+       "was": 35.467492032879925,
        "word": "thinner"
       },
       {
        "id": "professionals",
-       "w": 35.0,
-       "word": "much_thinner"
+       "w": 70.0,
+       "was": 100.0,
+       "word": "thinner"
       },
       {
        "id": "sales",
        "w": 10.706220665097222,
+       "was": 10.706220665097222,
        "word": "same"
       },
       {
        "id": "support",
-       "w": 0.0,
-       "word": "gone"
+       "w": 1.7329424479333324,
+       "was": 4.951264136952378,
+       "word": "much_thinner"
       }
      ]
     }
    ],
    "tiers": [
     {
+     "agreed_w": 0.6911530552521811,
      "id": "managers",
      "pass_w": 0.9309000055356711,
      "share": 0.2346898095582194,
+     "share_agreed3": 0.006911530552521811,
      "share_passes": 0.009309000055356712,
      "w": 35.467492032879925
     },
     {
+     "agreed_w": 0.9607504402065676,
      "id": "professionals",
      "pass_w": 6.638454835978972,
      "share": 0.6617039889390871,
+     "share_agreed3": 0.009607504402065677,
      "share_passes": 0.06638454835978973,
      "w": 100.0
     },
     {
+     "agreed_w": 10.361467617410657,
      "id": "sales",
      "pass_w": 16.93898910442607,
      "share": 0.07084348920556918,
+     "share_agreed3": 0.10361467617410657,
      "share_passes": 0.16938989104426072,
      "w": 10.706220665097222
     },
     {
+     "agreed_w": 11.2254107198675,
      "id": "support",
      "pass_w": 20.233720080901673,
      "share": 0.03276271229712435,
+     "share_agreed3": 0.11225410719867501,
      "share_passes": 0.20233720080901677,
      "w": 4.951264136952378
     }
@@ -681,10 +770,11 @@
     "Computer Systems Design and Related Services"
    ],
    "waits_on_check": 49871440363.54526,
-   "wrong": "A repeat of the trial with current tools still finding a slowdown; or the outsourcers' headcount recovering as demand does."
+   "wrong": "A sound repeat of the trial, with developers who cannot opt out, still finding a slowdown; or the outsourcers' headcount recovering as demand does."
   },
   {
    "agreed3": 6222257181.886959,
+   "agreed_w": 2.8696182584278502,
    "bar": [
     {
      "part": "passes",
@@ -697,19 +787,25 @@
      "x": 7.9725958395211345
     },
     {
-     "part": "held",
-     "w": 78.01641894487878,
+     "part": "needs_body",
+     "w": 9.893353263826347,
      "x": 20.632847938637315
     },
     {
+     "part": "held",
+     "w": 68.12306568105244,
+     "x": 30.52620120246366
+    },
+    {
      "part": "outside",
-     "w": 1.3507331164839087,
-     "x": 98.64926688351609
+     "w": 1.3507331164838945,
+     "x": 98.6492668835161
     }
    ],
-   "held": 169164738779.8634,
+   "held": 147712760553.14484,
    "id": "bank",
-   "later": "Branches and cash are the only physical part, and they are already shrinking for other reasons.",
+   "knowledge_payroll": 213903402500.0,
+   "later": "Branches and cash are the only physical part.",
    "naics": [
     "5220A1",
     "522200"
@@ -723,15 +819,14 @@
     "check",
     "context"
    ],
+   "needs_body": 21451978226.71856,
    "next": "An agent that remembers the customer handles most service and processing. People sit in risk, exceptions and the decisions an examiner will ask about.",
-   "now": "Agents are in service and operations, not in deciding who gets credit. One bank projected fewer people in operations; two lenders that cut service staff for a chatbot took people back. In April the American bank regulators rewrote their rules for models and left agents out of them, so a bank has no approved way to show an examiner that an agent is under control.",
-   "office_payroll": 213903402500.0,
+   "now": "What is on record here is in service and operations; this site found nothing on agents deciding who gets credit. A bank's consumer chief projected fewer people in operations and account services, with no date. A payments lender that froze hiring and leaned on a chatbot said quality fell and began hiring service staff again. A bank that declared service jobs redundant in favour of a voice bot called it an error and reversed it. In April 2026 the American bank regulators reissued their guidance on managing models, put generative and agentic AI outside its scope, and said they would ask for views on AI later. This site reads that as leaving a bank with no agreed template for showing a regulator's examiner that an agent is under control.",
    "outside": 2928824700.0,
    "passes": 17287157124.488213,
    "payroll": 216832227200.0,
    "place": {
-    "x": 69.72,
-    "y": 9.0
+    "x": 41.83
    },
    "refs": [
     "census:v3.2-2026-09-24/industries.csv#5220A1",
@@ -744,7 +839,7 @@
      "same",
      "thinner",
      "thinner",
-     "gone"
+     "much_thinner"
     ],
     "next": [
      "same",
@@ -755,11 +850,12 @@
    },
    "share_agreed3": 0.0286961825842785,
    "share_checkable": 0.20915358613866172,
-   "share_held": 0.7801641894487878,
+   "share_held": 0.6812306568105243,
+   "share_needs_body": 0.09893353263826346,
    "share_outside": 0.01350733116483895,
    "share_passes": 0.07972595839521134,
    "share_waits_on_check": 0.12660252099116182,
-   "signs": "The bank's own risk function, and a registered supervisor for anything sold as advice",
+   "signs": "The bank's own risk function",
    "sources": [
     "occ_2026_13",
     "jpm_entrepreneur",
@@ -801,21 +897,25 @@
       {
        "id": "managers",
        "w": 56.138731742324175,
+       "was": 56.138731742324175,
        "word": "same"
       },
       {
        "id": "professionals",
        "w": 70.0,
+       "was": 100.0,
        "word": "thinner"
       },
       {
        "id": "sales",
        "w": 21.545903160741712,
+       "was": 30.77986165820245,
        "word": "thinner"
       },
       {
        "id": "support",
        "w": 17.655747392994478,
+       "was": 50.444992551412795,
        "word": "much_thinner"
       }
      ]
@@ -827,52 +927,64 @@
       {
        "id": "managers",
        "w": 56.138731742324175,
+       "was": 56.138731742324175,
        "word": "same"
       },
       {
        "id": "professionals",
        "w": 70.0,
+       "was": 100.0,
        "word": "thinner"
       },
       {
        "id": "sales",
        "w": 21.545903160741712,
+       "was": 30.77986165820245,
        "word": "thinner"
       },
       {
        "id": "support",
-       "w": 0.0,
-       "word": "gone"
+       "w": 17.655747392994478,
+       "was": 50.444992551412795,
+       "word": "much_thinner"
       }
      ]
     }
    ],
    "tiers": [
     {
+     "agreed_w": 0.9115282055912676,
      "id": "managers",
      "pass_w": 1.1000191271803932,
      "share": 0.23650945243846694,
+     "share_agreed3": 0.009115282055912676,
      "share_passes": 0.011000191271803931,
      "w": 56.138731742324175
     },
     {
+     "agreed_w": 1.3591384913511269,
      "id": "professionals",
      "pass_w": 7.664607523556364,
      "share": 0.4212946126464725,
+     "share_agreed3": 0.01359138491351127,
      "share_passes": 0.07664607523556365,
      "w": 100.0
     },
     {
+     "agreed_w": 3.1198582074923267,
      "id": "sales",
      "pass_w": 6.248484915715166,
      "share": 0.1296738989460441,
+     "share_agreed3": 0.03119858207492326,
      "share_passes": 0.06248484915715166,
      "w": 30.77986165820245
     },
     {
+     "agreed_w": 8.075223449426986,
      "id": "support",
      "pass_w": 17.797075181067363,
      "share": 0.21252203596901645,
+     "share_agreed3": 0.08075223449426985,
      "share_passes": 0.17797075181067365,
      "w": 50.444992551412795
     }
@@ -882,10 +994,11 @@
     "Nondepository Credit Intermediation"
    ],
    "waits_on_check": 27451506595.64837,
-   "wrong": "The regulators extending the old model rules to agents unchanged; or the banks that took people back finding they need few."
+   "wrong": "The regulators bringing agents under the model guidance unchanged; or the bank that projected fewer operations staff reporting no fall."
   },
   {
    "agreed3": 5364702269.116219,
+   "agreed_w": 2.338990791363629,
    "bar": [
     {
      "part": "passes",
@@ -898,18 +1011,24 @@
      "x": 9.397870406962653
     },
     {
-     "part": "held",
-     "w": 78.23655622275437,
+     "part": "needs_body",
+     "w": 8.039123545881399,
      "x": 21.061386442023334
     },
     {
+     "part": "held",
+     "w": 70.19743267687296,
+     "x": 29.100509987904733
+    },
+    {
      "part": "outside",
-     "w": 0.7020573352222925,
-     "x": 99.29794266477771
+     "w": 0.7020573352223067,
+     "x": 99.2979426647777
     }
    ],
-   "held": 179443130877.5504,
+   "held": 161004621205.9701,
    "id": "insurer",
+   "knowledge_payroll": 227749463700.0,
    "later": "Robots or drones inspect damage; repair stays with other trades.",
    "naics": [
     "524100",
@@ -920,18 +1039,16 @@
     "trail",
     "signoff",
     "cover",
-    "check",
-    "fallback"
+    "check"
    ],
+   "needs_body": 18438509671.580307,
    "next": "Software takes in a claim, checks it and pays it. People remain for refusals, disputes and large or strange risks, and for selling to businesses.",
-   "now": "One insurer built on AI grew its premiums far faster than its staff and says it spends much less than rivals on handling claims, while still losing money. Two American states have bills that leave sorting, fraud scoring and approvals to software and require a person only to refuse a claim. On brokers this site found almost nothing.",
-   "office_payroll": 227749463700.0,
+   "now": "An insurer built on AI reports premiums, the payments its customers make for cover, growing far faster than its staff and says rivals spend far more than it does on handling claims, by its own estimate of the industry; it still loses money. A bill introduced in New Jersey would leave sorting, fraud scoring and approvals to software and bar software from making the final refusal, for home, motor and flood cover only; it has not reached a committee. A wider bill in Florida, which would have required a qualified person to make every refusal, died in March 2026. On brokers this site found almost nothing.",
    "outside": 1610236600.0,
    "passes": 21554927399.991932,
    "payroll": 229359700300.0,
    "place": {
-    "x": 70.7,
-    "y": 18.0
+    "x": 42.42
    },
    "refs": [
     "census:v3.2-2026-09-24/industries.csv#524100",
@@ -953,7 +1070,7 @@
      "same",
      "thinner",
      "much_thinner",
-     "gone"
+     "much_thinner"
     ],
     "next": [
      "same",
@@ -964,14 +1081,17 @@
    },
    "share_agreed3": 0.023389907913636293,
    "share_checkable": 0.21210294873001517,
-   "share_held": 0.7823655622275436,
+   "share_held": 0.7019743267687296,
+   "share_needs_body": 0.08039123545881398,
    "share_outside": 0.007020573352222854,
    "share_passes": 0.09397870406962654,
    "share_waits_on_check": 0.11663516035060684,
-   "signs": "A licensed adjuster or agent; under bills now proposed, a person for any refusal to pay",
+   "signs": "A licensed adjuster or seller, under licensing rules this page did not read; under a bill now proposed, a person for the final refusal of some claims",
    "sources": [
     "lemonade_q2",
-    "nj_a5494"
+    "nj_a5494",
+    "fl_hb527",
+    "fl_hb527_status"
    ],
    "staged": [
     {
@@ -1007,21 +1127,25 @@
       {
        "id": "managers",
        "w": 53.32135809239879,
+       "was": 53.32135809239879,
        "word": "same"
       },
       {
        "id": "professionals",
        "w": 70.0,
+       "was": 100.0,
        "word": "thinner"
       },
       {
        "id": "sales",
        "w": 29.149298789312176,
+       "was": 41.64185541330311,
        "word": "thinner"
       },
       {
        "id": "support",
        "w": 14.217854220937951,
+       "was": 40.622440631251294,
        "word": "much_thinner"
       }
      ]
@@ -1033,52 +1157,64 @@
       {
        "id": "managers",
        "w": 53.32135809239879,
+       "was": 53.32135809239879,
        "word": "same"
       },
       {
        "id": "professionals",
        "w": 70.0,
+       "was": 100.0,
        "word": "thinner"
       },
       {
        "id": "sales",
        "w": 14.574649394656088,
+       "was": 41.64185541330311,
        "word": "much_thinner"
       },
       {
        "id": "support",
-       "w": 0.0,
-       "word": "gone"
+       "w": 14.217854220937951,
+       "was": 40.622440631251294,
+       "word": "much_thinner"
       }
      ]
     }
    ],
    "tiers": [
     {
+     "agreed_w": 0.7498277579936901,
      "id": "managers",
      "pass_w": 0.9976396597752386,
      "share": 0.2263353356032513,
+     "share_agreed3": 0.007498277579936901,
      "share_passes": 0.009976396597752386,
      "w": 53.32135809239879
     },
     {
+     "agreed_w": 1.0676993697966624,
      "id": "professionals",
      "pass_w": 5.369050226955549,
      "share": 0.42447406386581976,
+     "share_agreed3": 0.010676993697966625,
      "share_passes": 0.05369050226955549,
      "w": 100.0
     },
     {
+     "agreed_w": 0.7243380149144648,
      "id": "sales",
      "pass_w": 15.8116213999518,
      "share": 0.1767588759419766,
+     "share_agreed3": 0.007243380149144648,
      "share_passes": 0.158116213999518,
      "w": 41.64185541330311
     },
     {
+     "agreed_w": 9.30554728764978,
      "id": "support",
      "pass_w": 24.15244198974631,
      "share": 0.17243172458895234,
+     "share_agreed3": 0.0930554728764978,
      "share_passes": 0.24152441989746312,
      "w": 40.622440631251294
     }
@@ -1088,10 +1224,11 @@
     "Agencies, Brokerages, and Other Insurance Related Activities"
    ],
    "waits_on_check": 26751405422.457626,
-   "wrong": "That insurer's staff growing in step with its premiums; or the bills on refusals failing."
+   "wrong": "That insurer's staff growing in step with its premiums; or the New Jersey bill dying as Florida's did, leaving no state that requires a person for a refusal."
   },
   {
    "agreed3": 5159625551.230558,
+   "agreed_w": 0.633241895751485,
    "bar": [
     {
      "part": "passes",
@@ -1104,9 +1241,14 @@
      "x": 1.8976476673333516
     },
     {
-     "part": "held",
-     "w": 82.3934109951385,
+     "part": "needs_body",
+     "w": 28.157572504908757,
      "x": 6.253318044853815
+    },
+    {
+     "part": "held",
+     "w": 54.23583849022974,
+     "x": 34.41089054976257
     },
     {
      "part": "outside",
@@ -1114,9 +1256,10 @@
      "x": 88.64672903999231
     }
    ],
-   "held": 671337685449.6609,
+   "held": 441911092655.22235,
    "id": "hospital",
-   "later": "This is where robots would matter most and are furthest off: bodies are fragile, and the work the census cannot see is most of a hospital.",
+   "knowledge_payroll": 722289430400.0,
+   "later": "This is where robots would matter most and are furthest off: bodies are fragile, and much of a clinician's work needs hands, which the census sets aside as physical.",
    "naics": [
     "622100",
     "621100"
@@ -1127,18 +1270,16 @@
     "signoff",
     "cover",
     "trail",
-    "staged",
-    "fleet"
+    "staged"
    ],
+   "needs_body": 229426592794.43854,
    "next": "An agent holding the patient's whole record drafts, orders and follows up routine care. Clinicians examine, decide and sign, each for more patients; the office behind them thins.",
-   "now": "What has spread is note-taking: software that writes up the visit. Clinicians report less burnout; an independent review finds no clear saving. One American state lets a company renew routine prescriptions without a doctor signing, after doctors reviewed its first decisions, with insurance that covers the software. The state's own medical board asked for a halt and was refused.",
-   "office_payroll": 722289430400.0,
+   "now": "The use on record is note-taking: software that writes up the visit. In a study with no comparison group, whose authors include staff of the software's maker, fewer clinicians reported burnout after a month of use. An independent institute's report, drawn from interviews with early users, calls the financial effect unclear. Utah has waived its licensing law to let a company's software renew routine prescriptions without a doctor signing, once doctors have reviewed its early decisions for each class of drug; the company says its malpractice insurance covers the software. Members of the state's medical licensing board asked for a halt in April 2026. The state declined, saying doctors were still reviewing every renewal in the opening phase.",
    "outside": 92505924400.0,
    "passes": 15461945043.902706,
    "payroll": 814795354800.0,
    "place": {
-    "x": 23.510000000000005,
-    "y": 9.0
+    "x": 14.11
    },
    "refs": [
     "census:v3.2-2026-09-24/industries.csv#622100",
@@ -1162,7 +1303,7 @@
      "same",
      "thinner",
      "same",
-     "gone"
+     "much_thinner"
     ],
     "next": [
      "same",
@@ -1173,7 +1314,8 @@
    },
    "share_agreed3": 0.00633241895751485,
    "share_checkable": 0.07054200547019256,
-   "share_held": 0.8239341099513849,
+   "share_held": 0.5423583849022974,
+   "share_needs_body": 0.28157572504908757,
    "share_outside": 0.11353270960007687,
    "share_passes": 0.018976476673333516,
    "share_waits_on_check": 0.04355670377520464,
@@ -1182,6 +1324,7 @@
     "abridge_jama",
     "phti_scribes",
     "doctronic_me",
+    "doctronic_tnw",
     "fsmb_ai"
    ],
    "staged": [
@@ -1218,21 +1361,25 @@
       {
        "id": "managers",
        "w": 9.256878573701998,
+       "was": 9.256878573701998,
        "word": "same"
       },
       {
        "id": "professionals",
        "w": 100.0,
+       "was": 100.0,
        "word": "same"
       },
       {
        "id": "sales",
        "w": 0.08857393631812577,
+       "was": 0.08857393631812577,
        "word": "same"
       },
       {
        "id": "support",
        "w": 3.803345010259965,
+       "was": 10.866700029314186,
        "word": "much_thinner"
       }
      ]
@@ -1244,52 +1391,64 @@
       {
        "id": "managers",
        "w": 9.256878573701998,
+       "was": 9.256878573701998,
        "word": "same"
       },
       {
        "id": "professionals",
        "w": 70.0,
+       "was": 100.0,
        "word": "thinner"
       },
       {
        "id": "sales",
        "w": 0.08857393631812577,
+       "was": 0.08857393631812577,
        "word": "same"
       },
       {
        "id": "support",
-       "w": 0.0,
-       "word": "gone"
+       "w": 3.803345010259965,
+       "was": 10.866700029314186,
+       "word": "much_thinner"
       }
      ]
     }
    ],
    "tiers": [
     {
+     "agreed_w": 0.2242364502721118,
      "id": "managers",
      "pass_w": 0.43890088224040025,
      "share": 0.07700451558483722,
+     "share_agreed3": 0.0022423645027211184,
      "share_passes": 0.004389008822404002,
      "w": 9.256878573701998
     },
     {
+     "agreed_w": 0.1994185147455345,
      "id": "professionals",
      "pass_w": 1.2714766824479775,
      "share": 0.8318626518835461,
+     "share_agreed3": 0.0019941851474553447,
      "share_passes": 0.012714766824479775,
      "w": 100.0
     },
     {
+     "agreed_w": 6.672998169226353,
      "id": "sales",
      "pass_w": 12.303212692209193,
      "share": 0.0007368134955336043,
+     "share_agreed3": 0.06672998169226352,
      "share_passes": 0.12303212692209195,
      "w": 0.08857393631812577
     },
     {
+     "agreed_w": 5.821831906934397,
      "id": "support",
      "pass_w": 11.506358519335038,
      "share": 0.09039601903608308,
+     "share_agreed3": 0.058218319069343966,
      "share_passes": 0.11506358519335039,
      "w": 10.866700029314186
     }
@@ -1302,55 +1461,60 @@
    "wrong": "Harm in that state's trial, or other states copying it quickly; or a controlled trial finding note-taking software does nothing for burnout."
   },
   {
-   "agreed3": 6449431602.920601,
+   "agreed3": 3138501653.9172015,
+   "agreed_w": 8.978473362406069,
    "bar": [
     {
      "part": "passes",
-     "w": 5.9103137007494615,
+     "w": 14.598403537115285,
      "x": 0.0
     },
     {
      "part": "waits_on_check",
-     "w": 10.881674404431504,
-     "x": 5.9103137007494615
+     "w": 26.09756322457318,
+     "x": 14.598403537115285
+    },
+    {
+     "part": "needs_body",
+     "w": 12.479189134492596,
+     "x": 40.69596676168847
     },
     {
      "part": "held",
-     "w": 49.70375031203882,
-     "x": 16.791988105180966
+     "w": 42.79666509491333,
+     "x": 53.17515589618107
     },
     {
      "part": "outside",
-     "w": 33.50426158278022,
-     "x": 66.49573841721978
+     "w": 4.028179008905596,
+     "x": 95.9718209910944
     }
    ],
-   "held": 112443036408.6844,
-   "id": "staffing",
-   "later": "Agency work that is physical, such as warehouse shifts, goes the way of the warehouses.",
+   "held": 14959937927.190266,
+   "id": "customer_support",
+   "knowledge_payroll": 33547765500.0,
+   "later": "Robots do not bear on it: the work is done on screens and telephones.",
    "naics": [
-    "561300",
     "561400"
    ],
-   "name": "Staffing and business-support firm",
+   "name": "Customer-support and business-support firm",
    "needs": [
     "check",
     "fallback",
     "outcome",
-    "context"
+    "context",
+    "deploy"
    ],
+   "needs_body": 4362206597.631963,
    "next": "An agent that remembers each customer and learns from corrections takes first contact. The firm sells results, not seats, and keeps a small team for the cases that escalate.",
-   "now": "The trade with the most figures and the most reversals. One software company says it runs support with far fewer people. The large contact-centre operators report flat or falling revenue. The one careful study found an assistant made agents faster, novices most. Firms that removed people too quickly brought some back. For staffing agencies themselves there are targets and little else.",
-   "office_payroll": 150430957200.0,
-   "outside": 75795506000.0,
-   "passes": 13370693649.23054,
-   "payroll": 226226463200.0,
+   "now": "The trade with the most figures and the most reversals, nearly all of them about customer support. A software company that sells AI agents says it now runs its own support with far fewer people. A large contact-centre operator reports revenue slightly down on a year before; the largest by headcount expects little or no growth. The best-measured study this site found, of an AI assistant working beside support staff inside a company, found the staff faster, novices most. A payments firm that leaned on a chatbot says quality fell and is hiring support staff again. Staffing agencies, a neighbouring trade this page does not draw, have a target from a large agency and little else.",
+   "outside": 1408084200.0,
+   "passes": 5102995999.033503,
+   "payroll": 34955849700.0,
    "place": {
-    "x": 84.18,
-    "y": 73.0
+    "x": 84.81
    },
    "refs": [
-    "census:v3.2-2026-09-24/industries.csv#561300",
     "census:v3.2-2026-09-24/industries.csv#561400"
    ],
    "rollups": {
@@ -1371,7 +1535,7 @@
      "thinner",
      "thinner",
      "same",
-     "gone"
+     "much_thinner"
     ],
     "next": [
      "thinner",
@@ -1380,18 +1544,22 @@
      "much_thinner"
     ]
    },
-   "share_agreed3": 0.028508740806414204,
-   "share_checkable": 0.2525272822721598,
-   "share_held": 0.49703750312038825,
-   "share_outside": 0.33504261582780204,
-   "share_passes": 0.059103137007494616,
-   "share_waits_on_check": 0.10881674404431503,
+   "share_agreed3": 0.08978473362406068,
+   "share_checkable": 0.42404078969664244,
+   "share_held": 0.4279666509491333,
+   "share_needs_body": 0.12479189134492596,
+   "share_outside": 0.04028179008905625,
+   "share_passes": 0.14598403537115284,
+   "share_waits_on_check": 0.2609756322457318,
    "signs": "Nobody by law; the customer who expects a person",
    "sources": [
     "salesforce_ktvu",
     "cnxc_pulse",
-    "crescendo_next",
-    "klarna_entrepreneur"
+    "tp_oa",
+    "bry_li_raymond",
+    "klarna_entrepreneur",
+    "adecco_hub",
+    "crescendo_next"
    ],
    "staged": [
     {
@@ -1400,23 +1568,23 @@
      "tiers": [
       {
        "id": "managers",
-       "inner": 1.0811481325061305,
-       "w": 29.912214212620373
+       "inner": 0.7349728424874853,
+       "w": 34.572330051007775
       },
       {
        "id": "professionals",
-       "inner": 5.416149160397783,
-       "w": 100.0
+       "inner": 7.257797979996915,
+       "w": 44.14319012027673
       },
       {
        "id": "sales",
-       "inner": 19.030664433479828,
-       "w": 12.609068673439312
+       "inner": 21.62927205550081,
+       "w": 30.37755874831725
       },
       {
        "id": "support",
-       "inner": 19.821571584801607,
-       "w": 41.419536356901084
+       "inner": 21.777065506066176,
+       "w": 100.0
       }
      ]
     },
@@ -1426,22 +1594,26 @@
      "tiers": [
       {
        "id": "managers",
-       "w": 20.93854994883426,
+       "w": 24.20063103570544,
+       "was": 34.572330051007775,
        "word": "thinner"
       },
       {
        "id": "professionals",
-       "w": 70.0,
+       "w": 30.900233084193708,
+       "was": 44.14319012027673,
        "word": "thinner"
       },
       {
        "id": "sales",
-       "w": 12.609068673439312,
+       "w": 30.37755874831725,
+       "was": 30.37755874831725,
        "word": "same"
       },
       {
        "id": "support",
-       "w": 14.496837724915379,
+       "w": 35.0,
+       "was": 100.0,
        "word": "much_thinner"
       }
      ]
@@ -1452,66 +1624,78 @@
      "tiers": [
       {
        "id": "managers",
-       "w": 20.93854994883426,
+       "w": 24.20063103570544,
+       "was": 34.572330051007775,
        "word": "thinner"
       },
       {
        "id": "professionals",
-       "w": 70.0,
+       "w": 30.900233084193708,
+       "was": 44.14319012027673,
        "word": "thinner"
       },
       {
        "id": "sales",
-       "w": 12.609068673439312,
+       "w": 30.37755874831725,
+       "was": 30.37755874831725,
        "word": "same"
       },
       {
        "id": "support",
-       "w": 0.0,
-       "word": "gone"
+       "w": 35.0,
+       "was": 100.0,
+       "word": "much_thinner"
       }
      ]
     }
    ],
    "tiers": [
     {
+     "agreed_w": 0.4752913119606245,
      "id": "managers",
-     "pass_w": 1.0811481325061305,
-     "share": 0.16261868537787913,
-     "share_passes": 0.010811481325061304,
-     "w": 29.912214212620373
+     "pass_w": 0.7349728424874853,
+     "share": 0.16534421048102294,
+     "share_agreed3": 0.004752913119606245,
+     "share_passes": 0.007349728424874853,
+     "w": 34.572330051007775
     },
     {
+     "agreed_w": 1.8960215664841078,
      "id": "professionals",
-     "pass_w": 5.416149160397783,
-     "share": 0.5436531184952135,
-     "share_passes": 0.05416149160397783,
-     "w": 100.0
+     "pass_w": 7.257797979996915,
+     "share": 0.211117414064433,
+     "share_agreed3": 0.018960215664841077,
+     "share_passes": 0.07257797979996915,
+     "w": 44.14319012027673
     },
     {
+     "agreed_w": 16.860672195948073,
      "id": "sales",
-     "pass_w": 19.030664433479828,
-     "share": 0.06854959505635586,
-     "share_passes": 0.1903066443347983,
-     "w": 12.609068673439312
+     "pass_w": 21.62927205550081,
+     "share": 0.14528246896205352,
+     "share_agreed3": 0.16860672195948073,
+     "share_passes": 0.21629272055500812,
+     "w": 30.37755874831725
     },
     {
+     "agreed_w": 13.43818756958914,
      "id": "support",
-     "pass_w": 19.821571584801607,
-     "share": 0.22517860107055146,
-     "share_passes": 0.1982157158480161,
-     "w": 41.419536356901084
+     "pass_w": 21.777065506066176,
+     "share": 0.47825590649249056,
+     "share_agreed3": 0.1343818756958914,
+     "share_passes": 0.2177706550606618,
+     "w": 100.0
     }
    ],
    "titles": [
-    "Employment Services",
     "Business Support Services"
    ],
-   "waits_on_check": 24617227142.085052,
-   "wrong": "The large operators' revenue recovering; or the companies that cut support staff quietly hiring them back."
+   "waits_on_check": 9122624976.144274,
+   "wrong": "The large operators' revenue recovering; or the software company that cut its support staff reporting that it has hired them back."
   },
   {
    "agreed3": 3952697761.7298994,
+   "agreed_w": 2.055613491258905,
    "bar": [
     {
      "part": "passes",
@@ -1524,18 +1708,24 @@
      "x": 4.9163768886295625
     },
     {
-     "part": "held",
-     "w": 82.00674366234651,
+     "part": "needs_body",
+     "w": 10.215807688618437,
      "x": 14.609716123219393
     },
     {
+     "part": "held",
+     "w": 71.79093597372808,
+     "x": 24.82552381183783
+    },
+    {
      "part": "outside",
-     "w": 3.383540214434106,
-     "x": 96.6164597855659
+     "w": 3.383540214434092,
+     "x": 96.61645978556591
     }
    ],
-   "held": 157689114952.4413,
+   "held": 138045344196.52185,
    "id": "consultancy",
+   "knowledge_payroll": 185781843700.0,
    "later": "Robots do not bear on it.",
    "naics": [
     "541600"
@@ -1547,15 +1737,14 @@
     "capture",
     "cover"
    ],
+   "needs_body": 19643770755.919468,
    "next": "Research, analysis and drafts come from agents that hold the firm's past work. Fewer, more senior people sell, frame the question and stand behind the answer.",
-   "now": "The evidence is thin and mostly second-hand. What is on record is a failure: a large firm repaid part of a government fee after its report was found to cite things that did not exist. There is no licence and no accepted check for advice, so the client cannot verify it and reputation carries the sale.",
-   "office_payroll": 185781843700.0,
+   "now": "The evidence is thin and mostly second-hand. What is on record is a failure: a large firm agreed to repay part of a government fee after its report was found to quote a court judgment and cite research papers that did not exist; the department said the report's recommendations stood. This site's reading is that there is no licence and no accepted check for advice, so the client cannot verify it and reputation carries the sale.",
    "outside": 6506141300.0,
    "passes": 9453602054.15148,
    "payroll": 192287985000.0,
    "place": {
-    "x": 50.4,
-    "y": 73.0
+    "x": 30.239999999999995
    },
    "refs": [
     "census:v3.2-2026-09-24/industries.csv#541600"
@@ -1567,7 +1756,7 @@
      "same",
      "much_thinner",
      "same",
-     "gone"
+     "much_thinner"
     ],
     "next": [
      "same",
@@ -1578,7 +1767,8 @@
    },
    "share_agreed3": 0.02055613491258905,
    "share_checkable": 0.1512135318934758,
-   "share_held": 0.8200674366234652,
+   "share_held": 0.7179093597372808,
+   "share_needs_body": 0.10215807688618438,
    "share_outside": 0.03383540214434095,
    "share_passes": 0.049163768886295624,
    "share_waits_on_check": 0.0969333923458983,
@@ -1620,21 +1810,25 @@
       {
        "id": "managers",
        "w": 54.044029664406246,
+       "was": 54.044029664406246,
        "word": "same"
       },
       {
        "id": "professionals",
        "w": 35.0,
+       "was": 100.0,
        "word": "much_thinner"
       },
       {
        "id": "sales",
        "w": 9.478643002577687,
+       "was": 9.478643002577687,
        "word": "same"
       },
       {
        "id": "support",
        "w": 4.637334526311506,
+       "was": 13.249527218032876,
        "word": "much_thinner"
       }
      ]
@@ -1646,52 +1840,64 @@
       {
        "id": "managers",
        "w": 54.044029664406246,
+       "was": 54.044029664406246,
        "word": "same"
       },
       {
        "id": "professionals",
        "w": 35.0,
+       "was": 100.0,
        "word": "much_thinner"
       },
       {
        "id": "sales",
        "w": 9.478643002577687,
+       "was": 9.478643002577687,
        "word": "same"
       },
       {
        "id": "support",
-       "w": 0.0,
-       "word": "gone"
+       "w": 4.637334526311506,
+       "was": 13.249527218032876,
+       "word": "much_thinner"
       }
      ]
     }
    ],
    "tiers": [
     {
+     "agreed_w": 0.7864405484722448,
      "id": "managers",
      "pass_w": 1.0701159779064529,
      "share": 0.3057269734695824,
+     "share_agreed3": 0.007864405484722448,
      "share_passes": 0.010701159779064528,
      "w": 54.044029664406246
     },
     {
+     "agreed_w": 1.0280133014342467,
      "id": "professionals",
      "pass_w": 4.297818265726413,
      "share": 0.5656998106322486,
+     "share_agreed3": 0.010280133014342467,
      "share_passes": 0.04297818265726413,
      "w": 100.0
     },
     {
+     "agreed_w": 10.453819229882404,
      "id": "sales",
      "pass_w": 16.796798529436842,
      "share": 0.05362066551608886,
+     "share_agreed3": 0.10453819229882404,
      "share_passes": 0.16796798529436843,
      "w": 9.478643002577687
     },
     {
+     "agreed_w": 9.940662264452442,
      "id": "support",
      "pass_w": 19.07148194216337,
      "share": 0.07495255038208021,
+     "share_agreed3": 0.09940662264452442,
      "share_passes": 0.1907148194216337,
      "w": 13.249527218032876
     }
@@ -1704,6 +1910,7 @@
   },
   {
    "agreed3": 2621822058.107537,
+   "agreed_w": 2.182408405215576,
    "bar": [
     {
      "part": "passes",
@@ -1716,39 +1923,43 @@
      "x": 5.987724515792503
     },
     {
-     "part": "held",
-     "w": 60.810338850146664,
+     "part": "needs_body",
+     "w": 11.575659956589048,
      "x": 14.828158509230885
     },
     {
+     "part": "held",
+     "w": 49.234678893557614,
+     "x": 26.40381846581993
+    },
+    {
      "part": "outside",
-     "w": 24.361502640622447,
-     "x": 75.63849735937755
+     "w": 24.36150264062246,
+     "x": 75.63849735937754
     }
    ],
-   "held": 73054102695.5766,
+   "held": 59147759346.27144,
    "id": "property",
-   "later": "Of the service trades this is the one robots change most, through maintenance, and there is no evidence of it yet.",
+   "knowledge_payroll": 90867813900.0,
+   "later": "Of the service trades this is the one robots would change most, through maintenance; this site found no evidence of it yet.",
    "naics": [
     "531000"
    ],
-   "name": "Property manager or estate agent",
+   "name": "Property manager or letting agency",
    "needs": [
     "record",
     "check",
     "identity",
-    "fleet",
     "deploy"
    ],
+   "needs_body": 13906343349.305157,
    "next": "Software that knows each building and tenant runs the tenancy. People win landlords, handle disputes and hold the client money.",
-   "now": "The clearest roll-up case. One British buyer of letting agencies says each of its staff handles several times the usual number of homes, with software doing messages, rent and the arranging of repairs; its investor says margins rose where the software is fully in use. Both are the company's own account. The physical part, repairs and viewings, is still people.",
-   "office_payroll": 90867813900.0,
+   "now": "The clearest case of a buyer of firms. A British buyer of letting agencies says each of its property managers handles a multiple of the usual number of homes, with software handling messages, rent, compliance and the arranging of repairs. Its investor says profit margins rose sharply at agencies where the software is fully in use. The count is the company's own and the margin claim its investor's; neither has been independently checked. This site found no account of software or robots doing the repairs or viewings themselves.",
    "outside": 29266531800.0,
    "passes": 7193313669.365817,
    "payroll": 120134345700.0,
    "place": {
-    "x": 65.35,
-    "y": 50.0
+    "x": 39.21
    },
    "refs": [
     "census:v3.2-2026-09-24/industries.csv#531000"
@@ -1786,7 +1997,7 @@
      "thinner",
      "thinner",
      "same",
-     "gone"
+     "much_thinner"
     ],
     "next": [
      "thinner",
@@ -1797,11 +2008,12 @@
    },
    "share_agreed3": 0.02182408405215576,
    "share_checkable": 0.196039834567027,
-   "share_held": 0.6081033885014666,
+   "share_held": 0.49234678893557615,
+   "share_needs_body": 0.11575659956589048,
    "share_outside": 0.24361502640622448,
    "share_passes": 0.05987724515792504,
    "share_waits_on_check": 0.0884043399343838,
-   "signs": "The agent who holds clients' money; licensing varies by place",
+   "signs": "In England, the agent who holds clients' money; licensing elsewhere varies and was not read for this page",
    "sources": [
     "dwelly_tnw",
     "gc_services",
@@ -1841,21 +2053,25 @@
       {
        "id": "managers",
        "w": 70.0,
+       "was": 100.0,
        "word": "thinner"
       },
       {
        "id": "professionals",
        "w": 29.50733930937534,
+       "was": 42.1533418705362,
        "word": "thinner"
       },
       {
        "id": "sales",
        "w": 51.126875731560816,
+       "was": 51.126875731560816,
        "word": "same"
       },
       {
        "id": "support",
        "w": 12.947099044042378,
+       "was": 36.9917115544068,
        "word": "much_thinner"
       }
      ]
@@ -1867,52 +2083,64 @@
       {
        "id": "managers",
        "w": 70.0,
+       "was": 100.0,
        "word": "thinner"
       },
       {
        "id": "professionals",
        "w": 29.50733930937534,
+       "was": 42.1533418705362,
        "word": "thinner"
       },
       {
        "id": "sales",
        "w": 51.126875731560816,
+       "was": 51.126875731560816,
        "word": "same"
       },
       {
        "id": "support",
-       "w": 0.0,
-       "word": "gone"
+       "w": 12.947099044042378,
+       "was": 36.9917115544068,
+       "word": "much_thinner"
       }
      ]
     }
    ],
    "tiers": [
     {
+     "agreed_w": 0.31285612718563693,
      "id": "managers",
      "pass_w": 2.269241678639096,
      "share": 0.434269171958147,
+     "share_agreed3": 0.003128561271856369,
      "share_passes": 0.02269241678639096,
      "w": 100.0
     },
     {
+     "agreed_w": 1.9171914123641574,
      "id": "professionals",
      "pass_w": 7.181935224133175,
      "share": 0.18305896869386443,
+     "share_agreed3": 0.019171914123641574,
      "share_passes": 0.07181935224133175,
      "w": 42.1533418705362
     },
     {
+     "agreed_w": 4.990386852366712,
      "id": "sales",
      "pass_w": 12.754204202431994,
      "share": 0.22202825988751998,
+     "share_agreed3": 0.04990386852366712,
      "share_passes": 0.12754204202431996,
      "w": 51.126875731560816
     },
     {
+     "agreed_w": 8.0332149791846,
      "id": "support",
      "pass_w": 17.33194640658086,
      "share": 0.16064359946046858,
+     "share_agreed3": 0.08033214979184598,
      "share_passes": 0.17331946406580864,
      "w": 36.9917115544068
     }
@@ -1925,6 +2153,7 @@
   },
   {
    "agreed3": 3561567244.84003,
+   "agreed_w": 1.6874930801605361,
    "bar": [
     {
      "part": "passes",
@@ -1937,19 +2166,25 @@
      "x": 3.1141308992350143
     },
     {
-     "part": "held",
-     "w": 22.006725194646652,
+     "part": "needs_body",
+     "w": 4.711209855029773,
      "x": 7.117893289039673
     },
     {
+     "part": "held",
+     "w": 17.295515339616877,
+     "x": 11.829103144069446
+    },
+    {
      "part": "outside",
-     "w": 70.87538151631367,
-     "x": 29.124618483686326
+     "w": 70.87538151631368,
+     "x": 29.124618483686323
     }
    ],
-   "held": 46446668458.03775,
+   "held": 36503344304.29051,
    "id": "freight",
-   "later": "The trade robots reach first: fixed routes and warehouses now, general handling later. The yard and the road are where the firm changes most.",
+   "knowledge_payroll": 61469459300.0,
+   "later": "In this site's view the trade robots reach first: fixed routes and warehouses now, general handling later. The yard and the road are where the firm changes most.",
    "naics": [
     "488500",
     "484000",
@@ -1957,20 +2192,18 @@
    ],
    "name": "Freight and logistics operator",
    "needs": [
-    "identity",
     "check",
     "fleet",
     "record"
    ],
+   "needs_body": 9943324153.74724,
    "next": "Quoting, booking and tracking run without people. The broker's office becomes a small desk for exceptions and customers.",
-   "now": "Most of the payroll here is not office work, so the census sees little of it. In the office part, the largest American freight broker reports each person handling many more shipments than a few years ago, a company measure that mixes AI with other changes. Driverless trucks are hauling freight on fixed routes, and one retailer counts its warehouse robots in very large numbers.",
-   "office_payroll": 61469459300.0,
+   "now": "Most of the payroll here is in driving and warehouse jobs, which the census does not score. In the office part, a large American freight broker reports each person handling markedly more shipments a day than at the end of 2022; it is a company measure, and the report does not separate what AI did from anything else. A company running driverless trucks says they are hauling freight on fixed routes and that it plans many more by the end of 2026. A retailer says it has put a very large number of mobile robots into its warehouses; they are not humanoids, meaning robots shaped like a person.",
    "outside": 149587242900.0,
    "passes": 6572581978.116626,
    "payroll": 211056702200.0,
    "place": {
-    "x": 81.46000000000001,
-    "y": 59.0
+    "x": 48.88
    },
    "refs": [
     "census:v3.2-2026-09-24/industries.csv#488500",
@@ -1996,7 +2229,7 @@
      "thinner",
      "thinner",
      "thinner",
-     "gone"
+     "much_thinner"
     ],
     "next": [
      "same",
@@ -2007,11 +2240,12 @@
    },
    "share_agreed3": 0.016874930801605362,
    "share_checkable": 0.24439438727846838,
-   "share_held": 0.2200672519464665,
+   "share_held": 0.17295515339616876,
+   "share_needs_body": 0.04711209855029773,
    "share_outside": 0.7087538151631367,
    "share_passes": 0.031141308992350143,
    "share_waits_on_check": 0.0400376238980466,
-   "signs": "A registered broker or carrier",
+   "signs": "A registered broker or carrier, under rules this page did not read",
    "sources": [
     "chr_fw",
     "aurora_q2",
@@ -2051,21 +2285,25 @@
       {
        "id": "managers",
        "w": 71.46803747018765,
+       "was": 71.46803747018765,
        "word": "same"
       },
       {
        "id": "professionals",
        "w": 33.151629056758104,
+       "was": 47.35947008108301,
        "word": "thinner"
       },
       {
        "id": "sales",
        "w": 12.256700975471713,
+       "was": 17.50957282210245,
        "word": "thinner"
       },
       {
        "id": "support",
        "w": 35.0,
+       "was": 100.0,
        "word": "much_thinner"
       }
      ]
@@ -2077,52 +2315,64 @@
       {
        "id": "managers",
        "w": 50.02762622913136,
+       "was": 71.46803747018765,
        "word": "thinner"
       },
       {
        "id": "professionals",
        "w": 33.151629056758104,
+       "was": 47.35947008108301,
        "word": "thinner"
       },
       {
        "id": "sales",
        "w": 12.256700975471713,
+       "was": 17.50957282210245,
        "word": "thinner"
       },
       {
        "id": "support",
-       "w": 0.0,
-       "word": "gone"
+       "w": 35.0,
+       "was": 100.0,
+       "word": "much_thinner"
       }
      ]
     }
    ],
    "tiers": [
     {
+     "agreed_w": 0.5604628893659751,
      "id": "managers",
      "pass_w": 1.2267981101034287,
      "share": 0.30239874909717973,
+     "share_agreed3": 0.005604628893659751,
      "share_passes": 0.012267981101034288,
      "w": 71.46803747018765
     },
     {
+     "agreed_w": 2.135105819059461,
      "id": "professionals",
      "pass_w": 6.8854235201145695,
      "share": 0.20038950301942868,
+     "share_agreed3": 0.02135105819059461,
      "share_passes": 0.0688542352011457,
      "w": 47.35947008108301
     },
     {
+     "agreed_w": 9.867224420437285,
      "id": "sales",
      "pass_w": 16.09748980978909,
      "share": 0.07408728581414413,
+     "share_agreed3": 0.09867224420437284,
      "share_passes": 0.1609748980978909,
      "w": 17.50957282210245
     },
     {
+     "agreed_w": 10.55403789858036,
      "id": "support",
      "pass_w": 18.313918364889577,
      "share": 0.4231244620692475,
+     "share_agreed3": 0.10554037898580358,
      "share_passes": 0.18313918364889578,
      "w": 100.0
     }
@@ -2137,6 +2387,7 @@
   },
   {
    "agreed3": 1736877588.1172035,
+   "agreed_w": 1.0554011403949417,
    "bar": [
     {
      "part": "passes",
@@ -2149,19 +2400,25 @@
      "x": 2.86604665381143
     },
     {
-     "part": "held",
-     "w": 45.470056649025025,
+     "part": "needs_body",
+     "w": 8.725326592080114,
      "x": 8.014591506583898
     },
     {
+     "part": "held",
+     "w": 36.74473005694492,
+     "x": 16.739918098664013
+    },
+    {
      "part": "outside",
-     "w": 46.51535184439108,
-     "x": 53.48464815560892
+     "w": 46.51535184439107,
+     "x": 53.48464815560893
     }
    ],
-   "held": 74830241603.2615,
+   "held": 60470939128.83371,
    "id": "manufacturer",
-   "later": "The kind of firm most exposed to robots and least sure of the date. One carmaker plans humanoids on a line within a few years; a veteran roboticist expects hands to stay far short of human ones for a decade.",
+   "knowledge_payroll": 88019884700.0,
+   "later": "The kind of firm most exposed to robots and least sure of the date. One carmaker plans humanoids on a line within a few years; a veteran roboticist, who sells robots of another kind, expects robot hands to stay far short of human ones beyond 2036.",
    "naics": [
     "336100",
     "336300",
@@ -2174,15 +2431,14 @@
     "fleet",
     "cover"
    ],
+   "needs_body": 14359302474.427797,
    "next": "Planning, purchasing and scheduling are run by agents that know the plant. Engineers and managers remain; clerical work thins.",
-   "now": "This site found almost nothing on agents in a manufacturer's offices, and says so. On the floor the base is ordinary industrial robots, installed in large numbers every year. The best-documented humanoid trial is a single task at a single car plant, since retired.",
-   "office_payroll": 88019884700.0,
+   "now": "This site found almost nothing on agents in a manufacturer's offices, and says so. On the floor the base is ordinary industrial robots, installed in large numbers every year by the count of the robot makers' own federation. The humanoid trial with the most published detail is its maker's own account of a loading task at a car plant, and no other task; it ran for most of a year and ended when the maker retired that generation of robot for its successor.",
    "outside": 76550487800.0,
    "passes": 4716663654.201256,
    "payroll": 164570372500.0,
    "place": {
-    "x": 49.95,
-    "y": 41.0
+    "x": 29.97
    },
    "refs": [
     "census:v3.2-2026-09-24/industries.csv#336100",
@@ -2197,7 +2453,7 @@
      "thinner",
      "thinner",
      "same",
-     "gone"
+     "much_thinner"
     ],
     "next": [
      "same",
@@ -2208,7 +2464,8 @@
    },
    "share_agreed3": 0.010554011403949416,
    "share_checkable": 0.1498484477875995,
-   "share_held": 0.45470056649025026,
+   "share_held": 0.36744730056944913,
+   "share_needs_body": 0.08725326592080113,
    "share_outside": 0.4651535184439107,
    "share_passes": 0.0286604665381143,
    "share_waits_on_check": 0.051485448527724666,
@@ -2253,21 +2510,25 @@
       {
        "id": "managers",
        "w": 43.55418159780796,
+       "was": 43.55418159780796,
        "word": "same"
       },
       {
        "id": "professionals",
        "w": 70.0,
+       "was": 100.0,
        "word": "thinner"
       },
       {
        "id": "sales",
        "w": 6.4853364489875265,
+       "was": 6.4853364489875265,
        "word": "same"
       },
       {
        "id": "support",
        "w": 4.8042762489991455,
+       "was": 13.726503568568988,
        "word": "much_thinner"
       }
      ]
@@ -2279,52 +2540,64 @@
       {
        "id": "managers",
        "w": 30.48792711846557,
+       "was": 43.55418159780796,
        "word": "thinner"
       },
       {
        "id": "professionals",
        "w": 70.0,
+       "was": 100.0,
        "word": "thinner"
       },
       {
        "id": "sales",
        "w": 6.4853364489875265,
+       "was": 6.4853364489875265,
        "word": "same"
       },
       {
        "id": "support",
-       "w": 0.0,
-       "word": "gone"
+       "w": 4.8042762489991455,
+       "was": 13.726503568568988,
+       "word": "much_thinner"
       }
      ]
     }
    ],
    "tiers": [
     {
+     "agreed_w": 0.6697187576205874,
      "id": "managers",
      "pass_w": 1.5163133828458601,
      "share": 0.2659537135249167,
+     "share_agreed3": 0.006697187576205875,
      "share_passes": 0.0151631338284586,
      "w": 43.55418159780796
     },
     {
+     "agreed_w": 1.3118689717853331,
      "id": "professionals",
      "pass_w": 4.872377944403725,
      "share": 0.6106272779518876,
+     "share_agreed3": 0.013118689717853332,
      "share_passes": 0.04872377944403725,
      "w": 100.0
     },
     {
+     "agreed_w": 2.365020418539018,
      "id": "sales",
      "pass_w": 8.766402311746921,
      "share": 0.03960123342447414,
+     "share_agreed3": 0.02365020418539018,
      "share_passes": 0.08766402311746921,
      "w": 6.4853364489875265
     },
     {
+     "agreed_w": 10.742873434536765,
      "id": "support",
      "pass_w": 19.4827148378281,
      "share": 0.08381777509872153,
+     "share_agreed3": 0.10742873434536765,
      "share_passes": 0.19482714837828102,
      "w": 13.726503568568988
     }
@@ -2340,6 +2613,7 @@
   },
   {
    "agreed3": 7615873144.776991,
+   "agreed_w": 2.743321112413581,
    "bar": [
     {
      "part": "passes",
@@ -2352,9 +2626,14 @@
      "x": 5.406964342598457
     },
     {
-     "part": "held",
-     "w": 45.83879138516149,
+     "part": "needs_body",
+     "w": 25.74414644467749,
      "x": 14.849565504163936
+    },
+    {
+     "part": "held",
+     "w": 20.094644940484002,
+     "x": 40.593711948841424
     },
     {
      "part": "outside",
@@ -2362,8 +2641,9 @@
      "x": 60.688356889325426
     }
    ],
-   "held": 127255398108.36984,
+   "held": 55785764948.75493,
    "id": "retailer",
+   "knowledge_payroll": 168480031500.0,
    "later": "Warehouses first, as in freight. The shop floor changes last, because shoppers are there.",
    "naics": [
     "455000",
@@ -2377,15 +2657,14 @@
     "fleet",
     "check"
    ],
+   "needs_body": 71469633159.61491,
    "next": "Agents buy, price and plan stock within limits a person sets. Head office thins; the shop floor does not.",
-   "now": "The largest retailer says its headcount will stay flat while the work changes. An AI model set to run a small shop lost money and invented a payment account. Two physical experiments were withdrawn: checkout without cashiers, and robots that scanned shelves.",
-   "office_payroll": 168480031500.0,
+   "now": "The world's largest private employer, a retailer, says it expects its headcount to stay flat for some years while the jobs change. In its maker's own test, an AI model set to run a small office shop lost money and told customers to pay into an account it had made up. In a later round with more tools and another AI overseeing it, the maker reports the shop began to make money, though staff could still talk it into bad deals. Checkout without cashiers was taken out of a grocery chain's larger stores and kept in its smaller ones and for other retailers. Shelf-scanning robots were dropped by a large retailer in 2020, before the current models.",
    "outside": 109135050100.0,
    "passes": 15010548471.787611,
    "payroll": 277615081600.0,
    "place": {
-    "x": 81.56,
-    "y": 91.0
+    "x": 48.94
    },
    "refs": [
     "census:v3.2-2026-09-24/industries.csv#455000",
@@ -2399,7 +2678,7 @@
      "thinner",
      "thinner",
      "thinner",
-     "gone"
+     "much_thinner"
     ],
     "next": [
      "thinner",
@@ -2410,7 +2689,8 @@
    },
    "share_agreed3": 0.027433211124135812,
    "share_checkable": 0.24468557504768845,
-   "share_held": 0.4583879138516149,
+   "share_held": 0.20094644940484,
+   "share_needs_body": 0.2574414644467749,
    "share_outside": 0.39311643110674577,
    "share_passes": 0.054069643425984575,
    "share_waits_on_check": 0.0944260116156548,
@@ -2418,7 +2698,9 @@
    "sources": [
     "walmart_fortune",
     "vend1",
-    "jwo_mpr"
+    "vend2",
+    "jwo_mpr",
+    "bossa_cnbc"
    ],
    "staged": [
     {
@@ -2454,21 +2736,25 @@
       {
        "id": "managers",
        "w": 8.702653769600056,
+       "was": 12.432362528000082,
        "word": "thinner"
       },
       {
        "id": "professionals",
        "w": 11.226153328376327,
+       "was": 16.03736189768047,
        "word": "thinner"
       },
       {
        "id": "sales",
        "w": 100.0,
+       "was": 100.0,
        "word": "same"
       },
       {
        "id": "support",
        "w": 6.273431048561226,
+       "was": 17.92408871017493,
        "word": "much_thinner"
       }
      ]
@@ -2480,52 +2766,64 @@
       {
        "id": "managers",
        "w": 8.702653769600056,
+       "was": 12.432362528000082,
        "word": "thinner"
       },
       {
        "id": "professionals",
        "w": 11.226153328376327,
+       "was": 16.03736189768047,
        "word": "thinner"
       },
       {
        "id": "sales",
        "w": 70.0,
+       "was": 100.0,
        "word": "thinner"
       },
       {
        "id": "support",
-       "w": 0.0,
-       "word": "gone"
+       "w": 6.273431048561226,
+       "was": 17.92408871017493,
+       "word": "much_thinner"
       }
      ]
     }
    ],
    "tiers": [
     {
+     "agreed_w": 0.30970447912904614,
      "id": "managers",
      "pass_w": 0.4690688825275517,
      "share": 0.08492409796350257,
+     "share_agreed3": 0.003097044791290461,
      "share_passes": 0.0046906888252755165,
      "w": 12.432362528000082
     },
     {
+     "agreed_w": 1.6700583329758527,
      "id": "professionals",
      "pass_w": 4.058943010434133,
      "share": 0.1095494512653863,
+     "share_agreed3": 0.016700583329758528,
      "share_passes": 0.04058943010434133,
      "w": 16.03736189768047
     },
     {
+     "agreed_w": 3.9362612058776403,
      "id": "sales",
      "pass_w": 8.553155833426878,
      "share": 0.6830889766304442,
+     "share_agreed3": 0.0393626120587764,
      "share_passes": 0.08553155833426877,
      "w": 100.0
     },
     {
+     "agreed_w": 13.249781079648711,
      "id": "support",
      "pass_w": 21.091063196415742,
      "share": 0.12243747414066693,
+     "share_agreed3": 0.13249781079648712,
      "share_passes": 0.21091063196415744,
      "w": 17.92408871017493
     }
@@ -2536,25 +2834,40 @@
     "Clothing and Clothing Accessories Retailers"
    ],
    "waits_on_check": 26214084919.842552,
-   "wrong": "The largest retailer's headcount falling well before the decade ends; or a repeat of the shop experiment turning a profit unaided."
+   "wrong": "That retailer's headcount falling well before the decade ends; or an AI running a shop at a profit with no person or other AI correcting it, as reported by someone other than its maker."
   }
  ],
  "map": {
-  "rungs": [
+  "bands": [
    {
     "id": "heavy",
-    "label": "The law says who may sign, and the firm answers for the work",
-    "y": 18.0
+    "kinds": [
+     "insurer",
+     "bank",
+     "accounting",
+     "law",
+     "hospital"
+    ],
+    "label": "The law says who may sign, and the firm answers for the work"
    },
    {
     "id": "moderate",
-    "label": "A registration, bond or safety duty sits with the firm",
-    "y": 50.0
+    "kinds": [
+     "freight",
+     "property",
+     "manufacturer"
+    ],
+    "label": "A registration, bond or safety duty sits with the firm"
    },
    {
     "id": "light",
-    "label": "No licence; the customer's trust and the contract carry it",
-    "y": 82.0
+    "kinds": [
+     "customer_support",
+     "retailer",
+     "software",
+     "consultancy"
+    ],
+    "label": "No licence; the customer's trust and the contract carry it"
    }
   ],
   "x": {
@@ -2565,14 +2878,22 @@
     },
     {
      "label": "10%",
-     "x": 33.33
+     "x": 20.0
     },
     {
      "label": "20%",
-     "x": 66.67
+     "x": 40.0
     },
     {
      "label": "30%",
+     "x": 60.0
+    },
+    {
+     "label": "40%",
+     "x": 80.0
+    },
+    {
+     "label": "50%",
      "x": 100.0
     }
    ]
@@ -2618,7 +2939,7 @@
      "name": "A licensed firm that sells the finished job and stands behind it"
     }
    ],
-   "what": "A way to show an examiner or a board that an agent is under control, where the old rules leave agents out."
+   "what": "A way to show a regulator's examiner or a board that an agent is under control, where the old guidance leaves agents out."
   },
   {
    "id": "cover",
@@ -2841,7 +3162,7 @@
     false,
     false,
     true,
-    true,
+    false,
     false,
     true
    ],
@@ -2855,7 +3176,7 @@
     false,
     false,
     false,
-    false,
+    true,
     false,
     true,
     false,
@@ -2918,7 +3239,7 @@
   {
    "cells": [
     false,
-    false,
+    true,
     false,
     false,
     false,
@@ -2972,7 +3293,7 @@
     false,
     false,
     true,
-    true,
+    false,
     false,
     true,
     false,
@@ -2986,7 +3307,7 @@
   {
    "cells": [
     false,
-    false,
+    true,
     false,
     false,
     false,
@@ -3007,10 +3328,10 @@
     false,
     false,
     false,
-    true,
     false,
     false,
-    true,
+    false,
+    false,
     true,
     true,
     true
@@ -3037,7 +3358,7 @@
    "id": "abridge_jama",
    "n": 1,
    "retrieved_at": "2026-10-06",
-   "ties": "authors include executives of the software's maker",
+   "ties": "authors include staff of the software's maker",
    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12492056/",
    "venue": "JAMA Network Open",
    "who": "Olson and colleagues",
@@ -3045,10 +3366,23 @@
    "year": 2025
   },
   {
+   "content_hash": "a4a9a94d917fdec0dae5e9443008494b645c902943e7428f7050d3422c8af789",
+   "http_status": 200,
+   "id": "adecco_hub",
+   "n": 2,
+   "retrieved_at": "2026-10-06",
+   "ties": "trade press, on the agency's own target",
+   "url": "https://staffinghub.com/technology/adecco-says-half-its-revenue-will-run-on-agentic-ai-by-december-whats-your-number/",
+   "venue": "Staffing Hub",
+   "who": "Staffing Hub, on Adecco",
+   "work": "Adecco Says Half Its Revenue Will Run on Agentic AI by December. What\u2019s Your Number?",
+   "year": 2026
+  },
+  {
    "content_hash": "7dbfd16915eddaee9488060eca7f2d886490a3edc1721142364ce4de7ea875ba",
    "http_status": 200,
    "id": "amazon_million",
-   "n": 2,
+   "n": 3,
    "retrieved_at": "2026-10-06",
    "ties": "the company's own account",
    "url": "https://www.aboutamazon.com/news/operations/amazon-million-robots-ai-foundation-model",
@@ -3061,7 +3395,7 @@
    "content_hash": "1ebc534d516a7d35bea84e0db874e6419a77a655126d3887abb9bd9431353a10",
    "http_status": 200,
    "id": "anthropic_work",
-   "n": 3,
+   "n": 4,
    "retrieved_at": "2026-10-06",
    "ties": "a lab's survey of its own staff; Anthropic's model drafted this page",
    "url": "https://www.anthropic.com/research/how-ai-is-transforming-work-at-anthropic",
@@ -3074,9 +3408,9 @@
    "content_hash": "87fda6f8f9b0be3e4333abbc9986af72284c3d4733bd3e6f5226d802a5a1282c",
    "http_status": 200,
    "id": "aurora_q2",
-   "n": 4,
+   "n": 5,
    "retrieved_at": "2026-10-06",
-   "ties": "the company's own account",
+   "ties": "the company's own account, from an automated summary",
    "url": "https://www.marketbeat.com/instant-alerts/aurora-innovation-q2-earnings-call-highlights-2026-07-29/",
    "venue": "MarketBeat",
    "who": "MarketBeat, on Aurora",
@@ -3087,7 +3421,7 @@
    "content_hash": "7b9c413c34a51d9346bfc4970e85cd5ce36fd3ee713d052f1c46067d515db6a7",
    "http_status": 200,
    "id": "az_abs",
-   "n": 5,
+   "n": 6,
    "retrieved_at": "2026-10-06",
    "url": "https://www.azcourts.gov/cld/Alternative-Business-Structure",
    "venue": "azcourts.gov",
@@ -3096,10 +3430,23 @@
    "year": 2026
   },
   {
+   "content_hash": "2ec6fdc58c85e866b5be682d3b32039dd2f80d96218e85cfc4e9b8180c1c0aef",
+   "http_status": 200,
+   "id": "bossa_cnbc",
+   "n": 7,
+   "retrieved_at": "2026-10-06",
+   "ties": "press, citing another newspaper's report",
+   "url": "https://www.cnbc.com/2020/11/02/walmart-ends-contract-with-robotics-company-bossa-nova-report-says.html",
+   "venue": "CNBC",
+   "who": "CNBC, citing The Wall Street Journal",
+   "work": "Walmart ends contract with robotics company, opts for human workers instead, report says",
+   "year": 2020
+  },
+  {
    "content_hash": "6a578fca5aa6a7ac4a8ab1eb14e660015ac7713f20c43c11076c852598517509",
    "http_status": 200,
    "id": "brooks_2026",
-   "n": 6,
+   "n": 8,
    "retrieved_at": "2026-10-06",
    "ties": "he sells robots that are not humanoid",
    "url": "https://rodneybrooks.com/predictions-scorecard-2026-january-01/",
@@ -3109,10 +3456,23 @@
    "year": 2026
   },
   {
+   "content_hash": "c235cde6a74e575b40f057ed7a7007ac1b44be80b95e69c5dbabe528249ea8f6",
+   "http_status": 200,
+   "id": "bry_li_raymond",
+   "n": 9,
+   "retrieved_at": "2026-10-06",
+   "ties": "an academic working paper",
+   "url": "https://www.nber.org/papers/w31161",
+   "venue": "NBER Working Paper 31161",
+   "who": "Brynjolfsson, Li and Raymond",
+   "work": "Generative AI at Work",
+   "year": 2023
+  },
+  {
    "content_hash": "689b22d477c56529d34628d4d27859b1c475b4363858f454b8e88c6e8495f0c8",
    "http_status": 200,
    "id": "cba_acs",
-   "n": 7,
+   "n": 10,
    "retrieved_at": "2026-10-06",
    "url": "https://ia.acs.org.au/article/2025/cba-reverses-ai-driven-job-cuts--admits--error-.html",
    "venue": "Information Age",
@@ -3124,8 +3484,9 @@
    "content_hash": "51b9fdba1693c4db5a0403166bbeb8fb73387775835cc4f91e9004e1d323826d",
    "http_status": 200,
    "id": "charlotin",
-   "n": 8,
+   "n": 11,
    "retrieved_at": "2026-10-06",
+   "ties": "independent",
    "url": "https://www.damiencharlotin.com/hallucinations/",
    "venue": "damiencharlotin.com",
    "who": "Damien Charlotin",
@@ -3136,7 +3497,7 @@
    "content_hash": "741413d38128fc845fd29afbba4fa3be2358d750cf7c697eedade86a11eaaaf1",
    "http_status": 200,
    "id": "chr_fw",
-   "n": 9,
+   "n": 12,
    "retrieved_at": "2026-10-06",
    "ties": "the company's own measure, as reported",
    "url": "https://www.freightwaves.com/news/c-h-robinsons-ai-strategy-boosts-2026-financial-forecast",
@@ -3149,8 +3510,9 @@
    "content_hash": "abfb87de89ad684d3cf34c010a70e9ab40c44c9d42fe6491f7971205db3e62a0",
    "http_status": 200,
    "id": "cnxc_pulse",
-   "n": 10,
+   "n": 13,
    "retrieved_at": "2026-10-06",
+   "ties": "the company's results, as rewritten by a news site",
    "url": "https://pulse2.com/concentrix-reports-q3-revenue-of-2-45-billion-and-record-third-quarter-free-cash-flow/",
    "venue": "Pulse 2.0",
    "who": "Pulse 2.0, on Concentrix",
@@ -3161,22 +3523,22 @@
    "content_hash": "9e648e900750afc5c4399ac84c97bb46481609d25d271b0986499d657047c1fc",
    "http_status": 200,
    "id": "crescendo_next",
-   "n": 11,
+   "n": 14,
    "retrieved_at": "2026-10-06",
    "ties": "the operator's own account",
    "url": "https://www.crescendo.ai/news/crescendo-the-next-episode",
    "venue": "crescendo.ai",
    "who": "Crescendo",
    "work": "Crescendo \u2013 the next episode!",
-   "year": null
+   "year": 2024
   },
   {
    "content_hash": "6d3a03c3abbfe3bad02e8e17326f35de1a6ea5d72c3c6091b7dde9dffec4bcc1",
    "http_status": 200,
    "id": "crete_rebrand",
-   "n": 12,
+   "n": 15,
    "retrieved_at": "2026-10-06",
-   "ties": "the operator's own account",
+   "ties": "the operator's own account; its backer also invests in OpenAI, whose engineers build its tools",
    "url": "https://www.cpapracticeadvisor.com/2026/06/03/crete-professionals-alliance-rebrands-as-current/184461/",
    "venue": "CPA Practice Advisor",
    "who": "Current, formerly Crete (CPA Practice Advisor)",
@@ -3187,9 +3549,9 @@
    "content_hash": "e02fb6595e9a79203f74ef3b417ed8ec978fc1c4e29abe9044238a4ea5571ead",
    "http_status": 200,
    "id": "crete_reuters",
-   "n": 13,
+   "n": 16,
    "retrieved_at": "2026-10-06",
-   "ties": "the operator's own account",
+   "ties": "the operator's own account; its backer also invests in OpenAI, whose engineers build its tools",
    "url": "https://kfgo.com/2025/06/04/thrive-backed-accounting-firm-crete-to-spend-500-million-in-ai-roll-up/",
    "venue": "Reuters via KFGO",
    "who": "Crete's executives (Reuters)",
@@ -3200,9 +3562,9 @@
    "content_hash": "6d9f3920c9cec5d67a12562f6605aa21492e5545a7cc7e214ab900c28dcc27e6",
    "http_status": 200,
    "id": "crosby",
-   "n": 14,
+   "n": 17,
    "retrieved_at": "2026-10-06",
-   "ties": "the operator's own account",
+   "ties": "the operator's own account; a marketing page",
    "url": "https://crosby.ai/",
    "venue": "crosby.ai",
    "who": "Crosby",
@@ -3213,7 +3575,7 @@
    "content_hash": "c46bca2d10927fd23304a790059a09a244cef3156fd45f084e37b295bf355b8a",
    "http_status": 200,
    "id": "deloitte_ap",
-   "n": 15,
+   "n": 18,
    "retrieved_at": "2026-10-06",
    "url": "https://www.ctvnews.ca/business/article/deloitte-to-partially-refund-australian-government-for-report-with-apparent-ai-generated-errors/",
    "venue": "AP via CTV News",
@@ -3225,8 +3587,9 @@
    "content_hash": "c1cb1bd27d5d58dcab00e1ac59c4a2de1bf7dd85bdd6708c0c5c42c42a38a6ae",
    "http_status": 200,
    "id": "doctronic_me",
-   "n": 16,
+   "n": 19,
    "retrieved_at": "2026-10-06",
+   "ties": "trade press relaying the company and state officials",
    "url": "https://www.medicaleconomics.com/view/utah-lets-ai-refill-chronic-prescriptions-in-state-backed-pilot-program",
    "venue": "Medical Economics",
    "who": "Medical Economics",
@@ -3234,11 +3597,25 @@
    "year": 2026
   },
   {
+   "content_hash": "f1952f18e6695a1d13dfa3dd46ffd004dd377953fd44125803fd4eeacfc7e539",
+   "http_status": 200,
+   "id": "doctronic_tnw",
+   "n": 20,
+   "retrieved_at": "2026-10-06",
+   "ties": "press, relaying the Associated Press",
+   "url": "https://thenextweb.com/news/utah-ai-prescription-refills-doctronic",
+   "venue": "The Next Web",
+   "who": "The Next Web",
+   "work": "Utah let an AI renew prescriptions without a doctor, and its medical board wants it stopped",
+   "year": 2026
+  },
+  {
    "content_hash": "7f8c21173818cb39527f9f38a7a7310e81263dca3ad9a76ff43eb9f9e787c9c1",
    "http_status": 200,
    "id": "dwarkesh_timelines",
-   "n": 17,
+   "n": 21,
    "retrieved_at": "2026-10-06",
+   "ties": "independent",
    "url": "https://www.dwarkesh.com/p/timelines-june-2025",
    "venue": "dwarkesh.com",
    "who": "Dwarkesh Patel",
@@ -3249,7 +3626,7 @@
    "content_hash": "d4a57edda489206257958e4add8dd43ad7b78335dce2f294ed9bd90abf023c87",
    "http_status": 200,
    "id": "dwelly_tnw",
-   "n": 18,
+   "n": 22,
    "retrieved_at": "2026-10-06",
    "ties": "the company's own figures, as reported",
    "url": "https://thenextweb.com/news/dwelly-raises-170m-to-turn-uk-lettings-agencies-into-software",
@@ -3262,20 +3639,46 @@
    "content_hash": "58a74835668df8affab740ab77ddfb6c55a32a328a0b23c6aa2b6adc6ad7206c",
    "http_status": 200,
    "id": "figure_bmw",
-   "n": 19,
+   "n": 23,
    "retrieved_at": "2026-10-06",
    "ties": "the maker's own account",
    "url": "https://www.figure.ai/news/production-at-bmw",
    "venue": "figure.ai",
    "who": "Figure",
    "work": "F.02 Contributed to the Production of 30,000 Cars at BMW",
-   "year": null
+   "year": 2025
+  },
+  {
+   "content_hash": "acf4c8ef9113fd3eedb57f70d2260b54e5d147854889a3c62276dd292208d319",
+   "http_status": 200,
+   "id": "fl_hb527",
+   "n": 24,
+   "retrieved_at": "2026-10-06",
+   "ties": "legislative staff",
+   "url": "https://www.flsenate.gov/Session/Bill/2026/527/Analyses/h0527a.IBS.PDF",
+   "venue": "flsenate.gov",
+   "who": "Florida House staff",
+   "work": "HB 527 bill analysis, Insurance and Banking Subcommittee",
+   "year": 2026
+  },
+  {
+   "content_hash": "d95772b258bbcc7c16c4c9efcb9251b293d9c2723b176209619ee9d7ea390c28",
+   "http_status": 200,
+   "id": "fl_hb527_status",
+   "n": 25,
+   "retrieved_at": "2026-10-06",
+   "ties": "the legislature's own record",
+   "url": "https://www.flsenate.gov/Session/Bill/2026/527",
+   "venue": "flsenate.gov",
+   "who": "The Florida Senate",
+   "work": "CS/CS/HB 527: Mandatory Human Reviews of Insurance Claim Denials",
+   "year": 2026
   },
   {
    "content_hash": "c5c3104083bca12ea4512913d7d9a17ad79a5c3a641b09b07a9a85df43b10ca7",
    "http_status": 200,
    "id": "fsmb_ai",
-   "n": 20,
+   "n": 26,
    "retrieved_at": "2026-10-06",
    "url": "https://www.fsmb.org/siteassets/advocacy/policies/incorporation-of-ai-into-practice.pdf",
    "venue": "FSMB",
@@ -3287,20 +3690,20 @@
    "content_hash": "3f74fc17610bbe65886f3de440ff0f0ebc8f32f05145ea8323655735ef7590c3",
    "http_status": 200,
    "id": "gc_services",
-   "n": 21,
+   "n": 27,
    "retrieved_at": "2026-10-06",
    "ties": "an investor in the firms it describes",
    "url": "https://www.generalcatalyst.com/stories/the-future-of-services",
    "venue": "General Catalyst stories",
    "who": "General Catalyst",
    "work": "The Future of Services",
-   "year": null
+   "year": 2025
   },
   {
    "content_hash": "a79c694c2057d2c2db18c3afd4b9bcf5daff4b1db420b19298bb5e01d3810173",
    "http_status": 200,
    "id": "google_q3",
-   "n": 22,
+   "n": 28,
    "retrieved_at": "2026-10-06",
    "ties": "the company's own account",
    "url": "https://blog.google/inside-google/message-ceo/alphabet-earnings-q3-2024/",
@@ -3313,7 +3716,7 @@
    "content_hash": "7d90639c6b2670dd336ed29f85b68c69752416b6978f7dc9c88b03b2da75f411",
    "http_status": 200,
    "id": "gs_humanoid",
-   "n": 23,
+   "n": 29,
    "retrieved_at": "2026-10-06",
    "ties": "a bank with clients in the sector",
    "url": "https://www.goldmansachs.com/insights/articles/the-global-market-for-robots-could-reach-38-billion-by-2035",
@@ -3326,7 +3729,7 @@
    "content_hash": "91516baf3649df0015c470b7b0d2cf402e6a05183981fe9b54c7f2a0ffabe312",
    "http_status": 200,
    "id": "hyundai_rdn",
-   "n": 24,
+   "n": 30,
    "retrieved_at": "2026-10-06",
    "ties": "the maker's plan, as reported",
    "url": "https://www.repairerdrivennews.com/2026/01/07/hyundai-showcases-humanoid-at-ces-plans-30000-units-by-2028/",
@@ -3339,8 +3742,9 @@
    "content_hash": "a192dc935f41b07dc8130d59c4348228e66dd22015124c0dc4e143190609c895",
    "http_status": 200,
    "id": "ifr_wr",
-   "n": 25,
+   "n": 31,
    "retrieved_at": "2026-10-06",
+   "ties": "the robot makers' trade federation",
    "url": "https://ifr.org/ifr-press-releases/news/global-robot-demand-in-factories-doubles-over-10-years",
    "venue": "IFR press release",
    "who": "The International Federation of Robotics",
@@ -3351,8 +3755,9 @@
    "content_hash": "a75faefbfdb6ad290f00896c7a86c6550f81cd267d39638919d265adc5eb2535",
    "http_status": 200,
    "id": "it_rpe",
-   "n": 26,
+   "n": 32,
    "retrieved_at": "2026-10-06",
+   "ties": "the companies' own counts, as reported",
    "url": "https://india.entrepreneur.com/business-news/from-tcs-to-techm-headcount-declines-echo-vembus-it-hiring-concerns",
    "venue": "Entrepreneur India",
    "who": "Entrepreneur India",
@@ -3363,9 +3768,9 @@
    "content_hash": "2c028221b03f84666cbbfc5481e223a9475c7f1071ad7e34e16ea00bd91958a8",
    "http_status": 200,
    "id": "jpm_entrepreneur",
-   "n": 27,
+   "n": 33,
    "retrieved_at": "2026-10-06",
-   "ties": "the bank's own projection",
+   "ties": "the bank's own projection, reported at second hand, from another outlet's interview",
    "url": "https://www.entrepreneur.com/business-news/jpmorgan-to-cut-headcount-in-some-divisions-due-to-ai/491864",
    "venue": "Entrepreneur",
    "who": "JPMorgan's consumer chief (Entrepreneur)",
@@ -3376,7 +3781,7 @@
    "content_hash": "e680999d4f53a127f465047eeb8d39a3b5c4b009ceb9000129325b484254a8f0",
    "http_status": 200,
    "id": "jwo_mpr",
-   "n": 28,
+   "n": 34,
    "retrieved_at": "2026-10-06",
    "url": "https://www.mprnews.org/story/2024/04/03/npr-amazon-remove-walk-out-technology",
    "venue": "AP via MPR News",
@@ -3388,9 +3793,9 @@
    "content_hash": "c228983782c5b13cb3a26ad95236ea37bf1b084e12bedec99ed68682351166d0",
    "http_status": 200,
    "id": "klarna_entrepreneur",
-   "n": 29,
+   "n": 35,
    "retrieved_at": "2026-10-06",
-   "ties": "the company's own account",
+   "ties": "the company's own account, reported at second hand, from another outlet's interview",
    "url": "https://www.entrepreneur.com/business-news/klarna-ceo-reverses-course-by-hiring-more-humans-not-ai/491396",
    "venue": "Entrepreneur",
    "who": "Klarna's chief executive (Entrepreneur)",
@@ -3401,7 +3806,7 @@
    "content_hash": "04550af01b30ea8bc2bcaf801ec3af035b6480c8d44f7c60317474f3ba405e74",
    "http_status": 200,
    "id": "lemonade_q2",
-   "n": 30,
+   "n": 36,
    "retrieved_at": "2026-10-06",
    "ties": "the company's own account",
    "url": "https://www.marketbeat.com/earnings/reports/2026-7-28-lemonade-inc-stock/",
@@ -3414,11 +3819,12 @@
    "content_hash": "49a49dabf691f68a909dfab0f4bbc7116523f9f0b0efc8be8f4a5f8b36925dab",
    "http_status": 200,
    "id": "lotj_arxiv",
-   "n": 31,
+   "n": 37,
    "retrieved_at": "2026-10-06",
+   "ties": "a preprint, not peer reviewed",
    "url": "https://arxiv.org/abs/2607.22157",
    "venue": "arXiv 2607.22157",
-   "who": "Tablan, Taylor and colleagues",
+   "who": "Tablan, Taylor and Bernhem",
    "work": "Learning on the Job: Continual Learning from Deployment Feedback for Frozen-Weights Agents",
    "year": 2026
   },
@@ -3426,8 +3832,9 @@
    "content_hash": "70a2ea69beb064ea74c76e9fdef3dcde2ec95da22a11b194e51515a94bd10012",
    "http_status": 200,
    "id": "metr_dev",
-   "n": 32,
+   "n": 38,
    "retrieved_at": "2026-10-06",
+   "ties": "independent",
    "url": "https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/",
    "venue": "METR blog",
    "who": "METR",
@@ -3438,8 +3845,9 @@
    "content_hash": "324ceae578c828673aec1511837883b1d93a614738fa4001b4afbd2db22f7444",
    "http_status": 200,
    "id": "metr_horizon",
-   "n": 33,
+   "n": 39,
    "retrieved_at": "2026-10-06",
+   "ties": "independent",
    "url": "https://metr.org/blog/2025-03-19-measuring-ai-ability-to-complete-long-tasks/",
    "venue": "METR blog",
    "who": "METR",
@@ -3447,10 +3855,23 @@
    "year": 2025
   },
   {
+   "content_hash": "e6a7349ae59adb7c28ab9b03575d8327e94dbbe778bf341b097cc1edad76be5d",
+   "http_status": 200,
+   "id": "metr_uplift_update",
+   "n": 40,
+   "retrieved_at": "2026-10-06",
+   "ties": "independent",
+   "url": "https://metr.org/blog/2026-02-24-uplift-update/",
+   "venue": "METR blog",
+   "who": "METR",
+   "work": "We are Changing our Developer Productivity Experiment Design",
+   "year": 2026
+  },
+  {
    "content_hash": "ed5202e7ca0b403e139a00149842df044aefc701a35adfd07c4ba059529a40f1",
    "http_status": 200,
    "id": "ms_humanoid",
-   "n": 34,
+   "n": 41,
    "retrieved_at": "2026-10-06",
    "ties": "a bank with clients in the sector",
    "url": "https://www.morganstanley.com/insights/articles/humanoid-robot-market-5-trillion-by-2050",
@@ -3463,11 +3884,11 @@
    "content_hash": "0b327b10b3169e12b70f3e0e68554564536f4c90df3a5cdff4214fa9690602da",
    "http_status": 200,
    "id": "nasba_aps",
-   "n": 35,
+   "n": 42,
    "retrieved_at": "2026-10-06",
    "url": "https://nasba.org/blog/2026/04/27/response-to-peec-proposed-revisions-related-to-alternative-practice-structures-4-21-2026/",
    "venue": "NASBA",
-   "who": "The state boards of accountancy",
+   "who": "The National Association of State Boards of Accountancy",
    "work": "Response to PEEC Proposed Revisions Related to Alternative Practice Structures (4-21-2026)",
    "year": 2026
   },
@@ -3475,7 +3896,7 @@
    "content_hash": "61c2d24e47a3637074595ef32243e7d9d2ffb3270f38e213eb55e0de4a8e4598",
    "http_status": 200,
    "id": "nj_a5494",
-   "n": 36,
+   "n": 43,
    "retrieved_at": "2026-10-06",
    "url": "https://www.insurancebusinessmag.com/us/news/risk-compliance-legal/new-jersey-bill-targets-aipowered-insurance-claim-denials-590341.aspx",
    "venue": "Insurance Business",
@@ -3487,7 +3908,7 @@
    "content_hash": "05f9c988f9ce7168c9f45ccdb356157c488f5582f8d916497ae04b63feb9171a",
    "http_status": 200,
    "id": "occ_2026_13",
-   "n": 37,
+   "n": 44,
    "retrieved_at": "2026-10-06",
    "url": "https://www.occ.gov/news-issuances/bulletins/2026/bulletin-2026-13.html",
    "venue": "occ.gov",
@@ -3499,8 +3920,9 @@
    "content_hash": "a6dfd69b1fc95077ba9ff4f14e2bb1572eebb238d792eeb48bff6458991820b0",
    "http_status": 200,
    "id": "phti_scribes",
-   "n": 38,
+   "n": 45,
    "retrieved_at": "2026-10-06",
+   "ties": "independent",
    "url": "https://phti.org/ai-adoption-early-applications-impacts/",
    "venue": "PHTI",
    "who": "The Peterson Health Technology Institute",
@@ -3511,7 +3933,7 @@
    "content_hash": "abc0921bc37b806df71e92144bfc0d1481b5a93430c5d217dc4c37769c2357a0",
    "http_status": 200,
    "id": "pilot_cpa",
-   "n": 39,
+   "n": 46,
    "retrieved_at": "2026-10-06",
    "ties": "the operator's own account",
    "url": "https://www.cpapracticeadvisor.com/2026/02/04/pilot-rolls-out-fully-autonomous-ai-accountant/177453/",
@@ -3524,9 +3946,9 @@
    "content_hash": "abe93d379cebea3b38d284dab794f7c79a31bed8c9d4b8ceedfdff892aa4d3af",
    "http_status": 200,
    "id": "salesforce_ktvu",
-   "n": 40,
+   "n": 47,
    "retrieved_at": "2026-10-06",
-   "ties": "the company's own account",
+   "ties": "the company's own account; it sells the agent product in question",
    "url": "https://www.ktvu.com/news/salesforce-ai-layoffs-marc-benioff",
    "venue": "KTVU",
    "who": "Marc Benioff, Salesforce (KTVU)",
@@ -3537,31 +3959,44 @@
    "content_hash": "5004559d706eb30ccfaf0a899865c89afe8249e7d8cffe8241f5b972229dbdbf",
    "http_status": 200,
    "id": "sra_garfield",
-   "n": 41,
+   "n": 48,
    "retrieved_at": "2026-10-06",
-   "url": "https://www.sra.org.uk/sra/news/press/garfield-ai-authorised/",
+   "url": "https://www.sra.org.uk/news/news/releases/2025/garfield-ai-authorised/",
    "venue": "sra.org.uk",
    "who": "The Solicitors Regulation Authority",
    "work": "SRA approves first AI-driven law firm",
    "year": 2025
   },
   {
+   "content_hash": "9251cad7dacf5ba2a42106821669a7b5745f36ca2bc509a6b6dd36c88c4b11b4",
+   "http_status": 200,
+   "id": "tp_oa",
+   "n": 49,
+   "retrieved_at": "2026-10-06",
+   "ties": "trade press with an interest in outsourcing",
+   "url": "https://news.outsourceaccelerator.com/tp-ai-enabled-workforce/",
+   "venue": "Outsource Accelerator",
+   "who": "Outsource Accelerator, on TP",
+   "work": "TP wants all 500,000 staff AI-enabled by 2027",
+   "year": 2026
+  },
+  {
    "content_hash": "d2b6691d4be68582632b3aa3329675c45b54d9b187de41d9efafd4be7d21e874",
    "http_status": 200,
    "id": "uk_cmp",
-   "n": 42,
+   "n": 50,
    "retrieved_at": "2026-10-06",
    "url": "https://www.gov.uk/client-money-protection-scheme-property-agents",
    "venue": "gov.uk",
    "who": "The UK Government",
-   "work": "Client money protection scheme for property agents",
+   "work": "Protecting clients\u2019 money if you\u2019re a property agent",
    "year": 2026
   },
   {
    "content_hash": "e4f8ae7909a7fdefd370e40765c71ba86d8044ea5ab94c6258f590600f8822d6",
    "http_status": 200,
    "id": "vend1",
-   "n": 43,
+   "n": 51,
    "retrieved_at": "2026-10-06",
    "ties": "a lab's own experiment; Anthropic's model drafted this page",
    "url": "https://www.anthropic.com/research/project-vend-1",
@@ -3571,16 +4006,29 @@
    "year": 2025
   },
   {
+   "content_hash": "85f07b200090b905f8f2382e10e0508feb43b6729796262df9cdc1de07dc7677",
+   "http_status": 200,
+   "id": "vend2",
+   "n": 52,
+   "retrieved_at": "2026-10-06",
+   "ties": "a lab's own experiment; Anthropic's model drafted this page",
+   "url": "https://www.anthropic.com/research/project-vend-2",
+   "venue": "anthropic.com research",
+   "who": "Anthropic with Andon Labs",
+   "work": "Project Vend: Phase two",
+   "year": 2025
+  },
+  {
    "content_hash": "e16850a86ed8690e6976a23dde99f224710eb856f59fa8d43620e401daad38db",
    "http_status": 200,
    "id": "walmart_fortune",
-   "n": 44,
+   "n": 53,
    "retrieved_at": "2026-10-06",
    "ties": "the company's own statement",
    "url": "https://fortune.com/2025/09/30/billion-dollar-retail-giant-walmart-ceo-doug-mcmillon-cant-think-of-a-single-job-that-wont-be-changed-by-ai-artifical-intelligence-how-employees-can-prepare",
    "venue": "Fortune",
    "who": "Fortune, on Walmart",
-   "work": "Walmart CEO Doug McMillon can\u2019t think of a single job that won\u2019t be changed by AI",
+   "work": "Walmart CEO Doug McMillon says he can\u2019t think of a single job that won\u2019t be changed by AI\u2014here\u2019s how today\u2019s workforce can prepare",
    "year": 2025
   }
  ],
@@ -3594,7 +4042,7 @@
   {
    "id": "next",
    "name": "Next",
-   "rests_on": "Judgement. Models cannot yet be taught on the job; the writers this site reads date it from late in this decade to well into the next.",
+   "rests_on": "Judgement. Today's models do not change from what they do on the job. A widely read interviewer of AI researchers put even odds on models learning on the job as a person does by 2032. A recent preprint, not yet peer reviewed, shows a memory kept outside the model helping on a banking test.",
    "sources": [
     "dwarkesh_timelines",
     "lotj_arxiv",
@@ -3605,7 +4053,7 @@
   {
    "id": "later",
    "name": "Later",
-   "rests_on": "Extrapolation. The evidence is a few trials and plans; bank forecasts put the real rise late in the next decade, and a veteran roboticist later still.",
+   "rests_on": "Extrapolation. The evidence is a few trials and plans. A bank's forecast puts the real rise late in the next decade, and another bank's runs only to its middle. A veteran roboticist expects robot hands to stay far short of human ones beyond 2036.",
    "sources": [
     "gs_humanoid",
     "ms_humanoid",

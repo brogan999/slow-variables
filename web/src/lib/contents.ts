@@ -75,10 +75,10 @@ export const PAGES: Record<string, Page> = {
     ["folio-record", "What the records show", "What do this site's ledgers show so far, and where do its own leans disagree?"],
   ] },
   "/firm/kinds": { name: "What happens to each kind of firm", question: "What does AI do to an accounting practice, a hospital or a freight operator, and what will such firms need to buy?", sections: [
-    ["today", "Today", "How much of each kind of firm's work can a check settle, and who must still sign?"],
-    ["stages", "Three stages", "What is known now, what is judged next, and what is extrapolated for a world with robots?"],
-    ["kinds", "Kind by kind", "What does each of twelve kinds of firm look like at each stage, and what would prove that wrong?"],
-    ["anatomy", "What an AI-run firm looks like", "What shape recurs across the kinds of firm?"],
+    ["today", "Today", "How much of each kind of firm's payroll passes the census screen, and what holds the rest?"],
+    ["stages", "The stages", "What is known now, what is judged next, and what is extrapolated for a world with robots?"],
+    ["kinds", "Kind by kind", "What does each kind of firm look like at each stage, and what would prove that wrong?"],
+    ["anatomy", "What an AI-run firm looks like", "What shape does this site judge these kinds of firm are heading towards?"],
     ["needs", "Where the opportunity is", "What will AI-run firms need to buy, and which business would supply it?"],
   ] },
   "/outlook": { name: "What people expect", question: "What do informed writers expect, and what would settle it?", sections: [

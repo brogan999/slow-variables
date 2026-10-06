@@ -17,14 +17,13 @@ from . import census, chart
 ROOT = Path(__file__).resolve().parents[2]
 SPEC = ROOT / "seed" / "firm_kinds.yaml"
 TRADES = ROOT / "web" / "data" / "census" / "trades.json"
-PARTS = ("passes", "waits_on_check", "held", "outside")
+PARTS = ("passes", "waits_on_check", "needs_body", "held", "outside")
 # the occupation code's major groups, gathered into the four layers the page draws
 TIERS = {"managers": ("11",), "sales": ("41",), "support": ("43",)}
 TIER_ORDER = ("managers", "professionals", "sales", "support")
 OPPORTUNITIES = ROOT / "seed" / "opportunities.yaml"
-# how a word for a layer's change is drawn against today's width: a drawing rule, stated under the figure
+# how a word for a layer's change is drawn against today's width: a drawing rule, stated in the key above the panels
 DRAWN = {"gone": 0.0, "much_thinner": 0.35, "thinner": 0.7, "same": 1.0, "wider": 1.25}
-RUNG_Y = {"heavy": 18.0, "moderate": 50.0, "light": 82.0}  # the three bands of the map, top to bottom
 
 
 def load() -> dict[str, Any]:
@@ -59,6 +58,25 @@ def _tier(occ: str) -> str:
     return next((t for t, codes in TIERS.items() if occ[:2] in codes), "professionals")
 
 
+def by_industry(d: Path) -> dict[str, dict[str, float]]:
+    """Knowledge-work payroll in each industry split by the bundle's task verdicts, the way census.shape() splits an
+    occupational group: each role's task shares applied to that role's payroll in the industry. The same sum gives back
+    the bundle's own passes and waits-on-a-check for every industry (tests/test_firm_kinds.py), so it is not an estimate."""
+    shares: dict[str, dict[str, float]] = {}
+    for t in census.rows(d / "tasks.csv"):
+        part = "passes" if census.truth(t["passes"]) else "waits_on_check" if census.truth(t["blocked_by_missing_check"]) else "needs_body" if census.truth(t["physical"]) else "rest"
+        role = shares.setdefault(t["occ"], {"passes": 0.0, "waits_on_check": 0.0, "needs_body": 0.0, "rest": 0.0})
+        role[part] += census.num(t["task_payroll_usd"]) or 0.0
+    out: dict[str, dict[str, float]] = {}
+    for r in census.rows(d / "role_industry.csv"):
+        role, pay = shares[r["occ"]], census.num(r["wage_bill"]) or 0.0
+        whole = sum(role.values())
+        row = out.setdefault(r["naics"], {"passes": 0.0, "waits_on_check": 0.0, "needs_body": 0.0})
+        for part in row:
+            row[part] += pay * role[part] / whole
+    return out
+
+
 def problems(spec: dict[str, Any], cspec: dict[str, Any], trades_doc: dict[str, Any]) -> list[str]:
     if not spec:
         return []
@@ -87,22 +105,24 @@ def build(spec: dict[str, Any], cspec: dict[str, Any], trades_doc: dict[str, Any
     by_trade = {t["key"]: t for t in trades_doc.get("trades") or []}
     mix: dict[str, dict[str, dict[str, float]]] = {}
     for r in census.rows(d / "role_industry.csv"):
-        t = mix.setdefault(r["naics"], {}).setdefault(_tier(r["occ"]), {"payroll": 0.0, "passes": 0.0})
+        t = mix.setdefault(r["naics"], {}).setdefault(_tier(r["occ"]), {"payroll": 0.0, "passes": 0.0, "agreed3": 0.0})
         t["payroll"] += census.num(r["wage_bill"]) or 0.0
         t["passes"] += census.num(r["passes_usd"]) or 0.0
+        t["agreed3"] += census.num(r["agreed3_usd"]) or 0.0
+    split = by_industry(d)
     kinds = []
     for k in spec.get("kinds") or []:
         rows = [industries[n] for n in k["naics"]]
         total, know = (sum(float(r[c]) for r in rows) for c in ("total", "know"))
         passes, agreed3, waits = (sum(float(r[c]) for r in rows) for c in ("passes_usd", "agreed3_usd", "blocked"))
-        parts = {"passes": passes, "waits_on_check": waits, "held": know - passes - waits, "outside": total - know}
+        body = sum(split[n]["needs_body"] for n in k["naics"])  # physical tasks inside knowledge roles
+        parts = {"passes": passes, "waits_on_check": waits, "needs_body": body, "held": know - passes - waits - body, "outside": total - know}
         bar, x = [], 0.0
         for p in PARTS:  # the stacked bar, as percentages of the kind's whole payroll
             w = 100 * parts[p] / total
             bar.append({"part": p, "x": x, "w": w if p != PARTS[-1] else 100 - x})
             x += w
-        tiers = {t: {"payroll": sum(mix.get(n, {}).get(t, {}).get("payroll", 0.0) for n in k["naics"]),
-                     "passes": sum(mix.get(n, {}).get(t, {}).get("passes", 0.0) for n in k["naics"])} for t in TIER_ORDER}
+        tiers = {t: {f: sum(mix.get(n, {}).get(t, {}).get(f, 0.0) for n in k["naics"]) for f in ("payroll", "passes", "agreed3")} for t in TIER_ORDER}
         office = sum(t["payroll"] for t in tiers.values())
         widest = max(t["payroll"] for t in tiers.values())
         trade = by_trade.get(k.get("trade") or "")
@@ -111,13 +131,14 @@ def build(spec: dict[str, Any], cspec: dict[str, Any], trades_doc: dict[str, Any
             "naics": k["naics"],
             "titles": [r["naics_title"] for r in rows],
             "refs": [census.ref(cspec, "industries.csv", n) for n in k["naics"]],
-            "payroll": total, "office_payroll": know, "agreed3": agreed3, **parts,
+            "payroll": total, "knowledge_payroll": know, "agreed3": agreed3, **parts,
             **{f"share_{p}": parts[p] / total for p in PARTS}, "share_agreed3": agreed3 / total,
-            "share_checkable": (passes + waits) / know,  # of the office work: passes, or would but for a check
-            "bar": bar,
-            "tiers": [{"id": t, "share": v["payroll"] / office, "share_passes": v["passes"] / v["payroll"] if v["payroll"] else 0.0,
-                       "w": 100 * v["payroll"] / widest,
-                       "pass_w": 100 * v["passes"] / v["payroll"] if v["payroll"] else 0.0} for t, v in tiers.items()],
+            "share_checkable": (passes + waits) / know,  # of the knowledge work: passes, or would but for a check
+            "bar": bar, "agreed_w": 100 * agreed3 / total,  # the part all the models pass, drawn inside "passes"
+            "tiers": [{"id": t, "share": v["payroll"] / office, "w": 100 * v["payroll"] / widest,
+                       **{f"share_{f}": v[f] / v["payroll"] if v["payroll"] else 0.0 for f in ("passes", "agreed3")},
+                       "pass_w": 100 * v["passes"] / v["payroll"] if v["payroll"] else 0.0,
+                       "agreed_w": 100 * v["agreed3"] / v["payroll"] if v["payroll"] else 0.0} for t, v in tiers.items()],
             "rollups": {"buyers": trade["rollups"]["n"], "deals": len(trade["deals"]), "obs_ids": [x["obs_id"] for x in trade["deals"]],
                         "trade": trade["name"]} if trade else None,
         })
@@ -126,21 +147,19 @@ def build(spec: dict[str, Any], cspec: dict[str, Any], trades_doc: dict[str, Any
     for k in kinds:
         now = k["tiers"]
         staged = [{"stage": "now", "judged": False, "tiers": [{"id": t["id"], "w": t["w"], "inner": t["pass_w"]} for t in now]}]
+        # a judged layer carries its word and today's width, so the page can outline what it is drawn against
         for stage in ("next", "later"):
             words = (k.get("shape") or {}).get(stage) or ["same"] * len(now)
             staged.append({"stage": stage, "judged": True,
-                           "tiers": [{"id": t["id"], "w": min(100.0, t["w"] * DRAWN[w]), "word": w} for t, w in zip(now, words)]})
+                           "tiers": [{"id": t["id"], "w": min(100.0, t["w"] * DRAWN[w]), "was": t["w"], "word": w} for t, w in zip(now, words)]})
         k["staged"] = staged
-        # across: the share of office work that passes or waits only on a check; up: the judged band
-        k["place"] = {"x": 100 - chart.y(k["share_checkable"], ax), "y": RUNG_Y.get(k.get("rung") or "", 50.0)}
+        # across: the share of knowledge-work payroll that passes or waits only on a check
+        k["place"] = {"x": 100 - chart.y(k["share_checkable"], ax)}
     most = max([max(k["rollups"]["buyers"], k["rollups"]["deals"]) for k in kinds if k["rollups"]] or [1])
     for k in kinds:  # the roll-up bars share one scale: the largest count on the page is the full width
         if k["rollups"]:
             k["rollups"] |= {"buyers_w": 100 * k["rollups"]["buyers"] / most, "deals_w": 100 * k["rollups"]["deals"] / most}
-    for band in RUNG_Y:  # kinds in one band step up and down in turn, left to right, so their names do not collide
-        row = sorted((k for k in kinds if k.get("rung") == band), key=lambda k: k["place"]["x"])
-        for i, k in enumerate(row):
-            k["place"]["y"] += (-9.0, 0.0, 9.0)[i % 3]
+    used = {w for k in spec.get("kinds") or [] for words in (k.get("shape") or {}).values() for w in words}
     needs = [{**n, "opportunities": [{"id": o, "name": opps.get(o, o), "href": f"/value-chain/opportunities#op-{o}"} for o in n.get("opportunities") or []]}
              for n in spec.get("needs") or []]
     return {
@@ -149,7 +168,11 @@ def build(spec: dict[str, Any], cspec: dict[str, Any], trades_doc: dict[str, Any
         "sources": [{**x, "retrieved_at": str(x["retrieved_at"]), "n": i + 1} for i, x in enumerate(spec.get("sources") or [])],
         "needs": needs,
         "needs_grid": [{"id": n["id"], "cells": [n["id"] in (k.get("needs") or []) for k in kinds]} for n in needs],
+        # the key to the judged drawings: each word in use at its drawn width, widest first
+        "drawn": [{"word": w, "label": (spec.get("shape_words") or {}).get(w, w), "w": 100 * f} for w, f in sorted(DRAWN.items(), key=lambda x: -x[1]) if w in used],
+        # the map: one row for each kind, grouped by the band this site judged and ordered by the measured share
         "map": {"x": {"ticks": [{"x": 100 - t["y"], "label": t["label"]} for t in ax["ticks"]]},
-                "rungs": [{"id": r, "y": y, "label": (spec.get("rungs") or {}).get(r, "")} for r, y in RUNG_Y.items()]},
+                "bands": [{"id": r, "label": label, "kinds": [k["id"] for k in sorted(kinds, key=lambda k: -k["share_checkable"]) if k.get("rung") == r]}
+                          for r, label in (spec.get("rungs") or {}).items()]},
         "kinds": kinds,
     }
