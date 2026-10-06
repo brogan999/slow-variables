@@ -453,5 +453,11 @@ def shape(spec: dict[str, Any]) -> dict[str, Any]:
     for code, g in groups.items():
         row = {"code": code, "name": names.get(code, ""), "ref": ref(spec, "tasks.csv", f"occ={code}-*"), "mean_pay": g["payroll"] / g["emp"], **g}
         row |= {f"share_{k}": g[k] / g["payroll"] for k in ("passes", "agreed3", "waits_on_check", "physical", "rest")}
+        bar, x = [], 0.0
+        for part in ("passes", "waits_on_check", "physical", "rest"):  # the stacked bar, in percent of the group's payroll
+            w = 100 * g[part] / g["payroll"]
+            bar.append({"part": part, "x": x, "w": w if part != "rest" else 100 - x})
+            x += w
+        row |= {"bar": bar, "agreed3_x": 100 * g["agreed3"] / g["payroll"]}
         out.append(row)
     return {"version": spec["version"], "groups": sorted(out, key=lambda g: -g["mean_pay"])}

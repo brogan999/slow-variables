@@ -3,7 +3,8 @@ import { ArticleLayout } from "@/components/ArticleLayout";
 import { Folios, folioId, Inline, parseEssay } from "@/components/Essay";
 import { CensusCutPlate, FirmMargin, RegimesPlate, SeatedPositions, ShapesPlate } from "@/components/FirmParts";
 import { ClaimState, cites, OutlookSources } from "@/components/OutlookParts";
-import { firm } from "@/lib/data";
+import { Anatomy } from "@/components/FirmKinds";
+import { firm, firmKinds } from "@/lib/data";
 import { SITE } from "@/lib/site";
 
 const title = "Who owns what";
@@ -34,7 +35,7 @@ export default function FirmPage() {
       }
       margin={<FirmMargin doc={doc} />}
     >
-      <Folios folios={folios} facts={doc.facts} plates={{ regimes: <RegimesPlate regimes={doc.regimes} />, shapes: <ShapesPlate doc={doc} />, jobs: <CensusCutPlate cut={doc.census_cut} /> }} cites={c} tests={doc.tests} after={(label) => <SeatedPositions doc={doc} folio={folioId(label).replace(/^folio-/, "")} />} />
+      <Folios folios={folios} facts={doc.facts} plates={{ regimes: <RegimesPlate regimes={doc.regimes} />, shapes: <ShapesPlate doc={doc} />, jobs: <CensusCutPlate cut={doc.census_cut} />, anatomy: <Anatomy doc={firmKinds()} /> }} cites={c} tests={doc.tests} after={(label) => <SeatedPositions doc={doc} folio={folioId(label).replace(/^folio-/, "")} />} />
       <section id="sources" className="mt-20 border-t border-grid pt-8 scroll-mt-8">
         <h2 className="display text-[1.5rem] mb-4">Sources</h2>
         <OutlookSources doc={doc} />
