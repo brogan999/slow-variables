@@ -5,6 +5,8 @@ import json
 import re
 from pathlib import Path
 
+from collections import Counter
+
 from ai_tracker import firm_kinds, futures
 from ai_tracker import opportunities as op
 from ai_tracker.outlook import load as load_outlook
@@ -14,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 WEB = ROOT / "web" / "src"
 FIGS = WEB / "components" / "OpportunityFigures.tsx"
 PARTS = WEB / "components" / "diagrams" / "opportunities.tsx"
+CARDS = WEB / "components" / "Opportunities.tsx"
 TOP = {"reviewed_by", "reviewed", "opportunities", "sequence", "powers", "counts"}
 RECORD = {"id", *op.TEXT, "primary", "adjacent", "powers", "builds_on", "rent", "examples", "n_more_examples", "unmapped",
           "none_independent", "see_also", "blank"}
@@ -37,6 +40,7 @@ def test_the_figures_add_a_block_and_change_no_field_the_cards_read():
     assert [(m["id"], m["n"]) for m in F["marks"]] == [(i, n + 1) for n, i in enumerate(want)]
     assert all(m["name"] == RECS[m["id"]]["name"] and m["verdict"] == RECS[m["id"]]["rent"]["verdict"] for m in F["marks"])
     assert F["example"] == want[0]
+    assert all(m["owner"] == futures.POOLS_WORDS[RECS[m["id"]]["rent"]["asset_owner"]] for m in F["marks"])  # a word for the folded table
 
 
 def test_who_keeps_it_follows_the_rubrics_rules_in_order_and_places_every_business_once():
@@ -58,12 +62,23 @@ def test_how_large_is_the_rubrics_table_with_every_business_in_its_cell():
     for r in size["rows"]:
         for d, c in zip(size["cols"], r["cells"]):
             assert c["tier"] == rubric["tiers"]["rules"][r["kind"]][d] and c["word"]
-            for i in c["ops"]:
+            for i in c["ops"] + c["away"]:
                 rent = RECS[i]["rent"]
                 assert (rent["rent_kind"], rent["durability"]) == (r["kind"], d)
                 assert rent["tier"] == (c["tier"] if rent["pools"] != "users" else "none")  # competed away keeps nothing
                 seen.append(i)
     assert sorted(seen) == sorted(RECS)
+
+
+def test_how_large_sets_the_competed_away_apart_so_each_band_counts_what_the_tally_counts():
+    cells = [c for r in F["size"]["rows"] for c in r["cells"]]
+    assert all(RECS[i]["rent"]["pools"] != "users" for c in cells for i in c["ops"])
+    assert all(RECS[i]["rent"]["pools"] == "users" for c in cells for i in c["away"])
+    drawn = Counter(c["word"] for c in cells for _ in c["ops"])
+    drawn["no lasting profit"] += sum(len(c["away"]) for c in cells)  # set apart beneath a line: they keep none of the cell
+    assert dict(drawn) == {t["tier"]: t["n"] for t in DOC["counts"]["by_tier"]}
+    src = FIGS.read_text()
+    assert "c.away" in src and "competed away: keeps none of this" in src
 
 
 def test_the_chain_strip_holds_every_category_of_the_map_and_each_business_where_its_record_puts_it():
@@ -80,6 +95,19 @@ def test_the_chain_strip_holds_every_category_of_the_map_and_each_business_where
     assert sum(layer["n_primary"] for layer in F["chain"]) == DOC["counts"]["records"]
 
 
+def test_each_part_of_the_chain_carries_the_maps_own_count_of_companies():
+    """The crowding figure is folded into the chain strip: the count sits in the part's tile."""
+    assert "coverage" not in F
+    on_map = {c["id"]: c for layer in MAP["layers"] for c in layer["categories"]}
+    for c in (c for layer in F["chain"] for c in layer["categories"]):
+        m = on_map[c["id"]]
+        assert c["n_entities"] == m["n_entities"] == c["live"] + c["other"], c["id"]
+        assert c["other"] == len({e["name"] for e in m["entities"] if e.get("ownership")})  # counted, not left over
+    for o in RECS.values():
+        assert next(c for layer in F["chain"] for c in layer["categories"] if c["id"] == o["primary"]["id"])["n_entities"] == o["primary"]["n_entities"]
+    assert "c.n_entities" in FIGS.read_text()
+
+
 def test_every_business_a_need_names_exists():
     known = {o["id"] for o in op.load()["opportunities"]}
     for n in firm_kinds.load()["needs"]:
@@ -90,7 +118,10 @@ def test_demand_breadth_counts_the_kinds_of_firm_on_the_needs_grid():
     spec = firm_kinds.load()
     d = F["demand"]
     assert d["kinds"] == len(spec["kinds"])
-    assert sorted(r["id"] for r in d["rows"]) == sorted(RECS)
+    named = {i for n in spec["needs"] for i in n.get("opportunities") or []}
+    assert d["off"] == [i for i in RECS if i not in named]  # no need names them: listed apart, never drawn as a zero
+    assert sorted([r["id"] for r in d["rows"]] + d["off"]) == sorted(RECS)
+    assert all(r["count"] and r["needs"] for r in d["rows"])
     for r in d["rows"]:
         needs = {n["id"] for n in spec["needs"] if r["id"] in (n.get("opportunities") or [])}
         kinds = [k["name"] for k in spec["kinds"] if needs & set(k.get("needs") or [])]
@@ -105,19 +136,6 @@ def test_demand_breadth_counts_the_kinds_of_firm_on_the_needs_grid():
     for u in d["unmet"]:
         assert u["count"] == sum(1 for k in spec["kinds"] if u["id"] in (k.get("needs") or []))
         assert u["w"] == 100 * u["count"] / d["kinds"]
-
-
-def test_coverage_is_the_maps_own_count_of_each_business_category():
-    rows = F["coverage"]["rows"]
-    assert sorted(r["id"] for r in rows) == sorted(RECS)
-    for r in rows:
-        o = RECS[r["id"]]
-        assert r["n"] == o["primary"]["n_entities"] == r["live"] + r["other"]
-        assert r["live"] == len(o["examples"]) + o["n_more_examples"] and r["other"] >= 0
-        assert 0 <= r["w_live"] and 0 <= r["w_other"] and r["w_live"] + r["w_other"] <= 100 + 1e-9
-        assert r["href"] == f"/value-chain#mm-{o['primary']['id']}"
-    assert max(r["w_live"] + r["w_other"] for r in rows) == 100  # the fullest category is the full width
-    assert [r["n"] for r in rows] == sorted((r["n"] for r in rows), reverse=True)
 
 
 def test_the_powers_grid_is_each_records_own_list():
@@ -138,7 +156,7 @@ def test_the_committed_export_carries_the_figures():
 def test_every_figure_states_its_kind_and_has_a_key_and_a_foot():
     src = FIGS.read_text()
     figures = re.findall(r'<Figure\s+id="fig-([a-z]+)"\s+title=(?:"[^"]+"|\{[^\n]+\})\s+note=\{?("[^"]+"|KIND_LABEL\.[a-z]+|[A-Z_]+)', src)
-    assert len(figures) >= 5, figures
+    assert [f[0] for f in figures] == ["turn", "keeps", "size", "chain", "demand"], figures  # five; the powers are a folded table
     assert len(re.findall(r"<Figure\b", src)) == len(figures)  # none without a stated kind
     blocks = re.split(r"(?=<Figure\b)", src)[1:]
     assert all("keys={" in b and "foot={" in b for b in blocks)
@@ -147,10 +165,58 @@ def test_every_figure_states_its_kind_and_has_a_key_and_a_foot():
     assert "judgement" in src and "hatch" in src + PARTS.read_text()
 
 
+def _prose(src: str) -> str:
+    return re.sub(r"\s+", " ", re.sub(r"\{[^{}]*\}|<[^<>]*>", " ", src).replace("&apos;", "'").replace("&quot;", '"'))
+
+
+def test_numbers_have_a_key_beside_every_figure_that_draws_them():
+    src, cards = FIGS.read_text(), CARDS.read_text()
+    assert "export function NumberKey" in src and "d.figures.marks.map" in src.split("export function NumberKey")[1].split("\nexport ")[0]
+    assert cards.index("<NumberKey") < cards.index("<WhoKeeps")  # open, before the first figure that draws numbers
+    for fig in ("HowLarge", "ChainStrip"):
+        body = src.split(f"export function {fig}")[1].split("\nexport function")[0]
+        assert "<NumberKey d={d} folded />" in body, fig
+    assert "Which number is which business" in src
+    assert "The number is only its place in the list: nothing here is ranked or scored." in _prose(cards)
+
+
+def test_the_figures_say_what_the_review_asked_them_to_say():
+    said = _prose(FIGS.read_text())
+    for words in (
+        "How many kinds of firm are marked with a need each business would meet",
+        "Breadth of need is not size of profit",
+        "each is given every kind with that need",
+        "they are not part of the owner's review of the records below",
+        "Not on that page's grid",
+        "No need on that page names these businesses.",
+        "not on the grid",
+        "Short means the shortage is expected to move within a few years",
+        "set apart beneath a line",
+        "sized by the rent rule drawn below",
+        "Chart of each record's own placing",
+        "are separate judgements under separate schemes and need not match",
+        "the owner judges the business would build this power",
+        "the maker would keep the profit (the owner's judgement, by the rent rule)",
+        "a boxed number sits in this part",
+    ):
+        assert words in said, words
+    for gone in ("would need each business", "set out in the", "such as the labs and clouds themselves", "drawn in the next figures"):
+        assert gone not in said, gone
+
+
+def test_the_folded_tables_print_words_not_the_rubrics_raw_values():
+    src = FIGS.read_text()
+    for raw in ("o.rent.appropriability}", "o.rent.complementary_assets}", "o.rent.asset_owner", "o.rent.rent_kind.replace"):
+        assert raw not in src, raw
+    assert "something only a few hold" in src and "nothing scarce" in src
+
+
 def test_figure_words_type_no_digit_but_a_year_and_no_number_word():
     for f in (FIGS, PARTS):
         src = re.sub(r"//[^\n]*", "", f.read_text())
         words = re.findall(r'(?:title|note|label|aria-label)="([^"]+)"', src) + re.findall(r">([^<>{}=;]+)<", src)
+        # and every quoted sentence held in an object or another prop; a class list has no capital and has hyphens
+        words += [q for q in re.findall(r'"([^"\n]+)"', src) if len(q.split()) >= 3 and (q != q.lower() or "-" not in q)]
         for w in words:
             w = w.replace("&apos;", "'")
             assert not op.stray_digits(w), (f.name, w)
@@ -158,7 +224,7 @@ def test_figure_words_type_no_digit_but_a_year_and_no_number_word():
 
 
 def test_the_page_keeps_every_card_and_claims_no_new_review():
-    cards = (WEB / "components" / "Opportunities.tsx").read_text()
+    cards = CARDS.read_text()
     for label in ("The problem", "Sold to", "First step", "Charges for", "Why a lab would not just bundle it", "What it builds up",
                   "Why that profit", "Wrong if", "Already on the map", "Builds on the site's reading", "Needs first"):
         assert f'label="{label}"' in cards, label
