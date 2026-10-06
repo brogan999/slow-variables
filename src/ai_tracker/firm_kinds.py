@@ -112,7 +112,8 @@ def build(spec: dict[str, Any], cspec: dict[str, Any], trades_doc: dict[str, Any
             "share_checkable": (passes + waits) / know,  # of the office work: passes, or would but for a check
             "bar": bar,
             "tiers": [{"id": t, "share": v["payroll"] / office, "share_passes": v["passes"] / v["payroll"] if v["payroll"] else 0.0,
-                       "w": 100 * v["payroll"] / widest} for t, v in tiers.items()],
+                       "w": 100 * v["payroll"] / widest,
+                       "pass_w": 100 * v["passes"] / v["payroll"] if v["payroll"] else 0.0} for t, v in tiers.items()],
             "rollups": {"buyers": trade["rollups"]["n"], "deals": len(trade["deals"]), "obs_ids": [x["obs_id"] for x in trade["deals"]],
                         "trade": trade["name"]} if trade else None,
         })

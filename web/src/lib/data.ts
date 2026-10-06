@@ -279,6 +279,16 @@ export type FirmDoc = ClaimsDoc & {
   census_cut: { version: string; groups: FirmCutGroup[] };
 };
 export const firm = () => read<FirmDoc>("firm.json");
+export type KindPart = "passes" | "waits_on_check" | "held" | "outside";
+export type FirmKind = {
+  id: string; name: string; naics: string[]; titles: string[]; refs: string[]; payroll: number; office_payroll: number;
+  share_passes: number; share_agreed3: number; share_waits_on_check: number; share_held: number; share_outside: number; share_checkable: number;
+  bar: { part: KindPart; x: number; w: number }[];
+  tiers: { id: "managers" | "professionals" | "sales" | "support"; share: number; share_passes: number; w: number; pass_w: number }[];
+  rollups: { buyers: number; deals: number; obs_ids: string[]; trade: string } | null;
+};
+export type FirmKindsDoc = { version: string; kinds: FirmKind[] };
+export const firmKinds = () => read<FirmKindsDoc>("firm_kinds.json");
 export type Word = "happening" | "not_happening" | "slower" | "both" | "too_early";
 export type BoardRow = {
   id: string; kind: "ledger" | "outlook" | "migration" | "exit"; folio: string; who: string; attribution: string; line: string;
