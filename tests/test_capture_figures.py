@@ -90,7 +90,7 @@ def test_each_labs_bars_are_its_own_records_and_the_ratio_is_the_sites_metric(wo
     top = max(b["value"] for r in labs["rows"] for b in (r["run_rate"], r["equity"], r["promised"]) if b)
     for r in labs["rows"]:
         d = ratio[r["subject"]]
-        assert r["run_rate"]["obs_ids"] == d.input_observation_ids[:1] and r["run_rate"]["value"] == obs[d.input_observation_ids[0]]["value_numeric"]
+        assert obs[r["run_rate"]["obs_ids"][0]]["measure"] == "revenue_run_rate_usd" and r["run_rate"]["value"] == obs[r["run_rate"]["obs_ids"][0]]["value_numeric"]
         assert abs(r["equity"]["value"] - sum(obs[i]["value_numeric"] for i in r["equity"]["obs_ids"])) < 1
         assert sorted(r["run_rate"]["obs_ids"] + r["equity"]["obs_ids"]) == sorted(d.input_observation_ids)
         assert abs(r["ratio"]["value"] - d.value) < 1e-9 and abs(r["run_rate"]["value"] / r["equity"]["value"] - d.value) < 1e-9
@@ -129,6 +129,11 @@ def test_the_ties_add_up_to_the_ledgers_counted_total_and_every_band_sits_inside
     assert abs(sum(b["value"] for b in t["bands"]) - total.value) < 1 and all(b["d"].startswith("M") for b in t["bands"])
     labs = {e.id for e in s.seed.entities if any(m.is_primary and m.sublayer_id == "frontier_labs" for m in e.memberships)}
     assert {n["id"] for n in t["right"]} - {"none"} <= labs
+    # the title says the same companies fund the labs and sell to them: some pair carries a band of each kind
+    kinds: dict[tuple[str, str], set[str]] = {}
+    for b in t["bands"]:
+        kinds.setdefault((b["left"], b["right"]), set()).add(b["kind"])
+    assert any(k == {"buy", "stake"} and "none" not in pair for pair, k in kinds.items())
     # the foot says a few very large deals make up most of it: the three largest pairings are more than half
     by_pair: dict[tuple[str, str], float] = {}
     for p in t["pairs"]:
@@ -137,7 +142,7 @@ def test_the_ties_add_up_to_the_ledgers_counted_total_and_every_band_sits_inside
 
 
 def test_the_concentration_strip_places_each_index_at_its_latest_reading(world):
-    _, cap = world
+    s, cap = world
     cards = {c["id"]: c for layer in cap["layers"] for c in layer["indicators"]}
     rows = cap["figures"]["concentration"]["rows"]
     assert len(rows) >= 3 and [r["id"] for r in rows] == [i for i in cf.CONCENTRATION if i in cards]
@@ -145,6 +150,7 @@ def test_the_concentration_strip_places_each_index_at_its_latest_reading(world):
         latest = cards[r["id"]]["latest"]
         assert cards[r["id"]]["unit"] == "index" and r["value"] == latest["value"] and r["obs_ids"] == latest["obs_ids"]
         assert abs(r["x"] - 100 * r["value"]) < 0.01 and 0 <= r["x"] <= 100 and r["as_of"] == latest["as_of"]
+        assert r["counts"] == next(i.definition for i in s.seed.indicators if i.id == r["id"])
 
 
 def test_the_rule_is_seed_text_and_no_word_on_the_page_types_a_number(world):
@@ -152,7 +158,7 @@ def test_the_rule_is_seed_text_and_no_word_on_the_page_types_a_number(world):
 
     _, cap = world
     spec = cf.load()
-    assert cap["figures"]["rule"] == spec["rule"] and len(spec["rule"]["steps"]) >= 3
+    assert cap["figures"]["rule"] == spec["rule"] and len(spec["rule"]["outcomes"]) == 3 and len(spec["rule"]["questions"]) == 2
     for t in cf.strings(spec):
         assert not re.search(r"\d", t) and not NUMBER_WORD.search(t), t
     for f in TSX:

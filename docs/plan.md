@@ -988,3 +988,16 @@ Five figures on `/value-chain`, all laid out in Python (`value_chain.figures`, `
   - Only a handful of the judged parts name any power while their profiled companies are credited with several; frontier labs names only scale economies while its companies are credited with other kinds, and memory names a cornered resource no single-part profile holds.
   - The sub-layer names in `seed/sublayers.yaml` are jargon (RLaaS, HBM, FDE, evals); the feet gloss them, and a `plain` name beside each is the owner's to approve.
   - Whether a person reviewed the unit judgements (the directions and the powers each part names) is not recorded; the feet of the first two figures therefore claim no review. What `verified: true` means operationally, and who sets it, is not written down anywhere.
+
+## Part 45f (6 Oct 2026): figures on who profits
+
+Six figures added to `/capture`, beside the three already there; the cards and folded lists are kept. Everything drawn is summed and laid out in `src/ai_tracker/capture_figures.py` and rides in `web/data/lens/capture.json` under `figures`; no existing field changes.
+
+- **Every gauge, layer by layer** (chart, the page's summary): each published gauge with a direction rule as one square under the word it reads tonight, linked to its page.
+- **The rule** (model): the page's rule as a pair of questions and where the profit goes on each answer. Its words are new seed text in `seed/capture.yaml`, with no number.
+- **Shares a year apart** (chart): each part of both profit stacks in the newest quarter against the same quarter a year before, so it reads the stacks' ends and does not redraw them.
+- **Concentration indices on one scale** (chart): the Herfindahl indices the site holds. The chip index counts a pair of filers and the cloud index a handful, so neither can read low; the foot says the rows are not like for like, and what each counts is in the folded table.
+- **Each lab's run-rate against what it has raised and promised** (chart): the inputs of `lab_recoupment_ratio` for every lab the metric holds, plus the ledger's contracts and commitments that name the lab. Estimates are hatched by the store's own stamp.
+- **Who is tied to whom** (chart): the rows `circular_commitments_total` counts, as bands between counterparties and frontier labs, split into promises to buy and stakes or guarantees.
+
+Judgement calls: the ledger's instruments are sorted into the two kinds by a table in the module (a backstop is read as a promise to buy); an unknown instrument fails the export. The eight largest counterparties are named and the rest gathered. The ledger does not record which way money moves, so the flow figure draws ties, not arrows. Labs are ordered by money raised, by one rule, and frontier labs with no run-rate on record are named in the foot. The lab figure draws every lab the metric holds, though for those with a single round on record the sum raised is a floor.

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { StackPlate } from "@/components/ArgumentParts";
 import { FourPlaces } from "@/components/FourPlaces";
 import { ChangelogList } from "@/components/Changelog";
+import { ConcentrationPlate, GaugesPlate, LabsPlate, RulePlate, TiesPlate, YearPlate } from "@/components/CaptureFigures";
 import { StackChart } from "@/components/StackChart";
 import { PageHeader } from "@/components/PageHeader";
 import { StatusChip } from "@/components/StatusChip";
@@ -19,8 +20,11 @@ export default function CaptureLens() {
         lede="The AI industry is a stack of layers, from chips and data centres at the bottom to the apps people use at the top. This page follows where the profit settles, layer by layer. Gross profit is what is left of revenue after paying to deliver the product; where a layer publishes none, it is left out rather than guessed." />
       <p className="-mt-10 text-ink-2 max-w-[62ch]">Where each layer&apos;s economics are heading, what is getting cheap and what stays scarce, is on <Link href="/value-chain" className="underline decoration-axis underline-offset-4">the value chain</Link>.</p>
 
+      <GaugesPlate gauges={c.figures.gauges} />
+      <RulePlate rule={c.figures.rule} />
       <FourPlaces shifts={outlook().shifts} />
       <StackPlate />
+      <YearPlate year={c.figures.year} />
 
       <section aria-labelledby="layers" className="flex flex-col gap-4">
         <h2 id="layers" className="eyebrow">The layers, from the chips up</h2>
@@ -50,6 +54,15 @@ export default function CaptureLens() {
             );
           })}
         </ol>
+      </section>
+
+      <ConcentrationPlate strip={c.figures.concentration} />
+
+      <section aria-labelledby="ahead" className="flex flex-col gap-4">
+        <h2 id="ahead" className="eyebrow">Spending ahead of sales</h2>
+        <p className="max-w-[62ch] font-serif text-lg text-ink-2">Why it matters: a layer keeps profit only if its sales outgrow the money it takes in. These figures set what the labs sell against what they have raised and promised to spend, and show how much of that money runs between the labs and their own suppliers.</p>
+        <LabsPlate labs={c.figures.labs} />
+        <TiesPlate ties={c.figures.ties} />
       </section>
 
       <section className="border-t border-grid pt-8 flex flex-col gap-4">

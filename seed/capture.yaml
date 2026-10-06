@@ -1,0 +1,35 @@
+# The words of the model drawn on /capture (Part 45f). A drawing of the page's rule, not a measurement: no number
+# belongs here, and tests/test_capture_figures.py keeps digits and number words out.
+rule:
+  title: "The rule this page reads by: profit stays where something is scarce and rivals can be kept off"
+  start: Something every buyer of AI needs, such as a chip, a model or an app
+  questions:
+    - id: scarce
+      ask: Is it scarce?
+      explain: Scarce means buyers want more of it than its makers can supply at today's price.
+    - id: defended
+      ask: Can whoever holds it keep rivals off?
+      explain: A rival is kept off when copying the thing takes years, costs too much, or needs something only the holder has.
+  outcomes:
+    - id: away
+      after: scarce
+      answer: "No"
+      word: Profit competed away
+      text: Many firms can supply it, so they undercut each other until the price is close to the cost. The saving passes to whoever buys it.
+    - id: while
+      after: defended
+      answer: "No"
+      word: Profit for a while
+      text: The holder is paid well today, but the high price draws in rivals and substitutes. As they arrive the price falls and the money moves on to the next scarce thing.
+    - id: stays
+      after: defended
+      answer: "Yes"
+      word: Profit stays here
+      text: Buyers must pay the holder's price, and the profit collects with the holder for as long as both answers stay yes.
+  defences_label: What keeps rivals off
+  defences:
+    - A design that takes years to match
+    - Factories and power connections that take years to build
+    - Customers whose own work is already built on the product
+    - Being the place a customer opens first
+  foot: The gauges on this page ask these same questions of each layer. A layer reads as concentrating when its profit or its sales are gathering with fewer firms, and as dispersing when they are spreading out to more firms or to buyers.
