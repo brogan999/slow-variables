@@ -139,6 +139,7 @@ def test_the_rollup_plot_places_every_industry_inside_the_plot_and_draws_the_cut
     assert all(0 <= pt["x"] <= 100 and 0 <= pt["y"] <= 100 for pt in [*p["points"], *p["cut"]])
     assert p["points"][0]["y"] < p["points"][3]["y"] and p["points"][2]["x"] > p["points"][4]["x"]  # up is more passing, right is more small firms
     assert len(p["cut"]) > 10 and p["cut_points"] == " ".join(f"{c['x']},{c['y']}" for c in p["cut"])
+    assert [pt.get("label") in ("r", "l", "t", "b") for pt in p["points"]] == [True, True, True, False, False]  # a side for each rank
     xs = [c["x"] for c in p["cut"]]
     assert xs == sorted(xs)
     assert p["x"]["ticks"] and p["y"]["ticks"] and p["y"]["chars"] >= 2
@@ -171,7 +172,8 @@ def test_the_figures_type_no_figure_and_claim_no_capability():
     from .test_atlas import NUMBER_WORD
 
     src = (SRC / "components" / "CensusFigures.tsx").read_text()
-    words = re.findall(r'(?:title|label|tableLabel)="([^"]+)"|>([^<>{}]{12,})<', src)
+    words = re.findall(r'(?:title|label|tableLabel|first)="([^"]+)"|[>}]\s*([A-Za-z][^<>{}=;()]{11,})[<{]', src)
+    assert len(words) > 40
     for s in (a or b for a, b in words):
         assert not re.search(r"\d", s) and not NUMBER_WORD.search(s), s
         assert not re.search(r"\bcan go\b|\btoday\b|\ba range\b", s, re.I), s

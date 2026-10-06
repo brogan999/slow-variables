@@ -645,6 +645,7 @@
    "l": 1,
    "label": null,
    "passes": 115026067576.71378,
+   "ref": "census:v3.2-2026-09-24/validation.json#dial/0",
    "rule": "can be checked instantly, by an existing check, and a failure costs up to about $1k",
    "vh": 0
   },
@@ -657,6 +658,7 @@
    "l": 2,
    "label": null,
    "passes": 171839085955.99167,
+   "ref": "census:v3.2-2026-09-24/validation.json#dial/1",
    "rule": "can be checked instantly, by an existing check, and a failure costs up to about $10k",
    "vh": 0
   },
@@ -669,6 +671,7 @@
    "l": 2,
    "label": "the rule used: an existing check settles it, with no person's judgement",
    "passes": 388648621524.1933,
+   "ref": "census:v3.2-2026-09-24/validation.json#dial/2",
    "rule": "can be checked within hours, by an existing check, and a failure costs up to about $10k",
    "vh": 1
   },
@@ -681,6 +684,7 @@
    "l": 2,
    "label": "also counts work that only a qualified person's judgement settles",
    "passes": 1295896086566.0398,
+   "ref": "census:v3.2-2026-09-24/validation.json#dial/3",
    "rule": "can be checked within hours \u2014 by an existing check or an expert \u2014 and a failure costs up to about $10k",
    "vh": 1
   },
@@ -693,6 +697,7 @@
    "l": 2,
    "label": null,
    "passes": 1946257049374.957,
+   "ref": "census:v3.2-2026-09-24/validation.json#dial/4",
    "rule": "can be checked within days \u2014 by an existing check or an expert \u2014 and a failure costs up to about $10k",
    "vh": 2
   },
@@ -705,6 +710,7 @@
    "l": 3,
    "label": null,
    "passes": 2428965366697.0347,
+   "ref": "census:v3.2-2026-09-24/validation.json#dial/5",
    "rule": "can be checked within days \u2014 by an existing check or an expert \u2014 and a failure costs up to about $100k",
    "vh": 2
   }
@@ -765,6 +771,1916 @@
     "left": 100.0
    }
   ]
+ },
+ "figures": {
+  "dial": {
+   "rows": [
+    {
+     "agreed3": 4598944622.603205,
+     "agreed3_x": 0.18,
+     "headline": false,
+     "label": null,
+     "passes": 115026067576.71378,
+     "ref": "census:v3.2-2026-09-24/validation.json#dial/0",
+     "rule": "can be checked instantly, by an existing check, and a failure costs up to about $1k",
+     "w": 4.6
+    },
+    {
+     "agreed3": 77966695863.09009,
+     "agreed3_x": 3.12,
+     "headline": false,
+     "label": null,
+     "passes": 171839085955.99167,
+     "ref": "census:v3.2-2026-09-24/validation.json#dial/1",
+     "rule": "can be checked instantly, by an existing check, and a failure costs up to about $10k",
+     "w": 6.87
+    },
+    {
+     "agreed3": 158386271953.58893,
+     "agreed3_x": 6.34,
+     "headline": true,
+     "label": "the rule used: an existing check settles it, with no person's judgement",
+     "passes": 388648621524.1933,
+     "ref": "census:v3.2-2026-09-24/validation.json#dial/2",
+     "rule": "can be checked within hours, by an existing check, and a failure costs up to about $10k",
+     "w": 15.55
+    },
+    {
+     "agreed3": 696749693323.8652,
+     "agreed3_x": 27.87,
+     "headline": false,
+     "label": "also counts work that only a qualified person's judgement settles",
+     "passes": 1295896086566.0398,
+     "ref": "census:v3.2-2026-09-24/validation.json#dial/3",
+     "rule": "can be checked within hours \u2014 by an existing check or an expert \u2014 and a failure costs up to about $10k",
+     "w": 51.84
+    },
+    {
+     "agreed3": 1099036444168.5375,
+     "agreed3_x": 43.96,
+     "headline": false,
+     "label": null,
+     "passes": 1946257049374.957,
+     "ref": "census:v3.2-2026-09-24/validation.json#dial/4",
+     "rule": "can be checked within days \u2014 by an existing check or an expert \u2014 and a failure costs up to about $10k",
+     "w": 77.85
+    },
+    {
+     "agreed3": 1582359194979.0542,
+     "agreed3_x": 63.29,
+     "headline": false,
+     "label": null,
+     "passes": 2428965366697.0347,
+     "ref": "census:v3.2-2026-09-24/validation.json#dial/5",
+     "rule": "can be checked within days \u2014 by an existing check or an expert \u2014 and a failure costs up to about $100k",
+     "w": 97.16
+    }
+   ],
+   "ticks": [
+    {
+     "label": "$0",
+     "left": 0.0
+    },
+    {
+     "label": "$0.5T",
+     "left": 20.0
+    },
+    {
+     "label": "$1.0T",
+     "left": 40.0
+    },
+    {
+     "label": "$1.5T",
+     "left": 60.0
+    },
+    {
+     "label": "$2.0T",
+     "left": 80.0
+    },
+    {
+     "label": "$2.5T",
+     "left": 100.0
+    }
+   ]
+  },
+  "functions": [
+   {
+    "agreed3": 21762630792.507908,
+    "agreed3_x": 12.532997812850201,
+    "bar": [
+     {
+      "part": "passes",
+      "w": 22.399274441884387,
+      "x": 0.0
+     },
+     {
+      "part": "waits_on_check",
+      "w": 49.75826588114861,
+      "x": 22.399274441884387
+     },
+     {
+      "part": "physical",
+      "w": 15.812596493862033,
+      "x": 72.157540323033
+     },
+     {
+      "part": "rest",
+      "w": 12.029863183104965,
+      "x": 87.97013681689504
+     }
+    ],
+    "function": "Customer support",
+    "passes": 38894695983.98748,
+    "payroll": 173642660100.0,
+    "physical": 27457413182.82137,
+    "ref": "census:v3.2-2026-09-24/functions.csv#Customer support",
+    "rest": 20888974437.534035,
+    "share_agreed3": 0.125329978128502,
+    "share_passes": 0.22399274441884387,
+    "share_physical": 0.15812596493862033,
+    "share_rest": 0.12029863183104988,
+    "share_waits_on_check": 0.4975826588114861,
+    "waits_on_check": 86401576495.65715
+   },
+   {
+    "agreed3": 439142390.6790683,
+    "agreed3_x": 0.9568373835744008,
+    "bar": [
+     {
+      "part": "passes",
+      "w": 14.76040619602524,
+      "x": 0.0
+     },
+     {
+      "part": "waits_on_check",
+      "w": 9.959413400566833,
+      "x": 14.76040619602524
+     },
+     {
+      "part": "physical",
+      "w": 6.573041807583049,
+      "x": 24.719819596592075
+     },
+     {
+      "part": "rest",
+      "w": 68.70713859582487,
+      "x": 31.292861404175124
+     }
+    ],
+    "function": "Claims & underwriting",
+    "passes": 6774317324.541116,
+    "payroll": 45895195800.0,
+    "physical": 3016710407.6060996,
+    "ref": "census:v3.2-2026-09-24/functions.csv#Claims & underwriting",
+    "rest": 31533275787.13121,
+    "share_agreed3": 0.009568373835744009,
+    "share_passes": 0.14760406196025241,
+    "share_physical": 0.0657304180758305,
+    "share_rest": 0.687071385958249,
+    "share_waits_on_check": 0.09959413400566833,
+    "waits_on_check": 4570892280.721586
+   },
+   {
+    "agreed3": 22275825966.2487,
+    "agreed3_x": 3.663369351599075,
+    "bar": [
+     {
+      "part": "passes",
+      "w": 12.655174257615235,
+      "x": 0.0
+     },
+     {
+      "part": "waits_on_check",
+      "w": 8.443800765712103,
+      "x": 12.655174257615235
+     },
+     {
+      "part": "physical",
+      "w": 9.162146165073578,
+      "x": 21.098975023327338
+     },
+     {
+      "part": "rest",
+      "w": 69.73887881159908,
+      "x": 30.261121188400914
+     }
+    ],
+    "function": "Finance",
+    "passes": 76952235027.06195,
+    "payroll": 608069343500.0,
+    "physical": 55712202036.47333,
+    "ref": "census:v3.2-2026-09-24/functions.csv#Finance",
+    "rest": 424060742553.9519,
+    "share_agreed3": 0.036633693515990745,
+    "share_passes": 0.12655174257615234,
+    "share_physical": 0.09162146165073577,
+    "share_rest": 0.697388788115992,
+    "share_waits_on_check": 0.08443800765712103,
+    "waits_on_check": 51344163882.51356
+   },
+   {
+    "agreed3": 9937792641.932972,
+    "agreed3_x": 5.860225724313611,
+    "bar": [
+     {
+      "part": "passes",
+      "w": 12.110947824654897,
+      "x": 0.0
+     },
+     {
+      "part": "waits_on_check",
+      "w": 10.035748051746182,
+      "x": 12.110947824654897
+     },
+     {
+      "part": "physical",
+      "w": 33.13617494715146,
+      "x": 22.14669587640108
+     },
+     {
+      "part": "rest",
+      "w": 44.71712917644746,
+      "x": 55.28287082355254
+     }
+    ],
+    "function": "Supply chain",
+    "passes": 20537790494.885162,
+    "payroll": 169580373000.0,
+    "physical": 56192449073.312004,
+    "ref": "census:v3.2-2026-09-24/functions.csv#Supply chain",
+    "rest": 75831474452.3114,
+    "share_agreed3": 0.0586022572431361,
+    "share_passes": 0.12110947824654898,
+    "share_physical": 0.33136174947151464,
+    "share_rest": 0.4471712917644744,
+    "share_waits_on_check": 0.10035748051746182,
+    "waits_on_check": 17018658979.49141
+   },
+   {
+    "agreed3": 16976721551.010077,
+    "agreed3_x": 5.176578627953654,
+    "bar": [
+     {
+      "part": "passes",
+      "w": 10.071405843359951,
+      "x": 0.0
+     },
+     {
+      "part": "waits_on_check",
+      "w": 15.728966575766643,
+      "x": 10.071405843359951
+     },
+     {
+      "part": "physical",
+      "w": 51.04008196795155,
+      "x": 25.800372419126596
+     },
+     {
+      "part": "rest",
+      "w": 23.159545612921846,
+      "x": 76.84045438707815
+     }
+    ],
+    "function": "Retail front line",
+    "passes": 33029432163.291092,
+    "payroll": 327952548800.0,
+    "physical": 167387249723.50632,
+    "ref": "census:v3.2-2026-09-24/functions.csv#Retail front line",
+    "rest": 75952320128.07585,
+    "share_agreed3": 0.051765786279536534,
+    "share_passes": 0.1007140584335995,
+    "share_physical": 0.5104008196795156,
+    "share_rest": 0.2315954561292187,
+    "share_waits_on_check": 0.15728966575766642,
+    "waits_on_check": 51583546785.126785
+   },
+   {
+    "agreed3": 19886989665.896816,
+    "agreed3_x": 4.1272640387765,
+    "bar": [
+     {
+      "part": "passes",
+      "w": 9.490196550790289,
+      "x": 0.0
+     },
+     {
+      "part": "waits_on_check",
+      "w": 12.359980810548873,
+      "x": 9.490196550790289
+     },
+     {
+      "part": "physical",
+      "w": 10.455562253727216,
+      "x": 21.850177361339163
+     },
+     {
+      "part": "rest",
+      "w": 67.69426038493361,
+      "x": 32.30573961506638
+     }
+    ],
+    "function": "Sales",
+    "passes": 45727978379.79958,
+    "payroll": 481844376300.0,
+    "physical": 50379538730.13013,
+    "ref": "census:v3.2-2026-09-24/functions.csv#Sales",
+    "rest": 326180986742.6816,
+    "share_agreed3": 0.041272640387765,
+    "share_passes": 0.09490196550790289,
+    "share_physical": 0.10455562253727216,
+    "share_rest": 0.6769426038493366,
+    "share_waits_on_check": 0.1235998081054887,
+    "waits_on_check": 59555872447.38889
+   },
+   {
+    "agreed3": 2412102073.347807,
+    "agreed3_x": 4.691700831542342,
+    "bar": [
+     {
+      "part": "passes",
+      "w": 9.342083997484842,
+      "x": 0.0
+     },
+     {
+      "part": "waits_on_check",
+      "w": 6.499832188149296,
+      "x": 9.342083997484842
+     },
+     {
+      "part": "physical",
+      "w": 6.090295920964224,
+      "x": 15.841916185634137
+     },
+     {
+      "part": "rest",
+      "w": 78.06778789340164,
+      "x": 21.93221210659836
+     }
+    ],
+    "function": "Procurement",
+    "passes": 4802961865.817593,
+    "payroll": 51412103200.00001,
+    "physical": 3131149224.071518,
+    "ref": "census:v3.2-2026-09-24/functions.csv#Procurement",
+    "rest": 40136291677.71274,
+    "share_agreed3": 0.04691700831542341,
+    "share_passes": 0.09342083997484842,
+    "share_physical": 0.06090295920964224,
+    "share_rest": 0.780677878934016,
+    "share_waits_on_check": 0.06499832188149296,
+    "waits_on_check": 3341700432.3981347
+   },
+   {
+    "agreed3": 1159339265.0686073,
+    "agreed3_x": 2.4738402231947703,
+    "bar": [
+     {
+      "part": "passes",
+      "w": 8.655507480646374,
+      "x": 0.0
+     },
+     {
+      "part": "waits_on_check",
+      "w": 18.351756884511925,
+      "x": 8.655507480646374
+     },
+     {
+      "part": "physical",
+      "w": 0.018455880213556923,
+      "x": 27.0072643651583
+     },
+     {
+      "part": "rest",
+      "w": 72.97427975462814,
+      "x": 27.025720245371858
+     }
+    ],
+    "function": "Data & analytics",
+    "passes": 4056312767.2204366,
+    "payroll": 46863950800.0,
+    "physical": 8649154.622988252,
+    "ref": "census:v3.2-2026-09-24/functions.csv#Data & analytics",
+    "rest": 34198630560.863293,
+    "share_agreed3": 0.024738402231947704,
+    "share_passes": 0.08655507480646375,
+    "share_physical": 0.00018455880213556923,
+    "share_rest": 0.7297427975462815,
+    "share_waits_on_check": 0.18351756884511924,
+    "waits_on_check": 8600358317.293282
+   },
+   {
+    "agreed3": 26274656500.816128,
+    "agreed3_x": 6.08056780392883,
+    "bar": [
+     {
+      "part": "passes",
+      "w": 7.8332311121402505,
+      "x": 0.0
+     },
+     {
+      "part": "waits_on_check",
+      "w": 27.9319369901405,
+      "x": 7.8332311121402505
+     },
+     {
+      "part": "physical",
+      "w": 27.83263796958758,
+      "x": 35.765168102280754
+     },
+     {
+      "part": "rest",
+      "w": 36.402193928131666,
+      "x": 63.597806071868334
+     }
+    ],
+    "function": "Admin",
+    "passes": 33848065410.932133,
+    "payroll": 432108601500.0,
+    "physical": 120267222690.94289,
+    "ref": "census:v3.2-2026-09-24/functions.csv#Admin",
+    "rest": 157297011098.1678,
+    "share_agreed3": 0.0608056780392883,
+    "share_passes": 0.0783323111214025,
+    "share_physical": 0.2783263796958758,
+    "share_rest": 0.36402193928131693,
+    "share_waits_on_check": 0.279319369901405,
+    "waits_on_check": 120696302299.9573
+   },
+   {
+    "agreed3": 4237959260.618057,
+    "agreed3_x": 2.533751672760346,
+    "bar": [
+     {
+      "part": "passes",
+      "w": 7.444020559111047,
+      "x": 0.0
+     },
+     {
+      "part": "waits_on_check",
+      "w": 16.50959978250311,
+      "x": 7.444020559111047
+     },
+     {
+      "part": "physical",
+      "w": 0.5846456861467101,
+      "x": 23.953620341614155
+     },
+     {
+      "part": "rest",
+      "w": 75.46173397223913,
+      "x": 24.538266027760866
+     }
+    ],
+    "function": "People",
+    "passes": 12450887039.907549,
+    "payroll": 167260245200.0,
+    "physical": 977879808.2002099,
+    "ref": "census:v3.2-2026-09-24/functions.csv#People",
+    "rest": 126217481274.13889,
+    "share_agreed3": 0.02533751672760346,
+    "share_passes": 0.07444020559111048,
+    "share_physical": 0.0058464568614671015,
+    "share_rest": 0.7546173397223914,
+    "share_waits_on_check": 0.1650959978250311,
+    "waits_on_check": 27613997077.75337
+   },
+   {
+    "agreed3": 4115865242.5764375,
+    "agreed3_x": 0.6079865087028792,
+    "bar": [
+     {
+      "part": "passes",
+      "w": 5.315526341348425,
+      "x": 0.0
+     },
+     {
+      "part": "waits_on_check",
+      "w": 13.198817223214512,
+      "x": 5.315526341348425
+     },
+     {
+      "part": "physical",
+      "w": 9.698490526780246,
+      "x": 18.514343564562935
+     },
+     {
+      "part": "rest",
+      "w": 71.78716590865682,
+      "x": 28.212834091343183
+     }
+    ],
+    "function": "IT & software",
+    "passes": 35984334851.4945,
+    "payroll": 676966541800.0,
+    "physical": 65655535925.94483,
+    "ref": "census:v3.2-2026-09-24/functions.csv#IT & software",
+    "rest": 485975094508.0618,
+    "share_agreed3": 0.006079865087028792,
+    "share_passes": 0.053155263413484255,
+    "share_physical": 0.09698490526780246,
+    "share_rest": 0.717871659086567,
+    "share_waits_on_check": 0.13198817223214512,
+    "waits_on_check": 89351576514.49806
+   },
+   {
+    "agreed3": 9125893690.849085,
+    "agreed3_x": 1.7955924637937748,
+    "bar": [
+     {
+      "part": "passes",
+      "w": 5.103542260781761,
+      "x": 0.0
+     },
+     {
+      "part": "waits_on_check",
+      "w": 10.519393640622306,
+      "x": 5.103542260781761
+     },
+     {
+      "part": "physical",
+      "w": 16.10137017267249,
+      "x": 15.622935901404066
+     },
+     {
+      "part": "rest",
+      "w": 68.27569392592345,
+      "x": 31.724306074076555
+     }
+    ],
+    "function": "Operations",
+    "passes": 25938170858.7963,
+    "payroll": 508238582800.0,
+    "physical": 81833375576.97258,
+    "ref": "census:v3.2-2026-09-24/functions.csv#Operations",
+    "rest": 347003419205.9793,
+    "share_agreed3": 0.01795592463793775,
+    "share_passes": 0.051035422607817606,
+    "share_physical": 0.1610137017267249,
+    "share_rest": 0.6827569392592351,
+    "share_waits_on_check": 0.10519393640622307,
+    "waits_on_check": 53463617158.25214
+   },
+   {
+    "agreed3": 5559979919.442213,
+    "agreed3_x": 2.616252328383442,
+    "bar": [
+     {
+      "part": "passes",
+      "w": 4.319009513637414,
+      "x": 0.0
+     },
+     {
+      "part": "waits_on_check",
+      "w": 15.12380920027111,
+      "x": 4.319009513637414
+     },
+     {
+      "part": "physical",
+      "w": 4.526899541978598,
+      "x": 19.442818713908522
+     },
+     {
+      "part": "rest",
+      "w": 76.03028174411288,
+      "x": 23.96971825588712
+     }
+    ],
+    "function": "Marketing",
+    "passes": 9178627729.131037,
+    "payroll": 212516960200.0,
+    "physical": 9620429297.920639,
+    "ref": "census:v3.2-2026-09-24/functions.csv#Marketing",
+    "rest": 161577243594.08423,
+    "share_agreed3": 0.02616252328383442,
+    "share_passes": 0.04319009513637414,
+    "share_physical": 0.045268995419785976,
+    "share_rest": 0.7603028174411288,
+    "share_waits_on_check": 0.1512380920027111,
+    "waits_on_check": 32140659578.864094
+   },
+   {
+    "agreed3": 657927970.4878976,
+    "agreed3_x": 0.712497760733798,
+    "bar": [
+     {
+      "part": "passes",
+      "w": 3.1220804388928536,
+      "x": 0.0
+     },
+     {
+      "part": "waits_on_check",
+      "w": 26.600484086689654,
+      "x": 3.1220804388928536
+     },
+     {
+      "part": "physical",
+      "w": 34.17426933427712,
+      "x": 29.72256452558251
+     },
+     {
+      "part": "rest",
+      "w": 36.103166140140374,
+      "x": 63.896833859859626
+     }
+    ],
+    "function": "Creative",
+    "passes": 2882962108.8847046,
+    "payroll": 92341058000.0,
+    "physical": 31556881867.04105,
+    "ref": "census:v3.2-2026-09-24/functions.csv#Creative",
+    "rest": 33338045585.303387,
+    "share_agreed3": 0.00712497760733798,
+    "share_passes": 0.031220804388928537,
+    "share_physical": 0.3417426933427712,
+    "share_rest": 0.36103166140140375,
+    "share_waits_on_check": 0.2660048408668966,
+    "waits_on_check": 24563168438.770866
+   },
+   {
+    "agreed3": 342239271.4391874,
+    "agreed3_x": 0.2542657448422064,
+    "bar": [
+     {
+      "part": "passes",
+      "w": 3.0379528280369543,
+      "x": 0.0
+     },
+     {
+      "part": "waits_on_check",
+      "w": 8.513896628065773,
+      "x": 3.0379528280369543
+     },
+     {
+      "part": "physical",
+      "w": 7.059717090304573,
+      "x": 11.551849456102726
+     },
+     {
+      "part": "rest",
+      "w": 81.3884334535927,
+      "x": 18.6115665464073
+     }
+    ],
+    "function": "Social services",
+    "passes": 4089055579.150912,
+    "payroll": 134599047800.0,
+    "physical": 9502311980.92382,
+    "ref": "census:v3.2-2026-09-24/functions.csv#Social services",
+    "rest": 109548056447.87245,
+    "share_agreed3": 0.002542657448422064,
+    "share_passes": 0.030379528280369543,
+    "share_physical": 0.07059717090304572,
+    "share_rest": 0.8138843345359271,
+    "share_waits_on_check": 0.08513896628065773,
+    "waits_on_check": 11459623792.052837
+   },
+   {
+    "agreed3": 9718059184.634079,
+    "agreed3_x": 1.7474169162986575,
+    "bar": [
+     {
+      "part": "passes",
+      "w": 2.678360265943979,
+      "x": 0.0
+     },
+     {
+      "part": "waits_on_check",
+      "w": 19.003020262870674,
+      "x": 2.678360265943979
+     },
+     {
+      "part": "physical",
+      "w": 24.52197765407938,
+      "x": 21.681380528814653
+     },
+     {
+      "part": "rest",
+      "w": 53.796641817105964,
+      "x": 46.203358182894036
+     }
+    ],
+    "function": "Education",
+    "passes": 14895394075.35828,
+    "payroll": 556138554800.0,
+    "physical": 136376172133.776,
+    "ref": "census:v3.2-2026-09-24/functions.csv#Education",
+    "rest": 299183866332.58484,
+    "share_agreed3": 0.017474169162986573,
+    "share_passes": 0.026783602659439788,
+    "share_physical": 0.2452197765407938,
+    "share_rest": 0.5379664181710583,
+    "share_waits_on_check": 0.19003020262870673,
+    "waits_on_check": 105683122258.28012
+   },
+   {
+    "agreed3": 1359133035.7714097,
+    "agreed3_x": 0.46018964950678787,
+    "bar": [
+     {
+      "part": "passes",
+      "w": 1.7574824882184956,
+      "x": 0.0
+     },
+     {
+      "part": "waits_on_check",
+      "w": 9.752786614626109,
+      "x": 1.7574824882184956
+     },
+     {
+      "part": "physical",
+      "w": 21.041657074746812,
+      "x": 11.510269102844605
+     },
+     {
+      "part": "rest",
+      "w": 67.44807382240859,
+      "x": 32.55192617759142
+     }
+    ],
+    "function": "Engineering",
+    "passes": 5190582865.319881,
+    "payroll": 295341939400.0,
+    "physical": 62144838086.454544,
+    "ref": "census:v3.2-2026-09-24/functions.csv#Engineering",
+    "rest": 199202449315.04535,
+    "share_agreed3": 0.0046018964950678785,
+    "share_passes": 0.017574824882184956,
+    "share_physical": 0.21041657074746814,
+    "share_rest": 0.6744807382240863,
+    "share_waits_on_check": 0.09752786614626108,
+    "waits_on_check": 28804069133.18035
+   },
+   {
+    "agreed3": 479503128.12653637,
+    "agreed3_x": 0.3850491033348047,
+    "bar": [
+     {
+      "part": "passes",
+      "w": 1.6279036957108337,
+      "x": 0.0
+     },
+     {
+      "part": "waits_on_check",
+      "w": 9.073466834140575,
+      "x": 1.6279036957108337
+     },
+     {
+      "part": "physical",
+      "w": 31.609677949003437,
+      "x": 10.70137052985141
+     },
+     {
+      "part": "rest",
+      "w": 57.68895152114516,
+      "x": 42.31104847885484
+     }
+    ],
+    "function": "Research",
+    "passes": 2027234728.3026037,
+    "payroll": 124530384300.0,
+    "physical": 39363653425.88634,
+    "ref": "census:v3.2-2026-09-24/functions.csv#Research",
+    "rest": 71840273027.92267,
+    "share_agreed3": 0.0038504910333480467,
+    "share_passes": 0.016279036957108337,
+    "share_physical": 0.31609677949003434,
+    "share_rest": 0.5768895152114508,
+    "share_waits_on_check": 0.09073466834140574,
+    "waits_on_check": 11299223117.8883
+   },
+   {
+    "agreed3": 1225768056.237458,
+    "agreed3_x": 0.11607819923600396,
+    "bar": [
+     {
+      "part": "passes",
+      "w": 0.9366382750722831,
+      "x": 0.0
+     },
+     {
+      "part": "waits_on_check",
+      "w": 2.2656123816619447,
+      "x": 0.9366382750722831
+     },
+     {
+      "part": "physical",
+      "w": 37.39040862594862,
+      "x": 3.2022506567342277
+     },
+     {
+      "part": "rest",
+      "w": 59.40734071731715,
+      "x": 40.59265928268285
+     }
+    ],
+    "function": "Clinical",
+    "passes": 9890757139.492664,
+    "payroll": 1055984727800.0,
+    "physical": 394837004752.0313,
+    "ref": "census:v3.2-2026-09-24/functions.csv#Clinical",
+    "rest": 627332445166.9797,
+    "share_agreed3": 0.0011607819923600395,
+    "share_passes": 0.00936638275072283,
+    "share_physical": 0.37390408625948623,
+    "share_rest": 0.5940734071731711,
+    "share_waits_on_check": 0.022656123816619442,
+    "waits_on_check": 23924520741.49598
+   },
+   {
+    "agreed3": 438742345.8985005,
+    "agreed3_x": 0.2160517314616418,
+    "bar": [
+     {
+      "part": "passes",
+      "w": 0.7370878699805193,
+      "x": 0.0
+     },
+     {
+      "part": "waits_on_check",
+      "w": 6.835603118181862,
+      "x": 0.7370878699805193
+     },
+     {
+      "part": "physical",
+      "w": 14.5315864707487,
+      "x": 7.572690988162382
+     },
+     {
+      "part": "rest",
+      "w": 77.89572254108892,
+      "x": 22.10427745891108
+     }
+    ],
+    "function": "Legal & compliance",
+    "passes": 1496825130.8182528,
+    "payroll": 203072821000.0,
+    "physical": 29509702582.203724,
+    "ref": "census:v3.2-2026-09-24/functions.csv#Legal & compliance",
+    "rest": 158185041202.522,
+    "share_agreed3": 0.002160517314616418,
+    "share_passes": 0.007370878699805194,
+    "share_physical": 0.145315864707487,
+    "share_rest": 0.7789572254108884,
+    "share_waits_on_check": 0.06835603118181863,
+    "waits_on_check": 13881252084.455872
+   },
+   {
+    "agreed3": 0.0,
+    "agreed3_x": 0.0,
+    "bar": [
+     {
+      "part": "passes",
+      "w": 0.0,
+      "x": 0.0
+     },
+     {
+      "part": "waits_on_check",
+      "w": 0.3571190837951911,
+      "x": 0.0
+     },
+     {
+      "part": "physical",
+      "w": 7.386724999188314,
+      "x": 0.3571190837951911
+     },
+     {
+      "part": "rest",
+      "w": 92.2561559170165,
+      "x": 7.743844082983506
+     }
+    ],
+    "function": "Executive",
+    "passes": 0.0,
+    "payroll": 534548729900.0,
+    "physical": 39485644664.36692,
+    "ref": "census:v3.2-2026-09-24/functions.csv#Executive",
+    "rest": 493154109708.97534,
+    "share_agreed3": 0.0,
+    "share_passes": 0.0,
+    "share_physical": 0.07386724999188314,
+    "share_rest": 0.9225615591701649,
+    "share_waits_on_check": 0.0035711908379519107,
+    "waits_on_check": 1908975526.6577106
+   },
+   {
+    "agreed3": 0.0,
+    "agreed3_x": 0.0,
+    "bar": [
+     {
+      "part": "passes",
+      "w": 0.0,
+      "x": 0.0
+     },
+     {
+      "part": "waits_on_check",
+      "w": 0.0,
+      "x": 0.0
+     },
+     {
+      "part": "physical",
+      "w": 13.521936438060457,
+      "x": 0.0
+     },
+     {
+      "part": "rest",
+      "w": 86.47806356193954,
+      "x": 13.521936438060457
+     }
+    ],
+    "function": "Strategy",
+    "passes": 0.0,
+    "payroll": 101440480400.0,
+    "physical": 13716717282.151176,
+    "ref": "census:v3.2-2026-09-24/functions.csv#Strategy",
+    "rest": 87723763117.84883,
+    "share_agreed3": 0.0,
+    "share_passes": 0.0,
+    "share_physical": 0.13521936438060458,
+    "share_rest": 0.8647806356193956,
+    "share_waits_on_check": 0.0,
+    "waits_on_check": 0.0
+   }
+  ],
+  "industries": {
+   "rows": [
+    {
+     "agreed3": 5404218311.043365,
+     "agreed3_x": 27.02,
+     "naics": "541500",
+     "passes": 18844265820.080723,
+     "ref": "census:v3.2-2026-09-24/industries.csv#541500",
+     "share_total": 0.06317805421205042,
+     "title": "Computer Systems Design and Related Services",
+     "w": 94.22
+    },
+    {
+     "agreed3": 6790631650.748558,
+     "agreed3_x": 33.95,
+     "naics": "551100",
+     "passes": 17647935367.500206,
+     "ref": "census:v3.2-2026-09-24/industries.csv#551100",
+     "share_total": 0.055262461188594875,
+     "title": "Management of Companies and Enterprises",
+     "w": 88.24
+    },
+    {
+     "agreed3": 5037369847.523392,
+     "agreed3_x": 25.19,
+     "naics": "5220A1",
+     "passes": 13740642112.224522,
+     "ref": "census:v3.2-2026-09-24/industries.csv#5220A1",
+     "share_total": 0.07943102605495589,
+     "title": "Credit Intermediation and Related Activities (5221 and 5223 only)",
+     "w": 68.7
+    },
+    {
+     "agreed3": 8288481311.236071,
+     "agreed3_x": 41.44,
+     "naics": "611300",
+     "passes": 12974827204.506681,
+     "ref": "census:v3.2-2026-09-24/industries.csv#611300",
+     "share_total": 0.04991328137389903,
+     "title": "Colleges, Universities, and Professional Schools",
+     "w": 64.87
+    },
+    {
+     "agreed3": 2838872765.231325,
+     "agreed3_x": 14.19,
+     "naics": "524200",
+     "passes": 12653632889.715445,
+     "ref": "census:v3.2-2026-09-24/industries.csv#524200",
+     "share_total": 0.11134760487952669,
+     "title": "Agencies, Brokerages, and Other Insurance Related Activities",
+     "w": 63.27
+    },
+    {
+     "agreed3": 4912926136.212464,
+     "agreed3_x": 24.56,
+     "naics": "999300",
+     "passes": 10467810318.019554,
+     "ref": "census:v3.2-2026-09-24/industries.csv#999300",
+     "share_total": 0.026684407855550724,
+     "title": "Local Government, excluding Schools and Hospitals (OEWS Designation)",
+     "w": 52.34
+    },
+    {
+     "agreed3": 3952697761.7298994,
+     "agreed3_x": 19.76,
+     "naics": "541600",
+     "passes": 9453602054.15148,
+     "ref": "census:v3.2-2026-09-24/industries.csv#541600",
+     "share_total": 0.049163768886295624,
+     "title": "Management, Scientific, and Technical Consulting Services",
+     "w": 47.27
+    },
+    {
+     "agreed3": 2447466288.8177996,
+     "agreed3_x": 12.24,
+     "naics": "541200",
+     "passes": 9255706184.672256,
+     "ref": "census:v3.2-2026-09-24/industries.csv#541200",
+     "share_total": 0.09498301369107086,
+     "title": "Accounting, Tax Preparation, Bookkeeping, and Payroll Services",
+     "w": 46.28
+    },
+    {
+     "agreed3": 2779470842.137501,
+     "agreed3_x": 13.9,
+     "naics": "622100",
+     "passes": 8929764033.840305,
+     "ref": "census:v3.2-2026-09-24/industries.csv#622100",
+     "share_total": 0.01730833580593929,
+     "title": "General Medical and Surgical Hospitals",
+     "w": 44.65
+    },
+    {
+     "agreed3": 2525829503.884894,
+     "agreed3_x": 12.63,
+     "naics": "524100",
+     "passes": 8901294510.276487,
+     "ref": "census:v3.2-2026-09-24/industries.csv#524100",
+     "share_total": 0.07692171170049675,
+     "title": "Insurance Carriers",
+     "w": 44.51
+    },
+    {
+     "agreed3": 3395556130.9519806,
+     "agreed3_x": 16.98,
+     "naics": "999100",
+     "passes": 8774164471.928238,
+     "ref": "census:v3.2-2026-09-24/industries.csv#999100",
+     "share_total": 0.036841332489807636,
+     "title": "Federal Executive Branch (OEWS Designation)",
+     "w": 43.87
+    },
+    {
+     "agreed3": 3310929949.0034,
+     "agreed3_x": 16.55,
+     "naics": "561300",
+     "passes": 8267697650.197037,
+     "ref": "census:v3.2-2026-09-24/industries.csv#561300",
+     "share_total": 0.04322513270025684,
+     "title": "Employment Services",
+     "w": 41.34
+    },
+    {
+     "agreed3": 2436391841.717528,
+     "agreed3_x": 12.18,
+     "naics": "611100",
+     "passes": 8042619405.101507,
+     "ref": "census:v3.2-2026-09-24/industries.csv#611100",
+     "share_total": 0.014712920874031487,
+     "title": "Elementary and Secondary Schools",
+     "w": 40.21
+    },
+    {
+     "agreed3": 2621822058.107537,
+     "agreed3_x": 13.11,
+     "naics": "531000",
+     "passes": 7193313669.365817,
+     "ref": "census:v3.2-2026-09-24/industries.csv#531000",
+     "share_total": 0.05987724515792504,
+     "title": "Real Estate",
+     "w": 35.97
+    },
+    {
+     "agreed3": 3634098717.878652,
+     "agreed3_x": 18.17,
+     "naics": "455000",
+     "passes": 7014982162.685872,
+     "ref": "census:v3.2-2026-09-24/industries.csv#455000",
+     "share_total": 0.05545559650232317,
+     "title": "General Merchandise Retailers",
+     "w": 35.07
+    }
+   ],
+   "ticks": [
+    {
+     "label": "$0",
+     "left": 0.0
+    },
+    {
+     "label": "$5B",
+     "left": 25.0
+    },
+    {
+     "label": "$10B",
+     "left": 50.0
+    },
+    {
+     "label": "$15B",
+     "left": 75.0
+    },
+    {
+     "label": "$20B",
+     "left": 100.0
+    }
+   ]
+  },
+  "scorers": {
+   "rows": [
+    {
+     "agreed3": 158386271953.58893,
+     "agreed3_x": 5.66,
+     "by_scorer": {
+      "gemini": {
+       "share": 0.05716279393875673,
+       "usd": 400159520328.03827,
+       "x": 14.29
+      },
+      "gpt6": {
+       "share": 0.03488060671389586,
+       "usd": 244176428225.98355,
+       "x": 8.72
+      },
+      "sonnet": {
+       "share": 0.09943696586897405,
+       "usd": 696093487096.4357,
+       "x": 24.86
+      }
+     },
+     "function": null,
+     "hi_x": 24.86,
+     "lo_x": 8.72,
+     "passes": 388648621524.1932,
+     "ref": "census:v3.2-2026-09-24/manifest.json#headline",
+     "share_agreed3": 0.022625481505447787,
+     "share_passes": 0.055518461858803526,
+     "spread_w": 16.14,
+     "vote_x": 13.88
+    },
+    {
+     "agreed3": 21762630792.507908,
+     "agreed3_x": 31.33,
+     "by_scorer": {
+      "gemini": {
+       "share": 0.22126319961229324,
+       "usd": 38420730562.915886,
+       "x": 55.32
+      },
+      "gpt6": {
+       "share": 0.12805952293505266,
+       "usd": 22236596213.579502,
+       "x": 32.01
+      },
+      "sonnet": {
+       "share": 0.3986132058770203,
+       "usd": 69216257419.47476,
+       "x": 99.65
+      }
+     },
+     "function": "Customer support",
+     "hi_x": 99.65,
+     "lo_x": 32.01,
+     "passes": 38894695983.98748,
+     "ref": "census:v3.2-2026-09-24/functions.csv#Customer support",
+     "share_agreed3": 0.125329978128502,
+     "share_passes": 0.22399274441884387,
+     "spread_w": 67.64,
+     "vote_x": 56.0
+    },
+    {
+     "agreed3": 439142390.6790683,
+     "agreed3_x": 2.39,
+     "by_scorer": {
+      "gemini": {
+       "share": 0.10613191485261918,
+       "usd": 4870945012.7898855,
+       "x": 26.53
+      },
+      "gpt6": {
+       "share": 0.05104052094337721,
+       "usd": 2342514702.430298,
+       "x": 12.76
+      },
+      "sonnet": {
+       "share": 0.2413342785111922,
+       "usd": 11076083965.5229,
+       "x": 60.33
+      }
+     },
+     "function": "Claims & underwriting",
+     "hi_x": 60.33,
+     "lo_x": 12.76,
+     "passes": 6774317324.541116,
+     "ref": "census:v3.2-2026-09-24/functions.csv#Claims & underwriting",
+     "share_agreed3": 0.009568373835744009,
+     "share_passes": 0.14760406196025241,
+     "spread_w": 47.57,
+     "vote_x": 36.9
+    },
+    {
+     "agreed3": 22275825966.2487,
+     "agreed3_x": 9.16,
+     "by_scorer": {
+      "gemini": {
+       "share": 0.1362241524531306,
+       "usd": 82833730951.01904,
+       "x": 34.06
+      },
+      "gpt6": {
+       "share": 0.04884930304160672,
+       "usd": 29703763630.942352,
+       "x": 12.21
+      },
+      "sonnet": {
+       "share": 0.17528586304359955,
+       "usd": 106585959665.75249,
+       "x": 43.82
+      }
+     },
+     "function": "Finance",
+     "hi_x": 43.82,
+     "lo_x": 12.21,
+     "passes": 76952235027.06195,
+     "ref": "census:v3.2-2026-09-24/functions.csv#Finance",
+     "share_agreed3": 0.036633693515990745,
+     "share_passes": 0.12655174257615234,
+     "spread_w": 31.61,
+     "vote_x": 31.64
+    },
+    {
+     "agreed3": 9937792641.932972,
+     "agreed3_x": 14.65,
+     "by_scorer": {
+      "gemini": {
+       "share": 0.09637223542720864,
+       "usd": 16342839630.589857,
+       "x": 24.09
+      },
+      "gpt6": {
+       "share": 0.09506937571800647,
+       "usd": 16121900195.13668,
+       "x": 23.77
+      },
+      "sonnet": {
+       "share": 0.18231541869419712,
+       "usd": 30917116705.81312,
+       "x": 45.58
+      }
+     },
+     "function": "Supply chain",
+     "hi_x": 45.58,
+     "lo_x": 23.77,
+     "passes": 20537790494.885162,
+     "ref": "census:v3.2-2026-09-24/functions.csv#Supply chain",
+     "share_agreed3": 0.0586022572431361,
+     "share_passes": 0.12110947824654898,
+     "spread_w": 21.81,
+     "vote_x": 30.28
+    },
+    {
+     "agreed3": 16976721551.010077,
+     "agreed3_x": 12.94,
+     "by_scorer": {
+      "gemini": {
+       "share": 0.12354700336253911,
+       "usd": 40517554649.34687,
+       "x": 30.89
+      },
+      "gpt6": {
+       "share": 0.09310066858317666,
+       "usd": 30532601556.83687,
+       "x": 23.28
+      },
+      "sonnet": {
+       "share": 0.09035922503915404,
+       "usd": 29633538159.183346,
+       "x": 22.59
+      }
+     },
+     "function": "Retail front line",
+     "hi_x": 30.89,
+     "lo_x": 22.59,
+     "passes": 33029432163.291092,
+     "ref": "census:v3.2-2026-09-24/functions.csv#Retail front line",
+     "share_agreed3": 0.051765786279536534,
+     "share_passes": 0.1007140584335995,
+     "spread_w": 8.3,
+     "vote_x": 25.18
+    },
+    {
+     "agreed3": 19886989665.896816,
+     "agreed3_x": 10.32,
+     "by_scorer": {
+      "gemini": {
+       "share": 0.09059298477556639,
+       "usd": 43651720246.33818,
+       "x": 22.65
+      },
+      "gpt6": {
+       "share": 0.05224774635284597,
+       "usd": 25175282754.467667,
+       "x": 13.06
+      },
+      "sonnet": {
+       "share": 0.16544079953051088,
+       "usd": 79716718864.35236,
+       "x": 41.36
+      }
+     },
+     "function": "Sales",
+     "hi_x": 41.36,
+     "lo_x": 13.06,
+     "passes": 45727978379.79958,
+     "ref": "census:v3.2-2026-09-24/functions.csv#Sales",
+     "share_agreed3": 0.041272640387765,
+     "share_passes": 0.09490196550790289,
+     "spread_w": 28.3,
+     "vote_x": 23.73
+    },
+    {
+     "agreed3": 2412102073.347807,
+     "agreed3_x": 11.73,
+     "by_scorer": {
+      "gemini": {
+       "share": 0.07158143456896533,
+       "usd": 3680152101.263694,
+       "x": 17.9
+      },
+      "gpt6": {
+       "share": 0.07500355014516467,
+       "usd": 3856090260.4295816,
+       "x": 18.75
+      },
+      "sonnet": {
+       "share": 0.1698624161400607,
+       "usd": 8732984068.394148,
+       "x": 42.47
+      }
+     },
+     "function": "Procurement",
+     "hi_x": 42.47,
+     "lo_x": 17.9,
+     "passes": 4802961865.817593,
+     "ref": "census:v3.2-2026-09-24/functions.csv#Procurement",
+     "share_agreed3": 0.04691700831542341,
+     "share_passes": 0.09342083997484842,
+     "spread_w": 24.57,
+     "vote_x": 23.36
+    },
+    {
+     "agreed3": 1159339265.0686073,
+     "agreed3_x": 6.18,
+     "by_scorer": {
+      "gemini": {
+       "share": 0.1625829083865674,
+       "usd": 7619277419.549002,
+       "x": 40.65
+      },
+      "gpt6": {
+       "share": 0.036077444395398686,
+       "usd": 1690731579.1356997,
+       "x": 9.02
+      },
+      "sonnet": {
+       "share": 0.12425904659940933,
+       "usd": 5823269846.289626,
+       "x": 31.06
+      }
+     },
+     "function": "Data & analytics",
+     "hi_x": 40.65,
+     "lo_x": 9.02,
+     "passes": 4056312767.2204366,
+     "ref": "census:v3.2-2026-09-24/functions.csv#Data & analytics",
+     "share_agreed3": 0.024738402231947704,
+     "share_passes": 0.08655507480646375,
+     "spread_w": 31.63,
+     "vote_x": 21.64
+    },
+    {
+     "agreed3": 26274656500.816128,
+     "agreed3_x": 15.2,
+     "by_scorer": {
+      "gemini": {
+       "share": 0.07650127027233741,
+       "usd": 33056856910.353245,
+       "x": 19.13
+      },
+      "gpt6": {
+       "share": 0.10571357770404644,
+       "usd": 45679746221.25709,
+       "x": 26.43
+      },
+      "sonnet": {
+       "share": 0.11802866943951112,
+       "usd": 51001203288.41294,
+       "x": 29.51
+      }
+     },
+     "function": "Admin",
+     "hi_x": 29.51,
+     "lo_x": 19.13,
+     "passes": 33848065410.932133,
+     "ref": "census:v3.2-2026-09-24/functions.csv#Admin",
+     "share_agreed3": 0.0608056780392883,
+     "share_passes": 0.0783323111214025,
+     "spread_w": 10.38,
+     "vote_x": 19.58
+    },
+    {
+     "agreed3": 4237959260.618057,
+     "agreed3_x": 6.33,
+     "by_scorer": {
+      "gemini": {
+       "share": 0.07829107303027527,
+       "usd": 13094984072.01495,
+       "x": 19.57
+      },
+      "gpt6": {
+       "share": 0.026802041389029026,
+       "usd": 4482916014.589543,
+       "x": 6.7
+      },
+      "sonnet": {
+       "share": 0.2320538865875382,
+       "usd": 38813389970.24463,
+       "x": 58.01
+      }
+     },
+     "function": "People",
+     "hi_x": 58.01,
+     "lo_x": 6.7,
+     "passes": 12450887039.907549,
+     "ref": "census:v3.2-2026-09-24/functions.csv#People",
+     "share_agreed3": 0.02533751672760346,
+     "share_passes": 0.07444020559111048,
+     "spread_w": 51.31,
+     "vote_x": 18.61
+    },
+    {
+     "agreed3": 4115865242.5764375,
+     "agreed3_x": 1.52,
+     "by_scorer": {
+      "gemini": {
+       "share": 0.06603155860901666,
+       "usd": 44701155881.21003,
+       "x": 16.51
+      },
+      "gpt6": {
+       "share": 0.012400186955459767,
+       "usd": 8394511680.91107,
+       "x": 3.1
+      },
+      "sonnet": {
+       "share": 0.12228610305882631,
+       "usd": 82783600297.93205,
+       "x": 30.57
+      }
+     },
+     "function": "IT & software",
+     "hi_x": 30.57,
+     "lo_x": 3.1,
+     "passes": 35984334851.4945,
+     "ref": "census:v3.2-2026-09-24/functions.csv#IT & software",
+     "share_agreed3": 0.006079865087028792,
+     "share_passes": 0.053155263413484255,
+     "spread_w": 27.47,
+     "vote_x": 13.29
+    },
+    {
+     "agreed3": 9125893690.849085,
+     "agreed3_x": 4.49,
+     "by_scorer": {
+      "gemini": {
+       "share": 0.03167355177102611,
+       "usd": 16097721064.34874,
+       "x": 7.92
+      },
+      "gpt6": {
+       "share": 0.04157219835143008,
+       "usd": 21128595174.01132,
+       "x": 10.39
+      },
+      "sonnet": {
+       "share": 0.09009581331910012,
+       "usd": 45790168477.51281,
+       "x": 22.52
+      }
+     },
+     "function": "Operations",
+     "hi_x": 22.52,
+     "lo_x": 7.92,
+     "passes": 25938170858.7963,
+     "ref": "census:v3.2-2026-09-24/functions.csv#Operations",
+     "share_agreed3": 0.01795592463793775,
+     "share_passes": 0.051035422607817606,
+     "spread_w": 14.6,
+     "vote_x": 12.76
+    },
+    {
+     "agreed3": 5559979919.442213,
+     "agreed3_x": 6.54,
+     "by_scorer": {
+      "gemini": {
+       "share": 0.03151172898794018,
+       "usd": 6696776855.163269,
+       "x": 7.88
+      },
+      "gpt6": {
+       "share": 0.041089551355042914,
+       "usd": 8732226549.955511,
+       "x": 10.27
+      },
+      "sonnet": {
+       "share": 0.05650915838383956,
+       "usd": 12009154563.193928,
+       "x": 14.13
+      }
+     },
+     "function": "Marketing",
+     "hi_x": 14.13,
+     "lo_x": 7.88,
+     "passes": 9178627729.131037,
+     "ref": "census:v3.2-2026-09-24/functions.csv#Marketing",
+     "share_agreed3": 0.02616252328383442,
+     "share_passes": 0.04319009513637414,
+     "spread_w": 6.25,
+     "vote_x": 10.8
+    },
+    {
+     "agreed3": 657927970.4878976,
+     "agreed3_x": 1.78,
+     "by_scorer": {
+      "gemini": {
+       "share": 0.01984185021437231,
+       "usd": 1832217441.4726658,
+       "x": 4.96
+      },
+      "gpt6": {
+       "share": 0.020887430043922486,
+       "usd": 1928767389.1567888,
+       "x": 5.22
+      },
+      "sonnet": {
+       "share": 0.05532544502892648,
+       "usd": 5108810128.291912,
+       "x": 13.83
+      }
+     },
+     "function": "Creative",
+     "hi_x": 13.83,
+     "lo_x": 4.96,
+     "passes": 2882962108.8847046,
+     "ref": "census:v3.2-2026-09-24/functions.csv#Creative",
+     "share_agreed3": 0.00712497760733798,
+     "share_passes": 0.031220804388928537,
+     "spread_w": 8.87,
+     "vote_x": 7.81
+    },
+    {
+     "agreed3": 342239271.4391874,
+     "agreed3_x": 0.64,
+     "by_scorer": {
+      "gemini": {
+       "share": 0.013097087396756421,
+       "usd": 1762855492.5567951,
+       "x": 3.27
+      },
+      "gpt6": {
+       "share": 0.023613324804860537,
+       "usd": 3178331034.126349,
+       "x": 5.9
+      },
+      "sonnet": {
+       "share": 0.08345826161229905,
+       "usd": 11233402544.058744,
+       "x": 20.86
+      }
+     },
+     "function": "Social services",
+     "hi_x": 20.86,
+     "lo_x": 3.27,
+     "passes": 4089055579.150912,
+     "ref": "census:v3.2-2026-09-24/functions.csv#Social services",
+     "share_agreed3": 0.002542657448422064,
+     "share_passes": 0.030379528280369543,
+     "spread_w": 17.59,
+     "vote_x": 7.59
+    },
+    {
+     "agreed3": 9718059184.634079,
+     "agreed3_x": 4.37,
+     "by_scorer": {
+      "gemini": {
+       "share": 0.03262013430030037,
+       "usd": 18141314347.150955,
+       "x": 8.16
+      },
+      "gpt6": {
+       "share": 0.019535921765620894,
+       "usd": 10864679297.418268,
+       "x": 4.88
+      },
+      "sonnet": {
+       "share": 0.05897388643717335,
+       "usd": 32797651974.108906,
+       "x": 14.74
+      }
+     },
+     "function": "Education",
+     "hi_x": 14.74,
+     "lo_x": 4.88,
+     "passes": 14895394075.35828,
+     "ref": "census:v3.2-2026-09-24/functions.csv#Education",
+     "share_agreed3": 0.017474169162986573,
+     "share_passes": 0.026783602659439788,
+     "spread_w": 9.86,
+     "vote_x": 6.7
+    },
+    {
+     "agreed3": 1359133035.7714097,
+     "agreed3_x": 1.15,
+     "by_scorer": {
+      "gemini": {
+       "share": 0.017702014689615513,
+       "usd": 5228147349.718334,
+       "x": 4.43
+      },
+      "gpt6": {
+       "share": 0.00645565777819771,
+       "usd": 1906626488.3156068,
+       "x": 1.61
+      },
+      "sonnet": {
+       "share": 0.05310195248934234,
+       "usd": 15683233634.129025,
+       "x": 13.28
+      }
+     },
+     "function": "Engineering",
+     "hi_x": 13.28,
+     "lo_x": 1.61,
+     "passes": 5190582865.319881,
+     "ref": "census:v3.2-2026-09-24/functions.csv#Engineering",
+     "share_agreed3": 0.0046018964950678785,
+     "share_passes": 0.017574824882184956,
+     "spread_w": 11.67,
+     "vote_x": 4.39
+    },
+    {
+     "agreed3": 479503128.12653637,
+     "agreed3_x": 0.96,
+     "by_scorer": {
+      "gemini": {
+       "share": 0.023776234416542762,
+       "usd": 2960863609.0989566,
+       "x": 5.94
+      },
+      "gpt6": {
+       "share": 0.010480948295504474,
+       "usd": 1305196519.0676022,
+       "x": 2.62
+      },
+      "sonnet": {
+       "share": 0.0486639854753545,
+       "usd": 6060144812.815514,
+       "x": 12.17
+      }
+     },
+     "function": "Research",
+     "hi_x": 12.17,
+     "lo_x": 2.62,
+     "passes": 2027234728.3026037,
+     "ref": "census:v3.2-2026-09-24/functions.csv#Research",
+     "share_agreed3": 0.0038504910333480467,
+     "share_passes": 0.016279036957108337,
+     "spread_w": 9.55,
+     "vote_x": 4.07
+    },
+    {
+     "agreed3": 1225768056.237458,
+     "agreed3_x": 0.29,
+     "by_scorer": {
+      "gemini": {
+       "share": 0.015763900490606986,
+       "usd": 16646438168.639904,
+       "x": 3.94
+      },
+      "gpt6": {
+       "share": 0.004239274016437288,
+       "usd": 4476608618.317142,
+       "x": 1.06
+      },
+      "sonnet": {
+       "share": 0.045443590831823276,
+       "usd": 47987737894.79748,
+       "x": 11.36
+      }
+     },
+     "function": "Clinical",
+     "hi_x": 11.36,
+     "lo_x": 1.06,
+     "passes": 9890757139.492664,
+     "ref": "census:v3.2-2026-09-24/functions.csv#Clinical",
+     "share_agreed3": 0.0011607819923600395,
+     "share_passes": 0.00936638275072283,
+     "spread_w": 10.3,
+     "vote_x": 2.34
+    },
+    {
+     "agreed3": 438742345.8985005,
+     "agreed3_x": 0.54,
+     "by_scorer": {
+      "gemini": {
+       "share": 0.009864631577151681,
+       "usd": 2003238562.4978712,
+       "x": 2.47
+      },
+      "gpt6": {
+       "share": 0.002160517314616418,
+       "usd": 438742345.8985005,
+       "x": 0.54
+      },
+      "sonnet": {
+       "share": 0.025227703002941252,
+       "usd": 5123060816.157452,
+       "x": 6.31
+      }
+     },
+     "function": "Legal & compliance",
+     "hi_x": 6.31,
+     "lo_x": 0.54,
+     "passes": 1496825130.8182528,
+     "ref": "census:v3.2-2026-09-24/functions.csv#Legal & compliance",
+     "share_agreed3": 0.002160517314616418,
+     "share_passes": 0.007370878699805194,
+     "spread_w": 5.77,
+     "vote_x": 1.84
+    },
+    {
+     "agreed3": 0.0,
+     "agreed3_x": 0.0,
+     "by_scorer": {
+      "gemini": {
+       "share": 0.0,
+       "usd": 0.0,
+       "x": 0.0
+      },
+      "gpt6": {
+       "share": 0.0,
+       "usd": 0.0,
+       "x": 0.0
+      },
+      "sonnet": {
+       "share": 0.0,
+       "usd": 0.0,
+       "x": 0.0
+      }
+     },
+     "function": "Executive",
+     "hi_x": 0.0,
+     "lo_x": 0.0,
+     "passes": 0.0,
+     "ref": "census:v3.2-2026-09-24/functions.csv#Executive",
+     "share_agreed3": 0.0,
+     "share_passes": 0.0,
+     "spread_w": 0.0,
+     "vote_x": 0.0
+    },
+    {
+     "agreed3": 0.0,
+     "agreed3_x": 0.0,
+     "by_scorer": {
+      "gemini": {
+       "share": 0.0,
+       "usd": 0.0,
+       "x": 0.0
+      },
+      "gpt6": {
+       "share": 0.0,
+       "usd": 0.0,
+       "x": 0.0
+      },
+      "sonnet": {
+       "share": 0.0,
+       "usd": 0.0,
+       "x": 0.0
+      }
+     },
+     "function": "Strategy",
+     "hi_x": 0.0,
+     "lo_x": 0.0,
+     "passes": 0.0,
+     "ref": "census:v3.2-2026-09-24/functions.csv#Strategy",
+     "share_agreed3": 0.0,
+     "share_passes": 0.0,
+     "spread_w": 0.0,
+     "vote_x": 0.0
+    }
+   ],
+   "ticks": [
+    {
+     "label": "0%",
+     "left": 0.0
+    },
+    {
+     "label": "10%",
+     "left": 25.0
+    },
+    {
+     "label": "20%",
+     "left": 50.0
+    },
+    {
+     "label": "30%",
+     "left": 75.0
+    },
+    {
+     "label": "40%",
+     "left": 100.0
+    }
+   ]
+  },
+  "screen": {
+   "agreed3": 158386271953.58893,
+   "agreed3_x": 2.2625481505447786,
+   "gates": [
+    {
+     "id": "physical",
+     "share": 0.19972328328059188,
+     "usd": 1398132731607.3594,
+     "w": 19.972328328059188
+    },
+    {
+     "id": "accountable",
+     "share": 0.018985666073556208,
+     "usd": 132906292810.70792,
+     "w": 1.8985666073556207
+    }
+   ],
+   "passes": 388648621524.1932,
+   "passes_w": 5.551846185880353,
+   "payroll": 7000349226400.0,
+   "questions": [
+    {
+     "id": "hours",
+     "share": 0.4463347701610871,
+     "usd": 3124499263012.588,
+     "w": 44.63347701610871
+    },
+    {
+     "id": "check",
+     "share": 0.692604399010391,
+     "usd": 4848472668813.627,
+     "w": 69.26043990103909
+    },
+    {
+     "id": "stakes",
+     "share": 0.1954175783337774,
+     "usd": 1367991293313.82,
+     "w": 19.54175783337774
+    }
+   ],
+   "ref": "census:v3.2-2026-09-24/tasks.csv#why",
+   "share_agreed3": 0.022625481505447787,
+   "share_passes": 0.055518461858803526,
+   "voted": {
+    "id": "voted",
+    "share": 0.7812910506458519,
+    "usd": 5469310201981.933,
+    "w": 78.12910506458519
+   }
+  },
+  "whole": {
+   "agreed3": 158386271953.58893,
+   "agreed3_x": 2.2625481505447786,
+   "parts": [
+    {
+     "part": "passes",
+     "share": 0.055518461858803526,
+     "usd": 388648621524.1932,
+     "w": 5.551846185880353,
+     "x": 0.0
+    },
+    {
+     "part": "waits_on_check",
+     "share": 0.1181665157822557,
+     "usd": 827206877342.6971,
+     "w": 11.81665157822557,
+     "x": 5.551846185880353
+    },
+    {
+     "part": "physical",
+     "share": 0.19972328328059188,
+     "usd": 1398132731607.3594,
+     "w": 19.972328328059188,
+     "x": 17.368497764105925
+    },
+    {
+     "part": "rest",
+     "share": 0.6265917390783483,
+     "usd": 4386360995925.7466,
+     "w": 62.659173907834884,
+     "x": 37.340826092165116
+    }
+   ],
+   "passes": 388648621524.1932,
+   "payroll": 7000349226400.0,
+   "ref": "census:v3.2-2026-09-24/tasks.csv#*",
+   "share_agreed3": 0.022625481505447787
+  }
  },
  "functions": [
   {
@@ -3815,6 +5731,515 @@
    "title": "Leather and Hide Tanning and Finishing"
   }
  ],
+ "kinds": {
+  "groups": [
+   {
+    "agreed3": 8855855204.552328,
+    "agreed3_x": 0.5737900295010413,
+    "bar": [
+     {
+      "part": "passes",
+      "w": 1.0301792646489634,
+      "x": 0.0
+     },
+     {
+      "part": "waits_on_check",
+      "w": 3.0476422000565746,
+      "x": 1.0301792646489634
+     },
+     {
+      "part": "physical",
+      "w": 8.321809017962057,
+      "x": 4.077821464705538
+     },
+     {
+      "part": "rest",
+      "w": 87.60036951733241,
+      "x": 12.399630482667595
+     }
+    ],
+    "code": "11",
+    "emp": 10871810.0,
+    "mean_pay": 141963.15931753773,
+    "name": "Management",
+    "passes": 15899750663.839052,
+    "payroll": 1543396495100.0,
+    "physical": 128438508712.1421,
+    "ref": "census:v3.2-2026-09-24/tasks.csv#occ=11-*",
+    "rest": 1352021032825.156,
+    "roles": 37,
+    "share_agreed3": 0.0057379002950104134,
+    "share_passes": 0.010301792646489633,
+    "share_physical": 0.08321809017962056,
+    "share_rest": 0.8760036951733233,
+    "share_waits_on_check": 0.030476422000565745,
+    "waits_on_check": 47037202898.8617
+   },
+   {
+    "agreed3": 179799250.3454389,
+    "agreed3_x": 0.1061732939641505,
+    "bar": [
+     {
+      "part": "passes",
+      "w": 0.26012592410842056,
+      "x": 0.0
+     },
+     {
+      "part": "waits_on_check",
+      "w": 6.087618723964215,
+      "x": 0.26012592410842056
+     },
+     {
+      "part": "physical",
+      "w": 14.021115703570771,
+      "x": 6.347744648072635
+     },
+     {
+      "part": "rest",
+      "w": 79.6311396483566,
+      "x": 20.368860351643406
+     }
+    ],
+    "code": "23",
+    "emp": 1212460.0,
+    "mean_pay": 139670.65362981046,
+    "name": "Legal",
+    "passes": 440510456.1030255,
+    "payroll": 169345080700.0,
+    "physical": 23744069703.252293,
+    "ref": "census:v3.2-2026-09-24/tasks.csv#occ=23-*",
+    "rest": 134851417699.83913,
+    "roles": 7,
+    "share_agreed3": 0.001061732939641505,
+    "share_passes": 0.0026012592410842054,
+    "share_physical": 0.1402111570357077,
+    "share_rest": 0.7963113964835656,
+    "share_waits_on_check": 0.060876187239642145,
+    "waits_on_check": 10309082840.80551
+   },
+   {
+    "agreed3": 5275204507.645043,
+    "agreed3_x": 0.8755412029696613,
+    "bar": [
+     {
+      "part": "passes",
+      "w": 6.645664017948044,
+      "x": 0.0
+     },
+     {
+      "part": "waits_on_check",
+      "w": 15.078848411262681,
+      "x": 6.645664017948044
+     },
+     {
+      "part": "physical",
+      "w": 10.89847787211728,
+      "x": 21.724512429210726
+     },
+     {
+      "part": "rest",
+      "w": 67.377009698672,
+      "x": 32.622990301328
+     }
+    ],
+    "code": "15",
+    "emp": 5155540.0,
+    "mean_pay": 116866.10003995702,
+    "name": "Computing and mathematics",
+    "passes": 40040647618.71495,
+    "payroll": 602507853400.0,
+    "physical": 65664185080.56782,
+    "ref": "census:v3.2-2026-09-24/tasks.csv#occ=15-*",
+    "rest": 405951774820.5779,
+    "roles": 21,
+    "share_agreed3": 0.008755412029696614,
+    "share_passes": 0.06645664017948044,
+    "share_physical": 0.10898477872117279,
+    "share_rest": 0.673770096986719,
+    "share_waits_on_check": 0.15078848411262682,
+    "waits_on_check": 90851245880.1388
+   },
+   {
+    "agreed3": 1838804968.002164,
+    "agreed3_x": 0.18598084126494965,
+    "bar": [
+     {
+      "part": "passes",
+      "w": 1.124381112016146,
+      "x": 0.0
+     },
+     {
+      "part": "waits_on_check",
+      "w": 2.0621226077391577,
+      "x": 1.124381112016146
+     },
+     {
+      "part": "physical",
+      "w": 39.93281096100268,
+      "x": 3.1865037197553034
+     },
+     {
+      "part": "rest",
+      "w": 56.88068531924202,
+      "x": 43.11931468075798
+     }
+    ],
+    "code": "29",
+    "emp": 9478780.0,
+    "mean_pay": 104307.37523183363,
+    "name": "Healthcare practitioners",
+    "passes": 11116830963.02208,
+    "payroll": 988706662200.0,
+    "physical": 394818362375.16534,
+    "ref": "census:v3.2-2026-09-24/tasks.csv#occ=29-*",
+    "rest": 562383125256.3617,
+    "roles": 70,
+    "share_agreed3": 0.0018598084126494965,
+    "share_passes": 0.01124381112016146,
+    "share_physical": 0.3993281096100268,
+    "share_rest": 0.5688068531924186,
+    "share_waits_on_check": 0.020621226077391575,
+    "waits_on_check": 20388343605.449425
+   },
+   {
+    "agreed3": 1359133035.7714097,
+    "agreed3_x": 0.5246822413602005,
+    "bar": [
+     {
+      "part": "passes",
+      "w": 2.0037822494662194,
+      "x": 0.0
+     },
+     {
+      "part": "waits_on_check",
+      "w": 9.856889833986571,
+      "x": 2.0037822494662194
+     },
+     {
+      "part": "physical",
+      "w": 21.109552697310292,
+      "x": 11.86067208345279
+     },
+     {
+      "part": "rest",
+      "w": 67.02977521923691,
+      "x": 32.97022478076308
+     }
+    ],
+    "code": "17",
+    "emp": 2485340.0,
+    "mean_pay": 104226.89358397643,
+    "name": "Architecture and engineering",
+    "passes": 5190582865.319881,
+    "payroll": 259039267700.0,
+    "physical": 54682030721.85817,
+    "ref": "census:v3.2-2026-09-24/tasks.csv#occ=17-*",
+    "rest": 173633438868.86746,
+    "roles": 35,
+    "share_agreed3": 0.005246822413602004,
+    "share_passes": 0.020037822494662193,
+    "share_physical": 0.21109552697310288,
+    "share_rest": 0.6702977521923695,
+    "share_waits_on_check": 0.09856889833986571,
+    "waits_on_check": 25533215243.95456
+   },
+   {
+    "agreed3": 17105440764.452784,
+    "agreed3_x": 1.7758686090611508,
+    "bar": [
+     {
+      "part": "passes",
+      "w": 6.737458327830774,
+      "x": 0.0
+     },
+     {
+      "part": "waits_on_check",
+      "w": 11.606274573420674,
+      "x": 6.737458327830774
+     },
+     {
+      "part": "physical",
+      "w": 6.319105302331411,
+      "x": 18.34373290125145
+     },
+     {
+      "part": "rest",
+      "w": 75.33716179641713,
+      "x": 24.66283820358286
+     }
+    ],
+    "code": "13",
+    "emp": 10280290.0,
+    "mean_pay": 93695.35754341561,
+    "name": "Business and finance",
+    "passes": 64896239362.32884,
+    "payroll": 963215447200.0,
+    "physical": 60866598396.89041,
+    "ref": "census:v3.2-2026-09-24/tasks.csv#occ=13-*",
+    "rest": 725659179905.1451,
+    "roles": 35,
+    "share_agreed3": 0.017758686090611507,
+    "share_passes": 0.06737458327830775,
+    "share_physical": 0.06319105302331411,
+    "share_rest": 0.7533716179641695,
+    "share_waits_on_check": 0.11606274573420672,
+    "waits_on_check": 111793429535.63382
+   },
+   {
+    "agreed3": 479503128.12653637,
+    "agreed3_x": 0.3850491033348047,
+    "bar": [
+     {
+      "part": "passes",
+      "w": 1.6279036957108337,
+      "x": 0.0
+     },
+     {
+      "part": "waits_on_check",
+      "w": 9.073466834140575,
+      "x": 1.6279036957108337
+     },
+     {
+      "part": "physical",
+      "w": 31.609677949003437,
+      "x": 10.70137052985141
+     },
+     {
+      "part": "rest",
+      "w": 57.68895152114516,
+      "x": 42.31104847885484
+     }
+    ],
+    "code": "19",
+    "emp": 1385140.0,
+    "mean_pay": 89904.54704939573,
+    "name": "Science",
+    "passes": 2027234728.3026037,
+    "payroll": 124530384300.0,
+    "physical": 39363653425.88634,
+    "ref": "census:v3.2-2026-09-24/tasks.csv#occ=19-*",
+    "rest": 71840273027.92267,
+    "roles": 47,
+    "share_agreed3": 0.0038504910333480467,
+    "share_passes": 0.016279036957108337,
+    "share_physical": 0.31609677949003434,
+    "share_rest": 0.5768895152114508,
+    "share_waits_on_check": 0.09073466834140574,
+    "waits_on_check": 11299223117.8883
+   },
+   {
+    "agreed3": 1093364521.5526853,
+    "agreed3_x": 0.7784838990170131,
+    "bar": [
+     {
+      "part": "passes",
+      "w": 3.4967129495936704,
+      "x": 0.0
+     },
+     {
+      "part": "waits_on_check",
+      "w": 28.686643496235913,
+      "x": 3.4967129495936704
+     },
+     {
+      "part": "physical",
+      "w": 24.134795027050284,
+      "x": 32.18335644582958
+     },
+     {
+      "part": "rest",
+      "w": 43.68184852712014,
+      "x": 56.31815147287986
+     }
+    ],
+    "code": "27",
+    "emp": 1863370.0,
+    "mean_pay": 75373.07673730928,
+    "name": "Arts, design and media",
+    "passes": 4911060955.746254,
+    "payroll": 140447930000.0,
+    "physical": 33896820025.235065,
+    "ref": "census:v3.2-2026-09-24/tasks.csv#occ=27-*",
+    "rest": 61350252042.07569,
+    "roles": 32,
+    "share_agreed3": 0.007784838990170131,
+    "share_passes": 0.03496712949593671,
+    "share_physical": 0.24134795027050285,
+    "share_rest": 0.43681848527120115,
+    "share_waits_on_check": 0.28686643496235914,
+    "waits_on_check": 40289796976.94297
+   },
+   {
+    "agreed3": 9469998971.64091,
+    "agreed3_x": 1.9304121427948517,
+    "bar": [
+     {
+      "part": "passes",
+      "w": 2.7884858576885057,
+      "x": 0.0
+     },
+     {
+      "part": "waits_on_check",
+      "w": 20.635713748244655,
+      "x": 2.7884858576885057
+     },
+     {
+      "part": "physical",
+      "w": 26.899061926549212,
+      "x": 23.42419960593316
+     },
+     {
+      "part": "rest",
+      "w": 49.67673846751762,
+      "x": 50.32326153248238
+     }
+    ],
+    "code": "25",
+    "emp": 6907440.0,
+    "mean_pay": 71020.34373081778,
+    "name": "Education",
+    "passes": 13679440581.280928,
+    "payroll": 490568763100.0,
+    "physical": 131958395378.57552,
+    "ref": "census:v3.2-2026-09-24/tasks.csv#occ=25-*",
+    "rest": 243698561448.52316,
+    "roles": 58,
+    "share_agreed3": 0.019304121427948517,
+    "share_passes": 0.027884858576885056,
+    "share_physical": 0.26899061926549217,
+    "share_rest": 0.49676738467517634,
+    "share_waits_on_check": 0.20635713748244655,
+    "waits_on_check": 101232365691.62045
+   },
+   {
+    "agreed3": 342239271.4391874,
+    "agreed3_x": 0.2904035412119327,
+    "bar": [
+     {
+      "part": "passes",
+      "w": 3.4697251878904787,
+      "x": 0.0
+     },
+     {
+      "part": "waits_on_check",
+      "w": 9.19294232903228,
+      "x": 3.4697251878904787
+     },
+     {
+      "part": "physical",
+      "w": 8.063087083362932,
+      "x": 12.662667516922758
+     },
+     {
+      "part": "rest",
+      "w": 79.27424539971432,
+      "x": 20.72575460028569
+     }
+    ],
+    "code": "21",
+    "emp": 1881650.0,
+    "mean_pay": 62630.96309090426,
+    "name": "Community and social service",
+    "passes": 4089055579.150912,
+    "payroll": 117849551700.0,
+    "physical": 9502311980.92382,
+    "ref": "census:v3.2-2026-09-24/tasks.csv#occ=21-*",
+    "rest": 93424342817.1212,
+    "roles": 12,
+    "share_agreed3": 0.0029040354121193266,
+    "share_passes": 0.03469725187890479,
+    "share_physical": 0.08063087083362933,
+    "share_rest": 0.7927424539971432,
+    "share_waits_on_check": 0.0919294232903228,
+    "waits_on_check": 10833841322.804081
+   },
+   {
+    "agreed3": 36863711216.9069,
+    "agreed3_x": 5.188274009697136,
+    "bar": [
+     {
+      "part": "passes",
+      "w": 11.065031453789127,
+      "x": 0.0
+     },
+     {
+      "part": "waits_on_check",
+      "w": 15.641988861730173,
+      "x": 11.065031453789127
+     },
+     {
+      "part": "physical",
+      "w": 30.235294386198067,
+      "x": 26.7070203155193
+     },
+     {
+      "part": "rest",
+      "w": 43.057685298282635,
+      "x": 56.942314701717365
+     }
+    ],
+    "code": "41",
+    "emp": 13160750.0,
+    "mean_pay": 53987.78520221112,
+    "name": "Sales",
+    "passes": 78619233170.04701,
+    "payroll": 710519744100.0,
+    "physical": 214827736300.69617,
+    "ref": "census:v3.2-2026-09-24/tasks.csv#occ=41-*",
+    "rest": 305933355396.74133,
+    "roles": 21,
+    "share_agreed3": 0.05188274009697136,
+    "share_passes": 0.11065031453789127,
+    "share_physical": 0.30235294386198064,
+    "share_rest": 0.43057685298282666,
+    "share_waits_on_check": 0.15641988861730172,
+    "waits_on_check": 111139419232.51572
+   },
+   {
+    "agreed3": 75523217113.15355,
+    "agreed3_x": 8.483638141309388,
+    "bar": [
+     {
+      "part": "passes",
+      "w": 16.595638705512016,
+      "x": 0.0
+     },
+     {
+      "part": "waits_on_check",
+      "w": 27.689688415880394,
+      "x": 16.595638705512016
+     },
+     {
+      "part": "physical",
+      "w": 27.00113531710451,
+      "x": 44.28532712139241
+     },
+     {
+      "part": "rest",
+      "w": 28.713537561503074,
+      "x": 71.28646243849693
+     }
+    ],
+    "code": "43",
+    "emp": 17738540.0,
+    "mean_pay": 50185.75637566564,
+    "name": "Office and administrative support",
+    "passes": 147738034580.33774,
+    "payroll": 890222046900.0,
+    "physical": 240370059506.16656,
+    "ref": "census:v3.2-2026-09-24/tasks.csv#occ=43-*",
+    "rest": 255614241817.4133,
+    "roles": 50,
+    "share_agreed3": 0.08483638141309388,
+    "share_passes": 0.16595638705512017,
+    "share_physical": 0.2700113531710451,
+    "share_rest": 0.28713537561503105,
+    "share_waits_on_check": 0.2768968841588039,
+    "waits_on_check": 246499710996.0826
+   }
+  ],
+  "version": "v3.2-2026-09-24"
+ },
  "manifest_sha256": "d86bfa61ac188bc7fa73d8b7217dd7b57431849f4d73562a2cdf5ed9ac4fb76e",
  "method": {
   "adjudication": [

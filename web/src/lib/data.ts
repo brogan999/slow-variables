@@ -403,11 +403,24 @@ export type CensusIndex = {
     accountable_removed: number; not_called: number; by_scorer: Record<string, number>; rescore_changed: number; fleiss_kappa: number;
     modelled_saving: number; ref: string;
   };
-  dial: { rule: string; passes: number; agreed3: number; alone: number; alone_rest: number; headline: boolean; label?: string | null }[];
+  kinds: { version: string; groups: FirmCutGroup[] }; figures: CensusFigureData;
+  dial: { rule: string; ref: string; passes: number; agreed3: number; alone: number; alone_rest: number; headline: boolean; label?: string | null }[];
   functions: CensusFunction[]; industries: CensusIndustry[]; roles: CensusRole[];
   deals: { cards: CensusCard[]; not_carded: { name: string; why: string }[] };
   method: CensusMethod;
   csv: Record<string, string>;
+};
+// The census page's figures (plan Part 45b): every width and position is a percentage the export laid out.
+type CutPart = FirmCutGroup["bar"][number]["part"];
+type ScaleTick = { left: number; label: string };
+type ScreenMark = { id: string; usd: number; share: number; w: number };
+export type CensusFigureData = {
+  whole: { payroll: number; passes: number; agreed3: number; share_agreed3: number; agreed3_x: number; ref: string; parts: { part: CutPart; x: number; w: number; usd: number; share: number }[] };
+  screen: { payroll: number; ref: string; gates: ScreenMark[]; voted: ScreenMark; questions: ScreenMark[]; passes: number; agreed3: number; share_passes: number; share_agreed3: number; passes_w: number; agreed3_x: number };
+  dial: { ticks: ScaleTick[]; rows: { rule: string; passes: number; agreed3: number; headline: boolean; label: string | null; ref: string; w: number; agreed3_x: number }[] };
+  functions: { function: string; ref: string; payroll: number; passes: number; agreed3: number; share_passes: number; share_agreed3: number; share_waits_on_check: number; share_physical: number; share_rest: number; bar: FirmCutGroup["bar"]; agreed3_x: number }[];
+  scorers: { ticks: ScaleTick[]; rows: { function: string | null; ref: string; passes: number; agreed3: number; share_passes: number; share_agreed3: number; by_scorer: Record<string, { usd: number; share: number; x: number }>; vote_x: number; agreed3_x: number; lo_x: number; hi_x: number; spread_w: number }[] };
+  industries: { ticks: ScaleTick[]; rows: { naics: string; title: string; ref: string; passes: number; agreed3: number | null; share_total: number; w: number; agreed3_x: number }[] };
 };
 type AloneTest = { n: number; passes: number; fails: number; within_occ_pp: number; within_occ_t: number; label?: string };
 export type CensusMethod = {
@@ -437,6 +450,11 @@ export type CensusRollup = {
   small_share: { value: number; derived_id: string; obs_ids: string[] }; firms_20_99: { value: number; obs_ids: string[] };
 };
 export const censusRollup = () => read<CensusRollup[]>("census/rollup.json");
+export type CensusRollupPlot = {
+  x: { ticks: Tick[] }; y: Axis; cut_points: string;
+  points: { naics: string; title: string; ref: string; rank: number; listed: boolean; passes: number; agreed3: number | null; share_total: number; small_share: number; x: number; y: number; label?: "r" | "l" | "t" | "b" }[];
+};
+export const censusRollupPlot = () => read<CensusRollupPlot>("census/rollup_plot.json");
 export type CensusTrade = {
   key: string; name: string; card: string | null; flag: string | null; no_figure: string | null; census_note: string | null;
   census: { passes: number; share: number | null; ref: string | null; from: "industry" | "card"; title: string | null } | null;
