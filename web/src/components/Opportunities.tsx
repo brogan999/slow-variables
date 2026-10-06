@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ChainStrip, Crowding, Demand, HowLarge, PowersGrid, WhoKeeps } from "@/components/OpportunityFigures";
+import { ChainStrip, Demand, HowLarge, NumberKey, PowersTable, WhoKeeps } from "@/components/OpportunityFigures";
 import type { OpportunitiesDoc, Opportunity } from "@/lib/data";
 
 const link = "underline decoration-grid underline-offset-2 hover:decoration-ink";
@@ -61,7 +61,8 @@ export function Opportunities({ d }: { d: OpportunitiesDoc }) {
       </p>
       <section className="flex flex-col gap-4" aria-labelledby="op-rule">
         <h2 id="op-rule" className="display text-[1.6rem] scroll-mt-24">The rent rule, drawn</h2>
-        <p className="text-ink-2 leading-relaxed max-w-[68ch]">The rule answers in turn who keeps a profit and how large it is. Each business is drawn as its number in the list further down, boxed by who would keep its profit.</p>
+        <p className="text-ink-2 leading-relaxed max-w-[68ch]">The rule answers in turn who keeps a profit and how large it is. Each business is drawn as its number in the list, shown here and on its card, boxed by who would keep its profit. The number is only its place in the list: nothing here is ranked or scored.</p>
+        <NumberKey d={d} />
         <WhoKeeps d={d} />
         <HowLarge d={d} />
       </section>
@@ -79,11 +80,10 @@ export function Opportunities({ d }: { d: OpportunitiesDoc }) {
       </figure>
       <section className="flex flex-col gap-4" aria-labelledby="op-glance">
         <h2 id="op-glance" className="display text-[1.6rem] scroll-mt-24">The businesses at a glance</h2>
-        <p className="text-ink-2 leading-relaxed max-w-[68ch]">Where the businesses sit on the chain, how crowded each part already is, which kinds of firm would need them and what each would rely on.</p>
+        <p className="text-ink-2 leading-relaxed max-w-[68ch]">Where the businesses sit on the chain and how many companies the map already holds in each part, how many kinds of firm are marked with a need each would meet and, folded beneath, what each would rely on.</p>
         <ChainStrip d={d} />
-        <Crowding d={d} />
         <Demand d={d} />
-        <PowersGrid d={d} />
+        <PowersTable d={d} />
       </section>
       <section className="flex flex-col gap-4" aria-labelledby="op-list">
         <h2 id="op-list" className="display text-[1.6rem]">The businesses</h2>

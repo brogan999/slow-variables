@@ -3,9 +3,8 @@ the cards already show, the rent rubric, the market map and the needs grid on /f
 
 import json
 import re
-from pathlib import Path
-
 from collections import Counter
+from pathlib import Path
 
 from ai_tracker import firm_kinds, futures
 from ai_tracker import opportunities as op

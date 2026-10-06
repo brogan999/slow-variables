@@ -112,12 +112,18 @@ def figures(out: list[dict[str, Any]], map_doc: dict[str, Any], rubric: dict[str
             row["groups"].append(group := {"pools": o["rent"]["pools"], "keeper": keeper[o["rent"]["pools"]], "ops": []})
         group["ops"].append(o["id"])
     cols = rubric["inputs"]["durability"]
+
+    def cell(kind: str, d: str, away: bool) -> list[str]:  # competed away to users keeps none of its cell: drawn apart
+        return [o["id"] for o in out if (o["rent"]["rent_kind"], o["rent"]["durability"]) == (kind, d) and (o["rent"]["pools"] == "users") == away]
+
     size = [{"kind": kind, "cells": [{"tier": row[d], "word": TIER_WORDS[row[d]] if row[d] != "none" else "no lasting profit",
-                                      "ops": [o["id"] for o in out if (o["rent"]["rent_kind"], o["rent"]["durability"]) == (kind, d)]}
+                                      "ops": cell(kind, d, False), "away": cell(kind, d, True)}
                                      for d in cols]} for kind, row in rubric["tiers"]["rules"].items()]
     chain = []
     for layer in map_doc.get("layers") or []:
-        cs = [{"id": c["id"], "number": c.get("number"), "name": c.get("name", c["id"]),
+        cs = [{"id": c["id"], "number": c.get("number"), "name": c.get("name", c["id"]), "n_entities": c.get("n_entities", 0),
+               "live": len({e["name"] for e in c.get("entities", []) if not e.get("ownership")}),
+               "other": len({e["name"] for e in c.get("entities", []) if e.get("ownership")}),
                "primary": [o["id"] for o in out if o["primary"]["id"] == c["id"]],
                "adjacent": [o["id"] for o in out if c["id"] in [a["id"] for a in o["adjacent"]]]} for c in layer["categories"]]
         chain.append({"id": layer.get("id"), "number": layer.get("number"), "name": layer.get("name"),
@@ -135,22 +141,17 @@ def figures(out: list[dict[str, Any]], map_doc: dict[str, Any], rubric: dict[str
         demand.append({"id": o["id"], "count": len(who), "w": 100 * len(who) / whole, "needs": [need(n) for n in mine], "kinds": who})
     unmet = [{**need(n), "count": (c := sum(1 for k in firm if n["id"] in (k.get("needs") or []))), "w": 100 * c / whole}
              for n in needs if not n.get("opportunities")]
-    most = max([o["primary"]["n_entities"] for o in out] or [0]) or 1
-    coverage = []
-    for o in out:
-        n, live = o["primary"]["n_entities"], len(o["examples"]) + o["n_more_examples"]
-        coverage.append({"id": o["id"], "category": o["primary"], "href": f"/value-chain#mm-{o['primary']['id']}", "n": n, "live": live,
-                         "other": n - live, "w_live": 100 * live / most, "w_other": 100 * (n - live) / most})
     used = sorted({x for o in out for x in o["powers"]}, key=list(POWERS.values()).index)
     grid = [{"id": o["id"], "cells": [p in o["powers"] for p in used]} for o in out]
     return {
-        "marks": [{"id": o["id"], "n": i + 1, "name": o["name"], "verdict": o["rent"]["verdict"], "pools": o["rent"]["pools"]} for i, o in enumerate(out)],
+        "marks": [{"id": o["id"], "n": i + 1, "name": o["name"], "verdict": o["rent"]["verdict"], "pools": o["rent"]["pools"],
+                   "owner": POOLS_WORDS[o["rent"]["asset_owner"]]} for i, o in enumerate(out)],
         "example": out[0]["id"] if out else None,
         "keeps": [{k: v for k, v in r.items() if k != "when"} for r in keeps],
         "size": {"cols": cols, "rows": size},
         "chain": chain,
-        "demand": {"kinds": len(firm), "rows": sorted(demand, key=lambda r: -r["count"]), "unmet": unmet},
-        "coverage": {"rows": sorted(coverage, key=lambda r: -r["n"])},
+        "demand": {"kinds": len(firm), "rows": sorted((r for r in demand if r["needs"]), key=lambda r: -r["count"]),
+                   "off": [r["id"] for r in demand if not r["needs"]], "unmet": unmet},
         "powers": {"cols": used, "rows": grid, "totals": [sum(1 for r in grid if r["cells"][i]) for i in range(len(used))],
                    "unused": [p for p in POWERS.values() if p not in used]},
     }
