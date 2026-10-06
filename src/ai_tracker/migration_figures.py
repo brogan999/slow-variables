@@ -21,7 +21,9 @@ NEAR = 0.9
 # the essay's conjecture names one group of unscored inputs: those nobody publishes a series for
 CONJECTURE = "no_public_series"
 REASONS = ("no_public_series", "not_read_yet", "gauge_unsound", "stale_or_thin")
-BUYER_KINDS = {"model": "labs", "compute_physical": "computing and cloud companies"}
+# ponytail: the tally has no field for a deal that fell through, so this reads the phrase the ledger sweep writes in
+# the record's note; give the sweep a field of its own if a second wording ever appears
+CALLED_OFF = "later terminated"
 
 
 def _day(d: date) -> str:
@@ -57,7 +59,8 @@ def chain(spec: dict[str, Any]) -> dict[str, Any]:
 def scale(card: dict[str, Any]) -> dict[str, Any]:
     floors = sorted(card["method"]["words"])
     ends = [f for f, _ in floors[1:]] + [100]
-    scored = sorted((i for i in card["inputs"] if i["score"] is not None), key=lambda i: (-i["score"], i["n"]))
+    # a low-confidence score rests on a stand-in, so it goes after the ranked rows, never among them
+    scored = sorted((i for i in card["inputs"] if i["score"] is not None), key=lambda i: (i["hatched"], -i["score"], i["n"]))
     return {
         "bands": [{"word": w, "x": f, "w": e - f} for (f, w), e in zip(floors, ends)],
         "rows": [
@@ -82,17 +85,19 @@ def blind(card: dict[str, Any]) -> dict[str, Any]:
     return {"groups": [{**g, "n": len(g["inputs"])} for g in groups if g["inputs"]], "total": len(unscored)}
 
 
-def deals(s: Store) -> dict[str, Any] | None:
+def deals(s: Store, fact: dict[str, Any] | None) -> dict[str, Any] | None:
     """One mark for each deal the tally's newest reading counted, by buyer and by the quarter it was announced in.
-    The deals are that derived row's own input rows, grouped as the metric groups them (buyer and target)."""
+    The deals are that derived row's own input rows, grouped as the metric groups them (buyer and target). Nothing is
+    drawn once the essay's own fact for the tally has aged past its limit."""
     rows = s.derived_for(DEALS)
-    if not rows:
+    if not rows or not fact or fact.get("stale"):
         return None
     d = rows[-1]
     obs = s.con.execute(
-        "SELECT subject, measure, min(as_of_date), list(id ORDER BY id), min(series_key) FROM observations"
+        "SELECT subject, measure, min(as_of_date), list(id ORDER BY id), min(series_key), bool_or(contains(coalesce(note, ''), ?))"
+        " FROM observations"
         " WHERE id IN (SELECT unnest(?)) GROUP BY 1, 2 ORDER BY 3, 1, 2",
-        [d.input_observation_ids],
+        [CALLED_OFF, d.input_observation_ids],
     ).fetchall()
     ends = [d.as_of_date]
     for _ in range(3):  # the four quarters the reading covers, oldest first
@@ -107,7 +112,6 @@ def deals(s: Store) -> dict[str, Any] | None:
         for e in ends
     ]
     names = {e.id: e.name for e in s.seed.entities}
-    layer = {e.id: next((m.layer_id for m in e.memberships if m.is_primary), None) for e in s.seed.entities}
     buyers = []
     for b in dict.fromkeys(o[0] for o in obs):
         mine = [o for o in obs if o[0] == b]
@@ -115,13 +119,12 @@ def deals(s: Store) -> dict[str, Any] | None:
             {
                 "id": b,
                 "name": names[b],
-                "kind": layer[b],
                 "n": len(mine),
                 "cells": [
                     {
                         "quarter": q["id"],
                         "deals": [
-                            {"target": o[1], "date": o[2].isoformat(), "day": _day(o[2]), "obs_ids": o[3], "href": f"/series/{o[4]}#{o[3][0]}"}
+                            {"target": o[1], "date": o[2].isoformat(), "day": _day(o[2]), "obs_ids": o[3], "href": f"/series/{o[4]}#{o[3][0]}", "called_off": o[5]}
                             for o in mine
                             if quarter(o[2]) == q["id"]
                         ],
@@ -134,7 +137,6 @@ def deals(s: Store) -> dict[str, Any] | None:
     return {
         "total": {"value": d.value, "unit": "count", "as_of": d.as_of_date.isoformat(), "obs_ids": d.input_observation_ids, "derived_id": d.id, "href": "/indicators/lab_vertical_integration_exit_bell"},
         "quarters": quarters,
-        "kinds": [{"id": k, "label": label, "n": sum(b["n"] for b in buyers if b["kind"] == k)} for k, label in BUYER_KINDS.items()],
         "buyers": buyers,
         "chart_sources": s._chart_sources(d.input_observation_ids),
     }
@@ -166,6 +168,7 @@ def ages(card: dict[str, Any], spec: dict[str, Any], today: date) -> dict[str, A
                     "last": last.isoformat(),
                     "last_label": _day(last),
                     "as_of": g["reading"]["as_of"],
+                    "as_of_label": _day(date.fromisoformat(g["reading"]["as_of"])),
                     "obs_ids": g["reading"]["obs_ids"],
                     "href": g["reading"]["href"],
                 }
@@ -187,5 +190,5 @@ def ages(card: dict[str, Any], spec: dict[str, Any], today: date) -> dict[str, A
     }
 
 
-def build(s: Store, block: dict[str, Any], card: dict[str, Any], tightness: dict[str, Any], today: date) -> dict[str, Any]:
-    return {"chain": chain(block["chain"]), "scale": scale(card), "blind": blind(card), "deals": deals(s), "ages": ages(card, tightness, today)}
+def build(s: Store, block: dict[str, Any], card: dict[str, Any], tightness: dict[str, Any], today: date, tally: dict[str, Any] | None) -> dict[str, Any]:
+    return {"chain": chain(block["chain"]), "scale": scale(card), "blind": blind(card), "deals": deals(s, tally), "ages": ages(card, tightness, today)}

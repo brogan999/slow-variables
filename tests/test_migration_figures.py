@@ -249,7 +249,7 @@ def test_with_no_reading_near_its_limit_nothing_is_said_to_lapse(built):
     src = plate("Ages")
     # the summary line, the "near its limit" key and the notes are drawn only when a reading is near its limit,
     # and the line survives a count of one
-    assert src.count("ages.near > 0 ?") == 2 and "{ages.near}" not in src
+    assert src.count("ages.near ?") == 2 and "{ages.near}" not in src
     assert "Inputs with a score today:" in src and "readings near their limit lapsed" not in src
     assert "nothing has got tighter" in src  # a higher score in the note is a gauge dropping out, and the foot says so
     assert "ages.near_x" in src  # the line past which a reading is near its limit is drawn, so the words are defined

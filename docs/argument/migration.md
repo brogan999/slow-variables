@@ -80,4 +80,3 @@ Three cautions belong with any list like the one below. Rent from a bottleneck i
 
 With that said, here is what this site expects, and what would show it to be wrong. Each entry is tested every night where a test exists. Where none does, the entry says what outcome would settle it.
 
-[plate:calls]

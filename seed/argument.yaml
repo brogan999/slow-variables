@@ -187,8 +187,10 @@ migration:
       expect_state: untestable
 
   # The rule as a picture (Folio I). A model: each input stands as tall as the word given it here (short < little < some
-  # < plenty; migration_figures.DRAWN maps the word to a height), and which input is drawn short is an illustration
-  # taken from the essay's own record, never a reading. Exactly one link is shortest in each state.
+  # < plenty; migration_figures.DRAWN maps the word to a height). It is a model of the rule, not a history: only the two
+  # posts in the illustrated move differ from the rest, which all stand at one height and claim nothing about the real
+  # inputs. Chips and memory are named to show a move of the kind the strip records, never a reading; the real record
+  # is untidier (the strip holds chips as binding to today). Exactly one link is shortest in each state.
   chain:
     links:
       - {id: power, label: Power}
@@ -203,11 +205,11 @@ migration:
       - id: before
         title: The scarcest input sets the pace
         text: "Every input is needed at once, so the industry can go only as fast as the one it has least of. Whoever owns that input collects the rent. More of anything else adds nothing."
-        levels: {power: some, buildings: some, chips: short, memory: little, data: plenty, people: plenty, money: plenty}
+        levels: {power: plenty, buildings: plenty, chips: short, memory: little, data: plenty, people: plenty, money: plenty}
       - id: after
         title: Relieve it, and the shortage turns up somewhere else
         text: "The industry builds its way out and the pace rises, but only as far as the next scarcest input. The rent moves there with it."
-        levels: {power: some, buildings: some, chips: some, memory: little, data: plenty, people: plenty, money: plenty}
+        levels: {power: plenty, buildings: plenty, chips: some, memory: little, data: plenty, people: plenty, money: plenty}
 
   # Where the bottleneck has sat. Whole years; two levels (binding: what held things back; present: short, but not what
   # held things back). Every span is a judgement anchored on a dated, sourced event, and says so. `to: null` runs to today.
