@@ -151,7 +151,7 @@ def test_a_lab_with_too_little_on_record_is_listed_without_a_multiple_and_none_i
         # the date and who said it are beside the bars, from the record: Epoch's own source type and grade
         o = next(o for o in s.observations("epoch.*.revenue_run_rate_usd.pt") if o["id"] == r["run_rate"]["obs_ids"][0])
         told = json.loads(o["raw_snippet"])
-        assert r["run_rate"]["when"] == f"{at:%B %Y}" and r["run_rate"]["said"] == cf.SAID[told["Source type"]]
+        assert r["run_rate"]["when"] == f"{at:%B %Y}" and r["run_rate"]["said"] == cf.SAID.get(told["Source type"], "other") != "other"
         if not r["thin"]:  # the key's claim: hatched is a press report graded likely, solid is the company's own word
             assert (r["run_rate"]["stamp"] == "estimate") == (r["run_rate"]["said"] == "press")
     assert len([r for r in labs["rows"] if not r["thin"]]) >= 2 and any(r["thin"] for r in labs["rows"])

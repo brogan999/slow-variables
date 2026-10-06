@@ -60,7 +60,7 @@ export default function CaptureLens() {
 
       <section aria-labelledby="ahead" className="flex flex-col gap-4">
         <h2 id="ahead" className="eyebrow">Spending ahead of sales</h2>
-        <p className="max-w-[62ch] font-serif text-lg text-ink-2">Why it matters: a layer keeps profit only if its sales outgrow the money it takes in. These figures set what the labs sell against what they have raised and promised to spend, and show how much of that money runs between the labs and their own suppliers.</p>
+        <p className="max-w-[62ch] font-serif text-lg text-ink-2">Why it matters: a lab&apos;s own profit depends on its sales catching up with what it has raised and signed up to pay. These figures set the two side by side, and show how much is promised between the labs and their own suppliers.</p>
         <LabsPlate labs={c.figures.labs} />
         <TiesPlate ties={c.figures.ties} />
       </section>
