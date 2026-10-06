@@ -102,7 +102,7 @@ export function KindMap({ doc }: { doc: FirmKindsDoc }) {
       note="Chart across, judgement up"
       foot={<p>Across: the share of each kind of firm&apos;s office payroll that passes the census screen or waits only on a check, from {census} ({doc.version}). Up: one of three bands this site assigned, by how far a licence or a legal duty ties the work to the firm. Within a band, height means nothing; names are stepped so they do not collide.</p>}
     >
-      <div className="grid grid-cols-[minmax(0,9rem)_1fr] gap-x-3">
+      <div className="overflow-x-auto"><div className="grid min-w-[44rem] grid-cols-[minmax(0,9rem)_1fr] gap-x-3">
         <div className="relative h-80" aria-hidden>
           {doc.map.rungs.map((r) => <div key={r.id} className="absolute right-0 w-full -translate-y-1/2 text-right text-[11px] leading-tight text-ink-2" style={{ top: `${r.y}%` }}>{r.label}</div>)}
         </div>
@@ -121,7 +121,7 @@ export function KindMap({ doc }: { doc: FirmKindsDoc }) {
         </div>
         <div />
         <div className="text-center text-[11px] text-ink-2">share of office work a check can settle, or could with one more check</div>
-      </div>
+      </div></div>
     </Figure>
   );
 }
