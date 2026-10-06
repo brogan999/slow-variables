@@ -240,6 +240,8 @@ def _suggested_enrichment(s: st.Store) -> str:
     from .ingest.connectors.formd import FormD
 
     lines = []
+    if not os.environ.get("AI_TRACKER_USER_AGENT"):  # sec.gov wants a declared contact; only the nightly has one
+        return "\n## Suggested enrichment\n\n- Form D lookup skipped: no user agent declared for sec.gov\n"
     try:
         c = FormD()
         for r in c.candidates(c.fetch(date.today(), False)):

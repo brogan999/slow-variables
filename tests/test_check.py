@@ -168,3 +168,21 @@ def test_approve_gives_a_hand_written_proposal_the_id_its_model_computes(monkeyp
     cli.cmd_approve(argparse.Namespace(reviewer="claude"))
     row = json.loads((tmp_path / "status_events.jsonl").read_text())
     assert row["id"] and row["id"] == StatusEvent(**p).id
+
+
+def test_evaluate_asks_sec_for_nothing_unless_the_operator_named_a_user_agent(monkeypatch):
+    """SEC's fair-access rule wants a declared contact; a laptop or a CI run has none, so the Form D lookup in the
+    operator's notes is skipped there and only the nightly, which sets the name, makes it."""
+    from ai_tracker import cli
+    from ai_tracker.ingest.connectors.formd import FormD
+
+    def fail(*a, **k):
+        raise AssertionError("fetched sec.gov without a declared user agent")
+
+    monkeypatch.delenv("AI_TRACKER_USER_AGENT", raising=False)
+    monkeypatch.setattr(FormD, "fetch", fail)
+    assert "skipped" in cli._suggested_enrichment(st.Store())  # and `fail` shows nothing was fetched
+    monkeypatch.setenv("AI_TRACKER_USER_AGENT", "Example Operator ops@example.org")
+    monkeypatch.setattr(FormD, "fetch", lambda self, day, refetch=False: [])
+    monkeypatch.setattr(FormD, "candidates", lambda self, items: [])
+    cli._suggested_enrichment(st.Store())  # with a name, the lookup runs
