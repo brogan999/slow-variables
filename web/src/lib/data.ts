@@ -419,8 +419,7 @@ export type CensusFigureData = {
   screen: { payroll: number; ref: string; gates: ScreenMark[]; voted: ScreenMark; questions: ScreenMark[]; passes: number; agreed3: number; share_passes: number; share_agreed3: number; passes_w: number; agreed3_x: number };
   dial: { ticks: ScaleTick[]; rows: { rule: string; passes: number; agreed3: number; headline: boolean; label: string | null; ref: string; w: number; agreed3_x: number }[] };
   functions: { function: string; ref: string; payroll: number; passes: number; agreed3: number; share_passes: number; share_agreed3: number; share_waits_on_check: number; share_physical: number; share_rest: number; bar: FirmCutGroup["bar"]; agreed3_x: number }[];
-  scorers: { ticks: ScaleTick[]; rows: { function: string | null; ref: string; passes: number; agreed3: number; share_passes: number; share_agreed3: number; by_scorer: Record<string, { usd: number; share: number; x: number }>; vote_x: number; agreed3_x: number; lo_x: number; hi_x: number; spread_w: number }[] };
-  industries: { ticks: ScaleTick[]; rows: { naics: string; title: string; ref: string; passes: number; agreed3: number | null; share_total: number; w: number; agreed3_x: number }[] };
+  scorers: { ticks: ScaleTick[]; rows: { function: string | null; ref: string; passes: number; agreed3: number; share_passes: number; share_agreed3: number; by_scorer: Record<string, { usd: number; share: number; x: number }>; vote_x: number; agreed3_x: number; lo_x: number; hi_x: number; spread_w: number; tight: boolean; note_x: number | null }[] };
 };
 type AloneTest = { n: number; passes: number; fails: number; within_occ_pp: number; within_occ_t: number; label?: string };
 export type CensusMethod = {
@@ -452,7 +451,7 @@ export type CensusRollup = {
 export const censusRollup = () => read<CensusRollup[]>("census/rollup.json");
 export type CensusRollupPlot = {
   x: { ticks: Tick[] }; y: Axis; cut_points: string;
-  points: { naics: string; title: string; ref: string; rank: number; listed: boolean; passes: number; agreed3: number | null; share_total: number; small_share: number; x: number; y: number; label?: "r" | "l" | "t" | "b" }[];
+  points: { naics: string; title: string; ref: string; rank: number; listed: boolean; passes: number; agreed3: number | null; share_total: number; small_share: number; x: number; y: number; label?: string; label_wide?: string }[];
 };
 export const censusRollupPlot = () => read<CensusRollupPlot>("census/rollup_plot.json");
 export type CensusTrade = {

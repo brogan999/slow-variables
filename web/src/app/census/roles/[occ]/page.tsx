@@ -26,7 +26,7 @@ function Task({ t, names, order }: { t: CensusTask; names: Record<string, string
   return (
     <li className="py-2.5 border-t border-grid first:border-0">
       <p className="text-[15px]">{t.task}</p>
-      <p className="text-[12px] text-ink-2 mt-1">{t.why} · {fmt(t.time_share, "share")} of the role&apos;s time · {usd(t.payroll)}{flags.length ? ` · ${flags.join(" · ")}` : ""}</p>
+      <p className="text-[12px] text-ink-2 mt-1">{t.passes || t.physical || t.accountable ? null : "reason given most often: "}{t.why} · {fmt(t.time_share, "share")} of the role&apos;s time · {usd(t.payroll)}{flags.length ? ` · ${flags.join(" · ")}` : ""}</p>
     </li>
   );
 }

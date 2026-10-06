@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import csv
 import hashlib
+import itertools
 import json
 from pathlib import Path
 from typing import Any
@@ -335,7 +336,6 @@ def build(spec: dict[str, Any], fetched: dict[str, Any]) -> tuple[dict[str, Any]
         "method": {k: val[k] for k in METHOD},
         "csv": {f: csv_href(f) for f in (*TABLES.values(),)},
     }
-    index["figures"]["industries"] = _usd_bars(index["industries"][:TOP_INDUSTRIES], ("naics", "title", "ref", "passes", "agreed3", "share_total"))
     return index, docs
 
 
@@ -462,8 +462,8 @@ def shape(spec: dict[str, Any]) -> dict[str, Any]:
 
 
 PARTS = ("passes", "waits_on_check", "physical", "rest")
-TOP_INDUSTRIES = 15  # the rows the page shows before its fold
-# The fixed phrases of the bundle's `why`, read as which of the rule's three questions a task fails.
+TIGHT = 15.0  # a row of the scorers figure whose marks span less than this much of the axis stacks on a phone
+# The fixed phrases of the bundle's `why`, read as the question(s) most often failed among the scorers voting no.
 QUESTIONS = {"hours": "nobody can tell quickly whether it worked", "check": "no existing check settles it", "stakes": "a failure is too expensive"}
 GATES = {"physical": "physical work", "accountable": "an accountable sign-off"}
 PASSED = "checkable fast, an existing check settles it, survivable if wrong"
@@ -485,8 +485,9 @@ def _bar(g: dict[str, Any], total: float) -> list[dict[str, Any]]:
 
 
 def reason(why: str) -> set[str]:
-    """What a task's `why` says held it: a gate, or the questions it fails; empty when it passes. A phrase this does
-    not know is an error, so a later bundle's new reason cannot fall silently into a remainder."""
+    """What a task's `why` says held it: a gate, or the question(s) most often failed among the scorers voting no (not
+    every question it fails); empty when it passes. A phrase this does not know is an error, so a later bundle's new
+    reason cannot fall silently into a remainder."""
     if why == PASSED:
         return set()
     for gate, start in GATES.items():
@@ -550,9 +551,11 @@ def figures(spec: dict[str, Any], h: dict[str, Any], val: dict[str, Any], tasks:
     for fn, rf, g, pay in lines:
         by = {s: {"usd": g[f"by_{s}"], "share": g[f"by_{s}"] / pay, "x": x(g[f"by_{s}"] / pay)} for s in scorers}
         xs = [b["x"] for b in by.values()]
+        tight = max(xs) - x(g["agreed3"] / pay) < TIGHT  # the page then prints the rule and all three in type, not as marks
         scorer_rows.append({
             "function": fn, "ref": rf, "passes": g["passes"], "agreed3": g["agreed3"], "share_passes": g["passes"] / pay, "share_agreed3": g["agreed3"] / pay,
             "by_scorer": by, "vote_x": x(g["passes"] / pay), "agreed3_x": x(g["agreed3"] / pay), "lo_x": min(xs), "hi_x": max(xs), "spread_w": round(max(xs) - min(xs), 2),
+            "tight": tight, "note_x": round(max(xs) + 4, 2) if tight else None,
         })  # fmt: skip
 
     dial = _usd_bars(
@@ -578,6 +581,67 @@ def figures(spec: dict[str, Any], h: dict[str, Any], val: dict[str, Any], tasks:
     }  # fmt: skip
 
 
+# Where a rank label may sit: the offset of its box from the dot, in pixels, as the page's SIDE map draws the same
+# names. A pixel is a different share of the plot on a phone and on a desk, so each gets its own choice of place.
+PLOT_PX = {"label": (282.0, 288.0), "label_wide": (790.0, 384.0)}  # the plot's width and height at each
+LABEL_PX, DOT_PX = (17.0, 13.0), 11.0
+LABEL_SIDES = {
+    "r": (6.0, -7.0), "l": (-23.0, -7.0), "t": (-8.5, -19.0), "b": (-8.5, 4.0),
+    "tr": (5.0, -16.0), "tl": (-22.0, -16.0), "br": (5.0, 2.0), "bl": (-22.0, 2.0),
+    "r2": (16.0, -7.0), "l2": (-33.0, -7.0), "t2": (-8.5, -30.0), "b2": (-8.5, 15.0),
+    "tr2": (12.0, -23.0), "tl2": (-29.0, -23.0), "br2": (12.0, 9.0), "bl2": (-29.0, 9.0),
+}  # fmt: skip
+
+
+def label_box(q: dict[str, Any], key: str = "label") -> tuple[float, float, float, float]:
+    """A point's rank label as a box in percent of the plot, at the plot size `key` names."""
+    (w, h), (dx, dy) = PLOT_PX[key], LABEL_SIDES[q[key]]
+    return (q["x"] + 100 * dx / w, q["y"] + 100 * dy / h, 100 * LABEL_PX[0] / w, 100 * LABEL_PX[1] / h)
+
+
+def dot_box(q: dict[str, Any], key: str = "label") -> tuple[float, float, float, float]:
+    w, h = PLOT_PX[key]
+    return (q["x"] - 50 * DOT_PX / w, q["y"] - 50 * DOT_PX / h, 100 * DOT_PX / w, 100 * DOT_PX / h)
+
+
+def _hit(a: tuple[float, ...], b: tuple[float, ...]) -> bool:
+    return a[0] < b[0] + b[2] and b[0] < a[0] + a[2] and a[1] < b[1] + b[3] and b[1] < a[1] + a[3]
+
+
+def _place(points: list[dict[str, Any]], key: str) -> None:
+    """A rank label takes the first place around its dot where it covers no dot and no other label: the four sides,
+    then the corners, then a ring further out. Covering a listed dot or a label costs more than covering a hollow
+    dot. Labels are placed in rank order, then tried again against where the others ended up, alone and in pairs
+    (two labels in a knot often have to move together)."""
+    listed = [q for q in points if q["listed"]]
+    dots = [(dot_box(q, key), 3 if q["listed"] else 1, q) for q in points]
+
+    def cost(q: dict[str, Any]) -> float:
+        b = label_box(q, key)
+        return (
+            100 * (b[0] < 0 or b[0] + b[2] > 100 or b[1] < 0)
+            + sum(w for d, w, o in dots if o is not q and _hit(b, d))
+            + sum(3 for o in listed if o is not q and key in o and _hit(b, label_box(o, key)))
+        )
+
+    def settle(qs: tuple[dict[str, Any], ...]) -> None:
+        def total(ks: tuple[str, ...]) -> float:
+            for q, k in zip(qs, ks):
+                q[key] = k
+            return sum(cost(q) for q in qs)
+
+        total(min(itertools.product(LABEL_SIDES, repeat=len(qs)), key=total))
+
+    for q in listed:
+        settle((q,))
+    for _ in range(3):
+        for q in listed:
+            settle((q,))
+        for a, b in itertools.combinations(listed, 2):
+            if cost(a) + cost(b) and abs(a["x"] - b["x"]) < 20 and abs(a["y"] - b["y"]) < 20:
+                settle((a, b))
+
+
 def rollup_plot(ranked: list[dict[str, Any]], shown: int = 20) -> dict[str, Any]:
     """Every industry `rollup` ranks, placed by its two ingredients: across, the share of its employment in small
     firms; up, the share of its payroll that passes. The first `shown` are the page's list; the curve is the score of
@@ -598,19 +662,8 @@ def rollup_plot(ranked: list[dict[str, Any]], shown: int = 20) -> dict[str, Any]
          "share_total": r["share_total"], "small_share": r["small_share"]["value"], "x": px(r["small_share"]["value"]), "y": y(r["share_total"], ya)}
         for r in ranked
     ]  # fmt: skip
-    # A rank label sits right of, left of, above or below its dot: the first side where it covers no dot and no label
-    # already placed. Boxes are in percent of the plot, sized for a phone, where a label takes the most room.
-    lw, lh, placed = 8.0, 6.0, []
-    sides = {"r": (1.5, -lh / 2), "l": (-1.5 - lw, -lh / 2), "t": (-lw / 2, -2 - lh), "b": (-lw / 2, 2)}
-    dots = [(q["x"] - 1.5, q["y"] - 2, 3.0, 4.0) for q in points]
-    hit = lambda a, b: a[0] < b[0] + b[2] and b[0] < a[0] + a[2] and a[1] < b[1] + b[3] and b[1] < a[1] + a[3]  # noqa: E731
-    for i, q in enumerate(points):
-        if not q["listed"]:
-            continue
-        boxes = {k: (q["x"] + dx, q["y"] + dy, lw, lh) for k, (dx, dy) in sides.items()}
-        others = [d for j, d in enumerate(dots) if j != i] + placed
-        q["label"] = min(boxes, key=lambda k: sum(hit(boxes[k], o) for o in others) + (boxes[k][0] + lw > 100 or boxes[k][1] < 0))
-        placed.append(boxes[q["label"]])
+    for key in PLOT_PX:
+        _place(points, key)
     return {
         "x": {"ticks": [{"x": round(100 - t["y"], 2), "label": t["label"]} for t in xa["ticks"]]},
         "y": {"ticks": ya["ticks"], "unit": None, "log": False, "chars": max(len(t["label"]) for t in ya["ticks"])},

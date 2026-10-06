@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArticleLayout, MarginPanel } from "@/components/ArticleLayout";
-import { DialFigure, FunctionsFigure, IndustriesFigure, JudgesFigure, KindsFigure, RollupFigure, ScorersFigure, ScreenFigure, WholeFigure } from "@/components/CensusFigures";
+import { DialFigure, FunctionsFigure, JudgesFigure, KindsFigure, RollupFigure, ScorersFigure, ScreenFigure, WholeFigure } from "@/components/CensusFigures";
 import { PageHeader } from "@/components/PageHeader";
 import { census, censusRollup, censusRollupPlot, censusTrades, type CensusIndex, type CensusRollup } from "@/lib/data";
 import { fmt } from "@/lib/format";
@@ -37,7 +37,7 @@ function Rows<T>({ head, rows, row, label }: { head: string[]; rows: T[]; row: (
   );
 }
 
-const industryHead = ["Industry (code)", "Payroll, all workers", "Passes the screen", "All three pass", "Share of payroll", "Waiting on a check"];
+const industryHead = ["Industry (code)", "Payroll, all workers", "Passes the screen", "All three pass", "Share of payroll", "Waits only on a check"];
 const industryRow = (i: CensusIndex["industries"][number]) => (
   <tr key={i.naics} id={`naics-${i.naics}`} title={i.ref}><th scope="row">{i.title} <span className="text-muted font-mono text-[11px]">{i.naics}</span></th><td className="tabular-nums">{usd(i.payroll)}</td><td className="tabular-nums">{usd(i.passes)}</td><td className="tabular-nums"><A3 v={i.agreed3} /></td><td className="tabular-nums">{fmt(i.share_total, "share")}</td><td className="tabular-nums">{usd(i.blocked_by_missing_check)}</td></tr>
 );
@@ -45,7 +45,7 @@ const industryRow = (i: CensusIndex["industries"][number]) => (
 const OUTCOME = (p: boolean | null) => (p === true ? "passed" : p === false ? "failed" : "—"); // null: pending or descriptive; its result says which
 const WHEN = { pre17: "Set before the first scores (17 September)", pre24: "Set before this version's scores (24 September)", post: "Found after seeing the data" } as const;
 
-function Method({ c }: { c: CensusIndex }) {
+function Method({ c, gate }: { c: CensusIndex; gate: Record<string, number> }) {
   const m = c.method;
   const n = c.prose.method_notes;
   const who = (k: string) => c.scorer_names[k] ?? k;
@@ -106,7 +106,7 @@ function Method({ c }: { c: CensusIndex }) {
       </div>
       <div>
         <h3 className="font-medium mb-2">The physical-work filter, checked both ways</h3>
-        <p className="text-sm text-ink-2 max-w-[66ch]">Work that needs a body was removed before the vote: {usd(m.physical_gate.removed_usd)} of payroll. A spot check by {who("gemini")} of {fmt(sc.removed.draws, "count")} removed tasks found {fmt(sc.removed.error_rate, "share")} were really desk work (a ninety-five percent interval of {interval(sc.removed.ci95)}), so the payroll that passes may be {usd(sc.removed.effect_usd[0])} to {usd(sc.removed.effect_usd[2])} too low. The same check of {fmt(sc.kept.draws, "count")} kept tasks found {fmt(sc.kept.wrong, "count")} that were really physical (an interval of {interval(sc.kept.ci95)}), so the payroll that passes may also be up to {usd(sc.kept.effect_usd[2])} too high. The filter counts talking with people in person as desk work, which neither check can measure.</p>
+        <p className="text-sm text-ink-2 max-w-[66ch]">Work that needs a body is left out whatever the vote says: {usd(gate.physical)} of payroll. Most of it would have failed the vote anyway; the filter changed the verdict on {usd(m.physical_gate.removed_usd)}, the payroll the vote would otherwise have passed. A spot check by {who("gemini")} of {fmt(sc.removed.draws, "count")} tasks drawn from that part found {fmt(sc.removed.error_rate, "share")} were really desk work (a ninety-five percent interval of {interval(sc.removed.ci95)}), so the payroll that passes may be {usd(sc.removed.effect_usd[0])} to {usd(sc.removed.effect_usd[2])} too low. The same check of {fmt(sc.kept.draws, "count")} kept tasks found {fmt(sc.kept.wrong, "count")} that were really physical (an interval of {interval(sc.kept.ci95)}), so the payroll that passes may also be up to {usd(sc.kept.effect_usd[2])} too high. The filter counts talking with people in person as desk work, which neither check can measure.</p>
       </div>
       <div>
         <h3 className="font-medium mb-2">Modelled, not measured: what the remaining work costs</h3>
@@ -126,6 +126,7 @@ export default function CensusPage() {
   const s = c.prose.sections;
   const h = c.headline;
   const fns = c.functions.map((f) => f.function);
+  const gate = Object.fromEntries(c.figures.screen.gates.map((g) => [g.id, g.usd]));
   return (
     <ArticleLayout
       head={<PageHeader eyebrow={`Census · version ${c.version}`} title={c.prose.title} lede={c.prose.lede} />}
@@ -138,9 +139,11 @@ export default function CensusPage() {
             ...c.scorers.map((k) => [`${c.scorer_names[k]} alone would pass`, usd(h.by_scorer[k])] as [string, string]),
             ["Agreement across the three models (Fleiss κ: one is perfect, zero is chance)", fmt(h.fleiss_kappa)],
             ["Verdicts that changed when the same model re-scored", fmt(h.rescore_changed, "share")],
-            ["Waiting on a check", usd(h.blocked_by_missing_check)],
-            ["Removed as physical work", usd(h.physical_removed)],
-            ["Removed as an accountable sign-off", usd(h.accountable_removed)],
+            ["Waits only on a check: at least two of the three models find it quick to judge and cheap to get wrong, with no existing check", usd(h.blocked_by_missing_check)],
+            ["Left out as physical work", usd(gate.physical)],
+            ["Of that, payroll the vote would otherwise have passed", usd(h.physical_removed)],
+            ["Left out as an accountable sign-off, and not physical", usd(gate.accountable)],
+            ["Of that, payroll the vote would otherwise have passed", usd(h.accountable_removed)],
             ["Modelled saving (modelled, not measured: passing is not saving)", usd(h.modelled_saving)],
           ]} />
           <MarginPanel title="Instrument">
@@ -158,8 +161,8 @@ export default function CensusPage() {
           <p>{c.prose.agreed}</p>
         </div>
 
-        <ScreenFigure c={c} />
         <WholeFigure c={c} />
+        <ScreenFigure c={c} />
         <JudgesFigure c={c} />
 
         <Section id="dial" n="The rule" title={s.dial.title} lede={s.dial.lede}>
@@ -183,13 +186,13 @@ export default function CensusPage() {
         </Section>
 
         <Section id="functions" n="Part II · functions" title={s.functions.title} lede={s.functions.lede}>
-          <FunctionsFigure c={c} table={<Rows head={["Function", "Knowledge payroll", "Passes the screen", "All three pass", "Share that passes (stricter and looser rules)", "Waiting on a check"]} rows={c.functions} row={(f) => (
+          <FunctionsFigure c={c} table={<Rows head={["Function", "Knowledge payroll", "Passes the screen", "All three pass", "Share that passes (stricter and looser rules)", "Waits only on a check"]} rows={c.functions} row={(f) => (
             <tr key={f.function} title={f.ref}><th scope="row">{f.function}</th><td className="tabular-nums">{usd(f.payroll)}</td><td className="tabular-nums">{usd(f.passes)}</td><td className="tabular-nums"><A3 v={f.agreed3} /></td><td className="tabular-nums">{fmt(f.share_passes, "share")} <span className="text-muted">({rules(f.rule_strict, f.rule_loose)})</span></td><td className="tabular-nums">{usd(f.blocked_by_missing_check)}</td></tr>
           )} />} />
         </Section>
 
         <Section id="industries" n="Part III · industries" title={s.industries.title} lede={s.industries.lede}>
-          <IndustriesFigure c={c} table={<Rows head={industryHead} rows={c.industries.slice(0, 15)} row={industryRow} />} />
+          <Rows head={industryHead} rows={c.industries.slice(0, 15)} row={industryRow} />
           <details className="panel px-4 py-3">
             <summary className="cursor-pointer font-medium">Every other industry, by payroll that passes</summary>
             <Rows head={industryHead} rows={c.industries.slice(15)} row={industryRow} />
@@ -266,7 +269,7 @@ export default function CensusPage() {
         </Section>
 
         <Section id="method" n="Method" title={s.method.title} lede={s.method.lede}>
-          <Method c={c} />
+          <Method c={c} gate={gate} />
         </Section>
 
         <section aria-labelledby="caveats-h" className="flex flex-col gap-3">

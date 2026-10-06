@@ -14,7 +14,7 @@ type Part = keyof typeof CUT;
 const PARTS = Object.keys(CUT) as Part[];
 const usd = (v: number | null | undefined) => (v === 0 ? "$0" : fmt(v, "USD"));
 const pct = (v: number) => fmt(v, "share");
-const SCREEN = <>a screen scored by three AI models, not a record of what has been automated and not a forecast</>;
+const SCREEN = <>a screen scored by three AI models, not a claim about what AI can do and not a forecast</>;
 const th = "border-b border-ink py-2 pr-4 align-bottom font-medium text-ink-2";
 const td = "py-2 pr-4 text-ink-2 tabular-nums";
 const rowTh = "py-2 pr-4 font-medium text-ink";
@@ -40,17 +40,17 @@ export function ScreenFigure({ c }: { c: CensusIndex }) {
   return (
     <Figure
       id="fig-screen"
-      title="Most work fails the screen because no existing check settles it"
+      title="For most work that fails the screen, the reason given most often is that no existing check settles it"
       note={KIND_LABEL.chart}
-      keys={<><Key swatch={<Swatch fill={CUT.physical[0]} />}>left out before the vote</Key><Key swatch={<Swatch fill={CUT.rest[0]} />}>fails that question</Key><Key swatch={<Swatch fill={CUT.passes[0]} />}>{CUT.passes[1]}</Key><TickKey /></>}
-      foot={<p>Every bar is a share of the {usd(s.payroll)} of knowledge payroll scored. From the census ({c.version}), {SCREEN}. Each task carries one reason, set by the census&apos;s own code from the three models&apos; votes; a task can fail more than one question, so the middle bars overlap and do not add up. The margin&apos;s smaller figures for physical work and sign-offs count only the part the vote would otherwise have passed.</p>}
+      keys={<><Key swatch={<Swatch fill={CUT.physical[0]} />}>left out before the vote</Key><Key swatch={<Swatch fill={CUT.rest[0]} />}>the reason the models that voted no gave most often</Key><Key swatch={<Swatch fill={CUT.passes[0]} />}>{CUT.passes[1]}</Key><TickKey /></>}
+      foot={<p>Every bar is a share of the {usd(s.payroll)} of knowledge payroll scored. From the census ({c.version}), {SCREEN}. Each task that fails carries the reason the models that voted no gave most often, set by the census&apos;s own code; where reasons tie, the task counts under each, so the middle bars overlap and do not add up. A question a task also fails, but less often, is not counted, so each bar is a floor for that question.</p>}
       table={
         <table className={tbl}>
           <Head cols={["Step", "Payroll", "Share of knowledge payroll"]} />
           <tbody title={s.ref}>
             {s.gates.map((g) => <tr key={g.id} className="border-b border-grid"><th scope="row" className={rowTh}>Left out: {GATE[g.id]}</th><td className={td}>{usd(g.usd)}</td><td className={td}>{pct(g.share)}</td></tr>)}
             <tr className="border-b border-grid"><th scope="row" className={rowTh}>Goes to the vote</th><td className={td}>{usd(s.voted.usd)}</td><td className={td}>{pct(s.voted.share)}</td></tr>
-            {s.questions.map((q) => <tr key={q.id} className="border-b border-grid"><th scope="row" className={rowTh}>Fails: {QUESTION[q.id]}</th><td className={td}>{usd(q.usd)}</td><td className={td}>{pct(q.share)}</td></tr>)}
+            {s.questions.map((q) => <tr key={q.id} className="border-b border-grid"><th scope="row" className={rowTh}>Most often given: {QUESTION[q.id]}</th><td className={td}>{usd(q.usd)}</td><td className={td}>{pct(q.share)}</td></tr>)}
             <tr className="border-b border-grid"><th scope="row" className={rowTh}>Passes the screen</th><td className={td}>{usd(s.passes)}</td><td className={td}>{pct(s.share_passes)}</td></tr>
             <tr className="border-b border-grid"><th scope="row" className={rowTh}>All three models pass</th><td className={td}>{usd(s.agreed3)}</td><td className={td}>{pct(s.share_agreed3)}</td></tr>
           </tbody>
@@ -63,8 +63,8 @@ export function ScreenFigure({ c }: { c: CensusIndex }) {
           <ScaleBars label="Payroll left out before the vote" valueWidth="15rem" nameWidth="13rem" rows={s.gates.map((g) => ({ key: g.id, name: GATE[g.id], w: g.w, fill: CUT.physical[0], value: share(g), tip: `${GATE[g.id]}: ${usd(g.usd)}, ${pct(g.share)} of knowledge payroll` }))} />
         </div>
         <div>
-          <div className={step}>Then the vote on the other {usd(s.voted.usd)}: the payroll that fails each question</div>
-          <ScaleBars label="Payroll that fails each of the three questions" valueWidth="15rem" nameWidth="13rem" rows={s.questions.map((q) => ({ key: q.id, name: QUESTION[q.id], w: q.w, fill: CUT.rest[0], value: share(q), tip: `Fails "${QUESTION[q.id]}": ${usd(q.usd)}, ${pct(q.share)} of knowledge payroll` }))} />
+          <div className={step}>Then the vote on the other {usd(s.voted.usd)}: the reason given most often for the payroll that fails, as a share of all knowledge payroll</div>
+          <ScaleBars label="Payroll that fails, by the reason given most often" valueWidth="15rem" nameWidth="13rem" rows={s.questions.map((q) => ({ key: q.id, name: QUESTION[q.id], w: q.w, fill: CUT.rest[0], value: share(q), tip: `Most often given, "${QUESTION[q.id]}": ${usd(q.usd)}, ${pct(q.share)} of knowledge payroll` }))} />
         </div>
         <div>
           <div className={step}>What is left passes</div>
@@ -84,7 +84,7 @@ export function WholeFigure({ c }: { c: CensusIndex }) {
       title="A small part of the knowledge payroll passes the screen"
       note={KIND_LABEL.chart}
       keys={<TickKey />}
-      foot={<p>The strip is the whole {usd(w.payroll)} of knowledge payroll scored. From the census ({c.version}), {SCREEN}. All three models pass {usd(w.agreed3)}, which is {pct(w.share_agreed3)} of the whole. The last part is everything else: mostly work with no existing check that is also slow to judge or costly when wrong, and a small part that is a sign-off a person answers for.</p>}
+      foot={<p>The strip is the whole {usd(w.payroll)} of knowledge payroll scored. From the census ({c.version}), {SCREEN}. All three models pass {usd(w.agreed3)}, which is {pct(w.share_agreed3)} of the whole. The last part is everything else: mostly work with no existing check that is also slow to judge or costly when wrong; work whose most-given reason is a missing check but on which the models split over whether anything else holds it; and a small part that is a sign-off a person answers for.</p>}
       table={
         <table className={tbl}>
           <Head cols={["Part of the knowledge payroll", "Payroll", "Share"]} />
@@ -126,7 +126,7 @@ export function JudgesFigure({ c }: { c: CensusIndex }) {
       title="The payroll that passes depends on which model judges it"
       note={KIND_LABEL.chart}
       keys={<><Key swatch={<Swatch fill="var(--s1)" />}>the rule: two of the three models pass</Key><Key swatch={<Swatch fill="var(--s2)" />}>all three models pass</Key><Key swatch={<Swatch fill="var(--s3)" />}>one model alone</Key></>}
-      foot={<p>Of {usd(c.headline.payroll)} of knowledge payroll scored. From the census ({c.version}), {SCREEN}. The site&apos;s rule counts a task when two of the three models pass it. Each model alone would pass a different amount, which is why the part all three pass is shown beside every total.</p>}
+      foot={<p>Of {usd(c.headline.payroll)} of knowledge payroll scored. From the census ({c.version}), {SCREEN}. The census&apos;s rule counts a task when at least two of the three models pass it. Each model alone would pass a different amount, which is why the part all three pass is shown beside every total.</p>}
       table={
         <table className={tbl}>
           <Head cols={["Who judges", "Payroll that passes"]} />
@@ -146,7 +146,7 @@ export function DialFigure({ c, table }: { c: CensusIndex } & Extra) {
   return (
     <Figure
       id="fig-dial"
-      title="Loosen the rule a step and the payroll that passes grows many times over"
+      title="Each looser step passes more payroll, and the biggest jump comes from letting a person&apos;s judgement count as the check"
       note={KIND_LABEL.chart}
       keys={<><Key swatch={<Swatch fill="var(--s1)" />}>passes at that step of the rule</Key><TickKey /></>}
       foot={<p>Steps run from the strictest rule to the loosest; the step in bold is the rule the census uses. From the census ({c.version}), {SCREEN}. At every step the models vote again, and the part all three pass is marked inside the bar.</p>}
@@ -217,7 +217,7 @@ export function FunctionsFigure({ c, table }: { c: CensusIndex } & Extra) {
       title="In most functions, more work waits on a check than passes"
       note={KIND_LABEL.chart}
       keys={<CutKeys />}
-      foot={<p>Shares of each function&apos;s knowledge payroll, ordered by the share that passes, which is printed beside the name. From the census ({c.version}), {SCREEN}. The tick marks the part all three models pass. Work waiting on a check is quick to judge and cheap to get wrong, but no existing check settles it.</p>}
+      foot={<p>Shares of each function&apos;s knowledge payroll, ordered by the share that passes, which is printed beside the name. From the census ({c.version}), {SCREEN}. The tick marks the part all three models pass. Work waiting only on a check is work at least two of the three models find quick to judge and cheap to get wrong, with no existing check to settle it.</p>}
       table={<div className="flex flex-col gap-6"><CutTable rows={rows} name={(f) => f.function} first="Function" />{table}</div>}
     >
       <CutBars rows={rows} name={(f) => f.function} label="Each function's knowledge payroll, split by what the census screen says of it" />
@@ -233,10 +233,10 @@ export function ScorersFigure({ c }: { c: CensusIndex }) {
   return (
     <Figure
       id="fig-scorers"
-      title="The three models disagree in every function, and by a wide margin"
+      title="In most functions the three models are far apart, and the same model is usually the highest"
       note={KIND_LABEL.chart}
       keys={<>{c.scorers.map((k, i) => <Key key={k} swatch={<Dot i={i} />}>{who(k)} alone</Key>)}<Key swatch={<VoteMark />}>the rule: two of the three pass</Key><Key swatch={<AllThreeMark />}>all three models pass</Key></>}
-      foot={<p>Each mark is a share of the function&apos;s knowledge payroll; the line spans the lowest and the highest model. From the census ({c.version}), {SCREEN}. Each model&apos;s own share is its verdict under the same rule and the same exclusions. The same model re-scoring the same tasks also changed some verdicts, so small gaps between rows are noise.</p>}
+      foot={<p>Each mark is a share of the function&apos;s knowledge payroll; the line spans the lowest and the highest model. From the census ({c.version}), {SCREEN}. Each model&apos;s own share is its verdict under the same rule and the same exclusions. The same model re-scoring the same tasks also changed some verdicts, so small gaps between rows are noise. Where a function&apos;s marks would sit on top of one another, the rule&apos;s share and the share all three pass are printed in type instead of drawn. Where nothing passes, the marks sit together at zero.</p>}
       table={
         <table className={`${tbl} min-w-[40rem]`}>
           <Head cols={["Function", ...c.scorers.map((k) => `${who(k)} alone`), "The rule: two of the three", "All three models pass"]} />
@@ -254,36 +254,26 @@ export function ScorersFigure({ c }: { c: CensusIndex }) {
         rows={s.rows.map((r) => ({
           key: name(r), name: name(r), strong: r.function === null, title: r.ref, lo: r.lo_x, spread: r.spread_w,
           dots: c.scorers.map((k) => ({ x: r.by_scorer[k].x, tip: `${name(r)}: ${who(k)} alone passes ${pct(r.by_scorer[k].share)}` })),
-          vote: { x: r.vote_x, tip: `${name(r)}: the rule passes ${pct(r.share_passes)}` },
-          allThree: { x: r.agreed3_x, tip: `${name(r)}: all three models pass ${pct(r.share_agreed3)}` },
+          vote: r.tight ? undefined : { x: r.vote_x, tip: `${name(r)}: the rule passes ${pct(r.share_passes)}` },
+          allThree: r.tight ? undefined : { x: r.agreed3_x, tip: `${name(r)}: all three models pass ${pct(r.share_agreed3)}` },
+          note: r.note_x === null ? undefined : { x: r.note_x, text: <>rule {pct(r.share_passes)} · all three {pct(r.share_agreed3)}</> },
         }))} />
     </Figure>
   );
 }
 
-// The industries with the most payroll passing, on one dollar axis, each with its share beside it.
-export function IndustriesFigure({ c, table }: { c: CensusIndex } & Extra) {
-  const f = c.figures.industries;
-  return (
-    <Figure
-      id="fig-industries"
-      title="Where the most payroll passes, industry by industry"
-      note={KIND_LABEL.chart}
-      keys={<><Key swatch={<Swatch fill="var(--s1)" />}>payroll that passes the screen</Key><TickKey /><Key swatch={<span className="font-mono text-[11px] text-ink">%</span>}>beside the name, that payroll as a share of all the industry pays</Key></>}
-      foot={<p>The industries with the most payroll passing; the rest are in the table below the figure. From the census ({c.version}), {SCREEN}. A large industry can lead this list with a small share, so the share is printed beside each name; the part all three models pass is marked inside each bar.</p>}
-      table={table}
-    >
-      <ScaleBars label="Payroll that passes the screen in the industries with the most" ticks={f.ticks} nameWidth="19rem"
-        rows={f.rows.map((r) => ({
-          key: r.naics, title: r.ref, w: r.w, tick: r.agreed3_x, tickTip: `All three models pass ${r.agreed3 === null ? "—" : usd(r.agreed3)}`,
-          name: <>{r.title} <span className="whitespace-nowrap font-mono text-[11px] text-muted">{pct(r.share_total)}</span></>,
-          value: <Both passes={r.passes} agreed3={r.agreed3} />, tip: `${both(r.title, r.passes, r.agreed3)}; ${pct(r.share_total)} of the industry's payroll`,
-        }))} />
-    </Figure>
-  );
-}
-
-const SIDE = { r: { dx: 8, dy: 4, textAnchor: "start" }, l: { dx: -8, dy: 4, textAnchor: "end" }, t: { dx: 0, dy: -8, textAnchor: "middle" }, b: { dx: 0, dy: 15, textAnchor: "middle" } } as const;
+// The places a rank label may take around its dot, in pixels; the export picks one (census.LABEL_SIDES, same names).
+// A place in the further ring is tied back to its dot by a short line (`lead`, where the line ends).
+// The export picks a place twice, for the plot's size on a phone and on a desk, and the page shows the one that fits.
+type Side = { dx: number; dy: number; textAnchor: "start" | "middle" | "end"; lead?: [number, number] };
+const SIDE: Record<string, Side> = {
+  r: { dx: 8, dy: 4, textAnchor: "start" }, l: { dx: -8, dy: 4, textAnchor: "end" }, t: { dx: 0, dy: -8, textAnchor: "middle" }, b: { dx: 0, dy: 15, textAnchor: "middle" },
+  tr: { dx: 7, dy: -5, textAnchor: "start" }, tl: { dx: -7, dy: -5, textAnchor: "end" }, br: { dx: 7, dy: 13, textAnchor: "start" }, bl: { dx: -7, dy: 13, textAnchor: "end" },
+  r2: { dx: 18, dy: 4, textAnchor: "start", lead: [15, 0] }, l2: { dx: -18, dy: 4, textAnchor: "end", lead: [-15, 0] },
+  t2: { dx: 0, dy: -19, textAnchor: "middle", lead: [0, -17] }, b2: { dx: 0, dy: 26, textAnchor: "middle", lead: [0, 15] },
+  tr2: { dx: 14, dy: -12, textAnchor: "start", lead: [12, -11] }, tl2: { dx: -14, dy: -12, textAnchor: "end", lead: [-12, -11] },
+  br2: { dx: 14, dy: 20, textAnchor: "start", lead: [12, 11] }, bl2: { dx: -14, dy: 20, textAnchor: "end", lead: [-12, 11] },
+};
 
 // Where a roll-up could start: every industry the list considers, by its two ingredients, with the list's cut drawn.
 export function RollupFigure({ plot, version, table }: { plot: CensusRollupPlot; version: string } & Extra) {
@@ -293,10 +283,10 @@ export function RollupFigure({ plot, version, table }: { plot: CensusRollupPlot;
   return (
     <Figure
       id="fig-rollup"
-      title="The list is the industries that have both: work that passes and small firms to buy"
+      title="The list is the industries where work that passes and small firms to buy multiply highest"
       note={KIND_LABEL.chart}
       keys={<><Key swatch={<span className="inline-block h-2.5 w-2.5 rounded-full bg-ink" />}>on the list, with its rank</Key><Key swatch={<span className="inline-block h-2.5 w-2.5 rounded-full border-[1.5px] border-s3 bg-surface" />}>considered, below the cut</Key><Key swatch={<span className="inline-block w-5 border-t-[1.5px] border-dashed border-ink-2" />}>the cut: the score of the last industry listed</Key></>}
-      foot={<p>Up is more of an industry&apos;s payroll passing; right is more of its employment in small firms; the score is one times the other, so the dashed line is where the list ends. The share that passes is from the census ({version}), {SCREEN}; the part all three models pass is in each mark&apos;s note and the table. Employment in small firms is from the Census Bureau&apos;s Statistics of US Businesses. Only industries that clear the list&apos;s floors are drawn.</p>}
+      foot={<p>Up is more of an industry&apos;s payroll passing; right is more of its employment in small firms; the score is one times the other, so the dashed line is where the list ends. The share that passes is from the census ({version}), {SCREEN}; the part all three models pass is in the table beneath. Employment in small firms is from the Census Bureau&apos;s Statistics of US Businesses. Only industries that clear the list&apos;s floors are drawn. Industries just either side of the line are not meaningfully apart.</p>}
       tableLabel="The numbers, and every industry drawn"
       table={
         <div className="flex flex-col gap-6">
@@ -312,15 +302,27 @@ export function RollupFigure({ plot, version, table }: { plot: CensusRollupPlot;
         </div>
       }
     >
-      <Plot x={plot.x.ticks} y={{ ...plot.y, unit: "Share of the industry's payroll that passes the screen" }} label="Industries by the share of payroll that passes and the share of employment in small firms" tall>
+      <Plot x={plot.x.ticks} y={{ ...plot.y, unit: "Share of payroll that passes the screen" }} label="Industries by the share of payroll that passes and the share of employment in small firms" tall>
         <PlotLine points={plot.cut_points} />
         <Marks>
           {plot.points.filter((p) => !p.listed).map((p) => <Mark key={p.naics} p={{ x: p.x, y: p.y, href: null }} tip={tip(p)} stop={false} hollow r={3.5} stroke="var(--s3)" />)}
           {listed.map((p) => <Mark key={p.naics} p={{ x: p.x, y: p.y, href: `#naics-${p.naics}` }} tip={tip(p)} stop={p.rank === 1} r={4.5} />)}
         </Marks>
-        {listed.map((p) => <text key={p.naics} x={`${p.x}%`} y={`${p.y}%`} {...SIDE[p.label ?? "r"]} aria-hidden className="pointer-events-none fill-ink font-mono text-[10.5px] font-medium" style={{ paintOrder: "stroke", stroke: "var(--surface)", strokeWidth: 3 }}>{p.rank}</text>)}
+        {([["md:hidden", (p) => p.label], ["max-md:hidden", (p) => p.label_wide]] as [string, (p: (typeof listed)[number]) => string | undefined][]).map(([show, place]) => (
+          <g key={show} className={show} aria-hidden>
+            {listed.map((p) => {
+              const { lead, ...at } = SIDE[place(p) ?? "r"];
+              return (
+                <svg key={p.naics} x={`${p.x}%`} y={`${p.y}%`} overflow="visible" className="pointer-events-none">
+                  {lead ? <line x1={0} y1={0} x2={lead[0]} y2={lead[1]} stroke="var(--ink)" strokeWidth={0.75} /> : null}
+                  <text {...at} className="fill-ink font-mono text-[10.5px] font-medium" style={{ paintOrder: "stroke", stroke: "var(--surface)", strokeWidth: 3 }}>{p.rank}</text>
+                </svg>
+              );
+            })}
+          </g>
+        ))}
       </Plot>
-      <div className="mt-1 text-center font-mono text-[11px] text-muted">Share of the industry&apos;s employment in small firms</div>
+      <div className="mt-1 text-center font-mono text-[11px] text-muted">Share of employment in small firms</div>
       <ol className="mt-4 grid grid-cols-1 gap-x-6 gap-y-0.5 text-[12.5px] leading-snug text-ink-2 sm:grid-cols-2">
         {listed.map((p) => <li key={p.naics} className="flex gap-2"><span className="w-5 shrink-0 text-right font-mono text-[11px] text-ink">{p.rank}</span><span>{p.title}</span></li>)}
       </ol>

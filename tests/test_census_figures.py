@@ -186,6 +186,7 @@ def test_the_rollup_plot_places_every_industry_inside_the_plot_and_draws_the_cut
     assert p["points"][0]["y"] < p["points"][3]["y"] and p["points"][2]["x"] > p["points"][4]["x"]  # up is more passing, right is more small firms
     assert len(p["cut"]) > 10 and p["cut_points"] == " ".join(f"{c['x']},{c['y']}" for c in p["cut"])
     assert [pt.get("label") in census.LABEL_SIDES for pt in p["points"]] == [True, True, True, False, False]  # a side for each rank
+    assert all(pt.get("label_wide") in census.LABEL_SIDES for pt in p["points"][:3])
     xs = [c["x"] for c in p["cut"]]
     assert xs == sorted(xs)
     assert p["x"]["ticks"] and p["y"]["ticks"] and p["y"]["chars"] >= 2
@@ -193,22 +194,24 @@ def test_the_rollup_plot_places_every_industry_inside_the_plot_and_draws_the_cut
 
 
 def test_rank_labels_in_a_crowd_take_a_further_place_before_they_cover_a_dot_or_each_other():
-    # five listed industries in a knot (as ranks fifteen to nineteen sit on the real plot) and a pair side by side
-    spots = [(0.60, 0.050), (0.61, 0.048), (0.62, 0.052), (0.63, 0.047), (0.615, 0.054), (0.30, 0.10), (0.33, 0.10), (0.95, 0.15), (0.05, 0.01)]
+    # five listed industries in a knot (spaced as the knot on the plot when this was written) and a pair side by side
+    spots = [(0.64, 0.0541), (0.63, 0.0504), (0.64, 0.0471), (0.668, 0.045), (0.577, 0.0492), (0.30, 0.10), (0.33, 0.10), (0.95, 0.15), (0.05, 0.01)]
     ranked = [
         {"naics": f"5{i:03d}00", "title": f"Industry {i}", "ref": f"r{i}", "rank": i + 1, "share_total": s, "passes": 1e9, "score": s * f,
          "small_share": {"value": f, "derived_id": "d", "obs_ids": ["o"]}, "firms_20_99": {"value": 500.0, "obs_ids": ["f"]}}
         for i, (f, s) in enumerate(spots)
     ]  # fmt: skip
     pts = census.rollup_plot(ranked, shown=len(spots))["points"]
-    boxes = [census.label_box(p) for p in pts]
-    dots = [census.dot_box(p) for p in pts]
     hit = lambda a, b: a[0] < b[0] + b[2] and b[0] < a[0] + a[2] and a[1] < b[1] + b[3] and b[1] < a[1] + a[3]  # noqa: E731
-    for i, a in enumerate(boxes):
-        assert 0 <= a[0] and a[0] + a[2] <= 100 and 0 <= a[1], pts[i]  # inside the plot
-        assert not any(hit(a, b) for b in boxes[i + 1 :]), pts[i]
-        assert not any(hit(a, d) for j, d in enumerate(dots) if j != i), pts[i]
-    assert {p["label"] for p in pts} - {"r", "l", "t", "b"}  # the knot needed more than the four nearest places
+    for key in ("label", "label_wide"):  # a pixel is a different share of the plot on a phone and on a desk
+        boxes = [census.label_box(p, key) for p in pts]
+        dots = [census.dot_box(p, key) for p in pts]
+        for i, a in enumerate(boxes):
+            assert 0 <= a[0] and a[0] + a[2] <= 100 and 0 <= a[1], pts[i]  # inside the plot
+            assert not any(hit(a, b) for b in boxes[i + 1 :]), (key, pts[i])
+            assert not any(hit(a, d) for j, d in enumerate(dots) if j != i), (key, pts[i])
+    assert {p["label"] for p in pts} - {"r", "l", "t", "b"}  # on a phone the knot needs more than the four nearest places
+    assert "p.label_wide" in FIGURES and "md:hidden" in FIGURES
     assert all(f"{k}:" in FIGURES or f'"{k}":' in FIGURES for k in census.LABEL_SIDES)  # the page knows how to draw each place
 
 

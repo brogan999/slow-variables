@@ -52,10 +52,10 @@ export function Dot({ i }: { i: number }) {
 export const VoteMark = () => <span className="inline-block h-4 w-[3px] bg-ink" />;
 export const AllThreeMark = () => <span className="inline-block h-2 w-2 border-[1.5px] border-ink bg-surface" />;
 
-export type DotRow = { key: string; name: string; strong?: boolean; title?: string; lo: number; spread: number; dots: { x: number; tip: string }[]; vote: { x: number; tip: string }; allThree: { x: number; tip: string } };
+export type DotRow = { key: string; name: string; strong?: boolean; title?: string; lo: number; spread: number; dots: { x: number; tip: string }[]; vote?: { x: number; tip: string }; allThree?: { x: number; tip: string }; note?: { x: number; text: React.ReactNode } };
 
 // One line per row on a shared scale: each judge's own reading as a dot, the span between them, the vote and the
-// part all three pass as ticks.
+// part all three pass as ticks. A row whose marks would stack carries those two in type (`note`) instead.
 export function DotRows({ rows, ticks, label }: { rows: DotRow[]; ticks: ScaleTick[]; label: string }) {
   return (
     <div role="group" aria-label={label} className="flex flex-col gap-2 md:gap-1" style={{ "--namew": "11rem", "--valuew": "0rem" } as React.CSSProperties}>
@@ -65,9 +65,10 @@ export function DotRows({ rows, ticks, label }: { rows: DotRow[]; ticks: ScaleTi
           <div className="relative mx-1.5 h-5">
             <Rules ticks={ticks} />
             <span aria-hidden className="absolute top-1/2 h-px -translate-y-1/2 bg-ink-2" style={{ left: `${r.lo}%`, width: `${r.spread}%` }} />
-            <span title={r.allThree.tip} className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 leading-[0]" style={{ left: `${r.allThree.x}%` }}><AllThreeMark /></span>
+            {r.allThree ? <span title={r.allThree.tip} className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 leading-[0]" style={{ left: `${r.allThree.x}%` }}><AllThreeMark /></span> : null}
             {r.dots.map((d, i) => <span key={i} title={d.tip} className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 leading-[0]" style={{ left: `${d.x}%` }}><Dot i={i} /></span>)}
-            <span title={r.vote.tip} className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 leading-[0]" style={{ left: `${r.vote.x}%` }}><VoteMark /></span>
+            {r.vote ? <span title={r.vote.tip} className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 leading-[0]" style={{ left: `${r.vote.x}%` }}><VoteMark /></span> : null}
+            {r.note ? <span className="absolute top-1/2 -translate-y-1/2 whitespace-nowrap bg-surface px-1 py-1 font-mono text-[11px] leading-none text-ink-2 tabular-nums" style={{ left: `${r.note.x}%` }}>{r.note.text}</span> : null}
           </div>
           <div className="max-md:hidden" />
         </div>
