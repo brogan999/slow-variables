@@ -1003,7 +1003,9 @@ class Store:
                 o["subject"].removeprefix("naics_"): o
                 for o in self.observations("census_susb.*.firms_20_99.a")
             }
-            _write(out / "census" / "rollup.json", census.rollup(index, small, firms))
+            ranked = census.rollup(index, small, firms, limit=len(index["industries"]))
+            _write(out / "census" / "rollup.json", ranked[:20])
+            _write(out / "census" / "rollup_plot.json", census.rollup_plot(ranked))
             names = {e.id: e.name for e in self.seed.entities}
             deals = {o["series_key"]: o for o in self.observations("rollup_acq.*.*.pt")}
             spec = census.load()

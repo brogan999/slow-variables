@@ -103,7 +103,7 @@ export function ShapesPlate({ doc }: { doc: FirmDoc }) {
   );
 }
 
-const CUT = { passes: ["var(--s1)", "passes the screen"], waits_on_check: ["var(--tight-2)", "waits only on a check"], physical: ["var(--s2)", "needs a body"], rest: ["var(--s3)", "held for more than a missing check"] } as const;
+export const CUT = { passes: ["var(--s1)", "passes the screen"], waits_on_check: ["var(--tight-2)", "waits only on a check"], physical: ["var(--s2)", "needs a body"], rest: ["var(--s3)", "held for more than a missing check"] } as const;
 
 // The census by kind of job, best paid first, as stacked bars; the table is folded beneath. Every share is the
 // bundle's, summed and laid out by the export.

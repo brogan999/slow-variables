@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { ArticleLayout, MarginPanel } from "@/components/ArticleLayout";
-import { Figure } from "@/components/Figure";
+import { DialFigure, FunctionsFigure, JudgesFigure, KindsFigure, RollupFigure, ScorersFigure, ScreenFigure, WholeFigure } from "@/components/CensusFigures";
 import { PageHeader } from "@/components/PageHeader";
-import { census, censusRollup, censusTrades, type CensusIndex, type CensusRollup } from "@/lib/data";
+import { census, censusRollup, censusRollupPlot, censusTrades, type CensusIndex, type CensusRollup } from "@/lib/data";
 import { fmt } from "@/lib/format";
 
 export const metadata = { title: "The automatability census", description: "Which knowledge work passes a structural hand-over screen, task by task, role by role and industry by industry, with the part all three scoring models pass beside every total." };
@@ -37,15 +37,15 @@ function Rows<T>({ head, rows, row, label }: { head: string[]; rows: T[]; row: (
   );
 }
 
-const industryHead = ["Industry (code)", "Payroll, all workers", "Passes the screen", "All three pass", "Share of payroll", "Waiting on a check"];
+const industryHead = ["Industry (code)", "Payroll, all workers", "Passes the screen", "All three pass", "Share of payroll", "Waits only on a check"];
 const industryRow = (i: CensusIndex["industries"][number]) => (
-  <tr key={i.naics} id={`naics-${i.naics}`}><th scope="row">{i.title} <span className="text-muted font-mono text-[11px]">{i.naics}</span></th><td className="tabular-nums">{usd(i.payroll)}</td><td className="tabular-nums">{usd(i.passes)}</td><td className="tabular-nums"><A3 v={i.agreed3} /></td><td className="tabular-nums">{fmt(i.share_total, "share")}</td><td className="tabular-nums">{usd(i.blocked_by_missing_check)}</td></tr>
+  <tr key={i.naics} id={`naics-${i.naics}`} title={i.ref}><th scope="row">{i.title} <span className="text-muted font-mono text-[11px]">{i.naics}</span></th><td className="tabular-nums">{usd(i.payroll)}</td><td className="tabular-nums">{usd(i.passes)}</td><td className="tabular-nums"><A3 v={i.agreed3} /></td><td className="tabular-nums">{fmt(i.share_total, "share")}</td><td className="tabular-nums">{usd(i.blocked_by_missing_check)}</td></tr>
 );
 
 const OUTCOME = (p: boolean | null) => (p === true ? "passed" : p === false ? "failed" : "—"); // null: pending or descriptive; its result says which
 const WHEN = { pre17: "Set before the first scores (17 September)", pre24: "Set before this version's scores (24 September)", post: "Found after seeing the data" } as const;
 
-function Method({ c }: { c: CensusIndex }) {
+function Method({ c, gate }: { c: CensusIndex; gate: Record<string, number> }) {
   const m = c.method;
   const n = c.prose.method_notes;
   const who = (k: string) => c.scorer_names[k] ?? k;
@@ -76,6 +76,7 @@ function Method({ c }: { c: CensusIndex }) {
       </div>
       <div>
         <h3 className="font-medium mb-2">Each model alone, and the same model twice</h3>
+        <div className="mb-4"><ScorersFigure c={c} /></div>
         <Rows head={["Model", "Payroll it alone would pass"]} rows={c.scorers} row={(k) => <tr key={k}><th scope="row">{who(k)}</th><td className="tabular-nums">{usd(m.by_scorer[k].passes_usd)}</td></tr>} />
         <p className="text-sm text-ink-2 mt-2 max-w-[66ch]">{n.rescore} {who(m.rescore_stability.scorer)} re-scored {fmt(m.rescore_stability.n_tasks, "count")} tasks and changed {fmt(m.rescore_stability.share_verdicts_changed, "share")} of its verdicts.</p>
       </div>
@@ -105,7 +106,7 @@ function Method({ c }: { c: CensusIndex }) {
       </div>
       <div>
         <h3 className="font-medium mb-2">The physical-work filter, checked both ways</h3>
-        <p className="text-sm text-ink-2 max-w-[66ch]">Work that needs a body was removed before the vote: {usd(m.physical_gate.removed_usd)} of payroll. A spot check by {who("gemini")} of {fmt(sc.removed.draws, "count")} removed tasks found {fmt(sc.removed.error_rate, "share")} were really desk work (a ninety-five percent interval of {interval(sc.removed.ci95)}), so the payroll that passes may be {usd(sc.removed.effect_usd[0])} to {usd(sc.removed.effect_usd[2])} too low. The same check of {fmt(sc.kept.draws, "count")} kept tasks found {fmt(sc.kept.wrong, "count")} that were really physical (an interval of {interval(sc.kept.ci95)}), so the payroll that passes may also be up to {usd(sc.kept.effect_usd[2])} too high. The filter counts talking with people in person as desk work, which neither check can measure.</p>
+        <p className="text-sm text-ink-2 max-w-[66ch]">Work that needs a body is left out whatever the vote says: {usd(gate.physical)} of payroll. Most of it would have failed the vote anyway; the filter changed the verdict on {usd(m.physical_gate.removed_usd)}, the payroll the vote would otherwise have passed. A spot check by {who("gemini")} of {fmt(sc.removed.draws, "count")} tasks drawn from that part found {fmt(sc.removed.error_rate, "share")} were really desk work (a ninety-five percent interval of {interval(sc.removed.ci95)}), so the payroll that passes may be {usd(sc.removed.effect_usd[0])} to {usd(sc.removed.effect_usd[2])} too low. The same check of {fmt(sc.kept.draws, "count")} kept tasks found {fmt(sc.kept.wrong, "count")} that were really physical (an interval of {interval(sc.kept.ci95)}), so the payroll that passes may also be up to {usd(sc.kept.effect_usd[2])} too high. The filter counts talking with people in person as desk work, which neither check can measure.</p>
       </div>
       <div>
         <h3 className="font-medium mb-2">Modelled, not measured: what the remaining work costs</h3>
@@ -125,6 +126,7 @@ export default function CensusPage() {
   const s = c.prose.sections;
   const h = c.headline;
   const fns = c.functions.map((f) => f.function);
+  const gate = Object.fromEntries(c.figures.screen.gates.map((g) => [g.id, g.usd]));
   return (
     <ArticleLayout
       head={<PageHeader eyebrow={`Census · version ${c.version}`} title={c.prose.title} lede={c.prose.lede} />}
@@ -137,9 +139,11 @@ export default function CensusPage() {
             ...c.scorers.map((k) => [`${c.scorer_names[k]} alone would pass`, usd(h.by_scorer[k])] as [string, string]),
             ["Agreement across the three models (Fleiss κ: one is perfect, zero is chance)", fmt(h.fleiss_kappa)],
             ["Verdicts that changed when the same model re-scored", fmt(h.rescore_changed, "share")],
-            ["Waiting on a check", usd(h.blocked_by_missing_check)],
-            ["Removed as physical work", usd(h.physical_removed)],
-            ["Removed as an accountable sign-off", usd(h.accountable_removed)],
+            ["Waits only on a check: at least two of the three models find it quick to judge and cheap to get wrong, with no existing check", usd(h.blocked_by_missing_check)],
+            ["Left out as physical work", usd(gate.physical)],
+            ["Of that, payroll the vote would otherwise have passed", usd(h.physical_removed)],
+            ["Left out as an accountable sign-off, and not physical", usd(gate.accountable)],
+            ["Of that, payroll the vote would otherwise have passed", usd(h.accountable_removed)],
             ["Modelled saving (modelled, not measured: passing is not saving)", usd(h.modelled_saving)],
           ]} />
           <MarginPanel title="Instrument">
@@ -157,35 +161,18 @@ export default function CensusPage() {
           <p>{c.prose.agreed}</p>
         </div>
 
-        {c.figure ? (
-          <Figure title="Knowledge payroll that passes the hand-over screen, by who judges it" note={`of ${usd(h.payroll)} scored · version ${c.version}`}
-            foot={<p>The site&apos;s rule counts a task when two of the three models pass it. Each model alone would pass a different amount, which is why the part all three pass is shown beside every total.</p>}>
-            <div className="flex flex-col gap-2.5">
-              {c.figure.bars.map((b) => (
-                <div key={b.id} className="grid grid-cols-1 gap-1 md:grid-cols-[16rem_1fr] md:items-center md:gap-3">
-                  <span className={`text-sm ${b.id === "rule" ? "font-semibold text-ink" : "text-ink-2"}`}>{b.label}</span>
-                  <div className="flex items-center gap-2">
-                    <div className="relative h-4 flex-1 bg-surface-2" aria-hidden>
-                      <div className={`absolute inset-y-0 left-0 ${b.id === "rule" ? "bg-ink" : b.id === "agreed3" ? "bg-s2" : "bg-s3"}`} style={{ width: `${b.width}%` }} />
-                    </div>
-                    <span className="num w-16 text-right text-sm">{usd(b.usd)}</span>
-                  </div>
-                </div>
-              ))}
-              <div className="relative mr-[4.5rem] h-5 md:ml-[16.75rem]" aria-hidden>
-                {c.figure.ticks.map((t) => <span key={t.label} className="absolute top-0 -translate-x-1/2 font-mono text-[11px] text-muted" style={{ left: `${t.left}%` }}>{t.label}</span>)}
-              </div>
-            </div>
-          </Figure>
-        ) : null}
+        <WholeFigure c={c} />
+        <ScreenFigure c={c} />
+        <JudgesFigure c={c} />
 
         <Section id="dial" n="The rule" title={s.dial.title} lede={s.dial.lede}>
-          <Rows head={["Rule", "Passes the screen", "All three pass"]} rows={c.dial} row={(d) => (
-            <tr key={d.rule} className={d.headline ? "bg-surface-2" : undefined}><th scope="row">{d.rule}{d.label ? <span className={d.headline ? "block font-medium text-ink" : "block text-muted"}>{d.label}</span> : null}</th><td className="tabular-nums">{usd(d.passes)}</td><td className="tabular-nums">{usd(d.agreed3)}</td></tr>
-          )} />
+          <DialFigure c={c} table={<Rows head={["Rule", "Passes the screen", "All three pass"]} rows={c.dial} row={(d) => (
+            <tr key={d.rule} title={d.ref} className={d.headline ? "bg-surface-2" : undefined}><th scope="row">{d.rule}{d.label ? <span className={d.headline ? "block font-medium text-ink" : "block text-muted"}>{d.label}</span> : null}</th><td className="tabular-nums">{usd(d.passes)}</td><td className="tabular-nums">{usd(d.agreed3)}</td></tr>
+          )} />} />
         </Section>
 
         <Section id="roles" n="Part I · roles" title={s.roles.title} lede={s.roles.lede}>
+          <KindsFigure c={c} />
           <div className="flex flex-col gap-2">
             {fns.map((fn) => (
               <details key={fn} className="panel px-4 py-3">
@@ -199,9 +186,9 @@ export default function CensusPage() {
         </Section>
 
         <Section id="functions" n="Part II · functions" title={s.functions.title} lede={s.functions.lede}>
-          <Rows head={["Function", "Knowledge payroll", "Passes the screen", "All three pass", "Share that passes (stricter and looser rules)", "Waiting on a check"]} rows={c.functions} row={(f) => (
-            <tr key={f.function}><th scope="row">{f.function}</th><td className="tabular-nums">{usd(f.payroll)}</td><td className="tabular-nums">{usd(f.passes)}</td><td className="tabular-nums"><A3 v={f.agreed3} /></td><td className="tabular-nums">{fmt(f.share_passes, "share")} <span className="text-muted">({rules(f.rule_strict, f.rule_loose)})</span></td><td className="tabular-nums">{usd(f.blocked_by_missing_check)}</td></tr>
-          )} />
+          <FunctionsFigure c={c} table={<Rows head={["Function", "Knowledge payroll", "Passes the screen", "All three pass", "Share that passes (stricter and looser rules)", "Waits only on a check"]} rows={c.functions} row={(f) => (
+            <tr key={f.function} title={f.ref}><th scope="row">{f.function}</th><td className="tabular-nums">{usd(f.payroll)}</td><td className="tabular-nums">{usd(f.passes)}</td><td className="tabular-nums"><A3 v={f.agreed3} /></td><td className="tabular-nums">{fmt(f.share_passes, "share")} <span className="text-muted">({rules(f.rule_strict, f.rule_loose)})</span></td><td className="tabular-nums">{usd(f.blocked_by_missing_check)}</td></tr>
+          )} />} />
         </Section>
 
         <Section id="industries" n="Part III · industries" title={s.industries.title} lede={s.industries.lede}>
@@ -213,7 +200,7 @@ export default function CensusPage() {
         </Section>
 
         <Section id="rollups" n="Part III · where a rollup could start" title="Industries with work to hand over and firms to buy" lede="A rollup buys many small, owner-run firms in one industry and runs them together. It needs two things: work that passes the hand-over screen, so owning the firms keeps a saving, and many firms small enough to buy. This list ranks industries by the share of their payroll that passes, times the share of their employment in firms under five hundred staff (from the Census Bureau's Statistics of US Businesses). It leaves out industries with fewer than two hundred firms of twenty to ninety-nine staff, or under half a billion dollars of payroll passing, and nonprofits and government, which are not for sale. It is a place to start looking, not a verdict: it does not say whether an owner keeps the saving or passes it to customers.">
-          <Rows<CensusRollup>
+          <RollupFigure plot={censusRollupPlot()} version={c.version} table={<Rows<CensusRollup>
             head={["#", "Industry", "Payroll that passes", "Employment in firms under 500 staff", "Firms with 20–99 staff"]}
             rows={rollups}
             label="Industries ranked for a rollup"
@@ -226,7 +213,7 @@ export default function CensusPage() {
                 <td className="num"><Link href={`/series/census_susb.naics_${r.naics.slice(0, 4)}.firms_20_99.a#${r.firms_20_99.obs_ids[0]}`} className={link}>{fmt(r.firms_20_99.value, "count")}</Link></td>
               </tr>
             )}
-          />
+          />} />
         </Section>
 
         <Section id="deals" n="Part IV · businesses" title={s.deals.title} lede={s.deals.lede}>
@@ -282,7 +269,7 @@ export default function CensusPage() {
         </Section>
 
         <Section id="method" n="Method" title={s.method.title} lede={s.method.lede}>
-          <Method c={c} />
+          <Method c={c} gate={gate} />
         </Section>
 
         <section aria-labelledby="caveats-h" className="flex flex-col gap-3">
