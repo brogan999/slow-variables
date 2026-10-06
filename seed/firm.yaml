@@ -24,6 +24,9 @@ regimes:
   title: When to rent intelligence, and when to own it
   note: This site's reading of the writers cited on this page. It is a judgement, and no row has a test of its own; the last row rests on no source and is the weakest.
   columns: ["What is scarce in the firm's work", An example, Rent or own, Who wins]
+  # where each row sits on the line from renting to owning, in row order: rent, both or own
+  places: [rent, own, own, both, own, own, own]
+  places_note: Most firms sit in the first row. The rows are the cases in which this site judges owning wins; they are fewer firms than the first row holds.
   rows:
     - ["Nothing the firm alone can see, and a cheap check exists", "Answering routine customer queries; keeping the books", "Rent by the token, from more than one seller", "The firm's customers, once rivals rent the same; and whoever pools many firms' results"]
     - ["A signal only this firm senses", "A fleet of driverless cars; a ring that reads its wearer's body (both among Soren Larson's examples)", "Own the sensors and the model trained on what they read", "The owner-operator, for as long as the signal stays its own"]
@@ -33,49 +36,58 @@ regimes:
     - ["The frontier itself", "Training the most capable model", "Own", "The labs, for as long as their lead lasts"]
     - ["Use so heavy and steady that paying by the token costs more than running machines", "A service that calls a model at every step for every user", "Run an open model on owned or leased chips", "The firm, and the owners of chips and power"]
 
-# The plate in the folio on the firm's shape: the shapes writers have argued for. Each row names its sources, which the
+# The plate in the folio on the firm's shape: the shapes writers have argued for. `drawn` sketches each as three
+# layers of people (top, middle, base), each by a word for how it compares with a pyramid today; a sketch of the
+# hypothesis, not a measurement. Each row names its sources, which the
 # page prints by number. A row is someone else's hypothesis in this site's words, not a reading.
 shapes:
   title: Shapes the firm might take, and who argues each
   note: Each row is its authors' hypothesis in this site's words. None is tested here, and several come from people who sell AI or advise on it; the sources say who.
   rows:
     - shape: A pyramid emptied from the bottom
+      drawn: [same, thinner, gone]
       who: Luke Drago and Rudolf Laine; Dario Amodei warns of its first step
       goes_first: Entry-level hiring, then junior roles
       stays: The executives longest; at a few firms nobody
       would_show: Young workers' hiring falling in the jobs most exposed to AI while managers' numbers hold
       sources: [drago_laine_pyramid, amodei_adolescence, canaries]
     - shape: A flatter firm, with the middle taken out
+      drawn: [same, gone, same]
       who: Jack Dorsey and Roelof Botha argue it; Michael Ewens and Xavier Giroud measure flatter firms and do not say which layer goes
       goes_first: Managers whose work is passing information along
       stays: People who do the work, and people answerable for a result
       would_show: Fewer layers at firms that adopt AI than at similar firms that do not
       sources: [dorsey_botha, ewens_giroud]
     - shape: A pyramid that stops training
+      drawn: [same, same, much_thinner]
       who: Luis Garicano
       goes_first: The routine work by which juniors paid for their training
       stays: Seniors, each overseeing more; later, too few of them
       would_show: Firms hiring fewer trainees and paying more for experienced staff
       sources: [garicano_becker]
     - shape: More managers, not fewer
+      drawn: [same, wider, thinner]
       who: Luis Garicano; Julia Shin and Sandra Sucher report the middle loaded with checking, not enlarged
       goes_first: Jobs made of a single task
       stays: Whoever holds the right to decide, and whoever checks the machine's work
       would_show: The share of managers and reviewers rising at firms that adopt AI
       sources: [garicano_task, shin_sucher_middle]
     - shape: A very small firm directing many agents
+      drawn: [same, gone, gone]
       who: Sam Altman, in a remark Fortune reported; Ethan Mollick reports agents organising themselves and says it could mean more work for people
       goes_first: On Altman's remark, most hired staff
       stays: A founder or a few people who set the task and judge the result
       would_show: Large companies with a handful of employees becoming common
       sources: [altman_one_person, mollick_swarm]
     - shape: A firm of copies of its best worker
+      drawn: [much_thinner, gone, gone]
       who: Dwarkesh Patel and his co-authors, who put their own confidence low
       goes_first: By assumption every human worker; what they add is that copies need no hand-offs
       stays: Many copies of a few models, and the market as the test of their work
       would_show: Firms growing very large without adding layers
       sources: [patel]
     - shape: A firm that no person owns or controls
+      drawn: [gone, same, same]
       who: Shawn Bayern; Lynn LoPucki, who accepts it can be done and warns against it
       goes_first: The human owners and whoever controlled the firm; it may still hire people
       stays: A legal entity that follows a program

@@ -18,7 +18,8 @@ from .outlook import STATES, TOKEN, _numbered, essay_problems
 ROOT = Path(__file__).resolve().parents[2]
 SPEC = ROOT / "seed" / "firm.yaml"
 ESSAY = ROOT / "docs" / "argument" / "firm.md"
-PLATES = ("regimes", "shapes", "jobs")
+PLATES = ("regimes", "shapes", "jobs", "anatomy")
+GLYPH = (("top", 40.0), ("middle", 70.0), ("base", 100.0))  # a pyramid today, as three layers of people
 AGAINST = ("leans_false", "likely_false")
 FIGURE = re.compile(r"\d")
 
@@ -30,10 +31,11 @@ def load() -> dict[str, Any]:
 def strings(spec: dict[str, Any]) -> list[str]:
     """The page's own words outside the essay, for the tests that keep figures out."""
     r, sh, fi = spec.get("regimes") or {}, spec.get("shapes") or {}, spec.get("fiction") or {}
+    r_note = [r.get("places_note", "")]
     shapes = [row.get(k, "") for row in sh.get("rows") or [] for k in ("shape", "who", "goes_first", "stays", "would_show")]
     fiction = [w.get(k, "") for w in fi.get("works") or [] for k in ("author", "title", "shape", "picture")]
     plates = [sh.get("title", ""), sh.get("note", ""), *shapes, fi.get("label", ""), fi.get("note", ""), *fiction]
-    return [r.get("title", ""), r.get("note", ""), *(r.get("columns") or []), *(c for row in r.get("rows") or [] for c in row), *plates]
+    return [r.get("title", ""), r.get("note", ""), *(r.get("columns") or []), *(c for row in r.get("rows") or [] for c in row), *r_note, *plates]
 
 
 def _folio_words(essay: str) -> set[str]:
@@ -71,10 +73,22 @@ def problems(spec: dict[str, Any], outlook: dict[str, Any], leans: dict[str, Any
         if not row.get("sources"):
             errors.append(f"firm: shape '{row.get('shape')}' credits no source")
         errors += [f"firm: shape '{row.get('shape')}' names unknown source {x}" for x in row.get("sources") or [] if x not in sources]
+    r = spec.get("regimes") or {}
+    if r.get("places") and (len(r["places"]) != len(r.get("rows") or []) or not set(r["places"]) <= {"rent", "both", "own"}):
+        errors.append("firm: the regimes plate must place every row at rent, both or own")
     if spec.get("fiction") and "not evidence" not in spec["fiction"].get("label", ""):
         errors.append("firm: the fiction lane must be labelled as not evidence")
     errors += [f"firm: the page types a figure: {t[:40]}" for t in strings(spec) if FIGURE.search(t)]
     return errors
+
+
+def _shapes(shapes: dict[str, Any]) -> dict[str, Any]:
+    """Each shape's sketch laid out: a layer's width is today's pyramid scaled by the drawing rule for its word."""
+    from .firm_kinds import DRAWN
+
+    rows = [{**r, "glyph": [{"id": i, "word": w, "w": min(100.0, base * DRAWN[w])} for (i, base), w in zip(GLYPH, r["drawn"])]} if r.get("drawn") else r
+            for r in shapes.get("rows") or []]
+    return {**shapes, "rows": rows} if shapes else {}
 
 
 def build(spec: dict[str, Any], outlook: dict[str, Any], essay: str, census_cut: dict[str, Any] | None = None) -> dict[str, Any]:
@@ -104,7 +118,7 @@ def build(spec: dict[str, Any], outlook: dict[str, Any], essay: str, census_cut:
         "tally": {k: sum(1 for c in claims if c["state"] == k) for k in STATES},
         "folios": spec.get("folios") or {},
         "regimes": spec.get("regimes") or {},
-        "shapes": spec.get("shapes") or {},
+        "shapes": _shapes(spec.get("shapes") or {}),
         "fiction": spec.get("fiction") or {},
         "census_cut": census_cut or {},
     }

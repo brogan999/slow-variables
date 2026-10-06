@@ -270,15 +270,40 @@ export type Shifts = { grounded_in: string[]; places: Place[]; foot_claims: { id
 export const outlook = () => read<OutlookDoc>("outlook.json");
 // The part of the outlook's ledger a page argues from: /firm carries its own cut of it (firm.json).
 export type ClaimsDoc = Pick<OutlookDoc, "as_of" | "essay" | "facts" | "sources" | "positions" | "claims" | "tally" | "tests">;
-export type FirmShape = { shape: string; who: string; goes_first: string; stays: string; would_show: string; sources: string[] };
-export type FirmCutGroup = { code: string; name: string; ref: string; roles: number; payroll: number; share_passes: number; share_agreed3: number; share_waits_on_check: number; share_physical: number; share_rest: number };
+export type FirmShape = { shape: string; who: string; goes_first: string; stays: string; would_show: string; sources: string[]; glyph?: { id: "top" | "middle" | "base"; word: string; w: number }[] };
+export type FirmCutGroup = { code: string; name: string; ref: string; roles: number; payroll: number; agreed3_x: number; bar: { part: "passes" | "waits_on_check" | "physical" | "rest"; x: number; w: number }[]; share_passes: number; share_agreed3: number; share_waits_on_check: number; share_physical: number; share_rest: number };
 export type FirmDoc = ClaimsDoc & {
-  folios: Record<string, string[]>; regimes: { title: string; note: string; columns: string[]; rows: string[][] };
+  folios: Record<string, string[]>; regimes: { title: string; note: string; columns: string[]; rows: string[][]; places: ("rent" | "both" | "own")[]; places_note: string };
   shapes: { title: string; note: string; rows: FirmShape[] };
   fiction: { label: string; note: string; works: { author: string; title: string; year: number; picture: string; shape: string }[] };
   census_cut: { version: string; groups: FirmCutGroup[] };
 };
 export const firm = () => read<FirmDoc>("firm.json");
+export type KindPart = "passes" | "waits_on_check" | "needs_body" | "held" | "outside";
+export type KindTier = "managers" | "professionals" | "sales" | "support";
+export type KindStage = "now" | "next" | "later";
+export type FirmKind = {
+  id: string; name: string; naics: string[]; titles: string[]; refs: string[]; payroll: number; knowledge_payroll: number;
+  share_passes: number; share_agreed3: number; share_waits_on_check: number; share_needs_body: number; share_held: number; share_outside: number; share_checkable: number;
+  bar: { part: KindPart; x: number; w: number }[]; agreed_w: number;
+  tiers: { id: KindTier; share: number; share_passes: number; share_agreed3: number; w: number; pass_w: number; agreed_w: number }[];
+  staged: { stage: KindStage; judged: boolean; tiers: { id: KindTier; w: number; inner?: number; was?: number; word?: string }[] }[];
+  place: { x: number };
+  rollups: { buyers: number; deals: number; obs_ids: string[]; trade: string; buyers_w: number; deals_w: number } | null;
+  rung: string; signs: string; now: string; next: string; later: string; wrong: string; needs: string[]; sources: string[];
+};
+export type FirmKindsDoc = {
+  version: string; kinds: FirmKind[];
+  stages: { id: KindStage; name: string; what: string; rests_on: string; sources?: string[] }[];
+  rungs: Record<string, string>; shape_words: Record<string, string>;
+  anatomy: { title: string; note: string; parts: { id: string; name: string; does: string }[] };
+  needs: { id: string; name: string; what: string; opportunities: { id: string; name: string; href: string }[] }[];
+  needs_grid: { id: string; cells: boolean[] }[];
+  drawn: { word: string; label: string; w: number }[];
+  map: { x: { ticks: { x: number; label: string }[] }; bands: { id: string; label: string; kinds: string[] }[] };
+  sources: { id: string; n: number; who: string; work: string; venue: string; year: number | null; url: string; retrieved_at: string; ties?: string }[];
+};
+export const firmKinds = () => read<FirmKindsDoc>("firm_kinds.json");
 export type Word = "happening" | "not_happening" | "slower" | "both" | "too_early";
 export type BoardRow = {
   id: string; kind: "ledger" | "outlook" | "migration" | "exit"; folio: string; who: string; attribution: string; line: string;
