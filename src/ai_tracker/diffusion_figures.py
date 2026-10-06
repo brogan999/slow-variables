@@ -9,14 +9,16 @@ from datetime import date
 from statistics import median
 from typing import Any
 
-from .analysis.bands import _band
-from .schema import CONFIDENCE_RUBRIC
+from .analysis.bands import EDGE, _band, _on_edge
+from .schema import CONFIDENCE_RUBRIC, Tier
+from .store import is_stale
 
 GROUPS = ("fast", "normal", "slow", "unscored", "other")
 GROUP = {"faster_than_normal": "fast", "consistent_with_normal": "normal", "slower_than_normal": "slow"}
 ZONE = {"consistent_with_normal": "normal", "faster_than_normal": "fast", "emerging": "between", "slower_than_normal": "slow"}
 LANE = 18  # pixels a stacked mark takes
 GAP = 5.0  # percent of the strip two marks in one lane must be apart
+FRAMED_GAP, FRAMED_LANE = 7.5, 26  # the same where a mark may carry a frame, which is wider and taller than a bare mark
 AGES = [(0, "today"), (7, "1 week"), (30, "1 month"), (91, "3 months"), (365, "1 year")]
 AGE_ENDS = [(365, "1 year"), (1096, "3 years"), (1826, "5 years"), (3652, "10 years")]
 # the lag model's drawing rule: each stage starts a fixed step after the one before and climbs more slowly
@@ -24,12 +26,12 @@ MID = (16.0, 36.0, 57.0, 79.0)
 SLOPE = (3.2, 4.4, 5.6, 6.8)
 
 
-def _stack(dots: list[dict[str, Any]]) -> int:
-    """Give each mark a `y` so marks closer than GAP sit in separate lanes, stacked up from the strip's foot."""
+def _stack(dots: list[dict[str, Any]], gap: float = GAP, lane_px: int = LANE) -> int:
+    """Give each mark a `y` so marks closer than `gap` sit in separate lanes, stacked up from the strip's foot."""
     last: list[float] = []
     lane: dict[int, int] = {}
     for d in sorted(dots, key=lambda d: (d["x"], d["id"])):
-        k = next((i for i, x in enumerate(last) if d["x"] - x >= GAP), len(last))
+        k = next((i for i, x in enumerate(last) if d["x"] - x >= gap), len(last))
         if k == len(last):
             last.append(d["x"])
         last[k] = d["x"]
@@ -37,12 +39,13 @@ def _stack(dots: list[dict[str, Any]]) -> int:
     n = max(len(last), 1)
     for d in dots:
         d["y"] = round(100 - 100 * (lane[id(d)] + 0.5) / n, 2)
-    return n * LANE + 6
+    return n * lane_px + 6
 
 
-def _place(value: float, ind: Any, zones: dict[str, tuple[float, float]]) -> tuple[str, float] | None:
-    """The zone the band rule reads tonight's number into, and where in it. Between the bands the place is to scale;
-    inside a band, which has no far edge, distance is squeezed so every reading fits and their order is kept."""
+def _place(value: float, ind: Any, zones: dict[str, tuple[float, float]]) -> tuple[str, float, str | None] | None:
+    """The range tonight's number falls in, where in it, and the line it sits on if the evaluator reads it as on the
+    edge. Between the bands the place is to scale; inside a band, which has no far edge, distance is squeezed so every
+    reading fits and their order is kept. A number on the line between ranges is drawn on that line, not inside."""
     n, f = ind.normal_band, ind.fast_band
     above = (f.lo is not None and n.hi is not None and f.lo >= n.hi) or (f.lo is not None and n.lo is not None and f.lo > n.lo)
     near, far, edge = (n.hi, n.lo, f.lo) if above else (n.lo, n.hi, f.hi)
@@ -50,14 +53,41 @@ def _place(value: float, ind: Any, zones: dict[str, tuple[float, float]]) -> tup
         return None
     zone = ZONE[_band(value, n, f, ind.falsifying_band).value]
     x0, w = zones[zone]
+    if _on_edge(value, n, f, ind.falsifying_band):  # the evaluator's own test; here only which line it is near
+        off = {k: abs(value - b) for k, b in (("normal", near), ("fast", edge)) if abs(value - b) <= EDGE * abs(b)}
+        if off:
+            line = min(off, key=off.__getitem__)
+            return zone, zones["normal"][0] + zones["normal"][1] if line == "normal" else zones["fast"][0], line
     t = (value - near) / (edge - near)  # nought at the normal range's edge, one at the fast range's
     if zone == "between":
-        return zone, x0 + w * (0.06 + 0.88 * min(max(t, 0.0), 1.0))
+        return zone, x0 + w * (0.06 + 0.88 * min(max(t, 0.0), 1.0)), None
     if zone == "fast":
         e = max(t - 1, 0.0)
-        return zone, x0 + w * (0.12 + 0.76 * e / (1 + e))
+        return zone, x0 + w * (0.12 + 0.76 * e / (1 + e)), None
     d = max(-t, 0.0) if zone == "normal" else abs(value - far) / abs(edge - near)
-    return zone, x0 + w - w * (0.12 + 0.76 * d / (1 + d))
+    return zone, x0 + w - w * (0.12 + 0.76 * d / (1 + d)), None
+
+
+def _held(store: Any, ind: Any, value: float) -> list[str]:
+    """Why the evaluator holds a number its range would score at emerging, in the order `flow_status` and `evaluate`
+    apply their checks: the interval spans two ranges, else the number is on a line; its best evidence is a company
+    describing itself; it rests on a single source that is not a primary one."""
+    from .cli import _single_non_primary  # the two-source rule lives with `evaluate`
+
+    n, f, x = ind.normal_band, ind.fast_band, ind.falsifying_band
+    if _band(value, n, f, x).value == "emerging":
+        return []  # between the ranges: nothing is held, the range itself does not score it
+    lo, hi = store.band_interval(ind)
+    why = []
+    if lo is not None and hi is not None and _band(lo, n, f, x) != _band(hi, n, f, x):
+        why.append("interval")
+    elif _on_edge(value, n, f, x):
+        why.append("edge")
+    if store.band_input(ind)[3] == Tier.ACTOR_STATEMENT:
+        why.append("tier")
+    if _single_non_primary(store, ind):
+        why.append("single")
+    return why
 
 
 def build(store: Any, buckets: list[dict[str, Any]], voters: set[str], today: date) -> dict[str, Any]:
@@ -106,7 +136,8 @@ def build(store: Any, buckets: list[dict[str, Any]], voters: set[str], today: da
             if at is None:
                 left.append({"id": c["id"], "name": c["name"], "why": r if isinstance(r, str) else "its ranges do not face each other"})
                 continue
-            dots.append({**dot(c), "zone": at[0], "x": round(at[1], 2), "value": r[0], "unit": store.band_unit(ind[c["id"]]),
+            dots.append({**dot(c), "zone": at[0], "x": round(at[1], 2), "on_edge": at[2], "value": r[0], "unit": store.band_unit(ind[c["id"]]),
+                         "held": _held(store, ind[c["id"]], r[0]) if c["status"] == "emerging" else [],
                          "as_of": r[1].isoformat() if r[1] else None, "obs_ids": r[2]})  # fmt: skip
         bands.append({**row(b), "h": _stack(dots), "dots": dots, "left_out": left})
 
@@ -118,6 +149,9 @@ def build(store: Any, buckets: list[dict[str, Any]], voters: set[str], today: da
         return round(100 * math.log1p(min(max(days, 0), hi)) / math.log1p(hi), 2)
 
     marks = [a for a in AGES if a[0] < hi] + [(hi, hi_label)]
+    crowded = ax(marks[-2][0]) > 75  # the end label always shows; on a phone the one before it gives way if it would collide
+    ticks = [{"x": ax(d), "label": s, "minor": (k % 2 == 1) or (crowded and k == len(marks) - 2)} for k, (d, s) in enumerate(marks[:-1])]
+    ticks.append({"x": ax(hi), "label": hi_label, "minor": False})
     fresh = []
     for b in buckets:
         dots = []
@@ -126,9 +160,10 @@ def build(store: Any, buckets: list[dict[str, Any]], voters: set[str], today: da
                 continue
             age = max(0, (today - date.fromisoformat(c["latest"]["as_of"][:10])).days)
             dots.append({**dot(c), "as_of": c["latest"]["as_of"], "age_days": age, "x": ax(age), "stale": bool(c["stale_as_of"]),
-                         "excused": bool(c["stale_reason"] and not c["stale_as_of"]), "why": c["stale_reason"]})  # fmt: skip
+                         "excused": bool(c["stale_reason"]) and not c["stale_as_of"] and is_stale(c["latest"]["as_of"], ind[c["id"]].cadence_expected, today),
+                         "why": c["stale_reason"]})  # fmt: skip
         a = [d["age_days"] for d in dots]
-        fresh.append({**row(b), "h": _stack(dots), "dots": dots, "median_days": median(a) if a else None, "median_x": ax(median(a)) if a else None,
+        fresh.append({**row(b), "h": _stack(dots, FRAMED_GAP, FRAMED_LANE), "dots": dots, "median_days": median(a) if a else None, "median_x": ax(median(a)) if a else None,
                       "newest_days": min(a, default=None), "oldest_days": max(a, default=None), "n_stale": sum(d["stale"] for d in dots),
                       "n_excused": sum(d["excused"] for d in dots)})  # fmt: skip
 
@@ -162,7 +197,7 @@ def build(store: Any, buckets: list[dict[str, Any]], voters: set[str], today: da
     return {
         "gauges": {"rows": gauges, "groups": list(GROUPS)},
         "bands": {"rows": bands, "zones": zones},
-        "fresh": {"today": today.isoformat(), "rows": fresh, "ticks": [{"x": ax(d), "label": s, "minor": (k % 2 == 1) if d != hi else ax(marks[-2][0]) > 75} for k, (d, s) in enumerate(marks)]},  # a crowded end label gives way on a phone
+        "fresh": {"today": today.isoformat(), "rows": fresh, "ticks": ticks},
         "sure": {"rows": sure, "zones": rubric},
         "headline": headline,
         "model": model,

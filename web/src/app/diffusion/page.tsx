@@ -18,7 +18,7 @@ export default function DiffusionPage() {
   return (
     <div className="flex flex-col gap-16">
       <PageHeader eyebrow="How fast · the diffusion lens" title={argument().headlines.diffusion.claim}
-        lede={<>Arvind Narayanan and Sayash Kapoor, two Princeton computer scientists, argue that AI will spread the way electricity did: over decades, through stages. This page times each stage separately, from new methods to reorganised work. A stage carries a status only when a published indicator measures it; otherwise it reads unmeasured.</>} />
+        lede={<>Arvind Narayanan and Sayash Kapoor, two Princeton computer scientists, argue that AI will spread the way electricity did: over decades, through stages. This page times each stage separately, from new methods to reorganised work. A stage carries a status only when a published indicator, which this site calls a gauge, measures it; otherwise it reads unmeasured.</>} />
 
       <StageGauges f={f.gauges} />
 
@@ -34,7 +34,7 @@ export default function DiffusionPage() {
             <article key={b.id} id={b.id} className="flex scroll-mt-8 flex-col gap-3 rounded-[4px] border border-grid bg-surface p-5">
               <div className="eyebrow">Stage {b.order}</div>
               <h3 className="display text-[1.375rem] leading-tight"><Link href={`/buckets/${b.id}`} className="decoration-axis underline-offset-4 hover:underline">{b.name}</Link></h3>
-              <div className="flex flex-wrap items-center gap-2 text-sm"><StatusChip status={b.status} /><span className="text-muted">{b.tally.scored} of {b.tally.published} published readings count</span></div>
+              <div className="flex flex-wrap items-center gap-2 text-sm"><StatusChip status={b.status} /><span className="text-muted">{b.tally.scored} {b.tally.scored === 1 ? "vote" : "votes"} cast, from {b.tally.published} gauges read for speed</span></div>
               <p className="text-[15px] text-ink-2"><span className="text-muted">What limits its speed: </span>{b.speed_limit}</p>
               {b.indicators.length ? (
                 <ul className="flex flex-col gap-1.5 border-t border-dashed border-grid pt-3 text-sm">
@@ -51,7 +51,7 @@ export default function DiffusionPage() {
 
       <section aria-labelledby="readings" className="flex flex-col gap-6">
         <h2 id="readings" className="eyebrow">How close each stage is to fast</h2>
-        <p className="max-w-[62ch] font-serif text-lg text-ink-2">A status is a word. Behind it is a number and a line it has or has not crossed, so these figures show the distance as well as the verdict.</p>
+        <p className="max-w-[62ch] font-serif text-lg text-ink-2">A status is a word. Behind it is a number and a line it has crossed, has not crossed, or is held at, so these figures show the distance as well as the verdict.</p>
         <BandStrips f={f.bands} />
         <HeadlineSeries f={f.headline} docs={f.headline.map((h) => indicator(h.id))} />
       </section>

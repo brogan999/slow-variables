@@ -94,7 +94,7 @@ type StageRow = { stage: string; name: string; order: number };
 export type StageStrip<D extends StripDot = StripDot> = StageRow & { h: number; dots: D[] };
 export type DiffusionFigs = {
   gauges: { groups: GaugeGroup[]; rows: (StageRow & { status: string; dots: GaugeDot[]; counts: Record<GaugeGroup, number>; ids: Record<GaugeGroup, string[]>; votes: number })[] };
-  bands: { zones: { id: "slow" | "normal" | "between" | "fast"; x: number; w: number }[]; rows: (StageStrip<StripDot & { zone: string; value: number; unit: string; as_of: string | null; obs_ids: string[] }> & { left_out: { id: string; name: string; why: string }[] })[] };
+  bands: { zones: { id: "slow" | "normal" | "between" | "fast"; x: number; w: number }[]; rows: (StageStrip<StripDot & { zone: "slow" | "normal" | "between" | "fast"; on_edge: "normal" | "fast" | null; held: ("edge" | "interval" | "tier" | "single")[]; value: number; unit: string; as_of: string | null; obs_ids: string[] }> & { left_out: { id: string; name: string; why: string }[] })[] };
   fresh: { today: string; ticks: Tick[]; rows: (StageStrip<StripDot & { as_of: string; age_days: number; stale: boolean; excused: boolean; why: string | null }> & { median_days: number | null; median_x: number | null; newest_days: number | null; oldest_days: number | null; n_stale: number; n_excused: number })[] };
   sure: { zones: { lo: number; hi: number; label: string; x: number; w: number; tick: string }[]; rows: StageStrip<StripDot & { confidence: number }>[] };
   headline: (StageRow & { id: string; counts: boolean })[];

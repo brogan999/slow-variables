@@ -5,7 +5,7 @@ import type { GaugeDot, GaugeGroup, StageStrip, StripDot, Tick } from "@/lib/dat
 // out a number. One mark means one gauge everywhere on the page: its shape says what it reads, so no meaning rides on
 // colour alone, and an outline says the gauge is scored but casts no vote of its own.
 export const GROUP_WORDS: Record<GaugeGroup, string> = {
-  fast: "reads fast", normal: "reads normal", slow: "reads slow", unscored: "too early to score", other: "reads who keeps the money, not speed",
+  fast: "reads fast", normal: "reads normal", slow: "reads slow", unscored: "emerging (not yet scored)", other: "reads who keeps the money, not speed",
 };
 const HUE: Record<GaugeGroup, string> = { fast: "var(--fast)", normal: "var(--ink)", slow: "var(--slow)", unscored: "var(--muted)", other: "var(--muted)" };
 
@@ -23,11 +23,11 @@ export function Glyph({ group, votes = true, size = 14 }: { group: GaugeGroup; v
   );
 }
 
-// One gauge as a link to its page. `box` draws a frame round it (a solid frame, a dotted one), for a second fact.
+// One gauge as a link to its page. `box` draws a frame round it (a solid frame, a dashed one), for a second fact.
 export function GaugeLink({ d, tip, stop = false, box, style, className = "" }: { d: GaugeDot; tip: string; stop?: boolean; box?: "solid" | "dotted"; style?: React.CSSProperties; className?: string }) {
   return (
     <Link href={d.href} prefetch={false} data-tip={tip} aria-label={tip} title={tip} data-stop={stop || undefined} className={`mark ${className}`} style={style}>
-      <span className={`flex rounded-[2px] ${box === "solid" ? "p-0.5 ring-1 ring-ink" : box === "dotted" ? "p-0.5 outline-dotted outline-1 outline-muted" : ""}`}><Glyph group={d.group} votes={d.votes || d.group === "unscored" || d.group === "other"} /></span>
+      <span className={`flex rounded-[2px] ${box === "solid" ? "p-0.5 ring-1 ring-ink" : box === "dotted" ? "p-0.5 outline-dashed outline-2 outline-muted" : ""}`}><Glyph group={d.group} votes={d.votes || d.group === "unscored" || d.group === "other"} /></span>
     </Link>
   );
 }

@@ -932,11 +932,22 @@ Judgement calls: the deals are not drawn by what the bought company does, becaus
 
 Six figures added to `/diffusion` beside the stock-and-flow diagram and the cards, which stay as they were. Everything drawn is laid out by `src/ai_tracker/diffusion_figures.py` from the stage's own indicator cards, the seed's bands and tonight's band inputs, and rides in `web/data/lens/diffusion.json` under `figures`; no existing field changes.
 
-- **Every gauge, stage by stage** (chart, at the top): one mark per published gauge, shaped by what it reads, outlined where it is scored but shares a source cluster with a gauge that already votes. The filled marks in a row equal the card's "N readings count".
+- **Every gauge, stage by stage** (chart, at the top): one mark per published gauge, shaped by what it reads, outlined where it is scored but shares a source cluster with a gauge that already votes. The filled marks in a row equal the card's "N votes cast".
 - **Why the stages arrive one after another** (model): the four stages as curves that each start later and climb more slowly, the lag marked between them; names, stocks and limits are `seed/buckets.yaml`'s. The spacing and slopes are a stated drawing rule and measure nothing.
-- **Where tonight's number sits between its normal range and its fast range** (chart): each banded gauge placed by the band rule's own reading of its band input; to scale between the ranges, squeezed inside one.
-- **One reading from each stage, over time** (chart): the most confident drawable gauge per stage, a voting one where there is one, drawn with the indicator page's own plot (`TimePlot`, split out of `TimeChart`).
-- **How old each stage's newest readings are** (chart): age of each gauge's newest reading on a log scale, the stage's median marked, stale flags framed and stale-by-design gauges dotted.
+- **Where tonight's number sits between its normal range and its fast range** (chart): each banded gauge placed in the range its band input falls in, before the evaluator's checks on its evidence; to scale between the ranges, squeezed inside one, and on the line where the evaluator reads the number as on the edge. Each gauge held at emerging exports `held`, the evaluator's own reasons (`edge`, `interval`, `tier`, `single`), printed in the table.
+- **One gauge from each stage, over time** (chart): the most confident drawable gauge per stage, a voting one where there is one, drawn with the indicator page's own plot (`TimePlot`, split out of `TimeChart`).
+- **How old each stage's newest readings are** (chart): age of each gauge's newest reading on a log scale, the stage's median marked, stale flags framed, and a dashed frame on a gauge that is past its limit but excused by the seed's `stale_ok`.
 - **How sure this site says it is of each reading** (chart): each gauge's confidence on the rubric.
 
 Judgement calls: titles describe and do not claim, since the data regenerates nightly; "evidence against" was not drawn (the stages' gauges hold one `against` evidence row between them, too thin for a figure); the headline rule (most confident, more than one reading, voting first) is this part's, stated in the figure's foot; a "slower" zone appears on the band figure only on a night a gauge reads there.
+
+A separate model run then reviewed the six figures as a staff reviewer and its required and advised changes were applied: gauges on a line are drawn on the line and every held gauge says why, the status has one name ("emerging (not yet scored)"), the excused frame is drawn only past the staleness limit and the foot states the real rule, the age axis keeps its end label on a phone, the headline figure names its choice rule and says when its gauge casts no vote, the cards say "votes cast, from N gauges read for speed", and the fifth stage is "Return arrow (feedback into methods)" in both drawings. No status, reading, band, staleness rule or evidence record changed.
+
+The reviewer's notes for the owner (nothing changed on their account):
+
+- The return arrow has no vote: its speed gauges are all emerging, most of them resting on a company describing itself.
+- `dev_rct_uplift` is Products' most confident voter while both of its readings are flagged disputed; a status resting on disputed points is worth a look.
+- Methods reads "mixed" on two votes, `metr_horizon_50` and `perf_per_dollar_growth`, the second graded "limited or vague evidence".
+- Across the stages' gauges there is a single evidence row with stance `against` (`new_grad_unemployment`); every gauge has a written counterevidence note, but the structured rows are nearly empty.
+- The stock-and-flow figure's "N of M count" and its description "Five stocks" (four boxes and an arrow) have the same wording problem the cards had; left as they were.
+- A yearly gauge can vote for up to two years without a stale flag. That is the rule as written; whether it is the right limit for a voting gauge is the owner's call.
