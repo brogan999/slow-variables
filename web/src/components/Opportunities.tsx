@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ChainStrip, Crowding, Demand, HowLarge, PowersGrid, WhoKeeps } from "@/components/OpportunityFigures";
 import type { OpportunitiesDoc, Opportunity } from "@/lib/data";
 
 const link = "underline decoration-grid underline-offset-2 hover:decoration-ink";
@@ -15,11 +16,11 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 
 const orBlank = (s: string) => (s ? s : <span className="italic text-muted">not yet written</span>);
 
-function Card({ o }: { o: Opportunity }) {
+function Card({ o, n }: { o: Opportunity; n?: number }) {
   return (
     <li id={`op-${o.id}`} className="fig p-4 md:p-5 flex flex-col gap-3 scroll-mt-24">
       <header className="flex flex-col gap-1 md:flex-row md:items-baseline md:gap-4">
-        <h3 className="text-[1.05rem] font-semibold leading-snug text-ink">{o.name}</h3>
+        <h3 className="text-[1.05rem] font-semibold leading-snug text-ink">{n ? <span className="mr-2 font-mono text-[0.85rem] font-normal text-muted">{n}</span> : null}{o.name}</h3>
         <span className="md:ml-auto text-sm font-semibold text-ink md:text-right">{o.rent.verdict}</span>
       </header>
       <p className="text-sm text-ink-2">
@@ -58,6 +59,12 @@ export function Opportunities({ d }: { d: OpportunitiesDoc }) {
       <p className="font-mono text-[12px] text-muted">
         {d.counts.records} businesses · {d.counts.unmapped} in categories the tracker has not mapped yet · profit by the rent rule: {tiers} · {d.counts.kept_by_incumbents} kept by incumbent firms
       </p>
+      <section className="flex flex-col gap-4" aria-labelledby="op-rule">
+        <h2 id="op-rule" className="display text-[1.6rem] scroll-mt-24">The rent rule, drawn</h2>
+        <p className="text-ink-2 leading-relaxed max-w-[68ch]">The rule answers in turn who keeps a profit and how large it is. Each business is drawn as its number in the list further down, boxed by who would keep its profit.</p>
+        <WhoKeeps d={d} />
+        <HowLarge d={d} />
+      </section>
       <figure className="fig" style={{ margin: 0 }}>
         <div className="fig-head"><span className="fig-n" /><h2 className="fig-title">A sequence of bets</h2><span className="fig-note">each stage opens only once its gate is passed</span></div>
         <ol className="grid md:grid-cols-4">
@@ -70,9 +77,17 @@ export function Opportunities({ d }: { d: OpportunitiesDoc }) {
           ))}
         </ol>
       </figure>
+      <section className="flex flex-col gap-4" aria-labelledby="op-glance">
+        <h2 id="op-glance" className="display text-[1.6rem] scroll-mt-24">The businesses at a glance</h2>
+        <p className="text-ink-2 leading-relaxed max-w-[68ch]">Where the businesses sit on the chain, how crowded each part already is, which kinds of firm would need them and what each would rely on.</p>
+        <ChainStrip d={d} />
+        <Crowding d={d} />
+        <Demand d={d} />
+        <PowersGrid d={d} />
+      </section>
       <section className="flex flex-col gap-4" aria-labelledby="op-list">
         <h2 id="op-list" className="display text-[1.6rem]">The businesses</h2>
-        <ol className="flex flex-col gap-4">{d.opportunities.map((o) => <Card key={o.id} o={o} />)}</ol>
+        <ol className="flex flex-col gap-4">{d.opportunities.map((o, i) => <Card key={o.id} o={o} n={d.figures.marks[i]?.n} />)}</ol>
       </section>
     </div>
   );

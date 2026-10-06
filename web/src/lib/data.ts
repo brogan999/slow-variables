@@ -529,5 +529,18 @@ export type OpportunitiesDoc = {
   reviewed_by: string; reviewed: string; opportunities: Opportunity[]; sequence: { stage: string; opportunity: string; gate: string; name: string; label: string }[];
   powers: Record<string, string>;
   counts: { records: number; unmapped: number; by_tier: { tier: string; n: number }[]; kept_by_incumbents: number };
+  figures: OpportunityFigures;
+};
+// Part 45e: the page's figures, laid out by opportunities.figures; `ops` are record ids, drawn as the marks' numbers
+export type OpMark = { id: string; n: number; name: string; verdict: string; pools: string };
+export type OpNeed = { id: string; name: string; href: string };
+export type OpportunityFigures = {
+  marks: OpMark[]; example: string;
+  keeps: { key: string; groups: { pools: string; keeper: string; ops: string[] }[] }[];
+  size: { cols: string[]; rows: { kind: string; cells: { tier: string; word: string; ops: string[] }[] }[] };
+  chain: { id: string; number: string | null; name: string; n_primary: number; categories: { id: string; number: string | null; name: string; primary: string[]; adjacent: string[] }[] }[];
+  demand: { kinds: number; rows: { id: string; count: number; w: number; needs: OpNeed[]; kinds: string[] }[]; unmet: (OpNeed & { count: number; w: number })[] };
+  coverage: { rows: { id: string; category: OpportunityCat; href: string; n: number; live: number; other: number; w_live: number; w_other: number }[] };
+  powers: { cols: string[]; rows: { id: string; cells: boolean[] }[]; totals: number[]; unused: string[] };
 };
 export const opportunities = () => read<OpportunitiesDoc>("opportunities.json");

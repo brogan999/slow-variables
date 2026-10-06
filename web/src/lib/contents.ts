@@ -57,6 +57,8 @@ export const PAGES: Record<string, Page> = {
     ["market-map", "The market map", "Which companies sit in each finer category, and where does coverage stop?"],
   ] },
   "/value-chain/opportunities": { name: "Businesses that could be built", question: "Where is the chain short of something a new business could supply?", sections: [
+    ["op-rule", "The rent rule, drawn", "Who would keep each business's profit, and how large would it be?"],
+    ["op-glance", "The businesses at a glance", "Where do they sit on the chain, how crowded is it there, and which kinds of firm would need them?"],
     ["op-list", "The businesses", "What is each business, what profit would it keep, and what would prove it wrong?"],
   ] },
   "/stack": { name: "The stack", question: "What are the layers and sub-layers, and which companies does the tracker follow in each?",

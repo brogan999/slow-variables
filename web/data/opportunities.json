@@ -26,6 +26,1739 @@
   "records": 20,
   "unmapped": 0
  },
+ "figures": {
+  "chain": [
+   {
+    "categories": [
+     {
+      "adjacent": [
+       "energy_aware_compute"
+      ],
+      "id": "power_and_sites",
+      "name": "Power and sites",
+      "number": "1.1",
+      "primary": []
+     },
+     {
+      "adjacent": [],
+      "id": "data_centre_infrastructure",
+      "name": "Data-centre infrastructure",
+      "number": "1.2",
+      "primary": []
+     },
+     {
+      "adjacent": [],
+      "id": "semiconductor_supply_chain",
+      "name": "Semiconductor supply chain",
+      "number": "1.3",
+      "primary": []
+     },
+     {
+      "adjacent": [],
+      "id": "memory_storage_and_networking",
+      "name": "Memory, storage and networking",
+      "number": "1.4",
+      "primary": []
+     },
+     {
+      "adjacent": [
+       "energy_aware_compute"
+      ],
+      "id": "compute_providers",
+      "name": "Compute providers",
+      "number": "1.5",
+      "primary": []
+     },
+     {
+      "adjacent": [
+       "outcome_router"
+      ],
+      "id": "compute_utilization_and_control",
+      "name": "Compute utilization and control",
+      "number": "1.6",
+      "primary": [
+       "energy_aware_compute"
+      ]
+     }
+    ],
+    "id": "physical_compute",
+    "n_primary": 1,
+    "name": "Physical inputs and compute supply",
+    "number": 1
+   },
+   {
+    "categories": [
+     {
+      "adjacent": [
+       "open_weight_post_training"
+      ],
+      "id": "general_purpose_models",
+      "name": "General-purpose models",
+      "number": "2.1",
+      "primary": []
+     },
+     {
+      "adjacent": [],
+      "id": "modality_native_models",
+      "name": "Modality-native models",
+      "number": "2.2",
+      "primary": []
+     },
+     {
+      "adjacent": [],
+      "id": "specialized_models",
+      "name": "Specialized models",
+      "number": "2.3",
+      "primary": []
+     },
+     {
+      "adjacent": [],
+      "id": "model_compression_and_adaptation",
+      "name": "Model compression and adaptation",
+      "number": "2.4",
+      "primary": []
+     }
+    ],
+    "id": "models",
+    "n_primary": 0,
+    "name": "Models and capability production",
+    "number": 2
+   },
+   {
+    "categories": [
+     {
+      "adjacent": [],
+      "id": "data_origination",
+      "name": "Data origination",
+      "number": "3.1",
+      "primary": [
+       "pooled_expert_records"
+      ]
+     },
+     {
+      "adjacent": [],
+      "id": "data_rights_and_exchange",
+      "name": "Data rights and exchange",
+      "number": "3.2",
+      "primary": []
+     },
+     {
+      "adjacent": [
+       "continual_learning_in_customer"
+      ],
+      "id": "data_transformation",
+      "name": "Data transformation",
+      "number": "3.3",
+      "primary": []
+     },
+     {
+      "adjacent": [],
+      "id": "synthetic_data",
+      "name": "Synthetic data",
+      "number": "3.4",
+      "primary": []
+     },
+     {
+      "adjacent": [],
+      "id": "training_environments",
+      "name": "Training environments",
+      "number": "3.5",
+      "primary": []
+     },
+     {
+      "adjacent": [
+       "outcome_verification",
+       "pooled_expert_records"
+      ],
+      "id": "reward_and_verification_systems",
+      "name": "Reward and verification systems",
+      "number": "3.6",
+      "primary": []
+     },
+     {
+      "adjacent": [],
+      "id": "post_training_and_learning_infrastructure",
+      "name": "Post-training and learning infrastructure",
+      "number": "3.7",
+      "primary": [
+       "continual_learning_in_customer",
+       "open_weight_post_training"
+      ]
+     },
+     {
+      "adjacent": [
+       "continual_learning_in_customer",
+       "agent_audit_trail",
+       "ai_warranty",
+       "pooled_expert_records",
+       "open_weight_post_training"
+      ],
+      "id": "evals_and_assurance",
+      "name": "Evals and assurance",
+      "number": "3.8",
+      "primary": [
+       "regulated_assurance"
+      ]
+     }
+    ],
+    "id": "data_training_verification",
+    "n_primary": 4,
+    "name": "Data, training and verification inputs",
+    "number": 3
+   },
+   {
+    "categories": [
+     {
+      "adjacent": [
+       "policy_aware_routing",
+       "open_weight_post_training"
+      ],
+      "id": "inference_supply",
+      "name": "Inference supply",
+      "number": "4.1",
+      "primary": []
+     },
+     {
+      "adjacent": [
+       "outcome_router",
+       "energy_aware_compute"
+      ],
+      "id": "inference_optimization",
+      "name": "Inference optimization",
+      "number": "4.2",
+      "primary": []
+     },
+     {
+      "adjacent": [
+       "agent_payments"
+      ],
+      "id": "routing_and_gateways",
+      "name": "Routing and gateways",
+      "number": "4.3",
+      "primary": [
+       "outcome_router",
+       "policy_aware_routing"
+      ]
+     },
+     {
+      "adjacent": [
+       "permission_connectors",
+       "context_engineering_service"
+      ],
+      "id": "context_and_memory",
+      "name": "Context and memory",
+      "number": "4.4",
+      "primary": []
+     },
+     {
+      "adjacent": [
+       "permission_connectors"
+      ],
+      "id": "agent_runtimes",
+      "name": "Agent runtimes",
+      "number": "4.5",
+      "primary": []
+     },
+     {
+      "adjacent": [
+       "agent_authority_registry"
+      ],
+      "id": "tools_and_actuation",
+      "name": "Tools and actuation",
+      "number": "4.6",
+      "primary": [
+       "permission_connectors"
+      ]
+     }
+    ],
+    "id": "runtime_orchestration",
+    "n_primary": 3,
+    "name": "Runtime, serving and orchestration",
+    "number": 4
+   },
+   {
+    "categories": [
+     {
+      "adjacent": [
+       "agent_audit_trail"
+      ],
+      "id": "security",
+      "name": "Security",
+      "number": "5.1",
+      "primary": [
+       "agent_incident_response"
+      ]
+     },
+     {
+      "adjacent": [
+       "agent_audit_trail",
+       "agent_payments",
+       "permission_connectors",
+       "policy_aware_routing"
+      ],
+      "id": "identity_and_authority",
+      "name": "Identity and authority",
+      "number": "5.2",
+      "primary": [
+       "agent_authority_registry"
+      ]
+     },
+     {
+      "adjacent": [
+       "regulated_assurance",
+       "agent_authority_registry",
+       "ai_warranty",
+       "vertical_system_of_record",
+       "policy_aware_routing",
+       "agent_incident_response"
+      ],
+      "id": "provenance_and_audit",
+      "name": "Provenance and audit",
+      "number": "5.3",
+      "primary": [
+       "agent_audit_trail"
+      ]
+     },
+     {
+      "adjacent": [
+       "ai_warranty",
+       "outcome_router",
+       "agent_payments",
+       "licensed_autonomous_service"
+      ],
+      "id": "outcome_verification",
+      "name": "Outcome verification",
+      "number": "5.4",
+      "primary": [
+       "outcome_verification"
+      ]
+     },
+     {
+      "adjacent": [
+       "outcome_verification",
+       "agent_authority_registry"
+      ],
+      "id": "settlement_and_billing",
+      "name": "Settlement and billing",
+      "number": "5.5",
+      "primary": [
+       "agent_payments"
+      ]
+     },
+     {
+      "adjacent": [
+       "regulated_assurance",
+       "vertical_system_of_record",
+       "licensed_autonomous_service",
+       "agent_incident_response"
+      ],
+      "id": "liability_and_risk_transfer",
+      "name": "Liability and risk transfer",
+      "number": "5.6",
+      "primary": [
+       "ai_warranty"
+      ]
+     }
+    ],
+    "id": "trust_control_transactions",
+    "n_primary": 6,
+    "name": "Trust, control and transaction infrastructure",
+    "number": 5
+   },
+   {
+    "categories": [
+     {
+      "adjacent": [
+       "context_engineering_service",
+       "deployment_talent"
+      ],
+      "id": "technical_implementation",
+      "name": "Technical implementation",
+      "number": "6.1",
+      "primary": [
+       "deploy_to_platform"
+      ]
+     },
+     {
+      "adjacent": [
+       "continual_learning_in_customer",
+       "deploy_to_platform",
+       "deployment_talent"
+      ],
+      "id": "context_engineering",
+      "name": "Context engineering",
+      "number": "6.2",
+      "primary": [
+       "context_engineering_service"
+      ]
+     },
+     {
+      "adjacent": [
+       "outcome_verification",
+       "deploy_to_platform",
+       "context_engineering_service",
+       "deployment_talent"
+      ],
+      "id": "managed_ai_operations",
+      "name": "Managed AI operations",
+      "number": "6.3",
+      "primary": []
+     },
+     {
+      "adjacent": [
+       "deploy_to_platform"
+      ],
+      "id": "adoption_and_change",
+      "name": "Adoption and change",
+      "number": "6.4",
+      "primary": []
+     },
+     {
+      "adjacent": [],
+      "id": "talent_production",
+      "name": "Talent production",
+      "number": "6.5",
+      "primary": [
+       "deployment_talent"
+      ]
+     }
+    ],
+    "id": "deployment_diffusion",
+    "n_primary": 3,
+    "name": "Deployment and organizational diffusion",
+    "number": 6
+   },
+   {
+    "categories": [
+     {
+      "adjacent": [],
+      "id": "horizontal_copilots",
+      "name": "Horizontal copilots",
+      "number": "7.1",
+      "primary": []
+     },
+     {
+      "adjacent": [],
+      "id": "functional_enterprise_applications",
+      "name": "Functional enterprise applications",
+      "number": "7.2",
+      "primary": []
+     },
+     {
+      "adjacent": [
+       "outcome_priced_rollup",
+       "licensed_autonomous_service"
+      ],
+      "id": "vertical_workflow_software",
+      "name": "Vertical workflow software",
+      "number": "7.3",
+      "primary": [
+       "vertical_system_of_record"
+      ]
+     },
+     {
+      "adjacent": [
+       "vertical_system_of_record",
+       "outcome_priced_rollup"
+      ],
+      "id": "autonomous_services",
+      "name": "Autonomous services",
+      "number": "7.4",
+      "primary": [
+       "licensed_autonomous_service"
+      ]
+     },
+     {
+      "adjacent": [],
+      "id": "sensor_model_actuator_networks",
+      "name": "Sensor\u2013model\u2013actuator networks",
+      "number": "7.5",
+      "primary": []
+     },
+     {
+      "adjacent": [],
+      "id": "ai_native_rollups",
+      "name": "AI-native rollups",
+      "number": "7.6",
+      "primary": [
+       "outcome_priced_rollup"
+      ]
+     },
+     {
+      "adjacent": [],
+      "id": "consumer_ai",
+      "name": "Consumer AI",
+      "number": "7.7",
+      "primary": []
+     }
+    ],
+    "id": "applications_operating_models",
+    "n_primary": 3,
+    "name": "Applications and operating models",
+    "number": 7
+   },
+   {
+    "categories": [
+     {
+      "adjacent": [],
+      "id": "outcomes",
+      "name": "Outcomes (indicator-only)",
+      "number": "8",
+      "primary": []
+     }
+    ],
+    "id": "outcomes",
+    "n_primary": 0,
+    "name": "Adoption and economic outcomes",
+    "number": 8
+   }
+  ],
+  "coverage": {
+   "rows": [
+    {
+     "category": {
+      "id": "ai_native_rollups",
+      "n_entities": 106,
+      "name": "AI-native rollups",
+      "number": "7.6"
+     },
+     "href": "/value-chain#mm-ai_native_rollups",
+     "id": "outcome_priced_rollup",
+     "live": 106,
+     "n": 106,
+     "other": 0,
+     "w_live": 100.0,
+     "w_other": 0.0
+    },
+    {
+     "category": {
+      "id": "autonomous_services",
+      "n_entities": 89,
+      "name": "Autonomous services",
+      "number": "7.4"
+     },
+     "href": "/value-chain#mm-autonomous_services",
+     "id": "licensed_autonomous_service",
+     "live": 87,
+     "n": 89,
+     "other": 2,
+     "w_live": 82.0754716981132,
+     "w_other": 1.8867924528301887
+    },
+    {
+     "category": {
+      "id": "vertical_workflow_software",
+      "n_entities": 58,
+      "name": "Vertical workflow software",
+      "number": "7.3"
+     },
+     "href": "/value-chain#mm-vertical_workflow_software",
+     "id": "vertical_system_of_record",
+     "live": 58,
+     "n": 58,
+     "other": 0,
+     "w_live": 54.716981132075475,
+     "w_other": 0.0
+    },
+    {
+     "category": {
+      "id": "talent_production",
+      "n_entities": 40,
+      "name": "Talent production",
+      "number": "6.5"
+     },
+     "href": "/value-chain#mm-talent_production",
+     "id": "deployment_talent",
+     "live": 40,
+     "n": 40,
+     "other": 0,
+     "w_live": 37.735849056603776,
+     "w_other": 0.0
+    },
+    {
+     "category": {
+      "id": "technical_implementation",
+      "n_entities": 29,
+      "name": "Technical implementation",
+      "number": "6.1"
+     },
+     "href": "/value-chain#mm-technical_implementation",
+     "id": "deploy_to_platform",
+     "live": 29,
+     "n": 29,
+     "other": 0,
+     "w_live": 27.358490566037737,
+     "w_other": 0.0
+    },
+    {
+     "category": {
+      "id": "post_training_and_learning_infrastructure",
+      "n_entities": 20,
+      "name": "Post-training and learning infrastructure",
+      "number": "3.7"
+     },
+     "href": "/value-chain#mm-post_training_and_learning_infrastructure",
+     "id": "continual_learning_in_customer",
+     "live": 19,
+     "n": 20,
+     "other": 1,
+     "w_live": 17.92452830188679,
+     "w_other": 0.9433962264150944
+    },
+    {
+     "category": {
+      "id": "post_training_and_learning_infrastructure",
+      "n_entities": 20,
+      "name": "Post-training and learning infrastructure",
+      "number": "3.7"
+     },
+     "href": "/value-chain#mm-post_training_and_learning_infrastructure",
+     "id": "open_weight_post_training",
+     "live": 19,
+     "n": 20,
+     "other": 1,
+     "w_live": 17.92452830188679,
+     "w_other": 0.9433962264150944
+    },
+    {
+     "category": {
+      "id": "evals_and_assurance",
+      "n_entities": 17,
+      "name": "Evals and assurance",
+      "number": "3.8"
+     },
+     "href": "/value-chain#mm-evals_and_assurance",
+     "id": "regulated_assurance",
+     "live": 16,
+     "n": 17,
+     "other": 1,
+     "w_live": 15.09433962264151,
+     "w_other": 0.9433962264150944
+    },
+    {
+     "category": {
+      "id": "data_origination",
+      "n_entities": 16,
+      "name": "Data origination",
+      "number": "3.1"
+     },
+     "href": "/value-chain#mm-data_origination",
+     "id": "pooled_expert_records",
+     "live": 16,
+     "n": 16,
+     "other": 0,
+     "w_live": 15.09433962264151,
+     "w_other": 0.0
+    },
+    {
+     "category": {
+      "id": "security",
+      "n_entities": 16,
+      "name": "Security",
+      "number": "5.1"
+     },
+     "href": "/value-chain#mm-security",
+     "id": "agent_incident_response",
+     "live": 14,
+     "n": 16,
+     "other": 2,
+     "w_live": 13.20754716981132,
+     "w_other": 1.8867924528301887
+    },
+    {
+     "category": {
+      "id": "routing_and_gateways",
+      "n_entities": 13,
+      "name": "Routing and gateways",
+      "number": "4.3"
+     },
+     "href": "/value-chain#mm-routing_and_gateways",
+     "id": "outcome_router",
+     "live": 13,
+     "n": 13,
+     "other": 0,
+     "w_live": 12.264150943396226,
+     "w_other": 0.0
+    },
+    {
+     "category": {
+      "id": "tools_and_actuation",
+      "n_entities": 13,
+      "name": "Tools and actuation",
+      "number": "4.6"
+     },
+     "href": "/value-chain#mm-tools_and_actuation",
+     "id": "permission_connectors",
+     "live": 13,
+     "n": 13,
+     "other": 0,
+     "w_live": 12.264150943396226,
+     "w_other": 0.0
+    },
+    {
+     "category": {
+      "id": "routing_and_gateways",
+      "n_entities": 13,
+      "name": "Routing and gateways",
+      "number": "4.3"
+     },
+     "href": "/value-chain#mm-routing_and_gateways",
+     "id": "policy_aware_routing",
+     "live": 13,
+     "n": 13,
+     "other": 0,
+     "w_live": 12.264150943396226,
+     "w_other": 0.0
+    },
+    {
+     "category": {
+      "id": "identity_and_authority",
+      "n_entities": 11,
+      "name": "Identity and authority",
+      "number": "5.2"
+     },
+     "href": "/value-chain#mm-identity_and_authority",
+     "id": "agent_authority_registry",
+     "live": 10,
+     "n": 11,
+     "other": 1,
+     "w_live": 9.433962264150944,
+     "w_other": 0.9433962264150944
+    },
+    {
+     "category": {
+      "id": "compute_utilization_and_control",
+      "n_entities": 10,
+      "name": "Compute utilization and control",
+      "number": "1.6"
+     },
+     "href": "/value-chain#mm-compute_utilization_and_control",
+     "id": "energy_aware_compute",
+     "live": 9,
+     "n": 10,
+     "other": 1,
+     "w_live": 8.49056603773585,
+     "w_other": 0.9433962264150944
+    },
+    {
+     "category": {
+      "id": "provenance_and_audit",
+      "n_entities": 9,
+      "name": "Provenance and audit",
+      "number": "5.3"
+     },
+     "href": "/value-chain#mm-provenance_and_audit",
+     "id": "agent_audit_trail",
+     "live": 9,
+     "n": 9,
+     "other": 0,
+     "w_live": 8.49056603773585,
+     "w_other": 0.0
+    },
+    {
+     "category": {
+      "id": "outcome_verification",
+      "n_entities": 8,
+      "name": "Outcome verification",
+      "number": "5.4"
+     },
+     "href": "/value-chain#mm-outcome_verification",
+     "id": "outcome_verification",
+     "live": 8,
+     "n": 8,
+     "other": 0,
+     "w_live": 7.547169811320755,
+     "w_other": 0.0
+    },
+    {
+     "category": {
+      "id": "context_engineering",
+      "n_entities": 6,
+      "name": "Context engineering",
+      "number": "6.2"
+     },
+     "href": "/value-chain#mm-context_engineering",
+     "id": "context_engineering_service",
+     "live": 6,
+     "n": 6,
+     "other": 0,
+     "w_live": 5.660377358490566,
+     "w_other": 0.0
+    },
+    {
+     "category": {
+      "id": "settlement_and_billing",
+      "n_entities": 5,
+      "name": "Settlement and billing",
+      "number": "5.5"
+     },
+     "href": "/value-chain#mm-settlement_and_billing",
+     "id": "agent_payments",
+     "live": 5,
+     "n": 5,
+     "other": 0,
+     "w_live": 4.716981132075472,
+     "w_other": 0.0
+    },
+    {
+     "category": {
+      "id": "liability_and_risk_transfer",
+      "n_entities": 4,
+      "name": "Liability and risk transfer",
+      "number": "5.6"
+     },
+     "href": "/value-chain#mm-liability_and_risk_transfer",
+     "id": "ai_warranty",
+     "live": 4,
+     "n": 4,
+     "other": 0,
+     "w_live": 3.7735849056603774,
+     "w_other": 0.0
+    }
+   ]
+  },
+  "demand": {
+   "kinds": 12,
+   "rows": [
+    {
+     "count": 12,
+     "id": "outcome_verification",
+     "kinds": [
+      "Accounting practice",
+      "Law firm",
+      "Software and IT services company",
+      "Bank or lender",
+      "Insurer or insurance broker",
+      "Hospital or medical practice",
+      "Customer-support and business-support firm",
+      "Management consultancy",
+      "Property manager or letting agency",
+      "Freight and logistics operator",
+      "Manufacturer",
+      "Retailer"
+     ],
+     "needs": [
+      {
+       "href": "/firm/kinds#need-check",
+       "id": "check",
+       "name": "A check for work that has none"
+      }
+     ],
+     "w": 100.0
+    },
+    {
+     "count": 6,
+     "id": "agent_payments",
+     "kinds": [
+      "Law firm",
+      "Software and IT services company",
+      "Bank or lender",
+      "Customer-support and business-support firm",
+      "Property manager or letting agency",
+      "Retailer"
+     ],
+     "needs": [
+      {
+       "href": "/firm/kinds#need-identity",
+       "id": "identity",
+       "name": "Identity, permissions and spending limits for agents"
+      },
+      {
+       "href": "/firm/kinds#need-outcome",
+       "id": "outcome",
+       "name": "Selling the result, and settling it"
+      }
+     ],
+     "w": 50.0
+    },
+    {
+     "count": 5,
+     "id": "regulated_assurance",
+     "kinds": [
+      "Accounting practice",
+      "Law firm",
+      "Bank or lender",
+      "Insurer or insurance broker",
+      "Hospital or medical practice"
+     ],
+     "needs": [
+      {
+       "href": "/firm/kinds#need-signoff",
+       "id": "signoff",
+       "name": "Sign-off for regulated work"
+      }
+     ],
+     "w": 41.666666666666664
+    },
+    {
+     "count": 5,
+     "id": "agent_audit_trail",
+     "kinds": [
+      "Accounting practice",
+      "Law firm",
+      "Bank or lender",
+      "Insurer or insurance broker",
+      "Hospital or medical practice"
+     ],
+     "needs": [
+      {
+       "href": "/firm/kinds#need-trail",
+       "id": "trail",
+       "name": "A record of what the agent did, and who approved it"
+      }
+     ],
+     "w": 41.666666666666664
+    },
+    {
+     "count": 5,
+     "id": "ai_warranty",
+     "kinds": [
+      "Law firm",
+      "Insurer or insurance broker",
+      "Hospital or medical practice",
+      "Management consultancy",
+      "Manufacturer"
+     ],
+     "needs": [
+      {
+       "href": "/firm/kinds#need-cover",
+       "id": "cover",
+       "name": "Insurance priced for an agent's mistakes"
+      }
+     ],
+     "w": 41.666666666666664
+    },
+    {
+     "count": 5,
+     "id": "licensed_autonomous_service",
+     "kinds": [
+      "Accounting practice",
+      "Law firm",
+      "Bank or lender",
+      "Insurer or insurance broker",
+      "Hospital or medical practice"
+     ],
+     "needs": [
+      {
+       "href": "/firm/kinds#need-signoff",
+       "id": "signoff",
+       "name": "Sign-off for regulated work"
+      }
+     ],
+     "w": 41.666666666666664
+    },
+    {
+     "count": 4,
+     "id": "continual_learning_in_customer",
+     "kinds": [
+      "Accounting practice",
+      "Law firm",
+      "Bank or lender",
+      "Customer-support and business-support firm"
+     ],
+     "needs": [
+      {
+       "href": "/firm/kinds#need-context",
+       "id": "context",
+       "name": "Context that stays with one customer"
+      }
+     ],
+     "w": 33.333333333333336
+    },
+    {
+     "count": 4,
+     "id": "agent_authority_registry",
+     "kinds": [
+      "Software and IT services company",
+      "Bank or lender",
+      "Property manager or letting agency",
+      "Retailer"
+     ],
+     "needs": [
+      {
+       "href": "/firm/kinds#need-identity",
+       "id": "identity",
+       "name": "Identity, permissions and spending limits for agents"
+      }
+     ],
+     "w": 33.333333333333336
+    },
+    {
+     "count": 4,
+     "id": "permission_connectors",
+     "kinds": [
+      "Software and IT services company",
+      "Bank or lender",
+      "Property manager or letting agency",
+      "Retailer"
+     ],
+     "needs": [
+      {
+       "href": "/firm/kinds#need-identity",
+       "id": "identity",
+       "name": "Identity, permissions and spending limits for agents"
+      }
+     ],
+     "w": 33.333333333333336
+    },
+    {
+     "count": 4,
+     "id": "deploy_to_platform",
+     "kinds": [
+      "Accounting practice",
+      "Software and IT services company",
+      "Customer-support and business-support firm",
+      "Property manager or letting agency"
+     ],
+     "needs": [
+      {
+       "href": "/firm/kinds#need-deploy",
+       "id": "deploy",
+       "name": "Help putting it to work"
+      }
+     ],
+     "w": 33.333333333333336
+    },
+    {
+     "count": 4,
+     "id": "deployment_talent",
+     "kinds": [
+      "Accounting practice",
+      "Software and IT services company",
+      "Customer-support and business-support firm",
+      "Property manager or letting agency"
+     ],
+     "needs": [
+      {
+       "href": "/firm/kinds#need-deploy",
+       "id": "deploy",
+       "name": "Help putting it to work"
+      }
+     ],
+     "w": 33.333333333333336
+    },
+    {
+     "count": 3,
+     "id": "vertical_system_of_record",
+     "kinds": [
+      "Accounting practice",
+      "Property manager or letting agency",
+      "Freight and logistics operator"
+     ],
+     "needs": [
+      {
+       "href": "/firm/kinds#need-record",
+       "id": "record",
+       "name": "The trade's system of record"
+      }
+     ],
+     "w": 25.0
+    },
+    {
+     "count": 2,
+     "id": "outcome_priced_rollup",
+     "kinds": [
+      "Law firm",
+      "Customer-support and business-support firm"
+     ],
+     "needs": [
+      {
+       "href": "/firm/kinds#need-outcome",
+       "id": "outcome",
+       "name": "Selling the result, and settling it"
+      }
+     ],
+     "w": 16.666666666666668
+    },
+    {
+     "count": 1,
+     "id": "context_engineering_service",
+     "kinds": [
+      "Management consultancy"
+     ],
+     "needs": [
+      {
+       "href": "/firm/kinds#need-capture",
+       "id": "capture",
+       "name": "Writing down how the firm works"
+      }
+     ],
+     "w": 8.333333333333334
+    },
+    {
+     "count": 1,
+     "id": "agent_incident_response",
+     "kinds": [
+      "Retailer"
+     ],
+     "needs": [
+      {
+       "href": "/firm/kinds#need-incident",
+       "id": "incident",
+       "name": "Someone to call when an agent goes wrong"
+      }
+     ],
+     "w": 8.333333333333334
+    },
+    {
+     "count": 0,
+     "id": "pooled_expert_records",
+     "kinds": [],
+     "needs": [],
+     "w": 0.0
+    },
+    {
+     "count": 0,
+     "id": "outcome_router",
+     "kinds": [],
+     "needs": [],
+     "w": 0.0
+    },
+    {
+     "count": 0,
+     "id": "energy_aware_compute",
+     "kinds": [],
+     "needs": [],
+     "w": 0.0
+    },
+    {
+     "count": 0,
+     "id": "policy_aware_routing",
+     "kinds": [],
+     "needs": [],
+     "w": 0.0
+    },
+    {
+     "count": 0,
+     "id": "open_weight_post_training",
+     "kinds": [],
+     "needs": [],
+     "w": 0.0
+    }
+   ],
+   "unmet": [
+    {
+     "count": 4,
+     "href": "/firm/kinds#need-juniors",
+     "id": "juniors",
+     "name": "Training people when the junior work is gone",
+     "w": 33.333333333333336
+    },
+    {
+     "count": 2,
+     "href": "/firm/kinds#need-fallback",
+     "id": "fallback",
+     "name": "People on call",
+     "w": 16.666666666666668
+    },
+    {
+     "count": 2,
+     "href": "/firm/kinds#need-staged",
+     "id": "staged",
+     "name": "Running autonomy in stages",
+     "w": 16.666666666666668
+    },
+    {
+     "count": 3,
+     "href": "/firm/kinds#need-fleet",
+     "id": "fleet",
+     "name": "Running robots and driverless fleets",
+     "w": 25.0
+    }
+   ]
+  },
+  "example": "outcome_verification",
+  "keeps": [
+   {
+    "groups": [
+     {
+      "keeper": "the maker",
+      "ops": [
+       "regulated_assurance",
+       "ai_warranty"
+      ],
+      "pools": "innovator"
+     }
+    ],
+    "key": "appropriability=tight"
+   },
+   {
+    "groups": [
+     {
+      "keeper": "the maker",
+      "ops": [
+       "outcome_verification",
+       "continual_learning_in_customer",
+       "agent_audit_trail",
+       "pooled_expert_records",
+       "deploy_to_platform",
+       "context_engineering_service",
+       "vertical_system_of_record",
+       "outcome_priced_rollup",
+       "licensed_autonomous_service",
+       "policy_aware_routing",
+       "agent_incident_response"
+      ],
+      "pools": "innovator"
+     }
+    ],
+    "key": "complementary_assets=specialised+asset_owner=innovator"
+   },
+   {
+    "groups": [
+     {
+      "keeper": "incumbent firms",
+      "ops": [
+       "agent_authority_registry",
+       "agent_payments",
+       "permission_connectors",
+       "energy_aware_compute"
+      ],
+      "pools": "incumbents"
+     }
+    ],
+    "key": "complementary_assets=specialised"
+   },
+   {
+    "groups": [
+     {
+      "keeper": "users",
+      "ops": [
+       "outcome_router",
+       "deployment_talent",
+       "open_weight_post_training"
+      ],
+      "pools": "users"
+     }
+    ],
+    "key": "otherwise"
+   }
+  ],
+  "marks": [
+   {
+    "id": "outcome_verification",
+    "n": 1,
+    "name": "Outcome verification with pay-per-verified-result billing",
+    "pools": "innovator",
+    "verdict": "A fat profit, kept by the maker"
+   },
+   {
+    "id": "regulated_assurance",
+    "n": 2,
+    "name": "Independent sign-off for AI in regulated work",
+    "pools": "innovator",
+    "verdict": "A monopoly-like profit, kept by the maker"
+   },
+   {
+    "id": "continual_learning_in_customer",
+    "n": 3,
+    "name": "A model that keeps learning inside one customer's work",
+    "pools": "innovator",
+    "verdict": "A moderate profit, kept by the maker"
+   },
+   {
+    "id": "agent_authority_registry",
+    "n": 4,
+    "name": "Know-your-agent and delegated-authority registry",
+    "pools": "incumbents",
+    "verdict": "A monopoly-like profit, kept by incumbent firms"
+   },
+   {
+    "id": "agent_audit_trail",
+    "n": 5,
+    "name": "Tamper-proof audit trail for what agents did",
+    "pools": "innovator",
+    "verdict": "A fat profit, kept by the maker"
+   },
+   {
+    "id": "ai_warranty",
+    "n": 6,
+    "name": "AI warranty backed by a pool of loss data",
+    "pools": "innovator",
+    "verdict": "A fat profit, kept by the maker"
+   },
+   {
+    "id": "pooled_expert_records",
+    "n": 7,
+    "name": "Graded expert-work records pooled across buyers",
+    "pools": "innovator",
+    "verdict": "A moderate profit, kept by the maker"
+   },
+   {
+    "id": "outcome_router",
+    "n": 8,
+    "name": "A router that chooses models from pooled outcomes",
+    "pools": "users",
+    "verdict": "Competed away to users"
+   },
+   {
+    "id": "agent_payments",
+    "n": 9,
+    "name": "Escrow that pays an agent only when its work passes a check",
+    "pools": "incumbents",
+    "verdict": "A monopoly-like profit, kept by incumbent firms"
+   },
+   {
+    "id": "permission_connectors",
+    "n": 10,
+    "name": "The standard way agents get permission into business software",
+    "pools": "incumbents",
+    "verdict": "A moderate profit, kept by incumbent firms"
+   },
+   {
+    "id": "deploy_to_platform",
+    "n": 11,
+    "name": "Deployment that leaves behind the platform the customer runs on",
+    "pools": "innovator",
+    "verdict": "A moderate profit, kept by the maker"
+   },
+   {
+    "id": "context_engineering_service",
+    "n": 12,
+    "name": "Capturing how a firm really works, for its agents",
+    "pools": "innovator",
+    "verdict": "A thin profit, kept by the maker"
+   },
+   {
+    "id": "vertical_system_of_record",
+    "n": 13,
+    "name": "A trade's AI system of record, with the approvals only that trade can give",
+    "pools": "innovator",
+    "verdict": "A fat profit, kept by the maker"
+   },
+   {
+    "id": "outcome_priced_rollup",
+    "n": 14,
+    "name": "An AI roll-up that moves its clients to fixed fees",
+    "pools": "innovator",
+    "verdict": "A moderate profit, kept by the maker"
+   },
+   {
+    "id": "licensed_autonomous_service",
+    "n": 15,
+    "name": "A licensed firm that sells the finished job and stands behind it",
+    "pools": "innovator",
+    "verdict": "A fat profit, kept by the maker"
+   },
+   {
+    "id": "energy_aware_compute",
+    "n": 16,
+    "name": "Moving computing to where power is available",
+    "pools": "incumbents",
+    "verdict": "A moderate profit, kept by incumbent firms"
+   },
+   {
+    "id": "deployment_talent",
+    "n": 17,
+    "name": "Training and placing the engineers who deploy AI",
+    "pools": "users",
+    "verdict": "Competed away to users"
+   },
+   {
+    "id": "policy_aware_routing",
+    "n": 18,
+    "name": "Routing that keeps a firm inside approved models and fails over when one is cut off",
+    "pools": "innovator",
+    "verdict": "A fat profit, kept by the maker"
+   },
+   {
+    "id": "open_weight_post_training",
+    "n": 19,
+    "name": "Tuning open models to frontier quality for one industry",
+    "pools": "users",
+    "verdict": "Competed away to users"
+   },
+   {
+    "id": "agent_incident_response",
+    "n": 20,
+    "name": "Incident response and forensics for agent failures",
+    "pools": "innovator",
+    "verdict": "A moderate profit, kept by the maker"
+   }
+  ],
+  "powers": {
+   "cols": [
+    "scale economies",
+    "network economies",
+    "switching costs",
+    "branding",
+    "a cornered resource",
+    "process power"
+   ],
+   "rows": [
+    {
+     "cells": [
+      false,
+      true,
+      false,
+      false,
+      false,
+      false
+     ],
+     "id": "outcome_verification"
+    },
+    {
+     "cells": [
+      false,
+      false,
+      false,
+      true,
+      false,
+      false
+     ],
+     "id": "regulated_assurance"
+    },
+    {
+     "cells": [
+      false,
+      false,
+      true,
+      false,
+      false,
+      false
+     ],
+     "id": "continual_learning_in_customer"
+    },
+    {
+     "cells": [
+      false,
+      true,
+      false,
+      false,
+      false,
+      false
+     ],
+     "id": "agent_authority_registry"
+    },
+    {
+     "cells": [
+      false,
+      false,
+      true,
+      false,
+      false,
+      false
+     ],
+     "id": "agent_audit_trail"
+    },
+    {
+     "cells": [
+      false,
+      false,
+      false,
+      false,
+      true,
+      false
+     ],
+     "id": "ai_warranty"
+    },
+    {
+     "cells": [
+      false,
+      false,
+      false,
+      false,
+      true,
+      false
+     ],
+     "id": "pooled_expert_records"
+    },
+    {
+     "cells": [
+      false,
+      true,
+      false,
+      false,
+      false,
+      false
+     ],
+     "id": "outcome_router"
+    },
+    {
+     "cells": [
+      false,
+      true,
+      true,
+      false,
+      false,
+      false
+     ],
+     "id": "agent_payments"
+    },
+    {
+     "cells": [
+      false,
+      true,
+      true,
+      false,
+      false,
+      false
+     ],
+     "id": "permission_connectors"
+    },
+    {
+     "cells": [
+      false,
+      false,
+      true,
+      false,
+      false,
+      false
+     ],
+     "id": "deploy_to_platform"
+    },
+    {
+     "cells": [
+      false,
+      false,
+      true,
+      false,
+      false,
+      false
+     ],
+     "id": "context_engineering_service"
+    },
+    {
+     "cells": [
+      false,
+      false,
+      true,
+      false,
+      false,
+      false
+     ],
+     "id": "vertical_system_of_record"
+    },
+    {
+     "cells": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      true
+     ],
+     "id": "outcome_priced_rollup"
+    },
+    {
+     "cells": [
+      false,
+      false,
+      false,
+      false,
+      true,
+      false
+     ],
+     "id": "licensed_autonomous_service"
+    },
+    {
+     "cells": [
+      false,
+      false,
+      false,
+      false,
+      true,
+      false
+     ],
+     "id": "energy_aware_compute"
+    },
+    {
+     "cells": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+     ],
+     "id": "deployment_talent"
+    },
+    {
+     "cells": [
+      false,
+      false,
+      true,
+      false,
+      false,
+      false
+     ],
+     "id": "policy_aware_routing"
+    },
+    {
+     "cells": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      true
+     ],
+     "id": "open_weight_post_training"
+    },
+    {
+     "cells": [
+      false,
+      false,
+      false,
+      true,
+      false,
+      false
+     ],
+     "id": "agent_incident_response"
+    }
+   ],
+   "totals": [
+    1,
+    5,
+    8,
+    2,
+    4,
+    2
+   ],
+   "unused": [
+    "counter-positioning"
+   ]
+  },
+  "size": {
+   "cols": [
+    "short",
+    "medium",
+    "long"
+   ],
+   "rows": [
+    {
+     "cells": [
+      {
+       "ops": [],
+       "tier": "none",
+       "word": "no lasting profit"
+      },
+      {
+       "ops": [],
+       "tier": "none",
+       "word": "no lasting profit"
+      },
+      {
+       "ops": [],
+       "tier": "none",
+       "word": "no lasting profit"
+      }
+     ],
+     "kind": "none"
+    },
+    {
+     "cells": [
+      {
+       "ops": [
+        "deployment_talent",
+        "open_weight_post_training"
+       ],
+       "tier": "thin",
+       "word": "thin"
+      },
+      {
+       "ops": [
+        "pooled_expert_records",
+        "outcome_priced_rollup",
+        "energy_aware_compute",
+        "agent_incident_response"
+       ],
+       "tier": "moderate",
+       "word": "moderate"
+      },
+      {
+       "ops": [
+        "ai_warranty"
+       ],
+       "tier": "fat",
+       "word": "fat"
+      }
+     ],
+     "kind": "scarcity"
+    },
+    {
+     "cells": [
+      {
+       "ops": [
+        "context_engineering_service"
+       ],
+       "tier": "thin",
+       "word": "thin"
+      },
+      {
+       "ops": [
+        "continual_learning_in_customer",
+        "permission_connectors",
+        "deploy_to_platform"
+       ],
+       "tier": "moderate",
+       "word": "moderate"
+      },
+      {
+       "ops": [
+        "agent_audit_trail",
+        "vertical_system_of_record"
+       ],
+       "tier": "fat",
+       "word": "fat"
+      }
+     ],
+     "kind": "switching_cost"
+    },
+    {
+     "cells": [
+      {
+       "ops": [],
+       "tier": "moderate",
+       "word": "moderate"
+      },
+      {
+       "ops": [
+        "outcome_verification",
+        "outcome_router"
+       ],
+       "tier": "fat",
+       "word": "fat"
+      },
+      {
+       "ops": [
+        "agent_authority_registry",
+        "agent_payments"
+       ],
+       "tier": "monopoly_like",
+       "word": "monopoly-like"
+      }
+     ],
+     "kind": "scale_network"
+    },
+    {
+     "cells": [
+      {
+       "ops": [],
+       "tier": "moderate",
+       "word": "moderate"
+      },
+      {
+       "ops": [
+        "licensed_autonomous_service",
+        "policy_aware_routing"
+       ],
+       "tier": "fat",
+       "word": "fat"
+      },
+      {
+       "ops": [
+        "regulated_assurance"
+       ],
+       "tier": "monopoly_like",
+       "word": "monopoly-like"
+      }
+     ],
+     "kind": "regulatory"
+    }
+   ]
+  }
+ },
  "opportunities": [
   {
    "acquirers": "Payment and billing platforms that want to settle agent work, and evaluation firms moving from testing models to checking live results. The labs buy evaluation and testing teams (OpenAI took on Context.ai's team and bought Promptfoo; Anthropic took on Humanloop's), though a checker owned by a model seller loses the independence buyers pay for",
