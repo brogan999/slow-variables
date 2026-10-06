@@ -1,0 +1,17 @@
+# What happens to each kind of firm (/firm/kinds, plan Part 44). A kind is an archetype tied to the census industries
+# behind it (`naics`, rows of the bundle's industries table) and, where the roll-up trades list has one, to its trade
+# (`trade`, a key of seed/census_trades.yaml). The export sums the figures; this file holds the names and the page's
+# own words. Text types no digit.
+kinds:
+  - {id: accounting, name: Accounting practice, naics: ["541200"], trade: accounting}
+  - {id: law, name: Law firm, naics: ["541100"], trade: legal}
+  - {id: software, name: Software and IT services company, naics: ["513200", "541500"], trade: it_services}
+  - {id: bank, name: Bank or lender, naics: ["5220A1", "522200"]}
+  - {id: insurer, name: Insurer or insurance broker, naics: ["524100", "524200"], trade: insurance_agencies}
+  - {id: hospital, name: Hospital or medical practice, naics: ["622100", "621100"], trade: medical_practices}
+  - {id: staffing, name: Staffing and business-support firm, naics: ["561300", "561400"], trade: contact_centres}
+  - {id: consultancy, name: Management consultancy, naics: ["541600"]}
+  - {id: property, name: Property manager or estate agent, naics: ["531000"], trade: property_management}
+  - {id: freight, name: Freight and logistics operator, naics: ["488500", "484000", "493100"], trade: freight}
+  - {id: manufacturer, name: Manufacturer, naics: ["336100", "336300", "336400", "3330A1"]}
+  - {id: retailer, name: Retailer, naics: ["455000", "4450A1", "458100"]}
