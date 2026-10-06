@@ -317,6 +317,18 @@ export type BoardDoc = {
   leans?: { id: string; label: string; meaning: string }[];
   judged?: { model: string; date: string; method: string; reviewed_by: string; tally: Record<string, number> };
   questions: { question: string; indicator: string | null; note?: string; status: string | null; href: string | null }[];
+  figures: BoardFigures;
+};
+// The board's figures, counted and laid out by src/ai_tracker/board.py: x and w are percentages of the bar.
+export type BoardMark = { key: string; word: Word; who: string; href: string; settles?: string; due?: boolean };
+export type BoardFigures = {
+  sections: { id: string; label: string; n: number; counts: Record<Word, number>; bar: { word: Word; n: number; x: number; w: number }[] }[];
+  sources: { id: string; label: string; n: number; counts: Record<Word, number>; too_early: number; marks: BoardMark[] }[];
+  forecasters: { who: string; n: number; counts: Record<Word, number>; marks: BoardMark[] }[];
+  forecasters_left_out: { n: number; names: { who: string; n: number }[] };
+  calendar: { dated: number; undated: number; bins: { id: string; label: string; n: number; counts: Record<Word, number>; marks: BoardMark[] }[] };
+  leans?: { centre: number; rows: { id: string; label: string; n: number; unjudged: number; true: number; false: number; counts: Record<string, number>; bar: { lean: string; n: number; x: number; w: number }[] }[] };
+  flow: { stated: number; tested: number; too_early: number; leaned: number; unleaned: number };
 };
 export const board = () => read<BoardDoc>("board.json");
 

@@ -244,7 +244,7 @@ def build(
             "leans": [{"id": w, **spec["leans"][w]} for w in order],
             "judged": {**judged["made_by"], "date": str(judged["made_by"]["date"]), "tally": {w: count(rs).get(w, 0) for w in order}},
         }
-    return {
+    doc = {
         **extra,
         "as_of": outlook.get("as_of"),
         "words": [{"id": w, **spec["words"][w]} for w in ORDER],
@@ -274,6 +274,121 @@ def build(
             for q in spec["questions"]
         ],
     }
+    return {**doc, "figures": figures(doc, spec.get("forecaster_aliases"))}
+
+
+# The page's figures. Every count and position is worked out here, so the web only places it.
+SOURCES = [  # who made the forecast, by the family it came from; a row belongs to the first kind that claims it
+    ("ledger", "Other people's dated claims", lambda r: r["kind"] == "ledger"),
+    ("writers", "Named writers' claims, tested nightly", lambda r: r["attribution"] == "author"),
+    ("extension", "This site, extending a writer", lambda r: r["attribution"] == "extension"),
+    # a warning sign is the reverse of a forecast: "not happening" there means the site's argument stands
+    ("exits", "This site's warning signs: what would prove its argument wrong", lambda r: r["kind"] == "exit"),
+    ("site", "This site's own forecasts", lambda r: True),
+]
+ISO = re.compile(r"\d{4}-\d{2}-\d{2}")
+SPANS = [2035, 2040, 2050]  # where the far bins end; a bin starts after the last single year, so no two rows share a year
+
+
+def _mark(r: dict[str, Any]) -> dict[str, Any]:
+    return {"key": f"{r['kind']}-{r['id']}", "word": r["word"], "who": r["who"], "href": r["href"]}
+
+
+def _counts(rows_: list[dict[str, Any]]) -> dict[str, int]:
+    return {w: sum(1 for r in rows_ if r["word"] == w) for w in ORDER}
+
+
+def _bar(counts: dict[str, int], key: str) -> list[dict[str, Any]]:
+    """A stacked bar as percentages of its own total; the last part ends at one hundred."""
+    total, x, out = sum(counts.values()), 0.0, []
+    for k, n in counts.items():
+        if n:
+            out.append({key: k, "n": n, "x": x, "w": 100 * n / total})
+            x += 100 * n / total
+    if out:
+        out[-1]["w"] = 100 - out[-1]["x"]
+    return out
+
+
+def _bin(year: int, now: int) -> tuple[int, str]:
+    if year < now:
+        return 0, f"Before {now}"
+    if year <= now + 5:
+        return year, str(year)
+    start = now + 6
+    for end in SPANS:
+        if year <= end:
+            return end, f"{start} to {end}" if start < end else str(end)
+        start = max(start, end + 1)
+    return 9999, f"After {SPANS[-1]}"
+
+
+def figures(doc: dict[str, Any], aliases: dict[str, str] | None = None) -> dict[str, Any]:
+    """What the page draws, from the built board: it reads the rows and changes none of them. `aliases` joins one
+    forecaster credited under two names (seed/board.yaml); the rows keep the credit their source gave."""
+    rs = [r for f in doc["folios"] for r in f["rows"]]
+    rank = {w: i for i, w in enumerate(ORDER)}
+    by_word = lambda rows_: sorted(rows_, key=lambda r: rank[r["word"]])  # noqa: E731
+    groups = [("all", "Every forecast", rs)] + [(f["id"], f["label"], f["rows"]) for f in doc["folios"]]
+    sections = [{"id": i, "label": name, "n": len(g), "counts": _counts(g), "bar": _bar(_counts(g), "word")} for i, name, g in groups]
+
+    sources, left = [], rs
+    for i, name, mine in SOURCES:
+        g, left = [r for r in left if mine(r)], [r for r in left if not mine(r)]
+        if g:
+            tested = by_word([r for r in g if r["word"] != "too_early"])
+            sources.append({"id": i, "label": name, "n": len(g), "counts": _counts(tested), "too_early": len(g) - len(tested),
+                            "marks": [_mark(r) for r in tested]})  # fmt: skip
+    named: dict[str, list[dict[str, Any]]] = {}
+    for r in rs:  # one name however a source credits it: "Lab (A, B et al.)" is "Lab", then the seed's aliases
+        if not r["who"].startswith("This site"):
+            who = re.sub(r"\s*\([^)]*\)$", "", r["who"])
+            named.setdefault((aliases or {}).get(who, who), []).append(r)
+    scored = lambda g: any(r["word"] != "too_early" for r in g)  # noqa: E731
+    people = sorted(named.items(), key=lambda kv: kv[0].casefold())
+    forecasters = [
+        {"who": who, "n": len(g), "counts": _counts(g), "marks": [_mark(r) for r in by_word(g)]} for who, g in people if scored(g)
+    ]
+    left_out = [{"who": who, "n": len(g)} for who, g in people if not scored(g)]
+
+    as_of = doc.get("as_of") or ""
+    dated = [r for r in rs if isinstance(r.get("settles"), str) and ISO.fullmatch(r["settles"])]
+    bins: dict[tuple[int, str], list[dict[str, Any]]] = {}
+    for r in sorted(dated, key=lambda r: (rank[r["word"]], r["settles"])):  # within a year, by word: marks of a kind sit together
+        bins.setdefault(_bin(int(r["settles"][:4]), int(as_of[:4] or 0)), []).append(r)
+    calendar = {
+        "dated": len(dated), "undated": len(rs) - len(dated),
+        "bins": [{"id": str(k), "label": label, "n": len(g), "counts": _counts(g),
+                  "marks": [{**_mark(r), "settles": r["settles"], "due": r["settles"] < as_of} for r in g]}
+                 for (k, label), g in sorted(bins.items())],
+    }  # fmt: skip
+
+    out = {"sections": sections, "sources": sources, "forecasters": forecasters,
+           "forecasters_left_out": {"n": len(left_out), "names": left_out}, "calendar": calendar}  # fmt: skip
+    early = [r for r in rs if r["word"] == "too_early"]
+    leaned = [r for r in early if r.get("judgement")]
+    if doc.get("leans"):
+        order = [w["id"] for w in doc["leans"]]
+        lean_rows = []
+        for i, name, g in groups:
+            c = {w: sum(1 for r in g if (r.get("judgement") or {}).get("lean") == w) for w in order}
+            if n := sum(c.values()):
+                true, false = c["likely_true"] + c["leans_true"], c["likely_false"] + c["leans_false"]
+                lean_rows.append({"id": i, "label": name, "n": n, "unjudged": sum(1 for r in g if r["word"] == "too_early") - n,
+                                  "true": true, "false": false, "counts": c})  # fmt: skip
+        # each row is its own shares, set either side of the centre; the longest arm of any row reaches the edge
+        arm = max((max(r["true"], r["false"]) + r["counts"]["toss_up"] / 2) / r["n"] for r in lean_rows) if lean_rows else 1
+        for r in lean_rows:
+            x, bar = 50 - 50 * (r["true"] + r["counts"]["toss_up"] / 2) / r["n"] / arm, []
+            for w in order:
+                if r["counts"][w]:
+                    bar.append({"lean": w, "n": r["counts"][w], "x": x, "w": 50 * r["counts"][w] / r["n"] / arm})
+                    x += bar[-1]["w"]
+            r["bar"] = bar
+        out["leans"] = {"centre": 50, "rows": lean_rows}
+    out["flow"] = {"stated": len(rs), "tested": len(rs) - len(early), "too_early": len(early), "leaned": len(leaned),
+                   "unleaned": len(early) - len(leaned)}  # fmt: skip
+    return out
 
 
 def problems(
