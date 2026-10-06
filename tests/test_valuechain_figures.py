@@ -17,6 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 TSX = ROOT / "web" / "src" / "components" / "ValueChainFigures.tsx"
 PARTS = ROOT / "web" / "src" / "components" / "diagrams" / "valuechain.tsx"
 PAGE = ROOT / "web" / "src" / "app" / "value-chain" / "page.tsx"
+MAP = ROOT / "web" / "src" / "components" / "MarketMap.tsx"
 YEAR = re.compile(r"\b(19|20)\d\d\b")
 TODAY = date(2026, 10, 6)
 
@@ -33,7 +34,8 @@ def _chain():
     for c in doc["companies"]:
         c["name"] = names[c["entity"]]
     before = copy.deepcopy(doc)
-    fig = vc.figures(doc, seed.layers, seed.sublayers, mm.primaries(mm.load(), seed.entities, TODAY), futures.rubric())
+    short = {e.id: mm.display(e) for e in seed.entities}
+    fig = vc.figures(doc, seed.layers, seed.sublayers, mm.primaries(mm.load(), seed.entities, TODAY), futures.rubric(), short)
     assert doc == before  # drawing the figures changes no judgement
     return doc, fig, seed
 
@@ -61,6 +63,7 @@ def test_category_bars_count_each_company_once_by_its_ownership_state():
         for r in L["rows"]:
             c = cats[r["id"]]
             assert r["n"] == c["n_entities"] == sum(s["n"] for s in r["segs"])
+            assert r["leaves"] == [{"name": p["name"], "n": p["n"]} for p in c["leaves"]]  # the dots sit on the category's row
             states = {e["id"]: e["ownership"] for e in c["entities"]}
             assert {s["state"]: s["n"] for s in r["segs"]} == {
                 "independent": sum(1 for v in states.values() if v is None),
@@ -128,18 +131,46 @@ def test_the_chain_counts_every_company_on_the_map_once_and_draws_each_unit_wher
     assert chain["tally"] == {d: sum(1 for u in units.values() if u["direction"] == d) for d in vc.DIRECTIONS}
 
 
+def test_the_chain_names_the_companies_it_files_under_no_part_and_calls_a_layer_judged_whole_the_whole_layer():
+    doc, fig, seed = _chain()
+    chain = fig["chain"]
+    names = {e.id: mm.display(e) for e in seed.entities}
+    unfiled = [names[i] for i, sub in mm.primaries(mm.load(), seed.entities, TODAY).items() if sub is None]
+    assert chain["unfiled"] == unfiled and len(unfiled) == chain["n_unfiled"]
+    subs = {s.id: s.name for s in seed.sublayers}
+    marks = {m["unit"]: m["name"] for L in chain["layers"] for d in vc.DIRECTIONS for m in L["marks"][d]}
+    for u in doc["units"]:  # a layer judged as a whole does not repeat its own name beneath its heading
+        assert marks[u["id"]] == (subs[u["sublayer"]] if u["sublayer"] else "the whole layer")
+
+
 def test_the_powers_grid_marks_only_what_a_unit_or_a_profile_names():
-    doc, fig, _ = _chain()
+    doc, fig, seed = _chain()
     grid = fig["powers"]
+    short = {e.id: mm.display(e) for e in seed.entities}
     assert grid["cols"] == list(vc.POWERS.values())
     assert [r["unit"] for r in grid["rows"]] == [u["id"] for u in doc["units"]]
     for r, u in zip(grid["rows"], doc["units"]):
         assert [c["power"] for c in r["cells"]] == grid["cols"]
         for c in r["cells"]:
             assert c["named"] == (c["power"] in u["powers"])
-            held = [p["name"] for p in doc["companies"] if u["id"] in p["units"] and c["power"] in [x["power"] for x in p["powers"]]]
+            held = [short[p["entity"]] for p in doc["companies"] if p["units"] == [u["id"]] and c["power"] in [x["power"] for x in p["powers"]]]
             assert c["companies"] == held and c["n"] == len(held)
+        assert r["n_single"] == sum(1 for p in doc["companies"] if p["units"] == [u["id"]])
     assert grid["n_units_naming"] == sum(1 for u in doc["units"] if u["powers"]) and grid["n_units"] == len(doc["units"])
+    assert grid["gloss"] == [vc.POWER_GLOSS[p] for p in grid["cols"]]  # each column head carries its plain meaning
+
+
+def test_no_company_profiled_in_more_than_one_part_is_counted_in_a_powers_cell():
+    doc, fig, seed = _chain()
+    grid = fig["powers"]
+    short = {e.id: mm.display(e) for e in seed.entities}
+    several = [c for c in doc["companies"] if len(c["units"]) > 1]
+    assert several  # the case exists, so the rule is exercised
+    counted = {n for r in grid["rows"] for c in r["cells"] for n in c["companies"]}
+    assert not counted & {short[c["entity"]] for c in several}
+    names = {u["id"]: r["name"] for u, r in zip(doc["units"], grid["rows"])}
+    assert grid["multi"] == [{"entity": c["entity"], "name": short[c["entity"]], "parts": [names[u] for u in c["units"]],
+                              "powers": [x["power"] for x in c["powers"]]} for c in several]
 
 
 def test_the_rent_rule_is_drawn_step_for_step_and_sends_each_profile_where_the_rule_does():
@@ -156,8 +187,25 @@ def test_the_rent_rule_is_drawn_step_for_step_and_sends_each_profile_where_the_r
             a = by[c["entity"]]["rent"]
             assert all(a.get(k) == v for k, v in rules[i]["when"].items())
             assert not any(all(a.get(k) == v for k, v in r["when"].items()) for r in rules[:i])  # the first rule that fits
-            assert c["reads"] == a["reads"]
+            assert c["tier"] == futures.TIER_WORDS[a["tier"]]
     assert {c["entity"] for c in rent["steps"][-1]["companies"]} == {e for e, c in by.items() if c["rent"]["pools"] == "users"}
+
+
+def test_the_rent_rule_never_says_a_company_s_profit_is_kept_by_somebody_else_when_it_may_be_an_owner_itself():
+    doc, fig, _ = _chain()
+    by = {c["entity"]: c["rent"] for c in doc["companies"]}
+    assert futures.POOLS_WORDS["incumbents"] == "incumbent firms"  # the shared words are not this figure's to change
+    for s in fig["rent"]["steps"]:
+        for c in s["companies"]:
+            a = by[c["entity"]]
+            assert c["goes_to"] == vc.RENT_GOES_TO.get(a["pools"])
+            assert "kept by incumbent" not in c["reads"] and "kept_by" not in c
+            if c["goes_to"] and a["tier"] != "none":
+                assert c["reads"] == f"a {c['tier']} profit, judged to go to {c['goes_to']}"
+            else:
+                assert c["reads"] == a["reads"]
+    assert "the company named can be one of them" in vc.RENT_GOES_TO["incumbents"]
+    assert "can be the company itself" in fig["rent"]["steps"][2]["keeps"]
 
 
 def test_figure_words_in_the_export_type_no_figure():
@@ -165,6 +213,7 @@ def test_figure_words_in_the_export_type_no_figure():
 
     _, fig, _ = _chain()
     words = [s[k] for s in fig["rent"]["steps"] for k in ("question", "keeps", "why")] + list(vc.DIRECTION_MEANS.values())
+    words += list(vc.RENT_GOES_TO.values()) + ["the whole layer"]
     for t in words:
         assert not re.search(r"\d", YEAR.sub("", t)) and not NUMBER_WORD.search(t), t
 
@@ -181,8 +230,11 @@ def test_the_page_has_at_least_five_figures_and_each_states_its_kind_key_and_foo
         if "KIND_LABEL.chart" in head or "MIXED" in head:
             assert "table=" in head, head[:80]  # a chart's numbers are folded beneath it, never hover-only
     page = PAGE.read_text()
+    assert len(blocks) == 5, len(blocks)  # the coverage dots sit on the category rows, not in a figure of their own
+    assert "CoverageDots" not in src and "PartDot" in _body(src, "CategoryBars")
     for name in re.findall(r"export function (\w+)", src):
         assert f"<{name} " in page, name
+    assert page.index("<VerifiedBars ") < page.index("<CategoryBars ")  # how firm the map is comes before the map's counts
     assert "<MarketMap " in page and "<PowersGlossary " in page  # what the page already had stays
 
 
@@ -198,9 +250,80 @@ def test_the_figures_type_no_digit_but_a_year_and_no_number_word():
             assert not NUMBER_WORD.search(text), line.strip()[:140]
 
 
-def test_hatching_is_kept_for_judgement():
-    src = TSX.read_text() + "\nexport function end"
-    for fn in ("CategoryBars", "VerifiedBars", "CoverageDots"):  # plain data: the map's own records
-        body = src[src.index(f"export function {fn}") :]
-        body = body[: body.index("\nexport function ", 1)] if "\nexport function " in body[1:] else body
-        assert "hatch" not in body, fn
+def _body(src: str, fn: str) -> str:
+    body = src[src.index(f"export function {fn}") :]
+    return body[: body.index("\nexport function ", 1)] if "\nexport function " in body[1:] else body
+
+
+def _code(f: Path) -> str:
+    return "\n".join(line for line in f.read_text().splitlines() if not line.lstrip().startswith("//"))
+
+
+def test_hatching_is_kept_for_a_judged_length_or_area_and_a_judged_mark_is_solid_and_says_judgement():
+    # one convention across pages: this page draws judged yes-or-no marks and placings only, so nothing on it is
+    # hatched, and the map's "not yet mapped" (a gap in coverage, not a judgement) is a dashed outline
+    for f in (TSX, PARTS, MAP):
+        assert "hatch" not in _code(f), f.name
+    src = TSX.read_text()
+    for const in ("MIXED", "JUDGED", "PLACED"):
+        assert "judgement" in re.search(rf'const {const} = "([^"]+)"', src).group(1), const
+    for fn, const in (("ChainFigure", "MIXED"), ("PowerGrid", "JUDGED"), ("RentRule", "PLACED")):
+        body = _body(src, fn)
+        assert f"note={{{const}}}" in body and "judgement" in body[body.index("keys=") : body.index("foot=")], fn
+    assert "border-dashed" in MAP.read_text()
+
+
+def test_the_judgement_figures_say_the_model_that_drafted_them_is_anthropic_s():
+    src = TSX.read_text()
+    for fn in ("ChainFigure", "PowerGrid", "RentRule"):
+        body = _body(src, fn)
+        foot = body[body.index("foot=") : body.index("tableLabel=")]
+        assert "Claude, a model made by Anthropic" in foot, fn
+
+
+def test_the_profit_rule_prints_no_size_word_beside_a_company_and_says_its_placings_are_judgement():
+    body = _body(TSX.read_text(), "RentRule")
+    assert "word=" not in body and "c.tier" not in body  # the size stays in the folded table's reading
+    assert "Judged to go to" in body and "Judged kept by" not in body
+    assert "ranks a company" not in body and "advice to buy or sell" in body
+    assert "where each company lands is this site&apos;s judgement" in TSX.read_text() or "where each company lands is this site's judgement" in TSX.read_text()
+
+
+def test_the_feet_say_what_the_counts_and_marks_do_not_show():
+    src = TSX.read_text()
+    assert "do not line up with these bars" in _body(src, "ChainFigure")  # the chain's counts against the map's
+    assert "not ones it judged unimportant" in _body(src, "ChainFigure")
+    assert "do not always agree" in _body(src, "PowerGrid")  # the part's judgement against its companies'
+    bars = _body(src, "CategoryBars")
+    assert "are a floor" in bars and "drawn as independent" not in bars
+    assert "slightly fewer than the placements" in bars and "which holds the remaining parts" in bars
+    assert 'independent: "no sale or closure recorded"' in PARTS.read_text()
+    assert "nothing here says its entry is wrong" in _body(src, "VerifiedBars")
+    assert "RL is reinforcement learning" in _body(src, "ChainFigure") and "RL is reinforcement learning" in _body(src, "PowerGrid")
+
+
+def test_the_export_s_figures_are_the_builder_s_and_the_committed_file_has_their_shape():
+    from ai_tracker import store as st
+    from ai_tracker.analysis.metrics import run_metrics
+
+    s = st.Store()
+    s.derived = run_metrics(s.con)  # derived rows are not committed; a fresh checkout computes them
+    doc = s._value_chain()
+    today = date.today()
+    short = {e.id: mm.display(e) for e in s.seed.entities}
+    want = vc.figures({k: v for k, v in doc.items() if k != "figures"} | {"sources": []}, s.seed.layers, s.seed.sublayers,
+                      mm.primaries(mm.load(), s.seed.entities, today), futures.rubric(), short)
+    assert doc["figures"] == want
+    names = {c["entity"]: c["name"] for c in doc["companies"]}  # the figures use the short name, the profiles the legal one
+    assert any(names[c["entity"]] != c["name"] for st_ in want["rent"]["steps"] for c in st_["companies"])
+
+    def shape(x):
+        if isinstance(x, dict):
+            return {k: shape(v) for k, v in x.items()}
+        return [shape(x[0])] if isinstance(x, list) and x else type(x).__name__
+
+    committed = json.loads((ROOT / "web" / "data" / "value_chain.json").read_text())["figures"]
+    live = json.loads(json.dumps(want))
+    assert {k: set(v) for k, v in committed.items()} == {k: set(v) for k, v in live.items()}
+    assert shape(committed["powers"]["rows"]) == shape(live["powers"]["rows"])
+    assert shape(committed["rent"]["steps"][2]) == shape(live["rent"]["steps"][2])
