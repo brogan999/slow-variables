@@ -1,5 +1,5 @@
 {
- "as_of": "2026-10-05",
+ "as_of": "2026-10-06",
  "buckets": [
   {
    "id": "methods",
@@ -69,12 +69,12 @@
       "derived_id": "224e6fdb689ea92e",
       "dims": {},
       "obs_ids": [
-       "30800ba5a047800a",
-       "82cc9293363619e6",
-       "834fb201e3c8e119"
+       "3800fc9843a1e8c8",
+       "6dc467eb9e6cb136",
+       "c162a73221e2c503"
       ],
       "unit": "index",
-      "value": 8.899999999999977
+      "value": 9.0
      },
      "layer_id": "model",
      "leading_lagging": "leading",
@@ -84,10 +84,10 @@
      "published": true,
      "source_cluster": null,
      "spark": {
-      "d": "M1.0,16.5 L5.1,11.3 L9.2,11.3 L13.3,11.3 L17.3,11.3 L21.4,2.9 L25.5,2.9 L29.6,9.7 L33.7,9.7 L37.8,13.9 L41.9,13.9 L46.0,2.0 L50.0,2.0 L54.1,2.0 L58.2,2.0 L62.3,2.0 L66.4,4.7 L70.5,4.7 L74.6,26.0 L78.7,24.0 L82.7,24.0 L86.8,24.0 L90.9,24.0 L95.0,10.9",
+      "d": "M1.0,15.8 L5.1,10.7 L9.2,10.7 L13.3,10.7 L17.3,10.7 L21.4,2.0 L25.5,2.0 L29.6,8.7 L33.7,8.7 L37.8,13.2 L41.9,13.2 L46.0,2.2 L50.0,2.2 L54.1,2.2 L58.2,2.2 L62.3,2.2 L66.4,4.9 L70.5,4.9 L74.6,26.0 L78.7,23.4 L82.7,23.4 L86.8,23.4 L90.9,23.4 L95.0,9.7",
       "end": [
        95.0,
-       10.9
+       9.7
       ]
      },
      "stale_as_of": null,
@@ -158,7 +158,7 @@
      },
      "layer_id": "model",
      "leading_lagging": "leading",
-     "n_observations": 50,
+     "n_observations": 51,
      "name": "METR 50% time horizon",
      "pending": null,
      "published": true,
@@ -801,16 +801,16 @@
      "grade": "A",
      "id": "open_weights_lag_months",
      "latest": {
-      "as_of": "2026-09-28",
-      "derived_id": "32f378f897746dc9",
+      "as_of": "2026-09-29",
+      "derived_id": "acf78078f7d43ec0",
       "dims": {},
       "obs_ids": [
-       "30800ba5a047800a",
-       "d51dfcde93dd4c91",
+       "3800fc9843a1e8c8",
+       "ca9be01a3ad00cf2",
        "da57bc3c9519e42e"
       ],
       "unit": "months",
-      "value": 6.800262812089356
+      "value": 6.83311432325887
      },
      "layer_id": "model",
      "leading_lagging": "leading",
@@ -1820,8 +1820,8 @@
      "grade": "D",
      "id": "safety_brake_events",
      "latest": {
-      "as_of": "2026-10-05",
-      "derived_id": "7a0412b015668f77",
+      "as_of": "2026-10-06",
+      "derived_id": "4d5b5328b25e4f2b",
       "dims": {},
       "obs_ids": [
        "2ab8fec44e7914a5",
@@ -2888,8 +2888,8 @@
      "grade": "D",
      "id": "cl_lab_release_claims",
      "latest": {
-      "as_of": "2026-10-05",
-      "derived_id": "1b9737900a1dd0fa",
+      "as_of": "2026-10-06",
+      "derived_id": "f741e637e89115f0",
       "dims": {},
       "obs_ids": [
        "0bdf1920b1feb93e",
@@ -3190,7 +3190,7 @@
    "to": "capture"
   }
  ],
- "verdict": "As of 2026-10-05: methods mixed, products consistent with normal, early adoption consistent with normal, adaptation consistent with normal, return arrow emerging. Thesis: holding.",
+ "verdict": "As of 2026-10-06: methods mixed, products consistent with normal, early adoption consistent with normal, adaptation consistent with normal, return arrow emerging. Thesis: holding.",
  "what_would_change": [
   "METR 50% time horizon: Normal = doubling time \u2265 7 months (\u2248213 days, METR's 2019\u20132025 trend); fast = \u2264 4 months (\u2248122 days), the AI 2027 assumption. Between the two is `emerging`. The bands are about the current pace, so the input is a log-linear fit over the 2024-onward window, the most recent window METR reports (89 days in the TH1.1 post of 29 Jan 2026), recomputed from METR's corrected data. On the 2023-onward window METR's published figure is 128.7 days, in the gap between the bands: the reading is window-sensitive and both numbers are shown.",
   "METR 80% time horizon: Same bands and same 2024-onward window as the 50% horizon, applied to our own fit because METR publishes doubling times for the 50% series only. The 2023-onward fit (horizon_doubling_days_80) sits in the gap between the bands.",
