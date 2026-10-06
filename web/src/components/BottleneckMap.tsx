@@ -173,7 +173,7 @@ export function MapReasons({ doc }: { doc: MapDoc }) {
 
 // Startup money under each sub-layer the chain's inputs sit in, all read at one quarter end. Money raised by selling
 // new shares in startups only: the build-out itself is paid for with big companies' capital spending and debt.
-export function Bets({ doc }: { doc: MapDoc }) {
+export function StartupMoneyTable({ doc }: { doc: MapDoc }) {
   const names = Object.fromEntries(doc.groups.flatMap((g) => g.sections.flatMap((s) => s.rows.map((r) => [r.id, r.name]))));
   const asOf = doc.bets.find((b) => b.as_of)?.as_of;
   return (

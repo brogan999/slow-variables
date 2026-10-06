@@ -271,23 +271,24 @@ export type MapDoc = {
     venture: { value: number; unit: string; as_of: string; obs_ids: string[]; href: string } | null }[];
 };
 // What the figures on /bottlenecks draw (bottleneck_map.figures): every count and position is the export's.
-export type MapUnit = { id: string; name: string; cls: string; href: string };
+export type MapUnit = { id: string; name: string; cls: string; low: boolean; href: string };
 export type MapCount = { units: MapUnit[]; total: number; counts: Record<string, number> };
 export type MapNamed = { id: string; name: string; href: string };
 export type MapClaimMark = { who: string; text: string; href: string; site: boolean };
 export type MapFigures = {
   rows: number; tally: Record<string, number>;
-  stages: (MapCount & { id: string; label: string; n: number; now: MapNamed[]; expected: MapNamed[] })[];
+  stages: (MapCount & { id: string; label: string; n: number; scored: number; now: (MapNamed & { low: boolean })[];
+    expected: (MapNamed & { acts: boolean; writers: { who: string; state: OutlookState }[] })[] })[];
   sections: (MapCount & { id: string; group: string; name: string })[];
   kinds: (MapCount & { id: string })[];
-  firm: { id: "chain" | "outside" | "barriers"; total: number; low: number; segs: { key: "reading" | "judged" | "blank"; n: number; x: number; w: number }[] }[];
+  firm: { id: "chain" | "outside" | "barriers"; total: number; segs: { key: "reading" | "low" | "plain" | "judged" | "blank"; n: number; x: number; w: number }[] }[];
   families: { id: string; name: string; href: string; total: number; counts: Record<string, number>;
     units: { id: number; title: string; cls: string; label: string | null; href: string }[] }[];
-  judged_words: { id: string; label: string; n: number }[];
+  judged_words: { id: string; label: string; n: number }[]; judged_mostly: boolean; judged_top_mostly: boolean;
   made_by: JudgedDoc["made_by"];
-  claims: { states: OutlookState[]; total: number; site: number; tally: Record<OutlookState, number>;
+  claims: { states: OutlookState[]; total: number; marks: number; site: number; tally: Record<OutlookState, number>;
     rows: (MapNamed & { cells: Record<OutlookState, MapClaimMark[]> })[] };
-  money: { as_of: string | null; ticks: { x: number; label: string }[];
+  money: { steps: "even" | "even_but_last" | "uneven"; as_of: string | null; ticks: { x: number; label: string }[];
     rows: { id: string; name: string; inputs: string[]; firms: number; x: number | null; flip: boolean; venture: MapDoc["bets"][number]["venture"] }[] };
 };
 export const bottleneckMap = () => read<MapDoc>("map.json");

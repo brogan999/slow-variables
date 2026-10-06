@@ -10,23 +10,24 @@ export const ROW_FILL: Record<string, { fill: string; open?: boolean; label: str
   tight: { fill: "var(--tight-5)", label: "an input scored tight or severe" },
   moderate: { fill: "var(--tight-3)", label: "an input scored moderate" },
   easing: { fill: "var(--tight-1)", label: "an input scored easing or slack" },
-  unscored: { fill: "var(--tight-4)", open: true, label: "an input with no score" },
+  unscored: { fill: "var(--s1)", open: true, label: "an input with no score" },
   friction: { fill: "var(--s3)", label: "a friction outside the chain, read by indicators on their own scale" },
   friction_unread: { fill: "var(--s3)", open: true, label: "a friction nothing reads" },
 };
 
-// What is known of one barrier: an indicator reads it (a plain fill), or a model judged it in words (hatched, in the
-// colour of the word), or neither (open).
-export const BARRIER_FILL: Record<string, { fill: string; hatched?: boolean; open?: boolean }> = {
+// What is known of one barrier: an indicator reads it (a plain fill), or a model judged it in words (hatched, in a
+// weight of ink for the word and never on the tightness ramp, which is kept for measured scores), or neither (open).
+// The two darker inks cannot be told apart in thin lines, so the words step dark, light, and light with no outline.
+export const BARRIER_FILL: Record<string, { fill: string; hatched?: boolean; open?: boolean; bare?: boolean }> = {
   read: { fill: "var(--s1)" },
-  still_binds: { fill: "var(--tight-5)", hatched: true },
-  easing: { fill: "var(--tight-2)", hatched: true },
-  largely_lifted: { fill: "var(--s3)", hatched: true },
+  still_binds: { fill: "var(--s1)", hatched: true },
+  easing: { fill: "var(--s3)", hatched: true },
+  largely_lifted: { fill: "var(--s3)", hatched: true, bare: true },
   blank: { fill: "var(--s3)", open: true },
 };
 
-export function Square({ fill, open = false, hatched = false }: { fill: string; open?: boolean; hatched?: boolean }) {
-  return <span aria-hidden className={`inline-block h-3 w-3 shrink-0 ${hatched ? "hatch" : ""} ${open || hatched ? "ring-[1.5px] ring-inset ring-current" : ""}`} style={{ color: fill, background: open ? "var(--surface)" : hatched ? undefined : fill }} />;
+export function Square({ fill, open = false, hatched = false, bare = false }: { fill: string; open?: boolean; hatched?: boolean; bare?: boolean }) {
+  return <span aria-hidden className={`inline-block h-3 w-3 shrink-0 ${hatched ? "hatch" : ""} ${(open || hatched) && !bare ? "ring-[1.5px] ring-inset ring-current" : ""}`} style={{ color: fill, background: open ? "var(--surface)" : hatched ? undefined : fill }} />;
 }
 
 // A row of squares under a name, with the count the export made at its end.
@@ -39,8 +40,11 @@ export function UnitRow({ name, sub, total, children }: { name: React.ReactNode;
   );
 }
 
+// A score the scorecard marks as low in confidence is hatched in its own colour, as it is there.
+const LOW = ", low confidence";
+
 export function RowSquares({ units }: { units: MapUnit[] }) {
-  return <>{units.map((u) => <a key={u.id} href={u.href} title={`${u.name}: ${ROW_FILL[u.cls].label}`} className="flex hover:opacity-70"><Square {...ROW_FILL[u.cls]} /><span className="sr-only">{u.name}: {ROW_FILL[u.cls].label}</span></a>)}</>;
+  return <>{units.map((u) => <a key={u.id} href={u.href} title={`${u.name}: ${ROW_FILL[u.cls].label}${u.low ? LOW : ""}`} className="flex hover:opacity-70"><Square {...ROW_FILL[u.cls]} hatched={u.low} /><span className="sr-only">{u.name}: {ROW_FILL[u.cls].label}{u.low ? LOW : ""}</span></a>)}</>;
 }
 
 // The same glyphs the outlook page prints beside a claim's state.

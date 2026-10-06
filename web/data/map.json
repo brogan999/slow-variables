@@ -212,6 +212,7 @@
  ],
  "figures": {
   "claims": {
+   "marks": 40,
    "rows": [
     {
      "cells": {
@@ -714,7 +715,7 @@
      "name": "The information ecosystem"
     }
    ],
-   "site": 12,
+   "site": 9,
    "states": [
     "holding",
     "failing",
@@ -723,11 +724,11 @@
    ],
    "tally": {
     "both": 7,
-    "failing": 2,
-    "holding": 9,
-    "untestable": 22
+    "failing": 1,
+    "holding": 8,
+    "untestable": 21
    },
-   "total": 40
+   "total": 37
   },
   "families": [
    {
@@ -1469,13 +1470,24 @@
   "firm": [
    {
     "id": "chain",
-    "low": 1,
     "segs": [
      {
       "key": "reading",
-      "n": 10,
-      "w": 43.47826086956522,
+      "n": 9,
+      "w": 39.130434782608695,
       "x": 0.0
+     },
+     {
+      "key": "low",
+      "n": 1,
+      "w": 4.3478260869565215,
+      "x": 39.130434782608695
+     },
+     {
+      "key": "plain",
+      "n": 0,
+      "w": 0.0,
+      "x": 43.47826086956522
      },
      {
       "key": "judged",
@@ -1494,13 +1506,24 @@
    },
    {
     "id": "outside",
-    "low": 0,
     "segs": [
      {
       "key": "reading",
-      "n": 13,
-      "w": 100.0,
+      "n": 11,
+      "w": 84.61538461538461,
       "x": 0.0
+     },
+     {
+      "key": "low",
+      "n": 0,
+      "w": 0.0,
+      "x": 84.61538461538461
+     },
+     {
+      "key": "plain",
+      "n": 2,
+      "w": 15.384615384615385,
+      "x": 84.61538461538461
      },
      {
       "key": "judged",
@@ -1519,13 +1542,24 @@
    },
    {
     "id": "barriers",
-    "low": 0,
     "segs": [
      {
       "key": "reading",
       "n": 27,
       "w": 30.337078651685392,
       "x": 0.0
+     },
+     {
+      "key": "low",
+      "n": 0,
+      "w": 0.0,
+      "x": 30.337078651685392
+     },
+     {
+      "key": "plain",
+      "n": 0,
+      "w": 0.0,
+      "x": 30.337078651685392
      },
      {
       "key": "judged",
@@ -1543,6 +1577,8 @@
     "total": 89
    }
   ],
+  "judged_mostly": true,
+  "judged_top_mostly": true,
   "judged_words": [
    {
     "id": "still_binds",
@@ -1575,84 +1611,98 @@
       "cls": "tight",
       "href": "#why-energy",
       "id": "energy",
+      "low": true,
       "name": "Electricity generation"
      },
      {
       "cls": "tight",
       "href": "#why-data_centres",
       "id": "data_centres",
+      "low": false,
       "name": "Data-centre buildings"
      },
      {
       "cls": "moderate",
       "href": "#why-foundry",
       "id": "foundry",
+      "low": false,
       "name": "Chip foundries"
      },
      {
       "cls": "moderate",
       "href": "#why-packaging",
       "id": "packaging",
+      "low": false,
       "name": "Advanced chip packaging"
      },
      {
       "cls": "moderate",
       "href": "#why-memory",
       "id": "memory",
+      "low": false,
       "name": "Memory"
      },
      {
       "cls": "moderate",
       "href": "#why-accelerators",
       "id": "accelerators",
+      "low": false,
       "name": "AI chips"
      },
      {
       "cls": "easing",
       "href": "#why-inference",
       "id": "inference",
+      "low": false,
       "name": "Running models"
      },
      {
       "cls": "unscored",
       "href": "#why-minerals",
       "id": "minerals",
+      "low": false,
       "name": "Critical minerals"
      },
      {
       "cls": "unscored",
       "href": "#why-grid",
       "id": "grid",
+      "low": false,
       "name": "The grid and its hookups"
      },
      {
       "cls": "unscored",
       "href": "#why-chip_equipment",
       "id": "chip_equipment",
+      "low": false,
       "name": "Chip-making equipment"
      },
      {
       "cls": "unscored",
       "href": "#why-networking",
       "id": "networking",
+      "low": false,
       "name": "Networking and optics"
      },
      {
       "cls": "unscored",
       "href": "#why-training_infrastructure",
       "id": "training_infrastructure",
+      "low": false,
       "name": "Training infrastructure"
      },
      {
       "cls": "unscored",
       "href": "#why-training_data",
       "id": "training_data",
+      "low": false,
       "name": "Training data"
      },
      {
       "cls": "unscored",
       "href": "#why-deployment_platforms",
       "id": "deployment_platforms",
+      "low": false,
       "name": "Deployment platforms"
      }
     ]
@@ -1669,12 +1719,14 @@
       "cls": "easing",
       "href": "#why-capital",
       "id": "capital",
+      "low": false,
       "name": "Capital"
      },
      {
       "cls": "unscored",
       "href": "#why-applications",
       "id": "applications",
+      "low": false,
       "name": "Applications"
      }
     ]
@@ -1691,42 +1743,49 @@
       "cls": "easing",
       "href": "#why-pretraining",
       "id": "pretraining",
+      "low": false,
       "name": "Building frontier models"
      },
      {
       "cls": "easing",
       "href": "#why-agents",
       "id": "agents",
+      "low": false,
       "name": "Agents and tool use"
      },
      {
       "cls": "unscored",
       "href": "#why-systems_software",
       "id": "systems_software",
+      "low": false,
       "name": "Systems software"
      },
      {
       "cls": "unscored",
       "href": "#why-post_training",
       "id": "post_training",
+      "low": false,
       "name": "Post-training"
      },
      {
       "cls": "unscored",
       "href": "#why-continual_learning",
       "id": "continual_learning",
+      "low": false,
       "name": "Continual learning"
      },
      {
       "cls": "unscored",
       "href": "#why-evaluations",
       "id": "evaluations",
+      "low": false,
       "name": "Tests and evaluations"
      },
      {
       "cls": "unscored",
       "href": "#why-routing",
       "id": "routing",
+      "low": false,
       "name": "Routing between models"
      }
     ]
@@ -1939,6 +1998,7 @@
      "x": null
     }
    ],
+   "steps": "even_but_last",
    "ticks": [
     {
      "label": "$100M",
@@ -1980,66 +2040,77 @@
       "cls": "tight",
       "href": "#why-energy",
       "id": "energy",
+      "low": true,
       "name": "Electricity generation"
      },
      {
       "cls": "tight",
       "href": "#why-data_centres",
       "id": "data_centres",
+      "low": false,
       "name": "Data-centre buildings"
      },
      {
       "cls": "moderate",
       "href": "#why-foundry",
       "id": "foundry",
+      "low": false,
       "name": "Chip foundries"
      },
      {
       "cls": "moderate",
       "href": "#why-packaging",
       "id": "packaging",
+      "low": false,
       "name": "Advanced chip packaging"
      },
      {
       "cls": "moderate",
       "href": "#why-memory",
       "id": "memory",
+      "low": false,
       "name": "Memory"
      },
      {
       "cls": "moderate",
       "href": "#why-accelerators",
       "id": "accelerators",
+      "low": false,
       "name": "AI chips"
      },
      {
       "cls": "easing",
       "href": "#why-capital",
       "id": "capital",
+      "low": false,
       "name": "Capital"
      },
      {
       "cls": "unscored",
       "href": "#why-minerals",
       "id": "minerals",
+      "low": false,
       "name": "Critical minerals"
      },
      {
       "cls": "unscored",
       "href": "#why-grid",
       "id": "grid",
+      "low": false,
       "name": "The grid and its hookups"
      },
      {
       "cls": "unscored",
       "href": "#why-chip_equipment",
       "id": "chip_equipment",
+      "low": false,
       "name": "Chip-making equipment"
      },
      {
       "cls": "unscored",
       "href": "#why-networking",
       "id": "networking",
+      "low": false,
       "name": "Networking and optics"
      }
     ]
@@ -2058,18 +2129,21 @@
       "cls": "easing",
       "href": "#why-pretraining",
       "id": "pretraining",
+      "low": false,
       "name": "Building frontier models"
      },
      {
       "cls": "unscored",
       "href": "#why-systems_software",
       "id": "systems_software",
+      "low": false,
       "name": "Systems software"
      },
      {
       "cls": "unscored",
       "href": "#why-training_infrastructure",
       "id": "training_infrastructure",
+      "low": false,
       "name": "Training infrastructure"
      }
     ]
@@ -2087,24 +2161,28 @@
       "cls": "unscored",
       "href": "#why-post_training",
       "id": "post_training",
+      "low": false,
       "name": "Post-training"
      },
      {
       "cls": "unscored",
       "href": "#why-continual_learning",
       "id": "continual_learning",
+      "low": false,
       "name": "Continual learning"
      },
      {
       "cls": "unscored",
       "href": "#why-evaluations",
       "id": "evaluations",
+      "low": false,
       "name": "Tests and evaluations"
      },
      {
       "cls": "unscored",
       "href": "#why-training_data",
       "id": "training_data",
+      "low": false,
       "name": "Training data"
      }
     ]
@@ -2123,24 +2201,28 @@
       "cls": "easing",
       "href": "#why-inference",
       "id": "inference",
+      "low": false,
       "name": "Running models"
      },
      {
       "cls": "easing",
       "href": "#why-agents",
       "id": "agents",
+      "low": false,
       "name": "Agents and tool use"
      },
      {
       "cls": "unscored",
       "href": "#why-routing",
       "id": "routing",
+      "low": false,
       "name": "Routing between models"
      },
      {
       "cls": "unscored",
       "href": "#why-deployment_platforms",
       "id": "deployment_platforms",
+      "low": false,
       "name": "Deployment platforms"
      }
     ]
@@ -2158,6 +2240,7 @@
       "cls": "unscored",
       "href": "#why-applications",
       "id": "applications",
+      "low": false,
       "name": "Applications"
      }
     ]
@@ -2175,54 +2258,63 @@
       "cls": "friction",
       "href": "#why-family_0",
       "id": "family_0",
+      "low": false,
       "name": "From a working model to a product"
      },
      {
       "cls": "friction",
       "href": "#why-family_1",
       "id": "family_1",
+      "low": false,
       "name": "People taking up the products"
      },
      {
       "cls": "friction",
       "href": "#why-family_2",
       "id": "family_2",
+      "low": false,
       "name": "Firms reorganising around the tools"
      },
      {
       "cls": "friction",
       "href": "#why-family_3",
       "id": "family_3",
+      "low": false,
       "name": "Law, regulation and institutions"
      },
      {
       "cls": "friction",
       "href": "#why-family_4",
       "id": "family_4",
+      "low": false,
       "name": "The physical world's own speed"
      },
      {
       "cls": "friction",
       "href": "#why-family_5",
       "id": "family_5",
+      "low": false,
       "name": "Deliberate safety brakes"
      },
      {
       "cls": "friction",
       "href": "#why-family_6",
       "id": "family_6",
+      "low": false,
       "name": "Markets and prices"
      },
      {
       "cls": "friction",
       "href": "#why-family_7",
       "id": "family_7",
+      "low": false,
       "name": "How science itself moves"
      },
      {
       "cls": "friction",
       "href": "#why-family_8",
       "id": "family_8",
+      "low": false,
       "name": "Limits on AI speeding up its own spread"
      }
     ]
@@ -2240,24 +2332,28 @@
       "cls": "friction",
       "href": "#why-verification",
       "id": "verification",
+      "low": false,
       "name": "Verification and assurance"
      },
      {
       "cls": "friction",
       "href": "#why-measuring_returns",
       "id": "measuring_returns",
+      "low": false,
       "name": "Measuring the returns"
      },
      {
       "cls": "friction",
       "href": "#why-work_and_pay",
       "id": "work_and_pay",
+      "low": false,
       "name": "Work and pay"
      },
      {
       "cls": "friction",
       "href": "#why-information",
       "id": "information",
+      "low": false,
       "name": "The information ecosystem"
      }
     ]
@@ -2274,44 +2370,124 @@
     },
     "expected": [
      {
+      "acts": true,
       "href": "#why-grid",
       "id": "grid",
-      "name": "The grid and its hookups"
+      "name": "The grid and its hookups",
+      "writers": [
+       {
+        "state": "holding",
+        "who": "This site"
+       },
+       {
+        "state": "untestable",
+        "who": "Byrne Hobart"
+       }
+      ]
      },
      {
+      "acts": true,
       "href": "#why-data_centres",
       "id": "data_centres",
-      "name": "Data-centre buildings"
+      "name": "Data-centre buildings",
+      "writers": [
+       {
+        "state": "holding",
+        "who": "This site"
+       },
+       {
+        "state": "untestable",
+        "who": "David Cahn"
+       },
+       {
+        "state": "untestable",
+        "who": "Byrne Hobart"
+       }
+      ]
      },
      {
+      "acts": true,
       "href": "#why-packaging",
       "id": "packaging",
-      "name": "Advanced chip packaging"
+      "name": "Advanced chip packaging",
+      "writers": [
+       {
+        "state": "untestable",
+        "who": "This site"
+       }
+      ]
      },
      {
+      "acts": true,
       "href": "#why-memory",
       "id": "memory",
-      "name": "Memory"
+      "name": "Memory",
+      "writers": [
+       {
+        "state": "untestable",
+        "who": "This site"
+       }
+      ]
      },
      {
+      "acts": true,
       "href": "#why-accelerators",
       "id": "accelerators",
-      "name": "AI chips"
+      "name": "AI chips",
+      "writers": [
+       {
+        "state": "both",
+        "who": "This site"
+       }
+      ]
      },
      {
+      "acts": true,
       "href": "#why-post_training",
       "id": "post_training",
-      "name": "Post-training"
+      "name": "Post-training",
+      "writers": [
+       {
+        "state": "failing",
+        "who": "This site"
+       },
+       {
+        "state": "holding",
+        "who": "Sean Cai"
+       }
+      ]
      },
      {
+      "acts": true,
       "href": "#why-training_data",
       "id": "training_data",
-      "name": "Training data"
+      "name": "Training data",
+      "writers": [
+       {
+        "state": "failing",
+        "who": "This site"
+       },
+       {
+        "state": "untestable",
+        "who": "Dwarkesh Patel and Jerry Han"
+       },
+       {
+        "state": "untestable",
+        "who": "Sean Cai"
+       }
+      ]
      },
      {
+      "acts": true,
       "href": "#why-family_8",
       "id": "family_8",
-      "name": "Limits on AI speeding up its own spread"
+      "name": "Limits on AI speeding up its own spread",
+      "writers": [
+       {
+        "state": "both",
+        "who": "Benjamin Jones"
+       }
+      ]
      }
     ],
     "id": "methods",
@@ -2321,128 +2497,150 @@
      {
       "href": "#why-energy",
       "id": "energy",
+      "low": true,
       "name": "Electricity generation"
      },
      {
       "href": "#why-data_centres",
       "id": "data_centres",
+      "low": false,
       "name": "Data-centre buildings"
      }
     ],
+    "scored": 8,
     "total": 19,
     "units": [
      {
       "cls": "tight",
       "href": "#why-energy",
       "id": "energy",
+      "low": true,
       "name": "Electricity generation"
      },
      {
       "cls": "tight",
       "href": "#why-data_centres",
       "id": "data_centres",
+      "low": false,
       "name": "Data-centre buildings"
      },
      {
       "cls": "moderate",
       "href": "#why-foundry",
       "id": "foundry",
+      "low": false,
       "name": "Chip foundries"
      },
      {
       "cls": "moderate",
       "href": "#why-packaging",
       "id": "packaging",
+      "low": false,
       "name": "Advanced chip packaging"
      },
      {
       "cls": "moderate",
       "href": "#why-memory",
       "id": "memory",
+      "low": false,
       "name": "Memory"
      },
      {
       "cls": "moderate",
       "href": "#why-accelerators",
       "id": "accelerators",
+      "low": false,
       "name": "AI chips"
      },
      {
       "cls": "easing",
       "href": "#why-capital",
       "id": "capital",
+      "low": false,
       "name": "Capital"
      },
      {
       "cls": "easing",
       "href": "#why-pretraining",
       "id": "pretraining",
+      "low": false,
       "name": "Building frontier models"
      },
      {
       "cls": "unscored",
       "href": "#why-minerals",
       "id": "minerals",
+      "low": false,
       "name": "Critical minerals"
      },
      {
       "cls": "unscored",
       "href": "#why-grid",
       "id": "grid",
+      "low": false,
       "name": "The grid and its hookups"
      },
      {
       "cls": "unscored",
       "href": "#why-chip_equipment",
       "id": "chip_equipment",
+      "low": false,
       "name": "Chip-making equipment"
      },
      {
       "cls": "unscored",
       "href": "#why-networking",
       "id": "networking",
+      "low": false,
       "name": "Networking and optics"
      },
      {
       "cls": "unscored",
       "href": "#why-systems_software",
       "id": "systems_software",
+      "low": false,
       "name": "Systems software"
      },
      {
       "cls": "unscored",
       "href": "#why-training_infrastructure",
       "id": "training_infrastructure",
+      "low": false,
       "name": "Training infrastructure"
      },
      {
       "cls": "unscored",
       "href": "#why-post_training",
       "id": "post_training",
+      "low": false,
       "name": "Post-training"
      },
      {
       "cls": "unscored",
       "href": "#why-continual_learning",
       "id": "continual_learning",
+      "low": false,
       "name": "Continual learning"
      },
      {
       "cls": "unscored",
       "href": "#why-evaluations",
       "id": "evaluations",
+      "low": false,
       "name": "Tests and evaluations"
      },
      {
       "cls": "unscored",
       "href": "#why-training_data",
       "id": "training_data",
+      "low": false,
       "name": "Training data"
      },
      {
       "cls": "friction",
       "href": "#why-family_8",
       "id": "family_8",
+      "low": false,
       "name": "Limits on AI speeding up its own spread"
      }
     ]
@@ -2457,19 +2655,40 @@
     },
     "expected": [
      {
+      "acts": true,
       "href": "#why-family_0",
       "id": "family_0",
-      "name": "From a working model to a product"
+      "name": "From a working model to a product",
+      "writers": [
+       {
+        "state": "both",
+        "who": "Rabanser, Kapoor and colleagues"
+       }
+      ]
      },
      {
+      "acts": false,
       "href": "#why-family_5",
       "id": "family_5",
-      "name": "Deliberate safety brakes"
+      "name": "Deliberate safety brakes",
+      "writers": [
+       {
+        "state": "untestable",
+        "who": "Byrne Hobart"
+       }
+      ]
      },
      {
+      "acts": true,
       "href": "#why-verification",
       "id": "verification",
-      "name": "Verification and assurance"
+      "name": "Verification and assurance",
+      "writers": [
+       {
+        "state": "both",
+        "who": "This site, extending Gillian Hadfield and Andrew Koh"
+       }
+      ]
      }
     ],
     "id": "products",
@@ -2479,116 +2698,136 @@
      {
       "href": "#why-energy",
       "id": "energy",
+      "low": true,
       "name": "Electricity generation"
      },
      {
       "href": "#why-data_centres",
       "id": "data_centres",
+      "low": false,
       "name": "Data-centre buildings"
      }
     ],
+    "scored": 9,
     "total": 17,
     "units": [
      {
       "cls": "tight",
       "href": "#why-energy",
       "id": "energy",
+      "low": true,
       "name": "Electricity generation"
      },
      {
       "cls": "tight",
       "href": "#why-data_centres",
       "id": "data_centres",
+      "low": false,
       "name": "Data-centre buildings"
      },
      {
       "cls": "moderate",
       "href": "#why-foundry",
       "id": "foundry",
+      "low": false,
       "name": "Chip foundries"
      },
      {
       "cls": "moderate",
       "href": "#why-packaging",
       "id": "packaging",
+      "low": false,
       "name": "Advanced chip packaging"
      },
      {
       "cls": "moderate",
       "href": "#why-memory",
       "id": "memory",
+      "low": false,
       "name": "Memory"
      },
      {
       "cls": "moderate",
       "href": "#why-accelerators",
       "id": "accelerators",
+      "low": false,
       "name": "AI chips"
      },
      {
       "cls": "easing",
       "href": "#why-capital",
       "id": "capital",
+      "low": false,
       "name": "Capital"
      },
      {
       "cls": "easing",
       "href": "#why-inference",
       "id": "inference",
+      "low": false,
       "name": "Running models"
      },
      {
       "cls": "easing",
       "href": "#why-agents",
       "id": "agents",
+      "low": false,
       "name": "Agents and tool use"
      },
      {
       "cls": "unscored",
       "href": "#why-grid",
       "id": "grid",
+      "low": false,
       "name": "The grid and its hookups"
      },
      {
       "cls": "unscored",
       "href": "#why-post_training",
       "id": "post_training",
+      "low": false,
       "name": "Post-training"
      },
      {
       "cls": "unscored",
       "href": "#why-continual_learning",
       "id": "continual_learning",
+      "low": false,
       "name": "Continual learning"
      },
      {
       "cls": "unscored",
       "href": "#why-evaluations",
       "id": "evaluations",
+      "low": false,
       "name": "Tests and evaluations"
      },
      {
       "cls": "unscored",
       "href": "#why-routing",
       "id": "routing",
+      "low": false,
       "name": "Routing between models"
      },
      {
       "cls": "unscored",
       "href": "#why-deployment_platforms",
       "id": "deployment_platforms",
+      "low": false,
       "name": "Deployment platforms"
      },
      {
       "cls": "friction",
       "href": "#why-family_0",
       "id": "family_0",
+      "low": false,
       "name": "From a working model to a product"
      },
      {
       "cls": "friction",
       "href": "#why-verification",
       "id": "verification",
+      "low": false,
       "name": "Verification and assurance"
      }
     ]
@@ -2601,96 +2840,144 @@
     },
     "expected": [
      {
+      "acts": true,
       "href": "#why-agents",
       "id": "agents",
-      "name": "Agents and tool use"
+      "name": "Agents and tool use",
+      "writers": [
+       {
+        "state": "untestable",
+        "who": "This site"
+       },
+       {
+        "state": "untestable",
+        "who": "Byrne Hobart and Nikhil Davar; Soren Larson"
+       }
+      ]
      },
      {
+      "acts": true,
       "href": "#why-applications",
       "id": "applications",
-      "name": "Applications"
+      "name": "Applications",
+      "writers": [
+       {
+        "state": "untestable",
+        "who": "Byrne Hobart; Sean Cai"
+       }
+      ]
      },
      {
+      "acts": true,
       "href": "#why-family_1",
       "id": "family_1",
-      "name": "People taking up the products"
+      "name": "People taking up the products",
+      "writers": [
+       {
+        "state": "both",
+        "who": "Arvind Narayanan and Sayash Kapoor"
+       }
+      ]
      },
      {
+      "acts": true,
       "href": "#why-verification",
       "id": "verification",
-      "name": "Verification and assurance"
+      "name": "Verification and assurance",
+      "writers": [
+       {
+        "state": "both",
+        "who": "This site, extending Gillian Hadfield and Andrew Koh"
+       },
+       {
+        "state": "untestable",
+        "who": "Byrne Hobart"
+       }
+      ]
      }
     ],
     "id": "early_adoption",
     "label": "Diffusion: early adoption",
     "n": 3,
     "now": [],
+    "scored": 2,
     "total": 11,
     "units": [
      {
       "cls": "easing",
       "href": "#why-inference",
       "id": "inference",
+      "low": false,
       "name": "Running models"
      },
      {
       "cls": "easing",
       "href": "#why-agents",
       "id": "agents",
+      "low": false,
       "name": "Agents and tool use"
      },
      {
       "cls": "unscored",
       "href": "#why-continual_learning",
       "id": "continual_learning",
+      "low": false,
       "name": "Continual learning"
      },
      {
       "cls": "unscored",
       "href": "#why-evaluations",
       "id": "evaluations",
+      "low": false,
       "name": "Tests and evaluations"
      },
      {
       "cls": "unscored",
       "href": "#why-routing",
       "id": "routing",
+      "low": false,
       "name": "Routing between models"
      },
      {
       "cls": "unscored",
       "href": "#why-deployment_platforms",
       "id": "deployment_platforms",
+      "low": false,
       "name": "Deployment platforms"
      },
      {
       "cls": "unscored",
       "href": "#why-applications",
       "id": "applications",
+      "low": false,
       "name": "Applications"
      },
      {
       "cls": "friction",
       "href": "#why-family_1",
       "id": "family_1",
+      "low": false,
       "name": "People taking up the products"
      },
      {
       "cls": "friction",
       "href": "#why-family_3",
       "id": "family_3",
+      "low": false,
       "name": "Law, regulation and institutions"
      },
      {
       "cls": "friction",
       "href": "#why-verification",
       "id": "verification",
+      "low": false,
       "name": "Verification and assurance"
      },
      {
       "cls": "friction",
       "href": "#why-measuring_returns",
       "id": "measuring_returns",
+      "low": false,
       "name": "Measuring the returns"
      }
     ]
@@ -2702,75 +2989,93 @@
     },
     "expected": [
      {
+      "acts": true,
       "href": "#why-family_3",
       "id": "family_3",
-      "name": "Law, regulation and institutions"
+      "name": "Law, regulation and institutions",
+      "writers": [
+       {
+        "state": "untestable",
+        "who": "Byrne Hobart"
+       }
+      ]
      }
     ],
     "id": "adaptation",
     "label": "Diffusion: adaptation",
     "n": 4,
     "now": [],
+    "scored": 0,
     "total": 10,
     "units": [
      {
       "cls": "unscored",
       "href": "#why-applications",
       "id": "applications",
+      "low": false,
       "name": "Applications"
      },
      {
       "cls": "friction",
       "href": "#why-family_2",
       "id": "family_2",
+      "low": false,
       "name": "Firms reorganising around the tools"
      },
      {
       "cls": "friction",
       "href": "#why-family_3",
       "id": "family_3",
+      "low": false,
       "name": "Law, regulation and institutions"
      },
      {
       "cls": "friction",
       "href": "#why-family_4",
       "id": "family_4",
+      "low": false,
       "name": "The physical world's own speed"
      },
      {
       "cls": "friction",
       "href": "#why-family_5",
       "id": "family_5",
+      "low": false,
       "name": "Deliberate safety brakes"
      },
      {
       "cls": "friction",
       "href": "#why-family_6",
       "id": "family_6",
+      "low": false,
       "name": "Markets and prices"
      },
      {
       "cls": "friction",
       "href": "#why-family_7",
       "id": "family_7",
+      "low": false,
       "name": "How science itself moves"
      },
      {
       "cls": "friction",
       "href": "#why-measuring_returns",
       "id": "measuring_returns",
+      "low": false,
       "name": "Measuring the returns"
      },
      {
       "cls": "friction",
       "href": "#why-work_and_pay",
       "id": "work_and_pay",
+      "low": false,
       "name": "Work and pay"
      },
      {
       "cls": "friction",
       "href": "#why-information",
       "id": "information",
+      "low": false,
       "name": "The information ecosystem"
      }
     ]

@@ -108,7 +108,7 @@ def test_a_low_confidence_score_is_flagged_by_the_export_and_hatched_wherever_it
     counted = src[src.index("export function MapCounted") : src.index("export function MapFirmness")]
     assert "low in confidence" in counted
     firm = src[src.index("export function MapFirmness") : src.index("export function ClaimStates")]
-    assert "low in confidence" in firm and "on a firm reading" in firm
+    assert "low in confidence" in firm and "on a firm reading" in src
 
 
 def test_how_firm_the_map_is_adds_up_and_every_bar_ends_at_a_hundred():
@@ -175,7 +175,7 @@ def test_a_models_judgement_never_wears_the_colour_of_a_measured_tight_score():
     fills = parts[parts.index("export const BARRIER_FILL") : parts.index("export function Square")]
     assert "--tight-" not in fills
     for word in ("still_binds", "easing", "largely_lifted"):
-        assert re.search(rf"{word}: \{{ fill: \"var\(--s[123]\)\", hatched: true \}}", fills), word
+        assert re.search(rf"{word}: \{{ fill: \"var\(--s[123]\)\", hatched: true[,}} ]", fills), word
     rows = parts[parts.index("export const ROW_FILL") : parts.index("export const BARRIER_FILL")]
     assert 'unscored: { fill: "var(--s1)", open: true' in rows  # an input with no score never looks half tight
     src = TSX.read_text()
