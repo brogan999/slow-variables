@@ -236,3 +236,18 @@ def test_hatching_is_kept_for_judgement_and_every_judged_layer_shows_its_word():
     staged = src[src.index("function Staged") : src.index("export function KindPanels")]
     assert "hatch" in staged and "doc.shape_words[t.word]" in staged and "title=" not in staged  # the word is printed, not a hover tip
     assert "doc.drawn.map" in src  # the key that states the drawing rule
+
+
+def test_the_page_keeps_its_figures_and_adds_pictures_that_say_what_they_are():
+    src = TSX.read_text()
+    for fig in ("bars", "shapes", "stages", "map", "anatomy", "rollups", "needs"):
+        assert f'id="fig-{fig}"' in src, fig
+    assert re.search(r'<Figure\s+id="fig-picture"[^>]*?note=\{KIND_LABEL\.illustration\}', src, re.S)
+    anatomy = src[src.index("export function Anatomy") : src.index("function Staged")]
+    assert anatomy.index("fig-picture") < anatomy.index("fig-anatomy")  # the picture opens the section, the diagram stays
+    panels = src[src.index("export function KindPanels") : src.index("export function RollupBars")]
+    assert "<Illustration " in panels and "<Staged " in panels and panels.index("<h3") < panels.index("<Illustration ")
+    page = PAGE.read_text()
+    assert "<em>illustration</em>" in page and "AI image generation" in page  # the page says what the pictures are
+    doc = _built()
+    assert all(k["illustration"]["alt"] and k["illustration"]["stage"] in ("next", "later") for k in doc["kinds"])
