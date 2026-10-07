@@ -25,7 +25,7 @@ export function StockFlowDiagram({ buckets, valves, sources }: Props) {
   const v = (id: string) => valves.find((x) => x.id === id);
   const brake = buckets.flatMap((b) => b.indicators).find((c) => c.id === "safety_brake_events");
   const loops = [
-    { name: "Feedback into methods", status: v("return_arrow")?.status ?? "unmeasured", href: "/buckets/return_arrow" },
+    { name: "Return arrow (feedback into methods)", status: v("return_arrow")?.status ?? "unmeasured", href: "/buckets/return_arrow" },
     { name: "Backlash and brakes (a balancing loop)", status: brake?.status ?? "unmeasured", href: brake ? "/indicators/safety_brake_events" : undefined },
     { name: "Moving goalposts (a balancing loop)", status: "unmeasured", href: "/predictions#nk_benchmarks_false_summits" },
     { name: "Profits, to who keeps them", status: v("leak")?.status ?? "unmeasured", href: "/capture" },
@@ -113,7 +113,7 @@ function Drawing({ buckets, valves }: Props) {
             stroke={STROKE[v("return_arrow")?.status ?? "unmeasured"]} strokeWidth="1.5" strokeDasharray={v("return_arrow")?.status === "unmeasured" ? "4 4" : undefined} markerEnd="url(#arr)" />
           <Link href={`/buckets/return_arrow`}>
             <text x={X0 - 58} y={(y(0) + y(main.length - 1)) / 2 + 20} fontSize="13" fontFamily="var(--font-mono)" fill="var(--ink)" transform={`rotate(-90 ${X0 - 58} ${(y(0) + y(main.length - 1)) / 2 + 20})`} textAnchor="middle">
-              5. Feedback into methods · {words(v("return_arrow")?.status)}
+              5. Return arrow (feedback into methods) · {words(v("return_arrow")?.status)}
             </text>
           </Link>
         </g>

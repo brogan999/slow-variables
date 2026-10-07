@@ -1030,7 +1030,7 @@ class Store:
                     "generated_at": datetime.now(timezone.utc).isoformat(),
                     "observations": self.con.execute("SELECT count(*) FROM observations").fetchone()[0],
                     "indicators_published": sum(1 for i in self.seed.indicators if i.published),
-                    "confidence_rubric": [{**b, "span": b["hi"] - b["lo"] + 1} for b in CONFIDENCE_RUBRIC],
+                    "confidence_rubric": confidence_rubric(),
                     "sources": len(self.seed.sources),
                 }
             )
@@ -1187,14 +1187,18 @@ class Store:
         return self._awaiting_cache
 
     def _diffusion_lens(
-        self, cards: dict[str, Any], recent: list[dict[str, Any]], as_of: str
+        self, cards: dict[str, Any], recent: list[dict[str, Any]], as_of: str, today: date | None = None
     ) -> dict[str, Any]:
+        from . import diffusion_figures
+
         buckets = []
+        voters: set[str] = set()  # the cards that cast a stage's votes, for the page's figures
         for b in self.seed.buckets:
             mine = [i for i in self.seed.indicators if i.bucket_id == b.id and i.published]
             flow = [
                 cards[i.id] for i in mine if not i.direction_rule
             ]  # a shared capture indicator keeps its own lens
+            voters |= {c["id"] for c in _votes(flow)}
             buckets.append(
                 {
                     **dump(b),
@@ -1231,6 +1235,7 @@ class Store:
             "verdict": verdict,
             "buckets": buckets,
             "valves": valves,
+            "figures": diffusion_figures.build(self, buckets, voters, today or date.today()),
             # how many sources the stage statuses rest on (flow indicators only: a capture card on a stage page does not
             # vote); each stage's page names them, indicator by indicator
             "n_sources": len(
@@ -2349,6 +2354,11 @@ def plain_error(err: str | None, when: date) -> str:
     else:
         what = "the fetch failed"
     return f"{what}, on {when.isoformat()}"
+
+
+def confidence_rubric() -> list[dict[str, Any]]:
+    """The confidence rubric with each band's span, as the pages draw it."""
+    return [{**b, "span": b["hi"] - b["lo"] + 1} for b in CONFIDENCE_RUBRIC]
 
 
 def is_stale(as_of: date | str, cadence: str | None, today: date | None = None) -> bool:

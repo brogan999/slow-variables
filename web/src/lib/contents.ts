@@ -31,7 +31,9 @@ export const PAGES: Record<string, Page> = {
     ["predictions", "The predictions, re-tested every night", "Are those predictions holding?"],
   ] },
   "/diffusion": { name: "How fast", question: "How quickly is AI spreading through firms and work?", sections: [
-    ["stages", "The stages, one card each", "How far along is each stage, from what models can do to what workers are paid?"],
+    ["stages", "The stages, one card each", "How far along is each stage, from what models can do to how work is reorganised?"],
+    ["readings", "How close each stage is to fast", "Where does each gauge's number sit between its normal range and its fast range?"],
+    ["trust", "How far to trust each stage's reading", "How old, and how well evidenced, are the readings behind each stage?"],
   ], each: [["/buckets/", "One page per stage: its readings, what would move it, and the evidence against."]] },
   "/census": { name: "How far", question: "How much knowledge work passes the hand-over screen?", sections: [
     ["dial", "How strict should the screen be?", "How much does the answer change if the rule is stricter or looser?"],
