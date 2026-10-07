@@ -86,6 +86,8 @@ main { counter-reset: fig; }
 .fig-foot p { margin: 0; max-width: none; }
 .fig-table { padding: 0.5rem 1rem 0.75rem; border-top: 1px solid var(--grid); font-size: 12px; }
 .fig-table summary { cursor: pointer; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); }
+/* /story reuses figures cut down: the long foot and the folded table stay on the figure's own page. */
+.story-fig .fig-foot, .story-fig .fig-table { display: none; }
 
 .callout { background: var(--surface); box-shadow: 0 0 0 1px var(--grid); border-left: 3px solid var(--ink); border-radius: var(--radius-sm); padding: 0.75rem 1rem; }
 

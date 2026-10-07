@@ -27,4 +27,4 @@ export const STOP_OF = [
   ["/outlook", "7a"], ["/predictions", "7b"], ["/compare", "7b"], ["/singularity", "8"], ["/futures", "8"],
 ] as const;
 
-export const EVIDENCE = [["/contents", "Contents"], ["/indicators", "Indicators"], ["/stack", "Stack"], ["/value-chain", "Value chain"], ["/ledger", "Ledger"], ["/compare", "Compare"], ["/argument/migration", "The migrating bottleneck"], ["/futures", "Futures"], ["/singularity/atlas", "Atlas"], ["/crosswalk", "Crosswalk"], ["/sources", "Sources"], ["/changelog", "Changelog"], ["/query", "Query"], ["/methodology", "How to read this"]] as const;
+export const EVIDENCE = [["/contents", "Contents"], ["/story", "The story in pictures"], ["/indicators", "Indicators"], ["/stack", "Stack"], ["/value-chain", "Value chain"], ["/ledger", "Ledger"], ["/compare", "Compare"], ["/argument/migration", "The migrating bottleneck"], ["/futures", "Futures"], ["/singularity/atlas", "Atlas"], ["/crosswalk", "Crosswalk"], ["/sources", "Sources"], ["/changelog", "Changelog"], ["/query", "Query"], ["/methodology", "How to read this"]] as const;

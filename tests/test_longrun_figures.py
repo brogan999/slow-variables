@@ -285,6 +285,8 @@ def test_the_lag_counts_every_idea_marked_built_with_a_date_and_no_other():
 
 def test_every_figure_states_its_kind_and_has_a_key_and_a_foot():
     src = FIGS.read_text()
+    assert 'id = "fig-lag" }' in src and src.count("id={id}") == 1  # /story draws it beside another page's fig-lag, under its own id
+    src = src.replace("id={id}", 'id="fig-lag"')
     figures = re.findall(r'<Figure\s+id="fig-([a-z]+)"\s+title="[^"]+"\s+note=\{?("[^"]+"|KIND_LABEL\.[a-z]+|[A-Z_]+)', src)
     assert [f[0] for f in figures] == ["spread", "said", "due", "worlds", "lag"], figures
     assert len(re.findall(r"<Figure\b", src)) == len(figures)  # none without a stated kind

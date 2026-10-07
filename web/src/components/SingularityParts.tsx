@@ -21,7 +21,7 @@ function Track({ doc, height, children }: { doc: SingularityDoc; height: number;
   );
 }
 
-export function TimelinePlate({ doc }: { doc: SingularityDoc }) {
+export function TimelinePlate({ doc, base = "" }: { doc: SingularityDoc; base?: string }) {
   const placed = doc.lanes.flatMap((l) => l.forecasts);
   return (
     <Figure
@@ -73,7 +73,7 @@ export function TimelinePlate({ doc }: { doc: SingularityDoc }) {
           <Track doc={doc} height={doc.fiction_slots * ROW + 6}>
             {doc.fiction.filter((f) => f.x !== null).map((f) => {
               const tip = `${f.title}, ${f.author} (${f.year_written}), set in ${f.set_in_year}`;
-              return <a key={f.anchor} href={`#${f.anchor}`} data-tip={tip} aria-label={tip} title={tip}
+              return <a key={f.anchor} href={`${base}#${f.anchor}`} data-tip={tip} aria-label={tip} title={tip}
                 className="absolute -translate-x-1/2 font-mono text-[13px] leading-none text-muted" style={{ top: (f.slot ?? 0) * ROW + 3, left: `${f.x}%` }}>◇</a>;
             })}
           </Track>

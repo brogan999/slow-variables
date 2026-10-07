@@ -50,7 +50,8 @@ export function ChainPlate({ chain }: { chain: MigrationFigures["chain"] }) {
 }
 
 // Folio IV: every scored input ranked on the one scale, a stand-in score drawn apart, the unscored as hollow marks.
-export function ScalePlate({ scale }: { scale: MigrationFigures["scale"] }) {
+// `base` is the page the scorecard is on, for a page that reuses the figure away from it.
+export function ScalePlate({ scale, base = "" }: { scale: MigrationFigures["scale"]; base?: string }) {
   const lines = scale.bands.slice(1).map((b) => b.x);
   const ranked = scale.rows.filter((r) => !r.hatched);
   const standIns = scale.rows.filter((r) => r.hatched);
@@ -72,7 +73,7 @@ export function ScalePlate({ scale }: { scale: MigrationFigures["scale"] }) {
           {first ? <div className="mt-1.5 sm:hidden">{words}</div> : null}
           <Track lines={lines} tall>
             <div className="absolute left-0 top-1/2 h-0.5 -translate-y-1/2" style={{ width: `${r.x}%`, background: TONE[r.word] }} aria-hidden />
-            <a href={`#input-${r.id}`} data-tip={tip} aria-label={tip} title={tip} tabIndex={0} data-stop={first || undefined} className="mark absolute top-1/2 flex -translate-x-1/2 -translate-y-1/2" style={{ left: `${r.x}%` }}>
+            <a href={`${base}#input-${r.id}`} data-tip={tip} aria-label={tip} title={tip} tabIndex={0} data-stop={first || undefined} className="mark absolute top-1/2 flex -translate-x-1/2 -translate-y-1/2" style={{ left: `${r.x}%` }}>
               <Dot fill={TONE[r.word]} hatched={r.hatched} />
             </a>
           </Track>
@@ -116,7 +117,7 @@ export function ScalePlate({ scale }: { scale: MigrationFigures["scale"] }) {
           <div className="text-[12.5px] leading-tight text-ink sm:text-right">No score<span className="block text-[11.5px] text-ink-2"><span className="num">{scale.unscored.length}</span> of the <span className="num">{scale.total}</span> inputs</span></div>
           <ul className="mt-2 sm:mt-0 flex flex-wrap gap-x-3 gap-y-1.5">
             {scale.unscored.map((u) => (
-              <li key={u.id}><a href={`#input-${u.id}`} className="inline-flex items-center gap-1.5 text-[11.5px] leading-tight text-ink-2 hover:text-ink"><Dot hollow small />{u.name}</a></li>
+              <li key={u.id}><a href={`${base}#input-${u.id}`} className="inline-flex items-center gap-1.5 text-[11.5px] leading-tight text-ink-2 hover:text-ink"><Dot hollow small />{u.name}</a></li>
             ))}
           </ul>
         </div>

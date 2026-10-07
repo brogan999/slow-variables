@@ -11,6 +11,11 @@ export const PAGES: Record<string, Page> = {
     ["changes", "Latest changes", "What has moved since the last update?"],
     ["path", "The path", "In what order should the site be read?"],
   ] },
+  "/story": { name: "The story in pictures", question: "What does the argument look like, figure by figure, from now to what is forecast?", sections: [
+    ["act-now", "Now", "How fast is AI spreading, and how much work passes the screen?"],
+    ["act-money", "The money", "Where is the money, who keeps it, and what is scarce?"],
+    ["act-next", "Next", "What do people expect, and what can be read of it yet?"],
+  ] },
   "/argument": { name: "The argument", question: "Is AI a normal technology, or something faster?", sections: [
     ["folio-name", "Watch the variables that move slowly", "Why watch slow-moving measures and not the news?"],
     ["folio-pace", "Four machines, four clocks", "How long did earlier general-purpose technologies take to pay off?"],
@@ -164,4 +169,4 @@ export const UNDER: Record<string, readonly string[]> = {
   "/predictions": ["/compare"],
   "/singularity": ["/singularity/atlas", "/futures"],
 };
-export const REFERENCE = ["/", "/indicators", "/crosswalk", "/sources", "/query", "/ask", "/changelog", "/methodology", "/legal"] as const;
+export const REFERENCE = ["/", "/story", "/indicators", "/crosswalk", "/sources", "/query", "/ask", "/changelog", "/methodology", "/legal"] as const;

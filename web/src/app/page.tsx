@@ -85,6 +85,7 @@ export default function Home() {
             </div>
           ))}
         </div>
+        <Link href="/story" className="self-start text-sm underline decoration-axis underline-offset-4 hover:decoration-ink">Or see the argument as a run of figures →</Link>
       </section>
 
       <Link href={first.href} className="group block max-w-3xl rounded-[4px] bg-ink p-6 text-background md:p-8">

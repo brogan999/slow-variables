@@ -253,11 +253,11 @@ export function WorldsGrid({ doc }: { doc: SingularityDoc }) {
   );
 }
 
-export function FictionLag({ doc, credits }: { doc: SingularityDoc; credits: { name: string; url: string }[] }) {
+export function FictionLag({ doc, credits, id = "fig-lag" }: { doc: SingularityDoc; credits: { name: string; url: string }[]; id?: string }) {
   const f = doc.figures.lag;
   return (
     <Figure
-      id="fig-lag"
+      id={id}
       title="Ideas from fiction that were later built: how many decades passed between the story and the thing"
       note={KIND_LABEL.chart}
       keys={<>
