@@ -77,13 +77,25 @@ def test_the_card_is_split_off_and_laid_out_on_the_whole_grid():
 
 
 def test_a_card_that_breaks_the_vocabulary_or_types_a_figure_is_dropped_and_the_prose_kept():
-    for bad in (
+    bads = (
         {"call": "buy it"},
         {"kind": "company"},
         {"take": "Worth $40 billion by 2030."},
         {"wrong_if": "Fewer than 3 firms share."},
-    ):
-        text, card = split_card(block({**CARD, **bad}), SC, SUBLAYERS)
+        {"name": "Worth 9 trillion"},
+        {"take": None},
+        {"take": ["a", "b"]},
+        {"take": " "},
+        {"take": "See [obs:x]."},
+        {"wrong_if": "Read http://evil.example"},
+        {
+            "futures": [
+                {"progress": "Nowhere", "rules": "Nothing", "effect": "breaks", "why": "No such future."}
+            ]
+        },
+    )
+    for bad in bads:
+        text, card = split(block({**CARD, **bad}))
         assert card is None and text == "The prose [pos:vc_evals].", bad
     assert split("The prose.\n\n```card\nnot json\n```") == ("The prose.", None)
     assert split("The prose.\n\n```card\n[1, 2]\n```") == ("The prose.", None)

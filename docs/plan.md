@@ -1180,3 +1180,33 @@ The owner asked for a way to put in a new business idea and have the site reason
 **Found on the way, not fixed here.** Ask returned an empty answer with status `ok` to a long, open version of the question (ten tool calls, no text). `_run` returns `""` when the model stops without text and `ask()` reports it as an answer.
 
 **Still to check after the deploy.** The new rule was written without a local model key: run the box once against the deployed service and confirm the answer is short and ends with a call.
+
+## Part 47b (7 Oct 2026): the card, and every company on the map put to Ask
+
+The owner asked for two things the idea box lacked: the structured card with its strip of futures, and a way to assess the companies already on the field.
+
+**What shipped.**
+
+- *The card.* For a reasoned idea or company, Ask's rule now asks the model to append a fenced `card` block. `split_card` (`query/ask.py`) takes it off the prose, validates it and lays it out: a call, a take, the sublayer it sits on, what would prove it wrong, and one mark for each of the eight futures the outlook's grid fills, in the grid's order. `ask()` returns it as `card`; `AssessCard.tsx` only draws it. The citation check reads the prose as before.
+- *Companies.* Every company in the map's lists on `/value-chain` carries an "assess" link to `/ask?company=…&part=…`, wrapped in one fixed question (`companyQuestion`). Its calls are well placed, placed on a condition, or exposed.
+- `PROMPT_VERSION` is 14.
+
+**What bounds the card (the staff review's required changes).**
+
+- Only the two wrapped questions draw a card; any other question gets none and nothing is built for it.
+- A company's card is named from the site's own entity records, never by the model; a company the site does not hold gets no card.
+- Words only: a figure, a citation token or a link anywhere in the card drops it whole. Missing or wrongly typed fields drop it.
+- No card block is ever left in the prose, including one cut off mid-answer. A blocked answer ships no card. A failure building the layout costs only the card.
+- A company's card says beside the call that it judges the part of the chain, not the company or its shares, and that calls are not comparable across companies. Where the site holds no profile, the rule tells the model to say so and judge only the part.
+
+**Judgement calls.**
+
+- *An unreviewed model calls a named company "exposed".* The owner asked for it. It is labelled a model's judgement on the card and bounded as above; it is not covered by the 5 Oct policy's reviewing run, because it is made on demand.
+- *The strip is the eight futures the outlook already argues.* The five "who owns the models" futures wait for Part 47's atlas.
+- *"Where it sits" shows the sublayer id in words* and links to its stack page; the forty-two map categories are not yet a tool Ask can read.
+
+**Left for the owner.**
+
+- Each assess link is a GET that sends on arrival, like every "Reason through this" link: nine hundred more ways to spend against the daily cap. `robots.ts` disallows `/ask?` and the links are `nofollow`; a click-to-send step for `?company=` is the next guard if the cap is hit.
+- The twenty businesses on `/value-chain/opportunities` have no strip: their future-by-future effects are the atlas's draft judgements, not yet on the site.
+- Not run against a live model: the card rule was written without a local key. Check one idea and one company after the deploy.

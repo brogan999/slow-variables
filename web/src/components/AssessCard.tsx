@@ -12,7 +12,6 @@ const WORD = { stronger: "stronger", weaker: "weaker", breaks: "breaks", unchang
 // The card Ask returns beside a reasoned idea or company. The service validates it and lays out one mark per future
 // on the outlook's grid; this only draws it.
 export function AssessCard({ card }: { card: Assess }) {
-  const moved = card.futures.filter((f) => f.effect !== "unchanged");
   return (
     <section className="fig flex flex-col gap-3 p-4" aria-label={`${KIND[card.kind]}: ${card.name}`}>
       <span className="eyebrow">{KIND[card.kind]}</span>
@@ -20,6 +19,7 @@ export function AssessCard({ card }: { card: Assess }) {
         <h3 className="text-lg font-semibold leading-tight">{card.name}</h3>
         <span className={`rounded-[2px] px-2 py-0.5 font-mono text-[11px] uppercase tracking-[0.06em] ${CALL[card.level]}`}>{card.call}</span>
       </div>
+      {card.kind === "company" ? <p className="text-xs text-ink-2">A model&apos;s judgement on its part of the chain, not on the company or its shares. Calls are not comparable from one company to the next.</p> : null}
       <p className="leading-relaxed text-ink-2 max-w-[60ch]">{card.take}</p>
       <div className="flex flex-col gap-1.5">
         <span className="text-[11px] font-semibold uppercase tracking-[0.08em] text-muted">In each future on the outlook&apos;s grid</span>
@@ -39,11 +39,11 @@ export function AssessCard({ card }: { card: Assess }) {
           <span>a model&apos;s judgement of each</span>
         </p>
       </div>
-      {moved.length ? (
+      {card.futures.length ? (
         <details className="text-sm">
           <summary className="cursor-pointer font-mono text-[11px] text-ink-2">Future by future</summary>
           <ul className="mt-2 flex flex-col gap-1.5">
-            {moved.map((f) => (
+            {card.futures.map((f) => (
               <li key={`${f.progress}|${f.rules}`} className="leading-snug"><span className="font-medium">{f.progress}, {f.rules.toLowerCase()}:</span> {WORD[f.effect]}. <span className="text-ink-2">{f.why}</span></li>
             ))}
           </ul>
