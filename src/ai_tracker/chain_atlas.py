@@ -8,6 +8,7 @@ export lays out every business in every future, so the page switches between sta
 
 from __future__ import annotations
 
+import re
 from pathlib import Path
 from typing import Any
 
@@ -40,6 +41,18 @@ def problems(spec: dict[str, Any], opps: dict[str, Any], outlook: dict[str, Any]
     calls = {c["id"] for c in spec.get("calls") or []}
     published = {o["id"] for o in opps.get("opportunities") or [] if o.get("published")}
     futures = {f"{c['progress']}/{c['rules']}" for c in _cells(outlook)}
+    skipped = spec.get("not_judged") or {}
+    for fid in sorted(futures):
+        if not re.fullmatch(r"[a-z0-9_]+/[a-z0-9_]+", fid):
+            out.append(f"chain atlas: future {fid} cannot name a mark on the page")
+    for fid, why in skipped.items():
+        if fid not in futures:
+            out.append(f"chain atlas: not_judged names {fid}, which is not a future the outlook's grid fills")
+        if not str(why or "").strip():
+            out.append(f"chain atlas: {fid} is not judged and nothing says why not")
+    for c in spec.get("calls") or []:
+        if _figure(str(c.get("says") or "")):
+            out.append(f"chain atlas: call {c.get('id')} types a figure, a size word or an address")
     businesses = spec.get("businesses") or {}
     for missing in sorted(published - set(businesses)):
         out.append(f"chain atlas: {missing} is published and has no call")
@@ -58,6 +71,8 @@ def problems(spec: dict[str, Any], opps: dict[str, Any], outlook: dict[str, Any]
         for fid, f in (b.get("futures") or {}).items():
             if fid not in futures:
                 out.append(f"{w} names {fid}, which is not a future the outlook's grid fills")
+            if fid in skipped:
+                out.append(f"{w} names {fid}, which the file says is not judged, yet judges it")
             if f.get("effect") not in MOVES:
                 out.append(f"{w} in {fid} has effect {f.get('effect')}; leave a future out when it changes nothing")
             reason = str(f.get("reason") or "").strip()
@@ -72,7 +87,8 @@ def build(spec: dict[str, Any], opps_doc: dict[str, Any], outlook: dict[str, Any
     """web/data/chain_atlas.json. `opps_doc` is the opportunities export: the records, their numbers and the sequence."""
     sc = outlook.get("scenarios") or {}
     label = {a["id"]: a["label"] for k in ("progress", "rules") for a in sc.get(k) or []}
-    futures = [
+    skipped = spec.get("not_judged") or {}
+    every = [
         {
             "id": f"{c['progress']}/{c['rules']}",
             "key": f"{c['progress']}-{c['rules']}",
@@ -81,6 +97,7 @@ def build(spec: dict[str, Any], opps_doc: dict[str, Any], outlook: dict[str, Any
         }
         for c in _cells(outlook)
     ]
+    futures = [f for f in every if f["id"] not in skipped]  # a future nobody judged is no column: it is named apart
     words = spec.get("effects") or {}
     records = {o["id"]: o for o in opps_doc.get("opportunities") or []}
     marks = {m["id"]: m for m in (opps_doc.get("figures") or {}).get("marks") or []}
@@ -114,7 +131,7 @@ def build(spec: dict[str, Any], opps_doc: dict[str, Any], outlook: dict[str, Any
             "holds": "stronger" in effects and not effects & {"weaker", "breaks"},
             "problem": o["bottleneck"],
             "profit": marks[bid]["verdict"],
-            "primary": {"number": o["primary"].get("number"), "name": o["primary"]["name"]},
+            "primary": {"number": o["primary"].get("number"), "name": o["primary"]["name"], "href": f"/value-chain#mm-{o['primary']['id']}"},
             "href": f"/value-chain/opportunities#op-{bid}",
             "marks": laid,
             "moved": [m for m in laid if m["effect"] != "unchanged"],
@@ -124,6 +141,7 @@ def build(spec: dict[str, Any], opps_doc: dict[str, Any], outlook: dict[str, Any
     return {
         "made_by": {**made, "date": str(made["date"])} if made else None,
         "futures": futures,
+        "not_judged": [{"name": f["name"], "why": skipped[f["id"]]} for f in every if f["id"] in skipped],
         "effects": [{"id": e, "word": words.get(e, e)} for e in (*MOVES, "unchanged")],
         "groups": [
             {**c, "businesses": [row(bid, b) for bid, b in businesses.items() if b.get("call") == c["id"] and bid in records]}

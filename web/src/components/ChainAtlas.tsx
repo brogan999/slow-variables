@@ -12,7 +12,7 @@ function states(d: ChainAtlasDoc): string {
     return [
       `${on} [data-f="${f.key}"].ca-when, ${on} .ca-says[data-f="${f.key}"] { display: block; }`,
       `${on} .ca-strip i[data-f="${f.key}"] { outline: 2px solid var(--ink); outline-offset: 1px; }`,
-      `${on} [data-${f.key}="unchanged"] { opacity: 0.5; }`,
+      `${on} [data-${f.key}="unchanged"] { opacity: 0.62; }`,
       `${on} [data-${f.key}="stronger"] .ca-n { background: var(--ink); color: var(--background); }`,
       `${on} [data-${f.key}="weaker"] .ca-n { box-shadow: none; border: 1.5px dashed var(--ink-2); color: var(--ink-2); }`,
       `${on} [data-${f.key}="breaks"] .ca-n, ${on} [data-${f.key}="breaks"] .ca-name { text-decoration: line-through; color: var(--muted); }`,
@@ -23,11 +23,11 @@ function states(d: ChainAtlasDoc): string {
 function Row({ b }: { b: AtlasBusiness }) {
   const state = Object.fromEntries(b.marks.map((m) => [`data-${m.key}`, m.effect]));
   return (
-    <details {...state} className="border-b border-grid bg-surface">
+    <details {...state} className="ca-row border-b border-grid bg-surface">
       <summary className="grid grid-cols-[2.1rem_minmax(0,1fr)] items-center gap-x-3 gap-y-1 px-3 py-2.5 md:grid-cols-[2.1rem_minmax(0,1fr)_auto_6.5rem]">
         <span className="ca-n">{b.n}</span>
         <span>
-          <span className="ca-name text-[15px] font-semibold leading-snug">{b.name}</span>
+          <span className="ca-name text-[15px] font-semibold leading-snug underline decoration-grid decoration-dotted underline-offset-4">{b.name}</span>
           {b.stage ? <span className={tag}>{b.stage}</span> : null}
           {b.holds ? <span className={tag}>no future on the grid weakens it</span> : null}
           <span className="mt-0.5 block font-serif text-[15px] leading-snug text-ink-2">{b.take}</span>
@@ -40,19 +40,19 @@ function Row({ b }: { b: AtlasBusiness }) {
         </span>
       </summary>
       <div className="grid gap-x-6 gap-y-3 px-3 pb-4 pt-1 text-[13px] text-ink-2 md:grid-cols-3 md:pl-[3.6rem]">
-        <div><h4 className={h4}>The problem</h4><p>{b.problem}.</p></div>
-        <div><h4 className={h4}>The profit, by the site&apos;s rule</h4><p>{b.profit}.</p></div>
-        <div><h4 className={h4}>What would undo it</h4><p>{b.kills}</p></div>
+        <div><h3 className={h4}>The problem</h3><p>{b.problem}.</p></div>
+        <div><h3 className={h4}>The profit, by the site&apos;s rule</h3><p>{b.profit}.</p></div>
+        <div><h3 className={h4}>What would overturn this call</h3><p>{b.kills}</p></div>
         <div className="md:col-span-3">
-          <h4 className={h4}>Future by future</h4>
+          <h3 className={h4}>Future by future</h3>
           {b.moved.length ? (
             <ul className="flex flex-col gap-1">
               {b.moved.map((m) => <li key={m.key}><span className="font-medium text-ink">{m.label}.</span> {m.reason}</li>)}
             </ul>
           ) : <p>No future on the grid changes it. That is no judgement that it holds: the futures that bear on it are not on the grid yet.</p>}
         </div>
-        <p className="md:col-span-3">Sits on {b.primary.number} {b.primary.name}. <Link href={b.href} className={link}>The full record: what it sells first, what it builds up and what would prove it wrong</Link></p>
-        <p className="border-l-2 border-dotted border-axis pl-2 text-xs text-muted md:col-span-3">A model&apos;s judgement, not a reading: the call, the line under the name, what would undo it and each future&apos;s effect. The problem and the profit are the site&apos;s own record.</p>
+        <p className="md:col-span-3">Sits on <Link href={b.primary.href} className={link}>{b.primary.number} {b.primary.name}</Link>. <Link href={b.href} className={link}>The full record: what it sells first, what it builds up and what would prove it wrong</Link></p>
+        <p className="border-l-2 border-dotted border-axis pl-2 text-xs text-muted md:col-span-3">A model&apos;s judgement, not a reading: the call, the line under the name, what would overturn it and each future&apos;s effect. The problem, the profit and its place in the order of bets are the site&apos;s own record.</p>
       </div>
     </details>
   );
@@ -71,11 +71,12 @@ export function ChainAtlas({ d }: { d: ChainAtlasDoc }) {
           {d.futures.map((f) => <label key={f.key} className="inline-flex items-center gap-1.5"><input type="radio" name="ca-future" id={`ca-${f.key}`} />{f.name}</label>)}
         </div>
         <p className="ca-says font-serif text-[1.15rem] leading-snug text-ink max-w-[62ch]" data-f="none">With no future chosen, each strip shows every future at once: one mark for each, in the order above.</p>
-        {d.futures.map((f) => <p key={f.key} className="ca-says font-serif text-[1.15rem] leading-snug text-ink max-w-[62ch]" data-f={f.key}>{f.says} <span className="font-sans text-xs text-muted">The outlook&apos;s own words for this future.</span></p>)}
+        {d.futures.map((f) => <p key={f.key} className="ca-says font-serif text-[1.15rem] leading-snug text-ink max-w-[62ch]" data-f={f.key}>{f.says} <span className="font-sans text-xs text-muted">The <Link href="/outlook#scenarios" className={link}>outlook</Link>&apos;s own words for this future; the writers who argue it are named there.</span></p>)}
         <p className="ca-key flex flex-wrap gap-x-4 gap-y-1 font-mono text-[11px] text-ink-2">
           {d.effects.map((e) => <span key={e.id}><i data-e={e.id} />{e.word}</span>)}
           <span>each mark a model&apos;s judgement</span>
         </p>
+        {d.not_judged.map((n) => <p key={n.name} className="text-xs text-muted max-w-[72ch]">Not judged, and so not on the list: {n.name}. {n.why}</p>)}
       </fieldset>
       <div id="ca-board" className="flex flex-col gap-6 scroll-mt-24">
         {d.groups.map((g) => (
@@ -89,15 +90,15 @@ export function ChainAtlas({ d }: { d: ChainAtlasDoc }) {
         ))}
       </div>
       <details id="ca-table" className="fig p-3 scroll-mt-24">
-        <summary className="font-mono text-[11px] uppercase tracking-[0.08em] text-ink-2">The table: every business in every future</summary>
+        <summary className="font-mono text-[11px] uppercase tracking-[0.08em] text-ink-2">The table: every business in every future, each cell a model&apos;s judgement</summary>
         <div className="mt-2 overflow-x-auto">
           <table className="w-full min-w-[56rem] text-[12.5px]">
-            <thead><tr><th className="text-left align-bottom">Business</th>{d.futures.map((f) => <th key={f.key} className="px-1 text-left align-bottom text-[10.5px] font-semibold text-muted">{f.name}</th>)}</tr></thead>
+            <thead><tr><th scope="col" className="text-left align-bottom">Business</th>{d.futures.map((f) => <th key={f.key} scope="col" className="px-1 text-left align-bottom text-[10.5px] font-semibold text-muted">{f.name}</th>)}</tr></thead>
             <tbody>
               {rows.map((b) => (
                 <tr key={b.id} className="border-t border-grid">
                   <th scope="row" className="py-1 pr-2 text-left font-normal"><span className="font-mono text-muted">{b.n}</span> {b.name}</th>
-                  {b.marks.map((m) => <td key={m.key} className={`px-1 ${m.effect === "unchanged" ? "text-muted" : "font-medium"}`}>{m.effect === "unchanged" ? "·" : m.word}</td>)}
+                  {b.marks.map((m) => <td key={m.key} className={`px-1 ${m.effect === "unchanged" ? "text-muted" : "font-medium"}`}>{m.effect === "unchanged" ? <><span aria-hidden>·</span><span className="sr-only">{m.word}</span></> : m.word}</td>)}
                 </tr>
               ))}
             </tbody>

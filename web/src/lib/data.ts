@@ -715,11 +715,12 @@ export type AtlasEffect = "stronger" | "weaker" | "breaks" | "unchanged";
 export type AtlasMark = { future: string; key: string; name: string; effect: AtlasEffect; word: string; label: string; reason: string };
 export type AtlasBusiness = {
   id: string; n: number; name: string; call: string; take: string; kills: string; stage: string | null; holds: boolean; problem: string; profit: string;
-  primary: { number: string | null; name: string }; href: string; marks: AtlasMark[]; moved: AtlasMark[];
+  primary: { number: string | null; name: string; href: string }; href: string; marks: AtlasMark[]; moved: AtlasMark[];
 };
 export type ChainAtlasDoc = {
   made_by: { model: string; date: string; method: string; reviewed_by: string } | null;
   futures: { id: string; key: string; name: string; says: string }[];
+  not_judged: { name: string; why: string }[];
   effects: { id: AtlasEffect; word: string }[];
   groups: { id: string; name: string; says: string; businesses: AtlasBusiness[] }[];
 };
