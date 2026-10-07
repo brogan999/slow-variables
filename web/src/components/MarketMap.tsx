@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { MarketMapCategory, MarketMapDoc, MarketMapEntity } from "@/lib/data";
+import { SITE } from "@/lib/site";
 import { MarketMapFilter } from "./MarketMapFilter";
 
 const link = "underline decoration-grid underline-offset-2 hover:decoration-ink";
@@ -86,6 +87,7 @@ function Card({ c }: { c: MarketMapCategory }) {
                         <span className={e.verified ? "font-semibold" : ""}>{e.name}</span>
                         {e.legal_name !== e.name ? <span className="text-muted"> ({e.legal_name})</span> : null}
                         {e.ownership ? <span className="text-muted"> ({owned(e)})</span> : null}
+                        {SITE.askOnline && !c.out_of_scope ? <> <Link href={`/ask?${new URLSearchParams({ company: e.name, part: c.name, from: `/value-chain#mm-${c.id}` })}`} prefetch={false} rel="nofollow" className="text-[11px] text-muted underline decoration-grid underline-offset-2 hover:text-ink" aria-label={`Reason through ${e.name}`}>assess</Link></> : null}
                       </span>
                     ))}
                   </dd>
