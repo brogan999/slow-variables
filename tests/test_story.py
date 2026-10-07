@@ -21,33 +21,32 @@ PANEL = WEB / "components" / "StoryPanel.tsx"
 CSS = WEB / "app" / "globals.css"
 KINDS = {"chart", "model", "illustration", "mixed"}
 SPEC = story.load()
-PANELS = [p for a in SPEC["acts"] for p in a["panels"]]
+PANELS = story.panels(SPEC)  # the acts' panels, then the coda's
 BY = {p["id"]: p for p in PANELS}
 
 SCREEN = ["a screen scored by three AI models", "not a claim about what AI can do", "not a forecast"]
 # what a staff review made mandatory on the source page (docs/plan.md, the Part named), by panel
 MUST = {
-    "clocks": ["divided by its own first reading"],
+    "clocks": ["divided by its own first reading", "leaves out readings"],
     "lag": ["not of any data", "measure nothing"],  # 45c
     "gauges": ["no verdict yet", "casts no vote"],  # 45c
     "readings": ["includes an estimate for OpenAI and Anthropic", "has not scored"],  # 45i
     "whole": [*SCREEN, "all three models pass"],  # 44, 45b
     "screen": [*SCREEN, "the models that voted no", "a floor"],  # 45b
     "perez": ["not data", "published rule"],
-    "stack": ["an estimate for OpenAI and Anthropic", "left out"],
-    "labs": ["run-rates", "not audited", "not money paid", "by the same rule"],  # 45f
+    "stack": ["an estimate for OpenAI and Anthropic", "left out", "Microsoft's cloud business alone"],  # staff review of this page
+    "labs": ["run-rates", "not audited", "not money paid", "by the same rule", "not the same as having promised nothing"],  # 45f
     "ties": ["not money paid", "records no direction", "a tie, not a flow", "disputed"],  # 45f
     "chain": ["not the size of any market", "a judgement, not a measurement", "made by Anthropic"],  # 45g
     "scale": ["not ranked with the rest", "no meaningful order"],  # 45d
-    "path": ["same width on purpose", "not a reading", "not the same as free"],  # 45h
     "anatomy": ["judgement", "no reading tests it whole"],  # 44
-    "reach": ["does not mean either side has the better of the argument", "ties to Anthropic"],  # 45j
+    "reach": ["does not mean either side has the better of the argument", "ties to Anthropic", "does not hand the argument to the other side"],  # 45j
     "tally": ["not a final verdict", "no word for wrong"],  # 45a
-    "leans": ["judgements, not readings", "made by Anthropic", "no person reviewed each lean"],  # 45a
+    "leans": ["judgements, not readings", "made by Anthropic", "no person reviewed each lean", "with extra care"],  # 45a
     "timeline": ["scale is not even", "start of its year", "by the same rule"],  # 45k
     "said": ["not evidence that forecasts are converging", "height is not distance"],  # 45k
     "worlds": ["not ruled out"],  # 45k
-    "fiction": ["not forecasts", "not evidence", "no guide to how long a story written today will wait"],  # 45k
+    "fiction": ["not forecasts", "not evidence", "no guide to how long a story written today will wait", "not a typical wait"],  # 45k
 }
 
 
@@ -73,6 +72,13 @@ def test_about_twenty_panels_in_the_three_acts_of_the_path():
     assert [a["anchor"] for a in SPEC["acts"]] == ["act-now", "act-money", "act-next"]
     assert 18 <= len(PANELS) <= 22 and len(BY) == len(PANELS) and set(BY) == set(MUST)
     assert all(len(a["panels"]) >= 5 for a in SPEC["acts"])
+    # staff review: the densest panel is cut, and Act III ends on the grid that crowns no world; the fiction figure,
+    # evidence of nothing, sits in the coda with the imagined plates
+    assert "path" not in BY and "BindingPath" not in story.FIGURES and "BindingPath" not in PAGE.read_text()
+    assert SPEC["acts"][-1]["panels"][-1]["id"] == "worlds" and [p["id"] for p in SPEC["coda"]] == ["fiction"]
+    page = PAGE.read_text()
+    coda = page.split('aria-labelledby="coda"')[1]
+    assert "doc.coda.map(" in coda and coda.index("doc.coda.map(") < coda.index("doc.closing.strip")
 
 
 def test_every_panels_component_and_loader_exist_and_the_page_draws_exactly_those():
@@ -125,6 +131,7 @@ def test_a_panel_has_exactly_two_sentences_and_a_carry_line():
     for p in PANELS:
         assert len(p["words"]) == 2 and all(len(_sentences(w)) == 1 and w.endswith(".") for w in p["words"]), p["id"]
         assert 2 <= len(p["carry"]) <= 5 and all(c.endswith(".") for c in _carry(p)), p["id"]
+        assert not set(p["words"]) & set(_carry(p)), p["id"]
     for a in SPEC["acts"]:
         assert len(_sentences(a["sentence"])) == 1
 
@@ -143,7 +150,7 @@ def test_no_carry_line_drops_a_caveat_a_review_made_mandatory():
 
 def test_the_words_never_claim_more_than_the_figure_or_point_at_what_is_hidden():
     for t in story.strings(SPEC):
-        assert not re.search(r"\b(proves?|shows that AI|is certain|table below|the foot|see below)\b", t), t
+        assert not re.search(r"\b(proves?(?! (it|the site) wrong)|shows that AI|is certain|table below|the foot|see below)\b", t), t
     # a title that asks a question or describes is not turned into a finding by the sentences beside it
     assert BY["ties"]["words"][0].startswith("The figure asks")
     assert "fails for want" not in " ".join(BY["screen"]["words"])  # 45b: the reason given most often, not "fails that question"
@@ -157,6 +164,7 @@ def test_the_wrapper_hides_the_foot_and_the_table_and_nothing_else():
     assert len(hidden) == 1 and "fig-key" not in hidden[0] and "fig-note" not in hidden[0] and "fig-head" not in hidden[0]
     panel = PANEL.read_text()
     assert 'className="story-fig' in panel and "{children}" in panel
+    assert "text-[14px]" in panel and "text-[12.5px]" not in panel  # the carry line is the page's defence: body size, not fine print
     assert "The full figure, what it leaves out, and its numbers" in panel and "href={href}" in panel
     assert "<Figure" not in panel  # it redraws nothing
 
@@ -164,13 +172,13 @@ def test_the_wrapper_hides_the_foot_and_the_table_and_nothing_else():
 def test_a_panel_with_no_data_is_left_out_whole_by_the_export():
     gated = {p["id"]: p["needs"] for p in PANELS if p.get("needs")}
     full = story.build(SPEC, holds=lambda n: True)
-    assert [p["id"] for a in full["acts"] for p in a["panels"]] == [p["id"] for p in PANELS]
-    tonight = [p["id"] for a in story.build(SPEC)["acts"] for p in a["panels"]]  # whatever tonight's exports hold, never pinned
+    assert [p["id"] for p in story.panels(full)] == [p["id"] for p in PANELS]
+    tonight = [p["id"] for p in story.panels(story.build(SPEC))]  # whatever tonight's exports hold, never pinned
     assert set(BY) - set(tonight) <= set(gated) and tonight == [p["id"] for p in PANELS if p["id"] in tonight]
-    assert {"clocks", "stack", "ties", "leans"} <= set(gated) and set(gated.values()) <= set(story.CONDITIONS)
+    assert {"clocks", "perez", "stack", "ties", "leans"} <= set(gated) and set(gated.values()) <= set(story.CONDITIONS)
     for pid, name in gated.items():
         thin = story.build(SPEC, holds=lambda n, name=name: n != name)
-        ids = [p["id"] for a in thin["acts"] for p in a["panels"]]
+        ids = [p["id"] for p in story.panels(thin)]
         assert pid not in ids and len(ids) == len(PANELS) - list(gated.values()).count(name), pid
         assert BY[pid]["words"][0] not in json.dumps(thin)  # its sentences go with it
     # the gates are the components' own: what each returns nothing (or a bare line) on
@@ -181,6 +189,13 @@ def test_a_panel_with_no_data_is_left_out_whole_by_the_export():
              "board.json": {"figures": {"leans": None}, "leans": None, "judged": None}}
     for name in ("clocks_chart", "profit_stack", "ties", "leans"):
         assert story.CONDITIONS[name](lambda f: empty[f]) is False and isinstance(story.CONDITIONS[name](story.read), bool), name
+    # two half-empty figures: the clocks' own sentence flagged as no longer what the data shows, and a curve with no marker
+    assert 'clocks.holds === false ? " (That is no longer what the latest data shows' in _body(BY["clocks"])
+    flag = lambda holds: {"argument.json": {"clocks": {"chart": {"x": []}, "holds": holds}}}  # noqa: E731
+    assert [story.CONDITIONS["clocks_chart"](lambda f, h=h: flag(h)[f]) for h in (True, None, False)] == [True, True, False]
+    assert BY["perez"]["needs"] == "phase_placed" and 'phase.state === "untestable" ? "One of those series has no reading, so no position is shown."' in _body(BY["perez"])
+    phase = lambda state: {"argument.json": {"phase": {"state": state}}}  # noqa: E731
+    assert [story.CONDITIONS["phase_placed"](lambda f, s=s: phase(s)[f]) for s in ("frenzy", "installation", "untestable")] == [True, True, False]
     page = PAGE.read_text()
     figures = page.split("const FIGURES")[1].split("};")[0]
     assert "act.panels.map(" in page and "{FIGURES[p.figure]}" in page
@@ -189,8 +204,9 @@ def test_a_panel_with_no_data_is_left_out_whole_by_the_export():
 
 def test_a_sentence_that_states_tonights_result_is_shown_only_while_it_is_true():
     lines = {c["when"]: (p["id"], c["text"]) for p in PANELS for c in p["carry"] if not isinstance(c, str)}
-    assert set(lines) == {"ages_near", "most_disputes_untested", "no_world_signpost_read"}
-    assert (lines["ages_near"][0], lines["most_disputes_untested"][0], lines["no_world_signpost_read"][0]) == ("scale", "reach", "worlds")
+    assert {k: v[0] for k, v in lines.items()} == {"ages_near": "scale", "most_disputes_untested": "reach", "no_world_signpost_read": "worlds",
+                                                   "clocks_stamps_mixed": "clocks", "most_too_early": "tally"}
+    assert "measured and some are reported" in lines["clocks_stamps_mixed"][1] and "too early to tell" in lines["most_too_early"][1]
     for name, (_, text) in lines.items():
         assert text in json.dumps(story.build(SPEC, holds=lambda n: True), ensure_ascii=False)
         assert text not in json.dumps(story.build(SPEC, holds=lambda n, name=name: n != name), ensure_ascii=False)
@@ -200,6 +216,14 @@ def test_a_sentence_that_states_tonights_result_is_shown_only_while_it_is_true()
     assert story.CONDITIONS["no_world_signpost_read"](lambda f: worlds[f]) is False
     ages = {"argument.json": {"migration": {"figures": {"ages": {"near": 0}}}}}
     assert story.CONDITIONS["ages_near"](lambda f: ages[f]) is False
+    stamps = lambda *xs: {"argument.json": {"clocks": {"drawn": [{"stamp": x} for x in xs]}}}  # noqa: E731
+    mixed = story.CONDITIONS["clocks_stamps_mixed"]
+    assert mixed(lambda f: stamps("measured", "reported", None)[f]) is True
+    assert mixed(lambda f: stamps("measured", "measured")[f]) is False and mixed(lambda f: stamps("reported", "estimate")[f]) is False
+    early = lambda n, e: {"board.json": {"n": n, "tally": {"too_early": e}}}  # noqa: E731
+    assert story.CONDITIONS["most_too_early"](lambda f: early(4, 3)[f]) is True and story.CONDITIONS["most_too_early"](lambda f: early(4, 2)[f]) is False
+    # a sentence about a mark drawn only on some nights is worded for the night it is absent
+    assert BY["readings"]["words"][1].startswith("Where a mark hangs") and "where there is one" in " ".join(_carry(BY["readings"]))
 
 
 def test_the_finding_titles_the_story_repeats_are_held_to_the_data():
@@ -215,7 +239,7 @@ def test_the_finding_titles_the_story_repeats_are_held_to_the_data():
 
 def test_no_link_inside_a_reused_figure_is_dead_and_no_id_is_used_twice():
     page = PAGE.read_text()
-    for call in ('<ScalePlate scale={a.migration.figures.scale} base="/argument/migration" />', '<BindingPath doc={bottleneckMap()} base="/bottlenecks" />',
+    for call in ('<ScalePlate scale={a.migration.figures.scale} base="/argument/migration" />',
                  '<DisputeReach doc={o} base="/outlook" />', '<TimelinePlate doc={s} base="/singularity" />', 'id="fig-fiction-lag"',
                  "<Anatomy doc={firmKinds()} picture={false} />"):
         assert call in page, call
@@ -230,7 +254,6 @@ def test_no_link_inside_a_reused_figure_is_dead_and_no_id_is_used_twice():
 def test_a_new_prop_changes_nothing_on_the_figures_own_page():
     for pid, sig, uses in (
         ("scale", 'base = "" }', "href={`${base}#input-${r.id}`}"),
-        ("path", 'base = "" }', "href={`${base}${r.href}`}"),
         ("reach", 'base = "" }', "href={`${base}#position-${c.key}`}"),
         ("timeline", 'base = "" }', "href={`${base}#${f.anchor}`}"),
         ("fiction", 'id = "fig-lag" }', "id={id}"),
@@ -238,8 +261,8 @@ def test_a_new_prop_changes_nothing_on_the_figures_own_page():
     ):
         body = _body(BY[pid])
         assert sig in body.split(") {")[0] and uses in body, pid
-    assert "href={`${base}${x.href}`}" in _body(BY["path"])
-    for route, call in (("argument/migration", "<ScalePlate scale={g.scale} />"), ("bottlenecks", "<BindingPath doc={doc} />"), ("outlook", "<DisputeReach doc={doc} />"),
+    assert "base" not in (WEB / "components" / "BottleneckFigures.tsx").read_text().split("export function BindingPath(")[1].split(") {")[0]  # cut from the story, so its prop went too
+    for route, call in (("argument/migration", "<ScalePlate scale={g.scale} />"), ("outlook", "<DisputeReach doc={doc} />"),
                         ("singularity", "<TimelinePlate doc={d} />"), ("singularity", "<FictionLag doc={d} credits={fu.credits} />"), ("firm/kinds", "<Anatomy doc={doc} />")):
         assert call in (WEB / "app" / route / "page.tsx").read_text(), call  # the home pages pass none of them
 
@@ -260,9 +283,10 @@ def test_story_json_holds_words_only_and_is_what_the_seed_builds():
 
     assert all(v is None or isinstance(v, str) for v in leaves(doc))
     assert all(not re.search(r"\d", v) for v in leaves(doc) if v and not v.startswith("/"))  # a path may hold a stem's digit
+    assert set(doc) == {"eyebrow", "title", "lede", "disclosure", "closing", "acts", "coda", "plates"}
     assert "story.json" in (ROOT / "src" / "ai_tracker" / "store.py").read_text()
     assert 'read<StoryDoc>("story.json")' in (WEB / "lib" / "data.ts").read_text()
-    for p in (x for a in doc["acts"] for x in a["panels"]):
+    for p in story.panels(doc):
         assert p["href"] == f'{BY[p["id"]]["route"]}#{BY[p["id"]]["anchor"]}' and set(p) == {"id", "figure", "kind", "route", "href", "words", "carry"}
 
 
@@ -278,6 +302,11 @@ def test_each_act_opens_with_its_picture_and_the_check_holds_the_placement():
         assert a["illustration"] == {"file": f"/illustrations/{stem}.webp", "alt": rec[stem]["alt"], "stage": rec[stem].get("stage")}
     assert [a["illustration"]["stage"] for a in doc["acts"]] == [None, None, "next"]
     page = PAGE.read_text()
+    # staff review: on /firm/kinds "next" is agents that keep context, and Act III says what comes next is disputed, so
+    # this page does not print the record's stage line; it prints its own
+    assert "<Illustration {...act.illustration} stage={null} " in page and "{act.picture_note}" in page
+    assert [a["picture_note"] for a in doc["acts"]] == [None, None, "An imagined scene. It is not a forecast, and this site does not say this is what comes next."]
+    assert doc["acts"][-1]["picture_note"] in story.strings(SPEC)
     assert page.count("<Illustration ") == 1 and "eager={i === 0}" in page and "/illustrations/" not in page
     assert "story.placed(" in (ROOT / "src" / "ai_tracker" / "cli.py").read_text()
     assert story.problems(SPEC) == []
@@ -295,7 +324,29 @@ def test_it_is_a_reference_page_in_the_contents_and_the_menu_and_linked_from_hom
     assert re.findall(r'\["(act-[a-z]+)", "([^"]+)", "[^"]+\?"\]', entry) == [("act-now", "Now"), ("act-money", "The money"), ("act-next", "Next")]
     page = PAGE.read_text()
     assert "id={act.anchor}" in page
-    assert 'href="/story"' in (WEB / "app" / "page.tsx").read_text()
+    home = next(line for line in (WEB / "app" / "page.tsx").read_text().splitlines() if 'href="/story"' in line)
+    assert "Or see the argument as a run of figures →" in home
+    # a cut-down run of figures is not "the whole argument", and the home page does not send a reader here "first"
+    meta = page.split("export const metadata")[1].split("};")[0]
+    for text in (SPEC["eyebrow"], meta, entry.split("sections")[0], home):
+        assert not re.search(r"\bwhole\b|\bfirst\b", text), text
+
+
+def test_the_page_points_at_the_arguments_own_list_of_what_would_prove_it_wrong():
+    closing = SPEC["closing"]
+    assert "keeps a written list of what would prove it wrong and tests it every night" in closing["words"]
+    assert not re.search(r"\bfail|\bhas already\b", closing["words"] + closing["exits"])  # how a test reads is tonight's result
+    page = PAGE.read_text()
+    assert 'href="/argument#fig-exits"' in page and "{doc.closing.exits}" in page
+    assert 'id="fig-exits"' in (WEB / "components" / "ArgumentFigures.tsx").read_text()
+
+
+def test_the_closing_plates_are_named_in_the_seed_and_are_ones_the_gallery_holds():
+    featured = [x["image"] for x in json.loads((DATA / "futures" / "index.json").read_text())["featured"]]
+    assert len(SPEC["plates"]) == len(set(SPEC["plates"])) == 3 and set(SPEC["plates"]) <= set(featured)
+    assert story.build(SPEC)["plates"] == SPEC["plates"]
+    page = PAGE.read_text()
+    assert "doc.plates.flatMap(" in page and "slice(0, 3)" not in page
 
 
 def test_the_page_is_plain_server_html_with_no_animation_and_no_scroll_script():
@@ -310,6 +361,6 @@ def test_the_page_is_plain_server_html_with_no_animation_and_no_scroll_script():
 @pytest.mark.parametrize("pid", sorted(MUST))
 def test_each_panel_is_built_with_its_words(pid):
     doc = story.build(SPEC, holds=lambda n: True)
-    p = next(x for a in doc["acts"] for x in a["panels"] if x["id"] == pid)
+    p = next(x for x in story.panels(doc) if x["id"] == pid)
     assert p["words"] == BY[pid]["words"] and p["kind"] == BY[pid]["kind"]
     assert all(isinstance(c, str) for c in p["carry"]) and len(p["carry"]) == len(BY[pid]["carry"])
