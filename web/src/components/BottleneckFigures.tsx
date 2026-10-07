@@ -21,7 +21,7 @@ const SEG_GROUND = { reading: "var(--s1)", low: "var(--s3)", plain: "var(--surfa
 
 // The page's summary: the path as a row of equal boxes, with what is scored tight and what is expected to bind
 // placed at the stage it acts on. The boxes are equal because nothing here measures how much passes through a stage.
-export function BindingPath({ doc, base = "" }: { doc: MapDoc; base?: string }) {
+export function BindingPath({ doc }: { doc: MapDoc }) {
   const f = doc.figures;
   const low = f.stages.some((s) => s.now.some((r) => r.low));
   return (
@@ -56,11 +56,11 @@ export function BindingPath({ doc, base = "" }: { doc: MapDoc; base?: string }) 
                 </div>
                 <div className="text-[12.5px] leading-snug">
                   <span className="block text-[11px] text-ink-2">Scored tight or severe</span>
-                  {s.now.length ? <ul className="mt-0.5 flex flex-col gap-0.5">{s.now.map((r) => <li key={r.id} className="flex items-baseline gap-1.5"><span className="translate-y-px"><Square fill="var(--tight-5)" hatched={r.low} /></span><span><a href={`${base}${r.href}`} className={link}>{r.name}</a>{r.low ? <span className="text-muted"> · low confidence</span> : null}</span></li>)}</ul> : <span className="text-muted">{s.scored ? "none of the scored rows is tight; the rest are not scored" : "not scored: no row here carries a tightness score, so nothing can show as tight"}</span>}
+                  {s.now.length ? <ul className="mt-0.5 flex flex-col gap-0.5">{s.now.map((r) => <li key={r.id} className="flex items-baseline gap-1.5"><span className="translate-y-px"><Square fill="var(--tight-5)" hatched={r.low} /></span><span><a href={r.href} className={link}>{r.name}</a>{r.low ? <span className="text-muted"> · low confidence</span> : null}</span></li>)}</ul> : <span className="text-muted">{s.scored ? "none of the scored rows is tight; the rest are not scored" : "not scored: no row here carries a tightness score, so nothing can show as tight"}</span>}
                 </div>
                 <div className="text-[12.5px] leading-snug">
                   <span className="block text-[11px] text-ink-2">Expected to bind here</span>
-                  {s.expected.length ? <ul className="mt-0.5 flex flex-col gap-0.5">{s.expected.map((x) => <li key={x.id} className="flex items-baseline gap-1.5"><span className="translate-y-px"><Square fill="var(--s1)" hatched /></span><span><a href={`${base}${x.href}`} className={link}>{x.name}</a><span className="text-[11.5px] text-muted"> · {x.acts ? null : "placed here by "}{x.writers.map((w, j) => <span key={`${w.who}-${w.state}`}>{j ? " · " : null}{w.who}{w.state === "failing" ? <span className="text-ink"> ({STATE_GLYPH.failing} failing its test)</span> : null}</span>)}{x.acts ? null : "; the map itself does not"}</span></span></li>)}</ul> : <span className="text-muted">no claim on file</span>}
+                  {s.expected.length ? <ul className="mt-0.5 flex flex-col gap-0.5">{s.expected.map((x) => <li key={x.id} className="flex items-baseline gap-1.5"><span className="translate-y-px"><Square fill="var(--s1)" hatched /></span><span><a href={x.href} className={link}>{x.name}</a><span className="text-[11.5px] text-muted"> · {x.acts ? null : "placed here by "}{x.writers.map((w, j) => <span key={`${w.who}-${w.state}`}>{j ? " · " : null}{w.who}{w.state === "failing" ? <span className="text-ink"> ({STATE_GLYPH.failing} failing its test)</span> : null}</span>)}{x.acts ? null : "; the map itself does not"}</span></span></li>)}</ul> : <span className="text-muted">no claim on file</span>}
                 </div>
               </div>
             </section>

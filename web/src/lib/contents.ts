@@ -11,7 +11,7 @@ export const PAGES: Record<string, Page> = {
     ["changes", "Latest changes", "What has moved since the last update?"],
     ["path", "The path", "In what order should the site be read?"],
   ] },
-  "/story": { name: "The story in pictures", question: "What does the whole argument look like, figure by figure, from now to what is forecast?", sections: [
+  "/story": { name: "The story in pictures", question: "What does the argument look like, figure by figure, from now to what is forecast?", sections: [
     ["act-now", "Now", "How fast is AI spreading, and how much work passes the screen?"],
     ["act-money", "The money", "Where is the money, who keeps it, and what is scarce?"],
     ["act-next", "Next", "What do people expect, and what can be read of it yet?"],

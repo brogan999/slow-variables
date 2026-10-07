@@ -13,7 +13,7 @@ export function StoryPanel({ p, stop, children }: { p: StoryPanelDoc; stop: stri
       <div className="eyebrow">{stop} · {KIND[p.kind]}</div>
       <p className="max-w-[62ch] font-serif text-lg leading-relaxed text-ink md:text-[1.2rem]">{words.join(" ")}</p>
       <div className="story-fig min-w-0">{children}</div>
-      <p className="max-w-[78ch] text-[12.5px] leading-relaxed text-ink-2"><span className="mr-2 font-mono text-[10.5px] uppercase tracking-[0.08em] text-muted">Read it with this</span>{carry.join(" ")}</p>
+      <p className="max-w-[48rem] text-[14px] leading-relaxed text-ink-2"><span className="mr-2 font-mono text-[10.5px] uppercase tracking-[0.08em] text-muted">Read it with this</span>{carry.join(" ")}</p>
       <Link href={href} prefetch={false} className="self-start text-sm font-medium underline decoration-axis underline-offset-4 hover:decoration-ink">The full figure, what it leaves out, and its numbers →</Link>
     </article>
   );

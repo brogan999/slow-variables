@@ -2,7 +2,6 @@ import Link from "next/link";
 import { ReadingsFigure } from "@/components/ArgumentFigures";
 import { StackPlate } from "@/components/ArgumentParts";
 import { LeanBars, TallyBars } from "@/components/BoardFigures";
-import { BindingPath } from "@/components/BottleneckFigures";
 import { LabsPlate, TiesPlate } from "@/components/CaptureFigures";
 import { ScreenFigure, WholeFigure } from "@/components/CensusFigures";
 import { LagModel, StageGauges } from "@/components/DiffusionFigures";
@@ -19,12 +18,12 @@ import { TimelinePlate } from "@/components/SingularityParts";
 import { StoryPanel } from "@/components/StoryPanel";
 import { ChainFigure } from "@/components/ValueChainFigures";
 import { Illustration } from "@/components/diagrams/illustration";
-import { argument, board, bottleneckMap, capture, census, diffusion, firmKinds, futures, index, meta, outlook, singularity, story, valueChain } from "@/lib/data";
+import { argument, board, capture, census, diffusion, firmKinds, futures, index, meta, outlook, singularity, story, valueChain } from "@/lib/data";
 import { ACTS, STOPS, STOP_OF } from "@/lib/nav";
 
 export const metadata = {
   title: "The story in pictures",
-  description: "The whole argument as a run of figures in three acts: what is measured now, where the money is, and what people forecast. Each figure links to the page that holds its sources and limits.",
+  description: "The argument as a run of figures in three acts: what is measured now, where the money is, and what people forecast. Each figure links to the page that holds its sources and limits.",
 };
 
 const link = "underline decoration-axis underline-offset-4 hover:decoration-ink";
@@ -53,7 +52,6 @@ export default function Story() {
     TiesPlate: <TiesPlate ties={cap.figures.ties} />,
     ChainFigure: <ChainFigure f={valueChain().figures.chain} />,
     ScalePlate: <ScalePlate scale={a.migration.figures.scale} base="/argument/migration" />,
-    BindingPath: <BindingPath doc={bottleneckMap()} base="/bottlenecks" />,
     Anatomy: <Anatomy doc={firmKinds()} picture={false} />,
     DisputeReach: <DisputeReach doc={o} base="/outlook" />,
     TallyBars: <TallyBars b={b} />,
@@ -86,7 +84,10 @@ export default function Story() {
         return (
           <section key={act.id} id={act.anchor} aria-labelledby={`${act.anchor}-h`} className="flex scroll-mt-12 flex-col gap-12 md:gap-16">
             <div className="grid items-center gap-5 border-t-2 border-ink pt-6 md:grid-cols-[minmax(0,1fr)_minmax(0,30rem)] md:gap-10">
-              <Illustration {...act.illustration} eager={i === 0} className="md:order-2" />
+              <div className="flex flex-col gap-1 md:order-2">
+                <Illustration {...act.illustration} stage={null} eager={i === 0} />
+                {act.picture_note ? <p className="text-[12.5px] leading-snug text-ink-2">{act.picture_note}</p> : null}
+              </div>
               <div className="flex flex-col gap-3">
                 <div className="eyebrow">Act {act.id}</div>
                 <h2 id={`${act.anchor}-h`} className="display text-[2.25rem] leading-none md:text-[3rem]">{nav?.title}</h2>
@@ -103,9 +104,10 @@ export default function Story() {
 
       <section aria-labelledby="coda" className="flex flex-col gap-5 border-t-2 border-ink pt-6">
         <h2 id="coda" className="eyebrow">Imagined, not forecast</h2>
+        {doc.coda.map((p) => <StoryPanel key={p.id} p={p} stop={stopOf(p.route)}>{FIGURES[p.figure]}</StoryPanel>)}
         <p className="max-w-[62ch] font-serif text-lg leading-relaxed text-ink-2">{doc.closing.strip}</p>
         <div className="grid gap-5 sm:grid-cols-3">
-          {fu.featured.filter((x) => x.image).slice(0, 3).map((x) => (
+          {doc.plates.flatMap((src) => fu.featured.filter((x) => x.image === src)).map((x) => (
             <figure key={x.id} className="flex flex-col gap-1.5">
               <Plate src={x.image} alt={`Illustration of ${x.name}: ${x.line}`} sizes="(min-width: 640px) 30vw, 100vw" />
               <figcaption className="text-[13px]"><strong className="font-medium">{x.name}</strong> <span className="text-muted">· {x.author}, {x.imagined}</span><br /><span className="text-[12px] text-ink-2">{x.line}</span></figcaption>
@@ -115,7 +117,10 @@ export default function Story() {
         <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1"><Credit /><Link href="/futures#gallery" prefetch={false} className={`text-sm ${link}`}>The gallery, and the idea bank behind it →</Link></div>
       </section>
 
-      <p className="max-w-[62ch] font-serif text-xl leading-relaxed">{doc.closing.words}</p>
+      <div className="flex flex-col gap-3">
+        <p className="max-w-[62ch] font-serif text-xl leading-relaxed">{doc.closing.words}</p>
+        <Link href="/argument#fig-exits" prefetch={false} className={`self-start text-sm font-medium ${link}`}>{doc.closing.exits} →</Link>
+      </div>
     </div>
   );
 }
