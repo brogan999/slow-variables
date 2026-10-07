@@ -12,7 +12,7 @@ from typing import Any
 
 import yaml
 
-from . import census, chart
+from . import census, chart, illustrations
 
 ROOT = Path(__file__).resolve().parents[2]
 SPEC = ROOT / "seed" / "firm_kinds.yaml"
@@ -52,6 +52,11 @@ def strings(spec: dict[str, Any]) -> list[str]:
 
     walk({k: v for k, v in spec.items() if k != "stages_order"})
     return out
+
+
+def placed(spec: dict[str, Any]) -> list[str]:
+    """The illustrations the page shows, as the seed names them: the opening one, then one for each kind."""
+    return [x["illustration"] for x in [spec.get("anatomy") or {}, *(spec.get("kinds") or [])] if x.get("illustration")]
 
 
 def _tier(occ: str) -> str:
@@ -129,6 +134,7 @@ def build(spec: dict[str, Any], cspec: dict[str, Any], trades_doc: dict[str, Any
         kinds.append({
             **{f: v for f, v in k.items() if f not in ("naics", "trade")},
             "naics": k["naics"],
+            "illustration": illustrations.card(k.get("illustration")),  # the served file, its alt text and its stage
             "titles": [r["naics_title"] for r in rows],
             "refs": [census.ref(cspec, "industries.csv", n) for n in k["naics"]],
             "payroll": total, "knowledge_payroll": know, "agreed3": agreed3, **parts,
@@ -165,6 +171,7 @@ def build(spec: dict[str, Any], cspec: dict[str, Any], trades_doc: dict[str, Any
     return {
         "version": cspec["version"],
         **{f: v for f, v in spec.items() if f not in ("kinds", "needs", "sources")},
+        "anatomy": {**(spec.get("anatomy") or {}), "illustration": illustrations.card((spec.get("anatomy") or {}).get("illustration"))},
         "sources": [{**x, "retrieved_at": str(x["retrieved_at"]), "n": i + 1} for i, x in enumerate(spec.get("sources") or [])],
         "needs": needs,
         "needs_grid": [{"id": n["id"], "cells": [n["id"] in (k.get("needs") or []) for k in kinds]} for n in needs],

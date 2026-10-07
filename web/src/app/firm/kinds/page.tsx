@@ -23,7 +23,7 @@ export default function FirmKindsPage() {
           <Link href="/firm" className={link}>The page before this one</Link> argues that a firm rents what it can check and owns what it must answer for. This page makes that specific. It takes the kinds of firm below and asks of each: how much of its work can a check settle today, who must still sign, what does it look like as AI takes on more, and what will it need to buy that it does not buy now.
         </p>
         <p className={p}>
-          The figures here differ in kind, and each says which it is. A <em>chart</em> draws records: this site&apos;s list of firms bought, and its census, which is a screen scored by AI models. The census covers knowledge work: managers, professional and technical staff including clinicians, sales staff and office staff. A <em>model</em> draws an idea. And everything said about what comes next is <em>this site&apos;s judgement</em>, drawn with hatching, with what would prove it wrong beside it.
+          The figures here differ in kind, and each says which it is. A <em>chart</em> draws records: this site&apos;s list of firms bought, and its census, which is a screen scored by AI models. The census covers knowledge work: managers, professional and technical staff including clinicians, sales staff and office staff. A <em>model</em> draws an idea. An <em>illustration</em> is a picture made with AI image generation: an imagined scene that is evidence of nothing, and the words beside it say everything it is there to show. And everything said about what comes next is <em>this site&apos;s judgement</em>, drawn with hatching, with what would prove it wrong beside it.
         </p>
         <p className={p}>
           A task passes the screen when most of the AI models scoring it each find that whether it was done right can be told within hours, that a check which already exists settles it, and that a failure is cheap. Work that needs a body never passes, and nor does a sign-off a person answers for. Passing says nothing about whether today&apos;s AI can do the task.
@@ -47,7 +47,7 @@ export default function FirmKindsPage() {
 
       <section className="flex flex-col gap-4" aria-labelledby="kinds">
         <h2 id="kinds" className={h2}>Kind by kind</h2>
-        <p className={p}>Each panel draws the layers of a firm at each stage. The first drawing is measured: each layer as wide as its share of today&apos;s knowledge-work payroll, with the part that passes the screen dark. The hatched ones are judgement. This site chose a word for each layer and printed it under the layer; each word is drawn at a fixed width against an outline of today&apos;s, and the widths are not forecast numbers. Where a panel says robots do not bear on a kind of firm, its last drawing repeats the one before.</p>
+        <p className={p}>Each panel draws the layers of a firm at each stage, beside a picture of that firm at a later stage as this site imagines it. The first drawing is measured: each layer as wide as its share of today&apos;s knowledge-work payroll, with the part that passes the screen dark. The hatched ones are judgement. This site chose a word for each layer and printed it under the layer; each word is drawn at a fixed width against an outline of today&apos;s, and the widths are not forecast numbers. Where a panel says robots do not bear on a kind of firm, its last drawing repeats the one before.</p>
         <PanelKey doc={doc} />
         <KindPanels doc={doc} />
       </section>

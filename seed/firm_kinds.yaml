@@ -4,10 +4,12 @@
 # words: `now` reports what the listed sources say; `next`, `later`, `shape`, `rung` and the anatomy are this site's
 # judgement, drafted by claude-opus-5-5 on 6 Oct 2026 and labelled as judgement on the page. `shape` gives, for each
 # layer (managers, professionals, sales, office support), a word from `shape_words` for how it compares with today.
+# `illustration` names a record in seed/illustrations.yaml: a picture made with AI image generation, never evidence.
 # Sources carry a fetch record; each was fetched on the day. Text types no digit but a year.
 kinds:
 - id: accounting
   name: Accounting practice
+  illustration: firm-accounting
   naics:
   - '541200'
   trade: accounting
@@ -49,6 +51,7 @@ kinds:
   - nasba_aps
 - id: law
   name: Law firm
+  illustration: firm-law
   naics:
   - '541100'
   trade: legal
@@ -92,6 +95,7 @@ kinds:
   - az_abs
 - id: software
   name: Software and IT services company
+  illustration: firm-software
   naics:
   - '513200'
   - '541500'
@@ -134,6 +138,7 @@ kinds:
   - anthropic_work
 - id: bank
   name: Bank or lender
+  illustration: firm-bank
   naics:
   - 5220A1
   - '522200'
@@ -177,6 +182,7 @@ kinds:
   - lotj_arxiv
 - id: insurer
   name: Insurer or insurance broker
+  illustration: firm-insurer
   naics:
   - '524100'
   - '524200'
@@ -217,6 +223,7 @@ kinds:
   - fl_hb527_status
 - id: hospital
   name: Hospital or medical practice
+  illustration: firm-hospital
   naics:
   - '622100'
   - '621100'
@@ -261,6 +268,7 @@ kinds:
   - fsmb_ai
 - id: customer_support
   name: Customer-support and business-support firm
+  illustration: firm-support
   naics:
   - '561400'
   trade: contact_centres
@@ -304,6 +312,7 @@ kinds:
   - crescendo_next
 - id: consultancy
   name: Management consultancy
+  illustration: firm-consultancy
   naics:
   - '541600'
   rung: light
@@ -336,6 +345,7 @@ kinds:
   - deloitte_ap
 - id: property
   name: Property manager or letting agency
+  illustration: firm-property
   naics:
   - '531000'
   trade: property_management
@@ -374,6 +384,7 @@ kinds:
   - uk_cmp
 - id: freight
   name: Freight and logistics operator
+  illustration: firm-freight
   naics:
   - '488500'
   - '484000'
@@ -411,6 +422,7 @@ kinds:
   - amazon_million
 - id: manufacturer
   name: Manufacturer
+  illustration: firm-manufacturer
   naics:
   - '336100'
   - '336300'
@@ -450,6 +462,7 @@ kinds:
   - brooks_2026
 - id: retailer
   name: Retailer
+  illustration: firm-retailer
   naics:
   - '455000'
   - 4450A1
@@ -1046,6 +1059,7 @@ shape_words:
   same: about the same
   wider: wider
 anatomy:
+  illustration: firm-anatomy
   title: The anatomy of an AI-run firm
   note: This site's picture of where the kinds of firm on this page are heading. It is a model of an idea, joined from the
     arguments on the page before; no reading tests it whole.
