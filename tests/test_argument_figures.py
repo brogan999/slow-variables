@@ -19,6 +19,7 @@ WEB = ROOT / "web" / "src"
 FIGS = WEB / "components" / "ArgumentFigures.tsx"
 PARTS = WEB / "components" / "diagrams" / "argument.tsx"
 PAGE = WEB / "app" / "argument" / "page.tsx"
+FORMAT = WEB / "lib" / "format.ts"
 BEFORE = {"migration", "as_of", "essay", "facts", "slow_variables", "clocks", "phase", "exits", "headlines", "sources", "record"}
 SCORED = {"consistent_with_normal": "normal", "faster_than_normal": "fast"}
 
@@ -102,14 +103,34 @@ def test_a_ranged_reading_sits_inside_a_range_only_when_its_status_says_that_ran
             assert r["x"] in [e["x"] for e in r["edges"]] and r["held"]
         else:  # held: the number falls in a range the site does not score it in, so it is set outside with a reason
             assert r["lane"] == "outside" and r["held"] and SCORED.get(r["status"]) != falls
-        assert set(r["held"]) <= {"interval", "edge", "tier", "single", "reason"}
+        assert set(r["held"]) <= {"interval", "edge", "tier", "single", "reason", "pending"}
 
 
-def test_tonight_one_reading_is_held_outside_its_range_and_says_why():
-    held = [r for r in F["readings"]["ranged"] if r["lane"] == "outside"]
-    assert [r["id"] for r in held] == ["bbd_work_hours_assisted"] and held[0]["held"] == ["single"]
-    src = PARTS.read_text() + FIGS.read_text()
-    assert "HELD_WORDS" in src and all(f"{k}:" in src for k in ("interval", "edge", "tier", "single", "reason"))
+def test_a_reading_held_outside_its_range_always_says_why_in_words_the_site_has():
+    """The rule, not tonight's list: the night a second survey lands the held row goes, and this must not go red."""
+    words = re.search(r"export const HELD_WORDS[^{]*\{(.*?)\n\};", FORMAT.read_text(), re.S)[1]
+    for r in F["readings"]["ranged"]:
+        if r["lane"] in ("outside", "line"):
+            assert r["held"], r["id"]
+        assert all(re.search(rf"^\s*{k}:", words, re.M) for k in r["held"]), r["held"]
+    assert all(re.search(rf"^\s*{k}:", words, re.M) for k in ("interval", "edge", "tier", "single", "reason", "pending"))
+
+
+def test_the_held_reason_states_the_whole_rule_and_both_pages_read_one_wording():
+    assert "the site scores a status only on two independent sources or on one official one" in FORMAT.read_text()
+    assert "a scored status needs a second" not in PARTS.read_text() + FORMAT.read_text()
+    for f in (PARTS, FIGS, WEB / "components" / "DiffusionFigures.tsx"):
+        assert not re.search(r"const HELD_WORDS\b", f.read_text()), f.name  # one map, in lib/format.ts
+
+
+def test_a_number_that_moved_range_while_its_reason_waits_is_not_called_held():
+    # scored on record in another range: neither "held, not scored" nor "a written reason holds it" would be true
+    assert ar._why_held([], "consistent_with_normal", "fast", "outside") == ["pending"]
+    assert ar._why_held(["single"], "consistent_with_normal", "fast", "outside") == ["pending"]
+    assert ar._why_held(["single"], "emerging", "normal", "outside") == ["single"]
+    assert ar._why_held([], "emerging", "normal", "outside") == ["reason"]
+    assert ar._why_held([], "emerging", "between", "line") == ["edge"]  # between the ranges, on a line
+    assert "has moved range and the site has not yet published its reason" in FORMAT.read_text()
 
 
 def test_a_directed_reading_draws_the_window_its_rule_compares_and_the_dead_band_round_its_start():
@@ -155,14 +176,92 @@ def test_every_exit_is_drawn_with_every_condition_its_monitor_tests():
     assert n["untestable"] == len([r for r in rows if r["state"] == "untestable"])
 
 
-def test_the_seed_names_every_condition_and_its_new_words_type_no_figure():
+def test_the_seed_names_every_condition_by_the_monitors_own_text_and_its_new_words_type_no_figure():
     for e in SPEC["exits"]:
         v = THESIS[e["monitor"]]
-        assert len(e["conditions"]) == len(v["conds"]) + len(v["counter"]), e["monitor"]
+        assert sorted(c["test"] for c in e["conditions"]) == sorted(c["text"] for c in v["conds"] + v["counter"]), e["monitor"]
         for c in e["conditions"]:
             assert not stray_digits(c["label"]) and not NUMBER_WORD.search(c["label"]), c["label"]
     folios = set(re.findall(r"^### Folio [IVX]+ · (.+)$", ar.ESSAYS["full"].read_text(), re.M))
     assert all(r["folio"] in folios for r in SPEC["map"])
+    by = {(e["monitor"], c["test"]): c["label"] for e in SPEC["exits"] for c in e["conditions"]}
+    for r in F["exits"]["rows"]:
+        assert all(c["label"] == by[(r["monitor"], c["text"])] for c in r["conds"]), r["monitor"]
+
+
+def test_a_reorder_in_the_monitor_cannot_mislabel_a_condition_and_a_new_one_stops_the_build():
+    e = SPEC["exits"][0]
+    v = THESIS[e["monitor"]]
+    want = {c["test"]: c["label"] for c in e["conditions"]}
+    turned = {**v, "conds": v["conds"][::-1]}
+    assert [(c["text"], c["label"]) for c in ar._conds(e, turned)] == [(c["text"], want[c["text"]]) for c in turned["conds"] + turned["counter"]]
+    for broken in ({**v, "conds": v["conds"][1:]}, {**v, "conds": v["conds"] + [{**v["conds"][0], "text": "a condition the seed has not named"}]}):
+        try:
+            ar._conds(e, broken)
+        except ValueError as err:
+            assert e["monitor"] in str(err)
+        else:
+            raise AssertionError("a condition without its own label was drawn")
+
+
+def test_the_condition_labels_name_what_the_monitor_measures():
+    label = {c["test"]: c["label"] for e in SPEC["exits"] for c in e["conditions"]}
+    tfp = label["TFP > trend + 1pp for ≥ 4 consecutive years"]
+    assert "work and capital together" in tfp and "a broader measure than output per hour" in tfp  # not the slow variable
+    assert "a change that points to AI" in label["≥ 3 labour trackers show a concurrent AI-attributable break"]
+    assert label["work hours assisted by AI > 20%"] == "The share of work hours done with AI reaches the range that would mean something faster"
+    assert label["intervention rate on 4–8 h agent tasks < 50%"].startswith("Independent tests show agents needing")
+    assert not any(w in " ".join(label.values()) for w in ("fast line", "That is not just"))
+    hours = IND["bbd_work_hours_assisted"]
+    assert hours.fast_band.lo == 0.2  # the label says "the range that would mean something faster": the monitor's line is that range's edge
+
+
+def test_the_first_exits_paragraph_states_every_reliability_condition_the_monitor_tests():
+    text = SPEC["exits"][0]["text"]
+    assert "reliable enough to be left with a job that takes a person a working day" in text
+    assert "three things happen together" in text
+    assert any("80% horizon > 8 h" == c["text"] for c in THESIS["normal_tech_falsified"]["conds"])
+
+
+def test_the_map_and_the_exits_figure_do_not_call_every_test_a_disproof():
+    src = FIGS.read_text().replace("&apos;", "'")
+    assert 'title="The argument in one picture: each claim, what it rests on, and the tests that bear on it"' in src
+    assert 'title="The tests the argument is held to, and whether each is met tonight"' in src
+    assert "→ tested each night by" in src and "Tested each night by" in src
+    assert "overturn" not in src.lower() and "prove the argument wrong, and" not in src
+    assert "the essay does not sort them. The tests do not all cut the same way." in src
+    assert "Not every test would prove the argument wrong if it were met" in src
+    foot = src.split("The tests do not all cut the same way.")[1].split("</p>")[0]
+    assert all(e["label"] in foot for e in SPEC["exits"])  # each test is named, as the seed names it
+    # which way each cuts rests on the seed: the confirming test carries no expectation, the warning is the monitor's
+    assert "expect" not in next(e for e in SPEC["exits"] if e["monitor"] == "consumers_keep_surplus")
+    assert "the exits that bear on it" in (ROOT / "seed" / "argument.yaml").read_text()
+    assert "that would overturn it" not in (ROOT / "seed" / "argument.yaml").read_text()
+
+
+def test_a_test_is_never_drawn_as_a_ratio_of_conditions_met():
+    src = FIGS.read_text()
+    assert "conditions met" not in src and "r.met" not in src and "r.n}" not in src
+    assert "counts only when every condition is met at once" in src
+    assert "counts only when every condition is met at once, with one of the either-or pair" in src
+    assert "A test is met only when all of its conditions are met at once, so a tick on its own decides nothing" in src
+    # the opposite test's result is not drawn with the tick that means the test itself is met
+    assert "counter" in PARTS.read_text().split("export function CondMark")[1]
+
+
+def test_the_review_wordings_define_their_terms_and_say_what_a_colour_means():
+    src = (FIGS.read_text() + PARTS.read_text()).replace("&apos;", "'")
+    for words in (
+        "the window (the stretch of time its rule compares)",
+        "purple here means gathering in one place, not faster",
+        "a little past tonight's number",
+        "A number hanging beneath its strip is one the site has not scored",
+        "An ordinary technology is one that spreads over decades",
+        "a test's state tonight: met, not met, or running the other way",
+        "the opposite happened: the chip makers' share rose",
+        "sits inside the total the chip makers' share is measured against",
+    ):
+        assert words in src, words
 
 
 def test_no_title_states_a_finding_the_data_could_overturn_unguarded():
@@ -198,12 +297,13 @@ def test_figures_that_draw_the_labs_say_a_model_made_by_one_of_them_drafted_the_
     assert "a model made by Anthropic" in src
 
 
-def test_the_web_keeps_the_estimates_set_apart():
-    """The chip makers' share rests partly on an estimate for two labs and the value kept by users on one survey:
-    the row says so from the export, and the mark is hatched."""
-    by = {r["id"]: r for r in F["readings"]["directed"]}
-    assert by["consumer_surplus_wta"]["estimate"] and by["gross_profit_semis_share"]["estimate"]
-    assert all(r["grade"] == S._card(IND[r["id"]])["grade"] for r in by.values())
+def test_a_mark_is_hatched_when_a_record_behind_it_is_an_estimate_not_when_a_sentence_says_so():
+    for r in F["readings"]["directed"]:
+        ids = r["start"]["obs_ids"] + r["end"]["obs_ids"]
+        q = "SELECT count(*) FROM observation_all WHERE audited_vs_reported = 'estimated' AND id IN (" + ",".join("?" * len(ids)) + ")"
+        assert r["estimate"] == bool(S.con.execute(q, ids).fetchone()[0]), r["id"]
+        assert r["grade"] == S._card(IND[r["id"]])["grade"]
+    assert '"estimate" in' not in "".join(l for l in Path(ar.__file__).read_text().splitlines() if "sentence" in l)
     assert "hatch" in PARTS.read_text() and "r.estimate" in FIGS.read_text()
 
 
