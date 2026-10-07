@@ -63,7 +63,10 @@ def test_the_export_lays_out_every_future_for_every_business():
             m["effect"] in ("stronger", "weaker", "breaks", "unchanged") and m["label"] for m in b["marks"]
         )
         assert (
-            b["href"] == f"/value-chain/opportunities#op-{b['id']}" and b["profit"] and b["take"] and b["kills"]
+            b["href"] == f"/value-chain/opportunities#op-{b['id']}"
+            and b["profit"]
+            and b["take"]
+            and b["kills"]
         )
     assert doc["made_by"]["model"]
 
