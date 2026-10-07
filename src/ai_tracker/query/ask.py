@@ -37,7 +37,7 @@ log = logging.getLogger("ai-tracker.ask")
 MODEL = os.environ.get("QUERY_MODEL", "claude-sonnet-5")
 # a blocked answer gets its fresh attempt on the stronger model: rare, so the bill stays near Sonnet's
 ESCALATE_MODEL = os.environ.get("QUERY_ESCALATE_MODEL", "claude-opus-5")
-PROMPT_VERSION = "12"
+PROMPT_VERSION = "14"
 # Opus 5 list price, for the escalated retry only
 ESCALATE_USD_PER_MTOK_IN, ESCALATE_USD_PER_MTOK_OUT = (
     float(x) for x in os.environ.get("QUERY_ESCALATE_USD_PER_MTOK", "5,25").split(",")
@@ -237,7 +237,7 @@ Rules for answers:
    If a pass has no record, say so in one sentence rather than filling it. End with where the three agree and where they pull apart.
 8. Strategy questions (what lasts, what creates advantage, what to own or buy, which opportunities are transitional or durable, where value will sit, what gets commoditised) start from value_chain, which holds the site's assessment of each layer and of the companies that matter; use its recorded judgements, and never re-run rent_rubric with your own inputs where a profile has them. Then follow the chain: call bottlenecks to find what binds now and how tight it is; run rent_rubric for the binding input (a supply shortage is a scarcity rent; its durability follows how tight it is and whether the industry is building its way out); say who holds the complementary asset; then say what would convert the transitional rent into a durable one (Helmer's later powers) and which signposts (claims, predictions) would show it happening.
 9. Questions about which companies will be worth $1 trillion (or any value) by a date, or what the important companies of 2035 look like: never pick a winner, rank, or forecast. List the companies the site profiles as candidates and members of the trillion-dollar group (value_chain with companies true; an editorial set, unranked, and never "leading" or "most likely"), each with what must hold and what would disprove it from its profile, and say the profiles are this site's judgement drafted by a model. Then say what would have to be true in general. For each company that bears on it (use entity; its valuation block holds the rows), give how many times over its value must grow [derived:<id>] and the yearly rate that needs [derived:<id>], each cited in the same sentence as "$1 trillion", and never state the years remaining. Say that at today's price for each dollar of profit, profit would have to grow by the same factor, citing its latest net income [obs:<id>]. A private lab's multiple is read off its last round price and is never ranked with public companies. Then say where the company's rent comes from (rent_rubric, inputs flagged as your judgement), which bottleneck it depends on (bottlenecks) and which claims and predictions bear on it (claims), and close with the questions still open.
-10. Questions about what a particular reader should personally build, invest in or bet on get no personal recommendation: answer with the conditions and the signposts that would decide it, and say that this is the frame, not advice. A business idea put to you to be reasoned through is judged as a business, not as advice to its author: read value_chain, rent_rubric and scenarios and make at most two further calls, keep the answer under four hundred words, and end with the call the question asks for (build, build on a condition, or don't build alone) in its last line, saying the call is your judgement.
+10. Questions about what a particular reader should personally build, invest in or bet on get no personal recommendation: answer with the conditions and the signposts that would decide it, and say that this is the frame, not advice. A business idea put to you to be reasoned through is judged as a business, not as advice to its author: read value_chain, rent_rubric and scenarios and make at most two further calls, keep the answer under four hundred words, and end with the call the question asks for (build, build on a condition, or don't build alone) in its last line, saying the call is your judgement. A company the site's map places, put to you to be reasoned through, is judged the same way as the business it is in: its call is well placed, placed on a condition, or exposed, it is a model's judgement on the business and not on the company's shares, and never rank it against another company; where the site holds no profile of the company, say so and judge only the part of the chain it sits on, asserting nothing about the company from memory. After either answer, add a fenced block opened by ```card and closed by ```, holding one JSON object and nothing else: kind (\"idea\" or \"company\"), name (the business in at most five words, or the company's name), call (exactly one of the calls above), take (one or two plain sentences giving the call and its reason), sits (the sublayer id from value_chain it sits on), futures (one object for each cell the scenarios tool returns that changes the business: progress and rules exactly as that tool labels them, effect one of stronger, weaker or breaks, why in one sentence), and wrong_if (the one thing that would prove the call wrong). The card is words only: no number, no date and no citation token in it.
 11. Lead with the answer in one or two sentences, then the passes if any. Write in markdown with short paragraphs, a short heading per pass, and bullets where a list helps (a bullet is one claim). Take the length the question needs; do not pad. Do not describe the tools or your process.
 12. End with a line "Follow-ups:" and three short questions the reader could ask next, one per line starting "- ". They carry no numbers.
 
@@ -1270,6 +1270,77 @@ FOLLOW = re.compile(r"\n\s*(?:\*\*)?Follow[- ]ups?:?(?:\*\*)?:?\s*\n(?P<qs>(?:\s
 HISTORY_TURNS, HISTORY_Q, HISTORY_A = 4, 600, 1500
 
 
+CARD = re.compile(r"\n?```[ \t]*card\b(?P<json>.*?)(?:```[ \t]*\n?|\Z)", re.S)  # a cut-off answer ends inside it
+CARD_LOOSE = re.compile(CARD.pattern.replace("card", "(?:card|json)"), re.S)  # a wrapped question's answer holds no other JSON
+CARD_FOR = re.compile(r'^(?:Business idea|Company): "(?P<subject>[^"]*)"')  # the two questions web/src/lib/idea.ts writes
+CARD_CALLS = {
+    "idea": {"build": "yes", "build on a condition": "cond", "don't build alone": "no"},
+    "company": {"well placed": "yes", "placed on a condition": "cond", "exposed": "no"},
+}
+CARD_EFFECTS = ("stronger", "weaker", "breaks", "unchanged")
+CARD_BARS = re.compile(r"\d|\[[a-z]+:|https?:|www\.")  # the card is words: no figure, no citation token, no link
+
+
+def _fold(label: str) -> str:
+    return re.sub(r"[^a-z ]", "", label.lower()).strip()
+
+
+def split_card(text: str, question: str, load: Any) -> tuple[str, dict[str, Any] | None]:
+    """The answer without any card block, and the card laid out for the page: one mark per future the outlook's grid
+    fills, in the grid's order. Only the two wrapped questions draw a card, a company's card is named from the site's
+    own records, and a card outside the vocabulary or with a figure, a citation or a link in its words is dropped
+    whole: it is a judgement in words that the citation check never reads. `load` builds what the layout needs and is
+    called only for an answer that takes a card; if it raises, the answer keeps its prose and loses the card."""
+    asked = CARD_FOR.match(question.strip())
+    fence = CARD_LOOSE if asked else CARD
+    blocks = [m["json"] for m in fence.finditer(text)]
+    prose = fence.sub("\n", text).strip()
+    if not blocks or not asked:
+        return prose, None
+    try:
+        raw = json.loads(blocks[0])
+        ctx = load()
+        kind = "idea" if question.lstrip().startswith("Business idea") else "company"
+        call = raw["call"].strip().lower().replace("\u2019", "'")
+        level = CARD_CALLS[raw["kind"]][call]
+        name = ctx["companies"][asked["subject"].strip().casefold()] if kind == "company" else raw["name"].strip()[:80]
+        words = {k: raw[k].strip()[:400] for k in ("take", "wrong_if")}
+        scenarios = ctx["scenarios"]
+        named = {
+            (_fold(f["progress"]), _fold(f["rules"])): f
+            for f in raw.get("futures") or []
+            if f.get("effect") in CARD_EFFECTS
+        }
+        label = {a["id"]: a["label"] for k in ("progress", "rules") for a in scenarios.get(k) or []}
+        futures, matched = [], 0
+        for c in scenarios.get("cells") or []:
+            f = named.get((_fold(label[c["progress"]]), _fold(label[c["rules"]])))
+            matched += bool(f)
+            futures.append(
+                {
+                    "progress": label[c["progress"]],
+                    "rules": label[c["rules"]],
+                    "effect": f["effect"] if f else "unchanged",
+                    "why": (f.get("why") or "").strip()[:300] if f else "",
+                }
+            )
+        checked = [*words.values(), *(f["why"] for f in futures), *([name] if kind == "idea" else [])]
+        if raw["kind"] != kind or not name or not all(words.values()) or (named and not matched) or any(CARD_BARS.search(w) for w in checked):
+            return prose, None
+        sits = raw.get("sits")
+        return prose, {
+            "kind": kind,
+            "name": name,
+            "call": call,
+            "level": level,
+            **words,
+            "sits": {"label": sits.replace("_", " "), "href": f"/stack/{sits}"} if sits in ctx["sublayers"] else None,
+            "futures": futures,
+        }
+    except Exception:  # noqa: BLE001 - whatever is wrong with a card, the reader still gets the answer
+        return prose, None
+
+
 def split_followups(text: str) -> tuple[str, list[str]]:
     """The answer body, and the questions the model suggests next (they are questions, so the check skips them)."""
     m = FOLLOW.search(text.rstrip() + "\n")
@@ -1315,7 +1386,18 @@ def ask(
     usage = {"in": 0, "out": 0, "cache_write": 0, "cache_read": 0}
     calls: list[dict[str, Any]] = []
     t0 = time.monotonic()  # the site's proxy gives up at 110 s: a revise or a fresh attempt starts only if it can finish
-    text, follow = split_followups(_run(client, system, messages, tools, usage, calls))
+
+    def layout() -> dict[str, Any]:
+        from ..market_map import display
+
+        return {
+            "scenarios": tools._outlook().get("scenarios") or {},
+            "sublayers": {u["sublayer"] for u in tools._vc()["units"] if u.get("sublayer")},
+            "companies": {display(e).casefold(): display(e) for e in store.seed.entities},
+        }
+
+    raw, card = split_card(_run(client, system, messages, tools, usage, calls), question, layout)
+    text, follow = split_followups(raw)
     status, model = "ok", MODEL
     up: dict[str, int] = {"in": 0, "out": 0, "cache_write": 0, "cache_read": 0}
     res = check(text, tools.records(CITE.findall(text)))
@@ -1331,7 +1413,8 @@ def ask(
                 + "\nRevise the answer so every number is followed by the citation token of a record that contains it, or drop the number. Reply with the revised answer text only, and make no further tool calls.",
             }
         )
-        revised = _run(client, system, messages, tools, usage, calls)
+        revised, recard = split_card(_run(client, system, messages, tools, usage, calls), question, layout)
+        card = recard or card  # a revision is asked for the text only, so the first card stands
         if revised.strip():  # an empty reply (a tool call with no text) keeps the answer it was asked to revise
             text, again = split_followups(revised)
             follow = again or follow
@@ -1341,12 +1424,13 @@ def ask(
         status == "blocked" and time.monotonic() - t0 < ESCALATE_BY_S
     ):  # one fresh attempt on the stronger model: a new conversation, and better at citing what it read
         up: dict[str, int] = {"in": 0, "out": 0, "cache_write": 0, "cache_read": 0}
-        retry, retry_follow = split_followups(
-            _run(client, system, _conversation(question, history), tools, up, calls, ESCALATE_MODEL)
+        retry, retry_card = split_card(
+            _run(client, system, _conversation(question, history), tools, up, calls, ESCALATE_MODEL), question, layout
         )
+        retry, retry_follow = split_followups(retry)
         res2 = check(retry, tools.records(CITE.findall(retry)))
         if res2.ok:
-            text, res, status, model, follow = retry, res2, "retried", ESCALATE_MODEL, retry_follow
+            text, res, status, model, follow, card = retry, res2, "retried", ESCALATE_MODEL, retry_follow, retry_card
     # only tokens that resolve to a record: anything else is model or visitor text and must not reach the log
     found = tools.records(CITE.findall(text))
     cites = [
@@ -1375,6 +1459,7 @@ def ask(
         "answer": res.annotated if status == "blocked" else text,
         "status": status,
         "followups": follow,
+        "card": None if status == "blocked" else card,  # never a card under an answer the check refused
         "citations": cites,
         "checks": {"numbers": res.numbers, "failures": res.failures},
         "model": model,

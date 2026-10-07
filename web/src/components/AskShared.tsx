@@ -1,12 +1,13 @@
 "use client";
 
+import { AssessCard, type Assess } from "@/components/AssessCard";
 import Link from "next/link";
 import { Check, Copy, RotateCcw } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { AnswerBody, citeOrder, type Cite } from "@/components/AnswerBody";
 
 // What the Ask page and the side panel share: one way of asking, and one way of drawing an answer.
-export type Answer = { answer: string; status: "ok" | "revised" | "retried" | "blocked"; citations: Cite[]; followups?: string[] };
+export type Answer = { answer: string; status: "ok" | "revised" | "retried" | "blocked"; citations: Cite[]; followups?: string[]; card?: Assess | null };
 export type Turn = { q: string; from?: string; a?: Answer; error?: string };
 
 const OFFLINE = "The query service is offline right now. Everything on the site still links to its observations.";
@@ -85,6 +86,7 @@ export function AnswerView({ t, last, busy, onAsk, onRetry, look = "page" }: { t
       {a ? (
         <div className="flex flex-col gap-3 min-w-0">
           {a.status === "blocked" ? <p className="text-xs text-error">This answer failed the citation check after a revision and a fresh attempt; the unverified numbers are marked and should not be relied on.</p> : null}
+          {a.card ? <AssessCard card={a.card} /> : null}
           <AnswerBody text={a.answer} cites={a.citations} className={k.body} />
           {cites.length ? (
             <details className="text-xs text-ink-2">
