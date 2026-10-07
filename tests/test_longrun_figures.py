@@ -5,7 +5,6 @@ it. The figures change no forecast, outcome or record."""
 import copy
 import json
 import re
-import statistics
 from collections import Counter
 from pathlib import Path
 
@@ -105,21 +104,29 @@ def test_the_spread_counts_every_forecast_in_its_lane_once():
         assert abs(s["x"] + s["w"] - sg.x(years[-1])) < 0.011 and s["x"] == sg.x(years[0])
 
 
-def test_a_middle_is_drawn_only_for_a_milestone_with_enough_dated_forecasts():
+def _fn(name: str) -> str:
+    return FIGS.read_text().split(f"export function {name}")[1].split("\nexport function")[0]
+
+
+def test_no_middle_is_exported_or_drawn_for_any_milestone():
+    # the marks on a row are not one statistic (deadlines, most likely years, range ends, years at odds), so a middle
+    # would read as a consensus date the records do not hold
+    assert set(F["spread"]) == {"lanes"} and not hasattr(sg, "MIDDLE_FLOOR")
     for s in F["spread"]["lanes"]:
-        years = [m["at"] for m in s["marks"]]
-        if s["id"] in sg.TABLE_LANES and len(years) >= sg.MIDDLE_FLOOR:
-            assert (s["middle"]["low"], s["middle"]["high"]) == (statistics.median_low(years), statistics.median_high(years))
-            assert s["middle"]["x"] == sg.x(s["middle"]["low"]) and s["middle"]["w"] >= 0
-        else:
-            assert s["middle"] is None  # too few, or a row of different claims that share a theme
-            assert s["no_middle"] == ("few" if s["id"] in sg.TABLE_LANES else "theme")
+        assert not any("middle" in k for k in s) and s["theme"] == (s["id"] not in sg.TABLE_LANES)
     small = {s["id"]: s for s in sg.figures(_small(), GRID, IDEAS)["spread"]["lanes"]}
     assert small["agi"]["n_dated"] == 7 and small["agi"]["n_steps"] == 1 and small["agi"]["n_undated"] == 1
-    assert small["agi"]["middle"]["label"] == "2030" and small["superhuman_coder"]["middle"] is None
-    even = _doc({"agi": [_m(f"e{k}", "2024-01-01", high=y) for k, y in enumerate((2027, 2028, 2030, 2031, 2040, 2050))]})
-    mid = sg.figures(even, GRID, IDEAS)["spread"]["lanes"][0]["middle"]
-    assert (mid["low"], mid["high"], mid["label"]) == (2030, 2031, "2030–2031")  # two middle forecasts: both, not an average
+    src = _fn("LaneSpread")
+    assert ".middle" not in src and "middle:" not in src and ">Middle<" not in src and "bg-s1" not in src
+    assert "No middle or average is drawn" in _prose(src) and "not where opinion settles" in _prose(src)
+
+
+def test_the_spread_says_placed_where_the_end_of_a_range_is_what_is_drawn():
+    src = _prose(_fn("LaneSpread"))
+    assert "from the earliest year a forecast is placed at to the latest" in src and "earliest year given" not in src
+    assert "Earliest placed" in src and "Latest placed" in src
+    assert "a row can begin later than the earliest year a forecast names" in src
+    assert "Each forecast is named on the timeline above" in src and "a forecast of an early sign of it" in src  # nothing hover-only
 
 
 def test_said_against_given_draws_each_dated_forecast_of_the_four_milestones_once():
@@ -154,9 +161,60 @@ def test_marks_that_would_cover_each_other_are_set_side_by_side_and_say_so():
         for i, a in enumerate(doc_marks):
             assert not any(abs(a["x"] - b["x"]) < sg.BOX[0] - 0.011 and abs(a["y"] - b["y"]) < sg.BOX[1] - 0.011 for b in doc_marks[i + 1:]), a["id"]
     small = {m["id"]: m for m in sg.figures(_small(), GRID, IDEAS)["said"]["marks"]}
-    assert not small["c1"]["moved"] and small["c2"]["moved"] and small["c2"]["x"] > small["c1"]["x"]
+    assert small["c1"]["moved"] and not small["c2"]["moved"] and small["c1"]["x"] < small["c2"]["x"]  # set aside to the left
     assert small["a_range"]["y_low"] > small["a_range"]["y"] > small["a_range"]["y_high"]
     assert "a_step" not in small and "a_odds" not in small and "g_old" not in small  # not one of the four milestones' dated forecasts
+
+
+def test_a_mark_set_aside_is_tied_back_to_its_date_and_none_sits_right_of_today():
+    year = int(DOC["as_of"][:4])
+    for said in (F["said"], sg.figures(_small(), GRID, IDEAS)["said"]):
+        today = sg._said_x(sg._year(DOC["as_of"]), year)
+        for m in said["marks"]:
+            assert m["x_made"] == sg._said_x(sg._year(m["made"]), year), m["id"]  # the true place of the date it was made
+            assert m["moved"] == (m["x"] != m["x_made"]) and 0 <= m["x"] <= m["x_made"] <= today, m["id"]  # never into the future
+        assert said["n_moved"] == sum(m["moved"] for m in said["marks"])
+    assert F["said"]["y_breaks"] == [round(100 - p, 2) for _, _, p, _ in sg.GIVEN[1:]]  # where the scale up the side changes
+    src = _fn("SaidAgainstGiven")
+    assert "tie-" in src and "m.x_made" in src and "f.n_moved" in src and "f.y_breaks" in src
+    words = _prose(src)
+    assert "tied back by a short line to the date it was made" in words and "no mark sits right of today" in words
+    assert "a mark set aside, tied back to the date it was made" in words  # the key
+    assert "overflow-x-auto" in src and "No mark is named in the drawing" in words  # a phone has no hover and no room
+
+
+def test_said_against_given_claims_neither_that_height_is_distance_nor_that_forecasts_converge():
+    words = _prose(_fn("SaidAgainstGiven"))
+    assert "is how far ahead that forecast looked" not in words  # false on an uneven scale
+    assert "equal heights are not equal numbers of years" in words
+    assert "is not evidence that forecasts are converging" in words and "not because anyone here changed a date" in words
+    assert 'stroke="var(--s2)" strokeWidth="1.5"' in _fn("SaidAgainstGiven")  # a range is not drawn in a milestone's colour
+
+
+def test_the_worlds_wear_a_single_neutral_border_and_no_colour_that_means_something_elsewhere():
+    both = FIGS.read_text() + PARTS.read_text()
+    assert "WORLD_FILL" not in both and not re.search(r"var\(--(fast|slow|tight)", both)
+    src = _fn("WorldsGrid")
+    assert "style=" not in src and "border-l-4 border-s2 bg-surface-2" in src
+    words = _prose(src)
+    assert "a cell a world is drawn over, named in the cell" in words
+    assert "counting one that sits in more than one cell each time" in words  # the count is by cell
+    assert "the glyphs are tonight's readings" in FIGS.read_text() and "note={WORLDS_NOTE}" in src  # a model with readings on it
+
+
+def test_the_page_words_the_review_asked_for():
+    page, parts = PAGE.read_text(), (WEB / "components" / "SingularityParts.tsx").read_text()
+    labels = re.findall(r'<Folio [^>]*?label="([^"]+)" title="([^"]+)"', page)
+    assert labels and not any(NUMBER_WORD.search(w) for pair in labels for w in pair), labels
+    contents = (WEB / "lib" / "contents.ts").read_text()
+    assert "The ways the next decade could go" in page and "The ways the next decade could go" in contents and "Four ways" not in contents
+    assert "one due by the end of this year sits left of today while its window is still open" in parts  # the plate's foot
+    assert "may be a different claim, not an older view" in page  # the latest word is not an update
+    due = _prose(_fn("DueLines"))
+    assert "This site's ledger of forecasts has no word for wrong" in due and "the day this site set for checking it" in due
+    lag = _prose(_fn("FictionLag"))
+    assert "Nor is it a guide to how long a story written today will wait" in lag and "the middle of the built ideas" in lag
+    assert "the middle idea" not in lag
 
 
 def test_the_due_figure_is_the_pages_own_list_with_no_rate():
@@ -249,6 +307,7 @@ def test_the_figures_say_what_reviewers_have_required_of_sister_pages():
     for fig in ("LaneSpread", "SaidAgainstGiven"):  # wherever the heads of Anthropic and its rivals are drawn or counted
         assert "{DISCLOSE}" in FIGS.read_text().split(f"export function {fig}")[1].split("\nexport function")[0], fig
     assert re.search(r'DISCLOSE = "[^"]*a Claude model, made by Anthropic[^"]*rival labs', FIGS.read_text())
+    assert "its own record in this site's ledger of forecasts" in src and "its row links to" not in src  # no link that is not there
     lag = _prose(FIGS.read_text().split("export function FictionLag")[1])
     assert "not evidence" in lag and "fiction" in lag.lower()  # the fiction lane is never evidence for a forecast
     assert not re.search(r"\b(accuracy|track record|hit rate|best forecaster|most accurate|ranked by)\b", src, re.I)  # no rate, no ranking
