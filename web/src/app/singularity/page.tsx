@@ -82,13 +82,13 @@ export default function SingularityPage() {
         <DueLines doc={d} />
         <Due doc={d} />
       </Folio>
-      <Folio n="III" id="now" label="where the forecasters sit now" title="The latest word from each forecaster" lede="The most recent year each forecaster has given for each milestone, among forecasts made since 2023. The glyph is how the forecast reads tonight; each links to it.">
+      <Folio n="III" id="now" label="where the forecasters sit now" title="The latest word from each forecaster" lede="The most recent year each forecaster has given for each milestone, among forecasts made since 2023. The glyph is how the forecast reads tonight; each links to it. An earlier forecast by the same person may be a different claim, not an older view; all of them are on the timeline.">
         <Latest doc={d} />
       </Folio>
-      <Folio n="IV" id="watch" label="ten things to watch" title="What would tell the fast story from the slow one" lede="Each question names what this site reads tonight, and what a fast or a slow answer would look like.">
+      <Folio n="IV" id="watch" label="what to watch" title="What would tell the fast story from the slow one" lede="Each question names what this site reads tonight, and what a fast or a slow answer would look like.">
         <Questions doc={d} />
       </Folio>
-      <Folio n="V" id="worlds" label="four worlds for 2036" title="Four ways the next decade could go" lede={<>Each world maps onto the cells of the <Link href="/outlook#scenarios" className="underline decoration-axis underline-offset-2 hover:decoration-ink">scenario grid</Link>. None is crowned: a world reads consistent until one of its signposts fails. <Link href="/singularity/atlas" className="underline decoration-axis underline-offset-2 hover:decoration-ink">What each world would change, part of life by part of life →</Link></>}>
+      <Folio n="V" id="worlds" label="worlds for 2036" title="The ways the next decade could go" lede={<>Each world maps onto the cells of the <Link href="/outlook#scenarios" className="underline decoration-axis underline-offset-2 hover:decoration-ink">scenario grid</Link>. None is crowned: a world reads consistent until one of its signposts fails. <Link href="/singularity/atlas" className="underline decoration-axis underline-offset-2 hover:decoration-ink">What each world would change, part of life by part of life →</Link></>}>
         <WorldsGrid doc={d} />
         <Worlds doc={d} />
       </Folio>

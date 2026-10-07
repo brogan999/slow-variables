@@ -33,7 +33,7 @@ export function TimelinePlate({ doc }: { doc: SingularityDoc }) {
         <Key swatch={<span aria-hidden className="font-mono text-sm leading-none text-muted">◇</span>}>set in a story, not a forecast</Key>
         <Key swatch={<span aria-hidden className="font-mono text-sm leading-none text-muted">●</span>}>lighter: a step toward the milestone, not a date for it</Key>
       </>}
-      foot={<p>The scale is not even: the half century from 1950 and the half century from 2050 are squeezed so the years around now get most of the width (dashed lines mark where it changes). A call that gives odds, or bets against a date, without naming a year is listed under the chart. Shaded: the years still to come.</p>}
+      foot={<p>The scale is not even: the half century from 1950 and the half century from 2050 are squeezed so the years around now get most of the width (dashed lines mark where it changes). A call that gives odds, or bets against a date, without naming a year is listed under the chart. A forecast is placed at the start of its year, so one due by the end of this year sits left of today while its window is still open. Shaded: the years still to come.</p>}
       tableLabel="Every forecast placed on the chart"
       table={
         <table className="data w-full">

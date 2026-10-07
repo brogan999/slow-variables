@@ -470,14 +470,14 @@ export type SingularityDoc = {
 // What the page's figures draw (singularity.figures): counts and positions, all worked out by the export.
 export type SgNamed = { id: string; who: string; lane: string; line: string; quoted: boolean; made: string; years: string | null; word: string; step: boolean; href: string };
 export type SgFigures = {
-  spread: { floor: number; lanes: {
+  spread: { lanes: {
     id: string; label: string; n: number; n_dated: number; n_steps: number; n_undated: number; first: number | null; last: number | null; x: number | null; w: number;
     marks: { id: string; who: string; made: string; at: number; years: string; x: number; href: string }[];
-    middle: { low: number; high: number; label: string; x: number; w: number } | null; no_middle: "theme" | "few" | null;
+    theme: boolean;
   }[] };
   said: {
-    marks: { id: string; who: string; lane: string; made: string; at: number; years: string; word: string; href: string; x: number; y: number; y_low: number | null; y_high: number | null; moved: boolean }[];
-    n: number; lanes: { id: string; label: string }[]; left_out: { steps: number; undated: number };
+    marks: { id: string; who: string; lane: string; made: string; at: number; years: string; word: string; href: string; x: number; y: number; y_low: number | null; y_high: number | null; moved: boolean; x_made: number }[];
+    n: number; n_moved: number; y_breaks: number[]; lanes: { id: string; label: string }[]; left_out: { steps: number; undated: number };
     x_ticks: Tick[]; y_ticks: Tick[]; break: number; this_year: number; said_line: string;
   };
   due: {

@@ -16,11 +16,6 @@ export function LaneDot({ lane }: { lane: string }) {
   return <span className={`inline-block h-2.5 w-2.5 rounded-full border-[1.5px] border-s1 ${LANE_KEY[lane] ?? "bg-s1"}`} />;
 }
 
-// One colour for each world: the fast story and the slow one take the site's colours for fast and slow, a stall
-// takes the bottleneck orange, and loss of control the ink.
-export const WORLD_FILL: Record<string, string> = {
-  managed_explosion: "var(--fast)", long_diffusion: "var(--slow)", loss_of_control: "var(--s1)", brake: "var(--tight-3)",
-};
 // The outlook page's glyph for each state a claim can read.
 export const STATE_GLYPH: Record<OutlookState, string> = { holding: "●", failing: "×", both: "◑", untestable: "○" };
 

@@ -161,7 +161,7 @@ def test_marks_that_would_cover_each_other_are_set_side_by_side_and_say_so():
         for i, a in enumerate(doc_marks):
             assert not any(abs(a["x"] - b["x"]) < sg.BOX[0] - 0.011 and abs(a["y"] - b["y"]) < sg.BOX[1] - 0.011 for b in doc_marks[i + 1:]), a["id"]
     small = {m["id"]: m for m in sg.figures(_small(), GRID, IDEAS)["said"]["marks"]}
-    assert small["c1"]["moved"] and not small["c2"]["moved"] and small["c1"]["x"] < small["c2"]["x"]  # set aside to the left
+    assert not small["c1"]["moved"] and small["c2"]["moved"] and small["c2"]["x"] != small["c1"]["x"]
     assert small["a_range"]["y_low"] > small["a_range"]["y"] > small["a_range"]["y_high"]
     assert "a_step" not in small and "a_odds" not in small and "g_old" not in small  # not one of the four milestones' dated forecasts
 
@@ -172,15 +172,22 @@ def test_a_mark_set_aside_is_tied_back_to_its_date_and_none_sits_right_of_today(
         today = sg._said_x(sg._year(DOC["as_of"]), year)
         for m in said["marks"]:
             assert m["x_made"] == sg._said_x(sg._year(m["made"]), year), m["id"]  # the true place of the date it was made
-            assert m["moved"] == (m["x"] != m["x_made"]) and 0 <= m["x"] <= m["x_made"] <= today, m["id"]  # never into the future
+            assert m["moved"] == (m["x"] != m["x_made"]) and 0 <= m["x"] <= today and m["x_made"] <= today, m["id"]  # never into the future
         assert said["n_moved"] == sum(m["moved"] for m in said["marks"])
     assert F["said"]["y_breaks"] == [round(100 - p, 2) for _, _, p, _ in sg.GIVEN[1:]]  # where the scale up the side changes
     src = _fn("SaidAgainstGiven")
     assert "tie-" in src and "m.x_made" in src and "f.n_moved" in src and "f.y_breaks" in src
     words = _prose(src)
-    assert "tied back by a short line to the date it was made" in words and "no mark sits right of today" in words
+    assert "tied back by a short line to the date it was made" in words and "no mark is set right of today" in words
     assert "a mark set aside, tied back to the date it was made" in words  # the key
     assert "overflow-x-auto" in src and "No mark is named in the drawing" in words  # a phone has no hover and no room
+
+
+def test_a_mark_made_today_beside_another_is_set_aside_to_the_left():
+    late = _doc({"agi": [_m("t1", "2026-10-01", high=2030), _m("t2", "2026-10-05", high=2030)]})
+    said = sg.figures(late, GRID, IDEAS)["said"]
+    by = {m["id"]: m for m in said["marks"]}
+    assert by["t2"]["moved"] and by["t2"]["x"] < by["t1"]["x"] and said["n_moved"] == 1
 
 
 def test_said_against_given_claims_neither_that_height_is_distance_nor_that_forecasts_converge():

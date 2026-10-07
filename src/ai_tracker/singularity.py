@@ -6,6 +6,7 @@ things to watch, the four worlds (read through the outlook's scenario grid) and 
 
 from __future__ import annotations
 
+import itertools
 import re
 from datetime import date
 from pathlib import Path
@@ -244,8 +245,7 @@ def build(s: Any, today: date | None = None, outlook: dict[str, Any] | None = No
     return out | {"figures": figures(out, (outlook or {}).get("scenarios") or {}, futures.ideas())}
 
 
-MIDDLE_FLOOR = 5  # a milestone with fewer dated forecasts gets no middle drawn: too few to have one
-BOX = (3.0, 1.9)  # percent of the plot two marks must keep apart, across and down, before one is set beside the other
+BOX = (2.0, 1.9)  # percent of the plot two marks must keep apart, across and down, before one is set aside
 SAID = (3.0, 25.0, 90.0)  # the year-said scale: 1960 to 2020 squeezed into the first quarter, 2020 to next year in the rest
 # the year-given scale of the same plot, from its foot: the two decades most forecasts name get most of the height
 GIVEN = [(1990, 2020, 0.0, 10.0), (2020, 2040, 10.0, 65.0), (2040, 2100, 65.0, 96.0)]
@@ -255,6 +255,12 @@ LAG_TOP = 10  # decades between imagining and building; anything longer shares t
 
 def _lin(v: float, lo: float, hi: float, a: float, b: float) -> float:
     return round(a + (b - a) * (v - lo) / (hi - lo), 2)
+
+
+def _said_x(v: float, year: int) -> float:
+    """Percent across the said-against-given plot for the date a forecast was made."""
+    a, b, c = SAID
+    return _lin(max(v, 1960), 1960, 2020, a, b) if v <= 2020 else _lin(v, 2020, year + 1, b, c)
 
 
 def _at(m: dict[str, Any]) -> int:
@@ -272,10 +278,6 @@ def figures(doc: dict[str, Any], scenarios: dict[str, Any], ideas: list[dict[str
     for la in doc["lanes"]:
         dated = sorted((m for m in la["forecasts"] if not m["step"]), key=lambda m: (_at(m), m["made"]))
         years = [_at(m) for m in dated]
-        mid = None  # only the four milestones of the forecaster table: the other rows gather different claims on a theme
-        if la["id"] in TABLE_LANES and len(years) >= MIDDLE_FLOOR:
-            lo, hi = years[(len(years) - 1) // 2], years[len(years) // 2]
-            mid = {"low": lo, "high": hi, "label": str(lo) if lo == hi else f"{lo}–{hi}", "x": x(lo), "w": round(x(hi) - x(lo), 2)}
         spread.append(
             {
                 "id": la["id"],
@@ -293,16 +295,15 @@ def figures(doc: dict[str, Any], scenarios: dict[str, Any], ideas: list[dict[str
                 "last": years[-1] if years else None,
                 "x": x(years[0]) if years else None,
                 "w": round(x(years[-1]) - x(years[0]), 2) if years else 0,
-                "middle": mid,
-                # why a row has no middle: a theme of different claims, or too few dated forecasts
-                "no_middle": None if mid else "theme" if la["id"] not in TABLE_LANES else "few",
+                # no middle is worked out: a row's marks are deadlines, most likely years, range ends and years at odds
+                "theme": la["id"] not in TABLE_LANES,  # a row that gathers different claims on one theme
             }
         )
 
-    a, b, c = SAID
+    b = SAID[1]
 
     def said_x(v: float) -> float:
-        return _lin(max(v, 1960), 1960, 2020, a, b) if v <= 2020 else _lin(v, 2020, year + 1, b, c)
+        return _said_x(v, year)
 
     def given_y(v: float) -> float:
         """Percent from the top of the plot; a year after the last piece sits on the top edge."""
@@ -319,19 +320,24 @@ def figures(doc: dict[str, Any], scenarios: dict[str, Any], ideas: list[dict[str
             marks.append(
                 {
                     "id": m["id"], "who": m["who"], "lane": la["id"], "made": m["made"], "at": _at(m), "years": m["years"],
-                    "word": m["word"], "href": m["href"], "x": said_x(_year(m["made"])), "y": given_y(_at(m)),
+                    "word": m["word"], "href": m["href"], "x": said_x(_year(m["made"])), "x_made": said_x(_year(m["made"])), "y": given_y(_at(m)),
                     "y_low": given_y(m["low"]) if ranged else None, "y_high": given_y(m["high"]) if ranged else None,
                     "moved": False,
                 }
             )  # fmt: skip
     marks.sort(key=lambda m: (m["made"], m["at"], m["id"]))
-    for i, m in enumerate(marks):  # a mark that would cover an earlier one is set to its right, and says so
-        while any(abs(m["x"] - p["x"]) < BOX[0] and abs(m["y"] - p["y"]) < BOX[1] for p in marks[:i]):
-            m["x"], m["moved"] = round(m["x"] + BOX[0], 2), True
+    # a mark that would cover an earlier one is set aside at the nearest free place, right or left, never right of
+    # today, and says so (the web ties it back to x_made)
+    for i, m in enumerate(marks):
+        tries = (m["x_made"] + sign * k * BOX[0] for k in itertools.count(1) for sign in (1, -1))
+        while m["x"] > said_x(today) or any(abs(m["x"] - p["x"]) < BOX[0] and abs(m["y"] - p["y"]) < BOX[1] for p in marks[:i]):
+            m["x"], m["moved"] = round(next(tries), 2), True
     four = [la for la in doc["lanes"] if la["id"] in TABLE_LANES]
     said = {
         "marks": marks,
         "n": len(marks),
+        "n_moved": sum(1 for m in marks if m["moved"]),
+        "y_breaks": [given_y(lo) for lo, _, _, _ in GIVEN[1:]],  # where the scale up the side changes
         "lanes": [{"id": la["id"], "label": la["label"]} for la in four],
         "left_out": {
             "steps": sum(1 for la in four for m in la["forecasts"] if m["step"]),
@@ -459,7 +465,7 @@ def figures(doc: dict[str, Any], scenarios: dict[str, Any], ideas: list[dict[str
         "not_built": states.count("not_marked_built"),
         "ideas": len(ideas),
     }
-    return {"spread": spread and {"floor": MIDDLE_FLOOR, "lanes": spread}, "said": said, "due": due, "worlds": worlds, "lag": lag}
+    return {"spread": spread and {"lanes": spread}, "said": said, "due": due, "worlds": worlds, "lag": lag}
 
 
 def problems(
