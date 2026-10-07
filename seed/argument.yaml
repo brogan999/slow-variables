@@ -63,20 +63,46 @@ exits:
     expect: unsupported
     label: AI is not an ordinary technology
     text: AI stops looking like an ordinary technology if three things happen together. Models become nearly as reliable on long jobs as on short ones, and not just because the tests have run out of longer tasks. Most of the labour-market trackers we follow break at the same time. And either the share of work hours done with AI passes a fifth, or productivity runs well above trend for years on end.
+    conditions:  # one plain label for each condition the monitor tests, in the monitor's order (the `exits` plate)
+      - {label: Models are nearly as reliable on long jobs as on short ones}
+      - {label: "That is not just the tests running out of longer tasks"}
+      - {label: A model can be relied on for a job that takes a person a working day}
+      - {label: Most of the labour-market trackers we follow break at the same time}
+      - {label: The share of work hours done with AI passes its fast line, either: true}
+      - {label: Productivity runs well above trend for years on end, either: true}
   - monitor: rents_migrate_up
     expect: contradicted
     label: Profit moves up to the labs
     text: The chip makers' hold on the profit loosens if, over a year, the labs' share of the gross profit we can measure rises by five points while the chip makers' share falls by as much.
+    conditions:
+      - {label: The labs' share of the gross profit we can measure rises enough over a year}
+      - {label: The chip makers' share falls by as much}
+      - {label: "The other way: the chip makers' share is flat or rising"}
   - monitor: consumers_keep_surplus
     label: Users keep most of the value
     text: Users rather than sellers keep most of the value if what people say they would need to be paid to give AI up is more than double the revenue the leading labs and business buyers bring in.
+    conditions:
+      - {label: What people would need to be paid to give AI up is well above what sellers bring in}
   - monitor: invention_side_warning
     label: AI speeds up its own invention
     text: AI starts speeding up its own invention if independent tests show agents doing more than a day of research work for each day a person puts in, and needing a person's help on long tasks less than half the time.
+    conditions:
+      - {label: Independent tests show agents doing more research work in a day than a person does}
+      - {label: Agents need a person's help on long tasks less often than not}
   - monitor: real_wages_fall
     expect: unsupported
     label: Workers stop sharing the gains
     text: The case that workers share in AI's gains fails if the typical full-time worker's pay, after inflation, sits below its level at the end of 2022, just before ChatGPT, for four quarters running while the economy's output keeps growing. Pascual Restrepo, an economist who models work once machines can do every task, finds that workers' total pay never falls below its level before such AI unless something else, such as market power over computing, gets in the way; the typical worker's pay is the nearest measure this site reads.
+    conditions:
+      - {label: "The typical worker's pay, after inflation, sits below its level just before ChatGPT for a year running"}
+      - {label: The economy's output keeps growing}
+
+# The argument as a map (the `map` plate on /argument): each claim's folio, the slow variables it rests on and the exits
+# that would overturn it. Every slow variable and every exit appears once; the claim itself is the folio's own heading.
+map:
+  - {folio: the pace, watches: [btos_firm_use, bbd_work_hours_assisted, bls_labor_productivity_yoy], exits: [normal_tech_falsified, invention_side_warning]}
+  - {folio: the money, phase: true}
+  - {folio: the spoils, watches: [gross_profit_semis_share, consumer_surplus_wta], exits: [rents_migrate_up, consumers_keep_surplus, real_wages_fall]}
 
 # Every URL fetched while the essays were fact-checked (September 2026); rendered at the end of /argument.
 # Each lens page's headline, chosen by its monitor's state. Claims say only what the state supports.

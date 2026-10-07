@@ -86,7 +86,7 @@ def test_a_ranged_reading_sits_inside_a_range_only_when_its_status_says_that_ran
         assert zones["normal"]["x"] == 0 and abs(zones["fast"]["x"] + zones["fast"]["w"] - 100) < 0.01
         assert abs(zones["normal"]["w"] - zones["between"]["x"]) < 0.01  # the ranges meet with no gap and no overlap
         assert abs(zones["between"]["x"] + zones["between"]["w"] - zones["fast"]["x"]) < 0.01
-        assert [e["value"] for e in r["edges"]] == [ind.normal_band.hi, ind.fast_band.lo]
+        assert [e["at"] for e in r["edges"]] == [ind.normal_band.hi, ind.fast_band.lo]
         assert [e["x"] for e in r["edges"]] == [zones["between"]["x"], zones["fast"]["x"]]
         assert 0 <= r["x"] <= 100
         falls = {"consistent_with_normal": "normal", "faster_than_normal": "fast", "emerging": "between"}[
@@ -124,6 +124,7 @@ def test_a_directed_reading_draws_the_window_its_rule_compares_and_the_dead_band
         assert (r["start"]["as_of"], r["start"]["value"]) == win[0] and (r["end"]["as_of"], r["end"]["value"]) == win[-1]
         assert r["start"]["obs_ids"] == pts[win[0][0]]["obs_ids"] and r["end"]["obs_ids"] == pts[win[-1][0]]["obs_ids"]
         assert r["status"] == S.current(ind.id).new_status and r["higher_is"] == ind.direction_rule.higher_is
+        assert r["dead"]["band"] == ind.direction_rule.dead_band
         assert 0 <= r["dead"]["x"] < r["start"]["x"] < r["dead"]["x"] + r["dead"]["w"] <= 100
         assert 0 <= r["end"]["x"] <= 100
         moved = abs(win[-1][1] - win[0][1]) > ind.direction_rule.dead_band
@@ -149,6 +150,8 @@ def test_every_exit_is_drawn_with_every_condition_its_monitor_tests():
     n = F["exits"]["counts"]
     assert n["exits"] == len(rows) and n["met"] == len([r for r in rows if r["state"] == "supported"])
     assert n["contradicted"] == len([r for r in rows if r["state"] == "contradicted"])
+    assert n["unsupported"] == len([r for r in rows if r["state"] == "unsupported"])
+    assert n["met"] + n["unsupported"] + n["contradicted"] + n["untestable"] == n["exits"]  # the sentence adds up
     assert n["untestable"] == len([r for r in rows if r["state"] == "untestable"])
 
 
@@ -189,7 +192,7 @@ def test_every_figure_states_its_kind_and_has_a_key_and_a_foot_and_the_page_has_
 
 def test_figures_that_draw_the_labs_say_a_model_made_by_one_of_them_drafted_the_figure():
     src = FIGS.read_text()
-    for fig in ("ReadingsFigure", "ExitsFigure"):
+    for fig in ("ArgumentMap", "ReadingsFigure", "ExitsFigure"):
         body = src.split(f"export function {fig}")[1].split("\nexport function")[0]
         assert "<Drafted" in body, fig
     assert "a model made by Anthropic" in src

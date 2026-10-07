@@ -259,6 +259,24 @@ export type ArgumentDoc = {
   exits: { monitor: string; label: string; text: string; state: string | null }[];
   headlines: Record<"diffusion" | "capture", { monitor: string; state: string; claim: string }>;
   sources: { who: string; work: string; where: string; url: string }[];
+  figures: ArgumentFigures;
+};
+// The three figures on /argument (Part 45i), laid out by argument.figures: every place is a percentage of its strip.
+export type RangedReading = {
+  id: string; label: string; status: string | null; grade: string | null; href: string; unit: string; value: number; as_of: string; obs_ids: string[];
+  x: number; lane: "inside" | "between" | "line" | "outside"; falls: "normal" | "between" | "fast"; held: string[]; zero: number;
+  zones: { key: "normal" | "between" | "fast"; x: number; w: number }[]; edges: { x: number; at: number }[];
+};
+type DirectedPoint = { as_of: string; value: number; obs_ids: string[]; x: number };
+export type DirectedReading = {
+  id: string; label: string; status: string | null; grade: string | null; href: string; unit: string; higher_is: string; periods: number;
+  start: DirectedPoint; end: DirectedPoint; move: { x: number; w: number }; dead: { x: number; w: number; band: number }; estimate: boolean;
+};
+export type ExitCond = { label: string; text: string; detail: string; holds: boolean | null; obs_ids: string[]; either: boolean; counter: boolean };
+export type ArgumentFigures = {
+  map: { folio: string; label: string; claim: string; watches: { id: string; label: string; status: string | null }[]; phase: string | null; exits: { monitor: string; label: string; state: string | null }[] }[];
+  readings: { ranged: RangedReading[]; directed: DirectedReading[] };
+  exits: { rows: { monitor: string; label: string; state: string | null; conds: ExitCond[]; n: number; met: number }[]; counts: { exits: number; met: number; unsupported: number; contradicted: number; untestable: number } };
 };
 export const argument = () => read<ArgumentDoc>("argument.json");
 
