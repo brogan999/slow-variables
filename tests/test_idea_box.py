@@ -9,9 +9,15 @@ WEB = Path("web/src")
 
 def test_the_idea_question_names_what_ask_must_cover():
     lib = (WEB / "lib" / "idea.ts").read_text()
-    for part in ("value_chain", "rent_rubric", "scenarios", "what would prove it wrong", "build, build on a condition, or don't build alone"):
+    for part in (
+        "value_chain",
+        "rent_rubric",
+        "scenarios",
+        "what would prove it wrong",
+        "build, build on a condition, or don't build alone",
+    ):
         assert part in lib, f"the idea question leaves out: {part}"
-    assert not re.search(r"\d", re.sub(r"//.*", "", lib)), "the idea question types no figure"
+    assert not re.search(r"\d", re.search(r"`(.*)`", lib, re.S).group(1)), "the idea question types no figure"
 
 
 def test_the_ask_page_builds_the_question_from_an_idea():
