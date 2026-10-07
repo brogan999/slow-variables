@@ -419,3 +419,182 @@ def from_store(
         )
     m = argument["migration"]
     return build(spec, m["scorecard"], m["predictions"], bottlenecks, cards, readings, names, bets, outlook_claims(outlook or {}))
+
+
+# How a row is drawn when the map is counted (Part 45h). Inside the chain a scored row keeps its tightness word, cut
+# where the map's own filter cuts it; a friction outside the chain is read on another scale and never joins that one.
+ROW_CLASSES = ("tight", "moderate", "easing", "unscored", "friction", "friction_unread")
+CLAIM_STATES = ("holding", "failing", "both", "untestable")
+BARRIER_ORDER = ("read", "still_binds", "easing", "largely_lifted", "blank")  # like squares sit together in a family's row
+
+
+def _row_class(r: dict[str, Any]) -> str:
+    reading = r["reading"]
+    if reading["kind"] == "tally":
+        return "friction" if reading["instruments"] or reading["readings"] else "friction_unread"
+    if reading["kind"] == "withheld":
+        return "unscored"
+    return "tight" if reading["word"] in ("tight", "severe") else "moderate" if reading["word"] == "moderate" else "easing"
+
+
+def _bar(parts: list[tuple[str, int]]) -> list[dict[str, Any]]:
+    """Segments of one whole bar, in percent from its left edge."""
+    total, x, out = sum(n for _, n in parts), 0.0, []
+    for key, n in parts:
+        w = 100 * n / total if total else 0.0
+        out.append({"key": key, "n": n, "x": x, "w": w})
+        x += w
+    return out
+
+
+def _counts(us: list[dict[str, Any]]) -> dict[str, int]:
+    return {c: sum(u["cls"] == c for u in us) for c in dict.fromkeys(u["cls"] for u in us)}
+
+
+def figures(doc: dict[str, Any], bottlenecks: dict[str, Any], judged: dict[str, Any]) -> dict[str, Any]:
+    """Everything the figures on /bottlenecks draw, counted and placed here from the map, the barriers list and the
+    model's judgements, none of which it changes. Pure, so the file on disk can be rebuilt and compared."""
+    from . import chart
+
+    rows = [r for g in doc["groups"] for s in g["sections"] for r in s["rows"]]
+
+    def units(rs: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        # low: a score the scorecard itself marks as low in confidence, hatched wherever it is drawn
+        us = [{"id": r["id"], "name": r["name"], "cls": _row_class(r), "low": bool(r["reading"].get("hatched")), "href": f"#why-{r['id']}"} for r in rs]
+        return sorted(us, key=lambda u: ROW_CLASSES.index(u["cls"]))
+
+    stages = []
+    for st in doc["stages"]:
+        us = units([r for r in rows if r["cells"].get(st["id"], {}).get("bites")])
+        stages.append(
+            {
+                **st,
+                "units": us,
+                "total": len(us),
+                "counts": _counts(us),
+                # rows on the tightness scale at all: a stage with none is unmeasured on it, which is not free
+                "scored": sum(u["cls"] in ("tight", "moderate", "easing") for u in us),
+                "now": [{"id": u["id"], "name": u["name"], "href": u["href"], "low": u["low"]} for u in us if u["cls"] == "tight"],
+                "expected": [
+                    {
+                        "id": r["id"],
+                        "name": r["name"],
+                        "href": f"#why-{r['id']}",
+                        "acts": bool(c.get("bites")),  # false: a writer places the row here and the map does not
+                        "writers": [{"who": who, "state": state} for who, state in dict.fromkeys((w["who"], w["state"]) for w in c["writers"])],
+                    }
+                    for r in rows
+                    if (c := r["cells"].get(st["id"], {})).get("writers")
+                ],
+            }
+        )
+    sections = [
+        {"id": f"{g['id']}-{s['id']}", "group": g["label"], "name": s["name"], "units": (us := units(s["rows"])), "total": len(us), "counts": _counts(us)}
+        for g in doc["groups"]
+        for s in g["sections"]
+        if s["rows"]
+    ]
+    chain = [r for r in rows if r["reading"]["kind"] != "tally"]
+    kinds = [
+        {"id": k, "units": (us := units([r for r in chain if r["reading"]["kind_of_tight"] == k])), "total": len(us), "counts": _counts(us)}
+        for k in dict.fromkeys(r["reading"]["kind_of_tight"] for r in chain)
+    ]
+
+    tight = (judged.get("surfaces") or {}).get("tightness") or {}
+    words = (judged.get("surfaces") or {}).get("barriers") or {}
+    scored = [r for r in chain if r["reading"]["kind"] == "scored"]
+    withheld = [r for r in chain if r["reading"]["kind"] == "withheld"]
+    stood_in = sum(r["id"] in tight for r in withheld)
+    outside = [r for r in rows if r["reading"]["kind"] == "tally"]
+    low = sum(bool(r["reading"].get("hatched")) for r in scored)
+    status = sum(r["reading"]["instruments"] > 0 for r in outside)  # an indicator with a status stands behind the row
+    plain = sum(not r["reading"]["instruments"] and r["reading"]["readings"] > 0 for r in outside)  # figures only
+
+    def barrier(b: dict[str, Any]) -> dict[str, Any]:
+        j = None if b["related"] else words.get(str(b["id"]))
+        cls = "read" if b["related"] else j["word"] if j else "blank"
+        return {"id": b["id"], "title": b["title"], "cls": cls, "label": j["label"] if j else None, "href": f"#b{b['id']}"}
+
+    families = []
+    for r in rows:
+        if r.get("family"):
+            us = [barrier(b) for b in bottlenecks["items"] if b["section"] == r["family"]]
+            us.sort(key=lambda u: BARRIER_ORDER.index(u["cls"]) if u["cls"] in BARRIER_ORDER else len(BARRIER_ORDER))
+            families.append({"id": r["id"], "name": r["name"], "href": f"#why-{r['id']}", "units": us, "total": len(us), "counts": _counts(us)})
+    drawn = [u for f in families for u in f["units"]]
+    judged_words: dict[str, dict[str, Any]] = {}
+    for u in drawn:
+        if u["label"]:
+            judged_words.setdefault(u["cls"], {"id": u["cls"], "label": u["label"], "n": 0})["n"] += 1
+    n_read, n_judged = sum(u["cls"] == "read" for u in drawn), sum(bool(u["label"]) for u in drawn)
+    def bar(reading: int, low: int, plain: int, judged_n: int, total: int) -> list[dict[str, Any]]:
+        return _bar([("reading", reading), ("low", low), ("plain", plain), ("judged", judged_n), ("blank", total - reading - low - plain - judged_n)])
+
+    firm = [
+        {"id": "chain", "total": len(chain), "segs": bar(len(scored) - low, low, 0, stood_in, len(chain))},
+        {"id": "outside", "total": len(outside), "segs": bar(status, 0, plain, 0, len(outside))},
+        {"id": "barriers", "total": len(drawn), "segs": bar(n_read, 0, 0, n_judged, len(drawn))},
+    ]
+
+    claimed = [r for r in rows if r["claims"]]
+    distinct = {(w["who"], w["text"], w["href"]): w for r in claimed for w in r["claims"]}  # a claim under two rows is one claim
+    claims = {
+        "states": list(CLAIM_STATES),
+        "rows": [
+            {
+                "id": r["id"],
+                "name": r["name"],
+                "href": f"#why-{r['id']}",
+                "cells": {
+                    s: [{"who": w["who"], "text": w["text"], "href": w["href"], "site": w["who"].startswith(SITE)} for w in r["claims"] if w["state"] == s]
+                    for s in CLAIM_STATES
+                },
+            }
+            for r in claimed
+        ],
+        "tally": {s: sum(w["state"] == s for w in distinct.values()) for s in CLAIM_STATES},
+        "total": len(distinct),
+        "marks": sum(len(r["claims"]) for r in claimed),
+        "site": sum(w["who"].startswith(SITE) for w in distinct.values()),
+    }
+
+    names = {r["id"]: r["name"] for r in rows}
+    paid = [b["venture"]["value"] for b in doc["bets"] if b["venture"]]
+    ax = chart.axis(paid, "USD", log=True) if paid else None  # a dot on a ratio scale: the amounts differ a thousandfold
+    gaps = [b["y"] - a["y"] for a, b in zip(ax["ticks"], ax["ticks"][1:], strict=False)] if ax else []
+    even = lambda g: all(abs(x - g[0]) < 0.05 for x in g)  # noqa: E731
+    money = {
+        # what the page may say of the labelled lines: each the same multiple of the last, all but the closing one, or not
+        "steps": "even" if even(gaps) else "even_but_last" if len(gaps) > 2 and even(gaps[:-1]) else "uneven",
+        "as_of": next((b["as_of"] for b in doc["bets"] if b["as_of"]), None),
+        "ticks": [{"x": 100 - t["y"], "label": t["label"]} for t in ax["ticks"]] if ax else [],
+        "rows": [
+            {
+                "id": b["sublayer"]["id"],
+                "name": b["sublayer"]["name"],
+                "inputs": [names.get(i, i) for i in b["rows"]],
+                "firms": b["firms"],
+                "venture": b["venture"],
+                "x": 100 - chart.y(b["venture"]["value"], ax) if b["venture"] and ax else None,
+            }
+            for b in doc["bets"]
+        ],
+    }
+    for r in money["rows"]:  # a dot near the right edge carries its label on its left, so the label stays in the plot
+        r["flip"] = r["x"] is not None and r["x"] > 60
+    tally = {c: sum(_row_class(r) == c for r in rows) for c in ROW_CLASSES}
+    return {
+        "rows": len(rows),
+        "tally": tally,
+        "stages": stages,
+        "sections": sections,
+        "kinds": kinds,
+        "firm": firm,
+        "families": families,
+        "judged_words": (top := sorted(judged_words.values(), key=lambda w: -w["n"])),
+        "judged_mostly": 2 * n_judged > len(drawn),  # the foot says "most" only while these hold
+        "judged_top_mostly": bool(top) and 2 * top[0]["n"] > n_judged,
+        "made_by": judged.get("made_by"),
+        "claims": claims,
+        "money": money,
+    }

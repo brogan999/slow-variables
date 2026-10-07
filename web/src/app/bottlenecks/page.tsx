@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { BottleneckMap, Bets, MapReasons } from "@/components/BottleneckMap";
+import { BottleneckMap, MapReasons } from "@/components/BottleneckMap";
+import { BarrierFamilies, BindingPath, ClaimStates, MapCounted, MapFirmness, StartupMoney } from "@/components/BottleneckFigures";
 import { PageHeader } from "@/components/PageHeader";
 import { StatusChip } from "@/components/StatusChip";
 import { bottleneckMap, bottlenecks, index, words, judgements } from "@/lib/data";
@@ -31,17 +32,22 @@ export default function BottlenecksPage() {
           <p className="mt-2">A bottleneck here is whatever sets the pace, a scarce input upstream or a slow institution downstream; to bind is to be that scarce thing. Each row carries today&apos;s reading once; each cell says whether the row acts on that stage, and whether a named writer expects it to bind there.</p>
         </details>
       </PageHeader>
+      <BindingPath doc={doc} />
       <BottleneckMap doc={doc} />
+      <MapCounted doc={doc} />
+      <MapFirmness doc={doc} />
       <section className="flex flex-col gap-3">
         <h2 className="display text-2xl leading-tight mt-2">Why each row sits where it does</h2>
         <p className="text-sm text-ink-2 max-w-[62ch]">For each row: what it is, why it acts on each stage, what reads it, and who expects it to bind. A row&apos;s name in the map opens its entry here.</p>
+        <ClaimStates doc={doc} />
         <MapReasons doc={doc} />
       </section>
       <section className="flex flex-col gap-3">
         <h2 className="display text-2xl leading-tight mt-2">Where startup money is going</h2>
-        <p className="text-sm text-ink-2 max-w-[62ch]">Money startups raised by selling new shares, in each sub-layer the chain&apos;s inputs sit in (a sub-layer is a group of companies doing the same job within a layer of the chain). Startup money only: the physical build-out is paid for with big companies&apos; capital spending and debt, which this table misses; the capital row reads the builders&apos; spending. Each firm is counted once, in its main sub-layer, for both its count and its money.</p>
-        <Bets doc={doc} />
+        <p className="text-sm text-ink-2 max-w-[62ch]">Money startups raised by selling new shares, in each sub-layer the chain&apos;s inputs sit in (a sub-layer is a group of companies doing the same job within a layer of the chain). Startup money only: the physical build-out is paid for with big companies&apos; capital spending and debt, which the figure below misses; the map&apos;s capital row reads the builders&apos; spending. Each firm is counted once, in its main sub-layer, for both its count and its money.</p>
+        <StartupMoney doc={doc} />
       </section>
+      <BarrierFamilies doc={doc} />
       <details className="group">
         <summary className="cursor-pointer list-none"><h2 className="display text-2xl leading-tight inline"><span aria-hidden className="text-muted mr-2 inline-block transition-transform group-open:rotate-90">▸</span>Narayanan and Kapoor&apos;s barriers, all of them</h2></summary>
         <p className="text-sm text-ink-2 mt-2 mb-4 max-w-[62ch]">The computer scientists Arvind Narayanan and Sayash Kapoor argue that AI will spread like other general-purpose technologies, slowly, because of barriers outside the models. These are the barriers they name across their essays, by family; the map above places each family at its stage.</p>
