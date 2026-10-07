@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { PowersGlossary } from "@/components/ValueChain";
+import { IdeaBox } from "@/components/IdeaBox";
 import { Opportunities } from "@/components/Opportunities";
 import { TurnModel } from "@/components/OpportunityFigures";
 import { opportunities } from "@/lib/data";
@@ -27,6 +28,7 @@ export default function OpportunitiesPage() {
         </p>
         <PowersGlossary powers={d.powers} />
       </div>
+      <IdeaBox />
       <TurnModel d={d} />
       <Opportunities d={d} />
       <p className="text-xs text-muted max-w-[68ch]">Drafted by a model from the site&apos;s readings and reviewed by {d.reviewed_by}, who set the order and released every record. What each needs first, who would buy it and the next step were drafted by a model; a company is named as a buyer only where this site&apos;s deal ledgers record the purchase. These are conditions, not forecasts: nothing here is scored.</p>

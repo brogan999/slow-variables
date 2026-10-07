@@ -1160,3 +1160,23 @@ The owner asked for "a single page which is basically the visual story of AI now
 - *The leans panel stays* in this pass; the review thought a model made by Anthropic leaning on forecasts about Anthropic the weakest evidence on the page.
 - *Not checked by the review:* whether Perez, or Narayanan and Kapoor, would accept the site's wording of their work (checked only against the site's own records), and the figures' underlying sources.
 - *A hand PR that commits a changed export* (`outlook.json`, `board.json`, `argument.json`, `singularity.json`, `lens/capture.json`) without re-exporting `story.json` fails the equality test when a condition flips; worth a line in the PR template.
+
+## Part 47 (7 Oct 2026): a reader's own business idea, reasoned through by Ask
+
+The owner asked for a way to put in a new business idea and have the site reason through the evidence and give a view. Ask already does the reasoning, cite-checked and under a daily spend cap, so this part adds no model and no endpoint.
+
+**What shipped.**
+
+- `/value-chain/opportunities` carries a box, "Test a business of your own": a plain form (no script) that opens `/ask?idea=…`. `web/src/lib/idea.ts` wraps the idea in one fixed question in plain words: where it sits on the value chain, what is scarce there, where the profit would pool by the rent rule, which futures strengthen or weaken it, what would prove it wrong, and a closing call (build, build on a condition, or don't build alone).
+- Ask's rule on personal recommendations gains one sentence: an idea put to be reasoned through is judged as a business, read from `value_chain`, `rent_rubric` and `scenarios` with few further calls, kept short, and ends with the call, said to be a judgement. `PROMPT_VERSION` is 12.
+- The legal page says a question arriving in a link is part of the page address and so sits in the host's request log; the box says to leave out anything confidential. `robots.ts` disallows `/ask?`, so a crawler following a link spends nothing.
+
+**Judgement calls.**
+
+- *The call is allowed.* The owner asked for an opinionated view. The rule against personal recommendations stays for "what should I build"; the call here is on the business, labelled a judgement and not advice.
+- *The idea travels in the address* (a GET form, like the series box). Disclosed, not engineered around.
+- *The idea is capped at 450 characters* so a follow-up, which remembers the first 600 of a turn, still carries all of it.
+
+**Found on the way, not fixed here.** Ask returned an empty answer with status `ok` to a long, open version of the question (ten tool calls, no text). `_run` returns `""` when the model stops without text and `ask()` reports it as an answer.
+
+**Still to check after the deploy.** The new rule was written without a local model key: run the box once against the deployed service and confirm the answer is short and ends with a call.
