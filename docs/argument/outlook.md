@@ -1,6 +1,6 @@
 # A reading both sides predicted settles nothing.
 
-Two forecasters can watch the same number climb and both be right, because each of them predicted it. Most arguments about where AI goes next are like that: the evidence each side points to fits the other side's story too. For each question the outlook turns on, this page sets out what named writers argue, what each side expects this site's readings to show, what they show tonight, and the reading that would tell the sides apart.
+Two forecasters can watch the same number climb and both be right, because each of them predicted it. Most arguments about where AI goes next are like that: the evidence each side points to fits the other side's story too. For each question the outlook turns on, this page sets out what named writers argue, what each side expects this site's readings to show, what they show tonight, and, where this site has one, the reading that would tell the sides apart.
 
 ### Folio I · Can AI do whole jobs, reliably?
 
@@ -72,6 +72,8 @@ What the labs do with the best model's price while it still leads will settle it
 
 Selling access to a model that others can match, token by token, is a thin business; someone has to answer for what an AI agent does before it can be trusted with work that matters; checking AI's work becomes a costly task of its own; and people use AI well before firms reorganise around it. Where someone here dissents, the dissent is listed with the point.
 
+[plate:whose]
+
 ### The futures still open
 
 ## Crossing progress with rules shows which futures tonight's readings still allow
@@ -82,10 +84,18 @@ The grid crosses the two and fills a cell only where a named writer argues it; a
 
 [plate:scenarios]
 
+Some claims name a date, a few of them a date this site set where the writer gave none, and the calendar shows the year in which each date falls.
+
+[plate:due]
+
 ### Every claim, tested nightly
 
 ## A claim earns its place by naming what would prove it wrong
 
-Every claim on this page, each writer's and this site's own, is listed with its test, tonight's reading and the outcome that would prove it wrong. The tests run every night, so a claim that stops holding says so here before anyone rewrites a sentence.
+Every claim on this page, each writer's and this site's own, is listed with the outcome that would prove it wrong and, where a test has been written, with its test and tonight's reading. Most claims have no test yet. The tests that exist run every night, so a claim that stops holding says so here before anyone rewrites a sentence.
+
+[plate:method]
+
+[plate:settle]
 
 [plate:board]
