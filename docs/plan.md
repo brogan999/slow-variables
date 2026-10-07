@@ -1091,3 +1091,56 @@ The owner delivered sixteen 720 by 480 WebPs made with his own image pipeline (Q
 - **One rule for a held number.** `held_reasons` and `single_non_primary` now sit beside `flow_status` in `analysis/bands.py`; `evaluate`, `/argument` and `/diffusion` all use them, the two `_held` functions are gone, and `tests/test_held.py` checks the reasons against the evaluator for every ranged indicator. One `HELD_WORDS` map in `web/src/lib/format.ts` serves both pages. Judgement call: the reviewer's sentence for the single-source reason began "every reading comes from one survey run by researchers", which is true of work hours but not of the other gauges the diffusion page now prints the same words for, so the shared wording is "every reading comes from one source that is not an official one, and the site scores a status only on two independent sources or on one official one". The diffusion page's three other reasons take the argument page's wording; the exported reasons are unchanged on both pages.
 - **Smaller changes.** The estimate flag is read from the records (any record behind either end of the window with basis estimated), not from a word in a seed sentence. Each condition's label is tied to the monitor's own text by a new `test` key in the seed, and the build stops if `thesis.py` rewords, adds or drops a condition. The total-factor-productivity condition no longer borrows the name of the output-per-hour slow variable; four other labels were reworded. A number that has moved range while its reason waits prints "not yet rescored", not "held". The opposite test's condition carries the chip's glyph, not the tick. The test that pinned tonight's held list (it would have held the nightly the night a second survey of work hours landed) asserts the rule instead.
 - **Reviewer's notes for the owner (no change made).** The central falsifier cannot fire today: its second condition needs the best model's half-the-time horizon to be below the test suite's sixteen-hour ceiling, the record is 1,045 minutes against 960, and so "AI is not an ordinary technology" cannot be met while that model leads unless the ceiling constant in `thesis.py` is raised. The labs' share rose 4.4 points against a line of five: near, and the figure does not draw distance. "Users keep most of the value: can't be tested yet" reads as missing data, but the reading exists ($172B) and sits between the floor ($37B) and the bar ($356B): undecided, not unmeasured. "AI is not an ordinary technology: not happening" is a double negative; `STATE_WORDS` is site-wide and was left. The chip makers' share card is graded A because a card takes the best grade among its inputs (two of sixteen are audited, six are estimates); and the margin still prints "frenzy" where the essay says installation (smallest fix if wanted: "installation, in its frenzy phase", as the map does).
+## Part 46 (6 Oct 2026): the story in pictures
+
+The owner asked for "a single page which is basically the visual story of AI now and in the predicted future". `/story` is that page: twenty-one panels in the path's three acts (now, the money, next), each a figure that already exists on another page, with a couple of plain sentences above it and a link beneath to the page it comes from. It adds no number and no finding.
+
+- **How a panel is made.** One wrapper, `web/src/components/StoryPanel.tsx`, draws the other page's component as it is, from that page's export, inside `.story-fig`. One CSS rule hides the figure's long foot and folded table there and nothing else, so the figure keeps its own reviewed title, its note (where it states its kind), its drawing and its key. Above it: the stop it comes from, its kind, and the story's sentences. Beneath it: the carry line, which holds the caveats the hidden foot carried, and a link to the full figure. No figure was redrawn and no component gained a compact mode.
+- **Words.** `seed/story.yaml` holds every word the page adds; `story.build` writes them to `web/data/story.json`, whose every leaf is a string. The words type no digit and no number word, and a test holds them to that. Each panel declares its kind (chart, model, mixed) and a test checks it against the figure's own note.
+- **Thin data.** `story.CONDITIONS` reads the other pages' exports. A panel whose figure would draw nothing (the clocks, the profit stack, the ties, the leans) is left out of `story.json` whole, sentences included; the page tests no data. A carry sentence that states tonight's result is written `{text, when}` and is dropped when its condition stops holding: readings near their age limit (the scale), most disputes having no test (the reach figure), no signpost holding or failing (the worlds).
+- **Small props on reused figures**, each defaulting to what the figure does at home: `base` on `ScalePlate`, `BindingPath`, `DisputeReach` and `TimelinePlate` (their in-page hash links would be dead on `/story`); `id` on `FictionLag` (it shares `fig-lag` with the diffusion model); `picture` on `Anatomy` (on main it also draws the `firm-anatomy` illustration, which is placed once and stays on `/firm/kinds`).
+- **Placement.** A reference page, not a tenth stop: second in `EVIDENCE` (so the menu, search and sitemap have it), in `REFERENCE` with its three act sections in the contents, and one line under the path on the home page. Each act opens with its illustration (`story-act-1` to `-3`, now recorded with `page: /story`; `check` holds the placement) under the one credit, and the page closes with three Futures plates.
+
+**The caveats each panel must carry** (pinned as phrases in `tests/test_story.py`; the Part that required each is named there):
+
+- clocks: each line is divided by its own first reading; the methods line leaves out readings beyond the tests' range.
+- lag: a drawing of an argument, not of any data; the spacing and slopes measure nothing.
+- gauges: emerging means no verdict yet, not slow; an outlined mark casts no vote.
+- readings: each strip has its own scale; the chip makers' share includes an estimate for OpenAI and Anthropic; a number beneath a strip has not been scored.
+- whole and screen: a screen scored by three AI models, not a claim about what AI can do and not a forecast; "all three models pass" travels with "passes"; each middle bar is the reason given most often by the models that voted no, and a floor.
+- perez: schematic, not data; placed by the published rule.
+- stack: the hatched part is an estimate for OpenAI and Anthropic; applications are left out, not guessed.
+- labs: run-rates as reported, not audited; payments are the full amount written, not money paid; hatched and solid follow one rule for every lab.
+- ties: not money paid; the ledger records no direction, so a tie, not a flow; disputed deals are paler.
+- chain: a bar is the tracker's reach, not a market's size; each direction is a judgement drafted by Claude, a model made by Anthropic, whose own part is among those judged.
+- scale: a hatched score is low in confidence and not ranked with the rest; close inputs are in no meaningful order.
+- path: equal widths on purpose; an expected row is a claim, not a reading; unscored is not free.
+- anatomy: this site's judgement; no reading tests it whole.
+- reach: a dark mark does not mean either side has the better of the argument; some writers have ties to Anthropic.
+- tally and leans: tonight's reading, not a final verdict; no word for wrong (behind reads as slower than said); a model's judgements, not readings, by a model made by Anthropic, with no person reviewing each lean.
+- timeline and said: the scale is not even; a forecast sits at the start of its year; lab heads are placed by the same rule; the shape is not evidence that forecasts are converging; height is not distance.
+- worlds: consistent means not ruled out.
+- fiction: stories, not forecasts, not evidence, and no guide to how long a story written today will wait.
+- the page as a whole: drafted by Claude, a model made by Anthropic; what a chart, a model, an illustration and hatching each mean; nothing is advice.
+
+**Judgement calls.**
+
+- `content-visibility: auto` on the panels (in the design) was dropped: it contains styles, so the figure counter restarted and every panel read "Fig. 1". The page is static HTML and lighter than `/census`, `/predictions` and `/outlook` without it.
+- The disclosure says hatching marks "a judgement, an estimate or a score held with low confidence", not only the first two, because the scale and the path hatch a low-confidence score.
+- The anatomy's carry line is written for this page; the export's own note says "on this page" and "the page before", which would point at the wrong pages here.
+- The sentences beside the ties figure say what the figure asks, since its title is a question; the sentences beside the screen figure repeat the title's wording ("the reason given most often") and never "fails for want of a check".
+- The leans panel is declared mixed (a chart of a model's judgements), as is the chain.
+- Panels link to the figure's own id where it has one; the profit stack has none and links to `/capture#layers`, the timeline to `/singularity#timeline`. The two contents sections the design suggested adding (`/capture#ahead`, `/predictions#who-and-when`) were not needed and were left.
+- The home page's dark "Start the path" card was not repeated at the foot: the layout already ends every evidence page with "Return to the path".
+- A guard was added for the census title "A small part of the knowledge payroll passes the screen" (passes is the smallest part of the strip); Part 45b said every finding title had one and this did not.
+- `tests/test_longrun_figures.py` reads `FictionLag`'s id through its default now that it is a prop.
+
+**For the owner.**
+
+- *The page reads more settled than any page it draws from.* Twenty-one figures in a row make one story; each carry line is a few short sentences standing in for a reviewed foot. The words in `seed/story.yaml` are new text in the site's voice, drafted by a model, and have had no staff review yet.
+- *Three reused figures are heavy for a story page* and were left whole rather than cut: the labs figure (its "too little on record" list is long), the path (four boxes of named rows) and the readings figure (a nine-entry key). A lighter cut of each would need its own review.
+- *Hidden stamps.* The "measured / reported / estimate" stamps sit in the foot, so they are hidden here; the clocks and stack carry lines say so in words.
+- *A few keys still say "this page" or "the scorecard"*, meaning the figure's home page (the chain's "no judgement on this page yet", the path's "hatched as on the scorecard"). They are the figures' own words and were not changed.
+- *Acts here are not quite the acts in the menu:* Perez's curve and the profit stack come from stop 1 and stop 4 and sit in Act II; the scale comes from the migration essay under stop 1. Each panel names its stop.
+- *The Act III picture* (robots in a market square) is the most confident thing in an act about what is not yet known; it keeps its credit and stage line directly beneath.
+- *28 Oct.* When the six Epoch readings pass their age limit, the scale and the path redraw themselves and the scale's last carry sentence drops out by its condition; no wording here needs a change.

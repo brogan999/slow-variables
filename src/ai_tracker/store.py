@@ -1044,6 +1044,10 @@ class Store:
             )
             + "\n"
         )
+        from . import story
+
+        # last, because it reads the documents written above to learn which reused figures have data tonight
+        _write(out / "story.json", story.build(story.load(), lambda name: json.loads((out / name).read_text())))
 
     def _ledger_rows(self) -> list[dict[str, Any]]:
         return [

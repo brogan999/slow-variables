@@ -158,7 +158,7 @@ export function MethodFlow({ doc }: { doc: OutlookDoc }) {
   );
 }
 
-export function DisputeReach({ doc }: { doc: OutlookDoc }) {
+export function DisputeReach({ doc, base = "" }: { doc: OutlookDoc; base?: string }) {
   const f = doc.figures.settle;
   const pos = titles(doc);
   const name = (key: string) => `${pos[key].title}, against ${pos[pos[key].rival]?.title ?? "no named rival"}`;
@@ -186,7 +186,7 @@ export function DisputeReach({ doc }: { doc: OutlookDoc }) {
                 {r.cells.map((c) => (
                   <li key={c.key} className="grid grid-cols-[0.75rem_minmax(0,1fr)] items-baseline gap-x-2">
                     <span className="mt-1 flex self-start"><LookSwatch look={c.mark} /></span>
-                    <span><a href={`#position-${c.key}`} className="text-ink decoration-grid underline-offset-2 hover:underline">{name(c.key)}</a> <span className="text-muted">· {REACH_WORD[c.mark]} · claims with a test: <span className="num">{c.tested}</span> of <span className="num">{c.claims}</span></span></span>
+                    <span><a href={`${base}#position-${c.key}`} className="text-ink decoration-grid underline-offset-2 hover:underline">{name(c.key)}</a> <span className="text-muted">· {REACH_WORD[c.mark]} · claims with a test: <span className="num">{c.tested}</span> of <span className="num">{c.claims}</span></span></span>
                   </li>
                 ))}
               </ol>
@@ -200,7 +200,7 @@ export function DisputeReach({ doc }: { doc: OutlookDoc }) {
         label="Each question's disputes, one mark each, by how far tonight's readings reach"
         rows={f.rows.map((r) => ({
           key: r.id, name: r.label,
-          marks: r.cells.map((c) => <LookMark key={c.key} look={c.mark} href={`#position-${c.key}`} tip={`${name(c.key)}: ${REACH_WORD[c.mark]}`} />),
+          marks: r.cells.map((c) => <LookMark key={c.key} look={c.mark} href={`${base}#position-${c.key}`} tip={`${name(c.key)}: ${REACH_WORD[c.mark]}`} />),
           tail: <>{r.counts.no_test} of {r.n} where no claim has a test</>,
         }))}
       />

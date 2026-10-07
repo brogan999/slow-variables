@@ -413,7 +413,12 @@ def _check(s: st.Store) -> tuple[list[str], list[str]]:
     from . import firm_kinds, illustrations
 
     errors += illustrations.problems(illustrations.load())
-    errors += illustrations.placement_problems(illustrations.load(), {"/firm/kinds": firm_kinds.placed(firm_kinds.load())})
+    from . import story
+
+    errors += story.problems(story.load())
+    errors += illustrations.placement_problems(
+        illustrations.load(), {"/firm/kinds": firm_kinds.placed(firm_kinds.load()), "/story": story.placed(story.load())}
+    )
     import yaml
 
     from . import value_chain as vc

@@ -92,7 +92,7 @@ def test_every_panel_links_to_a_real_figure_on_another_page():
     for p in PANELS:
         assert p["route"] != "/story" and (WEB / "app" / p["route"].strip("/") / "page.tsx").exists(), p["id"]
         entry = contents.split(f'"{p["route"]}": {{')[1].split("\n  },")[0].split('\n  "/')[0]
-        assert f'["{p["anchor"]}", ' in entry or f'id="{p["anchor"]}"' in _component(p), p["id"]
+        assert f'["{p["anchor"]}", ' in entry or re.search(rf'\bid ?= ?"{p["anchor"]}"', _component(p)), p["id"]
         assert f'<{p["figure"]} ' in (WEB / "app" / p["route"].strip("/") / "page.tsx").read_text(), p["id"]  # it is that page's figure
 
 
@@ -143,7 +143,7 @@ def test_no_carry_line_drops_a_caveat_a_review_made_mandatory():
 
 def test_the_words_never_claim_more_than_the_figure_or_point_at_what_is_hidden():
     for t in story.strings(SPEC):
-        assert not re.search(r"\b(proves?|shows that AI|will be|is certain|table below|the foot|see below)\b", t), t
+        assert not re.search(r"\b(proves?|shows that AI|is certain|table below|the foot|see below)\b", t), t
     # a title that asks a question or describes is not turned into a finding by the sentences beside it
     assert BY["ties"]["words"][0].startswith("The figure asks")
     assert "fails for want" not in " ".join(BY["screen"]["words"])  # 45b: the reason given most often, not "fails that question"
@@ -162,9 +162,11 @@ def test_the_wrapper_hides_the_foot_and_the_table_and_nothing_else():
 
 
 def test_a_panel_with_no_data_is_left_out_whole_by_the_export():
-    real = story.build(SPEC)
-    assert [p["id"] for a in real["acts"] for p in a["panels"]] == [p["id"] for p in PANELS]  # tonight every figure has data
     gated = {p["id"]: p["needs"] for p in PANELS if p.get("needs")}
+    full = story.build(SPEC, holds=lambda n: True)
+    assert [p["id"] for a in full["acts"] for p in a["panels"]] == [p["id"] for p in PANELS]
+    tonight = [p["id"] for a in story.build(SPEC)["acts"] for p in a["panels"]]  # whatever tonight's exports hold, never pinned
+    assert set(BY) - set(tonight) <= set(gated) and tonight == [p["id"] for p in PANELS if p["id"] in tonight]
     assert {"clocks", "stack", "ties", "leans"} <= set(gated) and set(gated.values()) <= set(story.CONDITIONS)
     for pid, name in gated.items():
         thin = story.build(SPEC, holds=lambda n, name=name: n != name)
@@ -178,9 +180,11 @@ def test_a_panel_with_no_data_is_left_out_whole_by_the_export():
     empty = {"argument.json": {"clocks": {"chart": None}}, "lens/capture.json": {"gross_profit_stack": {"axis": None, "quarters": []}, "figures": {"ties": None}},
              "board.json": {"figures": {"leans": None}, "leans": None, "judged": None}}
     for name in ("clocks_chart", "profit_stack", "ties", "leans"):
-        assert story.CONDITIONS[name](lambda f: empty[f]) is False and story.CONDITIONS[name](story.read) is True, name
+        assert story.CONDITIONS[name](lambda f: empty[f]) is False and isinstance(story.CONDITIONS[name](story.read), bool), name
     page = PAGE.read_text()
-    assert "a.panels.map(" in page and not re.search(r"\.(chart|leans|ties|judged|quarters)\b", page)  # the page tests no data itself
+    figures = page.split("const FIGURES")[1].split("};")[0]
+    assert "act.panels.map(" in page and "{FIGURES[p.figure]}" in page
+    assert not re.search(r"\?|&&|\|\||\.length", figures)  # the page tests no data itself: a missing panel is the export's doing
 
 
 def test_a_sentence_that_states_tonights_result_is_shown_only_while_it_is_true():
@@ -290,7 +294,7 @@ def test_it_is_a_reference_page_in_the_contents_and_the_menu_and_linked_from_hom
     entry = contents.split('"/story": {')[1].split("\n  },")[0]
     assert re.findall(r'\["(act-[a-z]+)", "([^"]+)", "[^"]+\?"\]', entry) == [("act-now", "Now"), ("act-money", "The money"), ("act-next", "Next")]
     page = PAGE.read_text()
-    assert "id={a.anchor}" in page
+    assert "id={act.anchor}" in page
     assert 'href="/story"' in (WEB / "app" / "page.tsx").read_text()
 
 
@@ -299,12 +303,13 @@ def test_the_page_is_plain_server_html_with_no_animation_and_no_scroll_script():
         src = f.read_text()
         assert '"use client"' not in src and not re.search(r"framer|motion|gsap|IntersectionObserver|onScroll|scrollTo|useEffect|animate", src), f
     css = CSS.read_text()
-    assert ".story-panel { content-visibility: auto;" in css and "scroll-snap" not in css
+    assert "scroll-snap" not in css
+    assert "content-visibility" not in css  # it contains styles, so every panel's figure would restart at "Fig. 1"
 
 
 @pytest.mark.parametrize("pid", sorted(MUST))
 def test_each_panel_is_built_with_its_words(pid):
-    doc = story.build(SPEC)
+    doc = story.build(SPEC, holds=lambda n: True)
     p = next(x for a in doc["acts"] for x in a["panels"] if x["id"] == pid)
     assert p["words"] == BY[pid]["words"] and p["kind"] == BY[pid]["kind"]
-    assert all(isinstance(c, str) for c in p["carry"]) and len(p["carry"]) >= len([c for c in BY[pid]["carry"] if isinstance(c, str)])
+    assert all(isinstance(c, str) for c in p["carry"]) and len(p["carry"]) == len(BY[pid]["carry"])

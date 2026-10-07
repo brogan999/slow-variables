@@ -164,12 +164,13 @@ const PART_W = { top: "md:mx-[30%]", check: "md:mx-[15%]", base: "", rented: "",
 
 // The site's picture of an AI-run firm: a narrow top that answers, a checking layer, a wide working base, the models
 // rented beneath, and what the firm owns to the side.
-export function Anatomy({ doc }: { doc: FirmKindsDoc }) {
+// `picture` is false where the diagram is reused without its illustration, which is placed once.
+export function Anatomy({ doc, picture = true }: { doc: FirmKindsDoc; picture?: boolean }) {
   const a = doc.anatomy;
   const part = Object.fromEntries(a.parts.map((p) => [p.id, p.name]));
   return (
     <>
-      <Figure id="fig-picture" title="The idea as a picture: a few people who answer, above work that nobody attends" note={KIND_LABEL.illustration} foot={<p>An imagined scene, made by an AI image model from this site&apos;s description of the idea. It records no firm and nothing that has happened; the diagram beneath says the same thing in words.</p>}>
+      {picture ? <Figure id="fig-picture" title="The idea as a picture: a few people who answer, above work that nobody attends" note={KIND_LABEL.illustration} foot={<p>An imagined scene, made by an AI image model from this site&apos;s description of the idea. It records no firm and nothing that has happened; the diagram beneath says the same thing in words.</p>}>
         <div className="grid items-center gap-4 md:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] md:gap-6">
           <Illustration {...a.illustration} eager />
           <dl className="flex flex-col gap-3 text-[13px] leading-snug text-ink-2 md:grid md:grid-rows-2 md:gap-0 md:self-stretch md:pb-5">
@@ -177,7 +178,7 @@ export function Anatomy({ doc }: { doc: FirmKindsDoc }) {
             <div className="border-l border-axis pl-3 md:self-center"><dt className="font-mono text-[11px] uppercase tracking-wider text-ink">{part.base}</dt><dd>The hall beneath, where machines work with nobody among them.</dd></div>
           </dl>
         </div>
-      </Figure>
+      </Figure> : null}
       <Figure id="fig-anatomy" title={a.title} note={KIND_LABEL.model} foot={<p>{a.note}</p>}>
         <div className="grid gap-2 md:grid-cols-[0_minmax(0,1fr)_minmax(0,16rem)] md:gap-x-4">
           {a.parts.map((p) => (

@@ -708,3 +708,11 @@ export type OpportunityFigures = {
   powers: { cols: string[]; rows: { id: string; cells: boolean[] }[]; totals: number[]; unused: string[] };
 };
 export const opportunities = () => read<OpportunitiesDoc>("opportunities.json");
+
+// /story (plan Part 46): words only. Each panel names a reused figure; the export leaves out a panel with no data.
+export type StoryPanelDoc = { id: string; figure: string; kind: "chart" | "model" | "illustration" | "mixed"; route: string; href: string; words: string[]; carry: string[] };
+export type StoryDoc = {
+  eyebrow: string; title: string; lede: string; disclosure: string[]; closing: { words: string; strip: string };
+  acts: { id: string; anchor: string; sentence: string; illustration: { file: string; alt: string; stage: "next" | "later" | null }; panels: StoryPanelDoc[] }[];
+};
+export const story = () => read<StoryDoc>("story.json");
