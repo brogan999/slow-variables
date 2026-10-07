@@ -2123,6 +2123,11 @@ class Store:
                 for i in sorted({i for ids in c["sources"].values() for i in ids}) if i in srcs
             ]
         doc["powers"] = value_chain.POWER_GLOSS
+        from . import market_map
+
+        on_map = market_map.primaries(market_map.load(), self.seed.entities, _d.today())
+        short = {e.id: market_map.display(e) for e in self.seed.entities}
+        doc["figures"] = value_chain.figures(doc, self.seed.layers, self.seed.sublayers, on_map, futures.rubric(), short)
         return {k: v for k, v in doc.items() if k != "sources"}
 
     def _commoditisation(self, cards: dict[str, Any]) -> dict[str, Any]:
