@@ -280,7 +280,7 @@ export function OutlookMargin({ doc }: { doc: OutlookDoc }) {
         ]}
       />
       <MarginPanel title="Instrument">
-        <p>Each claim is tested every night against one reading and one line. When the rival position expects the same reading, the claim says so instead of counting it as a win.</p>
+        <p>Each claim that has a test is read every night against one reading and one line; most claims have no test yet, and say so. When the rival position expects the same reading, the claim says so instead of counting it as a win.</p>
         <p><Link href="/methodology#outlook" className="text-ink underline decoration-axis underline-offset-2">How the claims are tested →</Link></p>
         <p>The <Link href="/predictions" className="text-ink underline decoration-axis underline-offset-2">predictions ledger</Link> is a different thing: it scores dated forecasts people made in their own words.</p>
         <p>Where the claims say something will bind, <Link href="/bottlenecks" className="text-ink underline decoration-axis underline-offset-2">the bottleneck map</Link> marks the cell.</p>

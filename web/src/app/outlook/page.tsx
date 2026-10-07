@@ -9,7 +9,7 @@ import { bottleneckMap, context, outlook, signposts } from "@/lib/data";
 import { SITE } from "@/lib/site";
 
 const title = "What happens from here";
-const description = "Where the people who think hardest about AI agree and disagree on what comes next, the claims each side makes, tonight's reading of every claim, and the reading that would tell the sides apart.";
+const description = "Where the people who think hardest about AI agree and disagree on what comes next, the claims each side makes, tonight's reading of every claim, and, where this site has one, the reading that would tell the sides apart.";
 // a page's openGraph replaces the site's wholesale, so the share image is named again here
 export const metadata = {
   title,
@@ -29,7 +29,6 @@ export default function OutlookPage() {
     stack: <StackPlate />,
     scenarios: <ScenarioGrid doc={doc} rows={rows} />,
     board: <FalsifierBoard doc={doc} />,
-    sides: <SidesMap doc={doc} />,
     method: <MethodFlow doc={doc} />,
     settle: <DisputeReach doc={doc} />,
     whose: <WhoseBars doc={doc} />,
@@ -61,6 +60,7 @@ export default function OutlookPage() {
       }
       margin={<OutlookMargin doc={doc} />}
     >
+      <div className="fig-slot mb-12"><SidesMap doc={doc} /></div>
       <Folios folios={folios} facts={doc.facts} plates={plates} cites={cites(doc)} tests={doc.tests} after={after} />
       <section id="sources" className="mt-20 border-t border-grid pt-8 scroll-mt-8">
         <h2 className="display text-[1.5rem] mb-4">Sources</h2>

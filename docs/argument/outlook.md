@@ -1,12 +1,10 @@
 # A reading both sides predicted settles nothing.
 
-Two forecasters can watch the same number climb and both be right, because each of them predicted it. Most arguments about where AI goes next are like that: the evidence each side points to fits the other side's story too. For each question the outlook turns on, this page sets out what named writers argue, what each side expects this site's readings to show, what they show tonight, and the reading that would tell the sides apart.
+Two forecasters can watch the same number climb and both be right, because each of them predicted it. Most arguments about where AI goes next are like that: the evidence each side points to fits the other side's story too. For each question the outlook turns on, this page sets out what named writers argue, what each side expects this site's readings to show, what they show tonight, and, where this site has one, the reading that would tell the sides apart.
 
 ### Folio I · Can AI do whole jobs, reliably?
 
 ## Fast progress on single skills is what both sides expect; whole jobs are the test
-
-[plate:sides]
 
 The fastest story starts with a loop. Daniel Kokotajlo, who worked on governance at OpenAI, and his fellow forecasters at the AI Futures Project wrote AI 2027, a dated story in which each AI model, a program trained on text and data to write and reason, helps build the next, so progress feeds on itself until AI outdoes people at almost everything by the end of 2027 [cite:ai_2027]. They called 2027 their single most likely year rather than their middle estimate. They pushed their dates later at the end of 2025 and moved them earlier again in 2026, because coding agents, models set to carry out tasks on their own, had improved faster than they expected in late 2025 and early 2026 [cite:ai_futures_update]; their own check finds events running a little slower than the story [cite:ai_futures_q25].
 
@@ -86,7 +84,7 @@ The grid crosses the two and fills a cell only where a named writer argues it; a
 
 [plate:scenarios]
 
-Some claims carry a deadline of their own, and the calendar shows the year each falls.
+Some claims name a date, a few of them a date this site set where the writer gave none, and the calendar shows the year in which each date falls.
 
 [plate:due]
 
@@ -94,7 +92,7 @@ Some claims carry a deadline of their own, and the calendar shows the year each 
 
 ## A claim earns its place by naming what would prove it wrong
 
-Every claim on this page, each writer's and this site's own, is listed with its test, tonight's reading and the outcome that would prove it wrong. The tests run every night, so a claim that stops holding says so here before anyone rewrites a sentence.
+Every claim on this page, each writer's and this site's own, is listed with the outcome that would prove it wrong and, where a test has been written, with its test and tonight's reading. Most claims have no test yet. The tests that exist run every night, so a claim that stops holding says so here before anyone rewrites a sentence.
 
 [plate:method]
 

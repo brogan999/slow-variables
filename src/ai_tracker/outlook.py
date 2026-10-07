@@ -22,13 +22,16 @@ STATES = ("holding", "failing", "both", "untestable")
 FOLIOS = ("capability", "products", "adoption", "reorganisation", "value")
 ATTRIBUTIONS = ("author", "extension", "site")
 TOKEN = re.compile(r"\[(fact|cite|test|plate):([a-z0-9_]+)\]")
-PLATES = ("frontier", "reliability", "adoption", "stack", "scenarios", "board", "sides", "method", "settle", "whose", "due")
+PLATES = ("frontier", "reliability", "adoption", "stack", "scenarios", "board", "method", "settle", "whose", "due")
 # How a claim is drawn: the page's word, with "can't be tested yet" split by whether a test has been written.
 LOOKS = ("holding", "failing", "both", "waiting", "no_test")
 # How far a dispute has got: the furthest of its claims. A reading against a line, a reading both sides expect, a test
 # still waiting, or no test at all.
 REACH = ("read", "shared", "waiting", "no_test")
 _REACHED = {"holding": "read", "failing": "read", "both": "shared", "waiting": "waiting", "no_test": "no_test"}
+# How a dispute is drawn: a dispute read against a line is split by what was read. A claim that held and carries a test
+# of what the rival expects, then a claim that held with no such test, then only a claim that missed its line.
+SETTLE_MARKS = ("told_apart", "held", "missed", "shared", "waiting", "no_test")
 QUOTED = re.compile(r"[\"“]([^\"”]+)[\"”]")
 
 
@@ -272,6 +275,7 @@ def figures(doc: dict[str, Any]) -> dict[str, Any]:
     not drawn."""
     cl = doc["claims"]
     look = {c["id"]: _look(c) for c in cl}
+    claim = {c["id"]: c for c in cl}
     shown = [p for p in doc["positions"] if not p.get("layer")]
     by = {p["id"]: p for p in shown}
     own = {p["id"]: [c["id"] for c in cl if c["position"] == p["id"]] for p in shown}
@@ -296,8 +300,11 @@ def figures(doc: dict[str, Any]) -> dict[str, Any]:
         }
         folios[p["folio"]]["main" if any(x.get("visible") for x in both) else "more"].append(d)
         reach = min((_REACHED[look[c]] for c in ids), key=REACH.index, default="no_test")
+        held = [claim[c] for c in ids if look[c] == "holding"]
+        # ponytail: "carries a rival test" is read off the record; a rival test past its rival_until still counts here
+        mark = reach if reach != "read" else "told_apart" if any(c.get("rival_test") for c in held) else "held" if held else "missed"
         cells[p["folio"]].append(
-            {"key": p["id"], "reach": reach, "claims": len(ids), "tested": sum(1 for c in ids if look[c] != "no_test")}
+            {"key": p["id"], "reach": reach, "mark": mark, "claims": len(ids), "tested": sum(1 for c in ids if look[c] != "no_test")}
         )
     for f in folios.values():  # the disputes the essay argues first, then the rest, as the figure draws them
         order = [d["key"] for d in f["main"] + f["more"]]
@@ -307,6 +314,13 @@ def figures(doc: dict[str, Any]) -> dict[str, Any]:
         f.update(positions=len(sides), claims=len(ids), counts={k: sum(1 for c in ids if look[c] == k) for k in LOOKS})
     disputes = [d for f in folios.values() for d in f["main"] + f["more"]]
     count = lambda xs: {k: sum(1 for c in xs if c["reach"] == k) for k in REACH}  # noqa: E731
+    marks = lambda xs: {k: sum(1 for c in xs if c["mark"] == k) for k in SETTLE_MARKS}  # noqa: E731
+    every = [c for v in cells.values() for c in v]
+    # how few writers the positions rest on: a writer is a source's `who`, counted once however many works are cited
+    who = {x["id"]: x["who"] for x in doc.get("sources") or []}
+    credits = [{who[h] for h in p.get("holders") or [] if h in who} for p in shown if p["attribution"] != "site"]
+    tally = {w: sum(1 for ws in credits if w in ws) for ws in credits for w in ws}
+    top_two = set(sorted(tally, key=lambda w: (-tally[w], w))[:2])
     top = max((sum(1 for p in shown if p["attribution"] == a) for a in ATTRIBUTIONS), default=0) or 1
     whose = []
     for a in ATTRIBUTIONS:
@@ -326,6 +340,7 @@ def figures(doc: dict[str, Any]) -> dict[str, Any]:
         "looks": look,
         "texts": {c["id"]: plain(c["text"], doc) for c in cl},
         "counts": {k: sum(1 for v in look.values() if v == k) for k in LOOKS},
+        "holding_no_rival_test": sum(1 for c in cl if c["state"] == "holding" and not c.get("rival_test")),
         "sides": {
             "folios": list(folios.values()),
             "positions": len(shown),
@@ -335,22 +350,31 @@ def figures(doc: dict[str, Any]) -> dict[str, Any]:
             "challenges": sum(1 for d in disputes if d["kind"] == "challenge"),
         },
         "settle": {
-            "rows": [{"id": k, "label": f["kicker"], "n": len(cells[k]), "counts": count(cells[k]), "cells": cells[k]} for k, f in folios.items()],
+            "rows": [
+                {"id": k, "label": f["kicker"], "n": len(cells[k]), "counts": count(cells[k]), "marks": marks(cells[k]), "cells": cells[k]}
+                for k, f in folios.items()
+            ],
             "n": len(disputes),
-            "counts": count([c for v in cells.values() for c in v]),
+            "counts": count(every),
+            "marks": marks(every),
+            "told_apart": marks(every)["told_apart"],
+            "dark": marks(every)["told_apart"] + marks(every)["held"],
         },
         "whose": {
             "rows": whose,
             "site_readings": sum(1 for c in cl if c["attribution"] == "site" and by.get(c["position"], {}).get("attribution") != "site"),
             # this site's own positions that a writer's position names as its rival, each naming the other
             "site_rivals": sum(1 for d in disputes if d["kind"] == "pair" and {by[d["left"]["id"]]["attribution"], by[d["right"]["id"]]["attribution"]} > {"site"}),
+            "named": len(credits),
+            "writers": len(tally),
+            "top_two": sum(1 for ws in credits if ws & top_two),
         },
         "due": {
             "years": [
                 {
                     "year": y,
                     "marks": [
-                        {"claim": c["id"], "kind": "due" if c.get("due") else "rival_until", "date": d, "passed": d < str(doc["as_of"])}
+                        {"claim": c["id"], "kind": "due" if c.get("due") else "rival_until", "date": d, "passed": d < str(doc["as_of"]), "site": c["attribution"] == "site"}
                         for d, c in sorted(dated, key=lambda x: x[0])
                         if int(d[:4]) == y
                     ],
@@ -360,6 +384,7 @@ def figures(doc: dict[str, Any]) -> dict[str, Any]:
             "dated": len(dated),
             "undated": len(cl) - len(dated),
             "with_test": sum(1 for _, c in dated if c.get("test")),
+            "site": sum(1 for _, c in dated if c["attribution"] == "site"),
         },
     }
 

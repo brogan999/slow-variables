@@ -319,7 +319,11 @@ def test_the_method_figures_words_say_what_the_code_does():
     # the clock is the reading's own date, not the calendar
     assert state(shared, f, date(2027, 6, 1)) == "both" and state({"test": misses, "due": "2026-12-31"}, f, date(2027, 6, 1)) == "untestable"
     assert state({"test": misses, "due": "2026-12-31"}, late, date(2027, 6, 1)) == "failing"
-    assert "A date has come when the reading itself is dated after it, not when the calendar says so" in src
+    assert "A date has come when the reading itself is dated on or after it, not when the calendar says so" in src  # `clock < due`
+    # a running record is the one case the calendar counts: `grace_days`
+    record = {"test": misses, "due": "2026-12-31", "grace_days": 90}
+    assert state(record, f, date(2027, 3, 1)) == "untestable" and state(record, f, date(2027, 6, 1)) == "failing"
+    assert "only for a record that moves just when it is broken does the calendar count" in src
     assert "not that the rival expected otherwise" in src and src.count("{f.holding_no_rival_test}") == 2  # the foot and the end box
     assert "aria-hidden" not in PARTS.read_text().split("export function Onward")[1]  # a screen reader hears the answers too
 

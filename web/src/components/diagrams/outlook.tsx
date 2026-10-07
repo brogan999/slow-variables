@@ -1,14 +1,18 @@
 import type { CSSProperties, ReactNode } from "react";
-import type { OutlookLook, OutlookReach } from "@/lib/data";
+import type { OutlookLook, OutlookReach, OutlookSettleMark } from "@/lib/data";
+
+type Drawn = OutlookLook | OutlookReach | OutlookSettleMark;
 
 // The outlook's drawing parts. Like the kit, they take everything counted and laid out by the export.
 // One fill per reading, the predictions board's: dark for a reading against a line, orange for a failed test, grey for
 // a reading both sides expect, hollow where nothing has been read (with a centre dot when a test is written and waiting).
+// A dispute's dark mark is ringed when the claim that held also carries a test of what the rival expects.
 const LINE = "inset 0 0 0 1px var(--muted)";
 const DOT = `linear-gradient(var(--muted) 0 0) center / 6px 6px no-repeat, var(--surface)`;
-export const LOOK_STYLE: Record<OutlookLook | OutlookReach, CSSProperties> = {
-  holding: { background: "var(--s1)" }, read: { background: "var(--s1)" },
-  failing: { background: "var(--tight-3)" },
+export const LOOK_STYLE: Record<Drawn, CSSProperties> = {
+  holding: { background: "var(--s1)" }, read: { background: "var(--s1)" }, held: { background: "var(--s1)" },
+  told_apart: { background: "var(--s1)", boxShadow: "inset 0 0 0 2px var(--s1), inset 0 0 0 3.5px var(--surface)" },
+  failing: { background: "var(--tight-3)" }, missed: { background: "var(--tight-3)" },
   both: { background: "var(--s3)" }, shared: { background: "var(--s3)" },
   waiting: { background: DOT, boxShadow: LINE },
   no_test: { background: "var(--surface)", boxShadow: LINE },
@@ -18,12 +22,12 @@ const EDGE = "linear-gradient(var(--muted) 0 0)";
 export const HOLLOW = `${EDGE} top / 100% 1px no-repeat, ${EDGE} bottom / 100% 1px no-repeat, ${EDGE} left / 1px 100% no-repeat, ${EDGE} right / 1px 100% no-repeat, var(--surface)`;
 
 // A mark for a key strip, drawn as the figures draw it. `round` is a date the rival's reading runs out.
-export function LookSwatch({ look, round = false }: { look: OutlookLook | OutlookReach; round?: boolean }) {
+export function LookSwatch({ look, round = false }: { look: Drawn; round?: boolean }) {
   return <span className={`inline-block h-3 w-3 ${round ? "rounded-full" : ""}`} style={LOOK_STYLE[look]} />;
 }
 
 // One mark for one claim or one dispute, linked to its record on this page. The link is padded so a finger can hit it.
-export function LookMark({ look, href, tip, round = false }: { look: OutlookLook | OutlookReach; href: string; tip: string; round?: boolean }) {
+export function LookMark({ look, href, tip, round = false }: { look: Drawn; href: string; tip: string; round?: boolean }) {
   return (
     <a href={href} title={tip} aria-label={tip} className="block p-1 hover:opacity-70">
       <span className={`block h-4 w-4 ${round ? "rounded-full" : ""}`} style={LOOK_STYLE[look]} />
@@ -72,5 +76,5 @@ export function Ends({ children, out = false }: { children: ReactNode; out?: boo
 
 // The step between two gates: the answer that carries the claim on.
 export function Onward({ word }: { word: string }) {
-  return <li aria-hidden className="font-mono text-[11px] uppercase tracking-wider text-muted md:pl-6">↓ {word}</li>;
+  return <li className="font-mono text-[11px] uppercase tracking-wider text-muted md:pl-6">↓ {word}</li>;
 }
