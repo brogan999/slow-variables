@@ -109,7 +109,7 @@ export const PAGES: Record<string, Page> = {
     ["due", "The dates that have already come", "Which forecast dates have passed, and what happened?"],
     ["now", "The latest word from each forecaster", "What is each forecaster's most recent position?"],
     ["watch", "Fast story or slow one", "Which readings would tell the fast story from the slow one?"],
-    ["worlds", "Four ways the next decade could go", "What are the futures the site keeps open?"],
+    ["worlds", "The ways the next decade could go", "What are the futures the site keeps open?"],
     ["fiction", "What the novelists imagined", "What did fiction expect, and when?"],
   ] },
   "/singularity/atlas": { name: "Atlas", question: "What do named writers expect to change in each part of life?", sections: [
