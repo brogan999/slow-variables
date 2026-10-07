@@ -28,6 +28,7 @@ export default function OpportunitiesPage() {
         </p>
         <PowersGlossary powers={d.powers} />
       </div>
+      <p className="text-ink-2 leading-relaxed max-w-[68ch]">For a call on each of these, and what each future on the outlook&apos;s grid would do to it, see <Link href="/value-chain/atlas" className="underline decoration-grid underline-offset-4">what to build, future by future</Link>.</p>
       <IdeaBox />
       <TurnModel d={d} />
       <Opportunities d={d} />

@@ -441,6 +441,9 @@ def _check(s: st.Store) -> tuple[list[str], list[str]]:
     from . import opportunities
 
     errors += opportunities.problems(opportunities.load(), market_map.load(), load_outlook(), futures.rubric())
+    from . import chain_atlas
+
+    errors += chain_atlas.problems(chain_atlas.load(), opportunities.load(), load_outlook())
     from . import judgements
 
     b_errors += judgements.problems(judgements.load(), judgements.known())
