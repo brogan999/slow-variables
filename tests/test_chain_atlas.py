@@ -33,6 +33,7 @@ def test_a_broken_file_names_each_problem():
         "steady/nowhere": {"effect": "stronger", "reason": "x"},
         "steady/priced": {"effect": "booms", "reason": ""},
     }
+    bad["not_judged"] = {**bad["not_judged"], "steady/priced": "", "nowhere/at_all": "x"}
     del bad["made_by"]["reviewed_by"]
     errors = "\n".join(ca.problems(bad, opportunities.load(), OUTLOOK))
     for part in (
@@ -44,15 +45,22 @@ def test_a_broken_file_names_each_problem():
         "effect booms",
         "gives no reason",
         "reviewed_by",
+        "is not judged, yet",
+        "nowhere/at_all",
+        "says why not",
     ):
         assert part in errors, part
 
 
 def test_the_export_lays_out_every_future_for_every_business():
     doc = ca.build(SPEC, OPS, OUTLOOK)
-    assert [f["id"] for f in doc["futures"]] == [
-        f"{c['progress']}/{c['rules']}" for c in OUTLOOK["scenarios"]["cells"]
-    ]
+    cells = [f"{c['progress']}/{c['rules']}" for c in OUTLOOK["scenarios"]["cells"]]
+    assert [f["id"] for f in doc["futures"]] == [c for c in cells if c not in SPEC["not_judged"]], (
+        "a future nobody judged is no column"
+    )
+    assert [n["name"] for n in doc["not_judged"]] == ["Control slips away, the rules stay unsettled"] and doc[
+        "not_judged"
+    ][0]["why"]
     assert doc["futures"][3]["name"] == "Steady progress, courts and insurers price the risk"
     rows = [b for g in doc["groups"] for b in g["businesses"]]
     assert sorted(b["n"] for b in rows) == sorted(m["n"] for m in OPS["figures"]["marks"])
@@ -93,9 +101,9 @@ def test_the_committed_export_is_the_build_and_check_reads_the_file():
 
 
 def test_nothing_that_scores_or_answers_reads_the_judgements():
-    for f in ("evaluate.py", "query/ask.py", "argument.py", "board.py"):
-        p = ROOT / "src" / "ai_tracker" / f
-        assert not p.exists() or "chain_atlas" not in p.read_text(), f
+    src = ROOT / "src" / "ai_tracker"
+    for p in [*src.glob("query/*.py"), src / "evaluate.py", src / "argument.py", src / "board.py"]:
+        assert not p.exists() or "chain_atlas" not in p.read_text(), p.name
 
 
 def test_the_page_switches_futures_without_script_and_labels_the_judgement():
@@ -110,3 +118,32 @@ def test_the_page_switches_futures_without_script_and_labels_the_judgement():
         in (WEB / "app" / "value-chain" / "opportunities" / "page.tsx").read_text()
     )
     assert ".chain-atlas:has(" in (WEB / "app" / "globals.css").read_text()
+
+
+def test_each_business_links_to_its_place_on_the_map():
+    for b in (b for g in ca.build(SPEC, OPS, OUTLOOK)["groups"] for b in g["businesses"]):
+        assert b["primary"]["href"].startswith("/value-chain#mm-"), b["id"]
+
+
+def test_the_page_defines_its_terms_names_what_was_not_judged_and_says_whose_words_it_quotes():
+    page = (WEB / "app" / "value-chain" / "atlas" / "page.tsx").read_text()
+    comp = (WEB / "components" / "ChainAtlas.tsx").read_text()
+    assert (
+        "<ChainTerms" in page
+        and "<ChainTerms" in (WEB / "app" / "value-chain" / "opportunities" / "page.tsx").read_text()
+    )
+    assert "What would overturn this call" in comp and "What would undo it" not in comp
+    assert 'href="/outlook#scenarios"' in comp and "d.not_judged.map" in comp
+    assert "a model&apos;s judgement" in comp.split('id="ca-table"')[1].split("</summary>")[0]
+    assert "## Part 48" in (ROOT / "docs" / "plan.md").read_text()
+
+
+def test_no_take_counts_the_file_and_the_power_grid_is_named_as_one():
+    for bid, b in SPEC["businesses"].items():
+        text = " ".join([b["take"], b["kills"], *(f["reason"] for f in b["futures"].values())])
+        assert "any business here" not in text and "only business here" not in text, (
+            f"{bid}: a tally of this file goes stale"
+        )
+        assert "grid" not in text.replace("power grid", "").replace("on the grid", ""), (
+            f"{bid}: say power grid; the grid is the outlook's"
+        )
