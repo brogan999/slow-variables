@@ -9,8 +9,8 @@ from datetime import date
 from statistics import median
 from typing import Any
 
-from .analysis.bands import EDGE, _band, _on_edge
-from .schema import CONFIDENCE_RUBRIC, Tier
+from .analysis.bands import EDGE, _band, _on_edge, held_reasons
+from .schema import CONFIDENCE_RUBRIC
 from .store import is_stale
 
 GROUPS = ("fast", "normal", "slow", "unscored", "other")
@@ -68,28 +68,6 @@ def _place(value: float, ind: Any, zones: dict[str, tuple[float, float]]) -> tup
     return zone, x0 + w - w * (0.12 + 0.76 * d / (1 + d)), None
 
 
-def _held(store: Any, ind: Any, value: float) -> list[str]:
-    """Why the evaluator holds a number its range would score at emerging, in the order `flow_status` and `evaluate`
-    apply their checks: the interval spans two ranges, else the number is on a line; its best evidence is a company
-    describing itself; it rests on a single source that is not a primary one."""
-    from .cli import _single_non_primary  # the two-source rule lives with `evaluate`
-
-    n, f, x = ind.normal_band, ind.fast_band, ind.falsifying_band
-    if _band(value, n, f, x).value == "emerging":
-        return []  # between the ranges: nothing is held, the range itself does not score it
-    lo, hi = store.band_interval(ind)
-    why = []
-    if lo is not None and hi is not None and _band(lo, n, f, x) != _band(hi, n, f, x):
-        why.append("interval")
-    elif _on_edge(value, n, f, x):
-        why.append("edge")
-    if store.band_input(ind)[3] == Tier.ACTOR_STATEMENT:
-        why.append("tier")
-    if _single_non_primary(store, ind):
-        why.append("single")
-    return why
-
-
 def build(store: Any, buckets: list[dict[str, Any]], voters: set[str], today: date) -> dict[str, Any]:
     ind = {i.id: i for i in store.seed.indicators}
 
@@ -137,7 +115,7 @@ def build(store: Any, buckets: list[dict[str, Any]], voters: set[str], today: da
                 left.append({"id": c["id"], "name": c["name"], "why": r if isinstance(r, str) else "its ranges do not face each other"})
                 continue
             dots.append({**dot(c), "zone": at[0], "x": round(at[1], 2), "on_edge": at[2], "value": r[0], "unit": store.band_unit(ind[c["id"]]),
-                         "held": _held(store, ind[c["id"]], r[0]) if c["status"] == "emerging" else [],
+                         "held": held_reasons(store, ind[c["id"]], r[0]) if c["status"] == "emerging" else [],
                          "as_of": r[1].isoformat() if r[1] else None, "obs_ids": r[2]})  # fmt: skip
         bands.append({**row(b), "h": _stack(dots), "dots": dots, "left_out": left})
 

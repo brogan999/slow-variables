@@ -664,26 +664,38 @@ def _x(v: float, lo: float, hi: float) -> float:
     return round(100 * (v - lo) / (hi - lo), 2)
 
 
-def _held(s: Store, ind: Any, value: float, scored: bool) -> list[str]:
-    """Why a number that falls inside a range is not scored there, by the evaluator's own checks in its own order:
-    its interval spans two ranges, else it sits on a line; its best evidence is a company describing itself; it rests
-    on one source that is not a primary one. A status a person wrote for another reason reads `reason`."""
-    from .analysis.bands import _band, _on_edge
-    from .cli import _single_non_primary  # the two-source rule lives with `evaluate`
-    from .schema import Tier
+SCORED_ZONE = {"consistent_with_normal": "normal", "faster_than_normal": "fast"}
 
-    n, f, x = ind.normal_band, ind.fast_band, ind.falsifying_band
-    lo, hi = s.band_interval(ind)
-    why = []
-    if lo is not None and hi is not None and _band(lo, n, f, x) != _band(hi, n, f, x):
-        why.append("interval")
-    elif _on_edge(value, n, f, x):
-        why.append("edge")
-    if s.band_input(ind)[3] == Tier.ACTOR_STATEMENT:
-        why.append("tier")
-    if _single_non_primary(s, ind):
-        why.append("single")
-    return why or ([] if scored else ["reason"])
+
+def _why_held(why: list[str], status: str | None, falls: str, lane: str) -> list[str]:
+    """What a row drawn off its range prints. The evaluator's own reasons (`held_reasons`) stand, except that a
+    status on record scored in another range is not held at all: the number has moved and the reason for the new
+    range is still to be written (`pending`). With no reason from the evaluator, a number on a line says so, and
+    anything else is held by a reason a person wrote."""
+    if SCORED_ZONE.get(status or "", falls) != falls:
+        return ["pending"]
+    return why or (["edge"] if lane == "line" else ["reason"])
+
+
+def _estimated(s: Store, ids: list[str]) -> bool:
+    """Whether any record behind a number is an estimate, by the record's own basis."""
+    q = "SELECT count(*) FROM observation_all WHERE audited_vs_reported = 'estimated' AND id IN (" + ",".join("?" * len(ids)) + ")"
+    return bool(ids) and bool(s.con.execute(q, ids).fetchone()[0])
+
+
+def _conds(e: dict[str, Any], v: dict[str, Any]) -> list[dict[str, Any]]:
+    """An exit's conditions as the monitor tests them, each with the seed's plain label for it. A label is tied to
+    its condition by the monitor's own text (`test`), never by position, and a condition the seed has not named, or
+    a name the monitor no longer tests, stops the build."""
+    named = {w["test"]: w for w in e["conditions"]}
+    tested = v["conds"] + v["counter"]
+    if sorted(named) != sorted(c["text"] for c in tested) or len(named) != len(e["conditions"]):
+        raise ValueError(f"argument: the conditions named for {e['monitor']} are not the ones its monitor tests")
+    return [
+        {**{k: c[k] for k in ("text", "detail", "holds", "obs_ids")}, "label": named[c["text"]]["label"],
+         "either": bool(named[c["text"]].get("either")), "counter": i >= len(v["conds"])}
+        for i, c in enumerate(tested)
+    ]  # fmt: skip
 
 
 def _readings(s: Store, spec: dict[str, Any]) -> dict[str, Any]:
@@ -691,10 +703,10 @@ def _readings(s: Store, spec: dict[str, Any]) -> dict[str, Any]:
     zero past the fast range's edge; its mark sits inside a range only when the status says that range, on the line
     when the evaluator reads it as on the edge, and outside with its reasons when it is held. A directed one draws
     the window its rule compares, with the dead band round the window's first reading."""
-    from .analysis.bands import EDGE, _band, _on_edge
+    from .analysis.bands import EDGE, _band, _on_edge, held_reasons
     from .analysis.direction import window
 
-    zone_of = {"consistent_with_normal": "normal", "faster_than_normal": "fast", "emerging": "between"}
+    zone_of = SCORED_ZONE | {"emerging": "between"}
     ranged, directed = [], []
     for v in spec["slow_variables"]:
         ind = next(i for i in s.seed.indicators if i.id == v["id"])
@@ -719,9 +731,8 @@ def _readings(s: Store, spec: dict[str, Any]) -> dict[str, Any]:
                 "move": {"x": min(x0, x1), "w": round(abs(x1 - x0), 2)},
                 "dead": {"x": _x(v0 - band, lo, hi), "w": round(_x(v0 + band, lo, hi) - _x(v0 - band, lo, hi), 2),
                          "band": band},
-                # a mark that is not wholly a filed or surveyed count is hatched: a grade C reading, or a share whose
-                # total includes an estimate (the seed's own sentence says which)
-                "estimate": card["grade"] in ("C", "D") or "estimate" in v["sentence"],
+                # a mark is hatched when any record behind either end of the window is an estimate, by its own basis
+                "estimate": _estimated(s, pts[a0]["obs_ids"] + pts[a1]["obs_ids"]),
             })  # fmt: skip
             continue
         n, f = ind.normal_band, ind.fast_band
@@ -737,7 +748,7 @@ def _readings(s: Store, spec: dict[str, Any]) -> dict[str, Any]:
             near = [e for e, b in zip(edges, (n.hi, f.lo)) if abs(value - b) <= EDGE * abs(b)]
             x, lane = (near[0] if near else x), "line"
         if lane in ("outside", "line"):
-            held = _held(s, ind, value, scored)
+            held = _why_held(held_reasons(s, ind, value), row["status"], falls, lane)
         ranged.append(row | {
             "unit": s.band_unit(ind), "value": value, "as_of": as_of.isoformat(), "obs_ids": ids, "x": x, "lane": lane,
             "falls": falls, "held": held,
@@ -777,11 +788,7 @@ def figures(s: Store, spec: dict[str, Any], exits_: list[dict[str, Any]], phase_
     drawn = []
     for e, x in zip(spec["exits"], exits_):
         v = thesis.get(e["monitor"]) or {"conds": [], "counter": []}
-        conds = [
-            {**{k: c[k] for k in ("text", "detail", "holds", "obs_ids")}, "label": w["label"],
-             "either": bool(w.get("either")), "counter": i >= len(v["conds"])}
-            for i, (c, w) in enumerate(zip(v["conds"] + v["counter"], e["conditions"]))
-        ]  # fmt: skip
+        conds = _conds(e, v) if e["monitor"] in thesis else []
         mine = [c for c in conds if not c["counter"]]
         drawn.append({"monitor": e["monitor"], "label": x["label"], "state": x["state"], "conds": conds,
                       "n": len(mine), "met": len([c for c in mine if c["holds"] is True])})  # fmt: skip

@@ -4,15 +4,6 @@ import { STATE_WORDS } from "@/lib/format";
 // Parts for the figures on /argument. Every place (a zone's start and width, a mark's x) arrives from the export as a
 // percentage of its strip, so nothing here works out a number.
 
-// Why a number that falls inside a range is not scored there: the evaluator's own checks, in a reader's words.
-export const HELD_WORDS: Record<string, string> = {
-  interval: "its margin of error spans more than one range",
-  edge: "it sits on the line between ranges",
-  tier: "its best evidence is a company describing itself",
-  single: "every reading comes from a single source, and a scored status needs a second",
-  reason: "a written reason on its own page holds it",
-};
-
 export const ZONE_WORDS: Record<string, string> = { normal: "ordinary", between: "between", fast: "faster" };
 const TINT: Record<string, React.CSSProperties> = {
   normal: { background: "var(--surface-2)" },
@@ -80,7 +71,7 @@ export function DirectionStrip({ r, tip, whole }: { r: DirectedReading; tip: str
       <span className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2" style={{ left: `${r.start.x}%` }}><Dot kind="start" /></span>
       <span className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 bg-surface" style={{ left: `${r.end.x}%` }}><Square hue={hue} hatched={r.estimate} /></span>
     </div>
-    <div className="mt-0.5 flex justify-between font-mono text-[10px] text-muted" aria-hidden><span>nothing</span><span>{whole}</span></div>
+    <div className="mt-0.5 flex justify-between font-mono text-[10px] text-muted" aria-hidden><span>nothing</span><span>{whole ?? "a little past tonight's number"}</span></div>
     </div>
   );
 }
@@ -97,7 +88,10 @@ export function StateChip({ state }: { state: string | null }) {
   return <span className={`inline-flex items-center gap-1.5 rounded-[2px] border px-1.5 py-0.5 font-sans text-xs whitespace-nowrap ${s.cls}`}><span aria-hidden>{s.glyph}</span><span>{STATE_WORDS[state ?? "untestable"] ?? state}</span></span>;
 }
 export const COND_WORDS: Record<string, string> = { true: "met", false: "not met", null: "cannot be tested yet" };
-export function CondMark({ holds }: { holds: boolean | null }) {
-  const s = holds === true ? STATE.supported : holds === false ? STATE.unsupported : STATE.untestable;
-  return <span title={COND_WORDS[String(holds)]} className={`inline-flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-[2px] border font-sans text-[11px] leading-none ${s.cls} ${holds === true ? "bg-ink text-surface" : ""}`}><span aria-hidden>{holds === true ? "✓" : s.glyph}</span><span className="sr-only">{COND_WORDS[String(holds)]}</span></span>;
+// A met condition is a filled tick. The opposite test's condition, when met, carries the chip's own glyph for
+// "running the other way" instead, so a skim does not read it as the test above it being met.
+export function CondMark({ holds, counter = false }: { holds: boolean | null; counter?: boolean }) {
+  const s = holds === true ? (counter ? STATE.contradicted : STATE.supported) : holds === false ? STATE.unsupported : STATE.untestable;
+  const said = counter && holds === true ? "met, and it is the opposite of the test" : COND_WORDS[String(holds)];
+  return <span title={said} className={`inline-flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-[2px] border font-sans text-[11px] leading-none ${s.cls} ${holds === true && !counter ? "bg-ink text-surface" : ""}`}><span aria-hidden>{holds === true && !counter ? "✓" : s.glyph}</span><span className="sr-only">{said}</span></span>;
 }

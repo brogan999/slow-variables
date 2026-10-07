@@ -3,10 +3,10 @@ import { Fact } from "@/components/Fact";
 import { Figure, Key } from "@/components/Figure";
 import { folioId } from "@/components/Essay";
 import { StatusChip } from "@/components/StatusChip";
-import { CondMark, COND_WORDS, DirectionStrip, Dot, HELD_WORDS, RangeStrip, Square, StateChip, ZONE_WORDS, ZoneSwatch } from "@/components/diagrams/argument";
+import { CondMark, COND_WORDS, DIRECTION_HUE, DirectionStrip, Dot, RangeStrip, Square, StateChip, ZONE_WORDS, ZoneSwatch } from "@/components/diagrams/argument";
 import { KIND_LABEL } from "@/components/diagrams/kit";
 import type { ArgumentDoc } from "@/lib/data";
-import { fmt, fmtLine, PHASE_WORDS, STATE_WORDS, words } from "@/lib/format";
+import { fmt, fmtLine, HELD_WORDS, PHASE_WORDS, STATE_WORDS, words } from "@/lib/format";
 
 // The figures added to /argument (Part 45i). Every place and count is the export's (argument.figures); the claims are
 // the essay's own headings, the labels the seed's, and the statuses tonight's. Titles describe or ask: the readings
@@ -22,23 +22,29 @@ const Drafted = ({ what }: { what: string }) => (
   <p>This figure was drafted by Claude, a model made by Anthropic, and Anthropic is among the labs {what}. Check it against the records it links to.</p>
 );
 
+// The three glyphs a test's chip can carry, for the map's key.
+const StateChipGlyphs = () => <span aria-hidden className="font-sans text-[12px] leading-none text-ink">● ✕ ◀</span>;
+
 export function ArgumentMap({ doc }: { doc: ArgumentDoc }) {
   const head = "font-mono text-[10px] uppercase tracking-[0.08em] text-muted";
   return (
     <Figure
       id="fig-map"
-      title="The argument in one picture: each claim, what it rests on, and what would overturn it"
+      title="The argument in one picture: each claim, what it rests on, and the tests that bear on it"
       note={`${KIND_LABEL.model}; the chips are tonight's statuses`}
       keys={<>
         <Key swatch={<span className="inline-block h-3 w-5 rounded-[2px] border border-ink-2" />}>a slow variable&apos;s status tonight, by its published rule; the words are the site&apos;s</Key>
+        <Key swatch={<span className="inline-flex gap-1"><StateChipGlyphs /></span>}>a test&apos;s state tonight: met, not met, or running the other way</Key>
         <Key swatch={<span className="inline-block h-3 w-5 rounded-[2px] border border-dashed border-muted" />}>dashed: the test cannot be run yet</Key>
         <Key swatch={<span className="font-sans text-[12px] underline decoration-axis underline-offset-2">name</span>}>a link to the reading&apos;s page, or to the test below</Key>
       </>}
-      foot={<><p>A drawing of how the essay&apos;s claims hang together, not a measurement. Each claim is a heading of this essay, each slow variable and each test is named as the site names it, and each chip is the status on record tonight. Which reading and which test belong under which claim is this site&apos;s own arrangement. It does not show how strong any link is; the sections below do that with numbers.</p><Drafted what="whose profit and whose own claims some of these tests read" /></>}
+      foot={<><p>A drawing of how the essay&apos;s claims hang together, not a measurement. Each claim is a heading of this essay, each slow variable and each test is named as the site names it, and each chip is the status on record tonight. It does not show how strong any link is; the sections below do that with numbers.</p>
+        <p>Which reading and which test sit under which claim is this site&apos;s own arrangement; the essay does not sort them. The tests do not all cut the same way. Two would count against the claim above them if they were met: AI is not an ordinary technology, and Profit moves up to the labs. One would bear its claim out: Users keep most of the value. Two test things the essay does not argue and sit under the nearest claim: AI speeds up its own invention, and Workers stop sharing the gains.</p>
+        <p>An ordinary technology is one that spreads over decades, as electricity and computers did. The labs are the companies that build the models. Installation is the first half of a build-out, when money runs ahead of revenue; frenzy is its later phase. Each is explained in the folio it links to.</p><Drafted what="whose profit and whose own claims some of these tests read" /></>}
     >
       <div className="flex flex-col font-sans">
         <div className="hidden gap-x-5 pb-1.5 md:grid md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)_minmax(0,1.15fr)]" aria-hidden>
-          <span className={head}>The claim</span><span className={head}>→ rests on</span><span className={head}>→ would be overturned if</span>
+          <span className={head}>The claim</span><span className={head}>→ rests on</span><span className={head}>→ tested each night by</span>
         </div>
         {doc.figures.map.map((r) => (
           <div key={r.folio} className="grid gap-x-5 gap-y-3 border-t border-grid py-3.5 md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)_minmax(0,1.15fr)]">
@@ -61,7 +67,7 @@ export function ArgumentMap({ doc }: { doc: ArgumentDoc }) {
               ) : null}
             </div>
             <div className="flex flex-col gap-2">
-              <span className={`${head} md:hidden`}>Would be overturned if</span>
+              <span className={`${head} md:hidden`}>Tested each night by</span>
               {r.exits.map((e) => (
                 <div key={e.monitor} className={pair}>
                   <a href="#fig-exits" className={a}>{e.label}</a><StateChip state={e.state} />
@@ -95,32 +101,33 @@ export function ReadingsFigure({ doc }: { doc: ArgumentDoc }) {
         <Key swatch={<Dot kind="scored" />}>tonight&apos;s number, scored in the range it sits in</Key>
         {ranged.some((r) => r.lane === "between" || r.lane === "line") ? <Key swatch={<Dot kind="between" />}>tonight&apos;s number, between the ranges or on a line</Key> : null}
         {ranged.some((r) => r.lane === "outside") ? <Key swatch={<Dot kind="held" />}>held: the number falls in a range but is not scored there, so it hangs beneath</Key> : null}
-        <Key swatch={<Dot kind="start" />}>where a number stood when its rule&apos;s window opened</Key>
+        <Key swatch={<Dot kind="start" />}>where a number stood when the window (the stretch of time its rule compares) opened</Key>
+        {directed.some((r) => r.status === "concentrating") ? <Key swatch={<Square hue={DIRECTION_HUE.concentrating} hatched={false} />}>purple here means gathering in one place, not faster</Key> : null}
         <Key swatch={<span className="inline-block h-2.5 w-4 bg-surface-2" />}>a move this small does not count</Key>
         <Key swatch={<Square hue="var(--ink-2)" hatched />}>tonight&apos;s number, hatched where it rests on an estimate</Key>
       </>}
       foot={<>
-        <p>Each strip has its own scale, starting at nothing, so compare a mark with its own ranges and not with the row above. The ranges are published in advance, set from how earlier technologies spread and from the long-run trend in output per hour; each variable&apos;s own page gives the reasoning. A number sits inside a range only when the site scores it there. The lower rows have no range: the site grades them by whether the number rose or fell over a set window, and a rise can mean the profit gathering in one place or spreading out, never fast or slow.</p>
+        <p>Each strip has its own scale, starting at nothing, so compare a mark with its own ranges and not with the row above. The ranges are published in advance, set from how earlier technologies spread and from the long-run trend in output per hour; each variable&apos;s own page gives the reasoning. A number sits inside a range only when the site scores it there.{ranged.some((r) => r.lane === "outside") ? " A number hanging beneath its strip is one the site has not scored: the essay's sentence above reads where the number falls, and the site's own status does not yet confirm it." : ""} The lower rows have no range: the site grades them by whether the number rose or fell over a set window, and a rise can mean the profit gathering in one place or spreading out, never fast or slow.</p>
         <p>It does not show how sure each reading is, how each got here over time, or the fast variables the essay sets these against. The chip makers&apos; share is a share of the gross profit this site can measure, which includes an estimate for OpenAI and Anthropic; the value users keep is one survey&apos;s estimate.</p>
-        <Drafted what="whose estimated profit sits inside the chip makers' row" />
+        <Drafted what="whose estimated profit sits inside the total the chip makers' share is measured against" />
       </>}
       table={
-        <table className="w-full border-collapse text-xs">
+        <table className="w-full min-w-[40rem] border-collapse text-xs">
           <thead><tr><th className={th}>Slow variable</th><th className={th}>Tonight</th><th className={th}>As of</th><th className={th}>Graded against</th><th className={th}>Status on record</th><th className={th}>Evidence grade</th></tr></thead>
           <tbody>
             {ranged.map((r) => (
               <tr key={r.id}>
                 <td className={td}><Link href={r.href} className={a}>{r.label}</Link></td>
-                <td className={`${td} num`}>{fmt(r.value, r.unit)}</td><td className={`${td} num`}>{r.as_of}</td>
+                <td className={`${td} num whitespace-nowrap`}>{fmt(r.value, r.unit)}</td><td className={`${td} num whitespace-nowrap`}>{r.as_of}</td>
                 <td className={td}>ordinary up to <span className="num">{fmtLine(r.edges[0].at, r.unit)}</span>; faster from <span className="num">{fmtLine(r.edges[1].at, r.unit)}</span></td>
-                <td className={td}>{words(r.status)}{r.held.length ? <>: held because {r.held.map((h) => HELD_WORDS[h] ?? h).join("; ")}</> : null}</td>
+                <td className={td}>{words(r.status)}{r.held.length ? <>: {r.held.includes("pending") ? "" : "held because "}{r.held.map((h) => HELD_WORDS[h] ?? h).join("; ")}</> : null}</td>
                 <td className={td}>{r.grade}</td>
               </tr>
             ))}
             {directed.map((r) => (
               <tr key={r.id}>
                 <td className={td}><Link href={r.href} className={a}>{r.label}</Link></td>
-                <td className={`${td} num`}>{fmt(r.end.value, r.unit)}</td><td className={`${td} num`}>{r.end.as_of}</td>
+                <td className={`${td} num whitespace-nowrap`}>{fmt(r.end.value, r.unit)}</td><td className={`${td} num whitespace-nowrap`}>{r.end.as_of}</td>
                 <td className={td}>its own reading of <span className="num">{fmt(r.start.value, r.unit)}</span> on <span className="num">{r.start.as_of}</span>; a move within <span className="num">{fmtLine(r.dead.band, r.unit)}</span>{r.unit === "share" ? " of the whole" : ""} does not count</td>
                 <td className={td}>{words(r.status)}</td>
                 <td className={td}>{r.grade}{r.estimate ? " (rests on an estimate)" : ""}</td>
@@ -141,7 +148,7 @@ export function ReadingsFigure({ doc }: { doc: ArgumentDoc }) {
             </div>
             <div className="flex flex-col gap-1">
               <RangeStrip r={r} edge={(v) => fmtLine(v, r.unit)} tip={rangeTip(r)} />
-              {r.held.length ? <p className="text-[12px] leading-snug text-ink-2">Held, not scored: the number falls in the {ZONE_WORDS[r.falls]} range, but {r.held.map((h) => HELD_WORDS[h] ?? h).join("; ")}.</p> : null}
+              {r.held.length ? <p className="text-[12px] leading-snug text-ink-2">{r.held.includes("pending") ? "Not yet rescored" : "Held, not scored"}: the number falls in the {ZONE_WORDS[r.falls]} range, but {r.held.map((h) => HELD_WORDS[h] ?? h).join("; ")}.</p> : null}
             </div>
           </div>
         ))}
@@ -169,20 +176,20 @@ export function ExitsFigure({ doc }: { doc: ArgumentDoc }) {
   return (
     <Figure
       id="fig-exits"
-      title="What would prove the argument wrong, and whether it has happened tonight"
+      title="The tests the argument is held to, and whether each is met tonight"
       note={`${KIND_LABEL.chart} of the nightly test's results`}
       keys={<>
         <Key swatch={<CondMark holds={true} />}>a condition that is met tonight</Key>
         <Key swatch={<CondMark holds={false} />}>not met</Key>
         <Key swatch={<CondMark holds={null} />}>cannot be tested yet; the table says why</Key>
-        <Key swatch={<StateChip state="contradicted" />}>the test&apos;s opposite is what the data shows</Key>
+        {x.rows.some((r) => r.state === "contradicted") ? <Key swatch={<CondMark holds={true} counter />}>running the other way: the opposite happened: the chip makers&apos; share rose, so the move up to the labs the site once expected has not come. This is the test the essay says has already failed</Key> : null}
       </>}
       foot={<>
-        <p>Each row is a test from the list below, split into the conditions the nightly run checks; the plain wording of each condition is this site&apos;s, and the exact line and tonight&apos;s reading are in the table. A test is happening only when its conditions are met together, so a single tick decides nothing. It does not show how far each reading is from its line (the table gives both), or how likely any test is to be met.</p>
+        <p>Each row is a test from the list below, split into the conditions the nightly run checks; the plain wording of each condition is this site&apos;s, and the exact line and tonight&apos;s reading are in the table. Not every test would prove the argument wrong if it were met: the map at the top of the essay says which way each one cuts. A test is met only when all of its conditions are met at once, so a tick on its own decides nothing: output growing, for one, is the usual state of the economy. It does not show how far each reading is from its line (the table gives both), or how likely any test is to be met.</p>
         <Drafted what="whose share of the profit and whose own claims these tests read" />
       </>}
       table={
-        <table className="w-full border-collapse text-xs">
+        <table className="w-full min-w-[40rem] border-collapse text-xs">
           <thead><tr><th className={th}>Test</th><th className={th}>Condition, as the nightly run states it</th><th className={th}>Tonight&apos;s reading</th><th className={th}>Result</th></tr></thead>
           <tbody>
             {x.rows.flatMap((r) => r.conds.map((c, i) => (
@@ -206,12 +213,12 @@ export function ExitsFigure({ doc }: { doc: ArgumentDoc }) {
             <div className="flex flex-col items-start gap-1.5">
               <span className="text-[14px] font-semibold leading-tight text-ink">{r.label}</span>
               <StateChip state={r.state} />
-              <span className="text-[12px] text-muted">conditions met: <span className="num">{r.met}</span> of <span className="num">{r.n}</span></span>
+              <span className="text-[12px] leading-snug text-muted">{r.conds.some((c) => c.either) ? "counts only when every condition is met at once, with one of the either-or pair" : "counts only when every condition is met at once"}</span>
             </div>
             <ul className="flex flex-col gap-1.5">
               {r.conds.map((c, i) => (
                 <li key={i} className={`flex items-start gap-2 text-[13px] leading-snug ${c.counter ? "mt-1 border-t border-dashed border-grid pt-2" : ""}`}>
-                  <CondMark holds={c.holds} />
+                  <CondMark holds={c.holds} counter={c.counter} />
                   <span className="text-ink">{c.either && !r.conds[i - 1]?.either ? <span className="mr-1.5 font-mono text-[10px] uppercase tracking-[0.08em] text-muted">either</span> : null}{c.either && r.conds[i - 1]?.either ? <span className="mr-1.5 font-mono text-[10px] uppercase tracking-[0.08em] text-muted">or</span> : null}{c.label}</span>
                 </li>
               ))}

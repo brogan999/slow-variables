@@ -62,43 +62,47 @@ exits:
   - monitor: normal_tech_falsified
     expect: unsupported
     label: AI is not an ordinary technology
-    text: AI stops looking like an ordinary technology if three things happen together. Models become nearly as reliable on long jobs as on short ones, and not just because the tests have run out of longer tasks. Most of the labour-market trackers we follow break at the same time. And either the share of work hours done with AI passes a fifth, or productivity runs well above trend for years on end.
-    conditions:  # one plain label for each condition the monitor tests, in the monitor's order (the `exits` plate)
-      - {label: Models are nearly as reliable on long jobs as on short ones}
-      - {label: "That is not just the tests running out of longer tasks"}
-      - {label: A model can be relied on for a job that takes a person a working day}
-      - {label: Most of the labour-market trackers we follow break at the same time}
-      - {label: The share of work hours done with AI passes its fast line, either: true}
-      - {label: Productivity runs well above trend for years on end, either: true}
+    text: AI stops looking like an ordinary technology if three things happen together. Models become nearly as reliable on long jobs as on short ones, not just because the tests have run out of longer tasks, and reliable enough to be left with a job that takes a person a working day. Most of the labour-market trackers we follow break at the same time. And either the share of work hours done with AI passes a fifth, or productivity runs well above trend for years on end.
+    # One plain label for each condition the monitor tests (the `exits` plate). `test` is the monitor's own text for
+    # the condition, which ties the label to it: the build stops if thesis.py words, adds or drops one.
+    conditions:
+      - {test: "50%/80% horizon ratio ≤ 2", label: Models are nearly as reliable on long jobs as on short ones}
+      - {test: "50% horizon below the suite's 16 h ceiling, so a falling ratio is not censoring", label: And the tests have not run out of longer tasks to set}
+      - {test: "80% horizon > 8 h", label: A model can be relied on for a job that takes a person a working day}
+      - {test: "≥ 3 labour trackers show a concurrent AI-attributable break", label: "Most of the labour-market trackers we follow show, at the same time, a change that points to AI"}
+      - {test: "work hours assisted by AI > 20%", label: The share of work hours done with AI reaches the range that would mean something faster, either: true}
+      - {test: "TFP > trend + 1pp for ≥ 4 consecutive years", label: "Output per unit of work and capital together, a broader measure than output per hour, grows well above its trend for years on end", either: true}
   - monitor: rents_migrate_up
     expect: contradicted
     label: Profit moves up to the labs
     text: The chip makers' hold on the profit loosens if, over a year, the labs' share of the gross profit we can measure rises by five points while the chip makers' share falls by as much.
     conditions:
-      - {label: The labs' share of the gross profit we can measure rises enough over a year}
-      - {label: The chip makers' share falls by as much}
-      - {label: "The other way: the chip makers' share is flat or rising"}
+      - {test: "labs' share of stack gross profit up ≥ 5pp over four quarters (apps unmeasured)", label: The labs' share of the gross profit we can measure rises enough over a year}
+      - {test: "chips' share of stack gross profit down ≥ 5pp over four quarters", label: The chip makers' share falls by as much}
+      - {test: "chips' share of stack gross profit flat or rising over four quarters", label: "The other way: the chip makers' share is flat or rising"}
   - monitor: consumers_keep_surplus
     label: Users keep most of the value
     text: Users rather than sellers keep most of the value if what people say they would need to be paid to give AI up is more than double the revenue the leading labs and business buyers bring in.
     conditions:
-      - {label: What people would need to be paid to give AI up is well above what sellers bring in}
+      - {test: "consumer surplus (WTA) > twice the approximate revenue ceiling, bracketed", label: What people would need to be paid to give AI up is well above what sellers bring in}
   - monitor: invention_side_warning
     label: AI speeds up its own invention
     text: AI starts speeding up its own invention if independent tests show agents doing more than a day of research work for each day a person puts in, and needing a person's help on long tasks less than half the time.
     conditions:
-      - {label: Independent tests show agents doing more research work in a day than a person does}
-      - {label: Agents need a person's help on long tasks less often than not}
+      - {test: "independently verified agent-workdays per human-workday > 1", label: Independent tests show agents doing more research work in a day than a person does}
+      - {test: "intervention rate on 4–8 h agent tasks < 50%", label: Independent tests show agents needing a person's help on long tasks less often than not}
   - monitor: real_wages_fall
     expect: unsupported
     label: Workers stop sharing the gains
     text: The case that workers share in AI's gains fails if the typical full-time worker's pay, after inflation, sits below its level at the end of 2022, just before ChatGPT, for four quarters running while the economy's output keeps growing. Pascual Restrepo, an economist who models work once machines can do every task, finds that workers' total pay never falls below its level before such AI unless something else, such as market power over computing, gets in the way; the typical worker's pay is the nearest measure this site reads.
     conditions:
-      - {label: "The typical worker's pay, after inflation, sits below its level just before ChatGPT for a year running"}
-      - {label: The economy's output keeps growing}
+      - {test: "median real weekly pay below its end-2022 level in each of the last four quarters", label: "The typical worker's pay, after inflation, sits below its level just before ChatGPT for a year running"}
+      - {test: "real output above a year before", label: The economy's output keeps growing}
 
-# The argument as a map (the `map` plate on /argument): each claim's folio, the slow variables it rests on and the exits
-# that would overturn it. Every slow variable and every exit appears once; the claim itself is the folio's own heading.
+# The argument as a map (the `map` plate on /argument): each claim's folio, the slow variables it rests on and
+# the exits that bear on it. Every slow variable and every exit appears once; the claim itself is the folio's own heading. Which
+# exit sits under which claim is the site's arrangement, not the essay's: one exit would bear its claim out, and two
+# test things the essay does not argue and sit under the nearest claim (the figure's foot says which).
 map:
   - {folio: the pace, watches: [btos_firm_use, bbd_work_hours_assisted, bls_labor_productivity_yoy], exits: [normal_tech_falsified, invention_side_warning]}
   - {folio: the money, phase: true}

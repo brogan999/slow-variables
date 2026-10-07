@@ -49,6 +49,17 @@ export const WITHHELD_WORDS: Record<string, string> = {
   gauge_unsound: "the gauge available does not measure what it claims",
   stale_or_thin: "its readings are too old or too few today",
 };
+// Why a number that falls inside a range is not scored there: the evaluator's own checks (analysis/bands.py,
+// `held_reasons`) in a reader's words, one wording for /argument and /diffusion. `reason` and `pending` are the
+// argument page's, for a status a person wrote and for a number that has changed range since its status was written.
+export const HELD_WORDS: Record<string, string> = {
+  interval: "its margin of error spans more than one range",
+  edge: "it sits on the line between ranges",
+  tier: "its best evidence is a company describing itself",
+  single: "every reading comes from one source that is not an official one, and the site scores a status only on two independent sources or on one official one",
+  reason: "a written reason on its own page holds it",
+  pending: "the number has moved range and the site has not yet published its reason",
+};
 export const PHASE_WORDS: Record<string, string> = { irruption: "irruption", frenzy: "frenzy", installation: "installation", turning_point: "turning point", synergy: "synergy", maturity: "maturity", deployment: "deployment", untestable: "untestable" };
 
 // Who wrote a status change, as a reader should see it: the model's authorship stays visible, in plain words.

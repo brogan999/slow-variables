@@ -303,7 +303,7 @@ def test_a_mark_is_hatched_when_a_record_behind_it_is_an_estimate_not_when_a_sen
         q = "SELECT count(*) FROM observation_all WHERE audited_vs_reported = 'estimated' AND id IN (" + ",".join("?" * len(ids)) + ")"
         assert r["estimate"] == bool(S.con.execute(q, ids).fetchone()[0]), r["id"]
         assert r["grade"] == S._card(IND[r["id"]])["grade"]
-    assert '"estimate" in' not in "".join(l for l in Path(ar.__file__).read_text().splitlines() if "sentence" in l)
+    assert '"estimate" in' not in "".join(ln for ln in Path(ar.__file__).read_text().splitlines() if "sentence" in ln)
     assert "hatch" in PARTS.read_text() and "r.estimate" in FIGS.read_text()
 
 
