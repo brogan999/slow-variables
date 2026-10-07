@@ -891,6 +891,11 @@ class Store:
         as_of_d = as_of([cards[i.id] for i in self.seed.indicators if i.bucket_id])
         as_of_c = as_of([cards[i.id] for i in self.seed.indicators if i.layer_id])
         _write(out / "lens" / "diffusion.json", self._diffusion_lens(cards, recent, as_of_d))
+        from . import capture_figures
+
+        capture_layers = [self._capture_layer(layer, cards) for layer in self.seed.layers]
+        gross = self._profit_stack("gross_profit_share_by_layer", GROSS_PROFIT_PARTS)
+        margin = self._profit_stack("margin_stack_share_by_layer", MARGIN_PARTS)
         _write(
             out / "lens" / "capture.json",
             {
@@ -904,9 +909,10 @@ class Store:
                     if i.published and i.layer_id and i.direction_rule
                 ],
                 "recent_status_events": recent,
-                "gross_profit_stack": self._profit_stack("gross_profit_share_by_layer", GROSS_PROFIT_PARTS),
-                "margin_stack": self._profit_stack("margin_stack_share_by_layer", MARGIN_PARTS),
-                "layers": [self._capture_layer(layer, cards) for layer in self.seed.layers],
+                "gross_profit_stack": gross,
+                "margin_stack": margin,
+                "layers": capture_layers,
+                "figures": capture_figures.build(self, capture_layers, gross, margin, self._ledger()),
             },
         )
         _write(

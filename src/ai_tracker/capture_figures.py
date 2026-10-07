@@ -1,0 +1,287 @@
+"""The figures on /capture (Part 45f): every capture gauge as one mark, the profit split a year apart, each lab's
+run-rate against what it has raised and promised, who is tied to whom on the financing ledger, and the concentration
+indices on one strip. Everything is summed and laid out here from records the export already holds, so the page only
+places it; the model of the page's rule is seed text."""
+
+from __future__ import annotations
+
+import json
+from collections import Counter
+from datetime import date
+from pathlib import Path
+from typing import Any
+
+import yaml
+
+from . import chart
+from .market_map import display
+
+SPEC = Path(__file__).resolve().parents[2] / "seed" / "capture.yaml"
+# the words a gauge can read, in the order the figure's columns run; anything else is not yet a reading either way
+WORDS = (("concentrating", "Toward fewer firms"), ("stable", "Holding steady"), ("open", "Too early or unclear"), ("dispersing", "Spreading out"))
+# what an instrument on the financing ledger is: a promise to buy, or money or credit put behind the other party
+KIND = {
+    "contract": "buy", "commitment": "buy", "azure_commitment": "buy", "aws_commitment": "buy", "backstop": "backstop",
+    "equity": "stake", "equity_round": "stake", "guarantee": "stake",
+}  # fmt: skip
+# A backstop obliges one side to take the other's unsold capacity. It is drawn as credit behind the other side, and
+# never as a lab's own spending, unless its row has been read and is named here as a purchase by the second-named party.
+BACKSTOP_BUY = {"circular.nebius_meta.backstop_usd.pt"}  # "Meta has committed to purchase additional available compute capacity"
+# Ledger keys name the supplier first and the buyer second; a row that runs the other way names its payer here.
+PAYER: dict[str, str] = {}
+MIN_ROUNDS = 3  # fewer funding rounds on record than this and "money raised" is too thin to set a multiple on
+STALE_DAYS = 183  # a run-rate this much older than the newest one drawn is not set beside the others
+SLIVER = 1.0  # percent of the scale: a bar thinner than this cannot be read, so the page says so in words
+# Epoch's own "Source type" for a run-rate; anything else is drawn as "other" and says only that Epoch compiled it
+SAID = {"Media report": "press", "Company disclosure": "company", "Company disclosure,Media report": "both"}
+# the concentration indices, in the two groups that can be read together, and what each one counts
+CONCENTRATION = (("filed", ("semis_hhi", "cloud_hhi")), ("router", ("lab_hhi", "model_token_concentration")))
+OF = {"lab_hhi": "labs", "model_token_concentration": "models"}
+# lab_token_hhi's own grouping of models into labs; the test recomputes the index over these groups, so it cannot drift
+LAB = "CASE split_part(raw_snippet, '/', 1) WHEN 'meta-llama' THEN 'meta' WHEN 'qwen' THEN 'alibaba' ELSE split_part(raw_snippet, '/', 1) END"
+COUNT = {"firms": "count(DISTINCT subject)", "labs": f"count(DISTINCT {LAB})", "models": "count(*)"}
+KEPT = 8  # the counterparties drawn by name; the rest are one node (a drawing rule, stated in the figure's foot)
+GAP = 1.4  # percent of the drawing's height between two nodes
+
+
+def load() -> dict[str, Any]:
+    return yaml.safe_load(SPEC.read_text())
+
+
+def strings(x: Any) -> list[str]:
+    """The model's own words, for the test that keeps figures out of them."""
+    if isinstance(x, str):
+        return [x]
+    if isinstance(x, dict):
+        return [s for k, v in x.items() if k not in ("id", "after") for s in strings(v)]
+    return [s for v in x for s in strings(v)] if isinstance(x, list) else []
+
+
+def when(d: date) -> str:
+    return f"{d:%B %Y}"
+
+
+def kind(r: dict[str, Any]) -> str:
+    k = KIND[r["instrument"]]
+    return ("buy" if r["series_key"] in BACKSTOP_BUY else "stake") if k == "backstop" else k
+
+
+def payer(r: dict[str, Any]) -> str | None:
+    return PAYER.get(r["series_key"]) or r["parties"][-1]["entity_id"]
+
+
+def word(status: str | None) -> str:
+    return status if status in ("concentrating", "stable", "dispersing") else "open"
+
+
+def _gauges(store: Any, layers: list[dict[str, Any]]) -> dict[str, Any]:
+    ruled = {i.id for i in store.seed.indicators if i.published and i.direction_rule}
+    rows = []
+    for layer in layers:
+        mine = sorted((c for c in layer["indicators"] if c["id"] in ruled), key=lambda c: (-(c.get("confidence") or 0), c["id"]))
+        groups = []
+        for w, _ in WORDS:
+            marks = [{"id": c["id"], "name": c["name"], "status": c["status"], "href": f"/indicators/{c['id']}"} for c in mine if word(c["status"]) == w]
+            groups.append({"word": w, "n": len(marks), "marks": marks})
+        rows.append({"id": layer["id"], "name": layer["name"], "order": layer["order"], "href": f"/layers/{layer['id']}", "status": layer["status"], "n": len(mine), "groups": groups})
+    return {"words": [{"id": w, "label": label} for w, label in WORDS], "layers": rows, "n": sum(r["n"] for r in rows)}
+
+
+def _year(store: Any, stacks: dict[str, tuple[str, dict[str, Any]]]) -> dict[str, Any]:
+    ents = {e.id: e for e in store.seed.entities}
+    runs = {o["id"]: o for o in store.observations("epoch.*.revenue_run_rate_usd.pt")}
+    rows = []
+    for name, (what, stack) in stacks.items():
+        quarters = {q["as_of"]: q for q in stack["quarters"] if q["parts"]}
+        if not quarters:
+            continue
+        newest = quarters[max(quarters)]
+        before = quarters.get(f"{int(newest['as_of'][:4]) - 1}{newest['as_of'][4:]}")
+        for p in newest["parts"]:
+            old = next((o for o in before["parts"] if o["id"] == p["id"]), None) if before else None
+
+            def end(part: dict[str, Any], q: dict[str, Any]) -> dict[str, Any]:
+                out = {"value": part["value"], "unit": "share", "as_of": q["as_of"], "quarter": q["name"], "x": round(100 * part["value"], 2), "href": part["href"], "obs_ids": part["obs_ids"], "estimated": part["estimated"]}
+                if part["estimated"]:  # the dated run-rates an estimate rests on: they can be months older than the quarter
+                    used = sorted((runs[i] for i in part["obs_ids"] if i in runs), key=lambda o: o["subject"])
+                    out["basis"] = [{"name": display(ents[o["entity_id"]]) if o["entity_id"] in ents else o["subject"], "as_of": o["as_of_date"].isoformat(), "when": when(o["as_of_date"]), "obs_ids": [o["id"]], "href": store.href_of([o["id"]])} for o in used]
+                return out
+
+            rows.append({
+                "stack": name, "what": what, "id": p["id"], "name": p["name"], "estimated": p["estimated"] or bool(old and old["estimated"]),
+                "now": end(p, newest), "then": end(old, before) if old else None,
+                "change": chart.change_label(p["value"] - old["value"], "share") if old else None,
+                "rose": (p["value"] > old["value"]) if old else None,
+            })  # fmt: skip
+    return {"rows": rows, "ticks": [{"x": x, "label": f"{x}%"} for x in (0, 25, 50, 75, 100)]}
+
+
+def _counted(store: Any, ledger: list[dict[str, Any]]) -> tuple[Any, list[dict[str, Any]]]:
+    """The ledger rows the site's cumulative total counts (signed deals in dollars; no letters of intent, talks or
+    self-reported aggregates), read off the metric's own inputs so this never restates its rule."""
+    totals = store.derived_for("circular_commitments_total")
+    if not totals:
+        return None, []
+    ids = set(totals[-1].input_observation_ids)
+    rows = [r for r in ledger if r["id"] in ids]
+    unknown = {r["instrument"] for r in rows} - set(KIND)
+    if unknown:  # a new instrument must be read and named before it is drawn
+        raise ValueError(f"capture_figures: ledger instruments with no kind: {sorted(unknown)}")
+    return totals[-1], rows
+
+
+def _labs(store: Any, counted: list[dict[str, Any]]) -> dict[str, Any]:
+    """Each lab the recoupment metric holds, at the date of its own latest run-rate. A lab with too few rounds on record,
+    or a figure much older than the newest, is `thin`: it is listed with its run-rate and carries no multiple and no bar."""
+    ents = {e.id: e for e in store.seed.entities}
+    runs, every_round = store.observations("epoch.*.revenue_run_rate_usd.pt"), store.observations("epoch.*.round_equity_usd.pt")
+    obs = {o["id"]: o for o in runs + every_round}
+    latest: dict[str, Any] = {}
+    for d in store.derived_for("lab_recoupment_ratio"):
+        latest[d.dims["entity"]] = d
+
+    def name(eid: str) -> str:
+        return display(ents[eid]) if eid in ents else eid
+
+    newest = max((d.as_of_date for d in latest.values()), default=None)
+    rows = []
+    for subject, d in latest.items():
+        mine = [obs[i] for i in d.input_observation_ids]  # the ratio's own inputs: one run-rate, and every round by its date
+        rr, rounds = next(o for o in mine if o["measure"] == "revenue_run_rate_usd"), [o for o in mine if o["measure"] == "round_equity_usd"]
+        eid = rr["entity_id"] or subject
+        after = [o for o in every_round if o["subject"] == subject and o["as_of_date"] > rr["as_of_date"]]  # on record, cut out by the date
+        few, stale = len(rounds) < MIN_ROUNDS, (newest - rr["as_of_date"]).days > STALE_DAYS
+        buys = [r for r in counted if KIND[r["instrument"]] == "buy" and payer(r) == eid]
+        rows.append({
+            "id": eid, "subject": subject, "name": name(eid), "thin": few or stale, "thin_why": "rounds" if few else "stale" if stale else None,
+            "run_rate": {"value": rr["value_numeric"], "unit": "USD", "as_of": rr["as_of_date"].isoformat(), "when": when(rr["as_of_date"]), "said": SAID.get(json.loads(rr["raw_snippet"]).get("Source type"), "other"), "obs_ids": [rr["id"]], "href": store.href_of([rr["id"]]), "stamp": store.stamp_of([rr["id"]])},
+            "equity": {"value": sum(o["value_numeric"] for o in rounds), "unit": "USD", "n": len(rounds), "obs_ids": [o["id"] for o in rounds], "as_of": max(o["as_of_date"] for o in rounds).isoformat(), "href": store.href_of([rounds[0]["id"]]).split("#")[0]},
+            "promised": {"value": sum(r["value_numeric"] for r in buys), "unit": "USD", "n": len(buys), "obs_ids": [r["id"] for r in buys], "href": "/ledger"} if buys else None,
+            "later": {"value": sum(o["value_numeric"] for o in after), "unit": "USD", "n": len(after), "obs_ids": [o["id"] for o in after]} if after else None,
+            "ratio": None if few or stale else {"value": d.value, "unit": "ratio", "as_of": d.as_of_date.isoformat(), "obs_ids": d.input_observation_ids, "href": store._derived_href(d)},
+        })  # fmt: skip
+    rows.sort(key=lambda r: -r["equity"]["value"])
+    bars = [b for r in rows if not r["thin"] for b in (r["run_rate"], r["equity"], r["promised"]) if b]
+    top = max((b["value"] for b in bars), default=1.0)
+    for b in bars:
+        b["w"] = round(100 * b["value"] / top, 2)
+        b["small"] = b["w"] < SLIVER
+    drawn = {r["id"] for r in rows}
+    frontier = [e for e in store.seed.entities if any(m.is_primary and m.sublayer_id == "frontier_labs" for m in e.memberships)]
+    funded = {o["subject"] for o in every_round}
+    bare = sorted({o["entity_id"] or o["subject"] for o in runs if o["subject"] not in funded})
+    return {"rows": rows, "absent": [display(e) for e in frontier if e.id not in drawn], "no_rounds": [name(i) for i in bare]}
+
+
+def _ties(store: Any, total: Any, counted: list[dict[str, Any]]) -> dict[str, Any] | None:
+    """Who is tied to whom: each counted row joins a frontier lab (right) to its counterparty (left); a deal with no
+    frontier lab in it runs between suppliers. Bands are sized by face value, the same scale on both sides."""
+    if total is None:
+        return None
+    ents = {e.id: e for e in store.seed.entities}
+    labs = {e.id for e in store.seed.entities if any(m.is_primary and m.sublayer_id == "frontier_labs" for m in e.memberships)}
+
+    def name(p: dict[str, Any]) -> str:
+        return display(ents[p["entity_id"]]) if p["entity_id"] in ents else p["name"]
+
+    deals = []
+    for r in counted:
+        a, b = r["parties"]
+        lab = next((p for p in (b, a) if p["entity_id"] in labs), None)
+        other = a if lab is b else b
+        if lab is None:
+            lab, other = b, a
+        deals.append({"a": other["entity_id"], "a_name": name(other), "b": lab["entity_id"], "b_name": name(lab), "lab": lab["entity_id"] in labs, "kind": kind(r), "disputed": bool(r["disputed"]), "press": r["audited_vs_reported"] == "reported", "value": r["value_numeric"], "id": r["id"]})
+    pairs: dict[tuple[str, str, str], dict[str, Any]] = {}
+    for d in deals:
+        row = pairs.setdefault((d["a"], d["b"], d["kind"]), {**{k: d[k] for k in ("a", "a_name", "b", "b_name", "lab", "kind")}, "value": 0.0, "unit": "USD", "n": 0, "obs_ids": [], "press": 0, "disputed": 0, "href": "/ledger"})
+        row["value"] += d["value"]
+        row["n"] += 1
+        row["obs_ids"].append(d["id"])
+        row["press"] += d["press"]
+        row["disputed"] += d["disputed"]
+    rows = sorted(pairs.values(), key=lambda p: -p["value"])
+    left_total: Counter[str] = Counter()
+    for p in rows:
+        if p["lab"]:
+            left_total[p["a"]] += p["value"]
+    kept = [k for k, _ in left_total.most_common(KEPT)]
+    names = {p["a"]: p["a_name"] for p in rows} | {p["b"]: p["b_name"] for p in rows}
+
+    def ends(p: dict[str, Any]) -> tuple[str, str]:
+        return ("none", "none") if not p["lab"] else (p["a"] if p["a"] in kept else "other", p["b"])
+
+    # a band is the deals between two ends of one kind; a deal the ledger marks disputed is a band of its own
+    bands: dict[tuple[str, str, str, bool], dict[str, Any]] = {}
+    for d in deals:
+        le, ri = ends(d)
+        b = bands.setdefault((le, ri, d["kind"], d["disputed"]), {"left": le, "right": ri, "kind": d["kind"], "disputed": d["disputed"], "value": 0.0, "unit": "USD", "n": 0, "obs_ids": []})
+        b["value"] += d["value"]
+        b["n"] += 1
+        b["obs_ids"].append(d["id"])
+    label = {"other": "Other suppliers", "none": "No frontier lab"}
+
+    def side(key: str) -> list[dict[str, Any]]:
+        size: Counter[str] = Counter()
+        for b in bands.values():
+            size[b[key]] += b["value"]
+        order = sorted(size, key=lambda k: (k in ("other", "none"), k == "none", -size[k]))
+        scale = (100 - GAP * (max(len(kept), 1) + 1)) / total.value  # one scale for both sides: the left has the most gaps
+        gap = GAP if key == "left" else (100 - scale * total.value) / max(len(order) - 1, 1)
+        out, at = [], 0.0
+        for k in order:
+            out.append({"id": k, "name": label.get(k) or names[k], "value": size[k], "unit": "USD", "share": size[k] / total.value, "y": round(at, 3), "h": round(scale * size[k], 3), "obs_ids": [i for b in bands.values() if b[key] == k for i in b["obs_ids"]]})
+            at += scale * size[k] + gap
+        mids = chart.spread([n["y"] + n["h"] / 2 for n in out], 5.8)
+        for n, m in zip(out, mids):
+            n["label_y"] = m
+        return out
+
+    left, right = side("left"), side("right")
+    lo, ro = [n["id"] for n in left], [n["id"] for n in right]
+    drawn = sorted(bands.values(), key=lambda b: (lo.index(b["left"]), ro.index(b["right"]), b["kind"], b["disputed"]))
+    for n in left:  # a named company with both a sale to a lab and a stake in it or a guarantee behind it
+        mine = [b for b in drawn if b["left"] == n["id"]]
+        n["both"] = n["id"] in kept and any({b["kind"] for b in mine if b["right"] == ri} == {"buy", "stake"} for ri in ro)
+    for key, nodes, other, order in (("left", left, "right", ro), ("right", right, "left", lo)):
+        for n in nodes:
+            at = n["y"]
+            for b in sorted((b for b in drawn if b[key] == n["id"]), key=lambda b: (order.index(b[other]), b["kind"], b["disputed"])):
+                b[f"{key}_y"], b[f"{key}_h"] = round(at, 3), round(n["h"] * b["value"] / n["value"], 3)
+                at += n["h"] * b["value"] / n["value"]
+    for b in drawn:
+        y0, y1, z0, z1 = b["left_y"], b["left_y"] + b["left_h"], b["right_y"], b["right_y"] + b["right_h"]
+        b["d"] = f"M0,{y0:.2f} C50,{y0:.2f} 50,{z0:.2f} 100,{z0:.2f} L100,{z1:.2f} C50,{z1:.2f} 50,{y1:.2f} 0,{y1:.2f} Z"
+        b["left_name"], b["right_name"] = next(n["name"] for n in left if n["id"] == b["left"]), next(n["name"] for n in right if n["id"] == b["right"])
+    return {
+        "total": {"value": total.value, "unit": "USD", "as_of": total.as_of_date.isoformat(), "when": when(total.as_of_date), "obs_ids": total.input_observation_ids, "href": "/indicators/circular_financing_scale", "n": len(counted)},
+        "left": left, "right": right, "bands": drawn, "pairs": rows,
+    }  # fmt: skip
+
+
+def _concentration(store: Any, layers: list[dict[str, Any]]) -> dict[str, Any]:
+    """Each index at its latest reading, beside the lowest it could read: over n firms an index cannot fall below
+    equal shares, one over n, so the dot is placed against that floor and the rows are never ranked."""
+    said = {i.id: i.definition for i in store.seed.indicators}
+    cards = {c["id"]: (c, layer) for layer in layers for c in layer["indicators"]}
+    rows = []
+    for group, ids in CONCENTRATION:
+        for i in ids:
+            if i in cards and cards[i][0]["latest"] and cards[i][0]["unit"] == "index":
+                c, layer = cards[i]
+                of = OF.get(i, "firms")
+                (n,) = store.con.execute(f"SELECT {COUNT[of]} FROM observations WHERE id IN (SELECT unnest(?))", [c["latest"]["obs_ids"]]).fetchone()
+                rows.append({"id": i, "group": group, "name": c["name"], "layer": layer["name"], "href": f"/indicators/{i}", "value": c["latest"]["value"], "unit": "index", "x": round(100 * c["latest"]["value"], 2), "n": n, "of": of, "floor_x": round(100 / n, 2), "as_of": c["latest"]["as_of"], "when": when(date.fromisoformat(c["latest"]["as_of"])), "obs_ids": c["latest"]["obs_ids"], "status": c["status"], "counts": said[i]})
+    return {"rows": rows}
+
+
+def build(store: Any, layers: list[dict[str, Any]], gross: dict[str, Any], margin: dict[str, Any], ledger: list[dict[str, Any]]) -> dict[str, Any]:
+    total, counted = _counted(store, ledger)
+    return {
+        "gauges": _gauges(store, layers),
+        "year": _year(store, {"gross_profit": ("gross profit", gross), "operating_income": ("operating income", margin)}),
+        "labs": _labs(store, counted),
+        "ties": _ties(store, total, counted),
+        "concentration": _concentration(store, layers),
+        "rule": load()["rule"],
+    }

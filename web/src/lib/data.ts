@@ -124,7 +124,28 @@ export type Stack = {
   ends: { id: string; name: string; value: number; unit: string; as_of: string; obs_ids: string[]; y: number }[];
   stamps?: Stamp[]; sources: ChartSourcesT;
 };
-export const capture = () => read<{ as_of: string; verdict?: string; what_would_change: string[]; layers: (Layer & { indicators: Card[]; n_published: number; status: string; tally: Tally; venture: LayerVenture | null; reading: string; held?: { id: string; name: string; reason: string | null; n: number }[] })[]; recent_status_events: StatusEvent[]; gross_profit_stack: Stack; margin_stack: Stack }>("lens/capture.json");
+// The figures on /capture, summed and laid out by src/ai_tracker/capture_figures.py; the page only places them.
+type Num = { value: number; unit: string; obs_ids: string[] };
+export type CaptureEnd = Num & { as_of: string; quarter: string; x: number; href: string; estimated: boolean; basis?: { name: string; as_of: string; when: string; obs_ids: string[]; href: string | null }[] };
+export type CaptureBar = Num & { w?: number; small?: boolean; n?: number; as_of?: string; when?: string; said?: string; href?: string | null; stamp?: Stamp | null };
+export type CaptureNode = Num & { id: string; name: string; y: number; h: number; label_y: number; share: number; both?: boolean };
+export type CaptureFigures = {
+  gauges: { n: number; words: { id: string; label: string }[]; layers: { id: string; name: string; order: number; href: string; status: string; n: number; groups: { word: string; n: number; marks: { id: string; name: string; status: string; href: string }[] }[] }[] };
+  year: { ticks: { x: number; label: string }[]; rows: { stack: string; what: string; id: string; name: string; estimated: boolean; now: CaptureEnd; then: CaptureEnd | null; change: string | null; rose: boolean | null }[] };
+  labs: { absent: string[]; no_rounds: string[]; rows: { id: string; name: string; thin: boolean; thin_why: "rounds" | "stale" | null; run_rate: CaptureBar; equity: CaptureBar; promised: CaptureBar | null; later: (Num & { n: number }) | null; ratio: (Num & { as_of: string; href: string }) | null }[] };
+  ties: {
+    total: Num & { as_of: string; when: string; href: string; n: number }; left: CaptureNode[]; right: CaptureNode[];
+    bands: (Num & { left: string; right: string; left_name: string; right_name: string; kind: "buy" | "stake"; disputed: boolean; n: number; d: string })[];
+    pairs: (Num & { a: string; a_name: string; b: string; b_name: string; lab: boolean; kind: "buy" | "stake"; n: number; press: number; disputed: number; href: string })[];
+  } | null;
+  concentration: { rows: (Num & { id: string; group: string; name: string; layer: string; href: string; x: number; n: number; of: string; floor_x: number; as_of: string; when: string; status: string; counts: string })[] };
+  rule: {
+    title: string; start: string; questions: { id: string; ask: string; explain: string }[];
+    outcomes: { id: string; after: string; answer: string; word: string; text: string }[];
+    defences_label: string; defences: string[]; foot: string;
+  };
+};
+export const capture = () => read<{ as_of: string; verdict?: string; what_would_change: string[]; layers: (Layer & { indicators: Card[]; n_published: number; status: string; tally: Tally; venture: LayerVenture | null; reading: string; held?: { id: string; name: string; reason: string | null; n: number }[] })[]; recent_status_events: StatusEvent[]; gross_profit_stack: Stack; margin_stack: Stack; figures: CaptureFigures }>("lens/capture.json");
 export const sources = () => read<Source[]>("sources.json");
 export type Skipped = { id: string; name: string; url: string | null; reason: string; attribution: string | null; people?: string[] };
 export const skippedSources = () => read<Skipped[]>("skipped_sources.json");
