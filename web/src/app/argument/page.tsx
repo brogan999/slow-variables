@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArticleLayout } from "@/components/ArticleLayout";
+import { ArgumentMap, ExitsFigure, ReadingsFigure } from "@/components/ArgumentFigures";
 import { Exits, ReadingMargin, SlowVariables, StackPlate } from "@/components/ArgumentParts";
 import { Folios, Inline, parseEssay } from "@/components/Essay";
 import { FourClocks } from "@/components/FourClocks";
@@ -13,7 +14,8 @@ export default function ArgumentPage() {
   const doc = argument();
   const cards = Object.fromEntries(index().indicators.map((c) => [c.id, c]));
   const { title, lede, folios } = parseEssay(doc.essay.full);
-  const plates = { clocks: <FourClocks clocks={doc.clocks} cards={cards} />, perez: <><PerezCurve phase={doc.phase} facts={doc.facts} /><div className="not-prose mt-4"><FourPlacesCompact shifts={outlook().shifts} /></div></>, stack: <StackPlate />, record: <CaseRecord rows={doc.record} /> };
+  const plates = { clocks: <FourClocks clocks={doc.clocks} cards={cards} />, perez: <><PerezCurve phase={doc.phase} facts={doc.facts} /><div className="not-prose mt-4"><FourPlacesCompact shifts={outlook().shifts} /></div></>, stack: <StackPlate />, record: <CaseRecord rows={doc.record} />,
+    map: <ArgumentMap doc={doc} />, readings: <ReadingsFigure doc={doc} />, exits: <ExitsFigure doc={doc} /> };
   return (
     <ArticleLayout
       head={

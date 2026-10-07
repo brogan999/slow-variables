@@ -5,7 +5,7 @@ import { TimePlot } from "@/components/TimeChart";
 import { GROUP_WORDS, GaugeLink, Glyph, LineSwatch, Strips } from "@/components/diagrams/diffusion";
 import { KIND_LABEL } from "@/components/diagrams/kit";
 import type { DiffusionFigs, Doc, GaugeGroup } from "@/lib/data";
-import { fmt, words } from "@/lib/format";
+import { fmt, HELD_WORDS, words } from "@/lib/format";
 
 // The figures on /diffusion. Every count, place and age is the export's (src/ai_tracker/diffusion_figures.py), read
 // off the stage's own indicator cards; the site's mark for an estimate is not used, because nothing here is one.
@@ -59,7 +59,6 @@ export function StageGauges({ f }: { f: DiffusionFigs["gauges"] }) {
 }
 
 const ZONE_WORDS = { slow: "past normal, away from fast", normal: "inside the normal range", between: "between the two", fast: "inside the fast range", edge_normal: "on the line of the normal range", edge_fast: "on the line of the fast range" } as const;
-const HELD_WORDS = { edge: "on the line between ranges", interval: "its margin of error reaches across both ranges", single: "a single source that is not a primary one", tier: "its only evidence is a company describing itself" } as const;
 type BandDot = DiffusionFigs["bands"]["rows"][number]["dots"][number];
 const where = (d: BandDot) => ZONE_WORDS[d.on_edge ? (`edge_${d.on_edge}` as const) : d.zone];
 // why an emerging gauge carries no verdict: the evaluator's own reasons, or simply a number between the ranges

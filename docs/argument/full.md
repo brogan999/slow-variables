@@ -10,6 +10,8 @@ Ecologists who study why ecosystems suddenly flip into a different state draw a 
 
 AI has an abundance of fast variables. Benchmark scores, model launches and the length of task a model can finish all move monthly and all make the news. The slow variables are the ones that decide what those headlines amount to: how many firms use the technology, how much work is rebuilt around it, whether output per hour moves, which part of the industry keeps the profit, and how much of the value ends up with the people using it rather than the people selling it. This site is named after them, and it tracks five.
 
+[plate:map]
+
 ### Folio II · the pace
 
 ## Four machines, four clocks
@@ -62,6 +64,8 @@ Taken together, the theory and the record say that a spectacular frontier is ent
 
 Five numbers carry the argument, and each is graded by a rule the site publishes and can change only in public, with a written reason. Firms using AI: [fact:firms_using_ai]. Work hours done with AI: [fact:hours_assisted]. Output per hour, against a year before: [fact:productivity_yoy]. The chip makers' share of the gross profit we can measure: [fact:chips_gp_share_now]. And the value users keep: [fact:consumer_surplus]. Each links to its sources, its history and the rule that grades it. Read together, they describe a technology that nothing yet shows spreading faster than an ordinary one, being paid for well ahead of its revenue, and so far rewarding the companies that sell the scarcest input.
 
+[plate:readings]
+
 ### Folio VI · the exits
 
 ## Write down what would prove you wrong, first
@@ -69,3 +73,5 @@ Five numbers carry the argument, and each is graded by a rule the site publishes
 An argument like this one is easy to keep forever, because every slow reading can be called early. The only defence is to name in advance what would change the conclusion and to check it on a schedule. The site's conclusions each come with that list, re-tested every night against the same data, and the list follows this essay.
 
 One of them has already failed. The expectation that profit would drift up from the chip makers toward the model labs, as models became interchangeable, is contradicted by its own series: the labs' share grew, but the chip makers' share grew too, and the labs' gain came out of the cloud business instead. The Who profits page says so in its headline, where anyone can check it against the data. That is what a tracker is for.
+
+[plate:exits]

@@ -12,11 +12,12 @@ from datetime import date, datetime, timezone
 
 from . import store as st
 from .analysis.bands import flow_status
+from .analysis.bands import single_non_primary as _single_non_primary
 from .analysis.direction import direction
 from .analysis.metrics import run_metrics
 from .format import fmt as _fmt
 from .ingest.connectors import CONNECTORS
-from .schema import UNSCORED, FetchLog, Indicator, StatusEvent, Tier
+from .schema import UNSCORED, FetchLog, Indicator, StatusEvent
 from .thesis import render_md, run_all
 
 log = logging.getLogger("ai-tracker")
@@ -55,15 +56,6 @@ def cmd_build(a: argparse.Namespace) -> int:
         f"{len(s.derived)} derived, {len(s.events)} status events"
     )
     return 0
-
-
-PRIMARY = {Tier.BENCHMARK, Tier.MODEL_RELEASE, Tier.OFFICIAL_FILING}
-
-
-def _single_non_primary(s: st.Store, ind: Indicator) -> bool:
-    """A scored status needs two sources, or one primary (benchmark, model release, official filing)."""
-    obs = s.evidence_obs(ind)
-    return len({o["source_id"] for o in obs}) < 2 and not ({Tier(o["tier"]) for o in obs} & PRIMARY)
 
 
 def _auto_reason(

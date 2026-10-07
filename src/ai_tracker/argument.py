@@ -26,7 +26,7 @@ RECORD = Path("docs/interpretation/past-technology-waves.md")
 # each essay's own plates and facts: the migration essay keeps its facts apart, so the home page's date never moves
 PLATES = {
     "home": {"clocks", "perez", "stack"},
-    "full": {"clocks", "perez", "stack", "record"},
+    "full": {"clocks", "perez", "stack", "record", "map", "readings", "exits"},
     "migration": {"strip", "scorecard", "chain", "scale", "deals", "ages", "blind"},
 }
 STATES = ("holding", "failing", "untestable")
@@ -660,19 +660,161 @@ def record() -> list[dict[str, str]]:
     return [{"title": m[1], "text": m[2].strip()} for m in re.finditer(r"^\*\*(.+?)\.\*\* (.+)$", body, re.M)]
 
 
+def _x(v: float, lo: float, hi: float) -> float:
+    return round(100 * (v - lo) / (hi - lo), 2)
+
+
+SCORED_ZONE = {"consistent_with_normal": "normal", "faster_than_normal": "fast"}
+
+
+def _why_held(why: list[str], status: str | None, falls: str, lane: str) -> list[str]:
+    """What a row drawn off its range prints. The evaluator's own reasons (`held_reasons`) stand, except that a
+    status on record scored in another range is not held at all: the number has moved and the reason for the new
+    range is still to be written (`pending`). With no reason from the evaluator, a number on a line says so, and
+    anything else is held by a reason a person wrote."""
+    if SCORED_ZONE.get(status or "", falls) != falls:
+        return ["pending"]
+    return why or (["edge"] if lane == "line" else ["reason"])
+
+
+def _estimated(s: Store, ids: list[str]) -> bool:
+    """Whether any record behind a number is an estimate, by the record's own basis."""
+    q = "SELECT count(*) FROM observation_all WHERE audited_vs_reported = 'estimated' AND id IN (" + ",".join("?" * len(ids)) + ")"
+    return bool(ids) and bool(s.con.execute(q, ids).fetchone()[0])
+
+
+def _conds(e: dict[str, Any], v: dict[str, Any]) -> list[dict[str, Any]]:
+    """An exit's conditions as the monitor tests them, each with the seed's plain label for it. A label is tied to
+    its condition by the monitor's own text (`test`), never by position, and a condition the seed has not named, or
+    a name the monitor no longer tests, stops the build."""
+    named = {w["test"]: w for w in e["conditions"]}
+    tested = v["conds"] + v["counter"]
+    if sorted(named) != sorted(c["text"] for c in tested) or len(named) != len(e["conditions"]):
+        raise ValueError(f"argument: the conditions named for {e['monitor']} are not the ones its monitor tests")
+    return [
+        {**{k: c[k] for k in ("text", "detail", "holds", "obs_ids")}, "label": named[c["text"]]["label"],
+         "either": bool(named[c["text"]].get("either")), "counter": i >= len(v["conds"])}
+        for i, c in enumerate(tested)
+    ]  # fmt: skip
+
+
+def _readings(s: Store, spec: dict[str, Any]) -> dict[str, Any]:
+    """The five slow variables against the rule that grades each. A ranged one is drawn to scale on its own axis from
+    zero past the fast range's edge; its mark sits inside a range only when the status says that range, on the line
+    when the evaluator reads it as on the edge, and outside with its reasons when it is held. A directed one draws
+    the window its rule compares, with the dead band round the window's first reading."""
+    from .analysis.bands import EDGE, _band, _on_edge, held_reasons
+    from .analysis.direction import window
+
+    zone_of = SCORED_ZONE | {"emerging": "between"}
+    ranged, directed = [], []
+    for v in spec["slow_variables"]:
+        ind = next(i for i in s.seed.indicators if i.id == v["id"])
+        cur = s.current(ind.id)
+        card = s._card(ind)
+        row = {"id": ind.id, "label": v["label"], "status": cur.new_status if cur else None, "grade": card["grade"],
+               "href": f"/indicators/{ind.id}"}  # fmt: skip
+        if ind.direction_rule:
+            pts = {p["as_of"]: p for p in s.headline(ind) if p["value"] is not None}
+            win = window([(a, p["value"]) for a, p in pts.items()], ind.direction_rule)
+            if len(win) < 2:
+                continue
+            (a0, v0), (a1, v1) = win[0], win[-1]
+            band = ind.direction_rule.dead_band
+            # a share is drawn on the whole of the thing it is a share of; anything else from zero to a little past
+            lo, hi = min(0.0, v0 - band, v1), 1.0 if ind.unit == "share" else max(v0 + band, v1) * 1.15
+            x0, x1 = _x(v0, lo, hi), _x(v1, lo, hi)
+            directed.append(row | {
+                "unit": ind.unit, "higher_is": ind.direction_rule.higher_is, "periods": ind.direction_rule.periods,
+                "start": {"as_of": a0, "value": v0, "obs_ids": pts[a0]["obs_ids"], "x": _x(v0, lo, hi)},
+                "end": {"as_of": a1, "value": v1, "obs_ids": pts[a1]["obs_ids"], "x": _x(v1, lo, hi)},
+                "move": {"x": min(x0, x1), "w": round(abs(x1 - x0), 2)},
+                "dead": {"x": _x(v0 - band, lo, hi), "w": round(_x(v0 + band, lo, hi) - _x(v0 - band, lo, hi), 2),
+                         "band": band},
+                # a mark is hatched when any record behind either end of the window is an estimate, by its own basis
+                "estimate": _estimated(s, pts[a0]["obs_ids"] + pts[a1]["obs_ids"]),
+            })  # fmt: skip
+            continue
+        n, f = ind.normal_band, ind.fast_band
+        value, as_of, ids, _ = s.band_input(ind)
+        if value is None or n is None or f is None or n.hi is None or f.lo is None or f.lo <= n.hi:
+            raise ValueError(f"argument: {ind.id} has no reading or no normal range below a fast one to draw")
+        lo, hi = min(0.0, value), max(value, f.lo) + (f.lo - n.hi)
+        edges = [_x(n.hi, lo, hi), _x(f.lo, lo, hi)]
+        falls = zone_of[_band(value, n, f, ind.falsifying_band).value]
+        scored = zone_of.get(row["status"] or "") == falls and falls != "between"
+        x, lane, held = _x(value, lo, hi), "inside" if scored else "between" if falls == "between" else "outside", []
+        if _on_edge(value, n, f, ind.falsifying_band):
+            near = [e for e, b in zip(edges, (n.hi, f.lo)) if abs(value - b) <= EDGE * abs(b)]
+            x, lane = (near[0] if near else x), "line"
+        if lane in ("outside", "line"):
+            held = _why_held(held_reasons(s, ind, value), row["status"], falls, lane)
+        ranged.append(row | {
+            "unit": s.band_unit(ind), "value": value, "as_of": as_of.isoformat(), "obs_ids": ids, "x": x, "lane": lane,
+            "falls": falls, "held": held,
+            "zones": [{"key": "normal", "x": 0, "w": edges[0]},
+                      {"key": "between", "x": edges[0], "w": round(edges[1] - edges[0], 2)},
+                      {"key": "fast", "x": edges[1], "w": round(100 - edges[1], 2)}],
+            # a rule's line, from the seed's published range: `at`, not `value`, since no observation stands behind it
+            "edges": [{"x": edges[0], "at": n.hi}, {"x": edges[1], "at": f.lo}],
+            "zero": _x(0.0, lo, hi),
+        })  # fmt: skip
+    return {"ranged": ranged, "directed": directed}
+
+
+def figures(s: Store, spec: dict[str, Any], exits_: list[dict[str, Any]], phase_: dict[str, Any]) -> dict[str, Any]:
+    """What the three figures on /argument draw (Part 45i), read off the seed, the essay's own headings, tonight's
+    statuses and the thesis monitor's rows. Nothing here changes a status, a reading or a state."""
+    from .store import DATA, read_jsonl
+
+    readings = _readings(s, spec)
+    status = {r["id"]: r["status"] for r in readings["ranged"] + readings["directed"]}
+    labels = {v["id"]: v["label"] for v in spec["slow_variables"]}
+    by = {e["monitor"]: e for e in exits_}
+    heads = re.findall(r"^### (Folio [IVX]+ · (.+))\n\n## (.+)$", ESSAYS["full"].read_text(), re.M)
+    claim = {folio: (label, text) for label, folio, text in heads}
+    rows = [
+        {
+            "folio": m["folio"],
+            "label": claim[m["folio"]][0],
+            "claim": claim[m["folio"]][1],
+            "watches": [{"id": i, "label": labels[i], "status": status.get(i)} for i in m.get("watches") or []],
+            "phase": phase_["state"] if m.get("phase") else None,
+            "exits": [{k: by[e][k] for k in ("monitor", "label", "state")} for e in m.get("exits") or []],
+        }
+        for m in spec["map"]
+    ]
+    thesis = {v["id"]: v for v in read_jsonl(DATA / "thesis.jsonl")}
+    drawn = []
+    for e, x in zip(spec["exits"], exits_):
+        v = thesis.get(e["monitor"]) or {"conds": [], "counter": []}
+        conds = _conds(e, v) if e["monitor"] in thesis else []
+        mine = [c for c in conds if not c["counter"]]
+        drawn.append({"monitor": e["monitor"], "label": x["label"], "state": x["state"], "conds": conds,
+                      "n": len(mine), "met": len([c for c in mine if c["holds"] is True])})  # fmt: skip
+    counts = {"exits": len(drawn)} | {
+        k: len([r for r in drawn if r["state"] == st_])
+        for k, st_ in (("met", "supported"), ("unsupported", "unsupported"), ("contradicted", "contradicted"),
+                       ("untestable", "untestable"))  # fmt: skip
+    }
+    return {"map": rows, "readings": readings, "exits": {"rows": drawn, "counts": counts}}
+
+
 def build(s: Store, today: date | None = None) -> dict[str, Any]:
     spec = load()
     f = facts(s, spec)
     today = today or date.today()
+    ph, ex = phase(s, spec), exits(spec)
     return {
+        "figures": figures(s, spec, ex, ph),
         "migration": migration(s, spec, today),
         "as_of": max((x["as_of"] for x in f.values() if x), default=None),
         "essay": {k: p.read_text() for k, p in ESSAYS.items()},
         "facts": f,
         "slow_variables": spec["slow_variables"],
         "clocks": clocks(s, spec),
-        "phase": phase(s, spec),
-        "exits": exits(spec),
+        "phase": ph,
+        "exits": ex,
         "headlines": headlines(
             spec,
             {
@@ -709,6 +851,12 @@ def problems(s: Store) -> tuple[list[str], list[str]]:
     for e in spec["exits"]:
         if e["monitor"] not in monitors or not e.get("label"):
             errors.append(f"argument: exit {e['monitor']} names an unknown monitor or has no label")
+    slow, folios = {x["id"] for x in spec["slow_variables"]}, set(re.findall(r"· (.+)$", ESSAYS["full"].read_text(), re.M))
+    for m in spec.get("map") or []:
+        if m["folio"] not in folios or not set(m.get("watches") or []) <= slow:
+            errors.append(f"argument: map row {m['folio']} names an unknown folio or slow variable")
+        if not {e for e in m.get("exits") or []} <= {e["monitor"] for e in spec["exits"]}:
+            errors.append(f"argument: map row {m['folio']} names an unknown exit")
     for page, h in spec["headlines"].items():
         if h["monitor"] not in monitors or "untestable" not in h["claims"]:
             errors.append(f"argument: {page} headline names an unknown monitor or has no untestable claim")
