@@ -388,8 +388,10 @@ export const firm = () => read<FirmDoc>("firm.json");
 export type KindPart = "passes" | "waits_on_check" | "needs_body" | "held" | "outside";
 export type KindTier = "managers" | "professionals" | "sales" | "support";
 export type KindStage = "now" | "next" | "later";
+// A picture made with AI image generation (seed/illustrations.yaml): the served file, its alt text and the stage it pictures.
+export type IllustrationCard = { file: string; alt: string; stage: "next" | "later" | null };
 export type FirmKind = {
-  id: string; name: string; naics: string[]; titles: string[]; refs: string[]; payroll: number; knowledge_payroll: number;
+  id: string; name: string; illustration: IllustrationCard; naics: string[]; titles: string[]; refs: string[]; payroll: number; knowledge_payroll: number;
   share_passes: number; share_agreed3: number; share_waits_on_check: number; share_needs_body: number; share_held: number; share_outside: number; share_checkable: number;
   bar: { part: KindPart; x: number; w: number }[]; agreed_w: number;
   tiers: { id: KindTier; share: number; share_passes: number; share_agreed3: number; w: number; pass_w: number; agreed_w: number }[];
@@ -402,7 +404,7 @@ export type FirmKindsDoc = {
   version: string; kinds: FirmKind[];
   stages: { id: KindStage; name: string; what: string; rests_on: string; sources?: string[] }[];
   rungs: Record<string, string>; shape_words: Record<string, string>;
-  anatomy: { title: string; note: string; parts: { id: string; name: string; does: string }[] };
+  anatomy: { title: string; note: string; illustration: IllustrationCard; parts: { id: string; name: string; does: string }[] };
   needs: { id: string; name: string; what: string; opportunities: { id: string; name: string; href: string }[] }[];
   needs_grid: { id: string; cells: boolean[] }[];
   drawn: { word: string; label: string; w: number }[];

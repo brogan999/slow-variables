@@ -418,6 +418,10 @@ def _check(s: st.Store) -> tuple[list[str], list[str]]:
     from . import census
 
     errors += census.problems(census.load(), census.fetches())
+    from . import firm_kinds, illustrations
+
+    errors += illustrations.problems(illustrations.load())
+    errors += illustrations.placement_problems(illustrations.load(), {"/firm/kinds": firm_kinds.placed(firm_kinds.load())})
     import yaml
 
     from . import value_chain as vc
