@@ -1,4 +1,4 @@
-"""The illustrations made for /firm/kinds and the coming /story page: each served file is recorded in
+"""The illustrations made for /firm/kinds and the /story page: each served file is recorded in
 seed/illustrations.yaml with its hash, its prompt and an alt text, and is shown with the one credit. They are pictures
 made with AI image generation, never evidence."""
 
@@ -76,7 +76,9 @@ def test_every_kind_of_firm_names_its_own_illustration_and_every_firm_picture_is
     wrong = illustrations.placement_problems(_records(), {"/firm/kinds": [*placed[1:], placed[1], "firm-nowhere", "story-act-1"]})
     assert any("firm-nowhere" in e for e in wrong) and any(f"{placed[1]} is placed more than once" in e for e in wrong)
     assert any(f"{placed[0]} is recorded for /firm/kinds but not placed" in e for e in wrong)
-    assert any("story-act-1" in e and "waits" in e for e in wrong)
+    assert any("story-act-1 is placed on /firm/kinds but recorded for /story" in e for e in wrong)
+    waiting = [{**r, "page": None, "waits_for": "/later"} if r["stem"] == placed[0] else r for r in _records()]
+    assert any(placed[0] in e and "waits for /later" in e for e in illustrations.placement_problems(waiting, {"/firm/kinds": placed}))
 
 
 def test_the_export_hands_each_panel_a_ready_file_its_alt_and_its_stage():
@@ -90,12 +92,12 @@ def test_the_export_hands_each_panel_a_ready_file_its_alt_and_its_stage():
     assert doc["anatomy"]["illustration"]["stage"] is None and all(k["illustration"]["stage"] for k in doc["kinds"])
 
 
-def test_the_story_pictures_are_recorded_and_rendered_nowhere():
+def test_the_story_pictures_are_placed_on_the_story_page_and_nowhere_else():
     story = [r for r in _records() if r["stem"].startswith("story-act-")]
-    assert len(story) == 3 and all(r["waits_for"] == "/story" and not r.get("page") for r in story)
-    for p in [*(WEB / "src").rglob("*.ts*"), *(illustrations.ROOT / "seed").glob("*.yaml")]:
-        if p != illustrations.SEED:
-            assert "story-act" not in p.read_text(), p
+    assert len(story) == 3 and all(r["page"] == "/story" and not r.get("waits_for") for r in story)
+    assert not [r for r in _records() if r.get("waits_for")]  # nothing recorded is waiting for a page any more
+    named = [p for p in [*(WEB / "src").rglob("*.ts*"), *(illustrations.ROOT / "seed").glob("*.yaml")] if p != illustrations.SEED and "story-act" in p.read_text()]
+    assert named == [illustrations.ROOT / "seed" / "story.yaml"]  # the story's seed names them; no component types a stem
     doc = firm_kinds.build(firm_kinds.load(), census.load(), firm_kinds.trades())
     assert "story-act" not in json.dumps(doc)
 
