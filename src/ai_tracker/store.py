@@ -956,7 +956,12 @@ class Store:
         venture = self._venture()
         mm_doc = self._market_map(set(venture))
         _write(out / "market_map.json", mm_doc)
-        _write(out / "opportunities.json", self._opportunities(mm_doc))
+        opps_doc = self._opportunities(mm_doc)
+        _write(out / "opportunities.json", opps_doc)
+        from . import chain_atlas
+        from .outlook import load as load_outlook
+
+        _write(out / "chain_atlas.json", chain_atlas.build(chain_atlas.load(), opps_doc, load_outlook()))
         for sub_id, doc in venture.items():
             _write(out / "venture" / f"{sub_id}.json", doc)
         bottlenecks = self._bottlenecks(cards)

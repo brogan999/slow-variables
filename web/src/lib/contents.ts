@@ -68,6 +68,11 @@ export const PAGES: Record<string, Page> = {
     ["op-glance", "The businesses at a glance", "Where do they sit on the chain, how crowded is it there, and which kinds of firm would need them?"],
     ["op-list", "The businesses", "What is each business, what profit would it keep, and what would prove it wrong?"],
   ] },
+  "/value-chain/atlas": { name: "What to build, future by future", question: "Which businesses are worth building, and which hold whatever happens?", sections: [
+    ["ca-own", "Test a business of your own", "What would the site's records say about a business that is not on the list?"],
+    ["ca-board", "A call on each business", "Which should be built, which only on a condition, and what does each future do to them?"],
+    ["ca-table", "Every business in every future", "Which businesses does each future strengthen, weaken or break?"],
+  ] },
   "/stack": { name: "The stack", question: "What are the layers and sub-layers, and which companies does the tracker follow in each?",
     each: [["/stack/", "One page per sub-layer: its companies, its readings and the venture money going in."]] },
   "/ledger": { name: "Circular financing ledger", question: "How much of AI's demand is paid for by its own suppliers?" },
@@ -164,7 +169,7 @@ export const PAGES: Record<string, Page> = {
 // Deep dives listed under the stop they belong to, and the reference pages that belong to none.
 export const UNDER: Record<string, readonly string[]> = {
   "/argument": ["/argument/migration"],
-  "/capture": ["/value-chain", "/value-chain/opportunities", "/stack", "/ledger"],
+  "/capture": ["/value-chain", "/value-chain/opportunities", "/value-chain/atlas", "/stack", "/ledger"],
   "/firm": ["/firm/kinds"],
   "/predictions": ["/compare"],
   "/singularity": ["/singularity/atlas", "/futures"],

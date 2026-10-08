@@ -1210,3 +1210,29 @@ The owner asked for two things the idea box lacked: the structured card with its
 - Each assess link is a GET that sends on arrival, like every "Reason through this" link: nine hundred more ways to spend against the daily cap. `robots.ts` disallows `/ask?` and the links are `nofollow`; a click-to-send step for `?company=` is the next guard if the cap is hit.
 - The twenty businesses on `/value-chain/opportunities` have no strip: their future-by-future effects are the atlas's draft judgements, not yet on the site.
 - Not run against a live model: the card rule was written without a local key. Check one idea and one company after the deploy.
+
+## Part 48 (7 Oct 2026): the value-chain atlas, a call on each business in each future
+
+The owner's original ask was an instrument: the businesses that make sense in each future, and the ones that hold in all of them. Part 33 shipped the businesses as a document. This part adds the instrument's first slice at `/value-chain/atlas`.
+
+**What is judgement here.** Everything in `seed/chain_atlas.yaml`: a call on each published business (build, build on a condition, don't build alone), one line of reasoning, the one thing that would overturn the call, and for each future on the outlook's grid that changes the business, an effect (stronger, weaker, breaks) with a reason. It is made under the Part 39 policy: words only, one named model, a separate reviewing run, no person reading each line. No evaluator, metric, tally or query tool reads the file; a test keeps it so.
+
+**What is the site's own.** The businesses, their problems and rent verdicts (`seed/opportunities.yaml`), the order of bets, and the futures themselves, which are the cells of `seed/outlook.yaml`'s grid that a named writer argues.
+
+**How it is built.** `chain_atlas.problems` runs in `check` after the opportunities. `chain_atlas.build` writes `web/data/chain_atlas.json` with every business laid out in every future. The page is a server component: one radio per future and a style block written from the export switch the states, so it works without script and computes nothing. To re-run: edit the seed, then `ai-tracker export`.
+
+**What the reviewing run changed.**
+
+- *One future is not judged.* "Control slips away" has no named effect on any business, so it is no column and no business is said to hold through it; the page names it apart with the reason.
+- *Calls.* `pooled_expert_records` moved from don't-build-alone to build-on-a-condition, to match the site's own verdict that its maker keeps a moderate profit.
+- *Takes.* Superlatives the site does not hold were cut ("the best standalone business", "the strongest application bet", "the biggest prize", "small and certain"), and so were takes that counted the file's own marks.
+- *Effects.* Weakening futures taken from each record's own falsifier were added (the registry and the licensed firm if capability stalls; the system of record, tuning and in-customer learning if AI automates research). Effects resting on an invented regularity were withdrawn.
+- *Words.* "Grid" means the outlook's grid; the electricity network is "the power grid". The row's last field reads "what would overturn this call", since for a don't-build call it is the reverse of what would kill the business.
+
+**Judgement calls.**
+
+- *The agent registry stays in Build.* The reviewing run would move it to build-on-a-condition, because the site's rule has incumbents keeping its profit. The owner's instruction of 7 Oct was to assume anything is buildable, so the call stays and the take names who must be beaten.
+- *"Holds" needs a lift.* A business is marked as weakened by no future only when some future strengthens it; one that no future touches is unjudged, not robust.
+- *Seven futures, not thirteen.* The five "who owns the models" futures are not on the outlook's grid; two of them still need named sources.
+
+**Still to come.** The map as a locator, scarcity by category with the time dial, the companies-on-the-field view, shortage chains, and the planning assumptions.

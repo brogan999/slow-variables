@@ -709,6 +709,23 @@ export type OpportunityFigures = {
 };
 export const opportunities = () => read<OpportunitiesDoc>("opportunities.json");
 
+// Part 48: the value-chain atlas (web/data/chain_atlas.json, written by chain_atlas.build). Every word is a model's
+// judgement; every business is laid out in every future, so the page switches states and computes nothing.
+export type AtlasEffect = "stronger" | "weaker" | "breaks" | "unchanged";
+export type AtlasMark = { future: string; key: string; name: string; effect: AtlasEffect; word: string; label: string; reason: string };
+export type AtlasBusiness = {
+  id: string; n: number; name: string; call: string; take: string; kills: string; stage: string | null; holds: boolean; problem: string; profit: string;
+  primary: { number: string | null; name: string; href: string }; href: string; marks: AtlasMark[]; moved: AtlasMark[];
+};
+export type ChainAtlasDoc = {
+  made_by: { model: string; date: string; method: string; reviewed_by: string } | null;
+  futures: { id: string; key: string; name: string; says: string }[];
+  not_judged: { name: string; why: string }[];
+  effects: { id: AtlasEffect; word: string }[];
+  groups: { id: string; name: string; says: string; businesses: AtlasBusiness[] }[];
+};
+export const chainAtlas = () => read<ChainAtlasDoc>("chain_atlas.json");
+
 // /story (plan Part 46): words only. Each panel names a reused figure; the export leaves out a panel with no data.
 export type StoryPanelDoc = { id: string; figure: string; kind: "chart" | "model" | "illustration" | "mixed"; route: string; href: string; words: string[]; carry: string[] };
 export type StoryDoc = {
