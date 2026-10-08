@@ -1236,3 +1236,31 @@ The owner's original ask was an instrument: the businesses that make sense in ea
 - *Seven futures, not thirteen.* The five "who owns the models" futures are not on the outlook's grid; two of them still need named sources.
 
 **Still to come.** The map as a locator, scarcity by category with the time dial, the companies-on-the-field view, shortage chains, and the planning assumptions.
+
+## Part 48b (8 Oct 2026): the atlas's map, what is scarce on each part and when
+
+The second slice of `/value-chain/atlas`: the chain drawn once, with a time dial beside the future dial.
+
+**What is judgement here.** In `seed/chain_atlas.yaml`: for each of the forty-one parts of the market map in scope, what is scarce there, a word for how short it is now, in the transition and at the mature state, and a reason; and for each judged future, which parts it tightens or eases, with a reason. Made and reviewed as Part 48 was.
+
+**What is the site's own.** Where a part's `reading` names a tightness gauge the scorecard scores tonight, the word for now is that score's, drawn in the scorecard's colours, hatched when the score is low-confidence, and named ("tonight's reading of Electricity generation"). When a reading lapses the part falls back to its judged word; a test covers it.
+
+**The rules.** A future never moves now. Later, a future moves a part one step along the scale and no further than its ends. "The ground under today's companies" sorts every part by whether it is shorter, the same or less short at the mature state than now, with no future chosen.
+
+**How it is built.** `chain_atlas.build` lays out every part in every future at every time. `ChainAtlasMap.tsx` is the page's one island: it reads the page's radios and looks the state up. Without script the map shows now with no future chosen, and the ground list gives every part's three words.
+
+**What the reviewing run changed.**
+
+- *Colours.* The map now uses the scorecard's own mapping of words to the ramp, as a band beside words set on the page's surface, so the text stays readable at every level; a judged part is ink with a dashed edge.
+- *Paths brought into line with the site's records.* Power and the newest chip processes stay scarce at the mature state, as the layer assessments say; routing is slack throughout; serving engineering is moderate; data origination, practice environments and outcome verification start at moderate, where the site's own tightness judgements put their nearest inputs.
+- *Moves.* Moves resting on something the outlook's cell does not say were withdrawn; moves that mirror a business effect already in the file were added, so the map and the board agree future by future.
+- *Copy.* "Ground that eases" no longer says such parts become plentiful: the rule is a drop of one step, not a glut.
+- *Checks.* `problems` now checks the scale's judged words, the times, the moves and the ground's groups.
+
+**Judgement calls.**
+
+- *One gauge stands for a whole part* where the site's own layer assessments bind them (electricity for power and sites, the newest-process gauge for the chip supply chain). The gauge is named wherever its word is shown.
+- *A reading for now beside judged words for later* can show a step nobody judged when a score crosses a band. The page says which word is a reading.
+- *A tile leads to its own entry in the ground list*, not to the company list; the entry links on to the companies, each with its assess link.
+
+**Still to come.** Research for the two unsourced futures, shortage chains, and the planning assumptions.

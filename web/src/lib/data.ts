@@ -718,7 +718,7 @@ export type AtlasBusiness = {
   primary: { number: string | null; name: string; href: string }; href: string; marks: AtlasMark[]; moved: AtlasMark[];
 };
 export type AtlasTime = "now" | "transition" | "mature";
-export type AtlasState = { word: string; level: number; measured: boolean; label: string };
+export type AtlasState = { word: string; level: number; measured: boolean; hatched: boolean; gauge: string | null };
 export type AtlasTile = {
   id: string; number: string; name: string; scarce: string; reason: string; n_entities: number; href: string; businesses: number[];
   states: Record<string, Record<AtlasTime, AtlasState>>; moved: { key: string; name: string; move: string; word: string; reason: string }[];

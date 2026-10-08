@@ -63,20 +63,20 @@ function Row({ b }: { b: AtlasBusiness }) {
 function Ground({ c }: { c: AtlasTile }) {
   const base = c.states.none;
   return (
-    <details className="ca-row border-b border-grid bg-surface">
+    <details id={`ca-g-${c.id}`} className="ca-row border-b border-grid bg-surface scroll-mt-24">
       <summary className="grid grid-cols-[2.6rem_minmax(0,1fr)] items-baseline gap-x-3 px-3 py-2">
         <span className="font-mono text-[12px] text-muted">{c.number}</span>
         <span>
           <span className="ca-name text-[15px] font-semibold leading-snug underline decoration-grid decoration-dotted underline-offset-4">{c.name}</span>
           {c.businesses.map((n) => <span key={n} className={tag}>business {n}</span>)}
-          <span className="mt-0.5 block text-[13px] leading-snug text-ink-2">{c.scarce}: {base.now.word} now, {base.mature.word} at the mature state.</span>
+          <span className="mt-0.5 block text-[13px] leading-snug text-ink-2">{c.scarce}: {base.now.word} now{base.now.gauge ? ` (tonight’s reading of ${base.now.gauge}${base.now.hatched ? ", a low-confidence score" : ""})` : ""}, {base.mature.word} at the mature state.</span>
         </span>
       </summary>
       <div className="flex flex-col gap-2 px-3 pb-4 pt-1 text-[13px] text-ink-2 md:pl-[4.1rem]">
         <p>{c.reason} In the transition: {base.transition.word}.</p>
         {c.moved.length ? <ul className="flex flex-col gap-1">{c.moved.map((m) => <li key={m.key}><span className="font-medium text-ink">{m.name}: {m.word}.</span> {m.reason}</li>)}</ul> : <p>No future on the grid is judged to move it.</p>}
         <p><Link href={c.href} className={link}>{c.n_entities ? "The companies the site places here" : "This part on the map"}</Link>{c.n_entities ? ", each with a link to have Ask reason it through." : ": the tracker has placed no independent company here yet."}</p>
-        <p className="border-l-2 border-dotted border-axis pl-2 text-xs text-muted">A model&apos;s judgement, not a reading{base.now.measured ? ", except the word for now, which is tonight’s reading" : ""}: what is scarce, each word, the reason and each future&apos;s move.</p>
+        <p className="border-l-2 border-dotted border-axis pl-2 text-xs text-muted">A model&apos;s judgement, not a reading{base.now.gauge ? `, except the word for now, which is tonight’s reading of ${base.now.gauge}, the nearest gauge the site scores` : ""}: what is scarce, each word, the reason and each future&apos;s move.</p>
       </div>
     </details>
   );
@@ -101,17 +101,22 @@ export function ChainAtlas({ d }: { d: ChainAtlasDoc }) {
           {d.effects.map((e) => <span key={e.id}><i data-e={e.id} />{e.word}</span>)}
           <span>each mark a model&apos;s judgement</span>
         </p>
-        <div className="flex flex-wrap items-baseline gap-x-5 gap-y-1.5 border-t border-grid pt-2 text-sm">
-          <span className="eyebrow">At this point in time</span>
-          {d.times.map((t, i) => <label key={t.id} className="inline-flex items-center gap-1.5" title={t.says}><input type="radio" name="ca-time" value={t.id} defaultChecked={i === 0} />{t.name}</label>)}
-          <span className="text-xs text-muted">Time changes the map; a future never changes what is read now.</span>
-        </div>
         {d.not_judged.map((n) => <p key={n.name} className="text-xs text-muted max-w-[72ch]">Not judged, and so not on the list: {n.name}. {n.why}</p>)}
+      </fieldset>
+      <fieldset className="flex flex-wrap items-baseline gap-x-5 gap-y-1.5 text-sm">
+        <legend className="eyebrow">At this point in time</legend>
+        {d.times.map((t, i) => <label key={t.id} className="inline-flex items-center gap-1.5" title={t.says}><input type="radio" name="ca-time" value={t.id} defaultChecked={i === 0} />{t.name}</label>)}
+        <span className="text-xs text-muted">Time changes the map below; a future never changes what is read now.</span>
+        <noscript><span className="text-xs text-muted">Without script the map shows now only; the list under “the ground” gives every part&apos;s three words.</span></noscript>
       </fieldset>
       <section id="ca-map" className="flex flex-col gap-2 scroll-mt-24">
         <h2 className="text-xl font-bold tracking-tight">The chain, and what is scarce on it</h2>
-        <p className="text-sm text-ink-2 max-w-[72ch]">Each tile is one part of the value chain, from power on the left to applications on the right, and it never moves. Its shade says how short that part is of the thing it most needs. {d.times.map((t) => <span key={t.id}><em>{t.name}</em>: {t.says} </span>)}A tile leads to the companies on that part of the chain.</p>
-        <ChainAtlasMap layers={d.map.layers} />
+        <p className="text-sm text-ink-2 max-w-[72ch]">Each tile is one part of the value chain, from power on the left to applications on the right, and it never moves. Its shade says how short that part is of the thing it most needs. {d.times.map((t) => <span key={t.id}><em>{t.name}</em>: {t.says} </span>)}A reading from tonight&apos;s scorecard is drawn in the scorecard&apos;s colours; a model&apos;s judgement is drawn in ink with a dashed edge. A tile leads to that part&apos;s entry in the list further down.</p>
+        <ChainAtlasMap
+          layers={d.map.layers.map((l) => ({ number: l.number, name: l.name, tiles: l.categories.map((c) => ({ id: c.id, number: c.number, name: c.name, scarce: c.scarce, businesses: c.businesses, states: c.states, moves: Object.fromEntries(c.moved.map((m) => [m.key, m.word])) })) }))}
+          futures={d.futures.map((f) => ({ key: f.key, name: f.name }))}
+          times={d.times.map((t) => ({ key: t.id, name: t.name }))}
+        />
       </section>
       <div id="ca-board" className="flex flex-col gap-6 scroll-mt-24">
         {d.groups.map((g) => (

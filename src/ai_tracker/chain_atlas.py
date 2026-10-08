@@ -99,6 +99,22 @@ def _map_problems(spec: dict[str, Any], outlook: dict[str, Any], map_doc: dict[s
     owed = {c["id"] for c in _in_scope(map_doc)}
     cats = spec.get("categories") or {}
     futures = {f"{c['progress']}/{c['rules']}" for c in _cells(outlook)}
+    probably = spec.get("scarcity") or {}
+    if set(probably) != set(ORDER):
+        out.append(f"chain atlas: scarcity must give a judged word for each of {', '.join(ORDER)}")
+    for word, shown in probably.items():
+        if shown == word:
+            out.append(f"chain atlas: scarcity shows the scorecard's own word for a judged {word}")
+    if [t.get("id") for t in spec.get("times") or []] != list(WHEN):
+        out.append("chain atlas: times must be now, transition, mature, in that order")
+    if set(spec.get("moves") or {}) != set(STEP):
+        out.append("chain atlas: moves must name tightens and eases")
+    if [g.get("id") for g in spec.get("ground") or []] != ["scarcer", "holds", "eases"]:
+        out.append("chain atlas: ground must be scarcer, holds, eases, in that order")
+    for kind in ("times", "ground"):
+        for row in spec.get(kind) or []:
+            if _figure(str(row.get("says") or "")):
+                out.append(f"chain atlas: {kind} {row.get('id')} types a figure, a size word or an address")
     for missing in sorted(owed - set(cats)):
         out.append(f"chain atlas: {missing} has no path")
     for cid, c in cats.items():
@@ -133,19 +149,24 @@ def _map_problems(spec: dict[str, Any], outlook: dict[str, Any], map_doc: dict[s
     return out
 
 
-def _map(spec: dict[str, Any], futures: list[dict[str, Any]], map_doc: dict[str, Any], scored: dict[str, str], on: dict[str, list[int]]) -> dict[str, Any]:
+def _map(spec: dict[str, Any], futures: list[dict[str, Any]], map_doc: dict[str, Any], scored: dict[str, dict[str, Any]], on: dict[str, list[int]]) -> dict[str, Any]:
     """Every part of the map in every future at every time. Now is tonight's scored word where the part's gauge has one,
     else the judged word; a future never moves it. Later, a future moves a part one step along the scale, and no further
     than its ends."""
     cats, shifts, probably = spec.get("categories") or {}, spec.get("shifts") or {}, spec.get("scarcity") or {}
-    times = {t["id"]: t["name"] for t in spec.get("times") or []}
     moves = spec.get("moves") or {}
 
-    def state(name: str, c: dict[str, Any], when: str, step: int) -> dict[str, Any]:
-        read = scored.get(c.get("reading") or "") if when == "now" else None
-        word = read if read in ORDER else ORDER[min(max(ORDER.index(c[when]) + (step if when != "now" else 0), 0), len(ORDER) - 1)]
-        shown = word if read in ORDER else probably.get(word, word)
-        return {"word": shown, "level": ORDER.index(word) + 1, "measured": read in ORDER, "label": f"{name}: {shown}, {times.get(when, when).lower()}"}
+    def state(c: dict[str, Any], when: str, step: int) -> dict[str, Any]:
+        read = (scored.get(c.get("reading") or "") or {}) if when == "now" else {}
+        measured = read.get("word") in ORDER
+        word = read["word"] if measured else ORDER[min(max(ORDER.index(c[when]) + (step if when != "now" else 0), 0), len(ORDER) - 1)]
+        return {
+            "word": word if measured else probably.get(word, word),
+            "level": ORDER.index(word) + 1,
+            "measured": measured,
+            "hatched": bool(measured and read.get("hatched")),  # a low-confidence score is hatched wherever it is drawn
+            "gauge": read.get("name") if measured else None,
+        }
 
     def tile(m: dict[str, Any]) -> dict[str, Any]:
         c = cats[m["id"]]
@@ -164,7 +185,7 @@ def _map(spec: dict[str, Any], futures: list[dict[str, Any]], map_doc: dict[str,
             "n_entities": m.get("n_entities", 0),
             "href": f"/value-chain#mm-{m['id']}",
             "businesses": on.get(m["id"], []),
-            "states": {k: {when: state(m["name"], c, when, step.get(k, 0)) for when in WHEN} for k in ("none", *(f["key"] for f in futures))},
+            "states": {k: {when: state(c, when, step.get(k, 0)) for when in WHEN} for k in ("none", *(f["key"] for f in futures))},
             "moved": moved,
         }
 
@@ -186,9 +207,9 @@ def _map(spec: dict[str, Any], futures: list[dict[str, Any]], map_doc: dict[str,
     }
 
 
-def build(spec: dict[str, Any], opps_doc: dict[str, Any], outlook: dict[str, Any], map_doc: dict[str, Any], scored: dict[str, str]) -> dict[str, Any]:
+def build(spec: dict[str, Any], opps_doc: dict[str, Any], outlook: dict[str, Any], map_doc: dict[str, Any], scored: dict[str, dict[str, Any]]) -> dict[str, Any]:
     """web/data/chain_atlas.json. `opps_doc` is the opportunities export (the records, their numbers and the sequence),
-    `map_doc` the market map's export and `scored` tonight's tightness words by gauge, scored gauges only."""
+    `map_doc` the market map's export and `scored` tonight's scored gauges by id, each with its word, name and whether hatched."""
     sc = outlook.get("scenarios") or {}
     label = {a["id"]: a["label"] for k in ("progress", "rules") for a in sc.get(k) or []}
     skipped = spec.get("not_judged") or {}

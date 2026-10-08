@@ -962,7 +962,7 @@ class Store:
         from .argument import scorecard
         from .outlook import load as load_outlook
 
-        scored = {i["id"]: i["word"] for i in scorecard(self, date.today())["inputs"] if i.get("word") in chain_atlas.ORDER}
+        scored = {i["id"]: {"word": i["word"], "name": i["name"], "hatched": bool(i.get("hatched"))} for i in scorecard(self, date.today())["inputs"] if i.get("word") in chain_atlas.ORDER}
         _write(out / "chain_atlas.json", chain_atlas.build(chain_atlas.load(), opps_doc, load_outlook(), mm_doc, scored))
         for sub_id, doc in venture.items():
             _write(out / "venture" / f"{sub_id}.json", doc)

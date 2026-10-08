@@ -6,14 +6,14 @@
 # future moves it; `reading` names the tightness gauge whose scored word replaces the judged `now`. To withdraw a judgement, delete it.
 made_by:
   model: claude-opus-5-5
-  date: '2026-10-07'
+  date: '2026-10-08'
   method: One model read each published business beside the site's readings of the value chain and each future the outlook's
     grid fills, gave the business a call with one line of reasoning and the one thing that would undo it, and said in words
     what each future does to it. A future it left out changes nothing. The same model then said, for each part of the map
     in scope, what is scarce there, how short it is now, in the transition and at the mature state, and which futures tighten
     or ease it, each with a reason.
-  reviewed_by: a separate reviewing run of the same model, which changed calls, takes and reasons, withdrew some effects
-    and added others; no person reviewed each one
+  reviewed_by: separate reviewing runs of the same model, which changed calls, takes, words and reasons, withdrew some effects
+    and moves and added others; no person reviewed each one
 calls:
 - id: build
   name: Build
@@ -279,11 +279,11 @@ times:
   says: What the site reads tonight, and a model's judgement where it has no reading. No future changes it.
 - id: transition
   name: Transition
-  says: The years in which AI is capable but firms are still fitting it in. Shortages here come from the pace of adoption,
-    not the pace of the models.
+  says: The years in which AI is capable but firms are still fitting it into how they work. Shortages here come from the
+    pace of adoption, not the pace of the models.
 - id: mature
   name: Mature state
-  says: A hypothesis of what stays scarce once the fitting is done. Nothing here is a forecast with a date.
+  says: A hypothesis of what stays scarce once firms have fitted AI in. Nothing here is a forecast with a date.
 scarcity:
   slack: probably slack
   easing: probably easing
@@ -296,24 +296,24 @@ moves:
 ground:
 - id: scarcer
   name: Ground that gets scarcer
-  says: Companies here sit on something that is shorter at the mature state than it is today.
+  says: Shorter at the mature state than today.
 - id: holds
   name: Ground that holds
   says: About as short later as it is today.
 - id: eases
   name: Ground that eases
-  says: What is scarce here today becomes plentiful. Companies here need a second act.
+  says: Shorter today than at the mature state.
 categories:
   power_and_sites:
     scarce: Sites already connected to the power grid
     reading: energy
     now: severe
     transition: severe
-    mature: tight
+    mature: severe
     reason: Connections to the power grid take longer to build than anything else in the chain, so the shortage eases last
       and least.
   data_centre_infrastructure:
-    scarce: Cooling and power gear, and crews to install them
+    scarce: Heavy electrical gear, and the trades who install it
     reading: data_centres
     now: tight
     transition: tight
@@ -324,10 +324,11 @@ categories:
     reading: foundry
     now: moderate
     transition: moderate
-    mature: easing
-    reason: New plants are under construction, and chip shortages have ended in gluts before.
+    mature: moderate
+    reason: A plant for the newest process takes years to build and longer to run well, so capacity grows without catching
+      demand.
   memory_storage_and_networking:
-    scarce: High-bandwidth memory
+    scarce: The fast stacked memory that sits beside an AI chip
     reading: memory
     now: moderate
     transition: moderate
@@ -343,15 +344,15 @@ categories:
     scarce: Knowing where each job should run
     now: easing
     transition: moderate
-    mature: tight
+    mature: moderate
     reason: Few firms need it while computing is simply short; it matters more once supply is uneven by place and price.
   general_purpose_models:
     scarce: A lead over the next-best model
     reading: pretraining
     now: easing
     transition: easing
-    mature: slack
-    reason: The gap between the best model and the next has been closing, and open models follow behind.
+    mature: easing
+    reason: Open models chase the frontier within months, so a lead lasts only while it is renewed.
   modality_native_models:
     scarce: Data for sound, images and science
     now: easing
@@ -368,14 +369,14 @@ categories:
     scarce: The skill of shrinking a model without losing quality
     now: easing
     transition: moderate
-    mature: moderate
+    mature: easing
     reason: As more work moves to cheaper and smaller models, the skill is wanted more before tools spread it.
   data_origination:
     scarce: Experts whose judgement can be checked
-    now: tight
+    now: moderate
     transition: moderate
     mature: easing
-    reason: Labs are buying expert work hard today; the need falls as models learn from their own use.
+    reason: Experts in narrow fields are hard to recruit in quantity; the need falls as models learn from their own use.
   data_rights_and_exchange:
     scarce: Rights to archives nobody else holds
     now: moderate
@@ -384,7 +385,7 @@ categories:
     reason: An archive is licensed and stays its owner's, so the shortage neither clears nor grows.
   data_transformation:
     scarce: Clean, traceable data from live work
-    now: moderate
+    now: easing
     transition: moderate
     mature: easing
     reason: The cleaning is being automated by the same models it feeds.
@@ -396,10 +397,10 @@ categories:
     reason: A model's owner can generate it at will, so nothing here stays short.
   training_environments:
     scarce: Realistic practice tasks that can be graded
-    now: tight
+    now: moderate
     transition: moderate
     mature: easing
-    reason: Demand is high today, and building environments is a skill that spreads quickly.
+    reason: Many new sellers have entered, and building environments is a skill that spreads quickly.
   reward_and_verification_systems:
     scarce: A trusted way to grade work
     now: moderate
@@ -408,7 +409,7 @@ categories:
     reason: Grading gets harder as tasks get longer and less clear-cut.
   post_training_and_learning_infrastructure:
     scarce: A model that keeps learning without forgetting
-    now: moderate
+    now: tight
     transition: tight
     mature: moderate
     reason: Deployment makes the lack of learning felt before research closes the gap.
@@ -427,16 +428,17 @@ categories:
     reason: Prices for running a model have fallen steadily, and many firms offer the same service.
   inference_optimization:
     scarce: Engineers who can make serving cheaper
-    now: easing
-    transition: easing
+    now: moderate
+    transition: moderate
     mature: easing
-    reason: The methods are published and copied quickly.
+    reason: Each new model and chip needs the work done again, though the methods are published and copied.
   routing_and_gateways:
     scarce: A record of which choice worked
-    now: easing
-    transition: easing
-    mature: moderate
-    reason: Choosing gets harder as models, prices and places to run multiply.
+    now: slack
+    transition: slack
+    mature: slack
+    reason: Open tools, the clouds and the labs give the choosing away; only the record of where traffic went is hard to
+      copy.
   context_and_memory:
     scarce: A firm's own knowledge, kept fresh and permissioned
     now: moderate
@@ -464,7 +466,7 @@ categories:
     reason: Attacks grow with what agents are allowed to do.
   identity_and_authority:
     scarce: Knowing which agent acts for whom
-    now: moderate
+    now: easing
     transition: tight
     mature: tight
     reason: The need appears once agents act across firms, and no shared way of answering it exists yet.
@@ -476,8 +478,8 @@ categories:
     reason: Every dispute and every review starts from the record, and few agents keep one.
   outcome_verification:
     scarce: Proof that an agent's work was done right
-    now: tight
-    transition: severe
+    now: moderate
+    transition: tight
     mature: severe
     reason: Producing work gets cheaper while checking it does not.
   settlement_and_billing:
@@ -489,7 +491,7 @@ categories:
   liability_and_risk_transfer:
     scarce: Someone solvent to stand behind an agent's work
     now: tight
-    transition: severe
+    transition: tight
     mature: severe
     reason: Insurers are excluding AI from standard cover while firms put more work in agents' hands.
   technical_implementation:
@@ -497,7 +499,7 @@ categories:
     now: tight
     transition: tight
     mature: easing
-    reason: The fitting is done once at each firm, and tools and agents take over more of it.
+    reason: Much of the fitting is done once at each firm, and tools and agents take over more of it.
   context_engineering:
     scarce: A firm's unwritten rules, written down
     now: tight
@@ -521,7 +523,7 @@ categories:
     now: tight
     transition: moderate
     mature: easing
-    reason: Training catches up with demand in a few years, as it has for past technologies.
+    reason: People can be trained faster than firms can be rebuilt, so this shortage passes first.
   horizontal_copilots:
     scarce: 'Little: the labs sell their own'
     now: slack
@@ -557,7 +559,7 @@ categories:
     now: slack
     transition: slack
     mature: easing
-    reason: Attention is the limit, and a few products already hold much of it.
+    reason: Assistants are free and plentiful; the habit a few products hold is what is hard to win.
 shifts:
   stall_capability/unclear:
     technical_implementation:
@@ -572,16 +574,22 @@ shifts:
     general_purpose_models:
       move: eases
       reason: With no new frontier, the followers catch up.
-    training_environments:
+    power_and_sites:
       move: eases
-      reason: Labs stop buying practice tasks for a frontier that has stopped.
-    inference_supply:
+      reason: Demand for new computing eases, and with it the queue for power.
+    talent_production:
+      move: tightens
+      reason: Spreading what already works takes people who can deploy it.
+    identity_and_authority:
       move: eases
-      reason: Demand grows more slowly against capacity already built.
+      reason: Agents that stay inside a person's session need no identity of their own.
+    settlement_and_billing:
+      move: eases
+      reason: Agents that cannot finish whole jobs do not buy from each other.
   stall_money/unclear:
     power_and_sites:
       move: eases
-      reason: Building stops, and with it the queue for connections.
+      reason: Building slows, and the queue for connections shortens.
     semiconductor_supply_chain:
       move: eases
       reason: Orders for chips are cut.
@@ -591,17 +599,26 @@ shifts:
     data_origination:
       move: eases
       reason: A lab short of money buys less expert work.
+    data_centre_infrastructure:
+      move: eases
+      reason: Less is built, so the gear and the crews are easier to get.
   steady/unclear:
     adoption_and_change:
       move: tightens
       reason: Adoption at the pace of past technologies keeps the reorganising of work the limit for longer.
+    technical_implementation:
+      move: tightens
+      reason: Adoption at the pace of past technologies means years of fitting work.
+    context_engineering:
+      move: tightens
+      reason: Slow adoption keeps the knowledge in people's heads for longer.
+    talent_production:
+      move: tightens
+      reason: Years of fitting work need people who can deploy.
   steady/priced:
     outcome_verification:
       move: tightens
       reason: A payer who is liable wants proof.
-    liability_and_risk_transfer:
-      move: tightens
-      reason: Priced risk needs someone to carry it.
     provenance_and_audit:
       move: tightens
       reason: A claim is settled from the record.
@@ -611,12 +628,12 @@ shifts:
     identity_and_authority:
       move: tightens
       reason: Liability follows whoever the agent acted for.
-    technical_implementation:
-      move: eases
-      reason: Clear rules let firms adopt faster, so the fitting is done sooner.
-    talent_production:
-      move: eases
-      reason: Faster adoption trains more people sooner.
+    security:
+      move: tightens
+      reason: Each claim needs someone to say how the agent was turned or went wrong.
+    autonomous_services:
+      move: tightens
+      reason: Buyers want one accountable party, and there are few.
   steady/licensed:
     identity_and_authority:
       move: tightens
@@ -648,7 +665,7 @@ shifts:
       reason: More work is done with fewer people watching.
     context_and_memory:
       move: tightens
-      reason: Faster agents are held back by what they know about the firm.
+      reason: Faster agents are held back by access to the firm's records, not by skill.
     technical_implementation:
       move: eases
       reason: Agents do more of the fitting themselves.
@@ -658,16 +675,22 @@ shifts:
     talent_production:
       move: eases
       reason: There is less deployment work left for people.
+    data_centre_infrastructure:
+      move: tightens
+      reason: The buildings and their power gear have to be built for that computing.
+    general_purpose_models:
+      move: tightens
+      reason: When each model speeds up the next, the leading labs pull away.
+    security:
+      move: tightens
+      reason: Faster agents doing more work can be turned in more places.
+    provenance_and_audit:
+      move: tightens
+      reason: Faster agents doing more work leave more to reconstruct after the fact.
   automated_research/licensed:
     evals_and_assurance:
       move: tightens
       reason: The race is slowed until systems can be checked.
-    security:
-      move: tightens
-      reason: A race is slowed because of what its systems could do in the wrong hands.
     general_purpose_models:
       move: tightens
-      reason: A lead that is held on purpose stays a lead.
-    semiconductor_supply_chain:
-      move: eases
-      reason: A deliberate slowdown eases the rush for chips.
+      reason: The leading lab sits on the committee that slows the race, so its lead is kept.
