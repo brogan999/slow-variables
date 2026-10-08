@@ -729,7 +729,7 @@ export type ChainAtlasDoc = {
   ground: { id: string; name: string; says: string; categories: string[] }[];
   chains: { id: string; when: string; claim: string; state: string; state_word: string; href: string; says: string; parts: { id: string; number: string; name: string; href: string }[]; businesses: { id: string; n: number; name: string }[] }[];
   primitives: { id: string; name: string; what: string; why: string; businesses: { n: number; name: string }[] }[];
-  priors: { id: string; name: string; assumptions: { text: string; exception?: string; weakened_by: string }[] }[];
+  priors: { id: string; name: string; assumptions: { text: string; exception?: string; weakened_by: string; after?: { who: string; href: string } }[] }[];
   priors_by: string;
   made_by: { model: string; date: string; method: string; reviewed_by: string } | null;
   futures: { id: string; key: string; group: string; name: string; says: string; argued_by: { who: string; field: string; href: string }[]; bears_for: { text: string; href: string }[]; bears_against: { text: string; href: string }[] }[];

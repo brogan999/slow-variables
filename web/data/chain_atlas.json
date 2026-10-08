@@ -28,7 +28,7 @@
    "says": "While buildings and their power hookups bind, a business that finds where computing can run is selling into the shortage.",
    "state": "holding",
    "state_word": "holding tonight",
-   "when": "Short now"
+   "when": "Now"
   },
   {
    "businesses": [],
@@ -36,10 +36,10 @@
    "href": "/argument/migration#predictions",
    "id": "capital_now",
    "parts": [],
-   "says": "No part of the map is short of money, so money alone is no advantage for any business here.",
+   "says": "The site reads money as plentiful, so money alone is no advantage; the businesses that need most of it are weakened in the future where funding stalls.",
    "state": "holding",
    "state_word": "holding tonight",
-   "when": "Short now"
+   "when": "Now"
   },
   {
    "businesses": [],
@@ -60,10 +60,10 @@
      "number": "1.3"
     }
    ],
-   "says": "None of the businesses here sells into this shortage; it belongs to the chip makers.",
+   "says": "No business here sells into memory or packaging; if they are short, the makers of memory and the firms that package chips are paid.",
    "state": "untestable",
    "state_word": "cannot be tested yet",
-   "when": "Short now"
+   "when": "Now"
   },
   {
    "businesses": [
@@ -99,7 +99,7 @@
    "says": "If the shortage moves here, graded expert work and the means of grading it are what the labs buy.",
    "state": "failing",
    "state_word": "failing tonight",
-   "when": "Where the shortage goes next"
+   "when": "Next"
   },
   {
    "businesses": [
@@ -109,19 +109,29 @@
      "name": "Outcome verification with pay-per-verified-result billing"
     },
     {
-     "id": "agent_audit_trail",
-     "n": 5,
-     "name": "Tamper-proof audit trail for what agents did"
-    },
-    {
      "id": "agent_authority_registry",
      "n": 4,
      "name": "Know-your-agent and delegated-authority registry"
     },
     {
+     "id": "agent_audit_trail",
+     "n": 5,
+     "name": "Tamper-proof audit trail for what agents did"
+    },
+    {
+     "id": "ai_warranty",
+     "n": 6,
+     "name": "AI warranty backed by a pool of loss data"
+    },
+    {
      "id": "agent_payments",
      "n": 9,
      "name": "Escrow that pays an agent only when its work passes a check"
+    },
+    {
+     "id": "agent_incident_response",
+     "n": 20,
+     "name": "Incident response and forensics for agent failures"
     }
    ],
    "claim": "Proof of what an AI agent (a model that carries out tasks with software tools on a person's behalf) did, and who answers for it, becomes a bottleneck once agents handle money.",
@@ -151,12 +161,18 @@
      "id": "settlement_and_billing",
      "name": "Settlement and billing",
      "number": "5.5"
+    },
+    {
+     "href": "#ca-g-liability_and_risk_transfer",
+     "id": "liability_and_risk_transfer",
+     "name": "Liability and risk transfer",
+     "number": "5.6"
     }
    ],
-   "says": "Much of the Build group sells into this shortage, which nobody can yet measure.",
+   "says": "If proof of what an agent did becomes the bottleneck, these businesses are the ones that sell it; the site cannot yet test whether it has.",
    "state": "untestable",
    "state_word": "cannot be tested yet",
-   "when": "Watched, not yet measurable"
+   "when": "Watch"
   }
  ],
  "effects": [
@@ -573,10 +589,6 @@
     {
      "builds": [
       {
-       "id": "test",
-       "name": "The test"
-      },
-      {
        "id": "backing",
        "name": "The backing"
       }
@@ -740,12 +752,12 @@
     {
      "builds": [
       {
-       "id": "record",
-       "name": "The record"
-      },
-      {
        "id": "test",
        "name": "The test"
+      },
+      {
+       "id": "yardstick",
+       "name": "The yardstick"
       }
      ],
      "call": "build",
@@ -1562,10 +1574,6 @@
       {
        "id": "record",
        "name": "The record"
-      },
-      {
-       "id": "test",
-       "name": "The test"
       }
      ],
      "call": "cond",
@@ -2170,10 +2178,6 @@
     {
      "builds": [
       {
-       "id": "record",
-       "name": "The record"
-      },
-      {
        "id": "backing",
        "name": "The backing"
       }
@@ -2326,12 +2330,7 @@
      "take": "A natural next product for whoever already holds the audit trail. Demand waits on failures that are public."
     },
     {
-     "builds": [
-      {
-       "id": "backing",
-       "name": "The backing"
-      }
-     ],
+     "builds": [],
      "call": "cond",
      "holds": false,
      "href": "/value-chain/opportunities#op-outcome_priced_rollup",
@@ -2472,10 +2471,6 @@
     },
     {
      "builds": [
-      {
-       "id": "yardstick",
-       "name": "The yardstick"
-      },
       {
        "id": "choice",
        "name": "The choice"
@@ -2660,6 +2655,10 @@
       {
        "id": "backing",
        "name": "The backing"
+      },
+      {
+       "id": "yardstick",
+       "name": "The yardstick"
       }
      ],
      "call": "cond",
@@ -2802,6 +2801,10 @@
     },
     {
      "builds": [
+      {
+       "id": "record",
+       "name": "The record"
+      },
       {
        "id": "choice",
        "name": "The choice"
@@ -2946,12 +2949,7 @@
      "take": "Worth most as the standard; without that, what is left is each customer's wiring. The software vendors and the labs want the same place."
     },
     {
-     "builds": [
-      {
-       "id": "test",
-       "name": "The test"
-      }
-     ],
+     "builds": [],
      "call": "cond",
      "holds": false,
      "href": "/value-chain/opportunities#op-pooled_expert_records",
@@ -3688,7 +3686,7 @@
  ],
  "made_by": {
   "date": "2026-10-08",
-  "method": "One model read each published business beside the site's readings of the value chain and each future the outlook's grid fills, gave the business a call with one line of reasoning and the one thing that would undo it, and said in words what each future does to it. A future it left out changes nothing. The same model then said, for each part of the map in scope, what is scarce there, how short it is now, in the transition and at the mature state, and which futures tighten or ease it, each with a reason. The second group of futures are each a model's summary of what named writers on the outlook argue, and were judged the same way. It also tied each of the site's migration predictions to parts of the map and to businesses, and said which of five durable things each business builds.",
+  "method": "One model read each published business beside the site's readings of the value chain and each future the outlook's grid fills, gave the business a call with one line of reasoning and the one thing that would undo it, and said in words what each future does to it. A future it left out changes nothing. The same model then said, for each part of the map in scope, what is scarce there, how short it is now, in the transition and at the mature state, and which futures tighten or ease it, each with a reason. The second group of futures are each a model's summary of what named writers on the outlook argue, and were judged the same way. It also tied each of the site's migration predictions to parts of the map and to businesses, and said which of the owner's lasting things each business builds.",
   "model": "claude-opus-5-5",
   "reviewed_by": "separate reviewing runs of the same model, which changed calls, takes, words and reasons, withdrew some effects and moves and added others; no person reviewed each one"
  },
@@ -16058,10 +16056,6 @@
   {
    "businesses": [
     {
-     "n": 1,
-     "name": "Outcome verification with pay-per-verified-result billing"
-    },
-    {
      "n": 5,
      "name": "Tamper-proof audit trail for what agents did"
     },
@@ -16082,8 +16076,8 @@
      "name": "Deployment that leaves behind the platform the customer runs on"
     },
     {
-     "n": 20,
-     "name": "Incident response and forensics for agent failures"
+     "n": 10,
+     "name": "The standard way agents get permission into business software"
     },
     {
      "n": 12,
@@ -16098,20 +16092,8 @@
   {
    "businesses": [
     {
-     "n": 2,
-     "name": "Independent sign-off for AI in regulated work"
-    },
-    {
      "n": 1,
      "name": "Outcome verification with pay-per-verified-result billing"
-    },
-    {
-     "n": 3,
-     "name": "A model that keeps learning inside one customer's work"
-    },
-    {
-     "n": 7,
-     "name": "Graded expert-work records pooled across buyers"
     }
    ],
    "id": "test",
@@ -16150,10 +16132,6 @@
      "name": "Incident response and forensics for agent failures"
     },
     {
-     "n": 14,
-     "name": "An AI roll-up that moves its clients to fixed fees"
-    },
-    {
      "n": 9,
      "name": "Escrow that pays an agent only when its work passes a check"
     }
@@ -16166,8 +16144,12 @@
   {
    "businesses": [
     {
-     "n": 16,
-     "name": "Moving computing to where power is available"
+     "n": 1,
+     "name": "Outcome verification with pay-per-verified-result billing"
+    },
+    {
+     "n": 9,
+     "name": "Escrow that pays an agent only when its work passes a check"
     },
     {
      "n": 8,
@@ -16220,7 +16202,7 @@
     {
      "exception": "Where a regulator dictates the order.",
      "text": "The way in is the customer's most pressing problem.",
-     "weakened_by": "Products winning that solve a lesser problem first."
+     "weakened_by": "Products that began with a minor convenience taking the main budget later."
     },
     {
      "exception": "Low-stakes work.",
@@ -16229,8 +16211,8 @@
     },
     {
      "exception": "When a supplier is far ahead.",
-     "text": "Customers resist depending on a single model or supplier.",
-     "weakened_by": "Firms standardising on a single lab without a fallback."
+     "text": "Customers want to be able to leave a model or supplier, even when they stay.",
+     "weakened_by": "Firms giving up the means to switch: a single lab's tools throughout, and no other supplier tested."
     },
     {
      "text": "Customers expect better economics over time, though the bill may still rise if they use more.",
@@ -16247,12 +16229,16 @@
      "weakened_by": "Agents becoming cheap and reliable at checking their own work."
     },
     {
+     "after": {
+      "href": "/firm",
+      "who": "Friedrich Hayek"
+     },
      "text": "What a firm knows is local and goes stale, so it has to be kept fresh and tied to results.",
      "weakened_by": "Agents learning a firm's unwritten rules from its records alone."
     },
     {
      "text": "An agent's right to act stays limited: capability does not confer permission.",
-     "weakened_by": "Agents acting with full authority and no losses following."
+     "weakened_by": "Firms letting agents sign, pay and commit with no limit set, and no losses following."
     },
     {
      "text": "Physics still matters: energy, delay, memory and distance limit where AI can run.",
@@ -16269,16 +16255,24 @@
   {
    "assumptions": [
     {
+     "after": {
+      "href": "/diffusion",
+      "who": "Arvind Narayanan and Sayash Kapoor"
+     },
      "text": "Adoption lags capability: budgets, rules and trust move slower than the models.",
      "weakened_by": "Firms' use of AI rising as fast as the models improve."
     },
     {
+     "after": {
+      "href": "/argument/migration",
+      "who": "the site's migration essay, which follows Eliyahu Goldratt and David Ricardo"
+     },
      "text": "Competition moves the shortage and does not remove it: when a part becomes plentiful, the profit moves to what is still scarce.",
      "weakened_by": "Profits falling across the whole chain at once."
     },
     {
      "text": "Responsibility has to land on someone.",
-     "weakened_by": "Courts leaving losses where they fall."
+     "weakened_by": "A court or regulator treating an agent's act as nobody's."
     },
     {
      "text": "Customers differ, so shared infrastructure will sit beside local set-up and judgement.",
@@ -16286,14 +16280,14 @@
     },
     {
      "text": "Evidence has to change decisions: a rating with no source, no test and no review date becomes decoration.",
-     "weakened_by": "Ratings on this page going unrevised while the readings under them move."
+     "weakened_by": "Calls on this page being kept after the readings under them have moved."
     }
    ],
    "id": "markets",
    "name": "About markets and institutions"
   }
  ],
- "priors_by": "The owner's planning assumptions, reworded by a model. They are what the calls on this page take for granted, not readings and not findings.",
+ "priors_by": "The planning assumptions of the site's owner, reworded by a model. They are what the calls on this page take for granted, not readings and not findings. Where one follows a writer the site introduces elsewhere, it says so.",
  "times": [
   {
    "id": "now",

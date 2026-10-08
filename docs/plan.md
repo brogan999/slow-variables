@@ -1299,6 +1299,8 @@ The last pieces of the owner's original frame, added to `/value-chain/atlas`.
 **Judgement calls.**
 
 - *A prediction that is failing tonight is shown as failing.* The practice-data prediction's test is not passing; the business tied to it is shown beside that state, not shielded from it.
-- *Two businesses build none of the five* (training deployment engineers and tuning open models): the table leaves them out; it does not stretch a category to fit.
+- *Four businesses build none of the five* (training deployment engineers, tuning open models, the fixed-fee roll-up and pooled expert records): the table leaves them out; it does not stretch a category to fit.
+- *The assumptions stay the owner's.* The reviewing run would withdraw one (that evidence has to change decisions) as a rule about the page, not about the world. It is kept, with a plainer test of what would weaken it, because it is the owner's to drop. Three that restate a named writer's argument now say whose it is.
+- *The reviewing run's other changes are made:* labels that asserted a shortage ("short now" beside "money is not what is scarce") are plain; the agent-proof chain names the warranty and incident-response businesses and the liability part; assignments of lasting things that stretched a record's own durable asset were withdrawn; the page's foot says which words are the site's, which the owner's and which a model's.
 
 **Still to come.** The sources for the country-split future.

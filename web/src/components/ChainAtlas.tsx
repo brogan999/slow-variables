@@ -168,12 +168,12 @@ export function ChainAtlas({ d }: { d: ChainAtlasDoc }) {
         <ul className="flex flex-col">
           {d.chains.map((c) => (
             <li key={c.id} className="grid gap-x-6 gap-y-1 border-t border-grid py-3 md:grid-cols-[14rem_minmax(0,1fr)]">
-              <div className="flex flex-col gap-0.5"><span className={h4}>{c.when}</span><span className="font-mono text-[11px] text-ink-2">{c.state_word}</span></div>
+              <div className="flex flex-col gap-0.5"><span className={h4}>{c.when}</span><span className="font-mono text-[11px] text-ink-2">The site&apos;s test: {c.state_word}</span></div>
               <div className="flex flex-col gap-1 text-[13px] text-ink-2">
                 <p className="text-[15px] font-semibold leading-snug text-ink"><Link href={c.href} className={link}>{c.claim}</Link></p>
                 <p className="border-l-2 border-dotted border-axis pl-2">{c.says} <span className="text-xs text-muted">A model&apos;s judgement.</span></p>
                 {c.parts.length ? <p>On the map: {c.parts.map((x, i) => <span key={x.id}>{i ? ", " : ""}<Link href={x.href} className={link}>{x.number} {x.name}</Link></span>)}.</p> : null}
-                {c.businesses.length ? <p>Businesses that ride it: {c.businesses.map((x, i) => <span key={x.id}>{i ? "; " : ""}<span className="font-mono text-muted">{x.n}</span> {x.name}</span>)}.</p> : null}
+                {c.businesses.length ? <p>Businesses that sell into it: {c.businesses.map((x, i) => <span key={x.id}>{i ? "; " : ""}<span className="font-mono text-muted">{x.n}</span> {x.name}</span>)}.</p> : null}
               </div>
             </li>
           ))}
@@ -182,10 +182,11 @@ export function ChainAtlas({ d }: { d: ChainAtlasDoc }) {
       <section id="ca-builds" className="flex flex-col gap-3 scroll-mt-24">
         <div>
           <h2 className="text-xl font-bold tracking-tight">What a durable business builds</h2>
-          <p className="text-sm text-ink-2 max-w-[72ch]">Whatever the future, a business lasts by building up something a better model does not replace. These are the owner&apos;s; which business builds which is a model&apos;s judgement.</p>
+          <p className="text-sm text-ink-2 max-w-[72ch]">These are five things the site&apos;s owner holds that a better model does not replace. Building one is not enough to keep a profit: the calls above say which businesses do. Which business builds which is a model&apos;s judgement.</p>
         </div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="What a durable business builds">
           <table className="w-full min-w-[44rem] text-[13px]">
+            <caption className="sr-only">The lasting things, what each is, why it lasts and which businesses build it</caption>
             <thead><tr className="text-left text-[10.5px] font-semibold uppercase tracking-[0.08em] text-muted"><th scope="col" className="py-1 pr-3">It builds</th><th scope="col" className="py-1 pr-3">What that is</th><th scope="col" className="py-1 pr-3">Why it lasts</th><th scope="col" className="py-1">Businesses that build it, a model&apos;s judgement</th></tr></thead>
             <tbody>
               {d.primitives.map((p) => (
@@ -201,13 +202,13 @@ export function ChainAtlas({ d }: { d: ChainAtlasDoc }) {
         </div>
       </section>
       <details id="ca-priors" className="fig p-3 scroll-mt-24">
-        <summary className="font-mono text-[11px] uppercase tracking-[0.08em] text-ink-2">The planning assumptions, not readings: what the calls take for granted</summary>
+        <summary><h2 className="inline font-mono text-[11px] font-normal uppercase tracking-[0.08em] text-ink-2">The planning assumptions, not readings: what the calls take for granted</h2></summary>
         <p className="mt-2 text-sm text-ink-2 max-w-[72ch]">{d.priors_by}</p>
         {d.priors.map((g) => (
           <div key={g.id} className="mt-3">
             <h3 className={h4}>{g.name}</h3>
             <ul className="mt-1 flex flex-col gap-1.5 text-[13px] text-ink-2">
-              {g.assumptions.map((a) => <li key={a.text}><span className="font-medium text-ink">{a.text}</span>{a.exception ? <> <em>Exception:</em> {a.exception}</> : null} <em>Weakened by:</em> {a.weakened_by}</li>)}
+              {g.assumptions.map((a) => <li key={a.text}><span className="font-medium text-ink">{a.text}</span>{a.after ? <> After <Link href={a.after.href} className={link}>{a.after.who}</Link>.</> : null}{a.exception ? <> <span className="font-medium">Exception:</span> {a.exception}</> : null} <span className="font-medium">Weakened by:</span> {a.weakened_by}</li>)}
             </ul>
           </div>
         ))}
@@ -228,7 +229,7 @@ export function ChainAtlas({ d }: { d: ChainAtlasDoc }) {
           </table>
         </div>
       </details>
-      {d.made_by ? <p className="text-xs text-muted max-w-[72ch]">A model&apos;s judgement, not a reading. Made {d.made_by.date} by Claude, a model made by Anthropic ({d.made_by.model}). {d.made_by.method} Reviewed by {d.made_by.reviewed_by}. Nothing here is scored, and no status, tally or answer on the site reads it.</p> : null}
+      {d.made_by ? <p className="text-xs text-muted max-w-[72ch]">A model&apos;s judgement, not a reading. Made {d.made_by.date} by Claude, a model made by Anthropic ({d.made_by.model}). {d.made_by.method} Reviewed by {d.made_by.reviewed_by}. That covers every call, effect, word and move on this page, except the predictions and their states under “where the shortage goes next”, which are the site&apos;s own and tested nightly, and the lasting things and the planning assumptions, which are the site&apos;s owner&apos;s. No status, tally or answer on the site reads a judgement made here.</p> : null}
     </div>
   );
 }

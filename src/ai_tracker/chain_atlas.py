@@ -101,6 +101,9 @@ def _extra_problems(spec: dict[str, Any], published: set[str]) -> list[str]:
     chains = spec.get("chains") or []
     for missing in [p for p in predictions if p not in [c.get("id") for c in chains]]:
         out.append(f"chain atlas: migration prediction {missing} has no chain")
+    ids = [c.get("id") for c in chains]
+    for dup in sorted({i for i in ids if ids.count(i) > 1}):
+        out.append(f"chain atlas: chain {dup} is given twice")
     for c in chains:
         w = f"chain atlas: chain {c.get('id')}"
         if c.get("id") not in predictions:
@@ -116,10 +119,27 @@ def _extra_problems(spec: dict[str, Any], published: set[str]) -> list[str]:
             out.append(f"{w} says nothing")
         elif _figure(says):
             out.append(f"{w} types a figure, a size word or an address")
-    prims = {p.get("id") for p in spec.get("primitives") or []}
+    listed = [p.get("id") for p in spec.get("primitives") or []]
+    for dup in sorted({i for i in listed if listed.count(i) > 1}):
+        out.append(f"chain atlas: lasting thing {dup} is given twice")
+    for p in spec.get("primitives") or []:
+        for k in ("name", "what", "why"):
+            if not str(p.get(k) or "").strip():
+                out.append(f"chain atlas: lasting thing {p.get('id')} has no {k}")
+            elif _figure(str(p[k])):
+                out.append(f"chain atlas: lasting thing {p.get('id')} types a figure, a size word or an address")
+    pages = Path(__file__).resolve().parents[2] / "web" / "src" / "app"
+    for g in spec.get("priors") or []:
+        for a in g.get("assumptions") or []:
+            after = a.get("after")
+            if after and (not after.get("who") or not (pages / str(after.get("href") or "").split("#")[0].strip("/")).is_dir()):
+                out.append(f"chain atlas: an assumption follows {after.get('who')} at {after.get('href')}, which is not a page that introduces them")
+    prims = set(listed)
     for bid, built in (spec.get("builds") or {}).items():
         if bid not in published:
             out.append(f"chain atlas: builds names {bid}, which is not a published business")
+        if not built:
+            out.append(f"chain atlas: {bid} is listed as building nothing; leave it out")
         for i in built or []:
             if i not in prims:
                 out.append(f"chain atlas: {bid} builds {i}, which is not one of the durable things the file defines")
@@ -405,7 +425,7 @@ def build(spec: dict[str, Any], opps_doc: dict[str, Any], outlook: dict[str, Any
             "href": "/argument/migration#predictions",
             "says": c["says"],
             "parts": [{"id": i, "number": names[i]["number"], "name": names[i]["name"], "href": f"#ca-g-{i}"} for i in c.get("parts") or [] if i in names],
-            "businesses": [{"id": i, "n": rows[i]["n"], "name": rows[i]["name"]} for i in c.get("businesses") or [] if i in rows],
+            "businesses": sorted(({"id": i, "n": rows[i]["n"], "name": rows[i]["name"]} for i in c.get("businesses") or [] if i in rows), key=lambda x: x["n"]),
         }
         for p in predictions
         if (c := chain.get(p["id"]))
