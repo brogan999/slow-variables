@@ -70,7 +70,9 @@ export const PAGES: Record<string, Page> = {
   ] },
   "/value-chain/atlas": { name: "What to build, future by future", question: "Which businesses are worth building, and which hold whatever happens?", sections: [
     ["ca-own", "Test a business of your own", "What would the site's records say about a business that is not on the list?"],
+    ["ca-map", "The chain, and what is scarce on it", "How short is each part of the chain now, in the transition and at the mature state, and what does each future do to it?"],
     ["ca-board", "A call on each business", "Which should be built, which only on a condition, and what does each future do to them?"],
+    ["ca-ground", "The ground under today's companies", "Which parts of the chain get scarcer, which hold and which ease, and which companies sit on each?"],
     ["ca-table", "Every business in every future", "Which businesses does each future strengthen, weaken or break?"],
   ] },
   "/stack": { name: "The stack", question: "What are the layers and sub-layers, and which companies does the tracker follow in each?",

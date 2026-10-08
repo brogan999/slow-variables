@@ -717,7 +717,16 @@ export type AtlasBusiness = {
   id: string; n: number; name: string; call: string; take: string; kills: string; stage: string | null; holds: boolean; problem: string; profit: string;
   primary: { number: string | null; name: string; href: string }; href: string; marks: AtlasMark[]; moved: AtlasMark[];
 };
+export type AtlasTime = "now" | "transition" | "mature";
+export type AtlasState = { word: string; level: number; measured: boolean; label: string };
+export type AtlasTile = {
+  id: string; number: string; name: string; scarce: string; reason: string; n_entities: number; href: string; businesses: number[];
+  states: Record<string, Record<AtlasTime, AtlasState>>; moved: { key: string; name: string; move: string; word: string; reason: string }[];
+};
 export type ChainAtlasDoc = {
+  times: { id: AtlasTime; name: string; says: string }[];
+  map: { layers: { number: number; name: string; categories: AtlasTile[] }[] };
+  ground: { id: string; name: string; says: string; categories: string[] }[];
   made_by: { model: string; date: string; method: string; reviewed_by: string } | null;
   futures: { id: string; key: string; name: string; says: string }[];
   not_judged: { name: string; why: string }[];

@@ -262,6 +262,6 @@ def test_the_map_is_the_one_island_and_looks_up_every_state():
     island = (WEB / "components" / "ChainAtlasMap.tsx").read_text()
     comp = (WEB / "components" / "ChainAtlas.tsx").read_text()
     assert '"use client"' in island and '"use client"' not in comp and "<ChainAtlasMap" in comp
-    assert "states[future][time]" in island and 'name="ca-time"' in comp
+    assert "c.states[future]" in island and 'name="ca-time"' in comp
     assert "measured" in island and "a model&apos;s judgement" in island
     assert 'id="ca-ground"' in comp and '"ca-map"' in (WEB / "lib" / "contents.ts").read_text()
