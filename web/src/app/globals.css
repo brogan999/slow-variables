@@ -203,6 +203,7 @@ body:has(.ask-shell) {
 .chain-atlas:has(input:checked:not(#ca-none)) .ca-says[data-f="none"] { display: none; }
 .chain-atlas .ca-n { display: grid; place-items: center; width: 1.9rem; height: 1.9rem; border-radius: 999px; font-family: var(--font-mono); font-size: 13px; box-shadow: inset 0 0 0 1.5px var(--ink); }
 .chain-atlas .ca-strip { display: grid; grid-auto-flow: column; grid-auto-columns: 11px; gap: 2px; }
+.chain-atlas .ca-strip i[data-g="grid"] + i[data-g="owners"] { margin-left: 5px; } /* the two groups of futures read apart */
 .chain-atlas .ca-strip i { height: 20px; border-radius: 1px; background: var(--surface-2); }
 .chain-atlas .ca-strip i[data-e="stronger"], .chain-atlas .ca-key i[data-e="stronger"] { background: var(--ink); }
 .chain-atlas .ca-strip i[data-e="weaker"], .chain-atlas .ca-key i[data-e="weaker"] { background: none; border: 1.5px dashed var(--ink-2); }

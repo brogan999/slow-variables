@@ -32,6 +32,56 @@ def _cells(outlook: dict[str, Any]) -> list[dict[str, Any]]:
     return (outlook.get("scenarios") or {}).get("cells") or []
 
 
+def _future_ids(spec: dict[str, Any], outlook: dict[str, Any]) -> set[str]:
+    """Every future a judgement may name: the grid's filled cells and the ownership futures the file defines."""
+    return {f"{c['progress']}/{c['rules']}" for c in _cells(outlook)} | {f"owners/{o.get('id')}" for o in spec.get("ownership") or []}
+
+
+def _futures(spec: dict[str, Any], outlook: dict[str, Any], texts: dict[str, str]) -> list[dict[str, Any]]:
+    """The dial, in order: the grid's cells a writer argues, then the ownership futures, each with who argues it and
+    the outlook's claims that bear on it."""
+    sc = outlook.get("scenarios") or {}
+    label = {a["id"]: a["label"] for k in ("progress", "rules") for a in sc.get(k) or []}
+    sources = {x["id"]: x for x in outlook.get("sources") or []}
+    claims = {c["id"] for c in outlook.get("claims") or []}
+
+    def who(ids: list[str]) -> list[dict[str, str]]:
+        """Each writer by name and by what they study, as the outlook's own source record has them."""
+        return [{"who": sources[i]["who"], "field": sources[i].get("field") or "", "href": f"/outlook#source-{i}"} for i in ids if i in sources]
+
+    def bears(ids: list[str]) -> list[dict[str, str]]:
+        """A claim the outlook tests, in the outlook's own resolved words (`texts`), never a title of ours."""
+        return [{"text": texts[i], "href": f"/outlook#claim-{i}"} for i in dict.fromkeys(ids) if i in claims and i in texts]
+
+    grid = [
+        {
+            "id": f"{c['progress']}/{c['rules']}",
+            "key": f"{c['progress']}-{c['rules']}",
+            "group": "grid",
+            "name": f"{label[c['progress']]}, {label[c['rules']][:1].lower()}{label[c['rules']][1:]}",
+            "says": c.get("says") or "",
+            "argued_by": who(c.get("argued_by") or []),
+            "bears_for": bears(c.get("signposts") or []),
+            "bears_against": [],
+        }
+        for c in _cells(outlook)
+    ]
+    owners = [
+        {
+            "id": f"owners/{o['id']}",
+            "key": f"owners-{o['id']}",
+            "group": "owners",
+            "name": o["name"],
+            "says": o["says"],
+            "argued_by": who(o.get("argued_by") or []),
+            "bears_for": bears(o.get("bears_for") or []),
+            "bears_against": bears(o.get("bears_against") or []),
+        }
+        for o in spec.get("ownership") or []
+    ]
+    return [*grid, *owners]
+
+
 def _in_scope(map_doc: dict[str, Any]) -> list[dict[str, Any]]:
     """The map's categories a path is owed for, from the seed or from the export: numbered, in scope, not the outcomes row."""
     cats = map_doc.get("categories") or [c for layer in map_doc.get("layers") or [] for c in layer.get("categories") or []]
@@ -50,14 +100,39 @@ def problems(spec: dict[str, Any], opps: dict[str, Any], outlook: dict[str, Any]
             out.append(f"chain atlas: made_by has no {k}")
     calls = {c["id"] for c in spec.get("calls") or []}
     published = {o["id"] for o in opps.get("opportunities") or [] if o.get("published")}
-    futures = {f"{c['progress']}/{c['rules']}" for c in _cells(outlook)}
+    futures = _future_ids(spec, outlook)
     skipped = spec.get("not_judged") or {}
     for fid in sorted(futures):
         if not re.fullmatch(r"[a-z0-9_]+/[a-z0-9_]+", fid):
-            out.append(f"chain atlas: future {fid} cannot name a mark on the page")
+            out.append(f"chain atlas: future {fid} cannot name a mark on the page: lower-case letters, digits and underscores only")
+    sources = {x["id"] for x in outlook.get("sources") or []}
+    claims = {c["id"] for c in outlook.get("claims") or []}
+    owned = [o.get("id") for o in spec.get("ownership") or []]
+    for dup in sorted({i for i in owned if owned.count(i) > 1}):
+        out.append(f"chain atlas: ownership future {dup} is defined twice")
+    if owned and [g.get("id") for g in spec.get("future_groups") or []] != ["grid", "owners"]:
+        out.append("chain atlas: future_groups must be grid, owners, in that order")
+    for o in spec.get("ownership") or []:
+        w = f"chain atlas: ownership future {o.get('id')}"
+        if not o.get("argued_by"):
+            out.append(f"{w}: no named writer argues it, so it cannot be on the dial")
+        for i in o.get("argued_by") or []:
+            if i not in sources:
+                out.append(f"{w} is argued by {i}, which is not a source on the outlook")
+        for i in [*(o.get("bears_for") or []), *(o.get("bears_against") or [])]:
+            if i not in claims:
+                out.append(f"{w} names {i}, which is not a claim on the outlook")
+        for k in ("name", "says"):
+            if not str(o.get(k) or "").strip():
+                out.append(f"{w} has no {k}")
+            elif _figure(str(o[k])):
+                out.append(f"{w}: its {k} types a figure, a size word or an address")
+    for row in spec.get("waiting") or []:
+        if not str(row.get("name") or "").strip() or not str(row.get("why") or "").strip():
+            out.append("chain atlas: a future that waits has a name and says why")
     for fid, why in skipped.items():
         if fid not in futures:
-            out.append(f"chain atlas: not_judged names {fid}, which is not a future the outlook's grid fills")
+            out.append(f"chain atlas: not_judged names {fid}, which is not a future on the dial")
         if not str(why or "").strip():
             out.append(f"chain atlas: {fid} is not judged and nothing says why not")
     for c in spec.get("calls") or []:
@@ -98,7 +173,7 @@ def _map_problems(spec: dict[str, Any], outlook: dict[str, Any], map_doc: dict[s
     gauges = {i["id"] for i in yaml.safe_load(TIGHTNESS.read_text())["inputs"]}
     owed = {c["id"] for c in _in_scope(map_doc)}
     cats = spec.get("categories") or {}
-    futures = {f"{c['progress']}/{c['rules']}" for c in _cells(outlook)}
+    futures = _future_ids(spec, outlook)
     probably = spec.get("scarcity") or {}
     if set(probably) != set(ORDER):
         out.append(f"chain atlas: scarcity must give a judged word for each of {', '.join(ORDER)}")
@@ -207,21 +282,11 @@ def _map(spec: dict[str, Any], futures: list[dict[str, Any]], map_doc: dict[str,
     }
 
 
-def build(spec: dict[str, Any], opps_doc: dict[str, Any], outlook: dict[str, Any], map_doc: dict[str, Any], scored: dict[str, dict[str, Any]]) -> dict[str, Any]:
-    """web/data/chain_atlas.json. `opps_doc` is the opportunities export (the records, their numbers and the sequence),
+def build(spec: dict[str, Any], opps_doc: dict[str, Any], outlook: dict[str, Any], map_doc: dict[str, Any], scored: dict[str, dict[str, Any]], texts: dict[str, str]) -> dict[str, Any]:
+    """web/data/chain_atlas.json. `texts` is the outlook export's resolved wording of each claim. `opps_doc` is the opportunities export (the records, their numbers and the sequence),
     `map_doc` the market map's export and `scored` tonight's scored gauges by id, each with its word, name and whether hatched."""
-    sc = outlook.get("scenarios") or {}
-    label = {a["id"]: a["label"] for k in ("progress", "rules") for a in sc.get(k) or []}
     skipped = spec.get("not_judged") or {}
-    every = [
-        {
-            "id": f"{c['progress']}/{c['rules']}",
-            "key": f"{c['progress']}-{c['rules']}",
-            "name": f"{label[c['progress']]}, {label[c['rules']][:1].lower()}{label[c['rules']][1:]}",
-            "says": c.get("says") or "",
-        }
-        for c in _cells(outlook)
-    ]
+    every = _futures(spec, outlook, texts)
     futures = [f for f in every if f["id"] not in skipped]  # a future nobody judged is no column: it is named apart
     words = spec.get("effects") or {}
     records = {o["id"]: o for o in opps_doc.get("opportunities") or []}
@@ -271,6 +336,8 @@ def build(spec: dict[str, Any], opps_doc: dict[str, Any], outlook: dict[str, Any
         **_map(spec, futures, map_doc, scored, {k: sorted(v) for k, v in on.items()}),
         "made_by": {**made, "date": str(made["date"])} if made else None,
         "futures": futures,
+        "future_groups": spec.get("future_groups") or [],
+        "waiting": spec.get("waiting") or [],
         "not_judged": [{"name": f["name"], "why": skipped[f["id"]]} for f in every if f["id"] in skipped],
         "effects": [{"id": e, "word": words.get(e, e)} for e in (*MOVES, "unchanged")],
         "groups": [
