@@ -1264,3 +1264,24 @@ The second slice of `/value-chain/atlas`: the chain drawn once, with a time dial
 - *A tile leads to its own entry in the ground list*, not to the company list; the entry links on to the companies, each with its assess link.
 
 **Still to come.** Research for the two unsourced futures, shortage chains, and the planning assumptions.
+
+## Part 48c (8 Oct 2026): the futures about who owns the models
+
+The owner's framework had five futures beyond the outlook's grid. Research (8 Oct) found that four are already argued by writers among the outlook's sources; this part puts those four on the atlas's dial and names the fifth as waiting.
+
+**What ships.** In `seed/chain_atlas.yaml`, `ownership` holds four futures, each a model's one-sentence summary of what named writers argue, with the outlook's sources it is drawn from and the outlook's claims that bear on it, for and against. Each moves businesses and parts of the map like any other future. The dial shows two groups. `waiting` names what is not on the dial and why.
+
+**What the reviewing run changed.**
+
+- *Names and summaries cut back to what the writers argue.* "Open models reach the frontier" became "open models are good enough for most work": neither writer says open models match the best. "A few closed labs keep the lead" became "labs charge for their lead and move up the stack": neither says the lead is kept. "Agents buy from agents" became "agents deal in markets for people and firms": the writers say agents could cut the cost of dealing, not that they will trade with each other unattended; that stronger future is listed as waiting.
+- *One writer dropped* from the devices future, whose finding is about time-critical work run on the spot, not everyday work.
+- *Effects withdrawn* where the reason imported a future not yet sourced or asserted a regularity; *one added* (labs that move into their customers' work offer in-customer learning themselves).
+- *Links.* A claim is shown in the outlook's own resolved words and marked as counting for or against, never under a position's title. A link into a folded section of the outlook now opens it after a page change, which also fixes older links from the value-chain page.
+- *People.* Each writer is introduced by what they study, from the outlook's own source record.
+
+**Judgement calls.**
+
+- *The owner's names gave way to the writers'.* The dial carries only what a named writer argues; the owner's stronger wording is kept in `waiting` where no writer supports it.
+- *Model access splits by country waits.* Three credible sources were found (a RAND paper on export controls, a consultancy report, an adoption study). They join through the outlook's own source path, not this file.
+
+**Still to come.** The country-split sources, shortage chains, and the planning assumptions.

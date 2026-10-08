@@ -37,20 +37,21 @@ def _future_ids(spec: dict[str, Any], outlook: dict[str, Any]) -> set[str]:
     return {f"{c['progress']}/{c['rules']}" for c in _cells(outlook)} | {f"owners/{o.get('id')}" for o in spec.get("ownership") or []}
 
 
-def _futures(spec: dict[str, Any], outlook: dict[str, Any]) -> list[dict[str, Any]]:
+def _futures(spec: dict[str, Any], outlook: dict[str, Any], texts: dict[str, str]) -> list[dict[str, Any]]:
     """The dial, in order: the grid's cells a writer argues, then the ownership futures, each with who argues it and
     the outlook's claims that bear on it."""
     sc = outlook.get("scenarios") or {}
     label = {a["id"]: a["label"] for k in ("progress", "rules") for a in sc.get(k) or []}
     sources = {x["id"]: x for x in outlook.get("sources") or []}
-    claims = {c["id"]: c for c in outlook.get("claims") or []}
-    positions = {p["id"]: p for p in outlook.get("positions") or []}
+    claims = {c["id"] for c in outlook.get("claims") or []}
 
     def who(ids: list[str]) -> list[dict[str, str]]:
-        return [{"who": sources[i]["who"], "href": f"/outlook#source-{i}"} for i in ids if i in sources]
+        """Each writer by name and by what they study, as the outlook's own source record has them."""
+        return [{"who": sources[i]["who"], "field": sources[i].get("field") or "", "href": f"/outlook#source-{i}"} for i in ids if i in sources]
 
     def bears(ids: list[str]) -> list[dict[str, str]]:
-        return [{"title": (positions.get(claims[i].get("position")) or {}).get("title") or i, "href": f"/outlook#claim-{i}"} for i in ids if i in claims]
+        """A claim the outlook tests, in the outlook's own resolved words (`texts`), never a title of ours."""
+        return [{"text": texts[i], "href": f"/outlook#claim-{i}"} for i in dict.fromkeys(ids) if i in claims and i in texts]
 
     grid = [
         {
@@ -60,7 +61,8 @@ def _futures(spec: dict[str, Any], outlook: dict[str, Any]) -> list[dict[str, An
             "name": f"{label[c['progress']]}, {label[c['rules']][:1].lower()}{label[c['rules']][1:]}",
             "says": c.get("says") or "",
             "argued_by": who(c.get("argued_by") or []),
-            "bears": bears(c.get("signposts") or []),
+            "bears_for": bears(c.get("signposts") or []),
+            "bears_against": [],
         }
         for c in _cells(outlook)
     ]
@@ -72,7 +74,8 @@ def _futures(spec: dict[str, Any], outlook: dict[str, Any]) -> list[dict[str, An
             "name": o["name"],
             "says": o["says"],
             "argued_by": who(o.get("argued_by") or []),
-            "bears": bears(o.get("bears") or []),
+            "bears_for": bears(o.get("bears_for") or []),
+            "bears_against": bears(o.get("bears_against") or []),
         }
         for o in spec.get("ownership") or []
     ]
@@ -104,6 +107,11 @@ def problems(spec: dict[str, Any], opps: dict[str, Any], outlook: dict[str, Any]
             out.append(f"chain atlas: future {fid} cannot name a mark on the page: lower-case letters, digits and underscores only")
     sources = {x["id"] for x in outlook.get("sources") or []}
     claims = {c["id"] for c in outlook.get("claims") or []}
+    owned = [o.get("id") for o in spec.get("ownership") or []]
+    for dup in sorted({i for i in owned if owned.count(i) > 1}):
+        out.append(f"chain atlas: ownership future {dup} is defined twice")
+    if owned and [g.get("id") for g in spec.get("future_groups") or []] != ["grid", "owners"]:
+        out.append("chain atlas: future_groups must be grid, owners, in that order")
     for o in spec.get("ownership") or []:
         w = f"chain atlas: ownership future {o.get('id')}"
         if not o.get("argued_by"):
@@ -111,7 +119,7 @@ def problems(spec: dict[str, Any], opps: dict[str, Any], outlook: dict[str, Any]
         for i in o.get("argued_by") or []:
             if i not in sources:
                 out.append(f"{w} is argued by {i}, which is not a source on the outlook")
-        for i in o.get("bears") or []:
+        for i in [*(o.get("bears_for") or []), *(o.get("bears_against") or [])]:
             if i not in claims:
                 out.append(f"{w} names {i}, which is not a claim on the outlook")
         for k in ("name", "says"):
@@ -124,7 +132,7 @@ def problems(spec: dict[str, Any], opps: dict[str, Any], outlook: dict[str, Any]
             out.append("chain atlas: a future that waits has a name and says why")
     for fid, why in skipped.items():
         if fid not in futures:
-            out.append(f"chain atlas: not_judged names {fid}, which is not a future the outlook's grid fills")
+            out.append(f"chain atlas: not_judged names {fid}, which is not a future on the dial")
         if not str(why or "").strip():
             out.append(f"chain atlas: {fid} is not judged and nothing says why not")
     for c in spec.get("calls") or []:
@@ -274,11 +282,11 @@ def _map(spec: dict[str, Any], futures: list[dict[str, Any]], map_doc: dict[str,
     }
 
 
-def build(spec: dict[str, Any], opps_doc: dict[str, Any], outlook: dict[str, Any], map_doc: dict[str, Any], scored: dict[str, dict[str, Any]]) -> dict[str, Any]:
-    """web/data/chain_atlas.json. `opps_doc` is the opportunities export (the records, their numbers and the sequence),
+def build(spec: dict[str, Any], opps_doc: dict[str, Any], outlook: dict[str, Any], map_doc: dict[str, Any], scored: dict[str, dict[str, Any]], texts: dict[str, str]) -> dict[str, Any]:
+    """web/data/chain_atlas.json. `texts` is the outlook export's resolved wording of each claim. `opps_doc` is the opportunities export (the records, their numbers and the sequence),
     `map_doc` the market map's export and `scored` tonight's scored gauges by id, each with its word, name and whether hatched."""
     skipped = spec.get("not_judged") or {}
-    every = _futures(spec, outlook)
+    every = _futures(spec, outlook, texts)
     futures = [f for f in every if f["id"] not in skipped]  # a future nobody judged is no column: it is named apart
     words = spec.get("effects") or {}
     records = {o["id"]: o for o in opps_doc.get("opportunities") or []}

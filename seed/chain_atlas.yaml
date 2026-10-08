@@ -11,8 +11,8 @@ made_by:
     grid fills, gave the business a call with one line of reasoning and the one thing that would undo it, and said in words
     what each future does to it. A future it left out changes nothing. The same model then said, for each part of the map
     in scope, what is scarce there, how short it is now, in the transition and at the mature state, and which futures tighten
-    or ease it, each with a reason. The futures about who owns the models are each a model's summary of what named writers
-    on the outlook argue; it judged them the same way.
+    or ease it, each with a reason. The second group of futures are each a model's summary of what named writers on the
+    outlook argue, and were judged the same way.
   reviewed_by: separate reviewing runs of the same model, which changed calls, takes, words and reasons, withdrew some effects
     and moves and added others; no person reviewed each one
 calls:
@@ -153,6 +153,9 @@ businesses:
       owners/on_device:
         effect: stronger
         reason: A model that runs beside the customer's data can learn from it there.
+      owners/closed_lead:
+        effect: weaker
+        reason: Labs that move into their customers' work offer the learning themselves.
   deploy_to_platform:
     call: cond
     take: A quick way into a customer today that may not last. If agents do the fitting themselves, there is no scarce labour
@@ -170,7 +173,7 @@ businesses:
         reason: Agents that can do the fitting remove the labour this business sells.
       owners/closed_lead:
         effect: weaker
-        reason: The labs deploy their own models inside customers.
+        reason: Labs that deploy inside their customers' work do this fitting themselves.
   ai_warranty:
     call: cond
     take: 'Too early alone: there is too little loss data to price yet. Strong once verification and the audit trail supply
@@ -187,13 +190,7 @@ businesses:
     call: cond
     take: Its worth turns on how far access to models splits by country and supplier, a future the site has not yet sourced.
     kills: One supplier is approved everywhere.
-    futures:
-      owners/open_frontier:
-        effect: stronger
-        reason: More models that are good enough means more to route between.
-      owners/closed_lead:
-        effect: stronger
-        reason: A firm that depends on a leader wants a fallback for the day it is cut off.
+    futures: {}
   agent_incident_response:
     call: cond
     take: A natural next product for whoever already holds the audit trail. Demand waits on failures that are public.
@@ -246,8 +243,8 @@ businesses:
         reason: Work done on the device is not rented from a data centre.
   agent_payments:
     call: cond
-    take: A monopoly-like prize that exists only if agents buy from agents. Build it when that trade is visible, and beat
-      the payment firms on proof, not on payments.
+    take: A monopoly-like prize that exists only if agents come to deal with each other. Build it when that trade is visible,
+      and beat the payment firms on proof, not on payments.
     kills: Payment networks themselves hold the money until the work is checked.
     futures:
       stall_capability/unclear:
@@ -255,7 +252,7 @@ businesses:
         reason: Agents that cannot finish whole jobs do not buy from other agents.
       owners/agents_trade:
         effect: stronger
-        reason: This is the trade it exists to settle.
+        reason: Agents that order work for people have to pay for it, and pay on proof.
   permission_connectors:
     call: cond
     take: Worth most as the standard; without that, what is left is each customer's wiring. The software vendors and the
@@ -264,7 +261,7 @@ businesses:
     futures:
       owners/closed_lead:
         effect: weaker
-        reason: A lab far ahead can set the standard itself.
+        reason: A lab built into its customers' work can make its own protocol the default.
       owners/agents_trade:
         effect: stronger
         reason: Agents that deal across firms need a way into each firm's systems.
@@ -278,7 +275,7 @@ businesses:
         reason: With many good models to choose from, the choice is worth more.
       owners/closed_lead:
         effect: weaker
-        reason: With a clear leader there is little to choose between.
+        reason: A customer built into one lab's products has less left to route.
   context_engineering_service:
     call: 'no'
     take: A thin profit that weakens once agents learn a firm's habits on their own. Do it inside deployment or the system
@@ -302,9 +299,6 @@ businesses:
       stall_money/unclear:
         effect: weaker
         reason: Labs are the buyers of graded expert work, and a lab short of money buys less of it.
-      owners/open_frontier:
-        effect: weaker
-        reason: The labs that buy graded expert work have less of a lead to pay for.
   open_weight_post_training:
     call: 'no'
     take: The skill is scarce today and the profit is not kept. Tuning ends up a feature of a model that learns inside the
@@ -317,9 +311,6 @@ businesses:
       owners/open_frontier:
         effect: stronger
         reason: Tuning is the work that turns a free model into a product.
-      owners/closed_lead:
-        effect: weaker
-        reason: Open models that stay well behind are worth less to tune.
   deployment_talent:
     call: 'no'
     take: A good service firm, not a durable one.
@@ -767,14 +758,14 @@ shifts:
       reason: The cost moves to the computing that runs the model.
     inference_optimization:
       move: tightens
-      reason: Everyone running the same free model competes on running it cheaply.
+      reason: Running a free model cheaply is the skill left to compete on.
     general_purpose_models:
       move: eases
-      reason: A lead that anyone can download is no lead.
+      reason: Where an open model is good enough, the lead earns less.
   owners/closed_lead:
     general_purpose_models:
       move: tightens
-      reason: A lead that is kept stays scarce.
+      reason: Customers built into a lab's products cannot easily leave it.
     evals_and_assurance:
       move: tightens
       reason: A buyer tied to one seller needs a judge who is not that seller.
@@ -782,9 +773,6 @@ shifts:
     model_compression_and_adaptation:
       move: tightens
       reason: Shrinking a model to fit the device is the work.
-    memory_storage_and_networking:
-      move: tightens
-      reason: Every device needs the memory to hold a model.
     inference_supply:
       move: eases
       reason: Work done on the device is not bought from a host.
@@ -804,51 +792,66 @@ shifts:
     tools_and_actuation:
       move: tightens
       reason: Dealing across firms needs a way into each firm's systems.
+    provenance_and_audit:
+      move: tightens
+      reason: A deal between agents is settled from the record.
+    liability_and_risk_transfer:
+      move: tightens
+      reason: A firm that lets an agent deal for it wants someone standing behind the agent.
 future_groups:
 - id: grid
   name: How far AI goes, and how the rules settle
 - id: owners
-  name: Who owns the models
+  name: Who owns the models, where they run and who they deal for
 ownership:
 - id: open_frontier
-  name: Open models reach the frontier
-  says: Free, published models match the best closed ones, and the cost moves to the computing that runs them and the skill
-    of tuning them.
+  name: Open models are good enough for most work
+  says: Open models come close enough to the best closed ones that much work runs on them, and the cost moves to the computing
+    that runs them and the work of training them further.
   argued_by:
   - hobart_round_trip
   - cai_mythos
-  bears:
+  bears_for:
   - gap_stays_short
+  bears_against:
   - open_takes_volume
 - id: closed_lead
-  name: A few closed labs keep the lead
-  says: The leading labs stay ahead, charge for the lead, and move into their customers' work to keep them.
+  name: Labs charge for their lead and move up the stack
+  says: The leading labs charge what their lead over open models is worth, and move into products and deployments inside
+    their customers' work, where leaving is costly.
   argued_by:
   - larson_durability
   - nk_up_the_stack
-  bears:
+  bears_for:
   - lock_in
+  bears_against:
   - gap_stays_short
 - id: on_device
   name: Everyday work moves onto devices
   says: For much everyday work the cheapest and fastest place to run AI is the device that already holds the data.
   argued_by:
   - paik_edge
-  - larson_hayek
-  bears:
+  bears_for:
   - edge_inference
   - edge_floor
+  bears_against: []
 - id: agents_trade
-  name: Agents buy from agents
-  says: Agents search, bargain and contract on behalf of people and firms, once there is a way to know whom each one acts
-    for.
+  name: Agents deal in markets for people and firms
+  says: Agents cut the cost of searching, bargaining and contracting and deal in markets for people and firms, first where
+    the want is simple to state; they still lack a way to show whom each one acts for.
   argued_by:
   - shahidi_etal
   - hadfield_koh
-  bears:
+  bears_for:
+  - simple_markets_first
+  bears_against:
   - agents_fenced
   - asking_leaks
 waiting:
 - name: Model access splits by country
-  why: Writers who argue it were found, but none is yet among the outlook's sources, and the one public reading found for
-    it needs a rule for what counts. It joins the dial when the outlook holds it.
+  why: Writers who argue it were found, but none is yet among the outlook's sources. The one public reading found, a count
+    of the export rules the United States writes about AI, needs a rule for which rules count. It joins the dial when the
+    outlook holds it.
+- name: Agents buy from agents, with no person in the deal
+  why: The outlook's writers say agents could deal for people and firms; none argues that agents will trade with each other
+    unattended, and no public count of such trade exists.

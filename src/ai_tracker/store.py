@@ -958,12 +958,6 @@ class Store:
         _write(out / "market_map.json", mm_doc)
         opps_doc = self._opportunities(mm_doc)
         _write(out / "opportunities.json", opps_doc)
-        from . import chain_atlas
-        from .argument import scorecard
-        from .outlook import load as load_outlook
-
-        scored = {i["id"]: {"word": i["word"], "name": i["name"], "hatched": bool(i.get("hatched"))} for i in scorecard(self, date.today())["inputs"] if i.get("word") in chain_atlas.ORDER}
-        _write(out / "chain_atlas.json", chain_atlas.build(chain_atlas.load(), opps_doc, load_outlook(), mm_doc, scored))
         for sub_id, doc in venture.items():
             _write(out / "venture" / f"{sub_id}.json", doc)
         bottlenecks = self._bottlenecks(cards)
@@ -981,6 +975,12 @@ class Store:
 
         outlook = build_outlook(self)
         _write(out / "outlook.json", outlook)
+        from . import chain_atlas
+        from .argument import scorecard
+        from .outlook import load as load_outlook
+
+        scored = {i["id"]: {"word": i["word"], "name": i["name"], "hatched": bool(i.get("hatched"))} for i in scorecard(self, date.today())["inputs"] if i.get("word") in chain_atlas.ORDER}
+        _write(out / "chain_atlas.json", chain_atlas.build(chain_atlas.load(), opps_doc, load_outlook(), mm_doc, scored, outlook["figures"]["texts"]))
         from . import census, firm
 
         _write(out / "firm.json", firm.build(firm.load(), outlook, firm.ESSAY.read_text() if firm.ESSAY.exists() else "", census.shape(census.load())))

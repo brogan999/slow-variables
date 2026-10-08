@@ -34,7 +34,7 @@ function Row({ b }: { b: AtlasBusiness }) {
           <span className="mt-0.5 block font-serif text-[15px] leading-snug text-ink-2">{b.take}</span>
         </span>
         <span className="ca-strip col-start-2 md:col-start-auto" role="img" aria-label={b.moved.length ? b.moved.map((m) => m.label).join("; ") : "No future here changes it"}>
-          {b.marks.map((m) => <i key={m.key} data-f={m.key} data-e={m.effect} title={m.label} />)}
+          {b.marks.map((m) => <i key={m.key} data-f={m.key} data-e={m.effect} data-g={m.key.startsWith("owners-") ? "owners" : "grid"} title={m.label} />)}
         </span>
         <span className="col-start-2 font-mono text-[11px] text-ink-2 md:col-start-auto md:text-right">
           {b.marks.map((m) => <span key={m.key} data-f={m.key} className="ca-when">{m.effect === "unchanged" ? m.word : `${m.word} here`}</span>)}
@@ -104,9 +104,10 @@ export function ChainAtlas({ d }: { d: ChainAtlasDoc }) {
         {d.futures.map((f) => (
           <p key={f.key} className="ca-says font-serif text-[1.15rem] leading-snug text-ink max-w-[62ch]" data-f={f.key}>
             {f.says}{" "}
-            <span className="font-sans text-xs text-muted">
-              {f.group === "grid" ? "The outlook’s own words for this future." : "A model’s summary of what its writers argue."} Argued by {f.argued_by.map((a, i) => <span key={a.href}>{i ? "; " : ""}<Link href={a.href} className={link}>{a.who}</Link></span>)}, on the <Link href="/outlook#scenarios" className={link}>outlook</Link>.
-              {f.bears.length ? <> What bears on it there: {f.bears.map((b, i) => <span key={b.href}>{i ? "; " : ""}<Link href={b.href} className={link}>{b.title}</Link></span>)}.</> : null}
+            <span className="mt-1 block font-sans text-xs leading-relaxed text-muted">
+              {f.group === "grid" ? "The outlook’s own words for this future." : "A model’s summary, not the writers’ words."} Drawn from {f.argued_by.map((a, i) => <span key={a.href}>{i ? "; " : ""}<Link href={a.href} className={link}>{a.who}</Link>{a.field ? `, ${a.field}` : ""}</span>)}, among the {f.group === "grid" ? <><Link href="/outlook#scenarios" className={link}>outlook</Link>&apos;s futures</> : <><Link href="/outlook#sources" className={link}>outlook</Link>&apos;s sources</>}.
+              {f.bears_for.length ? <> Claims the outlook tests that would show it arriving: {f.bears_for.map((b, i) => <span key={b.href}>{i ? " " : ""}<Link href={b.href} className={link}>{b.text}</Link></span>)}</> : null}
+              {f.bears_against.length ? <> Claims that count against it: {f.bears_against.map((b, i) => <span key={b.href}>{i ? " " : ""}<Link href={b.href} className={link}>{b.text}</Link></span>)}</> : null}
             </span>
           </p>
         ))}

@@ -374,7 +374,7 @@ def test_ownership_futures_move_businesses_and_parts_like_any_other():
 
 def test_a_broken_ownership_future_names_each_problem():
     bad = copy.deepcopy(SPEC)
-    bad["ownership"][0].update(argued_by=["nobody_at_all"], bears=["no_such_claim"], says="Up 40% by 2030.")
+    bad["ownership"][0].update(argued_by=["nobody_at_all"], bears_for=["no_such_claim"], says="Up 40% by 2030.")
     bad["ownership"].append({"id": "Bad Id", "name": "x", "says": "y", "argued_by": []})
     bad["waiting"] = [{"name": "Something", "why": ""}]
     errors = "\n".join(ca.problems(bad, opportunities.load(), OUTLOOK, MAP))
