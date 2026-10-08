@@ -334,3 +334,59 @@ def test_the_map_uses_the_scorecards_colours_names_its_gauges_and_reads_on_a_pho
     assert "opacity-80" not in island
     assert '<legend className="eyebrow">At this point in time</legend>' in comp and "<noscript>" in comp
     assert "tonight’s reading of" in comp or "tonight&apos;s reading of" in comp
+
+
+# Part 48c: the futures about who owns the models, each argued by a writer the outlook already holds
+
+
+def test_an_ownership_future_is_on_the_dial_only_when_a_named_writer_argues_it():
+    doc = atlas()
+    sources = {s["id"]: s for s in OUTLOOK["sources"]}
+    owners = [f for f in doc["futures"] if f["group"] == "owners"]
+    assert [f["id"] for f in owners] == [f"owners/{o['id']}" for o in SPEC["ownership"]] and len(owners) >= 4
+    assert [g["id"] for g in doc["future_groups"]] == ["grid", "owners"]
+    for f, o in zip(owners, SPEC["ownership"]):
+        assert o["argued_by"] and [a["who"] for a in f["argued_by"]] == [
+            sources[i]["who"] for i in o["argued_by"]
+        ]
+        assert all(a["href"] == f"/outlook#source-{i}" for a, i in zip(f["argued_by"], o["argued_by"]))
+        assert all(b["href"].startswith("/outlook#claim-") and b["title"] for b in f["bears"])
+    grid = [f for f in doc["futures"] if f["group"] == "grid"]
+    assert all(f["argued_by"] for f in grid), "the grid's futures name their writers too"
+    assert doc["waiting"] and all(w["name"] and w["why"] for w in doc["waiting"]), (
+        "a future not yet sourced is named apart, with why"
+    )
+
+
+def test_ownership_futures_move_businesses_and_parts_like_any_other():
+    doc = atlas()
+    key = "owners-agents_trade"
+    rows = {b["id"]: b for g in doc["groups"] for b in g["businesses"]}
+    assert next(m for m in rows["agent_payments"]["marks"] if m["key"] == key)["effect"] == "stronger"
+    assert (
+        tiles(doc)["settlement_and_billing"]["states"][key]["mature"]["level"]
+        > tiles(doc)["settlement_and_billing"]["states"]["none"]["mature"]["level"]
+    )
+
+
+def test_a_broken_ownership_future_names_each_problem():
+    bad = copy.deepcopy(SPEC)
+    bad["ownership"][0].update(argued_by=["nobody_at_all"], bears=["no_such_claim"], says="Up 40% by 2030.")
+    bad["ownership"].append({"id": "Bad Id", "name": "x", "says": "y", "argued_by": []})
+    bad["waiting"] = [{"name": "Something", "why": ""}]
+    errors = "\n".join(ca.problems(bad, opportunities.load(), OUTLOOK, MAP))
+    for part in (
+        "nobody_at_all",
+        "no_such_claim",
+        "types a figure",
+        "no named writer argues",
+        "cannot name a mark",
+        "says why",
+    ):
+        assert part in errors, part
+
+
+def test_the_page_groups_the_futures_and_names_who_argues_each():
+    comp = (WEB / "components" / "ChainAtlas.tsx").read_text()
+    assert "d.future_groups.map" in comp and "f.argued_by.map" in comp and "d.waiting.map" in comp
+    assert "no future here weakens it" in comp and "on the grid weakens" not in comp
