@@ -22,6 +22,7 @@ ORDER = ("slack", "easing", "moderate", "tight", "severe")  # the tightness scor
 STEP = {"tightens": 1, "eases": -1}
 WHEN = ("now", "transition", "mature")
 TIGHTNESS = Path(__file__).resolve().parents[2] / "seed" / "tightness.yaml"
+ARGUMENT = Path(__file__).resolve().parents[2] / "seed" / "argument.yaml"
 
 
 def load() -> dict[str, Any]:
@@ -92,8 +93,50 @@ def _figure(text: str) -> bool:
     return bool(FIGURE.search(YEAR.sub("", text)))
 
 
+def _extra_problems(spec: dict[str, Any], published: set[str]) -> list[str]:
+    """Chains, builds and the planning assumptions (Part 48d)."""
+    out: list[str] = []
+    predictions = [p["id"] for p in (yaml.safe_load(ARGUMENT.read_text()).get("migration") or {}).get("predictions") or []]
+    cats = set(spec.get("categories") or {})
+    chains = spec.get("chains") or []
+    for missing in [p for p in predictions if p not in [c.get("id") for c in chains]]:
+        out.append(f"chain atlas: migration prediction {missing} has no chain")
+    for c in chains:
+        w = f"chain atlas: chain {c.get('id')}"
+        if c.get("id") not in predictions:
+            out.append(f"{w} is not a migration prediction on the site")
+        for part in c.get("parts") or []:
+            if part not in cats:
+                out.append(f"{w} names {part}, which is not a part with a path")
+        for b in c.get("businesses") or []:
+            if b not in published:
+                out.append(f"{w} names {b}, which is not a published business")
+        says = str(c.get("says") or "").strip()
+        if not says:
+            out.append(f"{w} says nothing")
+        elif _figure(says):
+            out.append(f"{w} types a figure, a size word or an address")
+    prims = {p.get("id") for p in spec.get("primitives") or []}
+    for bid, built in (spec.get("builds") or {}).items():
+        if bid not in published:
+            out.append(f"chain atlas: builds names {bid}, which is not a published business")
+        for i in built or []:
+            if i not in prims:
+                out.append(f"chain atlas: {bid} builds {i}, which is not one of the durable things the file defines")
+    if spec.get("priors") and not str(spec.get("priors_by") or "").strip():
+        out.append("chain atlas: the planning assumptions do not say whose they are")
+    for g in spec.get("priors") or []:
+        for a in g.get("assumptions") or []:
+            if not str(a.get("text") or "").strip() or not str(a.get("weakened_by") or "").strip():
+                out.append(f"chain atlas: an assumption {g.get('id')} holds has a text and says what would weaken it")
+            if _figure(" ".join(str(a.get(k) or "") for k in ("text", "exception", "weakened_by"))):
+                out.append(f"chain atlas: an assumption in {g.get('id')} types a figure, a size word or an address")
+    return out
+
+
 def problems(spec: dict[str, Any], opps: dict[str, Any], outlook: dict[str, Any], map_doc: dict[str, Any]) -> list[str]:
     out: list[str] = _map_problems(spec, outlook, map_doc)
+    out += _extra_problems(spec, {o["id"] for o in opps.get("opportunities") or [] if o.get("published")})
     made = spec.get("made_by") or {}
     for k in ("model", "date", "method", "reviewed_by"):
         if not made.get(k):
@@ -282,8 +325,8 @@ def _map(spec: dict[str, Any], futures: list[dict[str, Any]], map_doc: dict[str,
     }
 
 
-def build(spec: dict[str, Any], opps_doc: dict[str, Any], outlook: dict[str, Any], map_doc: dict[str, Any], scored: dict[str, dict[str, Any]], texts: dict[str, str]) -> dict[str, Any]:
-    """web/data/chain_atlas.json. `texts` is the outlook export's resolved wording of each claim. `opps_doc` is the opportunities export (the records, their numbers and the sequence),
+def build(spec: dict[str, Any], opps_doc: dict[str, Any], outlook: dict[str, Any], map_doc: dict[str, Any], scored: dict[str, dict[str, Any]], texts: dict[str, str], predictions: list[dict[str, Any]]) -> dict[str, Any]:
+    """web/data/chain_atlas.json. `texts` is the outlook export's resolved wording of each claim and `predictions` the migration predictions as the argument export has them tonight. `opps_doc` is the opportunities export (the records, their numbers and the sequence),
     `map_doc` the market map's export and `scored` tonight's scored gauges by id, each with its word, name and whether hatched."""
     skipped = spec.get("not_judged") or {}
     every = _futures(spec, outlook, texts)
@@ -293,6 +336,8 @@ def build(spec: dict[str, Any], opps_doc: dict[str, Any], outlook: dict[str, Any
     marks = {m["id"]: m for m in (opps_doc.get("figures") or {}).get("marks") or []}
     stage = {s["opportunity"]: (spec.get("stages") or {}).get(s["stage"]) for s in opps_doc.get("sequence") or []}
     made = spec.get("made_by")
+
+    prims, built = spec.get("primitives") or [], spec.get("builds") or {}
 
     def row(bid: str, b: dict[str, Any]) -> dict[str, Any]:
         o, judged = records[bid], b.get("futures") or {}
@@ -325,6 +370,7 @@ def build(spec: dict[str, Any], opps_doc: dict[str, Any], outlook: dict[str, Any
             "href": f"/value-chain/opportunities#op-{bid}",
             "marks": laid,
             "moved": [m for m in laid if m["effect"] != "unchanged"],
+            "builds": [{"id": p["id"], "name": p["name"]} for p in prims if p["id"] in built.get(bid, [])],
         }
 
     businesses = spec.get("businesses") or {}
@@ -332,7 +378,7 @@ def build(spec: dict[str, Any], opps_doc: dict[str, Any], outlook: dict[str, Any
     for bid in businesses:
         if bid in records:
             on.setdefault(records[bid]["primary"]["id"], []).append(marks[bid]["n"])
-    return {
+    doc = {
         **_map(spec, futures, map_doc, scored, {k: sorted(v) for k, v in on.items()}),
         "made_by": {**made, "date": str(made["date"])} if made else None,
         "futures": futures,
@@ -345,3 +391,26 @@ def build(spec: dict[str, Any], opps_doc: dict[str, Any], outlook: dict[str, Any
             for c in spec.get("calls") or []
         ],
     }
+    rows = {b["id"]: b for g in doc["groups"] for b in g["businesses"]}
+    names = {c["id"]: c for layer in doc["map"]["layers"] for c in layer["categories"]}
+    chain = {c["id"]: c for c in spec.get("chains") or []}
+    states, when = spec.get("chain_states") or {}, spec.get("chain_when") or {}
+    doc["chains"] = [
+        {
+            "id": p["id"],
+            "when": when.get(p["when"], p["when"]),
+            "claim": p["claim"],
+            "state": p["state"],
+            "state_word": states.get(p["state"], p["state"]),
+            "href": "/argument/migration#predictions",
+            "says": c["says"],
+            "parts": [{"id": i, "number": names[i]["number"], "name": names[i]["name"], "href": f"#ca-g-{i}"} for i in c.get("parts") or [] if i in names],
+            "businesses": [{"id": i, "n": rows[i]["n"], "name": rows[i]["name"]} for i in c.get("businesses") or [] if i in rows],
+        }
+        for p in predictions
+        if (c := chain.get(p["id"]))
+    ]
+    every_row = list(rows.values())
+    doc["primitives"] = [{**p, "businesses": [{"n": b["n"], "name": b["name"]} for b in every_row if p["id"] in built.get(b["id"], [])]} for p in prims]
+    doc["priors"], doc["priors_by"] = spec.get("priors") or [], spec.get("priors_by") or ""
+    return doc

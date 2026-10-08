@@ -1285,3 +1285,20 @@ The owner's framework had five futures beyond the outlook's grid. Research (8 Oc
 - *Model access splits by country waits.* Three credible sources were found (a RAND paper on export controls, a consultancy report, an adoption study). They join through the outlook's own source path, not this file.
 
 **Still to come.** The country-split sources, shortage chains, and the planning assumptions.
+
+## Part 48d (8 Oct 2026): where the shortage goes next, what a durable business builds, the planning assumptions
+
+The last pieces of the owner's original frame, added to `/value-chain/atlas`.
+
+**What ships.**
+
+- *Where the shortage goes next.* Each of the site's five migration predictions (`seed/argument.yaml`), with its claim and tonight's state as the argument export has them, tied to parts of the map and to the businesses that ride it. The tie and its one line are a model's judgement; the prediction and its state are never ours. `problems` fails if a prediction has no chain.
+- *What a durable business builds.* Five lasting things (the record, the test, the backing, the yardstick, the choice), which are the owner's, and which business builds which, which is a model's judgement. Each business's row names what it builds up.
+- *The planning assumptions.* Sixteen assumptions the calls take for granted, each with what would weaken it. They are the owner's, reworded by a model; the page says they are assumptions, not readings.
+
+**Judgement calls.**
+
+- *A prediction that is failing tonight is shown as failing.* The practice-data prediction's test is not passing; the business tied to it is shown beside that state, not shielded from it.
+- *Two businesses build none of the five* (training deployment engineers and tuning open models): the table leaves them out; it does not stretch a category to fit.
+
+**Still to come.** The sources for the country-split future.

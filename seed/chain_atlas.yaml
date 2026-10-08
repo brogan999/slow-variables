@@ -3,7 +3,8 @@
 # Part 39 policy: never a reading and never a status, and no evaluator, metric, tally or query tool reads this file.
 # A take, a reason and a `kills` type no figure. A future is named progress/rules, as seed/outlook.yaml names its cells;
 # one left out changes nothing. `categories` and `shifts` (Part 48b) say what is scarce on each part of the map and how each
-# future moves it; `reading` names the tightness gauge whose scored word replaces the judged `now`. To withdraw a judgement, delete it.
+# future moves it; `chains` (Part 48d) tie the site's migration predictions to parts and businesses, `builds` says which
+# `primitives` each business builds, and `priors` are the owner's planning assumptions, not judgements of the model; `reading` names the tightness gauge whose scored word replaces the judged `now`. To withdraw a judgement, delete it.
 made_by:
   model: claude-opus-5-5
   date: '2026-10-08'
@@ -12,7 +13,8 @@ made_by:
     what each future does to it. A future it left out changes nothing. The same model then said, for each part of the map
     in scope, what is scarce there, how short it is now, in the transition and at the mature state, and which futures tighten
     or ease it, each with a reason. The second group of futures are each a model's summary of what named writers on the
-    outlook argue, and were judged the same way.
+    outlook argue, and were judged the same way. It also tied each of the site's migration predictions to parts of the map
+    and to businesses, and said which of five durable things each business builds.
   reviewed_by: separate reviewing runs of the same model, which changed calls, takes, words and reasons, withdrew some effects
     and moves and added others; no person reviewed each one
 calls:
@@ -855,3 +857,167 @@ waiting:
 - name: Agents buy from agents, with no person in the deal
   why: The outlook's writers say agents could deal for people and firms; none argues that agents will trade with each other
     unattended, and no public count of such trade exists.
+chain_states:
+  holding: holding tonight
+  failing: failing tonight
+  untestable: cannot be tested yet
+chain_when:
+  now: Short now
+  next: Where the shortage goes next
+  watch: Watched, not yet measurable
+chains:
+- id: data_centres_now
+  parts:
+  - power_and_sites
+  - data_centre_infrastructure
+  businesses:
+  - energy_aware_compute
+  says: While buildings and their power hookups bind, a business that finds where computing can run is selling into the
+    shortage.
+- id: capital_now
+  parts: []
+  businesses: []
+  says: No part of the map is short of money, so money alone is no advantage for any business here.
+- id: memory_packaging_now
+  parts:
+  - memory_storage_and_networking
+  - semiconductor_supply_chain
+  businesses: []
+  says: None of the businesses here sells into this shortage; it belongs to the chip makers.
+- id: practice_next
+  parts:
+  - training_environments
+  - data_origination
+  - reward_and_verification_systems
+  businesses:
+  - pooled_expert_records
+  says: If the shortage moves here, graded expert work and the means of grading it are what the labs buy.
+- id: agent_proof_watch
+  parts:
+  - outcome_verification
+  - provenance_and_audit
+  - identity_and_authority
+  - settlement_and_billing
+  businesses:
+  - outcome_verification
+  - agent_audit_trail
+  - agent_authority_registry
+  - agent_payments
+  says: Much of the Build group sells into this shortage, which nobody can yet measure.
+primitives:
+- id: record
+  name: The record
+  what: The customer's own state, permissions, traces and results.
+  why: Models and suppliers change; the firm's memory has to stay.
+- id: test
+  name: The test
+  what: The customer's own definition of good work, checked against real cases.
+  why: Better output raises the need to know whether it is good.
+- id: backing
+  name: The backing
+  what: Someone accountable, an audit trail, a warranty.
+  why: Work with consequences needs a solvent party behind it.
+- id: yardstick
+  name: The yardstick
+  what: Cost, speed, quality and reliability measured on the same terms.
+  why: Buyers keep asking for proof that things improved.
+- id: choice
+  name: The choice
+  what: The freedom to switch models, places to run and suppliers.
+  why: Work differs and suppliers change.
+builds:
+  outcome_verification:
+  - test
+  - record
+  regulated_assurance:
+  - test
+  - backing
+  continual_learning_in_customer:
+  - record
+  - test
+  agent_authority_registry:
+  - record
+  - backing
+  agent_audit_trail:
+  - record
+  - backing
+  ai_warranty:
+  - backing
+  pooled_expert_records:
+  - test
+  outcome_router:
+  - choice
+  - yardstick
+  agent_payments:
+  - backing
+  permission_connectors:
+  - choice
+  deploy_to_platform:
+  - record
+  context_engineering_service:
+  - record
+  vertical_system_of_record:
+  - record
+  - backing
+  outcome_priced_rollup:
+  - backing
+  licensed_autonomous_service:
+  - backing
+  energy_aware_compute:
+  - choice
+  - yardstick
+  policy_aware_routing:
+  - choice
+  agent_incident_response:
+  - record
+  - backing
+priors_by: The owner's planning assumptions, reworded by a model. They are what the calls on this page take for granted,
+  not readings and not findings.
+priors:
+- id: customers
+  name: About customers
+  assumptions:
+  - text: Customers want the problem solved, not another tool.
+    exception: Technical buyers who want control.
+    weakened_by: Self-serve tools outgrowing done-for-you services in the same trade.
+  - text: Customers want fewer suppliers to hold accountable.
+    exception: Where the best part from each supplier is worth the trouble.
+    weakened_by: Firms adding AI suppliers faster than they consolidate them.
+  - text: The way in is the customer's most pressing problem.
+    exception: Where a regulator dictates the order.
+    weakened_by: Products winning that solve a lesser problem first.
+  - text: When something important fails, customers want someone solvent to put it right.
+    exception: Low-stakes work.
+    weakened_by: Buyers accepting agents with no named party behind them.
+  - text: Customers resist depending on a single model or supplier.
+    exception: When a supplier is far ahead.
+    weakened_by: Firms standardising on a single lab without a fallback.
+  - text: Customers expect better economics over time, though the bill may still rise if they use more.
+    weakened_by: Prices holding while quality stalls.
+- id: systems
+  name: About the systems
+  assumptions:
+  - text: Producing an answer and proving it right stay separate jobs.
+    weakened_by: Agents becoming cheap and reliable at checking their own work.
+  - text: What a firm knows is local and goes stale, so it has to be kept fresh and tied to results.
+    weakened_by: Agents learning a firm's unwritten rules from its records alone.
+  - text: 'An agent''s right to act stays limited: capability does not confer permission.'
+    weakened_by: Agents acting with full authority and no losses following.
+  - text: 'Physics still matters: energy, delay, memory and distance limit where AI can run.'
+    weakened_by: Efficiency gains outrunning demand for years.
+  - text: Different work needs different models and places to run.
+    weakened_by: A single supplier being best on price and quality for most tasks.
+- id: markets
+  name: About markets and institutions
+  assumptions:
+  - text: 'Adoption lags capability: budgets, rules and trust move slower than the models.'
+    weakened_by: Firms' use of AI rising as fast as the models improve.
+  - text: 'Competition moves the shortage and does not remove it: when a part becomes plentiful, the profit moves to what
+      is still scarce.'
+    weakened_by: Profits falling across the whole chain at once.
+  - text: Responsibility has to land on someone.
+    weakened_by: Courts leaving losses where they fall.
+  - text: Customers differ, so shared infrastructure will sit beside local set-up and judgement.
+    weakened_by: A single configuration serving most firms in a trade.
+  - text: 'Evidence has to change decisions: a rating with no source, no test and no review date becomes decoration.'
+    weakened_by: Ratings on this page going unrevised while the readings under them move.
