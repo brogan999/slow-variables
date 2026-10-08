@@ -5,15 +5,15 @@
  "band_input": "metric:aa_frontier_price_per_point",
  "band_rationale": null,
  "band_value": {
-  "as_of": "2026-09-30",
+  "as_of": "2026-10-08",
   "high": null,
   "low": null,
   "obs_ids": [
-   "4e1377865cbc6bdf",
-   "fee9950277164738"
+   "18ff00e52b5ea6b8",
+   "81819f4cc2334b96"
   ],
   "unit": "USD",
-  "value": 0.011749460043196545
+  "value": 0.004608294930875576
  },
  "bucket_id": null,
  "cadence_expected": "daily",
@@ -28,7 +28,7 @@
    "total": 0
   },
   "line": true,
-  "n_drawn": 2,
+  "n_drawn": 3,
   "needs": 5,
   "partial": false,
   "stamps": [
@@ -39,17 +39,22 @@
     {
      "label": "13 Sep 2026",
      "minor": false,
-     "x": 14.29
+     "x": 10.34
     },
     {
      "label": "20 Sep",
      "minor": false,
-     "x": 47.62
+     "x": 34.48
     },
     {
      "label": "27 Sep",
      "minor": false,
-     "x": 80.95
+     "x": 58.62
+    },
+    {
+     "label": "4 Oct",
+     "minor": false,
+     "x": 82.76
     }
    ]
   },
@@ -97,7 +102,7 @@
  "confidence_basis": {
   "best_tier": 1,
   "grade": "A",
-  "n_observations": 4,
+  "n_observations": 6,
   "sources": [
    "Artificial Analysis API (Intelligence Index, blended price, speed)"
   ],
@@ -109,7 +114,7 @@
  "derived": [
   {
    "as_of_date": "2026-09-11",
-   "computed_at": "2026-10-07T13:37:37.130657Z",
+   "computed_at": "2026-10-08T13:42:13.106789Z",
    "dims": {},
    "formula_version": "2",
    "id": "34a2009ea85bb400",
@@ -128,7 +133,7 @@
   },
   {
    "as_of_date": "2026-09-30",
-   "computed_at": "2026-10-07T13:37:37.130657Z",
+   "computed_at": "2026-10-08T13:42:13.106789Z",
    "dims": {},
    "formula_version": "2",
    "id": "d9fdc050389a40e5",
@@ -142,6 +147,25 @@
     "fee9950277164738"
    ],
    "value": 0.011749460043196545,
+   "value_high": null,
+   "value_low": null
+  },
+  {
+   "as_of_date": "2026-10-08",
+   "computed_at": "2026-10-08T13:42:13.106789Z",
+   "dims": {},
+   "formula_version": "2",
+   "id": "4e6b5cc72ed86c39",
+   "input_observation_ids": [
+    "18ff00e52b5ea6b8",
+    "81819f4cc2334b96"
+   ],
+   "metric": "aa_frontier_price_per_point",
+   "obs_ids": [
+    "18ff00e52b5ea6b8",
+    "81819f4cc2334b96"
+   ],
+   "value": 0.004608294930875576,
    "value_high": null,
    "value_low": null
   }
@@ -162,21 +186,21 @@
  "grade": "A",
  "id": "model_price_per_intelligence_point",
  "latest": {
-  "as_of": "2026-09-30",
-  "derived_id": "d9fdc050389a40e5",
+  "as_of": "2026-10-08",
+  "derived_id": "4e6b5cc72ed86c39",
   "dims": {},
   "obs_ids": [
-   "4e1377865cbc6bdf",
-   "fee9950277164738"
+   "18ff00e52b5ea6b8",
+   "81819f4cc2334b96"
   ],
   "unit": "USD",
-  "value": 0.011749460043196545
+  "value": 0.004608294930875576
  },
  "layer_id": "model",
  "leading_lagging": "coincident",
  "metric": "aa_frontier_price_per_point",
  "metric_dims": {},
- "n_observations": 4,
+ "n_observations": 6,
  "name": "Price per unit of capability (cheapest near-frontier model, Artificial Analysis)",
  "normal_band": null,
  "override_note": null,
@@ -195,7 +219,7 @@
    "stamp": "measured",
    "unit": "USD",
    "value": 0.005669856459330143,
-   "x": 4.76,
+   "x": 3.45,
    "y": 79.13
   },
   {
@@ -211,8 +235,24 @@
    "stamp": "measured",
    "unit": "USD",
    "value": 0.011749460043196545,
-   "x": 95.24,
+   "x": 68.97,
    "y": 3.13
+  },
+  {
+   "as_of": "2026-10-08",
+   "derived_id": "4e6b5cc72ed86c39",
+   "dims": {},
+   "faint": false,
+   "href": "#d-4e6b5cc72ed86c39",
+   "obs_ids": [
+    "18ff00e52b5ea6b8",
+    "81819f4cc2334b96"
+   ],
+   "stamp": "measured",
+   "unit": "USD",
+   "value": 0.004608294930875576,
+   "x": 96.55,
+   "y": 92.4
   }
  ],
  "prediction_rows": [],
@@ -235,10 +275,10 @@
   "artificial_analysis"
  ],
  "spark": {
-  "d": "M1.0,26.0 L95.0,2.0",
+  "d": "M1.0,22.4 L48.0,2.0 L95.0,26.0",
   "end": [
    95.0,
-   2.0
+   26.0
   ]
  },
  "stale_as_of": null,
