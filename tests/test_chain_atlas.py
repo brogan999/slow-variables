@@ -32,8 +32,11 @@ ORDER = ["slack", "easing", "moderate", "tight", "severe"]
 TEXTS = json.loads((ROOT / "web" / "data" / "outlook.json").read_text())["figures"]["texts"]
 
 
+PREDICTIONS = json.loads((ROOT / "web" / "data" / "argument.json").read_text())["migration"]["predictions"]
+
+
 def atlas(spec=SPEC, scored=SCORED):
-    return ca.build(spec, OPS, OUTLOOK, MAP, scored, TEXTS)
+    return ca.build(spec, OPS, OUTLOOK, MAP, scored, TEXTS, PREDICTIONS)
 
 
 def tiles(doc):
@@ -374,7 +377,9 @@ def test_ownership_futures_move_businesses_and_parts_like_any_other():
 
 def test_a_broken_ownership_future_names_each_problem():
     bad = copy.deepcopy(SPEC)
-    bad["ownership"][0].update(argued_by=["nobody_at_all"], bears_for=["no_such_claim"], says="Up 40% by 2030.")
+    bad["ownership"][0].update(
+        argued_by=["nobody_at_all"], bears_for=["no_such_claim"], says="Up 40% by 2030."
+    )
     bad["ownership"].append({"id": "Bad Id", "name": "x", "says": "y", "argued_by": []})
     bad["waiting"] = [{"name": "Something", "why": ""}]
     errors = "\n".join(ca.problems(bad, opportunities.load(), OUTLOOK, MAP))
@@ -434,3 +439,138 @@ def test_a_link_into_a_folded_section_opens_it_after_a_page_change_too():
     assert "f.bears_for" in comp and "f.bears_against" in comp and "a.field" in comp
     assert 'href="/outlook#sources"' in comp
     assert "## Part 48c" in (ROOT / "docs" / "plan.md").read_text()
+
+
+# Part 48d: where the shortage goes next, what a durable business builds, and the planning assumptions
+
+
+def test_each_migration_prediction_is_tied_to_its_parts_of_the_map_and_the_businesses_that_ride_it():
+    doc = atlas()
+    assert [c["id"] for c in doc["chains"]] == [p["id"] for p in PREDICTIONS], (
+        "every prediction the site makes, in the site's order"
+    )
+    t, rows = tiles(doc), {b["id"]: b for g in doc["groups"] for b in g["businesses"]}
+    for c, p in zip(doc["chains"], PREDICTIONS):
+        assert c["claim"] == p["claim"] and c["state"] == p["state"] and c["state_word"], (
+            "the claim and tonight's state are the site's, never ours"
+        )
+        assert c["href"] == "/argument/migration#predictions" and c["says"]
+        assert all(x["href"] == f"#ca-g-{x['id']}" and x["id"] in t for x in c["parts"])
+        assert all(x["n"] == rows[x["id"]]["n"] for x in c["businesses"])
+    proof = next(c for c in doc["chains"] if c["id"] == "agent_proof_watch")
+    assert "outcome_verification" in [x["id"] for x in proof["parts"]] and "outcome_verification" in [
+        x["id"] for x in proof["businesses"]
+    ]
+
+
+def test_each_business_says_which_durable_things_it_builds():
+    doc = atlas()
+    ids = [p["id"] for p in doc["primitives"]]
+    assert ids == ["record", "test", "backing", "yardstick", "choice"]
+    rows = [b for g in doc["groups"] for b in g["businesses"]]
+    for b in rows:
+        assert [x["id"] for x in b["builds"]] == [i for i in ids if i in SPEC["builds"].get(b["id"], [])]
+    for p in doc["primitives"]:
+        assert p["businesses"] == [
+            {"n": b["n"], "name": b["name"]} for b in rows if p["id"] in SPEC["builds"].get(b["id"], [])
+        ]
+
+
+def test_the_planning_assumptions_are_the_owners_and_each_says_what_would_weaken_it():
+    doc = atlas()
+    assert [g["id"] for g in doc["priors"]] == ["customers", "systems", "markets"]
+    every = [x for g in doc["priors"] for x in g["assumptions"]]
+    assert len(every) == len({x["text"] for x in every}) >= 12 and all(
+        x["text"] and x["weakened_by"] for x in every
+    )
+    assert SPEC["priors_by"] and doc["priors_by"] == SPEC["priors_by"]
+
+
+def test_broken_chains_builds_and_assumptions_name_each_problem():
+    bad = copy.deepcopy(SPEC)
+    bad["chains"][0].update(parts=["nowhere"], businesses=["nobody"], says="Up 40% by 2030.")
+    bad["chains"].append({"id": "no_such_prediction", "parts": [], "businesses": [], "says": "x"})
+    bad["builds"]["outcome_verification"] = ["moat"]
+    bad["builds"]["nobody"] = ["record"]
+    bad["priors"][0]["assumptions"][0]["weakened_by"] = ""
+    errors = "\n".join(ca.problems(bad, opportunities.load(), OUTLOOK, MAP))
+    for part in (
+        "nowhere",
+        "nobody",
+        "types a figure",
+        "no_such_prediction",
+        "builds moat",
+        "says what would weaken it",
+    ):
+        assert part in errors, part
+    missing = copy.deepcopy(SPEC)
+    missing["chains"] = missing["chains"][1:]
+    assert "has no chain" in "\n".join(ca.problems(missing, opportunities.load(), OUTLOOK, MAP))
+
+
+def test_the_page_shows_the_chains_the_builds_and_the_assumptions():
+    comp = (WEB / "components" / "ChainAtlas.tsx").read_text()
+    for part in (
+        'id="ca-next"',
+        'id="ca-builds"',
+        'id="ca-priors"',
+        "d.chains.map",
+        "d.primitives.map",
+        "d.priors.map",
+        "b.builds",
+    ):
+        assert part in comp, part
+    assert "planning assumptions, not readings" in comp
+    contents = (WEB / "lib" / "contents.ts").read_text()
+    assert all(f'"{i}"' in contents for i in ("ca-next", "ca-builds", "ca-priors"))
+    assert "## Part 48d" in (ROOT / "docs" / "plan.md").read_text()
+
+
+def test_the_chain_labels_cover_the_sites_states_and_assert_no_shortage_of_their_own():
+    from ai_tracker.argument import STATES
+
+    assert set(SPEC["chain_states"]) == set(STATES) and set(SPEC["chain_when"]) == {"now", "next", "watch"}
+    assert all("short" not in w.lower() for w in SPEC["chain_when"].values()), (
+        "a label must not say what a prediction says"
+    )
+    doc = atlas()
+    assert all(
+        [x["n"] for x in c["businesses"]] == sorted(x["n"] for x in c["businesses"]) for c in doc["chains"]
+    )
+
+
+def test_duplicate_chains_and_broken_lasting_things_are_caught():
+    bad = copy.deepcopy(SPEC)
+    bad["chains"].append(copy.deepcopy(bad["chains"][0]))
+    bad["primitives"].append(copy.deepcopy(bad["primitives"][0]))
+    del bad["primitives"][1]["why"]
+    bad["priors"][0]["assumptions"][0]["after"] = {"who": "Somebody", "href": "/no-such-page"}
+    errors = "\n".join(ca.problems(bad, opportunities.load(), OUTLOOK, MAP))
+    for part in (
+        "chain data_centres_now is given twice",
+        "lasting thing record is given twice",
+        "has no why",
+        "/no-such-page",
+    ):
+        assert part in errors, part
+
+
+def test_an_assumption_that_restates_a_named_writers_argument_says_whose_it_is():
+    every = [a for g in SPEC["priors"] for a in g["assumptions"]]
+    named = [a for a in every if a.get("after")]
+    assert len(named) >= 3 and all(
+        a["after"]["who"] and (WEB / "app" / a["after"]["href"].split("#")[0].strip("/")).is_dir()
+        for a in named
+    )
+    assert all(b for b in SPEC["builds"].values()), (
+        "a business that builds none is left out, not listed empty"
+    )
+
+
+def test_the_page_says_whose_each_thing_is():
+    comp = (WEB / "components" / "ChainAtlas.tsx").read_text()
+    assert "the site&apos;s owner" in comp and "a.after" in comp and "The site&apos;s test:" in comp
+    assert "which are the site&apos;s own and tested nightly" in comp, (
+        "the foot no longer calls the whole page a model's judgement"
+    )
+    assert 'role="region"' in comp and "Businesses that sell into it" in comp

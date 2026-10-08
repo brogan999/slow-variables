@@ -980,7 +980,7 @@ class Store:
         from .outlook import load as load_outlook
 
         scored = {i["id"]: {"word": i["word"], "name": i["name"], "hatched": bool(i.get("hatched"))} for i in scorecard(self, date.today())["inputs"] if i.get("word") in chain_atlas.ORDER}
-        _write(out / "chain_atlas.json", chain_atlas.build(chain_atlas.load(), opps_doc, load_outlook(), mm_doc, scored, outlook["figures"]["texts"]))
+        _write(out / "chain_atlas.json", chain_atlas.build(chain_atlas.load(), opps_doc, load_outlook(), mm_doc, scored, outlook["figures"]["texts"], argument["migration"]["predictions"]))
         from . import census, firm
 
         _write(out / "firm.json", firm.build(firm.load(), outlook, firm.ESSAY.read_text() if firm.ESSAY.exists() else "", census.shape(census.load())))

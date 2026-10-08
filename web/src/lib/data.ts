@@ -715,7 +715,7 @@ export type AtlasEffect = "stronger" | "weaker" | "breaks" | "unchanged";
 export type AtlasMark = { future: string; key: string; name: string; effect: AtlasEffect; word: string; label: string; reason: string };
 export type AtlasBusiness = {
   id: string; n: number; name: string; call: string; take: string; kills: string; stage: string | null; holds: boolean; problem: string; profit: string;
-  primary: { number: string | null; name: string; href: string }; href: string; marks: AtlasMark[]; moved: AtlasMark[];
+  primary: { number: string | null; name: string; href: string }; href: string; marks: AtlasMark[]; moved: AtlasMark[]; builds: { id: string; name: string }[];
 };
 export type AtlasTime = "now" | "transition" | "mature";
 export type AtlasState = { word: string; level: number; measured: boolean; hatched: boolean; gauge: string | null };
@@ -727,6 +727,10 @@ export type ChainAtlasDoc = {
   times: { id: AtlasTime; name: string; says: string }[];
   map: { layers: { number: number; name: string; categories: AtlasTile[] }[] };
   ground: { id: string; name: string; says: string; categories: string[] }[];
+  chains: { id: string; when: string; claim: string; state: string; state_word: string; href: string; says: string; parts: { id: string; number: string; name: string; href: string }[]; businesses: { id: string; n: number; name: string }[] }[];
+  primitives: { id: string; name: string; what: string; why: string; businesses: { n: number; name: string }[] }[];
+  priors: { id: string; name: string; assumptions: { text: string; exception?: string; weakened_by: string; after?: { who: string; href: string } }[] }[];
+  priors_by: string;
   made_by: { model: string; date: string; method: string; reviewed_by: string } | null;
   futures: { id: string; key: string; group: string; name: string; says: string; argued_by: { who: string; field: string; href: string }[]; bears_for: { text: string; href: string }[]; bears_against: { text: string; href: string }[] }[];
   future_groups: { id: string; name: string }[];
