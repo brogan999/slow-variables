@@ -20,11 +20,11 @@ OPS = json.loads((ROOT / "web" / "data" / "opportunities.json").read_text())
 
 MAP = json.loads((ROOT / "web" / "data" / "market_map.json").read_text())
 SCORED = {
-    r["id"]: r["word"]
-    for r in json.loads((ROOT / "web" / "data" / "argument.json").read_text())["migration"]["figures"][
-        "ages"
-    ]["rows"]
-    if r.get("word")
+    i["id"]: {"word": i["word"], "name": i["name"], "hatched": bool(i.get("hatched"))}
+    for i in json.loads((ROOT / "web" / "data" / "argument.json").read_text())["migration"]["scorecard"][
+        "inputs"
+    ]
+    if i.get("word")
 }
 ORDER = ["slack", "easing", "moderate", "tight", "severe"]
 
@@ -185,13 +185,15 @@ def test_every_part_of_the_map_in_scope_has_a_path_and_nothing_else_does():
 def test_now_is_the_reading_where_one_is_scored_and_a_labelled_judgement_where_not():
     t = tiles(atlas())
     power = t["power_and_sites"]["states"]["none"]["now"]
+    energy = SCORED["energy"]
     assert power == {
-        "word": SCORED["energy"],
-        "level": ORDER.index(SCORED["energy"]) + 1,
+        "word": energy["word"],
+        "level": ORDER.index(energy["word"]) + 1,
         "measured": True,
-        "label": power["label"],
+        "hatched": energy["hatched"],
+        "gauge": energy["name"],
     }
-    assert "probably" not in power["label"]
+    assert energy["hatched"], "tonight's electricity score is low-confidence, so the tile must say so"
     proof = t["outcome_verification"]["states"]["none"]["now"]
     assert proof["measured"] is False and proof["word"].startswith("probably ")
     lapsed = tiles(atlas(scored={}))["power_and_sites"]["states"]["none"]["now"]
@@ -265,3 +267,70 @@ def test_the_map_is_the_one_island_and_looks_up_every_state():
     assert "c.states[future]" in island and 'name="ca-time"' in comp
     assert "measured" in island and "a model&apos;s judgement" in island
     assert 'id="ca-ground"' in comp and '"ca-map"' in (WEB / "lib" / "contents.ts").read_text()
+
+
+def test_a_reading_that_differs_from_the_judged_word_wins_for_now_only():
+    scored = {**SCORED, "data_centres": {"word": "slack", "name": "Data-centre buildings", "hatched": False}}
+    c = tiles(atlas(scored=scored))["data_centre_infrastructure"]["states"]["none"]
+    assert (c["now"]["word"], c["now"]["measured"], c["now"]["gauge"]) == (
+        "slack",
+        True,
+        "Data-centre buildings",
+    )
+    assert (
+        c["transition"]["word"]
+        == "probably " + SPEC["categories"]["data_centre_infrastructure"]["transition"]
+        and c["transition"]["gauge"] is None
+    )
+
+
+def test_a_part_already_slack_cannot_ease_further():
+    spec = copy.deepcopy(SPEC)
+    spec["shifts"]["stall_money/unclear"]["synthetic_data"] = {"move": "eases", "reason": "x"}
+    c = tiles(atlas(spec))["synthetic_data"]["states"]
+    assert c["stall_money-unclear"]["mature"]["level"] == 1 == c["none"]["mature"]["level"]
+
+
+def test_the_scale_the_times_the_moves_and_the_ground_are_checked():
+    bad = copy.deepcopy(SPEC)
+    bad["scarcity"]["tight"] = "tight"
+    del bad["scarcity"]["slack"]
+    bad["times"] = bad["times"][:2]
+    bad["moves"] = {"tightens": "tightens"}
+    bad["ground"][0]["id"] = "rising"
+    bad["ground"][1]["says"] = "About 3 parts."
+    errors = "\n".join(ca.problems(bad, opportunities.load(), OUTLOOK, MAP))
+    for part in (
+        "scarcity must give a judged word for each of",
+        "shows the scorecard's own word",
+        "times must be now, transition, mature",
+        "moves must name",
+        "ground must be scarcer, holds, eases",
+        "ground holds types a figure",
+    ):
+        assert part in errors, part
+
+
+def test_the_map_text_names_the_power_grid_and_no_asserted_regularity():
+    texts = [(cid, f"{c['scarce']} {c['reason']}") for cid, c in SPEC["categories"].items()]
+    texts += [(f"{f}/{cid}", m["reason"]) for f, moved in SPEC["shifts"].items() for cid, m in moved.items()]
+    for where, text in texts:
+        assert "grid" not in text.replace("power grid", ""), (
+            f"{where}: say power grid; the grid is the outlook's"
+        )
+        assert "before" not in text.split() or "have ended" not in text, where
+
+
+def test_the_map_uses_the_scorecards_colours_names_its_gauges_and_reads_on_a_phone():
+    island = (WEB / "components" / "ChainAtlasMap.tsx").read_text()
+    comp = (WEB / "components" / "ChainAtlas.tsx").read_text()
+    assert 'import { TONE } from "@/components/diagrams/migration"' in island, (
+        "one mapping of words to the ramp, the scorecard's"
+    )
+    assert island.index("function Tile(") < island.index("export function ChainAtlasMap("), (
+        "a tile defined in render remounts on every change"
+    )
+    assert "hatch" in island and "s.gauge" in island and "#ca-g-" in island and "aria-live" in island
+    assert "opacity-80" not in island
+    assert '<legend className="eyebrow">At this point in time</legend>' in comp and "<noscript>" in comp
+    assert "tonight’s reading of" in comp or "tonight&apos;s reading of" in comp
