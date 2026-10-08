@@ -29,8 +29,11 @@ SCORED = {
 ORDER = ["slack", "easing", "moderate", "tight", "severe"]
 
 
+TEXTS = json.loads((ROOT / "web" / "data" / "outlook.json").read_text())["figures"]["texts"]
+
+
 def atlas(spec=SPEC, scored=SCORED):
-    return ca.build(spec, OPS, OUTLOOK, MAP, scored)
+    return ca.build(spec, OPS, OUTLOOK, MAP, scored, TEXTS)
 
 
 def tiles(doc):
@@ -76,9 +79,9 @@ def test_a_broken_file_names_each_problem():
 def test_the_export_lays_out_every_future_for_every_business():
     doc = atlas()
     cells = [f"{c['progress']}/{c['rules']}" for c in OUTLOOK["scenarios"]["cells"]]
-    assert [f["id"] for f in doc["futures"] if f["group"] == "grid"] == [c for c in cells if c not in SPEC["not_judged"]], (
-        "a future nobody judged is no column"
-    )
+    assert [f["id"] for f in doc["futures"] if f["group"] == "grid"] == [
+        c for c in cells if c not in SPEC["not_judged"]
+    ], "a future nobody judged is no column"
     assert [n["name"] for n in doc["not_judged"]] == ["Control slips away, the rules stay unsettled"] and doc[
         "not_judged"
     ][0]["why"]
@@ -350,7 +353,7 @@ def test_an_ownership_future_is_on_the_dial_only_when_a_named_writer_argues_it()
             sources[i]["who"] for i in o["argued_by"]
         ]
         assert all(a["href"] == f"/outlook#source-{i}" for a, i in zip(f["argued_by"], o["argued_by"]))
-        assert all(b["href"].startswith("/outlook#claim-") and b["title"] for b in f["bears"])
+        assert all(a["field"] for a in f["argued_by"]), "a person is introduced by what they study"
     grid = [f for f in doc["futures"] if f["group"] == "grid"]
     assert all(f["argued_by"] for f in grid), "the grid's futures name their writers too"
     assert doc["waiting"] and all(w["name"] and w["why"] for w in doc["waiting"]), (
@@ -390,3 +393,44 @@ def test_the_page_groups_the_futures_and_names_who_argues_each():
     comp = (WEB / "components" / "ChainAtlas.tsx").read_text()
     assert "d.future_groups.map" in comp and "f.argued_by.map" in comp and "d.waiting.map" in comp
     assert "no future here weakens it" in comp and "on the grid weakens" not in comp
+
+
+def test_every_link_from_a_future_lands_on_a_record_and_says_which_way_it_cuts():
+    doc = atlas()
+    sources = {x["id"] for x in OUTLOOK["sources"]}
+    for f in doc["futures"]:
+        assert all(a["href"].removeprefix("/outlook#source-") in sources for a in f["argued_by"]), f["id"]
+        linked = [*f["bears_for"], *f["bears_against"]]
+        assert all(b["text"] == TEXTS[b["href"].removeprefix("/outlook#claim-")] for b in linked), f["id"]
+        assert len({b["text"] for b in linked}) == len(linked), f"{f['id']}: one claim linked twice"
+    trade = next(f for f in doc["futures"] if f["id"] == "owners/agents_trade")
+    assert trade["bears_for"] and trade["bears_against"], (
+        "its own writers' claim, and the rival's, each marked as such"
+    )
+
+
+def test_ownership_ids_are_unique_grouped_and_can_be_left_unjudged():
+    bad = copy.deepcopy(SPEC)
+    bad["ownership"].append(copy.deepcopy(bad["ownership"][0]))
+    bad["future_groups"] = bad["future_groups"][:1]
+    errors = "\n".join(ca.problems(bad, opportunities.load(), OUTLOOK, MAP))
+    assert "is defined twice" in errors and "future_groups must be grid, owners" in errors
+    spec = copy.deepcopy(SPEC)
+    first = spec["ownership"][0]["id"]
+    spec["not_judged"][f"owners/{first}"] = "Nobody judged it."
+    for b in spec["businesses"].values():
+        b["futures"].pop(f"owners/{first}", None)
+    spec["shifts"].pop(f"owners/{first}", None)
+    assert ca.problems(spec, opportunities.load(), OUTLOOK, MAP) == []
+    doc = atlas(spec)
+    assert f"owners/{first}" not in [f["id"] for f in doc["futures"]] and spec["ownership"][0]["name"] in [
+        n["name"] for n in doc["not_judged"]
+    ]
+
+
+def test_a_link_into_a_folded_section_opens_it_after_a_page_change_too():
+    assert "usePathname" in (WEB / "components" / "OpenOnHash.tsx").read_text()
+    comp = (WEB / "components" / "ChainAtlas.tsx").read_text()
+    assert "f.bears_for" in comp and "f.bears_against" in comp and "a.field" in comp
+    assert 'href="/outlook#sources"' in comp
+    assert "## Part 48c" in (ROOT / "docs" / "plan.md").read_text()
