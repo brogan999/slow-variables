@@ -959,9 +959,8 @@ class Store:
         opps_doc = self._opportunities(mm_doc)
         _write(out / "opportunities.json", opps_doc)
         from . import chain_atlas
-        from .outlook import load as load_outlook
-
         from .argument import scorecard
+        from .outlook import load as load_outlook
 
         scored = {i["id"]: i["word"] for i in scorecard(self, date.today())["inputs"] if i.get("word") in chain_atlas.ORDER}
         _write(out / "chain_atlas.json", chain_atlas.build(chain_atlas.load(), opps_doc, load_outlook(), mm_doc, scored))
