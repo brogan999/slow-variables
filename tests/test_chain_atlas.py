@@ -524,3 +524,53 @@ def test_the_page_shows_the_chains_the_builds_and_the_assumptions():
     contents = (WEB / "lib" / "contents.ts").read_text()
     assert all(f'"{i}"' in contents for i in ("ca-next", "ca-builds", "ca-priors"))
     assert "## Part 48d" in (ROOT / "docs" / "plan.md").read_text()
+
+
+def test_the_chain_labels_cover_the_sites_states_and_assert_no_shortage_of_their_own():
+    from ai_tracker.argument import STATES
+
+    assert set(SPEC["chain_states"]) == set(STATES) and set(SPEC["chain_when"]) == {"now", "next", "watch"}
+    assert all("short" not in w.lower() for w in SPEC["chain_when"].values()), (
+        "a label must not say what a prediction says"
+    )
+    doc = atlas()
+    assert all(
+        [x["n"] for x in c["businesses"]] == sorted(x["n"] for x in c["businesses"]) for c in doc["chains"]
+    )
+
+
+def test_duplicate_chains_and_broken_lasting_things_are_caught():
+    bad = copy.deepcopy(SPEC)
+    bad["chains"].append(copy.deepcopy(bad["chains"][0]))
+    bad["primitives"].append(copy.deepcopy(bad["primitives"][0]))
+    del bad["primitives"][1]["why"]
+    bad["priors"][0]["assumptions"][0]["after"] = {"who": "Somebody", "href": "/no-such-page"}
+    errors = "\n".join(ca.problems(bad, opportunities.load(), OUTLOOK, MAP))
+    for part in (
+        "chain data_centres_now is given twice",
+        "lasting thing record is given twice",
+        "has no why",
+        "/no-such-page",
+    ):
+        assert part in errors, part
+
+
+def test_an_assumption_that_restates_a_named_writers_argument_says_whose_it_is():
+    every = [a for g in SPEC["priors"] for a in g["assumptions"]]
+    named = [a for a in every if a.get("after")]
+    assert len(named) >= 3 and all(
+        a["after"]["who"] and (WEB / "app" / a["after"]["href"].split("#")[0].strip("/")).is_dir()
+        for a in named
+    )
+    assert all(b for b in SPEC["builds"].values()), (
+        "a business that builds none is left out, not listed empty"
+    )
+
+
+def test_the_page_says_whose_each_thing_is():
+    comp = (WEB / "components" / "ChainAtlas.tsx").read_text()
+    assert "the site&apos;s owner" in comp and "a.after" in comp and "The site&apos;s test:" in comp
+    assert "which are the site&apos;s own and tested nightly" in comp, (
+        "the foot no longer calls the whole page a model's judgement"
+    )
+    assert 'role="region"' in comp and "Businesses that sell into it" in comp
