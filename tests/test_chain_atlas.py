@@ -16,8 +16,29 @@ SPEC, OUTLOOK = ca.load(), load_outlook()
 OPS = json.loads((ROOT / "web" / "data" / "opportunities.json").read_text())
 
 
+# Part 48b: what is scarce on each part of the map, now and later, and what each future does to it
+
+MAP = json.loads((ROOT / "web" / "data" / "market_map.json").read_text())
+SCORED = {
+    i["id"]: {"word": i["word"], "name": i["name"], "hatched": bool(i.get("hatched"))}
+    for i in json.loads((ROOT / "web" / "data" / "argument.json").read_text())["migration"]["scorecard"][
+        "inputs"
+    ]
+    if i.get("word")
+}
+ORDER = ["slack", "easing", "moderate", "tight", "severe"]
+
+
+def atlas(spec=SPEC, scored=SCORED):
+    return ca.build(spec, OPS, OUTLOOK, MAP, scored)
+
+
+def tiles(doc):
+    return {c["id"]: c for layer in doc["map"]["layers"] for c in layer["categories"]}
+
+
 def test_the_real_file_names_only_known_businesses_calls_and_futures_and_types_no_figure():
-    assert ca.problems(SPEC, opportunities.load(), OUTLOOK) == []
+    assert ca.problems(SPEC, opportunities.load(), OUTLOOK, MAP) == []
     published = {o["id"] for o in opportunities.load()["opportunities"] if o.get("published")}
     assert set(SPEC["businesses"]) == published, "every published business has a call, and nothing else does"
 
@@ -35,7 +56,7 @@ def test_a_broken_file_names_each_problem():
     }
     bad["not_judged"] = {**bad["not_judged"], "steady/priced": "", "nowhere/at_all": "x"}
     del bad["made_by"]["reviewed_by"]
-    errors = "\n".join(ca.problems(bad, opportunities.load(), OUTLOOK))
+    errors = "\n".join(ca.problems(bad, opportunities.load(), OUTLOOK, MAP))
     for part in (
         "no_such_business",
         "call buy",
@@ -53,7 +74,7 @@ def test_a_broken_file_names_each_problem():
 
 
 def test_the_export_lays_out_every_future_for_every_business():
-    doc = ca.build(SPEC, OPS, OUTLOOK)
+    doc = atlas()
     cells = [f"{c['progress']}/{c['rules']}" for c in OUTLOOK["scenarios"]["cells"]]
     assert [f["id"] for f in doc["futures"]] == [c for c in cells if c not in SPEC["not_judged"]], (
         "a future nobody judged is no column"
@@ -80,21 +101,21 @@ def test_the_export_lays_out_every_future_for_every_business():
 
 
 def test_a_business_holds_only_when_some_future_lifts_it_and_none_hurts_it():
-    doc = ca.build(SPEC, OPS, OUTLOOK)
+    doc = atlas()
     for b in (b for g in doc["groups"] for b in g["businesses"]):
         effects = {m["effect"] for m in b["marks"]}
         assert b["holds"] == ("stronger" in effects and not effects & {"weaker", "breaks"}), b["id"]
     spec = copy.deepcopy(SPEC)
     for b in spec["businesses"].values():
         b["futures"] = {}
-    assert not any(b["holds"] for g in ca.build(spec, OPS, OUTLOOK)["groups"] for b in g["businesses"]), (
+    assert not any(b["holds"] for g in atlas(spec)["groups"] for b in g["businesses"]), (
         "unjudged is not robust"
     )
 
 
 def test_the_committed_export_is_the_build_and_check_reads_the_file():
     assert json.loads((ROOT / "web" / "data" / "chain_atlas.json").read_text()) == json.loads(
-        json.dumps(ca.build(SPEC, OPS, OUTLOOK))
+        json.dumps(atlas())
     )
     assert "chain_atlas.problems(" in (ROOT / "src" / "ai_tracker" / "cli.py").read_text()
     assert 'out / "chain_atlas.json"' in (ROOT / "src" / "ai_tracker" / "store.py").read_text()
@@ -121,7 +142,7 @@ def test_the_page_switches_futures_without_script_and_labels_the_judgement():
 
 
 def test_each_business_links_to_its_place_on_the_map():
-    for b in (b for g in ca.build(SPEC, OPS, OUTLOOK)["groups"] for b in g["businesses"]):
+    for b in (b for g in atlas()["groups"] for b in g["businesses"]):
         assert b["primary"]["href"].startswith("/value-chain#mm-"), b["id"]
 
 
@@ -147,3 +168,169 @@ def test_no_take_counts_the_file_and_the_power_grid_is_named_as_one():
         assert "grid" not in text.replace("power grid", "").replace("on the grid", ""), (
             f"{bid}: say power grid; the grid is the outlook's"
         )
+
+
+def test_every_part_of_the_map_in_scope_has_a_path_and_nothing_else_does():
+    in_scope = {
+        c["id"]
+        for layer in MAP["layers"]
+        for c in layer["categories"]
+        if not c.get("out_of_scope") and c.get("number") != "8"
+    }
+    assert set(SPEC["categories"]) == in_scope
+    assert ca.problems(SPEC, opportunities.load(), OUTLOOK, MAP) == []
+    assert [t["id"] for t in atlas()["times"]] == ["now", "transition", "mature"]
+
+
+def test_now_is_the_reading_where_one_is_scored_and_a_labelled_judgement_where_not():
+    t = tiles(atlas())
+    power = t["power_and_sites"]["states"]["none"]["now"]
+    energy = SCORED["energy"]
+    assert power == {
+        "word": energy["word"],
+        "level": ORDER.index(energy["word"]) + 1,
+        "measured": True,
+        "hatched": energy["hatched"],
+        "gauge": energy["name"],
+    }
+    assert energy["hatched"], "tonight's electricity score is low-confidence, so the tile must say so"
+    proof = t["outcome_verification"]["states"]["none"]["now"]
+    assert proof["measured"] is False and proof["word"].startswith("probably ")
+    lapsed = tiles(atlas(scored={}))["power_and_sites"]["states"]["none"]["now"]
+    assert (
+        lapsed["measured"] is False
+        and lapsed["word"] == "probably " + SPEC["categories"]["power_and_sites"]["now"]
+    ), "a lapsed reading falls back to the judgement"
+
+
+def test_a_future_never_moves_now_and_moves_later_one_step_clamped():
+    doc = atlas()
+    t, keys = tiles(doc), [f["key"] for f in doc["futures"]]
+    for c in t.values():
+        assert set(c["states"]) == {"none", *keys}
+        for k in keys:
+            assert c["states"][k]["now"] == c["states"]["none"]["now"], (c["id"], k)
+            for when in ("transition", "mature"):
+                step = c["states"][k][when]["level"] - c["states"]["none"][when]["level"]
+                move = next((m["move"] for m in c["moved"] if m["key"] == k), None)
+                assert step in ({"tightens": (0, 1), "eases": (0, -1), None: (0,)}[move]), (c["id"], k, when)
+                assert 1 <= c["states"][k][when]["level"] <= 5 and c["states"][k][when]["measured"] is False
+    proof = t["outcome_verification"]
+    assert (
+        proof["states"]["steady-priced"]["mature"]["level"] == 5 == proof["states"]["none"]["mature"]["level"]
+    ), "severe cannot tighten further"
+
+
+def test_the_ground_sorts_each_part_by_where_its_shortage_is_heading():
+    doc = atlas()
+    t = tiles(doc)
+    assert [g["id"] for g in doc["ground"]] == ["scarcer", "holds", "eases"]
+    assert sorted(i for g in doc["ground"] for i in g["categories"]) == sorted(t)
+    for g in doc["ground"]:
+        for cid in g["categories"]:
+            base = t[cid]["states"]["none"]
+            diff = base["mature"]["level"] - base["now"]["level"]
+            assert (diff > 0, diff == 0, diff < 0) == (
+                g["id"] == "scarcer",
+                g["id"] == "holds",
+                g["id"] == "eases",
+            ), cid
+
+
+def test_a_broken_path_or_shift_names_each_problem():
+    bad = copy.deepcopy(SPEC)
+    bad["categories"]["power_and_sites"].update(
+        now="scarce", reason="Up 40% since 2024.", reading="no_such_gauge"
+    )
+    del bad["categories"]["outcome_verification"]
+    bad["categories"]["nowhere"] = bad["categories"]["security"]
+    bad["shifts"]["steady/priced"]["security"] = {"move": "explodes", "reason": ""}
+    bad["shifts"]["loss_of_control/unclear"] = {"security": {"move": "tightens", "reason": "x"}}
+    errors = "\n".join(ca.problems(bad, opportunities.load(), OUTLOOK, MAP))
+    for part in (
+        "word scarce",
+        "types a figure",
+        "no_such_gauge",
+        "outcome_verification has no path",
+        "nowhere is not",
+        "move explodes",
+        "gives no reason",
+        "loss_of_control/unclear",
+    ):
+        assert part in errors, part
+
+
+def test_the_map_is_the_one_island_and_looks_up_every_state():
+    island = (WEB / "components" / "ChainAtlasMap.tsx").read_text()
+    comp = (WEB / "components" / "ChainAtlas.tsx").read_text()
+    assert '"use client"' in island and '"use client"' not in comp and "<ChainAtlasMap" in comp
+    assert "c.states[future]" in island and 'name="ca-time"' in comp
+    assert "measured" in island and "a model&apos;s judgement" in island
+    assert 'id="ca-ground"' in comp and '"ca-map"' in (WEB / "lib" / "contents.ts").read_text()
+
+
+def test_a_reading_that_differs_from_the_judged_word_wins_for_now_only():
+    scored = {**SCORED, "data_centres": {"word": "slack", "name": "Data-centre buildings", "hatched": False}}
+    c = tiles(atlas(scored=scored))["data_centre_infrastructure"]["states"]["none"]
+    assert (c["now"]["word"], c["now"]["measured"], c["now"]["gauge"]) == (
+        "slack",
+        True,
+        "Data-centre buildings",
+    )
+    assert (
+        c["transition"]["word"]
+        == "probably " + SPEC["categories"]["data_centre_infrastructure"]["transition"]
+        and c["transition"]["gauge"] is None
+    )
+
+
+def test_a_part_already_slack_cannot_ease_further():
+    spec = copy.deepcopy(SPEC)
+    spec["shifts"]["stall_money/unclear"]["synthetic_data"] = {"move": "eases", "reason": "x"}
+    c = tiles(atlas(spec))["synthetic_data"]["states"]
+    assert c["stall_money-unclear"]["mature"]["level"] == 1 == c["none"]["mature"]["level"]
+
+
+def test_the_scale_the_times_the_moves_and_the_ground_are_checked():
+    bad = copy.deepcopy(SPEC)
+    bad["scarcity"]["tight"] = "tight"
+    del bad["scarcity"]["slack"]
+    bad["times"] = bad["times"][:2]
+    bad["moves"] = {"tightens": "tightens"}
+    bad["ground"][0]["id"] = "rising"
+    bad["ground"][1]["says"] = "About 3 parts."
+    errors = "\n".join(ca.problems(bad, opportunities.load(), OUTLOOK, MAP))
+    for part in (
+        "scarcity must give a judged word for each of",
+        "shows the scorecard's own word",
+        "times must be now, transition, mature",
+        "moves must name",
+        "ground must be scarcer, holds, eases",
+        "ground holds types a figure",
+    ):
+        assert part in errors, part
+
+
+def test_the_map_text_names_the_power_grid_and_no_asserted_regularity():
+    texts = [(cid, f"{c['scarce']} {c['reason']}") for cid, c in SPEC["categories"].items()]
+    texts += [(f"{f}/{cid}", m["reason"]) for f, moved in SPEC["shifts"].items() for cid, m in moved.items()]
+    for where, text in texts:
+        assert "grid" not in text.replace("power grid", ""), (
+            f"{where}: say power grid; the grid is the outlook's"
+        )
+        assert "before" not in text.split() or "have ended" not in text, where
+
+
+def test_the_map_uses_the_scorecards_colours_names_its_gauges_and_reads_on_a_phone():
+    island = (WEB / "components" / "ChainAtlasMap.tsx").read_text()
+    comp = (WEB / "components" / "ChainAtlas.tsx").read_text()
+    assert 'import { TONE } from "@/components/diagrams/migration"' in island, (
+        "one mapping of words to the ramp, the scorecard's"
+    )
+    assert island.index("function Tile(") < island.index("export function ChainAtlasMap("), (
+        "a tile defined in render remounts on every change"
+    )
+    assert "hatch" in island and "s.gauge" in island and "#ca-g-" in island and "aria-live" in island
+    assert "opacity-80" not in island
+    assert '<legend className="eyebrow">At this point in time</legend>' in comp and "<noscript>" in comp
+    assert "tonight’s reading of" in comp or "tonight&apos;s reading of" in comp

@@ -2,15 +2,18 @@
 # what each future the outlook's grid fills does to it. Every entry is a model's judgement in words, made under the
 # Part 39 policy: never a reading and never a status, and no evaluator, metric, tally or query tool reads this file.
 # A take, a reason and a `kills` type no figure. A future is named progress/rules, as seed/outlook.yaml names its cells;
-# one left out changes nothing. To withdraw a judgement, delete it.
+# one left out changes nothing. `categories` and `shifts` (Part 48b) say what is scarce on each part of the map and how each
+# future moves it; `reading` names the tightness gauge whose scored word replaces the judged `now`. To withdraw a judgement, delete it.
 made_by:
   model: claude-opus-5-5
-  date: '2026-10-07'
+  date: '2026-10-08'
   method: One model read each published business beside the site's readings of the value chain and each future the outlook's
     grid fills, gave the business a call with one line of reasoning and the one thing that would undo it, and said in words
-    what each future does to it. A future it left out changes nothing.
-  reviewed_by: a separate reviewing run of the same model, which changed calls, takes and reasons, withdrew some effects
-    and added others; no person reviewed each one
+    what each future does to it. A future it left out changes nothing. The same model then said, for each part of the map
+    in scope, what is scarce there, how short it is now, in the transition and at the mature state, and which futures tighten
+    or ease it, each with a reason.
+  reviewed_by: separate reviewing runs of the same model, which changed calls, takes, words and reasons, withdrew some effects
+    and moves and added others; no person reviewed each one
 calls:
 - id: build
   name: Build
@@ -270,3 +273,424 @@ businesses:
 not_judged:
   loss_of_control/unclear: No writer on the site says what this future does to any business, and a model's guess at it would
     be decoration.
+times:
+- id: now
+  name: Now
+  says: What the site reads tonight, and a model's judgement where it has no reading. No future changes it.
+- id: transition
+  name: Transition
+  says: The years in which AI is capable but firms are still fitting it into how they work. Shortages here come from the
+    pace of adoption, not the pace of the models.
+- id: mature
+  name: Mature state
+  says: A hypothesis of what stays scarce once firms have fitted AI in. Nothing here is a forecast with a date.
+scarcity:
+  slack: probably slack
+  easing: probably easing
+  moderate: probably moderate
+  tight: probably tight
+  severe: probably severe
+moves:
+  tightens: tightens
+  eases: eases
+ground:
+- id: scarcer
+  name: Ground that gets scarcer
+  says: Shorter at the mature state than today.
+- id: holds
+  name: Ground that holds
+  says: About as short later as it is today.
+- id: eases
+  name: Ground that eases
+  says: Shorter today than at the mature state.
+categories:
+  power_and_sites:
+    scarce: Sites already connected to the power grid
+    reading: energy
+    now: severe
+    transition: severe
+    mature: severe
+    reason: Connections to the power grid take longer to build than anything else in the chain, so the shortage eases last
+      and least.
+  data_centre_infrastructure:
+    scarce: Heavy electrical gear, and the trades who install it
+    reading: data_centres
+    now: tight
+    transition: tight
+    mature: moderate
+    reason: Factories for the gear and trained crews can be added in a few years, faster than connections to the power grid.
+  semiconductor_supply_chain:
+    scarce: Capacity at the newest chip-making processes
+    reading: foundry
+    now: moderate
+    transition: moderate
+    mature: moderate
+    reason: A plant for the newest process takes years to build and longer to run well, so capacity grows without catching
+      demand.
+  memory_storage_and_networking:
+    scarce: The fast stacked memory that sits beside an AI chip
+    reading: memory
+    now: moderate
+    transition: moderate
+    mature: easing
+    reason: Memory is a cyclical business whose makers add capacity when prices rise.
+  compute_providers:
+    scarce: Rentable computing at a price that works
+    now: moderate
+    transition: moderate
+    mature: easing
+    reason: Many firms are building capacity to rent, and what they rent out is much alike.
+  compute_utilization_and_control:
+    scarce: Knowing where each job should run
+    now: easing
+    transition: moderate
+    mature: moderate
+    reason: Few firms need it while computing is simply short; it matters more once supply is uneven by place and price.
+  general_purpose_models:
+    scarce: A lead over the next-best model
+    reading: pretraining
+    now: easing
+    transition: easing
+    mature: easing
+    reason: Open models chase the frontier within months, so a lead lasts only while it is renewed.
+  modality_native_models:
+    scarce: Data for sound, images and science
+    now: easing
+    transition: easing
+    mature: easing
+    reason: General models keep absorbing other kinds of input, which leaves a specialist's lead narrow and steady.
+  specialized_models:
+    scarce: A field's own data and trust
+    now: easing
+    transition: easing
+    mature: easing
+    reason: A field's data is hard to gather, but each better general model needs less of it.
+  model_compression_and_adaptation:
+    scarce: The skill of shrinking a model without losing quality
+    now: easing
+    transition: moderate
+    mature: easing
+    reason: As more work moves to cheaper and smaller models, the skill is wanted more before tools spread it.
+  data_origination:
+    scarce: Experts whose judgement can be checked
+    now: moderate
+    transition: moderate
+    mature: easing
+    reason: Experts in narrow fields are hard to recruit in quantity; the need falls as models learn from their own use.
+  data_rights_and_exchange:
+    scarce: Rights to archives nobody else holds
+    now: moderate
+    transition: moderate
+    mature: moderate
+    reason: An archive is licensed and stays its owner's, so the shortage neither clears nor grows.
+  data_transformation:
+    scarce: Clean, traceable data from live work
+    now: easing
+    transition: moderate
+    mature: easing
+    reason: The cleaning is being automated by the same models it feeds.
+  synthetic_data:
+    scarce: 'Little: whoever owns the model can make it'
+    now: slack
+    transition: slack
+    mature: slack
+    reason: A model's owner can generate it at will, so nothing here stays short.
+  training_environments:
+    scarce: Realistic practice tasks that can be graded
+    now: moderate
+    transition: moderate
+    mature: easing
+    reason: Many new sellers have entered, and building environments is a skill that spreads quickly.
+  reward_and_verification_systems:
+    scarce: A trusted way to grade work
+    now: moderate
+    transition: tight
+    mature: tight
+    reason: Grading gets harder as tasks get longer and less clear-cut.
+  post_training_and_learning_infrastructure:
+    scarce: A model that keeps learning without forgetting
+    now: tight
+    transition: tight
+    mature: moderate
+    reason: Deployment makes the lack of learning felt before research closes the gap.
+  evals_and_assurance:
+    scarce: A judge who is not the seller
+    now: moderate
+    transition: tight
+    mature: tight
+    reason: The more that rides on a model, the more a buyer needs someone other than its maker to vouch for it.
+  inference_supply:
+    scarce: 'Little: serving is priced like a commodity'
+    reading: inference
+    now: easing
+    transition: easing
+    mature: slack
+    reason: Prices for running a model have fallen steadily, and many firms offer the same service.
+  inference_optimization:
+    scarce: Engineers who can make serving cheaper
+    now: moderate
+    transition: moderate
+    mature: easing
+    reason: Each new model and chip needs the work done again, though the methods are published and copied.
+  routing_and_gateways:
+    scarce: A record of which choice worked
+    now: slack
+    transition: slack
+    mature: slack
+    reason: Open tools, the clouds and the labs give the choosing away; only the record of where traffic went is hard to
+      copy.
+  context_and_memory:
+    scarce: A firm's own knowledge, kept fresh and permissioned
+    now: moderate
+    transition: tight
+    mature: tight
+    reason: Every deployment needs it, and it has to be rebuilt firm by firm.
+  agent_runtimes:
+    scarce: 'Little: the plumbing is mostly free'
+    reading: agents
+    now: easing
+    transition: easing
+    mature: slack
+    reason: The labs and open projects give the software away.
+  tools_and_actuation:
+    scarce: Permission into the software that holds a firm's records
+    now: moderate
+    transition: moderate
+    mature: moderate
+    reason: Each system has an owner who decides who gets in, and that does not change quickly.
+  security:
+    scarce: Defences against agents being turned
+    now: moderate
+    transition: tight
+    mature: tight
+    reason: Attacks grow with what agents are allowed to do.
+  identity_and_authority:
+    scarce: Knowing which agent acts for whom
+    now: easing
+    transition: tight
+    mature: tight
+    reason: The need appears once agents act across firms, and no shared way of answering it exists yet.
+  provenance_and_audit:
+    scarce: A record of what an agent did that nobody can alter
+    now: moderate
+    transition: tight
+    mature: tight
+    reason: Every dispute and every review starts from the record, and few agents keep one.
+  outcome_verification:
+    scarce: Proof that an agent's work was done right
+    now: moderate
+    transition: tight
+    mature: severe
+    reason: Producing work gets cheaper while checking it does not.
+  settlement_and_billing:
+    scarce: A way to pay an agent only when the work is done
+    now: slack
+    transition: easing
+    mature: moderate
+    reason: Few agents pay for anything today; the need grows only if they start to.
+  liability_and_risk_transfer:
+    scarce: Someone solvent to stand behind an agent's work
+    now: tight
+    transition: tight
+    mature: severe
+    reason: Insurers are excluding AI from standard cover while firms put more work in agents' hands.
+  technical_implementation:
+    scarce: Engineers who can fit AI into a firm
+    now: tight
+    transition: tight
+    mature: easing
+    reason: Much of the fitting is done once at each firm, and tools and agents take over more of it.
+  context_engineering:
+    scarce: A firm's unwritten rules, written down
+    now: tight
+    transition: tight
+    mature: moderate
+    reason: The knowledge sits in people's heads, and models slowly get better at learning it from records.
+  managed_ai_operations:
+    scarce: People to keep agents running well
+    now: moderate
+    transition: tight
+    mature: moderate
+    reason: Running agents is new work that peaks while firms are still learning it.
+  adoption_and_change:
+    scarce: Managers willing to rebuild work around agents
+    now: tight
+    transition: tight
+    mature: moderate
+    reason: Firms change at the pace of their people, which is slower than the models.
+  talent_production:
+    scarce: People trained to deploy AI
+    now: tight
+    transition: moderate
+    mature: easing
+    reason: People can be trained faster than firms can be rebuilt, so this shortage passes first.
+  horizontal_copilots:
+    scarce: 'Little: the labs sell their own'
+    now: slack
+    transition: slack
+    mature: slack
+    reason: The labs sell assistants directly, and one is much like another.
+  functional_enterprise_applications:
+    scarce: A place in a department's daily work
+    now: slack
+    transition: easing
+    mature: easing
+    reason: The products are plentiful; what tightens slightly is room in a department's routine.
+  vertical_workflow_software:
+    scarce: A trade's records and approvals
+    now: easing
+    transition: moderate
+    mature: moderate
+    reason: A general model can draft the work but cannot hold the trade's records or sign for it.
+  autonomous_services:
+    scarce: A licence, and someone accountable for the result
+    now: easing
+    transition: moderate
+    mature: tight
+    reason: Licences are limited by law, and accountable firms cannot be created quickly.
+  ai_native_rollups:
+    scarce: Owners ready to sell, and clients on fixed fees
+    now: easing
+    transition: moderate
+    mature: moderate
+    reason: The firms worth buying are finite, and buyers are arriving.
+  consumer_ai:
+    scarce: A daily habit
+    now: slack
+    transition: slack
+    mature: easing
+    reason: Assistants are free and plentiful; the habit a few products hold is what is hard to win.
+shifts:
+  stall_capability/unclear:
+    technical_implementation:
+      move: tightens
+      reason: The gains come from fitting what exists, so the people who do it stay short for longer.
+    context_engineering:
+      move: tightens
+      reason: A model that will not learn a firm's habits needs them written down.
+    adoption_and_change:
+      move: tightens
+      reason: Spreading what already works is the whole of the gain.
+    general_purpose_models:
+      move: eases
+      reason: With no new frontier, the followers catch up.
+    power_and_sites:
+      move: eases
+      reason: Demand for new computing eases, and with it the queue for power.
+    talent_production:
+      move: tightens
+      reason: Spreading what already works takes people who can deploy it.
+    identity_and_authority:
+      move: eases
+      reason: Agents that stay inside a person's session need no identity of their own.
+    settlement_and_billing:
+      move: eases
+      reason: Agents that cannot finish whole jobs do not buy from each other.
+  stall_money/unclear:
+    power_and_sites:
+      move: eases
+      reason: Building slows, and the queue for connections shortens.
+    semiconductor_supply_chain:
+      move: eases
+      reason: Orders for chips are cut.
+    compute_providers:
+      move: eases
+      reason: Capacity built for demand that did not pay is rented cheaply.
+    data_origination:
+      move: eases
+      reason: A lab short of money buys less expert work.
+    data_centre_infrastructure:
+      move: eases
+      reason: Less is built, so the gear and the crews are easier to get.
+  steady/unclear:
+    adoption_and_change:
+      move: tightens
+      reason: Adoption at the pace of past technologies keeps the reorganising of work the limit for longer.
+    technical_implementation:
+      move: tightens
+      reason: Adoption at the pace of past technologies means years of fitting work.
+    context_engineering:
+      move: tightens
+      reason: Slow adoption keeps the knowledge in people's heads for longer.
+    talent_production:
+      move: tightens
+      reason: Years of fitting work need people who can deploy.
+  steady/priced:
+    outcome_verification:
+      move: tightens
+      reason: A payer who is liable wants proof.
+    provenance_and_audit:
+      move: tightens
+      reason: A claim is settled from the record.
+    evals_and_assurance:
+      move: tightens
+      reason: Courts and insurers ask who vouched for the system.
+    identity_and_authority:
+      move: tightens
+      reason: Liability follows whoever the agent acted for.
+    security:
+      move: tightens
+      reason: Each claim needs someone to say how the agent was turned or went wrong.
+    autonomous_services:
+      move: tightens
+      reason: Buyers want one accountable party, and there are few.
+  steady/licensed:
+    identity_and_authority:
+      move: tightens
+      reason: Registration before dealing requires it.
+    provenance_and_audit:
+      move: tightens
+      reason: A registered agent has to be able to show what it did.
+    security:
+      move: tightens
+      reason: A registered agent that is turned is its registrant's problem.
+    evals_and_assurance:
+      move: tightens
+      reason: Registration gives a regulator a point at which to ask for an outside test.
+    autonomous_services:
+      move: tightens
+      reason: Oversight favours firms that are already accountable, and there are few of them.
+  automated_research/unclear:
+    power_and_sites:
+      move: tightens
+      reason: Research run by models needs far more computing, and power is what limits it.
+    semiconductor_supply_chain:
+      move: tightens
+      reason: The chips for that computing have to be made.
+    compute_providers:
+      move: tightens
+      reason: Demand for computing outruns what is being built.
+    outcome_verification:
+      move: tightens
+      reason: More work is done with fewer people watching.
+    context_and_memory:
+      move: tightens
+      reason: Faster agents are held back by access to the firm's records, not by skill.
+    technical_implementation:
+      move: eases
+      reason: Agents do more of the fitting themselves.
+    context_engineering:
+      move: eases
+      reason: Better models learn a firm's habits from its records.
+    talent_production:
+      move: eases
+      reason: There is less deployment work left for people.
+    data_centre_infrastructure:
+      move: tightens
+      reason: The buildings and their power gear have to be built for that computing.
+    general_purpose_models:
+      move: tightens
+      reason: When each model speeds up the next, the leading labs pull away.
+    security:
+      move: tightens
+      reason: Faster agents doing more work can be turned in more places.
+    provenance_and_audit:
+      move: tightens
+      reason: Faster agents doing more work leave more to reconstruct after the fact.
+  automated_research/licensed:
+    evals_and_assurance:
+      move: tightens
+      reason: The race is slowed until systems can be checked.
+    general_purpose_models:
+      move: tightens
+      reason: The leading lab sits on the committee that slows the race, so its lead is kept.
