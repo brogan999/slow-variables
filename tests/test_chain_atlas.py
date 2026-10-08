@@ -76,7 +76,7 @@ def test_a_broken_file_names_each_problem():
 def test_the_export_lays_out_every_future_for_every_business():
     doc = atlas()
     cells = [f"{c['progress']}/{c['rules']}" for c in OUTLOOK["scenarios"]["cells"]]
-    assert [f["id"] for f in doc["futures"]] == [c for c in cells if c not in SPEC["not_judged"]], (
+    assert [f["id"] for f in doc["futures"] if f["group"] == "grid"] == [c for c in cells if c not in SPEC["not_judged"]], (
         "a future nobody judged is no column"
     )
     assert [n["name"] for n in doc["not_judged"]] == ["Control slips away, the rules stay unsettled"] and doc[

@@ -30,10 +30,10 @@ function Row({ b }: { b: AtlasBusiness }) {
         <span>
           <span className="ca-name text-[15px] font-semibold leading-snug underline decoration-grid decoration-dotted underline-offset-4">{b.name}</span>
           {b.stage ? <span className={tag}>{b.stage}</span> : null}
-          {b.holds ? <span className={tag}>no future on the grid weakens it</span> : null}
+          {b.holds ? <span className={tag}>no future here weakens it</span> : null}
           <span className="mt-0.5 block font-serif text-[15px] leading-snug text-ink-2">{b.take}</span>
         </span>
-        <span className="ca-strip col-start-2 md:col-start-auto" role="img" aria-label={b.moved.length ? b.moved.map((m) => m.label).join("; ") : "No future on the grid changes it"}>
+        <span className="ca-strip col-start-2 md:col-start-auto" role="img" aria-label={b.moved.length ? b.moved.map((m) => m.label).join("; ") : "No future here changes it"}>
           {b.marks.map((m) => <i key={m.key} data-f={m.key} data-e={m.effect} title={m.label} />)}
         </span>
         <span className="col-start-2 font-mono text-[11px] text-ink-2 md:col-start-auto md:text-right">
@@ -50,7 +50,7 @@ function Row({ b }: { b: AtlasBusiness }) {
             <ul className="flex flex-col gap-1">
               {b.moved.map((m) => <li key={m.key}><span className="font-medium text-ink">{m.label}.</span> {m.reason}</li>)}
             </ul>
-          ) : <p>No future on the grid changes it. That is no judgement that it holds: the futures that bear on it are not on the grid yet.</p>}
+          ) : <p>No future here changes it. That is no judgement that it holds: the futures that bear on it are not on the dial yet.</p>}
         </div>
         <p className="md:col-span-3">Sits on <Link href={b.primary.href} className={link}>{b.primary.number} {b.primary.name}</Link>. <Link href={b.href} className={link}>The full record: what it sells first, what it builds up and what would prove it wrong</Link></p>
         <p className="border-l-2 border-dotted border-axis pl-2 text-xs text-muted md:col-span-3">A model&apos;s judgement, not a reading: the call, the line under the name, what would overturn it and each future&apos;s effect. The problem, the profit and its place in the order of bets are the site&apos;s own record.</p>
@@ -74,7 +74,7 @@ function Ground({ c }: { c: AtlasTile }) {
       </summary>
       <div className="flex flex-col gap-2 px-3 pb-4 pt-1 text-[13px] text-ink-2 md:pl-[4.1rem]">
         <p>{c.reason} In the transition: {base.transition.word}.</p>
-        {c.moved.length ? <ul className="flex flex-col gap-1">{c.moved.map((m) => <li key={m.key}><span className="font-medium text-ink">{m.name}: {m.word}.</span> {m.reason}</li>)}</ul> : <p>No future on the grid is judged to move it.</p>}
+        {c.moved.length ? <ul className="flex flex-col gap-1">{c.moved.map((m) => <li key={m.key}><span className="font-medium text-ink">{m.name}: {m.word}.</span> {m.reason}</li>)}</ul> : <p>No future here is judged to move it.</p>}
         <p><Link href={c.href} className={link}>{c.n_entities ? "The companies the site places here" : "This part on the map"}</Link>{c.n_entities ? ", each with a link to have Ask reason it through." : ": the tracker has placed no independent company here yet."}</p>
         <p className="border-l-2 border-dotted border-axis pl-2 text-xs text-muted">A model&apos;s judgement, not a reading{base.now.gauge ? `, except the word for now, which is tonight’s reading of ${base.now.gauge}, the nearest gauge the site scores` : ""}: what is scarce, each word, the reason and each future&apos;s move.</p>
       </div>
@@ -91,16 +91,30 @@ export function ChainAtlas({ d }: { d: ChainAtlasDoc }) {
       <style>{states(d)}</style>
       <fieldset className="flex flex-col gap-2 border-y border-grid py-3">
         <legend className="eyebrow">Assume a future</legend>
-        <div className="flex flex-wrap gap-x-5 gap-y-1.5 text-sm">
+        <div className="flex flex-col gap-2 text-sm">
           <label className="inline-flex items-center gap-1.5"><input type="radio" name="ca-future" id="ca-none" value="none" defaultChecked />No particular future</label>
-          {d.futures.map((f) => <label key={f.key} className="inline-flex items-center gap-1.5"><input type="radio" name="ca-future" id={`ca-${f.key}`} value={f.key} />{f.name}</label>)}
+          {d.future_groups.map((g) => (
+            <div key={g.id} className="flex flex-wrap items-baseline gap-x-5 gap-y-1.5">
+              <span className="w-full text-[11px] font-semibold uppercase tracking-[0.08em] text-muted">{g.name}</span>
+              {d.futures.filter((f) => f.group === g.id).map((f) => <label key={f.key} className="inline-flex items-center gap-1.5"><input type="radio" name="ca-future" id={`ca-${f.key}`} value={f.key} />{f.name}</label>)}
+            </div>
+          ))}
         </div>
         <p className="ca-says font-serif text-[1.15rem] leading-snug text-ink max-w-[62ch]" data-f="none">With no future chosen, each strip shows every future at once: one mark for each, in the order above.</p>
-        {d.futures.map((f) => <p key={f.key} className="ca-says font-serif text-[1.15rem] leading-snug text-ink max-w-[62ch]" data-f={f.key}>{f.says} <span className="font-sans text-xs text-muted">The <Link href="/outlook#scenarios" className={link}>outlook</Link>&apos;s own words for this future; the writers who argue it are named there.</span></p>)}
+        {d.futures.map((f) => (
+          <p key={f.key} className="ca-says font-serif text-[1.15rem] leading-snug text-ink max-w-[62ch]" data-f={f.key}>
+            {f.says}{" "}
+            <span className="font-sans text-xs text-muted">
+              {f.group === "grid" ? "The outlook’s own words for this future." : "A model’s summary of what its writers argue."} Argued by {f.argued_by.map((a, i) => <span key={a.href}>{i ? "; " : ""}<Link href={a.href} className={link}>{a.who}</Link></span>)}, on the <Link href="/outlook#scenarios" className={link}>outlook</Link>.
+              {f.bears.length ? <> What bears on it there: {f.bears.map((b, i) => <span key={b.href}>{i ? "; " : ""}<Link href={b.href} className={link}>{b.title}</Link></span>)}.</> : null}
+            </span>
+          </p>
+        ))}
         <p className="ca-key flex flex-wrap gap-x-4 gap-y-1 font-mono text-[11px] text-ink-2">
           {d.effects.map((e) => <span key={e.id}><i data-e={e.id} />{e.word}</span>)}
           <span>each mark a model&apos;s judgement</span>
         </p>
+        {d.waiting.map((n) => <p key={n.name} className="text-xs text-muted max-w-[72ch]">Not on the dial yet: {n.name}. {n.why}</p>)}
         {d.not_judged.map((n) => <p key={n.name} className="text-xs text-muted max-w-[72ch]">Not judged, and so not on the list: {n.name}. {n.why}</p>)}
       </fieldset>
       <fieldset className="flex flex-wrap items-baseline gap-x-5 gap-y-1.5 text-sm">

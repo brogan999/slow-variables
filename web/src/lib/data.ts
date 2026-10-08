@@ -728,7 +728,9 @@ export type ChainAtlasDoc = {
   map: { layers: { number: number; name: string; categories: AtlasTile[] }[] };
   ground: { id: string; name: string; says: string; categories: string[] }[];
   made_by: { model: string; date: string; method: string; reviewed_by: string } | null;
-  futures: { id: string; key: string; name: string; says: string }[];
+  futures: { id: string; key: string; group: string; name: string; says: string; argued_by: { who: string; href: string }[]; bears: { title: string; href: string }[] }[];
+  future_groups: { id: string; name: string }[];
+  waiting: { name: string; why: string }[];
   not_judged: { name: string; why: string }[];
   effects: { id: AtlasEffect; word: string }[];
   groups: { id: string; name: string; says: string; businesses: AtlasBusiness[] }[];
