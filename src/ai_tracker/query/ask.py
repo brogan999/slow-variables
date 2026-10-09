@@ -1202,23 +1202,34 @@ class NoAnswer(RuntimeError):
     """The model stopped without writing an answer, twice. The service turns it into an error the reader can retry."""
 
 
-NUDGE = "Write the answer now from the records you have already read, in under four hundred words, citing as before. Make no further tool calls."
+NUDGE = "Write the answer now from the records you have already read, in the format your instructions ask for (with the card block if one applies), in under four hundred words. Make no further tool calls."
+NUDGE_BY_S = 85.0  # past this the proxy's 110 s would cut the nudge off, so the attempt fails without one
 
 
-def _answer(client: Any, system: list[dict[str, Any]], messages: list[dict[str, Any]], tools: Tools, usage: dict[str, int], calls: list[dict[str, Any]], model: str = MODEL) -> str:
-    """`_run`, and one more turn if it comes back empty: a long question can use up its rounds or its tokens on tool
-    calls and stop with no text. An empty reply, or one cut off inside a tool call, is dropped first."""
-    text = _run(client, system, messages, tools, usage, calls, model)
+def _answer(
+    client: Any, system: list[dict[str, Any]], messages: list[dict[str, Any]], tools: Tools, usage: dict[str, int],
+    calls: list[dict[str, Any]], question: str, layout: Any, t0: float,
+) -> tuple[str, list[str], dict[str, Any] | None]:
+    """The first answer as text, follow-ups and card. A long question can spend its rounds or its tokens on tool calls
+    and stop with nothing a reader could read (no text, only whitespace, only a card). Then the model is asked once
+    more, in one call that may not use a tool; if that is empty too, or there is no time for it, the attempt fails."""
+
+    def parts(raw: str) -> tuple[str, list[str], dict[str, Any] | None]:
+        prose, card = split_card(raw, question, layout)
+        return (*split_followups(prose), card)
+
+    text, follow, card = parts(_run(client, system, messages, tools, usage, calls))
     if text.strip():
-        return text
-    last = messages[-1]
-    if last["role"] == "assistant" and (not last["content"] or any(getattr(b, "type", None) == "tool_use" for b in last["content"])):
-        messages.pop()  # an empty turn, or a tool call with no result, cannot be sent back
+        return text, follow, card
+    if time.monotonic() - t0 > NUDGE_BY_S:
+        raise NoAnswer("the model returned no answer, and no time was left to ask again")
+    if messages[-1]["role"] == "assistant":
+        messages.pop()  # it held nothing readable, and an empty or whitespace-only turn cannot be sent back
     messages.append({"role": "user", "content": NUDGE})
-    text = _run(client, system, messages, tools, usage, calls, model)
+    text, follow, card = parts(_run(client, system, messages, tools, usage, calls, rounds=1, tool_choice={"type": "none"}))
     if not text.strip():
-        raise NoAnswer("the model returned no answer")  # ponytail: this attempt's spend is not ledgered; rare
-    return text
+        raise NoAnswer("the model returned no answer")
+    return text, follow, card
 
 
 def _run(
@@ -1229,11 +1240,14 @@ def _run(
     usage: dict[str, int],
     calls: list[dict[str, Any]],
     model: str = MODEL,
+    rounds: int = 12,
+    tool_choice: dict[str, Any] | None = None,
 ) -> str:
     """One pass of the tool loop: keep answering tool calls until the model stops with text."""
-    for _ in range(12):
+    extra = {"tool_choice": tool_choice} if tool_choice else {}
+    for _ in range(rounds):
         r = client.messages.create(
-            model=model, max_tokens=4000, system=system, tools=TOOLS, messages=messages
+            model=model, max_tokens=4000, system=system, tools=TOOLS, messages=messages, **extra
         )
         usage["in"] += r.usage.input_tokens
         usage["out"] += r.usage.output_tokens
@@ -1241,6 +1255,9 @@ def _run(
         usage["cache_read"] += getattr(r.usage, "cache_read_input_tokens", 0) or 0
         messages.append({"role": "assistant", "content": r.content})
         if r.stop_reason != "tool_use":
+            if any(b.type == "tool_use" for b in r.content):
+                messages.pop()  # cut off inside a tool call: a preamble before it is no answer, and it cannot be sent back
+                return ""
             return "".join(b.text for b in r.content if b.type == "text")
         results = []
         for b in r.content:
@@ -1392,12 +1409,40 @@ def _conversation(question: str, history: list[dict[str, str]] | None) -> list[d
     ]
 
 
+def _usd(usage: dict[str, int], up: dict[str, int]) -> float:
+    return (
+        (usage["in"] + 1.25 * usage["cache_write"] + 0.1 * usage["cache_read"]) * USD_PER_MTOK_IN
+        + usage["out"] * USD_PER_MTOK_OUT
+        + (up["in"] + 1.25 * up["cache_write"] + 0.1 * up["cache_read"]) * ESCALATE_USD_PER_MTOK_IN
+        + up["out"] * ESCALATE_USD_PER_MTOK_OUT
+    ) / 1e6
+
+
 def ask(
     store: st.Store,
     question: str,
     tools: Tools | None = None,
     client: Any = None,
     history: list[dict[str, str]] | None = None,
+) -> dict[str, Any]:
+    """`_ask`, with what a failed attempt cost attached to its error, so the service can ledger it against the cap."""
+    usage = {"in": 0, "out": 0, "cache_write": 0, "cache_read": 0}
+    up = dict(usage)  # the stronger model's tokens, priced apart
+    try:
+        return _ask(store, question, tools, client, history, usage, up)
+    except Exception as e:
+        e.usd = round(_usd(usage, up), 5)  # type: ignore[attr-defined]
+        raise
+
+
+def _ask(
+    store: st.Store,
+    question: str,
+    tools: Tools | None,
+    client: Any,
+    history: list[dict[str, str]] | None,
+    usage: dict[str, int],
+    up: dict[str, int],
 ) -> dict[str, Any]:
     import anthropic
 
@@ -1406,7 +1451,6 @@ def ask(
     client = client or anthropic.Anthropic(timeout=90.0)
     system = [{"type": "text", "text": _system(store), "cache_control": {"type": "ephemeral"}}]
     messages = _conversation(question, history)
-    usage = {"in": 0, "out": 0, "cache_write": 0, "cache_read": 0}
     calls: list[dict[str, Any]] = []
     t0 = time.monotonic()  # the site's proxy gives up at 110 s: a revise or a fresh attempt starts only if it can finish
 
@@ -1419,10 +1463,8 @@ def ask(
             "companies": {display(e).casefold(): display(e) for e in store.seed.entities},
         }
 
-    raw, card = split_card(_answer(client, system, messages, tools, usage, calls), question, layout)
-    text, follow = split_followups(raw)
+    text, follow, card = _answer(client, system, messages, tools, usage, calls, question, layout, t0)
     status, model = "ok", MODEL
-    up: dict[str, int] = {"in": 0, "out": 0, "cache_write": 0, "cache_read": 0}
     res = check(text, tools.records(CITE.findall(text)))
     if not res.ok and time.monotonic() - t0 > REVISE_BY_S:
         status = "blocked"
@@ -1446,13 +1488,12 @@ def ask(
     if (
         status == "blocked" and time.monotonic() - t0 < ESCALATE_BY_S
     ):  # one fresh attempt on the stronger model: a new conversation, and better at citing what it read
-        up: dict[str, int] = {"in": 0, "out": 0, "cache_write": 0, "cache_read": 0}
         retry, retry_card = split_card(
             _run(client, system, _conversation(question, history), tools, up, calls, ESCALATE_MODEL), question, layout
         )
         retry, retry_follow = split_followups(retry)
         res2 = check(retry, tools.records(CITE.findall(retry)))
-        if res2.ok:
+        if res2.ok and retry.strip():  # an empty retry passes the check with nothing to check; it is no answer
             text, res, status, model, follow, card = retry, res2, "retried", ESCALATE_MODEL, retry_follow, retry_card
     # only tokens that resolve to a record: anything else is model or visitor text and must not reach the log
     found = tools.records(CITE.findall(text))
@@ -1461,12 +1502,7 @@ def ask(
         for k, i in dict.fromkeys(CITE.findall(text))
         if f"{k}:{i}" in found
     ]
-    usd = (
-        (usage["in"] + 1.25 * usage["cache_write"] + 0.1 * usage["cache_read"]) * USD_PER_MTOK_IN
-        + usage["out"] * USD_PER_MTOK_OUT
-        + (up["in"] + 1.25 * up["cache_write"] + 0.1 * up["cache_read"]) * ESCALATE_USD_PER_MTOK_IN
-        + up["out"] * ESCALATE_USD_PER_MTOK_OUT
-    ) / 1e6
+    usd = _usd(usage, up)
     audit = {  # P1 §8 / v2 §6.1: auditable by the records it cited, the model and the prompt; never the text
         "time": datetime.now(timezone.utc).isoformat(timespec="microseconds"),
         "status": status,
