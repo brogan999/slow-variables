@@ -759,6 +759,32 @@ sources:
     retrieved_at: 2026-09-23
     http_status: 200
     content_hash: 8bb42a75e7e2ace553cf2308509359264f585df7b4fda420c68022b1b9803d8f
+  # Part 50: writers who argue that governments decide which countries and firms may use which models.
+  - id: woodward_rogoyski
+    who: Alan Woodward and Andrew Rogoyski
+    short: Woodward and Rogoyski
+    field: researchers who study cyber security and what a country can do about depending on foreign AI
+    finding: The most capable models come from a handful of firms in two countries whose governments are able and willing to control who abroad may use them. Access a country relies on to defend itself against cyber attack can therefore be withdrawn, and few states can build a comparable model themselves, so the writers advise bargaining for guarantees, running models at home and keeping open ones in reserve.
+    work: 'Sovereign by necessity? Frontier AI export controls, cyber security, and the limits of national AI capability'
+    venue: a paper posted to arXiv
+    year: 2026
+    url: https://arxiv.org/abs/2608.13272
+    retrieved_at: 2026-10-08
+    http_status: 200
+    content_hash: 8a1e4470a99fe8a7c5957e607459f9b53fca4507530c9800e5f6b553ccd638ea
+    quote: access to frontier AI is becoming part of national cyber defence
+  - id: bcg_great_divide
+    who: Nikolaus Lang, Sylvain Duranton and colleagues at Boston Consulting Group
+    short: Lang, Duranton and colleagues
+    field: consultants who advise large firms on technology and trade, and whose firm sells advice on the choice they describe
+    finding: The United States and China are building two sets of chips, models and software that fit together less and less, and the set a firm chooses increasingly decides where it is able to operate.
+    work: 'The Great Divide: How the US and China Are Splitting the AI World'
+    venue: Boston Consulting Group
+    year: 2026
+    url: https://www.bcg.com/publications/2026/us-and-china-ai-strategy-causing-global-ai-divide
+    retrieved_at: 2026-10-08
+    http_status: 200
+    content_hash: 75617b668c7c1a5805e0fa1283322e195106f2bde55e9b389c183cb4927d3d6d
   - id: korinek_lockwood
     who: Anton Korinek and Lee M. Lockwood
     field: economists who study taxation and the economics of AI
@@ -2012,6 +2038,27 @@ positions:
     case: Almost all paid use today runs through the labs' and clouds' own services.
     kill_shot: A large share of everyday requests answered on the device.
     rival: edge
+    visible: false
+  # Part 50: who may use which model, by country.
+  - id: access_by_state
+    folio: value
+    title: Governments decide which countries and firms may use which models
+    holders: [woodward_rogoyski, bcg_great_divide]
+    attribution: author
+    mechanism: The most capable models are made by a few firms in two states, and each state can license, limit or withdraw what those firms sell abroad, so a buyer's choice of model is bounded by where it sits.
+    case: In June 2026 the United States required one leading developer to hold a licence before any foreign national could use its most advanced models, and they were withdrawn worldwide [cite:woodward_rogoyski]. The consultancy's writers report that each of the two states' leading models are unavailable to customers in the other, or under growing political scrutiny there [cite:bcg_great_divide].
+    kill_shot: The same leading models being sold on the same terms in every large market, with no rule standing between a firm and the model it would choose.
+    rival: weights_cross
+    visible: false
+  - id: weights_cross
+    folio: value
+    title: Open models cross borders, so access cannot be fenced
+    holders: []
+    attribution: site
+    mechanism: A model whose maker publishes it can be copied and run anywhere, so a rule on who may buy a closed model leaves a capable open one within everyone's reach; the writers who argue the other side themselves name open models as the hedge.
+    case: Open models trail the best closed ones by [fact:open_lag], months rather than years, and most of China's leading models are published for anyone to run [cite:bcg_great_divide].
+    kill_shot: Open models falling far enough behind, or being restricted themselves, that a firm shut out of the closed ones has nothing comparable to run.
+    rival: access_by_state
     visible: false
   # Part 16: positions from Sean Cai's and The Diff's posts, paid ones included, in fresh wording and never quoted.
   - id: real_work
@@ -3576,6 +3623,15 @@ claims:
     holders: [larson_hayek]
     text: Work that must be decided faster than a message can reach a data centre, or on little power, is run on the spot, whoever holds the knowledge.
     falsifier: Time-critical work such as driving and industrial control moving to distant data centres as networks improve.
+  - id: access_fenced
+    position: access_by_state
+    text: Which models a firm may use comes to depend on the country it is in and the countries it sells to.
+    falsifier: The leading closed models being offered on the same terms in every large market, and firms choosing among them without regard to where they operate. No public, repeatable reading of which models firms may use exists on this site.
+  - id: open_reaches_all
+    position: weights_cross
+    attribution: site
+    text: A firm shut out of the leading closed models runs an open one that is close enough for its work.
+    falsifier: Firms in countries the closed suppliers do not serve going without comparable models. The gap between open and closed models, which this site reads, bears on it; whether shut-out firms run open models is not published.
   - id: check_binds
     position: checking_order
     attribution: site

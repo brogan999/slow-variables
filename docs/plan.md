@@ -1312,3 +1312,19 @@ Found while testing the idea box (Part 47): a long, open question came back with
 **The fix.** `_answer` wraps the first run. If nothing a reader could read comes back (no text, only whitespace, only a card, or a reply cut off inside a tool call), the model is asked once more, in a single call that may not use a tool, to write the answer from what it has read. If that is empty too, or too little time is left before the site's proxy gives up, `NoAnswer` is raised. The service returns it as "no answer", and the page tells the reader the question was too wide and to try a narrower one.
 
 **What the review added.** The same empty answer could still arrive by two other doors, both now closed: a retry on the stronger model that came back empty was reported as "retried", and a reply holding only a card was reported as "ok". The second ask was unbounded (up to twelve more rounds of tool calls); it is now one call. A failed attempt's cost was dropped from the day's ledger, so a reader retrying a question that keeps failing could spend past the cap unseen; the cost now travels with the error and is ledgered.
+
+## Part 50 (8 Oct 2026): the future in which governments decide which models a firm may use
+
+The last of the owner's five ownership futures. Part 48c left it waiting because no writer on the outlook argued it.
+
+**On the outlook (`seed/outlook.yaml`).** Two sources, each fetched on 8 Oct through the robots-checked path with its record: Alan Woodward and Andrew Rogoyski's paper on export controls and the limits of a country's own AI capability, and a Boston Consulting Group report that the United States and China are building two sets of technology that fit together less and less. A position, `access_by_state`, holds them; its rival, `weights_cross`, is the site's own (open models cross borders, so access cannot be fenced). Each has one claim, and neither has a test: no public, repeatable reading of which models firms may use was found.
+
+**On the atlas.** The future joins the second group on the dial, named for what its writers argue, with its claim counted for it and the rival's against. It strengthens routing inside approved models, whose take no longer says the future is unsourced.
+
+**Judgement calls.**
+
+- *Two sources were left out.* A RAND paper by Lennart Heim was the strongest found, but RAND's robots file refuses automated fetching, so it cannot be recorded under the site's rule. A Microsoft adoption study could not be read without scripts. Both remain candidates if the owner adds them by hand.
+- *One source sells advice on its own conclusion.* The consultancy's report says so in its `field` line.
+- *The reviewing run's changes are made.* The position's case now reports what the two sources report, credited to each, in place of a general statement neither makes; the rival's case reads the site's own open-model gap by token, so it is re-tested nightly. An effect and a move that assumed a rule asking firms to record which model did the work were withdrawn: neither source describes such a rule.
+- *Two new board rows have no lean.* The forecasts board gains the two positions without a model's lean, like other rows added since 5 Oct.
+- *Untested.* The one reading found, a count of the export rules the United States writes about AI, needs a rule for which rules count and currently points against the future. It is not wired in.
