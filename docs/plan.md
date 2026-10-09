@@ -1328,3 +1328,19 @@ The last of the owner's five ownership futures. Part 48c left it waiting because
 - *The reviewing run's changes are made.* The position's case now reports what the two sources report, credited to each, in place of a general statement neither makes; the rival's case reads the site's own open-model gap by token, so it is re-tested nightly. An effect and a move that assumed a rule asking firms to record which model did the work were withdrawn: neither source describes such a rule.
 - *Two new board rows have no lean.* The forecasts board gains the two positions without a model's lean, like other rows added since 5 Oct.
 - *Untested.* The one reading found, a count of the export rules the United States writes about AI, needs a rule for which rules count and currently points against the future. It is not wired in.
+
+## Part 51 (9 Oct 2026): the twenty-first business, the firm's own record of itself
+
+The owner saw the idea stated in public (a company-wide ontology, installed on the customer's own servers, growing into the system of record for every firm) and asked that it be on the page. The site held its pieces (a trade's system of record, capturing how a firm works, a model that keeps learning inside one customer) but no business for the whole firm.
+
+**What ships.**
+
+- `seed/opportunities.yaml`: `firm_own_record`, published last so the owner's order is kept. It sits on 4.4 Context and memory.
+- `seed/chain_atlas.yaml`: a call (build on a condition), a take, what would overturn it, six futures that move it, and what it builds up (the record, the choice).
+- `seed/entities.yaml`: TextQL, placed on Context and memory from its own site, read 9 Oct 2026.
+
+**Judgement calls.**
+
+- *The rent inputs are a model's draft the owner has not reviewed.* Switching cost, weak appropriability, specialised assets, held by the maker, medium durability. The rubric gives the verdict from those. Durability is medium, not long, because the record is the customer's own and kept as files it can move: leaving the seller is easier than leaving the record. The seed's header says the record is unreviewed.
+- *The call is build on a condition, not build.* The owner thinks the business very likely. The condition is the buyer whose data cannot leave; elsewhere the labs and clouds will offer a memory of their own, which is the record's own falsifier.
+- *TextQL's placement rests on its home page only.* The page calls the product a sovereign ontology and describes mapping a firm's data and running agents on it. It does not say where the product is installed, so the note does not either.

@@ -337,6 +337,31 @@ businesses:
       steady/unclear:
         effect: stronger
         reason: Adoption at the pace of past technologies means years of work for people who can deploy.
+  firm_own_record:
+    call: cond
+    take: 'The system of record for the whole firm and not for a single trade: what the firm knows, written down once, on
+      its own servers, for every agent to read. Build it where data cannot leave the building; elsewhere the labs and clouds
+      will offer a memory of their own.'
+    kills: The labs and clouds ship a model of the firm as a built-in feature, and buyers accept it on someone else's servers.
+    futures:
+      stall_capability/unclear:
+        effect: stronger
+        reason: A model that will not learn the firm on its own needs the firm written down.
+      steady/priced:
+        effect: stronger
+        reason: A dated, version-kept record of what the firm knew and did is what a court or an insurer asks for.
+      automated_research/unclear:
+        effect: weaker
+        reason: Better models learn a firm's habits from its records without the map being written down.
+      owners/open_frontier:
+        effect: stronger
+        reason: A record that works with any model is worth more when good models are free to swap.
+      owners/closed_lead:
+        effect: weaker
+        reason: Labs that move into their customers' work offer the memory themselves.
+      owners/country_split:
+        effect: stronger
+        reason: A state or a firm that fears being cut off keeps its knowledge, and the models that read it, at home.
 not_judged:
   loss_of_control/unclear: No writer on the site says what this future does to any business, and a model's guess at it would
     be decoration.
@@ -1001,6 +1026,9 @@ builds:
   - choice
   agent_incident_response:
   - backing
+  firm_own_record:
+  - record
+  - choice
 priors_by: The planning assumptions of the site's owner, reworded by a model. They are what the calls on this page take
   for granted, not readings and not findings. Where one follows a writer the site introduces elsewhere, it says so.
 priors:
