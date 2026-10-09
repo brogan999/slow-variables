@@ -52,6 +52,7 @@ def test_an_empty_first_answer_is_asked_for_once_more():
         res["answer"] == "The outlook's grid holds its futures."
         and res["status"] == "ok"
         and len(client.nudges) == 1
+    assert all(m["content"] for m in client.nudges[0]), "an empty turn is never sent back to the model"
     )
 
 
