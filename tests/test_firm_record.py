@@ -56,3 +56,25 @@ def test_the_company_that_names_the_idea_is_on_the_map_from_its_own_site():
     doc = json.loads((ROOT / "web" / "data" / "opportunities.json").read_text())
     rec = next(o for o in doc["opportunities"] if o["id"] == ID)
     assert rec["primary"]["n_entities"] == cat["n_entities"]
+
+
+def test_the_page_says_the_last_record_has_not_had_the_owners_review():
+    page = (ROOT / "web" / "src" / "app" / "value-chain" / "opportunities" / "page.tsx").read_text()
+    assert "its profit inputs are a model&apos;s draft he has not yet reviewed" in page
+
+
+def test_the_record_names_every_rival_and_claims_no_effect_its_own_category_contradicts():
+    r = next(o for o in opportunities.load()["opportunities"] if o["id"] == ID)
+    assert "data warehouse" in r["falsifier"] and r.get("see_also") == "deploy_to_platform"
+    assert "files it can move" not in r["rent_reason"], "one company's design choice is not the business"
+    b = ca.load()["businesses"][ID]
+    assert "steady/priced" not in b["futures"] and "automated_research/unclear" not in b["futures"]
+    assert "vendors that already hold" in b["kills"]
+
+
+def test_the_company_sits_beside_the_other_maker_of_ontologies_too():
+    mm = json.loads((ROOT / "web" / "data" / "market_map.json").read_text())
+    cat = next(
+        c for layer in mm["layers"] for c in layer["categories"] if c["id"] == "technical_implementation"
+    )
+    assert next(e for e in cat["entities"] if e["id"] == "textql")["leaf"] == "Ontology creation"
