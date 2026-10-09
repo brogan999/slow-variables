@@ -3279,7 +3279,7 @@
      "holds": false,
      "href": "/value-chain/opportunities#op-firm_own_record",
      "id": "firm_own_record",
-     "kills": "The labs and clouds ship a model of the firm as a built-in feature, and buyers accept it on someone else's servers.",
+     "kills": "The labs, the clouds or the vendors that already hold the firm's data ship a model of the firm as a built-in feature, and buyers accept it.",
      "marks": [
       {
        "effect": "stronger",
@@ -3309,13 +3309,13 @@
        "word": "unchanged"
       },
       {
-       "effect": "stronger",
+       "effect": "unchanged",
        "future": "steady/priced",
        "key": "steady-priced",
-       "label": "Steady progress, courts and insurers price the risk: stronger",
+       "label": "Steady progress, courts and insurers price the risk: unchanged",
        "name": "Steady progress, courts and insurers price the risk",
-       "reason": "A dated, version-kept record of what the firm knew and did is what a court or an insurer asks for.",
-       "word": "stronger"
+       "reason": "",
+       "word": "unchanged"
       },
       {
        "effect": "unchanged",
@@ -3327,13 +3327,13 @@
        "word": "unchanged"
       },
       {
-       "effect": "weaker",
+       "effect": "unchanged",
        "future": "automated_research/unclear",
        "key": "automated_research-unclear",
-       "label": "AI automates research, the rules stay unsettled: weaker",
+       "label": "AI automates research, the rules stay unsettled: unchanged",
        "name": "AI automates research, the rules stay unsettled",
-       "reason": "Better models learn a firm's habits from its records without the map being written down.",
-       "word": "weaker"
+       "reason": "",
+       "word": "unchanged"
       },
       {
        "effect": "unchanged",
@@ -3386,7 +3386,7 @@
        "key": "owners-country_split",
        "label": "Governments decide which models a firm may use: stronger",
        "name": "Governments decide which models a firm may use",
-       "reason": "A state or a firm that fears being cut off keeps its knowledge, and the models that read it, at home.",
+       "reason": "A firm whose permitted models can change needs its knowledge kept apart from any one of them.",
        "word": "stronger"
       }
      ],
@@ -3399,24 +3399,6 @@
        "name": "Capability stalls, the rules stay unsettled",
        "reason": "A model that will not learn the firm on its own needs the firm written down.",
        "word": "stronger"
-      },
-      {
-       "effect": "stronger",
-       "future": "steady/priced",
-       "key": "steady-priced",
-       "label": "Steady progress, courts and insurers price the risk: stronger",
-       "name": "Steady progress, courts and insurers price the risk",
-       "reason": "A dated, version-kept record of what the firm knew and did is what a court or an insurer asks for.",
-       "word": "stronger"
-      },
-      {
-       "effect": "weaker",
-       "future": "automated_research/unclear",
-       "key": "automated_research-unclear",
-       "label": "AI automates research, the rules stay unsettled: weaker",
-       "name": "AI automates research, the rules stay unsettled",
-       "reason": "Better models learn a firm's habits from its records without the map being written down.",
-       "word": "weaker"
       },
       {
        "effect": "stronger",
@@ -3442,12 +3424,12 @@
        "key": "owners-country_split",
        "label": "Governments decide which models a firm may use: stronger",
        "name": "Governments decide which models a firm may use",
-       "reason": "A state or a firm that fears being cut off keeps its knowledge, and the models that read it, at home.",
+       "reason": "A firm whose permitted models can change needs its knowledge kept apart from any one of them.",
        "word": "stronger"
       }
      ],
      "n": 21,
-     "name": "The firm's own record of itself, kept on its own servers for every agent to read",
+     "name": "A firm's own map of what its data means, kept on its own servers for every agent to read",
      "primary": {
       "href": "/value-chain#mm-context_and_memory",
       "name": "Context and memory",
@@ -3456,7 +3438,7 @@
      "problem": "What a firm knows is scattered across systems whose tables no document explains, so every agent has to be taught the firm again",
      "profit": "A moderate profit, kept by the maker",
      "stage": null,
-     "take": "The system of record for the whole firm and not for a single trade: what the firm knows, written down once, on its own servers, for every agent to read. Build it where data cannot leave the building; elsewhere the labs and clouds will offer a memory of their own."
+     "take": "The system of record for the whole firm and not for a single trade: what the firm's data means, written down once, on its own servers, for every agent to read. Build it where data cannot leave the building; elsewhere the labs and clouds are likely to offer a memory of their own."
     }
    ],
    "id": "cond",
@@ -4118,7 +4100,7 @@
   }
  ],
  "made_by": {
-  "date": "2026-10-08",
+  "date": "2026-10-09",
   "method": "One model read each published business beside the site's readings of the value chain and each future the outlook's grid fills, gave the business a call with one line of reasoning and the one thing that would undo it, and said in words what each future does to it. A future it left out changes nothing. The same model then said, for each part of the map in scope, what is scarce there, how short it is now, in the transition and at the mature state, and which futures tighten or ease it, each with a reason. The second group of futures are each a model's summary of what named writers on the outlook argue, and were judged the same way. It also tied each of the site's migration predictions to parts of the map and to businesses, and said which of the owner's lasting things each business builds.",
   "model": "claude-opus-5-5",
   "reviewed_by": "separate reviewing runs of the same model, which changed calls, takes, words and reasons, withdrew some effects and moves and added others; no person reviewed each one"
@@ -13930,7 +13912,7 @@
         "word": "eases"
        }
       ],
-      "n_entities": 29,
+      "n_entities": 30,
       "name": "Technical implementation",
       "number": "6.1",
       "reason": "Much of the fitting is done once at each firm, and tools and agents take over more of it.",
@@ -17488,7 +17470,7 @@
     },
     {
      "n": 21,
-     "name": "The firm's own record of itself, kept on its own servers for every agent to read"
+     "name": "A firm's own map of what its data means, kept on its own servers for every agent to read"
     },
     {
      "n": 12,
@@ -17588,7 +17570,7 @@
     },
     {
      "n": 21,
-     "name": "The firm's own record of itself, kept on its own servers for every agent to read"
+     "name": "A firm's own map of what its data means, kept on its own servers for every agent to read"
     },
     {
      "n": 8,

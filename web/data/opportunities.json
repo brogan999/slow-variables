@@ -467,8 +467,8 @@
        "firm_own_record"
       ],
       "id": "technical_implementation",
-      "live": 29,
-      "n_entities": 29,
+      "live": 30,
+      "n_entities": 30,
       "name": "Technical implementation",
       "number": "6.1",
       "other": 0,
@@ -1202,7 +1202,7 @@
    {
     "id": "firm_own_record",
     "n": 21,
-    "name": "The firm's own record of itself, kept on its own servers for every agent to read",
+    "name": "A firm's own map of what its data means, kept on its own servers for every agent to read",
     "owner": "the maker",
     "pools": "innovator",
     "verdict": "A moderate profit, kept by the maker"
@@ -2438,7 +2438,7 @@
    ],
    "falsifier": "Models need so little fitting that self-serve deployment wins",
    "id": "deploy_to_platform",
-   "n_more_examples": 23,
+   "n_more_examples": 24,
    "name": "Deployment that leaves behind the platform the customer runs on",
    "next_action": "Do three deployments in one industry and count how much of the third was reused from the first two",
    "none_independent": false,
@@ -2448,7 +2448,7 @@
    "prerequisites": "Engineers who can work inside a customer, and first customers alike enough that the second deployment reuses the first",
    "primary": {
     "id": "technical_implementation",
-    "n_entities": 29,
+    "n_entities": 30,
     "name": "Technical implementation",
     "number": "6.1"
    },
@@ -2476,7 +2476,7 @@
    "adjacent": [
     {
      "id": "technical_implementation",
-     "n_entities": 29,
+     "n_entities": 30,
      "name": "Technical implementation",
      "number": "6.1"
     },
@@ -2864,7 +2864,7 @@
    "adjacent": [
     {
      "id": "technical_implementation",
-     "n_entities": 29,
+     "n_entities": 30,
      "name": "Technical implementation",
      "number": "6.1"
     },
@@ -3174,7 +3174,7 @@
     },
     {
      "id": "technical_implementation",
-     "n_entities": 29,
+     "n_entities": 30,
      "name": "Technical implementation",
      "number": "6.1"
     },
@@ -3209,16 +3209,16 @@
     "Compresr",
     "Contextual AI"
    ],
-   "falsifier": "The labs and clouds ship a model of the firm as a built-in feature that buyers accept, or customers move the record to another seller at little cost",
+   "falsifier": "The labs, the clouds or the firms that already sell a firm its data warehouse and business software ship a model of the firm as a built-in feature that buyers accept, or customers move the record to another seller at little cost",
    "id": "firm_own_record",
    "n_more_examples": 15,
-   "name": "The firm's own record of itself, kept on its own servers for every agent to read",
+   "name": "A firm's own map of what its data means, kept on its own servers for every agent to read",
    "next_action": "Take one hard reporting question in one regulated firm, answer it where the data sits, and keep what was learned as the first pages of the record",
    "none_independent": false,
    "powers": [
     "switching costs"
    ],
-   "prerequisites": "A customer with data it may not move and questions it cannot answer today, and engineers who can work inside its systems",
+   "prerequisites": "A customer with data it may not move and questions it cannot answer today, a capable model that can run where that data sits, and engineers who can work inside its systems",
    "primary": {
     "id": "context_and_memory",
     "n_entities": 21,
@@ -3237,12 +3237,15 @@
     "tier": "moderate",
     "verdict": "A moderate profit, kept by the maker"
    },
-   "rent_reason": "Everything a firm builds comes to read the record, which is costly to replace; but the record is the customer's own and kept as files it can move, so leaving the seller is easier than leaving the record",
-   "see_also": null,
+   "rent_reason": "Everything a firm builds comes to read the record, so replacing the platform that keeps it means rebuilding that work; but the knowledge in it is the customer's own, and a rival or a better model could rebuild the map from the same data, so the hold is weaker than holding a trade's records",
+   "see_also": {
+    "id": "deploy_to_platform",
+    "name": "Deployment that leaves behind the platform the customer runs on"
+   },
    "unit_sold": "A platform licence, then each agent and application that runs on the record",
    "unmapped": false,
    "wedge": "Answer hard questions over the firm's data where it already sits, writing down what each table and term means along the way",
-   "why_not_bundled": "A lab or a cloud would hold the record on its own systems; the buyer wants it on its own, and usable with any model"
+   "why_not_bundled": "A lab or a cloud would hold the record on its own systems, and a software vendor would describe only its own tables; the buyer wants one record across all of them, on its own servers and usable with any model"
   }
  ],
  "powers": {
