@@ -1325,4 +1325,6 @@ The last of the owner's five ownership futures. Part 48c left it waiting because
 
 - *Two sources were left out.* A RAND paper by Lennart Heim was the strongest found, but RAND's robots file refuses automated fetching, so it cannot be recorded under the site's rule. A Microsoft adoption study could not be read without scripts. Both remain candidates if the owner adds them by hand.
 - *One source sells advice on its own conclusion.* The consultancy's report says so in its `field` line.
+- *The reviewing run's changes are made.* The position's case now reports what the two sources report, credited to each, in place of a general statement neither makes; the rival's case reads the site's own open-model gap by token, so it is re-tested nightly. An effect and a move that assumed a rule asking firms to record which model did the work were withdrawn: neither source describes such a rule.
+- *Two new board rows have no lean.* The forecasts board gains the two positions without a model's lean, like other rows added since 5 Oct.
 - *Untested.* The one reading found, a count of the export rules the United States writes about AI, needs a rule for which rules count and currently points against the future. It is not wired in.

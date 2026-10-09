@@ -547,7 +547,7 @@
    "id": "owners/country_split",
    "key": "owners-country_split",
    "name": "Governments decide which models a firm may use",
-   "says": "The governments of the few states that make the most capable models decide which countries and firms may use them, so a firm's choice of model is bounded by where it sits and where it sells."
+   "says": "The governments of the two states that make the most capable models decide which countries and firms may use them, so a firm's choice of model is bounded by where it sits and where it operates."
   }
  ],
  "ground": [
@@ -1073,13 +1073,13 @@
        "word": "stronger"
       },
       {
-       "effect": "stronger",
+       "effect": "unchanged",
        "future": "owners/country_split",
        "key": "owners-country_split",
-       "label": "Governments decide which models a firm may use: stronger",
+       "label": "Governments decide which models a firm may use: unchanged",
        "name": "Governments decide which models a firm may use",
-       "reason": "Showing which model did the work becomes part of obeying the rule.",
-       "word": "stronger"
+       "reason": "",
+       "word": "unchanged"
       }
      ],
      "moved": [
@@ -1117,15 +1117,6 @@
        "label": "Agents deal in markets for people and firms: stronger",
        "name": "Agents deal in markets for people and firms",
        "reason": "A deal between agents is settled from the record.",
-       "word": "stronger"
-      },
-      {
-       "effect": "stronger",
-       "future": "owners/country_split",
-       "key": "owners-country_split",
-       "label": "Governments decide which models a firm may use: stronger",
-       "name": "Governments decide which models a firm may use",
-       "reason": "Showing which model did the work becomes part of obeying the rule.",
        "word": "stronger"
       }
      ],
@@ -2313,7 +2304,7 @@
      "problem": "Access to models splits by country and supplier, and a banned supplier breaks the product",
      "profit": "A fat profit, kept by the maker",
      "stage": null,
-     "take": "Its worth turns on how far governments decide which models a firm may use. Where they do, this is the business that keeps a firm inside the line."
+     "take": "Its worth turns on how far governments decide which models a firm may use. Where they do, this business keeps a firm inside the line, though the routing itself can be copied."
     },
     {
      "builds": [
@@ -3397,13 +3388,13 @@
        "word": "unchanged"
       },
       {
-       "effect": "unchanged",
+       "effect": "weaker",
        "future": "owners/country_split",
        "key": "owners-country_split",
-       "label": "Governments decide which models a firm may use: unchanged",
+       "label": "Governments decide which models a firm may use: weaker",
        "name": "Governments decide which models a firm may use",
-       "reason": "",
-       "word": "unchanged"
+       "reason": "A firm allowed only some models has less left to route.",
+       "word": "weaker"
       }
      ],
      "moved": [
@@ -3423,6 +3414,15 @@
        "label": "Labs charge for their lead and move up the stack: weaker",
        "name": "Labs charge for their lead and move up the stack",
        "reason": "A customer built into one lab's products has less left to route.",
+       "word": "weaker"
+      },
+      {
+       "effect": "weaker",
+       "future": "owners/country_split",
+       "key": "owners-country_split",
+       "label": "Governments decide which models a firm may use: weaker",
+       "name": "Governments decide which models a firm may use",
+       "reason": "A firm allowed only some models has less left to route.",
        "word": "weaker"
       }
      ],
@@ -5270,7 +5270,7 @@
         "key": "owners-country_split",
         "move": "tightens",
         "name": "Governments decide which models a firm may use",
-        "reason": "A model that must run inside a country needs computing there.",
+        "reason": "A state that fears being cut off runs models at home, which needs computing there.",
         "word": "tightens"
        }
       ],
@@ -5945,7 +5945,7 @@
         "key": "owners-country_split",
         "move": "tightens",
         "name": "Governments decide which models a firm may use",
-        "reason": "A model a firm is not allowed to buy is scarce to that firm.",
+        "reason": "Inside each fence fewer makers are allowed to sell, so those that are face less competition.",
         "word": "tightens"
        }
       ],
@@ -9102,6 +9102,13 @@
         "name": "Open models are good enough for most work",
         "reason": "Tuning is where a free model is made to fit.",
         "word": "tightens"
+       },
+       {
+        "key": "owners-country_split",
+        "move": "tightens",
+        "name": "Governments decide which models a firm may use",
+        "reason": "A firm shut out of the closed models has an open one tuned instead.",
+        "word": "tightens"
        }
       ],
       "n_entities": 20,
@@ -9229,9 +9236,9 @@
         "mature": {
          "gauge": null,
          "hatched": false,
-         "level": 3,
+         "level": 4,
          "measured": false,
-         "word": "probably moderate"
+         "word": "probably tight"
         },
         "now": {
          "gauge": null,
@@ -9243,9 +9250,9 @@
         "transition": {
          "gauge": null,
          "hatched": false,
-         "level": 4,
+         "level": 5,
          "measured": false,
-         "word": "probably tight"
+         "word": "probably severe"
         }
        },
        "owners-on_device": {
@@ -12396,13 +12403,6 @@
         "name": "Agents deal in markets for people and firms",
         "reason": "A deal between agents is settled from the record.",
         "word": "tightens"
-       },
-       {
-        "key": "owners-country_split",
-        "move": "tightens",
-        "name": "Governments decide which models a firm may use",
-        "reason": "A firm has to be able to show which model did the work.",
-        "word": "tightens"
        }
       ],
       "n_entities": 9,
@@ -12530,9 +12530,9 @@
         "mature": {
          "gauge": null,
          "hatched": false,
-         "level": 5,
+         "level": 4,
          "measured": false,
-         "word": "probably severe"
+         "word": "probably tight"
         },
         "now": {
          "gauge": null,
@@ -12544,9 +12544,9 @@
         "transition": {
          "gauge": null,
          "hatched": false,
-         "level": 5,
+         "level": 4,
          "measured": false,
-         "word": "probably severe"
+         "word": "probably tight"
         }
        },
        "owners-on_device": {

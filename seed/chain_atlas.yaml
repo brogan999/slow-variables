@@ -87,9 +87,6 @@ businesses:
       owners/agents_trade:
         effect: stronger
         reason: A deal between agents is settled from the record.
-      owners/country_split:
-        effect: stronger
-        reason: Showing which model did the work becomes part of obeying the rule.
   agent_authority_registry:
     call: build
     take: 'A monopoly-like prize: every counterparty has to ask whoever holds the registry. The fight is with the identity
@@ -193,8 +190,8 @@ businesses:
         reason: A firm that lets an agent spend for it wants someone standing behind the agent.
   policy_aware_routing:
     call: cond
-    take: Its worth turns on how far governments decide which models a firm may use. Where they do, this is the business
-      that keeps a firm inside the line.
+    take: Its worth turns on how far governments decide which models a firm may use. Where they do, this business keeps
+      a firm inside the line, though the routing itself can be copied.
     kills: One supplier is approved everywhere.
     futures:
       owners/country_split:
@@ -285,6 +282,9 @@ businesses:
       owners/closed_lead:
         effect: weaker
         reason: A customer built into one lab's products has less left to route.
+      owners/country_split:
+        effect: weaker
+        reason: A firm allowed only some models has less left to route.
   context_engineering_service:
     call: 'no'
     take: A thin profit that weakens once agents learn a firm's habits on their own. Do it inside deployment or the system
@@ -816,13 +816,13 @@ shifts:
       reason: Keeping a firm inside the models it is allowed is work the free tools do not do.
     compute_providers:
       move: tightens
-      reason: A model that must run inside a country needs computing there.
+      reason: A state that fears being cut off runs models at home, which needs computing there.
     general_purpose_models:
       move: tightens
-      reason: A model a firm is not allowed to buy is scarce to that firm.
-    provenance_and_audit:
+      reason: Inside each fence fewer makers are allowed to sell, so those that are face less competition.
+    post_training_and_learning_infrastructure:
       move: tightens
-      reason: A firm has to be able to show which model did the work.
+      reason: A firm shut out of the closed models has an open one tuned instead.
 future_groups:
 - id: grid
   name: How far AI goes, and how the rules settle
@@ -874,8 +874,8 @@ ownership:
   - asking_leaks
 - id: country_split
   name: Governments decide which models a firm may use
-  says: The governments of the few states that make the most capable models decide which countries and firms may use them,
-    so a firm's choice of model is bounded by where it sits and where it sells.
+  says: The governments of the two states that make the most capable models decide which countries and firms may use them,
+    so a firm's choice of model is bounded by where it sits and where it operates.
   argued_by:
   - woodward_rogoyski
   - bcg_great_divide
