@@ -1,0 +1,87 @@
+"""The twenty-first business: the firm's own record of itself, kept on its own servers. It is a record on the
+businesses page, a call on the atlas, and the company that names the idea is placed on the map from its own site."""
+
+import json
+from pathlib import Path
+
+from ai_tracker import chain_atlas as ca
+from ai_tracker import opportunities
+
+ROOT = Path(__file__).resolve().parents[1]
+ID = "firm_own_record"
+
+
+def test_the_record_is_published_last_and_sits_on_a_firms_own_knowledge():
+    recs = [o for o in opportunities.load()["opportunities"] if o.get("published")]
+    r = recs[-1]
+    assert r["id"] == ID and r["primary"] == "context_and_memory", (
+        "the owner's order is kept: a new record goes last"
+    )
+    assert all(
+        r.get(k)
+        for k in (
+            "customer",
+            "bottleneck",
+            "wedge",
+            "why_not_bundled",
+            "durable_asset",
+            "falsifier",
+            "prerequisites",
+            "acquirers",
+            "next_action",
+        )
+    )
+    doc = json.loads((ROOT / "web" / "data" / "opportunities.json").read_text())
+    mark = next(m for m in doc["figures"]["marks"] if m["id"] == ID)
+    assert mark["n"] == len(recs) and mark["verdict"]
+
+
+def test_the_atlas_takes_a_position_on_it_in_the_futures_that_bear_on_it():
+    b = ca.load()["businesses"][ID]
+    assert b["call"] in ("build", "cond", "no") and b["take"] and b["kills"]
+    assert {f.split("/")[0] for f in b["futures"]} >= {"owners"}, (
+        "who owns the models bears on a record kept at home"
+    )
+    assert ID in ca.load()["builds"] and "record" in ca.load()["builds"][ID]
+    doc = json.loads((ROOT / "web" / "data" / "chain_atlas.json").read_text())
+    row = next(b for g in doc["groups"] for b in g["businesses"] if b["id"] == ID)
+    assert row["n"] == 21 and row["primary"]["name"] == "Context and memory"
+
+
+def test_the_company_that_names_the_idea_is_on_the_map_from_its_own_site():
+    mm = json.loads((ROOT / "web" / "data" / "market_map.json").read_text())
+    cat = next(c for layer in mm["layers"] for c in layer["categories"] if c["id"] == "context_and_memory")
+    e = next(e for e in cat["entities"] if e["id"] == "textql")
+    assert e["source"] == "hand" and "its own site" in e["label"] and e["verified"] is False
+    doc = json.loads((ROOT / "web" / "data" / "opportunities.json").read_text())
+    rec = next(o for o in doc["opportunities"] if o["id"] == ID)
+    assert rec["primary"]["n_entities"] == cat["n_entities"]
+
+
+def test_the_owner_reviewed_the_last_record_and_put_it_in_build():
+    page = (ROOT / "web" / "src" / "app" / "value-chain" / "opportunities" / "page.tsx").read_text()
+    assert "has not yet reviewed" not in page, "he reviewed its profit inputs on 9 Oct 2026"
+    assert (
+        "reviewed and approved by Alex Brogan on 9 Oct 2026"
+        in (ROOT / "seed" / "opportunities.yaml").read_text()
+    )
+    assert ca.load()["businesses"][ID]["call"] == "build"
+    doc = json.loads((ROOT / "web" / "data" / "chain_atlas.json").read_text())
+    assert ID in [b["id"] for b in next(g for g in doc["groups"] if g["id"] == "build")["businesses"]]
+
+
+def test_the_record_names_every_rival_and_claims_no_effect_its_own_category_contradicts():
+    r = next(o for o in opportunities.load()["opportunities"] if o["id"] == ID)
+    assert "data warehouse" in r["falsifier"] and r.get("see_also") == "deploy_to_platform"
+    assert "files it can move" not in r["rent_reason"], "one company's design choice is not the business"
+    b = ca.load()["businesses"][ID]
+    assert "steady/priced" not in b["futures"] and "automated_research/unclear" not in b["futures"]
+    assert "vendors that already hold" in b["kills"]
+
+
+def test_the_company_sits_beside_the_other_maker_of_ontologies_too():
+    mm = json.loads((ROOT / "web" / "data" / "market_map.json").read_text())
+    cat = next(
+        c for layer in mm["layers"] for c in layer["categories"] if c["id"] == "technical_implementation"
+    )
+    assert next(e for e in cat["entities"] if e["id"] == "textql")["leaf"] == "Ontology creation"

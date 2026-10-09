@@ -1328,3 +1328,20 @@ The last of the owner's five ownership futures. Part 48c left it waiting because
 - *The reviewing run's changes are made.* The position's case now reports what the two sources report, credited to each, in place of a general statement neither makes; the rival's case reads the site's own open-model gap by token, so it is re-tested nightly. An effect and a move that assumed a rule asking firms to record which model did the work were withdrawn: neither source describes such a rule.
 - *Two new board rows have no lean.* The forecasts board gains the two positions without a model's lean, like other rows added since 5 Oct.
 - *Untested.* The one reading found, a count of the export rules the United States writes about AI, needs a rule for which rules count and currently points against the future. It is not wired in.
+
+## Part 51 (9 Oct 2026): the twenty-first business, the firm's own record of itself
+
+The owner saw the idea stated in public (a company-wide ontology, installed on the customer's own servers, growing into the system of record for every firm) and asked that it be on the page. The site held its pieces (a trade's system of record, capturing how a firm works, a model that keeps learning inside one customer) but no business for the whole firm.
+
+**What ships.**
+
+- `seed/opportunities.yaml`: `firm_own_record`, published last so the owner's order is kept. It sits on 4.4 Context and memory.
+- `seed/chain_atlas.yaml`: a call (build on a condition), a take, what would overturn it, six futures that move it, and what it builds up (the record, the choice).
+- `seed/entities.yaml`: TextQL, placed on Context and memory from its own site, read 9 Oct 2026.
+
+**Judgement calls.**
+
+- *The owner reviewed the rent inputs and set the call (9 Oct 2026).* Switching cost, weak appropriability, specialised assets, held by the maker, medium durability; the rubric gives a moderate profit kept by the maker. He approved them as drafted, so the line on the businesses page saying they were unreviewed is gone. He also moved the call from build on a condition to build. The reviewing run had kept it conditional, as every other moderate-profit record is; the call is the owner's, as the agent registry's is.
+- *The reviewing run's changes are made.* The reason for the profit no longer rests on one company's design choice (files a customer can move); it rests on the knowledge being the customer's own and the map being rebuildable from the same data. The record names the rival its own buyers list implies: the firms that already sell a firm its data warehouse and business software. Two effects were withdrawn, one that described a different product and one that contradicted the atlas's own move for the record's part of the map.
+- *Its card will not name TextQL.* A card lists the first few companies on its part of the map, and that part holds search and storage firms first. The company is on the map in two places.
+- *TextQL's placement rests on its home page only.* The page calls the product a sovereign ontology and describes mapping a firm's data and running agents on it. It does not say where the product is installed, so the note does not either.

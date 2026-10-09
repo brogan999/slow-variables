@@ -10,7 +10,7 @@
     "tier": "fat"
    },
    {
-    "n": 7,
+    "n": 8,
     "tier": "moderate"
    },
    {
@@ -23,7 +23,7 @@
    }
   ],
   "kept_by_incumbents": 4,
-  "records": 20,
+  "records": 21,
   "unmapped": 0
  },
  "figures": {
@@ -309,12 +309,14 @@
        "context_engineering_service"
       ],
       "id": "context_and_memory",
-      "live": 20,
-      "n_entities": 20,
+      "live": 21,
+      "n_entities": 21,
       "name": "Context and memory",
       "number": "4.4",
       "other": 0,
-      "primary": []
+      "primary": [
+       "firm_own_record"
+      ]
      },
      {
       "adjacent": [
@@ -330,7 +332,8 @@
      },
      {
       "adjacent": [
-       "agent_authority_registry"
+       "agent_authority_registry",
+       "firm_own_record"
       ],
       "id": "tools_and_actuation",
       "live": 13,
@@ -344,7 +347,7 @@
      }
     ],
     "id": "runtime_orchestration",
-    "n_primary": 3,
+    "n_primary": 4,
     "name": "Runtime, serving and orchestration",
     "number": 4
    },
@@ -460,11 +463,12 @@
      {
       "adjacent": [
        "context_engineering_service",
-       "deployment_talent"
+       "deployment_talent",
+       "firm_own_record"
       ],
       "id": "technical_implementation",
-      "live": 29,
-      "n_entities": 29,
+      "live": 30,
+      "n_entities": 30,
       "name": "Technical implementation",
       "number": "6.1",
       "other": 0,
@@ -476,7 +480,8 @@
       "adjacent": [
        "continual_learning_in_customer",
        "deploy_to_platform",
-       "deployment_talent"
+       "deployment_talent",
+       "firm_own_record"
       ],
       "id": "context_engineering",
       "live": 6,
@@ -649,7 +654,8 @@
     "outcome_router",
     "energy_aware_compute",
     "policy_aware_routing",
-    "open_weight_post_training"
+    "open_weight_post_training",
+    "firm_own_record"
    ],
    "rows": [
     {
@@ -994,7 +1000,8 @@
        "outcome_priced_rollup",
        "licensed_autonomous_service",
        "policy_aware_routing",
-       "agent_incident_response"
+       "agent_incident_response",
+       "firm_own_record"
       ],
       "pools": "innovator"
      }
@@ -1188,6 +1195,14 @@
     "id": "agent_incident_response",
     "n": 20,
     "name": "Incident response and forensics for agent failures",
+    "owner": "the maker",
+    "pools": "innovator",
+    "verdict": "A moderate profit, kept by the maker"
+   },
+   {
+    "id": "firm_own_record",
+    "n": 21,
+    "name": "A firm's own map of what its data means, kept on its own servers for every agent to read",
     "owner": "the maker",
     "pools": "innovator",
     "verdict": "A moderate profit, kept by the maker"
@@ -1422,12 +1437,23 @@
       false
      ],
      "id": "agent_incident_response"
+    },
+    {
+     "cells": [
+      false,
+      false,
+      true,
+      false,
+      false,
+      false
+     ],
+     "id": "firm_own_record"
     }
    ],
    "totals": [
     1,
     5,
-    8,
+    9,
     2,
     4,
     2
@@ -1514,7 +1540,8 @@
        "ops": [
         "continual_learning_in_customer",
         "permission_connectors",
-        "deploy_to_platform"
+        "deploy_to_platform",
+        "firm_own_record"
        ],
        "tier": "moderate",
        "word": "moderate"
@@ -2298,7 +2325,7 @@
     },
     {
      "id": "context_and_memory",
-     "n_entities": 20,
+     "n_entities": 21,
      "name": "Context and memory",
      "number": "4.4"
     }
@@ -2411,7 +2438,7 @@
    ],
    "falsifier": "Models need so little fitting that self-serve deployment wins",
    "id": "deploy_to_platform",
-   "n_more_examples": 23,
+   "n_more_examples": 24,
    "name": "Deployment that leaves behind the platform the customer runs on",
    "next_action": "Do three deployments in one industry and count how much of the third was reused from the first two",
    "none_independent": false,
@@ -2421,7 +2448,7 @@
    "prerequisites": "Engineers who can work inside a customer, and first customers alike enough that the second deployment reuses the first",
    "primary": {
     "id": "technical_implementation",
-    "n_entities": 29,
+    "n_entities": 30,
     "name": "Technical implementation",
     "number": "6.1"
    },
@@ -2449,13 +2476,13 @@
    "adjacent": [
     {
      "id": "technical_implementation",
-     "n_entities": 29,
+     "n_entities": 30,
      "name": "Technical implementation",
      "number": "6.1"
     },
     {
      "id": "context_and_memory",
-     "n_entities": 20,
+     "n_entities": 21,
      "name": "Context and memory",
      "number": "4.4"
     },
@@ -2837,7 +2864,7 @@
    "adjacent": [
     {
      "id": "technical_implementation",
-     "n_entities": 29,
+     "n_entities": 30,
      "name": "Technical implementation",
      "number": "6.1"
     },
@@ -3135,6 +3162,90 @@
    "unmapped": false,
    "wedge": "Retained responders who can reconstruct an agent's actions from its logs",
    "why_not_bundled": "The maker of the failed agent cannot investigate itself"
+  },
+  {
+   "acquirers": "The firms that sell data warehouses and business software, and the consultancies and labs moving into deployment",
+   "adjacent": [
+    {
+     "id": "context_engineering",
+     "n_entities": 6,
+     "name": "Context engineering",
+     "number": "6.2"
+    },
+    {
+     "id": "technical_implementation",
+     "n_entities": 30,
+     "name": "Technical implementation",
+     "number": "6.1"
+    },
+    {
+     "id": "tools_and_actuation",
+     "n_entities": 13,
+     "name": "Tools and actuation",
+     "number": "4.6"
+    }
+   ],
+   "blank": [],
+   "bottleneck": "What a firm knows is scattered across systems whose tables no document explains, so every agent has to be taught the firm again",
+   "builds_on": [
+    {
+     "href": "/layers/deployment_application#assessment-vc_deployment_services",
+     "ref": "pos:vc_deployment_services",
+     "title": "Fitting AI into a firm earns a services margin that grows with headcount; a rent lasts only where the deployer leaves behind software the customer runs its work on"
+    },
+    {
+     "href": "/layers/serving_orchestration#assessment-vc_agent_infra",
+     "ref": "pos:vc_agent_infra",
+     "title": "Agent plumbing is mostly open source that labs and clouds buy or copy; the rent sits with whoever holds the connections into customers' systems"
+    }
+   ],
+   "customer": "Large firms in regulated fields whose data may not leave their own systems",
+   "durable_asset": "The written-down map of what the firm's data means and how its work is done, which every agent and application comes to depend on",
+   "examples": [
+    "Exa",
+    "ByteRover",
+    "Chroma",
+    "Cognee",
+    "Compresr",
+    "Contextual AI"
+   ],
+   "falsifier": "The labs, the clouds or the firms that already sell a firm its data warehouse and business software ship a model of the firm as a built-in feature that buyers accept, or customers move the record to another seller at little cost",
+   "id": "firm_own_record",
+   "n_more_examples": 15,
+   "name": "A firm's own map of what its data means, kept on its own servers for every agent to read",
+   "next_action": "Take one hard reporting question in one regulated firm, answer it where the data sits, and keep what was learned as the first pages of the record",
+   "none_independent": false,
+   "powers": [
+    "switching costs"
+   ],
+   "prerequisites": "A customer with data it may not move and questions it cannot answer today, a capable model that can run where that data sits, and engineers who can work inside its systems",
+   "primary": {
+    "id": "context_and_memory",
+    "n_entities": 21,
+    "name": "Context and memory",
+    "number": "4.4"
+   },
+   "rent": {
+    "appropriability": "weak",
+    "asset_owner": "innovator",
+    "complementary_assets": "specialised",
+    "durability": "medium",
+    "pools": "innovator",
+    "profit": "moderate",
+    "reads": "a moderate profit, kept by the maker",
+    "rent_kind": "switching_cost",
+    "tier": "moderate",
+    "verdict": "A moderate profit, kept by the maker"
+   },
+   "rent_reason": "Everything a firm builds comes to read the record, so replacing the platform that keeps it means rebuilding that work; but the knowledge in it is the customer's own, and a rival or a better model could rebuild the map from the same data, so the hold is weaker than holding a trade's records",
+   "see_also": {
+    "id": "deploy_to_platform",
+    "name": "Deployment that leaves behind the platform the customer runs on"
+   },
+   "unit_sold": "A platform licence, then each agent and application that runs on the record",
+   "unmapped": false,
+   "wedge": "Answer hard questions over the firm's data where it already sits, writing down what each table and term means along the way",
+   "why_not_bundled": "A lab or a cloud would hold the record on its own systems, and a software vendor would describe only its own tables; the buyer wants one record across all of them, on its own servers and usable with any model"
   }
  ],
  "powers": {

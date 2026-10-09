@@ -231,4 +231,4 @@ def test_the_page_keeps_every_card_and_claims_no_new_review():
     page = (WEB / "app" / "value-chain" / "opportunities" / "page.tsx").read_text()
     assert "reviewed by {d.reviewed_by}" in page and "figures" in page.lower()
     spec = op.load()
-    assert str(spec["reviewed"]) == "2026-09-29" and len([o for o in spec["opportunities"] if o.get("published")]) == 20
+    assert str(spec["reviewed"]) == "2026-09-29" and len([o for o in spec["opportunities"] if o.get("published")]) == 21  # the twenty reviewed then, and one added on 9 Oct 2026
