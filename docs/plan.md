@@ -1304,3 +1304,11 @@ The last pieces of the owner's original frame, added to `/value-chain/atlas`.
 - *The reviewing run's other changes are made:* labels that asserted a shortage ("short now" beside "money is not what is scarce") are plain; the agent-proof chain names the warranty and incident-response businesses and the liability part; assignments of lasting things that stretched a record's own durable asset were withdrawn; the page's foot says which words are the site's, which the owner's and which a model's.
 
 **Still to come.** The sources for the country-split future.
+
+## Part 49 (8 Oct 2026): Ask never reports an empty answer as an answer
+
+Found while testing the idea box (Part 47): a long, open question came back with status `ok`, an empty answer and ten tool calls. `_run` returns an empty string when the model stops without text (its rounds or its tokens spent on tool calls), and `ask()` passed that through the citation check, which has nothing to fail.
+
+**The fix.** `_answer` wraps the first run: if it comes back empty, an empty turn or a reply cut off inside a tool call is dropped, the model is asked once more to write the answer from what it has read with no further tool calls, and if that is empty too `NoAnswer` is raised. The service already turns an exception into an error the reader can retry, so the page shows "the service answered with an error" and not a blank reply.
+
+**Not done.** The failed attempt's spend is not added to the day's ledger, because the exception leaves before the ledger line. It is rare; a comment marks it.

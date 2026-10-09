@@ -1198,6 +1198,29 @@ def _json(v: Any) -> Any:
     return str(v)
 
 
+class NoAnswer(RuntimeError):
+    """The model stopped without writing an answer, twice. The service turns it into an error the reader can retry."""
+
+
+NUDGE = "Write the answer now from the records you have already read, in under four hundred words, citing as before. Make no further tool calls."
+
+
+def _answer(client: Any, system: list[dict[str, Any]], messages: list[dict[str, Any]], tools: Tools, usage: dict[str, int], calls: list[dict[str, Any]], model: str = MODEL) -> str:
+    """`_run`, and one more turn if it comes back empty: a long question can use up its rounds or its tokens on tool
+    calls and stop with no text. An empty reply, or one cut off inside a tool call, is dropped first."""
+    text = _run(client, system, messages, tools, usage, calls, model)
+    if text.strip():
+        return text
+    last = messages[-1]
+    if last["role"] == "assistant" and (not last["content"] or any(getattr(b, "type", None) == "tool_use" for b in last["content"])):
+        messages.pop()  # an empty turn, or a tool call with no result, cannot be sent back
+    messages.append({"role": "user", "content": NUDGE})
+    text = _run(client, system, messages, tools, usage, calls, model)
+    if not text.strip():
+        raise NoAnswer("the model returned no answer")  # ponytail: this attempt's spend is not ledgered; rare
+    return text
+
+
 def _run(
     client: Any,
     system: list[dict[str, Any]],
@@ -1396,7 +1419,7 @@ def ask(
             "companies": {display(e).casefold(): display(e) for e in store.seed.entities},
         }
 
-    raw, card = split_card(_run(client, system, messages, tools, usage, calls), question, layout)
+    raw, card = split_card(_answer(client, system, messages, tools, usage, calls), question, layout)
     text, follow = split_followups(raw)
     status, model = "ok", MODEL
     up: dict[str, int] = {"in": 0, "out": 0, "cache_write": 0, "cache_read": 0}
