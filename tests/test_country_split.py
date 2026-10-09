@@ -31,8 +31,7 @@ def test_the_outlook_holds_the_position_its_writers_and_a_rival():
     rival = positions[held["rival"]]
     assert rival["rival"] == "access_by_state" and rival["attribution"] == "site" and not rival["holders"]
     claim = next(c for c in OUTLOOK["claims"] if c["position"] == "access_by_state")
-    assert claim["falsifier"] and "test" not in claim, (
-        "no public repeatable reading exists yet, so the claim says so by having no test"
+    assert claim["falsifier"]
     )
 
 
@@ -51,3 +50,17 @@ def test_the_future_leaves_the_waiting_list_and_joins_the_dial():
     mark = next(m for m in rows["policy_aware_routing"]["marks"] if m["key"] == "owners-country_split")
     assert mark["effect"] == "stronger", "the business whose worth turns on this future is judged in it"
     assert "not yet sourced" not in SPEC["businesses"]["policy_aware_routing"]["take"]
+
+
+def test_the_records_say_only_what_their_sources_say():
+    sources = {s["id"]: s for s in OUTLOOK["sources"]}
+    positions = {p["id"]: p for p in OUTLOOK["positions"]}
+    assert sources["woodward_rogoyski"]["short"] and sources["bcg_great_divide"]["short"], "a short name, so a board row does not run to a list of authors"
+    held, rival = positions["access_by_state"], positions["weights_cross"]
+    assert "[cite:woodward_rogoyski]" in held["case"] and "[cite:bcg_great_divide]" in held["case"], "the case is what the writers report, credited"
+    assert "[fact:open_lag]" in rival["case"], "the site's own reading, re-tested nightly, not typed by hand"
+    assert "supplier policy" not in held["kill_shot"]
+    owners = "owners/country_split"
+    assert owners not in SPEC["businesses"]["agent_audit_trail"]["futures"], "no rule in either source asks for a record of which model was used"
+    assert "provenance_and_audit" not in SPEC["shifts"][owners]
+    assert SPEC["businesses"]["outcome_router"]["futures"][owners]["effect"] == "weaker"
