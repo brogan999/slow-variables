@@ -58,9 +58,16 @@ def test_the_company_that_names_the_idea_is_on_the_map_from_its_own_site():
     assert rec["primary"]["n_entities"] == cat["n_entities"]
 
 
-def test_the_page_says_the_last_record_has_not_had_the_owners_review():
+def test_the_owner_reviewed_the_last_record_and_put_it_in_build():
     page = (ROOT / "web" / "src" / "app" / "value-chain" / "opportunities" / "page.tsx").read_text()
-    assert "its profit inputs are a model&apos;s draft he has not yet reviewed" in page
+    assert "has not yet reviewed" not in page, "he reviewed its profit inputs on 9 Oct 2026"
+    assert (
+        "reviewed and approved by Alex Brogan on 9 Oct 2026"
+        in (ROOT / "seed" / "opportunities.yaml").read_text()
+    )
+    assert ca.load()["businesses"][ID]["call"] == "build"
+    doc = json.loads((ROOT / "web" / "data" / "chain_atlas.json").read_text())
+    assert ID in [b["id"] for b in next(g for g in doc["groups"] if g["id"] == "build")["businesses"]]
 
 
 def test_the_record_names_every_rival_and_claims_no_effect_its_own_category_contradicts():
