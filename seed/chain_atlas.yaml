@@ -87,6 +87,9 @@ businesses:
       owners/agents_trade:
         effect: stronger
         reason: A deal between agents is settled from the record.
+      owners/country_split:
+        effect: stronger
+        reason: Showing which model did the work becomes part of obeying the rule.
   agent_authority_registry:
     call: build
     take: 'A monopoly-like prize: every counterparty has to ask whoever holds the registry. The fight is with the identity
@@ -190,9 +193,13 @@ businesses:
         reason: A firm that lets an agent spend for it wants someone standing behind the agent.
   policy_aware_routing:
     call: cond
-    take: Its worth turns on how far access to models splits by country and supplier, a future the site has not yet sourced.
+    take: Its worth turns on how far governments decide which models a firm may use. Where they do, this is the business
+      that keeps a firm inside the line.
     kills: One supplier is approved everywhere.
-    futures: {}
+    futures:
+      owners/country_split:
+        effect: stronger
+        reason: A firm barred from a supplier has to stay inside the models it is allowed and switch when one is cut off.
   agent_incident_response:
     call: cond
     take: A natural next product for whoever already holds the audit trail. Demand waits on failures that are public.
@@ -313,6 +320,9 @@ businesses:
       owners/open_frontier:
         effect: stronger
         reason: Tuning is the work that turns a free model into a product.
+      owners/country_split:
+        effect: stronger
+        reason: A firm shut out of the closed models needs an open one tuned to its work.
   deployment_talent:
     call: 'no'
     take: A good service firm, not a durable one.
@@ -800,6 +810,19 @@ shifts:
     liability_and_risk_transfer:
       move: tightens
       reason: A firm that lets an agent deal for it wants someone standing behind the agent.
+  owners/country_split:
+    routing_and_gateways:
+      move: tightens
+      reason: Keeping a firm inside the models it is allowed is work the free tools do not do.
+    compute_providers:
+      move: tightens
+      reason: A model that must run inside a country needs computing there.
+    general_purpose_models:
+      move: tightens
+      reason: A model a firm is not allowed to buy is scarce to that firm.
+    provenance_and_audit:
+      move: tightens
+      reason: A firm has to be able to show which model did the work.
 future_groups:
 - id: grid
   name: How far AI goes, and how the rules settle
@@ -849,11 +872,18 @@ ownership:
   bears_against:
   - agents_fenced
   - asking_leaks
+- id: country_split
+  name: Governments decide which models a firm may use
+  says: The governments of the few states that make the most capable models decide which countries and firms may use them,
+    so a firm's choice of model is bounded by where it sits and where it sells.
+  argued_by:
+  - woodward_rogoyski
+  - bcg_great_divide
+  bears_for:
+  - access_fenced
+  bears_against:
+  - open_reaches_all
 waiting:
-- name: Model access splits by country
-  why: Writers who argue it were found, but none is yet among the outlook's sources. The one public reading found, a count
-    of the export rules the United States writes about AI, needs a rule for which rules count. It joins the dial when the
-    outlook holds it.
 - name: Agents buy from agents, with no person in the deal
   why: The outlook's writers say agents could deal for people and firms; none argues that agents will trade with each other
     unattended, and no public count of such trade exists.

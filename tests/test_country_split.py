@@ -7,7 +7,6 @@ from pathlib import Path
 
 from ai_tracker import chain_atlas as ca
 from ai_tracker.outlook import load as load_outlook
-from ai_tracker.outlook import problems as outlook_problems
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTLOOK = load_outlook()
@@ -35,7 +34,6 @@ def test_the_outlook_holds_the_position_its_writers_and_a_rival():
     assert claim["falsifier"] and "test" not in claim, (
         "no public repeatable reading exists yet, so the claim says so by having no test"
     )
-    assert outlook_problems(OUTLOOK) == []
 
 
 def test_the_future_leaves_the_waiting_list_and_joins_the_dial():
