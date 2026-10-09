@@ -135,8 +135,11 @@ class Handler(BaseHTTPRequestHandler):
             try:
                 res = ask_mod.ask(self.svc.store, q, self.svc.tools, history=history)
             except Exception as e:  # noqa: BLE001 - surfaced to the drawer as offline
+                self.svc.add_spend(getattr(e, "usd", 0.0))  # a failed attempt still cost what it cost
                 line, payload = model_error(e)
                 log.error(line)
+                if isinstance(e, ask_mod.NoAnswer):
+                    payload = {"error": "no answer", "detail": "the model wrote nothing"}
                 return self._send(502, payload)
             self.svc.add_spend(res["usage"]["usd"])
             self.svc.record(res["audit"])

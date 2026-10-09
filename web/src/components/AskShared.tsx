@@ -46,7 +46,7 @@ export function useAsk(initial: Turn[] | (() => Turn[]) = [], startBusy = false)
       });
       const j = await r.json();
       if (r.status === 429) done({ error: "Today's question budget is spent; it resets at midnight UTC." });
-      else if (!r.ok) done({ error: j.error === "offline" ? OFFLINE : `The service answered with an error (${j.error ?? r.status}).` });
+      else if (!r.ok) done({ error: j.error === "offline" ? OFFLINE : j.error === "no answer" ? "The question was too wide to answer in one go. Try a narrower one." : `The service answered with an error (${j.error ?? r.status}).` });
       else done({ a: j });
     } catch (e) {
       done({ error: (e as Error).name === "AbortError" ? "Stopped." : OFFLINE });

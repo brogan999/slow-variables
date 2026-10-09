@@ -1304,3 +1304,11 @@ The last pieces of the owner's original frame, added to `/value-chain/atlas`.
 - *The reviewing run's other changes are made:* labels that asserted a shortage ("short now" beside "money is not what is scarce") are plain; the agent-proof chain names the warranty and incident-response businesses and the liability part; assignments of lasting things that stretched a record's own durable asset were withdrawn; the page's foot says which words are the site's, which the owner's and which a model's.
 
 **Still to come.** The sources for the country-split future.
+
+## Part 49 (8 Oct 2026): Ask never reports an empty answer as an answer
+
+Found while testing the idea box (Part 47): a long, open question came back with status `ok`, an empty answer and ten tool calls. `_run` returns an empty string when the model stops without text (its rounds or its tokens spent on tool calls), and `ask()` passed that through the citation check, which has nothing to fail.
+
+**The fix.** `_answer` wraps the first run. If nothing a reader could read comes back (no text, only whitespace, only a card, or a reply cut off inside a tool call), the model is asked once more, in a single call that may not use a tool, to write the answer from what it has read. If that is empty too, or too little time is left before the site's proxy gives up, `NoAnswer` is raised. The service returns it as "no answer", and the page tells the reader the question was too wide and to try a narrower one.
+
+**What the review added.** The same empty answer could still arrive by two other doors, both now closed: a retry on the stronger model that came back empty was reported as "retried", and a reply holding only a card was reported as "ok". The second ask was unbounded (up to twelve more rounds of tool calls); it is now one call. A failed attempt's cost was dropped from the day's ledger, so a reader retrying a question that keeps failing could spend past the cap unseen; the cost now travels with the error and is ledgered.
