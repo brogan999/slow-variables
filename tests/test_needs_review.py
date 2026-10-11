@@ -18,7 +18,7 @@ def test_the_new_business_meets_a_need_and_the_roll_ups_customers_have_its_need(
     assert "outcome" in kinds["accounting"]["needs"] and "outcome" in kinds["property"]["needs"]
     demand = json.loads((ROOT / "web" / "data" / "opportunities.json").read_text())["figures"]["demand"]
     assert "firm_own_record" in json.dumps(demand["rows"]) and "firm_own_record" not in json.dumps(
-        demand.get("off_grid", [])
+        demand["off"]
     )
 
 
