@@ -185,7 +185,7 @@ def test_the_figures_say_what_the_review_asked_them_to_say():
         "How many kinds of firm are marked with a need each business would meet",
         "Breadth of need is not size of profit",
         "each is given every kind with that need",
-        "they are not part of the owner's review of the records below",
+        "the owner reviewed them in October 2026, after his review of the records below",
         "Not on that page's grid",
         "No need on that page names these businesses.",
         "not on the grid",

@@ -6,6 +6,9 @@
 # layer (managers, professionals, sales, office support), a word from `shape_words` for how it compares with today.
 # `illustration` names a record in seed/illustrations.yaml: a picture made with AI image generation, never evidence.
 # Sources carry a fetch record; each was fetched on the day. Text types no digit but a year.
+# The needs grid (the `needs` list, each kind's `needs`, and each need's `opportunities`) was reviewed by Alex Brogan on 10 Oct 2026,
+# who added firm_own_record to `capture` and marked `outcome` on the accounting practice and the property manager, the
+# roll-up's own customers. The rest of this file is not reviewed by him.
 kinds:
 - id: accounting
   name: Accounting practice
@@ -42,6 +45,7 @@ kinds:
   - deploy
   - context
   - record
+  - outcome
   wrong: A buyer of such firms reporting, after a full tax season, revenue per person no higher than ordinary firms; or a
     state board disciplining a firm over audit work an agent prepared.
   sources:
@@ -376,6 +380,7 @@ kinds:
   - check
   - identity
   - deploy
+  - outcome
   wrong: An independent count putting that buyer's homes per person near the ordinary level; or complaints rising at the agencies
     it bought.
   sources:
@@ -1122,6 +1127,7 @@ needs:
   what: The unwritten rules of a trade, captured so an agent can follow them.
   opportunities:
   - context_engineering_service
+  - firm_own_record
 - id: context
   name: Context that stays with one customer
   what: An agent that remembers a client and improves on that client's work.
