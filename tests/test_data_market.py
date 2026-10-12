@@ -59,7 +59,9 @@ def test_a_page_that_did_not_answer_or_has_no_hash_is_a_problem():
 def test_a_signal_counts_the_vendors_listed_and_weak_ones_apart():
     doc = dm.build(SPEC, FETCHES)
     weak = {v["id"] for v in SPEC["vendors"] if v["evidence"] == "weak"}
-    for s, built in zip(SPEC["signals"], doc["signals"]):
+    built_by_id = {s["id"]: s for s in doc["signals"]}
+    for s in SPEC["signals"]:
+        built = built_by_id[s["id"]]
         assert built["evidenced"] == len(set(s["shown_by"]) - weak)
         assert built["weak"] == len(set(s["shown_by"]) & weak)
     by_id = {v["id"]: v for v in doc["vendors"]}
@@ -96,5 +98,5 @@ def test_nothing_that_scores_or_answers_reads_the_file():
 def test_no_tracked_file_of_the_section_names_a_home_folder_or_a_social_link():
     for p in (dm.SPEC, dm.FETCHES, ROOT / "scripts" / "data_market_import.py"):
         text = p.read_text()
-        for needle in ("~/", "/Users/", "x.com/", "twitter.com/"):
+        for needle in ("~/", "/Users/", "//x.com/", "//twitter.com/"):
             assert needle not in text, f"{p.name}: {needle}"

@@ -965,6 +965,9 @@ class Store:
         from . import judgements
 
         _write(out / "judgements.json", judgements.build(judgements.load()))
+        from . import data_market
+
+        _write(out / "data_market.json", data_market.build(data_market.load(), data_market.fetches()))
         _write(out / "compare.json", self._compare(cards))
         _write(out / "thesis.json", read_jsonl(DATA / "thesis.jsonl"))
         from .argument import build
