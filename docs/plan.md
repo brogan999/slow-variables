@@ -1345,3 +1345,14 @@ The owner saw the idea stated in public (a company-wide ontology, installed on t
 - *The reviewing run's changes are made.* The reason for the profit no longer rests on one company's design choice (files a customer can move); it rests on the knowledge being the customer's own and the map being rebuildable from the same data. The record names the rival its own buyers list implies: the firms that already sell a firm its data warehouse and business software. Two effects were withdrawn, one that described a different product and one that contradicted the atlas's own move for the record's part of the map.
 - *Its card will not name TextQL.* A card lists the first few companies on its part of the map, and that part holds search and storage firms first. The company is on the map in two places.
 - *TextQL's placement rests on its home page only.* The page calls the product a sovereign ontology and describes mapping a firm's data and running agents on it. It does not say where the product is installed, so the note does not either.
+
+## Part 52 (10 Oct 2026): the owner's review of the needs grid
+
+The demand figure on the businesses page borrows the needs grid from `/firm/kinds`: fifteen needs, the businesses that meet each, and the needs each kind of firm is marked with. A model drafted it on 6 Oct, and the figure's foot said the owner had not reviewed it.
+
+**What changed.** The owner was shown the whole grid on 10 Oct 2026 and approved it, with two changes of his own choosing:
+
+- the twenty-first business, a firm's own map of what its data means, now meets the need "writing down how the firm works", beside capturing how a firm works;
+- "selling the result, and settling it" is marked on the accounting practice and the property manager, which the fixed-fee roll-up's own record names as its customers. This closes the mismatch Part 45e's notes recorded.
+
+The foot now says he reviewed the needs, the marks and the links in October 2026. The bars stay hatched: the grid is still a model's draft, now approved. The seed's header records the review and its limit: the rest of `seed/firm_kinds.yaml` (what happens to each kind of firm, now and later) is not reviewed by him, and that page claims no review.

@@ -654,8 +654,7 @@
     "outcome_router",
     "energy_aware_compute",
     "policy_aware_routing",
-    "open_weight_post_training",
-    "firm_own_record"
+    "open_weight_post_training"
    ],
    "rows": [
     {
@@ -685,9 +684,10 @@
      "w": 100.0
     },
     {
-     "count": 6,
+     "count": 7,
      "id": "agent_payments",
      "kinds": [
+      "Accounting practice",
       "Law firm",
       "Software and IT services company",
       "Bank or lender",
@@ -707,7 +707,7 @@
        "name": "Selling the result, and settling it"
       }
      ],
-     "w": 50.0
+     "w": 58.333333333333336
     },
     {
      "count": 5,
@@ -859,6 +859,24 @@
     },
     {
      "count": 4,
+     "id": "outcome_priced_rollup",
+     "kinds": [
+      "Accounting practice",
+      "Law firm",
+      "Customer-support and business-support firm",
+      "Property manager or letting agency"
+     ],
+     "needs": [
+      {
+       "href": "/firm/kinds#need-outcome",
+       "id": "outcome",
+       "name": "Selling the result, and settling it"
+      }
+     ],
+     "w": 33.333333333333336
+    },
+    {
+     "count": 4,
      "id": "deployment_talent",
      "kinds": [
       "Accounting practice",
@@ -893,22 +911,6 @@
      "w": 25.0
     },
     {
-     "count": 2,
-     "id": "outcome_priced_rollup",
-     "kinds": [
-      "Law firm",
-      "Customer-support and business-support firm"
-     ],
-     "needs": [
-      {
-       "href": "/firm/kinds#need-outcome",
-       "id": "outcome",
-       "name": "Selling the result, and settling it"
-      }
-     ],
-     "w": 16.666666666666668
-    },
-    {
      "count": 1,
      "id": "context_engineering_service",
      "kinds": [
@@ -934,6 +936,21 @@
        "href": "/firm/kinds#need-incident",
        "id": "incident",
        "name": "Someone to call when an agent goes wrong"
+      }
+     ],
+     "w": 8.333333333333334
+    },
+    {
+     "count": 1,
+     "id": "firm_own_record",
+     "kinds": [
+      "Management consultancy"
+     ],
+     "needs": [
+      {
+       "href": "/firm/kinds#need-capture",
+       "id": "capture",
+       "name": "Writing down how the firm works"
       }
      ],
      "w": 8.333333333333334
