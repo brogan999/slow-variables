@@ -161,3 +161,20 @@ def test_the_index_tallies_the_new_prizes_not_the_older_tiers():
     method = (WEB / "app" / "methodology" / "page.tsx").read_text()
     assert "how large a prize" in method and "no prize" in method, "the method page says how the new judgement is made"
 
+
+
+# A pinned list, not the rule itself: ideas a person read and placed under "done to someone without their say, to hurt
+# them, break their mind or override their will or body" (plan Part 56), and near neighbours the rule leaves priced.
+NO_PRIZE = ("tv-17773bf73d tv-090afb57c0 tv-f41c183010 tv-74a4ab4a94 tv-bb47e48592 tv-acdea59b5e tv-e7893c2990 tv-e223ea183a "
+            "tv-3252d4f1e8 tv-50cb9cdc7a tv-e991cd2a4c tv-2bc1683f5c tv-f82bcd62e5 tv-30f0c2bd3a tv-6b7b54f30f tv-869248d145 "
+            "tv-25daafbdf5 tv-ba7c1a1581 tv-969494bade tv-1d848f92b4 tv-28aaba424e tv-e5a30c862b tv-bec58bb3cc tv-7bf8c18a7d "
+            "tv-93908538db tv-454323bb79").split()
+STILL_PRICED = "tv-ab168e842f tv-201b5e5ac0 tv-ab7e27ff5a tv-7cd5ed5528 tv-2ade83aa31 tv-5365ae0802 tv-8d18cca47b tv-55645c5db3".split()
+
+
+def test_the_pinned_ideas_done_to_a_person_without_their_say_have_no_prize_and_their_neighbours_keep_one():
+    judged = fu.verdicts()
+    assert [i for i in NO_PRIZE if judged[i]["prize"] != "none"] == []
+    assert [i for i in STILL_PRICED if judged[i]["prize"] == "none"] == []
+    method = (WEB / "app" / "methodology" / "page.tsx").read_text()
+    assert "without their say" in method and "left standing" not in method
