@@ -81,7 +81,7 @@ export default function DataMarketPage() {
           Almost no page gives a price that a model builder paid. The prices that are published are what vendors pay their experts and what they offer companies for records. They are left off this page until each is checked against its source.
         </p>
         <p>
-          The vendors disagree with each other. Some say data made by people matters less with each new model; others say data made by machines helps less at the frontier. Model builders are reported to be bringing more of this work in house in the same months that vendors report record growth.
+          The vendors disagree with each other. Some say data made by people matters less with each new model; others say data made by machines helps less at the frontier.
         </p>
         <p>
           A vendor absent from a row may still do the thing the row describes. It is listed only where one of its own pages, read here, shows it. Some vendors are missing altogether because none of their pages answered.
