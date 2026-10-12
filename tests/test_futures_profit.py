@@ -153,13 +153,11 @@ def test_the_index_tallies_the_new_prizes_not_the_older_tiers():
     assert "tier_words" not in doc["index"]
     for c in doc["index"]["categories"]:
         assert "tiers" not in c and "tiers" not in doc["categories"][c["id"]]
-        assert [p["word"] for p in c["prizes"]] == ["vast", "large", "small", "none"]
+        assert [p["word"] for p in c["prizes"]] == ["vast", "large", "small", "no prize"]
         assert sum(p["n"] for p in c["prizes"]) == c["n"]
     page = (WEB / "app" / "futures" / "page.tsx").read_text()
     assert "c.prizes" in page and "tier_words" not in page and "as a model judges it" in page
+    assert "monopoly-like" not in page, "the lede explains the judgement the tally shows"
+    method = (WEB / "app" / "methodology" / "page.tsx").read_text()
+    assert "how large a prize" in method and "no prize" in method, "the method page says how the new judgement is made"
 
-
-def test_a_device_for_hurting_or_compelling_a_held_person_has_no_prize_in_any_kind():
-    judged = fu.verdicts()
-    for i in ("tv-e7893c2990", "tv-17773bf73d", "tv-7cd5ed5528", "tv-30f0c2bd3a", "tv-93908538db", "tv-454323bb79"):
-        assert judged[i]["prize"] == "none", i

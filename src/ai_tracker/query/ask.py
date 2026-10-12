@@ -170,7 +170,7 @@ TOOLS = [
     },
     {
         "name": "futures",
-        "description": "The Futures page: ideas imagined in fiction and essays (kind idea: when first imagined, whether built, the decade AI models judged a working version likely, and under profit a model's judgement of the idea as if it worked the way its story promises: how large a prize it would be, who would pay, which seller would keep what is left, a reason for each, and how sure the model is), and dated forecasts from the singularity reading list (kind forecast: who, what technology, when, the odds they gave). Cite each as [fut:<id>]. Each profit entry is a model's judgement, not a measurement: say so, and give it in its own words. Optional kind: idea, forecast.",
+        "description": "The Futures page: ideas imagined in fiction and essays (kind idea: when first imagined, whether built, the decade AI models judged a working version likely, and under profit a model's judgement of the idea as if it worked the way its story promises: how large a prize it would be, who would pay, which seller would keep what is left, a reason for each, and how sure the model is), and dated forecasts from the singularity reading list (kind forecast: who, what technology, when, the odds they gave). Cite each as [fut:<id>]. Each profit entry is a model's judgement, not a measurement: say so, and give it in its own words; a few ideas the site could not place in a kind have none. Optional kind: idea, forecast.",
         "input_schema": {"type": "object", "properties": {"query": {"type": "string"}, "kind": {"type": "string"}, "k": {"type": "integer"}}, "required": ["query"]},
     },
     {

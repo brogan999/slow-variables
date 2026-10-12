@@ -76,7 +76,7 @@ export default function FuturesPage() {
           <p className="text-[12px] text-muted">Upper bar: ideas, judged by AI models. Lower bar: forecasts stated by their authors.</p>
         </Section>
 
-        <Section id="categories" eyebrow="Part III" title="Kinds of technology, and who would profit" lede={<>Each idea was sorted into one kind of technology and, where it could be sold, judged by AI models for how much lasting profit it could earn and who would keep it: fat means a large margin that lasts for decades, moderate a typical one, thin a small or brief one, and monopoly-like one that rivals can barely touch. Where anyone could copy the idea, competition hands the gain to users instead. <Link href="/methodology#futures" className={link}>How the profit is judged</Link></>}>
+        <Section id="categories" eyebrow="Part III" title="Kinds of technology, and who would profit" lede={<>Each idea was sorted into one kind of technology and judged by a model as if it worked the way its story promises: how large a prize it would be, who would pay for it, and which seller would keep what is left once buyers have had their gain. A vast prize changes how most people live or work, a large one changes a whole industry, a small one serves a narrow need, and no prize means nothing would be sold. <Link href="/methodology#futures" className={link}>How the profit is judged</Link></>}>
           <div className="grid gap-5 sm:grid-cols-2">
             {f.categories.map((c) => (
               <Link key={c.id} href={c.href} className="panel px-3 py-3 flex flex-col gap-2 hover:border-ink">

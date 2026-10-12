@@ -244,7 +244,6 @@ TIER_WORDS = {"none": "none", "thin": "thin", "moderate": "moderate", "fat": "fa
 POOLS_WORDS = {"innovator": "the maker", "incumbents": "incumbent firms", "platforms": "platforms",
                "regulators_licensees": "licence holders"}
 # How an idea's profit reads: users collecting it and there being no lasting profit are different results.
-PROFIT_WORDS = ["fat", "moderate", "thin", "monopoly-like", "no lasting profit", "competed away to users", "not judged"]
 
 
 def profit(x: dict[str, Any]) -> str:
@@ -471,7 +470,7 @@ def build() -> dict[str, Any]:
     categories, category_docs = [], {}
     for cid, name in CATEGORY_NAMES.items():
         rows = [x for x in every if x["category"] == cid]
-        prizes = [{"word": p, "n": sum(1 for x in rows if (judged_profit.get(x["id"]) or {}).get("prize") == p)} for p in profit_spec["words"]["prize"]]
+        prizes = [{"word": "no prize" if p == "none" else p, "n": sum(1 for x in rows if (judged_profit.get(x["id"]) or {}).get("prize") == p)} for p in profit_spec["words"]["prize"]]
         img = f"/futures/cat-{cid}" if f"cat-{cid}" in imgs else None
         categories.append({"id": cid, "name": name, "n": len(rows), "built": sum(1 for x in rows if built(x["arrival"]["state"])),
                            "prizes": prizes, "image": img, "href": f"/futures/category/{cid}"})

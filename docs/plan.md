@@ -1390,6 +1390,7 @@ Part 54 left the older rubric in three places and put the question to the owner.
 
 **What changed.**
 
+- The futures index's lede and the method page explain the new judgement in place of the older tiers.
 - The futures index tallies each kind's ideas by the new prize (vast, large, small, none), labelled "as a model judges it", in place of the older profit tiers. `tiers` and `tier_words` leave the exports.
 - Ask's `futures` tool returns, for an idea, the new judgement in its own words (prize, who pays, which seller keeps the rest, a reason for each, how sure the model is), marked as a model's judgement, in place of the older rubric's five answers, pool and tier. The tool's description tells Ask to say whose judgement it is. Prompt version fifteen.
 - The category page's margin panel of older tiers is gone; every category now carries its table.
@@ -1399,7 +1400,7 @@ Part 54 left the older rubric in three places and put the question to the owner.
 
 - **The owner's decision overrides Part 39 for this file.** Part 39 holds every model judgement apart from tallies and from Ask. The futures section's profit judgement was already tallied and already read by Ask in its older form; the owner chose to keep that and to move both to the new judgement. `seed/futures/profit.yaml` records it. No status or metric reads the file.
 - **The table's cell counts stay** (left to the model). They are what the owner approved in the mock-up, each is labelled, and with the index now tallying the same judgement a mark in place of a count would hide nothing.
-- **The standing inconsistency is settled by one rule** (left to the model): a device or substance whose described use is to hurt or compel a person who has no say has no prize, in every kind; a weapon a police force or an army would buy stays priced, with a government as payer. Four ideas moved to "no prize" (a collar that compels a worker, a box that tests endurance by pain, a restraint for convicts, a plant used for social control). Each carries the same plain reason. The rule was applied by hand to the four rows; no model run re-read the entries the safety filter had stopped on.
+- **The standing inconsistency stays, and the method page now states it** (left to the model). A single rule was tried, no prize for anything whose described use is to hurt or compel a person who has no say, and set by hand on four rows. The staff review found it uneven: a keyword pass turned up well over a dozen more ideas it plainly covers, a family of state punishments and mind-control tools that three kinds deliberately price as things a government buys, and it cut against the priced police restraints. The opposite rule would price the poisons, gases and coercive devices the weapons kind deliberately leaves at no prize, and no run was made to write those reasons. So the four rows went back to what their kinds ruled, and the difference is described on `/methodology#futures` instead of hidden. Settling it properly means re-judging that whole family one way or the other.
 
-**Tests first.** In `tests/test_futures_profit.py`: only Ask reads the judgement file and it says whose judgement it is; the index tallies the new prizes, not the older tiers; a device for hurting or compelling a held person has no prize in any kind.
+**Tests first.** In `tests/test_futures_profit.py`: only Ask reads the judgement file and it says whose judgement it is; the index tallies the new prizes, not the older tiers. The method page says how the new judgement is made.
 
