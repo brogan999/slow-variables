@@ -29,7 +29,7 @@ export function Sources() {
 export function IdeaCard({ x }: { x: FuIdea }) {
   return (
     <article id={x.id} className="flex flex-col gap-1.5 py-3 border-t border-grid first:border-0 scroll-mt-8">
-      {x.image || x.image_file ? <figure className="flex flex-col gap-0.5 max-w-[360px]"><Plate src={x.image} file={x.image_file} alt={`Illustration of ${x.name}: ${x.line}`} sizes="(min-width: 768px) 360px, 100vw" /><Credit /></figure> : null}
+      {x.image || x.image_file ? <figure className="flex flex-col gap-0.5 max-w-[720px]"><Plate src={x.image} file={x.image_file} alt={`Illustration of ${x.name}: ${x.line}`} sizes="(min-width: 768px) 720px, 100vw" /><Credit /></figure> : null}
       <h3 className="font-medium text-[15px]">{x.name}</h3>
       <p className="text-[12px] text-muted">{x.work}{x.work ? ", " : ""}{x.author} · {x.imagined}</p>
       <p className="text-[14px] text-ink-2">{x.line}</p>
