@@ -2,7 +2,6 @@
 pay, and which seller would keep what is left, each in plain words with a reason. A model's judgement, kept apart from
 the older rubric answers, which stay for the pages and tools that still read them."""
 
-import copy
 from pathlib import Path
 
 from ai_tracker import futures as fu
@@ -99,3 +98,37 @@ def test_the_page_draws_the_verdict_with_its_reasons_folded_and_labels_it():
     page = (WEB / "app" / "futures" / "category" / "[id]" / "page.tsx").read_text()
     assert "c.matrix" in page and "VerdictTable" in page
     assert '"use client"' not in parts, "the table filters with radios and CSS, no script"
+
+
+def test_every_idea_of_a_known_kind_is_judged():
+    judged = fu.verdicts()
+    assert not [x["id"] for x in fu.ideas() if x["category"] != "cannot_judge" and x["id"] not in judged]
+
+
+def test_each_cell_counts_the_cards_it_shows_and_the_table_tallies_nothing_else():
+    for cid, d in fu.build()["categories"].items():
+        if not d["matrix"]:
+            continue
+        assert "payers" not in d["matrix"], "a count that filters nothing is a bare tally of judgements"
+        for row in d["matrix"]["rows"]:
+            for cell in row["cells"]:
+                assert cell["n"] == sum(1 for c in d["ideas"] if c["verdict"]["key"] == cell["key"]), (cid, cell["key"])
+                assert cell["key"].replace("-", "").isalpha(), "the key becomes a CSS id"
+
+
+def test_the_headline_says_it_is_a_judgement_without_being_opened():
+    parts = (WEB / "components" / "FuturesParts.tsx").read_text()
+    card = parts.split("export function IdeaCard")[1].split("\nexport ")[0]
+    assert "as a model judges it" in card.split("<details")[0], "decade pages show the card with no table above it"
+    table = parts.split("export function VerdictTable")[1].split("\nexport ")[0]
+    assert 'role="radiogroup"' in table and "data-v" in card and "fv-${c.key}" in table
+
+
+def test_nothing_else_reads_the_judgement_file():
+    src = Path(fu.__file__).parent
+    for p in src.rglob("*.py"):
+        text = p.read_text()
+        if p.name == "futures.py":
+            continue
+        uses = [ln for ln in text.splitlines() if "verdicts(" in ln or "profit.jsonl" in ln or "PROFIT_ROWS" in ln]
+        assert all("verdict_problems" in ln for ln in uses), f"{p.name} reads the futures profit judgement: {uses}"
