@@ -9,6 +9,7 @@ export const metadata = {
 };
 
 const link = "underline decoration-grid underline-offset-4";
+const ANCHOR = { evidenced: "dm-evidenced", weak: "dm-weak", builders: "dm-builders" } as const;
 
 export default function DataMarketVendorsPage() {
   const d = dataMarket();
@@ -25,7 +26,7 @@ export default function DataMarketVendorsPage() {
         An empty column does not mean a vendor does not do that work, only that no page read here shows it. Which vendors have weak evidence of growth is a call made in the research. {d.disclosure} <Link href="/methodology#company-claims" className={link}>How this is made</Link>.
       </p>
       {d.board.groups.map((g) => (
-        <section key={g.id} id={`dm-${g.id}`} className="scroll-mt-24 flex flex-col gap-3">
+        <section key={g.id} id={ANCHOR[g.id]} className="scroll-mt-24 flex flex-col gap-3">
           <div className="flex flex-col gap-1 max-w-[68ch]">
             <h2 className="display text-2xl">
               {g.name} <span className="num text-base font-normal text-muted">{g.n}</span>
