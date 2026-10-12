@@ -1356,3 +1356,30 @@ The demand figure on the businesses page borrows the needs grid from `/firm/kind
 - "selling the result, and settling it" is marked on the accounting practice and the property manager, which the fixed-fee roll-up's own record names as its customers. This closes the mismatch Part 45e's notes recorded.
 
 The foot now says he reviewed the needs, the marks and the links in October 2026. The bars stay hatched: the grid is still a model's draft, now approved. The seed's header records the review and its limit: the rest of `seed/firm_kinds.yaml` (what happens to each kind of firm, now and later) is not reviewed by him, and that page claims no review.
+
+## Part 54 (11 Oct 2026): a second judgement of profit for the futures ideas
+
+The futures pages said of each idea "Profit, as AI models judge it: a fat profit, kept by licence holders". The owner asked to rethink both how profit is judged and how it is shown. He chose: size first, then who keeps it; the payer and the seller as separate questions; every idea judged by its story's promise, whether or not it looks possible; one model with a reviewing run; a headline with the reasons folded beneath.
+
+**What is judged.** Three questions an idea, each answered in words with a reason (`seed/futures/profit.yaml` holds the words and what they mean, `seed/futures/profit.jsonl` one line an idea):
+
+- how large a prize it would be: vast, large, small or none;
+- who would pay: households, businesses, a government or nobody;
+- which seller would keep what is left once buyers have had their gain: no seller in particular, the maker, existing firms, permit holders, or nothing is sold.
+
+**How it was made.** Every idea of a known kind, in batches by kind. One run judged a batch; a separate run reviewed it; where a kind has more than one batch, later batches were judged against the reviewed first one and a further run gave each family one answer across the kind; a last run settled families that appear under more than one kind. The reviewing runs changed a large share of some first batches (the weapons and transport batches most). One medicine batch was stopped by a safety filter while its reasons were being written; it was rerun in smaller pieces with reasons that speak only of who buys and who sells, and came through whole.
+
+**What the page shows.** A category page (`/futures/category/<kind>`) opens with a table of prize by seller; choosing a cell shows only those ideas, with no script. Each card carries a headline (prize; who pays; which seller keeps the rest), marked beside it as a model's judgement, and a folded "Why" with the two reasons, the judgement label and how sure the model is. A category gets its table only when every idea in it is judged.
+
+**What did not change.** The older rubric answers in `ideas.jsonl` stay, and so do the pages and tools that read them: the futures index, the decade pages' tallies, the opportunities and value-chain pages' profit rule, and Ask's `futures` tool. Under Part 39 no status, metric or query tool reads the new file, and a test holds other code out of it. Whether those should move to the new judgement is the owner's call and has not been put to him. Until then a decade page's cards show the new headline beside ledes and tallies built from the older rubric, so two judgements share that page.
+
+**Judgement calls.** Every line of `profit.jsonl` is a model's judgement. Part 39 says no tally counts a judgement; the category table does count them, one count a cell, each the number of cards that cell shows on the same page. It is kept as a labelled index of the page's own cards, which is what the owner approved in the mock-up, and it is the one exception: a line that counted who pays and filtered nothing was cut on review. If the owner would rather hold the rule whole, the cells can carry a mark in place of the count and still filter. Known weak points, from the reviewing runs' own notes:
+
+- the seller question separates little in some kinds (surveillance and weapons are mostly existing firms; for small household goods the line between no seller and existing firms rests on a rule the reviewing run wrote: no seller in particular unless selling needs land, a fitting trade, a large factory, shop shelves for used-up goods, or a fleet);
+- one word in an idea's description often decides its answer;
+- a trade, a practice or a natural place fits the frame badly; trades are priced as labour, ways of doing a thing are not priced;
+- a principle and the products built on it are each counted, so a family's prize appears once a member;
+- one inconsistency is left standing: devices that hurt or coerce a captive are "no prize" in the weapons kind while a few like devices elsewhere are priced. The cross-kind run was stopped by a safety filter while reading those entries and left them untouched; they wait for a person.
+- the ideas the site cannot place in a kind are not judged.
+
+**Tests first.** `tests/test_futures_profit.py`: the real file passes and `check` reads it; a broken verdict names each problem; a card carries the verdict in words and keeps the old line; a category gets its table only when every idea in it is judged; the page draws the verdict with its reasons folded and labels it; every idea of a known kind is judged; each cell counts the cards it shows and the table tallies nothing else; the headline says it is a judgement without being opened; nothing else reads the judgement file.

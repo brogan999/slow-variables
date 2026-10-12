@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArticleLayout, MarginPanel } from "@/components/ArticleLayout";
-import { Credit, ForecastRow, IdeaCard, Plate, Sources } from "@/components/FuturesParts";
+import { Credit, ForecastRow, IdeaCard, Plate, Sources, VerdictTable } from "@/components/FuturesParts";
 import { PageHeader } from "@/components/PageHeader";
 import { futures, futuresCategory } from "@/lib/data";
 import { fmt } from "@/lib/format";
@@ -25,18 +25,19 @@ export default async function FuturesCategoryPage({ params }: { params: Promise<
         </PageHeader>
       }
       margin={
-        <MarginPanel title="Profit, as AI models judge it" rows={[["Ideas of this kind", fmt(c.n, "count")], ...words.filter((w) => c.tiers[w]).map((w) => [w, fmt(c.tiers[w], "count")] as [string, string])]} />
+        c.matrix ? undefined : <MarginPanel title="Profit, as AI models judge it" rows={[["Ideas of this kind", fmt(c.n, "count")], ...words.filter((w) => c.tiers[w]).map((w) => [w, fmt(c.tiers[w], "count")] as [string, string])]} />
       }
     >
-      <div className="flex flex-col gap-10">
+      <div className="fu-verdicts flex flex-col gap-10">
         {c.forecasts.length ? (
           <section aria-labelledby="fc-h">
             <h2 id="fc-h" className="display text-[1.5rem] leading-tight mb-2">Dated forecasts</h2>
             <ul>{c.forecasts.map((f) => <ForecastRow key={f.id} f={f} />)}</ul>
           </section>
         ) : null}
-        <section aria-labelledby="ideas-h">
-          <h2 id="ideas-h" className="display text-[1.5rem] leading-tight mb-2">Imagined, oldest first</h2>
+        <section aria-labelledby="ideas-h" className="flex flex-col gap-4">
+          <h2 id="ideas-h" className="display text-[1.5rem] leading-tight">Imagined, oldest first</h2>
+          {c.matrix ? <VerdictTable m={c.matrix} n={c.n} /> : null}
           <div>{c.ideas.map((x) => <IdeaCard key={x.id} x={x} />)}</div>
         </section>
         <Sources />

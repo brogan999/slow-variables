@@ -262,6 +262,79 @@ def profit_text(x: dict[str, Any]) -> str:
     return {"not judged": "not judged (not a technology, not something sold, not physically possible, or unclear)"}.get(p, p)
 
 
+PROFIT_SPEC = ROOT / "seed" / "futures" / "profit.yaml"
+PROFIT_ROWS = ROOT / "seed" / "futures" / "profit.jsonl"
+NOTHING = {"prize": "none", "payer": "nobody", "seller": "none"}  # these three go together or not at all
+
+
+def verdict_spec() -> dict[str, Any]:
+    return yaml.safe_load(PROFIT_SPEC.read_text()) if PROFIT_SPEC.exists() else {}
+
+
+def verdicts() -> dict[str, dict[str, Any]]:
+    """The second judgement of profit, by idea id (Part 54)."""
+    if not PROFIT_ROWS.exists():
+        return {}
+    return {r["id"]: r for r in (json.loads(line) for line in PROFIT_ROWS.read_text().splitlines() if line.strip())}
+
+
+def verdict_problems(rows: list[dict[str, Any]], spec: dict[str, Any], idea_ids: set[str]) -> list[str]:
+    from .board import FIGURE, YEAR
+
+    out: list[str] = []
+    made, words = spec.get("made_by") or {}, spec.get("words") or {}
+    for k in ("model", "date", "method", "reviewed_by"):
+        if rows and not made.get(k):
+            out.append(f"futures profit: made_by has no {k}")
+    seen: set[str] = set()
+    for r in rows:
+        w = f"futures profit: {r.get('id')}"
+        if r.get("id") not in idea_ids:
+            out.append(f"{w} is not an idea")
+        if r.get("id") in seen:
+            out.append(f"{w} is judged twice")
+        seen.add(r.get("id"))
+        for k in ("prize", "payer", "seller", "sure"):
+            if r.get(k) not in (words.get(k) or {}):
+                out.append(f"{w} has {k} {r.get(k)}, outside the file's words")
+        empty = [r.get(k) == v for k, v in NOTHING.items()]
+        if any(empty) and not all(empty):
+            out.append(f"{w}: no prize, nobody paying and nothing sold go together")
+        for k in ("prize_why", "money_why"):
+            text = str(r.get(k) or "").strip()
+            if not text:
+                out.append(f"{w} has no {k}")
+            elif FIGURE.search(YEAR.sub("", text)):
+                out.append(f"{w}: its {k} types a figure, a size word or an address")
+    return out
+
+
+def verdict_card(r: dict[str, Any], spec: dict[str, Any]) -> dict[str, Any]:
+    """One idea's verdict in the page's words. `key` names its cell in the category's table."""
+    w = spec["words"]
+    return {
+        "prize": r["prize"], "prize_word": w["prize"][r["prize"]], "payer_word": w["payer"][r["payer"]], "seller_word": w["seller"][r["seller"]],
+        "key": f"{r['prize']}-{r['seller']}", "prize_why": r["prize_why"], "money_why": r["money_why"], "sure": w["sure"][r["sure"]],
+    }
+
+
+def verdict_matrix(rows: list[dict[str, Any]], judged: dict[str, dict[str, Any]], spec: dict[str, Any]) -> dict[str, Any] | None:
+    """A category's table of prize by seller, each cell the count of the cards it shows; only once every idea in it is judged."""
+    if not rows or any(x["id"] not in judged for x in rows):
+        return None
+    w, means = spec["words"], spec.get("means") or {}
+    mine = [judged[x["id"]] for x in rows]
+    prizes = [{"id": p, "word": word, "means": (means.get("prize") or {}).get(p, "")} for p, word in w["prize"].items()]
+    return {
+        "prizes": prizes,
+        "rows": [
+            {"id": s, "word": word[:1].upper() + word[1:], "means": (means.get("seller") or {}).get(s, ""),
+             "cells": [{"key": f"{p['id']}-{s}", "n": sum(1 for r in mine if r["prize"] == p["id"] and r["seller"] == s)} for p in prizes]}
+            for s, word in w["seller"].items()
+        ],
+    }
+
+
 def built(state: str) -> bool:
     """Built after it was imagined; a real thing that came first is 'already existed', not built since."""
     return state in ("marked_built", "marked_built_date_unclear")
@@ -331,6 +404,7 @@ def build() -> dict[str, Any]:
     gen = [json.loads(line) for line in IMAGES_GENERATED.read_text().splitlines()] if IMAGES_GENERATED.exists() else []
     one_file = {x["idea"]: f"/futures/{x['stem']}-720.webp" for x in gen if not x.get("withheld")}
     works = {s["id"]: s for s in canon_sources()}
+    judged_profit, profit_spec = verdicts(), verdict_spec()
 
     def card(x: dict[str, Any]) -> dict[str, Any]:
         return {
@@ -339,6 +413,7 @@ def build() -> dict[str, Any]:
             "built": x["arrival"]["state"] != "not_marked_built",
             "judged": _judged(expected_key(x)) if x["arrival"]["state"] == "not_marked_built" else None,
             "profit": profit_text(x),
+            "verdict": verdict_card(judged_profit[x["id"]], profit_spec) if x["id"] in judged_profit else None,
             "image": by_idea.get(x["id"]),  # the owner-made set: a stem the page completes with -480 and -960
             "image_file": one_file.get(x["id"]),
         }
@@ -401,6 +476,7 @@ def build() -> dict[str, Any]:
         categories.append({"id": cid, "name": name, "n": len(rows), "built": sum(1 for x in rows if built(x["arrival"]["state"])),
                            "tiers": tiers, "image": img, "href": f"/futures/category/{cid}"})
         category_docs[cid] = {"id": cid, "name": name, "image": img, "n": len(rows), "tiers": tiers,
+                              "matrix": verdict_matrix(rows, judged_profit, profit_spec),
                               "ideas": sorted((card(x) for x in rows), key=lambda c: (c["imagined"], c["name"])),
                               "forecasts": sorted((forecast(f) for f in fcs if f["category"] == cid), key=lambda f: (f["when"], f["who"]))}
     featured = [card(x) for x in sorted(every, key=lambda x: x["imagined"]) if x["shortlist"] and by_idea.get(x["id"])][:12]
