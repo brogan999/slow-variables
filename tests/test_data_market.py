@@ -100,3 +100,48 @@ def test_no_tracked_file_of_the_section_names_a_home_folder_or_a_social_link():
         text = p.read_text()
         for needle in ("~/", "/Users/", "//x.com/", "//twitter.com/"):
             assert needle not in text, f"{p.name}: {needle}"
+
+
+# Part 56b: the first page
+
+WEB = ROOT / "web" / "src"
+
+
+def test_the_export_counts_what_the_page_prints_and_sizes_each_bar():
+    doc = dm.build(SPEC, FETCHES)
+    vendors = SPEC["vendors"]
+    assert doc["counts"] == {
+        "sellers": sum(v["role"] == "seller" and v["evidence"] == "evidenced" for v in vendors),
+        "weak": sum(v["evidence"] == "weak" for v in vendors),
+        "builders": sum(v["role"] == "builder" for v in vendors),
+        "signals": len(SPEC["signals"]),
+        "pages": len({e["url"] for s in SPEC["signals"] for e in s["evidence"]}),
+    }
+    top = max(s["evidenced"] for s in doc["signals"])
+    for s in doc["signals"]:
+        assert s["bar"] == round(100 * s["evidenced"] / top), s["id"]
+        assert s["theme_name"] == SPEC["themes"][s["theme"]]
+
+
+def test_the_page_draws_the_export_labels_the_reading_and_computes_nothing():
+    page = (WEB / "app" / "data-market" / "page.tsx").read_text()
+    assert "dataMarket()" in page and '"use client"' not in page
+    assert "d.counts." in page and "d.disclosure" in page and "d.made_by" in page
+    assert "A model&apos;s reading of the vendors&apos; own pages" in page
+    assert "weak evidence" in page and "<details" in page and "e.retrieved_at" in page
+    assert 'rel="nofollow noopener"' in page, "links out to vendors pass no endorsement"
+    for banned in (".length", "Math.", ".reduce(", ".filter("):
+        assert banned not in page, f"the page computes with {banned}"
+    assert "export const dataMarket" in (WEB / "lib" / "data.ts").read_text()
+
+
+def test_the_page_is_in_the_contents_the_menu_the_sitemap_and_the_search():
+    contents = (WEB / "lib" / "contents.ts").read_text()
+    nav = (WEB / "lib" / "nav.ts").read_text()
+    assert '"/data-market": {' in contents and '"dm-signals"' in contents and '"dm-limits"' in contents
+    assert '"/data-market"' in contents.split("export const UNDER")[1].split('"/capture":')[1].split("\n")[0]
+    assert '["/data-market", "4"]' in nav and '["/data-market", "The data market"]' in nav
+    search = (WEB / "app" / "search.json" / "route.ts").read_text()
+    assert "dataMarket().signals" in search and '"/data-market#' in search.replace("`", '"')
+    method = (WEB / "app" / "methodology" / "page.tsx").read_text()
+    assert 'id="company-claims"' in method and "/data-market" in method
