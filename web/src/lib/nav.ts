@@ -23,8 +23,8 @@ export const STOPS = ACTS.flatMap((a) => a.stops.map((s) => ({ ...s, act: a.act,
 // Deep dives light their parent stop; the most specific prefix comes first.
 export const STOP_OF = [
   ["/argument", "1"], ["/diffusion", "2"], ["/buckets", "2"], ["/census", "3"],
-  ["/capture", "4"], ["/value-chain", "4"], ["/layers", "4"], ["/stack", "4"], ["/ledger", "4"], ["/bottlenecks", "5"], ["/firm", "6"],
+  ["/capture", "4"], ["/value-chain", "4"], ["/data-market", "4"], ["/layers", "4"], ["/stack", "4"], ["/ledger", "4"], ["/bottlenecks", "5"], ["/firm", "6"],
   ["/outlook", "7a"], ["/predictions", "7b"], ["/compare", "7b"], ["/singularity", "8"], ["/futures", "8"],
 ] as const;
 
-export const EVIDENCE = [["/contents", "Contents"], ["/story", "The story in pictures"], ["/indicators", "Indicators"], ["/stack", "Stack"], ["/value-chain", "Value chain"], ["/ledger", "Ledger"], ["/compare", "Compare"], ["/argument/migration", "The migrating bottleneck"], ["/futures", "Futures"], ["/singularity/atlas", "Atlas"], ["/crosswalk", "Crosswalk"], ["/sources", "Sources"], ["/changelog", "Changelog"], ["/query", "Query"], ["/methodology", "How to read this"]] as const;
+export const EVIDENCE = [["/contents", "Contents"], ["/story", "The story in pictures"], ["/indicators", "Indicators"], ["/stack", "Stack"], ["/value-chain", "Value chain"], ["/ledger", "Ledger"], ["/data-market", "The data market"], ["/compare", "Compare"], ["/argument/migration", "The migrating bottleneck"], ["/futures", "Futures"], ["/singularity/atlas", "Atlas"], ["/crosswalk", "Crosswalk"], ["/sources", "Sources"], ["/changelog", "Changelog"], ["/query", "Query"], ["/methodology", "How to read this"]] as const;

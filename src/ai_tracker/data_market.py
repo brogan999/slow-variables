@@ -1,0 +1,153 @@
+"""The data market (plan Part 57): what the firms that sell training data show their buyers asking for.
+
+seed/data_market.yaml lists the vendors and the signals, in a model's words, read from the vendors' own pages. Each
+vendor is listed under a signal only with a page of its own that was fetched (seed/data_market_fetches.yaml), so a
+signal's count is a count of cited pages' owners; vendors whose growth evidence is weak are counted apart. Nothing here
+is a reading or a status, and no evaluator, metric or query tool reads it.
+"""
+
+from __future__ import annotations
+
+import re
+from pathlib import Path
+from typing import Any
+
+import yaml
+
+from .board import FIGURE, YEAR
+
+ROOT = Path(__file__).resolve().parents[2]
+SPEC = ROOT / "seed" / "data_market.yaml"
+FETCHES = ROOT / "seed" / "data_market_fetches.yaml"
+SOCIAL = re.compile(r"https?://([\w-]+\.)*(x|twitter|linkedin|facebook|instagram|tiktok|reddit)\.com/", re.I)
+ROLES = ("seller", "builder")
+EVIDENCE = ("evidenced", "weak")
+
+
+def load() -> dict[str, Any]:
+    return (yaml.safe_load(SPEC.read_text()) or {}) if SPEC.exists() else {}
+
+
+def fetches() -> list[dict[str, Any]]:
+    return (yaml.safe_load(FETCHES.read_text()) or {}).get("fetches") or [] if FETCHES.exists() else []
+
+
+def _figure(text: str) -> bool:
+    return bool(FIGURE.search(YEAR.sub("", text)))
+
+
+def _dups(ids: list[Any]) -> list[Any]:
+    return sorted({i for i in ids if ids.count(i) > 1})
+
+
+def problems(doc: dict[str, Any], fetched: list[dict[str, Any]]) -> list[str]:
+    errors = []
+    for k in ("model", "date", "method", "reviewed_by"):
+        if not (doc.get("made_by") or {}).get(k):
+            errors.append(f"data market: made_by has no {k}")
+    if "Anthropic" not in str(doc.get("disclosure") or ""):
+        errors.append("data market: the disclosure does not name Anthropic")
+    record = {f["url"]: f for f in fetched}
+
+    def page(where: str, url: str) -> None:
+        if SOCIAL.search(url):
+            errors.append(f"{where}: {url} is a social-media link")
+        elif url not in record:
+            errors.append(f"{where}: {url} has no fetch record")
+        elif record[url].get("http_status") != 200:
+            errors.append(f"{where}: {url} did not answer")
+        elif not record[url].get("content_hash") or not record[url].get("retrieved_at"):
+            errors.append(f"{where}: {url} has no content hash or no day it was read")
+
+    vendors = doc.get("vendors") or []
+    for dup in _dups([v.get("id") for v in vendors]):
+        errors.append(f"data market: vendor {dup} is given twice")
+    for v in vendors:
+        w = f"data market: vendor {v.get('id')}"
+        if v.get("role") not in ROLES:
+            errors.append(f"{w} has role {v.get('role')}")
+        if v.get("evidence") not in EVIDENCE:
+            errors.append(f"{w} has evidence {v.get('evidence')}")
+        sells = str(v.get("sells") or "").strip()
+        if not v.get("name") or not sells:
+            errors.append(f"{w} has no name or does not say what it sells")
+        elif _figure(sells):
+            errors.append(f"{w} types a figure, a size word or an address")
+        if not v.get("pages"):
+            errors.append(f"{w} cites no fetched page")
+        for url in v.get("pages") or []:
+            page(w, url)
+    ids, themes = {v.get("id") for v in vendors}, doc.get("themes") or {}
+    signals = doc.get("signals") or []
+    for dup in _dups([s.get("id") for s in signals]):
+        errors.append(f"data market: signal {dup} is given twice")
+    for s in signals:
+        w = f"data market: signal {s.get('id')}"
+        if s.get("theme") not in themes:
+            errors.append(f"{w}: {s.get('theme')} is not a theme")
+        for k in ("headline", "implies"):
+            if not str(s.get(k) or "").strip():
+                errors.append(f"{w} has no {k}")
+            elif _figure(str(s[k])):
+                errors.append(f"{w} types a figure, a size word or an address")
+        cited = {e.get("vendor") for e in s.get("evidence") or []}
+        if not cited:
+            errors.append(f"{w} cites no fetched page")
+        for vid in s.get("shown_by") or []:
+            if vid not in ids:
+                errors.append(f"{w} is shown by {vid}, which is not a vendor")
+            elif vid not in cited:
+                errors.append(f"{w} is shown by {vid} with no page of its own")
+        for e in s.get("evidence") or []:
+            page(w, str(e.get("url") or ""))
+    return errors
+
+
+def build(doc: dict[str, Any], fetched: list[dict[str, Any]]) -> dict[str, Any]:
+    """web/data/data_market.json: the vendors with the signals each shows, and the signals most-shown first, each with
+    how many vendors show it (weak evidence apart) and the pages, with the day each was read."""
+    read = {f["url"]: str(f["retrieved_at"]) for f in fetched}
+    vendors = doc.get("vendors") or []
+    weak = {v["id"] for v in vendors if v["evidence"] == "weak"}
+    name = {v["id"]: v["name"] for v in vendors}
+    signals = [
+        {
+            **{k: s[k] for k in ("id", "theme", "headline", "implies")},
+            "shown_by": s["shown_by"],
+            "evidenced": len(set(s["shown_by"]) - weak),
+            "weak": len(set(s["shown_by"]) & weak),
+            "evidence": [
+                {
+                    "vendor": e["vendor"],
+                    "name": name[e["vendor"]],
+                    "url": e["url"],
+                    "retrieved_at": read[e["url"]],
+                }
+                for e in s["evidence"]
+            ],
+        }
+        for s in doc.get("signals") or []
+    ]
+    signals.sort(key=lambda s: (-s["evidenced"], s["id"]))
+    top = max((s["evidenced"] for s in signals), default=0) or 1
+    themes = doc.get("themes") or {}
+    for s in signals:
+        s["bar"] = round(100 * s["evidenced"] / top)  # the row's bar, as a share of the most-shown signal
+        s["theme_name"] = themes.get(s["theme"], s["theme"])
+    made = doc.get("made_by") or {}
+    return {
+        "made_by": {**made, "date": str(made.get("date"))},
+        "disclosure": doc.get("disclosure"),
+        "counts": {
+            "sellers": sum(v["role"] == "seller" and v["evidence"] == "evidenced" for v in vendors),
+            "weak": len(weak),
+            "builders": sum(v["role"] == "builder" for v in vendors),
+            "signals": len(signals),
+            "pages": len({e["url"] for s in signals for e in s["evidence"]}),
+        },
+        "themes": themes,
+        "vendors": [
+            {**v, "signals": [s["id"] for s in signals if v["id"] in s["shown_by"]]} for v in vendors
+        ],
+        "signals": signals,
+    }
