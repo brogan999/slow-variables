@@ -183,9 +183,14 @@ def test_the_board_page_draws_the_export_marks_weak_evidence_and_the_section_has
     for banned in (".length", "Math.", ".reduce(", ".filter("):
         assert banned not in page, f"the page computes with {banned}"
     assert 'href="/data-market"' in nav.replace("{", "").replace("}", "") or '"/data-market"' in nav
-    assert '"/data-market/vendors"' in nav and "overflow-x-auto" in nav, "the menu scrolls on a phone, it does not wrap"
+    assert '"/data-market/vendors"' in nav and "overflow-x-auto" in nav, (
+        "the menu scrolls on a phone, it does not wrap"
+    )
     assert "<DataMarketNav" in (WEB / "app" / "data-market" / "page.tsx").read_text()
     contents = (WEB / "lib" / "contents.ts").read_text()
-    assert '"/data-market/vendors": {' in contents and '"/data-market/vendors"' in contents.split("export const UNDER")[1]
+    assert (
+        '"/data-market/vendors": {' in contents
+        and '"/data-market/vendors"' in contents.split("export const UNDER")[1]
+    )
     assert "dataMarket().vendors" in (WEB / "app" / "search.json" / "route.ts").read_text()
     assert '"/data-market/vendors"' in (WEB / "app" / "sitemap.ts").read_text()

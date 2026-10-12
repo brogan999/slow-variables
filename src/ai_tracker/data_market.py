@@ -78,6 +78,11 @@ def problems(doc: dict[str, Any], fetched: list[dict[str, Any]]) -> list[str]:
         for url in v.get("pages") or []:
             page(w, url)
     ids, themes = {v.get("id") for v in vendors}, doc.get("themes") or {}
+    for c in doc.get("board") or []:
+        if c.get("theme") not in themes:
+            errors.append(f"data market: board column {c.get('theme')} is not a theme")
+        if not c.get("label"):
+            errors.append(f"data market: board column {c.get('theme')} has no label")
     signals = doc.get("signals") or []
     for dup in _dups([s.get("id") for s in signals]):
         errors.append(f"data market: signal {dup} is given twice")
@@ -134,6 +139,45 @@ def build(doc: dict[str, Any], fetched: list[dict[str, Any]]) -> dict[str, Any]:
     for s in signals:
         s["bar"] = round(100 * s["evidenced"] / top)  # the row's bar, as a share of the most-shown signal
         s["theme_name"] = themes.get(s["theme"], s["theme"])
+    listed = [{**v, "signals": [s["id"] for s in signals if v["id"] in s["shown_by"]]} for v in vendors]
+    columns = doc.get("board") or []
+    theme_of = {s["id"]: s["theme"] for s in signals}
+    headline = {s["id"]: s["headline"] for s in signals}
+
+    def row(v: dict[str, Any]) -> dict[str, Any]:
+        """A vendor on the board: a mark in each column where a signal of its own sits, and its signals by headline."""
+        shows = {theme_of[i] for i in v["signals"]}
+        return {
+            **{k: v[k] for k in ("id", "name", "sells", "signals", "pages")},
+            "n_signals": len(v["signals"]),
+            "cells": [c["theme"] in shows for c in columns],
+            "shown": [{"id": i, "headline": headline[i]} for i in v["signals"]],
+        }
+
+    def group(gid: str, name: str, says: str, keep: Any) -> dict[str, Any]:
+        rows = sorted((row(v) for v in listed if keep(v)), key=lambda r: (-r["n_signals"], r["name"].lower()))
+        return {"id": gid, "name": name, "says": says, "n": len(rows), "vendors": rows}
+
+    groups = [
+        group(
+            "evidenced",
+            "Sellers with evidence of fast growth",
+            "A page read here shows, within the past year, a revenue claim, a funding round, a named model-builder customer or an acquisition.",
+            lambda v: v["role"] == "seller" and v["evidence"] == "evidenced",
+        ),
+        group(
+            "weak",
+            "Sellers with weak evidence of growth",
+            "Their pages show what they sell, but no page read here gives good evidence that they are growing fast.",
+            lambda v: v["role"] == "seller" and v["evidence"] == "weak",
+        ),
+        group(
+            "builders",
+            "Companies that build models for robots",
+            "Buyers and makers of data, not sellers: their pages say what they train on and how they collect it.",
+            lambda v: v["role"] == "builder",
+        ),
+    ]
     made = doc.get("made_by") or {}
     return {
         "made_by": {**made, "date": str(made.get("date"))},
@@ -146,8 +190,7 @@ def build(doc: dict[str, Any], fetched: list[dict[str, Any]]) -> dict[str, Any]:
             "pages": len({e["url"] for s in signals for e in s["evidence"]}),
         },
         "themes": themes,
-        "vendors": [
-            {**v, "signals": [s["id"] for s in signals if v["id"] in s["shown_by"]]} for v in vendors
-        ],
+        "vendors": listed,
+        "board": {"columns": columns, "groups": groups},
         "signals": signals,
     }
