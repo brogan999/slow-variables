@@ -37,7 +37,7 @@ log = logging.getLogger("ai-tracker.ask")
 MODEL = os.environ.get("QUERY_MODEL", "claude-sonnet-5")
 # a blocked answer gets its fresh attempt on the stronger model: rare, so the bill stays near Sonnet's
 ESCALATE_MODEL = os.environ.get("QUERY_ESCALATE_MODEL", "claude-opus-5")
-PROMPT_VERSION = "14"
+PROMPT_VERSION = "15"
 # Opus 5 list price, for the escalated retry only
 ESCALATE_USD_PER_MTOK_IN, ESCALATE_USD_PER_MTOK_OUT = (
     float(x) for x in os.environ.get("QUERY_ESCALATE_USD_PER_MTOK", "5,25").split(",")
@@ -170,7 +170,7 @@ TOOLS = [
     },
     {
         "name": "futures",
-        "description": "The Futures page: ideas imagined in fiction and essays (kind idea: when first imagined, whether built, the decade AI models judged a working version likely, and a judged view of who would keep the profit: rent kind, appropriability, complementary assets, asset owner, durability, where profit pools and its tier), and dated forecasts from the singularity reading list (kind forecast: who, what technology, when, the odds they gave). Cite each as [fut:<id>]. The profit judgements are AI models' judgements, not measurements: say so. Optional kind: idea, forecast.",
+        "description": "The Futures page: ideas imagined in fiction and essays (kind idea: when first imagined, whether built, the decade AI models judged a working version likely, and under profit a model's judgement of the idea as if it worked the way its story promises: how large a prize it would be, who would pay, which seller would keep what is left, a reason for each, and how sure the model is), and dated forecasts from the singularity reading list (kind forecast: who, what technology, when, the odds they gave). Cite each as [fut:<id>]. Each profit entry is a model's judgement, not a measurement: say so, and give it in its own words; a few ideas the site could not place in a kind have none. Optional kind: idea, forecast.",
         "input_schema": {"type": "object", "properties": {"query": {"type": "string"}, "kind": {"type": "string"}, "k": {"type": "integer"}}, "required": ["query"]},
     },
     {
@@ -750,16 +750,20 @@ class Tools:
         if "futures" not in self._index:
             from .. import futures as fu
 
-            rows = {}
+            rows, judged, w = {}, fu.verdicts(), fu.verdict_spec()["words"]
             for x in fu.ideas():
                 rows[x["id"]] = {
                     "cite": f"fut:{x['id']}", "kind": "idea", "name": x["name"], "author": x.get("author"), "work": x.get("work"),
                     "imagined": x.get("imagined"), "line": x.get("line"), "category": x.get("category"),
                     "arrival": (x.get("arrival") or {}).get("state"), "expected_decade": x.get("arrival_decade"),
-                    "rent": {k: x.get(k) for k in ("rent_kind", "appropriability", "complementary_assets", "asset_owner", "durability")},
-                    "profit_pools_with": x.get("pools"), "profit_tier": x.get("tier"),
-                    "text": " ".join(str(x.get(k) or "") for k in ("name", "line", "category", "author", "work", "rent_kind", "pools", "tier")),
+                    "text": " ".join(str(x.get(k) or "") for k in ("name", "line", "category", "author", "work")),
                 }
+                if v := judged.get(x["id"]):
+                    rows[x["id"]]["profit"] = {
+                        "judged_by": "a model, not a reading", "prize": w["prize"][v["prize"]], "who_pays": w["payer"][v["payer"]],
+                        "seller": w["seller"][v["seller"]], "prize_why": v["prize_why"], "money_why": v["money_why"], "sure": w["sure"][v["sure"]],
+                    }
+                    rows[x["id"]]["text"] += f" {v['prize_why']} {v['money_why']}"
             for f in fu.forecasts():
                 rows[f["id"]] = {
                     "cite": f"fut:{f['id']}", "kind": "forecast", "who": f.get("who"), "technology": f.get("technology"),

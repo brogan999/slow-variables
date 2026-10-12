@@ -124,11 +124,40 @@ def test_the_headline_says_it_is_a_judgement_without_being_opened():
     assert 'role="radiogroup"' in table and "data-v" in card and "fv-${c.key}" in table
 
 
-def test_nothing_else_reads_the_judgement_file():
+def test_only_ask_reads_the_judgement_file_and_it_says_whose_judgement_it_is():
     src = Path(fu.__file__).parent
     for p in src.rglob("*.py"):
-        text = p.read_text()
-        if p.name == "futures.py":
+        if p.name in ("futures.py", "ask.py"):
             continue
-        uses = [ln for ln in text.splitlines() if "verdicts(" in ln or "profit.jsonl" in ln or "PROFIT_ROWS" in ln]
+        uses = [ln for ln in p.read_text().splitlines() if "verdicts(" in ln or "profit.jsonl" in ln or "PROFIT_ROWS" in ln]
         assert all("verdict_problems" in ln for ln in uses), f"{p.name} reads the futures profit judgement: {uses}"
+    from ai_tracker import store as st
+    from ai_tracker.query.ask import TOOLS, Tools
+
+    judged = fu.verdicts()
+    hits = Tools(st.Store()).futures("food made without farms", kind="idea", k=5)
+    assert hits and all({"rent", "profit_tier", "profit_pools_with"}.isdisjoint(h) for h in hits), "the older rubric is gone"
+    for h in hits:
+        r = judged[h["cite"].removeprefix("fut:")]
+        assert h["profit"] == {
+            "judged_by": "a model, not a reading", "prize": SPEC["words"]["prize"][r["prize"]],
+            "who_pays": SPEC["words"]["payer"][r["payer"]], "seller": SPEC["words"]["seller"][r["seller"]],
+            "prize_why": r["prize_why"], "money_why": r["money_why"], "sure": SPEC["words"]["sure"][r["sure"]],
+        }
+    about = next(t["description"] for t in TOOLS if t["name"] == "futures")
+    assert "a model's judgement" in about and "rent kind" not in about
+
+
+def test_the_index_tallies_the_new_prizes_not_the_older_tiers():
+    doc = fu.build()
+    assert "tier_words" not in doc["index"]
+    for c in doc["index"]["categories"]:
+        assert "tiers" not in c and "tiers" not in doc["categories"][c["id"]]
+        assert [p["word"] for p in c["prizes"]] == ["vast", "large", "small", "no prize"]
+        assert sum(p["n"] for p in c["prizes"]) == c["n"]
+    page = (WEB / "app" / "futures" / "page.tsx").read_text()
+    assert "c.prizes" in page and "tier_words" not in page and "as a model judges it" in page
+    assert "monopoly-like" not in page, "the lede explains the judgement the tally shows"
+    method = (WEB / "app" / "methodology" / "page.tsx").read_text()
+    assert "how large a prize" in method and "no prize" in method, "the method page says how the new judgement is made"
+

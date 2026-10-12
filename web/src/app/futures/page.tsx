@@ -76,14 +76,14 @@ export default function FuturesPage() {
           <p className="text-[12px] text-muted">Upper bar: ideas, judged by AI models. Lower bar: forecasts stated by their authors.</p>
         </Section>
 
-        <Section id="categories" eyebrow="Part III" title="Kinds of technology, and who would profit" lede={<>Each idea was sorted into one kind of technology and, where it could be sold, judged by AI models for how much lasting profit it could earn and who would keep it: fat means a large margin that lasts for decades, moderate a typical one, thin a small or brief one, and monopoly-like one that rivals can barely touch. Where anyone could copy the idea, competition hands the gain to users instead. <Link href="/methodology#futures" className={link}>How the profit is judged</Link></>}>
+        <Section id="categories" eyebrow="Part III" title="Kinds of technology, and who would profit" lede={<>Each idea was sorted into one kind of technology and judged by a model as if it worked the way its story promises: how large a prize it would be, who would pay for it, and which seller would keep what is left once buyers have had their gain. A vast prize changes how most people live or work, a large one changes a whole industry, a small one serves a narrow need, and no prize means nothing would be sold. <Link href="/methodology#futures" className={link}>How the profit is judged</Link></>}>
           <div className="grid gap-5 sm:grid-cols-2">
             {f.categories.map((c) => (
               <Link key={c.id} href={c.href} className="panel px-3 py-3 flex flex-col gap-2 hover:border-ink">
                 {c.image ? <Plate src={c.image} alt="" sizes="(min-width: 640px) 400px, 100vw" /> : null}
                 <span className="font-medium">{c.name}</span>
                 <span className="text-[12px] text-ink-2 tabular-nums">{fmt(c.n, "count")} ideas · {fmt(c.built, "count")} built</span>
-                <span className="text-[11px] text-muted">Profit: {f.tier_words.filter((w) => c.tiers[w]).map((w) => `${w} ${fmt(c.tiers[w], "count")}`).join(" · ")}</span>
+                <span className="text-[11px] text-muted">Prize, as a model judges it: {c.prizes.filter((p) => p.n).map((p) => `${p.word} ${fmt(p.n, "count")}`).join(" · ")}</span>
               </Link>
             ))}
           </div>
