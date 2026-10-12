@@ -404,6 +404,7 @@ def _check(s: st.Store) -> tuple[list[str], list[str]]:
     from . import futures
 
     errors += futures.idea_problems(futures.ideas(), futures.rubric())
+    errors += futures.verdict_problems(list(futures.verdicts().values()), futures.verdict_spec(), {x["id"] for x in futures.ideas()})
     errors += futures.forecast_problems(
         futures.forecasts(), futures.canon_sources(), futures.rubric(), {pr.id for pr in s.seed.predictions}
     )

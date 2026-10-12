@@ -1,0 +1,47 @@
+# The futures section's second judgement of profit (plan Part 54; src/ai_tracker/futures.py). For each idea, judged as
+# if it had been built and worked the way its story promises: how large a prize it would be, who would pay, and which
+# seller would keep what is left once buyers have had their gain. Words only, a model's judgement that follows the Part 39
+# policy: never a reading, and no status, metric or query tool reads it. One count is drawn from it: a category page's table
+# counts the cards each cell shows, as a labelled index of that page (plan Part 54 lists it as a judgement call). The judgements are in profit.jsonl, one
+# line an idea. The older rubric answers in ideas.jsonl stay for the pages and tools that still read them.
+made_by:
+  model: claude-opus-5-5
+  date: '2026-10-11'
+  method: One model run judged each batch of ideas of one kind, sorting near-identical ideas into families so that each
+    family carries one answer, and gave a reason for the prize and a reason for who is paid. An idea is judged as if it
+    worked, whether or not it looks physically possible; the site says separately whether it can be built.
+  reviewed_by: a separate reviewing run of the same model for every batch, which changed answers and reasons; then a
+    run for each kind of technology that gave each family one answer across its batches, and one run across all the
+    kinds for families that appear in more than one. No person reviewed each one
+words:
+  prize:
+    vast: A vast prize
+    large: A large prize
+    small: A small prize
+    none: No prize
+  payer:
+    households: Households pay
+    businesses: Businesses pay
+    government: A government pays
+    nobody: Nothing is sold
+  seller:
+    anyone: no seller keeps much
+    maker: the maker keeps the rest
+    incumbents: existing firms keep the rest
+    permit: permit holders keep the rest
+    none: nothing is sold
+  sure:
+    fairly: fairly sure
+    not very: not very sure
+means:
+  prize:
+    vast: Meets a basic need for a large share of humanity, or changes how most people live or work.
+    large: Worth an industry of its own, or changes what one industry costs to run.
+    small: A convenience or a niche.
+    none: 'Not something anyone would pay for: a hazard, a custom, or something no one may buy.'
+  seller:
+    anyone: Anyone can make it, so competition leaves no seller much.
+    maker: Whoever builds it first can stop others copying it, or controls something others cannot get.
+    incumbents: It is easy to copy, and firms that already own what is needed to sell it collect.
+    permit: Only those a government permits may sell it, and permits are scarce.
+    none: Nothing is sold.

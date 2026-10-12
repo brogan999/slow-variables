@@ -631,6 +631,13 @@ export const censusRole = (occ: string) => read<CensusRoleDoc>(`census/roles/${o
 export type FuIdea = {
   id: string; name: string; work: string; author: string; imagined: number; line: string;
   arrival: string; built: boolean; judged: string | null; profit: string; image: string | null; image_file?: string | null;
+  verdict?: FuVerdict | null;
+};
+// Part 54: the second judgement of profit, in the page's words; `key` names the idea's cell in its category's table
+export type FuVerdict = { prize: string; prize_word: string; payer_word: string; seller_word: string; key: string; prize_why: string; money_why: string; sure: string };
+export type FuMatrix = {
+  prizes: { id: string; word: string; means: string }[];
+  rows: { id: string; word: string; means: string; cells: { key: string; n: number }[] }[];
 };
 export type FuForecast = {
   id: string; who: string; line: string; when: string; odds: string | null; quote: string | null;
@@ -645,7 +652,7 @@ export type FuIndex = {
   featured: FuIdea[]; credits: { name: string; url: string; archived: boolean }[];
 };
 export type FuDecade = { kind: "imagined" | "expected"; key: string; label: string; title: string; phrase?: string; n?: number; built?: number; judged?: number; stated?: number; groups: FuGroup[]; forecasts?: FuForecast[] };
-export type FuCategory = { id: string; name: string; image: string | null; n: number; tiers: Record<string, number>; ideas: FuIdea[]; forecasts: FuForecast[] };
+export type FuCategory = { id: string; name: string; image: string | null; n: number; tiers: Record<string, number>; matrix: FuMatrix | null; ideas: FuIdea[]; forecasts: FuForecast[] };
 export const futures = () => read<FuIndex>("futures/index.json");
 export const futuresDecade = (kind: string, key: string) => read<FuDecade>(`futures/${kind}/${key}.json`);
 export const futuresCategory = (id: string) => read<FuCategory>(`futures/category/${id}.json`);
