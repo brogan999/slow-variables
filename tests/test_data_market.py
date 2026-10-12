@@ -145,3 +145,47 @@ def test_the_page_is_in_the_contents_the_menu_the_sitemap_and_the_search():
     assert "dataMarket().signals" in search and '"/data-market#' in search.replace("`", '"')
     method = (WEB / "app" / "methodology" / "page.tsx").read_text()
     assert 'id="company-claims"' in method and "/data-market" in method
+
+
+# Part 57c: the vendor board
+
+
+def test_the_board_groups_vendors_and_marks_a_theme_only_where_a_signal_of_theirs_sits():
+    doc = dm.build(SPEC, FETCHES)
+    cols = [c["theme"] for c in doc["board"]["columns"]]
+    assert cols and set(cols) <= set(SPEC["themes"]), "every column is a theme of the seed"
+    assert [g["id"] for g in doc["board"]["groups"]] == ["evidenced", "weak", "builders"]
+    theme_of = {s["id"]: s["theme"] for s in SPEC["signals"]}
+    seen = []
+    for g in doc["board"]["groups"]:
+        counts = [len(v["signals"]) for v in g["vendors"]]
+        assert counts == sorted(counts, reverse=True), "most signals first within a group"
+        for v in g["vendors"]:
+            seen.append(v["id"])
+            shows = {theme_of[s] for s in v["signals"]}
+            assert v["cells"] == [c in shows for c in cols], v["id"]
+            assert v["n_signals"] == len(v["signals"]) and v["shown"][0]["headline"]
+    assert sorted(seen) == sorted(v["id"] for v in SPEC["vendors"]), "every vendor is on the board once"
+
+
+def test_a_board_column_that_is_not_a_theme_is_a_problem():
+    doc = copy.deepcopy(SPEC)
+    doc["board"].append({"theme": "astrology", "label": "Stars"})
+    assert any("board column astrology is not a theme" in e for e in dm.problems(doc, FETCHES))
+
+
+def test_the_board_page_draws_the_export_marks_weak_evidence_and_the_section_has_its_own_menu():
+    page = (WEB / "app" / "data-market" / "vendors" / "page.tsx").read_text()
+    nav = (WEB / "components" / "DataMarketNav.tsx").read_text()
+    assert "dataMarket()" in page and '"use client"' not in page and "<DataMarketNav" in page
+    assert "d.board.groups.map" in page and "weak evidence" in page and "A model&apos;s reading" in page
+    assert 'rel="nofollow noopener"' in page and "/data-market#" in page.replace("`", '"').replace("${", "")
+    for banned in (".length", "Math.", ".reduce(", ".filter("):
+        assert banned not in page, f"the page computes with {banned}"
+    assert 'href="/data-market"' in nav.replace("{", "").replace("}", "") or '"/data-market"' in nav
+    assert '"/data-market/vendors"' in nav and "overflow-x-auto" in nav, "the menu scrolls on a phone, it does not wrap"
+    assert "<DataMarketNav" in (WEB / "app" / "data-market" / "page.tsx").read_text()
+    contents = (WEB / "lib" / "contents.ts").read_text()
+    assert '"/data-market/vendors": {' in contents and '"/data-market/vendors"' in contents.split("export const UNDER")[1]
+    assert "dataMarket().vendors" in (WEB / "app" / "search.json" / "route.ts").read_text()
+    assert '"/data-market/vendors"' in (WEB / "app" / "sitemap.ts").read_text()
