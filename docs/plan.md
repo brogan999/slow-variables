@@ -1404,3 +1404,20 @@ Part 54 left the older rubric in three places and put the question to the owner.
 
 **Tests first.** In `tests/test_futures_profit.py`: only Ask reads the judgement file and it says whose judgement it is; the index tallies the new prizes, not the older tiers. The method page says how the new judgement is made.
 
+## Part 56 (11 Oct 2026): one rule for what is done to a person without their say
+
+Part 55 left the kinds judging tools of coercion differently and described the two ways of settling it. The owner left the direction to the model.
+
+**The rule.** Anything done to a person without their say, to hurt them, break their mind or override their will or body, has no prize in every kind, whether the person is a captive, a worker or a whole population. This is the way the weapons kind had already ruled for its own ideas, and it means no reason had to be written for the market in such a device. Kept priced: a weapon or restraint that only stops or holds someone; confinement, including a sentence served in a simulation; anything the person chooses for themselves, such as erasing a chosen memory; a device that only reads or watches. Where a description does not say who chooses, the person is assumed to.
+
+**How it was applied.** A keyword pass over the name and description of every priced idea, each hit read and placed by hand; then a separate reviewing run read the seven kinds where such ideas sit, in full, and reported what the rule covered that was still priced and what it had wrongly swept in. Its nine additions were made and one idea went back to priced beside its twin, because its description does not say who chooses. Twenty-four ideas moved to no prize, all with the same plain reason and marked "not very sure". The reviewing run's wording of the rule replaced the first one, which did not settle whole populations or unstated consent.
+
+**Judgement calls.**
+
+- The direction, the rule and its exceptions are the model's.
+- Each placing rests on one line of description, never on the story.
+- Left as the weapons kind ruled, though the reviewing run questioned them: an incapacitating gas with no prize beside a priced paralysis bomb, and a home guard that kills intruders with no prize beside priced sentry guns.
+- Borderline and left priced: blocks that keep a secret, memory erasure, a treatment given to everyone before birth, techniques that seize the mind of someone who is free, a ray of unasked-for pleasure.
+
+**Tests first.** `tests/test_futures_profit.py`: the pinned ideas done to a person without their say have no prize and their neighbours keep one, and the method page states the rule. The list is pinned ids a person read, not a test of the rule.
+
