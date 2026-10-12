@@ -1,9 +1,8 @@
 import Link from "next/link";
-import { ArticleLayout, MarginPanel } from "@/components/ArticleLayout";
+import { ArticleLayout } from "@/components/ArticleLayout";
 import { Credit, ForecastRow, IdeaCard, Plate, Sources, VerdictTable } from "@/components/FuturesParts";
 import { PageHeader } from "@/components/PageHeader";
 import { futures, futuresCategory } from "@/lib/data";
-import { fmt } from "@/lib/format";
 
 export const dynamicParams = false;
 export function generateStaticParams() { return futures().categories.map((c) => ({ id: c.id })); }
@@ -15,7 +14,6 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 export default async function FuturesCategoryPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const c = futuresCategory(id);
-  const words = futures().tier_words;
   return (
     <ArticleLayout
       head={
@@ -24,9 +22,7 @@ export default async function FuturesCategoryPage({ params }: { params: Promise<
           {c.image ? <div className="mt-4 flex flex-col gap-1"><Plate src={c.image} alt={`Illustration for ${c.name}`} eager sizes="(min-width: 1024px) 760px, 100vw" /><Credit /></div> : null}
         </PageHeader>
       }
-      margin={
-        c.matrix ? undefined : <MarginPanel title="Profit, as AI models judge it" rows={[["Ideas of this kind", fmt(c.n, "count")], ...words.filter((w) => c.tiers[w]).map((w) => [w, fmt(c.tiers[w], "count")] as [string, string])]} />
-      }
+      margin={undefined}
     >
       <div className="fu-verdicts flex flex-col gap-10">
         {c.forecasts.length ? (

@@ -83,7 +83,7 @@ export default function FuturesPage() {
                 {c.image ? <Plate src={c.image} alt="" sizes="(min-width: 640px) 400px, 100vw" /> : null}
                 <span className="font-medium">{c.name}</span>
                 <span className="text-[12px] text-ink-2 tabular-nums">{fmt(c.n, "count")} ideas · {fmt(c.built, "count")} built</span>
-                <span className="text-[11px] text-muted">Profit: {f.tier_words.filter((w) => c.tiers[w]).map((w) => `${w} ${fmt(c.tiers[w], "count")}`).join(" · ")}</span>
+                <span className="text-[11px] text-muted">Prize, as a model judges it: {c.prizes.filter((p) => p.n).map((p) => `${p.word} ${fmt(p.n, "count")}`).join(" · ")}</span>
               </Link>
             ))}
           </div>

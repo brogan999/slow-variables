@@ -471,11 +471,11 @@ def build() -> dict[str, Any]:
     categories, category_docs = [], {}
     for cid, name in CATEGORY_NAMES.items():
         rows = [x for x in every if x["category"] == cid]
-        tiers = {w: sum(1 for x in rows if profit(x) == w) for w in PROFIT_WORDS}
+        prizes = [{"word": p, "n": sum(1 for x in rows if (judged_profit.get(x["id"]) or {}).get("prize") == p)} for p in profit_spec["words"]["prize"]]
         img = f"/futures/cat-{cid}" if f"cat-{cid}" in imgs else None
         categories.append({"id": cid, "name": name, "n": len(rows), "built": sum(1 for x in rows if built(x["arrival"]["state"])),
-                           "tiers": tiers, "image": img, "href": f"/futures/category/{cid}"})
-        category_docs[cid] = {"id": cid, "name": name, "image": img, "n": len(rows), "tiers": tiers,
+                           "prizes": prizes, "image": img, "href": f"/futures/category/{cid}"})
+        category_docs[cid] = {"id": cid, "name": name, "image": img, "n": len(rows),
                               "matrix": verdict_matrix(rows, judged_profit, profit_spec),
                               "ideas": sorted((card(x) for x in rows), key=lambda c: (c["imagined"], c["name"])),
                               "forecasts": sorted((forecast(f) for f in fcs if f["category"] == cid), key=lambda f: (f["when"], f["who"]))}
@@ -484,7 +484,6 @@ def build() -> dict[str, Any]:
         "index": {"n_ideas": len(every), "n_forecasts": len(fcs), "n_idea_images": len(by_idea) + len(one_file),
                   "n_category_images": sum(1 for k in imgs if k.startswith("cat-")),
                   "imagined": imagined, "expected": expected, "categories": categories, "featured": featured,
-                  "tier_words": PROFIT_WORDS,
                   "credits": [{"name": c["name"], "url": c["url"], "archived": "web.archive.org" in c["url"]} for c in (yaml.safe_load(CREDITS.read_text()) or {}).get("credits", [])] if CREDITS.exists() else []},
         "decades": decade_docs,
         "categories": category_docs,

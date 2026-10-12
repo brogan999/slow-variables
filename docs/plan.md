@@ -1383,3 +1383,23 @@ The futures pages said of each idea "Profit, as AI models judge it: a fat profit
 - the ideas the site cannot place in a kind are not judged.
 
 **Tests first.** `tests/test_futures_profit.py`: the real file passes and `check` reads it; a broken verdict names each problem; a card carries the verdict in words and keeps the old line; a category gets its table only when every idea in it is judged; the page draws the verdict with its reasons folded and labels it; every idea of a known kind is judged; each cell counts the cards it shows and the table tallies nothing else; the headline says it is a judgement without being opened; nothing else reads the judgement file.
+
+## Part 55 (11 Oct 2026): the futures section reads one judgement of profit
+
+Part 54 left the older rubric in three places and put the question to the owner. He said to switch them over, and left Part 54's two other open points to the model.
+
+**What changed.**
+
+- The futures index tallies each kind's ideas by the new prize (vast, large, small, none), labelled "as a model judges it", in place of the older profit tiers. `tiers` and `tier_words` leave the exports.
+- Ask's `futures` tool returns, for an idea, the new judgement in its own words (prize, who pays, which seller keeps the rest, a reason for each, how sure the model is), marked as a model's judgement, in place of the older rubric's five answers, pool and tier. The tool's description tells Ask to say whose judgement it is. Prompt version fifteen.
+- The category page's margin panel of older tiers is gone; every category now carries its table.
+- The older rubric answers stay in `ideas.jsonl` and still set the line on the few ideas the site cannot place in a kind. The rent rule itself (`futures.pools`, `futures.tier`) is unchanged and still serves the businesses and value-chain pages.
+
+**Judgement calls.**
+
+- **The owner's decision overrides Part 39 for this file.** Part 39 holds every model judgement apart from tallies and from Ask. The futures section's profit judgement was already tallied and already read by Ask in its older form; the owner chose to keep that and to move both to the new judgement. `seed/futures/profit.yaml` records it. No status or metric reads the file.
+- **The table's cell counts stay** (left to the model). They are what the owner approved in the mock-up, each is labelled, and with the index now tallying the same judgement a mark in place of a count would hide nothing.
+- **The standing inconsistency is settled by one rule** (left to the model): a device or substance whose described use is to hurt or compel a person who has no say has no prize, in every kind; a weapon a police force or an army would buy stays priced, with a government as payer. Four ideas moved to "no prize" (a collar that compels a worker, a box that tests endurance by pain, a restraint for convicts, a plant used for social control). Each carries the same plain reason. The rule was applied by hand to the four rows; no model run re-read the entries the safety filter had stopped on.
+
+**Tests first.** In `tests/test_futures_profit.py`: only Ask reads the judgement file and it says whose judgement it is; the index tallies the new prizes, not the older tiers; a device for hurting or compelling a held person has no prize in any kind.
+
