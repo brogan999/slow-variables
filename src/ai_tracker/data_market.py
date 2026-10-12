@@ -129,11 +129,23 @@ def build(doc: dict[str, Any], fetched: list[dict[str, Any]]) -> dict[str, Any]:
         for s in doc.get("signals") or []
     ]
     signals.sort(key=lambda s: (-s["evidenced"], s["id"]))
+    top = max((s["evidenced"] for s in signals), default=0) or 1
+    themes = doc.get("themes") or {}
+    for s in signals:
+        s["bar"] = round(100 * s["evidenced"] / top)  # the row's bar, as a share of the most-shown signal
+        s["theme_name"] = themes.get(s["theme"], s["theme"])
     made = doc.get("made_by") or {}
     return {
         "made_by": {**made, "date": str(made.get("date"))},
         "disclosure": doc.get("disclosure"),
-        "themes": doc.get("themes") or {},
+        "counts": {
+            "sellers": sum(v["role"] == "seller" and v["evidence"] == "evidenced" for v in vendors),
+            "weak": len(weak),
+            "builders": sum(v["role"] == "builder" for v in vendors),
+            "signals": len(signals),
+            "pages": len({e["url"] for s in signals for e in s["evidence"]}),
+        },
+        "themes": themes,
         "vendors": [
             {**v, "signals": [s["id"] for s in signals if v["id"] in s["shown_by"]]} for v in vendors
         ],

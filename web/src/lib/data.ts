@@ -755,3 +755,19 @@ export type StoryDoc = {
   acts: { id: string; anchor: string; sentence: string; illustration: { file: string; alt: string; stage: "next" | "later" | null }; picture_note: string | null; panels: StoryPanelDoc[] }[];
 };
 export const story = () => read<StoryDoc>("story.json");
+
+// Part 56: the data market (web/data/data_market.json, written by data_market.build). A model's reading of vendors'
+// own fetched pages; a signal's count is the vendors listed under it, weak growth evidence counted apart.
+export type DataMarketSignal = {
+  id: string; theme: string; theme_name: string; headline: string; implies: string; shown_by: string[]; evidenced: number; weak: number; bar: number;
+  evidence: { vendor: string; name: string; url: string; retrieved_at: string }[];
+};
+export type DataMarketDoc = {
+  made_by: { model: string; date: string; method: string; reviewed_by: string };
+  disclosure: string;
+  counts: { sellers: number; weak: number; builders: number; signals: number; pages: number };
+  themes: Record<string, string>;
+  vendors: { id: string; name: string; role: "seller" | "builder"; evidence: "evidenced" | "weak"; sells: string; pages: string[]; signals: string[] }[];
+  signals: DataMarketSignal[];
+};
+export const dataMarket = () => read<DataMarketDoc>("data_market.json");

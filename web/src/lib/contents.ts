@@ -168,13 +168,18 @@ export const PAGES: Record<string, Page> = {
     ["conflicts", "Conflicts of interest", "What does the owner hold that could bias the site?"],
     ["licences", "Licences", "Under what terms may the data and words be reused?"],
   ] },
+  "/data-market": { name: "The data market", question: "What are the people who train AI buying?", sections: [
+    ["dm-how", "How this is read", "Where does a record of what model builders buy come from, when they publish none?"],
+    ["dm-signals", "The signals", "What do the vendors' own pages show their buyers asking for, and how many vendors show each?"],
+    ["dm-limits", "What the pages do not show", "What can this reading not tell you?"],
+  ] },
   "/ask": { name: "Ask", question: "Can I put a question to the data in plain words?" },
 };
 
 // Deep dives listed under the stop they belong to, and the reference pages that belong to none.
 export const UNDER: Record<string, readonly string[]> = {
   "/argument": ["/argument/migration"],
-  "/capture": ["/value-chain", "/value-chain/opportunities", "/value-chain/atlas", "/stack", "/ledger"],
+  "/capture": ["/value-chain", "/value-chain/opportunities", "/value-chain/atlas", "/data-market", "/stack", "/ledger"],
   "/firm": ["/firm/kinds"],
   "/predictions": ["/compare"],
   "/singularity": ["/singularity/atlas", "/futures"],

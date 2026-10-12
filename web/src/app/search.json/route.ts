@@ -1,4 +1,4 @@
-import { atlas, board, census, futures, index, indicator, sources, stack } from "@/lib/data";
+import { atlas, board, census, dataMarket, futures, index, indicator, sources, stack } from "@/lib/data";
 import { plain } from "@/lib/format";
 
 // The site search index, written once at build time from the same exports the pages read.
@@ -22,5 +22,6 @@ export function GET() {
   for (const r of census().roles) hits.push({ k: "Job", t: r.title, s: r.function, h: r.href });
   for (const c of futures().categories) hits.push({ k: "Futures", t: c.name, s: "Imagined technologies by category", h: c.href });
   for (const d of atlas().domains) hits.push({ k: "Atlas", t: d.name, s: untoken(d.thesis), h: `/singularity/atlas/${d.id}` });
+  for (const g of dataMarket().signals) hits.push({ k: "Data market", t: g.headline, s: g.implies, h: `/data-market#${g.id}` });
   return Response.json(hits);
 }
