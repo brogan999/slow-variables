@@ -1,4 +1,4 @@
-"""The data market (plan Part 56): what the firms that sell training data show their buyers asking for.
+"""The data market (plan Part 57): what the firms that sell training data show their buyers asking for.
 
 seed/data_market.yaml lists the vendors and the signals, in a model's words, read from the vendors' own pages. Each
 vendor is listed under a signal only with a page of its own that was fetched (seed/data_market_fetches.yaml), so a

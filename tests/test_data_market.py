@@ -1,4 +1,4 @@
-"""The data market (Part 56): what the firms that sell training data show their buyers asking for, read from the
+"""The data market (Part 57): what the firms that sell training data show their buyers asking for, read from the
 firms' own pages. seed/data_market.yaml holds the vendors and the signals in a model's words; every page behind them
 has a fetch record. A signal's count is the vendors listed under it, and vendors with weak growth evidence are counted
 apart."""
@@ -102,7 +102,7 @@ def test_no_tracked_file_of_the_section_names_a_home_folder_or_a_social_link():
             assert needle not in text, f"{p.name}: {needle}"
 
 
-# Part 56b: the first page
+# Part 57b: the first page
 
 WEB = ROOT / "web" / "src"
 

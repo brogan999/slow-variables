@@ -756,7 +756,7 @@ export type StoryDoc = {
 };
 export const story = () => read<StoryDoc>("story.json");
 
-// Part 56: the data market (web/data/data_market.json, written by data_market.build). A model's reading of vendors'
+// Part 57: the data market (web/data/data_market.json, written by data_market.build). A model's reading of vendors'
 // own fetched pages; a signal's count is the vendors listed under it, weak growth evidence counted apart.
 export type DataMarketSignal = {
   id: string; theme: string; theme_name: string; headline: string; implies: string; shown_by: string[]; evidenced: number; weak: number; bar: number;

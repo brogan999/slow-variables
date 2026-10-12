@@ -1404,7 +1404,24 @@ Part 54 left the older rubric in three places and put the question to the owner.
 
 **Tests first.** In `tests/test_futures_profit.py`: only Ask reads the judgement file and it says whose judgement it is; the index tallies the new prizes, not the older tiers. The method page says how the new judgement is made.
 
-## Part 56 (11 Oct 2026): the data market, first slice — vendors and signals
+## Part 56 (11 Oct 2026): one rule for what is done to a person without their say
+
+Part 55 left the kinds judging tools of coercion differently and described the two ways of settling it. The owner left the direction to the model.
+
+**The rule.** Anything done to a person without their say, to hurt them, break their mind or override their will or body, has no prize in every kind, whether the person is a captive, a worker or a whole population. This is the way the weapons kind had already ruled for its own ideas, and it means no reason had to be written for the market in such a device. Kept priced: a weapon or restraint that only stops or holds someone; confinement, including a sentence served in a simulation; anything the person chooses for themselves, such as erasing a chosen memory; a device that only reads or watches. Where a description does not say who chooses, the person is assumed to.
+
+**How it was applied.** A keyword pass over the name and description of every priced idea, each hit read and placed by hand; then a separate reviewing run read the seven kinds where such ideas sit, in full, and reported what the rule covered that was still priced and what it had wrongly swept in. Its nine additions were made and one idea went back to priced beside its twin, because its description does not say who chooses. Twenty-four ideas moved to no prize, all with the same plain reason and marked "not very sure". The reviewing run's wording of the rule replaced the first one, which did not settle whole populations or unstated consent.
+
+**Judgement calls.**
+
+- The direction, the rule and its exceptions are the model's.
+- Each placing rests on one line of description, never on the story.
+- Left as the weapons kind ruled, though the reviewing run questioned them: an incapacitating gas with no prize beside a priced paralysis bomb, and a home guard that kills intruders with no prize beside priced sentry guns.
+- Borderline and left priced: blocks that keep a secret, memory erasure, a treatment given to everyone before birth, techniques that seize the mind of someone who is free, a ray of unasked-for pleasure.
+
+**Tests first.** `tests/test_futures_profit.py`: the pinned ideas done to a person without their say have no prize and their neighbours keep one, and the method page states the rule. The list is pinned ids a person read, not a test of the rule.
+
+## Part 57 (11 Oct 2026): the data market, first slice — vendors and signals
 
 The owner asked for a section on the trade in AI training data: who sells, what the buyers are asking for, and which kinds of record nobody yet sells. Model builders do not publish what they buy; the firms that sell to them do, in job listings, research posts, product pages and terms. This part lands the data layer for that section and no page.
 
@@ -1420,4 +1437,4 @@ The owner asked for a section on the trade in AI training data: who sells, what 
 
 **Tests first.** `tests/test_data_market.py`: the real file passes and keeps weakly evidenced vendors, marked; a broken file names each problem (a figure, an unknown theme or vendor, a page never fetched, a social-media link, no reviewer); a page that did not answer or has no hash is a problem; a signal counts the vendors listed and weak ones apart, most-shown first; every exported link carries the day it was read; the committed export is the build and `check` reads the file; nothing that scores or answers reads it; no tracked file of the section names a home folder or a social link. Two of these were wrong as first written (a sort order assumed, and a pattern that matched an ordinary address) and were corrected in the green commit.
 
-**The first page (56b).** `/data-market` draws the export and computes nothing: how the section is read, with the counts of vendors and pages from the export; the model-reading label, the method and the disclosure; every signal, most-shown first, as a row that opens to what it implies and to each vendor's own page with the day it was read; and what the pages do not show. Links out to vendors are `nofollow`. The page is in the contents (under "Who profits"), the menu, the sitemap and the search index, and "How to read this" has a section on a model's reading of companies' own pages (`#company-claims`). Tests first, in the same file: the export counts what the page prints and sizes each bar; the page draws the export, labels the reading and computes nothing; the page is in the contents, the menu, the sitemap and the search.
+**The first page (57b).** `/data-market` draws the export and computes nothing: how the section is read, with the counts of vendors and pages from the export; the model-reading label, the method and the disclosure; every signal, most-shown first, as a row that opens to what it implies and to each vendor's own page with the day it was read; and what the pages do not show. Links out to vendors are `nofollow`. The page is in the contents (under "Who profits"), the menu, the sitemap and the search index, and "How to read this" has a section on a model's reading of companies' own pages (`#company-claims`). Tests first, in the same file: the export counts what the page prints and sizes each bar; the page draws the export, labels the reading and computes nothing; the page is in the contents, the menu, the sitemap and the search.
