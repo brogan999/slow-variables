@@ -1,4 +1,4 @@
-"""Build the data market's seed from the research database (plan Part 55).
+"""Build the data market's seed from the research database (plan Part 56).
 
     uv run python scripts/data_market_import.py <path to data_market.db> [--no-fetch]
 

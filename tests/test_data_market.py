@@ -1,4 +1,4 @@
-"""The data market (Part 55): what the firms that sell training data show their buyers asking for, read from the
+"""The data market (Part 56): what the firms that sell training data show their buyers asking for, read from the
 firms' own pages. seed/data_market.yaml holds the vendors and the signals in a model's words; every page behind them
 has a fetch record. A signal's count is the vendors listed under it, and vendors with weak growth evidence are counted
 apart."""

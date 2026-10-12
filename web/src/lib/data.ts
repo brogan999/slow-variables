@@ -645,14 +645,14 @@ export type FuForecast = {
 };
 export type FuGroup = { id: string; name: string; n: number; ideas: FuIdea[] };
 export type FuIndex = {
-  n_ideas: number; n_forecasts: number; n_idea_images: number; n_category_images: number; tier_words: string[];
+  n_ideas: number; n_forecasts: number; n_idea_images: number; n_category_images: number;
   imagined: { key: string; label: string; n: number; built: number; width: number; built_width: number; href: string | null }[];
   expected: { key: string; label: string; judged: number; stated: number; judged_width: number; stated_width: number; href: string }[];
-  categories: { id: string; name: string; n: number; built: number; tiers: Record<string, number>; image: string | null; href: string }[];
+  categories: { id: string; name: string; n: number; built: number; prizes: { word: string; n: number }[]; image: string | null; href: string }[];
   featured: FuIdea[]; credits: { name: string; url: string; archived: boolean }[];
 };
 export type FuDecade = { kind: "imagined" | "expected"; key: string; label: string; title: string; phrase?: string; n?: number; built?: number; judged?: number; stated?: number; groups: FuGroup[]; forecasts?: FuForecast[] };
-export type FuCategory = { id: string; name: string; image: string | null; n: number; tiers: Record<string, number>; matrix: FuMatrix | null; ideas: FuIdea[]; forecasts: FuForecast[] };
+export type FuCategory = { id: string; name: string; image: string | null; n: number; matrix: FuMatrix | null; ideas: FuIdea[]; forecasts: FuForecast[] };
 export const futures = () => read<FuIndex>("futures/index.json");
 export const futuresDecade = (kind: string, key: string) => read<FuDecade>(`futures/${kind}/${key}.json`);
 export const futuresCategory = (id: string) => read<FuCategory>(`futures/category/${id}.json`);
