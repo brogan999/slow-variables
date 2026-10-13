@@ -31,7 +31,7 @@ No lab has been shown buying records labelled with their outcome, here or elsewh
 ## Who is already there
 
 - **InsureThing** released a test of 160 tasks in 2026, written by specialists and not drawn from closed files [insurething].
-- **A Chinese university group** published 3,780 cases built on real claim materials and expanded by a language model; the best model scored 73% on decision and amount together [insclaimbench].
+- **A Chinese university group** published 3,780 cases built on real claim materials and expanded by a language model; the best model scored 73.15% on decision and amount together [insclaimbench].
 - **Tailshift** is itself a buyer of old liability claims, and says it holds broad sets of claim notes and legal and medical records, which it uses to price deals [tailshift].
 
 No one turned up licensing files from the policyholder's side that show the first offer and the final payment. The test built from claim files, however, already has several entrants.

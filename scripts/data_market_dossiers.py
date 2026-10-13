@@ -60,7 +60,7 @@ def main(args: list[str]) -> None:
         figs, missing = [], []
         for number, cited in prose_figures(text):
             for k in cited:
-                m = re.search(r"(?<![\d.])" + re.escape(number) + r"(?!\d)", page(url.get(k, "")))
+                m = re.search(r"(?<![\d.])" + re.escape(number) + r"(?!\d|\.\d)", page(url.get(k, "")))
                 if m:
                     t = page(url[k])
                     figs.append(

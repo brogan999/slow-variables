@@ -32,9 +32,9 @@ For several other large planning vendors no published customer terms were found.
 
 The bare record is already public and well studied.
 
-A 2025 paper in the International Journal of Forecasting pooled "the publicly available data on around 147,000 forecasts from six studies" [ijf-2025]. It found that human adjustments improved the forecasts "for only just over half" of products, and that evidence of forecasters using information the software lacked "was weak" [ijf-2025].
+A 2025 paper in the International Journal of Forecasting pooled "the publicly available data on around 147,000 forecasts from six studies" [ijf-2025]. It found that human adjustments improved the forecasts "for only just over half" of products, and that evidence of forecasters making good use of information the software lacked was weak [ijf-2025].
 
-Two consultancies have trained on one client's log each. First Analytics says that on a test of 900,000 overrides its machine and the planners were "virtually tied" [first-analytics]. EyeOn says the direction and size of a change predicted whether it helped, and that "written explanations had only a limited impact" [eyeon].
+Two consultancies have trained on one client's log each. First Analytics says that on a test of 900,000 overrides its machine and the planners were "virtually tied" [first-analytics]. EyeOn says the direction and size of a change predicted whether it helped, and that the written explanations "had only a limited impact on the model’s predictions" [eyeon].
 
 For hotels, an economics paper studied about 6 million price observations from 9 hotels, holding the system's recommendation, the manager's price and the bookings [cesifo-10849]. It reports that about 85% of managers' price updates copy the recommendation exactly [cesifo-10849].
 

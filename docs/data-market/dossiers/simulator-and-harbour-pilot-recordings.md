@@ -24,7 +24,7 @@ No lab or vendor was found asking for ship, aircraft or mining-machine operation
 
 **Ship simulators.** The Australian Maritime College in Launceston has a full bridge simulator and tug simulators and trains pilots for several ports and resource companies [amc-sim]. The centre holds the logs. Who owns them depends on each training contract, and none was seen.
 
-**Mining simulators.** Immersive Technologies of Perth says it works with more than 360 sites and has simulators in 57 countries, and that it monitors how operators brake, change gear and manage speed [immersive].
+**Mining simulators.** Immersive Technologies of Perth says it works with more than 360 sites, and that it monitors how operators brake, change gear and manage speed [immersive].
 
 **Pilots' recordings.** The firms and port corporations that provide pilots hold them. The Australasian pilots' institute's code of practice says recording should begin automatically, that recordings should be kept safe and archived, and that the policy belongs in the provider's safety system [ampi]. No statute on who owns the recordings was found.
 

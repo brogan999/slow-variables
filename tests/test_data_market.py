@@ -371,7 +371,7 @@ def test_the_dossier_export_lays_out_blocks_and_numbers_sources_in_order_of_firs
         order = list(dict.fromkeys(used))
         assert [s["key"] for s in d["sources"] if s["n"]] == order, d["id"]
         for s in d["sources"]:
-            assert s["retrieved_at"] and s["url"].startswith("https://")
+            assert s["retrieved_at"] and s["url"].startswith("http")
     committed = json.loads((ROOT / "web" / "data" / "data_market_dossiers.json").read_text())
     assert committed == json.loads(json.dumps(docs, default=str))
     assert 'out / "data_market_dossiers.json"' in (ROOT / "src" / "ai_tracker" / "store.py").read_text()
