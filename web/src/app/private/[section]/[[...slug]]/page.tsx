@@ -43,7 +43,7 @@ function TableView({ table, query }: { table: Table; query: Query }) {
       <div className="panel overflow-x-auto">
         <table className="data w-full min-w-[44rem]">
           <thead><tr>{table.columns.map((c) => <th key={c} scope="col" className="whitespace-nowrap">{c}</th>)}</tr></thead>
-          <tbody>{shown.map((r, i) => <tr key={i}>{r.map((c, j) => <td key={j}>{c}</td>)}</tr>)}</tbody>
+          <tbody>{shown.map((r, i) => <tr key={i}>{r.map((c, j) => <td key={j} className="min-w-[11rem] align-top">{c}</td>)}</tr>)}</tbody>
         </table>
       </div>
     </div>
