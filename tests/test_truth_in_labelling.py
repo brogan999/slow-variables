@@ -38,4 +38,5 @@ def test_the_census_s_stricter_figure_is_what_all_three_models_pass_never_what_t
         hit = AGREE.search(path.read_text())
         assert not hit, f"{path.relative_to(ROOT)}: {hit.group(0)}"
     kinds = (ROOT / "web" / "src" / "components" / "FirmKinds.tsx").read_text()
-    assert kinds.count("all three models pass") >= 3 and "all the models<" not in kinds
+    # that page's own test forbids a typed count of the models, so it names the panel
+    assert kinds.count("every model in the panel passes") >= 5 and "all the models<" not in kinds
