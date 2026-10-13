@@ -38,7 +38,7 @@ Two consultancies have trained on one client's log each. First Analytics says th
 
 For hotels, an economics paper studied about 6 million price observations from 9 hotels, holding the system's recommendation, the manager's price and the bookings [cesifo-10849]. It reports that about 85% of managers' price updates copy the recommendation exactly [cesifo-10849].
 
-The software companies learn from customers' overrides inside their own products, as the PROS and SAP terms allow.
+The software companies learn from customers' overrides inside their own products, as the PROS terms allow.
 
 What does not exist in public is a large set from many companies with the surrounding context. Nobody has been shown to want one.
 

@@ -122,8 +122,8 @@ method:
   - What paid newsletters report, unless a page the site can read carries the same fact.
   - How each kind of record might be obtained, what a business built on it might earn, and who to ask. Those notes are the
     owner's and are not published.
-  - Materials-science data. A late search found that the sellers are long-established crystal-structure databases and that
-    laboratories with their own robots keep what they make; it is not yet written up here.
+  - 'Much of materials science. A first pass is in: the sellers it found are long-established crystal-structure databases,
+    and laboratories that make new data keep it. Coverage of China, Japan and of battery and polymer test data is thin.'
   found_wrong:
   - The first screen favoured the obscure. It marked a kind of record down for being already sold, so the markets where money
     plainly moves scored lowest. A second set of dossiers was written on those markets; the first ranking is not published.
@@ -311,6 +311,14 @@ vendors:
     as a second line, proof datasets, evals and RL environments for frontier AI labs and research institutes.
   pages:
   - https://www.ycombinator.com/companies/cajal-technologies
+- id: ccdc
+  name: Cambridge Crystallographic Data Centre
+  role: seller
+  evidence: weak
+  sells: Licenses its crystal structure data under standard terms that bar use inside AI systems unless it expressly agrees
+    otherwise.
+  pages:
+  - https://www.ccdc.cam.ac.uk/media/CCDC-Licence-Terms.pdf
 - id: chakra-pango
   name: Chakra Labs and Pango
   role: seller
@@ -349,6 +357,14 @@ vendors:
   - https://investors.curiositystream.com/assets/uploads/2026/08/CURI_2026-Q2-earnings_executive-remarks.pdf
   - https://stockanalysis.com/stocks/curi/transcripts/669438-q2-2026/
   - https://www.fool.com/earnings/call-transcripts/2026/05/15/curiositystream-curi-q1-2026-earnings-transcript/
+- id: cuspai
+  name: CuspAI
+  role: builder
+  evidence: weak
+  sells: Model builder. Says it holds exclusive AI training rights to the main experimental crystal-structure databases and
+    a publisher's materials catalogues.
+  pages:
+  - https://www.imec-int.com/en/press/cuspai-launches-ai-materials-foundry-global-network-accelerate-breakthrough-discoveries
 - id: datacurve
   name: Datacurve
   role: seller
@@ -483,6 +499,14 @@ vendors:
     and body-position streams, teleoperation data pipelines, matched first- and third-person video, and defect image labelling.'
   pages:
   - https://www.firstsource.com/capabilities/genai-data-services/solutions/physical-ai
+- id: fiz-karlsruhe-icsd
+  name: FIZ Karlsruhe
+  role: seller
+  evidence: evidenced
+  sells: Licenses its inorganic crystal structure database, including bulk access for data mining licensed per named project
+    with prices on request. It supplies the database to CuspAI for AI models.
+  pages:
+  - https://icsd.products.fiz-karlsruhe.de/en/products/icsd-products
 - id: fleet-ai
   name: Fleet AI
   role: seller
@@ -1021,6 +1045,13 @@ vendors:
   - https://job-boards.greenhouse.io/scaleai/jobs/4701543005
   - https://outlier.ai/
   - https://outlier.ai/legal/terms-of-use
+- id: periodic-labs
+  name: Periodic Labs
+  role: builder
+  evidence: weak
+  sells: Model builder. Trains its own model on data from its own laboratories rather than bought data.
+  pages:
+  - https://periodic.com/news/building-labs-that-learn
 - id: petrarch
   name: Petrarch
   role: seller
@@ -1172,6 +1203,14 @@ vendors:
   - https://www.proximal.ai/blog/posttraining-infra/
   - https://www.proximal.ai/blog/proximal/
   - https://www.proximal.ai/msa/
+- id: rara-factory
+  name: RARA Factory
+  role: builder
+  evidence: weak
+  sells: A laboratory that makes and measures new materials daily and keeps the resulting dataset, failures included, as its
+    own asset; no data sale is offered.
+  pages:
+  - https://www.rarafactory.com/
 - id: scale
   name: Scale AI
   role: seller
@@ -4667,6 +4706,23 @@ signals:
     url: https://www.upstartsmedia.com/p/exclusive-simpleclosure-data-what-ai-labs-buy
   - vendor: turing
     url: https://lazarus.turing.com/
+- id: pricing_terms-reference-databases-hold-back-ai-training-rights
+  theme: pricing_terms
+  headline: Long-established crystal-structure databases hold AI-training rights back from ordinary access, and one buyer
+    says it holds them exclusively
+  implies: Buyers want explicit, separately negotiated AI training rights to experimentally verified reference records, and
+    at least one wants them exclusively.
+  shown_by:
+  - ccdc
+  - cuspai
+  - fiz-karlsruhe-icsd
+  evidence:
+  - vendor: ccdc
+    url: https://www.ccdc.cam.ac.uk/media/CCDC-Licence-Terms.pdf
+  - vendor: cuspai
+    url: https://www.imec-int.com/en/press/cuspai-launches-ai-materials-foundry-global-network-accelerate-breakthrough-discoveries
+  - vendor: fiz-karlsruhe-icsd
+    url: https://icsd.products.fiz-karlsruhe.de/en/products/icsd-products
 - id: pricing_terms-robot-data-per-hour
   theme: pricing_terms
   headline: Robot and first-person video data is often priced by the hour
@@ -5560,6 +5616,20 @@ signals:
   evidence:
   - vendor: epoch
     url: https://epoch.ai/latest/epoch-impact-report-2025
+- id: science_math-robot-labs-keep-their-own-data
+  theme: science_math
+  headline: Materials labs that make their own experimental data train their own models on it or hold it as their asset; none
+    lists the dataset for sale
+  implies: Buyers who want experimental materials data, failures included, must build their own laboratory or license an old
+    reference database, because the labs making new data are not selling it.
+  shown_by:
+  - periodic-labs
+  - rara-factory
+  evidence:
+  - vendor: periodic-labs
+    url: https://periodic.com/news/building-labs-that-learn
+  - vendor: rara-factory
+    url: https://www.rarafactory.com/
 - id: science_math-science-tasks-with-numeric-graders
   theme: science_math
   headline: Science and engineering tasks are built around simulations and recomputable answers

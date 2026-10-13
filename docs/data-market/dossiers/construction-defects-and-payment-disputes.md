@@ -10,7 +10,7 @@ This page covers three Australian records in which an outside party rules on bui
 
 **Collapsed builders' files.** When a builder is liquidated, its project files pass to the liquidator's control: contracts, claims, changes to the work, queries, programmes, defect lists and email.
 
-A worked example for adjudication, using official New South Wales averages; the builder's offer is invented. A waterproofing subcontractor claims A$617,276 [nsw-sop-2025], the average claim in the state for one quarter of 2025. The builder's schedule offers far less, citing defects and changes it never approved. An adjudicator, appointed through an approved body, reads both sides and awards A$284,105 [nsw-sop-2025], the average award that quarter.
+A worked example for adjudication, using official New South Wales averages; the builder's offer is invented. A waterproofing subcontractor claims about six hundred thousand Australian dollars [nsw-sop-2025], the average claim in the state for one quarter of 2025. The builder's schedule offers far less, citing defects and changes it never approved. An adjudicator, appointed through an approved body, reads both sides and awards about two hundred and eighty thousand dollars [nsw-sop-2025], the average award that quarter.
 
 ## Why it might matter for training AI
 
@@ -24,8 +24,8 @@ No purchase of any of the three by a lab was found.
 
 **Adjudications.** The states differ.
 
-- Queensland publishes adjudication decisions on the regulator's website, and its application form says the Act requires it [qbcc-registry]. In the first half of 2025 it released 106 [qbcc-h1-2025] decisions, from 175 [qbcc-h1-2025] valid applications worth A$193,702,366 [qbcc-h1-2025]; A$48,563,395 [qbcc-h1-2025] was awarded.
-- New South Wales does not publish them. In 2024-25 there were 990 [nsw-sop-2025] applications and 493 [nsw-sop-2025] decisions released to the parties, with A$547,219,189 [nsw-sop-2025] claimed and A$170,203,408 [nsw-sop-2025] awarded. The parties and the appointing bodies hold them.
+- Queensland publishes adjudication decisions on the regulator's website, and its application form says the Act requires it [qbcc-registry]. In the first half of 2025 it released 106 [qbcc-h1-2025] decisions, from 175 [qbcc-h1-2025] valid applications worth nearly a hundred and ninety-four million Australian dollars [qbcc-h1-2025]; about forty-eight and a half million [qbcc-h1-2025] was awarded.
+- New South Wales does not publish them. In 2024-25 there were 990 [nsw-sop-2025] applications and 493 [nsw-sop-2025] decisions released to the parties, with about five hundred and forty-seven million Australian dollars [nsw-sop-2025] claimed and about a hundred and seventy million [nsw-sop-2025] awarded. The parties and the appointing bodies hold them.
 - Victoria publishes a spreadsheet with a row for each application under an open licence, with amounts and dates but no reasons [vic-data].
 
 The claim, the schedule and the two sides' submissions are published nowhere. They belong to the parties.

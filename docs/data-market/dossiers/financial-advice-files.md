@@ -12,7 +12,7 @@ Two kinds of verdict are attached to these files, and they come out differently.
 
 An illustration, not a real file: a couple in their late fifties want to retire in five years. A paraplanner models moving both their retirement accounts to a new provider and drafts a sixty-page document. The reviewer fails it, because nothing compares the fees and insurance of the old accounts with the new. The comparison, once added, shows the couple would lose a large amount of life cover. The recommendation changes to keep one account, and the file passes.
 
-The second verdict has real numbers. The corporate regulator's final count, to the end of 2022, shows six institutions paid or offered A$4.7 billion [asic-final]. Of that, A$4,416,195,480 went to 1,590,689 customers who were charged fees for no service, which is a billing check [asic-final]. The part that turned on a judgement about advice was far smaller: 11,968 customers shared A$270,208,386 [asic-final]. Westpac had 3,341 of them, NAB 3,034, AMP 2,844, ANZ 2,123 and CBA 626 [asic-final].
+The second verdict has real numbers. The corporate regulator's final count, to the end of 2022, shows six institutions paid or offered A$4.7 billion [asic-final]. Of that, about four point four billion Australian dollars went to more than one and a half million customers who were charged fees for no service, which is a billing check [asic-final]. The part that turned on a judgement about advice was far smaller: nearly twelve thousand customers shared about two hundred and seventy million Australian dollars [asic-final]. Westpac had 3,341 of them, NAB 3,034, AMP 2,844, ANZ 2,123 and CBA 626 [asic-final].
 
 ## Why it might matter for training AI
 
@@ -22,7 +22,7 @@ Nothing found shows a purchase of advice-compliance files, Australian or otherwi
 
 ## Who holds it and who may share it
 
-Adviser Ratings counted 15,084 advisers at the start of 2026 [adviser-ratings]. No national count of advice documents was found.
+Adviser Ratings counted about fifteen thousand advisers at the start of 2026 [adviser-ratings]. No national count of advice documents was found.
 
 **The licensee** is the file's owner and has to keep it. A regulator's instrument of 2024 sets the period at 7 years from the day of the advice, and that the duty continues even if the licensee stops being licensed [asic-records].
 

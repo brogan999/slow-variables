@@ -34,7 +34,7 @@ One company builds machine-learning models for grade control and reconciliation 
 
 AI-led explorers buy or trade for exploration data: the purchase above and an alliance giving one explorer access to a large miner's exploration databases [bhp-kobold]. All of it is exploration, none reconciliation.
 
-Public real data is scarce. One open set from a Brazilian processing plant has 737,453 [frothiq] rows and covers the plant side only.
+Public real data is scarce. One open set from a Brazilian processing plant has more than seven hundred thousand [frothiq] rows and covers the plant side only.
 
 No dataset, public test or seller of this record was found.
 

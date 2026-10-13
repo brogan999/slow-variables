@@ -4,7 +4,7 @@
 
 When a company stops trading it leaves behind its whole working history: email, chat, shared drives, the accounting ledger, the customer database, job and ticket systems, contracts and code. If the company is insolvent, the files go to a liquidator or an administrator: an accountant, registered for the purpose, who sells whatever remains and pays the creditors. If the company is solvent and is being closed on purpose, which is called a members' voluntary liquidation, its directors and shareholders remain on hand and can sign.
 
-The numbers, as reported from the corporate regulator's statistics: in the 2025–26 financial year 14,152 companies went into external administration for the first time [accountants-daily]. Most are small. Of the administrators' reports lodged in 2022–23, 82% concerned companies with fewer than 20 employees, and 83% concerned companies with assets of A$100,000 or less [asic-23-346mr].
+The numbers, as reported from the corporate regulator's statistics: in the 2025–26 financial year more than fourteen thousand companies went into external administration for the first time [accountants-daily]. Most are small. Of the administrators' reports lodged in 2022–23, 82% concerned companies with fewer than 20 employees, and 83% concerned companies with assets of A$100,000 or less [asic-23-346mr].
 
 No Australian sale of such records was found. The model case is American. A transcription company called cielo24 closed after more than a decade [simpleclosure-blog]. Its shutdown agent, SimpleClosure, says it found a language-technology buyer for the company's data assets, which paid what it calls "mid-six figures" [simpleclosure-blog].
 

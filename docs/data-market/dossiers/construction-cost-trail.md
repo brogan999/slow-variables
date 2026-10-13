@@ -24,7 +24,7 @@ No purchase of such records by a lab or a vendor was found. The sign of value is
 
 **Lender's reports.** Quantity-surveying firms, banks and private lenders hold them. The guidance note read, a New Zealand adaptation of the Australian one, says reports go only to the lender that appointed the surveyor unless that lender releases them in writing, and should not be passed on without the authority of both surveyor and lender [nziqs-2019]. So two consents are needed, and in practice a third, because the report describes the borrower's project and its builder. The Australian original was not read.
 
-**Cost plans.** The surveying firm holds the working files. Its client owns the project's commercial information. No firm's engagement terms were found. One slice is public: large projects assessed by the state in New South Wales need a cost report from a certified surveyor on a standard form, and these are published [nsw-edc]. One such report, for a Sydney project, gives an estimate of A$108,589,952 [wt-edc] before tax. This is the estimate only. No final account is published.
+**Cost plans.** The surveying firm holds the working files. Its client owns the project's commercial information. No firm's engagement terms were found. One slice is public: large projects assessed by the state in New South Wales need a cost report from a certified surveyor on a standard form, and these are published [nsw-edc]. One such report, for a Sydney project, gives an estimate of more than a hundred and eight million Australian dollars [wt-edc] before tax. This is the estimate only. No final account is published.
 
 **Civil bids.** The contractor owns both ends and can consent alone.
 

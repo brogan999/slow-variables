@@ -26,9 +26,9 @@ No lab was found asking for veterinary records. Sellers exist and quote prices. 
 - **Evident** pulls diagnoses, treatments and outcomes out of clinics' free-text notes and sells them to drug, research and pet-food companies, sharing revenue with the clinics [evident].
 - **Sage Veterinary Imaging** licenses scans with specialists' reports to AI labs, including trial batches of 500 to 1,000 studies [sage].
 - **A British university project** gives away 17,600 annotated records under an open licence [peteval].
-- University groups have trained models on these archives; one American group says it is unable to share the 246,473 visits it coded by hand [vet-paper].
+- University groups have trained models on these archives; one American group says it is unable to share the almost two hundred and fifty thousand visits it coded by hand [vet-paper].
 
-The record is not untouched. One seller with thousands of practices already prices both the raw records and the practice environment, and has named Australia as its next market.
+The record is not untouched. One seller already prices both the raw records and the practice environment, and has named Australia as its next market.
 
 ## What would have to be stripped
 
