@@ -27,7 +27,7 @@ export default function DataMarketPage() {
           Model builders do not publish what they buy. The firms that sell to them do, without meaning to. A vendor&apos;s job listings say which experts it needs. Its research posts say which problems its customers have set it. Its terms say what a customer may do with the goods.
         </p>
         <p>
-          This page reads those pages for <span className="num text-ink">{d.counts.sellers}</span> vendors with evidence of fast growth in the past year, <span className="num text-ink">{d.counts.weak}</span> more whose evidence of growth is weak, and <span className="num text-ink">{d.counts.builders}</span> companies that build models for robots and say what they train on. It cites <span className="num text-ink">{d.counts.pages}</span> pages, each fetched and dated. Nothing comes from social media.
+          This page reads those pages for <span className="num text-ink">{d.counts.sellers}</span> vendors with evidence of fast growth in the past year, <span className="num text-ink">{d.counts.weak}</span> more whose evidence of growth is weak, and <span className="num text-ink">{d.counts.builders}</span> companies that build models, for robots or for language, whose pages say what they train on or buy. It cites <span className="num text-ink">{d.counts.pages}</span> pages, each fetched and dated. Nothing comes from social media.
         </p>
         <p className="border-l-2 border-dotted border-axis pl-3 text-[13.5px] leading-snug">
           <span className="text-muted">A model&apos;s reading of the vendors&apos; own pages, not a measurement. </span>

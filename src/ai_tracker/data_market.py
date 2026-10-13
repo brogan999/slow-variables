@@ -313,8 +313,8 @@ def build(
         ),
         group(
             "builders",
-            "Companies that build models for robots",
-            "Buyers and makers of data, not sellers: their pages say what they train on and how they collect it.",
+            "Model builders",
+            "Buyers and makers of data, not sellers: companies that build models for robots or for language, whose pages or listings say what they train on, collect or buy.",
             lambda v: v["role"] == "builder",
         ),
     ]

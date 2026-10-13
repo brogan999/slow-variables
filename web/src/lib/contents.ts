@@ -176,7 +176,7 @@ export const PAGES: Record<string, Page> = {
   "/data-market/vendors": { name: "The data market: vendors", question: "Who sells training data, and what do each vendor's own pages show?", sections: [
     ["dm-evidenced", "Sellers with evidence of fast growth", "Which vendors are growing fast, and which signals do their pages show?"],
     ["dm-weak", "Sellers with weak evidence of growth", "Which vendors are listed on thinner evidence?"],
-    ["dm-builders", "Companies that build models for robots", "What do robot-model builders say they train on?"],
+    ["dm-builders", "Model builders", "What do model builders say they train on, collect or buy?"],
   ] },
   "/data-market/prices": { name: "The data market: prices and pay", question: "What do vendors pay for data and the people who make it, in their own published figures?" },
   "/data-market/sources": { name: "The data market: every kind of record", question: "Which kinds of record could train AI, and is anyone already selling or using each?", sections: [
