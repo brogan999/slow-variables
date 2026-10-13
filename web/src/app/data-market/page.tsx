@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { DataMarketNav } from "@/components/DataMarketNav";
 import { PageHeader } from "@/components/PageHeader";
 import { dataMarket } from "@/lib/data";
 
@@ -13,6 +14,7 @@ export default function DataMarketPage() {
   const d = dataMarket();
   return (
     <div className="flex flex-col gap-10 max-w-[72rem]">
+      <DataMarketNav here="/data-market" />
       <PageHeader
         eyebrow={<><Link href="/capture" className="hover:text-ink">Who profits</Link> · the data market</>}
         title="What are the people who train AI buying?"

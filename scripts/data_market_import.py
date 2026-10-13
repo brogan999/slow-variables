@@ -60,6 +60,26 @@ THEMES = {
     "other": "Other",
 }
 
+# the vendor board's columns: the themes a reader would look for first, with a short label each
+BOARD = [
+    {"theme": k, "label": v}
+    for k, v in (
+        ("graders_quality", "Graders"),
+        ("proof_of_lift", "Proof"),
+        ("long_horizon", "Long tasks"),
+        ("coding", "Code"),
+        ("office_work", "Office work"),
+        ("company_records", "Company records"),
+        ("finance", "Finance"),
+        ("healthcare_medicine", "Medicine"),
+        ("safety_security", "Safety"),
+        ("robotics_capture", "Robots"),
+        ("video_world", "Video"),
+        ("audio_speech", "Speech"),
+        ("biology_lab", "Biology"),
+    )
+]
+
 
 def fetch(url: str) -> dict:
     rec: dict = {"url": url, "retrieved_at": date.today()}
@@ -147,6 +167,7 @@ def main(args: list[str]) -> None:
         "made_by": doc.get("made_by") or {"model": "", "date": date.today(), "method": "", "reviewed_by": ""},
         "disclosure": doc.get("disclosure") or "",
         "themes": {k: v for k, v in THEMES.items() if any(s["theme"] == k for s in signals)},
+        "board": doc.get("board") or BOARD,
         "vendors": out_vendors,
         "signals": signals,
     }
