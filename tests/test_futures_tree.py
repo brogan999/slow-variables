@@ -19,7 +19,7 @@ def _nodes(doc):
 
 
 def _big(category: str, key: str) -> list[dict]:
-    """The unbuilt technologies of one kind expected in one decade that a model judged a large or vast prize."""
+    """One kind and one decade: the unbuilt technologies the profit judgement calls a large or a vast prize."""
     judged = fu.verdicts()
     return [
         judged[x["id"]] | {"needs": x["needs"]}
@@ -131,7 +131,7 @@ def test_the_check_and_the_export_are_wired_without_handing_the_judgement_file_a
 def test_the_tree_is_listed_where_a_reader_or_a_crawler_would_look():
     contents = (WEB / "lib" / "contents.ts").read_text()
     assert re.search(r'^\s*"/futures/tree": \{ name: "[^"]+", question: "[^"]+\?"', contents, re.M)
-    assert re.search(r'"/futures": \[[^\]]*"/futures/tree"', contents), "it sits under Futures in the contents"
+    assert re.search(r'"/singularity": \[[^\]]*"/futures", "/futures/tree"', contents), "the contents page lists it beside Futures"
     assert '"/futures/tree"' in (WEB / "app" / "sitemap.ts").read_text()
     assert '"/futures/tree"' in (WEB / "app" / "search.json" / "route.ts").read_text()
     assert 'href="/futures/tree"' in (WEB / "app" / "futures" / "page.tsx").read_text()

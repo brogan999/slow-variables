@@ -656,6 +656,27 @@ export type FuCategory = { id: string; name: string; image: string | null; n: nu
 export const futures = () => read<FuIndex>("futures/index.json");
 export const futuresDecade = (kind: string, key: string) => read<FuDecade>(`futures/${kind}/${key}.json`);
 export const futuresCategory = (id: string) => read<FuCategory>(`futures/category/${id}.json`);
+// Part 60: the technology tree. One node per kind of technology and decade; `needs` is the gates that must be open
+// for it to light, and `tallies` holds the count for every set of open gates, keyed by a flag per gate in order.
+export type FuTreeNode = {
+  id: string; name: string; key: string; label: string; col: number; n: number; href: string;
+  shares: { id: string; word: string; n: number; width: number }[];
+  gate: { id: string; name: string }; needs: string[]; built: { id: string; word: string; step: number };
+  examples: { name: string; author: string; imagined: number; line: string }[];
+  after: { id: string; name: string; kind: string; cross: boolean }[];
+};
+export type FuTreeTally = { lit: number; n: number; incumbents: number; anyone: number; maker: number; permit: number };
+export type FuTree = {
+  made_by: { model: string; date: string; method: string; reviewed_by: string };
+  gates: { id: string; name: string; says: string; open: boolean }[];
+  decades: { key: string; label: string; col: number }[];
+  sellers: { id: "incumbents" | "anyone" | "maker" | "permit"; word: string }[];
+  built: { id: string; word: string }[];
+  lanes: { id: string; name: string; nodes: FuTreeNode[] }[];
+  tallies: Record<string, FuTreeTally>; nodes: number; on_board: number;
+  left_off: { n: number; kinds: string[] };
+};
+export const futuresTree = () => read<FuTree>("futures/tree.json");
 
 // Part 33: the market map (web/data/market_map.json, written by market_map.build via Store._market_map)
 export type MarketMapEntity = {
