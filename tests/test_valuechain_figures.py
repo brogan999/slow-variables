@@ -279,9 +279,9 @@ def test_the_judgement_figures_say_the_model_that_drafted_them_is_anthropic_s():
         body = _body(src, fn)
         foot = body[body.index("foot=") : body.index("tableLabel=")]
         assert "Claude, a model made by Anthropic" in foot, fn
-    # the profit rule's foot says one named person reviewed every profile; hold it to the records
-    assert "Alex Brogan reviewed every profile" in _body(src, "RentRule")
-    assert {c.get("reviewed_by") for c in vc.load()["companies"]} == {"Alex Brogan"}
+    # the profit rule's foot says reviewing runs of the model checked every profile and no person did; hold it to the records
+    assert "Separate reviewing runs of the same model checked each profile against its sources; no person reviewed each one" in _body(src, "RentRule")
+    assert all("no person reviewed it" in c.get("reviewed_by", "") for c in vc.load()["companies"])
     assert all(c.get("judged_by", "").startswith("claude") for c in vc.load()["companies"])
 
 

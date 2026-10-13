@@ -82,7 +82,7 @@ export function ProfileCard({ c }: { c: Profile }) {
         {c.source_links.map((s, i) => (
           <span key={s.id}>{i ? ", " : ""}<a href={s.url} className={link} target="_blank" rel="noreferrer">{s.label}<span className="sr-only"> (opens in a new tab)</span></a></span>
         ))}
-        ; {c.reviewed_by ? `reviewed by ${c.reviewed_by} on ${c.reviewed}` : "not yet reviewed by a person"}.{c.disclosure ? ` ${c.disclosure}` : ""}
+        ; {c.reviewed_by ? `reviewed by ${c.reviewed_by}` : "no review of it is recorded"}.{c.disclosure ? ` ${c.disclosure}` : ""}
       </p>
       </div>
       </PhoneCollapse>

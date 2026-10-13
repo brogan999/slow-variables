@@ -42,11 +42,11 @@ export function KindBars({ doc }: { doc: FirmKindsDoc }) {
         {doc.kinds.map((k) => (
           <div key={k.id} className="grid grid-cols-1 gap-1 sm:grid-cols-[15rem_1fr] sm:items-center sm:gap-3">
             <div className="text-[13px] leading-tight text-ink">{k.name}
-              <span className="block font-mono text-[11px] text-muted">{fmt(k.share_passes, "share")} passes · {fmt(k.share_agreed3, "share")} all the models</span>
+              <span className="block font-mono text-[11px] text-muted">{fmt(k.share_passes, "share")} passes · every model in the panel passes {fmt(k.share_agreed3, "share")}</span>
             </div>
             <div className="relative h-5 w-full">
               {k.bar.map((s) => (
-                <div key={s.part} title={`${k.name}: ${fmt(share(k, s.part), "share")} ${PART[s.part]}${s.part === "passes" ? ` (${fmt(k.share_agreed3, "share")} with all the models agreeing)` : ""}`} className="absolute inset-y-0" style={{ left: `${s.x}%`, width: `${s.w}%`, background: FILL[s.part], boxShadow: s.part === "outside" ? EDGE : "inset -1px 0 0 var(--surface)" }} />
+                <div key={s.part} title={`${k.name}: ${fmt(share(k, s.part), "share")} ${PART[s.part]}${s.part === "passes" ? ` (every model in the panel passes ${fmt(k.share_agreed3, "share")})` : ""}`} className="absolute inset-y-0" style={{ left: `${s.x}%`, width: `${s.w}%`, background: FILL[s.part], boxShadow: s.part === "outside" ? EDGE : "inset -1px 0 0 var(--surface)" }} />
               ))}
               <div aria-hidden className="absolute inset-y-0 w-px bg-surface" style={{ left: `${k.agreed_w}%` }} />
             </div>
@@ -71,7 +71,7 @@ export function KindShapes({ doc }: { doc: FirmKindsDoc }) {
           <thead><tr><th scope="col">Kind of firm</th>{doc.kinds[0].tiers.map((t) => <th key={t.id} scope="col">{TIER[t.id]}</th>)}</tr></thead>
           <tbody>{doc.kinds.map((k) => (
             <tr key={k.id}><th scope="row">{k.name}</th>{k.tiers.map((t) => (
-              <td key={t.id}>{fmt(t.share, "share")}<span className="block text-muted">{fmt(t.share_passes, "share")} passes · {fmt(t.share_agreed3, "share")} all the models</span></td>
+              <td key={t.id}>{fmt(t.share, "share")}<span className="block text-muted">{fmt(t.share_passes, "share")} passes · every model in the panel passes {fmt(t.share_agreed3, "share")}</span></td>
             ))}</tr>
           ))}</tbody>
         </table>
@@ -83,7 +83,7 @@ export function KindShapes({ doc }: { doc: FirmKindsDoc }) {
             <Pyramid
               compact
               label={`${k.name}: ${k.tiers.map((t) => `${TIER[t.id]} ${fmt(t.share, "share")}`).join(", ")}`}
-              tiers={k.tiers.map((t) => ({ key: t.id, label: TIER[t.id], w: t.w, inner: t.pass_w, tip: `${TIER[t.id]}: ${fmt(t.share, "share")} of knowledge-work payroll; ${fmt(t.share_passes, "share")} of it passes, ${fmt(t.share_agreed3, "share")} with all the models agreeing` }))}
+              tiers={k.tiers.map((t) => ({ key: t.id, label: TIER[t.id], w: t.w, inner: t.pass_w, tip: `${TIER[t.id]}: ${fmt(t.share, "share")} of knowledge-work payroll; ${fmt(t.share_passes, "share")} of it passes; every model in the panel passes ${fmt(t.share_agreed3, "share")}` }))}
             />
             <div className="text-center text-[12px] leading-tight text-ink-2">{k.name}</div>
           </div>
@@ -264,7 +264,7 @@ export function KindPanels({ doc }: { doc: FirmKindsDoc }) {
           <div className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_14rem]">
             <div className="flex flex-col gap-1">
               <h3 id={`kind-${k.id}-h`} className="display text-[1.25rem] leading-tight">{k.name}</h3>
-              <span className="font-mono text-[11px] leading-snug text-muted">{fmt(k.share_passes, "share")} passes ({fmt(k.share_agreed3, "share")} with all the models agreeing) · {fmt(k.share_waits_on_check, "share")} waits on a check{k.share_outside > k.share_held ? ` · ${fmt(k.share_outside, "share")} outside the census` : ""}</span>
+              <span className="font-mono text-[11px] leading-snug text-muted">{fmt(k.share_passes, "share")} passes (every model in the panel passes {fmt(k.share_agreed3, "share")}) · {fmt(k.share_waits_on_check, "share")} waits on a check{k.share_outside > k.share_held ? ` · ${fmt(k.share_outside, "share")} outside the census` : ""}</span>
             </div>
             <Illustration {...k.illustration} className="max-w-[16rem]" />
           </div>
