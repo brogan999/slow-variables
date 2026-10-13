@@ -604,3 +604,37 @@ def test_ask_knows_the_citation_kind_the_tables_and_a_golden_question():
     rec = citecheck.Record("price.x", "dm", [], "", "$28 – $36 per hour • Offers Equity")
     assert citecheck.check("The listing offers $28 to $36 per hour [dm:price.x].", {"dm:price.x": rec}).ok
     assert not citecheck.check("The listing offers $99 per hour [dm:price.x].", {"dm:price.x": rec}).ok
+
+
+# Part 57l: the landing opens on the field of marks; who pays whom is drawn; the board reads on a phone
+
+
+def test_the_landing_opens_on_the_field_and_keeps_its_small_print_short():
+    landing = (WEB / "app" / "data-market" / "page.tsx").read_text()
+    field = (WEB / "components" / "DataMarketField.tsx").read_text()
+    assert "<DataMarketField" in landing and landing.index("<DataMarketField") < landing.index('id="dm-how"')
+    assert "d.made_by.method" not in landing, "the long account of the method lives on the method page"
+    assert "A model&apos;s reading" in landing and 'href="/data-market/method"' in landing and "d.disclosure" in landing
+    assert "d.counts." in landing and "d.sources.n" in landing
+    assert '"use client"' not in field and "f.marks.map" in field and "k.name" in field and "hatch" in field
+    sources = (WEB / "app" / "data-market" / "sources" / "page.tsx").read_text()
+    assert "<DataMarketField" in sources, "one drawing of the field, used by both pages"
+    for banned in (".length", "Math.", ".reduce(", ".filter("):
+        assert banned not in landing + field, f"the page computes with {banned}"
+
+
+def test_who_pays_whom_is_drawn_as_a_flow_with_the_money_running_one_way():
+    landing = (WEB / "app" / "data-market" / "page.tsx").read_text()
+    flow = (WEB / "components" / "DataMarketFlow.tsx").read_text()
+    assert "<DataMarketFlow" in landing and '"use client"' not in flow
+    assert 'role="img"' in flow and "aria-label" in flow and "<svg" in flow
+    assert "published figures" in flow and "f.n" in flow and "f.says" in flow
+    for banned in (".length", "Math.", ".reduce(", ".filter("):
+        assert banned not in flow, f"the figure computes with {banned}"
+
+
+def test_the_board_and_the_prices_read_on_a_phone_without_sideways_scrolling():
+    board = (WEB / "app" / "data-market" / "vendors" / "page.tsx").read_text()
+    assert "hidden md:table-cell" in board and "md:hidden" in board and "min-w-[46rem]" not in board
+    prices = (WEB / "app" / "data-market" / "prices" / "page.tsx").read_text()
+    assert "min-w-[40rem]" not in prices and "md:grid-cols-" in prices
