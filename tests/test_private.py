@@ -20,7 +20,7 @@ MARK = "ZEBRA-FIXTURE-7"
 
 def _body(text: str, name: str) -> str:
     """One exported function's source, up to the next export."""
-    return re.split(r"\nexport ", text.split(f"function {name}(", 1)[1], maxsplit=1)[0]
+    return re.split(r"\nexport ", re.split(rf"function {name}[(<]", text, maxsplit=1)[1], maxsplit=1)[0]
 
 
 # the lock
@@ -74,7 +74,7 @@ def test_every_page_but_the_login_asks_for_a_session():
     assert len(pages) >= 3
     for p in pages:
         if p.parent.name != "login":
-            assert re.search(r"\b(session|load)\(", p.read_text()), p
+            assert re.search(r"\b(session|load)(<[^>]+>)?\(", p.read_text()), p
 
 
 def test_signing_in_is_a_post_from_this_site_that_answers_with_a_redirect():

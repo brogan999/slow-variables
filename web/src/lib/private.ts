@@ -41,3 +41,31 @@ export function issue() {
   const expiry = String(Date.now() + THIRTY_DAYS_MS);
   return { name: COOKIE, value: `${expiry}.${sign(expiry)}`, options: { httpOnly: true, secure: LIVE, sameSite: "lax" as const, path: "/private", maxAge: THIRTY_DAYS_S } };
 }
+
+export type PrivateDoc = { slug: string; title: string; kind: "doc" | "table"; file: string };
+export type PrivateSection = { slug: string; title: string; documents: PrivateDoc[] };
+export type PrivateManifest = { sections: PrivateSection[] };
+
+const cache = new Map<string, { at: number; data: unknown }>();
+const KEPT_MS = 180_000;
+
+/** One file of the bundle, or null without a session. The session is checked before anything is fetched or read
+    from the cache. `path` is "manifest.json" or a file name the manifest lists, never text from the request. */
+export async function load<T>(path: string): Promise<T | null> {
+  if (!(await session())) return null;
+  if (!/^[a-z0-9-]+\.json$/.test(path)) return null;
+  const hit = cache.get(path);
+  if (hit && Date.now() - hit.at < KEPT_MS) return hit.data as T;
+  // a local store for testing against invented files; the live host never reads it
+  const base = process.env.VERCEL ? undefined : process.env.PRIVATE_CONTENT_BASE;
+  const res = base
+    ? await fetch(`${base}/${path}`, { cache: "no-store" })
+    : await fetch(`https://api.github.com/repos/${process.env.PRIVATE_CONTENT_REPO}/contents/${path}`, {
+        headers: { Authorization: `Bearer ${process.env.PRIVATE_CONTENT_TOKEN}`, Accept: "application/vnd.github.raw+json" },
+        cache: "no-store",
+      });
+  if (!res.ok) throw new Error("the private store did not answer");
+  const data: unknown = await res.json();
+  cache.set(path, { at: Date.now(), data });
+  return data as T;
+}
