@@ -23,7 +23,7 @@ MODEL = re.compile(
 )
 # a census function id keeps its ampersand ("function.claims_&_underwriting")
 CITE = re.compile(
-    r"\[(obs|derived|ind|event|census|src|pos|claim|pred|corpus|note|fut):([A-Za-z0-9_.&\-]+)\]"
+    r"\[(obs|derived|ind|event|census|src|pos|claim|pred|corpus|note|fut|dm):([A-Za-z0-9_.&\-]+)\]"
 )
 # prose records (a writer's work, a position, a claim, a prediction): a number must appear in the text as a whole
 # token with its unit, so "15%" never matches inside "2015" or "150"
@@ -35,6 +35,7 @@ PROSE_KINDS = {
     "corpus",
     "note",
     "fut",
+    "dm",  # a data-market price or dossier passage: the words quoted from the fetched page
 }  # corpus: the private analyst's local reading only
 NUM = re.compile(
     r"(?<![\w.\-#])(?P<sign>[-−–])?(?P<cur>\$|€|£)?(?P<num>\d{1,3}(?:,\d{3})+|\d+(?:\.\d+)?)(?P<suffix>\s?(?:%|×|x\b|[kKmMbBtT](?!\w)|h\b|hours?\b|min\b|minutes?\b|days?\b|pp\b|points?\b|bn\b|trillion|billion|million))?(?![A-Za-z0-9]|-[A-Za-z0-9])",

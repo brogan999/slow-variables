@@ -3,7 +3,7 @@
 seed/data_market.yaml lists the vendors and the signals, in a model's words, read from the vendors' own pages. Each
 vendor is listed under a signal only with a page of its own that was fetched (seed/data_market_fetches.yaml), so a
 signal's count is a count of cited pages' owners; vendors whose growth evidence is weak are counted apart. Nothing here
-is a reading or a status, and no evaluator, metric or query tool reads it.
+is a reading or a status, and no evaluator or metric reads it; Ask reads only the quoted passages (see the end of this file).
 """
 
 from __future__ import annotations
@@ -164,7 +164,9 @@ def problems(doc: dict[str, Any], fetched: list[dict[str, Any]]) -> list[str]:
             errors.append(f"data market: review {r.get('id')} does not say how many it checked and changed")
         elif r["changed"] > r["checked"]:
             errors.append(f"data market: review {r.get('id')} changed more than it checked")
-    said = [x.get("says") for x in method.get("narrowing") or []] + [r.get("what") for r in method.get("reviews") or []]
+    said = [x.get("says") for x in method.get("narrowing") or []] + [
+        r.get("what") for r in method.get("reviews") or []
+    ]
     for text in [*said, *(method.get("left_out") or []), *(method.get("found_wrong") or [])]:
         if not str(text or "").strip() or _figure(str(text)):
             errors.append(f"data market: the method types a figure, or says nothing: {str(text)[:40]}")
@@ -223,7 +225,9 @@ def source_problems(
     return errors
 
 
-def _field(rows: list[dict[str, Any]], read: dict[str, str], titles: dict[str, str] | None = None) -> dict[str, Any]:
+def _field(
+    rows: list[dict[str, Any]], read: dict[str, str], titles: dict[str, str] | None = None
+) -> dict[str, Any]:
     """One mark a source, by family, most taken first; and the rows beneath, each with the links that could be read."""
 
     def order(r: dict[str, Any]) -> tuple[int, str]:
@@ -240,7 +244,15 @@ def _field(rows: list[dict[str, Any]], read: dict[str, str], titles: dict[str, s
             {
                 "name": fam,
                 "n": len(rs),
-                "marks": [{"id": r["id"], "level": r["taken"], "name": r["name"], "dossier": r.get("dossier") in titles} for r in rs],
+                "marks": [
+                    {
+                        "id": r["id"],
+                        "level": r["taken"],
+                        "name": r["name"],
+                        "dossier": r.get("dossier") in titles,
+                    }
+                    for r in rs
+                ],
                 "rows": [
                     {
                         "id": r["id"],
@@ -252,7 +264,10 @@ def _field(rows: list[dict[str, Any]], read: dict[str, str], titles: dict[str, s
                         "personal": PERSONAL.get(r.get("personal") or ""),
                         "there": [{"url": u, "retrieved_at": read[u]} for u in r.get("there") or []],
                         "unlinked": r["taken"] in (1, 2, 3) and not r.get("there"),
-                        "dossier": {"href": f"/data-market/dossiers/{r['dossier']}", "title": titles[r["dossier"]]}
+                        "dossier": {
+                            "href": f"/data-market/dossiers/{r['dossier']}",
+                            "title": titles[r["dossier"]],
+                        }
                         if r.get("dossier") in titles
                         else None,
                     }
@@ -356,7 +371,10 @@ def build(
     ]
     price_groups = [{**g, "n": len(g["rows"])} for g in price_groups if g["rows"]]
     method = doc.get("method") or {}
-    counted = {"kinds": len(records or []), "dossiers": len(examined or [])}  # the steps the seed does not type
+    counted = {
+        "kinds": len(records or []),
+        "dossiers": len(examined or []),
+    }  # the steps the seed does not type
     by_unit = {g["unit"]: g["n"] for g in price_groups}
     flow = [
         {
@@ -400,7 +418,9 @@ def build(
         "sources": _field(records or [], read, {d["id"]: d["title"] for d in examined or []}),
         "method": {
             **method,
-            "narrowing": [{**x, "n": counted.get(x["id"], x.get("n"))} for x in method.get("narrowing") or []],
+            "narrowing": [
+                {**x, "n": counted.get(x["id"], x.get("n"))} for x in method.get("narrowing") or []
+            ],
         },
         "flow": flow,
         "signals": signals,
@@ -509,7 +529,10 @@ def dossier_docs(rows: list[dict[str, Any]], fetched: list[dict[str, Any]]) -> l
                 blocks.append({"kind": "h2" if b.startswith("## ") else "h3", "text": b.lstrip("# ").strip()})
             elif b.startswith(">"):
                 lines = [ln.lstrip("> ").strip() for ln in b.split("\n")]
-                body = " ".join(ln for ln in lines if ln and not ln.startswith("*"))
+                by = [
+                    ln for ln in lines if ln.startswith("*") and not ln.startswith("**")
+                ]  # the italic line: who judged
+                body = " ".join(ln for ln in lines if ln and ln not in by)
                 blocks.append(
                     {
                         "kind": "judgement",
@@ -540,3 +563,92 @@ def dossier_docs(rows: list[dict[str, Any]], fetched: list[dict[str, Any]]) -> l
         ]
         out.append({"id": d["id"], "n": d["n"], "title": d["title"], "blocks": blocks, "sources": sources})
     return out
+
+
+# Ask (Part 57j). The query tables hold only passages quoted from fetched pages: a price with the passage that states
+# it, and the passage of a dossier source that states a figure or carries a quotation. The signals, the vendor
+# descriptions, the levels and the judgements are a model's reading and are in no table Ask can read.
+
+
+def _passages() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    doc, fetched = load(), fetches()
+    read = {f["url"]: str(f["retrieved_at"]) for f in reversed(fetched)}
+    name = {v["id"]: v["name"] for v in doc.get("vendors") or []}
+    prices = [
+        {
+            "id": f"price.{p['id']}",
+            "vendor": p["vendor"],
+            "vendor_name": name.get(p["vendor"], p["vendor"]),
+            "amount": p["amount"],
+            "unit": p["unit"],
+            "source_kind": WHOSE.get(p["whose"], p["whose"]),
+            "passage": p["snippet"],
+            "url": p["url"],
+            "retrieved_at": read.get(p["url"], ""),
+        }
+        for p in doc.get("prices") or []
+    ]
+    passages = []
+    for d in dossiers():
+        src = {x["key"]: x for x in d.get("sources") or []}
+        for kind, rows, field in (
+            ("figure", d.get("figures") or [], "snippet"),
+            ("quotation", d.get("quotes") or [], "quote"),
+        ):
+            for r in rows:
+                x = src.get(r["key"], {})
+                passages.append(
+                    {
+                        "id": f"dossier.{d['id']}.{r['key']}",
+                        "dossier": d["id"],
+                        "dossier_title": d["title"],
+                        "source_key": r["key"],
+                        "source_name": x.get("name", ""),
+                        "kind": kind,
+                        "passage": r[field],
+                        "url": x.get("url", ""),
+                        "retrieved_at": read.get(x.get("url", ""), ""),
+                    }
+                )
+    return prices, passages
+
+
+def create_tables(con: Any) -> None:
+    """data_market_prices and data_market_passages, in `con`: quoted passages only."""
+    prices, passages = _passages()
+    for table, rows in (("data_market_prices", prices), ("data_market_passages", passages)):
+        cols = list(rows[0]) if rows else ["id"]
+        con.execute(f"CREATE OR REPLACE TABLE {table} ({', '.join(c + ' VARCHAR' for c in cols)})")
+        if rows:
+            con.executemany(
+                f"INSERT INTO {table} VALUES ({', '.join('?' for _ in cols)})",
+                [[str(r[c]) for c in cols] for r in rows],
+            )
+
+
+def quoted(cite: str) -> dict[str, str] | None:
+    """What a [dm:<id>] citation rests on: the quoted words, a label and where the site shows them."""
+    prices, passages = _passages()
+    if cite.startswith("price."):
+        p = next((p for p in prices if p["id"] == cite), None)
+        return (
+            {
+                "label": f"{p['vendor_name']}, {p['source_kind']}",
+                "snippet": f"{p['amount']} {p['passage']}",
+                "href": "/data-market/prices",
+                "date": p["retrieved_at"],
+            }
+            if p
+            else None
+        )
+    if cite.startswith("dossier."):
+        rows = [x for x in passages if x["id"] == cite]
+        if not rows:
+            return None
+        return {
+            "label": f"{rows[0]['source_name']} (dossier: {rows[0]['dossier_title']})",
+            "snippet": " … ".join(dict.fromkeys(x["passage"] for x in rows)),
+            "href": f"/data-market/dossiers/{rows[0]['dossier']}#source-{rows[0]['source_key']}",
+            "date": rows[0]["retrieved_at"],
+        }
+    return None

@@ -371,6 +371,10 @@ def test_the_dossier_export_lays_out_blocks_and_numbers_sources_in_order_of_firs
     for d in docs:
         kinds = {b["kind"] for b in d["blocks"]}
         assert {"h2", "p", "judgement"} <= kinds, d["id"]
+        judged = [b for b in d["blocks"] if b["kind"] == "judgement"]
+        assert judged[0]["text"].strip() and "Anthropic" in judged[0]["by"], (
+            f"{d['id']}: the judgement is drawn, with who made it"
+        )
         used = [k for b in d["blocks"] for k in b.get("keys", [])]
         order = list(dict.fromkeys(used))
         assert [s["key"] for s in d["sources"] if s["n"]] == order, d["id"]
