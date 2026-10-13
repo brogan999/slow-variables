@@ -9117,5 +9117,400 @@
    }
   ],
   "title": "Two smaller records: small-aircraft defect logs, and forecasts set against what happened"
+ },
+ {
+  "blocks": [
+   {
+    "kind": "h2",
+    "text": "The record"
+   },
+   {
+    "keys": [
+     "onelondon"
+    ],
+    "kind": "p",
+    "text": "A hospital keeps one patient's story in several separate systems. Scans sit in an imaging archive, doctors' notes in the electronic record, blood results in a laboratory system, tissue slides in a pathology store. What happened later, such as a death, is often held by a registry outside the hospital. The systems share little more than a patient number. A poster about one London hospital trust's data lists 10+ billion rows of clinical facts across isolated systems and 8+ million medical images without standardised linkage [onelondon]."
+   },
+   {
+    "keys": [
+     "inspect-paper",
+     "inspect-paper",
+     "inspect-paper",
+     "inspect-site",
+     "inspect-paper"
+    ],
+    "kind": "p",
+    "text": "A worked example from a published dataset. Researchers at Stanford found 155,950 cases of a lung-clot CT scan in their hospital's research store [inspect-paper]. They sampled 26,475 scans with their reports and kept the 24,474 that had a report with a summary section [inspect-paper]. After further cleaning, the set held 23,248 scans for 19,402 patients [inspect-paper]. Each scan is joined to the radiologist's summary and to the patient's coded record, which runs to 225,444,005 rows, of which 4,410 are death records [inspect-site]. To allow release, the authors say they removed all unstructured text, and the set is offered \"for non-commercial use under a data use agreement\" [inspect-paper]."
+   },
+   {
+    "kind": "h2",
+    "text": "Why it might matter for training AI"
+   },
+   {
+    "keys": [
+     "pathos",
+     "protege-case",
+     "shandong"
+    ],
+    "kind": "p",
+    "text": "A model shown a scan beside the notes and results, and told what later happened, can learn what no single system contains. Some buyers pay for this. A biotechnology company building a cancer model announced agreements with a drug company and Tempus, whose de-identified cancer data it will use, that \"include $200 million in data licensing and model development fees\" to Tempus [pathos]. A broker, Protege, says it supplied an unnamed model builder, under the heading \"Millions of Verified Imaging Studies for Pre-Training in 30 Days\" [protege-case]. In China, a Shandong hospital signed a deal to sell a liver-disease set of 1000\u4f59\u4f8b (a little over a thousand cases) for 3\u4e07\u5143, which is thirty thousand yuan, to a firm building a diagnostic model, according to the university the hospital is attached to [shandong]."
+   },
+   {
+    "keys": [
+     "healthbench"
+    ],
+    "kind": "p",
+    "text": "In the sources read, no frontier AI lab was named as a buyer of hospital records. The named buyers are drug companies and medical-AI firms. One published benchmark for health models, HealthBench, draws on doctors' time: its responses are graded against \"rubrics created by 262 physicians\" [healthbench]."
+   },
+   {
+    "kind": "h2",
+    "text": "Who holds it and who may share it"
+   },
+   {
+    "keys": [],
+    "kind": "p",
+    "text": "The hospital or clinic holds the record. What it may do with it differs by country."
+   },
+   {
+    "keys": [
+     "hipaa-sale",
+     "hipaa-deid",
+     "hipaa-deid"
+    ],
+    "kind": "p",
+    "text": "**United States.** The health privacy rule says a hospital or its contractor \"may not sell protected health information\" unless the patient authorises it [hipaa-sale]. One route the rule gives for treating information as non-identifying is removing a list of identifiers [hipaa-deid]. The list includes \"Biometric identifiers, including finger and voice prints\" [hipaa-deid]."
+   },
+   {
+    "keys": [
+     "oaic-report",
+     "oaic-report",
+     "oaic-guidance"
+    ],
+    "kind": "p",
+    "text": "**Australia.** The privacy regulator examined I-MED, a radiology chain that passed \"less than 30 million patient studies\" to an AI joint venture without telling patients [oaic-report]. It found the data \"had been de-identified sufficiently that it was no longer personal information\", closed its preliminary inquiries, and added that its report \"should not be taken as an endorsement\" [oaic-report]. Its guidance for model developers says sensitive information \"generally requires consent to be collected\" [oaic-guidance]. The Privacy Act itself was not opened."
+   },
+   {
+    "keys": [
+     "politico"
+    ],
+    "kind": "p",
+    "text": "**Britain.** NHS England paused data processing for a model trained on the de-identified data of 57 million people after two doctors' bodies raised concerns; Politico reports that the family-doctor data involved had been approved for Covid research only [politico]."
+   },
+   {
+    "keys": [
+     "pipl",
+     "hgr",
+     "cross-border"
+    ],
+    "kind": "p",
+    "text": "**China.** The personal information law lists \u533b\u7597\u5065\u5eb7 (medical and health) information as sensitive, and says that processing sensitive information needs \u5355\u72ec\u540c\u610f, separate consent [pipl]. A 2019 regulation says \u7981\u6b62\u4e70\u5356\u4eba\u7c7b\u9057\u4f20\u8d44\u6e90, that buying and selling human genetic resources is banned, and bars foreign organisations and individuals, and bodies they set up or control, from collecting or storing them in China or providing them abroad [hgr]. Whether ordinary scans and notes count as genetic resources was not established. A 2024 rule says a data handler must apply to the national internet regulator for a data-export security assessment if, in a year, it sends abroad the sensitive personal information of 1\u4e07\u4eba\u4ee5\u4e0a, ten thousand people or more; the rule also lists exemptions [cross-border]."
+   },
+   {
+    "kind": "h2",
+    "text": "Who is already there"
+   },
+   {
+    "items": [
+     "**Epic Cosmos**, a pool of de-identified records from many health systems, has had a family of models pretrained on 118 million of its patients [epic-paper].",
+     "**Truveta**, which is owned by American health systems, pools their records and says 192 million images can be linked to each patient's history [truveta-paper].",
+     "**Brokers** include Protege, which lists notes, consultation audio and scans [protege-health], Gradient Health [gradient] and Segmed [segmed].",
+     "**Yidu Tech**, which provides data platforms to Chinese hospitals, says it has processed nearly 9 billion authorised records [yidu-report]. A Shenzhen hospital is reported to have completed a trade of a health data product through the city's data exchange [shenzhen], and a vendor's catalogue lists hospital records it calls anonymised for training medical models [catalogue].",
+     "**In Australia**, the I-MED scans went to Annalise.ai, then a joint venture between I-MED and Harrison.ai [oaic-report]. Heidi, a consultation-recording tool, says it \"does not use consultation data, session transcriptions, or generated notes to train its AI model in any way\" [heidi].",
+     "**Free research sets** exist, such as a Boston hospital's 227,835 chest X-ray studies with reports [mimic-cxr]."
+    ],
+    "keys": [
+     "epic-paper",
+     "truveta-paper",
+     "protege-health",
+     "gradient",
+     "segmed",
+     "yidu-report",
+     "shenzhen",
+     "catalogue",
+     "oaic-report",
+     "heidi",
+     "mimic-cxr"
+    ],
+    "kind": "ul"
+   },
+   {
+    "keys": [],
+    "kind": "p",
+    "text": "The record is not untouched."
+   },
+   {
+    "kind": "h2",
+    "text": "What would have to be stripped"
+   },
+   {
+    "keys": [
+     "oaic-report"
+    ],
+    "kind": "p",
+    "text": "Names, dates, addresses, record numbers, text burned into images, voices, and people named in notes. I-MED hashed identifiers, shifted dates and redacted text near the edges of images, and the regulator still recorded a \"very small number\" of instances where personal information was shared in error [oaic-report]."
+   },
+   {
+    "keys": [],
+    "kind": "p",
+    "text": "Removing names does not settle it:"
+   },
+   {
+    "items": [
+     "A network told whether two chest X-rays came from the same person \"with an AUC of 0.9940 and a classification accuracy of 95.55%\", where an AUC of one would be perfect [xray-study].",
+     "With every detected identifier masked, an attacking model \"still reidentified 9% of clinical notes\" [notes-study].",
+     "The better of two GPT models asked to find identifiers in notes reached a recall of 0.8318, meaning it found about five in six [gpt-study]."
+    ],
+    "keys": [
+     "xray-study",
+     "notes-study",
+     "gpt-study"
+    ],
+    "kind": "ul"
+   },
+   {
+    "keys": [],
+    "kind": "p",
+    "text": "Joining the scan to the notes and the outcome is what makes the record valuable, and it may also be what makes each patient easier to single out."
+   },
+   {
+    "kind": "h2",
+    "text": "What stands in the way"
+   },
+   {
+    "items": [
+     "The biggest pools already have models trained on them [epic-paper]. Whether their holders would sell the joined record is not shown.",
+     "Prices do not only rise. One drug company \"replaced two scheduled $42 million annual fees with three $14 million payments\" for Tempus data [trove].",
+     "Sharing that a regulator clears may still change what the holder does. Crikey reported that I-MED \"has since quietly begun asking customers for consent\" [crikey].",
+     "The joining is engineering done inside each hospital. The London trust lists \"High initial implementation costs\" among its limits [onelondon]."
+    ],
+    "keys": [
+     "epic-paper",
+     "trove",
+     "crikey",
+     "onelondon"
+    ],
+    "kind": "ul"
+   },
+   {
+    "by": "Claude, a model made by Anthropic, judged this on 13 October 2026; a separate run of the same model reviewed it.",
+    "kind": "judgement",
+    "text": ""
+   }
+  ],
+  "id": "clinical-records-with-outcomes",
+  "n": 42,
+  "sources": [
+   {
+    "key": "onelondon",
+    "n": 1,
+    "name": "OneLondon secure data environment poster",
+    "retrieved_at": "2026-10-12",
+    "url": "https://ukhealthdata.org/wp-content/uploads/2025/09/ohdsi-2025-poster-pipeline.pdf"
+   },
+   {
+    "key": "inspect-paper",
+    "n": 2,
+    "name": "INSPECT dataset paper, Stanford",
+    "retrieved_at": "2026-10-12",
+    "url": "https://proceedings.neurips.cc/paper_files/paper/2023/file/39736af1b9d87a1fddad9f84a6bcf64c-Paper-Datasets_and_Benchmarks.pdf"
+   },
+   {
+    "key": "inspect-site",
+    "n": 3,
+    "name": "INSPECT dataset site",
+    "retrieved_at": "2026-10-12",
+    "url": "https://som-shahlab.github.io/inspect-website/"
+   },
+   {
+    "key": "pathos",
+    "n": 4,
+    "name": "Pathos AI press release on its agreements with AstraZeneca and Tempus",
+    "retrieved_at": "2026-10-12",
+    "url": "https://www.pathos.com/pathos-signs-strategic-agreements-with-astrazeneca-and-tempus-to-develop-the-largest-multimodal-foundation-model-in-oncology"
+   },
+   {
+    "key": "protege-case",
+    "n": 5,
+    "name": "Protege case study on imaging for pre-training",
+    "retrieved_at": "2026-10-12",
+    "url": "https://withprotege.ai/articles/blog/healthcare-ai-case-study-millions-of-verified-imaging-studies-for-pre-training-in-30-days/"
+   },
+   {
+    "key": "shandong",
+    "n": 6,
+    "name": "Shandong First Medical University on the province's first medical-data trade",
+    "retrieved_at": "2026-10-12",
+    "url": "https://www.sdfmu.edu.cn/info/1255/117576.htm"
+   },
+   {
+    "key": "healthbench",
+    "n": 7,
+    "name": "HealthBench paper",
+    "retrieved_at": "2026-10-12",
+    "url": "https://arxiv.org/abs/2505.08775"
+   },
+   {
+    "key": "hipaa-sale",
+    "n": 8,
+    "name": "US health privacy rule, section on uses and disclosures",
+    "retrieved_at": "2026-10-12",
+    "url": "https://www.law.cornell.edu/cfr/text/45/164.502"
+   },
+   {
+    "key": "hipaa-deid",
+    "n": 9,
+    "name": "US health privacy rule, section on de-identification",
+    "retrieved_at": "2026-10-12",
+    "url": "https://www.law.cornell.edu/cfr/text/45/164.514"
+   },
+   {
+    "key": "oaic-report",
+    "n": 10,
+    "name": "Office of the Australian Information Commissioner, report into preliminary inquiries of I-MED",
+    "retrieved_at": "2026-10-12",
+    "url": "https://www.oaic.gov.au/privacy/privacy-assessments-and-decisions/privacy-decisions/Investigation-inquiry-reports/report-into-preliminary-inquiries-of-i-med"
+   },
+   {
+    "key": "oaic-guidance",
+    "n": 11,
+    "name": "Office of the Australian Information Commissioner, guidance on developing and training generative AI models",
+    "retrieved_at": "2026-10-12",
+    "url": "https://www.oaic.gov.au/privacy/privacy-guidance-for-organisations-and-government-agencies/guidance-on-privacy-and-developing-and-training-generative-ai-models"
+   },
+   {
+    "key": "politico",
+    "n": 12,
+    "name": "Politico on the NHS Foresight model",
+    "retrieved_at": "2026-10-12",
+    "url": "https://www.politico.eu/article/doctors-nhs-data-watchdog-patient-data-ai-uk-england-covid-pandemic-labour/"
+   },
+   {
+    "key": "pipl",
+    "n": 13,
+    "name": "China, Personal Information Protection Law",
+    "retrieved_at": "2026-10-12",
+    "url": "https://www.cac.gov.cn/2021-08/20/c_1631050028355286.htm"
+   },
+   {
+    "key": "hgr",
+    "n": 14,
+    "name": "China, Regulation on the Management of Human Genetic Resources",
+    "retrieved_at": "2026-10-12",
+    "url": "https://www.gov.cn/zhengce/content/2019-06/10/content_5398829.htm"
+   },
+   {
+    "key": "cross-border",
+    "n": 15,
+    "name": "China, Provisions on Promoting and Regulating Cross-Border Data Flows",
+    "retrieved_at": "2026-10-12",
+    "url": "https://www.cac.gov.cn/2024-03/22/c_1712776611775634.htm"
+   },
+   {
+    "key": "epic-paper",
+    "n": 16,
+    "name": "Paper on models trained on Epic Cosmos",
+    "retrieved_at": "2026-10-12",
+    "url": "https://arxiv.org/abs/2508.12104"
+   },
+   {
+    "key": "truveta-paper",
+    "n": 17,
+    "name": "Paper describing the Truveta platform",
+    "retrieved_at": "2026-10-12",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13418207/"
+   },
+   {
+    "key": "protege-health",
+    "n": 18,
+    "name": "Protege healthcare page for model builders",
+    "retrieved_at": "2026-10-12",
+    "url": "https://withprotege.ai/model-builders/healthcare"
+   },
+   {
+    "key": "gradient",
+    "n": 19,
+    "name": "Gradient Health announcement",
+    "retrieved_at": "2026-10-12",
+    "url": "https://gradienthealth.io/blog/gradient-health-expands-atlas-beyond-imaging-to-deliver-multimodal-data-for-medical-ai-development"
+   },
+   {
+    "key": "segmed",
+    "n": 20,
+    "name": "Segmed home page",
+    "retrieved_at": "2026-10-12",
+    "url": "https://www.segmed.ai/"
+   },
+   {
+    "key": "yidu-report",
+    "n": 21,
+    "name": "Yidu Tech annual report",
+    "retrieved_at": "2026-10-12",
+    "url": "https://www.hkexnews.hk/listedco/listconews/sehk/2026/0724/2026072401122.pdf"
+   },
+   {
+    "key": "shenzhen",
+    "n": 22,
+    "name": "Report of a Shenzhen hospital's sale through the city's data exchange",
+    "retrieved_at": "2026-10-12",
+    "url": "https://m.tech.china.com/digi/articles/20251029/202510291755943.html"
+   },
+   {
+    "key": "catalogue",
+    "n": 23,
+    "name": "\u6570\u5de8\u6709\u8c31 dataset catalogue",
+    "retrieved_at": "2026-10-12",
+    "url": "https://www.shujuyoupu.com/datasets/sale/"
+   },
+   {
+    "key": "heidi",
+    "n": 24,
+    "name": "Heidi help centre, how Heidi protects your data",
+    "retrieved_at": "2026-10-12",
+    "url": "https://support.heidihealth.com/en/articles/14648423-how-heidi-protects-your-data"
+   },
+   {
+    "key": "mimic-cxr",
+    "n": 25,
+    "name": "MIMIC-CXR dataset paper",
+    "retrieved_at": "2026-10-12",
+    "url": "https://www.nature.com/articles/s41597-019-0322-0"
+   },
+   {
+    "key": "xray-study",
+    "n": 26,
+    "name": "Study of patient re-identification from chest X-rays",
+    "retrieved_at": "2026-10-12",
+    "url": "https://www.nature.com/articles/s41598-022-19045-3"
+   },
+   {
+    "key": "notes-study",
+    "n": 27,
+    "name": "Study of patient re-identification from redacted clinical notes",
+    "retrieved_at": "2026-10-12",
+    "url": "https://arxiv.org/abs/2410.17035"
+   },
+   {
+    "key": "gpt-study",
+    "n": 28,
+    "name": "Study of GPT models for de-identifying clinical notes",
+    "retrieved_at": "2026-10-12",
+    "url": "https://www.nature.com/articles/s41598-025-86890-3"
+   },
+   {
+    "key": "trove",
+    "n": 29,
+    "name": "Trove Report on the Tempus and Recursion agreements",
+    "retrieved_at": "2026-10-12",
+    "url": "https://www.trovereport.com/p/recursion-turned-an-internal-model"
+   },
+   {
+    "key": "crikey",
+    "n": 30,
+    "name": "Crikey on the regulator's I-MED finding",
+    "retrieved_at": "2026-10-12",
+    "url": "https://www.crikey.com.au/2025/08/01/i-med-cleared-privacy-commissioner-ai-company-patient-scans/"
+   }
+  ],
+  "title": "Clinical records joined across scans, notes, tests and outcomes"
  }
 ]
