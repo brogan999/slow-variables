@@ -26,25 +26,21 @@ export default function DataMarketPricesPage() {
       {d.prices.groups.map((g) => (
         <section key={g.unit} className="flex flex-col gap-3">
           <h2 className="display text-2xl">{g.name} <span className="num text-base font-normal text-muted">{g.n}</span></h2>
-          <div className="panel overflow-x-auto">
-            <table className="w-full min-w-[40rem] border-collapse text-sm">
-              <tbody className="divide-y divide-grid">
-                {g.rows.map((r) => (
-                  <tr key={r.id} className="align-top">
-                    <td className="w-[9rem] px-4 py-2.5 font-medium text-ink"><Link href={`/data-market/vendors#${r.vendor}`} className="hover:underline">{r.name}</Link></td>
-                    <td className="px-2 py-2.5 text-ink-2">{r.what}</td>
-                    <td className="num w-[13rem] px-2 py-2.5 text-ink">{r.amount}</td>
-                    <td className="w-[22rem] px-4 py-2.5 text-[12.5px] leading-snug text-ink-2">
-                      <q className="font-serif">{r.snippet}</q>
-                      <span className="mt-1 block text-[11px] text-muted">
-                        <a href={r.url} rel="nofollow noopener" className={link}>{r.whose_name}</a> <span className="num">read {r.retrieved_at}</span>
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <ul className="panel divide-y divide-grid text-sm">
+            {g.rows.map((r) => (
+              <li key={r.id} className="grid grid-cols-1 gap-x-4 gap-y-1 px-4 py-3 md:grid-cols-[9rem_minmax(0,1fr)_13rem_22rem]">
+                <span className="font-medium text-ink"><Link href={`/data-market/vendors#${r.vendor}`} className="hover:underline">{r.name}</Link></span>
+                <span className="text-ink-2">{r.what}</span>
+                <span className="num text-ink">{r.amount}</span>
+                <span className="text-[12.5px] leading-snug text-ink-2">
+                  <q className="font-serif">{r.snippet}</q>
+                  <span className="mt-1 block text-[11px] text-muted">
+                    <a href={r.url} rel="nofollow noopener" className={link}>{r.whose_name}</a> <span className="num">read {r.retrieved_at}</span>
+                  </span>
+                </span>
+              </li>
+            ))}
+          </ul>
         </section>
       ))}
     </div>

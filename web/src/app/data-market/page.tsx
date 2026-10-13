@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { DataMarketField } from "@/components/DataMarketField";
+import { DataMarketFlow } from "@/components/DataMarketFlow";
 import { DataMarketNav } from "@/components/DataMarketNav";
 import { PageHeader } from "@/components/PageHeader";
 import { dataMarket } from "@/lib/data";
@@ -21,37 +23,43 @@ export default function DataMarketPage() {
         lede="AI models learn from examples. The public internet supplied the first of them for free. What comes next has to be made, bought or recorded, and a trade has grown up to supply it."
       />
 
-      <section id="dm-how" className="scroll-mt-24 flex flex-col gap-3 max-w-[68ch] text-ink-2 leading-relaxed">
-        <h2 className="display text-2xl text-ink">How this is read</h2>
-        <p>
-          Model builders do not publish what they buy. The firms that sell to them do, without meaning to. A vendor&apos;s job listings say which experts it needs. Its research posts say which problems its customers have set it. Its terms say what a customer may do with the goods.
+      <section id="dm-field" className="scroll-mt-24 flex flex-col gap-4">
+        <p className="max-w-[68ch] text-ink-2 leading-relaxed">
+          Each mark is one kind of record that work leaves behind and that could teach a model how the work is done: <span className="num text-ink">{d.sources.n}</span> of them, by family. The fill says whether anyone is yet selling it, giving it away or using their own to train AI. <Link href="/data-market/sources" className={link}>Every kind of record, with what was found</Link>.
         </p>
-        <p>
-          This page reads those pages for <span className="num text-ink">{d.counts.sellers}</span> vendors with evidence of fast growth in the past year, <span className="num text-ink">{d.counts.weak}</span> more whose evidence of growth is weak, and <span className="num text-ink">{d.counts.builders}</span> companies that build models, for robots or for language, whose pages say what they train on or buy. It cites <span className="num text-ink">{d.counts.pages}</span> pages, each fetched and dated. Nothing comes from social media.
-        </p>
-        <p className="border-l-2 border-dotted border-axis pl-3 text-[13.5px] leading-snug">
-          <span className="text-muted">A model&apos;s reading of the vendors&apos; own pages, not a measurement. </span>
-          {d.made_by.method} Then {d.made_by.reviewed_by}. A page shows what a company says of itself; the site reports that it says so and does not vouch that it is true. <Link href="/data-market/method" className={link}>How it was made, and what was found wrong with it</Link>.
-        </p>
-        <p className="text-[13.5px] leading-snug">{d.disclosure}</p>
+        <DataMarketField sources={d.sources} base="/data-market/sources" dense />
+      </section>
+
+      <section id="dm-how" className="scroll-mt-24 grid grid-cols-1 gap-x-12 gap-y-6 lg:grid-cols-[minmax(0,1fr)_19rem]">
+        <div className="flex max-w-[68ch] flex-col gap-3 text-ink-2 leading-relaxed">
+          <h2 className="display text-2xl text-ink">How this is read</h2>
+          <p>
+            Model builders do not publish what they buy. The firms that sell to them do, without meaning to. A vendor&apos;s job listings say which experts it needs. Its research posts say which problems its customers have set it. Its terms say what a customer may do with the goods.
+          </p>
+          <p>
+            This section reads those pages, each fetched and dated. Nothing comes from social media. What a page says is the company&apos;s own account of itself; the site reports that it says so and does not vouch that it is true.
+          </p>
+          <p className="border-l-2 border-dotted border-axis pl-3 text-[13.5px] leading-snug">
+            <span className="text-muted">A model&apos;s reading of the vendors&apos; own pages, not a measurement. </span>
+            A model read the pages and wrote every line here; further runs of the same model checked it, and no person reviewed each line. {d.disclosure} <Link href="/data-market/method" className={link}>How it was made, and what is wrong with it</Link>.
+          </p>
+        </div>
+        <dl className="panel grid grid-cols-2 gap-x-4 gap-y-4 self-start p-5 lg:grid-cols-1">
+          <div><dt className="eyebrow">Vendors read</dt><dd className="num text-[1.9rem] leading-none text-ink">{d.counts.sellers}</dd><dd className="text-xs text-muted">with evidence of fast growth, and {d.counts.weak} more on weaker evidence</dd></div>
+          <div><dt className="eyebrow">Model builders</dt><dd className="num text-[1.9rem] leading-none text-ink">{d.counts.builders}</dd><dd className="text-xs text-muted">whose pages say what they train on or buy</dd></div>
+          <div><dt className="eyebrow">Signals</dt><dd className="num text-[1.9rem] leading-none text-ink">{d.counts.signals}</dd><dd className="text-xs text-muted">things the pages show buyers asking for</dd></div>
+          <div><dt className="eyebrow">Pages cited</dt><dd className="num text-[1.9rem] leading-none text-ink">{d.counts.pages}</dd><dd className="text-xs text-muted">each fetched under this site&apos;s rules</dd></div>
+        </dl>
       </section>
 
       <section id="dm-flow" className="scroll-mt-24 flex flex-col gap-3">
         <div className="flex flex-col gap-2 max-w-[68ch]">
           <h2 className="display text-2xl">Who pays whom, and which prices are published</h2>
           <p className="text-ink-2 leading-relaxed">
-            Money runs from model builders to vendors, and from vendors to the people and companies whose work or records become the data. The count on each arrow is how many published figures this site could quote for it. <Link href="/data-market/prices" className={link}>Every figure, with its passage</Link>.
+            Money runs from model builders to vendors, and from vendors to the people and companies whose work or records become the data. The number on each arrow is how many published figures this site could quote for it; the faint arrow is the one almost nobody publishes. <Link href="/data-market/prices" className={link}>Every figure, with its passage</Link>.
           </p>
         </div>
-        <ol className="grid grid-cols-1 gap-3 md:grid-cols-3">
-          {d.flow.map((f) => (
-            <li key={f.id} className="panel flex flex-col gap-2 p-4">
-              <span className="flex flex-wrap items-center gap-x-2 text-[15px] font-medium text-ink">{f.from} <span aria-hidden className="text-muted">→</span> {f.to}</span>
-              <span className="num text-[1.75rem] leading-none text-ink">{f.n} <span className="font-sans text-xs text-muted">published figures quoted</span></span>
-              <span className="text-[13px] leading-snug text-ink-2">{f.says}</span>
-            </li>
-          ))}
-        </ol>
+        <DataMarketFlow flow={d.flow} />
       </section>
 
       <section id="dm-signals" className="scroll-mt-24 flex flex-col gap-4">

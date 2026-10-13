@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { DataMarketField, Mark } from "@/components/DataMarketField";
 import { DataMarketNav } from "@/components/DataMarketNav";
 import { OpenOnHash } from "@/components/OpenOnHash";
 import { PageHeader } from "@/components/PageHeader";
@@ -10,20 +11,6 @@ export const metadata = {
 };
 
 const link = "underline decoration-grid underline-offset-4";
-
-// One mark for each level: solid where the record is openly sold or released, hatched where an incumbent uses its own, a small dot
-// where only nearby players were found, an open square where nobody was, and a faint square where no search was run.
-const MARK: Record<string, string> = {
-  "3": "bg-slow",
-  "2": "hatch text-slow",
-  "1": "bg-[radial-gradient(circle,var(--slow)_0_2px,transparent_2.5px)] shadow-[inset_0_0_0_1px_var(--grid)]",
-  "0": "shadow-[inset_0_0_0_1px_var(--axis)]",
-  null: "bg-grid",
-};
-
-function Mark({ level, className = "" }: { level: number | null; className?: string }) {
-  return <span aria-hidden className={`inline-block h-2.5 w-2.5 rounded-[1px] ${MARK[String(level)]} ${className}`} />;
-}
 
 export default function DataMarketSourcesPage() {
   const d = dataMarket();
@@ -41,25 +28,8 @@ export default function DataMarketSourcesPage() {
         For each of the <span className="num text-ink">{d.sources.n}</span> kinds of record, research runs searched for anyone selling it, or using their own, to train AI, and sorted what they found into the levels below. &ldquo;Nobody found&rdquo; means that search found nobody, not that nobody exists. Links are shown only where the page could be read under this site&apos;s rules; where a level rests on a finding with no link that could be read, the row says so. {d.disclosure} <Link href="/methodology#company-claims" className={link}>How this is made</Link>.
       </p>
 
-      <section id="dm-field" className="scroll-mt-24 flex flex-col gap-4">
-        <ul className="flex flex-wrap gap-x-5 gap-y-1.5 text-[13px] text-ink-2">
-          {d.sources.key.map((k) => (
-            <li key={String(k.level)} className="flex items-center gap-1.5"><Mark level={k.level} /> {k.name} <span className="num text-muted">{k.n}</span></li>
-          ))}
-          <li className="flex items-center gap-1.5"><span aria-hidden className="inline-block h-2.5 w-2.5 rounded-[1px] outline outline-2 outline-offset-1 outline-fast" /> <Link href="/data-market/dossiers" className={link}>Examined in a dossier</Link> <span className="num text-muted">{d.sources.examined}</span></li>
-        </ul>
-        <div className="grid grid-cols-1 gap-x-4 gap-y-2 md:grid-cols-[15rem_1fr]">
-          {d.sources.families.map((f) => (
-            <div key={f.name} className="contents">
-              <a href={`#${f.rows[0].id}-family`} className="text-[12.5px] leading-tight text-ink-2 hover:text-ink md:text-right">{f.name} <span className="num text-muted">{f.n}</span></a>
-              <div className="flex flex-wrap content-start gap-[3px]">
-                {f.marks.map((m) => (
-                  <a key={m.id} href={`#${m.id}`} title={m.name} aria-label={m.name}><Mark level={m.level} className={m.dossier ? "block outline outline-2 outline-offset-1 outline-fast" : "block"} /></a>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
+      <section id="dm-field" className="scroll-mt-24">
+        <DataMarketField sources={d.sources} />
       </section>
 
       <section id="dm-families" className="scroll-mt-24 flex flex-col gap-2">

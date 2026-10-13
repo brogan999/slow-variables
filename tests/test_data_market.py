@@ -131,7 +131,7 @@ def test_the_export_counts_what_the_page_prints_and_sizes_each_bar():
 def test_the_page_draws_the_export_labels_the_reading_and_computes_nothing():
     page = (WEB / "app" / "data-market" / "page.tsx").read_text()
     assert "dataMarket()" in page and '"use client"' not in page
-    assert "d.counts." in page and "d.disclosure" in page and "d.made_by" in page
+    assert "d.counts." in page and "d.disclosure" in page
     assert "A model&apos;s reading of the vendors&apos; own pages" in page
     assert "weak evidence" in page and "<details" in page and "e.retrieved_at" in page
     assert 'rel="nofollow noopener"' in page, "links out to vendors pass no endorsement"
@@ -310,7 +310,10 @@ def test_the_field_lays_out_one_mark_a_source_by_family_and_counts_each_level():
 def test_the_sources_page_draws_the_field_and_says_what_a_mark_rests_on():
     page = (WEB / "app" / "data-market" / "sources" / "page.tsx").read_text()
     assert "dataMarket()" in page and '"use client"' not in page and "<DataMarketNav" in page
-    assert "d.sources.families.map" in page and "d.sources.key.map" in page and "hatch" in page
+    page += (
+        WEB / "components" / "DataMarketField.tsx"
+    ).read_text()  # the field is drawn by a component both pages use
+    assert "d.sources.families.map" in page and "sources.key.map" in page and "hatch" in page
     assert "A model&apos;s reading of a search" in page and "no link that could be read" in page
     assert 'rel="nofollow noopener"' in page
     for banned in (".length", "Math.", ".reduce(", ".filter("):
@@ -488,7 +491,8 @@ def test_a_source_examined_in_a_dossier_links_to_it_and_only_to_a_real_one():
         assert marks[s["id"]]["dossier"] is True
     assert doc["examined"] == len(linked)
     page = (WEB / "app" / "data-market" / "sources" / "page.tsx").read_text()
-    assert "r.dossier" in page and "m.dossier" in page and "d.sources.examined" in page
+    page += (WEB / "components" / "DataMarketField.tsx").read_text()
+    assert "r.dossier" in page and "m.dossier" in page and "sources.examined" in page
 
 
 def test_the_method_counts_are_in_the_seed_and_each_review_says_what_it_changed():
@@ -535,7 +539,7 @@ def test_the_method_page_and_the_landing_draw_them():
     for banned in (".length", "Math.", ".reduce(", ".filter("):
         assert banned not in page, f"the page computes with {banned}"
     landing = (WEB / "app" / "data-market" / "page.tsx").read_text()
-    assert "d.flow.map" in landing and 'href="/data-market/method"' in landing
+    assert "<DataMarketFlow" in landing and 'href="/data-market/method"' in landing
     assert '"/data-market/method"' in (WEB / "components" / "DataMarketNav.tsx").read_text()
     contents = (WEB / "lib" / "contents.ts").read_text()
     assert '"/data-market/method": {' in contents and '"dm-flow"' in contents
@@ -614,7 +618,11 @@ def test_the_landing_opens_on_the_field_and_keeps_its_small_print_short():
     field = (WEB / "components" / "DataMarketField.tsx").read_text()
     assert "<DataMarketField" in landing and landing.index("<DataMarketField") < landing.index('id="dm-how"')
     assert "d.made_by.method" not in landing, "the long account of the method lives on the method page"
-    assert "A model&apos;s reading" in landing and 'href="/data-market/method"' in landing and "d.disclosure" in landing
+    assert (
+        "A model&apos;s reading" in landing
+        and 'href="/data-market/method"' in landing
+        and "d.disclosure" in landing
+    )
     assert "d.counts." in landing and "d.sources.n" in landing
     assert '"use client"' not in field and "f.marks.map" in field and "k.name" in field and "hatch" in field
     sources = (WEB / "app" / "data-market" / "sources" / "page.tsx").read_text()

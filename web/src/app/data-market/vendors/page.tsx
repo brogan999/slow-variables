@@ -35,13 +35,13 @@ export default function DataMarketVendorsPage() {
             <p className="text-sm leading-relaxed text-ink-2">{g.says}</p>
           </div>
           <div className="panel overflow-x-auto">
-            <table className="w-full min-w-[46rem] border-collapse text-sm">
+            <table className="w-full border-collapse text-sm">
               <thead>
                 <tr className="border-b border-grid align-bottom">
                   <th className="px-4 py-2 text-left eyebrow">Vendor</th>
                   <th className="px-2 py-2 text-right eyebrow">Signals</th>
                   {d.board.columns.map((c) => (
-                    <th key={c.theme} className="px-1 py-2 eyebrow !tracking-[0.06em]"><span className="inline-block rotate-180 [writing-mode:vertical-rl]">{c.label}</span></th>
+                    <th key={c.theme} className="hidden md:table-cell px-1 py-2 eyebrow !tracking-[0.06em]"><span className="inline-block rotate-180 [writing-mode:vertical-rl]">{c.label}</span></th>
                   ))}
                 </tr>
               </thead>
@@ -50,7 +50,11 @@ export default function DataMarketVendorsPage() {
                   <tr key={v.id} id={v.id} className="scroll-mt-24 align-top">
                     <td className="px-4 py-2.5">
                       <details>
-                        <summary className="cursor-pointer list-none font-medium text-ink hover:underline">{v.name}</summary>
+                        <summary className="cursor-pointer list-none"><span className="font-medium text-ink hover:underline">{v.name}</span>
+                        <span className="mt-1 flex flex-wrap gap-x-2 gap-y-0.5 text-[11.5px] leading-snug text-muted md:hidden">
+                          {v.cells.map((on, i) => (on ? <span key={d.board.columns[i].theme} className="flex items-center gap-1"><span aria-hidden className={`inline-block h-1.5 w-1.5 rounded-full ${g.id === "weak" ? "border border-slow" : "bg-slow"}`} />{d.board.columns[i].label}</span> : null))}
+                        </span>
+                        </summary>
                         <div className="mt-1.5 flex max-w-[52ch] flex-col gap-2 pb-1 text-[13px] leading-snug text-ink-2">
                           <p>{v.sells}</p>
                           <ul className="flex flex-col gap-1">
@@ -68,7 +72,7 @@ export default function DataMarketVendorsPage() {
                     </td>
                     <td className="num px-2 py-2.5 text-right text-ink">{v.n_signals}</td>
                     {v.cells.map((on, i) => (
-                      <td key={d.board.columns[i].theme} className="px-1 py-2.5 text-center">
+                      <td key={d.board.columns[i].theme} className="hidden md:table-cell px-1 py-2.5 text-center">
                         {on ? <span className={`inline-block h-2.5 w-2.5 rounded-full ${g.id === "weak" ? "border border-slow" : "bg-slow"}`} title={d.board.columns[i].label} /> : null}
                       </td>
                     ))}
