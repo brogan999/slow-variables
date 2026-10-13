@@ -454,3 +454,65 @@ def test_the_private_page_cannot_be_written_into_the_repository_and_names_no_pri
     text = script.read_text()
     for banned in ("~/", "/Users/", "docs/private"):
         assert banned not in text, banned
+
+
+# Part 57i: how it was made, who pays whom, and a mark that leads to its dossier
+
+
+def test_a_source_examined_in_a_dossier_links_to_it_and_only_to_a_real_one():
+    ids = {d["id"] for d in DOSSIERS}
+    linked = [s for s in SOURCES if s.get("dossier")]
+    assert len(linked) >= 30 and {s["dossier"] for s in linked} <= ids
+    bad = copy.deepcopy(SOURCES)
+    bad[0]["dossier"] = "no-such-dossier"
+    assert any("names dossier no-such-dossier, which does not exist" in e for e in dm.source_problems(bad, FETCHES, ids))
+    doc = dm.build(SPEC, FETCHES, SOURCES, DOSSIERS)["sources"]
+    rows = {r["id"]: r for f in doc["families"] for r in f["rows"]}
+    marks = {m["id"]: m for f in doc["families"] for m in f["marks"]}
+    for s in linked:
+        assert rows[s["id"]]["dossier"]["href"] == f"/data-market/dossiers/{s['dossier']}" and rows[s["id"]]["dossier"]["title"]
+        assert marks[s["id"]]["dossier"] is True
+    assert doc["examined"] == len(linked)
+    page = (WEB / "app" / "data-market" / "sources" / "page.tsx").read_text()
+    assert "r.dossier" in page and "m.dossier" in page and "d.sources.examined" in page
+
+
+def test_the_method_counts_are_in_the_seed_and_each_review_says_what_it_changed():
+    m = SPEC["method"]
+    assert [s["id"] for s in m["narrowing"]] == ["candidates", "kinds", "dossiers"]
+    doc = dm.build(SPEC, FETCHES, SOURCES, DOSSIERS)["method"]
+    assert doc["narrowing"][2]["n"] == len(DOSSIERS), "the last step is counted, not typed"
+    assert doc["narrowing"][0]["n"] > doc["narrowing"][1]["n"] > doc["narrowing"][2]["n"]
+    for r in doc["reviews"]:
+        assert r["what"] and r["checked"] > 0 and 0 <= r["changed"] <= r["checked"], r["id"]
+    for text in [s["says"] for s in m["narrowing"]] + [r["what"] for r in m["reviews"]] + m["left_out"] + m["found_wrong"]:
+        assert not dm._figure(text), text
+    broken = copy.deepcopy(SPEC)
+    broken["method"]["reviews"][0]["changed"] = broken["method"]["reviews"][0]["checked"] + 1
+    assert any("changed more than it checked" in e for e in dm.problems(broken, FETCHES))
+
+
+def test_who_pays_whom_counts_the_published_figures_on_each_side():
+    doc = dm.build(SPEC, FETCHES, SOURCES, DOSSIERS)
+    flow = doc["flow"]
+    assert [s["id"] for s in flow] == ["people", "companies", "builders"]
+    units = {g["unit"]: g["n"] for g in doc["prices"]["groups"]}
+    assert flow[0]["n"] == sum(units.get(u, 0) for u in ("per hour", "salary", "per task"))
+    assert flow[1]["n"] == units.get("per company", 0)
+    for s in flow:
+        assert s["from"] and s["to"] and s["says"]
+
+
+def test_the_method_page_and_the_landing_draw_them():
+    page = (WEB / "app" / "data-market" / "method" / "page.tsx").read_text()
+    assert "dataMarket()" in page and '"use client"' not in page and "<DataMarketNav" in page
+    for needle in ("d.method.narrowing.map", "d.method.reviews.map", "d.method.left_out.map", "d.method.found_wrong.map"):
+        assert needle in page, needle
+    for banned in (".length", "Math.", ".reduce(", ".filter("):
+        assert banned not in page, f"the page computes with {banned}"
+    landing = (WEB / "app" / "data-market" / "page.tsx").read_text()
+    assert "d.flow.map" in landing and 'href="/data-market/method"' in landing
+    assert '"/data-market/method"' in (WEB / "components" / "DataMarketNav.tsx").read_text()
+    contents = (WEB / "lib" / "contents.ts").read_text()
+    assert '"/data-market/method": {' in contents and '"dm-flow"' in contents
+    assert '"/data-market/method"' in (WEB / "app" / "sitemap.ts").read_text()
