@@ -116,6 +116,7 @@ def test_the_export_counts_what_the_page_prints_and_sizes_each_bar():
         "builders": sum(v["role"] == "builder" for v in vendors),
         "signals": len(SPEC["signals"]),
         "pages": len({e["url"] for s in SPEC["signals"] for e in s["evidence"]}),
+        "prices": len(SPEC["prices"]),
     }
     top = max(s["evidenced"] for s in doc["signals"])
     for s in doc["signals"]:
@@ -194,3 +195,60 @@ def test_the_board_page_draws_the_export_marks_weak_evidence_and_the_section_has
     )
     assert "dataMarket().vendors" in (WEB / "app" / "search.json" / "route.ts").read_text()
     assert '"/data-market/vendors"' in (WEB / "app" / "sitemap.ts").read_text()
+
+
+# Part 57d: prices and pay, each quoted from its page
+
+
+def test_every_price_states_its_figures_in_a_snippet_from_a_fetched_page():
+    assert SPEC["prices"], "the seed carries prices"
+    fetched = {f["url"] for f in FETCHES if f.get("http_status") == 200}
+    vendors = {v["id"] for v in SPEC["vendors"]}
+    for p in SPEC["prices"]:
+        assert p["vendor"] in vendors and p["url"] in fetched, p["id"]
+        assert dm.figures(p["amount"]) and set(dm.figures(p["amount"])) <= set(dm.figures(p["snippet"])), p[
+            "id"
+        ]
+
+
+def test_a_broken_price_names_each_problem():
+    doc = copy.deepcopy(SPEC)
+    a, b, c = doc["prices"][0], doc["prices"][1], doc["prices"][2]
+    a["amount"] = "$987,654 a year"
+    b["what"] = "Pay for 40 experts"
+    c["unit"], c["whose"], c["vendor"] = "per fortnight", "rumour", "nobody-inc"
+    doc["prices"].append(copy.deepcopy(doc["prices"][3]))
+    errors = "\n".join(dm.problems(doc, FETCHES))
+    for needle in (
+        f"price {a['id']} gives a figure its snippet does not state",
+        f"price {b['id']} types a figure in its description",
+        f"price {c['id']} has unit per fortnight",
+        f"price {c['id']} has source kind rumour",
+        f"price {c['id']} names nobody-inc, which is not a vendor",
+        f"price {doc['prices'][3]['id']} is given twice",
+    ):
+        assert needle in errors, needle
+
+
+def test_the_export_groups_prices_by_unit_and_the_page_quotes_each():
+    doc = dm.build(SPEC, FETCHES)
+    rows = [r for g in doc["prices"]["groups"] for r in g["rows"]]
+    assert len(rows) == len(SPEC["prices"]) == doc["counts"]["prices"]
+    for g in doc["prices"]["groups"]:
+        assert g["n"] == len(g["rows"]) and g["name"]
+        for r in g["rows"]:
+            assert r["snippet"] and r["retrieved_at"] and r["name"] and r["whose_name"]
+    page = (WEB / "app" / "data-market" / "prices" / "page.tsx").read_text()
+    assert "dataMarket()" in page and '"use client"' not in page and "<DataMarketNav" in page
+    assert "d.prices.groups.map" in page and "r.snippet" in page and 'rel="nofollow noopener"' in page
+    assert "quoted from the page" in page and "a model&apos;s" in page
+    for banned in (".length", "Math.", ".reduce(", ".filter("):
+        assert banned not in page, f"the page computes with {banned}"
+    assert '"/data-market/prices"' in (WEB / "components" / "DataMarketNav.tsx").read_text()
+    contents = (WEB / "lib" / "contents.ts").read_text()
+    assert (
+        '"/data-market/prices": {' in contents
+        and '"/data-market/prices"' in contents.split("export const UNDER")[1]
+    )
+    assert '"/data-market/prices"' in (WEB / "app" / "sitemap.ts").read_text()
+    assert 'href="/data-market/prices"' in (WEB / "app" / "data-market" / "page.tsx").read_text()

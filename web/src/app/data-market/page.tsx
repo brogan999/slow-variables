@@ -80,7 +80,7 @@ export default function DataMarketPage() {
       <section id="dm-limits" className="scroll-mt-24 flex flex-col gap-3 max-w-[68ch] text-ink-2 leading-relaxed">
         <h2 className="display text-2xl text-ink">What the pages do not show</h2>
         <p>
-          Almost no page gives a price that a model builder paid. The prices that are published are what vendors pay their experts and what they offer companies for records. They are left off this page until each is checked against its source.
+          Almost no page gives a price that a model builder paid. The prices that are published are what vendors pay their experts and what they offer companies for records. Those that could be checked against their page are on <Link href="/data-market/prices" className={link}>prices and pay</Link>.
         </p>
         <p>
           The vendors disagree with each other. Some say data made by people matters less with each new model; others say data made by machines helps less at the frontier.

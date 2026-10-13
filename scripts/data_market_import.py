@@ -119,7 +119,10 @@ def main(args: list[str]) -> None:
             f["url"]: {**f, "retrieved_at": date.fromisoformat(f["retrieved_at"])}
             for f in json.loads(attempts.read_text())
         }
-    todo = sorted({r["url"] for r in pages} - set(known))
+    todo = sorted(
+        ({r["url"] for r in pages} | {r["url"] for r in db.execute("select url from public_prices")})
+        - set(known)
+    )
     if todo and "--no-fetch" not in args:
         with ThreadPoolExecutor(8) as pool:
             for rec in pool.map(fetch, todo):
@@ -148,6 +151,21 @@ def main(args: list[str]) -> None:
         for r in db.execute("select * from rollup order by id")
         if r["id"] in pairs
     ]
+    # prices: each reviewed row, with the snippet cut from the fetched page that states its figures
+    prices = [
+        {
+            "id": f"{r['vendor']}-{r['id']}",
+            "vendor": r["vendor"],
+            "what": r["what"],
+            "amount": r["amount"],
+            "unit": r["unit"],
+            "whose": r["whose"],
+            "url": r["url"],
+            "snippet": r["snippet"],
+        }
+        for r in db.execute("select * from public_prices order by vendor, id")
+        if r["url"] in ok and not SOCIAL.search(r["url"])
+    ]
     used = {e["url"] for s in signals for e in s["evidence"]}
     out_vendors = [
         {
@@ -170,11 +188,16 @@ def main(args: list[str]) -> None:
         "board": doc.get("board") or BOARD,
         "vendors": out_vendors,
         "signals": signals,
+        "prices": [p for p in prices if p["vendor"] in {v["id"] for v in out_vendors}],
     }
     SPEC.write_text(yaml.safe_dump(doc, sort_keys=False, allow_unicode=True, width=120))
     FETCHES.write_text(
         "# Written by scripts/data_market_import.py: one fetch record per vendor page the seed cites.\n"
-        + yaml.safe_dump({"fetches": [known[u] for u in sorted(used)]}, sort_keys=False, width=1000)
+        + yaml.safe_dump(
+            {"fetches": [known[u] for u in sorted(used | {p["url"] for p in doc["prices"]})]},
+            sort_keys=False,
+            width=1000,
+        )
     )
     left = sorted(ids - {v["id"] for v in out_vendors})
     print(
