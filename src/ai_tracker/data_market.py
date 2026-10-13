@@ -33,7 +33,7 @@ UNITS = {
     "other": "Other sums",
 }
 LEVELS = {
-    3: "Openly sold for training AI",
+    3: "Openly sold or released for training AI",
     2: "An incumbent uses its own",
     1: "Only nearby players",
     0: "Nobody found",

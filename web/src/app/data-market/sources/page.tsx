@@ -11,7 +11,7 @@ export const metadata = {
 
 const link = "underline decoration-grid underline-offset-4";
 
-// One mark for each level: solid where the record is openly sold, hatched where an incumbent uses its own, a small dot
+// One mark for each level: solid where the record is openly sold or released, hatched where an incumbent uses its own, a small dot
 // where only nearby players were found, an open square where nobody was, and a faint square where no search was run.
 const MARK: Record<string, string> = {
   "3": "bg-slow",
@@ -34,7 +34,7 @@ export default function DataMarketSourcesPage() {
       <PageHeader
         eyebrow={<><Link href="/capture" className="hover:text-ink">Who profits</Link> · <Link href="/data-market" className="hover:text-ink">the data market</Link></>}
         title="Every kind of record, and who is already there"
-        lede="Work leaves records: claim files, inspection reports, dispatch logs, exam scripts. Each could teach a model how the work is done. Each mark below is one kind of record, and its fill says whether anyone is yet selling or using it to train AI."
+        lede="Work leaves records: claim files, inspection reports, dispatch logs, exam scripts. Each could teach a model how the work is done. Each mark below is one kind of record, and its fill says whether anyone is yet selling it, giving it away or using it to train AI."
       />
       <p className="max-w-[68ch] border-l-2 border-dotted border-axis pl-3 text-[13.5px] leading-snug text-ink-2">
         <span className="text-muted">A model&apos;s reading of a search, not a measurement. </span>

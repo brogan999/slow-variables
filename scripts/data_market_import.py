@@ -211,7 +211,9 @@ def main(args: list[str]) -> None:
             "personal": r["personal_data"]
             if r["personal_data"] in ("none", "ordinary", "sensitive", "children")
             else None,
-            "taken": int(r["taken_level"]) if str(r["taken_level"]).isdigit() else None,
+            "taken": int(r["public_level"])
+            if str(r["public_level"]).isdigit()
+            else None,  # the level after the reviewing run
             "there": links.get(r["cluster_id"], []),
         }
         for r in db.execute("select * from sources order by family, cluster_id")
