@@ -275,3 +275,11 @@ def test_the_runbook_warns_about_preview_and_the_plan_records_the_part():
     assert "Production" in text and "rotate" in text.lower()
     plan = (ROOT / "docs" / "plan.md").read_text()
     assert "## Part 59 (13 Oct 2026): a private area behind a login" in plan
+
+
+def test_a_line_that_opens_with_a_bar_but_is_no_table_is_a_paragraph_not_a_hang(tmp_path):
+    src = _source(tmp_path)
+    (src / "notes" / "second.md").write_text("| a lone bar, with no rule beneath it\n\nthen a paragraph\n")
+    r = subprocess.run([sys.executable, str(BUNDLER), str(src), str(tmp_path / "out")], capture_output=True, text=True, timeout=20)
+    assert r.returncode == 0, r.stderr
+    assert "a lone bar" in (tmp_path / "out" / "example--second.json").read_text()
