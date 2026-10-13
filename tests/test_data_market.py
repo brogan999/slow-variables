@@ -404,7 +404,9 @@ def _private(tmp_path):
         "**Who pays:** ZEBRA-BUYER.\n\n| Buyer | Terms |\n|---|---|\n| One | Two |\n\n"
         "## 10. Questions only a buyer can answer\n\n1. To five record buyers: price?\n2. To two vendors: margin?\n"
     )
-    (folder / "questions.json").write_text(json.dumps([{"n": 1, "status": "asked", "asked_on": "2026-10-14", "answer": "QUOLL-ANSWER"}]))
+    (folder / "questions.json").write_text(
+        json.dumps([{"n": 1, "status": "asked", "asked_on": "2026-10-14", "answer": "QUOLL-ANSWER"}])
+    )
     first = sorted(DOSSIERS, key=lambda d: d["n"])[0]
     (folder / "dossiers" / f"D{first['n']:02d}.md").write_text("# Private\n\nWOMBAT-ROUTE to the records.\n")
     (folder / "vendors" / f"{SPEC['vendors'][0]['id']}.md").write_text("# Notes\n\nNUMBAT-CONTACT.\n")
@@ -417,15 +419,22 @@ def test_the_private_page_opens_on_the_streams_tracks_the_questions_and_joins_pr
 
     out = tmp_path / "playbook.html"
     script = ROOT / "scripts" / "data_market_private.py"
-    done = subprocess.run([sys.executable, str(script), str(_private(tmp_path)), str(out)], capture_output=True, text=True, cwd=ROOT)
+    done = subprocess.run(
+        [sys.executable, str(script), str(_private(tmp_path)), str(out)],
+        capture_output=True,
+        text=True,
+        cwd=ROOT,
+    )
     assert done.returncode == 0, done.stderr
     html = out.read_text()
     assert "Private · local file · never deployed" in html and '<meta name="robots" content="noindex' in html
-    assert html.index("Stream A: bring companies to the buyers") < html.index("What changed"), "the streams come first"
+    assert html.index("Stream A: bring companies to the buyers") < html.index("What changed"), (
+        "the streams come first"
+    )
     assert "ZEBRA-BUYER" in html and "<table" in html
     assert "QUOLL-ANSWER" in html and "not asked yet" in html, "one question answered, one waiting"
     assert "WOMBAT-ROUTE" in html and "NUMBAT-CONTACT" in html
-    assert SPEC["signals"][0]["headline"] in html, "the market view sits underneath"
+    assert dm.build(SPEC, FETCHES)["signals"][0]["headline"] in html, "the market view sits underneath"
 
 
 def test_the_private_page_cannot_be_written_into_the_repository_and_names_no_private_path(tmp_path):
@@ -434,7 +443,12 @@ def test_the_private_page_cannot_be_written_into_the_repository_and_names_no_pri
 
     script = ROOT / "scripts" / "data_market_private.py"
     inside = ROOT / "web" / "public" / "playbook.html"
-    done = subprocess.run([sys.executable, str(script), str(_private(tmp_path)), str(inside)], capture_output=True, text=True, cwd=ROOT)
+    done = subprocess.run(
+        [sys.executable, str(script), str(_private(tmp_path)), str(inside)],
+        capture_output=True,
+        text=True,
+        cwd=ROOT,
+    )
     assert done.returncode != 0 and not inside.exists()
     assert "outside the repository" in done.stderr + done.stdout
     text = script.read_text()
