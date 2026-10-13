@@ -1,6 +1,9 @@
 # The value-chain company profiles: this site's judgement, drafted by a model from each company's own filing and
 # the site's readings (scripts/value_chain_sources.py fetches the filings). Layer judgements are outlook positions
 # with a `layer`. No figures: scale comes from observations.
+# Review: before each batch was published, separate reviewing runs of the same model checked its claims against the
+# sources, and on 30 Sep 2026 two more re-read the ten largest against anything filed since. No person reviewed each
+# profile. `reviewed` is the date a profile was last settled, which `check` compares with the company's newest filing.
 companies:
 - entity: asml
   role: candidate
@@ -48,7 +51,7 @@ companies:
     must_be_true:
     - asml_20f_2025
   judged_by: claude-opus-5.5
-  reviewed_by: Alex Brogan
+  reviewed_by: separate reviewing runs of the same model, which checked its claims against the sources it cites; no person reviewed it
   reviewed: 2026-09-30
   disclosure: null
 - entity: micron
@@ -93,7 +96,7 @@ companies:
     must_be_true:
     - micron_10k_fy25
   judged_by: claude-opus-5.5
-  reviewed_by: Alex Brogan
+  reviewed_by: separate reviewing runs of the same model, which checked its claims against the sources it cites; no person reviewed it
   reviewed: 2026-09-28
   disclosure: null
 - entity: sk_hynix
@@ -141,7 +144,7 @@ companies:
     must_be_true:
     - skhynix_fy25_results
   judged_by: claude-opus-5.5
-  reviewed_by: Alex Brogan
+  reviewed_by: separate reviewing runs of the same model, which checked its claims against the sources it cites; no person reviewed it
   reviewed: 2026-09-28
   disclosure: null
 - entity: samsung
@@ -189,7 +192,7 @@ companies:
     - samsung_report_2025
     - skhynix_fy25_results
   judged_by: claude-opus-5.5
-  reviewed_by: Alex Brogan
+  reviewed_by: separate reviewing runs of the same model, which checked its claims against the sources it cites; no person reviewed it
   reviewed: 2026-09-28
   disclosure: null
 - entity: nvda
@@ -249,7 +252,7 @@ companies:
     - tsmc_20f_2025
     - nvda_10q_q2_fy27
   judged_by: claude-opus-5.5
-  reviewed_by: Alex Brogan
+  reviewed_by: separate reviewing runs of the same model, which checked its claims against the sources it cites; no person reviewed it
   reviewed: 2026-09-30
   disclosure: null
 - entity: broadcom
@@ -301,9 +304,9 @@ companies:
     - tsmc_20f_2025
     - broadcom_10q_q3_fy26
   judged_by: claude-opus-5.5
-  reviewed_by: Alex Brogan
+  reviewed_by: separate reviewing runs of the same model, which checked its claims against the sources it cites; no person reviewed it
   reviewed: 2026-09-30
-  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviewed this profile before it was published."
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer."
 - entity: amd
   role: candidate
   units:
@@ -349,7 +352,7 @@ companies:
     - amd_10k_fy25
     - tsmc_20f_2025
   judged_by: claude-opus-5.5
-  reviewed_by: Alex Brogan
+  reviewed_by: separate reviewing runs of the same model, which checked its claims against the sources it cites; no person reviewed it
   reviewed: 2026-09-28
   disclosure: null
 - entity: tsmc
@@ -404,7 +407,7 @@ companies:
     must_be_true:
     - tsmc_20f_2025
   judged_by: claude-opus-5.5
-  reviewed_by: Alex Brogan
+  reviewed_by: separate reviewing runs of the same model, which checked its claims against the sources it cites; no person reviewed it
   reviewed: 2026-09-30
   disclosure: null
 - entity: msft
@@ -460,9 +463,9 @@ companies:
     - msft_10k_fy26
     - crwv_10k_fy25
   judged_by: claude-opus-5.5
-  reviewed_by: Alex Brogan
+  reviewed_by: separate reviewing runs of the same model, which checked its claims against the sources it cites; no person reviewed it
   reviewed: 2026-09-30
-  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviewed this profile before it was published."
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer."
 - entity: amzn
   role: club
   units:
@@ -513,9 +516,9 @@ companies:
     - amzn_10k_fy25
     - amzn_10q_q2_2026
   judged_by: claude-opus-5.5
-  reviewed_by: Alex Brogan
+  reviewed_by: separate reviewing runs of the same model, which checked its claims against the sources it cites; no person reviewed it
   reviewed: 2026-09-30
-  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviewed this profile before it was published."
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer."
 - entity: googl
   role: club
   units:
@@ -571,9 +574,9 @@ companies:
     - googl_atm_8k_2026
     - googl_10q_q2_2026
   judged_by: claude-opus-5.5
-  reviewed_by: Alex Brogan
+  reviewed_by: separate reviewing runs of the same model, which checked its claims against the sources it cites; no person reviewed it
   reviewed: 2026-09-30
-  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviewed this profile before it was published."
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer."
 - entity: orcl
   role: candidate
   units:
@@ -617,7 +620,7 @@ companies:
     must_be_true:
     - orcl_10k_fy26
   judged_by: claude-opus-5.5
-  reviewed_by: Alex Brogan
+  reviewed_by: separate reviewing runs of the same model, which checked its claims against the sources it cites; no person reviewed it
   reviewed: 2026-09-28
   disclosure: null
 - entity: crwv
@@ -664,7 +667,7 @@ companies:
     must_be_true:
     - crwv_10k_fy25
   judged_by: claude-opus-5.5
-  reviewed_by: Alex Brogan
+  reviewed_by: separate reviewing runs of the same model, which checked its claims against the sources it cites; no person reviewed it
   reviewed: 2026-09-28
   disclosure: null
 - entity: nbis
@@ -709,7 +712,7 @@ companies:
     must_be_true:
     - nbis_20f_2025
   judged_by: claude-opus-5.5
-  reviewed_by: Alex Brogan
+  reviewed_by: separate reviewing runs of the same model, which checked its claims against the sources it cites; no person reviewed it
   reviewed: 2026-09-28
   disclosure: null
 - entity: openai
@@ -775,9 +778,9 @@ companies:
     would_disprove:
     - nvda_10q_q2_fy27
   judged_by: claude-opus-5.5
-  reviewed_by: Alex Brogan
+  reviewed_by: separate reviewing runs of the same model, which checked its claims against the sources it cites; no person reviewed it
   reviewed: 2026-09-30
-  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviewed this profile before it was published."
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer."
 - entity: anthropic
   role: candidate
   units:
@@ -841,9 +844,9 @@ companies:
     would_disprove:
     - amzn_10q_q2_2026
   judged_by: claude-opus-5.5
-  reviewed_by: Alex Brogan
+  reviewed_by: separate reviewing runs of the same model, which checked its claims against the sources it cites; no person reviewed it
   reviewed: 2026-09-30
-  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviewed this profile before it was published."
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer."
 - entity: xai
   role: candidate
   units:
@@ -895,9 +898,9 @@ companies:
     must_be_true:
     - xai_spacex_10q_q2_2026
   judged_by: claude-opus-5.5
-  reviewed_by: Alex Brogan
+  reviewed_by: separate reviewing runs of the same model, which checked its claims against the sources it cites; no person reviewed it
   reviewed: 2026-09-28
-  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviewed this profile before it was published."
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer."
 - entity: periodic_labs
   role: candidate
   units:
@@ -945,9 +948,9 @@ companies:
     - anthropic_series_h_2026
     - googl_10k_fy25
   judged_by: claude-opus-5.5
-  reviewed_by: Alex Brogan
+  reviewed_by: separate reviewing runs of the same model, which checked its claims against the sources it cites; no person reviewed it
   reviewed: 2026-09-28
-  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviewed this profile before it was published."
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer."
 - entity: elevenlabs
   role: candidate
   units:
@@ -992,9 +995,9 @@ companies:
     - elevenlabs_500m_arr_2026
     - xai_series_e_2026
   judged_by: claude-opus-5.5
-  reviewed_by: Alex Brogan
+  reviewed_by: separate reviewing runs of the same model, which checked its claims against the sources it cites; no person reviewed it
   reviewed: 2026-09-28
-  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviewed this profile before it was published."
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer."
 - entity: fluidstack
   role: candidate
   units:
@@ -1038,9 +1041,9 @@ companies:
     - fluidstack_form_d_2026
     - anthropic_series_h_2026
   judged_by: claude-opus-5.5
-  reviewed_by: Alex Brogan
+  reviewed_by: separate reviewing runs of the same model, which checked its claims against the sources it cites; no person reviewed it
   reviewed: 2026-09-28
-  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviewed this profile before it was published."
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer."
 - entity: etched
   role: candidate
   units:
@@ -1081,7 +1084,7 @@ companies:
     must_be_true:
     - etched_frontier_clusters_2026
   judged_by: claude-opus-5.5
-  reviewed_by: Alex Brogan
+  reviewed_by: separate reviewing runs of the same model, which checked its claims against the sources it cites; no person reviewed it
   reviewed: 2026-09-28
   disclosure: null
 - entity: scale_ai
@@ -1135,9 +1138,9 @@ companies:
     - scale_ai_new_ceo_2026
     - scale_ai_enterprise_page
   judged_by: claude-opus-5.5
-  reviewed_by: Alex Brogan
+  reviewed_by: separate reviewing runs of the same model, which checked its claims against the sources it cites; no person reviewed it
   reviewed: 2026-09-28
-  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviewed this profile before it was published."
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer."
 - entity: mercor
   role: candidate
   units:
@@ -1188,9 +1191,9 @@ companies:
     - mercor_enterprise_ai_2026
     - mercor_deeptune_2026
   judged_by: claude-opus-5.5
-  reviewed_by: Alex Brogan
+  reviewed_by: separate reviewing runs of the same model, which checked its claims against the sources it cites; no person reviewed it
   reviewed: 2026-09-28
-  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviewed this profile before it was published."
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer."
 - entity: handshake_ai
   role: candidate
   units:
@@ -1241,9 +1244,9 @@ companies:
     - handshake_ai_enterprise_page
     - handshake_ai_right_model_2026
   judged_by: claude-opus-5.5
-  reviewed_by: Alex Brogan
+  reviewed_by: separate reviewing runs of the same model, which checked its claims against the sources it cites; no person reviewed it
   reviewed: 2026-09-28
-  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviewed this profile before it was published."
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer."
 - entity: surge_ai
   role: candidate
   units:
@@ -1284,9 +1287,9 @@ companies:
     must_be_true:
     - surge_enterprise_page
   judged_by: claude-opus-5.5
-  reviewed_by: Alex Brogan
+  reviewed_by: separate reviewing runs of the same model, which checked its claims against the sources it cites; no person reviewed it
   reviewed: 2026-09-29
-  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviewed this profile before it was published."
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer."
 - entity: baseten
   role: candidate
   units:
@@ -1334,9 +1337,9 @@ companies:
     - baseten_form_d_2026
     - xai_spacex_10q_q2_2026
   judged_by: claude-opus-5.5
-  reviewed_by: Alex Brogan
+  reviewed_by: separate reviewing runs of the same model, which checked its claims against the sources it cites; no person reviewed it
   reviewed: 2026-09-28
-  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviewed this profile before it was published."
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer."
 - entity: fireworks
   role: candidate
   units:
@@ -1386,9 +1389,9 @@ companies:
     - fireworks_series_d_2026
     - xai_spacex_10q_q2_2026
   judged_by: claude-opus-5.5
-  reviewed_by: Alex Brogan
+  reviewed_by: separate reviewing runs of the same model, which checked its claims against the sources it cites; no person reviewed it
   reviewed: 2026-09-28
-  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviewed this profile before it was published."
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer."
 - entity: meta
   role: club
   units:
@@ -1462,9 +1465,9 @@ companies:
     - manus_joins_meta_2025
     - meta_manus_blocked_2026
   judged_by: claude-opus-5.5
-  reviewed_by: Alex Brogan
+  reviewed_by: separate reviewing runs of the same model, which checked its claims against the sources it cites; no person reviewed it
   reviewed: 2026-09-30
-  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviewed this profile before it was published."
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer."
 - entity: palantir
   role: candidate
   units:
@@ -1506,9 +1509,9 @@ companies:
     must_be_true:
     - palantir_10k_fy25
   judged_by: claude-opus-5.5
-  reviewed_by: Alex Brogan
+  reviewed_by: separate reviewing runs of the same model, which checked its claims against the sources it cites; no person reviewed it
   reviewed: 2026-09-28
-  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviewed this profile before it was published."
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer."
 - entity: cognition
   role: candidate
   units:
@@ -1555,9 +1558,9 @@ companies:
     - cognition_series_e_2026
     - anthropic_series_g_2026
   judged_by: claude-opus-5.5
-  reviewed_by: Alex Brogan
+  reviewed_by: separate reviewing runs of the same model, which checked its claims against the sources it cites; no person reviewed it
   reviewed: 2026-09-28
-  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviewed this profile before it was published."
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer."
 - entity: anysphere
   role: candidate
   units:
@@ -1603,9 +1606,9 @@ companies:
     - anysphere_joining_spacex_2026
     - xai_spacex_10q_q2_2026
   judged_by: claude-opus-5.5
-  reviewed_by: Alex Brogan
+  reviewed_by: separate reviewing runs of the same model, which checked its claims against the sources it cites; no person reviewed it
   reviewed: 2026-09-28
-  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviewed this profile before it was published."
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer."
 - entity: lovable
   role: candidate
   units:
@@ -1652,9 +1655,9 @@ companies:
     - lovable_series_c_2026
     - lovable_series_b_2025
   judged_by: claude-opus-5.5
-  reviewed_by: Alex Brogan
+  reviewed_by: separate reviewing runs of the same model, which checked its claims against the sources it cites; no person reviewed it
   reviewed: 2026-09-28
-  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviewed this profile before it was published."
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer."
 - entity: harvey
   role: candidate
   units:
@@ -1704,9 +1707,9 @@ companies:
     - harvey_550m_2026
     - harvey_11b_2026
   judged_by: claude-opus-5.5
-  reviewed_by: Alex Brogan
+  reviewed_by: separate reviewing runs of the same model, which checked its claims against the sources it cites; no person reviewed it
   reviewed: 2026-09-28
-  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviewed this profile before it was published."
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer."
 - entity: openevidence
   role: candidate
   units:
@@ -1753,9 +1756,9 @@ companies:
     - anthropic_series_g_2026
     - msft_10k_fy26
   judged_by: claude-opus-5.5
-  reviewed_by: Alex Brogan
+  reviewed_by: separate reviewing runs of the same model, which checked its claims against the sources it cites; no person reviewed it
   reviewed: 2026-09-28
-  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviewed this profile before it was published."
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer."
 - entity: apple
   role: club
   units:
@@ -1806,9 +1809,9 @@ companies:
     - apple_10k_fy25
     - apple_foundation_models_2025
   judged_by: claude-opus-5.5
-  reviewed_by: Alex Brogan
+  reviewed_by: separate reviewing runs of the same model, which checked its claims against the sources it cites; no person reviewed it
   reviewed: 2026-09-29
-  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviewed this profile before it was published."
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer."
 - entity: databricks
   role: candidate
   units:
@@ -1859,9 +1862,9 @@ companies:
     - msft_10k_fy26
     - googl_10k_fy25
   judged_by: claude-opus-5.5
-  reviewed_by: Alex Brogan
+  reviewed_by: separate reviewing runs of the same model, which checked its claims against the sources it cites; no person reviewed it
   reviewed: 2026-09-29
-  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviewed this profile before it was published."
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer."
 - entity: chai_discovery
   role: candidate
   units:
@@ -1903,9 +1906,9 @@ companies:
     - chai_discovery_chai1_2024
     - googl_10k_fy25
   judged_by: claude-opus-5.5
-  reviewed_by: Alex Brogan
+  reviewed_by: separate reviewing runs of the same model, which checked its claims against the sources it cites; no person reviewed it
   reviewed: 2026-09-29
-  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer; Alex Brogan reviewed this profile before it was published."
+  disclosure: "Drafted by a Claude model, made by Anthropic, which competes with, sells to or buys from companies in this layer."
 sources:
 - id: amd_10k_fy25
   entity: amd
