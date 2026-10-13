@@ -89,10 +89,14 @@ def test_the_committed_export_is_the_build_and_check_reads_the_file():
     assert 'out / "data_market.json"' in (ROOT / "src" / "ai_tracker" / "store.py").read_text()
 
 
-def test_nothing_that_scores_or_answers_reads_the_file():
+def test_nothing_that_scores_reads_the_file_and_ask_reads_only_quoted_passages():
     src = ROOT / "src" / "ai_tracker"
-    for p in [*src.glob("query/*.py"), src / "evaluate.py", src / "argument.py", src / "board.py"]:
+    for p in [src / "evaluate.py", src / "argument.py", src / "board.py", src / "query" / "server.py"]:
         assert not p.exists() or "data_market" not in p.read_text(), p.name
+    ask = (src / "query" / "ask.py").read_text()
+    assert "data_market.create_tables(" in ask and "data_market.quoted(" in ask
+    for reading in ("data_market.load(", "data_market.build(", "data_market.sources(", '"signals"', "sells"):
+        assert reading not in ask.split("data_market.create_tables(")[1][:400], reading
 
 
 def test_no_tracked_file_of_the_section_names_a_home_folder_or_a_social_link():
@@ -532,3 +536,67 @@ def test_the_method_page_and_the_landing_draw_them():
     contents = (WEB / "lib" / "contents.ts").read_text()
     assert '"/data-market/method": {' in contents and '"dm-flow"' in contents
     assert '"/data-market/method"' in (WEB / "app" / "sitemap.ts").read_text()
+
+
+# Part 57j: Ask may cite a price or a dossier passage, and nothing a model wrote
+
+
+def test_the_query_tables_hold_only_passages_quoted_from_fetched_pages():
+    import duckdb
+
+    con = duckdb.connect()
+    dm.create_tables(con)
+    assert con.execute("SELECT count(*) FROM data_market_prices").fetchone()[0] == len(SPEC["prices"])
+    cols = {r[0] for r in con.execute("DESCRIBE data_market_prices").fetchall()}
+    assert {
+        "id",
+        "vendor",
+        "amount",
+        "unit",
+        "passage",
+        "url",
+        "retrieved_at",
+    } <= cols and "sells" not in cols
+    n = sum(len(d.get("figures") or []) + len(d.get("quotes") or []) for d in DOSSIERS)
+    assert con.execute("SELECT count(*) FROM data_market_passages").fetchone()[0] == n
+    everything = " ".join(
+        str(v)
+        for t in ("data_market_prices", "data_market_passages")
+        for row in con.execute(f"SELECT * FROM {t}").fetchall()
+        for v in row
+    )
+    for s in SPEC["signals"][:40]:
+        assert s["headline"] not in everything and s["implies"] not in everything, (
+            "a model's reading is not in the tables"
+        )
+    judged = [
+        b["text"] for d in dm.dossier_docs(DOSSIERS, FETCHES) for b in d["blocks"] if b["kind"] == "judgement"
+    ]
+    assert judged and not any(j[:60] in everything for j in judged)
+
+
+def test_a_citation_to_a_price_or_a_passage_resolves_to_the_quoted_words():
+    p = SPEC["prices"][0]
+    rec = dm.quoted(f"price.{p['id']}")
+    assert rec and p["snippet"] in rec["snippet"] and rec["href"] == "/data-market/prices"
+    d = next(d for d in DOSSIERS if d.get("figures"))
+    key = d["figures"][0]["key"]
+    rec = dm.quoted(f"dossier.{d['id']}.{key}")
+    assert rec and d["figures"][0]["snippet"] in rec["snippet"]
+    assert rec["href"] == f"/data-market/dossiers/{d['id']}#source-{key}"
+    assert dm.quoted("price.no-such") is None and dm.quoted("signal.anything") is None
+
+
+def test_ask_knows_the_citation_kind_the_tables_and_a_golden_question():
+    from ai_tracker.query import ask, citecheck
+
+    assert citecheck.CITE.search("[dm:price.mercor-12]") and "dm" in citecheck.PROSE_KINDS
+    assert {"data_market_prices", "data_market_passages"} <= set(ask.DATA_MARKET_TABLES)
+    text = (ROOT / "src" / "ai_tracker" / "query" / "ask.py").read_text()
+    assert "[dm:<id>]" in text and "data_market_prices (" in text and "a model's reading" in text
+    assert int(ask.PROMPT_VERSION) >= 16
+    golden = (ROOT / "seed" / "golden.yaml").read_text()
+    assert '"dm:*"' in golden
+    rec = citecheck.Record("price.x", "dm", [], "", "$28 – $36 per hour • Offers Equity")
+    assert citecheck.check("The listing offers $28 to $36 per hour [dm:price.x].", {"dm:price.x": rec}).ok
+    assert not citecheck.check("The listing offers $99 per hour [dm:price.x].", {"dm:price.x": rec}).ok
