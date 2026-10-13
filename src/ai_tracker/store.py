@@ -968,6 +968,7 @@ class Store:
         from . import data_market
 
         _write(out / "data_market.json", data_market.build(data_market.load(), data_market.fetches(), data_market.sources()))
+        _write(out / "data_market_dossiers.json", data_market.dossier_docs(data_market.dossiers(), data_market.fetches()))
         _write(out / "compare.json", self._compare(cards))
         _write(out / "thesis.json", read_jsonl(DATA / "thesis.jsonl"))
         from .argument import build

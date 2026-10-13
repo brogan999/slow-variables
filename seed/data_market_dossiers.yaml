@@ -1,0 +1,1157 @@
+# Written by scripts/data_market_dossiers.py: each dossier's sources, and the passage of a source that states each figure.
+dossiers:
+- id: electricity-market-rebids
+  n: 1
+  title: Electricity market rebids and the trader's written reason
+  sources:
+  - key: ner-3822
+    name: Australian Energy Regulator, Rebidding and technical parameters guideline, which states the rules' reason requirement (Internet Archive copy)
+    url: https://web.archive.org/web/20250420163709id_/https://www.aer.gov.au/system/files/Rebidding%20and%20Technical%20Parameters%20Guideline.pdf
+  - key: mms-model
+    name: AEMO market data model report, bid tables
+    url: https://visualisations.aemo.com.au/aemo/nemweb/MMSDataModelReport/Electricity/MMS%20Data%20Model%20Report_files/MMS_18.htm
+  - key: aemo-copyright
+    name: AEMO copyright permissions notice (Internet Archive copy)
+    url: https://web.archive.org/web/20260923180705id_/https://www.aemo.com.au/privacy-and-legal-notices/copyright-permissions
+  - key: aemo-legal
+    name: AEMO privacy and legal notices (Internet Archive copy)
+    url: https://web.archive.org/web/20260510061429id_/https://www.aemo.com.au/privacy-and-legal-notices
+  - key: aer-2026
+    name: Australian Energy Regulator, Wholesale electricity market performance report 2026 (Internet Archive copy)
+    url: https://web.archive.org/web/20260903220730id_/https://www.aer.gov.au/system/files/2026-08/Wholesale%20electricity%20market%20performance%20report%20-%202026.pdf
+  - key: aer-guideline
+    name: Australian Energy Regulator, Rebidding and technical parameters guideline (Internet Archive copy)
+    url: https://web.archive.org/web/20250420163709id_/https://www.aer.gov.au/system/files/Rebidding%20and%20Technical%20Parameters%20Guideline.pdf
+  - key: aer-bulletin-2026
+    name: Australian Energy Regulator, compliance bulletin on automated bidding, August 2026 (Internet Archive copy)
+    url: https://web.archive.org/web/20261008174614id_/https://www.aer.gov.au/system/files/2026-08/Automated%20bidding%20and%20utilisation%20of%20third-party%20services%20Compliance%20Bulletin%20-%20August%202026.pdf
+  - key: aer-consult-2026
+    name: Australian Energy Regulator, 2026 review of the rebidding and technical parameters guideline, review page (Internet Archive copy)
+    url: https://web.archive.org/web/20260314232655id_/https://www.aer.gov.au/industry/registers/resources/reviews/2026-review-rebidding-and-technical-parameters-guideline
+  - key: mdavis
+    name: A practitioner's guide to the market data tables
+    url: https://www.mdavis.xyz/mms-guide/
+  - key: nempy
+    name: nempy documentation, introduction
+    url: https://nempy.readthedocs.io/en/latest/intro.html
+  - key: roam
+    name: ROAM Consulting, analysis of rebidding activity, for the Australian Energy Market Commission (Internet Archive copy)
+    url: https://web.archive.org/web/20250518171044id_/https://www.aemc.gov.au/sites/default/files/content/387f3a8d-c29c-408f-808c-7cc6a6087d46/ROAM-Consulting-Analysis-of-rebidding-activity-in-the-NEM-Final-report.PDF
+  - key: energy-econ-2016
+    name: Journal study of rebidding, Energy Economics, 2016
+    url: https://ideas.repec.org/a/eee/eneeco/v59y2016icp24-36.html
+  - key: rebid-analysis
+    name: Public code analysing rebidding, 2012 to 2021
+    url: https://github.com/prakaa/nem-rebidding-analysis-2012-2021
+  - key: llm-bids-2024
+    name: Abstract of a 2024 paper on a language model trained on market bids
+    url: https://exa.ai/library/publication/hjh40gxs750
+  - key: ercot-bench
+    name: Texas battery-bidding test
+    url: https://github.com/karthikmattu06-hue/ercot-rtcb-bench
+  - key: alphasearch
+    name: AlphaSearch, battery arbitrage with AI agents, authors' repository README
+    url: https://raw.githubusercontent.com/AgenticsFintekColumbia/agentics-energy-alphasearch/main/README.md
+  - key: energyagentbench
+    name: Test of agents on live American market data
+    url: https://arxiv.org/pdf/2605.15230.pdf
+  - key: bessbidder
+    name: European intraday battery-bidding test
+    url: https://github.com/kim-mskw/BessBidder
+  figures:
+  - figure: '5.4'
+    key: aer-2026
+    snippet: lack coal shifted capacity from low-price to mid-price bands......129 5.4 In NSW, low-priced coal offers fell after the market intervention end
+  - figure: '73'
+    key: aer-2026
+    snippet: or example, the growth in rebids from 5.4 million per year in 2020 to 73 million in 2025, poses a significant market monitoring challenge. We
+- id: financial-model-audit-logs
+  n: 2
+  title: 'Financial model audits: the issue list and the corrected spreadsheet'
+  sources:
+  - key: hcpc-2013
+    name: Mazars, forecasting model review for the Health and Care Professions Council, 2013
+    url: https://www.hcpc-uk.org/globalassets/meetings-attachments3/finance-and-resources-committee/2013/september/enc-08---forecasting-model-review
+  - key: ssb2
+    name: SpreadsheetBench 2 paper
+    url: https://arxiv.org/abs/2606.29955
+  - key: mazars-audit
+    name: Forvis Mazars, financial model audit service page
+    url: https://financialmodelling.forvismazars.com/services/financial-model-audit/
+  - key: mazars-corality
+    name: Mazars announcement of the purchase of Corality Financial Group
+    url: https://www.forvismazars.com/group/en/who-we-are/news-publications/latest-news/mazars-to-acquire-corality-financial-group
+  - key: operis
+    name: Operis, model audit page
+    url: https://www.operis.com/model-audit/
+  - key: bdo
+    name: BDO, financial modelling assurance capability statement, 2024
+    url: https://www.bdo.co.uk/getmedia/172305e8-18b9-4362-8461-d1e5f293c7d6/BDO-Financial-Modelling-Assurance-Services-Capability-Statement-Overview-May-2024.pdf
+  - key: finch
+    name: Finch test of spreadsheet work, ACL Findings 2026
+    url: https://aclanthology.org/2026.findings-acl.523/
+  - key: afterquery
+    name: AfterQuery research page
+    url: https://www.afterquery.com/research
+  figures:
+  - figure: '68'
+    key: hcpc-2013
+    snippet: rther clarification, examination or correction. There were a total of 68 comments. None of the comments were graded One, which would have repr
+  - figure: '12.00'
+    key: ssb2
+    snippet: es 34.89\% overall task accuracy, and debugging accuracy is as low as 12.00\%. Trajectory analysis and a failure taxonomy further indicate that i
+  - figure: '34.89'
+    key: ssb2
+    snippet: 'in far from reliable on real-world workflows: the best model achieves 34.89\% overall task accuracy, and debugging accuracy is as low as 12.00\%.'
+  - figure: '2000'
+    key: mazars-audit
+    snippet: global model audit practice, and we have issued opinions on more than 2000 project models representing in excess of US$300 billion of transactio
+  - figure: '100'
+    key: mazars-audit
+    snippet: 'nquiry #1 Number one ranked global model audit practice, twelve years 100+ Model audit professionals across seven offices worldwide 2000+ Model'
+  - figure: '20'
+    key: operis
+    snippet: sents our opinion on the model and includes liability cover of up to £20 million. Due Diligence Review (DDR) Our DDR assists you with your M&A
+  - figure: '2500'
+    key: bdo
+    snippet: sia-Pacific diligence and operational support, we have supported over 2500 projects worldwide, including many award-winning projects.  Inframat
+  - figure: '321'
+    key: ssb2
+    snippet: is annotated and validated by domain experts. The benchmark contains 321 tasks; each instance averages 11.8 worksheets and requires 593.5 cell
+  - figure: '172'
+    key: finch
+    snippet: ous annotation requiring over 700 hours of expert effort. This yields 172 composite workflows with 384 tasks, involving 1710 spreadsheets with
+  - figure: '38.4'
+    key: finch
+    snippet: .1 Pro spends an average of 16.8 minutes per workflow yet passes only 38.4% of workflows. Comprehensive case studies further surface the challen
+- id: accountants-reviewed-workpapers
+  n: 3
+  title: 'Accountants'' reviewed files: tax workpapers, audit files and private pension fund audits'
+  sources:
+  - key: gs011
+    name: Auditing and Assurance Standards Board, guidance statement GS 011, reissued 2026
+    url: https://www.auasb.gov.au/media/vdlel4ta/finalrevised_gs011_3feb2026a.pdf
+  - key: apes110
+    name: Accounting Professional and Ethical Standards Board, APES 110 technology amendments
+    url: https://apesb.org.au/wp-content/uploads/2024/06/APES_110_AS_Technology.pdf
+  - key: tpb
+    name: Tax Practitioners Board, confidentiality of client information (Internet Archive copy)
+    url: https://web.archive.org/web/20260520013921id_/https://www.tpb.gov.au/confidentiality-client-information
+  - key: xero-terms
+    name: Xero developer platform terms and conditions
+    url: https://developer.xero.com/xero-developer-platform-terms-conditions
+  - key: myob-terms
+    name: MYOB developer terms
+    url: https://www.myob.com/au/legal/sme-developer-terms
+  - key: ato-mar-2026
+    name: SMS Magazine, reporting the Australian Taxation Office's self-managed fund statistics for March 2026
+    url: https://smsmagazine.com.au/news/2026/06/16/trend-to-younger-smsf-members/
+  - key: cloudoffis
+    name: Cloudoffis, fund audit product page
+    url: https://cloudoffis.com.au/smsf-auditomation/
+  - key: evolv
+    name: Evolv, auditors' software page
+    url: https://evolvsuper.com.au/auditors-software/
+  - key: asf
+    name: ASF Audits, platform page
+    url: https://asfaudits.com.au/platfrom
+  - key: techcrunch-2026
+    name: TechCrunch, OpenAI-backed Thrive Holdings raises $2B, August 2026
+    url: https://techcrunch.com/2026/08/12/openai-backed-thrive-holdings-raises-2b-to-bring-ai-to-the-enterprise/
+  - key: montana
+    name: Montana Labs, how Thrive and OpenAI turned tax review into a feedback loop
+    url: https://montanalabs.ai/news/how-thrive-and-openai-turned-tax-review-clicks-into-a-self-improving-codex-loop/
+  figures:
+  - figure: '2'
+    key: techcrunch-2026
+    snippet: OpenAI-backed Thrive Holdings raises $2B to bring AI to the enterprise | TechCrunch –:–:–:– Last day to exhib
+  - figure: '672805'
+    key: ato-mar-2026
+    snippet: d there were 11687 new funds and 658 exits for net growth of 11029 to 672805 SMSFs, while total members increased by 19000 from the December 2025
+- id: business-lender-credit-files
+  n: 4
+  title: Business lenders' credit files and invoice-finance ledgers
+  sources:
+  - key: herald-funda
+    name: Newcastle Herald, report on the collapse of a small-business lender
+    url: https://www.newcastleherald.com.au/story/8475321/hunter-families-impacted-by-13m-collapse-of-merewether-small-business-lender-funda/
+  - key: bizpay-report
+    name: BRI Ferrier, BizPay first report to creditors
+    url: https://briferrier.com.au/wp-content/uploads/2024/11/file_1701079029_429.pdf
+  - key: bizpay-deed
+    name: BRI Ferrier, BizPay deed of company arrangement
+    url: https://briferrier.com.au/wp-content/uploads/2024/11/file_1712037473_999.pdf
+  - key: spenda-grapple
+    name: Australian FinTech, sale of an invoice-finance portfolio
+    url: https://australianfintech.com.au/grapple-acquires-grapples-invoice-finance-portfolio-for-2-million/
+  - key: earlypay-fy25
+    name: Earlypay, full-year 2025 results announcement
+    url: https://announcements.asx.com.au/asxpdf/20250826/pdf/06nbvt1134vjjj.pdf
+  - key: bcr-2026
+    name: BCR, World Factoring Yearbook 2026 note on Australia
+    url: https://bcrpub.com/news/wfy26-australias-invoice-finance-market-reaches-aud95bn-but-remains-underpenetrated/
+  - key: privacy-act
+    name: Privacy Act 1988 (Cth), compilation of June 2025
+    url: https://www.legislation.gov.au/C2004A03712/2025-06-10
+  - key: ocrolus
+    name: Ocrolus, post on cash-flow data for small-business lenders (Internet Archive copy)
+    url: https://web.archive.org/web/20260512132519id_/https://www.ocrolus.com/blog/cash-flow-intelligence-smb-lenders/
+  - key: aloan
+    name: Aloan, guide on AI underwriting and third-party risk
+    url: https://aloan.ai/guides/occ-2023-17-ai-underwriting-third-party-risk
+  - key: applied-econ
+    name: Applied Economics, US Firm-Lender Credit Map
+    url: https://appliedeconomics.ai/data/bad-bank
+  figures:
+  - figure: '2.56'
+    key: herald-funda
+    snippet: s of assets, Funda lists a "loan pool" owed to the company valued at $2.56 million and software valued at $730634. It's unknown at this stage ho
+  - figure: '150'
+    key: bizpay-report
+    snippet: is’ secured debt of circa $3.7M, trade/statutory creditors of around $150K plus employee/contractor entitlements. There may also be various con
+  - figure: '2.7'
+    key: bizpay-report
+    snippet: '. Key features include: l Loan book with circa 150 existing clients, $2.7M B.V. l Customer contracts, with B2B Customer list l Bespoke IT platf'
+  - figure: '2'
+    key: spenda-grapple
+    snippet: Grapple acquires Spenda's invoice finance portfolio for $2 million - Australian FinTech Menu Sponsors mybalancingIQ Escode LENSE
+  - figure: '95'
+    key: bcr-2026
+    snippet: 'WFY''26: Australia’s invoice finance market reaches AUD95bn but remains underpenetrated Events Upcoming Events BCR MENA Supply'
+  - figure: '750000'
+    key: ocrolus
+    snippet: y credit signals for small-business lending. Ocrolus analyzes roughly 750000 credit applications a month, producing the largest SMB cash-flow data
+  - figure: '40'
+    key: applied-econ
+    snippet: nships of 1.8 million US firms, built by digitising and standardising 40M+ archival loan documents using LLM tools. Request Access Data Specif
+  - figure: '1.8'
+    key: applied-econ
+    snippet: Firm-Lender Credit Map A novel dataset on the credit relationships of 1.8 million US firms, built by digitising and standardising 40M+ archival
+- id: plant-control-room-history
+  n: 10
+  title: 'Process plants: operators'' control changes and the control-room history of closed plants'
+  sources:
+  - key: imubit-data
+    name: Imubit, post on data readiness for AI
+    url: https://imubit.com/blog/youre-ready-for-ai-but-is-your-data
+  - key: imubit-fpm
+    name: Imubit, introduction to its foundation process model
+    url: https://imubit.com/blog/introducing-the-imubit-foundation-process-model-a-new-paradigm-in-plant-optimization
+  - key: privara
+    name: Privara, llms.txt site summary
+    url: https://privara.io/llms.txt
+  - key: datanexx
+    name: DataNexx, page for data owners
+    url: https://datanexx.ai/for-data-owners/
+  - key: petrarch-article
+    name: Zero G Talent, article on Petrarch and industrial data
+    url: https://zerogtalent.com/blog/petrarch-and-the-race-to-unlock-industrial-data-for-physical-ai
+  - key: aveva-pi
+    name: AVEVA, software schedule for the PI System, July 2024
+    url: https://www.aveva.com/content/dam/aveva/documents/legal/policies/AVEVA-Software-Schedule-PI-System-v1-3-3-July-2024.pdf
+  - key: osisoft-licence
+    name: OSIsoft, corporate family software licence and services agreement
+    url: https://www.aveva.com/content/dam/aveva/documents/legal/policies/osisoft/Corporate-Family-Software-License-and-Services-Agreement.pdf
+  - key: osisoft-usage
+    name: OSIsoft, product usage terms, version 4
+    url: https://www.aveva.com/content/dam/aveva/documents/legal/policies/osisoft/Product-Usage-Terms-V4-ENG-11-21.pdf
+  - key: alcoa-2025
+    name: Alcoa, announcement of the closure of the Kwinana refinery, September 2025
+    url: https://www.alcoa.com/australia/en/news/releases?id=2025%2F09%2Falcoa-announces-closure-of-kwinana-refinery-also-updates-third-quarter-2025-outlook&year=y2025
+  - key: agl-2023
+    name: AGL, appointment of a demolition contractor for Liddell (Internet Archive copy)
+    url: https://web.archive.org/web/2026id_/https://www.agl.com.au/about-agl/news-centre/2023/january/agl-appoints-demolition-contractor-for-liddell-as-energy-hub-tak
+  - key: hunternet
+    name: HunterNet, early demolition work under way at Liddell
+    url: https://hunternet.com.au/agl-early-demolition-work-underway-at-liddell/
+  - key: liberty
+    name: Liberty Industrial, Altona refinery decommissioning project page
+    url: https://libertyindustrial.com/projects/altona-refinery-facilities-decommissioning/
+  - key: opal
+    name: Packaging News, Opal explores biogas at Maryvale mill
+    url: https://www.packagingnews.com.au/sustainability/opal-explores-biogas-at-maryvale-mill
+  - key: intellisense
+    name: International Mining, report on IntelliSense.io's funding, September 2026
+    url: https://im-mining.com/2026/09/03/intellisense-io-partners-with-sep-mitsubishi-hcm-to-scale-industrial-decision-intelligence-across-global-mining/
+  figures:
+  - figure: '200'
+    key: imubit-data
+    snippet: ful results, we recommend 6+ months of unit process data and at least 200 lab samples to support inferentials. This can typically capture a wid
+  - figure: '2'
+    key: imubit-data
+    snippet: and accuracy depend on the richness and reliability of the data used. 2. Data Compression Data compression can impact the accuracy of what th
+  - figure: '5'
+    key: imubit-data
+    snippet: ntly meets the requirements for constructing machine learning models. 5. Instrumentation Considerations When designing AI models for closed l
+  - figure: '2.2'
+    key: alcoa-2025
+    snippet: recorded in the first quarter of 2024. Permanently closing Kwinana’s 2.2 million metric tons of annual capacity will bring Alcoa’s global cons
+- id: machine-shop-records
+  n: 11
+  title: Machine-shop job records and design change histories
+  sources:
+  - key: mattel
+    name: Mattel purchase order terms and conditions (US)
+    url: https://gpssupplier.mattel.com/POTermsConditions/NA/MATTEL_PO_TERMS_US_v1.pdf
+  - key: textron
+    name: Textron purchase order terms, indirect materials
+    url: https://www.textron.com/assets/Suppliers/PurchaseOrderIndirectMaterials.pdf
+  - key: mms
+    name: Modern Machine Shop, article on automating part programming, June 2025
+    url: https://www.mmsonline.com/articles/automating-part-programming-cuts-the-time-to-engaging-work
+  - key: cloudnc-support
+    name: CloudNC support page on what its software learns from (the same article, served by the publisher's help-centre API)
+    url: https://cloudncsupport.zendesk.com/api/v2/help_center/en-us/articles/4935157656991.json
+  - key: cloudnc
+    name: CloudNC home page
+    url: https://www.cloudnc.com/?stream=top
+  - key: privara
+    name: Privara, llms.txt site summary
+    url: https://privara.io/llms.txt
+  - key: datanexx
+    name: DataNexx, page for data owners
+    url: https://datanexx.ai/for-data-owners/
+  - key: petrarch
+    name: ZeroG Talent, article on Petrarch
+    url: https://zerogtalent.com/blog/petrarch-and-the-race-to-unlock-industrial-data-for-physical-ai
+  figures: []
+- id: it-operations-records
+  n: 12
+  title: IT operations work that either held or did not
+  sources:
+  - key: channeldive
+    name: Channel Dive, report on OpenAI's partnership with Thrive Holdings
+    url: https://www.channeldive.com/news/openai-thrive-holdings-partnership-it-services-msps/806850/
+  - key: legacy-bench
+    name: Factory, Legacy-Bench documentation
+    url: https://docs.factory.ai/benchmarks/legacy-bench
+  - key: connectwise
+    name: ConnectWise master agreement
+    url: https://www.connectwise.com/globalassets/media/documents/legal/connectwise-master-agreementsoftware-saas-and-education-and-services-addendum-7119.pdf
+  - key: ninjaone-dpa
+    name: NinjaOne data processing agreement, 8 June 2026
+    url: https://www.ninjaone.com/wp-content/uploads/2026/06/NinjaOne-DPA-June-8-2026-Final.pdf
+  - key: becolve
+    name: Becolve, note on the end of life of AutoSave
+    url: https://becolve.com/en/blog/end-of-life-for-autosave/
+  - key: aiops-compare
+    name: Paper comparing outage-diagnosis test sets (AIOps2025 and RCA100)
+    url: https://arxiv.org/html/2606.29193v1
+  figures:
+  - figure: '7'
+    key: channeldive
+    snippet: fiscal year and saw its consulting and managed services revenues grow 7% to nearly $70 billion during the 12 months ending Aug. 31. On Monday
+  - figure: '31'
+    key: legacy-bench
+    snippet: de Opus 4.6) 33% 9 Factory Droid (GLM-5) 32.2% 10 Cursor (Composer 2) 31% 11 Factory Droid (Gemini 3 Flash) 27.2% 12 Factory Droid (Kimi K2.5)
+  - figure: '44'
+    key: legacy-bench
+    snippet: 'and runtime feedback expose errors. COBOL remains hardest: 31 of the 44 tasks no model solved are COBOL. Legacy-Bench View sample tasks and t'
+- id: lab-proficiency-tests
+  n: 13
+  title: Laboratory proficiency tests scored against the known answer
+  sources:
+  - key: rcpaqap-poster
+    name: RCPAQAP conference poster on AI-assisted case-study reports, October 2025 (Internet Archive copy)
+    url: https://web.archive.org/web/2026id_/https://www.rcpaqap.com.au/wp-content/uploads/2025/10/RCPAQAP_A0-Posters_AACB-Chemical-Pathology_Poster_2_V2.pdf
+  - key: rcpaqap-guidelines
+    name: RCPAQAP guidelines for participation (Internet Archive copy)
+    url: https://web.archive.org/web/2026id_/https://dataanalysis.rcpaqap.com.au/guidelines-for-participation-in-rcpaqap-programs/
+  - key: rcpaqap-privacy
+    name: RCPAQAP privacy policy (Internet Archive copy)
+    url: https://web.archive.org/web/2026id_/https://rcpaqap.com.au/privacy-policy/
+  - key: cap-terms
+    name: College of American Pathologists terms and conditions
+    url: https://www.cap.org/terms-and-conditions/
+  - key: cap-studio
+    name: College of American Pathologists news release on its AI platform
+    url: https://www.cap.org/news/pathologists-get-test-drive-platform-for-ai-tools-through-cap-initiative/
+  - key: ukneqas
+    name: UK NEQAS Cellular Pathology Technique privacy policy
+    url: https://www.ukneqascpt.org/Privacy-Policy
+  - key: pta
+    name: Proficiency Testing Australia confidentiality policy
+    url: https://pta.asn.au/confidentiality-policy/
+  - key: cts-dna
+    name: Collaborative Testing Services, DNA interpretation test 22-5882 summary report (Internet Archive copy)
+    url: https://web.archive.org/web/20250118190750id_/http://cts-forensics.com/reports/22-5882_Web.pdf
+  - key: afte
+    name: Association of Firearm and Tool Mark Examiners, proficiency test review committee final report
+    url: https://afte.org/wp-content/uploads/2025/03/PTRC_Final_Report_2024-11-25_with_Erratum.pdf
+  - key: sage
+    name: Sage Veterinary Imaging dataset page
+    url: https://www.sageveterinary.com/veterinary-imaging-dataset
+  figures:
+  - figure: '3'
+    key: rcpaqap-poster
+    snippet: The findings provide insight into the potential Round 1 Round 2 Round 3 of AI to enhance external quality assurance (EQA) processes while mai
+  - figure: '5'
+    key: rcpaqap-poster
+    snippet: 024 26/06/2024 179 Results Chemical Pathology Patient Report Comments 5 16/09/2024 14/08/2024 135 Chemical Pathology Patient Report Comments
+  - figure: '94'
+    key: rcpaqap-poster
+    snippet: times Three case studies, comprising of five questions, were sent to 94 participants enrolled in the 2025 program. RCPAQAP staff utilised a p
+  - figure: '470'
+    key: rcpaqap-poster
+    snippet: 20 hours for the previous version. Using an initial 30 AI summary of 470 question responses cut the QAP staff component time 20 from 15 hours
+  - figure: '28'
+    key: rcpaqap-poster
+    snippet: mical Pathology Chemical Pathology Case Study 2 09/06/2025 06/05/2025 28 with Enterprise Data Protection, ensuring that all data processed rem
+  - figure: '63'
+    key: rcpaqap-poster
+    snippet: mical Pathology Chemical Pathology Case Study 1 20/04/2025 19/03/2025 63 participant response component of the program. Copilot was deployed C
+  - figure: '80'
+    key: rcpaqap-poster
+    snippet: in Chemical Pathology Patient Report Comments 1 04/03/2024 31/01/2024 80 AI models, and adhered to strict privacy and compliance standards. Ch
+  - figure: '163'
+    key: rcpaqap-poster
+    snippet: s. Chemical Pathology Patient Report Comments 2 22/04/2024 20/03/2024 163 The AC and QAP staff then reviewed and edited the AI-generated partic
+  - figure: '35'
+    key: cts-dna
+    snippet: 'd to evaluate using their existing protocols. Data were returned from 35 participants and are compiled into the following tables: Page Manufac'
+  - figure: '11'
+    key: cts-dna
+    snippet: 18 D7S820 D8S1179 D10S1248 D12S391 D13S317 D16S539 D18S51 D19S433 D21S11 D22S1045 Amelogenin CSF1PO FGA Penta D Penta E SE33 TH01 TPOX vWA DYS
+  - figure: '13'
+    key: cts-dna
+    snippet: 1S1656 D2S1338 D2S441 D3S1358 D5S818 D7S820 D8S1179 D10S1248 D12S391 D13S317 D16S539 D18S51 D19S433 D21S11 D22S1045 Amelogenin CSF1PO FGA Pent
+  - figure: '280'
+    key: afte
+    snippet: pistols3 CTS issued its summary report on February 12, 2024. 4 Of the 280 responding participants, 219 reported inconclusive results or elimina
+  - figure: '20'
+    key: afte
+    snippet: TS Test 23-5262 Item 2 Item 3 Item 45 Item 5 Yes (Identification) 57 (20.4%) 51 (18.2%) 1 (0.4%) 53 (18.9%) No (Elimination) 88 (31.4%) 92 (32
+- id: simulator-and-harbour-pilot-recordings
+  n: 15
+  title: Simulator sessions and harbour pilots' recordings
+  sources:
+  - key: ga-pilots
+    name: Geoscience Australia, case study on Port Phillip Sea Pilots
+    url: https://www.ga.gov.au/scientific-topics/positioning-navigation/positioning-australia/case-studies/port-philip-sea-pilots
+  - key: ntsb
+    name: US National Transportation Safety Board, factual report on the voyage data recorder and other electronic data
+    url: https://data.ntsb.gov/Docket/Document/docBLOB?FileExtension=pdf&FileName=7+-+VOYAGE+DATA+RECORDER+AND+OTHER+ELECTRONIC+DATA+-+GROUP+CHAIR%27S+FACTUAL+REPORT-Rel.pdf&ID=18994429
+  - key: imo
+    name: International Maritime Organization, MSC/Circ.1024, 29 May 2002
+    url: https://www.classnk.com/hp/pdf/activities/statutory/ism/imo/MSC_Circ.1024.pdf
+  - key: ampi
+    name: Australasian Marine Pilots Institute, code of good practice for portable pilot units
+    url: https://ampi.org.au/wp-content/uploads/2022/09/Code-of-good-practice-Portable-Pilot-Units-2nd-Edition.pdf
+  - key: omc
+    name: OMC International, position statement on the ethical use of pilotage data
+    url: https://omcinternational.com/wp-content/uploads/Ethical-use-of-Pilotage-Data-OMC-Position-Statement.pdf
+  - key: cae
+    name: CAE Rise product page
+    url: https://www.cae.com/civil-aviation/aviation-software/cae-rise/
+  - key: ifalpa
+    name: International Federation of Air Line Pilots' Associations, template agreement for flight data programmes
+    url: https://www.ifalpa.org/wp-content/uploads/2025/12/23aapbl01-template-agreement-for-fdap.pdf
+  - key: amc-sim
+    name: Australian Maritime College, centre for maritime simulations (Internet Archive copy)
+    url: https://web.archive.org/web/2026id_/https://www.amc.edu.au/facilities/centre-for-maritime-simulations
+  - key: immersive
+    name: Immersive Technologies, solutions pages
+    url: https://www.immersivetechnologies.com/solutions/Improved-Productivity.htm
+  - key: osaka
+    name: Osaka Metropolitan University research news (Internet Archive copy)
+    url: https://web.archive.org/web/20250725071106id_/https://www.omu.ac.jp/en/info/research-news/entry-75859.html
+  figures:
+  - figure: '360'
+    key: immersive
+    snippet: CONTACT US Login Mining Equipment Simulators (Our Technology) PRO5 IM360 + IM360 LX + Series LX Series Surface Machines Underground Machines V
+  - figure: '57'
+    key: immersive
+    snippet: ting a new training program, the following four months demonstrated a 57.7% increase in production tons moved while delivering significant equ
+- id: veterinary-records
+  n: 16
+  title: Veterinary records, from first complaint to outcome
+  sources:
+  - key: vic-board
+    name: Veterinary Practitioners Registration Board of Victoria, Guideline 7 on veterinary medical records
+    url: https://www.vetboard.vic.gov.au/VPRBV/VPRBV_Guidelines/Guideline_07_-_Veterinary_medical_records.aspx
+  - key: nsw-reg
+    name: New South Wales, Veterinary Practice Regulation 2013
+    url: https://faolex.fao.org/docs/pdf/nsw153640.pdf
+  - key: vetpartners
+    name: VetPartners home page
+    url: http://vet.partners/
+  - key: vet-paper
+    name: arXiv paper on language models for veterinary records
+    url: https://arxiv.org/html/2410.15186v1
+  - key: ezyvet-terms
+    name: IDEXX, ezyVet general terms and conditions
+    url: https://www.idexx.com/en/about-idexx/terms-of-sale/ezyvet-general-terms-and-conditions-ous/
+  - key: idexx-master
+    name: IDEXX master terms
+    url: https://www.idexx.com/files/one-idexx-master-terms-pulled-from-web-7-7-23-EN.pdf
+  - key: sikka
+    name: Galaxy by Sikka
+    url: https://galaxy.sikka.ai/
+  - key: evident
+    name: Evident
+    url: https://evident.vet/
+  - key: sage
+    name: Sage Veterinary Imaging dataset page
+    url: https://www.sageveterinary.com/veterinary-imaging-dataset
+  - key: peteval
+    name: SAVSNET PetEVAL dataset
+    url: https://huggingface.co/datasets/SAVSNET/PetEVAL
+  figures:
+  - figure: '3'
+    key: nsw-reg
+    snippet: une 2019 at 01:11) Legislation on this site is usually updated within 3 working days after a change to the legislation. Provisions in force T
+  - figure: '270'
+    key: vetpartners
+    snippet: 2026-04-29T19:04:24+10:00 We bring together a community of more than 270 individual clinics and specialty hospitals united by a commitment to
+  - figure: '15'
+    key: vet-paper
+    snippet: icrobial stewardship. The VetCompass Australia corpus containing over 15 million clinical records from 180 veterinary clinics in Australia (5%
+  - figure: '180'
+    key: vet-paper
+    snippet: ass Australia corpus containing over 15 million clinical records from 180 veterinary clinics in Australia (5% of all vet clinics there) McGreev
+  - figure: '5'
+    key: vet-paper
+    snippet: 15 million clinical records from 180 veterinary clinics in Australia (5% of all vet clinics there) McGreevy et al., 2017a was used for pre-tr
+  - figure: '252000'
+    key: sikka
+    snippet: calibrated continuously rather than delivered once. Adjudication API $252000 Per year. The calibrated single-step response function with evidence,
+  - figure: '500'
+    key: sage
+    snippet: 'ur project. Evaluation Arranged privately A bounded sample (typically 500–1000 studies) for internal evaluation only, over a fixed term. Use: a'
+  - figure: '1000'
+    key: sage
+    snippet: 'roject. Evaluation Arranged privately A bounded sample (typically 500–1000 studies) for internal evaluation only, over a fixed term. Use: assess'
+  - figure: '17600'
+    key: peteval
+    snippet: e-text veterinary electronic health records (EHRs). PetEVAL comprises 17600 professionally annotated EHRs from first-opinion veterinary practices
+  - figure: '246473'
+    key: vet-paper
+    snippet: RTa, GPT-2, and GPT-2 XL) were fine-tuned on the free-text notes from 246473 manually-coded veterinary patient visits included in the CSU VTH’s el
+- id: owner-side-insurance-files
+  n: 17
+  title: Insurance claim files held outside the big insurers
+  sources:
+  - key: huzzle
+    name: Huzzle Labs, InsureBench
+    url: https://www.insurebench.com/
+  - key: insurething
+    name: InsureThing, InsureBench V1
+    url: https://insurebench.insure-thing.com/
+  - key: insclaimbench
+    name: arXiv paper, InsClaimBench
+    url: https://arxiv.org/html/2610.09671
+  - key: tailshift
+    name: Tailshift
+    url: https://tailshift.ai/
+  - key: asic-253
+    name: ASIC information sheet 253 on claims handling
+    url: https://download.asic.gov.au/media/q2ybygwo/info253-published-16-june-2025.pdf
+  - key: sira
+    name: State Insurance Regulatory Authority (NSW), list of workers compensation insurers (Internet Archive copy)
+    url: https://web.archive.org/web/20251121171423id_/https://www.sira.nsw.gov.au/workers-compensation/list-of-workers-compensation-insurers
+  - key: worksafe-vic
+    name: WorkSafe Victoria, list of current self-insurers
+    url: https://www.worksafe.vic.gov.au/list-current-self-insurers
+  - key: runoff-mag
+    name: Bermuda Reinsurance Magazine, article on legacy and run-off
+    url: https://www.bermudareinsurancemagazine.com/legacy-and-run-off-the-natural-home-for-legacy-risk
+  - key: oaic-app6
+    name: Office of the Australian Information Commissioner, guidelines on Australian Privacy Principle 6
+    url: https://www.oaic.gov.au/privacy/australian-privacy-principles/australian-privacy-principles-guidelines/chapter-6-app-6-use-or-disclosure-of-personal-information
+  figures:
+  - figure: '33'
+    key: worksafe-vic
+    snippet: recovery Home Self-insurance List of current self-insurers There are 33 employers approved as self-insurers by WorkSafe. Share Email Facebook
+  - figure: '42'
+    key: runoff-mag
+    snippet: disclosed non-life run-off transactions increased from 33 in 2024 to 42 in 2025, while estimated transferred gross reserves totalled $5.4 bn.
+  - figure: '5.4'
+    key: runoff-mag
+    snippet: 4 to 42 in 2025, while estimated transferred gross reserves totalled $5.4 bn. Although lower than the levels reported between 2021 and 2024, th
+  - figure: '160'
+    key: insurething
+    snippet: rk — and unnecessary for other work. V1 snapshot V1 is built around a 160-task comparable core, with runs generated over roughly a week. Questi
+  - figure: '3780'
+    key: insclaimbench
+    snippet: laim materials and structured insurance rules, InsClaimBench contains 3780 cases in 375 case families across auto, property, and health insuranc
+  - figure: '73'
+    key: insclaimbench
+    snippet: rom 74.23–80.19%, while joint decision–amount accuracy drops to 47.54–73.15%. Strong local performance also fails to ensure case-level correct
+- id: customs-entries
+  n: 20
+  title: Customs entries and what the border agency later decided
+  sources:
+  - key: cbp-ruling
+    name: US Customs and Border Protection, ruling HQ H350722, 16 January 2026
+    url: https://rulings.cbp.gov/api/getdoc/hq/2026/H350722.pdf
+  - key: abf-update
+    name: Australian Border Force, Goods Compliance Update, May 2025
+    url: https://www.abf.gov.au/trade-and-goods-compliance-subsite/ComplianceNewsletters/goods-compliance-update-may-2025.pdf
+  - key: abf-guide
+    name: Australian Border Force, Infringement Notice Scheme guide
+    url: https://www.abf.gov.au/trade-and-goods-compliance-subsite/files/infringement-notice-scheme-guide.pdf
+  - key: wisetech
+    name: WiseTech Global, Agentic AI Development Agreement
+    url: https://www.wisetechglobal.com/legal/agentic-ai-development-agreement-ada/
+  - key: cass
+    name: Cass Information Systems, freight audit and payment
+    url: https://www.cassinfo.com/freight-audit-payment
+  - key: atlas
+    name: arXiv paper, ATLAS benchmark for tariff classification
+    url: https://arxiv.org/html/2509.18400
+  - key: hscodecomp
+    name: ACL 2026 paper, HSCodeComp
+    url: https://aclanthology.org/2026.acl-long.937/
+  - key: zonos
+    name: Zonos, post on its rebuilt classifier
+    url: https://zonos.com/blog/classify-rebuilt
+  - key: loop
+    name: Loop, freight and parcel audit
+    url: https://www.loop.com/capabilities/freight-and-parcel-audit
+  figures:
+  - figure: '5226'
+    key: abf-update
+    snippet: D 2024/25 FYTD 2023/24 2024/25 2023/24 No. of lines checked 1752 1364 5226 4521 No. of lines detected to have errors 506 436 1579 1398 Error Rat
+  - figure: '1579'
+    key: abf-update
+    snippet: cked 1752 1364 5226 4521 No. of lines detected to have errors 506 436 1579 1398 Error Rate 28.8% 31.4% 30.2% 30.6% No. of Detections 743 430 214
+  - figure: '30.2'
+    key: abf-update
+    snippet: ines detected to have errors 506 436 1579 1398 Error Rate 28.8% 31.4% 30.2% 30.6% No. of Detections 743 430 2141 1386 Table 6 - Most common erro
+  - figure: '351'
+    key: abf-update
+    snippet: elivery Address 231 196 Goods Description 80 88 Tariff Classification 351 135 Val - Price (Invoice Total) 132 99 Val - Related Transaction 111
+  - figure: '5'
+    key: abf-guide
+    snippet: t is an infringement notice? 3 4 What is the legislative framework? 4 5 In what circumstances is the ABF likely to issue an infringement noti
+  - figure: '35'
+    key: cass
+    snippet: rt > 15000 freight carriers in our payment network We Process and Pay 35 Million freight invoices each year Cass Transportation Indexes Since
+  - figure: '37'
+    key: cass
+    snippet: Global execution Get in Touch Cass Freight in Numbers Trusted With $ 37 Billion in freight spend processed & paid annually We Support > 15000
+  - figure: '18731'
+    key: atlas
+    snippet: ission (2025) . After filtering and cleaning, the final dataset spans 18731 rulings covering 2992 unique HTS codes across a broad range of produc
+  - figure: '2992'
+    key: atlas
+    snippet: iltering and cleaning, the final dataset spans 18731 rulings covering 2992 unique HTS codes across a broad range of product categories. Not ever
+  - figure: '25'
+    key: atlas
+    snippet: 5% at the 6-digit level , substantially outperforming GPT-5-Thinking (25%) and Gemini-2.5-Pro-Thinking (13.5%). • Beyond accuracy, Atlas is si
+  - figure: '40'
+    key: atlas
+    snippet: LMs, we find that our fine-tuned Atlas model (LLaMA-3.3-70B) achieves 40% fully correct 10-digit classifications and 57.5% correct 6-digit cla
+  - figure: '632'
+    key: hscodecomp
+    snippet: tributes with strict tariff classification rules.HSCodeComp comprises 632 realistic products across 32 categories, featuring detailed yet noisy
+  - figure: '26'
+    key: hscodecomp
+    snippet: es, attributes, and images). The HS Codes are annotated by a panel of 26 tariff experts, strictly adhering to official rules and an empirical
+  - figure: '46.8'
+    key: hscodecomp
+    snippet: rmance gap remains between state-of-the-art agents and human experts (46.8% vs. 95.0%); and 2) test-time scaling fails to close this gap. Furthe
+  - figure: '95.0'
+    key: hscodecomp
+    snippet: remains between state-of-the-art agents and human experts (46.8% vs. 95.0%); and 2) test-time scaling fails to close this gap. Further analysis
+- id: planner-forecast-overrides
+  n: 23
+  title: Planners' changes to a software forecast, and what happened next
+  sources:
+  - key: ijf-2025
+    name: International Journal of Forecasting, 2025, pooled study of forecast adjustments (abstract)
+    url: https://ideas.repec.org/a/eee/intfor/v41y2025i2p649-669.html
+  - key: first-analytics
+    name: First Analytics, demand planners case study
+    url: https://firstanalytics.com/portfolio-item/demand-planners/
+  - key: eyeon
+    name: EyeOn, can AI predict which forecast enrichments add value
+    url: https://eyeonplanning.com/blog/can-ai-help-us-predict-which-forecast-enrichments-add-value/
+  - key: cesifo-10849
+    name: CESifo Working Paper 10849, hotel pricing algorithms and managers
+    url: https://www.ifo.de/DocDL/cesifo1_wp10849.pdf
+  - key: ideas-aup
+    name: IDeaS acceptable use policy (Internet Archive copy)
+    url: https://web.archive.org/web/20260612054028id_/https://ideas.com/acceptable-use-policy/
+  - key: pros-msa
+    name: PROS master subscription agreement
+    url: https://pros.com/master-subscription-agreement
+  figures:
+  - figure: '147000'
+    key: ijf-2025
+    snippet: ress these issues, we collected the publicly available data on around 147000 forecasts from six studies and analysed them using a common framework
+  - figure: '900000'
+    key: first-analytics
+    snippet: bad ones. A MEASURABLE IMPACT In a comparative, holdout evaluation of 900000 actual overrides, the machine learning algorithms and human planners
+  - figure: '6'
+    key: cesifo-10849
+    snippet: ific Cluster (VSC). Garcia gratefully acknowledges funding from FWF-FG6 Project. Wagner gratefully acknowledges financial support from the An
+  - figure: '9'
+    key: cesifo-10849
+    snippet: chooses a linear reporting strategy but can secretly deviate from it. 9 In the algorithmic pricing industry, some companies offer an arrangem
+  - figure: '85'
+    key: cesifo-10849
+    snippet: 'e price to exactly match the price recommendation. On average, around 85% of the price up- 12 Table 2: Price Update Probability Update Probabi'
+- id: three-long-shots
+  n: 28
+  title: 'Three long shots: repair video, fire predictions, film cost reports'
+  sources:
+  - key: rfs-nye-2019
+    name: NSW Rural Fire Service, fire spread predictions for New Year's Eve 2019 (Internet Archive copy)
+    url: https://web.archive.org/web/20250909105511id_/https://www.rfs.nsw.gov.au/about-us/our-districts/blue-mountains/photo-and-video-gallery/2015-photo-and-video-gallery/fire-spread-predictions-for-new-years-eve-2019
+  - key: film-finances-archive
+    name: Film Finances, the Film Finances archive (Internet Archive copy)
+    url: https://web.archive.org/web/2026id_/https://www.filmfinances.com/post/the-film-finances-archive
+  - key: eup-blog
+    name: Edinburgh University Press blog, researching film finance
+    url: https://euppublishingblog.com/2022/10/07/researching-film-finance/
+  - key: film-finances-au
+    name: Film Finances Australasia, monitoring
+    url: https://www.filmfinances.com.au/6Amonitor.html
+  - key: fire-review-2020
+    name: 2020 review of fire prediction practice
+    url: https://exa.ai/library/publication/848z2072trj
+  figures:
+  - figure: '600'
+    key: film-finances-archive
+    snippet: e Film Finances Archive contains production material relating to over 600 films that the company guaranteed before 1980. It is one of the large
+- id: ai-use-and-corrections-at-work
+  n: 33
+  title: Records of people using AI at work, and correcting it
+  sources:
+  - key: anthropic-terms
+    name: Anthropic commercial terms of service
+    url: https://www.anthropic.com/legal/commercial-terms
+  - key: ms-copilot
+    name: Microsoft, data, privacy and security for Microsoft 365 Copilot
+    url: https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-privacy
+  - key: micro1-partners
+    name: micro1 data partnerships page (read as a search extract)
+    url: https://www.micro1.ai/data-partnerships
+  - key: cursor-privacy
+    name: Cursor privacy overview
+    url: https://cursor.com/privacy-overview
+  - key: jetbrains-faq
+    name: JetBrains product data collection FAQ
+    url: https://www.jetbrains.com/legal/docs/terms/product_data_collection_faq/
+  - key: jetbrains-blog
+    name: JetBrains, detailed data sharing for better AI, September 2025
+    url: https://blog.jetbrains.com/blog/2025/09/30/detailed-data-sharing-for-better-ai/
+  - key: oaic-ai
+    name: Office of the Australian Information Commissioner, guidance on commercially available AI products
+    url: https://www.oaic.gov.au/privacy/privacy-guidance-for-organisations-and-government-agencies/guidance-on-privacy-and-the-use-of-commercially-available-ai-products
+  - key: magma
+    name: Magma
+    url: https://magmahq.ai
+  - key: cookiy
+    name: Cookiy Labs, coding traces
+    url: https://cookiylabs.com/data/coding-traces/
+  - key: sourcex
+    name: SourceX, evaluation sets
+    url: https://sourcex.si/datasets/use-cases/evaluation-sets
+  - key: otter-docket
+    name: In re Otter.AI Privacy Litigation, docket
+    url: https://storage.courtlistener.com/recap/gov.uscourts.cand.454675/gov.uscourts.cand.454675.1.0_1.pdf
+  - key: granola-complaint
+    name: Class complaint against Granola
+    url: https://storage.courtlistener.com/recap/gov.uscourts.cand.475308/gov.uscourts.cand.475308.1.0.pdf
+  figures: []
+- id: resale-of-finished-datasets
+  n: 34
+  title: Reselling datasets the leading labs have finished with
+  sources:
+  - key: forbes-china
+    name: Forbes, "Silicon Valley's other China problem", August 2026 (opening paragraphs only) (Internet Archive copy)
+    url: https://web.archive.org/web/20260930150639id_/https://www.forbes.com/sites/annatong/2026/08/05/silicon-valleys-other-china-problem-its-training-their-ai/
+  - key: lavx-summary
+    name: Secondary summary of the Forbes report
+    url: https://news.lavx.hu/article/these-american-startups-are-making-china-s-ai-smarter
+  - key: fenado-summary
+    name: Secondary summary of the Forbes report
+    url: https://fenado.ai/articles/us-data-firms-serving-government-also-supply-chinese-ai-labs-sparking-national-security-concerns
+  - key: proximal-msa
+    name: Proximal master services agreement
+    url: https://proximal.ai/msa
+  - key: tgdc-pack
+    name: The General Data Company, seller pack
+    url: https://thegeneraldata.com/downloads/TGDC-Seller-Pack-Archive.pdf
+  - key: lawfare
+    name: Lawfare, "America must protect its training data", September 2026
+    url: https://www.lawfaremedia.org/article/america-must-protect-its-training-data
+  - key: doj-guide
+    name: US Department of Justice, Data Security Program compliance guide
+    url: https://www.justice.gov/opa/media/1396356/dl
+  - key: ecfr-202
+    name: Code of Federal Regulations, title 28, part 202
+    url: https://www.ecfr.gov/current/title-28/chapter-I/part-202
+  - key: spirit-bid
+    name: micro1's competing bid in the Spirit Aviation Holdings bankruptcy, September 2026
+    url: https://cdn.arstechnica.net/wp-content/uploads/2026/09/In-RE-Spirit-Aviation-Holdings-Micro1-Competing-Bid-9-3-26.pdf
+  - key: datavendor
+    name: DataVendor (Internet Archive copy)
+    url: https://web.archive.org/web/20261009203626id_/https://datavendor.ai/
+  - key: aiproem
+    name: AI Proem, "Does China not have data vendors?" (opening section)
+    url: https://aiproem.substack.com/p/does-china-not-have-data-vendors
+  figures: []
+- id: private-refreshed-test-sets
+  n: 35
+  title: Private tests of AI, kept secret and regularly refreshed
+  sources:
+  - key: vals-fabv2
+    name: Vals AI, Finance Agent benchmark v2
+    url: https://vals.ai/benchmarks/fabv2
+  - key: vals-series-a
+    name: Vals AI, Series A announcement
+    url: https://www.vals.ai/blogs/series-a
+  - key: vals-hlab
+    name: Vals AI, Harvey Legal Agent Benchmark
+    url: https://vals-ai.com/benchmarks/hlab
+  - key: epoch-frontiermath
+    name: Epoch AI, OpenAI and FrontierMath
+    url: https://epoch.ai/latest/openai-and-frontiermath
+  - key: epoch-report
+    name: Epoch AI, impact report 2025
+    url: https://epoch.ai/latest/epoch-impact-report-2025
+  - key: siliconangle-lmarena
+    name: SiliconANGLE, LMArena raises US$150M, January 2026
+    url: https://siliconangle.com/2026/01/06/ai-evaluation-startup-lmarena-raises-150m-1-7b-valuation/
+  - key: privateeval
+    name: PrivateEval
+    url: https://privateeval.ai/
+  - key: sourcex
+    name: SourceX, evaluation sets
+    url: https://sourcex.si/datasets/use-cases/evaluation-sets
+  - key: allens
+    name: Allens AI Australian law benchmark 2025, results
+    url: https://www.allens.com.au/insights-news/explore/2025/the-allens-ai-australian-law-benchmark-2025/the-results/
+  - key: aus-reg-bench
+    name: aus-reg-bench, public code repository
+    url: https://github.com/kylieannerichards/aus-reg-bench
+  - key: tpb
+    name: Tax Practitioners Board, guidance on the use of artificial intelligence, 2026 (Internet Archive copy)
+    url: https://web.archive.org/web/20260905060031id_/https://www.tpb.gov.au/tpbgs-552026-use-artificial-intelligence-and-code-professional-conduct
+  - key: andon-vending
+    name: Andon Labs, Vending-Bench
+    url: https://andonlabs.com/evals/vending-bench
+  - key: braintrust-pricing
+    name: Braintrust pricing
+    url: https://www.braintrust.dev/pricing
+  figures:
+  - figure: '927'
+    key: vals-fabv2
+    snippet: hanged. Background Finance Agent v2 builds on Finance Agent v1.1 with 927 expert-reviewed questions across public, private validation, and held
+  - figure: '27'
+    key: vals-fabv2
+    snippet: 3 $2 / $12 24m10s 26 Claude Haiku 5.5 54.14% $1.64 $0.1 / $0.5 30m49s 27 Claude Opus 4.8 53.92% $4.22 $5 / $25 9m07s 28 Claude Sonnet 5 53.91%
+  - figure: '450'
+    key: vals-fabv2
+    snippet: 'nto three parts: Public (27 open-source samples), Private Validation (450 samples available for license), and Test (450 samples). The Public se'
+  - figure: '60.60'
+    key: vals-fabv2
+    snippet: ith 65.40%, followed by Gemini 3.8 Flash (61.44%) and Muse Spark 1.2 (60.60%). Finance Agent v2 Core financial analyst tasks ACCURACY Cost Ant Gr
+  - figure: '300'
+    key: epoch-frontiermath
+    snippet: ath benchmark We clarify that OpenAI commissioned Epoch AI to produce 300 math questions for the FrontierMath benchmark. They own these and hav
+  - figure: '40'
+    key: vals-series-a
+    snippet: ncredible team has tripled in six months. Today we’re announcing our $40M Series A at a $400M valuation, led by a16z, with participation from
+  - figure: '400'
+    key: vals-series-a
+    snippet: tripled in six months. Today we’re announcing our $40M Series A at a $400M valuation, led by a16z, with participation from existing investors 8
+  - figure: '150'
+    key: siliconangle-lmarena
+    snippet: AI evaluation startup LMArena raises $150M at $1.7B valuation - SiliconANGLE Skip to content [the voice of ente
+  - figure: '1.7'
+    key: siliconangle-lmarena
+    snippet: AI evaluation startup LMArena raises $150M at $1.7B valuation - SiliconANGLE Skip to content [the voice of enterprise an
+  - figure: '50'
+    key: epoch-frontiermath
+    snippet: n these and have access to the statements and solutions, except for a 50-question holdout set. Cite By Tamay Besiroglu and Jaime Sevilla Front
+  - figure: '10.3'
+    key: epoch-report
+    snippet: 2024 31000 Twitter followers 2× since 2024 Finances and organization $10.3 million Raised from donors and collaborators +40% from 2024 $5 millio
+  - figure: '25.42'
+    key: vals-hlab
+    snippet: 26, Muse Spark 1.2 ranks first on Harvey's Legal Agent Benchmark with 25.42%, followed by Muse Spark 1.3 Max (23.75%) and Muse Spark 1.3 (22.92%)
+  - figure: '249'
+    key: braintrust-pricing
+    snippet: experiments Sign up No credit card required Pro For AI native teams $249 / month $100 credits + tok rates 5 GB processed data + $3/GB 50k scor
+- id: biology-lab-records
+  n: 36
+  title: The working records of biology laboratories
+  sources:
+  - key: thefly
+    name: Tiger Brokers news item, 17 December 2025
+    url: https://www.itiger.com/news/1107482798
+  - key: pivotnews
+    name: Pivot News, OpenAI Foundation funds bid to buy data from bankrupt biotechs
+    url: https://pivotnews.ai/healthcare/openai-foundation-funds-bid-to-buy-data-from-bankrupt
+  - key: mit-tr
+    name: MIT Technology Review, September 2026
+    url: https://www.technologyreview.com/2026/09/15/1144129/ai-models-need-more-data-about-biology-and-openai-is-paying-to-create-it/
+  - key: strategic-signal
+    name: Strategic Signal, deal note
+    url: https://strategicsignal.ai/ai-data-transactions/deals/ss-aidt-2026-0018/
+  - key: ginkgo-pr
+    name: Ginkgo Bioworks press release, February 2026
+    url: https://www.prnewswire.com/news-releases/ginkgo-bioworks-autonomous-laboratory-driven-by-openais-gpt-5-achieves-40-improvement-over-state-of-the-art-scientific-benchmark-302680619.html
+  - key: benchling-msa
+    name: Benchling main services agreement
+    url: https://www.benchling.com/main-services-agreement
+  - key: benchling-ai-service
+    name: Benchling AI service terms
+    url: https://www.benchling.com/ai-service-terms
+  - key: benchling-tos
+    name: Benchling terms of service
+    url: https://www.benchling.com/terms-of-service
+  - key: dotmatics
+    name: Dotmatics terms and conditions
+    url: https://www.dotmatics.com/terms-and-conditions
+  - key: labarchives
+    name: LabArchives enterprise terms and conditions
+    url: https://www.labarchives.com/docs/LabArchives-Enterprise-Terms&Conditions.pdf
+  - key: cmri
+    name: Children's Medical Research Institute, research core facilities terms
+    url: https://www.cmrijeansforgenes.org.au/system/research-core-facilities-terms-and-conditions
+  - key: agrf
+    name: AGRF sample retention policy
+    url: https://www.agrfclinical.com/sample-retention-policy
+  - key: ctd-commons
+    name: CTD Commons
+    url: https://www.ctdcommons.org/
+  - key: asx-paradigm
+    name: Paradigm Biopharmaceuticals, ASX announcement, September 2026
+    url: https://announcements.asx.com.au/asxpdf/20260930/pdf/074q95c6fs00x1.pdf
+  - key: fallow
+    name: Fallow Labs
+    url: https://fallowlabs.co/
+  - key: datanexx
+    name: DataNexx, for data owners
+    url: https://datanexx.ai/for-data-owners/
+  - key: geekwire
+    name: GeekWire, Harell Data raises US$15M (Internet Archive copy)
+    url: https://web.archive.org/web/20260926135314id_/https://www.geekwire.com/2026/adaptive-biotech-co-founder-raises-15m-for-new-startup-to-rethink-how-ai-trains-on-science/
+  - key: revvity-lilly
+    name: Revvity press release on its collaboration with Lilly (Internet Archive copy)
+    url: https://web.archive.org/web/20260202072749id_/https://news.revvity.com/press-announcements/press-releases/press-release-details/2026/Revvity-Collaborates-with-Lilly-to-Expand-Access-to-AI-Drug-Discovery-Models/default.aspx
+  figures:
+  - figure: '500000'
+    key: pivotnews
+    snippet: nAI Foundation funds bid to buy data from bankrupt biotech firms The $500000 grant to advocacy group 1Day Sooner is part of a new Data for Public
+  - figure: '1'
+    key: pivotnews
+    snippet: data from bankrupt biotech firms The $500000 grant to advocacy group 1Day Sooner is part of a new Data for Public Health program whose first
+  - figure: '40'
+    key: pivotnews
+    snippet: of a new Data for Public Health program whose first round also sends $40 million to a cancer vaccine data effort at the University of North Ca
+  - figure: '300'
+    key: strategic-signal
+    snippet: OE and NIH. Meta, Google DeepMind and Isomorphic Labs jointly invest $300 million and receive a one-year commercial embargo period for data the
+  - figure: '36000'
+    key: ginkgo-pr
+    snippet: cell-free protein synthesis GPT-5-driven autonomous lab executed over 36000 experiments Ginkgo now selling the AI-improved reaction mix in its re
+  - figure: '1'
+    key: ctd-commons
+    snippet: 'o secure non-exclusive rights to this information. How it works: Step 1: Monitor Bankruptcy Proceedings A small team of legal experts tracks'
+  - figure: '1'
+    key: datanexx
+    snippet: TASET PROFILE Illustrative Food Quality Dataset History 8 years Tests 1.8M Chemical + microbiological measurements Production batch linkage P
+  - figure: '15'
+    key: geekwire
+    snippet: Adaptive Biotech co-founder raises $15M for new startup to rethink how AI trains on science – GeekWire Toggl
+- id: warranty-negligence-and-test-lab-files
+  n: 38
+  title: 'Three files with an outside verdict: home-warranty claims, lawyers'' negligence claims, and failed product tests'
+  sources:
+  - key: icare-ar
+    name: icare annual report and financial statements 2024-25
+    url: https://edge.sitecorecloud.io/insuranceanf0c2-xmcprodf24d-xmprod74a5-5eb4/media/icare/unique-media/about-us/annual-report/media-files/files/download-module/icare-annual-report-2024-25.pdf
+  - key: icare-quoting
+    name: icare, quoting for rectification work on claims
+    url: http://icare.nsw.gov.au/builders-and-homeowners/builders-and-distributors/quoting-for-rectification-work-on-hbcf-claims
+  - key: vago
+    name: Victorian Auditor-General, Domestic Building Insurance, May 2025
+    url: https://www.audit.vic.gov.au/report/domestic-building-insurance
+  - key: bpc
+    name: Building and Plumbing Commission, domestic building insurance (Internet Archive copy)
+    url: https://web.archive.org/web/2026id_/https://www.bpc.vic.gov.au/domestic-building-insurance/porter-davis-builders
+  - key: qbcc-ar
+    name: Queensland Building and Construction Commission annual report 2022-23 — qbcc.qld.gov.au; no direct address recorded
+    url: https://www.qbcc.qld.gov.au/sites/default/files/documents/corporate-qbcc-ar-22-23-annual-report.pdf
+  - key: vic-ombudsman
+    name: Victorian Ombudsman, report on the management of domestic building insurance claims
+    url: https://www.ombudsman.vic.gov.au/our-impact/investigation-reports/we-just-want-to-finish-our-home-management-of-domestic-building-insurance-claims-by-vmia/
+  - key: lplc-ar
+    name: Legal Practitioners' Liability Committee annual report 2024-25
+    url: https://lplc.com.au/uploads/main/LPLC-Annual-Report-24-25.pdf
+  - key: lawsoc-nsw-ar
+    name: Law Society of NSW annual report 2023
+    url: https://www.lawsociety.com.au/sites/default/files/2024-09/LSNSW_AnnualReport24_2024-09-27a.pdf
+  - key: florida-study
+    name: St. Mary's Journal on Legal Malpractice & Ethics, study of Florida's closed-claim database, 2024 (Internet Archive copy)
+    url: https://web.archive.org/web/20250526071043id_/https://commons.stmarytx.edu/cgi/viewcontent.cgi?article=1170&context=lmej
+  - key: harvey-lab
+    name: Harvey, introducing the Legal Agent Benchmark
+    url: https://www.harvey.ai/blog/introducing-harveys-legal-agent-benchmark
+  - key: iso-17025
+    name: ISO/IEC 17025:2017, as reflected in the Australian accreditor's assessment worksheet
+    url: https://nata.com.au/files/2021/05/ISO-IEC-17025_assessment_worksheet.pdf
+  - key: emctech-terms
+    name: EMC Technologies terms and conditions
+    url: https://www.emctech.com.au/wp-content/uploads/2020/11/terms-and-conditions.pdf
+  - key: crado
+    name: Crado
+    url: https://www.crado.io/
+  - key: fuchsia
+    name: Fuchsia, Y Combinator company page
+    url: https://www.ycombinator.com/companies/fuchsia
+  - key: kicad-emc
+    name: kicad-happy, EMC rule set
+    url: https://github.com/aklofas/kicad-happy/blob/main/skills/emc/SKILL.md
+  figures:
+  - figure: '749'
+    key: icare-ar
+    snippet: owner feedback. © icare TM | Insurance and Care NSW 2025 41 Key facts 749 23943 new claims received builders covered 75976 $22.8 policies issue
+  - figure: '23943'
+    key: icare-ar
+    snippet: r feedback. © icare TM | Insurance and Care NSW 2025 41 Key facts 749 23943 new claims received builders covered 75976 $22.8 policies issued bill
+  - figure: '14342'
+    key: vago
+    snippet: 'l process for a DBI claim. Between 2019–20 and 2023–24, VMIA received 14342 DBI claims. As of October 2024, it had: fully accepted 24 per cent pa'
+  - figure: '212'
+    key: qbcc-ar
+    snippet: 'nsumers) as well as the broader community. Scheme have increased from 212 in 2020-2021 to 730 in 2021- This will mean we can: 2022 to 1387 in 2'
+  - figure: '730'
+    key: qbcc-ar
+    snippet: 'the broader community. Scheme have increased from 212 in 2020-2021 to 730 in 2021- This will mean we can: 2022 to 1387 in 2022-2023 – an increa'
+  - figure: '1387'
+    key: qbcc-ar
+    snippet: 'from 212 in 2020-2021 to 730 in 2021- This will mean we can: 2022 to 1387 in 2022-2023 – an increase of 554 per cent over three years. • increa'
+  - figure: '514'
+    key: lplc-ar
+    snippet: and circumstances that may lead to claims, as soon as they A total of 514 matters (261 claims and 253 become aware of them. This enables the no
+  - figure: '261'
+    key: lplc-ar
+    snippet: nces that may lead to claims, as soon as they A total of 514 matters (261 claims and 253 become aware of them. This enables the notifications)
+  - figure: '714'
+    key: lawsoc-nsw-ar
+    snippet: notifications were received in the year to 30 June 2024 compared with 714 in the year to 30 June 2023. Lawcover’s continued achievement of posi
+  - figure: '8175'
+    key: florida-study
+    snippet: ess of going through each individual entry. At the outset, there were 8175 entries. Many entries, however, had to be discarded because they lack
+- id: foreign-accounting-and-outsourcing-files
+  n: 39
+  title: Accounting and back-office files from India and the Philippines, and whether labs behind the frontier buy local data
+  sources:
+  - key: lavx-summary
+    name: Secondary write-up of a news investigation into American vendors selling to Chinese labs
+    url: https://news.lavx.hu/article/these-american-startups-are-making-china-s-ai-smarter
+  - key: sarvam
+    name: Sarvam, model training
+    url: https://www.sarvam.ai/products/model-training
+  - key: bharatgen
+    name: BharatGen
+    url: https://bharatgen.com/
+  - key: mistral-humain
+    name: Mistral, announcement with Humain, August 2026
+    url: https://mistral.ai/news/mistral-x-humain/
+  - key: dpdp-rules
+    name: Digital Personal Data Protection Rules 2025, gazette notification
+    url: https://gazettetracker.com/g/CG-DL-E-14112025-267650
+  - key: induslaw
+    name: IndusLaw, FAQs on the Digital Personal Data Protection Act and Rules
+    url: https://cms-induslaw.com/en/ind/publication/faqs-on-the-digital-personal-data-protection-act-and-rules
+  - key: sovereign-au
+    name: Sovereign Australia AI, copyright fund announcement
+    url: https://sovereign-au.ai/launches-10m-copyright-fund-for-home-grown-models/
+  - key: copyright-agency
+    name: Copyright Agency, Australian AI start-ups committed to paying for content, October 2025
+    url: https://www.copyright.com.au/2025/10/australian-ai-startups-committed-to-paying-australians-for-their-content/
+  - key: lh2
+    name: LH2 AI Labs, about us
+    url: https://www.lh2.ai/about-us
+  - key: benyuan
+    name: Announcement of the acquisition of a controlling stake in Benyuan Zhishu
+    url: https://aseantrend.com/acn-newswire/c-banner-to-acquire-controlling-stake-in-benyuan-zhishu-to-establish-dual-core-businesses-footwear-ai-data/
+  figures:
+  - figure: '15000'
+    key: bharatgen
+    snippet: and philosophy. Why it matters? This secure, versioned corpus (e.g., 15000+ hours of annotated voice data across 22 Indian languages by Q4 2025)
+  - figure: '22'
+    key: bharatgen
+    snippet: . Our foundational AI models are fluent in understanding and speaking 22+ Indian languages, dialects, and cultural nuances. Our futuristic app
+  - figure: '10'
+    key: sovereign-au
+    snippet: Sovereign Australia AI Launches $10M Copyright Fund to Train Ethical, Home-Grown Models - Sovereign Austr
+- id: aircraft-defect-logs-and-forecast-versions
+  n: 41
+  title: 'Two smaller records: small-aircraft defect logs, and forecasts set against what happened'
+  sources:
+  - key: car-50a
+    name: Civil Aviation Regulations 1988, regulation 50A
+    url: https://www.legislation.gov.au/F1997B00935/2026-06-30/2026-06-30/text/original/epub/OEBPS/document_1/document_1.html
+  - key: casa-sched6
+    name: Civil Aviation Safety Authority, Schedule 6 to the Civil Aviation Regulations (Internet Archive copy)
+    url: https://web.archive.org/web/20250612033823id_/https://www.casa.gov.au/rules/regulatory-framework/car/schedule-6-car-casa-system-certification-completion-maintenance
+  - key: airbus-guide
+    name: Airbus, In-Service Reliability Data Reporting guide (copy)
+    url: https://www.scribd.com/document/563335432
+  - key: faa-sdr
+    name: US Federal Aviation Administration, Service Difficulty Reports download
+    url: https://www.faa.gov/av-info/download_SDR
+  - key: casa-drs
+    name: Civil Aviation Safety Authority, Defect Report Service (Internet Archive copy)
+    url: https://web.archive.org/web/20260617063554id_/https://www.casa.gov.au/resources-and-education/our-systems/defect-report-service
+  - key: camb
+    name: CAMB benchmark paper
+    url: https://arxiv.org/html/2508.20420v1
+  - key: businesswire-trecs
+    name: Business Wire, MTU Maintenance Lease Services invests in TRecs, May 2026 (Internet Archive copy)
+    url: https://web.archive.org/web/20260517021247id_/https://www.businesswire.com/news/home/20260513682497/en/MTU-Maintenance-Lease-Services-Invests-in-TRecs-to-Digitalise-Engine-Transition-Management
+  - key: mbabench
+    name: MBABench 2.0 repository README
+    url: https://raw.githubusercontent.com/namkoong-lab/MBABench-2.0/main/README.md
+  - key: bluefin
+    name: BlueFin benchmark paper
+    url: https://arxiv.org/abs/2605.30907
+  - key: frontierfinance
+    name: FrontierFinance benchmark paper
+    url: https://www.arxiv.org/pdf/2604.05912
+  - key: finch
+    name: FINCH / FinWorkBench paper
+    url: https://aclanthology.org/2026.findings-acl.523.pdf
+  - key: telegent
+    name: Investor document checklist
+    url: https://www.telegentai.com/investors
+  - key: aistartupcfo
+    name: Data-room checklist
+    url: https://aistartupcfo.com/blog/ai-startup-data-room-checklist
+  figures:
+  - figure: '101'
+    key: mbabench
+    snippet: kbook, and build a complete, working financial model in Excel. It has 101 tasks, four ways of running an agent on them, and an LLM judge that g
+  - figure: '7969'
+    key: camb
+    snippet: taset 5984 6 20 234 QA dataset 202 25 263 299 Multiple-choice dataset 7969 3 8 18 Fault-tree dataset 50 6 33 495 3.2 Task Construction We design
+  - figure: '50'
+    key: camb
+    snippet: 202 25 263 299 Multiple-choice dataset 7969 3 8 18 Fault-tree dataset 50 6 33 495 3.2 Task Construction We designed seven types of tasks, each
+  - figure: '131'
+    key: bluefin
+    snippet: those in professional finance roles. In response, we curate a set of 131 challenging, complex tasks with real-world relevance in the domain, c
+  - figure: '50'
+    key: bluefin
+    snippet: he challenging benchmark, with the strongest LLMs achieving less than 50\% average scores across tasks -- models exhibit particular weaknesses
+  - figure: '77.2'
+    key: frontierfinance
+    snippet: '6 78.7 58.7 11 1.52 0.59 DCF Thor 85.0 70.5 61.1 11 1.32 0.50 Average 77.2 70.9 61.8 18.3 0.97 0.71 Table 3: Expert-graded performance compariso'
+  - figure: '70.9'
+    key: frontierfinance
+    snippet: '7 58.7 11 1.52 0.59 DCF Thor 85.0 70.5 61.1 11 1.32 0.50 Average 77.2 70.9 61.8 18.3 0.97 0.71 Table 3: Expert-graded performance comparison of'
+  - figure: '172'
+    key: finch
+    snippet: fort. This timodal artifacts such as charts, images, and code. yields 172 composite workflows with 384 tasks, It is also long-horizon (Patwardh
+  - figure: '38.4'
+    key: finch
+    snippet: sourced from authentic enterprise envi- per workflow yet passes only 38.4% of work- ronments. F INCH captures the intrinsic complexity flows. C

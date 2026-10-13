@@ -346,6 +346,13 @@ def test_a_number_must_be_stated_in_a_snippet_of_a_source_its_sentence_cites():
     assert f"dossier {d['id']}: 98765 is not stated by a source its sentence cites" in errors
     assert f"dossier {d['id']}: 43210 is not stated by a source its sentence cites" in errors
     assert "77777" not in errors, "a labelled invented example is exempt"
+    q = copy.deepcopy(DOSSIERS[0])
+    q["text"] += (
+        f'\n\nIts terms say the customer "keeps every right to all of its own records for ever" [{key}].'
+    )
+    assert "a quotation is not recorded as read on a source its sentence cites" in "\n".join(
+        dm.dossier_problems([q], FETCHES)
+    )
     assert f"dossier {d['id']} cites no-such-source, which is not in its sources" in errors
     e = copy.deepcopy(DOSSIERS[0])
     e["text"] = e["text"].replace("**A model's judgement, not a reading:**", "**Verdict:**")

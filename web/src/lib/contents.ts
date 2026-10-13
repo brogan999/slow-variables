@@ -183,13 +183,14 @@ export const PAGES: Record<string, Page> = {
     ["dm-field", "Every kind of record as one mark", "How much of the field is already taken?"],
     ["dm-families", "The records, family by family", "Who holds each kind of record, and what was found?"],
   ] },
+  "/data-market/dossiers": { name: "The data market: dossiers", question: "Which kinds of record have been examined closely, and what did each turn up?", each: [["/data-market/dossiers/", "One page per kind of record: what it is, who holds it, who is already there, what stands in the way, and a labelled judgement."]] },
   "/ask": { name: "Ask", question: "Can I put a question to the data in plain words?" },
 };
 
 // Deep dives listed under the stop they belong to, and the reference pages that belong to none.
 export const UNDER: Record<string, readonly string[]> = {
   "/argument": ["/argument/migration"],
-  "/capture": ["/value-chain", "/value-chain/opportunities", "/value-chain/atlas", "/data-market", "/data-market/vendors", "/data-market/prices", "/data-market/sources", "/stack", "/ledger"],
+  "/capture": ["/value-chain", "/value-chain/opportunities", "/value-chain/atlas", "/data-market", "/data-market/vendors", "/data-market/prices", "/data-market/sources", "/data-market/dossiers", "/stack", "/ledger"],
   "/firm": ["/firm/kinds"],
   "/predictions": ["/compare"],
   "/singularity": ["/singularity/atlas", "/futures"],

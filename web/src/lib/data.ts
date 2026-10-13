@@ -784,3 +784,11 @@ export type DataMarketDoc = {
   };
 };
 export const dataMarket = () => read<DataMarketDoc>("data_market.json");
+
+// Part 57f: the dossiers (web/data/data_market_dossiers.json, written by data_market.dossier_docs).
+export type DataMarketDossier = {
+  id: string; n: number; title: string;
+  blocks: { kind: "h2" | "h3" | "p" | "ul" | "judgement"; text?: string; items?: string[]; keys?: string[]; by?: string }[];
+  sources: { key: string; name: string; url: string; n: number; retrieved_at: string }[];
+};
+export const dataMarketDossiers = () => read<DataMarketDossier[]>("data_market_dossiers.json");

@@ -21,6 +21,10 @@ ROOT = Path(__file__).resolve().parents[2]
 SPEC = ROOT / "seed" / "data_market.yaml"
 FETCHES = ROOT / "seed" / "data_market_fetches.yaml"
 SOURCES = ROOT / "seed" / "data_market_sources.jsonl"
+DOSSIERS = ROOT / "seed" / "data_market_dossiers.yaml"
+DOSSIER_FETCHES = ROOT / "seed" / "data_market_dossier_fetches.yaml"
+DOSSIER_TEXT = ROOT / "docs" / "data-market" / "dossiers"
+JUDGED = "**A model's judgement, not a reading:**"
 SOCIAL = re.compile(r"https?://([\w-]+\.)*(x|twitter|linkedin|facebook|instagram|tiktok|reddit)\.com/", re.I)
 ROLES = ("seller", "builder")
 EVIDENCE = ("evidenced", "weak")
@@ -58,7 +62,13 @@ def load() -> dict[str, Any]:
 
 
 def fetches() -> list[dict[str, Any]]:
-    return (yaml.safe_load(FETCHES.read_text()) or {}).get("fetches") or [] if FETCHES.exists() else []
+    """Every fetch record of the section: the vendors' pages and, in their own file, the dossiers' sources."""
+    return [
+        f
+        for p in (FETCHES, DOSSIER_FETCHES)
+        if p.exists()
+        for f in (yaml.safe_load(p.read_text()) or {}).get("fetches") or []
+    ]
 
 
 def sources() -> list[dict[str, Any]]:
@@ -341,3 +351,138 @@ def build(
         "sources": _field(records or [], read),
         "signals": signals,
     }
+
+
+# The dossiers (Part 57f). Each is a page of prose in docs/data-market/dossiers, with its sources and the passage of
+# each source that states each figure in seed/data_market_dossiers.yaml. A number may stand in the prose only where a
+# source cited in the same sentence states it; a labelled invented example is exempt, and so is a year.
+
+_YEARISH = re.compile(r"\b(19|20|21)\d\d(s|[–-]\d\d)?\b")
+_NUMBER = re.compile(r"(?<![\w.])\d[\d,]*(?:\.\d+)?")
+_KEY = re.compile(r"\[([a-z0-9][a-z0-9-]*)\]")
+_SENTENCE = re.compile(r"(?<=[.!?])\s+(?=[A-Z*\[\"“])")
+
+
+def dossiers() -> list[dict[str, Any]]:
+    rows = (yaml.safe_load(DOSSIERS.read_text()) or {}).get("dossiers") or [] if DOSSIERS.exists() else []
+    return [{**d, "text": (DOSSIER_TEXT / f"{d['id']}.md").read_text()} for d in rows]
+
+
+def prose_figures(text: str) -> list[tuple[str, list[str]]]:
+    """Each number the prose states, with the sources cited in its sentence. Headings, the judgement and a paragraph
+    that opens by saying it is an illustration are passed over; so are years."""
+    out = []
+    for para in text.split("\n"):
+        if para.startswith(("#", ">")) or re.search(r"illustrat|not a real", para[:80], re.I):
+            continue
+        for sent in _SENTENCE.split(para):
+            keys = _KEY.findall(sent)
+            for n in _NUMBER.findall(_YEARISH.sub(" ", _KEY.sub(" ", sent))):
+                out.append((n.replace(",", "").rstrip("."), keys))
+    return out
+
+
+def squash(text: str) -> str:
+    """Letters and digits only, lower case: how a quotation is compared with the page it is quoted from."""
+    return re.sub(r"[^a-z0-9]+", "", text.lower())
+
+
+def prose_quotes(text: str) -> list[tuple[str, list[str]]]:
+    """Each quoted passage of some length in the prose, with the sources cited in its sentence; the same paragraphs
+    are passed over as for figures."""
+    out = []
+    for para in text.split("\n"):
+        if para.startswith(("#", ">")) or re.search(r"illustrat|not a real", para[:80], re.I):
+            continue
+        for sent in _SENTENCE.split(para):
+            out += [(q, _KEY.findall(sent)) for q in re.findall(r"[\"“]([^\"”]{25,})[\"”]", sent)]
+    return out
+
+
+def dossier_problems(rows: list[dict[str, Any]], fetched: list[dict[str, Any]]) -> list[str]:
+    errors = []
+    record = {f["url"]: f for f in fetched}
+    for dup in _dups([d.get("id") for d in rows]):
+        errors.append(f"data market: dossier {dup} is given twice")
+    for d in rows:
+        w = f"data market: dossier {d.get('id')}"
+        text = d.get("text") or ""
+        if not d.get("title") or not text.strip():
+            errors.append(f"{w} has no title or no text")
+        if text.count(JUDGED) != 1:
+            errors.append(f"{w} has no labelled judgement, or more than one")
+        keys = {s.get("key") for s in d.get("sources") or []}
+        for s in d.get("sources") or []:
+            url = str(s.get("url") or "")
+            if SOCIAL.search(url):
+                errors.append(f"{w}: {url} is a social-media link")
+            elif url not in record:
+                errors.append(f"{w}: {url} has no fetch record")
+            elif record[url].get("http_status") != 200 or not record[url].get("content_hash"):
+                errors.append(f"{w}: {url} did not answer or has no content hash")
+        for k in sorted(set(_KEY.findall(text)) - keys):
+            errors.append(f"{w} cites {k}, which is not in its sources")
+        stated: dict[str, set[str]] = {}
+        for f in d.get("figures") or []:
+            if str(f.get("figure")) in figures(str(f.get("snippet") or "")):
+                stated.setdefault(str(f.get("key")), set()).add(str(f.get("figure")))
+            else:
+                errors.append(f"{w}: figure {f.get('figure')} is not in the snippet given for {f.get('key')}")
+        quoted = {(str(q.get("key")), squash(str(q.get("quote")))) for q in d.get("quotes") or []}
+        for q, cited in prose_quotes(text):
+            if not any((k, squash(q)) in quoted for k in cited):
+                errors.append(
+                    f"{w}: a quotation is not recorded as read on a source its sentence cites: {q[:40]}"
+                )
+        for n, cited in prose_figures(text):
+            if not any(n in stated.get(k, ()) for k in cited):
+                errors.append(f"{w}: {n} is not stated by a source its sentence cites")
+    return errors
+
+
+def dossier_docs(rows: list[dict[str, Any]], fetched: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """web/data/data_market_dossiers.json: each dossier as blocks the page draws, its sources numbered in order of
+    first use, each with the day it was read."""
+    read = {f["url"]: str(f["retrieved_at"]) for f in fetched}
+    out = []
+    for d in sorted(rows, key=lambda d: d["n"]):
+        blocks: list[dict[str, Any]] = []
+        for raw in re.split(r"\n{2,}", d["text"].strip()):
+            b = raw.strip()
+            if not b or b.startswith("# "):
+                continue
+            if b.startswith("## ") or b.startswith("### "):
+                blocks.append({"kind": "h2" if b.startswith("## ") else "h3", "text": b.lstrip("# ").strip()})
+            elif b.startswith(">"):
+                lines = [ln.lstrip("> ").strip() for ln in b.split("\n")]
+                body = " ".join(ln for ln in lines if ln and not ln.startswith("*"))
+                blocks.append(
+                    {
+                        "kind": "judgement",
+                        "text": body.replace(JUDGED, "").strip(),
+                        "by": " ".join(
+                            ln.strip("*") for ln in lines if ln.startswith("*") and not ln.startswith("**")
+                        ),
+                    }
+                )
+            elif b.startswith("- "):
+                items = [ln[2:].strip() for ln in b.split("\n") if ln.startswith("- ")]
+                blocks.append(
+                    {"kind": "ul", "items": items, "keys": [k for i in items for k in _KEY.findall(i)]}
+                )
+            else:
+                text = " ".join(b.split("\n"))
+                blocks.append({"kind": "p", "text": text, "keys": _KEY.findall(text)})
+        order = list(dict.fromkeys(k for b in blocks for k in b.get("keys", [])))
+        number = {k: i + 1 for i, k in enumerate(order)}
+        by_key = {s["key"]: s for s in d["sources"]}
+        sources = [
+            {**by_key[k], "n": number[k], "retrieved_at": read[by_key[k]["url"]]}
+            for k in order
+            if k in by_key
+        ]
+        sources += [
+            {**s, "n": 0, "retrieved_at": read[s["url"]]} for s in d["sources"] if s["key"] not in number
+        ]
+        out.append({"id": d["id"], "n": d["n"], "title": d["title"], "blocks": blocks, "sources": sources})
+    return out
