@@ -91,7 +91,7 @@ export function NextStop() {
       </nav>
     );
   }
-  if (path === "/" || ["/ask", "/legal"].some((h) => under(path, h))) return null;
+  if (path === "/" || ["/ask", "/legal", "/private"].some((h) => under(path, h))) return null;
   return (
     <nav aria-label="Back to the path" className="mt-16">
       <Link href="/" className={`${card} max-w-3xl border border-grid bg-surface`}>

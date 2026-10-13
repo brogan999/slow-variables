@@ -122,6 +122,10 @@ def test_the_ask_panel_is_absent_from_the_area():
     assert 'if (pathname === "/ask" || pathname.startsWith("/private")) return null;' in panel
 
 
+def test_the_foot_of_a_private_page_offers_no_way_back_to_the_path():
+    assert '["/ask", "/legal", "/private"]' in (WEB / "components" / "Journey.tsx").read_text()
+
+
 # the bundler
 
 

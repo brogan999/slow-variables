@@ -225,5 +225,7 @@ body:has(.ask-shell) {
 .doc-html h3, .doc-html h4 { font-family: var(--font-sans); font-weight: 600; font-size: 1rem; line-height: 1.4; margin-top: 1.5rem; }
 .doc-html pre { font-family: var(--font-mono); font-size: 13px; line-height: 1.5; background: var(--surface-2); padding: 0.75rem 1rem; border-radius: var(--radius-md); overflow-x: auto; overflow-wrap: normal; }
 .doc-html :not(pre) > code { font-family: var(--font-mono); font-size: 0.85em; background: var(--surface-2); padding: 0.05em 0.3em; border-radius: 2px; }
+.doc-html > pre, .doc-html > table { max-width: 100%; } /* the measure is counted in the prose's own type, not theirs */
 .doc-html table { display: block; overflow-x: auto; font-family: var(--font-sans); }
+.doc-html table th { white-space: nowrap; } .doc-html table td { min-width: 7rem; } /* a wide table scrolls sideways; it is not squeezed */
 .doc-html hr { border-color: var(--grid); }
