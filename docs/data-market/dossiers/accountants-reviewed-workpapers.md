@@ -22,7 +22,7 @@ No purchase of pension fund audit files by a lab or a vendor was found.
 
 ## Who holds it and who may share it
 
-There were about 672,805 [ato-mar-2026] self-managed funds in March 2026. One audit software product says it keeps review points, red flags and queries against each line and can export them with the audit file [cloudoffis].
+There were about six hundred and seventy thousand [ato-mar-2026] self-managed funds in March 2026. One audit software product says it keeps review points, red flags and queries against each line and can export them with the audit file [cloudoffis].
 
 Who may share is set by professional rules:
 

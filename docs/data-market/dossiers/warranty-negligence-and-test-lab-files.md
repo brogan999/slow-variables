@@ -20,7 +20,7 @@ No purchase of any of the three by a lab or a vendor was found.
 
 ## Who holds it and who may share it
 
-**H.** The holders are the owners: three state bodies. In New South Wales the insurer icare received 749 new claims in a year and covered 23,943 builders [icare-ar]. It invites up to five builders to quote on each claim [icare-quoting], and pays Equifax to run its checks on builders [icare-ar]. In Victoria the insurance authority received 14,342 claims over five years [vago], and responsibility moved to the Building and Plumbing Commission in July 2025 [bpc]. In Queensland, claims for unfinished homes rose from 212 to 730 to 1,387 over three years [qbcc-ar]. The builder who finishes a job owns its own quote and invoices, and the homeowner receives the inspector's report. The state privacy and public-records laws were not opened, so whether any agency may license claim files is not established.
+**H.** The holders are the owners: three state bodies. In New South Wales the insurer icare received 749 new claims in a year and covered nearly twenty-four thousand builders [icare-ar]. It invites up to five builders to quote on each claim [icare-quoting]. In Victoria the insurance authority received more than fourteen thousand claims over five years [vago], and responsibility moved to the Building and Plumbing Commission in July 2025 [bpc]. In Queensland, claims for unfinished homes rose from 212 to 730 to nearly fourteen hundred over three years [qbcc-ar]. The builder who finishes a job owns its own quote and invoices, and the homeowner receives the inspector's report. The state privacy and public-records laws were not opened, so whether any agency may license claim files is not established.
 
 **L.** The insurer owns its claim file, but the documents inside it came from a client's matter. The Victorian insurer opened 514 matters in a year, of which 261 were claims [lplc-ar]. The New South Wales insurer received 714 notifications in a year, by the prior-year figure in the Law Society's 2024 annual report [lawsoc-nsw-ar]. The rules protecting a client's communications with a lawyer were not opened for this dossier. The working assumption is that the protection is the client's to give up, not the insurer's; that is not established here.
 
@@ -28,7 +28,7 @@ No purchase of any of the three by a lab or a vendor was found.
 
 ## Who is already there
 
-**H.** The agencies run the quoting themselves, and Equifax runs the builder scoring. Neither has shown any wish to sell.
+**H.** The agencies run the quoting themselves. None has shown any wish to sell.
 
 **L.** The holders already give the lessons away. The Victorian insurer publishes risk guides and case notes [lplc-ar]. Florida's insurance regulator publishes a database of closed claims against lawyers, with 8,175 entries [florida-study]. Harvey has released a legal test of more than a thousand tasks openly [harvey-lab].
 

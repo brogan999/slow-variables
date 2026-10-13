@@ -32,7 +32,7 @@ The importer owns its declarations. The broker holds copies as the importer's ag
 
 ## Who is already there
 
-The tariff code alone is well covered in public. A research group released 18,731 published American rulings, covering 2,992 codes, as a training and test set; the general model it tested scored 25% on the full ten-digit code and a fine-tuned open model 40% [atlas]. A second test used 632 online shop products labelled by 26 tariff experts; the best AI agent scored 46.8% against 95.0% for the experts [hscodecomp].
+The tariff code alone is well covered in public. A research group released nearly nineteen thousand published American rulings, covering nearly three thousand codes, as a training and test set; the general model it tested scored 25% on the full ten-digit code and a fine-tuned open model 40% [atlas]. A second test used 632 online shop products labelled by 26 tariff experts; the best AI agent scored 46.8% against 95.0% for the experts [hscodecomp].
 
 Several companies train on their own flow. Zonos says its classifier learns from official rulings and from the product listings it sees daily [zonos]. WiseTech, a maker of freight-forwarding software, publishes terms for its AI agents saying the customer always owns its data and that none is extracted [wisetech]. In freight, Loop says its software audits invoices against contracts and opens and tracks disputes with carriers [loop].
 

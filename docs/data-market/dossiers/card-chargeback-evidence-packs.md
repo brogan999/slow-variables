@@ -44,7 +44,7 @@ Visa itself announced AI dispute products in 2026, among them one that drafts th
 
 A free practice setting for chargebacks exists, with a scripted issuer; its cases are made up [chargebackops].
 
-One real Australian set has reached researchers. A payments company gave academics 126,184 [novatti-study] charged-back transactions with customer details, card identifiers and network addresses removed; the fraud rate was 0.31% [novatti-study].
+One real Australian set has reached researchers. A payments company gave academics about a hundred and twenty-six thousand [novatti-study] charged-back transactions with customer details, card identifiers and network addresses removed; the fraud rate was 0.31% [novatti-study].
 
 ## What would have to be stripped
 
