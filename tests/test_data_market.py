@@ -83,7 +83,7 @@ def test_every_link_in_the_export_carries_the_day_it_was_read():
 
 def test_the_committed_export_is_the_build_and_check_reads_the_file():
     assert json.loads((ROOT / "web" / "data" / "data_market.json").read_text()) == json.loads(
-        json.dumps(dm.build(SPEC, FETCHES), default=str)
+        json.dumps(dm.build(SPEC, FETCHES, dm.sources()), default=str)
     )
     assert "data_market.problems(" in (ROOT / "src" / "ai_tracker" / "cli.py").read_text()
     assert 'out / "data_market.json"' in (ROOT / "src" / "ai_tracker" / "store.py").read_text()
@@ -293,7 +293,9 @@ def test_the_field_lays_out_one_mark_a_source_by_family_and_counts_each_level():
     for f in doc["families"]:
         assert f["n"] == len(f["marks"]) == len(f["rows"])
         levels = [m["level"] for m in f["marks"]]
-        assert levels == sorted(levels, key=lambda v: -1 if v is None else v, reverse=True), "most taken first"
+        assert levels == sorted(levels, key=lambda v: -1 if v is None else v, reverse=True), (
+            "most taken first"
+        )
         for r in f["rows"]:
             assert r["level_name"] and (r["there"] or not by_id[r["id"]]["there"])
             assert r["unlinked"] == (by_id[r["id"]]["taken"] in (1, 2, 3) and not by_id[r["id"]]["there"])
@@ -314,6 +316,7 @@ def test_the_sources_page_draws_the_field_and_says_what_a_mark_rests_on():
     assert '"/data-market/sources": {' in contents and '"dm-field"' in contents
     assert '"/data-market/sources"' in contents.split("export const UNDER")[1]
     assert '"/data-market/sources"' in (WEB / "app" / "sitemap.ts").read_text()
-    assert 'out / "data_market.json", data_market.build(data_market.load(), data_market.fetches(), data_market.sources())' in (
-        ROOT / "src" / "ai_tracker" / "store.py"
-    ).read_text().replace("\n", "").replace("    ", "")
+    assert (
+        'out / "data_market.json", data_market.build(data_market.load(), data_market.fetches(), data_market.sources())'
+        in (ROOT / "src" / "ai_tracker" / "store.py").read_text().replace("\n", "").replace("    ", "")
+    )

@@ -8,6 +8,7 @@ is a reading or a status, and no evaluator, metric or query tool reads it.
 
 from __future__ import annotations
 
+import json
 import re
 from pathlib import Path
 from typing import Any
@@ -19,6 +20,7 @@ from .board import FIGURE, YEAR
 ROOT = Path(__file__).resolve().parents[2]
 SPEC = ROOT / "seed" / "data_market.yaml"
 FETCHES = ROOT / "seed" / "data_market_fetches.yaml"
+SOURCES = ROOT / "seed" / "data_market_sources.jsonl"
 SOCIAL = re.compile(r"https?://([\w-]+\.)*(x|twitter|linkedin|facebook|instagram|tiktok|reddit)\.com/", re.I)
 ROLES = ("seller", "builder")
 EVIDENCE = ("evidenced", "weak")
@@ -29,6 +31,19 @@ UNITS = {
     "per company": "Offered for one company's records",
     "per dataset": "For a dataset",
     "other": "Other sums",
+}
+LEVELS = {
+    3: "Openly sold for training AI",
+    2: "An incumbent uses its own",
+    1: "Only nearby players",
+    0: "Nobody found",
+    None: "Not searched",
+}
+PERSONAL = {
+    "none": "no personal detail",
+    "ordinary": "ordinary personal detail",
+    "sensitive": "sensitive personal detail",
+    "children": "detail about children",
 }
 WHOSE = {
     "job post": "job listing",
@@ -44,6 +59,15 @@ def load() -> dict[str, Any]:
 
 def fetches() -> list[dict[str, Any]]:
     return (yaml.safe_load(FETCHES.read_text()) or {}).get("fetches") or [] if FETCHES.exists() else []
+
+
+def sources() -> list[dict[str, Any]]:
+    """Every kind of record the research screened, one line each (seed/data_market_sources.jsonl)."""
+    return (
+        [json.loads(line) for line in SOURCES.read_text().splitlines() if line.strip()]
+        if SOURCES.exists()
+        else []
+    )
 
 
 def _figure(text: str) -> bool:
@@ -147,7 +171,74 @@ def problems(doc: dict[str, Any], fetched: list[dict[str, Any]]) -> list[str]:
     return errors
 
 
-def build(doc: dict[str, Any], fetched: list[dict[str, Any]]) -> dict[str, Any]:
+def source_problems(rows: list[dict[str, Any]], fetched: list[dict[str, Any]]) -> list[str]:
+    errors = []
+    record = {f["url"]: f for f in fetched}
+    for dup in _dups([r.get("id") for r in rows]):
+        errors.append(f"data market: source {dup} is given twice")
+    for r in rows:
+        w = f"data market: source {r.get('id')}"
+        if not str(r.get("family") or "").strip():
+            errors.append(f"{w} has no family")
+        name = str(r.get("name") or "").strip()
+        if not name:
+            errors.append(f"{w} has no name")
+        elif _figure(name):
+            errors.append(f"{w} types a figure, a size word or an address")
+        if r.get("taken") not in LEVELS:
+            errors.append(f"{w} has level {r.get('taken')}")
+        if r.get("personal") not in (None, *PERSONAL):
+            errors.append(f"{w} has personal detail {r.get('personal')}")
+        for url in r.get("there") or []:
+            if SOCIAL.search(url):
+                errors.append(f"{w}: {url} is a social-media link")
+            elif url not in record:
+                errors.append(f"{w}: {url} has no fetch record")
+            elif record[url].get("http_status") != 200 or not record[url].get("content_hash"):
+                errors.append(f"{w}: {url} did not answer or has no content hash")
+    return errors
+
+
+def _field(rows: list[dict[str, Any]], read: dict[str, str]) -> dict[str, Any]:
+    """One mark a source, by family, most taken first; and the rows beneath, each with the links that could be read."""
+
+    def order(r: dict[str, Any]) -> tuple[int, str]:
+        return (0 if r["taken"] is None else -r["taken"] - 1, r["name"].lower())
+
+    families: dict[str, list[dict[str, Any]]] = {}
+    for r in rows:
+        families.setdefault(r["family"], []).append(r)
+    out = []
+    for fam in sorted(families, key=lambda f: (-len(families[f]), f)):
+        rs = sorted(families[fam], key=order)
+        out.append(
+            {
+                "name": fam,
+                "n": len(rs),
+                "marks": [{"id": r["id"], "level": r["taken"], "name": r["name"]} for r in rs],
+                "rows": [
+                    {
+                        "id": r["id"],
+                        "name": r["name"],
+                        "idea": bool(r.get("idea")),
+                        "level": r["taken"],
+                        "level_name": LEVELS[r["taken"]],
+                        "holder": r.get("holder"),
+                        "personal": PERSONAL.get(r.get("personal") or ""),
+                        "there": [{"url": u, "retrieved_at": read[u]} for u in r.get("there") or []],
+                        "unlinked": r["taken"] in (1, 2, 3) and not r.get("there"),
+                    }
+                    for r in rs
+                ],
+            }
+        )
+    key = [{"level": lv, "name": nm, "n": sum(r["taken"] == lv for r in rows)} for lv, nm in LEVELS.items()]
+    return {"n": len(rows), "key": [k for k in key if k["n"]], "families": out}
+
+
+def build(
+    doc: dict[str, Any], fetched: list[dict[str, Any]], records: list[dict[str, Any]] | None = None
+) -> dict[str, Any]:
     """web/data/data_market.json: the vendors with the signals each shows, and the signals most-shown first, each with
     how many vendors show it (weak evidence apart) and the pages, with the day each was read."""
     read = {f["url"]: str(f["retrieved_at"]) for f in fetched}
@@ -247,5 +338,6 @@ def build(doc: dict[str, Any], fetched: list[dict[str, Any]]) -> dict[str, Any]:
         "vendors": listed,
         "board": {"columns": columns, "groups": groups},
         "prices": {"groups": price_groups},
+        "sources": _field(records or [], read),
         "signals": signals,
     }

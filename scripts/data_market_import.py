@@ -21,7 +21,7 @@ from pathlib import Path
 import httpx
 import yaml
 
-from ai_tracker.data_market import FETCHES, SOCIAL, SPEC
+from ai_tracker.data_market import FETCHES, SOCIAL, SOURCES, SPEC
 from ai_tracker.ingest.base import robots_ok, ua
 
 THEMES = {
@@ -119,8 +119,19 @@ def main(args: list[str]) -> None:
             f["url"]: {**f, "retrieved_at": date.fromisoformat(f["retrieved_at"])}
             for f in json.loads(attempts.read_text())
         }
+    there = [
+        r
+        for r in db.execute(
+            "select ref, url from link_triage where kind = 'already_there' and verdict = 'ok' order by ref, url"
+        )
+        if r["url"].startswith("https://") and not SOCIAL.search(r["url"])
+    ]
     todo = sorted(
-        ({r["url"] for r in pages} | {r["url"] for r in db.execute("select url from public_prices")})
+        (
+            {r["url"] for r in pages}
+            | {r["url"] for r in db.execute("select url from public_prices")}
+            | {r["url"] for r in there}
+        )
         - set(known)
     )
     if todo and "--no-fetch" not in args:
@@ -180,6 +191,32 @@ def main(args: list[str]) -> None:
         if v["slug"] in listed
     ]
     out_vendors = [v for v in out_vendors if v["pages"]]
+    # every kind of record the research screened: who is already there, and the links that say so and could be read
+    links: dict[str, list[str]] = {}
+    for r in there:
+        if r["url"] in ok:
+            links.setdefault(r["ref"], []).append(r["url"])
+    holder = {
+        "yes": "the holder owns it",
+        "partly": "the holder owns part of it",
+        "no-processor": "the holder only processes it for the owner",
+    }
+    rows = [
+        {
+            "id": r["cluster_id"],
+            "name": r["public_name"] or r["name"],
+            "family": r["family"],
+            "idea": r["cluster_id"].startswith("CX"),
+            "holder": holder.get(r["holder_is_owner"]),
+            "personal": r["personal_data"]
+            if r["personal_data"] in ("none", "ordinary", "sensitive", "children")
+            else None,
+            "taken": int(r["taken_level"]) if str(r["taken_level"]).isdigit() else None,
+            "there": links.get(r["cluster_id"], []),
+        }
+        for r in db.execute("select * from sources order by family, cluster_id")
+    ]
+    SOURCES.write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows))
     doc = yaml.safe_load(SPEC.read_text()) if SPEC.exists() else {}
     doc = {
         "made_by": doc.get("made_by") or {"model": "", "date": date.today(), "method": "", "reviewed_by": ""},
@@ -194,7 +231,14 @@ def main(args: list[str]) -> None:
     FETCHES.write_text(
         "# Written by scripts/data_market_import.py: one fetch record per vendor page the seed cites.\n"
         + yaml.safe_dump(
-            {"fetches": [known[u] for u in sorted(used | {p["url"] for p in doc["prices"]})]},
+            {
+                "fetches": [
+                    known[u]
+                    for u in sorted(
+                        used | {p["url"] for p in doc["prices"]} | {u for r in rows for u in r["there"]}
+                    )
+                ]
+            },
             sort_keys=False,
             width=1000,
         )
