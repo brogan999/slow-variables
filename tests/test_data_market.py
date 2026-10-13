@@ -116,6 +116,7 @@ def test_the_export_counts_what_the_page_prints_and_sizes_each_bar():
         "builders": sum(v["role"] == "builder" for v in vendors),
         "signals": len(SPEC["signals"]),
         "pages": len({e["url"] for s in SPEC["signals"] for e in s["evidence"]}),
+        "prices": len(SPEC["prices"]),
     }
     top = max(s["evidenced"] for s in doc["signals"])
     for s in doc["signals"]:
@@ -205,7 +206,9 @@ def test_every_price_states_its_figures_in_a_snippet_from_a_fetched_page():
     vendors = {v["id"] for v in SPEC["vendors"]}
     for p in SPEC["prices"]:
         assert p["vendor"] in vendors and p["url"] in fetched, p["id"]
-        assert dm.figures(p["amount"]) and set(dm.figures(p["amount"])) <= set(dm.figures(p["snippet"])), p["id"]
+        assert dm.figures(p["amount"]) and set(dm.figures(p["amount"])) <= set(dm.figures(p["snippet"])), p[
+            "id"
+        ]
 
 
 def test_a_broken_price_names_each_problem():
@@ -243,6 +246,9 @@ def test_the_export_groups_prices_by_unit_and_the_page_quotes_each():
         assert banned not in page, f"the page computes with {banned}"
     assert '"/data-market/prices"' in (WEB / "components" / "DataMarketNav.tsx").read_text()
     contents = (WEB / "lib" / "contents.ts").read_text()
-    assert '"/data-market/prices": {' in contents and '"/data-market/prices"' in contents.split("export const UNDER")[1]
+    assert (
+        '"/data-market/prices": {' in contents
+        and '"/data-market/prices"' in contents.split("export const UNDER")[1]
+    )
     assert '"/data-market/prices"' in (WEB / "app" / "sitemap.ts").read_text()
     assert 'href="/data-market/prices"' in (WEB / "app" / "data-market" / "page.tsx").read_text()

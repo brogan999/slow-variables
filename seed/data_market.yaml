@@ -103,6 +103,16 @@ vendors:
   - https://www.afterquery.com/blog/the-afterquery-thesis
   - https://www.afterquery.com/solutions
   - https://www.afterquery.com/terms
+- id: agility
+  name: Agility
+  role: builder
+  evidence: evidenced
+  sells: Agility builds the Digit humanoid robot and collects its own training data by teleoperating it in-house and at customer
+    sites. It also trains control models in simulation.
+  pages:
+  - https://www.agilityrobotics.com/content/agility-and-ai
+  - https://www.agilityrobotics.com/content/training-a-whole-body-control-foundation-model
+  - https://zerogtalent.com/robotics-jobs/agility-robotics/data-collection-manager-6208804004
 - id: andon-labs
   name: Andon Labs
   role: seller
@@ -583,6 +593,14 @@ vendors:
   - https://www.irregular.com/research/containment-challenges-testing-the-boundaries-of-cyber-evaluations
   - https://www.irregular.com/research/cyber-capabilities-exceed-standard-evaluation-budgets
   - https://www.irregular.com/research/frontiercyber
+- id: jd-com
+  name: JD.com (robot-data collection plan)
+  role: seller
+  evidence: weak
+  sells: JD.com is collecting real-scene human video across warehouses, factories and homes for embodied AI. It uses the data
+    for its own models, offers it through a data trading platform and opens some sets to academia.
+  pages:
+  - https://k.sina.cn/article_5952915720_162d2490806704tktq.html?from=tech
 - id: kled
   name: Kled
   role: seller
@@ -983,6 +1001,14 @@ vendors:
   - https://www.primeintellect.ai/case-study/mixedbread
   - https://www.primeintellect.ai/case-study/ramp
   - https://www.primeintellect.ai/terms-of-service
+- id: prolific
+  name: Prolific (prolific.com)
+  role: seller
+  evidence: evidenced
+  sells: Prolific sells human data from its participants and verified experts, including made-to-order first-person video,
+    manipulation recordings and annotation. It also lists ready-made expert datasets.
+  pages:
+  - https://www.prolific.com/datasets
 - id: protege
   name: Protege
   role: seller
@@ -1187,6 +1213,14 @@ vendors:
     notes), plus analysis and, increasingly, a place to train models on that data with GPUs attached; licensed to drug companies.
   pages:
   - https://lefkofsky.com/q2-2026-overview/
+- id: tesla-optimus
+  name: Tesla Optimus
+  role: builder
+  evidence: evidenced
+  sells: Tesla collects training data for its Optimus robot in-house, employing operators who perform movements wearing motion-capture
+    gear and helmet cameras.
+  pages:
+  - https://www.businessinsider.com/tesla-optimus-humanoid-robot-training-elon-musk-2025-11
 - id: theta
   name: Theta (Theta Software Inc.)
   role: seller
@@ -1296,6 +1330,14 @@ vendors:
   - https://wirestock.io/datasets/sports-videos
   - https://wirestock.io/datasets/video-edits
   - https://wirestock.io/docs/terms-of-use
+- id: world-labs
+  name: World Labs
+  role: builder
+  evidence: evidenced
+  sells: World Labs sells a world model that generates spatial scenes, pitched as a source of robot simulation and training
+    data. Its pages do not say where its own training data came from.
+  pages:
+  - https://www.worldlabs.ai/case-studies/1-robotics
 - id: world-model-builders
   name: World-model builders (general notes)
   role: builder
@@ -3582,6 +3624,7 @@ signals:
   - micro1
   - ocular-ai
   - prime-intellect
+  - prolific
   - scale
   - snorkel
   - surge
@@ -3609,6 +3652,8 @@ signals:
     url: https://www.useocular.com/blog/pre-seed
   - vendor: prime-intellect
     url: https://www.primeintellect.ai/blog/scaling-environments-program
+  - vendor: prolific
+    url: https://www.prolific.com/datasets
   - vendor: scale
     url: https://scale.com/experts
   - vendor: snorkel
@@ -4781,6 +4826,7 @@ signals:
   - nvidia
   - protege
   - scale
+  - tesla-optimus
   - toloka
   evidence:
   - vendor: 1x
@@ -4813,6 +4859,8 @@ signals:
     url: https://withprotege.ai/articles/blog/spatial-physical-intelligence-announcement/
   - vendor: scale
     url: https://labs.scale.com/blog/can-robots-learn-from-watching-us
+  - vendor: tesla-optimus
+    url: https://www.businessinsider.com/tesla-optimus-humanoid-robot-training-elon-musk-2025-11
   - vendor: toloka
     url: https://toloka.ai/ots-datasets
 - id: robotics_capture-labels-and-recovered-geometry
@@ -4891,6 +4939,7 @@ signals:
   - encord-physical-ai
   - genesis-ai
   - human-archive
+  - jd-com
   - lightwheel
   - mecka
   - mercor
@@ -4912,6 +4961,8 @@ signals:
     url: https://techcrunch.com/2026/05/06/khosla-backed-robotics-startup-genesis-ai-has-gone-full-stack-demo-shows/
   - vendor: human-archive
     url: https://www.ycombinator.com/companies/human-archive
+  - vendor: jd-com
+    url: https://k.sina.cn/article_5952915720_162d2490806704tktq.html?from=tech
   - vendor: lightwheel
     url: https://www.163.com/dy/article/KQQBFJA605198R3E.html
   - vendor: mecka
@@ -5006,11 +5057,14 @@ signals:
   headline: Robot builders and vendors feed data from deployed robots back into training
   implies: Data from robots at work, obtained through deployment and partnership.
   shown_by:
+  - agility
   - apptronik
   - dyna
   - encord-physical-ai
   - general-intuition
   evidence:
+  - vendor: agility
+    url: https://www.agilityrobotics.com/content/agility-and-ai
   - vendor: apptronik
     url: https://apptronik.com/news-collection/welcome-to-robot-park-where-apptroniks-apollo-goes-to-work
   - vendor: dyna
@@ -5052,12 +5106,15 @@ signals:
   implies: Trained operators and robot uptime are the constraint; labs staff this themselves or pay a vendor to.
   shown_by:
   - 1x
+  - agility
   - apptronik
   - physical-intelligence
   - skild
   evidence:
   - vendor: 1x
     url: https://jobs.ashbyhq.com/1x/84efa580-016a-431c-aaa3-1a744bdef6d7
+  - vendor: agility
+    url: https://zerogtalent.com/robotics-jobs/agility-robotics/data-collection-manager-6208804004
   - vendor: apptronik
     url: https://zerogtalent.com/robotics-jobs/apptronik/senior-robot-operator-6183395004
   - vendor: physical-intelligence
@@ -5348,6 +5405,7 @@ signals:
   - hud
   - labelbox
   - prime-intellect
+  - world-labs
   evidence:
   - vendor: applied-compute
     url: https://jobs.ashbyhq.com/Applied%20Compute/13138e7c-f2b3-402f-bb41-d6078e76b23c
@@ -5361,6 +5419,8 @@ signals:
     url: https://labelbox.com/products/horizon/
   - vendor: prime-intellect
     url: https://www.primeintellect.ai/blog/general-agent
+  - vendor: world-labs
+    url: https://www.worldlabs.ai/case-studies/1-robotics
 - id: synthetic_data-measured-or-forbidden
   theme: synthetic_data
   headline: Vendors are measuring synthetic data's effect, and one data licence forbids it outright
@@ -5393,10 +5453,13 @@ signals:
   headline: Robot-model builders lean on simulation and generated video, mixed with real data
   implies: Physically accurate simulation assets and generated video to stretch scarce real robot data.
   shown_by:
+  - agility
   - encord-physical-ai
   - nvidia
   - skild
   evidence:
+  - vendor: agility
+    url: https://www.agilityrobotics.com/content/training-a-whole-body-control-foundation-model
   - vendor: encord-physical-ai
     url: https://encord.com/blog/physical-ai-data-pipeline-collection-to-deployment/
   - vendor: nvidia
@@ -5563,3 +5626,703 @@ signals:
     url: https://originlab.ai/our-data
   - vendor: troveo
     url: https://www.troveo.ai/world-models
+prices:
+- id: 1x-1
+  vendor: 1x
+  what: Robot data-collection operator, San Carlos (in-house)
+  amount: $28 – $36 per hour, offers equity
+  unit: per hour
+  whose: job post
+  url: https://jobs.ashbyhq.com/1x/84efa580-016a-431c-aaa3-1a744bdef6d7
+  snippet: $28 – $36 per hour • Offers Equity
+- id: appen-3
+  vendor: appen
+  what: Three-dimensional and LiDAR data annotation analyst (US)
+  amount: $30 - $32 an hour
+  unit: per hour
+  whose: job post
+  url: https://jobs.lever.co/appen-2/b66cbdf1-684b-449b-8779-5859fa4419fa
+  snippet: $30 - $32 an hour
+- id: appen-5
+  vendor: appen
+  what: First-person household-task video collector, Kuala Lumpur
+  amount: $3.60 an hour
+  unit: per hour
+  whose: job post
+  url: https://jobs.lever.co/appen/62853079-22aa-44dd-9f1e-228832024dd9
+  snippet: $3.60 - $3.60 an hour This role is a project-based opportunity wi
+- id: appen-9
+  vendor: appen
+  what: Transcription, Hebrew
+  amount: $100.00 per audio hour
+  unit: per hour
+  whose: job post
+  url: https://jobs.lever.co/appen/b8aec32d-bc8d-49b3-8b94-972fceb1fbb8
+  snippet: '- $100.00 per audio hour - 0.2 audio hours/hour × 10 hours/week ='
+- id: appen-12
+  vendor: appen
+  what: Japanese Kansai dialect speech recording
+  amount: $40 per valid hour
+  unit: per hour
+  whose: job post
+  url: https://jobs.lever.co/appen/bfc5b1f8-70a3-4be0-b8d3-15b18e620517
+  snippet: ✅$40 per valid hour
+- id: david-ai-19
+  vendor: david-ai
+  what: Telugu (Indic) transcriber
+  amount: up to $110 USD / audio hour transcribed
+  unit: per hour
+  whose: job post
+  url: https://babel.audio/jobs/telugu_transcriber
+  snippet: up to $110 USD / audio hour transcribed
+- id: david-ai-20
+  vendor: david-ai
+  what: English video conversation partner
+  amount: $50 per recorded hour
+  unit: per hour
+  whose: job post
+  url: https://babel.audio/jobs/english_video_conversation_partners
+  snippet: $50 per recorded hour
+- id: defined-ai-22
+  vendor: defined-ai
+  what: Data partner licence income (several partners)
+  amount: more than $1 million annually
+  unit: other
+  whose: company claim
+  url: https://defined.ai/press-room/defined-ai-reports-sixty-five-percent-revenue-growth
+  snippet: revenue potential. Several partners now generate more than $1 million annually by licensing proprietary datasets
+    through
+- id: epoch-23
+  vendor: epoch
+  what: RL environment task
+  amount: $200 to $2000 mostly. $20k per task would be rare but possible.
+  unit: per task
+  whose: company claim
+  url: https://epoch.ai/gradient-updates/state-of-rl-envs
+  snippet: 'so vary, but multiple interviewees agreed on a ballpark of $200-$2000 per task. As one RL environment founder
+    put it: “I’ve seen $200 to $2000 mostly. $20k per task would be rare but possible.” A neolab researcher'
+- id: figure-28
+  vendor: figure
+  what: Committed spend on data collection and compute
+  amount: over $1 billion to data collection and compute over the next 12 months
+  unit: other
+  whose: press
+  url: https://www.humanoidsdaily.com/news/figure-ai-unveils-index-crowdsourcing-real-world-human-video-to-train-helix
+  snippet: $15 million in payouts to contributors and committed over $1 billion to data collection and compute over the next
+    12 mon
+- id: figure-29
+  vendor: figure
+  what: Sensor-suit motion data creator (in-house)
+  amount: $30/hr
+  unit: per hour
+  whose: job post
+  url: https://www.physicalai.jobs/figure-ai/helix-data-creator-2
+  snippet: $30/hr
+- id: firstsource-30
+  vendor: firstsource
+  what: Single-task robot teleoperation dataset
+  amount: $50K–$200K
+  unit: per dataset
+  whose: company claim
+  url: https://www.firstsource.com/capabilities/genai-data-services/robotics
+  snippet: Robotics 2025 (Sep 2025) A single-task robot dataset costs $50K–$200K $50K+ That is the total cost for a production-grade
+    teleop
+- id: fleet-ai-31
+  vendor: fleet-ai
+  what: US lawyer or senior paralegal writing legal tasks
+  amount: $150–$200 USD per hour
+  unit: per hour
+  whose: job post
+  url: https://www.fleetai.com/api/job-postings
+  snippet: nd reviews submitted deliverables.\n\n## Fees\n- **Rate:** $150–$200 USD per hour.\n- **Increases and bonuses:**
+    Top performers
+- id: fleet-ai-33
+  vendor: fleet-ai
+  what: Mechanical engineering specialist
+  amount: Initial hourly fees are $60–$100 USD. Rates may increase up to $150 USD
+  unit: per hour
+  whose: job post
+  url: https://www.fleetai.com/api/job-postings
+  snippet: inst the agreed requirements. Fees Initial hourly fees are $60–$100 USD. Rates may increase up to $150 USD based
+    on the quality of completed deliverables. Initial
+- id: halluminate-34
+  vendor: halluminate
+  what: Forward deployed engineer (vendor staff)
+  amount: $215K - $275K
+  unit: salary
+  whose: job post
+  url: https://jobs.ashbyhq.com/halluminate/e84fa450-13b8-4a09-809c-551c26fed8f2
+  snippet: $215K - $275K
+- id: halluminate-36
+  vendor: halluminate
+  what: Private equity expert
+  amount: $150-$250/hour
+  unit: per hour
+  whose: job post
+  url: https://halluminate.ai/experts
+  snippet: Private Equity ($150-$250/hour)
+- id: halluminate-37
+  vendor: halluminate
+  what: FP&A expert
+  amount: $100-$200/hour
+  unit: per hour
+  whose: job post
+  url: https://halluminate.ai/experts
+  snippet: FP&A ($100-$200/hour)
+- id: handshake-40
+  vendor: handshake
+  what: Company data partnership
+  amount: $100K to $4M+
+  unit: per company
+  whose: company claim
+  url: https://joinhandshake.com/ai/data-partnerships/
+  snippet: to license your company data. Partnerships can range from $100K to $4M+ depending on the data shared. Data is de-identified,
+    and
+- id: handshake-41
+  vendor: handshake
+  what: Estimated payout range for an example company's data, USA (indicative, not an offer)
+  amount: $383083 - $896969
+  unit: per company
+  whose: company claim
+  url: https://joinhandshake.com/ai/data-partnerships/
+  snippet: nd compliance all happen seamlessly Estimated payout range $383083 - $896969 Number of employees 100 Years of operation
+    10 Country USA C
+- id: handshake-42
+  vendor: handshake
+  what: Referral bounty for referring a company
+  amount: $10K
+  unit: per company
+  whose: company claim
+  url: https://joinhandshake.com/ai/data-partnerships/referral/
+  snippet: Sign up Log in Sign up Log in Sign up Refer a company, get $10K Earn by helping companies monetize the data they
+    already h
+- id: handshake-43
+  vendor: handshake
+  what: Radiology professional
+  amount: Up to $300/hr
+  unit: per hour
+  whose: job post
+  url: https://joinhandshake.com/ai/opportunities/radiology-expert/
+  snippet: up Log in Sign up Radiology Professional Sign up now Up to $300/hr Depending on the project Bachelor's Remote Part-time
+    Fle
+- id: handshake-45
+  vendor: handshake
+  what: QGIS specialist
+  amount: Up to $125/hr
+  unit: per hour
+  whose: job post
+  url: https://joinhandshake.com/ai/opportunities/qgis-specialist-ai-trainer/
+  snippet: n Sign up Log in Sign up QGIS Specialist Sign up now Up to $125/hr Depending on the project Bachelor's , Master's
+    , Ph.D's
+- id: handshake-47
+  vendor: handshake
+  what: AI trainer (bachelor's, master's and PhD holders)
+  amount: Up to $200/hr
+  unit: per hour
+  whose: job post
+  url: https://joinhandshake.com/ai/opportunities/intelligence-expert-(bachelor-s-master-s-and-phds)-ai-trainer-copy/
+  snippet: helor's, Master's and PhDs) - AI Trainer Sign up now Up to $200/hr Depending on the project Remote Part-time Flexible
+    hours
+- id: handshake-48
+  vendor: handshake
+  what: Jailbreak (adversarial prompt) writer
+  amount: $45 up to $65 hourly
+  unit: per hour
+  whose: job post
+  url: https://joinhandshake.com/ai/opportunities/adversarial-prompt-expert/
+  snippet: and improve system defenses. Details Hourly rates start at $45 and extend up to $65 depending on prior experience
+    with adversarial testing. The
+- id: handshake-59
+  vendor: handshake
+  what: Chemical, biological, radiological, nuclear and explosives red-teamer
+  amount: $65 – $158 per hour
+  unit: per hour
+  whose: job post
+  url: https://jobs.ashbyhq.com/handshake/87c44874-6f3d-4814-8721-f214ea5eceed
+  snippet: $65 – $158 per hour
+- id: handshake-60
+  vendor: handshake
+  what: On-site mental-health safety policy grader, Seattle
+  amount: $45 – $65 per hour
+  unit: per hour
+  whose: job post
+  url: https://jobs.ashbyhq.com/handshake/1e3a9711-d13c-4b79-8599-34dfb3133621
+  snippet: $45 – $65 per hour
+- id: invisible-65
+  vendor: invisible
+  what: Coding task auditor (SWE-Bench, Kubernetes, GPU kernels and others)
+  amount: $60 per hour
+  unit: per hour
+  whose: job post
+  url: https://job-boards.eu.greenhouse.io/agency/jobs/4969230101
+  snippet: We offer a pay rate of $60 per hour, with the exact rate determined after evaluating y
+- id: invisible-66
+  vendor: invisible
+  what: Three-dimensional modeller scripting geometry
+  amount: $22 per hour
+  unit: per hour
+  whose: job post
+  url: https://job-boards.eu.greenhouse.io/agency/jobs/4857878101
+  snippet: We offer a fixed pay rate of $22 per hour. As a contractor you’ll supply a secure computer a
+- id: invisible-67
+  vendor: invisible
+  what: Sector AI trainer (finance and insurance, government, healthcare, retail and others)
+  amount: $10-$30 per hour
+  unit: per hour
+  whose: job post
+  url: https://job-boards.eu.greenhouse.io/agency/jobs/4842757101
+  snippet: We offer a pay range of $10-$30 per hour, with the exact rate determined after evaluating y
+- id: invisible-68
+  vendor: invisible
+  what: Small-business owner testing an AI assistant
+  amount: $40-$50 per hour
+  unit: per hour
+  whose: job post
+  url: https://job-boards.eu.greenhouse.io/agency/jobs/4982004101
+  snippet: We offer a pay range of $40-$50 per hour, with the exact rate determined after evaluating y
+- id: invisible-69
+  vendor: invisible
+  what: Business owner auditing AI descriptions of local shops
+  amount: $25-to-$100 per hour
+  unit: per hour
+  whose: job post
+  url: https://job-boards.eu.greenhouse.io/agency/jobs/4864072101
+  snippet: We offer a pay range of $25-to-$100 per hour, with the exact rate determined after evaluating y
+- id: invisible-70
+  vendor: invisible
+  what: Garment factory quality-control specialist
+  amount: $6-to-$15 per hour
+  unit: per hour
+  whose: job post
+  url: https://job-boards.eu.greenhouse.io/agency/jobs/4749302101
+  snippet: We offer a pay range of $6-to-$15 per hour, with the exact rate determined after evaluating y
+- id: invisible-71
+  vendor: invisible
+  what: Road-surface inspector labelling pavement images
+  amount: $6 - $20 per hour
+  unit: per hour
+  whose: job post
+  url: https://job-boards.eu.greenhouse.io/agency/jobs/4781818101
+  snippet: We offer a pay range of $6 - $20 per hour, with the exact rate determined after evaluating y
+- id: invisible-72
+  vendor: invisible
+  what: Police officer or detective reviewing model answers
+  amount: $6 to $65 per hour
+  unit: per hour
+  whose: job post
+  url: https://job-boards.eu.greenhouse.io/agency/jobs/4757128101
+  snippet: We offer a pay range of $6 to $65 per hour, with the exact rate determined after evaluating y
+- id: irregular-73
+  vendor: irregular
+  what: Cost of specific harder cyber challenges
+  amount: specific harder challenges approaching $100
+  unit: other
+  whose: company claim
+  url: https://www.irregular.com/research/cyber-capabilities-exceed-standard-evaluation-budgets
+  snippet: rd challenges, with specific harder challenges approaching $100. The expense comes from scale – reliably estimating
+    perform
+- id: kled-74
+  vendor: kled
+  what: Personal financial document, per form
+  amount: up to $50-$150 per form
+  unit: per task
+  whose: company claim
+  url: https://www.kled.ai/blog/kled-lands-8m-financial-data-request
+  snippet: nymized with 0 personal data leaked. Expected pay is up to $50-$150 per form. Live with our V3 update, currently
+    being fulfille
+- id: labelbox-77
+  vendor: labelbox
+  what: Software developer building own project with an AI coding assistant
+  amount: $60-120/hr
+  unit: per hour
+  whose: job post
+  url: https://www.alignerr.com/en/jobs/8dd3542f-262a-4e06-98cd-5d50ef977243
+  snippet: Paid to Build Your Own Project with an AI Coding Assistant $60-120/hr Remote Freelance CODING About the Role
+- id: labelbox-78
+  vendor: labelbox
+  what: Lean proof formaliser for advanced math
+  amount: $170–$200/hr
+  unit: per hour
+  whose: job post
+  url: https://www.alignerr.com/en/jobs/1f74394c-d1e4-4c2e-aa02-a4044d4c4062
+  snippet: Get paid $170–$200/hr to formalize advanced math proofs in Lean 4 for cutting-
+- id: labelbox-80
+  vendor: labelbox
+  what: Finance and accounting task author
+  amount: $60-120/hr
+  unit: per hour
+  whose: job post
+  url: https://www.alignerr.com/en/jobs/3673a42d-d3db-4561-a33f-8fa733e1fc0d
+  snippet: ack to jobs Finance & Accounting Task Author (AI Training) $60-120/hr Remote Freelance OTHER About the Role
+- id: labelbox-81
+  vendor: labelbox
+  what: Robotics technician (remote freelance)
+  amount: $40-120/hr
+  unit: per hour
+  whose: job post
+  url: https://www.alignerr.com/en/jobs/f11c78f0-bbbc-445d-ba64-b3d5f08c40d9
+  snippet: ss Stories FAQs Apply Now Back to jobs Robotics Technician $40-120/hr Remote Freelance GENERAL About the Role
+- id: labelbox-87
+  vendor: labelbox
+  what: Low-resource-language audio transcription lead
+  amount: $15-35/hr
+  unit: per hour
+  whose: job post
+  url: https://www.alignerr.com/en/jobs
+  snippet: $15-35/hr
+- id: luel-89
+  vendor: luel
+  what: Hebrew text reading
+  amount: $42/hour
+  unit: per hour
+  whose: press
+  url: https://stealthis.ai/drill/from-yc-demo-day-to-31m-in-weeks-into-an-untapped-ai-data
+  snippet: nversation recordings at $18/hour, Hebrew text readings at $42/hour, origami videos at $10.20/hour, and so on.
+    All uploade
+- id: mantic-90
+  vendor: mantic
+  what: Forecasting question-writers (prize pool)
+  amount: $25000 USD prize pool for question-writers
+  unit: other
+  whose: company claim
+  url: https://blog.mantic.com/p/a-new-kind-of-forecasting-tournament
+  snippet: r the disagreement, the greater the cash prize. There is a $25000 USD prize pool for question-writers. We are looking
+    for que
+- id: mercor-121
+  vendor: mercor
+  what: First-person work video, paid to the business
+  amount: $12 to $18 per approved hour
+  unit: per hour
+  whose: company claim
+  url: https://www.mercor.com/robotics/
+  snippet: Rates range from $12 to $18 per approved hour and depend on the kind of work your team
+- id: micro1-124
+  vendor: micro1
+  what: Commitment to spend on enterprise data acquisition
+  amount: $1B over the next 12 months
+  unit: other
+  whose: company claim
+  url: https://www.micro1.ai/blog/micro1-commits-1b-to-enterprise-data-acquisition
+  snippet: micro1 announces commitment to spend $1B on enterprise data acquisition over the next 12 months
+- id: micro1-125
+  vendor: micro1
+  what: Qualified enterprise data partnership tier
+  amount: $100k+
+  unit: per company
+  whose: company claim
+  url: https://www.micro1.ai/data-partnerships
+  snippet: on the quality, uniqueness, and value of the data provided $100k+ Qualified Enterprise Data Partnerships $500k+
+    Large-scale
+- id: micro1-126
+  vendor: micro1
+  what: Large-scale operational datasets or ongoing participation tier
+  amount: $500k+
+  unit: per company
+  whose: company claim
+  url: https://www.micro1.ai/data-partnerships
+  snippet: ata provided $100k+ Qualified Enterprise Data Partnerships $500k+ Large-scale operational datasets or ongoing participation
+- id: micro1-128
+  vendor: micro1
+  what: Referral bounty for referring a company
+  amount: $50000
+  unit: per company
+  whose: company claim
+  url: https://www.micro1.ai/company-referral
+  snippet: Refer a company to micro1, earn $50000
+- id: micro1-129
+  vendor: micro1
+  what: Referral payout on a company data licence or purchase
+  amount: 7.5% of the total license or purchase price
+  unit: other
+  whose: terms
+  url: https://www.micro1.ai/legal/referral-terms
+  snippet: the Referral Payout will equal seven and one-half percent (7.5%) of the total license or purchase price paid to
+    Company in
+- id: micro1-132
+  vendor: micro1
+  what: AI training roles (flexible, remote)
+  amount: $40-$200 / hr
+  unit: per hour
+  whose: job post
+  url: https://www.micro1.ai/spirit
+  snippet: ntial treatment for AI training roles paying anywhere from $40-$200 / hr with flexible remote schedules De-identification
+    at ev
+- id: micro1-155
+  vendor: micro1
+  what: Plumber (open opportunity)
+  amount: $20 - $30/hour
+  unit: per hour
+  whose: job post
+  url: https://www.micro1.ai/get-paid-to-record-tasks
+  snippet: Get paid on a biweekly basis Open opportunities Plumbers $20 - $30/hour Apply
+- id: micro1-156
+  vendor: micro1
+  what: Senior technical research role (vendor staff)
+  amount: $600K - $2M/yr
+  unit: salary
+  whose: job post
+  url: https://www.micro1.ai/tech-opportunities
+  snippet: 'L-Oriented Data Design Ops-to-Research Translation +1 Pay: $600K - $2M/yr Sep 14, 2026 Member of Technical Staff,
+    Enterprise AI R'
+- id: micro1-157
+  vendor: micro1
+  what: Director of robotics research (vendor staff)
+  amount: $1.5M - $4M/yr
+  unit: salary
+  whose: job post
+  url: https://www.micro1.ai/research
+  snippet: Director of Robotics Research $1.5M - $4M/yr Apply Member of Technical Staff, Research Engineering $
+- id: micro1-158
+  vendor: micro1
+  what: Technical staff role in coding evaluation (vendor staff)
+  amount: $600K - $1.3M/yr
+  unit: salary
+  whose: job post
+  url: https://www.micro1.ai/tech-opportunities
+  snippet: 'quired skills LLMs Coding Evaluation AI Evaluation +1 Pay: $600K - $1.3M/yr Sep 22, 2026 Member of Technical Staff,
+    Legal Research'
+- id: micro1-robotics-159
+  vendor: micro1-robotics
+  what: Robot teleoperator
+  amount: $30–$55/hour
+  unit: per hour
+  whose: job post
+  url: https://parailabs.com/projects/data-annotation/robot-teleoperator-1201
+  snippet: bot Teleoperator Global Remote Contract Posted 27 Jun 2026 $30–$55/hour
+- id: micro1-robotics-160
+  vendor: micro1-robotics
+  what: Robot wrangler, fleet operations, Los Angeles
+  amount: $10–$20/hr
+  unit: per hour
+  whose: job post
+  url: https://robottraining.jobs/jobs/micro1/robot-wrangler-operations
+  snippet: micro1 Fleet Operations Robot Wrangler - Operations micro1 $10–$20/hr Los Angeles, Cali Contract Posted 2w ago
+    Apply on micro1
+- id: microagi-161
+  vendor: microagi
+  what: Recording of a contributor's everyday work
+  amount: up to $20/Hour
+  unit: per hour
+  whose: job post
+  url: https://www.joinshift.org/
+  snippet: Earn up to $20/Hour Recording the Work You Already Do | Shift For Individu
+- id: outlier-177
+  vendor: outlier
+  what: Contract recruiter for high-volume contributor roles
+  amount: $40 to $55/hr
+  unit: per hour
+  whose: job post
+  url: https://job-boards.greenhouse.io/scaleai/jobs/4720975005
+  snippet: The hourly salary range for this position is $40 to $55/hr. This is a remote position with occasional travels requi
+- id: plato-180
+  vendor: plato
+  what: Cost of one benchmark run for a high-scoring model
+  amount: $652 and about five and a half hours per run
+  unit: other
+  whose: company claim
+  url: https://plato.so/research/web-clone-bench/
+  snippet: 'l, GPT-6 Astra at max (17.5%), but it also spends heavily: $652 and about five and a half hours per run. GPT-6.1
+    Sol reache'
+- id: plato-181
+  vendor: plato
+  what: Research engineer (vendor staff)
+  amount: $200K – $400K
+  unit: salary
+  whose: job post
+  url: https://jobs.ashbyhq.com/plato.so/b341c968-e36a-4802-b697-0290acd90cbf
+  snippet: $200K – $400K
+- id: preference-model-183
+  vendor: preference-model
+  what: Performance bonus (vendor staff)
+  amount: Bonus range of $0 to $300K+ based on performance
+  unit: salary
+  whose: job post
+  url: https://jobs.ashbyhq.com/preference-model/9729e0f8-678d-4548-992b-0b0028cc50c6
+  snippet: 0K – $350K • Offers Equity • Offers Bonus • Bonus range of $0 to $300K+ based on performance
+- id: prime-intellect-184
+  vendor: prime-intellect
+  what: Smaller environment bounty
+  amount: $100-500
+  unit: per task
+  whose: company claim
+  url: https://www.primeintellect.ai/blog/scaling-environments-program
+  snippet: vironments Hub ecosystem, and have smaller bounties in the $100-500 range.
+- id: scale-186
+  vendor: scale
+  what: Company data partnership (illustrative value)
+  amount: $10K–$1M+ illustrative value per data partnership
+  unit: per company
+  whose: company claim
+  url: https://scale.com/data-partnership
+  snippet: 0 yrs building the data infrastructure behind frontier AI $10K–$1M+ illustrative value per data partnership, scaling
+    with cad
+- id: scale-187
+  vendor: scale
+  what: Referral bonus per referred company
+  amount: up to $50000
+  unit: per company
+  whose: company claim
+  url: https://scale.com/data-partnership
+  snippet: nue. How do referrals work? Refer a company and earn up to $50000 bonus. Referrals must be submitted through the
+    official ref
+- id: scale-188
+  vendor: scale
+  what: Data acquisition lead (vendor staff)
+  amount: $182400 - $228000 USD
+  unit: salary
+  whose: job post
+  url: https://job-boards.greenhouse.io/scaleai/jobs/4725509005
+  snippet: 'n in the locations of San Francisco, New York, Seattle is: $182400 - $228000 USD PLEASE NOTE:  Our policy requires
+    a 90-day waiting peri'
+- id: scale-189
+  vendor: scale
+  what: Research adviser role across three domains
+  amount: $300/hr
+  unit: per hour
+  whose: job post
+  url: https://job-boards.greenhouse.io/scaleai/jobs/4693078005
+  snippet: 'Competitive Pay: We are offering $300/hr. USD for this role across all three domains.'
+- id: simpleclosure-190
+  vendor: simpleclosure
+  what: Sums promised to founders in ads from company-data buyers
+  amount: $1 million, $3 million, even $5 million
+  unit: per company
+  whose: company claim
+  url: https://simpleclosure.com/blog/guides/how-real-are-those-million-dollar-data-offers
+  snippet: ere are ads from companies like SHFA.ai promising founders $1 million, $3 million, even $5 million. Those numbers
+    can make a new company look like an
+- id: skild-192
+  vendor: skild
+  what: Robot operator, Pittsburgh (in-house)
+  amount: Base Salary Range $18 - $20 USD
+  unit: other
+  whose: job post
+  url: https://job-boards.greenhouse.io/skildai-careers/jobs/5162957008
+  snippet: Base Salary Range $18 - $20 USD Create a Job Alert Interested in building your career a
+- id: snorkel-196
+  vendor: snorkel
+  what: PhD-student research fellow building benchmarks
+  amount: $85-$165+/hour
+  unit: per hour
+  whose: job post
+  url: https://job-boards.greenhouse.io/snorkelai/jobs/6175199004
+  snippet: Hourly ranges from $85-$165+/hour. Actual compensation will be determined based on fact
+- id: surge-197
+  vendor: surge
+  what: Senior software engineer building coding RL environments
+  amount: $100–$150+/hour
+  unit: per hour
+  whose: job post
+  url: https://surgehq.ai/swe
+  snippet: Make $200–300k+/year. Start the coding screen At a glance $100–$150+/hour Pay scales with your expertise 20-40+
+    hrs/week What m
+- id: surge-198
+  vendor: surge
+  what: Senior software engineer building coding RL environments, annual
+  amount: $200–300k+/year
+  unit: other
+  whose: job post
+  url: https://surgehq.ai/swe
+  snippet: s on the RL environments and benchmarks you'll build. Make $200–300k+/year. Start the coding screen At a glance
+    $100–$150+/hour
+- id: surge-199
+  vendor: surge
+  what: Consultant assessing AI in a professional domain
+  amount: From $60/hr
+  unit: per hour
+  whose: job post
+  url: https://surgehq.ai/consultant-network
+  snippet: for applying · From $60/hr Apply now Healthcare Ops Assess AI handling of schedulin
+- id: surge-201
+  vendor: surge
+  what: Expert contractor, such as a journalist
+  amount: $200–400 / hour, contractor
+  unit: per hour
+  whose: job post
+  url: https://surgehq.ai/workforce/award-winning-author-journalist-nyt-new-yorker-atlantic
+  snippet: $200–400 / hour, contractor Journalist  ( NYT, New Yorker, Atlantic
+- id: tesla-optimus-203
+  vendor: tesla-optimus
+  what: Robot data collection operator, Bay Area (in-house)
+  amount: 25.25 - 34.50 USD
+  unit: other
+  whose: job post
+  url: https://diversityjobs.com/career/16828360/Data-Collection-Operator-Optimus-California-Fremont
+  snippet: 25.25 - 34.50 USD
+- id: toloka-207
+  vendor: toloka
+  what: Entry-level contributor (Mindrift)
+  amount: $15-30 per hour
+  unit: per hour
+  whose: job post
+  url: https://mindrift.ai/
+  snippet: unities for leading tech companies. Apply now Entry-level: $15-30 per hour Domain experts: $60-100+/hr 90+ Domains, 20K
+    AI Tr
+- id: toloka-208
+  vendor: toloka
+  what: Domain expert (Mindrift)
+  amount: $60-100+/hr
+  unit: per hour
+  whose: job post
+  url: https://mindrift.ai/
+  snippet: es. Apply now Entry-level: $15-30 per hour Domain experts: $60-100+/hr 90+ Domains, 20K AI Trainers, 20+ Languages, 70% Master
+- id: troveo-211
+  vendor: troveo
+  what: Mercor's figure for an airline's records (vendor's summary)
+  amount: 7.5 million
+  unit: per company
+  whose: company claim
+  url: https://www.troveo.ai/resources/who-buys-company-data-for-ai
+  snippet: ines' records, Micro1 at 12.5 million dollars and Mercor at 7.5 million. In late 2025 Turing launched a program
+    to acquire
+- id: troveo-212
+  vendor: troveo
+  what: RL environment task
+  amount: 200 to 2000 dollars per task in most cases
+  unit: per task
+  whose: company claim
+  url: https://www.troveo.ai/resources/sell-rl-environments
+  snippet: Publicly reported prices run from 200 to 2000 dollars per task in most cases, up to about 20000 dollars f
+- id: turing-214
+  vendor: turing
+  what: Lawyer writing legal tasks
+  amount: $400/approved task
+  unit: per task
+  whose: job post
+  url: https://work.turing.com/r/hMThpdC2rD
+  snippet: 'AHT (Average handling time) per task -  Rates per task - $400/approved task Timezone: PST Engagement Type: Contract
+    Creat'
+- id: turing-215
+  vendor: turing
+  what: Engineer cloning office software and writing tasks on it
+  amount: $300 per approved task
+  unit: per task
+  whose: job post
+  url: https://work.turing.com/r/wb-UMvt2Ep
+  snippet: 'details Engagement type: Contractor, pay per task Payment: $300 per approved task Commitment: Minimum of 1 completed
+    and ap'
+- id: turing-216
+  vendor: turing
+  what: Senior software engineer judging coding agents
+  amount: $100-150/hr
+  unit: per hour
+  whose: job post
+  url: https://work.turing.com/r/596RUEEw_q
+  snippet: Senior Software Engineer - AI Evaluation / Coding Agents ($100-150/hr) Apply now
+- id: turing-217
+  vendor: turing
+  what: Engineering-discipline expert writing terminal tasks
+  amount: $300/per approved task
+  unit: per task
+  whose: job post
+  url: https://work.turing.com/r/F-dCnuE9xZ
+  snippet: 'pected start date is next week] Payment type: Pay Per Task $300/per approved task Create an account Already have
+    an account'
+- id: vals-222
+  vendor: vals
+  what: Founding head of partnerships (vendor staff)
+  amount: $150K - $200K
+  unit: salary
+  whose: job post
+  url: https://jobs.ashbyhq.com/vals-ai/ae3f0677-b069-40ec-a115-b46d32fec5cc
+  snippet: $150K - $200K

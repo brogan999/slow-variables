@@ -765,7 +765,8 @@ export type DataMarketSignal = {
 export type DataMarketDoc = {
   made_by: { model: string; date: string; method: string; reviewed_by: string };
   disclosure: string;
-  counts: { sellers: number; weak: number; builders: number; signals: number; pages: number };
+  counts: { sellers: number; weak: number; builders: number; signals: number; pages: number; prices: number };
+  prices: { groups: { unit: string; name: string; n: number; rows: { id: string; vendor: string; name: string; what: string; amount: string; snippet: string; url: string; whose_name: string; retrieved_at: string; unit: string }[] }[] };
   themes: Record<string, string>;
   vendors: { id: string; name: string; role: "seller" | "builder"; evidence: "evidenced" | "weak"; sells: string; pages: string[]; signals: string[] }[];
   signals: DataMarketSignal[];

@@ -22,6 +22,20 @@ FETCHES = ROOT / "seed" / "data_market_fetches.yaml"
 SOCIAL = re.compile(r"https?://([\w-]+\.)*(x|twitter|linkedin|facebook|instagram|tiktok|reddit)\.com/", re.I)
 ROLES = ("seller", "builder")
 EVIDENCE = ("evidenced", "weak")
+UNITS = {
+    "per hour": "Paid by the hour",
+    "salary": "Salaries",
+    "per task": "Paid by the task",
+    "per company": "Offered for one company's records",
+    "per dataset": "For a dataset",
+    "other": "Other sums",
+}
+WHOSE = {
+    "job post": "job listing",
+    "company claim": "the company's own page",
+    "press": "press report",
+    "terms": "published terms",
+}
 
 
 def load() -> dict[str, Any]:
@@ -34,6 +48,11 @@ def fetches() -> list[dict[str, Any]]:
 
 def _figure(text: str) -> bool:
     return bool(FIGURE.search(YEAR.sub("", text)))
+
+
+def figures(text: str) -> list[str]:
+    """The numbers a text states, commas dropped: what a price's amount must share with its snippet."""
+    return re.findall(r"\d+(?:\.\d+)?", re.sub(r"(?<=\d),(?=\d)", "", text or ""))
 
 
 def _dups(ids: list[Any]) -> list[Any]:
@@ -105,6 +124,26 @@ def problems(doc: dict[str, Any], fetched: list[dict[str, Any]]) -> list[str]:
                 errors.append(f"{w} is shown by {vid} with no page of its own")
         for e in s.get("evidence") or []:
             page(w, str(e.get("url") or ""))
+    prices = doc.get("prices") or []
+    for dup in _dups([p.get("id") for p in prices]):
+        errors.append(f"data market: price {dup} is given twice")
+    for p in prices:
+        w = f"data market: price {p.get('id')}"
+        if p.get("vendor") not in ids:
+            errors.append(f"{w} names {p.get('vendor')}, which is not a vendor")
+        if p.get("unit") not in UNITS:
+            errors.append(f"{w} has unit {p.get('unit')}")
+        if p.get("whose") not in WHOSE:
+            errors.append(f"{w} has source kind {p.get('whose')}")
+        what = str(p.get("what") or "").strip()
+        if not what:
+            errors.append(f"{w} does not say what is priced")
+        elif _figure(what):
+            errors.append(f"{w} types a figure in its description")
+        stated = figures(str(p.get("amount") or ""))
+        if not stated or not set(stated) <= set(figures(str(p.get("snippet") or ""))):
+            errors.append(f"{w} gives a figure its snippet does not state")
+        page(w, str(p.get("url") or ""))
     return errors
 
 
@@ -178,6 +217,20 @@ def build(doc: dict[str, Any], fetched: list[dict[str, Any]]) -> dict[str, Any]:
             lambda v: v["role"] == "builder",
         ),
     ]
+    prices = [
+        {
+            **{k: p[k] for k in ("id", "vendor", "what", "amount", "snippet", "url")},
+            "name": name[p["vendor"]],
+            "whose_name": WHOSE[p["whose"]],
+            "retrieved_at": read[p["url"]],
+            "unit": p["unit"],
+        }
+        for p in sorted(doc.get("prices") or [], key=lambda p: (name[p["vendor"]].lower(), p["id"]))
+    ]
+    price_groups = [
+        {"unit": u, "name": n, "rows": [p for p in prices if p["unit"] == u]} for u, n in UNITS.items()
+    ]
+    price_groups = [{**g, "n": len(g["rows"])} for g in price_groups if g["rows"]]
     made = doc.get("made_by") or {}
     return {
         "made_by": {**made, "date": str(made.get("date"))},
@@ -188,9 +241,11 @@ def build(doc: dict[str, Any], fetched: list[dict[str, Any]]) -> dict[str, Any]:
             "builders": sum(v["role"] == "builder" for v in vendors),
             "signals": len(signals),
             "pages": len({e["url"] for s in signals for e in s["evidence"]}),
+            "prices": len(prices),
         },
         "themes": themes,
         "vendors": listed,
         "board": {"columns": columns, "groups": groups},
+        "prices": {"groups": price_groups},
         "signals": signals,
     }
