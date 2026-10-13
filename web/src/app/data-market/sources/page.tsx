@@ -46,6 +46,7 @@ export default function DataMarketSourcesPage() {
           {d.sources.key.map((k) => (
             <li key={String(k.level)} className="flex items-center gap-1.5"><Mark level={k.level} /> {k.name} <span className="num text-muted">{k.n}</span></li>
           ))}
+          <li className="flex items-center gap-1.5"><span aria-hidden className="inline-block h-2.5 w-2.5 rounded-[1px] outline outline-2 outline-offset-1 outline-fast" /> <Link href="/data-market/dossiers" className={link}>Examined in a dossier</Link> <span className="num text-muted">{d.sources.examined}</span></li>
         </ul>
         <div className="grid grid-cols-1 gap-x-4 gap-y-2 md:grid-cols-[15rem_1fr]">
           {d.sources.families.map((f) => (
@@ -53,7 +54,7 @@ export default function DataMarketSourcesPage() {
               <a href={`#${f.rows[0].id}-family`} className="text-[12.5px] leading-tight text-ink-2 hover:text-ink md:text-right">{f.name} <span className="num text-muted">{f.n}</span></a>
               <div className="flex flex-wrap content-start gap-[3px]">
                 {f.marks.map((m) => (
-                  <a key={m.id} href={`#${m.id}`} title={m.name} aria-label={m.name}><Mark level={m.level} className="block" /></a>
+                  <a key={m.id} href={`#${m.id}`} title={m.name} aria-label={m.name}><Mark level={m.level} className={m.dossier ? "block outline outline-2 outline-offset-1 outline-fast" : "block"} /></a>
                 ))}
               </div>
             </div>
@@ -77,6 +78,7 @@ export default function DataMarketSourcesPage() {
                       <span key={t.url}> · <a href={t.url} rel="nofollow noopener" className={link}>link {i + 1}</a> <span className="num">read {t.retrieved_at}</span></span>
                     ))}
                     {r.unlinked ? <span> · rests on a finding with no link that could be read here</span> : null}
+                    {r.dossier ? <span> · <Link href={r.dossier.href} className={`${link} text-ink-2`}>dossier: {r.dossier.title}</Link></span> : null}
                   </span>
                 </li>
               ))}

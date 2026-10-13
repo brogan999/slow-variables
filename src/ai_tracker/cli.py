@@ -451,7 +451,9 @@ def _check(s: st.Store) -> tuple[list[str], list[str]]:
     from . import data_market
 
     errors += data_market.problems(data_market.load(), data_market.fetches())
-    errors += data_market.source_problems(data_market.sources(), data_market.fetches())
+    errors += data_market.source_problems(
+        data_market.sources(), data_market.fetches(), {d["id"] for d in data_market.dossiers()}
+    )
     errors += data_market.dossier_problems(data_market.dossiers(), data_market.fetches())
     from . import firm
 

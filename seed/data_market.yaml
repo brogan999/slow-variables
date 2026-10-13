@@ -69,6 +69,72 @@ board:
   label: Speech
 - theme: biology_lab
   label: Biology
+method:
+  narrowing:
+  - id: candidates
+    n: 1425
+    says: candidate sources of records, listed by separate passes that each looked through a different lens
+  - id: kinds
+    says: distinct kinds of record once the passes were merged, counting those that would have to be made; each was searched
+      for anyone already selling or using it
+  - id: dossiers
+    says: examined closely in a dossier
+  reviews:
+  - id: pairings
+    checked: 1858
+    changed: 868
+    what: A second run read every pairing of a vendor with a signal against the vendor's own note, and withdrew those no note
+      supported.
+  - id: headlines
+    checked: 211
+    changed: 98
+    what: The same runs reworded the signals whose headline, or stated implication, claimed more than the notes show.
+  - id: prices
+    checked: 93
+    changed: 10
+    what: A run read each price against the passage quoted for it, and rejected those where the passage stated a different
+      figure or less than the amount claimed.
+  - id: levels
+    checked: 803
+    changed: 83
+    what: Two runs read the level of every kind of record against the finding behind it, and moved those the finding did not
+      support, most of them downward.
+  - id: sources
+    checked: 102
+    changed: 96
+    what: Every dossier source that would not open was given another readable page or an Internet Archive copy, or the sentences
+      resting on it were cut.
+  - id: figures
+    checked: 335
+    changed: 47
+    what: Every number in the dossiers was tested against the page its sentence cites, and those that failed were rewritten
+      to the page's own form, turned into words or removed.
+  - id: quotations
+    checked: 69
+    changed: 14
+    what: Every quoted passage in the dossiers was tested word for word against its cited page, and those that failed were
+      corrected to the page's words or removed.
+  left_out:
+  - Anything read only on social media. Several vendors announce their revenue there and nowhere else; those figures are not
+    on this site.
+  - Prices that the page does not state in a single passage as this site's fetch sees it. Many more were found than are shown.
+  - Vendors none of whose pages answered a polite fetch, or whose pages supported no signal.
+  - What paid newsletters report, unless a page the site can read carries the same fact.
+  - How each kind of record might be obtained, what a business built on it might earn, and who to ask. Those notes are the
+    owner's and are not published.
+  - Materials-science data. A late search found that the sellers are long-established crystal-structure databases and that
+    laboratories with their own robots keep what they make; it is not yet written up here.
+  found_wrong:
+  - The first screen favoured the obscure. It marked a kind of record down for being already sold, so the markets where money
+    plainly moves scored lowest. A second set of dossiers was written on those markets; the first ranking is not published.
+  - The passes that listed candidates were not independent. All were told the valuable shape was a decision followed by its
+    result, so their agreement shows what is obvious and not what is good.
+  - Most levels rest on one search. In several dossiers a closer look found an incumbent the first search had missed, so a
+    mark of nobody found is weaker than it looks.
+  - An early summary misstated several facts, among them a bid in a bankruptcy described as a completed sale. Each was corrected
+    against the filing.
+  - No kind of record came out strong. No buyer was shown for a found record valued because its outcome is attached, which
+    was the idea the work began with.
 vendors:
 - id: 1x
   name: 1X
@@ -113,6 +179,15 @@ vendors:
   - https://www.agilityrobotics.com/content/agility-and-ai
   - https://www.agilityrobotics.com/content/training-a-whole-body-control-foundation-model
   - https://zerogtalent.com/robotics-jobs/agility-robotics/data-collection-manager-6208804004
+- id: alibaba
+  name: Alibaba
+  role: builder
+  evidence: evidenced
+  sells: Model builder. Its listings show it buying base, industry, multimodal and customised corpora and labelling from outside
+    vendors, including international ones, while task standards stay with its own teams.
+  pages:
+  - https://www.liepin.com/a/78704927.shtml
+  - https://www.liepin.com/job/1984647125.shtml
 - id: andon-labs
   name: Andon Labs
   role: seller
@@ -218,6 +293,16 @@ vendors:
   - https://letsdatascience.com/news/indian-workers-record-footage-to-train-ai-017815a8
   - https://welzin.ai/blogs/egocentric-data-physical-ai
   - https://www.ycombinator.com/companies/os3
+- id: bytedance
+  name: ByteDance
+  role: builder
+  evidence: evidenced
+  sells: Model builder. Its pages show one department covering data standards, sourcing and procurement, with a large outside
+    data budget; it keeps evaluation staff in house, recruits its own subject specialists to write questions, and says it
+    will not distil.
+  pages:
+  - https://eu.36kr.com/en/p/3934936980667776
+  - https://www.36kr.com/p/3934936980667776
 - id: cajal
   name: Cajal
   role: seller
@@ -449,6 +534,14 @@ vendors:
   - https://exa.ai/library/markets/stocks/DNA/earnings/FY2026/Q2/transcript
   - https://www.biospace.com/press-releases/ginkgo-datapoints-and-apheris-welcome-abbvie-argenx-lundbeck-and-takeda-as-founding-members-of-the-antibody-developability-consortium
   - https://www.corrdyn.com/podcasts/data-in-biotech/ep-75-john-androsavich-biotech-ai-data-spend/
+- id: gomax-lab
+  name: GOMAX Lab
+  role: seller
+  evidence: weak
+  sells: Supplies expert-built data corpora and Chinese-language benchmarks for scientific and industrial AI, made with industry
+    partners. It also runs a research project with a state information body.
+  pages:
+  - https://www.wuhan.gov.cn/whyw/gqdt/202607/t20260724_2824950.shtml
 - id: google-deepmind
   name: Google DeepMind
   role: builder
@@ -549,6 +642,16 @@ vendors:
   - https://blog.cloudflare.com/agentic-internet-bot-report/
   - https://blog.cloudflare.com/human-native-joins-cloudflare/
   - https://blog.cloudflare.com/pay-per-use/
+- id: humanlaya
+  name: Humanlaya
+  role: seller
+  evidence: evidenced
+  sells: Runs an expert platform that supplies expert data and evaluation work to most major Chinese model companies, and
+    publishes public benchmarks. It also asks enterprises to license their anonymised workflow data.
+  pages:
+  - https://humanlaya.com/
+  - https://m.aitntnews.com/newDetail.html?newId=29700
+  - https://media.qimingpian.cn/2026/09/09/b0252a2d46e0fe0457ba285a75f61dee.html
 - id: illumina-bioinsight
   name: Illumina BioInsight / Billion Cell Atlas
   role: seller
@@ -1168,6 +1271,7 @@ vendors:
     and labelling, across speech, computer vision and text; a new application-services line (digital humans, voice-model platforms,
     government data platforms).'
   pages:
+  - https://static.cninfo.com.cn/finalpage/2026-04-24/1225168276.PDF
   - https://stockmc.xueqiu.com/202604/688787_20260424_M2WS.pdf
 - id: surge
   name: Surge AI
@@ -1213,6 +1317,14 @@ vendors:
     notes), plus analysis and, increasingly, a place to train models on that data with GPUs attached; licensed to drug companies.
   pages:
   - https://lefkofsky.com/q2-2026-overview/
+- id: tencent
+  name: Tencent
+  role: builder
+  evidence: evidenced
+  sells: Model builder. Its listing shows it buying training data from overseas suppliers; the notes show nothing on what
+    it keeps inside.
+  pages:
+  - https://jobs.niuqizp.com/job-vls5LaLtM.html
 - id: tesla-optimus
   name: Tesla Optimus
   role: builder
@@ -1290,6 +1402,15 @@ vendors:
   - https://work.turing.com/r/hMThpdC2rD
   - https://work.turing.com/r/wb-UMvt2Ep
   - https://www.sourcery.vc/p/breaking-frontier-ai-is-a-ferrari
+- id: unipat
+  name: UniPat
+  role: seller
+  evidence: weak
+  sells: Sells customised reinforcement-learning data to Alibaba, which also supplies it with capital and compute. It has
+    published a research-grade science dataset graded by rubric and built with expert time.
+  pages:
+  - https://eu.36kr.com/en/p/3997143103311749
+  - https://unipat.ai/blog/UniScientist
 - id: vals
   name: Vals AI
   role: seller
@@ -1364,9 +1485,12 @@ signals:
   implies: Performed speech labelled by emotion and tone, to make synthetic voices expressive.
   shown_by:
   - labelbox
+  - speechocean
   evidence:
   - vendor: labelbox
     url: https://www.alignerr.com/en/jobs
+  - vendor: speechocean
+    url: https://stockmc.xueqiu.com/202604/688787_20260424_M2WS.pdf
 - id: audio_speech-consent-made-to-order-non-exclusive
   theme: audio_speech
   headline: Speech is collected to order with consent records; one vendor licenses non-exclusively by default
@@ -1850,6 +1974,7 @@ signals:
   - afterquery
   - halluminate
   - hud
+  - humanlaya
   - micro1
   - petrarch
   - simpleclosure
@@ -1861,6 +1986,8 @@ signals:
     url: https://jobs.ashbyhq.com/halluminate/337117ea-9b63-40c1-8d01-bf98d7f361c8
   - vendor: hud
     url: https://jobs.ashbyhq.com/hud/965d24c5-2cce-4683-9848-597b12ed4a23
+  - vendor: humanlaya
+    url: https://humanlaya.com/
   - vendor: micro1
     url: https://www.micro1.ai/legal/data-license-master-terms
   - vendor: petrarch
@@ -2032,6 +2159,18 @@ signals:
     url: https://www.troveo.ai/business-data
   - vendor: turing
     url: https://lazarus.turing.com/
+- id: data_buying_role-chinese-labs-hire-overseas-buyers
+  theme: data_buying_role
+  headline: Chinese model builders are hiring staff to buy training data from overseas suppliers
+  implies: Buyers want access to foreign vendors and data they cannot get from domestic suppliers.
+  shown_by:
+  - alibaba
+  - tencent
+  evidence:
+  - vendor: alibaba
+    url: https://www.liepin.com/a/78704927.shtml
+  - vendor: tencent
+    url: https://jobs.niuqizp.com/job-vls5LaLtM.html
 - id: data_buying_role-dedicated-data-buyers-hired
   theme: data_buying_role
   headline: Vendors are hiring people whose whole job is buying data from companies
@@ -2056,6 +2195,18 @@ signals:
     url: https://job-boards.greenhouse.io/snorkelai/jobs/6214981004
   - vendor: toloka
     url: https://toloka.ai/careers/info?jid=4969089101&gh_jid=4969089101
+- id: data_buying_role-labs-keep-standards-buy-labour
+  theme: data_buying_role
+  headline: Chinese model builders keep standards and evaluation in house and buy corpora and labour outside
+  implies: Buyers want suppliers that deliver data and labour to a specification the buyer writes and checks itself.
+  shown_by:
+  - alibaba
+  - bytedance
+  evidence:
+  - vendor: alibaba
+    url: https://www.liepin.com/job/1984647125.shtml
+  - vendor: bytedance
+    url: https://www.36kr.com/p/3934936980667776
 - id: data_buying_role-no-settled-price
   theme: data_buying_role
   headline: The buyers' own job posts say this market has no settled price
@@ -3146,6 +3297,7 @@ signals:
   - theta
   - toloka
   - turing
+  - unipat
   evidence:
   - vendor: afterquery
     url: https://www.afterquery.com/blog/how-we-improved-terminal-bench-2-with-tinker-and-harbor
@@ -3185,6 +3337,8 @@ signals:
     url: https://toloka.ai/blog/what-one-epoch-of-our-ots-enterprise-rl-data-does-for-qwen3.5-27b/
   - vendor: turing
     url: https://labs.turing.com/training-sets/terminal-bench
+  - vendor: unipat
+    url: https://unipat.ai/blog/UniScientist
 - id: graders_quality-proof-of-human-origin
   theme: graders_quality
   headline: Vendors screen contributor work to show it was really made by a human
@@ -4093,15 +4247,30 @@ signals:
   implies: Launch-driven, custom data for a broader set of model builders.
   shown_by:
   - afterquery
+  - alibaba
   - appen
+  - bytedance
+  - humanlaya
   - speechocean
+  - tencent
+  - unipat
   evidence:
   - vendor: afterquery
     url: https://www.afterquery.com/blog/afterquery-celebrates-the-release-of-motif-3
+  - vendor: alibaba
+    url: https://www.liepin.com/a/78704927.shtml
   - vendor: appen
     url: https://announcements.asx.com.au/asxpdf/20260827/pdf/0739ct3d5q4g32.pdf
+  - vendor: bytedance
+    url: https://eu.36kr.com/en/p/3934936980667776
+  - vendor: humanlaya
+    url: https://media.qimingpian.cn/2026/09/09/b0252a2d46e0fe0457ba285a75f61dee.html
   - vendor: speechocean
     url: https://stockmc.xueqiu.com/202604/688787_20260424_M2WS.pdf
+  - vendor: tencent
+    url: https://jobs.niuqizp.com/job-vls5LaLtM.html
+  - vendor: unipat
+    url: https://eu.36kr.com/en/p/3997143103311749
 - id: other-embedded-partner-not-order-taker
   theme: other
   headline: Labs arrive with vague goals and expect the vendor to shape the data fast
@@ -4189,6 +4358,7 @@ signals:
   implies: Practical know-how and specialist media that sit outside the big professional domains.
   shown_by:
   - appen
+  - gomax-lab
   - handshake
   - invisible
   - mercor
@@ -4197,6 +4367,8 @@ signals:
   evidence:
   - vendor: appen
     url: https://announcements.asx.com.au/asxpdf/20260430/pdf/06z15mgxt8dgtk.pdf
+  - vendor: gomax-lab
+    url: https://www.wuhan.gov.cn/whyw/gqdt/202607/t20260724_2824950.shtml
   - vendor: handshake
     url: https://joinhandshake.com/ai/opportunities/drilling-engineer/
   - vendor: invisible
@@ -4245,6 +4417,7 @@ signals:
   - scale
   - simpleclosure
   - surge
+  - unipat
   evidence:
   - vendor: appen
     url: https://www.appen.com/blog/ai-agent-recovery-training-data
@@ -4258,6 +4431,8 @@ signals:
     url: https://jobs.ashbyhq.com/simpleclosure/9b173513-600a-4caa-8451-5c2e336bd8b8
   - vendor: surge
     url: https://jobs.ashbyhq.com/surge-ai/9c80ec29-43fd-4b11-9755-54ce037a0ed8
+  - vendor: unipat
+    url: https://eu.36kr.com/en/p/3997143103311749
 - id: pricing_terms-access-not-files
   theme: pricing_terms
   headline: Some health and biology data vendors sell governed access rather than downloadable files
@@ -4316,6 +4491,7 @@ signals:
   - mifeng
   - protege
   - proximal
+  - speechocean
   - wirestock
   evidence:
   - vendor: appen
@@ -4340,6 +4516,8 @@ signals:
     url: https://withprotege.ai/provider-terms
   - vendor: proximal
     url: https://www.proximal.ai/msa/
+  - vendor: speechocean
+    url: https://static.cninfo.com.cn/finalpage/2026-04-24/1225168276.PDF
   - vendor: wirestock
     url: https://wirestock.io/docs/terms-of-use
 - id: pricing_terms-metered-runs-and-compute
@@ -5353,6 +5531,7 @@ signals:
   shown_by:
   - appen
   - handshake
+  - humanlaya
   - labelbox
   - scale
   - snorkel
@@ -5362,6 +5541,8 @@ signals:
     url: https://www.appen.com/frontier-model-alignment
   - vendor: handshake
     url: https://joinhandshake.com/ai/opportunities/mathematics-expert-india/
+  - vendor: humanlaya
+    url: https://m.aitntnews.com/newDetail.html?newId=29700
   - vendor: labelbox
     url: https://www.alignerr.com/en/jobs
   - vendor: scale
