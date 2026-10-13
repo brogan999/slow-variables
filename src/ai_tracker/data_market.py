@@ -251,7 +251,8 @@ def build(
 ) -> dict[str, Any]:
     """web/data/data_market.json: the vendors with the signals each shows, and the signals most-shown first, each with
     how many vendors show it (weak evidence apart) and the pages, with the day each was read."""
-    read = {f["url"]: str(f["retrieved_at"]) for f in fetched}
+    # a page a dossier also cites keeps the day the vendor study read it: the first record of a page wins here
+    read = {f["url"]: str(f["retrieved_at"]) for f in reversed(fetched)}
     vendors = doc.get("vendors") or []
     weak = {v["id"] for v in vendors if v["evidence"] == "weak"}
     name = {v["id"]: v["name"] for v in vendors}
