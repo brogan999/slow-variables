@@ -390,3 +390,53 @@ def test_the_dossier_pages_draw_the_export_label_the_judgement_and_are_listed():
     assert '"/data-market/dossiers": {' in contents and '"/data-market/dossiers/"' in contents
     assert "dataMarketDossiers()" in (WEB / "app" / "sitemap.ts").read_text()
     assert "dataMarketDossiers()" in (WEB / "app" / "search.json" / "route.ts").read_text()
+
+
+# Part 57h: the owner's private page, built locally and never deployed
+
+
+def _private(tmp_path):
+    folder = tmp_path / "private"
+    (folder / "dossiers").mkdir(parents=True)
+    (folder / "vendors").mkdir()
+    (folder / "playbook-private.md").write_text(
+        "# Playbook\n\n## 1. What changed\n\nContext.\n\n## 2. Stream A: bring companies to the buyers\n\n"
+        "**Who pays:** ZEBRA-BUYER.\n\n| Buyer | Terms |\n|---|---|\n| One | Two |\n\n"
+        "## 10. Questions only a buyer can answer\n\n1. To five record buyers: price?\n2. To two vendors: margin?\n"
+    )
+    (folder / "questions.json").write_text(json.dumps([{"n": 1, "status": "asked", "asked_on": "2026-10-14", "answer": "QUOLL-ANSWER"}]))
+    first = sorted(DOSSIERS, key=lambda d: d["n"])[0]
+    (folder / "dossiers" / f"D{first['n']:02d}.md").write_text("# Private\n\nWOMBAT-ROUTE to the records.\n")
+    (folder / "vendors" / f"{SPEC['vendors'][0]['id']}.md").write_text("# Notes\n\nNUMBAT-CONTACT.\n")
+    return folder
+
+
+def test_the_private_page_opens_on_the_streams_tracks_the_questions_and_joins_private_notes(tmp_path):
+    import subprocess
+    import sys
+
+    out = tmp_path / "playbook.html"
+    script = ROOT / "scripts" / "data_market_private.py"
+    done = subprocess.run([sys.executable, str(script), str(_private(tmp_path)), str(out)], capture_output=True, text=True, cwd=ROOT)
+    assert done.returncode == 0, done.stderr
+    html = out.read_text()
+    assert "Private · local file · never deployed" in html and '<meta name="robots" content="noindex' in html
+    assert html.index("Stream A: bring companies to the buyers") < html.index("What changed"), "the streams come first"
+    assert "ZEBRA-BUYER" in html and "<table" in html
+    assert "QUOLL-ANSWER" in html and "not asked yet" in html, "one question answered, one waiting"
+    assert "WOMBAT-ROUTE" in html and "NUMBAT-CONTACT" in html
+    assert SPEC["signals"][0]["headline"] in html, "the market view sits underneath"
+
+
+def test_the_private_page_cannot_be_written_into_the_repository_and_names_no_private_path(tmp_path):
+    import subprocess
+    import sys
+
+    script = ROOT / "scripts" / "data_market_private.py"
+    inside = ROOT / "web" / "public" / "playbook.html"
+    done = subprocess.run([sys.executable, str(script), str(_private(tmp_path)), str(inside)], capture_output=True, text=True, cwd=ROOT)
+    assert done.returncode != 0 and not inside.exists()
+    assert "outside the repository" in done.stderr + done.stdout
+    text = script.read_text()
+    for banned in ("~/", "/Users/", "docs/private"):
+        assert banned not in text, banned
