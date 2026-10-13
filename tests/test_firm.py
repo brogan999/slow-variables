@@ -150,7 +150,7 @@ def test_the_shape_folio_says_what_the_census_can_and_cannot_read():
         assert {low[-1]["name"], low[-2]["name"]} == {"Office and administrative support", "Sales"}
     rank = [g["name"] for g in sorted(groups, key=lambda g: g["share_passes"])].index("Management")
     rank3 = [g["name"] for g in sorted(groups, key=lambda g: g["share_agreed3"])].index("Management")
-    assert rank <= 2 < rank3  # "near the bottom on the headline vote, though not when all three must agree"
+    assert rank <= 2 < rank3  # "near the bottom on the headline vote, though not on the part all three models pass"
     assert by["Management"]["share_passes"] < by["Sales"]["share_passes"]  # more of it in lower-paid kinds of job than among managers
     assert "cannot test Drago and Laine's order" in folio and "agrees with" not in folio
     assert "the company whose model drafted this page" in folio  # Anthropic's chief executive is named, not left out

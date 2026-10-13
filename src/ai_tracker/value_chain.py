@@ -140,12 +140,12 @@ def problems(
 
 def notes(spec: dict[str, Any], outlook: dict[str, Any], filed: dict[str, date], today: date) -> list[str]:
     """Attention, not errors: a profile read before its company's newest annual filing, or not reviewed in a year,
-    or never reviewed; a unit with no named rival."""
+    or never reviewed (by a reviewing run of the model; no person reviews each profile); a unit with no named rival."""
     out = []
     for c in spec.get("companies") or []:
         eid, reviewed = c["entity"], c.get("reviewed")
         if not reviewed:
-            out.append(f"value chain: profile {eid} has not been reviewed by a person")
+            out.append(f"value chain: profile {eid} has not been reviewed")
         elif eid in filed and filed[eid] > reviewed:
             out.append(f"value chain: profile {eid} predates its annual filing of {filed[eid]}; review it")
         elif (today - reviewed).days > STALE_DAYS:
