@@ -320,3 +320,73 @@ def test_the_sources_page_draws_the_field_and_says_what_a_mark_rests_on():
         'out / "data_market.json", data_market.build(data_market.load(), data_market.fetches(), data_market.sources())'
         in (ROOT / "src" / "ai_tracker" / "store.py").read_text().replace("\n", "").replace("    ", "")
     )
+
+
+# Part 57f: the dossiers, every figure stated on the page its sentence cites
+
+DOSSIERS = dm.dossiers()
+
+
+def test_every_dossier_passes_the_figure_rule_and_cites_only_fetched_pages():
+    assert len(DOSSIERS) >= 35
+    assert dm.dossier_problems(DOSSIERS, FETCHES) == []
+    for d in DOSSIERS:
+        assert d["text"].count("**A model's judgement, not a reading:**") == 1, d["id"]
+        for banned in ("Alex", "~/", "/Users/", "Notes for", "//x.com/", "//twitter.com/"):
+            assert banned not in d["text"], f"{d['id']}: {banned}"
+
+
+def test_a_number_must_be_stated_in_a_snippet_of_a_source_its_sentence_cites():
+    d = copy.deepcopy(DOSSIERS[0])
+    key = d["sources"][0]["key"]
+    d["text"] += f"\n\nThe agency counted 98,765 files [{key}]. A further 43,210 went missing."
+    d["text"] += "\n\nAn illustration, not a real file: a shop sells 77,777 jackets."
+    d["text"] += "\n\nIt reported nothing more [no-such-source]."
+    errors = "\n".join(dm.dossier_problems([d], FETCHES))
+    assert f"dossier {d['id']}: 98765 is not stated by a source its sentence cites" in errors
+    assert f"dossier {d['id']}: 43210 is not stated by a source its sentence cites" in errors
+    assert "77777" not in errors, "a labelled invented example is exempt"
+    q = copy.deepcopy(DOSSIERS[0])
+    q["text"] += (
+        f'\n\nIts terms say the customer "keeps every right to all of its own records for ever" [{key}].'
+    )
+    assert "a quotation is not recorded as read on a source its sentence cites" in "\n".join(
+        dm.dossier_problems([q], FETCHES)
+    )
+    assert f"dossier {d['id']} cites no-such-source, which is not in its sources" in errors
+    e = copy.deepcopy(DOSSIERS[0])
+    e["text"] = e["text"].replace("**A model's judgement, not a reading:**", "**Verdict:**")
+    e["sources"][0]["url"] = "https://example.com/never-fetched"
+    errors = "\n".join(dm.dossier_problems([e], FETCHES))
+    assert "has no labelled judgement" in errors and "never-fetched has no fetch record" in errors
+
+
+def test_the_dossier_export_lays_out_blocks_and_numbers_sources_in_order_of_first_use():
+    docs = dm.dossier_docs(DOSSIERS, FETCHES)
+    assert [d["id"] for d in docs] == [d["id"] for d in sorted(DOSSIERS, key=lambda d: d["n"])]
+    for d in docs:
+        kinds = {b["kind"] for b in d["blocks"]}
+        assert {"h2", "p", "judgement"} <= kinds, d["id"]
+        used = [k for b in d["blocks"] for k in b.get("keys", [])]
+        order = list(dict.fromkeys(used))
+        assert [s["key"] for s in d["sources"] if s["n"]] == order, d["id"]
+        for s in d["sources"]:
+            assert s["retrieved_at"] and s["url"].startswith("http")
+    committed = json.loads((ROOT / "web" / "data" / "data_market_dossiers.json").read_text())
+    assert committed == json.loads(json.dumps(docs, default=str))
+    assert 'out / "data_market_dossiers.json"' in (ROOT / "src" / "ai_tracker" / "store.py").read_text()
+    assert "data_market.dossier_problems(" in (ROOT / "src" / "ai_tracker" / "cli.py").read_text()
+
+
+def test_the_dossier_pages_draw_the_export_label_the_judgement_and_are_listed():
+    page = (WEB / "app" / "data-market" / "dossiers" / "[id]" / "page.tsx").read_text()
+    index = (WEB / "app" / "data-market" / "dossiers" / "page.tsx").read_text()
+    assert "generateStaticParams" in page and "dataMarketDossiers()" in page and '"use client"' not in page
+    assert "A model&apos;s judgement, not a reading" in page and "Claude, a model made by Anthropic" in page
+    assert 'rel="nofollow noopener"' in page and "s.retrieved_at" in page
+    assert "dataMarketDossiers()" in index and "<DataMarketNav" in index
+    assert '"/data-market/dossiers"' in (WEB / "components" / "DataMarketNav.tsx").read_text()
+    contents = (WEB / "lib" / "contents.ts").read_text()
+    assert '"/data-market/dossiers": {' in contents and '"/data-market/dossiers/"' in contents
+    assert "dataMarketDossiers()" in (WEB / "app" / "sitemap.ts").read_text()
+    assert "dataMarketDossiers()" in (WEB / "app" / "search.json" / "route.ts").read_text()
