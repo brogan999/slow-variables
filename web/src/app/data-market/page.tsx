@@ -31,9 +31,27 @@ export default function DataMarketPage() {
         </p>
         <p className="border-l-2 border-dotted border-axis pl-3 text-[13.5px] leading-snug">
           <span className="text-muted">A model&apos;s reading of the vendors&apos; own pages, not a measurement. </span>
-          {d.made_by.method} Then {d.made_by.reviewed_by}. A page shows what a company says of itself; the site reports that it says so and does not vouch that it is true. <Link href="/methodology#company-claims" className={link}>How this is made</Link>.
+          {d.made_by.method} Then {d.made_by.reviewed_by}. A page shows what a company says of itself; the site reports that it says so and does not vouch that it is true. <Link href="/data-market/method" className={link}>How it was made, and what was found wrong with it</Link>.
         </p>
         <p className="text-[13.5px] leading-snug">{d.disclosure}</p>
+      </section>
+
+      <section id="dm-flow" className="scroll-mt-24 flex flex-col gap-3">
+        <div className="flex flex-col gap-2 max-w-[68ch]">
+          <h2 className="display text-2xl">Who pays whom, and which prices are published</h2>
+          <p className="text-ink-2 leading-relaxed">
+            Money runs from model builders to vendors, and from vendors to the people and companies whose work or records become the data. The count on each arrow is how many published figures this site could quote for it. <Link href="/data-market/prices" className={link}>Every figure, with its passage</Link>.
+          </p>
+        </div>
+        <ol className="grid grid-cols-1 gap-3 md:grid-cols-3">
+          {d.flow.map((f) => (
+            <li key={f.id} className="panel flex flex-col gap-2 p-4">
+              <span className="flex flex-wrap items-center gap-x-2 text-[15px] font-medium text-ink">{f.from} <span aria-hidden className="text-muted">→</span> {f.to}</span>
+              <span className="num text-[1.75rem] leading-none text-ink">{f.n} <span className="font-sans text-xs text-muted">published figures quoted</span></span>
+              <span className="text-[13px] leading-snug text-ink-2">{f.says}</span>
+            </li>
+          ))}
+        </ol>
       </section>
 
       <section id="dm-signals" className="scroll-mt-24 flex flex-col gap-4">

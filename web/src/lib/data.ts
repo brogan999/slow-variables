@@ -770,12 +770,20 @@ export type DataMarketDoc = {
   themes: Record<string, string>;
   vendors: { id: string; name: string; role: "seller" | "builder"; evidence: "evidenced" | "weak"; sells: string; pages: string[]; signals: string[] }[];
   signals: DataMarketSignal[];
+  method: {
+    narrowing: { id: string; n: number; says: string }[];
+    reviews: { id: string; checked: number; changed: number; what: string }[];
+    left_out: string[];
+    found_wrong: string[];
+  };
+  flow: { id: string; from: string; to: string; n: number; says: string }[];
   sources: {
     n: number;
+    examined: number;
     key: { level: number | null; name: string; n: number }[];
     families: {
-      name: string; n: number; marks: { id: string; level: number | null; name: string }[];
-      rows: { id: string; name: string; idea: boolean; level: number | null; level_name: string; holder: string | null; personal: string | null; there: { url: string; retrieved_at: string }[]; unlinked: boolean }[];
+      name: string; n: number; marks: { id: string; level: number | null; name: string; dossier: boolean }[];
+      rows: { id: string; name: string; idea: boolean; level: number | null; level_name: string; holder: string | null; personal: string | null; there: { url: string; retrieved_at: string }[]; unlinked: boolean; dossier: { href: string; title: string } | null }[];
     }[];
   };
   board: {

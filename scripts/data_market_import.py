@@ -21,7 +21,7 @@ from pathlib import Path
 import httpx
 import yaml
 
-from ai_tracker.data_market import FETCHES, SOCIAL, SOURCES, SPEC
+from ai_tracker.data_market import DOSSIERS, FETCHES, SOCIAL, SOURCES, SPEC
 from ai_tracker.ingest.base import robots_ok, ua
 
 THEMES = {
@@ -201,6 +201,12 @@ def main(args: list[str]) -> None:
         "partly": "the holder owns part of it",
         "no-processor": "the holder only processes it for the owner",
     }
+    # a record a dossier examines names that dossier, where the dossier is in the repository
+    slug_of = (
+        {d["n"]: d["id"] for d in (yaml.safe_load(DOSSIERS.read_text()) or {}).get("dossiers") or []}
+        if DOSSIERS.exists()
+        else {}
+    )
     rows = [
         {
             "id": r["cluster_id"],
@@ -215,6 +221,7 @@ def main(args: list[str]) -> None:
             if str(r["public_level"]).isdigit()
             else None,  # the level after the reviewing run
             "there": links.get(r["cluster_id"], []),
+            "dossier": slug_of.get(r["public_dossier"]),
         }
         for r in db.execute("select * from sources order by family, cluster_id")
     ]
@@ -225,6 +232,7 @@ def main(args: list[str]) -> None:
         "disclosure": doc.get("disclosure") or "",
         "themes": {k: v for k, v in THEMES.items() if any(s["theme"] == k for s in signals)},
         "board": doc.get("board") or BOARD,
+        "method": doc.get("method") or {},
         "vendors": out_vendors,
         "signals": signals,
         "prices": [p for p in prices if p["vendor"] in {v["id"] for v in out_vendors}],

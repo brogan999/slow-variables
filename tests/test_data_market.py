@@ -83,7 +83,7 @@ def test_every_link_in_the_export_carries_the_day_it_was_read():
 
 def test_the_committed_export_is_the_build_and_check_reads_the_file():
     assert json.loads((ROOT / "web" / "data" / "data_market.json").read_text()) == json.loads(
-        json.dumps(dm.build(SPEC, FETCHES, dm.sources()), default=str)
+        json.dumps(dm.build(SPEC, FETCHES, dm.sources(), dm.dossiers()), default=str)
     )
     assert "data_market.problems(" in (ROOT / "src" / "ai_tracker" / "cli.py").read_text()
     assert 'out / "data_market.json"' in (ROOT / "src" / "ai_tracker" / "store.py").read_text()
@@ -317,7 +317,7 @@ def test_the_sources_page_draws_the_field_and_says_what_a_mark_rests_on():
     assert '"/data-market/sources"' in contents.split("export const UNDER")[1]
     assert '"/data-market/sources"' in (WEB / "app" / "sitemap.ts").read_text()
     assert (
-        'out / "data_market.json", data_market.build(data_market.load(), data_market.fetches(), data_market.sources())'
+        'out / "data_market.json", data_market.build(data_market.load(), data_market.fetches(), data_market.sources(), data_market.dossiers())'
         in (ROOT / "src" / "ai_tracker" / "store.py").read_text().replace("\n", "").replace("    ", "")
     )
 
@@ -465,12 +465,18 @@ def test_a_source_examined_in_a_dossier_links_to_it_and_only_to_a_real_one():
     assert len(linked) >= 30 and {s["dossier"] for s in linked} <= ids
     bad = copy.deepcopy(SOURCES)
     bad[0]["dossier"] = "no-such-dossier"
-    assert any("names dossier no-such-dossier, which does not exist" in e for e in dm.source_problems(bad, FETCHES, ids))
+    assert any(
+        "names dossier no-such-dossier, which does not exist" in e
+        for e in dm.source_problems(bad, FETCHES, ids)
+    )
     doc = dm.build(SPEC, FETCHES, SOURCES, DOSSIERS)["sources"]
     rows = {r["id"]: r for f in doc["families"] for r in f["rows"]}
     marks = {m["id"]: m for f in doc["families"] for m in f["marks"]}
     for s in linked:
-        assert rows[s["id"]]["dossier"]["href"] == f"/data-market/dossiers/{s['dossier']}" and rows[s["id"]]["dossier"]["title"]
+        assert (
+            rows[s["id"]]["dossier"]["href"] == f"/data-market/dossiers/{s['dossier']}"
+            and rows[s["id"]]["dossier"]["title"]
+        )
         assert marks[s["id"]]["dossier"] is True
     assert doc["examined"] == len(linked)
     page = (WEB / "app" / "data-market" / "sources" / "page.tsx").read_text()
@@ -485,7 +491,12 @@ def test_the_method_counts_are_in_the_seed_and_each_review_says_what_it_changed(
     assert doc["narrowing"][0]["n"] > doc["narrowing"][1]["n"] > doc["narrowing"][2]["n"]
     for r in doc["reviews"]:
         assert r["what"] and r["checked"] > 0 and 0 <= r["changed"] <= r["checked"], r["id"]
-    for text in [s["says"] for s in m["narrowing"]] + [r["what"] for r in m["reviews"]] + m["left_out"] + m["found_wrong"]:
+    for text in (
+        [s["says"] for s in m["narrowing"]]
+        + [r["what"] for r in m["reviews"]]
+        + m["left_out"]
+        + m["found_wrong"]
+    ):
         assert not dm._figure(text), text
     broken = copy.deepcopy(SPEC)
     broken["method"]["reviews"][0]["changed"] = broken["method"]["reviews"][0]["checked"] + 1
@@ -506,7 +517,12 @@ def test_who_pays_whom_counts_the_published_figures_on_each_side():
 def test_the_method_page_and_the_landing_draw_them():
     page = (WEB / "app" / "data-market" / "method" / "page.tsx").read_text()
     assert "dataMarket()" in page and '"use client"' not in page and "<DataMarketNav" in page
-    for needle in ("d.method.narrowing.map", "d.method.reviews.map", "d.method.left_out.map", "d.method.found_wrong.map"):
+    for needle in (
+        "d.method.narrowing.map",
+        "d.method.reviews.map",
+        "d.method.left_out.map",
+        "d.method.found_wrong.map",
+    ):
         assert needle in page, needle
     for banned in (".length", "Math.", ".reduce(", ".filter("):
         assert banned not in page, f"the page computes with {banned}"

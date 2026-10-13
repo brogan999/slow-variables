@@ -158,6 +158,16 @@ def problems(doc: dict[str, Any], fetched: list[dict[str, Any]]) -> list[str]:
                 errors.append(f"{w} is shown by {vid} with no page of its own")
         for e in s.get("evidence") or []:
             page(w, str(e.get("url") or ""))
+    method = doc.get("method") or {}
+    for r in method.get("reviews") or []:
+        if not (isinstance(r.get("checked"), int) and isinstance(r.get("changed"), int)) or r["checked"] <= 0:
+            errors.append(f"data market: review {r.get('id')} does not say how many it checked and changed")
+        elif r["changed"] > r["checked"]:
+            errors.append(f"data market: review {r.get('id')} changed more than it checked")
+    said = [x.get("says") for x in method.get("narrowing") or []] + [r.get("what") for r in method.get("reviews") or []]
+    for text in [*said, *(method.get("left_out") or []), *(method.get("found_wrong") or [])]:
+        if not str(text or "").strip() or _figure(str(text)):
+            errors.append(f"data market: the method types a figure, or says nothing: {str(text)[:40]}")
     prices = doc.get("prices") or []
     for dup in _dups([p.get("id") for p in prices]):
         errors.append(f"data market: price {dup} is given twice")
@@ -181,7 +191,9 @@ def problems(doc: dict[str, Any], fetched: list[dict[str, Any]]) -> list[str]:
     return errors
 
 
-def source_problems(rows: list[dict[str, Any]], fetched: list[dict[str, Any]]) -> list[str]:
+def source_problems(
+    rows: list[dict[str, Any]], fetched: list[dict[str, Any]], dossier_ids: set[str] | None = None
+) -> list[str]:
     errors = []
     record = {f["url"]: f for f in fetched}
     for dup in _dups([r.get("id") for r in rows]):
@@ -197,6 +209,8 @@ def source_problems(rows: list[dict[str, Any]], fetched: list[dict[str, Any]]) -
             errors.append(f"{w} types a figure, a size word or an address")
         if r.get("taken") not in LEVELS:
             errors.append(f"{w} has level {r.get('taken')}")
+        if r.get("dossier") and dossier_ids is not None and r["dossier"] not in dossier_ids:
+            errors.append(f"{w} names dossier {r['dossier']}, which does not exist")
         if r.get("personal") not in (None, *PERSONAL):
             errors.append(f"{w} has personal detail {r.get('personal')}")
         for url in r.get("there") or []:
@@ -209,12 +223,13 @@ def source_problems(rows: list[dict[str, Any]], fetched: list[dict[str, Any]]) -
     return errors
 
 
-def _field(rows: list[dict[str, Any]], read: dict[str, str]) -> dict[str, Any]:
+def _field(rows: list[dict[str, Any]], read: dict[str, str], titles: dict[str, str] | None = None) -> dict[str, Any]:
     """One mark a source, by family, most taken first; and the rows beneath, each with the links that could be read."""
 
     def order(r: dict[str, Any]) -> tuple[int, str]:
         return (0 if r["taken"] is None else -r["taken"] - 1, r["name"].lower())
 
+    titles = titles or {}
     families: dict[str, list[dict[str, Any]]] = {}
     for r in rows:
         families.setdefault(r["family"], []).append(r)
@@ -225,7 +240,7 @@ def _field(rows: list[dict[str, Any]], read: dict[str, str]) -> dict[str, Any]:
             {
                 "name": fam,
                 "n": len(rs),
-                "marks": [{"id": r["id"], "level": r["taken"], "name": r["name"]} for r in rs],
+                "marks": [{"id": r["id"], "level": r["taken"], "name": r["name"], "dossier": r.get("dossier") in titles} for r in rs],
                 "rows": [
                     {
                         "id": r["id"],
@@ -237,17 +252,24 @@ def _field(rows: list[dict[str, Any]], read: dict[str, str]) -> dict[str, Any]:
                         "personal": PERSONAL.get(r.get("personal") or ""),
                         "there": [{"url": u, "retrieved_at": read[u]} for u in r.get("there") or []],
                         "unlinked": r["taken"] in (1, 2, 3) and not r.get("there"),
+                        "dossier": {"href": f"/data-market/dossiers/{r['dossier']}", "title": titles[r["dossier"]]}
+                        if r.get("dossier") in titles
+                        else None,
                     }
                     for r in rs
                 ],
             }
         )
     key = [{"level": lv, "name": nm, "n": sum(r["taken"] == lv for r in rows)} for lv, nm in LEVELS.items()]
-    return {"n": len(rows), "key": [k for k in key if k["n"]], "families": out}
+    examined = sum(r.get("dossier") in titles for r in rows)
+    return {"n": len(rows), "examined": examined, "key": [k for k in key if k["n"]], "families": out}
 
 
 def build(
-    doc: dict[str, Any], fetched: list[dict[str, Any]], records: list[dict[str, Any]] | None = None
+    doc: dict[str, Any],
+    fetched: list[dict[str, Any]],
+    records: list[dict[str, Any]] | None = None,
+    examined: list[dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     """web/data/data_market.json: the vendors with the signals each shows, and the signals most-shown first, each with
     how many vendors show it (weak evidence apart) and the pages, with the day each was read."""
@@ -333,6 +355,32 @@ def build(
         {"unit": u, "name": n, "rows": [p for p in prices if p["unit"] == u]} for u, n in UNITS.items()
     ]
     price_groups = [{**g, "n": len(g["rows"])} for g in price_groups if g["rows"]]
+    method = doc.get("method") or {}
+    counted = {"kinds": len(records or []), "dossiers": len(examined or [])}  # the steps the seed does not type
+    by_unit = {g["unit"]: g["n"] for g in price_groups}
+    flow = [
+        {
+            "id": "people",
+            "from": "Vendors",
+            "to": "the people who make the data",
+            "n": sum(by_unit.get(u, 0) for u in ("per hour", "salary", "per task")),
+            "says": "Job listings say what a vendor offers an expert, a robot operator or someone filming at home.",
+        },
+        {
+            "id": "companies",
+            "from": "Vendors",
+            "to": "companies that hold records",
+            "n": by_unit.get("per company", 0),
+            "says": "A few vendors publish what they will pay a company for its internal records.",
+        },
+        {
+            "id": "builders",
+            "from": "Model builders",
+            "to": "vendors",
+            "n": by_unit.get("per dataset", 0),
+            "says": "Almost no page says what a model builder paid. This is the price the whole trade turns on, and it is the one not published.",
+        },
+    ]
     made = doc.get("made_by") or {}
     return {
         "made_by": {**made, "date": str(made.get("date"))},
@@ -349,7 +397,12 @@ def build(
         "vendors": listed,
         "board": {"columns": columns, "groups": groups},
         "prices": {"groups": price_groups},
-        "sources": _field(records or [], read),
+        "sources": _field(records or [], read, {d["id"]: d["title"] for d in examined or []}),
+        "method": {
+            **method,
+            "narrowing": [{**x, "n": counted.get(x["id"], x.get("n"))} for x in method.get("narrowing") or []],
+        },
+        "flow": flow,
         "signals": signals,
     }
 

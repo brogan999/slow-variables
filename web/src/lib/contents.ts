@@ -170,6 +170,7 @@ export const PAGES: Record<string, Page> = {
   ] },
   "/data-market": { name: "The data market", question: "What are the people who train AI buying?", sections: [
     ["dm-how", "How this is read", "Where does a record of what model builders buy come from, when they publish none?"],
+    ["dm-flow", "Who pays whom", "Which way does the money run, and which prices are published?"],
     ["dm-signals", "The signals", "What do the vendors' own pages show their buyers asking for, and how many vendors show each?"],
     ["dm-limits", "What the pages do not show", "What can this reading not tell you?"],
   ] },
@@ -184,13 +185,19 @@ export const PAGES: Record<string, Page> = {
     ["dm-families", "The records, family by family", "Who holds each kind of record, and what was found?"],
   ] },
   "/data-market/dossiers": { name: "The data market: dossiers", question: "Which kinds of record have been examined closely, and what did each turn up?", each: [["/data-market/dossiers/", "One page per kind of record: what it is, who holds it, who is already there, what stands in the way, and a labelled judgement."]] },
+  "/data-market/method": { name: "The data market: how it was made", question: "How was this section made, what did each check change, and what is wrong with it?", sections: [
+    ["dm-narrowing", "From candidates to dossiers", "How many kinds of record were looked at, and how many closely?"],
+    ["dm-reviews", "What each check changed", "How much did a second reading change?"],
+    ["dm-left-out", "What is left out", "What is not on these pages, and why?"],
+    ["dm-found-wrong", "What is wrong with it", "Where is this work weak?"],
+  ] },
   "/ask": { name: "Ask", question: "Can I put a question to the data in plain words?" },
 };
 
 // Deep dives listed under the stop they belong to, and the reference pages that belong to none.
 export const UNDER: Record<string, readonly string[]> = {
   "/argument": ["/argument/migration"],
-  "/capture": ["/value-chain", "/value-chain/opportunities", "/value-chain/atlas", "/data-market", "/data-market/vendors", "/data-market/prices", "/data-market/sources", "/data-market/dossiers", "/stack", "/ledger"],
+  "/capture": ["/value-chain", "/value-chain/opportunities", "/value-chain/atlas", "/data-market", "/data-market/vendors", "/data-market/prices", "/data-market/sources", "/data-market/dossiers", "/data-market/method", "/stack", "/ledger"],
   "/firm": ["/firm/kinds"],
   "/predictions": ["/compare"],
   "/singularity": ["/singularity/atlas", "/futures"],
