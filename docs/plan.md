@@ -1482,3 +1482,12 @@ The same change fixes a fault in the dossier export: the judgement's text was dr
 **Tests first.** `tests/test_truth_in_labelling.py`: no seed or page text says a named person reviewed the profiles, every profile's reviewer says no person did and its disclosure still names Anthropic; Ask is not handed a bare reviewed flag; no page, census seed or essay describes the stricter figure with a form of "agree". `tests/test_valuechain_figures.py` holds the profit rule's foot to the records.
 
 **Not regenerated here.** `web/data` still holds the old words in the committed exports of the value chain, the layers, the firm page and the outlook until the nightly export replaces them; no test compares those words with the seed.
+
+## Part 59 (13 Oct 2026): a private area behind a login
+
+**What ships.** The site has its first login. It guards one area, `/private`, whose pages are drawn from a bundle of files kept in a separate private store and fetched at request time, only after the session has been checked; the content is never in this repository. Nothing private is tracked, deployed in the build, listed in the menu, the contents, the sitemap or the search index, or open to a search engine, and the area answers "not found" wherever its four settings are absent.
+
+**How it is held.** `web/src/lib/private.ts` is the only file that reads the settings: it checks a password against a scrypt hash, signs a thirty-day cookie scoped to the area, and loads a file only by a name the bundle's own manifest lists. One generic route draws an index, a section and a document or a table filtered on the server, so no page, heading or figure is named in public code. `scripts/private_bundle.py` builds the bundle from a spec kept outside the repository and refuses to write inside it; `docs/private-area.md` is the owner's runbook. Two faults in the markdown renderer it shares with the local private page were fixed on the way: a quotation mark in a link's address could open an attribute, and a line opening with a bar that began no table never ended.
+
+**Judgement calls.** There is no limit on password attempts, so the runbook asks for a long password. Each page checks the settings and the session itself, because Next's guide says a layout does not stop the pages beneath it from rendering. Tests first: `tests/test_private.py` holds the order of the session check and the fetch, where the settings may be read, the headers, the absence of the area from every list, and the bundler's escaping, tables, links and refusal.
+

@@ -111,7 +111,8 @@ export function AskPanel() {
   // a new question is pinned to the top of the panel, so its answer reads from its first line
   useEffect(() => { if (busy) newest.current?.scrollIntoView({ block: "start" }); }, [busy]);
 
-  if (pathname === "/ask") return null;  // the Ask page holds its own, separate conversation; no second one beside it
+  // the Ask page holds its own, separate conversation; the area behind the login sends no page title to the model's host
+  if (pathname === "/ask" || pathname.startsWith("/private")) return null;
 
   const from = `${pathname} — ${title}${section ? `, section "${section}"` : ""}`;
   async function ask(text: string, page = withPage) {

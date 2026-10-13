@@ -40,7 +40,7 @@ details{margin:6px 0}summary{cursor:pointer;font-weight:600}summary .n{font-weig
 
 
 def inline(text: str) -> str:
-    t = escape(text, quote=False)
+    t = escape(text)  # quotes too: an address is written into an attribute
     t = re.sub(r"`([^`]+)`", r"<code>\1</code>", t)
     t = re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", t)
     t = re.sub(r"(?<![*\w])\*([^*\n]+)\*(?!\w)", r"<em>\1</em>", t)
@@ -97,7 +97,8 @@ def markdown(text: str, shift: int = 0) -> str:
                 i += 1
             out.append(f"<blockquote>{inline(' '.join(quote))}</blockquote>")
         else:
-            para = []
+            para = [line.strip()]  # this line is taken whatever it opens with, so the loop always moves on
+            i += 1
             while (
                 i < len(lines)
                 and lines[i].strip()

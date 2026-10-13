@@ -219,3 +219,13 @@ body:has(.ask-shell) {
 .chain-atlas .ca-tile:hover, .chain-atlas .ca-tile:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px; }
 .chain-atlas .ca-band { position: absolute; inset: 0 auto 0 0; width: 0.65rem; }
 @media (prefers-reduced-motion: no-preference) { .chain-atlas .ca-band { transition: background-color 0.4s, color 0.4s; } }
+
+/* a document behind the login arrives as HTML from the site's own bundler, so its marks are styled here, inside .prose-folio */
+.doc-html h2 { font-family: var(--font-display); font-weight: 700; font-size: 1.5rem; line-height: 1.15; letter-spacing: -0.02em; margin-top: 2rem; }
+.doc-html h3, .doc-html h4 { font-family: var(--font-sans); font-weight: 600; font-size: 1rem; line-height: 1.4; margin-top: 1.5rem; }
+.doc-html pre { font-family: var(--font-mono); font-size: 13px; line-height: 1.5; background: var(--surface-2); padding: 0.75rem 1rem; border-radius: var(--radius-md); overflow-x: auto; overflow-wrap: normal; }
+.doc-html :not(pre) > code { font-family: var(--font-mono); font-size: 0.85em; background: var(--surface-2); padding: 0.05em 0.3em; border-radius: 2px; }
+.doc-html > pre, .doc-html > table { max-width: 100%; } /* the measure is counted in the prose's own type, not theirs */
+.doc-html table { display: block; overflow-x: auto; font-family: var(--font-sans); }
+.doc-html table th { white-space: nowrap; } .doc-html table td { min-width: 7rem; } /* a wide table scrolls sideways; it is not squeezed */
+.doc-html hr { border-color: var(--grid); }

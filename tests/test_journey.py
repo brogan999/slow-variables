@@ -35,6 +35,7 @@ def test_every_page_has_a_contents_entry_that_says_what_question_it_answers():
     text = _contents()
     entries = dict(re.findall(r'^\s*"(/[a-z/-]*)": \{ name: "[^"]+", question: "([^"]+\?)"', text, re.M))
     pages = [p.parent.relative_to(WEB / "app").as_posix() for p in (WEB / "app").rglob("page.tsx")]
+    pages = [p for p in pages if p.split("/")[0] != "private"]  # the area behind the login is listed nowhere
     static = {"/" + ("" if p == "." else p) for p in pages if "[" not in p}
     assert static - {"/contents"} == set(entries), sorted(static - {"/contents"} ^ set(entries))
     # a page made once per record is described on the page that lists them
