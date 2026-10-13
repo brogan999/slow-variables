@@ -19,6 +19,8 @@ const nextConfig: NextConfig = {
           { key: "Content-Security-Policy", value: CSP },
         ],
       },
+      // the area behind the login: never indexed, never kept by a cache between the server and the reader
+      { source: "/private/:path*", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }, { key: "Cache-Control", value: "private, no-store" }] },
       { source: "/futures/:path*.webp", headers: [{ key: "Cache-Control", value: "public, max-age=86400, stale-while-revalidate=604800" }] },
       { source: "/illustrations/:path*.webp", headers: [{ key: "Cache-Control", value: "public, max-age=86400, stale-while-revalidate=604800" }] },
       { source: "/data/:path*.csv", headers: [{ key: "Cache-Control", value: "public, max-age=3600, stale-while-revalidate=86400" }] },
