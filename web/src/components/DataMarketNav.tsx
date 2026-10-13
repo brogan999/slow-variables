@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 // The data market's own menu, one row that scrolls sideways on a phone and never wraps.
-const PAGES = [["/data-market", "Signals"], ["/data-market/vendors", "Vendors"], ["/data-market/prices", "Prices and pay"]] as const;
+const PAGES = [["/data-market", "Signals"], ["/data-market/vendors", "Vendors"], ["/data-market/prices", "Prices and pay"], ["/data-market/sources", "Every kind of record"]] as const;
 
 export function DataMarketNav({ here }: { here: (typeof PAGES)[number][0] }) {
   return (

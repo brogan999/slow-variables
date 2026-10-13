@@ -451,6 +451,7 @@ def _check(s: st.Store) -> tuple[list[str], list[str]]:
     from . import data_market
 
     errors += data_market.problems(data_market.load(), data_market.fetches())
+    errors += data_market.source_problems(data_market.sources(), data_market.fetches())
     from . import firm
 
     errors += firm.problems(firm.load(), load_outlook(), board.judgements(), firm.ESSAY.read_text() if firm.ESSAY.exists() else "")

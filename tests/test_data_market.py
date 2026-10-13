@@ -83,7 +83,7 @@ def test_every_link_in_the_export_carries_the_day_it_was_read():
 
 def test_the_committed_export_is_the_build_and_check_reads_the_file():
     assert json.loads((ROOT / "web" / "data" / "data_market.json").read_text()) == json.loads(
-        json.dumps(dm.build(SPEC, FETCHES), default=str)
+        json.dumps(dm.build(SPEC, FETCHES, dm.sources()), default=str)
     )
     assert "data_market.problems(" in (ROOT / "src" / "ai_tracker" / "cli.py").read_text()
     assert 'out / "data_market.json"' in (ROOT / "src" / "ai_tracker" / "store.py").read_text()
@@ -252,3 +252,71 @@ def test_the_export_groups_prices_by_unit_and_the_page_quotes_each():
     )
     assert '"/data-market/prices"' in (WEB / "app" / "sitemap.ts").read_text()
     assert 'href="/data-market/prices"' in (WEB / "app" / "data-market" / "page.tsx").read_text()
+
+
+# Part 57e: every kind of record that could be training data, and who is already there
+
+SOURCES = dm.sources()
+
+
+def test_every_source_has_a_family_a_level_and_only_fetched_links():
+    assert dm.source_problems(SOURCES, FETCHES) == []
+    assert len(SOURCES) > 700 and {s["taken"] for s in SOURCES} >= {0, 1, 2, 3}
+    fetched = {f["url"] for f in FETCHES if f.get("http_status") == 200}
+    for s in SOURCES:
+        assert set(s["there"]) <= fetched, s["id"]
+
+
+def test_a_broken_source_names_each_problem():
+    rows = copy.deepcopy(SOURCES)
+    rows[0]["name"] = "Top 40 ledgers"
+    rows[1]["taken"] = 7
+    rows[2]["there"] = ["https://example.com/never-fetched"]
+    rows[3]["family"] = ""
+    rows.append(copy.deepcopy(rows[4]))
+    errors = "\n".join(dm.source_problems(rows, FETCHES))
+    for needle in (
+        f"source {rows[0]['id']} types a figure",
+        f"source {rows[1]['id']} has level 7",
+        "never-fetched has no fetch record",
+        f"source {rows[3]['id']} has no family",
+        f"source {rows[4]['id']} is given twice",
+    ):
+        assert needle in errors, needle
+
+
+def test_the_field_lays_out_one_mark_a_source_by_family_and_counts_each_level():
+    doc = dm.build(SPEC, FETCHES, SOURCES)["sources"]
+    marks = [m for f in doc["families"] for m in f["marks"]]
+    assert len(marks) == len(SOURCES) == doc["n"] and len({m["id"] for m in marks}) == len(marks)
+    by_id = {s["id"]: s for s in SOURCES}
+    for f in doc["families"]:
+        assert f["n"] == len(f["marks"]) == len(f["rows"])
+        levels = [m["level"] for m in f["marks"]]
+        assert levels == sorted(levels, key=lambda v: -1 if v is None else v, reverse=True), (
+            "most taken first"
+        )
+        for r in f["rows"]:
+            assert r["level_name"] and (r["there"] or not by_id[r["id"]]["there"])
+            assert r["unlinked"] == (by_id[r["id"]]["taken"] in (1, 2, 3) and not by_id[r["id"]]["there"])
+    for k in doc["key"]:
+        assert k["n"] == sum(m["level"] == k["level"] for m in marks)
+
+
+def test_the_sources_page_draws_the_field_and_says_what_a_mark_rests_on():
+    page = (WEB / "app" / "data-market" / "sources" / "page.tsx").read_text()
+    assert "dataMarket()" in page and '"use client"' not in page and "<DataMarketNav" in page
+    assert "d.sources.families.map" in page and "d.sources.key.map" in page and "hatch" in page
+    assert "A model&apos;s reading of a search" in page and "no link that could be read" in page
+    assert 'rel="nofollow noopener"' in page
+    for banned in (".length", "Math.", ".reduce(", ".filter("):
+        assert banned not in page, f"the page computes with {banned}"
+    assert '"/data-market/sources"' in (WEB / "components" / "DataMarketNav.tsx").read_text()
+    contents = (WEB / "lib" / "contents.ts").read_text()
+    assert '"/data-market/sources": {' in contents and '"dm-field"' in contents
+    assert '"/data-market/sources"' in contents.split("export const UNDER")[1]
+    assert '"/data-market/sources"' in (WEB / "app" / "sitemap.ts").read_text()
+    assert (
+        'out / "data_market.json", data_market.build(data_market.load(), data_market.fetches(), data_market.sources())'
+        in (ROOT / "src" / "ai_tracker" / "store.py").read_text().replace("\n", "").replace("    ", "")
+    )
