@@ -11,6 +11,7 @@ export const metadata = {
 const link = "underline decoration-grid underline-offset-4";
 const REVIEW: Record<string, string> = {
   pairings: "Vendors paired with signals",
+  register: "Further vendors from a public register",
   headlines: "Signals",
   prices: "Prices",
   levels: "Levels of the kinds of record",
