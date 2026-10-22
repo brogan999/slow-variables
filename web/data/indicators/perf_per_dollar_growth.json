@@ -6,9 +6,9 @@
  "band_input": "metric:perf_per_dollar_doubling_days",
  "band_rationale": "Normal = doubling no faster than every 500 days (roughly the +49% a year Epoch reports); fast = yearly or faster. Between is emerging.",
  "band_value": {
-  "as_of": "2025-11-06",
-  "high": 3784.9187193147472,
-  "low": 771.4141760014054,
+  "as_of": "2026-08-02",
+  "high": 3685.8016020712007,
+  "low": 812.2028983329974,
   "obs_ids": [
    "022d95069a720995",
    "0b6ae77b38f91046",
@@ -20,6 +20,7 @@
    "3918686e84cafd5d",
    "3b6cabe10efe4e9f",
    "3c78e4d11f6ddb21",
+   "3dcea1b6baf0cba7",
    "4242fdcd0f30ce32",
    "441605f18f26a5a3",
    "4424f8477ba888b7",
@@ -47,12 +48,13 @@
    "d29860483000ace5",
    "d83a3353e02b94d1",
    "da2a2b98b39d1db4",
+   "da41686f835a3764",
    "e95523e7de1e6074",
    "f5f878d6f616f2f9",
    "f6102c632d05f6d2"
   ],
   "unit": "days",
-  "value": 1281.6183637916065
+  "value": 1331.08748273312
  },
  "bucket_id": "methods",
  "cadence_expected": "annual",
@@ -87,19 +89,19 @@
   "x": {
    "ticks": [
     {
-     "label": "Oct 2025",
+     "label": "Jul 2026",
      "minor": false,
-     "x": 12.5
+     "x": 16.67
     },
     {
-     "label": "Nov",
+     "label": "Aug",
      "minor": false,
-     "x": 44.79
+     "x": 48.96
     },
     {
-     "label": "Dec",
+     "label": "Sep",
      "minor": false,
-     "x": 76.04
+     "x": 81.25
     }
    ]
   },
@@ -143,7 +145,7 @@
  "confidence_basis": {
   "best_tier": 2,
   "grade": "B",
-  "n_observations": 40,
+  "n_observations": 42,
   "sources": [
    "Epoch AI ML hardware"
   ],
@@ -166,15 +168,15 @@
  "definition": "Doubling time of FP16 tensor throughput per release-price dollar across accelerators with a public price, fitted log-linearly from 2012 on Epoch's hardware table. Derived metric perf_per_dollar_doubling_days.",
  "derived": [
   {
-   "as_of_date": "2025-11-06",
-   "computed_at": "2026-10-21T12:03:08.945086Z",
+   "as_of_date": "2026-08-02",
+   "computed_at": "2026-10-22T12:06:05.710167Z",
    "dims": {
-    "aic": "-6.6",
-    "n": "20",
-    "r2": "0.360"
+    "aic": "-7.9",
+    "n": "21",
+    "r2": "0.361"
    },
    "formula_version": "2",
-   "id": "eeb1925cd35ee237",
+   "id": "fc0eae291f2e0f7d",
    "input_observation_ids": [
     "022d95069a720995",
     "0b6ae77b38f91046",
@@ -186,6 +188,7 @@
     "3918686e84cafd5d",
     "3b6cabe10efe4e9f",
     "3c78e4d11f6ddb21",
+    "3dcea1b6baf0cba7",
     "4242fdcd0f30ce32",
     "441605f18f26a5a3",
     "4424f8477ba888b7",
@@ -213,6 +216,7 @@
     "d29860483000ace5",
     "d83a3353e02b94d1",
     "da2a2b98b39d1db4",
+    "da41686f835a3764",
     "e95523e7de1e6074",
     "f5f878d6f616f2f9",
     "f6102c632d05f6d2"
@@ -229,6 +233,7 @@
     "3918686e84cafd5d",
     "3b6cabe10efe4e9f",
     "3c78e4d11f6ddb21",
+    "3dcea1b6baf0cba7",
     "4242fdcd0f30ce32",
     "441605f18f26a5a3",
     "4424f8477ba888b7",
@@ -256,13 +261,14 @@
     "d29860483000ace5",
     "d83a3353e02b94d1",
     "da2a2b98b39d1db4",
+    "da41686f835a3764",
     "e95523e7de1e6074",
     "f5f878d6f616f2f9",
     "f6102c632d05f6d2"
    ],
-   "value": 1281.6183637916065,
-   "value_high": 3784.9187193147472,
-   "value_low": 771.4141760014054
+   "value": 1331.08748273312,
+   "value_high": 3685.8016020712007,
+   "value_low": 812.2028983329974
   }
  ],
  "direction": null,
@@ -279,12 +285,12 @@
  "grade": "B",
  "id": "perf_per_dollar_growth",
  "latest": {
-  "as_of": "2025-11-06",
-  "derived_id": "eeb1925cd35ee237",
+  "as_of": "2026-08-02",
+  "derived_id": "fc0eae291f2e0f7d",
   "dims": {
-   "aic": "-6.6",
-   "n": "20",
-   "r2": "0.360"
+   "aic": "-7.9",
+   "n": "21",
+   "r2": "0.361"
   },
   "obs_ids": [
    "022d95069a720995",
@@ -297,6 +303,7 @@
    "3918686e84cafd5d",
    "3b6cabe10efe4e9f",
    "3c78e4d11f6ddb21",
+   "3dcea1b6baf0cba7",
    "4242fdcd0f30ce32",
    "441605f18f26a5a3",
    "4424f8477ba888b7",
@@ -324,18 +331,19 @@
    "d29860483000ace5",
    "d83a3353e02b94d1",
    "da2a2b98b39d1db4",
+   "da41686f835a3764",
    "e95523e7de1e6074",
    "f5f878d6f616f2f9",
    "f6102c632d05f6d2"
   ],
   "unit": "days",
-  "value": 1281.6183637916065
+  "value": 1331.08748273312
  },
  "layer_id": "compute_physical",
  "leading_lagging": "leading",
  "metric": "perf_per_dollar_doubling_days",
  "metric_dims": {},
- "n_observations": 40,
+ "n_observations": 42,
  "name": "Hardware price-performance growth (doubling time)",
  "normal_band": {
   "hi": null,
@@ -345,14 +353,14 @@
  "pending": null,
  "points": [
   {
-   "as_of": "2025-11-06",
-   "derived_id": "eeb1925cd35ee237",
+   "as_of": "2026-08-02",
+   "derived_id": "fc0eae291f2e0f7d",
    "dims": {
-    "aic": "-6.6",
-    "n": "20",
-    "r2": "0.360"
+    "aic": "-7.9",
+    "n": "21",
+    "r2": "0.361"
    },
-   "href": "#d-eeb1925cd35ee237",
+   "href": "#d-fc0eae291f2e0f7d",
    "obs_ids": [
     "022d95069a720995",
     "0b6ae77b38f91046",
@@ -364,6 +372,7 @@
     "3918686e84cafd5d",
     "3b6cabe10efe4e9f",
     "3c78e4d11f6ddb21",
+    "3dcea1b6baf0cba7",
     "4242fdcd0f30ce32",
     "441605f18f26a5a3",
     "4424f8477ba888b7",
@@ -391,15 +400,16 @@
     "d29860483000ace5",
     "d83a3353e02b94d1",
     "da2a2b98b39d1db4",
+    "da41686f835a3764",
     "e95523e7de1e6074",
     "f5f878d6f616f2f9",
     "f6102c632d05f6d2"
    ],
    "stamp": "reported",
    "unit": "days",
-   "value": 1281.6183637916065,
+   "value": 1331.08748273312,
    "x": 50.0,
-   "y": 14.56
+   "y": 11.26
   }
  ],
  "prediction_rows": [
