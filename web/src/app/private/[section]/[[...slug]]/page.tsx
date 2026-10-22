@@ -76,7 +76,7 @@ export default async function PrivatePage({ params, searchParams }: { params: Pr
   const at = sec.documents.findIndex((d) => d.slug === slug[0]);
   const doc = sec.documents[at];
   if (!doc) notFound();
-  const body = await load<{ title: string; html?: string } & Partial<Table>>(doc.file);
+  const body = await load<{ title: string; html?: string; figures?: string[] } & Partial<Table>>(doc.file);
   if (!body) redirect("/private/login");
   const table = doc.kind === "table" && body.columns && body.rows ? { title: body.title, columns: body.columns, rows: body.rows, filters: body.filters ?? [] } : null;
   const prev = sec.documents[at - 1];
@@ -87,6 +87,8 @@ export default async function PrivatePage({ params, searchParams }: { params: Pr
         <span className="eyebrow">{eyebrow} · <Link prefetch={false} href={`/private/${sec.slug}`} className="hover:text-ink">{sec.title}</Link></span>
         <h1 className="display text-[2.25rem] md:text-[3.25rem] leading-[1.04] max-w-[24ch]">{body.title}</h1>
       </div>
+      {/* Figures are SVG the bundler checked element by element: drawing only, nothing that runs, links or fetches. */}
+      {body.figures?.map((svg, i) => <figure key={i} className="panel overflow-x-auto p-3" dangerouslySetInnerHTML={{ __html: svg }} />)}
       {table ? <TableView table={table} query={await searchParams} /> : (
         <div className="grid grid-cols-1 gap-x-12 gap-y-8 lg:grid-cols-[minmax(0,1fr)_19rem]">
           {/* The bundle's HTML is produced, escaped, by our own converter from our own private repository. */}
