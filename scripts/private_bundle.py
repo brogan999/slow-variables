@@ -58,32 +58,40 @@ def html(text: str, here: Path, urls: dict[Path, str]) -> str:
     return "\n".join(out)
 
 
-# a figure may hold only these elements and attributes; anything else, and any value that could fetch or run, is refused
+# a figure may hold only these elements and attributes, in the SVG namespace. It is rebuilt from the checked tree, so
+# nothing the XML reader drops (a processing instruction, say) can reach the page; there is no style attribute at all.
+SVG = "http://www.w3.org/2000/svg"
 DRAWING = {"svg", "g", "rect", "line", "path", "circle", "text", "tspan", "title", "desc"}
 ATTRS = {
-    "viewBox", "width", "height", "role", "id", "aria-labelledby", "aria-label", "style", "x", "y", "x1", "y1", "x2",
-    "y2", "cx", "cy", "r", "rx", "d", "fill", "stroke", "stroke-width", "opacity", "font-size", "font-weight",
+    "viewBox", "width", "height", "role", "id", "aria-labelledby", "aria-label", "x", "y", "x1", "y1", "x2", "y2",
+    "cx", "cy", "r", "rx", "d", "fill", "stroke", "stroke-width", "opacity", "font-size", "font-weight",
     "font-family", "text-anchor", "dominant-baseline", "transform",
 }
-UNSAFE = re.compile(r"url\(|javascript:|expression\(|@import", re.I)
+UNSAFE = re.compile(r"url\(|javascript:|expression\(|@import|\\", re.I)
+ET.register_namespace("", SVG)
 
 
-def figure(path: Path) -> str:
-    text = path.read_text()
-    if "<!" in text:
-        sys.exit(f"refused: {path.name} carries a declaration or comment")
+def figure(path: Path, prefix: str) -> str:
+    text = re.sub(r"\A\s*<\?xml[^>]*\?>", "", path.read_text(encoding="utf-8"))
+    if "<!" in text or "<?" in text:
+        sys.exit(f"refused: {path.name} carries a declaration, comment or processing instruction")
     try:
         root = ET.fromstring(text)
     except ET.ParseError as e:
         sys.exit(f"refused: {path.name} is not well-formed: {e}")
     for el in root.iter():
-        tag = el.tag.rsplit("}", 1)[-1]
-        if tag not in DRAWING or (el is root) != (tag == "svg"):
-            sys.exit(f"refused: {path.name} holds an element that is not a drawing: {tag}")
+        tag = el.tag.removeprefix("{" + SVG + "}")
+        if tag not in DRAWING or (el is root) != (tag == "svg") or "}" in tag:
+            sys.exit(f"refused: {path.name} holds an element that is not an SVG drawing: {el.tag}")
         for name, value in el.attrib.items():
-            if "}" in name or name not in ATTRS or UNSAFE.search(value):
+            if name not in ATTRS or UNSAFE.search(value):
                 sys.exit(f"refused: {path.name} has an attribute that is not allowed: {name}")
-    return text
+        # ids become unique to this document and figure, and labels follow them
+        if "id" in el.attrib:
+            el.set("id", f"{prefix}-{el.get('id')}")
+        if "aria-labelledby" in el.attrib:
+            el.set("aria-labelledby", " ".join(f"{prefix}-{i}" for i in el.get("aria-labelledby").split()))
+    return ET.tostring(root, encoding="unicode")
 
 
 def table(path: Path, doc: dict) -> dict:
@@ -110,6 +118,8 @@ def main(args: list[str]) -> None:
             sys.exit(f"refused: a slug is lower-case letters, digits and hyphens: {s['slug']}/{d['slug']}")
         if d["kind"] not in ("doc", "table"):
             sys.exit(f"refused: {d['slug']} has a kind that is neither doc nor table")
+        if not isinstance(d.get("figures", []), list):
+            sys.exit(f"refused: {d['slug']} lists its figures as something other than a list of files")
         for f in [d["source"], *d.get("figures", [])]:
             if not (src / f).resolve().is_relative_to(src):
                 sys.exit(f"refused: {d['slug']} reads a file outside the source folder")
@@ -125,7 +135,7 @@ def main(args: list[str]) -> None:
             else {"title": d["title"], "html": html(path.read_text(), path, urls)}
         )
         if d.get("figures"):
-            body["figures"] = [figure((src / f).resolve()) for f in d["figures"]]
+            body["figures"] = [figure((src / f).resolve(), f"{s['slug']}-{d['slug']}-{i}") for i, f in enumerate(d["figures"])]
         (out / name(s, d)).write_text(json.dumps(body))
     manifest = {
         "sections": [

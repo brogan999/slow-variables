@@ -88,7 +88,7 @@ export default async function PrivatePage({ params, searchParams }: { params: Pr
         <h1 className="display text-[2.25rem] md:text-[3.25rem] leading-[1.04] max-w-[24ch]">{body.title}</h1>
       </div>
       {/* Figures are SVG the bundler checked element by element: drawing only, nothing that runs, links or fetches. */}
-      {body.figures?.map((svg, i) => <figure key={i} className="panel overflow-x-auto p-3" dangerouslySetInnerHTML={{ __html: svg }} />)}
+      {body.figures?.map((svg, i) => <figure key={i} className="panel overflow-x-auto p-3 [&>svg]:block [&>svg]:h-auto [&>svg]:min-w-[780px]" dangerouslySetInnerHTML={{ __html: svg }} />)}
       {table ? <TableView table={table} query={await searchParams} /> : (
         <div className="grid grid-cols-1 gap-x-12 gap-y-8 lg:grid-cols-[minmax(0,1fr)_19rem]">
           {/* The bundle's HTML is produced, escaped, by our own converter from our own private repository. */}
