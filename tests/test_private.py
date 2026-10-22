@@ -287,3 +287,60 @@ def test_a_line_that_opens_with_a_bar_but_is_no_table_is_a_paragraph_not_a_hang(
     r = subprocess.run([sys.executable, str(BUNDLER), str(src), str(tmp_path / "out")], capture_output=True, text=True, timeout=20)
     assert r.returncode == 0, r.stderr
     assert "a lone bar" in (tmp_path / "out" / "example--second.json").read_text()
+
+
+# figures: a document may carry inline drawings, checked against a short list of drawing elements
+
+
+FIGURE = (
+    '<svg viewBox="0 0 100 40" width="100%" role="img" xmlns="http://www.w3.org/2000/svg" aria-labelledby="t">'
+    '<title id="t">An invented chart</title><rect x="0" y="0" width="50" height="20" fill="var(--slow, #00897b)" rx="2"/>'
+    f'<g><title>a tile</title><text x="2" y="12" font-size="11" fill="var(--ink)">{MARK}</text></g>'
+    '<line x1="0" y1="0" x2="10" y2="10" stroke="var(--axis)"/></svg>'
+)
+
+
+def _figured(tmp_path: Path, svg: str) -> Path:
+    src = _source(tmp_path)
+    (src / "notes" / "chart.svg").write_text(svg)
+    spec = (src / "bundle.yaml").read_text()
+    (src / "bundle.yaml").write_text(spec.replace("source: notes/first.md}", "source: notes/first.md, figures: [notes/chart.svg]}"))
+    return src
+
+
+def test_a_document_carries_its_figures_as_checked_inline_drawings(tmp_path):
+    out = tmp_path / "out"
+    r = _bundle(_figured(tmp_path, FIGURE), out)
+    assert r.returncode == 0, r.stderr
+    first = json.loads((out / "example--first.json").read_text())
+    assert first["figures"] == [FIGURE]
+    assert "figures" not in json.loads((out / "example--second.json").read_text())
+
+
+def test_a_figure_that_could_run_or_fetch_anything_is_refused(tmp_path):
+    for i, bad in enumerate([
+        FIGURE.replace("</svg>", "<script>alert(1)</script></svg>"),
+        FIGURE.replace("<rect ", '<rect onclick="alert(1)" '),
+        FIGURE.replace("</svg>", '<a href="https://example.com"><text>x</text></a></svg>'),
+        FIGURE.replace("</svg>", "<foreignObject><div>x</div></foreignObject></svg>"),
+        FIGURE.replace('fill="var(--slow, #00897b)"', 'fill="url(https://example.com/x)"'),
+        FIGURE.replace("<rect ", '<rect style="background:url(x)" '),
+        "<div>not a drawing</div>",
+    ]):
+        r = _bundle(_figured(tmp_path / str(i), bad), tmp_path / f"out{i}")
+        assert r.returncode != 0 and "refused" in r.stderr, (i, r.stderr)
+
+
+def test_a_figure_outside_the_source_folder_is_refused(tmp_path):
+    src = _figured(tmp_path, FIGURE)
+    spec = (src / "bundle.yaml").read_text()
+    (src / "bundle.yaml").write_text(spec.replace("figures: [notes/chart.svg]", "figures: [../elsewhere.svg]"))
+    (tmp_path / "elsewhere.svg").write_text(FIGURE)
+    r = _bundle(src, tmp_path / "out")
+    assert r.returncode != 0 and "refused" in r.stderr
+
+
+def test_the_page_draws_a_documents_figures_full_width_above_its_text():
+    page = (AREA / "[section]" / "[[...slug]]" / "page.tsx").read_text()
+    assert "body.figures" in page
+    assert page.index("body.figures") < page.index("prose-folio")
