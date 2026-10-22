@@ -313,7 +313,10 @@ def test_a_document_carries_its_figures_as_checked_inline_drawings(tmp_path):
     r = _bundle(_figured(tmp_path, FIGURE), out)
     assert r.returncode == 0, r.stderr
     first = json.loads((out / "example--first.json").read_text())
-    assert first["figures"] == [FIGURE]
+    [svg] = first["figures"]
+    assert svg.startswith("<svg") and MARK in svg and "<rect" in svg and "<line" in svg and "ns0:" not in svg
+    # ids are made unique to the document and the figure, and the label still points at its own title
+    assert 'id="example-first-0-t"' in svg and 'aria-labelledby="example-first-0-t"' in svg and 'id="t"' not in svg
     assert "figures" not in json.loads((out / "example--second.json").read_text())
 
 
@@ -326,9 +329,26 @@ def test_a_figure_that_could_run_or_fetch_anything_is_refused(tmp_path):
         FIGURE.replace('fill="var(--slow, #00897b)"', 'fill="url(https://example.com/x)"'),
         FIGURE.replace("<rect ", '<rect style="background:url(x)" '),
         "<div>not a drawing</div>",
+        # found in review: a processing instruction the XML reader drops but a browser reads as markup
+        FIGURE.replace("<rect ", '<?x a="--><img src=x onerror=alert(1)>"?><rect '),
+        '<?x --><img src=x onerror=alert(1)>?>' + FIGURE,
+        # found in review: a style attribute can spell a fetch or cover the page, so style is refused outright
+        FIGURE.replace("<rect ", '<rect style="background:\\75 rl(https://example.com/x)" '),
+        FIGURE.replace("<rect ", "<rect style=\"background-image:image-set('https://example.com/x' 1x)\" "),
+        FIGURE.replace('role="img"', 'role="img" style="position:fixed;inset:0;z-index:9999"'),
+        # an element from another vocabulary, even with a drawing's name
+        FIGURE.replace("</svg>", '<h:rect xmlns:h="urn:x"/></svg>'),
     ]):
         r = _bundle(_figured(tmp_path / str(i), bad), tmp_path / f"out{i}")
         assert r.returncode != 0 and "refused" in r.stderr, (i, r.stderr)
+
+
+def test_a_figures_list_must_be_a_list_of_files(tmp_path):
+    src = _figured(tmp_path, FIGURE)
+    spec = (src / "bundle.yaml").read_text()
+    (src / "bundle.yaml").write_text(spec.replace("figures: [notes/chart.svg]", "figures: notes/chart.svg"))
+    r = _bundle(src, tmp_path / "out")
+    assert r.returncode != 0 and "refused" in r.stderr
 
 
 def test_a_figure_outside_the_source_folder_is_refused(tmp_path):
@@ -344,3 +364,4 @@ def test_the_page_draws_a_documents_figures_full_width_above_its_text():
     page = (AREA / "[section]" / "[[...slug]]" / "page.tsx").read_text()
     assert "body.figures" in page
     assert page.index("body.figures") < page.index("prose-folio")
+    assert "[&>svg]:min-w-[" in page  # a phone scrolls a figure inside its panel rather than shrinking it
