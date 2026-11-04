@@ -1,0 +1,134 @@
+# The technology tree at /futures/tree (plan Part 60; src/ai_tracker/futures.py). One node stands for one kind of
+# technology in one decade. Its counts are not typed here: the export counts the unbuilt technologies of that kind and
+# decade that the profit judgement (profit.jsonl) calls a large or a vast prize, and reads the gate a node waits on from
+# what more of those ideas wait on than anything else, an earlier gate in the list below winning a tie. What is typed here is a model's
+# judgement and nothing else: the node's name, how far along the thing is today, and which node in another kind of
+# technology has to come first. A node always comes after the node before it in its own row.
+made_by:
+  model: claude-opus-5-5
+  date: '2026-10-13'
+  method: One model named each node from the ideas the export places in it, judged how far along each is today, and
+    drew the links between kinds of technology. The links were then compared with the order in which strategy games
+    that model the future make their players research the same things, and changed where the games agreed with one
+    another against the first draft.
+  reviewed_by: a separate reviewing run of the same model, which traced every link and confirmed that the whole board
+    can be reached. No person reviewed each link
+tally: By the owner's decision of 13 Oct 2026 (plan Part 60) the page keeps a running count of the prizes on the lit
+  nodes, by which seller keeps the rest. It counts the profit judgement, as plan Part 55 allows for that file, on nodes
+  chosen by the links in this one, and the page labels it a model's judgement wherever it stands.
+built:
+  idea: an idea only
+  lab: working in a laboratory
+  partly: partly built
+gates:
+  - id: none
+    name: Nothing new
+    open: true
+    says: The parts exist. It is a matter of someone building it.
+    needs: [nothing_new]
+  - id: scale
+    name: Building at scale
+    says: The science is known, and it has to be built far larger or far more often than anything so far.
+    needs: [engineering_scale_up]
+  - id: ai
+    name: More capable AI
+    says: Machines have to reason, plan or act well beyond what they do today.
+    needs: [ai_capability]
+  - id: accept
+    name: Rules, acceptance and cost
+    says: It could be made now, and waits for the law, for people to want it, or for it to become cheap enough.
+    needs: [regulation_or_acceptance, cost_decline]
+  - id: materials
+    name: New materials and new computing
+    says: It waits for a material, or a kind of computer, that does not exist yet.
+    needs: [materials_breakthrough, computing_breakthrough]
+  - id: biology
+    name: A breakthrough in biology
+    says: It waits for an understanding of the body or the brain that nobody has yet.
+    needs: [biology_breakthrough]
+  - id: energy
+    name: A breakthrough in energy
+    says: It waits for a source or a store of energy far beyond any in use.
+    needs: [energy_breakthrough]
+lanes:
+  - id: computing_ai
+    name: Computing and AI
+    nodes:
+      - {decade: 2020s, name: Software agents and synthetic personalities, built: partly}
+      - {decade: 2030s, name: Machines that improve themselves, built: lab}
+      - {decade: 2040s, name: Minds that run a city, built: idea}
+      - {decade: 2050s, name: Recorded personalities, built: idea, after: [mind_neurotech-2030s]}
+      - {decade: 2060s, name: Computers that build computers, built: idea}
+      - {decade: 2100-or-later, name: A digital afterlife, built: idea}
+  - id: robotics_automation
+    name: Robots
+    nodes:
+      - {decade: 2020s, name: Robots for one job, built: partly}
+      - {decade: 2030s, name: Humanlike workers, built: lab, after: [computing_ai-2030s]}
+      - {decade: 2040s, name: Robots that replace a worker outright, built: idea}
+      - {decade: 2050s, name: Factories that copy themselves, built: idea, after: [materials_manufacturing-2020s]}
+      - {decade: 2060s, name: Robot carers and swarms, built: idea}
+  - id: energy
+    name: Energy
+    nodes:
+      - {decade: 2020s, name: Small reactors and heat turned to power, built: partly}
+      - {decade: 2030s, name: Solar paint and portable reactors, built: lab}
+      - {decade: 2040s, name: Fusion power, built: lab, after: [computing_ai-2030s]}
+      - {decade: 2060s, name: Batteries that hold a vast store, built: idea}
+      - {decade: 2070s, name: Reactors that fit in a pocket, built: idea}
+      - {decade: 2100-or-later, name: Collectors around a star, built: idea, after: [space-2070s]}
+  - id: space
+    name: Space
+    nodes:
+      - {decade: 2020s, name: Launch sites and stations, built: partly}
+      - {decade: 2030s, name: The Moon as a fuel stop, built: lab}
+      - {decade: 2040s, name: Mining and living off-world, built: idea, after: [robotics_automation-2030s]}
+      - {decade: 2050s, name: Moving asteroids and sealed ships, built: idea, after: [energy-2040s]}
+      - {decade: 2060s, name: Spinning habitats, built: idea}
+      - {decade: 2070s, name: Cities in orbit, built: idea, after: [robotics_automation-2050s]}
+      - {decade: 2080s, name: A lift to orbit, built: idea, after: [materials_manufacturing-2060s]}
+      - {decade: 2100-or-later, name: Remaking whole worlds, built: idea}
+  - id: materials_manufacturing
+    name: Materials
+    nodes:
+      - {decade: 2020s, name: Goods printed from a recipe, built: partly}
+      - {decade: 2030s, name: Engineered super-materials, built: lab}
+      - {decade: 2040s, name: New structural metals, built: idea}
+      - {decade: 2050s, name: Materials that grow, built: idea}
+      - {decade: 2060s, name: Thread stronger than any made, built: idea}
+      - {decade: 2100-or-later, name: A machine that builds from atoms, built: idea, after: [robotics_automation-2050s]}
+  - id: medicine_biotech
+    name: Medicine
+    nodes:
+      - {decade: 2020s, name: Drugs that revive and regrow tissue, built: partly}
+      - {decade: 2030s, name: Cancer cures and a body kept from decay, built: lab, after: [computing_ai-2030s]}
+      - {decade: 2040s, name: Drugs for sleep and memory, built: idea}
+      - {decade: 2050s, name: Youth restored, built: idea}
+      - {decade: 2060s, name: Longer lives, built: idea}
+      - {decade: 2070s, name: A cure for every infection, built: idea}
+      - {decade: 2100-or-later, name: Youth without end, built: idea}
+  - id: mind_neurotech
+    name: Mind and brain
+    nodes:
+      - {decade: 2020s, name: Headsets for mood and sleep, built: partly}
+      - {decade: 2030s, name: Brain implants that work, built: lab}
+      - {decade: 2040s, name: Implants for pleasure and focus, built: idea, after: [medicine_biotech-2040s]}
+      - {decade: 2050s, name: Mood set by machine, built: idea}
+      - {decade: 2060s, name: Knowledge loaded into the brain, built: idea}
+      - {decade: 2070s, name: Skills on a plug-in chip, built: idea}
+      - {decade: 2100-or-later, name: Schooling in an instant, built: idea}
+  - id: transport
+    name: Transport
+    nodes:
+      - {decade: 2020s, name: Flying rigs for one person, built: lab}
+      - {decade: 2030s, name: Flying cars, built: lab}
+      - {decade: 2040s, name: Self-driving roads and rocket liners, built: idea, after: [computing_ai-2030s]}
+      - {decade: 2050s, name: Travel through airless tubes, built: idea}
+      - {decade: 2100-or-later, name: Trains that fall through the Earth, built: idea}
+  - id: food_environment
+    name: Food and climate
+    nodes:
+      - {decade: 2020s, name: Water from air and farmed algae, built: partly}
+      - {decade: 2030s, name: Food from factories and a cooled sky, built: lab}
+      - {decade: 2040s, name: Designed crops and frozen ground kept frozen, built: idea, after: [medicine_biotech-2030s]}
+      - {decade: 2100-or-later, name: Weather made to order, built: idea, after: [energy-2060s]}

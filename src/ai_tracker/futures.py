@@ -487,3 +487,151 @@ def build() -> dict[str, Any]:
         "decades": decade_docs,
         "categories": category_docs,
     }
+
+
+TREE = ROOT / "seed" / "futures" / "tree.yaml"
+TREE_SELLERS = ("incumbents", "anyone", "maker", "permit")
+
+
+def tree_spec() -> dict[str, Any]:
+    return (yaml.safe_load(TREE.read_text()) or {}) if TREE.exists() else {}
+
+
+def _tree_cells() -> dict[tuple[str, str], list[dict[str, Any]]]:
+    """Unbuilt technologies the profit judgement calls a large or a vast prize, by kind and by expected decade."""
+    judged = verdicts()
+    cells: dict[tuple[str, str], list[dict[str, Any]]] = {}
+    for x in ideas():
+        v = judged.get(x["id"])
+        if x["technology"] == "yes" and x["arrival"]["state"] == "not_marked_built" and v and v["prize"] in ("large", "vast"):
+            cells.setdefault((x["category"], expected_key(x)), []).append({**x, "seller": v["seller"], "prize": v["prize"]})
+    return cells
+
+
+def _tree_gate(rows: list[dict[str, Any]], spec: dict[str, Any]) -> str | None:
+    """The gate most of a node's ideas wait on; an earlier gate in the seed's list wins a tie."""
+    order = [g["id"] for g in spec["gates"]]
+    of = {need: g["id"] for g in spec["gates"] for need in g["needs"]}
+    votes = [of[r["needs"]] for r in rows if r["needs"] in of]
+    return max(order, key=lambda g: (votes.count(g), -order.index(g))) if votes else None
+
+
+def _tree_links(spec: dict[str, Any]) -> dict[str, list[str]]:
+    """Each node's id and the nodes that come first: the one before it in its row, then those the seed names."""
+    out: dict[str, list[str]] = {}
+    for lane in spec.get("lanes") or []:
+        prev = None
+        for n in lane["nodes"]:
+            nid = f"{lane['id']}-{n['decade']}"
+            out[nid] = ([prev] if prev else []) + list(n.get("after") or [])
+            prev = nid
+    return out
+
+
+def tree_problems(spec: dict[str, Any] | None = None) -> list[str]:
+    """Every node sits on a cell with a prize in it, waits on a known gate, says how far along it is in the seed's
+    words, and can be reached; no link runs in a circle; no name types a figure."""
+    from .board import FIGURE, YEAR
+
+    spec = tree_spec() if spec is None else spec
+    if not spec:
+        return []
+    out: list[str] = []
+    for k in ("model", "date", "method", "reviewed_by"):
+        if not (spec.get("made_by") or {}).get(k):
+            out.append(f"futures tree: made_by has no {k}")
+    if sum(1 for g in spec["gates"] if g.get("open")) != 1 or not spec["gates"][0].get("open"):
+        out.append("futures tree: the first gate, and only the first, is always open")
+    cells, links = _tree_cells(), _tree_links(spec)
+    for lane in spec["lanes"]:
+        if lane["id"] not in CATEGORY_NAMES:
+            out.append(f"futures tree: {lane['id']} is not a kind of technology")
+        for n in lane["nodes"]:
+            w = f"futures tree: {lane['id']}-{n['decade']}"
+            rows = cells.get((lane["id"], str(n["decade"])))
+            if not rows:
+                out.append(f"{w} has no large or vast prize to count")
+            elif not _tree_gate(rows, spec):
+                out.append(f"{w} waits on nothing the gates cover")
+            if n.get("built") not in spec["built"]:
+                out.append(f"{w} is {n.get('built')!r} along, outside the file's words")
+            if FIGURE.search(YEAR.sub("", str(n.get("name") or ""))) or not n.get("name"):
+                out.append(f"{w}: its name is missing or types a figure, a size word or an address")
+    ids = [f"{lane['id']}-{n['decade']}" for lane in spec["lanes"] for n in lane["nodes"]]
+    out += [f"futures tree: {nid} is on the board twice" for nid in sorted({i for i in ids if ids.count(i) > 1})]
+    for nid, first in links.items():
+        out += [f"futures tree: {nid} comes after {a}, which is not on the board" for a in first if a not in links]
+    seen: dict[str, int] = {}  # 1 while a node's chain is being walked, 2 once it is known to end
+
+    def walk(nid: str) -> bool:
+        if seen.get(nid) == 1:
+            return False
+        if seen.get(nid) != 2:
+            seen[nid] = 1
+            if not all(walk(a) for a in links[nid] if a in links):
+                return False
+            seen[nid] = 2
+        return True
+
+    out += [f"futures tree: the links to {nid} run in a circle" for nid in links if not walk(nid)]
+    return out
+
+
+def tree() -> dict[str, Any]:
+    """web/data/futures/tree.json: the board's nodes with their counts and bar widths, the gates each one needs, and a
+    tally for every set of open gates, so the page looks one up and adds nothing."""
+    import itertools
+
+    spec = tree_spec()
+    if not spec or tree_problems(spec):
+        return {}
+    cells, links, words = _tree_cells(), _tree_links(spec), verdict_spec()["words"]["seller"]
+    gates = {g["id"]: g for g in spec["gates"]}
+    always = {g["id"] for g in spec["gates"] if g.get("open")}
+    keys = sorted({str(n["decade"]) for lane in spec["lanes"] for n in lane["nodes"]}, key=lambda k: (k in EXPECTED_LABELS, k))
+    col = {k: i + 1 for i, k in enumerate(keys)}
+    names = {f"{lane['id']}-{n['decade']}": (n["name"], lane["name"]) for lane in spec["lanes"] for n in lane["nodes"]}
+    gate_of = {f"{lane['id']}-{n['decade']}": _tree_gate(cells[(lane["id"], str(n["decade"]))], spec) for lane in spec["lanes"] for n in lane["nodes"]}
+
+    def needs(nid: str) -> set[str]:
+        return ({gate_of[nid]} - always).union(*(needs(a) for a in links[nid]))
+
+    lanes = []
+    for lane in spec["lanes"]:
+        nodes = []
+        for n in lane["nodes"]:
+            key, nid = str(n["decade"]), f"{lane['id']}-{n['decade']}"
+            rows = cells[(lane["id"], key)]
+            shares = [{"id": s, "word": words[s], "n": sum(1 for r in rows if r["seller"] == s)} for s in TREE_SELLERS]
+            for s in shares:
+                s["width"] = round(100 * s["n"] / len(rows), 1)
+            examples = sorted(rows, key=lambda r: (r["prize"] != "vast", r["imagined"], r["name"]))[:4]
+            nodes.append({
+                "id": nid, "name": n["name"], "key": key, "label": EXPECTED_LABELS.get(key, key), "col": col[key], "n": len(rows),
+                "shares": shares, "gate": {"id": gate_of[nid], "name": gates[gate_of[nid]]["name"]},
+                "needs": sorted(needs(nid)), "built": {"id": n["built"], "word": spec["built"][n["built"]], "step": list(spec["built"]).index(n["built"]) + 1},
+                "examples": [{"name": r["name"], "author": r["author"], "imagined": r["imagined"], "line": r["line"]} for r in examples],
+                "after": [{"id": a, "name": names[a][0], "kind": names[a][1], "cross": not a.startswith(lane["id"] + "-")} for a in links[nid]],
+                "href": f"/futures/category/{lane['id']}",
+            })
+        lanes.append({"id": lane["id"], "name": lane["name"], "nodes": nodes})
+    every = [n for lane in lanes for n in lane["nodes"]]
+    closed = [g["id"] for g in spec["gates"] if not g.get("open")]
+    tallies = {}
+    for flags in itertools.product("01", repeat=len(closed)):
+        on = {g for g, f in zip(closed, flags) if f == "1"}
+        lit = [n for n in every if set(n["needs"]) <= on]
+        tallies["".join(flags)] = {"lit": len(lit), "n": sum(n["n"] for n in lit),
+                                   **{s: sum(x["n"] for n in lit for x in n["shares"] if x["id"] == s) for s in TREE_SELLERS}}
+    on_board = sum(n["n"] for n in every)
+    shown = {lane["id"] for lane in spec["lanes"]}
+    return {
+        "made_by": spec["made_by"],
+        "gates": [{"id": g["id"], "name": g["name"], "says": g["says"], "open": bool(g.get("open"))} for g in spec["gates"]],
+        "decades": [{"key": k, "label": EXPECTED_LABELS.get(k, k), "col": col[k]} for k in keys],
+        "sellers": [{"id": s, "word": words[s]} for s in TREE_SELLERS],
+        "built": [{"id": k, "word": v} for k, v in spec["built"].items()],
+        "lanes": lanes, "tallies": tallies, "nodes": len(every), "on_board": on_board,
+        "left_off": {"n": sum(len(v) for v in cells.values()) - on_board,
+                     "kinds": [name for cid, name in CATEGORY_NAMES.items() if cid not in shown and any(c == cid for c, _ in cells)]},
+    }

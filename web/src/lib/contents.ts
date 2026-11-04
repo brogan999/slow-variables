@@ -137,6 +137,11 @@ export const PAGES: Record<string, Page> = {
     ["categories", "Kinds of technology", "What kinds of technology are there, and who would keep the profit from each?"],
     ["gallery", "A gallery", "What might these inventions look like?"],
   ], each: [["/futures/", "One page per decade: the ideas imagined or expected then."], ["/futures/category/", "One page per kind of technology: its ideas and the dated forecasts about it."]] },
+  "/futures/tree": { name: "The technology tree", question: "What has to happen before each imagined technology can be built, and who would profit as it does?", sections: [
+    ["ft-gates", "The gates", "What is each imagined technology waiting for?"],
+    ["ft-board", "The board", "Which technologies come within reach as each gate opens?"],
+    ["ft-nodes", "Every node", "What does fiction put in each place on the board, and what must come first?"],
+  ] },
   "/indicators": { name: "Indicators", question: "What is measured, what does each reading tell you, and how sure is it?",
     each: [["/indicators/", "One page per indicator: its reading, status, evidence against, and history."], ["/series/", "One page per data series: every observation and the source it came from."]] },
   "/crosswalk": { name: "Crosswalk", question: "How does a reading filed under how fast AI spreads also say who keeps the money?" },
@@ -200,6 +205,6 @@ export const UNDER: Record<string, readonly string[]> = {
   "/capture": ["/value-chain", "/value-chain/opportunities", "/value-chain/atlas", "/data-market", "/data-market/vendors", "/data-market/prices", "/data-market/sources", "/data-market/dossiers", "/data-market/method", "/stack", "/ledger"],
   "/firm": ["/firm/kinds"],
   "/predictions": ["/compare"],
-  "/singularity": ["/singularity/atlas", "/futures"],
+  "/singularity": ["/singularity/atlas", "/futures", "/futures/tree"],
 };
 export const REFERENCE = ["/", "/story", "/indicators", "/crosswalk", "/sources", "/query", "/ask", "/changelog", "/methodology", "/legal"] as const;

@@ -3,7 +3,7 @@ import { atlas, census, dataMarketDossiers, futures, index, meta, seriesKeys } f
 import { EVIDENCE, STOPS } from "@/lib/nav";
 import { SITE } from "@/lib/site";
 
-const STATIC = ["", ...STOPS.map((s) => s.href), ...EVIDENCE.map(([href]) => href), "/legal", "/data-market/vendors", "/data-market/prices", "/data-market/sources", "/data-market/dossiers", "/data-market/method", ...(SITE.askOnline ? ["/ask"] : [])];
+const STATIC = ["", ...STOPS.map((s) => s.href), ...EVIDENCE.map(([href]) => href), "/legal", "/futures/tree", "/data-market/vendors", "/data-market/prices", "/data-market/sources", "/data-market/dossiers", "/data-market/method", ...(SITE.askOnline ? ["/ask"] : [])];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date(meta().generated_at);

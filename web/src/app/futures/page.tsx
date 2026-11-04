@@ -74,6 +74,7 @@ export default function FuturesPage() {
             ))}
           </ol>
           <p className="text-[12px] text-muted">Upper bar: ideas, judged by AI models. Lower bar: forecasts stated by their authors.</p>
+          <p className="text-[14px] text-ink-2 max-w-[66ch]">The same unbuilt ideas are laid out as <Link href="/futures/tree" className={link}>a technology tree</Link>: each kind of technology in each decade, what it waits on, and what has to come before it.</p>
         </Section>
 
         <Section id="categories" eyebrow="Part III" title="Kinds of technology, and who would profit" lede={<>Each idea was sorted into one kind of technology and judged by a model as if it worked the way its story promises: how large a prize it would be, who would pay for it, and which seller would keep what is left once buyers have had their gain. A vast prize changes how most people live or work, a large one changes a whole industry, a small one serves a narrow need, and no prize means nothing would be sold. <Link href="/methodology#futures" className={link}>How the profit is judged</Link></>}>

@@ -21,6 +21,7 @@ export function GET() {
   for (const s of sources()) hits.push({ k: "Source", t: s.name, s: s.org ?? "", h: `/sources#${s.id}` });
   for (const r of census().roles) hits.push({ k: "Job", t: r.title, s: r.function, h: r.href });
   for (const c of futures().categories) hits.push({ k: "Futures", t: c.name, s: "Imagined technologies by category", h: c.href });
+  hits.push({ k: "Futures", t: "The technology tree", s: "What each imagined technology waits on, and who would profit as it arrives", h: "/futures/tree" });
   for (const d of atlas().domains) hits.push({ k: "Atlas", t: d.name, s: untoken(d.thesis), h: `/singularity/atlas/${d.id}` });
   for (const g of dataMarket().signals) hits.push({ k: "Data market", t: g.headline, s: g.implies, h: `/data-market#${g.id}` });
   for (const v of dataMarket().vendors) hits.push({ k: "Data vendor", t: v.name, s: v.sells, h: `/data-market/vendors#${v.id}` });

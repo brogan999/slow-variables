@@ -1007,6 +1007,8 @@ class Store:
                 _write(out / "futures" / f"{k}.json", d)
             for k, d in fu_doc["categories"].items():
                 _write(out / "futures" / "category" / f"{k}.json", d)
+            if tree_doc := fut.tree():
+                _write(out / "futures" / "tree.json", tree_doc)
         from . import census
 
         index, roles = census.build(census.load(), census.fetches())
