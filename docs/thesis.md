@@ -1,4 +1,4 @@
-# Thesis monitor (2026-11-04)
+# Thesis monitor (2026-11-14)
 
 Generated nightly from `thesis.py`; do not edit.
 
@@ -10,7 +10,7 @@ Rule: (ratio ≤ 2 AND 50% horizon below the ceiling AND 80% horizon > 8 h) AND 
 - ✗ 50%/80% horizon ratio ≤ 2 — 6.34× as of 2026-03-05 (obs: 11a8bbd2, 858c619b)
 - ✗ 50% horizon below the suite's 16 h ceiling, so a falling ratio is not censoring — 1045 min as of 2026-04-07 (obs: a3cd6bce)
 - ✗ 80% horizon > 8 h — 186 min as of 2026-04-07 (obs: c256ff03)
-- ✗ ≥ 3 labour trackers show a concurrent AI-attributable break — 0 of 4 as of 2026-09-30 (obs: 0b4410b8, 1fce2bb8, 3f6ee989…)
+- ✗ ≥ 3 labour trackers show a concurrent AI-attributable break — 0 of 4 as of 2026-10-31 (obs: 0b4410b8, 1fce2bb8, 3f6ee989…)
 - ✗ work hours assisted by AI > 20% — 5.3% as of 2026-09-30 (obs: 22c81993)
 - ✗ TFP > trend + 1pp for ≥ 4 consecutive years — 2022 -1.1%, 2023 +1.6%, 2024 +1.5%, 2025 +0.8% (obs: 3af5026f, 3cb18cc9, 3cb18cc9…)
 
@@ -42,7 +42,7 @@ Rule: supported when labs are up ≥ 5pp and chips down, on gross profit; contra
 
 Rule: surplus above twice the approximate revenue ceiling holds, below the enterprise-spend floor fails, in between is untestable; the doubling covers the willingness-to-accept wedge and the consumer subscriptions the ceiling omits
 
-- ? consumer surplus (WTA) > twice the approximate revenue ceiling, bracketed — $172B surplus against a floor of $37B (US enterprise spend) and a bar of $315B, twice the $158B ceiling (lab run-rates plus enterprise spend; consumer subscriptions sit outside it, and a WTA estimate runs at least twice WTP) (obs: 2d481469, 6012e72e, 6012e72e…)
+- ? consumer surplus (WTA) > twice the approximate revenue ceiling, bracketed — $172B surplus against a floor of $37B (US enterprise spend) and a bar of $347B, twice the $174B ceiling (lab run-rates plus enterprise spend; consumer subscriptions sit outside it, and a WTA estimate runs at least twice WTP) (obs: 2d481469, 6012e72e, 6012e72e…)
 
 ## Workers' pay falls below its level before AI while output grows: **does not hold**
 
