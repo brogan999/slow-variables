@@ -26,11 +26,11 @@
        "latest": {
         "as_of": "2026-09-26",
         "obs_ids": [
-         "cbc4c2611c710139"
+         "198ee2c135dbde25"
         ],
-        "series_key": "sec_seg.amd.data_center.operating_income.q",
+        "series_key": "sec_seg.amd.data_center.revenue.q",
         "unit": "USD",
-        "value": 2882000000.0,
+        "value": 8546000000.0,
         "value_text": null
        },
        "led_by": [],
@@ -1704,11 +1704,11 @@
        "latest": {
         "as_of": "2026-09-30",
         "obs_ids": [
-         "1956dd2b78a1c92f"
+         "863f74abe6325878"
         ],
-        "series_key": "sec_seg.googl.cloud.operating_income.q",
+        "series_key": "sec_seg.googl.cloud.revenue.q",
         "unit": "USD",
-        "value": 11121000000.0,
+        "value": 30709000000.0,
         "value_text": null
        },
        "led_by": [],
@@ -1884,13 +1884,13 @@
        "is_primary": true,
        "kind": "company",
        "latest": {
-        "as_of": "2026-06-30",
+        "as_of": "2026-09-30",
         "obs_ids": [
-         "76768dbc53148c08"
+         "97a24ab78cc28994"
         ],
-        "series_key": "sec.crwv.net_income.q",
+        "series_key": "sec.crwv.cost_of_revenue.q",
         "unit": "USD",
-        "value": -626000000.0,
+        "value": 1183000000.0,
         "value_text": null
        },
        "led_by": [],
@@ -2313,11 +2313,11 @@
        "latest": {
         "as_of": "2026-08-31",
         "obs_ids": [
-         "8f8ad7e3256240f6"
+         "6737bdaaf17d3189"
         ],
-        "series_key": "sec.orcl.net_income.q",
-        "unit": "USD",
-        "value": 4760000000.0,
+        "series_key": "sec.orcl.diluted_shares.q",
+        "unit": "shares",
+        "value": 3000000000.0,
         "value_text": null
        },
        "led_by": [],
@@ -2930,7 +2930,7 @@
        },
        "layer_id": "compute_physical",
        "leading_lagging": "leading",
-       "n_observations": 76,
+       "n_observations": 77,
        "name": "Cloud backlog (remaining performance obligations)",
        "pending": null,
        "published": true,
@@ -3058,6 +3058,7 @@
          "29221e0928c0242d",
          "32e64259c1e4e50d",
          "416fff663e911055",
+         "49f1eab9fb61bd77",
          "4dc8ee6d073b8430",
          "5ce5a318c280a584",
          "6012e72e8105bfc4",
@@ -3066,7 +3067,6 @@
          "708d2e6055986e42",
          "74e0788446cea555",
          "7593873dac7002c0",
-         "76d9d169a90543e5",
          "8065a41f15722c18",
          "87dd71d5670d0873",
          "8b365444d28ae498",
@@ -3089,7 +3089,7 @@
          "fe6b2adb2eebca5a"
         ],
         "unit": "ratio",
-        "value": 4.383500380614057
+        "value": 4.2227756049865555
        },
        "layer_id": "compute_physical",
        "leading_lagging": "leading",
@@ -3099,7 +3099,7 @@
        "published": true,
        "source_cluster": null,
        "spark": {
-        "d": "M1.0,4.5 L14.4,2.0 L27.9,6.4 L41.3,6.7 L54.7,21.2 L68.1,21.7 L81.6,23.9 L95.0,26.0",
+        "d": "M1.0,4.5 L14.4,2.0 L27.9,6.3 L41.3,6.6 L54.7,20.8 L68.1,21.3 L81.6,23.4 L95.0,26.0",
         "end": [
          95.0,
          26.0
@@ -3199,31 +3199,31 @@
        "grade": "B",
        "id": "gpu_rental_price_per_hour",
        "latest": {
-        "as_of": "2026-10-26",
+        "as_of": "2026-11-02",
         "disputed": false,
         "grade": "B",
         "high": null,
         "low": null,
         "obs_ids": [
-         "82d13988719ef2c8"
+         "95a8e2a288cb42c2"
         ],
         "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
         "subject": "nvidia_h100",
         "unit": "USD",
-        "value": 3.85
+        "value": 3.99
        },
        "layer_id": "compute_physical",
        "leading_lagging": "leading",
-       "n_observations": 174,
+       "n_observations": 177,
        "name": "GPU rental price per hour",
        "pending": null,
        "published": true,
        "source_cluster": null,
        "spark": {
-        "d": "M1.0,23.6 L5.1,24.6 L9.2,22.0 L13.3,25.4 L17.3,24.6 L21.4,26.0 L25.5,23.3 L29.6,21.0 L33.7,23.0 L37.8,21.0 L41.9,18.8 L46.0,16.1 L50.0,15.3 L54.1,16.1 L58.2,17.0 L62.3,18.2 L66.4,17.0 L70.5,18.0 L74.6,16.6 L78.7,14.8 L82.7,13.1 L86.8,5.6 L90.9,2.0 L95.0,4.7",
+        "d": "M1.0,24.6 L5.1,22.0 L9.2,25.4 L13.3,24.6 L17.3,26.0 L21.4,23.3 L25.5,21.0 L29.6,23.0 L33.7,21.0 L37.8,18.8 L41.9,16.1 L46.0,15.3 L50.0,16.1 L54.1,17.0 L58.2,18.2 L62.3,17.0 L66.4,18.0 L70.5,16.6 L74.6,14.8 L78.7,13.1 L82.7,5.6 L86.8,2.0 L90.9,4.7 L95.0,2.0",
         "end": [
          95.0,
-         4.7
+         2.0
         ]
        },
        "stale_as_of": null,
@@ -3897,13 +3897,13 @@
        "is_primary": true,
        "kind": "company",
        "latest": {
-        "as_of": "2026-06-30",
+        "as_of": "2026-09-30",
         "obs_ids": [
-         "f82da4e5822127b8"
+         "43bb34212989afff"
         ],
-        "series_key": "sec.core_scientific.net_income.q",
+        "series_key": "sec.core_scientific.revenue.q",
         "unit": "USD",
-        "value": -1155310000.0,
+        "value": 232866000.0,
         "value_text": null
        },
        "led_by": [],
@@ -4638,13 +4638,13 @@
        "is_primary": true,
        "kind": "company",
        "latest": {
-        "as_of": "2026-08-03",
+        "as_of": "2026-09-30",
         "obs_ids": [
-         "10244490f9d1100b"
+         "b3f5496f2550c73d"
         ],
-        "series_key": "formd.iren.amount_sold_usd.pt",
+        "series_key": "sec.iren.da.q",
         "unit": "USD",
-        "value": 464866211.0,
+        "value": 148000000.0,
         "value_text": null
        },
        "led_by": [],
@@ -4952,13 +4952,13 @@
        "is_primary": true,
        "kind": "company",
        "latest": {
-        "as_of": "2026-06-30",
+        "as_of": "2026-09-30",
         "obs_ids": [
-         "37458542870fe34d"
+         "59784bdcf4d3a8af"
         ],
-        "series_key": "sec.oklo.diluted_shares.q",
-        "unit": "shares",
-        "value": 176224404.0,
+        "series_key": "sec.oklo.net_income.q",
+        "unit": "USD",
+        "value": -41746000.0,
         "value_text": null
        },
        "led_by": [],
@@ -5421,13 +5421,13 @@
        "is_primary": true,
        "kind": "company",
        "latest": {
-        "as_of": "2026-07-06",
+        "as_of": "2026-09-30",
         "obs_ids": [
-         "08fb17f57e28ec37"
+         "014226a44a87f11d"
         ],
-        "series_key": "circular.terawulf_anthropic.contract_usd.pt",
+        "series_key": "sec.terawulf.revenue.q",
         "unit": "USD",
-        "value": 19000000000.0,
+        "value": 76230000.0,
         "value_text": null
        },
        "led_by": [],
@@ -6381,11 +6381,11 @@
        "latest": {
         "as_of": "2022-10-04",
         "obs_ids": [
-         "8df7c1acd226118a"
+         "e0d5ff6e91ede2b1"
         ],
-        "series_key": "formd.jetcool.offering_amount_usd.pt",
+        "series_key": "formd.jetcool.amount_sold_usd.pt",
         "unit": "USD",
-        "value": 10000000.0,
+        "value": 7334706.0,
         "value_text": null
        },
        "led_by": [],
@@ -6546,11 +6546,11 @@
        "latest": {
         "as_of": "2026-09-03",
         "obs_ids": [
-         "e91158860ce33ea3"
+         "d143c1b9bd65963e"
         ],
-        "series_key": "sec.micron.da.fy",
+        "series_key": "sec.micron.capex.fy",
         "unit": "USD",
-        "value": 9503000000.0,
+        "value": 30712000000.0,
         "value_text": null
        },
        "led_by": [],
@@ -7094,13 +7094,13 @@
        "is_primary": true,
        "kind": "lab",
        "latest": {
-        "as_of": "2026-09-30",
+        "as_of": "2026-10-31",
         "obs_ids": [
-         "ac8d56fc1831d171"
+         "7843169e956efb88"
         ],
-        "series_key": "ramp.anthropic.business_paid_share.m",
-        "unit": "share",
-        "value": 0.4377,
+        "series_key": "epoch.anthropic.revenue_run_rate_usd.pt",
+        "unit": "USD",
+        "value": 81000000000.0,
         "value_text": null
        },
        "led_by": [],
@@ -7250,13 +7250,13 @@
        "is_primary": true,
        "kind": "lab",
        "latest": {
-        "as_of": "2026-09-30",
+        "as_of": "2026-10-31",
         "obs_ids": [
-         "9ef4459610ec6b01"
+         "5c46bb11c363c210"
         ],
         "series_key": "ramp.openai.business_paid_share.m",
         "unit": "share",
-        "value": 0.4063,
+        "value": 0.405648,
         "value_text": null
        },
        "led_by": [],
@@ -7302,13 +7302,13 @@
        "is_primary": true,
        "kind": "lab",
        "latest": {
-        "as_of": "2026-09-30",
+        "as_of": "2026-10-31",
         "obs_ids": [
-         "e7193775bec76b91"
+         "8084438d930b6d77"
         ],
         "series_key": "ramp.xai.business_paid_share.m",
         "unit": "share",
-        "value": 0.0414,
+        "value": 0.062729,
         "value_text": null
        },
        "led_by": [],
@@ -7354,11 +7354,11 @@
        "latest": {
         "as_of": "2026-09-30",
         "obs_ids": [
-         "1956dd2b78a1c92f"
+         "863f74abe6325878"
         ],
-        "series_key": "sec_seg.googl.cloud.operating_income.q",
+        "series_key": "sec_seg.googl.cloud.revenue.q",
         "unit": "USD",
-        "value": 11121000000.0,
+        "value": 30709000000.0,
         "value_text": null
        },
        "led_by": [],
@@ -7492,7 +7492,7 @@
        },
        "layer_id": "model",
        "leading_lagging": "coincident",
-       "n_observations": 37,
+       "n_observations": 39,
        "name": "Frontier-lab revenue run-rates",
        "pending": null,
        "published": true,
@@ -7575,46 +7575,45 @@
        "grade": "B",
        "id": "lab_hhi",
        "latest": {
-        "as_of": "2026-11-03",
-        "derived_id": "65b6b0df85d4015b",
+        "as_of": "2026-11-13",
+        "derived_id": "08cb472eda07556a",
         "dims": {},
         "obs_ids": [
-         "399ed286152c1dce",
-         "4e8dceb93f0bc058",
-         "4e9a3709de15c813",
-         "51734c3e03cbaaa5",
-         "54ecdc0b81ab3180",
-         "5c1352c89229193b",
-         "62675dbf435589aa",
-         "6bb7769c28395090",
-         "6e7e1b9026b9086f",
-         "7f3b11b25adbe508",
-         "884170ce46f6eca5",
-         "9dce51ce5f7eda7c",
-         "a367fc1cfad6349a",
-         "bb24427ddc32cc75",
-         "c433acd794add4d4",
-         "cdc348ad4849dab0",
-         "e017972b19459f1b",
-         "f18ba6e76cea5f33",
-         "f323994684220b07",
-         "f7eae44aa07b8738"
+         "0942f5a86afd9db9",
+         "25d74a887ae80104",
+         "32c1743bdd442faf",
+         "353e7e9648d551ed",
+         "3acceba6e5f3fdab",
+         "423d0b1b4a5fc71a",
+         "571b7a7a9bc22188",
+         "611ef5adeb86c8a4",
+         "63e44c8a81d0be98",
+         "66ccda6fd51f1685",
+         "6ac90b59d32e28ec",
+         "7cf95434ac5ae9be",
+         "7fdab58efd6cf764",
+         "836d77ffc15f7e52",
+         "8cf2f8d223e37d3c",
+         "e3757bd9e9f5280a",
+         "e3bdc3c24b5c3c46",
+         "e810353a4cad7e17",
+         "f9547a7eca8000f6"
         ],
         "unit": "index",
-        "value": 0.2431766666771371
+        "value": 0.2500028343897257
        },
        "layer_id": "model",
        "leading_lagging": "leading",
-       "n_observations": 178,
+       "n_observations": 197,
        "name": "Lab concentration of routed tokens (OpenRouter, HHI)",
        "pending": null,
        "published": true,
        "source_cluster": null,
        "spark": {
-        "d": "M1.0,24.3 L12.8,21.9 L24.5,26.0 L36.2,19.3 L48.0,17.4 L59.8,20.9 L71.5,6.3 L83.2,2.0 L95.0,3.0",
+        "d": "M1.0,24.4 L11.4,22.0 L21.9,26.0 L32.3,19.5 L42.8,17.7 L53.2,21.1 L63.7,6.9 L74.1,2.8 L84.6,3.7 L95.0,2.0",
         "end": [
          95.0,
-         3.0
+         2.0
         ]
        },
        "stale_as_of": null,
@@ -7798,9 +7797,9 @@
          "0f5c74f37c8cf1bc",
          "2cac0c7becbe5a81",
          "2d0db56e4afa2e1e",
+         "49f1eab9fb61bd77",
          "509992bfb6dccad2",
          "648397cf9bb2ea70",
-         "76d9d169a90543e5",
          "87dd71d5670d0873",
          "b7dae3087b70126a",
          "be965222ccbf4054",
@@ -7808,17 +7807,17 @@
          "fe6b2adb2eebca5a"
         ],
         "unit": "ratio",
-        "value": 16.282244556113902
+        "value": 15.503189792663477
        },
        "layer_id": "model",
        "leading_lagging": "leading",
-       "n_observations": 61,
+       "n_observations": 62,
        "name": "Frontier lab valuation to run-rate multiple",
        "pending": null,
        "published": true,
        "source_cluster": null,
        "spark": {
-        "d": "M1.0,21.9 L5.1,22.4 L9.2,22.4 L13.3,22.4 L17.3,22.4 L21.4,8.6 L25.5,2.2 L29.6,12.0 L33.7,2.0 L37.8,11.3 L41.9,18.2 L46.0,13.9 L50.0,13.6 L54.1,21.3 L58.2,21.2 L62.3,19.9 L66.4,10.2 L70.5,15.1 L74.6,19.3 L78.7,19.3 L82.7,18.1 L86.8,18.1 L90.9,23.9 L95.0,26.0",
+        "d": "M1.0,21.5 L5.1,22.0 L9.2,22.0 L13.3,22.0 L17.3,22.0 L21.4,8.4 L25.5,2.2 L29.6,11.8 L33.7,2.0 L37.8,11.1 L41.9,17.9 L46.0,13.6 L50.0,13.3 L54.1,20.9 L58.2,20.8 L62.3,19.6 L66.4,10.0 L70.5,14.9 L74.6,19.0 L78.7,19.0 L82.7,17.8 L86.8,17.8 L90.9,23.4 L95.0,26.0",
         "end": [
          95.0,
          26.0
@@ -8008,43 +8007,42 @@
        "grade": "B",
        "id": "model_token_concentration",
        "latest": {
-        "as_of": "2026-11-03",
-        "derived_id": "9aa89c12b5808bd9",
+        "as_of": "2026-11-13",
+        "derived_id": "02d212b1e06f6fac",
         "dims": {},
         "obs_ids": [
-         "399ed286152c1dce",
-         "4e8dceb93f0bc058",
-         "4e9a3709de15c813",
-         "51734c3e03cbaaa5",
-         "54ecdc0b81ab3180",
-         "5c1352c89229193b",
-         "62675dbf435589aa",
-         "6bb7769c28395090",
-         "6e7e1b9026b9086f",
-         "7f3b11b25adbe508",
-         "884170ce46f6eca5",
-         "9dce51ce5f7eda7c",
-         "a367fc1cfad6349a",
-         "bb24427ddc32cc75",
-         "c433acd794add4d4",
-         "cdc348ad4849dab0",
-         "e017972b19459f1b",
-         "f18ba6e76cea5f33",
-         "f323994684220b07",
-         "f7eae44aa07b8738"
+         "0942f5a86afd9db9",
+         "25d74a887ae80104",
+         "32c1743bdd442faf",
+         "353e7e9648d551ed",
+         "3acceba6e5f3fdab",
+         "423d0b1b4a5fc71a",
+         "571b7a7a9bc22188",
+         "611ef5adeb86c8a4",
+         "63e44c8a81d0be98",
+         "66ccda6fd51f1685",
+         "6ac90b59d32e28ec",
+         "7cf95434ac5ae9be",
+         "7fdab58efd6cf764",
+         "836d77ffc15f7e52",
+         "8cf2f8d223e37d3c",
+         "e3757bd9e9f5280a",
+         "e3bdc3c24b5c3c46",
+         "e810353a4cad7e17",
+         "f9547a7eca8000f6"
         ],
         "unit": "index",
-        "value": 0.144858228797143
+        "value": 0.1574599397432379
        },
        "layer_id": "model",
        "leading_lagging": "coincident",
-       "n_observations": 178,
+       "n_observations": 197,
        "name": "Model-layer token concentration on OpenRouter (HHI, top table)",
        "pending": null,
        "published": true,
        "source_cluster": null,
        "spark": {
-        "d": "M1.0,21.0 L12.8,26.0 L24.5,25.1 L36.2,4.3 L48.0,6.4 L59.8,18.8 L71.5,17.8 L83.2,7.3 L95.0,2.0",
+        "d": "M1.0,21.9 L11.4,26.0 L21.9,25.3 L32.3,8.4 L42.8,10.1 L53.2,20.2 L63.7,19.3 L74.1,10.8 L84.6,6.5 L95.0,2.0",
         "end": [
          95.0,
          2.0
@@ -10967,9 +10965,9 @@
        "latest": {
         "as_of": "2023-01-13",
         "obs_ids": [
-         "5c9e78d4ed79b299"
+         "29f5546cdf12d6ba"
         ],
-        "series_key": "formd.luma.amount_sold_usd.pt",
+        "series_key": "formd.luma.offering_amount_usd.pt",
         "unit": "USD",
         "value": 25534227.0,
         "value_text": null
@@ -11254,13 +11252,13 @@
        "is_primary": true,
        "kind": "lab",
        "latest": {
-        "as_of": "2026-09-30",
+        "as_of": "2026-10-31",
         "obs_ids": [
-         "b1bc3097a5a8e843"
+         "dba2df93cb1bccb2"
         ],
         "series_key": "ramp.mistral.business_paid_share.m",
         "unit": "share",
-        "value": 0.0019,
+        "value": 0.001818,
         "value_text": null
        },
        "led_by": [],
@@ -13702,13 +13700,13 @@
        "is_primary": false,
        "kind": "lab",
        "latest": {
-        "as_of": "2026-10-22",
+        "as_of": "2026-10-31",
         "obs_ids": [
-         "2d0db56e4afa2e1e"
+         "6a7648b9e8798b34"
         ],
-        "series_key": "epoch.deepseek.post_money_usd.pt",
-        "unit": "USD",
-        "value": 90000000000.0,
+        "series_key": "ramp.deepseek.business_paid_share.m",
+        "unit": "share",
+        "value": 0.001966,
         "value_text": null
        },
        "led_by": [],
@@ -14199,13 +14197,13 @@
        "is_primary": true,
        "kind": "lab",
        "latest": {
-        "as_of": "2026-10-22",
+        "as_of": "2026-10-31",
         "obs_ids": [
-         "2d0db56e4afa2e1e"
+         "6a7648b9e8798b34"
         ],
-        "series_key": "epoch.deepseek.post_money_usd.pt",
-        "unit": "USD",
-        "value": 90000000000.0,
+        "series_key": "ramp.deepseek.business_paid_share.m",
+        "unit": "share",
+        "value": 0.001966,
         "value_text": null
        },
        "led_by": [],
@@ -14462,31 +14460,29 @@
        "grade": "A",
        "id": "open_vs_closed_gap",
        "latest": {
-        "as_of": "2026-10-17",
-        "derived_id": "45a5a32bdc573750",
+        "as_of": "2026-10-29",
+        "derived_id": "88988d28a84e1922",
         "dims": {},
         "obs_ids": [
-         "0e8ab4eb034527cc",
-         "e893705983d50aa2"
+         "37730a5ecf75d67b",
+         "65ba1465622eb631",
+         "af3f4ec5cf117b7b"
         ],
         "unit": "index",
-        "value": 10.22999999999999
+        "value": 8.389999999999986
        },
        "layer_id": "model",
        "leading_lagging": "leading",
-       "n_observations": 149,
+       "n_observations": 153,
        "name": "Open-weights gap to the closed frontier (ECI points)",
-       "pending": {
-        "new_status": "stable",
-        "since": "2026-10-31"
-       },
+       "pending": null,
        "published": true,
        "source_cluster": null,
        "spark": {
-        "d": "M1.0,12.1 L5.1,3.2 L9.2,3.2 L13.3,9.0 L17.3,9.0 L21.4,12.9 L25.5,12.9 L29.6,2.0 L33.7,2.0 L37.8,2.0 L41.9,2.0 L46.0,2.0 L50.0,5.3 L54.1,5.3 L58.2,26.0 L62.3,21.5 L66.4,21.5 L70.5,21.5 L74.6,21.5 L78.7,6.4 L82.7,6.4 L86.8,6.4 L90.9,6.4 L95.0,8.0",
+        "d": "M1.0,5.7 L5.1,12.5 L9.2,12.5 L13.3,15.3 L17.3,15.3 L21.4,6.9 L25.5,6.9 L29.6,6.9 L33.7,6.9 L37.8,2.0 L41.9,7.0 L46.0,7.0 L50.0,26.0 L54.1,24.1 L58.2,24.1 L62.3,24.1 L66.4,24.1 L70.5,9.4 L74.6,9.4 L78.7,9.4 L82.7,9.4 L86.8,12.2 L90.9,18.9 L95.0,16.3",
         "end": [
          95.0,
-         8.0
+         16.3
         ]
        },
        "stale_as_of": null,
@@ -14507,29 +14503,29 @@
        "grade": "A",
        "id": "open_weights_lag_months",
        "latest": {
-        "as_of": "2026-10-26",
-        "derived_id": "b4ae4bc6315f51a4",
+        "as_of": "2026-11-09",
+        "derived_id": "94f3e93ffd0ee49b",
         "dims": {},
         "obs_ids": [
-         "0e8ab4eb034527cc",
-         "4a930fa62232fa4f",
-         "edc6cdd8e59564df"
+         "10033e24beaa924e",
+         "85d2bae20059b1bb",
+         "af3f4ec5cf117b7b"
         ],
         "unit": "months",
-        "value": 7.720105124835742
+        "value": 6.570302233902759
        },
        "layer_id": "model",
        "leading_lagging": "leading",
-       "n_observations": 35,
+       "n_observations": 40,
        "name": "Open-weights lag behind the closed frontier (months)",
        "pending": null,
        "published": true,
        "source_cluster": null,
        "spark": {
-        "d": "M1.0,14.5 L5.1,12.3 L9.2,4.9 L13.3,4.9 L17.3,3.8 L21.4,2.0 L25.5,23.9 L29.6,20.5 L33.7,22.7 L37.8,21.9 L41.9,26.0 L46.0,20.4 L50.0,18.6 L54.1,21.3 L58.2,18.4 L62.3,16.2 L66.4,14.8 L70.5,18.0 L74.6,14.0 L78.7,19.2 L82.7,15.9 L86.8,20.3 L90.9,14.9 L95.0,14.4",
+        "d": "M1.0,13.0 L5.1,2.1 L9.2,2.0 L13.3,19.5 L17.3,23.6 L21.4,22.4 L25.5,18.3 L29.6,16.8 L33.7,21.4 L37.8,26.0 L41.9,17.6 L46.0,21.5 L50.0,20.6 L54.1,17.4 L58.2,14.9 L62.3,13.2 L66.4,16.9 L70.5,16.3 L74.6,18.2 L78.7,16.0 L82.7,19.5 L86.8,13.4 L90.9,16.3 L95.0,15.1",
         "end": [
          95.0,
-         14.4
+         15.1
         ]
        },
        "stale_as_of": null,
@@ -15198,9 +15194,9 @@
        "latest": {
         "as_of": "2023-04-25",
         "obs_ids": [
-         "44b8d5d6ebaa1e08"
+         "212ec38668e5c65d"
         ],
-        "series_key": "formd.prolific.amount_sold_usd.pt",
+        "series_key": "formd.prolific.offering_amount_usd.pt",
         "unit": "USD",
         "value": 16639954.0,
         "value_text": null
@@ -16980,8 +16976,8 @@
        "grade": "D",
        "id": "cl_lab_release_claims",
        "latest": {
-        "as_of": "2026-11-04",
-        "derived_id": "f9d3ae1b0943f5c6",
+        "as_of": "2026-11-14",
+        "derived_id": "b06db972e9f94591",
         "dims": {},
         "obs_ids": [
          "0bdf1920b1feb93e",
@@ -18892,11 +18888,11 @@
        "latest": {
         "as_of": "2026-09-26",
         "obs_ids": [
-         "e58483bf0badce0a"
+         "c2dbf669787fcd50"
         ],
-        "series_key": "sec.apple.cost_of_revenue.fy",
+        "series_key": "sec.apple.da.fy",
         "unit": "USD",
-        "value": 245232000000.0,
+        "value": 13423000000.0,
         "value_text": null
        },
        "led_by": [],
@@ -25260,11 +25256,11 @@
        "latest": {
         "as_of": "2026-09-30",
         "obs_ids": [
-         "d177550c1b9cb626"
+         "8f92d6da146911db"
         ],
-        "series_key": "sec.palantir.diluted_shares.q",
-        "unit": "shares",
-        "value": 2573926000.0,
+        "series_key": "sec.palantir.revenue.q",
+        "unit": "USD",
+        "value": 2313411000.0,
         "value_text": null
        },
        "led_by": [],
@@ -29311,9 +29307,9 @@
        "latest": {
         "as_of": "2026-05-15",
         "obs_ids": [
-         "024bd2e50b64b129"
+         "7308d902b04b066b"
         ],
-        "series_key": "formd.exa.amount_sold_usd.pt",
+        "series_key": "formd.exa.offering_amount_usd.pt",
         "unit": "USD",
         "value": 247488419.0,
         "value_text": null
@@ -29712,13 +29708,13 @@
        "is_primary": true,
        "kind": "company",
        "latest": {
-        "as_of": "2026-09-15",
+        "as_of": "2026-10-20",
         "obs_ids": [
-         "c6173abc3f231905"
+         "e3c8ff2e5fc399ae"
         ],
-        "series_key": "runtimewire.legora.arr_usd.pt",
+        "series_key": "formd.legora.offering_amount_usd.pt",
         "unit": "USD",
-        "value": 200000000.0,
+        "value": 550000000.0,
         "value_text": null
        },
        "led_by": [
@@ -35747,12 +35743,12 @@
        "latest": {
         "as_of": "2026-04-08",
         "obs_ids": [
-         "888a81ca057613c4"
+         "48bb21d19d0ab19b"
         ],
-        "series_key": "rollup_acq.archipel.prospective_finance.pt",
+        "series_key": "rollup_acq.archipel.l_a_conseil_audit.pt",
         "unit": "text",
         "value": null,
-        "value_text": "acquired Prospective & Finance (accounting firm, France)"
+        "value_text": "acquired L&A Conseil & Audit (accounting and audit firm, France)"
        },
        "led_by": [],
        "memberships": [
