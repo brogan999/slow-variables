@@ -29,12 +29,12 @@
     {
      "id": "accelerators",
      "name": "AI chips",
-     "word": "moderate"
+     "word": "tight"
     },
     {
      "id": "foundry",
      "name": "Chip foundries",
-     "word": "moderate"
+     "word": null
     },
     {
      "id": "chip_equipment",
@@ -182,7 +182,7 @@
     {
      "id": "accelerators",
      "name": "AI chips",
-     "word": "moderate"
+     "word": "tight"
     },
     {
      "id": "capital",
@@ -296,7 +296,7 @@
    },
    "layer_id": "compute_physical",
    "leading_lagging": "leading",
-   "n_observations": 76,
+   "n_observations": 77,
    "name": "Cloud backlog (remaining performance obligations)",
    "pending": null,
    "published": true,
@@ -692,6 +692,7 @@
      "29221e0928c0242d",
      "32e64259c1e4e50d",
      "416fff663e911055",
+     "49f1eab9fb61bd77",
      "4dc8ee6d073b8430",
      "5ce5a318c280a584",
      "6012e72e8105bfc4",
@@ -700,7 +701,6 @@
      "708d2e6055986e42",
      "74e0788446cea555",
      "7593873dac7002c0",
-     "76d9d169a90543e5",
      "8065a41f15722c18",
      "87dd71d5670d0873",
      "8b365444d28ae498",
@@ -723,7 +723,7 @@
      "fe6b2adb2eebca5a"
     ],
     "unit": "ratio",
-    "value": 4.383500380614057
+    "value": 4.2227756049865555
    },
    "layer_id": "compute_physical",
    "leading_lagging": "leading",
@@ -733,7 +733,7 @@
    "published": true,
    "source_cluster": null,
    "spark": {
-    "d": "M1.0,4.5 L14.4,2.0 L27.9,6.4 L41.3,6.7 L54.7,21.2 L68.1,21.7 L81.6,23.9 L95.0,26.0",
+    "d": "M1.0,4.5 L14.4,2.0 L27.9,6.3 L41.3,6.6 L54.7,20.8 L68.1,21.3 L81.6,23.4 L95.0,26.0",
     "end": [
      95.0,
      26.0
@@ -833,31 +833,31 @@
    "grade": "B",
    "id": "gpu_rental_price_per_hour",
    "latest": {
-    "as_of": "2026-10-26",
+    "as_of": "2026-11-16",
     "disputed": false,
     "grade": "B",
     "high": null,
     "low": null,
     "obs_ids": [
-     "82d13988719ef2c8"
+     "b4a201c3f96c6901"
     ],
     "series_key": "getdeploying.nvidia_h100.on_demand_median_usd_per_gpu_hour.w",
     "subject": "nvidia_h100",
     "unit": "USD",
-    "value": 3.85
+    "value": 4.0575
    },
    "layer_id": "compute_physical",
    "leading_lagging": "leading",
-   "n_observations": 174,
+   "n_observations": 183,
    "name": "GPU rental price per hour",
    "pending": null,
    "published": true,
    "source_cluster": null,
    "spark": {
-    "d": "M1.0,23.6 L5.1,24.6 L9.2,22.0 L13.3,25.4 L17.3,24.6 L21.4,26.0 L25.5,23.3 L29.6,21.0 L33.7,23.0 L37.8,21.0 L41.9,18.8 L46.0,16.1 L50.0,15.3 L54.1,16.1 L58.2,17.0 L62.3,18.2 L66.4,17.0 L70.5,18.0 L74.6,16.6 L78.7,14.8 L82.7,13.1 L86.8,5.6 L90.9,2.0 L95.0,4.7",
+    "d": "M1.0,25.5 L5.1,24.7 L9.2,26.0 L13.3,23.5 L17.3,21.4 L21.4,23.2 L25.5,21.4 L29.6,19.3 L33.7,16.8 L37.8,16.1 L41.9,16.8 L46.0,17.7 L50.0,18.8 L54.1,17.7 L58.2,18.6 L62.3,17.3 L66.4,15.6 L70.5,14.0 L74.6,7.1 L78.7,3.8 L82.7,6.2 L86.8,3.8 L90.9,2.0 L95.0,2.6",
     "end": [
      95.0,
-     4.7
+     2.6
     ]
    },
    "stale_as_of": null,
@@ -878,12 +878,12 @@
    "grade": "C",
    "id": "epoch_training_power_growth",
    "latest": {
-    "as_of": "2026-10-15",
-    "derived_id": "a5883ff06ea4a1a2",
+    "as_of": "2026-11-05",
+    "derived_id": "140aa9c7e97696ec",
     "dims": {
-     "aic": "340.5",
-     "n": "171",
-     "r2": "0.116"
+     "aic": "341.7",
+     "n": "172",
+     "r2": "0.123"
     },
     "obs_ids": [
      "0064d6a330f0ca94",
@@ -911,6 +911,7 @@
      "27530e86781b288e",
      "27d7f9fd8896b341",
      "2871a41a075256ee",
+     "29e4ae4f8f7e9230",
      "2b3cc5146659de6b",
      "2c4b837d77b3d596",
      "2c6de7b534e32ca1",
@@ -1104,11 +1105,11 @@
      "ff96cf7424de5ba4"
     ],
     "unit": "days",
-    "value": 418.9551390503601
+    "value": 410.49472655518514
    },
    "layer_id": "compute_physical",
    "leading_lagging": "leading",
-   "n_observations": 216,
+   "n_observations": 217,
    "name": "Training power draw growth (doubling time)",
    "pending": null,
    "published": true,
@@ -1217,7 +1218,7 @@
     {
      "id": "foundry",
      "name": "Chip foundries",
-     "word": "moderate"
+     "word": null
     },
     {
      "id": "memory",
@@ -1318,7 +1319,7 @@
     {
      "id": "accelerators",
      "name": "AI chips",
-     "word": "moderate"
+     "word": "tight"
     },
     {
      "id": "packaging",
@@ -1411,7 +1412,7 @@
     {
      "id": "accelerators",
      "name": "AI chips",
-     "word": "moderate"
+     "word": "tight"
     },
     {
      "id": "packaging",
@@ -1513,12 +1514,12 @@
     {
      "id": "foundry",
      "name": "Chip foundries",
-     "word": "moderate"
+     "word": null
     },
     {
      "id": "accelerators",
      "name": "AI chips",
-     "word": "moderate"
+     "word": "tight"
     },
     {
      "id": "packaging",
@@ -1613,7 +1614,7 @@
     {
      "id": "foundry",
      "name": "Chip foundries",
-     "word": "moderate"
+     "word": null
     },
     {
      "id": "packaging",
@@ -1628,7 +1629,7 @@
     {
      "id": "accelerators",
      "name": "AI chips",
-     "word": "moderate"
+     "word": "tight"
     },
     {
      "id": "networking",
@@ -1755,7 +1756,7 @@
     {
      "id": "foundry",
      "name": "Chip foundries",
-     "word": "moderate"
+     "word": null
     },
     {
      "id": "packaging",
@@ -1879,7 +1880,7 @@
     {
      "id": "foundry",
      "name": "Chip foundries",
-     "word": "moderate"
+     "word": null
     },
     {
      "id": "packaging",
@@ -1894,7 +1895,7 @@
     {
      "id": "accelerators",
      "name": "AI chips",
-     "word": "moderate"
+     "word": "tight"
     },
     {
      "id": "energy",
@@ -2106,7 +2107,7 @@
     {
      "id": "accelerators",
      "name": "AI chips",
-     "word": "moderate"
+     "word": "tight"
     },
     {
      "id": "data_centres",
@@ -2231,7 +2232,7 @@
     {
      "id": "accelerators",
      "name": "AI chips",
-     "word": "moderate"
+     "word": "tight"
     },
     {
      "id": "memory",
@@ -2348,12 +2349,12 @@
     {
      "id": "accelerators",
      "name": "AI chips",
-     "word": "moderate"
+     "word": "tight"
     },
     {
      "id": "foundry",
      "name": "Chip foundries",
-     "word": "moderate"
+     "word": null
     },
     {
      "id": "data_centres",
@@ -2479,7 +2480,7 @@
     {
      "id": "accelerators",
      "name": "AI chips",
-     "word": "moderate"
+     "word": "tight"
     },
     {
      "id": "memory",
@@ -2574,7 +2575,7 @@
     {
      "id": "accelerators",
      "name": "AI chips",
-     "word": "moderate"
+     "word": "tight"
     },
     {
      "id": "networking",
@@ -2670,7 +2671,7 @@
     {
      "id": "accelerators",
      "name": "AI chips",
-     "word": "moderate"
+     "word": "tight"
     },
     {
      "id": "data_centres",
@@ -2779,7 +2780,7 @@
     {
      "id": "accelerators",
      "name": "AI chips",
-     "word": "moderate"
+     "word": "tight"
     },
     {
      "id": "networking",
@@ -2869,7 +2870,7 @@
     {
      "id": "foundry",
      "name": "Chip foundries",
-     "word": "moderate"
+     "word": null
     },
     {
      "id": "packaging",
@@ -2884,7 +2885,7 @@
     {
      "id": "accelerators",
      "name": "AI chips",
-     "word": "moderate"
+     "word": "tight"
     },
     {
      "id": "networking",

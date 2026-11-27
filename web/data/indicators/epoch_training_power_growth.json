@@ -6,9 +6,9 @@
  "band_input": "metric:training_power_doubling_days",
  "band_rationale": "Normal = doubling no faster than yearly (grid-connection pace); fast = every 230 days or less (3x a year, the pace a runaway buildout needs). Between is emerging.",
  "band_value": {
-  "as_of": "2026-10-15",
-  "high": 718.870429380521,
-  "low": 295.6210073162752,
+  "as_of": "2026-11-05",
+  "high": 685.3409440262177,
+  "low": 292.9937565259982,
   "obs_ids": [
    "0064d6a330f0ca94",
    "0345be86776a534d",
@@ -35,6 +35,7 @@
    "27530e86781b288e",
    "27d7f9fd8896b341",
    "2871a41a075256ee",
+   "29e4ae4f8f7e9230",
    "2b3cc5146659de6b",
    "2c4b837d77b3d596",
    "2c6de7b534e32ca1",
@@ -228,7 +229,7 @@
    "ff96cf7424de5ba4"
   ],
   "unit": "days",
-  "value": 418.9551390503601
+  "value": 410.49472655518514
  },
  "bucket_id": "methods",
  "cadence_expected": "monthly",
@@ -263,19 +264,19 @@
   "x": {
    "ticks": [
     {
-     "label": "Sep 2026",
+     "label": "Oct 2026",
      "minor": false,
-     "x": 4.17
-    },
-    {
-     "label": "Oct",
-     "minor": false,
-     "x": 35.42
+     "x": 13.54
     },
     {
      "label": "Nov",
      "minor": false,
-     "x": 67.71
+     "x": 45.83
+    },
+    {
+     "label": "Dec",
+     "minor": false,
+     "x": 77.08
     }
    ]
   },
@@ -327,7 +328,7 @@
  "confidence_basis": {
   "best_tier": 6,
   "grade": "C",
-  "n_observations": 216,
+  "n_observations": 217,
   "sources": [
    "Epoch AI notable and frontier models"
   ],
@@ -350,15 +351,15 @@
  "definition": "Doubling time of notable models' estimated training power draw, fitted log-linearly from 2020 on Epoch's notable-model table. Derived metric training_power_doubling_days.",
  "derived": [
   {
-   "as_of_date": "2026-10-15",
-   "computed_at": "2026-11-04T14:43:43.916983Z",
+   "as_of_date": "2026-11-05",
+   "computed_at": "2026-11-27T20:23:24.994824Z",
    "dims": {
-    "aic": "340.5",
-    "n": "171",
-    "r2": "0.116"
+    "aic": "341.7",
+    "n": "172",
+    "r2": "0.123"
    },
    "formula_version": "1",
-   "id": "a5883ff06ea4a1a2",
+   "id": "140aa9c7e97696ec",
    "input_observation_ids": [
     "0064d6a330f0ca94",
     "0345be86776a534d",
@@ -385,6 +386,7 @@
     "27530e86781b288e",
     "27d7f9fd8896b341",
     "2871a41a075256ee",
+    "29e4ae4f8f7e9230",
     "2b3cc5146659de6b",
     "2c4b837d77b3d596",
     "2c6de7b534e32ca1",
@@ -604,6 +606,7 @@
     "27530e86781b288e",
     "27d7f9fd8896b341",
     "2871a41a075256ee",
+    "29e4ae4f8f7e9230",
     "2b3cc5146659de6b",
     "2c4b837d77b3d596",
     "2c6de7b534e32ca1",
@@ -796,9 +799,9 @@
     "ff8a3cc4d316d6d2",
     "ff96cf7424de5ba4"
    ],
-   "value": 418.9551390503601,
-   "value_high": 718.870429380521,
-   "value_low": 295.6210073162752
+   "value": 410.49472655518514,
+   "value_high": 685.3409440262177,
+   "value_low": 292.9937565259982
   }
  ],
  "direction": null,
@@ -815,12 +818,12 @@
  "grade": "C",
  "id": "epoch_training_power_growth",
  "latest": {
-  "as_of": "2026-10-15",
-  "derived_id": "a5883ff06ea4a1a2",
+  "as_of": "2026-11-05",
+  "derived_id": "140aa9c7e97696ec",
   "dims": {
-   "aic": "340.5",
-   "n": "171",
-   "r2": "0.116"
+   "aic": "341.7",
+   "n": "172",
+   "r2": "0.123"
   },
   "obs_ids": [
    "0064d6a330f0ca94",
@@ -848,6 +851,7 @@
    "27530e86781b288e",
    "27d7f9fd8896b341",
    "2871a41a075256ee",
+   "29e4ae4f8f7e9230",
    "2b3cc5146659de6b",
    "2c4b837d77b3d596",
    "2c6de7b534e32ca1",
@@ -1041,13 +1045,13 @@
    "ff96cf7424de5ba4"
   ],
   "unit": "days",
-  "value": 418.9551390503601
+  "value": 410.49472655518514
  },
  "layer_id": "compute_physical",
  "leading_lagging": "leading",
  "metric": "training_power_doubling_days",
  "metric_dims": {},
- "n_observations": 216,
+ "n_observations": 217,
  "name": "Training power draw growth (doubling time)",
  "normal_band": {
   "hi": null,
@@ -1057,14 +1061,14 @@
  "pending": null,
  "points": [
   {
-   "as_of": "2026-10-15",
-   "derived_id": "a5883ff06ea4a1a2",
+   "as_of": "2026-11-05",
+   "derived_id": "140aa9c7e97696ec",
    "dims": {
-    "aic": "340.5",
-    "n": "171",
-    "r2": "0.116"
+    "aic": "341.7",
+    "n": "172",
+    "r2": "0.123"
    },
-   "href": "#d-a5883ff06ea4a1a2",
+   "href": "#d-140aa9c7e97696ec",
    "obs_ids": [
     "0064d6a330f0ca94",
     "0345be86776a534d",
@@ -1091,6 +1095,7 @@
     "27530e86781b288e",
     "27d7f9fd8896b341",
     "2871a41a075256ee",
+    "29e4ae4f8f7e9230",
     "2b3cc5146659de6b",
     "2c4b837d77b3d596",
     "2c6de7b534e32ca1",
@@ -1285,9 +1290,9 @@
    ],
    "stamp": "estimate",
    "unit": "days",
-   "value": 418.9551390503601,
+   "value": 410.49472655518514,
    "x": 50.0,
-   "y": 16.21
+   "y": 17.9
   }
  ],
  "prediction_rows": [
